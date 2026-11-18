@@ -576,6 +576,20 @@ should be paused or archived by the owner's hand.
   at the measured figure under this ruling ONLY with the cause shown first (the top lines and shares at 6483322cc
   and now; the landed seat whose rows changed the mix; no line lost, no pool emptied), each named for the owner as
   variety owed; a COLLAPSE (a line no longer drawable, or one line above 0.95) is a stop.
+- **CL23 (04:25 UTC, 2026-11-18; THE FOUR FRESH HITS THAT PASSED NONE OF CL21's PROOFS BY THE SEAT'S STRICT READING;
+  21 of the 25 were banked at CLOSE-DOORS-1B's f0e60758a: 6 by identity, 5 the same debt in new words, 10 true by
+  construction).** THE CHAIR READ EACH IN THE SOURCE; ALL FOUR PASS (iii), each by a guarantee named here: (1) the
+  bowyers' siege twin "While the siege lasts it supplies the town's defenders, and no caravan."
+  (`institutionDescVariants.js:2335`): BY ITS OWN DECLARATION `crisis: under_siege` (a besieged town has defenders
+  by the meaning of the siege; no house is named; its original named the watch and the garrison: the twin claims
+  less); (2) and (3) the hired company's siege twins ("garrison work", "garrison duty and the town's defence",
+  `:2354`, `:2358`): the house's OWN TRADE in the original's own words, which the census read as presuming nothing: BY
+  THE POOL'S KEY (the house); the two originals, once CL18 takes them out of the colour column, are banked by the
+  same reading if the door then shows them fresh; (4) " A court and a prison stand, but few offenders are ever
+  brought to either." (`guardLineUnderTheLaw.js:35`): only ever a twin (lines 65, 67, 69 and the frame at 94) of
+  lines of `safetyProfile.js :: COURT_AND_PRISON`, drawn at `safetyProfile.js:370` in the branch where a court and a
+  prison stand: BY ITS ORIGINALS' BRANCH (the seat quotes the condition and greps that the constant has no other
+  reader; another path found is a hit not banked). Vetoable; on the owner's list by name.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
