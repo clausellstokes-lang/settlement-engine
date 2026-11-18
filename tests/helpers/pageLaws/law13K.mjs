@@ -12,6 +12,7 @@
 //                (C3863, C8647)
 //   13g.tie      a power's card that calls its tie to the guild a war of arrests, where the Web prints a working
 //                arrangement (C21547)
+import { orderForceOf } from '../../../src/domain/facts/orderForce.js';
 const DEF = 'Systems/Defense', POW = 'Systems/Power';
 const DESK = 'src/data/dossierStateProse/defense.generated.js';
 
@@ -69,7 +70,9 @@ export function law13K(T, town) {
   }
 
   // ---- 13e · the watch seen by day, where every force walks after dark
-  const forces = (T.record?.institutions || []).filter((x) => /\b(watch|militia|garrison|guard|barracks|patrol|constab|warden)\b/i.test(String(x?.name || '')) && !/^access to/i.test(String(x?.name || '')));
+  // BAR8-K-WATCH-2 (BR29 (2)): the force as the page prints it, the one partition's houses on the live roster (the Defense tab's
+  // "Standing forces"), not a name table of its own (a Warden's Lodge is no force; a Household levy is one)
+  const forces = [...orderForceOf(T.record).houses];
   const nightOnly = forces.length > 0 && forces.every((f) => /after dark|\bnight\b/i.test(String(f?.desc || '')) && !/\bday\b|gate|by day|daylight/i.test(String(f?.desc || '')));
   if (nightOnly) for (const x of T.findSent(/\bon the rounds most hours of the day\b|\bat (?:all|any) hours?\b[^.]*\b(watch|patrol)|\b(watch|patrol)\b[^.]*\bby day\b/i)) {
     push('13e.hours', x, { tab: 'record', line: forces.map((f) => `${f.name}: ${String(f.desc || '').slice(0, 90)}`).join(' | ') },

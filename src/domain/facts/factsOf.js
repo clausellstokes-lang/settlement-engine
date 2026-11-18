@@ -52,6 +52,7 @@ import { hasOtherNpc } from './otherNpc.js';
 import { pairSharesPower } from './sharedPower.js';
 import { pairSeatHeld } from './seatHeld.js'; // BAR6-PEOPLE (10d-seat)
 import { paidWatchOf } from './guardPay.js'; // BAR6-PEOPLE (10e-house)
+import { forceWalksByDayOf } from './forceHours.js'; // BAR8-K-WATCH (13e)
 import { faithReadingOf } from '../dossier/faithReading.js';
 import { guildOf } from './guild.js';
 import { canonExports, canonImports } from '../canonicalAccessors.js';
@@ -113,6 +114,8 @@ export function factsOf(record, options = {}) {
     get legalHouse() { return legalHouseOf(record); },
     /** BAR6-PEOPLE (10e-house): someone is paid to keep order: the unpaid rota is not the whole watch (`guardPay.js`) */
     get paidWatch() { return paidWatchOf(record); },
+    /** BAR8-K-WATCH (13e, BR14 (c)): the town's force walks by day, by its own text (`forceHours.js`) */
+    get forceWalksByDay() { const roster = /** @type {{ institutions?: unknown } | null} */ (record)?.institutions; return forceWalksByDayOf(Array.isArray(roster) ? orderForceOf({ institutions: roster }).houses : undefined); }, // BAR8-K-WATCH-2 (BR29 (2)): the one partition's houses, read off the roster alone (the force's pay and cast are not this atom's: factLayers' row)
     /** BAR5-THINGS (LAW 4): the town keeps a post someone is named to: no household head nobody named is its voice (`appointedPost.js`) */
     get appointedPost() { return appointedPostOf(record); },
     /** fact 6: the one starving rule */

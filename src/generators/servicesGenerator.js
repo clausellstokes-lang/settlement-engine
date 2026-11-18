@@ -3,14 +3,14 @@ import { getInstFlags, getStressFlags } from './helpers.js';
 import { generateSafetyProfile } from './safetyProfile.js';
 import {
   hasCriminalInstitution,
+  lawlessRow,
   materializeInstitutionServiceRolls,
+  THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION,
 } from './services/serviceRollMaterialization.js';
 import {
   resolveGenerationWorldLaw,
 } from './generationContext.js';
 import { hasInstitution } from '../domain/facts/institutions.js';
-import { defenceOf } from '../domain/facts/defence.js'; // BAR6-CRIME (e): the court and the gaol
-import { lineText } from '../domain/facts/drawDeclared.js';
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS = 'Ask around at the right tavern. Someone moves goods without questions.';
 // R3-CODE-C-3 (CENSUS-2 a, r2r-village-19): "the right tavern" reads the roster (facts/institutions.js `tavern`); else its twin.
@@ -26,19 +26,7 @@ const INFORMAL_NO_CONTRACT_VIOLENCE_AVAILABLE_FOR_COIN_TO_THOSE_WHO_KNOW_WHERE_T
 const NO_LAW_BRING_COIN = 'Weak law, bring coin';
 const PAY_A_LOCAL_STRONGMAN_A_NEIGHBOR_OR_A_GANG_FOR_SOME_MEASURE_OF_SAFETY_NO_CONTRACTS_NO_GUARANTEES = 'Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.';
 const PROTECTION_INFORMAL = 'Protection (informal)';
-const THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION = 'The law here is slow and easily outbid. Disputes end with whoever can apply more violence or pay more for protection.';
 const _ARCANE_UNDERGROUND = '(arcane underground)';
-// BAR6-CRIME (BRIEF-BAR6 (e), LAW 9's 9a.lawless; the wide read's C172465; vetoable by the owner): "easily outbid" and
-// "disputes end with whoever can apply more violence" are false where the town keeps its own court and its own gaol (the
-// defence home's `court` and `prison`, `facts/defence.js`), beside "A functioning court and prison mean crimes carry real
-// consequences". There the row keeps its draw, its place and its name (the name is the service's identity, declared in
-// `crisisDependence.js :: SERVICE_DEPENDENCE`) and takes its twin description: the law is slow, and coin buys it quicker.
-const SLOW_LAW_DESC = lineText({ text: 'The court sits and the gaol holds, but both are slow, and coin buys a quicker answer.', needs: ['court', 'prison'] });
-/** @param {Array<{ name?: unknown }>} institutions @returns {{ name: string, desc: string }} */
-const lawlessRow = (institutions) => {
-  const d = defenceOf({ institutions });
-  return { name: NO_LAW_BRING_COIN, desc: d.court && d.prison ? SLOW_LAW_DESC : THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION }; // the name said once (275ce166f made both branches one name)
-};
 
 /**
  * servicesGenerator.js
@@ -115,7 +103,8 @@ export const generateAvailableServices = (
     if (securityRatio < 0.6) {
       buckets.criminal.push(
         {
-          ...lawlessRow(institutions),
+          name: NO_LAW_BRING_COIN,
+          ...lawlessRow(institutions, buckets),
           institution: '(lawless)',
         },
         {
@@ -148,7 +137,8 @@ export const generateAvailableServices = (
       if (securityRatio < 0.4) {
         buckets.criminal.push(
           {
-            ...lawlessRow(institutions),
+            name: NO_LAW_BRING_COIN,
+            ...lawlessRow(institutions, buckets),
             institution: '(lawless)',
           },
           {
