@@ -1711,3 +1711,21 @@ should be paused or archived by the owner's hand.
   things found, the numbering breach among them with its other choice; what is left, in order). Rulings CL18 and
   CL19 sent to CLOSE-DOORS-1A after the answer; the old checkout `/home/user/old4` (6483322cc, detached) serves the
   comparison.
+- 04:16 UTC, 2026-11-18 · CLOSE-SWEEP (04:14, committed, pushed on the chair's word): S4.1 ae0af7ca9 (`worldFactRederive` A4
+  green; the re-derive is the whole pipeline, so the moved hunk stays in its reach); S5 a970ef865 (`vercel.json`
+  `git.deploymentEnabled` false for `lane/*` and `lane/**`, one sentence in `docs/DEPLOY.md`; the file's eight
+  readers the same at both ends; `validate:edge` green); S4.2 890296904 (the fact-layers instrument probes EVERY key
+  the vocabulary declares: `tradeAtWork` 17, `goodExported` 5, `seatHeld` every roster pair; it throws on a
+  `factsCall` getter with no branch; arm (a) collects all failures and is GREEN with NO change of the table; POOLS
+  shows the one shrink row only: no ordering fault). NAMED BY THE SEAT AND GIVEN BACK TO IT: `hasInstitution`'s
+  typed probe misses 4 of 14 keys: derived too, a commit of its own. THE DUMP THAT DIFFERED ONCE: the Power tab's
+  lazy `DeityAssignmentPanel` (its Suspense fallback is null) was not yet mounted when the probe captured: THE
+  PROBE, NOT THE PAGE; six quiet re-renders are in its hand-back. MARKS-2 HANDED BACK (04:15; tip 1a2c7f2b4, one
+  push; BR31 done at `foodBalance.js:826` alone, 3ade10eb8: six occupied towns lose the war hook, "Short of iron."
+  and the forges' scene; declared: `plotHooks` 1, 3 and 2 towns of the 30, 150 and 720, none of the 525; a scratch
+  merge with 70e557d5b clean, the same 84 red names as the line alone, nothing to re-key): ITS SECOND READER IS
+  SEATED AFTER THE CLOSE'S MERGES; it lands after the deploy. CLOSE-DOORS-1B is at its hand-kept re-pins (the ruin
+  roster 113 to 115 with each reader named; `noLegacyFactionReaders`' three rows re-keyed by identity to
+  352/515/709; the site-coherence inventory under CL15); its 25 fresh presumed-things hits have not come yet. A
+  NOTE FOR THE CHAIR'S OWN COUNT: `list_events` with kind assistant returns every thinking signature: read a
+  seat's state by `get_session` and its messages, not by its events.
