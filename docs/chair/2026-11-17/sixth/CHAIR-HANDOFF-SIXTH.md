@@ -129,6 +129,9 @@ should be paused or archived by the owner's hand.
   and deploy before continuing" of 02:43:57):** "no everythign but the new 30 reads is predeploy. the reads and what
   follows is post deploy". THE ORDER OF WORK IS NOW: EVERYTHING BUT THE NEXT READ OF THIRTY LANDS BEFORE THE DEPLOY;
   THE READ AND WHAT FOLLOWS IT COME AFTER. Pull request #75 stays a draft until then.
+- **2026-11-18, 05:14:58 UTC:** "don't do number 4. any map work is of no consequence because it is not being shown and
+  that is being defered for PLAT". THE TOWN MAP IS NOT SHOWN: NO MAP WORK IS DONE BY THIS PROGRAM AND NONE IS RAISED
+  AGAIN; it is deferred to PLAT by the owner. (Number 4 was the chair's plan to cure the desert coal slope.)
 
 ## 2. What changed since the fifth chair's last state (13:54 UTC), read from origin
 
@@ -2137,3 +2140,9 @@ should be paused or archived by the owner's hand.
   told, a "no" reverses it): ALLOWED: no stored handler is rewritten (0 of 568); only a re-deal after the party
   removes a handler and a corruption event follows can come out otherwise (9 of 208 constructed cases), and a v2
   record's first deal (1 of 38): the difference is the cure of the swap.
+- 05:15 UTC, 2026-11-18 · THE OWNER STRUCK THE MAP CURE FROM THE PLAN (05:14:58 UTC; section 1): the town map is not shown, so
+  the site deriver's reading is no fault on a page; map work is deferred to PLAT. THE CHAIR HAD CALLED IT "a fault on
+  a page" TO THE OWNER (04:48 and 05:14): WRONG, corrected out loud in the same turn. WHAT STANDS: CL15's re-record of
+  the site-coherence inventory (a stored figure of the close: it keeps the gate green; no cure follows). STRUCK: the
+  plan's item (4); the pull request's draft no longer lists it among the faults on pages. THE PRE-DEPLOY PLAN IS NOW:
+  the close; the five built pieces; the unbuilt faults; the checking tools' repairs; the last close.
