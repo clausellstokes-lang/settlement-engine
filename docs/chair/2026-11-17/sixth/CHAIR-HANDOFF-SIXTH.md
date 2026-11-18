@@ -2213,3 +2213,17 @@ should be paused or archived by the owner's hand.
   surfaces; then "READY FOR THE MERGE". THE EARLY WHOLE CHECK ON THE FIVE-MERGE TREE (close-1-1b0614950): CHECKS-1
   (05:21; f144e7ad2): 14 names against 33 at the base: 19 gone, 0 NEW; CHECKS-2 (05:30; be15b8be2): 24 against 57:
   33 gone, NO NEW NAME (its first run was killed by a container restart and re-run whole); CHECKS-3 still runs.
+- 05:35 UTC, 2026-11-18 · PEOPLE-2 HANDED BACK (05:35; `lane/bar8-people-2-2026-11-18` at
+  71525f075ceed2f8037e9b8117c5c0791149d8a5; base 20b44f97c; hand-back
+  `docs/chair/2026-11-17/bar8/BAR8-PEOPLE-2-HANDBACK.md`): TESTS ONLY (three files, no `src/`): part A 76ffc8eef (two
+  stale anchors re-keyed by identity); part B 66f609d14 (`tests/generators/bar8People2.test.js` on constructed
+  records: the swap's cure holds in the migration and in IMPOSE_CORRUPTION; A STORED HANDLER THAT NAMES A LIVE CARD
+  IS NEVER REWRITTEN; every "held inside" tie line declares a prison; each arm red when its fault is planted); the
+  three plain-words items for the owner with r2r-city-0, r2r-city-3, r2r-city-13. LEFT, EACH NEEDING A FILE OUTSIDE
+  ITS LIST (for the builders of the unbuilt faults): (5) wantBuy 6, 2, 0 (`importsAsPrinted` reds
+  `engineCoreLazyEdge`; a leaf would be a second matcher: the road is `dealGoals`' callers or a pin of
+  `tradeListDisplay`); (6) 14e 4, 5, 1 (the seats land after the draw; refusing on the house alone strikes C5328
+  and C5358: the road is `personHooks.js` or `npcGenerator`'s `ownPoolHook`). Stored counts it moves, for the last
+  close: the estate's file count +1, `engineBundleReplay` 321 to 322. THE CHAIR READS ITS THREE TEST FILES ITSELF AT
+  THE LANDING OF K-PEOPLE WITH IT (K-PEOPLE's `src/` was read by its first reader; the follow-up adds no source):
+  no reader seat for it.
