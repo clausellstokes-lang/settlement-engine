@@ -9,7 +9,6 @@
  * every printed line against the town's resources and its food record. Keyed by the printed text.
  */
 
-import { ritesHoldAChain } from '../../domain/facts/chainRites.js'; // BAR4-CORPUS-ECO (FS1): the rites' one reader
 // BAR8 J-INCOME item 1: the trade's ordinary lines and their reader, in an import-free leaf the printed export may read; re-exported
 // under the same names, so no importer of this module changes
 import { CLOTH_SHORT_LINE, CLOTH_WORKED_LINE, LOCAL_COAL_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, METAL_WORKED_LINE, METAL_SHORT_LINE, METAL_FORGE_IDLE_LINE, TIMBER_PLAIN_LINE, TIMBER_SAWN_LINE, TIMBER_SHORT_LINE, ordinaryIncomeLineOf } from '../../domain/display/incomeOrdinaryLines.js';
@@ -213,8 +212,12 @@ export function trueIncomeDesc(desc, f) {
       // TAIL-DEFECON-3: under a famine whose failed source is fish no line offers fish; where every fishery near the
       // place is fished out, the catch is not landed: the salted fish bought in, or no sentence (D5, #77).
       if (f.besieged || f.fishFailed) return '';
-      // BAR4-CORPUS-ECO (FS1): a fishing chain the rites hold up still lands its catch over spent grounds: the rites line, not "bought in"
-      if (f.fisheryExhausted && ritesHoldAChain({ activeChains: f.chains }, /fish/)) return FISH_RITES_LINE;
+      // BAR8 J-INCOME item 2 (11b, the sixth chair's BRIEF-BAR8, 2026-11-17): THE FISH STORY IS ASKED FIRST, and no longer the
+      // rites (BAR4-CORPUS-ECO's FS1 arm, `chainRites.js :: ritesHoldAChain`, retired here). Under the owner's supply rule a chain kept by
+      // magic feeds no house (`supplyStory.js :: sourceStoryOf`): where every fishery is fished out the story is bought where the
+      // import brings the salted fish in (the bought line), else idle (no sentence); "rites keep the catch coming, and it is landed
+      // and sold here" is true of neither (the Magic tab prints no fishing). Below a town the birth writes the salted fish later
+      // (`resourceGenerator.js :: importsBroughtAtBirth`): the share then prints its label and share alone, never the rites line.
       if (f.fisheryExhausted) return bought(/\bsalt(?:ed)? fish\b/i) ? FISH_BOUGHT_LINE : '';
       if (has(/fisher|fishing/)) return sold(/\bsalt(?:ed)? fish\b/i) ? desc : FISH_LANDED_LINE;
       return has(/\bfish/) ? FISH_SOLD_LINE : '';
