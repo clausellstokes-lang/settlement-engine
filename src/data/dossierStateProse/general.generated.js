@@ -3569,7 +3569,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "crisis: any"
+            "crisis: any",
+            "no crisis: under_siege",
+            "food: = importDependent"
           ],
           "text": "{settlement} does not grow enough to eat. It buys the rest, and that buying costs it more than anything else.",
           "slots": [
@@ -3580,7 +3582,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "crisis: any"
+            "crisis: any",
+            "no crisis: under_siege",
+            "food: = importDependent"
           ],
           "text": "What {settlement} eats comes up the road, and everybody here knows which road.",
           "slots": [
@@ -3594,7 +3598,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
             "walls",
             "market",
             "no crisis: hunger",
-            "crisis: any"
+            "crisis: any",
+            "food: = importDependent"
           ],
           "text": "{settlement}'s market is well supplied and almost none of it was grown within sight of the walls.",
           "slots": [
@@ -3603,25 +3608,13 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "vid": 3
         },
         {
-          "angle": "threshold",
-          "marks": [
-            "no crisis: hunger",
-            "crisis: any",
-            "food: ≥ secure"
-          ],
-          "text": "{settlement} eats well, but on food grown elsewhere; if the carts stop, so do the meals.",
-          "slots": [
-            "settlement"
-          ],
-          "vid": 4
-        },
-        {
           "angle": "visitor",
           "marks": [
             "no walls",
             "market",
             "no crisis: hunger",
-            "crisis: any"
+            "crisis: any",
+            "food: = importDependent"
           ],
           "text": "{settlement}'s market is well supplied and almost none of it was grown within sight of the town.",
           "slots": [
@@ -3634,13 +3627,25 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "marks": [
             "no crisis: hunger",
             "crisis: any",
-            "food: ≤ pressured"
+            "food: = importDependent"
           ],
           "text": "{settlement} eats on food grown elsewhere; if the carts stop, so do the meals.",
           "slots": [
             "settlement"
           ],
           "vid": 6
+        },
+        {
+          "angle": "ledger",
+          "marks": [
+            "crisis: any",
+            "food: = deficit"
+          ],
+          "text": "{settlement} does not grow enough to eat, and nothing comes in to make up the rest.",
+          "slots": [
+            "settlement"
+          ],
+          "vid": 7
         }
       ],
       "foodSecurity.label: Deficit": [
@@ -4429,9 +4434,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           1,
           2,
           3,
-          4,
           5,
-          6
+          6,
+          7
         ],
         "readsCount": 1,
         "attach": [],
