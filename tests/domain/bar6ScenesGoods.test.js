@@ -308,6 +308,8 @@ describe('the facts the cure made', () => {
       const ok = (/** @type {any} */ l) => declarationAdmits(declarationOf(l), facts).admitted;
       // BAR8-SCENES (2026-11-17, the chair's grant under BR23; re-keyed by identity): a line may have two twins, and the draw answers by
       // the first ADMITTED one (`arrivalScene.js :: drawAdmitted`), so a line holds its slot where ANY of its twins is admitted
+      // RE-KEYED BY IDENTITY 2026-11-18 (BAR8-SCENES-3, BR25 (3)): the draw now answers by the LAST admitted twin, else the first
+      // (the narrower state); which twin answers does not move the count: the slot is held where ANY twin is admitted, as before
       const twins = (/** @type {any} */ l) => (typeof l === 'object' ? pool.filter((/** @type {any} */ t) => t && t.twinOf === String(l.text('{name}'))) : []);
       out[`${sense.key}.${dominant ? 'dominant' : 'lines'}`] = pool.filter((/** @type {any} */ l) => !(l && typeof l === 'object' && l.twinOf))
         .filter((/** @type {any} */ l) => ok(l) || twins(l).some(ok)).length;

@@ -32,6 +32,11 @@ import { rowMarkText } from '../../src/domain/display/crisisStoppedRow.js';
 import { chainStateShown } from '../../src/domain/display/chainStateShown.js';
 import { crisisOf } from '../../src/domain/facts/crisisKind.js';
 import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
+import { composeArrivalScene } from '../../src/generators/narrative/arrivalScene.js';
+import { createPRNG } from '../../src/kernel/prng.js';
+import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
+import { canonStressors } from '../../src/domain/canonicalAccessors.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 /** seedcfg.mjs's bar0- arm, verbatim in shape (as `tests/generators/bar7Scenes.test.js`). @param {string} seed */
@@ -172,6 +177,10 @@ describe('BAR8-SCENES item 7 (9g.food-soft): "nobody looks hungry" wants the foo
 // ---- AFTER THE CHAIR'S RULING BR23 (2026-11-17): three twins given by name; the arrival draw answers by a line's first ADMITTED
 // twin (`arrivalScene.js :: drawAdmitted`), the history's cascade by a row's `twinKey` (`historyCoherence.js :: flavorOf`). Each
 // twin prints where its premise holds and is refused where it does not; no state admits two twins of one line.
+// RE-KEYED BY IDENTITY 2026-11-18 (BAR8-SCENES-3, ruling BR25 (3)): the draw now answers by a line's LAST admitted twin, else its
+// first (a later twin is the narrower state), and the empty road is back at its base declaration (no tier exclusion): in a thorp
+// or a hamlet whose stone is at work outside a siege the road and the small cart are BOTH admitted, and the cart answers. The
+// claim "one twin answers each state" now stands on the draw's answer (the scene as printed), not on disjoint declarations.
 /** @param {any[]} pool @param {any} original @returns {any[]} its twins, by template or by key */
 const twinsOf = (pool, original) => {
   const own = typeof original?.twinKey === 'string' ? original.twinKey : textOfLine(original);
@@ -183,16 +192,51 @@ describe('BR23 (1): the small working quarry', () => {
   const laden = () => rowOf(pool(), /^Laden carts from the workings/);
   const small = () => rowOf(pool(), /^A laden cart or two comes down from the workings in a day, and no more\.$/);
   const empty = () => rowOf(pool(), /^The road from the workings is empty of carts/);
-  test('the endless line has exactly the two twins (the new one last in the pool, so no row\'s argmax id moves)', () => {
+  /** the scene of a record over sixty streams of the scene's own, joined */
+  const scenes = (/** @type {any} */ record) => Array.from({ length: 60 }, (_, i) => {
+    setActiveRng(createPRNG(`bar8-scenes-3-stone-${i}`).fork('arrival-scene'));
+    try { return String(composeArrivalScene(record)); } finally { clearActiveRng(); }
+  }).join('\n');
+  /** the stone pool's slots the record admits: a line admitted, or any twin of it (as `bar6ScenesGoods.test.js` B7 counts) */
+  const slots = (/** @type {any} */ record) => pool().filter((/** @type {any} */ l) => !l.twinOf).filter((/** @type {any} */ l) => admits(l, record, true) || twinsOf(pool(), l).some((t) => admits(t, record, true))).length;
+  const ROAD = 'The road from the workings is empty of carts.';
+  const CART = 'A laden cart or two comes down from the workings in a day, and no more.';
+  // RE-KEYED BY IDENTITY 2026-11-18 (BAR8-SCENES-3, BR25 (3)): the order of the two twins is now the draw's rule (the later, the
+  // narrower state, answers where both are admitted): the small cart needs the trade at work and a small place; the road needs nothing
+  test('the endless line has exactly the two twins (the new one last in the pool, so no row\'s argmax id moves; the later is the narrower)', () => {
     expect(twinsOf(pool(), laden())).toEqual([empty(), small()]);
     expect(pool()[pool().length - 1]).toBe(small());
+    expect(declarationOf(empty()).needs ?? []).toEqual([]);
+    expect(declarationOf(small()).needs).toEqual(['trade at work: stone', 'tier: ≤ hamlet']);
   });
+  // RE-KEYED BY IDENTITY 2026-11-18 (BAR8-SCENES-3, BR25 (3)): the old anchor was the road's refusal by the tier ([false, true,
+  // false]); the road is admitted here again, so the same claim (a cart or two prints, never the empty road) stands on the scene
   test('C15891, bar0-hamlet-calm-rand-45: a hamlet whose stone is at work prints a cart or two, never the empty road', () => {
     const s = town('bar0-hamlet-calm-rand-45');
     expect(tradeAtWorkOf(s, 'stone')).toBe(true);
     expect(crisisOf(s).has('under_siege')).toBe(false);
-    expect([admits(laden(), s, true), admits(small(), s, true), admits(empty(), s, true)]).toEqual([false, true, false]);
+    expect([admits(laden(), s, true), admits(small(), s, true), admits(empty(), s, true)]).toEqual([false, true, true]);
+    expectAbsentWithAnchor(scenes(s), ROAD, CART);
   });
+  // BAR8-SCENES-3 (BR25 (3), 2026-11-18): THE TWO STATES NO TWIN COVERED (rule R7). The same hamlet planted (a) with every ground
+  // it has spent (its stone idle) and (b) under a siege over its stone at work: the empty road keeps the slot, the small cart is
+  // refused, and the pool holds three slots. Both FAIL at 55b954f98 (the road refused by the tier: no twin admitted, two slots)
+  for (const [label, plant] of /** @type {Array<[string, (s: any) => any]>} */ ([
+    ['its stone idle (every ground spent)', (s) => ({ ...s, config: { ...s.config, nearbyResourcesDepleted: [...(s.config.nearbyResources || [])] } })],
+    ['its stone at work under a siege', (s) => { const list = [...canonStressors(s), { type: 'under_siege' }]; return { ...s, stress: list, stressors: list }; }],
+  ])) {
+    test(`bar0-hamlet-calm-rand-45 planted, ${label}: the empty road prints, never the small cart, and the pool holds three slots`, () => {
+      const born0 = town('bar0-hamlet-calm-rand-45');
+      expect(scenes(born0)).toContain(CART); // the stone pool is in play: the unplanted hamlet's slot draws the endless line
+      const s = plant(born0);
+      expect(s.tier).toBe('hamlet');
+      expect(tradeAtWorkOf(s, 'stone')).toBe(label.includes('siege'));
+      expect(crisisOf(s).has('under_siege')).toBe(label.includes('siege'));
+      expect([admits(laden(), s, true), admits(small(), s, true), admits(empty(), s, true)]).toEqual([false, false, true]);
+      expectAbsentWithAnchor(scenes(s), CART, ROAD);
+      expect(slots(s)).toBe(3);
+    });
+  }
   test('bar0-city-wartime-rand-31: the stone not at work: the empty road, not the small cart', () => {
     const s = town('bar0-city-wartime-rand-31');
     expect(tradeAtWorkOf(s, 'stone')).toBe(false);
