@@ -2518,3 +2518,12 @@ should be paused or archived by the owner's hand.
   fresh lines NAMED and banked at the last close by the door as copies by identity (CL1 (i), CL21). ITS SECOND READER
   IS SEATED ON THE TIP THAT FOLLOWS. FAULTS-ROWS goes on under FR12. CLOSE-DOORS-2: written; on its last build and
   `verify:dist` (08:17).
+- 08:35 UTC, 2026-11-18 · FAULTS-NEED's FR13 IS IN (08:34; tip d3cdb5207c9d2e8fbc89578a3533f3857748dc45): the leaf IMPORTS
+  `LUXURY_CLASS` and `NOT_A_GOOD` from `tradeListDeclarations.js` (no copy; the lazy edge, `vendorPdfLazy` and
+  `bootSmoke` green after a build; the presumption walker reads 3 and 153 as at the base; nothing banked); its copy of
+  the working chain statuses stands (the import was refused by `vendorPdfLazy`'s WEAVE ST-2 goods roster).
+  **READ-NEED IS SEATED** (08:35; session_01FbPLbfig98kBndBiUzo9e4; its prompt as sent:
+  `docs/chair/2026-11-18/faults/readers/READ-NEED.txt`): the brief's three parts and seven questions of the chair (the
+  second home proved able to fail and tried on 600 fresh seeds; the five towns of item 0; wantBuy and R7; item 3's
+  measure; the twin v6 read in ten towns and v1 in ten, R7 on the pool, the numbering; FR13; the rise of `11e.offer`,
+  at a scratch merge with FAULTS-BIRTH's tip if that seat has finished).
