@@ -130,3 +130,34 @@ merge, in its own session. **At this seat's tip `presumedThings.walker` is red o
 
 The rebank (CL2 carried: once, on the final tree, `--rebank --charter=§934.105`) waits for the second merge; the two N
 rows wait for the chair's ruling.
+
+## THE SECOND MERGE (8d7c2af33, CLOSE-DOORS-1A's books) AND THE FINAL PASS
+
+| # | family | door | moved | commit |
+|---|---|---|---|---|
+| — | MERGE (the chair's word, 05:05 UTC) | `git merge --no-ff 8d7c2af33` | clean; 30 files, 2 under src/ (institutionDescColour.js four keys out, proseNorms.generated.js) | 238d030c2 |
+| f1 | the doors that read docs/content and src/data | `wiring-census.mjs --check` (861 pools / 3033 variants, exit 0); `fact-layers-door.mjs` (0 rise · 0 fall); presumed things (fresh 4: the four) | — | — |
+| f2 | presumption classes (the chair's 05:03 word (4)) | `node scripts/presumption-classes-door.mjs --bank debt-at-base` ("banked 3 rows … (each stood at afa46d644)") | the billet line's `ease`, `outside`; the cathedral line's `outside` (1A's CL18 took their colour marks); fresh 0 | be3c96b91 |
+| f3 | the news pins of the observed-shape walker | the producers arm's own note form | 415/2622/417 -> 417/2627/419 (as 73840c101) | e83e74a0e |
+| f4 | pool dominance (CL22, the chair's lead) | an untracked replica, the 599 draws matched pair by pair at 6483322cc and here | gov_econ_dependence (the TENSION rows): all 39 draws that left line 3 are pairs where `seat held` holds (BAR6-PEOPLE 26f510d87's gate), the 31 left are pairs where it does not: top5 0.6662 -> 0.7514, re-recorded once | a1e231245 |
+| f5 | dossier phone floors (B5) | the walk, probed at the 50 first-parent landings touching src/ | mobile Institutions 73 -> 71, Services 103 -> 102; desktop 74 -> 72, 104 -> 103; floors arm zero violations; cause BAR5-CHAINS (+1 Services), BAR6-MARKS (+2, +1), BAR6-PEOPLE (-1), BIRTH-1 (-2, -4) | ae41cafb3 |
+| f6 | edge bundles (B6; RE-TAKEN after the third merge) | `npm run build:edge-shared` twice | engine 0636e6dc -> 5bf3974b (435 inputs), grounding 7c276759 -> ded4fab9 (182) | 22e072a49 |
+| f7 | the lighting census (RE-TAKEN after the third merge) | `LIGHTING_CENSUS_REFREEZE=…`, then plainly 34/34 | files 3641 -> 3682 (the 41 new test files, none deleted), parked 468 -> 471, credited 3173 -> 3211, titles 30647 -> 30955, suiteTitles 8448 -> 8562 | 55d5bf498 |
+
+Pool dominance at the merged tree: 17/17. The bundles' 42 readers alone at 22e072a49: see the net.
+
+**CL20, STOPPED (the chair's (c)).** The register's growth door `--write --raise-explained-writer` admits only identities
+declared in `EXPLAINED_WRITER_EXEMPTIONS` (scripts/check-observed-shape-readers.mjs:1318), whose header reads: "⚠ EXACT AND
+FROZEN, pinned in tests/lint/observedShapeSentinel.test.js. A declaration membership or ruling change alters tag authenticity
+and requires a governed instrument migration; it is not ordinary maintenance." Declaring the W and C identities and
+`_userEdits` is therefore the schema rung the chair reserved: not taken. The two class-N reads are cured at the source by
+CLOSE-SWEEP (the third merge). At this seat's tip observedShapeReaders is red on SHRINK-ONLY, the live-estate drift and A1/A7,
+and writerReach on its three arms that read the observed-shape register's corpusMeta.
+
+**CL26 (the chair, 05:23 UTC, on the owner's word of 05:13:00 UTC: "no everythign but the new 30 reads is predeploy. the
+reads and what follows is post deploy"): THE OBSERVED SHAPES' IDENTITIES ARE NOT ADMITTED AT THIS CLOSE.** Five more landings
+come onto the line before the deploy (K-WATCH-2 moves this register, 8 to 7), then a last close: ONE schema rung there,
+under its own ruling. **KNOWN REDS CARRIED BY NAME TO THE LAST CLOSE: `observedShapeReaders.walker` (SHRINK-ONLY; THE LIVE
+ESTATE INSTANCE drift; A1/A7) and `writerReach.walker` (its three arms that compare the observed-shape register's frozen
+corpusMeta: originCount 15031 against 15106 live, shapes 1741 against 1748).** The last close starts from CL20's table above
+(the twelve identities: reader, key, container, landed point, writer, class).
