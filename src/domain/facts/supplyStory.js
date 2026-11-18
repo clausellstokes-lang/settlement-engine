@@ -267,11 +267,15 @@ export function groundPicksAtBirth(record, seed) {
   // passing trade"), and an implied ground is on no stored list: the furs of r2r-village-2's "Furs and pelts (transit)" are
   // carried through, `furs_north`'s own note: "Furs travel from the hunting grounds through trading posts". So no export
   // reading stands here: a second matcher over the exports would be a second reading of the page's one.)
+  // FR21 (2) (THE CHAIR'S RULING, 2026-11-18, under the owner's standing deferral; a "no" from the owner reverses it): THE COMMON
+  // PROVES THE PASTURE: where a live Common grazing land stands, the grazing land is there (`GROUND_KEPT_BY`)
   const es = /** @type {{ foodSecurity?: { foodRecord?: { foodSources?: unknown } } } | null | undefined} */ (record?.economicState);
   const fed = arr(es?.foodSecurity?.foodRecord?.foodSources).map(str);
+  const standing = new Set(liveNative(record).map((i) => idOfHouse(i)));
   for (const ground of [...provingHouses(record).keys()].sort()) {
     const food = Object.prototype.hasOwnProperty.call(GROUND_FOOD, ground) ? GROUND_FOOD[ground] : '';
-    const spoken = !!food && fed.includes(food);
+    const kept = Object.prototype.hasOwnProperty.call(GROUND_KEPT_BY, ground) && GROUND_KEPT_BY[ground].some((id) => standing.has(id));
+    const spoken = (!!food && fed.includes(food)) || kept;
     states.set(ground, spoken ? 'there' : seedPicks(seed, `ground::${ground}`, SUPPLY_ODDS.groundThere) === false ? 'used' : 'there');
   }
   return states;
@@ -279,6 +283,8 @@ export function groundPicksAtBirth(record, seed) {
 
 /** FAULTS-BIRTH: the food record's own word for what a ground feeds the town (`foodLand.js :: foodSources`). */
 const GROUND_FOOD = Object.freeze(/** @type {Record<string, string>} */ ({ fishing_grounds: 'fish', river_fish: 'fish', grazing_land: 'livestock', hunting_grounds: 'game' }));
+/** FR21 (2): the houses of the roster that are the ground itself, at work (catalogue ids): the common is the pasture. */
+const GROUND_KEPT_BY = Object.freeze(/** @type {Record<string, ReadonlyArray<string>>} */ ({ grazing_land: Object.freeze(['common_grazing_land']) }));
 
 /** The word the imports list holds for a family's material ("Timber", "Salt"); '' where the list has none. @param {string} family */
 export const familyWord = (family) => (family === 'desertSalt' ? RUNS_ON_BOUGHT.salt_works : (Object.prototype.hasOwnProperty.call(IMPORT_WORD, family) ? IMPORT_WORD[family] : ''));

@@ -190,6 +190,23 @@ describe('FAULTS-BIRTH (a) · the second ring proves its ground as the first doe
     expect(HI.impliedGroundGoods(sea, 'fishing_grounds'), 'NEGATIVE: the sea gives salt').toEqual(['fishing_grounds', 'fish', 'salt']);
   }, 600_000);
 
+  test('FR21 (2): where a Common grazing land stands, the pick does not spend the pasture (the twelve towns of the 720)', () => {
+    const TWELVE = ['r2r-hamlet-52', 'r2r-hamlet-56', 'r2r-village-32', 'r2r-village-46', 'r2r-village-47', 'r2s-under_siege-hamlet-3',
+      'r2s-occupied-village-1', 'r2s-politically_fractured-hamlet-0', 'r2s-indebted-hamlet-2', 'r2s-succession_void-hamlet-0',
+      'r2s-monster_pressure-hamlet-3', 'r2s-mass_migration-hamlet-1'];
+    expectNoSeedFailures(collectSeedFailures(TWELVE, (seed) => {
+      const s = town(seed);
+      if (!liveInstitutions(s).some((i) => i.name === 'Common grazing land')) throw new Error('no common (the anchor)');
+      const shown = HI.impliedGroundsOnPage(s);
+      if (!shown.there.includes('grazing_land') || shown.used.includes('grazing_land')) throw new Error(`the pasture: ${JSON.stringify(shown)}`);
+      for (const i of liveInstitutions(s)) if (/^(Dairy farmer|Shepherd)$/.test(i.name) && /Short of /.test(rowMarkText(s, 'house', i) || '')) throw new Error(`${i.name} marked short beside the common`);
+    }), 'the twelve towns');
+    const seed = groundSeedFor('grazing_land', false);
+    // a dairy beside a shepherd is never a venture (FR8 (b)): the pair reads the pick alone
+    expect([...birthPicksOn(built(['Dairy farmer', 'Shepherd', 'Common grazing land']), seed)[BIRTH_PICKS].grounds], 'beside the common: the pasture there').toEqual([['grazing_land', 'there']]);
+    expect([...birthPicksOn(built(['Dairy farmer', 'Shepherd']), seed)[BIRTH_PICKS].grounds], 'NEGATIVE: no common: the seed spends it').toEqual([['grazing_land', 'used']]);
+  }, 600_000);
+
   test('constructed: a lone woodcutter proves its wood (there or used up by the seed) and is never the failed venture; a lone charcoal burner can be', () => {
     const there = birthPicksOn(built(["Woodcutter's camp"]), groundSeedFor('managed_forest', true));
     expect([...there[BIRTH_PICKS].grounds], 'the woodcutter proves its wood, there').toEqual([['managed_forest', 'there']]);
