@@ -157,11 +157,16 @@ const ONE_MEMBER = ['r2r-hamlet-30', 'r2r-thorp-1', 'r2s-occupied-village-0', 'r
 const MANY_MEMBERS = ['r2r-hamlet-6', 'r2r-hamlet-25', 'r2r-hamlet-33'];
 
 describe('BAR8-DESKS-DEF · 14c over born census towns: the seat of one takes the twin, the seat of many the line (every town, every form)', () => {
-  it.each(/** @type {Array<[string, string[], boolean]>} */ ([['one member', ONE_MEMBER, false], ['two or more', MANY_MEMBERS, true]]))('%s', (_n, seeds, many) => {
-    expect(seeds.length, 'the anchors are named').toBeGreaterThan(0);
+  // A PLAIN TEST THAT LOOPS OVER THE ROWS (2026-11-18, BAR8-DESKS-2, ruling BR32 (3)): it was an `it.each`, which the
+  // law "THE EACH-FAMILY PARK DEBT ONLY SHRINKS" (`tests/lint/sovereigntyLightingContract.walker.test.js`) counted
+  // 113 -> 114. Every town of both rows, at every form, is run and its failure collected (`seedFailures.js`).
+  it('the seat of one takes the twin, the seat of many the line: every town of both rows', () => {
+    const ROWS = /** @type {Array<[string, string[], boolean]>} */ ([['one member', ONE_MEMBER, false], ['two or more', MANY_MEMBERS, true]]);
+    for (const [n, seeds] of ROWS) expect(seeds.length, `the anchors are named (${n})`).toBeGreaterThan(0);
     const { line, twin, admits } = deskLine('power', 'DS-POW-5', 'council', 2, 6);
     const sibling = deskLine('power', 'DS-POW-5', 'council', 1, null).line;
-    expectNoSeedFailures(collectSeedFailures(seeds, (seed) => {
+    const cases = ROWS.flatMap(([n, seeds, many]) => seeds.map((seed) => ({ n, seed, many })));
+    expectNoSeedFailures(collectSeedFailures(cases, ({ seed, many }) => {
       const s = bornCensus(seed);
       for (const [form, r] of /** @type {Array<[string, any]>} */ ([['record', s], ['public', toPublicSafe(structuredClone(s))], ['the share veil', projectShareVeil(toPublicSafe(structuredClone(s)), null)]])) {
         const f = factsOf(r);
@@ -170,6 +175,6 @@ describe('BAR8-DESKS-DEF · 14c over born census towns: the seat of one takes th
         expect(admits(twin, f), `${seed} (${form}): "goes to the {seat}"`).toBe(!many);
         expect(admits(sibling, f), `${seed} (${form}): "the whole {seat} must agree"`).toBe(many);
       }
-    }), `the council line beside a seat of ${many ? 'many' : 'one'}`);
+    }), 'the council line beside a seat of one and a seat of many');
   }, 240_000);
 });
