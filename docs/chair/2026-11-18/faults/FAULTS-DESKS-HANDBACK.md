@@ -11,6 +11,9 @@ generated through the armed guard. Merged nothing; no pull request; no stored fi
 | 993d656f0 | item 1 (13d, FR6): the atom `court or gaol`; the seven lines declare it; `defense.generated.js` |
 | 7a9c5375e | two older tests re-keyed by identity (R8) |
 | 2c40b1553 | three walkers followed (presumedThings' instrument count, proseDrawnAnchors, negativeAssertionAnchor) |
+| 9e250c8fa | this hand-back (read by the chair, 09:11 UTC) |
+| b86d8122d | the Unsafe twin, given by name (section 8), and its guard arm |
+| (the next) | the R7 tables (`FAULTS-DESKS-R7.md`) and section 8 |
 
 ## 1 · Item 2 (FR7): the numbering guard, armed
 
@@ -108,18 +111,17 @@ same pool that presumes no record kept, and is true there by its own declaration
 | Safe v1 "Crime at X stays small: …" | no threat, no unrest | bar0-thorp-calm-rand-28, r2r-town-4, r2r-town-33 |
 | Safe v4 "Visitors feel safe at X, and it is plain that somebody keeps it that way." | guardPresence | bar0-town-calm-rand-29 |
 | Very Safe v2 "You can walk X at any hour …" | no threat, no unrest | bar0-village-calm-rand-36, r2r-village-49 |
-| **nothing** (the Public-order paragraph is not printed) | Unsafe: v1, v3 need a watch | bar0-hamlet-calm-rand-27, -29, r2r-thorp-30 |
+| nothing at 9e250c8fa (no Public-order paragraph); since b86d8122d the Unsafe twin v4 (section 8) | Unsafe: v1, v3 need a watch | bar0-hamlet-calm-rand-27, -29, r2r-thorp-30 |
 
-**POOLS UNDER THREE (named; no twin was given).** Where the atom refuses a line, the pool stood at two or three admitted
-lines already at the base: Moderate 2→1 (21 towns), 3→2 (7); Safe 3→2 (17), 2→1 (4); Very Safe 2→1 (10); Unsafe 1→0 (3).
+**POOLS UNDER THREE (named; no twin was given).** Every pool the atom takes under three stood at two or three admitted
+lines already at the base (elsewhere it went 5 → 4: Moderate, 11 towns): Moderate 2→1 (21 towns), 3→2 (7); Safe 3→2 (17), 2→1 (4); Very Safe 2→1 (10); Unsafe 1→0 (3).
 Towns: the thirty bar0-hamlet-calm-rand-45, bar0-village-calm-rand-47; the 150 bar0-thorp-calm-rand-28, -30, -31, -33, -35,
 -39, -41, bar0-hamlet-calm-rand-27, -29, -32, -35, -37, bar0-village-calm-rand-27, -31, -33, -34, -36, bar0-town-calm-rand-29;
 the 720 r2r-thorp-4, -6, -7, -8, -12, -13, -26, -28, -30, -34, r2r-hamlet-3, -6, -11, -17, -18, -20, -26, -40, -41, -50, -51,
 -55, -56, r2r-village-3, -6, -7, -8, -14, -19, -23, -27, -40, -46, -49, -59, r2r-town-4, -20, -33, r2s-infiltrated-thorp-3,
 -hamlet-0, -village-2, -village-3 (tables: the seat's scratch, `r7.*.json`).
-**Unsafe falls to NO line** in three hamlets and thorps with no watch, no court and no gaol. The words I would propose for
-the owner's veto (NOT in the annex): Unsafe `[ledger · no court or gaol · no watch]` "Wrongs at {settlement} are piling up
-faster than its people can settle them among themselves, and nobody here holds an offender or hears a case."
+**Unsafe fell to NO line** in three hamlets and thorps with no watch, no court and no gaol. The words I proposed were given
+back to me by name (the chair, 09:11 UTC) and are written: section 8.
 **Safe v5 and Very Safe v5** (the no-guard record lines) now print in NO town of the 900: of the 338 towns with nobody under
 arms, none keeps a court or a gaol. At the base they printed in 5 (r2r-village-49, r2r-thorp-28, r2s-infiltrated-village-2,
 bar0-thorp-calm-rand-28, -30), each beside "no court and no gaol". They stand in their pools (nothing removed).
@@ -168,9 +170,50 @@ where Unsafe now speaks no line: those two reads keep a gaol, the only DS-DEF-3 
 
 ## 7 · Left by name
 
-- The Unsafe twin above (words proposed, not written); Safe v5 and Very Safe v5 reach no town (named above).
+- The pools under three: the variety round's, tabled town by town in `FAULTS-DESKS-R7.md`; Safe v5 and Very Safe v5 reach
+  no town.
 - The `presumedThings` hit on the atom's name (section 5): the walker's, not mine.
 - The BR35 correction (DS-ECO-12 v4, another branch): it lands with its own regenerated leaf, so the guard sees leaf and
   annex agree. A branch that regenerates with the new words and the OLD leaf meets REWORDED and needs its row:
   `{ pool: 'DS-ECO-12 :: CRITICAL IMPORT: a house needs what the land lacks', vid: 4, from: <sha256 old>, to: <sha256 new>, ruling: 'BR35' }`.
 - Not raised (the owner's standing word): the projector now parses the state annex twice (once for the guard); one line.
+
+## 8 · The Unsafe twin, given by name (the chair, 09:11 UTC), commit b86d8122d
+
+DS-DEF-3 › Unsafe **v4**, the pool's NEXT number, projected through the armed guard (a next-number line passes it; scratch
+tree, fresh census). Only `defense.generated.js` moves: the variant, the pool's `variantCount` 3 → 4, its `faceCounts` and
+`vids`, and the header's count 662 → 663:
+`[ledger · no court or gaol · no watch]` "Wrongs at {settlement} are piling up faster than its people can settle them among
+themselves, and nobody here holds an offender or hears a case." **NEW WORDS, on the owner's veto list.**
+
+**It prints in** bar0-hamlet-calm-rand-27 (Gangapur), bar0-hamlet-calm-rand-29 (Skálgarde), r2r-thorp-30 (Obergasse): the
+only three towns of the 900 whose Unsafe pool admits it (the other 13 Unsafe towns keep a watch and a court or a gaol).
+
+**The Public-order paragraph, before and after** (PAGE-COPY dumps; alike in the three, Gangapur's shown):
+
+| surface | the base 4288049ba | 9e250c8fa | now |
+|---|---|---|---|
+| Defense tab | the DM's sentence ("Crime is a persistent and visible problem. …"), beside it "The hamlet's record of crimes at Gangapur grows faster than its record of arrests, and people pay for the difference in what they lose." | the DM's sentence alone | the DM's sentence, beside it "Wrongs at Gangapur are piling up faster than its people can settle them among themselves, and nobody here holds an offender or hears a case." |
+| PDF, Defense & Security | "Public order", then the record line | no "Public order" paragraph | "Public order", then the twin |
+
+**The shared page prints the same:** the guard's new arm reads the line on the record, its public projection and the share
+veil (`toPublicSafe`, `projectShareVeil`) and finds the twin on all three, in all three towns.
+
+**THE GUARD'S ARM** (`faultsDesks.test.js`, three tests, green; 15 of 15 in the file): v4 stands at the next number with its
+declaration; it prints in the three towns on all three forms; NEGATIVE: it does not print in r2r-city-0 or r2r-city-41
+(Unsafe, a watch and a court), and over Gangapur's own facts with ONE premise flipped it is refused by exactly that premise
+(`no court or gaol` with a court or gaol set; `no watch` with a watch set).
+
+**Declared moves (R5).** No stored record: **0 of the 525** move against the base (hashed again at this tip). The page: those
+three towns only. All 16 Unsafe towns of the 900 re-rendered at this tip: 3 moved, 13 byte-equal to 9e250c8fa. Over four
+stored Unsafe cities, 200 seeds each, the public-order draw moves 0 of 800 times: the fourth line re-rolls no draw.
+
+**Stored figures the twin moves** (named, none re-taken, each red at the base already):
+
+| figure | base → 9e250c8fa → now |
+|---|---|
+| `dossierProseManifest`'s DRIFT arm (rows moved against the stored fixture) | 842 → 842 → 854. Between 9e250c8fa and now, 54 rows move: 27 golden configurations × 2 audiences, every one an Unsafe city that keeps a watch and a court, whose printed public-order line is UNCHANGED in both audiences (measured); the cells carry the pool's audible membership, which gained a line |
+| the state corpus's variant count (`proseWiringCensus` TOTALITY; the shift register's mutant arm) | 3042 → 3042 → 3043 (stored 3033) |
+| `proseEntryContradiction`'s two corpus counts | 3510, 2802 → the same → 3511, 2803 (stored 3501, 2794) |
+| the defense leaf's bytes (`.prose-byte-baseline.json`'s row, stored 281,298) | 283,040 → 283,221 → 283,630 raw; gzip-9 37,628 → 37,642 → 37,702 |
+| the census's declared rows (`wiringCensusDeclared`) | 10 → 14 → 14 (Unsafe's row was already among them) |
