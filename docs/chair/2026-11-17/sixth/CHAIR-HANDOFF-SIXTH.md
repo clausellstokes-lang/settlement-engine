@@ -640,6 +640,20 @@ should be paused or archived by the owner's hand.
   each with its guarantee (CL23), one commit whose body quotes the owner; no page moves; a new refusal by the
   seat's check would stand again. CLOSE-SWEEP's preparation of source cures (CL24) is withdrawn: the four sentences
   stand as they are.
+- **THE FOUR ROWS: THE SEAT'S SECOND REFUSAL, AND WHOSE HAND WRITES THEM (04:57 UTC, 2026-11-18).** CLOSE-DOORS-1B
+  (04:56), on the owner's words passed on verbatim: "my own permission check refused the write, word for word:
+  "Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Undermining Oversight]."
+  Nothing is written and the four stay fresh. The owner's word reaches me only through your session; the check
+  doesn't take that as the owner's. It stands; I'm not routing round it." THAT REFUSAL STANDS AND ITS REASON IS
+  SOUND: a seat cannot know the owner's word first-hand. THE OWNER'S WORDS "record the four" (04:41:48 UTC) WERE
+  WRITTEN IN THE CHAIR'S OWN SESSION: THE ACT IS THEREFORE THE CHAIR'S, IN THAT SESSION, IN THE OPEN: after
+  CLOSE-DOORS-1B's final branch is merged, ONE COMMIT OF THE CHAIR on the merge branch adds the four rows to
+  `tests/lint/presumedThings.widened.register.json` in the form of the seat's 21 rows (f0e60758a), each with its
+  guarantee (CL23); its body quotes the owner's words with their hour, the chair's question (04:38), the seat's two
+  refusals and the chair's own earlier one. No other seat is asked (that would be the same door tried on other
+  machines). IF THE CHAIR'S OWN CHECK REFUSES THE WRITE, IT STANDS AND THE OWNER HEARS IT: the choice then left is
+  the sentences changed at the source (CL24). The chair writes no product source: this is a row of a test
+  register, by the owner's own named word.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
