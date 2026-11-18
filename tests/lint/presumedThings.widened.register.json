@@ -5196,6 +5196,72 @@
     "after-base: close-true",
     "Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer an",
     "ff2573e4e1329738"
+   ],
+   [
+    "armedForce",
+    "family",
+    "A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, ",
+    "a2cdeb4bcbf27797"
+   ],
+   [
+    "quarters",
+    "word",
+    "Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.",
+    "c6fded0acf9197fb"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "A billet and contracting office for a band of professional soldiers available between campaigns. With the roads held the",
+    "38ba15e3c2a308e4"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "A billet and hiring office for professional soldiers idle between campaigns. No caravan leaves while the siege holds the",
+    "743cc96b12b6c45b"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "Where a band of soldiers lodges and takes contracts between wars. While the siege holds the roads they hire out by the d",
+    "b50dee27dd04b260"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. With ",
+    "d163baaf3dfdbc97"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    "Metropolitan cathedral. Seat of the highest regional religious authority. Its pilgrims cannot reach it while the siege h",
+    "522f88620a90790f"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "Metropolitan cathedral. Seat of the highest regional religious authority. Its pilgrims cannot reach it while the siege h",
+    "522f88620a90790f"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    "The metropolitan cathedral, seat of the region's highest prelate. No pilgrim reaches it while the siege holds the roads.",
+    "5c421f2f763ebdb8"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "The metropolitan cathedral, seat of the region's highest prelate. No pilgrim reaches it while the siege holds the roads.",
+    "5c421f2f763ebdb8"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    "The great church of the metropolis. The region's chief religious authority sits here, and the faithful of the city fill ",
+    "fc8262cb8594256b"
    ]
   ],
   "src/data/institutionLadders.js": [
@@ -26558,6 +26624,12 @@
     "after-base: close-unprinted",
     "Isolated from major trade routes, and short of what it eats. With the siege closing the roads, it must make do with ",
     "effe163c2bf52282"
+   ],
+   [
+    "openTrade",
+    "family",
+    "It stands roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what st",
+    "46a67ae06452f0b9"
    ]
   ],
   "src/generators/narrativeGenerator.js": [
@@ -28050,6 +28122,30 @@
     "after-base: close-true",
     " The walls leave few ways in.",
     "47eed4442b369227"
+   ],
+   [
+    "garrison",
+    "implied",
+    "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound t",
+    "26ba104371f73baf"
+   ],
+   [
+    "clergy",
+    "family",
+    "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound t",
+    "26ba104371f73baf"
+   ],
+   [
+    "clergy",
+    "family",
+    "The settlement's chaplain also leads its armed men, and is authorizing military action for reasons that sound theologica",
+    "ad2781f9cea24c20"
+   ],
+   [
+    "streets",
+    "family",
+    "The streets are unusually quiet.",
+    "d0cb088496831e60"
    ]
   ],
   "src/generators/services/serviceClassifier.js": [

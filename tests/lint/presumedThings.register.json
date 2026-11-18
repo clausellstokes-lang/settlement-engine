@@ -366,7 +366,11 @@
    ["temple", "after-release", "The metropolitan cathedral, seat of the region's highest prelate and a draw for pilgrims.", "ec915038daabf5cc"],
    ["temple", "after-release", "Works wood into the useful and the ornamental alike (tool handles, holy figures, inlay for furniture) and makes the sacr", "9df57ae2017a78f5"],
    ["walls", "after-release", "Masonry ramparts studded with towers and pierced by many gates.", "98bc7f5fa53e0f17"],
-   ["watch", "after-release", "Watchmen serving part-time. Night patrols and gate duty.", "837006bf0b956def"]
+   ["watch", "after-release", "Watchmen serving part-time. Night patrols and gate duty.", "837006bf0b956def"],
+   ["garrison", "after-release", "A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, ", "a2cdeb4bcbf27797"],
+   ["garrison", "after-release", "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies ", "e7a63c6a99211dbd"],
+   ["watch", "after-release", "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies ", "e7a63c6a99211dbd"],
+   ["temple", "after-release", "Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.", "c6fded0acf9197fb"]
   ],
   "src/data/institutionLadders.js": [
    ["market", "after-release", "Slave market district", "74a38cc7536fc631"],
@@ -668,6 +672,9 @@
   "src/data/traditionCorpus.js": [
    ["temple", "after-release", "tithes carried up the temple steps", "88952daa1eb4d6dc"],
    ["walls", "after-release", "a custom older than the walls", "a202b89961d875ce"]
+  ],
+  "src/domain/display/guardLineUnderTheLaw.js": [
+   ["prison", "after-release", " A functioning court and prison mean crimes carry real consequences.", "269d54d08e6175bc"]
   ],
   "src/generators/aiLayer.js": [
    ["garrison", "after-release", "{\n  \"thesis\": \"2-3 paragraphs. The defining character of this settlement — what kind of place it is, what its central te", "cdca9aaafed081b6"],
