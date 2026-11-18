@@ -654,6 +654,28 @@ should be paused or archived by the owner's hand.
   machines). IF THE CHAIR'S OWN CHECK REFUSES THE WRITE, IT STANDS AND THE OWNER HEARS IT: the choice then left is
   the sentences changed at the source (CL24). The chair writes no product source: this is a row of a test
   register, by the owner's own named word.
+- **CL25 (05:02 UTC, 2026-11-18; THE EIGHT OVER-CLAIMS CLOSE-DOORS-1A LEFT RED UNDER CL14's CONDITION).** WHAT THEY
+  ARE (the seat's list, read by the chair): of the eleven new over-claims of `proseComposed`'s A0b (all DS-GEN-17
+  ADMINISTERED), three are covered by the line's own declaration and fit the ceiling's slack; EIGHT ARE NOT CLAIMS
+  OF THE LINE AT ALL: two are the NAME SLOT `settlement` (v4, BAR6-CULTURE d9857d7ce; v5, LEFT-LINES 094a6b8f6) and
+  six are the VERB "has" of "has no court sitting and no gaol in use" matched against six fields that begin `has`
+  (`hasGranary`, `hasHospital`, `hasMagicInst`, `hasMilitaryInst`, `hasNavy`, `hasWatch`). THE MATCHER'S OWN
+  ARTIFACTS: CL14's condition (a line declares what it claims) has nothing to bite on. THE RULING, under the owner's
+  deferral of 04:39:24: in the file's own idiom `OVER_CLAIM_OWED` 1 to 9, the base untouched, with a dated note that
+  names the eight (variant, field, why it is the matcher's), the figures at 6483322cc and at the tip, and the
+  buy-back: the matcher learns the name slot and the bare verb, a builder's item after the deploy (the base falls
+  with it). A refusal by the seat's own check would stand. ALSO FROM THE SEAT'S SECOND HAND-BACK (3a28738a9, merged
+  as merge 6, 8d7c2af33): CL17's two hunks READ BY THE CHAIR LINE BY LINE (a two-branch conditional `text` read as
+  two texts, every other shape unread; `calmLast` on the found side only, every other entry still compared in
+  order; each with its negative control); CL18 done (the four keys out of the column; the ledger's rows colour
+  false with the late declaration in `colourReadBy`, NOT `excludes`: with `excludes` the column law of
+  `institutionProseDeclared` reds 78 against 74); CL19's note true (its seven pools are the chair's seven; the
+  curfew pool was renumbered by be3585040 too); CL14: `UNDER_CLAIM_OWED` 734 to 815 (2,016 to 2,097: 96 new, 15
+  gone, by seat). A NEW RED BY CL18's MOVE, EXPECTED: `presumptionClasses.walker` sees three hits on old lines no
+  longer exempt as colour (the billet line's `ease` and `outside`, the cathedral line's `outside`): that register's
+  door has its own mode for a literal that stood at its base (`--bank debt-at-base`): CLOSE-DOORS-1B's, on the final
+  tree. THE VALIDATOR `scripts/census/census4-validate-ledger.mjs`: NO GATE RUNS IT and it cannot open since
+  2c1428102 (2026-11-04, when the pool-shaped ledgers joined its directory): A DEBT NAMED TO THE OWNER.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
@@ -2009,3 +2031,8 @@ should be paused or archived by the owner's hand.
   branch is cut at 70e557d5b and Part 1's tip is merged into it; the draft said "cut from Part 1's final tip"). TWO
   PLACEHOLDERS ARE FILLED AT THE WRITE: Part 1's tip and the hour of "SIGN". CLOSE-SWEEP (04:51): its item for the
   four was withdrawn with no commit ever made; it finishes its hand-back.
+- 05:02 UTC, 2026-11-18 · THE CLOSE'S SIXTH MERGE: CLOSE-DOORS-1A's follow-up (3a28738a9) merged as 8d7c2af33 and being
+  pushed to the merge branch. ON THE MERGED TREE (nine files of its rulings): 242 of 245 green; red: `proseComposed`
+  A0b by exactly the eight (CL25 sent), `presumptionClasses.walker` two arms (the three new hits and the stale rows:
+  CLOSE-DOORS-1B's door). THE SECOND "MERGE" GOES TO CLOSE-DOORS-1B WHEN THE PUSH LANDS; CL25's one commit follows
+  as a seventh merge (one constant of one test file: it moves no figure of 1B's).
