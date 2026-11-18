@@ -14,7 +14,7 @@
     "frozenAt names the commit whose GENERATION SUBSTRATE produced these rows; SCW-0 itself",
     "touches zero src/ files, so the landing commit derives identically."
   ],
-  "frozenAt": "dc4bae117b32922e3d442fbf41a7cee3f5636684",
+  "frozenAt": "f0e60758a36b320c0126b7aabcb5496b664ba56e",
   "corpusMeta": {
     "settlements": 462,
     "settTypes": 6,
@@ -26,7 +26,7 @@
     "coastal|coast|(biome)": 66,
     "desert|coast|(biome)": 6,
     "desert|dunes|(biome)": 28,
-    "desert|mountain-flank|coal": 7,
+    "desert|mountain-flank|coal": 9,
     "desert|mountain-flank|iron": 2,
     "desert|mountain-flank|ore": 14,
     "desert|mountain-flank|stone": 1,
@@ -69,8 +69,8 @@
   "totals": {
     "waterOnDry": 119,
     "marshOnDry": 27,
-    "flankOnFlat": 39,
+    "flankOnFlat": 41,
     "dunesOnWet": 0,
-    "anyContradiction": 158
+    "anyContradiction": 160
   }
 }
