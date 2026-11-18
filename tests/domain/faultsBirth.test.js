@@ -308,6 +308,18 @@ describe('FAULTS-BIRTH (c) · an isolated buyer of a material the land never hel
     expect(seen, 'houses short of hides or wool (the anchor)').toBeGreaterThanOrEqual(25);
   }, 600_000);
 
+  test('FR21 (1): on a connected road beside a spent pasture whose word names no wool, the seed buys or refuses "Wool" itself', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-4', 'r2r-metropolis-20'], (seed) => {
+      const s = town(seed);
+      if (!(s.config?.nearbyResourcesDepleted || []).includes('grazing_land')) throw new Error('no spent pasture (the anchor)');
+      if (!(s.economicState?.primaryImports || []).includes('Wool')) throw new Error('"Wool" not bought');
+      for (const i of liveInstitutions(s)) if (/^(Fuller|Weavers\/Textile workers)$/.test(i.name) && HI.housesShortOf(s).has(i.name)) throw new Error(`${i.name} short of wool`);
+    }), 'the wool bought');
+    const s = town('r2r-city-45');
+    expect((s.economicState?.primaryImports || []).includes('Wool'), 'NEGATIVE: r2r-city-45, the seed refuses: no "Wool"').toBe(false);
+    expect(HI.housesShortOf(s).get('Fuller'), 'r2r-city-45: the fuller idle, short of wool').toBe('wool');
+  }, 600_000);
+
   test('the three views read the grounds alike in every anchor town', () => {
     expectNoSeedFailures(collectSeedFailures([...RING_TOWNS, ...ISOLATED_TOWNS], (seed) => {
       const s = town(seed);
