@@ -231,8 +231,18 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // (applied|boom 3 → 2). HOMES ARRIVE applied|army_homecoming, applied|strategy_return_home; HOMES LEAVE applied|npc_bargain,
 // applied|npc_exploit, applied|trade_pressure, realm|realm_mass_migration. THE VOICE LAW HOLDS: no introduced summary at the tip reads
 // `can advance through`; the voice debt stays EMPTY. Conservation 417 − 2 = 415.
+// ── RE-RECORDED 2026-11-18 BY CLOSE-DOORS-1B (the close of 2026-11-18, the chair's seat; as BAR3-CLOSE-DOORS-1's ruling OC1, vetoable
+// by the owner) AT THE FROZEN TREE 70e557d5b, IN ONE ACT WITH THE HEADLINE AND PROSE-FAMILY CONTRACTS (the cause recorded once, here).
+// 417/2/415/42 → 419/2/417/42. ONE CORPUS BUILD, this library's own functions (the throw below disabled in an untracked scratch copy
+// only), run on the working tree, which differs from 70e557d5b only in register and test files outside src/ and one register-only
+// table no src module imports (src/domain/generation/generationForkRegistry.js). THE CAUSE: `git log --first-parent
+// 600b7683a..70e557d5b` over the prose-family walker's 23 EXPECTED_UNION paths is EMPTY (no landing of the span touches the pulse, the
+// events, the region, the news voice, the chronicle, the contract libraries or their baselines); the span's declared generation moves
+// re-deal the AO-0 year (not bisected: one build). TWO MORE INTRODUCTIONS, BOTH INTO STANDING HOMES: applied|boom 2 → 3, applied|
+// urban_fabric 14 → 15; no home arrives or leaves (42 holds); retirements 2 hold. THE VOICE LAW HOLDS: no introduced summary reads
+// `can advance through`; the voice debt stays EMPTY. Conservation 419 − 2 = 417.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 417, retirements: 2, finalEntries: 415, homes: 42,
+  pulseRoots: 12, introductions: 419, retirements: 2, finalEntries: 417, homes: 42,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([
