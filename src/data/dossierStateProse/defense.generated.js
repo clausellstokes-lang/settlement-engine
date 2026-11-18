@@ -3072,11 +3072,11 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "vid": 5
         },
         {
-          "angle": "visitor",
+          "angle": "street",
           "marks": [
-            "no watch"
+            "tier: ≤ village"
           ],
-          "text": "There is no watch at {settlement}, and visitors are warned to keep their belongings close.",
+          "text": "Neighbours at {settlement} have begun to suspect one another, and few will lend a tool or a coin now.",
           "slots": [
             "settlement"
           ],

@@ -597,6 +597,9 @@ const WORD_CORRECTIONS = Object.freeze([
   // LR6 (1), the chair's ruling of 2026-11-18 (after READ-LAST): DS-DEF-3 Moderate v9 (LAST-VARIETY's line) said the safety
   // profile's own sentence beside it again ("what trouble there is, everyone soon hears of"); its words corrected in place
   { pool: 'DS-DEF-3 :: Moderate', vid: 9, from: '97ee2d2bfed958aed1424ef8ae564f85f32108a781cb3ac9a0089b02d637e338', to: 'e9b1763b01cb54eb3f5380b090a6ad4d92a016d8821e61ff2a97ee1c48ac0e74', ruling: 'LR6' },
+  // LR6 (2): DS-DEF-3 Unsafe v6 (LAST-VARIETY's line) repeated the safety profile's travellers' advice and the guard line's
+  // "There is no watch"; its words corrected in place
+  { pool: 'DS-DEF-3 :: Unsafe', vid: 6, from: '2ab8fa180378f08d13e1fa047c7d8df733c1ea70fe18f996ed526428850200ed', to: '87c78172c08ce1e0a54bb926c8ea0cdd9cb1676156ab2783767d0de5ae258e3d', ruling: 'LR6' },
 ]);
 
 async function readNumberingBaseline() {

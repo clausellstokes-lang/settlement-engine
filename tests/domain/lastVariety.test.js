@@ -44,7 +44,7 @@ const NEW_LINES = [
   { pool: 'Moderate', vid: 9, marks: ['tier: ≤ village'] },
   { pool: 'Moderate', vid: 10, marks: ['no court or gaol'] },
   { pool: 'Unsafe', vid: 5, marks: ['no guardPresence', 'crime wave'] },
-  { pool: 'Unsafe', vid: 6, marks: ['no watch'] },
+  { pool: 'Unsafe', vid: 6, marks: ['tier: ≤ village'] }, // LR6 (2): its words corrected in place
 ];
 const BASE_COUNTS = { 'Very Safe': 5, Safe: 5, Moderate: 8, Unsafe: 4 };
 const variantOf = (/** @type {string} */ pool, /** @type {number} */ vid) => (BLOCK.pools[pool] || []).find((/** @type {any} */ v) => v.vid === vid);

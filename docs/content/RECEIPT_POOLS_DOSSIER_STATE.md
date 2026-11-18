@@ -3129,7 +3129,7 @@ reading rather than a settled one.
 3. `[unfolding · watch]` The balance at {settlement} has tipped and is still tipping. Each season the watch answers a smaller share of what happens.
 4. `[ledger · no court or gaol · no watch]` {settlement} has no court and no gaol. Custom and neighbours answer what they can, and the rest goes unanswered.
 5. `[street · no guardPresence · crime wave]` Theft at {settlement} grows each season, and with nobody under arms, every household guards its own.
-6. `[visitor · no watch]` There is no watch at {settlement}, and visitors are warned to keep their belongings close.
+6. `[street · tier: ≤ village]` Neighbours at {settlement} have begun to suspect one another, and few will lend a tool or a coin now.
 
 **`Dangerous`**
 1. `[street · watch]` The watch at {settlement} has been overwhelmed. What happens in this town is decided by whoever is present when it happens.
