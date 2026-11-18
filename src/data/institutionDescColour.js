@@ -364,8 +364,6 @@ export const DESC_VARIANT_COLOUR_DECLARATIONS = Object.freeze({
   "A chartered house of correspondents. Reports arrive from several roads and are checked against each other before anything is sold. The written answer carries a standing rate and a grade.": COLOUR,
   "General forges, farriers, and toolsmiths in each quarter.": COLOUR,
   "Every quarter has its forges: farriers, toolsmiths, and general smiths.": COLOUR,
-  "Silks, spices, and other precious goods.": COLOUR,
-  "The trade in silk, spice, and precious things.": COLOUR,
   "Apothecary shops crowded into one quarter, where competition forces each to specialise. One leans to chirurgery, another to herbal preparations, a third to imported medicines. Between them they carry herbalism kits, medicinal herbs, surgical supplies, and basic antidotes.": COLOUR,
   "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad. Herbalism kits, medicinal herbs, surgical supplies, and basic antidotes are all to be had.": COLOUR,
   "Planks and beams for the building trade, sawn by water or ox power at a mill with a permanent crew.": COLOUR,
