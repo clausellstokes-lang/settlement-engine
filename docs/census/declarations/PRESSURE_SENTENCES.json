@@ -1123,7 +1123,8 @@
           "lineId": "PRESSURE_SENTENCES.wartime(winning)[1]",
           "text": "Being on the right side of it keeps the forges of ${name} running day and night on the army's contracts, and the place now needs the war to go on to pay for what the war has already cost it.",
           "needs": [
-            "institution: smith"
+            "institution: smith",
+            "trade at work: ironwork in full"
           ],
           "excludes": [],
           "crisis": [

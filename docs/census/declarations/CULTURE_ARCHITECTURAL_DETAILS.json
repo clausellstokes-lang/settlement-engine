@@ -385,7 +385,7 @@
           "lineId": "CULTURE_PROFILES.mesoamerican.architecturalDetails[2]",
           "text": "causeways and managed water divide the settlement into organized neighborhoods",
           "needs": [
-            "tier: ≥ village"
+            "tier: ≥ town"
           ],
           "excludes": [],
           "crisis": null,
@@ -416,7 +416,8 @@
           "text": "shaded bazaar fronts open toward tanks, wells, and neighborhood shrines",
           "needs": [
             "market",
-            "institution: temple"
+            "institution: temple",
+            "tier: ≥ town"
           ],
           "excludes": [],
           "crisis": null,
@@ -476,7 +477,9 @@
           "lineId": "CULTURE_PROFILES.steppe.architecturalDetails[1]",
           "text": "storehouses and caravan yards mark the boundary between settlement and seasonal encampment",
           "needs": [],
-          "excludes": [],
+          "excludes": [
+            "route: isolated"
+          ],
           "crisis": null,
           "colour": false,
           "stop": [
