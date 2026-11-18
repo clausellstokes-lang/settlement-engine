@@ -142,6 +142,11 @@ const PRESENCE_SETTER = {
   'rival rings': (f, _a, want) => ({ ...f, rivalRings: want }),
   'monster frontier': (f, _a, want) => ({ ...f, monsterFrontier: want }),
   'food surplus': (f, _a, want) => ({ ...f, growsMoreThanEats: want }),
+  // BAR8-DESKS-2 (2026-11-18, ruling BR28 (1)): the round BAR8's two presence atoms (one-home facts each): DESKS-ECO's
+  // `critical import brought in` (`criticalImportBroughtIn.js`, DS-ECO-12 CRITICAL IMPORT v2 and its twin v4) and DESKS-DEF's
+  // `uprising` (`uprising.js`, DS-POW-4 Stable v3)
+  'critical import brought in': (f, _a, want) => ({ ...f, criticalImportBroughtIn: want }),
+  uprising: (f, _a, want) => ({ ...f, uprising: want }),
   imports: (f, _a, want) => ({ ...f, imports: want ? ['X'] : [] }),
   exports: (f, _a, want) => ({ ...f, exports: want ? ['X'] : [] }),
   priest: (f, _a, want) => ({ ...f, faith: { ...f.faith, seniorCleric: want ? { name: 'X' } : null } }),

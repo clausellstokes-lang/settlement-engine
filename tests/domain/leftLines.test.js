@@ -75,7 +75,10 @@ const DESK_LINES = /** @type {Array<[string, string, string, string, number, num
   // pool's surviving line of the same claim, v6 ("eats on food grown elsewhere"), which now declares the food brought in
   // (`food: = importDependent`); its twin v7 says nothing comes in. The positive anchor is a state a birth produces (the key's
   // band with food brought in), the negative the key's band with none (the page prints Deficit: bar0-hamlet-under_siege-rand-34)
-  ['L8 · eats on food grown elsewhere', 'general', 'DS-GEN-3', 'foodSecurity.label: Import-Dependent', 6, 7, { famine: { band: 'importDependent', shownBand: 'importDependent' } }, { famine: { band: 'importDependent', shownBand: 'deficit' } }],
+  // 2026-11-18 (BAR8-DESKS-2, ruling BR28 (2)): v4 is NOT retired after all: it went back exactly as it stood on the line (law
+  // 6; the ledger DS-GEN-3.json names vid 4), never admitted under this key's band. This row stays on v6, the line that speaks.
+  // the label re-worded 2026-11-18 (BAR8-DESKS-2, ruling BR28 (4)): it quoted the line (`proseDrawnAnchors.walker`)
+  ['L8 · the threshold line, v6', 'general', 'DS-GEN-3', 'foodSecurity.label: Import-Dependent', 6, 7, { famine: { band: 'importDependent', shownBand: 'importDependent' } }, { famine: { band: 'importDependent', shownBand: 'deficit' } }],
   ['L8 · food stored, and clergy', 'defense', 'DS-DEF-2', 'Disasters & Famine: granary AND parish care only', 1, 4, { storesMonths: 5 }, { storesMonths: 1.5 }],
   ['L8 · the stores go in deep', 'economy', 'DS-ECO-2', 'GRANARY: well stocked', 5, 6, { storesMonths: 5, hasInstitution: noGranary }, { storesMonths: 1.5, hasInstitution: noGranary }],
   ['L9 · its watch keeps the peace', 'defense', 'DS-DEF-2', 'Invasion & War: neither walls nor force', 7, 10, { lawBand: 'strained' }, { lawBand: 'collapsed' }],

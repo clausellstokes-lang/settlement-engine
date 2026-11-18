@@ -11,7 +11,8 @@
  *             matching on every town this file births.
  *   item 5    the brewer's secret "Thins the ale … charges the taverns" needs `institution: tavern`.
  *   item 6    DS-GEN-3 Import-Dependent: the lines that say the food is bought or brought in declare it (`food: =
- *             importDependent`), the two by road no siege; v4 retired by name; v7 the twin where nothing comes in.
+ *             importDependent`), the two by road no siege; v7 the twin where nothing comes in. v4 STANDS IN ITS PLACE, never
+ *             admitted (`food: ≥ secure`): restored 2026-11-18 by BAR8-DESKS-2 under the chair's ruling BR28 (2).
  *
  * THE ANCHORS (rule N7): the desk lines over a CONSTRUCTED record (the facts of one fixed born town on no road, one premise
  * atom set each way: a negative beside a positive); the atom over born towns of the seventh read's thirty that printed the
@@ -117,7 +118,8 @@ const DESK_LINES = /** @type {Array<[string, string, string, string, number, num
   ['11c · must come from elsewhere', 'economy', 'DS-ECO-12', 'CRITICAL IMPORT: a house needs what the land lacks', 2, 4, { criticalImportBroughtIn: true }, { criticalImportBroughtIn: false }],
   ['6 · buys the rest', 'general', 'DS-GEN-3', 'foodSecurity.label: Import-Dependent', 1, 7, band('importDependent'), band('deficit', 'importDependent')],
   ['6 · comes up the road', 'general', 'DS-GEN-3', 'foodSecurity.label: Import-Dependent', 2, 7, band('importDependent'), band('deficit', 'importDependent')],
-  ['6 · eats on food grown elsewhere', 'general', 'DS-GEN-3', 'foodSecurity.label: Import-Dependent', 6, 7, band('importDependent'), band('deficit', 'importDependent')],
+  // the label re-worded 2026-11-18 (BAR8-DESKS-2, ruling BR28 (4)): it quoted the line (`proseDrawnAnchors.walker`)
+  ['6 · the threshold line, v6', 'general', 'DS-GEN-3', 'foodSecurity.label: Import-Dependent', 6, 7, band('importDependent'), band('deficit', 'importDependent')],
 ]);
 
 describe('BAR8-DESKS-ECO · the desk lines: absent where the premise is false, the twin there', () => {
@@ -133,12 +135,17 @@ describe('BAR8-DESKS-ECO · the desk lines: absent where the premise is false, t
     }), 'each cured desk line and its twin');
   });
 
-  it('item 6: no Import-Dependent line says the food comes by road or is bought under a siege; v4 is retired and its number unused', () => {
+  // RE-KEYED BY IDENTITY (2026-11-18, BAR8-DESKS-2, ruling BR28 (2)): v4 is NOT retired. A row is not removed from the middle
+  // of a pool (the kernel's law 6: a pool's ids are its annex rows) and the ledger `docs/census/declarations/DS-GEN-3.json`
+  // names vid 4, so it went back exactly as it stood on the line, `food: ≥ secure`: never admitted under the key's own band.
+  it('item 6: no Import-Dependent line says the food comes by road or is bought under a siege; v4 stands in its place and is never admitted', () => {
     const pool = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-3'].pools['foodSecurity.label: Import-Dependent'];
-    expect(pool.map((/** @type {any} */ v) => v.vid)).toEqual([1, 2, 3, 5, 6, 7]);
-    expect(pool.some((/** @type {any} */ v) => /eats well/.test(v.text)), 'the retired "eats well" line').toBe(false);
+    expect(pool.map((/** @type {any} */ v) => v.vid)).toEqual([1, 2, 3, 4, 5, 6, 7]);
+    const v4 = pool.find((/** @type {any} */ v) => v.vid === 4);
+    expect([/eats well/.test(v4.text), v4.marks], 'v4 as it stood on the line').toEqual([true, ['no crisis: hunger', 'crisis: any', 'food: ≥ secure']]);
     const sieged = over({ ...band('importDependent'), crisis: siege });
     const { admits } = deskLine('general', 'DS-GEN-3', 'foodSecurity.label: Import-Dependent', 1, 7);
+    expect([admits(v4, over(band('importDependent'))), admits(v4, over(band('deficit', 'importDependent')))], 'v4 under the key\'s own band, brought in or not').toEqual([false, false]);
     expectNoSeedFailures(collectSeedFailures(pool.filter((/** @type {any} */ v) => v.vid !== 7), (/** @type {any} */ v) => {
       expect(admits(v, sieged), `v${v.vid} "${v.text}" under a siege`).toBe(false);
       expect(admits(v, over(band('deficit', 'importDependent'))), `v${v.vid} where nothing is brought in`).toBe(false);

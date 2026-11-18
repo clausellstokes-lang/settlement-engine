@@ -950,10 +950,22 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     // variety in the states where the corpus authored only one line for a value, and every
     // settlement in such a state prints the same sentence. That is a CORPUS bill, payable
     // by authoring, and hiding it would be the fail-open reading in a different coat.
+    // RE-KEYED BY IDENTITY (2026-11-18, BAR8-DESKS-2, ruling BR28 (3)): a pool KEYED BY A FOOD BAND (DS-GEN-3's
+    // `foodSecurity.label: <band>`) is read under THAT band, not the calm double's `secure`: the page draws the pool only
+    // where it prints the band. BAR8-DESKS-ECO declared the Import-Dependent lines `food: = importDependent`, so under the
+    // double's band only v4 (`food: ≥ secure`, never admitted under its own key) was left, and the pool's two walls states
+    // read thin (28 -> 30 DM, 29 -> 31 player); under the key's own band they hold five lines each, and the bill is back.
+    const FOOD_KEY_BAND = { Famine: 'famine', Deficit: 'deficit', 'Import-Dependent': 'importDependent', Pressured: 'pressured', Secure: 'secure', Surplus: 'surplus' };
+    const factsForKey = (/** @type {string} */ key) => {
+      const band = /** @type {Record<string, string>} */ (FOOD_KEY_BAND)[String(key).replace(/^foodSecurity\.label: /, '')];
+      return /^foodSecurity\.label: /.test(key) && band
+        ? { ...CALM_FACTS_ADMIT_ALL, famine: { ...CALM_FACTS_ADMIT_ALL.famine, band, shownBand: band } }
+        : CALM_FACTS_ADMIT_ALL;
+    };
     const thin = {};
     for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
-      thin[audience] = DIMENSION_STATES.filter(({ pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
-        pool, { slots: bagFor(pool), audience, dimensions: { ...others, [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL },
+      thin[audience] = DIMENSION_STATES.filter(({ key, pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
+        pool, { slots: bagFor(pool), audience, dimensions: { ...others, [dimension]: value }, facts: factsForKey(key) },
       ).length <= 1)).length;
     }
     // MEASURED at 2d5112851, and the two audiences DIFFER BY ONE. The design volume
