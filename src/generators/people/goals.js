@@ -33,7 +33,7 @@
  * DM-only by construction: `npcs[].goal` (and so `intent`) never reaches a public page (design §6.3).
  */
 
-import { GOAL_FAMILY_LINES, PERSONALITY_CLUSTER_OF, TIE_TYPE_TO_GOAL_SUBKIND } from '../../data/people/goalFamilies.js';
+import { GOAL_FAMILY_LINES, GOAL_LINE_MIN_MEMBERS, PERSONALITY_CLUSTER_OF, TIE_TYPE_TO_GOAL_SUBKIND } from '../../data/people/goalFamilies.js'; import { facesInPower } from '../../domain/people/cardPowers.js'; // BAR8 K-PEOPLE (14h): the power's members as the Power tab counts them
 import { familyOfInstitution, isLawEnforcementInstitution, isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
@@ -353,7 +353,7 @@ const PROSE_SLOTS = new Set(['power', 'rival', 'guild']);
 /**
  * Every line of a cell the record fills and admits, unheld: the candidates of one sub-kind.
  * @param {string} family @param {string} kind @param {Vantage} vantage @param {Rec} slots @param {GoalContext} ctx
- * @param {Set<string>} held @param {{ target?: GoalTarget | null, refs?: string[] }} [extra]
+ * @param {Set<string>} held @param {{ target?: GoalTarget | null, refs?: string[], members?: number }} [extra] `members`: the power's members as the Power tab counts them (BAR8 K-PEOPLE 14h)
  * @returns {Candidate[]}
  */
 function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
@@ -373,7 +373,8 @@ function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
     if (!text) continue;
     if (held.has(text)) { ctx.refusals.n += 1; continue; }
     const used = Object.fromEntries(slotsIn(templateOf(line)).map((k) => [k, slots[k]]));
-    out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes });
+    const fewMembers = typeof extra.members === 'number' && (GOAL_LINE_MIN_MEMBERS[templateOf(line)] ?? 0) > extra.members; // BAR8 K-PEOPLE (14h)
+    out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes, ...(fewMembers ? { refused: true } : {}) });
   }
   return out;
 }
@@ -402,7 +403,7 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
     const rankOf = (/** @type {number} */ r) => cards.find((c) => c !== card && arr(c?.memberships).some((x) => str(rec(x).power) === power && Number(rec(x).rank) === r));
     if (rank === 2 || rank === 3) {
       const above = rankOf(rank - 1);
-      if (above) push(cellCandidates('RANK', 'climb', vantage, { power, above: personName(above) }, ctx, held, { target: { kind: 'npc', id: String(above.id) }, refs: [String(above.id)] }));
+      if (above) push(cellCandidates('RANK', 'climb', vantage, { power, above: personName(above) }, ctx, held, { target: { kind: 'npc', id: String(above.id) }, refs: [String(above.id)], members: facesInPower(cards, power).length }));
     } else if (rank === 1) {
       const below = rankOf(2);
       if (below) push(cellCandidates('RANK', 'defend', vantage, { power, below: personName(below) }, ctx, held, { target: { kind: 'npc', id: String(below.id) }, refs: [String(below.id)] }));

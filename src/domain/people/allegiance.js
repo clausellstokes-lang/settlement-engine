@@ -422,8 +422,41 @@ export function assignHandlers(cards, settlement) {
       rec(x.card.allegiance).handler = String(handler.id);
       dealt.push(x.card);
     });
+    if (key === 'houses') ownHandlersOfTheSwap(group, handlers);
   }
   return dealt;
+}
+
+/**
+ * BAR8 K-PEOPLE (LAW 14 rule 14b; the chair's ruling BR13; vetoable by the owner): THE SWAP IS UNDONE. Where the houses'
+ * pool (allegiances that name no criminal power: the page prints each house's network apart) deals one agent of house A
+ * to a face of house B and one agent of B to a face of A, the round of the deal has crossed two networks that each had
+ * their own people to hand (C6183: house A's network handled ONLY by B's people, and B's ONLY by A's). The two agents
+ * exchange handlers, so each house's network is handled by its own people; every handler keeps the number of agents
+ * the deal gave it (the bound ceil(agents / handlers) holds). THE SWAP ONLY: a pair is exchanged only where neither
+ * house's network has any of its own people among its handlers, so a network handled one way by another house's face
+ * (`.cross`, the deal's design, the owner's question) is not touched. Draw-free; the first such pair in dealing order
+ * is exchanged first, until none is left.
+ * @param {Array<{ card: Rec }>} group the pool's agents, in dealing order @param {Rec[]} handlers the pool's handlers
+ */
+function ownHandlersOfTheSwap(group, handlers) {
+  const byId = new Map(handlers.map((h) => [String(h.id), h]));
+  const houseOfHandler = (/** @type {{ card: Rec }} */ x) => str(rec(rec(byId.get(str(rec(x.card.allegiance).handler))).institution).key);
+  const houseOfAgent = (/** @type {{ card: Rec }} */ x) => str(rec(x.card.allegiance).house);
+  const ownHandled = (/** @type {string} */ house) => group.some((z) => houseOfAgent(z) === house && houseOfHandler(z) === house);
+  for (let changed = true; changed;) {
+    changed = false;
+    for (const x of group) {
+      const a = houseOfAgent(x); const b = houseOfHandler(x);
+      if (!a || !b || a === b || ownHandled(a) || ownHandled(b)) continue;
+      const y = group.find((z) => z !== x && houseOfAgent(z) === b && houseOfHandler(z) === a);
+      if (!y) continue;
+      const hx = rec(x.card.allegiance).handler;
+      rec(x.card.allegiance).handler = rec(y.card.allegiance).handler;
+      rec(y.card.allegiance).handler = hx;
+      changed = true;
+    }
+  }
 }
 
 /**
