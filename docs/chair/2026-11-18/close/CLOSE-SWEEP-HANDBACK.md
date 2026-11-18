@@ -15,6 +15,7 @@ under BRIEF-CLOSE (C1 to C10) and the chair's rulings CL11 (landed points over `
 | S4.2 | 890296904 | `tests/lint/factLayers.walker.test.js` arm (a): the instrument | (c) a law: a guard blind to two leaves | arm (a) **green**; the table unchanged |
 | S4.3 | 1039b8c26 | the same: `hasInstitution`'s probe | (c) the same gap | green; the table unchanged |
 | S4.4 | none (withdrawn) | the presumed-things door's four fresh lines | recorded by the owner's word (CLOSE-DOORS-1B) | nothing changed here |
+| S4.5 | 8ecd7c61b | observed-shape readers: `custom`, `isCustom` on `incomeSources` (`tradeListDisplay.js :: harvestScarceHere`) | (c) a law: a reader with no writer | both identities gone at the source |
 | S5 | a970ef865 | `vercel.json` (CL13) | not a red: the chair's item | every reader the same at both ends |
 
 No stored figure (register, baseline, census, ledger, golden, ceiling, bundle) was written by this seat. No `DECLARED_OVERRUN`
@@ -147,6 +148,11 @@ the rows). Nothing of it was committed: the scratch trees were discarded. What i
 - **Measured in scratch against the door's `--check`:** the bowyers' "defenders" → "defence", the two "garrison …" clauses dropped, the
   two first sentences' "soldiers" → "hired swords", and the court-and-prison twin wrapped in `lineText({ …, needs: ['court', 'prison'] })`
   took the four lines' six keys out of the fresh list (38 → 32) and touched no other row.
+
+## S4 item 5 · two dead reads on an income share (8ecd7c61b)
+
+**S4.5 (8ecd7c61b):** `harvestScarceHere`'s filter read `sh.custom` and `sh.isCustom`, written on no income share under `src/` (the birth's `incomeBuild`, custom goods' `{ source: <good> + ' Trade' }`, the pulse, the editor, an import: none; those keys are written on services, houses, resources, content items); both conjuncts out, `sh.source !== 'custom'` kept (a share's `source` is its line's title, never the bare word, so it is always true). Cause: JOIN-17 point 14 (93eb061ff).
+**Proof:** the observed-shape scan (`--scan-only --scan-mode=legacy-leaf`, clean HEAD before and after) 2,215 → 2,213 findings, exactly those two identities gone, none new, no other inventory row moved; 525/525 hashes and 30/30 dumps equal; the file's 22 importing test files alone, 22/22 identical at both ends; both type gates at ceiling (167; 1113); eslint 0.
 
 ## S5 · lane pushes create no deployment (a970ef865)
 
