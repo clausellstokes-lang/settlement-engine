@@ -94,6 +94,8 @@ export function factsOf(record, options = {}) {
     get legacyRuin() { return legacyRuinOf(record); },
     /** BAR6-CULTURE (6d-court): a court sits on the live roster, the Defense tab's Legal Infrastructure row (`defence.js :: courtHoldersOf`) */
     get courtSits() { return courtHoldersOf(/** @type {import('./defence.js').CourtRecord} */ (record)).length > 0; },
+    /** FAULTS-DESKS (13d, FR6): a court sits on the live roster or a prison stands on it (the defence home's own two readers, `courtHoldersOf` and `defenceOf().prison`): the Legal row prints anything but "None" */
+    get courtOrGaol() { return courtHoldersOf(/** @type {import('./defence.js').CourtRecord} */ (record)).length > 0 || defenceOf(record).prison; },
     /** fact 2: the months of food in store (number | null) */
     get storesMonths() { return storesMonthsOf(record); },
     /** BAR6-DEFDESK (9c.nothing-over): the town grows more than it eats (`growsMoreThanEats.js`) */
@@ -162,6 +164,8 @@ export function factsOf(record, options = {}) {
     get enchanting() { return enchantingOfferedOf(record); },
     /** BAR4-SCENES-2 (HW1): a trade the scene shows is at work, some house of it not short (`tradeAtWork.js`) */
     get tradeAtWork() { return (/** @type {string} */ key) => tradeAtWorkOf(record, key); },
+    /** FAULTS-ROWS (FR12 (3)): the town's fish is bought in, the swap's own fact (`fishBoughtIn.js`) */
+    get fishBoughtIn() { return fishBoughtIn(record); },
     /** BAR6-SCENES (6b): a good a scene sends out is on the export list (`goodExported.js`) */
     get goodExported() { return (/** @type {string} */ key) => goodExportedOf(record, key); },
     /** fact 12: small / middling / large */
@@ -196,6 +200,8 @@ export function factsOf(record, options = {}) {
     get imports() { return canonImports(record); },
     /** BAR8-DESKS-ECO (11c): the good the critical-import lens names is brought in (`criticalImportBroughtIn.js`) */
     get criticalImportBroughtIn() { return criticalImportBroughtInOf(record); },
+    /** FAULTS-NEED (FR2): the page's own need list names a need of the family (`needNotBroughtIn.js`) */
+    get needNotBroughtIn() { return needNotBroughtInOf(record); },
     /** the export list (`canonicalAccessors.js :: canonExports`) */
     get exports() { return canonExports(record); },
     /** the culture key (`resolveCulture.js :: resolveSettlementCulture`) */
@@ -277,3 +283,5 @@ import { rivalRingsStand } from './rivalRings.js'; // BAR7-DESKS (9i.crews): at 
 import { crimeWaveStands, lawBandOf } from './lawBand.js'; // BAR5-SAFETY (L2.law.collapsed): at the END, no line above moves; BAR6-CRIME: the crime wave
 import { criticalImportBroughtInOf } from './criticalImportBroughtIn.js'; // BAR8-DESKS-ECO (11c): at the END, no line above moves
 import { uprisingOf } from './uprising.js'; // BAR8-DESKS-DEF (12e): at the END, no line above moves
+import { needNotBroughtInOf } from './needNotBroughtIn.js'; // FAULTS-NEED (FR2): at the END, no line above moves
+import { fishBoughtIn } from './fishBoughtIn.js'; // FAULTS-ROWS (FR12 (3)): at the END, no line above moves

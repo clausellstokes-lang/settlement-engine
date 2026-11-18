@@ -18,6 +18,19 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-18 — THE CLOSE OF THE ROUNDS BAR5 TO BAR8, THROUGH THE SIGNED DOOR (ODQ §934.105 and the owner's own word in the chair's chat, 2026-11-18 03:03:46 UTC,
+ *   the whole of the message: "yes: refresh the stored reference files and open the pull request.", answering the chair's message of 02:47:31 UTC; the
+ *   chair's line "SIGN" 06:57 UTC; record docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json; seat CLOSE-DOORS-2, vetoable).
+ *   485 of 525 rows (thorp 56, hamlet 84, village 84, town 93, city 84, metropolis 84) against the last green corpus 0ac61b4b4 (which reproduces all 525;
+ *   the chair's ruling CL11: the line's 6c117344f was already red, 285, the round BAR5 having joined before the BAR4 close). THE CAUSE: the declared cures
+ *   of every seat landed over 600b7683a..70e557d5b: BAR5 (things, chains, food, world, powers), BAR6 (powers, people, record, culture, scenes and the seam),
+ *   BIRTH-1, -2, -3 (the supply rule), BAR7 (lines, econ), SECRETS-1, LEFT-LINES, BAR8 (scenes, fish rows). FIELD-DIFFED by leaf path (the record's
+ *   familyCheck: 23 families, each with its declarers' file and line): relationships[] tension 276 / description 63 / proseVariant 60 / type, strength,
+ *   archetypeKey 57, powerStructure.factions[].desc 241, npcs[] secret 168 / goal 54 / presentation 24, resourceAnalysis.gaps 129, economicState imports 117 /
+ *   exports 75 / dependencies and chains 37 / food 35 / production 29 / income 10, availableServices 102, culturalIdentity 86, economicViability hooks 85 /
+ *   summary 46 / issues 37, arrivalScene 74, history 54, settlementReason 38, simulationTrace 37, conflicts 29, prominentRelationship 10; no person, house,
+ *   tie or name in or out. Written at the doors' branch 2f4eb8acf (it holds Part 1's final tip 0af60594a: the 525 byte-equal). 03f9688f.. -> d08ae44c..
+ *
  * 2026-11-16 — THE CLOSE OF THE ROUND BAR4, THROUGH THE SIGNED DOOR (ODQ §934.105 and the owner's own words in the chair's chat: 2026-11-16 08:55:14 UTC, "Yes to the following:" /
  *   "Later: a new yes for the example-town refresh when this round closes.", answering the chair's report of 08:30:14 UTC; and, the chair's own permission check having held the
  *   first go-ahead at 17:40 UTC, 18:51:17 UTC, "Yes to plain yes for the example-town refresh.", answering the chair's ask of 17:42, 18:06 and 18:35 UTC;

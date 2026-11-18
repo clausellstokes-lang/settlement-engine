@@ -2412,4 +2412,61 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer and employer.", needs: Object.freeze(['institution: tavern']), excludes: Object.freeze(['crisis: under_siege']) }),
     Object.freeze({ text: "Commercial-scale ale and beer production. Supplies the town's taverns; while the siege holds the roads none of it goes further. Major grain consumer and employer.", twinOf: "Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer and employer.", needs: Object.freeze(['institution: tavern']), crisis: Object.freeze(['under_siege']) }),
   ]),
+  // FAULTS-ROWS (the sixth chair's BRIEF-FAULTS ruling FR3, 2026-11-18; vetoable by the owner): THE FAIR'S LUXURIES. The Annual
+  // fair's two lines offer luxuries the town's own need list says are not brought in ("Needed, and not brought in: luxury goods.",
+  // bar0-town-calm-rand-45, C32296; r2r-town-10, -56, -57). The need list is the resource analysis's, settled after the
+  // description draw, so each line is read here, late, on `need not brought in: luxury` (`facts/needNotBroughtIn.js`), and its
+  // twin, in its siege twin's form, says the fair is held and names no luxury as to be had. THE ORDER OF THE TWO DECLARATIONS:
+  // the siege is the draw's (`DESC_VARIANT_SIBLINGS` above): a town under siege at the draw stores the siege twin, which is no key
+  // here, so the late re-read never reaches it (r2s-under_siege-town-2: the siege twin beside "Needed, and not brought in: Quality
+  // textiles."); each late member declares the siege off too, so a siege settled after the draw keeps the original as before,
+  // noted for the birth check, and never takes this twin's "held". No draw moves.
+  "Regional merchants. Luxury goods available.": Object.freeze([
+    Object.freeze({ text: "Regional merchants. Luxury goods available.", excludes: Object.freeze(['crisis: under_siege', 'need not brought in: luxury']) }),
+    Object.freeze({ text: "A yearly fair for regional merchants. The luxuries the town wants do not reach it.", twinOf: "Regional merchants. Luxury goods available.", needs: Object.freeze(['need not brought in: luxury']), excludes: Object.freeze(['crisis: under_siege']) }),
+  ]),
+  "Merchants from across the region, and luxuries to be had.": Object.freeze([
+    Object.freeze({ text: "Merchants from across the region, and luxuries to be had.", excludes: Object.freeze(['crisis: under_siege', 'need not brought in: luxury']) }),
+    Object.freeze({ text: "A yearly gathering of the region's merchants, though the luxuries the town wants do not come with them.", twinOf: "Merchants from across the region, and luxuries to be had.", needs: Object.freeze(['need not brought in: luxury']), excludes: Object.freeze(['crisis: under_siege']) }),
+  ]),
+  // FAULTS-ROWS (the sixth chair's ruling FR12 (1), 2026-11-18; vetoable by the owner): the fair's third line, its "fine goods on
+  // offer" beside "Needed, and not brought in: luxury goods." (bar0-town-calm-rand-46, bar0-town-occupied-rand-46, -47). The
+  // same form as the two above: read late on the atom, the siege off on both members, ONE TWIN.
+  "A yearly draw for regional traders, with fine goods on offer.": Object.freeze([
+    Object.freeze({ text: "A yearly draw for regional traders, with fine goods on offer.", excludes: Object.freeze(['crisis: under_siege', 'need not brought in: luxury']) }),
+    Object.freeze({ text: "A yearly draw for regional traders, though the fine goods the town wants do not reach it.", twinOf: "A yearly draw for regional traders, with fine goods on offer.", needs: Object.freeze(['need not brought in: luxury']), excludes: Object.freeze(['crisis: under_siege']) }),
+  ]),
+  // FAULTS-ROWS (the sixth chair's rulings FR3 and FR12 (2), 2026-11-18; vetoable by the owner): THE LUXURY QUARTER'S TWO LINES
+  // trade in the silk and the spice the town's own need list says are not brought in ("Needed, and not brought in: spices.",
+  // r2r-city-29, r2r-city-17). Each was marked a colour line (`institutionDescColour.js`: struck, in CL18's form). Read late on
+  // `need not brought in: spice` and `: silk`; the draw declares no siege, so none is declared here. ONE TWIN each, naming no
+  // good as to be had. A town whose only unmet good is another (copper ore, gold/silver ore: the mint's want) keeps its line.
+  "Silks, spices, and other precious goods.": Object.freeze([
+    Object.freeze({ text: "Silks, spices, and other precious goods.", excludes: Object.freeze(['need not brought in: spice', 'need not brought in: silk']) }),
+    Object.freeze({ text: "Fine goods of every kind, though the spice or silk the town wants never arrives.", twinOf: "Silks, spices, and other precious goods." }),
+  ]),
+  "The trade in silk, spice, and precious things.": Object.freeze([
+    Object.freeze({ text: "The trade in silk, spice, and precious things.", excludes: Object.freeze(['need not brought in: spice', 'need not brought in: silk']) }),
+    Object.freeze({ text: "Fine things are traded here, though the spice or silk the town wants does not reach it.", twinOf: "The trade in silk, spice, and precious things." }),
+  ]),
+  // FAULTS-ROWS (the sixth chair's rulings FR4 and FR12 (3), 2026-11-18; vetoable by the owner): THE FISH MARKET'S CARD follows
+  // its row. Where the fish is bought in (`fish bought in`, `facts/fishBoughtIn.js`: the one fact BAR8-FISH-ROWS's swap reads to
+  // give the market its "Preserved fish"), "the day's catch" is false (bar0-village-calm-rand-47); the imports are written after
+  // the draw, so the card is read here. ONE TWIN: salted and dried fish, no catch of the day. An idle town (nothing brought in)
+  // and a live fishery keep the line; its draw declaration (`navigable`, DESC_VARIANT_DECLARATIONS) stands as it was.
+  "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.": Object.freeze([
+    Object.freeze({ text: "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.", excludes: Object.freeze(['fish bought in']) }),
+    Object.freeze({ text: "Salted and dried fish is sold here, from an open stall or under a small roof. No fresh catch comes in.", twinOf: "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.", needs: Object.freeze(['fish bought in']) }),
+  ]),
+  // FAULTS-ROWS (the chair's ruling FR20 (2), 2026-11-18; vetoable by the owner; the twins' words are the chair's): the card's two
+  // siblings of the village Fish market's draw pool, the catalogue line (`institutionalCatalog.js`) and the pool's #0, in the same
+  // form (r2r-village-11: the catalogue line beside "Preserved fish").
+  "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait.": Object.freeze([
+    Object.freeze({ text: "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait.", excludes: Object.freeze(['fish bought in']) }),
+    Object.freeze({ text: "An open-air stall or small covered market where salted and dried fish is sold. No fresh catch is landed here.", twinOf: "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait.", needs: Object.freeze(['fish bought in']) }),
+  ]),
+  "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.": Object.freeze([
+    Object.freeze({ text: "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.", excludes: Object.freeze(['fish bought in']) }),
+    Object.freeze({ text: "An open stall or small roofed market for salted and dried fish, brought in from elsewhere. The catch is no longer landed here.", twinOf: "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.", needs: Object.freeze(['fish bought in']) }),
+  ]),
 });

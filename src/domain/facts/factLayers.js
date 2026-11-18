@@ -107,6 +107,9 @@ export const LEAVES = Object.freeze({
   paidWatch: home('paidWatch', 1, ['institutions']), // BAR6-PEOPLE (10e-house): someone is paid to keep order (`guardPay.js`)
   forceWalksByDay: home('forceWalksByDay', 1, ['institutions']), // BAR8-K-WATCH (13e): the force walks by day, by its own text (`forceHours.js`)
   courtSits: home('courtSits', 2, ['availableServices', 'institutions']), // BAR6-CULTURE (6d-court): a court on the live roster (`defence.js :: courtHoldersOf`)
+  courtOrGaol: home('courtOrGaol', 2, ['availableServices', 'institutions', 'economicState'], { // FAULTS-DESKS (13d, FR6): `court sits` or the defence home's `prison`
+    note: 'it reads the live roster\'s drawn services (layer 2) and a defence-home atom, which bundles the economy as every defence atom does',
+  }),
   appointedPost: home('appointedPost', 1, ['institutions']), // BAR5-THINGS (LAW 4): a post someone is named to (`appointedPost.js`)
   migration: home('migration', 1, ['stress', 'stressors']),
   warState: home('warState', 1, ['stress', 'stressors', 'activeConditions', 'economicState'], {
@@ -197,6 +200,13 @@ export const LEAVES = Object.freeze({
   // BAR8-DESKS-ECO (11c): the good the critical-import lens names is brought in (`criticalImportBroughtIn.js`: the resource
   // analysis's critical list and reasons, stored at layer 3, and the economy's imports)
   criticalImportBroughtIn: home('criticalImportBroughtIn', 4, ['resourceAnalysis', 'economicState']),
+  // FAULTS-NEED (FR2): the page's own need list names a need of the family (`needNotBroughtIn.js`: the resource analysis's
+  // critical list and gap rows, stored at layer 3, the economy's lists and chains, the live roster and its service rows, the
+  // tier the luxury class's band reads, and the config the failed venture's pick reads)
+  needNotBroughtIn: home('needNotBroughtIn', 4, ['resourceAnalysis', 'economicState', 'institutions', 'availableServices', 'config', 'tier']),
+  // FAULTS-ROWS (FR12 (3)): the town's fish is bought in (`fishBoughtIn.js`: the grounds read from the config's resource record
+  // and the roster, the imports the narratives step writes at layer 3; the swap of the service rows reads the same function)
+  fishBoughtIn: home('fishBoughtIn', 4, ['config', 'economicState', 'institutions', 'resourceAnalysis']),
   crimeSignal: leaf({ layer: 3, module: 'domain/crimeSignal.js', exported: 'crimeSignalOf', call: 'crimeLists', reads: ['powerStructure', 'institutions'] }),
   faith: home('faith', 3, ['institutions', 'config', 'economicState', 'powerStructure', 'npcs', 'stress'], {
     note: 'its value reads the config, the roster, the income and the factions (layer 3); it touches the cast (layer 3), banked; '
@@ -207,7 +217,7 @@ export const LEAVES = Object.freeze({
   powersList: leaf({ layer: 3, module: 'domain/dossier/powerStrata.js', exported: 'derivePowerStrata', call: 'record', reads: ['powerStructure'],
     note: 'the one derivation of both lists the Power tab prints (the contenders and the roster); the fault of 16b is that both are titled alike, not a second derivation' }),
   // ── layer 4: over the cast ──
-  importsAsPrinted: leaf({ layer: 4, module: 'domain/display/tradeListDisplay.js', exported: 'importsAsPrinted', call: 'record', reads: ['activeConditions', 'config', 'economicState', 'economicViability', 'institutions', 'resourceAnalysis', 'stress', 'stressors', 'tier'] }), // W2-C-LEAVES-4 item 2: the pills read the chain cards' crisis state (chainStateShown.js :: crisisOf); W2-C-LEAVES R2: a need the town makes (its live roster, through localProductionAsPrinted); W2-C-LEAVES-3 P1-a: the chain leaf's WORKED_BY_HOUSE reads the town's own live resources (config); CLOSE-SWEEP S2: and the viability (layer 3)
+  importsAsPrinted: leaf({ layer: 4, module: 'domain/display/tradeListDisplay.js', exported: 'importsAsPrinted', call: 'record', reads: ['activeConditions', 'availableServices', 'config', 'economicState', 'economicViability', 'institutions', 'resourceAnalysis', 'stress', 'stressors', 'tier'] }), // W2-C-LEAVES-4 item 2: the pills read the chain cards' crisis state (chainStateShown.js :: crisisOf); W2-C-LEAVES R2: a need the town makes (its live roster, through localProductionAsPrinted); W2-C-LEAVES-3 P1-a: the chain leaf's WORKED_BY_HOUSE reads the town's own live resources (config); CLOSE-SWEEP S2: and the viability (layer 3); BAR8 J-INCOME item 4: a live house's printed service row (dealtInHere reads availableServices, stratum 1)
   // BAR6-HOUSES (the chair's ruling SV1): a sovereign given by the government, a power, a house, a person or the founding, or a
   // war or an occupation (`sovereign.js`); read at the settled record (the houses' late re-read)
   sovereign: home('sovereign', 4, ['history', 'institutions', 'npcs', 'powerStructure', 'stress', 'stressors']),

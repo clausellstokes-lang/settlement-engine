@@ -3,9 +3,9 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 949,
-    "printOneLine": 669,
-    "measuredUnder30Draws": 150,
+    "pools": 954,
+    "printOneLine": 667,
+    "measuredUnder30Draws": 151,
     "highestSharesOver150Draws": [
       {
         "pool": "ledger:institutionServices:Access to external mill.Grain milling (a day away)",
@@ -57,6 +57,27 @@
         "lines": 2
       },
       {
+        "pool": "ledger:institutionServices:Hired blades.Bodyguard service",
+        "top1": 0.8977,
+        "top5": 1,
+        "draws": 254,
+        "lines": 2
+      },
+      {
+        "pool": "ledger:foodwaysPrintSiblings:FOODWAYS_PRINT_SIBLINGS",
+        "top1": 0.8859,
+        "top5": 1,
+        "draws": 1585,
+        "lines": 2
+      },
+      {
+        "pool": "ledger:institutionServices:Butchers (3-8).Fresh meat",
+        "top1": 0.8776,
+        "top5": 1,
+        "draws": 833,
+        "lines": 2
+      },
+      {
         "pool": "ledger:npcData:NPC_HOOK_SIBLINGS",
         "top1": 0.8772,
         "top5": 1,
@@ -68,27 +89,6 @@
         "top1": 0.8734,
         "top5": 1,
         "draws": 450,
-        "lines": 2
-      },
-      {
-        "pool": "ledger:foodwaysPrintSiblings:FOODWAYS_PRINT_SIBLINGS",
-        "top1": 0.8643,
-        "top5": 1,
-        "draws": 1002,
-        "lines": 2
-      },
-      {
-        "pool": "ledger:institutionDescVariants:city|Crafts|Cartographer's guild",
-        "top1": 0.8396,
-        "top5": 1,
-        "draws": 293,
-        "lines": 4
-      },
-      {
-        "pool": "ledger:cultureProfiles:slavic.foodways",
-        "top1": 0.831,
-        "top5": 1,
-        "draws": 621,
         "lines": 2
       }
     ],
@@ -1190,7 +1190,7 @@
       "lines": 2
     },
     "ledger:foodBalance:OUTLOOK_HOOK_SIBLINGS": {
-      "top1": 0.5625,
+      "top1": 0.4564,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 4
@@ -1934,10 +1934,10 @@
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): a pool the 360-settlement corpus never drew"
     },
     "ledger:institutionDescVariants:DESC_LATE_SIBLINGS": {
-      "top1": 0.6364,
+      "top1": 0.8107,
       "top5": 1,
       "lines": 2,
-      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+      "reason": "re-recorded once by CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18) under the chair's ruling CL22 (vetoable; named for the owner as variety owed): top1 0.6364 -> 0.8107, measured on both corpora (2002 draws in 1154 towns; 1986 in 1144); top5 1, lines 2 held. Cause: the table went from 11 keys to 29 (BAR5-MARKS, JOIN-16 point 1, +15; BAR6-HOUSES, JOIN-17 point 2, +3), each key's line 1 a siege twin printed only under siege, so line 0 (the original) takes 0.8107 of the draws (0.5900 of 661 at 6483322cc); both lines still drawn, no pool emptied. Before: banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     },
     "ledger:institutionDescVariants:city|Crafts|Alchemist quarter": {
       "top1": 0.3596,
@@ -3023,10 +3023,10 @@
       "lines": 1
     },
     "ledger:institutionServices:Butchers (3-8).Fresh meat": {
-      "top1": 1,
+      "top1": 0.8825,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 1
+      "lines": 2
     },
     "ledger:institutionServices:Butchers (3-8).Offal and by-products": {
       "top1": 1,
@@ -3965,10 +3965,10 @@
       "lines": 1
     },
     "ledger:institutionServices:Hired blades.Bodyguard service": {
-      "top1": 1,
+      "top1": 0.8982,
       "top5": 1,
       "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
-      "lines": 1
+      "lines": 2
     },
     "ledger:institutionServices:Hired blades.Escort": {
       "top1": 1,
@@ -5658,8 +5658,8 @@
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.gov_econ_dependence": {
       "top1": 0.1491,
-      "top5": 0.6662,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "top5": 0.7514,
+      "reason": "re-recorded once by CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18) under the chair's ruling CL22 (vetoable; named for the owner as variety owed): top5 0.6662 -> 0.7514, the higher of the two corpora's readings (0.7429 over 599 draws in 219 towns; 0.7514 over 696 in 242); top1 0.1491 and lines 8 held. The pool is the TENSION rows. Cause: BAR6-PEOPLE 26f510d87 (JOIN-17 point 8, 10d-seat, C66115) gave tension row 3 (\"… has asked for a seat on the council as a condition of the next loan …\") `excludes: [\"seat held\"]`; by an untracked replica matched pair by pair at 6483322cc and this tree, all 39 draws that left line 3 are pairs where `seat held` holds (pairSeatHeld), and all 31 still drawn are pairs where it does not; no line lost. Before: banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mag_crim_market": {
@@ -5844,6 +5844,36 @@
       "top1": 0.8643,
       "top5": 1,
       "lines": 2,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:rareSecrets:deeds": {
+      "top1": 0.0245,
+      "top5": 0.1222,
+      "lines": 47,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:rareSecrets:masters": {
+      "top1": 0.047,
+      "top5": 0.235,
+      "lines": 24,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:rareSecrets:natures": {
+      "top1": 0.0185,
+      "top5": 0.0921,
+      "lines": 55,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:rareSecrets:outsiders": {
+      "top1": 0.0385,
+      "top5": 0.1924,
+      "lines": 26,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:rareSecrets:ties": {
+      "top1": 0.026,
+      "top5": 0.13,
+      "lines": 42,
       "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }

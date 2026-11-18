@@ -2591,3 +2591,18 @@ export function temperamentYieldsToSecret(card) {
   }
   return card;
 }
+
+/**
+ * FAULTS-PEOPLE (14e; the brief BRIEF-FAULTS of 2026-11-18, the seat FAULTS-PEOPLE; vetoable by the owner): THE ECONOMY
+ * POOL'S LINES THAT ARE TRUE OF ANY HOLDER. Every other line of `NPC_FACTION_LOYALTY.economy` presumes the holder keeps a
+ * trade (a shop and its scales, customers, a rival in business, a batch sold, buyers, a warehouse, a mark, hands hired), so
+ * a famine, a debt or a migration that pulls a soldier's hook into the pool (`npcGenerator.js :: generatePlotHook`) dealt a
+ * garrison commander "price-fixing across the whole market" (bar0-city-under_siege+famine-rand-47, C5296). The reading is
+ * the card's own house AND seats, read after the seats land (`people/personHooks.js :: truePersonHooks`): a holder of a
+ * standing force's house who sits on no power of trade is refused the rest. These six need no trade: debts bought up, a
+ * contract's clause, a supplier gone dark or of doubtful goods or left unpaid, a crate come by mistake. Bare lines read
+ * from the pool itself (no text spelled twice): the set holds the pool's own rows (a bare line or a declared row, as
+ * authored), at the file's end so no cited line moves. A new economy line presumes a trade until it is named here.
+ * @type {ReadonlySet<string | { text: string }>}
+ */
+export const ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER = Object.freeze(new Set(NPC_FACTION_LOYALTY.economy.filter((l) => /^One of their most reliable suppliers has gone dark\.|^Someone is buying up their debts\.|^A contract they signed in difficult times |^A supplier is providing goods of uncertain provenance\.|^They have quietly stopped paying a supplier |^A crate came to them by mistake,/.test(typeof l === 'string' ? l : l.text))));

@@ -239,6 +239,15 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // lines and an outlook hook (BAR4-CORPUS-ECO), the foodways lines and three houses (BAR4-HOUSES), three powers' descriptions (BAR4-HISTORY), the
   // arrival (BAR4-SCENES), the prominent tie, two secrets (BAR4-PEOPLE) and one conflict's hook twin (BAR4-SAFETY 2ee6f3a0). Re-captured on the doors'
   // branch over Part 1's final tip 6483322cc (no byte under src/ moved since the capture) by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-18 (the close of the rounds BAR5 to BAR8, CLOSE-DOORS-2; the owner's word, 2026-11-18 03:03:46 UTC, "yes: refresh the
+  // stored reference files and open the pull request.", in the chair's chat; record docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json):
+  // 55 of 60 moved by the rounds' declared cures; the stored sixty reproduce at the last green corpus 0ac61b4b4 (60 of 60). FIELD-DIFFED by leaf path:
+  // the supply gaps, imports and need lists (BAR5-CHAINS, BIRTH-1 to -3), the powers' descriptions (BAR6-POWERS), the ties' tensions, lines and second
+  // ties' kinds (BAR5-THINGS, BAR6-PEOPLE, BAR7-LINES), the founding reasons (BAR5-WORLD), arrivals, the crier's and the fish market's rows, the rare
+  // secrets (SECRETS-1), card twins and tempers (BAR5-POWERS, BAR6-PEOPLE), the foodways and architecture, the outlook hooks, exports, production and
+  // income (BAR6-RECORD; one town's complexity label reads its exports' count), the goals and conflicts that read a tie, the history (BAR7-LINES,
+  // BAR5-MAGIC), a crime line and a pressure sentence. Re-captured at the frozen line 70e557d5b and again on the doors' branch over Part 1's final tip
+  // 0af60594a (the sixty byte-equal) by this file's own loop (an untracked probe), twice and equal.
   const DARK =/** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));

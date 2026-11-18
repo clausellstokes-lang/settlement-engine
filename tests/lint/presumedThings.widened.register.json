@@ -20,7 +20,8 @@
   "after-base: close-true": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: TRUE WHERE IT PRINTS on the 1,080 births measured at the close (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed after the release: the line declares its thing through a draw door and its row leaves by --shrink",
   "after-base: close-unprinted": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: NEVER PRINTED on the 1,080 births measured at the close: only arm 1 lists it (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed after the release: the line declares its thing through a draw door and its row leaves by --shrink",
   "after-base: close-false": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: PRINTS IN TOWNS THAT LACK ITS THING (its count is in the table) on the 1,080 births measured at the close (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed FIRST in the next round: cured by its declaration and its twin, the row leaves in the cure's commit",
-  "after-base: close-strip": "a strip site the round of 2026-11-14/15 wrote after the instrument's base: the pool passes the declared filter first and its lines are unwrapped only to be printed (not a draw); banked BY HAND under the chair's ruling PT2 of 2026-11-15, against the letter of the door's base rule, as record 405's row; owed after the release: the site reads the door's own text field and the row leaves"
+  "after-base: close-strip": "a strip site the round of 2026-11-14/15 wrote after the instrument's base: the pool passes the declared filter first and its lines are unwrapped only to be printed (not a draw); banked BY HAND under the chair's ruling PT2 of 2026-11-15, against the letter of the door's base rule, as record 405's row; owed after the release: the site reads the door's own text field and the row leaves",
+  "after-base: owner-2026-11-18": "a line written after the instrument's base (BAR5-MARKS's three siege twins of institutionDescVariants.js; BAR5-SAFETY's court-and-prison twin of guardLineUnderTheLaw.js) that the chair read TRUE WHERE IT PRINTS by a guarantee this walker does not read (the twin's own `crisis: under_siege`: a besieged town has defenders; the hired company's own trade, \"garrison work\" and \"garrison duty\", in its original's words; a twin only of lines drawn under `inst.hasCourtSystem && courthouse && inst.hasPrison`, safetyProfile.js:369-370, the constant has no other reader), and that a seat's own permission check twice refused to bank on the chair's ruling CL23; RECORDED BY THE OWNER'S OWN WORDS in the chair's session, 2026-11-18 04:41:48 UTC, verbatim: \"record the four\"; banked BY HAND by the chair, against the letter of the door's base rule, as record 405's seven and the tail close's PT1 rows; owed after the release: each line declares through a door what guarantees it, and the row leaves"
  },
  "arm1": {
   "src/components/AccountPage.jsx": [
@@ -919,24 +920,6 @@
     "1172789a61efd547"
    ],
    [
-    "market",
-    "root",
-    "Multiple roads converging means constant movement: merchants, pilgrims, soldiers, refugees. The settlement sees a rotati",
-    "8c50dca21a85a099"
-   ],
-   [
-    "docks",
-    "root",
-    "The river is a highway. Barges and boats bring bulk goods that no cart could carry economically. The landing, the dock, ",
-    "a65bb8cf55e30dc6"
-   ],
-   [
-    "docks",
-    "root",
-    "The sea brings the world to the door. The harbour is never quiet. Sailors from distant ports, foreign merchants, exotic ",
-    "f5a56e72692d7de6"
-   ],
-   [
     "refugees",
     "word",
     "Multiple roads converging means constant movement: merchants, pilgrims, soldiers, refugees. The settlement sees a rotati",
@@ -953,12 +936,6 @@
     "family",
     "Multiple roads converging means constant movement: merchants, pilgrims, soldiers, refugees. The settlement sees a rotati",
     "8c50dca21a85a099"
-   ],
-   [
-    "openTrade",
-    "family",
-    "The river is a highway. Barges and boats bring bulk goods that no cart could carry economically. The landing, the dock, ",
-    "a65bb8cf55e30dc6"
    ],
    [
     "house: tavern",
@@ -1581,12 +1558,6 @@
     "be2b623871332d5e"
    ],
    [
-    "openTrade",
-    "family",
-    "Daily observance, schools, charitable endowments, pilgrimage traffic, and neighborhood shrines organize sacred life.",
-    "f471123b61522360"
-   ],
-   [
     "streets",
     "family",
     "Daily observance, schools, charitable endowments, pilgrimage traffic, and neighborhood shrines organize sacred life.",
@@ -1717,12 +1688,6 @@
     "family",
     "Occupation, neighborhood, household, guild, patronage, and religious affiliation create multiple routes to belonging.",
     "52ac582f14db47ef"
-   ],
-   [
-    "streets",
-    "family",
-    "shaded bazaar fronts open toward tanks, wells, and neighborhood shrines",
-    "7f6ca57e51df3ee2"
    ],
    [
     "house: theater",
@@ -2043,12 +2008,6 @@
     "aacfd4f803652d82"
    ],
    [
-    "siege",
-    "word",
-    "With the town under siege, quarrels over rations and theft of food are the trouble on {settlement}'s streets now.",
-    "498cfc75c90d5834"
-   ],
-   [
     "plague",
     "word",
     "{settlement} has no dedicated healers. Wounds take what they take, and a plague here runs until it has finished.",
@@ -2159,18 +2118,6 @@
    [
     "armedForce",
     "family",
-    "Approaching {settlement}, you see the walls and the soldiers who belong on them, and any attacker would think again abou",
-    "4981288dbf0ebe5c"
-   ],
-   [
-    "armedForce",
-    "family",
-    "People at {settlement} believe the town could be held, and the soldiers on the walls give them good reason to.",
-    "864d9e085885d1df"
-   ],
-   [
-    "armedForce",
-    "family",
     "While the trades behind {settlement}'s defence keep working, its defenders will not go short.",
     "80efc1377cbf9c25"
    ],
@@ -2193,30 +2140,6 @@
     "e05cb0084fe4350f"
    ],
    [
-    "streets",
-    "family",
-    "Order at {settlement} could tip either way: a few fewer watchmen or one bolder gang would be felt on the streets within ",
-    "cd1033fd63141b40"
-   ],
-   [
-    "streets",
-    "family",
-    "Nobody at {settlement} warns visitors about particular streets, because the warning would cover all of them.",
-    "66aa53375c44260e"
-   ],
-   [
-    "streets",
-    "family",
-    "A crisis now governs the streets of {settlement}, and the town's usual safety no longer holds.",
-    "51b6208bfc4e58da"
-   ],
-   [
-    "streets",
-    "family",
-    "With the town under siege, quarrels over rations and theft of food are the trouble on {settlement}'s streets now.",
-    "498cfc75c90d5834"
-   ],
-   [
     "siege",
     "family",
     "Inside the siege at {settlement}, people guard their food and keep an eye on their neighbours.",
@@ -2229,58 +2152,10 @@
     "6a81e979011bc306"
    ],
    [
-    "streets",
-    "family",
-    "Fighting between the rebels and the town's guards has closed whole streets of {settlement}.",
-    "3b4a1d2e0cc16601"
-   ],
-   [
-    "streets",
-    "family",
-    "People at {settlement} keep away from the streets where the revolt is being fought, and nobody walks them after dark.",
-    "a0a16cdf4aa63ed8"
-   ],
-   [
-    "streets",
-    "family",
-    "Whole streets of {settlement} stand half empty now that so many have left, and nobody watches the empty houses.",
-    "53ddce44af6d9553"
-   ],
-   [
-    "streets",
-    "family",
-    "The streets of {settlement} are quiet because the authorities are everywhere, and people fear them more than any thief.",
-    "6800b2c2a100b351"
-   ],
-   [
-    "streets",
-    "family",
-    "At {settlement} you pay the people who run the streets, or nobody protects you.",
-    "e6929e3e7bdb88e5"
-   ],
-   [
-    "streets",
-    "family",
-    "Rival crews at {settlement} are fighting over who runs the streets, and until one wins, people pay both the cut and the ",
-    "8bbdf1e04794ad61"
-   ],
-   [
-    "streets",
-    "family",
-    "The danger at {settlement} comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running t",
-    "676f689e64a53527"
-   ],
-   [
     "house: thieves' guild",
     "family",
     "Few thefts at {settlement} are ever written into the town's books: a thieves' guild settles them first, and the losses g",
     "0eb17e7ff33ca69a"
-   ],
-   [
-    "streets",
-    "family",
-    "The thieves at {settlement} answer to a guild, and the guild decides who works which streets.",
-    "bcd94b58be34c16a"
    ],
    [
     "house: smuggling",
@@ -2293,30 +2168,6 @@
     "family",
     "A smuggling network runs through {settlement}, and some of what is sold in the town never paid a toll.",
     "4c4fd277f6276435"
-   ],
-   [
-    "streets",
-    "family",
-    "Criminal gangs at {settlement} keep a footing in the town, through the streets they hold or the businesses they front.",
-    "2d8851c2dd202f79"
-   ],
-   [
-    "armedForce",
-    "family",
-    "{settlement}'s soldiers serve all year, not for a season; the town relies on them and grumbles about them in equal measu",
-    "f4a2501bf65efba5"
-   ],
-   [
-    "armedForce",
-    "family",
-    "{settlement} could keep soldiers and does not; the town has decided that arming itself when needed costs less than payin",
-    "bb8b7cb9a58d16b4"
-   ],
-   [
-    "armedForce",
-    "family",
-    "The town pays for some of its soldiers and knows which ones, and treats them accordingly.",
-    "2fe8b75f4c2640c5"
    ],
    [
     "house: wizard's tower",
@@ -2451,22 +2302,10 @@
     "0847527bfbd9f884"
    ],
    [
-    "streets",
-    "family",
-    "The guards at {settlement} walk streets where they are not welcome, and that is more dangerous to them than any ambush o",
-    "72003b95be4eaaba"
-   ],
-   [
     "armedForce",
     "family",
     "Until the quarrel over faith is settled at {settlement}, its defenders will not act as one.",
     "6e01e36d52f59908"
-   ],
-   [
-    "armedForce",
-    "family",
-    "The soldiers at {settlement} command its magic: the arcane houses answer to them, and their work goes first to the town'",
-    "41cb674fedbe69d5"
    ],
    [
     "armedForce",
@@ -2537,12 +2376,6 @@
    [
     "armedForce",
     "after-base: close-true",
-    "{settlement} keeps paid soldiers behind its walls, so raiders keep their distance and an army would pay dearly; a long s",
-    "0354993074b09fba"
-   ],
-   [
-    "armedForce",
-    "after-base: close-true",
     "{settlement}'s defenders are better off for the trades behind them, and they know it.",
     "35f752f1ec916e32"
    ],
@@ -2569,12 +2402,6 @@
     "after-base: close-unprinted",
     "no crisis: wartime",
     "a9efc2bafe7d0b0e"
-   ],
-   [
-    "streets",
-    "after-base: close-unprinted",
-    "{settlement} has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.",
-    "27ba92837d0df93a"
    ],
    [
     "famine",
@@ -2605,6 +2432,36 @@
     "after-base: close-true",
     "{settlement}'s defenders are a little worse off for the trades behind them, which are not on a sure footing.",
     "0e22c82cc1df7d84"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "Which power holds a district of {settlement} decides which rules apply there.",
+    "2fe7494f83abfe50"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "Patrols at {settlement} have changed their routes, and some districts are closed to anyone without business there.",
+    "5c20597434a2b64a"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "Some districts of {settlement} are closed off now, and whatever happens there goes unrecorded and unpunished.",
+    "5f8d6934d29fb438"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "Each power at {settlement} keeps its own list of offences, so a wrong punished in one district goes unpunished in the ne",
+    "cb2c18ff89ae6733"
+   ],
+   [
+    "siege",
+    "after-base: close-true",
+    "With {settlement} under siege, quarrels over rations and theft of food are the trouble on its streets now.",
+    "7ec4bbb368deec23"
    ]
   ],
   "src/data/dossierStateProse/economy.generated.js": [
@@ -2695,12 +2552,6 @@
    [
     "openTrade",
     "family",
-    "The roads are busy. Caravans arrive thick and depart laden, and the markets are well-fed.",
-    "c6bb92c07a034b19"
-   ],
-   [
-    "openTrade",
-    "family",
     "Heavy traffic runs through {settlement}, but most of it is bound elsewhere and leaves little behind.",
     "22adb401d8e8c8e5"
    ],
@@ -2745,12 +2596,6 @@
     "family",
     "The clergy have more say over {settlement}'s market than its traders do; anyone who wants to do business here goes to th",
     "ddbf6c9f71a595a8"
-   ],
-   [
-    "streets",
-    "family",
-    "{settlement}'s {institution} works below its streets, in cellars and tunnels out of sight of the town above.",
-    "dee285c9f8970f57"
    ],
    [
     "famine",
@@ -2826,12 +2671,6 @@
    ]
   ],
   "src/data/dossierStateProse/general.generated.js": [
-   [
-    "quarters",
-    "word",
-    "Thousands have gone from {settlement}, and more leave every season. Whole districts stand empty.",
-    "c6330bd707af43d7"
-   ],
    [
     "starving",
     "word",
@@ -2953,54 +2792,6 @@
     "5a38915ec8c8514b"
    ],
    [
-    "streets",
-    "family",
-    "Many hundreds have gone from {settlement}. Whole streets stand shut, and those who stayed do the work of several.",
-    "e1b2ccdb4e051c1b"
-   ],
-   [
-    "streets",
-    "family",
-    "Visitors to {settlement} are warned twice before nightfall which streets to avoid, and the warning is given quietly.",
-    "a4bbc7c77d21bb4f"
-   ],
-   [
-    "streets",
-    "family",
-    "Whatever holds {settlement}'s streets after dark, it is not the watch; shopkeepers have begun buying their quiet directl",
-    "c3a9e33793f605fa"
-   ],
-   [
-    "streets",
-    "family",
-    "Order in {settlement} is kept quietly: few guards on the streets, and little trouble for them to deal with.",
-    "a24a1d4fa25ac4ab"
-   ],
-   [
-    "streets",
-    "family",
-    "{settlement} is orderly on the main streets and less particular about the others.",
-    "c73c71aed51ecf8e"
-   ],
-   [
-    "streets",
-    "family",
-    "Whatever authority {settlement} has does not reach into its own streets.",
-    "4b48626f4a419587"
-   ],
-   [
-    "streets",
-    "family",
-    "The watch at {settlement} has little to report, because the streets are quiet, not because the watch is idle.",
-    "2a6c68371bd1b5b2"
-   ],
-   [
-    "streets",
-    "family",
-    "Movement in {settlement} is watched and limited; the streets are quiet because people are kept off them.",
-    "47c4f0a9449224a1"
-   ],
-   [
     "famineToCome",
     "family",
     "{settlement} lives on its own harvest, so a closed road will not starve it; a bad harvest could.",
@@ -3055,34 +2846,10 @@
     "c6c53056134c456b"
    ],
    [
-    "streets",
-    "family",
-    "{settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.",
-    "c6c53056134c456b"
-   ],
-   [
     "armedForce",
     "family",
     "{settlement} is orderly under foreign soldiers, and its people go about their business with their eyes down.",
     "db055783d8bf6bf6"
-   ],
-   [
-    "streets",
-    "family",
-    "{settlement} was founded {timeband_since} for {reason}, and the oldest streets still show it.",
-    "8917dec05988222d"
-   ],
-   [
-    "streets",
-    "family",
-    "{settlement} is {timeband_age}, and what it has been through still shows in its streets and habits.",
-    "8c60a46edd074b63"
-   ],
-   [
-    "streets",
-    "family",
-    "{settlement} sits where the ground let it stand, not where it was easy, and its streets climb with the slope.",
-    "adc7dc161f957b4f"
    ],
    [
     "openTrade",
@@ -3137,12 +2904,6 @@
     "family",
     "A trader at {settlement} can rent warehouse space and leave goods there between journeys.",
     "6740cb8508aee7cb"
-   ],
-   [
-    "streets",
-    "family",
-    "No disaster has marked {settlement}; its streets are evenly worn and nothing in it looks new.",
-    "476de03dbefcb573"
    ],
    [
     "clergy",
@@ -3413,12 +3174,6 @@
     "6fca31765ae289ff"
    ],
    [
-    "streets",
-    "family",
-    "Hunger has moved from the poorest streets into the ordinary ones; what the fields returned does not reach the table.",
-    "de4c9cce5131a0c7"
-   ],
-   [
     "openTrade",
     "family",
     "More carts leave {settlement} than arrive, and the ones that leave carry everything a family owns.",
@@ -3448,12 +3203,6 @@
    [
     "streets",
     "family",
-    "The streets rose on their own. No power owns this yet, which is what makes it dangerous to everyone.",
-    "fb2a1cd6871659d0"
-   ],
-   [
-    "streets",
-    "family",
     "The market square empties at the same hour every evening; somewhere people are meeting, and nobody organized them from a",
     "cce17a8b96dec7de"
    ],
@@ -3468,12 +3217,6 @@
     "family",
     "Hedge wizards are leaving {settlement} quietly; the ones who stay have started learning herbcraft.",
     "98401e5731521823"
-   ],
-   [
-    "streets",
-    "family",
-    "The town's account books show this trouble, but the streets hardly do; it is a small one.",
-    "335183ea73c81990"
    ],
    [
     "siege",
@@ -3510,18 +3253,6 @@
     "family",
     "A little food is reaching {settlement} again as the siege loosens, and its price has started to fall.",
     "74b505067d832dfb"
-   ],
-   [
-    "streets",
-    "family",
-    "The occupiers in {settlement}'s streets are the same faces as last season, and they no longer bother to look about them.",
-    "0b76faaf849dcdee"
-   ],
-   [
-    "streets",
-    "family",
-    "The occupiers are easing their grip on {settlement}: fewer patrols walk the streets, and fewer people are taken for ques",
-    "a9bc8aef78d62acd"
    ],
    [
     "openTrade",
@@ -3748,12 +3479,6 @@
     "0297c3b5da615b11"
    ],
    [
-    "streets",
-    "family",
-    "The occupiers' duty lists at {settlement} now put more of their troops on the streets than on the walls, and more each s",
-    "0297c3b5da615b11"
-   ],
-   [
     "armedForce",
     "family",
     "The occupiers' duty lists at {settlement} now put more of their troops on policing the town than on watching the country",
@@ -3796,22 +3521,10 @@
     "dfe8f63d6558cea9"
    ],
    [
-    "streets",
-    "family",
-    "{settlement} works normally, and it takes a day or two to notice whose troops stand in its streets.",
-    "dfe8f63d6558cea9"
-   ],
-   [
     "armedForce",
     "family",
     "{settlement} goes about its business under someone else's troops as if that were normal.",
     "eced4a11d988530e"
-   ],
-   [
-    "streets",
-    "family",
-    "{settlement} is in open revolt against {counterpart}. The occupation is being fought rather than endured, in the streets",
-    "c87b9103d4727fad"
    ],
    [
     "siege",
@@ -5460,6 +5173,114 @@
     "after-base: close-true",
     "At fixed times the proclamations, the prices, and the news are called out in the market square. The town pays for it, or",
     "3b60d080337c77be"
+   ],
+   [
+    "house: tavern",
+    "after-base: close-true",
+    "Commercial-scale ale and beer production supplying taverns and regional distribution. Major grain consumer and employer.",
+    "c80ba6fcdab28bf6"
+   ],
+   [
+    "house: tavern",
+    "after-base: close-true",
+    "Commercial-scale ale and beer production for the taverns; while the siege holds the roads none of it goes further. Major",
+    "cc264edcf9c2797c"
+   ],
+   [
+    "house: tavern",
+    "after-base: close-true",
+    "Commercial-scale ale and beer production. Supplies the town's taverns; while the siege holds the roads none of it goes f",
+    "e183aed036c8b4f1"
+   ],
+   [
+    "house: tavern",
+    "after-base: close-true",
+    "Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer an",
+    "ff2573e4e1329738"
+   ],
+   [
+    "armedForce",
+    "family",
+    "A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, ",
+    "a2cdeb4bcbf27797"
+   ],
+   [
+    "quarters",
+    "word",
+    "Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.",
+    "c6fded0acf9197fb"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "A billet and contracting office for a band of professional soldiers available between campaigns. With the roads held the",
+    "38ba15e3c2a308e4"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "A billet and hiring office for professional soldiers idle between campaigns. No caravan leaves while the siege holds the",
+    "743cc96b12b6c45b"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "Where a band of soldiers lodges and takes contracts between wars. While the siege holds the roads they hire out by the d",
+    "b50dee27dd04b260"
+   ],
+   [
+    "armedForce",
+    "after-base: close-true",
+    "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. With ",
+    "d163baaf3dfdbc97"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    "Metropolitan cathedral. Seat of the highest regional religious authority. Its pilgrims cannot reach it while the siege h",
+    "522f88620a90790f"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "Metropolitan cathedral. Seat of the highest regional religious authority. Its pilgrims cannot reach it while the siege h",
+    "522f88620a90790f"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    "The metropolitan cathedral, seat of the region's highest prelate. No pilgrim reaches it while the siege holds the roads.",
+    "5c421f2f763ebdb8"
+   ],
+   [
+    "quarters",
+    "after-base: close-true",
+    "The metropolitan cathedral, seat of the region's highest prelate. No pilgrim reaches it while the siege holds the roads.",
+    "5c421f2f763ebdb8"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    "The great church of the metropolis. The region's chief religious authority sits here, and the faithful of the city fill ",
+    "fc8262cb8594256b"
+   ],
+   [
+    "armedForce",
+    "after-base: owner-2026-11-18",
+    "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. While the",
+    "c57566e5bfaaf1a1"
+   ],
+   [
+    "garrison",
+    "after-base: owner-2026-11-18",
+    "A billet and hiring office for professional soldiers idle between campaigns. No caravan leaves while the siege holds the",
+    "743cc96b12b6c45b"
+   ],
+   [
+    "garrison",
+    "after-base: owner-2026-11-18",
+    "Where a band of soldiers lodges and takes contracts between wars. While the siege holds the roads they hire out by the d",
+    "b50dee27dd04b260"
    ]
   ],
   "src/data/institutionLadders.js": [
@@ -7448,12 +7269,6 @@
     "ceab82e2c220e558"
    ],
    [
-    "streets",
-    "family",
-    " faces the sea as deliberately as a fortress faces its enemy. Warehouses and chandlers crowd the waterfront, with the ol",
-    "ceab82e2c220e558"
-   ],
-   [
     "house: tanner",
     "family",
     " smells of work: sawdust, tallow, the particular sharp smell of a tanner at the edge of town.",
@@ -7484,12 +7299,6 @@
     "56402fce007a6672"
    ],
    [
-    "streets",
-    "family",
-    " is orderly in the way that a settlement is orderly when order is being enforced. The streets are clear. The rationing m",
-    "7311792ded54953b"
-   ],
-   [
     "armedForce",
     "family",
     "'s gatehouse are not the settlement's own. Two soldiers at the gate. Their uniform is not local. They look at your paper",
@@ -7508,40 +7317,10 @@
     "8cdd12d1ba20fd62"
    ],
    [
-    "streets",
-    "family",
-    " gets by. The market is busy enough, the streets clean enough and the civic buildings kept up just enough, and nothing m",
-    "bbfcbe18bf210f7c"
-   ],
-   [
-    "streets",
-    "family",
-    " is functioning well. Clean streets, busy market, maintained walls. If you were looking for problems, you would not find",
-    "c031692c7a8a0038"
-   ],
-   [
-    "streets",
-    "family",
-    "'s streets, but they move in pairs and do not linger. The people watch them pass with the particular blankness of a plac",
-    "31980da3e860d89c"
-   ],
-   [
-    "streets",
-    "family",
-    "'s gates are shut in daylight, which is wrong for a settlement of its size. There is smoke inside: not cookfire smoke, t",
-    "4467ece7b82b6f5c"
-   ],
-   [
     "house: auction",
     "family",
     " is quiet in the way a held breath is quiet. The slave market at its heart (you can see the empty auction platform from ",
     "4d6c965e6b993bb2"
-   ],
-   [
-    "streets",
-    "family",
-    "'s streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising th",
-    "f79ada5e9837264a"
    ],
    [
     "temple",
@@ -7551,12 +7330,6 @@
    ],
    [
     "armedForce",
-    "after-base: close-true",
-    " is going about its business. The market is open, the streets are orderly, the gates are attended by soldiers whose armo",
-    "8c921ec44468a876"
-   ],
-   [
-    "streets",
     "after-base: close-true",
     " is going about its business. The market is open, the streets are orderly, the gates are attended by soldiers whose armo",
     "8c921ec44468a876"
@@ -7750,12 +7523,6 @@
     "3aa06aec0cad034a"
    ],
    [
-    "notary",
-    "family",
-    " has hired an advocate to sue ",
-    "63685fb401dc8e0c"
-   ],
-   [
     "clergy",
     "family",
     "A visiting cleric has asked to audit the shrine's books. ",
@@ -7766,12 +7533,6 @@
     "family",
     "A prisoner is held under ",
     "8490fe1d08c4151c"
-   ],
-   [
-    "notary",
-    "family",
-    " owes and left a copy with a notary.",
-    "4daa862b1a4972de"
    ],
    [
     "shrine",
@@ -9578,12 +9339,6 @@
    [
     "siege",
     "family",
-    "Passed information about the settlement's water supply to someone in the besieging camp three weeks ago",
-    "60b8f48bfca95bf1"
-   ],
-   [
-    "siege",
-    "family",
     "Is in contact with the besieging commander (not as a spy, as a former colleague)",
     "1ae4e054fc01a976"
    ],
@@ -9598,12 +9353,6 @@
     "family",
     "Is smuggling people out, but only those who can pay, and the price has been rising",
     "79b2418defb2bc22"
-   ],
-   [
-    "notary",
-    "family",
-    "{npc} is a notary who helped draft it. They've been avoiding eye contact for six months",
-    "941437748d4719fb"
    ],
    [
     "armedForce",
@@ -16930,12 +16679,6 @@
     "21121a5ba45662d3"
    ],
    [
-    "watch",
-    "root",
-    "Controls specific territory through violence. Extorts local businesses. Competes with the watch for street-level authori",
-    "5cda302fa8ef4287"
-   ],
-   [
     "house: gambling",
     "family",
     "Operates unlicensed gambling. Revenue funds broader criminal network. Attracts debt spirals and desperation crime.",
@@ -17078,6 +16821,14 @@
     "after-base: close-true",
     "Even what the occupiers leave to the hall is not settled without bargaining with ",
     "efd49e9008896522"
+   ]
+  ],
+  "src/domain/display/guardLineUnderTheLaw.js": [
+   [
+    "prison",
+    "after-base: owner-2026-11-18",
+    " A court and a prison stand, but few offenders are ever brought to either.",
+    "85fc61848472a7ad"
    ]
   ],
   "src/domain/display/humanizeEngineTokens.js": [
@@ -26876,12 +26627,6 @@
    [
     "openTrade",
     "family",
-    "Founded roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stop",
-    "48564237c7b6ab26"
-   ],
-   [
-    "openTrade",
-    "family",
     "A river port built around navigable inland water; barges, wharves, and seasonal river traffic shape its economy.",
     "c654f46293b19687"
    ],
@@ -26908,6 +26653,12 @@
     "after-base: close-unprinted",
     "Isolated from major trade routes, and short of what it eats. With the siege closing the roads, it must make do with ",
     "effe163c2bf52282"
+   ],
+   [
+    "openTrade",
+    "family",
+    "It stands roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what st",
+    "46a67ae06452f0b9"
    ]
   ],
   "src/generators/narrativeGenerator.js": [
@@ -27334,6 +27085,24 @@
     "after-base: close-true",
     "City watch; it answers for keeping order and is growing more sure of its own authority.",
     "6c12f9d5be13b96e"
+   ],
+   [
+    "clergy",
+    "after-base: close-true",
+    "Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular ",
+    "66fcf46efb43008a"
+   ],
+   [
+    "temple",
+    "after-base: close-true",
+    "Clergy and church institutions exercise meaningful civic influence through moral authority, land ownership, and popular ",
+    "66fcf46efb43008a"
+   ],
+   [
+    "watch",
+    "after-base: close-true",
+    "Town watch; it enforces ordinances, manages disorder, and reports to the council.",
+    "a7cf3311b12549dc"
    ]
   ],
   "src/generators/power/conflictIssues.js": [
@@ -27484,6 +27253,12 @@
     "family",
     " deals with bodies and the clergy with minds, and each wishes the other would keep quieter.",
     "0620fe348e40feea"
+   ],
+   [
+    "house: merchant guild",
+    "after-base: close-true",
+    "The merchant guilds now have more say",
+    "321bb8f01127b5f9"
    ]
   ],
   "src/generators/power/governanceNarrative.js": [
@@ -27576,12 +27351,6 @@
     "family",
     "A noble house has begun recruiting its own soldiers beyond its traditional levy obligation. The crown has noticed and ha",
     "e3079fde4df0f720"
-   ],
-   [
-    "armedForce",
-    "family",
-    "The military commanders are pushing for expanded authority over civilian courts, and the council is losing ground.",
-    "bc58707ae8c16ddd"
    ],
    [
     "house: reeve",
@@ -28099,12 +27868,6 @@
     "8304373dac6d4dc8"
    ],
    [
-    "garrison",
-    "implied",
-    "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theolo",
-    "e7ad3faace2b368b"
-   ],
-   [
     "watch",
     "implied",
     "The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is lookin",
@@ -28133,12 +27896,6 @@
     "family",
     "More people have arrived than there are roofs or work for, and newcomers and old residents quarrel in the streets. ",
     "12bc6452b0666a93"
-   ],
-   [
-    "streets",
-    "family",
-    "The streets are unusually quiet. ",
-    "7b406ce4ce4fa1de"
    ],
    [
     "house: thieves' guild",
@@ -28264,12 +28021,6 @@
     "a6683b1c07c7ddad"
    ],
    [
-    "clergy",
-    "family",
-    "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theolo",
-    "e7ad3faace2b368b"
-   ],
-   [
     "house: merchant guild",
     "family",
     "The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is lookin",
@@ -28310,12 +28061,6 @@
     "family",
     "The merchant guild's private security force just detained someone, with no legal authority to do so. No one with the aut",
     "77a3c5831030f05a"
-   ],
-   [
-    "clergy",
-    "family",
-    "The settlement's chaplain also leads its armed men. He's authorizing military action for reasons that sound theological.",
-    "fbc31f49ad100e4f"
    ],
    [
     "house: smuggling",
@@ -28406,6 +28151,30 @@
     "after-base: close-true",
     " The walls leave few ways in.",
     "47eed4442b369227"
+   ],
+   [
+    "garrison",
+    "implied",
+    "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound t",
+    "26ba104371f73baf"
+   ],
+   [
+    "clergy",
+    "family",
+    "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound t",
+    "26ba104371f73baf"
+   ],
+   [
+    "clergy",
+    "family",
+    "The settlement's chaplain also leads its armed men, and is authorizing military action for reasons that sound theologica",
+    "ad2781f9cea24c20"
+   ],
+   [
+    "streets",
+    "family",
+    "The streets are unusually quiet.",
+    "d0cb088496831e60"
    ]
   ],
   "src/generators/services/serviceClassifier.js": [

@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "corpus": {
     "pulseRoots": 12,
-    "introductions": 417,
+    "introductions": 419,
     "retirements": 2,
-    "finalEntries": 415,
+    "finalEntries": 417,
     "homes": 42
   },
   "addressTotality": {
@@ -41,15 +41,15 @@
         "home": "applied|boom",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 2,
-        "occurrences": 2
+        "distinctValues": 3,
+        "occurrences": 3
       },
       {
         "home": "applied|boom",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 2,
-        "occurrences": 2
+        "distinctValues": 3,
+        "occurrences": 3
       },
       {
         "home": "applied|cause_lifecycle",
@@ -391,15 +391,15 @@
         "home": "applied|urban_fabric",
         "field": "headline",
         "voiceClass": "indicative",
-        "distinctValues": 14,
-        "occurrences": 14
+        "distinctValues": 15,
+        "occurrences": 15
       },
       {
         "home": "applied|urban_fabric",
         "field": "summary",
         "voiceClass": "indicative",
-        "distinctValues": 14,
-        "occurrences": 14
+        "distinctValues": 15,
+        "occurrences": 15
       },
       {
         "home": "applied|war_conscription",
@@ -598,15 +598,15 @@
         "occurrences": 1
       }
     ],
-    "rowsSha256": "3b1e4ee5dbd1510744eededbff887fbb37a572980219d13f50b40e878a1b0476",
+    "rowsSha256": "bac0f58d38314f234e92a13baec7a4728e05c69ed4920fea6a97a8b42df48afd",
     "totals": {
       "homes": 42,
       "fields": 2,
       "identities": 84,
       "prospectiveIdentities": 0,
       "indicativeIdentities": 84,
-      "distinctValues": 660,
-      "occurrences": 834
+      "distinctValues": 664,
+      "occurrences": 838
     }
   },
   "rewriteLiveness": {

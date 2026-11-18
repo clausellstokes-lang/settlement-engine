@@ -11,8 +11,8 @@
 
 // BAR8 J-INCOME item 1: the trade's ordinary lines and their reader, in an import-free leaf the printed export may read; re-exported
 // under the same names, so no importer of this module changes
-import { CLOTH_SHORT_LINE, CLOTH_WORKED_LINE, LOCAL_COAL_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, METAL_WORKED_LINE, METAL_SHORT_LINE, METAL_FORGE_IDLE_LINE, TIMBER_PLAIN_LINE, TIMBER_SAWN_LINE, TIMBER_SHORT_LINE, ordinaryIncomeLineOf } from '../../domain/display/incomeOrdinaryLines.js';
-export { CLOTH_SHORT_LINE, CLOTH_WORKED_LINE, LOCAL_COAL_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, METAL_WORKED_LINE, METAL_SHORT_LINE, METAL_FORGE_IDLE_LINE, TIMBER_PLAIN_LINE, TIMBER_SAWN_LINE, TIMBER_SHORT_LINE, ordinaryIncomeLineOf };
+import { CLOTH_SHORT_LINE, CLOTH_WORKED_LINE, LOCAL_COAL_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, METAL_WORKED_LINE, METAL_SHORT_LINE, METAL_FORGE_IDLE_LINE, TIMBER_PLAIN_LINE, TIMBER_SAWN_LINE, TIMBER_SHORT_LINE, FORGE_HOUSE_WORDS, ordinaryIncomeLineOf } from '../../domain/display/incomeOrdinaryLines.js';
+export { CLOTH_SHORT_LINE, CLOTH_WORKED_LINE, LOCAL_COAL_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, METAL_WORKED_LINE, METAL_SHORT_LINE, METAL_FORGE_IDLE_LINE, TIMBER_PLAIN_LINE, TIMBER_SAWN_LINE, TIMBER_SHORT_LINE, FORGE_HOUSE_WORDS, ordinaryIncomeLineOf };
 
 /** The grain line that sells a surplus, and its twin for a town whose own fields do not cover what it eats. */
 
@@ -23,8 +23,6 @@ export const GRAIN_OWN_FIELDS_LINE = 'Grain from local fields sold within the se
  * point 49, `after-base: defence`): it names no forge, here or elsewhere; it says what its gate makes true (coal among
  * the exports, no siege: `trueIncomeDesc`). */
 export const LOCAL_COAL_SOLD_LINE = 'Coal is dug here and sold on to other towns, so this income stream leans on the trade route.';
-/** The roster's forge houses, as a name word (the census's "metal house"): the coal line's gate. */
-export const FORGE_HOUSE_WORDS = Object.freeze(['smith', 'forge', 'foundr', 'smelt', 'metal', 'armor', 'armour', 'weapon']);
 
 export const INCOME_LINE_SIBLINGS = Object.freeze({
   // F7 (REVIEW-AGREE): "surplus" only where the food record holds one — the site's gate is

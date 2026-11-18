@@ -16,8 +16,8 @@ import { deriveLegacyAnnotations } from '../legacyGenerator.js';
 import { getTerrainType } from '../terrainHelpers.js';
 import { getInstFlags } from '../priorityHelpers.js'; import { hasInstitution } from '../../domain/facts/institutions.js';
 import { recordTrace } from '../../domain/trace.js';
-import { availableNativeResourceKeys, resourceShortageImport } from '../../domain/resourceSemantics.js';
-import { importsHold, usedGroundOf } from '../../domain/facts/supplyStory.js';
+import { availableNativeResourceKeys } from '../../domain/resourceSemantics.js';
+import { fishBoughtIn } from '../../domain/facts/fishBoughtIn.js'; // FAULTS-ROWS (FR12 (3)): the swap's one fact, the atom `fish bought in`'s reader
 import { INSTITUTION_SERVICES } from '../../data/institutionServices.js';
 import { resolveServiceCatalogKey } from '../services/institutionServices.js';
 
@@ -26,7 +26,8 @@ import { resolveServiceCatalogKey } from '../services/institutionServices.js';
  * speaks of a catch is its pool's own inland alternative (the catalogue's `inlandAlternative`, `data/institutionServices.js`:
  * the Fish market's "Fresh fish retail" is its "Preserved fish", the Fishmonger's "Fresh fish" its "Salted fish"). The story
  * is known only here, after the birth has written its imports (`resourceGenerator.js :: importsBroughtAtBirth`): the town's
- * fish grounds are used up (`supplyStory.js :: usedGroundOf`) and the stored imports hold the spent ground's own word
+ * fish grounds are used up and the stored imports hold the spent ground's own word (`facts/fishBoughtIn.js :: fishBoughtIn`, the
+ * one reader the atom `fish bought in` reads too: FAULTS-ROWS, FR12 (3))
  * ("Salted fish (local … exhausted)": the bought story, as every view reads it). An IDLE town (grounds spent, no fish brought
  * in) and a town whose fishers land their own catch keep their rows. The row is replaced IN PLACE (its bucket, its index, its
  * house; the toggle and the roll that kept it are the catch row's): NO DRAW. As the roll's own inland swap does, a later row of
@@ -36,8 +37,7 @@ import { resolveServiceCatalogKey } from '../services/institutionServices.js';
  */
 function boughtFishRowsInPlace(record, availableServices) {
   if (!availableServices || typeof availableServices !== 'object') return;
-  const ground = usedGroundOf(/** @type {any} */ (record), 'fish');
-  if (!ground || !importsHold(/** @type {any} */ (record), String(resourceShortageImport(ground) || ''))) return;
+  if (!fishBoughtIn(record)) return;
   /** @type {Record<string, Record<string, { inlandAlternative?: string, desc?: string }>>} */
   const pools = /** @type {any} */ (INSTITUTION_SERVICES);
   for (const rows of Object.values(availableServices)) {

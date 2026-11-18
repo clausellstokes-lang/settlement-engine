@@ -1,5 +1,5 @@
 {
-  "rr-fresh-full|1|contentSha256": "e2b064266e1f5ba6dac27ed7365e0126d19a56682fc547a3878ec8c40cd02662",
+  "rr-fresh-full|1|contentSha256": "a4294c066e34f62ba2dbcb8987a1a5c0c19f4466a8665142a7d50b66df8ad620",
   "rr-fresh-full|1|itemCount": 473,
   "rr-fresh-full|1|section|candidate.condition.food.soak_c.52": "divination",
   "rr-fresh-full|1|section|candidate.npc.bargain.soak_d_npc_grain_holders_senior_trader_1.52": "events",
@@ -103,7 +103,6 @@
   "rr-fresh-full|1|section|wizard_news.19.world_pulse.applied.candidate.strategy.deploy.soak_a.19": "war",
   "rr-fresh-full|1|section|wizard_news.19.world_pulse.applied.candidate.strategy.embargo.soak_c.19": "trade",
   "rr-fresh-full|1|section|wizard_news.19.world_pulse.applied.world_outcome.war_mobilization.soak_b.19": "war",
-  "rr-fresh-full|1|section|wizard_news.19.world_pulse.proposal.candidate.faction.faction_institution_suppression.soak_a_merchant_guilds.19": "events",
   "rr-fresh-full|1|section|wizard_news.2.refuge.berghavn.strathton": "events",
   "rr-fresh-full|1|section|wizard_news.2.world_pulse.applied.candidate.condition.crime.soak_b.2": "divination",
   "rr-fresh-full|1|section|wizard_news.2.world_pulse.applied.candidate.faction.faction_institution_capture.soak_a_city_state_council.2": "events",
@@ -463,6 +462,7 @@
   "rr-fresh-full|1|section|wizard_news.8.world_pulse.applied.candidate.tier.demotion.soak_d.8": "trade",
   "rr-fresh-full|1|section|wizard_news.8.world_pulse.applied.world_outcome.residual.8.world_stressor_criminal_corridor_soak_c.soak_c": "events",
   "rr-fresh-full|1|section|wizard_news.8.world_pulse.applied.world_outcome.war_mobilization.soak_b.8": "war",
+  "rr-fresh-full|1|section|wizard_news.8.world_pulse.proposal.candidate.relationship.neutral_to_trade_partner.edge.soak-a.soak-c.8": "events",
   "rr-fresh-full|1|section|wizard_news.9.roads.soak-d.return.road.soak-d.soak-d:npc_parish_church.4": "trade",
   "rr-fresh-full|1|section|wizard_news.9.signed.soak_b.soak_c": "trade",
   "rr-fresh-full|1|section|wizard_news.9.world_pulse.applied.candidate.faction.faction_institution_capture.soak_a_city_state_council.9": "events",

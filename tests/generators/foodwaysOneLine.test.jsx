@@ -93,7 +93,7 @@ describe('the foodways line: one writer on the record, the same line on every su
     expect(wrong).toEqual([]);
     // Measured 6 distinct lines over these 12 seeds (default configs share culture and terrain).
     expect(lines.size, 'the line is the place\'s own, not one sentence for all').toBeGreaterThanOrEqual(5);
-  });
+  }, 120_000); // its own budget: a corpus walk at the edge of the 20 s default on a CI runner under coverage (measured 2026-11-18: ~11 s there)
 });
 
 /**

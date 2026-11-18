@@ -38,9 +38,6 @@
   "DS-ECO-6::TIER: significant off-book activity (≥15)": [
    "declares guild (layer 3)"
   ],
-  "DS-ECO-6::TIER: minor shadow activity (≥3)": [
-   "declares organised crime (layer 3)"
-  ],
   "DS-GEN-7::power_stress: occupation against stated stability": [
    "declares ruler: occupier (layer 3)"
   ],
