@@ -60,7 +60,12 @@ describe('the services declare in place (CENSUS-4c unit 5)', () => {
     // W2-FIX-DATA-6 (2026-11-13, CENSUS-2 kind b): the coaching inn's lodging and horse change exclude a siege that holds the roads, each with its twin (57 → 59)
     // W2-FIX-DATA-8 (2026-11-14, ROUND-3-CUT-INCREMENT ww-1416): the brewer's barrel trade needs an alehouse on the roster, with its twin (59 → 60)
     // TAIL-SERVICES-3 (2026-11-15, READ-ALL 04603, X9 31188): the fish market's wholesale needs a tavern on the roster, with its twin (60 → 61)
-    expect(rows.filter(declares)).toHaveLength(61);
+    // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18, the ledger re-taken by its readers' reading): eleven definitions now declare (61 → 72):
+    // `sovereign` on the Lord's appointee's three, the Lord's steward's two, the Noble governor's, the Royal seat's and the Village reeve's tax
+    // collection and `crisis: hunger` off the Butchers' fresh meat (BAR6-HOUSES 9fa69a146, SV1 and LAW 5 widened; JOIN-17 point 2),
+    // `crisis: under_siege` off the Hired blades' bodyguards and the Monastery's services (BAR5-MARKS 8c0a3cd71 and e8068a494, L2; JOIN-16 point 1);
+    // two texts reworded: the Village headman's dues (BAR5-MARKS 8c0a3cd71) and the Town crier's announcements (BAR7-LINES 0458d954a; JOIN-17 point 26)
+    expect(rows.filter(declares)).toHaveLength(72);
     for (const r of rows) {
       const [inst, svc] = r.id.split('|');
       const def = /** @type {any} */ (INSTITUTION_SERVICES)[inst][svc];

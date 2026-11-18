@@ -319,13 +319,13 @@
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 165,
+    "line": 166,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 171,
+    "line": 172,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },
@@ -1063,13 +1063,13 @@
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 331,
+    "line": 339,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 384,
+    "line": 392,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
@@ -1105,7 +1105,7 @@
   },
   {
     "path": "src/pdf/sections/SystemStateSnapshot.jsx",
-    "line": 150,
+    "line": 151,
     "category": "floatInterpolation",
     "snippet": "{row.score}"
   }

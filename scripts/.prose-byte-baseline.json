@@ -55,38 +55,38 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 269046,
-      "gzip": 35811,
+      "raw": 281298,
+      "gzip": 37154,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 188975,
-      "gzip": 26073,
+      "raw": 195233,
+      "gzip": 26610,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 301857,
-      "gzip": 38286,
+      "raw": 306982,
+      "gzip": 38767,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 131223,
-      "gzip": 18410,
+      "raw": 135398,
+      "gzip": 18681,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 147835,
-      "gzip": 20823,
+      "raw": 148435,
+      "gzip": 20910,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
     "src/data/dossierStateProse/warFaith.generated.js": {
-      "raw": 180301,
-      "gzip": 25099,
+      "raw": 180478,
+      "gzip": 25143,
       "ceilingRaw": 505306,
       "ceilingGzip": 112290
     },
@@ -683,6 +683,46 @@
       "toRaw": 301857,
       "gzipAfter": 38286,
       "reason": "+3182 B raw over the committed 298675 (gzip level 9: 38100 -> 38286), measured on disk at the joined tree: BAR4-HISTORY batch 2 (155c7e1af) +2693, the three DS-GEN-16 -MARKED pools of two (BAR4-HISTORY-HANDBACK: 298,675 -> 301,368 on its own base), and BAR4-SCENES (187c46f61) +489, DS-GEN-13 COMMERCE v6 and the monastery line's exclusion mark (BAR4-SCENES-2-HANDBACK: 298675 -> 299164 on its own base); the two compose exactly (2693 + 489 = 3182). The leaf stands at 37.9 per cent of its ceilingRaw (796761)."
+    },
+    {
+      "car": "THE CLOSE OF 2026-11-18 (JOIN-16 points 2 to 5, JOIN-17 points 4 to 31, the sixth chair's point 37): the landings' declared lines and twins of state prose, re-recorded once by CLOSE-DOORS-1A at the frozen tree 70e557d5b (the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 269046,
+      "toRaw": 281298,
+      "gzipAfter": 37154,
+      "reason": "+12252 B raw over the committed 269046 (gzip level 9: 35811 -> 37154), measured on disk at 70e557d5b (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: BAR5-SAFETY (JOIN-16 point 2, e02f01157) +431; BAR6-DEFDESK (JOIN-17 point 4, 53b856b10) +6008; SEAM-DESKS (point 18, 3a8366e29) -5; BAR7-DESKS (point 27, fc941ca9d) +4400; DEBT-1 (point 31, c935f2e23) -4; LEFT-LINES (point 37, f1ca75555) +1422; they compose exactly (269046 -> 281298); 57.6 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE CLOSE OF 2026-11-18 (JOIN-16 points 2 to 5, JOIN-17 points 4 to 31, the sixth chair's point 37): the landings' declared lines and twins of state prose, re-recorded once by CLOSE-DOORS-1A at the frozen tree 70e557d5b (the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 188975,
+      "toRaw": 195233,
+      "gzipAfter": 26610,
+      "reason": "+6258 B raw over the committed 188975 (gzip level 9: 26073 -> 26610), measured on disk at 70e557d5b (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: BAR5-FOOD (JOIN-16 point 5, f3ad5775f) +531; BAR6-ECON (JOIN-17 point 7, e4b2955f0) +4145, its two new pools among them; BAR7-DESKS (point 27, fc941ca9d) +1164; LEFT-LINES (point 37, f1ca75555) +418; they compose exactly (188975 -> 195233); 49.6 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE CLOSE OF 2026-11-18 (JOIN-16 points 2 to 5, JOIN-17 points 4 to 31, the sixth chair's point 37): the landings' declared lines and twins of state prose, re-recorded once by CLOSE-DOORS-1A at the frozen tree 70e557d5b (the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 301857,
+      "toRaw": 306982,
+      "gzipAfter": 38767,
+      "reason": "+5125 B raw over the committed 301857 (gzip level 9: 38286 -> 38767), measured on disk at 70e557d5b (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: BAR6-CULTURE (JOIN-17 point 10, cd40ad0e0) +2040; SEAM-CULTURE (point 13, 52984c09c) +1481; DEBT-1 (point 31, c935f2e23) -2; LEFT-LINES (point 37, f1ca75555) +1606; they compose exactly (301857 -> 306982); 38.5 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE CLOSE OF 2026-11-18 (JOIN-16 points 2 to 5, JOIN-17 points 4 to 31, the sixth chair's point 37): the landings' declared lines and twins of state prose, re-recorded once by CLOSE-DOORS-1A at the frozen tree 70e557d5b (the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 131329,
+      "toRaw": 135398,
+      "gzipAfter": 18681,
+      "reason": "+4175 B raw over the committed 131223 (gzip level 9: 18410 -> 18681), measured on disk at 70e557d5b (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: BAR5-POWERS (JOIN-16 point 4, 4045718d2) +139; BAR6-POWERS (JOIN-17 point 11, 570e3c351) +409; SEAM-DESKS (point 18, 3a8366e29) +418; BAR7-DESKS (point 27, fc941ca9d) +3209; they compose exactly (131223 -> 135398); the row chains from where the leaf's declared chain stood (131329, above the committed figure after an earlier shrink, which the chain arm admits); 37.9 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE CLOSE OF 2026-11-18 (JOIN-16 points 2 to 5, JOIN-17 points 4 to 31, the sixth chair's point 37): the landings' declared lines and twins of state prose, re-recorded once by CLOSE-DOORS-1A at the frozen tree 70e557d5b (the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147835,
+      "toRaw": 148435,
+      "gzipAfter": 20910,
+      "reason": "+600 B raw over the committed 147835 (gzip level 9: 20823 -> 20910), measured on disk at 70e557d5b (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: BAR6-CULTURE (JOIN-17 point 10, cd40ad0e0) +600, the declarations its batches added to the stressor and condition lines; they compose exactly (147835 -> 148435); 57.3 per cent of its ceilingRaw"
     }
   ],
   "ceilingTransfersNewLeaves": [
