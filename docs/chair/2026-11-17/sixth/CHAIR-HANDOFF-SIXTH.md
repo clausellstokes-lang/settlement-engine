@@ -459,6 +459,28 @@ should be paused or archived by the owner's hand.
   as the last close took it); BAR5's nine seats (`docs/chair/2026-11-16/bar5/`; `JOIN-16-HANDBACK.md`) are among the
   declarers; the signed record is named `docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json`.
   Told to DOORS-2, DOORS-1A, DOORS-1B and CLOSE-SWEEP at 03:35.
+- **CL12 AND CL13 (03:46 UTC, 2026-11-18; BY THE OWNER'S DEFERRAL).** THE OWNER'S WORD, at 03:42:43 UTC, the whole of
+  it: "I defer these to you:" then, after an empty line, "the Vercel limit; "accept the worker size")." It answers the
+  chair's two open questions (the host's allowance, 03:10; the worker bundle's ceiling, 03:24). **CL12: THE WORKER
+  BUNDLE'S CEILING IS ACCEPTED BY THE CHAIR** (the rise of +168,907 B, over CL3's stop): it is not part of the first
+  paint, and the worker path is off by default (`generationWorker: false`, `src/lib/flagRegistry.js`), so no visitor
+  downloads it today; the growth is the rounds' content (the supply rule, the twins, the new fact leaves).
+  CLOSE-DOORS-1B re-records it once at the measured figure with the old, the new, the difference, the cause and the
+  owner's words; it stays on the veto list by name. **CL13: THE HOST'S ALLOWANCE.** (1) PUSH DISCIPLINE stays in
+  force for every seat and the chair: by the reading that refused attempts take no slot, the slots spent before
+  03:10 free themselves over the next day, and the production deploy needs one. (2) THE WORKING BRANCHES STOP
+  ASKING FOR DEPLOYMENTS: one new top-level key in `vercel.json` on the frozen line, `"git": { "deploymentEnabled":
+  { "lane/*": false, "lane/**": false } }`, given to CLOSE-SWEEP as its item S5 with every test that reads that
+  file and one dated sentence in `docs/DEPLOY.md`. THE SHAPE IS VERIFIED from the host's own published typed
+  configuration (`@vercel/config` 0.14.1, fetched from the package registry into a scratch folder, no code run:
+  `GitConfig.deploymentEnabled?: boolean | { [branch: string]: boolean }`, "Specifies the branches that will not
+  trigger an auto-deployment when committing to them. Any non specified branch is `true` by default."). THAT A KEY
+  MAY BE A PATTERN IS THE CHAIR'S RECOLLECTION OF THE HOST'S DOCUMENTATION AND IS NOT VERIFIED (the host's site is
+  outside this session's network): if patterns are not honoured the key is inert and harmless; `master` is never
+  named, the bare boolean and a `*` key are never used. WHAT IT DOES NOT DO: a branch cut before the change still
+  asks on every push (the seats now at work), so (1) carries this deploy; the key serves the rounds after it. (3)
+  THE PLAN'S UPGRADE stays the owner's (it spends the owner's money): named to the owner as the way to deploy
+  sooner than the allowance frees.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
