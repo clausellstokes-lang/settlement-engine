@@ -196,7 +196,7 @@ list does not print. The guard holds it on its five cards and pins the citadel's
 names the work through "the work at {house}" (POWERS-9), so the four lines keep it. Where the house is a militia or a levy
 (25 of the 140 want cards: a citizen militia or a household levy), the phrase reads as a duty, not a trade. Named for the owner's veto list.
 
-## 4 · The net (base b014a7bf3 and the tip 6e36e0359, each in a worktree of its own; each gate alone through `sh scripts/gate-tail.sh`; reds compared BY MESSAGE; 66b98a241 after it touches only the pool table, whose walker was re-run green)
+## 4 · The net (base b014a7bf3 and the tip 6e36e0359, each in a worktree of its own; each gate alone through `sh scripts/gate-tail.sh`; reds compared BY MESSAGE; 66b98a241 after it touches only the pool table, whose walker was re-run green). **RE-RUN WHOLE AT LR6's TIP 04a3d1450: every gate's result and every red's message as in this table, the counts as section 5 gives them at 04a3d1450; the older tests 65 files, the same 5 reds; the six faults guards and my guard green.**
 
 | gate | base | tip |
 |---|---|---|
@@ -216,10 +216,10 @@ names the work through "the work at {house}" (POWERS-9), so the four lines keep 
 
 | figure | base → tip |
 |---|---|
-| the state corpus's variant count (`proseComposed`, `proseWiringCensus`, `composeStateProse`, the shift register's mutant; stored 3033) | 3044 → 3052 (+8) |
-| `proseEntryContradiction` loaders (stored 3501 / 2794) | 3512 → 3520, 2804 → 2812 |
-| `proseWaveGate` units (stored 658) | 663 → 671 |
-| the trailing-coordinate class (`proseEntryContradiction` anti-vacuity, report-only, stored 377) | 377 → 379 (two of the eight end on a plain ", and …" clause) |
+| the state corpus's variant count (`proseComposed`, `proseWiringCensus`, `composeStateProse`, the shift register's mutant; stored 3033) | 3044 → 3052 (+8); 3054 at 04a3d1450 (+10: LR6's Safe v8 and Unsafe v7) |
+| `proseEntryContradiction` loaders (stored 3501 / 2794) | 3512 → 3522, 2804 → 2814 (at 04a3d1450) |
+| `proseWaveGate` units (stored 658) | 663 → 673 (at 04a3d1450) |
+| the trailing-coordinate class (`proseEntryContradiction` anti-vacuity, report-only, stored 377) | 377 → 379 (at 04a3d1450 too: two of the lines end on a plain ", and …" clause) |
 | `scripts/.prose-byte-baseline.json`, `defense.generated.js` (stored 281,298 raw / 37,154 gz) | raw measured 286,547 at the tip; gzip 37,820 (outside the 1 % band, red at the tip only) |
 | `factLayers.poolTable.json`: DS-DEF-3 › Very Safe and › Unsafe | placed 3 → 5 in 66b98a241 on the chair's word of 19:58 UTC (their lines Very Safe v6 `no crime wave`, Unsafe v5 `crime wave` read layer 4), as BAR6-DEFDESK placed Safe; the lines kept as written (R6). The walker green |
 | `presumedThings` ARM 1 fresh hits (stored register) | 5 → 6: Moderate v10 ("With no gaol at …") read as naming a prison undeclared; it declares `no court or gaol`, which holds only where no gaol stands. The same reading the walker gives Unsafe v4 at the base (FAULTS-DESKS named it): the walker's, not reshaped |
