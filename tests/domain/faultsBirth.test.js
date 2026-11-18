@@ -29,6 +29,7 @@ import { liveInstitutions } from '../../src/domain/institutions/institutionRoste
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { chainCarrierOf } from '../../src/domain/facts/chainCarrier.js';
 import { resourceGapLines } from '../../src/domain/display/validationOnPage.js';
 
@@ -343,7 +344,7 @@ describe('FAULTS-BIRTH (c) · an isolated buyer of a material the land never hel
   test('FR24 (2): the common proves its pasture for every reader: r2r-village-23 one story; an isolated fuller beside a common is fed', () => {
     const s = town('r2r-village-23');
     expect(HI.impliedGroundsOnPage(s).there, 'r2r-village-23: the pasture proven').toContain('grazing_land');
-    expect(HI.impliedGroundsOnPage(s).used, 'r2r-village-23: no pasture under Depleted').not.toContain('grazing_land');
+    expectAbsentWithAnchor(HI.impliedGroundsOnPage(s).used, 'grazing_land', 'iron_deposits', 'r2r-village-23: no pasture under Depleted, its smith\'s iron still there');
     expect(HI.housesShortOf(s).has('Fuller'), 'r2r-village-23: the Fuller at work').toBe(false);
     const fuller = { ...built(['Fuller', 'Common grazing land'], 'isolated'), resourceAnalysis: { gaps: [{ institution: 'Fuller', chain: 'wool', kind: 'missing', impact: 'x' }] } };
     const picked = birthPicksOn(fuller, groundSeedFor('grazing_land', false));
