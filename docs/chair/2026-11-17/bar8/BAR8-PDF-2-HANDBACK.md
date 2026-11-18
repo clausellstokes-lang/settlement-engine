@@ -195,3 +195,41 @@ tab's `econOrdinaryTimesLine` hands, so the PDF's Economics head line and the jo
 THE LINE A READER SEES: "A row marked short is what its house makes when supplied." leaves the PDF's Services and
 Institutions chapters where their tabs print it no more (a failed venture's mark alone): r2r-hamlet-26, r2r-town-13,
 r2s-wartime-city-3 (and the six others above). No line is added.
+
+### ITEM 4 OF MY SECTION · the income share's ordinary line (the chair's messages of 01:21 and 01:25 UTC: the leaf is pushed)
+
+- `src/domain/display/incomeOrdinaryLines.js` COPIED BYTE FOR BYTE from J-INCOME's 9d344fc9c, in its own commit 2960c5912
+  ("the leaf, copied from J-INCOME's 9d344fc9c"; the committed blob is the same object). `src/pdf/sections/EconomicsTrade.jsx`'s
+  income row reads `incomeDescShown(settlement, s, ordinaryIncomeLineOf)` with the leaf's `ordinaryIncomeLineOf` (LEFT-PDF's
+  afb259a34 form). The journal's share prints no description: nothing there. `incomeLineSiblings.js` untouched.
+- Measured (births at 917c915bc): the 720 95 towns (108 shares) → **0**; the 150 16 → **0**; the thirty 3 → **0**. No other
+  count moves. The guard's arm reads the TAB'S OWN IMPORT (`generators/economy/incomeLineSiblings.js`) against the PDF's
+  row, floor 3 shares: red in 2 of 15 towns without the cure (r2s-plague_onset-city-0, r2r-town-45), green with it. The
+  layer law (`tests/architecture`) green.
+- RE-KEYED BY IDENTITY (R8): `leftPdfReadsTheTabs` L1's "the tab's row" is the tab's call `incomeDescShown(s, src,
+  ordinaryIncomeLineOf)` (the cure made the key without it untrue: r2s-infiltrated-village-0, r2r-town-16).
+- THE LINE A READER SEES: an unmarked share prints the trade's ordinary line where the PDF printed the stored short twin
+  ("Little metal is worked here while the metal trade is short of what it needs." → "Metal is smelted or worked here.";
+  "Little cloth is made here …" → "Cloth is woven or finished here."): r2r-town-8, r2r-town-16, r2r-town-20.
+- NAMED, NOT TOUCHED (the chair's word; the owner's answer "Move the entries" is J-INCOME's to carry out): on this branch
+  alone the leaf's lines read FRESH in the doors: `presumption-classes-door --check` 3 (`fresh 0` → `fresh 3`: the two cloth
+  lines and the sawn timber line), `presumed-things-door --check` 2 (`fresh 38` → `fresh 40`: the local coal and local ore
+  lines); `tests/lint/presumptionClasses.walker.test.js` ("no NEW undeclared line") is red at my tip for the same three.
+  ALSO NAMED: `tests/lint/ruinFilterRoster.walker.test.js` ("every `.institutions` reader is COMPLIANT or EXEMPT") is red at
+  my tip: the leaf reads `town.institutions` raw (line 55, `ordinaryIncomeLineOf`'s roster) and is on no list of that walker;
+  J-INCOME's branch carries the same leaf and no row for it. The walker is not my file: the row is the leaf's owner's.
+
+### THE NET OF THE SECOND BRANCH (base 917c915bc in a scratch worktree, then the tip; by name)
+
+`typecheck:domain:strict` 0 / 0; `typecheck:ratchet` 0 / 0; `tests/architecture` green / green; the rounds' guards green /
+green; `tests/joins` and WEAVE ST-2 green / green (LEFT-CHAIN's two reds are cured on the line); eslint on my changed files
+0. `tests/lint` BY NAME: 69 at the base; at the tip the same 69 plus the two named above (`presumptionClasses` "no NEW
+undeclared line", `ruinFilterRoster` "COMPLIANT or EXEMPT"), both the copied leaf's; `seedLoopTotality` is red at the base
+and the tip alike (`tests/pdf/seamPdfReadsTheTabs.test.jsx`, not mine); `sovereigntyLightingContract`'s each-family count
+113 → 112. `tests/pdf tests/foundry tests/components` by name: the same 7 at the base and the tip. The doors' last lines:
+the same but for the leaf's fresh rows (above).
+
+N5 · A SCRATCH MERGE: my tip 4f584c14d with the line's tip 99ca9ad51 and then J-INCOME's tip 771a1a945: CLEAN (the leaf's
+identical bytes merge without conflict). My guard, the four PDF tests I changed and `tests/architecture` there: 371 of 372
+green; the one red (`leftPdfReadsTheTabs` L1) was the key item 4 made untrue, re-keyed at ac2f98365 and then green there
+too. Aborted; worktrees removed.
