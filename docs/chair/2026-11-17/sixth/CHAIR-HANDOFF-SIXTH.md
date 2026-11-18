@@ -1647,3 +1647,23 @@ should be paused or archived by the owner's hand.
   the floors were last measured at master; `src/lib/saves.js` grew by 141 lines since (two commits, both before the
   BAR4 close): CHECKS-1 runs the job's command with `--coverage.reportOnFailure=true` at 70e557d5b and reports the
   table.
+- 04:08 UTC, 2026-11-18 · THE CLOSE'S SECOND MERGE, LOCAL: CLOSE-WALKERS DONE (0f4487199; hand-back
+  `docs/chair/2026-11-18/close/CLOSE-WALKERS-HANDBACK.md`): all five laws green, no `src/`, no stored figure, no
+  other seat's file: W1 seven planted regressions (#125 to #131) each CAUGHT in a scratch worktree, seven manifest
+  entries; W2 `seamPdfReadsTheTabs` collects every seed; W3 21 negatives anchored in 7 files; W4 DS-GEN-16 v2
+  computed by its vid, one test label reworded (`staffUnlockSurveyorEntitlement.pglite`: the assertion untouched);
+  W5 the each-family debt 113 to 106 (seven files dated after the ceiling froze; THE CEILING STAYS 108: lowering
+  it to 106 is a stored figure, named for CLOSE-DOORS-1B's last pass). `tests/lint`: 66 reds at the base, 61 at its
+  tip, the five its own, every other message identical. Merged as 2047d6dc0 on `lane/landing-close-2026-11-18`
+  (over merge 1); the five laws and the thirteen changed files are running on the merged tree. FOR THE DESKS'
+  LANDING LATER: W5 re-wrote the two `test.each` of `tests/domain/bar7DesksLines.test.js` (DESKS-2 touches that
+  file under BR32 (1)): a merge to read by hand. **CL17 (04:07; CLOSE-DOORS-1A's A4 STOP; ledgers otherwise
+  re-taken at aba73c9e6):** two rows no ledger value can cure, BOTH FAULTS OF THE CENSUS'S READER
+  (`tests/domain/facts/census2dTables.test.js`), not of the source: (1) `declaredLiteralsOf` reads only a literal
+  or a template `text`; `PRESSURE_SENTENCES.wartime(losing)[0]`'s text is a conditional of two templates since
+  BAR7-SCENES 765a516a3 (`narrativeText.js:277`): the reader learns that one shape (two texts, one declaration);
+  every other shape stays unread and loud; (2) `expectedDeclaration` puts `calm` last on the expected side only:
+  `POLITICAL_FLAVOR stable[2]` (SCENES-3 4efba5868) lists it first: the found side is normalized the same way and
+  nothing else is loosened. Both hunks are the seat's by this ruling, each a commit of its own with a negative
+  control, read by the chair; no `src/` line moves. `census4-validate-ledger.mjs` refuses at base and tip ("no
+  extracted ARRIVAL_MEMORIES"): a door that cannot open: the seat dates it; a debt to name to the owner.
