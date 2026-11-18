@@ -261,15 +261,21 @@ export function groundPicksAtBirth(record, seed) {
   /** @type {Map<string, 'there' | 'used'>} */
   const states = new Map();
   // FAULTS-BIRTH (FR8 (a)): A FACT OF THE RECORD IS NEVER UNSAID: where the town's own food record names the ground's food as
-  // a source of what it eats ("its food is the day's catch": `foodLand.js`'s fishing row on water), the ground is there
-  // and where the town's own exports name the ground's raw yield ("Furs and pelts" off the hunting grounds: r2r-village-2)
-  const es = /** @type {{ foodSecurity?: { foodRecord?: { foodSources?: unknown } }, primaryExports?: unknown } | null | undefined} */ (record?.economicState);
+  // a source of what it eats ("its food is the day's catch": `foodLand.js`'s fishing row on water), the ground is there.
+  // (FR21 (4), the sixth chair, 2026-11-18: AN EXPORT PROVES NO IMPLIED GROUND. The page's own reader of a chain's carrier,
+  // `chainCarrier.js :: chainCarrierOf`, reads a chain whose ground is not on the stored land list as `transit` ("it runs on
+  // passing trade"), and an implied ground is on no stored list: the furs of r2r-village-2's "Furs and pelts (transit)" are
+  // carried through, `furs_north`'s own note: "Furs travel from the hunting grounds through trading posts". So no export
+  // reading stands here: a second matcher over the exports would be a second reading of the page's one.)
+  // FR21 (2) (THE CHAIR'S RULING, 2026-11-18, under the owner's standing deferral; a "no" from the owner reverses it): THE COMMON
+  // PROVES THE PASTURE: where a live Common grazing land stands, the grazing land is there (`GROUND_KEPT_BY`)
+  const es = /** @type {{ foodSecurity?: { foodRecord?: { foodSources?: unknown } } } | null | undefined} */ (record?.economicState);
   const fed = arr(es?.foodSecurity?.foodRecord?.foodSources).map(str);
-  const sold = arr(es?.primaryExports).map((x) => ` ${struck(x).replace(/[^a-z]+/g, ' ')} `);
+  const keptHere = groundsKeptOf(record);
   for (const ground of [...provingHouses(record).keys()].sort()) {
     const food = Object.prototype.hasOwnProperty.call(GROUND_FOOD, ground) ? GROUND_FOOD[ground] : '';
-    const words = Object.prototype.hasOwnProperty.call(GROUND_EXPORT, ground) ? GROUND_EXPORT[ground] : [];
-    const spoken = (!!food && fed.includes(food)) || sold.some((x) => words.some((w) => x.includes(` ${w} `)));
+    const kept = keptHere.includes(ground);
+    const spoken = (!!food && fed.includes(food)) || kept;
     states.set(ground, spoken ? 'there' : seedPicks(seed, `ground::${ground}`, SUPPLY_ODDS.groundThere) === false ? 'used' : 'there');
   }
   return states;
@@ -277,21 +283,36 @@ export function groundPicksAtBirth(record, seed) {
 
 /** FAULTS-BIRTH: the food record's own word for what a ground feeds the town (`foodLand.js :: foodSources`). */
 const GROUND_FOOD = Object.freeze(/** @type {Record<string, string>} */ ({ fishing_grounds: 'fish', river_fish: 'fish', grazing_land: 'livestock', hunting_grounds: 'game' }));
-/** FAULTS-BIRTH: the raw words of a ground's yield an export names whole (a worked good, "Iron tools", is none of them). */
-const GROUND_EXPORT = Object.freeze(/** @type {Record<string, ReadonlyArray<string>>} */ ({
-  hunting_grounds: Object.freeze(['game', 'furs', 'pelts', 'hides']), fishing_grounds: Object.freeze(['fish']), grazing_land: Object.freeze(['livestock', 'wool']),
-  managed_forest: Object.freeze(['timber']), iron_deposits: Object.freeze(['iron ore']), stone_quarry: Object.freeze(['stone']), marshlands: Object.freeze(['peat']),
-}));
+/** FR21 (2): the houses of the roster that are the ground itself, at work (catalogue ids): the common is the pasture. */
+const GROUND_KEPT_BY = Object.freeze(/** @type {Record<string, ReadonlyArray<string>>} */ ({ grazing_land: Object.freeze(['common_grazing_land']) }));
+/**
+ * FR21 (2), FR24 (2) (the chair's rulings, 2026-11-18): THE GROUNDS A LIVE HOUSE OF THE ROSTER KEEPS THERE (`GROUND_KEPT_BY`: the
+ * common, its pasture): one reading for every reader of a ground's story, the birth's pick and the isolated buyers' reading
+ * (`houseInputAtHand.js :: neverHeldGroundsUsed`) alike. @param {StoryRecord | null | undefined} record @returns {string[]}
+ */
+export function groundsKeptOf(record) {
+  const standing = new Set(liveNative(record).map((i) => idOfHouse(i)));
+  return Object.keys(GROUND_KEPT_BY).filter((g) => GROUND_KEPT_BY[g].some((id) => standing.has(id)));
+}
 
 /** The word the imports list holds for a family's material ("Timber", "Salt"); '' where the list has none. @param {string} family */
 export const familyWord = (family) => (family === 'desertSalt' ? RUNS_ON_BOUGHT.salt_works : (Object.prototype.hasOwnProperty.call(IMPORT_WORD, family) ? IMPORT_WORD[family] : ''));
 
-/** Whether a ground gives a family's material (by the yield the Depleted list reads). @param {string} ground @param {string} family */
-export const groundGives = (ground, family) => !!FAMILY_NOUN[family] && Object.prototype.hasOwnProperty.call(GROUND_YIELD, ground) && GROUND_YIELD[ground] === FAMILY_NOUN[family];
+/**
+ * FAULTS-BIRTH FR21 (1) (the sixth chair, 2026-11-18; vetoable by the owner): WOOL AND HIDES TAKE THEIR GROUNDS. The Depleted
+ * list's yields (`GROUND_YIELD`, one good a ground) name no ground of wool or hides, but the record's own words do: the hunting
+ * grounds' shortage word is "Game and hides (local hunting grounds exhausted)" (`resourceSemantics.js`), and the catalogue's
+ * pastures give wool (`RESOURCE_DATA.grazing_land.commodities`: livestock, wool, dairy, animal hides). A ground -> the families
+ * it gives beside its yield. @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+const ALSO_GIVES = Object.freeze({ hunting_grounds: Object.freeze(['hides']), grazing_land: Object.freeze(['wool']), alpine_pasture: Object.freeze(['wool']) });
+/** Whether a ground gives a family's material (by the yield the Depleted list reads, or `ALSO_GIVES`). @param {string} ground @param {string} family */
+export const groundGives = (ground, family) => !!FAMILY_NOUN[family] && ((Object.prototype.hasOwnProperty.call(GROUND_YIELD, ground) && GROUND_YIELD[ground] === FAMILY_NOUN[family])
+  || (Object.prototype.hasOwnProperty.call(ALSO_GIVES, ground) && ALSO_GIVES[ground].includes(family)));
 /**
  * FAULTS-BIRTH (FR8 (c)): THE GROUND OF A FAMILY'S MATERIAL, the first of the Depleted list's yields that gives it (`GROUND_YIELD`,
- * in its order: iron ore the iron deposits, clay the river clay, timber the managed forest); '' where no ground gives it (hides,
- * wool, the luxury trade's goods). @param {string} family @returns {string}
+ * in its order: iron ore the iron deposits, clay the river clay, timber the managed forest; FR21 (1): hides the hunting grounds,
+ * wool the grazing land); '' where no ground gives it (the luxury trade's goods). @param {string} family @returns {string}
  */
 export const groundOfFamily = (family) => Object.keys(GROUND_YIELD).find((g) => groundGives(g, family)) || '';
 

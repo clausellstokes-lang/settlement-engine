@@ -91,6 +91,11 @@ export const SOURCE_GROUNDS = Object.freeze({
   fishing_community: Object.freeze(['fishing_grounds', 'river_fish']), // the same
   hunter_s_lodge: Object.freeze(['hunting_grounds']), // it hunts the grounds it stands in
   wildfowler: Object.freeze(['marshlands', 'hunting_grounds']), // it hunts the marsh and the grounds
+  // FAULTS-BIRTH FR23 (2) (the sixth chair's ruling, 2026-11-18; vetoable by the owner): THE COMMON IS ITS PASTURE. "Shared pasture
+  // for the hamlet's livestock": where the record stores its pasture spent, it reads as every house on a spent ground of its own
+  // (idle, marked short, its worked-out line). It proves no ground (not in `IMPLIED_GROUND`: it keeps one, `supplyStory.js ::
+  // GROUND_KEPT_BY`) and buys nothing in (not in `RUNS_ON_BOUGHT`)
+  common_grazing_land: Object.freeze(['grazing_land', 'alpine_pasture']),
 });
 
 /** Whether a catalogue id is a house that is the source of its material. @param {unknown} id @returns {boolean} */
@@ -180,6 +185,9 @@ export const IMPLIED_GROUND = Object.freeze({
   fishing_community: 'fishing_grounds', // the same
   hunter_s_lodge: 'hunting_grounds', // a lodge proves the grounds it hunts
   wildfowler: 'hunting_grounds', // a wildfowler proves the grounds it hunts (its game; the marsh's yield is reeds)
+  // FAULTS-BIRTH FR24 (2) (the chair's ruling, 2026-11-18): the common proves its pasture, there for every reader (`supplyStory.js ::
+  // GROUND_KEPT_BY` holds the pick there): one reading of the pasture for the land list, the input reader and the isolated buyers
+  common_grazing_land: 'grazing_land',
 });
 
 /**

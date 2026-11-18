@@ -33,7 +33,7 @@
  */
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { availableNativeResourceKeys, resourceKeyForLabel } from '../resourceSemantics.js';
-import { hasTradeRouteConnection } from '../tradeRouteSemantics.js';
+import { hasTradeRouteConnection, waterAccessKind } from '../tradeRouteSemantics.js';
 import { institutionHasAnyTag } from '../../lib/entities.js';
 import { nativeSemanticNames } from '../content/customContentSemanticAuthority.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
@@ -44,7 +44,7 @@ import { resourceShortageImport } from '../resourceSemantics.js';
 import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE, HOUSE_TRADE_INPUT, HOUSE_NEED_INPUT } from '../../data/crisisDependence.js';
 import { warHoldsIron } from './warIronHook.js'; // BIRTH-3 (BR9): the iron hook's own predicate (EG1: import-free)
 import { BUYER_IMPORT_WORDS, BUYS_AND_WORKS, MATERIAL_OF, RUNS_ON_BOUGHT, TAKERS, isSourceHouse } from './houseKinds.js'; // BIRTH-1: an import-free leaf (EG1)
-import { groundGives, groundOfFamily, impliedGroundsOf, impliedGroundsShown, sourceStoryOf, ventureOnPage, idOfHouse } from './supplyStory.js'; // BIRTH-2: the one reading of the grounds and the stories (EG1); BIRTH-3 (BR8): of the stored record alone
+import { groundGives, groundOfFamily, groundsKeptOf, impliedGroundsOf, impliedGroundsShown, sourceStoryOf, ventureOnPage, idOfHouse } from './supplyStory.js'; // BIRTH-2: the one reading of the grounds and the stories (EG1); BIRTH-3 (BR8): of the stored record alone
 
 /**
  * What each chain's input is CALLED on the record (the economy's goods vocabulary and the nearby-resource keys), and how
@@ -216,8 +216,10 @@ function inputAtHandCore(record, chainKey, house, chain) {
   // BIRTH-2 (BR4 (b)): THE HOUSE PROVES ITS GROUND. A ground a source house implies and the story leaves there answers as a
   // live ground does (`supplyStory.js :: impliedGroundsOf`: BIRTH-3, BR8, read off the stored rows; no land list stores it)
   const implied = record && /** @type {Record<symbol, unknown>} */ (record)[AT_THE_ECONOMY] ? [] : [...impliedGroundsOf(/** @type {Parameters<typeof impliedGroundsOf>[0]} */ (record)).states].filter(([, st]) => st === 'there').map(([g]) => g);
-  const keys = [.../** @type {string[]} */ (availableNativeResourceKeys(config)), ...implied];
-  const native = [...keys, ...keys.flatMap((k) => arr(/** @type {Record<string, { commodities?: unknown } | undefined>} */ (RESOURCE_DATA)[k]?.commodities))].map(str).map(norm).join('|');
+  const keys = /** @type {string[]} */ (availableNativeResourceKeys(config));
+  // FAULTS-BIRTH FR21 (3): an implied ground gives the goods of its water (`impliedGroundGoods`: a river's fishing ground no salt)
+  const native = [...keys, ...keys.flatMap((k) => arr(/** @type {Record<string, { commodities?: unknown } | undefined>} */ (RESOURCE_DATA)[k]?.commodities)),
+    ...implied.flatMap((g) => impliedGroundGoods(record, g))].map(str).map(norm).join('|');
   const rawNames = [raw, ...terrainSynonymsFor(raw)];
   if (words.some((w) => holds(native, w)) || rawNames.some((n) => holds(native, n))) return 'local';
   // What the town makes names the RAW good itself (never the chain's product).
@@ -786,6 +788,25 @@ export function ventureHouseOf(record) {
 export const inputMissingBeforeStory = (record, inst, family) => !!CHAIN_INPUTS[family]
   && inputAtHandCore(record, family, /** @type {{ name?: unknown }} */ (inst), { rawResource: CHAIN_RAW_INPUT[family] }) === 'missing';
 
+/**
+ * FAULTS-BIRTH FR21 (3) (the sixth chair, 2026-11-18; vetoable by the owner): A RIVER'S FISHING GROUND GIVES NO SALT. A ground a
+ * house implies gives its key and the goods of the catalogue (`RESOURCE_DATA[ground].commodities`), save the sea's own: salt is
+ * the sea's, so on water that is no sea (the world law's water kind, `tradeRouteSemantics.js :: waterAccessKind`: a river, or
+ * none) the implied fishing grounds give fish and no salt (six river towns' salt works read their salt local off a landing's
+ * river). A stored ground keeps the catalogue's goods (the land list's own reading). The birth's need list reads it too
+ * (`resourceGenerator.js :: generateResourceAnalysis`). @param {InputRecord | null | undefined} record @param {string} ground
+ * @returns {string[]} the ground and its goods
+ */
+export function impliedGroundGoods(record, ground) {
+  const goods = arr(/** @type {Record<string, { commodities?: unknown } | undefined>} */ (RESOURCE_DATA)[ground]?.commodities).map(str);
+  const config = /** @type {{ terrainType?: unknown, tradeRouteAccess?: unknown }} */ (record?.config || {});
+  const sea = waterAccessKind(str(config.terrainType), str(config.tradeRouteAccess)) === 'maritime';
+  const seaGoods = !sea && Object.prototype.hasOwnProperty.call(SEA_GOODS, ground) ? SEA_GOODS[ground] : [];
+  return [ground, ...goods.filter((g) => !seaGoods.includes(g))];
+}
+/** The goods a ground gives only on the sea. @type {Readonly<Record<string, ReadonlyArray<string>>>} */
+const SEA_GOODS = Object.freeze({ fishing_grounds: Object.freeze(['salt']) });
+
 /** One reading a record object. @type {WeakMap<object, ReadonlyArray<string>>} */
 const NEVER_HELD_OF = new WeakMap();
 
@@ -809,7 +830,9 @@ export function neverHeldGroundsUsed(record) {
   if (!hasTradeRouteConnection(str(record?.config?.tradeRouteAccess))) {
     const c = /** @type {Record<string, unknown>} */ (record.config || {});
     const held = [...arr(c.nearbyResources), ...arr(c.nearbyResourcesNative), ...arr(c.nearbyResourcesDepleted)].map(str)
-      .concat([...impliedGroundsOf(/** @type {Parameters<typeof impliedGroundsOf>[0]} */ (record)).states.keys()]);
+      .concat([...impliedGroundsOf(/** @type {Parameters<typeof impliedGroundsOf>[0]} */ (record)).states.keys()])
+      // FR24 (2): a ground a live house keeps there (the common's pasture, `supplyStory.js :: groundsKeptOf`) is held: never spent here
+      .concat(groundsKeptOf(/** @type {Parameters<typeof groundsKeptOf>[0]} */ (record)));
     const short = housesShortOf(record);
     const spent = housesOnSpentGround(record);
     const venture = ventureHouseOf(record);

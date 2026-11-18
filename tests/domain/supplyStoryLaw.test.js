@@ -50,7 +50,7 @@ import path from 'node:path';
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import { CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseInputAtHand, housesShortOf, impliedGroundsOnPage, ventureHouseOf } from '../../src/domain/facts/houseInputAtHand.js';
-import { FAMILY_NOUN, GROUND_YIELD, familyWord, idOfHouse, impliedGroundsOf, isVentureLine, sourceStoryOf, ventureLineText, ventureMarkText, ventureOfLine } from '../../src/domain/facts/supplyStory.js';
+import { FAMILY_NOUN, GROUND_YIELD, familyWord, groundsKeptOf, idOfHouse, impliedGroundsOf, isVentureLine, sourceStoryOf, ventureLineText, ventureMarkText, ventureOfLine } from '../../src/domain/facts/supplyStory.js';
 import { ALSO_USES } from '../../src/domain/facts/houseKinds.js';
 import { HOUSE_TRADE_INPUT, houseDependenceOf, INPUT } from '../../src/data/crisisDependence.js';
 import { RESOURCE_CHAINS } from '../../src/data/goods/chains.js';
@@ -261,7 +261,10 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
     let there = 0, implied = 0, ventures = 0, usedConnected = 0, boughtConnected = 0;
     expectNoSeedFailures(collectSeedFailures(CENSUS, (seed) => {
       const s = town(seed);
-      for (const st of impliedGroundsOf(s).states.values()) { implied++; if (st === 'there') there++; }
+      // FAULTS-BIRTH FR24 (2) (2026-11-18, R8: re-keyed by identity): a pasture a live Common grazing land keeps is the record
+      // speaking (`supplyStory.js :: groundsKeptOf`), never the seed's pick: the odds are read over the grounds the seed picks
+      const kept = groundsKeptOf(s);
+      for (const [g, st] of impliedGroundsOf(s).states) { if (kept.includes(g)) continue; implied++; if (st === 'there') there++; }
       if (ventureHouseOf(s)) ventures++;
       if (!connectedIn(s)) return;
       for (const { id, story } of storiesOf(s)) {

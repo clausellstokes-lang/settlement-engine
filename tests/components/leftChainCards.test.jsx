@@ -140,6 +140,10 @@ const WORKING_STATES = new Set(['running', 'operational', 'productive', 'thrivin
 const fold = (x) => String(x).toLowerCase().replace(/_/g, ' ').replace(/\s+/g, ' ').trim();
 /** @param {string} x */
 const bare = (x) => String(x).replace(/\s*\(.*?\)\s*/g, ' ').trim();
+/** FR23 (1): the page's own transit mark on a printed pill (`tradeListDisplay.js :: tradeMarkOf`'s `(transit)`). @param {string} good */
+const transitPill = (good) => /\(transit\)/.test(String(good));
+/** FR23 (1): the transit pills the arm passed over, with their town, for its count. @type {Array<[any, string]>} */
+const transitPassed = [];
 /** (b)'s instances in one town. @param {any} s @returns {string[]} */
 function goodsOfShortMakers(s) {
   const live = liveInstitutions(s).filter((/** @type {any} */ i) => i && typeof i.name === 'string' && i.name);
@@ -160,7 +164,15 @@ function goodsOfShortMakers(s) {
   }
   const lists = tradeListsAsPrinted(s);
   for (const [head, goods] of /** @type {Array<[string, string[]]>} */ ([['Exports', lists.exports], ['Produced locally', lists.local]])) {
-    for (const good of goods) { const m = everyMakerShort(good); if (m) out.push(`${head} ${good} · ${m}`); }
+    for (const good of goods) {
+      // FAULTS-BIRTH, the chair's ruling FR23 (1) (2026-11-18): A PILL THE PAGE PRINTS AS TRANSIT IS PASSING TRADE AND CLAIMS NO
+      // MAKER IN THE TOWN. "(transit)" is the entrepôt's mark (`computeActiveChains.js` §3: "a transit good passes through
+      // untouched"); the page prints it where the chain's carrier is passing trade (`chainCarrier.js :: chainCarrierOf`:
+      // `transit`), so the maker rule does not reach it (r2r-village-2's "Furs and pelts (transit)" beside its idle lodge).
+      // Read off the printed list itself, never by a second reading of the chain.
+      if (transitPill(good)) { transitPassed.push([s, good]); continue; }
+      const m = everyMakerShort(good); if (m) out.push(`${head} ${good} · ${m}`);
+    }
   }
   return out;
 }
@@ -241,6 +253,12 @@ describe('LEFT-CHAIN: the chain card says who works the chain now, and its lists
     });
     expectNoSeedFailures(failures, 'every town is born and read');
     expect(found).toEqual([]);
+    // FR23 (1): the transit pills passed over (the anchor), each on an entrepôt chain of its town that carries the good
+    expect(transitPassed.length, 'transit pills the arm passed over').toBeGreaterThan(0);
+    const unborne = transitPassed.filter(([t, good]) => !(t?.economicState?.activeChains || [])
+      .some((/** @type {any} */ c) => c?.entrepot === true && (c.outputs || []).some((/** @type {string} */ o) => fold(o) === fold(bare(good)))));
+    expect(unborne.map(([t, good]) => `${t?.name} · ${good}`), 'a transit pill no entrepôt chain of its town carries').toEqual([]);
+    console.log(`FR23 (1): transit pills passed over: ${transitPassed.length} in ${new Set(transitPassed.map(([t]) => t)).size} towns`);
   }, 1_800_000);
 
   test('(b) L5 ANCHORS: an output a maker printed bare bears out stays on its card', () => {

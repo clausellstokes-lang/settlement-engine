@@ -31,7 +31,7 @@ import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
 import { serviceRowsOf } from '../../src/domain/dossier/entityLinks.js';
 import { ironWarState, warIronState } from '../../src/domain/facts/warIronHook.js';
-import { warIronHookOutsideWar } from '../../src/domain/facts/houseInputAtHand.js';
+import { houseInputAtHand, warIronHookOutsideWar } from '../../src/domain/facts/houseInputAtHand.js';
 import { subsumeTradeGoods } from '../../src/domain/region/goodsCatalog.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
@@ -129,8 +129,12 @@ describe('(5) · BR3 (b): a gap row "runs on imported X" stands beside an import
   test('the tannery that runs on imported livestock beside "Raw hides and animal products": one canonical good, no second word', () => {
     // FAULTS-BIRTH (2026-11-18, R8: re-keyed by identity): r2r-village-9's hunter's lodge now proves its hunting grounds, whose hides
     // feed the tannery (FR8 (a)); the same claim on a tannery that still runs on imported livestock beside the hides word
-    const s = town('r2s-religious_conversion-village-3');
-    expect((s.resourceAnalysis?.gaps || []).some((/** @type {any} */ g) => g?.kind === 'imported' && g.chain === 'livestock' && /Tannery/.test(String(g.institution))), 'the tannery runs on imported livestock (the anchor)').toBe(true);
+    // FAULTS-BIRTH FR24 (2) (2026-11-18, R8: re-keyed by identity again): r2s-religious_conversion-village-3's common now proves its
+    // pasture, whose hides feed the tannery; no town of the 900 keeps a tannery's imported-livestock row beside the hides word at the
+    // merged line, so the claim (one canonical good, no second word) on a tanning house the hides word itself feeds: r2r-town-1
+    const s = town('r2r-town-1');
+    const tanners = liveInstitutions(s).find((i) => i?.name === 'Tanners');
+    expect(tanners && houseInputAtHand(s, 'livestock', tanners, { rawResource: 'livestock' }), 'the Tanners run on the bought word, the beasts\' one good (the anchor)').toBe('imported');
     expect((s.economicState?.primaryImports || []).map(String), 'the hides word stands (the anchor)').toContain('Raw hides and animal products');
     const imports = (s.economicState?.primaryImports || []).map(String);
     expect(imports.filter((x) => /^Livestock$/.test(x)), 'no "Livestock" beside the hides word').toEqual([]);

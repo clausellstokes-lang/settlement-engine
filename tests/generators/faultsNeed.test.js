@@ -5,7 +5,8 @@
 //   item 0   the need list never drops a need, by a live house's printed service row (J-INCOME-2's `NEED_DEALT_ROWS`), for a
 //            good a live house of the town is marked short of (`crisisStoppedRow.js :: rowShortOf`, the page's own mark): the
 //            Dairy farmer's "Short of livestock." beside a shepherd's "Livestock management" (bar0-village-calm-rand-29,
-//            r2r-village-47) keeps "Needed, and not brought in: livestock.".
+//            r2r-village-47) kept "Needed, and not brought in: livestock." (re-keyed by FR24 (1), 2026-11-18: the commons prove
+//            those pastures; the claim on r2r-town-54's Butchers and, after FR24 (2), bar0-town-calm-rand-29's Potter).
 //   item 1   THE ATOM (FR2): `domain/facts/needNotBroughtIn.js` states the need list in the record's own words, held EQUAL here to
 //            `importsAsPrinted(record).needed`, label by label, on every town this file births (the seventh read's thirty and the
 //            fixed towns of the other items) and on a constructed record for each branch of the page's reader; its copied tables
@@ -36,8 +37,19 @@ import { liveInstitutions } from '../../src/domain/institutions/institutionRoste
 
 /** The towns each item is held in, with the items each one holds (the controls beside them). */
 const TOWNS = Object.freeze({
-  'bar0-village-calm-rand-29': ['short'], // the 150: the Dairy farmer short of livestock, a shepherd's livestock management
-  'r2r-village-47': ['short'], // the 720: the same
+  // RE-KEYED BY IDENTITY (FAULTS-BIRTH, the chair's ruling FR24 (1), 2026-11-18): the Common grazing land now proves the pasture of
+  // bar0-village-calm-rand-29 and r2r-village-47 (FR21 (2)), so no house there is short of livestock. The same claim on towns of the
+  // 900 that bear it at the merged line, each anchor with its own house, good and the label its need list prints (`SHORT`, below).
+  // WHAT THESE ANCHORS NO LONGER PROVE (the second reader READ-BIRTH's M1 at the landing, written by the chair's hand, 2026-11-18):
+  // item 0's cure is one line of `tradeListDisplay.js :: dealtInHere` (a dealing row never drops a need a live house is short
+  // of), and neither anchor holds a dealing row (r2r-town-54 has no livestock service row; the Potter's clay no row can drop):
+  // with that line removed, this sample stays green. No town of the 900 still bears the old claim (a dealing row beside a
+  // house short of livestock), so the cure itself is guarded by the constructed record of item 0 alone; these anchors hold
+  // only that a short good stands on the printed need list. A weaker claim on real towns, named as such, not the same one.
+  'r2r-town-54': ['short'], // the 720: the Butchers (3-8) short of livestock; the list prints "Livestock for meat and draft"
+  // FR24 (2) (2026-11-18): bar0-village-famine-rand-41's common now proves the pasture whose hides feed its Tannery; the 150's anchor
+  // re-keyed by identity to a house short of its good beside that good's printed label: the Potter of bar0-town-calm-rand-29
+  'bar0-town-calm-rand-29': ['short'], // the 150: the Potter short of clay; the list prints "clay"
   'r2r-city-43': ['dealt'], // the 720: a fair's livestock auction, no house short of livestock (the need stays dropped)
   'r2r-metropolis-12': ['dealt'],
   'r2r-metropolis-19': ['dealt'],
@@ -115,10 +127,18 @@ describe('FAULTS-NEED item 0: the need list keeps a need a live house is marked 
       const dropped = neededWithoutRows(s).filter((n) => !needed.includes(n));
       expect(dropped.filter((n) => nouns.some((noun) => needMetBy(n, noun))), `${seed}: a need dropped beside a house marked short of it`).toEqual([]);
     }));
+    // FR24 (1): each anchor's own house, the good its mark names and the label its need list prints, asserted exactly
+    const SHORT = /** @type {Record<string, { house: string, good: string, label: string }>} */ ({
+      'r2r-town-54': { house: 'Butchers (3-8)', good: 'livestock', label: 'Livestock for meat and draft' },
+      'bar0-town-calm-rand-29': { house: 'Potter', good: 'clay', label: 'clay' },
+    });
     expectNoSeedFailures(collectSeedFailures(seedsOf('short'), (seed) => {
       const s = BORN.get(seed);
-      expect(markedNouns(s), `${seed} still marks a house short of livestock`).toContain('livestock');
-      expect(importsAsPrinted(s).needed, seed).toContain('livestock');
+      const { house, good, label } = SHORT[seed];
+      const inst = liveInstitutions(s).find((i) => i?.name === house);
+      expect(inst && rowShortOf(s, 'house', inst), `${seed}: the ${house} is marked short of ${good} (the page's own mark)`).toBe(good);
+      expect(importsAsPrinted(s).needed, `${seed}: "${label}" stands on the need list beside it`).toContain(label);
+      expect(needMetBy(label, good), `${seed}: the label names the good`).toBe(true);
     }));
     expectNoSeedFailures(collectSeedFailures(seedsOf('dealt'), (seed) => {
       const s = BORN.get(seed);

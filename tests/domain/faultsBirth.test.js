@@ -20,7 +20,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import * as HI from '../../src/domain/facts/houseInputAtHand.js';
-import { BIRTH_PICKS, idOfHouse, impliedGroundsOf, seedPicks, sourceStoryOf } from '../../src/domain/facts/supplyStory.js';
+import { BIRTH_PICKS, groundOfFamily, idOfHouse, impliedGroundsOf, seedPicks, sourceStoryOf } from '../../src/domain/facts/supplyStory.js';
 import * as HK from '../../src/domain/facts/houseKinds.js';
 import { birthPicksOn } from '../../src/generators/resourceGenerator.js';
 import { resourceShortageImport } from '../../src/domain/resourceSemantics.js';
@@ -29,6 +29,9 @@ import { liveInstitutions } from '../../src/domain/institutions/institutionRoste
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { chainCarrierOf } from '../../src/domain/facts/chainCarrier.js';
+import { resourceGapLines } from '../../src/domain/display/validationOnPage.js';
 
 await loadGenerationLawPayloads();
 
@@ -58,6 +61,15 @@ const RING = /** @type {Record<string, string[]>} */ ({
 });
 /** @param {any} s @returns {Set<string>} the grounds the record stores, live or spent */
 const storedOf = (s) => new Set([...(s.config?.nearbyResources || []), ...(s.config?.nearbyResourcesNative || []), ...(s.config?.nearbyResourcesDepleted || [])].map(String));
+
+const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+const CRISES = ['famine', 'indebted', 'infiltrated', 'insurgency', 'mass_migration', 'monster_pressure', 'occupied', 'plague_onset',
+  'politically_fractured', 'recently_betrayed', 'religious_conversion', 'slave_revolt', 'succession_void', 'under_siege', 'wartime'];
+/** The census's 720. */
+const CENSUS = [
+  ...SIZES.flatMap((size) => Array.from({ length: 60 }, (_, i) => `r2r-${size}-${i}`)),
+  ...CRISES.flatMap((c) => SIZES.flatMap((size) => Array.from({ length: 4 }, (_, i) => `r2s-${c}-${size}-${i}`))),
+];
 
 /** Towns of the 720 and the 150 holding a taker of the second ring on no stored ground of its own (measured at the base). */
 const RING_TOWNS = ['r2r-thorp-0', 'r2r-hamlet-1', 'r2r-hamlet-4', 'r2r-hamlet-18', 'r2r-village-2', 'r2r-village-20', 'r2r-village-36',
@@ -141,13 +153,60 @@ describe('FAULTS-BIRTH (a) · the second ring proves its ground as the first doe
     expect(seen, 'takers of the second ring on a stored ground (the anchor)').toBeGreaterThanOrEqual(4);
   }, 600_000);
 
-  test('and where the town\'s own exports name the ground\'s raw yield ("Furs and pelts": r2r-village-2), the ground is there', () => {
+  test('FR21 (4): an export proves no implied ground: the page reads the chain that carries it as transit', () => {
     const seed = groundSeedFor('hunting_grounds', false);
     const lodge = (/** @type {string[]} */ exports) => ({ ...built(["Hunter's lodge"]), economicState: { primaryImports: [], primaryExports: exports } });
-    expect([...birthPicksOn(lodge(['Furs and pelts']), seed)[BIRTH_PICKS].grounds], 'the exports name furs: there').toEqual([['hunting_grounds', 'there']]);
-    expect([...birthPicksOn(lodge(['Iron tools', 'Preserved foods']), seed)[BIRTH_PICKS].grounds], 'NEGATIVE: no export of its yield: the seed spends it').toEqual([['hunting_grounds', 'used']]);
+    expect([...birthPicksOn(lodge(['Furs and pelts']), seed)[BIRTH_PICKS].grounds], 'an exported "Furs and pelts": the seed still spends the ground').toEqual([['hunting_grounds', 'used']]);
+    expect([...birthPicksOn(lodge([]), groundSeedFor('hunting_grounds', true))[BIRTH_PICKS].grounds], 'POSITIVE CONTROL: a seed that leaves it there').toEqual([['hunting_grounds', 'there']]);
     const s = town('r2r-village-2');
-    expect(rowMarkText(s, 'house', liveInstitutions(s).find((i) => i.name === "Hunter's lodge")), 'r2r-village-2: the lodge at work beside its furs').toBeNull();
+    const furs = (s.economicState?.activeChains || []).find((/** @type {any} */ c) => (c.outputs || []).includes('Furs and pelts'));
+    expect(chainCarrierOf(furs, s).kind, 'r2r-village-2: the furs chain runs on passing trade').toBe('transit');
+    expect(HI.impliedGroundsOnPage(s).used, 'r2r-village-2: the lodge\'s hunting grounds read used up').toContain('hunting_grounds');
+  }, 600_000);
+
+  test('FR21 (4b): over the census\'s 720, no chain\'s own ground is a ground a house implies (the page\'s reader of a carrier)', () => {
+    let implied = 0;
+    expectNoSeedFailures(collectSeedFailures(CENSUS, (seed) => {
+      const s = town(seed);
+      for (const ground of impliedGroundsOf(s).states.keys()) {
+        implied++;
+        for (const c of (s.economicState?.activeChains || [])) if (c?.resourceKey === ground && chainCarrierOf(c, s).kind === 'own') throw new Error(`${c.label} carries ${ground} as its own`);
+      }
+    }), 'the census');
+    expect(implied, 'implied grounds read (the anchor)').toBeGreaterThan(200);
+  }, 1_800_000);
+
+  test('FR21 (3): on a river the fishing grounds a landing proves give fish and no salt; on the sea they give salt', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-village-38', 'r2r-village-39', 'r2s-under_siege-village-3', 'r2s-indebted-village-0', 'r2r-hamlet-18', 'r2s-religious_conversion-village-0'], (seed) => {
+      const s = town(seed);
+      if (!HI.impliedGroundsOnPage(s).there.includes('fishing_grounds')) throw new Error('no proven fishing grounds (the anchor)');
+      const works = liveInstitutions(s).find((i) => i.name === 'Salt works');
+      if (!works) throw new Error('no salt works (the anchor)');
+      const reach = HI.houseInputAtHand(s, 'desertSalt', works, { rawResource: 'desert_salt' });
+      if (reach === 'local') throw new Error('the salt works reads its salt local off a river');
+      if (!(s.resourceAnalysis?.imports?.critical || []).includes('desert_salt')) throw new Error('desert salt off the need list');
+    }), 'the six river towns');
+    const river = { config: { terrainType: 'plains', tradeRouteAccess: 'river' } };
+    const sea = { config: { terrainType: 'coastal', tradeRouteAccess: 'port' } };
+    expect(HI.impliedGroundGoods(river, 'fishing_grounds'), 'a river: fish, no salt').toEqual(['fishing_grounds', 'fish']);
+    expect(HI.impliedGroundGoods(sea, 'fishing_grounds'), 'NEGATIVE: the sea gives salt').toEqual(['fishing_grounds', 'fish', 'salt']);
+  }, 600_000);
+
+  test('FR21 (2): where a Common grazing land stands, the pick does not spend the pasture (the twelve towns of the 720)', () => {
+    const TWELVE = ['r2r-hamlet-52', 'r2r-hamlet-56', 'r2r-village-32', 'r2r-village-46', 'r2r-village-47', 'r2s-under_siege-hamlet-3',
+      'r2s-occupied-village-1', 'r2s-politically_fractured-hamlet-0', 'r2s-indebted-hamlet-2', 'r2s-succession_void-hamlet-0',
+      'r2s-monster_pressure-hamlet-3', 'r2s-mass_migration-hamlet-1'];
+    expectNoSeedFailures(collectSeedFailures(TWELVE, (seed) => {
+      const s = town(seed);
+      if (!liveInstitutions(s).some((i) => i.name === 'Common grazing land')) throw new Error('no common (the anchor)');
+      const shown = HI.impliedGroundsOnPage(s);
+      if (!shown.there.includes('grazing_land') || shown.used.includes('grazing_land')) throw new Error(`the pasture: ${JSON.stringify(shown)}`);
+      for (const i of liveInstitutions(s)) if (/^(Dairy farmer|Shepherd)$/.test(i.name) && /Short of /.test(rowMarkText(s, 'house', i) || '')) throw new Error(`${i.name} marked short beside the common`);
+    }), 'the twelve towns');
+    const seed = groundSeedFor('grazing_land', false);
+    // a dairy beside a shepherd is never a venture (FR8 (b)): the pair reads the pick alone
+    expect([...birthPicksOn(built(['Dairy farmer', 'Shepherd', 'Common grazing land']), seed)[BIRTH_PICKS].grounds], 'beside the common: the pasture there').toEqual([['grazing_land', 'there']]);
+    expect([...birthPicksOn(built(['Dairy farmer', 'Shepherd']), seed)[BIRTH_PICKS].grounds], 'NEGATIVE: no common: the seed spends it').toEqual([['grazing_land', 'used']]);
   }, 600_000);
 
   test('constructed: a lone woodcutter proves its wood (there or used up by the seed) and is never the failed venture; a lone charcoal burner can be', () => {
@@ -219,15 +278,103 @@ describe('FAULTS-BIRTH (c) · an isolated buyer of a material the land never hel
     expect(told, 'isolated buyers of a material a ground gives (the anchor)').toBeGreaterThanOrEqual(10);
   }, 600_000);
 
-  test('NEGATIVE: hides and wool imply no ground; a town on a connected road implies none for its buyers', () => {
-    const tanner = { ...built(['Tanner (established)', 'Blacksmith'], 'isolated'), resourceAnalysis: { gaps: [
+  // FR21 (1) (2026-11-18): the negative this test held (hides and wool imply no ground) is untrue by the chair's ruling; it is
+  // turned into the positive, and the negative is the luxury trade, whose goods no ground gives
+  test('FR21 (1): an isolated tanner reads its hunting grounds used up, a fuller its pasture; the luxury trade and a connected road imply none', () => {
+    const tanner = { ...built(['Tanner (established)', 'Blacksmith', 'Fuller'], 'isolated'), resourceAnalysis: { gaps: [
       { institution: 'Tanner (established)', chain: 'animal hides', kind: 'missing', impact: 'x' },
+      { institution: 'Fuller', chain: 'wool', kind: 'missing', impact: 'x' },
       { institution: 'Blacksmith', chain: 'iron ore', kind: 'missing', impact: 'x' }] } };
-    expect(HI.housesShortOf(tanner).has('Blacksmith'), 'the constructed smith is short (the anchor)').toBe(true);
-    expect(HI.impliedGroundsOnPage(tanner).used, 'POSITIVE: the isolated smith reads its iron used up; the tanner nothing').toEqual(['iron_deposits']);
+    expect(HI.housesShortOf(tanner).has('Tanner (established)'), 'the constructed tanner is short (the anchor)').toBe(true);
+    expect(HI.impliedGroundsOnPage(tanner).used, 'the smith\'s iron, the tanner\'s hunting grounds, the fuller\'s pasture').toEqual(['grazing_land', 'hunting_grounds', 'iron_deposits']);
+    expect(groundOfFamily('luxury'), 'NEGATIVE: the luxury trade has no ground').toBe('');
     const road = { ...tanner, config: { ...tanner.config, tradeRouteAccess: 'road' } };
-    expect(HI.impliedGroundsOnPage(road).used, 'on a connected road: no ground implied for a buyer').toEqual([]);
+    expect(HI.impliedGroundsOnPage(road).used, 'NEGATIVE: on a connected road: no ground implied for a buyer').toEqual([]);
   });
+
+  test('FR21 (1): every house the page marks short of hides or wool stands beside a used-up ground of its material (towns of the 720 and the 150)', () => {
+    const TOWNS = ['r2r-village-23', 'r2r-town-54', 'r2r-city-45', 'r2r-city-48', 'r2r-city-49', 'r2r-city-51', 'r2r-metropolis-9', 'r2r-metropolis-12',
+      'r2r-metropolis-38', 'r2r-metropolis-44', 'r2s-politically_fractured-town-2', 'r2s-indebted-town-3', 'r2s-mass_migration-town-2', 'bar0-town-calm-rand-29', 'bar0-city-wartime-rand-37'];
+    const GIVES = /** @type {Record<string, string[]>} */ ({ hides: ['hunting_grounds'], wool: ['grazing_land', 'alpine_pasture'] });
+    let seen = 0;
+    expectNoSeedFailures(collectSeedFailures(TOWNS, (seed) => {
+      const s = town(seed);
+      const depleted = new Set([...(s.config?.nearbyResourcesDepleted || []), ...HI.impliedGroundsOnPage(s).used]);
+      for (const i of liveInstitutions(s)) {
+        const m = /Short of (?:livestock or )?(hides|wool)\./.exec(rowMarkText(s, 'house', i) || '');
+        if (!m) continue;
+        seen++;
+        if (!GIVES[m[1]].some((g) => depleted.has(g))) throw new Error(`${i.name}: short of ${m[1]}, no ground of it under Depleted`);
+      }
+    }), 'the hides and wool towns');
+    expect(seen, 'houses short of hides or wool (the anchor)').toBeGreaterThanOrEqual(25);
+  }, 600_000);
+
+  test('FR21 (1): on a connected road beside a spent pasture whose word names no wool, the seed buys or refuses "Wool" itself', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-metropolis-4', 'r2r-metropolis-20'], (seed) => {
+      const s = town(seed);
+      if (!(s.config?.nearbyResourcesDepleted || []).includes('grazing_land')) throw new Error('no spent pasture (the anchor)');
+      if (!(s.economicState?.primaryImports || []).includes('Wool')) throw new Error('"Wool" not bought');
+      for (const i of liveInstitutions(s)) if (/^(Fuller|Weavers\/Textile workers)$/.test(i.name) && HI.housesShortOf(s).has(i.name)) throw new Error(`${i.name} short of wool`);
+    }), 'the wool bought');
+    const s = town('r2r-city-45');
+    expect((s.economicState?.primaryImports || []).includes('Wool'), 'NEGATIVE: r2r-city-45, the seed refuses: no "Wool"').toBe(false);
+    expect(HI.housesShortOf(s).get('Fuller'), 'r2r-city-45: the fuller idle, short of wool').toBe('wool');
+  }, 600_000);
+
+  test('FR23 (2): a Common grazing land whose pasture the record stores spent reads as every house on a spent ground of its own', () => {
+    const EIGHT = ['r2r-hamlet-53', 'r2r-village-15', 'r2r-village-20', 'r2r-village-49', 'r2s-infiltrated-village-0', 'r2s-plague_onset-village-1',
+      'r2s-succession_void-hamlet-3', 'r2s-monster_pressure-village-2'];
+    expectNoSeedFailures(collectSeedFailures([...EIGHT, 'r2r-hamlet-42', 'r2s-recently_betrayed-hamlet-2'], (seed) => {
+      const s = town(seed);
+      const common = liveInstitutions(s).find((i) => i.name === 'Common grazing land');
+      if (!common) throw new Error('no common (the anchor)');
+      if (!(s.config?.nearbyResourcesDepleted || []).some((/** @type {string} */ g) => g === 'grazing_land' || g === 'alpine_pasture')) throw new Error('no stored spent pasture (the anchor)');
+      if (rowMarkText(s, 'house', common) !== 'Short of livestock.') throw new Error(`the common's mark: ${rowMarkText(s, 'house', common)}`);
+      if (!resourceGapLines(s).some((/** @type {{ impact: string }} */ l) => /^The common grazing land is worked out: its own ground is depleted \(/.test(l.impact))) throw new Error('no worked-out line');
+    }), 'the commons on a stored spent pasture');
+    expectNoSeedFailures(collectSeedFailures(['r2r-hamlet-15', 'r2r-hamlet-22', 'r2r-village-4'], (seed) => {
+      const s = town(seed);
+      const common = liveInstitutions(s).find((i) => i.name === 'Common grazing land');
+      if (!common || !(s.config?.nearbyResources || []).includes('grazing_land')) throw new Error('no common on a live pasture (the anchor)');
+      if (rowMarkText(s, 'house', common)) throw new Error(`NEGATIVE: a common on its live pasture is marked: ${rowMarkText(s, 'house', common)}`);
+    }), 'the commons on a live pasture');
+  }, 600_000);
+
+  test('FR24 (2): the common proves its pasture for every reader: r2r-village-23 one story; an isolated fuller beside a common is fed', () => {
+    const s = town('r2r-village-23');
+    expect(HI.impliedGroundsOnPage(s).there, 'r2r-village-23: the pasture proven').toContain('grazing_land');
+    expectAbsentWithAnchor(HI.impliedGroundsOnPage(s).used, 'grazing_land', 'iron_deposits', 'r2r-village-23: no pasture under Depleted, its smith\'s iron still there');
+    expect(HI.housesShortOf(s).has('Fuller'), 'r2r-village-23: the Fuller at work').toBe(false);
+    const fuller = { ...built(['Fuller', 'Common grazing land'], 'isolated'), resourceAnalysis: { gaps: [{ institution: 'Fuller', chain: 'wool', kind: 'missing', impact: 'x' }] } };
+    const picked = birthPicksOn(fuller, groundSeedFor('grazing_land', false));
+    expect([...picked[BIRTH_PICKS].grounds], 'the common proves its pasture, there whatever the seed').toEqual([['grazing_land', 'there']]);
+    const lone = { ...built(['Fuller'], 'isolated'), resourceAnalysis: { gaps: [{ institution: 'Fuller', chain: 'wool', kind: 'missing', impact: 'x' }] } };
+    expect(HI.impliedGroundsOnPage(lone).used, 'NEGATIVE: no common: the isolated fuller reads its pasture used up').toEqual(['grazing_land']);
+  }, 600_000);
+
+  test('FR24 (2) over the census\'s 720: a proven pasture stands with a proving house (a common among them where no herder proves it), never under Depleted; no house short of livestock, wool or hides stands beside no used-up ground of it', () => {
+    /** @type {string[]} */
+    const bad = []; let proven = 0, short = 0;
+    expectNoSeedFailures(collectSeedFailures(CENSUS, (seed) => {
+      const s = town(seed);
+      const page = HI.impliedGroundsOnPage(s);
+      const depleted = new Set([...(s.config?.nearbyResourcesDepleted || []), ...page.used]);
+      for (const g of page.there) if (depleted.has(g)) bad.push(`${seed}: ${g} proven and Depleted`);
+      if (page.there.includes('grazing_land')) { proven++; if (!(impliedGroundsOf(s).houses.get('grazing_land') || []).length) bad.push(`${seed}: a proven pasture with no proving house`); }
+      const v = HI.ventureHouseOf(s);
+      for (const [name, noun] of HI.housesShortOf(s)) {
+        const fams = ['livestock', 'wool', 'hides'].filter((k) => new RegExp(`\\b${k}\\b`).test(noun));
+        if (!fams.length || v?.name === name) continue;
+        short++;
+        const gives = { livestock: ['grazing_land', 'alpine_pasture'], wool: ['grazing_land', 'alpine_pasture'], hides: ['hunting_grounds', 'grazing_land', 'alpine_pasture'] };
+        if (!fams.some((k) => gives[/** @type {'livestock'|'wool'|'hides'} */ (k)].some((g) => depleted.has(g)))) bad.push(`${seed}: ${name} short of ${noun}, no ground of it used up`);
+      }
+    }), 'the census');
+    expect(bad).toEqual([]);
+    expect(proven, 'towns with a proven pasture (the anchor)').toBeGreaterThan(150);
+    expect(short, 'houses short of livestock, wool or hides (the anchor)').toBeGreaterThan(40);
+  }, 1_800_000);
 
   test('the three views read the grounds alike in every anchor town', () => {
     expectNoSeedFailures(collectSeedFailures([...RING_TOWNS, ...ISOLATED_TOWNS], (seed) => {
