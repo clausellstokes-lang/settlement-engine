@@ -2578,3 +2578,15 @@ should be paused or archived by the owner's hand.
   `factLayers.walker` whole (15 of 15); the doors: classes fresh 0, stale 1; things fresh 0, stale 0. THE LINE
   (`lane/join-2026-11-14`, pull request #75) IS PUSHED AT THE CLOSE'S TIP WHEN THE WHOLE CHECK IS IN, THEN FAST-
   FORWARDED TO THE LANDINGS. THE FAULTS SEATS' BRANCHES LAND ON THE LANDINGS BRANCH after their readers.
+- 09:28 UTC, 2026-11-18 · FAULTS-PEOPLE HANDED BACK (09:27; tip 188602e96; hand-back
+  `docs/chair/2026-11-18/faults/FAULTS-PEOPLE-HANDBACK.md`): 14e cured in `personHooks.js :: truePersonHooks` (the
+  card's house and seats, read after the seats land; `npcData.js`'s ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER): runK 14e 1, 5,
+  4 to zero; C5296 gone, C5328 and C5358 still print; FR5: the fishmonger's twin in `poolMap.js :: settleTitleLines`
+  on `trade at work: fish taken here` (the reading at the settling step equals the final record's in 355 of 355
+  towns): the false line 3, 0, 7 to zero; no rule rises; moves: `plotHooks` in 1, 8, 11 towns, the presentation in 3,
+  0, 7; 48 OF THE 525 (the twin only); every other card byte-equal over the 900; left: the plain fishmonger's sibling
+  line (1 town). Stored figures named: the driven golden's hash, the observed shapes' one more read, the estate's
+  count. STATE OF THE ROUND AT THIS HOUR: DONE: TOOLS, NEED (its reader at work), PEOPLE; FINISHING: WATCH (its item
+  5 committed, its re-render running), DESKS (the Unsafe twin and its R7 tables), BIRTH (its tip's net running), ROWS
+  (FR12's three: two pushed, its renders about an hour). THE SHARED READER is seated when WATCH, DESKS and ROWS send
+  their final tips.
