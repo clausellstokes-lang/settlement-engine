@@ -416,7 +416,12 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       guardEffectivenessDesc = `The ${lawRef} ${many ? 'are' : 'is'} disciplined but resource-constrained: motivated with inadequate equipment and irregular pay. ` +
         `Effective in a fight; vulnerable to sustained corruption.${prisonNote}${wallNote}`;
     } else {
-      const drawn = voiceOf('standardPatrol', STANDARD_PATROL(lawRef)); // SW-B5 FRAMES: the original is index 0
+      // SW-B5 FRAMES: the original is index 0. BAR8-K-WATCH (13e, BAR8-AUDIT-K's 13e.hours; the seventh read's C42053): #18 is
+      // drawn WITH ITS DECLARATION, the seed's frame as `voiceOf` chooses it (no roll); "most hours of the day" presumes the force
+      // walks by day (the atom `force walks by day`, `forceHours.js`), and where every force's own text walks the night ("after
+      // dark", "walk the night") the refused frame resolves to an admitted line of the same pool (`drawDeclared`: only a refused
+      // winner moves).
+      const frames = STANDARD_PATROL(lawRef), drawn = String(drawDeclared([...frames.slice(0, 3), { text: frames[3], needs: ['force walks by day'] }], { draw: (pool) => pool[frames.indexOf(voiceOf('standardPatrol', frames))], facts: () => factsOf({ institutions }), key: `${getActiveRng()?.seed ?? ''}::safetyProfile:standardPatrol`, poolId: 'safetyProfile:STANDARD_PATROL', surface: 'defense', drawKind: 'T' }).text ?? frames[0]);
       guardEffectivenessDesc = (patrolTwin(lawRef, patrolCrisisOf(hasStress)) ?? drawn) + `${prisonNote}${wallNote}`; // TAIL-DISPLAY-CIVIC-3 V3: the draw kept, its twin
     }
   } else if (inst.hasCourtSystem) {

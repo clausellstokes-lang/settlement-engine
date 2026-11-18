@@ -105,6 +105,7 @@ export const LEAVES = Object.freeze({
   market: home('market', 1, ['institutions']),
   legalHouse: home('legalHouse', 1, ['institutions']), // BAR5-THINGS (LAW 4): a house of written law (`legalHouse.js`)
   paidWatch: home('paidWatch', 1, ['institutions']), // BAR6-PEOPLE (10e-house): someone is paid to keep order (`guardPay.js`)
+  forceWalksByDay: home('forceWalksByDay', 1, ['institutions']), // BAR8-K-WATCH (13e): the force walks by day, by its own text (`forceHours.js`)
   courtSits: home('courtSits', 2, ['availableServices', 'institutions']), // BAR6-CULTURE (6d-court): a court on the live roster (`defence.js :: courtHoldersOf`)
   appointedPost: home('appointedPost', 1, ['institutions']), // BAR5-THINGS (LAW 4): a post someone is named to (`appointedPost.js`)
   migration: home('migration', 1, ['stress', 'stressors']),
