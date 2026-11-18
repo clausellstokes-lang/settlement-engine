@@ -1,0 +1,146 @@
+{
+ "f0e60758a": [
+  [
+   "src/data/institutionDescVariants.js",
+   "armedForce",
+   "after-base: close-true",
+   "A billet and contracting office for a band of professional soldiers available between campaigns. With the roads held the",
+   "38ba15e3c2a308e4"
+  ],
+  [
+   "src/data/institutionDescVariants.js",
+   "armedForce",
+   "after-base: close-true",
+   "A billet and hiring office for professional soldiers idle between campaigns. No caravan leaves while the siege holds the",
+   "743cc96b12b6c45b"
+  ],
+  [
+   "src/data/institutionDescVariants.js",
+   "armedForce",
+   "after-base: close-true",
+   "Arrows by the sheaf, specialty broadheads, and commissioned composite bows from the guild's bowyers and fletchers. With ",
+   "d163baaf3dfdbc97"
+  ],
+  [
+   "src/data/institutionDescVariants.js",
+   "armedForce",
+   "after-base: close-true",
+   "Where a band of soldiers lodges and takes contracts between wars. While the siege holds the roads they hire out by the d",
+   "b50dee27dd04b260"
+  ],
+  [
+   "src/data/institutionDescVariants.js",
+   "armedForce",
+   "family",
+   "A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, ",
+   "a2cdeb4bcbf27797"
+  ],
+  [
+   "src/data/institutionDescVariants.js",
+   "quarters",
+   "after-base: close-true",
+   "Metropolitan cathedral. Seat of the highest regional religious authority. Its pilgrims cannot reach it while the siege h",
+   "522f88620a90790f"
+  ],
+  [
+   "src/data/institutionDescVariants.js",
+   "quarters",
+   "after-base: close-true",
+   "The metropolitan cathedral, seat of the region's highest prelate. No pilgrim reaches it while the siege holds the roads.",
+   "5c421f2f763ebdb8"
+  ],
+  [
+   "src/data/institutionDescVariants.js",
+   "quarters",
+   "word",
+   "Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.",
+   "c6fded0acf9197fb"
+  ],
+  [
+   "src/data/institutionDescVariants.js",
+   "temple",
+   "after-base: close-true",
+   "Metropolitan cathedral. Seat of the highest regional religious authority. Its pilgrims cannot reach it while the siege h",
+   "522f88620a90790f"
+  ],
+  [
+   "src/data/institutionDescVariants.js",
+   "temple",
+   "after-base: close-true",
+   "The great church of the metropolis. The region's chief religious authority sits here, and the faithful of the city fill ",
+   "fc8262cb8594256b"
+  ],
+  [
+   "src/data/institutionDescVariants.js",
+   "temple",
+   "after-base: close-true",
+   "The metropolitan cathedral, seat of the region's highest prelate. No pilgrim reaches it while the siege holds the roads.",
+   "5c421f2f763ebdb8"
+  ],
+  [
+   "src/generators/narrative/settlementOriginProse.js",
+   "openTrade",
+   "family",
+   "It stands roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what st",
+   "46a67ae06452f0b9"
+  ],
+  [
+   "src/generators/safetyProfile.js",
+   "clergy",
+   "family",
+   "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound t",
+   "26ba104371f73baf"
+  ],
+  [
+   "src/generators/safetyProfile.js",
+   "clergy",
+   "family",
+   "The settlement's chaplain also leads its armed men, and is authorizing military action for reasons that sound theologica",
+   "ad2781f9cea24c20"
+  ],
+  [
+   "src/generators/safetyProfile.js",
+   "garrison",
+   "implied",
+   "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound t",
+   "26ba104371f73baf"
+  ],
+  [
+   "src/generators/safetyProfile.js",
+   "streets",
+   "family",
+   "The streets are unusually quiet.",
+   "d0cb088496831e60"
+  ]
+ ],
+ "0af60594a": [
+  [
+   "src/data/institutionDescVariants.js",
+   "armedForce",
+   "after-base: owner-2026-11-18",
+   "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. While the",
+   "c57566e5bfaaf1a1"
+  ],
+  [
+   "src/data/institutionDescVariants.js",
+   "garrison",
+   "after-base: owner-2026-11-18",
+   "A billet and hiring office for professional soldiers idle between campaigns. No caravan leaves while the siege holds the",
+   "743cc96b12b6c45b"
+  ],
+  [
+   "src/data/institutionDescVariants.js",
+   "garrison",
+   "after-base: owner-2026-11-18",
+   "Where a band of soldiers lodges and takes contracts between wars. While the siege holds the roads they hire out by the d",
+   "b50dee27dd04b260"
+  ],
+  [
+   "src/domain/display/guardLineUnderTheLaw.js",
+   "prison",
+   "after-base: owner-2026-11-18",
+   " A court and a prison stand, but few offenders are ever brought to either.",
+   "85fc61848472a7ad"
+  ]
+ ]
+}
