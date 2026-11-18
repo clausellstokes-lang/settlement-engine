@@ -112,7 +112,7 @@ describe('FAULTS-ROWS item 1: the Annual fair offers no luxury the need list say
       expect([...set[0].excludes]).toEqual(['crisis: under_siege', 'need not brought in: luxury']);
       expect([...set[1].needs]).toEqual(['need not brought in: luxury']);
       expect([...set[1].excludes]).toEqual(['crisis: under_siege']);
-      expect(twin).not.toMatch(/luxur(?:y|ies) (?:goods )?(?:available|to be had)|on offer/i);
+      for (const offer of ['available', 'to be had', 'on offer']) expectAbsentWithAnchor(twin, offer, 'merchants', line);
     }
   });
 });
