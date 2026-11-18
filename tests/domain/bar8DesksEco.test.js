@@ -113,8 +113,8 @@ function deskLine(/** @type {string} */ desk, /** @type {string} */ block, /** @
 /** [line, desk, block, pool, the cured vid, its twin's vid, readings where the premise holds, readings where it fails] */
 const DESK_LINES = /** @type {Array<[string, string, string, string, number, number, Record<string, unknown>, Record<string, unknown>]>} */ ([
   ['12d · every essential is accounted for', 'economy', 'DS-ECO-8', 'POOR', 1, 5, band('secure'), band('pressured')],
-  ['12d · every essential, a town that buys its food', 'economy', 'DS-ECO-8', 'POOR', 1, 5, band('surplus'), band('importDependent')],
-  ['12d · every essential, a town in deficit', 'economy', 'DS-ECO-8', 'POOR', 1, 5, band('secure'), band('deficit')],
+  // 2026-11-18 (BAR8-DESKS-2, ruling BR28 (5)): the twin v5's band is narrowed to Pressured alone, so the two rows that held v5
+  // as the twin under `importDependent` and `deficit` move to the arm below (v1 and v5 are both refused there).
   ['11c · must come from elsewhere', 'economy', 'DS-ECO-12', 'CRITICAL IMPORT: a house needs what the land lacks', 2, 4, { criticalImportBroughtIn: true }, { criticalImportBroughtIn: false }],
   ['6 · buys the rest', 'general', 'DS-GEN-3', 'foodSecurity.label: Import-Dependent', 1, 7, band('importDependent'), band('deficit', 'importDependent')],
   ['6 · comes up the road', 'general', 'DS-GEN-3', 'foodSecurity.label: Import-Dependent', 2, 7, band('importDependent'), band('deficit', 'importDependent')],
@@ -123,6 +123,17 @@ const DESK_LINES = /** @type {Array<[string, string, string, string, number, num
 ]);
 
 describe('BAR8-DESKS-ECO · the desk lines: absent where the premise is false, the twin there', () => {
+  // BAR8-DESKS-2 (2026-11-18, ruling BR28 (5), vetoable): DS-ECO-8 POOR v5 keeps its words and is admitted at the food band
+  // Pressured alone; as declared (`food: ≤ pressured`) it stood under a deficit and a famine, beside "cannot grow or buy enough".
+  it('POOR v5 is admitted at Pressured alone; under Import-Dependent, Deficit and Famine neither v1 nor v5 (BR28 (5))', () => {
+    const { line, twin, admits } = deskLine('economy', 'DS-ECO-8', 'POOR', 1, 5);
+    expect([line?.vid, twin?.vid, twin?.marks]).toEqual([1, 5, ['crisis: any', 'food: = pressured']]);
+    const BANDS = ['famine', 'deficit', 'importDependent', 'pressured', 'secure', 'surplus'];
+    expect(BANDS.map((b) => [b, admits(line, over(band(b))), admits(twin, over(band(b)))])).toEqual([
+      ['famine', false, false], ['deficit', false, false], ['importDependent', false, false],
+      ['pressured', false, true], ['secure', true, false], ['surplus', true, false],
+    ]);
+  });
   it('where the premise fails the line is refused and its twin admitted; where it holds, the line and not the twin (every row)', () => {
     expectNoSeedFailures(collectSeedFailures(DESK_LINES, ([name, desk, block, pool, vid, twinVid, yes, no]) => {
       const { line, twin, admits } = deskLine(desk, block, pool, vid, twinVid);

@@ -2782,7 +2782,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "crisis: any",
-            "food: ≤ pressured"
+            "food: = pressured"
           ],
           "text": "{settlement} pays for what it must and nothing beyond, and it does not raise all the food it eats.",
           "slots": [

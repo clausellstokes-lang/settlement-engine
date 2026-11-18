@@ -1240,7 +1240,7 @@ contradict** it (R-DST-C).
 2. `[street · no hunger · food: ≥ secure]` The town gets by. Nobody is going without bread and nobody is building anything either.
 3. `[visitor · crisis: any]` In {settlement} the old buildings are patched and kept standing, and nothing new goes up.
 4. `[street · crisis: any]` Money is short in {settlement}, and most households spend what they earn as soon as it comes in.
-5. `[ledger · crisis: any · food: ≤ pressured]` {settlement} pays for what it must and nothing beyond, and it does not raise all the food it eats.
+5. `[ledger · crisis: any · food: = pressured]` {settlement} pays for what it must and nothing beyond, and it does not raise all the food it eats.
 
 **MODERATE** — *steady, thin margin* {crisis-scoped}
 1. `[ledger · crisis: any]` {settlement}'s treasury takes in a little more than it pays out each year. It is enough, and no more.
