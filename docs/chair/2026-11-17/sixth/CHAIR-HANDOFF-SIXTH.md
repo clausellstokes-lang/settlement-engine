@@ -2527,3 +2527,17 @@ should be paused or archived by the owner's hand.
   second home proved able to fail and tried on 600 fresh seeds; the five towns of item 0; wantBuy and R7; item 3's
   measure; the twin v6 read in ten towns and v1 in ten, R7 on the pool, the numbering; FR13; the rise of `11e.offer`,
   at a scratch merge with FAULTS-BIRTH's tip if that seat has finished).
+- 08:50 UTC, 2026-11-18 · FAULTS-WATCH HANDED BACK ITS FOUR (08:50; tip 21e363124; hand-back
+  `docs/chair/2026-11-18/faults/FAULTS-WATCH-HANDBACK.md`): (1) the crime-type "(lawless)" row reads `lawlessRow`
+  (r2r-city-41: 1 to 0); (2) FR9: a gate is a post and a levy at need walks no round: 3 and 8 to 0 in the 150 and the
+  720; 11 towns' guard line moves ("most hours of the day" to "patrols on a regular round"); 2 of the 525
+  (`town|germanic|plains|road|frontier` and `…|plagued`); (3) a power the power step gave no standing takes the final
+  roster's sentence: 2 and 14 towns to 0; 17 towns' `factions[].desc` move; 0 of 525; (4a) `trade at work` reads the
+  siege's stop: 5, 23 and 27 house-trade pairs to 0, held equal to the page's mark on 2,348 besieged houses; no printed
+  line moves; (4b) LEFT BY NAME: `impairedUnderSiege` reads the stored chain status (5 pairs in the 900): importing
+  the shown status' reader puts `chainStateShown.js` in the engine core beside two lazily pinned imports
+  (`engineCoreLazyEdge` red): the pin is `vite.config.js`'s, no seat's. No runner rule rises (runK's
+  `14a.descCopy.generic` 92 to 91). Stored figures: the golden 2 rows, the estate's count +1, the mutation manifest
+  +1. ITS ITEM 5 (the Legal row's prison read live; sent 07:10 while it worked) IS NOT IN THAT HAND-BACK: the seat is
+  still running (08:45), the queued message delivered at its turn's end: the chair waits for its next message and asks
+  once if none comes. THE SHARED READER (WATCH, PEOPLE, DESKS, ROWS) is seated when the four have handed back.
