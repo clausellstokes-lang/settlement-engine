@@ -141,6 +141,15 @@ describe('FAULTS-BIRTH (a) · the second ring proves its ground as the first doe
     expect(seen, 'takers of the second ring on a stored ground (the anchor)').toBeGreaterThanOrEqual(4);
   }, 600_000);
 
+  test('and where the town\'s own exports name the ground\'s raw yield ("Furs and pelts": r2r-village-2), the ground is there', () => {
+    const seed = groundSeedFor('hunting_grounds', false);
+    const lodge = (/** @type {string[]} */ exports) => ({ ...built(["Hunter's lodge"]), economicState: { primaryImports: [], primaryExports: exports } });
+    expect([...birthPicksOn(lodge(['Furs and pelts']), seed)[BIRTH_PICKS].grounds], 'the exports name furs: there').toEqual([['hunting_grounds', 'there']]);
+    expect([...birthPicksOn(lodge(['Iron tools', 'Preserved foods']), seed)[BIRTH_PICKS].grounds], 'NEGATIVE: no export of its yield: the seed spends it').toEqual([['hunting_grounds', 'used']]);
+    const s = town('r2r-village-2');
+    expect(rowMarkText(s, 'house', liveInstitutions(s).find((i) => i.name === "Hunter's lodge")), 'r2r-village-2: the lodge at work beside its furs').toBeNull();
+  }, 600_000);
+
   test('constructed: a lone woodcutter proves its wood (there or used up by the seed) and is never the failed venture; a lone charcoal burner can be', () => {
     const there = birthPicksOn(built(["Woodcutter's camp"]), groundSeedFor('managed_forest', true));
     expect([...there[BIRTH_PICKS].grounds], 'the woodcutter proves its wood, there').toEqual([['managed_forest', 'there']]);

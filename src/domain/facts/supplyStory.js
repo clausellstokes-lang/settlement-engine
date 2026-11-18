@@ -262,16 +262,26 @@ export function groundPicksAtBirth(record, seed) {
   const states = new Map();
   // FAULTS-BIRTH (FR8 (a)): A FACT OF THE RECORD IS NEVER UNSAID: where the town's own food record names the ground's food as
   // a source of what it eats ("its food is the day's catch": `foodLand.js`'s fishing row on water), the ground is there
-  const fed = arr(/** @type {{ foodSecurity?: { foodRecord?: { foodSources?: unknown } } } | null | undefined} */ (record?.economicState)?.foodSecurity?.foodRecord?.foodSources).map(str);
+  // and where the town's own exports name the ground's raw yield ("Furs and pelts" off the hunting grounds: r2r-village-2)
+  const es = /** @type {{ foodSecurity?: { foodRecord?: { foodSources?: unknown } }, primaryExports?: unknown } | null | undefined} */ (record?.economicState);
+  const fed = arr(es?.foodSecurity?.foodRecord?.foodSources).map(str);
+  const sold = arr(es?.primaryExports).map((x) => ` ${struck(x).replace(/[^a-z]+/g, ' ')} `);
   for (const ground of [...provingHouses(record).keys()].sort()) {
     const food = Object.prototype.hasOwnProperty.call(GROUND_FOOD, ground) ? GROUND_FOOD[ground] : '';
-    states.set(ground, food && fed.includes(food) ? 'there' : seedPicks(seed, `ground::${ground}`, SUPPLY_ODDS.groundThere) === false ? 'used' : 'there');
+    const words = Object.prototype.hasOwnProperty.call(GROUND_EXPORT, ground) ? GROUND_EXPORT[ground] : [];
+    const spoken = (!!food && fed.includes(food)) || sold.some((x) => words.some((w) => x.includes(` ${w} `)));
+    states.set(ground, spoken ? 'there' : seedPicks(seed, `ground::${ground}`, SUPPLY_ODDS.groundThere) === false ? 'used' : 'there');
   }
   return states;
 }
 
 /** FAULTS-BIRTH: the food record's own word for what a ground feeds the town (`foodLand.js :: foodSources`). */
 const GROUND_FOOD = Object.freeze(/** @type {Record<string, string>} */ ({ fishing_grounds: 'fish', river_fish: 'fish', grazing_land: 'livestock', hunting_grounds: 'game' }));
+/** FAULTS-BIRTH: the raw words of a ground's yield an export names whole (a worked good, "Iron tools", is none of them). */
+const GROUND_EXPORT = Object.freeze(/** @type {Record<string, ReadonlyArray<string>>} */ ({
+  hunting_grounds: Object.freeze(['game', 'furs', 'pelts', 'hides']), fishing_grounds: Object.freeze(['fish']), grazing_land: Object.freeze(['livestock', 'wool']),
+  managed_forest: Object.freeze(['timber']), iron_deposits: Object.freeze(['iron ore']), stone_quarry: Object.freeze(['stone']), marshlands: Object.freeze(['peat']),
+}));
 
 /** The word the imports list holds for a family's material ("Timber", "Salt"); '' where the list has none. @param {string} family */
 export const familyWord = (family) => (family === 'desertSalt' ? RUNS_ON_BOUGHT.salt_works : (Object.prototype.hasOwnProperty.call(IMPORT_WORD, family) ? IMPORT_WORD[family] : ''));
