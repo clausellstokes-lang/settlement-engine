@@ -2434,3 +2434,12 @@ should be paused or archived by the owner's hand.
   `list_events` with kind result: its metadata is as heavy as the thinking signatures). Extra usage is the owner's
   billing choice; no setting was touched. IF THE ALLOWANCE RUNS OUT: every seat has pushed as it went; a successor reads
   section 7 from here and the tasks' subjects.
+- 07:01 UTC, 2026-11-18 · J-INCOME-2's FOLLOW-UP IS IN (07:00; tip 3b419910f; three commits, read by the chair): 9b723bfdc: the
+  `importsAsPrinted` row of `factLayers.js` declares `availableServices` (its layer stays 4; AT THE LANDING THAT ROW
+  COLLIDES WITH THE CLOSE'S S2, which added `economicViability`: THE UNION OF BOTH READS, as its hand-back's section 8
+  says; with it the walker is 15 of 15 at a scratch merge on 0af60594a); 88e8958fd: the metal arm asks the live roster
+  for a forge house (`FORGE_HOUSE_WORDS` moved into the leaf unchanged and re-exported; a ruined forge prints no
+  sentence: the guard's new arm red at 262ba9ec6; the 900 records byte-equal, 13,646 ordinary-line reads equal);
+  81ac4096d: FS1 (a)'s note quotes the retired claim. `tradeListDisplay.js` untouched (the reader's MED 1 is
+  FAULTS-NEED's item 0). THE INCOME PIECE LANDS AT 3b419910f, then PDF-2b at cd94d5a08 (the leaf is J-INCOME-2's).
+  STILL OUT: DESKS-2's two commits (BR35); "WRITTEN" from CLOSE-DOORS-2; FAULTS-NEED's atom.
