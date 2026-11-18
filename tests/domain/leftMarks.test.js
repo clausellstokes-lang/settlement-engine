@@ -141,7 +141,11 @@ describe('M3 · the head line over a failed venture: no "marked short" sentence 
     expectNoSeedFailures(collectSeedFailures([...VENTURE_ONLY, 'r2r-city-20', 'r2r-hamlet-27'], (seed) => {
       const shown = printed(town(seed));
       if (VENTURE_ONLY.includes(seed)) expect(shown, `${seed}: the sentence on the Institutions and the Services tab`).toEqual({ inst: false, svc: false });
-      else expect(shown.inst, `${seed}: the sentence on the Institutions tab, over its short mark`).toBe(true);
+      else {
+        expect(shown.inst, `${seed}: the sentence on the Institutions tab, over its short mark`).toBe(true);
+        // LEFT-KEYS K7 (2026-11-18): the positive reads the Services tab too, as the negative does
+        expect(shown.svc, `${seed}: the sentence on the Services tab, over its short mark`).toBe(true);
+      }
     }), 'M3 rows');
   }, 900_000);
 });

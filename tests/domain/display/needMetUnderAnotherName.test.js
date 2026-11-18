@@ -38,12 +38,15 @@ describe('a need an import meets under another name is not a need left unmet (it
     expect(unmet.filter(([need, imp]) => needMetBy(need, imp))).toEqual([]);
   });
 
-  test('the leaf on the census\'s towns: r2r-city-0\'s luxury goods are met; r2r-town-17\'s mountain timber is not', () => {
+  // RE-KEYED BY IDENTITY 2026-11-18 (LEFT-KEYS K4, R8): the supply rule (BIRTH-3, BR4/BR5) has r2r-town-17 buy its timber in,
+  // so its mountain timber need is met now. The same claim on r2r-village-3 (a road, no crisis): its need of mountain timber
+  // is met by no import, under any name (one of the 720's five that print it needed).
+  test('the leaf on the census\'s towns: r2r-city-0\'s luxury goods are met; r2r-village-3\'s mountain timber is not', () => {
     const city = birthCensus('r2r-city-0');
     const cityLists = importsAsPrinted(city);
     expect(cityLists.arriving, 'anchored: the city brings in luxury textiles').toContain('Luxury textiles and exotic goods');
     expect(cityLists.needed.filter((n) => n === 'luxury goods')).toEqual([]);
-    const town = importsAsPrinted(birthCensus('r2r-town-17'));
+    const town = importsAsPrinted(birthCensus('r2r-village-3'));
     expect(town.needed).toContain('mountain_timber');
   }, 120000);
 });

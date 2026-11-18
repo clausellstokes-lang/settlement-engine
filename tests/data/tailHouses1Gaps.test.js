@@ -20,6 +20,12 @@ const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', mon
 
 /** A census town, as its births script makes it. */
 const bornCensus = (/** @type {string} */ seed) => {
+  // LEFT-KEYS K2 (2026-11-18): a town of the 150 (`bar0-`), as CENSUS-3 seedcfg.mjs's bar0- arm births it
+  const read = /^bar0-(thorp|hamlet|village|town|city|metropolis)-([a-z_+]+)-([a-z_]+)-\d+$/.exec(seed);
+  if (read) {
+    const route = read[3] === 'rand' ? {} : { tradeRouteAccess: read[3] };
+    return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...route, settType: read[1], selectedStressesRandom: false, selectedStresses: read[2] === 'calm' ? [] : read[2].split('+'), _randomizePriorities: true }), null, { seed, customContent: {} });
+  }
   const forced = /^r2s-(.+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/.exec(seed);
   const calm = /^r2r-(thorp|hamlet|village|town|city|metropolis)-\d+$/.exec(seed);
   const tier = forced ? forced[2] : /** @type {RegExpExecArray} */ (calm)[1];
@@ -38,46 +44,58 @@ const missing = (t, name) => (t.resourceAnalysis?.gaps || []).some((/** @type {a
  * the Glassblower's gap in r2r-city-5, r2r-town-16, r2r-town-32, r2r-town-8 and r2r-town-41, and the Sawmill of r2r-village-3
  * draws another text; each pair now names a town that still lacks the input and prints the same two texts (the two
  * Glassblower towns lie beyond the census's 720: none of the 720 prints those texts with the gap). */
+/** LEFT-KEYS K2 (2026-11-18; L12, R8): THE SUPPLY RULE (BIRTH-3, the chair's BR4/BR5) buys in, or finds on a ground the house
+ * proves, the input of 23 of the 31 pairs below: their houses' gap is `imported` or gone (the town has the input now), so the
+ * claim left them. Each pair is RE-KEYED BY IDENTITY where a town of the census's 720 (else the 150, `bar0-`) holds the same
+ * house with its gap still `missing` AND draws the same text's rewording, word for word: 11 pairs, each with a dated note.
+ * The other 12 are borne by no town of the 720 or the 150 and are RETIRED, listed below the table with their note (no
+ * Fishmonger and no Smelter lacks its input in either: a fish or ore buyer on a road buys it in). THE COUNT: 19 pairs (8 kept
+ * as they were, 11 re-keyed), 12 retired, of the 31. */
 /** [seed, house, the old text's opening (must not print), the rewording's opening (prints instead)] */
 const RED = [
-  ['r2r-village-4', 'Potter', 'Wheel-thrown pottery for domestic use.', 'A wheel and a small kiln for domestic pottery'],
-  ['r2r-town-17', 'Potter', 'Throws pottery at the wheel for the household', 'Pottery for the household'],
-  ['r2r-village-27', 'Potter', 'Domestic ware thrown on the wheel', 'A wheel and a modest kiln for domestic ware'],
-  ['r2r-town-10', 'Brickmaker', 'Moulds and fires clay bricks for construction.', 'Moulds and fires clay bricks for construction whenever clay can be had.'],
-  ['r2r-town-45', 'Brickmaker', 'Shapes and fires clay into bricks for building.', 'Shapes and fires clay into bricks for building, whenever clay can be had.'],
-  ['r2r-town-28', 'Brickmaker', 'Clay is moulded and fired into building brick here', 'Moulds and a kiln for building brick'],
+  ['r2r-town-54', 'Potter', 'Wheel-thrown pottery for domestic use.', 'A wheel and a small kiln for domestic pottery'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-village-4 (its clay bought in now)
+  ['r2r-city-48', 'Potter', 'Throws pottery at the wheel for the household', 'Pottery for the household'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-town-17 (its clay bought in now)
+  ['r2r-village-34', 'Potter', 'Domestic ware thrown on the wheel', 'A wheel and a modest kiln for domestic ware'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-village-27 (its clay bought in now)
+  ['r2r-city-48', 'Brickmaker', 'Moulds and fires clay bricks for construction.', 'Moulds and fires clay bricks for construction whenever clay can be had.'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-town-10 (its clay bought in now)
+  ['r2r-city-49', 'Brickmaker', 'Shapes and fires clay into bricks for building.', 'Shapes and fires clay into bricks for building, whenever clay can be had.'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-town-45 (its clay bought in now)
+  ['r2r-town-54', 'Brickmaker', 'Clay is moulded and fired into building brick here', 'Moulds and a kiln for building brick'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-town-28 (its clay bought in now)
   ['r2r-city-48', 'Vintner', 'Produces and ages wine', 'Presses and ages wine'],
   ['r2r-metropolis-9', 'Vintner', 'Makes and ages wine', 'A cellar of presses and casks for wine'],
   ['r2r-metropolis-54', 'Vintner', 'Wine pressed and matured, from local fruit or imported must, sold in bulk to the taverns', 'Wine pressed and matured from local fruit or imported must, when either comes to the cellar'],
-  ['r2r-hamlet-12', 'Dairy farmer', 'Keeps cattle or goats for milk, butter, and cheese.', 'A dairy for milk, butter, and cheese from cattle or goats'],
+  ['r2r-hamlet-56', 'Dairy farmer', 'Keeps cattle or goats for milk, butter, and cheese.', 'A dairy for milk, butter, and cheese from cattle or goats'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-hamlet-12 (its gap gone)
   ['r2r-hamlet-27', 'Dairy farmer', 'Keeps a herd of cattle or goats for milk', 'A dairy for milk, butter, and cheese, from a herd'],
-  ['r2r-village-14', 'Dairy farmer', 'Runs cattle or goats for their milk', 'Milk, butter, and soft cheese from cattle or goats, whenever livestock can be had.'],
-  ['r2r-city-22', 'Salt works', 'Evaporation pans or brine processing along the coast or riverbank.', 'Evaporation pans and brine-works, at work whenever brine can be had.'],
-  ['r2r-village-36', 'Salt works', 'Evaporation pans and brine-works turn the local saline source into salt', 'Evaporation pans and brine-works for making salt whenever brine can be had'],
-  ['r2r-town-29', 'Salt works', 'Salt is won from local brine', 'Broad evaporation pans, where salt is won from brine whenever brine can be had.'],
-  ['r2r-hamlet-18', 'Salt works', 'The works can operate only where a strong local brine source supports it.', 'Evaporates brine, whenever brine can be had'],
+  ['r2r-metropolis-58', 'Salt works', 'Evaporation pans or brine processing along the coast or riverbank.', 'Evaporation pans and brine-works, at work whenever brine can be had.'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-city-22 (its salt bought in now)
   ['r2r-hamlet-26', 'Charcoal burner', 'Turf-covered kilns burn wood slowly down to charcoal', 'Turf-covered kilns for burning wood slowly down to charcoal whenever wood can be had'],
-  ['r2r-town-17', 'Charcoal burner', 'What they make feeds the hottest fires in the settlement.', 'whenever wood can be had'],
-  ['r2r-hamlet-9', 'Charcoal burner', "A collier's kilns, smoking under their turf", "A collier's kilns under their turf, turning wood into charcoal whenever wood can be had"],
-  ['r2r-village-6', 'Sawmill', 'Expands construction and furniture output.', 'whenever logs can be had, for building and furniture'],
-  ['r2r-village-14', 'Sawmill', 'It lifts what building and furniture-making the village can do.', 'whenever logs can be had, for building and furniture-making'],
-  ['r2r-village-4', 'Sawmill', "widening the settlement's output", 'whenever logs can be had, for building timber and furniture'],
-  ['r2r-village-9', 'Tannery', 'Converts hides into leather using oak bark. Foul', 'Converts hides into leather using oak bark, whenever hides can be had.'],
-  ['r2r-village-14', 'Tannery', 'Turns hides to leather with oak bark. The stink', 'Turns hides to leather with oak bark, whenever hides can be had.'],
-  ['r2r-village-49', 'Fishmonger', 'Buys, salts, and sells fish. The link', 'Buys, salts, and sells fish, whenever fish can be had.'],
+  ['r2s-occupied-metropolis-3', 'Charcoal burner', 'What they make feeds the hottest fires in the settlement.', 'whenever wood can be had'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-town-17 (its gap gone); the same text, word for word
+  ['bar0-village-calm-rand-40', 'Sawmill', 'It lifts what building and furniture-making the village can do.', 'whenever logs can be had, for building and furniture-making'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-village-14 (its logs bought in now); no town of the 720 bears it, this one of the 150 does
+  ['r2s-plague_onset-village-2', 'Tannery', 'Converts hides into leather using oak bark. Foul', 'Converts hides into leather using oak bark, whenever hides can be had.'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-village-9 (its hides bought in now)
   // BAR4-CLOSE-SWEEP (2026-11-16, the chair's word of 16:44): re-keyed by identity from r2r-village-36, whose Fishmonger the record
   // now answers (BAR4-RECORD b7d3da983, R1, declared: the gap's writer reads the page's one reading; the town's food record names fish,
   // "Its own food is the day's catch", so the gap is `imported`, and the page agrees: no fish gap line, the house unmarked). Measured on
   // the 720 at 1a5678df0: 4 fishmongers still lack fish (r2r-village-49, a case above; r2r-village-57; r2s-succession_void-village-0;
   // r2s-monster_pressure-village-2), none drawing this row's "Buys the catch" variant; this one draws the third variant, so its own
   // pair (the old text of a2550c0ef, its rewording) is the anchor. The "Buys the catch" twin stays in the data (a reachable state).
-  ['r2s-succession_void-village-0', 'Fishmonger', 'Deals in fish: bought, salted', 'Deals in fish, whenever fish can be had'],
+  // (That pair is RETIRED 2026-11-18, LEFT-KEYS K2: below the table.)
   ['r2r-town-293', 'Glassblower', 'Small-scale glasswork: bottles', 'Small-scale glasswork, when sand can be had'],
   ['r2r-town-406', 'Glassblower', 'Glass worked on a small scale: bottles', 'Glass worked on a small scale, whenever sand reaches the furnace'],
   ['r2r-town-9', 'Glassblower', 'A modest glassworks making bottles', 'A modest glassworks for bottles'],
-  ['r2r-city-5', 'Smelter', 'Charcoal furnaces reduce raw ore to refined metal, cast in bars', 'Charcoal furnaces for reducing raw ore to refined metal whenever ore can be had'],
-  ['r2r-city-36', 'Smelter', 'Refines crude ore into workable metal over charcoal fire, and sells', 'Refines crude ore into workable metal over charcoal fire whenever ore can be had'],
 ];
+/** RETIRED 2026-11-18 (LEFT-KEYS K2; L12, R8): 12 pairs whose house now has its input in its own town (the supply rule buys it
+ * in, or the gap is gone) and that NO TOWN of the census's 720 or the 150 bears (the same house, its gap `missing`, the same
+ * text's rewording). Each as it stood:
+ *   ['r2r-village-14', 'Dairy farmer', 'Runs cattle or goats for their milk', 'Milk, butter, and soft cheese from cattle or goats, whenever livestock can be had.']
+ *   ['r2r-village-36', 'Salt works', 'Evaporation pans and brine-works turn the local saline source into salt', 'Evaporation pans and brine-works for making salt whenever brine can be had']
+ *   ['r2r-town-29', 'Salt works', 'Salt is won from local brine', 'Broad evaporation pans, where salt is won from brine whenever brine can be had.']
+ *   ['r2r-hamlet-18', 'Salt works', 'The works can operate only where a strong local brine source supports it.', 'Evaporates brine, whenever brine can be had']
+ *   ['r2r-hamlet-9', 'Charcoal burner', "A collier's kilns, smoking under their turf", "A collier's kilns under their turf, turning wood into charcoal whenever wood can be had"]
+ *   ['r2r-village-6', 'Sawmill', 'Expands construction and furniture output.', 'whenever logs can be had, for building and furniture']
+ *   ['r2r-village-4', 'Sawmill', "widening the settlement's output", 'whenever logs can be had, for building timber and furniture']
+ *   ['r2r-village-14', 'Tannery', 'Turns hides to leather with oak bark. The stink', 'Turns hides to leather with oak bark, whenever hides can be had.']
+ *   ['r2r-village-49', 'Fishmonger', 'Buys, salts, and sells fish. The link', 'Buys, salts, and sells fish, whenever fish can be had.']
+ *   ['r2s-succession_void-village-0', 'Fishmonger', 'Deals in fish: bought, salted', 'Deals in fish, whenever fish can be had']
+ *   ['r2r-city-5', 'Smelter', 'Charcoal furnaces reduce raw ore to refined metal, cast in bars', 'Charcoal furnaces for reducing raw ore to refined metal whenever ore can be had']
+ *   ['r2r-city-36', 'Smelter', 'Refines crude ore into workable metal over charcoal fire, and sells', 'Refines crude ore into workable metal over charcoal fire whenever ore can be had']
+ * The Salt works, the Charcoal burner, the Sawmill and the Tannery keep a pair of their own above; the Dairy farmer two. */
 
 /** [seed, house, the trade its description still names] — towns whose house HAS its input (no gap). */
 const KEEP = [

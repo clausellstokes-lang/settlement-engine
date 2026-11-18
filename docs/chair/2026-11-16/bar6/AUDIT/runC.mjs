@@ -22,6 +22,19 @@ const { law2 } = await L('law2.mjs');
 const { law3 } = await L('law3.mjs');
 const { law4n } = await L('law4.mjs');
 const { dossierTabs, parseDump } = await L('page.mjs');
+const { cardMark } = await L('law8H.mjs');
+/**
+ * LEFT-KEYS K6 (b), 2026-11-18: A SCENE OF FORGES IS DENIED ONLY WHERE EVERY FORGE HOUSE ON THE PAGE CARRIES A MARK. `6b-denied`
+ * (`law6.mjs`) took the page's first denial of iron (the mine's gap line, a "Short of iron" anywhere) as a denial of the forge
+ * scene, where the Blacksmiths and the Smelter are at work on bought-in iron (r2r-metropolis-45, -53, -59, -6: the chair
+ * probed all four). The forge houses are the scene's own makers (`law6.mjs :: GOODS.ironwork.maker`), read off the
+ * Institutions cards; a mark is the card's own (`law8H.mjs :: cardMark(...).any`). A town with no forge card keeps its row.
+ * (`law6.mjs` is not this seat's: a reading here, counted apart.)
+ */
+const FORGE_SCENE = /\b(new ironwork|ironwork|anvils?|forge fires|forges)\b/i;
+const FORGE_HOUSE = /smith|forge|foundry|smelter|armou?rer|metal/i;
+const clearedK6b = [];
+const forgeAtWork = (T) => { const forges = (T.cards || []).filter((c) => FORGE_HOUSE.test(c.name)); const bare = forges.filter((c) => !cardMark(c).any); return bare.length ? bare.map((c) => c.name) : null; };
 
 const [outDir, resultPath, ...controlFiles] = process.argv.slice(2);
 if (!outDir || !resultPath) { console.error('usage: runC.mjs <render-dir> <out.json> [second-check.json ...]'); process.exit(2); }
@@ -45,7 +58,9 @@ for (const f of dumps) {
   const T = readTownC(text, rec);
   // one instance a (rule, tab, line) in a town: an opened part prints a list again, and that is one line read twice
   const seenHere = new Set();
-  const mine = [...law6(T, seed), ...law7(T, seed)].filter((x) => { const k = `${x.rule}|${x.tab}|${x.line}`; if (seenHere.has(k)) return false; seenHere.add(k); return true; });
+  const atWork = forgeAtWork(T);
+  const mine = [...law6(T, seed), ...law7(T, seed)].filter((x) => { const k = `${x.rule}|${x.tab}|${x.line}`; if (seenHere.has(k)) return false; seenHere.add(k); return true; })
+    .filter((x) => { if (x.rule === '6b-denied' && FORGE_SCENE.test(x.line) && atWork) { clearedK6b.push({ ...x, atWork }); return false; } return true; });
   if (!mine.length && !controlFiles.length) continue; // with controls, every town's earlier laws are read
   // the earlier laws over the same town: which of my lines they already find
   let earlier = [];
@@ -77,11 +92,13 @@ if (process.env.TRACE) {
   }
 }
 fs.writeFileSync(resultPath, JSON.stringify(all, null, 1));
+fs.writeFileSync(resultPath.replace(/\.json$/, '.k6b-cleared.json'), JSON.stringify(clearedK6b, null, 1));
 
 const PRINTED = []; const say = (t) => { PRINTED.push(t); console.log(t); };
 process.on('exit', () => fs.writeFileSync(resultPath.replace(/\.json$/, '.txt'), PRINTED.join('\n') + '\n'));
 const by = (k, xs = all) => { const m = new Map(); for (const x of xs) { const key = k(x); const v = m.get(key) || { n: 0, towns: new Set(), lines: new Set() }; v.n++; v.towns.add(x.town); v.lines.add(norm(x.line)); m.set(key, v); } return m; };
 say(`towns ${dumps.length} · instances ${all.length} · towns with one ${new Set(all.map((x) => x.town)).size}`);
+say(`  (K6 (b): ${clearedK6b.length} 6b-denied forge scenes cleared in ${new Set(clearedK6b.map((x) => x.town)).size} towns: a forge house on the page at work, unmarked)`);
 for (const [k, v] of [...by((x) => x.law)].sort()) say(`${k}: towns ${v.towns.size} · instances ${v.n} · distinct lines ${v.lines.size}`);
 for (const [k, v] of [...by((x) => x.rule)].sort()) say(`  ${k.padEnd(13)} towns ${String(v.towns.size).padStart(4)} · instances ${String(v.n).padStart(4)} · distinct lines ${String(v.lines.size).padStart(4)} · found by an earlier law ${all.filter((x) => x.rule === k && x.earlier.length).length}`);
 

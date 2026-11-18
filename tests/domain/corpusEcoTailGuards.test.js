@@ -67,7 +67,12 @@ const GONE = [
   { seed: 'r2s-slave_revolt-city-2', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', gone: /None of the \{good\} used/, prints: 2, why: 'gems mined and luxury made here: "None of the luxury goods ... comes from the country here" (14987)' },
   { seed: 'r2s-monster_pressure-thorp-3', pool: 'DS-ECO-12::CRITICAL IMPORT: the land cannot give it', gone: /produces no \{good\}/, prints: 3, why: 'sacred wood exported: "produces no timber" (20355)' },
   { seed: 'r2r-metropolis-13', pool: 'DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks', gone: /produces none/, prints: 1, why: 'grain grown here: "the country around the metropolis produces none" (18237)' },
-  { seed: 'r2r-hamlet-12', pool: 'DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks', gone: /^Whatever \{good\}/, prints: 2, why: 'a dairy farmer and grazing land: "Whatever livestock ... must come from elsewhere" (28786; v2 now "A good part of")' },
+  // RE-KEYED BY IDENTITY 2026-11-18 (LEFT-KEYS K5, R8), ON A CONSTRUCTED RECORD: r2r-hamlet-12 no longer reads this pool (the
+  // supply rule, BIRTH-3, left its critical imports stone and salt, the terrain's form). NO BORN TOWN BEARS THE CASE: no town of
+  // the 720 or the 150 reads this pool for a good a live ground of its own land gives in part. So the claim is held on
+  // r2r-village-4 (a Dairy farmer beside live grazing land, and this pool's v2 drawn for its Sawmill's timber) with livestock
+  // "Required by Dairy farmer" put first among its critical imports (`CONSTRUCTED` below): the same case as the row was read in.
+  { seed: 'r2r-village-4', pool: 'DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks', gone: /^Whatever \{good\}/, prints: 2, why: 'a dairy farmer and grazing land (a constructed record): "Whatever livestock ... must come from elsewhere" (28786; v2 now "A good part of"; re-keyed from r2r-hamlet-12)' },
   // ── BATCH 2 · DS-GEN-13/17/18, DS-ECO-6/8/9/10: DECLARED (the replay's inheritor named) or REWORDED (the same vid) ──
   { seed: 'r2s-famine-metropolis-2', pool: 'DS-GEN-13::WAREHOUSES', gone: /fill after the harvest/, prints: 2, why: 'a famine: "warehouses fill after the harvest" of a harvest that failed (12197; v3 + `no crisis: famine`)' },
   { seed: 'r2s-occupied-metropolis-0', pool: 'DS-GEN-17::ADMINISTERED', gone: /keeps its own court and its own gaol/, prints: 3, why: 'an occupation: "keeps its own court and its own gaol" where the occupier holds them (21023; v1 + `no crisis: occupied`)' },
@@ -236,6 +241,19 @@ function configOf(seed) {
   throw new Error(`a guard seed is a census seed: ${seed}`);
 }
 
+/**
+ * LEFT-KEYS K5 (2026-11-18): a CONSTRUCTED record, where no born town of the 720 or the 150 bears a row's case: the born town
+ * with one fact of its record set to the case (named at its row). r2r-village-4 holds a Dairy farmer beside live grazing land;
+ * its critical imports gain livestock as that house's need, first, in the record's own reason form.
+ * @type {Record<string, (town: any) => any>}
+ */
+const CONSTRUCTED = {
+  'r2r-village-4': (town) => {
+    const imports = town.resourceAnalysis?.imports || {};
+    return { ...town, resourceAnalysis: { ...town.resourceAnalysis, imports: { ...imports, critical: ['livestock', ...(imports.critical || [])], reasons: { ...(imports.reasons || {}), livestock: 'Required by Dairy farmer but not available in Plains terrain' } } } };
+  },
+};
+
 /** @type {Map<string, Record<string, {e: Set<number>, d: Map<number, string>}>>} */
 const READ = new Map();
 
@@ -252,6 +270,7 @@ beforeAll(async () => {
   await boundary.loadGenerationLawPayloads();
   for (const seed of new Set([...GONE, ...KEEP].map((g) => g.seed))) {
     let town = generateSettlementPipeline(boundary.birthConfig({ ...DEFAULT_CONFIG, ...configOf(seed) }), null, { seed, customContent: {} });
+    if (Object.prototype.hasOwnProperty.call(CONSTRUCTED, seed)) town = CONSTRUCTED[seed](town);
     town = withPublicProse(town, composePublicProse(town));
     seen.cur = {};
     const ctx = { veiledRecord: publicVeiledRecordOf(town) };
