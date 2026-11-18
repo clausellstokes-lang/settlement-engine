@@ -376,7 +376,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // BAR6-SCENES (LAW 6 rule 6b; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary): the GOODS a scene
   // shows, beside the trades: `dairy`, `cloth`, `ironwork`, `herbs`, `spice`, `cut stone`, `woodwork`, each read from the page's
   // own lists (`tradeAtWork.js :: GOOD_TRADES`): "Someone is churning butter" beside "Common grazing land" and no dairy
-  'trade at work': dim({ shape: 'presence', home: 'tradeAtWork', keys: ['fish', 'kilns', 'clay kilns', 'charcoal kilns', 'stone', 'arcane', 'dairy', 'cloth', 'ironwork', 'herbs', 'spice', 'cut stone', 'woodwork', 'leather', 'dyed cloth'],
+  // BAR8-DESKS-2 (K's 15e; the chair's ruling BR34; vetoable by the owner, on the veto list as new vocabulary): `building`, a
+  // house whose own service is building stands and is not short (`tradeAtWork.js :: BUILDING_HOUSE_IDS`, by catalogue id);
+  // false where none stands. "Nothing new goes up" presumes its absence.
+  'trade at work': dim({ shape: 'presence', home: 'tradeAtWork', keys: ['fish', 'kilns', 'clay kilns', 'charcoal kilns', 'stone', 'arcane', 'dairy', 'cloth', 'ironwork', 'herbs', 'spice', 'cut stone', 'woodwork', 'leather', 'dyed cloth', 'building'],
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (typeof f.tradeAtWork === 'function' && key ? f.tradeAtWork(key) : undefined) }),
   // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary), beside the crisis
   // states the record holds as presences (famine, starving): a danger from outside is on its way, a live external-threat

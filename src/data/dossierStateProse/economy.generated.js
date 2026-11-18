@@ -2759,7 +2759,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "crisis: any"
+            "crisis: any",
+            "no trade at work: building"
           ],
           "text": "In {settlement} the old buildings are patched and kept standing, and nothing new goes up.",
           "slots": [

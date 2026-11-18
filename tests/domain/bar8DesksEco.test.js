@@ -225,3 +225,27 @@ describe('BAR8-DESKS-ECO · item 5: the brewer\'s tavern secret', () => {
     }), 'the brewers');
   });
 });
+
+// ---------------------------------------------------------------------------------------------------------------- 15e
+// BAR8-DESKS-2 (2026-11-18, the chair's ruling BR34; vetoable new vocabulary): DS-ECO-8 POOR v3 "… and nothing new goes up"
+// declares `no trade at work: building` (`tradeAtWork.js :: BUILDING_HOUSE_IDS`, by catalogue id): refused where a building
+// house stands and is not short; the atom FALSE, never unanswered, where none stands. The anchors: bar0-city-wartime-rand-38
+// (K's 15e of the 150: its Carpenters (5-15)) and bar0-town-occupied-rand-47 (the thirty's: its Brickmaker, whose own card
+// "knows every new wall going up"), beside two towns of the thirty and the 150 with no building house.
+describe('BAR8-DESKS-2 · 15e: `trade at work: building`, read the same on every form', () => {
+  it('the building towns refuse "nothing new goes up"; the towns with none admit it; never unanswered', () => {
+    const { line: v3, admits } = deskLine('economy', 'DS-ECO-8', 'POOR', 3, 0);
+    expect(v3?.marks).toContain('no trade at work: building');
+    // `over` calls a function with the base facts, so the keyed reader is handed as a function that returns it
+    expect([admits(v3, over({ tradeAtWork: () => () => false })), admits(v3, over({ tradeAtWork: () => (/** @type {string} */ k) => k === 'building' }))]).toEqual([true, false]);
+    const CASES = /** @type {Array<[string, boolean]>} */ ([['bar0-city-wartime-rand-38', true], ['bar0-town-occupied-rand-47', true], ['bar0-town-occupied-rand-45', false], ['bar0-town-calm-rand-31', false]]);
+    expectNoSeedFailures(collectSeedFailures(CASES, ([seed, building]) => {
+      const s = bornBar(seed);
+      for (const [form, r] of /** @type {Array<[string, any]>} */ ([['record', s], ['public', toPublicSafe(structuredClone(s))], ['the share veil', projectShareVeil(toPublicSafe(structuredClone(s)), null)]])) {
+        const f = factsOf(r);
+        expect(f.tradeAtWork('building'), `${seed} (${form}): a building house at work`).toBe(building);
+        expect(admits(v3, f), `${seed} (${form}): v3`).toBe(!building);
+      }
+    }), 'the building towns and the towns with none');
+  }, 240_000);
+});

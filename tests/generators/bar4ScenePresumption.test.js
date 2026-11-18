@@ -272,7 +272,9 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
     const { KILN_KINDS } = await import('../../src/domain/facts/tradeAtWork.js');
     // BAR6-SCENES (2026-11-16, LAW 6 rule 6b; re-keyed by identity): the goods a scene shows join the keys (`tradeAtWork.js :: GOOD_TRADES`)
     const { GOOD_TRADES } = await import('../../src/domain/facts/tradeAtWork.js');
-    expect([.../** @type {any} */ (FACT_DIMENSIONS)['trade at work'].keys].sort()).toEqual([...Object.keys(TRADE_HOUSES), ...Object.keys(KILN_KINDS), ...Object.keys(GOOD_TRADES)].sort());
+    // BAR8-DESKS-2 (2026-11-18, the chair's ruling BR34; re-keyed by identity): `building`, the building houses by catalogue id
+    // (`tradeAtWork.js :: BUILDING_HOUSE_IDS`), joins the keys; it has no house words (no arrival sense opens it)
+    expect([.../** @type {any} */ (FACT_DIMENSIONS)['trade at work'].keys].sort()).toEqual([...Object.keys(TRADE_HOUSES), ...Object.keys(KILN_KINDS), ...Object.keys(GOOD_TRADES), 'building'].sort());
   });
 
 });
