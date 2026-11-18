@@ -117,6 +117,9 @@ should be paused or archived by the owner's hand.
   "as i said before, i defer all judgement to you now nad in hte future". A standing deferral of judgement: the
   chair decides and reports; it names no act a permission check refuses (see CL24 in section 6); the merge, the
   deploy, every migration and production credentials stay the owner's hand.
+- **2026-11-18, 04:41:48 UTC:** "record the four" (the four fresh presumed-things rows that two permission checks had
+  refused to write on the chair's reading: the bowyers' siege twin, the hired company's two siege twins, the
+  court-and-prison twin; see CL23 in section 6).
 
 ## 2. What changed since the fifth chair's last state (13:54 UTC), read from origin
 
@@ -628,6 +631,14 @@ should be paused or archived by the owner's hand.
   verbatim and the rewording stopped; the owner was told so and that no answer is needed. CLOSE-DOORS-1B was told:
   nothing is written; its net stays red on exactly those four until the cure or the words. CL19 (THE NUMBERING)
   STANDS UNDER THE SAME DEFERRAL: the owner was shown the other choice and deferred.
+- **THE OWNER'S WORDS OF 04:41:48 UTC, 2026-11-18: "record the four" (04:42 UTC; CL24 IS WITHDRAWN, CL23 IS
+  RELEASED BY THE OWNER'S OWN WORDS).** After the chair told the owner (04:40) that its own permission check had
+  refused too and that the fast way needed the exact words, the owner wrote, the whole message: "record the four".
+  PASSED ON VERBATIM to CLOSE-DOORS-1B with its hour, the hour of the chair's question (04:38) and both refusals
+  that preceded it: the four are written as reviewed rows of `tests/lint/presumedThings.widened.register.json`,
+  each with its guarantee (CL23), one commit whose body quotes the owner; no page moves; a new refusal by the
+  seat's check would stand again. CLOSE-SWEEP's preparation of source cures (CL24) is withdrawn: the four sentences
+  stand as they are.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
