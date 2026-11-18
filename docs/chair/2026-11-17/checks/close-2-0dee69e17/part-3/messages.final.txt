@@ -1,0 +1,73 @@
+=== tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target
+AssertionError: 
+Claims with no resolvable @enforced-by tag:
+docs/chair/2026-11-17/left/LEFT-KEYS-HANDBACK.md:174  "1113, at both. `npx eslint` on the 18 changed script and test files: 0 problems."  (matched: 0 problems)
+docs/chair/2026-11-18/close/CLOSE-DOORS-1B-HANDBACK.md:144  "| f5 | dossier phone floors (B5) | the walk, probed at the 50 first-parent landings touching src/ | mobile Institutions "  (matched: zero violations)
+docs/chair/2026-11-18/close/CLOSE-SWEEP-HANDBACK.md:214  "| `npx eslint` on the branch's 8 changed code files | (S1: 0 on the four) | 0 problems |"  (matched: 0 problems)
+: expected [ …(3) ] to deeply equal []
+    at /home/user/t/close-2-0dee69e17/tests/docs/enforcement-claims.test.js:492:91
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+
+=== tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) the banked naked-claim debt is frozen PER CLAIM — a seventh cannot hide inside it
+AssertionError: 
+A NEW completeness claim landed carrying no resolvable @enforced-by tag. It does NOT show up in the pin above, because that pin is banked debt: it was already red on six claims and a seventh reds it identically. Tag the claim with the enforcer that actually proves it, or delete the claim:
+  docs/chair/2026-11-17/left/LEFT-KEYS-HANDBACK.md :: 0 problems: frozen 0, now 1 — the claims under this key:
+    docs/chair/2026-11-17/left/LEFT-KEYS-HANDBACK.md:174  "1113, at both. `npx eslint` on the 18 changed script and test files: 0 problems."
+  docs/chair/2026-11-18/close/CLOSE-DOORS-1B-HANDBACK.md :: zero violations: frozen 0, now 1 — the claims under this key:
+    docs/chair/2026-11-18/close/CLOSE-DOORS-1B-HANDBACK.md:144  "| f5 | dossier phone floors (B5) | the walk, probed at the 50 first-parent landings touching src/ | mobile Institutions "
+  docs/chair/2026-11-18/close/CLOSE-SWEEP-HANDBACK.md :: 0 problems: frozen 0, now 1 — the claims under this key:
+    docs/chair/2026-11-18/close/CLOSE-SWEEP-HANDBACK.md:214  "| `npx eslint` on the branch's 8 changed code files | (S1: 0 on the four) | 0 problems |"
+: expected [ …(6) ] to deeply equal []
+    at /home/user/t/close-2-0dee69e17/tests/docs/enforcement-claims.test.js:549:8
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+
+=== tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the EXECUTED corpus and the closures the producers ran and the write population is not empty
+AssertionError: expected 1748 to be 1741 // Object.is equality
+    at /home/user/t/close-2-0dee69e17/tests/lint/writerReach.walker.test.js:414:52
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+=== tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the frozen register the frozen corpusMeta EQUALS the observed-shape register corpusMeta — one corpus, two walkers
+AssertionError: corpusMeta.originCount must equal OSR's frozen value: expected 15106 to be 15031 // Object.is equality
+    at /home/user/t/close-2-0dee69e17/tests/lint/writerReach.walker.test.js:223:10
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+=== tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the frozen register the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count
+AssertionError: live corpusMeta.originCount still equals OSR's frozen value: expected 15106 to be 15031 // Object.is equality
+    at /home/user/t/close-2-0dee69e17/tests/lint/writerReach.walker.test.js:231:10
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+

@@ -1,0 +1,5 @@
+tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) every completeness claim carries an @enforced-by tag with ≥1 target
+tests/docs/enforcement-claims.test.js :: enforcement-claims meta-pin (A+ P1.1) the banked naked-claim debt is frozen PER CLAIM — a seventh cannot hide inside it
+tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the EXECUTED corpus and the closures the producers ran and the write population is not empty
+tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the frozen register the frozen corpusMeta EQUALS the observed-shape register corpusMeta — one corpus, two walkers
+tests/lint/writerReach.walker.test.js :: writer-with-no-reader ratchet: the frozen register the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count
