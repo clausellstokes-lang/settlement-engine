@@ -236,6 +236,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [crimeWave] BAR6-CRIME: `lawBand.js :: crimeWaveStands`
  * @property {boolean} [rivalRings] BAR7-DESKS: `rivalRings.js :: rivalRingsStand`
  * @property {boolean} [criticalImportBroughtIn] BAR8-DESKS-ECO: `criticalImportBroughtIn.js :: criticalImportBroughtInOf`
+ * @property {Readonly<Record<string, boolean>>} [needNotBroughtIn] FAULTS-NEED: `needNotBroughtIn.js :: needNotBroughtInOf`
  * @property {{ kept?: boolean, paid?: boolean, volunteers?: boolean }} [orderForce] BAR6-CRIME: `orderForce.js :: orderForceOf`
  * @property {string} [prosperity]
  */
@@ -488,6 +489,12 @@ export const FACT_DIMENSIONS = Object.freeze({
   // (`criticalImportBroughtIn.js`, held equal to the page's need list). "A good part of the {good} … must come from elsewhere"
   // presumes it ("copper ore" beside "Needed, and not brought in: copper ore.", bar0-city-wartime-rand-47).
   'critical import brought in': dim({ shape: 'presence', home: 'criticalImportBroughtIn', reader: (/** @type {FactsLike} */ f) => bool(f.criticalImportBroughtIn) }),
+  // FAULTS-NEED (the sixth chair's BRIEF-FAULTS ruling FR2, 2026-11-18; vetoable by the owner, on the veto list as new
+  // vocabulary), beneath `critical import brought in`: `need not brought in: <family>` = the page's own need list ("Needed,
+  // and not brought in: …", `tradeListDisplay.js :: importsAsPrinted().needed`) names a need of that family
+  // (`needNotBroughtIn.js`, held equal to the page's list). A line that presumes the good is had refuses it.
+  'need not brought in': dim({ shape: 'presence', home: 'needNotBroughtIn', keys: ['luxury', 'spice', 'silk', 'precious', 'salt', 'fuel', 'livestock'], // `needNotBroughtIn.js :: NEED_KEYS`, held equal by its guard
+    reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.needNotBroughtIn && typeof f.needNotBroughtIn === 'object' && key ? f.needNotBroughtIn[key] : undefined) }),
   exports: dim({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.length > 0 : undefined) }),
   // BAR6-SCENES (LAW 6 rule 6b "out"; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary), beneath
   // `exports`: `exported: <good>`, the export list names the good a scene sends out (`goodExported.js`): "Bolts of cloth and

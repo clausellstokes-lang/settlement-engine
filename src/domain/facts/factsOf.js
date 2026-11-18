@@ -196,6 +196,8 @@ export function factsOf(record, options = {}) {
     get imports() { return canonImports(record); },
     /** BAR8-DESKS-ECO (11c): the good the critical-import lens names is brought in (`criticalImportBroughtIn.js`) */
     get criticalImportBroughtIn() { return criticalImportBroughtInOf(record); },
+    /** FAULTS-NEED (FR2): the page's own need list names a need of the family (`needNotBroughtIn.js`) */
+    get needNotBroughtIn() { return needNotBroughtInOf(record); },
     /** the export list (`canonicalAccessors.js :: canonExports`) */
     get exports() { return canonExports(record); },
     /** the culture key (`resolveCulture.js :: resolveSettlementCulture`) */
@@ -277,3 +279,4 @@ import { rivalRingsStand } from './rivalRings.js'; // BAR7-DESKS (9i.crews): at 
 import { crimeWaveStands, lawBandOf } from './lawBand.js'; // BAR5-SAFETY (L2.law.collapsed): at the END, no line above moves; BAR6-CRIME: the crime wave
 import { criticalImportBroughtInOf } from './criticalImportBroughtIn.js'; // BAR8-DESKS-ECO (11c): at the END, no line above moves
 import { uprisingOf } from './uprising.js'; // BAR8-DESKS-DEF (12e): at the END, no line above moves
+import { needNotBroughtInOf } from './needNotBroughtIn.js'; // FAULTS-NEED (FR2): at the END, no line above moves

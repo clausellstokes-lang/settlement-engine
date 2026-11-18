@@ -197,6 +197,10 @@ export const LEAVES = Object.freeze({
   // BAR8-DESKS-ECO (11c): the good the critical-import lens names is brought in (`criticalImportBroughtIn.js`: the resource
   // analysis's critical list and reasons, stored at layer 3, and the economy's imports)
   criticalImportBroughtIn: home('criticalImportBroughtIn', 4, ['resourceAnalysis', 'economicState']),
+  // FAULTS-NEED (FR2): the page's own need list names a need of the family (`needNotBroughtIn.js`: the resource analysis's
+  // critical list and gap rows, stored at layer 3, the economy's lists and chains, the live roster and its service rows, the
+  // tier the luxury class's band reads, and the config the failed venture's pick reads)
+  needNotBroughtIn: home('needNotBroughtIn', 4, ['resourceAnalysis', 'economicState', 'institutions', 'availableServices', 'config', 'tier']),
   crimeSignal: leaf({ layer: 3, module: 'domain/crimeSignal.js', exported: 'crimeSignalOf', call: 'crimeLists', reads: ['powerStructure', 'institutions'] }),
   faith: home('faith', 3, ['institutions', 'config', 'economicState', 'powerStructure', 'npcs', 'stress'], {
     note: 'its value reads the config, the roster, the income and the factions (layer 3); it touches the cast (layer 3), banked; '

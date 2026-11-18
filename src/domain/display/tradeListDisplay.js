@@ -209,7 +209,7 @@ function importedByGapRow(settlement) {
  * spices' carriers (`CARRIED_GOOD_ROWS`) stay the chain card's. The failed venture's own material is never dealt in here
  * (a whole trade is not abandoned: BR6; r2r-hamlet-27's shepherd beside its failed venture of livestock is that fault, named).
  * @type {ReadonlyArray<readonly [string, RegExp]>} */
-const NEED_DEALT_ROWS = Object.freeze([
+export const NEED_DEALT_ROWS = Object.freeze([
   ['livestock', /^livestock (?:auctions?|management)$/i],
 ]);
 
