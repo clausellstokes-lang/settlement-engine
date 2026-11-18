@@ -2227,3 +2227,17 @@ should be paused or archived by the owner's hand.
   close: the estate's file count +1, `engineBundleReplay` 321 to 322. THE CHAIR READS ITS THREE TEST FILES ITSELF AT
   THE LANDING OF K-PEOPLE WITH IT (K-PEOPLE's `src/` was read by its first reader; the follow-up adds no source):
   no reader seat for it.
+- 05:38 UTC, 2026-11-18 · THE EARLY WHOLE CHECK ON THE FIVE-MERGE TREE IS WHOLE (close-1-1b0614950): CHECKS-1 14 names (33 at
+  the base), CHECKS-2 24 (57), CHECKS-3 42 (69; its 1aa2ced9b): 80 NAMES AGAINST 159, 79 GONE, NOT ONE NEW NAME IN ANY
+  PART. (The tree has moved since: the words seat's rulings, the two dead reads: the final whole check is run on
+  the close's last tip.) THE OWNER ASKED (05:36:31 UTC): "How useful would this be in practice (if you were to imagine)
+  for a DM days before session, minutes before session, during session, and to organize party choices after
+  session. The simulator is not to be included in this.": ANSWERED FIRST AND IN FULL, grounded in what the tree
+  holds (read before answering: the dossier's tabs; `TonightSheet.jsx`, `TableView.jsx`, `session/SessionMode.jsx`;
+  `NotesTab`, `ChronicleTab`, `EventComposer` and the 41 event types of `src/domain/events/registry.js`;
+  `PartyLinkView`): days before: the strongest use (a town that hangs together; hooks from its own facts; much to
+  read; about one MED false sentence a town at the last count); minutes before: the Tonight sheet (NOT checked by
+  the reads: said so); during: a reference, the weakest of the four (five-second lookups against rich prose); after:
+  a ledger as good as the fit between the party's deeds and the 41 events (it tracks the town, not the party; the
+  chair saw no per-character reputation record and said it had not searched thoroughly). Said plainly that the
+  chair has not sat at a table with it.
