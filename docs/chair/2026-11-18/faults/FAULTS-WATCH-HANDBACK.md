@@ -189,3 +189,77 @@ Scratch merge (N5) not run: this round's prompt names no line tip to merge again
   Nothing prints falsely by it in the 900 (BR25 (5)). The brief's count was 16 (the Dyer); mine is 5 by house-trade pair.
 - `scripts/mutation-coverage-manifest.json`: the guard's entry (not on my row).
 - runK's 13e.hours detector reads a gate as the day (FR9's blind spot), in the auditor's file, not mine.
+
+## FR19 / FR22 · items 6 and 7 (the chair's rulings FR19, FR22)
+
+Base 3c19fd1d8 (cleared to land by FR19). Tip a1fb0e825. Commits: 4e9e730c9 (item 6), d99ee9635 (its guard arms), ec2ed1e01
+(FR22 (2) as ruled), 6359fb44b (item 7), 7a34980a5 (FR22 (2) as measured: DS-GEN-17 back to the base; a re-key), a1fb0e825
+(the guard's anchors read from the pool). Files beyond my row, each given by the ruling: `threatAssessment.js` (one hunk; no
+line moves). `generalStateProse.js` is byte-equal to 3c19fd1d8 at the tip. Item 7 lives in `servicesGenerator.js` (398 lines,
+ceiling 400); `institutionServices.js` is untouched.
+
+**Item 6 · the threat assessment (FR22 (1), as built).** `buildThreatAssessment`'s internal-security line reads the court by
+`defence.js :: courtHoldersOf` and the prison by `defenceOf(r).prison`, the functions the Legal Infrastructure row reads; it
+reads no `compound.inst` flag now. The words are the function's own four branches, unchanged (no new text): court and gaol
+"Arrest, trial and gaol all work here."; court only "Cases are heard here, but there is almost nowhere to hold anyone.";
+gaol only "People are locked up without trial."; neither "No court and no gaol; order rests on whoever is armed."
+DECLARED MOVES (view-time; no stored field, the golden's hash moves 0): the line in 49 of the 900 (thirty 3 · the 150 8 ·
+the 720 38), each now the branch its own Legal row names, on the PDF's DefenseSecurity (the only surface that prints it):
+- "Arrest, trial and gaol all work here." → "People are locked up without trial." (Legal row "Prison only"), 11: the
+  thirty: bar0-town-calm-rand-46, bar0-town-occupied-rand-47; the 150: bar0-town-calm-rand-30; the 720: r2r-town-5, -15, -25,
+  r2s-insurgency-town-1, r2s-mass_migration-town-2, r2s-plague_onset-town-2, r2s-under_siege-town-2, -3.
+- "Cases are heard here, but there is almost nowhere to hold anyone." → "No court and no gaol; order rests on whoever is
+  armed." (Legal row "None": a town hall the stamped flag called a court), 38: the thirty: bar0-town-occupied-rand-45; the 150:
+  bar0-town-calm-rand-29, -32, -40, bar0-town-occupied-rand-29, -34, -37, -41; the 720: r2r-town-4, -7, -8, -20, -22, -24, -26,
+  -27, -33, -36, -45, -48, -50, r2s-famine-town-2, r2s-indebted-town-1, -3, r2s-infiltrated-town-2, r2s-mass_migration-town-1,
+  r2s-monster_pressure-town-0, r2s-plague_onset-town-0, -3, r2s-recently_betrayed-town-2, -3, r2s-religious_conversion-town-0,
+  r2s-slave_revolt-town-3, r2s-succession_void-town-0, -1, -3, r2s-under_siege-town-1, r2s-wartime-town-3.
+Read whole against each page: the new line agrees with the Legal row and its note in all 49; in 15 of them the desk's own
+"X keeps no court and no gaol …", which the base line contradicted, now agrees with it. Named, not built (FR22 (4)):
+`cultureProfiles.js:421`'s "Court officers, … overlap." (6 of the 49) and "Commercial disputes resolved outside the courts"
+(3); the stored `guardEffectivenessDesc`. The 525: the threat assessment differs in 4 configurations (not state prose: no
+manifest row).
+
+**Item 6 · DS-GEN-17 (FR22 (2), MEASURED, A DEVIATION FOR THE CHAIR'S VETO).** As ruled (ec2ed1e01) the key read the live
+prison. Measured after: DS-GEN-17's ADMINISTERED pool declares the LIVE court and prison on every variant (v1, v2 `court
+sits` + `prison`; v3 `court sits`; v4 `no court sits` + `prison`; v5 `no court sits` + `no prison`), so the base prints a true
+line in every state, the ruin included: r2r-city-41 with its prison ruined draws, at the base, "In Nokhoiabad the law keeps a
+building of its own." (no gaol). The ruled key only swapped that true line for another ("… pays wages for its defense as well
+as keeping its walls.") and reddened `tests/ui/generalDeskTabFlow.test.js` (its fixture holds no prison and draws v5 "… has
+no court sitting and no gaol in use.", also true). So `generalStateProse.js` is the base's again (7a34980a5): 0 moves in the
+900 and the 525 (the dossier prose manifest's DS-GEN-17 rows: 0 configurations). FR19's "keys ADMINISTERED ('keeps its own
+court and its own gaol')" was the key, not the printed line: v1 is refused by its own declarations wherever no gaol stands.
+
+**Item 7 · the Holding cells (FR22 (3)).** After the houses' rolls (the lawless row's mechanism, `courtHoldersOf({ institutions,
+availableServices: buckets })`, the Legal row's court over the services drawn), the Small prison/stocks' "Holding cells" takes
+the chair's twin where no court sits, exactly "Short-term detention until a fine is paid." (label kept); where a court or a
+bench sits it is unchanged. NEW TEXT (the chair's words, on the owner's veto list), three towns: r2r-town-5, r2r-town-15,
+bar0-town-calm-rand-30. DECLARED MOVE (stored): `availableServices.legal[].desc` in 11 of the 900 (the same 11 as the
+"People are locked up without trial." towns above; thirty 2 · the 150 1 · the 720 8), every other leaf of every record equal
+to 3c19fd1d8's. The row prints in 31 of the 900: the twin in exactly the 11 whose Legal row reads "Prison only", the original
+in the 20 with a court or a bench ("Court + Prison" 12, "Town hall bench + Prison" 4, "Council bench + Prison" 4). 300 FRESH
+(r2r-<tier>-200..249): the row in 17, the twin in exactly the 3 "Prison only" (r2r-town-221, -225, -234), the original in the
+14 others; against the same 300 born at 3c19fd1d8 only those 3 leaves move. Services tab and PDF Institutions alike (2 lines a
+town); `toPublicSafe` carries the twin in all 11 and nowhere else. THE 525: 1 configuration moves,
+`town|germanic|mountain|random_trade|civilized|gm-seed-c`, field family `availableServices` (the row's text is stored).
+
+**The pages, base against tip, the 900 re-born and re-rendered whole:** every record equal but those 11 leaves; exactly 49
+dumps differ, by the 49 threat lines and the 11 towns' two Holding cells lines; nothing else (DS-GEN-17 unchanged).
+
+**The guard** (19 tests over 15 seeds): the ruin arm (r2r-city-41, its prison ruined): the Legal row "Court only", the desk's
+"court without detention", the atoms `court sits` true and `prison` false, the threat line "Cases are heard here, …" (no gaol),
+DS-GEN-17 drawing v3, never v1 (anchors computed by `variantByVid`); unruined, the full chain everywhere. The born arm
+(r2r-town-5, r2r-town-4): the threat line says what the Legal row says. Item 7's arm: the twin exactly where no court sits;
+r2r-town-5's twin in the record, `toPublicSafe` and the share veil; bar0-town-calm-rand-35 and r2r-town-1 unchanged. RED at
+3c19fd1d8 (4 of 19), green at the tip. MUTATIONS, each red, unmutated green: the threat line's court set back to the stamped
+flag; its prison to the flag; the cells' court read without the drawn services; the twin never written. `court or gaol` (FR6)
+is not on my base: the arm reads its two halves.
+
+**The net, base 3c19fd1d8 against the tip, each alone:** strict typecheck, ratchet, eslint, `tests/architecture` (import
+classes kept: `threatAssessment.js` imports `facts/defence.js`, whose two imports it already reached), `tests/joins` green at
+both; the 169 older test files the same by name and message but two, RE-KEYED BY IDENTITY: `tailDisplayCivic2Batch1`
+(its court-without-gaol arm from r2s-famine-town-2, Legal row "None", to r2s-famine-town-0, "Court only") and
+`generalDeskTabFlow` (green again with DS-GEN-17 restored, unchanged). `tests/lint`: the same as the base by name and message
+(`proseDrawnAnchors` caught the guard's literal DS-GEN-17 anchors: cured in a1fb0e825). STORED FIGURES MOVED (the close's;
+none re-taken): the generation worker 2,561,848 → 2,562,117 B (+269, item 7; the ceiling 2,356,121 is exceeded at the base
+too); the golden master, 1 more configuration (`…|gm-seed-c`, item 7).
