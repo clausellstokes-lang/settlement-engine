@@ -235,6 +235,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [monsterFrontier] BAR6-DEFDESK: `monsterFrontier.js`
  * @property {boolean} [crimeWave] BAR6-CRIME: `lawBand.js :: crimeWaveStands`
  * @property {boolean} [rivalRings] BAR7-DESKS: `rivalRings.js :: rivalRingsStand`
+ * @property {boolean} [criticalImportBroughtIn] BAR8-DESKS-ECO: `criticalImportBroughtIn.js :: criticalImportBroughtInOf`
  * @property {{ kept?: boolean, paid?: boolean, volunteers?: boolean }} [orderForce] BAR6-CRIME: `orderForce.js :: orderForceOf`
  * @property {string} [prosperity]
  */
@@ -470,6 +471,12 @@ export const FACT_DIMENSIONS = Object.freeze({
   // record names no grain (`ownPlots.js`): a line that gives the record's one source as what every table leans on first refuses it.
   'own plots': dim({ shape: 'presence', home: 'ownPlots', reader: (/** @type {FactsLike} */ f) => bool(f.ownPlots) }),
   imports: dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.length > 0 : undefined) }),
+  // BAR8-DESKS-ECO (J's 11c.needed, 11c.venture, 11c.idle; BRIEF-BAR8 DESKS-ECO item 2, the chair's BR17 (3); vetoable by the
+  // owner, on the veto list as new vocabulary), beneath `imports`: `critical import brought in` = the good DS-ECO-12's critical
+  // import lens fills `{good}` with (a house needs it and the land lacks it) is one an import of the stored list brings
+  // (`criticalImportBroughtIn.js`, held equal to the page's need list). "A good part of the {good} … must come from elsewhere"
+  // presumes it ("copper ore" beside "Needed, and not brought in: copper ore.", bar0-city-wartime-rand-47).
+  'critical import brought in': dim({ shape: 'presence', home: 'criticalImportBroughtIn', reader: (/** @type {FactsLike} */ f) => bool(f.criticalImportBroughtIn) }),
   exports: dim({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.length > 0 : undefined) }),
   // BAR6-SCENES (LAW 6 rule 6b "out"; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary), beneath
   // `exports`: `exported: <good>`, the export list names the good a scene sends out (`goodExported.js`): "Bolts of cloth and

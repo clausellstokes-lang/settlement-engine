@@ -192,6 +192,8 @@ export function factsOf(record, options = {}) {
     get ownPlots() { return ownPlotsOf(record, liveInstitutionNames(/** @type {{ institutions?: unknown }} */ (record))); },
     /** the import list (`canonicalAccessors.js :: canonImports`) */
     get imports() { return canonImports(record); },
+    /** BAR8-DESKS-ECO (11c): the good the critical-import lens names is brought in (`criticalImportBroughtIn.js`) */
+    get criticalImportBroughtIn() { return criticalImportBroughtInOf(record); },
     /** the export list (`canonicalAccessors.js :: canonExports`) */
     get exports() { return canonExports(record); },
     /** the culture key (`resolveCulture.js :: resolveSettlementCulture`) */
@@ -271,3 +273,4 @@ export function birthFactsOf(partial = {}, worldLaw = null) {
 import { orderForceOf } from './orderForce.js'; // BAR6-CRIME: the force that keeps order
 import { rivalRingsStand } from './rivalRings.js'; // BAR7-DESKS (9i.crews): at the END, no line above moves
 import { crimeWaveStands, lawBandOf } from './lawBand.js'; // BAR5-SAFETY (L2.law.collapsed): at the END, no line above moves; BAR6-CRIME: the crime wave
+import { criticalImportBroughtInOf } from './criticalImportBroughtIn.js'; // BAR8-DESKS-ECO (11c): at the END, no line above moves
