@@ -1771,3 +1771,13 @@ should be paused or archived by the owner's hand.
   page-law helpers are running on the merged tree. THE PLAN FOR PUSHES: the merge branch
   `lane/landing-close-2026-11-18` is pushed for the seats to fetch (no CI runs on a lane branch); THE LINE ITSELF
   IS PUSHED ONCE, at the end, as a fast-forward to the close's final tip: one CI run on pull request #75.
+- 04:21 UTC, 2026-11-18 · CL16 CROSSED A COMMIT (the chair's miss: it moved the fork census's A4 without asking the seat
+  that held it): CLOSE-DOORS-1B had already taken A4 under its own list (ed8601e54, unpushed: the register's five
+  cells laid to DEBT-2 and to FISH-ROWS's named patch, A4's two literals 13 to 14 and 13 to 14, the contract's
+  POST-STEP tally and count, the observed site `npcData.js` 1678 to 1683). RULED "KEEP": A4 IS 1B's AND DONE;
+  CLOSE-DOORS-2 KEEPS A6's COUNT AND A1 and stops its A4 bisect. A6 IS TAKEN AND READ (DOORS-2's 536a04fb6): 23 to
+  54, ONE caller, `people/rareSecrets.js :: dealRareSecrets` (SECRETS-1, point 30): thirty keyed readings (three
+  kinds for the probe row's ten named people) and one of the place; every hashed string is the seed, a fixed key and
+  the person's own id; draw-free by the file's own header; the 23 older strings stand byte for byte; BIRTH-3 adds no
+  caller. LEFT-KEYS (04:17): K1 to K5 and K8 in at b112c6ccc; its tip 9bbc4c19d adds K7, K9 and K6's detectors (no
+  test of the whole check reads them): the tip is what merge 3 took.
