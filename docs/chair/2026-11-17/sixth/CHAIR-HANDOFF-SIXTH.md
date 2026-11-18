@@ -500,6 +500,21 @@ should be paused or archived by the owner's hand.
   false). WHY NOT "THE CENSUS FIRST": the census wave is a build, not a re-take; the close moves no town and no page
   (C5); the debt is recorded by name and dated, as both earlier closes did. VETOABLE; it goes on the pull request's
   list with the figures.
+- **CL15 (03:53 UTC, 2026-11-18; CLOSE-SWEEP's S3: THE SITE-COHERENCE ROW THAT GREW).** THE FINDING (the seat's, by
+  bisect over the first-parent merges): the two towns are Arm A `desert/thorp/road/latin@scw0-a5` and
+  `desert/hamlet/road/arabic@scw0-a5`; point 5 (a010f4f9c) reads dunes, point 6 (0ecd003d6, BAR6-RECORD at
+  04ef95b44) reads a mountain flank; the cause is BAR6-RECORD (b) e9b36b024's DECLARED move (raw sand is exported
+  only where a glasshouse stands: neither town has one, Coal takes the fifth export slot) meeting the old arm order
+  at `siteGenesis.js:252` (cbbf04c55, 2026-07-17: a coal, ore or stone export reads as a flank before the dry-biome
+  arm), the same reading that gives the seven rows already banked. The site deriver did not move; no seat cured it
+  on purpose. THE RULING: NO CURE AT THE CLOSE (re-ordering the arm re-sites every dry town that exports coal, ore
+  or stone: C5); THE INVENTORY IS RE-RECORDED THROUGH ITS OWN DOOR, as 84e7bdd5e (LANDING-7 A) and 8e5915353 (the
+  tail round's close) did: the print-only literal written by hand, `frozenAt` the measured commit, both rows
+  (`desert|mountain-flank|coal` 7 to 9, `desert|dunes|(biome)` 30 to 28) and the totals before and after said for
+  the owner; any OTHER moved row is a stop. The act is CLOSE-DOORS-1B's; the finding stays word for word in
+  CLOSE-SWEEP's hand-back. FOR THE PULL REQUEST'S KNOWN FAULTS: a desert town that exports coal is drawn on a
+  mountain slope (nine of the 462 reference towns, two more than before); its cure is a wave of the site-coherence
+  plan, after the deploy.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
@@ -1582,3 +1597,15 @@ should be paused or archived by the owner's hand.
   HAS NOT YET ANSWERED: the host's allowance (03:10), the worker bundle's ceiling (03:24). A read-only compiler is
   making THE VETO LIST for points 33 to 53 (every new or changed sentence verified by grep at 70e557d5b; it reads
   `/home/user/k`: that checkout is not moved until it reports).
+- 03:53 UTC, 2026-11-18 · THE CLOSE, AS IT STANDS: rulings CL14 (the corpus reading's new claims are owed by name;
+  each over-claim licensed by its line's own declaration or left red; sent to CLOSE-DOORS-1A at 03:48) and CL15 (the
+  site-coherence inventory re-recorded through its door; sent to CLOSE-SWEEP and CLOSE-DOORS-1B). CHECKS-1 (33
+  names) and CHECKS-2 (57 names) of `close-0-70e557d5b` show nothing outside the known list; CHECKS-3 still runs.
+  The chair's own run of the coverage job's command (in `/home/user/k`, log `/home/user/wk/close0.coverage.log`)
+  still runs. J-INCOME-2 HANDED BACK AGAIN (03:49): tip e031be41c; BR26 is cc7ebb708 alone (the five rows moved by
+  hand; both doors print the base's last line: fresh 0, stale 151); ON BR33 (2) THE SEAT DID NOT DO AS RULED: it
+  ADDED THE ROSTER ROW (df4e0e85a) and did not read the live roster through the filter ("the live filter changes 0
+  lines of 900, and the leaf stays import-free for PDF-2's copy"): THE CHAIR READS THAT BEFORE THE LANDING AND RULES
+  (the landing is after the deploy; nothing waits on it now); three counts each +1 by its files, named for the
+  second close (the ruin roster 115 to 116, the estate's file count, the mutation manifest lists
+  `bar8Income.test.js`); FS1 (a) is the one red at a merge, by the cure.
