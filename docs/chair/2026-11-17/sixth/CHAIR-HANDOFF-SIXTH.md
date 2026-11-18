@@ -2092,3 +2092,16 @@ should be paused or archived by the owner's hand.
   the prominent tie in 1 town of the 150. LEFT: item 3's guard arms, items 4, 5, 6. THE CHAIR TAKES IT UP AFTER THE
   PULL REQUEST IS READY (it is after-deploy work; the question for the owner is put then, in plain words, with what
   a saved town would see).
+- 05:10 UTC, 2026-11-18 · THE OWNER ASKED (05:09:26 UTC): "tell me all of hte after deploy work?": ANSWERED FIRST AND IN FULL, in
+  eight parts: (1) the five built pieces that wait to land, each with what it fixes on a page (the income lines and
+  the PDF; the marks' follow-up; the watch and the powers; the people, stopped on the saved towns' re-deal; the two
+  desks), each after its reader, one at a time; (2) the second, smaller close and a second pull request; (3) the
+  next read of thirty (the last: 37 MED by the stronger measure); (4) the known faults nobody has built (the fish
+  lines left, the fair's luxuries, r2r-hamlet-27's birth fault, the brewer's secret, two granary lines, the
+  "Prison only" desk line, the supply rule's leftovers, the "court or gaol" form); (5) five questions (the saved
+  towns' re-deal put to the owner when its time comes; the other four decided by the chair under the deferral and
+  told); (6) the repairs of the checking tools found at this close (the vids guard; the matcher of the name slot
+  and the verb; two dead reads; the validator that cannot open; the probe's wait for the lazy panel; the recorded
+  rows to be given declarations; variety owed in two pools); (7) what is tabled for the owner's word (the map work,
+  the worker file's size, the slow ratchet arm); (8) the owner's own steps after the deploy (the edge functions, the
+  release proof, one save a shared town, the old account's sessions). THIS LIST IS THE CHAIR'S AFTER-DEPLOY QUEUE.
