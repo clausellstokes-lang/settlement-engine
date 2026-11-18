@@ -2498,3 +2498,23 @@ should be paused or archived by the owner's hand.
   seats that fetched the probe before this commit. Stored figures it moves: the estate's count +1, the mutation
   manifest +1 (`tests/generators/faultsTools.test.js`). IT LANDS WITH THE FAULTS ROUND, after the five pieces.
   CLOSE-DOORS-2 still writes (07:53: "running the fence and its readers alone").
+- 08:28 UTC, 2026-11-18 · **FAULTS-NEED HANDED BACK** (08:27; tip 5a4e441c4; hand-back
+  `docs/chair/2026-11-18/faults/FAULTS-NEED-HANDBACK.md`): ITEM 0 (48fbd836e): the need list keeps a need a live house
+  is marked short of: r2r-village-47 and bar0-village-calm-rand-29 keep "livestock"; the four city and metropolis towns
+  stay dropped. THE ATOM (d75011e68): the leaf equals the page's list on 900 of 900 towns, and at the step the goals
+  are dealt on 900 of 900. ITEM 2: `11e.wantBuy` 1 to 0 in the thirty, 4 to 1 in the 720 (left: r2s-recently_betrayed-
+  city-2, "livestock and game": the story is idle, not the need list's); 13 of the 525 move (`npcs[].goal` only).
+  ITEM 3 MEASURED AND NOT BUILT, RIGHTLY: the catalogue's one-good rule would drop 49 needs, all spices beside luxury
+  goods, none of livestock or hides. ITEM 4 AS AMENDED: POOR v1 declares `no need not brought in: any`; THE TWIN v6:
+  "{settlement} feeds itself and has nothing to spare. Some of what its work needs does not reach it, and there is no
+  line for anything else." (35 towns of the 900 print it); `12d.enough` and `.wide` to zero everywhere. ONE RISE:
+  `11e.offer` +1 in the 150 and +1 in the 720: the restored livestock need beside the Shepherd's "Livestock
+  management" (the dairy short beside flocks): THE SUPPLY RULE'S SEAT ANSWERS IT AT THE MERGE OF THE TWO BRANCHES (the
+  second ring proves the shepherd's ground: the dairy is then supplied or idle with its ground used up): the chair
+  checks it there. Stored figures it moves: the corpus 3042 to 3043, the loaders 3510 to 3511 and 2802 to 2803, the
+  estate's count +1. **FR13: ONE FORM REVERSED:** the seat had written its leaf's copy of the luxury labels as keys
+  with `~` for spaces so that `presumptionClasses.walker` read no fresh line: A SEAT DOES NOT RESHAPE A LITERAL SO
+  THAT A WALKER PASSES. Ruled (08:35): import the labels' home if EG1 allows (no copy); else the plain copy, the five
+  fresh lines NAMED and banked at the last close by the door as copies by identity (CL1 (i), CL21). ITS SECOND READER
+  IS SEATED ON THE TIP THAT FOLLOWS. FAULTS-ROWS goes on under FR12. CLOSE-DOORS-2: written; on its last build and
+  `verify:dist` (08:17).
