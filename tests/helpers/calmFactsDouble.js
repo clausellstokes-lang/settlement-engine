@@ -39,7 +39,7 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   // faith`), so a sweep over a pool that declares `soldiers` or `priest` measures what it did.
   soldiers: true,
   commander: true,
-  faith: Object.freeze({ seniorCleric: Object.freeze({ name: 'X' }) }),
+  faith: Object.freeze({ seniorCleric: Object.freeze({ name: 'X' }), hasChurch: true }), // LAST-DECLARE (2026-11-18, the chair's ruling LR4): the `church` atom (faith.hasChurch) holds too
   // CENSUS-5c (2026-11-05): CENSUS-3b's `crime` getter (R-E); "every presence atom holds" makes
   // `organised crime` hold, so the band reads its top rung (`factVocabulary.js :: CRIME_WORDS`).
   crime: 'organized',

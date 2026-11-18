@@ -110,7 +110,20 @@ describe('item 5 · the safety profile\'s two lines leave the build guard\'s doo
   });
   test('the quiet streets in the file read by that rule, and no hit of the line is stock', () => {
     const scanned = scanSource('src/generators/safetyProfile.js', src).filter((r) => /unusually quiet/.test(r.text));
-    expect(scanned.map((r) => [r.text, r.decl.tierKey])).toEqual([['The streets are unusually quiet.', true]]);
+    // LAST-DECLARE (2026-11-18, the chair's ruling LR4): the line stands in exactly three places, each read gated by the
+    // tier: its print site (the door call that resolves it on the tier) and its declared sibling set in `SAFETY_LINE_SIBLINGS`
+    // (the set's key and its first member, `needs: tier: ≥ village`). A fourth literal anywhere else is red here.
+    const Q = 'The streets are unusually quiet.';
+    const lines = src.split('\n');
+    const where = (/** @type {{ pool: string, line: number }} */ r) => {
+      const at = lines[r.line - 1] ?? '';
+      if (r.pool === 'generateSafetyProfile' && at.includes(`resolveSibling('${Q}', SAFETY_LINE_SIBLINGS`)) return 'the print site';
+      if (r.pool === 'SAFETY_LINE_SIBLINGS' && at.startsWith(`  '${Q}': Object.freeze([Object.freeze({ text: '${Q}', needs: Object.freeze(['tier: ≥ village']) })`)) return 'the declared set (key, member)';
+      return `elsewhere (${r.pool}, line ${r.line})`;
+    };
+    expect(scanned.map((r) => [r.text, r.decl.tierKey, where(r)])).toEqual([
+      [Q, true, 'the print site'], [Q, true, 'the declared set (key, member)'], [Q, true, 'the declared set (key, member)'],
+    ]);
     expect(rows.filter((h) => /unusually quiet/.test(h.text))).toEqual([]);
   });
   test('the war profiteers\' line names no leather, and no goods word of it is a hit', () => {
