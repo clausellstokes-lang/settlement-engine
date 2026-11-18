@@ -174,6 +174,22 @@ describe('FAULTS-BIRTH (a) · the second ring proves its ground as the first doe
     expect(implied, 'implied grounds read (the anchor)').toBeGreaterThan(200);
   }, 1_800_000);
 
+  test('FR21 (3): on a river the fishing grounds a landing proves give fish and no salt; on the sea they give salt', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-village-38', 'r2r-village-39', 'r2s-under_siege-village-3', 'r2s-indebted-village-0', 'r2r-hamlet-18', 'r2s-religious_conversion-village-0'], (seed) => {
+      const s = town(seed);
+      if (!HI.impliedGroundsOnPage(s).there.includes('fishing_grounds')) throw new Error('no proven fishing grounds (the anchor)');
+      const works = liveInstitutions(s).find((i) => i.name === 'Salt works');
+      if (!works) throw new Error('no salt works (the anchor)');
+      const reach = HI.houseInputAtHand(s, 'desertSalt', works, { rawResource: 'desert_salt' });
+      if (reach === 'local') throw new Error('the salt works reads its salt local off a river');
+      if (!(s.resourceAnalysis?.imports?.critical || []).includes('desert_salt')) throw new Error('desert salt off the need list');
+    }), 'the six river towns');
+    const river = { config: { terrainType: 'plains', tradeRouteAccess: 'river' } };
+    const sea = { config: { terrainType: 'coastal', tradeRouteAccess: 'port' } };
+    expect(HI.impliedGroundGoods(river, 'fishing_grounds'), 'a river: fish, no salt').toEqual(['fishing_grounds', 'fish']);
+    expect(HI.impliedGroundGoods(sea, 'fishing_grounds'), 'NEGATIVE: the sea gives salt').toEqual(['fishing_grounds', 'fish', 'salt']);
+  }, 600_000);
+
   test('constructed: a lone woodcutter proves its wood (there or used up by the seed) and is never the failed venture; a lone charcoal burner can be', () => {
     const there = birthPicksOn(built(["Woodcutter's camp"]), groundSeedFor('managed_forest', true));
     expect([...there[BIRTH_PICKS].grounds], 'the woodcutter proves its wood, there').toEqual([['managed_forest', 'there']]);

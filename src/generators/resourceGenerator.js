@@ -18,7 +18,7 @@ import { availableNativeResourceKeys, nativeResourceConditionRecords, resourceSh
 import { waterAccessKind, hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
 import { MATERIAL_RESOURCE_KEYS, liveMaterialFor } from './economy/localMaterials.js';
 import {
-  CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseHead, houseInputAtHand, houseRunsChain, housesOnSpentGround, housesWantingTradeInput,
+  CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseHead, houseInputAtHand, houseRunsChain, impliedGroundGoods, housesOnSpentGround, housesWantingTradeInput,
   localProducerSupplies, terrainSynonymsFor, tradeFinisherIn, ventureHouseOf, worksTheGround, inputMissingBeforeStory,
 } from '../domain/facts/houseInputAtHand.js';
 import { ALSO_USES, BUYS_AND_WORKS, IMPLIED_GROUND, IMPORT_WORD, KEEPS_OR_YIELDS, MATERIAL_OF, RUNS_ON_BOUGHT, SOURCE_GROUNDS, isSourceHouse } from '../domain/facts/houseKinds.js';
@@ -885,7 +885,7 @@ export const generateResourceAnalysis = (
   // with the generator's seed; it builds no chain and no export (the economy's hour is past: the audit's V2)
   const storyRecord = birthPicksOn({ config, economicState, institutions: nativeInstitutions }, seed); // BIRTH-3 (BR8): the one place the seed enters
   const proven = impliedGroundsShown(storyRecord).there
-    .flatMap((g) => [g, ...(/** @type {Record<string, { commodities?: string[] }>} */ (RESOURCE_DATA)[g]?.commodities || [])]);
+    .flatMap((g) => impliedGroundGoods(storyRecord, g)); // FAULTS-BIRTH FR21 (3): a river's fishing ground gives no salt
   const imports        = buildViabilityReport(
     terrainType,
     nativeInstitutions,
