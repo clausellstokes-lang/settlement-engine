@@ -72,13 +72,21 @@ const fishedOut = (/** @type {any} */ s) => (s?.config?.nearbyResourcesDepleted 
 describe('BAR8 J-INCOME item 1: the ordinary income lines in an import-free leaf', () => {
   it('the leaf imports nothing, and the generator module re-exports its very objects', () => {
     const src = readFileSync(new URL('../../src/domain/display/incomeOrdinaryLines.js', import.meta.url), 'utf8');
-    expect(src.match(/^\s*import\b/m), 'the leaf is import-free (ruling EG1)').toBeNull();
+    // the chair's ruling of 2026-11-18: the leaf's one import is the ruin filter (`institutionRoster.js`, itself import-free)
+    expect([...src.matchAll(/^\s*import\b.*?from '([^']+)'/gm)].map((m) => m[1])).toEqual(['../institutions/institutionRoster.js']);
     const names = Object.keys(leaf);
     expect(names).toContain('ordinaryIncomeLineOf');
     for (const k of names) expect(/** @type {Record<string, unknown>} */ (siblings)[k], k).toBe(/** @type {Record<string, unknown>} */ (leaf)[k]);
     // the reading is the one it was: a short twin under no mark gives the trade's ordinary line; any other line, null
     expect(leaf.ordinaryIncomeLineOf(leaf.CLOTH_SHORT_LINE, { institutions: [{ name: 'Weavers guild' }] })).toBe(leaf.CLOTH_WORKED_LINE);
     expect(leaf.ordinaryIncomeLineOf(leaf.METAL_WORKED_LINE, { institutions: [] })).toBeNull();
+  });
+  it('the roster is read live: a ruined weavers\' house weaves nothing (the chair\'s ruling of 2026-11-18)', () => {
+    const weavers = { name: 'Weavers guild' };
+    // a fulling house stands at work beside it: the live roster still finishes cloth (the positive beside the negative)
+    expect(leaf.ordinaryIncomeLineOf(leaf.CLOTH_SHORT_LINE, { institutions: [weavers, { name: 'Fuller' }] })).toBe(leaf.CLOTH_WORKED_LINE);
+    expect(leaf.ordinaryIncomeLineOf(leaf.CLOTH_SHORT_LINE, { institutions: [{ ...weavers, _worldPulseInactive: true }] })).toBe('');
+    expect(leaf.ordinaryIncomeLineOf(leaf.TIMBER_SHORT_LINE, { institutions: [{ name: 'Sawmill', _worldPulseInactive: true }] })).toBe(leaf.TIMBER_PLAIN_LINE);
   });
 });
 

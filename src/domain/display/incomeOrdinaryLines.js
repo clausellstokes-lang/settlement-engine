@@ -3,9 +3,13 @@
  * chair's BRIEF-BAR8, 2026-11-17). `ordinaryIncomeLineOf` and exactly the lines it reads, moved here unchanged from
  * `generators/economy/incomeLineSiblings.js`, which imports them from this leaf and re-exports each under its own name
  * (so no importer of that module changes, and `INCOME_STATE_SIBLINGS` there declares the same texts). The printed export
- * (`src/pdf`) may not import `src/generators` (the layer law, `tests/architecture`); it may read this leaf. IMPORT-FREE
- * (ruling EG1): no line's text moves, no behaviour changes.
+ * (`src/pdf`) may not import `src/generators` (the layer law, `tests/architecture`); it may read this leaf. No line's text
+ * moves. The chair's ruling of 2026-11-18 (after the move): the roster is read LIVE, through the one ruin filter
+ * (`institutions/institutionRoster.js :: liveInstitutions`, itself import-free and on the eager side: ruling EG1 holds): a
+ * ruined house weaves or saws nothing. No record of the census's populations holds a non-live house (measured), so no page moves.
  */
+
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 
 /** The cloth lines (the record's short twin and the trade's ordinary line where a weaving or fulling house stands). */
 export const CLOTH_SHORT_LINE = 'Little cloth is made here while the cloth trade is short of what it needs.';
@@ -52,7 +56,7 @@ export function ordinaryIncomeLineOf(desc, town, reading = null) {
   // marked short beside a mine at work (`reading.forgeIdle`, the display layer's `economicsCrisisMarks.js :: forgeIdleHere`)
   if (reading?.forgeIdle === true && METAL_WORK_LINES.has(/** @type {string} */ (desc))) return METAL_FORGE_IDLE_LINE;
   if (desc !== CLOTH_SHORT_LINE && desc !== METAL_SHORT_LINE && desc !== TIMBER_SHORT_LINE) return null;
-  const roster = (Array.isArray(town?.institutions) ? town.institutions : []).map((i) => String(i?.name ?? '').toLowerCase());
+  const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (town)).map((i) => String(i?.name ?? '').toLowerCase());
   const has = (/** @type {RegExp} */ re) => roster.some((n) => re.test(n));
   if (desc === CLOTH_SHORT_LINE) return has(/weav|fuller/) ? CLOTH_WORKED_LINE : '';
   if (desc === METAL_SHORT_LINE) return METAL_WORKED_LINE;
