@@ -414,6 +414,29 @@ should be paused or archived by the owner's hand.
   counts only the houses that USE the material, not those that keep or yield it): to a birth seat, by name. (5) THE
   BUTCHERS (BR31) are put to this seat as one more case of its item 3: the need list asks the one reader, and stops
   if that would hide a need the page does not meet.
+- **THE CLOSE'S RULINGS (03:30 UTC, 2026-11-18; each the chair's, vetoable by the owner; the first seven carry the last
+  closes' rulings by their old names).** **CL1** (PT3): a FRESH hit of the presumed-things door is banked, through
+  the door's own mode for a reviewed row, ONLY where it is a pure move by identity (the line stood at the last closed
+  tip under another file key or place) or a landed seat's reworded line that names a registered thing and is TRUE
+  WHEREVER IT PRINTS by that seat's own measure; every other fresh hit is listed for the chair and not banked.
+  **CL2** (WR1/WR2): the writers' reach and the observed shapes are each banked ONCE, at the close, on the final
+  tree, every identity classed, the cause of each grown identity shown first; the one growth door is
+  `--rebank --charter=§934.105`. **CL3** (B3): a size ceiling is re-recorded ONCE at the measured figure with the
+  old figure, the new, the difference and the cause; A RISE OF MORE THAN 60,000 BYTES IN ANY ONE CEILING IS A STOP
+  FOR THE OWNER (rule 33 of the operating standard: a rise stays the owner's): at 70e557d5b the generation worker
+  bundle is +168,907 (2,525,028 against 2,356,121): ASKED OF THE OWNER AT 03:24; the engine chunk (+22,842) and the
+  first paint (raw +24,493, gzip +7,791, Brotli +6,453) are under the stop. **CL4** (AX1): the wiring census is
+  committed at the close and by no round. **CL5** (EF1): the espionage fence's driven golden is re-taken only after
+  the proof that no espionage BEHAVIOUR moved. **CL6** (MP1): the prose manifest's mixed-pool audience arm is a
+  pinned CONTROL: measured first, re-keyed only on the chair's word. **CL7** (CG1): a measured pin of the town-map
+  calibration is re-taken only with its cause named first. **CL8**: the pool-dominance register takes `--bank-new`
+  rows for the new drawn pools and nothing else on a seat's own motion; A RISE OVER A CEILING OR A COLLAPSE IS A LAW
+  RED FOR THE CHAIR (two stand at 70e557d5b: `ledger:institutionDescVariants:DESC_LATE_SIBLINGS` top1 0.8107 over
+  its ceiling 0.6364, and `ledger:npcData:STRESS_ECONOMIC_EFFECTS.gov_econ_dependence` top5 0.7429 over 0.6662; three
+  ceilings sit loose). **CL9**: the two anchors of `proseEntryContradiction.walker` (BR32 (5)) are found by their
+  rows' text by the close's seat DOORS-1A on the frozen line; DESKS-2 is told to leave that file. **CL10**: A LAW
+  RED (an invariant with no stored figure) IS NEVER RE-TAKEN: it goes to the repair seat CLOSE-SWEEP, cured at its
+  cause with the proof that no town and no page moves (the 525 hashed whole, the thirty rendered, equal).
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
@@ -1443,3 +1466,45 @@ should be paused or archived by the owner's hand.
   03:10): commit freely, push only at a milestone the chair waits for and at the hand-back, never more than once an
   hour; the chair batches its own pushes (the notes: at milestones; the line: one push a close landing).** A new
   seat's prompt says the same from its first line.
+- 03:30 UTC, 2026-11-18 · **THE CLOSE IS STAFFED: SIX SEATS ON THE FROZEN LINE 70e557d5b.**
+  THE TIMES, CORRECTED FROM THIS SESSION'S OWN RECORD (the lines above said "about"): the owner's "after this merge
+  one, push and deploy before continuing" at 02:43:57 UTC; "so in your own words, describe the architecture and
+  process for geenrating a settlement now, please, in laymans terms and in exhaustive detail." at 02:45:43; the
+  chair's answer with its two offered replies at 02:47:31; THE OWNER'S YES, "yes: refresh the stored reference files
+  and open the pull request.", AT 03:03:46.
+  THE PROCEDURE IS THE LAST CLOSE'S (BAR4, 2026-11-16: two parts, about seven hours; its prompts are
+  `docs/chair/2026-11-16/bar4/prompts/BAR4-CLOSE-DOORS-1.txt` and `-2.txt` on this lane, its hand-backs
+  `docs/chair/2026-11-16/bar4/BAR4-CLOSE-DOORS-1-HANDBACK.md` and `-2-HANDBACK.md` on the line: each door's exact
+  command), read by a read-only researcher with every figure's own door, CI's jobs and the deploy's prerequisites.
+  THE LAST CLOSED TIP OF THE LINE IS 6c117344f (JOIN-16's points 15 and 16); THIS CLOSE COVERS the round BAR6
+  (JOIN-17's points 1 to 11), the seam (12 to 19), BIRTH-1 (21), BAR7 (20, 22 to 29), SECRETS-1 (30, 32), DEBT-1
+  (31) and the sixth chair's points 33 to 47 and 53.
+  THE INVENTORY (the chair's own run of the 81 files known red, at 70e557d5b in `/home/user/k`:
+  `/home/user/wk/close0.known.log`; every failure with the head of its message:
+  `docs/chair/2026-11-18/close/CLOSE-0-KNOWN-REDS-MESSAGES.txt`): 152 failing tests in 75 files, and two files that
+  need a build. EVERY ONE SITS IN A SEAT'S LIST. The three CHECKS seats' whole check (label `close-0-70e557d5b`) is
+  still running: it shows any red outside those 81 files.
+  | seat | session | branch | its part |
+  |---|---|---|---|
+  | LEFT-KEYS | session_01FbPLbdnBuszUXLHq3tp72Q | `lane/left-keys-2026-11-17` | the stale test anchors K1 to K5, the watchdog K8; then the detectors K6, K7, K9 |
+  | CLOSE-WALKERS | session_01FbPLbeof1JKtv52vDb9iTt | `lane/close-walkers-2026-11-18` | five laws of the test corpus: the mutation manifest (7 guards), the bare seed loop, the un-anchored negatives, the literal prose anchors, the each-family debt (113 against 108) |
+  | CLOSE-DOORS-1A | session_01FbPLbbaQwDSMcsvSTNBvt2 | `lane/close-doors-1a-2026-11-18` | the words' books: the wiring census, the generated prose's pins and counts, the byte rows, the declarations ledgers, CL9 |
+  | CLOSE-DOORS-1B | session_01FbPLbcVhT2s5rbmcMuiYJK | `lane/close-doors-1b-2026-11-18` | every register with a door, the corpus-driven baselines, the edge bundles, the phone floors; THE ONE MERGE; then the lighting census and the size ceilings, last |
+  | CLOSE-DOORS-2 | session_01FbPLbfhxUyK7XsyAVtbX3G | `lane/close-doors-2-2026-11-18` (cut when Part 1's tip is named) | the signed golden door: it measures and checks every moved field family now; IT WRITES NOTHING BEFORE THE CHAIR'S "SIGN" |
+  | CLOSE-SWEEP | session_01FbPLbfAnjrmBeKNYMtTLWq | `lane/close-sweep-2026-11-18` | the law reds: new any-casts in four files (comment-only), three facts placed on a layer below what they read, the site-coherence row that grew (analysis first) |
+  THEIR PROMPTS are `docs/chair/2026-11-18/close/prompts/` on this lane; the common rules `BRIEF-CLOSE.md` beside
+  them. THE ORDER OF THE MERGES: LEFT-KEYS's first part, CLOSE-WALKERS, CLOSE-SWEEP's S1 and S2 and DOORS-1A go on
+  the line as they are read; the chair then sends DOORS-1B "MERGE <sha>"; DOORS-1B's final tip goes on the line;
+  the chair sends DOORS-2 "PART 1 IS AT <sha>", tells the owner in the chat that the signing starts, sends "SIGN",
+  and tells the owner when it is written; DOORS-2's tip goes on the line; the whole check by the three CHECKS seats;
+  CI on pull request #75; the description completed.
+  WHAT THE DEPLOY NEEDS OF THE OWNER BESIDES THE MERGE (`docs/DEPLOY.md`; `scripts/vercel-ignore-build.mjs`): the
+  gate builds only where the six CI checks are green on the exact commit AND `supabase/applied-head.json` (now
+  `appliedHead: 203`) is not below the repository's head migration (210): so the owner rehearses, runs
+  `supabase db push` for 204 to 210 and bumps that file in the same act (a commit on the pull request's branch),
+  or sets the drift override; then the edge functions (`bash scripts/deploy.sh`, from a clean tree at a pushed,
+  green commit); then `npm run ops:post-deploy`. AND THE HOST'S DAILY ALLOWANCE (above).
+  CI ON #75 AT 70e557d5b, FIRST RUN: green: validation, type ratchets, lint, the Deno edge tests, performance; red
+  as the close expects: the golden under the hostile locale, build-and-dist (the stale engine bundle; four size
+  budgets); the test ratchet, the coverage floors and the browser tests were still running at 03:16. One comment
+  left on the pull request says so (the chair's, 03:16).

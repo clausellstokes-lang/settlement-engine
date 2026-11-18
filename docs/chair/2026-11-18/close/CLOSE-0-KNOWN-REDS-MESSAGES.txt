@@ -1,0 +1,989 @@
+152 failing tests in 75 files (of the log close0.known.log)
+
+## tests/build/engineBundleReplay.test.js (3 red)
+- engine bundle replay — the bundle generates what the app generates > every golden-corpus config: the committed bundle's settlement JSON equals the in-process pipeline's, byte for byte
+    AssertionError: 485 of 525 rows differ between supabase/functions/_shared/engineBundle.js and the in-process pipeline. If src/ changed, the bundle is stale: run `npm run build:edge-shared` and commit the bundle with its inputs.: expected [ …(485) ] to deeply e
+- engine bundle replay — the bundle generates what the app generates > the espionage fence's 360-settlement driven corpus: bundle equals in-process byte for byte, and its hash meets the fence constant (known-stale rule)
+    AssertionError: 322 of 360 fence settlements differ bundle vs in-process: expected [ …(322) ] to deeply equal []
+    - []
+    + [
+    +   "SUBw4-fence1-thorp-road-000",
+    +   "SUBw4-fence1-thorp-road-004",
+    +   "SUBw4-fence1-thorp-road-006",
+    +   "SUBw4-fence1-thorp-road-008"
+- engine bundle replay — the bundle generates what the app generates > the engine-generate birth: for the three service cases, the bundle's stamped birth equals the in-process birth under the STORE's runtime
+    AssertionError: the bundle's birth equals the in-process birth — 2 of 3 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+    [1] engine-contract-beta — seed engine-contract-beta: expected 
+
+## tests/build/engineServiceCore.test.js (1 red)
+- the service runs the same core as the worker > the bundle's runGenerationRequest equals the in-process core for the service's request
+    AssertionError: the bundle's core answers the in-process core's settlement and step list — 3 of 3 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+    [0] ["remote-a","town"] — remote-a: e
+
+## tests/build/engineServiceStoreParity.test.js (3 red)
+- the engine service answers the store's own requests with the store's own records > generate: the bundle's birth for the wire body equals the local core on the store's request, stamp included
+    AssertionError: 2 of the seeds failed; every seed ran: expected [ …(2) ] to deeply equal []
+    - []
+    + [
+    +   "store-parity-a: store-parity-a: expected '{\"name\":\"Novoev\",\"tier\":\"town\",\"popul…' to be '{\"name\":\"Novoev\",\"tier\":\"town\",\"popul…' // Obje
+- the engine service answers the store's own requests with the store's own records > derive: the remote re-derivation of a store-born world equals the local one
+    AssertionError: expected '{"record":{"name":"Morkås","tier":"to…' to be '{"record":{"name":"Morkås","tier":"to…' // Object.is equality
+    - {"record":{"name":"Morkås","tier":"town","population":1394,"institutions":[{"category":"Economy","name":"Stone quarry","req
+- the engine service answers the store's own requests with the store's own records > regenSection: the bundle's passes over the wire body equal the local passes over the store-born world
+    AssertionError: expected '{"npcs":[{"id":"npc_merchant_warehous…' to be '{"npcs":[{"id":"npc_merchant_warehous…' // Object.is equality
+    - {"npcs":[{"id":"npc_merchant_warehouses","name":"Genji Wei","gender":"male","role":"Alderman","title":"the warehouse factor
+
+## tests/components/bar2ServicesRows.test.jsx (1 red)
+- BAR2-SERVICES batch 1: a service row carries its house's mark; four rows reworded or renamed true > SV1 MARKED: each row prints with its house's mark before it
+    AssertionError: expected [ Array(1) ] to deeply equal []
+    - []
+    + [
+    +   "r2r-town-45: \"Ore cut underground by the crews and brought out by cart for sorting.\" prints without \"Short of iron ore.\"",
+    + ]
+           |                      ^
+
+## tests/components/bar3ServicesRows.test.jsx (1 red)
+- BAR3-SERVICES batch 1: a row carries the mark its state makes true; a row names the body the town has > MARKED: each row prints with its mark before it
+    AssertionError: expected [ Array(1) ] to deeply equal []
+    - []
+    + [
+    +   "bar0-city-under_siege+famine-rand-9: \"House wine by the jug or bottle.\" prints without \"Short of grapes.\"",
+    + ]
+           |                      ^
+
+## tests/components/displayEconCrisisMarks.test.jsx (1 red)
+- TAIL-DISPLAY-ECON-4 batch 4: the Economics tab marks what the crisis stops, by the one leaf > each KEEP row still prints its line (every row)
+    AssertionError: every KEEP row: the Economics tab still prints the true sibling — 1 of 3 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+    [0] ["r2s-under_siege-city-0","Iron & Metalwor
+
+## tests/components/displayEconRelianceFoodWords.test.jsx (1 red)
+- TAIL-DISPLAY-ECON-2 batch 2: the reliance reading counts the food provision; the food sentence's shares are of the need > each KEEP row still prints its line (every row)
+    AssertionError: every KEEP row: the tab still prints the true sibling — 1 of 6 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+    [5] ["r2s-under_siege-metropolis-3","economics","Contrib
+
+## tests/components/dossierPhoneFloorAllViews.test.jsx (2 red)
+- THE PHONE FLOORS — every dossier view > every line in every tab clears its floor (prose 14px, chrome 12px) at phone width
+    AssertionError:
+    MOBILE_BASELINE mismatch. Each row counts the lines this view gave a reader at 375px, split by the class each was judged as, with the two sub-floor counts that must stay zero.
+    A number that FELL means a surface stopped rendering or a fold stopp
+- THE PHONE FLOORS — every dossier view > desktop is untouched — the SAME walk, pinned to DESKTOP_BASELINE
+    AssertionError:
+    DESKTOP_BASELINE mismatch. Each number counts lines rendered ABOVE the breakpoint, so a diff means an FS token, a fold or a surface moved on desktop — which proseFontSize/chromeFontSize (identity when mobile===false) must never do.
+    Deliberate? 
+
+## tests/components/phoneChromeFloor.census.test.js (1 red)
+- THE PHONE CHROME FLOOR — a census of the source, on every route the router declares > each surface matches its registry row, and an owned surface may only shrink
+    AssertionError:
+    ROUTE_BASELINE mismatch. Each row is what this census measured on that surface.
+    A `floored` number that FELL means a surface stopped being floored or stopped existing — which "zero violations" cannot see. One that ROSE means new floored lines; 
+
+## tests/data/colourMarks4h.test.js (2 red)
+- CENSUS-4h: the colour marks follow the ledger, line for line > the tie prose: every colour variant is `{ line, colour: true }`, every other row as phase A left it
+    AssertionError: expected { Object (id, colour) } to deeply equal { Object (id, colour) }
+      {
+    -   "colour": true,
+    +   "colour": false,
+        "id": "econ_mil_contract.desc#6",
+      }
+           |                                  ^
+- CENSUS-4h: the colour marks follow the ledger, line for line > the descriptions: the colour column holds exactly the ledger's colour texts, live, and declares nothing else
+    AssertionError: expected Set{ …(488) } to deeply equal Set{ …(492) }
+    @@ -115,11 +115,10 @@
+        "A stout walled enclosure for the desert merchant, with stabling for camels, locked stores, a well, and sleeping room for fifty. Any desert settlement on a caravan r
+
+## tests/data/dossierStateProseProjection.contract.test.js (9 red)
+- the dossier state-prose projection > is not stale against the two authored annexes
+    Error: Command failed: node scripts/generate-dossier-state-prose.mjs --check
+    file://scripts/lib/dossier-annex-grammar.mjs:199
+      throw new Error(`${label}: ${message}`);
+            ^
+    Error: the wiring census: is STALE against 3 of its own stamped files:
+      src/doma
+- SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edited > gives every STATE block a poolMeta row per pool, and no row for a pool it does not hold
+    AssertionError: expected 861 to be 859 // Object.is equality
+    - 859
+    + 861
+- SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edited > ⭐ readsCount equals the census, pool by pool, and is ABSENT where the census reads nothing
+    AssertionError: expected { present: 492, absent: 369 } to deeply equal { present: 492, absent: 367 }
+      {
+    -   "absent": 367,
+    +   "absent": 369,
+        "present": 492,
+      }
+- SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edited > MUTANT: the sha interlock refuses a census taken over a composer that has since moved
+    AssertionError: expected [Function] to not throw an error but 'Error: the wiring census: is STALE ag…' was thrown
+    - Expected:
+    undefined
+    + Received:
+    "Error: the wiring census: is STALE against 3 of its own stamped files:
+      src/domain/display/stateProse/generalS
+- SEAM car 4 — the SHIFT REGISTER, printed and every pin recomputed (ARCH §8.6) > ⭐ recomputes every pin from the leaves themselves — a pin is a measurement, not a promise
+    AssertionError: expected [ …(7) ] to deeply equal []
+    - []
+    + [
+    +   "variant-count-per-pool pin 0 (the sum of poolMeta.variantCount over all 708 pools): the register pins 2977 and the corpus measures 3033. If this move is intended, it is a 3 — THIN-pool growth (
+- SEAM car 4 — the SHIFT REGISTER, printed and every pin recomputed (ARCH §8.6) > MUTANT: a mechanism that moves without its row moving reds naming the mechanism
+    AssertionError: expected 3033 to be 2977 // Object.is equality
+    - 2977
+    + 3033
+           |                                                                    ^
+- SEAM car 4 — the three leaves, at their floors > NORMS: a bit per FIRED pool, frozen, and absent where the corpus never fired
+    AssertionError: expected 591 to be 589 // Object.is equality
+    - 589
+    + 591
+           |                                            ^
+- SEAM car 4d — the seat licence, computed where the census is visible > ⭐⭐ EVERY SHIPPED POOL SEATS AT THE SENTENCE, WITH ITS REASON, over all 708
+    AssertionError: expected { 'sentence/not-a-modifier': 861 } to deeply equal { 'sentence/not-a-modifier': 859 }
+      {
+    -   "sentence/not-a-modifier": 859,
+    +   "sentence/not-a-modifier": 861,
+      }
+- ⭐⭐ REWRITE car 8a-4 — `kin`, the thread rule's typed half (SITTING §T.4, agenda C″) > ⛔ AND IT SHIPS ON NOTHING, which is why this car moves no generated byte
+    AssertionError: over the whole shipped corpus, not a slice: expected 861 to be 859 // Object.is equality
+    - 859
+    + 861
+
+## tests/data/tailHouses1Gaps.test.js (1 red)
+- TAIL-HOUSES batch 1: a house is not described at work on an input that never reaches it > the house whose input is missing prints the rewording, not the old text
+    AssertionError: a house without its input is not described at work on it — 23 of 31 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+    [0] r2r-village-4|Potter|Wheel-thrown pottery for d
+
+## tests/data/w2FixData5Rows.test.js (1 red)
+- W2-FIX-DATA-5: round three's rows in the data lane's files > ww-1157 (HIGH): no forge making for a war in a famine city with no war (rww-city-famine-1)
+    AssertionError: LIVENESS ANCHOR [rww-city-famine-1 arrival]: the anchor sibling is missing from the collection, so the exclusion assertion below cannot distinguish "correctly excluded" from "the whole collection drifted away". Fix the collection or choose an a
+
+## tests/domain/bar3CorpusGuards.test.js (1 red)
+- BAR3-CORPUS: a reworded line claims no more than every printing town bears > batch 1 · DS-DEF-2::CHAIN: food trades failing v3: C23072 C31251: stores secure and deep
+    AssertionError: expected 'The food trades at {settlement} are s…' to match /would miss if it were cut off/
+    - Expected:
+    /would miss if it were cut off/
+    + Received:
+    "The food trades at {settlement} are struggling to keep up, and less is being put by against the 
+
+## tests/domain/bar3Defecon2Lines.test.js (1 red)
+- BAR3-DEFECON-2: the crime lines read the crime wave and the rival gangs > NOT C48585: with no timber import the carts and rafts that stopped are gone, and the twin prints
+    AssertionError: undefined — 1 of 3 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+    [0] {"seed":"r2r-town-34","not":"The timber carts stopped coming a month ago, and the builders are b
+
+## tests/domain/composeStateProse.test.js (4 red)
+- the composer — the corpus loads, and the merge is legal > every block lives in exactly one leaf, and the sweep found the whole corpus
+    AssertionError: pools: expected 861 to be 859 // Object.is equality
+    - 859
+    + 861
+- ⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves nothing > is byte-identical to `readStateProse` on all 708 pools, both faces, six seeds
+    AssertionError: expected 10332 to be 10308 // Object.is equality
+    - 10308
+    + 10332
+- ⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the composer's own rule > ⭐ THE CELL ARM CAN NOW TELL `vid` FROM `index`: the blind spot closed at car 8a-1
+    AssertionError: expected { …(2) } to deeply equal { …(2) }
+    @@ -1,10 +1,11 @@
+      {
+        "DS-ECO-6 :: TIER: minor shadow activity (≥3)": {
+          "cells": 172,
+          "coordinates": [
+            "vid 4 / index 1",
+    +       "vid 5 / index 2",
+          ],
+        },
+        "DS-POW-
+- ⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the composer's own rule > the seedless corpus reads canonical-at-zero the way the gallery import does
+    AssertionError: expected 861 to be 859 // Object.is equality
+    - 859
+    + 861
+
+## tests/domain/corpusEcoTailGuards.test.js (1 red)
+- a cured sentence is not drawn in the census town that made it false; what is drawn instead is named > DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks at r2r-hamlet-12: a dairy farmer and grazing land: "Whatever lives
+    AssertionError: r2r-hamlet-12 no longer reads DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks: re-key the row to a town of the case: expected [ …(63) ] to include 'DS-ECO-12::CRITICAL IMPORT: a house n…'
+           |                                  
+
+## tests/domain/display/needMetUnderAnotherName.test.js (1 red)
+- a need an import meets under another name is not a need left unmet (item 4(b)) > the leaf on the census's towns: r2r-city-0's luxury goods are met; r2r-town-17's mountain timber is not
+    AssertionError: expected [ 'stone', 'salt' ] to include 'mountain_timber'
+           |                         ^
+
+## tests/domain/editWorldFactResources.test.js (2 red)
+- EM-B2b2 — the DM's nearby-resources word survives resolveResources > A2 — THE NO-EDIT PATH IS UNMOVED: a dormant re-derivation is byte-identical to the PRE-CHANGE step's own output
+    AssertionError: a config carrying NO world-fact roster resolves exactly as it did before this change: the mark is absent, the branch is not taken, and not one byte of the world moves: expected [ 21, '21:fresh' ] to deeply equal []
+    - []
+    + [
+    +   21,
+    +   "21:fres
+- EM-B2b2 — the DM's nearby-resources word survives resolveResources > A6 — THE MARK IS NOT THE ECHO: the step's own resolved write-back, handed back in as a generation input, resolves exactly as before
+    AssertionError: a replay from the resolved config is byte-identical to the PRE-CHANGE step's own replay: the generator's answer is never mistaken for the DM's word: expected [ 21 ] to deeply equal []
+    - []
+    + [
+    +   21,
+    + ]
+           |                               
+
+## tests/domain/facts/census2dTables.test.js (3 red)
+- STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS carry the ledger's declarations > every ledger line is at its path, verbatim
+    
+- STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS carry the ledger's declarations > every row declares what the ledger says (R-B1; scoped calm is silence)
+    
+- PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor's closure; carried through textOf) > every declaring ledger line is declared in place, exactly (a crisis-keyed pool does not re-declare its key, R-B1)
+    
+
+## tests/domain/facts/census2eTables.test.js (4 red)
+- STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS carry the ledger's declarations > every ledger line is at its path, verbatim
+    
+- STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS carry the ledger's declarations > every row declares what the ledger says (R-B1; scoped calm is silence)
+    
+- PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor's closure; carried through textOf) > every declaring ledger line is declared in place, exactly (a crisis-keyed pool does not re-declare its key, R-B1)
+    
+- POLITICAL_FLAVOR — the cascade's rows carry the ledger's declarations (R, carried through textOf) > every row declares what its ledger lines say (a closure's branches share one row)
+    AssertionError: expected [ [ 'stable[2]', …(1) ], …(5) ] to deeply equal []
+    - []
+    + [
+    +   [
+    +     "stable[2]",
+    +     "{\"needs\":[],\"excludes\":[],\"crisis\":[\"any\"]}",
+    +   ],
+    +   [
+    +     "stable[5]",
+    +     "{\"needs\":[\"exports\"],\"excludes\":[],\"crisis\
+
+## tests/domain/facts/census2gDailyLifePriest.test.js (3 red)
+- STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS carry the ledger's declarations > every ledger line is at its path, verbatim
+    AssertionError: CULTURE_PROFILES_DAILY: expected [ Array(1) ] to deeply equal []
+    - []
+    + [
+    +   "CULTURE_PROFILES.mesoamerican.foodways[1]",
+    + ]
+           |                           ^
+- STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS carry the ledger's declarations > every row declares what the ledger says (R-B1; scoped calm is silence)
+    AssertionError: STRESS_DESCS: expected [ …(10) ] to deeply equal []
+    - []
+    + [
+    +   "STRESS_DESCS.famine[3]: {\"needs\":[\"tier: ≥ village\",\"patrol\"],\"excludes\":[],\"crisis\":[]} ≠ {\"needs\":[\"patrol\"],\"excludes\":[],\"crisis\":[]}",
+    +   "STRESS_DESCS.oc
+- PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor's closure; carried through textOf) > every declaring ledger line is declared in place, exactly (a crisis-keyed pool does not re-declare its key, R-B1)
+    AssertionError: expected [ …(2) ] to deeply equal []
+    - []
+    + [
+    +   "PRESSURE_SENTENCES.wartime(winning)[1]: [{\"needs\":[\"institution: smith\",\"trade at work: ironwork in full\"],\"excludes\":[],\"crisis\":[]}] ≠ {\"needs\":[\"institution: smith\"],\"excludes
+
+## tests/domain/facts/declarationRegisters.test.js (1 red)
+- THE UNDECLARED-LINES REGISTER — shrink-only > a count that fell is re-pinned in the same commit (the register is never left stale)
+    AssertionError: expected { fell: [ …(4) ], …(1) } to deeply equal { fell: [], gone: [] }
+      {
+    -   "fell": [],
+    -   "gone": [],
+    +   "fell": [
+    +     "DS-SUP-3::SEVERAL EXPECTED CATEGORIES MISSING: 3 → 2",
+    +     "DS-POP-3::LEVEL: 2 → 1",
+    +     "DS-STR-1::FAMINE: 2 
+
+## tests/domain/intentAtlasSoakDistiller.test.js (1 red)
+- intent atlas soak prior — the committed artifact is reproducible > the documented default run reproduces the committed distillate byte for byte
+    AssertionError: expected '{\n  "atlasVersion": "0.2.0",\n  "gen…' to be '{\n  "atlasVersion": "0.2.0",\n  "gen…' // Object.is equality
+    @@ -11,11 +11,11 @@
+          "fdrQ": 0.05,
+          "minN": 30,
+          "weightFloor": 0.25,
+          "soakWeightCap": 0.5,
+          "cells
+
+## tests/domain/mergeLadderHeldKeys.test.js (1 red)
+- EM-R8 — the escalation ladder never overwrites a HELD key, and the receipt mirrors the merged record > A3 · the mirror: the two counted rows equal the merged record, and no other character moves
+    AssertionError: trials whose conflict citations the post-pass rebuilt: expected 62 to be 61 // Object.is equality
+    - 61
+    + 62
+           |                                                                                                                            ^
+
+## tests/domain/worldFactRederive.test.js (2 red)
+- EM-B2b — world facts by consequence: the route, the refusals and the stated radius > A4 — THE STATED BLAST RADIUS IS COMPLETE: the culture reader set under src/generators is EXACT in both directions
+    AssertionError: the culture reader set under src/generators is EXACT in BOTH directions. An UNLISTED reader means the blast radius of a world-fact change grew without anybody saying so, which is what design §14 final's consequence-by-design ruling forbids this
+- EM-B2b — world facts by consequence: the route, the refusals and the stated radius > A7 — THE GOLDENS CANNOT SEE ANY OF IT: both fixtures are byte-identical and a no-layer re-derivation is still the committed golden
+    AssertionError: the stride is non-empty, or the absence above is vacuous: expected 5 to be +0 // Object.is equality
+    - 0
+    + 5
+           |                                                                                       ^
+
+## tests/edgeFunctions/aiCharterBundle.freshness.test.js (1 red)
+- aiCharter bundle is fresh > the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+    AssertionError: Bundle is stale. One of these inputs changed since the last bundle:
+      src/data/chainAccessNames.js
+      src/data/constants.js
+      src/data/entityTags.js
+      src/data/goods/identity.js
+      src/data/informationBrokerageTuning.js
+      src/data/institutionBack
+
+## tests/edgeFunctions/aiGroundingBundle.freshness.test.js (1 red)
+- Tier 6.8 — aiGrounding bundle is fresh > the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+    AssertionError: Bundle is stale. One of these inputs changed since the last bundle:
+      src/data/bandLadders.js
+      src/data/chainAccessNames.js
+      src/data/constants.js
+      src/data/crisisDependence.js
+      src/data/entityTags.js
+      src/data/foodImportRates.js
+      src/dat
+
+## tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js (1 red)
+- aiOutputSchema bundle is fresh > the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+    AssertionError: Bundle is stale. One of these inputs changed since the last bundle:
+      src/data/chainAccessNames.js
+      src/data/constants.js
+      src/data/entityTags.js
+      src/data/goods/identity.js
+      src/data/informationBrokerageTuning.js
+      src/data/institutionBack
+
+## tests/edgeFunctions/edgeSharedBundleReproducibility.test.js (4 red)
+- edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) > aiGroundingBundle.meta.json > the recorded sourceHash equals the builder hash over INDEX content
+    AssertionError: aiGroundingBundle.meta.json was built from content that is neither committed nor staged.
+    This is the DIRTY-BUILD class: the freshness suite agrees with it because
+    it reads the same dirty working tree, but no checkout can reproduce the
+    artifact.
+- edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) > aiCharterBundle.meta.json > the recorded sourceHash equals the builder hash over INDEX content
+    AssertionError: aiCharterBundle.meta.json was built from content that is neither committed nor staged.
+    This is the DIRTY-BUILD class: the freshness suite agrees with it because
+    it reads the same dirty working tree, but no checkout can reproduce the
+    artifact. C
+- edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) > aiOutputSchemaBundle.meta.json > the recorded sourceHash equals the builder hash over INDEX content
+    AssertionError: aiOutputSchemaBundle.meta.json was built from content that is neither committed nor staged.
+    This is the DIRTY-BUILD class: the freshness suite agrees with it because
+    it reads the same dirty working tree, but no checkout can reproduce the
+    artifa
+- edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) > engineBundle.meta.json > the recorded sourceHash equals the builder hash over INDEX content
+    AssertionError: engineBundle.meta.json was built from content that is neither committed nor staged.
+    This is the DIRTY-BUILD class: the freshness suite agrees with it because
+    it reads the same dirty working tree, but no checkout can reproduce the
+    artifact. Cure
+
+## tests/generators/foundryExportsFishTrade.test.js (1 red)
+- F11 · a fishmonger with no fish is the cart's trade > soak1k-1652: no fish source, no fish bought in, so the Fishmonger carries fish from the cart
+    AssertionError: expected true to be false // Object.is equality
+    - false
+    + true
+           |                                              ^
+
+## tests/generators/generationForkCensus.test.js (3 red)
+- EM-P2 — generation census by execution: the instrument, the classification, both channels > A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no golden moves, 493 draws unpinned and 0 pinned
+    AssertionError: the control row regenerated under both mocks: expected '8bb20e966e6779efabd8b49efac2f3749a630…' to be '5437998b250179459c3ca5efdff170a4f1b2d…' // Object.is equality
+    Expected: "5437998b250179459c3ca5efdff170a4f1b2d1933e79357aab9a68e21cfb6939"
+    Re
+- EM-P2 — generation census by execution: the instrument, the classification, both channels > A4 — both landing triples re-executed: the six varies rows, the sixteen disagreements, and zero differing landing paths
+    AssertionError:
+    THE REGISTER DISAGREES WITH A FRESH EXECUTION on 5 row(s):
+    economyReconcilePass|economicState.producedOnRecord.same: declared 49 measured 35
+    economyReconcilePass|economicState.producedOnRecord.transformed: declared 14 measured 28
+    economyReconci
+- EM-P2 — generation census by execution: the instrument, the classification, both channels > A6 — the hash channel: 69 distinct pickVariant seeds, sixteen external fnv1a32 calls, and two censuses disjoint by construction
+    AssertionError: fnv1a32 EXTERNAL callers: expected 54 to be 23 // Object.is equality
+    - 23
+    + 54
+           |                                                            ^
+
+## tests/generators/houseDescLateReRead.test.js (1 red)
+- TAIL-HOUSES-5 batch 8: the late re-read reaches a house description (H20 (ii)) > the table: every key is an original with one twin, and none is a colour line
+    AssertionError: expected [ …(30) ] to have a length of 11 but got 30
+    - 11
+    + 30
+           |                                             ^
+
+## tests/generators/institutionBudgetPromise.test.js (1 red)
+- X-46 car 3 — the promise: the factor at 1.0 is the tip before the budget > every one of sixty seeds is byte-identical with the density factor forced to 1.0
+    AssertionError: expected [ +0, 1, 2, 3, 4, 5, 7, 8, 9, …(48) ] to deeply equal []
+    - []
+    + [
+    +   0,
+    +   1,
+    +   2,
+    +   3,
+    +   4,
+    +   5,
+    +   7,
+    +   8,
+    +   9,
+    +   10,
+    +   11,
+    +   12,
+    +   13,
+    +   14,
+    +   15,
+    +   16,
+    +   17,
+    +   19,
+    +   20,
+    +   21,
+    +   22,
+    +   23,
+    + 
+
+## tests/generators/institutionProseDeclared.test.js (1 red)
+- the services declare in place (CENSUS-4c unit 5) > each definition carries exactly the ledger's declaration (4b's two Mill rows included)
+    AssertionError: expected 'Collects the dues owed and the tithe' to be 'Collects the lord\'s dues and the tit…' // Object.is equality
+    Expected: "Collects the lord's dues and the tithe"
+    Received: "Collects the dues owed and the tithe"
+           |                   
+
+## tests/generators/nameHeldThroughAssembly.test.js (1 red)
+- EM-R4 — the settlement name is held through assembly > A1 — EM-R4: inert with no pins: the golden corpus and an empty bag leave every byte where it was
+    AssertionError: a golden row moved with no pin bag anywhere: expected [ …(37) ] to deeply equal []
+    - []
+    + [
+    +   "thorp|latin|desert|road|civilized|golden-master-v3",
+    +   "thorp|slavic|coastal|port|civilized|golden-master-v3",
+    +   "thorp|mesoamerican|riverside|
+
+## tests/generators/npcLoyaltyGuardRows.test.js (1 red)
+- NPC_FACTION_LOYALTY declarations (CENSUS-3e) > declares exactly the ledger's fourteen rows, R2-CODE-A-2's seven size rows and R2-CODE-A-6's five, each by its atom
+    AssertionError: expected { …(44) } to deeply equal { …(41) }
+    @@ -59,10 +59,13 @@
+          "tier: ≥ village",
+        ],
+        "government#22": [
+          "tier: ≥ village",
+        ],
+    +   "government#23": [
+    +     "appointed post",
+    +   ],
+        "government#3": [
+          "market",
+    
+
+## tests/generators/pipelinePinnedChoosers.test.js (1 red)
+- EM-B2a3 — the institution and power choosers consult the pin seam > A1 — the null change: an unpinned run and pins {} leave the golden corpus byte-identical
+    AssertionError: the pin consults moved generated output: expected [ …(37) ] to deeply equal []
+    - []
+    + [
+    +   "thorp|latin|desert|road|civilized|golden-master-v3",
+    +   "thorp|slavic|coastal|port|civilized|golden-master-v3",
+    +   "thorp|mesoamerican|riverside|rive
+
+## tests/generators/pipelinePinnedMode.test.js (3 red)
+- EM-P0 — the pipeline seam: pins are consulted per chooser, on one stream > A1 — the null change: no pins and pins {} leave the golden corpus byte-identical
+    AssertionError: golden rows moved — version 1 of this packet moved 41 of 41 here: expected [ …(37) ] to deeply equal []
+    - []
+    + [
+    +   "thorp|latin|desert|road|civilized|golden-master-v3",
+    +   "thorp|slavic|coastal|port|civilized|golden-master-v3",
+    +   "thorp|me
+- EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives on the runner > A2 — the lift moves nothing: the golden corpus, the draw count and the one-stream shape
+    AssertionError: the lift moved a byte of generated output: expected [ …(37) ] to deeply equal []
+    - []
+    + [
+    +   "thorp|latin|desert|road|civilized|golden-master-v3",
+    +   "thorp|slavic|coastal|port|civilized|golden-master-v3",
+    +   "thorp|mesoamerican|riverside|ri
+- EM-R1b — a recordPath-less chooser is not counted against a record-built bag > A5 — EM-R1b: a supplied transient chooser is still handed back, and the unpinned path is inert
+    AssertionError: the golden moved: an unpinned run took a branch this member added: expected [ …(37) ] to deeply equal []
+    - []
+    + [
+    +   "thorp|latin|desert|road|civilized|golden-master-v3",
+    +   "thorp|slavic|coastal|port|civilized|golden-master-v3",
+    +   "thorp|m
+
+## tests/generators/powerEconomyFreshness.test.js (1 red)
+- EM-R3 — the power structure is final under a held pin > A4 — the golden is unmoved by construction, and a held bag does move it
+    AssertionError: the pin-aware guards moved generated output with no pin bag: expected [ …(37) ] to deeply equal []
+    - []
+    + [
+    +   "thorp|latin|desert|road|civilized|golden-master-v3",
+    +   "thorp|slavic|coastal|port|civilized|golden-master-v3",
+    +   "thorp|mesoame
+
+## tests/generators/rosterFinalUnderHeldRoster.test.js (1 red)
+- EM-R2 — the roster is final inside enrichNpcCoherence under a held roster > A1 — inert with no pins: the golden corpus and the coherence tail are byte-unmoved
+    AssertionError: a golden row moved with no pin bag anywhere: expected [ …(37) ] to deeply equal []
+    - []
+    + [
+    +   "thorp|latin|desert|road|civilized|golden-master-v3",
+    +   "thorp|slavic|coastal|port|civilized|golden-master-v3",
+    +   "thorp|mesoamerican|riverside|
+
+## tests/generators/tailDefeconBatch3Lines.test.js (2 red)
+- TAIL-DEFECON-3 batch 3: the fish, quarry and diversity lines say only what the record holds > #20893 r2r-hamlet-30: not "The iron carts are three weeks late"; silent by design
+    AssertionError: EXCLUSION [#20893 r2r-hamlet-30]: the member is present in a collection that is supposed to exclude it (the anchor sibling proves the collection is live).: expected 'Harvest :: What the households grow a…' not to contain 'The iron carts are thr
+- TAIL-DEFECON-3 batch 3: the fish, quarry and diversity lines say only what the record holds > #20893 r2r-city-36: not "A new toll on the iron road"; silent by design
+    AssertionError: EXCLUSION [#20893 r2r-city-36]: the member is present in a collection that is supposed to exclude it (the anchor sibling proves the collection is live).: expected 'Market Taxes :: District-level duties…' not to contain 'A new toll on the iron r
+
+## tests/generators/tieProseDeclared.test.js (2 red)
+- the tie prose declares in place (CENSUS-4c unit 4) > the ledger's 30 declaring rows carry exactly the ledger's declaration; every other row declares nothing
+    AssertionError: expected [ { …(6) }, { …(6) }, { …(6) }, …(45) ] to have a length of 45 but got 48
+    - 45
+    + 48
+           |                                   ^
+- the tie prose declares in place (CENSUS-4c unit 4) > the rendered text of every row is the ledger's, byte for byte (the closure is the same)
+    AssertionError: expected '{B} has brought a claim against {A} f…' to be '{B} has hired an advocate to sue {A} …' // Object.is equality
+    Expected: "{B} has hired an advocate to sue {A} for what {A}'s people did last month. The case comes before the council this 
+
+## tests/generators/x46NpcBand.test.js (1 red)
+- X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people > sixty seeds (ten a tier) generate byte-identically to the dark digests captured at the window tip (2026-11-04)
+    AssertionError: v1 worlds this car moved: expected [ 'x46-dark-thorp-000', …(54) ] to deeply equal []
+    - []
+    + [
+    +   "x46-dark-thorp-000",
+    +   "x46-dark-thorp-003",
+    +   "x46-dark-thorp-006",
+    +   "x46-dark-thorp-008",
+    +   "x46-dark-thorp-009",
+    +   "x46-dark-hamle
+
+## tests/lint/domainAnyCastBaseline.test.js (4 red)
+- domain any-cast ratchet — frozen baseline governance > no file exceeds its baseline (new files get 0) — fix the types, do not widen
+    AssertionError: any-cast debt grew — replace the any/* / ts-ignore with a real type. ⛔ Widening the baseline is not the cure and neither is adding a DECLARED_OVERRUN row: both ledger ceilings are MONOTONE-DOWN literals, so a new row (or a raised count on an ex
+- domain any-cast ratchet — frozen baseline governance > baseline exactly matches the tree (airtight against any drift mode)
+    AssertionError: expected { …(173) } to deeply equal { …(169) }
+    @@ -77,10 +77,14 @@
+        },
+        "src/domain/display/dossierViewModel.js": {
+          "any": 5,
+          "suppress": 1,
+        },
+    +   "src/domain/display/economicsCrisisMarks.js": {
+    +     "any": 2,
+    +     "sup
+- domain any-cast ratchet — the declared-overrun ledger is honest > ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path)
+    AssertionError: undeclared overruns:
+      src/domain/display/economicsCrisisMarks.js: 2 any / 0 suppress against baseline 0/0
+      src/domain/facts/factsOf.js: 1 any / 0 suppress against baseline 0/0
+      src/domain/facts/seatMembers.js: 9 any / 0 suppress against base
+- domain any-cast ratchet — `--update` refuses to bank a declared overrun > ⛔ every LIVE declared row is refused against the LIVE register
+    AssertionError: a clean-tip --update would still move the committed register: expected { …(171) } to deeply equal { …(167) }
+    @@ -77,10 +77,14 @@
+        },
+        "src/domain/display/dossierViewModel.js": {
+          "any": 5,
+          "suppress": 1,
+        },
+    +   "src/domain/
+
+## tests/lint/factLayers.walker.test.js (3 red)
+- the layer table covers every leaf and every pool > every leaf declares exactly the strata it touches, and every stored field it reads is placed
+    AssertionError: expected { id: 'legalHouse', …(3) } to deeply equal { id: 'legalHouse', …(3) }
+      {
+        "id": "legalHouse",
+    -   "undeclared": [],
+    +   "undeclared": [
+    +     "availableServices",
+    +   ],
+        "unplaced": [],
+        "unread": [],
+      }
+           |           
+- nothing reads at or above its own layer (shrink-only) > LEAVES: the tree reads exactly the register
+    AssertionError: expected { …(11) } to deeply equal { warState: [ 'economicState' ], …(7) }
+    @@ -15,12 +15,21 @@
+          "npcs",
+        ],
+        "guardPresence": [
+          "economicState",
+        ],
+    +   "legalHouse": [
+    +     "availableServices",
+    +   ],
+        "soldiers": [
+       
+- nothing reads at or above its own layer (shrink-only) > POOLS: the tree reads exactly the register, with no pool unplaced and no atom unlayered
+    AssertionError: expected { …(11) } to deeply equal { …(12) }
+    @@ -1,12 +1,9 @@
+      {
+        "DS-ECO-6::TIER: a large share off the books (≥30)": [
+          "declares guild (layer 3)",
+        ],
+    -   "DS-ECO-6::TIER: minor shadow activity (≥3)": [
+    -     "declares organised 
+
+## tests/lint/mutationCoverageManifest.test.js (1 red)
+- mutation-coverage manifest — the totality contract (E-A) > TOTALITY: every enumerated invariant file has a manifest entry
+    AssertionError:
+    Invariant test file(s) with NO mutation-coverage entry. For each: plant a regression in scripts/mutation-sweep.sh proving it reds (preferred), or add a rationale entry to scripts/mutation-coverage-manifest.json with a written reason. Do NOT add
+
+## tests/lint/negativeAssertionAnchor.walker.test.js (1 red)
+- negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus
+    AssertionError: expected [ …(7) ] to deeply equal []
+    - []
+    + [
+    +   "tests/components/bar7EconTab.test.jsx: 3 un-anchored negative assertion(s) at line(s) 134, 160, 243 (frozen ceiling 0). A bare not.toContain/not.toMatch/not.toHaveProperty passes just as happil
+
+## tests/lint/noLegacyFactionReaders.walker.test.js (1 red)
+- no legacy faction readers outside FPZ (PEOPLE-5, M-2; landed by PEOPLE-LAND) > every read outside the FPZ list is red; zero at the landing
+    AssertionError: expected [ …(3) ] to deeply equal []
+    - []
+    + [
+    +   "src/pdf/lib/viewModel.js:352 factions",
+    +   "src/pdf/lib/viewModel.js:515 factions",
+    +   "src/pdf/lib/viewModel.js:709 factions",
+    + ]
+           |                                                   
+
+## tests/lint/observedShapeReaders.walker.test.js (4 red)
+- reader-with-no-writer ratchet: the EXECUTED corpus > the producers ran and the corpus is not empty
+    AssertionError: expected { canonEventLogEntries: 1, …(7) } to deeply equal { canonEventLogEntries: 1, …(7) }
+    @@ -2,9 +2,9 @@
+        "aiChronicle": 1,
+        "canonEventLogEntries": 1,
+        "pulseHistory": 12,
+        "regionalEventLog": 71,
+        "regionalEventLogUnique": 
+- reader-with-no-writer ratchet: the live scan > SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+    AssertionError: the live heuristic inventory must exactly match the frozen one. A lawful shrink is `node scripts/check-observed-shape-readers.mjs --write` on a clean tree — it re-derives inventory, total and identities together and refuses anything that is not
+- reader-with-no-writer ratchet: the live scan > the provenance drift classifier separates a detector change from an input change > THE LIVE ESTATE INSTANCE: a freshly re-minted baseline has NO drift at all
+    AssertionError: an execution INPUT drifted since the mint — lawful, and the shrink-only re-freeze absorbs it: expected [ …(6) ] to deeply equal []
+    - []
+    + [
+    +   "src/data/dossierStateProse/defense.generated.js",
+    +   "src/data/dossierStateProse/economy.generated
+- reader-with-no-writer ratchet: the live scan > A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+    AssertionError: expected { reads: 2215, identities: 1553, …(3) } to deeply equal { reads: 2200, identities: 1542, …(3) }
+      {
+        "bankedReads": 78,
+    -   "files": 438,
+    -   "identities": 1542,
+    -   "reads": 2200,
+    +   "files": 443,
+    +   "identities": 1553,
+    +   "read
+
+## tests/lint/poolDominance.walker.test.js (3 red)
+- no drawn pool prints more of one line than its register allows > no pool rises above its ceiling beyond its own noise, or crosses into dominance, on both readings; none collapses
+    AssertionError: expected [ …(2) ] to deeply equal []
+    - []
+    + [
+    +   "ledger:institutionDescVariants:DESC_LATE_SIBLINGS: top1 0.8107 > ceiling 0.6364 (15.8 SE over 2002 draws in 1154 towns); repeats on confirm: ledger:institutionDescVariants:DESC_LATE_SIBLINGS: t
+- no drawn pool prints more of one line than its register allows > every drawn pool has a row, and every row is a drawn pool
+    AssertionError: expected [ 'ledger:rareSecrets:deeds', …(4) ] to deeply equal []
+    - []
+    + [
+    +   "ledger:rareSecrets:deeds",
+    +   "ledger:rareSecrets:masters",
+    +   "ledger:rareSecrets:natures",
+    +   "ledger:rareSecrets:outsiders",
+    +   "ledger:rareSecrets:ties",
+    + ]
+- no drawn pool prints more of one line than its register allows > no ceiling sits loose above its measure
+    AssertionError: expected [ …(3) ] to deeply equal []
+    - []
+    + [
+    +   "ledger:foodBalance:OUTLOOK_HOOK_SIBLINGS: top1 ceiling 0.5625 sits above its measure 0.4563",
+    +   "ledger:institutionServices:Butchers (3-8).Fresh meat: top1 ceiling 1 sits above its measure 0.
+
+## tests/lint/presumedThings.walker.test.js (2 red)
+- ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+    AssertionError: declare the thing on the line (needs or excludes, with its twin), never add a row: expected [ …(38) ] to deeply equal []
+    - []
+    + [
+    +   "src/data/dossierStateProse/defense.generated.js :: siege :: \"With {settlement} under siege, quarrels over ra
+- ARM 1 — the source > ⛔ no stale row: a cured line leaves the register in its own commit
+    AssertionError: expected [ …(79) ] to deeply equal []
+    - []
+    + [
+    +   "src/data/dossierStateProse/defense.generated.js	court	f8aa86f5bf0ee11e",
+    +   "src/data/dossierStateProse/defense.generated.js	militia	794fde202732eb70",
+    +   "src/data/dossierStateProse/defense
+
+## tests/lint/presumptionClasses.walker.test.js (1 red)
+- the tree against its register > no stale row: a cured line leaves the register (the close runs `node scripts/presumption-classes-door.mjs --shrink`)
+    AssertionError: expected [ …(152) ] to deeply equal []
+    - []
+    + [
+    +   "src/components/new/tabs/EconomicsTab.jsx	office	94e9cd55f3ff9cc4",
+    +   "src/data/arrivalProse.js	ease	e62f4b2c8d18f0e3",
+    +   "src/data/arrivalProse.js	office	e7b68086bd1c53b1",
+    +   "src/data/
+
+## tests/lint/proseComposed.walker.test.js (2 red)
+- GUARD THE GUARD — the inputs this file judges are the real ones > the corpus, the census and the relation leaf are the shipped ones, not empty stubs
+    AssertionError: the shipped state corpus: expected 3033 to be 2977 // Object.is equality
+    - 2977
+    + 3033
+- A0b — the text claims every declared field and no other > ⭐ THE SHIPPED CORPUS READING, printed and held SHRINK-ONLY
+    AssertionError: expected 54 to be less than or equal to 46
+           |                                 ^
+
+## tests/lint/proseCorpusBytes.test.js (2 red)
+- the prose byte ratchet — the roster and the measurement (ARCH §10) > RAW is EXACT: above fails, below demands the row be lowered
+    AssertionError: expected [ …(6) ] to deeply equal []
+    - []
+    + [
+    +   "src/data/dossierStateProse/defense.generated.js: grew to 281298 raw bytes, over the committed 269046. Append a declared row to scripts/.prose-byte-baseline.json naming the car and the delta, an
+- the prose byte ratchet — the roster and the measurement (ARCH §10) > GZIP sits inside the 1 % band around its committed figure
+    AssertionError: expected [ …(4) ] to deeply equal []
+    - []
+    + [
+    +   "src/data/dossierStateProse/defense.generated.js: gzip is 37154 against the committed 35811, a move of 1343 bytes, outside the 1 % band. A payload change reds the RAW arm first, so a gzip-only m
+
+## tests/lint/proseDrawnAnchors.walker.test.js (1 red)
+- proseDrawnAnchors — a literal state-prose sentence may not be a test anchor > no NEW file carries a literal state-prose anchor, and no frozen row grows
+    AssertionError: A literal state-prose sentence is being used as a test anchor. Compute it instead — `drawnMember` / `variantByVid` / `poolMemberTexts` from tests/helpers/drawnProse.js — so a re-index, a rewrite or an appended wording moves the member and the a
+
+## tests/lint/proseEntryContradiction.walker.test.js (4 red)
+- the corpus loaders — fail-closed, and counted against the probe > loads every home and reproduces the projection's own arithmetic
+    AssertionError: expected 3501 to be 3445 // Object.is equality
+    - 3445
+    + 3501
+- the corpus loaders — fail-closed, and counted against the probe > joins every annex row to its projected twin, so a breach can be cited by line
+    AssertionError: expected 2794 to be 2740 // Object.is equality
+    - 2740
+    + 2794
+- THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships beside > reds on all four shipped breaches, each in its assigned class
+    AssertionError: expected [] to include 'exemption on a null column'
+- THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships beside > THE QUALIFY ARM on the shipped `DS-POW-5::theocracy` variant — a trailing coordinate
+    AssertionError: entries carrying the trailing-coordinate class, at this tip: expected 377 to be 370 // Object.is equality
+    - 370
+    + 377
+
+## tests/lint/proseFamilyContract.walker.test.js (1 red)
+- four durable prose-family exact-totality contract > A1 reconstructs the exact four-family AO-0 corpus twice from one build
+    AssertionError: expected { scalarRows: 38197, …(8) } to deeply equal { scalarRows: 38127, …(8) }
+    @@ -2,10 +2,10 @@
+        "aiChronicle": 1,
+        "canonEventLogEntries": 1,
+        "pulseHistory": 12,
+        "regionalEventLog": 71,
+        "regionalEventLogUnique": 71,
+    -   "s
+
+## tests/lint/proseMoveGrammar.walker.test.js (3 red)
+- the four negative controls and the positive one (MOVE-GRAMMAR §4.4, as the sitting re-cut them) > CONTROL 4 — today's R1 leaves reproduce PROBE_ALL's two figures EXACTLY, with the segment definition pinned
+    AssertionError: expected 861 to be 859 // Object.is equality
+    - 859
+    + 861
+- the four negative controls and the positive one (MOVE-GRAMMAR §4.4, as the sitting re-cut them) > CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says
+    AssertionError: expected 861 to be 859 // Object.is equality
+    - 859
+    + 861
+- the walk over the shipped corpus — REPORTED, and the arms that cannot run say so > walks the whole dossier corpus and prints the level-1 figures
+    AssertionError: expected 939 to be 937 // Object.is equality
+    - 937
+    + 939
+
+## tests/lint/proseNumerics.test.js (1 red)
+- prose numerics live-tree ratchet (exact legacy identity, shrink-only) > path + line + category + snippet debt exactly matches the committed baseline
+    AssertionError: A new prose numeric leaked, or legacy debt moved/fell. Humanize additions; when debt falls, regenerate once and review every removed row before committing the lower baseline.: expected [ Array(185) ] to deeply equal [ Array(185) ]
+    @@ -317,17 +3
+
+## tests/lint/proseWaveGate.walker.test.js (3 red)
+- the CARTESIAN unit set is the attach set times the spines times the faces > ⭐⭐ ONE UNIT BUILDER: the gate and the lib agree on EVERY pool of a section
+    AssertionError: the units actually compared: expected 658 to be 634 // Object.is equality
+    - 634
+    + 658
+- THE ROSTER — a desk section is a LEAF, and the partition is asserted > ⛔ THE SIX LEAVES COVER EVERY POOL EXACTLY ONCE
+    AssertionError: every shipped pool: expected 861 to be 859 // Object.is equality
+    - 859
+    + 861
+- THE ROSTER — a desk section is a LEAF, and the partition is asserted > each section names its own leaf's pools, and a bad name is NOT-EXECUTABLE
+    AssertionError: and the six sum to the corpus: expected 861 to be 859 // Object.is equality
+    - 859
+    + 861
+
+## tests/lint/proseWiringCensus.walker.test.js (13 red)
+- the wiring census — TOTALITY over the corpus > every (block, pool) the loaders enumerate has exactly ONE census row
+    AssertionError: the R1 loaders enumerate this many pool cells: expected 861 to be 859 // Object.is equality
+    - 859
+    + 861
+- the wiring census — TOTALITY over the corpus > the VARIANT column closes, and reproduces the histogram the owner's ruling sizes
+    AssertionError: the R1 corpus holds this many variants: expected 3033 to be 2977 // Object.is equality
+    - 2977
+    + 3033
+- the wiring census — TOTALITY over the corpus > ANTI-VACUITY: the corpus census carries BOTH statuses, in measured integers
+    AssertionError: pools reported WIRING-UNRESOLVED with a reason: expected 369 to be 367 // Object.is equality
+    - 367
+    + 369
+- THE MAP READ THE OTHER WAY — fact → text, and the three tiers > the tiers name the block, the field, the reading function and the COUNT
+    AssertionError: and the rest: expected 246 to be 244 // Object.is equality
+    - 244
+    + 246
+- car 0 — `reads`, and the NARROWS line that may narrow it > reads = the SELECTING BRANCH's tests where one was recovered, function-wide where none was
+    AssertionError: the census still covers every pool: expected 861 to be 859 // Object.is equality
+    - 859
+    + 861
+- car 0 — `absent`: a measurement, or a default wearing a reading's clothes > the corpus's own absence distribution is an integer, and the table rung is counted apart
+    AssertionError: read paths whose absence a predicate can see: expected 597 to be 590 // Object.is equality
+    - 590
+    + 597
+- MEASURE car 3 — the desk-read recipe, the absence readers and the `sites` column > ⭐ THE `sites` COLUMN IS CONVICTED BY A FIXTURE THAT MUST FIRE
+    AssertionError: rows the mount registry gives a place to speak: expected 730 to be 728 // Object.is equality
+    - 728
+    + 730
+- car 0 — the derived ATTACH sets, their coverage, and the fact budget > the fact budget is counted over RESOLVED rows and refuses the rest
+    AssertionError: and the UNRESOLVED rows declare themselves: expected 369 to be 367 // Object.is equality
+    - 367
+    + 369
+- car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf written > the draft over the SHIPPED endpoints and read paths, with its evidence and its debt
+    AssertionError: candidate rows at this tip, docblock withdrawn: expected 24 to be 21 // Object.is equality
+    - 21
+    + 24
+- SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) > ⭐ THE RECORD-SERVICE LISTS ARE THE SHIPPED ROSTER'S OWN WORDS, re-measured here
+    AssertionError: ROWS by source standing: expected { LICENSED: 131, OFFICE: 3, …(1) } to deeply equal { LICENSED: 131, OFFICE: 3, …(1) }
+      {
+        "LICENSED": 131,
+        "OFFICE": 3,
+    -   "SOURCE-UNRESOLVED": 725,
+    +   "SOURCE-UNRESOLVED": 727,
+      }
+           |          
+- SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) > the `stateOrgan` column names the rows a captured town can move, and only those
+    AssertionError: and the rest carry no key at all: expected 808 to be 806 // Object.is equality
+    - 806
+    + 808
+- SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) > ⭐ THE DRY READ: both modes, and the one that writes is not among them
+    AssertionError: the committed register is current at this tip: expected false to be true // Object.is equality
+    - true
+    + false
+           |                                                                         ^
+- car 0 — the committed JSON and its interlock > the committed census is byte-identical to a fresh build, and the stamp is live
+    AssertionError: the committed file is current: expected 'stale-stamp' to be '' // Object.is equality
+    + stale-stamp
+           |                                                             ^
+
+## tests/lint/ruinFilterRoster.walker.test.js (1 red)
+- ruin-filter roster ratchet (structural-prevention Pattern 2) > the scan reads CODE — a `.institutions` in a comment or a quoted string never enrols
+    AssertionError: expected 115 to be 113 // Object.is equality
+    - 113
+    + 115
+           |                            ^
+
+## tests/lint/seedLoopTotality.walker.test.js (1 red)
+- seed-loop totality walker (habitat removal) > no NEW bare seed loop anywhere in the test corpus
+    AssertionError: expected [ Array(1) ] to deeply equal []
+    - []
+    + [
+    +   "tests/pdf/seamPdfReadsTheTabs.test.jsx: 2 bare seed loop(s) at line(s) 93, 120 (frozen ceiling 0). A seed loop that asserts inline stops at the FIRST failing seed, so its failure count is a
+
+## tests/lint/siteCoherenceRatchet.test.js (1 red)
+- site-coherence contradiction ratchet (Wave 0 — inventory freezing, never correctness) > C1 — the live row set equals the frozen baseline in both directions
+    AssertionError: THE CONTRADICTION INVENTORY MOVED. `added` = new (terrain, siteKind, decisiveToken) identities, a regression until proven otherwise. `grown` = a frozen row rose. `shrunk` / `vanished` = a row FELL or DISAPPEARED: that is a WIN, and it reds unti
+
+## tests/lint/sovereigntyLightingContract.walker.test.js (2 red)
+- the sovereignty lighting condition — a marker is EVIDENCE only in a live title > ⛔ THE EACH-FAMILY PARK DEBT ONLY SHRINKS — and the false reformat reds here
+    AssertionError: MORE files now park solely because of `each`/`for` than the frozen ceiling allows. This number is not permitted to rise: the cure is a plain parameterless test looping over the rows in its body, never a new `each` call.
+      tests/domain/bar5LawBa
+- the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+    AssertionError: the estate's file count moved — re-measure, do not re-word: expected 3682 to be 3641 // Object.is equality
+    - 3641
+    + 3682
+           |          ^
+
+## tests/lint/tuningRegister.walker.test.js (1 red)
+- tuning register — the inventory is frozen and honest > the measured tree matches the committed inventory exactly
+    AssertionError: the inventory is EXACT, both ways, including digests, leaves and dependents. A tuning value that moved without a refreeze is exactly the event this register exists to make visible. If the movement is legitimate, refreeze it and say why; do not 
+
+## tests/lint/wiringCensusDeclared.walker.test.js (1 red)
+- the state rows' declared columns > every row carries the four columns, equal to a fresh annex reading
+    AssertionError: expected [ …(88) ] to deeply equal []
+    - []
+    + [
+    +   "DS-DEF-1 :: readiness STRONG",
+    +   "DS-DEF-1 :: readiness ADEQUATE",
+    +   "DS-DEF-1 :: readiness WEAK",
+    +   "DS-DEF-2 :: Invasion & War: walls AND professional garrison",
+    +   "DS-DEF-2 :: Invas
+
+## tests/lint/writerReach.walker.test.js (9 red)
+- writer-with-no-reader ratchet: the frozen register > the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count
+    AssertionError: expected '25b8a5539fa97a9fcc085060fb80108ca804f…' to be '05cdd05bb5cc9a65091fd82bf9c2d82fcdaea…' // Object.is equality
+    Expected: "05cdd05bb5cc9a65091fd82bf9c2d82fcdaea37b7d3626aa5bbe40e573d30032"
+    Received: "25b8a5539fa97a9fcc085060fb80108ca804f
+- writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+    AssertionError: resourceDepleted on activeChains is missing from the frozen surfaceReach: expected 'campaign-pdf=R dossier-pdf=R foundry=…' to be 'campaign-pdf=R dossier-pdf=R foundry=…' // Object.is equality
+    Expected: "campaign-pdf=R dossier-pdf=R foundry=R w
+- writer-with-no-reader ratchet: the EXECUTED corpus and the closures > the producers ran and the write population is not empty
+    AssertionError: expected 1748 to be 1741 // Object.is equality
+    - 1741
+    + 1748
+           |                                                    ^
+- writer-with-no-reader ratchet: the live judgment > every DARK identity is REGISTERED or BANKED — the shrink-only comparison is clean
+    AssertionError: a DARK identity nobody rowed or banked is ceiling 0: expected [ 'fabricLed on osr000', …(17) ] to deeply equal []
+    - []
+    + [
+    +   "fabricLed on osr000",
+    +   "prosperityAccrued on osr003",
+    +   "proud on osr003:npc_bowyers_fletchers_guild",
+    +   "pro
+- writer-with-no-reader ratchet: the live judgment > the banked cohort is exact — a member now LIT or no longer written is stale, never silently spent
+    AssertionError: expected [ …(4) ] to deeply equal []
+    - []
+    + [
+    +   "Pastoral & livestock on chains",
+    +   "noble on stocks",
+    +   "settlementCondition on npcs",
+    +   "templateType on historicalEvents",
+    + ]
+           |                                                  
+- writer-with-no-reader ratchet: the MUTANTS > THE MUTANT REDS: a synthetic written key on a judged shape with no reader is DARK, unregistered, ceiling 0
+    AssertionError: expected [ …(19) ] to deeply equal [ '__plantedWrittenKey on settlement' ]
+      [
+        "__plantedWrittenKey on settlement",
+    +   "fabricLed on osr000",
+    +   "prosperityAccrued on osr003",
+    +   "proud on osr003:npc_bowyers_fletchers_guild",
+    +   "proud 
+- writer-with-no-reader ratchet: the MUTANTS > THE SWAP MUTANT: a new dark identity at constant count reds with its identity named
+    AssertionError: expected 1427 to be 1413 // Object.is equality
+    - 1413
+    + 1427
+           |                                  ^
+- writer-with-no-reader ratchet: the MUTANTS > THE GROWTH LAW IS EXECUTED: a live-derived register is green and ONE planted dark identity reds
+    AssertionError: expected [ 'fabricLed on osr000', …(17) ] to deeply equal []
+    - []
+    + [
+    +   "fabricLed on osr000",
+    +   "prosperityAccrued on osr003",
+    +   "proud on osr003:npc_bowyers_fletchers_guild",
+    +   "proud on osr003:npc_caravaneer_s_post",
+    +   "proud on os
+- writer-with-no-reader ratchet: the lit-dial arm > the lit arm changes no draw: the walker corpus is byte-identical beside the lit one, and the dials are passed on the arm’s own configs
+    AssertionError: expected '25b8a5539fa97a9fcc085060fb80108ca804f…' to be '05cdd05bb5cc9a65091fd82bf9c2d82fcdaea…' // Object.is equality
+    Expected: "05cdd05bb5cc9a65091fd82bf9c2d82fcdaea37b7d3626aa5bbe40e573d30032"
+    Received: "25b8a5539fa97a9fcc085060fb80108ca804f
+
+## tests/property/dmLayerGoldenIsolation.test.js (1 red)
+- EM-B2a4 — the DM layer, its pin bag and the golden isolation property > A7 — THE ISOLATION PROPERTY: a dormant layer is the committed golden on EVERY corpus row, and a one-root layer moves that root
+    AssertionError: a dormant layer pins nothing, so its re-derivation IS the golden: expected [ …(485) ] to deeply equal []
+    - []
+    + [
+    +   "thorp|germanic|hills|road|civilized|golden-master-v3",
+    +   "thorp|germanic|riverside|river|civilized|golden-master-v3",
+    +   "
+
+## tests/property/dossierProseManifest.test.js (2 red)
+- the composed-prose manifest — the DRIFT corpus, both audiences > ⭐⭐ THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally is derived rather than described
+    AssertionError: the DRIFT corpus by seed, cells and towns: expected { 'golden-master-v3': { …(2) }, …(3) } to deeply equal { 'golden-master-v3': { …(2) }, …(3) }
+    @@ -10,9 +10,9 @@
+        "gm-seed-c": {
+          "cells": 394,
+          "towns": 3,
+        },
+        "golden-mast
+- the composed-prose manifest — the DRIFT corpus, both audiences > ⭐ THE DRIFT ARM: no row added, no row removed, no row moved
+    AssertionError: rows whose composed prose moved: expected [ …(704) ] to deeply equal []
+    - []
+    + [
+    +   "city|arabic|coastal|port|civilized|golden-master-v3::dm",
+    +   "city|arabic|coastal|port|civilized|golden-master-v3::player",
+    +   "city|arabic|desert|road|civi
+
+## tests/property/editCorpusRatchet.test.js (1 red)
+- the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A7 the honesty figures are re-measured and the ride-along has its first population in the chain
+    AssertionError: the edits that DO reach a reading: expected [ 695, 275, 2176 ] to deeply equal [ 695, 275, 2173 ]
+      [
+        695,
+        275,
+    -   2173,
+    +   2176,
+      ]
+
+## tests/property/espionageDormancyFence.test.js (1 red)
+- FENCE 1 (REPLACED) — the driven byte-identity golden, and the chain that terminates > THE DRIVEN GOLDEN: 360 settlements at this tip hash to the PRE-COUPLING corpus
+    AssertionError: THE DRIVEN CORPUS MOVED. This is a STOP, not a re-record. The constant is re-recorded ONLY inside a NAMED CHARTERED WINDOW, and after the ENGINE-HYGIENE landing spent AGN's, T13 TRANS closed with zero movement (§883); exactly ONE remains: the L
+
+## tests/property/generatorGoldenMaster.test.js (1 red)
+- generator golden master (cross-build output stability) > every config produces byte-identical output to the golden master
+    AssertionError: expected [ …(485) ] to deeply equal []
+    - []
+    + [
+    +   "thorp|germanic|hills|road|civilized|golden-master-v3",
+    +   "thorp|germanic|riverside|river|civilized|golden-master-v3",
+    +   "thorp|germanic|coastal|port|civilized|golden-master-v3",
+    +   "thor
+
+## tests/property/heraldKnowledgeDeskGolden.test.js (1 red)
+- the knowledge desk — the non-omniscient Herald golden (captured first, byte-stable after) > THE REFILE MOVES NO CONTENT BYTE, AND EXACTLY THE DECLARED ITEMS CHANGE DESK
+    AssertionError: expected 'a4294c066e34f62ba2dbcb8987a1a5c0c19f4…' to be 'e2b064266e1f5ba6dac27ed7365e0126d19a5…' // Object.is equality
+    Expected: "e2b064266e1f5ba6dac27ed7365e0126d19a56682fc547a3878ec8c40cd02662"
+    Received: "a4294c066e34f62ba2dbcb8987a1a5c0c19f4
