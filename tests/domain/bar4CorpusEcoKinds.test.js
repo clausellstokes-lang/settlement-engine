@@ -17,6 +17,7 @@ import { leadingSourceSpentOf } from '../../src/domain/facts/leadingSourceSpent.
 import { ownPlotsOf } from '../../src/domain/facts/ownPlots.js';
 import { liveInstitutionNames } from '../../src/domain/facts/liveInstitutionNames.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { FISH_BOUGHT_LINE, FISH_RITES_LINE } from '../../src/generators/economy/incomeLineSiblings.js';
 
 /** The food-source pools' members (the twins are found by what they declare, never by a literal). */
@@ -131,10 +132,13 @@ describe('THE ZERO: in every census town where a kind was found at the base, the
 
 describe('FS1: the fished-out income line reads the rites that hold the fishing chain up', () => {
   const descs = (/** @type {string} */ seed) => (/** @type {any} */ (READ.get(seed))?.record?.economicState?.incomeSources || []).map((/** @type {any} */ i) => String(i.desc ?? ''));
-  it('where the rites hold the chain up, the rites line prints in place of "bought in"', () => {
+  // FS1 (a) RETIRED BY RULING BR33 (the sixth chair, 2026-11-18; BAR8 J-INCOME item 2): the earlier ruling yields to the owner's
+  // supply rule. A chain kept by magic feeds no house (`supplyStory.js :: sourceStoryOf`), so where the fish is bought in the
+  // bought line prints, whatever the rites hold. The retired claim, in its own words: "where the rites hold the chain up, the rites
+  // line prints in place of \"bought in\"". FS1 (a)'s four towns, re-keyed to the claim that now holds there.
+  it('BR33: where the fish is bought in, the bought line prints and the rites line does not, whatever the rites hold', () => {
     expectNoSeedFailures(collectSeedFailures(RITES_AT_BASE, (seed) => {
-      expect(descs(seed), seed).toContain(FISH_RITES_LINE);
-      expect(descs(seed), seed).not.toContain(FISH_BOUGHT_LINE); // anchored: the rites line is on the same list, above
+      expectAbsentWithAnchor(descs(seed), FISH_RITES_LINE, FISH_BOUGHT_LINE, seed);
     }));
   });
   it('where no rites hold it, the bought line still prints (KEEP)', () => {

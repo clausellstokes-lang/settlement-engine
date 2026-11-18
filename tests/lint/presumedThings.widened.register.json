@@ -16857,6 +16857,20 @@
     "2242e4fdde32e5ba"
    ]
   ],
+  "src/domain/display/incomeOrdinaryLines.js": [
+   [
+    "smith",
+    "family",
+    "Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.",
+    "782b0b74db43359b"
+   ],
+   [
+    "smith",
+    "after-base: close-true",
+    "Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.",
+    "ab7a101ef0ffa943"
+   ]
+  ],
   "src/domain/display/institutionDisplayName.js": [
    [
     "religiousHouses",
@@ -26261,12 +26275,6 @@
   ],
   "src/generators/economy/incomeLineSiblings.js": [
    [
-    "smith",
-    "family",
-    "Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.",
-    "782b0b74db43359b"
-   ],
-   [
     "house: warehouse",
     "family",
     "Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads.",
@@ -26277,12 +26285,6 @@
     "after-base: close-true",
     "Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade.",
     "876dfe3c4ebb2b12"
-   ],
-   [
-    "smith",
-    "after-base: close-true",
-    "Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.",
-    "ab7a101ef0ffa943"
    ],
    [
     "house: fuller",
