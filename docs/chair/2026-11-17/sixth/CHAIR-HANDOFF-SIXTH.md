@@ -354,6 +354,41 @@ should be paused or archived by the owner's hand.
   stays at rand-47 is printed and true of both powers. (4) ONE FOLLOW-UP SEAT, K-WATCH-2, DOES BR29 AND BR30 (the two
   seats' files are disjoint), cut from point 49 (215f97d29: K-WATCH and K-POWERS on the line's tip); the two points
   and its commits land together when both readers clear their part.
+- **BR31 (02:45 UTC, 2026-11-18; MARKS-2 after the chair's read: NOT YET).** The seat's own table shows runD's 8a
+  RISING and `bar6MarksLaw8` (a) red at its tip, both by the war's iron hook: the mark and the scene follow BR16 (an
+  occupation alone is peace for the war's iron) and the hook's writer does not (`foodBalance.js`, about line 826,
+  not the seat's file): THE ONE LINE IS GIVEN TO THE SEAT (`warIronState` handed the town's crisis kinds), in a
+  commit of its own, its moved `economicViability.plotHooks` declared over the thirty, the 150, the 720 and the 525.
+  The seat is also asked for the round's lesson at a merge with the line's tip (the laws by message; the older tests
+  that name what it changed) and whether `boughtByNameOnly` reaches any OLDER row of `INPUT_IMPORTED_AS`. LEFT AS
+  THE SEAT NAMED THEM: the two calm-road butchers (11a.atWork; C34109 of the thirty still stands: the need list says
+  "livestock … not brought in" beside imports that name the same catalogue good under another word: the need
+  list's, to be put to the need-list seat), the livestock and hides roots (one catalogue good under either word:
+  the detector's word list is narrower than the catalogue), the timber 9, the tailors. FOR THE VETO LIST: the KEEP
+  of C7539 (ruling CY1: the shipyard's row unmarked under a siege) is overturned by the brief's own item 2 (the
+  yard is curtailed); the new rows of `INPUT_IMPORTED_AS`, `HOUSE_NEED_INPUT`'s alchemist, the shipyard's field
+  work, "Salted fish" written on three towns' imports.
+- **BR32 (02:52 UTC, 2026-11-18; DESKS-DEF after its second reader: DO NOT LAND YET).** (1) H1: the older test
+  `tests/domain/bar7DesksLines.test.js` item 6 is re-keyed by identity (the pool's count five, its name corrected,
+  a dated note): the reader proved the per-town claim holds with five (exactly one of v3 to v7 stands in each town
+  of the key). (2) H2: `tests/property/dossierProseManifest.test.js` reads 260 cells as matching two variants, all
+  of DS-POW-5 council: the twin v6 ("… goes to the {seat}, …") is its original v2 ("… goes to the whole {seat}, …")
+  less one word, and the helper `tests/helpers/dossierManifest.js :: templateMatches` lets a slot swallow the
+  word. THE TWIN'S WORDS STAND (no word is changed to please a matcher): THE HELPER RESOLVES A SENTENCE THAT
+  SEVERAL TEMPLATES MATCH TO THE ONE WITH THE LONGEST LITERAL TEXT, and holds it ambiguous only where the longest
+  is tied; proved both ways (a v2 sentence reads v2; a v6 sentence reads v6; two templates of equal literals still
+  red the arm). (3) H3: the guard's `it.each` becomes a plain test that loops (the each-family count back to 113).
+  (4) M1, THE DESK LINE THAT STILL STANDS FALSE IN TEN TOWNS ("A thing done wrong at {name} goes somewhere and takes
+  time, …" beside "Legal Infrastructure · Prison only / Detention without process."): the pool's key is chosen by
+  a NAME test (`defenseStateProse.js :: internalRowPoolKey`, handed `hasCourtSystem`: every town hall) where the
+  Legal row reads the roster's court: THE KEY READS THE LEGAL ROW'S OWN COURT (the atom `court sits`, `defence.js
+  :: courtHoldersOf`), one fact for the row and the desk; the follow-up measures which pool each of the ten then
+  draws and reads each line against its page (R7: no slot left empty), and declares the moves. (5) M2: the two
+  line-number anchors of `tests/lint/proseEntryContradiction.walker.test.js` have named the wrong rows since before
+  this round (the reader: the rows their notes name stand at 6233 and 2455 at point 52, and with them one of the
+  walker's reds turns green): THE ANCHORS ARE FOUND BY THE ROW'S OWN TEXT, never by a line number again. (6) M3
+  (three more stale rows of the uncommitted wiring census) and the stored counts: the close's. 13d and 15c stay
+  left for the reasons the reader confirmed (15c is the need-list seat's item 5).
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
@@ -1295,3 +1330,31 @@ should be paused or archived by the owner's hand.
   merge with the line's tip.
   THE OBSERVED-SHAPE SCAN'S ONE MORE READ (7 -> 8) is given to K-WATCH-2 to attribute (its leaf reads a house's
   `_worldPulseInactive` and `status` itself).
+- 02:53 UTC, 2026-11-18 · **THE OWNER WROTE TWICE (about 02:46 and 02:48), BOTH ANSWERED FIRST.** (1) "after this
+  merge one, push and deploy before continuing". THE CHAIR MEASURED AND ANSWERED IN PLAIN CHAT: master is db832c892
+  (2026-11-06, pull request #73); the working line is 6,640 commits and 4,333 files ahead of it; seven migrations
+  (204 to 210) and the edge functions differ; the site's own gate (`scripts/vercel-ignore-build.mjs`) builds only a
+  commit whose CI is green, and about 160 tests are red by stored figures until the close. THE MERGE TO MASTER, THE
+  DEPLOY AND THE MIGRATIONS STAY THE OWNER'S HAND; the refresh of the stored figures needs the owner's plain yes.
+  THE CHAIR ASKED FOR ONE OF TWO ANSWERS: "Yes: refresh the stored reference files and open the pull request."
+  (the line is frozen after the merge in hand and the close starts at once) or "Land first, then close." (the
+  chair's advice: one close in place of two). UNTIL THE OWNER ANSWERS: the line takes the two pieces their readers
+  have cleared (SCENES, FISH-ROWS) and NOTHING ELSE; the builders already seated go on, on their own branches.
+  (2) "describe the architecture and process for generating a settlement now, in layman's terms and in exhaustive
+  detail": two read-only researchers map the code at 99ca9ad51 (a clean checkout, /home/user/birth3); the chair
+  reads the pipeline's spine itself (22 steps, `src/generators/steps/index.js`, `pipeline.js`, `stepMetadata.js`)
+  and writes the answer.
+  ALSO: **READ-SCENES: LAND on points 45 to 47** (02:48; the 900 births byte-equal at 46, 55b954f98 and 47; H2 and
+  M2 closed; the four re-keys each fail under a mutation; the laws by name and by message equal at 55b954f98 and
+  3dc87b346; no fresh row at either door): THE LINE IS BEING FAST-FORWARDED TO 4dbd6fc15. **READ-DESKS-DEF: DO NOT
+  LAND YET** (ruling BR32). **FISH-ROWS's tests-only commit d88cf53b3** (the stale `upkeepVocation` re-keyed by
+  identity; three constructed arms for the hunks no town reaches): merged alone on 99ca9ad51 in scratch
+  (57d775b73, branch `lane/landing-fish-2026-11-18`, /home/user/k): the targeted net reads 14 reds, all the line's
+  own (three messages differ: the fork census's A4 two rows to five, the seat's three cells left by name; the
+  mutation manifest names the seat's guard; the estate's file count one more); it is re-merged on the line's new
+  tip when SCENES is on it. **MEASURE-1's second measure** (99ca9ad51 against the six seats' stack 7e8fd4cc1; tables
+  under `docs/chair/2026-11-18/measure-2/` on `lane/measure-2026-11-17` at f96b63dd8): ONLY TWO RULES ROSE, both in
+  the 150 and both known (14a.descCopy.generic 6 to 7: BR30 (3); 15e.newBuild 0 to 1: BR28 (7)); many fell.
+  **K-WATCH-2 SEATED** session_01FbPLbdUmBAQENdoySQLHVG (02:43; from 215f97d29; BR29 and BR30). **DESKS-2**: prompt
+  `/home/user/wk/prompts/DESKS-2.txt` (from 4446aecb5; branch `lane/bar8-desks-2-2026-11-18`; PART A the blockers
+  of both desks under BR28 and BR32, PART B the leftovers). **MARKS-2** told BR31 at 02:45.
