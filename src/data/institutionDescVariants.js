@@ -2458,4 +2458,15 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.", excludes: Object.freeze(['fish bought in']) }),
     Object.freeze({ text: "Salted and dried fish is sold here, from an open stall or under a small roof. No fresh catch comes in.", twinOf: "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.", needs: Object.freeze(['fish bought in']) }),
   ]),
+  // FAULTS-ROWS (the chair's ruling FR20 (2), 2026-11-18; vetoable by the owner; the twins' words are the chair's): the card's two
+  // siblings of the village Fish market's draw pool, the catalogue line (`institutionalCatalog.js`) and the pool's #0, in the same
+  // form (r2r-village-11: the catalogue line beside "Preserved fish").
+  "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait.": Object.freeze([
+    Object.freeze({ text: "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait.", excludes: Object.freeze(['fish bought in']) }),
+    Object.freeze({ text: "An open-air stall or small covered market where salted and dried fish is sold. No fresh catch is landed here.", twinOf: "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait.", needs: Object.freeze(['fish bought in']) }),
+  ]),
+  "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.": Object.freeze([
+    Object.freeze({ text: "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.", excludes: Object.freeze(['fish bought in']) }),
+    Object.freeze({ text: "An open stall or small roofed market for salted and dried fish, brought in from elsewhere. The catch is no longer landed here.", twinOf: "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.", needs: Object.freeze(['fish bought in']) }),
+  ]),
 });

@@ -185,7 +185,15 @@ describe('FAULTS-ROWS item 5: the luxury quarter trades in no spice or silk the 
 const CATCH_CARD = "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.";
 const CATCH_TWIN = 'Salted and dried fish is sold here, from an open stall or under a small roof. No fresh catch comes in.';
 /** The card drawn and the fish bought in (the market's row "Preserved fish"): the twin. */
-const FISH_BOUGHT_CARD = Object.freeze(['bar0-village-calm-rand-47']);
+const CAT_CARD = "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait.";
+const CAT_TWIN = 'An open-air stall or small covered market where salted and dried fish is sold. No fresh catch is landed here.';
+const ZERO_CARD = "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.";
+const ZERO_TWIN = 'An open stall or small roofed market for salted and dried fish, brought in from elsewhere. The catch is no longer landed here.';
+/** [seed, the card drawn, its twin]: the fish bought in (the market's row "Preserved fish"): the twin (FR20 (2): the catalogue line too). */
+const FISH_BOUGHT_PAIRS = Object.freeze([['bar0-village-calm-rand-47', CATCH_CARD, CATCH_TWIN], ['r2r-village-11', CAT_CARD, CAT_TWIN]]);
+const FISH_BOUGHT_CARD = Object.freeze(FISH_BOUGHT_PAIRS.map(([seed]) => seed));
+/** [seed, the card kept]: a live fishery or an idle town keeps its card (r2r-village-45: idle, #0; bar0-village-calm-rand-46: live, the catalogue line). */
+const FISH_KEPT_PAIRS = Object.freeze([['r2r-village-45', ZERO_CARD], ['bar0-village-calm-rand-46', CAT_CARD], ['r2r-village-2', CATCH_CARD]]);
 /** The card drawn beside a live fishery ("Fresh fish retail"): the line stands. */
 const FISH_LIVE_CARD = Object.freeze(['r2r-village-2']);
 /** IDLE (the ground spent, nothing brought in; `bar8FishRows.test.js`'s own): no fish bought in, the row and its mark kept. */
@@ -206,7 +214,7 @@ describe('FAULTS-ROWS item 6: the fish market\'s card says the fish is bought in
     boughtOf = (await import('../../src/domain/facts/fishBoughtIn.js')).fishBoughtIn;
     factsOfFn = (await import('../../src/domain/facts/factsOf.js')).factsOf;
     await boundary.loadGenerationLawPayloads();
-    for (const seed of [...FISH_BOUGHT_CARD, ...FISH_LIVE_CARD, ...FISH_IDLE, ...FISH_POP]) {
+    for (const seed of [...FISH_BOUGHT_CARD, ...FISH_LIVE_CARD, ...FISH_IDLE, ...FISH_KEPT_PAIRS.map(([s]) => s), ...FISH_POP]) {
       if (!FISH.has(seed)) FISH.set(seed, generateSettlementPipeline(boundary.birthConfig({ ...DEFAULT_CONFIG, ...configOf(seed) }), null, { seed, customContent: {} }));
     }
   }, 600_000);
@@ -232,11 +240,11 @@ describe('FAULTS-ROWS item 6: the fish market\'s card says the fish is bought in
   });
 
   it('BOUGHT: the card takes its twin beside the market\'s "Preserved fish"', () => {
-    const failures = collectSeedFailures(FISH_BOUGHT_CARD, (seed) => {
+    const failures = collectSeedFailures(FISH_BOUGHT_PAIRS, ([seed, card, twin]) => {
       const town = FISH.get(seed);
       expect(boughtOf(town), `${seed}: the fish bought in`).toBe(true);
       expect(marketRows(town), `${seed}: the row`).toContain('Preserved fish');
-      expectAbsentWithAnchor(marketDescs(town), CATCH_CARD, CATCH_TWIN, seed);
+      expectAbsentWithAnchor(marketDescs(town), card, twin, seed);
       expect(marketDescs(toPublicSafe(town)), `${seed}: the shared page`).toEqual(marketDescs(town));
     });
     expectNoSeedFailures(failures, 'every bought town\'s card says no catch comes in');
@@ -256,11 +264,22 @@ describe('FAULTS-ROWS item 6: the fish market\'s card says the fish is bought in
     expectNoSeedFailures(failures, 'the live and the idle keep their cards');
   });
 
-  it('THE TABLE: the card is a late key on `fish bought in`; its twin names no catch of the day', () => {
-    const set = /** @type {any} */ (DESC_LATE_SIBLINGS)[CATCH_CARD];
-    expect(set.map((/** @type {any} */ l) => l.text)).toEqual([CATCH_CARD, CATCH_TWIN]);
-    expect([...set[0].excludes]).toEqual(['fish bought in']);
-    expect([...set[1].needs]).toEqual(['fish bought in']);
-    expectAbsentWithAnchor(CATCH_TWIN, "day's catch", 'Salted and dried fish', CATCH_CARD);
+  it('KEPT (FR20 (2)): an idle town and a live fishery keep the card they drew, of all three lines of the pool', () => {
+    const failures = collectSeedFailures(FISH_KEPT_PAIRS, ([seed, card]) => {
+      const town = FISH.get(seed);
+      expect(boughtOf(town), `${seed}: no fish bought in`).toBe(false);
+      expect(marketDescs(town), `${seed}: the card kept`).toEqual([card]);
+    });
+    expectNoSeedFailures(failures, 'the idle and the live keep their cards');
+  });
+
+  it('THE TABLE: each of the three cards is a late key on `fish bought in`; its twin names no catch of the day', () => {
+    for (const [card, twin] of [[CATCH_CARD, CATCH_TWIN], [CAT_CARD, CAT_TWIN], [ZERO_CARD, ZERO_TWIN]]) {
+      const set = /** @type {any} */ (DESC_LATE_SIBLINGS)[card];
+      expect(set.map((/** @type {any} */ l) => l.text)).toEqual([card, twin]);
+      expect([...set[0].excludes]).toEqual(['fish bought in']);
+      expect([...set[1].needs]).toEqual(['fish bought in']);
+      expectAbsentWithAnchor(twin, "day's catch", 'dried fish', card);
+    }
   });
 });
