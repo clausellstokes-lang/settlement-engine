@@ -6728,7 +6728,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
             "no crisis: under_siege",
             "no critical import brought in"
           ],
-          "text": "Some of {settlement}'s work needs {good} that the country around it does not give, and none of it is brought in.",
+          "text": "Some of {settlement}'s work needs more {good} than the country around it gives, and none of it is brought in.",
           "slots": [
             "settlement",
             "good"
