@@ -98,7 +98,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
       ) : null))(ordinaryTimesOnPage(settlement, [
         ...(e.incomeSources || []).map((src) => /** @type {const} */ (['income', src])),
         ...(flag('pdfVisualChains') ? (settlement?.economicState?.activeChains || []).filter((c) => c && c.status !== 'unexploited') : []).map((c) => /** @type {const} */ (['chain', c])),
-      ]))}
+      ], { readings: false }))/* PDF-2b (item 3): the boolean the Economics tab's head line hands (econOrdinaryTimesLine) */}
 
       {/* ── Income sources ─────────────────────────────────────── */}
       {e.incomeSources?.length > 0 && (

@@ -32,6 +32,11 @@ vi.mock('../../src/store/index.js', () => {
 
 import { EconomicsTrade } from '../../src/pdf/sections/EconomicsTrade.jsx';
 import { Services } from '../../src/pdf/sections/Services.jsx';
+import { Institutions } from '../../src/pdf/sections/Institutions.jsx';
+import React from 'react';
+import { render, cleanup } from '@testing-library/react';
+import InstitutionsTab from '../../src/components/new/tabs/InstitutionsTab.jsx';
+import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import { ResourcesProduction } from '../../src/pdf/sections/ResourcesProduction.jsx';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { CHAIN_STATE_WORDS } from '../../src/pdf/lib/chainStateOnPage.js';
@@ -258,15 +263,47 @@ describe('PDF-2 item 7: the journal\'s Economics head line is the Economics tab\
   });
 });
 
+describe('PDF-2b item 1 (item 3 of the section, LEFT-MARKS M3): the PDF\'s Services and Institutions chapters print the short sentence where their tabs print it', () => {
+  // The nine towns whose only mark is a failed venture's (LEFT-MARKS's M3: their tabs print no "marked short" sentence) and
+  // two whose tabs print it over a short mark (r2r-city-20; r2r-hamlet-27, the maltster's), each tab RENDERED, as
+  // `tests/domain/leftMarks.test.js` renders them; each PDF chapter rendered to its text leaves.
+  const VENTURE_ONLY = ['r2r-hamlet-26', 'r2r-hamlet-48', 'r2r-hamlet-57', 'r2r-town-13', 'r2r-town-18', 'r2s-under_siege-city-1',
+    'r2s-politically_fractured-hamlet-0', 'r2s-infiltrated-town-1', 'r2s-wartime-city-3'];
+  const SHORT_MARKED = ['r2r-city-20', 'r2r-hamlet-27'];
+  test('the nine towns and the two beside them, every seed collected', () => {
+    let printedOnTab = 0;
+    expectNoSeedFailures(collectSeedFailures([...VENTURE_ONLY, ...SHORT_MARKED], (seed) => {
+      const t = generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} });
+      const vm = buildViewModel({ settlement: t });
+      const props = { settlement: t, narrativeMode: false, vm, stateProse: null };
+      const instTab = (render(React.createElement(InstitutionsTab, { settlement: t })).container.textContent || '').includes(SUPPLIED_LINE);
+      cleanup();
+      const svcTab = (render(React.createElement(ServicesTab, { services: t.availableServices, settlement: t, narrativeNote: null })).container.textContent || '').includes(SUPPLIED_LINE);
+      cleanup();
+      if (instTab || svcTab) printedOnTab++;
+      /** @type {string[]} */ const inst = [], svc = [];
+      walk(Institutions(props), inst, []); walk(Services(props), svc, []);
+      expect({ institutions: inst.some((l) => l.includes(SUPPLIED_LINE)), services: svc.some((l) => l.includes(SUPPLIED_LINE)) }, `${seed}: the PDF's chapters / the tabs`)
+        .toEqual({ institutions: instTab, services: svcTab });
+      if (VENTURE_ONLY.includes(seed)) expect({ instTab, svcTab }, `${seed}: anchored: neither tab prints it (M3)`).toEqual({ instTab: false, svcTab: false });
+    }), 'the M3 towns');
+    expect(printedOnTab, 'the towns whose tab prints the sentence over a short mark').toBeGreaterThanOrEqual(1);
+  }, 900000);
+});
+
 describe('PDF-2: the negatives print none of these faults, and agree', () => {
-  test.each(NEGATIVES)('%s', (seed) => {
-    const x = town(seed);
-    expect(x.cards.length, 'anchored: the PDF prints its chain cards').toBeGreaterThan(0);
-    const instNames = (x.t?.institutions || []).map((/** @type {any} */ i) => i?.name);
-    for (const c of x.t?.economicState?.activeChains || []) {
-      expect(chainHousesOf(c.processingInstitutions, instNames, { chain: tabCard(x.t, c), town: x.t }).length, `${c.chainId}: a house the tab's card leaves off`).toBe(chainHousesOf(c.processingInstitutions, instNames).length);
-      expect(String(tabCard(x.t, c)?.status), `${c.chainId}: the tab's card`).toBe(String(chainAsShown(c, x.t)?.status));
-    }
-    expect(x.vm.resources?.nearbyProven || [], 'a proven ground').toEqual([]);
+  // PDF-2b item 5 (the chair, 2026-11-18): one plain test looping over the negatives, every seed through
+  // `collectSeedFailures` (the law `sovereigntyLightingContract.walker.test.js`: no new file parked by `each`).
+  test('every negative, each seed collected', () => {
+    expectNoSeedFailures(collectSeedFailures(NEGATIVES, (seed) => {
+      const x = town(seed);
+      expect(x.cards.length, `${seed}: anchored: the PDF prints its chain cards`).toBeGreaterThan(0);
+      const instNames = (x.t?.institutions || []).map((/** @type {any} */ i) => i?.name);
+      for (const c of x.t?.economicState?.activeChains || []) {
+        expect(chainHousesOf(c.processingInstitutions, instNames, { chain: tabCard(x.t, c), town: x.t }).length, `${seed} ${c.chainId}: a house the tab's card leaves off`).toBe(chainHousesOf(c.processingInstitutions, instNames).length);
+        expect(String(tabCard(x.t, c)?.status), `${seed} ${c.chainId}: the tab's card`).toBe(String(chainAsShown(c, x.t)?.status));
+      }
+      expect(x.vm.resources?.nearbyProven || [], `${seed}: a proven ground`).toEqual([]);
+    }), 'every negative');
   });
 });
