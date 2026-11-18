@@ -272,3 +272,130 @@ The line's tip (`lane/join-2026-11-14` at 70e557d5b) is an ancestor of my base: 
 - The "How they deal Talks about the boats …" line (FAULTS-PEOPLE) and the cards (FAULTS-ROWS): theirs.
 - NOT RAISED: code clean-up (none built).
 
+
+## FR21 (the chair's ruling of 2026-11-18, after READ-BIRTH) — the follow-up, one commit an item
+
+**Tip: c5f2fcc82.** Commits: 4edec0cd1 (4) · 2d92861ec (3) · 6f7584adc (2) · cc5840c17 (1) · d51b8b47a (7) · c5f2fcc82 (1: the guard's
+bought/refused arm) · this section. Base for every count below: 4288049ba; "the old tip": 703d5962b (its source equals 5f099849a's).
+
+**(4) THE EXPORT RULE — MEASURED, THEN REMOVED.** (a) By the writer's code: "(transit)" is the entrepôt's mark ("Entrepôt transit
+goods — flagged distinctively … a transit good passes through untouched", `computeActiveChains.js` §3). r2r-village-2's stored
+export is plain "Furs and pelts" (written by §2 off `furs_north`, a chain both exportable AND an entrepôt, whose own note says "Furs
+travel from the hunting grounds through trading posts"), and the page re-marks it "(transit)" (`tradeListDisplay.js ::
+pillAsPrinted`) because the page's reader of a chain's carrier (`chainCarrier.js :: chainCarrierOf`) reads `transit` ("it runs on
+passing trade") for a chain whose ground is not on the stored land list. AN IMPLIED GROUND IS ON NO STORED LIST, so by the page's
+own reader no export can prove one: the furs are other places', the lodge sits on the road. The matcher is removed (no second
+reading); r2r-village-2 and r2r-town-34 are spent again by their seed (their lodges "Short of game.", "The hunter's lodge is worked
+out: its own ground is depleted (Hunting grounds)."). (b) The guard holds it to the page: over the census's 720, no active chain's
+own ground (`chainCarrierOf(...).kind === 'own'`) is a ground a house implies (`faultsBirth :: FR21 (4b)`, 200+ implied grounds read).
+CONSEQUENCE, FOR THE CHAIR: the pill "Furs and pelts (transit)" of r2r-village-2 now prints beside its idle lodge, the entrepôt
+card's named house: `tests/components/leftChainCards.test.jsx :: (b)` ("no output and no pill names a good whose every maker is
+marked short") is RED at my tip on that one instance (`r2r-village-2 · Exports Furs and pelts (transit) · Hunter's lodge`), as it
+was at 7c396a207; runH's 8j.exports reads it too (below). Both read a transit pill as made; the card's naming of the lodge as the
+furs' source is the naming debt. Not narrowed, not re-keyed (the test's claim is over all the towns), and no label changed: yours.
+
+**(3) A RIVER'S FISHING GROUND GIVES NO SALT.** `houseInputAtHand.js :: impliedGroundGoods`: an implied ground gives its key and its
+catalogue goods save the sea's own; on water that is no sea (`tradeRouteSemantics.js :: waterAccessKind`, the world law's reading)
+the fishing grounds give fish and no salt. The input reader and the birth's need list read the one helper. The six river towns
+(r2r-village-38, -39, r2s-under_siege-village-3, r2s-indebted-village-0, r2r-hamlet-18, r2s-religious_conversion-village-0): each
+salt works reads `imported` and story `bought`, unmarked (r2s-under_siege-village-3: "Curtailed by the siege."), exactly as at the base;
+"desert_salt" is back on all six need lists; and "salt" on the need lists of r2r-thorp-0, -41, -45, r2r-hamlet-21,
+r2s-under_siege-thorp-3, as at the base (runK's r2r-hamlet-21 re-class undone). A stored fishing ground keeps the catalogue's goods.
+
+**(2) THE COMMON PROVES THE PASTURE (the chair's ruling).** `supplyStory.js :: GROUND_KEPT_BY`: where a live Common grazing land
+stands, the pick does not spend the grazing land. The twelve towns, before → after, each now the owner's second story (the pasture
+proven; the dairy and the shepherd at work): r2r-hamlet-52, r2r-hamlet-56 (shepherd and dairy "Short of livestock." → none),
+r2r-village-32 (shepherd → none), r2r-village-46, r2r-village-47 (both → none), r2s-under_siege-hamlet-3 (shepherd "Curtailed by
+the siege. Short of livestock." → "Curtailed by the siege.", the siege's mark as at the base), r2s-occupied-village-1 (dairy → none),
+r2s-politically_fractured-hamlet-0 (dairy → none), r2s-indebted-hamlet-2 (dairy → none), r2s-succession_void-hamlet-0 (both → none),
+r2s-monster_pressure-hamlet-3, r2s-mass_migration-hamlet-1 (shepherd → none); "Depleted: Open Grazing Land", "The nearby grazing
+land is used up." and the worked-out lines leave all twelve. LEFT BY NAME: 8 towns of the 720 whose grazing land THE RECORD ITSELF
+stores spent beside a common (`config.nearbyResourcesDepleted`, not the pick's; nothing here rewrites a stored record):
+r2r-hamlet-53, r2r-village-15, -20, -49, r2s-infiltrated-village-0, r2s-plague_onset-village-1, r2s-succession_void-hamlet-3,
+r2s-monster_pressure-village-2 (the same 8 at the base).
+
+**(1) WOOL AND HIDES TAKE THEIR GROUNDS.** `supplyStory.js :: groundGives` reads, beside the Depleted list's one yield a ground
+(`GROUND_YIELD`, held equal to its source), the record's own words (`ALSO_GIVES`): the hunting grounds give hides ("Game and hides
+(local hunting grounds exhausted)", `resourceSemantics.js`), the pastures give wool (the catalogue's grazing goods: livestock, wool,
+dairy, animal hides; the alpine pasture's own word, "Wool, dairy, and livestock …"). Every reader of a material's ground reads the
+one `groundGives`: the isolated buyers' reading (FR8 (c)), the birth's `usedGroundOf` and the venture's pick. One more fault the
+measure found and the item cures: on a connected road beside a spent pasture, the pasture's shortage word ("Livestock and dairy (local
+grazing land depleted)") names no wool, so no seed could ever feed a wool house there (every one fell idle); where a ground's word
+names another good, the birth buys or refuses the material by its own word ("Wool", "Raw hides …") under the same keyed pick
+(`resourceGenerator.js :: importsBroughtAtBirth` (2)). AT THE OLD TIP: 24 houses marked "Short of hides." / "Short of wool." in the
+720, 20 of them (all on isolated routes) beside no used-up ground of their material (r2r-village-23, r2r-town-54, r2r-city-48, -49,
+-51, r2r-metropolis-9, -44, -54, r2s-politically_fractured-town-2, r2s-indebted-town-3, r2s-mass_migration-town-2), plus 4 ventures.
+AT MY TIP (the 720 and the 150): **44 houses marked short of hides or wool, every one beside a used-up ground of its material under
+Depleted** (the owner's fourth story), and the 4 ventures (r2r-town-13, -18, r2s-infiltrated-town-1, r2s-wartime-city-3) unchanged.
+On a connected road, of the wool and hides towns on a used-up ground (the 720 and the 150): bought in 140, idle 8 (r2r-city-45,
+r2r-metropolis-12, -38, -41, r2s-occupied-metropolis-2, bar0-town-occupied-rand-33, bar0-city-wartime-rand-37,
+bar0-metropolis-calm-rand-38: the seed's refusal, the houses "Short of wool." / "Short of hides." beside "Depleted: …"). No new text: every
+line is one that prints already (the marks, "Depleted", "The nearby grazing land is used up.", the arrival scene's twin "Little cloth
+is made here, and the cloth that is sold was brought in from elsewhere." in r2s-occupied-metropolis-2).
+
+**(5) THE VENTURES.** After (2): 9 of the 720 (unchanged), 3 of the 150. After (1): **9 of the 720** (r2r-hamlet-26, -48, -57,
+r2r-village-45, r2r-town-13, -18, r2s-under_siege-city-1, r2s-infiltrated-town-1, r2s-wartime-city-3: the reader's nine, the same
+houses and versions), **3 of the 150**, 2 of the 30. No stop. `supplyStoryLaw :: L5` stays red at 9 ("expected 9 to be greater than
+or equal to 10"): the floor the last close re-records.
+
+**(6) THE DECLARED MOVES, CORRECTED.** The reader is right: at the old tip (5f099849a's births, base against tip) the 720 moved
+**33** towns, not 34: `resourceAnalysis.gaps` 22 (not 24: r2r-town-34 and r2r-village-2 equal the base), `resourceAnalysis.imports`
+15, `economicState.primaryImports` **8** (not 7: r2r-town-34 lost "Raw hides and animal products", which my list missed),
+`resourceAnalysis.priorityNotes` 1. My figures had been taken from 7c396a207's births. THIS FOLLOW-UP'S MOVES, births of my tip against
+the base, by field family, every town:
+- **the 30: 1** (bar0-hamlet-under_siege-rand-47: `resourceAnalysis.gaps`, `resourceAnalysis.imports`, `economicState.primaryImports`).
+- **the 150: 7**: `resourceAnalysis.gaps` 4 (bar0-hamlet-under_siege-rand-28, bar0-hamlet-calm-rand-29, bar0-village-calm-rand-29,
+  bar0-hamlet-under_siege-rand-36); `economicState.primaryImports` 5 (bar0-hamlet-calm-rand-29, bar0-town-occupied-rand-33,
+  bar0-hamlet-under_siege-rand-36, bar0-city-wartime-rand-37, bar0-metropolis-calm-rand-38); `resourceAnalysis.imports` 1
+  (bar0-village-calm-rand-29).
+- **the 720: 32**: `resourceAnalysis.gaps` 22 (r2r-hamlet-27, -33, -52, -56, r2r-village-2, -9, -20, -32, -36, -46, -47, r2r-town-34,
+  r2s-under_siege-hamlet-3, r2s-occupied-village-1, r2s-politically_fractured-hamlet-0, -1, r2s-indebted-hamlet-2,
+  r2s-succession_void-hamlet-0, r2s-monster_pressure-hamlet-3, r2s-religious_conversion-village-0, r2s-slave_revolt-hamlet-1,
+  r2s-wartime-village-3); `economicState.primaryImports` 18 (r2r-hamlet-52, r2r-village-9, -32, -36, -46, r2r-town-2, -34, -51,
+  r2r-city-45, r2r-metropolis-12, -38, -41, r2s-under_siege-hamlet-3, r2s-under_siege-town-1, r2s-famine-town-1,
+  r2s-occupied-metropolis-2, r2s-monster_pressure-hamlet-3, r2s-religious_conversion-village-0); `resourceAnalysis.imports` 8
+  (r2r-hamlet-27, r2r-village-3, -36, -46, -47, r2s-under_siege-town-1, r2s-occupied-village-1, r2s-religious_conversion-village-0);
+  `resourceAnalysis.priorityNotes` 1 (r2r-village-20); `arrivalScene` 1 (r2s-occupied-metropolis-2).
+- **the 525: 0 of 525** (sha256 of each record, the golden's own `hashFor`; the stored file differs from the base in 499, the close's).
+- **NO DRAW**: with the moved families struck, every record's sha256 is equal, base against tip: 30 of 30, 150 of 150, 720 of 720;
+  no person, tie, name or house moves (`fieldDiff.mjs`: 0 · 0 · 0 · 0 in each population).
+
+**(7)** `leftPdfReadsTheTabs`' sample comment now says what r2r-village-0 (a used-up ground off the stored list) and r2r-village-1
+(none) print.
+
+**THE PROOFS.** My guard, `tests/domain/faultsBirth.test.js`, 17 tests: at the old tip the six FR21 positives are RED, each by its own
+claim (an exported "Furs and pelts" kept the ground there; the six river salt works read local; the twelve pastures read used up; the
+isolated tanner and fuller implied nothing; 11 of 15 hides and wool towns printed a short mark with no ground; r2r-city-45 bought
+"Wool" by the old word) and FR21 (4b), a claim held to the page's reader and no cure, green there as here. AT MY TIP: 17 green. UNDER
+MUTATION (each cure reverted alone in a scratch copy of my tip): emptying `ALSO_GIVES` reds the two (1) tests; buying the pasture's
+word in place of the material's reds the (1) bought/refused test; emptying `GROUND_KEPT_BY` reds (2); emptying `SEA_GOODS` reds (3);
+restoring an export matcher reds (4). `supplyStoryLaw`: L1 to L3, L4, BR8 (the record, the record without its seed, `toPublicSafe`,
+the share veil, the birth's pick, over the 720 and the 150), P2, W1, M1, M4 green; L5 red at 9, the same message as the old tip.
+
+**THE NET, tip against tip** (each gate alone through `sh scripts/gate-tail.sh`, in a git worktree of my tip; the old tip's net above):
+| gate | the old tip (5f099849a) | my tip (d51b8b47a; c5f2fcc82 adds a guard test only) |
+|---|---|---|
+| `typecheck:domain:strict` · `typecheck:ratchet` · `eslint` (my files) | 0 · 0 · 0 | **0 · 0 · 0** |
+| `tests/architecture` · `tests/joins` | 347 · 425 green | **347 · 425 green** |
+| ALL of `tests/lint` | 41 red (23 files) | **the same 41 by name, all 42 messages identical** (the estate's count 3691 and writerReach's digest bd73f89e16a5… as at the old tip) |
+| N3: `pipelineContract`, `isolatedTrade`, `publicProseEquality` · `pipelinePinnedMode`, `generationForkCensus` | green · red | **green · the same reds, the same messages** |
+| `supplyStoryLaw` | L5 red (9) | **L5 red (9), the same message; all else green** |
+| `birthKindsLaw`, `bar6MarksLaw8`, `bar8Marks2`, `bar8FishRows`, the older tests of my list | green | **green, save `leftChainCards (b)`: RED, one instance (item (4), above)** |
+| my guard | 12 green | **17 green** (at c5f2fcc82) |
+| ONE `npm run build`, `vendorPdfLazy` + `bootSmoke` | 0; 49 passed · 17 skipped | **0; 49 passed · 17 skipped** |
+| the two doors (R9) | `fresh 3 · stale 153` · `fresh 38 · stale 72` | **the same lines** |
+
+**THE RUNNERS** (full renders of the 30, the 150 and the 720 at my tip; each record of the render byte-equal to my tip's births):
+- the 30 and the 150: runJ, runK, runH identical to the base, save runJ's 150 (11b 6 → 4, the idle shepherd's wool lines marked:
+  as at the old tip). The controls of the 30 (`--controls`): runJ's and runK's tables identical at base and tip.
+- the 720, by rule (base | old tip | my tip): runJ 11b.fish 14 | 7 | **7**, 11b.fishTitle 4 | 0 | **0**, 11b.wool 2 | 0 | **0**,
+  11a.atWork 9 | 8 | **8**, 11e.offer 15 | 14 | **14**, every other rule equal; runK **equal to the base** in every rule (12d.enough 2 | 0
+  | 2 and 12d.enough.wide 44 | 46 | 44: (3) gives r2r-hamlet-21 back its "salt"); runH 8k.trade.mild 4 | 4 | 4, and **8j.exports 0 | 0 |
+  1: RISES**, one instance: r2r-village-2, "Exports lists Furs and pelts (transit); every house that makes it (Hunter's lodge) is marked
+  short": the consequence of (4), with leftChainCards (b) above. FOR THE CHAIR: both read the transit pill as made by the lodge.
+  Three ways out, none mine to choose: the pill reads its transit carrier, the entrepôt card stops naming the lodge as the furs' maker,
+  or the rule of (4) is reversed for this one town. I changed nothing of either reader.
+
+**WHAT FR21 LEAVES, BY NAME**: the transit-pill instance (above); the 8 towns whose stored grazing land is spent beside a common
+(above); the alchemist of r2s-religious_conversion-town-2, short of medicinal herbs on a connected road (FR8's, not this ruling's);
+`supplyStoryLaw :: L5` at 9 (the close's floor).
