@@ -290,7 +290,7 @@ export function deriveSupportingCapabilities(settlement) {
   // The one set of defence facts (lane DEFENSE): a hospital only where one stands, and a
   // healer named as a healer.
   const facts = defenseFactsOf(r);
-  const court = courtOnRoster(r);
+  const court = courtOnRoster(r), prison = defenceOf(r).prison; // FAULTS-WATCH item 5: the prison read off the LIVE roster (the defence home), as the court is; not the stamped `compound.inst.hasPrison`
   // V6 (TAIL-DISPLAY-CIVIC-4, the chair's ruling of 2026-11-15): where no courthouse stands and a council or a town hall
   // hears the cases, the row names what stands (the council's bench), not a court.
   const bench = court ? courtBenchOf(r) : null;
@@ -373,9 +373,9 @@ export function deriveSupportingCapabilities(settlement) {
     {
       // W2-C-LEAVES-SIDE (the chair's #575): the court is read off the live roster (`courtOnRoster`, below), not the flag.
       label: 'Legal Infrastructure',
-      status: court && f.hasPrison ? `${courtWord} + Prison` : court ? `${courtWord} only` : f.hasPrison ? 'Prison only' : 'None',
-      color: court && f.hasPrison ? '#1a3a5a' : court ? '#3a5a7a' : f.hasPrison ? '#7a5a3a' : '#9c8068', score: null,
-      note: court && f.hasPrison ? 'Full enforcement chain. Arrest, prosecute, detain.' : court ? (bench ? 'Cases heard without detention. Fines and exile only.' : 'Courts without detention. Fines and exile only.') : f.hasPrison ? 'Detention without process. Arbitrary enforcement.' : 'No deterrence beyond force.',
+      status: court && prison ? `${courtWord} + Prison` : court ? `${courtWord} only` : prison ? 'Prison only' : 'None',
+      color: court && prison ? '#1a3a5a' : court ? '#3a5a7a' : prison ? '#7a5a3a' : '#9c8068', score: null,
+      note: court && prison ? 'Full enforcement chain. Arrest, prosecute, detain.' : court ? (bench ? 'Cases heard without detention. Fines and exile only.' : 'Courts without detention. Fines and exile only.') : prison ? 'Detention without process. Arbitrary enforcement.' : 'No deterrence beyond force.',
     },
     {
       label: 'Medical Readiness',
@@ -777,7 +777,7 @@ function navalRowStandsOn(settlement) {
 import { recordNamesAMage as arcaneNamedHere } from '../facts/magic.js';
 
 // ─── W2-C-LEAVES-SIDE (the chair's #575): THE LEGAL ROW NAMES A COURT ONLY WHERE A HOUSE HOLDS ONE (at the end of the file) ───
-import { courtBenchOf, courtHoldersOf } from '../facts/defence.js'; // TAIL-CLOSE-SRC-4 (SR1): the court's holders and its bench, read in the defence home
+import { courtBenchOf, courtHoldersOf, defenceOf } from '../facts/defence.js'; // TAIL-CLOSE-SRC-4 (SR1): the court's holders and its bench, read in the defence home
 
 /**
  * WHETHER A HOUSE ON THE LIVE ROSTER HOLDS A COURT (W2-C-LEAVES-SIDE, 2026-11-13; the chair's ruling on the cut's #575:

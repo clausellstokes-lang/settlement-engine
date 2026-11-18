@@ -10,6 +10,9 @@
 //      sentence; the Garrison Bloc's twin, which carries no standing, takes none.
 //   4. `trade at work` UNDER A SIEGE (BR25 (5)): a house the page marks "Stopped by the siege." is not at work; the leaf's
 //      verdict is held EQUAL to the page's on every house of the besieged towns; a curtailed house stays at work.
+//   5. THE LEGAL ROW'S PRISON (the chair's item 5, 2026-11-18): the Legal Infrastructure row and the Defense desk's internal
+//      row read the LIVE prison (`defenceOf(...).prison`), not the stamped `compound.inst.hasPrison`: r2r-city-41 with its
+//      prison ruined (a constructed record) says no prison stands and draws the pool the row names, in all three views.
 import { describe, it, expect, beforeAll } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -20,6 +23,10 @@ import * as tradeAtWork from '../../src/domain/facts/tradeAtWork.js';
 import { rowStoppedBy } from '../../src/domain/display/crisisStoppedRow.js';
 import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
 import { crisisOf } from '../../src/domain/facts/crisisKind.js';
+import { deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
+import { defenseThreatProse } from '../../src/domain/display/stateProse/defenseStateProse.js';
+import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
+import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -177,5 +184,43 @@ describe('4 · trade at work reads the siege\'s stop of a house (BR25 (5))', () 
       expect(tradeAtWork.tradeAtWorkOf(t, key), `${seed} ${key}`).toBe(true);
     });
     expectNoSeedFailures(failures, 'item 4 negatives');
+  });
+});
+
+describe('5 · the Legal row\'s prison is the live roster\'s (the chair\'s item 5)', () => {
+  const PRISON = /prison|stocks|\bgaol|\bjail/i;
+  /** the record with every prison house ruined (a DM's event): a constructed record. @param {any} s */
+  const prisonRuined = (s) => ({ ...s, institutions: (s.institutions || []).map((/** @type {any} */ i) => (PRISON.test(String(i?.name)) ? { ...i, status: 'ruined' } : i)) });
+  /** @param {any} o @returns {string | null} */
+  const pk = (o) => { if (!o || typeof o !== 'object') return null; if (o.provenance?.poolKey) return o.provenance.poolKey; for (const v of Object.values(o)) { const r = pk(v); if (r) return r; } return null; };
+  /** the three views: the owner's record, the shared page, the share veil. @param {any} s */
+  const views = (s) => /** @type {Array<[string, any]>} */ ([['record', s], ['public', toPublicSafe(structuredClone(s))], ['the share veil', projectShareVeil(toPublicSafe(structuredClone(s)), null)]]);
+  /** @param {any} r */
+  const legal = (r) => deriveSupportingCapabilities(r).find((c) => c.label === 'Legal Infrastructure');
+  /** @param {any} r */
+  const internalKey = (r) => pk(defenseThreatProse(r, { seed: String(r._seed ?? r.id ?? '') }).internal);
+  it('POSITIVE: r2r-city-41 with its prison ruined: the row says no prison stands, and the desk draws the court-only pool, in all three views', () => {
+    const born = BORN.get('r2r-city-41');
+    const s = prisonRuined(born);
+    expect((born.institutions || []).some((/** @type {any} */ i) => PRISON.test(String(i?.name))), 'premise: a prison house stands at birth').toBe(true);
+    expect(s.economicState?.compound?.inst?.hasPrison, 'premise: the stamped flag still says a prison stands').toBe(true);
+    expect(defenceOf(s).prison, 'premise: the live roster holds no prison').toBe(false);
+    expect(courtHoldersOf(s).length > 0, 'premise: the court still sits').toBe(true);
+    const failures = collectSeedFailures(views(s), ([form, r]) => {
+      const row = legal(r);
+      expect(row, form).toBeTruthy();
+      expect(String(row.status), `${form}: the Legal row`).not.toMatch(/Prison/);
+      expect(String(row.status), `${form}: the Legal row`).toMatch(/ only$/);
+      expect(String(row.note), `${form}: the Legal row's note`).not.toMatch(/Full enforcement chain/);
+      expect(internalKey(r), `${form}: the desk's internal pool`).toBe('Internal Security: court without detention');
+    });
+    expectNoSeedFailures(failures, 'item 5 positive');
+  });
+  it('NEGATIVE: the same town unruined keeps "+ Prison" and the full chain, in all three views', () => {
+    const failures = collectSeedFailures(views(BORN.get('r2r-city-41')), ([form, r]) => {
+      expect(String(legal(r)?.status), `${form}: the Legal row`).toMatch(/ \+ Prison$/);
+      expect(internalKey(r), `${form}: the desk's internal pool`).toBe('Internal Security: full legal chain (court AND prison)');
+    });
+    expectNoSeedFailures(failures, 'item 5 negative');
   });
 });

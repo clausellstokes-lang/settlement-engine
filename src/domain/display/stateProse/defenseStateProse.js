@@ -114,7 +114,7 @@ import { legibilityRung } from './legibilityRung.js';
 import { waterAccessKind } from '../../tradeRouteSemantics.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
-import { factsAnswered } from '../../facts/factsAnswered.js'; import { courtHoldersOf } from '../../facts/defence.js'; // BAR8-DESKS-2 (BR32 (4)): the Legal row's own court keys the internal row
+import { factsAnswered } from '../../facts/factsAnswered.js'; import { courtHoldersOf, defenceOf } from '../../facts/defence.js'; // BAR8-DESKS-2 (BR32 (4)): the Legal row's own court keys the internal row; FAULTS-WATCH item 5: and its live prison
 import { corpusAdmittingCrimeLines, crimeLineFactsOf } from './crimeLineDisqualifiers.js';
 import { corpusAdmittingPostureLines } from './postureLineDisqualifiers.js';
 
@@ -715,7 +715,7 @@ export function defenseThreatProse(settlement, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
   options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const dp = settlement?.defenseProfile || {};
-  const compound = settlement?.economicState?.compound?.inst || {};
+  // FAULTS-WATCH item 5: this desk reads no stamped `compound.inst` flag; the internal row's court and prison are the live roster's
   const slots = { settlement: properFill(text(settlement?.name)) };
 
   const forces = standingDefenseForces(settlement);
@@ -792,7 +792,7 @@ export function defenseThreatProse(settlement, options = {}) {
     // town hall for a court. Read off the flag, ten towns of the thirty and the 720 drew the full legal chain's "A thing done
     // wrong … goes somewhere and takes time" beside "Prison only / Detention without process. Arbitrary enforcement."
     internal: rung(internalRowPoolKey(
-      courtHoldersOf(settlement).length > 0, civicFlag(compound.hasPrison),
+      courtHoldersOf(settlement).length > 0, defenceOf(settlement).prison, // FAULTS-WATCH item 5: the row's own (live) prison, not `compound.hasPrison`
     )),
     economic: rungWith(
       economicRowPoolKey(dp.scores?.economic),
