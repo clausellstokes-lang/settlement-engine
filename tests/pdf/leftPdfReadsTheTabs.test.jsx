@@ -74,7 +74,8 @@ const leaves = (node, acc = []) => {
 /** The census's towns: a share marked short (r2r-hamlet-10, r2r-village-13, r2r-village-28), a siege's share and person
  *  marks and a used-up ground (r2s-under_siege-hamlet-3, -village-0), outputs a refused card withholds (r2s-infiltrated-village-0,
  *  r2r-town-1, r2r-town-16), a marked keeper (r2r-thorp-45), a used-up ground off the stored list (r2r-hamlet-23), a proven
- *  ground (r2r-hamlet-8), the Outlook's impaired list (r2s-under_siege-village-3, -town-0); r2r-village-0 prints none. */
+ *  ground (r2r-hamlet-8), the Outlook's impaired list (r2s-under_siege-village-3, -town-0); r2r-village-0 a used-up ground off the stored
+ *  list (FAULTS-BIRTH FR8 (c), its isolated smith's iron); r2r-village-1 prints none. */
 const CENSUS = ['r2r-hamlet-10', 'r2r-village-13', 'r2r-village-28', 'r2s-under_siege-hamlet-3', 'r2s-under_siege-village-0',
   'r2s-infiltrated-village-0', 'r2r-town-1', 'r2r-town-16', 'r2r-thorp-45', 'r2r-hamlet-23', 'r2r-hamlet-8',
   'r2s-under_siege-village-3', 'r2s-under_siege-town-0', 'r2r-village-0',
