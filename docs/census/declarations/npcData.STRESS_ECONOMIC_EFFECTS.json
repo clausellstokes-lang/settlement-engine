@@ -558,7 +558,7 @@
       "id": "mil_crim_suppression.tension#3",
       "text": "{A} has a witness willing to name {B} before a magistrate. {B} knows where the witness lives.",
       "needs": [
-        "court"
+        "court sits"
       ],
       "excludes": [],
       "crisis": [],
@@ -2616,7 +2616,7 @@
       "id": "bitter_history.tension#3",
       "text": "{B} has been appointed to judge a case in which {A} is a party.",
       "needs": [
-        "court"
+        "court sits"
       ],
       "excludes": [],
       "crisis": [],

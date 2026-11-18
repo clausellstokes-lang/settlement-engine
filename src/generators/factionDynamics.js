@@ -417,7 +417,7 @@ export const MERCHANT_CRAFT_VOTE = Object.freeze({
  * HIGH twin (withConflictRelations). */
 const ORDAINED_SEAT = /^(.+ holds the seat(?: and collects the taxes)?); (.+) (tells|tell) people that (.+) rule is right and ordained\. Each props up the other\.$/;
 
-export function computeFactionRelationships(factions, tier, instFlags, publicLeg, stressTypes = [], defenseFacts = null) {
+export function computeFactionRelationships(factions, tier, instFlags, publicLeg, stressTypes = [], defenseFacts = null, courtSits = null) { // FAULTS-WATCH FR25 (c): `courtSits`, the roster's court (`defence.js :: courtHoldersOf`, `court sits` at the draw); false strikes "courts" from the standing's rights; null keeps the line
   const rels = [];
   const stressed = t => stressTypes.includes(t);
 
@@ -638,7 +638,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
     narrative = type === 'tense'
       ? `${say(noble)} ${verb(noble, 'holds', 'hold')} old rights ${say(gov)} cannot take away; nothing about land, inheritance or levies gets done without ${verb(noble, 'its', 'their')} agreement.`
       : type === 'dependent'
-      ? `${say(noble)} ${verb(noble, 'lives', 'live')} under the rule of ${say(gov)} but ${verb(noble, 'keeps', 'keep')} enough rights of ${verb(noble, 'its', 'their')} own (land, courts, levies) to bargain, not simply obey.`
+      ? `${say(noble)} ${verb(noble, 'lives', 'live')} under the rule of ${say(gov)} but ${verb(noble, 'keeps', 'keep')} enough rights of ${verb(noble, 'its', 'their')} own (${courtSits === false ? 'land, levies' : 'land, courts, levies'}) to bargain, not simply obey.` // FR25 (c): the twin, "courts" struck, where no court sits
       : `${say(noble)} still ${verb(noble, 'has', 'have')} ${verb(noble, 'its', 'their')} titles, but ${merc && (merc.power || 0) > (noble.power || 0) ? 'merchant money and ' : ''}the hall's offices have taken most of ${verb(noble, 'its', 'their')} power.`; // R3-CODE-C-2 (#pf-90): merchant money only where a merchant power outranks them
 
     if (!(type === 'subordinate' && nobleIsCreditor)) addRel({ pair: [noble.faction, gov.faction], type, direction: 'declining', ratio: Math.round(ratio*100)/100, narrative });

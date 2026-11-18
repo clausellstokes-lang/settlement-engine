@@ -263,3 +263,59 @@ both; the 169 older test files the same by name and message but two, RE-KEYED BY
 (`proseDrawnAnchors` caught the guard's literal DS-GEN-17 anchors: cured in a1fb0e825). STORED FIGURES MOVED (the close's;
 none re-taken): the generation worker 2,561,848 → 2,562,117 B (+269, item 7; the ceiling 2,356,121 is exceeded at the base
 too); the golden master, 1 more configuration (`…|gm-seed-c`, item 7).
+
+## FR25 · the court's lines outside my files (the chair's rulings FR25 and its call of 19:04 UTC)
+
+Merged first, plainly: `lane/landing-pieces-2026-11-18` at b014a7bf3 (76062553d) and at 8771c531d (28465a9e1), both clean. FR25's
+base is 28465a9e1. Commits: 3ebcc5ba5 ((a) and (b)), 5df61e5db ((c)). Files: `src/data/npcData.js` (two declarations),
+`src/generators/factionDynamics.js` (the standing's line and one parameter), `src/generators/power/rulingStructure.js` (the
+chair's grant: one argument at the call), the guard. No line of any of the three source files moves. No new vocabulary
+(`court sits` already existed, BAR6-CULTURE). No services threaded (the chair's call): each line reads `court sits` as it
+reads at its draw, over the roster.
+
+**MEASURED FIRST** (base 28465a9e1), where the final Legal row has no court (the 900 · 300 fresh):
+(a) the tie "… has been appointed to judge a case in which …": 8 · 1 (the reader's 6, and r2s-recently_betrayed-town-2,
+r2s-under_siege-town-1; fresh r2r-town-221). (b) "… has a witness willing to name … before a magistrate.": 1 · 1
+(r2s-plague_onset-town-0; r2r-town-225). (c) "… keeps enough rights of its own (land, courts, levies) to bargain, not simply
+obey.": 1 · 2 (r2s-plague_onset-town-0; r2r-town-225, -231). Where a court sits they printed 136 + 4 (a), 23 (b), 26 (c) in the
+900. The magistrate's letter (`npcData.js:1787`) prints only where a court sits (4 towns): named, nothing done.
+
+**BUILT.** (a) and (b): `needs: ["court"]` (a NAME test that takes every town hall) → `needs: ["court sits"]`, the Legal row's
+court half (`defence.js :: courtHoldersOf`) as it reads at the draw; refused, the tie takes its pool's next row (description
+and tension are one row; no new text). (c): `rulingStructure.js` passes `courtHoldersOf({ institutions: nativeInstitutions })
+.length > 0`; `computeFactionRelationships` prints the standing's twin where it is false. THE TWIN, by the chair's wording rule
+("courts" struck from the list and nothing else changed): "… keeps enough rights of its own (land, levies) to bargain, not
+simply obey."; null (a caller with no roster) keeps the line.
+
+**PROVED.** (1) None of the three prints anywhere the FINAL Legal row has no court, over the 900 and the 300 fresh; no town
+held a court at the draw and none at the end. (2) THE MOVES, every one in `relationships[]` (a, b) or
+`powerStructure.factionRelationships[].narrative` (c), every other leaf equal to the base:
+- (a), the 8 no-court towns: bar0-town-calm-rand-30, r2s-mass_migration-town-2, r2s-plague_onset-town-2,
+  r2s-recently_betrayed-town-2, r2s-succession_void-town-1, r2s-under_siege-town-1, r2s-under_siege-town-3, r2s-wartime-town-3;
+  fresh r2r-town-221.
+- (a), DECLARED under the chair's LR3 (a true tie passed over: the court sits by a hall's or a council's service, not on the
+  roster): r2r-town-29, r2r-town-41, r2s-famine-town-3, r2s-infiltrated-town-0. NAMED: in r2r-town-41 and
+  r2s-infiltrated-town-0 a SECOND tie moves too: the refused tie's next row was the row the town's next tie held, and the pool
+  does not repeat a held line (no draw added: the knock-on of the no-repeat rule).
+- (b): r2s-plague_onset-town-0; fresh r2r-town-225.
+- (c): r2s-plague_onset-town-0; fresh r2r-town-225, r2r-town-231. The new argument moves nothing but the standing's line.
+(3) THE 525: 3 configurations move (`town|south_asian|coastal|port|civilized|golden-master-v3`,
+`town|germanic|mountain|random_trade|civilized|gm-seed-c`, `town|germanic|plains|road|civilized|gm-seed-c`): `relationships`,
+and in one `prominentRelationship` (derived from the ties); (c) alone moves 0. (4) THE GUARD gains arm 8 and 8 (c): no line
+where no court sits over the guard's towns; bar0-town-calm-rand-30 and r2s-plague_onset-town-0 keep ties of the pool in their
+place; r2s-plague_onset-town-0's standing is exactly the twin; beside a courthouse (bar0-city-wartime-rand-36,
+bar0-metropolis-calm-rand-40) all three still print; r2r-town-29 passes the judge over (declared). Red at 28465a9e1 (5 arms),
+green at the tip. MUTANTS, each red, unmutated green: (a)'s declaration back to `court`; (b)'s; the court argument dropped
+(null); the twin's test inverted.
+
+NOT BUILT (the owner's): the stored holding-cells row after a court is ruined.
+
+**The net, base 28465a9e1 against the tip, each alone:** strict typecheck, ratchet, `tests/architecture` green at both;
+`tests/lint` the same by name and message; the 114 older test files naming the three lines, their functions or `npcData`
+the same by name and message but one, `tieProseDeclared`, which holds `npcData.js`'s declarations equal to the census ledger
+`docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json`: the ledger's two rows follow the source (d1a8c8be3;
+`mil_crim_suppression.tension#3`, `bitter_history.tension#3` → `court sits`; the letter's `econ_crim_exploitation.tension#6`
+keeps `court`), as BAR6-PEOPLE wrote its own into it. ONE build at both, then the build tests: the same but the figure.
+STORED FIGURES MOVED (the close's; none re-taken): the generation worker 2,574,979 → 2,575,053 B (+74; the ceiling 2,525,028
+is exceeded at the base too); the driven fence's hash (`espionageDormancyFence` FENCE 1, already moved at the base:
+fe4e2e1d… → f3fdbcbd…, stored cd67a3c1…); the golden master, 3 configurations (above).
