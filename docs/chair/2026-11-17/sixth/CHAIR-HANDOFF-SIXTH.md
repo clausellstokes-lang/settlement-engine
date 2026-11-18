@@ -1930,3 +1930,19 @@ should be paused or archived by the owner's hand.
   merges made together, while the last two seats finish. PEOPLE-2 (04:39): PART A pushed at 76ffc8eef (tests only:
   two anchors re-keyed, each red under mutation; a sweep of 892 files: no other test made untrue): K-PEOPLE and it
   land after the deploy, after their reader.
+- 04:47 UTC, 2026-11-18 · THE FIFTH MERGE IS ON ORIGIN (`lane/landing-close-2026-11-18` at
+  1b06149508a9b40c9d2dbec3f9e7057429442fa3, pushed 04:46, gates green) AND THE WHOLE CHECK RUNS ON IT (CHECKS-1, 2, 3;
+  label close-1-1b0614950; an early look: no new name may appear). CLOSE-DOORS-2 IS "READY TO SIGN" (04:47; measured
+  at 70e557d5b against the green base 0ac61b4b4; its tip 9b49da084 holds A6 and the hand-back's first lines; THE
+  RECORD IS NOT COMMITTED YET: asked as a draft, read by the chair before "SIGN"): FOUR SURFACES: the golden 525 (485
+  move: thorp 56, hamlet 84, village 84, town 93, city 84, metropolis 84; every moved family declared by a landed
+  seat; no stop); the espionage fence 1 (CL5: 20 of 21 arms green, the driven digest red alone; the old digest
+  reproduced at 0ac61b4b4; 322 of 360 move, all declared); the dossier prose manifest 2 (CL6: the mixed-pool
+  audience arm GREEN; the drift arm 704 of 1,050 rows; the corpus tally 72,744 to 72,614 cells); the herald
+  knowledge-desk golden 475 (BIRTH-1, point 21: 473 items unchanged, one beat's reason and one pulse beat re-dealt).
+  THE PINS MEASURED: x46NpcBand 55 of 60; the budget 57 of 60; the edit row 21 alone (both digests); the control row
+  5437998b to 8bb20e96; mergeLadder A3 61 to 62 (point 26, BAR7-LINES); the edit corpus 2173 to 2176 (BAR5 +6, later
+  -3; the chains unmoved): THAT PIN IS DOORS-2's (the chair had named it to 1B from LEFT-KEYS's hand-back: taken back
+  before a second crossing). THE ORDER STILL TO COME: 1A's four hunks, merge 6, the second "MERGE" to 1B, 1B's final
+  pass merged, "PART 1 IS AT <sha>", DOORS-2 re-proves every predicted row on that tree (a predicted row that moves
+  between 70e557d5b and Part 1's tip is a stop), "READY TO SIGN ON <sha>", THE OWNER TOLD IN THE CHAT, "SIGN".
