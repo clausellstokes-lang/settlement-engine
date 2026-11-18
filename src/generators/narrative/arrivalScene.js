@@ -226,10 +226,12 @@ function drawAdmitted(pool, { poolId, scoped, facts, speaks = () => true, cleanO
   const twinOf = (/** @type {any} */ line) => {
     const t = textOf(line);
     const own = typeof t === 'function' ? t('{name}') : t;
-    // BAR8-SCENES (the chair's grant under BR23, 2026-11-17): a line may have more than one twin, each for another state; the
-    // first ADMITTED twin answers, else the first (as before: with one twin a line resolves exactly as it did)
+    // BAR8-SCENES (the chair's grant under BR23, 2026-11-17): a line may have more than one twin, each for another state.
+    // BAR8-SCENES-3 (ruling BR25 (3), 2026-11-18): the LAST admitted twin answers, else the first: a later twin is the narrower
+    // state (the small working quarry's cart, last in its pool, where it is admitted; the empty road everywhere else). With one
+    // twin a line resolves exactly as it did
     const twins = pool.filter((l) => l && typeof l === 'object' && typeof l.twinOf === 'string' && l.twinOf === own);
-    return twins.find((l) => ok(l)) ?? twins[0] ?? null;
+    return twins.filter((l) => ok(l)).pop() ?? twins[0] ?? null;
   };
   const twinAdmitted = (/** @type {any} */ line) => { const twin = twinOf(line); return twin != null && ok(twin); };
   return drawDeclared(pool, {
