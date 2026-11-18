@@ -111,7 +111,9 @@ const rowOf = (/** @type {number} */ vid) => {
 };
 const MOD3 = rowOf(3);
 const MOD4 = rowOf(4);
-const MOD8_LINE = rowOf(8);
+// LAST-VARIETY (2026-11-18): the pool's LAST row (v10 since that seat appended v9 and v10), so the planted line takes the next number
+const MOD_LAST = MODERATE[MODERATE.length - 1].vid;
+const MOD_LAST_LINE = rowOf(MOD_LAST);
 /** the message's own quotation of a text (the guard cuts it at 69 characters), escaped for a pattern */
 const head = (/** @type {number} */ vid) => textOf(vid).slice(0, 30).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const body = (/** @type {string} */ row) => row.replace(/^\d+\.\s+/, '');
@@ -195,7 +197,7 @@ describe('FR7: the numbering guard refuses a renumbering and a re-use, by text',
   });
 
   it('NEGATIVE: a new line at the NEXT number passes the guard (the --check then finds the leaf stale)', () => {
-    const r = project(plant([[MOD8_LINE, `${MOD8_LINE}\n9. \`[visitor · tier: ≥ village]\` A planted line at the next number.`]]));
+    const r = project(plant([[MOD_LAST_LINE, `${MOD_LAST_LINE}\n${MOD_LAST + 1}. \`[visitor · tier: ≥ village]\` A planted line at the next number.`]]));
     // anchored: the same output is asserted on the next line to reach the --check's staleness test, past the guard
     expect(r.out).not.toContain(GUARD);
     expect(r.out).toContain('is stale; run `npm run gen:dossier-prose`');
@@ -298,17 +300,24 @@ describe('13d (FR6): the Unsafe pool\'s twin `[ledger · no court or gaol · no 
   const filled = (/** @type {any} */ s) => String(twin?.text).replace('{settlement}', s.name);
 
   it('the twin stands at v4, the NEXT number, and declares what it presumes', () => {
-    expect(unsafe.map((/** @type {any} */ v) => v.vid)).toEqual([1, 2, 3, 4]);
+    // LAST-VARIETY (2026-11-18) appended v5 and v6 after it: the twin keeps v4
+    expect(unsafe.map((/** @type {any} */ v) => v.vid).slice(0, 4)).toEqual([1, 2, 3, 4]);
     expect(twin?.marks).toEqual(['no court or gaol', 'no watch']);
   });
 
-  it('it prints in the three towns where the pool spoke no line, on the record, its public projection and the share veil', () => {
+  // LAST-VARIETY (2026-11-18, BRIEF-LAST item 1) gave these three towns two more admitted lines (v5, v6), so the draw now
+  // chooses among three there: re-keyed by identity from "prints" to "is admitted, and what prints is an admitted line"
+  it('it is admitted in the three towns where the pool spoke no line, and they print a line the pool admits there, on the record, its public projection and the share veil', () => {
     const failures = collectSeedFailures(UNSAFE_EMPTY, (seed) => {
       const s = towns.get(seed);
       expect(s.economicState?.safetyProfile?.safetyLabel, seed).toBe('Unsafe');
-      for (const [form, r] of forms(s)) expect(defenseStateProse(r, { seed })?.publicOrder?.beside, `${seed} · ${form}`).toBe(filled(s));
+      for (const [form, r] of forms(s)) {
+        const admitted = unsafe.filter((/** @type {any} */ v) => declarationAdmits(variantFactDeclaration(v), factsOf(r)).admitted);
+        expect(admitted.map((/** @type {any} */ v) => v.vid), `${seed} · ${form}`).toContain(4);
+        expect(admitted.map((/** @type {any} */ v) => String(v.text).replace('{settlement}', s.name)), `${seed} · ${form}`).toContain(defenseStateProse(r, { seed })?.publicOrder?.beside);
+      }
     });
-    expectNoSeedFailures(failures, 'the Unsafe twin prints where no watch, no court and no gaol stand');
+    expectNoSeedFailures(failures, 'the Unsafe twin is admitted where no watch, no court and no gaol stand');
   });
 
   it('NEGATIVE: an Unsafe town with a watch and a court does not print it, and each premise alone refuses it', () => {

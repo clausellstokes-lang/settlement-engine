@@ -202,7 +202,18 @@ export function needNotBroughtInOf(record) {
  * @returns {boolean}
  */
 export function goodNeededNotBroughtIn(record, good) {
+  return goodsNeededNotBroughtIn(record, good).length > 0;
+}
+
+/**
+ * LAST-VARIETY (the chair's ruling LR6 (5), 2026-11-18): THE GOODS themselves, the needs of the list a good names or meets,
+ * in the list's order and words, so a line that says what a house lacks names what the page prints under "Needed, and not
+ * brought in", never the dependency's whole compound ("stone + iron + grain" where only the iron is wanting). [] where none.
+ * @param {unknown} record @param {unknown} good
+ * @returns {string[]}
+ */
+export function goodsNeededNotBroughtIn(record, good) {
   const g = typeof good === 'string' ? good.trim() : '';
-  if (!g) return false;
-  return needListOf(record).some((need) => fold(need) === fold(g) || meets(need, g));
+  if (!g) return [];
+  return needListOf(record).filter((need) => fold(need) === fold(g) || meets(need, g));
 }

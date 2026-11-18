@@ -94,7 +94,7 @@ export const GOAL_SUBKIND_SLOTS = Object.freeze({
   RANK: Object.freeze({ climb: ['power', 'above'], defend: ['power', 'below'], enter: ['power'] }),
   POWER: Object.freeze({ tense: ['power', 'rival'], competitive: ['power', 'rival'], corrupted: ['power', 'rival'], conflict: ['power', 'rival', 'issue'] }),
   INSTITUTION: Object.freeze({ solvency: ['house'], rebuilding: ['house'], charter: ['house'], takeover: ['house', 'otherHouse'] }),
-  SUPPLY: Object.freeze({ impaired: ['house'], dependency: ['resource', 'house'], isolation: ['import'], expansion: ['house'] }),
+  SUPPLY: Object.freeze({ impaired: ['house'], dependency: ['resource', 'house'], isolation: ['import'], expansion: ['house'], want: ['resource', 'house'] }),
   TIES: Object.freeze({ rival_enemy: ['other'], debtor: ['other'], creditor: ['other'], ally: ['other'], family: ['other'], mentor_student: ['other'] }),
   PERSONALITY: Object.freeze(Object.fromEntries(['greed', 'hunger_for_status', 'fear', 'forbidden_patron', 'duty', 'kindness', 'mastery', 'caution', 'conviction', 'sway', 'grudge', 'impulse']
     .map((k) => [k, Object.freeze(['flaw', 'dominant', 'modifier'])]))),
@@ -494,6 +494,20 @@ export const GOAL_FAMILY_LINES = Object.freeze({
         'Build the work at {house} into a trade that will feed the next generation here.',
         'Bring every step of the trade, from the first goods to the last, under the roof of {house}.',
         'Double the work at {house}, and find the hands to do it.',
+      ]),
+    }),
+    // LAST-VARIETY (item 2; BRIEF-LAST, 2026-11-18, the chair's ruling LR2; vetoable by the owner, on the veto list): the card's house has a trade
+    // dependency on {resource} that the page's need list says is needed and not brought in (`goals.js` deals this cell only
+    // there, beside the dependency cell it refuses). Each line presumes the good lacking, never a supply of it; none buys
+    // from outside, so none is refused under a siege.
+    want: Object.freeze({
+      short: cell([
+        'Find something the work at {house} can use in place of {resource}.',
+        'Gather what {resource} can be found close to home for the work at {house}.',
+      ]),
+      long: cell([
+        'Open a lasting way to bring {resource} in for the work at {house}.',
+        'Win those who govern here over to bringing {resource} in for the work at {house}.',
       ]),
     }),
   }),

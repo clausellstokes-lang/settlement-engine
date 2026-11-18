@@ -3099,6 +3099,8 @@ reading rather than a settled one.
 3. `[ledger · guardPresence · court or gaol · crisis: any]` The town's record of crimes at {settlement} is short: enforcement far outweighs the criminals, and there is little to write down.
 4. `[counterforce · watch · crisis: any]` There is money at {settlement} and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
 5. `[ledger · no guardPresence · court or gaol · crisis: any]` The town's record of crimes at {settlement} is short: there is little crime to write down, and neighbours settle what there is between themselves.
+6. `[street · tier: ≤ village · no crime wave · crisis: any · no crisis: threat, unrest]` What trouble {settlement} sees is mostly quarrels, and they seldom outlast the week.
+7. `[ledger · no watch · crisis: any · no crisis: threat, unrest]` {settlement} has no watch; its neighbours notice anything out of place, and are quick to say so.
 
 **`Safe`** {crisis-scoped}
 1. `[street · crisis: any · no crisis: threat, unrest]` Crime at {settlement} stays small: things are taken occasionally and the taking does not spread, because the people who would spread it are known.
@@ -3106,6 +3108,9 @@ reading rather than a settled one.
 3. `[ledger · guardPresence · crime wave · court or gaol · crisis: any]` The town's record of crimes at {settlement} is still short, but it grows longer each season, and enforcement is not keeping pace.
 4. `[visitor · guardPresence · crisis: any · no crisis: threat, unrest]` Visitors feel safe at {settlement}, and it is plain that somebody keeps it that way.
 5. `[ledger · no guardPresence · court or gaol · crisis: any]` The town's record of crimes at {settlement} stays short: there is some crime, and neighbours settle most of it between themselves.
+6. `[ledger · no prison · crisis: any · no crisis: threat, unrest]` {settlement} has no gaol, and has so far had little use for one.
+7. `[visitor · no guardPresence · no crime wave · crisis: any · no crisis: threat, unrest]` Visitors to {settlement} see nobody keeping watch, and come to no harm all the same.
+8. `[street · tier: ≤ village · crime wave · crisis: any · no crisis: threat, unrest]` At {settlement}, people who never used to bar their doors at night have started to.
 
 **`Moderate`**
 1. `[street · patrol · force: kept · law: > collapsed]` {settlement} keeps a working balance: the law is present, so is crime, and neither has the town to itself.
@@ -3116,12 +3121,17 @@ reading rather than a settled one.
 6. `[ledger · no guardPresence]` {settlement} pays nobody to keep the peace, and trouble here is settled among its own people.
 7. `[visitor · guardPresence · law: > collapsed]` {settlement} has people who keep order, and order holds about as well as anyone here expects.
 8. `[visitor · guardPresence · law: = collapsed]` {settlement} has people meant to keep order, but order holds only where they are standing.
+9. `[street · tier: ≤ village]` At {settlement} old wrongs are remembered for years, and some are still being argued over.
+10. `[ledger · no court or gaol]` With no gaol at {settlement}, nobody who does wrong here can be locked away; most go on living beside the people they wronged.
 
 **`Unsafe`**
 1. `[street · watch]` Crime at {settlement} is outrunning the watch. It is not chaos; it is that the people doing it have stopped expecting to be caught.
 2. `[ledger · court or gaol]` The town's record of crimes at {settlement} grows faster than its record of arrests, and people pay for the difference in what they lose.
 3. `[unfolding · watch]` The balance at {settlement} has tipped and is still tipping. Each season the watch answers a smaller share of what happens.
 4. `[ledger · no court or gaol · no watch]` {settlement} has no court and no gaol. Custom and neighbours answer what they can, and the rest goes unanswered.
+5. `[street · no guardPresence · crime wave]` Theft at {settlement} grows each season, and with nobody under arms, every household guards its own.
+6. `[street · tier: ≤ village]` Neighbours at {settlement} have begun to suspect one another, and few will lend a tool or a coin now.
+7. `[street · militia · no watch]` {settlement} calls its people out against raiders and beasts, but nobody is called out over a theft.
 
 **`Dangerous`**
 1. `[street · watch]` The watch at {settlement} has been overwhelmed. What happens in this town is decided by whoever is present when it happens.

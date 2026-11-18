@@ -34,7 +34,8 @@ const EXPECTED_CELLS = {
   RANK: { climb: SIX, defend: SIX, enter: SIX },
   POWER: { tense: SIX, competitive: SIX, corrupted: SIX, conflict: SIX },
   INSTITUTION: { solvency: SIX, rebuilding: SIX, charter: SIX, takeover: SIX },
-  SUPPLY: { impaired: SIX, dependency: SIX, isolation: SIX, expansion: SIX },
+  // LAST-VARIETY (item 2, 2026-11-18; the chair's ruling LR2): `want`, two a vantage, dealt only where a dependency's good is needed and not brought in
+  SUPPLY: { impaired: SIX, dependency: SIX, isolation: SIX, expansion: SIX, want: { short: 2, long: 2 } },
   TIES: { rival_enemy: FIVE, debtor: FIVE, creditor: FIVE, ally: FIVE, family: FIVE, mentor_student: FIVE },
   PERSONALITY: Object.fromEntries(PERSONALITY_CLUSTERS.map((k) => [k, FOUR])),
   ALLEGIANCE: {
@@ -45,7 +46,7 @@ const EXPECTED_CELLS = {
   },
   UNCANNY: { haunting: SIX, components: SIX, commission: SIX, omen: SIX, bargain: SIX },
 };
-const EXPECTED_TOTALS = { RANK: 36, POWER: 48, INSTITUTION: 48, SUPPLY: 48, TIES: 60, PERSONALITY: 96, ALLEGIANCE: 128, UNCANNY: 60 };
+const EXPECTED_TOTALS = { RANK: 36, POWER: 48, INSTITUTION: 48, SUPPLY: 52, TIES: 60, PERSONALITY: 96, ALLEGIANCE: 128, UNCANNY: 60 };
 
 /** STYLE-RULINGS-2026-11-07 §2 law 3, verbatim, plus WIRING-RULINGS §7's named tic. */
 const STRUCK_TICS = [
@@ -131,10 +132,10 @@ describe('goal families — the cells of design §6.6', () => {
     expect(actual).toEqual(EXPECTED_CELLS);
   });
 
-  test('the family totals are §6.6\'s 464 plus UNCANNY\'s 60, 524 in all', () => {
+  test('the family totals are §6.6\'s 464 plus UNCANNY\'s 60 plus LAST-VARIETY\'s 4, 528 in all', () => {
     const totals = Object.fromEntries(Object.entries(GOAL_FAMILY_LINES).map(([f, subs]) => [f, count(subs)]));
     expect(totals).toEqual(EXPECTED_TOTALS);
-    expect(Object.values(totals).reduce((a, b) => a + b, 0)).toBe(524);
+    expect(Object.values(totals).reduce((a, b) => a + b, 0)).toBe(528);
   });
 
   test('the table is frozen to its lines', () => {

@@ -149,6 +149,8 @@ const PRESENCE_SETTER = {
   uprising: (f, _a, want) => ({ ...f, uprising: want }),
   // FAULTS-DESKS (2026-11-18, FR6): `court or gaol` (`factsOf.js :: courtOrGaol`), declared by the seven record-of-crimes lines of DS-DEF-3
   'court or gaol': (f, _a, want) => ({ ...f, courtOrGaol: want }),
+  // LAST-VARIETY (2026-11-18): `prison` (the defence home's own atom), declared by DS-DEF-3 › Safe v6 (`no prison`)
+  prison: (f, _a, want) => ({ ...f, defence: { ...f.defence, prison: want } }),
   // FAULTS-NEED (FR2): `need not brought in` (keyed; `needNotBroughtIn.js`), declared by DS-ECO-8 POOR v1; the key's answer set,
   // every other key as it was
   'need not brought in': (f, a, want) => ({ ...f, needNotBroughtIn: { ...(f.needNotBroughtIn || {}), [a.key]: want } }),
