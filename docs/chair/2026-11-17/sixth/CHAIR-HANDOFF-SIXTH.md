@@ -552,8 +552,9 @@ should be paused or archived by the owner's hand.
   looking like an append. AGAINST THE LIVE SITE (master db832c892 already draws by vid): a town saved there may show
   another sentence of the same pool in those seven places after the deploy; no sentence is false by it (each prints
   only where its marks hold). THE RULING: THE NUMBERING STANDS AS IT IS ON THE FROZEN LINE (restoring it re-rolls
-  pages the seventh and eighth reads were made on, re-opens every book and test keyed by vid, and moves pages at the
-  close); the row's class is NOT changed; the digest is re-taken with a TRUE note: breached once, the seven pools,
+  pages the seventh read and BAR8's two audits were made on (CORRECTED 04:49: the chair first wrote "the seventh
+  and eighth reads": the eighth read has not been run), re-opens every book and test keyed by vid, and moves pages
+  at the close); the row's class is NOT changed; the digest is re-taken with a TRUE note: breached once, the seven pools,
   the fourteen moves, the commit, why the door did not refuse. IT IS NOW OR NEVER (once deployed the new numbers are
   the numbers): THE OWNER WAS TOLD IN THE CHAT AT ONCE, with the other choice (the old numbers restored before the
   merge, at a cost of time not measured). AFTER THE DEPLOY: a builder ARMS THE GUARD (the generator refuses a text
@@ -1946,3 +1947,13 @@ should be paused or archived by the owner's hand.
   before a second crossing). THE ORDER STILL TO COME: 1A's four hunks, merge 6, the second "MERGE" to 1B, 1B's final
   pass merged, "PART 1 IS AT <sha>", DOORS-2 re-proves every predicted row on that tree (a predicted row that moves
   between 70e557d5b and Part 1's tip is a stop), "READY TO SIGN ON <sha>", THE OWNER TOLD IN THE CHAT, "SIGN".
+- 04:49 UTC, 2026-11-18 · THE OWNER ASKED (04:48:29 UTC): "how are the new settlemetns now as compared to before?": ANSWERED
+  FIRST AND IN FULL in the chat: what differs in a town born now (the supply story and its marks; a sentence prints
+  only where it is true, with four before-and-after pairs quoted from the source; a crisis reaches the whole page;
+  the PDF and the journal say what the tabs say; the rare secrets); THE MEASURE (the stronger reader's: the sixth read
+  75 standing MED sentences, the seventh 37, HIGH none in either; fixes for part of the 37 landed since, the rest
+  after the deploy; NO NUMBER FOR TODAY: the next read is not run); what is still wrong (four named faults); what the
+  chair cannot say (how many people or houses change for a seed against the live version; no thirty-town read of the
+  live version exists). A WRONG STATEMENT OF THE CHAIR CORRECTED OUT LOUD IN THE SAME ANSWER: the pages with the
+  moved vids were not "read twice": one read (the seventh) and BAR8's two audits; CL19's text and the description's
+  draft are corrected.
