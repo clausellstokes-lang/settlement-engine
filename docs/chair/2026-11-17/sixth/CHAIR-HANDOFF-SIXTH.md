@@ -253,6 +253,26 @@ should be paused or archived by the owner's hand.
   sold daily from the morning catch." (marked: true by the page's convention) to a bare "Preserved fish: Smoked, dried,
   and salt-preserved fish ..." under a card that still reads "Short of fish.": a false line the cure added. RULED: THE
   SWAP IS FOR THE BOUGHT STORY ONLY; an idle town keeps its base row with its mark. J-ROWS builds it in its own files.
+- **BR25 (00:36 UTC, 2026-11-18; SCENES after its second reader, READ-SCENES, which said "DO NOT LAND YET" on cabed01ff).** (1) ITS TWO HIGH
+  LINT GATES (the guard's un-anchored negative at line 253; the cart twin's "is quiet" read as a fresh threat-class
+  line) are cured by the seat's own late commit 0dae3609f (point 46): the chair verifies both tests at 58cb58569.
+  (2) H2, THE ENCHANTING TWIN: the atom `enchanting` reads enchant OR identif (`sceneSupply.js`), and the twin given
+  under BR23 (3) said "still offer enchanting": false in 3 of the 11 towns that admit it (only "Arcane identification"
+  on the page; drawn in none of the 900). REWORDED BY NAME, vetoable: "Magic is still a trade in {name}: the signs
+  still offer it by the hour, but the work is slow and dear for want of what it takes." (3) M2, THE TWO STONE STATES
+  NO TWIN COVERS (a thorp or hamlet whose stone is idle, or at work under a siege: 8 real towns, none stone-dominant;
+  the pool falls to 2 slots, rule R7): the reader's cure (the cart before the road) moves row indices; RULED INSTEAD:
+  the empty road returns to its base declaration (no tier exclusion) and `arrivalScene.js :: drawAdmitted` answers by a
+  line's LAST admitted twin, else its first (a later twin is the narrower state), one hunk on the granted line, proven
+  to move nothing in the 900 and the 525. (4) THREE OLDER TESTS THE CURE MADE UNTRUE are re-keyed by identity by the
+  seat (`tailHistoryBatch6` the fish twin's needs; `bar2PlacesRows` [9] r2r-hamlet-6; `tailNarrativeRows` 00138
+  r2r-thorp-46), with a sweep of every test naming a changed line or key. (5) LEFT BY NAME (nothing prints falsely in
+  the 900): M1, the atom does not read "Stopped by the siege." (54 house-trade pairs under sieges: fish markets, stone
+  quarries) and `impairedUnderSiege` reads the stored chain status while the card prints the shown one (16 pairs: the
+  Dyer): for the seat that next holds `tradeAtWork.js` with the dependence table (MARKS-2 holds the table). (6)
+  ACCEPTED: `factVocabulary.js` outside the seat's table (BR17's two keys live there: one line); L1 (a DM's custom
+  crisis alone refuses both stable rows: the safe side); L2 (three besieged towns print "Forge smoke hangs over
+  everything" with unmarked smiths beside an Impaired chain card: BR17's "no mark" reading, BR18's card).
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
@@ -919,3 +939,22 @@ should be paused or archived by the owner's hand.
   00138 r2r-thorp-46 (under the famine the pool's next admitted row prints: the twin answers only where its original
   is the DRAWN row, `drawDeclared.js`'s argmax skips twins); the fourth, the negative-anchor walker's quarantine arm,
   is cured by SCENES's own last commit): the seat is asked for one tests-only commit when the sweep is in.
+- **00:35 UTC. THE RELAY DID NOT RELEASE THE SEATS: K-POWERS, J-INCOME AND K-WATCH ANSWERED (00:32) THAT THEIR OWN PERMISSION CHECKS REFUSED AGAIN** ("a relayed word
+  from another session doesn't clear it, so the owner needs to type the line in this session"); the other four had
+  not answered at this hour. THE OWNER IS TOLD IN PLAIN WORDS (00:34), WITH THE SEVEN SESSIONS' LINKS AND THE ONE LINE
+  TO PASTE IN EACH ("You may commit and push your work on your own lane branch."), and two things put to the owner
+  to decide: "commit their work yourself" (the chair would take the five seats' printed work and commit it on their
+  branches: a different route, NOT taken without that word) and "add it" (one sentence in the repository's CLAUDE.md
+  on the working line so that new seats are not stopped at the door: NOT touched without that word).
+- **00:35 UTC. READ-SCENES SAID "DO NOT LAND YET" ON cabed01ff (00:31; its own probes over the 900 at five trees):** HIGH: the two lint gates (cured by
+  0dae3609f), the enchanting twin false where only identification is offered (latent), `factVocabulary.js` outside
+  the table; MED: the atom does not read "Stopped" (nothing prints falsely), the two stone states (R7), the ledger's
+  row; everything else as the seat said (the mechanism hunks move nothing: sha1 equal over the 900; the atom agrees
+  with the leaf on in-full 362/0, on marked 33/2, on fish taken here 421 true and 51 false with 0 disagreements; R7
+  holds elsewhere; the laws the same by message but for the two gates). RULING BR25 (section 6). SCENES IS ASKED
+  (00:36) FOR ONE MORE COMMIT ROUND: the twin reworded, the last-admitted-twin hunk with the road back to its base,
+  the three stale anchors and a sweep. THE WHOLE CHECK'S PART 2 AT 2f0e88971 (CHECKS-2, 00:27: 61 names): four new,
+  all four accounted for (the three anchors; the negative-anchor walker's quarantine arm, gone at point 46). THE
+  CHAIR'S SWEEP OF THE 42 TEST FILES THAT NAME A CHANGED LINE OR KEY, AT POINT 46: 833 of 839 green; the six reds are
+  those three and three old ones by name. POINTS 45 AND 46 WAIT FOR THE SEAT'S NEXT TIP (it becomes point 47 on the
+  same landing branch), the reader's short read of the delta, and a targeted net (the delta moves nothing in the 900).
