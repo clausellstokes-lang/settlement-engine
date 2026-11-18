@@ -63,16 +63,23 @@ describe('(a) "no one leads" is refused where a leader stands clear', () => {
 
 describe('(b) a rival of the density law carries its own standing, never its host\'s', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
-  it('rw3-metropolis-under_siege-1: The Garrison Bloc (a rival of Military/Guard) does not read its host\'s "narrow gap"', () => {
-    const s = born('rw3-metropolis-under_siege-1');
-    const bloc = s.powerStructure.factions.find((f) => f.faction === 'The Garrison Bloc');
-    expect(bloc?.contestsNiche, 'premise: the bloc is the density law\'s rival').toBe('Military/Guard');
-    // 2026-11-15 BAR2-PEOPLE-4: the anchor RE-KEYED BY ITS TEXT, the same line: batch B's declared cure (ruling PT3) made
-    // "Well-funded city watch; it keeps order reliably …" read "City watch; it answers for keeping order …" (claimStanding.js)
-    // 2026-11-17 BAR8-K-POWERS (rule 14a, C14226): RE-KEYED BY IDENTITY, the same line: the seat's declared cure gives the minted rival
-    // of a one-body description its own ("A second armed company that wants a share of keeping order here ...", applyDensityLaw.js ::
-    // RIVAL_DESC_OF_HOST) in place of the host's "City watch; it answers for keeping order ..."; the claim and its form are kept
-    expectAbsentWithAnchor(String(bloc.desc), 'is narrow', 'wants a share of keeping order', 'the rival\'s own settled description');
+  // 2026-11-18 BAR8-K-WATCH-2 (the chair's BR30 (1)): RE-ANCHORED BY IDENTITY, the same claim. The old anchor, The Garrison Bloc of
+  // rw3-metropolis-under_siege-1, left: after rule 14a that rival takes its twin WHOLE (applyDensityLaw.js :: RIVAL_DESC_OF_HOST) and
+  // carries no standing at all, so its host's "is narrow" could no longer reach it and the arm was green with the settle's host
+  // path cut (`const host = null;` in rosterText.js :: settleStandingToRoster). The path still runs for a rival whose host's
+  // description is general to its kind (rivalDescOf gives it none): it is minted with its host's description AND standing, and
+  // the settle must give it its own. Here the host's sentence differs from the rival's own settled one, so the host's on the rival
+  // is the fault the claim forbids; the anchor is the shared description, present with the path cut or not.
+  it('rw3-metropolis-calm-9: The Commercial Circle (a rival of Merchant Guilds) does not read its host\'s standing sentence', () => {
+    const s = born('rw3-metropolis-calm-9');
+    const circle = s.powerStructure.factions.find((f) => f.faction === 'The Commercial Circle');
+    const host = s.powerStructure.factions.find((f) => f.faction === 'Merchant Guilds');
+    expect(circle?.contestsNiche, 'premise: the circle is the density law\'s rival').toBe('Merchant Guilds');
+    const HOSTS = 'Close enough to the two above that their support is worth buying';
+    expect(String(host?.desc), 'premise: the host carries its own standing sentence').toContain(HOSTS);
+    expectAbsentWithAnchor(String(circle.desc), HOSTS, 'Merchants trade here in number but carry little weight in how the place is run',
+      'the rival keeps its host\'s general description, never its host\'s standing');
+    expect(String(circle.desc), 'the rival\'s own settled standing').toContain('They have a say on only a few matters');
   }, 60_000);
 });
 
