@@ -447,6 +447,18 @@ should be paused or archived by the owner's hand.
   old buildings are patched and kept standing, and nothing new goes up.") declares `excludes` on it; the seat says
   what prints in each refused slot and that it is true there. NOT ON THE FROZEN LINE: it lands with the desks'
   points after the deploy.
+- **CL11 (03:35 UTC, 2026-11-18; A CORRECTION OF THE CHAIR'S OWN BASE, found by CLOSE-DOORS-2's measure and by
+  CLOSE-DOORS-1A's census).** The chair wrote that the line's last closed tip is 6c117344f, "green whole". IT IS NOT A
+  TREE WHERE THE STORED FIGURES WERE TRUE: the round BAR5's nine branches (JOIN-16's points 1 to 9, merged 2026-11-16
+  20:56 to 21:20) and five audit branches of BAR6 (points 10 to 14) joined the line BEFORE the last close's two
+  branches were merged on it (points 15 and 16, 2026-11-17 01:00), and that close re-took nothing for them: at
+  6c117344f the golden reads 285 of 525 moved (the seat's run), and the committed wiring census predates BAR5.
+  THE STORED FIGURES WERE LAST TRUE AT THE LAST CLOSE'S OWN TIPS: 6483322cc (its Part 1) and 0ac61b4b4 (its Part 2:
+  the golden reproduces all 525 there; 485 of 525 move at 70e557d5b against it). THE GREEN BASE of every measure is
+  those two tips; a move is laid to a landing over `git log --first-parent 600b7683a..HEAD` (600b7683a is the line
+  as the last close took it); BAR5's nine seats (`docs/chair/2026-11-16/bar5/`; `JOIN-16-HANDBACK.md`) are among the
+  declarers; the signed record is named `docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json`.
+  Told to DOORS-2, DOORS-1A, DOORS-1B and CLOSE-SWEEP at 03:35.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
