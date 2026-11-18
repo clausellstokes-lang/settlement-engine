@@ -1781,3 +1781,25 @@ should be paused or archived by the owner's hand.
   the person's own id; draw-free by the file's own header; the 23 older strings stand byte for byte; BIRTH-3 adds no
   caller. LEFT-KEYS (04:17): K1 to K5 and K8 in at b112c6ccc; its tip 9bbc4c19d adds K7, K9 and K6's detectors (no
   test of the whole check reads them): the tip is what merge 3 took.
+- 04:23 UTC, 2026-11-18 · MERGE 3 VALIDATED (15 files, 246 tests, all green on the merged tree: LEFT-KEYS's changed tests
+  and the four tests that use the changed page-law helpers). THE CLOSE'S FOURTH MERGE: CLOSE-SWEEP at 1039b8c26
+  (S4.1 ae0af7ca9: the culture readers' roster names `economy/foodBaseNumbers.js`: it joined the set through the
+  WORD "agriculture" in a doc comment, its hunk moved verbatim by DEBT-1 part C; it reads no culture; the re-derive
+  runs the whole pipeline; S4.2 890296904 and S4.3 1039b8c26: the layer walker derives every probe from
+  `FACT_DIMENSIONS`, throws on a `factsCall` getter with no branch, collects every failing leaf; S5 a970ef865:
+  `vercel.json` `"git": { "deploymentEnabled": { "lane/*": false, "lane/**": false } }` and one sentence of
+  `docs/DEPLOY.md`): merged as 9c170f3b2. ON THE MERGED TREE: `factLayers.walker` red on POOLS alone (the shrink
+  row, CLOSE-DOORS-1B's door); `worldFactRederive` red on A7 alone (two shas, CLOSE-DOORS-2's); `buildHeapPinned`
+  and `deployRunbookFreshness` green; `vercel.json` parses. **CL13's OPEN POINT IS CLOSED:** the host's own
+  documentation (found by a web search at 04:22: "git configuration", and the changelog "Granular branch matching
+  for Git configuration in vercel.json") says `git.deploymentEnabled` takes minimatch patterns (its example:
+  `"internal-*": false`); where a branch matches several rules, one `true` deploys it: both of ours are false.
+  THE OWNER WAS TOLD THE CORRECTION. THE MERGE BRANCH `lane/landing-close-2026-11-18` IS BEING PUSHED (four merges,
+  9c170f3b2; the first push that carries the key: whether the host skips it is read from the commit's statuses).
+  J-INCOME-2 HANDED BACK AGAIN (04:21; tip 262ba9ec6, one push): BR33 done as ruled (the leaf imports
+  `institutionRoster` and reads `liveInstitutions`; the exempt row gone; the ruin roster back to the base's 115;
+  the 900 records byte-equal; FS1 (a) re-written, anchored, dated, green; THE RITES LINE CANNOT PRINT BY
+  CONSTRUCTION: a dead line, named, not deleted); the net at a scratch merge: 587 of 587 older tests, the same 69
+  lint reds, two counts +1 by its files; THE BUTCHERS (BR31) LEFT BY NAME (its count stood at 380,000); item 4
+  already clears C34109 and r2r-city-43. NEXT FOR IT, AFTER THE DEPLOY: PDF-2b's reader reads the five rows and the
+  leaf, then both land.
