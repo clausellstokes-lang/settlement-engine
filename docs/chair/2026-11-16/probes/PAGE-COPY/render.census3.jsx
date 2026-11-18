@@ -18,6 +18,19 @@ import { afterEach, test, vi, expect } from 'vitest';
 import { act, cleanup, fireEvent, render, waitFor } from '@testing-library/react';
 import fs from 'node:fs';
 const mocks = vi.hoisted(() => ({ store: {} }));
+// MENDED 2026-11-18 (FAULTS-TOOLS item 3; the close's sweep, seed bar0-thorp-calm-rand-45): THE PROBE WAITS FOR EVERY LAZY PART.
+// A `React.lazy` part under `<Suspense fallback={null}>` (the Power tab's DeityAssignmentPanel, dossierLazyTabs.js) prints
+// NOTHING until its chunk resolves, so the page looks still while it is not yet whole, and under load the chunk resolved
+// after the stillness window closed (one dump lost "Patron deity"). Every `lazy()` the tree makes is wrapped here so its
+// import is tracked while it is pending; `settle` waits until none is, then asks for stillness. Nothing else of React changes.
+const lazyWait = vi.hoisted(() => ({ pending: new Set() }));
+vi.mock('react', async (importOriginal) => {
+  const R = await importOriginal();
+  const lazy = (factory) => R.lazy(() => { const p = Promise.resolve(factory()); lazyWait.pending.add(p);
+    const done = () => { lazyWait.pending.delete(p); }; p.then(done, done); return p; });
+  const base = R.default ?? R;
+  return { ...R, lazy, default: { ...base, lazy } };
+});
 vi.mock('__TREE__/src/store/index.js', () => {
   const useStore = (selector) => selector(mocks.store);
   useStore.subscribe = () => () => {}; useStore.getState = () => mocks.store; return { useStore };
@@ -84,7 +97,10 @@ function lines(root){
 // and not in the next run's at the same tree. Before every snapshot the panel's text must hold still for four polls of 25 ms
 // (at most three seconds), so two runs of one tree give the same dump.
 const tick=(ms)=>new Promise((r)=>setTimeout(r,ms));
-async function settle(panel){ let last=-1, same=0; for(let i=0;i<120;i++){ await act(async()=>{ await tick(25); }); const n=(panel.textContent||'').length; if(n===last){ if(++same>=4) return; } else { same=0; last=n; } } }
+// MENDED 2026-11-18 (FAULTS-TOOLS item 3): first every lazy part the page has asked for has arrived (at most thirty seconds),
+// then the stillness; a lazy part asked for during the stillness (an effect's late render) starts the count again.
+async function lazyArrived(){ for(let i=0;i<1200 && lazyWait.pending.size;i++){ await act(async()=>{ await Promise.race([Promise.allSettled([...lazyWait.pending]), tick(25)]); }); } if(lazyWait.pending.size) throw new Error(`census3: ${lazyWait.pending.size} lazy part(s) still pending after 30 s`); }
+async function settle(panel){ let last=-1, same=0; for(let i=0;i<120;i++){ if(lazyWait.pending.size){ await lazyArrived(); same=0; } await act(async()=>{ await tick(25); }); const n=(panel.textContent||'').length; if(n===last && !lazyWait.pending.size){ if(++same>=4) return; } else { same=0; last=n; } } }
 async function openAll(panel, snap){
   const disc=()=>[...panel.querySelectorAll('[aria-expanded]')].filter(e=>!e.hasAttribute('aria-haspopup'));
   await settle(panel);

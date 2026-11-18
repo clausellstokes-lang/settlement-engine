@@ -2461,3 +2461,26 @@ should be paused or archived by the owner's hand.
   constructed arm; no town of the populations moves). **ALL FIVE BUILT PIECES ARE NOW CLEARED TO LAND:** the income
   3b419910f then the PDF cd94d5a08 · the marks 85b25a99b · the watch and the powers 2abb7fb03 · the people 71525f075 ·
   the desks 18db5f062. They land on the closed line, after "WRITTEN" and the close's merge.
+- 07:59 UTC, 2026-11-18 · **FAULTS-TOOLS IS DONE** (07:57; `lane/faults-tools-2026-11-18` at 43df015d2; hand-back
+  `docs/chair/2026-11-18/faults/FAULTS-TOOLS-HANDBACK.md`; READ BY THE CHAIR, no second reader: tests and tools). (1) THE
+  MATCHER (`src/domain/prose/entryWalker.js`, FR11; d489df0a8): a NAME SLOT (`{settlement}`) is struck before the word
+  test, and the head verb of a predicate field's name (`has` of `hasGranary`) is no claim word: over-claims 54 to 19
+  over the shipped corpus; `OVER_CLAIM_OWED` 9 to 1 BY THE CURE (CL25's eight leave; the one that stays is DS-ECO-1's
+  `{access}` slot, a reading); the base's share (27 rows) left by the same cure: `OVER_CLAIM_BASE` 45 TO 18 IS THE
+  LAST CLOSE'S TO TAKE; under-claims 2102 to 2103 (DS-GEN-13 WAREHOUSES v5: only the bare verb had claimed it; the
+  tally was already over its ceiling 2097 at the faults base: the close's); one older assertion re-keyed to the ruled
+  reading (the name slot claims no field; the bare word still does); no importer outside the instruments; the build's
+  tests and the four ceilings the same; the wave gate and arm Q the same. (2) THE VALIDATOR
+  (`scripts/census/census4-validate-ledger.mjs`, 45af1478f) opens (it reads only CENSUS-4's own ledgers and names the
+  rest) and FINDS 1,721: CENSUS-4's ledger was never re-taken as the pools grew (positional rows: e.g.
+  stressInstitutionEffects 190 against 466), the extract's reach drifted in two pools (`npcGenerator.STRESS_GOALS`,
+  `CRIME_LEVEL_OTHER_NPC`), four stale `declaring` counts; no atom finding. NAMED, NOT CURED: FOR THE LAST CLOSE: the
+  ledger's re-take through its own door, then the validator as one more arm of `census4Ledger.walker` (BAD 0); if the
+  re-take is not one door's run, it is named in the pull request as a debt and no gate is added. (3) THE PROBE'S WAIT:
+  the patch is APPLIED ON THIS LANE (`render.census3.jsx`: every `lazy()` is tracked while pending; `settle` waits
+  for them, then for stillness): the chair's smoke at the merge branch's tree: bar0-thorp-calm-rand-45 and r2r-thorp-2
+  rendered twice each: byte-equal, "Patron deity" present; the seat's proof: 20 of 20 a town, and a planted 600 ms
+  delay loses the panel unpatched. THE RULE "a dump that differs only by the deity panel is the probe's" stays for the
+  seats that fetched the probe before this commit. Stored figures it moves: the estate's count +1, the mutation
+  manifest +1 (`tests/generators/faultsTools.test.js`). IT LANDS WITH THE FAULTS ROUND, after the five pieces.
+  CLOSE-DOORS-2 still writes (07:53: "running the fence and its readers alone").
