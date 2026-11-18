@@ -2449,3 +2449,15 @@ should be paused or archived by the owner's hand.
   **FAULTS-ROWS IS SEATED ON IT** (07:02; session_01FbPLbbdbBzYdRPJmCPrx2k; base d75011e68d1630711660f5668451624be0167a61
   on `lane/faults-need-2026-11-18`; branch `lane/faults-rows-2026-11-18`; the prompt as sent is in `faults/prompts/`).
   ALL SEVEN SEATS OF THE FAULTS ROUND ARE AT WORK.
+- 07:09 UTC, 2026-11-18 · DESKS-2's FOLLOW-UP IS IN (07:08; tip 18db5f062; read by the chair): BR35 (1) built (a279ffa6c: v4 reads
+  "… needs more {good} than the country around it gives, and none of it is brought in."; the annex row and
+  `economy.generated.js`, one line each; `corpusEcoTailGuards` ON THE CLOSE'S FORM: K5's row on a record that brings
+  the livestock in (prints 2) and a second row `as: 'nothing brought in'` (prints 4, the old words gone): it merges
+  clean on the close). BR35 (2) NOT BUILT, AND RIGHTLY: THE READER'S PREMISE WAS WRONG: the Legal row's STATUS itself
+  reads the stamped `compound.hasPrison` (`defenseDisplay.js` about line 376); only its court is live; a live key
+  alone would print "court without detention" beside "Court + Prison". THE FAULT IS THE ROW'S: with a prison ruined it
+  still says "Court + Prison" (no born town holds one; a DM's event or the world pulse reaches it). GIVEN TO
+  FAULTS-WATCH AS ITS ITEM 5 (07:10: the row reads the defence home's live prison; the key's one argument follows; one
+  constructed arm; no town of the populations moves). **ALL FIVE BUILT PIECES ARE NOW CLEARED TO LAND:** the income
+  3b419910f then the PDF cd94d5a08 · the marks 85b25a99b · the watch and the powers 2abb7fb03 · the people 71525f075 ·
+  the desks 18db5f062. They land on the closed line, after "WRITTEN" and the close's merge.
