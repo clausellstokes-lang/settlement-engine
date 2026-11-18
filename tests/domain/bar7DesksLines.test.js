@@ -162,10 +162,12 @@ describe('item 3 · the ledger line says money and keeps its words', () => {
     expect(v1.v.text).toMatch(/money laid by/);
     expect(v1.v.marks).toEqual(['no crisis: indebted']);
   });
-  test.each([['bar0-city-wartime-rand-42'], ['bar0-metropolis-calm-rand-43']])('%s (the negatives C12371, C27960) still prints it', (seed) => {
-    const s = town(seed);
-    const out = economyStateProse(s, { exportPosture: deriveExportPosture(s) }, { seed: String(s._seed ?? s.id ?? '') });
-    expect(JSON.stringify(out.prosperityRung)).toMatch(/purse closes every year ahead/);
+  test('the negatives C12371 (bar0-city-wartime-rand-42) and C27960 (bar0-metropolis-calm-rand-43) still print it', () => {
+    expectNoSeedFailures(collectSeedFailures([['bar0-city-wartime-rand-42'], ['bar0-metropolis-calm-rand-43']], ([seed]) => {
+      const s = town(seed);
+      const out = economyStateProse(s, { exportPosture: deriveExportPosture(s) }, { seed: String(s._seed ?? s.id ?? '') });
+      expect(JSON.stringify(out.prosperityRung)).toMatch(/purse closes every year ahead/);
+    }), 'every negative town still prints it');
   });
 });
 
@@ -270,13 +272,15 @@ describe('item 7 · the twelve free-seat lines of the power desk are refused und
 describe('item 8 · a slash label takes its prose form in {institution}', () => {
   const LABELS = ['Weavers/Textile workers', 'Palace/government complex', 'Small prison/stocks', 'Colosseum/arena', 'Docks/port facilities',
     'Sage/library', 'Spa/healing house', 'Hot Springs / Healing Waters', 'Livestock / game', 'Wool / flax', 'Desert/Arid', 'Monster Hunters / Adventurers'];
-  test.each(LABELS.map((l) => [l]))('planted: %s', (label) => {
-    const out = economyStateProse({ name: 'Plantford', economicState: {} }, { impairedInstitution: label }, { seed: 'bar7-desks' });
-    const said = JSON.stringify(out.impairedService ?? '');
-    expect(said).toMatch(/Plantford's [A-Z]/);
-    expect(said).not.toMatch(/\//); // anchored: the line above holds the sentence printed
-    // every form is singular: the desk's own singular verbs and "its" agree with it
-    expect(said).not.toMatch(/Plantford's [A-Z][^"]*?s (?:is|can|does|still) /); // anchored: two lines above hold the sentence printed
+  test('planted: every slash label takes its prose form', () => {
+    expectNoSeedFailures(collectSeedFailures(LABELS.map((l) => [l]), ([label]) => {
+      const out = economyStateProse({ name: 'Plantford', economicState: {} }, { impairedInstitution: label }, { seed: 'bar7-desks' });
+      const said = JSON.stringify(out.impairedService ?? '');
+      expect(said).toMatch(/Plantford's [A-Z]/);
+      expect(said).not.toMatch(/\//); // anchored: the line above holds the sentence printed
+      // every form is singular: the desk's own singular verbs and "its" agree with it
+      expect(said).not.toMatch(/Plantford's [A-Z][^"]*?s (?:is|can|does|still) /); // anchored: two lines above hold the sentence printed
+    }), 'every slash label takes its prose form');
   });
   test('the sixth read\'s town prints the house\'s form (C25601)', () => {
     const s = town('bar0-metropolis-calm-rand-43');

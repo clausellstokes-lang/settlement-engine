@@ -28,6 +28,9 @@ import { annotateFactionStanding } from '../../src/generators/power/factionStand
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
 import { CLASS_DIMS, classesOf, hitsOf, scanSource } from '../lint/presumptionClasses.shared.mjs';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { variantByVid } from '../helpers/drawnProse.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 /** The hits of a planted file, as `class:status` per text (the walker test's own form). @param {string} rel @param {string} src */
@@ -54,16 +57,18 @@ describe('item 1 · `paid watch` needs a watch that is not the unpaid rota', () 
 
 describe('item 3 and item 7 · the desks\' twins say a noun every tier bears', () => {
   const lines = [...textsOf(DOSSIER_STATE_PROSE_DEFENSE), ...textsOf(DOSSIER_STATE_PROSE_POWER)];
-  test.each([
-    // RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): the same line (DS-DEF-2 CHAIN: food trades failing v2) lost its second
-    // months figure about food ("through a year cut off"; foodEnduranceLine.test.js, one fact one home); the claim is unchanged.
-    ['DS-DEF-2 food trades failing', /its stores would still carry it if it were cut off\.$/],
-    ['DS-DEF-12 capacity enough', /and what the place cannot grow or make it mostly goes without\.$/],
-    ['DS-POW-5 council counterforce', /has left obvious decisions untaken, and nobody there can make it take them\.$/],
-  ])('%s', (_name, re) => {
-    const hit = lines.filter((v) => re.test(v.text));
-    expect(hit.length).toBe(1);
-    expect(hit[0].text).not.toMatch(/\bthe town\b/);
+  test('DS-DEF-2 food trades failing, DS-DEF-12 capacity enough and DS-POW-5 council counterforce say no "the town"', () => {
+    expectNoSeedFailures(collectSeedFailures([
+      // RE-KEYED BY IDENTITY (DEBT-1, 2026-11-17): the same line (DS-DEF-2 CHAIN: food trades failing v2) lost its second
+      // months figure about food ("through a year cut off"; foodEnduranceLine.test.js, one fact one home); the claim is unchanged.
+      ['DS-DEF-2 food trades failing', /its stores would still carry it if it were cut off\.$/],
+      ['DS-DEF-12 capacity enough', /and what the place cannot grow or make it mostly goes without\.$/],
+      ['DS-POW-5 council counterforce', /has left obvious decisions untaken, and nobody there can make it take them\.$/],
+    ], ([_name, re]) => {
+      const hit = lines.filter((v) => re.test(v.text));
+      expect(hit.length).toBe(1);
+      expect(hit[0].text).not.toMatch(/\bthe town\b/); // anchored: hit.length is exactly 1 above, the one corpus line its pattern names
+    }), 'every twin says a noun every tier bears');
   });
   test('the travellers\' line is declared against the THREAT family, and its twin stands under one', () => {
     const trav = lines.filter((v) => /^Travellers reach \{settlement\} and find nobody about/.test(v.text));
@@ -109,16 +114,19 @@ describe('item 5 · the safety profile\'s two lines leave the build guard\'s doo
     expect(rows.filter((h) => /unusually quiet/.test(h.text))).toEqual([]);
   });
   test('the war profiteers\' line names no leather, and no goods word of it is a hit', () => {
-    expect(src).not.toMatch(/adulterating grain and leather/);
+    // the old words are gone from the file and the line that replaced them stands in it (the anchor)
+    expectAbsentWithAnchor(src, 'adulterating grain and leather', "Suppliers adulterating the grain and provisions sold to the army's contracts.", 'the war profiteers line');
     expect(src).toMatch(/Suppliers adulterating the grain and provisions sold to the army's contracts\./);
     expect(rows.filter((h) => /^Suppliers adulterating/.test(h.text))).toEqual([]);
   });
 });
 
 describe('item 6 · the class table holds the atoms made after the guard seat\'s final', () => {
-  test.each([
-    ['court sits', ['office', 'law']], ['seat held', ['office']], ['seat members', ['office']], ['paid watch', ['office', 'law']],
-  ])('%s answers %j', (atom, classes) => { for (const c of classes) expect(CLASS_DIMS[c]).toContain(atom); });
+  test('court sits, seat held, seat members and paid watch answer their classes', () => {
+    expectNoSeedFailures(collectSeedFailures([
+      ['court sits', ['office', 'law']], ['seat held', ['office']], ['seat members', ['office']], ['paid watch', ['office', 'law']],
+    ], ([atom, classes]) => { for (const c of classes) expect(CLASS_DIMS[c]).toContain(atom); }), 'every atom answers its classes');
+  });
   test('PLANTED: a line of office words declared on each answers its class', () => {
     expect(one(`{ text: 'The court sits at the new moon and the magistrates hear what is brought.' }`)).toEqual([
       'law:none :: The court sits at the new moon and the magistrates hear what is brought.',
@@ -130,8 +138,11 @@ describe('item 6 · the class table holds the atoms made after the guard seat\'s
     expect(one(`{ text: 'The night watch draws its pay for every name on the roll.', needs: ['paid watch'] }`)).toEqual([]);
   });
   test('legacy ruin joins no class: no class of the lexicon names a ruin built upon', () => {
-    expect(classesOf('Much of what stands in {settlement} now was built after the {calamity}, and that legacy is {timeband_age}.')).toEqual([]);
-    for (const ds of Object.values(CLASS_DIMS)) expect(ds).not.toContain('legacy ruin');
+    // the sentence is the corpus's own, computed by its identity (DS-GEN-16 LEGACY-RECOVERED vid 2), its slots left as written
+    const legacy = variantByVid({ leaf: 'general', blockId: 'DS-GEN-16', poolKey: 'LEGACY-RECOVERED', vid: 2, slots: { settlement: '{settlement}', calamity: '{calamity}', timeband_age: '{timeband_age}' } });
+    expect(classesOf(legacy)).toEqual([]);
+    // every class of the lexicon, as one collection: the atom item 6 holds (court sits) stands in it, legacy ruin in none
+    expectAbsentWithAnchor(Object.values(CLASS_DIMS).flat(), 'legacy ruin', 'court sits', 'no class names a ruin built upon');
   });
 });
 
@@ -144,22 +155,27 @@ describe('item 7 · the merchant guilds\' sentence prints only where a power nam
   test('beside the Merchant Guilds it prints', () => {
     expect(nobles('Merchant Guilds')).toMatch(/The merchant guilds now have more say/);
   });
-  test.each(['Grand Merchant Oligarchy', 'Merchant Council', 'Merchant Princes'])('beside %s it never prints', (rival) => {
-    expect(nobles(rival)).not.toMatch(/The merchant guilds now have more say/);
+  test('beside the Grand Merchant Oligarchy, the Merchant Council and the Merchant Princes it never prints', () => {
+    expectNoSeedFailures(collectSeedFailures(['Grand Merchant Oligarchy', 'Merchant Council', 'Merchant Princes'], (rival) => {
+      // the anchor: the money's sentence the same standing prints beside every rival
+      expectAbsentWithAnchor(nobles(rival), 'The merchant guilds now have more say', 'the noble families keep their titles, their land and their precedence, but the money has moved.', rival);
+    }), 'beside every other merchant power it never prints');
   });
 });
 
 describe('item 8 · "candid" and "forthright" yield to the secrets of deceit only', () => {
   const card = (dominant, what) => temperamentYieldsToSecret({ personality: { dominant, flaw: null }, secret: { what } });
-  test.each([
-    ['forthright', 'Their appointment was secured through forged credentials'],
-    ['forthright', 'Lied about the battle that earned the lodge\'s honours, and the men who could say otherwise are almost all dead'],
-    ['candid', 'Their celebrated origin story is a fabrication they created to escape an intolerable past'],
-    ['forthright', 'Falsified the conscription rolls to keep their own household\'s men home'],
-  ])('%s yields beside "%s"', (dominant, what) => {
-    const out = card(dominant, what).personality.dominant;
-    expect(out).not.toBe(dominant);
-    expect(['honest', 'plain-dealing', 'candid', 'forthright']).not.toContain(out);
+  test('forthright and candid yield beside the four secrets of deceit', () => {
+    expectNoSeedFailures(collectSeedFailures([
+      ['forthright', 'Their appointment was secured through forged credentials'],
+      ['forthright', 'Lied about the battle that earned the lodge\'s honours, and the men who could say otherwise are almost all dead'],
+      ['candid', 'Their celebrated origin story is a fabrication they created to escape an intolerable past'],
+      ['forthright', 'Falsified the conscription rolls to keep their own household\'s men home'],
+    ], ([dominant, what]) => {
+      const out = card(dominant, what).personality.dominant;
+      expect(out).not.toBe(dominant);
+      expect(['honest', 'plain-dealing', 'candid', 'forthright']).not.toContain(out); // anchored: a literal list built here cannot drift; the line above proves the word moved
+    }), 'every secret of deceit moves the temperament');
   });
   test('never for a secret of money, nor one the holder only knows of', () => {
     expect(card('forthright', 'Has been paid to lose the case').personality.dominant).toBe('forthright');

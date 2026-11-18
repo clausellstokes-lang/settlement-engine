@@ -19,6 +19,7 @@ import { GRAIN } from '../../src/data/crisisDependence.js';
 import { housesShortOf } from '../../src/domain/facts/houseInputAtHand.js';
 import { generateEconomicViability } from '../../src/generators/economy/viability.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -54,7 +55,7 @@ describe('SEAM-ECON item 1 (8c.export): a crop the scarce harvest denies is not 
       expect(harvestScarceHere(s), `${seed}: the page marks the harvest scarce`).toBe(true);
       const shown = exportsAsPrinted(s);
       expect(shown, `${seed}: the sibling still prints`).toContain(still);
-      expect(shown, `${seed}: the crop is not exported`).not.toContain(crop);
+      expectAbsentWithAnchor(shown, crop, still, `${seed}: the crop is not exported`);
     }), 'item 1: every scarce-harvest town');
   }, 300000);
   // the reading equals the mark's own over every famine town of the census's 720 and the two above
@@ -93,7 +94,7 @@ describe('SEAM-ECON item 8 (L3.outputs): a running card lists no output every ma
       expect(housesShortOf(s).get('Fuller'), `${seed}: anchored, the Fuller is short`).toBe('wool');
       const shown = chainOutputsShown(mill, s);
       expect(shown, `${seed}: the sibling still prints`).toContain('Flour and meal');
-      expect(shown, `${seed}: the short output leaves the card`).not.toContain('Fulled cloth');
+      expectAbsentWithAnchor(shown, 'Fulled cloth', 'Flour and meal', `${seed}: the short output leaves the card`);
     }), 'item 8: every short-cloth town');
   }, 300000);
   test('constructed: a Fuller with its wool keeps the output; the same Fuller without it loses it', () => {
@@ -101,7 +102,7 @@ describe('SEAM-ECON item 8 (L3.outputs): a running card lists no output every ma
     const rec = (/** @type {string[]} */ near) => ({ name: 'Testford', institutions: [{ name: 'Mills (2-5)' }, { name: 'Fuller' }], config: { nearbyResources: near }, economicState: { activeChains: [mill] } });
     expect(chainOutputsShown(mill, rec(['river_mills', 'grazing_land'])), 'the wool at hand').toContain('Fulled cloth');
     expect(housesShortOf(rec(['river_mills'])).has('Fuller'), 'anchored: no wool, the Fuller is short').toBe(true);
-    expect(chainOutputsShown(mill, rec(['river_mills'])), 'no wool').not.toContain('Fulled cloth');
+    expectPresentThenAbsent(chainOutputsShown(mill, rec(['river_mills', 'grazing_land'])), chainOutputsShown(mill, rec(['river_mills'])), 'Fulled cloth', 'no wool');
   });
 });
 
@@ -113,8 +114,8 @@ describe('SEAM-ECON item 4 (6c-arms): the Exports and the made list read the car
     const ex = exportsAsPrinted(s), made = localProductionAsPrinted(s);
     expect(ex, 'the sibling still prints').toContain('Herbal remedies');
     for (const g of ['Advanced weapons and armor', 'Quality tools and weapons']) {
-      expect(ex, `${g} not exported`).not.toContain(g);
-      expect(made, `${g} not made`).not.toContain(g);
+      expectPresentThenAbsent(s.economicState.primaryExports, ex, g, `${g} not exported`);
+      expectPresentThenAbsent(s.economicState.localProduction, made, g, `${g} not made`);
     }
     const keep = town('r2r-town-58');
     expect(exportsAsPrinted(keep).concat(localProductionAsPrinted(keep)).some((g) => /^(Master-crafted weapons|Advanced weapons and armor)/.test(g)), 'r2r-town-58: Blacksmiths (3-10), no half-way gap: its fine arms print').toBe(true);
@@ -127,7 +128,7 @@ describe('SEAM-ECON item 2: the Outlook asks the minor-route leaf with the wider
     const desc = (/** @type {any} */ rec) => generateEconomicViability(rec).issues.map((/** @type {any} */ i) => String(i.description || '')).join(' | ');
     expect(desc(s), 'anchored: the poor road prints').toMatch(/supplied only irregularly over a poor road/);
     const sieged = { ...s, config: { ...s.config, intendedStressTypes: ['under_siege'] } };
-    expect(desc(sieged), 'a siege intended: no poor road').not.toMatch(/poor road/);
+    expectAbsentWithAnchor(desc(sieged), 'poor road', 'operating on stockpiles only', 'a siege intended: no poor road, the stockpile line');
     expect(desc(sieged), 'a siege intended: the stockpile line').toMatch(/operating on stockpiles only/);
   }, 300000);
 });
