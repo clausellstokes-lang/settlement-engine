@@ -103,7 +103,7 @@ export const LEAVES = Object.freeze({
   hasInstitution: home('hasInstitution', 1, ['institutions'], { call: 'factsCall' }),
   sacredHouse: home('sacredHouse', 1, ['institutions']),
   market: home('market', 1, ['institutions']),
-  legalHouse: home('legalHouse', 1, ['institutions']), // BAR5-THINGS (LAW 4): a house of written law (`legalHouse.js`)
+  legalHouse: home('legalHouse', 2, ['availableServices', 'institutions']), // BAR5-THINGS (LAW 4): a house of written law (`legalHouse.js`); layer 2: it reads the services (CLOSE-SWEEP S2)
   paidWatch: home('paidWatch', 1, ['institutions']), // BAR6-PEOPLE (10e-house): someone is paid to keep order (`guardPay.js`)
   courtSits: home('courtSits', 2, ['availableServices', 'institutions']), // BAR6-CULTURE (6d-court): a court on the live roster (`defence.js :: courtHoldersOf`)
   appointedPost: home('appointedPost', 1, ['institutions']), // BAR5-THINGS (LAW 4): a post someone is named to (`appointedPost.js`)
@@ -146,12 +146,13 @@ export const LEAVES = Object.freeze({
   // BAR4-HOUSES (H1 (ii)) and BAR4-SCENES (kind A1), ONE HOME (BAR4-SCENES-2, the chair's ruling of 2026-11-16 12:16 UTC):
   // how timber reaches the town's sawyers, by BAR4-RECORD's one reading (`houseInputAtHand.js`), in `timberAtHand.js`:
   // `timber at hand` its own ground (`local`); `timber reaches the saws` any kind (local or imported)
-  timberAtHand: home('timberAtHand', 2, ['config', 'economicState', 'institutions']),
-  timberReachesSawmill: home('timberReachesSawmill', 2, ['config', 'economicState', 'institutions']),
+  // layer 4 (CLOSE-SWEEP S2): both read the resource analysis (layer 3), as `tradeAtWork` does
+  timberAtHand: home('timberAtHand', 4, ['config', 'economicState', 'institutions', 'resourceAnalysis']),
+  timberReachesSawmill: home('timberReachesSawmill', 4, ['config', 'economicState', 'institutions', 'resourceAnalysis']),
   // BAR4-SCENES (kind A1): enchanting among the services (`sceneSupply.js`)
   enchanting: home('enchanting', 2, ['availableServices']),
   // BAR4-SCENES-2 (HW1): a trade the scene shows is at work (`tradeAtWork.js`, on `houseInputAtHand.js :: housesShortOf`)
-  tradeAtWork: home('tradeAtWork', 4, ['institutions', 'resourceAnalysis', 'config', 'economicState', 'stress', 'stressors', 'activeConditions'], { call: 'factsCall' }), // layer 4: it reads the resource analysis's gaps (layer 3)
+  tradeAtWork: home('tradeAtWork', 4, ['institutions', 'resourceAnalysis', 'economicViability', 'config', 'economicState', 'stress', 'stressors', 'activeConditions'], { call: 'factsCall' }), // layer 4: it reads the resource analysis's gaps (layer 3); and the viability (layer 3, CLOSE-SWEEP S2)
   // BAR6-SCENES (6b): the goods of a scene of goods leaving are on the export list (`goodExported.js`)
   goodExported: home('goodExported', 2, ['economicState'], { call: 'factsCall' }),
   // TAIL-CLOSE-SRC-2 (the chair's SR2): what the place can keep up (`keep.js :: keepOf`, d7d7f7787), read off the prosperity label
@@ -202,7 +203,7 @@ export const LEAVES = Object.freeze({
   powersList: leaf({ layer: 3, module: 'domain/dossier/powerStrata.js', exported: 'derivePowerStrata', call: 'record', reads: ['powerStructure'],
     note: 'the one derivation of both lists the Power tab prints (the contenders and the roster); the fault of 16b is that both are titled alike, not a second derivation' }),
   // ── layer 4: over the cast ──
-  importsAsPrinted: leaf({ layer: 4, module: 'domain/display/tradeListDisplay.js', exported: 'importsAsPrinted', call: 'record', reads: ['activeConditions', 'config', 'economicState', 'institutions', 'resourceAnalysis', 'stress', 'stressors', 'tier'] }), // W2-C-LEAVES-4 item 2: the pills read the chain cards' crisis state (chainStateShown.js :: crisisOf); W2-C-LEAVES R2: a need the town makes (its live roster, through localProductionAsPrinted); W2-C-LEAVES-3 P1-a: the chain leaf's WORKED_BY_HOUSE reads the town's own live resources (config)
+  importsAsPrinted: leaf({ layer: 4, module: 'domain/display/tradeListDisplay.js', exported: 'importsAsPrinted', call: 'record', reads: ['activeConditions', 'config', 'economicState', 'economicViability', 'institutions', 'resourceAnalysis', 'stress', 'stressors', 'tier'] }), // W2-C-LEAVES-4 item 2: the pills read the chain cards' crisis state (chainStateShown.js :: crisisOf); W2-C-LEAVES R2: a need the town makes (its live roster, through localProductionAsPrinted); W2-C-LEAVES-3 P1-a: the chain leaf's WORKED_BY_HOUSE reads the town's own live resources (config); CLOSE-SWEEP S2: and the viability (layer 3)
   // BAR6-HOUSES (the chair's ruling SV1): a sovereign given by the government, a power, a house, a person or the founding, or a
   // war or an occupation (`sovereign.js`); read at the settled record (the houses' late re-read)
   sovereign: home('sovereign', 4, ['history', 'institutions', 'npcs', 'powerStructure', 'stress', 'stressors']),
