@@ -437,6 +437,16 @@ should be paused or archived by the owner's hand.
   rows' text by the close's seat DOORS-1A on the frozen line; DESKS-2 is told to leave that file. **CL10**: A LAW
   RED (an invariant with no stored figure) IS NEVER RE-TAKEN: it goes to the repair seat CLOSE-SWEEP, cured at its
   cause with the proof that no town and no page moves (the 525 hashed whole, the thirty rendered, equal).
+- **BR34 (03:31 UTC, 2026-11-18; DESKS-2's A6, the rule 15e that rose).** No existing key of `trade at work` reads a
+  building trade (the seat's finding: `clay kilns` also reads a potter and is unanswered where no kiln stands;
+  `cut stone` and `stone` read quarries and mines). THE KEY IS GIVEN (new vocabulary; vetoable; on the veto list):
+  `trade at work: building`: true where a house whose OWN SERVICE is building (walls, houses, roofs) stands on the
+  live roster and is not short; FALSE, not unanswered, where none stands or every one is short. One reader (the
+  existing reading of the atom, houses by catalogue id); the seat reads the catalogue for every house that builds
+  (a house that only supplies material is not one) and lists those it takes and leaves; DS-ECO-8 POOR v3 ("… the
+  old buildings are patched and kept standing, and nothing new goes up.") declares `excludes` on it; the seat says
+  what prints in each refused slot and that it is true there. NOT ON THE FROZEN LINE: it lands with the desks'
+  points after the deploy.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
@@ -1508,3 +1518,14 @@ should be paused or archived by the owner's hand.
   as the close expects: the golden under the hostile locale, build-and-dist (the stale engine bundle; four size
   budgets); the test ratchet, the coverage floors and the browser tests were still running at 03:16. One comment
   left on the pull request says so (the chair's, 03:16).
+- 03:33 UTC, 2026-11-18 · CI ON #75: THE BROWSER TESTS ARE GREEN ("Chromium end-to-end", 03:24); the test ratchet and
+  the coverage floors still run. DESKS-2 (03:31): its A8 was already committed and pushed as e65cf0665 (only
+  `tests/lint/proseEntryContradiction.walker.test.js`) before the chair's word reached it: AT THE MERGE OF THE DESKS'
+  BRANCH THE CLOSE'S VERSION OF THAT FILE IS TAKEN; it pushed twice after the push rule and now keeps it; BR34
+  received. CLOSE-DOORS-1A (03:31), before its first commit: the generator changes ONE file under `src/data`,
+  `proseNorms.generated.js`, one comment line ("270 of 859 pools" to "270 of 861 pools": it follows the re-taken
+  census, 861 pools and 3,033 variants); no sentence moves; the census's 93 moved rows and 2 new pools are each
+  laid to a landing: let through (the bundles are rebuilt after the one merge). THE OWNER IS ASKED TWO THINGS AND
+  HAS NOT YET ANSWERED: the host's allowance (03:10), the worker bundle's ceiling (03:24). A read-only compiler is
+  making THE VETO LIST for points 33 to 53 (every new or changed sentence verified by grep at 70e557d5b; it reads
+  `/home/user/k`: that checkout is not moved until it reports).
