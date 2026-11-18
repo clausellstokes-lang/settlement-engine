@@ -52,6 +52,11 @@ const DECLARED = {
   // TAIL-TIES-4, the chair's ruling (T18) of 2026-11-15 (re-keyed by identity with its cause): the cargo comes only by an open
   // route (economy#6, with its inland twin in NPC_HOOK_SIBLINGS); the shop's note and its scales stand where a market does.
   'economy#6': ['no crisis: under_siege', 'no route: isolated'], 'economy#17': ['market'], 'economy#18': ['market'],
+  // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18; re-keyed by identity with its cause): BAR5-THINGS (c74829e25, LAW 4:
+  // the page names no thing the town lacks; JOIN-16 point 9) made three rows declare: the patron's post is an appointed one
+  // (government#23), and the traveller's parcel and the buried 'traveller' are crisis-scoped lines that say `any` (other#31,
+  // small_settlement#7). Measured against ee2bcd375: no other row moved.
+  'government#23': ['appointed post'], 'other#31': ['crisis: any'], 'small_settlement#7': ['crisis: any'],
 };
 
 describe('NPC_FACTION_LOYALTY declarations (CENSUS-3e)', () => {

@@ -66,6 +66,12 @@ const NOT = /** @type {const} */ ([
   ['r2s-famine-town-5', 'Grain Sales Grain purchased from farming regions', 'Grain Sales Scarce in the famine. Grain purchased from farming regions'],
   ['r2s-under_siege-town-2', 'Magical Trade Revenue Magical trade conduits generate modest fees', 'Magical Trade Revenue Stopped by the siege. Magical trade conduits generate modest fees'],
   ['r2s-plague_onset-thorp-2', 'Toll Revenue Tolls taken on the roads', 'Toll Revenue Curtailed by the outbreak. Tolls taken on the roads'],
+  // PINNED 2026-11-18 (LEFT-KEYS K3, the chair's rulings BR11 and BR12): the TRUE claim on the anchor of the retired KEEP row
+  // below. Under a siege the town's own ground is curtailed too, and so are the houses that work its material (BR11), so the
+  // besieged forge's share prints the siege's mark. Measured on the census: of the 720's 31 besieged towns 15 print the
+  // Iron & Metalwork share marked "Curtailed by the siege." and 16 print no such share; of the 150's 30, 16 and 14. NONE
+  // prints it bare (a bare one would be a fault to name, BR12).
+  ['r2s-under_siege-city-0', 'Iron & Metalwork Metal is smelted or worked here.', 'Iron & Metalwork Curtailed by the siege. Metal is smelted or worked here.'],
 ]);
 /** [seed, the twin true in the state that made the unmarked row false] (red at the base by design) */
 const TWIN = /** @type {const} */ ([
@@ -77,7 +83,12 @@ const TWIN = /** @type {const} */ ([
 ]);
 /** [seed, the true sibling that must still print] (green before and after) */
 const KEEP = /** @type {const} */ ([
-  ['r2s-under_siege-city-0', 'Iron & Metalwork Metal is smelted or worked here.'], // the siege stops no forge (the leaf's table); re-keyed by identity 2026-11-16 (BAR6-ECON, 8d.income): r2s-under_siege-town-1's Iron & Metalwork card prints Impaired by the siege, so its share takes the siege's partial mark; 6 besieged towns of the 720 print the share bare
+  // RETIRED 2026-11-18 (LEFT-KEYS K3, the chair's rulings BR11 and BR12): the row ['r2s-under_siege-city-0', 'Iron & Metalwork
+  // Metal is smelted or worked here.'] ("the siege stops no forge"; re-keyed 2026-11-16 by BAR6-ECON from r2s-under_siege-town-1)
+  // claimed what no besieged town can bear under BR11: the siege curtails the town's own ground and the houses that work its
+  // material. Its true claim is pinned on the same anchor among the NOT rows above; the same line keeps its KEEP row in a
+  // state that cuts no supply and stops no forge: r2r-city-31, no crisis, its iron its own (none bought in).
+  ['r2r-city-31', 'Iron & Metalwork Metal is smelted or worked here.'],
   ['r2r-town-37', 'Guild Fees Annual licensing fees'],
   // re-keyed by identity (TAIL-CLOSE-DISPLAY-1): the same claim in a famine hamlet that still holds the rents row (TAIL-DEFECON-2
   // df2fa5ca: r2s-famine-hamlet-0's own-fields share is "Harvest" now, the rents row only where a lord's steward or reeve stands)

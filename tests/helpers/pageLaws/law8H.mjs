@@ -123,6 +123,22 @@ const HEDGED = /\b(when there is|when .{1,30} to be had|what is left|what little
 const MANNER_ONLY = /^(Polite\b|Says nothing about\b|Tells you to see\b|Talks about who is (?:building|weaving)\b)/;
 const OWN_MARK = /^(How they deal\s+)?(Stopped by|Curtailed by|Scarce in|Short of)\b/;
 
+/**
+ * LEFT-KEYS K6 (c), 2026-11-18 · RULING BR18 (the sixth chair, 19:10 UTC 2026-11-17; L6): a chain card printed "Impaired" on a
+ * SPENT ground beside a trade AT WORK ON BOUGHT MATERIAL is the supply rule's second story told twice (the town's own chain is
+ * impaired, its ground spent; the trade goes on with the material bought in), not a fault. Read off the page and the record:
+ * the card Impaired (not Stopped), every ground its "From" names printed depleted or exhausted, the trade's material on the
+ * record's import list, and a house of the trade on the page unmarked (at work).
+ */
+const TRADE_BOUGHT = { iron: /\b(?:iron|ore|metals?)\b/i, timber: /\btimber\b/i, stone: /\bstone\b/i, clay: /\bclay\b/i, cloth: /\b(?:wool|cloth)\b/i, hides: /\bhides?\b/i, grapes: /\b(?:grapes|must)\b/i, salt: /\bsalt\b/i, coal: /\bcoal\b/i, remedy: /\bherbs?\b/i };
+function spentChainBoughtTrade(T, ch, trade) {
+  if (!trade || !/^Impaired$/i.test(String(ch.state || '').trim())) return false;
+  if (!ch.from.length || !ch.from.every((f) => /\((?:depleted|exhausted)\)/.test(f))) return false;
+  const re = TRADE_BOUGHT[trade];
+  if (!re || !(T.record?.economicState?.primaryImports || []).some((x) => re.test(String(x)))) return false;
+  return tradeHouses(T, trade).some((c) => !cardMark(c).lead);
+}
+
 // ---------------------------------------------------------------- the rules
 export function law8H(T, town) {
   const out = [];
@@ -155,7 +171,7 @@ export function law8H(T, town) {
     }
     if (inCrisis && desc && ROW_CLAIMS.test(desc) && !ROW_ADMITS.test(desc)) {
       const ch = T.chains.find((c) => c.marked && c.lines.some((l) => l.text.startsWith(`Contributes to ${r.name} - `)));
-      if (ch) push('8f.chain', { tab: ECO, i: r.i, line: r.line }, { tab: ECO, i: ch.headIdx, line: `${ch.head} / ${ch.lines.find((l) => l.text.startsWith('Contributes to')).text}` },
+      if (ch && !spentChainBoughtTrade(T, ch, trade)) push('8f.chain', { tab: ECO, i: r.i, line: r.line }, { tab: ECO, i: ch.headIdx, line: `${ch.head} / ${ch.lines.find((l) => l.text.startsWith('Contributes to')).text}` },
         `the income row claims its trade at work, bare, under the crisis; the chain that feeds it is printed ${ch.state || 'marked'}`, { thing: r.name, cause: 'crisis' });
     }
   }

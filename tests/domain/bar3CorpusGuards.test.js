@@ -60,7 +60,9 @@ const REWORDED = [
   { batch: 1, pool: 'DS-DEF-2::CHAIN: defence short', vid: 2, gone: /are struggling/, now: /are not secure/, rows: 'C20202\'s class' },
   { batch: 1, pool: 'DS-DEF-2::CHAIN: defence short', vid: 3, gone: /are failing/, now: /not on a sure footing/, rows: 'C17450: vulnerable chains only' },
   { batch: 1, pool: 'DS-DEF-2::CHAIN: defence short', vid: 4, gone: /keep failing/, now: /not on a sure footing/, rows: 'C17450\'s class' },
-  { batch: 1, pool: 'DS-DEF-2::CHAIN: food trades failing', vid: 3, gone: /each season they fail/, now: /would miss if it were cut off/, rows: 'C23072 C31251: stores secure and deep' },
+  // CLOSE-DOORS-1A (2026-11-18, re-keyed by identity, by its TEXT): vid 3 -> 4. BAR6-DEFDESK (be3585040, LAWS 6, 7, 9; JOIN-17 point 4)
+  // placed the stores-deep ledger twin at v2, so the guarded `[unfolding]` line ("… would miss if it were cut off") now holds v4.
+  { batch: 1, pool: 'DS-DEF-2::CHAIN: food trades failing', vid: 4, gone: /each season they fail/, now: /would miss if it were cut off/, rows: 'C23072 C31251: stores secure and deep' },
   // C3: the income lines read the income record, not a count or an influence score
   { batch: 1, pool: 'DS-ECO-12::INCOME MIX: two or three sources between them', vid: 1, gone: /two or three trades/, now: /biggest trade earns a real portion/, rows: 'C40450 C47266: twelve or thirteen sources' },
   { batch: 1, pool: 'DS-ECO-12::INCOME MIX: two or three sources between them', vid: 2, gone: /two or three trades/, now: /more than one trade named/, rows: 'C40450\'s class' },

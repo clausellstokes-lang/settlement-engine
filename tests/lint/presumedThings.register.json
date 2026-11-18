@@ -171,7 +171,6 @@
    ["watch", "after-release", "The watch {settlement}'s seat raised against foreigners is now its most reliable instrument, and the hall is discovering", "007b3771cade631f"]
   ],
   "src/data/dossierStateProse/defense.generated.js": [
-   ["court", "after-release", "You can see the courthouse and the gaol at {settlement} from the street, and the town means you to.", "f8aa86f5bf0ee11e"],
    ["docks", "after-release", "{settlement} has a harbour and nothing to hold it with; any vessel that wants the sea approaches has them.", "eb0eee027c212b6b"],
    ["garrison", "after-release", "DS-DEF-2: `Defense › Threat assessment (the five readiness rows)` · `defenseProfile.scores{monster,military,internal,eco", "8d9663583bb57c49"],
    ["garrison", "after-release", "DS-DEF-5: `Defense › Armed forces & fortifications` · `defenseProfile.institutions{walls,garrison,militia,watch,mercenar", "7f7529058e384742"],
@@ -181,8 +180,6 @@
    ["mercenary", "after-release", "The free company at {settlement} keeps its own muster roll, not the town's: its fighters answer to their captain and the", "0ab29d12114a588f"],
    ["militia", "after-release", "DS-DEF-2: `Defense › Threat assessment (the five readiness rows)` · `defenseProfile.scores{monster,military,internal,eco", "8d9663583bb57c49"],
    ["militia", "after-release", "DS-DEF-5: `Defense › Armed forces & fortifications` · `defenseProfile.institutions{walls,garrison,militia,watch,mercenar", "7f7529058e384742"],
-   ["militia", "after-release", "The militia at {settlement} know every path around the town, and they know that will not stop a professional army.", "794fde202732eb70"],
-   ["prison", "after-release", "You can see the courthouse and the gaol at {settlement} from the street, and the town means you to.", "f8aa86f5bf0ee11e"],
    ["walls", "after-release", "Approaching {settlement}, you see the walls and the soldiers who belong on them, and any attacker would think again abou", "4981288dbf0ebe5c"],
    ["walls", "after-release", "Every household at {settlement} would send someone to the walls, and everyone knows that townsfolk with spears are no tr", "6af29cfae6de5a07"],
    ["walls", "after-release", "People at {settlement} believe the town could be held, and the soldiers on the walls give them good reason to.", "864d9e085885d1df"],
@@ -216,15 +213,12 @@
    ["market", "after-release", "No great road feeds {settlement}'s market; it serves the town itself, no more.", "afba51dbc0109a22"],
    ["market", "after-release", "Prices in {settlement} hold steady from one market to the next; the town is not living hand to mouth.", "6e4b0029752e1429"],
    ["market", "after-release", "The market stands where carts always stopped; stalls followed the carts, and {settlement} grew around them.", "c608d0c0609dcc27"],
-   ["prison", "after-release", "{settlement} is visibly governed: a hall of justice, a gaol, and officers to staff them.", "0efcb879d014c5c9"],
-   ["prison", "after-release", "{settlement} keeps its own court and its own gaol, and settles its own quarrels.", "ff40ea8e081673d3"],
    ["temple", "after-release", "{settlement} has an official ruler and a real one: the temple, whose say counts most in the market.", "aba70c0900e464db"]
   ],
   "src/data/dossierStateProse/power.generated.js": [
    ["watch", "after-release", "The {seat} at {settlement} governs a besieged town, which means it governs rationing, the gates and the watch rota, and ", "1961be948387c885"]
   ],
   "src/data/dossierStateProse/stressors.generated.js": [
-   ["court", "after-release", "A list of grievances was nailed to the courthouse door and nobody has dared take it down. The rising is genuinely popula", "22592d50246e5ce9"],
    ["garrison", "after-release", "Holding this place costs more than it returns. Garrisons, administrators and suppression tie down strength that was mean", "d1dcf904d853d6e3"],
    ["garrison", "after-release", "The armed movement here answers a foreign garrison. Collaborators and patriots eat at the same tables, and everyone know", "7764776686a48531"],
    ["garrison", "after-release", "The resistance is bleeding the garrison. Occupation and revolt feed each other here, and the arrangement costs the occup", "b0ee79d63537f34e"],
@@ -372,7 +366,11 @@
    ["temple", "after-release", "The metropolitan cathedral, seat of the region's highest prelate and a draw for pilgrims.", "ec915038daabf5cc"],
    ["temple", "after-release", "Works wood into the useful and the ornamental alike (tool handles, holy figures, inlay for furniture) and makes the sacr", "9df57ae2017a78f5"],
    ["walls", "after-release", "Masonry ramparts studded with towers and pierced by many gates.", "98bc7f5fa53e0f17"],
-   ["watch", "after-release", "Watchmen serving part-time. Night patrols and gate duty.", "837006bf0b956def"]
+   ["watch", "after-release", "Watchmen serving part-time. Night patrols and gate duty.", "837006bf0b956def"],
+   ["garrison", "after-release", "A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, ", "a2cdeb4bcbf27797"],
+   ["garrison", "after-release", "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies ", "e7a63c6a99211dbd"],
+   ["watch", "after-release", "Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies ", "e7a63c6a99211dbd"],
+   ["temple", "after-release", "Metropolitan cathedral. Seat of the highest regional religious authority. Pilgrimage destination.", "c6fded0acf9197fb"]
   ],
   "src/data/institutionLadders.js": [
    ["market", "after-release", "Slave market district", "74a38cc7536fc631"],
@@ -675,6 +673,9 @@
    ["temple", "after-release", "tithes carried up the temple steps", "88952daa1eb4d6dc"],
    ["walls", "after-release", "a custom older than the walls", "a202b89961d875ce"]
   ],
+  "src/domain/display/guardLineUnderTheLaw.js": [
+   ["prison", "after-release", " A functioning court and prison mean crimes carry real consequences.", "269d54d08e6175bc"]
+  ],
   "src/generators/aiLayer.js": [
    ["garrison", "after-release", "{\n  \"thesis\": \"2-3 paragraphs. The defining character of this settlement — what kind of place it is, what its central te", "cdca9aaafed081b6"],
    ["market", "after-release", "the market, shrine, workshop, and public well", "4add5ad643b8d16d"]
@@ -803,7 +804,6 @@
    ["market", "after-release", "Free Market Advocates", "8f53b72c7d54aef4"]
   ],
   "src/generators/npcGenerator.js": [
-   ["war", "after-release", "Since the war began, every decision here comes back to the army, and the crown's requisition order asks for what the set", "79f413580e7c159a"],
    ["watch", "after-release", "City Watch Chief", "6fd945330bbf4816"]
   ],
   "src/generators/npcStructure.js": [

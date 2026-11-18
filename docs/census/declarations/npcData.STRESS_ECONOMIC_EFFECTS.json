@@ -582,7 +582,7 @@
     },
     {
       "id": "mil_crim_suppression.tension#6",
-      "text": "{B} has hired an advocate to sue {A} for what {A}'s people did last month. The case comes before the council this season.",
+      "text": "{B} has brought a claim against {A} for what {A}'s people did last month. The case comes before the council this season.",
       "needs": [
         "ruling body"
       ],
@@ -661,9 +661,11 @@
       "id": "econ_mil_contract.desc#6",
       "text": "{A} began paying {B}'s people after the last caravan was lost. No caravan has been lost since, and {B}'s fee has doubled.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
-      "colour": true
+      "colour": false
     },
     {
       "id": "econ_mil_contract.desc#7",
@@ -1913,7 +1915,7 @@
     },
     {
       "id": "mutual_leverage.tension#7",
-      "text": "{B} has written down what {A} owes and left a copy with a notary.",
+      "text": "{B} has written down what {A} owes and left a sealed copy with a third party.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2507,8 +2509,10 @@
       "text": "The family has asked {A} and {B} to end their quarrel before the next feast. Neither will apologise first.",
       "needs": [],
       "excludes": [],
-      "crisis": [],
-      "colour": true
+      "crisis": [
+        "any"
+      ],
+      "colour": false
     },
     {
       "id": "bitter_history.label",

@@ -2662,6 +2662,34 @@
       "kind": "mutation",
       "label": "size/the catalogue decides what is a market"
     },
+    "tests/generators/bar5WorldLines.test.js": {
+      "kind": "mutation",
+      "label": "bar5-world/the road arm's origin row founds no town"
+    },
+    "tests/generators/bar7Lines.test.js": {
+      "kind": "mutation",
+      "label": "bar7-lines/forty to sixty years is two generations"
+    },
+    "tests/generators/bar7Scenes.test.js": {
+      "kind": "mutation",
+      "label": "bar7-scenes/the kilns are answered by a house that fires a kiln"
+    },
+    "tests/generators/rareSecretsLaw.test.js": {
+      "kind": "mutation",
+      "label": "rare-secrets/a magic row stands only where magic works"
+    },
+    "tests/generators/bar8Rows.test.js": {
+      "kind": "mutation",
+      "label": "bar8-j-rows/one house, one material, one gap line"
+    },
+    "tests/generators/bar8Scenes.test.js": {
+      "kind": "mutation",
+      "label": "bar8-scenes/nobody looks hungry wants the food band secure or better"
+    },
+    "tests/generators/bar8FishRows.test.js": {
+      "kind": "mutation",
+      "label": "bar8-fish-rows/where the fish is bought in the catch row is its inland alternative"
+    },
     "tests/generators/foodVariance.test.js": {
       "kind": "rationale",
       "ref": "generators-tree-admitted-subject-coupled-2026-08-30"

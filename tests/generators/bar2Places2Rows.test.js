@@ -23,6 +23,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { CAST_REASONS } from '../../src/domain/crisis/crisisCast.js';
 import { membersByRank } from '../../src/domain/people/membership.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The census's own configuration for its seed families (CENSUS-3 seedcfg.mjs: r2r-, r2s-, bar0-). @param {string} seed */
@@ -68,10 +69,12 @@ describe('BAR2-PLACES-2: the rows read the town', () => {
       expect(row?.reason.startsWith(CAST_REASONS.exploiterMember)).toBe(true);
       expect(row?.reason.startsWith(CAST_REASONS.exploiterPower)).toBe(false);
     });
-    it.each([['r2s-famine-town-3', 'exploiter'], ['r2s-under_siege-city-3', 'profiteer']])('KEEP %s: the one ranked first in a power that gains is still "the strongest figure" (%s)', (seed, role) => {
-      const s = born(seed);
-      const row = gainerRows(s).find((x) => x.row.role === role)?.row;
-      expect(row?.reason.startsWith(CAST_REASONS.exploiterPower)).toBe(true);
+    it('KEEP r2s-famine-town-3 (exploiter) and r2s-under_siege-city-3 (profiteer): the one ranked first in a power that gains is still "the strongest figure"', () => {
+      expectNoSeedFailures(collectSeedFailures([['r2s-famine-town-3', 'exploiter'], ['r2s-under_siege-city-3', 'profiteer']], ([seed, role]) => {
+        const s = born(seed);
+        const row = gainerRows(s).find((x) => x.row.role === role)?.row;
+        expect(row?.reason.startsWith(CAST_REASONS.exploiterPower)).toBe(true);
+      }), 'every KEEP town');
     });
     it('LAW over these births: "the strongest figure" is said only of the one ranked first in a power that gains', () => {
       const bad = ['bar0-city-under_siege+famine-rand-5', 'r2s-famine-town-3', 'r2s-under_siege-city-3', 'r2s-occupied-hamlet-0', 'r2s-indebted-town-1']
@@ -81,10 +84,12 @@ describe('BAR2-PLACES-2: the rows read the town', () => {
   });
 
   describe('the slavic social texture claims no oven house, no bathhouse and no wells the town may lack', () => {
-    it.each(['r2r-thorp-23', 'r2s-wartime-metropolis-1', 'r2s-under_siege-thorp-1'])('CURED %s', (seed) => {
-      const s = born(seed);
-      expect(s.culturalIdentity?.socialTexture).toMatch(NEW_SLAVIC);
-      expectAbsentWithAnchor(JSON.stringify(s), OLD_SLAVIC.source, 'Shared water and seasonal work make private life unusually communal.', `${seed}: the old slavic texture is gone, its rewording prints`);
+    it('CURED r2r-thorp-23, r2s-wartime-metropolis-1, r2s-under_siege-thorp-1', () => {
+      expectNoSeedFailures(collectSeedFailures(['r2r-thorp-23', 'r2s-wartime-metropolis-1', 'r2s-under_siege-thorp-1'], (seed) => {
+        const s = born(seed);
+        expect(s.culturalIdentity?.socialTexture).toMatch(NEW_SLAVIC);
+        expectAbsentWithAnchor(JSON.stringify(s), OLD_SLAVIC.source, 'Shared water and seasonal work make private life unusually communal.', `${seed}: the old slavic texture is gone, its rewording prints`);
+      }), 'every CURED town');
     });
     it('KEEP r2r-thorp-10: the pool\'s true sibling (row 0) still prints where it was drawn: the slot keeps its draw', () => {
       const s = born('r2r-thorp-10');

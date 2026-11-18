@@ -42,6 +42,7 @@ import { exportsAsPrinted, localProductionAsPrinted } from '../../src/domain/dis
 import { chainAsShown } from '../../src/domain/display/chainStateShown.js';
 import { serviceRowsOf } from '../../src/domain/dossier/entityLinks.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 /** seedcfg.mjs's bar0- arm, verbatim in shape (tests/domain/bar6SeamEcon.test.js reads it the same way). @param {string} seed */
@@ -131,7 +132,7 @@ describe('BAR7-ECON item 2 (8g): the service economy\'s card reads the leaf\'s w
     expect(shop && rowMarkText(s, 'house', shop), 'anchored: the alchemist shop carries a mark').toMatch(/^Short of /);
     const { cards } = economics(s);
     expect(cards.alchemical, 'anchored: the card prints').toBeTruthy();
-    expect(cards.alchemical).not.toContain('Operational');
+    expectAbsentWithAnchor(cards.alchemical, 'Operational', 'Alchemical Trade', 'the card prints its chain, and no Operational');
   }, 300000);
 });
 
@@ -157,7 +158,7 @@ describe('BAR7-ECON item 4 (8i.chainStopped, ruling CY1): a stopped chain names 
     expect(record?.outputs, 'anchored: the record\'s chain yields ship construction').toContain('Ship construction');
     const shown = marks.chainCardUnderSiege(s, record, chainAsShown(record, s));
     const outs = marks.chainOutputsOnCard(shown, s);
-    expect(outs).not.toContain('Ship construction');
+    expectPresentThenAbsent(record?.outputs, outs, 'Ship construction', 'the record yields it, the stopped card does not');
     const row = serviceRowsOf(s.availableServices).map(({ svc }) => svc).find((svc) => svc.name === 'Ship construction');
     expect(row && rowMarkText(s, 'service', row), 'KEEP: the shipyard builds from its own timber (its row unmarked)').toBeNull();
   }, 300000);
@@ -240,7 +241,7 @@ describe('point (1): a stored short twin prints only under a mark; an unmarked s
   test('the tab prints it so: the unmarked metropolis shows no short twin', () => {
     const { text } = economics(town('bar0-metropolis-calm-rand-42'));
     expect(text).toContain(METAL_WORKED_LINE);
-    expect(text).not.toContain(METAL_SHORT_LINE);
+    expectAbsentWithAnchor(text, METAL_SHORT_LINE, METAL_WORKED_LINE, 'the worked line prints, the short twin does not');
   }, 300000);
 });
 

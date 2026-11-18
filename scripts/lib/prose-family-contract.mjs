@@ -274,8 +274,8 @@ const EXPECTED_ROOTS = new Map([
 // 81/188); regionalLog 2/8/164 → 2/4/158 (changes[].kind 7/83 → 3/77, sourceEvent.type 1/81 holds); chronicle and timeline hold.
 // Totals 62/1079/5545 → 64/1082/5533; bytes 8098 → 8401; digest 141be9b3 → 9bd27a79. Reach 0..11 holds.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 38127, canonEventLogEntries: 1, wizardNewsFinalEntries: 415,
-  wizardNewsAccumulatedEntries: 2622, wizardNewsUnique: 417, pulseHistory: 12,
+  scalarRows: 38197, canonEventLogEntries: 1, wizardNewsFinalEntries: 417,
+  wizardNewsAccumulatedEntries: 2627, wizardNewsUnique: 419, pulseHistory: 12,
   regionalEventLog: 71, regionalEventLogUnique: 71, aiChronicle: 1,
 });
 const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
@@ -329,6 +329,14 @@ const EXPECTED_FAMILY_TOTALS = Object.freeze([
 // rollExplanations proposalPayload.kind 2/21 → 2/22, .reason 4/10 → 5/11; selected proposalPayload.reason 4 → 5, reasons[] 162 →
 // 164, summary 117 → 118). scalarRows 38121 → 38127; the news layer 415/2622/417 and the regional log 71/71 hold.
 // Totals 60/1509/5302 → 64/1525/5308; pulseHistory 47/1491/5170 → 51/1507/5176; bytes 7806 → 8408; digest ed98c528 → 85f41b79.
+// 2026-11-18 (THE CLOSE OF 2026-11-18, CLOSE-DOORS-1B; as BAR3-CLOSE-DOORS-1's ruling OC1, vetoable by the owner; RE-RECORDED at the
+// frozen tree 70e557d5b through this library's own functions, one corpus build, an untracked scratch script, run on the working tree,
+// which differs from 70e557d5b only in register and test files outside src/ and one register-only table no src module imports; IN THE
+// SAME ACT AS the baseline and both news baselines): `git log --first-parent 600b7683a..70e557d5b` over the walker's 23 EXPECTED_UNION
+// paths is EMPTY; the span's declared generation moves re-deal the observed corpus's year (not bisected). EXPECTED_CORPUS only:
+// scalarRows 38127 → 38197; the news layer 415/2622/417 → 417/2627/419 (two introductions, applied|boom and applied|urban_fabric; at
+// news-voice-contract.mjs's RE-RECORDED block); canonEventLogEntries 1, pulseHistory 12, the regional log 71/71 and aiChronicle 1
+// hold. NO IDENTITY ARRIVES OR LEAVES AND NO ROW MOVES: totals 64/1525/5308, the family totals, bytes 8408 and digest 85f41b79 hold.
 const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 64, distinctValues: 1525, occurrences: 5308 });
 const EXPECTED_ROWS_BYTES = 8408; // the close of the round BAR3 (2026-11-15, ruling OC1): 7806 → 8408, the four identities arrive again; the close of the tail round (2026-11-15): 8408 → 7806, four identities leave; STYLE-2-MERGE-7 closing act 4: 8404 → 8408 (the final tip's re-key); MERGE-WAVE (FIX-PUBLIC-VEIL merge): 7523 → 7823, two identities arrive; MERGE-TRAIN (ALLEGIANCE-CAR1 merge): 7823 → 7798, two in and two out; (ALLEGIANCE-CAR2 merge): 7798 → 8098, two in; (ALLEGIANCE-CAR3 merge): 8098 → 8401, four in and two out; STYLE-2-PULSE-FOLLOWUP: 8401 → 8404, distinct counts only
 const EXPECTED_ROWS_SHA256 = '85f41b79e75e9ccf66f6b52bdde748e8e9498daf23361d35c5fd38c71fab0a9f';

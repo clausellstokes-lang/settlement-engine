@@ -694,7 +694,7 @@ export function harvestScarceHere(settlement) {
   const food = typeof failed === 'string' ? (Object.hasOwn(FAMINE_FAILED_FOOD, failed) ? FAMINE_FAILED_FOOD[failed] : null) : GRAIN;
   if (!food) return false;
   const shares = /** @type {Array<Record<string, unknown>>} */ ((Array.isArray(eco?.incomeSources) ? eco.incomeSources : []).filter((sh) => !!sh && typeof sh === 'object'))
-    .filter((sh) => sh.custom !== true && sh.source !== 'custom' && sh.isCustom !== true);
+    .filter((sh) => sh.source !== 'custom');
   const deps = shares.map((sh) => { const t = typeof sh.source === 'string' ? sh.source.trim() : ''; return Object.hasOwn(INCOME_DEPENDENCE, t) ? INCOME_DEPENDENCE[t] : NONE; });
   return deps.some((d) => d.includes(GRAIN)) && (food === GRAIN || deps.some((d) => d.includes(food) && d.includes(GRAIN)));
 }

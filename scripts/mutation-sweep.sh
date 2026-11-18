@@ -137,6 +137,12 @@ MUTATED_FILES=(
   src/generators/steps/assembleSettlement.js
   src/generators/hookVariety.js
   src/components/settlements/CampaignFolder.jsx
+  src/domain/display/stateProse/generalStateProse.js
+  src/domain/facts/tradeAtWork.js
+  src/generators/people/rareSecrets.js
+  src/domain/display/validationOnPage.js
+  src/data/arrivalProse.js
+  src/generators/steps/generateNarratives.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -1690,6 +1696,57 @@ check_caught "review-intake/a holder citation resolves by symbol" scripts/wiring
 #      one wire away from an advance the owner took out of it.
 perl -0pi -e 's/(  const faithUnlocked = useStore\(resolveFaithUnlocked\);\n)/$1  const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);\n/' src/components/settlements/CampaignFolder.jsx
 check_caught "library-simple/the Library reads no campaign advance" src/components/settlements/CampaignFolder.jsx "npx vitest run tests/lint/libraryAdvancesNothing.walker.test.js --no-file-parallelism" "the Library advances nothing (owner, 2026-11-10) > no Library file reaches a campaign advance"
+
+# 125. THE FOUNDING IS TOLD ONCE, BY THE HISTORY (BAR5-WORLD (a), 2026-11-16). The road arm's origin row is put back
+#      to the words the guard was written against ("Founded roadside, ..."), so the Overview founds the town again above a
+#      History that names no road; tests/generators/bar5WorldLines.test.js must red (the pool arm by name, and the three
+#      towns the detector fired in at the base). Measured in a scratch worktree (CLOSE-WALKERS, 2026-11-18, base 70e557d5b):
+#      clean => 6 passed; planted => 2 red, 4 passed, title_matches=1; restored byte-identically => 6 passed.
+perl -0pi -e "s/'It stands roadside, where the day is measured in traffic/'Founded roadside, where the day is measured in traffic/" src/generators/narrative/settlementOriginProse.js
+check_caught "bar5-world/the road arm's origin row founds no town" src/generators/narrative/settlementOriginProse.js "npx vitest run tests/generators/bar5WorldLines.test.js --no-file-parallelism" "no row of the road arm founds the town; the row says where it stands"
+
+# 126. FORTY TO SIXTY YEARS IS TWO GENERATIONS (BAR7-LINES low.generation, 2026-11-17). `yearBand`'s two-generations
+#      reading is switched off, so forty-five years is "a generation old" again; tests/generators/bar7Lines.test.js must red.
+#      Measured in a scratch worktree (CLOSE-WALKERS, 2026-11-18): clean => 7 passed; planted => 1 red, 6 passed,
+#      title_matches=1; restored => 7 passed.
+perl -0pi -e "s/return generation\.id === 'a_generation' && years >= 40 \?/return false ?/" src/domain/display/stateProse/generalStateProse.js
+check_caught "bar7-lines/forty to sixty years is two generations" src/domain/display/stateProse/generalStateProse.js "npx vitest run tests/generators/bar7Lines.test.js --no-file-parallelism" "low.generation: forty to sixty years is two generations; the band keeps its id"
+
+# 127. THE KILNS ARE ANSWERED BY A HOUSE THAT FIRES A KILN (BAR7-SCENES item 1, 8k.trade, 2026-11-17). The generic
+#      `kilns` key reads every kiln-trade house again, so working Glassmakers answer "the kilns are lit" beside a short
+#      Potter, Brickmaker and Charcoal burner; tests/generators/bar7Scenes.test.js must red. Measured in a scratch worktree
+#      (CLOSE-WALKERS, 2026-11-18): clean => 14 passed; planted => 1 red, 13 passed, title_matches=1; restored => 14 passed.
+perl -0pi -e "s/const answering = key === 'kilns' \? kilnHousesAnswering\(houses\) : houses;/const answering = houses;/" src/domain/facts/tradeAtWork.js
+check_caught "bar7-scenes/the kilns are answered by a house that fires a kiln" src/domain/facts/tradeAtWork.js "npx vitest run tests/generators/bar7Scenes.test.js --no-file-parallelism" "rand-32's houses, planted: the Potter, the Brickmaker and the Charcoal burner all short beside working Glassmakers: no \"kilns are lit\""
+
+# 128. A MAGIC ROW STANDS ONLY WHERE MAGIC WORKS (SECRETS-1, 2026-11-17). The dealer's world-law filter stops reading a
+#      row's `magic` flag, so a world without magic is dealt magic rows; tests/generators/rareSecretsLaw.test.js must red.
+#      Measured in a scratch worktree (CLOSE-WALKERS, 2026-11-18): clean => 22 passed; planted => 1 red, 21 passed,
+#      title_matches=1; restored => 22 passed.
+perl -0pi -e 's/const lawful = rows\.filter\(\(r\) => \(!r\.magic \|\| place\.magic\) && /const lawful = rows.filter((r) => /' src/generators/people/rareSecrets.js
+check_caught "rare-secrets/a magic row stands only where magic works" src/generators/people/rareSecrets.js "npx vitest run tests/generators/rareSecretsLaw.test.js --no-file-parallelism" "a world without magic holds no magic row (planted, every row; and over a hundred seeds of a large roster)"
+
+# 129. ONE HOUSE, ONE MATERIAL, ONE GAP LINE (BAR8-J-ROWS G1, 2026-11-17). Both strikes of the told goods at print are
+#      reverted (`resourceGapLines`: the no-chain house's and the chained house's), so "No iron ore reaches the mine."
+#      prints beside "The mine is worked out ..."; tests/generators/bar8Rows.test.js must red. Measured in a scratch worktree
+#      (CLOSE-WALKERS, 2026-11-18): clean => 6 passed; planted => 3 red, 3 passed, title_matches=1; restored => 6 passed.
+perl -0pi -e 's/const left = goods\.filter\(\(x\) => !told\.nouns\.has\(x\.noun\)\);/const left = goods;/; s/const left = nouns\.filter\(\(n\) => !told\.nouns\.has\(n\)\);/const left = nouns;/' src/domain/display/validationOnPage.js
+check_caught "bar8-j-rows/one house, one material, one gap line" src/domain/display/validationOnPage.js "npx vitest run tests/generators/bar8Rows.test.js --no-file-parallelism" "no town prints the general line beside the story line of the same house; the story line still prints"
+
+# 130. "NOBODY LOOKS HUNGRY" WANTS THE FOOD BAND SECURE OR BETTER (BAR8-SCENES item 7, 9g.food-soft, 2026-11-17). The
+#      row's `food: >= secure` need is taken off, so a prosperous metropolis whose band is pressured is admitted it;
+#      tests/generators/bar8Scenes.test.js must red. Measured in a scratch worktree (CLOSE-WALKERS, 2026-11-18):
+#      clean => 25 passed; planted => 1 red, 24 passed, title_matches=1; restored => 25 passed.
+perl -0pi -e 's/(nobody looks hungry\.\x27, )needs: \[\x27food: [^\x27]*secure\x27\], /$1/' src/data/arrivalProse.js
+check_caught "bar8-scenes/nobody looks hungry wants the food band secure or better" src/data/arrivalProse.js "npx vitest run tests/generators/bar8Scenes.test.js --no-file-parallelism" "bar0-metropolis-calm-rand-29: a prosperous metropolis whose food band is pressured"
+
+# 131. WHERE THE FISH IS BOUGHT IN, THE CATCH ROW IS ITS INLAND ALTERNATIVE (BAR8-FISH-ROWS, BR24, 2026-11-17). The
+#      narratives step no longer calls `boughtFishRowsInPlace`, so a Fish market whose grounds are spent and whose fish is
+#      bought in sells "Fresh fish retail ... the morning catch" again; tests/generators/bar8FishRows.test.js must red.
+#      Measured in a scratch worktree (CLOSE-WALKERS, 2026-11-18): clean => 9 passed; planted => 4 red, 5 passed,
+#      title_matches=1; restored => 9 passed.
+perl -0pi -e 's/^  boughtFishRowsInPlace\(/  if (0) boughtFishRowsInPlace(/m' src/generators/steps/generateNarratives.js
+check_caught "bar8-fish-rows/where the fish is bought in the catch row is its inland alternative" src/generators/steps/generateNarratives.js "npx vitest run tests/generators/bar8FishRows.test.js --no-file-parallelism" "BOUGHT: the fish bought in, the Fish market sells its \"Preserved fish\" with its own words, and no morning catch"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

@@ -464,7 +464,7 @@
     },
     {
       "id": "Village headman|Tithe and dues",
-      "text": "Collects the lord's dues and the tithe",
+      "text": "Collects the dues owed and the tithe",
       "needs": [
         "institution: temple"
       ],
@@ -2966,7 +2966,9 @@
       "id": "Butchers (3-8)|Fresh meat",
       "text": "Beef, pork, mutton. Slaughtered and dressed on premises or nearby.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: hunger"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -5061,7 +5063,9 @@
       "id": "Hired blades|Bodyguard service",
       "text": "Personal protection for merchants, officials, and travelers.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -5236,7 +5240,9 @@
     {
       "id": "Lord's appointee|Administrative orders",
       "text": "Implement the lord's directives at local level.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -5244,7 +5250,9 @@
     {
       "id": "Lord's appointee|Tax collection",
       "text": "Collect rents and taxes owed to the lord.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -5252,7 +5260,9 @@
     {
       "id": "Lord's appointee|Legal representation",
       "text": "Represent the lord's interests in local disputes.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -5260,7 +5270,9 @@
     {
       "id": "Lord's steward|Estate management",
       "text": "Oversee the lord's properties, staff, and revenues.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -5276,7 +5288,9 @@
     {
       "id": "Lord's steward|Supplier contracts",
       "text": "Negotiate supply contracts for the lord's household.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -5583,7 +5597,9 @@
       "id": "Monastery or friary|Religious services",
       "text": "Rites, prayers, and observances. Open to locals and pilgrims.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -5816,7 +5832,9 @@
     {
       "id": "Noble governor|Noble administration",
       "text": "Govern in the name of the crown or great noble house.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -6246,7 +6264,9 @@
     {
       "id": "Royal seat|Royal audience",
       "text": "Rare opportunity to petition the monarch directly.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -6655,7 +6675,7 @@
     },
     {
       "id": "Town crier|Official announcements",
-      "text": "Proclaim laws, royal decrees, and official notices to the public.",
+      "text": "Proclaim laws, decrees and official notices to the public.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -6818,7 +6838,9 @@
     {
       "id": "Village reeve|Tax collection",
       "text": "Collect dues owed to the lord and accounting for common resources.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false

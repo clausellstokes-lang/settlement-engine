@@ -107,7 +107,12 @@ describe('TAIL-HOUSES-5 batch 8: the late re-read reaches a house description (H
   test('the table: every key is an original with one twin, and none is a colour line', () => {
     // BAR4-HOUSES (2026-11-16, H1 (ii) and (iii)): 8 → 11, the commercial sawmill's two timber lines and the town council's
     // "answers to no one" (their guard: tests/generators/bar4HousesPresumptions.test.js)
-    expect(Object.keys(DESC_LATE_SIBLINGS)).toHaveLength(11);
+    // BAR5-MARKS (2026-11-16, L2; JOIN-16 point 1, re-pinned by CLOSE-DOORS-1A at the close of 2026-11-18): 11 → 26, the
+    // fifteen lines the fact leaves under a crisis: the bowyers' and fletchers' seven, the hired company's billet three, the
+    // cobbler's three, the metropolitan cathedral's three
+    // BAR6-HOUSES (2026-11-16, SV1 and LAW 5 widened; JOIN-17 point 2, re-pinned by CLOSE-DOORS-1A): 26 → 30, the weekly
+    // market's and the message network's crown lines (`sovereign`) and the brewery's two tavern lines
+    expect(Object.keys(DESC_LATE_SIBLINGS)).toHaveLength(30);
     for (const [key, set] of Object.entries(DESC_LATE_SIBLINGS)) {
       expect(set).toHaveLength(2);
       expect(set[0].text).toBe(key);

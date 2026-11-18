@@ -108,7 +108,12 @@ const LANES = Object.freeze({ mechanicalOutcomes: 8, selectedOutcomes: 24 });
 // (applied|boom 3 → 2). HOMES ARRIVE applied|army_homecoming, applied|strategy_return_home; HOMES LEAVE applied|npc_bargain,
 // applied|npc_exploit, applied|trade_pressure, realm|realm_mass_migration. THE VOICE LAW HOLDS: no introduced summary at the tip reads
 // `can advance through`; the voice debt stays EMPTY. Conservation 417 − 2 = 415.
-const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 417, retirements: 2, finalEntries: 415, homes: 42 });
+// ── RE-RECORDED 2026-11-18 BY CLOSE-DOORS-1B (the close of 2026-11-18; as BAR3-CLOSE-DOORS-1's ruling OC1, vetoable by the owner) AT
+// THE FROZEN TREE 70e557d5b, IN ONE ACT WITH THE NEWS-VOICE CONTRACT (the cause recorded once, at the voice contract's copy).
+// 417/2/415/42 → 419/2/417/42: `git log --first-parent 600b7683a..70e557d5b` over the prose-family walker's 23 EXPECTED_UNION paths is
+// EMPTY; the span's declared generation moves re-deal the AO-0 year (one corpus build, not bisected). Two introductions arrive into
+// standing homes (applied|boom, applied|urban_fabric); no home arrives or leaves; the voice debt stays EMPTY. Conservation 419 − 2 = 417.
+const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 419, retirements: 2, finalEntries: 417, homes: 42 });
 // ── RE-RECORDED 2026-09-01 BY T8 · SHIFT (ODQ §858 + §860) ─────────────────────────────────────
 // 53/106/14/92/400/544 → 51/102/12/90/393/536. `fields` holds at 2, as it must: the address grammar
 // is still headline-and-summary and nothing was added to it.
@@ -204,7 +209,14 @@ const CORPUS = Object.freeze({ pulseRoots: 12, introductions: 417, retirements: 
 // queued|strategy_sue_for_peace headline 3/3 → 4/4, summary 3/3 → 4/4. 42/2/84/0/84/659/834 → 42/2/84/0/84/660/834; every row stays
 // indicative; the digest re-derived with the rows in the baseline by this library's own functions (3d22d84b → 3b1e4ee5).
 // RAW_LIVENESS, the 26 rewrite rows and their totals do not move (A3 green before and after).
-const ADDRESS_TOTALS = Object.freeze({ homes: 42, fields: 2, identities: 84, prospectiveIdentities: 0, indicativeIdentities: 84, distinctValues: 660, occurrences: 834 });
+// ── RE-RECORDED 2026-11-18 BY CLOSE-DOORS-1B at the frozen tree 70e557d5b (the close of 2026-11-18; as BAR3-CLOSE-DOORS-1's ruling
+// OC1, vetoable by the owner), the same act as CORPUS above and the prose-family baseline (the cause at the voice contract's copy: no
+// landing of 600b7683a..70e557d5b touches the walker's union; the span's generation moves re-deal the year). NO HOME AND NO ADDRESS
+// ARRIVES OR LEAVES; four existing rows move a count, the two new introductions: applied|boom headline 2/2 → 3/3, summary 2/2 → 3/3;
+// applied|urban_fabric headline 14/14 → 15/15, summary 14/14 → 15/15. 42/2/84/0/84/660/834 → 42/2/84/0/84/664/838; every row stays
+// indicative; the digest re-derived with the rows in the baseline by this library's own functions (3b1e4ee5 → bac0f58d).
+// RAW_LIVENESS, the 26 rewrite rows and their totals do not move (measured equal; zero gaps, overlaps or indicative matches).
+const ADDRESS_TOTALS = Object.freeze({ homes: 42, fields: 2, identities: 84, prospectiveIdentities: 0, indicativeIdentities: 84, distinctValues: 664, occurrences: 838 });
 const RAW_LIVENESS = Object.freeze({
   pulseRecords: 12,
   lanes: Object.freeze([

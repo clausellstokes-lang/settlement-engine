@@ -82,7 +82,12 @@ describe('W2-FIX-DATA-5: round three\'s rows in the data lane\'s files', () => {
     const town = bornInc('rww-city-famine-1');
     // BAR2-CLOSE-SWEEP-B (2026-11-15): BAR2-PLACES batch 2 (166bb4160, C3297) gave "blades being made" `iron at hand`; this famine
     // city has none, so the same slot draws its declared twin, the anchor sibling now.
-    expectAbsentWithAnchor(arrivalText(town), 'making something meant for a war', 'stand cold: there is no iron left to make blades from', 'rww-city-famine-1 arrival');
+    // RE-KEYED BY IDENTITY 2026-11-18 (LEFT-KEYS K1, R8): the supply rule (BIRTH-3, BR4/BR5) has this city buy its ore in
+    // ("Iron ore" on the import list), so its iron is at hand and the same slot draws the line the twin stood for, true here
+    // now: the anchor sibling again. The claim (no war's forge in a famine city with no war) is this town's still. The cold
+    // forge is borne by no town to key it to: none of the 720, the 150 or 180 famine towns of this family (rww-<town|city|
+    // metropolis>-famine-0..59) prints it.
+    expectAbsentWithAnchor(arrivalText(town), 'making something meant for a war', 'and most of it is the sound of blades being made', 'rww-city-famine-1 arrival');
   }, 60_000);
 
   test('ww-494 (HIGH): the fair\'s trading under a siege says no merchant can reach it (rww-town-under_siege-1)', () => {

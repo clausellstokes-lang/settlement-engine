@@ -39,8 +39,14 @@ const GONE = [
   ['18655', 'r2s-succession_void-hamlet-0', 'provides dressed stone to regional builders', "Stone Quarrying :: Stone is quarried here for the place's own building."],
   ['07231', 'r2r-village-9', 'Transit duties, warehouse fees', 'Entrepôt Trade :: Goods passing through the crossroads, and what their traders spend while they stop.'],
   ['11808', 'r2s-under_siege-metropolis-1', 'Revenue from international trade', 'International Commerce :: '],
-  ['20893', 'r2r-hamlet-30', 'The iron carts are three weeks late', SILENT],
-  ['20893', 'r2r-city-36', 'A new toll on the iron road', SILENT],
+  // RE-KEYED BY IDENTITY 2026-11-18 (LEFT-KEYS K1, R8): the supply rule (BIRTH-3, BR4/BR5) has r2r-hamlet-30 and r2r-city-36
+  // buy their ore in ("Iron ore" on the import list), so the hook is true there now. The same claim on the 720's towns that
+  // print "Imports metals" with no iron on the import list (the only two of the 720; none of the 150): with the guard of
+  // `warIronHook.js :: ironHookStands` held open in scratch, r2s-succession_void-hamlet-0 prints this very hook and
+  // r2s-occupied-village-1 (a war the record holds) the war's iron hook. The toll's wording is borne by no town that buys no
+  // iron (720, 150): its pick is the same guard's.
+  ['20893', 'r2s-succession_void-hamlet-0', 'The iron carts are three weeks late', SILENT],
+  ['20893', 'r2s-occupied-village-1', 'War has taken the iron', SILENT],
   ['04271', 'r2s-infiltrated-metropolis-3', 'does little trade', SILENT],
   ['B04151', 'r2s-politically_fractured-city-0', 'Its banks find little business to do', SILENT],
   ['30890', 'r2s-politically_fractured-city-2', 'Add craft guilds: smiths', 'Add craft guilds: weavers, etc.'],
@@ -54,8 +60,8 @@ const LIVE = {
   'r2s-famine-hamlet-2': 'Fish & Maritime Produce :: ',
   'r2s-famine-city-0': 'Fish & Preserved Produce :: ',
   'r2r-hamlet-10': 'Fish & Maritime Produce :: ',
-  'r2r-hamlet-30': 'Imports metals',
-  'r2r-city-36': 'Imports metals',
+  'r2s-succession_void-hamlet-0': 'Imports metals',
+  'r2s-occupied-village-1': 'Imports metals',
   'r2s-infiltrated-metropolis-3': 'Trade Dependencies',
   'r2s-politically_fractured-city-0': 'Trade Dependencies',
 };
