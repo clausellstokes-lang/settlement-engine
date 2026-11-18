@@ -148,6 +148,35 @@ export function templateMatches(template, rendered) {
 }
 
 /**
+ * The literal text of a template: what is left when every `{slot}` is taken out.
+ * @param {string} template
+ * @returns {number}
+ */
+export function literalLength(template) {
+  return String(template).replace(/\{[a-zA-Z_][a-zA-Z0-9_]*\}/g, '').length;
+}
+
+/**
+ * ⭐ WHEN SEVERAL TEMPLATES MATCH ONE SENTENCE, THE LONGEST LITERAL TEXT IS THE ONE THAT WROTE
+ * IT (2026-11-18, BAR8-DESKS-2, ruling BR32 (2)). A `{slot}` reads `(.+?)`, so a template that
+ * is another LESS ONE WORD (DS-POW-5 council v6 "… goes to the {seat}, …" beside its original
+ * v2 "… goes to the whole {seat}, …") matches every sentence of the longer one: its slot takes
+ * the word ("whole Free Elder Council"). The longer template's literals are a superset of the
+ * words the sentence carries, so it is the reading that explains more of the sentence by its
+ * own text. THE SENTENCE IS AMBIGUOUS ONLY WHERE THE LONGEST IS TIED, and the manifest's
+ * "the resolution is not a guess" arm still reds there.
+ * @template {{text: string}} T
+ * @param {ReadonlyArray<T>} candidates the templates that match one sentence, in authored order
+ * @returns {{chosen: T|null, ambiguous: boolean}}
+ */
+export function resolveCandidates(candidates) {
+  if (candidates.length === 0) return { chosen: null, ambiguous: false };
+  const longest = Math.max(...candidates.map((v) => literalLength(v.text)));
+  const top = candidates.filter((v) => literalLength(v.text) === longest);
+  return { chosen: top[0], ambiguous: top.length > 1 };
+}
+
+/**
  * Walk a desk return for every rung that carries a (blockId, poolKey) provenance AND its
  * rendered sentence, in call order. Both shapes the desks return are read: the rung's
  * `provenance` block, and `readStateProse`'s own flat `{blockId, poolKey, angle, text}`.
@@ -210,7 +239,7 @@ export function cellsOfTown(settlement, input) {
     const candidates = pool.filter(
       (v) => v.angle === rung.angle && templateMatches(v.text, rung.text),
     );
-    const chosen = candidates[0] || null;
+    const { chosen, ambiguous } = resolveCandidates(candidates);
     const drawn = drawVariant(audible, rung.blockId, rung.poolKey, input.seed);
     // ⭐⭐ A COMPOSED UNIT IS IDENTIFIED BY THE COMPOSER, A ONE-PIECE UNIT BY ITS TEXT
     // (TASTE car M-3), and the split is exactly there for a measured reason.
@@ -246,7 +275,7 @@ export function cellsOfTown(settlement, input) {
       }],
       textSha: textDigest(rung.text),
       resolved: Boolean(chosen) || Boolean(spinePiece),
-      ambiguous: !composed && candidates.length > 1,
+      ambiguous: !composed && ambiguous,
       drawAgrees: composed ? true : (Boolean(chosen) && drawn === chosen),
     });
   }
