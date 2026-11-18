@@ -15,6 +15,7 @@ const { deriveMagicReliance } = await import(path.join(ROOT, 'src/domain/magicRe
 const { deriveMagicRelianceView } = await import(path.join(ROOT, 'src/domain/display/dossierViewModel.js'));
 const { foodWordShown } = await import(path.join(ROOT, 'src/domain/display/foodWordShown.js'));
 const { impliedGroundsShown } = await import(path.join(ROOT, 'src/domain/facts/supplyStory.js'));
+const { THINGS, NEW_WORDS } = await import(path.join(ROOT, 'src/domain/facts/registeredWords.js'));
 const facts = [];
 const DETECTORS = { ...LAW1, ...law4.LAW4 };
 /**
@@ -23,7 +24,8 @@ const DETECTORS = { ...LAW1, ...law4.LAW4 };
  * the supply rule PROVED at the birth (BIRTH-3: a source house on no ground of its own proves its ground, there or used up;
  * the Resources tab prints it) read as lacked, and so did a spent ground the line itself tells as spent. A `4r-thing:resource:`
  * row stands only where the town holds the ground in no form: not listed live, not proven there, and, where it is listed or
- * proven used up, not told on the line as spent. (The src reader is not this seat's: a reading here, counted apart.)
+ * proven used up, not told as spent IN THE CELL OR SENTENCE OF THE LINE THAT NAMES IT (by the register's own word for it).
+ * (The src reader is not this seat's: a reading here, counted apart.)
  */
 const SPENT_WORDS = /\b(?:depleted|exhausted|worked out|used up|spent|cleared|nothing more can be taken|no longer|little is left|is gone|are gone)\b/i;
 function groundHeld(record, key, line) {
@@ -33,7 +35,9 @@ function groundHeld(record, key, line) {
   let proven = { there: [], used: [] };
   try { proven = impliedGroundsShown(record); } catch { /* a record the leaf cannot read proves nothing */ }
   if ((near.has(key) && !gone.has(key)) || proven.there.includes(key)) return 'held';
-  if ((gone.has(key) || proven.used.includes(key)) && SPENT_WORDS.test(line)) return 'told spent';
+  const word = (NEW_WORDS[`resource: ${key}`] || THINGS[`resource: ${key}`])?.words;
+  const units = String(line).split(' · ').flatMap((cell) => cell.split(/(?<=[.!?])\s+/));
+  if ((gone.has(key) || proven.used.includes(key)) && units.some((u) => (!word || word.test(u)) && SPENT_WORDS.test(u))) return 'told spent';
   return null;
 }
 const RESOURCE_ROW = /^4r-thing:resource: (.+)$/;

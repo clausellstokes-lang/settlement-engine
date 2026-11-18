@@ -101,4 +101,103 @@ against the pinned `[695, 275, 2173]`, about line 586): a figure, the close's.
 
 `tests/helpers/pageLaws/law11Supply.mjs` (the 11g arm, about line 342) reads the story line's verb in both numbers ("is/are
 worked out:", "is/are failing:", "stands/stand abandoned"). Planted page of two story lines (a singular quarry, the plural
-tanners): base finds 1, tip 2. The count over the 720 at the base: below.
+tanners): base finds 1, tip 2. THE COUNT OVER THE 720 (the render of the base, `runJ.mjs`): 11g reads 0 before and 0 after,
+because BAR8-J-ROWS (point 43, on the line) cured the general gap line: r2r-town-13 prints "The tanners are failing: …"
+and no longer "No hides reach the tanners." beside it. The audit's base 0cdedd206 was not rendered (the planted page is
+the proof the brief allows). Every other rule of runJ is equal, base and tip.
+
+## K6 · three detectors read the old record (commits 9bbc4c19d, f5397562b)
+
+All counts over ONE render of the 720 at the base (PAGE-COPY `census3.sh --count-only`, 4 workers, 1694 s; no file under
+`src/` changes, so the page at the tip is the page at the base), each runner from the base worktree and from the tip.
+
+**(a) `run-a.mjs`, the register's reader of a ground (`4r-thing:resource:*`).** The src reader (`registeredWords.js`) is
+not this seat's, so the cure is a READING IN THE RUNNER, counted apart (`clearedK6a` in its output): a row stands only
+where the town holds the ground in no form (not listed live, not proven there by its own house, `supplyStory.js ::
+impliedGroundsShown`; and where listed or proven used up, not told as spent in the cell or sentence that names it, by the
+register's own word for it).
+- BEFORE 3348 instances in 506 towns; AFTER 1715 in 474. Cleared 1633: 361 held (listed live or proven there), 1272 told
+  spent. The brief's managed_forest: 128 towns · 256 instances before, 71 · 71 after (below MEASURE-1's pre-rise 54/170
+  in instances). All instances: 13777 -> 12144 (the 4r resource rows alone move).
+- FIVE THAT LEFT, read on the page, each TRUE as printed: r2r-metropolis-40 Resources "Managed Woodland" (no forest on
+  its land lists; its own house proves the woodland, there); r2r-metropolis-33 Economics chain From "Stone quarry
+  (depleted)" (listed depleted); r2r-town-20 "Iron ore deposits (depleted)" (listed depleted); r2r-metropolis-58
+  "Fishing grounds (depleted)"; r2r-metropolis-25 "Managed woodland (depleted)".
+- EVERY ONE THAT STAYS: `docs/chair/2026-11-17/left/K6a-STAYS.txt` (1715 rows, by ground in its head). Read by
+  sample: mostly the register's own withdrawn noise (`PAGE_WITHDRAWN.resource`): the house "Stone quarry" named on its
+  card, its Services rows, its person and its Power row (58 towns); the fur caravans' chain line "Furs travel from the
+  hunting grounds through trading posts" (130); grove and peat labels the woodland word catches.
+
+**(b) `runC.mjs` `6b-denied`, the forge scene.** A forge scene is denied only where every forge house on the page (the
+scene's own makers, `law6.mjs :: GOODS.ironwork.maker`) carries a mark (`law8H.mjs :: cardMark`); `law6.mjs` is not this
+seat's, so it is a reading in the runner (`<out>.k6b-cleared.json`). BEFORE 1, AFTER 1: the four towns the chair
+probed (r2r-metropolis-45, -53, -59, -6) carry NO `6b-denied` row at the base already (the denial it fed on no longer
+prints there: the Resources tab tells the mine as worked out, not "No iron ore reaches the mine."). The one row that
+stays, TRUE: r2s-occupied-village-1 "The anvil at Celoichi is quiet more days than it rings, for want of iron." beside its
+smith marked "Short of iron.". PROOF, a planted denial: "No iron ore reaches the mine." planted in r2r-metropolis-45's
+Resources tab: the base flags "The hammering of the forges echoes through all of Chandraganj."; the tip clears it (the
+Blacksmiths, the Smelter and the Specialized metalworkers unmarked, at work on bought-in iron). No instance left on the
+720 to read: the five-read is the planted one and the one that stays.
+
+**(c) `law8H.mjs` `8f.chain` (runner `runH.mjs`), RULING BR18.** Not flagged: a chain card Impaired (not Stopped) whose
+every "From" ground is printed depleted or exhausted, the trade's material on the record's import list, and a house of the
+trade on the page unmarked. BEFORE 5 (5 towns), AFTER 0; no other rule of runH moves (9 -> 4 instances in all). THE FIVE
+THAT LEFT, each read on the page and TRUE as printed: r2s-famine-metropolis-1, r2s-famine-metropolis-3,
+r2s-famine-village-2, r2s-plague_onset-city-0, r2s-plague_onset-city-3: each prints "Iron & Metalwork Metal is smelted or
+worked here." beside the card "Iron & Metalwork · Raw materials & fuel · Impaired" whose From is "Iron ore deposits
+(depleted)", each buys "Iron ore (local iron mines exhausted)", its smiths' cards carry no mark, and the crisis (a famine,
+an outbreak) cuts no road. NONE STAYS. (Whether the card should SAY it runs on bought iron is BR18's question on the
+owner's list: not built.)
+
+## K7 · 8b.extract's two blind spots, and leftMarks M3 (commit 34e2dd5d5)
+
+- (1) `law8.mjs :: ownGroundsOnRecord` (both forms: the page form and the born form `law8Marks.mjs`) reads a proven
+  ground's state OFF THE HOUSE'S OWN STORED GAP ROWS (kind `missing` or `imported` naming the ground's yield, from
+  `houseKinds.js :: IMPLIED_GROUND` and `crisisDependence.js :: SPENT_GROUND_YIELD`; a venture's row proves nothing), no
+  longer through `impliedGroundsOf`. EQUAL to the old reading on every source house of the 720 (785) and the 150 (137).
+  PLANTED FAULT: the leaf mutated in scratch (`states.set(ground, 'there')`), the 43 towns whose house proves a used-up
+  ground rendered in that tree: the born form at the base finds 0, at the tip 12, the 12 bare quarries (r2r-hamlet-23,
+  r2r-town-33, r2r-city-21, r2r-city-59, r2r-metropolis-2, -32, -55, -56, r2s-infiltrated-metropolis-3,
+  r2s-plague_onset-metropolis-2, r2s-monster_pressure-metropolis-2, r2s-religious_conversion-hamlet-0); without the fault,
+  0. The page form reads 0 in the mutant at both, because the mutant page prints no spent sentence there (its gate).
+- (2) the page form's spent sentence: "Nothing more can be taken from the …" OR the house's own "The <house> is/are worked
+  out: its own ground is depleted (…)." (its own line preferred as the instance's `against`). PLANTED FAULT: the mine's
+  marks taken off in r2r-hamlet-3 (card line, chip, Services row) and the quarry's in r2r-hamlet-23, both towns printing
+  only the second sentence: base 0, tip 2 instances each; unplanted 0 and 0. Over the 720 the rule reads 0 before and
+  after.
+- `tests/domain/leftMarks.test.js` M3's positive reads the Services tab too (r2r-city-20, r2r-hamlet-27 print it there).
+  Red in scratch with the sentence taken off the Services tab.
+
+## THE NET (each gate alone through `sh scripts/gate-tail.sh`, at base 70e557d5b and at the tip)
+
+- `npm run typecheck:ratchet`: 167 errors, ceiling 167, at base and at tip. `npm run typecheck:domain:strict`: 1113, ceiling
+  1113, at both. `npx eslint` on the 18 changed script and test files: 0 problems.
+- ALL OF `tests/lint`, at base (a detached scratch worktree) and at the final tip: 218 files, 3226 tests, 69 names red at
+  BOTH, THE SAME NAMES AND, after the checkout path is folded, THE SAME MESSAGES (0 lines differ; walkers, registers and
+  rosters alike: `negativeAssertionAnchor`, `seedLoopTotality`, `proseDrawnAnchors` list no file of this seat). Every one
+  of the 69 is red at the base: named, not chased (stored registers, censuses, rosters, ceilings: the close's).
+- The guards (`tests/domain/leftMarks.test.js`, `tests/domain/bar5*`, `bar6*`, `tests/generators/bar5*`, `bar6*`,
+  `bar8*`: 25 files, 219 tests): green at base and at tip.
+- Every changed test alone: at the tip each is green, except `editCorpusRatchet` (7 of 8: A5 green under the new watchdog,
+  the file 634.6 s; A7 red by its stored figure, the same message the close's list records at the base). At the base each
+  re-keyed one is red with the message its item names.
+- N6: the close's list `close-0-70e557d5b` (part 1, 33 names, as published while I worked) names
+  `bar2ServicesRows`, `tailHouses1Gaps`, `needMetUnderAnotherName` and `editCorpusRatchet` A7 of my files: the first
+  three are green at the tip; A7 is the stored figure above.
+- N5, the scratch merge: the line `lane/join-2026-11-14` is still at 70e557d5b, my base: an ancestor of my tip (a
+  fast-forward). CLEAN.
+
+## LEFT BY NAME
+
+- `tests/property/editCorpusRatchet.test.js` A7 (about line 586): "the edits that DO reach a reading: [695, 275, 2176]"
+  against the pinned [695, 275, 2173]. A stored figure: the close's.
+- The two Fishmonger and two Smelter pairs of `tailHouses1Gaps` (retired): their state (the house lacking its input) is
+  borne by no town of the 720 or the 150; a new reachable anchor would need a town on no road, outside these populations.
+- The cold forge ("The forges of <town> stand cold: there is no iron left to make blades from.") is printed by no town
+  of the 720, the 150 or 180 rww famine towns: its twin is reachable in the data but unanchored by any born town.
+- K3's "96 besieged towns": the 720 holds 31 by `config.stressTypes` (the 150, 30). Said so; counted on those.
+- K6 (a) and (b) are readings in the runners because the readers they correct live in `src/domain/facts/registeredWords.js`
+  (the `resource:` reader) and `tests/helpers/pageLaws/law6.mjs` (not on my list). If the chair wants the reading at the
+  source, that is a src change (`registeredWords.js :: RESOURCE_FAMILIES[...].absent` taking the proven grounds) for a
+  builder seat.
+- K10: not mine (CLOSE-WALKERS).

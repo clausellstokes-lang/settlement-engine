@@ -9,9 +9,12 @@ under BRIEF-CLOSE (C1 to C10) and the chair's rulings CL11 (landed points over `
 | item | commit | test · arm | class (C1) | at 70e557d5b → at the tip |
 | --- | --- | --- | --- | --- |
 | S1 | 6e15a77ea | `tests/lint/domainAnyCastBaseline.test.js`, 4 arms | (c) a law: new debt | 4 failed / 15 passed → **19 passed** |
-| S2 | c266e0dc4 | `tests/lint/factLayers.walker.test.js`, arms (a), LEAVES, POOLS | (c) a law: the table wrong; POOLS (a) a shrink | 3 failed / 12 → 2 failed / 13: **LEAVES green**; (a) LEFT (two instrument gaps, below); POOLS = the door's shrink, CLOSE-DOORS-1B's |
+| S2 | c266e0dc4 | `tests/lint/factLayers.walker.test.js`, arms (a), LEAVES, POOLS | (c) a law: the table wrong; POOLS (a) a shrink | 3 failed / 12 → 2 failed / 13: **LEAVES green**; (a) red on two instrument gaps, closed by S4.2 (below); POOLS = the door's shrink, CLOSE-DOORS-1B's |
 | S3 | none (CL15) | `tests/lint/siteCoherenceRatchet.test.js` C1 | (a) a declared move, re-taken by its door: CLOSE-DOORS-1B's | analysis only, unchanged |
 | S4.1 | ae0af7ca9 | `tests/domain/worldFactRederive.test.js` A4 | (b) a stale roster | A4 red → **A4 green** (A7 red at both, same message: CLOSE-DOORS-2's) |
+| S4.2 | 890296904 | `tests/lint/factLayers.walker.test.js` arm (a): the instrument | (c) a law: a guard blind to two leaves | arm (a) **green**; the table unchanged |
+| S4.3 | 1039b8c26 | the same: `hasInstitution`'s probe | (c) the same gap | green; the table unchanged |
+| S4.4 | none (withdrawn) | the presumed-things door's four fresh lines | recorded by the owner's word (CLOSE-DOORS-1B) | nothing changed here |
 | S5 | a970ef865 | `vercel.json` (CL13) | not a red: the chair's item | every reader the same at both ends |
 
 No stored figure (register, baseline, census, ledger, golden, ceiling, bundle) was written by this seat. No `DECLARED_OVERRUN`
@@ -61,11 +64,11 @@ walker's own `leafArm` on its own grid, `/tmp/claude-0/probe/fl/leaves.probe.tes
 | `goodExported` | declares `economicState`, the walker sees no read | JOIN-17 point 9 (d8997b193, BAR6-SCENES) | **LEFT** |
 | `seatHeld` | declares `npcs`, `powerStructure`, the walker sees no read | JOIN-17 point 8 (57a3bda67, BAR6-PEOPLE) | **LEFT** |
 
-**LEFT, by name, for the chair:** `goodExported` and `seatHeld` are `factsCall` getters (they take an argument), and the walker's
+**(Closed afterwards by S4 items 2 and 3, on the chair's word: below.) Named at S2, for the chair:** `goodExported` and `seatHeld` are `factsCall` getters (they take an argument), and the walker's
 instrument `tests/lint/factLayers.shared.mjs :: leafTouches` has a call branch for `hasInstitution`, `hasOtherNpc`, `sharesPower`,
 `sharesPlace`/`loneTie` and `tradeAtWork` only: it never calls these two, so their honest declarations read as "unread". The cure is in
 the walker's instrument (a branch calling each, as `tradeAtWork`'s), not in the table; striking the declarations would make the table
-lie. Not this seat's file: named. Arm (a) stays red on `goodExported` (first in order).
+lie. Not this seat's file: named. At c266e0dc4 arm (a) stood red on `goodExported` (first in order).
 
 **The pools arm after the move:** `r.violations` differs from `REGISTER.pools` by the one shrink row only
 (`DS-ECO-6::TIER: minor shadow activity (≥3)`, "declares organised crime (layer 3)"): **no pool or line that declares `legal house`,
@@ -108,6 +111,43 @@ moved readers through `foodBalance.js`'s re-export: the hunk is inside the re-de
 reason. A4 alone at the tip: green. The whole file: base 2 failed / 5 passed (A4, A7), tip 1 failed / 6 passed (A7, the same message:
 "the stride is non-empty, or the absence above is vacuous: expected 5 to be +0"): A7 is CLOSE-DOORS-2's.
 
+## S4 item 2 · the walker's instrument sees every key (890296904); item 3, `hasInstitution` (1039b8c26)
+
+The chair's word (S4.2): the gap named under S2 is this seat's to close (a test instrument; no `src/` behaviour). **The cause:**
+`tests/lint/factLayers.shared.mjs :: leafTouches` had call branches for five `factsCall` getters and none for `goodExported` (JOIN-17 point 9)
+or `seatHeld` (point 8); its `tradeAtWork` branch probed four typed keys of the seventeen the vocabulary declares (point 45 added
+`ironwork in full`, `fish taken here`); `hasInstitution` probed ten typed kinds of the fourteen declared (no bathhouse, quarry, mine,
+school). **The hunk:** `vocabularyKeysOf(getter)`, the keys of every `FACT_DIMENSIONS` row homed at the getter, derived; `tradeAtWork`
+(17), `goodExported` (5) and `hasInstitution` (14) probed with all of them; `seatHeld` with every pair of the roster (i < j); a
+`factsCall` getter with no branch now THROWS ("has no call here, so the walker would never see it read"); the typed lists are gone. And
+arm (a) of the walker COLLECTS every failing leaf (`expect(failing).toEqual([])`) instead of stopping at the first. **What the fuller
+instrument sees:** `goodExported` reads `economicState`, `seatHeld` `npcs` and `powerStructure`, `hasInstitution` `institutions`, exactly
+as declared; `tradeAtWork` reads nothing beyond its row. **The table needs no change.** Arm (a) green, LEAVES green, "POOLS by their KEY"
+green; POOLS differs from the register by the one shrink only (the door's read-only report, `node scripts/fact-layers-door.mjs`: "0
+rise(s), 1 fall(s)"): no pool or line reads at or above its layer; no ordering fault. **Controls** (a scratch copy of the tree): the base
+table (70e557d5b's `factLayers.js`) under the collecting loop lists all five red leaves at once (legalHouse, timberAtHand,
+timberReachesSawmill, tradeAtWork, importsAsPrinted; goodExported and seatHeld now read); a planted `plantX` `factsCall` row throws "the
+factsCall getter 'plantX' has no call here". eslint 0; both type gates at their ceilings (167; 1113).
+
+## S4 item 4 · the presumed-things door's four fresh lines (PREPARED IN SCRATCH; WITHDRAWN)
+
+Withdrawn by the chair at the owner's word (2026-11-18 04:41:48 UTC, "record the four": the four sentences stand; CLOSE-DOORS-1B writes
+the rows). Nothing of it was committed: the scratch trees were discarded. What it taught, for the next seat that writes a twin:
+- **What the walker credits** (`tests/lint/presumedThings.shared.mjs :: scanSource`): a literal of 3+ words naming a registered thing is
+  declared only by `needs` / `excludes` / `crisis` / `poolDeclares` (and a pool variant's `marks`, a tagged table's `tags`) on an object
+  literal the tree's trace marks DRAWN (`drawnRanges`: reached from a door's argument, `DOOR_ARGS`), within five levels up, by a builder
+  row's `needs` / `excludes`, or by a drawn table keyed by the line's own text; a bare `const` twin, or a table no door is handed
+  (`GUARD_LAW_SIBLINGS`), declares nothing. The form that does, at no runtime cost: `lineText({ text, needs: [...] })` (it hands back the
+  string; `guardLineUnderTheLaw.js :: MILITIA_TURNS_OUT` is the precedent).
+- **A rewording mints a new literal**, so every thing it still names becomes a fresh, UNBANKABLE hit (the door banks only a literal that
+  stood at `--base`): the hired company's twins, rid of "garrison", still named `armedForce` through their first sentence ("professional
+  soldiers", "a band of soldiers"); "hired swords" names nothing, "free company" names `mercenary`; `armedForce` also counts `mercenary`
+  among its sufficient atoms (`registeredWords.js :: armedForce`), so `needs: ['mercenary']` on a Free company hall's own row would
+  declare it.
+- **Measured in scratch against the door's `--check`:** the bowyers' "defenders" → "defence", the two "garrison …" clauses dropped, the
+  two first sentences' "soldiers" → "hired swords", and the court-and-prison twin wrapped in `lineText({ …, needs: ['court', 'prison'] })`
+  took the four lines' six keys out of the fresh list (38 → 32) and touched no other row.
+
 ## S5 · lane pushes create no deployment (a970ef865)
 
 `vercel.json`: one new top-level key, `"git": { "deploymentEnabled": { "lane/*": false, "lane/**": false } }`; nothing else in the file
@@ -121,21 +161,80 @@ names it in a comment only).
 
 ## THE PROOF THAT NO TOWN AND NO PAGE MOVES
 
-NET_PROOF_PLACEHOLDER
+The commits that touch `src/` are S1 (6e15a77ea, comments only) and S2 (c266e0dc4, a data table no `src/` file reads); S4.1, S4.2,
+S4.3 and S5 touch no file under `src/`. Each proof at the base 70e557d5b and at the commit, each tree a `git archive` (integrity-counted).
+
+1. **The 525 reference configurations, hashed whole** (`sha256(JSON.stringify(settlement))`, the golden master's own `goldenCorpus()` and
+   `keyOf`, its own `generateSettlementPipeline(cfg, null, { seed, customContent: {} })`, from an untracked probe outside every tree,
+   `/tmp/claude-0/probe/gm/gm.probe.test.js`; never `UPDATE_GOLDEN`): **525 of 525 equal** (`cmp` of the two manifests) at 6e15a77ea, at
+   c266e0dc4 and at the tip 1039b8c26.
+2. **The thirty towns of the seventh read** (`seeds.bar7.txt`, `lane/read7-prep-2026-11-17`) rendered by PAGE-COPY (`census3.sh … 4
+   --seeds … --count-only`, `HOLDERS=holders.tipA.json`): **30 of 30 dumps byte-equal** (`diff -r`) at 6e15a77ea and at the tip 1039b8c26.
+   At c266e0dc4, rendered while the net and a bisect loaded the machine, ONE dump differed (below, (B)); re-rendered 3 times it equalled the
+   base, and the tip's quiet run is 30 of 30.
+3. **`npx vitest run tests/architecture`**: 347 / 347 at the base (from a clean path) and at the tip.
+4. **Every test file that imports a changed file** (directly: `economicsCrisisMarks.js`, `factsOf.js`, `seatMembers.js`, `sovereign.js`,
+   `factLayers.js`; 122 test files), each alone, base and tip, by name and by whole message: **121 of 122 identical**; the one that differs is
+   `tests/lint/factLayers.walker.test.js`, by the two arms this branch cures (base 12/15, tip 14/15; the third, POOLS, is the door's
+   shrink). Red at both ends with the same message (none of mine): `bar3CorpusGuards` 1, `bar6PowersCards` 1, `census2dTables` 3,
+   `houseDescLateReRead` 1, `presumedThings.walker` 2, `ruinFilterRoster.walker` 1.
+
+**(B) THE SEED THAT DIFFERED ONCE UNDER LOAD** (the chair's word, word for word). Seed **`bar0-thorp-calm-rand-45`**; tab **`Systems/Power`**
+(the dump's heading `== Systems/Power ==`, line 183); the base dump holds, as its last two lines of that tab (lines 222-223), and the run
+under load at c266e0dc4 lacks:
+
+    Patron deity
+    Assign a patron god to awaken the settlement’s religion layer. Upgrade to premium · Available at launch to author and assign deities.
+
+(every other line of the 1,178 the same; both files kept: `/tmp/claude-0/keep/bar0-thorp-calm-rand-45.base.txt`,
+`/tmp/claude-0/keep/bar0-thorp-calm-rand-45.s2-under-load.txt`). **The cause: the probe captured before a lazy part mounted, not the page.**
+That block is `src/components/settlement/DeityAssignmentPanel.jsx`, a `React.lazy` chunk (`src/components/dossier/dossierLazyTabs.js:37`)
+mounted under `<Suspense fallback={null}>` (`src/components/OutputContainer.jsx:725`): until the chunk resolves it renders nothing, and
+under load it resolved after PAGE-COPY's "the panel's text holds still" window closed. **The six quiet re-renders** (that one seed, one
+worker, nothing else running), six at the base and six at the tip: **12 of 12 byte-equal to the base dump**. The page renders one way from one
+record. The wait belongs in the probe: `docs/chair/2026-11-16/probes/PAGE-COPY/render.census3.jsx` (on `lane/chair-2026-11-08`), its
+snapshot of a tab, should wait for every `Suspense` boundary of the tab to resolve (or for the lazy `DeityAssignmentPanel` to mount) before
+the stillness test: an item for the probe's keeper, not changed here.
 
 ## THE NET (C7)
 
-NET_PLACEHOLDER
+Each gate alone, through `sh scripts/gate-tail.sh`, at the base 70e557d5b and at the tip 1039b8c26. The suites ran in `git archive`s of
+each commit (integrity-counted: 11,167 and 11,168 files = `git ls-tree -r`), `node_modules` linked in; by message with the JSON reporter.
+
+| gate | 70e557d5b | 1039b8c26 |
+| --- | --- | --- |
+| `npm run typecheck:ratchet` | OK, 167 (ceiling 167) | OK, 167 (ceiling 167) |
+| `npm run typecheck:domain:strict` | ✓, 1113 (ceiling 1113) | ✓, 1113 (ceiling 1113) |
+| `npx eslint` on the branch's 8 changed code files | (S1: 0 on the four) | 0 problems |
+| `tests/lint` (778 files, 3,211 tests) | 3,123 passed · 72 failed · 16 skipped | **3,129 passed · 66 failed · 16 skipped** |
+| `tests/joins` | 425 / 425 | 425 / 425 |
+| `tests/architecture` | 347 / 347 | 347 / 347 |
+| `tests/build/vendorPdfLazy.test.js -t "WEAVE ST-2"` | 12 passed, 43 skipped | 12 passed, 43 skipped |
+
+**`tests/lint` BY MESSAGE.** Six reds cured, all of my list: the four any-cast arms (S1) and `factLayers.walker`'s arm (a) and LEAVES
+(S2, S4.2, S4.3). **The other 66 are the same 66 at both ends, and their WHOLE failure text is identical** (every line of every failure
+message, the trees' paths normalised: 66 of 66 equal), so no figure inside them moved by this branch. One of them is the machine's
+(class d): `ledgerCitationIntegrity.test.js` reads `refs/heads/review-fixes-2026-07-08` with git, and an archive has no `.git` (the same
+at both ends). A probe artefact, also class (d), is named so nobody re-meets it: `tests/architecture/archViewWall.test.js` ("lives outside
+the arch/ determinism perimeter") reds in ANY tree whose absolute path contains `/arch/` (it tests `govPath.includes('/arch/')`); my first base
+archive sat under `/tmp/claude-0/arch/` and read 346/347; from a clean path, 347/347 at both ends.
 
 ## STORED FIGURES MY CURES MOVE (named for the seats that hold them; none taken here)
 
-FIGURES_PLACEHOLDER
+| figure (file) | reading test | what moves | holder |
+| --- | --- | --- | --- |
+| the any-cast baseline (`tests/lint/.domain-any-baseline.json`), its ledger and ceiling | `domainAnyCastBaseline` | **nothing**: the four files are at 0 = their allowance; no row, no stale entry | none |
+| the fact-layers register (`tests/lint/factLayers.register.json`) | `factLayers.walker` | **nothing by my cures**: the LEAVES register now equals the tree as committed; its POOLS fall (`DS-ECO-6::TIER: minor shadow activity (≥3)`) pre-exists at 70e557d5b | CLOSE-DOORS-1B (`node scripts/fact-layers-door.mjs --shrink`) |
+| the site-coherence inventory (`tests/lint/.site-coherence-baseline.json`) | `siteCoherenceRatchet` C1 | not by me (S3, CL15): `desert\|mountain-flank\|coal` 7 → 9, `desert\|dunes\|(biome)` 30 → 28, `totals.flankOnFlat` 39 → 41 | CLOSE-DOORS-1B |
+| the observed-shape readers' input stamps (`scripts/.observed-shape-readers-baseline.json`: each `src/` file's `sha256` and `size`) | `observedShapeReaders.walker` | the bytes of five `src/` files move (the four of S1, `factLayers.js`); the stamps were ALREADY stale at 70e557d5b for three of them (`factLayers.js` stored b243507a…, the base edd5258e…) and absent for `seatMembers.js` and `sovereign.js`; the walker's whole failure text is identical at both ends | the doors' seat that re-takes that baseline (its `--write`) |
+| the figures that count the tree (C8: the estate file census, byte and size ceilings, the test ratchet, the mutation manifest) | the counting walkers | ONE new file (this hand-back); eleven files' bytes (`git diff --name-only 70e557d5b HEAD`); no test file added, renamed or removed, no test name changed (two test bodies: `factLayers.walker` arm (a), `worldFactRederive`'s roster) | the last seat, on the tree that holds every close commit |
 
 ## WHAT I LEFT, BY NAME
 
-- `tests/lint/factLayers.walker.test.js` arm (a): `goodExported`, `seatHeld` (`tests/lint/factLayers.shared.mjs :: leafTouches`, the
-  `factsCall` branches, about line 103): the walker never calls them. For the chair (the walker's instrument is not this seat's file).
 - `tests/lint/factLayers.walker.test.js` POOLS: the DS-ECO-6 shrink row, CLOSE-DOORS-1B's door.
 - `tests/lint/siteCoherenceRatchet.test.js` C1: CLOSE-DOORS-1B's door (CL15); `siteGenesis.js:252`'s arm order on the pull request's list
   of known faults.
 - `tests/domain/worldFactRederive.test.js` A7: CLOSE-DOORS-2's.
+- The PAGE-COPY probe's wait for a lazy part (`docs/chair/2026-11-16/probes/PAGE-COPY/render.census3.jsx`, `lane/chair-2026-11-08`):
+  for the probe's keeper ((B) above).
+- The presumed-things door's four lines (S4.4): recorded by the owner's word; CLOSE-DOORS-1B writes the rows.
