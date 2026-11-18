@@ -14,24 +14,30 @@ below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force);
 
 ## 0. THE STATE AT 19:04 UTC ON 2026-11-17 (READ THIS FIRST: it is written for a successor AND for this chair after its own context is summarized; it REPLACES the 17:04 state; the lines of section 7 written after 19:04 govern where they differ)
 
-**THE LINE.** `lane/join-2026-11-14` stands at 917c915bc6eb75011dfabd211f730e543e08d32a (pushed 00:25 UTC on 2026-11-18, read back): POINTS 33 TO 44.
-THE RECORD `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` ON THE LINE holds the rows of points 33 to 42 (one row a point: the
-commit, the trees, what cleared it, what it left red by name); THE ROWS OF 43 AND 44 ARE OWED and are written with the
-next landing's (a docs commit goes on the line only after the last BUILT landing commit, so that built commits stay
-fast-forwards). In order: 33 the owner's supply rule (e0242a12a) · 34, 35 BAR8's two audits (ef5fd621e) · 36 DEBT-2
-(2e54c06c2) · 37 LEFT-LINES (f1ca75555) · 38 LEFT-PDF (e60d42a20) · 39 LEFT-CHAIN (3b06c724b) · 40 LEFT-MARKS (f86295196) ·
-41 LEFT-CHAIN's follow-up (8f392d100) · 42 LEFT-MARKS's BR21 follow-up (440bac3da) · the rows' commit dfe557dc9 · 43 J-ROWS's
-G1, the general gap line (52a10f90a) · 44 PDF-2 (917c915bc). BUILT ON IT AND NOT LANDED: `lane/landing-45-2026-11-17` at
-58cb585691214feac4d9aa217181cf47c2ece63b = POINT 45 (SCENES at cabed01ff: 2f0e88971, its whole check running, label
-`landing-45-2f0e88971`) AND POINT 46 (SCENES's late rewording at 867476c33: a targeted net); READ-SCENES
-(session_01FbPLbesk53RrHfBHaBrMoN) is reading. VOID: 7d045555a and 67887afdc (J-ROWS's first tip and what was built on it).
-THE CHAIR IS THE LINE'S ONLY WRITER: `/home/user/line` (hooks; now on the landing branch) and, for a push while that
-checkout is busy, any scratch worktree at the commit AFTER `npx husky` there (`ls .husky/_` lists `pre-push`) and with no
-scratch file in it. THE BASELINE FOR COMPARISONS BY NAME: the whole check at 917c915bc (the three CHECKS seats' branches,
-`checks/landing-43-44-917c915bc/part-<n>/names.final.txt`: 159 names; `/home/user/wk/p44.all.txt`). A RED THAT A LANDING
-WAS TO CURE, AND EVERY WALKER, REGISTER AND ROSTER TEST, IS READ BY ITS MESSAGE, NOT ONLY BY ITS NAME: the chair runs
-`tests/lint` and the registers at the base and at the candidate with the default reporter and compares them with
-`/home/user/wk/lawcmp.mjs` (logs `/home/user/wk/laws.<tree>.log`). `editCorpusRatchet` A5 comes and goes by its watchdog (BR22).
+**THE LINE (re-written 03:03 UTC on 2026-11-18).** `lane/join-2026-11-14` stands at 70e557d5bdffdf00ac45fb2ec4566674e6a33674
+(pushed 03:02 UTC on 2026-11-18, read back): POINTS 33 TO 47 AND 53, each with its row in
+`docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` on the line. In order: 33 the owner's supply rule (e0242a12a) · 34, 35 BAR8's
+two audits (ef5fd621e) · 36 DEBT-2 (2e54c06c2) · 37 LEFT-LINES (f1ca75555) · 38 LEFT-PDF (e60d42a20) · 39 LEFT-CHAIN
+(3b06c724b) · 40 LEFT-MARKS (f86295196) · 41 LEFT-CHAIN's follow-up (8f392d100) · 42 LEFT-MARKS's BR21 follow-up (440bac3da) ·
+43 J-ROWS's general gap line (52a10f90a) · 44 PDF-2 (917c915bc) · the owner's sentence in `CLAUDE.md` and the rows of 43, 44
+(99ca9ad51) · 45 SCENES (2f0e88971) · 46 its last commit (58cb58569) · 47 SCENES-3 (4dbd6fc15) · 53 FISH-ROWS (1006a1f26) ·
+the rows' commit (70e557d5b). POINTS 48 TO 52 ARE NOT ON THE LINE: those numbers are held by five seats whose work waits
+for its follow-ups. **THE LINE IS HELD AT 70e557d5b UNTIL THE OWNER ANSWERS THE DEPLOY QUESTION (section 7, 02:53 and
+03:03): either the close starts at this commit, or landings resume.** BUILT AND NOT LANDED (each the OLD tip 99ca9ad51
+with seats' commits merged; each is merged with the line's tip at its landing: every pair merges clean by
+`git merge-tree`): `lane/landing-k-people-2026-11-18` 20b44f97c (K-PEOPLE; PEOPLE-2 builds on it) ·
+`lane/landing-k-watch-powers-2026-11-18` 215f97d29 (K-WATCH at d1d0c2e28, then K-POWERS; K-WATCH-2 builds on it) ·
+`lane/landing-desks-2026-11-18` 4446aecb5 (DESKS-ECO at 565aba854, then DESKS-DEF; DESKS-2 builds on it). HANDED BACK, NOT
+LANDED: MARKS-2 (c7e1b452b; ruling BR31), J-INCOME-2 (40717fde3; rulings BR26 and BR33 and the roster), PDF-2b (cd94d5a08:
+its reader holds it until J-INCOME-2's rows are in; it lands after that seat). THE CHAIR IS THE LINE'S ONLY WRITER: a push
+goes from any scratch worktree at the commit AFTER `npx husky` there (`ls .husky/_` lists `pre-push`) with no scratch file
+in it; AT MOST TWO GATED PUSHES AT ONCE (four restarted the machine). THE BASELINES: by name, the whole checks at
+917c915bc (159 names, `/home/user/wk/p44.all.txt`), at point 45 (165, `p45.all.txt`) and at the six seats' stack
+7e8fd4cc1 (172, `p53.all.txt`); by message, `tests/lint` and N3 at 99ca9ad51 (`/home/user/wk/laws2.tip.log`), compared
+with `/home/user/wk/lawcmp.mjs`. NO WHOLE CHECK HAS RUN AT 70e557d5b ITSELF (point 45 and the six seats' stack were each
+checked whole; the fish rows' merge on the new tip took a targeted net, `/home/user/wk/fish2.net.log`): the next whole
+check reads it. A RED THAT A LANDING WAS TO CURE, AND EVERY WALKER, REGISTER AND ROSTER TEST, IS READ BY ITS MESSAGE,
+NOT ONLY BY ITS NAME. `editCorpusRatchet` A5 comes and goes by its watchdog (BR22).
 
 **THE SEATS (each a child session of this chair on its own machine; briefs in `sixth/briefs/`; builders and readers of code
 are the middle tier at high effort, the mechanical seats the cheaper tier at low effort).**
@@ -389,6 +395,25 @@ should be paused or archived by the owner's hand.
   walker's reds turns green): THE ANCHORS ARE FOUND BY THE ROW'S OWN TEXT, never by a line number again. (6) M3
   (three more stale rows of the uncommitted wiring census) and the stored counts: the close's. 13d and 15c stay
   left for the reasons the reader confirmed (15c is the need-list seat's item 5).
+- **BR33 (03:03 UTC, 2026-11-18; J-INCOME-2 after the chair's read: NOT YET).** The four rules are at zero and the
+  declared move is as asked. (1) THE FIVE BANKED ROWS: the seat left them "for the close" and did not name BR26: it is
+  told again, with the owner's own words ("Move the entries"): the file key only, by hand, nothing else; a refusal by
+  its own check stands and comes back to the owner. PDF-2b's reader holds that seat for exactly these rows. (2) THE
+  LEAF'S RAW ROSTER READ (`ruinFilterRoster`): NO EXEMPT ROW: the leaf reads the live roster through the one filter
+  (`institutionRoster.js`, already on the eager side; EG1 forbids only what is pinned lazy): a ruined house works no
+  metal; no stored record of the 900 moves (the seat's measure); the chair takes the seat's leaf over PDF-2b's byte
+  copy at the merge. (3) FS1 (a) YIELDS TO THE SUPPLY RULE (`tests/domain/bar4CorpusEcoKinds.test.js`: "where the
+  rites hold the chain up, the rites line prints in place of 'bought in'" is red by the brief's own item 2 in all
+  four of its towns, and no town of the three populations prints the rites line now): the arm is re-written to the
+  claim that holds (the bought line prints there, the rites line does not), with a dated note that retires FS1 (a);
+  the seat says by construction whether the rites line can still print anywhere (then one constructed arm keeps it)
+  or is a dead line (named for the close, not deleted). FOR THE VETO LIST: FS1 (a) retired. (4) LEFT BY NAME: three
+  income shares that print bare where the bought line would be truer (true, silent); r2r-hamlet-27: THE FAILED
+  VENTURE STANDS BESIDE ITS OWN HERDERS ("The dairy farmer is failing: no livestock lies near and none is brought
+  in." beside a Shepherd, Common grazing land and a Stable yard): a birth fault (`supplyStory.js :: ventureAtBirth`
+  counts only the houses that USE the material, not those that keep or yield it): to a birth seat, by name. (5) THE
+  BUTCHERS (BR31) are put to this seat as one more case of its item 3: the need list asks the one reader, and stops
+  if that would hide a need the page does not meet.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
@@ -1358,3 +1383,26 @@ should be paused or archived by the owner's hand.
   **K-WATCH-2 SEATED** session_01FbPLbdUmBAQENdoySQLHVG (02:43; from 215f97d29; BR29 and BR30). **DESKS-2**: prompt
   `/home/user/wk/prompts/DESKS-2.txt` (from 4446aecb5; branch `lane/bar8-desks-2-2026-11-18`; PART A the blockers
   of both desks under BR28 and BR32, PART B the leftovers). **MARKS-2** told BR31 at 02:45.
+- 03:03 UTC, 2026-11-18 · **POINTS 45 TO 47 AND 53 ARE ON THE LINE: 70e557d5bdffdf00ac45fb2ec4566674e6a33674.** The scenes
+  chain went on by a fast-forward at 02:54 (4dbd6fc15, read back). FISH-ROWS was merged on that tip (1006a1f26, parents
+  4dbd6fc15 and d88cf53b3); the chair's targeted net there (22 files: both seats' guards, the tests the two seats
+  changed, the walkers that read test files, N3): 13 files green; 14 reds, the same names as at the old tip, 12 with
+  the same message and 2 moved only by the scenes' own guard file (the mutation manifest names it; the estate's file
+  count 3682). The rows of 45 to 47 and 53 went on with it in one docs commit (pushed 03:02, read back). THE LINE IS
+  HELD THERE for the owner's answer on the deploy. **THE OWNER'S SECOND PROMPT IS ANSWERED IN CHAT** (the architecture
+  and the process of generating a settlement, in plain words: the 22 steps in their real order, as `getStepOrder()`
+  gives it; the record; the facts, the declared lines and the twins; what is stored and what is composed at print;
+  the marks; the tabs, the PDF, the journal and the public page; what happens after; the guards; every figure quoted
+  was read in the code at 99ca9ad51 by two read-only researchers and checked by the chair). ONE CORRECTION MADE IN
+  THE RECORD BEFORE IT WAS PUSHED: point 47's row said 32 towns "now print the road"; they do not (the stored records
+  are byte-equal): in those 32 the resolver now HAS an answer where it had none.
+  **J-INCOME-2 HANDED BACK (02:55; 40717fde3 on `lane/bar8-j-income-2-2026-11-17`):** 11b 3·0·21 to 0; 11a.imported
+  2·5·5 to 0; 11e.offer's livestock half 1·2·6 to 0·0·1 (the exception r2r-hamlet-27); 15c 1·0·2 to 0; declared move
+  `incomeSources[].desc` 21 of the 720 and 36 of the 525. NOT YET (ruling BR33; told at 03:02): the five rows, the
+  roster, FS1 (a); then the butchers. **READ-PDF-2 ON PDF-2b: DO NOT LAND YET** for the copied leaf's two reds only
+  (all six of its claims hold; LOW 1: in narrative mode the journal pairs chain rows by position against the AI
+  copy's order: pair by the chain's printed name: a leftover; LOW 3: the journal leaves out the short sentence the
+  tabs and the PDF print: a leftover): IT LANDS AFTER J-INCOME-2. **DESKS-2 SEATED** session_01FbPLbfCdro1CAe3RjZUdiL
+  (02:54; from 4446aecb5; BR28 and BR32). THE CHAIR TOLD THE OWNER ONE THING IT CHANGED ITS MIND ON: it first wrote
+  "start nothing new"; the three follow-up builders work on side branches that a deploy would not carry, so they
+  were seated and go on; only the line is held.
