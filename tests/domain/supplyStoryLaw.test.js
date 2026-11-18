@@ -323,7 +323,9 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
   test('P2 · the failed venture\'s mark prints on a rendered tab and in the PDF\'s reading wherever the short mark would', () => {
     /** @type {string[]} */
     const found = []; let rendered = 0;
-    expectNoSeedFailures(collectSeedFailures(CENSUS, (seed) => {
+    // FAULTS-BIRTH (2026-11-18, R8: re-keyed by identity): the venture is never picked beside a house that keeps or yields its
+    // material (FR8 (b)), and the 720 hold 9 ventures (11 before): the same claim over the 720 and the wide read's 150 (12)
+    expectNoSeedFailures(collectSeedFailures([...CENSUS, ...WIDE], (seed) => {
       const s = town(seed);
       const venture = ventureHouseOf(s);
       if (!venture) return;
