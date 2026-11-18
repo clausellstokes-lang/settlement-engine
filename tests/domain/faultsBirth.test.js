@@ -30,6 +30,7 @@ import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { chainCarrierOf } from '../../src/domain/facts/chainCarrier.js';
+import { resourceGapLines } from '../../src/domain/display/validationOnPage.js';
 
 await loadGenerationLawPayloads();
 
@@ -318,6 +319,25 @@ describe('FAULTS-BIRTH (c) · an isolated buyer of a material the land never hel
     const s = town('r2r-city-45');
     expect((s.economicState?.primaryImports || []).includes('Wool'), 'NEGATIVE: r2r-city-45, the seed refuses: no "Wool"').toBe(false);
     expect(HI.housesShortOf(s).get('Fuller'), 'r2r-city-45: the fuller idle, short of wool').toBe('wool');
+  }, 600_000);
+
+  test('FR23 (2): a Common grazing land whose pasture the record stores spent reads as every house on a spent ground of its own', () => {
+    const EIGHT = ['r2r-hamlet-53', 'r2r-village-15', 'r2r-village-20', 'r2r-village-49', 'r2s-infiltrated-village-0', 'r2s-plague_onset-village-1',
+      'r2s-succession_void-hamlet-3', 'r2s-monster_pressure-village-2'];
+    expectNoSeedFailures(collectSeedFailures([...EIGHT, 'r2r-hamlet-42', 'r2s-recently_betrayed-hamlet-2'], (seed) => {
+      const s = town(seed);
+      const common = liveInstitutions(s).find((i) => i.name === 'Common grazing land');
+      if (!common) throw new Error('no common (the anchor)');
+      if (!(s.config?.nearbyResourcesDepleted || []).some((/** @type {string} */ g) => g === 'grazing_land' || g === 'alpine_pasture')) throw new Error('no stored spent pasture (the anchor)');
+      if (rowMarkText(s, 'house', common) !== 'Short of livestock.') throw new Error(`the common's mark: ${rowMarkText(s, 'house', common)}`);
+      if (!resourceGapLines(s).some((/** @type {{ impact: string }} */ l) => /^The common grazing land is worked out: its own ground is depleted \(/.test(l.impact))) throw new Error('no worked-out line');
+    }), 'the commons on a stored spent pasture');
+    expectNoSeedFailures(collectSeedFailures(['r2r-hamlet-15', 'r2r-hamlet-22', 'r2r-village-4'], (seed) => {
+      const s = town(seed);
+      const common = liveInstitutions(s).find((i) => i.name === 'Common grazing land');
+      if (!common || !(s.config?.nearbyResources || []).includes('grazing_land')) throw new Error('no common on a live pasture (the anchor)');
+      if (rowMarkText(s, 'house', common)) throw new Error(`NEGATIVE: a common on its live pasture is marked: ${rowMarkText(s, 'house', common)}`);
+    }), 'the commons on a live pasture');
   }, 600_000);
 
   test('the three views read the grounds alike in every anchor town', () => {
