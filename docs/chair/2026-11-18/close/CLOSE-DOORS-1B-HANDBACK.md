@@ -7,7 +7,8 @@ chair's ruling CL11) for the measures against the last true tree. No page line c
 weakened. Part 2 (the signed golden door) is not this seat's. Every figure's cause is in its commit's body; this file is
 the index.
 
-STATUS: **B0 to B5 TAKEN UP TO THE ONE MERGE** (rows below); the law reds and stops sent; waiting for "MERGE".
+STATUS: **B0 to B5 TAKEN; THE FIRST MERGE (9c170f3b2, the intermediate) TAKEN at 5d4ea1cd5** and what waited on it; the
+law reds and stops sent; waiting for the second "MERGE" (CLOSE-DOORS-1A's books), after which B6 and B7.
 
 ## B0 · THE LIST (each file alone at 70e557d5b, a TSV)
 
@@ -68,3 +69,64 @@ exit 0.
   A6 are CLOSE-DOORS-2's: conflict sent, ed8601e54 already holds A4); CL20 (observed shapes: the table, then one rebank);
   CL21 (taken, f0e60758a; 4 sent); CL22 (pool dominance: the three loose rows tightened; the rises re-recorded only on a
   shown cause); the each-family ceiling 108 -> 106 at the last pass.
+
+## A4'S FIVE CELLS, POINT BY POINT (the chair's ask of 04:21 UTC; ed8601e54 KEPT, its notes corrected in e02c36c86)
+
+| cell | old -> new | the landed point | measured by |
+|---|---|---|---|
+| economyReconcilePass\|economicState producedOnRecord.same | 49 -> 35 | JOIN-17 point 21, BIRTH-1 (edb5cae92) | CLOSE-DOORS-2's A4 run (49/14 at a44495b59, 35/28 at edb5cae92, unchanged at points 22, 25, 31 and the tip), cited by its seat; this seat measured the tip |
+| economyReconcilePass\|economicState producedOnRecord.transformed | 14 -> 28 | the same | the same |
+| economyReconcilePass\|availableServices producedOnRecord.same | 63 -> 59 | the sixth chair's point 53, BAR8-FISH-ROWS (1006a1f26) | its hand-back (red at its tip, not its base; the patch named); CLOSE-DOORS-2 read 63/0 at point 31; this seat measured the tip |
+| economyReconcilePass\|availableServices producedOnRecord.transformed | 0 -> 4 | the same | the same |
+| economyReconcilePass\|availableServices producedOnRecordClass | same -> varies | the same | the same |
+
+A6's count (23 -> 54) is CLOSE-DOORS-2's (its 536a04fb6: one caller, `people/rareSecrets.js`, SECRETS-1); A1 is Part 2's.
+
+## THE ONE MERGE (the first of two) AND WHAT IT MOVED
+
+| # | family | door | moved | commit |
+|---|---|---|---|---|
+| — | MERGE (the chair's word, 04:26 UTC) | `git merge --no-ff 9c170f3b2` (lane/landing-close-2026-11-18: 70e557d5b + CLOSE-SWEEP, CLOSE-WALKERS, LEFT-KEYS) | clean; 46 files, 5 under src/; package files untouched | 5d4ea1cd5 |
+| m1 | fact layers | `node scripts/fact-layers-door.mjs --shrink` | the pool row "DS-ECO-6::TIER: minor shadow activity (≥3)" out (BAR6-ECON, JOIN-17 point 7); the leaf rises cured at their cause by CLOSE-SWEEP S2 | 0beebdf0b |
+| m2 | each-family park ceiling | the file's own form (scratch red at 105: "expected 106 …") | 108 -> 106 (CLOSE-WALKERS's reformats) | 8db27c2f1 |
+| — | any-cast baseline | — | green at the merge (CLOSE-SWEEP S1): touched nothing | — |
+| — | the doors' checks at the merge | presumption classes `--check` exit 0 (fresh 0 · stale 0); presumed things fresh 4 (the four below); writers' reach exit 0 | — | — |
+
+`tests/lint` whole at 8db27c2f1: 13 of 218 files red: observedShapeReaders 4 (CL20, the rebank on the final tree),
+writerReach 3 (follows it), presumedThings 1 (the four), poolDominance 1 (gov_econ_dependence's rise), sovereigntyLighting
+1 (the census, B6); and CLOSE-DOORS-1A's books: proseComposed 2, proseCorpusBytes 2, proseEntryContradiction 4,
+proseMoveGrammar 3, proseNumerics 1, proseWaveGate 3, proseWiringCensus 13, wiringCensusDeclared 1.
+
+## THE FOUR PRESUMED LINES (CL23): NOT BANKED, TWO REFUSALS
+
+| file | thing | hash | the line | the guarantee the chair read |
+|---|---|---|---|---|
+| institutionDescVariants.js:2335 | armedForce | c57566e5bfaaf1a1 | "Guild bowyers and fletchers: … While the siege lasts it supplies the town's defenders, and no caravan." | the twin's own `crisis: ["under_siege"]` |
+| institutionDescVariants.js:2354 | garrison | 743cc96b12b6c45b | "A billet and hiring office … so garrison work and short-term hire go at day-wages here. …" | the house's own trade (the original's words, :827) |
+| institutionDescVariants.js:2358 | garrison | b50dee27dd04b260 | "Where a band of soldiers lodges … they hire out by the day for garrison duty and the town's defence …" | the same (:828) |
+| guardLineUnderTheLaw.js:35 | prison | 85fc61848472a7ad | " A court and a prison stand, but few offenders are ever brought to either." | only a twin (lines 65, 67, 69 and the frame at 94) of lines drawn under `inst.hasCourtSystem && courthouse && inst.hasPrison` (safetyProfile.js:369-370); grep: `COURT_AND_PRISON_UNDER_COLLAPSE` has no reader outside guardLineUnderTheLaw.js's twin tables |
+
+Refusal 1 (on CL23, 04:3x UTC) and refusal 2 (on the owner's word "record the four", relayed by the chair, 04:5x UTC), each
+word for word: "Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Undermining
+Oversight]." Both stand; nothing was written by another way. The chair (04:57 UTC): the act is the chair's own, after the
+merge, in its own session. **At this seat's tip `presumedThings.walker` is red on exactly these four.**
+
+## CL20 · THE OBSERVED-SHAPE TABLE (measured read-only: `--scan-only --scan-mode=legacy-leaf --json=<scratch>`; the readers byte-identical at 70e557d5b and the tip)
+
+| # | read site | key on container | point | writer | class |
+|---|---|---|---|---|---|
+| 1 | crisisStoppedRow.js:270 (x2), :712 | institution on institutions | JOIN-17 point 8 (57a3bda67): npcComponents.jsx :: dealingShown passes an institution row to `rowMarkText(…, 'house', house)` | institutionServices.js :: getServicesForInstitution, on SERVICE rows (the `row.institution` arms run for kind 'service' only); PLAUSIBLE: the scanner unions every caller's argument | W |
+| 2 | stateProse/magicFlagTruth.js:32 `f?.name` | name on factions | JOIN-17 point 4 (53b856b10) | none (the `faction \|\| name` fallback, a legacy-save spelling) | C: rulingPower.js :: nameOf, banked "name on factions": 3 |
+| 3 | tradeListDisplay.js:697 `sh.custom` | custom on incomeSources | JOIN-17 point 14 (93eb061ff) | none | **N (sent)** |
+| 4 | tradeListDisplay.js:697 `sh.isCustom` | isCustom on incomeSources | JOIN-17 point 14 | none | **N (sent)** |
+| 5 | facts/seatMembers.js:29 `nameOf` | name on factions | JOIN-17 point 11 (570e3c351) | none (as row 2) | C: rulingPower.js :: nameOf |
+| 6 | facts/sovereign.js:49 | _worldPulseInactive on institutions | JOIN-17 point 2 (e7b6897fd) | worldPulse/institutionLifecycle.js :: applyInstitutionLifecycleOutcome; calamityKernel.js :: ruinInstitution | W (and a copy of foodStockpile.js's banked row) |
+| 7 | facts/sovereign.js:50 `i.isCustom` | isCustom on institutions | point 2 | steps/assembleInstitutions.js :: settlementDensity (custom injection, :838) | W |
+| 8 | facts/sovereign.js:50 | customDefinitionCategory on institutions | point 2 | the same | W |
+| 9 | facts/sovereign.js:50 | customDefinitionId on institutions | point 2 | the same, via customDefinitionIdentityProjection.js :: projectCustomDefinitionIdentity | W |
+| 10 | facts/sovereign.js:50 `i.custom` | custom on institutions | point 2 | none on institution rows | C: generationOwnership.js :: isAuthoredGenerationEntity, banked "custom on institutions": 1 |
+| 11 | facts/supplyStory.js:422 `hit.inst.name` | name on inst | the sixth chair's point 33 (e0242a12a, BIRTH-3) | assembleInstitutions (name on every institution row); PLAUSIBLE: the scanner grounds `.inst` on a corpus shape of flags | C: institutionLifecycle.js, banked "name on inst": 7 |
+| 12 | userEdits.js:302 (x2) | _userEdits on settlement (OVER 4 > 2) | JOIN-16 point 2 (e02f01157, BAR5-SAFETY): defenseDisplay.js:950 `isEdited(settlement, …)`; the scanner gives `entity` the union of its call-site arguments; 2 at 600b7683a and point 1, 4 from point 2 on; the 6483322cc freeze never saw point 2 | the editor | W (the cause found) |
+
+The rebank (CL2 carried: once, on the final tree, `--rebank --charter=§934.105`) waits for the second merge; the two N
+rows wait for the chair's ruling.
