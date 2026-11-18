@@ -139,7 +139,31 @@ Results:
 
 ## 4. The net
 
-Each gate alone through `gate-tail.sh`, at 55b954f98 and at the tip: see §6 (written when the net was in).
+Each gate was run alone through `gate-tail.sh` (exit codes recorded, never a pipe), at 55b954f98 and at 90ce2852d. Both
+trees are `git archive` exports. Test messages were compared whole, with stack lines and timings stripped.
+
+- Type gates: `typecheck:ratchet` 0 · 0; `typecheck:domain:strict` 0 · 0.
+- `eslint` on every changed file: 0 · 0.
+- `tests/architecture`: 0 · 0.
+- `tests/lint`: 3211 tests at both, 72 red at both.
+  - The SAME names, and every failure message identical in full (0 differ).
+  - That covers every walker, register and roster test, the negative-anchor and seed-loop walkers included.
+  - Some reds there (`tuningRegister`'s refreeze arms, `observedShapeSentinel`, `wiringCensusDeclared`'s channel arm) come
+    from git commands that cannot run in an archive tree. They are equal at both trees.
+- Each alone, base · tip:
+  - the guard 0 · 0 (25 tests at the tip; the base runs its own 22);
+  - `bar6ScenesGoods` 0 · 0;
+  - `tailHistoryBatch6` 1 · 0;
+  - `bar2PlacesRows` 1 · 0;
+  - `tailNarrativeRows` 1 · 0;
+  - `bar7Scenes` 0 · 0;
+  - `bar4ScenePresumption` 0 · 0;
+  - `textOf` 0 · 0;
+  - `census2fColour` 0 · 0.
+  - `politicalFlavorDeclared` is red at the base and green at the tip (§3 (d)).
+- N3: `pipelineContract` 0 · 0; `isolatedTrade` 0 · 0; `pipelinePinnedMode` 3 red · the same 3; `generationForkCensus` 3
+  red · the same 3; `publicProseEquality` 0 · 0. Every message is identical (0 of 487 tests differ).
+- Every push ran the lane hook (the ratchet, strict and lint): all passed.
 
 ## 5. Left by name, not mine
 
