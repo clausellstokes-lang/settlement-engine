@@ -319,6 +319,41 @@ should be paused or archived by the owner's hand.
   "every new wall going up": the cure of 12d put one false line where another stood): 15e is the desks' own left
   rule: THE FOLLOW-UP CURES IT BEFORE THE POINT LANDS (a declaration on the line by a building trade at work; the
   seat proposes the atom's key, the chair rules).
+- **BR29 (02:40 UTC, 2026-11-18; K-WATCH after its second reader: DO NOT LAND YET).** (1) THE READER'S HIGH: the
+  older test `tests/generators/servicesStructure.test.js` (the entry at or under 400 lines) is red by the seat's own
+  lines (406): `SLOW_LAW_DESC`, `lawlessRow` and their two comment blocks move into
+  `src/generators/services/serviceRollMaterialization.js` (the home of the criminal-house reading the same overlay
+  uses), exported and imported by the entry; the overlay's two push sites stay; no draw moves (byte-equal records).
+  The moved line is in no register; if the move makes a row fresh the seat stops (a banked row does not follow a
+  moved line without the owner's word: BR26 is no precedent). (2) THE READER'S MED: the new atom `force walks by day`
+  spells its own force table and its own liveness, and drifts from the one partition the page prints (Warden's Lodge:
+  atom yes, page no; Household levy, Multiple garrisons, Mercenary quarter: page yes, atom no; in the reader's 1,300
+  probe towns 9 hold the atom by a Warden's Lodge alone and 1 prints the by-day line beside a night-only watch,
+  bar0-town-calm-rand-437): THE ATOM READS THE HOUSES OF `orderForce.js :: orderForceOf` (the one reader of the force
+  that keeps order), keeping only its reading of a house's own text; the moved towns are declared; the auditor's
+  detector 13e.hours has the same blind spot and is cured with it if it is one small hunk. (3) THE REGISTERS: the
+  ruin-filter roster's one more reader and the observed-shape scan's one more read follow the leaf (the seat says the
+  figures at its tip; no stored figure re-taken); THE NEW DRAWN POOL'S ROW (`ledger:safetyProfile:STANDARD_PATROL`)
+  IS THE CLOSE'S, with the five pools already waiting there. (4) THE READER'S LOW 3 (a gate held at night read as a
+  day's round, by the auditor's own rule; it prints in bar0-town-calm-rand-36, -37, -40) IS THE OWNER'S QUESTION AT
+  THE CLOSE. 15d stays dropped (the reader confirms the seat's reason).
+- **BR30 (02:40 UTC, 2026-11-18; K-POWERS after its second reader: DO NOT LAND YET).** (1) THE READER'S HIGH: the
+  seat's re-key of `tests/generators/power/standingAgainstFigure.test.js` (b) left the claim unable to fail (after
+  14a the Garrison Bloc takes its twin whole and carries no standing; with `const host = null;` planted in
+  `rosterText.js :: settleStandingToRoster` everything is green at the tip, red at the base): (b) IS RE-ANCHORED on a
+  minted rival that still copies its host's description with its standing (a description general to its kind), and
+  shown red under that mutation by its own claim, not by its liveness anchor. Tests only. (2) THE OCCUPATION TWIN IS
+  REWORDED BY NAME (the reader's LOW; vetoable): "A second body sent in from outside, which claims a share of the say
+  over every decision made here." asserts a second outside body, and the record holds none (the rival is the density
+  law's second claimant on the niche, nothing more): IT READS, in the form of its sibling twins, "A rival bloc that
+  wants a say over the decisions made here, and disputes the outside administration's hold on them." (3) LEFT BY
+  NAME: one TRUE line lost in 1 town of the 180 (bar0-city-under_siege+famine-rand-31: Military/Guard no longer
+  prints "They and the religious authorities both keep people in line …": 13g emptied its power-step standing and
+  `rosterText.js:95` skips a power whose old standing is empty; not the seat's file; a leftover); the detector's
+  14a.descCopy.generic 6 -> 7 in the 150 is two true descriptions now byte-equal (nothing false); the line that
+  stays at rand-47 is printed and true of both powers. (4) ONE FOLLOW-UP SEAT, K-WATCH-2, DOES BR29 AND BR30 (the two
+  seats' files are disjoint), cut from point 49 (215f97d29: K-WATCH and K-POWERS on the line's tip); the two points
+  and its commits land together when both readers clear their part.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
@@ -1234,3 +1269,29 @@ should be paused or archived by the owner's hand.
   register (K-POWERS's cured line: the close's shrink).
   MARKS-2 AND J-INCOME-2 ARE TOLD THE ROUND'S LESSON (02:30): the net at a scratch merge with the line's tip, every
   red of `tests/lint` by message, and the older tests that name what they change.
+- 02:40 UTC, 2026-11-18 · **FOUR READERS' VERDICTS ARE IN ON THE RECOVERED SEATS; THREE FOLLOW-UP SEATS.**
+  (a) READ-FISH-ROWS's addendum: agree-town-87 is a BOUGHT town, the swap there is right, `upkeepVocation`'s premise
+  is stale: LAND, with the stale re-key as the seat's tests-only follow-up (FISH-ROWS told at 02:29: the re-key,
+  three constructed guard arms for the hunks no test catches, the sweep). (b) READ-K-WATCH: DO NOT LAND YET (ruling
+  BR29). (c) READ-K-POWERS: DO NOT LAND YET (ruling BR30). (d) READ-K-PEOPLE: DO NOT LAND YET until the two re-keys
+  (BR27). READ-DESKS-ECO said DO NOT LAND YET (BR28); READ-DESKS-DEF is still reading.
+  THE PER-SEAT LANDING BRANCHES (each the line's tip 99ca9ad51 with one seat's commit merged, pushed, NOT landed):
+  `lane/landing-k-people-2026-11-18` 20b44f97c (K-PEOPLE); `lane/landing-desks-2026-11-18` 565aba854 (DESKS-ECO),
+  4446aecb5 (DESKS-DEF on it); `lane/landing-k-watch-2026-11-18` d1d0c2e28 (K-WATCH = the stack's point 48);
+  `lane/landing-k-watch-powers-2026-11-18` 215f97d29 (K-WATCH and K-POWERS = the stack's point 49). The six-seat
+  stack `lane/landing-k-desks-2026-11-18` (7e8fd4cc1) is the rehearsal the whole check ran on: its merge commits are
+  for checking only where a seat lands on a branch of its own.
+  SEATED: **PEOPLE-2** session_01FbPLbeknN6zPLMZrJZsrtS (02:34; from 20b44f97c; branch
+  `lane/bar8-people-2-2026-11-18`; PART A the two re-keys and the sweep, its hash to the chair, then K-PEOPLE lands;
+  PART B the swap cure's two other callers with the saved-record question, the held friend's guard arm,
+  11e.wantBuy, 14e). TO SEAT: **K-WATCH-2** (BR29 and BR30; from 215f97d29; branch
+  `lane/bar8-k-watch-2-2026-11-18`; prompt `/home/user/wk/prompts/K-WATCH-2.txt`); **DESKS-2** when READ-DESKS-DEF
+  reports (BR28 and that verdict; from 4446aecb5; branch `lane/bar8-desks-2-2026-11-18`).
+  MARKS-2 HANDED BACK (02:35): tip c7e1b452b on `lane/bar8-marks-2-2026-11-17`: 11e.siegeBought, 12a, 12f to 0 over
+  the thirty, the 150 and the 720; 11d 7·21·19 to 1·3·2 (the hook only); the 525 unmoved; left by name: the hook's
+  writer `foodBalance.js:826` does not follow BR16 (a one-line hunk it verified in scratch, which also clears
+  `bar6MarksLaw8` (a), red at its tip only, and runD's 8a rise); two calm-road butchers; the livestock/hides roots;
+  timber 9; C7539's KEEP overturned by its item 2. TO DO: the chair's read, a second reader, its net at a scratch
+  merge with the line's tip.
+  THE OBSERVED-SHAPE SCAN'S ONE MORE READ (7 -> 8) is given to K-WATCH-2 to attribute (its leaf reads a house's
+  `_worldPulseInactive` and `status` itself).
