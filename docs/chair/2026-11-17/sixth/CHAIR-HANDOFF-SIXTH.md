@@ -1838,3 +1838,26 @@ should be paused or archived by the owner's hand.
   with its 141 new lines); `stripe.js` 20 20 26.66 22.11 (0 0 9 0); `aiSlice.js` 72.47 60.35 55.66 76.97 (42 39 35
   46); `creditsSlice.js` 68.75 100 54.54 66.66 (11 0 7 11). THE CHAIR'S ONE COMMENT ON #75 FOR THAT JOB IS POSTED
   (id 6969100356): the job is red by the close's reds in its reach, the floors hold, nothing of its own to fix.
+- 04:35 UTC, 2026-11-18 · THE CLOSE'S FIFTH MERGE, LOCAL: CLOSE-DOORS-1A HANDED BACK (04:34; tip 3c7b6395f, pushed; hand-back
+  `docs/chair/2026-11-18/close/CLOSE-DOORS-1A-HANDBACK.md`, with its table of every re-take: file, old and new, door,
+  cause): merged as 1b0614950 on `lane/landing-close-2026-11-18` (27 files; ONE byte under `src/`:
+  `proseNorms.generated.js`'s comment count). ITS FIGURES: the wiring census 859 pools and 2,977 variants to 861 and
+  3,033 (93 rows moved, 2 new pools, each laid to its landing: BAR6-DEFDESK 35, BAR6-CULTURE 26, BAR7-DESKS 15,
+  LEFT-LINES 8, BAR6-ECON 7, SEAM-DESKS 4, DEBT-1 3, SEAM-CULTURE 2, BAR6-POWERS 2, BAR5-SAFETY 2, BAR5-POWERS 2,
+  BAR5-FOOD 1); the shift register's five moved rows; the byte rows (defense 269,046 to 281,298; economy 188,975 to
+  195,233; general 301,857 to 306,982; power 131,223 to 135,398; stressors 147,835 to 148,435; warFaith 180,301 to
+  180,478); the numerics baseline five rows by text; `proseEntryContradiction`'s two anchors found by their rows'
+  text (BOTH OLD ANCHORS POINTED AT THE WRONG ROW: one arm had passed on a row that fires nothing); the
+  undeclared-lines register shrunk (four counts fell, one row gone); eight declarations ledgers row by row; the
+  late re-read table 11 to 30. `tests/lint` by message: 66 red at the base, 38 at its tip, none new. 15 OF ITS 20
+  FILES GREEN; THE FIVE LEFT RED ARE THE ONES RULED WHILE IT WORKED (CL14, CL17, CL18, CL19): its hand-back was
+  written before it read those four messages (a seat's queue is delivered when its turn ends); told again in one
+  message at this hour; its follow-up is merge 6 and the last input of CLOSE-DOORS-1B's final pass. THE COMMITTED
+  CENSUS PREDATED JOIN-16's BAR5 MERGE (the seat's finding, the same root as CL11): BAR5's landings moved figures
+  too. All of `tests/lint` and the seat's twelve other files are running on the tree of five merges, to be
+  compared by name with the base's list. K-WATCH-2 DONE (04:34; `lane/bar8-k-watch-2-2026-11-18` at 2abb7fb03;
+  hand-back `docs/chair/2026-11-17/bar8/BAR8-K-WATCH-2-HANDBACK.md`): BR29 and BR30 built (the entry 406 to 390, the
+  row's NAME kept for an older test; (b) re-anchored on rw3-metropolis-calm-9; the occupation twin reworded, printing
+  only at r2s-occupied-city-0 and r2s-occupied-metropolis-3; the by-day atom reads `orderForceOf`'s houses: moves
+  in rand-437 of the 1,300 and r2r-town-4 of the 720; the ruin filter 116 to 115; the observed shapes 8 to 7); left by
+  name: LOW 3 (the owner's question), 15d, the pool row, the manifest: ITS READER IS SEATED AFTER THE CLOSE'S MERGES.
