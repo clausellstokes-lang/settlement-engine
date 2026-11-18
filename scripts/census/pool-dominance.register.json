@@ -5658,8 +5658,8 @@
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.gov_econ_dependence": {
       "top1": 0.1491,
-      "top5": 0.6662,
-      "reason": "banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
+      "top5": 0.7514,
+      "reason": "re-recorded once by CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18) under the chair's ruling CL22 (vetoable; named for the owner as variety owed): top5 0.6662 -> 0.7514, the higher of the two corpora's readings (0.7429 over 599 draws in 219 towns; 0.7514 over 696 in 242); top1 0.1491 and lines 8 held. The pool is the TENSION rows. Cause: BAR6-PEOPLE 26f510d87 (JOIN-17 point 8, 10d-seat, C66115) gave tension row 3 (\"… has asked for a seat on the council as a condition of the next loan …\") `excludes: [\"seat held\"]`; by an untracked replica matched pair by pair at 6483322cc and this tree, all 39 draws that left line 3 are pairs where `seat held` holds (pairSeatHeld), and all 31 still drawn are pairs where it does not; no line lost. Before: banked at the 2026-11-12 six-tier measure (POOL-GUARD): the instrument re-based by identity on the chair's ruling, not a tightening",
       "lines": 8
     },
     "ledger:npcData:STRESS_ECONOMIC_EFFECTS.mag_crim_market": {
