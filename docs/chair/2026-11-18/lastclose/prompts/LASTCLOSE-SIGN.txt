@@ -4,7 +4,7 @@ THE OWNER'S WORD for this close is in the chat: "Yes to both" (about 19:07 UTC, 
 
 YOUR FIRST ACT AFTER SETUP (`npm ci`, then `npx husky` once: `ls .husky/_` must list `pre-push`): create `docs/chair/2026-11-18/lastclose/LASTCLOSE-SIGN-HANDBACK.md` with its title and your base, commit it and push it to your branch `lane/lastclose-sign-2026-11-18`.
 
-YOUR BASE is the commit <BASE> (`lane/landing-pieces-2026-11-18` at that commit, points 54 to 70). `git checkout -B lane/lastclose-sign-2026-11-18 <BASE>` if your checkout is elsewhere.
+YOUR BASE is the commit cc11c950479e218c08f47462978a1d538d26c3fe (`lane/landing-pieces-2026-11-18` at that commit, points 54 to 70). `git checkout -B lane/lastclose-sign-2026-11-18 cc11c950479e218c08f47462978a1d538d26c3fe` if your checkout is elsewhere.
 
 WHAT YOU READ FIRST, AND NO MORE: on the chair's lane: `docs/chair/2026-11-18/lastclose/BRIEF-LASTCLOSE.md` (whole) and `docs/chair/2026-11-18/close/BRIEF-CLOSE.md` (its C1 to C8, C10); the first close's golden seat's hand-back, `docs/chair/2026-11-18/close/CLOSE-DOORS-2-HANDBACK.md` on your base (its record, its door, its order: copy its form); `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` on your base (points 54 to 70: every declared move of the 525).
 
