@@ -112,6 +112,18 @@ describe('BAR8-K-POWERS: a power\'s own words are true of that power and of the 
     expect(copiedOneBody(clergy).map(({ host }) => String(host.desc)).filter((d) => /^Clergy are present but operate at the margins/.test(d)).length, `${seed}: the general line is still shared`).toBe(1);
   });
 
+  // BAR8-K-WATCH-2 (the chair's BR30 (2), vetoable wording): the occupation's twin said "a second body sent in from outside",
+  // which the record does not hold (the rival is the density law's second claimant on the niche); it reads as its siblings do
+  it('14a (BR30): the occupation\'s rival is a rival bloc, not a second body sent in from outside', () => {
+    const [[seed, town]] = townsOf('14a').filter(([s]) => s === 'r2s-occupied-city-0');
+    const host = powersOf(town).find((f) => /^External administrative body; all significant decisions require approval or reversal\./.test(String(f.desc || '')));
+    expect(host, `${seed}: premise: the occupation's administrative body holds a niche`).toBeTruthy();
+    const rival = powersOf(town).find((f) => f.contestsNiche && f.contestsNiche === host.faction);
+    expect(rival?.faction, `${seed}: premise: the density law mints its rival`).toBe('The Shield Compact');
+    expect(String(rival.desc)).toBe("A rival bloc that wants a say over the decisions made here, and disputes the outside administration's hold on them.");
+    expectAbsentWithAnchor(powersOf(town).map((f) => String(f.desc || '')).join('\n'), 'A second body sent in from outside', 'A rival bloc that wants a say over the decisions made here', `${seed}: the old twin is gone from every card`);
+  });
+
   it('14d: the Elected Reeve answers to a noble only where one stands', () => {
     const towns = townsOf('14d');
     const failures = collectSeedFailures(towns.map(([seed, town]) => ({ seed, town })), ({ seed, town }) => {

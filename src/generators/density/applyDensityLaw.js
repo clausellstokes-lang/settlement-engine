@@ -584,7 +584,7 @@ const RIVAL_DESC_OF_HOST = Object.freeze([
   [/^Organised criminal network controls the black market and several informal revenue streams;/,
     'A rival criminal network that wants a share of the black market and its takings, and contests them with the established one.'],
   [/^External administrative body; all significant decisions require approval or reversal\./,
-    'A second body sent in from outside, which claims a share of the say over every decision made here.'],
+    "A rival bloc that wants a say over the decisions made here, and disputes the outside administration's hold on them."],
   [/^External or crown-appointed body with authority to verify compliance with the conversion order\./,
     'A rival body that wants a say in enforcing the conversion order, and disputes who should decide who complies.'],
 ].map((row) => Object.freeze(/** @type {readonly [RegExp, string]} */ (/** @type {unknown} */ (row)))));
