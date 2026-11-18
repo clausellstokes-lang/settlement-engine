@@ -2738,6 +2738,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "guardPresence",
+            "court or gaol",
             "crisis: any"
           ],
           "text": "The town's record of crimes at {settlement} is short: enforcement far outweighs the criminals, and there is little to write down.",
@@ -2762,6 +2763,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "no guardPresence",
+            "court or gaol",
             "crisis: any"
           ],
           "text": "The town's record of crimes at {settlement} is short: there is little crime to write down, and neighbours settle what there is between themselves.",
@@ -2789,6 +2791,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "guardPresence",
             "no crime wave",
+            "court or gaol",
             "crisis: any"
           ],
           "text": "The town's record of crimes at {settlement} stays short: there is crime, but enforcement keeps it down and keeps it from growing.",
@@ -2802,6 +2805,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "guardPresence",
             "crime wave",
+            "court or gaol",
             "crisis: any"
           ],
           "text": "The town's record of crimes at {settlement} is still short, but it grows longer each season, and enforcement is not keeping pace.",
@@ -2827,6 +2831,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "no guardPresence",
+            "court or gaol",
             "crisis: any"
           ],
           "text": "The town's record of crimes at {settlement} stays short: there is some crime, and neighbours settle most of it between themselves.",
@@ -2853,7 +2858,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "guardPresence"
+            "guardPresence",
+            "court or gaol"
           ],
           "text": "The town's record of crimes at {settlement} is not short, and the next few seasons will decide whether the law or the criminals gain on it.",
           "slots": [
@@ -2947,7 +2953,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "colour"
+            "court or gaol"
           ],
           "text": "The town's record of crimes at {settlement} grows faster than its record of arrests, and people pay for the difference in what they lose.",
           "slots": [
