@@ -289,12 +289,21 @@ const GROUND_KEPT_BY = Object.freeze(/** @type {Record<string, ReadonlyArray<str
 /** The word the imports list holds for a family's material ("Timber", "Salt"); '' where the list has none. @param {string} family */
 export const familyWord = (family) => (family === 'desertSalt' ? RUNS_ON_BOUGHT.salt_works : (Object.prototype.hasOwnProperty.call(IMPORT_WORD, family) ? IMPORT_WORD[family] : ''));
 
-/** Whether a ground gives a family's material (by the yield the Depleted list reads). @param {string} ground @param {string} family */
-export const groundGives = (ground, family) => !!FAMILY_NOUN[family] && Object.prototype.hasOwnProperty.call(GROUND_YIELD, ground) && GROUND_YIELD[ground] === FAMILY_NOUN[family];
+/**
+ * FAULTS-BIRTH FR21 (1) (the sixth chair, 2026-11-18; vetoable by the owner): WOOL AND HIDES TAKE THEIR GROUNDS. The Depleted
+ * list's yields (`GROUND_YIELD`, one good a ground) name no ground of wool or hides, but the record's own words do: the hunting
+ * grounds' shortage word is "Game and hides (local hunting grounds exhausted)" (`resourceSemantics.js`), and the catalogue's
+ * pastures give wool (`RESOURCE_DATA.grazing_land.commodities`: livestock, wool, dairy, animal hides). A ground -> the families
+ * it gives beside its yield. @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+const ALSO_GIVES = Object.freeze({ hunting_grounds: Object.freeze(['hides']), grazing_land: Object.freeze(['wool']), alpine_pasture: Object.freeze(['wool']) });
+/** Whether a ground gives a family's material (by the yield the Depleted list reads, or `ALSO_GIVES`). @param {string} ground @param {string} family */
+export const groundGives = (ground, family) => !!FAMILY_NOUN[family] && ((Object.prototype.hasOwnProperty.call(GROUND_YIELD, ground) && GROUND_YIELD[ground] === FAMILY_NOUN[family])
+  || (Object.prototype.hasOwnProperty.call(ALSO_GIVES, ground) && ALSO_GIVES[ground].includes(family)));
 /**
  * FAULTS-BIRTH (FR8 (c)): THE GROUND OF A FAMILY'S MATERIAL, the first of the Depleted list's yields that gives it (`GROUND_YIELD`,
- * in its order: iron ore the iron deposits, clay the river clay, timber the managed forest); '' where no ground gives it (hides,
- * wool, the luxury trade's goods). @param {string} family @returns {string}
+ * in its order: iron ore the iron deposits, clay the river clay, timber the managed forest; FR21 (1): hides the hunting grounds,
+ * wool the grazing land); '' where no ground gives it (the luxury trade's goods). @param {string} family @returns {string}
  */
 export const groundOfFamily = (family) => Object.keys(GROUND_YIELD).find((g) => groundGives(g, family)) || '';
 

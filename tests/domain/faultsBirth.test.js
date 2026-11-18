@@ -20,7 +20,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import * as HI from '../../src/domain/facts/houseInputAtHand.js';
-import { BIRTH_PICKS, idOfHouse, impliedGroundsOf, seedPicks, sourceStoryOf } from '../../src/domain/facts/supplyStory.js';
+import { BIRTH_PICKS, groundOfFamily, idOfHouse, impliedGroundsOf, seedPicks, sourceStoryOf } from '../../src/domain/facts/supplyStory.js';
 import * as HK from '../../src/domain/facts/houseKinds.js';
 import { birthPicksOn } from '../../src/generators/resourceGenerator.js';
 import { resourceShortageImport } from '../../src/domain/resourceSemantics.js';
@@ -276,15 +276,37 @@ describe('FAULTS-BIRTH (c) · an isolated buyer of a material the land never hel
     expect(told, 'isolated buyers of a material a ground gives (the anchor)').toBeGreaterThanOrEqual(10);
   }, 600_000);
 
-  test('NEGATIVE: hides and wool imply no ground; a town on a connected road implies none for its buyers', () => {
-    const tanner = { ...built(['Tanner (established)', 'Blacksmith'], 'isolated'), resourceAnalysis: { gaps: [
+  // FR21 (1) (2026-11-18): the negative this test held (hides and wool imply no ground) is untrue by the chair's ruling; it is
+  // turned into the positive, and the negative is the luxury trade, whose goods no ground gives
+  test('FR21 (1): an isolated tanner reads its hunting grounds used up, a fuller its pasture; the luxury trade and a connected road imply none', () => {
+    const tanner = { ...built(['Tanner (established)', 'Blacksmith', 'Fuller'], 'isolated'), resourceAnalysis: { gaps: [
       { institution: 'Tanner (established)', chain: 'animal hides', kind: 'missing', impact: 'x' },
+      { institution: 'Fuller', chain: 'wool', kind: 'missing', impact: 'x' },
       { institution: 'Blacksmith', chain: 'iron ore', kind: 'missing', impact: 'x' }] } };
-    expect(HI.housesShortOf(tanner).has('Blacksmith'), 'the constructed smith is short (the anchor)').toBe(true);
-    expect(HI.impliedGroundsOnPage(tanner).used, 'POSITIVE: the isolated smith reads its iron used up; the tanner nothing').toEqual(['iron_deposits']);
+    expect(HI.housesShortOf(tanner).has('Tanner (established)'), 'the constructed tanner is short (the anchor)').toBe(true);
+    expect(HI.impliedGroundsOnPage(tanner).used, 'the smith\'s iron, the tanner\'s hunting grounds, the fuller\'s pasture').toEqual(['grazing_land', 'hunting_grounds', 'iron_deposits']);
+    expect(groundOfFamily('luxury'), 'NEGATIVE: the luxury trade has no ground').toBe('');
     const road = { ...tanner, config: { ...tanner.config, tradeRouteAccess: 'road' } };
-    expect(HI.impliedGroundsOnPage(road).used, 'on a connected road: no ground implied for a buyer').toEqual([]);
+    expect(HI.impliedGroundsOnPage(road).used, 'NEGATIVE: on a connected road: no ground implied for a buyer').toEqual([]);
   });
+
+  test('FR21 (1): every house the page marks short of hides or wool stands beside a used-up ground of its material (towns of the 720 and the 150)', () => {
+    const TOWNS = ['r2r-village-23', 'r2r-town-54', 'r2r-city-45', 'r2r-city-48', 'r2r-city-49', 'r2r-city-51', 'r2r-metropolis-9', 'r2r-metropolis-12',
+      'r2r-metropolis-38', 'r2r-metropolis-44', 'r2s-politically_fractured-town-2', 'r2s-indebted-town-3', 'r2s-mass_migration-town-2', 'bar0-town-calm-rand-29', 'bar0-city-wartime-rand-37'];
+    const GIVES = /** @type {Record<string, string[]>} */ ({ hides: ['hunting_grounds'], wool: ['grazing_land', 'alpine_pasture'] });
+    let seen = 0;
+    expectNoSeedFailures(collectSeedFailures(TOWNS, (seed) => {
+      const s = town(seed);
+      const depleted = new Set([...(s.config?.nearbyResourcesDepleted || []), ...HI.impliedGroundsOnPage(s).used]);
+      for (const i of liveInstitutions(s)) {
+        const m = /Short of (?:livestock or )?(hides|wool)\./.exec(rowMarkText(s, 'house', i) || '');
+        if (!m) continue;
+        seen++;
+        if (!GIVES[m[1]].some((g) => depleted.has(g))) throw new Error(`${i.name}: short of ${m[1]}, no ground of it under Depleted`);
+      }
+    }), 'the hides and wool towns');
+    expect(seen, 'houses short of hides or wool (the anchor)').toBeGreaterThanOrEqual(25);
+  }, 600_000);
 
   test('the three views read the grounds alike in every anchor town', () => {
     expectNoSeedFailures(collectSeedFailures([...RING_TOWNS, ...ISOLATED_TOWNS], (seed) => {
