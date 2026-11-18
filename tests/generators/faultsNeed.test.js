@@ -23,7 +23,7 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { importsAsPrinted, needMetBy, NEED_DEALT_ROWS } from '../../src/domain/display/tradeListDisplay.js';
 import { LUXURY_CLASS, NOT_A_GOOD } from '../../src/data/tradeListDeclarations.js';
-import { NEED_DEALT_ROWS_COPY, NEED_KEYS, LUXURY_LABELS_COPY, NOT_A_GOOD_COPY, goodNeededNotBroughtIn, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
+import { NEED_DEALT_ROWS_COPY, NEED_KEYS, LUXURY_KEYS_COPY, NOT_A_GOOD_COPY, goodNeededNotBroughtIn, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
 import { FACT_DIMENSIONS, atomHolds, declarationAdmits } from '../../src/domain/facts/factVocabulary.js';
 import { variantFactDeclaration } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
@@ -102,7 +102,7 @@ describe('FAULTS-NEED item 0: the need list keeps a need a live house is marked 
     expect(importsAsPrinted(s).needed).toContain('livestock');
     // a house short of ANOTHER good leaves the dealt-in rule standing
     const other = town({ resourceAnalysis: { imports: { critical: ['livestock', 'iron ore'] }, gaps: [{ chain: 'iron ore', institution: 'Dairy farmer', kind: 'missing', impact: 'No iron ore reaches the dairy farmer.' }] } });
-    expect(importsAsPrinted(other).needed).not.toContain('livestock');
+    expectAbsentWithAnchor(importsAsPrinted(other).needed, 'livestock', 'iron ore', 'a house short of another good leaves the row\'s answer standing');
   });
   it('the towns of the sample: no need is dropped by a service row where a live house is marked short of its good; the others stay dropped', () => {
     expectNoSeedFailures(collectSeedFailures(Object.keys(TOWNS), (seed) => {
@@ -138,7 +138,7 @@ describe('FAULTS-NEED item 1: the atom `need not brought in` (FR2) states the pa
   const same = (s) => expect(needListOf(s), 'the leaf\'s list is the page\'s').toEqual(importsAsPrinted(s).needed);
   it('its copied tables are their homes\' own, and its keys are the vocabulary\'s', () => {
     expect([...NOT_A_GOOD_COPY]).toEqual([...NOT_A_GOOD]);
-    expect([...LUXURY_LABELS_COPY]).toEqual(LUXURY_CLASS.map((r) => r.text));
+    expect(LUXURY_KEYS_COPY.map((k) => k.replace(/~/g, ' '))).toEqual(LUXURY_CLASS.map((r) => r.text));
     expect(LUXURY_CLASS.every((r) => r.needs.length === 1 && r.needs[0] === 'tier: ≥ village')).toBe(true);
     expect(NEED_DEALT_ROWS_COPY.map(([g, re]) => [g, String(re)])).toEqual(NEED_DEALT_ROWS.map(([g, re]) => [g, String(re)]));
     expect([...(FACT_DIMENSIONS['need not brought in'].keys || [])]).toEqual([...NEED_KEYS]);
@@ -147,7 +147,7 @@ describe('FAULTS-NEED item 1: the atom `need not brought in` (FR2) states the pa
     const base = town({});
     same(base);
     // the category error leaves; the luxury below its band leaves (a hamlet), stays at a town
-    expect(needListOf(base)).not.toContain('Toll income');
+    expectAbsentWithAnchor(needListOf(base), 'Toll income', 'iron ore', 'a category error leaves the list');
     expect(needListOf(base)).toContain('luxury goods');
     same(town({ tier: 'hamlet' }));
     expectAbsentWithAnchor(needListOf(town({ tier: 'hamlet' })), 'luxury goods', 'iron ore', 'a luxury below its band leaves the list');
@@ -274,7 +274,8 @@ describe('FAULTS-NEED item 4 (12d, as amended): DS-ECO-8 POOR v1 is refused wher
     expect(v1.marks).toEqual(['crisis: any', 'food: ≥ secure', 'no need not brought in: any']);
     expect(v6.angle).toBe(v1.angle);
     expect(v6.marks).toEqual(['crisis: any', 'food: ≥ secure', 'need not brought in: any']);
-    expect(v6.text).not.toMatch(/essential/i);
+    expect(/essential/i.test(v6.text), 'v6 says nothing of every essential').toBe(false);
+    expect(/essential/i.test(v1.text), 'the anchor: v1 does').toBe(true);
     expect(block.pools.POOR.map((/** @type {any} */ v) => v.vid)).toEqual([1, 2, 3, 4, 5, 6]);
   });
   it('the towns: v1 refused and v6 admitted where the list holds a need; the same facts with the list empty, v1 and not v6', () => {

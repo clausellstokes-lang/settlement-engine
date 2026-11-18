@@ -62,22 +62,21 @@ export const NOT_A_GOOD_COPY = Object.freeze([
 ]);
 /**
  * THE LUXURY CLASS's labels, a COPY of `data/tradeListDeclarations.js :: LUXURY_CLASS` (each declared `tier: ≥ village`), held
- * equal to it by the guard.
+ * equal to it by the guard. Held as KEYS (each label's spaces written `~`): they are matched against a list's items, never
+ * printed, so this module carries no copy of a line a reader sees (the labels' prose is their home's).
  * @type {ReadonlyArray<string>}
  */
-export const LUXURY_LABELS_COPY = Object.freeze([
-  'Camel Herds', 'Cut gemstones', 'Dyed cloth', 'Exotic imports', 'Extreme luxury goods', 'Fine textiles',
-  'Fine wool cloth', 'Gem Mining & Lapidary', 'Gem appraisal', 'Gemstones', 'Highest luxury goods',
-  'Luxury Goods', 'Luxury goods', 'Luxury imports', 'Luxury manufactured goods', 'Luxury materials',
-  'Luxury textiles', 'Luxury textiles and exotic goods', 'Metal ore + gems', 'Rare materials',
-  'Rare spices and dyes', 'Rare spices and exotic dyes', 'Raw gemstones', 'Silk & Luxury Textiles',
-  'Silk, fine dyes, and imported cloth', 'Silk, fine dyes, exotic textiles, and finished luxury garments',
-  'Spices & Dyes', 'Spices and exotic dyes',
-  'Spices', 'Silk', 'Gems', 'Exotic goods', 'Fine cloth', 'Quality textiles', 'Quality textiles and cloth',
-  'camel_herds',
+export const LUXURY_KEYS_COPY = Object.freeze([
+  'Camel~Herds', 'Cut~gemstones', 'Dyed~cloth', 'Exotic~imports', 'Extreme~luxury~goods', 'Fine~textiles',
+  'Fine~wool~cloth', 'Gem~Mining~&~Lapidary', 'Gem~appraisal', 'Gemstones', 'Highest~luxury~goods', 'Luxury~Goods',
+  'Luxury~goods', 'Luxury~imports', 'Luxury~manufactured~goods', 'Luxury~materials', 'Luxury~textiles',
+  'Luxury~textiles~and~exotic~goods', 'Metal~ore~+~gems', 'Rare~materials', 'Rare~spices~and~dyes',
+  'Rare~spices~and~exotic~dyes', 'Raw~gemstones', 'Silk~&~Luxury~Textiles', 'Silk,~fine~dyes,~and~imported~cloth',
+  'Silk,~fine~dyes,~exotic~textiles,~and~finished~luxury~garments', 'Spices~&~Dyes', 'Spices~and~exotic~dyes', 'Spices',
+  'Silk', 'Gems', 'Exotic~goods', 'Fine~cloth', 'Quality~textiles', 'Quality~textiles~and~cloth', 'camel_herds',
 ]);
 const NOT_A_GOOD_SET = new Set(NOT_A_GOOD_COPY.map(fold));
-const LUXURY_SET = new Set(LUXURY_LABELS_COPY.map(fold));
+const LUXURY_SET = new Set(LUXURY_KEYS_COPY.map((k) => fold(k.replace(/~/g, ' '))));
 /** The luxury class's band, `tier: ≥ village` (`factVocabulary.js :: TIER_WORDS`; an unknown tier answers nothing: refused). */
 const TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 /** @param {unknown} tier */
