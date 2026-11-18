@@ -20,6 +20,7 @@
 //      elsewhere its twin "Short-term detention until a fine is paid." (the label kept).
 //   8. FR25: the tie "… appointed to judge a case …" and the line "… before a magistrate." are declared on `court sits` as it
 //      reads at the draw: neither prints where the final Legal row has no court; both print where a courthouse sits.
+//      (c) the standing "… keeps enough rights of its own (land, courts, levies) …" strikes "courts" where none sits.
 import { describe, it, expect, beforeAll } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -61,6 +62,7 @@ const SEEDS = Object.freeze([
   'r2r-town-5', 'r2r-town-4', // FR19 item 6: a town hall the stamped flag calls a court; the Legal row names none
   'bar0-town-calm-rand-35', 'r2r-town-1', // FR22 (3) item 7: the Holding cells beside a sitting court, and beside a council's bench
   'bar0-town-calm-rand-30', 'r2s-plague_onset-town-0', 'r2r-town-29', 'bar0-city-wartime-rand-36', // FR25: the court's lines
+  'bar0-metropolis-calm-rand-40', // FR25 (c): the standing's courts beside a courthouse
 ]);
 
 /** @type {Map<string, any>} */
@@ -359,5 +361,33 @@ describe('8 · the court\'s ties print only where a court sits (FR25)', () => {
     const t = BORN.get('r2r-town-29');
     expect(courtHoldersOf(t).length > 0 && courtHoldersOf({ institutions: t.institutions }).length === 0, 'premise: a court by a service only').toBe(true);
     expect(tieLines(t).some((l) => JUDGE.test(l))).toBe(false);
+  });
+});
+
+describe('8 (c) · the standing names courts only where a court sits (FR25 (c))', () => {
+  const WITH = '(land, courts, levies)';
+  const TWIN = '(land, levies)';
+  /** @param {any} t */
+  const standings = (t) => (t?.powerStructure?.factionRelationships || []).map((/** @type {any} */ r) => String(r?.narrative ?? ''));
+  it('every town of the guard: no standing names courts where the final Legal row has none', () => {
+    const failures = collectSeedFailures(SEEDS, (seed) => {
+      const t = BORN.get(seed);
+      if (courtHoldersOf(t).length > 0) return;
+      for (const n of standings(t)) if (n.includes(WITH)) throw new Error(`"${n.slice(0, 90)}" where no court sits`);
+    });
+    expectNoSeedFailures(failures, 'FR25 (c)');
+  });
+  it('POSITIVE: r2s-plague_onset-town-0 ("None") prints the twin, "courts" struck and nothing else changed', () => {
+    const t = BORN.get('r2s-plague_onset-town-0');
+    expect(courtHoldersOf(t).length).toBe(0);
+    const n = standings(t).find((x) => x.includes('keeps enough rights of its own'));
+    expect(n, 'the standing stands').toBeTruthy();
+    expectAbsentWithAnchor(String(n), WITH, TWIN, 'the standing');
+    expect(String(n).replace(TWIN, WITH)).toMatch(/keeps enough rights of its own \(land, courts, levies\) to bargain, not simply obey\.$/);
+  });
+  it('NEGATIVE: beside a courthouse (bar0-metropolis-calm-rand-40) the standing keeps its courts', () => {
+    const t = BORN.get('bar0-metropolis-calm-rand-40');
+    expect(courtHoldersOf({ institutions: t.institutions }).length, 'premise: a courthouse on the roster').toBeGreaterThan(0);
+    expect(standings(t).some((x) => x.includes(WITH))).toBe(true);
   });
 });
