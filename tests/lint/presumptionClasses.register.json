@@ -1432,6 +1432,11 @@
    ["sovereign","none","The overlord shielded its vassal","541e8a46c0519ce0"],
    ["sovereign","none","A vassal quietly backed the other side","f2f370800f833bff"]
   ],
+  "src/domain/display/incomeOrdinaryLines.js": [
+   ["goods","other","Little cloth is made here while the cloth trade is short of what it needs.","68f7f8907313f33a"],
+   ["goods","other","Cloth is woven or finished here.","a051929a6344f5f0"],
+   ["resource","other","Local forest provides timber revenue, and the timber is sawn here.","0855cc21d84e57a4"]
+  ],
   "src/domain/display/institutionVocabulary.js": [
    ["law","none","Ale brewed and sold from a back room, doubling as the gathering place where news and disputes are settled.","0030346f39021634"],
    ["outside","none","A metropolitan cathedral and the seat of the region's highest religious authority, drawing pilgrims from afar.","050454cb74d86a25"],
@@ -2067,13 +2072,10 @@
   ],
   "src/generators/economy/incomeLineSiblings.js": [
    ["goods","other","Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.","3e37b2807cf9474a"],
-   ["goods","other","Little cloth is made here while the cloth trade is short of what it needs.","68f7f8907313f33a"],
-   ["goods","other","Cloth is woven or finished here.","a051929a6344f5f0"],
    ["goods","other","Remedies and preparations are made here, but few, while the herbs and reagents they need run short.","b9b81a3eae356624"],
    ["goods","none","The game and hides the hunters bring in are sold here.","e11a61a3c13eade7"],
    ["goods","other","Local flocks provide raw wool, and cloth is woven or finished here.","f81d8cb52474fc8d"],
    ["outside","one-kind","Timber sourced from more distant forests and resold or processed locally: trade route dependent.","007194ee6261541f"],
-   ["resource","other","Local forest provides timber revenue, and the timber is sawn here.","0855cc21d84e57a4"],
    ["resource","none","What the miners dig is sold here.","1235fdc16bb54be9"],
    ["resource","other","Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.","3e37b2807cf9474a"],
    ["resource","none","Stone is quarried here for the place\\'s own building.","4d901cdad51a51b2"],

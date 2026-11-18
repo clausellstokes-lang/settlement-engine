@@ -179,8 +179,56 @@ export function importsAsPrinted(settlement) {
     arriving,
     // W2-C-LEAVES item 4(b): a need an arriving import already meets UNDER ANOTHER NAME is not a need left unmet
     // (`needMetBy`: "luxury goods" beside "Luxury textiles and exotic goods", "iron ore" beside "Iron").
-    needed: kept.filter((x) => !fromTrade.has(x) && !arriving.some((imp) => needMetBy(x, imp)) && !made.some((m) => needMetBy(x, m))),
+    // BAR8 J-INCOME item 3 (11a.imported): a need a gap row of kind `imported` answers ("Smelter runs on imported iron ore",
+    // the one reader of an input, `facts/houseInputAtHand.js`, through `resourceGenerator.js :: gapRowOf`) is brought in: the
+    // gap rows `crisisStoppedRow.js :: housesOnImportedInput` reads, matched as an import is (`needMetBy`), no second matcher.
+    // BAR8 J-INCOME item 4 (11e.offer, the need list's half): a good a live house on the page deals in (`NEED_DEALT_ROWS`) is
+    // not "needed, and not brought in", save the failed venture's own material (`supplyStory.js :: ventureOnPage`).
+    needed: kept.filter((x) => !fromTrade.has(x) && !arriving.some((imp) => needMetBy(x, imp)) && !made.some((m) => needMetBy(x, m))
+      && !importedByGapRow(settlement).some((g) => needMetBy(x, g)) && !dealtInHere(settlement).some((g) => needMetBy(x, g))),
   };
+}
+
+/**
+ * THE GOODS THE GAP ROWS SAY ARE BOUGHT IN (BAR8 J-INCOME item 3; the sixth chair's BRIEF-BAR8, 2026-11-17): each gap row of
+ * kind `imported` ("<house> runs on imported X"), its good. The rows `crisisStoppedRow.js :: housesOnImportedInput` reads
+ * (read, not changed). Display only.
+ * @param {unknown} settlement @returns {string[]}
+ */
+function importedByGapRow(settlement) {
+  const res = /** @type {{ resourceAnalysis?: { gaps?: unknown } | null } | null | undefined} */ (settlement)?.resourceAnalysis;
+  const gaps = Array.isArray(res?.gaps) ? /** @type {Array<{ kind?: unknown, chain?: unknown, institution?: unknown }>} */ (res.gaps) : [];
+  return gaps.filter((g) => g && g.kind === 'imported' && typeof g.chain === 'string' && g.chain.trim() && typeof g.institution === 'string' && g.institution)
+    .map((g) => String(g.chain));
+}
+
+/**
+ * THE GOODS A HOUSE ON THE PAGE DEALS IN (BAR8 J-INCOME item 4, 11e.offer's need-list half; vetoable by the owner): a service
+ * row the page prints for a live house (the record's `availableServices`, joined by `institution`, as the Services and
+ * Institutions tabs print them) that deals in the good: a fair's livestock auction, a shepherd's livestock management. The
+ * spices' carriers (`CARRIED_GOOD_ROWS`) stay the chain card's. The failed venture's own material is never dealt in here
+ * (a whole trade is not abandoned: BR6; r2r-hamlet-27's shepherd beside its failed venture of livestock is that fault, named).
+ * @type {ReadonlyArray<readonly [string, RegExp]>} */
+const NEED_DEALT_ROWS = Object.freeze([
+  ['livestock', /^livestock (?:auctions?|management)$/i],
+]);
+
+/** @param {unknown} settlement @returns {string[]} the goods a live house's printed service row deals in */
+function dealtInHere(settlement) {
+  const av = /** @type {{ availableServices?: unknown } | null | undefined} */ (settlement)?.availableServices;
+  const rows = Array.isArray(av) ? av : av && typeof av === 'object' ? Object.values(av).flat() : [];
+  if (!rows.length) return [];
+  const live = new Set(liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
+    .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '')).filter(Boolean));
+  const venture = ventureOnPage(/** @type {Parameters<typeof ventureOnPage>[0]} */ (settlement));
+  const ventureFamily = String(venture?.family ?? '').toLowerCase();
+  const out = [];
+  for (const [good, re] of NEED_DEALT_ROWS) {
+    if (ventureFamily === good) continue;
+    if (rows.some((r) => r && typeof r === 'object' && re.test(String(/** @type {{ name?: unknown }} */ (r).name ?? '').trim())
+      && live.has(String(/** @type {{ institution?: unknown }} */ (r).institution ?? '')))) out.push(good);
+  }
+  return out;
 }
 
 /**
@@ -297,6 +345,7 @@ import { RESOURCE_DATA } from '../../data/goods/identity.js';
 import { chainPrintName } from './chainPrintName.js';
 import { chainWorksResource, chainsWorking, WORKING_CHAIN_STATUSES } from '../facts/chainWorking.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { ventureOnPage } from '../facts/supplyStory.js'; // BAR8 J-INCOME item 4: the failed venture's material (read)
 /** The model's own identifiers in the local list (a position and the commodity categories): never a good. */
 const LOCAL_IDENTIFIERS = new Set(['trade access', 'maritime access', 'luxury', 'craft', 'textile', 'herbs', 'fuel', 'precious metal']);
 /** Each resource commodity (spaced, lower case) → the resource keys that yield it (`RESOURCE_DATA[k].commodities`). */
@@ -547,7 +596,8 @@ const MADE_GOOD_ROWS = Object.freeze([
   [['weapons training'], /\bwatch\b|garrison|barracks|militia|\bguards?\b|mercenar|free company|fencing/],
   [['armed escort'], /mercenar|free company|adventurer|veteran|caravan guard/],
   [['mercenary hire', 'training services'], /mercenar|free company/],
-  [['monster hunting services', 'dungeon clearance'], /adventurer|veteran|monster hunt/],
+  // BAR8 J-INCOME item 5 (K's 15c): a veteran's lodge offers armed escort only (`data/institutionServices.js`): it hunts no monster
+  [['monster hunting services', 'dungeon clearance'], /adventurer|monster hunt/],
   [['legal services'], /\bcourthouse|\bcourt buildings?\b|town hall|city hall|\bnotar|lawyer|advocate/],
   [['strategic control', 'trade access fees', 'transit trade profit'], /\btoll|customs|garrison|caravaneer|coaching inn|citadel/],
   // the underworld's trades

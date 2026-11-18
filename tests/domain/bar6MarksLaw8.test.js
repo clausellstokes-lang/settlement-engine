@@ -64,9 +64,10 @@ const town = (/** @type {string} */ seed) => { if (!towns.has(seed)) towns.set(s
 // r2r-metropolis-19 stand beside "Game and hides (local hunting grounds exhausted)" on the imports, the butchers' stock
 // (the reader's mend, `houseInputAtHand.js :: TRADE_STOCK_WORDS`): they are at work, and the rule reads the need line
 // "Livestock for meat and draft" alone.
-const LEFT = [
-  'r2r-metropolis-19 · 8a.input · Butchers (3-8)',
-];
+// STRUCK BY ITS OWN RULE (BAR8 J-INCOME item 4, 2026-11-18): 'r2r-metropolis-19 · 8a.input · Butchers (3-8)' is cured: the need
+// list no longer names "Livestock for meat and draft" where a live house's printed service row deals in livestock (the town's
+// fair, "Livestock auctions": `tradeListDisplay.js :: importsAsPrinted().needed`, `NEED_DEALT_ROWS`), so no need line marks it.
+const LEFT = [];
 
 describe('LAW 8\'s mark rules (BAR6-MARKS): the mark leaf reads every worst state', () => {
   test('(a) THE ZERO over the census\'s 720: every instance is cured, or one of the houses left by name', () => {
