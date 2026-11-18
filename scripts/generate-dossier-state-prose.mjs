@@ -560,6 +560,139 @@ const CAUSAL_HEADER = /^###\s+(JF-[A-Za-z0-9_-]+)\b/;
 /** @param {string} text @returns {string} */
 const sha256 = (text) => createHash('sha256').update(text).digest('hex');
 
+// ═══════════════════════════════════════════════════════════════════════════════════
+// ⭐⭐ THE NUMBERING GUARD, BY TEXT (FR7, the chair's CL19 debt; FAULTS-DESKS, 2026-11-18)
+//
+// A vid is the annex ROW NUMBER (`vidsOf`, ARCH §2.6): it names a variant across a rewrite and the draw is
+// keyed by it. `vidsOf` refuses a numbering that runs backwards or repeats inside one run, but `projectBlocks`
+// hands it no frozen vids, and a frozen-vids check compares POSITIONS: a line INSERTED before older ones, every
+// later row renumbered, passes it. That is how BAR6-DEFDESK (be3585040) renumbered 14 lines of seven DS-DEF pools
+// unrefused (the shift register's `vids` row; that row's digest stands as it is, this guard re-takes nothing).
+//
+// So the projection compares BY TEXT against THE BASELINE: the state leaves AS COMMITTED, read off disk before
+// this run writes (the last projection; the numbering as it stands, the fourteen renumbered lines included).
+// No second stored list of words: the leaf is the list. Per pool of the baseline it refuses:
+//   RENUMBERED  a text that stood under vid a now stands under another vid b, and no longer under a;
+//   RE-USED     a vid now names a text other than its own while its own text stands under another vid, or
+//               while the text it now names stood under another vid (the number handed to another line);
+//   DROPPED     a vid of the baseline (or a whole pool) is gone: nothing is ever removed (NEVER TRIM, §2.6);
+//   REWORDED    a vid's words changed in place (its old text gone, its new text never numbered in the pool).
+//               The draw is keyed by the number, so a correction in place moves no draw, and it passes ONLY
+//               through its row of WORD_CORRECTIONS below (the pool, the number, the old and the new text's
+//               sha256, the ruling): never by default.
+// A new line at the NEXT number and a new pool pass. It runs BEFORE the projection's other refusals, so its
+// message is the one a renumbering meets. ⛔ FAIL-CLOSED ON ABSENCE: a desk leaf that cannot be read is no
+// baseline, and the run refuses.
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * THE NAMED ALLOWANCE: each correction of a line's words in place, by the ruling that made it. A row is inert
+ * once its correction is projected (the baseline then holds the new text). Hashes: sha256 of the text as the
+ * leaf holds it (hex).
+ * @type {ReadonlyArray<{pool: string, vid: number, from: string, to: string, ruling: string}>}
+ */
+const WORD_CORRECTIONS = Object.freeze([
+]);
+
+async function readNumberingBaseline() {
+  /** @type {Map<string, Array<{vid: number, text: string}>>} */
+  const byPool = new Map();
+  for (const desk of DESKS) {
+    const leafPath = path.join(STATE_OUT_DIR, `${desk.file}.generated.js`);
+    let leaf;
+    try {
+      leaf = (await import(url.pathToFileURL(leafPath).href))[desk.constant];
+    } catch (e) {
+      throw new Error(`the numbering guard (FR7): ${path.relative(ROOT, leafPath)} cannot be read as the`
+        + ` baseline (${e.message}); restore it from the commit before projecting.`, { cause: e });
+    }
+    if (!leaf || typeof leaf !== 'object') {
+      throw new Error(`the numbering guard (FR7): ${path.relative(ROOT, leafPath)} exports no ${desk.constant}.`);
+    }
+    for (const [blockId, block] of Object.entries(leaf)) {
+      for (const [key, variants] of Object.entries(block.pools || {})) {
+        byPool.set(`${blockId} :: ${key}`, variants.map((v) => ({ vid: v.vid, text: v.text })));
+      }
+    }
+  }
+  return byPool;
+}
+
+/**
+ * @param {string} label `${block} :: ${pool}`
+ * @param {ReadonlyArray<{vid: number, text: string}>} before the baseline's rows
+ * @param {ReadonlyArray<{vid: number, text: string}>} after this run's rows
+ * @returns {string[]} the refusals, one a line
+ */
+function numberingRefusals(label, before, after) {
+  /** @param {ReadonlyArray<{vid: number, text: string}>} rows */
+  const index = (rows) => {
+    const textOf = new Map(rows.map((r) => [r.vid, r.text]));
+    /** @type {Map<string, number[]>} */
+    const vidsOfText = new Map();
+    for (const r of rows) vidsOfText.set(r.text, [...(vidsOfText.get(r.text) || []), r.vid]);
+    return { textOf, vidsOfText };
+  };
+  const was = index(before);
+  const now = index(after);
+  const quote = (t) => `"${t.length > 72 ? `${t.slice(0, 69)}...` : t}"`;
+  const out = [];
+  for (const { vid, text } of before) {
+    if (now.textOf.get(vid) === text) continue;
+    if (!now.textOf.has(vid)) out.push(`${label}: DROPPED: v${vid} ${quote(text)} stood at the baseline and is gone`);
+    for (const moved of (now.vidsOfText.get(text) || []).filter((v) => !(was.vidsOfText.get(text) || []).includes(v))) {
+      out.push(`${label}: RENUMBERED: the text ${quote(text)} stood at v${vid} at the baseline and would take v${moved}`);
+    }
+  }
+  for (const { vid, text } of after) {
+    const old = was.textOf.get(vid);
+    if (old === undefined || old === text) continue;
+    const stoodAt = (was.vidsOfText.get(text) || []).filter((v) => v !== vid);
+    const oldStandsAt = (now.vidsOfText.get(old) || []).filter((v) => v !== vid);
+    if (stoodAt.length || oldStandsAt.length) {
+      out.push(`${label}: RE-USED: v${vid} named ${quote(old)} at the baseline and would name ${quote(text)}`
+        + (stoodAt.length ? `, the baseline's v${stoodAt.join(', v')}` : '')
+        + (oldStandsAt.length ? `; its own text would stand at v${oldStandsAt.join(', v')}` : ''));
+      continue;
+    }
+    const from = sha256(old);
+    const to = sha256(text);
+    const allowed = WORD_CORRECTIONS.some((r) => r.pool === label && r.vid === vid && r.from === from && r.to === to && r.ruling);
+    if (!allowed) {
+      out.push(`${label}: REWORDED: v${vid} would change its words in place, from ${quote(old)} to ${quote(text)},`
+        + ` with no row of WORD_CORRECTIONS ({ pool: '${label}', vid: ${vid}, from: '${from}', to: '${to}', ruling: <the ruling> })`);
+    }
+  }
+  return out;
+}
+
+{
+  // The annex parsed once more, here, so the guard answers before the census interlock and every other refusal
+  // (the projection's own parse below is the one it emits from; the two read the same bytes).
+  const stateBlocks = parseAnnex(stateSrc, STATE_HEADER, 'DOSSIER_STATE', { regionEnd: CONNECTIVES_HEADING_RE, closedMarks: true });
+  const baseline = await readNumberingBaseline();
+  /** @type {Map<string, Array<{vid: number, text: string}>>} */
+  const projected = new Map();
+  for (const b of stateBlocks) {
+    for (const p of b.pools) projected.set(`${b.id} :: ${p.key}`, p.variants.map((v) => ({ vid: v.index, text: v.text })));
+  }
+  const refusals = [];
+  for (const [label, before] of baseline) {
+    const after = projected.get(label);
+    if (!after) {
+      refusals.push(`${label}: DROPPED: the pool stood at the baseline (v${before.map((r) => r.vid).join(', v')}) and is gone`);
+      continue;
+    }
+    refusals.push(...numberingRefusals(label, before, after));
+  }
+  if (refusals.length) {
+    throw new Error(`the numbering guard (FR7) refuses ${refusals.length} move(s) against the baseline (the state`
+      + ' leaves as committed), compared by text:\n  ' + refusals.join('\n  ')
+      + '\n  A new line takes the NEXT number; nothing is renumbered, no number is re-used or dropped, and words'
+      + ' change in place only through their row of WORD_CORRECTIONS (§2.6; the shift register\'s `vids` row).');
+  }
+}
+
 /**
  * ⭐⭐ THE SHA INTERLOCK (ARCH §3.5, §12 row 4). The census records the sha256 of every file it
  * was taken over; if one has moved since, the census's reading of what a pool tests is a
