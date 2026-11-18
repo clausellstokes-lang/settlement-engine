@@ -594,6 +594,9 @@ const sha256 = (text) => createHash('sha256').update(text).digest('hex');
 const WORD_CORRECTIONS = Object.freeze([
   // FR18 (1), the chair's ruling of 2026-11-18: DS-DEF-3 Unsafe v4's words (the twin of b86d8122d), corrected in place
   { pool: 'DS-DEF-3 :: Unsafe', vid: 4, from: '4bad941347dd4b9259d2aae2873bb678fd6f48a7ddf73bf3a28411dd9f6033d2', to: '214b6eabc4403e1c31abbc03fe102943eb6136d844aaa15445777c78b4aff6a3', ruling: 'FR18' },
+  // LR6 (1), the chair's ruling of 2026-11-18 (after READ-LAST): DS-DEF-3 Moderate v9 (LAST-VARIETY's line) said the safety
+  // profile's own sentence beside it again ("what trouble there is, everyone soon hears of"); its words corrected in place
+  { pool: 'DS-DEF-3 :: Moderate', vid: 9, from: '97ee2d2bfed958aed1424ef8ae564f85f32108a781cb3ac9a0089b02d637e338', to: 'e9b1763b01cb54eb3f5380b090a6ad4d92a016d8821e61ff2a97ee1c48ac0e74', ruling: 'LR6' },
 ]);
 
 async function readNumberingBaseline() {

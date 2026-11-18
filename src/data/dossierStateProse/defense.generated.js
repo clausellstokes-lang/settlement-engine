@@ -2995,7 +2995,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           "marks": [
             "tier: ≤ village"
           ],
-          "text": "Whatever trouble {settlement} has is soon known to everyone in it.",
+          "text": "At {settlement} old wrongs are remembered for years, and some are still being argued over.",
           "slots": [
             "settlement"
           ],

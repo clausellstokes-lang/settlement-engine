@@ -3120,7 +3120,7 @@ reading rather than a settled one.
 6. `[ledger · no guardPresence]` {settlement} pays nobody to keep the peace, and trouble here is settled among its own people.
 7. `[visitor · guardPresence · law: > collapsed]` {settlement} has people who keep order, and order holds about as well as anyone here expects.
 8. `[visitor · guardPresence · law: = collapsed]` {settlement} has people meant to keep order, but order holds only where they are standing.
-9. `[street · tier: ≤ village]` Whatever trouble {settlement} has is soon known to everyone in it.
+9. `[street · tier: ≤ village]` At {settlement} old wrongs are remembered for years, and some are still being argued over.
 10. `[ledger · no court or gaol]` With no gaol at {settlement}, nobody who does wrong here can be locked away; most go on living beside the people they wronged.
 
 **`Unsafe`**
