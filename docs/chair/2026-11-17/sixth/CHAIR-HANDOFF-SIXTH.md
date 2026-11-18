@@ -125,6 +125,10 @@ should be paused or archived by the owner's hand.
   written) the new thirty-town read is run BEFORE the deploy and the rest stays after; (R1) only the read is after
   the deploy and every built fix lands before it. THE CHAIR ASKED WHICH, in one line ("read" or "fixes"), and changed
   nothing until the answer: the close goes on under both.
+- **2026-11-18, 05:13:00 UTC (the owner's answer to the chair's one question; IT REPLACES "after this merge one, push
+  and deploy before continuing" of 02:43:57):** "no everythign but the new 30 reads is predeploy. the reads and what
+  follows is post deploy". THE ORDER OF WORK IS NOW: EVERYTHING BUT THE NEXT READ OF THIRTY LANDS BEFORE THE DEPLOY;
+  THE READ AND WHAT FOLLOWS IT COME AFTER. Pull request #75 stays a draft until then.
 
 ## 2. What changed since the fifth chair's last state (13:54 UTC), read from origin
 
@@ -2114,3 +2118,22 @@ should be paused or archived by the owner's hand.
   (section 1 holds both readings). Under R2 a PREP seat builds the eighth read's packets from the close's final tree
   (the seventh's tools: `lane/read7-prep-2026-11-17`) before the owner deploys; under R1 the five built pieces are
   read and landed before the deploy and the golden is signed once, after them. NEITHER IS STARTED.
+- 05:14 UTC, 2026-11-18 · **THE ORDER OF WORK CHANGED BY THE OWNER'S WORD OF 05:13:00 UTC** (section 1): everything but the
+  next read of thirty is BEFORE the deploy. THE CHAIR'S PLAN UNDER IT, told to the owner in the same turn (no time
+  promised): (1) THE CLOSE THAT IS RUNNING IS FINISHED (a green base makes every later landing's net exact; the
+  golden is signed under the owner's yes of 03:03:46 as planned); (2) THE FIVE BUILT PIECES LAND, each after its
+  reader, on the closed line (J-INCOME-2 with PDF-2b; MARKS-2; K-WATCH and K-POWERS with K-WATCH-2; K-PEOPLE with
+  PEOPLE-2; DESKS-ECO and DESKS-DEF with DESKS-2): READERS ARE SEATED NOW, while the close finishes; (3) THE KNOWN
+  FAULTS NOBODY HAS BUILT are built (the fish lines left; the fair's luxuries; r2r-hamlet-27's birth fault; the
+  brewer's secret; the two granary lines; the "Prison only" desk line; the supply rule's leftovers; the "court or
+  gaol" form; the "trade at work" fact under a siege; the butchers); (4) THE DESERT COAL SLOPE (the site deriver's
+  arm) is cured: the chair counts it in, a fault on a page; (5) THE CHECKING TOOLS ARE REPAIRED (the vids guard
+  armed; the matcher of the name slot and the bare verb; the two dead reads; the validator; the probe's wait for
+  the lazy panel; the recorded rows given declarations so they leave); (6) A LAST CLOSE (its golden signing needs
+  the owner's yes at that hour), a whole check, CI, and the pull request made ready. AFTER THE DEPLOY: the next read
+  and what follows. THE CHAIR'S CALLS ON SCOPE, told to the owner: the worker bundle's size and the slow ratchet arm
+  STAY TABLED (code clean-up, by the owner's standing word); sentences written only for variety come LAST (no new
+  text until the fixes are done). THE CHAIR'S CALL ON PEOPLE-2's STOP (under the deferral of 04:39:24; the owner
+  told, a "no" reverses it): ALLOWED: no stored handler is rewritten (0 of 568); only a re-deal after the party
+  removes a handler and a corruption event follows can come out otherwise (9 of 208 constructed cases), and a v2
+  record's first deal (1 of 38): the difference is the cure of the swap.
