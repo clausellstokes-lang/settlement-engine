@@ -2370,3 +2370,21 @@ export const TITLE_LINE_DECLARATIONS = Object.freeze({
     'Practical, with the red hands of someone who works hot vats all day.': Object.freeze({ needs: Object.freeze(['institution: tavern']) }),
   }),
 });
+
+/**
+ * FAULTS-PEOPLE (the fishmonger's talk; BRIEF-FAULTS ruling FR5, 2026-11-18; vetoable by the owner, on the veto list as a
+ * new line): A TWIN OF A ROW, keyed by the row's impression. Where the row's declaration refuses it, the row keeps its slot
+ * (its impression and its disposition) and prints the twin's `behaviour` in place of its own: no fourth row, no next row,
+ * no draw (`people/poolMap.js :: settleTitleLines`). The master fishmonger's welcoming row talks of the boats and the catch;
+ * where no catch is landed in the town (the fish is bought in, or none comes: `trade at work: fish taken here` false, the
+ * fish story's own fact, answered at the settling step from the roster and the grounds), it talks of what fish can be had.
+ * @type {Readonly<{ presentation: Readonly<Record<string, Readonly<{ needs?: readonly string[], excludes?: readonly string[], behaviour: string }>>> }>}
+ */
+export const TITLE_LINE_TWINS = Object.freeze({
+  presentation: Object.freeze({
+    'Cheerful in the cold and the stink of the market. Knows every regular by name and by order.': Object.freeze({
+      needs: Object.freeze(['trade at work: fish taken here']),
+      behaviour: 'Talks about the price of fish, where any can be had and who has been in today; a good ear for news.',
+    }),
+  }),
+});
