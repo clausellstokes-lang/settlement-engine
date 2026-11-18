@@ -295,8 +295,9 @@ export function serviceRowDependence(settlement, row) {
     ? SERVICE_FREE_OF_HOUSE[id][name] : NONE;
   const inherited = houseDeps.filter((d) => !own.includes(d) && !freeOf.includes(d));
   const deps = inherited.length ? [...own, ...inherited] : own;
-  // S1 (i): a row that lives on its house's input, where that input comes in by trade, under a siege
-  return deps.includes(INPUT) && onImportedInputUnderSiege(settlement, house) ? [...deps, IMPORTED_INPUT] : deps;
+  // S1 (i): a row that lives on its house's input, where that input comes in by trade, under a siege (BAR8 MARKS-2: or on a
+  // house whose input the siege's reading of the imports alone declares, `boughtByNameOnly`)
+  return (deps.includes(INPUT) || boughtByNameOnly(house)) && onImportedInputUnderSiege(settlement, house) ? [...deps, IMPORTED_INPUT] : deps;
 }
 
 /** Each record's houses the record says run on an imported input, read once a record. @type {WeakMap<object, ReadonlySet<string>>} */
@@ -320,7 +321,7 @@ export function housesOnImportedInput(settlement) {
     if (!house || typeof house.name !== 'string' || isCustom(house)) continue;
     const id = typeof house.catalogId === 'string' && house.catalogId ? house.catalogId : catalogIdForName(house.name);
     const good = id && Object.prototype.hasOwnProperty.call(INPUT_IMPORTED_AS, id) ? INPUT_IMPORTED_AS[id] : null;
-    if (good && imports.some((x) => new RegExp(`\\b${good}\\b`).test(x))) out.add(house.name);
+    if (good && imports.some((x) => new RegExp(`\\b(?:${good})\\b`).test(x))) out.add(house.name); // BAR8 MARKS-2: a value of several words is any one of them
   }
   // BAR6-MARKS (8a.input, fact (a)): a house whose trade is a good no gap speaks of, which the imports bring
   for (const [house, want] of housesWantingTradeInput(settlement)) if (want.reach === 'imported') out.add(house);
@@ -335,6 +336,19 @@ export function housesOnImportedInput(settlement) {
  */
 function onImportedInputUnderSiege(settlement, house) {
   return typeof house?.name === 'string' && housesOnImportedInput(settlement).has(house.name) && stoppingCrisesOf(settlement).includes('under_siege');
+}
+
+/**
+ * BAR8 MARKS-2 items 1 and 2 (J's 11e.siegeBought, K's 12a; the sixth chair's BRIEF-BAR8, 2026-11-17; vetoable by the owner):
+ * A HOUSE WHOSE INPUT ONLY THE IMPORTS' OWN NAME DECLARES. The dyer, the furrier's district, the river boatyard and the mint
+ * live on nothing a crisis stops (`HOUSE_DEPENDENCE`: `NONE`), but they work a material (`INPUT_IMPORTED_AS`): where the
+ * imports bring it by name and a siege is in force, they work what they hold and nothing more comes in, as the smelter beside
+ * them ("Curtailed by the siege."), and their rows with them. Their table row stays `NONE`, so no short reading opens on them.
+ * @param {{ catalogId?: unknown, name?: unknown } | null | undefined} inst @returns {boolean}
+ */
+function boughtByNameOnly(inst) {
+  const id = typeof inst?.catalogId === 'string' && inst.catalogId ? inst.catalogId : catalogIdForName(typeof inst?.name === 'string' ? inst.name : null);
+  return !!id && Object.prototype.hasOwnProperty.call(INPUT_IMPORTED_AS, id) && !houseDependenceOf(/** @type {{ catalogId?: unknown, name?: unknown }} */ (inst)).includes(INPUT);
 }
 
 /* What a house lives on, by its catalogue id: `houseDependenceOf`, moved VERBATIM to the data table's own file
@@ -354,8 +368,9 @@ const CARD_WORKING = new Set(['running', 'operational', 'entrepot']);
  */
 export function houseDependenceIn(settlement, inst) {
   const deps = gatesWorkIn(settlement, inst);
-  // S1 (i): a house on its input, where that input comes in by trade, under a siege
-  if (deps.includes(INPUT) && onImportedInputUnderSiege(settlement, inst)) return [...deps, IMPORTED_INPUT];
+  // S1 (i): a house on its input, where that input comes in by trade, under a siege (BAR8 MARKS-2: or a house whose input
+  // only the imports' own name declares, `boughtByNameOnly`)
+  if ((deps.includes(INPUT) || boughtByNameOnly(inst)) && onImportedInputUnderSiege(settlement, inst)) return [...deps, IMPORTED_INPUT];
   // LEFT-MARKS M7 (RULING BR11, the sixth chair, 2026-11-17; vetoable by the owner): A HOUSE WHOSE MATERIAL IS THE TOWN'S OWN
   // BY A PROVEN GROUND reads under a siege as the town's own land reads (SV8: curtailed, not stopped): its input is the land
   // the town still works, `field work`. The ground a house proves and the story leaves there (`impliedGroundsOnPage(s).there`)

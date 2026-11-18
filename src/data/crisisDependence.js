@@ -1580,6 +1580,19 @@ export const INPUT_IMPORTED_AS = Object.freeze({
   "apothecary": 'medicinal herbs',
   "apothecary_district": 'medicinal herbs',
   "apothecary_established": 'medicinal herbs',
+  // BAR8 MARKS-2 items 1 and 2 (J's 11e.siegeBought, K's 12a; the sixth chair's BRIEF-BAR8, 2026-11-17; vetoable by the owner):
+  // under a siege the dyer's wool, the furrier's pelts and hides, the river boatyard's timber and the mint's bullion, where the
+  // imports bring them by name ("Wool", "Raw hides and animal products", "Timber", "Precious metals (local gold and silver veins
+  // exhausted)"), are cut as the smelter's ore is: "Curtailed by the siege." (the furrier's district is its furs chain's one
+  // house, the chain "Stopped by the siege."). These four houses stay `NONE` in `HOUSE_DEPENDENCE`: the siege's reading of the
+  // import is their one dependence (`crisisStoppedRow.js :: houseDependenceIn`), and no short mark reads them (a dyer is no
+  // house of a ground). A value of several words is any one of them ("a|b"). The tailors sew cloth, and wool is not their
+  // input: not read.
+  "dyer": 'wool',
+  "furrier_s_district": 'hides|furs|pelts',
+  "river_boatyard": 'timber|lumber',
+  "mint": 'precious metals|bullion',
+  "mint_official": 'precious metals|bullion',
 });
 
 /**
