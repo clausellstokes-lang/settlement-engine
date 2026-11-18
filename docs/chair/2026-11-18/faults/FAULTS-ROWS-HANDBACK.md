@@ -296,10 +296,10 @@ THE CORRECTIONS (13: moves in towns whose move is not an emergent crisis's twin)
   draw the twin's `mercenary` was unanswered (no force yet), so the original was kept; on the final record the force stands and
   the twin is admitted. Forced crises (bar0-city-under_siege+famine-rand-28, -30, bar0-city-wartime-rand-29, -35,
   r2s-under_siege-city-1), emergent wartime or occupation (r2r-city-2111, -2147, -2175) and none (r2r-city-2159, -2191).
-- r2r-town-2060 Fish market: "the morning's catch" () in a town with no navigable water on the final record
+- r2r-town-2060 Fish market: "the morning's catch" (`navigable`) in a town with no navigable water on the final record
   (water: none) → the inland twin (salted, smoked and dried fish by cart).
-- r2r-town-2147 Charcoal burner: "Kiln crews in the surrounding woodland" () in a desert → its twin.
-- r2r-town-2156 Customs house: "…via the port or main roads" () with no docks → "…by the main roads".
+- r2r-town-2147 Charcoal burner: "Kiln crews in the surrounding woodland" (`terrain: forest`) in a desert → its twin.
+- r2r-town-2156 Customs house: "…via the port or main roads" (`institution: docks`) with no docks → "…by the main roads".
 NO MOVE IS UNEXPLAINED; nothing stopped.
 
 (b) THE 525: 0 of 525 move (c49bd8a16 against fed4d9af8's tree, the golden's own procedure; no reference configuration rolls an
