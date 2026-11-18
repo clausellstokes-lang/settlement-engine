@@ -217,12 +217,15 @@ function cfgFor(seed) {
 /** 13d's towns (the thirty's control C16222 first; DESKS-DEF's and DESKS-2's), and towns that keep a court or a gaol */
 const NEITHER = ['bar0-hamlet-calm-rand-45', 'bar0-hamlet-calm-rand-29', 'bar0-thorp-calm-rand-33', 'bar0-thorp-calm-rand-35', 'bar0-thorp-calm-rand-41',
   'r2r-hamlet-55', 'r2r-thorp-28', 'r2r-village-19', 'r2r-village-6', 'r2r-town-4', 'r2r-town-33'];
+/** the Unsafe twin's three towns (no watch, no court, no gaol), and two Unsafe cities that keep a watch and a court */
+const UNSAFE_EMPTY = ['bar0-hamlet-calm-rand-27', 'bar0-hamlet-calm-rand-29', 'r2r-thorp-30'];
+const UNSAFE_KEPT = ['r2r-city-0', 'r2r-city-41'];
 const OTHERS = ['bar0-town-calm-rand-30', 'bar0-town-calm-rand-46', 'bar0-town-occupied-rand-47', 'bar0-city-wartime-rand-32', 'r2r-town-5', 'r2r-village-3'];
 
 /** @type {Map<string, any>} */ const towns = new Map();
 beforeAll(async () => {
   await loadGenerationLawPayloads();
-  for (const seed of [...NEITHER, ...OTHERS]) towns.set(seed, generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} }));
+  for (const seed of new Set([...NEITHER, ...OTHERS, ...UNSAFE_EMPTY, ...UNSAFE_KEPT])) towns.set(seed, generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} }));
 }, 300_000);
 
 const legalRow = (/** @type {any} */ s) => deriveSupportingCapabilities(s).find((r) => r.label === 'Legal Infrastructure')?.status;
@@ -271,5 +274,44 @@ describe('13d (FR6): `court or gaol`, and the record-of-crimes lines that presum
       expect(declarationAdmits(decl, over(true)).refused, `${pool} v${v.vid} where one stands`).not.toContain('court or gaol');
     });
     expectNoSeedFailures(failures, 'the atom refuses each line exactly where it is false');
+  });
+});
+
+// ─── the Unsafe twin (the chair's word of 09:11 UTC): v4, at the pool's next number ─────────────────────────────────────
+
+describe('13d (FR6): the Unsafe pool\'s twin `[ledger · no court or gaol · no watch]` where its record line was false', () => {
+  const unsafe = DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-3'].pools.Unsafe;
+  const twin = unsafe.find((/** @type {any} */ v) => v.vid === 4);
+  const filled = (/** @type {any} */ s) => String(twin?.text).replace('{settlement}', s.name);
+
+  it('the twin stands at v4, the NEXT number, and declares what it presumes', () => {
+    expect(unsafe.map((/** @type {any} */ v) => v.vid)).toEqual([1, 2, 3, 4]);
+    expect(twin?.marks).toEqual(['no court or gaol', 'no watch']);
+  });
+
+  it('it prints in the three towns where the pool spoke no line, on the record, its public projection and the share veil', () => {
+    const failures = collectSeedFailures(UNSAFE_EMPTY, (seed) => {
+      const s = towns.get(seed);
+      expect(s.economicState?.safetyProfile?.safetyLabel, seed).toBe('Unsafe');
+      for (const [form, r] of forms(s)) expect(defenseStateProse(r, { seed })?.publicOrder?.beside, `${seed} · ${form}`).toBe(filled(s));
+    });
+    expectNoSeedFailures(failures, 'the Unsafe twin prints where no watch, no court and no gaol stand');
+  });
+
+  it('NEGATIVE: an Unsafe town with a watch and a court does not print it, and each premise alone refuses it', () => {
+    const failures = collectSeedFailures(UNSAFE_KEPT, (seed) => {
+      const s = towns.get(seed);
+      expect(s.economicState?.safetyProfile?.safetyLabel, seed).toBe('Unsafe');
+      const line = defenseStateProse(s, { seed })?.publicOrder?.beside;
+      expect(typeof line, seed).toBe('string');
+      expect(line, seed).not.toBe(filled(s));
+    });
+    expectNoSeedFailures(failures, 'the twin stays out where a watch or a court stands');
+    const base = factsOf(towns.get('bar0-hamlet-calm-rand-27'));
+    const over = (/** @type {Record<string, unknown>} */ o) => { const f = Object.create(base); for (const [k, v] of Object.entries(o)) Object.defineProperty(f, k, { value: v }); return f; };
+    const decl = variantFactDeclaration(twin);
+    expect(declarationAdmits(decl, base).admitted).toBe(true);
+    expect(declarationAdmits(decl, over({ courtOrGaol: true })).refused).toEqual(['no court or gaol']);
+    expect(declarationAdmits(decl, over({ defence: { ...base.defence, watch: true } })).refused).toEqual(['no watch']);
   });
 });
