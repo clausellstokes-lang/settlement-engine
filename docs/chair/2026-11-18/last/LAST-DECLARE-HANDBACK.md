@@ -1,12 +1,13 @@
 # LAST-DECLARE hand-back (seat LAST-DECLARE, 2026-11-18)
 
 Base: `b014a7bf3` (`lane/landing-pieces-2026-11-18`: the five pieces and the faults round landed, points 54 to 65).
-Branch: `lane/last-declare-2026-11-18`. Commits: e8d7c850f (item 1, ten rows and two keyed), a3e7c0776 (item 1, six rows),
+Branch: `lane/last-declare-2026-11-18`. Commits: e8d7c850f and a3e7c0776 (item 1), d96b9565c (the guard; item 3's patch), 5df57eb26 (item 2), then
 the guard and item 3's patch, then this hand-back. Model Opus 5.5, one builder, no sub-agents.
 
-**In one line:** 18 of the 20 rows leave the register by declaration, byte-equal everywhere; 2 are STOPPED (the walker
-reads "garrison work" as a garrison); item 2 cures all 12 false towns of the 900 but also moves 6 true ones (STOPPED,
-not committed); item 3 has a route that needs no `vite.config.js` change (measured, as a patch, not applied).
+**In one line:** 18 of the 20 rows leave the register by declaration, byte-equal everywhere. The other 2 stay recorded
+by the chair's ruling LR1 (the walker reads "garrison work" as a garrison). Item 2 landed under LR3: it cures all 12
+false towns of the 900 and all 3 of the 525, and the replacement is true in the 6 towns where a true line was passed
+over. Item 3 has a route that needs no `vite.config.js` change (measured, kept as a patch, not applied).
 
 ## The populations (each born at the base and at every commit; the tools are in scratch)
 
@@ -62,7 +63,7 @@ and every place it prints is proved equal below.
   resolves, so those rows went stale in the same commit. The 5 fresh hits and 1 fresh strip `--check` reports stand at
   the base too, byte-for-byte (not mine; named, not chased).
 
-### STOPPED: 2 of the 20 (sent to the chair)
+### Left by the chair's ruling LR1: 2 of the 20
 
 `garrison` on the hiring office's siege twin (743cc96b, "… so garrison work and short-term hire go at day-wages here")
 and the lodging line's (b50dee27, "… they hire out by the day for garrison duty …"). Neither prints in the 900. In the
@@ -70,7 +71,10 @@ and the lodging line's (b50dee27, "… they hire out by the day for garrison dut
 -1031, -1039, -1040, …; -1110, -1146, -1169, -1190, …). `needs: garrison` would refuse the twin there, and its set would
 keep the refused original ("Caravan escort …") under the siege. The line speaks of work the company hires out for, not
 of the town's garrison: R6, the walker's false reading. No atom in the vocabulary names "a company that does garrison
-work". Their armedForce rows are cured (`mercenary`). The rows stand.
+work". Their armedForce rows are cured (`mercenary`). **RULING LR1 (the chair, 18:29 UTC): leave both rows as they
+stand.** They are two of the four recorded by the owner's own word this morning ("record the four", 0af60594a), so they
+stay recorded, not declared. The walker's reading of the word goes to the last close's list of detector debts; no
+walker is changed.
 
 ### R6: a walker's false reading, named
 
@@ -81,7 +85,7 @@ so the walker reads every set they build as undeclared. The header claims they a
 and the streets set as explicit rows; I did not touch the builder, because that would stale about a dozen other rows
 outside the twenty (the watch, walls and prison `implied` rows of `safetyProfile.js`). One line for the close.
 
-## Item 2: the sawyer's secret: STOPPED, not applied (the change is `LAST-DECLARE-ITEM2.patch` beside this file)
+## Item 2: the sawyer's secret: LANDED under the chair's ruling LR3 ("land it as is, with one proof first")
 
 `'Sells green planks as seasoned …': { needs: ['trade at work: building'] }` in `TITLE_LINE_DECLARATIONS.secret`
 (titleSecretsPresentations.js), read by `poolMap.js :: settleTitleLines` at birth. Measured against the base:
@@ -96,8 +100,25 @@ outside the twenty (the watch, walls and prison `implied` rows of `safetyProfile
 
 Only `npcs` moves, and no other field. Every false town is cured, and none is left. The 6 wrong moves in the 900 have
 one cause: at birth `housesShortOf` reads the Carpenters (5-15) short of timber the town buys in later
-(`shortEarly: timber`, `shortFinal: none`, in each of the four I opened). That is a move nobody predicted, so it waits
-for the chair: land it as is, or hold it for a late reading of the title lines (new machinery).
+(`shortEarly: timber`, `shortFinal: none`, in each of the four I opened). I stopped on it, and the chair ruled LR3: land
+it, proving first that the replacement is true in each of the 6.
+
+**The proof.** I read the sawyer's card in each of the 6 (bar0-city-wartime-rand-28, r2r-city-22, r2s-indebted-town-0,
+r2s-recently_betrayed-city-2, r2s-succession_void-town-3, r2s-monster_pressure-city-2). Every one now holds "A sawyer's
+boy lost an arm at the blade, and the family was paid to say it happened somewhere else" ("The boy is growing up, and
+he does not think the money was enough"). It presumes nothing but the sawyer and the blade the card itself stands for,
+so it is true on each page. **The declared move:** `npcs[]`, the sawyer's `secret` only; no other card, field or byte
+moves. The 900: 18 towns. The 30: bar0-village-calm-rand-45. The 150: bar0-city-wartime-rand-28,
+bar0-village-famine-rand-33, bar0-village-calm-rand-36, bar0-town-occupied-rand-38. The 720: r2r-village-3, -11, -14,
+r2r-city-22, -44, r2s-occupied-town-3, r2s-indebted-town-0, r2s-indebted-city-1, r2s-recently_betrayed-city-2,
+r2s-succession_void-town-3, r2s-monster_pressure-city-2, r2s-religious_conversion-town-1, r2s-slave_revolt-village-2.
+The 525: **3 of 525**: town|germanic|plains|mountain_pass|civilized|golden-master-v3,
+town|germanic|plains|none|civilized|golden-master-v3, town|germanic|plains|road|civilized|gm-seed-a. Each moved town
+takes the same replacement.
+
+**LOW, for after the deploy (LR3):** the title lines are drawn on the birth's facts before the imports are written, so
+a line the final record makes true can be passed over. A late reading of the title lines, as `readHouseDescsLate` does
+for the house descriptions, would be new machinery and is not ordered now.
 
 ## Item 3: `impairedUnderSiege`, measured (the brief: measure and stop)
 
@@ -130,12 +151,13 @@ for the chair: land it as is, or hold it for a late reading of the title lines (
 - The presumption ledger's pools: two new door sites note lines (`settlementOriginProse:ORIGIN_DECLARED`,
   `guardLineUnderTheLaw:GUARD_LAW_SIBLINGS`). The streets line notes into `safetyProfile:SAFETY_LINE_SIBLINGS`. Any
   ledger-derived census (pool table, pool dominance, declared share) may gain these rows: see the net.
-- The golden: 0 of 525 move.
+- The golden: 0 of 525 move under item 1; **3 of 525 move under item 2** (the sawyer's secret, named above).
 
 ## Left, by name
 
-- The 2 `garrison` rows (743cc96b, b50dee27): STOPPED, with the chair.
-- Item 2: not applied; its one-line change is `LAST-DECLARE-ITEM2.patch` beside this file, waiting for the ruling.
+- Left by name, with the ruling: the 2 `garrison` rows (743cc96b, b50dee27): recorded by the owner's word, kept by LR1;
+  the walker's reading of "garrison work" goes to the last close's list of detector debts.
+- The LOW of LR3 (the title lines' birth-time reading), named above.
 - Item 3: the patch, not applied.
 - The `declaredSet` builder blindness (R6 above): named, not repaired.
 - The base's own reds: named in the net, not chased.

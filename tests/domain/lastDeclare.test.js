@@ -25,6 +25,8 @@ import { DESC_LATE_SIBLINGS } from '../../src/data/institutionDescVariants.js';
 import { SAFETY_LINE_SIBLINGS } from '../../src/generators/safetyProfile.js';
 import * as origin from '../../src/generators/narrative/settlementOriginProse.js';
 import { GUARD_LAW_SIBLINGS, guardLineUnderTheLaw } from '../../src/domain/display/guardLineUnderTheLaw.js';
+import { TITLE_LINE_DECLARATIONS } from '../../src/data/people/titleSecretsPresentations.js';
+import { settleTitleLines } from '../../src/generators/people/poolMap.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
@@ -155,5 +157,26 @@ describe('LAST-DECLARE item 1: each declaration is the door\'s, and refuses wher
     expect(resolveSibling(key, GUARD_LAW_SIBLINGS, { facts: f(true) })).toBe(twin.text);
     expect(resolveSibling(key, GUARD_LAW_SIBLINGS, { facts: f(false) })).toBe(key);
     expect(guardLineUnderTheLaw(`The watch keeps order.${key}`, null)).toBe(`The watch keeps order.${key}`);
+  });
+});
+
+/**
+ * LAST-DECLARE item 2 (the chair's ruling LR3): the sawyer's green-planks secret presumes building at work. Red at the base
+ * (no declaration: the secret stands where nothing is built, as in bar0-village-calm-rand-36 beside "nothing new goes up").
+ */
+describe('LAST-DECLARE item 2: the sawyer\'s secret needs building at work', () => {
+  const GREEN = 'Sells green planks as seasoned and the buildings made from them warp within a year';
+  const town = (building) => ({ facts: { tradeAtWork: (k) => (k === 'building' ? building : undefined) }, boundaries: {}, held: null });
+  const card = () => ({ secret: { what: GREEN, stakes: 'The builders who used the wood would want their losses back, and their customers would want them first' } });
+
+  test('declared on `trade at work: building`', () => {
+    expect(TITLE_LINE_DECLARATIONS.secret[GREEN]?.needs).toEqual(['trade at work: building']);
+  });
+
+  test('kept where something is built; the next admitted secret where nothing is (no new text)', () => {
+    expect(settleTitleLines(card(), 'the sawyer', town(true)).secret.what).toBe(GREEN);
+    const moved = settleTitleLines(card(), 'the sawyer', town(false)).secret.what;
+    expect(moved).not.toBe(GREEN);
+    expect(moved).toBe("A sawyer's boy lost an arm at the blade, and the family was paid to say it happened somewhere else");
   });
 });
