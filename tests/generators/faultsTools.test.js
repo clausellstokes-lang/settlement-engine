@@ -42,8 +42,9 @@ describe('FAULTS-TOOLS item 2 · census4-validate-ledger opens and still finds',
 
   it('OPENS with no argument (runs the extract itself) and reaches its verdict line, never a throw', () => {
     const out = run([]);
-    expect(out.stderr).not.toMatch(/ENOENT|Error:/);
     expect(out.stdout).toMatch(/^BAD \d+/m);
+    // anchored: the verdict line just above is present, so this absence is not a drifted collection
+    expect(out.stderr).not.toMatch(/ENOENT|Error:/);
     expect([0, 1]).toContain(out.status);
     // the exit code says the verdict: 1 exactly when a finding stands
     expect(out.status).toBe(findingsOf(out.stdout).length ? 1 : 0);
@@ -54,7 +55,8 @@ describe('FAULTS-TOOLS item 2 · census4-validate-ledger opens and still finds',
     expect(out.stdout).toMatch(/^NOT READ \(CENSUS-2 pool-shaped \(pools\[\]\)\): \d+$/m);
     expect(out.stdout).toMatch(/^NOT READ \(row-shaped, not a CENSUS-4 table \(CENSUS-3b\)\): \d+$/m);
     expect(out.stdout).toMatch(/^npcData\.MANNERISMS\tR\t\d+/m);
-    // negative beside it: a CENSUS-2 ledger is not read as a CENSUS-4 one
+    // negative beside it, anchored: the MANNERISMS row just above is read, so a CENSUS-2 ledger's absence is the selection's
+    // anchored: a CENSUS-2 ledger is not read as a CENSUS-4 one (the CENSUS-4 row above is present)
     expect(out.stdout).not.toMatch(/^ARRIVAL_MEMORIES\t/m);
   });
 
@@ -112,8 +114,11 @@ describe('FAULTS-TOOLS item 1 · the matcher tells a name and a verb from a clai
   });
 
   it('the BARE VERB of a predicate field is not a claim word; the field\'s own words still are', () => {
-    expect(claimTokensOf('readings.inst.hasWatch')).not.toContain('has');
-    expect(claimsField('{settlement} has no court sitting and no gaol in use.', 'readings.inst.hasWatch')).toBe('');
+    expect(claimTokensOf('readings.inst.hasWatch')).toEqual(['haswatchs', 'haswatch', 'watchs', 'watch']);
+    // DS-GEN-17 ADMINISTERED v5, read from the corpus (never quoted): its "has" claims no watch
+    const v5 = corpus.find((e) => e.block === 'DS-GEN-17' && e.pool === 'ADMINISTERED' && e.vid === 5);
+    expect(v5?.text).toMatch(/\bhas\b/);
+    expect(claimsField(v5.text, 'readings.inst.hasWatch')).toBe('');
     expect(claimsField('The town has decided it can afford them.', 'readings.inst.hasGranary')).toBe('');
     // positives beside it: the leaf's own words, a camel-cased leaf's words, a plural
     expect(claimsField('The town has a granary.', 'readings.inst.hasGranary')).toBe('granary');
