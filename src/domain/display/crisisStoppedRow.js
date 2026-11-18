@@ -341,7 +341,8 @@ export function housesOnImportedInput(settlement) {
 function ownTradeChainOf(settlement, name) {
   const chains = /** @type {{ economicState?: { activeChains?: unknown } | null }} */ (settlement).economicState?.activeChains;
   return (Array.isArray(chains) ? chains : []).some((c) => c && Array.isArray(c.processingInstitutions) && c.processingInstitutions.length === 1
-    && c.processingInstitutions[0] === name && chainDependenceOf(c).includes(GOODS));
+    && c.processingInstitutions[0] === name && typeof c.chainId === 'string' && Object.prototype.hasOwnProperty.call(CHAIN_DEPENDENCE, c.chainId)
+    && CHAIN_DEPENDENCE[c.chainId].includes(GOODS));
 }
 
 /**
