@@ -10,17 +10,21 @@
 //            `importsAsPrinted(record).needed`, label by label, on every town this file births (the seventh read's thirty and the
 //            fixed towns of the other items) and on a constructed record for each branch of the page's reader; its copied tables
 //            are held to their homes; `need not brought in: <family>` reads it through `factsOf`, the public page and the veil alike.
+//   item 2   11e.wantBuy: a card's SUPPLY dependency goal ("Buy {resource} at the market …", "Secure a steady supply of {resource}
+//            …") is dealt only where its good is brought in or had: never where the need list names it (C8867,
+//            bar0-city-wartime-rand-45's "Buy stone and iron and grain …" beside "Needed, and not brought in: stone, …").
 // THE DETECTORS are the page's own readers (the need list, the mark) and the record's own rows; none reads the table the cure changed.
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { importsAsPrinted, needMetBy, NEED_DEALT_ROWS } from '../../src/domain/display/tradeListDisplay.js';
 import { LUXURY_CLASS, NOT_A_GOOD } from '../../src/data/tradeListDeclarations.js';
-import { NEED_DEALT_ROWS_COPY, NEED_KEYS, LUXURY_LABELS_COPY, NOT_A_GOOD_COPY, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
+import { NEED_DEALT_ROWS_COPY, NEED_KEYS, LUXURY_LABELS_COPY, NOT_A_GOOD_COPY, goodNeededNotBroughtIn, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
 import { FACT_DIMENSIONS, atomHolds } from '../../src/domain/facts/factVocabulary.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
+import { GOAL_FAMILY_LINES } from '../../src/data/people/goalFamilies.js';
 import { rowShortOf } from '../../src/domain/display/crisisStoppedRow.js';
 import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
 
@@ -36,6 +40,7 @@ const TOWNS = Object.freeze({
   // the seventh read's thirty (`seeds.bar7.txt`): the atom held equal on each
   ...Object.fromEntries([45, 46, 47].flatMap((n) => ['thorp-calm', 'hamlet-calm', 'hamlet-under_siege', 'village-famine', 'village-calm', 'town-calm',
     'town-occupied', 'city-under_siege+famine', 'city-wartime', 'metropolis-calm'].map((k) => [`bar0-${k}-rand-${n}`, ['thirty']]))),
+  'bar0-city-wartime-rand-45': ['thirty', 'wantBuy'], // C8867: a dependency on stone beside "Needed, and not brought in: stone" (refused at the deal)
 });
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
@@ -204,6 +209,44 @@ describe('FAULTS-NEED item 1: the atom `need not brought in` (FR2) states the pa
     expect(Object.keys(TOWNS).some((seed) => needListOf(BORN.get(seed)).length === 0), 'and a town with none').toBe(true);
     expectNoSeedFailures(collectSeedFailures(seedsOf('venture'), (seed) => {
       expect(needListOf(BORN.get(seed)), `${seed}: the failed venture's own material stays`).toContain('livestock');
+    }));
+  });
+});
+
+describe('FAULTS-NEED item 2 (11e.wantBuy): a dependency goal presumes a supply only of a good that is brought in or had', () => {
+  /** each dependency line as a matcher, its `{resource}` captured (the other slots any words) */
+  const DEP = Object.values(GOAL_FAMILY_LINES.SUPPLY.dependency).flatMap((cell) => /** @type {any[]} */ (cell))
+    .map((l) => String(typeof l === 'string' ? l : l.line))
+    .map((t) => new RegExp(`^${t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{resource\\\}/g, '(.+?)').replace(/\\\{[a-z]+\\\}/g, '.+?')}$`));
+  /** @param {any} s @returns {Array<{ card: string, text: string, resource: string }>} */
+  const depGoals = (s) => (s.npcs || []).flatMap((c) => ['short', 'long'].map((v) => ({ card: String(c.name), text: String(c.goal?.[v] ?? '') })))
+    .map((g) => { const m = DEP.map((re) => re.exec(g.text)).find(Boolean); return m ? { ...g, resource: m[1] } : null; }).filter(Boolean);
+  it('the matchers read the cell (the lines carry their slot)', () => {
+    expect(DEP.length).toBe(12);
+    expect(DEP.some((re) => re.test('Buy stone and iron and grain at the market in bulk this season, while the price is still fair.'))).toBe(true);
+  });
+  it('a good the need list names refuses; a good brought in, or one of another family, not', () => {
+    const s = { tier: 'city', institutions: [], economicState: { primaryImports: ['Iron'], primaryExports: [], localProduction: [], activeChains: [] },
+      resourceAnalysis: { imports: { critical: ['stone', 'copper ore', 'iron ore'] }, gaps: [] }, availableServices: {} };
+    expect(goodNeededNotBroughtIn(s, 'Stone + iron + grain')).toBe(true);
+    expect(goodNeededNotBroughtIn(s, 'Stone')).toBe(true);
+    expect(goodNeededNotBroughtIn(s, 'Iron ore')).toBe(false); // the iron comes in: the need leaves the list
+    expect(goodNeededNotBroughtIn(s, 'Metal ore + fuel')).toBe(false); // a wide word asks nothing: the smith's metal is had
+    expect(goodNeededNotBroughtIn(s, 'Raw wool')).toBe(false);
+    expect(goodNeededNotBroughtIn(s, '')).toBe(false);
+  });
+  it('the towns of the sample: no card wants a supply of a good the page says is needed and not brought in; dependency goals still deal', () => {
+    expectNoSeedFailures(collectSeedFailures(Object.keys(TOWNS), (seed) => {
+      const s = BORN.get(seed);
+      expect(depGoals(s).filter((g) => goodNeededNotBroughtIn(s, g.resource)).map((g) => `${g.card}: ${g.text}`), seed).toEqual([]);
+    }));
+    // the negative beside it: a dependency goal on a good that is had still deals in the sample
+    expect(Object.keys(TOWNS).some((seed) => depGoals(BORN.get(seed)).length > 0), 'a dependency goal deals somewhere').toBe(true);
+    // the control's town still holds the dependency the cure refuses
+    expectNoSeedFailures(collectSeedFailures(seedsOf('wantBuy'), (seed) => {
+      const s = BORN.get(seed);
+      const deps = (s.economicState?.tradeDependencies || []).map((/** @type {any} */ d) => String(d?.resource ?? ''));
+      expect(deps.filter((r) => goodNeededNotBroughtIn(s, r)).length, `${seed} still holds a dependency on a good not brought in`).toBeGreaterThan(0);
     }));
   });
 });

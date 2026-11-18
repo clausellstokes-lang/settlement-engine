@@ -204,12 +204,15 @@ export function needNotBroughtInOf(record) {
 
 /**
  * Whether a good is one the need list says the town needs and does not get (11e.wantBuy): a need of the list that the good's
- * label names, or that it meets by family (`meets`, the page's matcher: "livestock" beside "Livestock for meat and draft").
+ * label names, or whose family a word of the good's label is of (`meets(need, good)`, the page's matcher read as the page
+ * reads an import against a need: "Stone + iron + grain" beside the need "stone"; "Precious metals" beside "gold/silver
+ * ore"). A wide word of the good ("Metal ore") asks nothing of a need: the smith's metal is had where iron comes in, though
+ * copper does not.
  * @param {unknown} record @param {unknown} good
  * @returns {boolean}
  */
 export function goodNeededNotBroughtIn(record, good) {
   const g = typeof good === 'string' ? good.trim() : '';
   if (!g) return false;
-  return needListOf(record).some((need) => fold(need) === fold(g) || meets(need, g) || meets(g, need));
+  return needListOf(record).some((need) => fold(need) === fold(g) || meets(need, g));
 }
