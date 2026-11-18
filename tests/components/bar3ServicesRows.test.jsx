@@ -80,7 +80,10 @@ const MARKED = [
   ['r2r-metropolis-14', "Search the archive that cross-checks one road's report against another's.", SIEGE], // C5102
   ['r2r-metropolis-14', 'Have a claim graded against every road the exchange keeps.', SIEGE], // C5102's sibling
   ['r2r-city-48', 'House wine by the jug or bottle.', 'Short of grapes.'], // C25841's class, a calm town ("No grapes reach the vintner.")
-  ['bar0-city-under_siege+famine-rand-9', 'House wine by the jug or bottle.', 'Short of grapes.'], // C25841 where it was read
+  // RE-KEYED BY IDENTITY 2026-11-18 (LEFT-KEYS K5, R8): the supply rule (BIRTH-3, BR4/BR5) has this town buy its grapes in, and
+  // under the siege a house on a bought input is curtailed (crisisStoppedRow.js :: houseDependenceIn, S1 (i)): the row is not bare
+  // where it was read, and its mark is the siege's now. The vintner short of grapes keeps its row above (r2r-city-48).
+  ['bar0-city-under_siege+famine-rand-9', 'House wine by the jug or bottle.', 'Curtailed by the siege.'], // C25841 where it was read
   ['r2s-under_siege-hamlet-3', 'Fair pricing through competition', SIEGE], // C13905's class: the periodic market's trading day
 ];
 /** (seed, a true sibling that must print unmarked). */
