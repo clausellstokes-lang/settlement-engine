@@ -201,12 +201,15 @@ are the page's reading, `impliedGroundsOnPage`, which `never2.mjs` reads: 64 →
   differs from the stored file in 499, the close's).
 - runJ's, runK's, runH's figures over the 720 (above); the auditors' RUN-J/K/H files are not mine to rewrite.
 - the venture count the guard L5 holds (10 to 20 of the 720): 11 → 9 (above).
-- the lint walkers' registers, censuses and counts: __LINT__
+- the lint walkers' registers, censuses and counts: the estate's file count (`sovereigntyLightingContract.walker`, "THE CENSUS IS AN ASSERTION"): stored 3641, measured
+  3690 at the base, **3691 at my tip** (my one new file, `tests/domain/faultsBirth.test.js`); `writerReach.walker`'s frozen
+  `shapesDigest` (stored 05cdd05bb5cc…): measured 25b8a5539fa9… at the base, **bd73f89e16a5… at my tip** (the births move; its two
+  tests red at both, by that digest alone).
 
 ## THE THREE VIEWS (N4)
 
 `supplyStoryLaw.test.js :: BR8` (the record, the record without its seed, `toPublicSafe`, the share veil, and the birth's pick,
-over the 720 and the 150): __BR8__. My guard holds `impliedGroundsOnPage` equal across the three views in its 19 anchor towns.
+over the 720 and the 150): **green at my tip** (as at the base): the three views tell one story in every town of the 870. My guard holds `impliedGroundsOnPage` equal across the three views in its 19 anchor towns.
 
 ## THE GUARD — `tests/domain/faultsBirth.test.js` (12 tests)
 
@@ -234,7 +237,27 @@ imply nothing). Anchors: towns of the 720 and the 150 whose supply story no othe
 
 ## THE NET (each gate alone through `sh scripts/gate-tail.sh`, in git worktrees of the base and of my tip)
 
-__NET__
+| gate | base (4288049ba) | tip (5f099849a) |
+|---|---|---|
+| `npm run typecheck:domain:strict` | 0 | **0** |
+| `npm run typecheck:ratchet` | 0 | **0** |
+| `npx eslint` (my five files) | (my guard absent: 2) | **0** |
+| `npx vitest run tests/architecture` | 347 / 347 | **347 / 347** |
+| ALL of `tests/lint` (JSON) | 41 tests in 23 files red | **the same 41 by name; 39 of 42 messages identical; the 3 that differ are the two figures above** |
+| `npx vitest run tests/joins` | 425 / 425 | **425 / 425** |
+| N3 `pipelineContract`, `isolatedTrade`, `publicProseEquality` | green | **green** |
+| N3 `pipelinePinnedMode` (3 red: the golden moved, 38 rows) · `generationForkCensus` (3 red: the control row's hash, the fnv1a32 callers 54 against 23, A4) | red | **the same 3 + 3, the same messages** (0 of the 525 move by me) |
+| `supplyStoryLaw` | green | **1 red: L5 only** ("expected 9 to be greater than or equal to 10"), declared above; BR8 (the three views), L1-L3, P2 (re-keyed), W1, L4, M1, M4 green |
+| `birthKindsLaw`, `bar6MarksLaw8`, `bar8FishRows` | green | **green** |
+| `bar8Marks2` | green | **green** (re-keyed) |
+| my guard `faultsBirth` | 9 red · 3 green | **12 green** |
+| ONE `npm run build`, then `vendorPdfLazy` + `bootSmoke` | 0; 49 passed · 17 skipped | **0; 49 passed · 17 skipped** |
+| THE OLDER TESTS naming what I changed (`grep -rlE` of IMPLIED_GROUND, SECOND_RING, KEEPS_OR_YIELDS, ventureAtBirth, birthPicksOn, impliedGroundsOnPage, groundGives, groundOfFamily, neverHeldGroundsUsed, usersOf, houseKinds, supplyStory, and the helpers that read them): `bar2ServicesRows`, `leftChainCards`, `bar4CorpusEcoKinds`, `leftMarks`, `bar8Rows`, `houseInputReaches`, `upkeepVocation`, `leftPdfReadsTheTabs`, `bar4MarkPromise`, `bar6PeopleLaw10` | green | **green** (leftMarks, leftPdfReadsTheTabs re-keyed; leftChainCards cured) |
+
+Before the last two code commits an intermediate tip (7c396a207) read bar8Marks2, leftChainCards, leftMarks and
+leftPdfReadsTheTabs red: each followed above. The renders: the tip's 30 and 150 at 7c396a207, whose births equal my tip's (0 of
+the 180 records differ); the tip's 720 at 7c396a207 with r2r-village-2 and r2r-town-34 re-rendered at 5f099849a (the only two
+records that differ; the other 718 byte-identical).
 
 ## THE SCRATCH MERGE (N5)
 
