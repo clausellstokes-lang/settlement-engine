@@ -24,7 +24,7 @@ import { LUXURY_CLASS, NOT_A_GOOD } from '../../data/tradeListDeclarations.js';
 import { REVENUE_HOMES } from '../../data/revenueHomes.js';
 
 /** The stored trade marks → their kind. */
-const MARKS = Object.freeze([
+export const MARKS = Object.freeze([
   Object.freeze({ re: /\s*\(transit\)\s*$/i, kind: 'transit' }),
   Object.freeze({ re: /\s*\(naval route only\)\s*$/i, kind: 'naval' }),
   Object.freeze({ re: /\s*\(taxed by occupation\)\s*$/i, kind: 'occupation' }),

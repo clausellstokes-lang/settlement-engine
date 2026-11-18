@@ -42,6 +42,7 @@ import { filterDeclared, lineText, resolveSibling } from '../../domain/facts/dra
 import { factsOf } from '../../domain/facts/factsOf.js';
 import { notePresumption, withPresumptionLedger } from '../../domain/facts/presumptionLedger.js';
 import { magicOf } from '../../domain/facts/magic.js';
+import { goodNeededNotBroughtIn } from '../../domain/facts/needNotBroughtIn.js'; // FAULTS-NEED item 2 (11e.wantBuy): the page's need list
 import { allegianceOf, criminalHousesOf, criminalPowersOf, organizedCrimeOf } from '../../domain/people/allegiance.js';
 import { NPC_GOAL_SIBLINGS, SIEGE_GOALS, STRESS_GOAL_OVERRIDES, stressBucketOf } from '../npcGenerator.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
@@ -269,6 +270,8 @@ export function goalContextOf(settlement, cards, relationships) {
     tier: str(settlement.tier) || 'town',
     organized: organizedCrimeOf(settlement),
     facts: () => (facts ??= factsOf(view)),
+    /** FAULTS-NEED item 2: whether a dependency's good is one the page's need list says is needed and not brought in */
+    needUnmet: (/** @type {unknown} */ resource) => goodNeededNotBroughtIn(settlement, resource),
     /** the held texts refused so far (the receipt's `refused`, per card) */
     refusals: { n: 0 },
     // the handler's agents: handler id → [{ agent, archetype }] (the agent's covert handler tie names the kind)
@@ -447,7 +450,17 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
       // a chain's name in a goal is PRINTED words (the NPCs tab, the summary, the PDF, the Foundry journal): it is the
       // name the page gives the chain (`chainPrintName`: the toll by the town's access); the target id stays the record's
       for (const ch of impaired) push(cellCandidates('SUPPLY', 'impaired', vantage, { chain: str(chainPrintName(ch, ctx.view).label), house: hf }, ctx, held, { target: { kind: 'chain', id: str(ch.chainId || ch.label) } }));
-      for (const d of ctx.depsByHouse.get(ctx.famKey(houseKey)) || []) { const rf = resourceFill(d.resource); if (rf) push(cellCandidates('SUPPLY', 'dependency', vantage, { resource: rf, house: hf }, ctx, held, { target })); }
+      // FAULTS-NEED item 2 (11e.wantBuy; the sixth chair's BRIEF-FAULTS, 2026-11-18; vetoable by the owner): a dependency goal
+      // presumes a supply of its good ("Secure a steady supply of {resource} …", "Buy {resource} at the market …"), so it is
+      // dealt only where the good is brought in or had: where the page's own need list says it is needed and not brought in
+      // (`facts/needNotBroughtIn.js`, held equal to `tradeListDisplay.js :: importsAsPrinted().needed`), the lines stay in the
+      // draw, marked refused, so no other card's draw moves; a refused pick takes the family's next admitted goal (drawVantage)
+      for (const d of ctx.depsByHouse.get(ctx.famKey(houseKey)) || []) {
+        const rf = resourceFill(d.resource);
+        if (!rf) continue;
+        const unmet = ctx.needUnmet(d.resource);
+        push(cellCandidates('SUPPLY', 'dependency', vantage, { resource: rf, house: hf }, ctx, held, { target }).map((c) => (unmet ? { ...c, refused: true } : c)));
+      }
       if (TRADING_SHELVES.includes(shelf)) for (const ch of own.filter((x) => RUNNING_STATUSES.includes(str(x.status)))) push(cellCandidates('SUPPLY', 'expansion', vantage, { chain: str(chainPrintName(ch, ctx.view).label), house: hf }, ctx, held, { target: { kind: 'chain', id: str(ch.chainId || ch.label) } }));
     }
   }

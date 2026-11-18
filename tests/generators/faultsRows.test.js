@@ -13,7 +13,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { importsAsPrinted } from '../../src/domain/display/tradeListDisplay.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
-import { LUXURY_LABELS_COPY } from '../../src/domain/facts/needNotBroughtIn.js';
+import { LUXURY_CLASS } from '../../src/data/tradeListDeclarations.js'; // FR20 (1): the declared pool's own texts
 import { DESC_LATE_SIBLINGS } from '../../src/data/institutionDescVariants.js';
 import { speakTierNoun } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
@@ -85,7 +85,7 @@ beforeAll(async () => {
   }
 }, 600_000);
 
-const LUXURY = new Set(LUXURY_LABELS_COPY.map((l) => l.toLowerCase()));
+const LUXURY = new Set(LUXURY_CLASS.map((l) => String(l.text).toLowerCase()));
 /** The page's own need list names a luxury ("Needed, and not brought in: luxury goods."). @param {any} town */
 const luxuryUnmet = (town) => importsAsPrinted(town).needed.some((n) => LUXURY.has(String(n).trim().toLowerCase()) || /\b(luxury|exotic)\b/i.test(String(n)));
 /** @param {any} town */
