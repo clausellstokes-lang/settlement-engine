@@ -1136,3 +1136,20 @@ should be paused or archived by the owner's hand.
   EIGHTH READ IS RUN AS SOON AS THE PIECES THAT CHANGE THE PAGES HAVE LANDED (SCENES with SCENES-3; points 48 to 53
   with their follow-ups; PDF-2b; MARKS-2; J-INCOME-2), NOT AFTER THE UPKEEP (LEFT-KEYS) AND THE SMALL LEFTOVERS
   (ROWS-2, PEOPLE-2, DESKS-2), which run beside it; the read reports apart what is new and what is already in work.
+- **02:20 UTC. THE WHOLE CHECK AT POINT 53 IS IN (CHECKS-1 01:57, CHECKS-2 01:59, CHECKS-3 02:10): 172 names at 7e8fd4cc1 against the line's 159: THIRTEEN NEW, NONE GONE**
+  (part 2 the same 57 names; `/home/user/wk/p53.all.txt`). EACH ATTRIBUTED BY THE CHAIR by running the red files at the
+  line's tip and at every point 48 to 53 (`/home/user/attr`; logs `/home/user/wk/p53.attr*.log`):
+  | point | seat | new reds | what each message names |
+  |---|---|---|---|
+  | 48 | K-WATCH | 1 | `servicesStructure` F31: `servicesGenerator.js` is 406 lines over a ceiling of 400 |
+  | 49 | K-POWERS | 0 | — |
+  | 50 | K-PEOPLE | 2 | `tonightSeatSecret`: soak1k-28, a kept crisis secret voiced as a WANT · `coachingInnUnderCrisis`: r2s-famine-city-1, a person's line is another line than before (a draw moved?) |
+  | 51 | DESKS-ECO | 7 | THE RETIRED v4 of DS-GEN-3 Import-Dependent: `stateProseKernel` law 6 (the pool's ids are no longer its annex rows), `census2DeclaredPools` (throws: a ledger line's variant is gone), `wallsWordDossierProse` F10 and the projection contract (the pool mute in both walls states; thin states 30 over 28) · THE NEW ATOM on DS-ECO-12: `stateProseKernel` law 5 (14 drifts from the pre-cure reader), `crisisBlindDossierProse` F12 (throws: no setter for the atom) |
+  | 52 | DESKS-DEF | 2 | `bar7DesksLines` item 6: the semi-organised pool holds 5, the test says 4 · `dossierProseManifest`: 260 cells whose sentence matches more than one variant |
+  | 53 | FISH-ROWS | 1 | `upkeepVocation`: agree-town-87, the Fish market's own "Fresh fish retail" is not on the page (the swap: a stale premise if the town is bought) |
+  NONE OF THE THIRTEEN WAS IN A SEAT'S OWN NET (each ran at its old base, or the tests live outside the directories the
+  briefs name): THE LESSON FOR EVERY BRIEF FROM NOW: A SEAT'S NET IS RUN AT A SCRATCH MERGE WITH THE LINE'S TIP, AND THE
+  WHOLE CHECK'S NEW NAMES ARE ATTRIBUTED POINT BY POINT BEFORE A READER IS DONE. Each red is sent to its seat's reader
+  (02:01 and 02:21) to weigh: the law right and the change wrong, or the test's stored table stale. THE DOORS: door-classes
+  fresh 0 · stale 152; door-things unchanged. K-POWERS IS THE ONE SEAT OF THE SIX WITH NO NEW RED. THE CHAIR'S OWN
+  LAWS-BY-MESSAGE RUN at the line's tip and at point 53 is in flight (`/home/user/wk/laws2.*.log`).
