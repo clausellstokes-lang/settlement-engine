@@ -8,7 +8,7 @@
 // keeps "Fresh fish retail". The story here is the auditor's own reading of the stored record (`law11Supply.mjs ::
 // materialStory`), not the cure's. The anchors are towns of the census's 720 and the read's thirty (the counts over the
 // thirty, the 150 and the 720 are in docs/chair/2026-11-17/bar8/BAR8-FISH-ROWS-HANDBACK.md); every seed loop collects.
-import { beforeAll, describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { materialStory } from '../helpers/pageLaws/law11Supply.mjs';
@@ -126,5 +126,72 @@ describe('BAR8-FISH-ROWS: the fish market\'s catch row reads the fish story the 
       expect(fishMarketRows(projectShareVeil(toPublicSafe(structuredClone(BORN.get(seed))), null)), `${seed}: veil`).toEqual(own);
     });
     expectNoSeedFailures(failures, 'the shared page prints the owner\'s fish row');
+  });
+});
+
+// THE CONSTRUCTED ARMS (2026-11-18, the second reader's MED 1: three hunks no town of the 900 reaches). The real narratives step
+// runs inside a real birth of a BOUGHT town (r2r-city-14) and of an IDLE one (r2r-village-45); in a module graph of their own,
+// the step is wrapped so that just before it runs the constructed rows are laid into `ctx.availableServices.food` (a record no
+// roll makes): (a) a later row of the Fish market already bearing "Preserved fish", (b) a CUSTOM row named "Fresh fish
+// retail" under the Fish market, (c) the Fishmonger's "Fresh fish" and its later "Salted fish".
+const FISHMONGER_FRESH = { name: 'Fresh fish', desc: "Today's catch. Buy early.", institution: 'Fishmonger' };
+const FISHMONGER_SALTED = { name: 'Salted fish', desc: 'Salt-cured fish. Weeks of shelf life.', institution: 'Fishmonger' };
+const LATER_PRESERVED = { name: PRESERVED, desc: PRESERVED_DESC, institution: 'Fish market' };
+const CUSTOM_CATCH = { name: CATCH_ROW, desc: 'A custom catch row of the owner\'s own.', institution: 'Fish market', custom: true, source: 'custom', localUid: 'bar8-fish-rows-custom' };
+/** @type {Map<string, any[]>} the food rows each constructed birth stores, keyed `<seed>` */
+const CONSTRUCTED = new Map();
+/** the food rows as laid in, before the step ran, keyed `<seed>` */
+const LAID = new Map();
+describe('BAR8-FISH-ROWS: the constructed rows (the splice, the custom row, the Fishmonger)', () => {
+  beforeAll(async () => {
+    vi.resetModules();
+    vi.doMock('../../src/generators/pipeline.js', async (importOriginal) => {
+      const orig = /** @type {any} */ (await importOriginal());
+      return { ...orig, registerStep: (/** @type {string} */ name, /** @type {any} */ meta, /** @type {Function} */ fn) => orig.registerStep(name, meta, name !== 'generateNarratives' ? fn : (/** @type {any} */ ctx, /** @type {any} */ rng) => {
+        const food = ctx.availableServices.food;
+        food.push({ ...LATER_PRESERVED }, { ...CUSTOM_CATCH }, { ...FISHMONGER_FRESH }, { ...FISHMONGER_SALTED });
+        LAID.set(String(ctx._seed), structuredClone(food));
+        return fn(ctx, rng);
+      }) };
+    });
+    const boundary = await import('../../src/domain/density/densityCreateBoundary.js');
+    const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+    const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
+    await boundary.loadGenerationLawPayloads();
+    for (const seed of ['r2r-city-14', 'r2r-village-45']) {
+      CONSTRUCTED.set(seed, generateSettlementPipeline(boundary.birthConfig({ ...DEFAULT_CONFIG, ...configOf(seed) }), null, { seed, customContent: {} }).availableServices.food);
+    }
+    vi.doUnmock('../../src/generators/pipeline.js');
+    vi.resetModules();
+  }, 600_000);
+  /** @param {any[]} rows @param {string} house @param {string} name */
+  const named = (rows, house, name) => rows.filter((r) => r.institution === house && r.name === name && r.custom !== true);
+
+  it('(a) the splice: the catch row takes "Preserved fish" in its place, and the house\'s later "Preserved fish" is not printed twice', () => {
+    const laid = LAID.get('r2r-city-14'); const food = CONSTRUCTED.get('r2r-city-14');
+    const at = laid.findIndex((r) => r.institution === 'Fish market' && r.name === CATCH_ROW && r.custom !== true);
+    expect(at, 'anchored: the bought town rolled its catch row').toBeGreaterThanOrEqual(0);
+    expect(named(food, 'Fish market', PRESERVED).length, 'one "Preserved fish" for the house').toBe(1);
+    expect(food[at], 'in the catch row\'s place').toEqual({ ...laid[at], name: PRESERVED, desc: PRESERVED_DESC });
+    expect(food.length, 'one row fewer: the later duplicate only').toBe(laid.length - 2); // the catch row stays (renamed); the later "Preserved fish" and the Fishmonger's later "Salted fish" go
+  });
+
+  it('(b) the custom row: a custom row named "Fresh fish retail" under the Fish market is untouched', () => {
+    const food = CONSTRUCTED.get('r2r-city-14');
+    expect(food.filter((r) => r.custom === true && r.localUid === CUSTOM_CATCH.localUid), 'the custom row, as laid').toEqual([CUSTOM_CATCH]);
+  });
+
+  it('(c) the Fishmonger\'s half: its "Fresh fish" becomes its own "Salted fish" in place, printed once', () => {
+    const laid = LAID.get('r2r-city-14'); const food = CONSTRUCTED.get('r2r-city-14');
+    const at = laid.findIndex((r) => r.institution === 'Fishmonger' && r.name === 'Fresh fish');
+    // its place: one row earlier than laid, the Fish market's later "Preserved fish" (laid before it) being spliced by (a)
+    expect(food[at - 1], 'in its place, with the pool\'s own words').toEqual({ ...FISHMONGER_FRESH, name: 'Salted fish', desc: FISHMONGER_SALTED.desc });
+    expectAbsentWithAnchor(food.filter((r) => r.institution === 'Fishmonger').map((r) => r.name), 'Fresh fish', 'Salted fish', 'the Fishmonger');
+    expect(named(food, 'Fishmonger', 'Salted fish').length, 'printed once').toBe(1);
+  });
+
+  it('IDLE, the same rows laid: nothing moves (the swap is the bought story\'s only)', () => {
+    expect(CONSTRUCTED.get('r2r-village-45'), 'the idle town stores the rows as laid').toEqual(LAID.get('r2r-village-45'));
+    expect(named(LAID.get('r2r-village-45'), 'Fish market', CATCH_ROW).length, 'anchored: the idle town has its catch row').toBe(1);
   });
 });

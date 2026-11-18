@@ -32,6 +32,8 @@ import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import { institutionDisplayName, institutionHouseLabel } from '../../src/domain/display/institutionDisplayName.js';
+import { importsHold, usedGroundOf } from '../../src/domain/facts/supplyStory.js';
+import { resourceShortageImport } from '../../src/domain/resourceSemantics.js';
 
 afterEach(cleanup);
 
@@ -64,6 +66,21 @@ const catalogueOf = (institution) => {
 const ownServicesOf = (institution, _tier) => new Set(catalogueOf(institution)
   .filter(([name, def]) => Number(def.p) >= 1 || serviceDomainOf(name, String(institution.name || '')) === 'religion')
   .map(([name]) => name));
+/**
+ * 2026-11-18, BAR8-FISH-ROWS (ruling BR24; R8, RE-KEYED BY IDENTITY): a house's own service, AS THE PAGE NAMES IT. Where the
+ * fish is bought in (the town's fish grounds used up and the spent ground's own word on the stored imports, "Salted fish
+ * (local … exhausted)"), a catch row's own service is its pool's own alternative (the catalogue's `inlandAlternative`: the
+ * Fish market's "Fresh fish retail" is its "Preserved fish"), written by the birth in its place; elsewhere it is the row
+ * itself. The claim is unchanged: upkeep never takes a house's own service (agree-town-87 buys its fish in).
+ * @param {any} s @param {string} house @param {string} name
+ */
+const ownServiceOnPage = (s, house, name) => {
+  const ground = usedGroundOf(s, 'fish');
+  if (!ground || !importsHold(s, String(resourceShortageImport(ground) || ''))) return name;
+  const key = resolveServiceCatalogKey(house);
+  const alt = key ? /** @type {any} */ (INSTITUTION_SERVICES)[key]?.[name]?.inlandAlternative : undefined;
+  return typeof alt === 'string' ? alt : name;
+};
 /** Every (house, own service) pair a services map holds. @param {any} svc @param {any} s */
 const ownRows = (svc, s) => {
   const own = new Map(s.institutions.map((i) => [String(i.name), ownServicesOf(i, s.tier)]));
@@ -103,7 +120,8 @@ describe('a house keeps its own service, whatever the place can pay', () => {
       }));
       expect(shown.length, `anchored: ${seed}'s tab renders its rows`).toBeGreaterThan(0);
       for (const key of offered) {
-        const [house, name] = key.split(' | ');
+        const [house, rolled] = key.split(' | ');
+        const name = ownServiceOnPage(s, house, rolled); // 2026-11-18 BAR8-FISH-ROWS (R8): the own service as the page names it
         checked += 1;
         // A native service is one row per name (`availableServiceIdentityKey`): where an earlier house
         // on the roster offers the same name, the row stands under that house (agree-city-29: the
@@ -117,7 +135,7 @@ describe('a house keeps its own service, whatever the place can pay', () => {
         // worship". The 41 rows the arm read missing all stood on the tab under their house's label.
         // The service's own name is still read by `institutionDisplayName`.
         const rows = shown.filter((r) => r.name === institutionDisplayName(name));
-        if (!rows.some((r) => r.house.includes(institutionHouseLabel(house))) && !(rows.length && (s.availableServices && Object.values(s.availableServices).flat().some((r) => r.name === name && r.institution !== house)))) missing.push(`${seed}: ${key}`);
+        if (!rows.some((r) => r.house.includes(institutionHouseLabel(house))) && !(rows.length && (s.availableServices && Object.values(s.availableServices).flat().some((r) => r.name === name && r.institution !== house)))) missing.push(`${seed}: ${house} | ${name}`);
       }
       cleanup();
     });
