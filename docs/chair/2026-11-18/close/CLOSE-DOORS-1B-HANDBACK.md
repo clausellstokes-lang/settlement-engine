@@ -7,8 +7,9 @@ chair's ruling CL11) for the measures against the last true tree. No page line c
 weakened. Part 2 (the signed golden door) is not this seat's. Every figure's cause is in its commit's body; this file is
 the index.
 
-STATUS: **B0 to B5 TAKEN; THE FIRST MERGE (9c170f3b2, the intermediate) TAKEN at 5d4ea1cd5** and what waited on it; the
-law reds and stops sent; waiting for the second "MERGE" (CLOSE-DOORS-1A's books), after which B6 and B7.
+STATUS: **PART 1B DONE** (final). B0 to B7 taken; the three merges (9c170f3b2, 8d7c2af33, 635c9b57e) taken and what they
+moved re-taken; the net at 7d8f05cf5 red ONLY on CL26's six arms and the four presumed lines (the chair's own commit after
+the merge). Part 2 is CLOSE-DOORS-2's.
 
 ## B0 · THE LIST (each file alone at 70e557d5b, a TSV)
 
@@ -161,3 +162,73 @@ under its own ruling. **KNOWN REDS CARRIED BY NAME TO THE LAST CLOSE: `observedS
 ESTATE INSTANCE drift; A1/A7) and `writerReach.walker` (its three arms that compare the observed-shape register's frozen
 corpusMeta: originCount 15031 against 15106 live, shapes 1741 against 1748).** The last close starts from CL20's table above
 (the twelve identities: reader, key, container, landed point, writer, class).
+
+## THE THIRD MERGE (635c9b57e) AND THE LAST STEP (rule C8: what counts the tree, last)
+
+| # | family | door | moved | commit |
+|---|---|---|---|---|
+| — | MERGE (the chair's word, 05:34 UTC) | `git merge --no-ff 635c9b57e` | clean; 7 files, one line of src/ (tradeListDisplay.js:697, the two dead conjuncts gone: CLOSE-SWEEP 8ecd7c61b) | 7a7204c00 |
+| l1 | every door that reads src/ | presumption classes exit 0 (fresh 0 · stale 0 · 1789); presumed things fresh 4 (the four); fact layers 0 · 0; writers' reach exit 0; wiring census `--check` exit 0 | — | — |
+| l2 | edge bundles | `npm run build:edge-shared` twice | NOTHING moved (engine 5bf3974b, 435 inputs; grounding ded4fab9, 182): the one line is no bundle's input; the stamps discarded; 22e072a49 stands | — |
+| l3 | the lighting census | the walker plainly | 34/34: no test file came by the merge; 55d5bf498 stands (3,682) | — |
+| l4 | the goods roster | `vendorPdfLazy`'s arm "every consumer in the tree is declared" at the last step | green under VERIFY_DIST: no row printed, none written | — |
+| l5 | THE SIZE CEILINGS (CL3; the worker CL12) | one `npm run build` of this tree and of 6483322cc; `VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js tests/build/generationWorkerLazy.test.js tests/build/engineServiceStoreParity.test.js` (5 red, then 70/70); the causes measured by one build at each round boundary | worker 2,356,121 -> 2,525,028; engine chunk < 881,331 -> < 904,174; first paint 1,139,072 -> 1,163,565, gzip 362,621 -> 370,414, Brotli 304,224 -> 310,664 | 7d8f05cf5 |
+
+`npm run verify:dist` whole at 7d8f05cf5: no FAILED row; STRICT DIST REFUSED on the two SKIPPED rows only
+(engineBundleReplay's golden and fence arms: Part 2). engineServiceStoreParity GREEN (the law). Build output removed from
+every tree.
+
+## THE NET (C7) AT 7d8f05cf5
+
+- `npx vitest run tests/lint tests/build` (one run, by message): **3 of 285 files red, 7 tests: observedShapeReaders.walker 3
+  (SHRINK-ONLY, the live-estate drift, A1/A7: CL26, carried to the last close), writerReach.walker 3 (the three arms that read
+  the observed-shape register's corpusMeta: CL26), presumedThings.walker 1 (exactly the four: CL23, the chair's own commit
+  after the merge)**. Nothing else.
+- Both type gates: `typecheck:ratchet` exit 0 (167, ceiling 167); `typecheck:domain:strict` exit 0 (1113, ceiling 1113).
+- `npx eslint` on every JS file this seat's commits touched: exit 0.
+- Red at 70e557d5b and green here, each alone (B0's list): presumptionClasses, factLayers, newsVoiceContract,
+  newsHeadlineContract, proseFamilyContract, tuningRegister, generationForkRegistry.contract (green at both), poolDominance,
+  siteCoherenceRatchet, domainAnyCastBaseline (by CLOSE-SWEEP's cure), ruinFilterRoster, noLegacyFactionReaders,
+  intentAtlasSoakDistiller, engineServiceCore, engineServiceStoreParity, the AI bundles' freshness, edgeSharedBundleReproducibility,
+  phoneChromeFloor.census, dossierPhoneFloorAllViews, sovereigntyLightingContract; and under VERIFY_DIST vendorPdfLazy and
+  generationWorkerLazy.
+
+## FOR THE OWNER, IN PLAIN WORDS
+
+- Every stored count, register, bundle and ceiling that the rounds since the last close moved has been re-taken through its own
+  procedure, once, on the final tree, with its cause named. Where no cause could be shown I stopped and the chair ruled first.
+- **The app grew.** Each figure below is recorded as the new ceiling and is yours to veto:
+  - **The generation worker** (the file that builds a town in the background): 2,356,121 -> 2,525,028 bytes, **+168,907**. That
+    is over the 60,000 stop, and **you accepted it** ("I defer these to you:" / "the Vercel limit; "accept the worker size")",
+    03:42 UTC). What grew it: the round BAR5 (+54,698), the rare secrets and DEBT-1 (+50,887), the round BAR6 (+25,413).
+  - **The engine chunk** (loaded when you first generate): 881,330 -> 904,173, **+22,843**. What grew it: the rare secrets and
+    DEBT-1 (+8,731), BIRTH-3 and the sixth chair's landings (+5,416), the round BAR7 (+3,915).
+  - **The first screen**: 1,139,072 -> 1,163,565 bytes raw, **+24,493** (gzip +7,793, Brotli +6,440). What grew it: BIRTH-3
+    (+10,582), the round BAR5 (+7,871), the round BAR6 (+3,515).
+- **Variety owed** (two drawn pools now print one line more often; recorded at the new figure, not cured): the houses' late
+  descriptions (their siege twins print only under siege) and the money-trouble tension between ruler and creditor (one line
+  now refused where a seat is already held).
+- **The site map's contradictions** rose by two (a desert hamlet and a desert thorp now read as mountain flanks, because raw sand
+  is exported only where a glasshouse stands): recorded, on the known-faults list.
+- The remote engine and the local one still agree. The signed golden record (Part 2) is not taken here.
+
+## FOR PART 2 (each alone at 7d8f05cf5; they read the golden corpus or a figure derived from it: CLOSE-DOORS-2's)
+
+generatorGoldenMaster 1/3, espionageDormancyFence 1/21, dossierProseManifest 2/17, dmLayerGoldenIsolation 1/15,
+heraldKnowledgeDeskGolden 1/3, pipelinePinnedMode 3/15, pipelinePinnedChoosers 1/7, powerEconomyFreshness 1/10,
+rosterFinalUnderHeldRoster 1/7, nameHeldThroughAssembly 1/7, worldFactRederive 1/7, editWorldFactResources 2/6, x46NpcBand
+1/24, institutionBudgetPromise 1/1, mergeLadderHeldKeys 1/8, editCorpusRatchet 1/8 (A7, [695, 275, 2173] -> [695, 275, 2176]:
+CLOSE-DOORS-2's by the chair's word of 04:47 UTC; not taken here), generationForkCensus A1 (the control row's hash) and A6's
+count (23 -> 54, CLOSE-DOORS-2's 536a04fb6); engineBundleReplay's golden and fence arms (skipped; they arm themselves when the
+golden is re-recorded) and with them `npm run verify:dist`'s only refusal.
+
+## WHAT IS LEFT, IN ORDER
+
+1. The chair's own commit of the four presumed lines (CL23) after this branch is merged: `presumedThings.walker` turns green
+   by it.
+2. THE LAST CLOSE (CL26): the observed-shape register's one schema rung, under its own ruling, starting from CL20's table
+   above (ten identities remain after CLOSE-SWEEP's cure of the two dead reads); `observedShapeReaders.walker` (3 arms) and
+   `writerReach.walker` (3 arms) green by it.
+3. PART 2 (the signed golden door): the files above.
+4. Scratch: logs, scripts and measures stay in this seat's scratch directories; none is committed. Two detached worktrees of
+   the scratch clone (at 6483322cc and 70e557d5b) hold no build output.
