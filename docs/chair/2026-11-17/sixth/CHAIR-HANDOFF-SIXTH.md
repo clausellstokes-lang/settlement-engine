@@ -1829,3 +1829,12 @@ should be paused or archived by the owner's hand.
   after point 31 (FISH-ROWS fits; not measured). NOT YET READ: whether the host skipped this push's deployment (the
   first with the key): no tool here reads a bare commit's statuses; it is read on the pull request's head at the
   final push.
+- 04:31 UTC, 2026-11-18 · THE COVERAGE FLOORS HOLD AT THE FROZEN LINE (CHECKS-1's measure, 04:30; its fd3d16428 holds
+  `coverage.log`): the job's own command with `--coverage.reportOnFailure=true` at 70e557d5b: 661 test files
+  selected, 653 pass, 16 tests in 8 files fail (all stored figures of the close's list); NO threshold error; every
+  one of the seven files above its floor (statements, branches, functions, lines against the floor):
+  `checkoutReconcile.js` 88.09 83.33 66.66 88.88 (83 78 61 83); `creditLedger.js` 15.38 26.08 28.57 17.24 (10 21 23
+  12); `pendingDossier.js` 83.18 82 90 91.3 (78 77 85 86); `saves.js` 85.82 83.25 93.9 92.3 (68 68 75 79: it GREW
+  with its 141 new lines); `stripe.js` 20 20 26.66 22.11 (0 0 9 0); `aiSlice.js` 72.47 60.35 55.66 76.97 (42 39 35
+  46); `creditsSlice.js` 68.75 100 54.54 66.66 (11 0 7 11). THE CHAIR'S ONE COMMENT ON #75 FOR THAT JOB IS POSTED
+  (id 6969100356): the job is red by the close's reds in its reach, the floors hold, nothing of its own to fix.
