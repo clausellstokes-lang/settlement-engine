@@ -146,7 +146,7 @@ describe('has_surveyor_entitlement — AFTER migration 201', () => {
     expect(await entitled(db)).toBe(false);
   });
 
-  it('the paying subscriber is unaffected — the original question still answers', async () => {
+  it('the paying subscriber is unaffected: a subscriber still reads entitled', async () => {
     await asUser(db, SUBSCRIBER);
     expect(await entitled(db)).toBe(true);
   });
