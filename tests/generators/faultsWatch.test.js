@@ -18,6 +18,8 @@
 //      keeps the full chain everywhere.
 //   7. FR22 (3): the Small prison/stocks' "Holding cells" holds "pending trial" only where the Legal row's court sits;
 //      elsewhere its twin "Short-term detention until a fine is paid." (the label kept).
+//   8. FR25: the tie "… appointed to judge a case …" and the line "… before a magistrate." are declared on `court sits` as it
+//      reads at the draw: neither prints where the final Legal row has no court; both print where a courthouse sits.
 import { describe, it, expect, beforeAll } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -39,10 +41,12 @@ import { variantByVid } from '../helpers/drawnProse.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
-/** PAGE-COPY seedcfg.mjs's r2r- and bar0- arms. @param {string} seed */
+/** PAGE-COPY seedcfg.mjs's r2r-, r2s- and bar0- arms. @param {string} seed */
 function configOf(seed) {
   let m = seed.match(new RegExp(`^r2r-${SIZE}-(\\d+)$`));
   if (m) return { ...DIALS, settType: m[1] };
+  m = seed.match(new RegExp(`^r2s-(\\w+)-${SIZE}-(\\d+)$`)); // FR25: seedcfg.mjs's r2s- arm, verbatim in shape
+  if (m) return { ...DIALS, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] };
   m = seed.match(new RegExp(`^bar0-${SIZE}-([a-z_+]+)-([a-z_]+)-(\\d+)$`));
   if (!m) throw new Error(`a guard seed is a census seed: ${seed}`);
   const st = m[2] === 'calm' ? [] : m[2].split('+'); const route = m[3] === 'rand' ? {} : { tradeRouteAccess: m[3] };
@@ -56,6 +60,7 @@ const SEEDS = Object.freeze([
   'bar0-hamlet-under_siege-rand-29', 'bar0-hamlet-under_siege-rand-34',
   'r2r-town-5', 'r2r-town-4', // FR19 item 6: a town hall the stamped flag calls a court; the Legal row names none
   'bar0-town-calm-rand-35', 'r2r-town-1', // FR22 (3) item 7: the Holding cells beside a sitting court, and beside a council's bench
+  'bar0-town-calm-rand-30', 'r2s-plague_onset-town-0', 'r2r-town-29', 'bar0-city-wartime-rand-36', // FR25: the court's lines
 ]);
 
 /** @type {Map<string, any>} */
@@ -317,5 +322,42 @@ describe('7 · the Holding cells say "pending trial" only where a court sits (FR
       expect(cells(t).map((/** @type {any} */ x) => String(x.desc)), seed).toEqual([PENDING]);
     });
     expectNoSeedFailures(failures, 'item 7 negatives');
+  });
+});
+
+describe('8 · the court\'s ties print only where a court sits (FR25)', () => {
+  const JUDGE = /has been appointed to judge a case in which/;
+  const MAGISTRATE = /before a magistrate\./;
+  /** every tie line of a town. @param {any} t */
+  const tieLines = (t) => (t?.relationships || []).flatMap((/** @type {any} */ r) => [String(r?.tension ?? ''), String(r?.description ?? '')]);
+  it('every town of the guard: neither line prints where the final Legal row has no court', () => {
+    const failures = collectSeedFailures(SEEDS, (seed) => {
+      const t = BORN.get(seed);
+      if (courtHoldersOf(t).length > 0) return;
+      for (const l of tieLines(t)) if (JUDGE.test(l) || MAGISTRATE.test(l)) throw new Error(`prints "${l.slice(0, 90)}" where no court sits`);
+    });
+    expectNoSeedFailures(failures, 'FR25');
+  });
+  it('POSITIVE: the towns that printed them with no court (bar0-town-calm-rand-30 "Prison only"; r2s-plague_onset-town-0 "None") keep a tie of the pool in their place', () => {
+    const failures = collectSeedFailures([['bar0-town-calm-rand-30', JUDGE], ['r2s-plague_onset-town-0', MAGISTRATE]], ([seed, re]) => {
+      const t = BORN.get(seed);
+      expect(courtHoldersOf(t).length, `${seed}: no court sits`).toBe(0);
+      const lines = tieLines(t);
+      expect(lines.length, `${seed}: the ties stand`).toBeGreaterThan(4);
+      expect(lines.filter((l) => re.test(l)), seed).toEqual([]);
+    });
+    expectNoSeedFailures(failures, 'FR25 positives');
+  });
+  it('NEGATIVE: where a courthouse sits (bar0-city-wartime-rand-36) both lines still print', () => {
+    const t = BORN.get('bar0-city-wartime-rand-36');
+    expect(courtHoldersOf({ institutions: t.institutions }).length, 'premise: a courthouse on the roster').toBeGreaterThan(0);
+    const lines = tieLines(t);
+    expect(lines.some((l) => JUDGE.test(l)), 'the judge').toBe(true);
+    expect(lines.some((l) => MAGISTRATE.test(l)), 'the magistrate').toBe(true);
+  });
+  it('DECLARED (the chair\'s LR3): r2r-town-29, a council bench\'s court (no courthouse), passes the judge over', () => {
+    const t = BORN.get('r2r-town-29');
+    expect(courtHoldersOf(t).length > 0 && courtHoldersOf({ institutions: t.institutions }).length === 0, 'premise: a court by a service only').toBe(true);
+    expect(tieLines(t).some((l) => JUDGE.test(l))).toBe(false);
   });
 });

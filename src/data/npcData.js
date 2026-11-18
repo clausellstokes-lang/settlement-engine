@@ -1849,7 +1849,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) => `${r.name} could end it with one blow, and keeps holding back. Nobody knows why.`, colour: true },
       { line: (r, s) => `Someone among ${r.name}'s people reports to ${s.name}. ${r.name} knows it, and does not know who.`, colour: true },
       { line: (r, s) =>
-        `${r.name} has a witness willing to name ${s.name} before a magistrate. ${s.name} knows where the witness lives.`, needs: ["court"] }, // BAR6-PEOPLE (LAW 5 widened, office): a magistrate sits only where a court does
+        `${r.name} has a witness willing to name ${s.name} before a magistrate. ${s.name} knows where the witness lives.`, needs: ["court sits"] }, // BAR6-PEOPLE (LAW 5 widened, office): a magistrate sits only where a court does; FAULTS-WATCH FR25 (b): `court sits`, as it reads at the draw
       { line: (r, s) =>
         `${s.name} has offered ${r.name} a truce and a purse. ${r.name} has not answered, which ${s.name} counts as progress.`, colour: true },
       { line: (r, s) =>
@@ -2357,7 +2357,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) => `What first broke ${r.name} and ${s.name} apart is happening again, and both of them know it.`, colour: true },
       { line: (r, s) => `${r.name} and ${s.name} each think the other owes the apology.`, colour: true },
       { line: (r, s) => `A newcomer keeps trying to reconcile ${r.name} and ${s.name}, and is about to learn why nobody else does.`, colour: true },
-      { line: (r, s) => `${s.name} has been appointed to judge a case in which ${r.name} is a party.`, needs: ["court"] }, // BAR6-PEOPLE (LAW 5 widened, office): a case is judged where a court sits
+      { line: (r, s) => `${s.name} has been appointed to judge a case in which ${r.name} is a party.`, needs: ["court sits"] }, // BAR6-PEOPLE (LAW 5 widened, office): a case is judged where a court sits; FAULTS-WATCH FR25 (a): the Legal row's court (`court sits`), as it reads at the draw
       { line: (r, s) => `${r.name} has found the document that proves what ${s.name} did, and has kept it locked away.`, colour: true },
       { line: (r, s) =>
         `${r.name} and ${s.name} have been handed the same dispute to settle together. The first meeting is next week.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },  // BAR2-PEOPLE (PP7): no council seat claimed for a card that holds none (70 of 95 ties); text only, the same admission
