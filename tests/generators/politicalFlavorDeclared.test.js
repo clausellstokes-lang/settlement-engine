@@ -19,7 +19,13 @@ const CALM = factsOf({ institutions: [], config: {}, stress: [] });
 /** One political event: the cascade lands on `stable` (political < 2, nothing else qualifies). */
 const EVENTS = [{ type: 'political', name: 'The Quiet Charter', severity: 'minor' }];
 const render = (/** @type {any} */ row) => collapseArticleSeams((typeof row === 'object' ? row.text : row)(EVENTS));
-const CRISIS_SAFE = new Set(POLITICAL_FLAVOR.stable.filter((r) => typeof r === 'object' && (r.crisis || []).includes('any') && !(r.needs || []).length).map(render));
+// RE-KEYED BY IDENTITY 2026-11-18 (BAR8-SCENES-3, the chair's message under BR25 (4)): the anchor was `crisis: any` alone; BAR8-SCENES
+// (BR23 (2), K's 12c) gave the stable pool a twin for the five hard crises, which declares them BY NAME (R6: never `crisis: any`),
+// and under the siege it prints. The same claim: a row is crisis-safe for the test's crisis (the siege) where its declaration
+// ADMITS that crisis (`any`, or `under_siege` named, and not excluded), with no other need
+const SIEGE = 'under_siege';
+const CRISIS_SAFE = new Set(POLITICAL_FLAVOR.stable.filter((r) => typeof r === 'object' && ((r.crisis || []).includes('any') || (r.crisis || []).includes(SIEGE))
+  && !(r.excludes || []).includes(`crisis: ${SIEGE}`) && !(r.needs || []).length).map(render));
 const ALL_STABLE = new Set(POLITICAL_FLAVOR.stable.map(render));
 
 describe('the POLITICAL_FLAVOR cascade resolves through drawDeclared (CENSUS-1f unit 3)', () => {
