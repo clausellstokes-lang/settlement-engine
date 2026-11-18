@@ -48,7 +48,17 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 // hold are kept (k of n = 11 of 12); the first seam settlement in corpus order not in the set whose seat's own line is a voiceable
 // want overridden by the crisis secret, 28, joins them. Measured over soak1k-0..239: 33 seats voiced with the secret and no separate
 // keeper row (26 of them with a want overridden). Was [2, 18, 27, 34, 36, 37, 38, 42, 90, 97, 114, 134].
-const SEAM_SEEDS = [2, 18, 28, 34, 36, 37, 38, 42, 90, 97, 114, 134];
+// BAR8-PEOPLE-2 PART A (2026-11-18, re-keyed BY IDENTITY, the same idiom; rule R8; ruling BR27 (1)): K-PEOPLE's 14f holder deal
+// (`src/data/stressInstitutionEffects.js`'s holder rows, read in `src/generators/npcGenerator.js`) refuses the crisis row
+// "Authorised an illegal sortie…" to a card whose house and role hold no command, so at 0c135c83a 1 of the twelve is no longer
+// a seam, measured: 28 (the sortie is now kept by the company captain, Ivor Ryan: a separate `secret` row; the seat-holder,
+// the Master of the Guilds, voices their own want). The page is right there (the reader's mutation, BR27). The eleven that still
+// hold are kept (11 of 12); the first seam settlement in corpus order not in the set whose seat's own line is a voiceable want
+// overridden by the crisis secret, 0, joins them (checked, not taken on trust: its seat's own line is "manage the influx without
+// the old residents concluding…", a voiceable want, overridden by "Knows the migration was triggered by something upstream…").
+// Measured over soak1k-0..239: 36 seats voiced with the secret and no separate keeper row (34 of them with a want overridden).
+// Was [2, 18, 28, 34, 36, 37, 38, 42, 90, 97, 114, 134].
+const SEAM_SEEDS = [0, 2, 18, 34, 36, 37, 38, 42, 90, 97, 114, 134];
 const FOUNDRY_SEED = 2;
 /** @type {Record<number, any>} */
 const born = {};
