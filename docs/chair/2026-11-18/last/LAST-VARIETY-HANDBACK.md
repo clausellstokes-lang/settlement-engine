@@ -9,7 +9,9 @@ Brief: `docs/chair/2026-11-18/last/BRIEF-LAST.md` (chair's lane), section LAST-V
 | 2455faed8 | item 1: two lines at the end of each DS-DEF-3 safety pool; the guard `tests/domain/lastVariety.test.js` |
 | 94a44219f | item 3 measured, nothing written; item 1's proof |
 | f3b728bb0 | item 1: Unsafe v6 declared (`no watch`); the older tests its lines made untrue, re-keyed by identity |
-| f00dd3a66 | item 2 HELD for the chair's word: its patch `LAST-VARIETY-ITEM2-WANT.diff` and figures |
+| f00dd3a66 | item 2 held for the chair's word: its patch `LAST-VARIETY-ITEM2-WANT.diff` and figures |
+| 092f07ab2 | the hand-back, as it stood before the ruling reached me |
+| 6e36e0359 | item 2 landed under LR2: the `want` cell, `goals.js`'s hunk, the §6.6 count, the guard's item 2 block |
 | (the last) | the net, the stored figures, what is left |
 
 The measuring scripts (scratch, not committed): the 900 born as FAULTS-DESKS's guard births them (the thirty
@@ -73,35 +75,51 @@ each. 23 of the 93 under a siege or with no market (cells of 3 or 5).
 cell refused where `needUnmet`; a line appended there is refused with them, and the other SUPPLY cells (impaired,
 isolation, expansion) are not dealt to these cards. The cure needs one push in `goals.js`, a file outside the item.
 
-**HELD, NOT COMMITTED (no word from the chair by the hand-back; its session idle).** The cure is written and measured
-in my tree, and handed over as a patch that applies on f3b728bb0: `docs/chair/2026-11-18/last/LAST-VARIETY-ITEM2-WANT.diff`
-(`git apply` it; four files: `src/data/people/goalFamilies.js`, `src/generators/people/goals.js` (two lines),
-`tests/data/goalFamilies.test.js` (the §6.6 count), `tests/domain/lastVariety.test.js` (item 2's guard block)).
+**LANDED UNDER THE CHAIR'S RULING LR2 (sent 18:39 UTC, delivered to this seat at 19:58: GRANTED as proposed), commit
+6e36e0359.** Before the ruling reached me the cure was held and handed over as a patch (f00dd3a66,
+`LAST-VARIETY-ITEM2-WANT.diff`, kept beside this file as the record of what was proposed); the commit is that patch, with
+the ruling named in the cell's comment and in the §6.6 count's dated note.
 
 - **The cell.** `GOAL_FAMILY_LINES.SUPPLY.want` (slots `resource`, `house`; `GOAL_SUBKIND_SLOTS.SUPPLY.want`), at the
-  family's END; the intent key falls to SUPPLY's `*` (`secure_supply`). `goals.js` pushes it beside the refused dependency
-  cell ONLY where `needUnmet` holds, so no card with a met dependency moves by it. A refused dependency pick then takes the
-  family's next admitted line (a want line), draw-free, as POWERS-9 resolves it.
-- **The four lines (THE OWNER'S VETO LIST; none presumes a supply, none buys from outside, so none is refused under a
-  siege; the slot contract held by `goalFamilies.test.js`):**
+  family's END; the intent key falls to SUPPLY's `*` (`secure_supply`). `goals.js` (one hunk, two lines) pushes it beside the
+  refused dependency cell ONLY where `needUnmet` holds. A refused dependency pick takes the family's next admitted line (a
+  want line), draw-free, as POWERS-9 resolves it. `tests/data/goalFamilies.test.js`'s §6.6 counts re-keyed under LR2
+  (SUPPLY 48 → 52, the total 524 → 528).
+- **The four lines (THE OWNER'S VETO LIST).** Each presumes only what `needUnmet` holds (the work at the house needs the
+  good, and the page says it is needed and not brought in); none presumes a supply, none names a good the town has or a
+  buyer it lacks, none buys from outside, so none is refused under a siege; the slot contract held by `goalFamilies.test.js`.
+  Printed on the NPCs tab, the summary, the PDF and the journal (the card's goal):
 
-  | vantage | line | e.g. (as it fills on a card of the 900) |
+  | vantage | line | three cards it is dealt on (the 900) |
   |---|---|---|
-  | short | Find something the work at {house} can use in place of {resource}. | bar0-city-wartime-rand-45, Klara Weber (the citadel; stone and iron and grain); bar0-city-wartime-rand-31, Banbh Farrell (the banking houses; precious metals); r2r-town-30, Helga Gormsson (the blacksmiths; iron and fuel) |
-  | short | Gather what {resource} can be found close to home for the work at {house}. | bar0-hamlet-under_siege-rand-39, Khongorzul Ongut (the citizen militia; iron, under a siege); r2r-metropolis-18, Katla Finsson (the banking district; precious metals); r2r-metropolis-50, Lasair Brennan (the citadel) |
-  | long | Open a lasting way to bring {resource} in for the work at {house}. | r2r-village-8, Rashid Besud (the citizen militia; iron); r2r-town-9, Grettir Kolbeinsson (the carpenters; timber); r2r-town-23, Taghrid ibn Ali (the citadel) |
-  | long | Win those who govern here over to bringing {resource} in for the work at {house}. | bar0-town-occupied-rand-40, Varun Mukherjee (the docks; timber); r2s-insurgency-metropolis-2 and r2s-slave_revolt-metropolis-0 (the banking district; precious metals) |
+  | short | Find something the work at {house} can use in place of {resource}. (a substitute tried) | bar0-city-wartime-rand-45, Klara Weber (the citadel; stone and iron and grain); bar0-city-wartime-rand-31, Banbh Farrell (the banking houses; precious metals); r2r-town-3, Erin Lynch (the docks; timber) |
+  | short | Gather what {resource} can be found close to home for the work at {house}. (a supply sought at home) | bar0-hamlet-under_siege-rand-39, Khongorzul Ongut (the citizen militia; iron, under a siege); r2r-metropolis-18, Katla Finsson (the banking district; precious metals); r2r-metropolis-50, Lasair Brennan (the citadel) |
+  | long | Open a lasting way to bring {resource} in for the work at {house}. (a supplier sought) | r2r-hamlet-56, Yuri Petrov and r2r-village-8, Rashid Besud (the citizen militia; iron); r2r-town-9, Grettir Kolbeinsson (the carpenters; timber) |
+  | long | Win those who govern here over to bringing {resource} in for the work at {house}. (the grievance, carried to whoever should bring it) | bar0-town-occupied-rand-40, Varun Mukherjee (the docks; timber); r2s-insurgency-metropolis-2, Michail Xiphilinos and r2s-slave_revolt-metropolis-0, Solveig Jokullsson (the banking district; precious metals) |
 
-- **Proof (in my tree).** Over the 900: cards whose SUPPLY family holds fewer than two admitted lines, 93 → **0** in each
-  vantage. The guard block (cells and slots; five such cards, two under a siege, hold two admitted lines a vantage; a want
-  line dealt on two cards of the 900; NEGATIVE: no want line beside a met dependency, over every card of the guard's towns)
-  green; red at the base (no cell). `goalFamilies`, `goals`, `goalChainWords`, `goalCharterRefused` and `faultsNeed` green.
-- **Declared moves (re-measured with the patch's final words, applied and reverted in my tree).** Field family: the cards' goals (`npcs[].goal` short, long and
-  intent) on the NPCs tab, the summary, the PDF and the journal. Towns moving: the thirty 1, the 150 3, the 720 37 (82
-  cards: the cards that now draw a want line, and cards whose draw moved because a held text moved). **13 of the 525** move
-  by the golden's own `hashFor` (town|… desert, city|… mountain rows among them). Stored figures it would move: the golden
-  master (already red at the base), `goalFamilies.test.js`'s §6.6 count (SUPPLY 48 → 52, 524 → 528: in the patch), the
-  estate's file count (no new file: unchanged).
+**PROOF (LR2's four), base b014a7bf3 against the tip 6e36e0359, over the 900 as the guards birth them:**
+
+- **(the cure)** cards whose SUPPLY family holds fewer than two admitted lines: 93 → **0**, in each vantage.
+- **(a) the moves, counted.** 82 cards in 41 towns (the thirty 1, the 150 3, the 720 37). Every town is one of the 85
+  (outside them: **0**). 41 of the 93 cards move (a `*` below; the other 52 never draw SUPPLY, so nothing about them moves),
+  and 41 later cards move through the held sets (a text another card no longer holds, or now holds). Fields, by card:
+  `npcs[].goal.short` 35, `npcs[].goal.long` 74, `npcs[].goal.intent` 56 (the intent rides with its text); `stressNote` 0.
+  Every town, every card:
+
+  **the thirty** (1 towns): bar0-city-wartime-rand-45: npc_citadel* (short+long)
+  **the 150** (3 towns): bar0-city-wartime-rand-31: npc_banking_houses* (short+long), npc_fuller (long), npc_town_crier (short), npc_multiple_adventurers_guilds (long), npc_sage_s_quarter (long), npc_theaters (short), npc_almshouse (short+long); bar0-hamlet-under_siege-rand-39: npc_citizen_militia* (short+long); bar0-town-occupied-rand-40: npc_docks_port_facilities* (long)
+  **the 720** (37 towns): r2r-hamlet-56: npc_citizen_militia* (long); r2r-village-8: npc_citizen_militia* (long); r2r-town-3: npc_docks_port_facilities* (short+long), npc_customs_house (long), npc_inn_multiple (long); r2r-town-9: npc_carpenters_5_15* (long); r2r-town-23: npc_citadel* (long); r2r-town-30: npc_blacksmiths_3_10* (short+long), npc_veiled_bbfffdd0ee4635dd (long); r2r-town-54: npc_butchers_3_8* (long); r2r-city-21: npc_banking_houses* (short+long); r2r-city-56: npc_banking_houses* (long); r2r-metropolis-1: npc_banking_district* (short+long), npc_warehouse_district (short), npc_veiled_42eef287985095da (long); r2r-metropolis-4: npc_banking_district* (short+long); r2r-metropolis-6: npc_banking_district* (short+long); r2r-metropolis-18: npc_banking_district* (short+long), npc_dungeon_delving_supply_district (short); r2r-metropolis-30: npc_banking_district* (short+long), npc_luxury_goods_quarter (long), npc_coaching_inn (long); r2r-metropolis-50: npc_citadel* (short+long); r2s-under_siege-city-3: npc_banking_houses* (long), npc_toll_bridge (long), npc_chroniclers_exchange (long), npc_butchers_3_8 (long), npc_customs_house (long), npc_tailor_s_guild (long); r2s-famine-metropolis-1: npc_banking_district* (long), npc_auction_house (long); r2s-occupied-metropolis-0: npc_banking_district* (long); r2s-occupied-metropolis-3: npc_carpenters_5_15* (long), npc_butchers_3_8 (long), npc_glassmakers (long), npc_ropemaker (long); r2s-indebted-city-1: npc_citadel* (short+long); r2s-recently_betrayed-city-0: npc_professional_city_watch* (short+long), npc_blacksmiths_3_10* (short+long); r2s-recently_betrayed-metropolis-2: npc_banking_district* (long); r2s-infiltrated-town-0: npc_blacksmiths_3_10* (short+long), npc_cartographer_s_workshop (long), npc_apothecary_established (long); r2s-infiltrated-city-1: npc_banking_houses* (short+long); r2s-infiltrated-metropolis-0: npc_banking_district* (long), npc_dungeon_delving_supply_district (long); r2s-plague_onset-hamlet-1: npc_citizen_militia* (long); r2s-plague_onset-city-3: npc_specialized_metalworkers (short); r2s-succession_void-hamlet-1: npc_citizen_militia* (long); r2s-monster_pressure-metropolis-0: npc_banking_district* (short+long); r2s-insurgency-city-2: npc_blacksmiths_3_10* (short+long); r2s-insurgency-metropolis-2: npc_banking_district* (long); r2s-religious_conversion-town-2: npc_alchemist_shop* (short+long); r2s-religious_conversion-city-3: npc_banking_houses* (short+long), npc_customs_house (short), npc_warehouse_district (long), npc_carpenters_5_15 (short), npc_potter (long), npc_tailor_s_guild (short+long), npc_butchers_3_8 (long), npc_red_light_district (short); r2s-slave_revolt-town-2: npc_docks_port_facilities* (short+long), npc_harbour_master_s_office (long), npc_bowyers_fletchers_guild (long); r2s-slave_revolt-metropolis-0: npc_banking_district* (long), npc_bowyers_fletchers_guild (long), npc_red_light_district (long); r2s-slave_revolt-metropolis-1: npc_banking_district* (long); r2s-wartime-metropolis-2: npc_banking_district* (short+long), npc_sawmill_commercial (short+long), npc_brewery (short+long), npc_glassmakers (long)
+
+- **(b) no draw moves beyond.** With every `npcs[].goal` and `npcs[].stressNote` struck, **every record of the 900 is
+  byte-equal** to b014a7bf3 (sha-256 of the whole record: 0 of 900 differ).
+- **(c) the 525 by the golden's own procedure.** **13 of 525** move (whole-record hash, as `hashFor` spells it); with the goal
+  fields struck, **0 of 525**: every one moves by the goals. (The golden is the last close's; 191 of the 525 already differ
+  from the stored fixture at the base.)
+- **(d) the negative.** Over the 900, 8,264 card·vantages hold an ADMITTED dependency line; **0** of them hold a `want`
+  line. Held in the guard too (`lastVariety.test.js` item 2: over every card of its towns), with the positives beside it
+  (five cards, two under a siege, hold two admitted SUPPLY lines a vantage; a want line dealt on two cards).
+- The guard's item 2 block red at the base (no cell), green at the tip; `goalFamilies`, `goals`, `goalChainWords`,
+  `goalCharterRefused`, `faultsNeed` green.
 
 ## 3 · Item 3: CL22's two lopsided pools, measured; nothing written
 
@@ -157,12 +175,12 @@ for nine repeats. Named for the chair as variety owed.
 | `factLayers.poolTable.json`: DS-DEF-3 › Very Safe and › Unsafe placed at layer 3 | they now declare `crime wave` (layer 4: Very Safe v6 `no crime wave`, Unsafe v5 `crime wave`); BAR6-DEFDESK placed Safe and Moderate at 5 for the same atom. Kept true rather than reworded to pass (R6): the placement is the close's, or a ruling's |
 | `presumedThings` ARM 1 fresh hits (stored register) | 5 → 6: Moderate v10 ("With no gaol at …") read as naming a prison undeclared; it declares `no court or gaol`, which holds only where no gaol stands. The same reading the walker gives Unsafe v4 at the base (FAULTS-DESKS named it): the walker's, not reshaped |
 | `sovereigntyLightingContract`'s estate file count | 3696 → 3697 (my guard) |
-| the golden master (`tests/fixtures/generator-golden-master.json`; 191 of 525 already differ at the base) | item 1: 0 of 525. Item 2 (held): 13 of 525 if applied |
+| the golden master (`tests/fixtures/generator-golden-master.json`; 191 of 525 already differ at the base) | item 1: 0 of 525; item 2: 13 of 525, every one by the goal fields |
+| `tests/data/goalFamilies.test.js`'s §6.6 count | SUPPLY 48 → 52, 524 → 528: re-keyed in 6e36e0359 under LR2 (not a re-take: the ruling's own instruction) |
 | the wiring census stamp | untouched: projected after a fresh census in the tree, the census restored byte-equal (the leaf committed, the census not) |
 
 ## 6 · Left by name
 
-- **Item 2, held**: the patch `LAST-VARIETY-ITEM2-WANT.diff` waits on the chair's word on `goals.js` (section 2).
 - **The lord-ruled corner of `gov_econ_dependence`** (item 3): four lines where a lord rules; nine repeat draws in four
   towns of the corpus. Not written (a line re-deals every tie of the archetype).
 - **The Unsafe twin v4 prints in no town of the 900** (section 1): admitted in its three towns, out-drawn there.
