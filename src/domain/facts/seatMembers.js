@@ -24,9 +24,15 @@
 // tests/build/vendorPdfLazy.test.js, measured by a build). The roster count and the governing power are read here in
 // `membership.js :: membersByRank`'s own terms and `rulingPower.js :: governingFactionOf`'s; with no member cast, the caller
 // hands the government label's answer (`factsOf` passes `rulingBody.js :: rulingBodyOf`, which it already imports).
-
+/**
+ * The record's slices this home reads, as stored (each read defensively; CLOSE-SWEEP S1, the any-casts typed):
+ * @typedef {{ factions?: unknown, governingName?: unknown }} SeatPowers the record's `powerStructure`
+ * @typedef {{ faction?: unknown, name?: unknown, isGoverning?: unknown } | null | undefined} SeatPower a power of `powerStructure.factions`
+ * @typedef {{ memberships?: unknown } | null | undefined} SeatPerson a person of the record's `npcs`
+ * @typedef {{ power?: unknown } | string | number | boolean | null | undefined} SeatMembership an entry of a person's `memberships` (a stored value; an object is read for its power)
+ */
 /** @param {unknown} f @returns {string} a power's name, as `rulingPower.js :: nameOf` reads it */
-const nameOf = (f) => String(/** @type {any} */ (f)?.faction || /** @type {any} */ (f)?.name || '').trim();
+const nameOf = (f) => String(/** @type {SeatPower} */ (f)?.faction || /** @type {SeatPower} */ (f)?.name || '').trim();
 
 /**
  * THE ONE READER of `seat members`.
@@ -35,14 +41,14 @@ const nameOf = (f) => String(/** @type {any} */ (f)?.faction || /** @type {any} 
  * @returns {boolean | undefined}
  */
 export function seatMembersOf(record, bodyOfLabel = () => undefined) {
-  const ps = /** @type {any} */ (record)?.powerStructure || {};
+  const ps = /** @type {{ powerStructure?: SeatPowers } | null | undefined} */ (record)?.powerStructure || {};
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
-  const seat = factions.find((/** @type {any} */ f) => f?.isGoverning) || factions.find((/** @type {any} */ f) => nameOf(f) && nameOf(f) === String(ps.governingName || '')) || null;
+  const seat = factions.find((/** @type {SeatPower} */ f) => f?.isGoverning) || factions.find((/** @type {SeatPower} */ f) => nameOf(f) && nameOf(f) === String(ps.governingName || '')) || null;
   const name = seat ? nameOf(seat) : '';
   if (!name) return undefined;
-  const npcs = Array.isArray(/** @type {any} */ (record)?.npcs) ? /** @type {any} */ (record).npcs : [];
-  const count = npcs.filter((/** @type {any} */ n) => Array.isArray(n?.memberships)
-    && n.memberships.some((/** @type {any} */ m) => !!m && typeof m === 'object' && typeof m.power === 'string' && m.power !== '' && m.power === name)).length;
+  const npcs = Array.isArray(/** @type {{ npcs?: unknown } | null | undefined} */ (record)?.npcs) ? /** @type {{ npcs: SeatPerson[] }} */ (record).npcs : [];
+  const count = npcs.filter((/** @type {SeatPerson} */ n) => Array.isArray(n?.memberships)
+    && n.memberships.some((/** @type {SeatMembership} */ m) => !!m && typeof m === 'object' && typeof m.power === 'string' && m.power !== '' && m.power === name)).length;
   if (count >= 2) return true;
   if (count === 1) return false;
   return bodyOfLabel();

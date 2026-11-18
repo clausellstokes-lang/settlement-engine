@@ -90,7 +90,7 @@ export function factsOf(record, options = {}) {
     /** BAR6-CULTURE (10g-legacy): the event the record's top legacy names destroyed something (`legacyRuin.js`) */
     get legacyRuin() { return legacyRuinOf(record); },
     /** BAR6-CULTURE (6d-court): a court sits on the live roster, the Defense tab's Legal Infrastructure row (`defence.js :: courtHoldersOf`) */
-    get courtSits() { return courtHoldersOf(/** @type {any} */ (record)).length > 0; },
+    get courtSits() { return courtHoldersOf(/** @type {import('./defence.js').CourtRecord} */ (record)).length > 0; },
     /** fact 2: the months of food in store (number | null) */
     get storesMonths() { return storesMonthsOf(record); },
     /** BAR6-DEFDESK (9c.nothing-over): the town grows more than it eats (`growsMoreThanEats.js`) */

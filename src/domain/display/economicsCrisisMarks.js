@@ -188,7 +188,7 @@ export function incomeKindShown(town, src, crises = stoppingCrisesOf(town)) {
   const all = (Array.isArray(chains) ? /** @type {Record<string, unknown>[]} */ (chains) : []).filter((c) => c && typeof c === 'object');
   const incomes = /** @type {{ economicState?: { incomeSources?: unknown } } | null | undefined} */ (town)?.economicState?.incomeSources;
   const titled = all
-    .filter((c) => folded(chainPrintName(/** @type {any} */ (c), town)?.label) === title // the chain's printed name, the leaf's (chainPrintSites F1)
+    .filter((c) => folded(chainPrintName(/** @type {Parameters<typeof chainPrintName>[0]} */ (c), town)?.label) === title // the chain's printed name, the leaf's (chainPrintSites F1)
       // BAR7-ECON item 1 (8f.chain, C4828): or the chain whose card says it feeds this share ("Contributes to Timber Trade"),
       // the card's own reading (`incomeShareOfChain`): "Timber & Lumber · Impaired" feeds "Timber Trade", whose row printed
       // "managed felling and sawmilling keep production consistent" bare under the siege
@@ -232,7 +232,7 @@ const SIEGE_CURTAILED = 'under_siege:curtailed';
 /**
  * An income share's description as the tab prints it: the leaf's mark, then the description of ordinary times.
  * @param {object | null | undefined} town @param {{ source?: unknown, desc?: unknown }} src `economicState.incomeSources[]`
- * @param {((desc: unknown, town: any, reading?: { forgeIdle: boolean }) => string | null) | null} [ordinaryOf] the trade's ordinary line in place of a stored short twin, or null
+ * @param {((desc: unknown, town: { institutions?: unknown } | null | undefined, reading?: { forgeIdle: boolean }) => string | null) | null} [ordinaryOf] the trade's ordinary line in place of a stored short twin, or null
  * @returns {string}
  */
 export function incomeDescShown(town, src, ordinaryOf = null) {
