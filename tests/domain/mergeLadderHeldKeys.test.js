@@ -394,7 +394,12 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // the line f572d12b7 reads 63, the COHERENCE-AGREE lane's own tip 69b53decd 66, the merge 22cc9ef7d 61. Against the line, by
     // trial: JOINED 'E8 culture to norse town|germanic|plains|road|plagued|golden-master-v3'; LEFT the three 'E6 seat' trials on
     // town|germanic|plains|road|civilized / frontier / safe|golden-master-v3. `foreign` stays empty (the rebuilt rows the record's own).
-    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(61);
+    // RE-KEYED at the close of the rounds BAR5 to BAR8 (2026-11-18, CLOSE-DOORS-2, BY MEASUREMENT; record docs/shift-records/2026-11-18-the-close-of-the-
+    // rounds-bar5-to-bar8.json, the owner's word 2026-11-18 03:03:46 UTC): 61 -> 62, this arm's received value at the frozen line 70e557d5b and at the
+    // doors' branch over Part 1's final tip 0af60594a. Green (61) at 6c117344f; bisected on the line's first parent: first 62 at JOIN-17 point 26
+    // (BAR7-LINES, 870e80030; point 25's d94dbdcba reads 61): a pair's second tie in the first's sense re-deals the rival ties a conflict rides on
+    // (its declared conflicts, 29 of the 525), so one more trial's conflict citations are rebuilt by the post-pass. `foreign` stays empty.
+    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(62);
     const foreign = all.filter((trial) => trial.citesOwn === false).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: the line above proves the restatement fires on twelve live trials, so silence here is a cure.
     expect(foreign, `the receipt cites a conflict list that is not the merged record's own:\n${foreign.join('\n')}`).toEqual([]);

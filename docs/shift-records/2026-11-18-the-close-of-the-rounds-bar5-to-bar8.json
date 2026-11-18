@@ -1,0 +1,220 @@
+{
+  "_doc": "THE CLOSE OF THE ROUNDS BAR5 TO BAR8: ONE signed record for this close and for it only (a later seat reads it as history, never as a grant; the closes of the rounds BAR2, BAR3 and BAR4 keep their own records, untouched). It signs the re-take, at the working line's tree as frozen for the close (lane/join-2026-11-14 at 70e557d5b, with Part 1 of the close at its final tip 0af60594a (lane/landing-close-2026-11-18, the chair's line of 06:51 UTC; merged here at 2f4eb8acf); Part 1 moves no generated town: the 525 at 0af60594a (lane/landing-close-2026-11-18, the chair's line of 06:51 UTC; merged here at 2f4eb8acf) are byte-equal to the measure at 70e557d5b), of the reference surfaces the rounds' cures moved, each through its own door, one commit a family. THE BASE OF THE MEASURE (the chair's ruling CL11, 2026-11-18, on this seat's measure): 0ac61b4b4, the tip of BAR4-CLOSE-DOORS-2, which reproduces all 525 stored hashes; NOT 6c117344f, where the line's own stored corpus is already red (285 of 525: the round BAR5's nine branches, JOIN-16 points 1 to 9, joined the line before the BAR4 close and were named red on purpose in JOIN-16 §4 for a later close). THE FAMILY CHECK (CLOSE-DOORS-2, before any write): every one of the 525 golden configurations born at 0ac61b4b4 and at this tree, hashed whole and by leaf path: 485 of 525 move (thorp 56, hamlet 84, village 84, town 93, city 84, metropolis 84); of them 285 already at 6c117344f (BAR5) and 475 between 6c117344f and the tree. Every moved family is one a landed seat's hand-back declares: relationships[].tension 276 (BAR5-THINGS 220, BAR6-PEOPLE 6, BAR7-LINES 57), relationships[].description 63 with .proseVariant 60 (BAR6-PEOPLE, BAR7-LINES; every proseVariant row a description row), relationships[].type / typeName / strength / archetypeKey 57 (BAR7-LINES 10i: a pair's second tie in the first's sense); powerStructure.factions[].desc 241 (BAR6-POWERS: its own count, one family); npcs[].secret.what and .stakes 168 (SECRETS-1: its own count); npcs[].goal 54 (BAR7-LINES: its own count); npcs[].presentation 24 (LEFT-LINES: its own count); npcs[].structuralPosition 1 (BAR5-POWERS), npcs[].personality 1 (BAR6-PEOPLE); resourceAnalysis.gaps 129 with entries in and out (BAR5-CHAINS 63, BIRTH-1, BIRTH-2, BIRTH-3); economicState.primaryImports 117 (BIRTH-1, BIRTH-2, BIRTH-3), .primaryExports 75, .tradeDependencies 37, .activeChains 37, .localProduction 29 (BAR6-RECORD), .foodSecurity 35 (BAR6-CULTURE, BAR6-SEAM-CULTURE), .incomeSources 10 (BAR6-RECORD 9, BAR7-ECON 1); availableServices 102 (information 66: BAR7-LINES, the crier; food 48: BAR8-FISH-ROWS); culturalIdentity 86 (BAR5-FOOD 48, BAR6-CULTURE 42, BAR6-SEAM-CULTURE); economicViability.plotHooks 85 (BAR5-FOOD 59, BIRTH-1 1, BAR7-LINES 25) with .summary 46 (BAR5-FOOD: the summary counts the hooks; every summary row a hooks row), .issues 37 (BAR6-RECORD); arrivalScene 74 (BAR5-THINGS 6, BAR6-SCENES 55, BAR6-RECORD 12, BIRTH-1 1, BAR8-SCENES 1); history.historicalEvents 54 and .currentTensions 38 (BAR7-LINES), history.founding 1 (BAR6-RECORD); settlementReason 38 (BAR5-WORLD: its own count); simulationTrace 37 (BAR6-RECORD); powerStructure.conflicts and conflicts 29, generationCoherenceReceipt 29 (BAR7-LINES: a conflict rides on a rival tie); prominentRelationship 10 (BAR5-THINGS 5, BAR6-PEOPLE 5). No family undeclared; no family moved in more rows than its declarers count. THE ESPIONAGE FENCE (the chair's ruling CL5, the last closes' EF1, vetoable): every other arm of the fence green at this tree (20 of 21); scripts/audit/refence.mjs at 0ac61b4b4 reproduces the committed 8e5881d6... (the spelling proven); at this tree 322 of 360 rows move (thorp 25, hamlet 59, village 59, town 59, city 60, metropolis 60), 360/360 distinct, every moved leaf in a declared family: the golden's families above and, beyond them, resourceAnalysis.imports, its need list and reasons (BIRTH-2, docs/chair/2026-11-17/birth/BIRTH-2-HANDBACK.md:48-49: the supply story), history.currentTensions[].description and .specificIssue, npcs[].stressNote (the war's crown lines reworded), npcs[].goal's targets, the conflicts' parties, issue, stakes, hooks and descriptions, powerStructure.factionRelationships[].narrative (the bargain's line where a conflict left) and the coherence receipt's quoted findings (BAR7-LINES), economicState.activeChains[].outputs (BAR6-RECORD; BAR5-CHAINS), history.historicalCharacter (BAR5-MAGIC; BAR7-SCENES), pressureSentence (BAR6-SEAM-SCENES), npcs[].personality (BAR6-PEOPLE 10e-temper) and npcs[].structuralPosition (BAR5-POWERS, the card twin), institutions[].desc (BAR5-MARKS's siege twins; the sawmill's twin where timber is at hand, the supply story), availableServices.legal and .employment (BAR5-MARKS: C42840 the dues owed; the bodyguards under a siege), economicState.safetyProfile.crimeTypes (BAR6-CRIME; BAR6-SEAM-DESKS), economicState.economicComplexity in the pins (it reads the exports' count: BAR6-RECORD), prominentRelationship's pair (BAR5-THINGS; BAR6-PEOPLE); the espionage subsystem stays dormant. THE DOSSIER PROSE MANIFEST (the chair's ruling CL6, the last closes' MP1): the mixed-pool audience arm green before the write; the drift arm 704 of 1,050 rows. THE HERALD KNOWLEDGE-DESK GOLDEN (the chair's ruling CL7, the cause named first): green at 6c117344f, first red at JOIN-17 point 21 (edb5cae92, BIRTH-1): the realm pulse's resource role reads the town's import list (tierResourceDynamics.resourceEconomicRole), and BIRTH-1's declared economicState.primaryImports makes soak-a import its hunting grounds' good: one beat's reason ('Economic role: primary export.' -> 'Economic role: export and import.') and one pulse beat re-dealt (473 items, unchanged count). Each surface's predictedRows is MEASURED before its write, through the door itself with a scratch record (PREDICTION_MISS, nothing written). A VETO of any change on the veto list reverts that change and re-records these surfaces again through this door under a new record.",
+  "ownerWords": "\"yes: refresh the stored reference files and open the pull request.\" (2026-11-18 03:03:46 UTC, the whole of the message)",
+  "ownerDate": "2026-11-18",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation to the cloud chair) and, for this signing, the owner's own word in the chair's chat (session_01FbPLbcLDSJzZFzb5B7EjxR): on 2026-11-18 at 03:03:46 UTC, verbatim, the whole of the message, \"yes: refresh the stored reference files and open the pull request.\", answering the chair's message put in that chat at 02:47:31 UTC, which set out what a deploy needs (\"1. I refresh the stored reference figures (hours of work; needs your plain yes). 2. I run the full check until it is green. 3. I open the pull request. 4. You merge it and run the 7 database updates; the site then builds itself.\") and asked for one of two answers, the first of them, word for word, \"Yes: refresh the stored reference files and open the pull request.\", with the chair's gloss \"I freeze the working line after this merge and start the close at once. The work still with builders lands after the deploy, and a second, smaller close follows later.\" (\"the stored reference files\" is the chair's plain name, in its reports to the owner, for the stored figures of the close, the signed golden corpus of example towns among them). The chair announced the signing in that chat and gave this seat its line \"SIGN\" at 06:57 UTC on 2026-11-18. It authorizes THIS close's signing, at this tree, ONCE; nothing after this close is covered",
+  "cause": "THE DECLARED CURES OF THE ROUNDS JOINED ON THE LINE OVER THE LAST GREEN CORPUS 0ac61b4b4, by their seats (every seat landed over git log --first-parent 600b7683a..70e557d5b, the chair's ruling CL11): THE ROUND BAR5 (JOIN-16 points 1 to 9, joined before the BAR4 close, which re-took nothing for them): BAR5-THINGS (the notary tension's words, the clerk's arrival, the prominent tie; relationships, arrivalScene, prominentRelationship), BAR5-CHAINS (resourceAnalysis.gaps), BAR5-FOOD (the foodways line, the outlook hooks and the summary that counts them; culturalIdentity, economicViability), BAR5-WORLD (settlementReason), BAR5-POWERS (the card twin; npcs[].structuralPosition); BAR5-BAND, -MAGIC, -MARKS, -SAFETY none of the 525; BAR6's five audit branches (JOIN-16 points 10 to 14) and the BAR4 close's two (15, 16) move no town. THE ROUND BAR6 (JOIN-17 points 1 to 11) and its seam (12 to 19): BAR6-POWERS (powerStructure.factions[].desc), BAR6-PEOPLE (ties, the prominent tie, a temper; relationships, prominentRelationship, npcs[].personality), BAR6-RECORD (the exports, their dependencies, chains and production, income, issues, traces, the founding, arrivals; economicState, economicViability.issues, simulationTrace, history.founding, arrivalScene), BAR6-CULTURE and BAR6-SEAM-CULTURE (the foodways, the architecture; culturalIdentity, economicState.foodSecurity), BAR6-SCENES (arrivalScene); the rest none of the 525. BIRTH-1 (21), BIRTH-2 (carried by point 33) and THE OWNER'S SUPPLY RULE BIRTH-3 (33): the import and the gaps of a house's material (economicState.primaryImports, resourceAnalysis.gaps, an outlook hook, an arrival). THE ROUND BAR7 (20, 22 to 29): BAR7-LINES (a pair's second tie in the first's sense and the goals, conflicts and receipt that read it; the iron dispute and corruption hooks; the crier; the food hooks' words: relationships, npcs[].goal, conflicts, powerStructure.conflicts, generationCoherenceReceipt, history, availableServices, economicViability.plotHooks), BAR7-ECON (an income line); the rest none. SECRETS-1 (30, 32: the rare secrets; npcs[].secret), DEBT-1 (31) none. The sixth chair's points 34 to 47 and 53: LEFT-LINES (npcs[].presentation), BAR8-SCENES (arrivalScene), BAR8-FISH-ROWS (the fish market's catch; availableServices.food); BAR8's audits, DEBT-2, LEFT-PDF, LEFT-CHAIN, LEFT-MARKS, J-ROWS, PDF-2, SCENES-3 none of the 525.",
+  "seat": "CLOSE-DOORS-2 under the chair session_01FbPLbcLDSJzZFzb5B7EjxR, on branch lane/close-doors-2-2026-11-18 (CUT AT 70e557d5b, the working line frozen for the close, on the chair's ruling CL16; Part 1's final tip 0af60594a (lane/landing-close-2026-11-18, the chair's line of 06:51 UTC; merged here at 2f4eb8acf) MERGED INTO IT BEFORE THE WRITE)",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 475,
+      "proofForm": "settlement-hash"
+    }
+  ],
+  "familyCheck": [
+    {
+      "family": "relationships[].tension",
+      "rowsOf525": 276,
+      "declaredBy": [
+        "BAR5-THINGS docs/chair/2026-11-16/bar5/BAR5-THINGS-HANDBACK.md:125 (220)",
+        "BAR6-PEOPLE docs/chair/2026-11-16/bar6/BAR6-PEOPLE-HANDBACK.md:115,120 (6)",
+        "BAR7-LINES docs/chair/2026-11-17/bar7/BAR7-LINES-HANDBACK.md:88 (57)"
+      ]
+    },
+    {
+      "family": "relationships[].description / .proseVariant",
+      "rowsOf525": 63,
+      "declaredBy": [
+        "BAR6-PEOPLE docs/chair/2026-11-16/bar6/BAR6-PEOPLE-HANDBACK.md:115,120 (6)",
+        "BAR7-LINES docs/chair/2026-11-17/bar7/BAR7-LINES-HANDBACK.md:88 (57); proseVariant 60, every one a description row"
+      ]
+    },
+    {
+      "family": "relationships[].type / typeName / strength / archetypeKey",
+      "rowsOf525": 57,
+      "declaredBy": [
+        "BAR7-LINES docs/chair/2026-11-17/bar7/BAR7-LINES-HANDBACK.md:55-57,88 (57: a pair's second tie in the first's sense)"
+      ]
+    },
+    {
+      "family": "powerStructure.factions",
+      "rowsOf525": 241,
+      "declaredBy": [
+        "BAR6-POWERS docs/chair/2026-11-16/bar6/BAR6-POWERS-HANDBACK.md:167 (241, one family)",
+        "BAR5-POWERS docs/chair/2026-11-16/bar5/BAR5-POWERS-HANDBACK.md:122 (declared, counted at the close)"
+      ]
+    },
+    {
+      "family": "npcs[].secret",
+      "rowsOf525": 168,
+      "declaredBy": [
+        "SECRETS-1 docs/chair/2026-11-17/secrets/SECRETS-1-HANDBACK.md:416 (168)",
+        "BAR6-PEOPLE docs/chair/2026-11-16/bar6/BAR6-PEOPLE-HANDBACK.md:120"
+      ]
+    },
+    {
+      "family": "npcs[].goal",
+      "rowsOf525": 54,
+      "declaredBy": [
+        "BAR7-LINES docs/chair/2026-11-17/bar7/BAR7-LINES-HANDBACK.md:88 (54)",
+        "BAR6-PEOPLE docs/chair/2026-11-16/bar6/BAR6-PEOPLE-HANDBACK.md:121"
+      ]
+    },
+    {
+      "family": "npcs[].presentation",
+      "rowsOf525": 24,
+      "declaredBy": [
+        "LEFT-LINES docs/chair/2026-11-17/left/LEFT-LINES-HANDBACK.md:64 (24); docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md:13"
+      ]
+    },
+    {
+      "family": "npcs[].structuralPosition",
+      "rowsOf525": 1,
+      "declaredBy": [
+        "BAR5-POWERS docs/chair/2026-11-16/bar5/BAR5-POWERS-HANDBACK.md:104 (1, the card twin)"
+      ]
+    },
+    {
+      "family": "npcs[].personality",
+      "rowsOf525": 1,
+      "declaredBy": [
+        "BAR6-PEOPLE docs/chair/2026-11-16/bar6/BAR6-PEOPLE-HANDBACK.md:116,119 (1, 10e-temper)"
+      ]
+    },
+    {
+      "family": "resourceAnalysis.gaps",
+      "rowsOf525": 129,
+      "declaredBy": [
+        "BAR5-CHAINS docs/chair/2026-11-16/bar5/BAR5-CHAINS-HANDBACK.md:72 (63)",
+        "BIRTH-1 docs/chair/2026-11-17/birth/BIRTH-1-HANDBACK.md:21 (114)",
+        "BIRTH-2 docs/chair/2026-11-17/birth/BIRTH-2-HANDBACK.md:50 (32)",
+        "BIRTH-3 docs/chair/2026-11-17/birth/BIRTH-3-HANDBACK.md:267-268 (3)"
+      ]
+    },
+    {
+      "family": "economicState.primaryImports",
+      "rowsOf525": 117,
+      "declaredBy": [
+        "BIRTH-1 docs/chair/2026-11-17/birth/BIRTH-1-HANDBACK.md:21 (141)",
+        "BIRTH-2 docs/chair/2026-11-17/birth/BIRTH-2-HANDBACK.md:50 (15)",
+        "BIRTH-3 docs/chair/2026-11-17/birth/BIRTH-3-HANDBACK.md:93 (37)"
+      ]
+    },
+    {
+      "family": "economicState.primaryExports / tradeDependencies / activeChains / localProduction",
+      "rowsOf525": 75,
+      "declaredBy": [
+        "BAR6-RECORD docs/chair/2026-11-16/bar6/BAR6-RECORD-HANDBACK.md:23 (75 / 37 / 37 / 29)"
+      ]
+    },
+    {
+      "family": "economicState.foodSecurity",
+      "rowsOf525": 35,
+      "declaredBy": [
+        "BAR6-CULTURE docs/chair/2026-11-16/bar6/BAR6-CULTURE-HANDBACK.md:51 (35)",
+        "BAR6-SEAM-CULTURE docs/chair/2026-11-16/bar6/BAR6-SEAM-CULTURE-HANDBACK.md:80-81 (4)"
+      ]
+    },
+    {
+      "family": "economicState.incomeSources",
+      "rowsOf525": 10,
+      "declaredBy": [
+        "BAR6-RECORD docs/chair/2026-11-16/bar6/BAR6-RECORD-HANDBACK.md:23 (9)",
+        "BAR7-ECON docs/chair/2026-11-17/bar7/BAR7-ECON-HANDBACK.md:118-119 (1)"
+      ]
+    },
+    {
+      "family": "availableServices",
+      "rowsOf525": 102,
+      "declaredBy": [
+        "BAR7-LINES docs/chair/2026-11-17/bar7/BAR7-LINES-HANDBACK.md:93 (66, information: the crier)",
+        "BAR8-FISH-ROWS docs/chair/2026-11-17/bar8/BAR8-FISH-ROWS-HANDBACK.md:61 (48, food: the fish market's catch)"
+      ]
+    },
+    {
+      "family": "culturalIdentity",
+      "rowsOf525": 86,
+      "declaredBy": [
+        "BAR5-FOOD docs/chair/2026-11-16/bar5/BAR5-FOOD-HANDBACK.md:80 (48)",
+        "BAR6-CULTURE docs/chair/2026-11-16/bar6/BAR6-CULTURE-HANDBACK.md:51 (42)",
+        "BAR6-SEAM-CULTURE docs/chair/2026-11-16/bar6/BAR6-SEAM-CULTURE-HANDBACK.md:81 (4)"
+      ]
+    },
+    {
+      "family": "economicViability.plotHooks / .summary",
+      "rowsOf525": 85,
+      "declaredBy": [
+        "BAR5-FOOD docs/chair/2026-11-16/bar5/BAR5-FOOD-HANDBACK.md:80 (59; summary 46, which counts the hooks, every one a hooks row)",
+        "BIRTH-1 docs/chair/2026-11-17/birth/BIRTH-1-HANDBACK.md:21 (1)",
+        "BAR7-LINES docs/chair/2026-11-17/bar7/BAR7-LINES-HANDBACK.md:94 (25)"
+      ]
+    },
+    {
+      "family": "economicViability.issues / simulationTrace / history.founding",
+      "rowsOf525": 37,
+      "declaredBy": [
+        "BAR6-RECORD docs/chair/2026-11-16/bar6/BAR6-RECORD-HANDBACK.md:23 (37 / 37 / 1)"
+      ]
+    },
+    {
+      "family": "arrivalScene",
+      "rowsOf525": 74,
+      "declaredBy": [
+        "BAR5-THINGS docs/chair/2026-11-16/bar5/BAR5-THINGS-HANDBACK.md:126 (6)",
+        "BAR6-SCENES docs/chair/2026-11-16/bar6/BAR6-SCENES-HANDBACK.md:68 (55)",
+        "BAR6-RECORD docs/chair/2026-11-16/bar6/BAR6-RECORD-HANDBACK.md:23 (12)",
+        "BIRTH-1 docs/chair/2026-11-17/birth/BIRTH-1-HANDBACK.md:21 (1)",
+        "BAR8-SCENES docs/chair/2026-11-17/bar8/BAR8-SCENES-HANDBACK.md:102 (1)"
+      ]
+    },
+    {
+      "family": "history.historicalEvents / currentTensions",
+      "rowsOf525": 54,
+      "declaredBy": [
+        "BAR7-LINES docs/chair/2026-11-17/bar7/BAR7-LINES-HANDBACK.md:92 (54 / 38)"
+      ]
+    },
+    {
+      "family": "settlementReason",
+      "rowsOf525": 38,
+      "declaredBy": [
+        "BAR5-WORLD docs/chair/2026-11-16/bar5/BAR5-WORLD-HANDBACK.md:40 (38, one family)"
+      ]
+    },
+    {
+      "family": "powerStructure.conflicts / conflicts / generationCoherenceReceipt",
+      "rowsOf525": 29,
+      "declaredBy": [
+        "BAR7-LINES docs/chair/2026-11-17/bar7/BAR7-LINES-HANDBACK.md:89-90 (29 each)"
+      ]
+    },
+    {
+      "family": "prominentRelationship",
+      "rowsOf525": 10,
+      "declaredBy": [
+        "BAR5-THINGS docs/chair/2026-11-16/bar5/BAR5-THINGS-HANDBACK.md:127 (5)",
+        "BAR6-PEOPLE docs/chair/2026-11-16/bar6/BAR6-PEOPLE-HANDBACK.md:115 (5)"
+      ]
+    }
+  ]
+}

@@ -211,7 +211,11 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // plain yes for the example-town refresh.", in the chair's chat; record docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json: the people
 // branch's declared tie lines re-word the control row's relationships[].description, one text leaf only; the golden re-recorded 390 of 525 at
 // 1581ed12, this row its control).
-const GOLDEN_CONTROL_HASH = '5437998b250179459c3ca5efdff170a4f1b2d1933e79357aab9a68e21cfb6939';
+// -> 8bb20e96 the close of the rounds BAR5 to BAR8, 2026-11-18 (CLOSE-DOORS-2; the owner's word, 2026-11-18 03:03:46 UTC, "yes: refresh the stored
+// reference files and open the pull request.", in the chair's chat; record docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json:
+// the rounds' declared cures move the control row's relationships[].tension (BAR5-THINGS, the notary tension's words), history.historicalEvents
+// (BAR7-LINES, the iron dispute) and economicState.localProduction (BAR6-RECORD); the golden re-recorded 485 of 525 at b3cfdbcc3, this row its control).
+const GOLDEN_CONTROL_HASH = '8bb20e966e6779efabd8b49efac2f3749a63015230df66380677f580200129e4';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -347,7 +351,16 @@ const PICK_VARIANT_CALLS = 31;
 // 15; its cast re-deals the probe row's ties: 'Adela Hoffmann>Wolfger Dietrich::peer_rivalry' and 'Wolfger Dietrich>Volker
 // Becker::mutual_leverage' gone, 'Adela Hoffmann>Gunter Schwarz::peer_rivalry' new); fingerprintPowerEconomyInput 6 and the
 // faction conflicts 2 the line's. No other lane moves a string. The register moves with it.
-const FNV_EXTERNAL_CALLS = 23;
+// RE-KEYED 2026-11-18 (THE CLOSE OF THE ROUNDS BAR5 TO BAR8, CLOSE-DOORS-2, the chair's ruling CL16): 23 -> 54, MEASURED by A6 at
+// the frozen line 70e557d5b and attributed caller by caller (a probe recording each external fnv1a32 call's string and first
+// src frames on the probe row, at the last green corpus 0ac61b4b4 and at every point named here): the 23 strings of 0ac61b4b4
+// stand byte for byte (foodways 3, fingerprintPowerEconomyInput 6, upkeep rolls 6, the tie prose 6, the faction conflicts 2);
+// the +31 are SECRETS-1's (JOIN-17 point 30, ecf56dd7d: 23 at point 29's fd93fb998, 54 at point 30; the top-up, point 32, moves
+// none): people/rareSecrets.js :: dealRareSecrets, the draw-free keyed reading its header names (`unit`, one fnv1a32 of
+// `<seed>::rare-secrets::<family>::<person id>`), the natures, deeds and ties families for each of the probe row's ten named
+// people (30) and the outsiders' `::place` (1). Every string is the record's own seed and a person's own id: no clock, no
+// order of iteration, no view state; the town's stream of draws untouched. The register's fnv1a32External moves with it.
+const FNV_EXTERNAL_CALLS = 54;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
