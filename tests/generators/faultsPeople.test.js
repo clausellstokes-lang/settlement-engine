@@ -104,7 +104,8 @@ describe("FAULTS-PEOPLE 14e · a trade's hook is not dealt to a card that keeps 
     expect(hookOf('the castellan')).toBe("A business rival has offered them a partnership with terms so good it must be a trap. They can't find the trap.");
     expect(hookOf('the watch commander')).toBe('A buyer has paid them in advance for a whole season of goods, far above the price, and will not say what the goods are for.');
     // C5296 beside them: the garrison commander (one seat, the Garrison Bloc) no longer holds the market's price-fixing
-    expect(hookOf('the garrison commander')).not.toMatch(/price-fixing/);
+    expect(hookOf('the garrison commander'), 'the garrison commander keeps one hook').not.toBe('');
+    expect(hookOf('the garrison commander')).not.toMatch(/price-fixing/); // anchored: the card's one hook is pinned non-empty on the line above, beside its two siblings printed in full
   }, 120_000);
 
   /** a constructed record: one card of a house, its seats, its hook @param {any} house @param {string[]} seats @param {string} hook */
@@ -155,7 +156,7 @@ describe("FAULTS-PEOPLE FR5 · the fishmonger talks of the boats and the catch o
     expect(WELCOMING?.behaviour).toBe(BOATS);
     const twin = twinOf();
     expect(typeof twin, 'titleSecretsPresentations.js :: TITLE_LINE_TWINS').toBe('string');
-    expect(twin).not.toMatch(/\bboats?\b|\bcatch\b/);
+    expect(twin).not.toMatch(/\bboats?\b|\bcatch\b/); // anchored: the twin is pinned a string on the line above, and the row it twins is pinned to the boats two lines up
   });
 
   it('over the towns where the row was dealt: the boats where the catch is landed, the twin where it is not', () => {
