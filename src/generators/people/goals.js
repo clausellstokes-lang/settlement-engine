@@ -460,6 +460,8 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
         if (!rf) continue;
         const unmet = ctx.needUnmet(d.resource);
         push(cellCandidates('SUPPLY', 'dependency', vantage, { resource: rf, house: hf }, ctx, held, { target }).map((c) => (unmet ? { ...c, refused: true } : c)));
+        // LAST-VARIETY (item 2): where the good is needed and not brought in, the lines of a house that LACKS it (`want`)
+        if (unmet) push(cellCandidates('SUPPLY', 'want', vantage, { resource: rf, house: hf }, ctx, held, { target }));
       }
       if (TRADING_SHELVES.includes(shelf)) for (const ch of own.filter((x) => RUNNING_STATUSES.includes(str(x.status)))) push(cellCandidates('SUPPLY', 'expansion', vantage, { chain: str(chainPrintName(ch, ctx.view).label), house: hf }, ctx, held, { target: { kind: 'chain', id: str(ch.chainId || ch.label) } }));
     }

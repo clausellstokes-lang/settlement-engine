@@ -10,6 +10,12 @@
  *      pool's one-line towns) now admit three or more, on the record, its public projection and the share veil; each new
  *      line prints in a town of the 900 on all three forms; and each declaration refuses its line where its premise is
  *      false (a negative beside each positive). Red at the base: the eight are not in the leaf.
+ *   2  THE SUPPLY GOAL FAMILY. Where a card's house depends on a good the page's need list says is needed and not brought in,
+ *      every dependency line is refused (FAULTS-NEED's 11e.wantBuy), and a card whose SUPPLY family held nothing else had NO
+ *      admitted SUPPLY line (93 cards in 85 towns of the 900 at the base). A sub-kind `want` (a house that LACKS the good: two
+ *      lines a vantage, none presuming a supply, none refused under a siege) is dealt ONLY there. Held here: the cell and its
+ *      slots; five such cards (two under a siege) now hold two admitted SUPPLY lines in each vantage; a want line is dealt on a
+ *      card of the 900; and a card whose dependency is met is dealt no want line (the negative). Red at the base: no cell.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -24,6 +30,8 @@ import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 import { defenseStateProse } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { censusPlan, configOf } from '../components/pageCensusWalk.shared.mjs';
+import { GOAL_FAMILY_LINES, GOAL_SUBKIND_SLOTS } from '../../src/data/people/goalFamilies.js';
+import { familyCandidates, goalContextOf } from '../../src/generators/people/goals.js';
 
 const BLOCK = DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-3'];
 
@@ -72,10 +80,24 @@ const PRINTS = [
   { pool: 'Unsafe', vid: 6, seed: 'bar0-hamlet-calm-rand-27' },
 ];
 
+/** item 2: cards whose SUPPLY family held only refused dependency lines at the base (measured over the 900), two under a siege */
+const WANT_CARDS = [
+  { seed: 'bar0-city-wartime-rand-45', id: 'npc_citadel' },
+  { seed: 'bar0-hamlet-under_siege-rand-27', id: 'npc_resident_smith_part_time' },
+  { seed: 'bar0-city-wartime-rand-31', id: 'npc_banking_houses' },
+  { seed: 'r2r-hamlet-17', id: 'npc_citizen_militia' },
+  { seed: 'r2s-under_siege-city-3', id: 'npc_banking_houses' },
+];
+/** item 2: a card of the 900 the deal gives a want line (measured at the tip), and the vantage */
+const WANT_DEALT = [
+  { seed: 'bar0-city-wartime-rand-45', id: 'npc_citadel', vantage: 'short' },
+  { seed: 'r2r-village-8', id: 'npc_citizen_militia', vantage: 'long' },
+];
+
 /** @type {Map<string, any>} */ const towns = new Map();
 beforeAll(async () => {
   await loadGenerationLawPayloads();
-  for (const seed of new Set([...Object.values(SHORT).flat(), ...PRINTS.map((p) => p.seed)])) towns.set(seed, generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} }));
+  for (const seed of new Set([...Object.values(SHORT).flat(), ...PRINTS.map((p) => p.seed), ...WANT_CARDS.map((c) => c.seed), ...WANT_DEALT.map((c) => c.seed)])) towns.set(seed, generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} }));
 }, 300_000);
 
 const forms = (/** @type {any} */ s) => /** @type {Array<[string, any]>} */ ([['record', s], ['public', toPublicSafe(structuredClone(s))], ['the share veil', projectShareVeil(toPublicSafe(structuredClone(s)), null)]]);
@@ -139,3 +161,55 @@ describe('LAST-VARIETY item 1: two lines at the end of each DS-DEF-3 safety pool
   });
 });
 
+describe('LAST-VARIETY item 2: the SUPPLY family keeps two admitted lines where a dependency\'s good is not brought in', () => {
+  /** @param {string} seed @param {string} id @param {'short'|'long'} vantage */
+  const supplyOf = (seed, id, vantage) => {
+    const s = towns.get(seed);
+    const cards = s.npcs || [];
+    const card = cards.find((/** @type {any} */ c) => c.id === id);
+    expect(card, `${seed} · ${id}`).toBeTruthy();
+    return familyCandidates(card, cards, goalContextOf({ ...s }, cards, s.relationships || []), vantage, new Set()).SUPPLY || [];
+  };
+
+  it('the cell `want` stands with two lines a vantage, on the resource and the house only', () => {
+    const want = /** @type {any} */ (GOAL_FAMILY_LINES.SUPPLY).want;
+    expect(want.short).toHaveLength(2);
+    expect(want.long).toHaveLength(2);
+    expect(/** @type {any} */ (GOAL_SUBKIND_SLOTS.SUPPLY).want).toEqual(['resource', 'house']);
+  });
+
+  it('each card that held only refused dependency lines now holds two admitted SUPPLY lines in each vantage', () => {
+    const failures = collectSeedFailures(WANT_CARDS.flatMap((c) => /** @type {const} */ (['short', 'long']).map((vantage) => ({ ...c, vantage }))), ({ seed, id, vantage }) => {
+      const sup = supplyOf(seed, id, vantage);
+      expect(sup.some((c) => c.kind === 'dependency' && c.refused === true), `${seed} · ${id} · ${vantage}: the dependency refused`).toBe(true);
+      expect(sup.filter((c) => !c.refused).length, `${seed} · ${id} · ${vantage}`).toBeGreaterThanOrEqual(2);
+      expect(sup.filter((c) => !c.refused).every((c) => c.kind === 'want'), `${seed} · ${id} · ${vantage}: what is admitted is want`).toBe(true);
+    });
+    expectNoSeedFailures(failures, 'two admitted SUPPLY lines on every such card');
+  });
+
+  it('a want line is dealt on a card of the 900, filled with its house and its good', () => {
+    const failures = collectSeedFailures(WANT_DEALT, ({ seed, id, vantage }) => {
+      const card = (towns.get(seed).npcs || []).find((/** @type {any} */ c) => c.id === id);
+      expect(card?.goal?.intent?.[vantage]?.family, `${seed} · ${id}`).toBe('SUPPLY');
+      const texts = supplyOf(seed, id, vantage).filter((c) => c.kind === 'want').map((c) => c.text);
+      expect(texts, `${seed} · ${id} · ${vantage}`).toContain(card.goal[vantage]);
+    });
+    expectNoSeedFailures(failures, 'the want lines are dealt');
+  });
+
+  it('NEGATIVE: a card whose dependency is met is dealt no want line (the cell reads the need list, nothing else)', () => {
+    let seen = 0;
+    const failures = collectSeedFailures([...towns.keys()], (seed) => {
+      const s = towns.get(seed);
+      for (const card of s.npcs || []) {
+        const sup = supplyOf(seed, card.id, 'short');
+        if (!sup.some((c) => c.kind === 'dependency' && c.refused !== true)) continue;
+        seen += 1;
+        expect(sup.filter((c) => c.kind === 'want'), `${seed} · ${card.id}`).toEqual([]);
+      }
+    });
+    expectNoSeedFailures(failures, 'no want line beside a met dependency');
+    expect(seen, 'cards with a met dependency were read').toBeGreaterThan(0);
+  });
+});
