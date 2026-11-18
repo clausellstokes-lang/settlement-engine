@@ -37,10 +37,10 @@ census in the tree, the census then restored: the leaf is committed, the census 
 | Very Safe v7 | {settlement} has no watch; its neighbours notice anything out of place, and are quick to say so. | ledger · no watch · crisis: any · no crisis: threat, unrest | r2r-village-8 (Khandavan), r2r-village-49 (Yaxchtzal); admitted, not drawn: r2r-village-6, -14 | 10 of 33 |
 | Safe v6 | {settlement} has no gaol, and has so far had little use for one. | ledger · no prison · crisis: any · no crisis: threat, unrest | bar0-town-calm-rand-29 (Neadgill), bar0-town-calm-rand-31 (Zelenosk), bar0-hamlet-calm-rand-32 (Raskot), r2r-town-4 (Jayagiri); 12 in all | 31 of 46 |
 | Safe v7 | Visitors to {settlement} see nobody keeping watch, and come to no harm all the same. | visitor · no guardPresence · crisis: any · no crisis: threat, unrest | bar0-thorp-calm-rand-28 (Jalalbash), r2r-thorp-28 (Zelenoev), r2s-infiltrated-village-2 (Bayarserai) | 4 of 46 |
-| Moderate v9 | Whatever trouble {settlement} has is soon known to everyone in it. | street · tier ≤ village | bar0-village-calm-rand-46 (Tihono), bar0-thorp-calm-rand-31 (Madinatqila), r2r-hamlet-17 (Faroaltum); 34 in all | 138 of 259 |
+| Moderate v9 | ~~Whatever trouble {settlement} has is soon known to everyone in it.~~ VETOED by LR6 (1); corrected in place: see section LR6 | street · tier ≤ village | bar0-village-calm-rand-46 (Tihono), bar0-thorp-calm-rand-31 (Madinatqila), r2r-hamlet-17 (Faroaltum); 34 in all | 138 of 259 |
 | Moderate v10 | With no gaol at {settlement}, nobody who does wrong here can be locked away; most go on living beside the people they wronged. | ledger · no court or gaol | bar0-thorp-calm-rand-45 (Dunwood), bar0-hamlet-calm-rand-45 (Ravenland), r2r-town-45 (Varanand); 39 in all | 146 of 259 |
 | Unsafe v5 | Theft at {settlement} grows each season, and with nobody under arms, every household guards its own. | street · no guardPresence · crime wave | bar0-hamlet-calm-rand-29 (Skálgarde); admitted, not drawn: bar0-hamlet-calm-rand-27, r2r-thorp-30 (the only three towns of the 900 it is true of) | 3 of 16 |
-| Unsafe v6 | There is no watch at {settlement}, and visitors are warned to keep their belongings close. | visitor · no watch (first written undeclared; the undeclared-lines register, shrink-only, refused it: it now says what it presumes, f3b728bb0) | bar0-hamlet-calm-rand-27 (Gangapur), r2r-thorp-30 (Obergasse); admitted, not drawn: bar0-hamlet-calm-rand-29 (the three towns of the 900 with no watch) | 3 of 16 |
+| Unsafe v6 | ~~There is no watch at {settlement}, and visitors are warned to keep their belongings close.~~ VETOED by LR6 (2); corrected in place: see section LR6 | visitor · no watch (first written undeclared; the undeclared-lines register, shrink-only, refused it: it now says what it presumes, f3b728bb0) | bar0-hamlet-calm-rand-27 (Gangapur), r2r-thorp-30 (Obergasse); admitted, not drawn: bar0-hamlet-calm-rand-29 (the three towns of the 900 with no watch) | 3 of 16 |
 
 Why each is declared as it is: v10 names the gaol but says the wrongdoer stays among the wronged, which a court (exile,
 the rope) could make false, so it declares `no court or gaol`, not `no prison`; Safe v6 names only the gaol (`no prison`).
@@ -146,6 +146,55 @@ to eight such ties those four repeat (quarrel-city-64, -city-261, -metropolis-10
 in two ruling-body towns). Not written: a line added to this pool changes `size`, so `(base + used) % size` re-deals
 EVERY tie of the archetype in every town, and a tension line must be paired with a description line; that is a wide move
 for nine repeats. Named for the chair as variety owed.
+
+## LR6 · the second reader's five MEDs, cured (the chair's ruling LR6, after READ-LAST; one commit each)
+
+Each line below was read against what prints BESIDE its pool on the same page (the safety profile's sentence
+`safetyDesc`, the guard line `guardEffectivenessDesc`, the Legal row) in every town of the 900 and of the reader's 600
+fresh that admits it (the 600: the census's calm plan at indices 5000 to 5099 a size, `r2r-<size>-<i>`, which holds
+r2r-thorp-5005). Small places print beside these pools: "The neighbours keep an eye on one another, and what trouble there
+is, everyone soon hears of" (205 of the 290 towns admitting v9), "There is no watch", "When someone does wrong, the
+neighbours deal with it themselves, and the oldest families have the last word", "A thief is known by name within a day …",
+"A quarrel goes to the heads of the oldest families …", "Nobody here is paid to keep order", "Without courts or prison,
+enforcement relies entirely on fines, exile, or summary violence", "Travelers are advised to move in groups and keep
+valuables hidden", "The militia cannot maintain consistent coverage. They have other jobs to do." None of the lines below
+says any of these.
+
+| LR6 | commit | the line (THE OWNER'S VETO LIST) | declared | prints in |
+|---|---|---|---|---|
+| (1) Moderate v9, corrected in place (WORD_CORRECTIONS row, ruling LR6) | 4bc8cfad0 | At {settlement} old wrongs are remembered for years, and some are still being argued over. | street · tier ≤ village | bar0-village-calm-rand-46 (Tihono), bar0-thorp-calm-rand-31 (Madinatqila), bar0-village-calm-rand-35 (Qaryahdarya); 66 towns of the 1,500 |
+| (2) Unsafe v6, corrected in place (WORD_CORRECTIONS row, ruling LR6) | 73a4d9e13 | Neighbours at {settlement} have begun to suspect one another, and few will lend a tool or a coin now. | street · tier ≤ village | bar0-hamlet-calm-rand-27 (Gangapur), r2r-thorp-30 (Obergasse), r2r-village-5023 (Zhongshan) |
+| (3) Safe v7 declares `no crime wave` (words unchanged) | 9176746d4 | Visitors to {settlement} see nobody keeping watch, and come to no harm all the same. | visitor · no guardPresence · no crime wave · crisis: any · no crisis: threat, unrest | r2r-thorp-28 (Zelenoev), r2s-infiltrated-village-2 (Bayarserai), r2r-thorp-5009 (Wushan); no longer bar0-thorp-calm-rand-28 ("Crime is on the rise.") |
+| (3) Safe v8, NEW at the pool's end (bar0-thorp-calm-rand-28 then admitted two) | 9176746d4 | At {settlement}, people who never used to bar their doors at night have started to. | street · tier ≤ village · crime wave · crisis: any · no crisis: threat, unrest | bar0-thorp-calm-rand-28 (Jalalbash), r2r-village-5004 (Agioschorio); admitted in a third (three towns of the 1,500 are Safe, small and under a crime wave) |
+| (4) Unsafe v7, NEW at the pool's end | 58fb29050 | {settlement} calls its people out against raiders and beasts, but nobody is called out over a theft. | street · militia · no watch | r2r-thorp-5005 (Dongcheng): the only levied, watchless Unsafe town of the 1,500, so one town, not three |
+| (5) the `want` cell's {resource} | 04a3d1450 | (the four lines' words unchanged) | the slot: `needNotBroughtIn.js :: goodsNeededNotBroughtIn` (the list's own goods a dependency names or meets), filled by `resourceFill` | e.g. bar0-city-wartime-rand-45, Klara Weber: "… in place of stone." (was "stone and iron and grain"; the list: stone; copper ore; gold and silver ore); r2r-town-30, Helga Gormsson: "… in place of charcoal and fuel."; r2r-village-8, Rashid Besud: "Open a lasting way to bring metals in …" |
+
+Unsafe v7's thought was chosen against its guard line: the chair's sketch ("called up when trouble comes but nobody keeps
+watch between times") is what "The militia cannot maintain consistent coverage. They have other jobs to do." already says
+beside it in r2r-thorp-5005, so the line says what the levy is FOR (raiders and beasts) and what it is not (a theft).
+
+**THE AT-LEAST-THREE CLAIM, AGAIN (at 04a3d1450).** Every town of the four pools admits three or more lines, over the 900
+(Moderate 0 of 259 under three, Safe 0 of 46, Very Safe 0 of 33, Unsafe 0 of 16) and over the reader's 600 fresh (0 of 290,
+0 of 54, 0 of 49, 0 of 19; at the base 115, 21, 8, 2). The guard holds r2r-thorp-5005 among the short towns and each new
+line in a town it prints in, on all three forms, with each premise refused where it fails (militia among them).
+
+**(5) PROVED.** Over the 900 and the 600: 560 `want` candidates on 140 cards (95 and 45); **0** name a good the town's need
+list does not print. The guard holds it on its five cards and pins the citadel's compound to its one unmet good ("stone").
+
+**LR2's PROOFS RE-RUN at 04a3d1450** (the fill changes words, not which cards draw): the same 41 towns and 82 cards move
+(goal.short 35, goal.long 74, goal.intent 56); outside the 85, 0; with every `npcs[].goal` and `stressNote` struck, 900 of
+900 byte-equal to b014a7bf3; the 525: 13 move, 0 with the goals struck; the negative (an admitted dependency never beside a
+`want`) holds.
+
+**DECLARED MOVES of item 1 at 04a3d1450** (DS-DEF-3's public-order line; no stored record): the 900: the thirty 4, the 150
+27 (Moderate 19, Safe 5, Very Safe 1, Unsafe 2), the 720 67 (Moderate 50, Safe 10, Very Safe 6, Unsafe 1); the 600: 95
+(Moderate 75, Safe 12, Very Safe 6, Unsafe 2); the 525: 0 by the prose.
+
+**LOW, named, no change.** (i) Moderate v10's "no gaol" read by the presumed-things walker as a prison (true by its
+`no court or gaol`; the chair: banked at the close by proof (iii), as v4's is). (ii) "the work at the citizen militia":
+`houseFill` gives the house's own display noun, and no word of the slot's form makes a levy a workplace; the SUPPLY family
+names the work through "the work at {house}" (POWERS-9), so the four lines keep it. Where the house is a militia or a levy
+(25 of the 140 want cards: a citizen militia or a household levy), the phrase reads as a duty, not a trade. Named for the owner's veto list.
 
 ## 4 · The net (base b014a7bf3 and the tip 6e36e0359, each in a worktree of its own; each gate alone through `sh scripts/gate-tail.sh`; reds compared BY MESSAGE; 66b98a241 after it touches only the pool table, whose walker was re-run green)
 
