@@ -83,7 +83,7 @@ import { generalStateProseCandidates } from './generalStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 import { powerSentenceName } from '../powerSentenceName.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
-import { defenceOf } from '../../facts/defence.js';
+import { courtHoldersOf, defenceOf } from '../../facts/defence.js'; // FR19 item 6: the Legal row's own court
 import { marketOf } from '../../facts/market.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
 import { factsAnswered } from '../../facts/factsAnswered.js'; import { shapeYieldingKey } from '../../facts/shapingEvent.js'; // BAR4-HISTORY T1-SHAPE
@@ -1302,7 +1302,7 @@ export function institutionsPoolKey(inst, record = undefined) {
   const paidHands = defence
     ? defence.garrison || defence.watch || defence.mercenary || inst.hasNavy === true
     : inst.hasMilitaryInst === true || inst.hasNavy === true || inst.hasWatch === true;
-  const key = (inst.hasCourtSystem === true && inst.hasPrison === true) ? 'ADMINISTERED'
+  const key = (defence ? courtHoldersOf(/** @type {{ institutions?: unknown }} */ (record)).length > 0 && defence.prison : inst.hasCourtSystem === true && inst.hasPrison === true) ? 'ADMINISTERED' // FR19 item 6: given the record, the Legal row's court and live prison
     : paidHands ? 'GARRISONED'
       : inst.hasMagicInst === true ? 'LETTERED'
         : (inst.hasGranary === true || hasHospital) ? 'PROVISIONED'
