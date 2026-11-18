@@ -45,7 +45,11 @@ describe('B1 the narrative text rows read the town (TAIL-NARRATIVE batch 1)', ()
     ['00172', 'r2s-monster_pressure-thorp-1', 'pressure', /Three farmsteads/, /^The bounty /],
     ['B00101', 'r2r-hamlet-8', 'history', /Nothing has ever forced/, /^"?It came through the Purge/],
     ['01333', 'r2r-hamlet-33', 'pressure', /paints its civic buildings/, /still keeps up its appearances/],
-    ['00138', 'r2r-thorp-46', 'history', /made its name in trade/, /^"?It has come through the Iron Dispute/],
+    // RE-KEYED BY IDENTITY 2026-11-18 (BAR8-SCENES-3, BR25 (4)): the anchor was "It has come through the Iron Dispute and the Great Fire,
+    // …" (the stable pool's long-and-steady row, the pool's argmax where the drawn row is refused); BAR8-SCENES (K's 12c) refused
+    // that row under a famine, and this thorp is under one, so the argmax moved to the row that names all four of its record's
+    // events, by name and in order (a twin answers only for the DRAWN row: `drawDeclared.js`). The same claim on that line
+    ['00138', 'r2r-thorp-46', 'history', /made its name in trade/, /^"?A settlement shaped by the accumulated weight of The Succession Crisis, The Iron Dispute, The Great Fire and The Trade Collapse: /],
     ['11487', 'r2r-thorp-22', 'pressure', /sends to enforce/, /has no one to send who would be obeyed/],
     ['20366', 'r2s-indebted-thorp-3', 'pressure', /a warehouse here/, /\(a field here, a right of way there\)/],
     ['07115', 'r2s-insurgency-thorp-2', 'pressure', /power leader/, /whoever first offers something better/],

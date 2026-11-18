@@ -58,7 +58,11 @@ describe('BAR2-PLACES: the rows read the town', () => {
     ['C26954 class: the arrival oven', 'r2r-thorp-10', /Smoke rises from a shared oven/, /Smoke rises from a household oven, and a neighbour stops in to share its warmth\./],
     ['C14917 no crowd', 'r2r-hamlet-5', /for a crowd to gather/, /loudly enough for the neighbours to stop and listen\./],
     ['C23710 no busy street', 'r2r-thorp-49', /through a busy street/, /Well-fed children run errands from door to door\./],
-    ['C10029 no ore', 'r2r-hamlet-6', /Ore carts and stone carts/, /Laden carts from the workings grind along the road/],
+    // RE-KEYED BY IDENTITY 2026-11-18 (BAR8-SCENES-3, BR25 (4)): the anchor was the endless line in r2r-hamlet-6; BAR8-SCENES (K's 15a)
+    // refused it below a village, and the small working quarry's twin prints there now, by design. The same claim (no ore claimed; the
+    // slot says what the record bears) on the line that prints, and beside it a town of a village or more where the endless line prints
+    ['C10029 no ore', 'r2r-hamlet-6', /Ore carts and stone carts/, /A laden cart or two comes down from the workings in a day, and no more\./],
+    ['C10029 no ore (a village or more)', 'r2r-city-30', /Ore carts and stone carts/, /Laden carts from the workings grind along the road/],
     ["C34242 no carpenter's bench", 'r2r-thorp-41', /a carpenter's bench/, /Curls of shavings and chips of bark blow across the lane\./],
     ['C15795 no ruling syndicate', 'r2r-metropolis-30', /The ruling criminal syndicate/, /The criminal syndicate the city has never rooted out/],
     ['C15795 class: no dominant power', 'r2r-metropolis-5', /A dominant underworld power/, /An underworld power the city has never rooted out/],

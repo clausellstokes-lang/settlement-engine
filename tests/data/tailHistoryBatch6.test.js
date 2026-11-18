@@ -25,6 +25,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { ARRIVAL_SENSES } from '../../src/data/arrivalProse.js';
 import { textOf } from '../../src/domain/facts/textOf.js';
+import { FISH_TAKEN_HERE } from '../../src/domain/facts/tradeAtWork.js';
 
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 
@@ -159,7 +160,11 @@ describe('TAIL-HISTORY-5 batch 6: what the bar\'s readers met prints only where 
       expect(twin, `the twin of ${own(l)}`).toBeTruthy();
       // BAR4-SCENES-2 (2026-11-16, re-keyed by identity; the chair's ruling HW1): a twin speaks wherever its original is refused for want of
       // fish (the hunger, or every fish house short: `trade at work: fish`), so it needs its original's other needs and not the hunger
-      expect(twin.needs, own(twin)).toEqual((l.needs || []).filter((/** @type {string} */ a) => a !== 'trade at work: fish'));
+      // RE-KEYED BY IDENTITY 2026-11-18 (BAR8-SCENES-3, BR25 (4)): the anchor was the plain key `trade at work: fish`; BAR8-SCENES had the
+      // racks and the gutting declare the fish story's key `trade at work: fish taken here` (BR17), and their twins speak where it is
+      // refused, so the filter takes ANY key of that atom for the fish (the plain key and the taker's), the same claim
+      const FISH_KEYS = ['trade at work: fish', `trade at work: ${FISH_TAKEN_HERE}`];
+      expect(twin.needs, own(twin)).toEqual((l.needs || []).filter((/** @type {string} */ a) => !FISH_KEYS.includes(a)));
     }
   });
 });
