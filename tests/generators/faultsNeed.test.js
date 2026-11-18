@@ -13,6 +13,8 @@
 //   item 2   11e.wantBuy: a card's SUPPLY dependency goal ("Buy {resource} at the market …", "Secure a steady supply of {resource}
 //            …") is dealt only where its good is brought in or had: never where the need list names it (C8867,
 //            bar0-city-wartime-rand-45's "Buy stone and iron and grain …" beside "Needed, and not brought in: stone, …").
+//   item 4   12d's need-list half: DS-ECO-8 POOR v1 ("covers what it must … Every essential is accounted for") declares `no need not
+//            brought in` on the three essentials its words deny (salt, fuel, livestock); r2r-hamlet-21 (salt) refuses it.
 // THE DETECTORS are the page's own readers (the need list, the mark) and the record's own rows; none reads the table the cure changed.
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -20,7 +22,9 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { importsAsPrinted, needMetBy, NEED_DEALT_ROWS } from '../../src/domain/display/tradeListDisplay.js';
 import { LUXURY_CLASS, NOT_A_GOOD } from '../../src/data/tradeListDeclarations.js';
 import { NEED_DEALT_ROWS_COPY, NEED_KEYS, LUXURY_LABELS_COPY, NOT_A_GOOD_COPY, goodNeededNotBroughtIn, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
-import { FACT_DIMENSIONS, atomHolds } from '../../src/domain/facts/factVocabulary.js';
+import { FACT_DIMENSIONS, atomHolds, declarationAdmits } from '../../src/domain/facts/factVocabulary.js';
+import { variantFactDeclaration } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
@@ -37,6 +41,7 @@ const TOWNS = Object.freeze({
   'r2r-metropolis-19': ['dealt'],
   'r2r-metropolis-25': ['dealt'],
   'r2r-hamlet-27': ['venture'], // the 720: the failed venture's own livestock beside a shepherd (the need stays)
+  'r2r-hamlet-21': ['poor'], // the 720: a food-secure POOR town whose need list names salt (12d)
   // the seventh read's thirty (`seeds.bar7.txt`): the atom held equal on each
   ...Object.fromEntries([45, 46, 47].flatMap((n) => ['thorp-calm', 'hamlet-calm', 'hamlet-under_siege', 'village-famine', 'village-calm', 'town-calm',
     'town-occupied', 'city-under_siege+famine', 'city-wartime', 'metropolis-calm'].map((k) => [`bar0-${k}-rand-${n}`, ['thirty']]))),
@@ -247,6 +252,30 @@ describe('FAULTS-NEED item 2 (11e.wantBuy): a dependency goal presumes a supply 
       const s = BORN.get(seed);
       const deps = (s.economicState?.tradeDependencies || []).map((/** @type {any} */ d) => String(d?.resource ?? ''));
       expect(deps.filter((r) => goodNeededNotBroughtIn(s, r)).length, `${seed} still holds a dependency on a good not brought in`).toBeGreaterThan(0);
+    }));
+  });
+});
+
+describe('FAULTS-NEED item 4 (12d): DS-ECO-8 POOR v1 is refused where the need list names an essential it denies', () => {
+  const block = /** @type {any} */ (DOSSIER_STATE_PROSE_ECONOMY)['DS-ECO-8'];
+  const v1 = block.pools.POOR.find((/** @type {any} */ v) => v.vid === 1);
+  const admits = (/** @type {any} */ f) => declarationAdmits(variantFactDeclaration(v1), f, { crisisScoped: block.poolMeta?.POOR?.crisisScoped === true }).admitted;
+  /** the town's own facts, the need atom's answer replaced @param {any} facts @param {Record<string, boolean> | undefined} need */
+  const withNeed = (facts, need) => Object.create(facts, { needNotBroughtIn: { value: need } });
+  it('v1 declares the three essentials, and no other key', () => {
+    expect(v1.text).toMatch(/^\{settlement\} covers what it must and nothing beyond\. Every essential is accounted for/);
+    expect(v1.marks.filter((/** @type {string} */ m) => /need not brought in/.test(m))).toEqual(['no need not brought in: salt', 'no need not brought in: fuel', 'no need not brought in: livestock']);
+  });
+  it('r2r-hamlet-21: refused by its salt; the same facts with no unmet essential (or only a luxury unmet) admit it', () => {
+    expectNoSeedFailures(collectSeedFailures(seedsOf('poor'), (seed) => {
+      const s = BORN.get(seed);
+      const facts = factsOf(s);
+      expect(needListOf(s), `${seed} still needs salt`).toContain('salt');
+      expect(admits(facts), `${seed}: v1 refused`).toBe(false);
+      const none = Object.fromEntries(NEED_KEYS.map((k) => [k, false]));
+      expect(admits(withNeed(facts, none)), `${seed}: v1 admitted where nothing it denies is unmet (the food band holds)`).toBe(true);
+      expect(admits(withNeed(facts, { ...none, luxury: true, spice: true })), `${seed}: a luxury unmet is no essential`).toBe(true);
+      for (const k of ['salt', 'fuel', 'livestock']) expect(admits(withNeed(facts, { ...none, [k]: true })), `${seed}: ${k}`).toBe(false);
     }));
   });
 });

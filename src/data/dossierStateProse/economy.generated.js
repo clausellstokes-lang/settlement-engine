@@ -2738,7 +2738,10 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "crisis: any",
-            "food: ≥ secure"
+            "food: ≥ secure",
+            "no need not brought in: salt",
+            "no need not brought in: fuel",
+            "no need not brought in: livestock"
           ],
           "text": "{settlement} covers what it must and nothing beyond. Every essential is accounted for and there is no line for anything else.",
           "slots": [
