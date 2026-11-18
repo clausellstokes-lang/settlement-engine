@@ -481,6 +481,25 @@ should be paused or archived by the owner's hand.
   asks on every push (the seats now at work), so (1) carries this deploy; the key serves the rounds after it. (3)
   THE PLAN'S UPGRADE stays the owner's (it spends the owner's money): named to the owner as the way to deploy
   sooner than the allowance frees.
+- **CL14 (03:48 UTC, 2026-11-18; ON CLOSE-DOORS-1A'S C4 STOP).** `tests/lint/proseComposed.walker.test.js`, the arm
+  "THE SHIPPED CORPUS READING, printed and held SHRINK-ONLY": over-claims 54 against the ceiling 46 (45 + 1 OWED),
+  under-claims 2,097 against 2,016 (1,282 + 734 OWED); the same at 70e557d5b and at the seat's tip. THE SEAT'S
+  ATTRIBUTION: the over-claims are +11 against the 43 measured at the last close, all DS-GEN-17 ADMINISTERED: 9 on
+  LEFT-LINES's twin "… has no court sitting and no gaol in use." (point 37), 2 on BAR6-CULTURE's "… keeps a gaol of
+  its own, though no court sits here …" (point 10); the under-claims +95 and -15 across 29 new lines (BAR7-DESKS 42
+  and 10, BAR6-DEFDESK 13, LEFT-LINES 7, BAR6-ECON 7, BAR6-POWERS 6, SEAM-CULTURE 6, SEAM-DESKS 3, BAR6-CULTURE 1).
+  THE RULING, IN THE FILE'S OWN IDIOM AND BY ITS OWN PRECEDENT (PC1 at the BAR4 close; A0B1 at the tail round's): THE
+  NEW CLAIMS ARE OWED, NOT FORGIVEN: `OVER_CLAIM_OWED` and `UNDER_CLAIM_OWED` rise to the measured tally, each BASE
+  untouched, each with a dated note that names the cause line by line or pool by pool and its seat, the figures at
+  the last close's tip 6483322cc and at the seat's, and what buys it back (the census wave that reads a line's OWN
+  declarations: these lines carry them and the census does not read them yet). ONE CONDITION: FOR EVERY NEW
+  OVER-CLAIM the seat shows that the line DECLARES the thing it claims (its `needs` or `excludes` names the field,
+  quoted): the declaration is what licenses the claim where the line prints. AN OVER-CLAIM ON A LINE WITH NO
+  DECLARATION COVERING IT IS NOT OWED: it is class (c), listed for the chair, and the tally stays short of green by
+  exactly those. The under-claims need no such proof (a line that says less than its pool reads claims nothing
+  false). WHY NOT "THE CENSUS FIRST": the census wave is a build, not a re-take; the close moves no town and no page
+  (C5); the debt is recorded by name and dated, as both earlier closes did. VETOABLE; it goes on the pull request's
+  list with the figures.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
