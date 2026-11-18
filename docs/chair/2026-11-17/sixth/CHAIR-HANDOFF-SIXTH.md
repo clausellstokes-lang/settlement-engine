@@ -2359,3 +2359,16 @@ should be paused or archived by the owner's hand.
   FAULTS-DESKS session_01FbPLbd75CLU9a3oUrN7GJX · FAULTS-PEOPLE session_01FbPLbbNYoo1zfKYvPWDQzR · FAULTS-WATCH
   session_01FbPLbceWHBqb38hxNLm8Px · FAULTS-TOOLS session_01FbPLbf7HeN79PoWDejxBKm. THE BRIEF'S HEADER SAID "written
   06:40": the file was written at 06:38 (the hour set ahead of the clock again): corrected in the file.
+- 06:51 UTC, 2026-11-18 · THE MERGE BRANCH IS ON ORIGIN AT 0af60594a34a0f9e04256c4a6e858c3c250aedcd (pushed 06:50, its three gates
+  green; read back): twelve merges and the four rows. "PART 1 IS AT 0af60594a…" SENT TO CLOSE-DOORS-2 (06:52): it merges
+  that commit (its only merge), re-proves every predicted row there (a row that differs from 70e557d5b is a stop), sends
+  "READY TO SIGN ON <sha>" and WRITES NOTHING until "SIGN"; THE OWNER IS TOLD IN THE CHAT BEFORE "SIGN". **PEOPLE-2 IS READ
+  BY THE CHAIR (its three test files against 20b44f97c): LAND.** `tonightSeatSecret`: the seam seeds re-keyed by
+  identity (28 out: the sortie is now kept by the company captain, the page is right; 0 in: checked, a voiceable want
+  overridden by the crisis secret; eleven of twelve kept; the assertion's form untouched); `coachingInnUnderCrisis`:
+  r2s-famine-city-1 to r2s-famine-city-10, measured to deal the welcoming line with the exclusion reverted (the claim can
+  fail); `bar8People2` (new): constructed records, a negative beside each positive: the swap's cure in the migration
+  and in IMPOSE_CORRUPTION; A STORED HANDLER THAT NAMES A CARD ON THE ROSTER IS NEVER REWRITTEN, at the load and at the
+  event; the three tie lines that hold someone inside declare the prison and no other line does. No assertion weakened;
+  nothing under `src/`. THE FIVE PIECES' STATE: K-WATCH-2 LAND · MARKS-2 LAND (one guard arm coming) · PEOPLE-2 LAND ·
+  the income and the PDF: after J-INCOME-2's three commits · the desks: READ-DESKS-2 still reads.
