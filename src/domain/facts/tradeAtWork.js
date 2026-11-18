@@ -85,6 +85,7 @@ import { ironAtHandOf } from './ironAtHand.js'; // BAR8-SCENES (item 1b): the ir
 import { warHoldsIron } from './warIronHook.js'; // BAR8-SCENES (item 1b): the war's hold on the iron, the iron hook's own predicate (EG1: import-free)
 import { GROUND_YIELD, idOfHouse, sourceStoryOf, usedGroundOf } from './supplyStory.js'; // BAR8-SCENES (item 1c): the fish story
 import { SOURCE_GROUNDS, TAKERS } from './houseKinds.js';
+import { catalogIdForName } from '../../data/institutionalCatalog.js'; // BAR8-DESKS-2 (BR34): the building houses, by catalogue id
 
 /** The arrival picker's house words, by trade (a copy of `ARRIVAL_SENSES[].institutions`, pinned). */
 export const TRADE_HOUSES = Object.freeze({
@@ -182,6 +183,46 @@ function goodAtWork(record, good) {
 }
 
 /**
+ * BAR8-DESKS-2 (2026-11-18; the chair's ruling BR34, new vocabulary: vetoable by the owner, on the veto list by name):
+ * `trade at work: building`: a house whose OWN SERVICE is building (walls, houses, roofs) stands on the live roster and is
+ * not short (`housesShortOf`, the one fact the page's mark reads); FALSE, not unanswered, where none stands or every one is
+ * short. "In {settlement} the old buildings are patched and kept standing, and nothing new goes up." (DS-ECO-8 POOR v3)
+ * printed beside a card that "knows every new wall going up" (K's 15e: bar0-city-wartime-rand-38, whose Carpenters (5-15)
+ * do "Building construction"). THE HOUSES ARE TAKEN BY CATALOGUE ID, never by a name pattern (the stamped `catalogId`, or
+ * the catalogue's own exact lookup of the house's name, as `catchStopped.js` joins). Read from the catalogue's own
+ * services (`data/institutionServices.js`) and descriptions (`data/institutionalCatalog.js`):
+ *   IN   carpenter_part_time  "Simple construction: Sheds, fences, and basic structures."
+ *        carpenter            "Builds houses, carts, furniture." ("Building repairs: … patch roofs …")
+ *        carpenters_5_15      "Building construction: Framing, roofing, flooring, and internal fitting-out of structures."
+ *        thatcher             "Roof repair and construction." ("Thatching: Apply and maintain reed or straw thatch roofing.")
+ *        golem_workforce      "Construction work: Tireless construction assistants."
+ *        brickmaker           "Moulds and fires clay bricks for construction … Enables more permanent buildings." (the
+ *                             first of the chair's three; its services are "Fired brick", "Roof tiles", "Drainage pipe",
+ *                             so by the ruling's rule on suppliers it would be left: IT IS IN, by name and vetoable,
+ *                             because its own card is the line's contradiction: "Talks about who is building what and
+ *                             where; knows every new wall going up." beside v3 in bar0-town-occupied-rand-47, whose only
+ *                             house of the trade is the brickmaker)
+ *   LEFT (each SUPPLIES material, or builds no building, or keeps an office): potter ("Fired brick"), stone_quarry ("Cut stone"), sawmill and sawmill_commercial ("Lumber
+ *        milling"), ropemaker, glassmakers ("Window glass"); shipyard and river_boatyard (vessels); town_council and
+ *        city_administration ("Public works: Walls, wells, roads, and the watch": an office's charge, not a trade at work);
+ *        town_hall (permits), workhouse (pauper labour; its services are textiles and vagrancy), banking_district (loans).
+ *        No catalogue house is a mason's or a stonecutter's (those are words of `TRADE_HOUSES.stone`, not ids).
+ */
+export const BUILDING_HOUSE_IDS = Object.freeze(['carpenter_part_time', 'carpenter', 'carpenters_5_15', 'thatcher', 'golem_workforce', 'brickmaker']);
+
+/** @param {object} record @returns {boolean} */
+function buildingAtWork(record) {
+  const builders = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record)).filter((inst) => {
+    const i = /** @type {{ catalogId?: unknown, name?: unknown }} */ (inst);
+    const id = String((typeof i?.catalogId === 'string' && i.catalogId) || catalogIdForName(String(i?.name ?? '')) || '');
+    return BUILDING_HOUSE_IDS.includes(id);
+  });
+  if (builders.length === 0) return false;
+  const short = housesShortOf(record);
+  return builders.some((h) => !short.has(String(/** @type {{ name?: unknown }} */ (h)?.name ?? '')));
+}
+
+/**
  * THE ONE READER of `trade at work: <key>`.
  * @param {unknown} record the settlement record
  * @param {string} key a trade of `TRADE_HOUSES`
@@ -193,6 +234,7 @@ export function tradeAtWorkOf(record, key) {
   if (typeof key === 'string' && key.endsWith(IN_FULL)) return tradeInFullOf(record, key.slice(0, -IN_FULL.length)); // BAR8-SCENES (item 1b)
   const good = Object.prototype.hasOwnProperty.call(GOOD_TRADES, key) ? /** @type {Record<string, Parameters<typeof goodAtWork>[1]>} */ (GOOD_TRADES)[key] : undefined;
   if (good) return goodAtWork(record, good); // BAR6-SCENES (6b): the good itself, from the page's own lists
+  if (key === 'building') return buildingAtWork(record); // BAR8-DESKS-2 (BR34): a building house at work, by catalogue id
   const kind =/** @type {Record<string, ReadonlyArray<string>>} */ (KILN_KINDS)[key];
   const words = kind ?? /** @type {Record<string, ReadonlyArray<string>>} */ (TRADE_HOUSES)[key];
   if (!words) return undefined;

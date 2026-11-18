@@ -114,7 +114,7 @@ import { legibilityRung } from './legibilityRung.js';
 import { waterAccessKind } from '../../tradeRouteSemantics.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
-import { factsAnswered } from '../../facts/factsAnswered.js';
+import { factsAnswered } from '../../facts/factsAnswered.js'; import { courtHoldersOf } from '../../facts/defence.js'; // BAR8-DESKS-2 (BR32 (4)): the Legal row's own court keys the internal row
 import { corpusAdmittingCrimeLines, crimeLineFactsOf } from './crimeLineDisqualifiers.js';
 import { corpusAdmittingPostureLines } from './postureLineDisqualifiers.js';
 
@@ -786,8 +786,13 @@ export function defenseThreatProse(settlement, options = {}) {
       withinTheBar(watchOnly ? null : invasionRowPoolKey(walls, garrison || contracted, militia), dp.scores?.military),
       noSupplyUnderACrisis(defenceSupplyPoolKey(settlement?.defenseProfile?.chainModifiers, force), settlement?.stress),
     ),
+    // ⛔ THE KEY READS THE LEGAL ROW'S OWN COURT (BAR8-DESKS-2, 2026-11-18; the chair's ruling BR32 (4), the reader's M1):
+    // the court is the one the Legal Infrastructure row prints (`defence.js :: courtHoldersOf`, the atom `court sits`: a
+    // courthouse, or a live house that drew a court service), not `compound.hasCourtSystem`, a NAME test that takes every
+    // town hall for a court. Read off the flag, ten towns of the thirty and the 720 drew the full legal chain's "A thing done
+    // wrong … goes somewhere and takes time" beside "Prison only / Detention without process. Arbitrary enforcement."
     internal: rung(internalRowPoolKey(
-      civicFlag(compound.hasCourtSystem), civicFlag(compound.hasPrison),
+      courtHoldersOf(settlement).length > 0, civicFlag(compound.hasPrison),
     )),
     economic: rungWith(
       economicRowPoolKey(dp.scores?.economic),

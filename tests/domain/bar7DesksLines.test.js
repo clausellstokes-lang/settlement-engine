@@ -239,13 +239,17 @@ describe('item 6 · the turf war declares the rings it asserts (the new atom `ri
     expect(admits(v3, town('bar0-metropolis-calm-rand-42'))).toBe(false); // C23038: rings, Very Safe, law Surplus
     expect(admits(v3, town('bar0-town-occupied-rand-43'))).toBe(false); // C39691: a lone gambling den, under a curfew
   });
-  test('exactly one of the line and its three twins stands in each village or larger town keyed semi-organised', () => {
-    const four = DEF.filter((x) => x.block === 'DS-DEF-4' && x.pool === 'structure semi-organized' && x.v.vid >= 3);
-    expect(four.length).toBe(4);
+  // RE-KEYED BY IDENTITY (2026-11-18, BAR8-DESKS-2, ruling BR32 (1)): DESKS-DEF's 13f twin v7 ("No one boss runs the
+  // crime at {settlement} …", `crime: ≤ semi-organized`) joined this pool, so the line and its twins are FIVE (v3 to v7,
+  // was four: "three twins"); its second reader proved the per-town claim holds with five (exactly one of v3 to v7 stands
+  // in each town of the key). The set is held by its vids, not by a count of whatever sits at vid ≥ 3.
+  test('exactly one of the line and its four twins stands in each village or larger town keyed semi-organised', () => {
+    const five = DEF.filter((x) => x.block === 'DS-DEF-4' && x.pool === 'structure semi-organized' && x.v.vid >= 3);
+    expect(five.map((x) => x.v.vid)).toEqual([3, 4, 5, 6, 7]);
     expectNoSeedFailures(collectSeedFailures(THIRTY, (seed) => {
       const s = town(seed);
       if (factsOf(s).crime !== 'semi-organized' || ['thorp', 'hamlet'].includes(s.tier)) return;
-      expect(four.filter((x) => admits(x, s)).length, seed).toBe(1);
+      expect(five.filter((x) => admits(x, s)).length, seed).toBe(1);
     }), 'exactly one of the turf-war line and its twins');
   });
 });

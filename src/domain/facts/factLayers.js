@@ -194,6 +194,9 @@ export const LEAVES = Object.freeze({
   // rivalRingsOf` over the live roster, and the key's own `semi-organized`): over the crime key (layer 3, which reads the
   // safety profile's back-write at its own layer), so one layer above it
   rivalRings: home('rivalRings', 4, ['availableServices', 'economicState', 'economicState.safetyProfile', 'institutions', 'powerStructure']),
+  // BAR8-DESKS-ECO (11c): the good the critical-import lens names is brought in (`criticalImportBroughtIn.js`: the resource
+  // analysis's critical list and reasons, stored at layer 3, and the economy's imports)
+  criticalImportBroughtIn: home('criticalImportBroughtIn', 4, ['resourceAnalysis', 'economicState']),
   crimeSignal: leaf({ layer: 3, module: 'domain/crimeSignal.js', exported: 'crimeSignalOf', call: 'crimeLists', reads: ['powerStructure', 'institutions'] }),
   faith: home('faith', 3, ['institutions', 'config', 'economicState', 'powerStructure', 'npcs', 'stress'], {
     note: 'its value reads the config, the roster, the income and the factions (layer 3); it touches the cast (layer 3), banked; '
@@ -211,6 +214,8 @@ export const LEAVES = Object.freeze({
   founder: leaf({ layer: 4, module: 'domain/facts/founder.js', exported: 'founderOf', call: 'record', reads: ['history'] }),
   // BAR4-CORPUS-DEF (D1): a danger from outside on its way, a live external-threat tension of the history (`dangerComing.js`)
   dangerComing: home('dangerComing', 4, ['history']),
+  // BAR8-DESKS-DEF (12e): the common people press, or have risen, against those in charge, a live popular-uprising tension (`uprising.js`)
+  uprising: home('uprising', 4, ['history']),
   // BAR6-DEFDESK (7a): the page itself prints the country's beasts as a threat (`monsterFrontier.js`: the config and the monster score)
   monsterFrontier: home('monsterFrontier', 3, ['config', 'defenseProfile']),
   // BAR6-CULTURE (10g-legacy): the blow the record's top legacy names destroyed something (`legacyRuin.js`)

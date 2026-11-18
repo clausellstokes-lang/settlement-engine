@@ -39,8 +39,8 @@ import { join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
 import {
-  AUDIENCES, driftRun, goldenCorpus, keyOf, manifestBytes, MANIFEST_RECORDER_FILES, poolIndex,
-  recorderShas, sha256, stripComments, templateMatches,
+  AUDIENCES, cellsOfTown, driftRun, goldenCorpus, keyOf, literalLength, manifestBytes, MANIFEST_RECORDER_FILES,
+  mountsByBlock, poolIndex, recorderShas, resolveCandidates, sha256, stripComments, templateMatches, townOf,
 } from '../helpers/dossierManifest.js';
 import { classifyCell, classifyCells, VERDICTS } from '../../scripts/prose-manifest-diff.mjs';
 import { MANIFEST_PROVENANCE } from '../../scripts/prose-manifest-cells.mjs';
@@ -762,5 +762,58 @@ describe('the classifier — what KIND of movement, per cell', () => {
     // match sentences it never wrote.
     expect(templateMatches('{settlement} (walled).', 'Ashford (walled).')).toBe(true);
     expect(templateMatches('{settlement} (walled).', 'Ashford xwalledx.')).toBe(false);
+  });
+
+  // ⭐ THE LONGEST LITERAL WINS, AND A TIE STAYS AMBIGUOUS (2026-11-18, BAR8-DESKS-2, ruling BR32 (2)). DS-POW-5
+  // council's twin v6 is its original v2 less the word "whole", so v6's `{seat}` swallowed "whole Free Elder Council"
+  // and 260 cells read as matching two. The twin's words stand; the reader resolves to the longest literal text.
+  const COUNCIL = pools.get('DS-POW-5 :: council') || [];
+  const councilV2 = COUNCIL.find((v) => /goes to the whole \{seat\}, and everybody/.test(v.text));
+  const councilV6 = COUNCIL.find((v) => /goes to the \{seat\}, and everybody/.test(v.text));
+  /** @param {string} sentence @param {string} angle */
+  const readSentence = (sentence, angle) => resolveCandidates(
+    COUNCIL.filter((v) => v.angle === angle && templateMatches(v.text, sentence)),
+  );
+  test('a sentence of the original reads the original, though the shorter twin matches it too (DS-POW-5 council v2, v6)', () => {
+    expect([councilV2?.vid, councilV6?.vid], 'the two rows, found by their own words').toEqual([2, 6]);
+    const v2 = /** @type {any} */ (councilV2);
+    const sentence = v2.text.replace('{settlement}', 'Ashford').replace('{seat}', 'Free Elder Council');
+    // the premise of the cure: BOTH templates match this sentence (v6's slot takes "whole Free Elder Council")
+    expect([templateMatches(v2.text, sentence), templateMatches(/** @type {any} */ (councilV6).text, sentence)]).toEqual([true, true]);
+    const read = readSentence(sentence, v2.angle);
+    expect(read.chosen?.vid, sentence).toBe(2);
+    expect(read.ambiguous).toBe(false);
+  });
+  test('a sentence of the twin reads the twin (DS-POW-5 council v6)', () => {
+    const v6 = /** @type {any} */ (councilV6);
+    const sentence = v6.text.replace('{settlement}', 'Ashford').replace('{seat}', 'Lord Mayor');
+    expect(templateMatches(/** @type {any} */ (councilV2).text, sentence), 'the original refuses it').toBe(false);
+    const read = readSentence(sentence, v6.angle);
+    expect(read.chosen?.vid, sentence).toBe(6);
+    expect(read.ambiguous).toBe(false);
+  });
+  test('two templates of EQUAL literal text matching one sentence still red the arm (the law can still fail)', () => {
+    // planted: "A {x} town." and "A small {y}" both carry eight literal characters and both match "A small town."
+    const tied = [{ text: 'A {x} town.' }, { text: 'A small {y}' }];
+    expect(tied.map((t) => [literalLength(t.text), templateMatches(t.text, 'A small town.')])).toEqual([[8, true], [8, true]]);
+    expect(resolveCandidates(tied).ambiguous).toBe(true);
+    expect(resolveCandidates([tied[0], { text: 'A small {y}.' }])).toEqual({ chosen: { text: 'A small {y}.' }, ambiguous: false });
+    // AND THROUGH THE RECORDER ITSELF: a town that prints v2, read against a pool with a second row of v2's own
+    // literal text, records ambiguous cells (the arm's figure), and none against the shipped pool.
+    const v2 = /** @type {any} */ (councilV2);
+    const v2Cell = run.cells.find((c) => /** @type {any} */ (c).block === 'DS-POW-5' && /** @type {any} */ (c).pool === 'council'
+      && /** @type {any} */ (c).vid === v2.idx);
+    expect(v2Cell, 'a cell of the drift corpus prints v2').toBeTruthy();
+    const [key, audience] = String(/** @type {any} */ (v2Cell).cell).split('::');
+    const config = /** @type {any} */ (goldenCorpus().find((c) => keyOf(c) === key));
+    const { settlement, seed } = townOf(config);
+    const mounts = mountsByBlock();
+    const ambiguousOver = (/** @type {Map<string, any>} */ poolMap) => cellsOfTown(settlement, {
+      key, seed, audience, pools: poolMap, mounts,
+    }).filter((c) => /** @type {any} */ (c).ambiguous).length;
+    expect(ambiguousOver(pools), 'the shipped pool').toBe(0);
+    const tampered = new Map(pools);
+    tampered.set('DS-POW-5 :: council', [...COUNCIL, { ...v2, idx: 99, vid: 99 }]);
+    expect(ambiguousOver(tampered), 'a tied twin').toBeGreaterThan(0);
   });
 });
