@@ -7,8 +7,9 @@
  * after dark" (the seventh read's C42053) and beside "Part-time guards who walk the night and keep the peace".
  *
  *   forceWalksByDayOf(houses)   THE ONE READER: true where some house of the force is not kept to the night by its own
- *                               text; false where every house is (its text walks "the night" or "after dark" and names no
- *                               day and no gate), or where none stands; `undefined` where no roster was handed in
+ *                               text and does not muster only at need; false where every house is (its text walks "the
+ *                               night" or "after dark" and names no day; or it musters only "when danger" comes), or where
+ *                               none stands; `undefined` where no roster was handed in
  *                               (unanswered: fail-closed)
  *
  * THE HOUSES ARE THE ONE PARTITION'S (BAR8-K-WATCH-2, the chair's BR29 (2)): `orderForce.js :: orderForceOf(record).houses`,
@@ -17,17 +18,25 @@
  * and drifted from the page: a Warden's Lodge counted (a ranger's lodge, no force the page prints) and a Household levy or
  * Multiple garrisons did not. What the leaf keeps is its reading of a house's own text.
  *
- * A house with no text of its own is not kept to the night: nothing it prints says so. A gate held is a day's duty
- * ("walk the night and hold the gates": the gate is kept by day), so a text that names a gate or the day is not
- * night-only. Imports nothing. Pure: no randomness, no clock, no write.
+ * A house with no text of its own is not kept to the night: nothing it prints says so. A text that names the day is not
+ * night-only.
+ *
+ * A GATE HELD IS A POST, NOT A ROUND (FAULTS-WATCH item 2; the chair's ruling FR9 under the owner's deferral, 2026-11-18;
+ * vetoable by the owner): "Part-time guards. Night patrol and gate duty." gives the night for its walking and only a gate
+ * for the day, so the watch is not "on the rounds most hours of the day" (bar0-town-calm-rand-36, -37, -40); a gate no
+ * longer counts as the day. A LEVY THAT MUSTERS ONLY WHEN DANGER COMES walks no round ("musters ... when danger reaches the
+ * fields": the thorp's Household levy). Neither reading says the force is unseen by day: the gate is held, the levy
+ * musters. Imports nothing. Pure: no randomness, no clock, no write.
  *
  * @enforced-by tests/generators/bar8Watch.test.js
  */
 
 /** A text that walks the night. */
 const NIGHT = /\bafter dark\b|\bnight\b/i;
-/** A text that keeps the day, or a gate (held by day). */
-const DAY = /\bday\b|\bdaylight\b|\bgates?\b/i;
+/** A text that keeps the day (FR9: a gate held is a post, not a round by day). */
+const DAY = /\bday\b|\bdaylight\b/i;
+/** FR9: a levy whose text musters only when danger comes (no round at all). */
+const MUSTERS_AT_NEED = /\bmusters?\b[^.]*\bwhen danger\b/i;
 
 /**
  * A force's own text keeps it to the night.
@@ -39,11 +48,19 @@ export function nightOnlyText(desc) {
 }
 
 /**
+ * FR9: a force's own text musters it only when danger comes; it walks no round.
+ * @param {unknown} desc @returns {boolean}
+ */
+export function mustersOnlyAtNeed(desc) {
+  return MUSTERS_AT_NEED.test(String(desc ?? ''));
+}
+
+/**
  * THE ONE READER of `force walks by day`.
  * @param {ReadonlyArray<{ desc?: unknown }> | null | undefined} houses the force's houses (`orderForceOf(record).houses`)
  * @returns {boolean | undefined}
  */
 export function forceWalksByDayOf(houses) {
   if (!Array.isArray(houses)) return undefined;
-  return houses.some((f) => !nightOnlyText(f?.desc));
+  return houses.some((f) => !nightOnlyText(f?.desc) && !mustersOnlyAtNeed(f?.desc));
 }
