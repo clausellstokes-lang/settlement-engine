@@ -718,6 +718,26 @@ should be paused or archived by the owner's hand.
   made and read; the last close then measures only the landings after it, and its signing needs the owner's yes at
   that hour).
 
+- **THE FAULTS ROUND'S RULINGS (FR1 to FR10; 06:38 UTC, 2026-11-18; each the chair's, vetoable by the owner; the brief is
+  `docs/chair/2026-11-18/faults/BRIEF-FAULTS.md` on this lane, where each is set out whole).** **FR1**: the faults nobody
+  has built are built on A REHEARSAL BASE, `lane/faults-base-2026-11-18` at 4288049ba (the close's merge 11 with the
+  five built pieces merged in their landing order), started while the close still runs; each seat's branch is merged on
+  the line after the five pieces have landed there. **FR2**: ONE NEW ATOM, `need not brought in` (keys by material
+  family), for the four faults that need what the page's need list says: a second home held EQUAL to
+  `tradeListDisplay.js :: importsAsPrinted().needed` by its guard, in the form of `catchStopped.js` and
+  `criticalImportBroughtIn.js` (new vocabulary: the veto list). **FR3**: the fair's two lines and the quarter's line are
+  refused where the need list names their good as not brought in; ONE TWIN each. **FR4**: the fish market's card follows
+  its row (BR24's story): ONE TWIN in the bought story; an idle town keeps its line under its mark. **FR5**: the
+  fishmonger's talk takes ONE TWIN where no catch is landed, in the false line's own slot (no fourth row, no other draw
+  moved). **FR6**: 13d by ONE NEW ATOM, `court or gaol`, never a disjunctive form of declaration (the kernel, the generator
+  and every reader of a declaration would be touched for one family of lines). **FR7**: the numbering guard is armed in
+  the generator, by text, on the numbering as it stands (CL19's debt). **FR8**: the supply rule's leftovers by the
+  owner's own table: the second ring proves its ground as a source house does; a venture is never picked beside a house
+  that keeps or yields its material; an isolated buyer whose material the land never held tells the owner's fourth story
+  (BRIEF-BIRTH-2's item 2 (e)). **FR9** (the owner's question 5): a gate held is a post, not a round: the by-day line is
+  refused where the force's text gives the night for its walking and only a gate for the day. **FR10** (the owner's
+  questions 2 to 4): NOTHING BUILT: the one-way deal stays (BR13); the offices' one-string titles take no female form;
+  a chain card does not say it runs on bought iron (BR18: a new word, not a fix).
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
   e0242a12a82285a736f9997360ec1e8a5fbd3568 = the line's ed1d43529 + BIRTH-3's 8b0506eae, no collision; tree
@@ -2270,3 +2290,32 @@ should be paused or archived by the owner's hand.
   CLOSED LINE, after the signing (the owner, 05:13:00: everything but the next read is before the deploy). STILL
   READING: READ-DESKS-2, READ-MARKS-2 (one planted fault not caught: "only M1 alchemist row uncaught", its word so
   far), READ-INCOME-PDF. CLOSE-DOORS-1B: its hand-back is drafted; it waits on a 59-file run.
+- 06:38 UTC, 2026-11-18 · **A WRONG STATEMENT OF THE CHAIR TO THE OWNER, CORRECTED OUT LOUD (about 06:30):** the lists of 05:10 and
+  05:14 named the brewer's secret, the two granary lines and the "Prison only" desk line among "the faults nobody has
+  built". THEY ARE BUILT, inside the desks' piece that waits to land (DESKS-ECO: the brewer's secret declares
+  `institution: tavern`; DESKS-DEF: the granary's v2 and v3 declare `stores: ≥ 3` with twins v5 and v6, and L9's two
+  lines; DESKS-2's A7: `internalRowPoolKey` reads the Legal row's own court). Read first-hand in the three hand-backs.
+  **THE REHEARSAL BASE IS BUILT AND PUSHED (FR1):** `lane/faults-base-2026-11-18` at
+  4288049bad6fba2382a8bddbb4d6de5d543580d9 (worktree `/home/user/fb`, hooks; pushed with its three gates green: the type
+  ratchet, the strict domain, lint): the close's merge 11 (03b5f64ea) plus six merges: J-INCOME-2 clean; PDF-2b with two
+  collisions resolved as ruled (the leaf is J-INCOME-2's, BR33 (2); `pdf2ReadsTheTabs.test.jsx`'s negatives were
+  re-formed by CLOSE-WALKERS W5 and by PDF-2b's own item 5: the seat's region taken, the file byte-equal to PDF-2b's
+  own); MARKS-2 with one (`bar7EconTab.test.jsx` C7539: the seat's re-keyed positive stands over W3's anchored negative;
+  the helper's unused name left the import line); K-WATCH-2 clean; PEOPLE-2 clean; DESKS-2 with four: three are two
+  seats' additions to one list joined as a union, asserted mechanically (`factVocabulary.js`'s `trade at work` keys:
+  SCENES's two and DESKS-2's `building`, 18; `tradeAtWork.js`'s imports; `bar4ScenePresumption.test.js`'s
+  expectation), the fourth by CL9 (the close's `proseEntryContradiction.walker.test.js`; DESKS-2's A8 dropped).
+  `git rerere` holds every resolution for the landings. ON THE JOINED TREE (17 files, 190 tests): every guard of the
+  round green and the joined tests green; RED, 4: `factLayers.walker` "every leaf declares exactly the strata it
+  touches" NAMES `importsAsPrinted` (A LAW RED AT THE JOIN: the income piece's new read against the close's derived
+  probes: cured at its cause at the landing, CL10), its POOLS register, and `proseEntryContradiction`'s two corpus counts
+  (3510 against 3501, 2802 against 2794: stored figures, the last close's). **BRIEF-FAULTS IS WRITTEN** (ec6a91040; seven
+  seats: FAULTS-NEED, FAULTS-ROWS (seated when the atom is pushed), FAULTS-BIRTH, FAULTS-DESKS, FAULTS-PEOPLE,
+  FAULTS-WATCH, FAULTS-TOOLS); the rulings FR1 to FR10 are in section 6. THE CORRECTED LIST OF WHAT IS BUILT IN THIS
+  ROUND: the fish market's card, the fisher's landing and one scene (by the second ring), the fishmonger's talk; the
+  fair and the quarter; r2r-hamlet-27; the isolated buyers (71 houses in 27 towns); 13d; 12d's need-list half; the
+  butchers and the one good under two words; 11e.wantBuy; 14e; the crime-type "(lawless)" row; the gate and the levy;
+  the true line lost at rand-31; `trade at work` under a siege; and the tools (the matcher, the validator, the probe's
+  wait; the numbering guard with the desks' seat). NOT IN IT: the card for a proven ground and the PDF's land list
+  (no false sentence); the 25 recorded rows' declarations and the variety lines (last, with the two lopsided pools).
+  CLOSE-DOORS-1B is still idle on its 59-file run (since 06:03).
