@@ -515,6 +515,42 @@ should be paused or archived by the owner's hand.
   CLOSE-SWEEP's hand-back. FOR THE PULL REQUEST'S KNOWN FAULTS: a desert town that exports coal is drawn on a
   mountain slope (nine of the 462 reference towns, two more than before); its cure is a wave of the site-coherence
   plan, after the deploy.
+- **CL18 (04:15 UTC, 2026-11-18; CLOSE-DOORS-1A's law red, `tests/generators/houseDescLateReRead.test.js`, "the table:
+  every key is an original with one twin, and none is a colour line").** After the lawful re-pin of the table's count
+  (11 to 30: BAR5-MARKS +15, BAR6-HOUSES +4) the per-key arm runs and reds on FOUR keys of `DESC_LATE_SIBLINGS` that
+  are still rows of `src/data/institutionDescColour.js` ("read; presumes nothing"): the hired company's two billet
+  lines and the metropolitan cathedral's two, given a siege twin by BAR5-MARKS e8068a494 (`excludes: crisis:
+  under_siege`). THE COLOUR COLUMN IS STALE, NOT THE TWINS: e8068a494 omitted what 8c0a3cd71 did for its own lines.
+  THE CURE IS IN THE WORDS' BOOKS (the seat's): the ledger's four rows lose `colour: true` and take the declaration
+  they carry, through the census's door; the four keys leave the column in the form of 8c0a3cd71. NO TOWN MOVES (the
+  chair's grep: no file under `src/` imports the column; `institutionDescVariants.js:2245` names it in a comment);
+  the column's four other readers (two scripts, `law5w.mjs`, `presumptionClasses.shared.mjs`) are read after the
+  move: a red is named to the chair, not banked.
+- **CL19 (04:15 UTC, 2026-11-18; THE SHIFT REGISTER'S `vids` ROW: A LAW OF THE CORPUS BREACHED ONCE, FOUND AT THE
+  CLOSE).** THE LAW (`docs/content/prose-shift-register.json`, row `vids`; `stateProseKernel.js`): a variant's `vid`
+  is the draw's key; "a new variant takes the NEXT number; nothing is ever deleted and nothing is renumbered"; shift
+  "none: a renumbering is REFUSED at the projector". THE CHAIR'S OWN MEASURE (every pool of the six leaves compared
+  by text; the script `cmp.mjs` in the session's scratchpad: a text standing at both commits with another vid):
+  6483322cc against 70e557d5b: FOURTEEN LINES IN SEVEN DS-DEF POOLS RENUMBERED BY INSERTION:
+  `DS-DEF-2::CHAIN: food trades failing` 2→3, 3→4, 4→5, 5→6; `DS-DEF-3::Safe` 3→4, 4→5; `DS-DEF-3::COMPOUND override
+  (a crisis stress has rewritten the label)` 2→3, 3→4; `DS-DEF-3::COMPOUND: occupation curfew` 2→3, 3→4;
+  `DS-DEF-4::structure diffuse` 2→3, 3→5; `DS-DEF-12::CAPACITY: enough` 3→4; `DS-DEF-11::UNWALLED-SMALL` 5→6; no
+  other pool of any leaf (861 pools; 41 lines added, none removed, 29 with the same vid and another text: the seven
+  insertion points and 22 rewordings in place, which the law allows). CAUSE: be3585040 (BAR6-DEFDESK, 2026-11-16:
+  its twins were inserted beside their originals; the curfew pool's inserted line greps first at 1b7049ea6: the seat
+  says which commit moved its numbers). WHY NO DOOR REFUSED IT: `scripts/generate-dossier-state-prose.mjs:493` calls
+  `vidsOf(label, p.variants, undefined, undefined)`: the frozen-vids check is not armed; and it compares POSITIONS,
+  so an insertion that renumbers passes it; the register's digest is over the numbers, which an insertion leaves
+  looking like an append. AGAINST THE LIVE SITE (master db832c892 already draws by vid): a town saved there may show
+  another sentence of the same pool in those seven places after the deploy; no sentence is false by it (each prints
+  only where its marks hold). THE RULING: THE NUMBERING STANDS AS IT IS ON THE FROZEN LINE (restoring it re-rolls
+  pages the seventh and eighth reads were made on, re-opens every book and test keyed by vid, and moves pages at the
+  close); the row's class is NOT changed; the digest is re-taken with a TRUE note: breached once, the seven pools,
+  the fourteen moves, the commit, why the door did not refuse. IT IS NOW OR NEVER (once deployed the new numbers are
+  the numbers): THE OWNER WAS TOLD IN THE CHAT AT ONCE, with the other choice (the old numbers restored before the
+  merge, at a cost of time not measured). AFTER THE DEPLOY: a builder ARMS THE GUARD (the generator refuses a text
+  that stands before and after with another vid, unless a signed shift record names it). DESKS-2 WAS TOLD THE LAW AND
+  TO CHECK ITS OWN BRANCHES pool by pool before its part A.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
@@ -1667,3 +1703,11 @@ should be paused or archived by the owner's hand.
   nothing else is loosened. Both hunks are the seat's by this ruling, each a commit of its own with a negative
   control, read by the chair; no `src/` line moves. `census4-validate-ledger.mjs` refuses at base and tip ("no
   extracted ARRIVAL_MEMORIES"): a door that cannot open: the seat dates it; a debt to name to the owner.
+- 04:15 UTC, 2026-11-18 · THE OWNER ASKED (04:13:11 UTC, mid-turn): "what are all of hte decisions and calculations
+  that you are running? you're doing a lot this round very different from others. please, in exhaustive detail yet
+  simple enough for a normal person to understand, walk me through all of hte things you are working on in detial":
+  ANSWERED FIRST AND IN FULL in the chat (why the close differs from a content round; the seven kinds of thing
+  refreshed or repaired; each seat and where it stands; the nine decisions so far; the chair's own checks; four
+  things found, the numbering breach among them with its other choice; what is left, in order). Rulings CL18 and
+  CL19 sent to CLOSE-DOORS-1A after the answer; the old checkout `/home/user/old4` (6483322cc, detached) serves the
+  comparison.
