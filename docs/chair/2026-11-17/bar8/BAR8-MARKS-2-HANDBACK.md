@@ -175,3 +175,17 @@ guard, bar7EconTab, leftMarks, birthKindsLaw and supplyStoryLaw are 41/41 green 
    apothecary_established) all hold INPUT in `HOUSE_DEPENDENCE`, so the reading is false for them. Over the 720, the mark
    table base → tip prints a new "Curtailed by the siege." only on the dyer, the furrier's district, the river boatyard and
    the mint, and on their rows; no older house gains one.
+
+## 10 · The second reader's MED 2: the alchemist's row of `HOUSE_NEED_INPUT` guarded (tests only)
+
+`tests/domain/bar8Marks2.test.js` gains arm (3). At r2s-religious_conversion-town-2 the alchemist's shop and its row
+("Potion brewing") carry "Short of medicinal herbs.", read alike on the owner's record, `toPublicSafe` and the share veil.
+THE NEGATIVE beside it: bar0-town-calm-rand-46's alchemist's shop prints bare (the town makes medicinal herbs, and its
+imports bring "Medicinal herbs"). The seed loop collects every failure.
+
+PROOF, in a scratch tree at 1a2c7f2b4 with this file:
+- with `alchemist_shop: 'herbs'` reverted from `HOUSE_NEED_INPUT`, the arm is red by its own claim (1 of 2 cases:
+  r2s-religious_conversion-town-2, "expected null to be 'Short of medicinal herbs.'");
+- restored, 7 of 7 green.
+
+Nothing under `src/` changes.
