@@ -2590,3 +2590,13 @@ should be paused or archived by the owner's hand.
   5 committed, its re-render running), DESKS (the Unsafe twin and its R7 tables), BIRTH (its tip's net running), ROWS
   (FR12's three: two pushed, its renders about an hour). THE SHARED READER is seated when WATCH, DESKS and ROWS send
   their final tips.
+- 09:33 UTC, 2026-11-18 · THE LANDINGS BRANCH IS ON ORIGIN (`lane/landing-pieces-2026-11-18` at 3e50b450ee6d, pushed 09:29, its
+  three gates green). FAULTS-DESKS's FINAL TIP: a764759b9 (09:31): the Unsafe twin is its v4, added THROUGH THE GUARD
+  (b86d8122d), printing in exactly the three towns on the tab, in the PDF and on the shared page; 0 of the 525; one
+  stored figure with it: the prose manifest's drift arm 842 to 854; its tables are `FAULTS-DESKS-R7.md`. FAULTS-WATCH's
+  item 5 is committed (bf776cf28). **READ-THREE IS SEATED** (09:33; session_01FbPLbfQGrnk656ynqyXWkx; ONE reader for
+  FAULTS-DESKS a764759b9, FAULTS-PEOPLE 188602e96 and FAULTS-WATCH bf776cf28 or later; its prompt:
+  `faults/readers/READ-THREE.txt`): each seat's questions, then a scratch merge of the three on the landings' tip and
+  the net at C and M. FAULTS-ROWS (FR12's three, about an hour more) is read by the chair or a small reader when it
+  comes. A WRONG HOUR IN THE CHAT, CORRECTED OUT LOUD: a progress note headed "09:45 UTC" was written at about 09:27
+  (typed from the head, not from the clock: the rule stands: read the clock first, in the chat too).
