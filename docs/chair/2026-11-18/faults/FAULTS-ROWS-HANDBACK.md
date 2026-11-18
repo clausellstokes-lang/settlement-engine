@@ -2,7 +2,7 @@
 
 Seat FAULTS-ROWS of the round FAULTS (BRIEF-FAULTS, rulings FR3 and FR4; then the chair's FR12, which gave me the three I
 had left, and FR14, which gave me two one-line edits). Base d75011e68 (FAULTS-NEED's atom at the rehearsal base 4288049ba);
-branch `lane/faults-rows-2026-11-18`, tip __TIP__.
+branch `lane/faults-rows-2026-11-18`, tip 70ad007d1 and the hand-back after it.
 
 | commit | item |
 |---|---|
@@ -14,6 +14,7 @@ branch `lane/faults-rows-2026-11-18`, tip __TIP__.
 | 3e78dc113 | 6b · the atom `fish bought in` and the fish market's card (FR4, FR12 (3)) |
 | 385124a7e | FR14 (1) · `assembleSettlement`'s `mutates` gains `institutions`: no record moves |
 | 56b82c6cc | FR14 (2) · the goods roster's row for `fishBoughtIn.js` |
+| 70ad007d1 | 6 · the fish twin names no market (its first wording was a fresh line of the presumed-things door) |
 
 Files: `src/data/institutionDescVariants.js` (the late sets); `src/data/institutionDescColour.js` (two marks struck, FR12
 (2)); `docs/census/declarations/institutionDescVariants.INSTITUTION_DESC_VARIANTS.json` (the two ledger rows, CL18's form);
@@ -163,11 +164,61 @@ vocabulary: `fish bought in` (item 6).
 ## 5. Stored figures my work moves (the close's; I re-take none)
 
 - `tests/generators/houseDescLateReRead.test.js`: the late table's count 30 → 36 (re-keyed in my commits, four dated notes).
-__FIGURES__
+- THE STEPS' DECLARATIONS (FR14 (1), `assembleSettlement`'s `mutates` gains `institutions`), each red at the tip with this
+  message, the close's to re-take:
+  - `tests/lint/generationForkRegistry.contract.test.js` (A2): "the register declares one row per live pair: expected 77 to be 78".
+  - `tests/generators/generationForkCensus.test.js` (A3e, red at the tip only): "the measured pair set is the registry's, not a
+    literal: expected 78 to be 77" (A1, A4, A6 red at both, the same messages).
+  - `tests/lint/heldKeyWriterCensus.walker.test.js` (A2): "a held-key writer step appeared or retired: expected [ …(15) ] to deeply
+    equal [ …(14) ]" (assembleSettlement now a declared writer of `institutions`).
+  - `tests/joins` (red at the tip only): "the declared institution producer/mutator chain matches the canonical order: expected
+    [ 'assembleInstitutions', …(6) ] to deeply equal [ 'assembleInstitutions', …(5) ]".
+- `tests/lint/poolDominance.register.json` (not touched): the pool `ledger:institutionDescVariants:DESC_LATE_SIBLINGS`, red at
+  both: top1 0.8107 over 2002 draws in 1154 towns → 0.8102 over 2539 draws in 1218 towns (my seven keys join the pool; the
+  ceiling 0.6364 unmoved). The pools I touch: `DESC_LATE_SIBLINGS` only.
+- `tests/lint/presumptionClasses.register.json` (the close's `--shrink`): stale rows 153 → 154: the fish card's row ("plenty",
+  1cac5c3cc9305cf8) is stale: the card now declares what it presumes. Hits 1793 → 1792. No fresh line (8 → 8).
+- `tests/property/espionageDormancyFence.test.js` (red at both, "THE DRIVEN CORPUS MOVED"): its 360-town hash 8938469f… at the
+  base → a8fb5418… at the tip (the stored 8e5881d6…): my desc moves.
+- `tests/build/generationWorkerLazy.test.js` (red at both): the worker bundle 2540378 B → 2543561 B (ceiling 2356121 B).
+- `tests/lint/sovereigntyLightingContract.walker.test.js` (red at both): the estate's file count 3691 → 3692.
+- `tests/lint/readerShapeResolver.test.js` (red at both): `maxReadTokenLength` 264 → 263 at this pair of runs (263 → 262 at the
+  first pair: the figure moves between runs of one tree; ceiling 256).
+- `scripts/mutation-coverage-manifest.json` (the totality test, red at both): my guard joins the list of invariant files with no
+  entry.
+- The golden master (`tests/fixtures/generator-golden-master.json`): red at both with the same 499 rows drifted; my move is 0
+  of 525 (section 4).
 
 ## 6. The net, base and tip, each gate alone (`sh scripts/gate-tail.sh`)
 
-__NET__
+Base d75011e68 and tip 56b82c6cc (each in a clean clone of its commit; 70ad007d1 changes one twin's words only: the guard,
+the presumed-things walker and both doors re-run there), each gate alone through `scripts/gate-tail.sh`.
+
+| gate | base | tip |
+|---|---|---|
+| `npm run typecheck:domain:strict`, `npm run typecheck:ratchet` | green | green |
+| `npx eslint` (my thirteen files) | | green |
+| `npx vitest run tests/architecture` (with `engineCoreLazyEdge`) | green | green |
+| ALL of `tests/lint` (JSON) | 26 files red | the same names save two (the fork register's A2, the held-key census's A2: section 5); messages equal save those of section 5 |
+| `npx vitest run tests/joins` | green | RED, the declared mutator chain (section 5: FR14 (1)) |
+| ONE `npm run build`; `vendorPdfLazy`, `bootSmoke` | build green; `vendorPdfLazy` red (`chainWorking.js` declared l, the tree says E: FAULTS-NEED's); `bootSmoke` green | the same; `vendorPdfLazy` the same message (my roster row in) |
+| N3 `pipelineContract` | green | green (red at 3e78dc113 on the bound trade_partner case; FR14 (1) cures it) |
+| N3 `isolatedTrade`, `publicProseEquality` | green | green |
+| N3 `pipelinePinnedMode` | red (A1, A2, A5) | the same messages |
+| N3 `generationForkCensus` | red (A1, A4, A6) | the same three, and A3e (section 5) |
+| `bar8Rows`, `bar8FishRows`, `census5dTablePools`, `colourMarks4h`, `faultsNeed`, `houseDescLateReRead`, `crisisBlindDossierProse` | green | green |
+| `poolDominance.walker` | red (3) | the same three; one figure (section 5) |
+| `presumedThings.walker` | red (38; 79 stale) | the same (38; 79) at 70ad007d1 |
+| door `presumption-classes-door --check` | `hits 1793 · banked 1938 · fresh 8 · stale 153 · ceiling 1938` | `hits 1792 · banked 1938 · fresh 8 · stale 154 · ceiling 1938` |
+| door `presumed-things-door --check` | `fresh 38 · stale 72 · first-register stale 7 · banked 4688 · strips fresh 0 stale 0 banked 107` | the SAME (at 70ad007d1) |
+| `tests/domain/facts` | 1 red | the same, the same message |
+| THE OLDER TESTS (178 files naming what I changed: `institutionDescVariants`, `DESC_LATE_SIBLINGS`, `readHouseDescsLate`, the colour column, the ledger, `generateNarratives`, `factsOf`, `factVocabulary`, `factLayers`, the calm double; one JSON run per tree, compared by name and message) | 8 red | the same 8 names; two messages move (the worker bundle, the driven fence: section 5) |
+| `generatorGoldenMaster` | red (499 rows) | the same |
+| MY GUARD `tests/generators/faultsRows.test.js` | RED: 4 failed (the fair's and the quarter's UNMET and TABLE), 4 skipped (the fish arm: its leaf is absent) | green, 12 of 12 |
+
+N5, THE SCRATCH MERGE: `lane/join-2026-11-14` is at 70e557d5b, already in my base: "Already up to date", clean. N4: the
+guard's `toPublicSafe` arms print the owner's card on the shared page in every town they read. EG1: the new leaf rides the eager
+core; `engineCoreLazyEdge` and `bootSmoke` green after one build.
 
 ## 7. Left by name
 
