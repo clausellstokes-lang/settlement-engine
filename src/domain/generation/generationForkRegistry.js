@@ -193,13 +193,16 @@ export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} *
   // reconcile pass's producedOnRecord) same/transformed 52/11 -> 49/14: lane BAR3-DEFECON-2's late re-read at the assembly (the
   // crime wave's twins) transforms three of the 63 configurations' economic state (its table of books: the fork register's tallies).
   // CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18), MEASURED by A4 at the frozen tree 70e557d5b: producedOnRecord
-  // same/transformed 49/14 -> 35/28 (onRecord unmoved): the narratives step now writes `economicState` after the reconcile pass
-  // (DEBT-2 D1, the sixth chair's point 36; its hand-back names these two cells a stored landing count left for the close).
+  // same/transformed 49/14 -> 35/28 (onRecord unmoved). CORRECTED 2026-11-18 (the chair's word, citing CLOSE-DOORS-2's measure by
+  // A4 itself): the cells move at JOIN-17 point 21, BIRTH-1 (edb5cae92; 49/14 at a44495b59, point 20's tree; 35/28 at edb5cae92 and
+  // unchanged at points 22, 25, 31 and the tip): BIRTH-1 writes the import over what the reconcile pass produced (its declared
+  // `primaryImports`). DEBT-2's hand-back (point 36) only named the two cells left for the close; it did not move them.
   { step: 'economyReconcilePass', key: 'economicState', via: 'provides', stepDraws: 63, keyMoves: 7, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 49, transformed: 14 }, onRecordClass: 'varies', producedOnRecord: { absent: 0, same: 35, transformed: 28 }, producedOnRecordClass: 'varies', recordPath: 'record.economicState' },
   { step: 'economyReconcilePass', key: 'spatialLayout', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.spatialLayout' },
   // CLOSE-DOORS-1B (2026-11-18), MEASURED by A4 at 70e557d5b: producedOnRecord same/transformed 63/0 -> 59/4, producedOnRecordClass
   // same -> varies: the narratives step rewrites four of the census's rows' services after the reconcile pass (BAR8-FISH-ROWS, the
-  // sixth chair's point 53; its hand-back names these three cells and this patch, a stored landing count left for the close).
+  // sixth chair's point 53, 1006a1f26; its hand-back names these three cells red at its tip and not at its base, and this patch;
+  // CLOSE-DOORS-2 measured them still 63/0 at point 31; not bisected further by this seat).
   { step: 'economyReconcilePass', key: 'availableServices', via: 'provides', stepDraws: 63, keyMoves: 62, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 59, transformed: 4 }, producedOnRecordClass: 'varies', recordPath: 'record.availableServices' },
   { step: 'powerEconomyReconcilePass', key: 'powerStructure', via: 'mutates', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.powerStructure' },
   { step: 'structuralValidationPass', key: 'structural', via: 'provides', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 63, same: 0, transformed: 0 }, onRecordClass: 'absent', producedOnRecord: { absent: 63, same: 0, transformed: 0 }, producedOnRecordClass: 'absent', recordPath: null },
