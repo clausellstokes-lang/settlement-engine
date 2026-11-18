@@ -80,8 +80,6 @@ function exhaust(v) {
   try { JSON.stringify(v); } catch { /* a cycle: the reads are already made */ }
 }
 
-const INSTITUTION_PROBES = ['temple', 'docks', 'mill', 'granary', 'smith', 'tavern', 'monastery', 'bank', 'healer', 'hospital'];
-
 /**
  * The keys the vocabulary declares for a keyed home (every dimension whose `home` is the getter), in declaration order:
  * the probe's arguments, derived from `factVocabulary.js :: FACT_DIMENSIONS`, never a typed list (CLOSE-SWEEP S4 item 2).
@@ -109,7 +107,8 @@ export function leafTouches(row, record, modules, stratumOf) {
     const facts = modules['domain/facts/factsOf.js'].factsOf(view);
     const getter = row.exported.replace(/^factsOf\./, '');
     if (row.call === 'factsGetter') exhaust(facts[getter]);
-    else if (getter === 'hasInstitution') for (const kind of INSTITUTION_PROBES) facts.hasInstitution(kind);
+    // CLOSE-SWEEP S4 item 3: every institution key the vocabulary declares (14), derived (the typed ten missed four)
+    else if (getter === 'hasInstitution') for (const kind of vocabularyKeysOf('hasInstitution')) facts.hasInstitution(kind);
     else if (getter === 'hasOtherNpc') facts.hasOtherNpc(Array.isArray(record.npcs) ? record.npcs[0] : 0);
     else if (getter === 'sharesPower') facts.sharesPower(Array.isArray(record.npcs) ? record.npcs.slice(0, 2) : []); // R2-CODE-A-14 (s1): a pair of the roster
     else if (getter === 'sharesPlace' || getter === 'loneTie') facts[getter](Array.isArray(record.npcs) ? record.npcs.slice(0, 2) : []); // BAR4-PEOPLE (11:07): a pair of the roster
