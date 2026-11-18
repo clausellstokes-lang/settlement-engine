@@ -581,7 +581,19 @@ describe('A0b — the text claims every declared field and no other', () => {
     // (each as "has"): 8. So OWED = 54 - 8 - 45 = 1, unchanged (the three owed take the slack the ceiling held at 6483322cc, 46 over 43), and
     // the arm reads RED by exactly those eight until they are cured or ruled. Bought back as the two OWED above, and by the census wave that
     // narrows per-line reads (these lines carry their own declarations, which the census does not read yet).
-    const OVER_CLAIM_OWED = 1;
+    // CLOSE-DOORS-1A (2026-11-18, the chair's ruling CL25 under the owner's deferral of judgement to the chair; vetoable; BASE stays 45):
+    // 1 -> 9. The eight over-claims CL14's condition left red are NOT claims of the line about the town: they are the matcher's own
+    // artifacts, so a line's declaration has nothing to cover. By name, all on DS-GEN-17 :: ADMINISTERED:
+    //   v4 "{settlement} keeps a gaol of its own, though no court sits here to try anyone." (BAR6-CULTURE d9857d7ce): `settlement`
+    //   (as "{settlement}"): the NAME SLOT; a line may always say the town's name.
+    //   v5 "{settlement} has no court sitting and no gaol in use." (LEFT-LINES 094a6b8f6): `settlement` (as "{settlement}"), the name
+    //   slot; and `readings.inst.hasGranary`, `.hasHospital`, `.hasMagicInst`, `.hasMilitaryInst`, `.hasNavy`, `.hasWatch` (each as "has"):
+    //   the bare VERB "has" matched against six fields whose names begin `has`; the sentence says nothing of a granary, a hospital, a
+    //   magic house, a military house, a navy or a watch.
+    // Measured by armA0b over the shipped corpus: 43 at the last close's own tip 6483322cc, 54 at 70e557d5b (the 11 new: these 8 and
+    // CL14's 3 the lines declare). BOUGHT BACK by the matcher learning the name slot and the bare verb (a builder's item after the
+    // deploy); when it lands, the base falls with it.
+    const OVER_CLAIM_OWED = 9;
     const OVER_CLAIM_CEILING = OVER_CLAIM_BASE + OVER_CLAIM_OWED;
     const tally = {
       'over-claim': 0, 'under-claim': 0, 'implicit-negation': 0,
