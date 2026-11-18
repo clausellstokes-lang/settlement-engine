@@ -290,7 +290,7 @@ export const FACE_HONORIFICS_BY_CULTURE = Object.freeze({
     "the eldest": ["Sheikh"],
     "the village elder": ["Sheikh"],
     "the headman": ["Sheikh"],
-    "the lord": ["Emir"],
+    "the lord": [{ male: "Emir", female: "Emira" }], // BAR8 K-PEOPLE (14g, BR14, C36170): "Emir" is "the lord" of one sex; a woman who holds the seat is "Emira"
     "the governor": ["Wali"],
     "the royal governor": ["Wali"],
     "the priest": ["Imam"],

@@ -184,6 +184,18 @@ export const TIE_TYPE_TO_GOAL_SUBKIND = Object.freeze({
 const cell = (lines) => Object.freeze(lines.map((l) => (typeof l === 'string' ? l : Object.freeze({ line: l.line, needs: Object.freeze([...(l.needs || [])]), ...(l.excludes ? { excludes: Object.freeze([...l.excludes]) } : {}) }))));
 
 /**
+ * BAR8 K-PEOPLE (LAW 14 rule 14h, C14564; vetoable by the owner): A LINE THAT COUNTS THE PEOPLE OF ITS POWER DECLARES THE
+ * POWER'S MEMBERS IT NEEDS, beside its cell (the cells' shape law keeps `line`, `needs` and `excludes` only). "Win two more
+ * people in {power} ... before {above} notices" needs the person, the one above and two more: four members, as the Power tab
+ * counts them (`domain/people/cardPowers.js :: facesInPower`). Read by `people/goals.js :: cellCandidates`: a power with
+ * fewer marks the line refused, and the draw goes on to the family's other lines (draw-free, as the charter's refusal).
+ * @type {Readonly<Record<string, number>>}
+ */
+export const GOAL_LINE_MIN_MEMBERS = Object.freeze({
+  'Win two more people in {power} over to their side before {above} notices.': 4,
+});
+
+/**
  * THE LINES. `GOAL_FAMILY_LINES[family][subKind][vantage]` → the variants (a string, or
  * `{ line, needs }`). Every line is FOR THE OWNER'S VETO.
  */
