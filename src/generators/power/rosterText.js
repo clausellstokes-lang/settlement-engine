@@ -92,11 +92,13 @@ export function settleStandingToRoster(powerStructure, annotated, force) {
     const host = before.get(name) ? null : hostByStanding(String(f?.desc || ''), before);
     const old = before.get(name) || (host ? before.get(host) : undefined);
     const now = after.get(name);
-    if (!old || !now || !old.standing || old.standing === now.standing) return f;
+    if (!old || !now || old.standing === now.standing) return f;
     // COHERENCE-POWERS-7 (cold list REVIEW-W2A-3 #109 #713): a sentence the final roster no longer gives is settled
     // whether or not the rank moved — the figures moved under it ("a slow war with the guild" after the guild left)
     const desc = String(f.desc || '');
-    const base = desc === old.standing ? '' : desc.endsWith(` ${old.standing}`) ? desc.slice(0, -old.standing.length - 1) : null;
+    // FAULTS-WATCH item 3 (BR30 (3), bar0-city-under_siege+famine-rand-31): a power the power step gave NO standing (13g: the
+    // guild had bought the seat) takes the final roster's sentence for it, at its description's end, as the power step appends one
+    const base = !old.standing ? desc : desc === old.standing ? '' : desc.endsWith(` ${old.standing}`) ? desc.slice(0, -old.standing.length - 1) : null;
     if (base === null) return f;
     moved = true;
     return { ...f, desc: base && now.standing ? `${base} ${now.standing}` : (base || now.standing) };
