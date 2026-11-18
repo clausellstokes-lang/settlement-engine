@@ -1247,7 +1247,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "sewage_system": NONE,
   "shepherd": Object.freeze([FIELD_WORK, LIVESTOCK]), // BAR5-MARKS (LAW 5): its mutton is the herds a famine can fail; // SV8: its flocks on the grazing the siege curtails
   "shepherd_collective": Object.freeze([FIELD_WORK, LIVESTOCK]), // BAR5-MARKS (LAW 5): its mutton is the herds a famine can fail; // SV8: the same flocks, held in common
-  "shipyard": Object.freeze([INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
+  "shipyard": Object.freeze([INPUT, FIELD_WORK]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`); BAR8 MARKS-2 item 2 (K's 12a, C0476): its ship timber is felled on the stand beyond the walls (its own chain's card: "Impaired · Normally yields Ocean-going vessels" under the siege) or bought in, so a siege curtails the yard (SV8), "Curtailed by the siege."
   "slave_market": NONE,
   "slave_market_district": NONE,
   "small_hospital": NONE,
@@ -1580,6 +1580,19 @@ export const INPUT_IMPORTED_AS = Object.freeze({
   "apothecary": 'medicinal herbs',
   "apothecary_district": 'medicinal herbs',
   "apothecary_established": 'medicinal herbs',
+  // BAR8 MARKS-2 items 1 and 2 (J's 11e.siegeBought, K's 12a; the sixth chair's BRIEF-BAR8, 2026-11-17; vetoable by the owner):
+  // under a siege the dyer's wool, the furrier's pelts and hides, the river boatyard's timber and the mint's bullion, where the
+  // imports bring them by name ("Wool", "Raw hides and animal products", "Timber", "Precious metals (local gold and silver veins
+  // exhausted)"), are cut as the smelter's ore is: "Curtailed by the siege." (the furrier's district is its furs chain's one
+  // house, the chain "Stopped by the siege."). These four houses stay `NONE` in `HOUSE_DEPENDENCE`: the siege's reading of the
+  // import is their one dependence (`crisisStoppedRow.js :: houseDependenceIn`), and no short mark reads them (a dyer is no
+  // house of a ground). A value of several words is any one of them ("a|b"). The tailors sew cloth, and wool is not their
+  // input: not read.
+  "dyer": 'wool',
+  "furrier_s_district": 'hides|furs|pelts',
+  "river_boatyard": 'timber|lumber',
+  "mint": 'precious metals|bullion',
+  "mint_official": 'precious metals|bullion',
 });
 
 /**
@@ -1617,7 +1630,10 @@ export const HOUSE_TRADE_INPUT = Object.freeze({
  * those houses and no other over the census's 720. Catalogue id -> the chain key of its good.
  * @type {Readonly<Record<string, string>>}
  */
-export const HOUSE_NEED_INPUT = Object.freeze({ butchers_3_8: 'livestock', apothecary_established: 'herbs' });
+// BAR8 MARKS-2 item 3 (J's 11a.atWork; the sixth chair's BRIEF-BAR8, 2026-11-17; vetoable by the owner): the alchemist's shop
+// works herbs as the established apothecary does (`houseKinds.js :: MATERIAL_OF`): printed bare beside "Needed, and not brought
+// in: … medicinal herbs." (r2s-religious_conversion-town-2), read the same way.
+export const HOUSE_NEED_INPUT = Object.freeze({ butchers_3_8: 'livestock', apothecary_established: 'herbs', alchemist_shop: 'herbs' });
 
 /**
  * LEFT-MARKS item 4 (L16, rule 8i.surplus; the sixth chair's BRIEF-LEFT, 2026-11-17, the auditor's cure; vetoable by the

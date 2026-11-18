@@ -757,7 +757,14 @@ export function deriveMagicRelianceView(settlement) {
 export function deriveMagicSupplyView(settlement) {
   const reliance = deriveMagicRelianceView(settlement);
   if (!reliance.reliesOnMagic) return { supply: null, statable: true };
-  const { houses, people } = magicSourceOf(settlement);
+  const { houses: supplying, people } = magicSourceOf(settlement);
+  // BAR8 MARKS-2 item 6 (K's 12f; the sixth chair's BRIEF-BAR8, 2026-11-17; vetoable by the owner): A HOUSE THE PAGE MARKS
+  // STOPPED SUPPLIES NOTHING NOW. "supplied by Access to a house of worship" printed beside that house's own "Stopped by the
+  // siege." (C19407): the supplier's mark is read (`crisisStoppedRow.js :: rowMarkText`, the mark its card prints), and a
+  // house it marks stopped is not named. Where every house is so marked the reliance (the food ledger's) still prints, with
+  // no supplier named: the record holds one, the crisis has stopped it.
+  const houses = supplying.filter((name) => !stoppedOnPage(settlement, name));
+  if (supplying.length && !houses.length && !people.length) return { supply: null, statable: true };
   const parts = houses.map(proseHouseName).filter((n, i, all) => n && all.findIndex((p) => p.toLowerCase() === n.toLowerCase()) === i);
   if (people.length === 1) parts.push(people[0]);
   else if (people.length > 1) parts.push(`${people.length} practitioners`);
@@ -864,6 +871,19 @@ import { bandForVariable } from '../causalState.js'; import { foundationBandShow
 // lines the prose wiring census cites above keep their numbers).
 import { magicSourceOf } from '../facts/magicSource.js';
 import { institutionDisplayName } from './institutionDisplayName.js';
+import { rowMarkText } from './crisisStoppedRow.js'; // BAR8 MARKS-2 item 6: the supplier's mark (at the foot: no cited line moves)
+
+/**
+ * BAR8 MARKS-2 item 6: does the page mark this roster house stopped ("Stopped by the siege.")?
+ * @param {DossierSettlementView | null | undefined} settlement @param {string} name a roster house's name
+ * @returns {boolean}
+ */
+function stoppedOnPage(settlement, name) {
+  // the house by its roster name, as a bare row is read (the leaf finds its catalogue id by the name; `magicSourceOf` names
+  // only live roster houses)
+  const mark = rowMarkText(settlement, 'house', { name });
+  return typeof mark === 'string' && /^Stopped by /.test(mark);
+}
 
 /**
  * A house as running prose names it (W2-A-LEAVES-2, 2026-11-13; REVIEW-W2A F2: 73 of 289 reliance lines printed a

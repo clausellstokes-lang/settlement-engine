@@ -823,7 +823,7 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
               pick % 2 === 1 && !importHeld(facts, TIMBER_IMPORT) ? TIMBER_SHORT_HOOK : 'The timber rafts stopped coming a month ago, and the shipwrights and builders are bidding against each other for what is left in the yards.'][pick % 2], // BAR3-DEFECON-2 (C48585): no carts or rafts that stopped where the record's import list holds no timber
           });
         if (ironHookStands(resource, (pattern) => importHeld(facts, pattern))) // TAIL-DEFECON-3 (D8, #20893): the iron hooks only where the record's import list holds iron; BIRTH-3 (BR9): one predicate (domain/facts/warIronHook.js), the readers' too
-          hooks.push({ category: 'Strategic Resource', severity: 'medium', hook: warIronState((typeof facts === 'function' ? facts() : facts)?.warState) // the war line only where the record holds a war
+          hooks.push({ category: 'Strategic Resource', severity: 'medium', hook: ((f) => warIronState(f?.warState, f?.crisis?.kinds))(typeof facts === 'function' ? facts() : facts) // the war line only where the record holds a war; BAR8 MARKS-2 (RULING BR31, BR16): handed the town's crisis kinds, an occupation alone is peace
             ? 'War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.'
             : ['Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are starting to complain.',
               'The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, and work waits on mended tools.',
