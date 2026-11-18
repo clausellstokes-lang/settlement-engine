@@ -11,13 +11,16 @@ cannot import the leaf there. Green at the tip.
 |---|---|---|
 | hand-back | 7a635d72b, de0696e1a, this one | the file |
 | 0 | 48fbd836e | the need list keeps a need a live house is marked short of |
-| 1 (THE ATOM) | d75011e68, bbe7b490c, 4b410e109 | `need not brought in` (FR2): `src/domain/facts/needNotBroughtIn.js` |
+| 1 (THE ATOM) | d75011e68, bbe7b490c (reversed by FR13), 4b410e109, the FR13 commit | `need not brought in` (FR2): `src/domain/facts/needNotBroughtIn.js` |
 | 2 | 926d31812 | 11e.wantBuy: a dependency goal presumes a supply only of a good that is had |
 | 4 | 92c99b5ca, then 61a6c4f85 (as amended) | 12d: DS-ECO-8 POOR v1 `no need not brought in: any`; its twin v6 |
 | 3 | none | measured; nothing built (section 2, item 3) |
 
-bbe7b490c and 4b410e109 change the leaf's form, not its reading: the luxury labels are held as keys, and the working chain
-statuses are copied. The reasons are in section 6.
+4b410e109 and the FR13 commit change the leaf's form, not its reading. FR13 (the chair, 08:28 UTC) reversed bbe7b490c's luxury
+keys: the leaf now IMPORTS `LUXURY_CLASS` and `NOT_A_GOOD` from their home, with no copy (section 6).
+- The working chain statuses stay copied (4b410e109): the import was refused by `tests/build/vendorPdfLazy.test.js`, whose
+  WEAVE ST-2 goods roster in `goods.schema.js` declares `chainWorking.js` lazy.
+- It was not refused by EG1's `engineCoreLazyEdge`.
 
 ## 2 · Each item with its proof
 
@@ -63,8 +66,9 @@ HELD EQUAL to `importsAsPrinted(record).needed`:
   - a live house's service row against a dead house's;
   - a house marked short;
   - the failed venture's material (r2r-hamlet-27's livestock stays).
-- The copied tables are held to their homes: `NOT_A_GOOD`, `LUXURY_CLASS`, `NEED_DEALT_ROWS` (now exported) and
-  `WORKING_CHAIN_STATUSES`. The vocabulary's keys are held to `NEED_KEYS`. On the guard's towns, the atom reads alike through
+- The two copied rows are held to their homes: `NEED_DEALT_ROWS` (now exported) and `WORKING_CHAIN_STATUSES`.
+- `NOT_A_GOOD` and `LUXURY_CLASS` are imported from `tradeListDeclarations.js`, which imports nothing (FR13 (a)). The
+  lazy-edge test, `vendorPdfLazy` and `bootSmoke` are green with that import, after one build. The vocabulary's keys are held to `NEED_KEYS`. On the guard's towns, the atom reads alike through
   `factsOf`, the public form and the share veil.
 
 MUTATIONS, each turning the guard red (2 tests):
@@ -216,10 +220,10 @@ its premise; the full list is in section 3's scratch output, and its three towns
   - **Red at the base only (the scratch repo has no history):** domainAnyCastBaseline.
   - **Mine, found and cured:**
     - `negativeAssertionAnchor.walker`: my guard's three bare negatives, now anchored.
-    - `presumptionClasses.walker`: the leaf's copy of the luxury labels read as 5 new prose lines. They are matched, never
-      printed, so they are now held as keys (each label's spaces written `~`) and held equal to their home by the guard. The
-      walker now reads 3 fresh and 153 stale, as at the base. THE CHAIR MAY PREFER THE CLOSE TO BANK THE PLAIN COPY (BG1:
-      no seat edits that register); the keyed form is reversible.
+    - `presumptionClasses.walker`: the leaf's copy of the luxury labels read as 5 new prose lines. bbe7b490c held them as
+      `~` keys; FR13 reversed that: a seat does not reshape a literal so that a walker passes. FR13 (a) is now taken: the
+      leaf imports the labels' home, so there is no copy. The walker reads 3 fresh and 153 stale, exactly as at the base,
+      with nothing banked.
   - **`factLayers.walker`:** its two reds are the base's (`importsAsPrinted` undeclared `availableServices`: the income
     seat's; the POOLS register). My row is clean.
   - The rest: the base's own, by name and message.
@@ -227,7 +231,8 @@ its premise; the full list is in section 3's scratch output, and its three towns
   - `tests/build/vendorPdfLazy.test.js` caught `src/domain/facts/chainWorking.js` flipping from lazy to eager in the goods
     roster (`goods.schema.js`, not my file) through the leaf's import. Cured at 4b410e109: the leaf copies the one constant,
     held equal by the guard.
-  - `vendorPdfLazy`, `bootSmoke` and `engineCoreLazyEdge`: green.
+  - `vendorPdfLazy`, `bootSmoke` and `engineCoreLazyEdge`: green, and green again after the FR13 import (a second build).
+  - The leaf still equals the page on 900 of 900 towns.
 - **Older tests:** every test file that names a function, constant or line I changed (grep over `tests` for `importsAsPrinted`,
   `NEED_DEALT_ROWS`, `dealtInHere`, `criticalImportBroughtIn`, `FAMILY_WORDS`, `calmFactsDouble`, `needNotBroughtIn`,
   `dealGoals`, `goalContextOf`, `DS-ECO-8`, `tradeListsAsPrinted`, `GOAL_FAMILY_LINES`; 47 files outside `tests/lint`, plus

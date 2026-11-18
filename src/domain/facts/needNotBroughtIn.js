@@ -22,8 +22,9 @@
  * declarations, the input fact `houseInputAtHand.js`, the crisis table); `factsOf` reads this leaf and the generators reach it
  * through the eager core, so none of those can be imported here. This leaf states the page's verdict in the record's own words
  * (each of the page's filters below, by name) and the guard `tests/generators/faultsNeed.test.js` holds it EQUAL to the page's
- * list, label by label, on every town it births and on a constructed record for each branch of the page's reader; the two copied
- * tables are held equal to their homes there too, so the two cannot drift: a change to either reds it. The family words and the
+ * list, label by label, on every town it births and on a constructed record for each branch of the page's reader, so the two
+ * cannot drift: a change to either reds it. The trade declarations' two tables are imported from their home (it imports
+ * nothing: the chair's FR13 (a)); the copied rows below are held equal to their homes by the guard. The family words and the
  * matcher are `criticalImportBroughtIn.js`'s (no third copy).
  *
  * Layer 4 (over the resource analysis and the economy, stored at layer 3, and the roster and the services beside them). Pure:
@@ -34,6 +35,7 @@ import { FAMILY_WORDS, familiesOf, meets, wordsOf } from './criticalImportBrough
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { ventureOnPage } from './supplyStory.js';
 import { chainPrintName } from '../display/chainPrintName.js';
+import { LUXURY_CLASS, NOT_A_GOOD } from '../../data/tradeListDeclarations.js'; // their home (imports nothing; FR13 (a))
 
 /**
  * THE STATUSES OF A WORKING CHAIN, a COPY of `facts/chainWorking.js :: WORKING_CHAIN_STATUSES` (that module is rostered lazy in
@@ -54,35 +56,8 @@ const fold = (v) => String(v ?? '').trim().toLowerCase();
 const labelOf = (raw) => { let l = raw; for (let c = true; c;) { c = false; for (const re of MARK_RES) if (re.test(l)) { l = l.replace(re, ''); c = true; } } return l; };
 const MARK_RES = Object.freeze([/\s*\(transit\)\s*$/i, /\s*\(naval route only\)\s*$/i, /\s*\(taxed by occupation\)\s*$/i]);
 
-/**
- * THE TRADE LISTS' CATEGORY ERRORS, a COPY of `data/tradeListDeclarations.js :: NOT_A_GOOD` (that module is pinned lazy: see
- * the header), held equal to it by the guard.
- * @type {ReadonlyArray<string>}
- */
-export const NOT_A_GOOD_COPY = Object.freeze([
-  'Transit trade', 'Toll revenue', 'Pass transit trade', 'Toll income', 'Market taxes', 'Transit trade profit',
-  'Strategic control', 'Trade access fees', 'Coin minting', 'Cultural tourism revenue', 'Planar trade access',
-  'Warehousing and logistics services', 'Route maps and intelligence', 'Massive food requirements',
-  'Political legitimacy', 'Banking services', 'International banking', 'Legal services',
-  'Advanced legal expertise', 'Advanced medical care', 'Overland freight revenue', 'Capital',
-]);
-/**
- * THE LUXURY CLASS's labels, a COPY of `data/tradeListDeclarations.js :: LUXURY_CLASS` (each declared `tier: ≥ village`), held
- * equal to it by the guard. Held as KEYS (each label's spaces written `~`): they are matched against a list's items, never
- * printed, so this module carries no copy of a line a reader sees (the labels' prose is their home's).
- * @type {ReadonlyArray<string>}
- */
-export const LUXURY_KEYS_COPY = Object.freeze([
-  'Camel~Herds', 'Cut~gemstones', 'Dyed~cloth', 'Exotic~imports', 'Extreme~luxury~goods', 'Fine~textiles',
-  'Fine~wool~cloth', 'Gem~Mining~&~Lapidary', 'Gem~appraisal', 'Gemstones', 'Highest~luxury~goods', 'Luxury~Goods',
-  'Luxury~goods', 'Luxury~imports', 'Luxury~manufactured~goods', 'Luxury~materials', 'Luxury~textiles',
-  'Luxury~textiles~and~exotic~goods', 'Metal~ore~+~gems', 'Rare~materials', 'Rare~spices~and~dyes',
-  'Rare~spices~and~exotic~dyes', 'Raw~gemstones', 'Silk~&~Luxury~Textiles', 'Silk,~fine~dyes,~and~imported~cloth',
-  'Silk,~fine~dyes,~exotic~textiles,~and~finished~luxury~garments', 'Spices~&~Dyes', 'Spices~and~exotic~dyes', 'Spices',
-  'Silk', 'Gems', 'Exotic~goods', 'Fine~cloth', 'Quality~textiles', 'Quality~textiles~and~cloth', 'camel_herds',
-]);
-const NOT_A_GOOD_SET = new Set(NOT_A_GOOD_COPY.map(fold));
-const LUXURY_SET = new Set(LUXURY_KEYS_COPY.map((k) => fold(k.replace(/~/g, ' '))));
+const NOT_A_GOOD_SET = new Set(NOT_A_GOOD.map(fold));
+const LUXURY_SET = new Set(LUXURY_CLASS.map((r) => fold(r.text)));
 /** The luxury class's band, `tier: ≥ village` (`factVocabulary.js :: TIER_WORDS`; an unknown tier answers nothing: refused). */
 const TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 /** @param {unknown} tier */
