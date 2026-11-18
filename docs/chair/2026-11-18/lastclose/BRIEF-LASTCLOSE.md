@@ -71,10 +71,29 @@ reporter, and THE CHAIR READS EVERY TEST'S DURATION: each test on the default 20
 time of the budget on the runner's scale (the ratio measured at the first close: about 1.9 for the coverage job; for
 the ratchet, from the four time-outs of runs 44282875950 and 44295605654) takes `}, 120_000);` with its measured figure.
 
+## Added by the last small round (points 69, 70)
+
+- The presumed-things walker: the known fresh lines true by construction, banked by proof (iii): the atom's name "court
+  or gaol", DS-DEF-3 Unsafe v4's "no gaol" and Moderate v10's "no gaol" (each guaranteed by its `no court or gaol`), the
+  three Fish market cards' "market"; FR16's one strip; the register at 4,629 after LAST-DECLARE's retirements; LR1's two
+  `garrison` rows stay recorded (the owner's "record the four").
+- Pool dominance's unregistered drawn pools: `SUPPLY.want.short`, `SUPPLY.want.long` (LAST-VARIETY) and
+  `ledger:settlementOriginProse:ORIGIN_DECLARED` (LAST-DECLARE): banked by their own rows (NOT `--bank-new`, which would
+  also bank the base's three: list those three for the chair).
+- The goal families' §6.6 counts (re-keyed by LAST-VARIETY under LR2: 52 / 528): read, not re-taken.
+- writerReach: its frozen shapesDigest, the banked cohort (two dark identities no longer written), the growth law and the
+  swap mutant figures, the surfaceReach first-missing (`resourceActive` on `activeChains`), by its governed door (WR2's
+  form).
+- The variant counts and corpus counts after the twelve new lines (3052 and on), `proseCorpusBytes`' GZIP band (the
+  defense leaf), `proseEntryContradiction`'s trailing-coordinate class (377 → 379), the dossier prose manifest's drift.
+- `pipelinePinnedMode`'s rows (15 → 18), `tests/joins`' mutationOrder, the fork census and register.
+- A stale comment, no behaviour: `src/domain/facts/tradeAtWork.js`'s header still says `impairedUnderSiege` reads the
+  stored status (it reads the shown one since point 69): corrected by the doors seat (C5 allows a comment).
+
 ## The seats (fixed at the hour)
 
-| seat | model, effort | what |
-|---|---|---|
-| LASTCLOSE-DOORS | Opus 5.5, high | every stored figure above but the golden and the tree-counting ones |
-| LASTCLOSE-SIGN | Opus 5.5, high | after the owner's yes in the chat: the golden door (the generator golden master, the espionage fence, the dossier prose manifest, the herald desk) and the tree-counting figures, last |
-| CHECKS-1, -2, -3 | Sonnet 5.5, low | the whole check in three parts, JSON with durations, every red listed by message |
+| seat | model, effort | base | what |
+|---|---|---|---|
+| LASTCLOSE-DOORS | Opus 5.5, high | the landings' tip | every stored figure above with a door, the ruled ones and the comment, BUT NOT the golden door and NOT the tree-counting figures |
+| LASTCLOSE-SIGN | Opus 5.5, high | the landings' tip | in parallel (the golden reads only `src/`, which the close does not touch): the golden door (the generator golden master, the espionage fence, the dossier prose manifest, the herald desk) and the pins that read the golden, written ON THE CHAIR'S WORD "SIGN", announced in the chat first under the owner's "Yes to both"; THEN, after the chair merges LASTCLOSE-DOORS into its branch, the tree-counting figures last (the estate's file census, the mutation manifest, the size ceilings with every rise tallied by cause, the committed engine bundle by `npm run build:edge-shared` and its replay's fence count) |
+| CHECKS-1, -2, -3 | Sonnet 5.5, low | the close's last tip | the whole check in three parts, JSON reporter with every test's duration, every red listed by message; the chair reads the durations |
