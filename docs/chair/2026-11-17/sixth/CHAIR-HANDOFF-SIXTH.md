@@ -1083,3 +1083,24 @@ should be paused or archived by the owner's hand.
   and the round's lessons: the laws by name AND by message, and THE OLDER TESTS A CURE MAKES UNTRUE (a seat's own net
   was run at its old base). THE LANDING BRANCH IS BEING PUSHED (its gates); then the whole check at point 53 (label
   `landing-48-53-7e8fd4cc1`) and MEASURE-1 (the 720 at the line's tip and at point 53).
+- **01:22 UTC. THE LANDING BRANCH IS ON ORIGIN AT POINT 53 (01:20, 7e8fd4cc1; its gates green): THE WHOLE CHECK AND THE MEASURE ARE ASKED.** The three CHECKS seats
+  (01:22): the commit 7e8fd4cc1ec25e766e7420a34fccc67d3294545e, the label `landing-48-53-7e8fd4cc1`; compare the union
+  with `/home/user/wk/p44.all.txt` (159 names at 917c915bc; the line's tip 99ca9ad51 differs from it by docs only).
+  MEASURE-1 (session_01FbPLbfsyUsu4FiR9AaJT4E; the cheaper tier): the thirty, the 150 and the 720 rendered at the line's
+  tip and at point 53, every runner (its eight, `runJ.mjs`, `runK.mjs`), tables under
+  `docs/chair/2026-11-18/measure-2/` on `lane/measure-2026-11-17`, and FIRST every rule that ROSE with its towns.
+- **01:22 UTC. J-INCOME-2 PUSHED ITS ITEM 1, THE LEAF (01:18): 9d344fc9c4b69712ee3c44882028f75de1173bf6** on `lane/bar8-j-income-2-2026-11-17`
+  (`src/domain/display/incomeOrdinaryLines.js`; the records byte-equal over the thirty and the 150, the 720 pending;
+  all 54 exports equal). PDF-2 IS TOLD (01:21): its section's item 4 may go in on its second branch with the leaf
+  copied byte for byte. THE SEAT NAMED A THING AND LEFT IT: the moved lines are banked in two debt registers under
+  their OLD path (3 rows of `tests/lint/presumptionClasses.register.json`, 2 of
+  `tests/lint/presumedThings.widened.register.json`), so after the move the presumption walker's "no NEW undeclared
+  line" reads 3 FRESH (a NEW red name when it lands), and the door's own law has no way to move a row (`--bank
+  debt-at-base` refuses a literal that did not stand IN ITS FILE at the register's base). THE CHAIR TRIED TO RULE THAT
+  THE SEAT MOVE THE FIVE ROWS BY HAND (the same row under the new path, nothing else, the doors' lines equal):
+  **ITS OWN PERMISSION CHECK DENIED THAT MESSAGE ("Undermining Oversight"). THE REFUSAL STANDS: NO SUCH RULING IS
+  ISSUED, NOTHING IS RETRIED IN OTHER WORDS, THE REGISTERS ARE NOT TOUCHED.** PDF-2 had been told of "a ruling BR26" in
+  the same minute: corrected at once (there is none; it names the fresh rows and touches no register). THE OWNER IS
+  ASKED IN PLAIN WORDS how the rows are to follow the moved lines (by the seat's hand; at the close with the stored
+  figures; or the lines declared so that they leave the register by their cure). UNTIL THEN: J-INCOME-2's branch and
+  PDF-2's second branch each read 3 fresh rows by the door, NAMED; a landing of either is compared BY MESSAGE.
