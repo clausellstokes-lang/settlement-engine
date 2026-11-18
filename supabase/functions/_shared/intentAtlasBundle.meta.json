@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-16T16:34:42.321Z",
+  "generatedAt": "2026-11-18T05:21:12.377Z",
   "entry": "src/domain/intentAtlas.js",
-  "sourceHash": "490333ce8ce288ba",
+  "sourceHash": "69ba037dc75892dc",
   "inputs": [
     "src/domain/data/intentAtlas.distillate.json",
     "src/domain/intentAtlas.js"
