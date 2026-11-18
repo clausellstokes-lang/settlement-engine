@@ -7,7 +7,7 @@ DRAFT, written while the last small round runs; its base and its seats are fixed
 The first close ran this morning under the owner's word of 03:03:46 UTC: **"yes: refresh the stored reference files and
 open the pull request."** By the operating standard's rule 17 a recorded approval is history, never a grant: the chair
 asks the owner again, in the chat, at the hour this close starts, for the refresh of the stored reference files AND the
-golden door's signing, and no seat writes a stored figure before that yes is in the chat. The word never covers a merge
+golden door's signing, and no seat writes a stored figure before that yes is in the chat. THE OWNER GAVE IT IN THE CHAT AHEAD OF THE HOUR, at about 19:07 UTC, verbatim: **"Yes to both"** (the refresh of the stored reference files again, and the golden door's signing), for this last close only; the chair announces each in the chat when it happens. The word never covers a merge
 to `master`, a deploy, a migration, or any touch of a hosted database or a production credential: the owner's hand.
 
 ## The base
