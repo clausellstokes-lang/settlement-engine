@@ -69,7 +69,10 @@ describe('(b) a rival of the density law carries its own standing, never its hos
     expect(bloc?.contestsNiche, 'premise: the bloc is the density law\'s rival').toBe('Military/Guard');
     // 2026-11-15 BAR2-PEOPLE-4: the anchor RE-KEYED BY ITS TEXT, the same line: batch B's declared cure (ruling PT3) made
     // "Well-funded city watch; it keeps order reliably …" read "City watch; it answers for keeping order …" (claimStanding.js)
-    expectAbsentWithAnchor(String(bloc.desc), 'is narrow', 'answers for keeping order', 'the rival\'s own settled description');
+    // 2026-11-17 BAR8-K-POWERS (rule 14a, C14226): RE-KEYED BY IDENTITY, the same line: the seat's declared cure gives the minted rival
+    // of a one-body description its own ("A second armed company that wants a share of keeping order here ...", applyDensityLaw.js ::
+    // RIVAL_DESC_OF_HOST) in place of the host's "City watch; it answers for keeping order ..."; the claim and its form are kept
+    expectAbsentWithAnchor(String(bloc.desc), 'is narrow', 'wants a share of keeping order', 'the rival\'s own settled description');
   }, 60_000);
 });
 
