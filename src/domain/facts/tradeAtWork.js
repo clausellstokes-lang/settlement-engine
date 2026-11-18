@@ -69,8 +69,28 @@
  *       salting or selling fish." printed where the river fishery was exhausted and salted fish was bought in
  *       (bar0-town-occupied-rand-45, bar0-metropolis-calm-rand-45: C36591, C19722).
  *
+ * THE PAGE'S STOP AND THE CARD'S STATE (FAULTS-WATCH item 4, 2026-11-18; BR25 (5), left by name by SCENES: nothing printed
+ * falsely in the 900, a fact's reading made true). Two readings of `houseAtWork` disagreed with the page; (a) is cured:
+ *   (a) A HOUSE THE SIEGE STOPS IS NOT AT WORK (`houseStoppedBySiege`, exported for its guard): the atom answered "at work"
+ *       for a house whose rows read "Stopped by the siege." (55 house-trade pairs in the 900 at the base: fish markets,
+ *       fisher's landings, fishing communities, stone quarries). The page's mark (`display/crisisStoppedRow.js :: rowStoppedBy`, kind 'house') cannot
+ *       be imported here (the header's (a) says why), so its verdict for a house is STATED HERE in the table's own words, in
+ *       the form of `catchStopped.js`: the house's dependence (`houseDependenceOf`; GATES held where the record keeps its work
+ *       beyond the gates, `GATES_WORK_HELD_BY_RECORD`, as the leaf's SV8b reads it) meets what the siege stops (travellers,
+ *       goods, the gates; the herds where none are kept), and no row of its own goes on (SV7: a row the table declares free of
+ *       what stops its house, or a siege twin on offer). The guard `tests/generators/faultsWatch.test.js` holds this verdict
+ *       EQUAL to the page's on every house of its besieged towns (and the seat measured it equal on all 2,348 besieged houses
+ *       of the 900): a change to the leaf's stop reds it. "Curtailed by the siege." is not a stop: it works what it holds.
+ *   (b) LEFT BY NAME: `impairedUnderSiege` reads the STORED chain status where the card prints the shown one
+ *       (`display/chainStateShown.js :: chainCrisisStateShown`: the Dyer's textile chains, an Enchanter's shop's magical
+ *       goods; 5 house-trade pairs in the 900 at the base, the stored "running" printed "impaired"). Its reader cannot be
+ *       imported here: the static edge puts the display leaf in engine-core beside its two lazily pinned imports
+ *       (`crisisKind.js`, `institutions.js`: `tests/architecture/engineCoreLazyEdge.test.js`, measured), and the pin is
+ *       `vite.config.js`'s, outside this seat (BR25 (5): nothing prints falsely by it in the 900).
+ *
  * Layer 2 (over the roster, the resources and the economy). Pure: no randomness, no clock, no write.
  * @enforced-by tests/generators/bar8Scenes.test.js
+ * @enforced-by tests/generators/faultsWatch.test.js
  * @enforced-by tests/generators/bar4ScenePresumption.test.js
  * @enforced-by tests/domain/bar6ScenesGoods.test.js
  * @enforced-by tests/generators/bar7Scenes.test.js
@@ -81,6 +101,7 @@ import { housesShortOf } from './houseInputAtHand.js';
 import { canonExports, canonImports } from '../canonicalAccessors.js';
 import { crisisOf } from './crisisKind.js';
 import { houseDependenceOf } from '../../data/crisisDependence.js'; // BAR8-SCENES (item 1a): the dependence table's own reader (the lazy table houseInputAtHand.js reads)
+import { FIELD_WORK, GATES, GATES_WORK_HELD_BY_RECORD, GOODS, IMPORTED_INPUT, LIVESTOCK, SERVICE_DEPENDENCE, SERVICE_FREE_OF_HOUSE, SIEGE_TWINS_ON_OFFER, TRAVELLERS } from '../../data/crisisDependence.js'; // FAULTS-WATCH item 4 (a): the siege's stop, in the table's own words
 import { ironAtHandOf } from './ironAtHand.js'; // BAR8-SCENES (item 1b): the iron the smiths work, the siege's reading
 import { warHoldsIron } from './warIronHook.js'; // BAR8-SCENES (item 1b): the war's hold on the iron, the iron hook's own predicate (EG1: import-free)
 import { GROUND_YIELD, idOfHouse, sourceStoryOf, usedGroundOf } from './supplyStory.js'; // BAR8-SCENES (item 1c): the fish story
@@ -273,13 +294,72 @@ function kilnHousesAnswering(houses) {
 const rosterName = (inst) => String(/** @type {{ name?: unknown }} */ (inst)?.name ?? '');
 
 /**
- * BAR8-SCENES (item 1a): IS THIS HOUSE AT WORK? Not marked short (the one fact, `housesShortOf`), and not a house the siege
- * impairs (`impairedUnderSiege`).
+ * BAR8-SCENES (item 1a): IS THIS HOUSE AT WORK? Not marked short (the one fact, `housesShortOf`), not a house the siege
+ * impairs (`impairedUnderSiege`), and (FAULTS-WATCH item 4 (a)) not a house the siege stops (`houseStoppedBySiege`).
  * @param {object} record @param {unknown} house a row of the live roster @param {{ has: (name: string) => boolean }} short the houses marked short (`housesShortOf`)
  * @returns {boolean}
  */
 function houseAtWork(record, house, short) {
-  return !short.has(rosterName(house)) && !impairedUnderSiege(record, house);
+  return !short.has(rosterName(house)) && !impairedUnderSiege(record, house) && !houseStoppedBySiege(record, house);
+}
+
+/** @param {unknown} row @returns {boolean} */
+const isCustomRow = (row) => {
+  const r = /** @type {{ custom?: unknown, source?: unknown, isCustom?: unknown } | null} */ (row);
+  return r?.custom === true || r?.source === 'custom' || r?.isCustom === true;
+};
+/** @param {Readonly<Record<string, unknown>>} table @param {string} key @returns {boolean} */
+const has = (table, key) => Object.prototype.hasOwnProperty.call(table, key);
+
+/**
+ * FAULTS-WATCH item 4 (a): no herds are kept here (the food ledger's pastoral chain off, no livestock among the food
+ * sources, and no house of the town's own herds stands), so the siege stops what lives on them (the leaf's `noHerdsHere`).
+ * @param {object} record @returns {boolean}
+ */
+function noHerdsHere(record) {
+  const food = /** @type {{ economicState?: { foodSecurity?: { chains?: Record<string, unknown> | null, foodRecord?: { foodSources?: unknown } | null } | null } | null }} */ (record).economicState?.foodSecurity;
+  const sources = food?.foodRecord?.foodSources;
+  if (!(Array.isArray(sources) && !sources.includes('livestock') && food?.chains?.['Pastoral & livestock'] === false)) return false;
+  return !liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record))
+    .some((h) => h && typeof h.name === 'string' && !isCustomRow(h) && houseDependenceOf(h).includes(LIVESTOCK) && houseDependenceOf(h).includes(FIELD_WORK));
+}
+
+/**
+ * FAULTS-WATCH item 4 (a): THE PAGE'S "Stopped by the siege." OF A HOUSE, stated in the table's own words (see the header).
+ * @param {object} record the settlement record @param {unknown} house a row of the live roster @returns {boolean}
+ */
+export function houseStoppedBySiege(record, house) {
+  if (!crisisOf(record).has('under_siege') || isCustomRow(house)) return false;
+  const h = /** @type {{ catalogId?: unknown, name?: unknown }} */ (house);
+  const name = rosterName(house);
+  const id = idOfHouse(h);
+  let deps = houseDependenceOf(h);
+  const rule = id && has(GATES_WORK_HELD_BY_RECORD, id) ? GATES_WORK_HELD_BY_RECORD[/** @type {keyof typeof GATES_WORK_HELD_BY_RECORD} */ (id)] : null;
+  if (rule && deps.includes(GATES)) {
+    const s = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodSources?: unknown } | null } | null, activeChains?: unknown } | null }} */ (record);
+    const r = /** @type {{ foodSource?: string, waterGrounds?: ReadonlyArray<string> }} */ (rule);
+    const held = (!!r.foodSource && arr(s.economicState?.foodSecurity?.foodRecord?.foodSources).includes(r.foodSource))
+      || (!!r.waterGrounds && arr(s.economicState?.activeChains).some((c) => !!c && typeof c === 'object'
+        && (r.waterGrounds ?? []).includes(String(/** @type {{ resourceKey?: unknown }} */ (c).resourceKey))
+        && arr(/** @type {{ processingInstitutions?: unknown }} */ (c).processingInstitutions).includes(name)));
+    if (held) deps = deps.filter((d) => d !== GATES); // SV8b: the work beyond the gates goes on, curtailed or open
+  }
+  const stops = noHerdsHere(record) ? [TRAVELLERS, GOODS, GATES, LIVESTOCK] : [TRAVELLERS, GOODS, GATES];
+  const hit = deps.filter((d) => stops.includes(d));
+  if (hit.length === 0) return false;
+  // SV7: a row of its own that goes on makes the house "Curtailed by the siege.", not stopped
+  const free = id && has(SERVICE_FREE_OF_HOUSE, id) ? /** @type {Record<string, ReadonlyArray<string>>} */ (SERVICE_FREE_OF_HOUSE[/** @type {keyof typeof SERVICE_FREE_OF_HOUSE} */ (id)]) : {};
+  const ownDeps = (/** @type {string} */ n) => (has(SERVICE_DEPENDENCE, n) ? /** @type {Record<string, ReadonlyArray<string>>} */ (SERVICE_DEPENDENCE)[n] : []);
+  const services = /** @type {{ availableServices?: unknown }} */ (record).availableServices;
+  const rows = Object.values(services && typeof services === 'object' ? services : {}).flatMap((v) => arr(v))
+    .filter((row) => !!row && typeof row === 'object' && /** @type {{ institution?: unknown }} */ (row).institution === name && !isCustomRow(row));
+  const goesOn = rows.some((row) => {
+    const { name: n, desc } = /** @type {{ name?: unknown, desc?: unknown }} */ (row);
+    if (typeof desc === 'string' && SIEGE_TWINS_ON_OFFER.includes(desc)) return true;
+    const key = String(n ?? '');
+    return has(free, key) && hit.every((d) => free[key].includes(d)) && !ownDeps(key).some((d) => stops.includes(d) || d === FIELD_WORK || d === IMPORTED_INPUT);
+  });
+  return !goesOn;
 }
 
 /**

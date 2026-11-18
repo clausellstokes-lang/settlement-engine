@@ -34,7 +34,7 @@
  * is byte-identical to its former home.
  */
 
-import { defenseFactsOf } from '../defense/defenseFacts.js';
+import { defenseFactsOf } from '../defense/defenseFacts.js'; import { courtHoldersOf, defenceOf } from '../facts/defence.js'; // FR19 item 6: the Legal row's own court and live prison
 import { SCORE_BAND_CUTS, economicSurvivalBandOf, scoreBand } from './defenseScoreBands.js';
 import { laidByBeforeCrisis } from './prosperityInCrisis.js';
 import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js';
@@ -205,7 +205,7 @@ export function buildThreatAssessment(r) {
   const d = r?.defenseProfile || {};
   const scores = d.scores || {};
   const sp = r?.economicState?.safetyProfile || {};
-  const f = r?.economicState?.compound?.inst || {};
+  // FR19 item 6: this assessment reads no stamped `compound.inst` flag (the internal line reads the live roster)
   const threat = r?.config?.monsterThreat || 'frontier';
   const facts = defenseFactsOf(r);
   const { hasWalls, hasGarrison, hasMilitia, hasCharter } = facts;
@@ -343,11 +343,11 @@ export function buildThreatAssessment(r) {
   // TAIL-DISPLAY-CIVIC-2 (READ-ALL-3 28629): the court fact is a house that hears cases (a courthouse, or the town or
   // city hall, or the assembly: `defenseFacts.js :: COURT_RE`), so the court-without-gaol line says cases are heard, not
   // that "a court" stands where the roster lists a town hall.
-  if (f.hasCourtSystem && f.hasPrison) {
+  const court = courtHoldersOf(r).length > 0, prison = defenceOf(r).prison; if (court && prison) { // FR19 item 6: the Legal row's court and live prison, not `compound.inst`
     intA += 'Arrest, trial and gaol all work here.';
-  } else if (f.hasCourtSystem) {
+  } else if (court) {
     intA += 'Cases are heard here, but there is almost nowhere to hold anyone.';
-  } else if (f.hasPrison) {
+  } else if (prison) {
     intA += 'People are locked up without trial.';
   } else {
     intA += 'No court and no gaol; order rests on whoever is armed.';

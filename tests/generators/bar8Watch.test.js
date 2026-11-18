@@ -29,7 +29,9 @@ const TOWNS = Object.freeze({
   'bar0-village-calm-rand-46': ['13e'], // C42053: the household rota walks "after dark"
   'bar0-town-calm-rand-31': ['13e'], // the 150's instances
   'bar0-town-calm-rand-41': ['13e'],
-  'bar0-town-calm-rand-36': ['13e-keep'], // a force that keeps the day: the line stays
+  // FAULTS-WATCH item 2 (2026-11-18; FR9: a gate held is a post, not a round): rand-36's Town watch walks the night and holds
+  // the gates, so it no longer keeps the day; RE-KEYED BY IDENTITY to rand-39, whose Barracks keep the day beside its watch
+  'bar0-town-calm-rand-39': ['13e-keep'], // a force that keeps the day: the line stays
   'bar0-town-calm-rand-437': ['13e'], // BR29 (2): a night-only Town watch; the atom held only by a Warden's Lodge
 });
 
@@ -93,13 +95,15 @@ describe('13e · the watch on its rounds by day only where the force walks by da
   it('the atom `force walks by day` reads the force\'s own text (constructed rosters)', () => {
     const rota = { name: 'Village watch', desc: 'Each household takes its turn walking the lanes after dark, a lantern kept burning at the crossroads.' };
     const night = { name: 'Town watch', desc: 'Part-time guards who walk the night and keep the peace.' };
-    const gates = { name: 'Town watch', desc: 'Part-time guards who walk the night and hold the gates.' };
+    // FAULTS-WATCH item 2 (2026-11-18; FR9): a gate held is a post, not a round by day; RE-KEYED BY IDENTITY to a text that
+    // walks the night and keeps the day (the claim kept: a night-walking text that keeps the day walks by day)
+    const gates = { name: 'Town watch', desc: 'Part-time guards who walk the night and keep the market by day.' };
     const garrison = { name: 'Garrison', desc: 'Soldiers quartered in the keep.' };
     /** @param {Array<Record<string, unknown>>} institutions */
     const atom = (institutions) => factsOf({ institutions }).forceWalksByDay;
     expect(atom([rota])).toBe(false);
     expect(atom([night])).toBe(false);
-    expect(atom([gates])).toBe(true); // a gate is held by day
+    expect(atom([gates])).toBe(true); // the day is kept
     expect(atom([rota, garrison])).toBe(true);
     expect(atom([{ ...garrison, status: 'ruined' }, rota])).toBe(false); // a ruin walks no rounds
     expect(atom([])).toBe(false);

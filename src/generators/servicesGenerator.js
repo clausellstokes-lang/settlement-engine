@@ -5,12 +5,12 @@ import {
   hasCriminalInstitution,
   lawlessRow,
   materializeInstitutionServiceRolls,
-  THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION,
 } from './services/serviceRollMaterialization.js';
 import {
   resolveGenerationWorldLaw,
 } from './generationContext.js';
 import { hasInstitution } from '../domain/facts/institutions.js';
+import { courtHoldersOf } from '../domain/facts/defence.js'; // FAULTS-WATCH item 7 (FR22 (3)): the Legal row's own court
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS = 'Ask around at the right tavern. Someone moves goods without questions.';
 // R3-CODE-C-3 (CENSUS-2 a, r2r-village-19): "the right tavern" reads the roster (facts/institutions.js `tavern`); else its twin.
@@ -27,6 +27,10 @@ const NO_LAW_BRING_COIN = 'Weak law, bring coin';
 const PAY_A_LOCAL_STRONGMAN_A_NEIGHBOR_OR_A_GANG_FOR_SOME_MEASURE_OF_SAFETY_NO_CONTRACTS_NO_GUARANTEES = 'Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.';
 const PROTECTION_INFORMAL = 'Protection (informal)';
 const _ARCANE_UNDERGROUND = '(arcane underground)';
+// FAULTS-WATCH item 7 (the chair's FR22 (3), 2026-11-18; the twin's words are the chair's, vetoable by the owner): the Small
+// prison/stocks' "Holding cells" (`institutionServices.js`) holds "pending trial" where no court sits to try anyone.
+const HOLDING_CELLS_PENDING_TRIAL = 'Short-term detention pending trial or payment of fines.';
+const HOLDING_CELLS_UNTIL_FINE = 'Short-term detention until a fine is paid.';
 
 /**
  * servicesGenerator.js
@@ -344,7 +348,7 @@ export const generateAvailableServices = (
   if (crimeTypes.has('Lawlessness')) {
     addCrimeService(
       NO_LAW_BRING_COIN,
-      THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION,
+      lawlessRow(institutions, buckets).desc, // FAULTS-WATCH item 1 (r2r-city-41): the overlay's own reading, as its two push sites read it
       '(lawless)'
     );
     addCrimeService(
@@ -362,6 +366,11 @@ export const generateAvailableServices = (
       fenceAskLine,
       '(covert)'
     );
+  }
+  // FAULTS-WATCH item 7: the Legal row's court (`defence.js :: courtHoldersOf`, the atom `court sits`), read over the services
+  // drawn, as the lawless row reads it (`lawlessRow`); where none sits the Holding cells take their twin (label kept)
+  if (courtHoldersOf({ institutions, availableServices: buckets }).length === 0) {
+    for (const list of Object.values(buckets)) for (const svc of list) if (svc?.name === 'Holding cells' && svc.desc === HOLDING_CELLS_PENDING_TRIAL) svc.desc = HOLDING_CELLS_UNTIL_FINE;
   }
   // Deterministic bucket order — codepoint sort, stable across devices/locales.
   Object.keys(buckets).forEach(function (category) {
