@@ -648,7 +648,9 @@ const SHORT_HOUSES = new WeakMap();
 
 /**
  * The houses of this place short of their input, BY THE PAGE'S OWN GAP LINE: each house's gaps read alone through
- * `resourceGapLines`, so a house is short exactly where the Resources tab says "No … reaches the …" of it.
+ * `resourceGapLines`, so a house is short exactly where that reading of its own gaps says "No … reaches the …" of it (the
+ * general gap line; the Resources tab may print the house's supply-story line in its place, and this mark reads the
+ * general line whatever the tab prints).
  * @param {object | null | undefined} settlement
  * @returns {ReadonlyMap<string, string>} house name -> the input ("grapes", "clay", "glass sand")
  */
