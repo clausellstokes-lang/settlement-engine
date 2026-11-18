@@ -6,29 +6,28 @@
  * #18) presumes it; it stood beside a village watch whose own text is "Each household takes its turn walking the lanes
  * after dark" (the seventh read's C42053) and beside "Part-time guards who walk the night and keep the peace".
  *
- *   forceWalksByDayOf(record)   THE ONE READER: true where some live order-keeping house (a watch, a garrison, a
- *                               militia, a guard, a barracks, a patrol, a constabulary, a warden) is not kept to the
- *                               night by its own text; false where every such house is (its text walks "the night" or
- *                               "after dark" and names no day and no gate), or where none stands; `undefined` where the
- *                               record holds no roster (unanswered: fail-closed)
+ *   forceWalksByDayOf(houses)   THE ONE READER: true where some house of the force is not kept to the night by its own
+ *                               text; false where every house is (its text walks "the night" or "after dark" and names no
+ *                               day and no gate), or where none stands; `undefined` where no roster was handed in
+ *                               (unanswered: fail-closed)
+ *
+ * THE HOUSES ARE THE ONE PARTITION'S (BAR8-K-WATCH-2, the chair's BR29 (2)): `orderForce.js :: orderForceOf(record).houses`,
+ * the force's rows on the live roster (garrison, watch, militia by `defenseInstitutionBuckets.js :: DEFENSE_BUCKET_KEYWORDS`:
+ * the Defense tab's "Standing forces"), handed in by `factsOf.js`. This leaf spelled its own name table and liveness once,
+ * and drifted from the page: a Warden's Lodge counted (a ranger's lodge, no force the page prints) and a Household levy or
+ * Multiple garrisons did not. What the leaf keeps is its reading of a house's own text.
  *
  * A house with no text of its own is not kept to the night: nothing it prints says so. A gate held is a day's duty
  * ("walk the night and hold the gates": the gate is kept by day), so a text that names a gate or the day is not
- * night-only. The roster's liveness is `institutionRoster.js :: isLiveInstitution`'s, spelled here so the leaf imports
- * nothing (ruling EG1).
- * Pure: no randomness, no clock, no write.
+ * night-only. Imports nothing. Pure: no randomness, no clock, no write.
  *
  * @enforced-by tests/generators/bar8Watch.test.js
  */
 
-/** An order-keeping house by its roster name (a house "within reach" is no force of the town). */
-export const ORDER_FORCE_NAME = /\b(watch|militia|garrison|guard|barracks|patrol|constab\w*|warden)\b/i;
 /** A text that walks the night. */
 const NIGHT = /\bafter dark\b|\bnight\b/i;
 /** A text that keeps the day, or a gate (held by day). */
 const DAY = /\bday\b|\bdaylight\b|\bgates?\b/i;
-/** `institutionRoster.js :: INACTIVE_STATUS`, spelled here (EG1). */
-const INACTIVE = new Set(['ruined', 'removed', 'destroyed', 'remnant']);
 
 /**
  * A force's own text keeps it to the night.
@@ -41,18 +40,10 @@ export function nightOnlyText(desc) {
 
 /**
  * THE ONE READER of `force walks by day`.
- * @param {{ institutions?: unknown } | null | undefined} record
+ * @param {ReadonlyArray<{ desc?: unknown }> | null | undefined} houses the force's houses (`orderForceOf(record).houses`)
  * @returns {boolean | undefined}
  */
-export function forceWalksByDayOf(record) {
-  const roster = record?.institutions;
-  if (!Array.isArray(roster)) return undefined;
-  const forces = roster.filter((/** @type {unknown} */ i) => {
-    const h = /** @type {{ name?: unknown, status?: unknown, _worldPulseInactive?: unknown } | null} */ (i);
-    if (!h || typeof h !== 'object' || h._worldPulseInactive === true) return false;
-    if (INACTIVE.has(String(h.status || 'active').toLowerCase())) return false;
-    const name = String(h.name ?? '');
-    return ORDER_FORCE_NAME.test(name) && !/^access to/i.test(name);
-  });
-  return forces.some((/** @type {{ desc?: unknown }} */ f) => !nightOnlyText(f.desc));
+export function forceWalksByDayOf(houses) {
+  if (!Array.isArray(houses)) return undefined;
+  return houses.some((f) => !nightOnlyText(f?.desc));
 }

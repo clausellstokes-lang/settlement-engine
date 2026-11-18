@@ -8,12 +8,17 @@
 //        atom `force walks by day`, `forceHours.js`; C42053; its negative: a town whose watch keeps the day);
 // (15d, the war bar's word, is LEFT BY NAME in the hand-back: the owner's chart-proportion guard holds the PDF bar's label
 // to the band of the score it is drawn from, ODQ §934.20, so a roster reading of the word alone parts the run and its label.)
+// BAR8-K-WATCH-2 (the chair's BR29 (2)): the atom reads the one partition's houses (`orderForce.js :: orderForceOf(record).houses`,
+// the Defense tab's "Standing forces") through `factsOf`, never a name table of its own: a Warden's Lodge is no force, a
+// Household levy or Multiple garrisons is one (bar0-town-calm-rand-437: the by-day line beside a night-only watch, held true
+// only by a Warden's Lodge).
 // THE DETECTORS read the record (the drawn rows and the roster), never the table the cure changed.
 // The counts before and after over the thirty, the 150 and the 720 are in docs/chair/2026-11-17/bar8/BAR8-K-WATCH-HANDBACK.md.
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { courtHoldersOf, defenceOf } from '../../src/domain/facts/defence.js';
-import { forceWalksByDayOf, nightOnlyText } from '../../src/domain/facts/forceHours.js';
+import { nightOnlyText } from '../../src/domain/facts/forceHours.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { declarationAdmits, declarationOf } from '../../src/domain/facts/factVocabulary.js';
 
@@ -25,6 +30,7 @@ const TOWNS = Object.freeze({
   'bar0-town-calm-rand-31': ['13e'], // the 150's instances
   'bar0-town-calm-rand-41': ['13e'],
   'bar0-town-calm-rand-36': ['13e-keep'], // a force that keeps the day: the line stays
+  'bar0-town-calm-rand-437': ['13e'], // BR29 (2): a night-only Town watch; the atom held only by a Warden's Lodge
 });
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
@@ -42,6 +48,8 @@ const BY_DAY = /\bon the rounds most hours of the day\b/;
 const lawlessRows = (town) => (town?.availableServices?.criminal || []).filter((/** @type {any} */ x) => x?.name === 'Weak law, bring coin');
 /** @param {any} town */
 const guardLine = (town) => String(town?.economicState?.safetyProfile?.guardEffectivenessDesc || '');
+/** the atom `force walks by day`, read through the facts' home. @param {any} town */
+const walksByDay = (town) => factsOf(town).forceWalksByDay;
 
 /** @type {Map<string, any>} */
 const BORN = new Map();
@@ -87,16 +95,31 @@ describe('13e · the watch on its rounds by day only where the force walks by da
     const night = { name: 'Town watch', desc: 'Part-time guards who walk the night and keep the peace.' };
     const gates = { name: 'Town watch', desc: 'Part-time guards who walk the night and hold the gates.' };
     const garrison = { name: 'Garrison', desc: 'Soldiers quartered in the keep.' };
-    expect(forceWalksByDayOf({ institutions: [rota] })).toBe(false);
-    expect(forceWalksByDayOf({ institutions: [night] })).toBe(false);
-    expect(forceWalksByDayOf({ institutions: [gates] })).toBe(true); // a gate is held by day
-    expect(forceWalksByDayOf({ institutions: [rota, garrison] })).toBe(true);
-    expect(forceWalksByDayOf({ institutions: [{ ...garrison, status: 'ruined' }, rota] })).toBe(false); // a ruin walks no rounds
-    expect(forceWalksByDayOf({ institutions: [{ name: 'Access to town watch', desc: 'A day away.' }, rota] })).toBe(false);
-    expect(forceWalksByDayOf({ institutions: [] })).toBe(false);
-    expect(forceWalksByDayOf({})).toBe(undefined);
+    /** @param {Array<Record<string, unknown>>} institutions */
+    const atom = (institutions) => factsOf({ institutions }).forceWalksByDay;
+    expect(atom([rota])).toBe(false);
+    expect(atom([night])).toBe(false);
+    expect(atom([gates])).toBe(true); // a gate is held by day
+    expect(atom([rota, garrison])).toBe(true);
+    expect(atom([{ ...garrison, status: 'ruined' }, rota])).toBe(false); // a ruin walks no rounds
+    expect(atom([])).toBe(false);
+    expect(factsOf({}).forceWalksByDay).toBe(undefined); // no roster: unanswered
     expect(nightOnlyText(rota.desc)).toBe(true);
     expect(nightOnlyText(garrison.desc)).toBe(false);
+  });
+  // BAR8-K-WATCH-2 (BR29 (2)): the houses are the one partition's, as the Defense tab prints them under "Standing forces"
+  it('the atom reads the one partition: a Warden\'s Lodge is no force; a Household levy or Multiple garrisons is one', () => {
+    const night = { name: 'Town watch', desc: 'Part-time guards who walk the night and keep the peace.' };
+    const rota = { name: 'Village watch', desc: 'Each household takes its turn walking the lanes after dark.' };
+    const warden = { name: "Warden's Lodge", desc: 'Rangers keep this lodge, minding the wilderness about the town.' };
+    /** @param {Array<Record<string, unknown>>} institutions */
+    const atom = (institutions) => factsOf({ institutions }).forceWalksByDay;
+    const failures = collectSeedFailures([
+      { roster: [warden, night], want: false, why: "a Warden's Lodge beside a night-only watch is refused" },
+      { roster: [{ name: 'Household levy', desc: 'Every household owes a spear when the call goes out.' }, rota], want: true, why: 'a Household levy is read' },
+      { roster: [{ name: 'Multiple garrisons', desc: 'Soldiers quartered across the districts.' }, night], want: true, why: 'Multiple garrisons is read' },
+    ], ({ roster, want, why }) => { expect(atom(roster), why).toBe(want); });
+    expectNoSeedFailures(failures, 'the one partition');
   });
   it('the line\'s declaration is the atom, read through the facts\' home', () => {
     const decl = declarationOf({ text: 'You will see the watch on the rounds most hours of the day.', needs: ['force walks by day'] });
@@ -106,21 +129,31 @@ describe('13e · the watch on its rounds by day only where the force walks by da
   it('every town of the guard: "most hours of the day" only where the force walks by day', () => {
     const failures = collectSeedFailures(Object.keys(TOWNS), (seed) => {
       const t = BORN.get(seed);
-      if (BY_DAY.test(guardLine(t)) && forceWalksByDayOf(t) !== true) throw new Error(`prints "${guardLine(t).slice(0, 90)}" where every force walks the night`);
+      if (BY_DAY.test(guardLine(t)) && walksByDay(t) !== true) throw new Error(`prints "${guardLine(t).slice(0, 90)}" where every force walks the night`);
     });
     expectNoSeedFailures(failures, '13e');
   });
   it('POSITIVE: the night-walking towns keep a patrol line of the pool (#18) in its place', () => {
-    for (const seed of seedsOf('13e')) {
+    const failures = collectSeedFailures(seedsOf('13e'), (seed) => {
       const t = BORN.get(seed);
-      expect(forceWalksByDayOf(t), seed).toBe(false);
+      expect(walksByDay(t), seed).toBe(false);
       expect(guardLine(t), seed).toMatch(/\b(?:maintains? standard patrol coverage|walks? the usual rounds|patrols? on a regular round)\b/);
-    }
+    });
+    expectNoSeedFailures(failures, '13e positives');
+  });
+  // BAR8-K-WATCH-2 (BR29 (2)): the reader's town, where the old name table held the atom true by a Warden's Lodge alone
+  it('bar0-town-calm-rand-437: a Warden\'s Lodge beside a night-only Town watch does not put the watch on its rounds by day', () => {
+    const t = BORN.get('bar0-town-calm-rand-437');
+    const names = (t.institutions || []).map((/** @type {any} */ i) => String(i?.name));
+    expect(names, 'premise: the lodge stands').toContain("Warden's Lodge");
+    expect(names, 'premise: the night-only watch stands').toContain('Town watch');
+    expect(walksByDay(t)).toBe(false);
+    expectAbsentWithAnchor(guardLine(t), 'on the rounds most hours of the day', 'maintains standard patrol coverage', 'the guard line of the reader\'s town');
   });
   it('NEGATIVE: a town whose force keeps the day still prints the line', () => {
     for (const seed of seedsOf('13e-keep')) {
       const t = BORN.get(seed);
-      expect(forceWalksByDayOf(t), seed).toBe(true);
+      expect(walksByDay(t), seed).toBe(true);
       expect(guardLine(t), seed).toMatch(BY_DAY);
     }
   });
