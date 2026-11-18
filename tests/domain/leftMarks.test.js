@@ -135,8 +135,10 @@ describe('M3 · the head line over a failed venture: no "marked short" sentence 
     cleanup();
     return { inst: inst.includes(SUPPLIED), svc: svc.includes(SUPPLIED) };
   };
+  // FAULTS-BIRTH (2026-11-18, R8: re-keyed by identity): r2s-politically_fractured-hamlet-0's dairy is no venture beside its common
+  // pasture (FR8 (b)): the same claim on bar0-town-calm-rand-32, whose potter is a venture and its only mark
   const VENTURE_ONLY = ['r2r-hamlet-26', 'r2r-hamlet-48', 'r2r-hamlet-57', 'r2r-town-13', 'r2r-town-18', 'r2s-infiltrated-town-1',
-    'r2s-politically_fractured-hamlet-0', 'r2s-under_siege-city-1', 'r2s-wartime-city-3'];
+    'bar0-town-calm-rand-32', 'r2s-under_siege-city-1', 'r2s-wartime-city-3'];
   test('absent on both tabs in the nine towns whose only mark is a venture\'s; present in r2r-city-20 (a short mark) and r2r-hamlet-27 (the maltster\'s)', () => {
     expectNoSeedFailures(collectSeedFailures([...VENTURE_ONLY, 'r2r-city-20', 'r2r-hamlet-27'], (seed) => {
       const shown = printed(town(seed));
