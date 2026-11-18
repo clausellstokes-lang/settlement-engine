@@ -2409,3 +2409,28 @@ should be paused or archived by the owner's hand.
   13d at M: 6 towns of the 720, 5 of the 180; five hunks reverted one at a time, each red under a named test.
   ALL FOUR READERS ARE IN: K-WATCH-2 LAND · MARKS-2 LAND · the income and the PDF: after three commits · the desks:
   after two commits; PEOPLE-2 LAND by the chair's read. The chair lane is on origin at 62ab862c9.
+- 06:57 UTC, 2026-11-18 · **"SIGN" IS SENT (06:57 UTC).** CLOSE-DOORS-2 said "READY TO SIGN ON 2f4eb8acf" (06:55): its merge of
+  0af60594a (one conflict: the fork census's observed site line `npcData.js:1683`, changed by 1B and by itself: 1B's
+  kept; A6's 54 stands); EVERY PREDICTED ROW UNMOVED FROM 70e557d5b: the golden 525 (all byte-equal to its measure; 485
+  move against the stored file), the fence 1 (360 rows equal; 322 moved), the dossier manifest 2 (the drift cells, both
+  audiences), the herald desk 475 (473 items equal); the 23 families stand; the record at its 1caaa48c1 (Part 1's tip
+  named). THE OWNER WAS TOLD IN THE CHAT AT 06:57 THAT THE SIGNING STARTS, under the owner's yes of 03:03:46 UTC, with
+  the four surfaces and that a second signing at the last close needs a yes at that hour. The seat writes once through
+  each surface's own door (a row other than predicted at the write is a stop), then its pins, `verify:dist`, its net,
+  its hand-back, one push, "WRITTEN <tip>".
+  MARKS-2's FOLLOW-UP IS IN (06:55; tip 85b25a99b; read by the chair: `bar8Marks2` arm (3): the alchemist's shop short
+  at r2s-religious_conversion-town-2, bare at bar0-town-calm-rand-46, every failure collected; red with the table row
+  reverted; nothing under `src/`): THE MARKS' PIECE LANDS AT 85b25a99b.
+  **FR11 (the tools' matcher):** FAULTS-TOOLS found the matcher of `proseComposed.walker` under `src/`
+  (`src/domain/prose/entryWalker.js :: claimsField, claimTokensOf`) against its prompt's "nothing under src/": RULED:
+  those two functions are its (the walkers' instrument: no module outside `src/domain/prose/` imports it: the chair's
+  grep at the base), with the proofs named (no importer outside the instruments, tests and scripts; the size ceilings'
+  tests unmoved; `prose-wave-gate` and arm Q's tallies at base and tip; `UNDER_CLAIM_OWED` 815).
+  **THE ACCOUNT'S WEEKLY ALLOWANCE (told to the owner at 06:57 in plain words):** every seat's record read
+  `rate_limit_info.status` "allowed" until about 06:20 and reads "allowed_warning" (seven_day) since about 06:55; it
+  resets 2026-11-22 18:00 UTC. The exact figure is not visible to the chair. THE CHAIR'S OWN CALLS UNDER IT: the order
+  of importance (the signing; the five pieces' landing; the faults; the tools); ONE SHARED SECOND READER for the small
+  faults seats (WATCH, PEOPLE, DESKS, ROWS) and separate readers only for BIRTH and NEED; short look-ups (never
+  `list_events` with kind result: its metadata is as heavy as the thinking signatures). Extra usage is the owner's
+  billing choice; no setting was touched. IF THE ALLOWANCE RUNS OUT: every seat has pushed as it went; a successor reads
+  section 7 from here and the tasks' subjects.
