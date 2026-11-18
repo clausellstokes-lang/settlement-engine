@@ -15,6 +15,13 @@ programs. Stay inside the packet's exact file manifest and scope budget; stop
 on a mismatch instead of inventing behavior, chasing adjacent edge cases, or
 repairing unrelated gate failures.
 
+By the owner's word (2026-11-18, in the chair's session: "I give the word",
+then "Do both"), a builder session that the program's chair has seated may
+commit and push its own work on its own lane branch (`lane/*`, the branch its
+prompt names) from its own cloud checkout, by plain pushes with the hooks:
+never `--no-verify`, never a force push, never `master`, never a pull request;
+the pull request's merge, the deploy and every migration stay the owner's hand.
+
 When changing generation-remediation ownership or persistence, also read
 [`docs/GENERATION_REMEDIATION_HANDOFF.md`](docs/GENERATION_REMEDIATION_HANDOFF.md)
 and [`docs/GENERATION_CONTRACTS.md`](docs/GENERATION_CONTRACTS.md). That lane's
