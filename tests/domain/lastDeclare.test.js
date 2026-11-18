@@ -191,3 +191,31 @@ describe('LAST-DECLARE item 2: the sawyer\'s secret needs building at work', () 
     expect(moved).toBe("A sawyer's boy lost an arm at the blade, and the family was paid to say it happened somewhere else");
   });
 });
+
+/**
+ * LAST-DECLARE item 3 (the chair's ruling LR5; FAULTS-WATCH's 4b): `trade at work` reads the chain status the card SHOWS. Under
+ * a siege a Dyer whose chains the record stores "running" on its own ground prints "impaired" on its chain cards (the crisis
+ * state); the atom said at work. Red at the base (the stored status: true) and under the mutation that restores it.
+ */
+describe('LAST-DECLARE item 3: the house at work reads the state its chain card prints', () => {
+  const chains = [
+    { chainId: 'textiles', status: 'running', processingInstitutions: ['Dyer'], resourceKey: 'grazing_land', resourceInputKey: 'grazing_land', entrepot: false, needKey: 'manufacturing' },
+    { chainId: 'textile_finishing', status: 'running', processingInstitutions: ['Dyer'], resourceKey: 'grazing_land', resourceInputKey: 'grazing_land', needKey: 'manufacturing' },
+  ];
+  // the Dyer works its own grazing land (`chainCarrier.js`: own ground), which a siege stops
+  const record = (siege) => ({ institutions: [{ name: 'Dyer' }], config: { nearbyResources: ['grazing_land'] }, stresses: siege ? [{ type: 'under_siege' }] : [], economicState: { activeChains: chains } });
+
+  test('under a siege: every chain card of the Dyer shows impaired, and the atom says the dyeing is not at work', async () => {
+    const { tradeAtWorkOf } = await import('../../src/domain/facts/tradeAtWork.js');
+    const { chainStateShown } = await import('../../src/domain/display/chainStateShown.js');
+    expect(chains.map((c) => chainStateShown(c, record(true)))).toEqual(['impaired', 'impaired']);
+    expect(tradeAtWorkOf(record(true), 'dyed cloth')).toBe(false);
+  });
+
+  test('in calm the same Dyer runs, its cards show it, and the atom says at work', async () => {
+    const { tradeAtWorkOf } = await import('../../src/domain/facts/tradeAtWork.js');
+    const { chainStateShown } = await import('../../src/domain/display/chainStateShown.js');
+    expect(chains.map((c) => chainStateShown(c, record(false)))).toEqual(['running', 'running']);
+    expect(tradeAtWorkOf(record(false), 'dyed cloth')).toBe(true);
+  });
+});
