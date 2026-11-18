@@ -702,6 +702,21 @@ should be paused or archived by the owner's hand.
   the table; (c) an identity the fence refuses is NOT answered by a schema rung on the seat's own motion: it comes
   to the chair (a rung is a ruling of its own; or the reader is cured at the source). A refusal by the seat's own
   check stands.
+- **CL26 (05:23 UTC, 2026-11-18; THE OBSERVED SHAPES ARE NOT ADMITTED AT THIS CLOSE).** CLOSE-DOORS-1B read the door's own
+  words (05:22): `EXPLAINED_WRITER_EXEMPTIONS` (`scripts/check-observed-shape-readers.mjs:1318`) is "EXACT AND
+  FROZEN, pinned in tests/lint/observedShapeSentinel.test.js. A declaration membership or ruling change alters tag
+  authenticity and requires a governed instrument migration; it is not ordinary maintenance." So admitting the W
+  and C identities IS a schema rung (the governed two-act migration: rungs 41 to 44 of this month, each under a
+  chair's ruling: 75dd3fc17/3350c7b18, 50f58bb23/9e2ae9035, 15ceec7a5/fbf236252, a845c2c84/3e8718df2). THE RULING:
+  NO RUNG NOW. The owner's order of 05:13 puts five more landings on this line before the deploy (K-WATCH-2 moves
+  this very register, 8 to 7) and then A LAST CLOSE: ONE RUNG THERE, under a ruling of its own, every identity
+  then standing classed in its table (the two dead reads gone at the source before it). AT THIS CLOSE
+  `observedShapeReaders` STAYS RED ON THREE ARMS AND `writerReach` ON THE THREE THAT FOLLOW IT: KNOWN REDS CARRIED BY
+  NAME TO THE LAST CLOSE, written in the seat's hand-back with its table of the twelve identities. THIS CLOSE
+  THEREFORE ENDS GREEN BUT FOR THOSE SIX NAMED ARMS; pull request #75 stays a draft. THE GOLDEN IS STILL SIGNED AT
+  THIS CLOSE (the owner's yes of 03:03:46 covers it; the seat's measure of 485 rows in 23 declared families is
+  made and read; the last close then measures only the landings after it, and its signing needs the owner's yes at
+  that hour).
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
