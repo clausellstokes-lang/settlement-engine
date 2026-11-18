@@ -109,17 +109,23 @@ describe('FAULTS-BIRTH (a) · the second ring proves its ground as the first doe
     expect(idle, 'second-ring takers idle on a ground they prove used up (the anchor)').toBeGreaterThanOrEqual(3);
   }, 600_000);
 
-  test('the two towns of the brief: r2r-village-36 reads its fishing grounds used up; r2s-religious_conversion-village-0 proves them there', () => {
-    const a = town('r2r-village-36');
-    const landing = liveInstitutions(a).find((i) => i.name === "Fisher's landing");
-    expect(landing, 'r2r-village-36 has its landing').toBeTruthy();
-    expect(HI.impliedGroundsOnPage(a).used, 'r2r-village-36: the fishing grounds under Depleted').toContain('fishing_grounds');
-    expect(rowMarkText(a, 'house', landing), 'r2r-village-36: the landing marked short').toBe('Short of fish.');
-    expect(String(a.arrivalScene), 'r2r-village-36: no racks of fish drying on a sea fished out').not.toMatch(/Racks of drying fish line the way in/);
-    const b = town('r2s-religious_conversion-village-0');
-    expect(HI.impliedGroundsOnPage(b).there, 'r2s-religious_conversion-village-0: the fishing grounds proven').toContain('fishing_grounds');
-    expect(b.resourceAnalysis?.imports?.critical || [], 'r2s-religious_conversion-village-0: fish off the need list').not.toContain('fish');
+  test('the two towns of the brief: r2r-village-36 and r2s-religious_conversion-village-0 prove the water their landing fishes', () => {
+    expectNoSeedFailures(collectSeedFailures(['r2r-village-36', 'r2s-religious_conversion-village-0'], (seed) => {
+      const s = town(seed);
+      const landing = liveInstitutions(s).find((i) => i.name === "Fisher's landing");
+      if (!landing) throw new Error('no landing (the anchor)');
+      if (!HI.impliedGroundsOnPage(s).there.includes('fishing_grounds')) throw new Error('the fishing grounds not on the land list');
+      if (rowMarkText(s, 'house', landing)) throw new Error(`the landing marked: ${rowMarkText(s, 'house', landing)}`);
+      if ((s.resourceAnalysis?.imports?.critical || []).includes('fish')) throw new Error('fish on the need list');
+    }), 'the two towns of the brief');
   }, 600_000);
+
+  test('a fact of the record is never unsaid: where the food record names the catch, a seed that would spend the water leaves it there', () => {
+    const seed = groundSeedFor('fishing_grounds', false);
+    const fed = { ...built(["Fisher's landing"]), economicState: { primaryImports: [], foodSecurity: { foodRecord: { foodSources: ['fish'] } } } };
+    expect([...birthPicksOn(fed, seed)[BIRTH_PICKS].grounds], 'the food record names fish: there').toEqual([['fishing_grounds', 'there']]);
+    expect([...birthPicksOn(built(["Fisher's landing"]), seed)[BIRTH_PICKS].grounds], 'NEGATIVE: no food record of fish: the seed spends it').toEqual([['fishing_grounds', 'used']]);
+  });
 
   test('NEGATIVE: a taker of the second ring on a stored ground of its own kind proves nothing (the record speaks)', () => {
     let seen = 0;

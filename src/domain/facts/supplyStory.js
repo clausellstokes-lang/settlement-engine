@@ -260,9 +260,18 @@ export function impliedGroundsOf(record) {
 export function groundPicksAtBirth(record, seed) {
   /** @type {Map<string, 'there' | 'used'>} */
   const states = new Map();
-  for (const ground of [...provingHouses(record).keys()].sort()) states.set(ground, seedPicks(seed, `ground::${ground}`, SUPPLY_ODDS.groundThere) === false ? 'used' : 'there');
+  // FAULTS-BIRTH (FR8 (a)): A FACT OF THE RECORD IS NEVER UNSAID: where the town's own food record names the ground's food as
+  // a source of what it eats ("its food is the day's catch": `foodLand.js`'s fishing row on water), the ground is there
+  const fed = arr(/** @type {{ foodSecurity?: { foodRecord?: { foodSources?: unknown } } } | null | undefined} */ (record?.economicState)?.foodSecurity?.foodRecord?.foodSources).map(str);
+  for (const ground of [...provingHouses(record).keys()].sort()) {
+    const food = Object.prototype.hasOwnProperty.call(GROUND_FOOD, ground) ? GROUND_FOOD[ground] : '';
+    states.set(ground, food && fed.includes(food) ? 'there' : seedPicks(seed, `ground::${ground}`, SUPPLY_ODDS.groundThere) === false ? 'used' : 'there');
+  }
   return states;
 }
+
+/** FAULTS-BIRTH: the food record's own word for what a ground feeds the town (`foodLand.js :: foodSources`). */
+const GROUND_FOOD = Object.freeze(/** @type {Record<string, string>} */ ({ fishing_grounds: 'fish', river_fish: 'fish', grazing_land: 'livestock', hunting_grounds: 'game' }));
 
 /** The word the imports list holds for a family's material ("Timber", "Salt"); '' where the list has none. @param {string} family */
 export const familyWord = (family) => (family === 'desertSalt' ? RUNS_ON_BOUGHT.salt_works : (Object.prototype.hasOwnProperty.call(IMPORT_WORD, family) ? IMPORT_WORD[family] : ''));
