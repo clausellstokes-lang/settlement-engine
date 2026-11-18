@@ -33,6 +33,8 @@ import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
+import { defenseThreatProse } from '../../src/domain/display/stateProse/defenseStateProse.js';
+import { courtHoldersOf } from '../../src/domain/facts/defence.js';
 
 const DESKS = /** @type {Record<string, any>} */ ({ defense: DOSSIER_STATE_PROSE_DEFENSE, power: DOSSIER_STATE_PROSE_POWER });
 
@@ -176,5 +178,28 @@ describe('BAR8-DESKS-DEF · 14c over born census towns: the seat of one takes th
         expect(admits(sibling, f), `${seed} (${form}): "the whole {seat} must agree"`).toBe(many);
       }
     }), 'the council line beside a seat of one and a seat of many');
+  }, 240_000);
+});
+
+// ---------------------------------------------------------------------------------------------------------------- 13a, the key
+// BAR8-DESKS-2 (2026-11-18, the chair's ruling BR32 (4), the reader's M1): the internal row's pool key reads the Legal row's own
+// court (`defence.js :: courtHoldersOf`, the atom `court sits`), not the town-hall NAME test `compound.hasCourtSystem`. The anchors
+// are towns of the 720 born as the census births them: two that drew the full legal chain's "goes somewhere and takes time"
+// beside "Prison only" (r2r-town-5, r2r-town-15), one that drew "court without detention" beside "Legal Infrastructure · None"
+// (r2r-town-4), and one whose courthouse and prison both stand (r2r-town-0, the full chain, unmoved).
+describe('BAR8-DESKS-2 · 13a: the internal row is keyed by the court the Legal row prints', () => {
+  it('each town\'s internal pool is the Legal row\'s own pair: the flag-court towns move, the court town does not', () => {
+    const pk = (/** @type {any} */ o) => { if (!o || typeof o !== 'object') return null; if (o.provenance?.poolKey) return o.provenance.poolKey; for (const v of Object.values(o)) { const r = pk(v); if (r) return r; } return null; };
+    const CASES = /** @type {Array<[string, string]>} */ ([
+      ['r2r-town-5', 'Internal Security: detention without process'], ['r2r-town-15', 'Internal Security: detention without process'],
+      ['r2r-town-4', 'Internal Security: no legal infrastructure'], ['r2r-town-0', 'Internal Security: full legal chain (court AND prison)'],
+    ]);
+    expectNoSeedFailures(collectSeedFailures(CASES, ([seed, key]) => {
+      const s = /** @type {any} */ (bornCensus(seed));
+      const court = courtHoldersOf(s).length > 0;
+      expect(court, `${seed}: the Legal row's court`).toBe(key.includes('full legal chain'));
+      expect(factsOf(s).courtSits, `${seed}: the atom reads the same court`).toBe(court);
+      expect(pk(defenseThreatProse(s, { seed: String(s._seed ?? s.id ?? '') }).internal), `${seed}: the internal row's pool`).toBe(key);
+    }), 'the internal row against the Legal row');
   }, 240_000);
 });
