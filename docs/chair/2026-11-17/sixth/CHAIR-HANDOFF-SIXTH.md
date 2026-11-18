@@ -2669,3 +2669,18 @@ should be paused or archived by the owner's hand.
   siege's stop read by the trade-at-work fact): under the stop of 60,000 for one ceiling; the last close tallies every
   ceiling's rise since the first close on the joined tree, with its causes, and the owner is told the totals.
   READ-THREE takes that tip (its prompt: "or later").
+- 10:04 UTC, 2026-11-18 · **THE WHOLE CHECK ON THE CLOSE IS WHOLE** (`close-2-0dee69e17`; 42,048 tests in three parts): CHECKS-1
+  (b7147d3cc): 13,546 tests, 3 red: `observedShapeReaders.walker`'s three arms; CHECKS-2 (844713d68): 13,841 tests,
+  0 red, every step exit 0 (the build, the remote build, the dist phase); CHECKS-3 (db491a030): 14,661 tests, 5 red:
+  `writerReach.walker`'s three arms AND TWO ARMS OF `tests/docs/enforcement-claims.test.js` (NOT EXPECTED): three
+  lines of the close's hand-backs report one run in the pin's vocabulary of a completeness claim ("0 problems" in
+  LEFT-KEYS's and CLOSE-SWEEP's; "zero violations" in CLOSE-DOORS-1B's): each a run's report, not a standing claim:
+  THE CHAIR REWORDED THE THREE LINES AS REPORTS (64252903e on the merge branch; the pin 23 of 23; no meaning changed).
+  ("not run 1" in part 3 is one skipped test, as at the earlier checks.) SO THE CLOSE ENDS AS RULED: RED ONLY ON THE
+  SIX ARMS OF CL26. THE OWNER WAS TOLD IN THE CHAT (10:1x) THAT THE WORKING LINE IS NOW PUSHED TO THE CLOSED STATE (pull
+  request #75 updates, still a draft; not a merge, not a deploy): the merge branch, then `lane/join-2026-11-14`
+  fast-forwarded from 70e557d5b to 64252903e, each with its gates (running). The claims-pin commit is merged into the
+  landings branch too (local cfafd5838; the pin green there). A RULE FOR EVERY LATER LANDING: run
+  `tests/docs/enforcement-claims.test.js` on the merged tree: a hand-back that says "0 problems", "zero violations",
+  "fails the gate" or the like is reworded as a report before the push. CLOSE-DOORS-2 still waits on its own runs
+  (its hand-back follows as a documents merge).
