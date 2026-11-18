@@ -96,9 +96,9 @@ const over = (/** @type {Record<string, unknown>} */ o, base = anchorFacts) => {
   return f;
 };
 const band = (/** @type {string} */ shown, raw = shown) => ({ famine: { band: raw, shownBand: shown } });
-// FAULTS-NEED item 4 (2026-11-18, 12d's need-list half): POOR v1 also declares `no need not brought in: salt | fuel | livestock`;
-// the anchor (a town on no road) needs one of them, so v1's food-band readings hold the need atom met, as one premise each way
-const NO_NEED = Object.freeze({ luxury: false, spice: false, silk: false, precious: false, salt: false, fuel: false, livestock: false });
+// FAULTS-NEED item 4 (2026-11-18, 12d's need-list half, the chair's amendment): POOR v1 also declares `no need not brought in:
+// any`; the anchor (a town on no road) holds a need, so v1's food-band readings hold the need atom met, as one premise each way
+const NO_NEED = Object.freeze({ luxury: false, spice: false, silk: false, precious: false, salt: false, fuel: false, livestock: false, any: false });
 const bandMet = (/** @type {string} */ shown, raw = shown) => ({ ...band(shown, raw), needNotBroughtIn: NO_NEED });
 const siege = (/** @type {any} */ b) => ({ active: true, has: (/** @type {string} */ k) => k === 'under_siege' || k === 'hunger' || k === 'threat' || b.crisis.has(k) });
 

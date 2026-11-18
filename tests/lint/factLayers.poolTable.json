@@ -1335,7 +1335,7 @@
   },
   "DS-ECO-8::POOR": {
    "layer": 5,
-   "src": "placed: BAR8-DESKS-2 2026-11-18 (was 3 by map:measured): its line v3 declares `trade at work: building` (the chair's ruling BR34; tradeAtWork.js, layer 4: it reads the resource analysis's gaps), as BAR8-DESKS-DEF placed DS-POW-4 Stable; FAULTS-NEED 2026-11-18: its line v1 declares `no need not brought in: salt | fuel | livestock` (needNotBroughtIn.js, layer 4), and 5 stands above it"
+   "src": "placed: BAR8-DESKS-2 2026-11-18 (was 3 by map:measured): its line v3 declares `trade at work: building` (the chair's ruling BR34; tradeAtWork.js, layer 4: it reads the resource analysis's gaps), as BAR8-DESKS-DEF placed DS-POW-4 Stable; FAULTS-NEED 2026-11-18: its line v1 declares `no need not brought in: any` and its twin v6 `need not brought in: any` (needNotBroughtIn.js, layer 4), and 5 stands above it"
   },
   "DS-ECO-8::PROSPEROUS": {
    "layer": 3,

@@ -491,9 +491,9 @@ export const FACT_DIMENSIONS = Object.freeze({
   'critical import brought in': dim({ shape: 'presence', home: 'criticalImportBroughtIn', reader: (/** @type {FactsLike} */ f) => bool(f.criticalImportBroughtIn) }),
   // FAULTS-NEED (the sixth chair's BRIEF-FAULTS ruling FR2, 2026-11-18; vetoable by the owner, on the veto list as new
   // vocabulary), beneath `critical import brought in`: `need not brought in: <family>` = the page's own need list ("Needed,
-  // and not brought in: …", `tradeListDisplay.js :: importsAsPrinted().needed`) names a need of that family
-  // (`needNotBroughtIn.js`, held equal to the page's list). A line that presumes the good is had refuses it.
-  'need not brought in': dim({ shape: 'presence', home: 'needNotBroughtIn', keys: ['luxury', 'spice', 'silk', 'precious', 'salt', 'fuel', 'livestock'], // `needNotBroughtIn.js :: NEED_KEYS`, held equal by its guard
+  // and not brought in: …", `tradeListDisplay.js :: importsAsPrinted().needed`) names a need of that family; `any`: the list
+  // is not empty (`needNotBroughtIn.js`, held equal to the page's list). A line that presumes the good is had refuses it.
+  'need not brought in': dim({ shape: 'presence', home: 'needNotBroughtIn', keys: ['luxury', 'spice', 'silk', 'precious', 'salt', 'fuel', 'livestock', 'any'], // `needNotBroughtIn.js :: NEED_KEYS`, held equal by its guard
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.needNotBroughtIn && typeof f.needNotBroughtIn === 'object' && key ? f.needNotBroughtIn[key] : undefined) }),
   exports: dim({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.length > 0 : undefined) }),
   // BAR6-SCENES (LAW 6 rule 6b "out"; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary), beneath

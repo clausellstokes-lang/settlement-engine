@@ -179,12 +179,14 @@ export function needListOf(record) {
 /**
  * THE KEYS of `need not brought in` (the families the lines of this round declare; FR2): the luxuries and the quarter's goods
  * (FR3: a luxury of the page's own class or of the family words; the silk, the spice, the precious things the quarter's line
- * names), and the three essentials DS-ECO-8 POOR v1 denies (12d: salt, fuel, livestock).
+ * names), the three essentials of 12d (salt, fuel, livestock), and `any` (the chair's amendment to item 4, 2026-11-18 06:55
+ * UTC: a good the page lists under "Needed, and not brought in" is not accounted for, so DS-ECO-8 POOR v1 refuses any need).
  */
-export const NEED_KEYS = Object.freeze(['luxury', 'spice', 'silk', 'precious', 'salt', 'fuel', 'livestock']);
+export const NEED_KEYS = Object.freeze(['luxury', 'spice', 'silk', 'precious', 'salt', 'fuel', 'livestock', 'any']);
 
 /** @param {string} key @param {string} need */
 function needOfKey(key, need) {
+  if (key === 'any') return true;
   if (key === 'silk') return wordsOf(need).includes('silk');
   if (key === 'luxury') return LUXURY_SET.has(fold(labelOf(need))) || familiesOf(wordsOf(need)).has('luxury');
   return Object.prototype.hasOwnProperty.call(FAMILY_WORDS, key) && familiesOf(wordsOf(need)).has(key);
