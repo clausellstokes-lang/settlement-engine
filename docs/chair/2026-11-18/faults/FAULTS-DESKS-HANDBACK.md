@@ -219,3 +219,37 @@ stored Unsafe cities, 200 seeds each, the public-order draw moves 0 of 800 times
 | `proseEntryContradiction`'s two corpus counts | 3510, 2802 → the same → 3511, 2803 (stored 3501, 2794) |
 | the defense leaf's bytes (`.prose-byte-baseline.json`'s row, stored 281,298) | 283,040 → 283,221 → 283,630 raw; gzip-9 37,628 → 37,642 → 37,702 |
 | the census's declared rows (`wiringCensusDeclared`) | 10 → 14 → 14 (Unsafe's row was already among them) |
+
+## FR18 (the chair's ruling after READ-THREE), four commits
+
+| item | commit | what |
+|---|---|---|
+| (4) | 451df00de | `tests/domain/defenseStateProseDesk.test.js` restored to the base's own form (byte-equal to 4288049ba): with v4 the bare record speaks an Unsafe line, so the older claim stands; 102 of 102 |
+| (3) | 4505a6f0a | REWORDED with a row that does not answer the words says so ("its row of WORD_CORRECTIONS does not answer them (the row's new-text hash does not match the new words)", or the old-text hash, or "names no ruling"), then the row the words need; with no row at all it still says "with no row". The guard reads all four wrong rows by message |
+| (2) | 6ba29d809 | the equality arm holds the court half: bar0-town-calm-rand-45 ("Court only") and bar0-town-calm-rand-28 ("Town hall bench only") join it, and it asserts a court-only row and a "Prison only" row are both present. MUTATIONS (each restored, `factsOf.js` diff empty): cut to the prison half, the arm reds on 2 of 23 towns; cut to the court half, on 4 of 23. Unmutated 15 of 15 |
+| (1) | 7b409eb84 | v4's words: "{settlement} has no court and no gaol. Custom and neighbours answer what they can, and the rest goes unanswered." Same number, same declaration (`no court or gaol · no watch`), vantage `ledger` kept. The guard asked a row (its baseline is the committed leaf, which held v4 since b86d8122d); the chair granted it, and it stays as the correction's record: `{ pool: 'DS-DEF-3 :: Unsafe', vid: 4, from: '4bad9413…33d2', to: '214b6eab…f6a3', ruling: 'FR18' }`, `to` checked by `sha256sum` against the exact words. Projected through the guard: only v4's text moves in `defense.generated.js`; every other leaf byte-equal. The guard's planted rows now append to the table |
+
+**PROOF of (1).**
+- **The three towns' pages, read whole** (PAGE-COPY dumps at 7b409eb84, every tab, the PDF and the journal, for *hears,
+  mediat, settle, court, gaol, offender*): the new line prints on the Defense tab and in the PDF's Defense & Security in
+  Gangapur, Skálgarde and Obergasse, and NO line contradicts it. Beside it: Gangapur "Community mediation: The elder hears
+  disputes and suggests resolution …", "The hamlet settles things itself, quickly, …", "Internal security: Unsafe. No court
+  and no gaol; …"; Skálgarde "A quarrel goes to the heads of households, and most are settled before they come to blows.",
+  and its internal row "keeps no court and no gaol, and no wrong done there is written down; …" (the same fact twice on one
+  tab: an echo, named, not a contradiction); Obergasse "Dispute mediation: Settles quarrels between households by custom",
+  "If you are wronged at Obergasse, there is no court to take it to, …". The DM's own sentence in Skálgarde and Obergasse
+  ("There is no meaningful law enforcement. Disputes are settled by whoever is stronger. …") is the generator's, unchanged.
+- **Where v4 prints:** 213 towns rendered at this tip (the 180 and my towns of the 720: the 20 that moved since the base and
+  the 16 Unsafe): the new words in exactly bar0-hamlet-calm-rand-27, -29 and r2r-thorp-30, the old words in none. That is
+  where v4 printed at b86d8122d (the only three of the 900 whose Unsafe pool admits it).
+- **The 525:** 0 move against the base, by `generatorGoldenMaster`'s `hashFor`. **The dossier prose manifest:** NO row moves
+  with the words (a764759b9 → 7b409eb84: 0 of 1050). The 54 rows that moved with v4's arrival (27 Unsafe cities × 2
+  audiences, which keep a watch and a court and do not print v4) carry the pool's membership, not v4's words. The count
+  against the stored fixture stays 854.
+
+**Stored figures moved** (named, none re-taken): the defense leaf's bytes (v4's words: 283,630 → 283,598 raw);
+`presumedThings` ARM 1's fresh hits 39 → 40: the walker reads "gaol" in v4's new words as naming a `prison` and does not
+know that `no court or gaol` covers it (the declaration stands by the ruling; the walker's thing table is not my file).
+Moved by v4's ARRIVAL at b86d8122d and measured only now: `proseWaveGate`'s compared units 662 → 663 and `proseComposed`'s
+state corpus 3042 → 3043 (stored 658 and 3033), beside section 8's. Every other red of `tests/lint` (35) reads as at 2c40b1553's (the last full lint before this one), and the data group's
+as at the base but for the two counts section 8 names (the corpus 3043, the manifest's 854).
