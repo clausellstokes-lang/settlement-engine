@@ -47,8 +47,9 @@ function born(seed) {
 beforeAll(async () => { await loadGenerationLawPayloads(); });
 
 // ── 14e ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
-const anyHolder = () => /** @type {ReadonlySet<string> | undefined} */ (/** @type {any} */ (NPC_DATA).ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER);
-const tradeLines = () => new Set(NPC_DATA.NPC_FACTION_LOYALTY.economy.map((l) => plotHookText(l).trim()).filter((t) => !(anyHolder()?.has(t))));
+const anyHolder = () => /** @type {ReadonlySet<unknown> | undefined} */ (/** @type {any} */ (NPC_DATA).ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER);
+// the pool's rows not named true of any holder, as texts (the set holds the pool's own rows)
+const tradeLines = () => new Set(NPC_DATA.NPC_FACTION_LOYALTY.economy.filter((l) => !(anyHolder()?.has(l))).map((l) => plotHookText(l).trim()));
 const FOR_HIRE = new Set(['free_company_hall', 'mercenary_quarter', 'hireling_hall']);
 /** the test's own reading of "keeps no trade" (the card's house and seats) @param {any} s @param {any} npc */
 function keepsNoTrade(s, npc) {
@@ -72,10 +73,12 @@ describe("FAULTS-PEOPLE 14e · a trade's hook is not dealt to a card that keeps 
     const set = anyHolder();
     expect(set, 'npcData.js :: ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER').toBeInstanceOf(Set);
     expect(set?.size).toBe(6);
-    const pool = new Set(NPC_DATA.NPC_FACTION_LOYALTY.economy.map((l) => plotHookText(l).trim()));
-    for (const t of set ?? []) expect(pool.has(t), t).toBe(true);
-    // a trade's own line is not among them (the pool's shop and its customers)
-    expect(set?.has('They have evidence of price-fixing across the whole market. Publishing it helps their competition as much as their customers.')).toBe(false);
+    const pool = NPC_DATA.NPC_FACTION_LOYALTY.economy;
+    for (const row of set ?? []) expect(pool.includes(/** @type {any} */ (row)), plotHookText(row)).toBe(true);
+    // a trade's own line is not among them (the pool's shop and its customers); a debt bought up is
+    const named = new Set([...(set ?? [])].map((row) => plotHookText(row).trim()));
+    expect(named.has('They have evidence of price-fixing across the whole market. Publishing it helps their competition as much as their customers.')).toBe(false);
+    expect(named.has("Someone is buying up their debts. Quietly. They don't know who, or why, or when they plan to call them in.")).toBe(true);
   });
 
   it('over the towns where it stood: no soldier who keeps no trade holds a trade line, and each keeps one hook', () => {

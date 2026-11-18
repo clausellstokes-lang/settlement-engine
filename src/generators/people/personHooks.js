@@ -35,7 +35,8 @@ import { ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER, NPC_FACTION_LOYALTY } from '../../dat
  * trade (an `economy` or `crafts` power: C5328, C5358, a castellan and a watch commander on the merchant oligarchy, keep
  * theirs), keeps no trade: a trade line is refused for it and the card redraws from its own pool below, draw-free.
  */
-const TRADE_LINES = new Set(NPC_FACTION_LOYALTY.economy.map((l) => textOf(l).trim()).filter((t) => t !== '' && !ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER.has(t)));
+/** whether a text is a line of the economy pool that presumes a trade (a row of the pool not named true of any holder) @param {string} text */
+const isTradeLine = (text) => text !== '' && NPC_FACTION_LOYALTY.economy.some((l) => (typeof l === 'string' ? l : l.text) === text && !ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER.has(l));
 /** the houses that hire out for coin (catalogue ids) */
 const HIRED_FOR_COIN = new Set(['free_company_hall', 'mercenary_quarter', 'hireling_hall']);
 /** the powers of trade, by the power's category */
@@ -75,7 +76,7 @@ export function truePersonHooks(settlement, portKind) {
   const powerKind = new Map((Array.isArray(factions) ? factions : []).flatMap((f) => [f?.name, f?.faction].filter((n) => typeof n === 'string').map((n) => [n, f?.category])));
   const trueOf = (/** @type {Record<string, any>} */ npc) => {
     if (!keepsNoTrade(npc, institutions, powerKind)) return isTrue;
-    return (/** @type {string} */ text) => isTrue(text) && !TRADE_LINES.has(text.trim());
+    return (/** @type {string} */ text) => isTrue(text) && !isTradeLine(text.trim());
   };
   const held = new Set(npcs.flatMap((npc) => (Array.isArray(npc?.plotHooks) ? npc.plotHooks.map(textOf) : [])).map((t) => t.trim()));
   let changed = false;

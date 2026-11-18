@@ -2601,11 +2601,8 @@ export function temperamentYieldsToSecret(card) {
  * the card's own house AND seats, read after the seats land (`people/personHooks.js :: truePersonHooks`): a holder of a
  * standing force's house who sits on no power of trade is refused the rest. These six need no trade: debts bought up, a
  * contract's clause, a supplier gone dark or of doubtful goods or left unpaid, a crate come by mistake. Bare lines read
- * from the pool itself (no text spelled twice), at the file's end so no cited line moves. A new economy line presumes a
- * trade until it is named here.
- * @type {ReadonlySet<string>}
+ * from the pool itself (no text spelled twice): the set holds the pool's own rows (a bare line or a declared row, as
+ * authored), at the file's end so no cited line moves. A new economy line presumes a trade until it is named here.
+ * @type {ReadonlySet<string | { text: string }>}
  */
-export const ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER = Object.freeze(new Set(NPC_FACTION_LOYALTY.economy.flatMap((l) => {
-  const text = typeof l === 'string' ? l : l.text;
-  return /^One of their most reliable suppliers has gone dark\.|^Someone is buying up their debts\.|^A contract they signed in difficult times |^A supplier is providing goods of uncertain provenance\.|^They have quietly stopped paying a supplier |^A crate came to them by mistake,/.test(text) ? [text] : [];
-})));
+export const ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER = Object.freeze(new Set(NPC_FACTION_LOYALTY.economy.filter((l) => /^One of their most reliable suppliers has gone dark\.|^Someone is buying up their debts\.|^A contract they signed in difficult times |^A supplier is providing goods of uncertain provenance\.|^They have quietly stopped paying a supplier |^A crate came to them by mistake,/.test(typeof l === 'string' ? l : l.text))));
