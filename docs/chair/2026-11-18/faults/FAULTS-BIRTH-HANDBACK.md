@@ -402,7 +402,7 @@ the share veil, the birth's pick, over the 720 and the 150), P2, W1, M1, M4 gree
 
 ## FR23 (the chair's ruling of 2026-11-18) — three small items, one commit each
 
-**Tip: __TIP__.** Commits: 01393a55c (1) · 230ab7a44 (2) · this section (3).
+**FR23's tip: a101648f9** (code 230ab7a44). Commits: 01393a55c (1) · 230ab7a44 (2) · a101648f9 (this section, (3)).
 
 **(1) THE TRANSIT PILL IS PASSING TRADE** (`tests/components/leftChainCards.test.jsx :: (b)`): the arm passes over a pill exactly
 when the page prints it as transit, read off the same printed list (`tradeListDisplay.js :: tradeListsAsPrinted`: the pill's own
@@ -453,7 +453,9 @@ ground and stands outside the stories again). Neither is mine to pick.
 - **NO DRAW**: every record's sha256 equal, base against tip, with the moved families struck: 30 of 30, 150 of 150, 720 of 720;
   people 0 · ties 0 · name 0 · roster 0 in each population.
 
-__FR23NET__
+**FR23's net** (a git worktree of 230ab7a44, stopped two tests short by FR24's merge): every gate as at the FR21 tip (strict,
+ratchet, eslint, architecture, joins green; lint and N3 the same reds; `supplyStoryLaw` L5 alone red, 9; every older test of my list
+green, `leftChainCards` included). The whole net was then taken at the merged tip, below (FR24).
 
 ## FR24 (the chair's ruling of 2026-11-18) — IN PROGRESS: (0) and (1) done; (2) and (3) STOPPED for the chair
 
