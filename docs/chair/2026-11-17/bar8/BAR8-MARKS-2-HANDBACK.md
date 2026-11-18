@@ -127,3 +127,51 @@ guard, bar7EconTab, leftMarks, birthKindsLaw and supplyStoryLaw are 41/41 green 
   - `crisisStoppedRow.js :: boughtByNameOnly`, `ownTradeChainOf`;
   - `warIronHook.js :: ironWarState`, `OCCUPATION_TYPES`;
   - `resourceGenerator.js :: importWordsOfImportedGaps`.
+
+## 9 · RULING BR31 and the chair's three questions (after the first hand-back; base dfe557dc9; line's tip 70e557d5b)
+
+1. **The hook's writer follows BR16 (3ade10eb8).** `src/generators/economy/foodBalance.js:826` now hands `warIronState` the
+   town's crisis kinds; no other line of that file changed.
+   - THE SIX OCCUPIED TOWNS (r2s-occupied-city-1, r2s-occupied-town-3; bar0-town-occupied-rand-27, -31, -35;
+     bar0-town-occupied-rand-46): no war hook, no "Short of iron." and no forges' scene, on every surface (tab, PDF,
+     journal).
+   - None of the pool's three peace lines prints in their place. Their own declaration
+     (`outlookHookSiblings.js :: PEACE_IRON_HOOKS`, excludes `war: at war`) refuses a town whose war state reads "at war", so
+     the slot drops (`dropRefused`): the town prints one plot hook fewer.
+   - runD over the thirty, the 150 and the 720: every rule at the base's figure. That is 8a.input 0 · 0 · 0, 8a.mild
+     1/2 · 0 · 1/3, 8b.person 0 · 0 · 0; the 720's 8a.mild 1/3 is r2r-metropolis-19's butchers, as at the base.
+   - 11d by text: 7 · 21 · 19 → 0 · 0 · 0. `bar6MarksLaw8` is green.
+   - Measured over composite renders: the tip's renders with the six moved towns re-rendered at 3ade10eb8. No other record
+     moves (every stored field compared over the three populations).
+   - DECLARED MOVE (R5): `economicViability.plotHooks` (the war hook gone, none in its place) moves in 1 town of the 30
+     (bar0-town-occupied-rand-46), 3 of the 150 (-27, -31, -35) and 2 of the 720 (r2s-occupied-city-1, r2s-occupied-town-3).
+     `economicViability.summary` moves with it in the same six towns, by its count only: "3 plot hooks available" → "2".
+     THE 525: 0 move.
+   - N3's five: pipelineContract, isolatedTrade and publicProseEquality are green. generationForkCensus (A1, A4, A6) and
+     pipelinePinnedMode (A1, A2, A5) are red at the line's tip and at the merge, with the same messages.
+2. **The net at a scratch merge of 3ade10eb8 with the line's tip 70e557d5b** (a clean merge, aborted after the run). Each
+   list was run at the line's tip alone and at the merge, as one JSON report per tree, and every red was compared by name and
+   by message. Vitest isolates each file in its own worker, but this is one batch per tree, not the one-file-at-a-time loop
+   you asked for.
+   - (a) ALL of `tests/lint`;
+   - (b) the net: `tests/joins`, `tests/architecture`, `tests/components/bar7*`, `vendorPdfLazy` and `bootSmoke` after one
+     build, N3's five, the bar5*/bar6* guards, my guard;
+   - (c) THE OLDER TESTS: the 373 test files outside `tests/lint` and `tests/helpers` that name any of the chair's terms or
+     my functions and tables ("Curtailed by", "Stopped by", "Short of", "supplied by", "War has taken the iron",
+     `INPUT_IMPORTED_AS`, `HOUSE_NEED_INPUT`, `HOUSE_DEPENDENCE`, `HOUSE_TRADE_INPUT`, `houseDependenceIn`,
+     `housesOnImportedInput`, `serviceRowDependence`, `rowMarkText`, `deriveMagicSupplyView`, `warHoldsIron`,
+     `warIronState`, `ironWarState`, `warIronHookOutsideWar`, `housesWantingTradeInput`, `generateResourceAnalysis`,
+     `importsBroughtAtBirth`, `housesShortOfInput`, `primaryImports`).
+   - RESULT: 654 files and 8878 tests at the line's tip; 655 files and 8885 tests at the merge (the 7 more are my guard's 6
+     and bar7EconTab's constructed metal record). THE SAME 84 FAILING NAMES at both. Two messages differ: by the worktree's
+     path (`ledgerCitationIntegrity`), and the stored figure `sovereigntyLightingContract.walker` "the estate's file count
+     moved" 3682 → 3683 (my guard file: the close's figure).
+   - No older test red at the merge and green at the line's tip, so nothing more to re-key. The re-keys made before
+     (bar7EconTab, section 6) are green at the merge.
+   - Both doors give the same last line at the line's tip and at the merge: "hits 1786 · banked 1938 · fresh 0 · stale 152 ·
+     ceiling 1938" and "fresh 38 · stale 72 · first-register stale 7 · banked 4688 · strips fresh 0 stale 0 banked 107".
+     typecheck strict (1113, ceiling 1113) and ratchet (167, ceiling 167) are green at both.
+3. **`boughtByNameOnly` reaches NO older row.** The three older rows of `INPUT_IMPORTED_AS` (apothecary, apothecary_district,
+   apothecary_established) all hold INPUT in `HOUSE_DEPENDENCE`, so the reading is false for them. Over the 720, the mark
+   table base → tip prints a new "Curtailed by the siege." only on the dyer, the furrier's district, the river boatyard and
+   the mint, and on their rows; no older house gains one.
