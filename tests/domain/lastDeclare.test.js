@@ -80,12 +80,17 @@ describe('LAST-DECLARE item 1: the first close\'s rows leave by declaration', ()
   const sources = new Map([...new Set(CURED.map(([f]) => f))].map((f) => [f, read(f)]));
   const hits = new Map([...sources].map(([f, s]) => [f, new Set(hitsOf(f, s))]));
 
-  test.each(CURED)('%s · %s %s: declared, answered, its row gone; without the declaration a hit again', (file, thing, hash, snippet) => {
-    const rows = (widened.arm1[file] || []).filter((r) => r[0] === thing && [].concat(r[3]).includes(hash));
-    expect(rows, 'its widened-register row is gone').toEqual([]);
-    expect(hits.get(file).has(`${thing} ${hash}`), 'the walker answers it by its declaration').toBe(false);
-    // the negative: the same file with this one declaration taken out
-    expect(new Set(hitsOf(file, strip(sources.get(file), hash, snippet))).has(`${thing} ${hash}`), 'undeclared, it is a hit').toBe(true);
+  test('each cured row: declared, answered, its row gone; without its declaration a hit again (every row read, the failures collected)', () => {
+    const bad = [];
+    for (const [file, thing, hash, snippet] of CURED) {
+      const rows = (widened.arm1[file] || []).filter((r) => r[0] === thing && [].concat(r[3]).includes(hash));
+      if (rows.length) bad.push(`${file} ${thing} ${hash}: its widened-register row stands`);
+      if (hits.get(file).has(`${thing} ${hash}`)) bad.push(`${file} ${thing} ${hash}: the walker does not answer it`);
+      // the negative: the same file with this one declaration taken out
+      if (!new Set(hitsOf(file, strip(sources.get(file), hash, snippet))).has(`${thing} ${hash}`)) bad.push(`${file} ${thing} ${hash}: undeclared, it is no hit`);
+    }
+    expect(bad).toEqual([]);
+    expect(CURED.length).toBe(18);
   });
 });
 
@@ -100,21 +105,26 @@ describe('LAST-DECLARE item 1: each declaration is the door\'s, and refuses wher
   const keyOf = (prefix) => Object.keys(DESC_LATE_SIBLINGS).find((k) => k.startsWith(prefix));
   const twinOf = (key) => DESC_LATE_SIBLINGS[key].find((l) => l.twinOf === key).text;
 
-  test.each([
-    ['A billet and contracting office', { mercenary: false }],
-    ['A billet and hiring office', { mercenary: false }],
-    ['Where a band of soldiers lodges', { mercenary: false }],
-    ["Arrows by the sheaf, specialty broadheads, and commissioned", { guards: false }],
-    ['Guild bowyers and fletchers: standard arrows', { guards: false }],
-    ['Metropolitan cathedral.', { church: false }],
-    ['The metropolitan cathedral, seat', { church: false }],
-    ['The great church of the metropolis.', { church: false }],
-  ])('%s: the siege twin where its thing stands; refused (the original kept, noted) where it does not', (prefix, absent) => {
-    const key = keyOf(prefix);
-    expect(key, prefix).toBeTruthy();
-    expect(late(key, facts({ siege: true }))).toBe(twinOf(key));
-    expect(late(key, facts({ siege: true, ...absent }))).toBe(key);
-    expect(late(key, facts())).toBe(key);
+  test('each siege set: the twin where its thing stands; refused (the original kept, noted) where it does not', () => {
+    const SETS = [
+      ['A billet and contracting office', { mercenary: false }],
+      ['A billet and hiring office', { mercenary: false }],
+      ['Where a band of soldiers lodges', { mercenary: false }],
+      ['Arrows by the sheaf, specialty broadheads, and commissioned', { guards: false }],
+      ['Guild bowyers and fletchers: standard arrows', { guards: false }],
+      ['Metropolitan cathedral.', { church: false }],
+      ['The metropolitan cathedral, seat', { church: false }],
+      ['The great church of the metropolis.', { church: false }],
+    ];
+    const bad = [];
+    for (const [prefix, absent] of SETS) {
+      const key = keyOf(prefix);
+      if (!key) { bad.push(`${prefix}: no set`); continue; }
+      if (late(key, facts({ siege: true })) !== twinOf(key)) bad.push(`${prefix}: no twin under the siege where its thing stands`);
+      if (late(key, facts({ siege: true, ...absent })) !== key) bad.push(`${prefix}: the twin printed where its thing is absent`);
+      if (late(key, facts()) !== key) bad.push(`${prefix}: the original refused in calm`);
+    }
+    expect(bad).toEqual([]);
   });
 
   test('the cathedral\'s original names a metropolitan size: refused in a small place', () => {
@@ -146,7 +156,8 @@ describe('LAST-DECLARE item 1: each declaration is the door\'s, and refuses wher
     expect(row?.text).toBe(roadside);
     expect(declarationAdmits(declarationOf(row), facts()).admitted).toBe(true);
     expect(declarationAdmits(declarationOf(row), facts({ siege: true })).admitted).toBe(false);
-    for (let i = 0; i < 200; i += 1) expect(origin.selectOriginBody({ route: 'road', seed: `last-declare-${i}`, siege: true })).not.toBe(roadside);
+    const picked = Array.from({ length: 200 }, (_, i) => `last-declare-${i}`).filter((k) => origin.selectOriginBody({ route: 'road', seed: k, siege: true }) === roadside);
+    expect(picked).toEqual([]);
   });
 
   test('the court-and-prison twin needs the prison: printed under a collapsed law where it stands, the line kept where it does not', () => {

@@ -1,8 +1,8 @@
 # LAST-DECLARE hand-back (seat LAST-DECLARE, 2026-11-18)
 
 Base: `b014a7bf3` (`lane/landing-pieces-2026-11-18`: the five pieces and the faults round landed, points 54 to 65).
-Branch: `lane/last-declare-2026-11-18`. Commits: e8d7c850f and a3e7c0776 (item 1), d96b9565c (the guard; item 3's patch), 5df57eb26 (item 2), then
-the guard and item 3's patch, then this hand-back. Model Opus 5.5, one builder, no sub-agents.
+Branch: `lane/last-declare-2026-11-18`. Commits: e8d7c850f and a3e7c0776 (item 1), d96b9565c (the guard; item 3's patch),
+5df57eb26 (item 2), the LR4 older tests, the guard's reshape and this hand-back. Model Opus 5.5, one builder, no sub-agents.
 
 **In one line:** 18 of the 20 rows leave the register by declaration, byte-equal everywhere. The other 2 stay recorded
 by the chair's ruling LR1 (the walker reads "garrison work" as a garrison). Item 2 landed under LR3: it cures all 12
@@ -141,17 +141,56 @@ for the house descriptions, would be new machinery and is not ordered now.
   applied; it would want its own guard).
 - **(b) the chunk sizes** are not taken: (a2) exists, so the pin need not move, and I built nothing.
 
-## The net (each gate alone through `scripts/gate-tail.sh`; base b014a7bf3 and tip)
+## The net (each gate alone through `scripts/gate-tail.sh`; base b014a7bf3 and tip; every red compared by message)
 
-(filled below)
+| gate | base | tip |
+|---|---|---|
+| `typecheck:domain:strict` | 0 (1,113 ceiling) | 0 (1,113) |
+| `typecheck:ratchet` | 0 (167 ceiling) | 0 (167) |
+| `npx eslint` on the changed files | — | 0 errors |
+| `tests/architecture` | 21 files, 347 green | 21, 347 green |
+| `tests/lint` (JSON) | 29 red of 3,226 | 29 red of 3,226 after the guard's reshape (31 before it: see below) |
+| `tests/joins` | 1 red (`mutationOrder`) | the same 1, same message |
+| `tests/data`, `tests/domain/facts`, `crisisBlindDossierProse` | 5 red (2 files: `tailHouses1Gaps` …) | the same 5, same messages |
+| the six faults guards | 58 green | 58 green |
+| my guard `tests/domain/lastDeclare.test.js` | 9 red (each for its own reason) | 9 green |
+| the older tests (162 files naming what I changed, outside `tests/lint`) | 8 red | 8 red, after LR4 (see below) |
+
+**`tests/lint`, by message.** Every base red stands at the tip with the same message, the file path apart. That
+covers the presumed-things walker's arm 1 (5 fresh hits) and its strip ban (1), both the base's own. Three messages
+move, and each is a stored figure for the close:
+- `poolDominance` "every drawn pool has a row": 3 → 4 pools. The new one is `ledger:settlementOriginProse:ORIGIN_DECLARED`,
+  the roadside row's door.
+- `sovereigntyLightingContract` "THE CENSUS IS AN ASSERTION": the estate's file count is 3,696 at base and 3,697 at the
+  tip (my guard's file).
+- `presumedThings` arm 1 keeps its 5 fresh hits; its banked count is 4,649 → 4,629.
+
+My first tip run had two new reds, both from my own guard's shape: `seedLoopTotality` (a bare seed loop) and
+`sovereigntyLightingContract`'s each-family park debt (`test.each`). I cured both in the guard (collected failures, plain
+loops; 9 tests) and re-ran both walkers: green.
+
+**The older tests, by message.** The base's 8 reds stand at the tip with the same messages: `generationForkCensus` ×3,
+`editWorldFactResources` ×2, `espionageDormancyFence`, `institutionBudgetPromise` and `generatorGoldenMaster`. Two counts
+move with item 2's declared move: the golden master's failing configurations go 191 → 192 (item 2 moves 3 of the 525;
+the list grows by one), and `institutionBudgetPromise`'s seeds 35 → 36 (one of its sixty takes the sawyer's
+other secret). Two NEW reds came from item 1, and both are cured under the chair's ruling LR4 (outside my items, granted):
+- `census5bOffCensusDeclarations`: the admit-all double `tests/helpers/calmFactsDouble.js` lacked `faith.hasChurch`, so
+  the chaplain's `church` read as "never lawful". It gains `hasChurch: true`. Across its 17 users the only change is this
+  test turning green.
+- `bar6SeamDesks` item 5: the pin now names WHERE the streets line stands (its print site, and its declared set's key and
+  member), each read gated by the tier. A fourth literal in another table reds; that was shown once in scratch
+  ("elsewhere (PLANTED_FOURTH, line 1137)") and then restored. ITS LIMIT: the scanner lists a text once per pool, so a
+  second copy inside the print site's own function is not caught.
 
 ## Stored figures this branch moves (for the last close; none re-taken by me)
 
 - `tests/lint/presumedThings.widened.register.json`: arm-1 rows banked 4,649 → 4,629 (the 18, and the catalogue's 2).
-- The presumption ledger's pools: two new door sites note lines (`settlementOriginProse:ORIGIN_DECLARED`,
-  `guardLineUnderTheLaw:GUARD_LAW_SIBLINGS`). The streets line notes into `safetyProfile:SAFETY_LINE_SIBLINGS`. Any
-  ledger-derived census (pool table, pool dominance, declared share) may gain these rows: see the net.
-- The golden: 0 of 525 move under item 1; **3 of 525 move under item 2** (the sawyer's secret, named above).
+- The pool-dominance register: a row for `ledger:settlementOriginProse:ORIGIN_DECLARED` (the roadside door; its
+  ledger notes are on the births). The guard line's door runs at display, outside the births' ledger, and adds no row.
+- The estate's file count (`sovereigntyLightingContract`): 3,696 → 3,697.
+- `institutionBudgetPromise`'s moved seeds: 35 → 36 (item 2).
+- The golden: 0 of 525 move under item 1; **3 of 525 move under item 2** (the sawyer's secret, named above). The golden
+  test's failing list goes 191 → 192.
 
 ## Left, by name
 
