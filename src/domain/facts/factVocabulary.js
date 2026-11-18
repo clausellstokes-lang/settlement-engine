@@ -227,7 +227,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [seatOutranked] @property {boolean} [sovereign] @property {boolean} [seatMembers] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
  * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork] @property {(key: string) => boolean|undefined} [goodExported] @property {boolean} [legitimacyCrisis] @property {boolean} [legalHouse] @property {boolean} [appointedPost]
- * @property {boolean} [dangerComing] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
+ * @property {boolean} [dangerComing] @property {boolean} [uprising] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [lawBand] BAR5-SAFETY: `lawBand.js :: lawBandOf`
@@ -382,6 +382,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // tension of the history (`dangerComing.js`), which the crisis record's threat family does not see. "Nothing threatens it"
   // presumes its absence (REVIEW-BAR-4 C18744, C45642).
   'danger coming': dim({ shape: 'presence', home: 'dangerComing', reader: (f) => bool(f.dangerComing) }),
+  // BAR8-DESKS-DEF (BAR8-AUDIT-K rule 12e; the chair's ruling BR14 (c); vetoable by the owner, on the veto list as new
+  // vocabulary), beneath `danger coming`, the history's other live tension: the common people are pressing, or have risen,
+  // against those in charge (`uprising.js`: a live `popular_uprising` tension), which the desk's `unrest` dimension (three crisis
+  // kinds) does not see. "Nobody stands ready to lead them against the {seat}" presumes its absence (the seventh read's C16668).
+  uprising: dim({ shape: 'presence', home: 'uprising', reader: (f) => bool(f.uprising) }),
   // BAR6-DEFDESK (LAW 7's `7a-nothreat`; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary), beside
   // `danger coming`: the page itself prints the country's beasts as a threat (`monsterFrontier.js`: plagued country, or frontier
   // country under a Beasts & Monsters band Weak or Critical), a frontier condition and no crisis. "Nothing threatens it now that a
