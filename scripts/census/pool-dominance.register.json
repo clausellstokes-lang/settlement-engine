@@ -3,9 +3,9 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 949,
-    "printOneLine": 669,
-    "measuredUnder30Draws": 150,
+    "pools": 954,
+    "printOneLine": 667,
+    "measuredUnder30Draws": 151,
     "highestSharesOver150Draws": [
       {
         "pool": "ledger:institutionServices:Access to external mill.Grain milling (a day away)",
@@ -57,6 +57,27 @@
         "lines": 2
       },
       {
+        "pool": "ledger:institutionServices:Hired blades.Bodyguard service",
+        "top1": 0.8977,
+        "top5": 1,
+        "draws": 254,
+        "lines": 2
+      },
+      {
+        "pool": "ledger:foodwaysPrintSiblings:FOODWAYS_PRINT_SIBLINGS",
+        "top1": 0.8859,
+        "top5": 1,
+        "draws": 1585,
+        "lines": 2
+      },
+      {
+        "pool": "ledger:institutionServices:Butchers (3-8).Fresh meat",
+        "top1": 0.8776,
+        "top5": 1,
+        "draws": 833,
+        "lines": 2
+      },
+      {
         "pool": "ledger:npcData:NPC_HOOK_SIBLINGS",
         "top1": 0.8772,
         "top5": 1,
@@ -68,27 +89,6 @@
         "top1": 0.8734,
         "top5": 1,
         "draws": 450,
-        "lines": 2
-      },
-      {
-        "pool": "ledger:foodwaysPrintSiblings:FOODWAYS_PRINT_SIBLINGS",
-        "top1": 0.8643,
-        "top5": 1,
-        "draws": 1002,
-        "lines": 2
-      },
-      {
-        "pool": "ledger:institutionDescVariants:city|Crafts|Cartographer's guild",
-        "top1": 0.8396,
-        "top5": 1,
-        "draws": 293,
-        "lines": 4
-      },
-      {
-        "pool": "ledger:cultureProfiles:slavic.foodways",
-        "top1": 0.831,
-        "top5": 1,
-        "draws": 621,
         "lines": 2
       }
     ],
@@ -5844,6 +5844,36 @@
       "top1": 0.8643,
       "top5": 1,
       "lines": 2,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:rareSecrets:deeds": {
+      "top1": 0.0245,
+      "top5": 0.1222,
+      "lines": 47,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:rareSecrets:masters": {
+      "top1": 0.047,
+      "top5": 0.235,
+      "lines": 24,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:rareSecrets:natures": {
+      "top1": 0.0185,
+      "top5": 0.0921,
+      "lines": 55,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:rareSecrets:outsiders": {
+      "top1": 0.0385,
+      "top5": 0.1924,
+      "lines": 26,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:rareSecrets:ties": {
+      "top1": 0.026,
+      "top5": 0.13,
+      "lines": 42,
       "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }
