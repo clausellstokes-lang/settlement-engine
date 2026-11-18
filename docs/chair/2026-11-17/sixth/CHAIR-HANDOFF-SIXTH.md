@@ -1957,3 +1957,15 @@ should be paused or archived by the owner's hand.
   live version exists). A WRONG STATEMENT OF THE CHAIR CORRECTED OUT LOUD IN THE SAME ANSWER: the pages with the
   moved vids were not "read twice": one read (the seventh) and BAR8's two audits; CL19's text and the description's
   draft are corrected.
+- 04:50 UTC, 2026-11-18 · DESKS-2 HANDED BACK (04:49; `lane/bar8-desks-2-2026-11-18`... its branch at d25ded69c, pushed; hand-back
+  `docs/chair/2026-11-17/bar8/BAR8-DESKS-2-HANDBACK.md`; part A is 1347efef5; its A8 commit e65cf0665 is dropped at
+  the merge): PART B: B1 built (54fa0ca98: the family-match arm on the five towns, held to `needMetBy` import by
+  import; red when planted); B2 (13d) NAMED FOR THE CHAIR: "court or gaol" is a disjunction the existing forms can
+  only build as seven same-words twin rows, which A2's law makes ambiguous: it wants `needs any of` or a new atom:
+  A RULING OF THE NEXT ROUND (a new form of declaration is the chair's to give by name); A7 adds two 13d towns of
+  the 720 (r2r-town-4, r2r-town-33: their old line was false too); B3 NAMED: the fishmonger is a title presentation,
+  not a desk line; its net at three trees by message: nothing green at 99ca9ad51 is red at its tip but the
+  manifest's provenance arm (stored: the second close's); the seven of BR28 are green. ALL FIVE AFTER-DEPLOY
+  BUILDERS HAVE NOW HANDED BACK OR HAVE THEIR PART A IN: K-WATCH-2 2abb7fb03, PEOPLE-2 76ffc8eef (part A), DESKS-2
+  d25ded69c, MARKS-2 1a2c7f2b4, J-INCOME-2 262ba9ec6 (PDF-2b cd94d5a08 behind it): THEIR READERS ARE SEATED WHEN THE
+  CLOSE REACHES ITS LONG WAITS; none lands before the deploy.
