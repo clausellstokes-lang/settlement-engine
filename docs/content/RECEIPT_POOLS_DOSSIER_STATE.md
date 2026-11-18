@@ -3131,6 +3131,7 @@ reading rather than a settled one.
 4. `[ledger · no court or gaol · no watch]` {settlement} has no court and no gaol. Custom and neighbours answer what they can, and the rest goes unanswered.
 5. `[street · no guardPresence · crime wave]` Theft at {settlement} grows each season, and with nobody under arms, every household guards its own.
 6. `[street · tier: ≤ village]` Neighbours at {settlement} have begun to suspect one another, and few will lend a tool or a coin now.
+7. `[street · militia · no watch]` {settlement} calls its people out against raiders and beasts, but nobody is called out over a theft.
 
 **`Dangerous`**
 1. `[street · watch]` The watch at {settlement} has been overwhelmed. What happens in this town is decided by whoever is present when it happens.

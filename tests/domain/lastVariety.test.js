@@ -46,10 +46,11 @@ const NEW_LINES = [
   { pool: 'Moderate', vid: 10, marks: ['no court or gaol'] },
   { pool: 'Unsafe', vid: 5, marks: ['no guardPresence', 'crime wave'] },
   { pool: 'Unsafe', vid: 6, marks: ['tier: ≤ village'] }, // LR6 (2): its words corrected in place
+  { pool: 'Unsafe', vid: 7, marks: ['militia', 'no watch'] }, // LR6 (4): the third kind of Unsafe town
 ];
 const BASE_COUNTS = { 'Very Safe': 5, Safe: 5, Moderate: 8, Unsafe: 4 };
 /** the lines this seat appended to each pool (LR6 added Safe v8 and Unsafe v7) */
-const ADDED = { 'Very Safe': 2, Safe: 3, Moderate: 2, Unsafe: 2 };
+const ADDED = { 'Very Safe': 2, Safe: 3, Moderate: 2, Unsafe: 3 };
 const variantOf = (/** @type {string} */ pool, /** @type {number} */ vid) => (BLOCK.pools[pool] || []).find((/** @type {any} */ v) => v.vid === vid);
 
 /** the bar0- arm of the census probe's seed map (as `faultsDesks.test.js`), and the census's own plan for the 720 */
@@ -59,6 +60,9 @@ const PLAN = new Map(censusPlan('r2').map((row) => [row.seed, row]));
 function cfgFor(seed) {
   const row = PLAN.get(seed);
   if (row) return configOf(row, DEFAULT_CONFIG, birthConfig);
+  // the second reader's 600 fresh (READ-LAST): the census's calm plan at indices 5000 to 5099
+  const fresh = seed.match(new RegExp(`^r2r-${SIZE}-(\\d+)$`));
+  if (fresh) return configOf({ size: fresh[1], crisis: null }, DEFAULT_CONFIG, birthConfig);
   const m = /** @type {RegExpMatchArray} */ (seed.match(new RegExp(`^bar0-${SIZE}-([a-z_+]+)-([a-z_]+)-(\\d+)$`)));
   const st = m[2] === 'calm' ? [] : m[2].split('+');
   return birthConfig({ ...DEFAULT_CONFIG, ...(m[3] === 'rand' ? {} : { tradeRouteAccess: m[3] }), settType: m[1], selectedStressesRandom: false, selectedStresses: st, _randomizePriorities: true });
@@ -69,7 +73,7 @@ const SHORT = {
   Moderate: ['bar0-hamlet-calm-rand-45', 'bar0-thorp-calm-rand-31', 'r2r-hamlet-17', 'r2r-thorp-0'],
   Safe: ['bar0-thorp-calm-rand-28', 'r2s-infiltrated-village-2', 'r2r-town-4'],
   'Very Safe': ['bar0-village-calm-rand-36', 'r2r-hamlet-11'],
-  Unsafe: ['bar0-hamlet-calm-rand-27', 'bar0-hamlet-calm-rand-29', 'r2r-thorp-30'],
+  Unsafe: ['bar0-hamlet-calm-rand-27', 'bar0-hamlet-calm-rand-29', 'r2r-thorp-30', 'r2r-thorp-5005'], // LR6 (4): a household levy, no watch
 };
 /** a town of the 900 where each new line is the one the slot prints (measured at the tip over the 900) */
 const PRINTS = [
@@ -82,6 +86,7 @@ const PRINTS = [
   { pool: 'Moderate', vid: 10, seed: 'bar0-thorp-calm-rand-45' },
   { pool: 'Unsafe', vid: 5, seed: 'bar0-hamlet-calm-rand-29' },
   { pool: 'Unsafe', vid: 6, seed: 'bar0-hamlet-calm-rand-27' },
+  { pool: 'Unsafe', vid: 7, seed: 'r2r-thorp-5005' },
 ];
 
 /** item 2: cards whose SUPPLY family held only refused dependency lines at the base (measured over the 900), two under a siege */
@@ -150,6 +155,7 @@ describe('LAST-VARIETY item 1: two lines at the end of each DS-DEF-3 safety pool
       'no prison': (f) => ({ defence: { ...f.defence, prison: true } }),
       'no guardPresence': () => ({ guardPresence: true }),
       'no court or gaol': () => ({ courtOrGaol: true }),
+      militia: (f) => ({ defence: { ...f.defence, militia: false } }),
     };
     const failures = collectSeedFailures(NEW_LINES.flatMap(({ pool, vid, marks }) => marks.filter((m) => !/crisis/.test(m)).map((mark) => ({ pool, vid, mark }))), ({ pool, vid, mark }) => {
       const where = /** @type {{ seed: string }} */ (PRINTS.find((p) => p.pool === pool && p.vid === vid));
