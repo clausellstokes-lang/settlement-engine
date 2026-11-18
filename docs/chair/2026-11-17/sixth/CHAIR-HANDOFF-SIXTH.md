@@ -1969,3 +1969,15 @@ should be paused or archived by the owner's hand.
   BUILDERS HAVE NOW HANDED BACK OR HAVE THEIR PART A IN: K-WATCH-2 2abb7fb03, PEOPLE-2 76ffc8eef (part A), DESKS-2
   d25ded69c, MARKS-2 1a2c7f2b4, J-INCOME-2 262ba9ec6 (PDF-2b cd94d5a08 behind it): THEIR READERS ARE SEATED WHEN THE
   CLOSE REACHES ITS LONG WAITS; none lands before the deploy.
+- 04:51 UTC, 2026-11-18 · THE OWNER ASKED (04:50:07 UTC), quoting the four faults of the last answer: "why are these the way they
+  are?": ANSWERED FIRST AND IN FULL: the one root (a town is built in steps; a sentence written at one step did not
+  know what a later step or a later rule decided), then each: (1) the PDF's stored short metal line
+  (`incomeLineSiblings.js`: the short twin is drawn by the chain's STORED status; the tab reads it at print through
+  `incomeDescShown` and gives the ordinary line where no house is marked; the PDF prints the stored line: J-INCOME-2
+  and PDF-2b, built, not yet cleared); (2) the fish lines written when every fish house took its own fish (the
+  scenes and the market's row ask "fish landed here?" since points 45 and 53; the title presentation, the catalogue
+  description and the service list do not yet); (3) the fair's luxuries (no fact "luxuries brought in" exists; BR17
+  (2)'s twin not written); (4) the desert coal slope (`siteGenesis.js:252`; 7 to 9 by BAR6-RECORD's correct change
+  of the sand export; the cure re-sites every dry town that exports coal, ore or stone: the map work, behind the
+  content rounds). WHAT HAPPENS TO THEM: (1) lands right after the deploy; (2) and (3) the next content round; (4)
+  the map work, sooner on the owner's word.
