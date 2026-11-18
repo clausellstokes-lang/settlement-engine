@@ -21,9 +21,8 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
-import { importsAsPrinted, needMetBy, NEED_DEALT_ROWS } from '../../src/domain/display/tradeListDisplay.js';
-import { LUXURY_CLASS } from '../../src/data/tradeListDeclarations.js';
-import { NEED_DEALT_ROWS_COPY, NEED_KEYS, WORKING_CHAIN_STATUSES_COPY, goodNeededNotBroughtIn, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
+import { importsAsPrinted, needMetBy, NEED_DEALT_ROWS, MARKS } from '../../src/domain/display/tradeListDisplay.js';
+import { MARK_RES, NEED_DEALT_ROWS_COPY, NEED_KEYS, WORKING_CHAIN_STATUSES_COPY, goodNeededNotBroughtIn, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
 import { FACT_DIMENSIONS, atomHolds, declarationAdmits } from '../../src/domain/facts/factVocabulary.js';
 import { variantFactDeclaration } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
@@ -139,7 +138,9 @@ describe('FAULTS-NEED item 1: the atom `need not brought in` (FR2) states the pa
   const same = (s) => expect(needListOf(s), 'the leaf\'s list is the page\'s').toEqual(importsAsPrinted(s).needed);
   it('its copied tables are their homes\' own, and its keys are the vocabulary\'s', () => {
     expect([...WORKING_CHAIN_STATUSES_COPY]).toEqual([...WORKING_CHAIN_STATUSES]);
-    expect(LUXURY_CLASS.every((r) => r.needs.length === 1 && r.needs[0] === 'tier: ≥ village')).toBe(true);
+    // FR15: the leaf reads the luxury pool through the kernel's door (each row's own declaration), so its band is the home's;
+    // the old arm "every row needs exactly tier: ≥ village" is answered by the leaf's equality to the page on every town
+    expect(MARK_RES.map(String)).toEqual(MARKS.map((m) => String(m.re)));
     expect(NEED_DEALT_ROWS_COPY.map(([g, re]) => [g, String(re)])).toEqual(NEED_DEALT_ROWS.map(([g, re]) => [g, String(re)]));
     expect([...(FACT_DIMENSIONS['need not brought in'].keys || [])]).toEqual([...NEED_KEYS]);
   });

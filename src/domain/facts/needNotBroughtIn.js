@@ -36,6 +36,7 @@ import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { ventureOnPage } from './supplyStory.js';
 import { chainPrintName } from '../display/chainPrintName.js';
 import { LUXURY_CLASS, NOT_A_GOOD } from '../../data/tradeListDeclarations.js'; // their home (imports nothing; FR13 (a))
+import { filterDeclared, lineText } from './drawDeclared.js'; // the kernel's door the luxury pool is read through (FR15)
 
 /**
  * THE STATUSES OF A WORKING CHAIN, a COPY of `facts/chainWorking.js :: WORKING_CHAIN_STATUSES` (that module is rostered lazy in
@@ -52,29 +53,36 @@ const arr = (v) => (Array.isArray(v) ? v : []);
 const strings = (v) => arr(v).filter((x) => typeof x === 'string').map(String);
 /** @param {unknown} v @returns {string} */
 const fold = (v) => String(v ?? '').trim().toLowerCase();
-/** The page's trade marks (`tradeListDisplay.js :: MARKS`), struck from a label. @param {string} raw */
+/**
+ * The page's trade marks, a COPY of `tradeListDisplay.js :: MARKS`'s patterns (that module is not importable here: see the
+ * header), held equal to it by the guard.
+ * @type {ReadonlyArray<RegExp>}
+ */
+export const MARK_RES = Object.freeze([/\s*\(transit\)\s*$/i, /\s*\(naval route only\)\s*$/i, /\s*\(taxed by occupation\)\s*$/i]);
+/** A label with the page's trade marks struck (`tradeListDisplay.js :: tradeMarkOf(raw).label`). @param {string} raw */
 const labelOf = (raw) => { let l = raw; for (let c = true; c;) { c = false; for (const re of MARK_RES) if (re.test(l)) { l = l.replace(re, ''); c = true; } } return l; };
-const MARK_RES = Object.freeze([/\s*\(transit\)\s*$/i, /\s*\(naval route only\)\s*$/i, /\s*\(taxed by occupation\)\s*$/i]);
 
 const NOT_A_GOOD_SET = new Set(NOT_A_GOOD.map(fold));
-const LUXURY_SET = new Set(LUXURY_CLASS.map((r) => fold(r.text)));
-/** The luxury class's band, `tier: ≥ village` (`factVocabulary.js :: TIER_WORDS`; an unknown tier answers nothing: refused). */
-const TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
-/** @param {unknown} tier */
-const luxuryBandHolds = (tier) => typeof tier === 'string' && TIERS.indexOf(tier) >= TIERS.indexOf('village');
+/** The luxury class's row for a label, or undefined (a lookup: the row keeps its declaration). @param {string} label folded */
+const luxuryRowOf = (label) => LUXURY_CLASS.find((row) => fold(row.text) === label);
 
 /**
  * `displayTradeList(list, record, { side: 'imports', exports })`, in the record's words: a category error leaves, an export
- * wins, a luxury below its band leaves.
+ * wins, and every item goes through the kernel's door (`drawDeclared.js :: filterDeclared`) as the page sends it: a luxury
+ * with its row's own declaration, every other item a bare line, read against the facts that declaration reads (the
+ * record's tier, in the door's facts shape; FR15: the pool is drawn through its door, never unwrapped).
  * @param {string[]} list @param {NeedRecord} record @param {unknown} exports
  */
 function keptOnImports(list, record, exports) {
   const exported = new Set(strings(exports).map((x) => fold(labelOf(x))));
-  return list.filter((raw) => raw.trim()).filter((raw) => {
+  const kept = list.filter((raw) => raw.trim()).filter((raw) => {
     const label = fold(labelOf(raw));
-    if (NOT_A_GOOD_SET.has(label) || exported.has(label)) return false;
-    return !LUXURY_SET.has(label) || luxuryBandHolds(record.tier);
+    return !NOT_A_GOOD_SET.has(label) && !exported.has(label);
   });
+  const declared = kept.map((raw) => { const row = luxuryRowOf(fold(labelOf(raw))); return row ? { text: raw, needs: row.needs } : raw; });
+  const tier = typeof record.tier === 'string' ? record.tier : undefined;
+  return filterDeclared(declared, { facts: () => ({ tier }), poolId: 'trade-list:imports', surface: 'economics', drawKind: 'A' })
+    .map((line) => String(lineText(line)));
 }
 
 /**
@@ -168,7 +176,7 @@ export const NEED_KEYS = Object.freeze(['luxury', 'spice', 'silk', 'precious', '
 function needOfKey(key, need) {
   if (key === 'any') return true;
   if (key === 'silk') return wordsOf(need).includes('silk');
-  if (key === 'luxury') return LUXURY_SET.has(fold(labelOf(need))) || familiesOf(wordsOf(need)).has('luxury');
+  if (key === 'luxury') return !!luxuryRowOf(fold(labelOf(need))) || familiesOf(wordsOf(need)).has('luxury');
   return Object.prototype.hasOwnProperty.call(FAMILY_WORDS, key) && familiesOf(wordsOf(need)).has(key);
 }
 

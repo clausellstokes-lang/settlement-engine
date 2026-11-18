@@ -253,3 +253,50 @@ its premise; the full list is in section 3's scratch output, and its three towns
 - **The fair, the quarter and the fish market's card:** FAULTS-ROWS's, on the atom (keys `luxury`, `spice`, `silk`,
   `precious`).
 - **By the brief:** the timber nine of 11a.atWork, the tailors' livery and the three bare income shares: not built.
+
+## 8 · FR15 (the chair, 09:37 UTC, after READ-NEED): the luxury pool through its door
+
+**(1) The cure at the cause.** The leaf no longer unwraps `LUXURY_CLASS`, and `luxuryBandHolds` with its hard-coded band is
+gone. `keptOnImports` sends every item through the kernel's door as the page does (`tradeListDisplay.js :: displayTradeList`):
+- a luxury goes as `{ text: raw, needs: row.needs }`, its row found by a lookup (`LUXURY_CLASS.find`, which keeps the row);
+- every other item goes as a bare line;
+- the call is `filterDeclared(declared, { facts: () => ({ tier }), poolId: 'trade-list:imports', surface: 'economics',
+  drawKind: 'A' })`. The facts are the record's tier in the door's shape, so `factsOf` is not called.
+
+The door may be imported: `drawDeclared.js` routes to engine-core, and `engineCoreLazyEdge` is green.
+
+The guard's arm "every row needs exactly tier: ≥ village" is REMOVED. The leaf now reads each row's own declaration, and
+its equality to the page on every town (and on the constructed hamlet against a town) is the claim.
+
+The leaf still equals the page on 900 of 900 towns. The golden does not move against the previous tip (0 of 525; 13 of 525
+against the base, as before).
+
+**ARM 3 IS NOT GREEN: ONE FRESH SITE REMAINS, AND I STOPPED THERE.** The site is the read of the door's own output:
+`needNotBroughtIn.js :: filterDeclared(declared, { facts: () => ({ tier }), poolId: 'trade-list:imports', …`. That is
+`.map((line) => String(lineText(line)))` on what the door admitted. It is the page's own shape: the widened register banks
+it there as `src/domain/display/tradeListDisplay.js :: filterDeclared(declared, { facts: () => factsOf(settlement), poolId:
+`trade-list:${…`, reason `not-a-draw`. A seat banks nothing, and I did not reshape the read. One shape would avoid the read:
+keep the raw items whose declared line the door admitted, by identity. It is the chair's to allow or refuse (FR13, FR15).
+ARMS 1 and 2 read as at the base: 38 fresh, 79 stale.
+
+**Budget arms, `VERIFY_DIST=1`** (one build per side; the figures are the last close's, red at both):
+
+| figure | base 4288049b | tip d3cdb5207 (READ-NEED's read) | tip with FR15 |
+|---|---|---|---|
+| the engine chunk | 906,842 | 906,944 | 906,944 |
+| first-paint raw | 1,168,138 | 1,172,712 | 1,172,766 |
+| first-paint gzip | 371,842 | 373,167 | 373,215 |
+| first-paint Brotli | 312,201 | 313,377 | 313,302 |
+
+- The four ceilings stored at the base are 881,331, 1,139,072, 362,621 and 304,224. All four arms are red at the base and
+  at the tip; the moves are the close's to re-take.
+- `bootSmoke` is green at both. Every other `vendorPdfLazy` arm is green at both.
+
+**(2) The other copies held to their homes.**
+- `MARK_RES` is held equal to `tradeListDisplay.js :: MARKS` (now exported).
+- `TIERS` has left the leaf with the band; nothing remains to hold.
+- `NEED_DEALT_ROWS_COPY` and `WORKING_CHAIN_STATUSES_COPY` are held as before.
+
+**(3) For the last close.**
+- The mutation manifest takes one more name: `tests/generators/faultsNeed.test.js`.
+- The four size figures are in the table above.
