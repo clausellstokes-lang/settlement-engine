@@ -3415,7 +3415,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "CLOSE-DOORS-1A (2026-11-18, the chair's ruling CL18): no longer a colour line: since BAR5-MARKS e8068a494 (L2/L4/L5) it carries the LATE declaration `excludes: ['crisis: under_siege']` with its siege twin (DESC_LATE_SIBLINGS), read after the draw; recorded here and not in `excludes`, as every late-declared key of this ledger is (institutionProseDeclared's column law counts only draw-time declarations)"
     },
     {
       "id": "town|Defense|Free company hall#1",
@@ -3423,7 +3424,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "CLOSE-DOORS-1A (2026-11-18, the chair's ruling CL18): no longer a colour line: since BAR5-MARKS e8068a494 (L2/L4/L5) it carries the LATE declaration `excludes: ['crisis: under_siege']` with its siege twin (DESC_LATE_SIBLINGS), read after the draw; recorded here and not in `excludes`, as every late-declared key of this ledger is (institutionProseDeclared's column law counts only draw-time declarations)"
     },
     {
       "id": "town|Defense|Warden's Lodge#0",
@@ -5230,7 +5232,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "CLOSE-DOORS-1A (2026-11-18, the chair's ruling CL18): no longer a colour line: since BAR5-MARKS e8068a494 (L2/L4/L5) it carries the LATE declaration `excludes: ['crisis: under_siege']` with its siege twin (DESC_LATE_SIBLINGS), read after the draw; recorded here and not in `excludes`, as every late-declared key of this ledger is (institutionProseDeclared's column law counts only draw-time declarations)"
     },
     {
       "id": "metropolis|Religious|Great cathedral#1",
@@ -5238,7 +5241,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "CLOSE-DOORS-1A (2026-11-18, the chair's ruling CL18): no longer a colour line: since BAR5-MARKS e8068a494 (L2/L4/L5) it carries the LATE declaration `excludes: ['crisis: under_siege']` with its siege twin (DESC_LATE_SIBLINGS), read after the draw; recorded here and not in `excludes`, as every late-declared key of this ledger is (institutionProseDeclared's column law counts only draw-time declarations)"
     },
     {
       "id": "metropolis|Religious|Hospital network#0",

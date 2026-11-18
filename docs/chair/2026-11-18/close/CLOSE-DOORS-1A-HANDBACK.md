@@ -7,10 +7,16 @@ register was last taken) and f19c3b28b (where the move grammar's figures were la
 run alone, to a file, through `sh scripts/gate-tail.sh`. No page line cured, no test written, skipped or weakened; no
 ceiling raised. I sign nothing.
 
-STATUS: **A1 TO A5 DONE.** 15 of my 20 files green alone at my tip (all 20 red at the base); 5 left red, each named
-below with its cause and sent to the chair (one C4 ceiling, one law, three rows no stored value can cure).
+STATUS: **A1 TO A5 DONE, AND THE CHAIR'S RULINGS CL11, CL14, CL17, CL18, CL19 TAKEN.** 19 of my 20 files green alone at
+my tip (all 20 red at the base); 1 left red by ruling: proseComposed's A0b arm, short of green by exactly the eight
+over-claims no declaration covers (CL14). One new red outside my list, named to the chair: presumptionClasses.walker
+(CL18's move).
 
 ## WHERE MY RUN DIFFERS FROM THE BRIEF
+
+- (The chair's correction CL11.) The stored figures were last true at **6483322cc**, the last close's Part 1 tip, not at
+  6c117344f. My bases (e56e112e2 for the census, ee2bcd375 for the register's pins) hold the same census, annex, leaves
+  and pool-meta digests as 6483322cc (measured); the A0b tallies are measured at 6483322cc itself.
 
 - The committed census was last taken at **e56e112e2** (the BAR4 close's own tree), BEFORE JOIN-16 merged the round BAR5
   (points 1 to 9). So the census, the shift register, the byte rows and several ledgers move for BAR5's landings too
@@ -62,22 +68,22 @@ below with its cause and sent to the chair (one C4 ceiling, one law, three rows 
 | tests/lint/wiringCensusDeclared.walker.test.js | 1 → 0 | (a) the stale census |
 | tests/data/dossierStateProseProjection.contract.test.js | 9 → 0 | (a) the register's pins, the counts |
 | tests/domain/composeStateProse.test.js | 4 → 0 | (a) counts; DECLARED_APART's DS-ECO-6 row (b), by identity |
-| tests/lint/proseComposed.walker.test.js | 2 → 1 | (a) the corpus count; **A0b ceilings: C4, left red for the chair** |
+| tests/lint/proseComposed.walker.test.js | 2 → 1 | (a) the corpus count; A0b: the under-claims owed (CL14); **the over-claims red by exactly eight, class (c) (CL14)** |
 | tests/lint/proseWaveGate.walker.test.js | 3 → 0 | (a) |
 | tests/lint/proseMoveGrammar.walker.test.js | 3 → 0 | (a) under PM1 |
 | tests/lint/proseEntryContradiction.walker.test.js | 4 → 0 | the breach anchor (b) by text (BR32 (5)); three counts (a) |
 | tests/lint/proseCorpusBytes.test.js | 2 → 0 | (a) under B3 |
 | tests/lint/proseNumerics.test.js | 1 → 0 | (b) five pure line moves, re-keyed by text |
-| tests/domain/facts/census2dTables.test.js | 3 → 1 | (a) STRESS_DESCS, CULTURE ×2 ledgers; **PRESSURE wartime(losing)[0]: left red, no stored value can express it (STOP sent)** |
-| tests/domain/facts/census2eTables.test.js | 4 → 2 | (a) as 2d and POLITICAL_FLAVOR ×5 rows; **PRESSURE as 2d; POLITICAL_FLAVOR stable[2] (calm's order): left red (STOP sent)** |
-| tests/domain/facts/census2gDailyLifePriest.test.js | 3 → 1 | (a) as 2d; **PRESSURE as 2d** |
+| tests/domain/facts/census2dTables.test.js | 3 → 0 | (a) STRESS_DESCS, CULTURE ×2 ledgers; PRESSURE by the reader's cure (CL17 (1)) |
+| tests/domain/facts/census2eTables.test.js | 4 → 0 | (a) as 2d and POLITICAL_FLAVOR ×6 rows; the readers' cures CL17 (1), (2) |
+| tests/domain/facts/census2gDailyLifePriest.test.js | 3 → 0 | (a) as 2d; CL17 (1) |
 | tests/domain/facts/declarationRegisters.test.js | 1 → 0 | (a) its own door, a shrink |
 | tests/generators/tieProseDeclared.test.js | 2 → 0 | (a) (red at 6c117344f too) |
 | tests/generators/institutionProseDeclared.test.js | 1 → 0 | (a) (red at 6c117344f too) |
 | tests/generators/npcLoyaltyGuardRows.test.js | 1 → 0 | (b) three rows by identity (red at 6c117344f too) |
 | tests/data/colourMarks4h.test.js | 2 → 0 | (a) (red at 6c117344f too) |
 | tests/domain/bar3CorpusGuards.test.js | 1 → 0 | (b) by text, v3 → v4 |
-| tests/generators/houseDescLateReRead.test.js | 1 → 1 | the length (a) re-pinned; **the per-key arm it hid: (ii) a LAW, left red (sent)** |
+| tests/generators/houseDescLateReRead.test.js | 1 → 0 | the length (a) re-pinned; the per-key law it hid cured at the colour column (CL18) |
 
 Other readers of what I re-took, each alone, the same at the base and my tip unless said: census5dTablePools 2/2,
 holderCitesBySymbol 3/3, proseLicenceCard 12/12, proseTasteInterested 4/4, sourceCitationIntegrity 18/18,
@@ -87,17 +93,43 @@ dossierProseManifest 15/17 at both (its two drift arms read the golden corpus: C
 
 ## C4 · ROWS LISTED FOR THE CHAIR (not banked, not raised)
 
-1. `tests/lint/proseComposed.walker.test.js` A0b "THE SHIPPED CORPUS READING … SHRINK-ONLY": over-claims 54 > ceiling 46
-   (45 + 1 OWED), under-claims 2097 > 2016; identical at the base. Against 6c117344f (43 / 2017): +11 over-claims, all on
-   DS-GEN-17 ADMINISTERED: 9 on "{settlement} has no court sitting and no gaol in use." (LEFT-LINES 094a6b8f6, point 37),
-   2 on "{settlement} keeps a gaol of its own, though no court sits here to try anyone." (BAR6-CULTURE d9857d7ce, point
-   10). Under-claims +95 / −15 on 29 new lines: BAR7-DESKS 1627c330a 42 (DS-DEF-12 ample ×5 lines, DS-ECO-2 surplus ×2,
-   DS-POW-3, DS-POW-5 secularBrutalism and autocrat), c51e7e449 5, 7a9e8e2ad 5; BAR6-DEFDESK be3585040 9 and 0218a4df8 4;
-   LEFT-LINES 7; BAR6-ECON 528c5dece 7; BAR6-POWERS 5843c7f74 6; SEAM-CULTURE 1d72767c8 6; SEAM-DESKS 7a2d9a895 3;
-   BAR6-CULTURE 1. The cure the arm names: the census licensing the claim, or the line reworded. The full list:
-   `under-new-attrib.tsv` in my scratch (each pool, line and commit).
+proseComposed's A0b, ruled under CL14 (below): the eight class (c) over-claims are the only rows left. The under-claims
+by seat and the full first measure: `under-new-attrib.tsv` in my scratch.
 
-## LAWS AND STOPS SENT TO THE CHAIR
+## THE CHAIR'S RULINGS, TAKEN (each its own commit)
+
+- **CL19** (bbb672c8c): the `vids` note says the law was BREACHED ONCE: 14 moves in seven DS-DEF pools, cause
+  be3585040 (the curfew pool's new v2 first appears there; only a shorter phrase greps at 1b7049ea6), why the door did
+  not refuse (`generate-dossier-state-prose.mjs:493`, positional). My seven equal the chair's seven, move for move.
+- **CL18** (ea65bada7): the four stale keys leave `src/data/institutionDescColour.js` in 8c0a3cd71's form (deleted). No
+  `src/` file imports the column (grep: only a comment at `institutionDescVariants.js:2245`). The ledger's four rows:
+  colour false, and the late declaration recorded in `colourReadBy`, NOT in `excludes`: every late-declared key of the
+  ledger keeps empty draw-time columns (17 rows), and institutionProseDeclared's column law reds 78 vs 74 when the four
+  carry `excludes` (shown, restored). houseDescLateReRead 5/5, colourMarks4h 4/4. The readers: style-law-scan
+  (styleLaw.walker 20/20), table-pools (census --check exit 0, census5dTablePools 2/2), law5w (bar6CultureLines,
+  bar6SeamDesks, coherenceAgreeCures: green at both), presumptionClasses.shared: **presumptionClasses.walker "no NEW
+  undeclared line" reds: three hits (the billet line `ease` and `outside`, the cathedral line `outside`), no longer
+  exempt as colour; named, not banked.**
+- **CL17 (1)** (3180c1a14): `declaredLiteralsOf` reads a two-branch conditional text as two texts. No arm iterates the
+  found texts against a ledger, so the new branch enters none. Negative control: `excludes` mutated, the arm reds (on
+  the ledger's text; the other branch is read by no arm). census2d 11/11, census2g 14/14.
+- **CL17 (2)** (076050ebb, then the ledger row b88bcac83): the found declaration's `calm` normalized last (`calmLast`,
+  exported from census2dTables, used at its row arm and census2e's POLITICAL_FLAVOR arm); the draw reads the list by
+  `includes`/`some` (`crisisAdmits`), never an index. Negative control: two non-calm entries swapped: red. stable[2]
+  re-taken to its live declaration. census2e 25/25.
+- **CL17 (3)**, the ledger validator: `scripts/census/census4-validate-ledger.mjs` (CENSUS-4 phase A, 42f212b1d) checks
+  every ledger in `docs/census/declarations/` against `census4-extract-pools.mjs`'s row-shaped output and the
+  VOCABULARY atoms. NO GATE RUNS IT (no reference in package.json, .github, .husky or any test). It cannot open since
+  CENSUS-2's pool-shaped ledgers joined the same directory (2c1428102, 2026-11-04, ARRIVAL_MEMORIES.json first): the
+  extract emits no such pool, so it throws at the first. A door that cannot open: the chair's to name to the owner.
+- **CL14** (7a0baadd8): UNDER_CLAIM_OWED 734 → 815 (2016 at 6483322cc → 2097; 96 new − 15 gone, by seat in the note).
+  OVER_CLAIM_OWED stays 1: of the eleven new over-claims (all DS-GEN-17 ADMINISTERED), 3 are covered by the line's own
+  declaration (v4 `hasCourtSystem` by `no court sits`; v5 `hasCourtSystem` by `no court sits`, `hasPrison` by `no
+  prison`) and fit the slack the ceiling held (46 over 43); **8 are class (c), for the chair**: v4 (BAR6-CULTURE
+  d9857d7ce) `settlement` (the slot); v5 (LEFT-LINES 094a6b8f6) `settlement` and `hasGranary`, `hasHospital`,
+  `hasMagicInst`, `hasMilitaryInst`, `hasNavy`, `hasWatch` (the word "has"). The arm reads 54 > 46: red by exactly those.
+
+## LAWS AND STOPS SENT TO THE CHAIR (each since answered: above)
 
 - 03:4x UTC, before commit (A1): `gen:dossier-prose` moves one generated file, proseNorms' comment count only.
 - 04:0x UTC (C4): proseComposed's A0b ceilings, above.
@@ -112,8 +144,9 @@ dossierProseManifest 15/17 at both (its two drift arms read the golden corpus: C
 
 ## C7 · THE NET (my tip, each gate alone through `sh scripts/gate-tail.sh`)
 
-- `npx vitest run tests/lint`, BY MESSAGE: base 70e557d5b **27 files / 66 tests red**; my tip **20 / 38**. 28 arms turn
-  green (all of my list's lint files); **none turns red**. One message moves on an arm red at both:
+- `npx vitest run tests/lint`, BY MESSAGE: base 70e557d5b **27 files / 66 tests red**; my tip **20 / 39**. 28 arms turn
+  green (all of my list's lint files); **one turns red: presumptionClasses.walker "no NEW undeclared line" (CL18's move,
+  named)**. One message moves on an arm red at both:
   observedShapeReaders' "an execution INPUT drifted since the mint" now also names `src/data/proseNorms.generated.js`
   (my one comment): that register's door is CLOSE-DOORS-1B's. No test file added or removed (no estate count moves).
 - `npm run typecheck:ratchet` exit 0 (167 errors, ceiling 167; `tsc -p tsconfig.full.json` reads the same 167 at the
@@ -126,8 +159,10 @@ dossierProseManifest 15/17 at both (its two drift arms read the golden corpus: C
 Files under `src/` or `docs/content/` I changed (CLOSE-DOORS-1B: re-run your doors' `--check` after the merge):
 - `docs/content/wiring-census.json` (the census, re-taken at its door);
 - `docs/content/prose-shift-register.json` (five rows' pins and note);
-- `src/data/proseNorms.generated.js` (one comment count; generated).
-observedShapeReaders' input drift now also lists `src/data/proseNorms.generated.js` (its door absorbs it).
+- `src/data/proseNorms.generated.js` (one comment count; generated);
+- `src/data/institutionDescColour.js` (four entries deleted, CL18; imported by no `src/` file).
+observedShapeReaders' input drift now also lists `src/data/proseNorms.generated.js` (its door absorbs it). The presumption-classes
+register (`tests/lint/presumptionClasses.register.json`) sees three new hits on the two lines CL18 took out of the colour column: the chair's to rule.
 Other stored files I wrote: `scripts/.prose-byte-baseline.json`, `tests/lint/.prose-numerics-baseline.json`,
 `tests/lint/undeclaredLines.register.json`, eight ledgers under `docs/census/declarations/`. The bundles and the golden
 door read `src/`: proseNorms' comment is the only `src/` byte; the engine and AI bundles' source hashes may move by it.
@@ -137,17 +172,20 @@ door read `src/`: proseNorms' comment is the only `src/` byte; the engine and AI
 - The prose books (the wiring census, its register of shifts, the byte sizes, the declarations ledgers) were behind the
   writing two rounds had done. I brought each up to date through its own procedure, once, and named for every changed
   figure which branch's writing moved it. Nothing a town prints was changed.
-- Five checks of my list stay red on purpose, because making them green would have meant raising a limit or rewriting a
-  check: one counts sentences that claim more than the record licenses (11 more than its limit, all in one pool, two
-  branches' lines), one says four house descriptions are marked both "colour" and "re-read late", and three are rows my
-  procedures cannot express. Each is with the chair.
+- One check of my list stays red on purpose: it counts sentences that claim more than the record licenses. The chair
+  ruled that a new claim is only "owed" where the line itself declares what it claims; eight claims in two new lines of
+  one pool do not, so the check stays eight over its limit until those lines or the census are cured.
+- On the chair's rulings I also fixed two blind spots of the ledger checks (a sentence written as an either/or, and the
+  order of the word "calm"), and took four house descriptions out of the "colour" list because they now carry a
+  condition. That last move makes another check see three new sentence findings; it is with the chair.
 - One correction of my own: I first wrote that every new line took the next number in its pool; in seven defence pools a
-  new line went in front of older ones and moved their numbers. The record now says so.
+  new line went in front of older ones and moved fourteen numbers. The record now says so, and that the rule against
+  renumbering was broken once (the check that should have refused it compares positions only).
 
 ## WHAT IS LEFT, IN ORDER
 
-1. The five reds above, for the chair's rulings: proseComposed A0b (C4), houseDescLateReRead's per-key law, and the
-   two ledger rows (census2d/2e/2g PRESSURE; census2e POLITICAL_FLAVOR stable[2]).
+1. For the chair: proseComposed's eight class (c) over-claims (CL14); presumptionClasses.walker's three new hits (CL18);
+   the ledger validator that cannot open (CL17 (3)), a debt for the owner.
 2. CLOSE-DOORS-1B, after the merge: the observed-shape readers' input drift (now with proseNorms), the edge bundles'
    freshness, and every door that reads `docs/content/` or `src/data/`.
 3. CLOSE-DOORS-2: dossierProseManifest's drift arms (the golden corpus), red identically at the base and here.

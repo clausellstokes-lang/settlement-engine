@@ -503,8 +503,26 @@
           "lineId": "POLITICAL_FLAVOR.stable[2]",
           "text": "The kind of place that historians overlook and travellers remember fondly: no dramatic history, but a persistent one",
           "needs": [],
-          "excludes": [],
-          "crisis": "any",
+          "excludes": [
+            "crisis: under_siege",
+            "crisis: famine",
+            "crisis: occupied",
+            "crisis: plague_onset",
+            "crisis: wartime"
+          ],
+          "crisis": [
+            "calm",
+            "politically_fractured",
+            "indebted",
+            "recently_betrayed",
+            "infiltrated",
+            "succession_void",
+            "monster_pressure",
+            "insurgency",
+            "religious_conversion",
+            "slave_revolt",
+            "mass_migration"
+          ],
           "colour": true,
           "stop": []
         },
