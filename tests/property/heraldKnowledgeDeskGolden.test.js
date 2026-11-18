@@ -135,6 +135,12 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 446 → 475 at THE CLOSE OF THE TAIL ROUND (TAIL-CLOSE-DOORS-3; the owner's word of 2026-11-15 06:00 UTC, ODQ §934.105; record
     // docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): the round's declared moves re-deal the fresh campaign's cast
     // and figures, so its simulated year's news is re-dealt — on rr-fresh-full|1 65 section rows leave and 94 arrive (itemCount 444 → 473).
+    // 475 → 475 at THE CLOSE OF THE ROUNDS BAR5 TO BAR8 (CLOSE-DOORS-2; the owner's word of 2026-11-18 03:03:46 UTC, ODQ §934.105; record
+    // docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json, the chair's ruling CL7, the cause named first): green at 6c117344f,
+    // first red at JOIN-17 point 21 (BIRTH-1, edb5cae92): the realm pulse's resource role reads the town's import list
+    // (tierResourceDynamics.resourceEconomicRole) and BIRTH-1's declared economicState.primaryImports makes soak-a import its hunting
+    // grounds' good, so one beat's reason reads "export and import" and the year re-deals one pulse beat (one section row out, one in;
+    // itemCount 473 unmoved). The content sha re-recorded through the door at the doors' branch over Part 1's final tip 0af60594a.
     expect(Object.keys(manifest)).toHaveLength(475);
   });
 
