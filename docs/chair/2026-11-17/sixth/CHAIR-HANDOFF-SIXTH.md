@@ -2071,3 +2071,13 @@ should be paused or archived by the owner's hand.
   `src/domain/display/guardLineUnderTheLaw.js`); written with the door's own functions (`scanTree`, `bankRow`)
   from a script outside the tree, after CLOSE-DOORS-1B's branch is merged; any count the walker pins moves in the
   same commit.
+- 05:08 UTC, 2026-11-18 · THE FOUR ROWS' SCRIPT IS READY AND DRY-RUN (`docs/chair/2026-11-18/close/tools/four-rows.mjs` on this
+  lane; run from the tree root; it uses the register's own `scanTree`, `hitKey`, `bankedKeys`, `bankRow`,
+  `literalHash` and the door's own line and serialization; WITHOUT `--write` IT WRITES NOTHING; WITH IT, IT REFUSES
+  UNLESS THE FRESH HITS ARE EXACTLY THE FOUR): on the merge branch at e21f09e40 (before CLOSE-DOORS-1B's rows): 38
+  fresh, the four among them by hash and thing (c57566e5bfaaf1a1 armedForce; 743cc96b12b6c45b and b50dee27dd04b260
+  garrison; 85fc61848472a7ad prison), 34 others (the seat's 13 and 21, banked on its branch). The reason it writes
+  into the register's own table: `after-base: owner-2026-11-18`, with the guarantee of each, the two refusals and
+  the owner's words and hour. THE CHAIR DECIDED NOT TO SEAT THE AFTER-DEPLOY READERS YET: the owner's order was
+  "after this merge one, push and deploy before continuing": they are seated when the pull request is ready for the
+  owner's hand, and the owner is told then.
