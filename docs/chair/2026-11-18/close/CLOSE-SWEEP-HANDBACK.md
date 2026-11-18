@@ -9,7 +9,7 @@ under BRIEF-CLOSE (C1 to C10) and the chair's rulings CL11 (landed points over `
 | item | commit | test · arm | class (C1) | at 70e557d5b → at the tip |
 | --- | --- | --- | --- | --- |
 | S1 | 6e15a77ea | `tests/lint/domainAnyCastBaseline.test.js`, 4 arms | (c) a law: new debt | 4 failed / 15 passed → **19 passed** |
-| S2 | c266e0dc4 | `tests/lint/factLayers.walker.test.js`, arms (a), LEAVES, POOLS | (c) a law: the table wrong; POOLS (a) a shrink | 3 failed / 12 → 2 failed / 13: **LEAVES green**; (a) LEFT (two instrument gaps, below); POOLS = the door's shrink, CLOSE-DOORS-1B's |
+| S2 | c266e0dc4 | `tests/lint/factLayers.walker.test.js`, arms (a), LEAVES, POOLS | (c) a law: the table wrong; POOLS (a) a shrink | 3 failed / 12 → 2 failed / 13: **LEAVES green**; (a) red on two instrument gaps, closed by S4.2 (below); POOLS = the door's shrink, CLOSE-DOORS-1B's |
 | S3 | none (CL15) | `tests/lint/siteCoherenceRatchet.test.js` C1 | (a) a declared move, re-taken by its door: CLOSE-DOORS-1B's | analysis only, unchanged |
 | S4.1 | ae0af7ca9 | `tests/domain/worldFactRederive.test.js` A4 | (b) a stale roster | A4 red → **A4 green** (A7 red at both, same message: CLOSE-DOORS-2's) |
 | S4.2 | 890296904 | `tests/lint/factLayers.walker.test.js` arm (a): the instrument | (c) a law: a guard blind to two leaves | arm (a) **green**; the table unchanged |
@@ -68,7 +68,7 @@ walker's own `leafArm` on its own grid, `/tmp/claude-0/probe/fl/leaves.probe.tes
 instrument `tests/lint/factLayers.shared.mjs :: leafTouches` has a call branch for `hasInstitution`, `hasOtherNpc`, `sharesPower`,
 `sharesPlace`/`loneTie` and `tradeAtWork` only: it never calls these two, so their honest declarations read as "unread". The cure is in
 the walker's instrument (a branch calling each, as `tradeAtWork`'s), not in the table; striking the declarations would make the table
-lie. Not this seat's file: named. Arm (a) stays red on `goodExported` (first in order).
+lie. Not this seat's file: named. At c266e0dc4 arm (a) stood red on `goodExported` (first in order).
 
 **The pools arm after the move:** `r.violations` differs from `REGISTER.pools` by the one shrink row only
 (`DS-ECO-6::TIER: minor shadow activity (≥3)`, "declares organised crime (layer 3)"): **no pool or line that declares `legal house`,
@@ -161,7 +161,40 @@ names it in a comment only).
 
 ## THE PROOF THAT NO TOWN AND NO PAGE MOVES
 
-NET_PROOF_PLACEHOLDER
+The commits that touch `src/` are S1 (6e15a77ea, comments only) and S2 (c266e0dc4, a data table no `src/` file reads); S4.1, S4.2,
+S4.3 and S5 touch no file under `src/`. Each proof at the base 70e557d5b and at the commit, each tree a `git archive` (integrity-counted).
+
+1. **The 525 reference configurations, hashed whole** (`sha256(JSON.stringify(settlement))`, the golden master's own `goldenCorpus()` and
+   `keyOf`, its own `generateSettlementPipeline(cfg, null, { seed, customContent: {} })`, from an untracked probe outside every tree,
+   `/tmp/claude-0/probe/gm/gm.probe.test.js`; never `UPDATE_GOLDEN`): **525 of 525 equal** (`cmp` of the two manifests) at 6e15a77ea, at
+   c266e0dc4 and at the tip 1039b8c26.
+2. **The thirty towns of the seventh read** (`seeds.bar7.txt`, `lane/read7-prep-2026-11-17`) rendered by PAGE-COPY (`census3.sh … 4
+   --seeds … --count-only`, `HOLDERS=holders.tipA.json`): **30 of 30 dumps byte-equal** (`diff -r`) at 6e15a77ea and at the tip 1039b8c26.
+   At c266e0dc4, rendered while the net and a bisect loaded the machine, ONE dump differed (below, (B)); re-rendered 3 times it equalled the
+   base, and the tip's quiet run is 30 of 30.
+3. **`npx vitest run tests/architecture`**: 347 / 347 at the base (from a clean path) and at the tip.
+4. **Every test file that imports a changed file** (directly: `economicsCrisisMarks.js`, `factsOf.js`, `seatMembers.js`, `sovereign.js`,
+   `factLayers.js`; 122 test files), each alone, base and tip, by name and by whole message: **121 of 122 identical**; the one that differs is
+   `tests/lint/factLayers.walker.test.js`, by the two arms this branch cures (base 12/15, tip 14/15; the third, POOLS, is the door's
+   shrink). Red at both ends with the same message (none of mine): `bar3CorpusGuards` 1, `bar6PowersCards` 1, `census2dTables` 3,
+   `houseDescLateReRead` 1, `presumedThings.walker` 2, `ruinFilterRoster.walker` 1.
+
+**(B) THE SEED THAT DIFFERED ONCE UNDER LOAD** (the chair's word, word for word). Seed **`bar0-thorp-calm-rand-45`**; tab **`Systems/Power`**
+(the dump's heading `== Systems/Power ==`, line 183); the base dump holds, as its last two lines of that tab (lines 222-223), and the run
+under load at c266e0dc4 lacks:
+
+    Patron deity
+    Assign a patron god to awaken the settlement’s religion layer. Upgrade to premium · Available at launch to author and assign deities.
+
+(every other line of the 1,178 the same; both files kept: `/tmp/claude-0/keep/bar0-thorp-calm-rand-45.base.txt`,
+`/tmp/claude-0/keep/bar0-thorp-calm-rand-45.s2-under-load.txt`). **The cause: the probe captured before a lazy part mounted, not the page.**
+That block is `src/components/settlement/DeityAssignmentPanel.jsx`, a `React.lazy` chunk (`src/components/dossier/dossierLazyTabs.js:37`)
+mounted under `<Suspense fallback={null}>` (`src/components/OutputContainer.jsx:725`): until the chunk resolves it renders nothing, and
+under load it resolved after PAGE-COPY's "the panel's text holds still" window closed. **The six quiet re-renders** (that one seed, one
+worker, nothing else running), six at the base and six at the tip: **12 of 12 byte-equal to the base dump**. The page renders one way from one
+record. The wait belongs in the probe: `docs/chair/2026-11-16/probes/PAGE-COPY/render.census3.jsx` (on `lane/chair-2026-11-08`), its
+snapshot of a tab, should wait for every `Suspense` boundary of the tab to resolve (or for the lazy `DeityAssignmentPanel` to mount) before
+the stillness test: an item for the probe's keeper, not changed here.
 
 ## THE NET (C7)
 
@@ -202,3 +235,6 @@ archive sat under `/tmp/claude-0/arch/` and read 346/347; from a clean path, 347
 - `tests/lint/siteCoherenceRatchet.test.js` C1: CLOSE-DOORS-1B's door (CL15); `siteGenesis.js:252`'s arm order on the pull request's list
   of known faults.
 - `tests/domain/worldFactRederive.test.js` A7: CLOSE-DOORS-2's.
+- The PAGE-COPY probe's wait for a lazy part (`docs/chair/2026-11-16/probes/PAGE-COPY/render.census3.jsx`, `lane/chair-2026-11-08`):
+  for the probe's keeper ((B) above).
+- The presumed-things door's four lines (S4.4): recorded by the owner's word; CLOSE-DOORS-1B writes the rows.
