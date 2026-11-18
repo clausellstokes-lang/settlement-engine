@@ -495,7 +495,18 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // BAR4-PEOPLE +3,898 (the pair readings); then BAR4-RECORD +3,229, BAR4-SAFETY +2,746, BAR4-HISTORY +2,669, BAR4-CORPUS-ECO +1,724,
 // BAR4-CORPUS-DEF +1,023, each on its own base; BAR4-FIRSTPAINT's seam moves no byte of the worker and the repair seat's last cures
 // +220. Recorded AT the measured figure; MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 2356121;
+// 2,356,121 -> 2,525,028 (2026-11-18, CLOSE-DOORS-1B, THE CLOSE OF 2026-11-18: the working line 70e557d5b + the close's three merges,
+// merged 7a7204c00, the edge bundles re-derived 22e072a49; re-recorded ONCE under the chair's ruling CL12, ON THE OWNER'S WORD: on
+// 2026-11-18 at 03:42:43 UTC the owner wrote in the chair's chat, the whole of it, "I defer these to you:" then, after an empty line,
+// "the Vercel limit; "accept the worker size")", answering the chair's question of 03:24 UTC, and THE CHAIR ACCEPTED IT; it stays on
+// the owner's veto list by name): A RISE OF 168,907 B, OVER THE 60,000 STOP, accepted. MEASURED by one fresh `npm run build` of each
+// tree, read by this file's own arm (VERIFY_DIST=1): the last close's tip 6483322cc and the line before the rounds 600b7683a read
+// 2,356,121; this tree reads 2,525,028 (70e557d5b the same: the close's merges move no byte of the worker). THE CAUSE, MEASURED BY
+// ROUND (one build of each boundary of the line's first parent): the round BAR5 (JOIN-16 points 1 to 9, to db62ab299) +54,698;
+// SECRETS-1 and DEBT-1 (JOIN-17 points 30 to 32, 47666fd8f -> 580cc26c6) +50,887 (the rare secrets' tables); the round BAR6
+// (points 1 to 11, to 570e3c351) +25,413; then BIRTH-3 (point 33) +14,690, the sixth chair's points 36 to 53 +12,678, BAR7 (20 to
+// 29) +7,995, the seam (12 to 19) +2,546. Recorded AT the measured figure; MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 2525028;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
