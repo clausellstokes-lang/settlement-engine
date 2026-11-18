@@ -3073,7 +3073,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Visitors to {settlement} are warned to keep their belongings close.",
+          "marks": [
+            "no watch"
+          ],
+          "text": "There is no watch at {settlement}, and visitors are warned to keep their belongings close.",
           "slots": [
             "settlement"
           ],

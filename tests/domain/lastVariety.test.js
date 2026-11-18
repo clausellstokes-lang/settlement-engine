@@ -36,7 +36,7 @@ const NEW_LINES = [
   { pool: 'Moderate', vid: 9, marks: ['tier: ≤ village'] },
   { pool: 'Moderate', vid: 10, marks: ['no court or gaol'] },
   { pool: 'Unsafe', vid: 5, marks: ['no guardPresence', 'crime wave'] },
-  { pool: 'Unsafe', vid: 6, marks: [] },
+  { pool: 'Unsafe', vid: 6, marks: ['no watch'] },
 ];
 const BASE_COUNTS = { 'Very Safe': 5, Safe: 5, Moderate: 8, Unsafe: 4 };
 const variantOf = (/** @type {string} */ pool, /** @type {number} */ vid) => (BLOCK.pools[pool] || []).find((/** @type {any} */ v) => v.vid === vid);
@@ -90,7 +90,7 @@ describe('LAST-VARIETY item 1: two lines at the end of each DS-DEF-3 safety pool
       expect(vids, pool).toEqual(Array.from({ length: BASE_COUNTS[/** @type {keyof typeof BASE_COUNTS} */ (pool)] + 2 }, (_, i) => i + 1));
     });
     expectNoSeedFailures(failures, 'the vids law: appended, nothing renumbered');
-    for (const { pool, vid, marks } of NEW_LINES) expect(variantOf(pool, vid)?.marks ?? [], `${pool} v${vid}`).toEqual(marks);
+    for (const { pool, vid, marks } of NEW_LINES) expect(variantOf(pool, vid)?.marks, `${pool} v${vid}`).toEqual(marks);
   });
 
   it('the towns that admitted one or two lines at the base admit three or more, on all three forms', () => {
@@ -136,8 +136,6 @@ describe('LAST-VARIETY item 1: two lines at the end of each DS-DEF-3 safety pool
       expect(broken.refused.length, `${pool} v${vid}: only "${mark}" is refused`).toBe(1);
     });
     expectNoSeedFailures(failures, 'each premise refuses its line exactly where it fails');
-    // the unmarked line (Unsafe v6) declares nothing, so every Unsafe town admits it
-    expect(variantFactDeclaration(variantOf('Unsafe', 6)).needs).toEqual([]);
-    expect(variantFactDeclaration(variantOf('Unsafe', 6)).excludes).toEqual([]);
   });
 });
+
