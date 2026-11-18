@@ -340,6 +340,41 @@ describe('FAULTS-BIRTH (c) · an isolated buyer of a material the land never hel
     }), 'the commons on a live pasture');
   }, 600_000);
 
+  test('FR24 (2): the common proves its pasture for every reader: r2r-village-23 one story; an isolated fuller beside a common is fed', () => {
+    const s = town('r2r-village-23');
+    expect(HI.impliedGroundsOnPage(s).there, 'r2r-village-23: the pasture proven').toContain('grazing_land');
+    expect(HI.impliedGroundsOnPage(s).used, 'r2r-village-23: no pasture under Depleted').not.toContain('grazing_land');
+    expect(HI.housesShortOf(s).has('Fuller'), 'r2r-village-23: the Fuller at work').toBe(false);
+    const fuller = { ...built(['Fuller', 'Common grazing land'], 'isolated'), resourceAnalysis: { gaps: [{ institution: 'Fuller', chain: 'wool', kind: 'missing', impact: 'x' }] } };
+    const picked = birthPicksOn(fuller, groundSeedFor('grazing_land', false));
+    expect([...picked[BIRTH_PICKS].grounds], 'the common proves its pasture, there whatever the seed').toEqual([['grazing_land', 'there']]);
+    const lone = { ...built(['Fuller'], 'isolated'), resourceAnalysis: { gaps: [{ institution: 'Fuller', chain: 'wool', kind: 'missing', impact: 'x' }] } };
+    expect(HI.impliedGroundsOnPage(lone).used, 'NEGATIVE: no common: the isolated fuller reads its pasture used up').toEqual(['grazing_land']);
+  }, 600_000);
+
+  test('FR24 (2) over the census\'s 720: a proven pasture stands with a proving house (a common among them where no herder proves it), never under Depleted; no house short of livestock, wool or hides stands beside no used-up ground of it', () => {
+    /** @type {string[]} */
+    const bad = []; let proven = 0, short = 0;
+    expectNoSeedFailures(collectSeedFailures(CENSUS, (seed) => {
+      const s = town(seed);
+      const page = HI.impliedGroundsOnPage(s);
+      const depleted = new Set([...(s.config?.nearbyResourcesDepleted || []), ...page.used]);
+      for (const g of page.there) if (depleted.has(g)) bad.push(`${seed}: ${g} proven and Depleted`);
+      if (page.there.includes('grazing_land')) { proven++; if (!(impliedGroundsOf(s).houses.get('grazing_land') || []).length) bad.push(`${seed}: a proven pasture with no proving house`); }
+      const v = HI.ventureHouseOf(s);
+      for (const [name, noun] of HI.housesShortOf(s)) {
+        const fams = ['livestock', 'wool', 'hides'].filter((k) => new RegExp(`\\b${k}\\b`).test(noun));
+        if (!fams.length || v?.name === name) continue;
+        short++;
+        const gives = { livestock: ['grazing_land', 'alpine_pasture'], wool: ['grazing_land', 'alpine_pasture'], hides: ['hunting_grounds', 'grazing_land', 'alpine_pasture'] };
+        if (!fams.some((k) => gives[/** @type {'livestock'|'wool'|'hides'} */ (k)].some((g) => depleted.has(g)))) bad.push(`${seed}: ${name} short of ${noun}, no ground of it used up`);
+      }
+    }), 'the census');
+    expect(bad).toEqual([]);
+    expect(proven, 'towns with a proven pasture (the anchor)').toBeGreaterThan(150);
+    expect(short, 'houses short of livestock, wool or hides (the anchor)').toBeGreaterThan(40);
+  }, 1_800_000);
+
   test('the three views read the grounds alike in every anchor town', () => {
     expectNoSeedFailures(collectSeedFailures([...RING_TOWNS, ...ISOLATED_TOWNS], (seed) => {
       const s = town(seed);

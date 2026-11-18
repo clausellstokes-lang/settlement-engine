@@ -271,10 +271,10 @@ export function groundPicksAtBirth(record, seed) {
   // PROVES THE PASTURE: where a live Common grazing land stands, the grazing land is there (`GROUND_KEPT_BY`)
   const es = /** @type {{ foodSecurity?: { foodRecord?: { foodSources?: unknown } } } | null | undefined} */ (record?.economicState);
   const fed = arr(es?.foodSecurity?.foodRecord?.foodSources).map(str);
-  const standing = new Set(liveNative(record).map((i) => idOfHouse(i)));
+  const keptHere = groundsKeptOf(record);
   for (const ground of [...provingHouses(record).keys()].sort()) {
     const food = Object.prototype.hasOwnProperty.call(GROUND_FOOD, ground) ? GROUND_FOOD[ground] : '';
-    const kept = Object.prototype.hasOwnProperty.call(GROUND_KEPT_BY, ground) && GROUND_KEPT_BY[ground].some((id) => standing.has(id));
+    const kept = keptHere.includes(ground);
     const spoken = (!!food && fed.includes(food)) || kept;
     states.set(ground, spoken ? 'there' : seedPicks(seed, `ground::${ground}`, SUPPLY_ODDS.groundThere) === false ? 'used' : 'there');
   }
@@ -285,6 +285,15 @@ export function groundPicksAtBirth(record, seed) {
 const GROUND_FOOD = Object.freeze(/** @type {Record<string, string>} */ ({ fishing_grounds: 'fish', river_fish: 'fish', grazing_land: 'livestock', hunting_grounds: 'game' }));
 /** FR21 (2): the houses of the roster that are the ground itself, at work (catalogue ids): the common is the pasture. */
 const GROUND_KEPT_BY = Object.freeze(/** @type {Record<string, ReadonlyArray<string>>} */ ({ grazing_land: Object.freeze(['common_grazing_land']) }));
+/**
+ * FR21 (2), FR24 (2) (the chair's rulings, 2026-11-18): THE GROUNDS A LIVE HOUSE OF THE ROSTER KEEPS THERE (`GROUND_KEPT_BY`: the
+ * common, its pasture): one reading for every reader of a ground's story, the birth's pick and the isolated buyers' reading
+ * (`houseInputAtHand.js :: neverHeldGroundsUsed`) alike. @param {StoryRecord | null | undefined} record @returns {string[]}
+ */
+export function groundsKeptOf(record) {
+  const standing = new Set(liveNative(record).map((i) => idOfHouse(i)));
+  return Object.keys(GROUND_KEPT_BY).filter((g) => GROUND_KEPT_BY[g].some((id) => standing.has(id)));
+}
 
 /** The word the imports list holds for a family's material ("Timber", "Salt"); '' where the list has none. @param {string} family */
 export const familyWord = (family) => (family === 'desertSalt' ? RUNS_ON_BOUGHT.salt_works : (Object.prototype.hasOwnProperty.call(IMPORT_WORD, family) ? IMPORT_WORD[family] : ''));

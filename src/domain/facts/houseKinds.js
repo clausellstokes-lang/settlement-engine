@@ -185,6 +185,9 @@ export const IMPLIED_GROUND = Object.freeze({
   fishing_community: 'fishing_grounds', // the same
   hunter_s_lodge: 'hunting_grounds', // a lodge proves the grounds it hunts
   wildfowler: 'hunting_grounds', // a wildfowler proves the grounds it hunts (its game; the marsh's yield is reeds)
+  // FAULTS-BIRTH FR24 (2) (the chair's ruling, 2026-11-18): the common proves its pasture, there for every reader (`supplyStory.js ::
+  // GROUND_KEPT_BY` holds the pick there): one reading of the pasture for the land list, the input reader and the isolated buyers
+  common_grazing_land: 'grazing_land',
 });
 
 /**

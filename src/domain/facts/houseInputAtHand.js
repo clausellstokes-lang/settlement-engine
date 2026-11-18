@@ -44,7 +44,7 @@ import { resourceShortageImport } from '../resourceSemantics.js';
 import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE, HOUSE_TRADE_INPUT, HOUSE_NEED_INPUT } from '../../data/crisisDependence.js';
 import { warHoldsIron } from './warIronHook.js'; // BIRTH-3 (BR9): the iron hook's own predicate (EG1: import-free)
 import { BUYER_IMPORT_WORDS, BUYS_AND_WORKS, MATERIAL_OF, RUNS_ON_BOUGHT, TAKERS, isSourceHouse } from './houseKinds.js'; // BIRTH-1: an import-free leaf (EG1)
-import { groundGives, groundOfFamily, impliedGroundsOf, impliedGroundsShown, sourceStoryOf, ventureOnPage, idOfHouse } from './supplyStory.js'; // BIRTH-2: the one reading of the grounds and the stories (EG1); BIRTH-3 (BR8): of the stored record alone
+import { groundGives, groundOfFamily, groundsKeptOf, impliedGroundsOf, impliedGroundsShown, sourceStoryOf, ventureOnPage, idOfHouse } from './supplyStory.js'; // BIRTH-2: the one reading of the grounds and the stories (EG1); BIRTH-3 (BR8): of the stored record alone
 
 /**
  * What each chain's input is CALLED on the record (the economy's goods vocabulary and the nearby-resource keys), and how
@@ -830,7 +830,9 @@ export function neverHeldGroundsUsed(record) {
   if (!hasTradeRouteConnection(str(record?.config?.tradeRouteAccess))) {
     const c = /** @type {Record<string, unknown>} */ (record.config || {});
     const held = [...arr(c.nearbyResources), ...arr(c.nearbyResourcesNative), ...arr(c.nearbyResourcesDepleted)].map(str)
-      .concat([...impliedGroundsOf(/** @type {Parameters<typeof impliedGroundsOf>[0]} */ (record)).states.keys()]);
+      .concat([...impliedGroundsOf(/** @type {Parameters<typeof impliedGroundsOf>[0]} */ (record)).states.keys()])
+      // FR24 (2): a ground a live house keeps there (the common's pasture, `supplyStory.js :: groundsKeptOf`) is held: never spent here
+      .concat(groundsKeptOf(/** @type {Parameters<typeof groundsKeptOf>[0]} */ (record)));
     const short = housesShortOf(record);
     const spent = housesOnSpentGround(record);
     const venture = ventureHouseOf(record);
