@@ -1,0 +1,39 @@
+### tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+AssertionError: expected { reads: 2213, identities: 1551, …(3) } to deeply equal { reads: 2200, identities: 1542, …(3) }
+    at /home/user/t/close-2-0dee69e17/tests/lint/observedShapeReaders.walker.test.js:1652:8
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+AssertionError: the live heuristic inventory must exactly match the frozen one. A lawful shrink is `node scripts/check-observed-shape-readers.mjs --write` on a clean tree — it re-derives inventory, total and identities together and refuses anything that is not a shrink. NEVER hand-edit a row: that throws "observed-shape baseline totals are inconsistent" out of validateLeafBaseline (scripts/lib/observed-shape-baseline.mjs).: expected { violations: 6, stale: +0 } to deeply equal { violations: +0, stale: +0 }
+    at /home/user/t/close-2-0dee69e17/tests/lint/observedShapeReaders.walker.test.js:841:7
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan the provenance drift classifier separates a detector change from an input change THE LIVE ESTATE INSTANCE: a freshly re-minted baseline has NO drift at all
+AssertionError: an execution INPUT drifted since the mint — lawful, and the shrink-only re-freeze absorbs it: expected [ …(8) ] to deeply equal []
+    at /home/user/t/close-2-0dee69e17/tests/lint/observedShapeReaders.walker.test.js:1344:10
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-2-0dee69e17/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
