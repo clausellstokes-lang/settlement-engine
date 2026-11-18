@@ -399,3 +399,58 @@ the share veil, the birth's pick, over the 720 and the 150), P2, W1, M1, M4 gree
 **WHAT FR21 LEAVES, BY NAME**: the transit-pill instance (above); the 8 towns whose stored grazing land is spent beside a common
 (above); the alchemist of r2s-religious_conversion-town-2, short of medicinal herbs on a connected road (FR8's, not this ruling's);
 `supplyStoryLaw :: L5` at 9 (the close's floor).
+
+## FR23 (the chair's ruling of 2026-11-18) — three small items, one commit each
+
+**Tip: __TIP__.** Commits: 01393a55c (1) · 230ab7a44 (2) · this section (3).
+
+**(1) THE TRANSIT PILL IS PASSING TRADE** (`tests/components/leftChainCards.test.jsx :: (b)`): the arm passes over a pill exactly
+when the page prints it as transit, read off the same printed list (`tradeListDisplay.js :: tradeListsAsPrinted`: the pill's own
+"(transit)" mark), with the reason in the arm's dated comment (`computeActiveChains.js` §3, `chainCarrier.js :: chainCarrierOf`).
+r2r-village-2 green; the arm green over the 720 and the 150. It passes over **173 transit pills in 126 towns of the 870**, and EVERY
+ONE stands on an entrepôt chain of its town that carries the good (asserted in the arm): rare spices and exotic dyes 81, furs and
+pelts 21, extraplanar goods 16, caravan trade goods 14, exotic imports 13, contraband goods 11, cargo handling 8, fine metalwork and
+jewelry 5, preserved foods 2, financial services 2. UNDER MUTATION (the page's transit mark stripped in `pillAsPrinted`, scratch
+copy): the arm is RED and finds "r2r-village-2 · Exports Furs and pelts · Hunter's lodge" as a made pill whose every maker is short.
+runH's 8j.exports +1 at r2r-village-2: the same pill, recorded as ruled. NAMED, NOT BUILT (LOW): the entrepôt card that names
+"Hunter's lodge » Furs and pelts" as a source beside the lodge's own "Short of game." (the card's naming debt).
+
+**(2) THE STORED-SPENT COMMONS.** The Common grazing land joins `houseKinds.js :: SOURCE_GROUNDS` with its pastures (grazing land,
+alpine pasture). It proves no ground (not in `IMPLIED_GROUND`; it keeps one, FR21 (2)) and buys nothing (not in `RUNS_ON_BOUGHT`), so
+where the record stores its pasture spent it is idle, and the readers that already mark a house on its own spent ground mark it
+(`supplyStory.js :: sourceStoryOf`, `houseInputAtHand.js :: housesOnSpentGround`, the birth's story row). EXISTING LINES ONLY. Each of
+the eight, before → after, on the Institutions tab, the Services tab, the PDF and the journal (rendered at both tips): the card
+"Shared pasture …" → "Short of livestock. Shared pasture …"; the chip "Services · Pasturage" → "Services · Pasturage (short)"; the row
+"Grazing on the common for a traveller's beasts, for a small fee." → "Short of livestock. Grazing on the common …" (the PDF's
+"Pasturage: Short of livestock. …"); the gap list gains "The common grazing land is worked out: its own ground is depleted (Open
+grazing land)." (the PDF's GAPS & OPPORTUNITIES, "High"); where no other row was marked, the tabs' head line "A row marked short is
+what its house makes when supplied." prints (r2r-village-15). The eight: r2r-hamlet-53, r2r-village-15, r2r-village-20, r2r-village-49,
+r2s-infiltrated-village-0, r2s-plague_onset-village-1, r2s-succession_void-hamlet-3, r2s-monster_pressure-village-2: each common
+"Short of livestock." beside its "Depleted: Open Grazing Land". BY THE SAME RULE, and no other town: r2r-hamlet-42 and
+r2s-recently_betrayed-hamlet-2 (a stored spent ALPINE pasture: "… depleted (Alpine pastures)."), and three of the 150:
+bar0-hamlet-under_siege-rand-31, bar0-village-calm-rand-31, bar0-hamlet-calm-rand-33. A common on a live pasture stays unmarked
+(the guard's negative: r2r-hamlet-15, -22, r2r-village-4; 31 such towns in the 720). The guard's FR23 (2) test is red at the
+previous tip (10 of 10: "the common's mark: null"), green at mine. 0 of the 525 move. The failed ventures: 9 of the 720, 3 of the 150.
+FOUND, NAMED FOR THE CHAIR (not built: it is FR21 (1)'s, and a choice): **r2r-village-23**, isolated, prints "Depleted: Open Grazing
+Land" from its idle fuller's reading (FR8 (c) with FR21 (1)) beside a Common grazing land at work and unmarked: the one town of the
+870 where the page's implied used pasture stands beside a common. Two ways: the common reads that implied pasture used too (it is
+idle with the fuller), or a common keeps the pasture there for the isolated reading as it does for the pick (then the fuller has no
+ground and stands outside the stories again). Neither is mine to pick.
+
+**(3) THE DECLARED MOVES OF FR21 AND FR23 TOGETHER**, births of my tip against the base (4288049ba), by field family, every town:
+- **the 30: 1**: bar0-hamlet-under_siege-rand-47 (`resourceAnalysis.gaps`, `resourceAnalysis.imports`, `economicState.primaryImports`).
+- **the 150: 10**: `resourceAnalysis.gaps` 7 (bar0-hamlet-under_siege-rand-28, bar0-hamlet-calm-rand-29, bar0-village-calm-rand-29,
+  bar0-hamlet-under_siege-rand-31, bar0-village-calm-rand-31, bar0-hamlet-calm-rand-33, bar0-hamlet-under_siege-rand-36);
+  `economicState.primaryImports` 5 (bar0-hamlet-calm-rand-29, bar0-town-occupied-rand-33, bar0-hamlet-under_siege-rand-36,
+  bar0-city-wartime-rand-37, bar0-metropolis-calm-rand-38); `resourceAnalysis.imports` 1 (bar0-village-calm-rand-29).
+- **the 720: 41**: `resourceAnalysis.gaps` 31 (r2r-hamlet-27, -33, -42, -52, -53, -56, r2r-village-2, -9, -15, -20, -32, -36, -46, -47,
+  -49, r2r-town-34, r2s-under_siege-hamlet-3, r2s-occupied-village-1, r2s-politically_fractured-hamlet-0, -1, r2s-indebted-hamlet-2,
+  r2s-recently_betrayed-hamlet-2, r2s-infiltrated-village-0, r2s-plague_onset-village-1, r2s-succession_void-hamlet-0, -3,
+  r2s-monster_pressure-hamlet-3, r2s-monster_pressure-village-2, r2s-religious_conversion-village-0, r2s-slave_revolt-hamlet-1,
+  r2s-wartime-village-3); `economicState.primaryImports` 18 (as in FR21 (6)); `resourceAnalysis.imports` 8 (as in FR21 (6));
+  `resourceAnalysis.priorityNotes` 1 (r2r-village-20); `arrivalScene` 1 (r2s-occupied-metropolis-2).
+- **the 525: 0 of 525** (sha256, the golden's own `hashFor`).
+- **NO DRAW**: every record's sha256 equal, base against tip, with the moved families struck: 30 of 30, 150 of 150, 720 of 720;
+  people 0 · ties 0 · name 0 · roster 0 in each population.
+
+__FR23NET__
