@@ -1630,7 +1630,10 @@ export const HOUSE_TRADE_INPUT = Object.freeze({
  * those houses and no other over the census's 720. Catalogue id -> the chain key of its good.
  * @type {Readonly<Record<string, string>>}
  */
-export const HOUSE_NEED_INPUT = Object.freeze({ butchers_3_8: 'livestock', apothecary_established: 'herbs' });
+// BAR8 MARKS-2 item 3 (J's 11a.atWork; the sixth chair's BRIEF-BAR8, 2026-11-17; vetoable by the owner): the alchemist's shop
+// works herbs as the established apothecary does (`houseKinds.js :: MATERIAL_OF`): printed bare beside "Needed, and not brought
+// in: … medicinal herbs." (r2s-religious_conversion-town-2), read the same way.
+export const HOUSE_NEED_INPUT = Object.freeze({ butchers_3_8: 'livestock', apothecary_established: 'herbs', alchemist_shop: 'herbs' });
 
 /**
  * LEFT-MARKS item 4 (L16, rule 8i.surplus; the sixth chair's BRIEF-LEFT, 2026-11-17, the auditor's cure; vetoable by the
