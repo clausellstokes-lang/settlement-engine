@@ -2,7 +2,8 @@
 
 Seat FAULTS-PEOPLE of the round FAULTS (BRIEF-FAULTS, 2026-11-18). Base `lane/faults-base-2026-11-18` at 4288049ba; branch
 `lane/faults-people-2026-11-18`. Commits: 10413cd0c (14e), d6d2cdc1c (FR5), f18ebaab1 (the guard), 272e6d6c9 (14e: the pool
-read by membership, so the presumed-things door's strip arm stays at its base). Files touched: `src/generators/people/personHooks.js`,
+read by membership, so the presumed-things door's strip arm stays at its base), 8b30cc806 (this hand-back), b0edec006 (the
+guard's two negatives anchored). Files touched: `src/generators/people/personHooks.js`,
 `src/data/npcData.js` (one new export at the file's end), `src/generators/people/poolMap.js`,
 `src/data/people/titleSecretsPresentations.js` (one new export at the file's end), the NEW guard
 `tests/generators/faultsPeople.test.js`, this file. No other file. No new field on the saved record; nothing under
@@ -154,7 +155,48 @@ The shared page (N4): plot hooks never reach it (`toPublicSafe` strips `plotHook
 
 ## 6 · The net (each gate alone through `sh scripts/gate-tail.sh`; the base and the tip each a scratch worktree of their commit)
 
-NET_TABLE
+Every gate ran alone, to a file, at the base (a scratch worktree of 4288049ba) and at the tip (a scratch worktree of
+272e6d6c9; the last commit b0edec006 changes only the guard's two comments, and the guard and the walker were re-run on it).
+Failing tests were compared BY NAME AND BY MESSAGE (the first line of each failure).
+
+| gate | base | tip | read |
+|---|---|---|---|
+| `npm run typecheck:domain:strict` | 0 | 0 | green |
+| `npm run typecheck:ratchet` | 0 | 0 | green |
+| `npx eslint` (the five changed files) | 0 | 0 | green (warnings only, none in my lines) |
+| `npx vitest run tests/architecture` | 0 | 0 | green |
+| `npx vitest run tests/joins` | 0 | 0 | green |
+| `tests/lint` (JSON) | 45 red | 47 red at 272e6d6c9 (2 of them mine, cured in b0edec006: the walker re-run green) | see below |
+| N3 `pipelineContract`, `isolatedTrade`, `publicProseEquality` | 0 | 0 | green |
+| N3 `pipelinePinnedMode` | 3 red | the same 3, same messages (38 drift rows) | the golden corpus, the close's |
+| N3 `generationForkCensus` | 3 red (A1, A4, A6) | the same 3, same messages | the census, the close's |
+| `tests/generators/people` | 0 | 0 | green |
+| `bar8People`, `bar8People2`, `tonightSeatSecret` (each alone) | 0 | 0 | green |
+| the guard `tests/generators/faultsPeople.test.js` | 7 of 9 red (the two NEGATIVES green) | 9 of 9 green | as R8 asks |
+| THE OLDER TESTS (48 files each alone: every test naming `npcData`, `personHooks`, `poolMap`, `titleSecretsPresentations`, `truePersonHooks`, `settleTitleLines` or a moved trade line's text) | 4 files red | the same 4, same messages but one moved figure | below |
+
+THE OLDER TESTS RED AT BOTH: `generatorGoldenMaster` (499 of 525 drift at both: the 48 my twin moves are among the 499
+already drifted); `dossierProseManifest` (3 tests, 842 drift rows at both); `generationForkCensus` (as N3);
+`espionageDormancyFence` (the driven golden's hash: MOVED BY ME, §7b). Every other of the 48 green at both
+(`titleSecretsPresentations`, `loyaltyHooksRead`, `tailTies4Batch1`, `spareHookLineFactsWork`, `leftLines`, `bar8DesksEco`,
+`bar3PeopleTies`, `seatHolderOnThePage`, `generationWorkerLazy`, …).
+
+`tests/lint`, BY MESSAGE: 41 reds identical at both (factLayers.walker POOLS and importsAsPrinted; proseEntryContradiction
+3510/3501 and 2802/2794; observedShapeReaders' six arms; writerReach; proseWiringCensus; poolDominance; presumedThings and
+presumptionClasses' registers; tuningRegister; siteCoherenceRatchet; … the brief's known list). Those that differ:
+- `negativeAssertionAnchor.walker` (2 tests): RED AT 272e6d6c9 ONLY, caused by my guard's two bare `not.toMatch`; FIXED in
+  b0edec006 (each anchored on its own line); the walker is green there (18 of 18 with the guard).
+- `observedShapeReaders.walker` A1/A7: red at both; `{ reads: 2213, identities: 1551 }` at the base, `{ reads: 2214,
+  identities: 1552 }` at the tip, against the stored 2200/1542: ONE MORE READ (personHooks.js's reading of the house's
+  category, priority and catalogue id and the power's category). A stored figure, §7b.
+- `readerShapeResolver`: red at both; 272 at the base, 271 at the tip, against the ceiling 256 (one fewer). §7b.
+- `sovereigntyLightingContract.walker`: red at both; the estate's file count 3690 at the base, 3691 at the tip (my new guard
+  file), against the stored 3641. §7b.
+- `ledgerCitationIntegrity`: red at both, the same message but for the worktree's path (a scratch worktree has no
+  `refs/heads/review-fixes-2026-07-08`): the instrument's, not the code's.
+
+R11's `npm run build` and the build tests: not required (no file under `src/domain/facts/` and no import in one changed);
+`tests/build/generationWorkerLazy.test.js` and `vendorPdfLazy.test.js` ran among the older tests, green at both.
 
 ## 7 · Doors (R9), scratch merges (N5)
 
@@ -169,7 +211,17 @@ NET_TABLE
 
 ## 7b · Stored figures my work moves (the close's; none re-taken)
 
-STORED_TABLE
+| figure | where | base | tip | stored |
+|---|---|---|---|---|
+| the 525 golden hashes (`tests/fixtures/generator-golden-master.json`) | 48 rows move base → tip (§4) | 499 of 525 drift | 499 of 525 drift (the 48 among them) | not re-taken |
+| the driven golden of `espionageDormancyFence` (360 settlements) | its hash | `8938469f33a4046a…` | `d43b74d4fcecc455…` | `8e5881d64d3c2b89…` |
+| `observedShapeReaders` A1/A7 | reads · identities | 2213 · 1551 | 2214 · 1552 | 2200 · 1542 |
+| `readerShapeResolver` | the pulse count | 272 | 271 | ceiling 256 |
+| `sovereigntyLightingContract` | the estate's file count | 3690 | 3691 (the guard file) | 3641 |
+| the two doors | fresh lines | classes 3, things 38, strips 0 | the same | not banked by me |
+
+The composed-prose manifest (842 drift rows), the fork census, the pinned-mode corpus (38) and the registers' counts read
+the same at the base and the tip.
 
 ## 8 · Not raised
 
