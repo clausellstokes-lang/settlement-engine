@@ -42,7 +42,7 @@ import { exportsAsPrinted, localProductionAsPrinted } from '../../src/domain/dis
 import { chainAsShown } from '../../src/domain/display/chainStateShown.js';
 import { serviceRowsOf } from '../../src/domain/dossier/entityLinks.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
-import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 /** seedcfg.mjs's bar0- arm, verbatim in shape (tests/domain/bar6SeamEcon.test.js reads it the same way). @param {string} seed */
@@ -82,7 +82,10 @@ describe('BAR7-ECON item 1 (8f): an income share whose every house the leaf mark
     ['bar0-town-occupied-rand-44', 'Wool & Textile Trade', /^Short of wool\. /], // C40674: the weavers short
     // C41826 (C41825, its cell) and C33921, re-keyed (the note above the sibling arm): the only smiths short of iron, on no road;
     // the apothecary short of its materials, on no road
-    ['bar0-town-occupied-isolated-2', 'Iron & Metalwork', /^Short of iron\. /],
+    // RE-KEYED BY IDENTITY (BAR8 MARKS-2, 2026-11-18; the sixth chair's RULING BR16: an occupation alone is peace for the war's
+    // iron): isolated-2's smiths were short by the war's iron hook in a town no war is in force in, and print bare now; the same
+    // claim on the same shape, a town on no road whose smiths are short of iron by the one reader
+    ['bar0-metropolis-occupied-isolated-8', 'Iron & Metalwork', /^Short of iron\. /],
     ['bar0-village-calm-isolated-11', 'Apothecary & Alchemy', /^Short of /],
     ['bar0-city-under_siege+famine-rand-43', 'Timber Trade', /^Curtailed by the siege\. /], // C4828: fed by "Timber & Lumber · Impaired"
   ];
@@ -152,15 +155,20 @@ describe('BAR7-ECON item 3 (8i.resource): no "Fully exploited" over a ground who
 });
 
 describe('BAR7-ECON item 4 (8i.chainStopped, ruling CY1): a stopped chain names no service kept on offer', () => {
-  test('C7539: the harbour chain\'s "Normally yields" drops "Ship construction"; the shipyard\'s row stays on offer', () => {
+  // RE-KEYED (BAR8 MARKS-2, 2026-11-18; the sixth chair's BRIEF-BAR8 item 2, K's 12a, C0476; vetoable by the owner): under a
+  // siege the shipyard's timber is the stand beyond the walls or bought in, so its rows read "Curtailed by the siege." (SV8); a
+  // row so marked is not kept on offer at work, and the stopped harbour chain's "Normally yields" names it again, of ordinary
+  // times. The claim of CY1 (a stopped chain names no service whose row is kept on offer at work) is unchanged; its anchor's row
+  // is marked now
+  test('C7539: the shipyard\'s row is curtailed by the siege, so the harbour chain\'s "Normally yields" names "Ship construction"', () => {
     const s = town('bar0-city-under_siege+famine-rand-44');
     const record = (s.economicState.activeChains || []).find((/** @type {any} */ c) => c.chainId === 'harbour_trade');
     expect(record?.outputs, 'anchored: the record\'s chain yields ship construction').toContain('Ship construction');
     const shown = marks.chainCardUnderSiege(s, record, chainAsShown(record, s));
     const outs = marks.chainOutputsOnCard(shown, s);
-    expectPresentThenAbsent(record?.outputs, outs, 'Ship construction', 'the record yields it, the stopped card does not');
+    expect(outs).toContain('Ship construction');
     const row = serviceRowsOf(s.availableServices).map(({ svc }) => svc).find((svc) => svc.name === 'Ship construction');
-    expect(row && rowMarkText(s, 'service', row), 'KEEP: the shipyard builds from its own timber (its row unmarked)').toBeNull();
+    expect(row && rowMarkText(s, 'service', row), 'the shipyard works what timber it holds (its row curtailed)').toBe('Curtailed by the siege.');
   }, 300000);
 });
 
@@ -171,7 +179,9 @@ describe('BAR7-ECON item 5 (8j): a good whose every maker is marked short leaves
   // keep the good there, measured)
   const GONE = [
     ['bar0-city-calm-isolated-10', 'exports', 'Quality tools and weapons', 'Hardwood beams'],
-    ['bar0-town-occupied-isolated-2', 'exports', 'Quality tools and weapons', 'Legal services (contracts, notarial)'],
+    // RE-KEYED BY IDENTITY (BAR8 MARKS-2, 2026-11-18, RULING BR16): isolated-2's smiths are no longer short (the war's iron is
+    // not taken under an occupation alone); the same claim on an occupied town on no road whose every smith is "Short of iron."
+    ['bar0-city-occupied-isolated-18', 'exports', 'Quality tools and weapons', 'Milled timber (taxed by occupation)'],
   ];
   test('each town: the record lists the good, the page does not; its sibling prints', () => {
     expectNoSeedFailures(collectSeedFailures(GONE, ([seed, list, good, still]) => {
@@ -216,7 +226,10 @@ describe('point (1): a stored short twin prints only under a mark; an unmarked s
     ['bar0-metropolis-calm-rand-42', 'Iron & Metalwork', METAL_SHORT_LINE, METAL_WORKED_LINE], // unmarked: the smiths at work
     // RE-KEYED BY IDENTITY (BAR7-ECON, 2026-11-17, the chair's message of about 07:05 UTC): the marked sides' calm connected towns
     // are fed at the joined tree (BIRTH-1); the metal side stands on a town on no road, both trees
-    ['bar0-metropolis-occupied-isolated-5', 'Iron & Metalwork', METAL_SHORT_LINE, `Short of iron. ${METAL_SHORT_LINE}`], // marked: the twin stays
+    // RE-KEYED (BAR8 MARKS-2, 2026-11-18, RULING BR16): isolated-5's smiths were marked by the war's iron hook under an occupation
+    // alone, and print bare now (its stored twin then prints the trade's ordinary line: the row below); no born town of the 30, the
+    // 150 or 144 isolated births stores the metal twin under a mark, so the marked side is held on a constructed record (below)
+    ['bar0-metropolis-occupied-isolated-5', 'Iron & Metalwork', METAL_SHORT_LINE, METAL_WORKED_LINE], // unmarked now: the ordinary line
     ['bar0-metropolis-calm-rand-42', 'Wool & Textile Trade', CLOTH_SHORT_LINE, CLOTH_WORKED_LINE], // unmarked
   ];
   test('each town: the record stores the twin; the tab prints the line of its side (the tab\'s own call)', () => {
@@ -237,6 +250,15 @@ describe('point (1): a stored short twin prints only under a mark; an unmarked s
     expect(marks.incomeMarkShown(s, src), 'anchored: the cloth share is marked').toBe('Short of wool.');
     src.desc = CLOTH_SHORT_LINE;
     expect(marks.incomeDescShown(s, src, ordinaryIncomeLineOf)).toBe(`Short of wool. ${CLOTH_SHORT_LINE}`);
+  }, 300000);
+  // THE METAL TWIN'S MARKED SIDE, HELD ON A CONSTRUCTED RECORD (BAR8 MARKS-2, 2026-11-18, the re-key above): a town on no road
+  // whose smiths are "Short of iron." by the one reader, its metal share's stored line written as the metal twin
+  test('the metal twin under a mark stays (a constructed record: bar0-metropolis-occupied-isolated-8, its share\'s line the twin)', () => {
+    const s = JSON.parse(JSON.stringify(town('bar0-metropolis-occupied-isolated-8')));
+    const src = share(s, 'Iron & Metalwork');
+    expect(marks.incomeMarkShown(s, src), 'anchored: the metal share is marked').toBe('Short of iron.');
+    src.desc = METAL_SHORT_LINE;
+    expect(marks.incomeDescShown(s, src, ordinaryIncomeLineOf)).toBe(`Short of iron. ${METAL_SHORT_LINE}`);
   }, 300000);
   test('the tab prints it so: the unmarked metropolis shows no short twin', () => {
     const { text } = economics(town('bar0-metropolis-calm-rand-42'));

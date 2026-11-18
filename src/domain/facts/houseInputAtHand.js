@@ -664,7 +664,10 @@ export function warIronHookOutsideWar(record) {
   // BIRTH-3 (the chair's ruling BR9: a mark the players see is never read off the DM's hooks): the hook's own predicate
   // (`warIronHook.js`) over the kept fields; the war's state as `facts/warState.js :: warStateOf` reads it off the record,
   // here off the stress container (EG1: warState.js reaches a module the build pins lazy; the guard holds the two equal)
-  return warHoldsIron(arr(r.economicViability?.dependencies), arr(r.economicState?.primaryImports), warStateOnRecord(record));
+  // BAR8 MARKS-2 item 4 (RULING BR16): an occupation alone is peace for the iron (`warIronHook.js :: ironWarState`), so the mark,
+  // the income row's mark and the forges' scene, which read this, fall together; a siege keeps its own reading
+  const types = canonStressors(/** @type {Parameters<typeof canonStressors>[0]} */ (record)).map((e) => String(/** @type {{ type?: unknown } | null} */ (e)?.type ?? ''));
+  return warHoldsIron(arr(r.economicViability?.dependencies), arr(r.economicState?.primaryImports), warStateOnRecord(record), types);
 }
 
 /** LEFT-MARKS M4: the stress types that put the town at the front, or at war, in the generator's words and the world pulse's
