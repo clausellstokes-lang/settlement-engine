@@ -1,0 +1,28 @@
+diff --git a/tests/domain/bar6SeamDesks.test.js b/tests/domain/bar6SeamDesks.test.js
+index 751439e2c..d6a43712c 100644
+--- a/tests/domain/bar6SeamDesks.test.js
++++ b/tests/domain/bar6SeamDesks.test.js
+@@ -110,7 +110,9 @@ describe('item 5 · the safety profile\'s two lines leave the build guard\'s doo
+   });
+   test('the quiet streets in the file read by that rule, and no hit of the line is stock', () => {
+     const scanned = scanSource('src/generators/safetyProfile.js', src).filter((r) => /unusually quiet/.test(r.text));
+-    expect(scanned.map((r) => [r.text, r.decl.tierKey])).toEqual([['The streets are unusually quiet.', true]]);
++    // LAST-DECLARE (2026-11-18): the line stands at its print site and as its declared sibling set's key and row
++    // (`SAFETY_LINE_SIBLINGS`, `needs: tier: ≥ village`); each of the three is read gated by the tier
++    expect(scanned.map((r) => [r.text, r.decl.tierKey])).toEqual(Array.from({ length: 3 }, () => ['The streets are unusually quiet.', true]));
+     expect(rows.filter((h) => /unusually quiet/.test(h.text))).toEqual([]);
+   });
+   test('the war profiteers\' line names no leather, and no goods word of it is a hit', () => {
+diff --git a/tests/helpers/calmFactsDouble.js b/tests/helpers/calmFactsDouble.js
+index d5768a670..8e3364fc2 100644
+--- a/tests/helpers/calmFactsDouble.js
++++ b/tests/helpers/calmFactsDouble.js
+@@ -39,7 +39,7 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
+   // faith`), so a sweep over a pool that declares `soldiers` or `priest` measures what it did.
+   soldiers: true,
+   commander: true,
+-  faith: Object.freeze({ seniorCleric: Object.freeze({ name: 'X' }) }),
++  faith: Object.freeze({ seniorCleric: Object.freeze({ name: 'X' }), hasChurch: true }), // LAST-DECLARE (2026-11-18): the `church` atom (faith.hasChurch) holds too
+   // CENSUS-5c (2026-11-05): CENSUS-3b's `crime` getter (R-E); "every presence atom holds" makes
+   // `organised crime` hold, so the band reads its top rung (`factVocabulary.js :: CRIME_WORDS`).
+   crime: 'organized',
