@@ -2201,3 +2201,15 @@ should be paused or archived by the owner's hand.
   PAGE-COPY's `render.census3.jsx` (its keeper's item). It was given S4 item 5 (the two dead reads). CLOSE-DOORS-1B
   stands on the second MERGE (its 238d030c2): the presumption classes banked debt-at-base by the door (be3c96b91:
   fresh 0); next the news pins, pool dominance; then, after the third MERGE, the bundles, ceilings and counts.
+- 05:34 UTC, 2026-11-18 · TEN MERGES ON ORIGIN (`lane/landing-close-2026-11-18` at
+  635c9b57e681d4a1bbf920aaef22cc098938c830, pushed 05:34, gates green): merge 10 is CLOSE-SWEEP's S4 item 5
+  (8ecd7c61b): the two dead conjuncts of `harvestScarceHere`'s filter gone (`tradeListDisplay.js` about line 697);
+  the chair read the one-line hunk and its minified difference (that conjunction and nothing else); the seat's
+  proof: no writer of `custom` or `isCustom` on an income share anywhere under `src/` (the birth, custom goods,
+  the pulse, the editor, the import); the observed-shape scan 2,215 to 2,213 findings, those two identities and
+  nothing else; the 525 hashed whole equal; thirty of thirty dumps byte-equal; both type gates at their ceilings.
+  THE THIRD AND LAST "MERGE" IS SENT TO CLOSE-DOORS-1B: bundles, the four size ceilings, the lighting census and the
+  estate's counts on this tree; its net red only on the four rows, on the six arms of CL26 and on CLOSE-DOORS-2's
+  surfaces; then "READY FOR THE MERGE". THE EARLY WHOLE CHECK ON THE FIVE-MERGE TREE (close-1-1b0614950): CHECKS-1
+  (05:21; f144e7ad2): 14 names against 33 at the base: 19 gone, 0 NEW; CHECKS-2 (05:30; be15b8be2): 24 against 57:
+  33 gone, NO NEW NAME (its first run was killed by a container restart and re-run whole); CHECKS-3 still runs.
