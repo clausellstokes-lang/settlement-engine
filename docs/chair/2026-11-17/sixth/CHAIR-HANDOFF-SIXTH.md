@@ -1424,3 +1424,22 @@ should be paused or archived by the owner's hand.
   detector's debt, the LEFT-KEYS items K1 to K10; a real fault; the machine's own), seats by disjoint files from
   70e557d5b, the figures that count files or tests re-taken LAST, the whole check green, CI's other jobs (the edge
   functions' tests, the browser tests), the draft pull request with the veto list and the questions owed.
+- 03:11 UTC, 2026-11-18 · **THE DRAFT PULL REQUEST IS OPEN: #75** (`lane/join-2026-11-14` into `master`, at 70e557d5b;
+  title "[NOT READY: the close is running] …"; its description says what it is, what stays the owner's hand, the
+  seven migrations by name, and what is still to be added: the veto list, the questions owed, the close's account).
+  Opened EARLY, as a draft, so that CI's own jobs report while the close runs (`ci.yml` runs on a pull request into
+  master: the gates, the end-to-end browser tests, performance, the coverage floors, the Deno edge tests, the golden
+  master under a hostile locale); the chair is subscribed to its events. THE OWNER WAS TOLD NOT TO MERGE IT YET.
+  **A BLOCKER OF THE DEPLOY THAT IS THE OWNER'S, FOUND ON THE PULL REQUEST: THE HOST REFUSES DEPLOYMENTS.** Vercel's
+  status on the line's commit, created at the chair's own push (03:02:14), reads "Deployment rate limited — retry in
+  24 hours." (its comment: "more than 100 … api-deployments-free-per-day"). EVERY PUSH TO ANY BRANCH IS ONE
+  DEPLOYMENT ATTEMPT THERE; the same status stands on pull request #74's head, pushed on 2026-11-15: the program's
+  pushes have kept the project over its daily allowance for days. The production deploy after a merge (the `deploy`
+  job's `vercel deploy --prod`, or the `redeploy` job's hook) is one more deployment and would be refused the same
+  way. TOLD TO THE OWNER IN PLAIN WORDS WITH THREE WAYS OUT, ALL THE OWNER'S: switch off deployments for the working
+  branches (the chair recalls `git.deploymentEnabled` in `vercel.json`, could not open the host's documentation from
+  this session, and CHANGED NOTHING: deploy settings are the owner's); upgrade the plan; or wait about a day with
+  pushes cut to a trickle. **PUSH DISCIPLINE FROM NOW (told to PEOPLE-2, K-WATCH-2, DESKS-2, MARKS-2, J-INCOME-2 at
+  03:10): commit freely, push only at a milestone the chair waits for and at the hand-back, never more than once an
+  hour; the chair batches its own pushes (the notes: at milestones; the line: one push a close landing).** A new
+  seat's prompt says the same from its first line.
