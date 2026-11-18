@@ -98,7 +98,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
       ) : null))(ordinaryTimesOnPage(settlement, [
         ...(e.incomeSources || []).map((src) => /** @type {const} */ (['income', src])),
         ...(flag('pdfVisualChains') ? (settlement?.economicState?.activeChains || []).filter((c) => c && c.status !== 'unexploited') : []).map((c) => /** @type {const} */ (['chain', c])),
-      ]))}
+      ], { readings: false }))/* PDF-2b (item 3): the boolean the Economics tab's head line hands (econOrdinaryTimesLine) */}
 
       {/* ── Income sources ─────────────────────────────────────── */}
       {e.incomeSources?.length > 0 && (
@@ -119,7 +119,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
                 <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: -2, marginLeft: 6 }}>
                   {desc}
                 </Text>
-              ) : null))(incomeDescShown(settlement, s))/* LEFT-PDF L1 (BRIEF-LEFT, 2026-11-17; vetoable by the owner): the Economics tab's row (economicsCrisisMarks.js :: incomeDescShown): its mark, crisis and short. The tab's ordinary line for a short twin under no mark (generators/economy/incomeLineSiblings.js) is a tree src/pdf may not reach (tests/architecture/layerBoundaries.test.js): LEFT by name */}
+              ) : null))(incomeDescShown(settlement, s, ordinaryIncomeLineOf))/* PDF-2b (BRIEF-BAR8 item 4, 2026-11-18; vetoable by the owner): a stored short twin under no mark prints the trade's ordinary line, as the tab's row does, through the leaf both trees reach (domain/display/incomeOrdinaryLines.js, J-INCOME's 9d344fc9c, copied byte for byte); LEFT-PDF L1 (BRIEF-LEFT, 2026-11-17; vetoable by the owner): the Economics tab's row (economicsCrisisMarks.js :: incomeDescShown): its mark, crisis and short. The tab's ordinary line for a short twin under no mark (generators/economy/incomeLineSiblings.js) is a tree src/pdf may not reach (tests/architecture/layerBoundaries.test.js): LEFT by name */}
             </View>
           ))}
         </View>
@@ -614,3 +614,4 @@ import { shadowCaptureShown } from '../../domain/display/shadowEconomyShown.js';
 import { criticalImportsShown } from '../../domain/display/criticalImportsShown.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1): the critical goods the tab prints
 import { ordinaryTimesOnPage } from '../lib/crisisMarksOnPage.js';
 import { incomeDescShown } from '../../domain/display/economicsCrisisMarks.js'; // LEFT-PDF L1: the tab's income row
+import { ordinaryIncomeLineOf } from '../../domain/display/incomeOrdinaryLines.js'; // PDF-2b item 4: the trade's ordinary line, the tab's reading

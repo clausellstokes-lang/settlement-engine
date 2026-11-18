@@ -169,3 +169,67 @@ institutions and the view model's grounds; no mark or line moves on any tab or o
 
 NO NEW WORDS: every line above is a word or a row the tab already prints. DECLARED MOVES: none (no generator, no saved
 field, no stored figure).
+
+## SECOND BRANCH · lane/bar8-pdf-2b-2026-11-17 (the chair's message of 00:25 UTC on 2026-11-18; base 917c915bc, point 44)
+
+Branch `lane/bar8-pdf-2b-2026-11-17`, cut from the line `lane/join-2026-11-14` at 917c915bc (my first tip 2dac64372 is
+in it, with LEFT-MARKS). Nothing merged. The same file list; no new words, no generator, no stored field. Measured over the
+census's 720 BORN AT 917c915bc (PAGE-COPY's `births.mjs`), by the same probe, base 917c915bc → tip.
+
+| # | the chair's item | before → after | proof |
+|---|---|---|---|
+| 1 | item 3 of my section: the head line over no short row (LEFT-MARKS M3) | the PDF prints the short sentence in 154 towns (329 chapters) → 145 (311); the nine towns leave it, each in Services and Institutions: r2r-hamlet-26, r2r-hamlet-48, r2r-hamlet-57, r2r-town-13, r2r-town-18, r2s-under_siege-city-1, r2s-politically_fractured-hamlet-0, r2s-infiltrated-town-1, r2s-wartime-city-3; no other town moves | the guard's new arm renders the Services and Institutions TABS (as `tests/domain/leftMarks.test.js` does) and the PDF's two chapters for the nine and r2r-city-20, r2r-hamlet-27: red in 9 of 11 before the hunk, green after |
+| 2 | the reader's MED 1 (a): the L2 arm of `leftPdfReadsTheTabs` read only text after "Normally yields: " | the arm now reads every printed output (the Services flow line's last part; each flow row's `o-` node) | with `Services.jsx`'s card handed `chain` for `onCard` (in `chainYieldRefused` and `chainOutputsOnCard`): red in 4 of 21 (r2s-under_siege-hamlet-3, r2s-under_siege-village-0, r2s-under_siege-town-0 "Goods storage", bar0-hamlet-under_siege-rand-34); restored, green |
+| 3 | the reader's MED 1 (b): `chainStateThreeSurfaces :: outputDisagreements`' five seeds held no item-5 card | four seeds added: r2r-village-8, r2r-village-17, r2r-village-25, r2r-thorp-38 | red under the mutation of 2; red with `SupplyChainFlow.jsx`'s rows mapped back to the stored chain (`.map((c) => c)`); restored, green |
+| 4 | the reader's LOW 1: the journal paired `e.chains[i]` with `activeChains[i]` by bare index | ONE HUNK (`journalPages.js`): `records` are the record's chains the view model prints (the same `chainPrintName` filter, in its order), used by the chain rows' mark and word | no town of the 720, the 150 or the thirty holds a chain with no print label (0 of 900: the fault is latent, no printed line moves); a CONSTRUCTED-RECORD arm in my guard (a chain of no label put first in three towns) is red in 3 of 3 under the bare index, green at the tip |
+| 5 | my guard grew the each-family park count (`sovereigntyLightingContract.walker.test.js`) | the negatives' `test.each` is one plain test looping through `collectSeedFailures` | the walker's message: "expected 113 to be less than or equal to 108" at 917c915bc → "expected 112 …" at my tip; my file is no longer listed |
+
+At the tip the other items of my section read as they did: items 1, 2, 5, 5′, 6, 7 at 0 over the 720; ITEM 4 (the income
+share's ordinary line) STILL WAITS for J-INCOME's leaf: 95 towns of the 720.
+
+THE CODE: `src/pdf/lib/crisisMarksOnPage.js :: ordinaryTimesOnPage(settlement, rows, { readings = true } = {})` hands the
+leaf the rows' short readings; `src/pdf/sections/EconomicsTrade.jsx` hands `{ readings: false }` (the boolean the Economics
+tab's `econOrdinaryTimesLine` hands, so the PDF's Economics head line and the journal's stay the tab's: item 7's arm green).
+`src/foundry/journalPages.js`: the `records` filter (above) and its `chainPrintName` import.
+
+THE LINE A READER SEES: "A row marked short is what its house makes when supplied." leaves the PDF's Services and
+Institutions chapters where their tabs print it no more (a failed venture's mark alone): r2r-hamlet-26, r2r-town-13,
+r2s-wartime-city-3 (and the six others above). No line is added.
+
+### ITEM 4 OF MY SECTION · the income share's ordinary line (the chair's messages of 01:21 and 01:25 UTC: the leaf is pushed)
+
+- `src/domain/display/incomeOrdinaryLines.js` COPIED BYTE FOR BYTE from J-INCOME's 9d344fc9c, in its own commit 2960c5912
+  ("the leaf, copied from J-INCOME's 9d344fc9c"; the committed blob is the same object). `src/pdf/sections/EconomicsTrade.jsx`'s
+  income row reads `incomeDescShown(settlement, s, ordinaryIncomeLineOf)` with the leaf's `ordinaryIncomeLineOf` (LEFT-PDF's
+  afb259a34 form). The journal's share prints no description: nothing there. `incomeLineSiblings.js` untouched.
+- Measured (births at 917c915bc): the 720 95 towns (108 shares) → **0**; the 150 16 → **0**; the thirty 3 → **0**. No other
+  count moves. The guard's arm reads the TAB'S OWN IMPORT (`generators/economy/incomeLineSiblings.js`) against the PDF's
+  row, floor 3 shares: red in 2 of 15 towns without the cure (r2s-plague_onset-city-0, r2r-town-45), green with it. The
+  layer law (`tests/architecture`) green.
+- RE-KEYED BY IDENTITY (R8): `leftPdfReadsTheTabs` L1's "the tab's row" is the tab's call `incomeDescShown(s, src,
+  ordinaryIncomeLineOf)` (the cure made the key without it untrue: r2s-infiltrated-village-0, r2r-town-16).
+- THE LINE A READER SEES: an unmarked share prints the trade's ordinary line where the PDF printed the stored short twin
+  ("Little metal is worked here while the metal trade is short of what it needs." → "Metal is smelted or worked here.";
+  "Little cloth is made here …" → "Cloth is woven or finished here."): r2r-town-8, r2r-town-16, r2r-town-20.
+- NAMED, NOT TOUCHED (the chair's word; the owner's answer "Move the entries" is J-INCOME's to carry out): on this branch
+  alone the leaf's lines read FRESH in the doors: `presumption-classes-door --check` 3 (`fresh 0` → `fresh 3`: the two cloth
+  lines and the sawn timber line), `presumed-things-door --check` 2 (`fresh 38` → `fresh 40`: the local coal and local ore
+  lines); `tests/lint/presumptionClasses.walker.test.js` ("no NEW undeclared line") is red at my tip for the same three.
+  ALSO NAMED: `tests/lint/ruinFilterRoster.walker.test.js` ("every `.institutions` reader is COMPLIANT or EXEMPT") is red at
+  my tip: the leaf reads `town.institutions` raw (line 55, `ordinaryIncomeLineOf`'s roster) and is on no list of that walker;
+  J-INCOME's branch carries the same leaf and no row for it. The walker is not my file: the row is the leaf's owner's.
+
+### THE NET OF THE SECOND BRANCH (base 917c915bc in a scratch worktree, then the tip; by name)
+
+`typecheck:domain:strict` 0 / 0; `typecheck:ratchet` 0 / 0; `tests/architecture` green / green; the rounds' guards green /
+green; `tests/joins` and WEAVE ST-2 green / green (LEFT-CHAIN's two reds are cured on the line); eslint on my changed files
+0. `tests/lint` BY NAME: 69 at the base; at the tip the same 69 plus the two named above (`presumptionClasses` "no NEW
+undeclared line", `ruinFilterRoster` "COMPLIANT or EXEMPT"), both the copied leaf's; `seedLoopTotality` is red at the base
+and the tip alike (`tests/pdf/seamPdfReadsTheTabs.test.jsx`, not mine); `sovereigntyLightingContract`'s each-family count
+113 → 112. `tests/pdf tests/foundry tests/components` by name: the same 7 at the base and the tip. The doors' last lines:
+the same but for the leaf's fresh rows (above).
+
+N5 · A SCRATCH MERGE: my tip 4f584c14d with the line's tip 99ca9ad51 and then J-INCOME's tip 771a1a945: CLEAN (the leaf's
+identical bytes merge without conflict). My guard, the four PDF tests I changed and `tests/architecture` there: 371 of 372
+green; the one red (`leftPdfReadsTheTabs` L1) was the key item 4 made untrue, re-keyed at ac2f98365 and then green there
+too. Aborted; worktrees removed.

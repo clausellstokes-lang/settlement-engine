@@ -47,6 +47,7 @@ import { foodWordShown } from '../domain/display/foodWordShown.js';
 // TAIL-EXPORTS-JOURNAL-2 batch 3 (the chair's rulings E3, E12): a row that lives on what a siege, an outbreak or a famine
 // stops is marked by the tabs' one leaf, and the page says once that its rows are of ordinary times.
 import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordinaryTimesLine, isVentureMark } from '../domain/display/crisisStoppedRow.js';
+import { chainPrintName } from '../domain/display/chainPrintName.js'; // PDF-2b item 4: the view model's rows, paired by the record
 import { stoppedOnPage, shortOnPage, stoppedWordOnPage, chainCardOnPage } from '../pdf/lib/crisisMarksOnPage.js'; /* SURFACES-1 item 1: the tab's state in the tab's words; PDF-2 item 6: the card's (chainCardOnPage) */ // LEFT-PDF L1: the tab's income mark, the PDF's reader
 import { cultureOnPage } from '../pdf/lib/cultureOnPage.js'; // EXPORTS-B24 · B2: the PDF's culture block's reader
 import {
@@ -361,7 +362,10 @@ function economicsPage(vm, settlement = vm.raw) { // W2-C-LEAVES-8: the settleme
   // which prints no description, takes the leaf's word after its name (the Institutions tab's form for a row with no
   // description); a chain, its mark before its description; the page's one head line where a row is marked.
   const crises = stoppingCrisesOf(settlement);
-  const records = settlement?.economicState?.activeChains || [];
+  // PDF-2b item 4 (the chair's second reader's LOW 1, 2026-11-18): the records of the rows the view model prints, in its
+  // order: it drops a chain with no print label (`viewModelBodySlices.js`, UPKEEP-14 (j)), so `e.chains[i]` pairs with
+  // these, never with `activeChains[i]` by bare index (a dropped chain would hand its word and its mark to the next row).
+  const records = (settlement?.economicState?.activeChains || []).filter((c) => chainPrintName(c, settlement).label);
   // LEFT-PDF L1 (BRIEF-LEFT, 2026-11-17; vetoable by the owner): a share is marked as the Economics tab marks it, by its
   // crisis AND by its houses short (`economicsCrisisMarks.js :: incomeMarkShown`, through the PDF's reader
   // `crisisMarksOnPage.js`): its words after its name ("curtailed, short"), the head line's crisis and its short sentence.
@@ -389,7 +393,7 @@ function economicsPage(vm, settlement = vm.raw) { // W2-C-LEAVES-8: the settleme
     // CENSUS-3c (R-P 2): the revenues that left the trade lists, where the record holds their fact.
     revenuesOffTheLists(vm.raw).length ? kv('Also earned (no share recorded)', revenuesOffTheLists(vm.raw).map((r) => r.text).join(', ')) : null,
     // W2-C-LEAVES-7 item 9: the state the tab's card prints (chainStateShown.js :: chainAsShown; none: no state written).
-    (e.chains || []).length ? md('', '## Supply chains', e.chains.map((c, i) => { const rec = settlement?.economicState?.activeChains?.[i]; const st = rec ? chainCardOnPage(rec, settlement).word.toLowerCase() : c.status; /* PDF-2 item 6: the tab card's word (chainCardOnPage) */
+    (e.chains || []).length ? md('', '## Supply chains', e.chains.map((c, i) => { const rec = records[i]; const st = rec ? chainCardOnPage(rec, settlement).word.toLowerCase() : c.status; /* PDF-2 item 6: the tab card's word (chainCardOnPage) */
       const desc = chainStopped[i] ? markedDescription(crisisMarkText(settlement, chainStopped[i]), c.description) : c.description;
       return `- **${esc(c.name)}**${st ? ` *(${esc(st.replace(/_/g, ' '))})*` : ''}${desc ? `: ${esc(desc)}` : ''}`; })) : null,
   );
