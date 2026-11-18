@@ -12,6 +12,8 @@ under BRIEF-CLOSE (C1 to C10) and the chair's rulings CL11 (landed points over `
 | S2 | c266e0dc4 | `tests/lint/factLayers.walker.test.js`, arms (a), LEAVES, POOLS | (c) a law: the table wrong; POOLS (a) a shrink | 3 failed / 12 → 2 failed / 13: **LEAVES green**; (a) LEFT (two instrument gaps, below); POOLS = the door's shrink, CLOSE-DOORS-1B's |
 | S3 | none (CL15) | `tests/lint/siteCoherenceRatchet.test.js` C1 | (a) a declared move, re-taken by its door: CLOSE-DOORS-1B's | analysis only, unchanged |
 | S4.1 | ae0af7ca9 | `tests/domain/worldFactRederive.test.js` A4 | (b) a stale roster | A4 red → **A4 green** (A7 red at both, same message: CLOSE-DOORS-2's) |
+| S4.2 | 890296904 | `tests/lint/factLayers.walker.test.js` arm (a): the instrument | (c) a law: a guard blind to two leaves | arm (a) **green**; the table unchanged |
+| S4.3 | 1039b8c26 | the same: `hasInstitution`'s probe | (c) the same gap | green; the table unchanged |
 | S5 | a970ef865 | `vercel.json` (CL13) | not a red: the chair's item | every reader the same at both ends |
 
 No stored figure (register, baseline, census, ledger, golden, ceiling, bundle) was written by this seat. No `DECLARED_OVERRUN`
@@ -107,6 +109,24 @@ nothing under `src/` or `scripts/` reads the roster; `rederive` (`dmLayer.js:911
 moved readers through `foodBalance.js`'s re-export: the hunk is inside the re-derive's reach. **The hunk:** one roster row with its dated
 reason. A4 alone at the tip: green. The whole file: base 2 failed / 5 passed (A4, A7), tip 1 failed / 6 passed (A7, the same message:
 "the stride is non-empty, or the absence above is vacuous: expected 5 to be +0"): A7 is CLOSE-DOORS-2's.
+
+## S4 item 2 · the walker's instrument sees every key (890296904); item 3, `hasInstitution` (1039b8c26)
+
+The chair's word (S4.2): the gap named under S2 is this seat's to close (a test instrument; no `src/` behaviour). **The cause:**
+`tests/lint/factLayers.shared.mjs :: leafTouches` had call branches for five `factsCall` getters and none for `goodExported` (JOIN-17 point 9)
+or `seatHeld` (point 8); its `tradeAtWork` branch probed four typed keys of the seventeen the vocabulary declares (point 45 added
+`ironwork in full`, `fish taken here`); `hasInstitution` probed ten typed kinds of the fourteen declared (no bathhouse, quarry, mine,
+school). **The hunk:** `vocabularyKeysOf(getter)`, the keys of every `FACT_DIMENSIONS` row homed at the getter, derived; `tradeAtWork`
+(17), `goodExported` (5) and `hasInstitution` (14) probed with all of them; `seatHeld` with every pair of the roster (i < j); a
+`factsCall` getter with no branch now THROWS ("has no call here, so the walker would never see it read"); the typed lists are gone. And
+arm (a) of the walker COLLECTS every failing leaf (`expect(failing).toEqual([])`) instead of stopping at the first. **What the fuller
+instrument sees:** `goodExported` reads `economicState`, `seatHeld` `npcs` and `powerStructure`, `hasInstitution` `institutions`, exactly
+as declared; `tradeAtWork` reads nothing beyond its row. **The table needs no change.** Arm (a) green, LEAVES green, "POOLS by their KEY"
+green; POOLS differs from the register by the one shrink only (the door's read-only report, `node scripts/fact-layers-door.mjs`: "0
+rise(s), 1 fall(s)"): no pool or line reads at or above its layer; no ordering fault. **Controls** (a scratch copy of the tree): the base
+table (70e557d5b's `factLayers.js`) under the collecting loop lists all five red leaves at once (legalHouse, timberAtHand,
+timberReachesSawmill, tradeAtWork, importsAsPrinted; goodExported and seatHeld now read); a planted `plantX` `factsCall` row throws "the
+factsCall getter 'plantX' has no call here". eslint 0; both type gates at their ceilings (167; 1113).
 
 ## S5 · lane pushes create no deployment (a970ef865)
 
