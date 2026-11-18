@@ -2315,6 +2315,10 @@ export const TITLE_LINE_DECLARATIONS = Object.freeze({
     'Buys fish from boats that fished where they are forbidden to, and never asks where the catch came from': Object.freeze({ needs: Object.freeze(['navigable']) }),
     "Has been buying stolen ship's stores at night and selling them in the shop the next morning": Object.freeze({ needs: Object.freeze(['coast']) }),
     "Has been taking timber from the river's driftwood that belongs to the mill upstream": Object.freeze({ needs: Object.freeze(['river']) }),
+    // LAST-DECLARE (item 2, 2026-11-18; vetoable by the owner): the sawyer's green planks warp in "the buildings made from them",
+    // so the secret presumes building at work (`trade at work: building`, tradeAtWork.js); bar0-village-calm-rand-36 printed it
+    // beside "nothing new goes up". Where nothing is built the sawyer's next admitted secret prints (no new text).
+    'Sells green planks as seasoned and the buildings made from them warp within a year': Object.freeze({ needs: Object.freeze(['trade at work: building']) }),
     'Has been selling some of the foundlings to families who pay, without any record': Object.freeze({ topic: 'human_trafficking' }),
     'Buys fighters who were taken against their will, and keeps them in chains between bouts': Object.freeze({ topic: PERSONS_HELD }),
     'Buys fighters who were taken against their will and keeps them locked up between bouts': Object.freeze({ topic: PERSONS_HELD }),
