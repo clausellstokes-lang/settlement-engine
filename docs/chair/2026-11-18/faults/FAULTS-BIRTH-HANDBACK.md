@@ -454,3 +454,39 @@ ground and stands outside the stories again). Neither is mine to pick.
   people 0 · ties 0 · name 0 · roster 0 in each population.
 
 __FR23NET__
+
+## FR24 (the chair's ruling of 2026-11-18) — IN PROGRESS: (0) and (1) done; (2) and (3) STOPPED for the chair
+
+**(0)** The landings merged (`lane/landing-pieces-2026-11-18` at b014a7bf3, `--no-ff`): e330ec120, clean; no dependency changed.
+
+**(1) FAULTS-NEED's item 0, re-keyed by identity** (`tests/generators/faultsNeed.test.js`, dated note naming FR24 (1)): at the
+merged tip no town of the 900 bears the exact old case (a live "Livestock management/auction" row, a house short of livestock and
+livestock on the printed list: measured, none). Each anchor now carries its own house, good and the label its need list prints,
+asserted exactly (the house's own mark names the good; the label stands on the list; the label names the good): **r2r-town-54**
+(the Butchers (3-8) short of livestock; "Livestock for meat and draft") and **bar0-village-famine-rand-41** (the Tannery short of
+livestock or hides; "animal hides"). The four dealt towns (r2r-city-43, r2r-metropolis-12, -19, -25: the need rightly dropped by a
+fair's livestock auction, no house short) stay the negative. 11 of 11 green at the merged tip.
+
+**(2) r2r-village-23 — STOPPED: the ruling's mechanism does not give the town one story.** Built and measured, not committed
+(patches kept). (a) AS RULED, `neverHeldGroundsUsed` reads `GROUND_KEPT_BY` (one helper, `supplyStory.js :: groundsKeptOf`): the
+pasture is no longer spent, "Depleted: Open Grazing Land" leaves the town, BUT its Fuller stays "Short of wool." with no ground of
+wool used up, on a route isolated in ordinary times: a mark with no story (FR21 (1)'s fault, back). The kept pasture is held only;
+no reader of an input reads it there. (b) WHAT GIVES ONE STORY: the common PROVES its pasture for every reader (`IMPLIED_GROUND`
+gains `common_grazing_land: 'grazing_land'`; `GROUND_KEPT_BY` already holds that pick there): r2r-village-23 then reads "Open
+Grazing Land" proven, the common and the Fuller at work. But it moves WIDE: births against the merged tip, records 1 of the 30, 9 of
+the 150, 17 of the 720 (`economicState.primaryImports` 12, `resourceAnalysis.imports` 8, `resourceAnalysis.gaps` 3: the cobblers',
+fullers' and tanneries' bought words dropped, e.g. r2r-village-26 "-Wool", r2r-village-27 "-Raw hides and animal products"), and
+PAGES in 186 towns of the 720, 38 of the 150 and 10 of the 30 (139 of the 720 newly print "Open Grazing Land" as proven beside their
+common); the ventures stay 9. Which of (a), (b), or another reading: the chair's.
+
+**(3) r2r-hamlet-53 — STOPPED: the cause is the need list's own rule.** Its `resourceAnalysis.imports.critical` is
+["timber (for large vessels)", "livestock"]; its imports hold "Livestock and dairy (local grazing land depleted)".
+`tradeListDisplay.js :: importsAsPrinted` drops a critical need whose word a primary import's text contains
+(`primary.some((imp) => imp.toLowerCase().includes(tc.toLowerCase()))`): livestock IS brought in, and the page says so (the Dairy
+farmer, which runs on bought livestock, is at work and unmarked). The Shepherd and the common are "Short of livestock." as TAKERS of
+their own spent pasture (an import feeds a buyer, never the work on the ground: bought beasts graze no spent pasture). No service
+row drops the need, so this is not item 0's claim failing: the list's "brought in" and the takers' "short" are both true. The same at
+the base. Nothing built.
+
+NAMED, NOT BUILT (the chair's list, for the owner): r2r-town-34 buys "Game and hides (local hunting grounds exhausted)" for its
+tanner while its Hunter's lodge stays "Short of game."; the four wool refusals import livestock words while refusing "Wool".
