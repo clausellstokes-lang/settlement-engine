@@ -777,6 +777,15 @@ should be paused or archived by the owner's hand.
   function in an import-free facts leaf, read by the atom AND by `generateNarratives.js :: boughtFishRowsInPlace` in
   place of its own two calls (that one hunk given by name; no record may move); the card's original excludes it; one
   twin; held equal to the swap on every fish-market town (36 swapped, 303 not, 4 idle at its measure).
+- **FR14 (09:33 UTC, 2026-11-18; FAULTS-ROWS's two blockers at 3e78dc113).** Two reds green at its base, each one line in a
+  file no seat holds: GRANTED BY NAME, each a commit of its own. (1) `src/generators/steps/assembleSettlement.js`: the
+  step's `mutates` declaration gains 'institutions' and nothing else (rule R5 stands for every other line): the late
+  re-read has written `institutions[].desc` in place since it was built; no late twin fired in the pipeline contract's
+  configurations until the fair's third line did (`pipelineContract`: "step assembleSettlement wrote undeclared ctx
+  key(s) [institutions]"); proof: every stored record byte-equal at that commit alone; every register, census or
+  contract that reads the steps' declarations and then moves is NAMED for the last close (the precedent: `npcs`, DEBT-2,
+  point 36). (2) `src/domain/goods.schema.js`: the goods roster's one row for the new leaf `fishBoughtIn.js`, in path
+  order (the precedent: `chainHouses.js`, point 41).
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
   e0242a12a82285a736f9997360ec1e8a5fbd3568 = the line's ed1d43529 + BIRTH-3's 8b0506eae, no collision; tree
