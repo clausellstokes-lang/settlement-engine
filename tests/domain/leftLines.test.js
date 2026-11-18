@@ -70,7 +70,12 @@ const DESK_LINES = /** @type {Array<[string, string, string, string, number, num
   ['L32 · the gaol', 'general', 'DS-GEN-17', 'ADMINISTERED', 4, 5, { courtSits: false, defence: defenceWith(true) }, { courtSits: false, defence: defenceWith(false) }],
   ['L32 · the entrepot\'s "the town"', 'general', 'DS-GEN-13', 'ENTREPOT', 2, 6, { tier: 'town' }, { tier: 'village' }],
   ['L8 · eats well enough', 'general', 'DS-GEN-3', 'prosperity: Moderate / Modest', 3, 4, { famine: { band: 'secure', shownBand: 'secure' } }, { famine: { band: 'pressured', shownBand: 'pressured' } }],
-  ['L8 · eats well, on food grown elsewhere', 'general', 'DS-GEN-3', 'foodSecurity.label: Import-Dependent', 4, 6, { famine: { band: 'secure', shownBand: 'secure' } }, { famine: { band: 'importDependent', shownBand: 'importDependent' } }],
+  // BAR8-DESKS-ECO (item 6, 2026-11-17; READ-LEFT-LINES's MED-2): v4 ("eats well, but on food grown elsewhere") is RETIRED BY
+  // NAME (its `food: ≥ secure` is a band this key never holds: dead by construction), and the row is RE-KEYED BY IDENTITY to the
+  // pool's surviving line of the same claim, v6 ("eats on food grown elsewhere"), which now declares the food brought in
+  // (`food: = importDependent`); its twin v7 says nothing comes in. The positive anchor is a state a birth produces (the key's
+  // band with food brought in), the negative the key's band with none (the page prints Deficit: bar0-hamlet-under_siege-rand-34)
+  ['L8 · eats on food grown elsewhere', 'general', 'DS-GEN-3', 'foodSecurity.label: Import-Dependent', 6, 7, { famine: { band: 'importDependent', shownBand: 'importDependent' } }, { famine: { band: 'importDependent', shownBand: 'deficit' } }],
   ['L8 · food stored, and clergy', 'defense', 'DS-DEF-2', 'Disasters & Famine: granary AND parish care only', 1, 4, { storesMonths: 5 }, { storesMonths: 1.5 }],
   ['L8 · the stores go in deep', 'economy', 'DS-ECO-2', 'GRANARY: well stocked', 5, 6, { storesMonths: 5, hasInstitution: noGranary }, { storesMonths: 1.5, hasInstitution: noGranary }],
   ['L9 · its watch keeps the peace', 'defense', 'DS-DEF-2', 'Invasion & War: neither walls nor force', 7, 10, { lawBand: 'strained' }, { lawBand: 'collapsed' }],
@@ -111,6 +116,31 @@ describe('LEFT-LINES · the desk lines (L32, L8, L9): absent where the premise i
       const read = (/** @type {any} */ f) => [admits(line, f), admits(twin, f)];
       for (const [n, f] of F.slice(1)) expect(read(f), `${name}: the ${n} form reads as the record does`).toEqual(read(F[0][1]));
     }), 'one reading on all three forms');
+  });
+
+  // BAR8-DESKS-ECO (READ-LEFT-LINES's LOW-2, 2026-11-17): the arm above reads only the anchor's own state; this one takes the
+  // CONSTRUCTED states of the economy's and the general desk's rows (each premise each way, over each form's own facts), so a
+  // reading the projection loses would red here. The defense desk's rows are DESKS-DEF's.
+  it('THE SHARED PAGE (N4) over the constructed states: each form admits each economy and general line and twin alike', () => {
+    const forms = [['record', anchor], ['public', toPublicSafe(structuredClone(anchor))], ['the share veil', projectShareVeil(toPublicSafe(structuredClone(anchor)), null)]];
+    const F = forms.map(([n, r]) => [n, factsOf(r)]);
+    const overOn = (/** @type {any} */ base, /** @type {Record<string, unknown>} */ o) => {
+      const f = Object.create(base);
+      for (const [k, v] of Object.entries(o)) Object.defineProperty(f, k, { value: typeof v === 'function' ? v(base) : v });
+      return f;
+    };
+    const mine = DESK_LINES.filter(([, desk]) => desk === 'general' || desk === 'economy');
+    expect(mine.length, 'the economy and general rows').toBeGreaterThan(3);
+    expectNoSeedFailures(collectSeedFailures(mine, ([name, desk, block, pool, vid, twinVid, yes, no]) => {
+      const { line, twin, admits } = deskLine(desk, block, pool, vid, twinVid);
+      expect(twin, `${name}: the twin v${twinVid}`).toBeTruthy();
+      for (const [state, o] of /** @type {Array<[string, Record<string, unknown>]>} */ ([['premise holds', yes], ['premise fails', no]])) {
+        const read = (/** @type {any} */ f) => [admits(line, overOn(f, o)), admits(twin, overOn(f, o))];
+        const want = read(F[0][1]);
+        expect(want, `${name} (${state}): exactly one of line and twin on the record`).toEqual(state === 'premise holds' ? [true, false] : [false, true]);
+        for (const [n, f] of F.slice(1)) expect(read(f), `${name} (${state}): the ${n} form reads as the record does`).toEqual(want);
+      }
+    }), 'one reading on all three forms, each constructed state');
   });
 });
 

@@ -396,7 +396,12 @@ describe('DS-GEN-3 — ten lenses over one block, and three label traps', () => 
     );
     for (const label of labels) {
       // db3ed88c1: the famine pool declares `starving` · `famine`, read off the record's food band.
-      const record = { economicState: { foodSecurity: { label } } };
+      // BAR8-DESKS-ECO (item 6, 2026-11-17): every Import-Dependent line that says the food is bought or brought in now
+      // declares it (`food: = importDependent`, the band the page prints only where food is brought in), so that label's
+      // constructed record carries the food record a born Import-Dependent town carries (its band, and food brought in);
+      // the claim (each food label draws one line) is kept
+      const foodRecord = label === 'Import-Dependent' ? { foodRecord: { band: 'importDependent', normalImportPct: 30, gapPct: 0 } } : {};
+      const record = { economicState: { foodSecurity: { label, ...foodRecord } } };
       expect(draw({ foodSecurityLabel: label }, record).health, `${label} drew nothing`).toHaveLength(1);
     }
   });
@@ -558,6 +563,10 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
       // constructed record carries a tier as every born record does; the claim (each market pool yields a sentence) is kept
       const record = { tier: 'town', institutions: state.institutions, config: { tradeRouteAccess: state.tradeRouteAccess } };
       expectSentence(draw(state, record).market, JSON.stringify(state));
+      // BAR8-DESKS-ECO (READ-LEFT-LINES's LOW-3, 2026-11-17): beside the town record, a VILLAGE record, so ENTREPOT's
+      // small-place branch (v6, `tier: ≤ village`) is drawn here too; the claim (each market pool yields a sentence) is kept
+      const village = { ...record, tier: 'village' };
+      expectSentence(draw(state, village).market, `${JSON.stringify(state)} (a village)`);
     }
   });
 

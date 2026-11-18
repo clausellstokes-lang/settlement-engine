@@ -2326,6 +2326,11 @@ export const TITLE_LINE_DECLARATIONS = Object.freeze({
     // BAR3-PEOPLE (P1, C21976): no coach leaves and no traveller's coach comes in under a siege; the inn's third secret stands
     'Tells a band on the road which coaches carry money and when they leave': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
     'Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable': Object.freeze({ excludes: Object.freeze(['crisis: under_siege']) }),
+    // BAR8-DESKS-ECO (item 5, 2026-11-17; LEFT-LINES left it by name: its stakes name the taverns too): the brewer's first
+    // secret sells to the taverns and charges them, so it needs a tavern-kind house to stand (`institution: tavern`, the
+    // EXISTING atom its two presentations took: a tavern, an inn or an ale house); where none stands the title's next
+    // admitted secret prints (the grain bought up, the still in the back: neither names a house of another kind)
+    'Thins the ale with water after it is sold by the barrel and charges the taverns for full strength': Object.freeze({ needs: Object.freeze(['institution: tavern']) }),
   }),
   presentation: Object.freeze({
     'Cheerful in the cold and the stink of the market. Knows every regular by name and by order.': Object.freeze({ needs: Object.freeze(['navigable']) }),
