@@ -13,6 +13,8 @@
 //   5. THE LEGAL ROW'S PRISON (the chair's item 5, 2026-11-18): the Legal Infrastructure row and the Defense desk's internal
 //      row read the LIVE prison (`defenceOf(...).prison`), not the stamped `compound.inst.hasPrison`: r2r-city-41 with its
 //      prison ruined (a constructed record) says no prison stands and draws the pool the row names, in all three views.
+//   6. FR19 item 6: the threat assessment's internal-security line and DS-GEN-17's key read the same court and prison: in the
+//      ruined town every reader agrees (no gaol where none works); the town unruined keeps the full chain everywhere.
 import { describe, it, expect, beforeAll } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -27,6 +29,8 @@ import { deriveSupportingCapabilities } from '../../src/domain/display/defenseDi
 import { defenseThreatProse } from '../../src/domain/display/stateProse/defenseStateProse.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
+import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
+import { institutionsPoolKey } from '../../src/domain/display/stateProse/generalStateProse.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -45,6 +49,7 @@ const SEEDS = Object.freeze([
   'bar0-town-calm-rand-36', 'bar0-town-calm-rand-37', 'bar0-town-calm-rand-40', 'bar0-town-calm-rand-39',
   'bar0-city-under_siege+famine-rand-31', 'bar0-city-under_siege+famine-rand-46', 'bar0-city-under_siege+famine-rand-36',
   'bar0-hamlet-under_siege-rand-29', 'bar0-hamlet-under_siege-rand-34',
+  'r2r-town-5', 'r2r-town-4', // FR19 item 6: a town hall the stamped flag calls a court; the Legal row names none
 ]);
 
 /** @type {Map<string, any>} */
@@ -215,6 +220,41 @@ describe('5 · the Legal row\'s prison is the live roster\'s (the chair\'s item 
       expect(internalKey(r), `${form}: the desk's internal pool`).toBe('Internal Security: court without detention');
     });
     expectNoSeedFailures(failures, 'item 5 positive');
+  });
+  /** @param {any} r */
+  const internalLine = (r) => String(buildThreatAssessment(r).find((/** @type {any} */ x) => x?.label === 'Internal Security')?.assess ?? '');
+  /** @param {any} r */
+  const genKey = (r) => institutionsPoolKey(r?.economicState?.compound?.inst, r);
+  it('FR19 item 6 · POSITIVE: the ruined town\'s every reader agrees: the Legal row, the desk, the atoms, the threat line, DS-GEN-17', () => {
+    const s = prisonRuined(BORN.get('r2r-city-41'));
+    expect(s.economicState?.compound?.inst?.hasCourtSystem && s.economicState?.compound?.inst?.hasPrison, 'premise: the stamped flags still say court and gaol').toBe(true);
+    const f = factsOf(s);
+    expect([f.courtSits, f.defence?.prison], 'the atoms `court sits` and `prison`').toEqual([true, false]);
+    expect(String(legal(s)?.status)).toMatch(/ only$/);
+    expect(internalKey(s)).toBe('Internal Security: court without detention');
+    expect(internalLine(s)).toMatch(/Cases are heard here, but there is almost nowhere to hold anyone\.$/);
+    expectAbsentWithAnchor(internalLine(s), 'gaol', 'Cases are heard here', 'the threat assessment\'s internal line');
+    expect(genKey(s), 'DS-GEN-17: no "own court and its own gaol"').not.toBe('ADMINISTERED');
+    expect(genKey(s), 'DS-GEN-17 keys the next lens of the cascade').toBe(genKey({ ...s, institutions: (s.institutions || []).filter((/** @type {any} */ i) => !PRISON.test(String(i?.name))) }));
+  });
+  it('FR19 item 6 · NEGATIVE: the same town unruined: the threat line and DS-GEN-17 keep the full chain', () => {
+    const s = BORN.get('r2r-city-41');
+    expect(internalLine(s)).toMatch(/Arrest, trial and gaol all work here\.$/);
+    expect(genKey(s)).toBe('ADMINISTERED');
+  });
+  it('FR19 item 6 · POSITIVE (born): where the stamped flag calls a town hall a court, the threat line and DS-GEN-17 say what the Legal row says', () => {
+    const failures = collectSeedFailures([
+      ['r2r-town-5', 'Prison only', 'People are locked up without trial.'],
+      ['r2r-town-4', 'None', 'No court and no gaol; order rests on whoever is armed.'],
+    ], ([seed, row, line]) => {
+      const t = BORN.get(seed);
+      expect(t.economicState?.compound?.inst?.hasCourtSystem, `premise: ${seed}'s stamped flag says a court`).toBe(true);
+      expect(courtHoldersOf(t).length, `premise: ${seed}: no court sits`).toBe(0);
+      expect(String(legal(t)?.status), `${seed}: the Legal row`).toBe(row);
+      expect(internalLine(t), `${seed}: the threat assessment's internal line`).toMatch(new RegExp(`${line.replace(/[.;]/g, '\\$&')}$`));
+      expect(genKey(t), `${seed}: DS-GEN-17`).not.toBe('ADMINISTERED');
+    });
+    expectNoSeedFailures(failures, 'FR19 item 6 born');
   });
   it('NEGATIVE: the same town unruined keeps "+ Prison" and the full chain, in all three views', () => {
     const failures = collectSeedFailures(views(BORN.get('r2r-city-41')), ([form, r]) => {
