@@ -10,14 +10,16 @@
  */
 
 import { ritesHoldAChain } from '../../domain/facts/chainRites.js'; // BAR4-CORPUS-ECO (FS1): the rites' one reader
+// BAR8 J-INCOME item 1: the trade's ordinary lines and their reader, in an import-free leaf the printed export may read; re-exported
+// under the same names, so no importer of this module changes
+import { CLOTH_SHORT_LINE, CLOTH_WORKED_LINE, LOCAL_COAL_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, METAL_WORKED_LINE, METAL_SHORT_LINE, METAL_FORGE_IDLE_LINE, TIMBER_PLAIN_LINE, TIMBER_SAWN_LINE, TIMBER_SHORT_LINE, ordinaryIncomeLineOf } from '../../domain/display/incomeOrdinaryLines.js';
+export { CLOTH_SHORT_LINE, CLOTH_WORKED_LINE, LOCAL_COAL_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, METAL_WORKED_LINE, METAL_SHORT_LINE, METAL_FORGE_IDLE_LINE, TIMBER_PLAIN_LINE, TIMBER_SAWN_LINE, TIMBER_SHORT_LINE, ordinaryIncomeLineOf };
 
 /** The grain line that sells a surplus, and its twin for a town whose own fields do not cover what it eats. */
 
 export const GRAIN_SURPLUS_LINE = 'Surplus from local harvest sold to nearby settlements and passing merchants: steady income tied to the growing season.';
 export const GRAIN_OWN_FIELDS_LINE = 'Grain from local fields sold within the settlement: it eats more than it grows, so none is left to sell to other settlements.';
 
-/** The metalwork line where coal stands and no iron does (COHERENCE-AGREE cure 7); it says the iron is bought in. */
-export const LOCAL_COAL_LINE = 'Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.';
 /** Its twin where the roster holds no forge house (COHERENCE-AGREE-8, REVIEW-AGREE-3 T3). UPKEEP-10 (the row banked at
  * point 49, `after-base: defence`): it names no forge, here or elsewhere; it says what its gate makes true (coal among
  * the exports, no siege: `trueIncomeDesc`). */
@@ -56,21 +58,10 @@ export const ALCHEMIST_SUPPLEMENTS_LINE = 'Herbal remedies, minor alchemical pre
 export const ALCHEMY_UNDER_SIEGE_LINE = 'Alchemical preparations and curative potions, sold only to the people inside while the siege keeps outside customers away.';
 export const REMEDIES_LINE = 'Remedies and simple preparations, made and sold here: a modest trade.';
 export const REMEDIES_SHORT_LINE = 'Remedies and preparations are made here, but few, while the herbs and reagents they need run short.';
-export const LOCAL_ORE_LINE = 'Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.';
-export const IRON_IMPORTED_LINE = 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.';
-export const METAL_WORKED_LINE = 'Metal is smelted or worked here.';
-/** BAR7-ECON item 1 (8f; vetoable by the owner): the metal line's twin where the metal chain is impaired, as the cloth line's is. */
-export const METAL_SHORT_LINE = 'Little metal is worked here while the metal trade is short of what it needs.';
-/** LEFT-CHAIN L7 (BRIEF-LEFT, 2026-11-17; vetoable by the owner): the metal lines' twin where every smelting or working house of
- * the trade is marked short and a mine of the trade is at work (`economicsCrisisMarks.js :: forgeIdleHere`, read at print by
- * `ordinaryIncomeLineOf`): the mine is worked; the metalworking is not. */
-export const METAL_FORGE_IDLE_LINE = 'The digging goes on here, but the metalworking stands idle, short of what it needs.';
 export const GRAIN_BOUGHT_LINE = 'Grain purchased from farming regions and resold or processed locally; margin depends on stable supply routes.';
 export const WOOL_LOCAL_LINE = 'Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.';
 export const WOOL_LOCAL_WORKED_LINE = 'Local flocks provide raw wool, and cloth is woven or finished here.';
-export const CLOTH_SHORT_LINE = 'Little cloth is made here while the cloth trade is short of what it needs.';
 export const WOOL_BOUGHT_LINE = 'Wool bought from pastoral regions and processed locally: value-add trade dependent on consistent supply.';
-export const CLOTH_WORKED_LINE = 'Cloth is woven or finished here.';
 export const FISH_EXPORT_LINE = 'Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.';
 export const FISH_LANDED_LINE = 'Catch landed here and sold fresh or preserved.';
 export const FISH_SOLD_LINE = 'Fish is sold here, fresh or preserved.';
@@ -97,11 +88,6 @@ export const TITHES_RENTS_PLAIN_LINE = 'Mandatory tithes, and rents from land th
 // trade by road, by sea or in transit under a siege.
 export const TIMBER_LINE = 'Local forest provides sustainable timber revenue; managed felling and sawmilling keep production consistent.';
 export const TIMBER_MANAGED_LINE = 'Local forest provides sustainable timber revenue; managed felling keeps production consistent.';
-export const TIMBER_PLAIN_LINE = 'Local forest provides timber revenue.';
-/** BAR2-LABELS LB6: the timber line's twin where a sawmill stands and no managed woodland does (vetoable by the owner). */
-export const TIMBER_SAWN_LINE = 'Local forest provides timber revenue, and the timber is sawn here.';
-/** BAR7-ECON item 1 (8f.chain; vetoable by the owner): the timber line's twin where the timber chain is impaired. */
-export const TIMBER_SHORT_LINE = 'Little timber is worked here while the timber trade is short of what it needs.';
 export const TIMBER_BOUGHT_LINE = 'Timber sourced from more distant forests and resold or processed locally: trade route dependent.';
 /** The market-day line, declared on its own text (it names the market; economicState.js prints its literal, registered there). */
 const MARKET_DAY_SET = Object.freeze([Object.freeze({ text: 'Market day stall fees and toll collection on goods entering the market.', needs: Object.freeze(['market']), excludes: Object.freeze(['crisis: under_siege']) })]);
@@ -246,36 +232,8 @@ export function trueIncomeDesc(desc, f) {
   }
 }
 
-/**
- * THE TRADE'S ORDINARY LINE IN PLACE OF A STORED SHORT TWIN (BAR7-ECON after the second reader, the chair's point (1),
- * 2026-11-17; vetoable by the owner). The three short twins (`CLOTH_SHORT_LINE`, `METAL_SHORT_LINE`, `TIMBER_SHORT_LINE`) are
- * drawn by the chain's STORED status, so "Little metal is worked here …" stood where the smiths are fed by an import and the page
- * marks no house. The page reads it at print (`economicsCrisisMarks.js :: incomeDescShown`): a short twin prints only where the
- * share takes a mark; where it takes none, this gives the trade's ordinary line, a declared twin of the same family that claims
- * only what the roster holds: "Cloth is woven or finished here." where a weaving or fulling house stands (else no sentence),
- * "Metal is smelted or worked here." (the twin is drawn only beside a forge house), "Local forest provides timber revenue, and
- * the timber is sawn here." where a sawmill stands, else "Local forest provides timber revenue.". The record does not hold the
- * line the draw began from, so this is the family's plain line, not always the exact one (no "managed felling", no flocks, no
- * trade route: none of them is read here). Pure; no draw. Not a short twin: null. LEFT-CHAIN L7: handed `reading.forgeIdle`, a
- * metal line that says metal is worked (`METAL_WORK_LINES`) gives `METAL_FORGE_IDLE_LINE`.
- * @param {unknown} desc the stored line @param {{ institutions?: unknown } | null | undefined} town
- * @param {{ forgeIdle?: boolean } | null} [reading] the display layer's reading of the share's houses
- * @returns {string | null}
- */
-export function ordinaryIncomeLineOf(desc, town, reading = null) {
-  // LEFT-CHAIN L7: a metal line that says metal is smelted or worked here, on an unmarked share whose every working house is
-  // marked short beside a mine at work (`reading.forgeIdle`, the display layer's `economicsCrisisMarks.js :: forgeIdleHere`)
-  if (reading?.forgeIdle === true && METAL_WORK_LINES.has(/** @type {string} */ (desc))) return METAL_FORGE_IDLE_LINE;
-  if (desc !== CLOTH_SHORT_LINE && desc !== METAL_SHORT_LINE && desc !== TIMBER_SHORT_LINE) return null;
-  const roster = (Array.isArray(town?.institutions) ? town.institutions : []).map((i) => String(i?.name ?? '').toLowerCase());
-  const has = (/** @type {RegExp} */ re) => roster.some((n) => re.test(n));
-  if (desc === CLOTH_SHORT_LINE) return has(/weav|fuller/) ? CLOTH_WORKED_LINE : '';
-  if (desc === METAL_SHORT_LINE) return METAL_WORKED_LINE;
-  return has(/sawmill|lumber/) ? TIMBER_SAWN_LINE : TIMBER_PLAIN_LINE;
-}
-
-/** The metal lines that say metal is smelted or worked here, or that the forges burn (LEFT-CHAIN L7's twin answers each). */
-const METAL_WORK_LINES = new Set([METAL_WORKED_LINE, METAL_SHORT_LINE, LOCAL_ORE_LINE, IRON_IMPORTED_LINE, LOCAL_COAL_LINE]);
+// THE TRADE'S ORDINARY LINE IN PLACE OF A STORED SHORT TWIN (BAR7-ECON; LEFT-CHAIN L7): `ordinaryIncomeLineOf` and the lines
+// it reads live in the import-free leaf `domain/display/incomeOrdinaryLines.js` (BAR8 J-INCOME item 1), imported and re-exported above.
 
 // ── #93 (UPKEEP-8; the chair's ruling of 2026-11-13, 23:48, a DECLARED MOVE of the income family) ──────────────────
 // Where Agricultural Rents is a small place's ONLY income line and a house of work stands on the roster, one line is
