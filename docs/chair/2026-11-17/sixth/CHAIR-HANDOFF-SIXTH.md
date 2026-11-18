@@ -897,3 +897,25 @@ should be paused or archived by the owner's hand.
   SECTION 0's "THE LINE" IS REWRITTEN AS OF THIS HOUR. LEFT-KEYS's PROMPT IS DRAFTED (`/home/user/wk/prompts/LEFT-KEYS.txt`:
   K1 to K6 of its section, K5's names, K6 (c), K7, K8, K9 (J's detector), K10 (the mutation manifest)): IT IS SEATED WHEN
   THE FISH ROWS ARE ON THE LINE (they re-key two of its files), with the early small commit.
+- **00:32 UTC (2026-11-18). THE OWNER HAS GIVEN THE WORD ON THE PERMISSION QUESTION.** The chair's last report to the owner ended: "Seven builders remain
+  stopped until you give the word on the permission question." (the two ways had been put in plain words several times
+  since 20:45: the owner types in each session "You may commit and push your work on your own lane branch.", or tells
+  the chair to add one sentence saying so to the repository's CLAUDE.md). THE OWNER'S REPLY IN THIS CHAT, THE WHOLE OF
+  IT: **"I give the word"**. WHAT THE CHAIR DID WITH IT, AND NO MORE: it RELAYED the question and the reply VERBATIM to
+  the seven held seats (K-POWERS, K-PEOPLE, K-WATCH, DESKS-DEF, DESKS-ECO: commit the finished work, push, send the
+  hand-back message; J-INCOME, MARKS-2: the first small commit, then the assignment, the branch staying on the base its
+  prompt names); each message says the seat may commit and push ON ITS OWN LANE BRANCH ONLY (plain pushes with the
+  hooks; never `--no-verify`, a force push, master, a pull request, a merge) and that A REFUSAL BY ITS OWN PERMISSION
+  CHECK STILL STANDS (one line to the chair; the owner is then asked to type the line in that session). The chair's own
+  permission check, which had denied its grant messages before the owner's word, let these through. THE CHAIR HAS NOT
+  TOUCHED CLAUDE.md: the owner's four words do not name that way, and it is a standing instruction file that reaches
+  master: if a seat still refuses, or a NEW seat is refused at its first commit, the owner is asked ONE plain question
+  (type the line there, or have the sentence added). NEW SEATS' PROMPTS CARRY THE OWNER'S WORD VERBATIM from now on.
+  THE CHAIR'S NOTES ARE ON ORIGIN AT 0c3b713ba (00:33). STOPPED AND TO RESTART: the laws run at point 46 (the third
+  tree of the background job was killed at the job's 40-minute limit after the first two trees had finished);
+  RUNNING: the 42 anchor test files at 917c915bc and at point 46 (three stale anchors of SCENES's intended moves found
+  by the whole check's part 2 at 2f0e88971: `tests/data/tailHistoryBatch6.test.js` (the fish twin's needs),
+  `tests/generators/bar2PlacesRows.test.js` [9] r2r-hamlet-6 (the small cart now prints), `tests/generators/tailNarrativeRows.test.js`
+  00138 r2r-thorp-46 (under the famine the pool's next admitted row prints: the twin answers only where its original
+  is the DRAWN row, `drawDeclared.js`'s argmax skips twins); the fourth, the negative-anchor walker's quarantine arm,
+  is cured by SCENES's own last commit): the seat is asked for one tests-only commit when the sweep is in.
