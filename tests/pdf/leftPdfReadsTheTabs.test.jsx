@@ -37,6 +37,7 @@ import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages, esc } from '../../src/foundry/journalPages.js';
 import { incomeMarkShown, incomeKindShown, incomeDescShown, chainOutputsOnCard, chainCardUnderSiege } from '../../src/domain/display/economicsCrisisMarks.js';
 import { chainAsShown } from '../../src/domain/display/chainStateShown.js'; // PDF-2 (2026-11-17): the chain the tab's card renders
+import { ordinaryIncomeLineOf } from '../../src/generators/economy/incomeLineSiblings.js'; // PDF-2b (2026-11-18): the Economics tab's own import
 import { crisisMarkText, incomeShortOf, markedDescription, isVentureMark } from '../../src/domain/display/crisisStoppedRow.js';
 import { chainOutputsShown } from '../../src/domain/display/tradeListDisplay.js';
 import { houseMarkShown } from '../../src/components/new/npcComponents.jsx';
@@ -128,8 +129,10 @@ describe('LEFT-PDF L1: an income share is marked in the PDF and the journal as t
           marked++;
           if (!x.pdf.includes(markedDescription(mark, desc))) bad.push(`PDF ${s.source}: the tab's "${mark}" not printed`);
         } else if (x.pdf.some((l) => markedLeaf(l, desc))) bad.push(`PDF ${s.source}: a mark the tab does not print`);
-        // the row as the tab's function gives it (its mark before the record's text)
-        const row = incomeDescShown(x.t, s);
+        // the row as the tab's function gives it (its mark before the record's text). RE-KEYED BY IDENTITY (PDF-2b item 4,
+        // 2026-11-18; rule R8): the tab's call is `incomeDescShown(s, src, ordinaryIncomeLineOf)` (EconomicsTab.jsx), a stored
+        // short twin under no mark printing the trade's ordinary line; the PDF now reads it so, and the claim is kept.
+        const row = incomeDescShown(x.t, s, ordinaryIncomeLineOf);
         if (row && !x.pdf.includes(row)) bad.push(`PDF ${s.source}: the tab's row "${row}" not printed`);
         // the journal: one word for each half of the tab's mark, after the share's name
         const halves = [crisisMarkText(x.t, incomeKindShown(x.t, s)), incomeShortOf(x.t, s)].filter(Boolean).length;
