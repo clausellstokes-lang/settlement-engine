@@ -3,14 +3,15 @@ import { getInstFlags, getStressFlags } from './helpers.js';
 import { generateSafetyProfile } from './safetyProfile.js';
 import {
   hasCriminalInstitution,
+  lawlessRow,
   materializeInstitutionServiceRolls,
+  NO_LAW_BRING_COIN,
+  THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION,
 } from './services/serviceRollMaterialization.js';
 import {
   resolveGenerationWorldLaw,
 } from './generationContext.js';
 import { hasInstitution } from '../domain/facts/institutions.js';
-import { courtHoldersOf, defenceOf } from '../domain/facts/defence.js'; // BAR6-CRIME (e): the court and the gaol; BAR8-K-WATCH (13a): the court the Legal row prints
-import { lineText } from '../domain/facts/drawDeclared.js';
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS = 'Ask around at the right tavern. Someone moves goods without questions.';
 // R3-CODE-C-3 (CENSUS-2 a, r2r-village-19): "the right tavern" reads the roster (facts/institutions.js `tavern`); else its twin.
@@ -19,32 +20,9 @@ const ASK_AROUND_QUIETLY_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS = 'Ask around qui
 // all (R3-CODE-C-6: a name test of the roster for the fence house, outside the crime fact's home, is no reading of it).
 const FENCING_STOLEN_GOODS = 'Fencing stolen goods';
 const INFORMAL_NO_CONTRACT_VIOLENCE_AVAILABLE_FOR_COIN_TO_THOSE_WHO_KNOW_WHERE_TO_ASK = 'Informal, no contract. Violence available for coin to those who know where to ask.';
-// COHERENCE-PRESUME (the chair's ruling A, 2026-11-11): the row DENIED the law ("No law", "There is no
-// official recourse here") in towns with a watch and a hall, court or council (22 of the 360 corpus
-// towns, every one). Every town this generator births has some law, so the row says what it meant:
-// the law is there and coin beats it. One row, reworded; no twin (the thought holds everywhere).
-const NO_LAW_BRING_COIN = 'Weak law, bring coin';
 const PAY_A_LOCAL_STRONGMAN_A_NEIGHBOR_OR_A_GANG_FOR_SOME_MEASURE_OF_SAFETY_NO_CONTRACTS_NO_GUARANTEES = 'Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.';
 const PROTECTION_INFORMAL = 'Protection (informal)';
-const THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION = 'The law here is slow and easily outbid. Disputes end with whoever can apply more violence or pay more for protection.';
 const _ARCANE_UNDERGROUND = '(arcane underground)';
-// BAR6-CRIME (BRIEF-BAR6 (e), LAW 9's 9a.lawless; the wide read's C172465; vetoable by the owner): "easily outbid" and
-// "disputes end with whoever can apply more violence" are false where the town keeps its own court and its own gaol (the
-// defence home's `court` and `prison`, `facts/defence.js`), beside "A functioning court and prison mean crimes carry real
-// consequences". There the row keeps its draw, its place and its name (the name is the service's identity, declared in
-// `crisisDependence.js :: SERVICE_DEPENDENCE`) and takes its twin description: the law is slow, and coin buys it quicker.
-// BAR8-K-WATCH (13a, BAR8-AUDIT-K's 13a.court; C39616): "The court sits" is the LEGAL ROW'S court, the atom `court sits`
-// (`defence.js :: courtHoldersOf`: a courthouse, or a live house that drew a court service), not the `court` atom's name
-// test (every town hall): beside "Legal Infrastructure · Prison only / Detention without process." the line was false.
-// The drawn services are read as they stand when this row is added (the court services are the houses' own rolls,
-// materialised above), the same rows the record keeps; where no court sits the row takes its other description.
-const SLOW_LAW_DESC = lineText({ text: 'The court sits and the gaol holds, but both are slow, and coin buys a quicker answer.', needs: ['court sits', 'prison'] });
-/** @param {Array<{ name?: unknown }>} institutions @param {Record<string, unknown[]>} drawn the services drawn so far @returns {{ name: string, desc: string }} */
-const lawlessRow = (institutions, drawn) => {
-  const d = defenceOf({ institutions });
-  const courtSits = courtHoldersOf({ institutions, availableServices: drawn }).length > 0;
-  return { name: NO_LAW_BRING_COIN, desc: courtSits && d.prison ? SLOW_LAW_DESC : THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION }; // the name said once (275ce166f made both branches one name)
-};
 
 /**
  * servicesGenerator.js

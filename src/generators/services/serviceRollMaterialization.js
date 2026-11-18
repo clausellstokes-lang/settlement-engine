@@ -25,7 +25,8 @@ import {
   nativeSemanticName,
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { birthFactsOf } from '../../domain/facts/factsOf.js';
-import { drawDeclared } from '../../domain/facts/drawDeclared.js'; import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
+import { courtHoldersOf, defenceOf } from '../../domain/facts/defence.js'; // BAR6-CRIME (e): the court and the gaol; BAR8-K-WATCH (13a): the court the Legal row prints
+import { drawDeclared, lineText } from '../../domain/facts/drawDeclared.js'; import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 
 const CRIMINAL_INSTITUTION_KEYWORDS = Object.freeze([
   'thieves',
@@ -77,6 +78,32 @@ export function hasCriminalInstitution(institutions) {
     return CRIMINAL_INSTITUTION_KEYWORDS.some((kw) => name.includes(kw));
   });
 }
+
+// THE LAWLESS ROW (BAR8-K-WATCH-2, BR29: moved here from `servicesGenerator.js` with no change but `export`; the overlay's
+// two push sites stay in the orchestrator, which imports the row).
+// COHERENCE-PRESUME (the chair's ruling A, 2026-11-11): the row DENIED the law ("No law", "There is no
+// official recourse here") in towns with a watch and a hall, court or council (22 of the 360 corpus
+// towns, every one). Every town this generator births has some law, so the row says what it meant:
+// the law is there and coin beats it. One row, reworded; no twin (the thought holds everywhere).
+export const NO_LAW_BRING_COIN = 'Weak law, bring coin';
+export const THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION = 'The law here is slow and easily outbid. Disputes end with whoever can apply more violence or pay more for protection.';
+// BAR6-CRIME (BRIEF-BAR6 (e), LAW 9's 9a.lawless; the wide read's C172465; vetoable by the owner): "easily outbid" and
+// "disputes end with whoever can apply more violence" are false where the town keeps its own court and its own gaol (the
+// defence home's `court` and `prison`, `facts/defence.js`), beside "A functioning court and prison mean crimes carry real
+// consequences". There the row keeps its draw, its place and its name (the name is the service's identity, declared in
+// `crisisDependence.js :: SERVICE_DEPENDENCE`) and takes its twin description: the law is slow, and coin buys it quicker.
+// BAR8-K-WATCH (13a, BAR8-AUDIT-K's 13a.court; C39616): "The court sits" is the LEGAL ROW'S court, the atom `court sits`
+// (`defence.js :: courtHoldersOf`: a courthouse, or a live house that drew a court service), not the `court` atom's name
+// test (every town hall): beside "Legal Infrastructure · Prison only / Detention without process." the line was false.
+// The drawn services are read as they stand when this row is added (the court services are the houses' own rolls,
+// materialised above), the same rows the record keeps; where no court sits the row takes its other description.
+export const SLOW_LAW_DESC = lineText({ text: 'The court sits and the gaol holds, but both are slow, and coin buys a quicker answer.', needs: ['court sits', 'prison'] });
+/** @param {Array<{ name?: unknown }>} institutions @param {Record<string, unknown[]>} drawn the services drawn so far @returns {{ name: string, desc: string }} */
+export const lawlessRow = (institutions, drawn) => {
+  const d = defenceOf({ institutions });
+  const courtSits = courtHoldersOf({ institutions, availableServices: drawn }).length > 0;
+  return { name: NO_LAW_BRING_COIN, desc: courtSits && d.prison ? SLOW_LAW_DESC : THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION }; // the name said once (275ce166f made both branches one name)
+};
 
 /**
  * THE PER-DEFINITION SERVICE ROLL, RESOLVED (CENSUS-1f unit 1c; Appendix B site 15, R). A service
