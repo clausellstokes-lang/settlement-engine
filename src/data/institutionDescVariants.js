@@ -2412,4 +2412,21 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer and employer.", needs: Object.freeze(['institution: tavern']), excludes: Object.freeze(['crisis: under_siege']) }),
     Object.freeze({ text: "Commercial-scale ale and beer production. Supplies the town's taverns; while the siege holds the roads none of it goes further. Major grain consumer and employer.", twinOf: "Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer and employer.", needs: Object.freeze(['institution: tavern']), crisis: Object.freeze(['under_siege']) }),
   ]),
+  // FAULTS-ROWS (the sixth chair's BRIEF-FAULTS ruling FR3, 2026-11-18; vetoable by the owner): THE FAIR'S LUXURIES. The Annual
+  // fair's two lines offer luxuries the town's own need list says are not brought in ("Needed, and not brought in: luxury goods.",
+  // bar0-town-calm-rand-45, C32296; r2r-town-10, -56, -57). The need list is the resource analysis's, settled after the
+  // description draw, so each line is read here, late, on `need not brought in: luxury` (`facts/needNotBroughtIn.js`), and its
+  // twin, in its siege twin's form, says the fair is held and names no luxury as to be had. THE ORDER OF THE TWO DECLARATIONS:
+  // the siege is the draw's (`DESC_VARIANT_SIBLINGS` above): a town under siege at the draw stores the siege twin, which is no key
+  // here, so the late re-read never reaches it (r2s-under_siege-town-2: the siege twin beside "Needed, and not brought in: Quality
+  // textiles."); each late member declares the siege off too, so a siege settled after the draw keeps the original as before,
+  // noted for the birth check, and never takes this twin's "held". No draw moves.
+  "Regional merchants. Luxury goods available.": Object.freeze([
+    Object.freeze({ text: "Regional merchants. Luxury goods available.", excludes: Object.freeze(['crisis: under_siege', 'need not brought in: luxury']) }),
+    Object.freeze({ text: "A yearly fair for regional merchants. The luxuries the town wants do not reach it.", twinOf: "Regional merchants. Luxury goods available.", needs: Object.freeze(['need not brought in: luxury']), excludes: Object.freeze(['crisis: under_siege']) }),
+  ]),
+  "Merchants from across the region, and luxuries to be had.": Object.freeze([
+    Object.freeze({ text: "Merchants from across the region, and luxuries to be had.", excludes: Object.freeze(['crisis: under_siege', 'need not brought in: luxury']) }),
+    Object.freeze({ text: "A yearly gathering of the region's merchants, though the luxuries the town wants do not come with them.", twinOf: "Merchants from across the region, and luxuries to be had.", needs: Object.freeze(['need not brought in: luxury']), excludes: Object.freeze(['crisis: under_siege']) }),
+  ]),
 });
