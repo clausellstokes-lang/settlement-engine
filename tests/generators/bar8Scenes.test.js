@@ -258,7 +258,8 @@ describe('BR23 (3): enchanting offered, the arcane trade not at work', () => {
   const pool = () => sense('arcane').dominant;
   const trade = () => rowOf(pool(), /^Magic is a trade in .* like any other/);
   const noSign = () => rowOf(pool(), /^No sign in .* offers enchanting by the hour/);
-  const slow = () => rowOf(pool(), /^Signs in .* still offer enchanting by the hour, but the work is slow and dear/);
+  // RE-WORDED BY NAME 2026-11-18 (BAR8-SCENES-3, BR25 (2), VETOABLE): was "Signs in {name} still offer enchanting by the hour, …"
+  const slow = () => rowOf(pool(), /^Magic is still a trade in .*: the signs still offer it by the hour, but the work is slow and dear/);
   /** @param {any} s */
   const states = (s) => [admits(trade(), s), admits(noSign(), s), admits(slow(), s)];
   test('the trade line has exactly the two twins (the new one last in the pool)', () => {
@@ -270,6 +271,22 @@ describe('BR23 (3): enchanting offered, the arcane trade not at work', () => {
     expect(/** @type {any} */ (factsOf(s)).enchanting).toBe(true);
     expect(tradeAtWorkOf(s, 'arcane')).toBe(false);
     expect(states(s)).toEqual([false, false, true]);
+  });
+  // BAR8-SCENES-3 (BR25 (2), 2026-11-18): the reader's H2. The atom `enchanting` reads enchant OR identif (`sceneSupply.js ::
+  // ENCHANTING`); this town's only arcane service is "Arcane identification", and the twin said "still offer enchanting". Its
+  // words now, word for word, and the services it names are only those the page lists (FAILS at 55b954f98: it named enchanting)
+  test('the twin word for word; in bar0-city-under_siege+famine-rand-47 (identification only) it names no service the page does not list', () => {
+    expect(slow().text('Ashford')).toBe('Magic is still a trade in Ashford: the signs still offer it by the hour, but the work is slow and dear for want of what it takes.');
+    const s = town('bar0-city-under_siege+famine-rand-47');
+    const listed = Object.values(s.availableServices || {}).flatMap((rows) => (Array.isArray(rows) ? rows : []).map((/** @type {any} */ r) => String(r?.name ?? ''))).filter((n) => /enchant|identif/i.test(n));
+    expect(listed).toEqual(['Arcane identification']); // the premise: identification only
+    expect(admits(slow(), s)).toBe(true);
+    const SERVICES = ['enchant', 'identif'];
+    const named = SERVICES.filter((w) => slow().text(s.name).toLowerCase().includes(w));
+    expect(named.filter((w) => !listed.some((n) => n.toLowerCase().includes(w)))).toEqual([]);
+    // the same reading convicts the old words (the arm can fail)
+    const OLD = `Signs in ${s.name} still offer enchanting by the hour, but the work is slow and dear for want of what it takes.`;
+    expect(SERVICES.filter((w) => OLD.toLowerCase().includes(w)).filter((w) => !listed.some((n) => n.toLowerCase().includes(w)))).toEqual(['enchant']);
   });
   test('bar0-city-under_siege+famine-rand-46: enchanting offered and the arcane trade at work: the original', () => {
     const s = town('bar0-city-under_siege+famine-rand-46');
