@@ -29,6 +29,7 @@ import { liveInstitutions } from '../../src/domain/institutions/institutionRoste
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { chainCarrierOf } from '../../src/domain/facts/chainCarrier.js';
 
 await loadGenerationLawPayloads();
 
@@ -58,6 +59,15 @@ const RING = /** @type {Record<string, string[]>} */ ({
 });
 /** @param {any} s @returns {Set<string>} the grounds the record stores, live or spent */
 const storedOf = (s) => new Set([...(s.config?.nearbyResources || []), ...(s.config?.nearbyResourcesNative || []), ...(s.config?.nearbyResourcesDepleted || [])].map(String));
+
+const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+const CRISES = ['famine', 'indebted', 'infiltrated', 'insurgency', 'mass_migration', 'monster_pressure', 'occupied', 'plague_onset',
+  'politically_fractured', 'recently_betrayed', 'religious_conversion', 'slave_revolt', 'succession_void', 'under_siege', 'wartime'];
+/** The census's 720. */
+const CENSUS = [
+  ...SIZES.flatMap((size) => Array.from({ length: 60 }, (_, i) => `r2r-${size}-${i}`)),
+  ...CRISES.flatMap((c) => SIZES.flatMap((size) => Array.from({ length: 4 }, (_, i) => `r2s-${c}-${size}-${i}`))),
+];
 
 /** Towns of the 720 and the 150 holding a taker of the second ring on no stored ground of its own (measured at the base). */
 const RING_TOWNS = ['r2r-thorp-0', 'r2r-hamlet-1', 'r2r-hamlet-4', 'r2r-hamlet-18', 'r2r-village-2', 'r2r-village-20', 'r2r-village-36',
@@ -141,14 +151,28 @@ describe('FAULTS-BIRTH (a) · the second ring proves its ground as the first doe
     expect(seen, 'takers of the second ring on a stored ground (the anchor)').toBeGreaterThanOrEqual(4);
   }, 600_000);
 
-  test('and where the town\'s own exports name the ground\'s raw yield ("Furs and pelts": r2r-village-2), the ground is there', () => {
+  test('FR21 (4): an export proves no implied ground: the page reads the chain that carries it as transit', () => {
     const seed = groundSeedFor('hunting_grounds', false);
     const lodge = (/** @type {string[]} */ exports) => ({ ...built(["Hunter's lodge"]), economicState: { primaryImports: [], primaryExports: exports } });
-    expect([...birthPicksOn(lodge(['Furs and pelts']), seed)[BIRTH_PICKS].grounds], 'the exports name furs: there').toEqual([['hunting_grounds', 'there']]);
-    expect([...birthPicksOn(lodge(['Iron tools', 'Preserved foods']), seed)[BIRTH_PICKS].grounds], 'NEGATIVE: no export of its yield: the seed spends it').toEqual([['hunting_grounds', 'used']]);
+    expect([...birthPicksOn(lodge(['Furs and pelts']), seed)[BIRTH_PICKS].grounds], 'an exported "Furs and pelts": the seed still spends the ground').toEqual([['hunting_grounds', 'used']]);
+    expect([...birthPicksOn(lodge([]), groundSeedFor('hunting_grounds', true))[BIRTH_PICKS].grounds], 'POSITIVE CONTROL: a seed that leaves it there').toEqual([['hunting_grounds', 'there']]);
     const s = town('r2r-village-2');
-    expect(rowMarkText(s, 'house', liveInstitutions(s).find((i) => i.name === "Hunter's lodge")), 'r2r-village-2: the lodge at work beside its furs').toBeNull();
+    const furs = (s.economicState?.activeChains || []).find((/** @type {any} */ c) => (c.outputs || []).includes('Furs and pelts'));
+    expect(chainCarrierOf(furs, s).kind, 'r2r-village-2: the furs chain runs on passing trade').toBe('transit');
+    expect(HI.impliedGroundsOnPage(s).used, 'r2r-village-2: the lodge\'s hunting grounds read used up').toContain('hunting_grounds');
   }, 600_000);
+
+  test('FR21 (4b): over the census\'s 720, no chain\'s own ground is a ground a house implies (the page\'s reader of a carrier)', () => {
+    let implied = 0;
+    expectNoSeedFailures(collectSeedFailures(CENSUS, (seed) => {
+      const s = town(seed);
+      for (const ground of impliedGroundsOf(s).states.keys()) {
+        implied++;
+        for (const c of (s.economicState?.activeChains || [])) if (c?.resourceKey === ground && chainCarrierOf(c, s).kind === 'own') throw new Error(`${c.label} carries ${ground} as its own`);
+      }
+    }), 'the census');
+    expect(implied, 'implied grounds read (the anchor)').toBeGreaterThan(200);
+  }, 1_800_000);
 
   test('constructed: a lone woodcutter proves its wood (there or used up by the seed) and is never the failed venture; a lone charcoal burner can be', () => {
     const there = birthPicksOn(built(["Woodcutter's camp"]), groundSeedFor('managed_forest', true));
