@@ -5,7 +5,6 @@ import {
   hasCriminalInstitution,
   lawlessRow,
   materializeInstitutionServiceRolls,
-  NO_LAW_BRING_COIN,
   THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION,
 } from './services/serviceRollMaterialization.js';
 import {
@@ -20,6 +19,11 @@ const ASK_AROUND_QUIETLY_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS = 'Ask around qui
 // all (R3-CODE-C-6: a name test of the roster for the fence house, outside the crime fact's home, is no reading of it).
 const FENCING_STOLEN_GOODS = 'Fencing stolen goods';
 const INFORMAL_NO_CONTRACT_VIOLENCE_AVAILABLE_FOR_COIN_TO_THOSE_WHO_KNOW_WHERE_TO_ASK = 'Informal, no contract. Violence available for coin to those who know where to ask.';
+// COHERENCE-PRESUME (the chair's ruling A, 2026-11-11): the row DENIED the law ("No law", "There is no
+// official recourse here") in towns with a watch and a hall, court or council (22 of the 360 corpus
+// towns, every one). Every town this generator births has some law, so the row says what it meant:
+// the law is there and coin beats it. One row, reworded; no twin (the thought holds everywhere).
+const NO_LAW_BRING_COIN = 'Weak law, bring coin';
 const PAY_A_LOCAL_STRONGMAN_A_NEIGHBOR_OR_A_GANG_FOR_SOME_MEASURE_OF_SAFETY_NO_CONTRACTS_NO_GUARANTEES = 'Pay a local strongman, a neighbor, or a gang for some measure of safety. No contracts, no guarantees.';
 const PROTECTION_INFORMAL = 'Protection (informal)';
 const _ARCANE_UNDERGROUND = '(arcane underground)';
@@ -99,6 +103,7 @@ export const generateAvailableServices = (
     if (securityRatio < 0.6) {
       buckets.criminal.push(
         {
+          name: NO_LAW_BRING_COIN,
           ...lawlessRow(institutions, buckets),
           institution: '(lawless)',
         },
@@ -132,6 +137,7 @@ export const generateAvailableServices = (
       if (securityRatio < 0.4) {
         buckets.criminal.push(
           {
+            name: NO_LAW_BRING_COIN,
             ...lawlessRow(institutions, buckets),
             institution: '(lawless)',
           },

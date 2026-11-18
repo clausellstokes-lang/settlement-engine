@@ -79,13 +79,9 @@ export function hasCriminalInstitution(institutions) {
   });
 }
 
-// THE LAWLESS ROW (BAR8-K-WATCH-2, BR29: moved here from `servicesGenerator.js` with no change but `export`; the overlay's
-// two push sites stay in the orchestrator, which imports the row).
-// COHERENCE-PRESUME (the chair's ruling A, 2026-11-11): the row DENIED the law ("No law", "There is no
-// official recourse here") in towns with a watch and a hall, court or council (22 of the 360 corpus
-// towns, every one). Every town this generator births has some law, so the row says what it meant:
-// the law is there and coin beats it. One row, reworded; no twin (the thought holds everywhere).
-export const NO_LAW_BRING_COIN = 'Weak law, bring coin';
+// THE LAWLESS ROW'S DESCRIPTION (BAR8-K-WATCH-2, BR29: moved here from `servicesGenerator.js`; the row's NAME stays there,
+// spelled once beside the overlay's two push sites, which write `{ name, ...lawlessRow(...), institution }`: the same keys in
+// the same order).
 export const THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION = 'The law here is slow and easily outbid. Disputes end with whoever can apply more violence or pay more for protection.';
 // BAR6-CRIME (BRIEF-BAR6 (e), LAW 9's 9a.lawless; the wide read's C172465; vetoable by the owner): "easily outbid" and
 // "disputes end with whoever can apply more violence" are false where the town keeps its own court and its own gaol (the
@@ -98,11 +94,11 @@ export const THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_AP
 // The drawn services are read as they stand when this row is added (the court services are the houses' own rolls,
 // materialised above), the same rows the record keeps; where no court sits the row takes its other description.
 export const SLOW_LAW_DESC = lineText({ text: 'The court sits and the gaol holds, but both are slow, and coin buys a quicker answer.', needs: ['court sits', 'prison'] });
-/** @param {Array<{ name?: unknown }>} institutions @param {Record<string, unknown[]>} drawn the services drawn so far @returns {{ name: string, desc: string }} */
+/** @param {Array<{ name?: unknown }>} institutions @param {Record<string, unknown[]>} drawn the services drawn so far @returns {{ desc: string }} */
 export const lawlessRow = (institutions, drawn) => {
   const d = defenceOf({ institutions });
   const courtSits = courtHoldersOf({ institutions, availableServices: drawn }).length > 0;
-  return { name: NO_LAW_BRING_COIN, desc: courtSits && d.prison ? SLOW_LAW_DESC : THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION }; // the name said once (275ce166f made both branches one name)
+  return { desc: courtSits && d.prison ? SLOW_LAW_DESC : THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION }; // the name is the caller's, said once (275ce166f made both branches one name)
 };
 
 /**
