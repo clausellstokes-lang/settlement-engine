@@ -14,6 +14,7 @@ under BRIEF-CLOSE (C1 to C10) and the chair's rulings CL11 (landed points over `
 | S4.1 | ae0af7ca9 | `tests/domain/worldFactRederive.test.js` A4 | (b) a stale roster | A4 red → **A4 green** (A7 red at both, same message: CLOSE-DOORS-2's) |
 | S4.2 | 890296904 | `tests/lint/factLayers.walker.test.js` arm (a): the instrument | (c) a law: a guard blind to two leaves | arm (a) **green**; the table unchanged |
 | S4.3 | 1039b8c26 | the same: `hasInstitution`'s probe | (c) the same gap | green; the table unchanged |
+| S4.4 | none (withdrawn) | the presumed-things door's four fresh lines | recorded by the owner's word (CLOSE-DOORS-1B) | nothing changed here |
 | S5 | a970ef865 | `vercel.json` (CL13) | not a red: the chair's item | every reader the same at both ends |
 
 No stored figure (register, baseline, census, ledger, golden, ceiling, bundle) was written by this seat. No `DECLARED_OVERRUN`
@@ -127,6 +128,25 @@ rise(s), 1 fall(s)"): no pool or line reads at or above its layer; no ordering f
 table (70e557d5b's `factLayers.js`) under the collecting loop lists all five red leaves at once (legalHouse, timberAtHand,
 timberReachesSawmill, tradeAtWork, importsAsPrinted; goodExported and seatHeld now read); a planted `plantX` `factsCall` row throws "the
 factsCall getter 'plantX' has no call here". eslint 0; both type gates at their ceilings (167; 1113).
+
+## S4 item 4 · the presumed-things door's four fresh lines (PREPARED IN SCRATCH; WITHDRAWN)
+
+Withdrawn by the chair at the owner's word (2026-11-18 04:41:48 UTC, "record the four": the four sentences stand; CLOSE-DOORS-1B writes
+the rows). Nothing of it was committed: the scratch trees were discarded. What it taught, for the next seat that writes a twin:
+- **What the walker credits** (`tests/lint/presumedThings.shared.mjs :: scanSource`): a literal of 3+ words naming a registered thing is
+  declared only by `needs` / `excludes` / `crisis` / `poolDeclares` (and a pool variant's `marks`, a tagged table's `tags`) on an object
+  literal the tree's trace marks DRAWN (`drawnRanges`: reached from a door's argument, `DOOR_ARGS`), within five levels up, by a builder
+  row's `needs` / `excludes`, or by a drawn table keyed by the line's own text; a bare `const` twin, or a table no door is handed
+  (`GUARD_LAW_SIBLINGS`), declares nothing. The form that does, at no runtime cost: `lineText({ text, needs: [...] })` (it hands back the
+  string; `guardLineUnderTheLaw.js :: MILITIA_TURNS_OUT` is the precedent).
+- **A rewording mints a new literal**, so every thing it still names becomes a fresh, UNBANKABLE hit (the door banks only a literal that
+  stood at `--base`): the hired company's twins, rid of "garrison", still named `armedForce` through their first sentence ("professional
+  soldiers", "a band of soldiers"); "hired swords" names nothing, "free company" names `mercenary`; `armedForce` also counts `mercenary`
+  among its sufficient atoms (`registeredWords.js :: armedForce`), so `needs: ['mercenary']` on a Free company hall's own row would
+  declare it.
+- **Measured in scratch against the door's `--check`:** the bowyers' "defenders" → "defence", the two "garrison …" clauses dropped, the
+  two first sentences' "soldiers" → "hired swords", and the court-and-prison twin wrapped in `lineText({ …, needs: ['court', 'prison'] })`
+  took the four lines' six keys out of the fresh list (38 → 32) and touched no other row.
 
 ## S5 · lane pushes create no deployment (a970ef865)
 
