@@ -31,10 +31,16 @@
  * @enforced-by tests/generators/faultsNeed.test.js
  */
 import { FAMILY_WORDS, familiesOf, meets, wordsOf } from './criticalImportBroughtIn.js';
-import { WORKING_CHAIN_STATUSES } from './chainWorking.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { ventureOnPage } from './supplyStory.js';
 import { chainPrintName } from '../display/chainPrintName.js';
+
+/**
+ * THE STATUSES OF A WORKING CHAIN, a COPY of `facts/chainWorking.js :: WORKING_CHAIN_STATUSES` (that module is rostered lazy in
+ * `goods.schema.js`'s goods roster: an import from this eager leaf would make it eager), held equal to it by the guard.
+ * @type {ReadonlyArray<string>}
+ */
+export const WORKING_CHAIN_STATUSES_COPY = Object.freeze(['running', 'operational', 'entrepot', 'vulnerable', 'magically_sustained']);
 
 /** @typedef {{ resourceAnalysis?: unknown, economicState?: unknown, institutions?: unknown, availableServices?: unknown, tier?: unknown }} NeedRecord */
 
@@ -106,7 +112,7 @@ function madeHere(record, eco) {
   const chains = /** @type {Array<{ status?: unknown, outputs?: unknown }>} */ (arr(eco.activeChains).filter((c) => c && typeof c === 'object'));
   return [
     ...strings(eco.primaryExports),
-    ...chains.filter((c) => WORKING_CHAIN_STATUSES.includes(String(c.status))).flatMap((c) => {
+    ...chains.filter((c) => WORKING_CHAIN_STATUSES_COPY.includes(String(c.status))).flatMap((c) => {
       const p = chainPrintName(/** @type {Parameters<typeof chainPrintName>[0]} */ (c), /** @type {Parameters<typeof chainPrintName>[1]} */ (record));
       return [p.resource, ...arr(c.outputs), p.label];
     }),

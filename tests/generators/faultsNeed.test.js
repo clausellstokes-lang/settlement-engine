@@ -23,7 +23,7 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { importsAsPrinted, needMetBy, NEED_DEALT_ROWS } from '../../src/domain/display/tradeListDisplay.js';
 import { LUXURY_CLASS, NOT_A_GOOD } from '../../src/data/tradeListDeclarations.js';
-import { NEED_DEALT_ROWS_COPY, NEED_KEYS, LUXURY_KEYS_COPY, NOT_A_GOOD_COPY, goodNeededNotBroughtIn, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
+import { NEED_DEALT_ROWS_COPY, NEED_KEYS, LUXURY_KEYS_COPY, NOT_A_GOOD_COPY, WORKING_CHAIN_STATUSES_COPY, goodNeededNotBroughtIn, needListOf, needNotBroughtInOf } from '../../src/domain/facts/needNotBroughtIn.js';
 import { FACT_DIMENSIONS, atomHolds, declarationAdmits } from '../../src/domain/facts/factVocabulary.js';
 import { variantFactDeclaration } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
@@ -31,6 +31,7 @@ import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 import { GOAL_FAMILY_LINES } from '../../src/data/people/goalFamilies.js';
+import { WORKING_CHAIN_STATUSES } from '../../src/domain/facts/chainWorking.js';
 import { rowShortOf } from '../../src/domain/display/crisisStoppedRow.js';
 import { liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
 
@@ -138,6 +139,7 @@ describe('FAULTS-NEED item 1: the atom `need not brought in` (FR2) states the pa
   const same = (s) => expect(needListOf(s), 'the leaf\'s list is the page\'s').toEqual(importsAsPrinted(s).needed);
   it('its copied tables are their homes\' own, and its keys are the vocabulary\'s', () => {
     expect([...NOT_A_GOOD_COPY]).toEqual([...NOT_A_GOOD]);
+    expect([...WORKING_CHAIN_STATUSES_COPY]).toEqual([...WORKING_CHAIN_STATUSES]);
     expect(LUXURY_KEYS_COPY.map((k) => k.replace(/~/g, ' '))).toEqual(LUXURY_CLASS.map((r) => r.text));
     expect(LUXURY_CLASS.every((r) => r.needs.length === 1 && r.needs[0] === 'tier: ≥ village')).toBe(true);
     expect(NEED_DEALT_ROWS_COPY.map(([g, re]) => [g, String(re)])).toEqual(NEED_DEALT_ROWS.map(([g, re]) => [g, String(re)]));
