@@ -855,3 +855,31 @@ should be paused or archived by the owner's hand.
   files, 937 lines (HEAD f1ca75555). Each session's idle clock restarted at 23:47. THE CHAIR HAS NOT READ THE PRINTED
   WORK AND APPLIES NONE OF IT: the seats commit it themselves if the owner releases them; if a machine is replaced
   first, the seat (or a successor the owner allows) rebuilds its tree from its own conversation.
+- **00:21 UTC (2026-11-18). THE WHOLE CHECK OF POINTS 43 AND 44 IS IN (CHECKS-2 23:54, CHECKS-1 23:58, CHECKS-3 00:09): 159 names at 917c915bc. Against the
+  baseline (161): TWO GONE (the walker's quarantine arm: J-ROWS's loops; `bar7EconTab` C39519: point 42), NONE NEW;** the
+  doors' last lines unchanged (door-classes fresh 0 · stale 151; door-things fresh 38 · stale 72); A5 red by its
+  watchdog this time. THE LAWS READ BY MESSAGE BY THE CHAIR (`tests/lint`, the registers and the roster test, 224
+  files, at the line's tip dfe557dc9 and at 917c915bc; `/home/user/wk/lawcmp.mjs <logA> <logB>` compares two default
+  reporter logs FAIL block by FAIL block): 78 reds at each, 75 with the same message, THREE WITH ANOTHER MESSAGE UNDER
+  THE SAME NAME, each one more in a count: (1) `tests/lint/mutationCoverageManifest.test.js` TOTALITY: 4 -> 5 guards
+  with no entry (`tests/generators/bar8Rows.test.js` joins `bar5WorldLines`, `bar7Lines`, `bar7Scenes`,
+  `rareSecretsLaw`): the register `scripts/mutation-coverage-manifest.json` (or a planted regression in
+  `scripts/mutation-sweep.sh`): GIVEN TO LEFT-KEYS AS K10, with `bar8Scenes` and the fish rows' guard when they are
+  on the line; (2) `tests/lint/sovereigntyLightingContract.walker.test.js` "THE EACH-FAMILY PARK DEBT ONLY SHRINKS":
+  112 -> 113 over a frozen ceiling of 108 (PDF-2's guard: `tests/pdf/pdf2ReadsTheTabs.test.jsx:262` is a
+  `test.each`): ASKED OF PDF-2 ON ITS SECOND BRANCH (a plain looping test, every seed collected); (3) the same file's
+  census of the estate's files 3678 -> 3680 (two new test files: a stored figure, the close's). NONE IS A LINE ON THE
+  PAGE; none is a new red name. (A LESSON KEPT: a scratch test left in a scratch worktree is counted by these
+  censuses: `/home/user/b1` held one; removed before the gated push.)
+  **POINTS 43 AND 44 ARE BEING LANDED AS CHECKED** (a fast-forward of the line to 917c915bc, pushed from `/home/user/b1`
+  with hooks, the three gates at that tree).
+- **00:21 UTC. SCENES PUSHED ONE MORE SOURCE COMMIT AFTER ITS HAND-BACK (0dae3609f, 23:53; its final net 867476c33, 00:11): THE SMALL QUARRY'S TWIN IS REWORDED**
+  ("A laden cart or two comes down from the workings in a day, and no more."; it read "… and the road is quiet between
+  them.", which the presumption-classes walker counts as a fresh claim that no threat is near; the declaration
+  unchanged) and the guard's one un-anchored negative became the history twin's branches word for word. MERGED ON TOP
+  OF POINT 45 AS POINT 46: 58cb585691214feac4d9aa217181cf47c2ece63b on `lane/landing-45-2026-11-17` (the tree
+  cf9b3d5c7; on origin 00:21). At it the guard and its five neighbours: 62 of 62 green; `presumption-classes-door --check`:
+  fresh 0 · stale 152 (the one new stale row is the 12c row). READ-SCENES IS TOLD (its verdict is on 867476c33; what it
+  measured at cabed01ff and at 2f0e88971 stands: the delta is one line of text and the guard). THE WHOLE CHECK ASKED AT
+  2f0e88971 (CHECKS-2 23:55, CHECKS-1 23:58, CHECKS-3 00:10; label `landing-45-2f0e88971`) STANDS FOR POINT 45; POINT
+  46 LANDS WITH IT ON A TARGETED NET OF THE DELTA (the guard, the doors, the laws by message at 58cb58569).
