@@ -69,7 +69,36 @@ each. 23 of the 93 under a siege or with no market (cells of 3 or 5).
 cell refused where `needUnmet`; a line appended there is refused with them, and the other SUPPLY cells (impaired,
 isolation, expansion) are not dealt to these cards. The cure needs one push in `goals.js`, a file outside the item.
 
-(Section completed on the chair's word.)
+**HELD, NOT COMMITTED (no word from the chair by the hand-back; its session idle).** The cure is written and measured
+in my tree, and handed over as a patch that applies on f3b728bb0: `docs/chair/2026-11-18/last/LAST-VARIETY-ITEM2-WANT.diff`
+(`git apply` it; four files: `src/data/people/goalFamilies.js`, `src/generators/people/goals.js` (two lines),
+`tests/data/goalFamilies.test.js` (the §6.6 count), `tests/domain/lastVariety.test.js` (item 2's guard block)).
+
+- **The cell.** `GOAL_FAMILY_LINES.SUPPLY.want` (slots `resource`, `house`; `GOAL_SUBKIND_SLOTS.SUPPLY.want`), at the
+  family's END; the intent key falls to SUPPLY's `*` (`secure_supply`). `goals.js` pushes it beside the refused dependency
+  cell ONLY where `needUnmet` holds, so no card with a met dependency moves by it. A refused dependency pick then takes the
+  family's next admitted line (a want line), draw-free, as POWERS-9 resolves it.
+- **The four lines (THE OWNER'S VETO LIST; none presumes a supply, none buys from outside, so none is refused under a
+  siege; the slot contract held by `goalFamilies.test.js`):**
+
+  | vantage | line | e.g. (as it fills on a card of the 900) |
+  |---|---|---|
+  | short | Find something the work at {house} can use in place of {resource}. | bar0-city-wartime-rand-45, Klara Weber (the citadel; stone and iron and grain); bar0-city-wartime-rand-31, Banbh Farrell (the banking houses; precious metals); r2r-town-30, Helga Gormsson (the blacksmiths; iron and fuel) |
+  | short | Gather what {resource} can be found close to home for the work at {house}. | (its cards: those of the row above and below; e.g. bar0-hamlet-under_siege-rand-39, Khongorzul Ongut, the citizen militia, iron) |
+  | long | Open a lasting way to bring {resource} in for the work at {house}. | r2r-village-8, Rashid Besud (the citizen militia; iron); r2r-town-9, Grettir Kolbeinsson (the carpenters; timber); r2r-town-23, Taghrid ibn Ali (the citadel) |
+  | long | Win those who govern here over to bringing {resource} in for the work at {house}. | bar0-town-occupied-rand-40, Varun Mukherjee (the docks; timber); r2s-insurgency-metropolis-2 and r2s-slave_revolt-metropolis-0 (the banking district; precious metals) |
+
+- **Proof (in my tree).** Over the 900: cards whose SUPPLY family holds fewer than two admitted lines, 93 → **0** in each
+  vantage. The guard block (cells and slots; five such cards, two under a siege, hold two admitted lines a vantage; a want
+  line dealt on two cards of the 900; NEGATIVE: no want line beside a met dependency, over every card of the guard's towns)
+  green; red at the base (no cell). `goalFamilies`, `goals`, `goalChainWords`, `goalCharterRefused` and `faultsNeed` green.
+- **Declared moves (measured with an earlier wording of the second short line, "Ask every household nearby …", reworded
+  before handing over: the cards it reaches are the same).** Field family: the cards' goals (`npcs[].goal` short, long and
+  intent) on the NPCs tab, the summary, the PDF and the journal. Towns moving: the thirty 1, the 150 3, the 720 37 (82
+  cards: the cards that now draw a want line, and cards whose draw moved because a held text moved). **13 of the 525** move
+  by the golden's own `hashFor` (town|… desert, city|… mountain rows among them). Stored figures it would move: the golden
+  master (already red at the base), `goalFamilies.test.js`'s §6.6 count (SUPPLY 48 → 52, 524 → 528: in the patch), the
+  estate's file count (no new file: unchanged).
 
 ## 3 · Item 3: CL22's two lopsided pools, measured; nothing written
 
