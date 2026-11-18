@@ -1,5 +1,9 @@
 // FAULTS-TOOLS (2026-11-18, BRIEF-FAULTS § FAULTS-TOOLS): the guards of the checking tools this seat repaired.
 //
+// ITEM 1 · THE MATCHER TAKES A NAME FOR A CLAIM (the chair's ruling CL25). `claimsField` read the NAME SLOT `{settlement}`
+// (the town's proper name) as a claim of the record's `settlement` field, and the bare verb "has" as a claim of every field
+// whose name opens on it (`hasGranary`, `hasWatch`, ...). Cured at the matcher; each kind of claim it must still find is planted.
+//
 // ITEM 2 · THE VALIDATOR THAT CANNOT OPEN. `scripts/census/census4-validate-ledger.mjs` threw on the first file of
 // its directory that was not one of its own ledgers (ENOENT on `undefinedARRIVAL_MEMORIES.json`, from 2c1428102 on).
 // It must OPEN on the tree as it stands, NAME the files it does not read, and still FIND each kind of fault it exists
@@ -10,6 +14,8 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { armA0b, claimsField, claimTokensOf } from '../../src/domain/prose/composedWalker.js';
+import { loadStateLeaves } from '../helpers/dossierCorpus.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const VALIDATE = join(ROOT, 'scripts/census/census4-validate-ledger.mjs');
@@ -81,5 +87,63 @@ describe('FAULTS-TOOLS item 2 · census4-validate-ledger opens and still finds',
       // negative: neither finding stands on the tree's own extract
       expect(baseline.filter((f) => /no pool for|no ledger file/.test(f))).toEqual([]);
     } finally { rmSync(planted, { recursive: true, force: true }); }
+  });
+});
+
+const corpus = await loadStateLeaves();
+const census = JSON.parse(readFileSync(join(ROOT, 'docs/content/wiring-census.json'), 'utf8'));
+const censusByPool = new Map(census.rows.map((r) => [`${r.block} :: ${r.pool}`, r]));
+/** every over-claim armA0b finds on the shipped corpus, as `<block> :: <pool> v<vid> <field>` */
+const overClaims = corpus.flatMap((entry) => {
+  const row = censusByPool.get(`${entry.block} :: ${entry.pool}`);
+  const out = armA0b({ id: `${entry.block} :: ${entry.pool}`, text: entry.text, reads: row ? row.reads : [],
+    universe: row ? row.fieldsRead : [], predicate: row ? row.predicate : [], marks: entry.marks });
+  return out.fails.filter((f) => f.subject === 'over-claim').map((f) => `${f.id} v${entry.vid} ${String(f.value).replace(/ \(as .*$/, '')}`);
+});
+
+describe('FAULTS-TOOLS item 1 · the matcher tells a name and a verb from a claim', () => {
+  it('the NAME SLOT claims no field; a slot naming a field, and the bare word, still do', () => {
+    expect(claimsField('{settlement} keeps its own rolls.', 'settlement')).toBe('');
+    expect(claimsField('What binds {settlement} to {counterpart} expires.', 'readings.settlementId')).toBe('');
+    // positives beside it
+    expect(claimsField('The {granary} stands full.', 'readings.inst.granary')).toBe('{granary}');
+    expect(claimsField('The settlement keeps its own rolls.', 'settlement')).toBe('settlement');
+    expect(claimsField('{settlement} keeps a watch at the gate.', 'readings.inst.hasWatch')).toBe('watch');
+  });
+
+  it('the BARE VERB of a predicate field is not a claim word; the field\'s own words still are', () => {
+    expect(claimTokensOf('readings.inst.hasWatch')).not.toContain('has');
+    expect(claimsField('{settlement} has no court sitting and no gaol in use.', 'readings.inst.hasWatch')).toBe('');
+    expect(claimsField('The town has decided it can afford them.', 'readings.inst.hasGranary')).toBe('');
+    // positives beside it: the leaf's own words, a camel-cased leaf's words, a plural
+    expect(claimsField('The town has a granary.', 'readings.inst.hasGranary')).toBe('granary');
+    expect(claimsField('The economic gates hold.', 'defenseProfile.economicGates')).toBe('economic');
+    expect(claimsField('No court sits here.', 'readings.inst.hasCourtSystem')).toBe('court');
+  });
+
+  it('PLANTED over-claims of each kind are still found by armA0b, and a clean line finds none', () => {
+    const universe = ['walls', 'readings.inst.hasWatch', 'readings.inst.granary', 'settlement', 'defenseProfile.economicGates'];
+    const planted = armA0b({ id: 'plant', text: 'The settlement has walls; the watch walks, the {granary} is full and the economic gates hold.',
+      reads: ['walls'], universe });
+    expect(planted.fails.filter((f) => f.subject === 'over-claim').map((f) => f.value).sort()).toEqual([
+      'defenseProfile.economicGates (as "economic")', 'readings.inst.granary (as "{granary}")',
+      'readings.inst.hasWatch (as "watch")', 'settlement (as "settlement")',
+    ]);
+    const clean = armA0b({ id: 'clean', text: '{settlement} has walls.', reads: ['walls'], universe });
+    expect(clean.fails).toEqual([]);
+  });
+
+  it('on the shipped corpus, CL25\'s eight are gone and the true over-claims of the same lines stand', () => {
+    const eight = [
+      'DS-GEN-17 :: ADMINISTERED v4 settlement', 'DS-GEN-17 :: ADMINISTERED v5 settlement',
+      ...['hasGranary', 'hasHospital', 'hasMagicInst', 'hasMilitaryInst', 'hasNavy', 'hasWatch']
+        .map((f) => `DS-GEN-17 :: ADMINISTERED v5 readings.inst.${f}`),
+    ];
+    expect(eight.filter((row) => overClaims.includes(row))).toEqual([]);
+    // the lines are still walked (non-vacuity): their true claim of the court stands
+    expect(overClaims).toEqual(expect.arrayContaining([
+      'DS-GEN-17 :: ADMINISTERED v4 readings.inst.hasCourtSystem', 'DS-GEN-17 :: ADMINISTERED v5 readings.inst.hasCourtSystem',
+    ]));
+    expect(overClaims.filter((row) => / settlement$| readings\.settlementId$/.test(row))).toEqual([]);
   });
 });
