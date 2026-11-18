@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-18T04:19:45.599Z",
+  "generatedAt": "2026-11-18T05:21:12.293Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "7c276759a1dfe992",
+  "sourceHash": "ded4fab9ebb35790",
   "inputs": [
     "src/data/bandLadders.js",
     "src/data/chainAccessNames.js",
