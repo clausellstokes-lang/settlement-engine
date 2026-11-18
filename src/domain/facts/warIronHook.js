@@ -20,17 +20,38 @@ export const IRON_GOODS = /\b(?:iron|metal)/i;
  */
 export const ironHookStands = (resource, held) => /metal|iron/.test(String(resource ?? '').toLowerCase()) && held(IRON_GOODS);
 
-/** The hook speaks of the war where the war's state is not peace (`facts/warState.js :: WAR_STATES`). @param {unknown} warState */
-export const warIronState = (warState) => warState !== 'peace';
+/** The stress types of an occupation, in the generator's words and the world pulse's (`stressorPicker.js :: GEN_TO_PULSE_TYPE`). */
+export const OCCUPATION_TYPES = Object.freeze(['occupied', 'occupation']);
+
+/**
+ * BAR8 MARKS-2 item 4 (RULING BR16 of the sixth chair, 2026-11-17; vetoable by the owner): THE WAR'S IRON IS TAKEN ONLY WHERE
+ * A WAR IS IN FORCE ON THE PAGE. `facts/warState.js` reads an occupied town "at war"; for the iron it is peace where the
+ * occupation stands alone (no `wartime` among the town's stress types): the occupied town printed "Short of iron." on every
+ * iron house, its income row's mark and the forges' quiet scene beside its own import of iron (C38200, C38039). A siege keeps
+ * its own reading ("front"). Handed no stress types, the state is read as it is (the hook's writer hands none).
+ * @param {unknown} warState @param {ReadonlyArray<unknown>} [stressTypes] the town's stress types
+ * @returns {unknown} the war's state as the iron reads it
+ */
+export function ironWarState(warState, stressTypes) {
+  if (warState !== 'at war' || !Array.isArray(stressTypes)) return warState;
+  const types = stressTypes.map((t) => String(t ?? ''));
+  return types.some((t) => OCCUPATION_TYPES.includes(t)) && !types.includes('wartime') ? 'peace' : warState;
+}
+
+/**
+ * The hook speaks of the war where the war's state is not peace (`facts/warState.js :: WAR_STATES`); handed the town's stress
+ * types, an occupation alone is peace (BR16, `ironWarState`). @param {unknown} warState @param {ReadonlyArray<unknown>} [stressTypes]
+ */
+export const warIronState = (warState, stressTypes) => ironWarState(warState, stressTypes) !== 'peace';
 
 /**
  * THE PREDICATE OVER THE KEPT RECORD: a dependency row "Imports <a metal>" (the economy's own row, written beside the hook),
- * the imports holding iron or metal, and a war's state other than peace.
+ * the imports holding iron or metal, and a war's state other than peace (an occupation alone is peace, handed the stress types).
  * @param {ReadonlyArray<unknown>} dependencies `economicViability.dependencies` @param {ReadonlyArray<unknown>} imports
- * `economicState.primaryImports` @param {unknown} warState @returns {boolean}
+ * `economicState.primaryImports` @param {unknown} warState @param {ReadonlyArray<unknown>} [stressTypes] @returns {boolean}
  */
-export function warHoldsIron(dependencies, imports, warState) {
-  if (!warIronState(warState)) return false;
+export function warHoldsIron(dependencies, imports, warState, stressTypes) {
+  if (!warIronState(warState, stressTypes)) return false;
   /** @param {RegExp} pattern */
   const held = (pattern) => imports.some((x) => typeof x === 'string' && pattern.test(x));
   return dependencies.some((d) => {
