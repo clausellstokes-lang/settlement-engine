@@ -3,7 +3,8 @@
 Seat K-WATCH-2 of the round BAR8 (the chair's rulings BR29 and BR30). Base **215f97d29** (point 49: K-WATCH and K-POWERS
 merged on the working line's 99ca9ad51); branch `lane/bar8-k-watch-2-2026-11-18`; nothing merged. Each item has its own
 commit. Pushes: the title line, item 1, then items 4 and 5 together. After the chair's message of 03:11 UTC I stopped
-the item-2 push in its pre-push hook, before it sent anything. Everything else goes up in one push with this file.
+the item-2 push in its pre-push hook, before it sent anything. Everything else (item 2, the item-1 repair and this
+file) goes up in one push.
 
 | item | commit | what |
 |---|---|---|
@@ -225,7 +226,8 @@ THE TWO MESSAGES THAT DIFFER, both mine and both falls (item 3): `ruinFilterRost
 
 THE ONE RED THAT WAS MINE: `crisisStoppedRows.test.jsx`, red at the first tip (bbcc83967's move) and cured by f93d6ee60
 (item 1, above). After the repair I re-ran at the final tip: all of `tests/lint`, `tests/joins`, `servicesStructure`, N3,
-`crisisStoppedRows`, and every older test that names `servicesGenerator`, `lawlessRow` or `SLOW_LAW_DESC`. NET2_LINE
+`crisisStoppedRows`, and every older test that names `servicesGenerator`, `lawlessRow` or `SLOW_LAW_DESC`. Against the base, 25 gates compared by message: **no red at the tip that is not red at the base**. The only
+differences are `servicesStructure` (cured) and the two falls above.
 
 Item 3 (c) in the lint reds, red at both with the same messages: `poolDominance.walker` "every drawn pool has a row ..."
 (`expected [ 'ledger:rareSecrets:deeds', …(5) ]`), and `mutationCoverageManifest` TOTALITY, which names the two bar8
