@@ -1043,3 +1043,23 @@ should be paused or archived by the owner's hand.
   `tests/generators/politicalFlavorDeclared.test.js` "under a crisis, a stable character is one of the crisis-safe
   rows" (the twin declares its crises by name, not `any`): GIVEN TO SCENES-3 (01:08) with a wider sweep (every test
   that imports the tables the seat changed). The doors' other figures unchanged.
+- **01:15 UTC. THE FIVE ARE MERGED ON THE LINE'S TIP AS POINTS 48 TO 52, NOT LANDED** (in `/home/user/b1`, `lane/landing-k-desks-2026-11-18`, cut from 99ca9ad51):
+  48 K-WATCH d1d0c2e28b02b632ceafd1e1f6da0ccaef41ca20 · 49 K-POWERS 215f97d298736da2e27abfac44976970b169157a · 50 K-PEOPLE
+  b997b6b15e1260fcb983e0b08db5d6502566107e · 51 DESKS-ECO 99072ef25d096affce8509df4c2e5a59c0ae1210 · 52 DESKS-DEF
+  8138cf3c81b85e3656141898225c182820710ecf. Each merges cleanly alone; in the chain ONLY POINT 52 MET POINT 51, in two
+  files, resolved by the chair: `src/domain/facts/factsOf.js` (each desk seat adds one import at the end: both kept)
+  and `tests/lint/proseEntryContradiction.walker.test.js` (two anchors that address an annex row by its line number:
+  both seats' deltas composed and MEASURED in the merged annex by the rows' own text: 6181 -> 6189, 2428 -> 2431; both
+  seats' notes kept). The merge commit differs from the plain merge in those two files only; the pre-commit hook changed
+  nothing in any merge (trees compared). AT POINT 52 the five guards and the walker: 62 of 66 green, the walker's four
+  reds red by name at the seats' base (three by a stored count that composes both desk seats' lines).
+  THE CONTAINER WAS RESTARTED AT 01:10 (four pushes' gates and a merge at once: too much for the machine; FROM NOW AT
+  MOST TWO GATED PUSHES AT A TIME); nothing on disk was lost; the pushes run again in pairs (the four seats' branches,
+  then the landing branch). READ-K-WATCH IS SEATED: session_01FbPLbf3wyhza7C1zeAkEM1 (01:15); the four other readers'
+  prompts are written (`/home/user/wk/prompts/readers/READ-<SEAT>.txt`: the brief `BRIEF-READ-LEFT.md` with BAR8's
+  section, the seat's one commit against its base, THE MERGE read at the seat's own point against its first parent, the
+  laws by name and by message, the older tests the cure makes untrue) and are seated as each branch reaches origin.
+  WHEN THE LANDING BRANCH IS ON ORIGIN: the whole check at point 52 (label `landing-48-52-8138cf3c8`) is asked of the
+  three CHECKS seats, and the 720 at the line's tip and at point 52 of MEASURE-1 (every runner; every rule that moves).
+  BOTH FRESH SEATS COULD COMMIT AND PUSH (01:08: `lane/bar8-j-income-2-2026-11-17` 0d3363177,
+  `lane/bar8-scenes-3-2026-11-17` 09c89699a): the paragraph in `CLAUDE.md` does what it was added for.
