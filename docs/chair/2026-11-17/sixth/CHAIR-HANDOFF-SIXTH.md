@@ -786,6 +786,19 @@ should be paused or archived by the owner's hand.
   contract that reads the steps' declarations and then moves is NAMED for the last close (the precedent: `npcs`, DEBT-2,
   point 36). (2) `src/domain/goods.schema.js`: the goods roster's one row for the new leaf `fishBoughtIn.js`, in path
   order (the precedent: `chainHouses.js`, point 41).
+- **FR15, FR16 and FR17 (09:56 UTC, 2026-11-18).** **FR15** (FAULTS-NEED after its second reader): the leaf passes the declared
+  pool `LUXURY_CLASS` through the kernel's door (`filterDeclared`, each luxury with its row's own declaration, read
+  against the record's tier) and only then reads the admitted lines; its hard-coded band leaves; `MARK_RES` is held to
+  its home by the guard (built: e5fb6347c; the leaf still equals the page on 900 of 900). **FR16**: the one site
+  `presumedThings.walker` ARM 3 still names there (the read of the door's output, `.map(lineText)`) is of the class of
+  the page's own banked site (filtered first, unwrapped only to be matched, never drawn): ONE ROW IS BANKED FOR IT AT
+  THE LAST CLOSE, by hand under this ruling; the seat does nothing more and keeps no raw items to make the walker pass;
+  ITS PIECE IS CLEARED TO LAND AT e5fb6347c with that arm red by that one site. **FR17** (FAULTS-BIRTH's venture
+  count): its cure of FR8 (b) (a venture is never picked beside a house that keeps or yields its material) takes the
+  failed ventures of the census's 720 from 11 to 9 towns, under the band BIRTH-2 calibrated (10 to 20), and
+  `supplyStoryLaw` L5 is red for that alone. THE ODDS STAY (the owner's table is not changed by a seat or by the
+  chair); the band's floor is re-recorded at the last close at the measured figure with this cause; THE OWNER IS TOLD
+  the figure (about one town in eighty where one in fifty was said); a "no" raises the odds instead.
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
   e0242a12a82285a736f9997360ec1e8a5fbd3568 = the line's ed1d43529 + BIRTH-3's 8b0506eae, no collision; tree
@@ -2627,3 +2640,19 @@ should be paused or archived by the owner's hand.
   FAULTS-NEED** (09:40): the leaf passes `LUXURY_CLASS` through `filterDeclared` with the record's tier and only then
   reads the admitted rows' texts (no banked row; stop if EG1 or a self-read of `factsOf` forbids it); the two copies
   held by the guard; the figures named.
+- 09:56 UTC, 2026-11-18 · **FAULTS-BIRTH HANDED BACK** (09:53; tip 703d5962bc60aeac97cb2cff2541f29b001a0914; hand-back
+  `docs/chair/2026-11-18/faults/FAULTS-BIRTH-HANDBACK.md`): (a) THE SECOND RING PROVES ITS GROUND: 123 takers in 106
+  towns of the 720 told no story: now 110 are at work on the ground they prove (fishers 47, woodcutters 24, hunters
+  22, shepherds 16, a wildfowler) and 13 are idle and marked, the ground under Depleted; runJ `11b.fish` 14 to 7 and
+  `11b.fishTitle` 4 to 0 (the 7 left are FAULTS-PEOPLE's fishmonger line and one secret line); ITS OWN TWO CALLS: the
+  second ring is never the failed venture; A GROUND THE TOWN'S OWN FOOD RECORD OR EXPORTS NAME IS NEVER PICKED USED UP
+  (its first cut spent bar0-thorp-calm-rand-47's water beside "what it puts on the table itself is the day's catch");
+  consequences in 22 towns, each read (the dairies of r2r-hamlet-27 and r2s-politically_fractured-hamlet-0; salt works
+  and tanners fed by a proven ground; five towns' "Raw hides and animal products" and two towns' "Salted fish" no
+  longer bought; the need list loses a good in 15 towns); (b) the venture's pick counts keepers and yielders:
+  r2r-hamlet-27 tells story 2; ventures 11 to 9 in the 720 (FR17); (c) 37 isolated buyers in 23 towns read their
+  ground used up; wool 14 and hides 11 left by name; moves: 1, 2 and 34 towns; 0 OF THE 525; no person, tie, name or
+  house moves; no runner rule rises; four older tests re-keyed by identity. **READ-BIRTH IS SEATED** (09:56;
+  session_01FbPLbfSAxCir4NxiU15dpd; `faults/readers/READ-BIRTH.txt`: eight questions; a scratch merge on the landings'
+  tip of its tip and FAULTS-NEED's e5fb6347c, with the two towns of the `11e.offer` rise rendered there).
+  FAULTS-NEED's FR15 is in (e5fb6347c, read by the chair) and FR16 sent: CLEARED TO LAND.
