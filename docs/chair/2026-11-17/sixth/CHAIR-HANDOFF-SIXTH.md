@@ -2319,3 +2319,43 @@ should be paused or archived by the owner's hand.
   wait; the numbering guard with the desks' seat). NOT IN IT: the card for a proven ground and the PDF's land list
   (no false sentence); the 25 recorded rows' declarations and the variety lines (last, with the two lopsided pools).
   CLOSE-DOORS-1B is still idle on its 59-file run (since 06:03).
+- 06:50 UTC, 2026-11-18 · **PART 1 OF THE CLOSE IS WHOLE.** CLOSE-DOORS-1B SAID "READY FOR THE MERGE 397f18e6b" (06:37; 34 commits on
+  all three of the chair's merges; hand-back `docs/chair/2026-11-18/close/CLOSE-DOORS-1B-HANDBACK.md`): every register
+  with a door, the edge bundles, the floors, the lighting census (3,682), the each-family ceiling (106), the four size
+  ceilings each re-recorded once with its causes round by round (the worker 2,356,121 to 2,525,028, +168,907, on the
+  owner's word of 03:42:43 and CL12; the engine chunk +22,843; the first screen +24,493 raw, gzip +7,793, Brotli +6,440);
+  its net at 7d8f05cf5 (`tests/lint` and `tests/build`, one run, by message): 3 of 285 files red, 7 tests: the six arms
+  of CL26 and the four rows. **MERGE 12** (57786142f, clean: 40 files; under `src/` only the regenerated intent atlas
+  distillate and the fork register's measured rows with their notes). **THE FOUR ROWS ARE WRITTEN BY THE CHAIR'S OWN
+  HAND** (0af60594a; `tools/four-rows.mjs --write`; it refused nothing: at merge 12 the fresh hits were EXACTLY the four:
+  hits 5397, fresh 4, others 0): one new reason of the register, `after-base: owner-2026-11-18`; the door after: "fresh
+  0 · stale 0 · first-register stale 0 · banked 4649 · strips fresh 0 stale 0 banked 107"; the walker 43 of 43; the
+  commit quotes the owner's "record the four" (04:41:48 UTC), the chair's question (04:38), the seat's two refusals and
+  the chair's own. THE CHAIR'S OWN CHECK DID NOT REFUSE THE WRITE. The merge branch is being pushed (twelve merges and
+  the four rows); then "PART 1 IS AT 0af60594a" goes to CLOSE-DOORS-2.
+  **READ-MARKS-2 SAID "LAND"** (06:40; M on C = 8d7c2af33; HIGH none): the one conflicted hunk (`bar7EconTab` C7539)
+  resolved on the seat's side, as the chair's rehearsal did; MED 1 (bar0-town-occupied-rand-46: the PDF prints the
+  stored short metal twin with no mark: PDF-2b's income row cures it at the landing: one more town of a class of eight
+  calm towns); MED 2: `HOUSE_NEED_INPUT`'s `alchemist_shop: 'herbs'` is caught by no test (reverted: 46 of 46 green):
+  A FOLLOW-UP SENT TO MARKS-2 (06:50: one arm in its guard, tests only); the declared moves hold (C to M over the 720:
+  primaryImports 3, plotHooks and summary 2, arrivalScene 1); runD the base's figures at all four trees; the stored
+  figure it moves: the estate's count 3682 to 3683.
+  **READ-INCOME-PDF SAID "DO NOT LAND YET"** (06:25): HIGH 1: at the merge `factLayers.walker` "every leaf declares
+  exactly the strata it touches" names `importsAsPrinted` (undeclared `availableServices`: item 4's `dealtInHere`; the
+  chair's rehearsal found the same); MED 1: `dealtInHere` drops "livestock" from the need list where a live shepherd
+  prints "Livestock management" EVEN WHERE THE PAGE MARKS ANOTHER HOUSE SHORT OF IT (bar0-village-calm-rand-29,
+  r2r-village-47: "Needed, and not brought in: livestock." leaves while the Dairy farmer prints "Short of livestock.";
+  five towns of the 720 lose a need by the rule); MED 2: BR33 (2) is not held for metal (a ruined forge still prints
+  "Metal is smelted or worked here."; no town of the 900 holds a non-live house); LOW 1: a town SAVED before the change
+  still prints the rites line (its stored `desc`: for the owner's list: a saved town keeps the sentences stored at its
+  birth); LOW 2: FS1 (a)'s note does not quote the retired words. Its two resolutions at the merge are the chair's own
+  (the leaf is J-INCOME-2's; the test file byte-equal to PDF-2b's). G1 19 towns of the 180 to 0; G2 the nine to 0; the
+  five rows of BR26 equal by both doors; the shared page 0 differences. ROUTED: HIGH 1, MED 2 and LOW 2 TO J-INCOME-2
+  (06:50: three small commits on its branch; the one row of `factLayers.js` given by name); MED 1 TO FAULTS-NEED as its
+  ITEM 0 (it holds `tradeListDisplay.js`, and its leaf restates the list as cured).
+  **THE FAULTS ROUND IS SEATED** (06:43 to 06:49; each from `lane/faults-base-2026-11-18` at 4288049ba; the prompts are
+  `docs/chair/2026-11-18/faults/prompts/` on this lane, as sent): FAULTS-NEED session_01FbPLbe2g4WTAG4NkxKukHt (it sends
+  "THE ATOM IS AT <sha>"; FAULTS-ROWS is then seated on that commit) · FAULTS-BIRTH session_01FbPLbfwK9snxPA6QnLex8U ·
+  FAULTS-DESKS session_01FbPLbd75CLU9a3oUrN7GJX · FAULTS-PEOPLE session_01FbPLbbNYoo1zfKYvPWDQzR · FAULTS-WATCH
+  session_01FbPLbceWHBqb38hxNLm8Px · FAULTS-TOOLS session_01FbPLbf7HeN79PoWDejxBKm. THE BRIEF'S HEADER SAID "written
+  06:40": the file was written at 06:38 (the hour set ahead of the clock again): corrected in the file.

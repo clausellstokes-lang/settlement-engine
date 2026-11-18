@@ -1,4 +1,4 @@
-# BRIEF-FAULTS · the faults every seat so far left by name, each cured at its one fact (written 06:40 UTC on 2026-11-18 by the sixth chair)
+# BRIEF-FAULTS · the faults every seat so far left by name, each cured at its one fact (written 06:38 UTC on 2026-11-18 by the sixth chair)
 
 By the owner's word of 2026-11-18 (05:13:00 UTC, verbatim: "no everythign but the new 30 reads is predeploy. the reads and
 what follows is post deploy") every known fault is built BEFORE the deploy. The round BAR8 cured the families of the seventh
