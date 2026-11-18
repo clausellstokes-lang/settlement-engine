@@ -175,7 +175,17 @@ green at both. Bytes, previous tip → this one: engine-core 307,440 → 307,956
 278,066 → 277,561; the generation worker 2,550,602 → 2,552,575 (+1,973). The worker was over its ceiling (2,525,028)
 already: a stored figure for the close.
 
-**The net of item 3** (the previous tip against this one): running; it follows in the next commit.
+**The net of item 3** (the previous tip 91661eceb against dd4a88a32; every red compared by message, paths stripped):
+`tests/lint` has 29 red at both and 29 with the same message. `tests/joins`, `tests/data`, `tests/domain/facts`,
+`crisisBlindDossierProse`, the six faults guards and the 31 older tests naming the moved rule have 8 red at both
+(1,517 → 1,519 tests: the guard's two new ones), 7 with the same message. Two messages move, both STORED FIGURES for the
+close:
+- the generation worker bundle (`tests/build/generationWorkerLazy`): 2,550,602 → 2,552,575 B;
+- the writers' reach (`tests/lint/writerReach` "the surfaceReach grammar round-trips"): the first identity off the
+  frozen register is now `resourceActive on activeChains` (its reader `chainCarrier.js` is reached through
+  `tradeAtWork.js` now; the computed reach begins `dossier-pdf=R …` where the register begins `campaign-pdf=R …`),
+  where before it was `name on availableServices`. I did not trace which surfaces changed; the close rebanks this
+  register through its door. `typecheck:ratchet` and `typecheck:domain:strict` hold at 167 and 1,113 (the push).
 
 ## The net (each gate alone through `scripts/gate-tail.sh`; base b014a7bf3 and tip; every red compared by message)
 
@@ -226,6 +236,7 @@ other secret). Two NEW reds came from item 1, and both are cured under the chair
 - The estate's file count (`sovereigntyLightingContract`): 3,696 → 3,697.
 - `institutionBudgetPromise`'s moved seeds: 35 → 36 (item 2).
 - The generation worker bundle: 2,552,575 B at the tip (+1,973 under item 3; over its ceiling since the base).
+- The writers' reach register: `activeChains[].resourceActive`'s surface reach (item 3, named in its net).
 - The golden: 0 of 525 move under items 1 and 3; **3 of 525 move under item 2** (the sawyer's secret, named above). The golden
   test's failing list goes 191 → 192.
 
