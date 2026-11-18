@@ -50,7 +50,7 @@ const QUARTER = 'Luxury goods quarter';
 const Q1 = 'Silks, spices, and other precious goods.';
 const Q2 = 'The trade in silk, spice, and precious things.';
 const QT1 = 'Fine goods of every kind, though the spice or silk the town wants never arrives.';
-const QT2 = 'The trade in fine things, though the spice or silk the town wants does not reach it.';
+const QT2 = 'Fine things are traded here, though the spice or silk the town wants does not reach it.';
 /** The need list names "spices": the twin. */
 const Q_UNMET = Object.freeze([
   ['r2r-city-29', Q2, QT2], ['r2s-wartime-city-0', Q2, QT2], ['bar0-city-wartime-rand-28', Q2, QT2],

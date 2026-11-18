@@ -2447,7 +2447,7 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
   ]),
   "The trade in silk, spice, and precious things.": Object.freeze([
     Object.freeze({ text: "The trade in silk, spice, and precious things.", excludes: Object.freeze(['need not brought in: spice', 'need not brought in: silk']) }),
-    Object.freeze({ text: "The trade in fine things, though the spice or silk the town wants does not reach it.", twinOf: "The trade in silk, spice, and precious things." }),
+    Object.freeze({ text: "Fine things are traded here, though the spice or silk the town wants does not reach it.", twinOf: "The trade in silk, spice, and precious things." }),
   ]),
   // FAULTS-ROWS (the sixth chair's rulings FR4 and FR12 (3), 2026-11-18; vetoable by the owner): THE FISH MARKET'S CARD follows
   // its row. Where the fish is bought in (`fish bought in`, `facts/fishBoughtIn.js`: the one fact BAR8-FISH-ROWS's swap reads to
