@@ -490,3 +490,78 @@ the base. Nothing built.
 
 NAMED, NOT BUILT (the chair's list, for the owner): r2r-town-34 buys "Game and hides (local hunting grounds exhausted)" for its
 tanner while its Hunter's lodge stays "Short of game."; the four wool refusals import livestock words while refusing "Wool".
+
+## FR24, CLOSED (the chair's calls on the two stops) and FR23 + FR24 DONE
+
+**Tip: the commit that carries this section** (named in the message to the chair; code at 7edac7519; later commits are tests and this file). The branch carries the landings merge (e330ec120).
+
+**(2) TAKEN: (b), THE COMMON PROVES ITS PASTURE** (7edac7519): `houseKinds.js :: IMPLIED_GROUND` gains `common_grazing_land:
+'grazing_land'` (where no pasture of its own is stored), `GROUND_KEPT_BY` holds the pick there, and the isolated buyers' reading
+reads the kept ground too (`supplyStory.js :: groundsKeptOf`, one helper). r2r-village-23 tells one story: "Open Grazing Land"
+proven, its common and its Fuller at work (the Fuller's "Short of wool." and its Fulled cloth row's mark gone). THE CHAIR'S PROOFS,
+over the 900 against the merged tip before the change: (i) **174 newly proven pastures** (139 of the 720, 29 of the 150, 6 of the 30),
+every one with the Common grazing land among its proving houses, none without one; (ii) **no ground proven and under Depleted at
+once**; (iii) **82 houses short of livestock, wool, dairy or hides, every one beside a used-up ground of its material** (none short
+with no ground used up); (iv) **the ventures of the 720: 9** (no stop); (v) the moves: RECORDS 1 of the 30 (bar0-village-calm-rand-47:
+`resourceAnalysis.gaps`, `resourceAnalysis.imports`, `economicState.primaryImports`), 9 of the 150 (`resourceAnalysis.imports` 5:
+bar0-village-famine-rand-27, bar0-village-calm-rand-32, bar0-village-famine-rand-35, bar0-hamlet-calm-rand-40,
+bar0-village-famine-rand-41; `economicState.primaryImports` 5: bar0-village-famine-rand-30, bar0-village-calm-rand-32,
+bar0-village-famine-rand-34, -35, bar0-village-calm-rand-37; `resourceAnalysis.gaps` 5: bar0-village-calm-rand-32,
+bar0-village-famine-rand-34, -35, -39, -41), 17 of the 720 (`economicState.primaryImports` 12: r2r-village-26, -27, -28, -37, -44,
+-57, r2s-famine-village-0, r2s-recently_betrayed-village-3, r2s-insurgency-village-1, r2s-religious_conversion-village-1, -3,
+r2s-wartime-village-2; `resourceAnalysis.imports` 8: r2r-village-58, r2s-recently_betrayed-village-3, r2s-plague_onset-village-2,
+r2s-insurgency-village-3, r2s-religious_conversion-village-3, r2s-slave_revolt-hamlet-1, r2s-wartime-village-1, -2;
+`resourceAnalysis.gaps` 3: r2s-plague_onset-village-2, r2s-religious_conversion-village-3, r2s-wartime-village-2): the bought
+words "Wool" and "Raw hides and animal products" a proven pasture now answers, the need list's livestock and animal hides, the gap
+rows of houses now fed. PAGES: the reading moves in 10 / 38 / 186 towns (the common's story, unprinted); a printed change in 6 / 29 /
+139: the proven pasture on the land list (all of them), the imports (1 / 5 / 12), the need list (1 / 5 / 8), a house's mark and its
+row (r2r-village-23's Fuller; r2s-plague_onset-village-2's Tannery "Short of its materials." gone with its gap line "No livestock or
+hides reaches the tannery."; one of the 150), every line an existing one; (vi) **THE 525: 36 move against the merged tip**
+(`resourceAnalysis.imports` 36, `resourceAnalysis.gaps` 12: the desert hamlets and villages and the isolated forest villages whose
+common now proves the pasture: their need list's livestock); with those two families struck every one of the 525 hashes equal: no
+draw (the golden file is the close's); (vii) **the 13 stored-spent commons** (FR23's eight, r2r-hamlet-42, r2s-recently_betrayed-
+hamlet-2 and three of the 150) **still read "Short of livestock."**: the record's own depletion wins over the proof (a common whose
+pasture is stored proves nothing; `provingHouses` reads only a house on no ground of its own kind). The guard: two new tests (r2r-
+village-23 with a constructed pair; (i) to (iii) over the 720), red at the merged tip before the change, green after.
+
+**(3) NO CHANGE**, as the chair rules: r2r-hamlet-53's livestock is brought in; the Shepherd and the common are short as takers of
+their spent pasture. For the owner, beside r2r-town-34's lodge (the same class: a taker short while its material is bought for
+another house) and the four wool refusals that import livestock words while refusing "Wool".
+
+**THE OLDER CLAIMS THE COMMONS MADE UNTRUE, RE-KEYED BY IDENTITY** (2abed711d, each with a dated note): `bar8Marks2 (5)`'s tannery
+anchor → r2r-town-1's Tanners, fed by the hides word, no second word (no town of the 900 keeps a tannery's imported-livestock row
+beside that word any more); `leftPdfReadsTheTabs`' negatives → r2r-village-17 and bar0-village-calm-rand-30 (r2r-village-1 and
+bar0-village-calm-rand-28 now print their common's pasture); `faultsNeed` item 0's 150 anchor → bar0-town-calm-rand-29's Potter,
+short of clay, "clay" on the list (bar0-village-famine-rand-41's Tannery is fed by its common's pasture); `supplyStoryLaw :: L5`
+reads the there-share over the grounds the seed picks (a pasture a live common keeps is the record speaking, never the seed's pick:
+the share over the picked grounds stands in the band; over all grounds it read 403 of 449, 0.898). My own guard's new negative is
+anchored (8750c2d0d; the negative-assertion walker).
+
+**THE NET AT MY TIP** (git worktree of 7edac7519; tests re-run alone after each later test commit), against the FR23 tip's and,
+for every difference, the merge commit's (e330ec120) to tell the landings' from mine:
+- `typecheck:domain:strict` 0 · `typecheck:ratchet` 0 · `eslint` (my files) 0 · `tests/architecture` 347 green.
+- `tests/joins`: **1 red, the landings'**: `mutationOrder` ("the declared institution producer/mutator chain matches the canonical
+  order": 7 steps against 6), the same at e330ec120.
+- ALL of `tests/lint`: 34 failing by name at my tip (42 at the FR23 tip). New against the FR23 tip, and the
+  same at e330ec120 (the landings'): `generationForkRegistry` (77 rows against 78), `heldKeyWriterCensus` (15 steps against 14),
+  `presumedThings` ARM 3 (the strip ban names `src/domain/facts/needNotBroughtIn.js`, FAULTS-NEED's leaf), `writerReach`'s frozen
+  corpusMeta (originCount 15106 against 15031). MINE, STORED FIGURES (the close's; named, not re-taken): `writerReach`'s frozen
+  shapesDigest (25b8a5539fa9… stored; bd73f89e16a5… at the merge; **6dd384135d68… at my tip**); its banked cohort: **two banked dark
+  identities no longer written, "animal hides on reasons" and "livestock on reasons"** (the commons give those goods: their need
+  reasons vanish), so the cohort reads 1427 → **1425** (the swap and growth mutants' counts with it: 1425 against 1427, 1426 against
+  1428); the estate's file count 3682 stored, **3696** measured (the landings' files and mine). The negative-assertion walker: my one
+  bare negative, now anchored, green.
+- N3: `pipelineContract`, `isolatedTrade`, `publicProseEquality` green; `pipelinePinnedMode`, `generationForkCensus` the same reds.
+- `supplyStoryLaw`: **L5 red on the ventures alone** ("expected 9 to be greater than or equal to 10": the close's floor); L1 to L3,
+  L4, **BR8 (the three views equal, the birth's pick, over the 720 and the 150)**, P2, W1, M1, M4 green.
+- `birthKindsLaw`, `bar6MarksLaw8`, `bar8FishRows`, `bar2ServicesRows`, `leftChainCards`, `bar4CorpusEcoKinds`, `leftMarks`,
+  `bar8Rows`, `houseInputReaches`, `upkeepVocation`, `bar4MarkPromise`, `bar6PeopleLaw10` green; `bar8Marks2`,
+  `leftPdfReadsTheTabs`, `faultsNeed` green after their re-keys; my guard **20 green**.
+- THE RUNNERS (full renders of the 900 at my tip, against the FR23 tip's): runH identical; runK only loses instances (56 gone:
+  the landings' 12d, 13d, 14e cures); runJ 6 new, none mine: five 11d.importShort in towns FR24 never touched, and one 11b.fish in
+  r2r-village-11 where the fish card swapped to FAULTS-ROWS's landed twin ("… salted and dried fish is sold. No fresh catch is landed
+  here.") and the detector reads "landed here" in the negation (a detector false positive, for FAULTS-TOOLS); 30 gone. The controls
+  of the 30 that changed are the landings' cures (C8867 wantBuy, C32296 offer, C16222 record, C5296 hookTrade).
+
+**FR23 (3) WITH FR24, AGAINST MY ORIGINAL BASE**: the merge brings the landings' own moves into any count against 4288049ba, so my
+FR24 moves are declared against the merged tip (above), and FR21 + FR23's against the base (FR23 (3)): 1 / 10 / 41 records, 0 of 525.
