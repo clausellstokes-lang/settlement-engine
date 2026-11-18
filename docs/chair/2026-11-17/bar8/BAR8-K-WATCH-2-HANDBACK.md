@@ -7,7 +7,7 @@ the item-2 push in its pre-push hook, before it sent anything. Everything else g
 
 | item | commit | what |
 |---|---|---|
-| 1 (BR29 1) | bbcc83967 | the lawless row moves into `serviceRollMaterialization.js`; the entry is 384 lines (test count) |
+| 1 (BR29 1) | bbcc83967, then f93d6ee60 | the lawless row moves into `serviceRollMaterialization.js`; the repair keeps the row's name in the entry (an older test, below); the entry is 390 lines (test count) |
 | 4 (BR30 1) | 9f6466459 | `standingAgainstFigure.test.js` (b) re-anchored by identity (tests only) |
 | 5 (BR30 2) | 96530483f | the occupation twin reworded by name |
 | 2 (BR29 2) | 8f34a0238 | the atom `force walks by day` reads `orderForceOf`'s houses |
@@ -19,20 +19,29 @@ the item-2 push in its pre-push hook, before it sent anything. Everything else g
   `src/generators/servicesGenerator.js` into `src/generators/services/serviceRollMaterialization.js`, after
   `hasCriminalInstitution`. They are exported there and imported by the entry. Nothing in them changes except `export`.
   Their imports move with them (`courtHoldersOf`, `defenceOf`, `lineText`). The overlay's two push sites stay in the entry.
-- **ONE THING MOVED BEYOND THE BRIEF'S LIST, BECAUSE IT HAD TO.** `lawlessRow` returns the row's own two strings:
-  `NO_LAW_BRING_COIN` ("Weak law, bring coin") and its "easily outbid" description. The module cannot import them from
-  the entry, whose export surface must stay exactly `{ generateAvailableServices }`. So both strings, and the
-  COHERENCE-PRESUME comment on the first, move with the row and are exported. The entry's crime-type path
-  (`crimeTypes.has('Lawlessness')`) imports them. Neither string is in any register (I grepped `tests/` and `scripts/`
-  for both texts and the slow-law text: no register row).
-- **SIZES (the test's own count).** The entry goes from 406 to **384** (ceiling 400). The module goes from 383 to 410
-  (ceiling 800). `tests/generators/servicesStructure.test.js` passes all 3 arms (the export surface is unchanged).
+- **THE ROW'S NAME, AND THE OLDER TEST THAT CAUGHT ME.** My first commit (bbcc83967) also moved the row's own two strings,
+  because `lawlessRow` returned them: `NO_LAW_BRING_COIN` ("Weak law, bring coin") and its "easily outbid" description.
+  The module cannot import from the entry, whose export surface must stay exactly `{ generateAvailableServices }`.
+  - **What broke.** My net found an older test red at the tip and green at the base: `tests/components/
+    crisisStoppedRows.test.jsx`, the walker "every service name and every catalogue id is declared". It reads the entry's
+    own source for its hoisted names, so with the constant gone it read `addCrimeService(NO_LAW_BRING_COIN` as
+    `undefined`: "a service with no declaration: expected [ undefined ] to deeply equal []".
+  - **The repair (f93d6ee60).** The name and its COHERENCE-PRESUME comment stay in the entry, spelled once. The moved
+    `lawlessRow` returns `{ desc }`, and the two push sites write `{ name: NO_LAW_BRING_COIN, ...lawlessRow(institutions,
+    buckets), institution: '(lawless)' }`. That is the same keys in the same order, so records are byte-equal.
+  - **Only the description moves.** The "easily outbid" string moves with the row and is exported, and the entry's
+    crime-type path (`crimeTypes.has('Lawlessness')`) imports it. Neither string is in any register (I grepped `tests/`
+    and `scripts/` for both texts and the slow-law text: no register row).
+  - **Re-checked at the tip.** `crisisStoppedRows` passes 11 of 11. So do the other tests that read the entry's source:
+    `servicesStructure`, `tests/joins/deadCode`, `customContentConsumerEvidence.walker`, `institutionRemoval` and
+    `serviceCategoryRegistration.walker`.
 - **NOTHING DRAWN MOVES.** I hashed every record at the base (215f97d29) and at bbcc83967, which holds item 1 alone:
   the thirty and the 150 born by PAGE-COPY's `seedcfg.mjs` (180 whole records), and the 525 reference configurations
   (`goldenCorpus()`, `generateSettlementPipeline` exactly as the golden master calls it; whole record and every
-  top-level field). **0 of 180 and 0 of 525 differ.**
+  top-level field). **0 of 180 and 0 of 525 differ.** I repeated the hash after the repair, at the final source tree
+  (f93d6ee60, which holds items 1, 2 and 5): again 0 of 180 and 0 of 525.
 - **THE DOORS.** I diffed the full output of `presumption-classes-door --check` and `presumed-things-door --check`,
-  base against item 1: byte-identical. Classes `hits 1786 · banked 1938 · fresh 0 · stale 152`; things
+  base against item 1, and again at f93d6ee60: byte-identical. Classes `hits 1786 · banked 1938 · fresh 0 · stale 152`; things
   `fresh 38 · stale 72 · first-register stale 7 · banked 4688 · strips fresh 0 stale 0 banked 107`. No row went fresh.
 
 ## Item 4 · the re-key had killed its guard (tests only)
@@ -142,7 +151,9 @@ THE DETECTOR (`tests/helpers/pageLaws/law13K.mjs`, rule 13e.hours, one small hun
 `orderForceOf(T.record).houses`, not its own name regex, which counted a warden as a force. Results:
 
 - rand-437 and r2r-town-4, rendered at the base: **1 each** under the new rule, 0 under the old one.
-- Over the thirty and the 150: RUNK_13E_TABLE
+- Over the thirty and the 150: **13e.hours is 0 at the base under the old rule, 0 at the base under the new rule, and 0
+  at the tip.** K-WATCH's cure had already cleared those 180 towns, and neither the warden town nor r2r-town-4 is among
+  them.
 
 ## Item 3 · the registers that follow
 
@@ -174,11 +185,51 @@ THE DETECTOR (`tests/helpers/pageLaws/law13K.mjs`, rule 13e.hours, one small hun
 
 ## Measure first and last (`runK.mjs`; the thirty of the seventh read and the 150, rendered by PAGE-COPY at the base and at the tip)
 
-RUNK_SECTION
+- **IDENTICAL.** The whole `runK.mjs` output is **byte-identical, base against tip**, over the thirty and over the 150: the
+  rule table, the by-writer list, the 15b census and the controls. Renders: `census3.sh --count-only`, 180 towns per tree.
+- **13a.court · 13e.hours · 13g · 14a · 14d · 15b, base → tip:**
+  - the thirty: 2 · 0 · 0 · 1 · 0 · 0 → the same;
+  - the 150: 0 · 0 · 0 · 4 · 0 · 0 → the same;
+  - 13a.court's 2 in the thirty are the desk's line, C40154 and C34395 (K-DESKS's).
+- **No rule of the runner rises.** Totals: the thirty 39 instances in 22 towns; the 150 139 in 64.
+- **CONTROLS.** `controls: 43 of 49 as expected` at both, so the runner exits 3 at both. The six misses are the STANDS
+  controls K-WATCH and K-POWERS cleared by design (C39616, C42053, C21547, C14226, C44634, C31732), clear at the base and
+  clear at the tip. Every STANDS control clear at the base stays clear. Over the 150 the runner exits 0 at both.
+- **THE 720 AND THE 1,300.** I did not render them; I hashed and probed them (items 2 and 5).
 
 ## The net (each gate alone; base 215f97d29 in a scratch worktree, tip in the checkout)
 
-NET_SECTION
+Run with `vitest --reporter=json`, every gate alone, and compared **by file, test name and failure message**, with paths
+normalised (`netcmp.mjs`, scratch).
+
+| gate | base | tip |
+|---|---|---|
+| `typecheck:ratchet` | — | OK, 167 / ceiling 167 |
+| `typecheck:domain:strict` | — | OK, 1113 / ceiling 1113 (a first draft added 1 in `factsOf.js`; fixed) |
+| `npx eslint` on the changed files | — | clean |
+| `tests/architecture` | 347 / 347 | 347 / 347 |
+| all of `tests/lint` | 66 red of 3,226 | 66 red of 3,226, **the same tests**, two messages differing (below) |
+| `tests/joins` | green | green |
+| `vendorPdfLazy -t "WEAVE ST-2"` | green | green |
+| `servicesStructure.test.js` | 1 red ("expected 406 to be less than or equal to 400") | 3 / 3 |
+| `bar8Watch.test.js` | 7 / 7 (its own file at the base) | 10 / 10 |
+| `bar8Powers.test.js` | 4 / 4 (its own file at the base) | 5 / 5 |
+| `standingAgainstFigure.test.js` | 4 / 4 | 4 / 4 |
+| N3 `pipelineContract`, `isolatedTrade`, `publicProseEquality` | green | green |
+| N3 `pipelinePinnedMode` (3 of 15), `generationForkCensus` (3 of 7) | red | red, **the same tests with the same messages**: no golden row moved by me |
+| the older tests (49 files that name one of the brief's words, each alone) | reds: `generatorGoldenMaster` 1 of 3, `writerReach.walker` 9 of 52 | the same tests, the same messages |
+
+THE TWO MESSAGES THAT DIFFER, both mine and both falls (item 3): `ruinFilterRoster` "expected 116 to be 113" → "expected
+115 to be 113", and `observedShapeReaders` A1/A7 `{ reads: 2216, identities: 1554, … }` → `{ reads: 2215, identities:
+1553, … }`.
+
+THE ONE RED THAT WAS MINE: `crisisStoppedRows.test.jsx`, red at the first tip (bbcc83967's move) and cured by f93d6ee60
+(item 1, above). After the repair I re-ran at the final tip: all of `tests/lint`, `tests/joins`, `servicesStructure`, N3,
+`crisisStoppedRows`, and every older test that names `servicesGenerator`, `lawlessRow` or `SLOW_LAW_DESC`. NET2_LINE
+
+Item 3 (c) in the lint reds, red at both with the same messages: `poolDominance.walker` "every drawn pool has a row ..."
+(`expected [ 'ledger:rareSecrets:deeds', …(5) ]`), and `mutationCoverageManifest` TOTALITY, which names the two bar8
+guards.
 
 ## Not mine, by name (left as the prompt says)
 
