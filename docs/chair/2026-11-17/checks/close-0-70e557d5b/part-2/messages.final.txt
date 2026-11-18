@@ -1,0 +1,705 @@
+tests/build/engineBundleReplay.test.js :: engine bundle replay — the bundle generates what the app generates every golden-corpus config: the committed bundle's settlement JSON equals the in-process pipeline's, byte for byte
+AssertionError: 485 of 525 rows differ between supabase/functions/_shared/engineBundle.js and the in-process pipeline. If src/ changed, the bundle is stale: run `npm run build:edge-shared` and commit the bundle with its inputs.: expected [ …(485) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/build/engineBundleReplay.test.js:146:7
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20
+
+tests/build/engineBundleReplay.test.js :: engine bundle replay — the bundle generates what the app generates the engine-generate birth: for the three service cases, the bundle's stamped birth equals the in-process birth under the STORE's runtime
+AssertionError: the bundle's birth equals the in-process birth — 2 of 3 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[1] engine-contract-beta — seed engine-contract-beta: expected '5bf341c8f5ce8b3830c8e2f2af3ead4c54a5f…' to be '922287429060b7c06d34f9af0fd3cac092c72…' // Object.is equality
+[2] engine-contract-gamma — seed engine-contract-gamma: expected '4de9a2273742653f4303c3a1f88428c592e30…' to be '854f98602089812ff4c9c8330994b91adeacc…' // Object.is equality: expected [ …(2) ] to deeply equal []
+    at expectNoSeedFailures (/home/user/t/close-0-70e557d5b/tests/helpers/seedFailures.js:147:26)
+    at /home/user/t/close-0-70e557d5b/tests/build/engineBundleReplay.test.js:237:25
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20
+
+tests/build/engineBundleReplay.test.js :: engine bundle replay — the bundle generates what the app generates the espionage fence's 360-settlement driven corpus: bundle equals in-process byte for byte, and its hash meets the fence constant (known-stale rule)
+AssertionError: 322 of 360 fence settlements differ bundle vs in-process: expected [ …(322) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/build/engineBundleReplay.test.js:199:101
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20
+
+tests/build/engineServiceCore.test.js :: the service runs the same core as the worker the bundle's runGenerationRequest equals the in-process core for the service's request
+AssertionError: the bundle's core answers the in-process core's settlement and step list — 3 of 3 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[0] ["remote-a","town"] — remote-a: expected '{"name":"Kaliko","tier":"town","popul…' to be '{"name":"Kaliko","tier":"town","popul…' // Object.is equality
+[1] ["remote-b","village"] — remote-b: expected '{"name":"Nanpu","tier":"village","pop…' to be '{"name":"Nanpu","tier":"village","pop…' // Object.is equality
+[2] ["remote-c","city"] — remote-c: expected '{"name":"Baidao","tier":"city","popul…' to be '{"name":"Baidao","tier":"city","popul…' // Object.is equality: expected [ …(3) ] to deeply equal []
+    at expectNoSeedFailures (/home/user/t/close-0-70e557d5b/tests/helpers/seedFailures.js:147:26)
+    at /home/user/t/close-0-70e557d5b/tests/build/engineServiceCore.test.js:54:25
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20
+
+tests/build/engineServiceStoreParity.test.js :: the engine service answers the store's own requests with the store's own records derive: the remote re-derivation of a store-born world equals the local one
+AssertionError: expected '{"record":{"name":"Morkås","tier":"to…' to be '{"record":{"name":"Morkås","tier":"to…' // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/build/engineServiceStoreParity.test.js:153:42
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20
+
+tests/build/engineServiceStoreParity.test.js :: the engine service answers the store's own requests with the store's own records generate: the bundle's birth for the wire body equals the local core on the store's request, stamp included
+AssertionError: 2 of the seeds failed; every seed ran: expected [ …(2) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/build/engineServiceStoreParity.test.js:100:80
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20
+
+tests/build/engineServiceStoreParity.test.js :: the engine service answers the store's own requests with the store's own records regenSection: the bundle's passes over the wire body equal the local passes over the store-born world
+AssertionError: expected '{"npcs":[{"id":"npc_merchant_warehous…' to be '{"npcs":[{"id":"npc_merchant_warehous…' // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/build/engineServiceStoreParity.test.js:162:46
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20
+
+tests/build/generationWorkerLazy.test.js :: generation worker — production boundary the generation worker bundle stays under its measured ceiling (monotone-down; WORKER_BUNDLE_CEILING_BYTES)
+AssertionError: generation worker bundle generation.worker-BWCa3fYy.js is 2525028 B; the ceiling is 2356121 B (re-recorded at the measured figure by the chair's ruling B3, 2026-11-15, the close of the round BAR3, as at the close of BAR2; before it WB1, ODQ §934.105). A RISE IS NEVER A LANE'S EDIT: buy the bytes back, or take the ruling.: expected 2525028 to be less than or equal to 2356121
+    at /home/user/t/close-0-70e557d5b/tests/build/generationWorkerLazy.test.js:826:7
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/build/vendorPdfLazy.test.js :: Tier 9.7 — vendor-pdf lazy load contract entry static closure Brotli bytes stay under 304224
+AssertionError: first-paint Brotli transfer = 310677 B (budget 304224):
+  gzip    2610  br    2244  content-identity-BiMB_uYV.js
+  gzip   45093  br   36958  data-CljPgzlN.js
+  gzip   95902  br   80570  engine-core-BldHvBMN.js
+  gzip  155274  br  128827  index-lE87IjLF.js
+  gzip    2501  br    2263  kernel-BI0fDpJx.js
+  gzip    1472  br    1319  vendor-icons-aOW4IQH8.js
+  gzip   60454  br   52076  vendor-react-DsScxBXT.js
+  gzip    7106  br    6420  vendor-state-DXnjcO3h.js: expected 310677 to be less than or equal to 304224
+    at /home/user/t/close-0-70e557d5b/tests/build/vendorPdfLazy.test.js:1311:9
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+
+tests/build/vendorPdfLazy.test.js :: Tier 9.7 — vendor-pdf lazy load contract entry static closure gzip bytes stay under 362621
+AssertionError: first-paint gzip transfer = 370412 B (budget 362621):
+  gzip    2610  br    2244  content-identity-BiMB_uYV.js
+  gzip   45093  br   36958  data-CljPgzlN.js
+  gzip   95902  br   80570  engine-core-BldHvBMN.js
+  gzip  155274  br  128827  index-lE87IjLF.js
+  gzip    2501  br    2263  kernel-BI0fDpJx.js
+  gzip    1472  br    1319  vendor-icons-aOW4IQH8.js
+  gzip   60454  br   52076  vendor-react-DsScxBXT.js
+  gzip    7106  br    6420  vendor-state-DXnjcO3h.js: expected 370412 to be less than or equal to 362621
+    at /home/user/t/close-0-70e557d5b/tests/build/vendorPdfLazy.test.js:1300:9
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+
+tests/build/vendorPdfLazy.test.js :: Tier 9.7 — vendor-pdf lazy load contract entry static closure raw bytes stay under the first-paint budget (1139072)
+AssertionError: first-paint static closure = 1163565 bytes (budget 1139072):
+       5362  content-identity-BiMB_uYV.js
+     153160  data-CljPgzlN.js
+     297563  engine-core-BldHvBMN.js
+     488957  index-lE87IjLF.js
+       4722  kernel-BI0fDpJx.js
+       3579  vendor-icons-aOW4IQH8.js
+     193176  vendor-react-DsScxBXT.js
+      17046  vendor-state-DXnjcO3h.js: expected 1163565 to be less than or equal to 1139072
+    at /home/user/t/close-0-70e557d5b/tests/build/vendorPdfLazy.test.js:1290:7
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+
+tests/build/vendorPdfLazy.test.js :: Tier 9.7 — vendor-pdf lazy load contract the engine chunk still exists (lazy) and remains large
+AssertionError: expected 904173 to be less than 881331
+    at /home/user/t/close-0-70e557d5b/tests/build/vendorPdfLazy.test.js:1088:18
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/components/bar3ServicesRows.test.jsx :: BAR3-SERVICES batch 1: a row carries the mark its state makes true; a row names the body the town has MARKED: each row prints with its mark before it
+AssertionError: expected [ Array(1) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/components/bar3ServicesRows.test.jsx:132:22
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20
+
+tests/domain/corpusEcoTailGuards.test.js :: a cured sentence is not drawn in the census town that made it false; what is drawn instead is named DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks at r2r-hamlet-12: a dairy farmer and grazing land: "Whatever livestock ... must come from elsewhere" (28786; v2 now "A good part of")
+AssertionError: r2r-hamlet-12 no longer reads DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks: re-key the row to a town of the case: expected [ …(63) ] to include 'DS-ECO-12::CRITICAL IMPORT: a house n…'
+    at Proxy.<anonymous> (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/expect/dist/index.js:1319:15)
+    at Proxy.<anonymous> (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/expect/dist/index.js:1156:15)
+    at Proxy.methodWrapper (file:///home/user/t/close-0-70e557d5b/node_modules/chai/index.js:1700:25)
+    at /home/user/t/close-0-70e557d5b/tests/domain/corpusEcoTailGuards.test.js:273:111
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+
+tests/domain/editWorldFactResources.test.js :: EM-B2b2 — the DM's nearby-resources word survives resolveResources A2 — THE NO-EDIT PATH IS UNMOVED: a dormant re-derivation is byte-identical to the PRE-CHANGE step's own output
+AssertionError: a config carrying NO world-fact roster resolves exactly as it did before this change: the mark is absent, the branch is not taken, and not one byte of the world moves: expected [ 21, '21:fresh' ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/domain/editWorldFactResources.test.js:347:8
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/domain/editWorldFactResources.test.js :: EM-B2b2 — the DM's nearby-resources word survives resolveResources A6 — THE MARK IS NOT THE ECHO: the step's own resolved write-back, handed back in as a generation input, resolves exactly as before
+AssertionError: a replay from the resolved config is byte-identical to the PRE-CHANGE step's own replay: the generator's answer is never mistaken for the DM's word: expected [ 21 ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/domain/editWorldFactResources.test.js:420:85
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/domain/facts/census2dTables.test.js :: PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor's closure; carried through textOf) every declaring ledger line is declared in place, exactly (a crisis-keyed pool does not re-declare its key, R-B1)
+AssertionError: expected [ …(2) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/domain/facts/census2dTables.test.js:226:19
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/domain/facts/census2dTables.test.js :: STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS carry the ledger's declarations every ledger line is at its path, verbatim
+AssertionError: CULTURE_PROFILES_DAILY: expected [ Array(1) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/domain/facts/census2dTables.test.js:114:27
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/domain/facts/census2dTables.test.js :: STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS carry the ledger's declarations every row declares what the ledger says (R-B1; scoped calm is silence)
+AssertionError: STRESS_DESCS: expected [ …(10) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/domain/facts/census2dTables.test.js:124:27
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/domain/facts/census2eTables.test.js :: POLITICAL_FLAVOR — the cascade's rows carry the ledger's declarations (R, carried through textOf) every row declares what its ledger lines say (a closure's branches share one row)
+AssertionError: expected [ [ 'stable[2]', …(1) ], …(5) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/domain/facts/census2eTables.test.js:147:19
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/domain/facts/census2eTables.test.js :: PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor's closure; carried through textOf) every declaring ledger line is declared in place, exactly (a crisis-keyed pool does not re-declare its key, R-B1)
+AssertionError: expected [ …(2) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/domain/facts/census2dTables.test.js:226:19
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/domain/facts/census2eTables.test.js :: STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS carry the ledger's declarations every ledger line is at its path, verbatim
+AssertionError: CULTURE_PROFILES_DAILY: expected [ Array(1) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/domain/facts/census2dTables.test.js:114:27
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/domain/facts/census2eTables.test.js :: STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS carry the ledger's declarations every row declares what the ledger says (R-B1; scoped calm is silence)
+AssertionError: STRESS_DESCS: expected [ …(10) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/domain/facts/census2dTables.test.js:124:27
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/domain/facts/census2gDailyLifePriest.test.js :: PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor's closure; carried through textOf) every declaring ledger line is declared in place, exactly (a crisis-keyed pool does not re-declare its key, R-B1)
+AssertionError: expected [ …(2) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/domain/facts/census2dTables.test.js:226:19
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/domain/facts/census2gDailyLifePriest.test.js :: STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS carry the ledger's declarations every ledger line is at its path, verbatim
+AssertionError: CULTURE_PROFILES_DAILY: expected [ Array(1) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/domain/facts/census2dTables.test.js:114:27
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/domain/facts/census2gDailyLifePriest.test.js :: STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS carry the ledger's declarations every row declares what the ledger says (R-B1; scoped calm is silence)
+AssertionError: STRESS_DESCS: expected [ …(10) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/domain/facts/census2dTables.test.js:124:27
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/domain/facts/declarationRegisters.test.js :: THE UNDECLARED-LINES REGISTER — shrink-only a count that fell is re-pinned in the same commit (the register is never left stale)
+AssertionError: expected { fell: [ …(4) ], …(1) } to deeply equal { fell: [], gone: [] }
+    at /home/user/t/close-0-70e557d5b/tests/domain/facts/declarationRegisters.test.js:92:28
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/edgeFunctions/aiGroundingBundle.freshness.test.js :: Tier 6.8 — aiGrounding bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+AssertionError: Bundle is stale. One of these inputs changed since the last bundle:
+  src/data/bandLadders.js
+  src/data/chainAccessNames.js
+  src/data/constants.js
+  src/data/crisisDependence.js
+  src/data/entityTags.js
+  src/data/foodImportRates.js
+  src/data/goods/identity.js
+  src/data/holderTitleForms.js
+  src/data/institutionBacking.js
+  src/data/institutionServices.js
+  src/data/institutionalCatalog.js
+  src/data/npcTraitWeights.js
+  src/data/people/powerSentenceName.js
+  src/data/powerData.js
+
+tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js :: aiOutputSchema bundle is fresh the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+AssertionError: Bundle is stale. One of these inputs changed since the last bundle:
+  node_modules/immer/dist/immer.mjs
+  node_modules/seedrandom/seedrandom.js
+  src/data/chainAccessNames.js
+  src/data/constants.js
+  src/data/entityTags.js
+  src/data/goods/identity.js
+  src/data/informationBrokerageTuning.js
+  src/data/institutionBacking.js
+  src/data/institutionalCatalog.js
+  src/data/npcTraitWeights.js
+  src/data/powerData.js
+  src/data/resourceData.js
+  src/domain/activeConditions.js
+  src/domain/aiOutputSchema.js
+
+tests/generators/foundryExportsFishTrade.test.js :: F11 · a fishmonger with no fish is the cart's trade soak1k-1652: no fish source, no fish bought in, so the Fishmonger carries fish from the cart
+AssertionError: expected true to be false // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/generators/foundryExportsFishTrade.test.js:48:46
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/generators/institutionBudgetPromise.test.js :: X-46 car 3 — the promise: the factor at 1.0 is the tip before the budget every one of sixty seeds is byte-identical with the density factor forced to 1.0
+AssertionError: expected [ +0, 1, 2, 3, 4, 5, 7, 8, 9, …(48) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/generators/institutionBudgetPromise.test.js:256:19
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/generators/institutionProseDeclared.test.js :: the services declare in place (CENSUS-4c unit 5) each definition carries exactly the ledger's declaration (4b's two Mill rows included)
+AssertionError: expected 'Collects the dues owed and the tithe' to be 'Collects the lord\'s dues and the tit…' // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/generators/institutionProseDeclared.test.js:69:24
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/generators/tailDefeconBatch3Lines.test.js :: TAIL-DEFECON-3 batch 3: the fish, quarry and diversity lines say only what the record holds #20893 r2r-city-36: not "A new toll on the iron road"; silent by design
+AssertionError: EXCLUSION [#20893 r2r-city-36]: the member is present in a collection that is supposed to exclude it (the anchor sibling proves the collection is live).: expected 'Market Taxes :: District-level duties…' not to contain 'A new toll on the iron road'
+    at expectAbsentWithAnchor (/home/user/t/close-0-70e557d5b/tests/helpers/anchoredNegatives.js:132:9)
+    at /home/user/t/close-0-70e557d5b/tests/generators/tailDefeconBatch3Lines.test.js:83:29
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+
+tests/generators/tailDefeconBatch3Lines.test.js :: TAIL-DEFECON-3 batch 3: the fish, quarry and diversity lines say only what the record holds #20893 r2r-hamlet-30: not "The iron carts are three weeks late"; silent by design
+AssertionError: EXCLUSION [#20893 r2r-hamlet-30]: the member is present in a collection that is supposed to exclude it (the anchor sibling proves the collection is live).: expected 'Harvest :: What the households grow a…' not to contain 'The iron carts are three weeks late'
+    at expectAbsentWithAnchor (/home/user/t/close-0-70e557d5b/tests/helpers/anchoredNegatives.js:132:9)
+    at /home/user/t/close-0-70e557d5b/tests/generators/tailDefeconBatch3Lines.test.js:83:29
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+
+tests/generators/x46NpcBand.test.js :: X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people sixty seeds (ten a tier) generate byte-identically to the dark digests captured at the window tip (2026-11-04)
+AssertionError: v1 worlds this car moved: expected [ 'x46-dark-thorp-000', …(54) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/generators/x46NpcBand.test.js:264:47
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/mutationCoverageManifest.test.js :: mutation-coverage manifest — the totality contract (E-A) TOTALITY: every enumerated invariant file has a manifest entry
+AssertionError: 
+Invariant test file(s) with NO mutation-coverage entry. For each: plant a regression in scripts/mutation-sweep.sh proving it reds (preferred), or add a rationale entry to scripts/mutation-coverage-manifest.json with a written reason. Do NOT add it as uncovered — the gap list only shrinks:
+tests/generators/bar5WorldLines.test.js
+tests/generators/bar7Lines.test.js
+tests/generators/bar7Scenes.test.js
+tests/generators/bar8FishRows.test.js
+tests/generators/bar8Rows.test.js
+tests/generators/bar8Scenes.test.js
+tests/generators/rareSecretsLaw.test.js
+: expected [ …(7) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/lint/mutationCoverageManifest.test.js:99:7
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+
+tests/lint/negativeAssertionAnchor.walker.test.js :: negative-assertion anchor walker (habitat removal) no NEW un-anchored negative assertion anywhere in the test corpus
+AssertionError: expected [ …(7) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/lint/negativeAssertionAnchor.walker.test.js:850:24
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/newsVoiceContract.walker.test.js :: [FILE]
+
+
+tests/lint/proseCorpusBytes.test.js :: the prose byte ratchet — the roster and the measurement (ARCH §10) GZIP sits inside the 1 % band around its committed figure
+AssertionError: expected [ …(4) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseCorpusBytes.test.js:174:19
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseCorpusBytes.test.js :: the prose byte ratchet — the roster and the measurement (ARCH §10) RAW is EXACT: above fails, below demands the row be lowered
+AssertionError: expected [ …(6) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseCorpusBytes.test.js:157:19
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseDrawnAnchors.walker.test.js :: proseDrawnAnchors — a literal state-prose sentence may not be a test anchor no NEW file carries a literal state-prose anchor, and no frozen row grows
+AssertionError: A literal state-prose sentence is being used as a test anchor. Compute it instead — `drawnMember` / `variantByVid` / `poolMemberTexts` from tests/helpers/drawnProse.js — so a re-index, a rewrite or an appended wording moves the member and the anchor together. Regenerate the roster with UPDATE_DRAWN_ANCHOR_ALLOWLIST=1 to see every pin and the corpus row it aligns against.: expected [ …(2) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseDrawnAnchors.walker.test.js:507:7
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseNumerics.test.js :: prose numerics live-tree ratchet (exact legacy identity, shrink-only) path + line + category + snippet debt exactly matches the committed baseline
+AssertionError: A new prose numeric leaked, or legacy debt moved/fell. Humanize additions; when debt falls, regenerate once and review every removed row before committing the lower baseline.: expected [ Array(185) ] to deeply equal [ Array(185) ]
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseNumerics.test.js:922:7
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseWiringCensus.walker.test.js :: MEASURE car 3 — the desk-read recipe, the absence readers and the `sites` column ⭐ THE `sites` COLUMN IS CONVICTED BY A FIXTURE THAT MUST FIRE
+AssertionError: rows the mount registry gives a place to speak: expected 730 to be 728 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWiringCensus.walker.test.js:1401:92
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseWiringCensus.walker.test.js :: SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) the `stateOrgan` column names the rows a captured town can move, and only those
+AssertionError: and the rest carry no key at all: expected 808 to be 806 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWiringCensus.walker.test.js:2156:80
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseWiringCensus.walker.test.js :: SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) ⭐ THE DRY READ: both modes, and the one that writes is not among them
+AssertionError: the committed register is current at this tip: expected false to be true // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWiringCensus.walker.test.js:2321:73
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseWiringCensus.walker.test.js :: SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) ⭐ THE RECORD-SERVICE LISTS ARE THE SHIPPED ROSTER'S OWN WORDS, re-measured here
+AssertionError: ROWS by source standing: expected { LICENSED: 131, OFFICE: 3, …(1) } to deeply equal { LICENSED: 131, OFFICE: 3, …(1) }
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWiringCensus.walker.test.js:1958:53
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseWiringCensus.walker.test.js :: THE MAP READ THE OTHER WAY — fact → text, and the three tiers the tiers name the block, the field, the reading function and the COUNT
+AssertionError: and the rest: expected 246 to be 244 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWiringCensus.walker.test.js:733:55
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseWiringCensus.walker.test.js :: car 0 — `absent`: a measurement, or a default wearing a reading's clothes the corpus's own absence distribution is an integer, and the table rung is counted apart
+AssertionError: read paths whose absence a predicate can see: expected 597 to be 590 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWiringCensus.walker.test.js:1077:77
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseWiringCensus.walker.test.js :: car 0 — `reads`, and the NARROWS line that may narrow it reads = the SELECTING BRANCH's tests where one was recovered, function-wide where none was
+AssertionError: the census still covers every pool: expected 861 to be 859 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWiringCensus.walker.test.js:936:73
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseWiringCensus.walker.test.js :: car 0 — the committed JSON and its interlock the committed census is byte-identical to a fresh build, and the stamp is live
+AssertionError: the committed file is current: expected 'stale-stamp' to be '' // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWiringCensus.walker.test.js:2401:61
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseWiringCensus.walker.test.js :: car 0 — the derived ATTACH sets, their coverage, and the fact budget the fact budget is counted over RESOLVED rows and refuses the rest
+AssertionError: and the UNRESOLVED rows declare themselves: expected 369 to be 367 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWiringCensus.walker.test.js:1540:80
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseWiringCensus.walker.test.js :: car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf written the draft over the SHIPPED endpoints and read paths, with its evidence and its debt
+AssertionError: candidate rows at this tip, docblock withdrawn: expected 24 to be 21 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWiringCensus.walker.test.js:1795:81
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseWiringCensus.walker.test.js :: the wiring census — TOTALITY over the corpus ANTI-VACUITY: the corpus census carries BOTH statuses, in measured integers
+AssertionError: pools reported WIRING-UNRESOLVED with a reason: expected 369 to be 367 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWiringCensus.walker.test.js:243:82
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseWiringCensus.walker.test.js :: the wiring census — TOTALITY over the corpus every (block, pool) the loaders enumerate has exactly ONE census row
+AssertionError: the R1 loaders enumerate this many pool cells: expected 861 to be 859 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWiringCensus.walker.test.js:157:73
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/proseWiringCensus.walker.test.js :: the wiring census — TOTALITY over the corpus the VARIANT column closes, and reproduces the histogram the owner's ruling sizes
+AssertionError: the R1 corpus holds this many variants: expected 3033 to be 2977 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWiringCensus.walker.test.js:204:72
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/ruinFilterRoster.walker.test.js :: ruin-filter roster ratchet (structural-prevention Pattern 2) the scan reads CODE — a `.institutions` in a comment or a quoted string never enrols
+AssertionError: expected 115 to be 113 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/ruinFilterRoster.walker.test.js:540:28
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+tests/lint/seedLoopTotality.walker.test.js :: seed-loop totality walker (habitat removal) no NEW bare seed loop anywhere in the test corpus
+AssertionError: expected [ Array(1) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/lint/seedLoopTotality.walker.test.js:358:24
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
