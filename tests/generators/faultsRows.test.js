@@ -183,7 +183,7 @@ describe('FAULTS-ROWS item 5: the luxury quarter trades in no spice or silk the 
 // fish ground used up and its shortage word on the imports, the one condition BAR8-FISH-ROWS's swap reads
 // (`generateNarratives.js :: boughtFishRowsInPlace`). The card "Where the day's catch is sold, …" takes its twin there.
 const CATCH_CARD = "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.";
-const CATCH_TWIN = 'Where salted and dried fish is sold, from an open stall or a small covered market. No fresh catch comes in here.';
+const CATCH_TWIN = 'Salted and dried fish is sold here, from an open stall or under a small roof. No fresh catch comes in.';
 /** The card drawn and the fish bought in (the market's row "Preserved fish"): the twin. */
 const FISH_BOUGHT_CARD = Object.freeze(['bar0-village-calm-rand-47']);
 /** The card drawn beside a live fishery ("Fresh fish retail"): the line stands. */
@@ -261,6 +261,6 @@ describe('FAULTS-ROWS item 6: the fish market\'s card says the fish is bought in
     expect(set.map((/** @type {any} */ l) => l.text)).toEqual([CATCH_CARD, CATCH_TWIN]);
     expect([...set[0].excludes]).toEqual(['fish bought in']);
     expect([...set[1].needs]).toEqual(['fish bought in']);
-    expectAbsentWithAnchor(CATCH_TWIN, "day's catch", 'salted and dried fish', CATCH_CARD);
+    expectAbsentWithAnchor(CATCH_TWIN, "day's catch", 'Salted and dried fish', CATCH_CARD);
   });
 });

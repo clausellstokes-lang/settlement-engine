@@ -2456,6 +2456,6 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
   // and a live fishery keep the line; its draw declaration (`navigable`, DESC_VARIANT_DECLARATIONS) stands as it was.
   "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.": Object.freeze([
     Object.freeze({ text: "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.", excludes: Object.freeze(['fish bought in']) }),
-    Object.freeze({ text: "Where salted and dried fish is sold, from an open stall or a small covered market. No fresh catch comes in here.", twinOf: "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.", needs: Object.freeze(['fish bought in']) }),
+    Object.freeze({ text: "Salted and dried fish is sold here, from an open stall or under a small roof. No fresh catch comes in.", twinOf: "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.", needs: Object.freeze(['fish bought in']) }),
   ]),
 });

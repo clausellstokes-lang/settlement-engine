@@ -103,7 +103,7 @@ the same, and the layer walker sees the read on its grid. Import-clean for the e
 two calls (44558c5f5): AT THAT COMMIT ALONE the 900 births and the 525 are byte-equal to the commit before it.
 
 The card: "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait."
-→ "Where salted and dried fish is sold, from an open stall or a small covered market. No fresh catch comes in here." The
+→ "Salted and dried fish is sold here, from an open stall or under a small roof. No fresh catch comes in." The
 original `excludes: ['fish bought in']`; the twin `needs: ['fish bought in']`; its draw declaration (`navigable`) stands.
 FALSE at the base: bar0-village-calm-rand-47 (the thirty; its market's row "Preserved fish"): the twin at the tip. The live
 fishery r2r-village-2 (the 720, "Fresh fish retail") keeps the line. Every idle fish town's card and mark byte-equal (no fish
@@ -140,7 +140,7 @@ run exits 3 at the base and at the tip alike (other seats' STANDS controls; "con
 | "A yearly draw for regional traders, though the fine goods the town wants do not reach it." | bar0-town-calm-rand-46, bar0-town-occupied-rand-35, r2r-town-47 |
 | "Fine goods of every kind, though the spice or silk the town wants never arrives." (spoken "the city", "the metropolis") | bar0-city-under_siege+famine-rand-29, r2r-city-17, r2r-metropolis-18 |
 | "Fine things are traded here, though the spice or silk the town wants does not reach it." (spoken likewise) | bar0-city-wartime-rand-28, r2r-city-29, r2r-metropolis-4 |
-| "Where salted and dried fish is sold, from an open stall or a small covered market. No fresh catch comes in here." | bar0-village-calm-rand-47 (its one town in the three populations) |
+| "Salted and dried fish is sold here, from an open stall or under a small roof. No fresh catch comes in." | bar0-village-calm-rand-47 (its one town in the three populations) |
 
 Each prints on the house's three surfaces (the Institutions tab, the card, the PDF), as its original did. The shared page
 prints the owner's card (N4: the guard's `toPublicSafe` arms). Neither door shows a fresh line of mine (R9, section 6). New
