@@ -58,7 +58,7 @@ describe('unit 1 — the crisis-scoped flags stand only where a calm line is (R-
 });
 
 // ── UNIT 2 — the remaining tables ────────────────────────────────────────────────────────────
-import { expectedDeclaration, declaredLiteralsOf } from './census2dTables.test.js';
+import { expectedDeclaration, declaredLiteralsOf, calmLast } from './census2dTables.test.js';
 import { extractSettlementContext } from '../../../src/components/new/dailyLifeLogic.js';
 import { withPresumptionLedger } from '../../../src/domain/facts/presumptionLedger.js';
 
@@ -142,7 +142,7 @@ describe('POLITICAL_FLAVOR — the cascade\'s rows carry the ledger\'s declarati
     const wrong = Object.entries(want).filter(([k, d]) => {
       const [, pool, i] = /^(\w+)\[(\d+)\]$/.exec(k);
       const have = declarationOf(POLITICAL_FLAVOR[pool][Number(i)]);
-      return JSON.stringify({ needs: have.needs, excludes: have.excludes, crisis: have.crisis }) !== d;
+      return JSON.stringify({ needs: have.needs, excludes: have.excludes, crisis: calmLast(have.crisis) }) !== d; // CL17 (2): the found side normalized as the expected is (census2dTables.test.js `calmLast`)
     });
     expect(wrong).toEqual([]);
   });

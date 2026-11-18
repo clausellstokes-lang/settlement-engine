@@ -70,6 +70,16 @@ export function expectedDeclaration(pool, line) {
   return { needs, excludes: (line.excludes || []).map(norm), crisis };
 }
 
+/**
+ * CLOSE-DOORS-1A (2026-11-18, the chair's ruling CL17 (2)): THE FOUND SIDE IS NORMALIZED EXACTLY AS THE EXPECTED IS.
+ * `expectedDeclaration` puts `calm` last; a found declaration keeps the source's order, so a row that writes `calm` first
+ * (POLITICAL_FLAVOR.stable[2], SCENES-3 4efba5868) could never match: an asymmetry of the instrument. The list is a
+ * membership list (the draw reads it by `includes`/`some`: factVocabulary.js `crisisAdmits`, never an index). Only `calm`
+ * moves; every other entry stays compared in order.
+ * @param {readonly string[]} crisis
+ */
+export const calmLast = (crisis) => (crisis.includes('calm') ? [...crisis.filter((v) => v !== 'calm'), 'calm'] : [...crisis]);
+
 /** @param {string} id */
 const parseLineId = (id) => {
   const out = []; const re = /([^.[\]]+)|\[(\d+)\]|\[['"]([^'"]+)['"]\]/g; let m;
@@ -119,7 +129,7 @@ describe('STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS
       const wrong = rows.filter((r) => {
         const want = expectedDeclaration(r.pool, r.line);
         const have = declarationOf(r.node);
-        return JSON.stringify([have.needs, have.excludes, have.crisis]) !== JSON.stringify([want.needs, want.excludes, want.crisis]);
+        return JSON.stringify([have.needs, have.excludes, calmLast(have.crisis)]) !== JSON.stringify([want.needs, want.excludes, want.crisis]);
       }).map((r) => `${r.line.lineId}: ${JSON.stringify(declarationOf(r.node))} ≠ ${JSON.stringify(expectedDeclaration(r.pool, r.line))}`);
       expect(wrong, name).toEqual([]);
     }
