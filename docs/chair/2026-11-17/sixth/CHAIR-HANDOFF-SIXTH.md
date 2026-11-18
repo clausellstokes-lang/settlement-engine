@@ -2684,3 +2684,15 @@ should be paused or archived by the owner's hand.
   `tests/docs/enforcement-claims.test.js` on the merged tree: a hand-back that says "0 problems", "zero violations",
   "fails the gate" or the like is reworded as a report before the push. CLOSE-DOORS-2 still waits on its own runs
   (its hand-back follows as a documents merge).
+- 10:11 UTC, 2026-11-18 · **THE WORKING LINE IS AT THE CLOSED STATE: `lane/join-2026-11-14` = 64252903e207d94da17d6cc97a3d7f7bfd4d4abd**
+  (pushed 10:10 UTC as a fast-forward of 70e557d5b, its three gates green; read back from origin; pull request #75's
+  head, still a draft). ITS CI RUN 44282875950 started at once (16 check runs: five weekly soaks skipped; the gates,
+  the coverage floors, the end-to-end, the edge functions' tests, the golden under tr_TR and Chatham running);
+  EXPECTED RED: the six arms of CL26, and `check-observed-shape-readers.mjs` exit 1 if a gate step runs it.
+  **THE HOST SKIPPED THE LANE PUSH (CL13 closed):** the head carries no commit status at all (`get_status`:
+  total_count 0) and no Vercel check: the key `git.deploymentEnabled` ("lane/*": false) works. (A Cloudflare Pages
+  check runs: another integration.) **CLOSE-DOORS-2 SAID "WRITTEN ba62d0413"** (10:09): each surface as predicted; the
+  pins green; its receipt 189 of 191 files green alone (the two: CL26's); `verify:dist` STRICT DIST OK; goldenFreeze
+  90 of 90; MERGED AS MERGE 14 (e8cca6943, its hand-back only) on the close's branch and into the landings branch
+  (57ba4da23); both being pushed. THE LINE IS NOT PUSHED AGAIN UNTIL ITS CI RUN HAS FINISHED (a new push may cancel
+  it); then it is fast-forwarded to the landings.
