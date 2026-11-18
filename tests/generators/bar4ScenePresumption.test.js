@@ -278,7 +278,9 @@ describe('kind A1: no arrival or overview line shows what the town\'s present st
     // BAR8-SCENES (2026-11-17, BR17; re-keyed by identity): the two keys of the mark's worst state join them (`tradeAtWork.js ::
     // IN_FULL` on the ironwork, `FISH_TAKEN_HERE`)
     const { IN_FULL, FISH_TAKEN_HERE } = await import('../../src/domain/facts/tradeAtWork.js');
-    expect([.../** @type {any} */ (FACT_DIMENSIONS)['trade at work'].keys].sort()).toEqual([...Object.keys(TRADE_HOUSES), ...Object.keys(KILN_KINDS), ...Object.keys(GOOD_TRADES), `ironwork${IN_FULL}`, FISH_TAKEN_HERE].sort());
+    // BAR8-DESKS-2 (2026-11-18, the chair's ruling BR34; re-keyed by identity): `building`, the building houses by catalogue id
+    // (`tradeAtWork.js :: BUILDING_HOUSE_IDS`), joins the keys; it has no house words (no arrival sense opens it)
+    expect([.../** @type {any} */ (FACT_DIMENSIONS)['trade at work'].keys].sort()).toEqual([...Object.keys(TRADE_HOUSES), ...Object.keys(KILN_KINDS), ...Object.keys(GOOD_TRADES), `ironwork${IN_FULL}`, FISH_TAKEN_HERE, 'building'].sort());
   });
 
 });

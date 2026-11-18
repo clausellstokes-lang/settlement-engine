@@ -86,6 +86,8 @@ export function factsOf(record, options = {}) {
     get siegeMotion() { return siegeMotionOf(record); },
     /** BAR4-CORPUS-DEF (D1): a danger from outside is on its way, a live external-threat tension (`dangerComing.js`) */
     get dangerComing() { return dangerComingOf(record); },
+    /** BAR8-DESKS-DEF (12e): the common people press, or have risen, against those in charge, a live popular-uprising tension (`uprising.js`) */
+    get uprising() { return uprisingOf(record); },
     /** BAR6-DEFDESK (7a): the page itself prints the country's beasts as a threat (`monsterFrontier.js`) */
     get monsterFrontier() { return monsterFrontierOf(record); },
     /** BAR6-CULTURE (10g-legacy): the event the record's top legacy names destroyed something (`legacyRuin.js`) */
@@ -192,6 +194,8 @@ export function factsOf(record, options = {}) {
     get ownPlots() { return ownPlotsOf(record, liveInstitutionNames(/** @type {{ institutions?: unknown }} */ (record))); },
     /** the import list (`canonicalAccessors.js :: canonImports`) */
     get imports() { return canonImports(record); },
+    /** BAR8-DESKS-ECO (11c): the good the critical-import lens names is brought in (`criticalImportBroughtIn.js`) */
+    get criticalImportBroughtIn() { return criticalImportBroughtInOf(record); },
     /** the export list (`canonicalAccessors.js :: canonExports`) */
     get exports() { return canonExports(record); },
     /** the culture key (`resolveCulture.js :: resolveSettlementCulture`) */
@@ -271,3 +275,5 @@ export function birthFactsOf(partial = {}, worldLaw = null) {
 import { orderForceOf } from './orderForce.js'; // BAR6-CRIME: the force that keeps order
 import { rivalRingsStand } from './rivalRings.js'; // BAR7-DESKS (9i.crews): at the END, no line above moves
 import { crimeWaveStands, lawBandOf } from './lawBand.js'; // BAR5-SAFETY (L2.law.collapsed): at the END, no line above moves; BAR6-CRIME: the crime wave
+import { criticalImportBroughtInOf } from './criticalImportBroughtIn.js'; // BAR8-DESKS-ECO (11c): at the END, no line above moves
+import { uprisingOf } from './uprising.js'; // BAR8-DESKS-DEF (12e): at the END, no line above moves

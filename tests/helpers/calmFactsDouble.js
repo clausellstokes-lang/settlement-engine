@@ -98,4 +98,11 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   // `exports` on DS-GEN-5): a list with something on it holds the presence.
   imports: Object.freeze(['goods']),
   exports: Object.freeze(['goods']),
+  // BAR8-DESKS-2 (2026-11-18, ruling BR28 (1)): two presence atoms of the round BAR8 arrived after the double, unanswered here,
+  // so fail-closed (the kernel sweep's law 5 drifted on DS-ECO-12 CRITICAL IMPORT): DESKS-ECO's `critical import brought in`
+  // (`criticalImportBroughtIn.js`) holds, as every presence atom does; DESKS-DEF's `uprising` (`uprising.js`, a live popular
+  // rising) is a TROUBLE, read like `danger coming` above: a calm place has none, so DS-POW-4 Stable v3 (`no uprising`) is
+  // admitted (law 5 is byte-identical either way: that pool demotes a dimension and is not swept).
+  criticalImportBroughtIn: true,
+  uprising: false,
 });

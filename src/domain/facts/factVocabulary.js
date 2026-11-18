@@ -227,7 +227,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [seatOutranked] @property {boolean} [forceWalksByDay] @property {boolean} [sovereign] @property {boolean} [seatMembers] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
  * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork] @property {(key: string) => boolean|undefined} [goodExported] @property {boolean} [legitimacyCrisis] @property {boolean} [legalHouse] @property {boolean} [appointedPost]
- * @property {boolean} [dangerComing] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
+ * @property {boolean} [dangerComing] @property {boolean} [uprising] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [lawBand] BAR5-SAFETY: `lawBand.js :: lawBandOf`
@@ -235,6 +235,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [monsterFrontier] BAR6-DEFDESK: `monsterFrontier.js`
  * @property {boolean} [crimeWave] BAR6-CRIME: `lawBand.js :: crimeWaveStands`
  * @property {boolean} [rivalRings] BAR7-DESKS: `rivalRings.js :: rivalRingsStand`
+ * @property {boolean} [criticalImportBroughtIn] BAR8-DESKS-ECO: `criticalImportBroughtIn.js :: criticalImportBroughtInOf`
  * @property {{ kept?: boolean, paid?: boolean, volunteers?: boolean }} [orderForce] BAR6-CRIME: `orderForce.js :: orderForceOf`
  * @property {string} [prosperity]
  */
@@ -383,13 +384,21 @@ export const FACT_DIMENSIONS = Object.freeze({
   // BAR8-SCENES (BRIEF-BAR8 seat SCENES item 1; the chair's ruling BR17; vetoable by the owner, on the veto list as new
   // vocabulary): two keys more, `ironwork in full` (the trade at work and no house of it marked: the boom scenes) and `fish
   // taken here` (a taker of fish at work on a live ground: the racks and the gutting) (`tradeAtWork.js :: IN_FULL`, `FISH_TAKEN_HERE`)
-  'trade at work': dim({ shape: 'presence', home: 'tradeAtWork', keys: ['fish', 'kilns', 'clay kilns', 'charcoal kilns', 'stone', 'arcane', 'dairy', 'cloth', 'ironwork', 'herbs', 'spice', 'cut stone', 'woodwork', 'leather', 'dyed cloth', 'ironwork in full', 'fish taken here'],
+  // BAR8-DESKS-2 (K's 15e; the chair's ruling BR34; vetoable by the owner, on the veto list as new vocabulary): `building`, a
+  // house whose own service is building stands and is not short (`tradeAtWork.js :: BUILDING_HOUSE_IDS`, by catalogue id);
+  // false where none stands. "Nothing new goes up" presumes its absence.
+  'trade at work': dim({ shape: 'presence', home: 'tradeAtWork', keys: ['fish', 'kilns', 'clay kilns', 'charcoal kilns', 'stone', 'arcane', 'dairy', 'cloth', 'ironwork', 'herbs', 'spice', 'cut stone', 'woodwork', 'leather', 'dyed cloth', 'ironwork in full', 'fish taken here', 'building'],
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (typeof f.tradeAtWork === 'function' && key ? f.tradeAtWork(key) : undefined) }),
   // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary), beside the crisis
   // states the record holds as presences (famine, starving): a danger from outside is on its way, a live external-threat
   // tension of the history (`dangerComing.js`), which the crisis record's threat family does not see. "Nothing threatens it"
   // presumes its absence (REVIEW-BAR-4 C18744, C45642).
   'danger coming': dim({ shape: 'presence', home: 'dangerComing', reader: (f) => bool(f.dangerComing) }),
+  // BAR8-DESKS-DEF (BAR8-AUDIT-K rule 12e; the chair's ruling BR14 (c); vetoable by the owner, on the veto list as new
+  // vocabulary), beneath `danger coming`, the history's other live tension: the common people are pressing, or have risen,
+  // against those in charge (`uprising.js`: a live `popular_uprising` tension), which the desk's `unrest` dimension (three crisis
+  // kinds) does not see. "Nobody stands ready to lead them against the {seat}" presumes its absence (the seventh read's C16668).
+  uprising: dim({ shape: 'presence', home: 'uprising', reader: (f) => bool(f.uprising) }),
   // BAR6-DEFDESK (LAW 7's `7a-nothreat`; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary), beside
   // `danger coming`: the page itself prints the country's beasts as a threat (`monsterFrontier.js`: plagued country, or frontier
   // country under a Beasts & Monsters band Weak or Critical), a frontier condition and no crisis. "Nothing threatens it now that a
@@ -473,6 +482,12 @@ export const FACT_DIMENSIONS = Object.freeze({
   // record names no grain (`ownPlots.js`): a line that gives the record's one source as what every table leans on first refuses it.
   'own plots': dim({ shape: 'presence', home: 'ownPlots', reader: (/** @type {FactsLike} */ f) => bool(f.ownPlots) }),
   imports: dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.length > 0 : undefined) }),
+  // BAR8-DESKS-ECO (J's 11c.needed, 11c.venture, 11c.idle; BRIEF-BAR8 DESKS-ECO item 2, the chair's BR17 (3); vetoable by the
+  // owner, on the veto list as new vocabulary), beneath `imports`: `critical import brought in` = the good DS-ECO-12's critical
+  // import lens fills `{good}` with (a house needs it and the land lacks it) is one an import of the stored list brings
+  // (`criticalImportBroughtIn.js`, held equal to the page's need list). "A good part of the {good} … must come from elsewhere"
+  // presumes it ("copper ore" beside "Needed, and not brought in: copper ore.", bar0-city-wartime-rand-47).
+  'critical import brought in': dim({ shape: 'presence', home: 'criticalImportBroughtIn', reader: (/** @type {FactsLike} */ f) => bool(f.criticalImportBroughtIn) }),
   exports: dim({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.length > 0 : undefined) }),
   // BAR6-SCENES (LAW 6 rule 6b "out"; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary), beneath
   // `exports`: `exported: <good>`, the export list names the good a scene sends out (`goodExported.js`): "Bolts of cloth and
