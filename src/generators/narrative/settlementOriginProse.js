@@ -61,6 +61,7 @@
  */
 
 import { pickVariant } from '../../kernel/proseHash.js';
+import { noteDeclared } from '../../domain/facts/drawDeclared.js';
 
 /** The `{channels}` token the isolated-deficit pool splices the support list into. */
 export const CHANNELS_TOKEN = '{channels}';
@@ -294,6 +295,18 @@ const TRAVELLER_LIVING_REFUSED_TIERS = new Set(['city', 'metropolis']);
 const noSiege = (state) => state.siege !== true;
 
 /**
+ * THE ROWS DECLARED ON WHAT THEY PRESUME (LAST-DECLARE, 2026-11-18): the roadside row names the traffic a siege stops
+ * (`excludes: crisis: under_siege`), the atom of its `noSiege` test below. Keyed by the row's text and handed to
+ * `noteDeclared` where the pick is made: the admits table has already refused the row under a siege, so nothing moves;
+ * the note gives the birth self-check the row's atom to re-assert against the final record.
+ */
+export const ORIGIN_DECLARED = Object.freeze({
+  'It stands roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.': Object.freeze([
+    Object.freeze({ text: 'It stands roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what stops for the night.', excludes: Object.freeze(['crisis: under_siege']) }),
+  ]),
+});
+
+/**
  * THE ROWS A FOUNDING STATE REFUSES (R2-CODE-A-4: round three's #154 and the increment's #ww-1227, the
  * chair's rulings of 2026-11-13 20:33 and 21:14). A row listed here is said only where its test holds;
  * a refused pick resolves DRAW-FREE to the next admitted row of the same pool (pickVariant's index,
@@ -414,6 +427,7 @@ export const selectOriginBody = (state) => {
   const pool = ORIGIN_POOLS[arm];
   const hashed = pickVariant(pool, originVariantKey({ ...state, arm }));
   const picked = pool[admittedIndex(arm, pool, pool.indexOf(hashed), state)];
+  noteDeclared(picked, ORIGIN_DECLARED, { poolId: 'settlementOriginProse:ORIGIN_DECLARED', surface: 'dossier', drawKind: 'H' });
   const body = arm === 'ground'
     ? picked.split(GROUND_TOKEN).join(GROUND_PHRASE[/** @type {string} */ (state.terrainType)])
     : picked;

@@ -18,21 +18,29 @@
  */
 import { lawBandOf } from '../facts/lawBand.js';
 import { atomHolds } from '../facts/factVocabulary.js';
+import { defenceOf } from '../facts/defence.js';
+import { resolveSibling } from '../facts/drawDeclared.js';
 
 /** The atom every line of this table presumes: the page's `Law & order` band above Collapsed. */
 export const LAW_ANSWERS_ATOM = 'law: > collapsed';
 
 /**
- * One declared sibling set (the safety writer's `declaredSet` form): the original needs the atom; its twin excludes it.
- * @param {string} text @param {string} twin
+ * One declared sibling set (the safety writer's `declaredSet` form): the original needs the atom; its twin excludes it. A
+ * twin given as a row brings its own declaration of what it names (LAST-DECLARE).
+ * @param {string} text @param {string | { text: string, needs?: ReadonlyArray<string> }} twin
  */
 const declaredSet = (text, twin) => Object.freeze([
   Object.freeze({ text, needs: Object.freeze([LAW_ANSWERS_ATOM]) }),
-  Object.freeze({ text: twin, twinOf: text, excludes: Object.freeze([LAW_ANSWERS_ATOM]) }),
+  Object.freeze({ ...(typeof twin === 'string' ? { text: twin } : twin), twinOf: text, excludes: Object.freeze([LAW_ANSWERS_ATOM]) }),
 ]);
 
-/** The twin of the court's lines where a court and a prison stand (`safetyProfile.js :: COURT_AND_PRISON`). */
-const COURT_AND_PRISON_UNDER_COLLAPSE = ' A court and a prison stand, but few offenders are ever brought to either.';
+/**
+ * The twin of the court's lines where a court and a prison stand (`safetyProfile.js :: COURT_AND_PRISON`). It names the
+ * prison, so it declares it (LAST-DECLARE, 2026-11-18): its originals print only on the writer's court-and-prison branch,
+ * so the atom holds wherever it can print (509 towns of the 900, the 525 and 700 besieged births print an original; the
+ * prison stands in every one).
+ */
+const COURT_AND_PRISON_UNDER_COLLAPSE = Object.freeze({ text: ' A court and a prison stand, but few offenders are ever brought to either.', needs: Object.freeze(['prison']) });
 /** The twin where a court stands and no prison (`safetyProfile.js :: COURT_NO_PRISON`). */
 const COURT_ONLY_UNDER_COLLAPSE = ' A court stands, though few offenders are ever brought before it, and there is nowhere to hold them.';
 /** The twin of the quarrel line, its plain and its violent telling alike (`safetyLineTruth.js :: quarrelUnderViolence`). */
@@ -91,7 +99,7 @@ export const SIEGE_ORDER_FRAME = Object.freeze({
  * never this table's); each twin names no force.
  */
 export const GUARD_LAW_FRAMES = Object.freeze([
-  Object.freeze({ frame: / Offenders the [^.]+? catches are tried at the court and held in the prison\./, needs: Object.freeze([LAW_ANSWERS_ATOM]), twin: COURT_AND_PRISON_UNDER_COLLAPSE }),
+  Object.freeze({ frame: / Offenders the [^.]+? catches are tried at the court and held in the prison\./, needs: Object.freeze([LAW_ANSWERS_ATOM]), twin: COURT_AND_PRISON_UNDER_COLLAPSE.text }),
   Object.freeze({ frame: / Offenders the [^.]+? catches go before the court; there is little room to hold them after\./, needs: Object.freeze([LAW_ANSWERS_ATOM]), twin: COURT_ONLY_UNDER_COLLAPSE }),
 ]);
 
@@ -113,9 +121,12 @@ function guardLineUnderTheBand(text, record) {
   if (!held.length && !framed.length) return text;
   if (atomHolds(LAW_ANSWERS_ATOM, { lawBand: lawBandOf(record) }) !== false) return text;
   let out = text;
+  // LAST-DECLARE (2026-11-18): each held line resolves through the door on what its set declares (the band, and a twin's own
+  // thing): the original is refused here, so its twin prints where admitted, as before; a refused twin keeps the line.
+  const facts = { lawBand: lawBandOf(record), defence: defenceOf(/** @type {Parameters<typeof defenceOf>[0]} */ (record)) };
   for (const k of held) {
-    const twin = /** @type {Readonly<Record<string, ReadonlyArray<{ text: string, twinOf?: string }>>>} */ (GUARD_LAW_SIBLINGS)[k].find((l) => typeof l.twinOf === 'string');
-    if (twin) out = out.split(k).join(twin.text);
+    const twin = resolveSibling(k, GUARD_LAW_SIBLINGS, { facts, poolId: 'guardLineUnderTheLaw:GUARD_LAW_SIBLINGS', surface: 'defense', drawKind: 'T' });
+    if (twin !== k) out = out.split(k).join(twin);
   }
   for (const f of framed) out = out.replace(f.frame, f.twin);
   return out;

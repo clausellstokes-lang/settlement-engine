@@ -16739,14 +16739,6 @@
     "efd49e9008896522"
    ]
   ],
-  "src/domain/display/guardLineUnderTheLaw.js": [
-   [
-    "prison",
-    "after-base: owner-2026-11-18",
-    " A court and a prison stand, but few offenders are ever brought to either.",
-    "85fc61848472a7ad"
-   ]
-  ],
   "src/domain/display/humanizeEngineTokens.js": [
    [
     "war",
@@ -26569,12 +26561,6 @@
     "after-base: close-unprinted",
     "Isolated from major trade routes, and short of what it eats. With the siege closing the roads, it must make do with ",
     "effe163c2bf52282"
-   ],
-   [
-    "openTrade",
-    "family",
-    "It stands roadside, where the day is measured in traffic: what arrives before noon, what leaves before dusk, and what st",
-    "46a67ae06452f0b9"
    ]
   ],
   "src/generators/narrativeGenerator.js": [
@@ -28067,30 +28053,6 @@
     "after-base: close-true",
     " The walls leave few ways in.",
     "47eed4442b369227"
-   ],
-   [
-    "garrison",
-    "implied",
-    "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound t",
-    "26ba104371f73baf"
-   ],
-   [
-    "clergy",
-    "family",
-    "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound t",
-    "26ba104371f73baf"
-   ],
-   [
-    "clergy",
-    "family",
-    "The settlement's chaplain also leads its armed men, and is authorizing military action for reasons that sound theologica",
-    "ad2781f9cea24c20"
-   ],
-   [
-    "streets",
-    "family",
-    "The streets are unusually quiet.",
-    "d0cb088496831e60"
    ]
   ],
   "src/generators/services/serviceClassifier.js": [
