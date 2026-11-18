@@ -2541,3 +2541,20 @@ should be paused or archived by the owner's hand.
   +1. ITS ITEM 5 (the Legal row's prison read live; sent 07:10 while it worked) IS NOT IN THAT HAND-BACK: the seat is
   still running (08:45), the queued message delivered at its turn's end: the chair waits for its next message and asks
   once if none comes. THE SHARED READER (WATCH, PEOPLE, DESKS, ROWS) is seated when the four have handed back.
+- 09:12 UTC, 2026-11-18 · FAULTS-DESKS HANDED BACK (09:11; tip 9e250c8fa; hand-back
+  `docs/chair/2026-11-18/faults/FAULTS-DESKS-HANDBACK.md`): ITEM 2 (FR7; f0b59f2ef): THE NUMBERING GUARD IS ARMED in
+  `scripts/generate-dossier-state-prose.mjs`: its baseline is the six state leaves AS COMMITTED (no second stored
+  list), compared by text; it refuses RENUMBERED, RE-USED, DROPPED and REWORDED, the last unless a `WORD_CORRECTIONS`
+  row names the pool, the number, both texts' sha256 and the ruling (the list ships empty); proved on eight planted
+  cases (BAR6-DEFDESK's own shape among them: red at the base's projector, refused at the tip); restored, all ten
+  leaves byte-equal; it agrees with the register's `vids` digest. ITEM 1 (13d; 993d656f0): THE ATOM `court or gaol`
+  (a live court or a live prison; it agrees with the Legal row in 720 of 720 towns), declared by the seven
+  record-of-crimes lines; 13d 1, 4, 6 to zero; no rule rises; 0 of the 525; the pool table moves no row; pages move in
+  2, 13 and 20 towns: each line that takes the slot is true by its own declaration. THE UNSAFE POOL FELL TO NO LINE IN
+  THREE TOWNS (bar0-hamlet-calm-rand-27, -29, r2r-thorp-30): ITS TWIN IS GIVEN BY NAME (09:15, the seat's own words:
+  "Wrongs at {settlement} are piling up faster than its people can settle them among themselves, and nobody here holds
+  an offender or hears a case." `[ledger · no court or gaol · no watch]`). THE POOLS UNDER THREE (Moderate 2 to 1 in 21
+  towns and 3 to 2 in 7; Safe 3 to 2 in 17 and 2 to 1 in 4; Very Safe 2 to 1 in 10) ARE THE VARIETY ROUND'S: the seat
+  commits its tables as `FAULTS-DESKS-R7.md`. Named: `presumedThings` 38 to 39 by the atom's own name (the walker's);
+  the wiring census's declared rows 10 to 14; the estate's count +1; the defense leaf +181 bytes; the committed census
+  stale at the base. Safe v5 and Very Safe v5 now reach no town of the 900.
