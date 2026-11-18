@@ -13,7 +13,7 @@
     "weightFloor": 0.25,
     "soakWeightCap": 0.5,
     "cellsTested": 207,
-    "cellsKept": 94,
+    "cellsKept": 96,
     "cellsUntestable": 39,
     "cellsUnderSampled": 0
   },
@@ -95,7 +95,7 @@
       "coBucket": "high",
       "n": 140,
       "effect": 0.12,
-      "weight": 0.37,
+      "weight": 0.38,
       "source": "soak"
     },
     {
@@ -106,6 +106,16 @@
       "n": 56,
       "effect": 0.38,
       "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resilience",
+      "bucket": "city",
+      "coBucket": "low",
+      "n": 56,
+      "effect": -0.12,
+      "weight": 0.37,
       "source": "soak"
     },
     {
@@ -132,9 +142,19 @@
       "surface": "construct",
       "dimension": "settType.resilience",
       "bucket": "hamlet",
+      "coBucket": "low",
+      "n": 72,
+      "effect": 0.13,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resilience",
+      "bucket": "hamlet",
       "coBucket": "moderate",
       "n": 72,
-      "effect": 0.16,
+      "effect": 0.13,
       "weight": 0.5,
       "source": "soak"
     },
@@ -154,7 +174,7 @@
       "bucket": "metropolis",
       "coBucket": "low",
       "n": 63,
-      "effect": -0.12,
+      "effect": -0.13,
       "weight": 0.5,
       "source": "soak"
     },
@@ -184,7 +204,7 @@
       "bucket": "thorp",
       "coBucket": "low",
       "n": 61,
-      "effect": 0.22,
+      "effect": 0.21,
       "weight": 0.5,
       "source": "soak"
     },
@@ -204,8 +224,8 @@
       "bucket": "town",
       "coBucket": "moderate",
       "n": 81,
-      "effect": 0.12,
-      "weight": 0.48,
+      "effect": 0.13,
+      "weight": 0.5,
       "source": "soak"
     },
     {
@@ -465,7 +485,7 @@
       "coBucket": "high",
       "n": 62,
       "effect": 0.12,
-      "weight": 0.37,
+      "weight": 0.38,
       "source": "soak"
     },
     {
@@ -484,7 +504,7 @@
       "bucket": "crossroads",
       "coBucket": "low",
       "n": 61,
-      "effect": -0.14,
+      "effect": -0.12,
       "weight": 0.5,
       "source": "soak"
     },
@@ -504,7 +524,7 @@
       "bucket": "isolated",
       "coBucket": "low",
       "n": 69,
-      "effect": 0.37,
+      "effect": 0.35,
       "weight": 0.5,
       "source": "soak"
     },
@@ -615,7 +635,7 @@
       "coBucket": "low",
       "n": 75,
       "effect": 0.12,
-      "weight": 0.4,
+      "weight": 0.41,
       "source": "soak"
     },
     {

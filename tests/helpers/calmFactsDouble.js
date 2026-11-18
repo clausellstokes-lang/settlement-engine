@@ -77,6 +77,8 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   // `legitimacy crisis`, `force` (keyed: ORDER_FORCE_WORDS); and the goods since given to `trade at work` (keyed). "Every
   // presence atom holds" covers them, so a `no X` line is refused here exactly as the pre-cure reference refuses it.
   courtSits: true,
+  // FAULTS-DESKS (2026-11-18, FR6): `court or gaol` (`factsOf.js :: courtOrGaol`): a calm place keeps a court (above)
+  courtOrGaol: true,
   legacyRuin: true,
   sovereign: true,
   seatOutranked: true,
@@ -105,4 +107,10 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   // admitted (law 5 is byte-identical either way: that pool demotes a dimension and is not swept).
   criticalImportBroughtIn: true,
   uprising: false,
+  // FAULTS-NEED (FR2): `need not brought in` (`needNotBroughtIn.js`) is a WANT, read like `uprising` above: a calm place meets
+  // its needs, so a line that presumes a good is had is admitted
+  needNotBroughtIn: Object.freeze({ luxury: false, spice: false, silk: false, precious: false, salt: false, fuel: false, livestock: false, any: false }),
+  // FAULTS-ROWS (FR12 (3)): `fish bought in` (`fishBoughtIn.js`): a calm place lands its own catch, so a line that presumes the
+  // day's catch is admitted
+  fishBoughtIn: false,
 });

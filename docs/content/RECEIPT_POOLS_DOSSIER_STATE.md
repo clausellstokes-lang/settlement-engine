@@ -1236,11 +1236,12 @@ contradict** it (R-DST-C).
 7. `[newcomer · colour]` A newcomer to {settlement} soon learns that most people here are owed money and owe some too.
 
 **POOR** — *getting by, no surplus* {crisis-scoped}
-1. `[ledger · crisis: any · food: ≥ secure]` {settlement} covers what it must and nothing beyond. Every essential is accounted for and there is no line for anything else.
+1. `[ledger · crisis: any · food: ≥ secure · no need not brought in: any]` {settlement} covers what it must and nothing beyond. Every essential is accounted for and there is no line for anything else.
 2. `[street · no hunger · food: ≥ secure]` The town gets by. Nobody is going without bread and nobody is building anything either.
 3. `[visitor · crisis: any · no trade at work: building]` In {settlement} the old buildings are patched and kept standing, and nothing new goes up.
 4. `[street · crisis: any]` Money is short in {settlement}, and most households spend what they earn as soon as it comes in.
 5. `[ledger · crisis: any · food: = pressured]` {settlement} pays for what it must and nothing beyond, and it does not raise all the food it eats.
+6. `[ledger · crisis: any · food: ≥ secure · need not brought in: any]` {settlement} feeds itself and has nothing to spare. Some of what its work needs does not reach it, and there is no line for anything else.
 
 **MODERATE** — *steady, thin margin* {crisis-scoped}
 1. `[ledger · crisis: any]` {settlement}'s treasury takes in a little more than it pays out each year. It is enough, and no more.
@@ -1845,7 +1846,7 @@ shape.
 1. `[ledger · no crisis: under_siege]` Some of {settlement}'s work cannot go on without {good}, and the country around the town does not give enough of it, so the town buys from outside or that work stops.
 2. `[visitor · no crisis: under_siege · critical import brought in]` A good part of the {good} {settlement}'s work uses must come from elsewhere; when none comes, that work stands idle.
 3. `[ledger · crisis: under_siege · stores: < 6]` Since the siege closed the roads, none of the {good} that {settlement}'s work needs has reached it, and that work has stopped or soon will.
-4. `[visitor · no crisis: under_siege · no critical import brought in]` Some of {settlement}'s work needs {good} that the country around it does not give, and none of it is brought in.
+4. `[visitor · no crisis: under_siege · no critical import brought in]` Some of {settlement}'s work needs more {good} than the country around it gives, and none of it is brought in.
 
 **CRITICAL IMPORT: the land cannot give it** *(the `reasons` entry names the terrain alone)*
 1. `[ledger · colour]` The country around {settlement} does not give the town enough {good} for what the town needs of it.
@@ -3095,20 +3096,20 @@ reading rather than a settled one.
 **`Very Safe`** {crisis-scoped}
 1. `[street · watch · crisis: any · no crisis: threat, unrest]` Nothing much happens to people at {settlement}. The watch is heavier than anything working against it, by a margin the town does not have to think about.
 2. `[visitor · crisis: any · no crisis: threat, unrest]` You can walk {settlement} at any hour without trouble, and the people who live there do the same without a second thought.
-3. `[ledger · guardPresence · crisis: any]` The town's record of crimes at {settlement} is short: enforcement far outweighs the criminals, and there is little to write down.
+3. `[ledger · guardPresence · court or gaol · crisis: any]` The town's record of crimes at {settlement} is short: enforcement far outweighs the criminals, and there is little to write down.
 4. `[counterforce · watch · crisis: any]` There is money at {settlement} and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
-5. `[ledger · no guardPresence · crisis: any]` The town's record of crimes at {settlement} is short: there is little crime to write down, and neighbours settle what there is between themselves.
+5. `[ledger · no guardPresence · court or gaol · crisis: any]` The town's record of crimes at {settlement} is short: there is little crime to write down, and neighbours settle what there is between themselves.
 
 **`Safe`** {crisis-scoped}
 1. `[street · crisis: any · no crisis: threat, unrest]` Crime at {settlement} stays small: things are taken occasionally and the taking does not spread, because the people who would spread it are known.
-2. `[ledger · guardPresence · no crime wave · crisis: any]` The town's record of crimes at {settlement} stays short: there is crime, but enforcement keeps it down and keeps it from growing.
-3. `[ledger · guardPresence · crime wave · crisis: any]` The town's record of crimes at {settlement} is still short, but it grows longer each season, and enforcement is not keeping pace.
+2. `[ledger · guardPresence · no crime wave · court or gaol · crisis: any]` The town's record of crimes at {settlement} stays short: there is crime, but enforcement keeps it down and keeps it from growing.
+3. `[ledger · guardPresence · crime wave · court or gaol · crisis: any]` The town's record of crimes at {settlement} is still short, but it grows longer each season, and enforcement is not keeping pace.
 4. `[visitor · guardPresence · crisis: any · no crisis: threat, unrest]` Visitors feel safe at {settlement}, and it is plain that somebody keeps it that way.
-5. `[ledger · no guardPresence · crisis: any]` The town's record of crimes at {settlement} stays short: there is some crime, and neighbours settle most of it between themselves.
+5. `[ledger · no guardPresence · court or gaol · crisis: any]` The town's record of crimes at {settlement} stays short: there is some crime, and neighbours settle most of it between themselves.
 
 **`Moderate`**
 1. `[street · patrol · force: kept · law: > collapsed]` {settlement} keeps a working balance: the law is present, so is crime, and neither has the town to itself.
-2. `[ledger · guardPresence]` The town's record of crimes at {settlement} is not short, and the next few seasons will decide whether the law or the criminals gain on it.
+2. `[ledger · guardPresence · court or gaol]` The town's record of crimes at {settlement} is not short, and the next few seasons will decide whether the law or the criminals gain on it.
 3. `[visitor · tier: ≥ village]` Visitors to {settlement} are told which few streets to avoid, and the advice turns out to be right.
 4. `[threshold · watch · tier: ≥ village]` Order at {settlement} could tip either way: a few fewer watchmen or one bolder gang would be felt on the streets within the season.
 5. `[street · no guardPresence · no watch]` Nobody at {settlement} is paid to keep order; what order the place has, its own people keep.
@@ -3118,8 +3119,9 @@ reading rather than a settled one.
 
 **`Unsafe`**
 1. `[street · watch]` Crime at {settlement} is outrunning the watch. It is not chaos; it is that the people doing it have stopped expecting to be caught.
-2. `[ledger · colour]` The town's record of crimes at {settlement} grows faster than its record of arrests, and people pay for the difference in what they lose.
+2. `[ledger · court or gaol]` The town's record of crimes at {settlement} grows faster than its record of arrests, and people pay for the difference in what they lose.
 3. `[unfolding · watch]` The balance at {settlement} has tipped and is still tipping. Each season the watch answers a smaller share of what happens.
+4. `[ledger · no court or gaol · no watch]` {settlement} has no court and no gaol. Custom and neighbours answer what they can, and the rest goes unanswered.
 
 **`Dangerous`**
 1. `[street · watch]` The watch at {settlement} has been overwhelmed. What happens in this town is decided by whoever is present when it happens.

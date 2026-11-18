@@ -639,6 +639,12 @@ const desktopShape = (perView) => Object.fromEntries(
 // 6e36000a and 56f73d7ec); Institutions and Services, TAIL-SERVICES S1/S5 (73291c8e: the ordinary-times and short lines);
 // Defense, R3-TABS-4 F2/F7 (2b7f6199) and the defence lines' families; Overview, History, Power, NPCs and Relationships: the
 // joins' births from JOIN-1 · 3 (e20a60e0) on. No token moved.
+// ── RE-MEASURED 2026-11-18 (CLOSE-DOORS-1B, the close of 2026-11-18, at the merged tree 238d030c2): sub12 0 in every view and
+// the floors arm reads zero violations. Mobile: Institutions prose 73 -> 71, Services prose 103 -> 102; desktop: Institutions
+// measured/sub14 74 -> 72, Services 104 -> 103; nothing else moved. Cause, measured by this walk at every first-parent landing
+// that touches src/ from 600b7683a (each probe at its own tree): Services +1 at JOIN-16 point 6 (BAR5-CHAINS 027ead2b8), +2 at
+// JOIN-17 point 5 (BAR6-MARKS a010f4f9c, Institutions +1 there), Institutions -1 at point 8 (BAR6-PEOPLE 57a3bda67), then at
+// point 21 (BIRTH-1 edb5cae92) Institutions -2 and Services -4: the figures hold from there to the tip. No token moved.
 const DESKTOP_BASELINE = Object.freeze({
   // RE-MEASURED ONCE at MERGE-TRAIN's final tip (2026-11-09, the allegiance train; BRIEF-MERGE-TRAIN §0.3, GREEN-BASE §4.4's form),
   // the same walk: World/NPCs 220 -> 284, bisected on the desktop walk at the merge points' stages — 220 at the base, CAR1 +3
@@ -657,8 +663,8 @@ const DESKTOP_BASELINE = Object.freeze({
 // Plot Hooks 88 -> 89 on both arms. Red on SW-8's own tip b951ce7da and unkeyed there; bisected over the lane: green at
 // c85fd3f85, red at d12e20112 (the conflict hooks reworded). No token moved; sub12 0.
   "Summary/Plot Hooks":  { measured: 89, sub14: 89 },
-  "Systems/Services":    { measured: 104, sub14: 104 },
-  "Systems/Institutions": { measured: 74, sub14: 74 }, // T1-14, measured 2026-10-30 by this walk; 62 → 71 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine face rows each gain the "Connection:" label, a line of its own
+  "Systems/Services":    { measured: 103, sub14: 103 },
+  "Systems/Institutions": { measured: 72, sub14: 72 }, // T1-14, measured 2026-10-30 by this walk; 62 → 71 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine face rows each gain the "Connection:" label, a line of its own
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
   // 46 -> 45 (2026-11-14, R2-CODE-B-7, the merge 0aa0cce00 of the line 976db5b19 into the lane), the two sides' moves composed
@@ -837,8 +843,8 @@ const MOBILE_BASELINE = Object.freeze({
   // 37 -> 38 and Relationships 57 -> 58 (2026-10-31, the G2 + W2-LINKS composition at the merge): one conflict
   // line more (X-26a); both sub-floor counts stay where they were.
   "Summary/Plot Hooks":  { prose: 88, chrome: 1, sub14: 1, sub12: 0 },
-  "Systems/Services":    { prose: 103, chrome: 1, sub14: 0, sub12: 0 },
-  "Systems/Institutions": { prose: 73, chrome: 1, sub14: 0, sub12: 0 }, // 61 → 70 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine "Connection:" labels, each at the prose floor
+  "Systems/Services":    { prose: 102, chrome: 1, sub14: 0, sub12: 0 },
+  "Systems/Institutions": { prose: 71, chrome: 1, sub14: 0, sub12: 0 }, // 61 → 70 OWNER-WORDS-DOSSIER item 1 (2026-11-09): the nine "Connection:" labels, each at the prose floor
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
   // chrome 7 -> 6, sub14 7 -> 6 (2026-11-14, R2-CODE-B-7, the merge 0aa0cce00), composed from the base's 39/8/8: the line's
   // chrome 8 -> 7 (point 47, e382be4b3) and the lane's prose 39 -> 40 -> 39, chrome 8 -> 7 (R2-CODE-B-3 item 2a, the stores

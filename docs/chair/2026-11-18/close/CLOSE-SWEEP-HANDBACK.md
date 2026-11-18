@@ -211,7 +211,7 @@ each commit (integrity-counted: 11,167 and 11,168 files = `git ls-tree -r`), `no
 | --- | --- | --- |
 | `npm run typecheck:ratchet` | OK, 167 (ceiling 167) | OK, 167 (ceiling 167) |
 | `npm run typecheck:domain:strict` | ✓, 1113 (ceiling 1113) | ✓, 1113 (ceiling 1113) |
-| `npx eslint` on the branch's 8 changed code files | (S1: 0 on the four) | 0 problems |
+| `npx eslint` on the branch's 8 changed code files | (S1: 0 on the four) | nothing reported (exit 0) |
 | `tests/lint` (778 files, 3,211 tests) | 3,123 passed · 72 failed · 16 skipped | **3,129 passed · 66 failed · 16 skipped** |
 | `tests/joins` | 425 / 425 | 425 / 425 |
 | `tests/architecture` | 347 / 347 | 347 / 347 |

@@ -189,6 +189,27 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-18, THE CLOSE OF THE ROUNDS BAR5 TO BAR8, SIGNED AT THE DOORS' BRANCH (CLOSE-DOORS-2) ──
+ * THE HUNDRED-AND-FIFTEENTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own word in the chair's chat (2026-11-18
+ * 03:03:46 UTC, the whole of the message, "yes: refresh the stored reference files and open the pull request.", answering the
+ * chair's message of 02:47:31 UTC; ODQ §934.105; the chair's line "SIGN" 06:57 UTC; for this close only); the record is
+ * docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json. THE CHAIR'S RULING CL5 (the last closes' EF1, vetoable):
+ * the move is the rounds' declared page text and record, re-taken only after every other arm of this fence read green at the tree
+ * (20 of 21). THE MOVERS, FOUND: every seat landed over 600b7683a..70e557d5b (the chair's ruling CL11: BAR5's nine branches, BAR6
+ * and its seam, BIRTH-1 to -3, BAR7, SECRETS-1, the leftovers round and BAR8) and Part 1 of the close (stored figures only, at
+ * 0af60594a: the 360 byte-equal); FIELD-DIFFED by leaf path: the golden's families (the ties' tensions, lines and, beside a warm or
+ * cold first tie, the second's kind and strength (BAR7-LINES); the powers' descriptions (BAR6-POWERS); the rare secrets (SECRETS-1);
+ * goals, conflicts and the coherence receipt that read a tie (BAR7-LINES); the supply gaps, imports and need lists (BAR5-CHAINS,
+ * BIRTH-1 to -3); exports, chains, production, income (BAR6-RECORD); the crier's line and the fish market's catch (BAR7-LINES,
+ * BAR8-FISH-ROWS); the foodways and the architecture (BAR5-FOOD, BAR6-CULTURE); the outlook hooks; the arrival; the history's events
+ * and tensions; the founding reasons (BAR5-WORLD); presentations (LEFT-LINES)) and, beyond them, the history's character (BAR5-MAGIC,
+ * BAR7-SCENES), the pressure sentence (BAR6-SEAM-SCENES), the war's crown lines in a stress note (BAR7-LINES), tempers and card
+ * twins (BAR6-PEOPLE, BAR5-POWERS), four houses' siege and supply twins, the dues owed and the bodyguards' line (BAR5-MARKS), a crime
+ * line (BAR6-CRIME) and a bargain's line where a conflict left. The espionage subsystem stays dormant.
+ * On THIS corpus 322 of 360 rows (thorp 25, hamlet 59, village 59, town 59, city 60, metropolis 60) move against the last green
+ * corpus 0ac61b4b4 (the tip of the BAR4 close, which reproduces `8e5881d6…`); 360/360 hashes stay distinct. Written on the doors'
+ * branch after the golden master's commit (b3cfdbcc3), measured by scripts/audit/refence.mjs before the write.
+ *
  * ── 2026-11-16, THE CLOSE OF THE ROUND BAR4, SIGNED AT THE DOORS' BRANCH (BAR4-CLOSE-DOORS-2) ──
  * THE HUNDRED-AND-FOURTEENTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own words in the chair's chat (2026-11-16
  * 08:55:14 UTC, "Yes to the following:" / "Later: a new yes for the example-town refresh when this round closes.", answering the
@@ -1390,7 +1411,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '8e5881d64d3c2b892a7cecdae5eb07eb4d98c51770d1b7e16dd1c215a4734074';
+const PRE_COUPLING_CORPUS_SHA = 'cd67a3c1e430139ff29b6107a5faa60645761525df31d4fd3504b4d2b33b4e22';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

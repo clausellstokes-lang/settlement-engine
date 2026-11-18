@@ -135,7 +135,7 @@ describe('at birth, free ≡ premium on every dossier tab (the twelve soak towns
       }
     });
     expect(diffs).toEqual([]);
-  });
+  }, 120_000); // its own budget: a corpus walk at the edge of the 20 s default on a CI runner under coverage (measured 2026-11-18: ~11 s there)
 
   it('non-vacuity: the twelve towns render a faith line on the Faith tab for both owners', () => {
     TOWNS.forEach((s) => {

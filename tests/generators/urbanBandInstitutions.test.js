@@ -126,7 +126,7 @@ describe('G3 — the cumulative laws at generation', () => {
         .filter(s => (s.institutions || []).some(i => i.name === 'Beast trainers' && i.source === 'generated'));
       expect(native.length, `${tier}: native Beast trainers`).toBeGreaterThan(0);
     }
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the ratchet's instruction; 2026-11-18): 21.7 s here under load; 20.9 s and 23.6 s on CI's ratchet runner (runs 44295605654, 44282875950)
 
   it('a metropolis carries its own scale rows and never a city\'s beside them', () => {
     const metros = settlements('metropolis', 60);
@@ -273,7 +273,7 @@ describe('G6 — a druid is a priest where magic does not work (J30)', () => {
     }
     expect(rows, 'druid rows in magic worlds').toBeGreaterThan(20);
     expect(wrong).toEqual([]);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the ratchet's instruction; 2026-11-18): 12.0 s here under load
 
   it('no druid or faith service in a magic-free world asserts working magic, and mundane healing stays', () => {
     const asserting = [];
@@ -419,7 +419,7 @@ describe("G7 — Warden's Lodge defends in every world, and divine defence needs
     }
     expect({ noMagic: divine.noMagic, deadDial: divine.deadDial }).toEqual({ noMagic: 0, deadDial: 0 });
     expect(divine.magic, 'the magic world is the control: divine defence still opens there').toBeGreaterThan(9);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the ratchet's instruction; 2026-11-18): 10.3 s here under load
 });
 
 describe("G8 — Warden's Lodge is no druid in a magic world either (J33)", () => {

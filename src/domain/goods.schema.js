@@ -93,6 +93,7 @@
  *
  * R | E | identity        | surface | src/domain/display/chainPrintName.js
  * R | E | identity        | surface | src/domain/events/mutateWorld.js
+ * R | E | none            | member  | src/domain/facts/fishBoughtIn.js
  * R | E | chains          | direct  | src/domain/region/tradeLinks.js
  * R | E | identity        | surface | src/domain/resourceTerrainCompatibility.js
  * R | l | chains          | surface | src/components/new/SupplyChainsPanel.jsx

@@ -47,7 +47,7 @@ const proper = (v) => !!v && !/[—–]/.test(v) && !/[.!?]\s|[.!?]$/.test(v) &&
  * by the guard, need by need.
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
-const FAMILY_WORDS = Object.freeze({
+export const FAMILY_WORDS = Object.freeze({
   iron: ['iron', 'steel'], copper: ['copper'], precious: ['gold', 'silver', 'precious'], tin: ['tin'],
   timber: ['timber', 'lumber', 'plank'], stone: ['stone', 'masonry'], clay: ['clay'], salt: ['salt'],
   grain: ['grain', 'flour', 'wheat', 'barley'], textile: ['textile', 'cloth', 'linen', 'silk'], luxury: ['luxury', 'exotic'],
@@ -56,16 +56,16 @@ const FAMILY_WORDS = Object.freeze({
   provision: ['provision', 'foodstuff', 'preserved'], glass: ['glass'],
 });
 const WIDE_WORDS = Object.freeze({ metal: ['iron', 'copper', 'precious', 'tin'] });
-const WORKED_GOOD = /\b(?:tools?|arms|armou?r|weapons?|fittings?|components?|torcs?|jewel(?:le)?ry|candles?|supplies|equipment|vessels?|rigging|cordage)\b/i;
+export const WORKED_GOOD = /\b(?:tools?|arms|armou?r|weapons?|fittings?|components?|torcs?|jewel(?:le)?ry|candles?|supplies|equipment|vessels?|rigging|cordage)\b/i;
 
 /** @param {string} label @returns {string[]} */
-const wordsOf = (label) => label.toLowerCase().replace(/\([^)]*\)/g, ' ').split(/[^a-z]+/).filter(Boolean)
+export const wordsOf = (label) => label.toLowerCase().replace(/\([^)]*\)/g, ' ').split(/[^a-z]+/).filter(Boolean)
   .map((w) => (w.length > 3 && /[^su]s$/.test(w) ? w.slice(0, -1) : w));
 /** @param {string[]} words @returns {Set<string>} */
-const familiesOf = (words) => new Set(Object.entries(FAMILY_WORDS).filter(([, ws]) => ws.some((w) => words.includes(w))).map(([f]) => f));
+export const familiesOf = (words) => new Set(Object.entries(FAMILY_WORDS).filter(([, ws]) => ws.some((w) => words.includes(w))).map(([f]) => f));
 
 /** An import meets a need under another name (`needMetBy`'s rule). @param {string} need @param {string} imp */
-function meets(need, imp) {
+export function meets(need, imp) {
   if (WORKED_GOOD.test(imp)) return false;
   const needWords = wordsOf(need);
   const asked = familiesOf(needWords);

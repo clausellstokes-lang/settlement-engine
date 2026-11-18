@@ -112,7 +112,7 @@ describe('the law, over births of every crisis the lines print under', () => {
     expect(arcane?.desc, 'the guard town prints its Arcane Industry line').toMatch(/^Enchanting contracts/);
     expect(arcane?.desc).not.toMatch(/mages' guild/); // anchored: the line is matched on the line above
     expect(siegeRows, 'sieges were read').toBeGreaterThan(0);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the ratchet's instruction; 2026-11-18): 16.9 s here under load
 });
 
 describe('the declarations', () => {
@@ -167,5 +167,5 @@ describe('the grain line: none left to sell, only where none is sold and the har
       if (failed || soldOut) { silenced++; expect(row.desc, `${seed}: failed=${failed} soldOut=${soldOut}`).not.toBe(GRAIN_OWN_FIELDS_LINE); }
     }));
     expect(silenced, 'a failed grain harvest or a flour export was read beside a grain row').toBeGreaterThan(0);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the ratchet's instruction; 2026-11-18): 17.2 s here under load; 20.5 s on CI's ratchet runner (run 44282875950)
 });

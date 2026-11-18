@@ -96,6 +96,10 @@ const over = (/** @type {Record<string, unknown>} */ o, base = anchorFacts) => {
   return f;
 };
 const band = (/** @type {string} */ shown, raw = shown) => ({ famine: { band: raw, shownBand: shown } });
+// FAULTS-NEED item 4 (2026-11-18, 12d's need-list half, the chair's amendment): POOR v1 also declares `no need not brought in:
+// any`; the anchor (a town on no road) holds a need, so v1's food-band readings hold the need atom met, as one premise each way
+const NO_NEED = Object.freeze({ luxury: false, spice: false, silk: false, precious: false, salt: false, fuel: false, livestock: false, any: false });
+const bandMet = (/** @type {string} */ shown, raw = shown) => ({ ...band(shown, raw), needNotBroughtIn: NO_NEED });
 const siege = (/** @type {any} */ b) => ({ active: true, has: (/** @type {string} */ k) => k === 'under_siege' || k === 'hunger' || k === 'threat' || b.crisis.has(k) });
 
 /** @returns {{ line: any, twin: any, admits: (v: any, f: any) => boolean }} */
@@ -112,7 +116,7 @@ function deskLine(/** @type {string} */ desk, /** @type {string} */ block, /** @
 
 /** [line, desk, block, pool, the cured vid, its twin's vid, readings where the premise holds, readings where it fails] */
 const DESK_LINES = /** @type {Array<[string, string, string, string, number, number, Record<string, unknown>, Record<string, unknown>]>} */ ([
-  ['12d · every essential is accounted for', 'economy', 'DS-ECO-8', 'POOR', 1, 5, band('secure'), band('pressured')],
+  ['12d · every essential is accounted for', 'economy', 'DS-ECO-8', 'POOR', 1, 5, bandMet('secure'), bandMet('pressured')],
   // 2026-11-18 (BAR8-DESKS-2, ruling BR28 (5)): the twin v5's band is narrowed to Pressured alone, so the two rows that held v5
   // as the twin under `importDependent` and `deficit` move to the arm below (v1 and v5 are both refused there).
   ['11c · must come from elsewhere', 'economy', 'DS-ECO-12', 'CRITICAL IMPORT: a house needs what the land lacks', 2, 4, { criticalImportBroughtIn: true }, { criticalImportBroughtIn: false }],
@@ -129,7 +133,7 @@ describe('BAR8-DESKS-ECO · the desk lines: absent where the premise is false, t
     const { line, twin, admits } = deskLine('economy', 'DS-ECO-8', 'POOR', 1, 5);
     expect([line?.vid, twin?.vid, twin?.marks]).toEqual([1, 5, ['crisis: any', 'food: = pressured']]);
     const BANDS = ['famine', 'deficit', 'importDependent', 'pressured', 'secure', 'surplus'];
-    expect(BANDS.map((b) => [b, admits(line, over(band(b))), admits(twin, over(band(b)))])).toEqual([
+    expect(BANDS.map((b) => [b, admits(line, over(bandMet(b))), admits(twin, over(bandMet(b)))])).toEqual([
       ['famine', false, false], ['deficit', false, false], ['importDependent', false, false],
       ['pressured', false, true], ['secure', true, false], ['surplus', true, false],
     ]);

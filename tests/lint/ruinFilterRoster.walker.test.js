@@ -537,7 +537,12 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // one-source foodways frame against the subsistence holdings), COMPLIANT (liveInstitutions), measured by this file's own scan.
     // BAR5-FOOD (2026-11-16, L3.foodLineStopped): 112 -> 113, src/domain/facts/catchStopped.js :: catchStoppedBySiege's roster read (the
     // fish trade's houses the siege stops), COMPLIANT (liveInstitutions), measured by this file's own scan.
-    expect(readers.length).toBe(113);
+    // CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18): 113 -> 115, read from this arm's own failure message ("expected 115
+    // to be 113") at the frozen tree 70e557d5b: src/domain/display/impairedListShown.js :: impairedListMarked's roster-name read
+    // (BAR7-CARDS, JOIN-17 points 20 and 25; EXEMPT above, ruled by the chair after the landing at a44495b59) and
+    // src/domain/facts/sovereign.js :: liveNamesOf's roster read (BAR6-HOUSES, JOIN-17 point 2), COMPLIANT (a local
+    // `_worldPulseInactive` standing guard). The arm "every reader is COMPLIANT or EXEMPT" is green on both.
+    expect(readers.length).toBe(115);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

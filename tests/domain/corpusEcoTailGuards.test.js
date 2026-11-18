@@ -72,7 +72,13 @@ const GONE = [
   // the 720 or the 150 reads this pool for a good a live ground of its own land gives in part. So the claim is held on
   // r2r-village-4 (a Dairy farmer beside live grazing land, and this pool's v2 drawn for its Sawmill's timber) with livestock
   // "Required by Dairy farmer" put first among its critical imports (`CONSTRUCTED` below): the same case as the row was read in.
-  { seed: 'r2r-village-4', pool: 'DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks', gone: /^Whatever \{good\}/, prints: 2, why: 'a dairy farmer and grazing land (a constructed record): "Whatever livestock ... must come from elsewhere" (28786; v2 now "A good part of"; re-keyed from r2r-hamlet-12)' },
+  // RE-KEYED BY IDENTITY 2026-11-18 (BAR8-DESKS-2, the chair's ruling BR35 (b), R8): BAR8-DESKS-ECO's atom `critical import
+  // brought in` reads whether the good arrives, and K5's record brought no livestock in, so its twin v4 drew there. K5's claim
+  // stays on a record that BRINGS THE LIVESTOCK IN (v2 draws, the old words gone); the record with nothing of it brought in is
+  // the second row: v4 draws, and the words BR35 (a) corrected ("needs {good} that the country around it does not give",
+  // false beside live grazing land) are gone ("needs more {good} than the country around it gives").
+  { seed: 'r2r-village-4', pool: 'DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks', gone: /^Whatever \{good\}/, prints: 2, why: 'a dairy farmer and grazing land (a constructed record, the livestock brought in): "Whatever livestock ... must come from elsewhere" (28786; v2 now "A good part of"; re-keyed from r2r-hamlet-12)' },
+  { seed: 'r2r-village-4', as: 'nothing brought in', pool: 'DS-ECO-12::CRITICAL IMPORT: a house needs what the land lacks', gone: /that the country around it does not give,/, prints: 4, why: 'a dairy farmer and grazing land, none of the livestock brought in (a constructed record): "needs {good} that the country around it does not give" beside live grazing land (BR35: v4 now "needs more {good} than the country around it gives")' },
   // ── BATCH 2 · DS-GEN-13/17/18, DS-ECO-6/8/9/10: DECLARED (the replay's inheritor named) or REWORDED (the same vid) ──
   { seed: 'r2s-famine-metropolis-2', pool: 'DS-GEN-13::WAREHOUSES', gone: /fill after the harvest/, prints: 2, why: 'a famine: "warehouses fill after the harvest" of a harvest that failed (12197; v3 + `no crisis: famine`)' },
   { seed: 'r2s-occupied-metropolis-0', pool: 'DS-GEN-17::ADMINISTERED', gone: /keeps its own court and its own gaol/, prints: 3, why: 'an occupation: "keeps its own court and its own gaol" where the occupier holds them (21023; v1 + `no crisis: occupied`)' },
@@ -247,12 +253,21 @@ function configOf(seed) {
  * its critical imports gain livestock as that house's need, first, in the record's own reason form.
  * @type {Record<string, (town: any) => any>}
  */
+const livestockNeeded = (/** @type {any} */ town) => {
+  const imports = town.resourceAnalysis?.imports || {};
+  return { ...town, resourceAnalysis: { ...town.resourceAnalysis, imports: { ...imports, critical: ['livestock', ...(imports.critical || [])], reasons: { ...(imports.reasons || {}), livestock: 'Required by Dairy farmer but not available in Plains terrain' } } } };
+};
+// BAR8-DESKS-2 (2026-11-18, BR35 (b)): a row's record is keyed by its seed and, where one town carries two constructed records,
+// its `as` (`readKey`): the K5 record now BRINGS THE LIVESTOCK IN (its primary imports carry it); its sibling brings none.
 const CONSTRUCTED = {
   'r2r-village-4': (town) => {
-    const imports = town.resourceAnalysis?.imports || {};
-    return { ...town, resourceAnalysis: { ...town.resourceAnalysis, imports: { ...imports, critical: ['livestock', ...(imports.critical || [])], reasons: { ...(imports.reasons || {}), livestock: 'Required by Dairy farmer but not available in Plains terrain' } } } };
+    const t = livestockNeeded(town);
+    return { ...t, economicState: { ...t.economicState, primaryImports: [...(t.economicState?.primaryImports || []), 'Livestock'] } };
   },
+  'r2r-village-4 · nothing brought in': livestockNeeded,
 };
+/** @param {{ seed: string, as?: string }} row @returns {string} the key of the row's read */
+const readKey = (row) => (row.as ? `${row.seed} · ${row.as}` : row.seed);
 
 /** @type {Map<string, Record<string, {e: Set<number>, d: Map<number, string>}>>} */
 const READ = new Map();
@@ -268,9 +283,10 @@ beforeAll(async () => {
   const { generalDeskLines } = await import('../../src/components/new/generalDeskRead.js');
   const { economicsDeskArgs } = await import('../../src/components/new/deskHostArgs.js');
   await boundary.loadGenerationLawPayloads();
-  for (const seed of new Set([...GONE, ...KEEP].map((g) => g.seed))) {
+  for (const key of new Set([...GONE, ...KEEP].map((g) => readKey(/** @type {any} */ (g))))) {
+    const seed = key.split(' · ')[0];
     let town = generateSettlementPipeline(boundary.birthConfig({ ...DEFAULT_CONFIG, ...configOf(seed) }), null, { seed, customContent: {} });
-    if (Object.prototype.hasOwnProperty.call(CONSTRUCTED, seed)) town = CONSTRUCTED[seed](town);
+    if (Object.prototype.hasOwnProperty.call(CONSTRUCTED, key)) town = CONSTRUCTED[key](town);
     town = withPublicProse(town, composePublicProse(town));
     seen.cur = {};
     const ctx = { veiledRecord: publicVeiledRecordOf(town) };
@@ -280,15 +296,15 @@ beforeAll(async () => {
     // the owner's own reads (playerView false): the `dm-only` lines the owner's page prints
     try { economyDeskRead(town, { publicDossier: false, playerView: false, tier: town?.tier, ...economicsDeskArgs(town) }); } catch { /* as above */ }
     try { generalDeskLines(town, { publicDossier: false, playerView: false, tier: town?.tier }); } catch { /* as above */ }
-    READ.set(seed, seen.cur);
+    READ.set(key, seen.cur);
     seen.cur = null;
   }
 }, 600000);
 
 describe('a cured sentence is not drawn in the census town that made it false; what is drawn instead is named', () => {
   for (const g of GONE) {
-    it(`${g.pool} at ${g.seed}: ${g.why}`, () => {
-      const pools = READ.get(g.seed) || {};
+    it(`${g.pool} at ${readKey(/** @type {any} */ (g))}: ${g.why}`, () => {
+      const pools = READ.get(readKey(/** @type {any} */ (g))) || {};
       expect(Object.keys(pools), `${g.seed} no longer reads ${g.pool}: re-key the row to a town of the case`).toContain(g.pool);
       const drawn = [...pools[g.pool].d.entries()];
       expect(drawn.map(([vid]) => vid), `what ${g.pool} draws at ${g.seed}`).toEqual(g.prints === null ? [] : [g.prints].flat());

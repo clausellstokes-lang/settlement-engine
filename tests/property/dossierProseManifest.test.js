@@ -210,8 +210,13 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // 73,397 -> 72,744 (408/394/388 -> 402/390/394) at THE CLOSE OF THE ROUND BAR2, THE COMPOSED-PROSE MANIFEST AT THE JOINED LINE'S 1011a8a91 (ODQ §934.105 and the owner's word of 2026-11-15 20:27:16 UTC; record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json, BAR2-CLOSE-DOORS-2),
     // the measured value of this arm's own failure: the tail round's declared moves since closing act 2, left pending at the last close (the same 72,744 and 402/390/394 measured at 74ded1800, so this round's cures move no count); not bisected by point.
     // Towns unmoved at 516/3/3/3.
+    // 72,744 -> 72,614 (402/390/394 unmoved) at THE CLOSE OF THE ROUNDS BAR5 TO BAR8, THE COMPOSED-PROSE MANIFEST AT THE DOORS' BRANCH OVER PART 1'S FINAL TIP
+    // 0af60594a (ODQ §934.105 and the owner's word of 2026-11-18 03:03:46 UTC; record docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json,
+    // CLOSE-DOORS-2): the measured value of this arm's own failure at the frozen line 70e557d5b (the DRIFT cells byte-equal over Part 1's tip); 72,744 still at
+    // 6c117344f, so the round BAR5 moves no count and the -130 is the later rounds' declared cures (BAR6 to BAR8); not bisected by point.
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 72_744, towns: 516 },
+      'golden-master-v3': { cells: 72_614, towns: 516 },
       'gm-seed-a': { cells: 402, towns: 3 },
       'gm-seed-b': { cells: 390, towns: 3 },
       'gm-seed-c': { cells: 394, towns: 3 },

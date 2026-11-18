@@ -227,7 +227,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
  * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [seatOutranked] @property {boolean} [forceWalksByDay] @property {boolean} [sovereign] @property {boolean} [seatMembers] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
  * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork] @property {(key: string) => boolean|undefined} [goodExported] @property {boolean} [legitimacyCrisis] @property {boolean} [legalHouse] @property {boolean} [appointedPost]
- * @property {boolean} [dangerComing] @property {boolean} [uprising] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
+ * @property {boolean} [dangerComing] @property {boolean} [uprising] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [courtOrGaol] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [lawBand] BAR5-SAFETY: `lawBand.js :: lawBandOf`
@@ -236,6 +236,8 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [crimeWave] BAR6-CRIME: `lawBand.js :: crimeWaveStands`
  * @property {boolean} [rivalRings] BAR7-DESKS: `rivalRings.js :: rivalRingsStand`
  * @property {boolean} [criticalImportBroughtIn] BAR8-DESKS-ECO: `criticalImportBroughtIn.js :: criticalImportBroughtInOf`
+ * @property {Readonly<Record<string, boolean>>} [needNotBroughtIn] FAULTS-NEED: `needNotBroughtIn.js :: needNotBroughtInOf`
+ * @property {boolean} [fishBoughtIn] FAULTS-ROWS (FR12 (3)): `fishBoughtIn.js :: fishBoughtIn`
  * @property {{ kept?: boolean, paid?: boolean, volunteers?: boolean }} [orderForce] BAR6-CRIME: `orderForce.js :: orderForceOf`
  * @property {string} [prosperity]
  */
@@ -289,6 +291,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // courtHoldersOf`: a courthouse, or a house that drew a court service). The `court` atom's name test takes every town hall
   // for a court and disagrees with that row by design; a line that says the town has a hall of justice presumes this (C161931).
   'court sits': dim({ shape: 'presence', home: 'courtSits', reader: (f) => bool(f.courtSits) }),
+  // FAULTS-DESKS (13d; the chair's ruling FR6; vetoable by the owner, on the veto list as new vocabulary): ONE atom, not a
+  // disjunctive form: a court sits on the live roster (`court sits`) or somewhere holds the guilty (`prison`), so the Defense
+  // tab's Legal Infrastructure row prints anything but "None". A line that presumes a record of crimes kept presumes one or
+  // the other ("The town's record of crimes at {settlement} …" beside "keeps no court and no gaol", C16222).
+  'court or gaol': dim({ shape: 'presence', home: 'courtOrGaol', reader: (f) => bool(f.courtOrGaol) }),
   prison: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.prison) }),
   // BAR5-THINGS (LAW 4 "the notary"; BRIEF-BAR5; amendment 5b; vetoable by the owner, on the veto list as new vocabulary):
   // beside the court: a house that writes, witnesses or tries the law stands, by catalogue identity (`legalHouse.js`). A
@@ -389,6 +396,12 @@ export const FACT_DIMENSIONS = Object.freeze({
   // false where none stands. "Nothing new goes up" presumes its absence.
   'trade at work': dim({ shape: 'presence', home: 'tradeAtWork', keys: ['fish', 'kilns', 'clay kilns', 'charcoal kilns', 'stone', 'arcane', 'dairy', 'cloth', 'ironwork', 'herbs', 'spice', 'cut stone', 'woodwork', 'leather', 'dyed cloth', 'ironwork in full', 'fish taken here', 'building'],
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (typeof f.tradeAtWork === 'function' && key ? f.tradeAtWork(key) : undefined) }),
+  // FAULTS-ROWS (the sixth chair's rulings FR4 and FR12 (3), 2026-11-18; vetoable by the owner, on the veto list as new
+  // vocabulary), beneath `trade at work`'s fish key: `fish bought in` = the town's fish ground is used up AND the imports hold
+  // its shortage word ("Salted fish (local … exhausted)"): the condition of BAR8-FISH-ROWS's swap, read by the swap itself
+  // (`fishBoughtIn.js`, the one reader). "Where the day's catch is sold" presumes its absence; an idle town (nothing brought
+  // in) and a live fishery answer false.
+  'fish bought in': dim({ shape: 'presence', home: 'fishBoughtIn', reader: (/** @type {FactsLike} */ f) => bool(f.fishBoughtIn) }),
   // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary), beside the crisis
   // states the record holds as presences (famine, starving): a danger from outside is on its way, a live external-threat
   // tension of the history (`dangerComing.js`), which the crisis record's threat family does not see. "Nothing threatens it"
@@ -488,6 +501,12 @@ export const FACT_DIMENSIONS = Object.freeze({
   // (`criticalImportBroughtIn.js`, held equal to the page's need list). "A good part of the {good} … must come from elsewhere"
   // presumes it ("copper ore" beside "Needed, and not brought in: copper ore.", bar0-city-wartime-rand-47).
   'critical import brought in': dim({ shape: 'presence', home: 'criticalImportBroughtIn', reader: (/** @type {FactsLike} */ f) => bool(f.criticalImportBroughtIn) }),
+  // FAULTS-NEED (the sixth chair's BRIEF-FAULTS ruling FR2, 2026-11-18; vetoable by the owner, on the veto list as new
+  // vocabulary), beneath `critical import brought in`: `need not brought in: <family>` = the page's own need list ("Needed,
+  // and not brought in: …", `tradeListDisplay.js :: importsAsPrinted().needed`) names a need of that family; `any`: the list
+  // is not empty (`needNotBroughtIn.js`, held equal to the page's list). A line that presumes the good is had refuses it.
+  'need not brought in': dim({ shape: 'presence', home: 'needNotBroughtIn', keys: ['luxury', 'spice', 'silk', 'precious', 'salt', 'fuel', 'livestock', 'any'], // `needNotBroughtIn.js :: NEED_KEYS`, held equal by its guard
+    reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.needNotBroughtIn && typeof f.needNotBroughtIn === 'object' && key ? f.needNotBroughtIn[key] : undefined) }),
   exports: dim({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.length > 0 : undefined) }),
   // BAR6-SCENES (LAW 6 rule 6b "out"; BRIEF-BAR6 B6; vetoable by the owner, on the veto list as new vocabulary), beneath
   // `exports`: `exported: <good>`, the export list names the good a scene sends out (`goodExported.js`): "Bolts of cloth and

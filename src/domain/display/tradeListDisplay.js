@@ -24,7 +24,7 @@ import { LUXURY_CLASS, NOT_A_GOOD } from '../../data/tradeListDeclarations.js';
 import { REVENUE_HOMES } from '../../data/revenueHomes.js';
 
 /** The stored trade marks → their kind. */
-const MARKS = Object.freeze([
+export const MARKS = Object.freeze([
   Object.freeze({ re: /\s*\(transit\)\s*$/i, kind: 'transit' }),
   Object.freeze({ re: /\s*\(naval route only\)\s*$/i, kind: 'naval' }),
   Object.freeze({ re: /\s*\(taxed by occupation\)\s*$/i, kind: 'occupation' }),
@@ -209,7 +209,7 @@ function importedByGapRow(settlement) {
  * spices' carriers (`CARRIED_GOOD_ROWS`) stay the chain card's. The failed venture's own material is never dealt in here
  * (a whole trade is not abandoned: BR6; r2r-hamlet-27's shepherd beside its failed venture of livestock is that fault, named).
  * @type {ReadonlyArray<readonly [string, RegExp]>} */
-const NEED_DEALT_ROWS = Object.freeze([
+export const NEED_DEALT_ROWS = Object.freeze([
   ['livestock', /^livestock (?:auctions?|management)$/i],
 ]);
 
@@ -222,9 +222,14 @@ function dealtInHere(settlement) {
     .map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '')).filter(Boolean));
   const venture = ventureOnPage(/** @type {Parameters<typeof ventureOnPage>[0]} */ (settlement));
   const ventureFamily = String(venture?.family ?? '').toLowerCase();
+  const short = markedShortNouns(settlement);
   const out = [];
   for (const [good, re] of NEED_DEALT_ROWS) {
     if (ventureFamily === good) continue;
+    // FAULTS-NEED item 0 (the second reader of the income piece, MED 1): a good a live house of the town is marked short of
+    // ("Short of livestock." on the Dairy farmer, bar0-village-calm-rand-29, r2r-village-47) is a want the page does not meet:
+    // a shepherd's livestock management beside it answers no need, so the need stays
+    if (short.some((noun) => needMetBy(good, noun))) continue;
     if (rows.some((r) => r && typeof r === 'object' && re.test(String(/** @type {{ name?: unknown }} */ (r).name ?? '').trim())
       && live.has(String(/** @type {{ institution?: unknown }} */ (r).institution ?? '')))) out.push(good);
   }
@@ -891,6 +896,19 @@ function everyMakerShortHere(settlement, good) {
   if (short.size === 0) return false;
   const roster = live.map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '').toLowerCase()).filter(Boolean);
   return everyMakerShort(good, roster, short, /** @type {Parameters<typeof localProductionAsPrinted>[0]} */ (settlement));
+}
+
+/**
+ * THE NOUNS THE PAGE MARKS A LIVE HOUSE SHORT OF (FAULTS-NEED item 0): the page's own mark, read as `everyMakerShortHere`
+ * reads it (a house of the short set whose dependence holds INPUT: `crisisStoppedRow.js :: rowShortOf`'s gate), the noun of
+ * each ("livestock" for "Short of livestock."). Held to `rowShortOf` on every town of the guard's populations
+ * (`tests/generators/faultsNeed.test.js`). Display only.
+ * @param {unknown} settlement @returns {string[]}
+ */
+function markedShortNouns(settlement) {
+  const live = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement));
+  const marked = new Set(live.filter((i) => houseDependenceOf(/** @type {{ name?: unknown }} */ (i)).includes(INPUT)).map((i) => String(/** @type {{ name?: unknown }} */ (i)?.name ?? '')));
+  return [...housesShortOf(settlement)].filter(([house]) => marked.has(house)).map(([, noun]) => noun);
 }
 
 /** The houses that make a good of the cloth's wool (the weavers, the textile works, the fuller). */

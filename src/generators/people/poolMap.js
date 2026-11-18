@@ -35,7 +35,7 @@
  */
 
 import { NPC_FACTION_GOALS, NPC_FACTION_LOYALTY } from '../../data/npcData.js';
-import { TITLE_LINE_DECLARATIONS, TITLE_PRESENTATIONS, TITLE_SECRETS } from '../../data/people/titleSecretsPresentations.js';
+import { TITLE_LINE_DECLARATIONS, TITLE_LINE_TWINS, TITLE_PRESENTATIONS, TITLE_SECRETS } from '../../data/people/titleSecretsPresentations.js';
 import { declarationAdmits, declarationOf } from '../../domain/facts/factVocabulary.js';
 
 /** The seven categories the pools are keyed by. */
@@ -406,5 +406,10 @@ export function settleTitleLines(card, title, town) {
     const r = nextAdmitted(lines.presentations, pAt, (x) => x.impression, TITLE_LINE_DECLARATIONS.presentation, () => true);
     if (r) card.presentation = { ...r };
   }
+  // FAULTS-PEOPLE (FR5): a row with a twin keeps its slot and prints the twin's words where its twin's declaration refuses
+  // the row's own (titleSecretsPresentations.js :: TITLE_LINE_TWINS); only the title's own row, as drawn or settled above
+  const tAt = lines.presentations.findIndex((r) => r.impression === card.presentation?.impression);
+  const twin = tAt >= 0 ? TITLE_LINE_TWINS.presentation[lines.presentations[tAt].impression] : undefined;
+  if (twin && card.presentation?.behaviour === lines.presentations[tAt].behaviour && !admits(twin)) card.presentation = { ...card.presentation, behaviour: twin.behaviour };
   return card;
 }

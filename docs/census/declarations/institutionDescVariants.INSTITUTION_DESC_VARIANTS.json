@@ -4114,7 +4114,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "FAULTS-ROWS (2026-11-18, the sixth chair's rulings FR3 and FR12 (2), in CL18's form): no longer a colour line: it presumes the goods it names, and carries the LATE declaration `excludes: ['need not brought in: spice', 'need not brought in: silk']` with its twin (DESC_LATE_SIBLINGS), read after the draw; recorded here and not in `excludes`, as every late-declared key of this ledger is (institutionProseDeclared's column law counts only draw-time declarations)"
     },
     {
       "id": "city|Crafts|Luxury goods quarter#1",
@@ -4122,7 +4123,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "FAULTS-ROWS (2026-11-18, the sixth chair's rulings FR3 and FR12 (2), in CL18's form): no longer a colour line: it presumes the goods it names, and carries the LATE declaration `excludes: ['need not brought in: spice', 'need not brought in: silk']` with its twin (DESC_LATE_SIBLINGS), read after the draw; recorded here and not in `excludes`, as every late-declared key of this ledger is (institutionProseDeclared's column law counts only draw-time declarations)"
     },
     {
       "id": "city|Crafts|Carpenters (5-15)#0",

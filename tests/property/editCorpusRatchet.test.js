@@ -588,7 +588,12 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 22cc9ef7d [682, 269, 2181]: the two re-deals interact (PLAUSIBLE per component, CONFIRMED per point). The arm's later expects run green.
     // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): [682, 269, 2181] -> [695, 275, 2173],
     // measured by this arm's own census at the golden's tree 8c11f73ea: the round's re-drawn casts and ties the E-edits reach.
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([695, 275, 2173]);
+    // 2026-11-18, the close of the rounds BAR5 to BAR8 (CLOSE-DOORS-2, BY MEASUREMENT; record docs/shift-records/2026-11-18-the-close-of-the-rounds-
+    // bar5-to-bar8.json, the owner's word 2026-11-18 03:03:46 UTC): [695, 275, 2173] -> [695, 275, 2176], this arm's received value at the frozen line
+    // 70e557d5b and at the doors' branch over Part 1's final tip 0af60594a; E1 and E5 unmoved. ACCUMULATED: 2179 at 6c117344f (the round BAR5's nine
+    // branches, JOIN-16 points 1 to 9, +6) and -3 over JOIN-17's points and the sixth chair's (the rounds' re-dealt readings E6 reaches); not bisected
+    // by point. The ride-along's chain population below stands at [129, 143] (measured with this figure in place).
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([695, 275, 2176]);
     // an npc ROLE reached ZERO readings over the whole corpus until CRISIS, recorded so the figure is not silence.
     // 2026-11-05 (LANDING-6, the same bisection): 0 → 48 CRISIS (d3e072368: the crisis record carries its derived cast,
     // and the cast is chosen by role) → 63 SELF-VOUCH (0be13b5cb) → 32 car 3 (90dc22f18) → 24 PINS (37b1e746d) → 28 F6
