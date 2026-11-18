@@ -283,6 +283,42 @@ should be paused or archived by the owner's hand.
   equal, the doors' last lines equal to its base (fresh 0, the same stale count); the five rows before and after go in
   its hand-back and on the owner's list. IT IS NOT A PRECEDENT FOR BANKING A NEW LINE: only a banked line that moved with
   its text unchanged.
+- **BR27 (02:35 UTC, 2026-11-18; K-PEOPLE after its second reader and the whole check).** (1) THE TWO REDS OF ITS POINT ARE STALE ANCHORS, THE PAGE IS
+  RIGHT (the reader, by mutation: both from the 14f holder deal, inside the seat's declared moves):
+  `tonightSeatSecret`'s soak1k-28 is no longer a seam (the crisis secret is now kept by the company captain, whom the
+  holder test admits; the seat-holder voices his own want; no kept secret prints after "Wants to" in the thirty or the
+  150); `coachingInnUnderCrisis`'s r2s-famine-city-1 keeper presents by the generic line of a compromised card (true
+  under the famine). EACH IS RE-KEYED BY IDENTITY (rule R8) BEFORE THE POINT LANDS: the seat PEOPLE-2, first. (2) THE
+  RESIDUE OF BR13 (two houses each handling some of the other's people while their own handlers have room: 6 towns of
+  the 180, 12 pairs in 11 towns before): IT STAYS. BR13 cured THE SWAP (a network handled ONLY by the other house's
+  people: strict 14b is 0); what is left is the one-way deal in two directions, each line true of the record; it joins
+  the owner's question on BR13, already on the veto list. No further build. (3) THE DECLARED MOVES ARE MADE COMPLETE
+  IN THE RECORD: `npcs[].personality` moves with the secret (4 cards of the 180) and one goal through it. (4) THE SWAP
+  CURE ALSO RUNS IN `assignHandlers`' TWO OTHER CALLERS (`settlementMigrations.js:317`, `mutateEntities.js:835`): a
+  guard arm each (PEOPLE-2); IF A SAVED TOWN'S STORED HANDLERS CAN BE REWRITTEN BY IT, THE SEAT STOPS AND THE OWNER IS
+  ASKED (a saved record's change is the owner's).
+- **BR28 (02:35 UTC, 2026-11-18; DESKS-ECO after its second reader and the whole check).** The reader measured that THE POOL DS-GEN-3 Import-Dependent
+  PRINTS NOWHERE (the general desk's health lines are unmounted since the owner's order of 2026-09-17: 0 of 900 towns
+  print a line of it at either tree), so the seat's item 6 moved no printed line and no slot went empty. (1) THE NEW
+  PRESENCE ATOM `critical import brought in` STANDS; its two test-helper rows are added as every earlier presence atom
+  got them (`tests/helpers/calmFactsDouble.js`; `PRESENCE_SETTER` of `tests/domain/crisisBlindDossierProse.test.js`):
+  law 5 and F12 green by the reader's run; the same is checked for DESKS-DEF's `uprising`. (2) v4 OF THAT POOL GOES
+  BACK EXACTLY AS IT STOOD ON THE LINE (its number 4, its declaration `food: ≥ secure`: never admitted): a row is not
+  removed from the middle of a pool (the kernel's law 6: a pool's ids are its annex rows) and the ledger
+  `docs/census/declarations/DS-GEN-3.json` names vid 4 (a stored ledger: the close's, NOT re-taken in a round); the
+  reader's preferred form (renumber 5, 6, 7 to 4, 5, 6) needs that ledger and is left to the close with the row's fate.
+  The seat's other declarations on that pool and its v7 stand. (3) THE THREE READS THAT TAKE THE CALM DOUBLE'S BAND
+  AGAINST THE POOL'S KEY (F10; the projection contract's mute list and its thin-state bill): the constructed read takes
+  the key's own band (a re-key by identity), or, where the test already lists DS-GEN-3's glances, the two states are
+  entered as glance mutes with a dated note; a stored ceiling is raised only if the band alone does not bring the bill
+  back, and then by name with its cause. (4) H2: the two test labels that quote a state-prose line are re-worded.
+  (5) M3, THE TWO TWINS NOT GIVEN BY NAME: GIVEN NOW, vetoable: DS-ECO-8 POOR v5 with its band narrowed to the food
+  band Pressured alone (as declared it is admitted under a deficit and a famine, beside "cannot grow or buy enough to
+  eat"); DS-GEN-3 Import-Dependent v7 as written. (6) M1: a guard arm for the leaf's family match (five towns rely on
+  it). (7) M2: 15e ROSE BY ONE in the 150 (bar0-city-wartime-rand-38: "nothing new goes up" beside the brickmaker's
+  "every new wall going up": the cure of 12d put one false line where another stood): 15e is the desks' own left
+  rule: THE FOLLOW-UP CURES IT BEFORE THE POINT LANDS (a declaration on the line by a building trade at work; the
+  seat proposes the atom's key, the chair rules).
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
