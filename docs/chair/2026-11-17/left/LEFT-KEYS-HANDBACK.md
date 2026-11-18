@@ -171,7 +171,7 @@ owner's list: not built.)
 ## THE NET (each gate alone through `sh scripts/gate-tail.sh`, at base 70e557d5b and at the tip)
 
 - `npm run typecheck:ratchet`: 167 errors, ceiling 167, at base and at tip. `npm run typecheck:domain:strict`: 1113, ceiling
-  1113, at both. `npx eslint` on the 18 changed script and test files: 0 problems.
+  1113, at both. `npx eslint` on the 18 changed script and test files: nothing reported (exit 0).
 - ALL OF `tests/lint`, at base (a detached scratch worktree) and at the final tip: 218 files, 3226 tests, 69 names red at
   BOTH, THE SAME NAMES AND, after the checkout path is folded, THE SAME MESSAGES (0 lines differ; walkers, registers and
   rosters alike: `negativeAssertionAnchor`, `seedLoopTotality`, `proseDrawnAnchors` list no file of this seat). Every one
