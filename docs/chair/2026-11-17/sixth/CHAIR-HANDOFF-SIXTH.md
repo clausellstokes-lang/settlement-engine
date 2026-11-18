@@ -1406,3 +1406,21 @@ should be paused or archived by the owner's hand.
   (02:54; from 4446aecb5; BR28 and BR32). THE CHAIR TOLD THE OWNER ONE THING IT CHANGED ITS MIND ON: it first wrote
   "start nothing new"; the three follow-up builders work on side branches that a deploy would not carry, so they
   were seated and go on; only the line is held.
+- 03:06 UTC, 2026-11-18 · **THE OWNER SAID YES TO THE CLOSE (about 03:04 UTC, the whole of the message): "yes: refresh the
+  stored reference files and open the pull request."** It answers the chair's plain question of 02:53 (the first of
+  its two offered answers, word for word). WHAT IT AUTHORIZES: the refresh of the stored reference files (goldens,
+  registers, censuses, ledgers, ceilings, the committed bundles) by each one's own lawful procedure, and the opening
+  of the pull request from the working line to master (opened as a DRAFT: the owner makes it ready). WHAT IT DOES NOT:
+  the merge to master, the deploy, the seven migrations (204 to 210), any hosted database, any production credential:
+  the owner's hand, as before. **THE LINE IS FROZEN AT 70e557d5bdffdf00ac45fb2ec4566674e6a33674 FOR THE CLOSE: ONLY
+  THE CLOSE'S OWN COMMITS GO ON IT.** The builders in flight (PEOPLE-2, K-WATCH-2, DESKS-2, MARKS-2, J-INCOME-2,
+  PDF-2b) go on, on their own branches; their work lands AFTER the deploy, and a second, smaller close follows it (the
+  owner was told this in the question's own words).
+  THE CLOSE, STARTED: (1) THE INVENTORY: the three CHECKS seats run the whole check at 70e557d5b (label
+  `close-0-70e557d5b`; asked 03:06); the chair runs the 81 test files known red (the names of the whole checks at
+  917c915bc and at point 45) at that commit for each failure's own message (`/home/user/wk/close0.known.log`, in
+  `/home/user/k`); a read-only researcher maps each stored figure's own refresh procedure, CI's jobs, the pull
+  request's form and the deploy's prerequisites. (2) THEN: every red classed (a stored figure; a stale anchor or a
+  detector's debt, the LEFT-KEYS items K1 to K10; a real fault; the machine's own), seats by disjoint files from
+  70e557d5b, the figures that count files or tests re-taken LAST, the whole check green, CI's other jobs (the edge
+  functions' tests, the browser tests), the draft pull request with the veto list and the questions owed.
