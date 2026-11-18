@@ -7,9 +7,9 @@ register was last taken) and f19c3b28b (where the move grammar's figures were la
 run alone, to a file, through `sh scripts/gate-tail.sh`. No page line cured, no test written, skipped or weakened; no
 ceiling raised. I sign nothing.
 
-STATUS: **A1 TO A5 DONE, AND THE CHAIR'S RULINGS CL11, CL14, CL17, CL18, CL19 TAKEN.** 19 of my 20 files green alone at
-my tip (all 20 red at the base); 1 left red by ruling: proseComposed's A0b arm, short of green by exactly the eight
-over-claims no declaration covers (CL14). One new red outside my list, named to the chair: presumptionClasses.walker
+STATUS: **FINAL. A1 TO A5 DONE, AND THE CHAIR'S RULINGS CL11, CL14, CL17, CL18, CL19, CL25 TAKEN.** 20 of my 20 files
+green alone at my tip (all 20 red at the base); proseComposed's last eight over-claims owed under CL25 (the matcher's
+name-slot and bare-verb artifacts). One new red outside my list, named to the chair: presumptionClasses.walker
 (CL18's move).
 
 ## WHERE MY RUN DIFFERS FROM THE BRIEF
@@ -68,7 +68,7 @@ over-claims no declaration covers (CL14). One new red outside my list, named to 
 | tests/lint/wiringCensusDeclared.walker.test.js | 1 → 0 | (a) the stale census |
 | tests/data/dossierStateProseProjection.contract.test.js | 9 → 0 | (a) the register's pins, the counts |
 | tests/domain/composeStateProse.test.js | 4 → 0 | (a) counts; DECLARED_APART's DS-ECO-6 row (b), by identity |
-| tests/lint/proseComposed.walker.test.js | 2 → 1 | (a) the corpus count; A0b: the under-claims owed (CL14); **the over-claims red by exactly eight, class (c) (CL14)** |
+| tests/lint/proseComposed.walker.test.js | 2 → 0 | (a) the corpus count; A0b: the under-claims owed (CL14), the eight matcher artifacts owed (CL25) |
 | tests/lint/proseWaveGate.walker.test.js | 3 → 0 | (a) |
 | tests/lint/proseMoveGrammar.walker.test.js | 3 → 0 | (a) under PM1 |
 | tests/lint/proseEntryContradiction.walker.test.js | 4 → 0 | the breach anchor (b) by text (BR32 (5)); three counts (a) |
@@ -127,7 +127,8 @@ by seat and the full first measure: `under-new-attrib.tsv` in my scratch.
   declaration (v4 `hasCourtSystem` by `no court sits`; v5 `hasCourtSystem` by `no court sits`, `hasPrison` by `no
   prison`) and fit the slack the ceiling held (46 over 43); **8 are class (c), for the chair**: v4 (BAR6-CULTURE
   d9857d7ce) `settlement` (the slot); v5 (LEFT-LINES 094a6b8f6) `settlement` and `hasGranary`, `hasHospital`,
-  `hasMagicInst`, `hasMilitaryInst`, `hasNavy`, `hasWatch` (the word "has"). The arm reads 54 > 46: red by exactly those.
+  `hasMagicInst`, `hasMilitaryInst`, `hasNavy`, `hasWatch` (the word "has"). The arm read 54 > 46: red by exactly those. **CL25** (the next commit): the eight are the matcher's artifacts (the name
+  slot; the verb "has" against six `has*` fields), owed: OVER_CLAIM_OWED 1 → 9, base untouched; proseComposed 87/87.
 
 ## LAWS AND STOPS SENT TO THE CHAIR (each since answered: above)
 
@@ -144,7 +145,8 @@ by seat and the full first measure: `under-new-attrib.tsv` in my scratch.
 
 ## C7 · THE NET (my tip, each gate alone through `sh scripts/gate-tail.sh`)
 
-- `npx vitest run tests/lint`, BY MESSAGE: base 70e557d5b **27 files / 66 tests red**; my tip **20 / 39**. 28 arms turn
+- `npx vitest run tests/lint`, BY MESSAGE: base 70e557d5b **27 files / 66 tests red**; 3a28738a9 **20 / 39** (that count holds proseComposed's A0b arm, since owed under CL25 and green alone at 87/87;
+  the whole suite was not re-run after that one-arm commit). 28 arms turn
   green (all of my list's lint files); **one turns red: presumptionClasses.walker "no NEW undeclared line" (CL18's move,
   named)**. One message moves on an arm red at both:
   observedShapeReaders' "an execution INPUT drifted since the mint" now also names `src/data/proseNorms.generated.js`
@@ -172,9 +174,9 @@ door read `src/`: proseNorms' comment is the only `src/` byte; the engine and AI
 - The prose books (the wiring census, its register of shifts, the byte sizes, the declarations ledgers) were behind the
   writing two rounds had done. I brought each up to date through its own procedure, once, and named for every changed
   figure which branch's writing moved it. Nothing a town prints was changed.
-- One check of my list stays red on purpose: it counts sentences that claim more than the record licenses. The chair
-  ruled that a new claim is only "owed" where the line itself declares what it claims; eight claims in two new lines of
-  one pool do not, so the check stays eight over its limit until those lines or the census are cured.
+- All twenty checks of my list now pass. The last eight findings of the check that counts over-claiming sentences
+  turned out to be the checker misreading (the town's name, and the word "has"); the chair ruled them owed until the
+  checker is taught better.
 - On the chair's rulings I also fixed two blind spots of the ledger checks (a sentence written as an either/or, and the
   order of the word "calm"), and took four house descriptions out of the "colour" list because they now carry a
   condition. That last move makes another check see three new sentence findings; it is with the chair.
@@ -184,8 +186,10 @@ door read `src/`: proseNorms' comment is the only `src/` byte; the engine and AI
 
 ## WHAT IS LEFT, IN ORDER
 
-1. For the chair: proseComposed's eight class (c) over-claims (CL14); presumptionClasses.walker's three new hits (CL18);
-   the ledger validator that cannot open (CL17 (3)), a debt for the owner.
+1. CLOSE-DOORS-1B, on the final tree: presumptionClasses.walker's three new hits (CL18's lines; its door's
+   `--bank debt-at-base` mode, the chair's word). The ledger validator that cannot open: named to the owner as a debt.
+   A builder's item after the deploy: the A0b matcher learning the name slot and the bare verb (CL25); the generator's
+   vids guard armed (CL19).
 2. CLOSE-DOORS-1B, after the merge: the observed-shape readers' input drift (now with proseNorms), the edge bundles'
    freshness, and every door that reads `docs/content/` or `src/data/`.
 3. CLOSE-DOORS-2: dossierProseManifest's drift arms (the golden corpus), red identically at the base and here.
