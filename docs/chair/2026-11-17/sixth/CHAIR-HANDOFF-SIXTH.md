@@ -763,6 +763,20 @@ should be paused or archived by the owner's hand.
   3510 and 2794 to 2802; the cartesian unit set 658 to 662; the byte ratchet (four leaves over their committed size);
   proseMoveGrammar CONTROL 4; the wiring census, the holder census and `wiringCensusDeclared` (10 rows); the manifest's
   provenance and drift arms (704 to 842 rows); the estate's count 3682 to 3684.
+- **FR12 (08:26 UTC, 2026-11-18; FAULTS-ROWS after its first hand-back at 8e4515c36).** THE FAIR STANDS AS BUILT (two twins:
+  "A yearly fair for regional merchants. The luxuries the town wants do not reach it." and "A yearly gathering of the
+  region's merchants, though the luxuries the town wants do not come with them."; seven towns' fair description moves,
+  none of the 525; `11e.offer`'s luxury 1, 0, 5 to zero; C32296 clear). GIVEN BY NAME, the three it left: (1) the
+  fair's THIRD line "A yearly draw for regional traders, with fine goods on offer." (3 towns of the thirty beside an
+  unmet luxury): the same form, one twin; (2) the quarter's TWO lines ("The trade in silk, spice, and precious things."
+  and "Silks, spices, and other precious goods."): each is marked a colour line in `institutionDescColour.js` and the
+  mark is false: both marks struck (that file for those two rows; CL18's form), each line a late set on
+  `need not brought in: spice / silk` and one twin; the seat's reading stands that gold and silver ore is the mint's
+  want and not the quarter's wares; (3) THE FISH MARKET'S CARD BY ONE NEW ATOM, `fish bought in` (new vocabulary, the
+  veto list): true where FISH-ROWS's swap is made (the fish ground used up and its shortage import held); ONE exported
+  function in an import-free facts leaf, read by the atom AND by `generateNarratives.js :: boughtFishRowsInPlace` in
+  place of its own two calls (that one hunk given by name; no record may move); the card's original excludes it; one
+  twin; held equal to the swap on every fish-market town (36 swapped, 303 not, 4 idle at its measure).
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
   e0242a12a82285a736f9997360ec1e8a5fbd3568 = the line's ed1d43529 + BIRTH-3's 8b0506eae, no collision; tree
