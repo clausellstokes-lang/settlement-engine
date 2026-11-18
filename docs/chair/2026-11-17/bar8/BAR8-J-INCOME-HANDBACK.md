@@ -123,3 +123,53 @@ this base, so the base's reds above are my own run's.
 FILES TOUCHED: `src/generators/economy/incomeLineSiblings.js`, `src/domain/display/tradeListDisplay.js`, the new
 `src/domain/display/incomeOrdinaryLines.js`, the new `tests/generators/bar8Income.test.js`, `tests/domain/bar6MarksLaw8.test.js`
 (one struck house, by its own rule), this file. Nothing under `src/pdf`, no register, no reference file, no stored figure.
+
+## 6. AFTER THE CHAIR'S RULINGS (the chair's messages of 01:25 and 02:25 UTC, 2026-11-18)
+
+**RULING BR26, BY THE OWNER'S WORD ("Move the entries"): commit `cc7ebb708`, alone.** The five rows moved BY HAND from the key
+`src/generators/economy/incomeLineSiblings.js` to the key `src/domain/display/incomeOrdinaryLines.js`, each row unchanged; no
+`--shrink`, no `--bank`; the ceilings equal (presumption 1938); parsed, each file equals its parent with the rows moved back
+(nothing else changed). The five rows, word for word, the same before (under the old key) and after (under the new):
+
+`tests/lint/presumptionClasses.register.json` (`[class, status, text, hash]`):
+1. `["goods","other","Little cloth is made here while the cloth trade is short of what it needs.","68f7f8907313f33a"]`
+2. `["goods","other","Cloth is woven or finished here.","a051929a6344f5f0"]`
+3. `["resource","other","Local forest provides timber revenue, and the timber is sawn here.","0855cc21d84e57a4"]`
+
+`tests/lint/presumedThings.widened.register.json` (`arm1`, `[thing, reason, text, hash]`):
+4. `["smith","family","Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.","782b0b74db43359b"]`
+5. `["smith","after-base: close-true","Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.","ab7a101ef0ffa943"]`
+
+PROOF. The key is the file's path plus the row's own class and hash (`presumptionClasses.shared.mjs :: rowKey`), and the hash is
+the literal's, not the path's: the same row is kept. `node scripts/presumption-classes-door.mjs --check` now prints at the tip
+what it prints at base: "hits 1787 · banked 1938 · fresh 0 · stale 151 · ceiling 1938". `node scripts/presumed-things-door.mjs
+--check` prints the same whole output as at base, line for line ("fresh 38 · stale 72 · first-register stale 7 · banked 4688 ·
+strips fresh 0 stale 0 banked 107"). Both walkers' tests read by message as at base: presumptionClasses' "no NEW undeclared
+line" is green again (its "no stale row" red as at base, the same 151); presumedThings' two arms red with base's messages.
+
+**THE RUIN-FILTER ROSTER (the chair's (1)): commit `df4e0e85a`. The roster's row follows the moved reader.** Measured: no
+record of the 900 holds a non-live house, so the live roster (`isLiveInstitution`) would give the same line on every income
+share. But the leaf stays import-free (the brief) and PDF-2 holds its byte-for-byte copy, so I chose THE ROW, not the import:
+`RUIN_AGNOSTIC_EXEMPT` gains `src/domain/display/incomeOrdinaryLines.js` (name-lookup/display, with that measure as its
+reason). The old file was never on the roster: `src/generators/` is outside the walker's `src/domain` root. THE WALKER'S
+MESSAGES: at base, one red, "the scan reads CODE …": "expected 115 to be 113". At the tip before the row, two reds: "every
+`.institutions` reader is COMPLIANT or EXEMPT" naming `src/domain/display/incomeOrdinaryLines.js`, and "expected 116 to be 113".
+At the tip now, one red, "expected 116 to be 113": the stored count is the close's, and it is one more than at base by the leaf.
+
+**ALL OF `tests/lint`, EVERY RED BY MESSAGE (the chair's (2)).** First at base 99ca9ad51 and at the tip `df4e0e85a`. Then at a
+SCRATCH MERGE of the tip with the line's tip `70e557d5b` (`lane/join-2026-11-14`, which had moved: a clean automatic merge,
+then aborted), against that line tip alone. Each pair holds 69 reds, the same tests by name. Folding the worktree paths, the
+messages differ in three COUNTS only, the same three in both pairs, each one more by a file of mine (stored figures, the close's,
+NAMED):
+- `ruinFilterRoster.walker.test.js` "the scan reads CODE …": 115 → 116 (against the stored 113): the leaf, a new
+  `src/domain` reader (its row above).
+- `sovereigntyLightingContract.walker.test.js` "the estate's file count moved": 3680 → 3681 at base and tip; the line's own
+  count → one more at the merge: the leaf, one new source file.
+- `mutationCoverageManifest.test.js` TOTALITY: its list of invariant files with no entry gains `tests/generators/bar8Income.test.js`
+  (it already holds bar7Lines, bar7Scenes and bar8Rows, the guards of other seats). `scripts/mutation-coverage-manifest.json`
+  is not my file: NAMED for the close (a rationale entry, or a planted regression in `scripts/mutation-sweep.sh`).
+No message names `src/domain/display/incomeOrdinaryLines.js` any more. The doors at the merge print what they print at the
+line's tip: presumption "hits 1786 · banked 1938 · fresh 0 · stale 152"; presumed things the same whole output, line for line.
+AT THE MERGE my guard, the tests I touched or my cures reach (`bar6MarksLaw8`, `bar4CorpusEcoKinds`, `incomeLinesSayTheRecord`,
+`bar7EconTab`, `leftChainCards`), `tests/architecture` and `tests/joins`: 825 of 826 green. The one red is FS1 (a) of
+`bar4CorpusEcoKinds`, made untrue by the cure itself (section 4).
