@@ -28,6 +28,10 @@ export const METAL_SHORT_LINE = 'Little metal is worked here while the metal tra
  * `ordinaryIncomeLineOf`): the mine is worked; the metalworking is not. */
 export const METAL_FORGE_IDLE_LINE = 'The digging goes on here, but the metalworking stands idle, short of what it needs.';
 
+/** The roster's forge houses, as a name word (the census's "metal house"): the coal line's gate, and (the chair's ruling of
+ * 2026-11-18, BR33 (2)) the metal arm's live house that smelts or works metal. Moved here unchanged from `incomeLineSiblings.js`. */
+export const FORGE_HOUSE_WORDS = Object.freeze(['smith', 'forge', 'foundr', 'smelt', 'metal', 'armor', 'armour', 'weapon']);
+
 /** The timber lines (the trade's ordinary line, with or without a sawmill, and the short twin). */
 export const TIMBER_PLAIN_LINE = 'Local forest provides timber revenue.';
 /** BAR2-LABELS LB6: the timber line's twin where a sawmill stands and no managed woodland does (vetoable by the owner). */
@@ -59,7 +63,8 @@ export function ordinaryIncomeLineOf(desc, town, reading = null) {
   const roster = liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (town)).map((i) => String(i?.name ?? '').toLowerCase());
   const has = (/** @type {RegExp} */ re) => roster.some((n) => re.test(n));
   if (desc === CLOTH_SHORT_LINE) return has(/weav|fuller/) ? CLOTH_WORKED_LINE : '';
-  if (desc === METAL_SHORT_LINE) return METAL_WORKED_LINE;
+  // BR33 (2): a live house that smelts or works metal, as the cloth and timber arms ask the live roster for theirs; else no sentence
+  if (desc === METAL_SHORT_LINE) return FORGE_HOUSE_WORDS.some((w) => roster.some((n) => n.includes(w))) ? METAL_WORKED_LINE : '';
   return has(/sawmill|lumber/) ? TIMBER_SAWN_LINE : TIMBER_PLAIN_LINE;
 }
 

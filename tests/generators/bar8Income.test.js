@@ -88,6 +88,11 @@ describe('BAR8 J-INCOME item 1: the ordinary income lines in an import-free leaf
     expect(leaf.ordinaryIncomeLineOf(leaf.CLOTH_SHORT_LINE, { institutions: [{ ...weavers, _worldPulseInactive: true }] })).toBe('');
     expect(leaf.ordinaryIncomeLineOf(leaf.TIMBER_SHORT_LINE, { institutions: [{ name: 'Sawmill', _worldPulseInactive: true }] })).toBe(leaf.TIMBER_PLAIN_LINE);
   });
+  it('BR33 (2): the metal arm asks the live roster too: a ruined forge works no metal (the reader\'s MED 2)', () => {
+    const smiths = { name: 'Blacksmiths (3-10)' };
+    expect(leaf.ordinaryIncomeLineOf(leaf.METAL_SHORT_LINE, { institutions: [smiths] })).toBe(leaf.METAL_WORKED_LINE);
+    expect(leaf.ordinaryIncomeLineOf(leaf.METAL_SHORT_LINE, { institutions: [{ ...smiths, status: 'ruined' }] })).toBe('');
+  });
 });
 
 describe('BAR8 J-INCOME item 2 (11b): the fished-out income line asks the fish story first', () => {
