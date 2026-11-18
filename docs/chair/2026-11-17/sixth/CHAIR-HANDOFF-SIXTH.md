@@ -14,18 +14,24 @@ below replaces); `docs/chair/2026-11-17/bar7/RULINGS.md` (the rulings in force);
 
 ## 0. THE STATE AT 19:04 UTC ON 2026-11-17 (READ THIS FIRST: it is written for a successor AND for this chair after its own context is summarized; it REPLACES the 17:04 state; the lines of section 7 written after 19:04 govern where they differ)
 
-**THE LINE.** `lane/join-2026-11-14` stands at dfe557dc951e38b0f36e84accc812a1310c802ce (pushed 22:54 UTC): POINTS 33 TO 42 AND THE RECORD
-`docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` ON THE LINE (one row a point, 33 to 42: the commit, the trees, what cleared
-it, what it left red by name). In order: 33 the owner's supply rule (e0242a12a) · 34, 35 BAR8's two audits (ef5fd621e) ·
-36 DEBT-2 (2e54c06c2) · 37 LEFT-LINES (f1ca75555) · 38 LEFT-PDF (e60d42a20) · 39 LEFT-CHAIN (3b06c724b) · 40 LEFT-MARKS
-(f86295196) · 41 LEFT-CHAIN's follow-up (8f392d100) · 42 LEFT-MARKS's BR21 follow-up (440bac3da) · the rows' commit
-dfe557dc9. NO LANDING COMMIT IS BUILT ON IT AT THIS HOUR (the next is merged on the line's tip when it is ready; a docs
-commit may follow at once). VOID: 7d045555a and 67887afdc (J-ROWS's first tip and what was built on it). THE CHAIR IS THE
-LINE'S ONLY WRITER: `/home/user/line` (hooks). THE BASELINE FOR COMPARISONS BY NAME: the whole check at 7d045555a minus
-J-ROWS's own red (the three CHECKS seats' branches, `checks/landing-41-42-7d045555a/part-<n>/names.final.txt`: 161 names;
-`/home/user/wk/p42.all.txt`); `tests/components/bar7EconTab` C39519 is cured since (point 42). A RED THAT A LANDING WAS TO
-CURE, AND EVERY WALKER, REGISTER AND ROSTER TEST, IS READ BY ITS MESSAGE, NOT ONLY BY ITS NAME. `editCorpusRatchet` A5 comes
-and goes by its watchdog (BR22).
+**THE LINE.** `lane/join-2026-11-14` stands at 917c915bc6eb75011dfabd211f730e543e08d32a (pushed 00:25 UTC on 2026-11-18, read back): POINTS 33 TO 44.
+THE RECORD `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` ON THE LINE holds the rows of points 33 to 42 (one row a point: the
+commit, the trees, what cleared it, what it left red by name); THE ROWS OF 43 AND 44 ARE OWED and are written with the
+next landing's (a docs commit goes on the line only after the last BUILT landing commit, so that built commits stay
+fast-forwards). In order: 33 the owner's supply rule (e0242a12a) · 34, 35 BAR8's two audits (ef5fd621e) · 36 DEBT-2
+(2e54c06c2) · 37 LEFT-LINES (f1ca75555) · 38 LEFT-PDF (e60d42a20) · 39 LEFT-CHAIN (3b06c724b) · 40 LEFT-MARKS (f86295196) ·
+41 LEFT-CHAIN's follow-up (8f392d100) · 42 LEFT-MARKS's BR21 follow-up (440bac3da) · the rows' commit dfe557dc9 · 43 J-ROWS's
+G1, the general gap line (52a10f90a) · 44 PDF-2 (917c915bc). BUILT ON IT AND NOT LANDED: `lane/landing-45-2026-11-17` at
+58cb585691214feac4d9aa217181cf47c2ece63b = POINT 45 (SCENES at cabed01ff: 2f0e88971, its whole check running, label
+`landing-45-2f0e88971`) AND POINT 46 (SCENES's late rewording at 867476c33: a targeted net); READ-SCENES
+(session_01FbPLbesk53RrHfBHaBrMoN) is reading. VOID: 7d045555a and 67887afdc (J-ROWS's first tip and what was built on it).
+THE CHAIR IS THE LINE'S ONLY WRITER: `/home/user/line` (hooks; now on the landing branch) and, for a push while that
+checkout is busy, any scratch worktree at the commit AFTER `npx husky` there (`ls .husky/_` lists `pre-push`) and with no
+scratch file in it. THE BASELINE FOR COMPARISONS BY NAME: the whole check at 917c915bc (the three CHECKS seats' branches,
+`checks/landing-43-44-917c915bc/part-<n>/names.final.txt`: 159 names; `/home/user/wk/p44.all.txt`). A RED THAT A LANDING
+WAS TO CURE, AND EVERY WALKER, REGISTER AND ROSTER TEST, IS READ BY ITS MESSAGE, NOT ONLY BY ITS NAME: the chair runs
+`tests/lint` and the registers at the base and at the candidate with the default reporter and compares them with
+`/home/user/wk/lawcmp.mjs` (logs `/home/user/wk/laws.<tree>.log`). `editCorpusRatchet` A5 comes and goes by its watchdog (BR22).
 
 **THE SEATS (each a child session of this chair on its own machine; briefs in `sixth/briefs/`; builders and readers of code
 are the middle tier at high effort, the mechanical seats the cheaper tier at low effort).**
@@ -883,3 +889,11 @@ should be paused or archived by the owner's hand.
   measured at cabed01ff and at 2f0e88971 stands: the delta is one line of text and the guard). THE WHOLE CHECK ASKED AT
   2f0e88971 (CHECKS-2 23:55, CHECKS-1 23:58, CHECKS-3 00:10; label `landing-45-2f0e88971`) STANDS FOR POINT 45; POINT
   46 LANDS WITH IT ON A TARGETED NET OF THE DELTA (the guard, the doors, the laws by message at 58cb58569).
+- **00:25 UTC. POINTS 43 AND 44 ARE LANDED** (00:25:01: `dfe557dc9..917c915bc lane/join-2026-11-14`, read back): J-ROWS's general gap line and PDF-2.
+  PDF-2 IS TOLD (00:26) TO CUT ITS SECOND BRANCH `lane/bar8-pdf-2b-2026-11-17` FROM THE LINE'S TIP: five small things
+  (its section's item 3 by its own hunk; the reader's MED 1 (a) and (b); the reader's LOW 1 if one hunk; its guard's
+  `test.each` made a looping test: the each-family count back to 112); a first small commit first; it says so and
+  stops if its count is above 380,000 (then a new seat takes it: the message is `/home/user/wk/prompts/PDF-2-second.final.txt`).
+  SECTION 0's "THE LINE" IS REWRITTEN AS OF THIS HOUR. LEFT-KEYS's PROMPT IS DRAFTED (`/home/user/wk/prompts/LEFT-KEYS.txt`:
+  K1 to K6 of its section, K5's names, K6 (c), K7, K8, K9 (J's detector), K10 (the mutation manifest)): IT IS SEATED WHEN
+  THE FISH ROWS ARE ON THE LINE (they re-key two of its files), with the early small commit.
