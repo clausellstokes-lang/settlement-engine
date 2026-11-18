@@ -226,7 +226,9 @@ const NEITHER = ['bar0-hamlet-calm-rand-45', 'bar0-hamlet-calm-rand-29', 'bar0-t
 /** the Unsafe twin's three towns (no watch, no court, no gaol), and two Unsafe cities that keep a watch and a court */
 const UNSAFE_EMPTY = ['bar0-hamlet-calm-rand-27', 'bar0-hamlet-calm-rand-29', 'r2r-thorp-30'];
 const UNSAFE_KEPT = ['r2r-city-0', 'r2r-city-41'];
-const OTHERS = ['bar0-town-calm-rand-30', 'bar0-town-calm-rand-46', 'bar0-town-occupied-rand-47', 'bar0-city-wartime-rand-32', 'r2r-town-5', 'r2r-village-3'];
+// FR18 (2): a court with no gaol is in the arm by name ("Court only", "Town hall bench only"), so the atom's court half is
+// held as its prison half is ("Prison only": bar0-town-calm-rand-30, -46, bar0-town-occupied-rand-47)
+const OTHERS = ['bar0-town-calm-rand-45', 'bar0-town-calm-rand-28', 'bar0-town-calm-rand-30', 'bar0-town-calm-rand-46', 'bar0-town-occupied-rand-47', 'bar0-city-wartime-rand-32', 'r2r-town-5', 'r2r-village-3'];
 
 /** @type {Map<string, any>} */ const towns = new Map();
 beforeAll(async () => {
@@ -248,15 +250,20 @@ describe('13d (FR6): `court or gaol`, and the record-of-crimes lines that presum
 
   it('the atom is held equal to the Legal Infrastructure row on every town, on all three forms; both answers occur', () => {
     const seen = new Set();
+    const rows = new Set();
     const failures = collectSeedFailures([...towns.keys()], (seed) => {
       const s = towns.get(seed);
       const row = legalRow(s);
       expect(row, seed).toBeTruthy();
       seen.add(row !== 'None');
+      rows.add(row);
       for (const [form, r] of forms(s)) expect(factsOf(r).courtOrGaol, `${seed} · ${form} · Legal row "${row}"`).toBe(row !== 'None');
     });
     expectNoSeedFailures(failures, '`court or gaol` answers as the Legal row prints');
     expect([...seen].sort()).toEqual([false, true]);
+    // each half alone is in the arm: a court with no gaol, and a gaol with no court (FR18 (2))
+    expect([...rows].filter((r) => /^(Court|Town hall bench|Council bench) only$/.test(String(r))).length).toBeGreaterThan(0);
+    expect(rows.has('Prison only')).toBe(true);
   });
 
   it('13d\'s towns keep neither, and none of them draws a record-of-crimes line into the public-order slot', () => {
