@@ -75,21 +75,24 @@ const leaves = (node, acc = []) => {
  *  marks and a used-up ground (r2s-under_siege-hamlet-3, -village-0), outputs a refused card withholds (r2s-infiltrated-village-0,
  *  r2r-town-1, r2r-town-16), a marked keeper (r2r-thorp-45), a used-up ground off the stored list (r2r-hamlet-23), a proven
  *  ground (r2r-hamlet-8), the Outlook's impaired list (r2s-under_siege-village-3, -town-0); r2r-village-0 a used-up ground off the stored
- *  list (FAULTS-BIRTH FR8 (c), its isolated smith's iron); r2r-village-1 prints none. */
+ *  list (FAULTS-BIRTH FR8 (c), its isolated smith's iron); r2r-village-1 a pasture its common proves (FR24 (2)); r2r-village-17 prints none. */
 const CENSUS = ['r2r-hamlet-10', 'r2r-village-13', 'r2r-village-28', 'r2s-under_siege-hamlet-3', 'r2s-under_siege-village-0',
   'r2s-infiltrated-village-0', 'r2r-town-1', 'r2r-town-16', 'r2r-thorp-45', 'r2r-hamlet-23', 'r2r-hamlet-8',
   'r2s-under_siege-village-3', 'r2s-under_siege-town-0', 'r2r-village-0',
-  'r2r-village-1']; // FAULTS-BIRTH (2026-11-18): the negative re-keyed (below); r2r-village-0 now reads a ground used up off the stored list
+  'r2r-village-1', 'r2r-village-17']; // FAULTS-BIRTH (2026-11-18): the negatives re-keyed (below); r2r-village-0 now reads a ground used up off the stored list
 /** The wide read's 150: a famine's share (bar0-village-famine-rand-36), proven grounds (bar0-hamlet-calm-rand-27,
  *  bar0-hamlet-under_siege-rand-29), the Outlook's list (bar0-hamlet-under_siege-rand-27, -34), a refused card's withheld
  *  output (bar0-town-calm-rand-30); bar0-village-calm-rand-28 prints none. */
 const WIDE = ['bar0-village-famine-rand-36', 'bar0-hamlet-calm-rand-27', 'bar0-hamlet-under_siege-rand-29',
-  'bar0-hamlet-under_siege-rand-27', 'bar0-hamlet-under_siege-rand-34', 'bar0-town-calm-rand-30', 'bar0-village-calm-rand-28'];
+  'bar0-hamlet-under_siege-rand-27', 'bar0-hamlet-under_siege-rand-34', 'bar0-town-calm-rand-30', 'bar0-village-calm-rand-28',
+  'bar0-village-calm-rand-30'];
 const SAMPLE = [...CENSUS, ...WIDE];
 /** The towns that print no mark of these kinds and no proven or used-up ground: the readings agree there too. */
 // FAULTS-BIRTH (2026-11-18, R8: re-keyed by identity): r2r-village-0, on no road, now reads its smith's iron used up under Depleted
 // (FR8 (c)); the same negative on r2r-village-1, which prints none of these marks
-const NEGATIVES = ['r2r-village-1', 'bar0-village-calm-rand-28'];
+// FAULTS-BIRTH FR24 (2) (2026-11-18, R8: re-keyed by identity again): r2r-village-1 and bar0-village-calm-rand-28 now print the
+// pasture their Common grazing land proves; the same negative on r2r-village-17 and bar0-village-calm-rand-30, which print none
+const NEGATIVES = ['r2r-village-17', 'bar0-village-calm-rand-30'];
 
 /** @type {Map<string, { t: any, vm: any, pdf: string[], svc: string[], journal: Array<{ name: string, markdown: string }> }>} */
 const towns = new Map();

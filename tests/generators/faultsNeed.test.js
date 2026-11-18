@@ -6,7 +6,7 @@
 //            good a live house of the town is marked short of (`crisisStoppedRow.js :: rowShortOf`, the page's own mark): the
 //            Dairy farmer's "Short of livestock." beside a shepherd's "Livestock management" (bar0-village-calm-rand-29,
 //            r2r-village-47) kept "Needed, and not brought in: livestock." (re-keyed by FR24 (1), 2026-11-18: the commons prove
-//            those pastures; the claim on r2r-town-54's Butchers and bar0-village-famine-rand-41's Tannery).
+//            those pastures; the claim on r2r-town-54's Butchers and, after FR24 (2), bar0-town-calm-rand-29's Potter).
 //   item 1   THE ATOM (FR2): `domain/facts/needNotBroughtIn.js` states the need list in the record's own words, held EQUAL here to
 //            `importsAsPrinted(record).needed`, label by label, on every town this file births (the seventh read's thirty and the
 //            fixed towns of the other items) and on a constructed record for each branch of the page's reader; its copied tables
@@ -41,7 +41,9 @@ const TOWNS = Object.freeze({
   // bar0-village-calm-rand-29 and r2r-village-47 (FR21 (2)), so no house there is short of livestock. The same claim on towns of the
   // 900 that bear it at the merged line, each anchor with its own house, good and the label its need list prints (`SHORT`, below)
   'r2r-town-54': ['short'], // the 720: the Butchers (3-8) short of livestock; the list prints "Livestock for meat and draft"
-  'bar0-village-famine-rand-41': ['short'], // the 150: the Tannery short of livestock or hides; the list prints "animal hides"
+  // FR24 (2) (2026-11-18): bar0-village-famine-rand-41's common now proves the pasture whose hides feed its Tannery; the 150's anchor
+  // re-keyed by identity to a house short of its good beside that good's printed label: the Potter of bar0-town-calm-rand-29
+  'bar0-town-calm-rand-29': ['short'], // the 150: the Potter short of clay; the list prints "clay"
   'r2r-city-43': ['dealt'], // the 720: a fair's livestock auction, no house short of livestock (the need stays dropped)
   'r2r-metropolis-12': ['dealt'],
   'r2r-metropolis-19': ['dealt'],
@@ -122,7 +124,7 @@ describe('FAULTS-NEED item 0: the need list keeps a need a live house is marked 
     // FR24 (1): each anchor's own house, the good its mark names and the label its need list prints, asserted exactly
     const SHORT = /** @type {Record<string, { house: string, good: string, label: string }>} */ ({
       'r2r-town-54': { house: 'Butchers (3-8)', good: 'livestock', label: 'Livestock for meat and draft' },
-      'bar0-village-famine-rand-41': { house: 'Tannery', good: 'livestock or hides', label: 'animal hides' },
+      'bar0-town-calm-rand-29': { house: 'Potter', good: 'clay', label: 'clay' },
     });
     expectNoSeedFailures(collectSeedFailures(seedsOf('short'), (seed) => {
       const s = BORN.get(seed);
