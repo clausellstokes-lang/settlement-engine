@@ -2241,3 +2241,32 @@ should be paused or archived by the owner's hand.
   a ledger as good as the fit between the party's deeds and the 41 events (it tracks the town, not the party; the
   chair saw no per-character reputation record and said it had not searched thoroughly). Said plainly that the
   chair has not sat at a table with it.
+- 05:39 UTC, 2026-11-18 · MERGE 11, LOCAL (`lane/landing-close-2026-11-18` at 03b5f64ea; origin still holds ten,
+  635c9b57e): CLOSE-SWEEP's hand-back with S4 item 5 at 07748d92e (documents only since 8ecd7c61b; its proof that
+  all 22 test files touching the changed file behave the same before and after). CLOSE-SWEEP IS DONE. Left in this
+  close: CLOSE-DOORS-1B's last pass, the chair's own commit of the four rows, the golden signing.
+- 06:20 UTC, 2026-11-18 · (A context summary fell at 06:19; the chair re-read its own transcript: the owner's question
+  of 05:36:31 was answered whole at 05:38:02; nothing is owed.) READ-K-WATCH-2 SAID "LAND" (06:16; the second
+  reader of K-WATCH-2 at 2abb7fb03, base 215f97d29): HIGH NONE, MED NONE. Its scratch merge on C = 8d7c2af33 MERGES
+  CLEAN (local d11a78830, never pushed). The move of `lawlessRow` is pure; ONE READING of the by-day atom and the
+  Defense tab's Standing forces in 904 of 904 records (the 720 and its 184); by PAGE-COPY at M no town puts the
+  by-day line beside an all-night Standing forces (at C five do: bar0-town-calm-rand-31, -41, -437,
+  bar0-village-calm-rand-46, r2r-town-4); the occupation twin is true on the page at r2s-occupied-city-0 and
+  r2s-occupied-metropolis-3 (the only two of the 28 occupied towns that mint a rival of the administration); the
+  owner's page, toPublicSafe and the share veil print the same; four planted faults each caught by its own arm; no
+  new field on the saved town. STORED FIGURES THAT MOVE WHEN IT LANDS (each for THE LAST CLOSE, none its own draw):
+  (a) `docs/content/wiring-census.json` producerIndexFiles 1429 to 1430 (the new `src/domain/facts/forceHours.js`;
+  proseWiringCensus car 0 and car 5b red until re-taken); (b) presumptionClasses "no stale row" 152 to 153
+  (`rulingStructure.js` `sovereign` 173deb052821574c, K-POWERS's Elected Reeve ternary); (c) poolDominance: a new
+  row `ledger:safetyProfile:STANDARD_PATROL`; (d) mutationCoverageManifest TOTALITY names
+  `tests/generators/bar8Watch.test.js` and `bar8Powers.test.js`; (e) the estate's file count 3682 to 3684; (f)
+  pipelinePinnedMode (37) to (38), the fork census A1 control row 8bb20e96 to 71ea4d5f, the golden 485 to 499 of 525
+  (14 more: 3 thorp coastal|port, 11 town riverside|river: K-WATCH's and K-POWERS's declared moves). ITS THREE
+  LOWS, FOR THE BUILDERS OF THE UNBUILT FAULTS: (1) a Household levy counts as walking by day though its text says
+  it musters when danger reaches the fields (unreached: 0 of 600 thorps print it); (2) the second lawless push site
+  (`servicesGenerator.js:140`) cannot run: a dead branch; (3) NOT ITS SEAT'S: the crime-type path
+  (`crimeTypes.has('Lawlessness')`, about line 345) writes "easily outbid" without `lawlessRow`: at r2r-city-41
+  the "(lawless)" row says so where a court sits and a gaol holds (a BAR6-CRIME leftover). THE PIECE LANDS ON THE
+  CLOSED LINE, after the signing (the owner, 05:13:00: everything but the next read is before the deploy). STILL
+  READING: READ-DESKS-2, READ-MARKS-2 (one planted fault not caught: "only M1 alchemist row uncaught", its word so
+  far), READ-INCOME-PDF. CLOSE-DOORS-1B: its hand-back is drafted; it waits on a 59-file run.
