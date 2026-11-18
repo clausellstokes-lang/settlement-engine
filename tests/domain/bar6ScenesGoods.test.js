@@ -18,6 +18,7 @@
 // docs/chair/2026-11-16/bar6/BAR6-SCENES-HANDBACK.md.
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { GOODS } from '../helpers/pageLaws/law6.mjs';
 import { PROSE_FORMS } from '../../src/data/people/powerSentenceName.js';
 import { ARRIVAL_SENSES } from '../../src/data/arrivalProse.js';
@@ -222,7 +223,7 @@ describe('the facts the cure made', () => {
     // Blacksmiths and Specialized metalworkers "Short of iron." and a Smelter alone not short)
     expect(tradeAtWorkOf({ institutions: [{ name: 'Smelter' }], economicState: { primaryImports: ['Iron ore'] } }, 'ironwork')).toBe(false);
     expect(tradeAtWorkOf({ institutions: [{ name: 'Smelter' }, { name: 'Blacksmith' }], economicState: { primaryImports: ['Iron'] } }, 'ironwork')).toBe(true);
-    expect(GOOD_TRADES.ironwork.houses).not.toContain('smelter');
+    expectAbsentWithAnchor(GOOD_TRADES.ironwork.houses, 'smelter', 'blacksmith', 'the forge trade is the smith\'s, not the smelter\'s');
     const cloth = /** @type {any} */ (ARRIVAL_SENSES.find((/** @type {any} */ x) => x.key === 'cloth')).institutions;
     expect([...CLOTH_KINDS.cloth, ...CLOTH_KINDS['dyed cloth']].sort()).toEqual(cloth.filter((/** @type {string} */ w) => !['tailor', 'clothier', 'draper'].includes(w)).sort());
     const tanners = /** @type {any} */ (ARRIVAL_SENSES.find((/** @type {any} */ x) => x.key === 'tanners')).institutions;
