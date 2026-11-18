@@ -171,3 +171,27 @@ NO NEW WORDS: every line above is a word or a row the tab already prints. DECLAR
 field, no stored figure).
 
 ## SECOND BRANCH · lane/bar8-pdf-2b-2026-11-17 (the chair's message of 00:25 UTC on 2026-11-18; base 917c915bc, point 44)
+
+Branch `lane/bar8-pdf-2b-2026-11-17`, cut from the line `lane/join-2026-11-14` at 917c915bc (my first tip 2dac64372 is
+in it, with LEFT-MARKS). Nothing merged. The same file list; no new words, no generator, no stored field. Measured over the
+census's 720 BORN AT 917c915bc (PAGE-COPY's `births.mjs`), by the same probe, base 917c915bc → tip.
+
+| # | the chair's item | before → after | proof |
+|---|---|---|---|
+| 1 | item 3 of my section: the head line over no short row (LEFT-MARKS M3) | the PDF prints the short sentence in 154 towns (329 chapters) → 145 (311); the nine towns leave it, each in Services and Institutions: r2r-hamlet-26, r2r-hamlet-48, r2r-hamlet-57, r2r-town-13, r2r-town-18, r2s-under_siege-city-1, r2s-politically_fractured-hamlet-0, r2s-infiltrated-town-1, r2s-wartime-city-3; no other town moves | the guard's new arm renders the Services and Institutions TABS (as `tests/domain/leftMarks.test.js` does) and the PDF's two chapters for the nine and r2r-city-20, r2r-hamlet-27: red in 9 of 11 before the hunk, green after |
+| 2 | the reader's MED 1 (a): the L2 arm of `leftPdfReadsTheTabs` read only text after "Normally yields: " | the arm now reads every printed output (the Services flow line's last part; each flow row's `o-` node) | with `Services.jsx`'s card handed `chain` for `onCard` (in `chainYieldRefused` and `chainOutputsOnCard`): red in 4 of 21 (r2s-under_siege-hamlet-3, r2s-under_siege-village-0, r2s-under_siege-town-0 "Goods storage", bar0-hamlet-under_siege-rand-34); restored, green |
+| 3 | the reader's MED 1 (b): `chainStateThreeSurfaces :: outputDisagreements`' five seeds held no item-5 card | four seeds added: r2r-village-8, r2r-village-17, r2r-village-25, r2r-thorp-38 | red under the mutation of 2; red with `SupplyChainFlow.jsx`'s rows mapped back to the stored chain (`.map((c) => c)`); restored, green |
+| 4 | the reader's LOW 1: the journal paired `e.chains[i]` with `activeChains[i]` by bare index | ONE HUNK (`journalPages.js`): `records` are the record's chains the view model prints (the same `chainPrintName` filter, in its order), used by the chain rows' mark and word | no town of the 720, the 150 or the thirty holds a chain with no print label (0 of 900: the fault is latent, no printed line moves); a CONSTRUCTED-RECORD arm in my guard (a chain of no label put first in three towns) is red in 3 of 3 under the bare index, green at the tip |
+| 5 | my guard grew the each-family park count (`sovereigntyLightingContract.walker.test.js`) | the negatives' `test.each` is one plain test looping through `collectSeedFailures` | the walker's message: "expected 113 to be less than or equal to 108" at 917c915bc → "expected 112 …" at my tip; my file is no longer listed |
+
+At the tip the other items of my section read as they did: items 1, 2, 5, 5′, 6, 7 at 0 over the 720; ITEM 4 (the income
+share's ordinary line) STILL WAITS for J-INCOME's leaf: 95 towns of the 720.
+
+THE CODE: `src/pdf/lib/crisisMarksOnPage.js :: ordinaryTimesOnPage(settlement, rows, { readings = true } = {})` hands the
+leaf the rows' short readings; `src/pdf/sections/EconomicsTrade.jsx` hands `{ readings: false }` (the boolean the Economics
+tab's `econOrdinaryTimesLine` hands, so the PDF's Economics head line and the journal's stay the tab's: item 7's arm green).
+`src/foundry/journalPages.js`: the `records` filter (above) and its `chainPrintName` import.
+
+THE LINE A READER SEES: "A row marked short is what its house makes when supplied." leaves the PDF's Services and
+Institutions chapters where their tabs print it no more (a failed venture's mark alone): r2r-hamlet-26, r2r-town-13,
+r2s-wartime-city-3 (and the six others above). No line is added.
