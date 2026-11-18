@@ -2449,4 +2449,13 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
     Object.freeze({ text: "The trade in silk, spice, and precious things.", excludes: Object.freeze(['need not brought in: spice', 'need not brought in: silk']) }),
     Object.freeze({ text: "The trade in fine things, though the spice or silk the town wants does not reach it.", twinOf: "The trade in silk, spice, and precious things." }),
   ]),
+  // FAULTS-ROWS (the sixth chair's rulings FR4 and FR12 (3), 2026-11-18; vetoable by the owner): THE FISH MARKET'S CARD follows
+  // its row. Where the fish is bought in (`fish bought in`, `facts/fishBoughtIn.js`: the one fact BAR8-FISH-ROWS's swap reads to
+  // give the market its "Preserved fish"), "the day's catch" is false (bar0-village-calm-rand-47); the imports are written after
+  // the draw, so the card is read here. ONE TWIN: salted and dried fish, no catch of the day. An idle town (nothing brought in)
+  // and a live fishery keep the line; its draw declaration (`navigable`, DESC_VARIANT_DECLARATIONS) stands as it was.
+  "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.": Object.freeze([
+    Object.freeze({ text: "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.", excludes: Object.freeze(['fish bought in']) }),
+    Object.freeze({ text: "Where salted and dried fish is sold, from an open stall or a small covered market. No fresh catch comes in here.", twinOf: "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.", needs: Object.freeze(['fish bought in']) }),
+  ]),
 });

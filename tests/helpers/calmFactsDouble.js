@@ -108,4 +108,7 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   // FAULTS-NEED (FR2): `need not brought in` (`needNotBroughtIn.js`) is a WANT, read like `uprising` above: a calm place meets
   // its needs, so a line that presumes a good is had is admitted
   needNotBroughtIn: Object.freeze({ luxury: false, spice: false, silk: false, precious: false, salt: false, fuel: false, livestock: false }),
+  // FAULTS-ROWS (FR12 (3)): `fish bought in` (`fishBoughtIn.js`): a calm place lands its own catch, so a line that presumes the
+  // day's catch is admitted
+  fishBoughtIn: false,
 });

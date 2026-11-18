@@ -29,6 +29,9 @@ import { resourceShortageImport } from '../resourceSemantics.js';
  */
 export function fishBoughtIn(record) {
   if (!record || typeof record !== 'object') return false;
+  // no import, no fish bought in: read first, so the verdict is the same and every record answers the imports it reads
+  const imports = /** @type {{ economicState?: { primaryImports?: unknown } }} */ (record).economicState?.primaryImports;
+  if (!Array.isArray(imports) || imports.length === 0) return false;
   const story = /** @type {Parameters<typeof usedGroundOf>[0]} */ (record);
   const ground = usedGroundOf(story, 'fish');
   return !!ground && importsHold(story, String(resourceShortageImport(ground) || ''));

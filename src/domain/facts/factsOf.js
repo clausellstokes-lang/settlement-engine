@@ -162,6 +162,8 @@ export function factsOf(record, options = {}) {
     get enchanting() { return enchantingOfferedOf(record); },
     /** BAR4-SCENES-2 (HW1): a trade the scene shows is at work, some house of it not short (`tradeAtWork.js`) */
     get tradeAtWork() { return (/** @type {string} */ key) => tradeAtWorkOf(record, key); },
+    /** FAULTS-ROWS (FR12 (3)): the town's fish is bought in, the swap's own fact (`fishBoughtIn.js`) */
+    get fishBoughtIn() { return fishBoughtIn(record); },
     /** BAR6-SCENES (6b): a good a scene sends out is on the export list (`goodExported.js`) */
     get goodExported() { return (/** @type {string} */ key) => goodExportedOf(record, key); },
     /** fact 12: small / middling / large */
@@ -280,3 +282,4 @@ import { crimeWaveStands, lawBandOf } from './lawBand.js'; // BAR5-SAFETY (L2.la
 import { criticalImportBroughtInOf } from './criticalImportBroughtIn.js'; // BAR8-DESKS-ECO (11c): at the END, no line above moves
 import { uprisingOf } from './uprising.js'; // BAR8-DESKS-DEF (12e): at the END, no line above moves
 import { needNotBroughtInOf } from './needNotBroughtIn.js'; // FAULTS-NEED (FR2): at the END, no line above moves
+import { fishBoughtIn } from './fishBoughtIn.js'; // FAULTS-ROWS (FR12 (3)): at the END, no line above moves

@@ -201,6 +201,9 @@ export const LEAVES = Object.freeze({
   // critical list and gap rows, stored at layer 3, the economy's lists and chains, the live roster and its service rows, the
   // tier the luxury class's band reads, and the config the failed venture's pick reads)
   needNotBroughtIn: home('needNotBroughtIn', 4, ['resourceAnalysis', 'economicState', 'institutions', 'availableServices', 'config', 'tier']),
+  // FAULTS-ROWS (FR12 (3)): the town's fish is bought in (`fishBoughtIn.js`: the grounds read from the config's resource record
+  // and the roster, the imports the narratives step writes at layer 3; the swap of the service rows reads the same function)
+  fishBoughtIn: home('fishBoughtIn', 4, ['config', 'economicState', 'institutions', 'resourceAnalysis']),
   crimeSignal: leaf({ layer: 3, module: 'domain/crimeSignal.js', exported: 'crimeSignalOf', call: 'crimeLists', reads: ['powerStructure', 'institutions'] }),
   faith: home('faith', 3, ['institutions', 'config', 'economicState', 'powerStructure', 'npcs', 'stress'], {
     note: 'its value reads the config, the roster, the income and the factions (layer 3); it touches the cast (layer 3), banked; '

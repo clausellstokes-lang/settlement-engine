@@ -237,6 +237,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [rivalRings] BAR7-DESKS: `rivalRings.js :: rivalRingsStand`
  * @property {boolean} [criticalImportBroughtIn] BAR8-DESKS-ECO: `criticalImportBroughtIn.js :: criticalImportBroughtInOf`
  * @property {Readonly<Record<string, boolean>>} [needNotBroughtIn] FAULTS-NEED: `needNotBroughtIn.js :: needNotBroughtInOf`
+ * @property {boolean} [fishBoughtIn] FAULTS-ROWS (FR12 (3)): `fishBoughtIn.js :: fishBoughtIn`
  * @property {{ kept?: boolean, paid?: boolean, volunteers?: boolean }} [orderForce] BAR6-CRIME: `orderForce.js :: orderForceOf`
  * @property {string} [prosperity]
  */
@@ -390,6 +391,12 @@ export const FACT_DIMENSIONS = Object.freeze({
   // false where none stands. "Nothing new goes up" presumes its absence.
   'trade at work': dim({ shape: 'presence', home: 'tradeAtWork', keys: ['fish', 'kilns', 'clay kilns', 'charcoal kilns', 'stone', 'arcane', 'dairy', 'cloth', 'ironwork', 'herbs', 'spice', 'cut stone', 'woodwork', 'leather', 'dyed cloth', 'ironwork in full', 'fish taken here', 'building'],
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (typeof f.tradeAtWork === 'function' && key ? f.tradeAtWork(key) : undefined) }),
+  // FAULTS-ROWS (the sixth chair's rulings FR4 and FR12 (3), 2026-11-18; vetoable by the owner, on the veto list as new
+  // vocabulary), beneath `trade at work`'s fish key: `fish bought in` = the town's fish ground is used up AND the imports hold
+  // its shortage word ("Salted fish (local … exhausted)"): the condition of BAR8-FISH-ROWS's swap, read by the swap itself
+  // (`fishBoughtIn.js`, the one reader). "Where the day's catch is sold" presumes its absence; an idle town (nothing brought
+  // in) and a live fishery answer false.
+  'fish bought in': dim({ shape: 'presence', home: 'fishBoughtIn', reader: (/** @type {FactsLike} */ f) => bool(f.fishBoughtIn) }),
   // BAR4-CORPUS-DEF (BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new vocabulary), beside the crisis
   // states the record holds as presences (famine, starving): a danger from outside is on its way, a live external-threat
   // tension of the history (`dangerComing.js`), which the crisis record's threat family does not see. "Nothing threatens it"

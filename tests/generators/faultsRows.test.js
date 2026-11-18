@@ -178,3 +178,89 @@ describe('FAULTS-ROWS item 5: the luxury quarter trades in no spice or silk the 
     }
   });
 });
+
+// FR12 (3), 2026-11-18: THE FISH MARKET'S CARD FOLLOWS ITS ROW, on ONE NEW ATOM, `fish bought in` (`facts/fishBoughtIn.js`): the
+// fish ground used up and its shortage word on the imports, the one condition BAR8-FISH-ROWS's swap reads
+// (`generateNarratives.js :: boughtFishRowsInPlace`). The card "Where the day's catch is sold, …" takes its twin there.
+const CATCH_CARD = "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.";
+const CATCH_TWIN = 'Where salted and dried fish is sold, from an open stall or a small covered market. No fresh catch comes in here.';
+/** The card drawn and the fish bought in (the market's row "Preserved fish"): the twin. */
+const FISH_BOUGHT_CARD = Object.freeze(['bar0-village-calm-rand-47']);
+/** The card drawn beside a live fishery ("Fresh fish retail"): the line stands. */
+const FISH_LIVE_CARD = Object.freeze(['r2r-village-2']);
+/** IDLE (the ground spent, nothing brought in; `bar8FishRows.test.js`'s own): no fish bought in, the row and its mark kept. */
+const FISH_IDLE = Object.freeze(['r2r-village-45', 'r2r-metropolis-45', 'r2s-recently_betrayed-metropolis-0']);
+/** Every fish-market shape of the thirty (45..47) and the 150 (27..41): the atom held to the row on each. */
+const FISH_SHAPES = Object.freeze(['village-famine', 'village-calm', 'town-calm', 'town-occupied', 'city-under_siege+famine', 'city-wartime', 'metropolis-calm']);
+const FISH_POP = Object.freeze(FISH_SHAPES.flatMap((sh) => [...Array.from({ length: 15 }, (_, k) => 27 + k), 45, 46, 47].map((n) => `bar0-${sh}-rand-${n}`)));
+
+describe('FAULTS-ROWS item 6: the fish market\'s card says the fish is bought in where its row does (FR4, FR12 (3))', () => {
+  /** @type {Map<string, any>} */
+  const FISH = new Map();
+  /** @type {(t: any) => boolean} */ let boughtOf = () => false;
+  /** @type {(t: any) => any} */ let factsOfFn = () => ({});
+  beforeAll(async () => {
+    const boundary = await import('../../src/domain/density/densityCreateBoundary.js');
+    const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+    const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
+    boughtOf = (await import('../../src/domain/facts/fishBoughtIn.js')).fishBoughtIn;
+    factsOfFn = (await import('../../src/domain/facts/factsOf.js')).factsOf;
+    await boundary.loadGenerationLawPayloads();
+    for (const seed of [...FISH_BOUGHT_CARD, ...FISH_LIVE_CARD, ...FISH_IDLE, ...FISH_POP]) {
+      if (!FISH.has(seed)) FISH.set(seed, generateSettlementPipeline(boundary.birthConfig({ ...DEFAULT_CONFIG, ...configOf(seed) }), null, { seed, customContent: {} }));
+    }
+  }, 600_000);
+
+  /** @param {any} town */
+  const marketRows = (town) => Object.values(town?.availableServices || {}).flat()
+    .filter((/** @type {any} */ r) => r && r.institution === 'Fish market' && r.custom !== true && r.source !== 'custom').map((/** @type {any} */ r) => String(r.name));
+  /** @param {any} town */
+  const marketDescs = (town) => (town?.institutions || []).filter((/** @type {any} */ i) => i?.name === 'Fish market').map((/** @type {any} */ i) => String(i.desc));
+
+  it('ONE FACT: on every fish-market town of the thirty and the 150 the atom reads the leaf, and the bought town\'s row is "Preserved fish"', () => {
+    const towns = FISH_POP.filter((seed) => marketDescs(FISH.get(seed)).length > 0);
+    expect(towns.length, 'the fish-market towns of the shapes (73 at the base)').toBeGreaterThan(60);
+    const failures = collectSeedFailures(towns, (seed) => {
+      const town = FISH.get(seed);
+      const bought = boughtOf(town);
+      expect(factsOfFn(town).fishBoughtIn, `${seed}: the atom is the leaf`).toBe(bought);
+      if (bought) expectAbsentWithAnchor(marketRows(town), 'Fresh fish retail', 'Preserved fish', seed);
+      if (bought) expect(marketDescs(town).includes(CATCH_CARD), `${seed}: no day's catch beside a bought fish`).toBe(false);
+    });
+    expectNoSeedFailures(failures, 'the atom is the swap\'s own fact on every fish-market town');
+    expect(towns.filter((seed) => boughtOf(FISH.get(seed))).length, 'some town of the shapes buys its fish').toBeGreaterThan(0);
+  });
+
+  it('BOUGHT: the card takes its twin beside the market\'s "Preserved fish"', () => {
+    const failures = collectSeedFailures(FISH_BOUGHT_CARD, (seed) => {
+      const town = FISH.get(seed);
+      expect(boughtOf(town), `${seed}: the fish bought in`).toBe(true);
+      expect(marketRows(town), `${seed}: the row`).toContain('Preserved fish');
+      expectAbsentWithAnchor(marketDescs(town), CATCH_CARD, CATCH_TWIN, seed);
+      expect(marketDescs(toPublicSafe(town)), `${seed}: the shared page`).toEqual(marketDescs(town));
+    });
+    expectNoSeedFailures(failures, 'every bought town\'s card says no catch comes in');
+  });
+
+  it('LIVE and IDLE: a live fishery keeps the card; an idle town buys no fish and prints no twin', () => {
+    const failures = collectSeedFailures([...FISH_LIVE_CARD, ...FISH_IDLE], (seed) => {
+      const town = FISH.get(seed);
+      expect(boughtOf(town), `${seed}: no fish bought in`).toBe(false);
+      if (FISH_LIVE_CARD.includes(seed)) {
+        expect(marketRows(town), `${seed}: the live row`).toContain('Fresh fish retail');
+        expect(marketDescs(town), `${seed}: the card kept`).toEqual([CATCH_CARD]);
+      } else {
+        expectAbsentWithAnchor(marketDescs(town), CATCH_TWIN, marketDescs(town)[0], seed);
+      }
+    });
+    expectNoSeedFailures(failures, 'the live and the idle keep their cards');
+  });
+
+  it('THE TABLE: the card is a late key on `fish bought in`; its twin names no catch of the day', () => {
+    const set = /** @type {any} */ (DESC_LATE_SIBLINGS)[CATCH_CARD];
+    expect(set.map((/** @type {any} */ l) => l.text)).toEqual([CATCH_CARD, CATCH_TWIN]);
+    expect([...set[0].excludes]).toEqual(['fish bought in']);
+    expect([...set[1].needs]).toEqual(['fish bought in']);
+    expectAbsentWithAnchor(CATCH_TWIN, "day's catch", 'salted and dried fish', CATCH_CARD);
+  });
+});
