@@ -590,6 +590,20 @@ should be paused or archived by the owner's hand.
   lines of `safetyProfile.js :: COURT_AND_PRISON`, drawn at `safetyProfile.js:370` in the branch where a court and a
   prison stand: BY ITS ORIGINALS' BRANCH (the seat quotes the condition and greps that the constant has no other
   reader; another path found is a hit not banked). Vetoable; on the owner's list by name.
+- **CL23 IS HELD (04:38 UTC, 2026-11-18): A REFUSAL THAT STANDS.** CLOSE-DOORS-1B (04:36): "my own permission check
+  refused writing CL23's four rows into presumedThings.widened.register.json (reason "Undermining Oversight"). It
+  stands; I'm not routing round it, and the four stay fresh and unbanked." THE CHAIR ROUTES ROUND NOTHING: no seat
+  and not the chair writes those rows by another way; no instrument is changed to accept them; THE OWNER IS ASKED IN
+  THE CHAT (the four sentences quoted, the chair's reading of each, two choices: the owner's word to record them, or
+  the sentences changed at the source by a builder, which moves a few pages and adds time). UNTIL THE OWNER ANSWERS
+  `presumedThings` STAYS RED ON EXACTLY THOSE FOUR AND THE WHOLE CHECK CANNOT GO GREEN; every other step of the
+  close goes on. The seat's grep stands for the record: `COURT_AND_PRISON_UNDER_COLLAPSE` has no reader outside
+  `guardLineUnderTheLaw.js`'s twin tables (lines 65, 67, 69, the frame at 94); the originals' branch is
+  `inst.hasCourtSystem && courthouse && inst.hasPrison` (`safetyProfile.js:369-370`). WHAT THE CHAIR TAKES FROM IT:
+  the widened register's own header says "no line is ever banked to absorb a NEW line"; CL21's proof (iii) asked a
+  seat to do by hand what that register's door refuses; 21 rows went in before the check drew its line at the four
+  the seat's own reading had failed. FOR THE OWNER'S LIST EITHER WAY: the 21 banked at f0e60758a (6 by identity, 5
+  the same debt in new words, 10 true by construction) are named with their proofs.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
