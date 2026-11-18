@@ -2146,3 +2146,15 @@ should be paused or archived by the owner's hand.
   the site-coherence inventory (a stored figure of the close: it keeps the gate green; no cure follows). STRUCK: the
   plan's item (4); the pull request's draft no longer lists it among the faults on pages. THE PRE-DEPLOY PLAN IS NOW:
   the close; the five built pieces; the unbuilt faults; the checking tools' repairs; the last close.
+- 05:19 UTC, 2026-11-18 · THE SECOND READERS OF THE BUILT PIECES: FOUR PROMPTS WRITTEN (`docs/chair/2026-11-18/readers/` on this
+  lane: READ-K-WATCH-2, READ-DESKS-2, READ-MARKS-2, READ-INCOME-PDF; each is BRIEF-READ-LEFT.md with its values, the
+  chair's own questions, and "AT THE MERGE" on the close's merge branch `lane/landing-close-2026-11-18`: a scratch
+  merge, the laws by name and message at the close's tip and at the merge, the older tests the cure makes untrue).
+  THE BASES, read from origin: K-WATCH-2 2abb7fb03 on 215f97d29 (`lane/landing-k-watch-powers-2026-11-18`: K-WATCH and
+  K-POWERS on 99ca9ad51), ten commits; DESKS-2 d25ded69c on 4446aecb5 (`lane/landing-desks-2026-11-18`), fourteen;
+  MARKS-2 1a2c7f2b4 on dfe557dc9 (the line at point 42), fourteen; J-INCOME-2 262ba9ec6 on 99ca9ad51, eleven; PDF-2b
+  cd94d5a08 on 917c915bc, eight; PEOPLE-2 92fb6c9de on 20b44f97c (`lane/landing-k-people-2026-11-18`), its part B
+  being built: ITS READER IS SEATED AT ITS HAND-BACK. THE LANDING ORDER ON THE CLOSED LINE: J-INCOME-2 then PDF-2b
+  (J-INCOME-2's leaf where both changed it); MARKS-2; K-WATCH, K-POWERS and K-WATCH-2 together; K-PEOPLE and PEOPLE-2;
+  DESKS-ECO, DESKS-DEF and DESKS-2 (its A8 commit left out: the close's file stands). The readers are seated with a
+  short prompt that sends each to its file on this lane (pushed first).
