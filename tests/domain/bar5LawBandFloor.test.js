@@ -78,23 +78,27 @@ const CONTROLS = /** @type {Array<[string, string, string]>} */ ([
 beforeAll(async () => { await loadGenerationLawPayloads(); }, 120_000);
 
 describe('BAR5-BAND LB1: a quiet place without an office of the law prints its law at least strained', () => {
-  test.each(REAL_ROWS)('%s: the model reads %s; the Foundations print Strained; the detector fired at the base', (seed, model) => {
-    const s = town(seed);
-    const b = bandsOf(s);
-    expect(b.model, `${seed}: the model's band (the score does not move)`).toBe(model);
-    expect(quietPlaceKeepsLaw(s), `${seed}: the floor stands`).toBe(true);
-    expect(lawBandOf(s), `${seed}: the one home reads the floor`).toBe('strained');
-    expect(b.shown, `${seed}: the row prints the floor`).toBe('strained');
-    expect(quietHits(seed, b.model).map((x) => x.line), `${seed}: POSITIVE CONTROL: the page at the base is the rule's instance`).toEqual([`Law & order · ${cap(model)}`]);
-    expect(quietHits(seed, b.shown).map((x) => x.line), `${seed}: the page at the tip prints "Law & order · Strained" and is no instance`).toEqual([]);
+  test('the wide read four rows: the model reads its band; the Foundations print Strained; the detector fired at the base', () => {
+    expectNoSeedFailures(collectSeedFailures(REAL_ROWS, ([seed, model]) => {
+      const s = town(seed);
+      const b = bandsOf(s);
+      expect(b.model, `${seed}: the model's band (the score does not move)`).toBe(model);
+      expect(quietPlaceKeepsLaw(s), `${seed}: the floor stands`).toBe(true);
+      expect(lawBandOf(s), `${seed}: the one home reads the floor`).toBe('strained');
+      expect(b.shown, `${seed}: the row prints the floor`).toBe('strained');
+      expect(quietHits(seed, b.model).map((x) => x.line), `${seed}: POSITIVE CONTROL: the page at the base is the rule's instance`).toEqual([`Law & order · ${cap(model)}`]);
+      expect(quietHits(seed, b.shown).map((x) => x.line), `${seed}: the page at the tip prints "Law & order · Strained" and is no instance`).toEqual([]);
+    }), 'every row the strict second check let stand');
   });
 
-  test.each(CONTROLS)('%s keeps its band (%s): %s', (seed, model) => {
-    const s = town(seed);
-    const b = bandsOf(s);
-    expect(b.model, `${seed}: the model's band`).toBe(model);
-    expect(quietPlaceKeepsLaw(s), `${seed}: no floor`).toBe(false);
-    expect(b.shown, `${seed}: the row prints the model's band`).toBe(model);
+  test('the controls keep their band', () => {
+    expectNoSeedFailures(collectSeedFailures(CONTROLS, ([seed, model]) => {
+      const s = town(seed);
+      const b = bandsOf(s);
+      expect(b.model, `${seed}: the model's band`).toBe(model);
+      expect(quietPlaceKeepsLaw(s), `${seed}: no floor`).toBe(false);
+      expect(b.shown, `${seed}: the row prints the model's band`).toBe(model);
+    }), 'every control keeps its band');
   });
 
   test('the zero over the census\'s 720: no quiet page prints the law failed', () => {

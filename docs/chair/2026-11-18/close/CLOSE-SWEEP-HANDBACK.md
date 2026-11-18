@@ -1,0 +1,141 @@
+# CLOSE-SWEEP · the repair seat's hand-back (the close of 2026-11-18)
+
+Seat CLOSE-SWEEP, the repair seat of the close (session `session_01FbPLbfAnjrmBeKNYMtTLWq`; parent: the chair,
+`session_01FbPLbcLDSJzZFzb5B7EjxR`). Base: the working line `lane/join-2026-11-14` at **70e557d5b** (the tip read back
+equal to the one the prompt named). Branch `lane/close-sweep-2026-11-18`, cut from 70e557d5b; nothing merged. Read
+under BRIEF-CLOSE (C1 to C10) and the chair's rulings CL11 (landed points over `600b7683a..HEAD`; S3 compared with
+6483322cc), CL13 (S5), CL15 (S3 ruled) and S4 item 1.
+
+| item | commit | test · arm | class (C1) | at 70e557d5b → at the tip |
+| --- | --- | --- | --- | --- |
+| S1 | 6e15a77ea | `tests/lint/domainAnyCastBaseline.test.js`, 4 arms | (c) a law: new debt | 4 failed / 15 passed → **19 passed** |
+| S2 | c266e0dc4 | `tests/lint/factLayers.walker.test.js`, arms (a), LEAVES, POOLS | (c) a law: the table wrong; POOLS (a) a shrink | 3 failed / 12 → 2 failed / 13: **LEAVES green**; (a) LEFT (two instrument gaps, below); POOLS = the door's shrink, CLOSE-DOORS-1B's |
+| S3 | none (CL15) | `tests/lint/siteCoherenceRatchet.test.js` C1 | (a) a declared move, re-taken by its door: CLOSE-DOORS-1B's | analysis only, unchanged |
+| S4.1 | ae0af7ca9 | `tests/domain/worldFactRederive.test.js` A4 | (b) a stale roster | A4 red → **A4 green** (A7 red at both, same message: CLOSE-DOORS-2's) |
+| S5 | a970ef865 | `vercel.json` (CL13) | not a red: the chair's item | every reader the same at both ends |
+
+No stored figure (register, baseline, census, ledger, golden, ceiling, bundle) was written by this seat. No `DECLARED_OVERRUN`
+row, no register row, no ceiling, no test of another seat touched.
+
+## S1 · the 21 new any-holes (6e15a77ea)
+
+**Cause, by landed point** (the four files over an allowance of 0; the counter's own `countText` on each first-parent point of
+600b7683a..70e557d5b): `economicsCrisisMarks.js` 0 → 1 at JOIN-17 point 7 (e4b2955f0, BAR6-ECON: the `chainPrintName` cast), 1 → 2
+at point 23 (40a6b0a22, BAR7-ECON: `ordinaryOf`'s `town: any`); `factsOf.js` 0 → 1 at point 10 (cd40ad0e0, BAR6-CULTURE: the
+`courtSits` getter); `seatMembers.js` 0 → 9 at point 11 (570e3c351, BAR6-POWERS: a new file); `sovereign.js` 0 → 9 at point 2
+(e7b6897fd, BAR6-HOUSES, ruling SV1: a new file).
+
+**The hunk: a real type at each hole, comments only.**
+- `seatMembers.js`: four local typedefs of the record slices it reads (`SeatPowers`, `SeatPower`, `SeatPerson`, `SeatMembership`),
+  kept local (the file stays import-free, EG1).
+- `sovereign.js`: local typedefs `SovereignRecord`, `StressEntry`, `RosterHouse`, `SovereignPower`, `SovereignPerson`; the private
+  `stressorsOf` returns `StressEntry[]` (an object of the container is read for its `type`), so the `.some` callback can be typed.
+- `factsOf.js`: `courtHoldersOf`'s own parameter type, `import('./defence.js').CourtRecord` (a type import; `defence.js` is already a
+  runtime import).
+- `economicsCrisisMarks.js`: `Parameters<typeof chainPrintName>[0]` for the chain; `ordinaryOf`'s `town` typed as the generator's own
+  signature (`incomeLineSiblings.js :: ordinaryIncomeLineOf`: `{ institutions?: unknown } | null | undefined`).
+
+**Proof it is comment-only.** Each file parsed with espree (`ecmaVersion: 'latest'`, module, jsx, `comment: true, range: true`), every
+comment's byte range removed, the rest written out (`/tmp/claude-0/probe/strip.mjs`): byte-equal (`cmp`) between the blob at
+70e557d5b and the committed blob, all four. (Each new typedef block takes the place of a blank line, so no code-side newline moves.)
+`typecheck:ratchet` 167 (ceiling 167) at both ends; `typecheck:domain:strict` 1113 (ceiling 1113) at both; raw `tsc --noEmit` on both
+configs, the 70e557d5b archive (11,167 files = `git ls-tree`) against the tree, diagnostics normalised for line/column: **0 introduced,
+0 removed** on `tsconfig.full.json` (167) and `tsconfig.domain-strict.json` (1904 raw). No ratchet fell, so nothing for CLOSE-DOORS-1B's
+`:update`. `npx eslint` on the four: 0. The baseline file, the ledger and the ceiling are untouched; all four arms green against them.
+
+## S2 · facts that read a part of the record their layer does not declare (c266e0dc4)
+
+**Who reads the table:** `grep -rn factLayers src/ scripts/ tests/`: under `src/` only a comment (`criminalStructureKey.js:68`) and
+the table itself. Nothing reads a leaf's layer at run time (it is imported by tests and by `scripts/fact-layers-door.mjs` only).
+
+**ARM (a) MASKED FOUR MORE.** Its loop asserts leaf by leaf and stops at the first failure. Measured whole (every leaf's verdict, the
+walker's own `leafArm` on its own grid, `/tmp/claude-0/probe/fl/leaves.probe.test.js`), 70e557d5b holds SEVEN red leaves:
+
+| leaf | at 70e557d5b | landed point that made it (first-parent bisect over every point, 6c117344f..70e557d5b; CL11's range 600b7683a..HEAD) | cure here |
+| --- | --- | --- | --- |
+| `legalHouse` | reads `availableServices`, declares `institutions`, layer 1 | BAR5-THINGS c74829e25 (the notary's services, `legalHouse.js:48`), JOIN-16 point 9 (db62ab299) | declared; placed at **2** (the form of `courtSits`) |
+| `timberAtHand` | reads `resourceAnalysis` (layer 3), at layer 2 | BIRTH-3, the sixth chair's point 33 (e0242a12a: `supplyStory.js` / `houseKinds.js` under `houseInputAtHand.js`) | declared; placed at **4** (as `tradeAtWork`) |
+| `timberReachesSawmill` | the same | the same | the same |
+| `tradeAtWork` | reads `economicViability` (layer 3), undeclared, at layer 4 | JOIN-17 point 5 (a010f4f9c, BAR6-MARKS) | declared; stays at 4 |
+| `importsAsPrinted` | reads `economicViability`, undeclared, at layer 4 | JOIN-17 point 23 (40a6b0a22, BAR7-ECON) | declared; stays at 4 |
+| `goodExported` | declares `economicState`, the walker sees no read | JOIN-17 point 9 (d8997b193, BAR6-SCENES) | **LEFT** |
+| `seatHeld` | declares `npcs`, `powerStructure`, the walker sees no read | JOIN-17 point 8 (57a3bda67, BAR6-PEOPLE) | **LEFT** |
+
+**LEFT, by name, for the chair:** `goodExported` and `seatHeld` are `factsCall` getters (they take an argument), and the walker's
+instrument `tests/lint/factLayers.shared.mjs :: leafTouches` has a call branch for `hasInstitution`, `hasOtherNpc`, `sharesPower`,
+`sharesPlace`/`loneTie` and `tradeAtWork` only: it never calls these two, so their honest declarations read as "unread". The cure is in
+the walker's instrument (a branch calling each, as `tradeAtWork`'s), not in the table; striking the declarations would make the table
+lie. Not this seat's file: named. Arm (a) stays red on `goodExported` (first in order).
+
+**The pools arm after the move:** `r.violations` differs from `REGISTER.pools` by the one shrink row only
+(`DS-ECO-6::TIER: minor shadow activity (≥3)`, "declares organised crime (layer 3)"): **no pool or line that declares `legal house`,
+`timber at hand` or `timber reaches the saws` reads at or above its own layer**; no ordering fault. The shrink is CLOSE-DOORS-1B's door
+(`node scripts/fact-layers-door.mjs --shrink`), not taken. "POOLS by their KEY" and every other arm green at the tip.
+eslint 0; both type gates at their ceilings; the any-count of the table 0.
+
+## S3 · the site-coherence row that grew (analysis only; ruled by the chair, CL15)
+
+THE FINDING, as sent to the chair (word for word):
+
+> CLOSE-SWEEP S3 (site coherence, `desert|mountain-flank|coal` 7 → 9; `desert|dunes|(biome)` 30 → 28): analysis only, nothing changed. THE TWO: Arm A `desert/thorp/road/latin@scw0-a5` and `desert/hamlet/road/arabic@scw0-a5` (the ratchet's own derivation, per row). Resources are the same at 6c117344f and 70e557d5b. Their exports at 6c117344f were [Raw sand, Water rights, Oasis provisions, Sacred wood, Ritual components] → dunes (biome). Now: Raw sand gone, Coal in → mountain-flank|coal. BISECTED over first-parent: point 5 a010f4f9c reads dunes; point 6 0ecd003d6 (BAR6-RECORD at 04ef95b44) reads flank. THE CAUSE: BAR6-RECORD (b) e9b36b024, its declared move "primaryExports 75: Raw sand 48" of the 525: `GOOD_WORKING_HOUSES['Raw sand'] = ['glass']`, so raw sand leaves only where a glasshouse stands. Neither town has one, so ungated Coal fills the fifth slot. The flank itself is `siteGenesis.js:252`'s old arm order (cbbf04c55, 2026-07-17): a coal/ore/stone export → mountain-flank, tested before the dry-biome dunes arm. The same arm gives the seven rows already there. VERDICT: not a fault of the birth's ground reading, and no seat cured it on purpose. A declared export cure exposed a pre-existing flank-on-flat reading on two more towns. Curing the arm moves pages (C5); the row only shrinks (C4). Yours to rule. I wait on S3 and go on with S2.
+
+**The two towns' exports** (`canonExports`, the ratchet's own bag), at 6483322cc (the last close's tip, CL11) and at 70e557d5b:
+
+| row | at 6483322cc (= at 6c117344f) | at 70e557d5b |
+| --- | --- | --- |
+| `desert/thorp/road/latin@scw0-a5` | Raw sand, Water rights, Oasis provisions, Sacred wood, Ritual components (each "taxed by occupation") → `desert\|dunes\|(biome)` | Water rights, Oasis provisions, Sacred wood, Ritual components, **Coal** → `desert\|mountain-flank\|coal` |
+| `desert/hamlet/road/arabic@scw0-a5` | the same → `desert\|dunes\|(biome)` | the same → `desert\|mountain-flank\|coal` |
+
+Their `config.nearbyResources` are the same at both ends (glass_sand, oasis_water, grain_fields, ancient_grove, coal_deposits).
+**flank-on-flat: 39 at 6483322cc** (= the stored `totals.flankOnFlat` 39) **→ 41 at 70e557d5b**; `desert|mountain-flank|coal` 7 → 9,
+`desert|dunes|(biome)` 30 → 28, every other row the same (462 of 462 rows compared, 6c117344f against 70e557d5b: exactly these two moved).
+The chair's ruling (CL15): no cure at the close (re-ordering `siteGenesis.js:252` re-sites every dry town that exports coal, ore or stone:
+C5); a wave of the site-coherence plan, after the deploy, on the pull request's list of known faults by name; the inventory re-recorded
+through its own door by CLOSE-DOORS-1B.
+
+## S4 item 1 · A4's culture-reader roster (ae0af7ca9)
+
+A4 alone at 70e557d5b: red, "the culture reader set under src/generators is EXACT in BOTH directions … expected [ …(27) ] to deeply
+equal [ …(26) ]", the one unlisted reader `src/generators/economy/foodBaseNumbers.js`. **The cause confirmed:** DEBT-1 part C,
+4f57f0c46 (`foodBalance.js` 21 lines out, `foodBaseNumbers.js` 24 in, `servicesGenerator.js` 4; landed at JOIN-17 point 31,
+c935f2e23): the 18 lines after the FOOD-2 section heading are **byte-equal** where they stood (the removed side of the diff) and where
+they stand (`foodBaseNumbers.js` from line 7; unchanged since). A4's reader is a substring test, `includes('culture')`: the new file
+matches through "agricultureCapacity" in `grownShareOf`'s doc, and reads no culture (the `foodLand.js` precedent, "reported, not
+filtered"). The file it LEFT, `foodBalance.js`, still holds "agriculture" in its own code, so its row stays. **The re-derive's reach:**
+nothing under `src/` or `scripts/` reads the roster; `rederive` (`dmLayer.js:911`) re-runs the whole pipeline (the test's
+`ENGINE.run = generateSettlementPipeline`), not a set of files, and `foodGenerator.js:178,237-238` and `foodBalance.js:253-254` call both
+moved readers through `foodBalance.js`'s re-export: the hunk is inside the re-derive's reach. **The hunk:** one roster row with its dated
+reason. A4 alone at the tip: green. The whole file: base 2 failed / 5 passed (A4, A7), tip 1 failed / 6 passed (A7, the same message:
+"the stride is non-empty, or the absence above is vacuous: expected 5 to be +0"): A7 is CLOSE-DOORS-2's.
+
+## S5 · lane pushes create no deployment (a970ef865)
+
+`vercel.json`: one new top-level key, `"git": { "deploymentEnabled": { "lane/*": false, "lane/**": false } }`; nothing else in the file
+moved; `master` not named, no bare `false`, no `*` key. `docs/DEPLOY.md`, the post-push checklist's Vercel item: one dated sentence (pushes
+to `lane/*` create no deployment; the daily allowance). **The file list of the commit: `vercel.json`, `docs/DEPLOY.md`: no file under
+`src/`, so no town and no page can move.** Every reader of `vercel.json` (`grep -rl vercel.json tests scripts`), each alone, base and
+tip, the same by name and count: `buildHeapPinned` 2/2, `ciGateHardening` 32/32, `metaShell` 20 passed + 1 skipped of 21 at both,
+`deployRunbookFreshness` 15/15, `testRatchet` 86/86, `cspForkIsolation` 12/12, `cspHeaderShape` 17/17, `mapForkXssChain` 65/65. No test
+pins the file's keys. `npm run validate:edge` green at both; no other `validate:*` script names the file (`scripts/vercel-ignore-build.mjs`
+names it in a comment only).
+
+## THE PROOF THAT NO TOWN AND NO PAGE MOVES
+
+NET_PROOF_PLACEHOLDER
+
+## THE NET (C7)
+
+NET_PLACEHOLDER
+
+## STORED FIGURES MY CURES MOVE (named for the seats that hold them; none taken here)
+
+FIGURES_PLACEHOLDER
+
+## WHAT I LEFT, BY NAME
+
+- `tests/lint/factLayers.walker.test.js` arm (a): `goodExported`, `seatHeld` (`tests/lint/factLayers.shared.mjs :: leafTouches`, the
+  `factsCall` branches, about line 103): the walker never calls them. For the chair (the walker's instrument is not this seat's file).
+- `tests/lint/factLayers.walker.test.js` POOLS: the DS-ECO-6 shrink row, CLOSE-DOORS-1B's door.
+- `tests/lint/siteCoherenceRatchet.test.js` C1: CLOSE-DOORS-1B's door (CL15); `siteGenesis.js:252`'s arm order on the pull request's list
+  of known faults.
+- `tests/domain/worldFactRederive.test.js` A7: CLOSE-DOORS-2's.

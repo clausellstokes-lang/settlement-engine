@@ -80,6 +80,11 @@ const NOT = /** @type {const} */ ([
   // at 837cad90 (TAIL-DEFECON-2 5f67f382d, TAIL-DEFECON-3 2ac50c55d) and back to 4 and 13 on JOIN-9's points (measured by the
   // record at the merged tree; the point not traced here); the same card, the famine still silences it
   ['r2s-famine-town-1', 'economics', 'Contributes to Grain Sales - 4% of income', 'silent: the famine failed the grain', 'Contributes to Entrepôt Trade - 13% of income'],
+  // PINNED 2026-11-18 (LEFT-KEYS K3, the chair's rulings BR11 and BR12): the TRUE claim on the anchor of the retired KEEP row
+  // below. Under a siege the town's own ground is curtailed too, and so are the houses that work its material (BR11): the
+  // besieged forge's card claims no share now, and its share prints the siege's mark (the share is still 2% on the record).
+  // No besieged town of the 720 (31) or the 150 (30) prints "Contributes to Iron & Metalwork".
+  ['r2s-under_siege-metropolis-3', 'economics', 'Contributes to Iron & Metalwork - 2% of income', 'silent: the siege curtails the card', 'Iron & Metalwork Curtailed by the siege. Short of iron ore.'],
 ]);
 /** [seed, tab, the twin true in the state that made the old line false] (new or newly reached lines: red at the base by design) */
 const TWIN = /** @type {const} */ ([
@@ -103,7 +108,11 @@ const KEEP = /** @type {const} */ ([
   // that chain's state; r2s-under_siege-town-1's Iron & Metalwork card prints Impaired by the siege, so its share takes the
   // siege's partial mark and the card's line is silent. The same claim in the one besieged town of the twelve whose Iron &
   // Metalwork card the siege leaves at work:
-  ['r2s-under_siege-metropolis-3', 'economics', 'Contributes to Iron & Metalwork - 2% of income'],
+  // RETIRED 2026-11-18 (LEFT-KEYS K3, the chair's rulings BR11 and BR12): ['r2s-under_siege-metropolis-3', 'economics',
+  // 'Contributes to Iron & Metalwork - 2% of income'] claimed a besieged forge at work, which no besieged town can bear under
+  // BR11. Its true claim is pinned on the same anchor among the NOT rows above; the same line keeps its KEEP row in a state
+  // that cuts no supply and stops no forge: r2r-city-6, no crisis, its iron its own (none bought in).
+  ['r2r-city-6', 'economics', 'Contributes to Iron & Metalwork - 5% of income'],
 ]);
 
 afterEach(cleanup);

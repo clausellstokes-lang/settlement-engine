@@ -339,9 +339,11 @@ export function law11(T, town) {
       if (!m) return;
       const house = m[2];
       const cap = house.charAt(0).toUpperCase() + house.slice(1);
-      const own = ls.slice(i + 1, i + 3).find((l) => l.startsWith(`${cap} is worked out:`) || l.startsWith(`${cap} is failing:`) || l.startsWith(`${cap} stands abandoned`));
+      // LEFT-KEYS K9 (2026-11-18; BAR8-J-ROWS's hand-back): a plural house tells its story in the plural ("The tanners are
+      // failing: …", r2r-town-13 of the 720), so the verb is read in both numbers
+      const own = ls.slice(i + 1, i + 3).find((l) => l.startsWith(`${cap} is worked out:`) || l.startsWith(`${cap} are worked out:`) || l.startsWith(`${cap} is failing:`) || l.startsWith(`${cap} are failing:`) || l.startsWith(`${cap} stands abandoned`) || l.startsWith(`${cap} stand abandoned`));
       if (!own) return;
-      const story = /is worked out/.test(own) ? 'workedOut' : 'venture';
+      const story = /(?:is|are) worked out/.test(own) ? 'workedOut' : 'venture';
       push({ rule: '11g.gapLine', tab: 'Systems/Resources', line, fam: m[1], house: house.replace(/^the /, ''), story, cause: story, kind: house.replace(/^the /, ''),
         rowLines: [line, own], against: { tab: 'Systems/Resources', line: own }, why: `"${line}" beside "${own}": one house, one material, two lines` });
     });

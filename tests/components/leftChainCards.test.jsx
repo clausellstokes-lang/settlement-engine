@@ -57,6 +57,7 @@ import { liveInstitutions } from '../../src/domain/institutions/institutionRoste
 import { RESOURCE_DATA } from '../../src/data/goods/identity.js';
 import * as incomeLines from '../../src/generators/economy/incomeLineSiblings.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 await loadGenerationLawPayloads();
 afterEach(() => cleanup());
@@ -131,6 +132,8 @@ const MAKERS_ON_THEIR_OWN_GROUND = [
   ['r2s-famine-city-2', 'Fuel & Heating', 'charcoal_burner'],
   ['r2s-famine-town-2', 'Fishing & Seafood', 'salt_works'],
 ];
+/** A ground each maker's row of SOURCE_GROUNDS holds (the liveness anchor of the row it reads): the woodland, the salt flats. */
+const OWN_GROUND_OF = /** @type {Record<string, string>} */ ({ charcoal_burner: 'managed_forest', salt_works: 'salt_flats' });
 
 const WORKING_STATES = new Set(['running', 'operational', 'productive', 'thriving']);
 /** @param {string} x */
@@ -191,11 +194,13 @@ describe('LEFT-CHAIN: the chain card says who works the chain now, and its lists
       expect(sourceStoryOf(s, mine, resourceShortageImport)?.story, `${seed}: the supply rule reads the mine at work`).toBe('local');
       const iron = (s.economicState?.activeChains || []).find((/** @type {any} */ c) => c?.label === 'Iron & Metalwork' && c?.resourceDepleted === true);
       expect(iron, `${seed}: the spent iron card`).toBeTruthy();
-      expect(viaOf(s, iron), `${seed}: the card's Via`).not.toContain(institutionHouseLabel(mine.name));
       expect(viaOf(s, iron).length, `${seed}: the card still names its other houses`).toBeGreaterThan(0);
+      // anchored: the line above holds this same Via non-empty, so the card is live and names its other houses
+      expect(viaOf(s, iron), `${seed}: the card's Via`).not.toContain(institutionHouseLabel(mine.name));
       const via = viaOnTab(s, chainPrintName(iron, s).label);
       expect(via, `${seed}: the tab prints the card's Via`).not.toBeNull();
-      expect(via, `${seed}: the rendered card`).not.toMatch(/\bMine\b/);
+      expect(via, `${seed}: the rendered Via names the card's first other house (the anchor)`).toContain(institutionHouseLabel(viaOf(s, iron)[0]));
+      expect(via, `${seed}: the rendered card`).not.toMatch(/\bMine\b/); // anchored: the line above holds the rendered Via naming the card's first other house
     });
     expectNoSeedFailures(failures, 'every one of the seventeen');
   }, 600_000);
@@ -221,7 +226,7 @@ describe('LEFT-CHAIN: the chain card says who works the chain now, and its lists
       expect(chain?.resourceDepleted, `${seed}: ${label} is on a spent ground`).toBe(true);
       const house = (s.institutions || []).find((/** @type {any} */ i) => idOfHouse(i) === id);
       expect(sourceStoryOf(s, house, resourceShortageImport)?.story, `${seed}: the ${id} is at work`).toBe('local');
-      expect(SOURCE_GROUNDS[id], `${seed}: the card's ground is not the ${id}'s own`).not.toContain(chain.resourceKey);
+      expectAbsentWithAnchor(SOURCE_GROUNDS[id], chain.resourceKey, OWN_GROUND_OF[id], `${seed}: the card's ground is not the ${id}'s own`);
       expect(viaOf(s, chain), `${seed}: the ${id} keeps its place`).toContain(institutionHouseLabel(house.name));
       expect(viaOnTab(s, chainPrintName(chain, s).label), `${seed}: the rendered card names it`).toContain(institutionHouseLabel(house.name).split(' ')[0]);
     });
@@ -264,7 +269,7 @@ describe('LEFT-CHAIN: the chain card says who works the chain now, and its lists
     expectNoSeedFailures(failures, 'both towns');
     const s = town(SMITH_WORKS);
     expect(metalShareOf(s), `${SMITH_WORKS}: the smith works; the line as before`).toEqual([incomeLines.METAL_WORKED_LINE]);
-    expect(textOnTab(s)).not.toContain(twin);
+    expectAbsentWithAnchor(textOnTab(s), twin, incomeLines.METAL_WORKED_LINE, `${SMITH_WORKS}: the tab prints the worked line, not the twin`);
     /** @type {string[]} */
     const elsewhere = [];
     const all = collectSeedFailures([...CENSUS, ...WIDE, ...THIRTY], (seed) => {

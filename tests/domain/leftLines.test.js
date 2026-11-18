@@ -134,7 +134,7 @@ describe('LEFT-LINES · the brewer\'s tavern lines (L33, one line of it)', () =>
       const cards = brewers(s);
       expect(cards.length, `${seed}: a brewer`).toBeGreaterThan(0);
       for (const c of cards) {
-        expect([WELCOMING, TRANSACTIONAL], `${seed}: the brewer's tavern line`).not.toContain(c.presentation?.impression);
+        expect([WELCOMING, TRANSACTIONAL], `${seed}: the brewer's tavern line`).not.toContain(c.presentation?.impression); // anchored: a literal list built here; the next line pins the impression to the cautious line
         expect(c.presentation?.impression, `${seed}: the cautious line`).toBe(CAUTIOUS);
       }
     }), 'no brewer hears the taverns where none stands');

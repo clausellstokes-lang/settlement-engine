@@ -8,8 +8,8 @@
 // fires on carries no mark of any kind (a chip under a marked card is covered by the card: the second check's rule 1).
 // Pure: reads `readTown` of pageB.mjs (seat B's reader, unchanged) plus the parts below, read in this file.
 import { CHIP_MARK, MARK_LEAD, economicsSections } from './pageB.mjs';
-import { SOURCE_GROUNDS } from '../../../src/domain/facts/houseKinds.js';
-import { impliedGroundsOf } from '../../../src/domain/facts/supplyStory.js';
+import { IMPLIED_GROUND, SOURCE_GROUNDS } from '../../../src/domain/facts/houseKinds.js';
+import { SPENT_GROUND_YIELD } from '../../../src/data/crisisDependence.js';
 import { catalogIdForName } from '../../../src/data/institutionalCatalog.js';
 import { liveInstitutions } from '../../../src/domain/institutions/institutionRoster.js';
 
@@ -60,9 +60,18 @@ const list = (x) => (Array.isArray(x) ? x : []);
  * authored set aside, with every ground of `nearbyResourcesDepleted`), each spent where `nearbyResourcesDepleted` lists it;
  * and, where the land holds none of its kinds, the ground the house itself proves (the record's proven grounds,
  * `impliedGroundsOf`: there, or used up). A chain kept by magic feeds no house of a spent ground (the supply rule's reading).
+ * LEFT-KEYS K7 (1), 2026-11-18 (the second reader of LEFT-MARKS): THE PROVEN GROUND'S STATE IS READ OFF THE HOUSE'S OWN STORED
+ * GAP ROWS, not through `supplyStory.js :: impliedGroundsOf` (the leaf under test: with it mutated in scratch to read every
+ * proven ground there, 12 quarries of the 720 printed bare beside their own gap row "missing: stone" and this reader found 0).
+ * The ground the house proves (`houseKinds.js :: IMPLIED_GROUND`, by its catalogue id) is used up where the house has a
+ * stored gap row of kind `missing` or `imported` naming that ground's yield (`crisisDependence.js :: SPENT_GROUND_YIELD`; a
+ * peat cutter's peat; the mountain timber row's timber), else there; a house whose own row is the failed venture's line
+ * proves nothing (BR6).
  * @param {any} record @param {{ name?: unknown, catalogId?: unknown } | null | undefined} house
  * @returns {{ held: string[], spent: string[] } | null} null where the house is no source house of the table
  */
+/** The failed venture's stored line (`supplyStory.js :: VENTURE_WORDS`, in both versions and both numbers). */
+const VENTURE_ROW = /^The .+? (?:stands abandoned|stand abandoned|is failing|are failing)\b.*: no .+? (?:lies|lie) near and none is brought in\.$/;
 export function ownGroundsOnRecord(record, house) {
   const name = String(house?.name ?? '');
   const id = (typeof house?.catalogId === 'string' && house.catalogId) || catalogIdForName(name) || '';
@@ -75,9 +84,13 @@ export function ownGroundsOnRecord(record, house) {
   /** @type {Map<string, boolean>} ground -> spent */
   const held = new Map();
   for (const g of SOURCE_GROUNDS[id]) if (land.has(g)) held.set(g, depleted.has(g));
-  if (!held.size) {
-    const { states, houses } = impliedGroundsOf(record);
-    for (const g of SOURCE_GROUNDS[id]) if (states.has(g) && list(houses.get(g)).includes(name)) held.set(g, states.get(g) === 'used');
+  if (!held.size && Object.prototype.hasOwnProperty.call(IMPLIED_GROUND, id)) {
+    const g = IMPLIED_GROUND[id];
+    const rows = list(record?.resourceAnalysis?.gaps).filter((r) => r && r.institution === name);
+    const venture = rows.some((r) => VENTURE_ROW.test(String(r.impact ?? '')));
+    const good = id === 'peat_cutter' ? 'peat' : (SPENT_GROUND_YIELD[g] || '');
+    const names = (chain) => { const c = String(chain ?? ''); return !!good && (c === good || (c === 'mountain_timber' && good === 'timber')); };
+    if (!venture) held.set(g, rows.some((r) => (r.kind === 'missing' || r.kind === 'imported') && names(r.chain)));
   }
   return { held: [...held.keys()], spent: [...held].filter(([, s]) => s).map(([g]) => g) };
 }
@@ -236,8 +249,12 @@ export function law8(T, town) {
   }
 
   // ---- 8b · A DEPLETED GROUND, on the house that extracts it and the person who sells it
-  const depletedGround = res.some((l) => /^Nothing more can be taken from the /.test(l)) || T.all.some((x) => /^Nothing more can be taken from the /.test(x.text) || /Nothing more can be taken from the /.test(x.text));
-  const spentLine = T.all.find((x) => /Nothing more can be taken from the /.test(x.text));
+  // LEFT-KEYS K7 (2), 2026-11-18: the page prints a spent ground in TWO sentences, "Nothing more can be taken from the …" and
+  // the house's own "The mine is worked out: its own ground is depleted (…)." (`validationOnPage.js`); four of six newly held
+  // towns print only the second (r2r-town-52, r2r-hamlet-3, r2r-metropolis-56, r2r-hamlet-23), where a planted bare mine read 0
+  const SPENT_SENTENCE = /Nothing more can be taken from the |^The .+? (?:is|are) worked out: its own ground is depleted\b/;
+  const depletedGround = res.some((l) => SPENT_SENTENCE.test(l)) || T.all.some((x) => SPENT_SENTENCE.test(x.text));
+  const spentLine = T.all.find((x) => SPENT_SENTENCE.test(x.text));
   const recordHouses = T.record ? liveInstitutions(T.record) : [];
   for (const c of T.cards) {
     if (!EXTRACTS.test(c.name)) continue; // the house that extracts
@@ -250,7 +267,8 @@ export function law8(T, town) {
     if (grounds ? !everyOwnGroundSpent(T.record, h) : (!chains.length || !chains.every((ch) => ch.from.every((f) => /\(depleted\)|\(exhausted\)/.test(f))))) continue;
     if (!bare(c.name) || !depletedGround) continue;
     const ch = chains[0];
-    const against = spentLine ? { tab: spentLine.tab, i: spentLine.i, line: spentLine.text } : ch ? { tab: 'Systems/Economics', i: ch.headIdx, line: `${ch.head} / From ${ch.from.join(' · ')}` } : { tab: 'Systems/Resources', i: -1, line: `the record's grounds of ${c.name}'s kind: ${grounds?.spent.join(', ')} (spent)` };
+    const ownSpent = T.all.find((x) => /^The .+? (?:is|are) worked out: its own ground is depleted\b/.test(x.text) && lc(x.text).includes(lc(c.name))) || spentLine;
+    const against = ownSpent ? { tab: ownSpent.tab, i: ownSpent.i, line: ownSpent.text } : ch ? { tab: 'Systems/Economics', i: ch.headIdx, line: `${ch.head} / From ${ch.from.join(' · ')}` } : { tab: 'Systems/Resources', i: -1, line: `the record's grounds of ${c.name}'s kind: ${grounds?.spent.join(', ')} (spent)` };
     starved.set(c.name, { good: 'its ground', against });
     for (const at of houseSurfaces(T, c.name)) push('8b.extract', at, against, `every ground ${c.name} works is printed depleted; its extraction is offered with no mark`, { thing: c.name });
   }

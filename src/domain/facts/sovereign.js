@@ -26,7 +26,18 @@
 // read its import as an engine-core -> lazy edge, tests/build/vendorPdfLazy.test.js). The two readings are spelled here as
 // their homes spell them: the stress container (`canonicalAccessors.js :: canonStressors`) and the live roster's native
 // names (`liveInstitutionNames.js`, `institutionRoster.js :: isLiveInstitution`, `customContentSemanticAuthority.js`).
-
+/**
+ * The record's slices this home reads, as stored (each read defensively; CLOSE-SWEEP S1, the any-casts typed):
+ * @typedef {{
+ *   stressors?: unknown, stress?: unknown, stresses?: unknown, institutions?: unknown, npcs?: unknown,
+ *   powerStructure?: { government?: unknown, governingName?: unknown, factions?: unknown } | null,
+ *   history?: { founding?: unknown } | null,
+ * }} SovereignRecord
+ * @typedef {{ type?: unknown } | string | number | boolean | null | undefined} StressEntry an entry of the stress container (a stored value; an object is read for its type)
+ * @typedef {{ name?: unknown, status?: unknown, _worldPulseInactive?: unknown, isCustom?: unknown, custom?: unknown, source?: unknown, customDefinitionId?: unknown, customDefinitionCategory?: unknown }} RosterHouse a house of the record's `institutions`
+ * @typedef {{ faction?: unknown } | null | undefined} SovereignPower a power of `powerStructure.factions`
+ * @typedef {{ role?: unknown, title?: unknown } | null | undefined} SovereignPerson a person of the record's `npcs`
+ */
 /** The words that give a sovereign, whole words (the page law's `SOV_FACT`, spelled once here for the source). */
 export const SOVEREIGN_WORDS = /\b(lords?|lord's|lordship|noble|nobles|nobility|feudal|baron\w*|duke|duchess|duchy|ducal|crown|royal|king|kings|kingdom|queen|prince|princess|manor|appointee|gentry|liege|seigneur\w*|vassal\w*|steward|castellan|earl|jarl|margrav\w*|governor|reeve|imperial|empire|realm)\b/i;
 
@@ -35,7 +46,7 @@ export const SOVEREIGN_CRISES = Object.freeze(['wartime', 'occupied']);
 /** Those kinds as the stress container may type them: the kind, or its pulse type (`stressorPicker.js :: GEN_TO_PULSE_TYPE`). */
 const SOVEREIGN_TYPES = Object.freeze([...SOVEREIGN_CRISES, 'occupation']);
 
-/** The stress container as stored (`canonStressors`'s order). @param {any} r @returns {unknown[]} */
+/** The stress container as stored (`canonStressors`'s order). @param {SovereignRecord} r @returns {StressEntry[]} */
 const stressorsOf = (r) => {
   for (const c of [r.stressors, r.stress, r.stresses]) if (Array.isArray(c)) return c;
   if (r.stressors && typeof r.stressors === 'object') return [r.stressors];
@@ -44,29 +55,29 @@ const stressorsOf = (r) => {
 };
 /** A ruined, removed, destroyed or remnant house gives nothing (`isLiveInstitution`). */
 const INACTIVE_STATUS = new Set(['ruined', 'removed', 'destroyed', 'remnant']);
-/** The live roster's native names: a custom house names nothing native (`nativeSemanticName`). @param {any} r @returns {string[]} */
+/** The live roster's native names: a custom house names nothing native (`nativeSemanticName`). @param {SovereignRecord} r @returns {string[]} */
 const liveNamesOf = (r) => (Array.isArray(r.institutions) ? r.institutions : [])
-  .filter((/** @type {any} */ i) => !!i && typeof i === 'object' && i._worldPulseInactive !== true && !INACTIVE_STATUS.has(String(i.status || 'active').toLowerCase()))
-  .filter((/** @type {any} */ i) => !(i.isCustom === true || i.custom === true || i.source === 'custom' || typeof i.customDefinitionId === 'string' || typeof i.customDefinitionCategory === 'string'))
-  .map((/** @type {any} */ i) => String(i.name || '')).filter(Boolean);
+  .filter((/** @type {RosterHouse | null | undefined} */ i) => !!i && typeof i === 'object' && i._worldPulseInactive !== true && !INACTIVE_STATUS.has(String(i.status || 'active').toLowerCase()))
+  .filter((/** @type {RosterHouse} */ i) => !(i.isCustom === true || i.custom === true || i.source === 'custom' || typeof i.customDefinitionId === 'string' || typeof i.customDefinitionCategory === 'string'))
+  .map((/** @type {RosterHouse} */ i) => String(i.name || '')).filter(Boolean);
 
 /** @param {unknown} v @returns {string} */
 const text = (v) => (typeof v === 'string' ? v : v && typeof v === 'object' ? JSON.stringify(v) : '');
 
 /**
  * THE ONE READER of `sovereign`.
- * @param {any} record a settlement record (at a birth draw: its houses and its crisis; settled: the whole)
+ * @param {SovereignRecord | null | undefined} record a settlement record (at a birth draw: its houses and its crisis; settled: the whole)
  * @returns {boolean | undefined}
  */
 export function sovereignOf(record) {
   if (!record || typeof record !== 'object') return undefined;
-  if (stressorsOf(record).some((/** @type {any} */ e) => !!e && typeof e === 'object' && SOVEREIGN_TYPES.includes(String(e.type)))) return true;
+  if (stressorsOf(record).some((/** @type {StressEntry} */ e) => !!e && typeof e === 'object' && SOVEREIGN_TYPES.includes(String(e.type)))) return true;
   const ps = record.powerStructure && typeof record.powerStructure === 'object' ? record.powerStructure : {};
   const sources = [
     text(ps.government), text(ps.governingName),
-    ...(Array.isArray(ps.factions) ? ps.factions.map((/** @type {any} */ f) => text(f?.faction)) : []),
+    ...(Array.isArray(ps.factions) ? ps.factions.map((/** @type {SovereignPower} */ f) => text(f?.faction)) : []),
     ...liveNamesOf(record),
-    ...(Array.isArray(record.npcs) ? record.npcs.flatMap((/** @type {any} */ n) => [text(n?.role), text(n?.title)]) : []),
+    ...(Array.isArray(record.npcs) ? record.npcs.flatMap((/** @type {SovereignPerson} */ n) => [text(n?.role), text(n?.title)]) : []),
     text(record.history?.founding),
   ];
   return sources.some((s) => s !== '' && SOVEREIGN_WORDS.test(s));

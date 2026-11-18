@@ -33,6 +33,8 @@ import { institutionHouseLabel } from '../../src/domain/display/institutionDispl
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
@@ -75,51 +77,56 @@ beforeAll(async () => {
 const props = (seed) => { const { t, vm } = /** @type {{ t: any, vm: any }} */ (towns.get(seed)); return { settlement: t, narrativeMode: false, vm, stateProse: null }; };
 
 describe('SEAM-PDF (1): the PDF\'s criminal operations print the Defense tab\'s mark', () => {
-  test.each([...OPS_SAMPLE, ...PLAIN_SAMPLE])('%s', (seed) => {
-    const { t, vm } = /** @type {{ t: any, vm: any }} */ (towns.get(seed));
-    const names = t?.economicState?.safetyProfile?.criminalInstitutions || [];
-    const text = leaves(DefenseSecurity(props(seed)));
-    expect(vm.defense.criminalOps.map((/** @type {any} */ o) => o.name)).toEqual(names);
-    names.forEach((/** @type {string} */ name, /** @type {number} */ i) => {
-      const mark = criminalOpMark(t, name);
-      expect(vm.defense.criminalOps[i].mark).toBe(mark);
-      // the mark the tab prints follows the operation's name, as the tab says it; a house with no mark prints none
-      const at = text.indexOf(institutionHouseLabel(name));
-      expect(at).toBeGreaterThanOrEqual(0);
-      if (mark) expect(text[at + 1]).toBe(mark);
-    });
+  test('every OPS town and every plain town prints the Defense tab mark', () => {
+    expectNoSeedFailures(collectSeedFailures([...OPS_SAMPLE, ...PLAIN_SAMPLE], (seed) => {
+      const { t, vm } = /** @type {{ t: any, vm: any }} */ (towns.get(seed));
+      const names = t?.economicState?.safetyProfile?.criminalInstitutions || [];
+      const text = leaves(DefenseSecurity(props(seed)));
+      expect(vm.defense.criminalOps.map((/** @type {any} */ o) => o.name)).toEqual(names);
+      names.forEach((/** @type {string} */ name, /** @type {number} */ i) => {
+        const mark = criminalOpMark(t, name);
+        expect(vm.defense.criminalOps[i].mark).toBe(mark);
+        // the mark the tab prints follows the operation's name, as the tab says it; a house with no mark prints none
+        const at = text.indexOf(institutionHouseLabel(name));
+        expect(at).toBeGreaterThanOrEqual(0);
+        if (mark) expect(text[at + 1]).toBe(mark);
+      });
+    }), 'every town prints the Defense tab mark');
   });
   test('the sample is not vacuous: every OPS town holds an operation the tab marks', () => {
-    for (const seed of OPS_SAMPLE) {
+    expectNoSeedFailures(collectSeedFailures(OPS_SAMPLE, (seed) => {
       const { t } = /** @type {{ t: any }} */ (towns.get(seed));
       expect((t.economicState.safetyProfile.criminalInstitutions || []).some((/** @type {string} */ n) => criminalOpMark(t, n))).toBe(true);
-    }
+    }), 'every OPS town holds an operation the tab marks');
   });
 });
 
 describe('SEAM-PDF (3): the PDF and the journal print the Economics tab\'s complexity label', () => {
-  test.each([...COMPLEXITY_SAMPLE, ...PLAIN_SAMPLE])('%s', (seed) => {
-    const { t, vm } = /** @type {{ t: any, vm: any }} */ (towns.get(seed));
-    const ec = t.economicState;
-    const shown = complexityLabelShown(ec) || null;
-    expect(vm.economics.economicComplexity).toBe(shown);
-    expect(vm.identity.anchor.complexity).toBe(shown);
-    if (shown !== (ec.economicComplexity || null)) {
-      const stored = String(ec.economicComplexity).toLowerCase();
-      for (const [where, text] of /** @type {Array<[string, string]>} */ ([
-        ['economics', leaves(EconomicsTrade(props(seed))).join('\n')],
-        ['daily life', leaves(IdentityDailyLife(props(seed))).join('\n')],
-        ['journal', JSON.stringify(buildJournalPages(vm, { settlement: t }))],
-      ])) {
-        expect(text.toLowerCase(), where).toContain(String(shown).toLowerCase());
-        expect(text.toLowerCase(), where).not.toContain(stored);
+  test('every COMPLEXITY town and every plain town prints the Economics tab label', () => {
+    expectNoSeedFailures(collectSeedFailures([...COMPLEXITY_SAMPLE, ...PLAIN_SAMPLE], (seed) => {
+      const { t, vm } = /** @type {{ t: any, vm: any }} */ (towns.get(seed));
+      const ec = t.economicState;
+      const shown = complexityLabelShown(ec) || null;
+      expect(vm.economics.economicComplexity).toBe(shown);
+      expect(vm.identity.anchor.complexity).toBe(shown);
+      if (shown !== (ec.economicComplexity || null)) {
+        const stored = String(ec.economicComplexity).toLowerCase();
+        for (const [where, text] of /** @type {Array<[string, string]>} */ ([
+          ['economics', leaves(EconomicsTrade(props(seed))).join('\n')],
+          ['daily life', leaves(IdentityDailyLife(props(seed))).join('\n')],
+          ['journal', JSON.stringify(buildJournalPages(vm, { settlement: t }))],
+        ])) {
+          expect(text.toLowerCase(), where).toContain(String(shown).toLowerCase());
+          // the tab's label prints (the anchor) and the stored label does not
+          expectAbsentWithAnchor(text.toLowerCase(), stored, String(shown).toLowerCase(), where);
+        }
       }
-    }
+    }), 'every town prints the Economics tab label');
   });
   test('the sample is not vacuous: every COMPLEXITY town\'s tab prints the twin', () => {
-    for (const seed of COMPLEXITY_SAMPLE) {
+    expectNoSeedFailures(collectSeedFailures(COMPLEXITY_SAMPLE, (seed) => {
       const { t } = /** @type {{ t: any }} */ (towns.get(seed));
       expect(complexityLabelShown(t.economicState)).not.toBe(t.economicState.economicComplexity);
-    }
+    }), 'every COMPLEXITY town\'s tab prints the twin');
   });
 });

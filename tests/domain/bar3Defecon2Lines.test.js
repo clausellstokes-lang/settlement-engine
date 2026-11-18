@@ -61,8 +61,12 @@ const KEEP = [
 ];
 /** @param {any} t */ const hooks = (t) => (t.economicViability?.plotHooks || []).map((/** @type {any} */ h) => String(h?.hook ?? ''));
 const CARTS = /** @type {string} */ (OUTLOOK_HOOK_SIBLINGS[TIMBER_RAFT_HOOK][1].text);
+// RE-KEYED BY IDENTITY 2026-11-18 (LEFT-KEYS K1, R8): the supply rule (BIRTH-3, BR4/BR5) has r2r-town-34 buy its timber in
+// ("Timber" on the import list), so the carts line is true there now. The same claim on r2r-metropolis-40 (road): it imports
+// no timber and prints the short twin; with the guard (`foodBalance.js`, `!importHeld(facts, TIMBER_IMPORT)`) held open in
+// scratch it prints the carts line. r2r-metropolis-2 and r2s-insurgency-city-3 still buy no timber (measured on the 720).
 const TIMBER_NOT = [
-  { seed: 'r2r-town-34', not: CARTS }, { seed: 'r2r-metropolis-2', not: CARTS }, { seed: 'r2s-insurgency-city-3', not: TIMBER_RAFT_HOOK },
+  { seed: 'r2r-metropolis-40', not: CARTS }, { seed: 'r2r-metropolis-2', not: CARTS }, { seed: 'r2s-insurgency-city-3', not: TIMBER_RAFT_HOOK },
 ];
 const TIMBER_KEEP = 'r2r-city-4'; // imports Timber
 const RIVALS = ['r2r-metropolis-0', 'r2s-wartime-city-2'];

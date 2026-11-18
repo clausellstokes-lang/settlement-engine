@@ -19,7 +19,7 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { foodWordsFindings } from '../../src/domain/coherence/foodWordsFindings.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildFoundryModuleFiles } from '../../src/foundry/moduleBuilder.js';
-import { fishTradeTwinSentences, recordHoldsFish } from '../../src/data/fishTradeTwinLines.js';
+import { fishTradeTwinned, fishTradeTwinSentences, recordHoldsFish } from '../../src/data/fishTradeTwinLines.js';
 
 /** @param {any} s */
 const journalText = (s) => buildFoundryModuleFiles({ settlement: s, vm: buildViewModel({ settlement: s, phase: 'canon' }), variant: 'canon_dossier', faithUnlocked: true })
@@ -43,8 +43,19 @@ describe('F11 · the Foundry Exports row reads as the screen reads', () => {
 });
 
 describe('F11 · a fishmonger with no fish is the cart\'s trade', () => {
-  it('soak1k-1652: no fish source, no fish bought in, so the Fishmonger carries fish from the cart', () => {
-    const s = birth(1652).settlement;
+  // RE-KEYED BY IDENTITY 2026-11-18 (LEFT-KEYS K1, R8): the supply rule (BIRTH-3, BR4/BR5) has soak1k-1652 buy its fish in
+  // ("Salted fish" on the import list), so the net line is true there now. NO BORN TOWN BEARS THE CLAIM ANY MORE: no
+  // Fishmonger stands without fish in the census's 720, the 150 or soak1k-0..2999 (a fish buyer on a road buys its fish in).
+  // So the claim is held on a CONSTRUCTED record: this town with its one fish import struck (its own food is game, no fish),
+  // read through the very leaf the assembler applies after the draw (`assembleSettlement.js` :: `fishTradeTwinned`); and the
+  // born town as stored, fish bought in, keeps the net line beside it.
+  it('soak1k-1652 with its fish import struck (a constructed record): no fish source, no fish bought in, so the Fishmonger carries fish from the cart', () => {
+    const born = birth(1652).settlement;
+    const bornDesc = born.institutions.find((/** @type {any} */ x) => x.name === 'Fishmonger')?.desc;
+    expect(recordHoldsFish(born.economicState), 'the born town buys its fish in').toBe(true);
+    expect(bornDesc).toContain('The trade that carries fish from the net to the table.');
+    const economicState = { ...born.economicState, primaryImports: born.economicState.primaryImports.filter((/** @type {string} */ x) => !/fish/i.test(x)) };
+    const s = { ...born, economicState, institutions: fishTradeTwinned(born.institutions, economicState) };
     expect(recordHoldsFish(s.economicState)).toBe(false);
     const desc = s.institutions.find((/** @type {any} */ x) => x.name === 'Fishmonger')?.desc;
     expect(desc).toContain('The trade that carries fish from the cart to the table.');
