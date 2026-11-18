@@ -19,6 +19,10 @@
  * cycle of `bothNamedTensions` reads only those). Every line is marked `colour: true` (R-AO: read,
  * presumes no record fact): none names a house, a tier or an institution the record might deny; the
  * force words come from the place itself. Every line is listed here FOR THE OWNER'S VETO.
+ * BAR8 K-PEOPLE (LAW 13 rule 13b, C37891): the three lines that hold someone inside (the held friend, its tension, the
+ * crewmate "the prisoner") presume a prison, what the Legal row prints: each DECLARES the existing atom `prison`
+ * (`defenseFacts.js :: hasPrison`) in place of `colour`; where the town keeps none, the index is refused and the
+ * archetype's other lines carry the tie (`relationshipArchetypes.js :: createTieProseDraw`).
  */
 
 /** @typedef {{ name?: string }} TieCard */
@@ -203,7 +207,7 @@ export const HANDLER_TIE_LINES = Object.freeze({
       { line: (r, s) =>
         `One of the witnesses to the fire wants to confess before dying. ${s.name} has asked ${r.name} what should be done, and ${r.name} has no answer.`, colour: true },
       { line: (r, s, f) =>
-        `One of ${r.name}'s old crewmates has been taken by the ${f.body} and may talk to save their own neck. ${s.name} could get the prisoner out if ${r.name} asks, and ${r.name} knows what asking will cost.`, colour: true },
+        `One of ${r.name}'s old crewmates has been taken by the ${f.body} and may talk to save their own neck. ${s.name} could get the prisoner out if ${r.name} asks, and ${r.name} knows what asking will cost.`, needs: ['prison'] }, // BAR8 K-PEOPLE (13b): a prisoner is held where a prison stands
     ]),
   }),
 
@@ -219,7 +223,7 @@ export const HANDLER_TIE_LINES = Object.freeze({
       { line: (r, s) =>
         `${r.name} has a lover nobody knows about, and ${s.name} could ruin them both with a word. ${s.name} keeps quiet, and ${r.name} keeps working for ${s.name}.`, colour: true },
       { line: (r, s, f) =>
-        `An old friend of ${r.name}'s is held by the ${f.body}, and ${s.name} is the one who keeps that friend fed and safe inside. ${r.name} pays for it in favours.`, colour: true },
+        `An old friend of ${r.name}'s is held by the ${f.body}, and ${s.name} is the one who keeps that friend fed and safe inside. ${r.name} pays for it in favours.`, needs: ['prison'] }, // BAR8 K-PEOPLE (13b, C37891): held where a prison stands
     ]),
     tension: Object.freeze([
       { line: (r, s) =>
@@ -229,7 +233,7 @@ export const HANDLER_TIE_LINES = Object.freeze({
       { line: (r, s) =>
         `The lover wants the two of them to leave this place together. ${s.name} has made it clear to ${r.name} that nobody leaves owing what ${r.name} owes.`, colour: true },
       { line: (r, s) =>
-        `The friend has fallen ill inside. ${s.name} says a physician can be sent in, once ${r.name} has done what ${s.name} asked last month.`, colour: true },
+        `The friend has fallen ill inside. ${s.name} says a physician can be sent in, once ${r.name} has done what ${s.name} asked last month.`, needs: ['prison'] }, // BAR8 K-PEOPLE (13b): the held friend's tension
     ]),
   }),
 });
