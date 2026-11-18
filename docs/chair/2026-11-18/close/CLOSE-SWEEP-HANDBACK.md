@@ -63,7 +63,7 @@ walker's own `leafArm` on its own grid, `/tmp/claude-0/probe/fl/leaves.probe.tes
 | `goodExported` | declares `economicState`, the walker sees no read | JOIN-17 point 9 (d8997b193, BAR6-SCENES) | **LEFT** |
 | `seatHeld` | declares `npcs`, `powerStructure`, the walker sees no read | JOIN-17 point 8 (57a3bda67, BAR6-PEOPLE) | **LEFT** |
 
-**LEFT, by name, for the chair:** `goodExported` and `seatHeld` are `factsCall` getters (they take an argument), and the walker's
+**(Closed afterwards by S4 items 2 and 3, on the chair's word: below.) Named at S2, for the chair:** `goodExported` and `seatHeld` are `factsCall` getters (they take an argument), and the walker's
 instrument `tests/lint/factLayers.shared.mjs :: leafTouches` has a call branch for `hasInstitution`, `hasOtherNpc`, `sharesPower`,
 `sharesPlace`/`loneTie` and `tradeAtWork` only: it never calls these two, so their honest declarations read as "unread". The cure is in
 the walker's instrument (a branch calling each, as `tradeAtWork`'s), not in the table; striking the declarations would make the table
@@ -145,16 +145,39 @@ NET_PROOF_PLACEHOLDER
 
 ## THE NET (C7)
 
-NET_PLACEHOLDER
+Each gate alone, through `sh scripts/gate-tail.sh`, at the base 70e557d5b and at the tip 1039b8c26. The suites ran in `git archive`s of
+each commit (integrity-counted: 11,167 and 11,168 files = `git ls-tree -r`), `node_modules` linked in; by message with the JSON reporter.
+
+| gate | 70e557d5b | 1039b8c26 |
+| --- | --- | --- |
+| `npm run typecheck:ratchet` | OK, 167 (ceiling 167) | OK, 167 (ceiling 167) |
+| `npm run typecheck:domain:strict` | ✓, 1113 (ceiling 1113) | ✓, 1113 (ceiling 1113) |
+| `npx eslint` on the branch's 8 changed code files | (S1: 0 on the four) | 0 problems |
+| `tests/lint` (778 files, 3,211 tests) | 3,123 passed · 72 failed · 16 skipped | **3,129 passed · 66 failed · 16 skipped** |
+| `tests/joins` | 425 / 425 | 425 / 425 |
+| `tests/architecture` | 347 / 347 | 347 / 347 |
+| `tests/build/vendorPdfLazy.test.js -t "WEAVE ST-2"` | 12 passed, 43 skipped | 12 passed, 43 skipped |
+
+**`tests/lint` BY MESSAGE.** Six reds cured, all of my list: the four any-cast arms (S1) and `factLayers.walker`'s arm (a) and LEAVES
+(S2, S4.2, S4.3). **The other 66 are the same 66 at both ends, and their WHOLE failure text is identical** (every line of every failure
+message, the trees' paths normalised: 66 of 66 equal), so no figure inside them moved by this branch. One of them is the machine's
+(class d): `ledgerCitationIntegrity.test.js` reads `refs/heads/review-fixes-2026-07-08` with git, and an archive has no `.git` (the same
+at both ends). A probe artefact, also class (d), is named so nobody re-meets it: `tests/architecture/archViewWall.test.js` ("lives outside
+the arch/ determinism perimeter") reds in ANY tree whose absolute path contains `/arch/` (it tests `govPath.includes('/arch/')`); my first base
+archive sat under `/tmp/claude-0/arch/` and read 346/347; from a clean path, 347/347 at both ends.
 
 ## STORED FIGURES MY CURES MOVE (named for the seats that hold them; none taken here)
 
-FIGURES_PLACEHOLDER
+| figure (file) | reading test | what moves | holder |
+| --- | --- | --- | --- |
+| the any-cast baseline (`tests/lint/.domain-any-baseline.json`), its ledger and ceiling | `domainAnyCastBaseline` | **nothing**: the four files are at 0 = their allowance; no row, no stale entry | none |
+| the fact-layers register (`tests/lint/factLayers.register.json`) | `factLayers.walker` | **nothing by my cures**: the LEAVES register now equals the tree as committed; its POOLS fall (`DS-ECO-6::TIER: minor shadow activity (≥3)`) pre-exists at 70e557d5b | CLOSE-DOORS-1B (`node scripts/fact-layers-door.mjs --shrink`) |
+| the site-coherence inventory (`tests/lint/.site-coherence-baseline.json`) | `siteCoherenceRatchet` C1 | not by me (S3, CL15): `desert\|mountain-flank\|coal` 7 → 9, `desert\|dunes\|(biome)` 30 → 28, `totals.flankOnFlat` 39 → 41 | CLOSE-DOORS-1B |
+| the observed-shape readers' input stamps (`scripts/.observed-shape-readers-baseline.json`: each `src/` file's `sha256` and `size`) | `observedShapeReaders.walker` | the bytes of five `src/` files move (the four of S1, `factLayers.js`); the stamps were ALREADY stale at 70e557d5b for three of them (`factLayers.js` stored b243507a…, the base edd5258e…) and absent for `seatMembers.js` and `sovereign.js`; the walker's whole failure text is identical at both ends | the doors' seat that re-takes that baseline (its `--write`) |
+| the figures that count the tree (C8: the estate file census, byte and size ceilings, the test ratchet, the mutation manifest) | the counting walkers | ONE new file (this hand-back); eleven files' bytes (`git diff --name-only 70e557d5b HEAD`); no test file added, renamed or removed, no test name changed (two test bodies: `factLayers.walker` arm (a), `worldFactRederive`'s roster) | the last seat, on the tree that holds every close commit |
 
 ## WHAT I LEFT, BY NAME
 
-- `tests/lint/factLayers.walker.test.js` arm (a): `goodExported`, `seatHeld` (`tests/lint/factLayers.shared.mjs :: leafTouches`, the
-  `factsCall` branches, about line 103): the walker never calls them. For the chair (the walker's instrument is not this seat's file).
 - `tests/lint/factLayers.walker.test.js` POOLS: the DS-ECO-6 shrink row, CLOSE-DOORS-1B's door.
 - `tests/lint/siteCoherenceRatchet.test.js` C1: CLOSE-DOORS-1B's door (CL15); `siteGenesis.js:252`'s arm order on the pull request's list
   of known faults.
