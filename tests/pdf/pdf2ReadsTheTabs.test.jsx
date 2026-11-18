@@ -291,6 +291,40 @@ describe('PDF-2b item 1 (item 3 of the section, LEFT-MARKS M3): the PDF\'s Servi
   }, 900000);
 });
 
+describe('PDF-2b item 4: the journal\'s chain row reads the record of its own row, never the next by index', () => {
+  // A CONSTRUCTED RECORD (rule N7: no town of the 720, the 150 or the thirty holds a chain with no print label, so the view
+  // model drops none): a town's chains with a chain of no label put first, whose tab card's word is not the first printed
+  // row's. The view model drops it (`viewModelBodySlices.js`, UPKEEP-14 (j)); paired by bare index, the journal's first row
+  // took its word.
+  test('every journal chain row of the constructed towns says its own chain\'s word', () => {
+    let built = 0;
+    expectNoSeedFailures(collectSeedFailures(['r2s-under_siege-village-0', 'r2r-thorp-41', 'r2r-village-8'], (seed) => {
+      const base = town(seed).t;
+      const chains = base.economicState.activeChains;
+      const first = chains.find((/** @type {any} */ c) => chainPrintName(c, base).label);
+      const want = tabWord(tabCard(base, first));
+      const dropped = ['impaired', 'vulnerable', 'running', 'operational'].map((status) => ({ ...first, label: '', status }))
+        .find((c) => tabWord(tabCard(base, c)) !== want);
+      expect(dropped, `${seed}: anchored: a chain of no label whose word is not the first row's`).toBeTruthy();
+      const t = { ...base, economicState: { ...base.economicState, activeChains: [dropped, ...chains] } };
+      expect(String(chainPrintName(dropped, t).label ?? ''), `${seed}: anchored: the chain prints no name`).toBe('');
+      built++;
+      const md = (buildJournalPages(buildViewModel({ settlement: t }), { settlement: t }).find((p) => p.name === 'Economics & Trade') || { markdown: '' }).markdown;
+      /** @type {string[]} */ const bad = [];
+      const rows = (md.split('## Supply chains')[1] || '').split('\n## ')[0].split('\n').filter((r) => r.startsWith('- **'));
+      expect(rows.length, `${seed}: anchored: the journal prints the named chains`).toBe(chains.filter((/** @type {any} */ c) => chainPrintName(c, t).label).length);
+      for (const l of rows) {
+        const m = /^- \*\*(.+?)\*\*(?: \*\(([^)]*)\)\*)?/.exec(l); if (!m) continue;
+        const rec = chains.find((/** @type {any} */ c) => esc(chainPrintName(c, t).label) === m[1]);
+        if (!rec) { bad.push(`${m[1]}: a row of no chain`); continue; }
+        if ((m[2] || '') !== tabWord(tabCard(t, rec)).toLowerCase()) bad.push(`${m[1]}: "${m[2] || ''}" / its own chain's "${tabWord(tabCard(t, rec))}"`);
+      }
+      expect(bad, seed).toEqual([]);
+    }), 'the constructed towns');
+    expect(built, 'the constructed towns').toBe(3);
+  });
+});
+
 describe('PDF-2: the negatives print none of these faults, and agree', () => {
   // PDF-2b item 5 (the chair, 2026-11-18): one plain test looping over the negatives, every seed through
   // `collectSeedFailures` (the law `sovereigntyLightingContract.walker.test.js`: no new file parked by `each`).
