@@ -2978,7 +2978,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
             "no court or gaol",
             "no watch"
           ],
-          "text": "Wrongs at {settlement} are piling up faster than its people can settle them among themselves, and nobody here holds an offender or hears a case.",
+          "text": "{settlement} has no court and no gaol. Custom and neighbours answer what they can, and the rest goes unanswered.",
           "slots": [
             "settlement"
           ],

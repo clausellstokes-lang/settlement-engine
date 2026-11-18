@@ -592,6 +592,8 @@ const sha256 = (text) => createHash('sha256').update(text).digest('hex');
  * @type {ReadonlyArray<{pool: string, vid: number, from: string, to: string, ruling: string}>}
  */
 const WORD_CORRECTIONS = Object.freeze([
+  // FR18 (1), the chair's ruling of 2026-11-18: DS-DEF-3 Unsafe v4's words (the twin of b86d8122d), corrected in place
+  { pool: 'DS-DEF-3 :: Unsafe', vid: 4, from: '4bad941347dd4b9259d2aae2873bb678fd6f48a7ddf73bf3a28411dd9f6033d2', to: '214b6eabc4403e1c31abbc03fe102943eb6136d844aaa15445777c78b4aff6a3', ruling: 'FR18' },
 ]);
 
 async function readNumberingBaseline() {

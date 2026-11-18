@@ -67,10 +67,10 @@ function project(annex, corrections = []) {
   trees.push(t);
   mkdirSync(path.join(t, 'scripts'));
   const script = readFileSync(path.join(ROOT, 'scripts/generate-dossier-state-prose.mjs'), 'utf8');
-  const empty = 'const WORD_CORRECTIONS = Object.freeze([\n]);';
-  if (corrections.length) expect(script.split(empty).length - 1, 'the allowance stands empty in the committed projector').toBe(1);
+  const open = 'const WORD_CORRECTIONS = Object.freeze([\n';
+  if (corrections.length) expect(script.split(open).length - 1, 'the allowance table stands once in the committed projector').toBe(1);
   writeFileSync(path.join(t, 'scripts/generate-dossier-state-prose.mjs'), corrections.length
-    ? script.replace(empty, `const WORD_CORRECTIONS = Object.freeze(${JSON.stringify(corrections)});`) : script);
+    ? script.replace(open, `${open}${corrections.map((c) => `  ${JSON.stringify(c)},\n`).join('')}`) : script);
   symlinkSync(path.join(ROOT, 'scripts/lib'), path.join(t, 'scripts/lib'));
   symlinkSync(path.join(ROOT, 'src'), path.join(t, 'src'));
   symlinkSync(path.join(ROOT, 'node_modules'), path.join(t, 'node_modules'));

@@ -183,8 +183,10 @@ where Unsafe now speaks no line: those two reads keep a gaol, the only DS-DEF-3 
 DS-DEF-3 › Unsafe **v4**, the pool's NEXT number, projected through the armed guard (a next-number line passes it; scratch
 tree, fresh census). Only `defense.generated.js` moves: the variant, the pool's `variantCount` 3 → 4, its `faceCounts` and
 `vids`, and the header's count 662 → 663:
-`[ledger · no court or gaol · no watch]` "Wrongs at {settlement} are piling up faster than its people can settle them among
-themselves, and nobody here holds an offender or hears a case." **NEW WORDS, on the owner's veto list.**
+`[ledger · no court or gaol · no watch]` "{settlement} has no court and no gaol. Custom and neighbours answer what they can,
+and the rest goes unanswered." **NEW WORDS, on the owner's veto list.** (Corrected in place by FR18 (1): the first words,
+"Wrongs at {settlement} are piling up … nobody here holds an offender or hears a case.", were contradicted on each town's
+own page; see the section FR18.)
 
 **It prints in** bar0-hamlet-calm-rand-27 (Gangapur), bar0-hamlet-calm-rand-29 (Skálgarde), r2r-thorp-30 (Obergasse): the
 only three towns of the 900 whose Unsafe pool admits it (the other 13 Unsafe towns keep a watch and a court or a gaol).
@@ -193,7 +195,7 @@ only three towns of the 900 whose Unsafe pool admits it (the other 13 Unsafe tow
 
 | surface | the base 4288049ba | 9e250c8fa | now |
 |---|---|---|---|
-| Defense tab | the DM's sentence ("Crime is a persistent and visible problem. …"), beside it "The hamlet's record of crimes at Gangapur grows faster than its record of arrests, and people pay for the difference in what they lose." | the DM's sentence alone | the DM's sentence, beside it "Wrongs at Gangapur are piling up faster than its people can settle them among themselves, and nobody here holds an offender or hears a case." |
+| Defense tab | the DM's sentence ("Crime is a persistent and visible problem. …"), beside it "The hamlet's record of crimes at Gangapur grows faster than its record of arrests, and people pay for the difference in what they lose." | the DM's sentence alone | the DM's sentence, beside it "Gangapur has no court and no gaol. Custom and neighbours answer what they can, and the rest goes unanswered." (FR18) |
 | PDF, Defense & Security | "Public order", then the record line | no "Public order" paragraph | "Public order", then the twin |
 
 **The shared page prints the same:** the guard's new arm reads the line on the record, its public projection and the share
