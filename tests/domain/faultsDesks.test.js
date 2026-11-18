@@ -100,16 +100,26 @@ function plant(pairs) {
   return s;
 }
 
-// DS-DEF-3 › Moderate, rows 3 and 4 (each stands once in the annex).
-const MOD3 = '3. `[visitor · tier: ≥ village]` Visitors to {settlement} are told which few streets to avoid, and the advice turns out to be right.';
-const MOD4 = '4. `[threshold · watch · tier: ≥ village]` Order at {settlement} could tip either way: a few fewer watchmen or one bolder gang would be felt on the streets within the season.';
-const MOD8 = /^8\. `\[visitor · guardPresence · law: = collapsed\]` .*$/m;
-const MOD8_LINE = /** @type {RegExpMatchArray} */ (ANNEX.match(MOD8))[0];
+// DS-DEF-3 › Moderate's rows, COMPUTED from the committed leaf by vid (never a literal sentence: proseDrawnAnchors), and
+// found in the annex as `<vid>. \`[tags]\` <text>` (each must stand once).
+const MODERATE = DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-3'].pools.Moderate;
+const textOf = (/** @type {number} */ vid) => /** @type {string} */ (MODERATE.find((/** @type {any} */ v) => v.vid === vid)?.text);
+const rowOf = (/** @type {number} */ vid) => {
+  const rows = ANNEX.split('\n').filter((l) => l.startsWith(`${vid}. \``) && l.endsWith(`\` ${textOf(vid)}`));
+  if (rows.length !== 1) throw new Error(`DS-DEF-3 › Moderate v${vid}: ${rows.length} annex rows, not one`);
+  return rows[0];
+};
+const MOD3 = rowOf(3);
+const MOD4 = rowOf(4);
+const MOD8_LINE = rowOf(8);
+/** the message's own quotation of a text (the guard cuts it at 69 characters), escaped for a pattern */
+const head = (/** @type {number} */ vid) => textOf(vid).slice(0, 30).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const body = (/** @type {string} */ row) => row.replace(/^\d+\.\s+/, '');
 
 describe('FR7: the numbering guard refuses a renumbering and a re-use, by text', { timeout: 120_000 }, () => {
   it('NEGATIVE: the annex as committed passes the guard (and the whole --check)', () => {
     const r = project(ANNEX);
+    // anchored: the same output is asserted below to be the whole --check's success (exit 0), so the run is live
     expect(r.out).not.toContain(GUARD);
     expect(r.status, r.out.slice(-1500)).toBe(0);
   });
@@ -118,15 +128,16 @@ describe('FR7: the numbering guard refuses a renumbering and a re-use, by text',
     const r = project(plant([[MOD3, `3. ${body(MOD4)}`], [MOD4, `4. ${body(MOD3)}`]]));
     expect(r.status).not.toBe(0);
     expect(r.out).toContain(GUARD);
-    expect(r.out).toContain('DS-DEF-3 :: Moderate: RENUMBERED: the text "Visitors to {settlement} are told');
-    expect(r.out).toMatch(/stood at v3 at the baseline and would take v4/);
+    expect(r.out).toMatch(new RegExp(`DS-DEF-3 :: Moderate: RENUMBERED: the text "${head(3)}.*stood at v3 at the baseline and would take v4`));
+    expect(r.out).toMatch(new RegExp(`DS-DEF-3 :: Moderate: RENUMBERED: the text "${head(4)}.*stood at v4 at the baseline and would take v3`));
   });
 
   it('POSITIVE: a vid handed a text another vid holds is RE-USED (and nothing is RENUMBERED)', () => {
     const r = project(plant([[MOD4, `4. ${body(MOD3)}`]]));
     expect(r.status).not.toBe(0);
     expect(r.out).toContain(GUARD);
-    expect(r.out).toMatch(/DS-DEF-3 :: Moderate: RE-USED: v4 named "Order at \{settlement\} could tip.*the baseline's v3/);
+    expect(r.out).toMatch(new RegExp(`DS-DEF-3 :: Moderate: RE-USED: v4 named "${head(4)}.*the baseline's v3`));
+    // anchored: the same output carries the RE-USED refusal (asserted above), so the guard ran and spoke
     expect(r.out).not.toContain('RENUMBERED');
   });
 
@@ -141,31 +152,35 @@ describe('FR7: the numbering guard refuses a renumbering and a re-use, by text',
     const r = project(shifted);
     expect(r.status).not.toBe(0);
     expect(r.out).toContain(GUARD);
-    expect(r.out).toMatch(/DS-DEF-3 :: Moderate: RENUMBERED: the text "Visitors to \{settlement\}.*stood at v3 at the baseline and would take v4/);
-    expect(r.out).toMatch(/DS-DEF-3 :: Moderate: RE-USED: v3 named "Visitors to/);
+    expect(r.out).toMatch(new RegExp(`DS-DEF-3 :: Moderate: RENUMBERED: the text "${head(3)}.*stood at v3 at the baseline and would take v4`));
+    expect(r.out).toMatch(new RegExp(`DS-DEF-3 :: Moderate: RE-USED: v3 named "${head(3)}`));
   });
 
   it('POSITIVE: a number gone from a pool is DROPPED', () => {
     const r = project(plant([[`${MOD4}\n`, '']]));
     expect(r.status).not.toBe(0);
     expect(r.out).toContain(GUARD);
-    expect(r.out).toMatch(/DS-DEF-3 :: Moderate: DROPPED: v4 "Order at \{settlement\} could tip/);
+    expect(r.out).toMatch(new RegExp(`DS-DEF-3 :: Moderate: DROPPED: v4 "${head(4)}`));
   });
 
-  const REWORDED = 'Visitors to {settlement} are told which few streets to avoid.';
+  /** v3's own words cut at its first comma: a rewording in place, under the same number and tags */
+  const REWORDED = `${textOf(3).split(',')[0]}.`;
+  const reworded = MOD3.replace(textOf(3), REWORDED);
   const sha = (/** @type {string} */ t) => createHash('sha256').update(t).digest('hex');
   it('POSITIVE: words changed in place under the same number, with no allowance row, are REWORDED', () => {
-    const r = project(plant([[MOD3, `3. \`[visitor · tier: ≥ village]\` ${REWORDED}`]]));
+    const r = project(plant([[MOD3, reworded]]));
     expect(r.status).not.toBe(0);
     expect(r.out).toContain(GUARD);
     expect(r.out).toMatch(/DS-DEF-3 :: Moderate: REWORDED: v3 would change its words in place/);
+    // anchored: the same output carries the REWORDED refusal (asserted above), so the guard ran and spoke
     expect(r.out).not.toMatch(/RENUMBERED|RE-USED|DROPPED/);
   });
 
   it('NEGATIVE: the same rewording WITH its row passes the guard; a row for another number, or another text, does not', () => {
-    const annex = plant([[MOD3, `3. \`[visitor · tier: ≥ village]\` ${REWORDED}`]]);
-    const row = { pool: 'DS-DEF-3 :: Moderate', vid: 3, from: sha(body(MOD3).replace(/^`\[[^\]]*\]`\s+/, '')), to: sha(REWORDED), ruling: 'FAULTS-DESKS plant' };
+    const annex = plant([[MOD3, reworded]]);
+    const row = { pool: 'DS-DEF-3 :: Moderate', vid: 3, from: sha(textOf(3)), to: sha(REWORDED), ruling: 'FAULTS-DESKS plant' };
     const ok = project(annex, [row]);
+    // anchored: the same output is asserted on the next line to reach the --check's staleness test, past the guard
     expect(ok.out).not.toContain(GUARD);
     expect(ok.out).toContain('is stale; run `npm run gen:dossier-prose`');
     for (const wrong of [{ ...row, vid: 4 }, { ...row, to: sha('another text') }, { ...row, ruling: '' }]) {
@@ -175,6 +190,7 @@ describe('FR7: the numbering guard refuses a renumbering and a re-use, by text',
 
   it('NEGATIVE: a new line at the NEXT number passes the guard (the --check then finds the leaf stale)', () => {
     const r = project(plant([[MOD8_LINE, `${MOD8_LINE}\n9. \`[visitor · tier: ≥ village]\` A planted line at the next number.`]]));
+    // anchored: the same output is asserted on the next line to reach the --check's staleness test, past the guard
     expect(r.out).not.toContain(GUARD);
     expect(r.out).toContain('is stale; run `npm run gen:dossier-prose`');
   });
@@ -239,6 +255,7 @@ describe('13d (FR6): `court or gaol`, and the record-of-crimes lines that presum
       const s = towns.get(seed);
       expect(factsOf(s).courtOrGaol, seed).toBe(false);
       const line = defenseStateProse(s, { seed })?.publicOrder?.beside;
+      // anchored: RECORD_LINES (the first test) pins the seven record lines present in the pools these towns draw from
       expect(String(line?.text ?? line ?? ''), seed).not.toMatch(/record of crimes/);
     });
     expectNoSeedFailures(failures, 'no record of crimes where no court sits and no gaol stands');
@@ -250,6 +267,7 @@ describe('13d (FR6): `court or gaol`, and the record-of-crimes lines that presum
     const failures = collectSeedFailures(RECORD_LINES, ({ pool, v }) => {
       const decl = variantFactDeclaration(v);
       expect(declarationAdmits(decl, over(false)).refused, `${pool} v${v.vid} where neither stands`).toContain('court or gaol');
+      // anchored: the line above holds the same declaration refused by `court or gaol` where it is false
       expect(declarationAdmits(decl, over(true)).refused, `${pool} v${v.vid} where one stands`).not.toContain('court or gaol');
     });
     expectNoSeedFailures(failures, 'the atom refuses each line exactly where it is false');
