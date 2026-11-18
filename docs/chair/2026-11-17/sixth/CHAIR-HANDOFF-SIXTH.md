@@ -1153,3 +1153,48 @@ should be paused or archived by the owner's hand.
   (02:01 and 02:21) to weigh: the law right and the change wrong, or the test's stored table stale. THE DOORS: door-classes
   fresh 0 · stale 152; door-things unchanged. K-POWERS IS THE ONE SEAT OF THE SIX WITH NO NEW RED. THE CHAIR'S OWN
   LAWS-BY-MESSAGE RUN at the line's tip and at point 53 is in flight (`/home/user/wk/laws2.*.log`).
+- **02:25 UTC. FOUR MESSAGES IN (02:12 to 02:19) AND THE CHAIR'S LAWS-BY-MESSAGE AT POINT 53.**
+  (a) **SCENES-3 DONE (3dc87b346) AND MERGED AS POINT 47:** 4dbd6fc154b526fa405eeeaf6152469df121e4b5 on
+  `lane/landing-45-2026-11-17` (being pushed). Ruling BR25 as ruled: the road back at its base and the LAST admitted
+  twin (the 900 records and the 525 byte-equal against 55b954f98; the planted states print the road: three slots); the
+  enchanting twin reworded, no fresh row; four older tests re-keyed, each red at its base; a sweep of 69 files; `tests/lint`
+  identical by message. At point 47 the chair's targeted net: 123 of 126 green (the three old names), the door fresh 0 ·
+  stale 152. READ-SCENES IS ASKED (02:26) FOR ITS SHORT READ OF THE DELTA; its verdict is then on points 45 to 47.
+  (b) **PDF-2b HANDED BACK (cd94d5a08 on `lane/bar8-pdf-2b-2026-11-17`, from 917c915bc):** its five items and its
+  section's item 4 through the leaf copied byte for byte (95/16/3 -> 0); the each-family count back to 112; a scratch
+  merge with the line and J-INCOME-2's tip clean. The chair's read: the hunks as asked. READ-PDF-2 IS ASKED (02:29) for
+  a short read of the delta. NAMED BY IT: the leaf's five banked rows read as fresh on its branch (BR26: J-INCOME-2
+  moves them) and `ruinFilterRoster` reads the leaf's raw `institutions` (J-INCOME-2 is told: the roster's row follows
+  the moved reader, or the leaf reads through the allowed reader if the output is the same).
+  (c) **READ-DESKS-ECO: "DO NOT LAND YET".** H1 the seven older tests (as the whole check found; the reader found the
+  same seven by its own sweep): the retired v4 leaves DS-GEN-3 Import-Dependent's ids [1,2,3,5,6,7] (law 6) and the
+  ledger `docs/census/declarations/DS-GEN-3.json` still names vid 4; the new presence atom has no row in
+  `crisisBlindDossierProse`'s PRESENCE_SETTER nor in `tests/helpers/calmFactsDouble.js` (law 5, F12); every line of
+  that pool now declares a food band the constructed reads do not answer (F10, the projection contract's mute list and
+  thin-state ceiling). H2 `proseDrawnAnchors`: two test labels quote a state-prose line (`bar8DesksEco.test.js`:120,
+  `leftLines.test.js`:78). M1 the leaf's family match is caught by no test (5 towns rely on it). M2 15e RISES 0 -> 1 in
+  the 150 (bar0-city-wartime-rand-38: "nothing new goes up" beside the brickmaker's "every new wall going up": one false
+  line for another; the seat's own left rule). M3 two twins not given by name (DS-ECO-8 POOR v5, true in the four towns
+  that print it but admitted under deficit and famine too; DS-GEN-3 Import-Dependent v7). EVERYTHING ELSE AS CLAIMED:
+  the annex and its projection byte-equal; the atom one reading (63 of 63 towns not under a siege); 12d and 11c to 0;
+  no rule of another seat rises.
+  (d) **READ-K-PEOPLE: "LAND", HIGH NONE: BUT IT HAD NOT SEEN THE WHOLE CHECK'S TWO REDS OF ITS SEAT** (its sweep of
+  115 files found none; `tonightSeatSecret` and `coachingInnUnderCrisis` are green at point 49 and red at point 50 by
+  the chair's run): its addendum on both is awaited; K-PEOPLE IS NOT LANDED ON THIS VERDICT. Its findings: MED 1 the
+  deal is still said both ways between two houses in 6 of the 180 towns (12 pairs in 11 towns before): ruling BR13's
+  "own people first" is not reached though the bound allows it: THE CHAIR'S TO RULE; MED 2 an undeclared family:
+  `npcs[].personality` moves with the secret (4 cards of the 180) and one goal through it; LOW: the swap also runs in
+  `settlementMigrations.js:317` and `mutateEntities.js:835` (undeclared, no test: A SAVED TOWN'S MIGRATION: to be
+  looked at before it lands); the golden of `espionageDormancyFence` moves under the same red name; the titles: Sheikh,
+  Wali, Imam and Qaid have no female form (the owner's question).
+  (e) **THE LAWS BY MESSAGE, the line's tip against point 53 (the chair's run, `/home/user/wk/laws2.cmp.txt`): 78 reds
+  at each, 57 with the same message, 21 with another under the same name.** Beyond stored counts (the corpus's
+  variants, the byte ratchets, the estate's file count 3680 -> 3686, the wiring census's rows): `poolDominance`
+  names a new drawn pool with no row, `ledger:safetyProfile:STANDARD_PATROL` (K-WATCH); `ruinFilterRoster` one more
+  reader, `src/domain/facts/forceHours.js` (K-WATCH); `observedShapeReaders` one more violation (7 -> 8: to
+  attribute); the each-family count 113 -> 114, `tests/domain/bar8DesksDef.test.js` (DESKS-DEF's guard uses `each`);
+  `mutationCoverageManifest` 5 -> 9 guards (K10); `proseDrawnAnchors` 2 -> 4 (DESKS-ECO's H2);
+  `generationForkCensus` A4 2 -> 5 rows (FISH-ROWS's three cells, left by name); one more stale row of the presumption
+  register (K-POWERS's cured line: the close's shrink).
+  MARKS-2 AND J-INCOME-2 ARE TOLD THE ROUND'S LESSON (02:30): the net at a scratch merge with the line's tip, every
+  red of `tests/lint` by message, and the older tests that name what they change.
