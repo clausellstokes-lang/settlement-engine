@@ -688,6 +688,20 @@ should be paused or archived by the owner's hand.
   door has its own mode for a literal that stood at its base (`--bank debt-at-base`): CLOSE-DOORS-1B's, on the final
   tree. THE VALIDATOR `scripts/census/census4-validate-ledger.mjs`: NO GATE RUNS IT and it cannot open since
   2c1428102 (2026-11-04, when the pool-shaped ledgers joined its directory): A DEBT NAMED TO THE OWNER.
+- **CL20 CORRECTED (05:22 UTC, 2026-11-18; THE CHAIR NAMED THE WRONG DOOR: CLOSE-DOORS-1B's STOP of 05:13).** The seat:
+  `check-observed-shape-readers.mjs` has NO `--rebank` (`--rebank --charter=§934.105` is the WRITERS' REACH door);
+  the observed shapes' doors are `--write` (shrink-only: it refuses all twelve identities), `--write
+  --raise-explained-writer <reason>` (it asks for an entry declared in `EXPLAINED_WRITER_EXEMPTIONS` and for the
+  hand-owned bank literal `tests/lint/observedShapeBank.literal.js` to move in the same commit) and
+  `--migrate-schema` (the governed two-act rung: rungs 41 to 44 of this month, each under a chair's ruling). THE
+  CHAIR'S EXACT WORD NOW: (a) THE TWO CLASS-N READS ARE NOT BANKED: CLOSE-SWEEP REMOVES THEM AT THE SOURCE (S4 item
+  5: two conjuncts of `tradeListDisplay.js` about line 697, proven to move no town); a third "MERGE" carries the
+  hunk; CLOSE-DOORS-1B holds its bundles, ceilings and the estate's counts until then; (b) every identity whose key
+  has a writer in another layer than the birth (the W rows, the C rows whose original is a tagged row, `_userEdits`
+  with its cause) goes through `--write --raise-explained-writer`, exactly as the door's fence asks, one commit with
+  the table; (c) an identity the fence refuses is NOT answered by a schema rung on the seat's own motion: it comes
+  to the chair (a rung is a ruling of its own; or the reader is cured at the source). A refusal by the seat's own
+  check stands.
 
 ## 7. Since this file was written (newest last; each hour read from the clock when written)
 - 16:19 UTC · THE CANDIDATE. The chair made the landing's merge commit itself, signed, in a checkout of its own:
@@ -2158,3 +2172,17 @@ should be paused or archived by the owner's hand.
   (J-INCOME-2's leaf where both changed it); MARKS-2; K-WATCH, K-POWERS and K-WATCH-2 together; K-PEOPLE and PEOPLE-2;
   DESKS-ECO, DESKS-DEF and DESKS-2 (its A8 commit left out: the close's file stands). The readers are seated with a
   short prompt that sends each to its file on this lane (pushed first).
+- 05:22 UTC, 2026-11-18 · FOUR SECOND READERS SEATED (05:22; Opus, high effort; each with a short prompt that sends it to its
+  file under `docs/chair/2026-11-18/readers/` on this lane, pushed at 00d04197a): READ-K-WATCH-2
+  session_01FbPLbcXoTjVnfun6ZSr5aX (K-WATCH-2 at 2abb7fb03) · READ-DESKS-2 session_01FbPLbeBjGK7vUWvU1ckVUL (DESKS-2
+  at d25ded69c) · READ-MARKS-2 session_01FbPLbdqFisYG6i7NdULERg (MARKS-2 at 1a2c7f2b4) · READ-INCOME-PDF
+  session_01FbPLbbUJaT72Ptcafns8cJ (J-INCOME-2 at 262ba9ec6 with PDF-2b at cd94d5a08). Each ends "LAND" or "DO NOT
+  LAND YET: <one reason>". PEOPLE-2 was told to go on with its part B (item 3 allowed); its reader at its hand-back.
+  THE CLOSE: nine merges local on `lane/landing-close-2026-11-18` (b4a8e9ddc: CLOSE-SWEEP's hand-back, documents);
+  origin holds six (8d7c2af33). CLOSE-SWEEP HANDED BACK (05:18; 675ac7432): S1, S2, S4.1 to S4.3, S5 green; the 525
+  hashed whole equal; thirty of thirty dumps byte-equal; `tests/architecture` 347 of 347; 121 of 122 importer tests
+  identical (the other is the cure); THE DUMP THAT DIFFERED ONCE: bar0-thorp-calm-rand-45, the Power tab's lazy
+  `DeityAssignmentPanel` not yet mounted at capture; twelve of twelve quiet re-renders equal; the wait belongs in
+  PAGE-COPY's `render.census3.jsx` (its keeper's item). It was given S4 item 5 (the two dead reads). CLOSE-DOORS-1B
+  stands on the second MERGE (its 238d030c2): the presumption classes banked debt-at-base by the door (be3c96b91:
+  fresh 0); next the news pins, pool dominance; then, after the third MERGE, the bundles, ceilings and counts.
