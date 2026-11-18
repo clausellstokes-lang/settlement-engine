@@ -1,7 +1,7 @@
 # FAULTS-WATCH hand-back
 
 Seat FAULTS-WATCH of the round FAULTS (BRIEF-FAULTS, section FAULTS-WATCH; rulings FR9, BR25 (5), BR29, BR30 (3)).
-Base 4288049ba (`lane/faults-base-2026-11-18`). Branch `lane/faults-watch-2026-11-18`, tip dfad63083. Merged nothing.
+Base 4288049ba (`lane/faults-base-2026-11-18`). Branch `lane/faults-watch-2026-11-18`, code tip 6bce910c9 (items 1 to 4 at dfad63083; item 5, the chair's, after). Merged nothing.
 
 | commit | what |
 |---|---|
@@ -12,9 +12,12 @@ Base 4288049ba (`lane/faults-base-2026-11-18`). Branch `lane/faults-watch-2026-1
 | 68328b578 | item 4 (a): `trade at work` reads the siege's stop of a house; (b) left by name; `bar8Scenes.test.js` re-keyed |
 | 32e2dc76c | the guard `tests/generators/faultsWatch.test.js`; `houseStoppedBySiege` exported for it |
 | dfad63083 | item 3's comment moved onto the changed line so no line of `rosterText.js` moves (see the net) |
+| bf776cf28 | item 5 (the chair's, 07:09 UTC): the Legal row's prison and the desk's internal key read the live prison; the guard's arm |
+| 6bce910c9 | item 5: `tests/domain/display/legalRowReadsTheRoster.test.js` re-keyed by identity |
 
-Files touched: the four on the seat's row, the new guard, the two older tests re-keyed by identity (`bar8Watch.test.js`,
-`bar8Scenes.test.js`) and this file. No new field on the saved record. No new text (every line that moves is a line or
+Files touched: the four on the seat's row, the two the chair gave for item 5 (`defenseDisplay.js`, `defenseStateProse.js`),
+the new guard, the three older tests re-keyed by identity (`bar8Watch.test.js`, `bar8Scenes.test.js`,
+`legalRowReadsTheRoster.test.js`) and this file. No new field on the saved record. No new text (every line that moves is a line or
 sentence the code already wrote elsewhere). No new atom. Nothing under the map. No stored figure re-taken.
 
 ## The rules, before and after (base corpus → tip corpus; populations: the thirty · the 150 · the 720)
@@ -98,10 +101,30 @@ no stored field: the reading is made true, the scenes over these towns were alre
 A curtailed house stays at work (bar0-hamlet-under_siege-rand-34's landing, bar0-city-under_siege+famine-rand-36's Mine).
 (b) LEFT BY NAME, see below.
 
+**5 · THE LEGAL ROW'S PRISON (the chair's item 5).** `defenseDisplay.js :: deriveSupportingCapabilities`: the Legal
+Infrastructure row's status, colour and note read `defenceOf(r).prison` (the defence home, over the LIVE roster), as its
+court already reads the live roster; not `compound.inst.hasPrison`, stamped from the raw roster. `defenseStateProse.js ::
+defenseThreatProse`: `internalRowPoolKey`'s prison argument is the same `defenceOf(settlement).prison` (its now unread
+`compound` local is replaced by a comment line, so no line of either file moves). THE GUARD'S ARM (constructed): r2r-city-41
+with its prison house set ruined (the stamped flag still true, the court still sitting): the row reads "Court only", its note
+is no longer "Full enforcement chain", and the desk draws "Internal Security: court without detention", the pool the row
+names, in the owner's record, `toPublicSafe` and the share veil alike; the negative, the same town unruined, keeps
+"Court + Prison" and the full chain in all three. At the base the positive fails in all three views, the negative passes.
+PROOF OF NO MOVE: the 900 re-born and re-rendered at bf776cf28 against dfad63083: every record byte-equal (900 of 900),
+every dump byte-equal whole (every tab, the Defense tab among them, the PDF, the Tonight sheet and the journal); the two
+functions over the 900 records give equal output, and the stamped flag equals the live prison in every born record. 0 of
+525 (the 525's generator path does not reach either file). OTHER PAGE READERS OF THE STAMPED FLAG, NAMED, NOT CHASED: they
+would disagree with the row only where a prison is ruined after birth: `src/domain/display/threatAssessment.js` about line
+346 (the Defense tab's Internal Security assessment: "Arrest, trial and gaol all work here." / "People are locked up without
+trial." read `compound.inst.hasCourtSystem && hasPrison`), and `src/domain/display/stateProse/generalStateProse.js` about line
+1305 (DS-GEN-17's key 'ADMINISTERED' on `inst.hasCourtSystem && inst.hasPrison`). The generator's own readers
+(`safetyProfile.js`'s prison notes, `defenseGenerator.js`) write at birth, where stamp and roster agree.
+
 ## The guard
 
-`tests/generators/faultsWatch.test.js`, 11 tests over 11 seeds (each seed loop collects its failures; a negative beside each
-positive): at the base 7 fail (every positive and every law), the 4 negatives pass; at the tip 11 pass.
+`tests/generators/faultsWatch.test.js`, 13 tests over 11 seeds (each seed loop collects its failures; a negative beside each
+positive): at the base 8 fail (every positive and every law, item 5's constructed arm among them), the 5 negatives pass;
+at the tip 13 pass.
 
 ## Declared moves (stored record, base → tip over the 900; the 525 by the golden's own hash)
 
@@ -119,6 +142,12 @@ positive): at the base 7 fail (every positive and every law), the 4 negatives pa
   file at the base): `town|germanic|plains|road|frontier|golden-master-v3` stored 666bbb9495f1… base 882c03fc1cbe… tip
   cea4c432a2e8…; `…|plagued|golden-master-v3` stored 8310acde9c23… base 048625988de6… tip 02f4dd4ac55e….
 - `sovereigntyLightingContract.walker` the estate's file count: 3690 at the base → 3691 at the tip (stored 3641): my guard file.
+- `tests/build/generationWorkerLazy.test.js` (WORKER_BUNDLE_CEILING_BYTES, red at the base too: built, the base's worker is
+  2,536,023 B): the generation worker 2,536,023 → 2,561,848 B (+25,825). Item 4's reading pulls the dependence table's
+  `SERVICE_DEPENDENCE`, `SERVICE_FREE_OF_HOUSE` and the gate-hold rows into the worker (tree-shaken out before). The SV7 arm is
+  what makes the verdict exact on the 2,348 houses; without it 70 houses differ (none of the atom's trades). Item 5 adds 0.
+- `proseWiringCensus.walker` car 0f (the alias draft): "the withdrawn candidates, reported and never proposed" 46 → 48 by item
+  5's two `defenceOf(...)` read paths (a census figure in the walker; not re-taken).
 - `mutationCoverageManifest` (TOTALITY): the gap list 5 → 6, `tests/generators/faultsWatch.test.js` added (beside the five
   bar8 guards already there). Its cure is an entry in `scripts/mutation-coverage-manifest.json`: NOT ON MY ROW, named, left.
 
@@ -137,7 +166,12 @@ every one the same exit code and the same failures by name and message at base a
 47 red at the base. At the tip, beyond the base's: (i) `noLegacyFactionReaders` 3 → 4: its exemption
 `'src/generators/power/rosterText.js:126': 'a tension'` is keyed by line and item 3's two comment lines moved it to 128;
 CURED in dfad63083 (the comment trails the changed line; the walker reads the base's 3 at the tip, by name and message);
-(ii) the two figures above (file count, mutation manifest); (iii) three `STACK_TRACE_ERROR`s under load
+(ii) the figures above (file count, mutation manifest, after item 5 the alias draft's 46 → 48); (iv) after item 5,
+`negativeAssertionAnchor.walker` caught the arm's two bare `.not.toMatch`: CURED in the same push (anchored with
+`expectAbsentWithAnchor`; the walker green at the tip, as at the base); item 5's 89 older test files (every test naming
+the two files, their functions or the row's words) each alone at base and tip: the same by name and message but
+`legalRowReadsTheRoster` (re-keyed, above), `generationWorkerLazy` (the bundle figure above; red at both once built) and
+the alias draft's count; (iii) three `STACK_TRACE_ERROR`s under load
 (`observedShapeSentinel` M8/M9 gate 1, `presumedThings` "the admitted instruments", `siteCoherenceRatchet` C5 determinism):
 each run alone at base and tip, the same by name and message. Red at both with the same message (named, not chased): the
 brief's known reds (`factLayers.walker` importsAsPrinted, `proseEntryContradiction` 3510/3501 and 2802/2794, the observed

@@ -209,9 +209,9 @@ describe('5 · the Legal row\'s prison is the live roster\'s (the chair\'s item 
     const failures = collectSeedFailures(views(s), ([form, r]) => {
       const row = legal(r);
       expect(row, form).toBeTruthy();
-      expect(String(row.status), `${form}: the Legal row`).not.toMatch(/Prison/);
       expect(String(row.status), `${form}: the Legal row`).toMatch(/ only$/);
-      expect(String(row.note), `${form}: the Legal row's note`).not.toMatch(/Full enforcement chain/);
+      expectAbsentWithAnchor(String(row.status), 'Prison', ' only', `${form}: the Legal row's status`);
+      expectAbsentWithAnchor(String(row.note), 'Full enforcement chain', 'without detention', `${form}: the Legal row's note`);
       expect(internalKey(r), `${form}: the desk's internal pool`).toBe('Internal Security: court without detention');
     });
     expectNoSeedFailures(failures, 'item 5 positive');
