@@ -224,3 +224,100 @@ core; `engineCoreLazyEdge` and `bootSmoke` green after one build.
 
 - Nothing of FR3, FR4 or FR12 is left.
 - Not raised: nothing.
+
+
+## FR20 (the chair's ruling after READ-THREE), tip fed4d9af8 and the hand-back after it
+
+| commit | item |
+|---|---|
+| 00635b8d9 | (1) HIGH · merge of `lane/faults-need-2026-11-18` at e5fb6347c (one conflict, `tests/helpers/calmFactsDouble.js`: NEED's `needNotBroughtIn` with `any: false` and my `fishBoughtIn: false`, both kept); the guard reads the luxury labels from `tradeListDeclarations.js :: LUXURY_CLASS` (NEED's FR13 removed `LUXURY_LABELS_COPY`). The merge differs from NEED's tip only in my own files. The guard green at the merge. |
+| c49bd8a16 | (2) MED · the fish card's two siblings: the catalogue line and the pool's #0 take the late set, the twins in the chair's words. |
+| fed4d9af8 | (3) MED → a class · the late re-read resolves the draw-time sibling sets on the final facts FIRST. |
+
+### (2) The fish card's two siblings
+
+| the line | its twin (the chair's words) |
+|---|---|
+| "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait." (`institutionalCatalog.js`) | "An open-air stall or small covered market where salted and dried fish is sold. No fresh catch is landed here." |
+| "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day." (#0) | "An open stall or small roofed market for salted and dried fish, brought in from elsewhere. The catch is no longer landed here." |
+
+Moves: r2r-village-11 (the 720; the catalogue line beside "Preserved fish") takes its twin; idle r2r-village-45 (#0) and the live
+fisheries (bar0-village-calm-rand-46, -32, bar0-village-famine-rand-45, r2s-occupied-village-2: the catalogue line) keep theirs.
+THE DOORS (named, not reshaped, as the ruling asks): `presumed-things-door --check` reads THREE FRESH LINES, all the thing
+`market`: both twins (the words "small covered market" and "small roofed market", which their originals carry too, banked
+under the originals' own rows) and the catalogue line's own text, now a literal in `institutionDescVariants.js` (it was banked
+under `institutionalCatalog.js`): fresh 38 → 41. THE SMALLEST CHANGE I PROPOSE: the close banks the three rows beside their
+originals' (the words are the chair's and true; the presumption is the original's, a market where fish is sold). The classes door
+reads no fresh line (3 → 3) and two rows stale (the two originals, now declared: 154 → 156).
+
+### (3) The draw-time sets, read on the final facts
+
+`assembleSettlement.js :: readHouseDescsLate` (the hunk FR20 gives, and its import line): a house whose stored description
+(tier noun aside) is the original of a `DESC_VARIANT_SIBLINGS` set is resolved through that set on the final record's facts
+FIRST (`resolveSibling`, the first admitted member; none admitted: kept and noted), then the late table reads the result as
+before. `settledStressTypes` and the draw unchanged; no new text; no draw moves; no hash read.
+
+MEASURED FIRST (a): the 900 and 600 fresh random-stress births (r2r-town-, r2r-city-, r2r-village-2000..2199), at c49bd8a16,
+re-resolved in scratch; then BORN at the change: the moved houses equal the prediction exactly (6 of the 900, 19 of the 600;
+each record moves in that house's `desc` only, and the Mercenary quarter's in its alias
+`defenseProfile.institutions.mercenary[0].desc`, the same house object). EVERY MOVE, ONE BY ONE:
+
+| population | town | house | crisis on the record (forced at the draw) | the move |
+|---|---|---|---|---|
+| the 900 | bar0-city-under_siege+famine-rand-28 | Mercenary quarter | under_siege+famine (forced: under_siege+famine) | CORRECTION |
+| the 900 | bar0-city-wartime-rand-29 | Mercenary quarter | wartime (forced: wartime) | CORRECTION |
+| the 900 | bar0-city-under_siege+famine-rand-30 | Mercenary quarter | under_siege+famine (forced: under_siege+famine) | CORRECTION |
+| the 900 | bar0-city-wartime-rand-35 | Mercenary quarter | wartime (forced: wartime) | CORRECTION |
+| the 900 | r2r-metropolis-14 | Toll bridge | under_siege (forced: none) | emergent under_siege: its crisis twin |
+| the 900 | r2s-under_siege-city-1 | Mercenary quarter | under_siege (forced: under_siege) | CORRECTION |
+| fresh | r2r-town-2060 | Fish market | none (forced: none) | CORRECTION |
+| fresh | r2r-town-2069 | Toll bridge | under_siege (forced: none) | emergent under_siege: its crisis twin |
+| fresh | r2r-town-2069 | Annual fair | under_siege (forced: none) | emergent under_siege: its crisis twin |
+| fresh | r2r-town-2147 | Charcoal burner | none (forced: none) | CORRECTION |
+| fresh | r2r-town-2156 | Customs house | none (forced: none) | CORRECTION |
+| fresh | r2r-town-2170 | Town granary | famine (forced: none) | emergent famine: its crisis twin |
+| fresh | r2r-city-2045 | Toll bridge | under_siege (forced: none) | emergent under_siege: its crisis twin |
+| fresh | r2r-city-2045 | Burial grounds and charnel house | under_siege (forced: none) | emergent under_siege: its crisis twin |
+| fresh | r2r-city-2061 | Toll bridge | under_siege (forced: none) | emergent under_siege: its crisis twin |
+| fresh | r2r-city-2061 | Burial grounds and charnel house | under_siege (forced: none) | emergent under_siege: its crisis twin |
+| fresh | r2r-city-2111 | Mercenary quarter | wartime (forced: none) | CORRECTION |
+| fresh | r2r-city-2119 | Burial grounds and charnel house | under_siege (forced: none) | emergent under_siege: its crisis twin |
+| fresh | r2r-city-2119 | Toll bridge | under_siege (forced: none) | emergent under_siege: its crisis twin |
+| fresh | r2r-city-2122 | Burial grounds and charnel house | under_siege (forced: none) | emergent under_siege: its crisis twin |
+| fresh | r2r-city-2122 | Toll bridge | under_siege (forced: none) | emergent under_siege: its crisis twin |
+| fresh | r2r-city-2147 | Mercenary quarter | wartime (forced: none) | CORRECTION |
+| fresh | r2r-city-2159 | Mercenary quarter | none (forced: none) | CORRECTION |
+| fresh | r2r-city-2175 | Mercenary quarter | occupied (forced: none) | CORRECTION |
+| fresh | r2r-city-2191 | Mercenary quarter | none (forced: none) | CORRECTION |
+
+THE CORRECTIONS (13: moves in towns whose move is not an emergent crisis's twin), each against the final record, DECLARED:
+- Mercenary quarter in a city, nine towns ("Organized sellsword companies. Major forces (hundreds to thousands)." → "…Real
+  forces, a few score to a few hundred blades apiece."): the original declares `tier: = metropolis`, refused in a city; at the
+  draw the twin's `mercenary` was unanswered (no force yet), so the original was kept; on the final record the force stands and
+  the twin is admitted. Forced crises (bar0-city-under_siege+famine-rand-28, -30, bar0-city-wartime-rand-29, -35,
+  r2s-under_siege-city-1), emergent wartime or occupation (r2r-city-2111, -2147, -2175) and none (r2r-city-2159, -2191).
+- r2r-town-2060 Fish market: "the morning's catch" () in a town with no navigable water on the final record
+  (water: none) → the inland twin (salted, smoked and dried fish by cart).
+- r2r-town-2147 Charcoal burner: "Kiln crews in the surrounding woodland" () in a desert → its twin.
+- r2r-town-2156 Customs house: "…via the port or main roads" () with no docks → "…by the main roads".
+NO MOVE IS UNEXPLAINED; nothing stopped.
+
+(b) THE 525: 0 of 525 move (c49bd8a16 against fed4d9af8's tree, the golden's own procedure; no reference configuration rolls an
+emergent crisis that a draw-time set reads).
+
+(c) AFTER, in both populations: no besieged town (67 of the 900, 9 of the 600) keeps the non-siege original of a set that holds a
+siege twin; no siege twin stands in a town with no siege (0 and 0).
+
+(d) THE GUARD'S ARM (`tests/generators/faultsRows.test.js`, "FR20 (3)"): an emergent siege (r2r-town-2069: the toll bridge and
+the fair; r2r-city-2045 and r2r-city-2122: the toll bridge and the burial grounds) reads its siege twins; a forced siege
+(r2s-under_siege-town-2) reads as before; a sweep of 60 fresh towns and cities holds the law of (c) both ways (a crisis the
+confirm pass dropped leaves no twin). RED at c49bd8a16, which is also the mutation with the pass removed (3 of 4 cases, 3 of 60
+towns), GREEN at fed4d9af8 (the guard 15 of 15).
+
+(e) BY MESSAGE, c49bd8a16 against fed4d9af8, each alone: `generationForkCensus` the same; `pipelinePinnedMode` the same;
+`houseDescLateReRead` green, the same; `census4Ledger.walker` green, the same; `pipelineContract` green; the golden master the
+same; both doors the same. `poolDominance.walker` MOVES: "every drawn pool has a row" gains
+`ledger:institutionDescVariants:DESC_VARIANT_SIBLINGS` (the pass notes the draw-time sets under the pool id and kind the draw
+site's own inland arm uses; the register row is the close's); `DESC_LATE_SIBLINGS`'s figure 1228 → 1226 towns (top1 0.8110, the
+ceiling unmoved). Lint otherwise the same names and messages (`readerShapeResolver` 262 → 261: the figure moves between runs).
+I re-take nothing.
