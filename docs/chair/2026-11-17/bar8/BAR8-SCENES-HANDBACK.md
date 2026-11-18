@@ -177,7 +177,7 @@ argmax id of every row before it is unchanged (`drawDeclared.js :: lineIdOf` is 
 
 | # | the twin | declared | prints in (tip renders) |
 |---|---|---|---|
-| (1) | "A laden cart or two comes down from the workings in a day, and the road is quiet between them." (twin of "Laden carts … a line that never seems to end.") | needs `trade at work: stone`, `tier: ≤ hamlet`; excludes `crisis: under_siege` | bar0-hamlet-calm-rand-45 (C15891), bar0-hamlet-calm-rand-47, r2r-hamlet-32, r2r-hamlet-40, r2r-hamlet-58, r2r-hamlet-6 |
+| (1) | "A laden cart or two comes down from the workings in a day, and no more." (twin of "Laden carts … a line that never seems to end.") | needs `trade at work: stone`, `tier: ≤ hamlet`; excludes `crisis: under_siege` | bar0-hamlet-calm-rand-45 (C15891), bar0-hamlet-calm-rand-47, r2r-hamlet-32, r2r-hamlet-40, r2r-hamlet-58, r2r-hamlet-6 |
 | (2) | for `POLITICAL_FLAVOR.stable`'s row "… the history here is long and steady …" (`twinKey: 'stable: long and steady'`): with two great events, the original's own true branch, "It has come through the {A} and the {B}, and travellers still remember the place kindly"; with one, "The {X} is the one great event in its past, and what it faces now may be the second"; with none, "No great event marks its past, and what it faces now may be the first" | `crisis: under_siege, famine, occupied, plague_onset, wartime` (the original now declares `crisis: calm` and the ten other kinds, and excludes those five) | "… may be the second": r2s-wartime-town-1; "… may be the first": bar0-hamlet-under_siege-rand-35, r2s-famine-town-2; the true branch prints as before wherever it was drawn |
 | (3) | "Signs in {name} still offer enchanting by the hour, but the work is slow and dear for want of what it takes." (twin of "Magic is a trade in {name} like any other: …") | needs `enchanting`; excludes `trade at work: arcane` | admitted in the nine towns (the base's five and my four: bar0-city-under_siege+famine-rand-47, r2r-metropolis-14, r2r-metropolis-31, r2r-metropolis-42, r2s-under_siege-metropolis-1, r2s-under_siege-metropolis-3, r2s-indebted-metropolis-3, r2s-monster_pressure-metropolis-1, r2s-wartime-metropolis-2); drawn in none of the 900, so it keeps the slot only |
 
@@ -243,3 +243,25 @@ declaration against the stored ledger. The ledger is a stored register: not re-t
 
 THE GUARD now holds 22 tests. They fail at the base and pass at 4efba5868 for every arm whose premise is a change of this
 seat: the three twins and their refusals in the other states; each new twin last in its pool; no line with two twins admitted.
+
+**THE LAST COMMIT, 0dae3609f, AND THE FINAL NET.**
+- The small quarry's twin was first worded "… and the road is quiet between them." The presumption-classes walker reads
+  `is quiet` as a claim of no threat (a FRESH undeclared line), so it now reads **"A laden cart or two comes down from the
+  workings in a day, and no more."**
+  - The declaration is unchanged.
+  - Re-rendered at 0dae3609f, the thirty prints it in bar0-hamlet-calm-rand-45 and bar0-hamlet-calm-rand-47, as before.
+  - The thirty's rules stand as in the table above.
+- My guard's one un-anchored negative (`not.toMatch`) is replaced by the twin's branches asserted word for word.
+- THE NET AT THE TIP, each alone through `gate-tail.sh`, compared with the base:
+  - `typecheck:domain:strict` 0, `typecheck:ratchet` 0, `tests/architecture` green, eslint clean on every changed file.
+  - The bar5/bar6 guards: the same one red as at the base.
+  - N3: the same 7 red, with the same messages (both granted files in).
+  - `tests/lint` by name: 71 at the base, 71 at the tip, the same names.
+  - No build was re-taken: no file under `src/domain/facts/` changed after 13c4cf7a0's build.
+- THE DOORS.
+  - `presumption-classes-door --check`: base "hits 1787 · banked 1938 · fresh 0 · stale 151"; tip "hits 1786 · banked 1938 ·
+    **fresh 0** · stale 152". The one new stale row is `src/generators/narrativeText.js · outside`, the 12c row this seat
+    declared (the close's `--shrink`).
+  - `presumed-things-door --check`: identical at base and tip, line for line.
+- WHAT IS LEFT is §5's items 2, 5 and 6 (r2r-village-36; the stalls' detector; the leaf's routing), §6's two uncovered stone
+  states (0 towns of the 900), and the ledger's stable[2].
