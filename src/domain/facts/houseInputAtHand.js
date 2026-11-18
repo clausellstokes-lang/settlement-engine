@@ -43,8 +43,8 @@ import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { resourceShortageImport } from '../resourceSemantics.js';
 import { SPENT_GROUND_YIELD, SPENT_GROUND_WORKERS, GROUNDS_WORKED_OFF_CHAIN, INPUT_GAP_HELD_EVERYWHERE, HOUSE_TRADE_INPUT, HOUSE_NEED_INPUT } from '../../data/crisisDependence.js';
 import { warHoldsIron } from './warIronHook.js'; // BIRTH-3 (BR9): the iron hook's own predicate (EG1: import-free)
-import { BUYER_IMPORT_WORDS, BUYS_AND_WORKS, RUNS_ON_BOUGHT, TAKERS, isSourceHouse } from './houseKinds.js'; // BIRTH-1: an import-free leaf (EG1)
-import { impliedGroundsOf, impliedGroundsShown, sourceStoryOf, ventureOnPage, idOfHouse } from './supplyStory.js'; // BIRTH-2: the one reading of the grounds and the stories (EG1); BIRTH-3 (BR8): of the stored record alone
+import { BUYER_IMPORT_WORDS, BUYS_AND_WORKS, MATERIAL_OF, RUNS_ON_BOUGHT, TAKERS, isSourceHouse } from './houseKinds.js'; // BIRTH-1: an import-free leaf (EG1)
+import { groundGives, groundOfFamily, impliedGroundsOf, impliedGroundsShown, sourceStoryOf, ventureOnPage, idOfHouse } from './supplyStory.js'; // BIRTH-2: the one reading of the grounds and the stories (EG1); BIRTH-3 (BR8): of the stored record alone
 
 /**
  * What each chain's input is CALLED on the record (the economy's goods vocabulary and the nearby-resource keys), and how
@@ -786,9 +786,57 @@ export function ventureHouseOf(record) {
 export const inputMissingBeforeStory = (record, inst, family) => !!CHAIN_INPUTS[family]
   && inputAtHandCore(record, family, /** @type {{ name?: unknown }} */ (inst), { rawResource: CHAIN_RAW_INPUT[family] }) === 'missing';
 
+/** One reading a record object. @type {WeakMap<object, ReadonlyArray<string>>} */
+const NEVER_HELD_OF = new WeakMap();
+
+/**
+ * FAULTS-BIRTH (the sixth chair's FR8 (c), BRIEF-BIRTH-2's item 2 (e), 2026-11-18; vetoable by the owner): A BUYER ON A ROUTE
+ * THAT IS ISOLATED EVEN IN ORDINARY TIMES whose material the land never held tells THE OWNER'S FOURTH STORY: the ground of
+ * its material is USED UP (a reading of the page, stored nowhere: the Depleted list prints it), the house idle and marked
+ * short. Read off the stored record alone (no seed: a town on no road buys nothing in, so the story is the only one): every
+ * live native buyer (`houseKinds.js :: BUYS_AND_WORKS`) of a material family (`MATERIAL_OF`) on such a route that the page
+ * marks short (`housesShortOf`), on no spent ground of its own and not the failed venture, where no ground of that material
+ * is on the record or implied by a house: the ground of its material (`supplyStory.js :: groundOfFamily`). A material no
+ * ground gives (hides, wool, the luxury goods) implies none: left by name. @param {InputRecord | null | undefined} record
+ * @returns {ReadonlyArray<string>} the grounds, sorted
+ */
+export function neverHeldGroundsUsed(record) {
+  if (!record || typeof record !== 'object' || /** @type {Record<symbol, unknown>} */ (record)[AT_THE_ECONOMY]) return [];
+  const hit = NEVER_HELD_OF.get(record);
+  if (hit) return hit;
+  /** @type {Set<string>} */
+  const out = new Set();
+  if (!hasTradeRouteConnection(str(record?.config?.tradeRouteAccess))) {
+    const c = /** @type {Record<string, unknown>} */ (record.config || {});
+    const held = [...arr(c.nearbyResources), ...arr(c.nearbyResourcesNative), ...arr(c.nearbyResourcesDepleted)].map(str)
+      .concat([...impliedGroundsOf(/** @type {Parameters<typeof impliedGroundsOf>[0]} */ (record)).states.keys()]);
+    const short = housesShortOf(record);
+    const spent = housesOnSpentGround(record);
+    const venture = ventureHouseOf(record);
+    for (const inst of liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (record))) {
+      const name = inst && typeof inst.name === 'string' ? inst.name : '';
+      if (!name || isCustom(inst) || !short.has(name) || spent.has(name) || venture?.name === name) continue;
+      const id = idOfHouse(/** @type {{ name?: unknown }} */ (inst));
+      const family = BUYS_AND_WORKS.has(id) && Object.prototype.hasOwnProperty.call(MATERIAL_OF, id) ? MATERIAL_OF[id] : '';
+      if (!family || held.some((g) => groundGives(g, family))) continue;
+      const ground = groundOfFamily(family);
+      if (ground) out.add(ground);
+    }
+  }
+  const list = Object.freeze([...out].sort());
+  NEVER_HELD_OF.set(record, list);
+  return list;
+}
+
 /**
  * BIRTH-2: THE TOWN'S GROUNDS AS THE PAGE READS THEM, beyond the stored lists (the Resources tab's Nearby Resources): the
- * grounds the houses imply, there or used up (the failed venture proves none; BIRTH-3, BR8: read off the stored rows). @param {InputRecord | null | undefined} record
+ * grounds the houses imply, there or used up (the failed venture proves none; BIRTH-3, BR8: read off the stored rows), and
+ * (FAULTS-BIRTH, FR8 (c)) the grounds an isolated town's buyers tell used up (`neverHeldGroundsUsed`). @param {InputRecord | null | undefined} record
  * @returns {{ there: string[], used: string[] }}
  */
-export const impliedGroundsOnPage = (record) => (record && typeof record === 'object' && /** @type {Record<symbol, unknown>} */ (record)[AT_THE_ECONOMY] ? { there: [], used: [] } : impliedGroundsShown(/** @type {Parameters<typeof impliedGroundsShown>[0]} */ (record)));
+export const impliedGroundsOnPage = (record) => {
+  if (record && typeof record === 'object' && /** @type {Record<symbol, unknown>} */ (record)[AT_THE_ECONOMY]) return { there: [], used: [] };
+  const shown = impliedGroundsShown(/** @type {Parameters<typeof impliedGroundsShown>[0]} */ (record));
+  const never = neverHeldGroundsUsed(record).filter((g) => !shown.used.includes(g) && !shown.there.includes(g));
+  return never.length ? { there: shown.there, used: [...shown.used, ...never] } : shown;
+};
