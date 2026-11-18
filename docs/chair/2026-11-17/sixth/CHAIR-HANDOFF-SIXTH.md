@@ -978,3 +978,27 @@ should be paused or archived by the owner's hand.
 - **00:39 UTC. ALSO MOVING:** PDF-2 on its second branch (`lane/bar8-pdf-2b-2026-11-17`: cde95b1f4 00:26, 390474464 00:31: its section's item 3 and the guard's
   `test.each` made one plain test); FISH-ROWS (`lane/bar8-fish-rows-2026-11-17`: the hunk dd6f8c75a, the register
   ac2baad1b, three fish anchors re-keyed 2676ad7ea, its guard f6419a36b at 23:57; its hand-back awaited).
+- **00:55 UTC. SCENES-2 WAS REFUSED AT ITS FIRST ACT (00:40; nothing ran): THE OWNER WAS GIVEN TWO WAYS, AND ANSWERED "Do both".** The chair's words to the owner
+  (00:41), the part that the answer takes up, verbatim: "B. Reply here with "do both" and visit none of them. I would
+  then: add one sentence to the repo's CLAUDE.md on the working line saying a builder may commit and push on its own
+  lane branch, so new builders start with your permission in front of them. It reaches master only when you merge;
+  take the finished work the first five printed into their chats and commit it on their branches myself, then seat
+  fresh builders for the two that never started." (way A was the owner's line pasted in each of seven sessions).
+  THE OWNER'S REPLY, THE WHOLE OF IT: **"Do both"**. WHAT THE CHAIR DOES WITH IT, AND NO MORE:
+  (1) THE SENTENCE: one paragraph in `CLAUDE.md` after "Do not ... commit ... without explicit authority", committed on
+  the line's tip as 919e3a7b216e9af1f4d441e9087c19178329a71b, with the rows of points 43 and 44 in
+  `LANDINGS-SIXTH.md` as 99ca9ad51a573bfcab8bc35c861a5107969ca977 (both in `/home/user/b1`; the line's push is in
+  flight); merged into the landing branch as 55b954f984435dcdf787c3da2e6f2fab3aa73802 (docs only) so that a seat cut
+  from it reads it. No test or script pins `CLAUDE.md`. IT IS ON THE OWNER'S VETO LIST FOR THE CLOSE.
+  (2) THE FIVE SEATS' FINISHED WORK (K-POWERS, K-PEOPLE, K-WATCH, DESKS-DEF, DESKS-ECO): each seat is first told of the
+  owner's second word and of the paragraph on the line (it may fetch and read it): IF ITS OWN CHECK THEN ALLOWS, IT
+  COMMITS AND PUSHES ITS OWN BYTES (the best outcome); IF NOT, the chair rebuilds its tree from what the seat printed
+  into its conversation (read with `list_events`), in a scratch worktree at the seat's own HEAD
+  (`/home/user/rk/<seat>`: k-powers, k-people, k-watch at 1ceae1ede; desks-def, desks-eco at f1ca75555; hooks
+  installed), PROVES EACH FILE BYTE-EQUAL (the new blob ids on the printed diff's `index` lines; the seat's
+  `git hash-object` lines where it will print them), runs the seat's guard, and commits on the seat's branch with
+  the seat named as the author of the work. Then the usual form: the chair's read, a second reader, the merge on the
+  line's tip, the shared whole check, the landing.
+  (3) THE TWO THAT NEVER STARTED: fresh seats cut from commits that hold the paragraph: J-INCOME-2 from the line's tip,
+  SCENES-3 from the landing branch; the old J-INCOME and SCENES-2 are told to stand down (not archived: that stays the
+  owner's).
