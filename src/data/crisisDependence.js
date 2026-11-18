@@ -1247,7 +1247,7 @@ export const HOUSE_DEPENDENCE = Object.freeze({
   "sewage_system": NONE,
   "shepherd": Object.freeze([FIELD_WORK, LIVESTOCK]), // BAR5-MARKS (LAW 5): its mutton is the herds a famine can fail; // SV8: its flocks on the grazing the siege curtails
   "shepherd_collective": Object.freeze([FIELD_WORK, LIVESTOCK]), // BAR5-MARKS (LAW 5): its mutton is the herds a famine can fail; // SV8: the same flocks, held in common
-  "shipyard": Object.freeze([INPUT]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`)
+  "shipyard": Object.freeze([INPUT, FIELD_WORK]), // BAR6-MARKS (8a.input): the trade works this good (`HOUSE_TRADE_INPUT`); BAR8 MARKS-2 item 2 (K's 12a, C0476): its ship timber is felled on the stand beyond the walls (its own chain's card: "Impaired · Normally yields Ocean-going vessels" under the siege) or bought in, so a siege curtails the yard (SV8), "Curtailed by the siege."
   "slave_market": NONE,
   "slave_market_district": NONE,
   "small_hospital": NONE,

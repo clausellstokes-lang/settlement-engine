@@ -322,11 +322,26 @@ export function housesOnImportedInput(settlement) {
     const id = typeof house.catalogId === 'string' && house.catalogId ? house.catalogId : catalogIdForName(house.name);
     const good = id && Object.prototype.hasOwnProperty.call(INPUT_IMPORTED_AS, id) ? INPUT_IMPORTED_AS[id] : null;
     if (good && imports.some((x) => new RegExp(`\\b(?:${good})\\b`).test(x))) out.add(house.name); // BAR8 MARKS-2: a value of several words is any one of them
+    // BAR8 MARKS-2 item 2 (K's 12a): or the house is the one house of a chain that IS the trade in its material (the chain
+    // lives on goods: the furs brought from the north, `furs_north`), so its material comes in by that trade
+    else if (good && ownTradeChainOf(settlement, house.name)) out.add(house.name);
   }
   // BAR6-MARKS (8a.input, fact (a)): a house whose trade is a good no gap speaks of, which the imports bring
   for (const [house, want] of housesWantingTradeInput(settlement)) if (want.reach === 'imported') out.add(house);
   IMPORTED_HOUSES.set(settlement, out);
   return out;
+}
+
+/**
+ * BAR8 MARKS-2 item 2 (K's 12a; vetoable by the owner): is this house the one house of a chain of the record that lives on
+ * goods (`CHAIN_DEPENDENCE`: the trade itself, as the furs brought from the north)? The furrier's district is its furs chain's
+ * one house; under a siege the chain prints "Stopped by the siege." and the district works the pelts it holds.
+ * @param {object} settlement @param {string} name a roster house's name @returns {boolean}
+ */
+function ownTradeChainOf(settlement, name) {
+  const chains = /** @type {{ economicState?: { activeChains?: unknown } | null }} */ (settlement).economicState?.activeChains;
+  return (Array.isArray(chains) ? chains : []).some((c) => c && Array.isArray(c.processingInstitutions) && c.processingInstitutions.length === 1
+    && c.processingInstitutions[0] === name && chainDependenceOf(c).includes(GOODS));
 }
 
 /**
