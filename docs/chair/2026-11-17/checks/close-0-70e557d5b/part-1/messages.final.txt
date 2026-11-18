@@ -1,0 +1,425 @@
+### tests/components/bar2ServicesRows.test.jsx :: BAR2-SERVICES batch 1: a service row carries its house's mark; four rows reworded or renamed true SV1 MARKED: each row prints with its house's mark before it
+AssertionError: expected [ Array(1) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/components/bar2ServicesRows.test.jsx:117:22
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20
+
+### tests/components/phoneChromeFloor.census.test.js :: THE PHONE CHROME FLOOR — a census of the source, on every route the router declares each surface matches its registry row, and an owned surface may only shrink
+AssertionError: 
+ROUTE_BASELINE mismatch. Each row is what this census measured on that surface.
+A `floored` number that FELL means a surface stopped being floored or stopped existing — which "zero violations" cannot see. One that ROSE means new floored lines; say so.
+A `bare` number that rose on an OWNED surface means new sub-floor sizes shipped behind the name of the lane that is curing the old ones; cure them instead of raising the row.
+Deliberate? Re-measure, re-record the row in the same car, and name the cause in the commit message.
+  /create  floored 618 -> 621
+  /settlements  floored 861 -> 864
+  /gallery  floored 663 -> 666
+: expected [ …(3) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/components/phoneChromeFloor.census.test.js:632:7
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+
+### tests/data/tailHouses1Gaps.test.js :: TAIL-HOUSES batch 1: a house is not described at work on an input that never reaches it the house whose input is missing prints the rewording, not the old text
+AssertionError: a house without its input is not described at work on it — 23 of 31 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[0] r2r-village-4|Potter|Wheel-thrown pottery for domestic use.|A wheel and a small kiln for domestic pottery — r2r-village-4: the Potter lacks its input: expected false to be true // Object.is equality
+[1] r2r-town-17|Potter|Throws pottery at the wheel for the household|Pottery for the household — r2r-town-17: the Potter lacks its input: expected false to be true // Object.is equality
+[2] r2r-village-27|Potter|Domestic ware thrown on the wheel|A wheel and a modest kiln for domestic ware — r2r-village-27: the Potter lacks its input: expected false to be true // Object.is equality
+[3] r2r-town-10|Brickmaker|Moulds and fires clay bricks for construction.|Moulds and fires clay bricks for construction whenever clay can be had. — r2r-town-10: the Brickmaker lacks its input: expected false to be true // Object.is equality
+[4] r2r-town-45|Brickmaker|Shapes and fires clay into bricks for building.|Shapes and fires clay into bricks for building, whenever clay can be had. — r2r-town-45: the Brickmaker lacks its input: expected false to be true // Object.is equality
+[5] r2r-town-28|Brickmaker|Clay is moulded and fired into building brick here|Moulds and a kiln for building brick — r2r-town-28: the Brickmaker lacks its input: expected false to be true // Object.is equality
+[9] r2r-hamlet-12|Dairy farmer|Keeps cattle or goats for milk, butter, and cheese.|A dairy for milk, butter, and cheese from cattle or goats — r2r-hamlet-12: the Dairy farmer lacks its input: expected false to be true // Object.is equality
+[11] r2r-village-14|Dairy farmer|Runs cattle or goats for their milk|Milk, butter, and soft cheese from cattle or goats, whenever livestock can be had. — r2r-village-14: the Dairy farmer lacks its input: expected false to be true // Object.is equality
+[12] r2r-city-22|Salt works|Evaporation pans or brine processing along the coast or riverbank.|Evaporation pans and brine-works, at work whenever brine can be had. — r2r-city-22: the Salt works lacks its input: expected false to be true // Object.is equality
+[13] r2r-village-36|Salt works|Evaporation pans and brine-works turn the local saline source into salt|Evaporation pans and brine-works for making salt whenever brine can be had — r2r-village-36: the Salt works lacks its input: expected false to be true // Object.is equality
+[14] r2r-town-29|Salt works|Salt is won from local brine|Broad evaporation pans, where salt is won from brine whenever brine can be had. — r2r-town-29: the Salt works lacks its input: expected false to be true // Object.is equality
+[15] r2r-hamlet-18|Salt works|The works can operate only where a strong local brine source supports it.|Evaporates brine, whenever brine can be had — r2r-hamlet-18: the Salt works lacks its input: expected false to be true // Object.is equality
+[17] r2r-town-17|Charcoal burner|What they make feeds the hottest fires in the settlement.|whenever wood can be had — r2r-town-17: the Charcoal burner lacks its input: expected false to be true // Object.is equality
+[18] r2r-hamlet-9|Charcoal burner|A collier's kilns, smoking under their turf|A collier's kilns under their turf, turning wood into charcoal whenever wood can be had — r2r-hamlet-9: the Charcoal burner lacks its input: expected false to be true // Object.is equality
+
+### tests/domain/composeStateProse.test.js :: the composer — the corpus loads, and the merge is legal every block lives in exactly one leaf, and the sweep found the whole corpus
+AssertionError: pools: expected 861 to be 859 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/domain/composeStateProse.test.js:174:43
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/domain/composeStateProse.test.js :: ⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the composer's own rule the seedless corpus reads canonical-at-zero the way the gallery import does
+AssertionError: expected 861 to be 859 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/domain/composeStateProse.test.js:423:19
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/domain/composeStateProse.test.js :: ⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the composer's own rule ⭐ THE CELL ARM CAN NOW TELL `vid` FROM `index`: the blind spot closed at car 8a-1
+AssertionError: expected { …(2) } to deeply equal { …(2) }
+    at /home/user/t/close-0-70e557d5b/tests/domain/composeStateProse.test.js:378:27
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/domain/composeStateProse.test.js :: ⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves nothing is byte-identical to `readStateProse` on all 708 pools, both faces, six seeds
+AssertionError: expected 10332 to be 10308 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/domain/composeStateProse.test.js:234:20
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/domain/display/needMetUnderAnotherName.test.js :: a need an import meets under another name is not a need left unmet (item 4(b)) the leaf on the census's towns: r2r-city-0's luxury goods are met; r2r-town-17's mountain timber is not
+AssertionError: expected [ 'stone', 'salt' ] to include 'mountain_timber'
+    at Proxy.<anonymous> (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/expect/dist/index.js:1319:15)
+    at Proxy.<anonymous> (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/expect/dist/index.js:1156:15)
+    at Proxy.methodWrapper (file:///home/user/t/close-0-70e557d5b/node_modules/chai/index.js:1700:25)
+    at /home/user/t/close-0-70e557d5b/tests/domain/display/needMetUnderAnotherName.test.js:47:25
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+
+### tests/domain/worldFactRederive.test.js :: EM-B2b — world facts by consequence: the route, the refusals and the stated radius A4 — THE STATED BLAST RADIUS IS COMPLETE: the culture reader set under src/generators is EXACT in both directions
+AssertionError: the culture reader set under src/generators is EXACT in BOTH directions. An UNLISTED reader means the blast radius of a world-fact change grew without anybody saying so, which is what design §14 final's consequence-by-design ruling forbids this packet to let happen quietly; a MISSING listed one means the roster has aged instead of convicting. The set is STATED here and it is NOT bounded anywhere.: expected [ 'src/generators/aiLayer.js', …(27) ] to deeply equal [ 'src/generators/aiLayer.js', …(26) ]
+    at /home/user/t/close-0-70e557d5b/tests/domain/worldFactRederive.test.js:349:7
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/domain/worldFactRederive.test.js :: EM-B2b — world facts by consequence: the route, the refusals and the stated radius A7 — THE GOLDENS CANNOT SEE ANY OF IT: both fixtures are byte-identical and a no-layer re-derivation is still the committed golden
+AssertionError: the stride is non-empty, or the absence above is vacuous: expected 5 to be +0 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/domain/worldFactRederive.test.js:585:87
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/generators/nameHeldThroughAssembly.test.js :: EM-R4 — the settlement name is held through assembly A1 — EM-R4: inert with no pins: the golden corpus and an empty bag leave every byte where it was
+AssertionError: a golden row moved with no pin bag anywhere: expected [ …(37) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/generators/nameHeldThroughAssembly.test.js:128:66
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/domainAnyCastBaseline.test.js :: domain any-cast ratchet — `--update` refuses to bank a declared overrun ⛔ every LIVE declared row is refused against the LIVE register
+AssertionError: a clean-tip --update would still move the committed register: expected { …(171) } to deeply equal { …(167) }
+    at /home/user/t/close-0-70e557d5b/tests/lint/domainAnyCastBaseline.test.js:694:88
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/domainAnyCastBaseline.test.js :: domain any-cast ratchet — frozen baseline governance baseline exactly matches the tree (airtight against any drift mode)
+AssertionError: expected { …(173) } to deeply equal { …(169) }
+    at /home/user/t/close-0-70e557d5b/tests/lint/domainAnyCastBaseline.test.js:435:27
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/domainAnyCastBaseline.test.js :: domain any-cast ratchet — frozen baseline governance no file exceeds its baseline (new files get 0) — fix the types, do not widen
+AssertionError: any-cast debt grew — replace the any/* / ts-ignore with a real type. ⛔ Widening the baseline is not the cure and neither is adding a DECLARED_OVERRUN row: both ledger ceilings are MONOTONE-DOWN literals, so a new row (or a raised count on an existing one) only moves the red from this arm to the ceiling arm:
+  src/domain/display/economicsCrisisMarks.js: 2 any-holes (allowance 0)
+  src/domain/facts/factsOf.js: 1 any-holes (allowance 0)
+  src/domain/facts/seatMembers.js: 9 any-holes (allowance 0)
+  src/domain/facts/sovereign.js: 9 any-holes (allowance 0): expected [ …(4) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/lint/domainAnyCastBaseline.test.js:393:7
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/domainAnyCastBaseline.test.js :: domain any-cast ratchet — the declared-overrun ledger is honest ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path)
+AssertionError: undeclared overruns:
+  src/domain/display/economicsCrisisMarks.js: 2 any / 0 suppress against baseline 0/0
+  src/domain/facts/factsOf.js: 1 any / 0 suppress against baseline 0/0
+  src/domain/facts/seatMembers.js: 9 any / 0 suppress against baseline 0/0
+  src/domain/facts/sovereign.js: 9 any / 0 suppress against baseline 0/0: expected [ …(4) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/lint/domainAnyCastBaseline.test.js:564:78
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/factLayers.walker.test.js :: nothing reads at or above its own layer (shrink-only) LEAVES: the tree reads exactly the register
+AssertionError: expected { …(11) } to deeply equal { warState: [ 'economicState' ], …(7) }
+    at /home/user/t/close-0-70e557d5b/tests/lint/factLayers.walker.test.js:158:17
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/factLayers.walker.test.js :: nothing reads at or above its own layer (shrink-only) POOLS: the tree reads exactly the register, with no pool unplaced and no atom unlayered
+AssertionError: expected { …(11) } to deeply equal { …(12) }
+    at /home/user/t/close-0-70e557d5b/tests/lint/factLayers.walker.test.js:164:26
+    at processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20
+
+### tests/lint/factLayers.walker.test.js :: the layer table covers every leaf and every pool every leaf declares exactly the strata it touches, and every stored field it reads is placed
+AssertionError: expected { id: 'legalHouse', …(3) } to deeply equal { id: 'legalHouse', …(3) }
+    at /home/user/t/close-0-70e557d5b/tests/lint/factLayers.walker.test.js:75:88
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/newsHeadlineContract.walker.test.js :: [FILE] 
+
+
+### tests/lint/noLegacyFactionReaders.walker.test.js :: no legacy faction readers outside FPZ (PEOPLE-5, M-2; landed by PEOPLE-LAND) every read outside the FPZ list is red; zero at the landing
+AssertionError: expected [ …(3) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/lint/noLegacyFactionReaders.walker.test.js:49:68
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the EXECUTED corpus the producers ran and the corpus is not empty
+AssertionError: expected { canonEventLogEntries: 1, …(7) } to deeply equal { canonEventLogEntries: 1, …(7) }
+    at /home/user/t/close-0-70e557d5b/tests/lint/observedShapeReaders.walker.test.js:700:37
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+AssertionError: expected { reads: 2215, identities: 1553, …(3) } to deeply equal { reads: 2200, identities: 1542, …(3) }
+    at /home/user/t/close-0-70e557d5b/tests/lint/observedShapeReaders.walker.test.js:1652:8
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+AssertionError: the live heuristic inventory must exactly match the frozen one. A lawful shrink is `node scripts/check-observed-shape-readers.mjs --write` on a clean tree — it re-derives inventory, total and identities together and refuses anything that is not a shrink. NEVER hand-edit a row: that throws "observed-shape baseline totals are inconsistent" out of validateLeafBaseline (scripts/lib/observed-shape-baseline.mjs).: expected { violations: 7, stale: +0 } to deeply equal { violations: +0, stale: +0 }
+    at /home/user/t/close-0-70e557d5b/tests/lint/observedShapeReaders.walker.test.js:841:7
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/observedShapeReaders.walker.test.js :: reader-with-no-writer ratchet: the live scan the provenance drift classifier separates a detector change from an input change THE LIVE ESTATE INSTANCE: a freshly re-minted baseline has NO drift at all
+AssertionError: an execution INPUT drifted since the mint — lawful, and the shrink-only re-freeze absorbs it: expected [ …(6) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/lint/observedShapeReaders.walker.test.js:1344:10
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/proseWaveGate.walker.test.js :: THE ROSTER — a desk section is a LEAF, and the partition is asserted each section names its own leaf's pools, and a bad name is NOT-EXECUTABLE
+AssertionError: and the six sum to the corpus: expected 861 to be 859 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWaveGate.walker.test.js:984:52
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/proseWaveGate.walker.test.js :: THE ROSTER — a desk section is a LEAF, and the partition is asserted ⛔ THE SIX LEAVES COVER EVERY POOL EXACTLY ONCE
+AssertionError: every shipped pool: expected 861 to be 859 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWaveGate.walker.test.js:967:47
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/proseWaveGate.walker.test.js :: the CARTESIAN unit set is the attach set times the spines times the faces ⭐⭐ ONE UNIT BUILDER: the gate and the lib agree on EVERY pool of a section
+AssertionError: the units actually compared: expected 658 to be 634 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/proseWaveGate.walker.test.js:171:50
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/siteCoherenceRatchet.test.js :: site-coherence contradiction ratchet (Wave 0 — inventory freezing, never correctness) C1 — the live row set equals the frozen baseline in both directions
+AssertionError: THE CONTRADICTION INVENTORY MOVED. `added` = new (terrain, siteKind, decisiveToken) identities, a regression until proven otherwise. `grown` = a frozen row rose. `shrunk` / `vanished` = a row FELL or DISAPPEARED: that is a WIN, and it reds until you bank it by lowering or removing the row in tests/lint/.site-coherence-baseline.json in the SAME change that earned it. Never regenerate the baseline to make this pass — UPDATE_SITE_COHERENCE_BASELINE=1 prints for review and always fails on purpose.: expected { added: [], …(3) } to deeply equal { added: [], grown: [], …(2) }
+    at /home/user/t/close-0-70e557d5b/tests/lint/siteCoherenceRatchet.test.js:424:8
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/sovereigntyLightingContract.walker.test.js :: the sovereignty lighting condition — a marker is EVIDENCE only in a live title THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+AssertionError: the estate's file count moved — re-measure, do not re-word: expected 3682 to be 3641 // Object.is equality
+    at /home/user/t/close-0-70e557d5b/tests/lint/sovereigntyLightingContract.walker.test.js:7549:10
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/sovereigntyLightingContract.walker.test.js :: the sovereignty lighting condition — a marker is EVIDENCE only in a live title ⛔ THE EACH-FAMILY PARK DEBT ONLY SHRINKS — and the false reformat reds here
+AssertionError: MORE files now park solely because of `each`/`for` than the frozen ceiling allows. This number is not permitted to rise: the cure is a plain parameterless test looping over the rows in its body, never a new `each` call.
+  tests/domain/bar5LawBandFloor.test.js
+  tests/domain/bar6SeamDesks.test.js
+  tests/domain/bar7DesksLines.test.js
+  tests/domain/customContentMechanicalClaims.test.js
+  tests/domain/customContentPresentationClaims.test.js
+  tests/domain/customTownScenePresentation.test.js
+  tests/domain/deploymentReturnHeraldWords.test.js
+  tests/domain/display/deityEffects.test.js
+  tests/domain/display/stateProse/tierNounKeptRulings.test.js
+  tests/domain/display/stateProse/tierNounSelfReference.test.js
+  tests/domain/envoyEncounter.test.js
+  tests/domain/espionageDoctrine.test.js: expected 113 to be less than or equal to 108
+    at /home/user/t/close-0-70e557d5b/tests/lint/sovereigntyLightingContract.walker.test.js:2667:7
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+
+### tests/lint/tuningRegister.walker.test.js :: tuning register — the inventory is frozen and honest the measured tree matches the committed inventory exactly
+AssertionError: the inventory is EXACT, both ways, including digests, leaves and dependents. A tuning value that moved without a refreeze is exactly the event this register exists to make visible. If the movement is legitimate, refreeze it and say why; do not edit this file by hand.: expected [ …(7) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/lint/tuningRegister.walker.test.js:496:49
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/lint/wiringCensusDeclared.walker.test.js :: the state rows' declared columns every row carries the four columns, equal to a fresh annex reading
+AssertionError: expected [ …(88) ] to deeply equal []
+    at /home/user/t/close-0-70e557d5b/tests/lint/wiringCensusDeclared.walker.test.js:43:19
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/property/editCorpusRatchet.test.js :: the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus A7 the honesty figures are re-measured and the ride-along has its first population in the chain
+AssertionError: the edits that DO reach a reading: expected [ 695, 275, 2176 ] to deeply equal [ 695, 275, 2173 ]
+    at /home/user/t/close-0-70e557d5b/tests/property/editCorpusRatchet.test.js:586:81
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/close-0-70e557d5b/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
