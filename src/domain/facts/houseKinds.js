@@ -161,8 +161,9 @@ export const RUNS_ON_BOUGHT = Object.freeze({
 /**
  * THE GROUND A SOURCE HOUSE PROVES where none of its own grounds (`SOURCE_GROUNDS`) is on the record, live or spent (the
  * owner: "Doesn't the stone quary here in and of itself stipulate that there is stone in the ground?"). A reading of the
- * page, stored nowhere. The salt works proves none: off the coast its salt is bought in. The six of the second ring (the
- * landings, the woodcutter, the hunters, the shepherd, the wildfowler) are left as they are (BIRTH-2's hand-back).
+ * page, stored nowhere. The salt works proves none: off the coast its salt is bought in. FAULTS-BIRTH (the sixth chair's FR8 (a),
+ * 2026-11-18; vetoable by the owner): THE SECOND RING IS READ AS THE FIRST: the six takers BIRTH-2 left (the landings, the
+ * woodcutter, the hunters, the shepherd, the wildfowler) prove their ground by the same seeded pick (`SECOND_RING`, below).
  * @type {Readonly<Record<string, string>>}
  */
 export const IMPLIED_GROUND = Object.freeze({
@@ -172,6 +173,39 @@ export const IMPLIED_GROUND = Object.freeze({
   peat_cutter: 'marshlands', // a peat cutter proves its bog
   dairy_farmer: 'grazing_land', // a dairy proves its pasture
   charcoal_burner: 'managed_forest', // a burner's kilns stand in the wood that feeds them
+  // FAULTS-BIRTH (FR8 (a)): the second ring
+  woodcutter_s_camp: 'managed_forest', // a camp proves the wood it fells
+  shepherd: 'grazing_land', // a shepherd proves the pasture of its flock
+  fisher_s_landing: 'fishing_grounds', // a landing proves the water its boats fish
+  fishing_community: 'fishing_grounds', // the same
+  hunter_s_lodge: 'hunting_grounds', // a lodge proves the grounds it hunts
+  wildfowler: 'hunting_grounds', // a wildfowler proves the grounds it hunts (its game; the marsh's yield is reeds)
+});
+
+/**
+ * FAULTS-BIRTH (FR8 (a)): THE SECOND RING, catalogue ids: takers that prove their ground as the first ring does
+ * (`IMPLIED_GROUND`) and are NEVER PICKED THE FAILED VENTURE (no venture's line was written for them: the owner's rule, no
+ * new text and no new story; the venture's pick keeps the candidates it had).
+ * @type {ReadonlySet<string>}
+ */
+export const SECOND_RING = new Set(['woodcutter_s_camp', 'shepherd', 'fisher_s_landing', 'fishing_community', 'hunter_s_lodge', 'wildfowler']);
+
+/**
+ * FAULTS-BIRTH (FR8 (b); the eighth read's r2r-hamlet-27: a dairy "failing: no livestock lies near" beside a Shepherd, Common
+ * grazing land and a Stable yard): THE HOUSES THAT KEEP OR YIELD A MATERIAL OF `MATERIAL_OF` outside its users: read only when
+ * the birth counts the houses of a town that use, keep or yield a material, so that no venture is picked beside its own
+ * material. Catalogue ids -> the families, each with its one line of reason (the catalogue's own description).
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const KEEPS_OR_YIELDS = Object.freeze({
+  shepherd: Object.freeze(['livestock']), // "Manages sheep flocks for wool and meat": it keeps the flock
+  shepherd_collective: Object.freeze(['livestock', 'wool']), // "Communal flock management"
+  common_grazing_land: Object.freeze(['livestock']), // "Shared pasture for the hamlet's livestock"
+  stable_yard: Object.freeze(['livestock']), // "Communal stable where travelers can leave horses"
+  stable_master: Object.freeze(['livestock']), // "Maintains stabling, trains horses"
+  stable_district: Object.freeze(['livestock']), // "Concentrated stabling, horse trading"
+  pack_animal_trader: Object.freeze(['livestock']), // "Buys and sells mules, donkeys, and draft horses"
+  hunter_s_lodge: Object.freeze(['hides']), // "prepare game, and sell pelts"
 });
 
 /**
