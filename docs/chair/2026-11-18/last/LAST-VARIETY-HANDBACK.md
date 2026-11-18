@@ -7,8 +7,10 @@ Brief: `docs/chair/2026-11-18/last/BRIEF-LAST.md` (chair's lane), section LAST-V
 |---|---|
 | f98a31cdd | the hand-back opened |
 | 2455faed8 | item 1: two lines at the end of each DS-DEF-3 safety pool; the guard `tests/domain/lastVariety.test.js` |
-| (pending the chair's word) | item 2: the SUPPLY `want` cell (a file outside the item: `goals.js`; see section 2) |
-| (this file) | item 3 measured, nothing written; the hand-back |
+| 94a44219f | item 3 measured, nothing written; item 1's proof |
+| f3b728bb0 | item 1: Unsafe v6 declared (`no watch`); the older tests its lines made untrue, re-keyed by identity |
+| f00dd3a66 | item 2 HELD for the chair's word: its patch `LAST-VARIETY-ITEM2-WANT.diff` and figures |
+| (the last) | the net, the stored figures, what is left |
 
 The measuring scripts (scratch, not committed): the 900 born as FAULTS-DESKS's guard births them (the thirty
 `seeds.bar7.txt`, the 150 `seeds.w150.txt`, the 720 `censusPlan('r2')`); every pool's admitted set read by
@@ -36,7 +38,7 @@ census in the tree, the census then restored: the leaf is committed, the census 
 | Moderate v9 | Whatever trouble {settlement} has is soon known to everyone in it. | street · tier ≤ village | bar0-village-calm-rand-46 (Tihono), bar0-thorp-calm-rand-31 (Madinatqila), r2r-hamlet-17 (Faroaltum); 34 in all | 138 of 259 |
 | Moderate v10 | With no gaol at {settlement}, nobody who does wrong here can be locked away; most go on living beside the people they wronged. | ledger · no court or gaol | bar0-thorp-calm-rand-45 (Dunwood), bar0-hamlet-calm-rand-45 (Ravenland), r2r-town-45 (Varanand); 39 in all | 146 of 259 |
 | Unsafe v5 | Theft at {settlement} grows each season, and with nobody under arms, every household guards its own. | street · no guardPresence · crime wave | bar0-hamlet-calm-rand-29 (Skálgarde); admitted, not drawn: bar0-hamlet-calm-rand-27, r2r-thorp-30 (the only three towns of the 900 it is true of) | 3 of 16 |
-| Unsafe v6 | Visitors to {settlement} are warned to keep their belongings close. | visitor (declares nothing: true of any Unsafe town) | bar0-hamlet-calm-rand-27 (Gangapur), r2r-thorp-30 (Obergasse), r2r-city-0 (Goraka); 6 in all | 16 of 16 |
+| Unsafe v6 | There is no watch at {settlement}, and visitors are warned to keep their belongings close. | visitor · no watch (first written undeclared; the undeclared-lines register, shrink-only, refused it: it now says what it presumes, f3b728bb0) | bar0-hamlet-calm-rand-27 (Gangapur), r2r-thorp-30 (Obergasse); admitted, not drawn: bar0-hamlet-calm-rand-29 (the three towns of the 900 with no watch) | 3 of 16 |
 
 Why each is declared as it is: v10 names the gaol but says the wrongdoer stays among the wronged, which a court (exile,
 the rope) could make false, so it declares `no court or gaol`, not `no prison`; Safe v6 names only the gaol (`no prison`).
@@ -52,9 +54,11 @@ declaration refused where its premise fails (a negative beside each positive): r
 not in the leaf), green at the tip.
 
 **Declared moves (R5).** Field family: the Defense tab's public-order rung (DS-DEF-3 `publicOrder.beside`) and its PDF
-copy. Towns whose line moves, base against tip: the thirty 4, the 150 27, the 720 71; every one moves TO one of the eight
-(no town moves between old lines). By pool: Moderate 4 · 19 · 50, Safe 0 · 5 · 10, Very Safe 0 · 1 · 6, Unsafe 0 · 2 · 5
-(the thirty · the 150 · the 720). The 525 by the golden's own `hashFor`: **0 of 525** move (display prose; no stored
+copy. Towns whose line moves, base against tip: the thirty 4, the 150 27, the 720 67; every one moves TO one of the eight
+(no town moves between old lines). By pool: Moderate 4 · 19 · 50, Safe 0 · 5 · 10, Very Safe 0 · 1 · 6, Unsafe 0 · 2 · 1
+(the thirty · the 150 · the 720). **Named: the Unsafe twin v4 (the chair's word of 09:11) now prints in NO town of the
+900**: its three towns admit v4, v5 and v6, and the draw gives them v6, v5, v6. It stays admitted there (held by
+`faultsDesks.test.js`, re-keyed) and true wherever drawn. The 525 by the golden's own `hashFor`: **0 of 525** move (display prose; no stored
 record). (At the base, 191 of the 525 already differ from the stored fixture: the base's own red, the close's.)
 
 ## 2 · Item 2: the SUPPLY goal family
@@ -84,7 +88,7 @@ in my tree, and handed over as a patch that applies on f3b728bb0: `docs/chair/20
   | vantage | line | e.g. (as it fills on a card of the 900) |
   |---|---|---|
   | short | Find something the work at {house} can use in place of {resource}. | bar0-city-wartime-rand-45, Klara Weber (the citadel; stone and iron and grain); bar0-city-wartime-rand-31, Banbh Farrell (the banking houses; precious metals); r2r-town-30, Helga Gormsson (the blacksmiths; iron and fuel) |
-  | short | Gather what {resource} can be found close to home for the work at {house}. | (its cards: those of the row above and below; e.g. bar0-hamlet-under_siege-rand-39, Khongorzul Ongut, the citizen militia, iron) |
+  | short | Gather what {resource} can be found close to home for the work at {house}. | bar0-hamlet-under_siege-rand-39, Khongorzul Ongut (the citizen militia; iron, under a siege); r2r-metropolis-18, Katla Finsson (the banking district; precious metals); r2r-metropolis-50, Lasair Brennan (the citadel) |
   | long | Open a lasting way to bring {resource} in for the work at {house}. | r2r-village-8, Rashid Besud (the citizen militia; iron); r2r-town-9, Grettir Kolbeinsson (the carpenters; timber); r2r-town-23, Taghrid ibn Ali (the citadel) |
   | long | Win those who govern here over to bringing {resource} in for the work at {house}. | bar0-town-occupied-rand-40, Varun Mukherjee (the docks; timber); r2s-insurgency-metropolis-2 and r2s-slave_revolt-metropolis-0 (the banking district; precious metals) |
 
@@ -92,8 +96,7 @@ in my tree, and handed over as a patch that applies on f3b728bb0: `docs/chair/20
   vantage. The guard block (cells and slots; five such cards, two under a siege, hold two admitted lines a vantage; a want
   line dealt on two cards of the 900; NEGATIVE: no want line beside a met dependency, over every card of the guard's towns)
   green; red at the base (no cell). `goalFamilies`, `goals`, `goalChainWords`, `goalCharterRefused` and `faultsNeed` green.
-- **Declared moves (measured with an earlier wording of the second short line, "Ask every household nearby …", reworded
-  before handing over: the cards it reaches are the same).** Field family: the cards' goals (`npcs[].goal` short, long and
+- **Declared moves (re-measured with the patch's final words, applied and reverted in my tree).** Field family: the cards' goals (`npcs[].goal` short, long and
   intent) on the NPCs tab, the summary, the PDF and the journal. Towns moving: the thirty 1, the 150 3, the 720 37 (82
   cards: the cards that now draw a want line, and cards whose draw moved because a held text moved). **13 of the 525** move
   by the golden's own `hashFor` (town|… desert, city|… mountain rows among them). Stored figures it would move: the golden
@@ -126,14 +129,41 @@ in two ruling-body towns). Not written: a line added to this pool changes `size`
 EVERY tie of the archetype in every town, and a tension line must be paired with a description line; that is a wide move
 for nine repeats. Named for the chair as variety owed.
 
-## 4 · The net
+## 4 · The net (base b014a7bf3 in a worktree of its own; tip f3b728bb0, the last code commit; each gate alone through `sh scripts/gate-tail.sh`; reds compared BY MESSAGE)
 
-(Section completed at the end.)
+| gate | base | tip |
+|---|---|---|
+| `typecheck:domain:strict` | 0 | 0 |
+| `typecheck:ratchet` | 0 | 0 |
+| `npx eslint` (my changed JS files) | — | 0 errors |
+| `tests/architecture` | green | green |
+| `tests/lint` (JSON) | 31 reds | 34: the base's 31, seven of them with a count my lines move (section 5), and 3 new, each a stored figure or a walker's reading (section 5): `factLayers` POOLS, `proseCorpusBytes` GZIP, the trailing-coordinate pin. `ledgerCitationIntegrity` red at both (wants the ledger branch as a local ref) |
+| `tests/joins` | 1 red (`mutationOrder`: the chain gains `assembleSettlement`) | the same, same message |
+| `tests/data`, `tests/domain/facts`, `crisisBlindDossierProse` | 5 reds | the same 5; one with a count moved (the shift register's mutant, 3044 → 3052 against 3033). `crisisBlindDossierProse` red on my first tip (no setter for `prison`), cured in f3b728bb0; `declarationRegisters` red on my first tip (Unsafe v6 undeclared), cured likewise |
+| the six faults guards | green | green (`faultsDesks.test.js` re-keyed by identity in f3b728bb0: FR7's planted line now at the pool's next number, v11; the Unsafe twin keeps v4 with v5 and v6 after it, and is ADMITTED, not the only line, in its three towns) |
+| my guard `lastVariety.test.js` | red, 4 of 4 (the lines are not in the leaf) | green, 4 of 4; item 2's block (in the patch) green with the patch applied, red at the base |
+| THE OLDER TESTS (every test file naming the defense leaf, the annex, DS-DEF-3, `defenseStateProse`, `goalFamilies`, `goals.js`'s functions: 78 listed, 65 test files run, in one JSON run a tree) | 3 files red (5 cases): `generationForkCensus` (3), `rosterFinalUnderHeldRoster`, `composeStateProse` | the same 5 by message, `composeStateProse`'s count moved 3044 → 3052 |
+| the claims pin `tests/docs/enforcement-claims.test.js` | — | green over this file |
 
-## 5 · Stored figures my work moves (named; none re-taken)
+## 5 · Stored figures my work moves (named; none re-taken; for the last close)
 
-(Section completed at the end.)
+| figure | base → tip |
+|---|---|
+| the state corpus's variant count (`proseComposed`, `proseWiringCensus`, `composeStateProse`, the shift register's mutant; stored 3033) | 3044 → 3052 (+8) |
+| `proseEntryContradiction` loaders (stored 3501 / 2794) | 3512 → 3520, 2804 → 2812 |
+| `proseWaveGate` units (stored 658) | 663 → 671 |
+| the trailing-coordinate class (`proseEntryContradiction` anti-vacuity, report-only, stored 377) | 377 → 379 (two of the eight end on a plain ", and …" clause) |
+| `scripts/.prose-byte-baseline.json`, `defense.generated.js` (stored 281,298 raw / 37,154 gz) | raw measured 286,547 at the tip; gzip 37,820 (outside the 1 % band, red at the tip only) |
+| `factLayers.poolTable.json`: DS-DEF-3 › Very Safe and › Unsafe placed at layer 3 | they now declare `crime wave` (layer 4: Very Safe v6 `no crime wave`, Unsafe v5 `crime wave`); BAR6-DEFDESK placed Safe and Moderate at 5 for the same atom. Kept true rather than reworded to pass (R6): the placement is the close's, or a ruling's |
+| `presumedThings` ARM 1 fresh hits (stored register) | 5 → 6: Moderate v10 ("With no gaol at …") read as naming a prison undeclared; it declares `no court or gaol`, which holds only where no gaol stands. The same reading the walker gives Unsafe v4 at the base (FAULTS-DESKS named it): the walker's, not reshaped |
+| `sovereigntyLightingContract`'s estate file count | 3696 → 3697 (my guard) |
+| the golden master (`tests/fixtures/generator-golden-master.json`; 191 of 525 already differ at the base) | item 1: 0 of 525. Item 2 (held): 13 of 525 if applied |
+| the wiring census stamp | untouched: projected after a fresh census in the tree, the census restored byte-equal (the leaf committed, the census not) |
 
 ## 6 · Left by name
 
-(Section completed at the end.)
+- **Item 2, held**: the patch `LAST-VARIETY-ITEM2-WANT.diff` waits on the chair's word on `goals.js` (section 2).
+- **The lord-ruled corner of `gov_econ_dependence`** (item 3): four lines where a lord rules; nine repeat draws in four
+  towns of the corpus. Not written (a line re-deals every tie of the archetype).
+- **The Unsafe twin v4 prints in no town of the 900** (section 1): admitted in its three towns, out-drawn there.
+- Not raised: none.
