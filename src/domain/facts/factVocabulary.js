@@ -225,7 +225,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {boolean} [rulingBody]
  * @property {boolean} [soldiers] @property {boolean} [commander]
  * @property {Readonly<import('../dossier/faithReading.js').FaithReading>} [faith] @property {boolean} [guardPresence]
- * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [seatOutranked] @property {boolean} [sovereign] @property {boolean} [seatMembers] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
+ * @property {boolean} [guild] @property {boolean} [sacredHouse] @property {boolean} [rivalPower] @property {boolean} [seatOutranked] @property {boolean} [forceWalksByDay] @property {boolean} [sovereign] @property {boolean} [seatMembers] @property {boolean} [ironAtHand] @property {boolean} [timberAtHand]
  * @property {boolean} [timberReachesSawmill] @property {boolean} [enchanting] @property {(key: string) => boolean|undefined} [tradeAtWork] @property {(key: string) => boolean|undefined} [goodExported] @property {boolean} [legitimacyCrisis] @property {boolean} [legalHouse] @property {boolean} [appointedPost]
  * @property {boolean} [dangerComing] @property {boolean} [legacyRuin] @property {boolean} [courtSits] @property {boolean} [magicSupply] @property {string} [magicRelianceShown] @property {boolean} [criminalIncome]
  * @property {ReadonlyArray<string>} [foodSources] @property {string|null} [failedSource] @property {boolean} [leadingSourceSpent] @property {boolean} [ownPlots] @property {ReadonlyArray<unknown>} [imports]
@@ -351,6 +351,11 @@ export const FACT_DIMENSIONS = Object.freeze({
   // Homed on the defence record (no getter of its own: the defence object is the layer map's bundled leaf, and its atoms are
   // read there); the defence walker knows it by the words of its two parts (`defenceFactReaders.shared.mjs`).
   patrol: dim({ shape: 'presence', home: 'defence', reader: (f) => (f.defence ? bool(f.defence.watch === true || f.defence.garrison === true) : undefined) }),
+  // BAR8-K-WATCH (13e; BRIEF-BAR8 K-WATCH item 2, the chair's ruling BR14 (c); vetoable by the owner, on the veto list as new
+  // vocabulary), beneath the force: the town's force walks BY DAY, as its own text says (`forceHours.js`: some live order-keeping
+  // house not kept to "the night" or "after dark" by its description). A line that has the watch seen "on the rounds most hours
+  // of the day" presumes it (`safetyProfile.js :: STANDARD_PATROL`, #18; the seventh read's C42053).
+  'force walks by day': dim({ shape: 'presence', home: 'forceWalksByDay', reader: (f) => bool(f.forceWalksByDay) }),
   // `iron at hand`: the town's smiths have iron to work: worked here, or brought in where no siege stops it (`ironAtHand.js`).
   'iron at hand': dim({ shape: 'presence', home: 'ironAtHand', reader: (f) => bool(f.ironAtHand) }),
   // BAR4-HOUSES (H1 (ii)) and BAR4-SCENES (kind A1), BRIEF-BAR4 amendment 5b; vetoable by the owner, on the veto list as new

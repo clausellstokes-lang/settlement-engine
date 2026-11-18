@@ -9,7 +9,7 @@ import {
   resolveGenerationWorldLaw,
 } from './generationContext.js';
 import { hasInstitution } from '../domain/facts/institutions.js';
-import { defenceOf } from '../domain/facts/defence.js'; // BAR6-CRIME (e): the court and the gaol
+import { courtHoldersOf, defenceOf } from '../domain/facts/defence.js'; // BAR6-CRIME (e): the court and the gaol; BAR8-K-WATCH (13a): the court the Legal row prints
 import { lineText } from '../domain/facts/drawDeclared.js';
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const ASK_AROUND_AT_THE_RIGHT_TAVERN_SOMEONE_MOVES_GOODS_WITHOUT_QUESTIONS = 'Ask around at the right tavern. Someone moves goods without questions.';
@@ -33,11 +33,17 @@ const _ARCANE_UNDERGROUND = '(arcane underground)';
 // defence home's `court` and `prison`, `facts/defence.js`), beside "A functioning court and prison mean crimes carry real
 // consequences". There the row keeps its draw, its place and its name (the name is the service's identity, declared in
 // `crisisDependence.js :: SERVICE_DEPENDENCE`) and takes its twin description: the law is slow, and coin buys it quicker.
-const SLOW_LAW_DESC = lineText({ text: 'The court sits and the gaol holds, but both are slow, and coin buys a quicker answer.', needs: ['court', 'prison'] });
-/** @param {Array<{ name?: unknown }>} institutions @returns {{ name: string, desc: string }} */
-const lawlessRow = (institutions) => {
+// BAR8-K-WATCH (13a, BAR8-AUDIT-K's 13a.court; C39616): "The court sits" is the LEGAL ROW'S court, the atom `court sits`
+// (`defence.js :: courtHoldersOf`: a courthouse, or a live house that drew a court service), not the `court` atom's name
+// test (every town hall): beside "Legal Infrastructure · Prison only / Detention without process." the line was false.
+// The drawn services are read as they stand when this row is added (the court services are the houses' own rolls,
+// materialised above), the same rows the record keeps; where no court sits the row takes its other description.
+const SLOW_LAW_DESC = lineText({ text: 'The court sits and the gaol holds, but both are slow, and coin buys a quicker answer.', needs: ['court sits', 'prison'] });
+/** @param {Array<{ name?: unknown }>} institutions @param {Record<string, unknown[]>} drawn the services drawn so far @returns {{ name: string, desc: string }} */
+const lawlessRow = (institutions, drawn) => {
   const d = defenceOf({ institutions });
-  return { name: NO_LAW_BRING_COIN, desc: d.court && d.prison ? SLOW_LAW_DESC : THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION }; // the name said once (275ce166f made both branches one name)
+  const courtSits = courtHoldersOf({ institutions, availableServices: drawn }).length > 0;
+  return { name: NO_LAW_BRING_COIN, desc: courtSits && d.prison ? SLOW_LAW_DESC : THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION }; // the name said once (275ce166f made both branches one name)
 };
 
 /**
@@ -115,7 +121,7 @@ export const generateAvailableServices = (
     if (securityRatio < 0.6) {
       buckets.criminal.push(
         {
-          ...lawlessRow(institutions),
+          ...lawlessRow(institutions, buckets),
           institution: '(lawless)',
         },
         {
@@ -148,7 +154,7 @@ export const generateAvailableServices = (
       if (securityRatio < 0.4) {
         buckets.criminal.push(
           {
-            ...lawlessRow(institutions),
+            ...lawlessRow(institutions, buckets),
             institution: '(lawless)',
           },
           {
