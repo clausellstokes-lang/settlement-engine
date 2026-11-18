@@ -22,16 +22,23 @@ const LINE_B = 'Merchants from across the region, and luxuries to be had.';
 const TWIN_A = 'A yearly fair for regional merchants. The luxuries the town wants do not reach it.';
 const TWIN_B = "A yearly gathering of the region's merchants, though the luxuries the town wants do not come with them.";
 const SIEGE_A = 'A yearly fair for regional merchants. None can reach it while the roads are held.';
+// FR12 (1), 2026-11-18: the fair's third line, its "fine goods on offer", in the same form
+const LINE_C = 'A yearly draw for regional traders, with fine goods on offer.';
+const TWIN_C = 'A yearly draw for regional traders, though the fine goods the town wants do not reach it.';
 
 /** THE LUXURY UNMET: the fair's line drawn, the need list names a luxury not brought in. [seed, the line drawn, its twin] */
 const UNMET = Object.freeze([
   ['bar0-town-calm-rand-45', LINE_A, TWIN_A], ['r2r-town-56', LINE_A, TWIN_A], ['r2r-town-57', LINE_A, TWIN_A],
   ['r2s-recently_betrayed-town-0', LINE_A, TWIN_A], ['r2r-town-10', LINE_B, TWIN_B], ['r2s-monster_pressure-town-3', LINE_B, TWIN_B],
   ['r2s-wartime-town-2', LINE_B, TWIN_B],
+  ['bar0-town-calm-rand-46', LINE_C, TWIN_C], ['bar0-town-occupied-rand-46', LINE_C, TWIN_C], ['bar0-town-occupied-rand-47', LINE_C, TWIN_C],
+  ['bar0-town-occupied-rand-35', LINE_C, TWIN_C], ['r2r-town-47', LINE_C, TWIN_C], ['r2r-town-50', LINE_C, TWIN_C],
+  ['r2s-famine-town-1', LINE_C, TWIN_C], ['r2s-indebted-town-1', LINE_C, TWIN_C],
 ]);
 /** THE NEGATIVES: the fair's line drawn and the need list names no luxury (salt, gold/silver ore, livestock, stone, nothing). */
 const MET = Object.freeze([
   ['r2r-town-31', LINE_A], ['r2r-town-49', LINE_A], ['r2r-town-54', LINE_A], ['r2r-town-23', LINE_B], ['bar0-town-calm-rand-28', LINE_B],
+  ['bar0-town-occupied-rand-31', LINE_C], ['bar0-town-occupied-rand-34', LINE_C],
 ]);
 /** UNDER SIEGE AT THE DRAW, a luxury unmet: the siege twin stands (the draw's declaration first). */
 const SIEGED = Object.freeze([['r2s-under_siege-town-2', SIEGE_A]]);
@@ -68,7 +75,7 @@ const luxuryUnmet = (town) => importsAsPrinted(town).needed.some((n) => LUXURY.h
 /** @param {any} town */
 const fairDescs = (town) => (town?.institutions || []).filter((/** @type {any} */ i) => i?.name === FAIR).map((/** @type {any} */ i) => String(i.desc));
 
-describe('FAULTS-ROWS item 1: the Annual fair offers no luxury the need list says is not brought in (FR3)', () => {
+describe('FAULTS-ROWS items 1 and 4: the Annual fair offers no luxury the need list says is not brought in (FR3)', () => {
   it('UNMET: the twin prints in the line\'s place, beside the page\'s own "Needed, and not brought in" luxury', () => {
     const failures = collectSeedFailures(UNMET, ([seed, line, twin]) => {
       const town = BORN.get(seed);
@@ -105,14 +112,14 @@ describe('FAULTS-ROWS item 1: the Annual fair offers no luxury the need list say
   });
 
   it('THE TABLE: each line is a late key whose twin names no luxury as to be had, and both declare the siege off', () => {
-    for (const [line, twin] of [[LINE_A, TWIN_A], [LINE_B, TWIN_B]]) {
+    for (const [line, twin] of [[LINE_A, TWIN_A], [LINE_B, TWIN_B], [LINE_C, TWIN_C]]) {
       const set = /** @type {any} */ (DESC_LATE_SIBLINGS)[line];
       expect(set, line).toBeDefined();
       expect(set.map((/** @type {any} */ l) => l.text)).toEqual([line, twin]);
       expect([...set[0].excludes]).toEqual(['crisis: under_siege', 'need not brought in: luxury']);
       expect([...set[1].needs]).toEqual(['need not brought in: luxury']);
       expect([...set[1].excludes]).toEqual(['crisis: under_siege']);
-      for (const offer of ['available', 'to be had', 'on offer']) expectAbsentWithAnchor(twin, offer, 'merchants', line);
+      for (const offer of ['available', 'to be had', 'on offer']) expectAbsentWithAnchor(twin, offer, 'the town wants', line);
     }
   });
 });

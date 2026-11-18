@@ -114,7 +114,8 @@ describe('TAIL-HOUSES-5 batch 8: the late re-read reaches a house description (H
     // market's and the message network's crown lines (`sovereign`) and the brewery's two tavern lines
     // FAULTS-ROWS (2026-11-18, the sixth chair's FR3): 30 → 32, the Annual fair's two luxury lines read on `need not brought
     // in: luxury` (their guard: tests/generators/faultsRows.test.js)
-    expect(Object.keys(DESC_LATE_SIBLINGS)).toHaveLength(32);
+    // FAULTS-ROWS (2026-11-18, the chair's FR12 (1)): 32 → 33, the fair's third line ("with fine goods on offer")
+    expect(Object.keys(DESC_LATE_SIBLINGS)).toHaveLength(33);
     for (const [key, set] of Object.entries(DESC_LATE_SIBLINGS)) {
       expect(set).toHaveLength(2);
       expect(set[0].text).toBe(key);

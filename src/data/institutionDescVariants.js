@@ -2429,4 +2429,11 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
     Object.freeze({ text: "Merchants from across the region, and luxuries to be had.", excludes: Object.freeze(['crisis: under_siege', 'need not brought in: luxury']) }),
     Object.freeze({ text: "A yearly gathering of the region's merchants, though the luxuries the town wants do not come with them.", twinOf: "Merchants from across the region, and luxuries to be had.", needs: Object.freeze(['need not brought in: luxury']), excludes: Object.freeze(['crisis: under_siege']) }),
   ]),
+  // FAULTS-ROWS (the sixth chair's ruling FR12 (1), 2026-11-18; vetoable by the owner): the fair's third line, its "fine goods on
+  // offer" beside "Needed, and not brought in: luxury goods." (bar0-town-calm-rand-46, bar0-town-occupied-rand-46, -47). The
+  // same form as the two above: read late on the atom, the siege off on both members, ONE TWIN.
+  "A yearly draw for regional traders, with fine goods on offer.": Object.freeze([
+    Object.freeze({ text: "A yearly draw for regional traders, with fine goods on offer.", excludes: Object.freeze(['crisis: under_siege', 'need not brought in: luxury']) }),
+    Object.freeze({ text: "A yearly draw for regional traders, though the fine goods the town wants do not reach it.", twinOf: "A yearly draw for regional traders, with fine goods on offer.", needs: Object.freeze(['need not brought in: luxury']), excludes: Object.freeze(['crisis: under_siege']) }),
+  ]),
 });
