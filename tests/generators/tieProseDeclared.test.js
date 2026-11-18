@@ -43,7 +43,12 @@ describe('the tie prose declares in place (CENSUS-4c unit 4)', () => {
     // `needs: ['shared place']` and bitter_history.desc#3 `needs: ['lone tie']` = 46
     // BAR4-CLOSE-DOORS-1 (2026-11-16, after THE ONE MERGE of 600b7683a, the chair's ruling PD1/PD1b, re-keyed by identity with its cause):
     // 46 - mentor_legacy.desc#7, which BAR4-CLOSE-SWEEP L4 (4ed8a41e9) made a closure gated by its own twin (no `needs` again) = 45
-    expect(ROWS.filter(declares)).toHaveLength(45);
+    // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18, re-keyed by identity with its cause): 45 + the three tie lines
+    // BAR6-PEOPLE (343b41c74, LAW 5 widened B4; JOIN-17 point 8) declared and wrote into the ledger (econ_crim_exploitation.tension#6,
+    // mil_crim_suppression.tension#3, bitter_history.tension#3) + the two BAR5-THINGS (c74829e25, LAW 4; JOIN-16 point 9) made
+    // declare, re-taken here: econ_mil_contract.desc#6 `excludes: ['crisis: under_siege']`, family_complication.tension#7
+    // `crisis: ['any']` (each no longer a colour line) = 50
+    expect(ROWS.filter(declares)).toHaveLength(50);
     for (const r of ROWS) {
       const { field, index } = at(r.id);
       const d = V.declarationOf(field.lines[index]);
