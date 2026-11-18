@@ -42,7 +42,8 @@ import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { CHAIN_STATE_WORDS } from '../../src/pdf/lib/chainStateOnPage.js';
 import { humanize, label } from '../../src/pdf/lib/format.js';
 import { buildJournalPages, esc } from '../../src/foundry/journalPages.js';
-import { chainCardUnderSiege, chainOutputsOnCard, econOrdinaryTimesLine } from '../../src/domain/display/economicsCrisisMarks.js';
+import { chainCardUnderSiege, chainOutputsOnCard, econOrdinaryTimesLine, incomeDescShown } from '../../src/domain/display/economicsCrisisMarks.js';
+import { ordinaryIncomeLineOf } from '../../src/generators/economy/incomeLineSiblings.js'; // the Economics tab's own import (EconomicsTab.jsx), not the PDF's copy
 import { chainAsShown } from '../../src/domain/display/chainStateShown.js';
 import { chainHousesOf } from '../../src/domain/display/chainHouses.js';
 import { chainOutputsShown } from '../../src/domain/display/tradeListDisplay.js';
@@ -322,6 +323,23 @@ describe('PDF-2b item 4: the journal\'s chain row reads the record of its own ro
       expect(bad, seed).toEqual([]);
     }), 'the constructed towns');
     expect(built, 'the constructed towns').toBe(3);
+  });
+});
+
+describe('PDF-2b item 4 (item 4 of the section): an income share\'s row in the PDF is the Economics tab\'s, its ordinary line under no mark', () => {
+  test('every share, over the sample', () => {
+    let twins = 0;
+    expectNoSeedFailures(collectSeedFailures(SAMPLE, (seed) => {
+      const x = town(seed); /** @type {string[]} */ const bad = [];
+      for (const sh of x.vm.economics?.incomeSources || []) {
+        const tab = clean(incomeDescShown(x.t, sh, ordinaryIncomeLineOf) || ''); // the tab's call (EconomicsTab.jsx: incomeDescShown(s, src, ordinaryIncomeLineOf))
+        if (!tab) continue;
+        if (tab !== clean(incomeDescShown(x.t, sh) || '')) twins++;
+        if (!x.eco.some((l) => l.includes(tab))) bad.push(`${sh.source}: the tab's row "${tab}" not printed`);
+      }
+      expect(bad, seed).toEqual([]);
+    }), 'every share of every town');
+    expect(twins, 'the shares whose stored short twin the tab replaces with the trade\'s ordinary line').toBeGreaterThanOrEqual(3);
   });
 });
 
