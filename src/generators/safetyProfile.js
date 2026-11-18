@@ -277,7 +277,9 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       ? 'The garrison is visible everywhere.'
       : 'Armed officials are visible everywhere.';
     // BAR6-CRIME (LAW 5 widened, size): no streets in a thorp or a hamlet; SEAM-DESKS (2026-11-17): the gate in the guard's sight (`tierKey`)
-    const quietOpening = TINY_PLACES.includes(tier) ? 'The place is unusually quiet.' : 'The streets are unusually quiet.';
+    // LAST-DECLARE (2026-11-18): the streets line declares its size (`tier: ≥ village`, SAFETY_LINE_SIBLINGS below) and resolves
+    // through the door on the town's tier; its twin is the small place's line, exactly where the tier test printed it before.
+    const quietOpening = resolveSibling('The streets are unusually quiet.', SAFETY_LINE_SIBLINGS, { facts: () => factsOf({ institutions, tier }), poolId: 'safetyProfile:SAFETY_LINE_SIBLINGS', surface: 'defense', drawKind: 'T' });
     safetyDesc = `${quietOpening} ${visibleAuthority} Residents face little risk from common thieves and considerably more from the authorities themselves. Unofficial disappearances are not discussed openly.`;
   } else if (stress.crimeIsGovt) {
     safetyLabel = 'Dangerous — Criminal Governance';
@@ -916,9 +918,13 @@ export const SAFETY_LINE_SIBLINGS = Object.freeze({
   "The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way.": declaredSet(
     "The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way.", ['watch'],
     "The merchant guild's private security force just detained someone, with no legal authority to do so. No one with the authority to stop it is trying."),
-  "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound theological.": declaredSet(
-    "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound theological.", ['garrison'],
-    "The settlement's chaplain also leads its armed men, and is authorizing military action for reasons that sound theological."),
+  // LAST-DECLARE (2026-11-18; vetoable by the owner): both chaplain lines name the church's man, so both declare `church` (the
+  // crusade's synthesis fires only where a church stands: `priorityHelpers.js :: crusaderInst`; true in every town that prints
+  // either). Written as rows: the walker reads `declaredSet`'s frozen arrays as no builder's, so its declaration went unread.
+  "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound theological.": Object.freeze([Object.freeze({ text: "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound theological.", needs: Object.freeze(['garrison', 'church']) }), Object.freeze({ text: "The settlement's chaplain also leads its armed men, and is authorizing military action for reasons that sound theological.", twinOf: "The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound theological.", needs: Object.freeze(['church']), excludes: Object.freeze(['garrison']) })]),
+  // LAST-DECLARE (2026-11-18): the streets line names streets, which a thorp or a hamlet has none of; its twin is the small
+  // place's own line (the tier test that chose between them, now the declaration). No new text.
+  'The streets are unusually quiet.': Object.freeze([Object.freeze({ text: 'The streets are unusually quiet.', needs: Object.freeze(['tier: ≥ village']) }), Object.freeze({ text: 'The place is unusually quiet.', twinOf: 'The streets are unusually quiet.', excludes: Object.freeze(['tier: ≥ village']) })]),
   // COHERENCE-UPKEEP (the chair's ruling 7 of 2026-11-12): what the place can pay for its hired
   // force, said in the guard assessment. Resolved AFTER prosperity by `keptGuardLine` (below), by the
   // `prosperity` atom (`prosperity: ≥ moderate` is `keepOf().bought` ≥ 0.6); each twin is today's

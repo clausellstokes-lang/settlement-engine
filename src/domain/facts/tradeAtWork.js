@@ -106,6 +106,8 @@ import { ironAtHandOf } from './ironAtHand.js'; // BAR8-SCENES (item 1b): the ir
 import { warHoldsIron } from './warIronHook.js'; // BAR8-SCENES (item 1b): the war's hold on the iron, the iron hook's own predicate (EG1: import-free)
 import { GROUND_YIELD, idOfHouse, sourceStoryOf, usedGroundOf } from './supplyStory.js'; // BAR8-SCENES (item 1c): the fish story
 import { SOURCE_GROUNDS, TAKERS } from './houseKinds.js';
+import { chainCarrierOf } from './chainCarrier.js'; // LAST-DECLARE item 3 (LR5): the chain's crisis state lives here (below)
+import { ACCESS_ONLY, liveInstitutionNames } from './institutions.js'; // LAST-DECLARE item 3 (LR5)
 import { catalogIdForName } from '../../data/institutionalCatalog.js'; // BAR8-DESKS-2 (BR34): the building houses, by catalogue id
 
 /** The arrival picker's house words, by trade (a copy of `ARRIVAL_SENSES[].institutions`, pinned). */
@@ -364,7 +366,8 @@ export function houseStoppedBySiege(record, house) {
 
 /**
  * BAR8-SCENES (item 1a): under a siege, a house the crisis table declares no dependence for, that runs at least one chain of
- * the record and every one of them the record stores Impaired (the chain card's own word).
+ * the record and every one of them the chain card SHOWS Impaired (`chainCrisisStateShown`, below: LAST-DECLARE item 3, LR5;
+ * the stored status read here before, while the card printed the shown one).
  * @param {object} record @param {unknown} house @returns {boolean}
  */
 function impairedUnderSiege(record, house) {
@@ -373,7 +376,7 @@ function impairedUnderSiege(record, house) {
   const name = rosterName(house);
   const chains = arr(/** @type {{ economicState?: { activeChains?: unknown } | null }} */ (record).economicState?.activeChains)
     .filter((c) => !!c && typeof c === 'object' && arr(/** @type {{ processingInstitutions?: unknown }} */ (c).processingInstitutions).includes(name));
-  return chains.length > 0 && chains.every((c) => /** @type {{ status?: unknown }} */ (c).status === 'impaired');
+  return chains.length > 0 && chains.every((c) => chainCrisisStateShown(c, record) === 'impaired'); // LAST-DECLARE item 3 (LR5): the status the card SHOWS
 }
 
 /** BAR8-SCENES (item 1b; BR17): the key's suffix that asks for the trade IN FULL (answered for the ironwork). */
@@ -431,4 +434,94 @@ function fishTakenHere(record) {
     const told = sourceStoryOf(story, /** @type {{ name?: unknown, catalogId?: unknown }} */ (h), () => '')?.story;
     return told === 'local' || (told == null && !used);
   });
+}
+
+// ── THE CHAIN'S CRISIS STATE (LAST-DECLARE item 3, the chair's ruling LR5, 2026-11-18; FAULTS-WATCH's 4b). Moved WHOLE, unchanged,
+// from `display/chainStateShown.js`, which imports it back and re-exports it: ONE rule, read by the chain card and by
+// `impairedUnderSiege` above, so the atom reads the status the card prints, not the stored one. It lives in this fact module
+// because this module is already pinned lazy (vite.config.js :: FIRSTPAINT2_LAZY_DOMAIN) beside the two lazily pinned modules
+// the rule reads (`crisisKind.js`, `institutions.js`); importing the display module instead put it in eager engine-core
+// (`tests/architecture/engineCoreLazyEdge.test.js`, measured red). Only `chainCarrier.js` (import-free) joins engine-core. ──
+/** The state a card prints as nothing: no chip (W2-C-LEAVES-4 item 1). */
+export const NO_STATE_SHOWN = '';
+
+/** The ground each food source of the food record is grown, grazed, fished or hunted on (`generators/foodLand.js`). */
+export const FOOD_SOURCE_GROUND = Object.freeze({
+  grain: Object.freeze(['grain_fields', 'fertile_floodplain']),
+  livestock: Object.freeze(['grazing_land']),
+  fish: Object.freeze(['fishing_grounds', 'river_fish']),
+  mill: Object.freeze(['river_mills']),
+  game: Object.freeze(['hunting_grounds']),
+});
+
+/** The states a card prints as working. */
+export const SHOWN_WORKING = new Set(['running', 'operational', 'entrepot']);
+
+/**
+ * @param {unknown} chain one of `economicState.activeChains`
+ * @param {unknown} record the settlement record
+ * @returns {string} the state a crisis leaves (a key of the flow card's status table); the card prints `chainStateShown`
+ */
+export function chainCrisisStateShown(chain, record) {
+  const c = chain && typeof chain === 'object'
+    ? /** @type {{ status?: unknown, resourceInputKey?: unknown, entrepot?: unknown, needKey?: unknown }} */ (chain)
+    : {};
+  const status = String(c.status ?? '');
+  if (!SHOWN_WORKING.has(status) || !record || typeof record !== 'object') return status;
+  const crisis = crisisOf(/** @type {object} */ (record));
+  const carrier = chainCarrierOf(chain, record).kind;
+  if (crisis.has('famine')) {
+    const failed = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { failedSource?: unknown } | null } | null } | null }} */ (record)
+      .economicState?.foodSecurity?.foodRecord?.failedSource;
+    const ground = typeof failed === 'string' ? FOOD_SOURCE_GROUND[/** @type {keyof typeof FOOD_SOURCE_GROUND} */ (failed)] : undefined;
+    if (carrier === 'own' && ground && ground.includes(String(c.resourceInputKey))) return 'impaired';
+  }
+  if (tradeStoppedHere(record) && c.needKey !== 'criminal_economy') {
+    const fieldWork = carrier === 'own' && typeof c.resourceInputKey === 'string' && c.resourceInputKey !== '' && !seaOpenTo(c.resourceInputKey, record);
+    const trade = c.entrepot === true || c.needKey === 'trade_entrepot' || carrier === 'transit' || carrier === 'bought';
+    if (fieldWork || trade) return 'impaired';
+    if (runsOnlyThroughAccess(chain, record)) return NO_STATE_SHOWN;
+  }
+  return status;
+}
+
+/**
+ * THE SEA A LAND SIEGE DOES NOT TAKE (W2-C-LEAVES-4 item 1): a port's sea grounds (`SEA_GROUNDS`, the catalogue's
+ * "water" grounds off the coast) lie outside no wall the siege holds; the record's own exports go out "by the naval
+ * route only" (`computeActiveChains.js :: deriveExportsFromChains`). A river's fish is the land's.
+ * @param {string} ground @param {unknown} record
+ * @returns {boolean}
+ */
+function seaOpenTo(ground, record) {
+  const access = /** @type {{ economicState?: { tradeAccess?: unknown } | null }} */ (record).economicState?.tradeAccess;
+  return SEA_GROUNDS.has(ground) && access === 'port';
+}
+/** The sea grounds (`data/goods/identity.js :: RESOURCE_DATA`, kind "water", off the coast). */
+const SEA_GROUNDS = new Set(['fishing_grounds', 'deep_harbour']);
+
+/**
+ * WHETHER A CHAIN'S ONLY HOUSE IS A NEIGHBOUR'S (W2-C-LEAVES-4 item 1): each of its houses is met on the live roster
+ * only by an "Access to ..." row, by the flow card's own reading of a house as present (the house's first word in a
+ * roster name, `SupplyChainsPanel.jsx :: chainFlowFacts`), and at least one is met so.
+ * @param {unknown} chain @param {unknown} record
+ * @returns {boolean}
+ */
+export function runsOnlyThroughAccess(chain, record) {
+  const houses = chain && typeof chain === 'object' && Array.isArray(/** @type {{ processingInstitutions?: unknown }} */ (chain).processingInstitutions)
+    ? /** @type {ReadonlyArray<unknown>} */ (/** @type {{ processingInstitutions: unknown[] }} */ (chain).processingInstitutions) : [];
+  const roster = liveInstitutionNames(/** @type {Parameters<typeof liveInstitutionNames>[0]} */ (record)).map((n) => n.toLowerCase());
+  const heads = houses.map((h) => String(h).toLowerCase().split(/[\s(]/)[0]).filter(Boolean);
+  const met = (/** @type {boolean} */ access) => heads.some((w) => roster.some((n) => ACCESS_ONLY.test(n) === access && n.includes(w)));
+  return heads.length > 0 && met(true) && !met(false);
+}
+
+/**
+ * WHETHER TRADE COMES IN AT ALL (W2-C-LEAVES-3, #169): a siege in force stops field work and trade (the siege's own
+ * record line, `data/stressTypes.js :: STRESS_TYPE_MAP.under_siege.viabilityNote`, printed on the page). The one home
+ * the chain cards and the Economics tab's Imports list read.
+ * @param {unknown} record the settlement record
+ * @returns {boolean}
+ */
+export function tradeStoppedHere(record) {
+  return !!record && typeof record === 'object' && crisisOf(/** @type {object} */ (record)).has('under_siege');
 }
