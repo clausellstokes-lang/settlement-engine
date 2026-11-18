@@ -1609,3 +1609,18 @@ should be paused or archived by the owner's hand.
   (the landing is after the deploy; nothing waits on it now); three counts each +1 by its files, named for the
   second close (the ruin roster 115 to 116, the estate's file count, the mutation manifest lists
   `bar8Income.test.js`); FS1 (a) is the one red at a merge, by the cure.
+- 04:00 UTC, 2026-11-18 · THE INVENTORY IS WHOLE: CHECKS-3's part of `close-0-70e557d5b` is in (fecb55bf3; 33 files,
+  69 names). THE WHOLE CHECK AT THE FROZEN LINE: 159 FAILING TESTS IN 79 FILES, EVERY ONE ON THE KNOWN LIST (the
+  list's four other files, `tailHistoryBatch6`, `bar2PlacesRows`, `politicalFlavorDeclared`, `tailNarrativeRows`,
+  were red at point 45 and are green since point 47: stale rows of the chair's list, not reds). NOTHING NEW.
+  CLOSE-DOORS-2 (03:52): 44 other registered goldens green at the tip; THE HERALD KNOWLEDGE-DESK GOLDEN is red since
+  point 21 (BIRTH-1: the realm pulse reads the town's imports, the declared `primaryImports` move; 473 items, 475
+  rows unchanged): A FOURTH SURFACE OF THE SHIFT RECORD (ruled yes); `worldFactRederive` A4 (the culture readers'
+  roster: `foodBaseNumbers.js` unlisted since DEBT-1 part C 4f57f0c46, point 31) is a LAW RED: sent to CLOSE-SWEEP
+  as S4 item 1 (confirm the move, the roster row with its reason, and prove the re-derive still reaches what the
+  file computes: else a fault and a stop); A7 (two shas) stays DOORS-2's. J-INCOME-2's 03:49 hand-back answers BR26
+  and the 02:25 note only: it was reading BR33 after (its session shows it at work on the rites line): the roster
+  row it chose is not yet its answer to BR33 (2). THE DRAFT OF #75's DESCRIPTION is written
+  (`docs/chair/2026-11-18/close/PR-75-DESCRIPTION.md`, 19 KB; the seven migrations each in one plain line: 208
+  restates one column of the saved towns at apply; 209 changes who holds the Surveyor from the moment it is applied).
+  A merge worktree for the close stands at `/home/user/line` (branch `lane/landing-close-2026-11-18` = 70e557d5b).
