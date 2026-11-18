@@ -210,3 +210,26 @@ line tip alone: the same 69 reds. Two messages differ, each by one: the estate's
 manifest's list (my guard, beside the other seats' guards it already lists), both the close's, named. `ruinFilterRoster` now
 reads exactly the line tip's message. The doors at the merge read the line tip's figures: presumption "fresh 0 · stale 152";
 presumed things "fresh 38 · stale 72".
+
+## 8. AFTER THE SECOND READER (READ-INCOME-PDF; the chair's message of 06:49 UTC): three commits, one push
+
+1. **THE HIGH (`9b723bfdc`).** `src/domain/facts/factLayers.js`, the one row `importsAsPrinted`: `reads` gains
+   `availableServices` (stratum 1; the leaf stays at layer 4, no pool placement asked). At a scratch merge of my tip with
+   `origin/lane/landing-close-2026-11-18` (0af60594a), `tests/lint/factLayers.walker.test.js` is 15 of 15 green, as on the
+   close's branch alone (15 of 15); merge aborted. THE MERGE IS NOT CLEAN: the close's branch rewrote the same row (it added
+   `economicViability`), so the row conflicts. THE RESOLUTION IS THE UNION, one row:
+   `reads: ['activeConditions', 'availableServices', 'config', 'economicState', 'economicViability', 'institutions',
+   'resourceAnalysis', 'stress', 'stressors', 'tier']` with the close's comment. That is the tree the walker was run on.
+2. **THE MED 2 (`88e8958fd`), BR33 (2).** `ordinaryIncomeLineOf`'s metal arm asks the live roster for a house that smelts or
+   works metal (`FORGE_HOUSE_WORDS`, moved unchanged into the leaf and re-exported by `incomeLineSiblings.js` under its name;
+   `economicState.js` and `trueIncomeDesc` read the same object), else no sentence. The guard's new arm (Blacksmiths ruined:
+   no line; the same house standing: "Metal is smelted or worked here.") is red at 262ba9ec6 (the old leaf prints the line for
+   the ruined smiths) and green now. The stored records of the thirty, the 150 and the 720 are byte-equal. The ordinary line of
+   every income share, with and without the forge-idle reading, is equal before and after (404 · 1,914 · 9,328 reads, 0 differ):
+   no town holds a non-live house.
+3. **THE LOW 2 (`81ac4096d`).** FS1 (a)'s dated note quotes the retired claim in its own words.
+
+NET at `81ac4096d`: `typecheck:domain:strict` 0; `typecheck:ratchet` 0; eslint on the five changed files 0; `tests/architecture`,
+the guard, `bar4CorpusEcoKinds`, `bar7EconTab` and all of `tests/pdf`: 1,008 of 1,008 green. NOT TOUCHED (the chair's word):
+`tradeListDisplay.js` (the reader's MED 1, `dealtInHere` dropping "livestock" beside a house marked short of it, is the seat
+FAULTS-NEED's); the stored figures the reader named.
