@@ -81,12 +81,13 @@
  *       what stops its house, or a siege twin on offer). The guard `tests/generators/faultsWatch.test.js` holds this verdict
  *       EQUAL to the page's on every house of its besieged towns (and the seat measured it equal on all 2,348 besieged houses
  *       of the 900): a change to the leaf's stop reds it. "Curtailed by the siege." is not a stop: it works what it holds.
- *   (b) LEFT BY NAME: `impairedUnderSiege` reads the STORED chain status where the card prints the shown one
- *       (`display/chainStateShown.js :: chainCrisisStateShown`: the Dyer's textile chains, an Enchanter's shop's magical
- *       goods; 5 house-trade pairs in the 900 at the base, the stored "running" printed "impaired"). Its reader cannot be
- *       imported here: the static edge puts the display leaf in engine-core beside its two lazily pinned imports
- *       (`crisisKind.js`, `institutions.js`: `tests/architecture/engineCoreLazyEdge.test.js`, measured), and the pin is
- *       `vite.config.js`'s, outside this seat (BR25 (5): nothing prints falsely by it in the 900).
+ *   (b) CURED (LAST-DECLARE item 3, the chair's ruling LR5, 2026-11-18): `impairedUnderSiege` reads the chain status the
+ *       card SHOWS (`chainCrisisStateShown`, moved whole into this module and re-exported by `display/chainStateShown.js`),
+ *       no longer the stored one (before: the Dyer's textile chains, an Enchanter's shop's magical goods; 5 house-trade
+ *       pairs in the 900, the stored "running" printed "impaired"). The rule lives here, not in the display leaf, because
+ *       the static edge would put that leaf in engine-core beside its two lazily pinned imports (`crisisKind.js`,
+ *       `institutions.js`: `tests/architecture/engineCoreLazyEdge.test.js`, measured); see the block above
+ *       `chainCrisisStateShown` below. (Comment corrected at the last close, LASTCLOSE-DOORS: it still said "the STORED".)
  *
  * Layer 2 (over the roster, the resources and the economy). Pure: no randomness, no clock, no write.
  * @enforced-by tests/generators/bar8Scenes.test.js
