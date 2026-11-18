@@ -1002,3 +1002,44 @@ should be paused or archived by the owner's hand.
   (3) THE TWO THAT NEVER STARTED: fresh seats cut from commits that hold the paragraph: J-INCOME-2 from the line's tip,
   SCENES-3 from the landing branch; the old J-INCOME and SCENES-2 are told to stand down (not archived: that stays the
   owner's).
+- **01:08 UTC. "DO BOTH" IS DONE BUT FOR THE PUSHES' GATES.** (1) THE LINE IS AT 99ca9ad51a573bfcab8bc35c861a5107969ca977 (00:57:20, read back): 919e3a7b2 the paragraph
+  in `CLAUDE.md`, 99ca9ad51 the rows of points 43 and 44. The landing branch `lane/landing-45-2026-11-17` is at
+  55b954f984435dcdf787c3da2e6f2fab3aa73802 (the line's two docs commits merged in; 00:58). (2) THE TWO FRESH SEATS:
+  J-INCOME-2 session_01FbPLbeysumDem58aX1TLLy (00:57; `lane/bar8-j-income-2-2026-11-17` from the line's tip) and SCENES-3
+  session_01FbPLbcFdcqzb6gG6CbkoyN (00:59; `lane/bar8-scenes-3-2026-11-17` from the landing branch; ruling BR25's three
+  items); the old J-INCOME and SCENES-2 are told to stand down. (3) THE FIVE SEATS' FINISHED WORK IS COMMITTED BY THE
+  CHAIR ON THEIR OWN BRANCHES, EACH FILE PROVEN BYTE-EQUAL TO THE SEAT'S OWN:
+  | seat | branch | the commit | its parent (the seat's HEAD) | files | pushed |
+  |---|---|---|---|---|---|
+  | K-WATCH | `lane/bar8-k-watch-2026-11-17` | 705d9f74713284b783bdab5ff7a4deb7ea3b1c24 | 1ceae1ede | 8 | 01:04 |
+  | K-POWERS | `lane/bar8-k-powers-2026-11-17` | b089828a64822ea1207154b73f7dadb7211bd7f8 | 1ceae1ede | 8 | in flight |
+  | K-PEOPLE | `lane/bar8-k-people-2026-11-17` | 0c135c83ad1c084d43519dc2b9831a749dc9a51c | 1ceae1ede | 10 | in flight |
+  | DESKS-ECO | `lane/bar8-desks-eco-2026-11-17` | dab73fac54548a27eb3b8870ae47c43f28edc83b | f1ca75555 | 13 | in flight |
+  | DESKS-DEF | `lane/bar8-desks-def-2026-11-17` | 73882679ee20dff21598a3a2a72960911e5745bb | f1ca75555 | 11 | in flight |
+  HOW (so that it can be checked or done again): a `list_events` result too large for the chair's context is SAVED BY
+  THE HARNESS TO A FILE (`/root/.claude/projects/.../tool-results/mcp-claude-code-remote-list_events-*.txt`: one JSON
+  line), so a seat's printed outputs are read BY A SCRIPT, never retyped: `/home/user/wk/ev/parse.py <file> --dump
+  <dir>` writes each tool result to a file; `/home/user/wk/ev/rebuild.py <dir> <worktree at the seat's HEAD> [--skip
+  <scratch paths>]` applies the printed `git diff HEAD` chunks, finds each new file's bytes in the prints BY THE SEAT'S
+  OWN HASH AND SIZE, and compares every file with the hash list each seat printed at 00:58 (`git hash-object`, size,
+  path). THREE THINGS IT MET: a printed diff whose last lines were empty context lines arrives without them (restored
+  from the last hunk's own header: K-POWERS, one line); K-POWERS had edited its hand-back after its print by two small
+  scripts (read by the chair, replayed: the seat's hash); DESKS-DEF had printed one file's diff with its lines cut at
+  600 characters (it printed it again whole at 01:03). LEFT OUT, AS DESKS-DEF SAID: its scratch changes of
+  `docs/content/wiring-census.json` and `src/data/proseNorms.generated.js`. THE PRE-COMMIT HOOK (`eslint --fix`)
+  CHANGED NOTHING: the committed blobs equal the seats' hashes (checked after each commit). AT EACH COMMIT: the seat's
+  guard and the tests it changed, and eslint on its changed files: K-WATCH 8 of 8; K-POWERS 8 of 8; K-PEOPLE 27 of 27;
+  DESKS-ECO 108 of 112 and DESKS-DEF 31 of 35, the four reds of each being
+  `tests/lint/proseEntryContradiction.walker.test.js`, red by name at their base f1ca75555 too (BOTH DESKS SEATS
+  CHANGED THAT FILE AND `docs/content/RECEIPT_POOLS_DOSSIER_STATE.md`, `factLayers.js`, `factVocabulary.js`,
+  `factsOf.js`: THEIR MERGES WILL MEET). NONE OF THE FIVE IS READ YET: for each, the chair's read, a second reader,
+  the merge on the line's tip (the K seats' base is 1ceae1ede, the DESKS seats' f1ca75555: the chair resolves what
+  meets), the shared whole check, the landing. A FINDING THAT NEEDS A BUILDER GOES TO A FRESH SEAT CUT FROM A COMMIT
+  THAT HOLDS THE PARAGRAPH (the five old seats cannot commit).
+- **01:08 UTC. THE WHOLE CHECK OF POINT 45 IS IN (CHECKS-2 00:27, CHECKS-1 00:41, CHECKS-3 00:58): 165 names at 2f0e88971 against the line's 159: SIX NEW, NONE GONE.**
+  Two are cured by the seat's own last commit (point 46: the negative-anchor walker's quarantine arm; the presumption
+  walker's "no NEW undeclared line"; the door-classes tail read "fresh 1" there, "fresh 0" at point 46). FOUR ARE OLDER
+  TESTS THE CURE MADE UNTRUE: the three of ruling BR25 (4) and a fourth the grep could not find:
+  `tests/generators/politicalFlavorDeclared.test.js` "under a crisis, a stable character is one of the crisis-safe
+  rows" (the twin declares its crises by name, not `any`): GIVEN TO SCENES-3 (01:08) with a wider sweep (every test
+  that imports the tables the seat changed). The doors' other figures unchanged.
