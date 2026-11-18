@@ -31,7 +31,10 @@ const CURED = [
   ['r2s-plague_onset-thorp-0', 'Disasters & Famine', 'a plague would run until it burned out', 'The outbreak has come, and no house here is kept to treat the sick.'],
   ['r2s-plague_onset-town-1', 'Disasters & Famine', 'keep an outbreak from spreading', 'The outbreak has come; the hospital is where the sick can be isolated.'],
   ['r2s-plague_onset-city-0', 'Disasters & Famine', 'an outbreak would outrun it', 'The outbreak has come, and the monastic infirmary treats the sick one at a time.'],
-  ['r2s-famine-town-2', 'Internal Security', 'There is a court', 'Cases are heard here, but there is almost nowhere to hold anyone.'],
+  // RE-KEYED BY IDENTITY 2026-11-18 (FAULTS-WATCH FR19 item 6): the internal line reads the Legal row's court (`courtHoldersOf`);
+  // r2s-famine-town-2's Legal row reads "None" (its town hall holds no court), so the court-without-gaol claim stands on
+  // r2s-famine-town-0 ("Court only"), the same shape and crisis
+  ['r2s-famine-town-0', 'Internal Security', 'There is a court', 'Cases are heard here, but there is almost nowhere to hold anyone.'],
   ['r2s-plague_onset-thorp-0', 'Internal Security', 'organised crime', 'Internal security: Dangerous — Plague Unrest — Plague Conditions. No court and no gaol'],
   ['r2s-occupied-thorp-1', 'Beasts & Monsters', 'Quiet country', 'Few creatures trouble this country; the danger here now is not from beasts.'],
   ['r2s-under_siege-town-0', 'Beasts & Monsters', 'Quiet country', 'Few creatures trouble this country; the danger here now is not from beasts.'],

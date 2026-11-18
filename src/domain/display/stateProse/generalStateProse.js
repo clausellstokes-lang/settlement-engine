@@ -1302,7 +1302,7 @@ export function institutionsPoolKey(inst, record = undefined) {
   const paidHands = defence
     ? defence.garrison || defence.watch || defence.mercenary || inst.hasNavy === true
     : inst.hasMilitaryInst === true || inst.hasNavy === true || inst.hasWatch === true;
-  const key = (inst.hasCourtSystem === true && (defence ? defence.prison : inst.hasPrison === true)) ? 'ADMINISTERED' // FR22 (2): given the record, the live prison; the court stays the pool's own (its variants declare `court sits`)
+  const key = (inst.hasCourtSystem === true && inst.hasPrison === true) ? 'ADMINISTERED'
     : paidHands ? 'GARRISONED'
       : inst.hasMagicInst === true ? 'LETTERED'
         : (inst.hasGranary === true || hasHospital) ? 'PROVISIONED'

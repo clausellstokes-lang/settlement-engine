@@ -13,8 +13,9 @@
 //   5. THE LEGAL ROW'S PRISON (the chair's item 5, 2026-11-18): the Legal Infrastructure row and the Defense desk's internal
 //      row read the LIVE prison (`defenceOf(...).prison`), not the stamped `compound.inst.hasPrison`: r2r-city-41 with its
 //      prison ruined (a constructed record) says no prison stands and draws the pool the row names, in all three views.
-//   6. FR19 item 6: the threat assessment's internal-security line and DS-GEN-17's key read the same court and prison: in the
-//      ruined town every reader agrees (no gaol where none works); the town unruined keeps the full chain everywhere.
+//   6. FR19 item 6: the threat assessment's internal-security line reads the Legal row's court and prison; DS-GEN-17's pool
+//      already reads them per variant: in the ruined town every reader agrees (no gaol where none works); the town unruined
+//      keeps the full chain everywhere.
 //   7. FR22 (3): the Small prison/stocks' "Holding cells" holds "pending trial" only where the Legal row's court sits;
 //      elsewhere its twin "Short-term detention until a fine is paid." (the label kept).
 import { describe, it, expect, beforeAll } from 'vitest';
@@ -33,6 +34,7 @@ import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { institutionsPoolKey } from '../../src/domain/display/stateProse/generalStateProse.js';
+import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -228,6 +230,8 @@ describe('5 · the Legal row\'s prison is the live roster\'s (the chair\'s item 
   const internalLine = (r) => String(buildThreatAssessment(r).find((/** @type {any} */ x) => x?.label === 'Internal Security')?.assess ?? '');
   /** @param {any} r */
   const genKey = (r) => institutionsPoolKey(r?.economicState?.compound?.inst, r);
+  /** the Overview's general desk, as the owner reads it. @param {any} r */
+  const gen17 = (r) => JSON.stringify(generalDeskLines(r, { publicDossier: false, stresses: [] }).overview);
   it('FR19 item 6 · POSITIVE: the ruined town\'s every reader agrees: the Legal row, the desk, the atoms, the threat line, DS-GEN-17', () => {
     const s = prisonRuined(BORN.get('r2r-city-41'));
     expect(s.economicState?.compound?.inst?.hasCourtSystem && s.economicState?.compound?.inst?.hasPrison, 'premise: the stamped flags still say court and gaol').toBe(true);
@@ -237,18 +241,21 @@ describe('5 · the Legal row\'s prison is the live roster\'s (the chair\'s item 
     expect(internalKey(s)).toBe('Internal Security: court without detention');
     expect(internalLine(s)).toMatch(/Cases are heard here, but there is almost nowhere to hold anyone\.$/);
     expectAbsentWithAnchor(internalLine(s), 'gaol', 'Cases are heard here', 'the threat assessment\'s internal line');
-    expect(genKey(s), 'DS-GEN-17: no "own court and its own gaol"').not.toBe('ADMINISTERED');
-    expect(genKey(s), 'DS-GEN-17 keys the next lens of the cascade').toBe(genKey({ ...s, institutions: (s.institutions || []).filter((/** @type {any} */ i) => !PRISON.test(String(i?.name))) }));
+    // FR22 (2), measured: DS-GEN-17's ADMINISTERED pool declares the LIVE court and prison on every variant (v1 v2 `court sits` +
+    // `prison`, v3 `court sits`, v4 `no court sits` + `prison`, v5 neither), so the key stays the base's and the door draws v3
+    expect(genKey(s), 'DS-GEN-17 keys its pool as at the base').toBe('ADMINISTERED');
+    expectAbsentWithAnchor(gen17(s), 'own gaol', 'the law keeps a building of its own', 'DS-GEN-17 as the Overview draws it');
   });
   it('FR19 item 6 · NEGATIVE: the same town unruined: the threat line and DS-GEN-17 keep the full chain', () => {
     const s = BORN.get('r2r-city-41');
     expect(internalLine(s)).toMatch(/Arrest, trial and gaol all work here\.$/);
     expect(genKey(s)).toBe('ADMINISTERED');
+    expect(gen17(s)).toContain('keeps its own court and its own gaol');
   });
   it('FR19 item 6 · POSITIVE (born): where the stamped flag calls a town hall a court, the threat line says what the Legal row says', () => {
     const failures = collectSeedFailures([
-      // FR22 (2): DS-GEN-17 reads the live prison only; its court is its pool's own (v4 "keeps a gaol of its own, though no
-      // court sits here to try anyone" declares `no court sits`), so r2r-town-5 keeps ADMINISTERED and its true v4
+      // FR22 (2), measured: DS-GEN-17 is the base's (its pool declares the live court and prison per variant), so
+      // r2r-town-5 keeps ADMINISTERED and its true v4 "keeps a gaol of its own, though no court sits here to try anyone"
       ['r2r-town-5', 'Prison only', 'People are locked up without trial.', true],
       ['r2r-town-4', 'None', 'No court and no gaol; order rests on whoever is armed.', false],
     ], ([seed, row, line, administered]) => {
