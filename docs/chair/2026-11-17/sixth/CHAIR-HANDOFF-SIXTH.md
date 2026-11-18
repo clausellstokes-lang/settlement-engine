@@ -2443,3 +2443,9 @@ should be paused or archived by the owner's hand.
   81ac4096d: FS1 (a)'s note quotes the retired claim. `tradeListDisplay.js` untouched (the reader's MED 1 is
   FAULTS-NEED's item 0). THE INCOME PIECE LANDS AT 3b419910f, then PDF-2b at cd94d5a08 (the leaf is J-INCOME-2's).
   STILL OUT: DESKS-2's two commits (BR35); "WRITTEN" from CLOSE-DOORS-2; FAULTS-NEED's atom.
+- 07:02 UTC, 2026-11-18 · "THE ATOM IS AT d75011e68" (FAULTS-NEED, 07:01; its item 0 is 48fbd836e: the need list keeps a need a
+  live house is marked short of; the atom `need not brought in` with keys luxury, spice, silk, precious, salt, fuel,
+  livestock; its leaf `src/domain/facts/needNotBroughtIn.js`, 215 lines; its guard `tests/generators/faultsNeed.test.js`).
+  **FAULTS-ROWS IS SEATED ON IT** (07:02; session_01FbPLbbdbBzYdRPJmCPrx2k; base d75011e68d1630711660f5668451624be0167a61
+  on `lane/faults-need-2026-11-18`; branch `lane/faults-rows-2026-11-18`; the prompt as sent is in `faults/prompts/`).
+  ALL SEVEN SEATS OF THE FAULTS ROUND ARE AT WORK.
