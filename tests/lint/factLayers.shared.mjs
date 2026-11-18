@@ -17,6 +17,7 @@ import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { codeOf, resolveNameConstants } from './defenceFactReaders.shared.mjs';
 import { INSTITUTION_KINDS } from '../../src/domain/facts/institutions.js';
+import { FACT_DIMENSIONS } from '../../src/domain/facts/factVocabulary.js';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const SRC = join(ROOT, 'src');
@@ -82,6 +83,14 @@ function exhaust(v) {
 const INSTITUTION_PROBES = ['temple', 'docks', 'mill', 'granary', 'smith', 'tavern', 'monastery', 'bank', 'healer', 'hospital'];
 
 /**
+ * The keys the vocabulary declares for a keyed home (every dimension whose `home` is the getter), in declaration order:
+ * the probe's arguments, derived from `factVocabulary.js :: FACT_DIMENSIONS`, never a typed list (CLOSE-SWEEP S4 item 2).
+ * @param {string} getter @returns {string[]}
+ */
+export const vocabularyKeysOf = (getter) => [...new Set(Object.values(FACT_DIMENSIONS)
+  .filter((d) => d.home === getter).flatMap((d) => (Array.isArray(d.keys) ? d.keys : [])))];
+
+/**
  * The strata one leaf touches on one record.
  * @param {Readonly<import('../../src/domain/facts/factLayers.js').LeafRow>} row
  * @param {Record<string, any>} record
@@ -104,7 +113,13 @@ export function leafTouches(row, record, modules, stratumOf) {
     else if (getter === 'hasOtherNpc') facts.hasOtherNpc(Array.isArray(record.npcs) ? record.npcs[0] : 0);
     else if (getter === 'sharesPower') facts.sharesPower(Array.isArray(record.npcs) ? record.npcs.slice(0, 2) : []); // R2-CODE-A-14 (s1): a pair of the roster
     else if (getter === 'sharesPlace' || getter === 'loneTie') facts[getter](Array.isArray(record.npcs) ? record.npcs.slice(0, 2) : []); // BAR4-PEOPLE (11:07): a pair of the roster
-    else if (getter === 'tradeAtWork') for (const trade of ['fish', 'kilns', 'stone', 'arcane']) facts.tradeAtWork(trade); // BAR4-SCENES-2 (HW1): each trade the atom keys
+    // CLOSE-SWEEP S4 item 2 (the chair, 2026-11-18): a key never probed is a read never seen. A keyed home is probed with EVERY
+    // key the vocabulary declares for it (`vocabularyKeysOf`, derived), and the pair home with every pair of the roster.
+    else if (getter === 'tradeAtWork' || getter === 'goodExported') for (const key of vocabularyKeysOf(getter)) facts[getter](key);
+    else if (getter === 'seatHeld') {
+      const roster = Array.isArray(record.npcs) ? record.npcs : [];
+      for (let i = 0; i < roster.length; i++) for (let j = i + 1; j < roster.length; j++) facts.seatHeld([roster[i], roster[j]]);
+    } else throw new Error(`leafTouches: the factsCall getter '${getter}' has no call here, so the walker would never see it read`);
   } else if (row.call === 'perChain' || row.call === 'perHouse') {
     // the chain a leaf reads is read through the view; the house NAMES a card asks about are the walker's own
     // argument, taken from the raw record, so asking costs the leaf no read of the economy
