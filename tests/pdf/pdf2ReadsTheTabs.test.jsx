@@ -32,12 +32,18 @@ vi.mock('../../src/store/index.js', () => {
 
 import { EconomicsTrade } from '../../src/pdf/sections/EconomicsTrade.jsx';
 import { Services } from '../../src/pdf/sections/Services.jsx';
+import { Institutions } from '../../src/pdf/sections/Institutions.jsx';
+import React from 'react';
+import { render, cleanup } from '@testing-library/react';
+import InstitutionsTab from '../../src/components/new/tabs/InstitutionsTab.jsx';
+import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import { ResourcesProduction } from '../../src/pdf/sections/ResourcesProduction.jsx';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { CHAIN_STATE_WORDS } from '../../src/pdf/lib/chainStateOnPage.js';
 import { humanize, label } from '../../src/pdf/lib/format.js';
 import { buildJournalPages, esc } from '../../src/foundry/journalPages.js';
-import { chainCardUnderSiege, chainOutputsOnCard, econOrdinaryTimesLine } from '../../src/domain/display/economicsCrisisMarks.js';
+import { chainCardUnderSiege, chainOutputsOnCard, econOrdinaryTimesLine, incomeDescShown } from '../../src/domain/display/economicsCrisisMarks.js';
+import { ordinaryIncomeLineOf } from '../../src/generators/economy/incomeLineSiblings.js'; // the Economics tab's own import (EconomicsTab.jsx), not the PDF's copy
 import { chainAsShown } from '../../src/domain/display/chainStateShown.js';
 import { chainHousesOf } from '../../src/domain/display/chainHouses.js';
 import { chainOutputsShown } from '../../src/domain/display/tradeListDisplay.js';
@@ -258,17 +264,98 @@ describe('PDF-2 item 7: the journal\'s Economics head line is the Economics tab\
   });
 });
 
+describe('PDF-2b item 1 (item 3 of the section, LEFT-MARKS M3): the PDF\'s Services and Institutions chapters print the short sentence where their tabs print it', () => {
+  // The nine towns whose only mark is a failed venture's (LEFT-MARKS's M3: their tabs print no "marked short" sentence) and
+  // two whose tabs print it over a short mark (r2r-city-20; r2r-hamlet-27, the maltster's), each tab RENDERED, as
+  // `tests/domain/leftMarks.test.js` renders them; each PDF chapter rendered to its text leaves.
+  const VENTURE_ONLY = ['r2r-hamlet-26', 'r2r-hamlet-48', 'r2r-hamlet-57', 'r2r-town-13', 'r2r-town-18', 'r2s-under_siege-city-1',
+    'r2s-politically_fractured-hamlet-0', 'r2s-infiltrated-town-1', 'r2s-wartime-city-3'];
+  const SHORT_MARKED = ['r2r-city-20', 'r2r-hamlet-27'];
+  test('the nine towns and the two beside them, every seed collected', () => {
+    let printedOnTab = 0;
+    expectNoSeedFailures(collectSeedFailures([...VENTURE_ONLY, ...SHORT_MARKED], (seed) => {
+      const t = generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} });
+      const vm = buildViewModel({ settlement: t });
+      const props = { settlement: t, narrativeMode: false, vm, stateProse: null };
+      const instTab = (render(React.createElement(InstitutionsTab, { settlement: t })).container.textContent || '').includes(SUPPLIED_LINE);
+      cleanup();
+      const svcTab = (render(React.createElement(ServicesTab, { services: t.availableServices, settlement: t, narrativeNote: null })).container.textContent || '').includes(SUPPLIED_LINE);
+      cleanup();
+      if (instTab || svcTab) printedOnTab++;
+      /** @type {string[]} */ const inst = [], svc = [];
+      walk(Institutions(props), inst, []); walk(Services(props), svc, []);
+      expect({ institutions: inst.some((l) => l.includes(SUPPLIED_LINE)), services: svc.some((l) => l.includes(SUPPLIED_LINE)) }, `${seed}: the PDF's chapters / the tabs`)
+        .toEqual({ institutions: instTab, services: svcTab });
+      if (VENTURE_ONLY.includes(seed)) expect({ instTab, svcTab }, `${seed}: anchored: neither tab prints it (M3)`).toEqual({ instTab: false, svcTab: false });
+    }), 'the M3 towns');
+    expect(printedOnTab, 'the towns whose tab prints the sentence over a short mark').toBeGreaterThanOrEqual(1);
+  }, 900000);
+});
+
+describe('PDF-2b item 4: the journal\'s chain row reads the record of its own row, never the next by index', () => {
+  // A CONSTRUCTED RECORD (rule N7: no town of the 720, the 150 or the thirty holds a chain with no print label, so the view
+  // model drops none): a town's chains with a chain of no label put first, whose tab card's word is not the first printed
+  // row's. The view model drops it (`viewModelBodySlices.js`, UPKEEP-14 (j)); paired by bare index, the journal's first row
+  // took its word.
+  test('every journal chain row of the constructed towns says its own chain\'s word', () => {
+    let built = 0;
+    expectNoSeedFailures(collectSeedFailures(['r2s-under_siege-village-0', 'r2r-thorp-41', 'r2r-village-8'], (seed) => {
+      const base = town(seed).t;
+      const chains = base.economicState.activeChains;
+      const first = chains.find((/** @type {any} */ c) => chainPrintName(c, base).label);
+      const want = tabWord(tabCard(base, first));
+      const dropped = ['impaired', 'vulnerable', 'running', 'operational'].map((status) => ({ ...first, label: '', status }))
+        .find((c) => tabWord(tabCard(base, c)) !== want);
+      expect(dropped, `${seed}: anchored: a chain of no label whose word is not the first row's`).toBeTruthy();
+      const t = { ...base, economicState: { ...base.economicState, activeChains: [dropped, ...chains] } };
+      expect(String(chainPrintName(dropped, t).label ?? ''), `${seed}: anchored: the chain prints no name`).toBe('');
+      built++;
+      const md = (buildJournalPages(buildViewModel({ settlement: t }), { settlement: t }).find((p) => p.name === 'Economics & Trade') || { markdown: '' }).markdown;
+      /** @type {string[]} */ const bad = [];
+      const rows = (md.split('## Supply chains')[1] || '').split('\n## ')[0].split('\n').filter((r) => r.startsWith('- **'));
+      expect(rows.length, `${seed}: anchored: the journal prints the named chains`).toBe(chains.filter((/** @type {any} */ c) => chainPrintName(c, t).label).length);
+      for (const l of rows) {
+        const m = /^- \*\*(.+?)\*\*(?: \*\(([^)]*)\)\*)?/.exec(l); if (!m) continue;
+        const rec = chains.find((/** @type {any} */ c) => esc(chainPrintName(c, t).label) === m[1]);
+        if (!rec) { bad.push(`${m[1]}: a row of no chain`); continue; }
+        if ((m[2] || '') !== tabWord(tabCard(t, rec)).toLowerCase()) bad.push(`${m[1]}: "${m[2] || ''}" / its own chain's "${tabWord(tabCard(t, rec))}"`);
+      }
+      expect(bad, seed).toEqual([]);
+    }), 'the constructed towns');
+    expect(built, 'the constructed towns').toBe(3);
+  });
+});
+
+describe('PDF-2b item 4 (item 4 of the section): an income share\'s row in the PDF is the Economics tab\'s, its ordinary line under no mark', () => {
+  test('every share, over the sample', () => {
+    let twins = 0;
+    expectNoSeedFailures(collectSeedFailures(SAMPLE, (seed) => {
+      const x = town(seed); /** @type {string[]} */ const bad = [];
+      for (const sh of x.vm.economics?.incomeSources || []) {
+        const tab = clean(incomeDescShown(x.t, sh, ordinaryIncomeLineOf) || ''); // the tab's call (EconomicsTab.jsx: incomeDescShown(s, src, ordinaryIncomeLineOf))
+        if (!tab) continue;
+        if (tab !== clean(incomeDescShown(x.t, sh) || '')) twins++;
+        if (!x.eco.some((l) => l.includes(tab))) bad.push(`${sh.source}: the tab's row "${tab}" not printed`);
+      }
+      expect(bad, seed).toEqual([]);
+    }), 'every share of every town');
+    expect(twins, 'the shares whose stored short twin the tab replaces with the trade\'s ordinary line').toBeGreaterThanOrEqual(3);
+  });
+});
+
 describe('PDF-2: the negatives print none of these faults, and agree', () => {
-  test('every negative town (r2r-village-0, bar0-village-calm-rand-28)', () => {
+  // PDF-2b item 5 (the chair, 2026-11-18): one plain test looping over the negatives, every seed through
+  // `collectSeedFailures` (the law `sovereigntyLightingContract.walker.test.js`: no new file parked by `each`).
+  test('every negative, each seed collected', () => {
     expectNoSeedFailures(collectSeedFailures(NEGATIVES, (seed) => {
       const x = town(seed);
-      expect(x.cards.length, 'anchored: the PDF prints its chain cards').toBeGreaterThan(0);
+      expect(x.cards.length, `${seed}: anchored: the PDF prints its chain cards`).toBeGreaterThan(0);
       const instNames = (x.t?.institutions || []).map((/** @type {any} */ i) => i?.name);
       for (const c of x.t?.economicState?.activeChains || []) {
-        expect(chainHousesOf(c.processingInstitutions, instNames, { chain: tabCard(x.t, c), town: x.t }).length, `${c.chainId}: a house the tab's card leaves off`).toBe(chainHousesOf(c.processingInstitutions, instNames).length);
-        expect(String(tabCard(x.t, c)?.status), `${c.chainId}: the tab's card`).toBe(String(chainAsShown(c, x.t)?.status));
+        expect(chainHousesOf(c.processingInstitutions, instNames, { chain: tabCard(x.t, c), town: x.t }).length, `${seed} ${c.chainId}: a house the tab's card leaves off`).toBe(chainHousesOf(c.processingInstitutions, instNames).length);
+        expect(String(tabCard(x.t, c)?.status), `${seed} ${c.chainId}: the tab's card`).toBe(String(chainAsShown(c, x.t)?.status));
       }
-      expect(x.vm.resources?.nearbyProven || [], 'a proven ground').toEqual([]);
-    }), 'every negative town prints none of these faults, and agrees');
+      expect(x.vm.resources?.nearbyProven || [], `${seed}: a proven ground`).toEqual([]);
+    }), 'every negative');
   });
 });

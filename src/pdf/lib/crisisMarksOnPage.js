@@ -135,15 +135,21 @@ export function stoppedWordOnPage(settlement, kind, row) {
  * input); else null.
  * @param {object | null | undefined} settlement
  * @param {ReadonlyArray<readonly ['service' | 'house' | 'chain' | 'income', Record<string, unknown> | null | undefined]>} rows
+ * @param {{ readings?: boolean }} [options] `readings` (default true): hand the leaf the rows' short readings (the Services and
+ *   Institutions tabs' form); false: a boolean (the Economics tab's form)
  * @returns {string | null}
  */
-export function ordinaryTimesOnPage(settlement, rows) {
+export function ordinaryTimesOnPage(settlement, rows, { readings = true } = {}) {
   const marked = [];
-  let shortMarked = false;
+  /** @type {Array<string | null>} */ const shorts = [];
   for (const [kind, row] of rows) {
     const crisis = stoppedOnPage(settlement, kind, row);
     if (crisis && crisisMarkText(settlement, crisis)) marked.push(crisis);
-    if (!shortMarked && shortOnPage(settlement, kind, row)) shortMarked = true;
+    shorts.push(shortOnPage(settlement, kind, row));
   }
-  return ordinaryTimesLine(marked, shortMarked);
+  // PDF-2b (BRIEF-BAR8 item 3, LEFT-MARKS M3; the chair, 2026-11-18): the rows' short readings, as the Services and
+  // Institutions tabs hand them (`ServicesTab.jsx`, `InstitutionsTab.jsx`: a failed venture's mark is no short mark, so the
+  // sentence no longer prints over a venture alone); the Economics chapter hands the boolean its tab hands
+  // (`economicsCrisisMarks.js :: econOrdinaryTimesLine`), by `{ readings: false }`.
+  return ordinaryTimesLine(marked, readings ? shorts : shorts.some((m) => m !== null));
 }

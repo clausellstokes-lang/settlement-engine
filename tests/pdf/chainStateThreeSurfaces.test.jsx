@@ -154,7 +154,10 @@ describe('a chain\'s state is one fact on the tab, the PDF and the journal (SURF
   }, 120000);
 
   test('the outputs the PDF\'s flow and cards print are the tab card\'s (SURFACES-1 item 2): a parish service with no church, a siege, a famine, the guard town', () => {
-    const seeds = ['r2r-thorp-0', 'r2r-hamlet-0', 'r2r-hamlet-16', 'r2r-metropolis-14', 'r2r-city-0'];
+    // PDF-2b item 3 (the chair's second reader's MED 1 (b), 2026-11-18): four towns added whose cards hold an output the tab's
+    // card withholds (PDF-2's item 5 at its base: r2r-village-8 "Milled lumber", r2r-village-17 "Charcoal", r2r-village-25
+    // "Quality tools and weapons"; r2r-thorp-38, a refused forage card); the five above held none.
+    const seeds = ['r2r-thorp-0', 'r2r-hamlet-0', 'r2r-hamlet-16', 'r2r-metropolis-14', 'r2r-city-0', 'r2r-village-8', 'r2r-village-17', 'r2r-village-25', 'r2r-thorp-38'];
     const thorp = birth720('r2r-thorp-0');
     const faith = thorp.economicState.activeChains.find((/** @type {any} */ c) => chainPrintName(c, thorp).label === 'Faith & Worship');
     expect(faith?.outputs, 'anchored: the record stores the parish outputs').toContain('Religious services');
