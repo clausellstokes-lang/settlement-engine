@@ -2558,3 +2558,23 @@ should be paused or archived by the owner's hand.
   commits its tables as `FAULTS-DESKS-R7.md`. Named: `presumedThings` 38 to 39 by the atom's own name (the walker's);
   the wiring census's declared rows 10 to 14; the estate's count +1; the defense leaf +181 bytes; the committed census
   stale at the base. Safe v5 and Very Safe v5 now reach no town of the 900.
+- 09:28 UTC, 2026-11-18 · **THE GOLDEN IS SIGNED, MERGED AND ON ORIGIN.** CLOSE-DOORS-2 (asked at 09:16 after 38 quiet minutes)
+  PUSHED dda87f14d: the record and the golden 525 (b3cfdbcc3: 03f9688f to d08ae44c), the fence 1 (1aad6b7f1: 322 of
+  360), the dossier manifest 2 (acf680a52: the tally 72,744 to 72,614), the herald desk 475 (7dac0c301), the pins
+  (A7's two shas, the census A1 8bb20e96 and A6 54, the edit row 21, the citation tree 185, mergeLadder 62, the edit
+  corpus 2176, x46 55 of 60, the budget 57 of 60); 1B's "FOR PART 2" list green, each alone; `engineBundleReplay`
+  7 of 7; its own receipt was at 123 of 191 files, all green; LEFT FOR IT: the receipt's rest, `verify:dist`, its
+  net, its hand-back ("WRITTEN" follows). THE CHAIR READ ITS TEST CHANGES (pins re-keyed with dated notes and the
+  owner's words; nothing weakened) AND MERGED IT: **MERGE 13 = 0dee69e17731b91929f669781fd6d90738f9c8fd** on
+  `lane/landing-close-2026-11-18` (pushed 09:24, gates green). THE OWNER WAS TOLD (09:20) that the files are written.
+  **THE WHOLE CHECK RUNS ON IT** (09:25: CHECKS-1, -2, -3; label `close-2-0dee69e17`; expected red: only CL26's six
+  arms). **THE FIVE PIECES ARE LANDED ON A BRANCH OF THEIR OWN**, `lane/landing-pieces-2026-11-18` (worktree
+  `/home/user/land`, hooks; from 0dee69e17): point 54 J-INCOME-2 (f71a1b04b; one row's union), 55 PDF-2b (5c09b5511),
+  56 MARKS-2 (f9f12bef4), 48+49+57 the watch and the powers (ed176ed08, clean), 50+58 the people (e713baeb3, clean),
+  51+52+59 the desks (ae4f90835; five collisions, each as ruled; `corpusEcoTailGuards` is the seat's, built on the
+  close's form), then the rows of `LANDINGS-SIXTH.md` (3e50b450e; being pushed). ON THAT TREE (462 files, 1,329 tests:
+  the pieces' guards, the joined tests, `tests/pdf`, `tests/architecture`): 1,327 PASS; red, 2:
+  `proseEntryContradiction.walker`'s two corpus counts (3510 against 3501, 2802 against 2794: stored);
+  `factLayers.walker` whole (15 of 15); the doors: classes fresh 0, stale 1; things fresh 0, stale 0. THE LINE
+  (`lane/join-2026-11-14`, pull request #75) IS PUSHED AT THE CLOSE'S TIP WHEN THE WHOLE CHECK IS IN, THEN FAST-
+  FORWARDED TO THE LANDINGS. THE FAULTS SEATS' BRANCHES LAND ON THE LANDINGS BRANCH after their readers.
