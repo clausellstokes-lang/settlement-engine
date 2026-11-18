@@ -105,4 +105,7 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   // admitted (law 5 is byte-identical either way: that pool demotes a dimension and is not swept).
   criticalImportBroughtIn: true,
   uprising: false,
+  // FAULTS-NEED (FR2): `need not brought in` (`needNotBroughtIn.js`) is a WANT, read like `uprising` above: a calm place meets
+  // its needs, so a line that presumes a good is had is admitted
+  needNotBroughtIn: Object.freeze({ luxury: false, spice: false, silk: false, precious: false, salt: false, fuel: false, livestock: false, any: false }),
 });

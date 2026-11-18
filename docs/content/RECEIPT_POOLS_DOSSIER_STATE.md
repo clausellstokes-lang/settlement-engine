@@ -1236,11 +1236,12 @@ contradict** it (R-DST-C).
 7. `[newcomer · colour]` A newcomer to {settlement} soon learns that most people here are owed money and owe some too.
 
 **POOR** — *getting by, no surplus* {crisis-scoped}
-1. `[ledger · crisis: any · food: ≥ secure]` {settlement} covers what it must and nothing beyond. Every essential is accounted for and there is no line for anything else.
+1. `[ledger · crisis: any · food: ≥ secure · no need not brought in: any]` {settlement} covers what it must and nothing beyond. Every essential is accounted for and there is no line for anything else.
 2. `[street · no hunger · food: ≥ secure]` The town gets by. Nobody is going without bread and nobody is building anything either.
 3. `[visitor · crisis: any · no trade at work: building]` In {settlement} the old buildings are patched and kept standing, and nothing new goes up.
 4. `[street · crisis: any]` Money is short in {settlement}, and most households spend what they earn as soon as it comes in.
 5. `[ledger · crisis: any · food: = pressured]` {settlement} pays for what it must and nothing beyond, and it does not raise all the food it eats.
+6. `[ledger · crisis: any · food: ≥ secure · need not brought in: any]` {settlement} feeds itself and has nothing to spare. Some of what its work needs does not reach it, and there is no line for anything else.
 
 **MODERATE** — *steady, thin margin* {crisis-scoped}
 1. `[ledger · crisis: any]` {settlement}'s treasury takes in a little more than it pays out each year. It is enough, and no more.
