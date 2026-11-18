@@ -153,10 +153,15 @@ export function declaredLiteralsOf(rel) {
     if (n.type === 'ObjectExpression') {
       const prop = (k) => n.properties.find((p) => p.type === 'Property' && (p.key.name === k || p.key.value === k));
       const t = prop('text');
-      if (t && typeof str(t.value) === 'string') {
+      // CLOSE-DOORS-1A (2026-11-18, the chair's ruling CL17 (1)): ONE SHAPE MORE: a `text` that is a conditional whose TWO
+      // branches are each a literal or a template is read as TWO texts, each carrying the row's one declaration
+      // (PRESSURE_SENTENCES.wartime(losing)[0], BAR7-SCENES 765a516a3). Every other shape stays unread, so it stays loud.
+      const texts = t && typeof str(t.value) === 'string' ? [str(t.value)]
+        : t && t.value.type === 'ConditionalExpression' && typeof str(t.value.consequent) === 'string' && typeof str(t.value.alternate) === 'string'
+          ? [str(t.value.consequent), str(t.value.alternate)] : [];
+      if (texts.length) {
         const arr = (k) => { const p = prop(k); return p && p.value.type === 'ArrayExpression' ? p.value.elements.map((e) => e.value) : []; };
-        const key = str(t.value);
-        out.set(key, [...(out.get(key) || []), { needs: arr('needs'), excludes: arr('excludes'), crisis: arr('crisis') }]);
+        for (const key of texts) out.set(key, [...(out.get(key) || []), { needs: arr('needs'), excludes: arr('excludes'), crisis: arr('crisis') }]);
       }
     }
     for (const k of Object.keys(n)) { const v = n[k]; if (Array.isArray(v)) v.forEach(walk); else if (v && typeof v.type === 'string') walk(v); }
