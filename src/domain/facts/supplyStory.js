@@ -21,7 +21,7 @@ import { fnv1a32 } from '../../kernel/proseHash.js';
 import { hasTradeRouteConnection } from '../tradeRouteSemantics.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { catalogIdForName } from '../../data/institutionalCatalog.js';
-import { BUYS_AND_WORKS, IMPLIED_GROUND, IMPORT_WORD, MATERIAL_OF, RUNS_ON_BOUGHT, SOURCE_GROUNDS, SUPPLY_ODDS, TAKERS } from './houseKinds.js';
+import { BUYS_AND_WORKS, IMPLIED_GROUND, IMPORT_WORD, MATERIAL_OF, RUNS_ON_BOUGHT, SECOND_RING, SOURCE_GROUNDS, SUPPLY_ODDS, TAKERS } from './houseKinds.js';
 
 /**
  * @typedef {{
@@ -260,15 +260,40 @@ export function impliedGroundsOf(record) {
 export function groundPicksAtBirth(record, seed) {
   /** @type {Map<string, 'there' | 'used'>} */
   const states = new Map();
-  for (const ground of [...provingHouses(record).keys()].sort()) states.set(ground, seedPicks(seed, `ground::${ground}`, SUPPLY_ODDS.groundThere) === false ? 'used' : 'there');
+  // FAULTS-BIRTH (FR8 (a)): A FACT OF THE RECORD IS NEVER UNSAID: where the town's own food record names the ground's food as
+  // a source of what it eats ("its food is the day's catch": `foodLand.js`'s fishing row on water), the ground is there
+  // and where the town's own exports name the ground's raw yield ("Furs and pelts" off the hunting grounds: r2r-village-2)
+  const es = /** @type {{ foodSecurity?: { foodRecord?: { foodSources?: unknown } }, primaryExports?: unknown } | null | undefined} */ (record?.economicState);
+  const fed = arr(es?.foodSecurity?.foodRecord?.foodSources).map(str);
+  const sold = arr(es?.primaryExports).map((x) => ` ${struck(x).replace(/[^a-z]+/g, ' ')} `);
+  for (const ground of [...provingHouses(record).keys()].sort()) {
+    const food = Object.prototype.hasOwnProperty.call(GROUND_FOOD, ground) ? GROUND_FOOD[ground] : '';
+    const words = Object.prototype.hasOwnProperty.call(GROUND_EXPORT, ground) ? GROUND_EXPORT[ground] : [];
+    const spoken = (!!food && fed.includes(food)) || sold.some((x) => words.some((w) => x.includes(` ${w} `)));
+    states.set(ground, spoken ? 'there' : seedPicks(seed, `ground::${ground}`, SUPPLY_ODDS.groundThere) === false ? 'used' : 'there');
+  }
   return states;
 }
+
+/** FAULTS-BIRTH: the food record's own word for what a ground feeds the town (`foodLand.js :: foodSources`). */
+const GROUND_FOOD = Object.freeze(/** @type {Record<string, string>} */ ({ fishing_grounds: 'fish', river_fish: 'fish', grazing_land: 'livestock', hunting_grounds: 'game' }));
+/** FAULTS-BIRTH: the raw words of a ground's yield an export names whole (a worked good, "Iron tools", is none of them). */
+const GROUND_EXPORT = Object.freeze(/** @type {Record<string, ReadonlyArray<string>>} */ ({
+  hunting_grounds: Object.freeze(['game', 'furs', 'pelts', 'hides']), fishing_grounds: Object.freeze(['fish']), grazing_land: Object.freeze(['livestock', 'wool']),
+  managed_forest: Object.freeze(['timber']), iron_deposits: Object.freeze(['iron ore']), stone_quarry: Object.freeze(['stone']), marshlands: Object.freeze(['peat']),
+}));
 
 /** The word the imports list holds for a family's material ("Timber", "Salt"); '' where the list has none. @param {string} family */
 export const familyWord = (family) => (family === 'desertSalt' ? RUNS_ON_BOUGHT.salt_works : (Object.prototype.hasOwnProperty.call(IMPORT_WORD, family) ? IMPORT_WORD[family] : ''));
 
 /** Whether a ground gives a family's material (by the yield the Depleted list reads). @param {string} ground @param {string} family */
-const groundGives = (ground, family) => !!FAMILY_NOUN[family] && Object.prototype.hasOwnProperty.call(GROUND_YIELD, ground) && GROUND_YIELD[ground] === FAMILY_NOUN[family];
+export const groundGives = (ground, family) => !!FAMILY_NOUN[family] && Object.prototype.hasOwnProperty.call(GROUND_YIELD, ground) && GROUND_YIELD[ground] === FAMILY_NOUN[family];
+/**
+ * FAULTS-BIRTH (FR8 (c)): THE GROUND OF A FAMILY'S MATERIAL, the first of the Depleted list's yields that gives it (`GROUND_YIELD`,
+ * in its order: iron ore the iron deposits, clay the river clay, timber the managed forest); '' where no ground gives it (hides,
+ * wool, the luxury trade's goods). @param {string} family @returns {string}
+ */
+export const groundOfFamily = (family) => Object.keys(GROUND_YIELD).find((g) => groundGives(g, family)) || '';
 
 /**
  * A ground of the family's material that is USED UP (stored spent with no live ground of that material, or implied and
@@ -321,7 +346,8 @@ export function ventureOnPage(record) {
 
 /**
  * (c) THE STORY OF A SOURCE HOUSE AND ITS MATERIAL (`SOURCE_GROUNDS`): 'abandoned' for the failed venture, else local,
- * bought or idle; null where this reading says nothing (a kind of the second ring on no ground of its own: as before).
+ * bought or idle; null where this reading says nothing (FAULTS-BIRTH, FR8 (a): the second ring now proves its ground as the
+ * first ring does, `houseKinds.js :: IMPLIED_GROUND`).
  * @param {StoryRecord | null | undefined} record @param {{ name?: unknown, catalogId?: unknown } | null | undefined} inst
  * @param {(ground: string) => unknown} shortageWord the imports list's own word for a spent ground
  *   (`resourceSemantics.js :: resourceShortageImport`, handed in by every caller: one word, one pick)
@@ -380,7 +406,9 @@ export function sourceStoryOf(record, inst, shortageWord) {
  *        ground of that material on the land list and no neighbour its ground would feed (`feedsAnother`), in place of
  *        that ground (BR6: a venture proves no ground).
  * "The only house using a material" counts EVERY live house that uses it, in whatever table it sits (`usersOf`: the
- * butcher, the bowyer, the thatcher as well as the houses of `MATERIAL_OF`): a whole trade is not abandoned. Never two in
+ * butcher, the bowyer, the thatcher as well as the houses of `MATERIAL_OF`): a whole trade is not abandoned. FAULTS-BIRTH
+ * (FR8 (b)): `usersOf` counts the houses that KEEP or YIELD it too (`houseKinds.js :: KEEPS_OR_YIELDS`: a dairy is no
+ * venture beside a shepherd's flock, a common pasture or a stable yard). The second ring is no venture (`SECOND_RING`). Never two in
  * one town (the first by catalogue id keeps it). Which of the two versions is the seed's pick too (`<seed>::venture::<id>`).
  * @param {StoryRecord | null | undefined} record the record in the making, its grounds picked (`BIRTH_PICKS`)
  * @param {string} seed
@@ -409,7 +437,7 @@ export function ventureAtBirth(record, seed, reads) {
       if (connected && never && !importsHold(record, familyWord(family)) && !importsName(record, family) && reads.inputMissing(/** @type {Record<string, unknown>} */ (inst), family)) candidates.push({ inst, id, family, ground: '' });
     } else if (id === 'salt_works') {
       if (connected && !onCoast(record) && !SOURCE_GROUNDS.salt_works.some((g) => all.has(g)) && !importsHold(record, familyWord(family)) && !importsName(record, family)) candidates.push({ inst, id, family, ground: '' });
-    } else if (Object.prototype.hasOwnProperty.call(IMPLIED_GROUND, id)) {
+    } else if (Object.prototype.hasOwnProperty.call(IMPLIED_GROUND, id) && !SECOND_RING.has(id)) { // FAULTS-BIRTH (FR8 (a)): the second ring is no venture
       const ground = IMPLIED_GROUND[id];
       if (arr(implied.houses.get(ground)).length === 1 && arr(implied.houses.get(ground))[0] === inst.name && !stored && !importsName(record, family)
         && !reads.feedsAnother(/** @type {Record<string, unknown>} */ (inst), ground)) candidates.push({ inst, id, family, ground });

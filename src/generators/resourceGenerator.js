@@ -21,7 +21,7 @@ import {
   CHAIN_INPUTS, CHAIN_RAW_INPUT, chainsOfHouse, houseHead, houseInputAtHand, houseRunsChain, housesOnSpentGround, housesWantingTradeInput,
   localProducerSupplies, terrainSynonymsFor, tradeFinisherIn, ventureHouseOf, worksTheGround, inputMissingBeforeStory,
 } from '../domain/facts/houseInputAtHand.js';
-import { ALSO_USES, BUYS_AND_WORKS, IMPLIED_GROUND, IMPORT_WORD, MATERIAL_OF, RUNS_ON_BOUGHT, SOURCE_GROUNDS, isSourceHouse } from '../domain/facts/houseKinds.js';
+import { ALSO_USES, BUYS_AND_WORKS, IMPLIED_GROUND, IMPORT_WORD, KEEPS_OR_YIELDS, MATERIAL_OF, RUNS_ON_BOUGHT, SOURCE_GROUNDS, isSourceHouse } from '../domain/facts/houseKinds.js';
 import { BIRTH_PICKS, rowGoodOf, rowNamesGround, boughtAtBirth, groundPicksAtBirth, impliedGroundsShown, sourceStoryOf, storySeed, usedGroundOf, ventureAtBirth } from '../domain/facts/supplyStory.js';
 import { liveInstitutions } from '../domain/institutions/institutionRoster.js';
 import { HOUSE_TRADE_INPUT, SPENT_GROUND_YIELD } from '../data/crisisDependence.js';
@@ -663,9 +663,11 @@ export function birthPicksOn(record, seed) {
   const bought = (r, word, usedUp) => boughtAtBirth(r, word, usedUp, k);
   const staged = { ...record, [BIRTH_PICKS]: { grounds, venture: null, bought } };
   const live = liveInstitutions(/** @type {any} */ (staged)).filter((i) => !!i && typeof i.name === 'string' && i.name && !isMaterializedCustomContent(i));
+  // FAULTS-BIRTH (FR8 (b)): a house that keeps or yields the material counts as one of its houses (`KEEPS_OR_YIELDS`)
   /** @param {any} inst @param {string} family */
   const usesFamily = (inst, family) => { const id = idOfInst(inst);
-    return MATERIAL_OF[id] === family || ALSO_USES[id] === family || inputKeysOf(inst).some((key) => familyOfKey(key) === family); };
+    return MATERIAL_OF[id] === family || ALSO_USES[id] === family || (Object.prototype.hasOwnProperty.call(KEEPS_OR_YIELDS, id) && KEEPS_OR_YIELDS[id].includes(family))
+      || inputKeysOf(inst).some((key) => familyOfKey(key) === family); };
   const venture = ventureAtBirth(/** @type {any} */ (staged), k, {
     inputMissing: (inst, family) => inputMissingBeforeStory(/** @type {any} */ (staged), inst, family),
     usersOf: (family) => live.filter((i) => usesFamily(i, family)).length,

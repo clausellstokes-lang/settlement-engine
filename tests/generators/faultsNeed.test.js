@@ -42,7 +42,10 @@ const TOWNS = Object.freeze({
   'r2r-metropolis-12': ['dealt'],
   'r2r-metropolis-19': ['dealt'],
   'r2r-metropolis-25': ['dealt'],
-  'r2r-hamlet-27': ['venture'], // the 720: the failed venture's own livestock beside a shepherd (the need stays)
+  // RE-KEYED BY IDENTITY at the landing of FAULTS-BIRTH (the chair's hand, ruling FR21, 2026-11-18): r2r-hamlet-27's dairy
+  // is at work once the supply rule's second ring proves its pasture, so it holds no failed venture any more; the same claim
+  // (the failed venture's own material stays on the need list) is held on a venture the merged line still bears.
+  'r2r-hamlet-57': ['venture'], // the 720: the failed venture (Carpenter (part-time)) and its own timber (the need stays)
   'r2r-hamlet-21': ['poor'], // the 720: a food-secure POOR town whose need list names salt (12d)
   'r2s-religious_conversion-town-3': ['poor'], // the 720: v1 beside "Needed, and not brought in: stone, copper ore, …" (the amendment)
   'bar0-town-occupied-rand-35': ['poor'], // the 150: v1 beside "luxury goods, copper ore" (the amendment)
@@ -218,7 +221,7 @@ describe('FAULTS-NEED item 1: the atom `need not brought in` (FR2) states the pa
     expect(held.length, 'the sample holds a need of some key').toBeGreaterThan(0);
     expect(Object.keys(TOWNS).some((seed) => needListOf(BORN.get(seed)).length === 0), 'and a town with none').toBe(true);
     expectNoSeedFailures(collectSeedFailures(seedsOf('venture'), (seed) => {
-      expect(needListOf(BORN.get(seed)), `${seed}: the failed venture's own material stays`).toContain('livestock');
+      expect(needListOf(BORN.get(seed)), `${seed}: the failed venture's own material stays`).toContain('timber');
     }));
   });
 });

@@ -115,7 +115,10 @@ describe('(4) · RULING BR16: an occupation alone is peace for the war\'s iron',
 });
 
 describe('(5) · BR3 (b): a gap row "runs on imported X" stands beside an import that names X', () => {
-  const FISH = ['r2r-village-36', 'r2s-indebted-village-2', 'r2s-religious_conversion-village-0'];
+  // FAULTS-BIRTH (2026-11-18, R8: re-keyed by identity): r2r-village-36's and r2s-religious_conversion-village-0's landings now prove
+  // the water their fishmonger buys from (FR8 (a)): the fish is local there and no row runs on imported fish; the same claim on
+  // two towns whose fishmonger still runs on imported fish
+  const FISH = ['r2r-village-49', 'r2s-indebted-village-2', 'r2r-village-57'];
   test('the three fishmongers that run on imported fish: the imports name fish', () => {
     expectNoSeedFailures(collectSeedFailures(FISH, (seed) => {
       const s = town(seed);
@@ -124,7 +127,11 @@ describe('(5) · BR3 (b): a gap row "runs on imported X" stands beside an import
     }), 'the fishmongers');
   }, 600_000);
   test('the tannery that runs on imported livestock beside "Raw hides and animal products": one canonical good, no second word', () => {
-    const s = town('r2r-village-9');
+    // FAULTS-BIRTH (2026-11-18, R8: re-keyed by identity): r2r-village-9's hunter's lodge now proves its hunting grounds, whose hides
+    // feed the tannery (FR8 (a)); the same claim on a tannery that still runs on imported livestock beside the hides word
+    const s = town('r2s-religious_conversion-village-3');
+    expect((s.resourceAnalysis?.gaps || []).some((/** @type {any} */ g) => g?.kind === 'imported' && g.chain === 'livestock' && /Tannery/.test(String(g.institution))), 'the tannery runs on imported livestock (the anchor)').toBe(true);
+    expect((s.economicState?.primaryImports || []).map(String), 'the hides word stands (the anchor)').toContain('Raw hides and animal products');
     const imports = (s.economicState?.primaryImports || []).map(String);
     expect(imports.filter((x) => /^Livestock$/.test(x)), 'no "Livestock" beside the hides word').toEqual([]);
     expect(subsumeTradeGoods([...imports, 'Livestock']).length).toBe(subsumeTradeGoods(imports).length);
