@@ -167,3 +167,37 @@ owner's list: not built.)
   after.
 - `tests/domain/leftMarks.test.js` M3's positive reads the Services tab too (r2r-city-20, r2r-hamlet-27 print it there).
   Red in scratch with the sentence taken off the Services tab.
+
+## THE NET (each gate alone through `sh scripts/gate-tail.sh`, at base 70e557d5b and at the tip)
+
+- `npm run typecheck:ratchet`: 167 errors, ceiling 167, at base and at tip. `npm run typecheck:domain:strict`: 1113, ceiling
+  1113, at both. `npx eslint` on the 18 changed script and test files: 0 problems.
+- ALL OF `tests/lint`, at base (a detached scratch worktree) and at the final tip: 218 files, 3226 tests, 69 names red at
+  BOTH, THE SAME NAMES AND, after the checkout path is folded, THE SAME MESSAGES (0 lines differ; walkers, registers and
+  rosters alike: `negativeAssertionAnchor`, `seedLoopTotality`, `proseDrawnAnchors` list no file of this seat). Every one
+  of the 69 is red at the base: named, not chased (stored registers, censuses, rosters, ceilings: the close's).
+- The guards (`tests/domain/leftMarks.test.js`, `tests/domain/bar5*`, `bar6*`, `tests/generators/bar5*`, `bar6*`,
+  `bar8*`: 25 files, 219 tests): green at base and at tip.
+- Every changed test alone: at the tip each is green, except `editCorpusRatchet` (7 of 8: A5 green under the new watchdog,
+  the file 634.6 s; A7 red by its stored figure, the same message the close's list records at the base). At the base each
+  re-keyed one is red with the message its item names.
+- N6: the close's list `close-0-70e557d5b` (part 1, 33 names, as published while I worked) names
+  `bar2ServicesRows`, `tailHouses1Gaps`, `needMetUnderAnotherName` and `editCorpusRatchet` A7 of my files: the first
+  three are green at the tip; A7 is the stored figure above.
+- N5, the scratch merge: the line `lane/join-2026-11-14` is still at 70e557d5b, my base: an ancestor of my tip (a
+  fast-forward). CLEAN.
+
+## LEFT BY NAME
+
+- `tests/property/editCorpusRatchet.test.js` A7 (about line 586): "the edits that DO reach a reading: [695, 275, 2176]"
+  against the pinned [695, 275, 2173]. A stored figure: the close's.
+- The two Fishmonger and two Smelter pairs of `tailHouses1Gaps` (retired): their state (the house lacking its input) is
+  borne by no town of the 720 or the 150; a new reachable anchor would need a town on no road, outside these populations.
+- The cold forge ("The forges of <town> stand cold: there is no iron left to make blades from.") is printed by no town
+  of the 720, the 150 or 180 rww famine towns: its twin is reachable in the data but unanchored by any born town.
+- K3's "96 besieged towns": the 720 holds 31 by `config.stressTypes` (the 150, 30). Said so; counted on those.
+- K6 (a) and (b) are readings in the runners because the readers they correct live in `src/domain/facts/registeredWords.js`
+  (the `resource:` reader) and `tests/helpers/pageLaws/law6.mjs` (not on my list). If the chair wants the reading at the
+  source, that is a src change (`registeredWords.js :: RESOURCE_FAMILIES[...].absent` taking the proven grounds) for a
+  builder seat.
+- K10: not mine (CLOSE-WALKERS).
