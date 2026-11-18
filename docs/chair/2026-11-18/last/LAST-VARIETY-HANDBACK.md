@@ -147,20 +147,20 @@ in two ruling-body towns). Not written: a line added to this pool changes `size`
 EVERY tie of the archetype in every town, and a tension line must be paired with a description line; that is a wide move
 for nine repeats. Named for the chair as variety owed.
 
-## 4 · The net (base b014a7bf3 in a worktree of its own; tip f3b728bb0, the last code commit; each gate alone through `sh scripts/gate-tail.sh`; reds compared BY MESSAGE)
+## 4 · The net (base b014a7bf3 and the tip 6e36e0359, each in a worktree of its own; each gate alone through `sh scripts/gate-tail.sh`; reds compared BY MESSAGE; 66b98a241 after it touches only the pool table, whose walker was re-run green)
 
 | gate | base | tip |
 |---|---|---|
 | `typecheck:domain:strict` | 0 | 0 |
 | `typecheck:ratchet` | 0 | 0 |
-| `npx eslint` (my changed JS files) | — | 0 errors |
+| `npx eslint` (every JS file I changed) | — | 0 errors |
 | `tests/architecture` | green | green |
-| `tests/lint` (JSON) | 31 reds | 34: the base's 31, seven of them with a count my lines move (section 5), and 3 new, each a stored figure or a walker's reading (section 5): `factLayers` POOLS, `proseCorpusBytes` GZIP, the trailing-coordinate pin. `ledgerCitationIntegrity` red at both (wants the ledger branch as a local ref) |
+| `tests/lint` (JSON) | 31 reds | 33 at 66b98a241: the base's 31, ten with a count or digest my work moves (section 5), and 2 new, each a stored figure (section 5): `proseCorpusBytes` GZIP and the trailing-coordinate pin. `factLayers` POOLS red at 6e36e0359, GREEN at 66b98a241 (the two rows placed at layer 5 on the chair's word). `ledgerCitationIntegrity` red at both (it wants the ledger branch as a local ref) |
 | `tests/joins` | 1 red (`mutationOrder`: the chain gains `assembleSettlement`) | the same, same message |
-| `tests/data`, `tests/domain/facts`, `crisisBlindDossierProse` | 5 reds | the same 5; one with a count moved (the shift register's mutant, 3044 → 3052 against 3033). `crisisBlindDossierProse` red on my first tip (no setter for `prison`), cured in f3b728bb0; `declarationRegisters` red on my first tip (Unsafe v6 undeclared), cured likewise |
-| the six faults guards | green | green (`faultsDesks.test.js` re-keyed by identity in f3b728bb0: FR7's planted line now at the pool's next number, v11; the Unsafe twin keeps v4 with v5 and v6 after it, and is ADMITTED, not the only line, in its three towns) |
-| my guard `lastVariety.test.js` | red, 4 of 4 (the lines are not in the leaf) | green, 4 of 4; item 2's block (in the patch) green with the patch applied, red at the base |
-| THE OLDER TESTS (every test file naming the defense leaf, the annex, DS-DEF-3, `defenseStateProse`, `goalFamilies`, `goals.js`'s functions: 78 listed, 65 test files run, in one JSON run a tree) | 3 files red (5 cases): `generationForkCensus` (3), `rosterFinalUnderHeldRoster`, `composeStateProse` | the same 5 by message, `composeStateProse`'s count moved 3044 → 3052 |
+| `tests/data`, `tests/domain/facts`, `crisisBlindDossierProse` | 5 reds | the same 5; one with a count moved (the shift register's mutant, 3044 → 3052 against 3033). `crisisBlindDossierProse` and `declarationRegisters`, red on my first tip, cured in f3b728bb0 |
+| the six faults guards | green | green (`faultsDesks.test.js` re-keyed by identity in f3b728bb0: FR7's planted line at the pool's next number, v11; the Unsafe twin keeps v4, v5 and v6 after it, and is ADMITTED, no longer the only line, in its three towns) |
+| my guard `lastVariety.test.js` | red, 8 of 8 (no lines, no cell) | green, 8 of 8 |
+| THE OLDER TESTS (every test file naming the defense leaf, the annex, DS-DEF-3, `defenseStateProse`, `goalFamilies`, `goals.js`'s functions: 78 listed, 65 test files run, one JSON run a tree) | 3 files red (5 cases): `generationForkCensus` (3), `rosterFinalUnderHeldRoster`, `composeStateProse` | the same 5 by message, `composeStateProse`'s count moved 3044 → 3052 |
 | the claims pin `tests/docs/enforcement-claims.test.js` | — | green over this file |
 
 ## 5 · Stored figures my work moves (named; none re-taken; for the last close)
@@ -172,11 +172,13 @@ for nine repeats. Named for the chair as variety owed.
 | `proseWaveGate` units (stored 658) | 663 → 671 |
 | the trailing-coordinate class (`proseEntryContradiction` anti-vacuity, report-only, stored 377) | 377 → 379 (two of the eight end on a plain ", and …" clause) |
 | `scripts/.prose-byte-baseline.json`, `defense.generated.js` (stored 281,298 raw / 37,154 gz) | raw measured 286,547 at the tip; gzip 37,820 (outside the 1 % band, red at the tip only) |
-| `factLayers.poolTable.json`: DS-DEF-3 › Very Safe and › Unsafe placed at layer 3 | they now declare `crime wave` (layer 4: Very Safe v6 `no crime wave`, Unsafe v5 `crime wave`); BAR6-DEFDESK placed Safe and Moderate at 5 for the same atom. Kept true rather than reworded to pass (R6): the placement is the close's, or a ruling's |
+| `factLayers.poolTable.json`: DS-DEF-3 › Very Safe and › Unsafe | placed 3 → 5 in 66b98a241 on the chair's word of 19:58 UTC (their lines Very Safe v6 `no crime wave`, Unsafe v5 `crime wave` read layer 4), as BAR6-DEFDESK placed Safe; the lines kept as written (R6). The walker green |
 | `presumedThings` ARM 1 fresh hits (stored register) | 5 → 6: Moderate v10 ("With no gaol at …") read as naming a prison undeclared; it declares `no court or gaol`, which holds only where no gaol stands. The same reading the walker gives Unsafe v4 at the base (FAULTS-DESKS named it): the walker's, not reshaped |
 | `sovereigntyLightingContract`'s estate file count | 3696 → 3697 (my guard) |
 | the golden master (`tests/fixtures/generator-golden-master.json`; 191 of 525 already differ at the base) | item 1: 0 of 525; item 2: 13 of 525, every one by the goal fields |
 | `tests/data/goalFamilies.test.js`'s §6.6 count | SUPPLY 48 → 52, 524 → 528: re-keyed in 6e36e0359 under LR2 (not a re-take: the ruling's own instruction) |
+| `scripts/census/pool-dominance.register.json`: drawn pools with no row (red at the base, 3) | 3 → 5: the two new goal pools `goalFamilies:SUPPLY.want.short` and `.long`. Not banked: the register's `--bank-new` door would also bank the base's three and re-take the census header; the close's |
+| `writerReach` (the frozen `shapesDigest`, red at the base: bd73f89e… against the stored 25b8a553…) | the in-process digest moves again (d39eb1ad…): the goals the corpus now deals. Its other reds the same by message |
 | the wiring census stamp | untouched: projected after a fresh census in the tree, the census restored byte-equal (the leaf committed, the census not) |
 
 ## 6 · Left by name
