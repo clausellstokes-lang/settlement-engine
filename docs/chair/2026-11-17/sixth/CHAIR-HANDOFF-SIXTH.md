@@ -1916,3 +1916,17 @@ should be paused or archived by the owner's hand.
   its tip but the manifest's PROVENANCE arm (A2 changes the recorder: the fixture's, the close's); 15e is 0 and 0;
   named: the brickmaker is IN the building key by name; POOR placed at layer 5 (a92d01bd8); R7: POOR three lines to
   two in 16 towns of the 180 and 42 of the 720. Its readers after the close's merges; it lands after the deploy.
+- 04:45 UTC, 2026-11-18 · THE LAWS ON THE TREE OF FIVE MERGES (1b0614950; all of `tests/lint` and CLOSE-DOORS-1A's twelve
+  other files: 230 files, 3,484 tests; the full log kept as `/home/user/wk/close.m5.full.log`): 19 FILES AND 32 TESTS
+  RED, EVERY FILE ON THE BASE'S LIST, NONE WITH MORE REDS THAN AT THE BASE, NO NEW NAME. BY HOLDER: CLOSE-DOORS-1A's
+  follow-up (6 tests: `census2dTables` 1, `census2eTables` 2, `census2gDailyLifePriest` 1, `houseDescLateReRead`
+  1, `proseComposed` 1: CL17, CL18, CL14); CLOSE-DOORS-1B (26 tests in 13 files: `writerReach` 9,
+  `observedShapeReaders` 4, `poolDominance` 3, `presumedThings` 2, and one each: `tuningRegister`,
+  `sovereigntyLightingContract` (the census arm), `siteCoherenceRatchet`, `ruinFilterRoster`,
+  `proseFamilyContract`, `presumptionClasses`, `noLegacyFactionReaders`, `newsVoiceContract`,
+  `newsHeadlineContract`, `factLayers` POOLS). (A NOTE ON THE TOOL: `gate-tail.sh` prints the tail; the whole log
+  is the file it names: read failing names from that file.) THE FIFTH MERGE IS BEING PUSHED to the merge branch;
+  THEN THE THREE CHECKS SEATS RUN THE WHOLE CHECK ON IT (label close-1-1b0614950), an early look for a red the
+  merges made together, while the last two seats finish. PEOPLE-2 (04:39): PART A pushed at 76ffc8eef (tests only:
+  two anchors re-keyed, each red under mutation; a sweep of 892 files: no other test made untrue): K-PEOPLE and it
+  land after the deploy, after their reader.
