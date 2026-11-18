@@ -15,6 +15,7 @@
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, it } from 'vitest';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import * as leaf from '../../src/domain/display/incomeOrdinaryLines.js';
 import * as siblings from '../../src/generators/economy/incomeLineSiblings.js';
 import { importsAsPrinted, chainOutputsShown } from '../../src/domain/display/tradeListDisplay.js';
@@ -114,15 +115,14 @@ describe('BAR8 J-INCOME items 3 and 4: the need list reads the gap rows and the 
     const gaps = [{ chain: 'iron ore', institution: 'Smelter', kind: 'imported', impact: 'Smelter runs on imported iron ore' }];
     expect(importsAsPrinted(town({})).needed).toContain('iron ore');
     const needed = importsAsPrinted(town({ resourceAnalysis: { imports: { critical: ['iron ore', 'copper ore', 'livestock'] }, gaps } })).needed;
-    expect(needed).not.toContain('iron ore');
-    expect(needed).toContain('copper ore'); // the negative beside it
+    expectAbsentWithAnchor(needed, 'iron ore', 'copper ore', 'the gap row answers iron ore, and no other need');
     // a gap row of another kind says nothing is brought in
     expect(importsAsPrinted(town({ resourceAnalysis: { imports: { critical: ['iron ore'] }, gaps: [{ ...gaps[0], kind: 'missing' }] } })).needed).toContain('iron ore');
   });
   it('a constructed record: a live house\'s livestock auction answers "livestock"; no row, or another house\'s, not', () => {
     const auction = { economy: [{ name: 'Livestock auction', institution: 'Annual fair' }] };
     expect(importsAsPrinted(town({})).needed).toContain('livestock');
-    expect(importsAsPrinted(town({ availableServices: auction })).needed).not.toContain('livestock');
+    expectAbsentWithAnchor(importsAsPrinted(town({ availableServices: auction })).needed, 'livestock', 'iron ore', 'the auction answers livestock, and no other need');
     expect(importsAsPrinted(town({ availableServices: { economy: [{ name: 'Livestock auction', institution: 'A fair long gone' }] } })).needed).toContain('livestock');
     expect(importsAsPrinted(town({ availableServices: { economy: [{ name: 'Seasonal trading', institution: 'Annual fair' }] } })).needed).toContain('livestock');
   });
