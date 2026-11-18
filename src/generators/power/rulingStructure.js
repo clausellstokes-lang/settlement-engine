@@ -23,7 +23,7 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS, GOV_DESC_OF_UNNAMED_SEAT } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; import { occupiedSeatLine } from './governingStressVignettes.js'; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS, GOV_DESC_OF_UNNAMED_SEAT, REEVE_ANSWERS_TO_ELECTORS, noGrazingQuarrelOf } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; import { occupiedSeatLine } from './governingStressVignettes.js'; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
 
 import { renormalizeFactionPower } from './renormalizeFactionPower.js'; export { renormalizeFactionPower }; // LANDING-R2 (ODQ §934.105): moved verbatim to power/renormalizeFactionPower.js, re-exported for its importers
 import { normalizeAndAnnotateFactions } from './normalizeAndAnnotateFactions.js';
@@ -332,7 +332,7 @@ export const generatePowerStructure = (
       'Household Council':
         'Settlement governed by heads of household; decisions by informal consensus among property owners.',
       'Elder Council': 'Respected elders guide the community; authority is moral and traditional rather than formal.',
-      'Elected Reeve': 'A reeve elected from the peasantry manages labour and mediates disputes under noble oversight.',
+      'Elected Reeve': noblePower > (tier === 'town' && !hasNobleInst ? 10 : 5) || hasNobleInst ? 'A reeve elected from the peasantry manages labour and mediates disputes under noble oversight.' : REEVE_ANSWERS_TO_ELECTORS, // BAR8-K-POWERS (14d, C44634): the noble it names is a noble power this step seats or a noble house; none, its twin (data/powerSiblings.js)
       'Feudal Stewardship':
         "A lord's steward administers the settlement; authority flows downward from the noble, not upward from residents.",
       'Feudal Appointee':
@@ -685,7 +685,7 @@ export const generatePowerStructure = (
     factions,
     config,
     stressFlags,
-    instFlags: { ...instFlags, garrisonStands: defenseFactsOf({ institutions: nativeInstitutions }).hasGarrison }, // TAIL-POWERS-3 P16 (G5): the garrison, for the military word
+    instFlags: { ...instFlags, garrisonStands: defenseFactsOf({ institutions: nativeInstitutions }).hasGarrison, noGrazingQuarrel: noGrazingQuarrelOf({ institutionNames: instNames, pastoral: economicState?.foodSecurity?.chains?.['Pastoral & livestock'] === true, grounds: config?.nearbyResources }) }, // TAIL-POWERS-3 P16 (G5): the garrison, for the military word; BAR8-K-POWERS (15b): the cascade's last quarrel where nothing grazes
     neighbourRelationship,
     instNames,
     priorities,

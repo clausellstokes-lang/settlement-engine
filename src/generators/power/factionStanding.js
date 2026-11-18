@@ -10,6 +10,20 @@ import { powerLabelOf } from '../factionDynamics.js';
 import { seatIsCouncil } from './claimStanding.js';
 import { STRESS_POWER_FACES } from '../../data/stressPowerFaces.js';
 import { coupContenders, coupRiskLabel } from '../../domain/rulingPowerCoup.js';
+import { inferFactionCategory } from './factionCategories.js';
+import { isCriminalPower } from '../../domain/people/allegiance.js';
+
+// BAR8-K-POWERS (rule 13g, the audit's C21547; BRIEF-BAR8 K-POWERS 1): THE GUARD AND THE GUILD'S NOTE READS THEIR TIE. Where
+// the governing seat is itself a criminal power (a purchased council: "Shadow Senate", "Corrupt Council"), the hall-capture
+// state is corrupted or worse by its one writer's own rule (`domain/people/hallCapture.js :: hallCaptureOf`: a criminal
+// ruler is corrupted), and the relation rows the page prints say so ("<guild> has bought key people in <seat>", "<guard>
+// and <guild> have a working arrangement ... Certain arrests never happen": `factionDynamics.js :: govCriminalRelation`,
+// `criminalMilitaryRelation`). There the notes that make the tie a contest of arrests ("A slow war with the guild", "the
+// garrison can arrest their people", "enough to keep it down") are not written; the notes of bribes and payrolls stand.
+// Read as the hall's writer reads its ruler (`allegiance.js :: isCriminalPower`), on the kind the roster's names give
+// (`inferFactionCategory`; stored and inferred agree on every criminal power of the 750), so the power step and the roster's re-settlement (`rosterText.js :: standingsOf`) write the same sentence.
+/** @param {ReadonlyArray<{ faction: string, isGoverning?: boolean }>} factions @returns {boolean} the governing seat is a criminal power */
+const seatBoughtOf = (factions) => factions.some((f) => f.isGoverning && isCriminalPower({ faction: f.faction, category: inferFactionCategory(f.faction) }));
 
 // BAR4-HISTORY C14176 (the chair's ruling FS2 of 2026-11-16, vetoable by the owner): A POWER THAT COULD TAKE THE SEAT IS NOT
 // "TOO FAR BEHIND". The rank-1 line said "behind <seat> by too much to challenge openly" (or "too far behind to lead") beside
@@ -91,7 +105,8 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
           hasFaction('Noble House'),
         hasFeudalSteward = hasFaction('Feudal Stewardship') || hasFaction('Feudal Appointee'),
         hasReligious = hasFaction('Religious Authorities'),
-        hasArcane = hasFaction('Arcane Orders');
+        hasArcane = hasFaction('Arcane Orders'),
+        seatBought = seatBoughtOf(factions); // BAR8-K-POWERS (13g)
       factions.forEach(function (faction, rank) {
         var power = faction.power,
           factionName = faction.faction,
@@ -184,8 +199,9 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
                   ? `The ${force.body} is far stronger. They survive by bribing the lower ranks and making it costly to arrest the wrong people.`
                   : guardRival.power < power - 10
                     ? 'They have more real pull than the military right now: officers on their payroll, and commanders who know better than to ask questions.'
+                    : seatBought ? '' // BAR8-K-POWERS (13g): no contest of arrests where the guild has bought the seat
                     : `They are roughly even with the military: the ${force.body} can arrest their people, and the guild can make every investigation costly.`;
-              standing = standing ? standing + ' ' + thievesGuardNote : thievesGuardNote;
+              if (thievesGuardNote) standing = standing ? standing + ' ' + thievesGuardNote : thievesGuardNote;
             }
           }
           if (nameLower.includes('military') || nameLower.includes('guard')) {
@@ -196,10 +212,11 @@ export const annotateFactionStanding = (factions, force = { body: 'garrison' }, 
               var guardThievesNote =
                 thievesRival.power > power + 10
                   ? 'The guild is stronger than they are. They can only make arrests where it is safe to, and everyone knows it.'
+                  : seatBought ? '' // BAR8-K-POWERS (13g): the relation row says the working arrangement; no war, no keeping it down
                   : thievesRival.power < power - 10
                     ? 'They are stronger than the guild, enough to keep it down but not to stamp it out.'
                     : 'A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken.';
-              standing = standing ? standing + ' ' + guardThievesNote : guardThievesNote;
+              if (guardThievesNote) standing = standing ? standing + ' ' + guardThievesNote : guardThievesNote;
             }
           }
         }
