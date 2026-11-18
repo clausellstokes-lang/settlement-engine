@@ -2081,3 +2081,14 @@ should be paused or archived by the owner's hand.
   the owner's words and hour. THE CHAIR DECIDED NOT TO SEAT THE AFTER-DEPLOY READERS YET: the owner's order was
   "after this merge one, push and deploy before continuing": they are seated when the pull request is ready for the
   owner's hand, and the owner is told then.
+- 05:08 UTC, 2026-11-18 · PEOPLE-2 STOPPED AT ITS PART B ITEM 3 (05:07; tip 92fb6c9de): "THE OWNER'S QUESTION IS YES": by 60
+  constructed towns born at 99ca9ad51 and loaded at both trees: when the party removes a handler from the roster
+  (`partyImpact.js:378`) and an IMPOSE_CORRUPTION event follows, the stale stored handlers are re-dealt, AND THE
+  SWAP'S CURE CHANGES THAT RE-DEAL IN 9 OF 208 CASES (r2r-city-0, r2r-city-3, r2r-city-13); stored handlers that
+  name a live card are never rewritten (0 of 568); the migration rewrites no stored handler; a v2 record's first
+  deal differs in 1 of 38. A SAVED RECORD'S CHANGE IS THE OWNER'S: the seat stopped as its prompt says. PART A stands
+  (76ffc8eef). Before, on the thirty, the 150 and the 720: 11e.wantBuy 2, 0, 6; 14e 1, 5, 4; no after (nothing under
+  `src/` changed). K-PEOPLE MISSED, by the seat's sweep: a personality on 4 of the 180 cards and one `goal.long`;
+  the prominent tie in 1 town of the 150. LEFT: item 3's guard arms, items 4, 5, 6. THE CHAIR TAKES IT UP AFTER THE
+  PULL REQUEST IS READY (it is after-deploy work; the question for the owner is put then, in plain words, with what
+  a saved town would see).
