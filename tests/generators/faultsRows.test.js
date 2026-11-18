@@ -15,6 +15,8 @@ import { importsAsPrinted } from '../../src/domain/display/tradeListDisplay.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 import { LUXURY_LABELS_COPY } from '../../src/domain/facts/needNotBroughtIn.js';
 import { DESC_LATE_SIBLINGS } from '../../src/data/institutionDescVariants.js';
+import { speakTierNoun } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
 
 const FAIR = 'Annual fair';
 const LINE_A = 'Regional merchants. Luxury goods available.';
@@ -43,6 +45,20 @@ const MET = Object.freeze([
 /** UNDER SIEGE AT THE DRAW, a luxury unmet: the siege twin stands (the draw's declaration first). */
 const SIEGED = Object.freeze([['r2s-under_siege-town-2', SIEGE_A]]);
 
+/** FR12 (2), 2026-11-18: THE LUXURY QUARTER'S TWO LINES (their colour marks struck). [seed, the line drawn, its twin] */
+const QUARTER = 'Luxury goods quarter';
+const Q1 = 'Silks, spices, and other precious goods.';
+const Q2 = 'The trade in silk, spice, and precious things.';
+const QT1 = 'Fine goods of every kind, though the spice or silk the town wants never arrives.';
+const QT2 = 'The trade in fine things, though the spice or silk the town wants does not reach it.';
+/** The need list names "spices": the twin. */
+const Q_UNMET = Object.freeze([
+  ['r2r-city-29', Q2, QT2], ['r2s-wartime-city-0', Q2, QT2], ['bar0-city-wartime-rand-28', Q2, QT2],
+  ['r2r-city-17', Q1, QT1], ['r2r-metropolis-18', Q1, QT1], ['bar0-city-under_siege+famine-rand-29', Q1, QT1],
+]);
+/** Another good unmet (gold/silver ore, the mint's want; livestock): the line stands. */
+const Q_MET = Object.freeze([['r2r-city-30', Q2], ['r2r-metropolis-0', Q2], ['r2r-city-21', Q1], ['r2r-city-39', Q1]]);
+
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** CENSUS-3 seedcfg.mjs's census and bar arms, in shape (as `bar8FishRows.test.js` reads them). @param {string} seed */
@@ -64,7 +80,7 @@ beforeAll(async () => {
   const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
   const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
   await boundary.loadGenerationLawPayloads();
-  for (const [seed] of [...UNMET, ...MET, ...SIEGED]) {
+  for (const [seed] of [...UNMET, ...MET, ...SIEGED, ...Q_UNMET, ...Q_MET]) {
     BORN.set(seed, generateSettlementPipeline(boundary.birthConfig({ ...DEFAULT_CONFIG, ...configOf(seed) }), null, { seed, customContent: {} }));
   }
 }, 600_000);
@@ -120,6 +136,45 @@ describe('FAULTS-ROWS items 1 and 4: the Annual fair offers no luxury the need l
       expect([...set[1].needs]).toEqual(['need not brought in: luxury']);
       expect([...set[1].excludes]).toEqual(['crisis: under_siege']);
       for (const offer of ['available', 'to be had', 'on offer']) expectAbsentWithAnchor(twin, offer, 'the town wants', line);
+    }
+  });
+});
+
+/** The page's own need list names a spice or a silk. @param {any} town */
+const spiceOrSilkUnmet = (town) => importsAsPrinted(town).needed.some((n) => /\b(spices?|silks?)\b/i.test(String(n)));
+/** @param {any} town */
+const quarterDescs = (town) => (town?.institutions || []).filter((/** @type {any} */ i) => i?.name === QUARTER).map((/** @type {any} */ i) => String(i.desc));
+
+describe('FAULTS-ROWS item 5: the luxury quarter trades in no spice or silk the need list says is not brought in (FR12 (2))', () => {
+  it('UNMET: the twin prints in the line\'s place, beside the page\'s own "Needed, and not brought in: spices"', () => {
+    const failures = collectSeedFailures(Q_UNMET, ([seed, line, twin]) => {
+      const town = BORN.get(seed);
+      expect(spiceOrSilkUnmet(town), `${seed}: the page's need list names a spice or a silk`).toBe(true);
+      // the late re-read speaks the tier's noun ("the city wants"), as `readHouseDescsLate` does
+      expectAbsentWithAnchor(quarterDescs(town), line, speakTierNoun(twin, tierNounFor(town.tier)), seed);
+      expect(quarterDescs(toPublicSafe(town)), `${seed}: the shared page`).toEqual(quarterDescs(town));
+    });
+    expectNoSeedFailures(failures, 'every quarter beside an unmet spice prints its twin');
+  });
+
+  it('MET: a quarter whose unmet good is another (the ore, the livestock) keeps its line', () => {
+    const failures = collectSeedFailures(Q_MET, ([seed, line]) => {
+      const town = BORN.get(seed);
+      expect(spiceOrSilkUnmet(town), `${seed}: the page's need list names no spice or silk`).toBe(false);
+      expect(importsAsPrinted(town).needed.length, `${seed}: some need unmet`).toBeGreaterThan(0);
+      expect(quarterDescs(town), `${seed}: the line kept`).toEqual([line]);
+    });
+    expectNoSeedFailures(failures, 'every quarter with another unmet good keeps its line');
+  });
+
+  it('THE TABLE: each line is a late key and no colour line; its twin names neither good as to be had', async () => {
+    const { DESC_VARIANT_COLOUR_DECLARATIONS } = await import('../../src/data/institutionDescColour.js');
+    for (const [line, twin] of [[Q1, QT1], [Q2, QT2]]) {
+      const set = /** @type {any} */ (DESC_LATE_SIBLINGS)[line];
+      expect(set.map((/** @type {any} */ l) => l.text)).toEqual([line, twin]);
+      expect([...set[0].excludes]).toEqual(['need not brought in: spice', 'need not brought in: silk']);
+      expect(Object.prototype.hasOwnProperty.call(DESC_VARIANT_COLOUR_DECLARATIONS, line), line).toBe(false);
+      for (const good of ['silks,', 'spices,', 'precious']) expectAbsentWithAnchor(twin, good, 'the town wants', line);
     }
   });
 });

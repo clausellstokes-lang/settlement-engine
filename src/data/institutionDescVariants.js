@@ -2436,4 +2436,17 @@ export const DESC_LATE_SIBLINGS = Object.freeze({
     Object.freeze({ text: "A yearly draw for regional traders, with fine goods on offer.", excludes: Object.freeze(['crisis: under_siege', 'need not brought in: luxury']) }),
     Object.freeze({ text: "A yearly draw for regional traders, though the fine goods the town wants do not reach it.", twinOf: "A yearly draw for regional traders, with fine goods on offer.", needs: Object.freeze(['need not brought in: luxury']), excludes: Object.freeze(['crisis: under_siege']) }),
   ]),
+  // FAULTS-ROWS (the sixth chair's rulings FR3 and FR12 (2), 2026-11-18; vetoable by the owner): THE LUXURY QUARTER'S TWO LINES
+  // trade in the silk and the spice the town's own need list says are not brought in ("Needed, and not brought in: spices.",
+  // r2r-city-29, r2r-city-17). Each was marked a colour line (`institutionDescColour.js`: struck, in CL18's form). Read late on
+  // `need not brought in: spice` and `: silk`; the draw declares no siege, so none is declared here. ONE TWIN each, naming no
+  // good as to be had. A town whose only unmet good is another (copper ore, gold/silver ore: the mint's want) keeps its line.
+  "Silks, spices, and other precious goods.": Object.freeze([
+    Object.freeze({ text: "Silks, spices, and other precious goods.", excludes: Object.freeze(['need not brought in: spice', 'need not brought in: silk']) }),
+    Object.freeze({ text: "Fine goods of every kind, though the spice or silk the town wants never arrives.", twinOf: "Silks, spices, and other precious goods." }),
+  ]),
+  "The trade in silk, spice, and precious things.": Object.freeze([
+    Object.freeze({ text: "The trade in silk, spice, and precious things.", excludes: Object.freeze(['need not brought in: spice', 'need not brought in: silk']) }),
+    Object.freeze({ text: "The trade in fine things, though the spice or silk the town wants does not reach it.", twinOf: "The trade in silk, spice, and precious things." }),
+  ]),
 });
