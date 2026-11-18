@@ -242,17 +242,19 @@ describe('5 · the Legal row\'s prison is the live roster\'s (the chair\'s item 
     expect(internalLine(s)).toMatch(/Arrest, trial and gaol all work here\.$/);
     expect(genKey(s)).toBe('ADMINISTERED');
   });
-  it('FR19 item 6 · POSITIVE (born): where the stamped flag calls a town hall a court, the threat line and DS-GEN-17 say what the Legal row says', () => {
+  it('FR19 item 6 · POSITIVE (born): where the stamped flag calls a town hall a court, the threat line says what the Legal row says', () => {
     const failures = collectSeedFailures([
-      ['r2r-town-5', 'Prison only', 'People are locked up without trial.'],
-      ['r2r-town-4', 'None', 'No court and no gaol; order rests on whoever is armed.'],
-    ], ([seed, row, line]) => {
+      // FR22 (2): DS-GEN-17 reads the live prison only; its court is its pool's own (v4 "keeps a gaol of its own, though no
+      // court sits here to try anyone" declares `no court sits`), so r2r-town-5 keeps ADMINISTERED and its true v4
+      ['r2r-town-5', 'Prison only', 'People are locked up without trial.', true],
+      ['r2r-town-4', 'None', 'No court and no gaol; order rests on whoever is armed.', false],
+    ], ([seed, row, line, administered]) => {
       const t = BORN.get(seed);
       expect(t.economicState?.compound?.inst?.hasCourtSystem, `premise: ${seed}'s stamped flag says a court`).toBe(true);
       expect(courtHoldersOf(t).length, `premise: ${seed}: no court sits`).toBe(0);
       expect(String(legal(t)?.status), `${seed}: the Legal row`).toBe(row);
       expect(internalLine(t), `${seed}: the threat assessment's internal line`).toMatch(new RegExp(`${line.replace(/[.;]/g, '\\$&')}$`));
-      expect(genKey(t), `${seed}: DS-GEN-17`).not.toBe('ADMINISTERED');
+      expect(genKey(t) === 'ADMINISTERED', `${seed}: DS-GEN-17 ADMINISTERED only where a gaol stands`).toBe(administered);
     });
     expectNoSeedFailures(failures, 'FR19 item 6 born');
   });
