@@ -35,6 +35,7 @@ import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { institutionsPoolKey } from '../../src/domain/display/stateProse/generalStateProse.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
+import { variantByVid } from '../helpers/drawnProse.js';
 
 const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
 const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
@@ -244,13 +245,16 @@ describe('5 · the Legal row\'s prison is the live roster\'s (the chair\'s item 
     // FR22 (2), measured: DS-GEN-17's ADMINISTERED pool declares the LIVE court and prison on every variant (v1 v2 `court sits` +
     // `prison`, v3 `court sits`, v4 `no court sits` + `prison`, v5 neither), so the key stays the base's and the door draws v3
     expect(genKey(s), 'DS-GEN-17 keys its pool as at the base').toBe('ADMINISTERED');
-    expectAbsentWithAnchor(gen17(s), 'own gaol', 'the law keeps a building of its own', 'DS-GEN-17 as the Overview draws it');
+    const v3 = variantByVid({ leaf: 'general', blockId: 'DS-GEN-17', poolKey: 'ADMINISTERED', vid: 3, slots: { settlement: String(s.name) } }); // `court sits`
+    const v1 = variantByVid({ leaf: 'general', blockId: 'DS-GEN-17', poolKey: 'ADMINISTERED', vid: 1, slots: { settlement: String(s.name) } }); // `court sits` + `prison`
+    const sentence = (/** @type {string} */ t) => t.replace(/[.,;].*$/, ''); // the sentence's first clause, as the desk folds it
+    expectAbsentWithAnchor(gen17(s), sentence(v1), sentence(v3), 'DS-GEN-17 as the Overview draws it');
   });
   it('FR19 item 6 · NEGATIVE: the same town unruined: the threat line and DS-GEN-17 keep the full chain', () => {
     const s = BORN.get('r2r-city-41');
     expect(internalLine(s)).toMatch(/Arrest, trial and gaol all work here\.$/);
     expect(genKey(s)).toBe('ADMINISTERED');
-    expect(gen17(s)).toContain('keeps its own court and its own gaol');
+    expect(gen17(s)).toContain(variantByVid({ leaf: 'general', blockId: 'DS-GEN-17', poolKey: 'ADMINISTERED', vid: 1, slots: { settlement: String(s.name) } }).replace(/[.,;].*$/, ''));
   });
   it('FR19 item 6 · POSITIVE (born): where the stamped flag calls a town hall a court, the threat line says what the Legal row says', () => {
     const failures = collectSeedFailures([
