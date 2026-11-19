@@ -1673,4 +1673,49 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     expect(bad, `${bad.length} sends or losses`).toEqual([]);
     expect(paths).toEqual([]);
   }, ARM_TIMEOUT_MS);
+
+  it('V8-4 THE TOP-LEVEL POWER\'S FLOOR: an entry of master\'s top-level factions[] that IS a shown power (its faction or name, in the one fold, a shown power\'s faction or name) keeps that name, as powerStructure.factions[] does (the chair\'s ruling (1)), key by key: the reader\'s row, by `name`, upper-cased; an entry whose string names no shown power stays swept (the hidden house\'s own name, a longer name that holds it, an entry flagged hidden), and one whose `name` is the hidden house\'s own leaves whole; every read, Reveal DM off and on, server against twin 0 paths', async () => {
+    const bad = []; const paths = [];
+    const TG = "Thieves' Guild";
+    const town = {
+      name: 'Saltmere', tier: 'town',
+      institutions: [hiddenHouse('inst-tg', "Thieves' guild (powerful)"), { id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
+      factions: [
+        { faction: TG, power: 10, desc: 'A shown power, top-level list.' },
+        { name: TG, power: 9, desc: 'gp1 the same power by its name key' },
+        { faction: "THIEVES' GUILD", power: 8, desc: 'gp2 the same power upper-cased' },
+        { faction: "Thieves' guild (powerful)", power: 7, desc: 'gp3 an entry named as the hidden house' },
+        { faction: "Thieves' Guild of the Docks", power: 6, desc: 'gp4 a longer name that holds the hidden one' },
+        { faction: TG, name: "Thieves' guild (powerful)", power: 5, desc: 'gp5 its name is the hidden house\'s own' },
+        { faction: TG, power: 3, hidden: true, desc: 'gp7 an entry flagged hidden' },
+      ],
+      powerStructure: { factions: [{ faction: TG, power: 10, desc: 'A shown power.' }, { faction: 'Council', power: 40 }] },
+    };
+    const want = [
+      { faction: TG, power: 10, desc: 'A shown power, top-level list.' },
+      { name: TG, power: 9, desc: 'gp1 the same power by its name key' },
+      { faction: "THIEVES' GUILD", power: 8, desc: 'gp2 the same power upper-cased' },
+      { power: 7, desc: 'gp3 an entry named as the hidden house' },
+      { power: 6, desc: 'gp4 a longer name that holds the hidden one' },
+      { power: 3, hidden: true, desc: 'gp7 an entry flagged hidden' },
+    ];
+    const r = await sharesOf(town, hide(town.institutions[0]));
+    paths.push(...enginePaths('town-g V8-4', r));
+    const floorAt = /^\$\.(powerStructure\.factions\[0\]\.faction|factions\[[012]\]\.(faction|name))$/;
+    for (const { tag, doc } of everyRead(r)) {
+      if (!isRec(doc)) { bad.push(`${tag}: no document`); continue; }
+      bad.push(...arrivals(doc, "Thieves' guild (powerful)").map(a => `${tag}: ${a}`));
+      bad.push(...arrivals(doc, TG, { notAt: floorAt }).map(a => `${tag}: ${a}`));
+      bad.push(...arrivals(doc, 'gp5').map(a => `${tag}: ${a}`));
+      if (doc.powerStructure?.factions?.[0]?.faction !== TG) bad.push(`${tag}: powerStructure.factions[0] lost its name`);
+      // where the top-level list arrives (Reveal DM: the public projection drops it), the shown power keeps its name in it
+      if (doc.factions !== undefined) {
+        const got = (Array.isArray(doc.factions) ? doc.factions : []).map(f => Object.fromEntries(Object.entries(f).sort()));
+        const exp = want.map(f => Object.fromEntries(Object.entries(f).sort()));
+        if (JSON.stringify(got) !== JSON.stringify(exp)) bad.push(`${tag}: factions[] is ${JSON.stringify(doc.factions).slice(0, 400)}`);
+      } else if (tag.startsWith('dm/') && !tag.endsWith('/link')) bad.push(`${tag}: Reveal DM lost the top-level factions[]`);
+    }
+    expect(bad, `${bad.length} sends or losses`).toEqual([]);
+    expect(paths).toEqual([]);
+  }, ARM_TIMEOUT_MS);
 });

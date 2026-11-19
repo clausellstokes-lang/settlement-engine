@@ -5,3 +5,6 @@ chain of each commit's tree (twin from that tree), compared by veil-probe-16/mea
 
 V8-2: towns 48 | 48; rows 1152 | 1152; rows whose fingerprint differs 0; missing 0
       reads that raise: 0 | 0; gallery reads where server and twin differ: 0 | 0
+
+V8-4: towns 48 | 48; rows 1152 | 1152; rows whose fingerprint differs 0; missing 0
+      reads that raise: 0 | 0; gallery reads where server and twin differ: 0 | 0

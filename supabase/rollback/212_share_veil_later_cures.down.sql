@@ -405,7 +405,7 @@ drop function if exists public._gallery_veil_hidden_name(jsonb, jsonb, text[], j
 drop function if exists public._gallery_veil_member_revealed(jsonb, jsonb, boolean, boolean, boolean);
 drop function if exists public._gallery_veil_name_bound();
 drop function if exists public._gallery_veil_name_case();
-drop function if exists public._gallery_veil_name_floor(jsonb, jsonb);
+drop function if exists public._gallery_veil_name_floor(jsonb, jsonb, text[]);
 drop function if exists public._gallery_veil_name_fold(text);
 drop function if exists public._gallery_veil_name_hit(text, jsonb, jsonb, jsonb);
 drop function if exists public._gallery_veil_name_hits(jsonb, jsonb);

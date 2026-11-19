@@ -152,6 +152,14 @@
 --       birth name into its identity) owns it, and the row follows that house's description and function eyes; where two
 --       houses could own one row, the eye that withholds (_gallery_veil_sources 'house_ids'; gallerySecondHomes.js ::
 --       secondHomeSources, withholdSecondHomes). No signature changes.
+--   (29) THE TOP-LEVEL POWER'S FLOOR (VEIL-18; REVIEW-VEIL-8's V8-4; the chair's ruling (1): a string that names a shown power
+--       by the power's own name is the power's, and stays): the floors were powerStructure.factions[] only, so a shown
+--       power whose name is a hidden house's name without its qualifier kept its name there and lost it in master's
+--       top-level factions[]. An entry of that list that IS a shown power now takes the same floor, key by key: its
+--       `faction` or `name` where the string, in the one fold, is a shown power's `faction` or `name`; a key that names no
+--       shown power, and an entry flagged hidden, take none and stay swept (_gallery_veil_name_floor, now given the shown
+--       powers' folds by _gallery_veil_name_sweep: its signature gains `shown text[]`, the rollback drops the new one;
+--       gallerySecondHomes.js :: sweepHiddenNames).
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -401,7 +409,8 @@ $$;
 --     is not 'Black market'); an open name that IS a hidden one (the same letters) is not cut out: it keeps its floor.
 --   KEYS AS WELL AS VALUES; an id and a join are strings like any other. FLOORS, never asked: the town's own `name`;
 --     the `id` and `name` of a house still listed (its `label` where it has no name); a shown power's `faction` and
---     `name`. An entry of a list whose own `id` or `name` is taken leaves the list whole (no record without a name).
+--     `name`, and (VEIL-18, V8-4) the same power's `faction` or `name` in master's top-level factions[] (the one fold). An
+--     entry of a list whose own `id` or `name` is taken leaves the list whole (no record without a name).
 --   THE WHOLE TEXT IS ASKED FIRST (the document's text, its escapes made spaces, folded once): no hit, no walk. THE
 --     WALK IS ITERATIVE (211's _gallery_veil_drop_hooks shape: only the nodes on the way to a hit are rebuilt) and
 --     bounded: the root is level 0, and a container at level 64 that holds a hit at any depth is withheld whole.
@@ -921,12 +930,21 @@ $$;
 -- [212: NEW] public._gallery_veil_name_floor
 -- THE FLOORS of a record, by the list it stands in (`list`: that list's path): the `id` and `name` of a house still
 -- listed (its `label` where it has no name), a shown power's `faction` and `name`. Never asked, never taken.
-create or replace function public._gallery_veil_name_floor(list jsonb, rec jsonb)
+-- VEIL-18 (REVIEW-VEIL-8's V8-4; the chair's ruling (1): a string that names a shown power by the power's own name is the
+-- power's): an entry of master's top-level factions[] that IS a shown power takes the same floor, key by key: its
+-- `faction` or `name` where that string, in the one fold (_gallery_veil_case_fold), is a shown power's `faction` or
+-- `name` (`shown`: those folds, read once by the sweep off powerStructure.factions[], a power not flagged hidden); a key
+-- that names no shown power, and an entry flagged hidden, take none (they stay swept), so nothing is floored beyond
+-- what the power structure's floor already keeps.
+create or replace function public._gallery_veil_name_floor(list jsonb, rec jsonb, shown text[])
 returns jsonb language sql immutable as $$
   select case
     when jsonb_typeof(rec) is distinct from 'object' then '[]'::jsonb
     when list = '["institutions"]'::jsonb then case when public._gallery_veil_str(rec -> 'name') <> '' then '["id", "name"]'::jsonb else '["id", "name", "label"]'::jsonb end
     when list = '["powerStructure", "factions"]'::jsonb and not coalesce(rec -> 'hidden' = 'true'::jsonb, false) then '["faction", "name"]'::jsonb
+    when list = '["factions"]'::jsonb and coalesce(cardinality(shown), 0) > 0 and not coalesce(rec -> 'hidden' = 'true'::jsonb, false) then
+      coalesce((select jsonb_agg(k) from unnest(array['faction', 'name']) k
+                 where jsonb_typeof(rec -> k) = 'string' and public._gallery_veil_case_fold(rec ->> k) = any(shown)), '[]'::jsonb)
     else '[]'::jsonb end
 $$;
 
@@ -971,12 +989,17 @@ declare
   ex int;
   n int;
   hk int[];     -- the places of the tokens that hold a hit, ascending (the k-th token of the document's text is k)
+  shown text[]; -- VEIL-18 (V8-4): the shown powers' `faction` and `name`, in the one fold (_gallery_veil_name_floor)
 begin
   -- `hits` holds the separators-only names' tokens too (VEIL-16): none, and nothing holds a name
   if hits = '{}' then return s; end if;
   hk := array(select (u.o / 2)::int from unnest(string_to_array(public._gallery_veil_name_json(s::text), '"')) with ordinality u(t, o)
                where u.o % 2 = 0 and hits ? u.t order by u.o);
   if cardinality(hk) = 0 then return s; end if;
+  shown := array(select x from (select distinct public._gallery_veil_case_fold(f ->> nk) as x
+                   from jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) f,
+                        unnest(array['faction', 'name']) nk
+                  where jsonb_typeof(f) = 'object' and not coalesce(f -> 'hidden' = 'true'::jsonb, false) and jsonb_typeof(f -> nk) = 'string') q where x <> '');
   with recursive w(p, d, v, f, b) as (
       select '[]'::jsonb, 0, s, '["name"]'::jsonb, 0
     union all
@@ -990,7 +1013,7 @@ begin
            where jsonb_typeof(e.v) in ('object', 'array') and not (w.f ? e.k) and public._gallery_veil_name_near(e.b, e.m, hk)
           union all
           select e.k, e.v, e.f, e.b
-            from (select (y.o - 1)::text as k, y.v, public._gallery_veil_name_floor(w.p, y.v) as f, m.m, (w.b + sum(m.m) over (order by y.o) - m.m)::int as b
+            from (select (y.o - 1)::text as k, y.v, public._gallery_veil_name_floor(w.p, y.v, shown) as f, m.m, (w.b + sum(m.m) over (order by y.o) - m.m)::int as b
                     from jsonb_array_elements(case when jsonb_typeof(w.v) = 'array' then w.v else '[]' end) with ordinality y(v, o),
                          lateral (select public._gallery_veil_name_tokens(y.v) as m offset 0) m) e
            where jsonb_typeof(e.v) in ('object', 'array') and public._gallery_veil_name_near(e.b, e.m, hk)) c
@@ -1018,7 +1041,7 @@ begin
                         when 'string' then public._gallery_veil_name_hit(y.v #>> '{}', hits, blank, raws)
                         when 'array' then wd[ix] + 1 >= 64 and public._gallery_veil_named(y.v, hits, blank, raws)
                         when 'object' then case when wd[ix] + 1 >= 64 then public._gallery_veil_named(y.v, hits, blank, raws)
-                                                else public._gallery_veil_name_taken(y.v, public._gallery_veil_name_floor(a.p, y.v), wd[ix] + 2 >= 64, hits, blank, raws) end
+                                                else public._gallery_veil_name_taken(y.v, public._gallery_veil_name_floor(a.p, y.v, shown), wd[ix] + 2 >= 64, hits, blank, raws) end
                         else false end)
         end as v
         from unnest(wp[ix:ex], wv[ix:ex], wf[ix:ex]) a(p, v, f), lateral (select coalesce(maps -> (a.p::text), '{}') as mm) l) q;

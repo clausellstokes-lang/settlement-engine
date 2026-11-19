@@ -563,7 +563,8 @@ const NO_FLOOR = Object.freeze(/** @type {string[]} */ ([]));
  * A HIDDEN NAME, ANYWHERE (in place): every key and every string that holds a hidden name leaves the projection (a
  * record loses the key, a list the entry; an entry whose own `id` or `name` is taken leaves its list whole). FLOORS,
  * never asked: the town's own `name`; the `id` and `name` of a house still listed (its `label` where it has no name); a
- * shown power's `faction` and `name`. Walked without a call a level; a container at NAME_WALK_BOUND is not walked: it
+ * shown power's `faction` and `name`, and (VEIL-18, V8-4) the same power's `faction` or `name` in master's top-level
+ * factions[] (the one fold). Walked without a call a level; a container at NAME_WALK_BOUND is not walked: it
  * is withheld whole if it holds a hit at any depth. SQL twin: _gallery_veil_name_sweep.
  * @param {Rec} s @param {NameSearch} search
  */
@@ -574,6 +575,23 @@ function sweepHiddenNames(s, search) {
   for (const i of Array.isArray(s.institutions) ? s.institutions : []) if (isRec(i)) floors.set(i, str(i.name) !== '' ? ['id', 'name'] : ['id', 'name', 'label']);
   const ps = recAt(s, 'powerStructure');
   for (const f of ps && Array.isArray(ps.factions) ? ps.factions : []) if (isRec(f) && f.hidden !== true) floors.set(f, ['faction', 'name']);
+  // VEIL-18 (REVIEW-VEIL-8's V8-4; the chair's ruling (1)): an entry of master's top-level factions[] that IS a shown power
+  // takes the same floor, key by key: its `faction` or `name` where the string, in the one fold (caseFold), is a shown
+  // power's `faction` or `name`; a key that names no shown power, and an entry flagged hidden, take none (they stay swept).
+  // SQL twin: _gallery_veil_name_floor's `shown`
+  /** @type {Set<string>} */
+  const shown = new Set();
+  for (const f of ps && Array.isArray(ps.factions) ? ps.factions : []) {
+    if (!isRec(f) || f.hidden === true) continue;
+    for (const k of ['faction', 'name']) { const v = f[k]; if (typeof v === 'string' && caseFold(v) !== '') shown.add(caseFold(v)); }
+  }
+  if (shown.size) {
+    for (const f of Array.isArray(s.factions) ? s.factions : []) {
+      if (!isRec(f) || f.hidden === true) continue;
+      const keys = ['faction', 'name'].filter((k) => { const v = f[k]; return typeof v === 'string' && shown.has(caseFold(v)); });
+      if (keys.length) floors.set(f, keys);
+    }
+  }
   /** @param {Rec} x @param {string} k @param {boolean} atBound @returns {boolean} the record's own `id` or `name` is taken */
   const taken = (x, k, atBound) => {
     if (!Object.prototype.hasOwnProperty.call(x, k) || (floors.get(x) || NO_FLOOR).includes(k)) return false;
