@@ -1,38 +1,37 @@
-<!-- THE CHAIR'S DRAFT OF PULL REQUEST #75's DESCRIPTION. Every `<<…>>` is filled from a close seat's hand-back before
-     this text is put on the pull request. Nothing below the first line of dashes is the record: the record is the
-     handoff and the hand-backs it names. -->
+<!-- THE CHAIR'S TEXT OF PULL REQUEST #75's DESCRIPTION (rewritten 2026-11-19 for points 1 to 72). The record is the handoff
+     and the hand-backs it names; this text is a summary of them for the owner. -->
 
-## Status: <<DRAFT, NOT READY TO MERGE | READY FOR YOUR READ>>
+## Status: <<READY FOR YOUR READ | NOT READY: …>>
 
-You wrote, on 2026-11-18, in the chair's session: "yes: refresh the stored reference files and open the pull request." This is that pull request.
+You wrote, on 2026-11-18, in the chair's session: "yes: refresh the stored reference files and open the pull request." This is that pull request. Later that day you said everything but the next thirty-town read lands before the deploy (05:13 UTC), and "Yes to both" (about 19:07 UTC) for the last close's refresh and signing. All of it is now on this branch.
 
 Nothing here merges, deploys or touches the database by itself. **The merge, the deploy and the seven database changes stay your hand.**
 
-- [<< >>] the stored reference figures are refreshed, each by its own procedure (the close);
-- [<< >>] `npm run check` is green on the branch's tip `<<tip>>`;
+- [x] the stored reference figures are refreshed, each by its own procedure (two closes; section 6);
+- [<< >>] the whole check is green on the branch's tip `<<tip>>` (three machines, every test's time read; section 6);
 - [<< >>] every CI job on this pull request is green on that tip;
-- [x] this description carries the veto list, the questions owed to you, what the close re-took, and the known faults.
+- [x] this description carries the veto list, the questions owed to you, what the closes re-took, and the known faults.
 
 ## 1. What this is, in plain words
 
 The app builds a town from a seed. Since the last deploy (pull request #73, 2026-11-06) the work on this branch has had one aim: **a town's page must not say a thing that is false for that town.**
 
-Three kinds of work are in it.
+Four kinds of work are in it.
 
 1. **The supply rule (yours).** A house that works a material (a smith, a brewer, a fish market) needs that material: from ground nearby, or bought in. Where neither holds, the page says so: the house is marked short, or it is shown as a failed venture. The dice for this are cast once, when the town is created, and every view (your page, a shared page, the gallery, the PDF, the Foundry journal) reads the same stored result.
-2. **Declared lines.** Each sentence the page can print now says what it needs to be true (a court, a wall, a harbour, food in store). It prints only in a town that has those things. Where the first sentence would be false, a twin that says what is true prints in its place.
-3. **The page-truth rounds.** Thirty fresh towns were read cold, eight times over. Each false sentence found was traced to its cause and cured there, or it is listed in section 7 by name.
+2. **Declared lines.** Each sentence the page can print says what it needs to be true (a court, a wall, a harbour, food in store, a good bought in). It prints only in a town that has those things. Where the first sentence would be false, a twin that says what is true prints in its place.
+3. **The page-truth rounds.** Thirty fresh towns were read cold, seven times over (the eighth read is after the deploy, by your word). Each false sentence found was traced to its cause and cured there, or it is listed in section 7 by name.
+4. **The faults round and the last small round** (points 60 to 70): the leftovers of the seventh read cured at their causes, the checking tools repaired, and new lines written where a small place had fewer than three true lines to choose from.
 
-Size: <<6,670+N>> commits and <<4,338+N>> files since `master`.
+Size: 7,105 commits and 4,409 files since `master`.
 
-Where the record is:
+Where the record is (all on this branch):
 
 - Points 1 to 32: `docs/chair/2026-11-14/JOIN-17-HANDBACK.md`.
-- Points 33 to 47 and 53, one row a point: `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md`.
-- The close: `docs/chair/2026-11-18/close/` (each seat's hand-back; `CLOSE-ACCOUNT.md` is the summary).
+- Points 33 to 72, one row a point: `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md`.
+- The veto lists, sentence by sentence: `docs/chair/2026-11-18/close/VETO-LIST-33-53.md` and `docs/chair/2026-11-18/lastclose/VETO-LIST-48-70.md`.
+- The two closes, figure by figure: `docs/chair/2026-11-18/lastclose/CLOSES-ACCOUNT.md`; each seat's hand-back beside it.
 - The chair's own record: `docs/chair/2026-11-17/sixth/CHAIR-HANDOFF-SIXTH.md` on the branch `lane/chair-2026-11-08`.
-
-Points 48 to 52 are **not** in this pull request. Section 8 says what they are.
 
 ## 2. What you do, in order
 
@@ -44,7 +43,7 @@ Nothing below happens by itself. Each step is yours; the chair can walk you thro
    - Apply to production from a clean checkout of this branch's tip: `npx supabase@2.122.0 db push` (always with the version number; a bare `npx supabase` now fetches a version that rejects this project).
    - Then the stamp file `supabase/applied-head.json` goes from 203 to 210 **on this branch**, with what your terminal printed. Until it does, the host refuses to build the app ("prod is at migration 203 while the repo head is 210"). Tell the chair when the push is done and paste the output: the chair writes the stamp from it, as was done on 2026-09-20.
 3. **Merge**: a merge commit, never a squash (the record cites commits by their hash; a squash would erase them).
-4. **The app deploys through CI** once the six required checks are green on the merged commit. The host's daily allowance must be free at that moment (section 4.6).
+4. **The app deploys through CI** once the six required checks are green on the merged commit. The host's daily allowance must be free at that moment (section 4.6, item 2).
 5. **The edge functions**, by hand, from a clean checkout of the merged commit: `bash scripts/deploy.sh` (`docs/DEPLOY.md`, "Edge function — manual"). This branch changes `_shared`, `engine-generate`, `engine-version`, `generate-narrative`, `send-email` and `admin-actions`.
 6. **The proof**: `npm run ops:post-deploy` (`docs/ops/POST_DEPLOY_VERIFICATION_RUNBOOK.md`).
 
@@ -52,7 +51,7 @@ No session touches a hosted database or a production credential.
 
 ## 3. The seven database changes, one line each
 
-All seven were reviewed before first use (the pre-deploy review of 2026-11-10). Six replace a function and touch no stored data. One (208) restates one column.
+All seven were reviewed before first use (the pre-deploy review of 2026-11-10). None was added since the first close. Six replace a function and touch no stored data. One (208) restates one column.
 
 | File | What it does | Does it touch stored data when applied? |
 |---|---|---|
@@ -66,117 +65,137 @@ All seven were reviewed before first use (the pre-deploy review of 2026-11-10). 
 
 ## 4. The veto list
 
-Each item is the chair's or a seat's call under your delegation. Each can be vetoed; say the number.
+Each item is the chair's or a seat's call under your delegation. Each can be vetoed; say the number or the name.
 
-The full list, sentence by sentence with file and line, is `docs/chair/2026-11-18/close/VETO-LIST-33-53.md` (points 33 to 47 and 53). Its last part indexes the veto sections of points 1 to 32, hand-back by hand-back.
+The full lists, sentence by sentence with file and line, are on this branch: `docs/chair/2026-11-18/close/VETO-LIST-33-53.md` (points 33 to 47 and 53) and `docs/chair/2026-11-18/lastclose/VETO-LIST-48-70.md` (points 48 to 70: 47 new or changed sentences, 23 older lines under new conditions, 9 lines taken away, 9 new facts a sentence may ask for, 45 rulings by name, 19 low notes). Points 1 to 32 are indexed in the first list's last part.
 
 How counts are given: "the 900" are the program's test towns (720 + 150 + the thirty of each read); "the 525" are the reference towns whose exact output is stored.
 
 ### 4.1 New rules that change what a page prints
 
+Points 33 to 53:
+
 1. **The supply odds** (point 33). For each house the dice give: its ground still there, 45 in 60; its material bought in, 45 in 60; a failed venture, 3 in 60. These odds and the table of "other users of a material" (butcher, chandler, bowyer, river boatyard, thatcher, furrier, tailors, dyer, alehouse: never a failed venture) are yours to change.
 2. **No town carries two words for one good on its imports** (point 33).
 3. **The war's iron** is read from facts every view keeps, not from the DM's plot hooks (point 33).
 4. **New conditions on old desk lines** (point 37): the gaol line needs a gaol; "the town lives off their passing" needs a town or larger; the two "eats well" lines need food secure or better; the granary and "deep stores" lines need three months of stores; "keeps the peace" and "order holds" need a law that has not collapsed; the brewer's tavern lines need a tavern.
-5. **New need tables** (points 40, 42): the butchers need livestock; the established apothecary needs herbs (the import word that feeds it is "herbs and forage", not any "herbs"); the maltster needs a grain surplus; game stocks the butchers.
-6. **Under a siege**: a house living off a proven ground is "Curtailed by the siege."; the dossier names no import as "arriving"; a house whose every chain is stored "Impaired" no longer counts as at work (points 33, 40, 45).
+5. **New need tables** (points 40, 42): the butchers need livestock; the established apothecary needs herbs; the maltster needs a grain surplus; game stocks the butchers.
+6. **Under a siege**: a house living off a proven ground is "Curtailed by the siege."; no import is named as "arriving"; a house whose every chain is stored "Impaired" no longer counts as at work (points 33, 40, 45).
 7. **The fish swap** (point 53): where a town's own fishing grounds are used up and its fish is bought in, the fish market's "Fresh fish retail" row becomes the catalogue's "Preserved fish". 30 of the 720 towns.
-8. **Scenes** (points 45 to 47): the "long and steady" history line is refused under a live siege, famine, occupation, plague or war; where two twins are allowed, the last answers.
-9. **The PDF and the Foundry journal read what the tabs read** (points 38, 44): the marks, the "Impaired" card word, the proven grounds, the used-up grounds.
+8. **Scenes** (points 45 to 47): the "long and steady" history line is refused under a live siege, famine, occupation, plague or war.
+9. **The PDF and the Foundry journal read what the tabs read** (points 38, 44).
+
+Points 48 to 70 (the most visible; the full list has 62):
+
+10. **The watch** (points 48, 57, 66): its service line reads the Legal row's own court; the by-day lines read the hours the force keeps (a gate is a post, a levy at need walks no round, ruling FR9); the threat assessment reads the court and the prison through the Legal row.
+11. **The people** (points 50, 58, 62): the swap of two houses' handlers is cured (the one-way deal stays, ruling BR13); the crisis rows that presume a command go to a holder who has one; a person's hook is true of the house and the seats they hold.
+12. **The desks** (points 51, 52, 59, 64): lines that presumed imports, an uprising, a court or stores are each declared, with twins; the record-of-crimes lines need a court or a gaol that keeps one; "nothing new goes up" is refused where a building house works.
+13. **The need list** (point 61): it keeps a need where a live house is short of it.
+14. **The fair, the luxury quarter and the fish cards** (point 65): they read the need list and the bought fish; a crisis the dice rolled is read by the house descriptions on the final record.
+15. **The supply rule's leftovers** (points 63, 68): the second ring of houses, the failed venture's pick read once, wool and hides read their grounds, the common proves its pasture.
+16. **Small places** (point 70): every town has at least three true lines in each of the Defense desk's four safety pools; the SUPPLY goals ("want") name only goods the page's own need list prints.
+17. **The numbering of the sentence pools is now guarded** (point 64, ruling FR7): a pool's numbers never move; a correction in place needs a row naming its ruling.
 
 ### 4.2 New or changed sentences
+
+Points 33 to 53 (unchanged from the first close):
 
 | Point | The words | Where, and how often |
 |---|---|---|
 | 33 | Marks "Abandoned: a failed venture." and "Failing: a failed venture." (your own words) | The house's card and rows. 11 of the 720 towns. |
 | 33 | "The {house} stands abandoned, a venture of an earlier time: no {material} lies near and none is brought in." / "The {house} is failing: no {material} lies near and none is brought in." | Resources tab, a town with a failed venture. |
-| 33 | A peat cutter's mark reads "Short of peat." (was "Short of reeds.") | An idle peat cutter. |
-| 33 | A proven ground prints in Nearby Resources with no word of plenty. | 171 of the 720. |
-| 37 | Eight twins on the desks, among them "{settlement} has no court sitting and no gaol in use." and "{settlement} has no wall and no soldiers; its watch does not keep the peace in its own streets, and would be no answer to an army." | Each only where its first line would be false. The eight are quoted whole in the full list. |
+| 37 | Eight twins on the desks, among them "{settlement} has no court sitting and no gaol in use." | Each only where its first line would be false. |
 | 39 | "The digging goes on here, but the metalworking stands idle, short of what it needs." | The income row "Iron & Metalwork". 2 of the 720. |
-| 40, 42 | Marks "Short of grain." (maltster), "Short of livestock." (butchers), "Short of medicinal herbs." (apothecary) | The existing mark form, in new houses. |
-| 45, 46 | "A laden cart or two comes down from the workings in a day, and no more." | The arrival scene of a thorp or hamlet with a working quarry or mine. |
-| 45 | "The {X} is the one great event in its past, and what it faces now may be the second" / "No great event marks its past, and what it faces now may be the first" | The history line of a town under a live hard crisis. |
+| 40, 42 | Marks "Short of grain.", "Short of livestock.", "Short of medicinal herbs." | The existing mark form, in new houses. |
+| 45, 46 | "A laden cart or two comes down from the workings in a day, and no more." | A thorp or hamlet with a working quarry or mine. |
+| 45 | "The {X} is the one great event in its past, and what it faces now may be the second" / "No great event marks its past, …" | A town under a live hard crisis. |
 | 47 | "Magic is still a trade in {name}: the signs still offer it by the hour, but the work is slow and dear for want of what it takes." | Allowed in 9 towns; drawn in none of the 900. |
 
-No other point adds a sentence. Points 38, 43, 44 and 53 add none: they move existing words to where they are true, or take a line away.
+Points 48 to 70 (47 sentences; a few here, every one in the full list with its file, line and towns):
+
+| Point | The words | Where |
+|---|---|---|
+| 58 | The title "Emira" (only; Sheikh, Wali, Imam and Qaid keep one form, ruling BR14) | Female holders of one-word office titles. |
+| 61 | "{settlement} feeds itself and has nothing to spare. Some of what its work needs does not reach it, and there is no line for anything else." (DS-ECO-8 POOR v6) | Economics, a poor town with an unmet need. |
+| 64 | "{settlement} has no court and no gaol. Custom and neighbours answer what they can, and the rest goes unanswered." (DS-DEF-3 Unsafe v4) | Defense, an unsafe town with neither. |
+| 65 | The fair's three twins, the luxury quarter's two, the fish card's three | The house's card, the Institutions tab and the PDF, where the first line would be false. |
+| 66 | The holding cells' twin "Short-term detention until a fine is paid." | The 11 "Prison only" towns. |
+| 70 | Ten lines at the ends of DS-DEF-3's four small-place safety pools (Moderate v9, v10; Safe v6, v7, v8; Very Safe v6, v7; Unsafe v5, v6, v7), among them "At {settlement} old wrongs are remembered for years, and some are still being argued over." and "Neighbours at {settlement} have begun to suspect one another, and few will lend a tool or a coin now." | Defense, a small place that keeps order by its own people. |
+| 70 | Four SUPPLY "want" goals (two short, two long), naming only goods the page's need list prints | A person's card where a need is unmet. 61 cards over the 900. |
 
 ### 4.3 New vocabulary
 
-Two new facts a sentence may ask for (point 45): `trade at work: ironwork in full` and `fish taken here`.
+Facts a sentence may ask for: `trade at work: ironwork in full` and `fish taken here` (point 45); `trade at work: building` (point 59, with the brickmaker named in it: vetoable); `critical import brought in` (point 59); `need not brought in` (point 61); `court or gaol` (point 64); `fish bought in` (point 65); `force walks by day` (point 57); and the `want` cell of the SUPPLY goals (point 70).
 
 ### 4.4 Earlier decisions overturned on this branch
 
-The full list has eleven (its Part D). The ones a reader of pages would notice:
+The full lists have them (eleven in the first, eighteen in the second). The ones a reader of pages would notice:
 
 - The fish swap first built by one seat printed "Preserved fish" in 4 idle towns where it was false. It was reverted and rebuilt for bought fish only (point 53).
 - "Ritual wood and herbs" no longer feeds an apothecary (point 42).
-- A maltster in a calm town on a connected road stays unmarked (ruling BR20).
-- A chain card that says "Impaired" beside a trade working on bought iron was ruled **not a fault**; see question 3.
+- The common grazing land now proves its pasture (point 68, replacing an earlier ruling).
+- Three lines whose first wordings a second reader vetoed were rewritten in place before landing (Unsafe v4, Moderate v9, Unsafe v6; rulings FR18, LR6).
 
 ### 4.5 Not wording, but yours to know
 
 1. **A paragraph was added to `CLAUDE.md`** under your words "I give the word" and "Do both": a builder session seated by the chair may commit and push its own work on its own `lane/*` branch, by plain pushes with the hooks; never a force push, never `master`, never a pull request. Vetoable.
-2. **Stored reference towns moved**, each move declared by its seat: <<the close's count: N of the 525>>.
-3. **The ratchet arm A5** (a test of the edit corpus) ran within six seconds of its 600-second limit; it takes 3.6 times what it took on 2026-10-01. <<LEFT-KEYS K8: what was done>>.
+2. **Stored reference towns moved**, each move declared by its seat and traced at the closes: at the last close 222 of the 525 (section 6).
+3. **The ratchet arm A5** (a test of the edit corpus) runs near its limit (561 s against 600 s at the last close).
 4. **The earlier account's sessions** (the fifth chair and its seats) are unreachable from this account and should be paused or archived by your hand.
 5. **Pull request #74** ("Git fixtures run behind one door") is another session's draft. This program did not touch it.
 
-### 4.6 The chair's rulings at the close
+### 4.6 The chair's rulings at the closes
 
-1. **The worker bundle's size ceiling** (your deferral of 2026-11-18, 03:42 UTC: "I defer these to you"). The bundle that generates a town off the main page is <<2,525,028>> bytes against a ceiling of 2,356,121 (+<<168,907>>). The chair accepted the rise: the growth is the supply rule and the declared lines, the worker flag is still off (generation runs in the page), and shaving it is code clean-up, which you tabled. The other three ceilings rose under 25,000 bytes each: <<figures>>.
-2. **The host's daily allowance** (the same deferral). The host refuses deployments ("more than 100" a day on the free plan) because every push to any branch asks for one. Two things were done: sessions now push rarely; and `vercel.json` now tells the host not to build `lane/*` branches (one line: `"git": { "deploymentEnabled": { "lane/*": false, "lane/**": false } }`; the host's documentation says this key takes branch patterns; `master` is not named and deploys as before). A branch cut before this change still asks until it takes the change in. **The plan upgrade stays yours** (it spends your money); it is the way to deploy sooner than the allowance frees. <<after the first push with the key: did the host skip it?>>
-3. **A debt count was raised by name** (ruling CL14). One test counts sentences whose declarations a census cannot yet read. The rounds added <<N>> such lines; each is recorded as owed, with its cause, not forgiven. <<figures>>.
-4. **A stored inventory of the town map's site reading was re-recorded** (ruling CL15): two rows moved by a correct change of the sand export. The map is not shown and map work is deferred to PLAT, so nothing follows from it here.
-5. **The numbering of fourteen sentences stands as one builder changed it** (ruling CL19). Each pool of alternative sentences numbers its sentences, and the number decides which sentence a town gets, so that a saved town keeps its sentence between releases. The rule is that a new sentence takes the next free number. On 2026-11-16 one builder (BAR6-DEFDESK, `be3585040`) inserted seven new sentences in the middle of seven pools of the Defense desk, which pushed fourteen older sentences to new numbers. The guard that should refuse this was not switched on. **What it does:** after the deploy, a town saved on the live site may show a different sentence of the same pool in those seven places; none is false, because each sentence prints only where it is true. **Why it was left:** putting the old numbers back changes pages that the last read and two audits were made on, and re-opens every book keyed by number, late in the close. **This is now or never:** once deployed, the new numbers are the numbers. If you want the old numbers back, say so before you merge. After the deploy a builder switches the guard on.
-6. **Two checkers were fixed, not the sentences they misread** (ruling CL17), and four house descriptions lost a stale "presumes nothing" mark (ruling CL18): <<DOORS-1A's hand-back>>.
-7. **Known debt recorded only with proof** (rulings CL20 to CL22): <<DOORS-1B: the observed shapes by class; the 25 new presumption hits by proof; the two variety figures with their cause>>.
+1. **The worker bundle's size** (your deferral of 2026-11-18, 03:42 UTC: "I defer these to you"). The bundle that generates a town off the main page grew at the first close (2,356,121 → 2,525,028 bytes, ruling CL12) and again at the last close (→ 2,579,708, +54,680, most of it point 66). The worker flag is still off (generation runs in the page). Each rise is tallied by the landing that caused it; shaving it is code clean-up, which you tabled. The engine chunk rose 5,754 bytes and the first paint 11,927 (raw) at the last close.
+2. **The host's daily allowance** (the same deferral). `vercel.json` tells the host not to build `lane/*` branches (measured: no deployment was asked for on the line's pushes). **The plan upgrade stays yours.**
+3. **Debt counts raised by name, never forgiven** (rulings CL14 and LC2): one test counts sentences whose declarations a census cannot yet read; each new one is recorded as owed with its cause (six at the last close, named).
+4. **The numbering of fourteen sentences stands as one builder changed it** (ruling CL19). A town saved on the live site may show a different sentence of the same pool in seven places of the Defense desk after the deploy; none is false. Since point 64 a guard refuses any further renumbering. If you want the old numbers back, say so before you merge: once deployed, the new numbers are the numbers.
+5. **Three registers of pools gained rows by name** (ruling LC1): pool dominance (where one sentence of a pool prints most of the time) records the last rounds' new pools; the one lopsided pool (two lines, one printing 99 % of the time because the other is true in few towns) is on the after-deploy list for variety.
+6. **The failed-venture floor** was re-recorded at its measured count (10 → 9 failed ventures over the 720, ruling FR17); the odds (3 in 60) are unchanged.
+7. **A stored inventory of the town map's site reading was re-recorded** (ruling CL15). The map is not shown and map work is deferred to PLAT, so nothing follows from it here.
+8. **Named as debt, no gate added:** the CENSUS-4 declaration ledger has 1,721 rows gone stale as the pools grew (positional rows); re-taking it is not one procedure's run. It is recorded, and no new check is added for it.
 
 ## 5. The questions owed to you
 
 None of these blocks the merge. Each says what the pages do today.
 
-1. **May one house's network be run by another house's boss?** Today both a one-way deal (106 networks in 56 of the 720 towns) and a two-way swap (20 networks in 11 towns) print. The chair kept the one-way deal and ruled the swap a fault; its cure lands after the deploy. Keep the one-way deal as design, or forbid it?
-2. **Female forms of titles.** Today "Emir" and the other one-word office titles have one form. The chair allowed "Emira" only (not landed yet). Pair any others? Sheikh, Wali, Imam and Qaid have no female form.
-3. **Should a chain card say it runs on bought iron?** In four test towns the card "Iron & Metalwork" prints "Impaired" with "From Iron deposits (depleted)" while the income line says "Metal is smelted or worked here." and the houses are fed by trade. Ruled not a fault; nothing built. A new word on the card ("runs on bought iron"), or leave it?
-4. **A gate held at night, read as a day's round.** Once the watch's follow-up lands (after the deploy), three test towns would print a by-day line for a force that only holds a gate at night. Does that reading stand?
-5. **Told, not asked:** the ratchet arm's slowness (4.5 item 3).
+1. **Should a chain card say it runs on bought iron?** In four test towns the card "Iron & Metalwork" prints "Impaired" with "From Iron deposits (depleted)" while the income line says metal is worked here and the houses are fed by trade. Ruled not a fault; nothing built. A new word on the card, or leave it?
+2. **The war bar's word.** The PDF's war bar prints "Adequate" in 6 of the 720 towns that have no wall, garrison, militia, watch or company. The cure needs the military score held where it is written. Build it after the deploy, or leave it?
+3. **The butchers of two towns** (r2r-city-43, bar0-town-calm-rand-46) are at work on "livestock for meat and draft" beside imports of "Raw hides and animal products". One-good rule, the need list, or as it is?
+4. **A saved town's text after a ruin**: a stored holding-cells row keeps its words after the town's court is ruined (a saved record's text; changing it is yours).
+5. **Told, not asked:** the answered ones. The one-way handler deal stays as design and the swap is cured (BR13); "Emira" is the only paired female title (BR14); a gate held at night is a post, not a round (FR9).
 
-## 6. The close: what was refreshed
+## 6. The closes: what was refreshed
 
-<<THE CLOSE'S ACCOUNT, from the seats' hand-backs: each stored figure, its old and new value, and the landed point that moved it. In short form here; whole in `docs/chair/2026-11-18/close/CLOSE-ACCOUNT.md`.>>
+Two closes ran. The first (2026-11-18 morning) covered points 33 to 53; the last (2026-11-18/19 night) covered points 54 to 70 and landed as points 71 and 72. Each stored figure was re-taken through its own procedure and laid to the landed points that moved it; a register of debt only shrank, except where section 4.6 names a ruling. Figure by figure: `docs/chair/2026-11-18/lastclose/CLOSES-ACCOUNT.md`.
 
-- **The golden master** (the exact output of the 525 reference towns), signed through its door under your yes: <<N of 525 rows moved; each surface's predicted and measured count>>.
-- **The engine bundle** (the copy of the generator the server runs): rebuilt from the tree.
-- **The size ceilings**: <<four figures, old and new>>.
-- **The words' books** (the census of sentences, the ledgers, the norms): <<counts>>.
-- **The registers of known debt**: <<each: old, new, why>>. A register only shrinks, except where section 4.6 names a rise.
-- **Tests re-keyed** (a test that pinned an old place or count): <<count, by seat>>.
-- **Law reds cured at their cause**, no town and no page moved (the 525 hashed whole, the thirty rendered, equal): <<S1, S2>>.
-- **Left red on purpose**: <<none | list>>.
+- **The golden master** (the exact output of the 525 reference towns), signed through its door under your "Yes to both" (the signing announced in the chat at 01:04 UTC): **222 of 525 rows moved**, every one traced to a landed point, none unexplained, no person or name in or out. The espionage fence: 116 of 360. The dossier text manifest: 832 of 1,050. The year-long news feed (the herald desk) did not move.
+- **The engine bundle** (the copy of the generator the server runs): rebuilt from the tree three times, bytes equal (435 → 442 inputs, each laid to its point).
+- **The size ceilings**: section 4.6, item 1.
+- **The words' books** (the census of sentences, the ledgers, the norms): 3,054 sentence variants; the wiring census, the shift register and the corpus pins re-taken by their own procedures.
+- **The registers of known debt**: the over-claims base shrank 45 → 18; the presumption classes' ceiling shrank 1,789 → 1,785; the presumed-things register 4,629 → 4,635 by six lines proved true by construction (court or gaol, "no gaol", the fish market's "market"); the under-claims took one owed row of six named lines (LC2).
+- **Tests re-keyed** where a test pinned an old place or count: by identity, never loosened (one stale anchor at the last close, `tailHouses1Gaps`).
+- **A fault of form cured**: one test of point 64 set a suite budget in a form the codebase's rules forbid; the budget moved onto each test, nothing else.
+- **The whole check at the tip**: <<the three parts' counts; every red by name, or none>>. **Every test's time was read**: <<the tests on the default 20-second budget that run within twice their time of it on CI's scale, and what was done: none | budgets given, commit …>>.
+- **Left red on purpose**: <<none>>.
 
 ## 7. Known faults still on the pages, by name
 
-Each is true at this branch's tip. None is new in this pull request unless it says so.
+Each is true at this branch's tip. The first close's list had ten. Eight are cured on this branch (the PDF's two lines at point 55; the fair and the luxury quarter at 65; r2r-hamlet-27's dairy at 63; the desk line beside "Prison only" at 59; the brewer's secret and the granary lines at 59; the supply rule's leftovers at 63 and 68; the siege's "trade at work" at 66); the fish lines are cured at points 53, 62 and 65 down to the two small remainders of item 2 below; the forge smoke (item 1) stays by ruling. What remains:
 
-1. **The PDF prints "Little metal is worked here while the metal trade is short of what it needs."** where the tab prints "Metal is smelted or worked here." 95 of the 720 towns. Its cure is built and lands after the deploy.
-2. **The PDF prints the head line "A row marked short is what its house makes when supplied." twice** where the only mark is a failed venture's. 9 of the 720. Cure built, lands after.
-3. **Fish lines still false where the fish is bought in or the grounds are spent**: one income line (21 rows), the fishmonger's talk of "the boats, the catch" (6), the fish market's card text, the fisher's landing's "Fresh fish", one arrival scene. Each needs a new fact or a catalogue change.
-4. **The fair and the luxury quarter** speak of luxuries where none is brought in: 5 towns; "silk, spice, and precious things": 7 (plausible, not proven).
-5. **One test town (r2r-hamlet-27)**: "The dairy farmer is failing: no livestock lies near and none is brought in." beside a Shepherd, Common grazing land and a Stable yard. A fault of how the town is created.
-6. **A desk line "A thing done wrong at {settlement} goes somewhere and takes time, …"** prints beside "Prison only / Detention without process." in 10 towns (measured on a seat's tree, not at this tip). Cure built, lands after.
-7. **Three besieged towns** print "Forge smoke hangs over everything here, and the ring of the anvils never quite stops." with unmarked smiths beside an "Impaired" chain card. Accepted by ruling.
-8. **The brewer's secret** still names taverns where none stands; two granary lines presume stores.
-9. **The supply rule's leftovers**: 71 houses in 27 towns are short with no used-up ground named (they stand on no road); the card for a proven ground; the second ring of houses.
-10. **The "trade at work" fact does not read "Stopped by the siege."** Nothing prints falsely from it in the 900.
-11. *(Not a fault on a page: the town map is not shown, and map work is deferred to PLAT by the owner's word of 2026-11-18. For the record only: the site inventory's two rows moved, ruling CL15: `desert|mountain-flank|coal` 7 to 9, `desert|dunes|(biome)` 30 to 28, by a correct change of the sand export.)*
+1. **Three besieged towns** print "Forge smoke hangs over everything here, and the ring of the anvils never quite stops." with unmarked smiths beside an "Impaired" chain card. Accepted by ruling.
+2. **Fish, two small remainders**: the town and city fish cards' hedged lines beside "Preserved fish" (40 of 640 bought-in markets); the fishmonger's line "Talks about the boats, the weather and what came in this morning." in 1 town of the 720 where no catch is landed.
+3. **Eight towns whose stored grazing land is spent** beside a common still read "Short of livestock." (the record's own depletion wins).
+4. **Title lines are drawn before the imports are written**, so a line the final record makes true can be passed over (no false line prints; a true one is missed).
+5. **The entrepôt card** names "Hunter's lodge » Furs and pelts" as a source beside the lodge's own "Short of game.".
+6. **Words that read stiffly**: two "want" goals say a need list's label verbatim ("livestock for meat and draft"); "the work at the citizen militia" where the house is a militia; the same "keeps no court and no gaol" twice on one tab in one town (Skálgarde).
+7. **Found by the chair's own walk and play of the built app (2026-11-19)**: a "the" dropped where the ruling body's name replaces "the council" ("Merchant Council has been debating market levies…", "and Arcane Council is avoiding the question"); the watch's service card says it "holds the gates" in towns with no walls; one person's goal speaks of paying back a debt their relationship card says is owed to them; "Magical Capability: Critical" shows in red in towns with no magic.
+8. *(Not a fault on a page: the town map is not shown, and map work is deferred to PLAT by your word of 2026-11-18.)*
 
 ## 8. What is not in this pull request
 
-Built or building, read by a second seat, and landing after the deploy (then a second, smaller close):
-
-- **Points 48 to 52**: the people's follow-up (the swap, "Emira"), the watch and the powers (a by-day line, the occupation's rival bloc), both desks' follow-ups.
-- **The income lines and the PDF's last gaps** (items 1 and 2 of section 7), and the marks' follow-up (the hook's kinds, the alchemist's need, "Salted fish" on three towns' imports).
+- **The eighth thirty-town read**: after the deploy, by your word (2026-11-18, 05:13 UTC).
+- **The after-deploy list**: the faults of section 7, the lopsided pool's variety (4.6, item 5), the six owed lines (4.6, item 3), the CENSUS-4 ledger (4.6, item 8), and three code comments in the observed-shape tools that still say "eleven new" where the register (correctly) holds 10 new and 1 grown: they change only with that register's next governed step.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
