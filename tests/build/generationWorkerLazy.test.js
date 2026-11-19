@@ -506,7 +506,17 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // SECRETS-1 and DEBT-1 (JOIN-17 points 30 to 32, 47666fd8f -> 580cc26c6) +50,887 (the rare secrets' tables); the round BAR6
 // (points 1 to 11, to 570e3c351) +25,413; then BIRTH-3 (point 33) +14,690, the sixth chair's points 36 to 53 +12,678, BAR7 (20 to
 // 29) +7,995, the seam (12 to 19) +2,546. Recorded AT the measured figure; MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 2525028;
+// 2,525,028 -> 2,579,708 (2026-11-19, LASTCLOSE-SIGN, THE LAST CLOSE BEFORE THE DEPLOY: the landings' tip cc11c9504 (points 54 to
+// 70) + LASTCLOSE-DOORS (point 71, 8ecd28085), the edge bundles re-derived 319d75ac1; re-recorded ONCE as the brief lets the seat
+// (a rise under 60,000 B in one ceiling; the chair's message of 2026-11-19 names the figure); VETOABLE BY THE OWNER): A RISE OF
+// 54,680 B. MEASURED by one fresh `npm run build` of each tree, read by this file's own arm (VERIFY_DIST=1; at each step a scratch
+// copy of this file with the ceiling at 0, removed): the first close's tip 0dee69e17 reads 2,525,028; this tree 2,579,708. THE
+// CAUSE, BY LANDING STEP (one build at each first-parent landing commit over 0dee69e17): FAULTS-WATCH (point 66) +26,098; FAULTS-NEED
+// (61) +4,751; FAULTS-ROWS (65) +4,722; K-WATCH, K-POWERS, K-WATCH-2 (48, 49, 57) +4,333; LAST-DECLARE (69) +3,694; the desks
+// (51, 52, 59) +3,102; K-PEOPLE, PEOPLE-2 (50, 58) +2,997; FAULTS-PEOPLE (62) +1,705; FAULTS-BIRTH (63) +1,539; MARKS-2 (56) +891;
+// LAST-VARIETY (70) +561; FAULTS-BIRTH's follow-ups (68) +400; FAULTS-DESKS (64) +141; FR25 (67) +74; J-INCOME-2 (54) -328;
+// PDF-2b (55), FAULTS-TOOLS (60) and point 71 +0. Recorded AT the measured figure; MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 2579708;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
