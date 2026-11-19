@@ -1,7 +1,7 @@
-<!-- THE CHAIR'S TEXT OF PULL REQUEST #75's DESCRIPTION (rewritten 2026-11-19 for points 1 to 72). The record is the handoff
+<!-- THE CHAIR'S TEXT OF PULL REQUEST #75's DESCRIPTION (rewritten 2026-11-19 for points 1 to 73). The record is the handoff
      and the hand-backs it names; this text is a summary of them for the owner. -->
 
-## Status: NOT READY: the share veil (database changes 211 and 212) is being joined, by your word of 2026-11-19 ("Yes get 211 and 212 in there"). The deploy waits for it.
+## Status: NOT READY: the share veil (database changes 211 and 212) is being joined, by your word of 2026-11-19 ("Yes get 211 and 212 in there"), and CI is being fitted (the test ratchet outgrew its 135-minute limit: it is being split into six parts that run at the same time). The deploy waits for both.
 
 You wrote, on 2026-11-18, in the chair's session: "yes: refresh the stored reference files and open the pull request." This is that pull request. Later that day you said everything but the next thirty-town read lands before the deploy (05:13 UTC), and "Yes to both" (about 19:07 UTC) for the last close's refresh and signing. All of it is now on this branch. On 2026-11-19 you added: "Yes get 211 and 212 in there": the share veil's two database changes join this pull request before the deploy (section 3).
 
@@ -10,6 +10,7 @@ Nothing here merges, deploys or touches the database by itself. **The merge, the
 - [x] the stored reference figures are refreshed, each by its own procedure (two closes; section 6);
 - [x] the whole check is green on the branch's tip `8f3b8bf4b` (three machines, every test's time read; its four reds classed and cured at point 73; section 6);
 - [ ] the share veil joined: 211 (frozen) and 212 finished, and 212 CLEARED by a fresh security reader (section 3);
+- [ ] CI fitted: the test ratchet split into six parts with the same verdict (its last four runs took 113 to 134 minutes, two of them stopped at the 135-minute limit), and the two browser jobs' limits set by the workflow's own rule (a slow browser install stopped the end-to-end job at 8f3b8bf4b);
 - [ ] after the join: the moved figures re-taken, the whole check, every CI job green on the final tip;
 - [x] this description carries the veto list, the questions owed to you, what the closes re-took, and the known faults.
 
