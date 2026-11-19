@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "ed8601e54ace7e7f9b695cb05d8b61f8c943012b",
-  "measuredBy": "CLOSE-DOORS-1B",
-  "date": "2026-11-18",
-  "note": "CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18), at the frozen tree 70e557d5b: the dependents moved, no tuning value: the six tables of src/domain/corruption.js each gain src/domain/facts/rivalRings.js (BAR7-DESKS, JOIN-17 point 27); src/domain/people/allegiance.js#ALLEGIANCE_TUNING gains src/generators/people/rareSecrets.js (SECRETS-1, JOIN-17 point 30); the tables' line addresses follow their files' landed edits",
+  "measuredAtSha": "5383c309f4476597fc4f881b22a1c31cd2d31c65",
+  "measuredBy": "LASTCLOSE-DOORS",
+  "date": "2026-11-19",
+  "note": "LASTCLOSE-DOORS (2026-11-19, the last close), at the base cc11c9504's landings: the dependents moved, no tuning value: src/domain/people/allegiance.js#ALLEGIANCE_TUNING gains src/generators/power/factionStanding.js (K-POWERS, points 48/49/57, ed176ed08)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1528,6 +1528,7 @@
         "src/generators/people/goals.js",
         "src/generators/people/rareSecrets.js",
         "src/generators/people/ties.js",
+        "src/generators/power/factionStanding.js",
         "src/generators/steps/assembleSettlement.js",
         "src/lib/structuralFingerprint.js"
       ],
@@ -8568,7 +8569,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 68,
+      "line": 69,
       "spanDigest": "9ce244b1dbb17502d5534d5ea33f9f9bafe8cec4c191d4f934be6e6673dbba1e",
       "leaves": {
         "base.RANK": 1,
@@ -8606,7 +8607,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 93,
+      "line": 94,
       "spanDigest": "9959eec349933f6bf2320b936780466dfea07d1f4bedbbed8da671fd806ce7ab",
       "leaves": {
         "strengthFull": 30,
