@@ -84,6 +84,22 @@ Base reds by name: `tests/lint` 35 tests in 21 files + 1 file that could not loa
 3. **`proseCorpusBytes`** (RAW ×4 exact, GZIP band, the defense leaf): both prompts give "the size and byte ceilings" to
    LASTCLOSE-SIGN; if the chair reads the prose byte ratchet as a door of mine, it is one run.
 
+### 3a · THE CHAIR'S RULINGS ON §3 (2026-11-19, after 242fc592b), each written, a commit an item
+
+| item | the ruling | written | commit |
+|---|---|---|---|
+| 1 · pool dominance, the base's three | bank each by its OWN row, never `--bank-new` at large, with the chair's reasons | the door's `bankNew` narrowed to exactly the three (`tools/lastclose-pooldom-base3.mjs`, refuses otherwise): DESC_VARIANT_SIBLINGS 0.9916 / 1, 2 lines; STANDARD_PATROL 0.2984 / 1, 4 lines; trade-list:imports 0.1344 / 0.5724, 15 lines. poolDominance.walker 17/17 | b0fc8eb2c |
+| 2 · proseComposed A0b, +6 under-claims | ONE OWED row in CL14's form; no line reworded before the deploy; the six on the post-deploy list | `UNDER_CLAIM_OWED` 815 → 821 with its dated row naming each line and cause; `UNDER_CLAIM_BASE` 1282 untouched. NOTE: the arm's ceiling is computed as BASE + OWED, so it now reads 2103 (= the measured tally); the shrink-only base did not move. proseComposed.walker 87/87 | (the commit before b0fc8eb2c) |
+| 3 · proseCorpusBytes | the prose byte ratchet is a door figure, this seat's | four declared rows chained from the committed figures, each landing's delta read: defense 281298 → 287394 (51/52/59 +1742, 64 +558, 70 +3796), economy 195233 → 196627 (51/52/59 +905, 61 +489), general 306982 → 307568 (51/52/59 +586), power 135398 → 136414 (51/52/59 +1016); gzip moved with them; every leaf under its ceilings. proseCorpusBytes 18/18 | (two before b0fc8eb2c) |
+
+THE POST-DEPLOY LIST (by the chair's rulings): DESC_VARIANT_SIBLINGS' variety (one line 99 %); the six under-claim lines
+(DS-POW-5 merchantArmy v3, DS-ECO-12 CRITICAL IMPORT v4, DS-GEN-13 WAREHOUSES v5); this seat's LOW: the three old
+towns' hedged "whenever livestock/hides can be had" (r2r-hamlet-56, r2r-hamlet-27 Dairy farmer; r2s-plague_onset-village-2
+Tannery) beside a common that now proves the pasture.
+
+After the rulings, `tests/lint` at this branch is red only on LASTCLOSE-SIGN's tree counts (mutationCoverageManifest
+TOTALITY, sovereigntyLightingContract's file count).
+
 ## 4 · THE NET (C7), at 40ecbd681 (the tree of every re-take; this commit adds only this file)
 
 The whole list again at the tip, after one fresh `npm run build`, each directory through `sh scripts/gate-tail.sh`, the
