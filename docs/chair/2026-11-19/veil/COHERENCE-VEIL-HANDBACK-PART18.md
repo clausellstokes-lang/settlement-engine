@@ -29,6 +29,7 @@ row, its V8-3 row and the largest born town; a read never fails where 211 serves
 | `supabase/migrations/211_server_side_share_veil.sql` (FROZEN) | `eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01` |
 | `supabase/rollback/211_server_side_share_veil.down.sql` (FROZEN) | `ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f` |
 | 212 at the join (unchanged from 4fa35f294) | `46389052ea3460a2b0ce8181df0e0c0c7599fe4c63e29af58f55ff06941bce0b` / down `5b3eb697ae2531f83c2586d2c59b5afe414e6647ba65b9a884e9dfd09ddf694f` |
+| 212 after V8-9 (284583359; the builder's cfa727a9d) | `d1b5da911f66d41c3f0350cf93dcf792b4e000fe5ca39f1fe5ea69cd9103a938` / down unchanged `5b3eb697ae2531f83c2586d2c59b5afe414e6647ba65b9a884e9dfd09ddf694f` (no signature added) |
 
 212 is NOT final.
 
@@ -87,7 +88,7 @@ inventory banked by its ritual `TUNING_INVENTORY_REFREEZE`), built once V8-9 lan
 
 | Item | State |
 |---|---|
-| V8-9 | IN HAND: a builder working to `briefs/SUB-BRIEF-V8-9.md` in `/home/user/wt/veil17` (base ad093c92c). Not yet committed. |
+| V8-9 | DONE, 284583359 (the builder's cfa727a9d to `briefs/SUB-BRIEF-V8-9.md`, cherry-picked onto the lane line). THE BOUND, one in both engines: the search's patterns (the alternation and every cut-out) at most 16,384 code points together, a weight (code points x distinct code points, summed) at most 4,194,304, at most 16 cut-outs; births at most 3,413 / 4,413 code points, weight 933,621, 2 cut-outs; the least refusal 3.2x (size) and 7x (weight) above. THE CLOSED ANSWER past the bound or on a raise: every key and string answers as a hit (the floors aside): the reader receives the town's name alone; the read serves. RED at ad093c92c's bytes: the new arm 90 faults (36 server reads raise); GREEN 0 faults in 55 s, server against twin 0 paths, under the bound 24 of 24 responses equal to the base's. COST (ms, x211 / base / after): V8-3 row 6,822 / 7,958 / 7,885 (1.16x); Langengrund link 290.1 / 504.2 / 490.8 (1.69x), gallery default veil 340.7 / 521.6 / 538.8 (1.58x); the reader's 600x145 223 / raises / 264, 1,000x80 388 / raises / 437, 1,500x145 671 / raises / 778. Born 1,152 rows 0 differ; V13-1 plant 18 of 18. Proof files `out/V89-*.txt`. THE SEAT READ THE DIFF LINE BY LINE (212's `_name_search` bound and exception block, `_name_hits` closed and exception paths, every caller of `p` and `blank`: `blank` reaches only look-ups after the search; the twin rule for rule: code-point length, distinct by code point, the same order of checks, the same closed answer on a refused compile; `NAME_SEARCH_BOUND` a frozen object, no named constant; the guard arm additive, 117 lines, none removed): nothing to cure. EXECUTED BY THE SEAT: the acceptance run at cfa727a9d exit 1, a07 and d06 only, twin 15 of 15, V7-10 and V7-6 PASS; the six guard files (section 5). NOT DONE (the builder's note): no bound on the separators-only names (not patterns; one `position` a token). PLAUSIBLE only: the closed read's memory under hosted limits. |
 | V8-2, V8-4, V8-5; B, C, D; E | not started. Notes for V8-2: the defence rows find their house by name (`_gallery_veil_sources` 'houses', keyed by card name; applied in `_gallery_veil_second_homes` at the `defenseProfile.institutions` loop); identity is `catalogId` (`catalogIdForName` = the catalogue lookup of the trimmed lowered name). V8-4: `_gallery_veil_name_floor` floors only `powerStructure.factions[]`. V8-5: the reader's own remedy (keep the person named) would send the hidden house's name inside the person's name, against the law; the lawful cure by identity is that a tie whose end the sweep removed leaves with it. |
 
 ## 4. THE FRESH READER'S FINDINGS (REVIEW-VEIL-9, through the chair) AND VR4
@@ -151,3 +152,36 @@ carries any other derived number only in the form a shared page DRAWS it (band o
 shared page draws is not sent. (iv) What a shared page draws stays, recorded as DIFFUSE (VR8), unless the reader's
 differ shows the drawn form alone identifies a house (then it is (i)). The registry records each number under (i) to
 (iv); at FINAL a precise figure with a hidden term reaching a non-owner read undrawn is a finding."
+
+## 5. THE WALKERS (VR1, VR2, VR3) AND THE DOORS AFTER V8-9
+
+VR1 6d73b0fe9 and VR2 3fce0a80e (section 2). VR3 by its fallback: ef0eacb3f (the DECLARED_GROWTH row for
+gallerySecondHomes.js, introducedAt 5abf99906, the cause naming VR3; UNREGISTERED_NAMED_CEILING 541 -> 542,
+DECLARED_GROWTH_CEILING 14 -> 15) and 841d492f9 (the inventory by its ritual `TUNING_INVENTORY_REFREEZE=VEIL-17`: exactly
+gallerySecondHomes.js 1 and unregisteredNamed 541 -> 542). After them the three walkers 98 of 98: the five titles carried
+from 4fa35f294 are green. The lighting census re-taken by its door at 841d492f9 (0837a7fb2: titles 31218 -> 31219, V8-9's
+arm; the walker 34 of 34). The wiring census `--check` and the writers' reach check at the tip: exit 0.
+NOTE for the instruments: a worktree whose `node_modules` is a SYMLINK is "dirty" to the inventory's ritual and the
+census's door (the ignore pattern `node_modules/` matches a directory only, and the walker isolates git from the
+environment); use `cp -al <a real node_modules> node_modules` in a scratch worktree.
+
+## 6. HANDED BACK AT THE MARK (2026-11-19, after V8-9 and VR3)
+
+The count read by `get_session` before the VR4 proposal: 278,293, at the mark of 300,000; the chair was told the seat
+hands back after V8-9 is read and pushed. Nothing is running; every commit is pushed (the tip: the commit carrying this
+file). 211's two files untouched, proved at the first commit and at the last (eface6d0…0be01 / ce8474ff…49712f).
+
+**DONE:** STEP 1, the join (section 2), green, JOINED sent; VR1, VR2, VR3; V8-9 (212 `d1b5da91…`); the VR4 class measured
+(`out/VR4-REPORT.md`) and its one mechanism proposed and APPROVED (VR7), with VR8 to VR14 and the clearance standard
+recorded (section 4).
+**WHAT IS LEFT, in order (the assignment's STEP 2 and the chair's rulings):**
+1. V8-2, V8-4, V8-5 (each one commit by identity, else into the pack's WHAT 212 DOES NOT CLOSE; section 3's notes).
+2. B (V7-5, a07), C (V7-8, d06; R3 with it), D (the income row by its house: VR6 folds it in, section 4).
+3. VR7, THE MECHANISM, built from `out/VR4-REPORT.md` section 3 read against VR8 to VR14: first run the reader's differ
+   (`differ.probe.jsx` on origin/lane/review-veil-9-2026-11-19) — its 130 / 113 paths are the registry's first rows;
+   VR9 and VR10 measure first (the role-less base rate; whether any non-owner view needs a stable person id). The
+   clearance standard: zero unregistered differing paths at FINAL.
+4. E, the acceptance run at ONE checksum, ONE message to the chair; 212 unchanged until the chair answers. F and G after.
+**FOR THE NEXT SEAT:** the instruments are this container's (PART 17 section 5, with `/var/tmp/v17` for `/var/tmp/v16`
+and `/var/tmp/v17pg` for the cluster; section 5 above for `node_modules`); the guard set is six files (galleryVeilHandRows
+18 titles now); the measure scripts of V8-9 are in `docs/chair/2026-11-19/veil/measure/`.
