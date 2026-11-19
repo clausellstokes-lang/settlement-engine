@@ -1,0 +1,3 @@
+tests/domain/composeStateProse.test.js :: the composer — the corpus loads, and the merge is legal every block lives in exactly one leaf, and the sweep found the whole corpus
+tests/domain/display/needMetUnderAnotherName.test.js :: a need an import meets under another name is not a need left unmet (item 4(b)) the leaf on the census's towns: r2r-city-0's luxury goods are met; r2r-village-3's mountain timber is not
+tests/pdf/pdf2ReadsTheTabs.test.jsx :: PDF-2: the negatives print none of these faults, and agree every negative, each seed collected

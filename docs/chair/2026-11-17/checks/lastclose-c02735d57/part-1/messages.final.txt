@@ -1,0 +1,41 @@
+### tests/domain/composeStateProse.test.js :: the composer — the corpus loads, and the merge is legal every block lives in exactly one leaf, and the sweep found the whole corpus
+AssertionError: variants: expected 3054 to be 3033 // Object.is equality
+    at /home/user/t/lastclose-c02735d57/tests/domain/composeStateProse.test.js:187:82
+    at file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:2955:64
+
+### tests/domain/display/needMetUnderAnotherName.test.js :: a need an import meets under another name is not a need left unmet (item 4(b)) the leaf on the census's towns: r2r-city-0's luxury goods are met; r2r-village-3's mountain timber is not
+AssertionError: expected [] to include 'mountain_timber'
+    at Proxy.<anonymous> (file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/expect/dist/index.js:1319:15)
+    at Proxy.<anonymous> (file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/expect/dist/index.js:1156:15)
+    at Proxy.methodWrapper (file:///home/user/t/lastclose-c02735d57/node_modules/chai/index.js:1700:25)
+    at /home/user/t/lastclose-c02735d57/tests/domain/display/needMetUnderAnotherName.test.js:50:25
+    at file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+
+### tests/pdf/pdf2ReadsTheTabs.test.jsx :: PDF-2: the negatives print none of these faults, and agree every negative, each seed collected
+AssertionError: every negative — 2 of 2 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[0] r2r-village-0 — r2r-village-0: a proven ground: expected [ 'grazing_land' ] to deeply equal []
+[1] bar0-village-calm-rand-28 — bar0-village-calm-rand-28: a proven ground: expected [ 'grazing_land' ] to deeply equal []: expected [ …(2) ] to deeply equal []
+    at Module.expectNoSeedFailures (/home/user/t/lastclose-c02735d57/tests/helpers/seedFailures.js:147:26)
+    at /home/user/t/lastclose-c02735d57/tests/pdf/pdf2ReadsTheTabs.test.jsx:350:5
+    at file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///home/user/t/lastclose-c02735d57/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+
