@@ -1,0 +1,139 @@
+V8-9 THE COST TABLE (VEIL-17's builder). Local scratch PostgreSQL 16.15 (unix socket /var/tmp/rv7), JIT as the cluster stands.
+Chains: x211 = v89x211 (001..211, the frozen 211); base = v89base (001..212 from the base's bytes, 212 46389052...); after =
+v89tree (001..212 from the tree). Runner: measure/v89-cost.sh v89x211 v89base v89tree <base tree> <tree> 5 (ms, medians; cost8
+and deep-cost 5 rounds, the chains in turn; Langengrund by veil-probe-16's cost.mjs, 15 rounds, alternated). THE LAW: no read
+more than twice x211 on the reader's 300 KB row, its V8-3 row and Langengrund; a read never fails where 211 serves.
+
+row                                                             x211      base     after after/x211
+h=5 hit=10000 cold=0 nl=1                                       6822      7958      7885       1.16
+h=5 hit=5000 cold=5000 nl=1                                     6803      7574      7632       1.12
+h=200 hit=2000 cold=2000 nl=1                                   1256      2123      2154       1.71
+h=50 hit=500 cold=500 nl=1                                       128       223       231       1.80
+h=600 hit=0 cold=0 nl=8                                          223       384       264       1.18
+h=1000 hit=0 cold=0 nl=4                                         388       527       437       1.13
+h=1500 hit=0 cold=0 nl=8                                         671      1020       778       1.16
+h=300 hit=0 cold=0 nl=8                                          116       178       155       1.34
+h=1000 hit=0 cold=0 nl=2                                         396       485       431       1.09
+h=85 hit=0 cold=0 nl=8                                            52        82        82       1.58
+h=86 hit=0 cold=0 nl=8                                            52        77        69       1.33
+depth=3000 houses=5 strings=100 dm=true                           39        49        50       1.28
+depth=10 houses=200 strings=5000 dm=false                        427       466       466       1.09
+depth=10 houses=600 strings=10000 dm=false                      1536      1596      1640       1.07
+Langengrund link, no veil record                               290.1     504.2     490.8       1.69
+Langengrund gallery, no veil record                            296.5     309.9     307.8       1.04
+Langengrund link, default veil                                 288.6     481.6     484.7       1.68
+Langengrund gallery, default veil                              340.7     521.6     538.8       1.58
+(the rows h=600/1000/1500: every base round raises, the median shown is its time to raise; h=85 is 16,200 code points, under
+ the bound, exact; h=86 is 16,385, over, the closed answer. The 300 KB rows are deep-cost's 200 and 600 houses; THE LAW holds:
+ V8-3 row 1.16 x, the 300 KB rows 1.09 x and 1.07 x, Langengrund 1.58 x to 1.69 x.)
+
+THE TWIN on the reader's rows (measure/twin.mjs, Node 22: buildNameSearch, then hit on 2,000 strings), base's tree then this tree:
+  latin:600:8 names 600 | L 111976 D 207 | build 1496 ms | 2,000 strings 1315 ms (hits 0)
+  latin:1000:4 names 1000 | L 102377 D 207 | build 1256 ms | 2,000 strings 1057 ms (hits 0)
+  latin:1500:8 names 1500 | L 279877 D 207 | build 8806 ms | 2,000 strings 7736 ms (hits 0)
+  latin:85:8 names 85 | L 16200 D 207 | build 53 ms | 2,000 strings 34 ms (hits 0)
+  latin:86:8 names 86 | L 16385 D 207 | build 50 ms | 2,000 strings 38 ms (hits 0)
+  latin:600:8 names 600 | L 111976 D 207 | build 23 ms | 2,000 strings 5 ms (hits 2000)
+  latin:1000:4 names 1000 | L 102377 D 207 | build 19 ms | 2,000 strings 3 ms (hits 2000)
+  latin:1500:8 names 1500 | L 279877 D 207 | build 47 ms | 2,000 strings 9 ms (hits 2000)
+  latin:85:8 names 85 | L 16200 D 207 | build 281 ms | 2,000 strings 6 ms (hits 0)
+  latin:86:8 names 86 | L 16385 D 207 | build 3 ms | 2,000 strings 1 ms (hits 2000)
+  (after: 85 x 145 is exact, 'hits 0'; past the bound every string is a hit: the closed answer)
+
+MEASURE FIRST, the base's compile (measure/compile.mjs: the search built with no open name on a fresh backend, then one match;
+L the pattern's code points, D its distinct code points; peak resident and address space of the backend):
+  cyrillic:100:8 names 100 chars/name 124 | p 49676 cp 77764 B | build 151 ms | compile 93 ms | backend peak RSS 16 -> 76 MB, peak virtual 217 -> 402 MB
+  cyrillic:300:8 names 300 chars/name 124 | p 148276 cp 231564 B | build 245 ms | compile 1092 ms | backend peak RSS 16 -> 84 MB, peak virtual 217 -> 752 MB
+  cyrillic:500:8 names 500 chars/name 124 | p 246876 cp 385364 B | build 409 ms | compile 4402 ms | backend peak RSS 16 -> 93 MB, peak virtual 217 -> 1399 MB
+  glong:1:1000 names 1 chars/name 17008 | p 21497 cp 21986 B | build 13 ms | compile 13 ms | backend peak RSS 16 -> 29 MB, peak virtual 217 -> 312 MB
+  glong:1:1000 names 1 chars/name 17012 | p 64532 cp 95043 B | build 122 ms | compile 104 ms | backend peak RSS 16 -> 78 MB, peak virtual 217 -> 442 MB
+  glong:1:1500 names 1 chars/name 25512 | p 96532 cp 142043 B | build 160 ms | compile 259 ms | backend peak RSS 16 -> 81 MB, peak virtual 217 -> 547 MB
+  glong:1:2000 names 1 chars/name 34008 | p 42497 cp 42986 B | build 16 ms | compile 28 ms | backend peak RSS 16 -> 36 MB, peak virtual 217 -> 540 MB
+  glong:1:2000 names 1 chars/name 34012 | p 128532 cp 189043 B | build 201 ms | compile 500 ms | backend peak RSS 16 -> 85 MB, peak virtual 217 -> 682 MB
+  glong:1:250 names 1 chars/name 4258 | p 5747 cp 6236 B | build 6 ms | compile 3 ms | backend peak RSS 16 -> 25 MB, peak virtual 217 -> 229 MB
+  glong:1:250 names 1 chars/name 4262 | p 16532 cp 24543 B | build 55 ms | compile 8 ms | backend peak RSS 16 -> 73 MB, peak virtual 217 -> 352 MB
+  glong:1:250 names 1 chars/name 4262 | p 16532 cp 24543 B, 212 distinct, L x D 3504784 | build 68 ms | compile 8 ms | backend peak RSS 16 -> 73 MB, peak virtual 217 -> 352 MB
+  glong:1:500 names 1 chars/name 8508 | p 10997 cp 11486 B | build 7 ms | compile 6 ms | backend peak RSS 16 -> 26 MB, peak virtual 217 -> 248 MB
+  glong:1:500 names 1 chars/name 8512 | p 32532 cp 48043 B | build 76 ms | compile 28 ms | backend peak RSS 16 -> 75 MB, peak virtual 217 -> 374 MB
+  greek:100:8 names 100 chars/name 150 | p 56876 cp 83664 B | build 120 ms | compile 83 ms | backend peak RSS 16 -> 77 MB, peak virtual 217 -> 429 MB
+  greek:200:8 names 200 chars/name 150 | p 113376 cp 166464 B | build 193 ms | compile 380 ms | backend peak RSS 16 -> 82 MB, peak virtual 217 -> 627 MB
+  greek:28:8 names 28 chars/name 150 | p 16267 cp 24119 B, 221 distinct, L x D 3595007 | build 76 ms | compile 8 ms | backend peak RSS 16 -> 73 MB, peak virtual 217 -> 354 MB
+  greek:300:8 names 300 chars/name 150 | p 169876 cp 249264 B | build 273 ms | compile 1139 ms | backend peak RSS 16 -> 87 MB, peak virtual 217 -> 934 MB
+  greek:400:8 names 400 chars/name 150 | p 226376 cp 332064 B | build 352 ms | compile 2434 ms | backend peak RSS 16 -> 93 MB, peak virtual 217 -> 1350 MB
+  greek:400:8 names 400 chars/name 150 | p 226376 cp 332064 B, 221 distinct, L x D 50029096 | build 383 ms | compile 2291 ms | backend peak RSS 16 -> 93 MB, peak virtual 217 -> 1350 MB
+  greek:50:1 names 50 chars/name 31 | p 6275 cp 9413 B | build 43 ms | compile 2 ms | backend peak RSS 16 -> 72 MB, peak virtual 217 -> 344 MB
+  han:100:40 names 100 chars/name 40 | p 4103 cp 12103 B | build 60 ms | compile 20 ms | backend peak RSS 16 -> 73 MB, peak virtual 217 -> 1061 MB
+  han:100:40 names 100 chars/name 40 | p 4103 cp 12103 B, 4005 distinct, L x D 16432515 | build 58 ms | compile 16 ms | backend peak RSS 16 -> 73 MB, peak virtual 217 -> 1061 MB
+  han:120:40 names 120 chars/name 40 | p 4923 cp 14523 B, 4805 distinct, L x D 23655015 | build 67 ms | compile 23 ms | backend peak RSS 16 -> 73 MB, peak virtual 217 -> 1377 MB
+  han:135:40 names 135 chars/name 40 | p 5538 cp 16338 B, 5405 distinct, L x D 29932890 | build 83 ms | compile 29 ms | backend peak RSS 16 -> 73 MB, peak virtual 217 -> 1652 MB
+  han:150:40 names 150 chars/name 40 | p 6153 cp 18153 B, 6005 distinct, L x D 36948765 | build 73 ms | ERROR invalid memory alloc request size 1124904640 | backend peak RSS 16 -> 74 MB, peak virtual 217 -> 887 MB
+  han:200:40 names 200 chars/name 40 | p 8203 cp 24203 B | build 87 ms | ERROR invalid memory alloc request size 1999072640 | backend peak RSS 16 -> 74 MB, peak virtual 217 -> 1311 MB
+  han:200:40 names 200 chars/name 40 | p 8203 cp 24203 B, 8005 distinct, L x D 65665015 | build 85 ms | ERROR invalid memory alloc request size 1999072640 | backend peak RSS 16 -> 74 MB, peak virtual 217 -> 1311 MB
+  han:400:40 names 400 chars/name 40 | p 16403 cp 48403 B | build 134 ms | ERROR invalid memory alloc request size 3995872320 | backend peak RSS 16 -> 77 MB, peak virtual 217 -> 405 MB
+  han:500:40 names 500 chars/name 40 | p 20503 cp 60503 B | build 174 ms | ERROR invalid memory alloc request size 6242840320 | backend peak RSS 16 -> 79 MB, peak virtual 217 -> 440 MB
+  han:51:40 names 51 chars/name 40 | p 2094 cp 6174 B, 2045 distinct, L x D 4282230 | build 45 ms | compile 5 ms | backend peak RSS 16 -> 72 MB, peak virtual 217 -> 528 MB
+  han:800:25 names 800 chars/name 25 | p 20803 cp 60803 B | build 162 ms | ERROR invalid memory alloc request size 6146816320 | backend peak RSS 16 -> 79 MB, peak virtual 217 -> 437 MB
+  latin:1000:2 names 1000 chars/name 44 | p 60377 cp 61865 B | build 82 ms | compile 1 ms | backend peak RSS 16 -> 40 MB
+  latin:1000:4 names 1000 chars/name 78 | ERROR invalid memory alloc request size 1556529336 | backend peak RSS 16 -> 51 MB
+  latin:100:8 names 100 chars/name 146 | p 18976 cp 19564 B | build 11 ms | compile 11 ms | backend peak RSS 16 -> 28 MB, peak virtual 217 -> 296 MB
+  latin:1500:8 names 1500 chars/name 146 | ERROR regular expression failed: regular expression is too complex | backend peak RSS 16 -> 100 MB
+  latin:1:1 names 1 chars/name 27 | p 521 cp 1010 B | build 4 ms | compile 0 ms | backend peak RSS 16 -> 23 MB, peak virtual 217 -> 220 MB
+  latin:200:8 names 200 chars/name 146 | p 37576 cp 38264 B | build 16 ms | compile 24 ms | backend peak RSS 16 -> 33 MB, peak virtual 217 -> 475 MB
+  latin:300:8 names 300 chars/name 146 | p 56176 cp 56964 B | build 24 ms | compile 34 ms | backend peak RSS 16 -> 38 MB, peak virtual 217 -> 757 MB
+  latin:300:8 names 300 chars/name 146 | p 56176 cp 56964 B | build 61 ms | compile 1 ms | backend peak RSS 16 -> 39 MB
+  latin:400:8 names 400 chars/name 146 | p 74776 cp 75664 B | build 29 ms | compile 48 ms | backend peak RSS 16 -> 43 MB, peak virtual 217 -> 1144 MB
+  latin:440:8 names 440 chars/name 146 | p 82216 cp 83144 B | build 33 ms | compile 61 ms | backend peak RSS 16 -> 45 MB, peak virtual 217 -> 1327 MB
+  latin:440:8 names 440 chars/name 146 | p 82216 cp 83144 B, 207 distinct, L x D 17018712 | build 31 ms | compile 54 ms | backend peak RSS 16 -> 45 MB, peak virtual 217 -> 1327 MB
+  latin:450:8 names 450 chars/name 146 | p 84076 cp 85014 B, 207 distinct, L x D 17403732 | build 32 ms | ERROR invalid memory alloc request size 1090592832 | backend peak RSS 16 -> 45 MB, peak virtual 217 -> 241 MB
+  latin:50:1 names 50 chars/name 27 | p 2375 cp 2913 B | build 9 ms | compile 1 ms | backend peak RSS 16 -> 25 MB
+  latin:600:8 names 600 chars/name 146 | ERROR invalid memory alloc request size 1940986152 | backend peak RSS 16 -> 54 MB
+  latin:86:8 names 86 chars/name 146 | p 16385 cp 16959 B, 207 distinct, L x D 3391695 | build 14 ms | compile 13 ms | backend peak RSS 16 -> 27 MB, peak virtual 217 -> 279 MB
+  long:1:1000 names 1 chars/name 17008 | p 21497 cp 21986 B | build 10 ms | compile 13 ms | backend peak RSS 16 -> 29 MB, peak virtual 217 -> 312 MB
+  long:1:1500 names 1 chars/name 25508 | p 31997 cp 32486 B | build 13 ms | compile 21 ms | backend peak RSS 16 -> 32 MB, peak virtual 217 -> 408 MB
+  long:1:2000 names 1 chars/name 34008 | p 42497 cp 42986 B | build 15 ms | compile 27 ms | backend peak RSS 16 -> 36 MB, peak virtual 217 -> 540 MB
+  long:1:2500 names 1 chars/name 42508 | p 52997 cp 53486 B | build 18 ms | compile 36 ms | backend peak RSS 16 -> 39 MB, peak virtual 217 -> 706 MB
+  long:1:2500 names 1 chars/name 42508 | p 52997 cp 53486 B, 198 distinct, L x D 10493406 | build 19 ms | compile 35 ms | backend peak RSS 16 -> 39 MB, peak virtual 217 -> 706 MB
+  long:1:2800 names 1 chars/name 47608 | p 59297 cp 59786 B | build 20 ms | ERROR invalid regular expression: regular expression is too complex | backend peak RSS 16 -> 34 MB, peak virtual 217 -> 230 MB
+  long:1:2800 names 1 chars/name 47608 | p 59297 cp 59786 B, 198 distinct, L x D 11740806 | build 20 ms | ERROR invalid regular expression: regular expression is too complex | backend peak RSS 16 -> 34 MB, peak virtual 217 -> 230 MB
+  long:1:3000 names 1 chars/name 51008 | p 63497 cp 63986 B | build 29 ms | ERROR invalid regular expression: regular expression is too complex | backend peak RSS 16 -> 35 MB, peak virtual 217 -> 231 MB
+  long:1:3200 names 1 chars/name 54408 | p 67697 cp 68186 B | build 22 ms | ERROR invalid regular expression: regular expression is too complex | backend peak RSS 16 -> 35 MB, peak virtual 217 -> 231 MB
+  long:1:5000 names 1 chars/name 85008 | p 105497 cp 105986 B | build 36 ms | ERROR invalid regular expression: regular expression is too complex | backend peak RSS 16 -> 40 MB, peak virtual 217 -> 236 MB
+  long:1:6000 names 1 chars/name 102008 | p 126497 cp 126986 B | build 41 ms | ERROR invalid regular expression: regular expression is too complex | backend peak RSS 16 -> 42 MB, peak virtual 217 -> 238 MB
+  long:1:760 names 1 chars/name 12928 | p 16457 cp 16946 B, 198 distinct, L x D 3258486 | build 11 ms | compile 11 ms | backend peak RSS 16 -> 28 MB, peak virtual 217 -> 276 MB
+  symbol:1000:20 names 1000 chars/name 43 | p 45896 cp 129896 B | build 323 ms | compile 31 ms | backend peak RSS 16 -> 85 MB, peak virtual 217 -> 855 MB
+  symbol:1250:20 names 1250 chars/name 43 | p 57646 cp 162646 B | build 397 ms | compile 41 ms | backend peak RSS 16 -> 88 MB, peak virtual 217 -> 1136 MB
+  symbol:1250:20 names 1250 chars/name 43 | p 57646 cp 162646 B, 19 distinct, L x D 1095274 | build 382 ms | compile 38 ms | backend peak RSS 16 -> 88 MB, peak virtual 217 -> 1136 MB
+  symbol:1500:20 names 1500 chars/name 43 | p 69396 cp 195396 B | build 454 ms | ERROR invalid memory alloc request size 1102198500 | backend peak RSS 16 -> 92 MB, peak virtual 217 -> 367 MB
+  symbol:1500:20 names 1500 chars/name 43 | p 69396 cp 195396 B, 19 distinct, L x D 1318524 | build 465 ms | ERROR invalid memory alloc request size 1102198500 | backend peak RSS 16 -> 92 MB, peak virtual 217 -> 367 MB
+  symbol:2000:20 names 2000 chars/name 43 | p 92896 cp 260896 B | build 604 ms | ERROR invalid memory alloc request size 1976369220 | backend peak RSS 16 -> 99 MB, peak virtual 217 -> 376 MB
+  symbol:350:20 names 350 chars/name 43 | p 15995 cp 45395 B, 19 distinct, L x D 303905 | build 140 ms | compile 10 ms | backend peak RSS 16 -> 76 MB, peak virtual 217 -> 415 MB
+
+AT THE BOUND, the tree (the same probe; it compiles even a closed search's pattern, which no read does):
+  latin:85:8 names 85 chars/name 146 | p 16200 cp 16773 B, 207 distinct, L x D 3353400 | build 15 ms | compile 26 ms | backend peak RSS 16 -> 28 MB, peak virtual 219 -> 280 MB
+  han:50:40 names 50 chars/name 40 | p 2053 cp 6053 B, 2005 distinct, L x D 4116265 | build 48 ms | compile 5 ms | backend peak RSS 16 -> 74 MB, peak virtual 219 -> 523 MB
+  greek:28:8 names 28 chars/name 150 | p 16267 cp 24119 B, 221 distinct, L x D 3595007 | build 76 ms | compile 9 ms | backend peak RSS 16 -> 75 MB, peak virtual 219 -> 356 MB
+  symbol:350:20 names 350 chars/name 43 | p 15995 cp 45395 B, 19 distinct, L x D 303905 | build 132 ms | compile 9 ms | backend peak RSS 16 -> 78 MB, peak virtual 219 -> 417 MB
+  long:1:750 names 1 chars/name 12758 | p 16247 cp 16736 B, 198 distinct, L x D 3216906 | build 13 ms | compile 10 ms | backend peak RSS 16 -> 29 MB, peak virtual 219 -> 277 MB
+  glong:1:247 names 1 chars/name 4211 | p 16340 cp 24261 B, 212 distinct, L x D 3464080 | build 59 ms | compile 8 ms | backend peak RSS 16 -> 75 MB, peak virtual 219 -> 354 MB
+  latin:86:8 names 86 chars/name 146 | p 16385 cp 16959 B, 207 distinct, L x D 3391695 | build 10 ms | compile 10 ms | backend peak RSS 16 -> 28 MB, peak virtual 219 -> 281 MB
+  latin:600:8 names 600 chars/name 146 | p 111976 cp 113064 B, 207 distinct, L x D 23179032 | build 61 ms | ERROR invalid memory alloc request size 1940986152 | backend peak RSS 16 -> 53 MB, peak virtual 219 -> 250 MB
+
+THE TWIN'S COMPILE (measure/twin.mjs at the base's tree):
+  latin:50:1 names 50 | L 2375 D 207 | build 11 ms | 2,000 strings 6 ms (hits 0)
+  latin:100:8 names 100 | L 18976 D 207 | build 322 ms | 2,000 strings 23 ms (hits 0)
+  latin:300:8 names 300 | L 56176 D 207 | build 424 ms | 2,000 strings 325 ms (hits 0)
+  latin:600:8 names 600 | L 111976 D 207 | build 1503 ms | 2,000 strings 1232 ms (hits 0)
+  latin:1500:8 names 1500 | L 279877 D 207 | build 8671 ms | 2,000 strings 7755 ms (hits 0)
+  greek:100:8 names 100 | L 56876 D 221 | build 9 ms | 2,000 strings 8 ms (hits 0)
+  greek:400:8 names 400 | L 226376 D 221 | build 33 ms | 2,000 strings 16 ms (hits 0)
+  han:100:40 names 100 | L 4103 D 4005 | build 2 ms | 2,000 strings 3 ms (hits 0)
+  han:400:40 names 400 | L 16403 D 16005 | build 7 ms | 2,000 strings 4 ms (hits 0)
+  symbol:1500:20 names 1500 | L 69396 D 19 | build 25 ms | 2,000 strings 9 ms (hits 0)
+  long:1:1000 names 1 | L 21497 D 198 | build 86 ms | 2,000 strings 55 ms (hits 0)
+  long:1:6000 names 1 | ERROR SyntaxError: Invalid regular expression: /(?<![0-9A-Za-zÆÐØÞßæðøþĐđĦħıĸŁłŊŋŒœŦŧƀ-ƟƢ-ƮƱ-ǃǝǤǥǶǷ
+  latin:86:8 names 86 | L 16385 D 207 | build 301 ms | 2,000 strings 21 ms (hits 0)
+  han:51:40 names 51 | L 2094 D 2045 | build 1 ms | 2,000 strings 5 ms (hits 0)
+  greek:28:8 names 28 | L 16267 D 221 | build 2 ms | 2,000 strings 4 ms (hits 0)
+  symbol:350:20 names 350 | L 15995 D 19 | build 5 ms | 2,000 strings 3 ms (hits 0)
+  long:1:760 names 1 | L 16457 D 198 | build 301 ms | 2,000 strings 20 ms (hits 0)
+  glong:1:250 names 1 | L 16532 D 212 | build 1 ms | 2,000 strings 4 ms (hits 0)

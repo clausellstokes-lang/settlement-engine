@@ -132,6 +132,17 @@
 --       sorted array of the hit places by width_bucket (_gallery_veil_name_near, _gallery_veil_name_tokens). The
 --       separators-only names are asked as written once a string, in the same set. No answer moves: the same keys and
 --       strings leave, the floors, the bound and every rebuild unchanged; the twin is unchanged.
+--   (27) NO UNBOUNDED PATTERN (VEIL-17; REVIEW-VEIL-8's V8-9; the law: the closed answer at any bound, never an error):
+--       the one alternation was compiled with no bound on its size, so past a size the sharer controls the read RAISED
+--       where 211 serves (600 houses of 145 characters: an allocation of 1.9 GB refused; 1,500: too complex). The
+--       search's patterns, the alternation and every open name cut out, now carry ONE BOUND, the same in both engines
+--       (_gallery_veil_name_search, gallerySecondHomes.js :: NAME_SEARCH_BOUND): 16,384 code points together, a weight of
+--       4,194,304 (each pattern's code points times its distinct code points: the match's memory grows as its states
+--       times its colours) and 16 cut-outs. Past it nothing is compiled and the search is CLOSED (its patterns are kept,
+--       never run): every key and string
+--       of the projection may hold a hidden name and leaves as a hit would, the floors aside (_gallery_veil_name_hits
+--       answers every token, as where the marks' count differs), so the read sends the town's name alone; a run of the
+--       search that raises answers the same. Below it no answer moves. Section 4c states the measures.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -411,6 +422,18 @@ $$;
 -- each name a hidden house 3.14 times); now each child's tokens are counted once at its level (a count of its
 -- quotation marks: no regular expression, no preparation) and asked of the sorted places in logarithmic time (1.64 to
 -- 1.80 and 1.14 times, medians on the native cluster).
+-- THE PATTERN'S BOUND (VEIL-17, V8-9; docs/chair/2026-11-19/veil/out/V89-cost.txt): PostgreSQL's match of one pattern
+-- asks its memory at once, about 32 bytes times its states times its colours, and a quarter byte times its states
+-- squared, and refuses one request past a gigabyte; it refuses a pattern of too many states as too complex. Measured on
+-- the base (the pattern's code points L, its distinct code points D): 450 Latin names of 145 characters (L 84,076, D 207)
+-- refused, 440 served (82,216: 1.3 GB of address space taken); one Latin name of 47,608 characters (L 59,297) too
+-- complex, of 42,508 (53,000) served; 150 Han names of 40 distinct characters (L x D 36.9 million) refused, 135 served
+-- (29.9 million: 1.65 GB of address space). The 240 born towns of the born probe, EVERY house hidden whole: L at most
+-- 3,413 (Albaorum; Langengrund 3,402), L x D at most 740,621, at most two cut-outs (1,000 code points, weight 193,000).
+-- So the bound: L 16,384 together (3.7 times the largest birth with its cut-outs, a third of the least refusal), the
+-- weight 4,194,304 (4.5 times the births, a seventh of the least refusal) and 16 cut-outs (8 times the births). At the
+-- bound (Latin, Greek, Han, symbols, one long name) a pattern compiles and matches in 26 ms or less, the backend's peak
+-- resident size 78 MB or less and its address space 523 MB or less.
 
 -- [212: NEW] public._gallery_veil_name_sep
 -- THE SEPARATORS, as the body of a bracket expression; `quote` false leaves the quotation mark out (the fold of a
@@ -655,9 +678,14 @@ $$;
 -- THE BOUNDARY (COHERENCE-VEIL-12; V8-1): where an end of a name is in the blocking table (_gallery_veil_name_bound), the
 -- neighbour on that side must not be; asked by a lookbehind and a lookahead, which consume nothing, so two hits that
 -- share one neighbour are both found and a cut-out puts back nothing but its mark.
+-- THE PATTERN'S BOUND (VEIL-17, V8-9; section 4c): the search is CLOSED ("closed": true beside what was built, which is
+-- then never compiled) where its patterns, `p` and every cut-out, pass 16,384 code points together, or their weight
+-- (each one's code points times its distinct code points, summed) passes 4,194,304, or there are more than 16 cut-outs;
+-- and where seeking the cut-outs raises. `p` alone is asked first, as the cut-outs are sought by running it.
 create or replace function public._gallery_veil_name_search(names text[], opens text[])
 returns jsonb language plpgsql immutable as $$
 declare
+  wp bigint;           -- `p`'s weight: its code points times its distinct code points (V8-9)
   -- one character of the blocking table: an end of a name in it asks a boundary, and a neighbour in it blocks the name
   bnd text := '[' || public._gallery_veil_name_bound() || ']';
   lbd text := '(?<!' || bnd || ')';   -- a left boundary: the text's start, or a neighbour before that is not in the table
@@ -697,10 +725,17 @@ begin
                                  else '(?:' || alt || ')' end, '|' order by lb desc, rb desc) from g)
     into raws, keys, p;
   if p is null and raws = '[]' then return null; end if;
+  -- V8-9, THE BOUND, on `p` alone: past it nothing is compiled, and the search is closed
+  if p is not null then
+    if length(p) > 16384 then return jsonb_build_object('p', p, 'raw', raws, 'blank', blank, 'closed', true); end if;
+    wp := length(p)::bigint * (select count(distinct c collate "C") from string_to_table(p, null) c);
+    if wp > 4194304 then return jsonb_build_object('p', p, 'raw', raws, 'blank', blank, 'closed', true); end if;
+  end if;
   if p is not null and cardinality(opens) > 0 then
     -- the open names that hold a hidden name (asked together: each made ready, between quotation marks, and `p` run
     -- once over them all, a mark set before each name it finds, inside its string: `p` consumes no neighbour), less
-    -- those that ARE a hidden name (the same letters)
+    -- those that ARE a hidden name (the same letters); where that raises, the search is closed (V8-9)
+    begin
     with o1 as (select distinct public._gallery_veil_name_ready(translate(x, '"', ' '), null) as po from unnest(opens) x where x is not null and x <> ''),
          held as (select distinct btrim(replace(m[1], chr(1), ''), '"') as po
                     from regexp_matches(regexp_replace((select coalesce(string_agg('"' || po || '"', ''), '') from o1), p, chr(1) || '\&', 'g'), '"[^"]*"', 'g') m
@@ -713,6 +748,15 @@ begin
     select coalesce(jsonb_agg(case when lb then lbd else '' end || needle || case when rb then '(?:e?s)?' || rbd else '' end
                               order by length(k) desc, k collate "C", f collate "C"), '[]')
       into blank from o3 where not (k = any(keys));
+    exception when others then return jsonb_build_object('p', p, 'raw', raws, 'blank', '[]'::jsonb, 'closed', true);
+    end;
+    -- V8-9, THE BOUND, on `p` and the cut-outs together
+    if jsonb_array_length(blank) > 16
+       or length(p) + (select coalesce(sum(length(b)), 0) from jsonb_array_elements_text(blank) b) > 16384
+       or wp + (select coalesce(sum(length(b)::bigint * (select count(distinct c collate "C") from string_to_table(b, null) c)), 0)
+                  from jsonb_array_elements_text(blank) b) > 4194304 then
+      return jsonb_build_object('p', p, 'raw', raws, 'blank', blank, 'closed', true);
+    end if;
   end if;
   return jsonb_build_object('p', p, 'raw', raws, 'blank', blank);
 end $$;
@@ -771,6 +815,9 @@ $$;
 -- answer: the walk then withholds every string and key but the floors. Whether one string or key holds a hidden name
 -- is from here on a look-up among these (_gallery_veil_name_hit, _named, _sweep): the alternation is never run a
 -- string at a time, and no text is made ready again.
+-- THE CLOSED ANSWER (VEIL-17, V8-9): a closed search (past THE PATTERN'S BOUND, _gallery_veil_name_search), and a run of
+-- the search that raises, answer every token, as above: where the veil cannot ask, every string and key may hold a
+-- hidden name.
 create or replace function public._gallery_veil_name_hits(v jsonb, srch jsonb)
 returns jsonb language plpgsql immutable as $$
 declare
@@ -784,8 +831,12 @@ declare
   an text[];
   h jsonb := '{}';
 begin
+  if coalesce(srch -> 'closed' = 'true'::jsonb, false) then
+    return coalesce((select jsonb_object_agg(u.t, true) from unnest(string_to_array(public._gallery_veil_name_json(r), '"')) with ordinality u(t, o) where u.o % 2 = 0), '{}');
+  end if;
   if p is null and raws = '[]' then return '{}'; end if;
   if p is not null then
+    begin
     n := r;
     if position(chr(92) in n) > 0 then n := regexp_replace(n, '\\(?:u[0-9a-fA-F]{4}|.)', ' ', 'g'); end if;
     n := public._gallery_veil_name_ready(n, srch -> 'blank');
@@ -799,6 +850,9 @@ begin
       select coalesce(jsonb_object_agg(u.b, true), '{}') into h
         from unnest(an, aq) with ordinality u(a, b, o) where u.o % 2 = 0 and position(chr(1) in u.a) > 0;
     end if;
+    exception when others then
+      return coalesce((select jsonb_object_agg(u.t, true) from unnest(string_to_array(public._gallery_veil_name_json(r), '"')) with ordinality u(t, o) where u.o % 2 = 0), '{}');
+    end;
   end if;
   if raws <> '[]' then
     if q is null then q := public._gallery_veil_name_json(r); aq := string_to_array(q, '"'); end if;

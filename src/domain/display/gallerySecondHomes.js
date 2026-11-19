@@ -218,6 +218,13 @@ export const NAME_PAD = [
 ].join('');
 /** A hidden name at or below this level is not walked to: the container AT this level is withheld whole (the root is level 0). */
 export const NAME_WALK_BOUND = 64;
+/**
+ * THE PATTERN'S BOUND (VEIL-17, V8-9): past it the name search is CLOSED and nothing is compiled. `size`: the code points
+ * of the search's patterns (the alternation and every cut-out) together; `weight`: each pattern's code points times its
+ * distinct code points, summed (a match's memory grows as its states times its colours); `cuts`: the cut-outs. SQL twin:
+ * _gallery_veil_name_search, the same three numbers (212 section 4c states the measures).
+ */
+export const NAME_SEARCH_BOUND = Object.freeze({ size: 16384, weight: 4194304, cuts: 16 });
 
 /**
  * THE CASE CLASSES: each a lower-case letter followed by every other code point that is the same letter in another case;
@@ -432,13 +439,49 @@ function byCodePoint(a, b) {
  * @property {string[]} blank       the open names that hold a hidden name and are not one, as patterns, longest first
  * @property {(t: string) => boolean} hit    one string or key holds a hidden name
  * @property {(v: unknown) => boolean} holds some key or string of the value, at any depth, holds one
+ * @property {boolean} [closed]     past THE PATTERN'S BOUND (V8-9): every string and key may hold one (SQL: `closed`)
  */
+
+/** A pattern's code points, and its weight: its code points times its distinct code points (SQL: length(p), and that times count(distinct)). @param {string} t */
+function patternSize(t) {
+  const cs = Array.from(t);
+  return { size: cs.length, weight: cs.length * new Set(cs).size };
+}
+
+/** @param {(t: string) => boolean} hit @returns {(v: unknown) => boolean} some key or string of the value, at any depth, is a hit */
+function holdsBy(hit) {
+  /** @param {unknown} v @returns {boolean} without a call a level: a value may be thousands of levels deep */
+  return (v) => {
+    /** @type {unknown[]} */
+    const todo = [v];
+    while (todo.length) {
+      const x = todo.pop();
+      if (typeof x === 'string') { if (hit(x)) return true; } else if (Array.isArray(x)) { for (const y of x) todo.push(y); } else if (isRec(x)) {
+        for (const k of Object.keys(x)) { if (hit(k)) return true; todo.push(x[k]); }
+      }
+    }
+    return false;
+  };
+}
+
+/**
+ * THE CLOSED SEARCH (VEIL-17, V8-9): past THE PATTERN'S BOUND, or where a pattern cannot be compiled, nothing is asked and
+ * every string and key may hold a hidden name: each leaves as a hit would, the floors aside. What was built is kept and
+ * never compiled. SQL twin: the search with "closed": true, to which _gallery_veil_name_hits answers every token.
+ * @param {string|null} pattern @param {string[]} raws @param {string[]} blank @returns {NameSearch}
+ */
+function closedSearch(pattern, raws, blank) {
+  const hit = () => true;
+  return { pattern, raws, blank, hit, holds: holdsBy(hit), closed: true };
+}
 
 /**
  * THE SEARCH, built once a projection from every name of the houses removed whole and every open name. A name's forms:
  * itself, and itself without its bracketed qualifier. THE BOUNDARY (COHERENCE-VEIL-12; V8-1): where an end of a name is
  * in the blocking table (NAME_BOUND), the neighbour on that side must not be; asked by a lookbehind and a lookahead,
- * which consume nothing. SQL twin: _gallery_veil_name_search.
+ * which consume nothing. THE PATTERN'S BOUND (VEIL-17, V8-9): the pattern alone first, then with the cut-outs; past it
+ * (NAME_SEARCH_BOUND), or where a pattern cannot be compiled, the search is closed (closedSearch). SQL twin:
+ * _gallery_veil_name_search.
  * @param {Iterable<unknown>} names @param {Iterable<unknown>} opens @returns {NameSearch|null}
  */
 export function buildNameSearch(names, opens) {
@@ -469,23 +512,39 @@ export function buildNameSearch(names, opens) {
     parts.push(`${lb ? LEFT_BOUND : ''}(?:${alt})${rb ? `(?:e?s)?${RIGHT_BOUND}` : ''}`);
   }
   const pattern = parts.length ? parts.join('|') : null;
-  const re = pattern === null ? null : new RegExp(pattern, 'u');
+  // V8-9, THE BOUND, on the pattern alone: past it nothing is compiled, and the search is closed
+  const own = pattern === null ? { size: 0, weight: 0 } : patternSize(pattern);
+  const raws = [...rawSet].sort(byCodePoint);
+  if (own.size > NAME_SEARCH_BOUND.size || own.weight > NAME_SEARCH_BOUND.weight) return closedSearch(pattern, raws, []);
+  /** @param {string} source @param {string} flags @returns {RegExp} compiled now, for both widths of text */
+  const compiled = (source, flags) => { const r = new RegExp(source, flags); r.test(''); r.test('\u0100'); r.lastIndex = 0; return r; };
+  /** @type {RegExp|null} */
+  let re = null;
   /** @type {Map<string, string>} the fold of an open name that holds a hidden one and is not one -> its letters */
   const held = new Map();
-  if (re) {
-    for (const o of opens) {
-      if (typeof o !== 'string' || o === '') continue;
-      const po = madeReady(o.replace(/"/g, ' '));
-      if (!re.test(po)) continue;
-      const f = nameFold(po);
-      if (f !== '' && !letters.has(lettersOf(f))) held.set(f, lettersOf(f));
+  try {
+    re = pattern === null ? null : compiled(pattern, 'u');
+    if (re) {
+      for (const o of opens) {
+        if (typeof o !== 'string' || o === '') continue;
+        const po = madeReady(o.replace(/"/g, ' '));
+        if (!re.test(po)) continue;
+        const f = nameFold(po);
+        if (f !== '' && !letters.has(lettersOf(f))) held.set(f, lettersOf(f));
+      }
     }
-  }
+  } catch { return closedSearch(pattern, raws, []); }
   const blank = [...held.entries()]
     .sort(([fa, ka], [fb, kb]) => (Array.from(kb).length - Array.from(ka).length) || byCodePoint(ka, kb) || byCodePoint(fa, fb))
     .map(([f]) => { const e = ends(f); return `${e.lb ? LEFT_BOUND : ''}${needleOf(f)}${e.rb ? `(?:e?s)?${RIGHT_BOUND}` : ''}`; });
-  const cuts = blank.map(b => new RegExp(b, 'gu'));
-  const raws = [...rawSet].sort(byCodePoint);
+  // V8-9, THE BOUND, on the pattern and the cut-outs together
+  const cutSizes = blank.map(patternSize);
+  if (blank.length > NAME_SEARCH_BOUND.cuts
+    || cutSizes.reduce((a, c) => a + c.size, own.size) > NAME_SEARCH_BOUND.size
+    || cutSizes.reduce((a, c) => a + c.weight, own.weight) > NAME_SEARCH_BOUND.weight) return closedSearch(pattern, raws, blank);
+  /** @type {RegExp[]} */
+  let cuts;
+  try { cuts = blank.map(b => compiled(b, 'gu')); } catch { return closedSearch(pattern, raws, blank); }
   /** @param {string} t @returns {boolean} */
   const hit = (t) => {
     if (raws.some(r => t.includes(r))) return true;
@@ -494,19 +553,7 @@ export function buildNameSearch(names, opens) {
     for (const c of cuts) ready = ready.replace(c, CUT);
     return re.test(ready);
   };
-  /** @param {unknown} v @returns {boolean} without a call a level: a value may be thousands of levels deep */
-  const holds = (v) => {
-    /** @type {unknown[]} */
-    const todo = [v];
-    while (todo.length) {
-      const x = todo.pop();
-      if (typeof x === 'string') { if (hit(x)) return true; } else if (Array.isArray(x)) { for (const y of x) todo.push(y); } else if (isRec(x)) {
-        for (const k of Object.keys(x)) { if (hit(k)) return true; todo.push(x[k]); }
-      }
-    }
-    return false;
-  };
-  return { pattern, raws, blank, hit, holds };
+  return { pattern, raws, blank, hit, holds: holdsBy(hit) };
 }
 
 const NO_FLOOR = Object.freeze(/** @type {string[]} */ ([]));

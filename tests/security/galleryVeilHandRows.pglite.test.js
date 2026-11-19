@@ -95,6 +95,14 @@
  *                        this engine, over every code point of every plane: the marks are the tokens (made ready, a text
  *                        keeps exactly the quoted runs of its JSON spelling), and lower() in the C collation is A-Z alone.
  *         THE SCALE      the V8-3 row's shape at N and at 4N rows: the name pass and the walk under 8 times as long at 4N.
+ *   V8-9  THE PATTERN'S BOUND (REVIEW-VEIL-212-8's V8-9; built for VEIL-17; the law: the closed answer at any bound, never
+ *         an error; a read never fails where 211 serves). One arm: the reader's rows (600 houses hidden whole of 145
+ *         characters, 1,000 of 80, 1,500 of 145), 600 in Greek and 1,000 in Cyrillic with a dotted capital I and a sharp s,
+ *         2,000 of symbols only, one open name of 100,000 characters that holds a hidden one: every read (gallery, link,
+ *         import, the twin; Reveal DM off and on) serves the closed answer (the town's name alone) and no hidden name. The
+ *         bound's neighbourhood, each of its three measures (16,384 code points, a weight of 4,194,304, 16 cut-outs): just
+ *         under, the exact answer (a string that names a hidden house loses it, one that names none arrives, the open houses
+ *         stay); just over, the closed answer. The server's own search measured on each row; server against twin, 0 paths.
  */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -1498,5 +1506,114 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     const ratio = median(t4) / median(t1);
     if (process.env.VEIL_V83_SCALE_OUT) writeFileSync(process.env.VEIL_V83_SCALE_OUT, `N ${N}: ${t1.map(x => x.toFixed(1)).join(' ')} ms; 4N ${4 * N}: ${t4.map(x => x.toFixed(1)).join(' ')} ms; medians ${median(t1).toFixed(1)} | ${median(t4).toFixed(1)}; ratio ${ratio.toFixed(2)}\n`, { flag: 'a' });
     expect(ratio, `4N takes ${ratio.toFixed(2)} times N`).toBeLessThan(8);
+  }, ARM_TIMEOUT_MS);
+
+  it('V8-9 THE PATTERN\'S BOUND: the reader\'s rows (600 houses hidden whole of 145 characters, 1,000 of 80, 1,500 of 145), as many in Greek and in Cyrillic with a dotted capital I and a sharp s, 2,000 of symbols only, and one open name of 100,000 characters that holds a hidden one: every read (gallery, link, import; Reveal DM off and on) serves, sends no hidden name, and the server and the twin send the same document, the closed answer; just under each of the three bounds (code points, weight, cut-outs) the exact answer, and just over the closed answer, in both engines', async () => {
+    const t0 = performance.now();
+    // THE BOUND, the law's three numbers: 212 :: _gallery_veil_name_search, and the twin's NAME_SEARCH_BOUND
+    const BOUND = { size: 16384, weight: 4194304, cuts: 16 };
+    const { NAME_SEARCH_BOUND } = await import('../../src/domain/display/gallerySecondHomes.js');
+    const bad = [];
+    const summary = [];
+    if (JSON.stringify(NAME_SEARCH_BOUND) !== JSON.stringify(BOUND)) bad.push(`the twin's bound is ${JSON.stringify(NAME_SEARCH_BOUND)}`);
+    const latin = (n, w) => Array.from({ length: n }, (_, i) => `Aa guild ${i + 1}${' of the long name'.repeat(w)}`);
+    const greek = (n) => Array.from({ length: n }, (_, i) => `Αδελφότητα ${i + 1} İΣΚΙΑΣ ΣΤΡΑßΕ${' της μακριάς οδού'.repeat(7)}`);
+    const cyrillic = (n) => Array.from({ length: n }, (_, i) => `Братство ${i + 1} İ Straße${' долгого имени'.repeat(5)}`);
+    const symbols = (n) => Array.from({ length: n }, (_, i) => `${String.fromCodePoint(0x2600 + (i % 100), 0x2700 + Math.floor(i / 100))}${'♜♞'.repeat(20)}`);
+    const han = (n, w) => Array.from({ length: n }, (_, i) => String.fromCodePoint(...Array.from({ length: w }, (_, j) => 0x4e00 + i * w + j)));
+    const annexes = (n) => Array.from({ length: n }, (_, i) => `Red hand annex ${i + 1}`);
+    // [the row, the names of the houses hidden whole, the open houses beside the Fish market, a string that names a
+    // hidden house, a string that names none (an open name cut out holds the hidden one only inside it), closed]
+    const ROWS = [
+      // the bound's neighbourhood first: the base serves these, so a red run on the base's bytes asks every one
+      ['just under the code points (85 x 145)', latin(85, 8), [], null, 'plain cargo line', false],
+      ['just over the code points (86 x 145)', latin(86, 8), [], null, 'plain cargo line', true],
+      ['just under the weight (50 Han names of 40 distinct characters)', han(50, 40), [], null, 'plain cargo line', false],
+      ['just over the weight (51 Han names of 40 distinct characters)', han(51, 40), [], null, 'plain cargo line', true],
+      ['just under the cut-outs (16)', ['Red hand'], annexes(16), 'Paid the Red hand twice', 'Paid the Red hand annex 3 twice', false],
+      ['just over the cut-outs (17)', ['Red hand'], annexes(17), 'Paid the Red hand twice', 'Paid the Red hand annex 3 twice', true],
+      // the rows on which the base raises (the 100,000 last: on the base's bytes its raise leaves this database unsteady)
+      ['the reader\'s 600 x 145', latin(600, 8), [], null, 'plain cargo line', true],
+      ['the reader\'s 1,000 x 80', latin(1000, 4), [], null, 'plain cargo line', true],
+      ['the reader\'s 1,500 x 145', latin(1500, 8), [], null, 'plain cargo line', true],
+      ['600 in Greek, a dotted capital I and a sharp s', greek(600), [], null, 'plain cargo line', true],
+      ['1,000 in Cyrillic, a dotted capital I and a sharp s', cyrillic(1000), [], null, 'plain cargo line', true],
+      ['2,000 of symbols only', symbols(2000), [], null, 'plain cargo line', true],
+      ['one open name of 100,000 characters that holds a hidden one', ['Red hand'], [`Red hand ${'x'.repeat(99991)}`], 'Paid the Red hand twice', 'plain cargo line', true],
+    ];
+    const read = async (q, args, uid = '') => {
+      await db.exec(`set test.uid = '${uid}';`);
+      try { const d = (await db.query(q, args)).rows[0]?.d; return isRec(d) ? { doc: d } : { error: 'no document' }; } catch (e) { return { error: String(e?.message || e).slice(0, 90) }; } finally { await db.exec(`set test.uid = '';`); }
+    };
+    const exact = {};
+    const report = () => { if (process.env.VEIL_V89_SUMMARY) writeFileSync(process.env.VEIL_V89_SUMMARY, `${summary.join('\n')}\n${bad.length} faults\n${bad.slice(0, 60).join('\n')}\n`); };
+    for (const [row, names, opens, hit0, miss, closed] of ROWS) try {
+      const hit = hit0 ?? `note on ${names[1] ?? names[0]}`;
+      const houses = names.map((n, i) => hiddenHouse(`h${i + 1}`, n));
+      const town = { name: 'Costwell', tier: 'town',
+        institutions: [...houses, { id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' }, ...opens.map((o, i) => ({ id: `open${i + 1}`, name: o, category: 'Economy', desc: 'Open.' }))],
+        powerStructure: { factions: [{ faction: 'Harbour Board', power: 5 }] },
+        economicState: { rows: [{ d: hit }, { d: miss }] } };
+      // the server's own search, as the read builds it (the open names: the houses still listed, the shown power)
+      let srch = null;
+      try { srch = (await db.query('select public._gallery_veil_name_search($1::text[], $2::text[]) as s', [names, ['Fish market', ...opens, 'Harbour Board']])).rows[0].s; } catch (e) { bad.push(`${row}: the server's search raises (${String(e?.message || e).slice(0, 90)})`); }
+      const pats = srch && typeof srch.p === 'string' ? [srch.p, ...(srch.blank || [])] : [];
+      const size = pats.reduce((a, t) => a + Array.from(t).length, 0);
+      const weight = pats.reduce((a, t) => a + Array.from(t).length * new Set(Array.from(t)).size, 0);
+      const cuts = (srch?.blank || []).length;
+      if (closed && srch?.closed !== true) bad.push(`${row}: the server's search is not closed (${size} code points, weight ${weight}, ${cuts} cut-outs)`);
+      if (!closed && (srch?.closed || size > BOUND.size || weight > BOUND.weight || cuts > BOUND.cuts)) bad.push(`${row}: the server's search is not under the bound (${srch?.closed ? 'closed' : `${size} code points, weight ${weight}, ${cuts} cut-outs`})`);
+      seq += 1;
+      const ov = { [veil.VEIL_OVERRIDE_KEY]: { v: 1, mode: 'live', deltas: hide(...houses) } };
+      const r = {};
+      for (const [share, dm] of [['veil', false], ['dm', true]]) {
+        const slug = `bound${seq}-${share}`;
+        await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides,gallery_share_dm,gallery_importable)
+          values (gen_random_uuid(), $1, $2, 'town', $3::jsonb, true, $4, now(), $5, 'unlisted', $6::jsonb, $7, true)`, [OWNER, town.name, JSON.stringify(town), slug, `${slug}-l`, JSON.stringify(ov), dm]);
+        r[share] = {
+          gallery: await read('select to_jsonb(g.data) as d from public.get_gallery_dossier($1) g', [slug]),
+          link: await read(`select public.get_unlisted_dossier($1) -> 'dossier' as d`, [`${slug}-l`]),
+          import: await read('select to_jsonb(g.data) as d from public.import_gallery_dossier($1) g', [slug], READER),
+        };
+        try { r[share].client = { doc: veil.projectShareVeil(veil.galleryPayloadFor(JSON.parse(JSON.stringify(town)), { shareDm: dm, memberOverrides: ov }), ov) }; } catch (e) { r[share].client = { error: `the twin throws: ${String(e?.message || e).slice(0, 80)}` }; }
+      }
+      let served = 0; let shut = 0;
+      for (const s of ['veil', 'dm']) for (const k of ['gallery', 'link', 'import', 'client']) {
+        const { doc, error } = r[s][k];
+        const tag = `${row}: ${s}/${k}`;
+        if (error) { bad.push(`${tag} raises (${error})`); continue; }
+        served += 1;
+        for (const n of [names[0], names[1], names[names.length - 1], hit].filter(x => typeof x === 'string')) bad.push(...arrivals(doc, n, { unless: [/Red hand annex/] }).map(a => `${tag}: ${a.slice(0, 140)}`));
+        const isClosed = JSON.stringify(doc) === JSON.stringify({ name: 'Costwell' });
+        if (isClosed) shut += 1;
+        if (closed && !isClosed) bad.push(`${tag}: not the closed answer (${Object.keys(doc).join(', ')})`);
+        if (!closed) {
+          // THE EXACT ANSWER: the string that names a hidden house loses it, the one that names none arrives, the open houses stay
+          if (JSON.stringify(doc.economicState?.rows) !== JSON.stringify([{}, { d: miss }])) bad.push(`${tag}: the rows are ${JSON.stringify(doc.economicState?.rows).slice(0, 120)}`);
+          if (JSON.stringify((doc.institutions || []).map(i => i.name)) !== JSON.stringify(['Fish market', ...opens])) bad.push(`${tag}: institutions[] lists ${JSON.stringify((doc.institutions || []).map(i => i.name)).slice(0, 120)}`);
+        }
+      }
+      // SERVER AGAINST TWIN, every read (the party link against the twin of the veiled share)
+      const paths = [];
+      for (const s of ['veil', 'dm']) {
+        const tw = r[s].client.doc;
+        if (!tw) continue;
+        for (const k of ['gallery', 'import']) if (r[s][k].doc) paths.push(...differ(r[s][k].doc, tw).map(d => `${row}: ${s}/${k}: ${d}`));
+        if (r[s].link.doc && r.veil.client.doc) paths.push(...differ(r[s].link.doc, r.veil.client.doc).map(d => `${row}: ${s}/link: ${d}`));
+      }
+      bad.push(...paths.slice(0, 5));
+      if (!closed) exact[row] = r;
+      summary.push(`${row}: ${srch === null ? 'the search raises' : srch.closed ? 'closed' : `${size} code points, weight ${weight}, ${cuts} cut-outs`}; served ${served} of 8, the closed answer ${shut} of 8, server against twin ${paths.length} paths`);
+      report();
+    } catch (e) {
+      // a raise can leave an in-process database unsteady (V7-10): the row is a fault, and the next rows are still asked
+      bad.push(`${row}: the arm's database raises (${String(e?.message || e).slice(0, 90)})`);
+      summary.push(`${row}: the arm's database raises (${String(e?.message || e).slice(0, 90)})`);
+      report();
+    }
+    summary.push(`the arm: ${((performance.now() - t0) / 1000).toFixed(1)} s`);
+    if (process.env.VEIL_V89_OUT) writeFileSync(process.env.VEIL_V89_OUT, `${JSON.stringify(exact)}\n`);
+    report();
+    expect(bad).toEqual([]);
   }, ARM_TIMEOUT_MS);
 });
