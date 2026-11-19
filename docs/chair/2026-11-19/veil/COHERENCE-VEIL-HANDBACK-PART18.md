@@ -141,3 +141,13 @@ CLEARANCE STANDARD: at FINAL the reader re-runs the differ; every differing path
 (a or b), or ruled diffuse (VR8), or rng-only (VR13): zero unregistered paths."
 FOR THE SUCCESSOR: the registry's first rows are the differ's 130 / 113 paths (run it first: it is the list); VR11 and
 VR12 are rules of the registry (a share re-derived like VR6; a composed block follows its inputs' rule).
+
+RULING VR14 (2026-11-19 07:02 UTC, copied whole), on the differ's 49 DERIVED NUMBERS: "in scope by what a number can be
+made to say (the repository is public, so a precise figure with a hidden term can be inverted from the known formula).
+(i) Numbers that measure crime or the underworld itself (criminalEffective, criminalPreStress, blackMarketCapture, the
+compound's criminal figures, crime counts and types, safetyRatio while it carries the crime term): WITHHELD. (ii) Shares
+or counts that must add up: RE-DERIVED to add up (VR6, VR11) or withheld. (iii) PAYLOAD MINIMISATION: a non-owner read
+carries any other derived number only in the form a shared page DRAWS it (band or label or drawn score); a raw figure no
+shared page draws is not sent. (iv) What a shared page draws stays, recorded as DIFFUSE (VR8), unless the reader's
+differ shows the drawn form alone identifies a house (then it is (i)). The registry records each number under (i) to
+(iv); at FINAL a precise figure with a hidden term reaching a non-owner read undrawn is a finding."
