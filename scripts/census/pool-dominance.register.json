@@ -5893,6 +5893,24 @@
       "top5": 1,
       "lines": 1,
       "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-18; BRIEF-LASTCLOSE.md, the ruled ones: the last small round's pool, LAST-DECLARE, point 69): the door's own bankNew narrowed to this pool (a drawn pool with no row, at the higher of the two corpora's readings), NOT --bank-new, which would also bank the base's three unregistered pools (listed for the chair)"
+    },
+    "ledger:institutionDescVariants:DESC_VARIANT_SIBLINGS": {
+      "top1": 0.9916,
+      "top5": 1,
+      "lines": 2,
+      "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-19, the chair's ruling on its hand-back's §3 (1)), through the door's own bankNew narrowed to this pool (at the higher of the two corpora's readings), NOT --bank-new: two-line sibling pool; the second line's declaration refuses it in most towns (a true line passed over, LR3), so one line prints 99%; no draw prints false; on the post-deploy variety list (the chair, last close)"
+    },
+    "ledger:safetyProfile:STANDARD_PATROL": {
+      "top1": 0.2984,
+      "top5": 1,
+      "lines": 4,
+      "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-19, the chair's ruling on its hand-back's §3 (1)), through the door's own bankNew narrowed to this pool (at the higher of the two corpora's readings), NOT --bank-new: K-WATCH-2's pool, points 48/49/57, named at its landing; top1 0.30, not lopsided; registered at the last close"
+    },
+    "ledger:trade-list:imports": {
+      "top1": 0.1344,
+      "top5": 0.5724,
+      "lines": 15,
+      "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-19, the chair's ruling on its hand-back's §3 (1)), through the door's own bankNew narrowed to this pool (at the higher of the two corpora's readings), NOT --bank-new: point 68's imports list (FR24); 15 lines, top1 0.13, not lopsided; registered at the last close"
     }
   }
 }
