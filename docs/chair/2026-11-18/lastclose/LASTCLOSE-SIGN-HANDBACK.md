@@ -7,7 +7,7 @@ AUTHORITY: the owner's word in the chair's chat, about 19:07 UTC 2026-11-18, **"
 files again, and the golden door's signing), for this last close only. Nothing is written through the golden door before the chair's
 line "SIGN".
 
-STATUS: **PART A READY (measured, drafted, sent to the chair); waiting for the chair's line SIGN; nothing written through the door. The draft record is committed for the chair's read:
+STATUS: **PART B DONE (the chair's line SIGN, 2026-11-19 01:04 UTC, announced in the owner's chat under "Yes to both"); PART C waits for the chair's merge of LASTCLOSE-DOORS. Earlier: nothing written through the door. The draft record is committed for the chair's read:
 [`docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json`](../../../shift-records/2026-11-18-the-last-close-points-54-to-70.json).**
 
 ## THE MEASURE BEFORE ANY WRITE (Part A; scratch probes only, every run to a file; nothing committed but this file and the draft)
@@ -57,3 +57,28 @@ worktree) reproduce both stored figures at 0dee69e17 (0 of 60 differ each).
   only the `GOLDEN_CONTROL_HASH` line and its dated note, after the chair has merged LASTCLOSE-DOORS (or DOORS writes it from this
   seat's measured value). The chair's call.
 - The herald desk does not move (the base writes its fixture byte for byte): it is NOT in the draft record.
+
+## PART B · THE FAMILIES THROUGH THE DOOR (each door's exact command; each commit's receipt alone)
+
+The chair's line **SIGN** came at 01:04 UTC on 2026-11-19 (announced in the owner's chat under "Yes to both"), with its C6 ruling: this
+seat writes only `GOLDEN_CONTROL_HASH` and its note in `generationForkCensus.test.js` (LASTCLOSE-DOORS's 77 → 78 went to
+`src/domain/generation/generationForkRegistry.js` and its contract test, 6cf4c4107). The record carries the line (1b2cb89f4).
+Commit trailer `Owner-Signed: §934.105` on the signed-door commits.
+
+| # | surface · pin | door (exact) | predicted | held | commit | receipt alone |
+|---|---|---|---|---|---|---|
+| B1 | the generator golden master | `GOLDEN_SHIFT_SIGNED=docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json UPDATE_GOLDEN=1 npx vitest run tests/property/generatorGoldenMaster.test.js`; the SHIFT RECORD row | 525 rows (222 moved) | 222; byte-equal to the probe (0 of 525 differ); d08ae44c… → 079bfce6… | a7a25bd39 | 3/3; goldenFreeze.walker 90/90 |
+| B1c | `generationForkCensus` A1 `GOLDEN_CONTROL_HASH` | the file's form: a dated line (only this line, the chair's C6 ruling) | 8bb20e96 → 71ea4d5f | as predicted | e13d47f58 | A1 green; A3e, A4 red until the chair's merge of LASTCLOSE-DOORS (its register) |
+| B1c | `sourceCitationIntegrity.walker` archival tree count | header and baseline | 185 → 186 (this record) | as predicted | 2d4d20dad | 18/18 |
+| B1c | `worldFactRederive` A7, the golden's file sha | a dated line | d08ae44c → 079bfce6 | as predicted | b565c802c | 7/7 |
+| B2 | the espionage fence's driven golden | `node scripts/audit/refence.mjs . --produce <scratch> --header <block>`; `GOLDEN_SHIFT_SIGNED=<record> node scripts/audit/door-write.mjs --surface espionage-dormancy-fence --from <scratch>` (exit 3, by design) | 1 (the fence file) | 116 of 360; cd67a3c1… → 9829e655… (the probe's); the 116th movement block; the written file byte-equal to the produced | bb20e743d | 21/21; espionageMissionDormancyFence 20/20, faithFieldDormancyFence 13/13, faithWitnessSource 35/35; goldenFreeze.walker 90/90 |
+| B3 | the dossier prose manifest | `GOLDEN_SHIFT_SIGNED=<record> node scripts/prose-manifest-cells.mjs --record` | 2 | 832 of 1,050 moved, 0 differ from the probe; b0ec7651… → e4f5a46b… | e74a9cce6 | dossierProseManifest **20/20** (the mixed-pool audience arm green); bandLadders 8/8, institutionDestroyedByKind 7/7, institutionRename 6/6, ruinInstitution 7/7; goldenFreeze.walker 90/90 |
+| B3c | `worldFactRederive` A7, the prose manifest's file sha | a dated line | b0ec7651 → e4f5a46b | as predicted | 45d093049 | 7/7 |
+| B4 | `x46NpcBand` dark digests (`tests/fixtures/x46-npc-band-dark-digests.json`) | the file's own loop (an untracked probe, removed after), twice at the tip, equal to the step probe; the fixture in the probe's own form (byte-equal at 0dee69e17); a dated note | 23 moved | 23 of 60 | 4bd82db5d | 24/24 |
+| B5 | `institutionBudgetPromise` BEFORE | the same, the factor forced to 1.0; the budget module untouched since 0dee69e17 | 34 moved | 34 of 60 | c9a0b1c14 | 1/1 |
+| B6 | `editCorpusRatchet` A7 | an in-file figure, a dated note (accumulated) | [695, 275, 2176] → [695, 275, 2179] | as predicted; the ride-along it masked holds | (the commit after 478ffbc4c) | 8/8 (556 s) |
+| B7 | `editWorldFactResources` PRE_CHANGE (A2, A6) | the same plant: the live `resolveResources.js` less EM-B2b2's 31 lines (and the blank before them), sha256 adfd3ba4…, over a detached worktree at c9a0b1c14; the live step twice; all six equal; A2/A6 green at 0dee69e17 against the stored six | row 21 (2 digests) | derived 8bb20e96 → 71ea4d5f (the new control), replay 93cd0cbe → c45eaea5; rows 0, 42 unmoved | 478ffbc4c | 6/6 |
+
+NOT RE-TAKEN BY THIS SEAT (named): the herald desk (unmoved); `composeStateProse` "variants" 3033 → 3054 and
+`dossierStateProseProjection.contract`'s four arms (the wiring census, the variant counts) — LASTCLOSE-DOORS's; `proseWiringCensus.walker`
+(LASTCLOSE-DOORS's); `engineBundleReplay` and the estate's file count (this seat's PART C).
