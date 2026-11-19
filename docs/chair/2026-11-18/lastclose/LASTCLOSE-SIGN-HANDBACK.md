@@ -106,3 +106,31 @@ THE MERGED TREE BY MESSAGE (`tests/lint` + `tests/build`, before Part C): 7 red 
 
 | C5 | `tests/domain/faultsDesks.test.js` FR7 (FAULTS-DESKS's, point 64; written here by the chair's C6 ruling of 2026-11-19 02:54 UTC: the seat is finished and holds no file) | the `{ timeout: 120_000 }` leaves `describe('FR7: …')`; each of its eight arms takes the estate's form `}, 120_000); // its own budget (moved from the describe's options for SUITE_ARG_FORM, the last close)`; no assertion, title or other line changes | — | **CLASS (c), A FAULT OF FORM in point 64's test** (vitest's options argument on a suite: the walker's SUITE_ARG_FORM, measured latent), cured at the close; no behaviour moved; unmasked by C4's refreeze. The sole cause, proved first in a scratch worktree under `CENSUS_STASIS=1` | (the commit after 4521322f2) | faultsDesks **15/15** alone |
 | C6 | the lighting census again (last) | the same door, on the clean tree | files 3699; parked 472 → 471, credited 3227 → 3228, titles 31138 → 31153, suiteTitles 8623 → 8626 (against the first close: 3682 / 471 / 3211 / 30955 / 8562) | the 17 test files of points 54 to 70; C5's arms counted | e7d02738b | sovereigntyLightingContract.walker **34/34** |
+
+## THE NET AT THE FINAL TREE (each gate alone through `sh scripts/gate-tail.sh`, never a pipe)
+
+| gate | result |
+|---|---|
+| `npx vitest run tests/lint tests/build` (at e7d02738b, after C5 and C6) | 285 files, 3,829 tests: **3,701 passed, 0 failed**, 128 skipped; ONE FILE red to load: `ledgerCitationIntegrity` (class (d), the missing local ref; 10/10 with `LEDGER_CITATIONS_REF=refs/remotes/origin/review-fixes-2026-07-08`) |
+| the same before C5/C6 (at 4521322f2) | 1 test red (the census arm C5 cured) + `ledgerCitationIntegrity` |
+| `npm run typecheck:ratchet` · `npm run typecheck:domain:strict` · `npm run lint` | exit 0 · exit 0 · exit 0 |
+| `npx eslint` on every file this seat changed | clean |
+| the size arms, `VERIFY_DIST=1` (a fresh build, removed after) | 70/70 |
+| the golden's readers alone (Part B's receipt, 48 files) | 44 green at ca029c9b4; the four reds were Part C's and DOORS's, each green after the merge and Part C (engineBundleReplay 7/7, the fork census 7/7, sovereigntyLightingContract 34/34, proseWiringCensus in the net above) |
+
+## FOR THE OWNER, IN PLAIN WORDS
+
+Under your "Yes to both" (2026-11-18, about 19:07 UTC) and the chair's signing line (01:04 UTC), I refreshed the stored "expected output"
+references once more for the work landed since this morning's close (points 54 to 70): **222 of the 525 reference towns** (the watch's
+hours, the reeve's line, the goals and ties, the fishmonger's talk, the income lines and the supply lists), **116 of the 360 espionage
+towns**, and **832 of the 1,050 dossier text cells**. Every change was traced to the landing that caused it; none was unexplained, and no
+person, house or name entered or left any town. The year-long news feed did not move. Saved towns are not touched.
+
+The app grew a little, each figure recorded as the new ceiling and yours to veto: the town-building worker **+54,680 bytes** (most of it the
+watch-and-court repairs, +26,098), the engine **+5,754**, the first screen **+11,927** raw (+3,585 gzip, +3,330 Brotli). Ten new safety
+checks were each proven to catch the bug they were written for. Nothing stays red that is this seat's.
+
+## WHAT IS LEFT
+
+Nothing of this assignment. Scratch only (probes, logs, builds, worktrees) stayed in this seat's scratch directory; none is committed;
+the scratch worktrees are removed.
