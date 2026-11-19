@@ -1,0 +1,193 @@
+tests/generators/defenceMonotoneMade.test.js	the defence rating is monotone in its houses, on made records (UPKEEP-15) every crisis beside every relief: adding the relief never lowers a score or readiness	327725	passed
+tests/build/engineBundleReplay.test.js	engine bundle replay — the bundle generates what the app generates every golden-corpus config: the committed bundle's settlement JSON equals the in-process pipeline's, byte for byte	101316	passed
+tests/domain/bar6CultureLines.test.js	BAR6-CULTURE: the zero over the census's 720 no rule of the seat has an instance in any town	95332	passed
+tests/domain/bar4SafetyKinds.test.js	BAR4-SAFETY: the three kinds read one settled fact each F1 F2 F3: zero instances over the sample	84082	passed
+tests/domain/bar4MarkPromise.test.js	the mark's promise (kind S1): no row on offer bare while the record says its need is cut (a) THE ZERO over the census's 720: every instance the detector finds is cured or named	76750	passed
+tests/build/engineBundleReplay.test.js	engine bundle replay — the bundle generates what the app generates the espionage fence's 360-settlement driven corpus: bundle equals in-process byte for byte, and its hash meets the fence constant (known-stale rule)	73257	passed
+tests/domain/bar6DefDeskGuards.test.js	BAR6-DEFDESK: the defence desk's lines declare what they presume (e) rulings EG1, XA2: the crime wave's one reading and the beasts' band arm equal their page readings (the 720)	72748	passed
+tests/generators/people/representatives.test.js	the people car — the representative generator (step 2) one card per face house, zero duplicates, the seat always faced: the golden 525	52259	passed
+tests/generators/people/ties.test.js	the people car — one outgoing tie per card (R-P7) out-degree exactly 1 for every card with a peer, 0 for a lone face: the golden 525	52109	passed
+tests/generators/people/castPowers.test.js	the people car — the powers' people (step 3) memberships, floors, the other mint and the shim on the golden 525; no sole power with a house of its archetype is at zero	51181	passed
+tests/domain/birthKindsLaw.test.js	BIRTH-1: a house that buys its material has it brought in; a source house is answered by its ground arm 1 · THE LAW over every calm town of the 720 and the 150: no buyer marked, no source house off its own spent ground, but the counted exceptions	43913	passed
+tests/generators/people/ties.test.js	the people car — one outgoing tie per card (R-P7) out-degree exactly 1 for every card with a peer, 0 for a lone face: the soak 1,000's first 300	36542	passed
+tests/components/publicProseVeilInvariance.test.js	(i) the invariance pin: the projection depends on nothing the sanitizer strips composePublicProse(owner) deep-equals composePublicProse(stripped owner) on every block, 12 fixtures + 120 soak towns	36147	passed
+tests/scripts/readerCorpusManifest.test.js	the reader corpus is composed from the golden key the whole document set renders twice with identical hashes, and the run id is not inside one	35204	passed
+tests/property/pipeline.property.test.js	pipeline (property-based) different seeds usually produce different fingerprints (seed sensitivity)	33697	passed
+tests/generators/x46NpcBand.test.js	X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people metropolis: 120 lit worlds land inside the owner's band, and ρ(population, named people) > 0.4	32354	passed
+tests/domain/mergeLadderHistory.test.js	EM-R8b — a rung takes a reading from R1 and never the lived history under it H2 · the lived history is byte-identical in every trial, and the ladder explains itself	24717	passed
+tests/generators/servicesSeverityPlaceholder.test.js	services — SEVERITY placeholder is retired no generated service description contains the raw SEVERITY placeholder	24658	passed
+tests/generators/people/representatives.test.js	the people car — the representative generator (step 2) one card per face house, zero duplicates, the seat always faced, the envelope: the soak 1,000's first 200	24295	passed
+tests/components/statBandsOverDigits.test.jsx	No rendered row says "None" beside a bar that has width over a generated corpus, neither tab ever pairs the word with a width	24182	passed
+tests/generators/servicesSeverityPlaceholder.test.js	services — SEVERITY placeholder is retired the lawless recourse service reads the corrected prose and fires somewhere in the sweep	23796	passed
+tests/generators/x46NpcBand.test.js	X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people city: 120 lit worlds land inside the owner's band, and ρ(population, named people) > 0.4	22895	passed
+tests/domain/people/patronage.test.js	ruling patronage (car 3) I-6 holds on the soak slice, and is not vacuous (boosted powers exist, the cap and the ceiling bind)	21805	passed
+tests/domain/bar6DefDeskGuards.test.js	BAR6-DEFDESK: the defence desk's lines declare what they presume (a) zero: no admitted line of the desk makes its claim where the town's own fact denies it (210 births)	20406	passed
+tests/generators/people/castPowers.test.js	the guild's push (car 2): I-5 the floors hold under a maximal push; I-13 keyed I-5: under a MAXIMAL push every floor holds on the soak slice, and the push is live (it moves weighted ranks)	20176	passed
+tests/joins/ordering.test.js	stressConfirmPass — walls suppress sieges, forced stress survives a walled town suppresses sieges measurably vs an unwalled one (120 paired seeds)	20149	passed
+tests/generators/people/hallCapture.test.js	I-1 — a captured or corrupted hall has a criminal in the ruling three I-1 on the soak slice (the raw record): no finding, and the soak kind agrees	19861	passed
+tests/generators/people/ties.test.js	I-12 — the handler tie is the agent's one outgoing tie (ALLEGIANCE-CAR1) over the soak 1,000's first 240 cities and metropolises: every agent ties to its handler, covert	19753	passed
+tests/property/pipeline.property.test.js	pipeline (property-based) same seed produces a DEEP-identical settlement (full-JSON determinism)	18596	passed
+tests/property/pipeline.property.test.js	pipeline (property-based) same seed produces structurally identical output (determinism)	18181	passed
+tests/generators/historyNoUndefinedProse.test.js	history prose never leaks the literal "undefined" holds across a full-pipeline config × seed sweep (broad backstop)	17674	passed
+tests/generators/people/seatHolderCard.test.js	COHERENCE-POWERS-5 — the seat-holder's card (REVIEW-POWERS-2 N1–N3) N1: at every size, random and under every crisis — every holder holds the seat on the card and is no one's subordinate	16958	passed
+tests/components/economicsFoodStores.test.jsx	the stored food is printed once, on the Economics tab the Economics tab prints the record's months exactly once, in words that follow the record, over 60 seeds	16354	passed
+tests/scripts/readerCorpusManifest.test.js	the reader corpus is composed from the golden key the dossier records the entitlement it was read at, and no surface document carries the tuning label	16260	passed
+tests/generators/institutionBudgetRouteRequired.test.js	X-46 car 3 — the route-required rows are exempt from the density factor sixty cells that admit no marked row are byte-identical across the exemption (and a port cell is not)	16160	passed
+tests/domain/bar6CrimeOneReading.test.js	BAR6-CRIME: crime and the force that keeps order have one reading (a) zero instances over the wide read's 150, rule by rule	16072	passed
+tests/generators/resolveCrisisCast.test.js	resolveCrisisCast writes the cast onto every active crisis 120 generated towns: every crisis is cast; at most one temporary person a town, each flagged with the crises it serves	15724	passed
+tests/generators/people/seatHolderCard.test.js	COHERENCE-POWERS-5 — the seat-holder's card (REVIEW-POWERS-2 N1–N3) N2: at every size, random and under every crisis — no holder reads below the office	15372	passed
+tests/domain/crisisCast.test.js	120 generated towns: every active crisis is cast, totally every crisis gets a cast; no contradictory pair; no cap exceeded; no placeholder name	15210	passed
+tests/generators/people/seatHolderCard.test.js	COHERENCE-POWERS-5 — the seat-holder's card (REVIEW-POWERS-2 N1–N3) N3: at every size, random and under every crisis — no card but the holder's says it holds the seat	15143	passed
+tests/domain/crisisCastFindings.test.js	the crisis cast's self-check 120 generated towns: no finding	14840	passed
+tests/components/economicsFoodStores.test.jsx	the stored food is printed once, on the Economics tab the stores sentence has one writer: the Economics row prints the Tonight sheet's own words, over 60 seeds	14320	passed
+tests/generators/resolveCrisisCast.test.js	a generated crisis adds the hooks its cast derives 120 generated towns: crisis hooks lead; each is true on the record; the place's own hooks stay beneath them, in their order	14112	passed
+tests/generators/populationBandRoll.test.js	the owner's table, generated twenty settlements per tier: residents inside the owner's band, tier as chosen, no household count	14085	passed
+tests/ops/infoLitDarkDifferential.test.js	THE FILE — the instrument writes its receipt and never the console the CLI writes --out and prints nothing	13872	passed
+tests/generators/tensionTemplateDeclaration.test.js	URBAN-FIX D-1 — a tension's words follow its own event's age eight of the 61: the referee's reader:tension-memory finds nothing on the rendered page	13653	passed
+tests/ops/infoLitDarkDifferential.test.js	THE ENGINE — one real year through the reader corpus loop the race is HELD_DARK by its named arms, and not one receipt moves	13267	passed
+tests/domain/crisisCast.test.js	the defence stands: a closed house is never the defender (the ruin filter, CRISIS-3 unit 1b) 120 generated towns with every second defence house closed: no defender names a closed house	13241	passed
+tests/domain/crisisCast.test.js	the levers stand: a closed house is never a lever (the ruin filter, CRISIS-3 unit 1) 120 generated towns with every second lever house closed: no lever names a closed house	12851	passed
+tests/domain/editWorldFactResources.test.js	EM-B2b2 — the DM's nearby-resources word survives resolveResources A1 — THE DM'S ROSTER STANDS AT ITS OWN DECLARED LEAF: byte-equal on three fixed seeds, and carried on every census row	12838	passed
+tests/domain/distribution.test.js	tier scaling — population grows with tier cities average a higher population than towns	11027	passed
+tests/generators/ghostFamine.test.js	F9 — ghost famine is killed (economics ⟺ entry ⟺ condition) no isolated subsistence settlement carries famine economics without a famine entry	10915	passed
+tests/generators/ghostFamine.test.js	F9 — ghost famine is killed (economics ⟺ entry ⟺ condition) exercises BOTH the famine-fires and famine-misses paths across the sweep	10573	passed
+tests/property/pipeline.property.test.js	pipeline (property-based) generation never throws across the config space	10567	passed
+tests/generators/regenDerivedState.test.js	FIX-SECTION-REGEN — an NPC section regen derives the hall-capture state the full generation derives the regenerated rows echo exactly the regenerated record's own quarrels (the planted four and fsr-0..39)	10505	passed
+tests/lib/localEngineCallers.test.js	flag off, the seam is a pass-through sixty settlements hashed through the seam equal sixty hashed through the direct import	10358	passed
+tests/generators/ghostFamine.test.js	F9 — ghost famine is killed (economics ⟺ entry ⟺ condition) famine channels are fully coupled — economics ⟺ entry ⟺ condition on every seed	10110	passed
+tests/generators/outlookIssuesSayTheWorld.test.js	THE LAW: births with the dial at its extreme, small to large, calm and in crisis no Outlook row names a slider, a priority, a capacity figure or "tier-plausible"; "no arcane house" reads the roster	10109	passed
+tests/generators/customServiceProvenance.test.js	custom-service exact provenance retains the same custom service revision through every provider roll	9753	passed
+tests/property/pipeline.property.test.js	pipeline (property-based) output is structurally complete for any valid config	9611	passed
+tests/generators/x46NpcBand.test.js	X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people town: 120 lit worlds land inside the owner's band, and ρ(population, named people) > 0.4	9414	passed
+tests/generators/legitimacyBgConsistency.test.js	M5 — publicLegitimacy.bg stays consistent with its band after the defense patch every generated settlement has bg matching the canonical bg for its legitimacy label	9380	passed
+tests/domain/distribution.test.js	tier scaling — population grows with tier city institutions are not fewer than village institutions	9263	passed
+tests/generators/people/nobleFaces.test.js	COHERENCE-POWERS-6 item 1: a noble power is faced by a noble on fresh births at every size, calm and in crisis: every noble body is faced by a noble at its standing	9139	passed
+tests/generators/structuralValidatorDeterminism.test.js	no-magic worlds suppress the magical_controversy tension (finding #12) magical_controversy never appears in currentTensions when magicExists is false	9112	passed
+tests/lint/observedShapeSentinel.test.js	observed-shape anti-vacuity sentinel telemetry M8/M9: gate 1 — the authored-input history probe separates a written key from an invented one	9014	passed
+tests/lint/flavorFields.census.test.js	EM-A3 — the flavor census: a free field has zero derivation readers, by both halves A2 — a card with no free row runs both halves and reports nothing, over a non-empty denominator	8904	passed
+tests/pdf/renderedFontEmbedding.test.js	a rendered dossier draws every text run with an embedded font renders a real multi-page dossier (the arm is not vacuous)	8480	passed
+tests/domain/distribution.test.js	supply-chain prevalence and status distribution cities average more supply chains than villages	8473	passed
+tests/generators/generationDialMetamorphic.test.js	major generation dials are mechanically causal 'economy' priority moves both the institution roster and faction power	8033	passed
+tests/domain/recordInvariants.test.js	EM-R0b — recordInvariants: the town's own invariants as a module EM-R0b A1 — the control over the declared stride: every plain generated record is clean, and the declared pins are exactly the offenders	7977	passed
+tests/domain/distribution.test.js	NPC profile prevalence and structural integrity cities average at least three distinct NPC archetypes	7951	passed
+tests/domain/distribution.test.js	supply-chain prevalence and status distribution every supply-chain status is one of the canonical values	7852	passed
+tests/domain/distribution.test.js	NPC profile prevalence and structural integrity every dominant-rank NPC produces a non-trivial removal consequence	7829	passed
+tests/domain/distribution.test.js	hook + escalation clock prevalence disrupted-food-chain settlements produce a Bread Riot Clock	7769	passed
+tests/generators/npcWantsSite.test.js	NPC_WANTS's site enforces its declarations (CENSUS-1i unit 6) no declared want prints where the final record refuses it (soak1k-0..59)	7764	passed
+tests/domain/distribution.test.js	NPC profile prevalence and structural integrity every NPC holding a membership carries a factionLink	7681	passed
+tests/generators/tensionTemplateDeclaration.test.js	URBAN-FIX D-1 — a tension's words follow its own event's age no draw moved: born with the memory table stripped, the twelve and the eight are one record but for the tensions' words	7661	passed
+tests/domain/distribution.test.js	faction prevalence and archetype coverage every city carries multiple factions	7492	passed
+tests/domain/distribution.test.js	supply-chain prevalence and status distribution on healthy generation, at least half of chains are stable	7466	passed
+tests/domain/distribution.test.js	NPC profile prevalence and structural integrity cities accumulate enough dominant-NPC removal-impact lines to drive a forecast	7412	passed
+tests/domain/distribution.test.js	history beat prevalence at least 80% of cities have a definingCrisis beat	7320	passed
+tests/domain/distribution.test.js	hook + escalation clock prevalence every clock has 6 stages and a non-empty trigger description	7308	passed
+tests/domain/distribution.test.js	enforcement institution prevalence every city carries an enforcement institution	7229	passed
+tests/generators/x46NpcBand.test.js	X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people sixty seeds (ten a tier) generate byte-identically to the dark digests captured at the window tip (2026-11-04)	7226	passed
+tests/domain/distribution.test.js	hook + escalation clock prevalence every city carries at least one structured hook	7169	passed
+tests/generators/generationDialMetamorphic.test.js	major generation dials are mechanically causal 'criminal' priority moves both the institution roster and faction power	7158	passed
+tests/generators/generationDialMetamorphic.test.js	major generation dials are mechanically causal 'magic' priority moves both the institution roster and faction power	7102	passed
+tests/domain/defenseStateProseDesk.test.js	DS-DEF-9 — magic dependency, and the slot filled from the right ROLE REACHABILITY, MEASURED OVER GENERATED WORLDS rather than assumed	7096	passed
+tests/generators/generationDialMetamorphic.test.js	major generation dials are mechanically causal 'military' priority moves both the institution roster and faction power	7083	passed
+tests/domain/birthKindsLaw.test.js	BIRTH-1: a house that buys its material has it brought in; a source house is answered by its ground arm 2 · no word under a siege or on an isolated route (at the write site, over the towns themselves), and none twice	7019	passed
+tests/domain/factionPowerSum.test.js	faction power sums to exactly 100 across all tiers metropolis: every non-empty faction roster sums to 100	6950	passed
+tests/domain/distribution.test.js	NPC profile prevalence and structural integrity every NPC profile carries an archetype from the canonical set	6769	passed
+tests/soak-harness/coveringArrayCoverage.test.js	the covering array and its constraint manifest the array covers EVERY reachable pair, is deterministic, and refuses a thin one	6704	passed
+tests/ops/infoLitDarkDifferential.test.js	THE ENGINE — one real year through the reader corpus loop THE POSITIVE CONTROL: the statecraft head as the key is ALIVE, so HELD_DARK is not blindness	6661	passed
+tests/build/landingChronicleTagCategory.test.js	landing chronicle: each tag agrees with its own event no chronicle tag contradicts its event's category, on every seed	6657	passed
+tests/generators/generationDialMetamorphic.test.js	major generation dials are mechanically causal 'religion' priority moves both the institution roster and faction power	6387	passed
+tests/domain/newsCardFace.pin.test.js	the news card face — an event, its people, no state-machine word (C1) on a planted run, every card body names a party and states an event; no face word is a state token	6366	passed
+tests/components/bar7CardsMarkOnce.test.jsx	BAR7-CARDS: a person's card says its house's state once; the PDF prints what the tabs print 1. THE TAB'S CARD: a marked house's keeper carries the mark once, as its own line; no deal line opens with it	6350	passed
+tests/simulation/worldTickCostEnvelope.test.js	performance-scale-6 — tick-cost / size envelope gate serialized state stays under the house envelope and growth decelerates as the bounded ledgers engage	6305	passed
+tests/pdf/customContentGlyphReach.test.js	the wall sees what the renderer would print AFTER THE FACT: the same pack, wall bypassed, prints with a NON-EMBEDDED font	6088	passed
+tests/domain/distribution.test.js	tier scaling — population grows with tier towns average more institutions than villages	5896	passed
+tests/build/bootSmoke.test.js	the built bundle boots scripts/boot-smoke.mjs passes against dist/ (acyclic chunk graph · every chunk initialises · the shell mounts)	5688	passed
+tests/generators/tailTiesBatch2.test.js	TAIL-TIES batch 2: a hook presumes only what the town holds (T3) NOT: the line is gone where the town makes it false, and every titled person there still holds a hook (the civic stand-ins of a crisis hold none by design, at the base too)	5650	passed
+tests/build/campaignRuntimeLazy.test.js	built campaign runtime capsule boundary all three implementation bodies live only in the runtime chunk closure	5461	passed
+tests/build/brandDerivatives.test.js	the eager mark and the dossier cover draw the same seal the dossier cover mounts that seal beside the title	5449	passed
+tests/data/tailHistoryBatch3.test.js	TAIL-HISTORY batch 3 (Y13): every tension type with no event of its own on the timeline is told as a live quarrel the twenty-six: no past of an event the timeline does not hold; the live quarrel prints instead	5351	passed
+tests/domain/display/economyDeskReadsTheCards.test.js	DS-ECO-11's exploitation line reads the grade the cards print (P1-c) on the reader's twenty towns: the line's grade is the card's, and the drawn sentence is of that pool; a full line names the record's house and export	5335	passed
+tests/components/crisisStoppedRows.test.jsx	TAIL-SERVICES S1: a row of ordinary times under a crisis is marked, on the Services and Institutions tabs the births table: each description prints under its crisis with the mark before it, and the tab heads with the line of ordinary times	5301	passed
+tests/scripts/baseStateCapsule.test.js	base-state capsule generator names the row when any single reading is perturbed, so the agreement above is a real read	5289	passed
+tests/domain/livingContentMaterialization.test.js	living-content materialization law every blind case materializes and discovers under the lit law	5269	passed
+tests/domain/factionPowerSum.test.js	faction power sums to exactly 100 across all tiers city: every non-empty faction roster sums to 100	5187	passed
+tests/components/bar3ServicesRows.test.jsx	BAR3-SERVICES batch 1: a row carries the mark its state makes true; a row names the body the town has MARKED: each row prints with its mark before it	5154	passed
+tests/build/engineGenerateBodyCap.test.js	the generate cap admits the toggle bags and nothing else a 256 KB body of anything but the toggle bags is refused 413 before any generation	5136	passed
+tests/domain/npcAimFrames.test.js	on a real run, every deed line's body names its own deed lf-033 and lf-003: no deed headline sits over a body about something else	5031	passed
+tests/generators/x46NpcBand.test.js	X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people village: 120 lit worlds land inside the owner's band, and ρ(population, named people) > 0.4	4877	passed
+tests/build/bootSmoke.test.js	the FLAGGED bundle (VITE_ENGINE_REMOTE=true, the production artifact) boots scripts/boot-smoke.mjs passes against the flagged dist (acyclic chunk graph · every chunk initialises · the shell mounts)	4867	passed
+tests/store/anonRandomForgeIsNeverDiscarded.test.js	THE PIPELINE — an aimed size is the size that comes out THE DEFECT ITSELF: the UNAIMED sentinel leaves the range on these seeds	4821	passed
+tests/domain/faithObservationFloorWf0.test.js	WF-0 (f) — one LIVE year through the product advance entry, each realm the bearing case OPENS the gate: religionStates for exactly its bearers, the qualifying observance minted, the count still the gate's	4756	passed
+tests/domain/undercityMonotoneComponents.test.js	MF-UC2 — the undercity monotone components G-43 · MOVE THE RESOURCE SITE AND THE MINE MOVES WITH IT — and every row of every real settlement carries the general form whole: flipping the stored terrain moves the working from the ground it sat in to the ground it now sits in with its licence intact, the licence itself is the geography data’s own excavation affinity re-derived here from the live TERRAIN_DATA, and a corpus-wide sweep pins temperament, licence, driver, extent, anchor, zone and joins against the closed vocabularies this car does not own	4467	passed
+tests/generators/bar3PlacesRows.test.js	BAR3-PLACES: the rows read the town the flagged line no longer prints, and its slot says what the record bears (every row)	4387	passed
+tests/domain/faithObservationFloorWf0.test.js	WF-0 (f) — one LIVE year through the product advance entry, each realm the deity-free corpus stays the ABSENT PRECONDITION: no religion state at all, zero bearers, the section minus the field unchanged	4176	passed
+tests/domain/npcAimFrames.test.js	the frames are text only swapping the whole frame pool moves no leaf but the body lines (lf-033, 12 weeks)	3961	passed
+tests/generators/people/crisisSeat.test.js	COHERENCE-POWERS-3 — the crisis that names a power seats it an occupation at every size has its occupier on the page, faced by the minted governor	3957	passed
+tests/generators/power/standingReadsTheNamedPower.test.js	TAIL-POWERS batch 2 · the towns read: what each prints instead (births) every false town prints its true line; every keep town keeps its line	3932	passed
+tests/data/tailHistoryBatch2.test.js	TAIL-HISTORY batch 2 (Y5): a tension with no event of its own on the timeline is told as a live quarrel the twenty: no aftermath of an event the timeline does not hold; the live quarrel prints instead	3761	passed
+tests/generators/bar2PlacesRows.test.js	BAR2-PLACES: the rows read the town the flagged line no longer prints, and its slot says what the record bears (every row)	3733	passed
+tests/generators/people/crisisSeat.test.js	COHERENCE-POWERS-3 — the crisis that names a power seats it a fractured realm at every size shows at least two powers	3640	passed
+tests/generators/x46NpcBand.test.js	X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people hamlet: 120 lit worlds land inside the owner's band, and ρ(population, named people) > 0.4	3613	passed
+tests/lint/heldKeyWriterCensus.walker.test.js	EM-R1 — the writer census of every held key A7 — the SAVED-ONLY keys with writers: every one RE-DERIVED from source, both directions (U62, NOTE-14)	3478	passed
+tests/lint/worldGenerationClockSeam.walker.test.js	ARM C — the same seed produces the same world with the clock moved a two-year kernel advance reads the clock ZERO times and is byte-identical	3440	passed
+tests/components/bar3ServicesRows.test.jsx	BAR3-SERVICES-3 batch 3 (SV8, SV7b): the land worked under a siege is curtailed; a twin that goes on is on offer FIELD: the house reads "Curtailed by the siege." on the tab, the PDF and the Journal, and its row on the Services tab	3437	passed
+tests/domain/distribution.test.js	trade-route gating isolated settlements never bypass trade-route requirements	3368	passed
+tests/domain/distribution.test.js	trace propagation prevalence every generated settlement carries a non-empty simulationTrace	3355	passed
+tests/generators/people/nobleFaces.test.js	COHERENCE-POWERS-6 item 1: a noble power is faced by a noble the review's towns and the lane's: no miller, college master, impresario or mine captain heads a noble body	3350	passed
+tests/domain/distribution.test.js	history beat prevalence every settlement produces a foundingCause beat	3325	passed
+tests/security/customContentArchiveTransfer.pglite.test.js	migration 187 custom-content archive authority uses the final receipt slot and durably rejects beyond the hard cap	3287	passed
+tests/generators/outlookIssuesSayTheWorld.test.js	THE LAW: births with the dial at its extreme, small to large, calm and in crisis a besieged or failing isolated town is never told it "remains viable"	3258	passed
+tests/build/envoyPersistenceHydrationLazy.test.js	built persisted envoy hydration stays lazy the strict-validator fingerprint is absent from every entry-closure chunk	3231	passed
+tests/build/campaignRuntimeLazy.test.js	built campaign runtime capsule boundary the runtime fingerprint is absent from the entry closure	3198	passed
+tests/domain/distribution.test.js	faction prevalence and archetype coverage every town resolves a government or merchant authority archetype	3197	passed
+tests/domain/distribution.test.js	supply-chain prevalence and status distribution every town carries at least one active supply chain	3160	passed
+tests/components/smallPlaceTierNoun.test.jsx	the screen calls a small place by its own noun no rendered tab calls a thorp, hamlet or village a town (outside a kept comparison)	3134	passed
+tests/joins/ordering.test.js	structural receipt describes the final roster no presence-implying violation references an institution missing from the roster	3134	passed
+tests/generators/x46NpcBand.test.js	X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people thorp: 120 lit worlds land inside the owner's band, and ρ(population, named people) > 0.4	3104	passed
+tests/domain/distribution.test.js	faction prevalence and archetype coverage every town carries at least one faction	3093	passed
+tests/domain/distribution.test.js	faction prevalence and archetype coverage every faction across the sample resolves to a known archetype	3013	passed
+tests/data/tailHistoryBatch6.test.js	TAIL-HISTORY-5 batch 6: what the bar's readers met prints only where the town makes it true MUST NOT: no cured line prints where the town makes it false; its twin prints on the same slot	2958	passed
+tests/generators/economicRatingCappedByProsperity.test.js	R1: the Economic Survival rating is capped by the prosperity word, in the record NO town of the draw holds a STRONG economic band beside a Subsistence, Struggling or Poor prosperity	2949	passed
+tests/domain/distribution.test.js	supply-chain prevalence and status distribution every chain declares a non-empty failureConsequences and at least one beneficiary	2934	passed
+tests/components/defenseRingNoteProjection.test.jsx	the organized-ring note: the shared Defense tab prints the owner's seeded variant soak1k-10, soak1k-11 and soak1k-41: each prints its seeded variant on the shared tab, three variants in all	2912	passed
+tests/domain/distribution.test.js	history beat prevalence every settlement produces at least three non-null beats out of seven	2911	passed
+tests/domain/distribution.test.js	hook + escalation clock prevalence every structured hook resolves to a canonical origin	2887	passed
+tests/generators/settlementReason.test.js	#10 — the port reason is gated on a docks or wharf institution STYLE-2 A·O16 THROUGH THE PIPELINE: the port reason prints exactly where the roster holds docks (the flag was never read)	2858	passed
+tests/domain/hookRetention.test.js	HK-2 retention — the seam is DARK by default (J-HK-5 convergence) collectPlotHooks is byte-identical to its pre-HK-2 answer when retention is not asked for	2841	passed
+tests/domain/distribution.test.js	enforcement institution prevalence every town carries an enforcement institution	2835	passed
+tests/components/economicsShowsNoMachinery.test.jsx	the food card shows no machinery (item 4(c)) the cold list's towns that printed it	2825	passed
+tests/domain/distribution.test.js	NPC profile prevalence and structural integrity every town carries at least one NPC	2782	passed
+tests/joins/ordering.test.js	structural receipt describes the final roster matches a fresh validation of the final institutions (receipt is not stale)	2770	passed
+tests/generators/tailTies4Batch1.test.js	TAIL-TIES-4 batch 1: a cargo needs an open route; scales and a shop need a market (T18) NOT: the line is gone where the town makes it false, and every titled person there still holds a hook	2746	passed
+tests/domain/distribution.test.js	history beat prevalence every history beat carries label + text + source	2733	passed
+tests/generators/tailTies4Batch2.test.js	TAIL-TIES-4 batch 2: a tie gives its military end no office its house does not hold (T19, decided (B)) NOT: the line that gave the card an office no longer prints; INSTEAD: the same tie prints the reworded line	2723	passed
+tests/build/landingFixtureFreshness.test.js	the landing fixture is the engine at the committed seed a fresh derivation reproduces the committed module BYTE FOR BYTE	2598	passed
+tests/pdf/notableNpcsByteRender.test.js	NotableNPCs renders real PDF bytes (M4 — worst-case NPC paginates, not clips) a worst-case top NPC renders to a valid multi-page PDF buffer	2590	passed
+tests/generators/institutionBudgetDensity.test.js	X-46 car 3 — the density factor the step function is gone: a 2,500-person town draws more than twice the houses of a 300-person town	2574	passed
+tests/property/pipeline.property.test.js	pipeline (property-based) thorps stay under 60 population	2567	passed
+tests/build/townSceneLocalMatrixAudit.test.js	TownScene deterministic local matrix audit covers every pair across tier, biome, enclosure, water, season, condition, and audience	2540	passed
+tests/build/landingFixtureFreshness.test.js	the landing fixture is the engine at the committed seed the script's own --check arm agrees, and is wired to say how to fix it	2525	passed
+tests/security/customContentBackfill.pglite.test.js	dirty legacy rows backfill losslessly, uniquely, and idempotently	2520	passed
+tests/domain/mergeLadderHistory.test.js	EM-R8b — a rung takes a reading from R1 and never the lived history under it H4 · three constructed controls: a history is never rewritten, invented or made from absence	2493	passed
+tests/property/sovereigntyWaveMultiYearDormancy.test.js	WR-10w wave close — the whole wave stays dark for two years ZERO PRNG DRAWS — lighting the flag over a barren world changes NOTHING	2484	passed
+tests/generators/regenDerivedState.test.js	FIX-SECTION-REGEN — an NPC section regen derives the hall-capture state the full generation derives every derived field of the hall: the state, the governing seed, the capture rows	2481	passed
+tests/security/neighbourBacklinkMerge.pglite.test.js	096 merge_neighbour_backlink — atomic additive merge (pglite) applies a back-link entry to the partner’s CURRENT data + mirrors neighbour_links	2439	passed
+tests/components/statBandsOverDigits.test.jsx	The Powers — the seat is contested in words, never in coup weights neither the Power tab nor the Succession section prints a raw coup weight	2427	passed
+tests/components/displayEconFlowsMagicFood.test.jsx	TAIL-DISPLAY-ECON batch 1: the flows header counts its cards; magic claims food only where the food record holds it each NOT row does not print its line; instead: what the row names (every row)	2396	passed
+tests/ui/mountFirstPaint.test.jsx	THE FIRST-PAINT LAW — the four cured positions reach a reader with no click economics.foodSecurity (DS-ECO-9) draws above the Food Security fold	2383	passed
+tests/generators/foodBaseNumbers.test.js	FOOD-2 — the food base numbers per tier, the median small place is fed and the median large place is fed through its hinterland	2322	passed
+tests/security/reviewedQuarantineConflict.pglite.test.js	migration 188 quarantine conflict integrity a substituted campaign receipt aborts and preserves the saved map	2307	passed
+tests/generators/isolatedTrade.test.js	planar institutions require a teleportation circle generated metropolises never list planar institutions without a circle	2286	passed
+tests/domain/roles/roleClass.test.js	no generated tie presumes a relation its two roles lack (reader:relation-types, exempted) holds on soak1k-0..11, read on the final record with the seat	2246	passed
+tests/components/displayEconStoresFacetTimber.test.jsx	TAIL-DISPLAY-ECON-3 batch 3: the stores sentence takes the crisis; a facet key prints as words; the timber note on a depleted ground one home: the tab prints the Tonight sheet's own stores sentence, crisis and all	2230	passed
+tests/components/settlementsPanelDelete.test.jsx	SettlementsPanel — single delete neighbour cleanup cleans the one-directionally-linked survivor and leaves unrelated saves untouched	2226	passed
+tests/components/crisisStoppedRows.test.jsx	TAIL-SERVICES S1: a row of ordinary times under a crisis is marked, on the Services and Institutions tabs S5, the keep pairs: a row whose house the input reaches prints unmarked, and a town with no such gap prints no line of it	2218	passed
+tests/security/paymentRefundRecovery.pglite.test.js	migration 180 payment refund recovery seeds an inert dispatcher and stores the original producer idempotency keys	2172	passed
+tests/build/engineGenerateBodyCap.test.js	the generate cap admits the toggle bags and nothing else the wizard's force-all body (every bulk control pressed 'force') is served 200	2150	passed
+tests/generators/tailNarrativeRows.test.js	B1 the narrative text rows read the town (TAIL-NARRATIVE batch 1) the flagged sentence no longer prints, and its slot says what the town bears (every row)	2145	passed
+tests/domain/pantheon.test.js	pantheon — realm arcs (Ascendancy / Twilight / the last altar) A7 the wizard-news authoring join: the new site is inside the denominator, clean, and the debt ledger is unmoved	2144	passed
+tests/domain/factionPowerSum.test.js	faction power sums to exactly 100 across all tiers town: every non-empty faction roster sums to 100	2126	passed
+tests/lint/declaredLineShape.test.js	declared line shape (FIX-HOOK-OBJECT, 2026-11-09) every declared line the declaring modules export carries a string or function text (baseline zero, only shrinks)	2110	passed
+tests/security/surveyorPremiumOnly.pglite.test.js	has_surveyor_entitlement at 201 — the measured defect (the base) refuses the Cartographer and the Founder, and admits a free account holding a purchased row	2094	passed
+tests/build/vendorPdfLazy.test.js	Tier 9.7 — vendor-pdf lazy load contract entry static closure gzip bytes stay under 373999	2034	passed
+tests/property/espionageMissionDormancyFence.test.js	engine-gated rule keys (the census-invisible subsystem class) the live scan is non-vacuous and reaches BOTH gate spellings	2021	passed
+tests/simulation/feedDistribution.test.js	wizard news — feed distribution (anti-monoculture envelope) no single news type exceeds 45% of the feed across 30 ticks × 5 campaigns	2019	passed

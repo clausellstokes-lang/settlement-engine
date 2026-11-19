@@ -1,0 +1,1 @@
+tests/components/crisisStoppedRows.test.jsx :: TAIL-SERVICES S1: a row of ordinary times under a crisis is marked, on the Services and Institutions tabs S5, the births table: a row its house makes from an input that never reaches it is marked short, and the tab says what such a row is
