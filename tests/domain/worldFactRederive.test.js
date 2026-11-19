@@ -581,8 +581,11 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // 6483322cc, after the golden master and the fence: the prose manifest be43267f.. -> 99c8150a.. (734 of 1,050 rows; the round's declared cures).
     // The close of the rounds BAR5 to BAR8 (2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json, CLOSE-DOORS-2), at the doors' branch over Part 1's
     // final tip 0af60594a, after the golden master and the fence: the prose manifest 99c8150a.. -> b0ec7651.. (704 of 1,050 rows; the rounds' declared cures).
+    // The last close before the deploy (2026-11-18-the-last-close-points-54-to-70.json, LASTCLOSE-SIGN), on its branch over the landings' tip
+    // cc11c9504, after the golden master and the fence: the prose manifest b0ec7651.. -> e4f5a46b.. (832 of 1,050 rows; the points' declared cures,
+    // and the recorder's provenance moved by DESKS-2's A2).
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('b0ec76516e242cdefdf7ed5898af5ac00c0ee92541963addb0c697f93b5e794e');
+      .toBe('e4f5a46b18e3b4f6025f5f6c9d7268f48f9984c42faddc576c3dae2ec36b96d1');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.
