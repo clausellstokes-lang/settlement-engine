@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "5383c309f4476597fc4f881b22a1c31cd2d31c65",
-  "measuredBy": "LASTCLOSE-DOORS",
+  "measuredAtSha": "ef0eacb3fa5dbb03d92a2ee5878d715bc108278a",
+  "measuredBy": "VEIL-17",
   "date": "2026-11-19",
-  "note": "LASTCLOSE-DOORS (2026-11-19, the last close), at the base cc11c9504's landings: the dependents moved, no tuning value: src/domain/people/allegiance.js#ALLEGIANCE_TUNING gains src/generators/power/factionStanding.js (K-POWERS, points 48/49/57, ed176ed08)",
+  "note": "VR3: src/domain/display/gallerySecondHomes.js banks its one named constant NAME_WALK_BOUND, attributed by its DECLARED_GROWTH row (5abf99906); no tuning value",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -8714,6 +8714,7 @@
     "src/domain/display/chroniclersLetter.js": 1,
     "src/domain/display/dossierViewModel.js": 1,
     "src/domain/display/forceComposition.js": 2,
+    "src/domain/display/gallerySecondHomes.js": 1,
     "src/domain/display/heraldCausalVoice.js": 2,
     "src/domain/display/humanizeEngineTokens.js": 2,
     "src/domain/display/marketPrices.js": 3,
@@ -9286,7 +9287,7 @@
   "totals": {
     "tables": 280,
     "keys": 2293,
-    "unregisteredNamed": 541,
+    "unregisteredNamed": 542,
     "bareDecimals": 6877,
     "zeroDependentTables": 10,
     "zeroNamedDependentTables": 187
