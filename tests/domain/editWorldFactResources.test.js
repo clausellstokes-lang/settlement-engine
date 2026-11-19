@@ -116,8 +116,8 @@ const PRE_CHANGE = Object.freeze({
     replay: 'd4c0f4e9e347f19c070811c0232b8f49a5523fdbe3e4ade050511c31b2d99ed8',
   }),
   21: Object.freeze({
-    derived: '8bb20e966e6779efabd8b49efac2f3749a63015230df66380677f580200129e4',
-    replay: '93cd0cbecf8e09bcb5abde226287f646e535785800e2cffdfdf47edace8a2cd9',
+    derived: '71ea4d5f28843f3a8027fe9ec2e23824d13c585a2df7b742cb4e000b01f65d4e',
+    replay: 'c45eaea50e57a9f9f117ee888fad277ebc7932cc18760e5e3f77d15bed4547ac',
   }),
   42: Object.freeze({
     derived: '8ff7bc4882f09a98c985e04c4d19918d0ba132da738fe61f13f7df4a17f7b547',
@@ -311,6 +311,15 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // COPY of the tree (a detached worktree) and the live step produced the SAME six digests (cmp-equal, the live run twice and equal); the same probe
 // reproduces the stored six at the last green corpus 0ac61b4b4; on every row the fresh generation equals the dormant re-derivation. Row 21's
 // `derived` is the re-recorded golden's control row (8bb20e96, town|germanic|plains|road|civilized).
+
+// ── RE-CAPTURED 2026-11-19, THE LAST CLOSE BEFORE THE DEPLOY (LASTCLOSE-SIGN), BY THE SAME PLANT ── Row 21 moved (both digests); rows 0 and 42
+// did not. By K-WATCH's declared cure (points 48, 49, 57: the watch's line by the hours it keeps, the control row's guardEffectivenessDesc; no other
+// landed point moves the row; record docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json; the owner's word 2026-11-18 about 19:07 UTC,
+// "Yes to both"; the chair's line SIGN 2026-11-19 01:04 UTC), after the golden master (a7a25bd39). Re-captured: THE LANE-ERA pre-EM-B2b2 step (the
+// live resolveResources.js less EM-B2b2's own 31 lines, sha256 adfd3ba4..., the step unchanged since 0dee69e17) planted over a COPY of the tree (a
+// detached worktree at c9a0b1c14) and the live step produced the SAME six digests (cmp-equal, the live run twice and equal); A2 and A6 read the stored
+// six green at the first close's tip 0dee69e17; on every row the fresh generation equals the dormant re-derivation. Row 21's `derived` is the
+// re-recorded golden's control row (71ea4d5f, town|germanic|plains|road|civilized).
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 
