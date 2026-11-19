@@ -66,6 +66,11 @@ with no hidden name; the stored public prose by counterfactual (nothing sent; 36
   "Criminal structure: Semi-organized networks…" on a clone; from open data, the shown criminal powers, so no leak).
   FOR FINAL, FROM THAT: any non-owner surface that COPIES the settlement before drawing (a print, a PDF, an export of the
   shared page) loses the client's veil on derived blocks: read each such surface on a share with a shut grouping.
+- **VR17** (09:42, to VEIL-18, before E): the shut-grouping signal must survive a copy on every non-owner surface; a
+  walker registers every copy site; a born test renders each copying surface with each family grouping shut, through the
+  server's payload, and finds no derived block of a shut grouping. AT FINAL: read the walker's list of copy sites against
+  your own grep (`structuredClone`, `JSON.parse(JSON.stringify`, `{ ...settlement }` near a veiled settlement in print,
+  PDF, export and import paths), and draw one copying surface yourself on a share with `block:defense.criminalStructure` shut.
 - **THE CLEARANCE STANDARD** (07:01): re-run the differ; every path IN THE CLASS registered with its rule, or DIFFUSE
   (VR8), or RNG-ONLY (VR13): **zero unregistered**, plus the reader's own plants and the library.
 - The owner's VS1: a "Hide everything criminal" switch in Curate (seat VEIL-SWITCH, `lane/veil-switch-2026-11-19`),
