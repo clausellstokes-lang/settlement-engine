@@ -1,0 +1,10 @@
+V8-2, V8-4, V8-5 RED FIRST AT THE BASE'S BYTES (VEIL-18's builder). Each new arm of
+tests/security/galleryVeilHandRows.pglite.test.js copied into a copy of /var/tmp/v18/base (git archive 1f501779b, 212
+d1b5da91..., node_modules linked) and run there alone (-t), one engine pglite and the twin of the base's bytes.
+
+V8-2 THE DEFENCE ROW BY IDENTITY: RED, 56 sends (7 on each of the 8 reads: veil and dm x gallery, link, import, twin):
+  walls[0].desc gdesc1 (the reader's row, Mill under Old Wheel/catalogId mill), walls[2].desc gdesc2 (MILL),
+  walls[3].description gdesc3 (' mill '), walls[4].tags/facets/serviceKeys gfn1-3 (the function eye, Brick kiln),
+  walls[5].desc gtwo2 (Watermill: two houses of one identity, one eye shut). The KEEP rows (Fish market, Granary, Brick
+  kiln's description, Upper race) held at the base: 0 losses. (The arm stops at its first expectation: the server/twin
+  paths are asked only once the sends are 0.)

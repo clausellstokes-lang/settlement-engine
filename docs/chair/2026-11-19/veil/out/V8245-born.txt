@@ -1,0 +1,7 @@
+V8-2, V8-4, V8-5 BORN (VEIL-18's builder). REVIEW-VEIL-13's born probe (veil-probe-13/measure/r5-born.probe.jsx, R5_N=4:
+six sizes, calm and infiltrated, four each; both stored shapes; three shares: no veil record, the default veil, the default
+veil with Reveal DM; gallery, link, import and the twin) on the base chain b1bornbase (twin from the base's bytes) and on a
+chain of each commit's tree (twin from that tree), compared by veil-probe-16/measure/born-cmp.mjs.
+
+V8-2: towns 48 | 48; rows 1152 | 1152; rows whose fingerprint differs 0; missing 0
+      reads that raise: 0 | 0; gallery reads where server and twin differ: 0 | 0

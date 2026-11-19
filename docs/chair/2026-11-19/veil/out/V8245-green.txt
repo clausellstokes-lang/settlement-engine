@@ -1,0 +1,13 @@
+V8-2, V8-4, V8-5 GREEN (VEIL-18's builder). Each arm in the tree at its commit; the six guard files, the twin's tests, the
+acceptance run and the gates at that commit's bytes (a copy of the tree at the commit, node_modules linked).
+
+V8-2 (212 4b04a3b2acd44c36eb4ca145ded36c40dd096d2bcd79e78e8b2af47befa8e038, down 5b3eb697... unchanged):
+  the arm: 0 sends or losses on 8 reads, server against twin 0 paths (gallery and import against the twin of their share,
+  the link against the veiled share's twin).
+  the six guard files (galleryVeilHandRows, gallerySecondHomes, galleryVeilCures, galleryServerVeil, gallerySanitizer,
+  galleryMapMemberCount; --maxWorkers=2): 6 files, 121 tests passed, exit 0.
+  the twin's tests (tests/domain/display/publicSafe*.test.js, tests/components/publicProseVeil*.test.js,
+  tests/lib/gallery.test.js): 5 files, 120 tests passed, exit 0.
+  the acceptance run (REVIEW-VEIL-7 run-all.sh): exit 1, checks 37 | PASS 35 | FAIL 2 (a07, d06 only), the twin 15 of 15.
+  npm run typecheck:domain:strict exit 0 (1113, ceiling 1113); npm run typecheck:ratchet exit 0 (167, ceiling 167);
+  npx eslint src/domain/display/gallerySecondHomes.js exit 0.

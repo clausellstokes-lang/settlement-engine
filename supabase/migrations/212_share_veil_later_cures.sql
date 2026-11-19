@@ -22,7 +22,8 @@
 --       a second time, at a path no card list walks, is withheld by the eye that governs its source (section 4b,
 --       _gallery_veil_second_homes and the impression arm of _gallery_veil_card): a tie's description and tension
 --       under prominentRelationship and inside pressureSentence; a current tension's description inside
---       history.siegeNarrative; a house's description and function in the defence profile's lists, and the whole
+--       history.siegeNarrative; a house's description and function in the defence profile's lists (by name, and since
+--       VEIL-18 by identity, (28)), and the whole
 --       entry for a house hidden whole; the name of a house hidden whole in the economy's chains (its own, or the
 --       name the engine's processor match gives it; and the chain that is its own) and in the simulation trace; a
 --       sentence of a person's appearance inside the card's impression.
@@ -143,6 +144,14 @@
 --       of the projection may hold a hidden name and leaves as a hit would, the floors aside (_gallery_veil_name_hits
 --       answers every token, as where the marks' count differs), so the read sends the town's name alone; a run of the
 --       search that raises answers the same. Below it no answer moves. Section 4c states the measures.
+--   (28) THE DEFENCE ROW BY IDENTITY (VEIL-18; REVIEW-VEIL-8's V8-2): a defence row (defenseProfile.institutions.<slot>[])
+--       found its house by NAME alone, so a house whose description eye was shut kept the hidden description in a row
+--       that still carried another name (the name it was born with: a record renamed by any writer but the editor's,
+--       whose rename cascades the rows). A row is now its house's by the house's name OR by its identity: any house
+--       whose catalogue identity (`catalogId`) is the fold of the row's name (_gallery_veil_fold, the engine's fold of a
+--       birth name into its identity) owns it, and the row follows that house's description and function eyes; where two
+--       houses could own one row, the eye that withholds (_gallery_veil_sources 'house_ids'; gallerySecondHomes.js ::
+--       secondHomeSources, withholdSecondHomes). No signature changes.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -1066,7 +1075,8 @@ $$;
 -- EVERY tie with its two eyes [{n1, n2, ty, d, t, ds, ts}] (a copy is its tie's whether that tie is shut or open);
 -- whether ANY current tension's description eye is shut (tension_shut); every event with its lasting-effects eye
 -- [{n, ty, y, le}] (an annotation is its event's). And for the words: each house's shut eyes by name
--- {name: {desc, fn}}, and (COHERENCE-VEIL-8) the pieces of every shut string of an event.
+-- {name: {desc, fn}} and (VEIL-18, V8-2) by catalogue identity {catalogId: {desc, fn}}, and (COHERENCE-VEIL-8) the pieces
+-- of every shut string of an event.
 create or replace function public._gallery_veil_sources(s jsonb, fields jsonb, classes jsonb, excj jsonb)
 returns jsonb language sql immutable as $$
   with shut(kind, id, eye, card) as (
@@ -1114,7 +1124,12 @@ returns jsonb language sql immutable as $$
                                where is_shut), '[]'),
     'houses', coalesce((select jsonb_object_agg(name, jsonb_build_object('desc', d, 'fn', f)) from (
         select card ->> 'name' as name, bool_or(is_shut) filter (where eye = 'description') as d, bool_or(is_shut) filter (where eye = 'function') as f
-          from eyes where kind = 'institution' and public._gallery_veil_str(card -> 'name') <> '' group by 1) h), '{}'))
+          from eyes where kind = 'institution' and public._gallery_veil_str(card -> 'name') <> '' group by 1) h), '{}'),
+    -- VEIL-18 (V8-2): each house's shut eyes BY ITS CATALOGUE IDENTITY {catalogId: {desc, fn}}, every house of one identity
+    -- unioned (the eye that withholds)
+    'house_ids', coalesce((select jsonb_object_agg(cid, jsonb_build_object('desc', d, 'fn', f)) from (
+        select card ->> 'catalogId' as cid, bool_or(is_shut) filter (where eye = 'description') as d, bool_or(is_shut) filter (where eye = 'function') as f
+          from eyes where kind = 'institution' and jsonb_typeof(card -> 'catalogId') = 'string' and (card ->> 'catalogId') <> '' group by 1) h), '{}'))
 $$;
 
 -- [212: NEW] public._gallery_veil_tie_pieces
@@ -1133,6 +1148,7 @@ returns jsonb language plpgsql immutable as $$
 declare
   ties jsonb := coalesce(src -> 'ties', '[]');
   houses jsonb := coalesce(src -> 'houses', '{}');
+  hids jsonb := coalesce(src -> 'house_ids', '{}');   -- VEIL-18 (V8-2): the houses' shut eyes by catalogue identity
   pr jsonb;
   own jsonb;
   ps jsonb;
@@ -1261,13 +1277,22 @@ begin
         from jsonb_array_elements(s #> '{history,legacyAnnotations}') with ordinality x(a, o)));
   end if;
 
+  -- the defence profile's copy of a house: its description and function go with that house's eyes; the whole entry with a
+  -- house hidden whole. VEIL-18 (REVIEW-VEIL-8's V8-2): A ROW IS ITS HOUSE'S BY NAME OR BY IDENTITY: the house of the same
+  -- name, or any house whose catalogue identity is the fold of the row's name (_gallery_veil_fold: the name it was born
+  -- with; the rename's writer moves `name` only, so a row a record keeps under the birth name is still that house's).
+  -- Where two houses could own one row, it follows the eye that withholds (gallerySecondHomes.js :: withholdSecondHomes)
   if jsonb_typeof(s -> 'defenseProfile') = 'object' and jsonb_typeof(s #> '{defenseProfile,institutions}') = 'object' then
     for k, v in select * from jsonb_each(s #> '{defenseProfile,institutions}') loop
       if jsonb_typeof(v) <> 'array' then continue; end if;
       s := jsonb_set(s, array['defenseProfile', 'institutions', k], coalesce((
         select jsonb_agg(case when jsonb_typeof(r) <> 'object' then r
-            else r - (case when coalesce((houses -> public._gallery_veil_str(r -> 'name') ->> 'desc')::boolean, false) then array['desc', 'description'] else '{}'::text[] end)
-                   - (case when coalesce((houses -> public._gallery_veil_str(r -> 'name') ->> 'fn')::boolean, false) then array['tags', 'facets', 'serviceKeys'] else '{}'::text[] end) end
+            else r - (case when coalesce((houses -> public._gallery_veil_str(r -> 'name') ->> 'desc')::boolean, false)
+                             or coalesce((hids -> public._gallery_veil_fold(public._gallery_veil_str(r -> 'name')) ->> 'desc')::boolean, false)
+                           then array['desc', 'description'] else '{}'::text[] end)
+                   - (case when coalesce((houses -> public._gallery_veil_str(r -> 'name') ->> 'fn')::boolean, false)
+                             or coalesce((hids -> public._gallery_veil_fold(public._gallery_veil_str(r -> 'name')) ->> 'fn')::boolean, false)
+                           then array['tags', 'facets', 'serviceKeys'] else '{}'::text[] end) end
           order by o)
           from jsonb_array_elements(v) with ordinality x(r, o)
          where not (jsonb_typeof(r) = 'object' and gone ? public._gallery_veil_str(r -> 'name'))), '[]'));

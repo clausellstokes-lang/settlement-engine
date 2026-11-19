@@ -1616,4 +1616,61 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     report();
     expect(bad).toEqual([]);
   }, ARM_TIMEOUT_MS);
+
+  // ── V8-2, V8-4, V8-5 (REVIEW-VEIL-212-8's three LOWs; built for VEIL-18): BY IDENTITY, the reader's town-g shape ───────
+  /** Every read of the two veiled shares (gallery, link, import, the twin), and the server against the twin: gallery and import against the twin of their share, the party link against the twin of the veiled share. */
+  const everyRead = (r) => each(r, ['veil', 'dm']);
+  const enginePaths = (what, r) => [
+    ...['veil', 'dm'].flatMap(s => ['gallery', 'import'].flatMap(k => differ(r[s][k], r[s].client).map(d => `${what}: ${s}/${k}: ${d}`))),
+    ...['veil', 'dm'].flatMap(s => differ(r[s].link, r.veil.client).map(d => `${what}: ${s}/link: ${d}`)),
+  ];
+  /** The rows of the walls' list a read sends, by name. */
+  const wallsOf = (doc) => (Array.isArray(doc?.defenseProfile?.institutions?.walls) ? doc.defenseProfile.institutions.walls : []);
+
+  it('V8-2 THE DEFENCE ROW BY IDENTITY: a defence row belongs to its house by the house\'s name OR by its catalogue identity (the fold of the row\'s name is the house\'s catalogId), and follows that house\'s description and function eyes: the reader\'s row (an open house renamed Old Wheel, catalogId mill, its description eye shut by hand, a row under its birth name Mill), the birth name in other spellings, the function eye, and two houses of one identity (the row follows the eye that withholds); every read, Reveal DM off and on, server against twin 0 paths; an open house whose eyes are open keeps its row\'s description, by name and by identity', async () => {
+    const bad = []; const paths = [];
+    const town = {
+      name: 'Saltmere', tier: 'town',
+      institutions: [
+        { id: 'inst-mill', name: 'Old Wheel', catalogId: 'mill', category: 'Economy', desc: 'gdesc1 the cellar under the wheel hides the ledgers' },
+        { id: 'inst-kiln', name: 'Ember yard', catalogId: 'brick_kiln', category: 'Industry', desc: 'Bricks.', tags: ['gfn1 a forge for coin'] },
+        { id: 'inst-wm1', name: 'Upper race', catalogId: 'watermill', category: 'Economy', desc: 'gtwo0 an open account of the upper race' },
+        { id: 'inst-wm2', name: 'Lower race', catalogId: 'watermill', category: 'Economy', desc: 'gtwo1 the lower race grinds bone at night' },
+        { id: 'inst-gran', name: 'Grain loft', catalogId: 'granary', category: 'Economy', desc: 'gkeep2 an open granary' },
+        { id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'gkeep1 fish, salted and fresh' },
+      ],
+      defenseProfile: { institutions: { walls: [
+        { name: 'Mill', desc: 'gdesc1 the cellar under the wheel hides the ledgers' },
+        { name: 'Old Wheel', desc: 'gdesc1 the cellar under the wheel hides the ledgers' },
+        { name: 'MILL', desc: 'gdesc2 the birth name upper-cased' },
+        { name: ' mill ', description: 'gdesc3 the birth name lower-cased, padded' },
+        { name: 'Brick kiln', desc: 'Bricks for the walls.', tags: ['gfn1 a forge for coin'], facets: ['gfn2'], serviceKeys: ['gfn3'] },
+        { name: 'Watermill', desc: 'gtwo2 the row two houses of one identity could own' },
+        { name: 'Fish market', desc: 'gkeep1 fish, salted and fresh' },
+        { name: 'Granary', desc: 'gkeep3 the birth name of an open house whose eyes are open' },
+      ] } },
+    };
+    const deltas = [
+      { address: 'field:institution:inst-mill:description', hidden: true },
+      { address: 'field:institution:inst-kiln:function', hidden: true },
+      { address: 'field:institution:inst-wm2:description', hidden: true },
+    ];
+    const r = await sharesOf(town, deltas);
+    paths.push(...enginePaths('town-g V8-2', r));
+    for (const { tag, doc } of everyRead(r)) {
+      if (!isRec(doc)) { bad.push(`${tag}: no document`); continue; }
+      for (const n of ['gdesc1', 'gdesc2', 'gdesc3', 'gfn1', 'gfn2', 'gfn3', 'gtwo1', 'gtwo2']) bad.push(...arrivals(doc, n).map(a => `${tag}: ${a}`));
+      const walls = wallsOf(doc);
+      // no row is lost: each row of the list arrives by its name (its own floor), its description or function withheld
+      const names = walls.map(w => w.name);
+      if (JSON.stringify(names) !== JSON.stringify(town.defenseProfile.institutions.walls.map(w => w.name))) bad.push(`${tag}: the walls list ${JSON.stringify(names)}`);
+      // KEEP: an open house whose eyes are open keeps its row's description, by its name and by its identity
+      if (walls.find(w => w.name === 'Fish market')?.desc !== 'gkeep1 fish, salted and fresh') bad.push(`${tag}: the Fish market row lost its description`);
+      if (walls.find(w => w.name === 'Granary')?.desc !== 'gkeep3 the birth name of an open house whose eyes are open') bad.push(`${tag}: the Granary row (an open house's birth name) lost its description`);
+      if (walls.find(w => w.name === 'Brick kiln')?.desc !== 'Bricks for the walls.') bad.push(`${tag}: the Brick kiln row lost its description (only its function eye is shut)`);
+      if (!valuesOf(doc).some(l => l.text === 'gtwo0 an open account of the upper race')) bad.push(`${tag}: the Upper race card lost its description`);
+    }
+    expect(bad, `${bad.length} sends or losses`).toEqual([]);
+    expect(paths).toEqual([]);
+  }, ARM_TIMEOUT_MS);
 });

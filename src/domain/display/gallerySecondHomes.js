@@ -32,8 +32,9 @@
  * matched IN BOTH DIRECTIONS (a piece of the source inside the copy, or a piece of the copy inside the source), on
  * the CURRENT wording and on the STORED one (prominentRelationship keeps its tie's text as born): PART 11 section 9
  * lists those rows. The other homes, from the review's §2:
- *   defenseProfile.institutions.<slot>[]                a house's copy, by name: its description and function;
- *                                                       the whole entry for a house hidden whole
+ *   defenseProfile.institutions.<slot>[]                a house's copy, by name OR BY IDENTITY (VEIL-18, V8-2: the fold
+ *                                                       of the row's name is the house's catalogId): its description
+ *                                                       and function; the whole entry for a house hidden whole
  *   economicState.activeChains[]                        a house hidden whole: each processing name it answers
  *                                                       to and no open house does (its own, or the engine's
  *                                                       processor match: 'Black market' for 'Black market
@@ -724,14 +725,19 @@ export function secondHomeSources(s, eyeShut, cardsOf, idOf) {
   const tensionShut = cardsOf(s, 'tension').some(card => eyeShut('tension', idOf('tension', card), 'description'));
   /** @type {Map<string, { desc: boolean, fn: boolean }>} house name -> its shut eyes */
   const houses = new Map();
+  /** @type {Map<string, { desc: boolean, fn: boolean }>} VEIL-18 (V8-2): catalogue identity -> the shut eyes of every house of it */
+  const houseIds = new Map();
   for (const card of cardsOf(s, 'institution')) {
-    const name = str(card.name);
-    if (!name) continue;
     const id = idOf('institution', card);
-    const h = houses.get(name) || { desc: false, fn: false };
-    if (eyeShut('institution', id, 'description')) h.desc = true;
-    if (eyeShut('institution', id, 'function')) h.fn = true;
-    houses.set(name, h);
+    const desc = eyeShut('institution', id, 'description');
+    const fn = eyeShut('institution', id, 'function');
+    for (const [map, key] of /** @type {Array<[Map<string, { desc: boolean, fn: boolean }>, string]>} */ ([[houses, str(card.name)], [houseIds, str(card.catalogId)]])) {
+      if (!key) continue;
+      const h = map.get(key) || { desc: false, fn: false };
+      if (desc) h.desc = true;
+      if (fn) h.fn = true;
+      map.set(key, h);
+    }
   }
   // COHERENCE-VEIL-8 (T1): the pieces of every shut string of an event (its description, lasting effects, hooks)
   /** @type {string[]} */
@@ -745,7 +751,7 @@ export function secondHomeSources(s, eyeShut, cardsOf, idOf) {
     if (eyeShut('event', id, 'lastingEffects')) secondHomePieces(card.lastingEffects, eventPieces);
     if (eyeShut('event', id, 'hooks')) secondHomePieces(card.plotHooks, eventPieces);
   }
-  return { ties, tensionShut, houses, eventPieces, events };
+  return { ties, tensionShut, houses, houseIds, eventPieces, events };
 }
 
 /** @param {TieSource} t @param {string[]} out @returns {string[]} */
@@ -819,16 +825,25 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields, births
     });
   }
 
+  // the defence profile's copy of a house: its description and function go with that house's eyes; the whole entry with
+  // a house hidden whole. VEIL-18 (REVIEW-VEIL-8's V8-2): A ROW IS ITS HOUSE'S BY NAME OR BY IDENTITY: the house of the
+  // same name, or any house whose catalogue identity is the fold of the row's name (foldName: the name it was born with;
+  // the rename's writer moves `name` only). Where two houses could own one row, it follows the eye that withholds.
+  // SQL twin: _gallery_veil_second_homes (`hids`)
   const def = recAt(recAt(s, 'defenseProfile') || {}, 'institutions');
   if (def) {
     for (const [slot, rows] of Object.entries(def)) {
       if (!Array.isArray(rows)) continue;
       def[slot] = rows.filter(r => !(isRec(r) && gone.has(str(r.name)))).map((r) => {
-        const h = isRec(r) ? src.houses.get(str(r.name)) : undefined;
-        if (!h || (!h.desc && !h.fn)) return r;
+        if (!isRec(r)) return r;
+        const byName = src.houses.get(str(r.name));
+        const byId = src.houseIds.get(foldName(str(r.name)));
+        const desc = !!(byName?.desc || byId?.desc);
+        const fn = !!(byName?.fn || byId?.fn);
+        if (!desc && !fn) return r;
         const next = { ...r };
-        if (h.desc) for (const k of houseFields.description) delete next[k];
-        if (h.fn) for (const k of houseFields.function) delete next[k];
+        if (desc) for (const k of houseFields.description) delete next[k];
+        if (fn) for (const k of houseFields.function) delete next[k];
         return next;
       });
     }
