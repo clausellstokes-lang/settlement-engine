@@ -113,6 +113,15 @@ them), and a reveal-off share (the server withholds the `role`/`title` of the ho
 "the fence" of "Fence (word of mouth)"; the twin sends them: V9-2's laxer twin, `out/server-twin-npcs.txt`). Nothing
 more reaches the wire for it, but a guard proved on the twin does not prove the server, and the library's "server
 against twin, 15 of 15 equal" does not hold on born towns. The differ is therefore read through the server at FINAL.
+BY DIRECTION (the chair's VR15: a twin-stricter class would be a LEAK on the server; `server-twin-census.probe.jsx`,
+`out/server-twin-census.txt`, the twin's answer round-tripped through JSON as a row is): **140 of the 560 shares
+differ** (the earlier 326 counted null and empty-string artefacts of my first comparison), every one a Reveal-DM share
+with every eye shut. **No class where the server sends what the twin withholds**: the one server-only class is a
+person's OPEN membership (`memberships[].power` "Merchant Guilds", `veiled: false`, 7 shares: the visitor's cover list).
+TWIN THE LAXER (15 classes + 4 of different value): a switched-off person's `gender`, `importance`, `power`,
+`structuralRank`, `structuralPosition`, `settlementCondition`, `stressNote`; `role`/`title` and `relationships[].npc1Role`/
+`npc2Role` ("the gang boss", 91 shares); the TRUE veiled membership (`"Thieves' Guild"`, `veiled: true`, 80 shares) where
+the server sends the cover. So the preview the twin draws shows more than a visitor gets, never less, on this corpus.
 
 ### What the cold pass found held (each executed)
 

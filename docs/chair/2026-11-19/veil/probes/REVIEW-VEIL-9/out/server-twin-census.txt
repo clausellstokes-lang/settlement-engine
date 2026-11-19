@@ -1,0 +1,41 @@
+shares 560, differing 140
+DIFFERENT VALUE | DM on | every eye shut | .npcs[].memberships[].power | shares 40
+      e.g. ds0x112: server "Military/Guard" | twin "Corrupt Council"
+DIFFERENT VALUE | DM on | every eye shut | .npcs[].memberships[].rank | shares 27
+      e.g. ds0x112: server 3 | twin null
+DIFFERENT VALUE | DM on | every eye shut | .npcs[].memberships[].share | shares 41
+      e.g. ds0x112: server 0.3 | twin 0.7
+DIFFERENT VALUE | DM on | every eye shut | .npcs[].memberships[].veiled | shares 44
+      e.g. ds0x112: server false | twin true
+SERVER ONLY | DM on | every eye shut | .npcs[].memberships[].power | shares 7
+      e.g. ds0x136: "Merchant Guilds"
+TWIN ONLY | DM on | every eye shut | .npcs[].gender | shares 140
+      e.g. ds0x100: "female"
+TWIN ONLY | DM on | every eye shut | .npcs[].importance | shares 140
+      e.g. ds0x100: "key"
+TWIN ONLY | DM on | every eye shut | .npcs[].memberships[].power | shares 80
+      e.g. ds0x112: "Thieves' Guild"
+TWIN ONLY | DM on | every eye shut | .npcs[].memberships[].rank | shares 56
+      e.g. ds0x112: 1
+TWIN ONLY | DM on | every eye shut | .npcs[].memberships[].share | shares 80
+      e.g. ds0x112: 1
+TWIN ONLY | DM on | every eye shut | .npcs[].memberships[].veiled | shares 80
+      e.g. ds0x112: true
+TWIN ONLY | DM on | every eye shut | .npcs[].power | shares 140
+      e.g. ds0x100: 8
+TWIN ONLY | DM on | every eye shut | .npcs[].role | shares 91
+      e.g. ds0x112: "the nominal owner"
+TWIN ONLY | DM on | every eye shut | .npcs[].settlementCondition | shares 140
+      e.g. ds0x100: "economic_stress"
+TWIN ONLY | DM on | every eye shut | .npcs[].stressNote | shares 22
+      e.g. ds0x112: "Every public appearance is a performance of control. The private meetings are about whether there is still enough contr
+TWIN ONLY | DM on | every eye shut | .npcs[].structuralPosition | shares 140
+      e.g. ds0x100: "Holds the seat while money is short, and people judge the seat by what it can no longer pay for. Still the priest as we
+TWIN ONLY | DM on | every eye shut | .npcs[].structuralRank | shares 140
+      e.g. ds0x100: "head"
+TWIN ONLY | DM on | every eye shut | .npcs[].title | shares 91
+      e.g. ds0x112: "the nominal owner"
+TWIN ONLY | DM on | every eye shut | .relationships[].npc1Role | shares 91
+      e.g. ds0x112: "the nominal owner"
+TWIN ONLY | DM on | every eye shut | .relationships[].npc2Role | shares 87
+      e.g. ds0x112: "the gang boss"
