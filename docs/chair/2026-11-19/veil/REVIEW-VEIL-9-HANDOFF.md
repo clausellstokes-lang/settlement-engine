@@ -31,7 +31,16 @@ with no hidden name; the stored public prose by counterfactual (nothing sent; 36
 - **VR8**: DIFFUSE = the overall safety band and the roster's general composition. **The safety band's condition (07:39,
   agreed):** "Volatile"/"Strained" is DIFFUSE only while `criminalEffective` and `safetyRatio` are withheld (VR14 (i)) and
   `militaryEffective` ships only as a shared page draws it (iii); **a raw term beside the band at FINAL is a finding.**
-- VR9, VR10: not received by me.
+- **VR9** (06:53, copied whole): "the holders: before you blank a role, MEASURE the base rate of people shown with no role
+  on unveiled pages; if role-less people are rare (a blank role would itself tell), the holder's card is withheld WHOLE
+  with its ties instead; if they are common, blanking stands." AT FINAL: check the builder's base-rate measure, and that a
+  blanked role (or a withheld holder) leaves no tie pointing at nobody (V8-5's lesson).
+- **VR10** (06:53, copied whole): "the `npc_veiled_` prefix: do not touch the saved record; try instead a per-read re-key of
+  EVERY person's id on non-owner reads (salted, consistent within one payload), so no prefix or pattern tells; measure
+  whether any non-owner view needs an id stable across reads; if one does, report it and it becomes the owner's question
+  (re-minting at birth changes the saved record)." AT FINAL: read two reads of one share (ids differ across reads,
+  agree within one payload: ties, goals' targets, the crisis cast's holderId, the trace's targetId), no `npc_veiled_`
+  or other pattern, and the stored row unchanged.
 - **VR11**: a power's share re-derived to 100 where a power is withheld.
 - **VR12**: any publicProse block or composed sentence whose inputs include a withheld field is withheld or recomposed with
   it, by rule in the registry (V9-5, V9-6 and their class).
