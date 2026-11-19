@@ -82,3 +82,31 @@ Commit trailer `Owner-Signed: §934.105` on the signed-door commits.
 NOT RE-TAKEN BY THIS SEAT (named): the herald desk (unmoved); `composeStateProse` "variants" 3033 → 3054 and
 `dossierStateProseProjection.contract`'s four arms (the wiring census, the variant counts) — LASTCLOSE-DOORS's; `proseWiringCensus.walker`
 (LASTCLOSE-DOORS's); `engineBundleReplay` and the estate's file count (this seat's PART C).
+
+## PART C · THE FIGURES THAT COUNT THE TREE (last; on the tree that holds every other close commit)
+
+THE MERGE: the chair's LASTCLOSE-DOORS landed as point 71 (bcf664f02), then the landings' docs-only tip 8ecd28085; merged here
+`git merge --no-ff 8ecd28085` at **d989d3217**, clean (the two seats' file sets do not overlap). `generationForkCensus` whole at
+the merged tree: **7/7** (this seat's A1 beside DOORS's A3e/A4, which read the 78-pair registry).
+
+THE MERGED TREE BY MESSAGE (`tests/lint` + `tests/build`, before Part C): 7 red in 5 files, each classed:
+- `engineBundleReplay` (4) and `engineServiceCore` (1): (a) the committed engine bundle → C1.
+- `mutationCoverageManifest` TOTALITY: (a) ten guards with no entry → C2.
+- `sovereigntyLightingContract.walker` the estate's file count: (a) → C4.
+- `ledgerCitationIntegrity` (whole file): (d) THE MACHINE'S OWN: `refs/heads/review-fixes-2026-07-08` does not exist in this
+  checkout. Proof the assertion holds: `git fetch origin review-fixes-2026-07-08` (235efce1a), then
+  `LEDGER_CITATIONS_REF=refs/remotes/origin/review-fixes-2026-07-08` (the script's own variable): **10/10**. Nothing taken.
+
+| # | figure · reading test | door (exact) | old → new | THE CAUSE | commit | receipt alone |
+|---|---|---|---|---|---|---|
+| C1 | the edge bundles (`engineBundleReplay`, `engineServiceCore`, `engineServiceStoreParity`, `edgeSharedBundleReproducibility`, the freshness suites) | `npm run build:edge-shared` three times: the bundle bytes equal across all three; the third run's stamps kept (the reproducibility arm asks one build window) | engine 5bf3974b → cab0dcca, inputs 435 → 442; grounding ded4fab9 → 75588c2b (182 → 189); charter and output schema rehashed; analytics, intent atlas stamps only | engine inputs: +`incomeOrdinaryLines`, −`chainRites` (54); +`forceHours` (48/49/57); +`criticalImportBroughtIn`, +`uprising` (51/52/59); +`needNotBroughtIn`, +`tradeListDeclarations` (61); +`fishBoughtIn` (65); +`chainCarrier` through `tradeAtWork` (69) | 319d75ac1 | engineBundleReplay **7/7** (the golden and fence arms run: 360 of 360, the fence constant met), engineServiceCore 1/1, engineServiceStoreParity 4/4, edgeSharedBundleReproducibility 29/29, the five freshness suites green |
+| C2 | `mutationCoverageManifest` TOTALITY (`scripts/mutation-coverage-manifest.json`, `scripts/mutation-sweep.sh`) | ten planted sweep regressions #132–#141, the form of CLOSE-WALKERS W1 (each reverts the cure hunk its guard was written for); MUTATED_FILES +9 | 10 files without an entry → 0 | the ten guards under `tests/generators` of points 54, 48/49, 50/58, 60, 61, 62, 65, 66 (bar8Income, bar8People, bar8People2, bar8Powers, bar8Watch, faultsNeed, faultsPeople, faultsRows, faultsTools, faultsWatch) | 4e6d06082 | each measured in a scratch worktree at 319d75ac1: clean green, planted red with title_matches=1, restored byte-identically, green; the sweep's own ten lines under its own `check_caught`: **CAUGHT 10, BROKEN/MISSED 0**; mutationCoverageManifest **10/10** |
+| C3 | the size ceilings (`generationWorkerLazy`, `vendorPdfLazy` and its three budget pins) | one fresh `npm run build` of this tree and of 0dee69e17; at each of the seventeen landing steps one build read by scratch copies of the two files with the ceilings at 0 (removed); `VERIFY_DIST=1 npx vitest run tests/build/vendorPdfLazy.test.js tests/build/generationWorkerLazy.test.js tests/build/engineServiceStoreParity.test.js` (5 red, then 70/70) | worker 2,525,028 → 2,579,708 (**+54,680**); engine chunk < 904,174 → < 909,928 (+5,754); first paint raw 1,163,565 → 1,175,492 (+11,927), gzip 370,414 → 373,999 (+3,585), Brotli 310,664 → 313,994 (+3,330) | BY LANDING STEP, each tally summing exactly to its rise (the notes beside each figure). The worker: FAULTS-WATCH (66) +26,098, FAULTS-NEED (61) +4,751, FAULTS-ROWS (65) +4,722, K-WATCH/K-POWERS (48/49/57) +4,333, LAST-DECLARE (69) +3,694, the desks +3,102, K-PEOPLE +2,997, the rest under 2,000 each, J-INCOME-2 −328. Every rise under 60,000: the seat's | 6f8059584 | VERIFY_DIST=1 **70/70**; build output removed |
+| C4 | the lighting census (`sovereigntyLightingContract.walker`, `tests/lint/.lighting-census-baseline.json`) | `LIGHTING_CENSUS_REFREEZE='LASTCLOSE-SIGN' LIGHTING_CENSUS_NOTE=… npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js` on the clean tree (exit 1, by design) | files 3682 → 3699, parked 471 → 472, credited 3211 → 3227, titles 30955 → 31138, suiteTitles 8562 → 8623 | exactly the 17 test files points 54 to 70 added (each by its landing commit, in the note), none deleted | 4521322f2 | the plain run: the census figures green; ONE arm red, unmasked (below) |
+
+**THE ONE RED LEFT, NAMED (C6):** `sovereigntyLightingContract.walker` "THE CENSUS IS AN ASSERTION" arm: "SUITE_ARG_FORM now fires on an
+estate file — it was measured as a LATENT closure costing zero files". The sole cause, proved in a scratch worktree under
+`CENSUS_STASIS=1` (with it moved: 34/34, parked 471): `tests/domain/faultsDesks.test.js:121`, FAULTS-DESKS's (point 64),
+`describe('FR7: …', { timeout: 120_000 }, () => {…})` (vitest's options argument). Masked until now behind the file count. NOT this
+seat's file: named to the chair with the cure (the timeout leaves the describe for the suite's arms, the estate's `}, 120_000);`
+form) and a census refreeze after it.
