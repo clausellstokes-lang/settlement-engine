@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "1e0d63a021db5eb9624a54bc11187254567cc066",
+  "measuredAtSha": "841d492f9094a388d57ce36d4df7a4c12b745307",
   "measuredBy": "VEIL-17",
   "date": "2026-11-19",
-  "note": "the join: PR #75 head 8f3b8bf4b merged into the veil 4fa35f294 (dfad3a18b); the merged estate counted",
+  "note": "V8-9 (284583359): the arm V8-9 THE PATTERN S BOUND in tests/security/galleryVeilHandRows.pglite.test.js, +1 title",
   "files": 3705,
   "parked": 472,
   "credited": 3233,
-  "titles": 31218,
+  "titles": 31219,
   "suiteTitles": 8631
 }
