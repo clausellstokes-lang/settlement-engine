@@ -1,0 +1,5 @@
+16 pages drawn twice; byte-equal 10; differing 6 (paths put back: 1)
+dv212 | Systems/Economics | pages 4
+      e.g. Megaanthi (dv15): +["Medicinal herbsWild honeyCoalContraband goods (transit)","Blue = re-exported transit goods"]
+dv212 | Systems/Institutions | pages 6
+      e.g. Nektarambelos (dv10): +["Assassins' guildCriminal","A professional trade in murder, screened behind cutouts and admitted by no one. vq6n105z"]

@@ -51,6 +51,21 @@ with no hidden name; the stored public prose by counterfactual (nothing sent; 36
   figure no page draws not sent; (iv) a drawn band stays DIFFUSE unless only crime moves it. At FINAL each of the 49
   numbers must be registered under (i) to (iv).
 - **VR15** (07:37): the SERVER is the reference; a twin-stricter class is a leak; FINAL reads the differ through the server only.
+- **VR16** (09:22, to VEIL-18): every field NO non-owner page draws is withheld on EVERY non-owner read whatever the
+  veil (the drawn census: 77 of the 130 paths, e.g. compound.*, safetyRatio, militaryEffective, incomeSources[].weight,
+  spatialLayout.quarters); only DRAWN fields take a conditional rule, (a) recompose by preference; imports never carry
+  what a non-owner page withholds; the owner's reads untouched. VEIL-18 measured VR9 (0 of 4,966 ordinary people role-less
+  on unveiled pages: a hidden house's holder is withheld WHOLE with ties) and VR10 (no non-owner view needs a stable
+  person id: the per-read re-key stands). **AT FINAL, TEST VR16 YOURSELF** with `putback.probe.jsx`: `RV9_PATHS=<a JSON
+  list of the registry's withheld-always paths>`, `RV9_DBS=<born default-veil and every-eye-shut databases>`; every page
+  drawn as served and again from a FRESH fetch with those paths put back IN PLACE from the stored row; PASS = byte-equal on
+  every page. Controls (09:40 at the joined tip): nothing put back, 16/16 equal (`out/pb0-out.txt`); RED: `institutions`
+  put back, 6 of 16 differ (`out/pb-red-out.txt`). **NEVER clone the page model:** the client marks a projected
+  settlement's shut groupings in a WeakMap keyed by the OBJECT (`galleryVeil.js:827 VEILED_GROUPINGS`); a
+  `structuredClone` loses it and draws blocks a visitor never sees (measured: Nektarambelos' Defense tab grows
+  "Criminal structure: Semi-organized networks…" on a clone; from open data, the shown criminal powers, so no leak).
+  FOR FINAL, FROM THAT: any non-owner surface that COPIES the settlement before drawing (a print, a PDF, an export of the
+  shared page) loses the client's veil on derived blocks: read each such surface on a share with a shut grouping.
 - **THE CLEARANCE STANDARD** (07:01): re-run the differ; every path IN THE CLASS registered with its rule, or DIFFUSE
   (VR8), or RNG-ONLY (VR13): **zero unregistered**, plus the reader's own plants and the library.
 - The owner's VS1: a "Hide everything criminal" switch in Curate (seat VEIL-SWITCH, `lane/veil-switch-2026-11-19`),
