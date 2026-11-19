@@ -84,6 +84,24 @@ and `readiness.score`, the powers' `power` and `powerLabel`, `publicLegitimacy.s
 whose every criminal house is withheld learns that they stand. The law as written ("booleans derived from it") reaches
 them; whether numbers are in scope, and how coarse a number may arrive, is a ruling, not a reading.
 
+**THE CLEARANCE STANDARD (the chair, 07:01, rulings VR11 to VR13):** at FINAL the differ is re-run; every path IN
+THE CLASS must be in the builder's registry with its rule (recompose or withhold), or ruled DIFFUSE (VR8: the overall
+safety band and the roster's general composition), or RNG-ONLY (VR13: the history drawn again); zero unregistered,
+plus my own plants and the library. The gate is `differ-gate.mjs <registry.json> <rulings.json> <differ shards>` (exit
+1 on any unregistered path). **Baseline at ad093c92c, read THROUGH THE SERVER** (`RV9_SERVER_TPL`: each A, B and C row
+stored on a clone of the chain and read back by `get_gallery_dossier`): new shape 001..212, 124 unregistered, 20
+rng-only (`out/gate-baseline-tip.txt`); master's shape 203+211+212, 135 unregistered, 20 rng-only
+(`out/gate-baseline-master.txt`). The registry is empty at this tip; the red is expected.
+
+**V9-7 (LOW, a note on the instruments; it bears on every guard that reads the twin): THE TWIN IS NOT THE SERVER on born
+towns** (`differ-server.probe.jsx`: the differ's A births stored and read, 560 shares): the client's twin and the
+server's gallery read disagree on 326 of 560. The server is the STRICTER on every difference I traced: a Reveal-DM
+share with every eye shut (the server withholds a switched-off person's `gender`, `importance`, `power`; the twin keeps
+them), and a reveal-off share (the server withholds the `role`/`title` of the holder of a withheld house, e.g. Lipoka's
+"the fence" of "Fence (word of mouth)"; the twin sends them: V9-2's laxer twin, `out/server-twin-npcs.txt`). Nothing
+more reaches the wire for it, but a guard proved on the twin does not prove the server, and the library's "server
+against twin, 15 of 15 equal" does not hold on born towns. The differ is therefore read through the server at FINAL.
+
 ### What the cold pass found held (each executed)
 
 - **The earlier readers' library** at ad093c92c (`out/run-all-at-ad093c92c.txt`): 37 checks, 35 pass; the two known open (a07, d06), as at the baseline 4fa35f294; server against twin 15 of 15 equal; V7-10 and V7-6 rows pass.

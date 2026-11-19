@@ -36,6 +36,12 @@ function diff(a, b, p, out) {
   if (strip(a) !== strip(b) && !(a === undefined && b === undefined)) out.push([p, a, b]);
 }
 it('REVIEW-VEIL-9: the counterfactual differ', async () => {
+  const SERVER = process.env.RV9_SERVER_TPL || null; let db = null; let nrow = 0;
+  if (SERVER) { const pg = (await import(`${process.env.RV6_PGMOD}/node_modules/pg/lib/index.js`)).default;
+    const admin = new pg.Client({ host: process.env.PGHOST, user: 'postgres', database: 'postgres' }); await admin.connect();
+    const dbn = `${process.env.RV9_SERVER_DB || 'dfs'}_${SHARD[0]}`; await admin.query(`drop database if exists ${dbn} with (force)`); await admin.query(`create database ${dbn} template ${SERVER}`); await admin.end();
+    db = new pg.Client({ host: process.env.PGHOST, user: 'postgres', database: dbn }); await db.connect(); await db.query(`select set_config('test.uid', '', false)`); }
+  const READ = process.env.RV9_READ || 'gallery';
   const { generateSettlementPipeline } = await import(`${GEN}/src/generators/generateSettlementPipeline.js`);
   const { birthConfig, loadGenerationLawPayloads } = await import(`${GEN}/src/domain/density/densityCreateBoundary.js`);
   const { DEFAULT_CONFIG } = await import(`${GEN}/src/store/configSlice.js`);
@@ -49,14 +55,21 @@ it('REVIEW-VEIL-9: the counterfactual differ', async () => {
     let t = generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {}, onStep: drop ? (name, ctx) => { cut(ctx.institutions); if (isRec(ctx.settlement)) cut(ctx.settlement.institutions); } : undefined });
     if (drop) cut(t.institutions);
     if (compose) { t = { ...t }; delete t.publicProse; t = withPP(t, compose(t)); }
-    return t;
+    return JSON.parse(JSON.stringify(t)); // the STORED shape: a row is JSON
   };
-  const served = (rec, dm, kind, handAddrs) => {
+  const served = async (rec, dm, kind, handAddrs) => {
     const pub = veil.galleryPayloadFor(rec, { shareDm: dm, memberOverrides: {} });
     let eyes = [];
     if (kind === 'hand') eyes = handAddrs;
     if (kind === 'all') { const m = veil.curateModelFor(pub, []); eyes = m.sections.flatMap((s) => [...s.groupings.map((g) => g.address), ...s.switches.map((x) => x.address), ...s.cards.flatMap((c) => [...(c.whole ? [c.whole.address] : []), ...c.eyes.map((e) => e.address), ...(c.kind === 'npc' ? [`card:npc:${c.id}`] : [])])]); }
-    return veil.projectShareVeil(pub, veil.writeShareVeil({}, eyes.map((a) => ({ address: a, hidden: true })), { mode: 'live', at: '2026-11-01T00:00:00.000Z' }));
+    const ov = veil.writeShareVeil({}, eyes.map((a) => ({ address: a, hidden: true })), { mode: 'live', at: '2026-11-01T00:00:00.000Z' });
+    if (!SERVER) return veil.projectShareVeil(pub, ov);
+    nrow += 1; const id = `abcd9f${String(SHARD[0]).padStart(2, '0')}-0000-0000-0000-${String(nrow).padStart(12, '0')}`;
+    await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_member_overrides,gallery_share_dm,gallery_importable,gallery_share_narrated)
+      values ($1,'11111111-1111-1111-1111-111111111111',$2,'town',$3,true,$4,now(),$5,'unlisted',$6,$7,true,false)`, [id, rec.name || 'x', JSON.stringify(rec), `df${SHARD[0]}x${nrow}`, `dfl${SHARD[0]}x${nrow}`, JSON.stringify(ov), dm]);
+    const r = READ === 'link' ? (await db.query('select public.get_unlisted_dossier($1) x', [`dfl${SHARD[0]}x${nrow}`])).rows[0]?.x?.dossier : (await db.query('select * from public.get_gallery_dossier($1)', [`df${SHARD[0]}x${nrow}`])).rows[0]?.data;
+    await db.query('delete from public.settlements where id = $1', [id]);
+    return r;
   };
   const census = {}; const towns = []; let idx = 0;
   const bump = (veilKind, which, path, seed, ex) => { const r = census[path] = census[path] || { B: {}, C: {}, ex: {} }; (r[which][veilKind] = r[which][veilKind] || new Set()).add(seed); if (!r.ex[`${which} ${veilKind}`]) r.ex[`${which} ${veilKind}`] = ex; };
@@ -74,12 +87,13 @@ it('REVIEW-VEIL-9: the counterfactual differ', async () => {
     const hand = mA.sections.flatMap((s) => s.cards.filter((c) => c.kind === 'institution' && c.whole && H.some((h) => String(c.id) === String(h.id) || c.title === h.name || c.name === h.name || String(c.whole.address).includes(encodeURIComponent(h.name)) || String(c.whole.address).toLowerCase().includes(String(h.name).toLowerCase()))).map((c) => c.whole.address));
     for (const dm of [false, true]) for (const kind of ['default', 'hand', 'all']) {
       const vk = `${kind}${dm ? ' +DM' : ''}`;
-      let sA; let sB; let sC; try { sA = served(A, dm, kind, hand); sB = served(B, dm, kind, hand); sC = served(C, dm, kind, hand); } catch (e) { towns.push({ seed, veilThrew: String(e.message).slice(0, 100) }); continue; }
+      let sA; let sB; let sC; try { sA = await served(A, dm, kind, hand); sB = await served(B, dm, kind, hand); sC = await served(C, dm, kind, hand); } catch (e) { towns.push({ seed, veilThrew: String(e.message).slice(0, 100) }); continue; }
       const sentH = (sA.institutions || []).filter(hideable).length; if (sentH && kind !== 'none') { bump(vk, 'B', '(a hideable house still SENT on A)', seed, `${sentH}`); }
       for (const [which, other] of [['B', sB], ['C', sC]]) { const out = []; diff(sA, other, '', out); const seenP = new Set();
         for (const [p, a, b] of out) { if (seenP.has(p)) continue; seenP.add(p); bump(vk, which, p, seed, `${seed}: A=${JSON.stringify(strip(a))?.slice(0, 160)} | ${which}=${JSON.stringify(strip(b))?.slice(0, 160)}`); } }
     }
   }
   const rows = Object.entries(census).map(([p, r]) => ({ path: p, B: Object.fromEntries(Object.entries(r.B).map(([v, s]) => [v, s.size])), C: Object.fromEntries(Object.entries(r.C).map(([v, s]) => [v, s.size])), ex: r.ex }));
-  writeFileSync(process.env.RV9_OUT, JSON.stringify({ towns, rows }));
+  if (db) await db.end();
+  writeFileSync(process.env.RV9_OUT, JSON.stringify({ towns, rows, via: SERVER ? `server ${READ}` : 'twin' }));
 }, 14_400_000);
