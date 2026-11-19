@@ -14,3 +14,9 @@ V8-4 THE TOP-LEVEL POWER'S FLOOR: RED, 3 losses (the three Reveal-DM reads that 
   `faction`; the entry naming the shown power by `name` leaves whole (its name taken); the upper-cased entry loses its
   `faction`. The swept rows (the hidden house's own name, a longer name holding it, an entry flagged hidden) and
   powerStructure.factions[0] held at the base.
+
+V8-5 A TIE WHOSE END IS GONE: RED, 664 sends or losses over 6 rows x 8 reads: the removed person's ties arrive (from
+  npc.orrin, to npc.orrin, the person's key npc.thieves_guild_fixer_pell, a tie by names alone) with their words
+  (gtie1-gtie6), in both stored shapes; prominentRelationship (the dropped tie's copy, its npc1 swept) and a
+  pressureSentence that holds its words or names its two ends arrive; WHERE UNSURE (a dropped tie with no end names)
+  the copy and the sentence arrive. The KEEP rows' open copy and sentence held at the base.

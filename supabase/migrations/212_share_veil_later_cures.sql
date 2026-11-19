@@ -160,6 +160,15 @@
 --       shown power, and an entry flagged hidden, take none and stay swept (_gallery_veil_name_floor, now given the shown
 --       powers' folds by _gallery_veil_name_sweep: its signature gains `shown text[]`, the rollback drops the new one;
 --       gallerySecondHomes.js :: sweepHiddenNames).
+--   (30) A TIE WHOSE END IS GONE LEAVES WITH IT (VEIL-18; REVIEW-VEIL-8's V8-5): a person whose own name holds a hidden
+--       house's name is removed whole by the sweep ((16), (19)), and the tie that named them was left pointing at nobody
+--       (its end's id still spelled who: a reader inferred a removed person). Keeping the person named would send the
+--       hidden name inside the person's name, so the cure is the tie's: before the walk, each person the walk removes
+--       (its own id or name taken) is known by its id, its name and its key (npc.<slug>); a tie any of whose ends (from,
+--       to; master's npc1Id, npc2Id; npc1Name, npc2Name) is one of them leaves whole, in both stored shapes, and its copies
+--       follow as a dropped tie's do (ruling (5)'s rule): prominentRelationship whole where it is that tie's copy,
+--       pressureSentence where it names that tie's two ends or holds its words, both where such a tie's ends carry no
+--       names (_gallery_veil_second_homes; gallerySecondHomes.js :: withholdTiesOfTheSwept). No signature changes.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -1206,6 +1215,10 @@ declare
   kept jsonb;
   ent jsonb;
   j int;
+  swept text[];        -- VEIL-18 (V8-5): every identity of each person the sweep removes (id, name, the person's key)
+  cut jsonb;           -- and the ties that name one of them, which leave with them
+  cut_unsure boolean;
+  pr_cut boolean;
 begin
   -- COHERENCE-VEIL-10 (V7-2): THE COMPOSED HOMES, BY IDENTITY (the section's header states each rule)
   if jsonb_array_length(ties) > 0 then
@@ -1452,6 +1465,60 @@ begin
         from jsonb_array_elements(s -> 'simulationTrace') with ordinality x(e, o)
        where not (jsonb_typeof(e) = 'object'
                   and exists (select 1 from jsonb_each(e) z(kk, vv) where kk not in ('causes', 'downstreamEffects') and public._gallery_veil_named(vv, hits, blank, raws)))), '[]'));
+  end if;
+  -- VEIL-18 (REVIEW-VEIL-8's V8-5): A TIE WHOSE END THE SWEEP REMOVES LEAVES WITH IT. The walk below removes a person
+  -- whose own `id` or `name` holds a hidden house's name (an entry of npcs[] whose id or name is taken, or every person
+  -- where the key npcs is), and kept the tie that names them, pointing at nobody (its end's id still spelled who). Asked
+  -- here, before the walk, by the walk's own answer (_gallery_veil_name_taken, no floor): each such person's identities
+  -- (its id, its name, and the person's key npc.<the name's slug>, _gallery_npc_key's form) are swept; a tie of
+  -- relationships[] any of whose ends (`from`, `to`; master's `npc1Id`, `npc2Id`; `npc1Name`, `npc2Name`) is one of them
+  -- leaves whole, in both stored shapes. Its copies follow as a dropped tie's (ruling (5)'s rule,
+  -- _gallery_apply_member_overrides): prominentRelationship WHOLE where it is that tie's copy (the same two ends and type,
+  -- or a copy equal to its text); pressureSentence where it names that tie's two ends, or holds its words or (with the
+  -- copy) the copy's (_gallery_veil_embeds, the one fold, both directions); both, WHERE UNSURE, where such a tie's two
+  -- ends do not both carry a name. gallerySecondHomes.js :: withholdTiesOfTheSwept, rule for rule
+  if hot and jsonb_typeof(s -> 'npcs') = 'array' and jsonb_typeof(s -> 'relationships') = 'array' then
+    swept := array(select distinct x
+                     from jsonb_array_elements(s -> 'npcs') n,
+                          lateral (select translate(btrim(regexp_replace(public._gallery_veil_str(n -> 'name'), '[^a-zA-Z0-9]+', '_', 'g'), '_'),
+                                                    'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') as slug) g,
+                          unnest(array[public._gallery_veil_str(n -> 'id'), public._gallery_veil_str(n -> 'name'),
+                                       case when g.slug <> '' then 'npc.' || g.slug else '' end]) x
+                    where jsonb_typeof(n) = 'object' and x <> ''
+                      and (public._gallery_veil_name_hit('npcs', hits, blank, raws)
+                           or public._gallery_veil_name_taken(n, '[]', false, hits, blank, raws)));
+    if cardinality(swept) > 0 then
+      select coalesce(jsonb_agg(q.t order by q.o) filter (where not q.g), '[]'), coalesce(jsonb_agg(q.t order by q.o) filter (where q.g), '[]')
+        into kept, cut
+        from (select x.t, x.o, jsonb_typeof(x.t) = 'object'
+                       and exists (select 1 from unnest(array['from', 'to', 'npc1Id', 'npc2Id', 'npc1Name', 'npc2Name']) ek
+                                    where public._gallery_veil_str(x.t -> ek) <> '' and public._gallery_veil_str(x.t -> ek) = any(swept)) as g
+                from jsonb_array_elements(s -> 'relationships') with ordinality x(t, o)) q;
+      if jsonb_array_length(cut) > 0 then
+        s := jsonb_set(s, '{relationships}', kept);
+        cut_unsure := exists (select 1 from jsonb_array_elements(cut) t
+                               where public._gallery_veil_str(t -> 'npc1Name') = '' or public._gallery_veil_str(t -> 'npc2Name') = '');
+        pr := s -> 'prominentRelationship';
+        pr_cut := coalesce(jsonb_typeof(pr) = 'object'
+          and exists (select 1 from jsonb_array_elements(cut) t
+                       where (public._gallery_veil_str(t -> 'npc1Name') = public._gallery_veil_str(pr -> 'npc1') and public._gallery_veil_str(t -> 'npc2Name') = public._gallery_veil_str(pr -> 'npc2')
+                              and public._gallery_veil_str(t -> 'typeName') = public._gallery_veil_str(pr -> 'type'))
+                          or (public._gallery_veil_str(pr -> 'full') <> '' and t -> 'description' = pr -> 'full')
+                          or (public._gallery_veil_str(pr -> 'tension') <> '' and t -> 'tension' = pr -> 'tension')), false);
+        ps := s -> 'pressureSentence';
+        if cut_unsure or pr_cut then s := s - 'prominentRelationship'; end if;
+        if cut_unsure or coalesce(jsonb_typeof(ps) = 'string'
+             and (exists (select 1 from jsonb_array_elements(cut) t
+                           where public._gallery_veil_str(t -> 'npc1Name') <> '' and public._gallery_veil_str(t -> 'npc2Name') <> ''
+                             and position(public._gallery_veil_str(t -> 'npc1Name') in (ps #>> '{}')) > 0
+                             and position(public._gallery_veil_str(t -> 'npc2Name') in (ps #>> '{}')) > 0)
+                  or public._gallery_veil_embeds(ps, public._gallery_veil_pieces(jsonb_build_array(
+                       (select jsonb_agg(jsonb_build_array(t -> 'description', t -> 'tension')) from jsonb_array_elements(cut) t),
+                       case when pr_cut then jsonb_build_array(pr -> 'full', pr -> 'tension') end)))), false) then
+          s := s - 'pressureSentence';
+        end if;
+      end if;
+    end if;
   end if;
   -- COHERENCE-VEIL-8, the chair's ruling (a), in COHERENCE-VEIL-10's form: the name of a house removed whole leaves
   -- every key and every string that holds it, anywhere (a person's goal or secret that names it, a role, an id, a join,

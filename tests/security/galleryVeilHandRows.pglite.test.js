@@ -1718,4 +1718,63 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     expect(bad, `${bad.length} sends or losses`).toEqual([]);
     expect(paths).toEqual([]);
   }, ARM_TIMEOUT_MS);
+
+  it('V8-5 A TIE WHOSE END IS GONE: a person the sweep removes (its name holds a hidden house\'s name) takes every tie that names them with it, by id, by the person\'s key or by name, in both stored shapes (from/to, npc1Id/npc2Id), and the tie\'s copies follow as a dropped tie\'s do (prominentRelationship whole where it is that tie\'s copy, pressureSentence where it names its two ends or holds its words; both where a dropped tie\'s ends carry no names); every read, Reveal DM off and on, server against twin 0 paths; a tie between two people who both stand is untouched, and its copies stay', async () => {
+    const bad = []; const paths = [];
+    const ORRIN = "Thieves' Guild Master Orrin"; const PELL = "Thieves' Guild Fixer Pell";
+    const OPEN_TIE = { from: 'npc.mira', to: 'npc.tam', npc1Name: 'Mira Vane', npc2Name: 'Tam Reed', type: 'lover', typeName: 'Lovers', description: 'Mira and Tam share a boat on the salt flats.' };
+    const OPEN_COPY = { npc1: 'Mira Vane', npc2: 'Tam Reed', type: 'Lovers', full: 'Mira and Tam share a boat on the salt flats.', phrasing: 'Mira Vane and Tam Reed share a boat.' };
+    const OPEN_PS = 'They say Mira Vane and Tam Reed share a boat.';
+    const master = (t) => { if (!isRec(t) || !('from' in t)) return t; const { from, to, ...rest } = t; return { ...rest, npc1Id: from, npc2Id: to }; };
+    const tieTown = (tag, ties, prominent, pressure, shape = 'new') => ({
+      name: `Saltmere ${tag}`, tier: 'town',
+      institutions: [hiddenHouse(`inst-${tag}-tg`, "Thieves' guild (powerful)"), { id: `inst-${tag}-fish`, name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
+      npcs: [{ id: 'npc.orrin', name: ORRIN, role: 'Guildmaster' }, { id: 'npc.mira', name: 'Mira Vane', role: 'Fence' }, { id: 'npc.tam', name: 'Tam Reed', role: 'Smith' }, { name: PELL, role: 'Fixer' }],
+      relationships: shape === 'master' ? ties.map(master) : ties,
+      ...(prominent ? { prominentRelationship: prominent } : {}), ...(pressure ? { pressureSentence: pressure } : {}),
+    });
+    const GONE_TIES = [
+      { from: 'npc.orrin', to: 'npc.mira', npc1Name: ORRIN, npc2Name: 'Mira Vane', type: 'rival', typeName: 'Rivals', description: 'gtie1 they split the docks between them', tension: 'gtie2 one of them will hang for it' },
+      { from: 'npc.tam', to: 'npc.orrin', npc1Name: 'Tam Reed', npc2Name: ORRIN, type: 'debtor', typeName: 'Debtor', description: 'gtie3 Tam owes the old man a season of iron' },
+      { from: 'npc.thieves_guild_fixer_pell', to: 'npc.mira', npc1Name: PELL, npc2Name: 'Mira Vane', type: 'ally', typeName: 'Allies', description: 'gtie4 Pell fences what Mira cannot' },
+      { npc1Name: 'Tam Reed', npc2Name: ORRIN, type: 'kin', typeName: 'Kin', description: 'gtie6 a tie by names alone' },
+    ];
+    const THE_COPY = { npc1: ORRIN, npc2: 'Mira Vane', type: 'Rivals', full: 'gtie1 they split the docks between them', tension: 'gtie2 one of them will hang for it', phrasing: 'gtie5 two old rivals and the docks' };
+    const GONE = ['gtie1', 'gtie2', 'gtie3', 'gtie4', 'gtie5', 'gtie6', 'npc.orrin', 'Orrin', 'Pell'];
+    // [what, town, the copy and the sentence go]
+    const ROWS = [
+      ['the reader\'s row: the removed person\'s ties (by id, the person\'s key, names alone), its copy, a sentence that holds its words', tieTown('a', [...GONE_TIES, OPEN_TIE], THE_COPY, 'Word on the quay: gtie1 they split the docks between them.'), true],
+      ['the same in master\'s stored shape (npc1Id, npc2Id)', tieTown('b', [...GONE_TIES, OPEN_TIE], THE_COPY, 'Word on the quay: gtie1 they split the docks between them.', 'master'), true],
+      ['a sentence that names the dropped tie\'s two ends', tieTown('c', [...GONE_TIES, OPEN_TIE], null, `${ORRIN} and Mira Vane split the docks.`), true],
+      ['WHERE UNSURE: a dropped tie whose ends carry no names (its two ids only); the copy and the sentence tell the open tie', tieTown('d', [{ npc1Id: 'npc.orrin', npc2Id: 'npc.mira', type: 'rival' }, OPEN_TIE], OPEN_COPY, OPEN_PS), true],
+      // KEEP: a tie between two people who both stand is untouched, and its copy and sentence stay
+      ['KEEP: the open tie\'s copy and sentence beside the dropped ties', tieTown('e', [...GONE_TIES, OPEN_TIE], OPEN_COPY, OPEN_PS), false],
+      ['KEEP, master\'s shape', tieTown('f', [...GONE_TIES, OPEN_TIE], OPEN_COPY, OPEN_PS, 'master'), false],
+    ];
+    const endsOf = (t) => [t.from, t.to, t.npc1Id, t.npc2Id, t.npc1Name, t.npc2Name].filter(x => typeof x === 'string');
+    for (const [what, town, copiesGo] of ROWS) {
+      const r = await sharesOf(town, hide(town.institutions[0]));
+      paths.push(...enginePaths(what, r));
+      for (const { tag, doc } of everyRead(r)) {
+        if (!isRec(doc)) { bad.push(`${what}, ${tag}: no document`); continue; }
+        for (const n of GONE) bad.push(...arrivals(doc, n).map(a => `${what}, ${tag}: ${a}`));
+        const ties = Array.isArray(doc.relationships) ? doc.relationships : [];
+        // the removed people's ties leave whole: no tie with an end that names nobody who stands
+        const standing = new Set((Array.isArray(doc.npcs) ? doc.npcs : []).flatMap(p => [p.id, p.name]).filter(Boolean));
+        for (const t of ties) if (endsOf(t).some(e => !standing.has(e))) bad.push(`${what}, ${tag}: a tie names nobody who stands: ${JSON.stringify(t).slice(0, 120)}`);
+        // KEEP: the tie between two who stand arrives
+        if (ties.length !== 1 || ties[0].description !== OPEN_TIE.description || ties[0].npc1Name !== 'Mira Vane' || ties[0].npc2Name !== 'Tam Reed') bad.push(`${what}, ${tag}: the ties are ${JSON.stringify(ties).slice(0, 200)}`);
+        if (JSON.stringify((doc.npcs || []).map(p => p.name)) !== JSON.stringify(['Mira Vane', 'Tam Reed'])) bad.push(`${what}, ${tag}: the people are ${JSON.stringify((doc.npcs || []).map(p => p.name))}`);
+        if (copiesGo) {
+          if (doc.prominentRelationship !== undefined) bad.push(`${what}, ${tag}: prominentRelationship is sent: ${JSON.stringify(doc.prominentRelationship).slice(0, 120)}`);
+          if (doc.pressureSentence !== undefined) bad.push(`${what}, ${tag}: the pressure sentence is sent: ${JSON.stringify(doc.pressureSentence).slice(0, 120)}`);
+        } else {
+          if (differ(doc.prominentRelationship, town.prominentRelationship).length) bad.push(`${what}, ${tag}: the open copy is ${JSON.stringify(doc.prominentRelationship).slice(0, 120)}`);
+          if (doc.pressureSentence !== town.pressureSentence) bad.push(`${what}, ${tag}: the open sentence is ${JSON.stringify(doc.pressureSentence)}`);
+        }
+      }
+    }
+    expect(bad, `${bad.length} sends or losses`).toEqual([]);
+    expect(paths).toEqual([]);
+  }, ARM_TIMEOUT_MS);
 });

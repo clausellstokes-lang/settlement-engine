@@ -1,0 +1,12 @@
+V8-2, V8-4, V8-5 THE COST (VEIL-18's builder), after the last commit. Local scratch PostgreSQL 16 (unix socket
+/var/tmp/rv7). Chains: x211 = b1c211 (001..211, the frozen 211); base = b1bornbase (001..212 from the base's bytes, 212
+d1b5da91...); after = b1bornv85 (001..212 from the tree, 212 dae0ae6c...). Runner: measure/v8245-cost.sh b1c211 b1bornbase
+b1bornv85 5 (the brief's two cost8 rows and deep-cost's two 300 KB rows; 5 rounds, the chains in turn; medians, ms).
+
+row                                                 x211      base     after  after/x211
+h=5 hit=10000 cold=0 nl=1 (the V8-3 row)            6358      7079      7361       1.16
+h=50 hit=500 cold=500 nl=1                           101       195       168       1.66
+depth=10 houses=200 strings=5000 dm=false (300 KB)   349       392       382       1.09
+depth=10 houses=600 strings=10000 dm=false           1285      1371      1299       1.01
+Every read served (0 ERROR). THE LAW HOLDS: no row past twice x211.
+NOT MEASURED HERE: Langengrund (the largest born town; /var/tmp/v17/out/big0.json is not in this container).

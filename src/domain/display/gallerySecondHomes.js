@@ -976,8 +976,61 @@ export function withholdSecondHomes(s, src, gone, openNames, houseFields, births
     });
   }
   // the chair's ruling (a), in COHERENCE-VEIL-10's form: last, every key and every string of the projection that names
-  // a house removed whole leaves it, the floors aside. SQL twin: _gallery_veil_name_sweep.
-  if (search) sweepHiddenNames(s, search);
+  // a house removed whole leaves it, the floors aside. SQL twin: _gallery_veil_name_sweep. VEIL-18 (V8-5): first, the
+  // ties of the people the walk removes leave with them (withholdTiesOfTheSwept)
+  if (search) {
+    withholdTiesOfTheSwept(s, search.hit);
+    sweepHiddenNames(s, search);
+  }
+}
+
+/** The ends of a tie, in both stored shapes (from/to; master's npc1Id/npc2Id) and by name. */
+const TIE_ENDS = Object.freeze(['from', 'to', 'npc1Id', 'npc2Id', 'npc1Name', 'npc2Name']);
+
+/**
+ * VEIL-18 (REVIEW-VEIL-8's V8-5): A TIE WHOSE END THE SWEEP REMOVES LEAVES WITH IT (in place). The walk removes a person
+ * whose own `id` or `name` holds a hidden house's name (an entry of npcs[] whose id or name is taken, or every person
+ * where the key npcs is), and kept the tie that names them, pointing at nobody. Asked before the walk, by the walk's own
+ * answer: each such person's identities (its id, its name, and the person's key npc.<the name's slug>) are swept; a tie of
+ * relationships[] any of whose ends (TIE_ENDS) is one of them leaves whole. Its copies follow as a dropped tie's
+ * (withholdCovertCopies' rule): prominentRelationship WHOLE where it is that tie's copy (the same two ends and type, or a
+ * copy equal to its text); pressureSentence where it names that tie's two ends, or holds its words or (with the copy) the
+ * copy's (embedsAny); both, WHERE UNSURE, where such a tie's two ends do not both carry a name. SQL twin:
+ * _gallery_veil_second_homes, before its walk.
+ * @param {Rec} s @param {(t: string) => boolean} hit
+ */
+function withholdTiesOfTheSwept(s, hit) {
+  if (!Array.isArray(s.npcs) || !Array.isArray(s.relationships)) return;
+  const all = hit('npcs');
+  /** @type {Set<string>} */
+  const swept = new Set();
+  for (const p of s.npcs) {
+    if (!isRec(p)) continue;
+    const gone = all || ['id', 'name'].some(k => Object.prototype.hasOwnProperty.call(p, k) && (hit(k) || (typeof p[k] === 'string' && hit(p[k]))));
+    if (!gone) continue;
+    const slug = asciiLower(str(p.name).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, ''));
+    for (const x of [str(p.id), str(p.name), slug !== '' ? `npc.${slug}` : '']) if (x !== '') swept.add(x);
+  }
+  if (!swept.size) return;
+  /** @type {Rec[]} */
+  const cut = [];
+  /** @type {unknown[]} */
+  const kept = [];
+  for (const t of s.relationships) {
+    if (isRec(t) && TIE_ENDS.some(k => str(t[k]) !== '' && swept.has(str(t[k])))) cut.push(t); else kept.push(t);
+  }
+  if (!cut.length) return;
+  s.relationships = kept;
+  const unsure = cut.some(t => str(t.npc1Name) === '' || str(t.npc2Name) === '');
+  const pr = s.prominentRelationship;
+  const prCut = isRec(pr) && cut.some(t => (str(t.npc1Name) === str(pr.npc1) && str(t.npc2Name) === str(pr.npc2) && str(t.typeName) === str(pr.type))
+    || (str(pr.full) !== '' && t.description === pr.full) || (str(pr.tension) !== '' && t.tension === pr.tension));
+  const ps = s.pressureSentence;
+  const psCut = typeof ps === 'string'
+    && (cut.some(t => str(t.npc1Name) !== '' && str(t.npc2Name) !== '' && ps.includes(str(t.npc1Name)) && ps.includes(str(t.npc2Name)))
+      || embedsAny(ps, secondHomePieces([cut.map(t => [t.description, t.tension]), prCut && isRec(pr) ? [pr.full, pr.tension] : null])));
+  if (unsure || prCut) delete s.prominentRelationship;
+  if (unsure || psCut) delete s.pressureSentence;
 }
 
 /**
