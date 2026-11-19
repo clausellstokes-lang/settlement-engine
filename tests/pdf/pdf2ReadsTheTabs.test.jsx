@@ -120,16 +120,20 @@ const tabWord = (shown) => { const k = String(shown?.status ?? ''); return k ===
  *  (r2s-plague_onset-city-0), a famine's (r2s-famine-town-0), the mines a spent iron card listed (r2r-town-45,
  *  r2r-metropolis-9), a calm card's output the tab withholds (r2r-village-8), a proven ground (r2r-hamlet-8), a calm
  *  thorp's impaired parish (r2r-thorp-41), shares marked short (the head line's short sentence: r2r-hamlet-10,
- *  r2r-village-13); r2r-village-0 prints none of the chain and ground faults. */
+ *  r2r-village-13); r2r-village-15 prints none of the chain and ground faults.
+ *  RE-KEYED BY IDENTITY 2026-11-19 (LASTCLOSE-DOORS, the last close's whole check, C1 (b)): from r2r-village-0, whose live Common
+ *  grazing land now proves its pasture (FAULTS-BIRTH's follow-ups, point 68, FR23): the PDF and the Resources tab both print
+ *  `grazing_land`, true by the record (`groundsKeptOf`), so it is no longer a town with no proven ground. */
 const CENSUS = ['r2s-under_siege-village-0', 'r2s-plague_onset-city-0', 'r2s-famine-town-0', 'r2r-town-45', 'r2r-metropolis-9',
-  'r2r-village-8', 'r2r-hamlet-8', 'r2r-thorp-41', 'r2r-hamlet-10', 'r2r-village-13', 'r2r-village-0'];
+  'r2r-village-8', 'r2r-hamlet-8', 'r2r-thorp-41', 'r2r-hamlet-10', 'r2r-village-13', 'r2r-village-15'];
 /** The wide read's 150: a besieged and starving city with a spent iron card (bar0-city-under_siege+famine-rand-36), a
  *  besieged hamlet (bar0-hamlet-under_siege-rand-32), a proven ground (bar0-hamlet-calm-rand-27);
- *  bar0-village-calm-rand-28 prints none. */
-const WIDE = ['bar0-city-under_siege+famine-rand-36', 'bar0-hamlet-under_siege-rand-32', 'bar0-hamlet-calm-rand-27', 'bar0-village-calm-rand-28'];
+ *  bar0-village-calm-rand-30 prints none (RE-KEYED BY IDENTITY 2026-11-19, LASTCLOSE-DOORS: from bar0-village-calm-rand-28, whose
+ *  common proves its pasture since point 68, printed on the PDF and the tab alike, true by the record). */
+const WIDE = ['bar0-city-under_siege+famine-rand-36', 'bar0-hamlet-under_siege-rand-32', 'bar0-hamlet-calm-rand-27', 'bar0-village-calm-rand-30'];
 const SAMPLE = [...CENSUS, ...WIDE];
 /** The towns where the base printed none of arms (1), (2), (5), (6): the readings still agree there. */
-const NEGATIVES = ['r2r-village-0', 'bar0-village-calm-rand-28'];
+const NEGATIVES = ['r2r-village-15', 'bar0-village-calm-rand-30']; // RE-KEYED 2026-11-19 (LASTCLOSE-DOORS, C1 (b)): from r2r-village-0 and bar0-village-calm-rand-28 (point 68's commons prove their pasture: a true ground, printed alike); each new one of the 720's (the 150's) villages that prints none of the faults (measured over r2r-village-0..59 and bar0-village-calm-rand-27..41: 9 and 8 qualify; the lowest taken)
 
 /** @typedef {{ t: any, vm: any, svc: string[], eco: string[], res: string[], cards: Card[], journal: Array<{ name: string, markdown: string }> }} Town */
 /** @type {Map<string, Town>} */
