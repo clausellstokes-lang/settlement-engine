@@ -1,15 +1,16 @@
 <!-- THE CHAIR'S TEXT OF PULL REQUEST #75's DESCRIPTION (rewritten 2026-11-19 for points 1 to 72). The record is the handoff
      and the hand-backs it names; this text is a summary of them for the owner. -->
 
-## Status: <<READY FOR YOUR READ | NOT READY: …>>
+## Status: NOT READY: the share veil (database changes 211 and 212) is being joined, by your word of 2026-11-19 ("Yes get 211 and 212 in there"). The deploy waits for it.
 
-You wrote, on 2026-11-18, in the chair's session: "yes: refresh the stored reference files and open the pull request." This is that pull request. Later that day you said everything but the next thirty-town read lands before the deploy (05:13 UTC), and "Yes to both" (about 19:07 UTC) for the last close's refresh and signing. All of it is now on this branch.
+You wrote, on 2026-11-18, in the chair's session: "yes: refresh the stored reference files and open the pull request." This is that pull request. Later that day you said everything but the next thirty-town read lands before the deploy (05:13 UTC), and "Yes to both" (about 19:07 UTC) for the last close's refresh and signing. All of it is now on this branch. On 2026-11-19 you added: "Yes get 211 and 212 in there": the share veil's two database changes join this pull request before the deploy (section 3).
 
-Nothing here merges, deploys or touches the database by itself. **The merge, the deploy and the seven database changes stay your hand.**
+Nothing here merges, deploys or touches the database by itself. **The merge, the deploy and the database changes stay your hand.**
 
 - [x] the stored reference figures are refreshed, each by its own procedure (two closes; section 6);
 - [x] the whole check is green on the branch's tip `8f3b8bf4b` (three machines, every test's time read; its four reds classed and cured at point 73; section 6);
-- [<< >>] every CI job on this pull request is green on that tip;
+- [ ] the share veil joined: 211 (frozen) and 212 finished, and 212 CLEARED by a fresh security reader (section 3);
+- [ ] after the join: the moved figures re-taken, the whole check, every CI job green on the final tip;
 - [x] this description carries the veto list, the questions owed to you, what the closes re-took, and the known faults.
 
 ## 1. What this is, in plain words
@@ -38,10 +39,10 @@ Where the record is (all on this branch):
 Nothing below happens by itself. Each step is yours; the chair can walk you through any of them in the chat.
 
 1. **Read the veto list** (section 4) and the questions (section 5). Anything you veto is undone before the merge.
-2. **The database first.** The branch carries seven database changes (section 3). The runbook asks for them before the new app: `docs/DEPLOY.md`, "Database migrations (Supabase) — manual".
+2. **The database first.** The branch carries the database changes of section 3 (nine, once the share veil is in). The runbook asks for them before the new app: `docs/DEPLOY.md`, "Database migrations (Supabase) — manual".
    - Rehearse on a copy: `npm run ops:migrations:rehearse`, then `docs/ops/MIGRATION_REHEARSAL_RUNBOOK.md`.
    - Apply to production from a clean checkout of this branch's tip: `npx supabase@2.122.0 db push` (always with the version number; a bare `npx supabase` now fetches a version that rejects this project).
-   - Then the stamp file `supabase/applied-head.json` goes from 203 to 210 **on this branch**, with what your terminal printed. Until it does, the host refuses to build the app ("prod is at migration 203 while the repo head is 210"). Tell the chair when the push is done and paste the output: the chair writes the stamp from it, as was done on 2026-09-20.
+   - Then the stamp file `supabase/applied-head.json` goes from 203 to the branch's last change (212 once the share veil is in) **on this branch**, with what your terminal printed. Until it does, the host refuses to build the app ("prod is at migration 203 while the repo head is …"). Tell the chair when the push is done and paste the output: the chair writes the stamp from it, as was done on 2026-09-20.
 3. **Merge**: a merge commit, never a squash (the record cites commits by their hash; a squash would erase them).
 4. **The app deploys through CI** once the six required checks are green on the merged commit. The host's daily allowance must be free at that moment (section 4.6, item 2).
 5. **The edge functions**, by hand, from a clean checkout of the merged commit: `bash scripts/deploy.sh` (`docs/DEPLOY.md`, "Edge function — manual"). This branch changes `_shared`, `engine-generate`, `engine-version`, `generate-narrative`, `send-email` and `admin-actions`.
@@ -49,9 +50,9 @@ Nothing below happens by itself. Each step is yours; the chair can walk you thro
 
 No session touches a hosted database or a production credential.
 
-## 3. The seven database changes, one line each
+## 3. The database changes, one line each
 
-All seven were reviewed before first use (the pre-deploy review of 2026-11-10). None was added since the first close. Six replace a function and touch no stored data. One (208) restates one column.
+Seven are on the branch now (204 to 210), all reviewed before first use (the pre-deploy review of 2026-11-10); six replace a function and touch no stored data, one (208) restates one column. Two more join by your word of 2026-11-19 (211, 212: the share veil), at the end of the table; when they are in, `db push` applies all nine in order and the stamp goes from 203 to 212.
 
 | File | What it does | Does it touch stored data when applied? |
 |---|---|---|
@@ -62,6 +63,8 @@ All seven were reviewed before first use (the pre-deploy review of 2026-11-10). 
 | `208_party_link_independent_idempotent_veiled` | The party link: pressing "Unlisted link" again returns the same link; the link hides what is hidden and never reveals more; it no longer depends on the gallery listing. | **Yes, one column.** It restates `visibility` on the saved towns from whether a link exists, then adds a check on it. No link is made, moved or removed. |
 | `209_surveyor_premium_only` | Your tier law of 2026-11-09 ("Premium only."): the Surveyor (the AI layer) is held by staff, premium accounts, founders, and accounts staff granted it. | No rows. **But from the moment it is applied**, an account whose only claim is a Surveyor plan purchase (purchases are closed until launch) no longer has it. |
 | `210_public_prose_text_projection` | The public page carries the composed text blocks. | No. A shared town shows them after its next save: one save per shared town is owed. |
+| `211_server_side_share_veil` (JOINING) | The share veil, first part: the server withholds every trace of a house the DM hid (its name, its income row, sentences and lists that name it) from every non-owner read: the gallery, the party link, an import, the public page, the map. Frozen and security-reviewed on 2026-11-13; its apply pack is kept. | No stored data; it replaces the read functions. |
+| `212_share_veil_later_cures` (JOINING, NOT YET CLEARED) | The share veil, second part: the cures for leaks the security reviewers found after 211 was frozen (names in other scripts or cases, derived lists, history notes, covert ties), within a cost limit (no read more than twice 211's time, none failing where 211 serves). **Not applied until a fresh security reader clears its final text.** | No stored data; it replaces the read functions. |
 
 ## 4. The veto list
 
@@ -193,6 +196,8 @@ Each is true at this branch's tip. The first close's list had ten. Eight are cur
 8. *(Not a fault on a page: the town map is not shown, and map work is deferred to PLAT by your word of 2026-11-18.)*
 
 ## 8. What is not in this pull request
+
+- (Until the share veil is joined: 211 and 212, section 3. They are being brought in now, by your word.)
 
 - **The eighth thirty-town read**: after the deploy, by your word (2026-11-18, 05:13 UTC).
 - **The after-deploy list**: the faults of section 7, the lopsided pool's variety (4.6, item 5), the six owed lines (4.6, item 3), the CENSUS-4 ledger (4.6, item 8), and three code comments in the observed-shape tools that still say "eleven new" where the register (correctly) holds 10 new and 1 grown: they change only with that register's next governed step.
