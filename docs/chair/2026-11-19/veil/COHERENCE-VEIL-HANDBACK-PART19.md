@@ -47,6 +47,7 @@ with `--no-ff` before E.
 | V8-2, V8-4, V8-5 | IN HAND: a builder to `briefs/SUB-BRIEF-V8-245.md` (worktree `/home/user/wt/b1`, branch `v18-b1`) |
 | B, C, D | not started |
 | VR7 (the registry), VR9, VR10 | measuring |
+| VR15 (b), placed by the chair after VR7 and before E (07:54 UTC) | not started: re-run the reader's `server-twin-census.probe.jsx` (origin/lane/review-veil-9-2026-11-19) at the tip; its measure: 140 of 560 shares differ, all Reveal-DM with every eye shut; NO twin-stricter class (no server leak); one server-only class (a person's open cover membership, 7 shares); the twin LAXER in 15 classes + 4 of different value (a switched-off person's gender, importance, power, structuralRank, structuralPosition, settlementCondition, stressNote; role, title and tie roles, 91 shares; the TRUE veiled membership where the server sends the cover, 80 shares). Bring the twin to the server class by class, or record a class in the pack as a known preview difference (the preview shows more, never less) and tell the chair which |
 | E | not started |
 
 ## 4. How the instruments are re-made
