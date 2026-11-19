@@ -8,7 +8,7 @@ You wrote, on 2026-11-18, in the chair's session: "yes: refresh the stored refer
 Nothing here merges, deploys or touches the database by itself. **The merge, the deploy and the seven database changes stay your hand.**
 
 - [x] the stored reference figures are refreshed, each by its own procedure (two closes; section 6);
-- [<< >>] the whole check is green on the branch's tip `<<tip>>` (three machines, every test's time read; section 6);
+- [x] the whole check is green on the branch's tip `8f3b8bf4b` (three machines, every test's time read; its four reds classed and cured at point 73; section 6);
 - [<< >>] every CI job on this pull request is green on that tip;
 - [x] this description carries the veto list, the questions owed to you, what the closes re-took, and the known faults.
 
@@ -23,12 +23,12 @@ Four kinds of work are in it.
 3. **The page-truth rounds.** Thirty fresh towns were read cold, seven times over (the eighth read is after the deploy, by your word). Each false sentence found was traced to its cause and cured there, or it is listed in section 7 by name.
 4. **The faults round and the last small round** (points 60 to 70): the leftovers of the seventh read cured at their causes, the checking tools repaired, and new lines written where a small place had fewer than three true lines to choose from.
 
-Size: 7,105 commits and 4,409 files since `master`.
+Size: 7,113 commits and 4,412 files since `master` (at `8f3b8bf4b`).
 
 Where the record is (all on this branch):
 
 - Points 1 to 32: `docs/chair/2026-11-14/JOIN-17-HANDBACK.md`.
-- Points 33 to 72, one row a point: `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md`.
+- Points 33 to 73, one row a point: `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md`.
 - The veto lists, sentence by sentence: `docs/chair/2026-11-18/close/VETO-LIST-33-53.md` and `docs/chair/2026-11-18/lastclose/VETO-LIST-48-70.md`.
 - The two closes, figure by figure: `docs/chair/2026-11-18/lastclose/CLOSES-ACCOUNT.md`; each seat's hand-back beside it.
 - The chair's own record: `docs/chair/2026-11-17/sixth/CHAIR-HANDOFF-SIXTH.md` on the branch `lane/chair-2026-11-08`.
@@ -167,7 +167,7 @@ None of these blocks the merge. Each says what the pages do today.
 
 ## 6. The closes: what was refreshed
 
-Two closes ran. The first (2026-11-18 morning) covered points 33 to 53; the last (2026-11-18/19 night) covered points 54 to 70 and landed as points 71 and 72. Each stored figure was re-taken through its own procedure and laid to the landed points that moved it; a register of debt only shrank, except where section 4.6 names a ruling. Figure by figure: `docs/chair/2026-11-18/lastclose/CLOSES-ACCOUNT.md`.
+Two closes ran. The first (2026-11-18 morning) covered points 33 to 53; the last (2026-11-18/19 night) covered points 54 to 70 and landed as points 71 to 73. Each stored figure was re-taken through its own procedure and laid to the landed points that moved it; a register of debt only shrank, except where section 4.6 names a ruling. Figure by figure: `docs/chair/2026-11-18/lastclose/CLOSES-ACCOUNT.md`.
 
 - **The golden master** (the exact output of the 525 reference towns), signed through its door under your "Yes to both" (the signing announced in the chat at 01:04 UTC): **222 of 525 rows moved**, every one traced to a landed point, none unexplained, no person or name in or out. The espionage fence: 116 of 360. The dossier text manifest: 832 of 1,050. The year-long news feed (the herald desk) did not move.
 - **The engine bundle** (the copy of the generator the server runs): rebuilt from the tree three times, bytes equal (435 → 442 inputs, each laid to its point).
@@ -176,8 +176,8 @@ Two closes ran. The first (2026-11-18 morning) covered points 33 to 53; the last
 - **The registers of known debt**: the over-claims base shrank 45 → 18; the presumption classes' ceiling shrank 1,789 → 1,785; the presumed-things register 4,629 → 4,635 by six lines proved true by construction (court or gaol, "no gaol", the fish market's "market"); the under-claims took one owed row of six named lines (LC2).
 - **Tests re-keyed** where a test pinned an old place or count: by identity, never loosened (one stale anchor at the last close, `tailHouses1Gaps`).
 - **A fault of form cured**: one test of point 64 set a suite budget in a form the codebase's rules forbid; the budget moved onto each test, nothing else.
-- **The whole check at the tip**: <<the three parts' counts; every red by name, or none>>. **Every test's time was read**: <<the tests on the default 20-second budget that run within twice their time of it on CI's scale, and what was done: none | budgets given, commit …>>.
-- **Left red on purpose**: <<none>>.
+- **The whole check** (three machines, 42,247 tests at c02735d57): four reds, each classed before it was touched and cured by its class (point 73): one stored count not yet re-taken (the sentence-variant pin, 3033 → 3054) and three test samples that the landed work had truly changed (a dairy now supplied, a forest now proven, two commons that now prove their pasture), each moved by identity to a town where the same claim still bites; no claim loosened. The validators, both type gates, lint and both debt doors are green. **Every test's time was read**: five tests on the default 20-second limit ran 10 to 14 seconds under load; each now carries a limit of its own with its measured time (point 73), so CI's runners do not time out as they did after the first close.
+- **Left red on purpose**: none.
 
 ## 7. Known faults still on the pages, by name
 
