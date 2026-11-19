@@ -1,0 +1,234 @@
+
+### CRIME-WORDED: 10 paths
+B 41 | C 1 | history.currentTensions[] (only in A)
+      rv9-diff-town-infiltrated-0-12: A="type=crime_wave" | B=""
+B 35 | C 1 | spatialLayout.quarters[] (only in A)
+      rv9-diff-city-infiltrated-0-32: A="name=Shadows District" | B=""
+B 31 | C 0 | economicState.safetyProfile.economicDragDesc
+      rv9-diff-town-indebted-0-16: A="A modest shadow economy (~14% of activity) operates alongside legitimate commerce. Noticeable but not yet structurally damaging." | B=null
+B 19 | C 5 | stress.cast.stakes[].factionId
+      rv9-diff-town-indebted-0-16: A="Thieves' Guild" | B="Merchant Guilds"
+B 19 | C 5 | stressors.cast.stakes[].factionId
+      rv9-diff-town-indebted-0-16: A="Thieves' Guild" | B="Merchant Guilds"
+B 17 | C 3 | stress.cast.stakes[].reason
+      rv9-diff-town-indebted-0-16: A="crime gains from the disorder" | B="the crisis hits its base"
+B 17 | C 3 | stressors.cast.stakes[].reason
+      rv9-diff-town-indebted-0-16: A="crime gains from the disorder" | B="the crisis hits its base"
+B 11 | C 0 | economicState.safetyProfile.safetyDesc
+      rv9-diff-city-infiltrated-0-32: A="A mix of safer and more exposed areas. The garrison patrols the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid. | B="Crime is a persistent and visible problem. The garrison is overwhelmed or corrupt. Travelers are adv
+B 3 | C 1 | powerStructure.stability
+      rv9-diff-city-indebted-0-36: A="Unstable (pervasive organized crime)" | B="Strained — debt obligations constrain every decision"
+B 2 | C 0 | economicState.incomeSources[].desc
+      rv9-diff-metropolis-indebted-0-66: A="Fees for identification, minor enchanting, and divination. Adventurers and merchants both pay well for reliable magical services." | B="A busy market for spell services. Identification, augury, message sending, and contract-grade enchanting brings steady coin."
+
+### OTHER text/label: 44 paths
+B 46 | C 13 | npcs[].role
+      rv9-diff-town-infiltrated-0-12: A="Priest" | B="Temple Healer"
+B 45 | C 12 | npcs[].category
+      rv9-diff-town-infiltrated-0-12: A="economy" | B="other"
+B 45 | C 12 | npcs[].presentation.impression
+      rv9-diff-town-infiltrated-0-12: A="Affable. The manner of someone for whom friendliness is both genuine and useful." | B=undefined
+B 44 | C 10 | npcs[].presentation.disposition
+      rv9-diff-town-infiltrated-0-12: A="welcoming" | B="transactional"
+B 44 | C 10 | npcs[].presentation.behaviour
+      rv9-diff-town-infiltrated-0-12: A="Offers information freely; asks questions that seem like interest rather than interrogation." | B="Cooperative within clear limits; every exchange has an implicit value."
+B 39 | C 12 | npcs[].influence
+      rv9-diff-town-infiltrated-0-12: A="moderate" | B="low"
+B 38 | C 1 | history.currentTensions[] (only in B)
+      rv9-diff-town-politically_fractured-0-30: A="" | B="type=disputed_land"
+B 29 | C 8 | prominentRelationship.npc2
+      rv9-diff-town-indebted-0-16: A="Tlachtga Quinn" | B="Veradach Tobin"
+B 25 | C 0 | powerStructure.economyInputFingerprint
+      rv9-diff-town-indebted-0-16: A="power-economy-v1:2e2375b5" | B="power-economy-v1:f9c42a6d"
+B 25 | C 7 | prominentRelationship.npc1
+      rv9-diff-town-indebted-0-16: A="Daigh O'Gorman" | B="Lorcan Flaherty"
+B 22 | C 5 | relationships[] (only in A)
+      rv9-diff-city-insurgency-0-34: A="type=patron_client" | B=""
+B 18 | C 4 | powerStructure.factions[].powerLabel
+      rv9-diff-town-indebted-0-16: A="Minor" | B="Significant"
+B 17 | C 3 | stress.cast.stakes[].stake
+      rv9-diff-town-indebted-0-16: A="gains" | B="loses"
+B 17 | C 3 | stressors.cast.stakes[].stake
+      rv9-diff-town-indebted-0-16: A="gains" | B="loses"
+B 17 | C 0 | economicState.safetyProfile.safetyLabel
+      rv9-diff-town-politically_fractured-0-30: A="Volatile — Political Fracture" | B="Strained — Political Fracture"
+B 14 | C 3 | stress.cast.roles[] (only in A)
+      rv9-diff-city-insurgency-0-34: A="id=npc_4" | B=""
+B 14 | C 3 | stressors.cast.roles[] (only in A)
+      rv9-diff-city-insurgency-0-34: A="id=npc_4" | B=""
+B 13 | C 0 | economicState.prosperity
+      rv9-diff-town-indebted-0-16: A="Struggling" | B="Poor"
+B 13 | C 3 | prominentRelationship.type
+      rv9-diff-town-infiltrated-0-22: A="Outstanding Debt" | B="Pragmatic Alliance"
+B 11 | C 2 | relationships[] (only in B)
+      rv9-diff-town-infiltrated-0-12: A="" | B="type=ally"
+B 11 | C 1 | powerStructure.factionRelationships[] (only in B)
+      rv9-diff-town-indebted-0-16: A="" | B="type=tense"
+B 10 | C 2 | npcs[].name
+      rv9-diff-city-insurgency-0-34: A="Laenas Rutilius" | B="Varus Metellus"
+B 7 | C 0 | npcs[] (only in B)
+      rv9-diff-town-infiltrated-0-22: A="" | B="id=npc_7"
+B 7 | C 1 | defenseProfile.readiness.label
+      rv9-diff-town-politically_fractured-0-30: A="Lightly Defended" | B="Defensible"
+B 7 | C 1 | defenseProfile.readiness.color
+      rv9-diff-town-politically_fractured-0-30: A="#7a5010" | B="#5a6a1a"
+B 7 | C 1 | defenseProfile.readiness.background
+      rv9-diff-town-politically_fractured-0-30: A="#faf6ec" | B="#f4f8ec"
+B 7 | C 1 | defenseProfile.readiness.border
+      rv9-diff-town-politically_fractured-0-30: A="#e0c880" | B="#b8d0a8"
+B 6 | C 2 | conflicts[]
+      rv9-diff-town-indebted-0-16: A=undefined | B={"parties":["Guild Council","Creditor's Representative"],"issue":"Military conscription of guild apprentices","intensity":"high"}
+B 6 | C 2 | powerStructure.conflicts[]
+      rv9-diff-town-indebted-0-16: A=undefined | B={"parties":["Guild Council","Creditor's Representative"],"issue":"Military conscription of guild apprentices","intensity":"high"}
+B 6 | C 0 | powerStructure.factionRelationships[].direction
+      rv9-diff-city-infiltrated-0-32: A="stable" | B="escalating"
+B 6 | C 1 | powerStructure.publicLegitimacy.label
+      rv9-diff-city-insurgency-0-34: A="Contested" | B="Tolerated"
+B 6 | C 1 | powerStructure.publicLegitimacy.color
+      rv9-diff-city-insurgency-0-34: A="#8a4010" | B="#a0762a"
+B 6 | C 1 | powerStructure.publicLegitimacy.bg
+      rv9-diff-city-insurgency-0-34: A="#fdf6ec" | B="#faf8ec"
+B 5 | C 0 | stress.cast.roles[].reason
+      rv9-diff-city-insurgency-0-34: A="holds the seat, with legitimacy already contested" | B="holds the seat"
+B 5 | C 0 | stressors.cast.roles[].reason
+      rv9-diff-city-insurgency-0-34: A="holds the seat, with legitimacy already contested" | B="holds the seat"
+B 4 | C 0 | stress.cast.absent[]
+      rv9-diff-city-insurgency-0-34: A=undefined | B={"role":"instigator","reason":"no faction gains"}
+B 4 | C 0 | stressors.cast.absent[]
+      rv9-diff-city-insurgency-0-34: A=undefined | B={"role":"instigator","reason":"no faction gains"}
+B 4 | C 0 | pressureSentence
+      rv9-diff-metropolis-insurgency-0-54: A="The commons of Ulaanbaliq have stopped pretending to accept the current arrangement. High Theocratic Council still holds the buildings and the official seal, b | B="The challenge to High Theocratic Council in Ulaanbaliq is institutional, not the street but the
+B 3 | C 1 | stress.cast.stakes[]
+      rv9-diff-town-indebted-0-16: A=undefined | B={"factionId":"Creditor's Representative","stake":"split","reason":"no direct stake; it could go either way"}
+B 3 | C 1 | stressors.cast.stakes[]
+      rv9-diff-town-indebted-0-16: A=undefined | B={"factionId":"Creditor's Representative","stake":"split","reason":"no direct stake; it could go either way"}
+B 3 | C 0 | powerStructure.factions[].contestsNiche
+      rv9-diff-city-insurgency-0-34: A="Merchant Guilds" | B="Craft Guilds"
+B 3 | C 1 | activeConditions[].severityBand
+      rv9-diff-city-indebted-0-36: A="medium" | B="low"
+B 2 | C 0 | stress.cast.roles[].role
+      rv9-diff-city-insurgency-0-44: A="waverer" | B="instigator"
+B 2 | C 0 | stressors.cast.roles[].role
+      rv9-diff-city-insurgency-0-44: A="waverer" | B="instigator"
+
+### NUMBER/BOOLEAN: 48 paths
+B 44 | C 2 | defenseProfile.scores.internal
+      rv9-diff-town-indebted-0-16: A=38 | B=52
+B 43 | C 7 | defenseProfile.readiness.score
+      rv9-diff-town-indebted-0-16: A=24 | B=28
+B 43 | C 0 | economicState.incomeSources[].weight
+      rv9-diff-town-indebted-0-16: A=14.025624070745272 | B=15.533584562602895
+B 43 | C 0 | economicState.compound.criminalEffective
+      rv9-diff-town-indebted-0-16: A=65.56776470588234 | B=36.06227058823529
+B 43 | C 0 | economicState.compound.economyOutput
+      rv9-diff-town-indebted-0-16: A=31.87641834260289 | B=35.303601278642944
+B 43 | C 0 | economicState.safetyProfile.compound.criminalEffective
+      rv9-diff-town-indebted-0-16: A=65.56776470588234 | B=36.06227058823529
+B 43 | C 0 | economicState.safetyProfile.compound.economyOutput
+      rv9-diff-town-indebted-0-16: A=31.87641834260289 | B=35.303601278642944
+B 41 | C 0 | economicState.safetyProfile.safetyRatio
+      rv9-diff-town-indebted-0-16: A=0.9 | B=1.8
+B 33 | C 3 | defenseProfile.scores.economic
+      rv9-diff-town-indebted-0-16: A=36 | B=38
+B 32 | C 6 | powerStructure.factions[].power
+      rv9-diff-town-indebted-0-16: A=40 | B=33
+B 32 | C 6 | powerStructure.factions[].rawPower
+      rv9-diff-town-indebted-0-16: A=31 | B=34
+B 29 | C 0 | economicState.compound.religionInfluence
+      rv9-diff-town-indebted-0-16: A=26.809860476947538 | B=28.8
+B 29 | C 0 | economicState.safetyProfile.compound.religionInfluence
+      rv9-diff-town-indebted-0-16: A=26.809860476947538 | B=28.8
+B 27 | C 6 | powerStructure.factionRelationships[].ratio
+      rv9-diff-town-infiltrated-0-22: A=0.39 | B=0.41
+B 25 | C 1 | defenseProfile.scores.disaster
+      rv9-diff-town-indebted-0-16: A=65 | B=67
+B 25 | C 0 | defenseProfile.economicGates.internal
+      rv9-diff-town-indebted-0-16: A=0.87 | B=0.9
+B 25 | C 0 | defenseProfile.economicGates.economic
+      rv9-diff-town-indebted-0-16: A=0.8 | B=0.84
+B 25 | C 0 | defenseProfile.economicGates.disaster
+      rv9-diff-town-indebted-0-16: A=0.84 | B=0.87
+B 24 | C 0 | defenseProfile.economicGates.monster
+      rv9-diff-town-indebted-0-16: A=0.89 | B=0.91
+B 23 | C 0 | defenseProfile.scores.military
+      rv9-diff-town-indebted-0-16: A=47 | B=50
+B 23 | C 0 | economicState.compound.militaryEffective
+      rv9-diff-town-indebted-0-16: A=59.08668164844292 | B=65.043
+B 23 | C 0 | economicState.safetyProfile.compound.militaryEffective
+      rv9-diff-town-indebted-0-16: A=59.08668164844292 | B=65.043
+B 23 | C 1 | powerStructure.publicLegitimacy.score
+      rv9-diff-town-indebted-0-16: A=16 | B=26
+B 22 | C 0 | defenseProfile.economicGates.military
+      rv9-diff-town-indebted-0-16: A=0.86 | B=0.88
+B 22 | C 1 | history.historicalEvents[].anchored
+      rv9-diff-town-infiltrated-0-22: A=true | B=undefined
+B 22 | C 1 | history.eventsTimeline[].anchored
+      rv9-diff-town-infiltrated-0-22: A=true | B=false
+B 22 | C 4 | history.legacyAnnotations[].yearsAgo
+      rv9-diff-town-infiltrated-0-22: A=94 | B=69
+B 21 | C 5 | defenseProfile.scores.monster
+      rv9-diff-town-indebted-0-16: A=42 | B=43
+B 21 | C 4 | economicState.compound.magicInfluence
+      rv9-diff-town-indebted-0-16: A=22.170163381512605 | B=23.595
+B 21 | C 4 | economicState.safetyProfile.compound.magicInfluence
+      rv9-diff-town-indebted-0-16: A=22.170163381512605 | B=23.595
+B 20 | C 5 | defenseProfile.scores.magical
+      rv9-diff-town-indebted-0-16: A=22 | B=24
+B 20 | C 2 | history.historicalEvents[].yearsAgo
+      rv9-diff-city-infiltrated-0-32: A=317 | B=188
+B 20 | C 2 | history.eventsTimeline[].year
+      rv9-diff-city-infiltrated-0-32: A=110 | B=239
+B 20 | C 2 | history.eventsTimeline[].yearsAgo
+      rv9-diff-city-infiltrated-0-32: A=317 | B=188
+B 15 | C 3 | stress.cast.levers[].holderId
+      rv9-diff-city-infiltrated-0-32: A=null | B="npc_10"
+B 15 | C 3 | stress.cast.levers[].holderName
+      rv9-diff-city-infiltrated-0-32: A=null | B="Christodoulos Iasites"
+B 15 | C 3 | stressors.cast.levers[].holderId
+      rv9-diff-city-infiltrated-0-32: A=null | B="npc_10"
+B 15 | C 3 | stressors.cast.levers[].holderName
+      rv9-diff-city-infiltrated-0-32: A=null | B="Christodoulos Iasites"
+B 13 | C 0 | powerStructure.publicLegitimacy.breakdown.prosperity
+      rv9-diff-town-indebted-0-16: A=-20 | B=-10
+B 11 | C 1 | activeConditions[].severity
+      rv9-diff-city-indebted-0-36: A=0.33 | B=0.23
+B 10 | C 0 | powerStructure.publicLegitimacy.breakdown.safety
+      rv9-diff-city-infiltrated-0-32: A=0 | B=-8
+B 7 | C 1 | powerStructure.publicLegitimacy.breakdown.defense
+      rv9-diff-town-politically_fractured-0-30: A=-2 | B=0
+B 6 | C 1 | powerStructure.publicLegitimacy.govMultiplier
+      rv9-diff-city-insurgency-0-34: A=0.8 | B=1
+B 6 | C 1 | powerStructure.publicLegitimacy.crimMultiplier
+      rv9-diff-city-insurgency-0-34: A=1.15 | B=1
+B 5 | C 0 | economicState.safetyProfile.flags.arcaneBlackMarket
+      rv9-diff-city-insurgency-0-34: A=true | B=false
+B 5 | C 1 | powerStructure.publicLegitimacy.isTolerated
+      rv9-diff-city-insurgency-0-34: A=false | B=true
+B 3 | C 0 | economicState.safetyProfile.flags.religiousFraud
+      rv9-diff-town-politically_fractured-0-30: A=true | B=false
+B 2 | C 0 | powerStructure.publicLegitimacy.isContested
+      rv9-diff-city-insurgency-0-34: A=true | B=false
+
+### HISTORY RE-DRAW: 11 paths
+B 25 | C 2 | history.historicalEvents[] (only in A)
+      rv9-diff-town-infiltrated-0-22: A="name=The Trade Collapse" | B=""
+B 25 | C 2 | history.historicalEvents[] (only in B)
+      rv9-diff-town-infiltrated-0-22: A="" | B="name=The Migration"
+B 25 | C 2 | history.eventsTimeline[] (only in A)
+      rv9-diff-town-infiltrated-0-22: A="name=The Trade Collapse" | B=""
+B 25 | C 2 | history.eventsTimeline[] (only in B)
+      rv9-diff-town-infiltrated-0-22: A="" | B="name=The Migration"
+B 23 | C 4 | history.legacyAnnotations[].eventName
+      rv9-diff-town-infiltrated-0-22: A="The Great Construction" | B="The Siege"
+B 22 | C 2 | history.historicalEvents[].severity
+      rv9-diff-city-infiltrated-0-32: A="minor" | B="major"
+B 21 | C 4 | history.legacyAnnotations[].severity
+      rv9-diff-city-insurgency-0-34: A="major" | B="minor"
+B 18 | C 1 | history.historicalCharacter
+      rv9-diff-town-infiltrated-0-22: A="Economically dynamic in ways that occasionally tip into instability: the Great Construction is recent enough to remind everyone that prosperity here has always | B="The kind of place that historians overlook and travellers remember fondly: no dramatic history, but 
+B 18 | C 4 | history.legacyAnnotations[].eventType
+      rv9-diff-town-infiltrated-0-22: A="economic" | B="disaster"
+B 12 | C 0 | history.legacyAnnotations[]
+      rv9-diff-town-infiltrated-0-22: A={"eventType":"political","yearsAgo":69,"severity":"minor","eventName":"The Succession Crisis"} | B=undefined
+B 7 | C 0 | history.founding.overcoming
+      rv9-diff-town-indebted-0-16: A="through determination and cooperation" | B="at significant cost"

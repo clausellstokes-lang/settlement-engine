@@ -1,0 +1,36 @@
+ct_0: 24 shares with hand hides; 168 (share, shut grouping) pairs composed
+ct_1: 24 shares with hand hides; 168 (share, shut grouping) pairs composed
+ct_2: 24 shares with hand hides; 168 (share, shut grouping) pairs composed
+ct_3: 24 shares with hand hides; 168 (share, shut grouping) pairs composed
+ct | gallery | DM off | block:housekeeping.receipt -> publicProse.blocks.general:viability.verdictLines | towns 8
+      e.g. Palaiotion: sent ["A handful of things about this town cannot all be true at once, and everyone here has their own explanation."] | without the grouping []
+ct | gallery | DM off | block:power.criminalUnderside -> publicProse.blocks.economy:daily_life.shadowEconomy | towns 12
+      e.g. Palaiotion: sent {"@":"economy:economics"} | without the grouping null
+ct | gallery | DM off | block:power.criminalUnderside -> publicProse.blocks.economy:resources.shadowEconomy | towns 12
+      e.g. Palaiotion: sent {"@":"economy:economics"} | without the grouping null
+ct | gallery | DM off | block:power.criminalUnderside -> publicProse.blocks.economy:services.shadowEconomy | towns 12
+      e.g. Palaiotion: sent {"@":"economy:economics"} | without the grouping null
+ct | gallery | DM on  | block:housekeeping.receipt -> publicProse.blocks.general:viability.verdictLines | towns 8
+      e.g. Palaiotion: sent ["A handful of things about this town cannot all be true at once, and everyone here has their own explanation."] | without the grouping []
+ct | gallery | DM on  | block:power.criminalUnderside -> publicProse.blocks.economy:daily_life.shadowEconomy | towns 12
+      e.g. Palaiotion: sent {"@":"economy:economics"} | without the grouping null
+ct | gallery | DM on  | block:power.criminalUnderside -> publicProse.blocks.economy:resources.shadowEconomy | towns 12
+      e.g. Palaiotion: sent {"@":"economy:economics"} | without the grouping null
+ct | gallery | DM on  | block:power.criminalUnderside -> publicProse.blocks.economy:services.shadowEconomy | towns 12
+      e.g. Palaiotion: sent {"@":"economy:economics"} | without the grouping null
+ct | link | DM off | block:housekeeping.receipt -> publicProse.blocks.general:viability.verdictLines | towns 8
+      e.g. Palaiotion: sent ["A handful of things about this town cannot all be true at once, and everyone here has their own explanation."] | without the grouping []
+ct | link | DM off | block:power.criminalUnderside -> publicProse.blocks.economy:daily_life.shadowEconomy | towns 12
+      e.g. Palaiotion: sent {"@":"economy:economics"} | without the grouping null
+ct | link | DM off | block:power.criminalUnderside -> publicProse.blocks.economy:resources.shadowEconomy | towns 12
+      e.g. Palaiotion: sent {"@":"economy:economics"} | without the grouping null
+ct | link | DM off | block:power.criminalUnderside -> publicProse.blocks.economy:services.shadowEconomy | towns 12
+      e.g. Palaiotion: sent {"@":"economy:economics"} | without the grouping null
+ct | link | DM on  | block:housekeeping.receipt -> publicProse.blocks.general:viability.verdictLines | towns 8
+      e.g. Palaiotion: sent ["A handful of things about this town cannot all be true at once, and everyone here has their own explanation."] | without the grouping []
+ct | link | DM on  | block:power.criminalUnderside -> publicProse.blocks.economy:daily_life.shadowEconomy | towns 12
+      e.g. Palaiotion: sent {"@":"economy:economics"} | without the grouping null
+ct | link | DM on  | block:power.criminalUnderside -> publicProse.blocks.economy:resources.shadowEconomy | towns 12
+      e.g. Palaiotion: sent {"@":"economy:economics"} | without the grouping null
+ct | link | DM on  | block:power.criminalUnderside -> publicProse.blocks.economy:services.shadowEconomy | towns 12
+      e.g. Palaiotion: sent {"@":"economy:economics"} | without the grouping null
