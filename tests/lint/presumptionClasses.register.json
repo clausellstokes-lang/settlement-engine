@@ -1,7 +1,7 @@
 {
  "about": "THE PRESUMPTION-CLASSES WALKER'S REGISTER (tests/lint/presumptionClasses.walker.test.js; BAR6-GUARD, the chair's ruling BG1 of 2026-11-16). TODAY'S DEBT, SHRINK-ONLY: one row a (file, class, line) that held a presumption-class word and declared nothing that answers it at the base. A row is [class, status at the base, the line's first 120 characters, literalHash(the whole line)]. Written ONLY by scripts/presumption-classes-door.mjs: --shrink removes the rows a cure leaves stale and lowers the ceiling; --bank debt-at-base banks only a line whose whole literal stood in its file at the base. A NEW line is never banked: it declares. No other seat edits this file or the walker (BG1); the round's close re-banks it through its door.",
  "base": "afa46d644",
- "ceiling": 1789,
+ "ceiling": 1785,
  "rows": {
   "src/components/dossier/EngineSections.jsx": [
    ["office","none","Besieged by a coalition (${warStatus.besiegedBy.map(nameFor).join(', ')}). The garrison is thinning under sustained assa","548678a29a9134ec"],
@@ -392,8 +392,6 @@
    ["outside","colour","Stabling, horse-dealing, and farriery gathered in one quarter, serving merchants, soldiers, and travellers in want of a ","ed07037df57b391f"],
    ["outside","colour","Permanent offices where caravan masters, merchants, and armed escorts do business. It handles bonded freight, route inte","f35ac7fc46f5bcfd"],
    ["outside","colour","A board where torchbearers and porters sign on by the session at a day labourer's wage.","fa9574615e714824"],
-   ["plenty","other","Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.","1cac5c3cc9305cf8"],
-   ["plenty","other","An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than","21f132929b00e06a"],
    ["plenty","none","Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer gr","e0c246a8b89e9a9d"],
    ["plenty","other","A herd of cattle or goats, whenever livestock can be had, for milk, butter, and soft cheese. Any surplus is sold on.","ec0acbb869d4bf6c"],
    ["size","colour","A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new","0f6c7ac3988bcbea"],
@@ -534,7 +532,6 @@
    ["outside","none","City haulage is bonded through the caravan masters.","eae853d3c8439424"],
    ["outside","none","Buys and sells mules, donkeys, and draft horses. Rents animals to travellers and merchants who need load-carrying capaci","fd433d7e56a5068c"],
    ["plenty","none","A dairy for milk, butter, and soft cheese, from cattle or goats, whenever livestock can be had. Any surplus goes to neig","1eb94ae2ff5e9c9c"],
-   ["plenty","none","An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait.","7d046b6c7ec09d67"],
    ["size","none","Central plaza for weekly markets and fairs.","1a8969157ab99a05"],
    ["size","none","Five to ten permanent specialized market districts: grain, livestock, cloth, metals, exotica.","2c1df363052bbe8a"],
    ["size","none","A substantial walled compound for desert merchants: stabling for camels, locked storage, a well, and sleeping quarters f","33c359f1a6c3bb88"],
@@ -2082,7 +2079,6 @@
    ["office","none","A full council governs the city: aldermen, guild masters and appointed officials see to its taxes, its laws and its stre","9b0453c0c2a95605"],
    ["size","none","A full council governs the city: aldermen, guild masters and appointed officials see to its taxes, its laws and its stre","9b0453c0c2a95605"],
    ["sovereign","none","The local lord's household; land rights and feudal obligation give them a formal claim to authority, though other powers","0765b566a013f7de"],
-   ["sovereign","none","A reeve elected from the peasantry manages labour and mediates disputes under noble oversight.","173deb052821574c"],
    ["sovereign","none","A lord's steward administers the settlement; authority flows downward from the noble, not upward from residents.","250fce9a26571d40"],
    ["sovereign","none","The great noble houses are the crown's military and fiscal foundation, and they know it. Royal policy is negotiated with","2810057ea6d63145"],
    ["sovereign","none","Hereditary landowners whose cooperation the crown depends on for levies, taxes, and regional order. Not powerful enough ","545160c618db3a38"],

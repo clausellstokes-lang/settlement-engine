@@ -51,6 +51,12 @@ const missing = (t, name) => (t.resourceAnalysis?.gaps || []).some((/** @type {a
  * The other 12 are borne by no town of the 720 or the 150 and are RETIRED, listed below the table with their note (no
  * Fishmonger and no Smelter lacks its input in either: a fish or ore buyer on a road buys it in). THE COUNT: 19 pairs (8 kept
  * as they were, 11 re-keyed), 12 retired, of the 31. */
+/** LASTCLOSE-DOORS (2026-11-18, the last close; C1 (b)): THREE pairs RE-KEYED BY IDENTITY at cc11c9504. Point 68 (FAULTS-BIRTH's
+ * follow-ups, FR21/FR23: "the common proves its pasture"; wool and hides read their grounds) closed the gap of the Dairy farmer
+ * of r2r-hamlet-56 and r2r-hamlet-27 and the Tannery of r2s-plague_onset-village-2: each town keeps a Common grazing land, and
+ * the gap list holds no row for the house now (measured: `resourceAnalysis.gaps` empty for it). No town of the census's 720
+ * or the 150 holds either house with its gap `missing` (scanned whole at cc11c9504), so, as TAIL-HOUSES-5 did, each pair
+ * names a town beyond them (r2r- by the same configuration) whose house still lacks its input and prints the same two texts. */
 /** [seed, house, the old text's opening (must not print), the rewording's opening (prints instead)] */
 const RED = [
   ['r2r-town-54', 'Potter', 'Wheel-thrown pottery for domestic use.', 'A wheel and a small kiln for domestic pottery'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-village-4 (its clay bought in now)
@@ -62,13 +68,13 @@ const RED = [
   ['r2r-city-48', 'Vintner', 'Produces and ages wine', 'Presses and ages wine'],
   ['r2r-metropolis-9', 'Vintner', 'Makes and ages wine', 'A cellar of presses and casks for wine'],
   ['r2r-metropolis-54', 'Vintner', 'Wine pressed and matured, from local fruit or imported must, sold in bulk to the taverns', 'Wine pressed and matured from local fruit or imported must, when either comes to the cellar'],
-  ['r2r-hamlet-56', 'Dairy farmer', 'Keeps cattle or goats for milk, butter, and cheese.', 'A dairy for milk, butter, and cheese from cattle or goats'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-hamlet-12 (its gap gone)
-  ['r2r-hamlet-27', 'Dairy farmer', 'Keeps a herd of cattle or goats for milk', 'A dairy for milk, butter, and cheese, from a herd'],
+  ['r2r-hamlet-1944', 'Dairy farmer', 'Keeps cattle or goats for milk, butter, and cheese.', 'A dairy for milk, butter, and cheese from cattle or goats'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-hamlet-12 (its gap gone); RE-KEYED 2026-11-18 (LASTCLOSE-DOORS): from r2r-hamlet-56 (its Common grazing land proves the pasture now: point 68, FR23)
+  ['r2r-hamlet-714', 'Dairy farmer', 'Keeps a herd of cattle or goats for milk', 'A dairy for milk, butter, and cheese, from a herd'], // RE-KEYED 2026-11-18 (LASTCLOSE-DOORS): from r2r-hamlet-27 (its Common grazing land proves the pasture now: point 68, FR23)
   ['r2r-metropolis-58', 'Salt works', 'Evaporation pans or brine processing along the coast or riverbank.', 'Evaporation pans and brine-works, at work whenever brine can be had.'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-city-22 (its salt bought in now)
   ['r2r-hamlet-26', 'Charcoal burner', 'Turf-covered kilns burn wood slowly down to charcoal', 'Turf-covered kilns for burning wood slowly down to charcoal whenever wood can be had'],
   ['r2s-occupied-metropolis-3', 'Charcoal burner', 'What they make feeds the hottest fires in the settlement.', 'whenever wood can be had'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-town-17 (its gap gone); the same text, word for word
   ['bar0-village-calm-rand-40', 'Sawmill', 'It lifts what building and furniture-making the village can do.', 'whenever logs can be had, for building and furniture-making'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-village-14 (its logs bought in now); no town of the 720 bears it, this one of the 150 does
-  ['r2s-plague_onset-village-2', 'Tannery', 'Converts hides into leather using oak bark. Foul', 'Converts hides into leather using oak bark, whenever hides can be had.'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-village-9 (its hides bought in now)
+  ['r2r-village-1472', 'Tannery', 'Converts hides into leather using oak bark. Foul', 'Converts hides into leather using oak bark, whenever hides can be had.'], // RE-KEYED 2026-11-18 (LEFT-KEYS K2): from r2r-village-9 (its hides bought in now); RE-KEYED 2026-11-18 (LASTCLOSE-DOORS): from r2s-plague_onset-village-2 (its Common grazing land proves the pasture its hides come from now: point 68, FR21/FR23)
   // BAR4-CLOSE-SWEEP (2026-11-16, the chair's word of 16:44): re-keyed by identity from r2r-village-36, whose Fishmonger the record
   // now answers (BAR4-RECORD b7d3da983, R1, declared: the gap's writer reads the page's one reading; the town's food record names fish,
   // "Its own food is the day's catch", so the gap is `imported`, and the page agrees: no fish gap line, the house unmarked). Measured on
