@@ -6,7 +6,7 @@ itself and pushes; YOU DO NOT PUSH. A security lane: slips are leaks. Measure fi
 WITHHOLDING, never toward sending.
 
 ## Where you are
-- Worktree `/home/user/wt/veil17`, local branch `veil17`, base `<TIP>` (the joined tip: the veil 4fa35f294 joined with
+- Worktree `/home/user/wt/veil17`, local branch `veil17`, base `ad093c92c` (the joined tip: the veil 4fa35f294 joined with
   pull request #75's head 8f3b8bf4b; 212 unchanged by the join). `npm ci` is done. Never touch
   `/home/user/settlement-engine` (the main checkout) or any other worktree; never run a git command that moves a ref
   other than your one commit on `veil17`.
@@ -23,7 +23,7 @@ WITHHOLDING, never toward sending.
 - THE ACCEPTANCE RUN: `cd /var/tmp/v17 && PGHOST=/var/tmp/rv7 RV6_PGMOD=/var/tmp/v17/pgmod sh lib/docs/chair/2026-11-13/probes/REVIEW-VEIL-7/run-all.sh /home/user/wt/veil17 <outdir> > <file> 2>&1; echo $?`.
   At the base (VEIL-16, PART 17 section 6): exit 1, a07 and d06 the only FAIL rows (items B and C, not yours), e06 PASS,
   the twin 15 of 15.
-- A RED RUN IS RUN ON THE BASE'S BYTES: `git -C /home/user/wt/veil17 archive <TIP> | tar -x -C /var/tmp/v17/red-<tip7>`,
+- A RED RUN IS RUN ON THE BASE'S BYTES: `git -C /home/user/wt/veil17 archive ad093c92c | tar -x -C /var/tmp/v17/red-d7abcdc (ready: the joined tip d7abcdc55, byte-equal to ad093c92c outside docs/chair, node_modules linked)`,
   `node_modules` linked; copy your new guard arm into it to show it red there.
 - Instruments: `docs/chair/2026-11-14/veil-probe-16/measure/` (`cost.mjs`, `prof.mjs`, `big.probe.jsx` — Langengrund,
   regenerate to `/var/tmp/v17/out/big0.json` if absent, `born-cmp.mjs`, `v83-cost.sh`) and
@@ -98,7 +98,7 @@ town (Langengrund). WHERE THE VEIL CANNOT BE SURE, IT WITHHOLDS.
   plus the twin's tests (`tests/domain/display/publicSafe*.test.js`, `tests/components/publicProseVeil*.test.js`,
   `tests/lib/gallery.test.js`); the acceptance run (expected: exit 1, a07 and d06 only). At the commit (src/ moves):
   `npm run typecheck:domain:strict`, `npm run typecheck:ratchet`, `npx eslint <touched files>`, each through gate-tail.
-- Proof files (verdict lines, not logs) into `docs/chair/2026-11-19/veil/out/` (`V89-red-at-<tip9>.txt`, `V89-green.txt`,
+- Proof files (verdict lines, not logs) into `docs/chair/2026-11-19/veil/out/` (`V89-red-at-ad093c92c.txt`, `V89-green.txt`,
   `V89-born.txt`, `V89-cost.txt`); probes into `docs/chair/2026-11-19/veil/measure/`.
 - 212's header list of cures gains an entry for V8-9 (follow the file's own form); the rollback drops any new signature.
 - Commit on `veil17` by explicit paths (`git add <paths>`; never `-A`), `git commit -F <file>`. The message: the bound and
@@ -112,3 +112,12 @@ town (Langengrund). WHERE THE VEIL CANNOT BE SURE, IT WITHHOLDS.
 The commit sha; both sha256 of 212 and its rollback; the bound and its margins (births, refusal); the closed answer in
 plain words; every pattern site listed; red and green with counts; cost; born; guards; acceptance; the gates; every pin
 red and left; anything not done; executed told from plausible.
+
+## Two registers you can move (read before writing the twin)
+- `tests/lint/tuningRegister.walker.test.js`: a NEW top-level named numeric constant in `src/` (e.g. `export const
+  X_BOUND = 4096`) raises `UNREGISTERED_NAMED_CEILING` and reds the walker. It is ALREADY red by one at the base for
+  `NAME_WALK_BOUND = 64` (named to the chair for a ruling). Prefer a shape that adds no new named numeric constant (e.g.
+  carry the bound beside the existing one in one frozen object, or derive it); if you cannot, say so in your report:
+  do not touch the walker.
+- `tests/lint/ruinFilterRoster.walker.test.js` and `tests/lint/mutationCoverageManifest.test.js` are red at the base
+  for the veil's own files (named to the chair): do not touch them; do not add a NEW reader of `.institutions`.

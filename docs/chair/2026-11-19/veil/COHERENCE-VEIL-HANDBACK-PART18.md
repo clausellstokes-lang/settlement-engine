@@ -70,3 +70,35 @@ for a ruling):
    the ceiling raised by one with a DECLARED_GROWTH row, in the form of the chair's ruling TU1: a ceiling is the
    chair's to raise.
 
+THE CHAIR'S RULINGS ON THE THREE (2026-11-19 05:43 UTC, copied whole): "VR1 GO: galleryVeilHandRows.pglite takes its
+mutation-manifest row with the rationale `pglite-executed`, as its four siblings. VR2 GO: gallerySecondHomes.js takes a
+RUIN_AGNOSTIC_EXEMPT row, reason "a name lookup: the veil withholds a hidden house's name whether the house stands or
+lies ruined (it fails toward withholding)", and the pin 115 -> 116. VR3: REGISTER `NAME_WALK_BOUND` (and any bound V8-9
+adds) in the tuning register as a proper entry, so UNREGISTERED_NAMED_CEILING does not grow; only if the register's form
+asks for something you cannot state truly, fall back to a DECLARED_GROWTH row in TU1's form naming VR3."
+AS BUILT: VR1 6d73b0fe9 (the walker 1 of 10 red at the join, 10 of 10 after); VR2 3fce0a80e (2 of 12 red, 12 of 12
+after; eslint 0). VR3 NOT YET BUILT, and why its fallback: the register's proper entry for a named constant is a row the
+owner signs (`declaredGrowth.unregisteredNamed` rows all say "the name earns its register row when the owner signs the
+estate"; a `_TUNING` table would state a security bound to be a tuning value, which it is not); so VR3 takes the
+DECLARED_GROWTH fallback in TU1's form (the row in `tests/lint/.tuning-register.json`, the two ceilings +1, the
+inventory banked by its ritual `TUNING_INVENTORY_REFREEZE`), built once V8-9 lands so any bound it adds rides with it.
+
+## 3. STEP 2 (in the assignment's order)
+
+| Item | State |
+|---|---|
+| V8-9 | IN HAND: a builder working to `briefs/SUB-BRIEF-V8-9.md` in `/home/user/wt/veil17` (base ad093c92c). Not yet committed. |
+| V8-2, V8-4, V8-5; B, C, D; E | not started. Notes for V8-2: the defence rows find their house by name (`_gallery_veil_sources` 'houses', keyed by card name; applied in `_gallery_veil_second_homes` at the `defenseProfile.institutions` loop); identity is `catalogId` (`catalogIdForName` = the catalogue lookup of the trimmed lowered name). V8-4: `_gallery_veil_name_floor` floors only `powerStructure.factions[]`. V8-5: the reader's own remedy (keep the person named) would send the hidden house's name inside the person's name, against the law; the lawful cure by identity is that a tie whose end the sweep removed leaves with it. |
+
+## 4. THE FRESH READER'S FINDINGS (REVIEW-VEIL-9, through the chair) AND VR4
+
+The chair sent V9-1 (the gates twin `gatesSmugglersLine`, #75), V9-2 / ruling VR5 (holders' role and title under the
+default veil), V9-3 (the Shadows District quarter, on master too) and ruling VR6 (the owner's own design: the income
+shares re-derived where the criminal row is withheld), with RULING VR4: cure THE CLASS; measure first; propose ONE
+mechanism before building. MEASURED by a read-only seat (`out/VR4-REPORT.md`: 240 births, a 20-cell read matrix on 211
+and 212). PROPOSED to the chair (06:5x UTC): a roster-choice registry read by 212 and the twin; NO stored twin (a new key
+on the saved record is against the lane's law and VR6 (5)); per path (a) recompose where SQL rebuilds the served-roster
+wording exactly from served data alone, else (b) withhold wherever a hidden-whole house could have chosen it;
+spatialLayout.quarters withheld whole (nothing draws it on a non-owner page); two rows (the diffuse safety bands, NPC
+roster composition) and the `npc_veiled_` id prefix left for the chair or the owner. AWAITING THE CHAIR'S ANSWER: nothing
+of VR4 is built.
