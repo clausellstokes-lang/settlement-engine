@@ -123,6 +123,11 @@ const freezeRow = (/** @type {GenerationTier1Row} */ row) => Object.freeze(Objec
 // what the record stores; it rewrites 4 of the 63). The fresh literal differs in one other row, economyReconcilePass|availableServices's
 // producedOnRecord (same 63 -> 59, transformed 0 -> 4, class same -> varies: the narratives step now rewrites four of its
 // rows after it): a stored landing count, as DEBT-2 left economyReconcilePass|economicState's, the close's, not re-taken here.
+// 2026-11-19, THE LAST CLOSE (LASTCLOSE-DOORS; the owner's word "Yes to both", 2026-11-18 about 19:07 UTC), ONE ROW JOINS, 77 -> 78
+// pairs, pasted word for word from the census arm's printed literal at the base cc11c9504 (A4's fresh literal, which differs from
+// this one in that row only): assembleSettlement|institutions|mutates (FAULTS-ROWS, point 65, ruling FR14: the late re-read,
+// readHouseDescsLate, stores a refused description's correction on the institution rows in place) measures pure (keyMoves 0 of
+// 63: no draw), same on both comparands (63/63). No other row's figure moved.
 // R2-CODE-B-4 (ROUND THREE item 4, 2026-11-14), RE-MEASURED, cells from the arm's printed literal (the literal differs from
 // this one in these two rows only): resolveCrisisCast|crisisCast and |settlement stepDraws 0 -> 2, keyMoves 0 -> 2, class
 // pure -> drawn, on the 63-row corpus. An "Access to ..." row (the road to another place's house; record 375) is no longer a
@@ -223,6 +228,7 @@ export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} *
   // 1+2+3+4 tip — the `other` mints' `people-powers::mint::<slug>::tie` fork at the seam is retired (drawTies writes their tie).
   { step: 'assembleSettlement', key: 'relationships', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.relationships' },
   { step: 'assembleSettlement', key: 'npcs', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.npcs' },
+  { step: 'assembleSettlement', key: 'institutions', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.institutions' },
   { step: 'resolveCrisisCast', key: 'crisisCast', via: 'provides', stepDraws: 2, keyMoves: 2, rows: 63, class: 'drawn', onRecord: { absent: 63, same: 0, transformed: 0 }, onRecordClass: 'absent', producedOnRecord: { absent: 63, same: 0, transformed: 0 }, producedOnRecordClass: 'absent', recordPath: null },
   { step: 'resolveCrisisCast', key: 'settlement', via: 'mutates', stepDraws: 2, keyMoves: 2, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record' },
 ]).map(freezeRow));
