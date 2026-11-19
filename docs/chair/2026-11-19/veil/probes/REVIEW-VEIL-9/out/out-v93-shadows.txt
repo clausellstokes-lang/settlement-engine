@@ -1,0 +1,58 @@
+ct | gallery | DM off | eyes shut | PHRASE SENT, ITS HOUSE WITHHELD | 14
+      e.g. Khutulunkum (tp0x17): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | gallery | DM off | eyes shut | frozen | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Khutulunkum (tp0x18): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | gallery | DM on | eyes shut | PHRASE SENT, ITS HOUSE WITHHELD | 14
+      e.g. Khutulunkum (tp0x19): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | gallery | DM on | eyes shut | frozen | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Khutulunkum (tp0x20): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | gallery | DM on | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Khutulunkum (tp0x24): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | gallery | DM on | unmarked (default veil on the link) | phrase sent, the house sent too | 7
+ct | import | DM off | eyes shut | PHRASE SENT, ITS HOUSE WITHHELD | 14
+      e.g. Khutulunkum (tp0x17): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | import | DM off | eyes shut | frozen | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Khutulunkum (tp0x18): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | import | DM on | eyes shut | PHRASE SENT, ITS HOUSE WITHHELD | 14
+      e.g. Khutulunkum (tp0x19): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | import | DM on | eyes shut | frozen | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Khutulunkum (tp0x20): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | import | DM on | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Khutulunkum (tp0x24): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | import | DM on | unmarked (default veil on the link) | phrase sent, the house sent too | 7
+ct | link | DM off | eyes shut | PHRASE SENT, ITS HOUSE WITHHELD | 14
+      e.g. Khutulunkum (tp0x17): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | link | DM off | eyes shut | frozen | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Khutulunkum (tp0x18): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | link | DM on | eyes shut | PHRASE SENT, ITS HOUSE WITHHELD | 14
+      e.g. Khutulunkum (tp0x19): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | link | DM on | eyes shut | frozen | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Khutulunkum (tp0x20): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | link | DM on | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Khutulunkum (tp0x24): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+ct | link | DM on | unmarked (default veil on the link) | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Khutulunkum (tp0x23): stored ["Smuggling network","Multiple criminal factions","Front businesses","Underground city","Rookery","Contract killer"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+dv212 | gallery | DM off | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Vatannuur (dv23): stored ["Smuggling network","Front businesses","Black market"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+dv212 | gallery | DM on | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Nektarambelos (dv10): stored ["Smuggling network","Multiple criminal factions","Underground city","Rookery","Black market bazaar","Assassins' guild"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+dv212 | import | DM off | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Vatannuur (dv23): stored ["Smuggling network","Front businesses","Black market"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+dv212 | import | DM on | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Nektarambelos (dv10): stored ["Smuggling network","Multiple criminal factions","Underground city","Rookery","Black market bazaar","Assassins' guild"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+dv212 | link | DM off | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Vatannuur (dv23): stored ["Smuggling network","Front businesses","Black market"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+dv212 | link | DM on | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Nektarambelos (dv10): stored ["Smuggling network","Multiple criminal factions","Underground city","Rookery","Black market bazaar","Assassins' guild"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+dvm212 | gallery | DM off | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Vatannuur (dv23): stored ["Smuggling network","Front businesses","Black market"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+dvm212 | gallery | DM on | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Nektarambelos (dv10): stored ["Smuggling network","Multiple criminal factions","Underground city","Rookery","Black market bazaar","Assassins' guild"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+dvm212 | import | DM off | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Vatannuur (dv23): stored ["Smuggling network","Front businesses","Black market"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+dvm212 | import | DM on | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Nektarambelos (dv10): stored ["Smuggling network","Multiple criminal factions","Underground city","Rookery","Black market bazaar","Assassins' guild"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+dvm212 | link | DM off | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Vatannuur (dv23): stored ["Smuggling network","Front businesses","Black market"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
+dvm212 | link | DM on | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 7
+      e.g. Nektarambelos (dv10): stored ["Smuggling network","Multiple criminal factions","Underground city","Rookery","Black market bazaar","Assassins' guild"]; at $.spatialLayout.quarters[5].desc, $.spatialLayout.quarters[5].name
