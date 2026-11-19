@@ -36,6 +36,9 @@ with `--no-ff` before E.
   house, the base's own twin, 92 s on four shards): every eye shut, 235 paths differ A/B in two towns or more, **130 IN
   THE CLASS** (49 NUMBER/BOOLEAN, 28 CRIME-WORDED, 40 OTHER, 13 HISTORY RE-DRAW), 94 re-roll; the default veil 138 in
   the class. The reader's bound (130) reproduced exactly.
+- THE SAME DIFFER THROUGH THE SERVER (VR15; `measure/differ/run-differ-server.sh`, the gallery read on a chain 001..212
+  of the base): the reader's gate (empty registry, the VR13 rng ruling) `registered 0 | diffuse 0 | rng-only 20 |
+  UNREGISTERED 124` (`out/v18/differS-gate-at-1f501779b.txt`): the reader's baseline at ad093c92c, exactly.
 
 ## 3. The list (PART 18 section 6), as it stands
 
