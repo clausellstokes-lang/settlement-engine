@@ -93,6 +93,18 @@ stored on a clone of the chain and read back by `get_gallery_dossier`): new shap
 rng-only (`out/gate-baseline-tip.txt`); master's shape 203+211+212, 135 unregistered, 20 rng-only
 (`out/gate-baseline-master.txt`). The registry is empty at this tip; the red is expected.
 
+**The chair's VR14 (07:02, derived numbers, vetoable by the owner), as I will read it at FINAL:** (i) a number that
+measures crime itself (criminalEffective, criminalPreStress, blackMarketCapture, the compound's criminal figures, crime
+counts and types, safetyRatio while it carries the crime term) is WITHHELD; (ii) shares that must add up are
+re-derived or withheld; (iii) any other derived number ships only as a shared page DRAWS it; (iv) a drawn band stays,
+DIFFUSE, unless only crime can move it. MY ANSWER ON "Volatile" against "Strained" (07:40): diffuse under (iv), since
+`safetyRatio = militaryEffective / max(8, criminalEffective)` (`safetyProfile.js:79`) moves with the military term as
+much as the crime term; CAVEAT: the band with the shown guard houses gives the public formula's inequality, a single
+coarse bound. It stays diffuse ONLY if the raw militaryEffective and criminalEffective are withheld; either raw figure
+beside the band inverts to the hidden term, and is a finding at FINAL. AT FINAL each of the 49 numbers must be
+registered under one of (i) to (iv). Also at FINAL: the VEIL-SWITCH "Hide everything criminal" (the owner's VS1):
+can its Show-all send anything a hand-opened eye could not?
+
 **V9-7 (LOW, a note on the instruments; it bears on every guard that reads the twin): THE TWIN IS NOT THE SERVER on born
 towns** (`differ-server.probe.jsx`: the differ's A births stored and read, 560 shares): the client's twin and the
 server's gallery read disagree on 326 of 560. The server is the STRICTER on every difference I traced: a Reveal-DM
