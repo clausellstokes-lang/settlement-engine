@@ -11,6 +11,11 @@
  *
  * Pure display over galleryVeil.js :: curateModelFor; this component owns only the draft.
  *
+ * THE CRIMINAL SWITCH (the chair's ruling VS1, 2026-11-19): one switch above the sections,
+ * "Hide everything criminal", reads its state from the draft (criminalVeilSwitch.js ::
+ * criminalSwitchStateOf) and flips it exactly as clicking each criminal eye would
+ * (flipCriminalVeil); like an eye it saves nothing by itself, Done hands the list back.
+ *
  * THE AFFORDANCE SLOT (X-23): wave three's shared slot primitive has not landed. The eye is
  * rendered by `CurateEye` at the slot's position, the trailing end of a card header or a
  * fact row, and carries `data-affordance-slot="eye"` so the slot primitive can absorb it
@@ -20,6 +25,7 @@
 import { useMemo, useState } from 'react';
 import Button from '../primitives/Button.jsx';
 import { curateModelFor, toggleVeilDelta } from '../../domain/display/galleryVeil.js';
+import { CRIMINAL_SWITCH_WORDS, criminalSwitchStateOf, flipCriminalVeil, presentCriminalGroupings } from '../../domain/display/criminalVeilSwitch.js';
 import { BORDER2, CARD, CARD_ALT, INK, BODY, MUTED, RED, sans, SP, FS } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
@@ -91,6 +97,43 @@ function Box({ card, preview, onToggle, mobile }) {
   );
 }
 
+/**
+ * "Hide everything criminal": the label, the one line of what it covers, its state read from the
+ * draft, and the one button. Disabled, with its words, on a town with no criminal part. It wraps
+ * at phone width (the words take the row, the button drops under them).
+ * @param {{ state: 'none'|'hidden'|'shown'|'partly', onFlip: () => void, mobile: boolean }} props
+ */
+export function CriminalSwitch({ state, onFlip, mobile }) {
+  const W = CRIMINAL_SWITCH_WORDS;
+  const none = state === 'none';
+  const hidden = state === 'hidden';
+  const words = none ? W.none : W[state];
+  return (
+    <div role="group" aria-label={W.label} data-criminal-switch={state} style={{
+      display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap', minWidth: 0,
+      padding: SP.sm, border: `1px solid ${BORDER2}`, background: CARD,
+    }}>
+      <div style={{ minWidth: 0, flex: '1 1 14rem' }}>
+        <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.sm, mobile), fontWeight: 800 }}>{W.label}</div>
+        <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.4, overflowWrap: 'anywhere' }}>{W.covers}</div>
+        <div aria-live="polite" style={{ color: hidden ? RED : MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700 }}>{words}</div>
+      </div>
+      <Button
+        variant={hidden ? 'secondary' : 'ghost'}
+        size="sm"
+        role="switch"
+        aria-checked={hidden}
+        aria-label={W.label}
+        disabled={none}
+        onClick={onFlip}
+        style={{ flexShrink: 0 }}
+      >
+        {hidden ? 'Show all' : 'Hide all'}
+      </Button>
+    </div>
+  );
+}
+
 /** A section: its heading, groupings and switches as rows, its boxes behind one toggle. */
 function SectionBlock({ section, preview, onToggle, mobile }) {
   const [open, setOpen] = useState(false);
@@ -130,6 +173,10 @@ export default function CurateMode({ payload, deltas, onDone, onCancel }) {
   const [preview, setPreview] = useState(false);
   const model = useMemo(() => curateModelFor(payload, draft), [payload, draft]);
   const toggle = (address) => setDraft(d => toggleVeilDelta(d, address, model.defaults));
+  // The criminal groupings that cover something in this town (read once per payload).
+  const present = useMemo(() => presentCriminalGroupings(payload), [payload]);
+  const criminal = criminalSwitchStateOf(model.defaults, draft, present);
+  const flipCriminal = () => setDraft(d => flipCriminalVeil(d, model.defaults, present));
 
   return (
     <div role="region" aria-label="Curate for visitors" style={{
@@ -150,6 +197,7 @@ export default function CurateMode({ payload, deltas, onDone, onCancel }) {
       <p style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
         Names, roles and categories always show. A criminal or clandestine house is the exception: it can be hidden whole.
       </p>
+      {!preview && <CriminalSwitch state={criminal} onFlip={flipCriminal} mobile={mobile} />}
       {model.sections.map(sec => (
         <SectionBlock key={sec.id} section={sec} preview={preview} onToggle={toggle} mobile={mobile} />
       ))}
