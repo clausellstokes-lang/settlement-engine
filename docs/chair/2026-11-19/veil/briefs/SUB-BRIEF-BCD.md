@@ -8,8 +8,8 @@ WITHHOLDING, never toward sending.
 ## Where you are, the Never list, THE LAWS, the gates
 EXACTLY as `docs/chair/2026-11-19/veil/briefs/SUB-BRIEF-V8-245.md` (read its sections "Where you are", "Never",
 "THE LAWS" and the green list of "The work" whole: they bind you), with these changes: your worktree is
-`/home/user/wt/b2`, your local branch `v18-b2`, your base `<BASE>` (the V8-2/4/5 builder's last commit; read the three
-commits' messages first: `git log -3`); your red runs are on a copy of `/var/tmp/v18/base-b2` (`git archive <BASE>`,
+`/home/user/wt/b2`, your local branch `v18-b2`, your base `2d92ddde5` (the lane's tip: V8-2, V8-4, V8-5 cherry-picked as e861caed2, 31d1eacb7, 2d92ddde5, on the
+merged criminal-veil switch c2db1bda2; read the three commits' messages first: `git log -4`); your red runs are on a copy of `/var/tmp/v18/base-b2` (`git archive 2d92ddde5`,
 `node_modules` linked); your outputs go to `/var/tmp/v18/out/b2/`; your proof files are `BCD-red.txt`, `BCD-green.txt`,
 `BCD-born.txt`, `BCD-cost.txt` in `docs/chair/2026-11-19/veil/out/`. THE ACCEPTANCE RUN at your base: exit 1, a07 and
 d06 the only FAIL rows. At your LAST commit it must exit 0 (a07 and d06 PASS; every other row as at the base; the twin
