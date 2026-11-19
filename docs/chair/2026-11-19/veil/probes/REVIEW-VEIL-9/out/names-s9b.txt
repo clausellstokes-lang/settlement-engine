@@ -1,0 +1,33 @@
+chain s9b: 11 towns, 44 shares, 308 reads, 176 houses hidden whole (summed over shares)
+s9b | economicState.activeChains[].chainId | towns: no reveal 2, DM 2 | spelled as the card 0, another form 40 | reads: gallery import importMap link map | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; no reveal | every eye shut ; no reveal | every eye shut | frozen
+      e.g. Hongpo gallery: "black market" in "black_market"
+s9b | economicState.activeChains[].label | towns: no reveal 2, DM 2 | spelled as the card 0, another form 40 | reads: gallery import importMap link map | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; no reveal | every eye shut ; no reveal | every eye shut | frozen
+      e.g. Hongpo gallery: "ตลาดมด" in "ตลาดมืด"
+s9b | economicState.activeChains[].processingInstitutions[] | towns: no reveal 10, DM 10 | spelled as the card 0, another form 360 | reads: gallery import importMap link map | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; no reveal | every eye shut ; no reveal | every eye shut | frozen
+      e.g. Ögedeigol gallery: "السوق السوداء" in "السوق السوداء"
+s9b | economicState.compound.inst.<key> | towns: no reveal 2, DM 2 | spelled as the card 0, another form 40 | reads: gallery import importMap link map | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; no reveal | every eye shut ; no reveal | every eye shut | frozen
+      e.g. Hongpo gallery: "black market (squeezed)" in "hasBlackMarket" = true
+s9b | economicState.compound.inst.names[] | towns: no reveal 11, DM 11 | spelled as the card 0, another form 740 | reads: gallery import importMap link map | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; no reveal | every eye shut ; no reveal | every eye shut | frozen
+      e.g. Ögedeigol gallery: "السوق السوداء" in "السوق السوداء"
+s9b | economicState.incomeSources[].source | towns: no reveal 1, DM 1 | spelled as the card 0, another form 20 | reads: gallery import importMap link map | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; no reveal | every eye shut ; no reveal | every eye shut | frozen
+      e.g. Khanörtöö gallery: "שוק שחור" in "שוק שחור Revenue"
+s9b | economicState.safetyProfile.compound.inst.<key> | towns: no reveal 2, DM 2 | spelled as the card 0, another form 40 | reads: gallery import importMap link map | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; no reveal | every eye shut ; no reveal | every eye shut | frozen
+      e.g. Hongpo gallery: "black market (squeezed)" in "hasBlackMarket" = true
+s9b | economicState.safetyProfile.compound.inst.names[] | towns: no reveal 11, DM 11 | spelled as the card 0, another form 740 | reads: gallery import importMap link map | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; no reveal | every eye shut ; no reveal | every eye shut | frozen
+      e.g. Ögedeigol gallery: "السوق السوداء" in "السوق السوداء"
+s9b | economicState.safetyProfile.flags.<key> | towns: no reveal 2, DM 2 | spelled as the card 0, another form 40 | reads: gallery import importMap link map | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; no reveal | every eye shut ; no reveal | every eye shut | frozen
+      e.g. Hongpo gallery: "black market (squeezed)" in "arcaneBlackMarket" = false
+s9b | economicState.situationDesc | towns: no reveal 1, DM 1 | spelled as the card 0, another form 20 | reads: gallery import importMap link map | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; no reveal | every eye shut ; no reveal | every eye shut | frozen
+      e.g. Hongpo gallery: "ตลาดมด" in "Honest trade gets by, but a busy ตลาดมืด undercuts it."
+s9b | relationships[].npc1Role | towns: no reveal 0, DM 1 | spelled as the card 0, another form 4 | reads: gallery import | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen
+      e.g. Khanörtöö gallery: "ночнои рынок" in "the Ночной рынок boss"
+s9b | relationships[].npc2Role | towns: no reveal 0, DM 1 | spelled as the card 0, another form 4 | reads: gallery import | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen
+      e.g. Khanörtöö gallery: "ночнои рынок" in "the Ночной рынок boss"
+s9b | simulationTrace[].causes[].reason | towns: no reveal 0, DM 9 | spelled as the card 0, another form 120 | reads: gallery import | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen
+      e.g. Rundberg gallery: "ヤミ市の組" in "ヤミ市の組 converts raw inputs into chain output."
+s9b | simulationTrace[].causes[].source | towns: no reveal 0, DM 9 | spelled as the card 0, another form 96 | reads: gallery import | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen
+      e.g. Rundberg gallery: "ヤミ市の組" in "processor.ヤミ市の組"
+s9b | simulationTrace[].downstreamEffects[].target | towns: no reveal 0, DM 9 | spelled as the card 0, another form 84 | reads: gallery import | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen
+      e.g. Rundberg gallery: "ヤミ市の組" in "ヤミ市の組"
+s9b | simulationTrace[].targetId | towns: no reveal 0, DM 11 | spelled as the card 0, another form 172 | reads: gallery import | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen
+      e.g. Rundberg gallery: "smuggling network" in "institution.smuggling_network"

@@ -1,0 +1,12 @@
+dv212 | gallery | DM off | persons of a withheld house sent 38 | whose role or title is the house's holder title 0 | towns 0 | e.g. -
+dv212 | gallery | DM on  | persons of a withheld house sent 38 | whose role or title is the house's holder title 32 | towns 12 | e.g. Fionnford: Black market -> the black marketeer / the black marketeer
+dv212 | link | DM off | persons of a withheld house sent 38 | whose role or title is the house's holder title 0 | towns 0 | e.g. -
+dv212 | link | DM on  | persons of a withheld house sent 38 | whose role or title is the house's holder title 0 | towns 0 | e.g. -
+dv211 | gallery | DM off | persons of a withheld house sent 38 | whose role or title is the house's holder title 0 | towns 0 | e.g. -
+dv211 | gallery | DM on  | persons of a withheld house sent 38 | whose role or title is the house's holder title 34 | towns 12 | e.g. Fionnford: Black market -> the black marketeer / the black marketeer
+dv211 | link | DM off | persons of a withheld house sent 38 | whose role or title is the house's holder title 0 | towns 0 | e.g. -
+dv211 | link | DM on  | persons of a withheld house sent 38 | whose role or title is the house's holder title 0 | towns 0 | e.g. -
+dvm212|f|19|Assassin Guildmaster; Bandit Contact; Black Market Fence; Corrupt Official; Counterfeiter; Crime Lord; Local Fence; Racketeer; Shadow Council Leader; Smuggler Chief; Thieves' Guild Master; Underground Broker
+dvm212|t|19|Assassin Guildmaster; Bandit Contact; Black Market Fence; Corrupt Official; Counterfeiter; Crime Lord; Local Fence; Racketeer; Shadow Council Leader; Smuggler Chief; Thieves' Guild Master; Underground Broker
+dvm211|f|19|Assassin Guildmaster; Bandit Contact; Black Market Fence; Corrupt Official; Counterfeiter; Crime Lord; Local Fence; Racketeer; Shadow Council Leader; Smuggler Chief; Thieves' Guild Master; Underground Broker
+dvm211|t|19|Assassin Guildmaster; Bandit Contact; Black Market Fence; Corrupt Official; Counterfeiter; Crime Lord; Local Fence; Racketeer; Shadow Council Leader; Smuggler Chief; Thieves' Guild Master; Underground Broker

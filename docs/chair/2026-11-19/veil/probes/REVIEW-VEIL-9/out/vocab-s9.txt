@@ -1,0 +1,385 @@
+s9_0: 44 shares, 88 pages, no model 0, render threw 0, views 1664, 4986228 characters
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Summary/Foundations | criminal | 11
+      e.g. Rundberg: Criminal opportunityElevated
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Summary/Overview | criminal | 3
+      e.g. Magnasaltus: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | brib | 4
+      e.g. Rundberg: Some of the garrison and city watch take bribes from whoever has coin. A functioning court and prison mean crimes carry real consequences.
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | crime | 8
+      e.g. Rundberg: The city's record of crimes at Rundberg is not short, and the next few seasons will decide whether the law or the criminals gain on it.
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | criminal | 11
+      e.g. Rundberg: Criminal Architecture & Public Order▲
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | gang | 2
+      e.g. Uxmalpan: There is money at Uxmalpan and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | smuggl | 3
+      e.g. Burjzamin: The garrison and city watch walk only the rounds the occupiers allow. A wrong done here goes before the court, and the guilty can be locked up for it. The garrison and city watch keep the gates, but smugglers have ways in beneath the walls.
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | thieve | 1
+      e.g. Burjzamin: The garrison, now under occupier command, enforces the curfew at the checkpoints. Thieves are scarce now; the danger is informers and occupation officials, and the resistance works out of sight.
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Economics | criminal | 10
+      e.g. Rundberg: Civil disputesCriminal trialsNotary services
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | criminal | 19
+      e.g. Rundberg: A sizable gaol holding debtors, criminals, and political prisoners together.
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | organized | 42
+      e.g. Rundberg: An organized body of shoemakers producing footwear for an urban population under regulated standards.
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | thieve | 8
+      e.g. Hongpo: BacksThieves' GuildMerchant oligarchy
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | underground | 9
+      e.g. Rundberg: Underground venues for illegal or barely-legal blood sport, hidden from the authorities that would close them.
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Magic | extort | 4
+      e.g. Magnasaltus: Service costextortionate
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Power | criminal | 4
+      e.g. Hongpo: Criminal17
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Power | shadow | 1
+      e.g. Hongpo: The Shadow Compact
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Power | thieve | 11
+      e.g. Hongpo: Thieves' Guild
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | World/History | bandit | 2
+      e.g. Prabhatala: Early trial:bandit activity on all four roads
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | World/History | crime | 8
+      e.g. Magnasaltus: Crime Wave
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | World/History | criminal | 3
+      e.g. Magnasaltus: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | World/NPCs | criminal | 11
+      e.g. Rundberg: Criminal archetype
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | World/NPCs | underworld | 5
+      e.g. Uxmalpan: Pragmatic AllianceUnderworld Queen Maceual
+s9 | gallery | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | World/Relationships | underworld | 3
+      e.g. Uxmalpan: Muluc VukubPragmatic AllianceUnderworld Queen Maceual
+s9 | gallery | DM reveal on | eyes shut | HIDDEN HOUSE in a KEY of the response | [][].data.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Hongpo: arcaneBlackMarket = false
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Summary/Foundations | criminal | 11
+      e.g. Rundberg: Criminal opportunityElevated
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Summary/Overview | criminal | 3
+      e.g. Magnasaltus: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | brib | 4
+      e.g. Rundberg: Some of the garrison and city watch take bribes from whoever has coin. A functioning court and prison mean crimes carry real consequences.
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | crime | 8
+      e.g. Rundberg: The city's record of crimes at Rundberg is not short, and the next few seasons will decide whether the law or the criminals gain on it.
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | criminal | 11
+      e.g. Rundberg: Criminal Architecture & Public Order▲
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | gang | 2
+      e.g. Uxmalpan: There is money at Uxmalpan and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | smuggl | 3
+      e.g. Burjzamin: The garrison and city watch walk only the rounds the occupiers allow. A wrong done here goes before the court, and the guilty can be locked up for it. The garrison and city watch keep the gates, but smugglers have ways in beneath the walls.
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | thieve | 1
+      e.g. Burjzamin: The garrison, now under occupier command, enforces the curfew at the checkpoints. Thieves are scarce now; the danger is informers and occupation officials, and the resistance works out of sight.
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Economics | criminal | 10
+      e.g. Rundberg: Civil disputesCriminal trialsNotary services
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | criminal | 19
+      e.g. Rundberg: A sizable gaol holding debtors, criminals, and political prisoners together.
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | organized | 42
+      e.g. Rundberg: An organized body of shoemakers producing footwear for an urban population under regulated standards.
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | thieve | 8
+      e.g. Hongpo: BacksThieves' GuildMerchant oligarchy
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | underground | 9
+      e.g. Rundberg: Underground venues for illegal or barely-legal blood sport, hidden from the authorities that would close them.
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Magic | extort | 4
+      e.g. Magnasaltus: Service costextortionate
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Power | criminal | 4
+      e.g. Hongpo: Criminal17
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Power | shadow | 1
+      e.g. Hongpo: The Shadow Compact
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Power | thieve | 11
+      e.g. Hongpo: Thieves' Guild
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/History | bandit | 2
+      e.g. Prabhatala: Early trial:bandit activity on all four roads
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/History | crime | 8
+      e.g. Magnasaltus: Crime Wave
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/History | criminal | 3
+      e.g. Magnasaltus: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/NPCs | criminal | 11
+      e.g. Rundberg: Criminal archetype
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/NPCs | underworld | 5
+      e.g. Uxmalpan: Pragmatic AllianceUnderworld Queen Maceual
+s9 | gallery | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/Relationships | underworld | 3
+      e.g. Uxmalpan: Muluc VukubPragmatic AllianceUnderworld Queen Maceual
+s9 | gallery | DM reveal on | eyes shut | frozen | HIDDEN HOUSE in a KEY of the response | [][].data.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Hongpo: arcaneBlackMarket = false
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Summary/Foundations | criminal | 11
+      e.g. Ögedeigol: Criminal opportunityElevated
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Summary/Overview | criminal | 3
+      e.g. Ögedeigol: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | brib | 4
+      e.g. Khanörtöö: Some of the garrison and city watch take bribes from whoever has coin. A functioning court and prison mean crimes carry real consequences. Hired swords back the garrison.
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | crime | 8
+      e.g. Ögedeigol: The town watch patrols on a regular round, so petty theft is often caught and planned crime seldom is.
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | criminal | 11
+      e.g. Ögedeigol: Criminal Architecture & Public Order▲
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | gang | 2
+      e.g. Uxmalpan: There is money at Uxmalpan and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | smuggl | 3
+      e.g. Burjzamin: The garrison and city watch walk only the rounds the occupiers allow. A wrong done here goes before the court, and the guilty can be locked up for it. The garrison and city watch keep the gates, but smugglers have ways in beneath the walls.
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | thieve | 1
+      e.g. Burjzamin: The garrison, now under occupier command, enforces the curfew at the checkpoints. Thieves are scarce now; the danger is informers and occupation officials, and the resistance works out of sight.
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Economics | criminal | 10
+      e.g. Hongpo: Civil disputesCriminal trialsNotary services
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | criminal | 19
+      e.g. Hongpo: A sizable gaol holding debtors, criminals, and political prisoners together.
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | organized | 42
+      e.g. Ögedeigol: An organized body of shoemakers producing footwear for an urban population under regulated standards.
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | thieve | 8
+      e.g. Hongpo: BacksThieves' GuildMerchant oligarchy
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | underground | 9
+      e.g. Burjzamin: Underground drainage carrying waste away from the streets. Rare, costly, and worth more than its cost in lives.
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Magic | extort | 4
+      e.g. Magnasaltus: Service costextortionate
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Power | criminal | 4
+      e.g. Hongpo: Criminal17
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Power | shadow | 1
+      e.g. Hongpo: The Shadow Compact
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Power | thieve | 3
+      e.g. Hongpo: Thieves' Guild
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | World/History | bandit | 2
+      e.g. Prabhatala: Early trial:bandit activity on all four roads
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | World/History | crime | 8
+      e.g. Ögedeigol: Crime Wave
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | World/History | criminal | 3
+      e.g. Ögedeigol: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | World/NPCs | criminal | 11
+      e.g. Ögedeigol: Criminal archetype
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | World/NPCs | underworld | 5
+      e.g. Uxmalpan: Pragmatic AllianceUnderworld Queen Maceual
+s9 | gallery | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | World/Relationships | underworld | 3
+      e.g. Uxmalpan: Muluc VukubPragmatic AllianceUnderworld Queen Maceual
+s9 | gallery | no reveal | eyes shut | HIDDEN HOUSE in a KEY of the response | [][].data.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Hongpo: arcaneBlackMarket = false
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Summary/Foundations | criminal | 11
+      e.g. Rundberg: Criminal opportunityElevated
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Summary/Overview | criminal | 3
+      e.g. Ögedeigol: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | brib | 4
+      e.g. Rundberg: Some of the garrison and city watch take bribes from whoever has coin. A functioning court and prison mean crimes carry real consequences.
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | crime | 8
+      e.g. Rundberg: The city's record of crimes at Rundberg is not short, and the next few seasons will decide whether the law or the criminals gain on it.
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | criminal | 11
+      e.g. Rundberg: Criminal Architecture & Public Order▲
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | gang | 2
+      e.g. Uxmalpan: There is money at Uxmalpan and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | smuggl | 3
+      e.g. Burjzamin: The garrison and city watch walk only the rounds the occupiers allow. A wrong done here goes before the court, and the guilty can be locked up for it. The garrison and city watch keep the gates, but smugglers have ways in beneath the walls.
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | thieve | 1
+      e.g. Burjzamin: The garrison, now under occupier command, enforces the curfew at the checkpoints. Thieves are scarce now; the danger is informers and occupation officials, and the resistance works out of sight.
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Economics | criminal | 10
+      e.g. Rundberg: Civil disputesCriminal trialsNotary services
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | criminal | 19
+      e.g. Rundberg: A sizable gaol holding debtors, criminals, and political prisoners together.
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | organized | 42
+      e.g. Rundberg: An organized body of shoemakers producing footwear for an urban population under regulated standards.
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | thieve | 8
+      e.g. Hongpo: BacksThieves' GuildMerchant oligarchy
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | underground | 9
+      e.g. Rundberg: Underground venues for illegal or barely-legal blood sport, hidden from the authorities that would close them.
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Magic | extort | 4
+      e.g. Magnasaltus: Service costextortionate
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Power | criminal | 4
+      e.g. Hongpo: Criminal17
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Power | shadow | 1
+      e.g. Hongpo: The Shadow Compact
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Power | thieve | 3
+      e.g. Hongpo: Thieves' Guild
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/History | bandit | 2
+      e.g. Prabhatala: Early trial:bandit activity on all four roads
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/History | crime | 8
+      e.g. Ögedeigol: Crime Wave
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/History | criminal | 3
+      e.g. Ögedeigol: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/NPCs | criminal | 11
+      e.g. Rundberg: Criminal archetype
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/NPCs | underworld | 5
+      e.g. Uxmalpan: Pragmatic AllianceUnderworld Queen Maceual
+s9 | gallery | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/Relationships | underworld | 3
+      e.g. Uxmalpan: Muluc VukubPragmatic AllianceUnderworld Queen Maceual
+s9 | gallery | no reveal | eyes shut | frozen | HIDDEN HOUSE in a KEY of the response | [][].data.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Hongpo: arcaneBlackMarket = false
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Summary/Foundations | criminal | 11
+      e.g. Rundberg: Criminal opportunityElevated
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Summary/Overview | criminal | 3
+      e.g. Magnasaltus: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | brib | 4
+      e.g. Rundberg: Some of the garrison and city watch take bribes from whoever has coin. A functioning court and prison mean crimes carry real consequences.
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | crime | 8
+      e.g. Rundberg: The city's record of crimes at Rundberg is not short, and the next few seasons will decide whether the law or the criminals gain on it.
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | criminal | 11
+      e.g. Rundberg: Criminal Architecture & Public Order▲
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | gang | 2
+      e.g. Uxmalpan: There is money at Uxmalpan and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | smuggl | 3
+      e.g. Burjzamin: The garrison and city watch walk only the rounds the occupiers allow. A wrong done here goes before the court, and the guilty can be locked up for it. The garrison and city watch keep the gates, but smugglers have ways in beneath the walls.
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | thieve | 1
+      e.g. Burjzamin: The garrison, now under occupier command, enforces the curfew at the checkpoints. Thieves are scarce now; the danger is informers and occupation officials, and the resistance works out of sight.
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Economics | criminal | 10
+      e.g. Rundberg: Civil disputesCriminal trialsNotary services
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | criminal | 19
+      e.g. Rundberg: A sizable gaol holding debtors, criminals, and political prisoners together.
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | organized | 42
+      e.g. Rundberg: An organized body of shoemakers producing footwear for an urban population under regulated standards.
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | thieve | 8
+      e.g. Hongpo: BacksThieves' GuildMerchant oligarchy
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | underground | 9
+      e.g. Rundberg: Underground venues for illegal or barely-legal blood sport, hidden from the authorities that would close them.
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Magic | extort | 4
+      e.g. Magnasaltus: Service costextortionate
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Power | criminal | 4
+      e.g. Hongpo: Criminal17
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Power | shadow | 1
+      e.g. Hongpo: The Shadow Compact
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Power | thieve | 3
+      e.g. Hongpo: Thieves' Guild
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | World/History | bandit | 2
+      e.g. Prabhatala: Early trial:bandit activity on all four roads
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | World/History | crime | 8
+      e.g. Magnasaltus: Crime Wave
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | World/History | criminal | 3
+      e.g. Magnasaltus: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | World/NPCs | criminal | 11
+      e.g. Rundberg: Criminal archetype
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | World/NPCs | underworld | 5
+      e.g. Uxmalpan: Pragmatic AllianceUnderworld Queen Maceual
+s9 | link | DM reveal on | eyes shut | CRIME WORDS with every hideable house hidden | World/Relationships | underworld | 3
+      e.g. Uxmalpan: Muluc VukubPragmatic AllianceUnderworld Queen Maceual
+s9 | link | DM reveal on | eyes shut | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Hongpo: arcaneBlackMarket = false
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Summary/Foundations | criminal | 11
+      e.g. Rundberg: Criminal opportunityElevated
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Summary/Overview | criminal | 3
+      e.g. Magnasaltus: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | brib | 4
+      e.g. Rundberg: Some of the garrison and city watch take bribes from whoever has coin. A functioning court and prison mean crimes carry real consequences.
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | crime | 8
+      e.g. Rundberg: The city's record of crimes at Rundberg is not short, and the next few seasons will decide whether the law or the criminals gain on it.
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | criminal | 11
+      e.g. Rundberg: Criminal Architecture & Public Order▲
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | gang | 2
+      e.g. Uxmalpan: There is money at Uxmalpan and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | smuggl | 3
+      e.g. Burjzamin: The garrison and city watch walk only the rounds the occupiers allow. A wrong done here goes before the court, and the guilty can be locked up for it. The garrison and city watch keep the gates, but smugglers have ways in beneath the walls.
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | thieve | 1
+      e.g. Burjzamin: The garrison, now under occupier command, enforces the curfew at the checkpoints. Thieves are scarce now; the danger is informers and occupation officials, and the resistance works out of sight.
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Economics | criminal | 10
+      e.g. Rundberg: Civil disputesCriminal trialsNotary services
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | criminal | 19
+      e.g. Rundberg: A sizable gaol holding debtors, criminals, and political prisoners together.
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | organized | 42
+      e.g. Rundberg: An organized body of shoemakers producing footwear for an urban population under regulated standards.
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | thieve | 8
+      e.g. Hongpo: BacksThieves' GuildMerchant oligarchy
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | underground | 9
+      e.g. Rundberg: Underground venues for illegal or barely-legal blood sport, hidden from the authorities that would close them.
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Magic | extort | 4
+      e.g. Magnasaltus: Service costextortionate
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Power | criminal | 4
+      e.g. Hongpo: Criminal17
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Power | shadow | 1
+      e.g. Hongpo: The Shadow Compact
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Power | thieve | 3
+      e.g. Hongpo: Thieves' Guild
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/History | bandit | 2
+      e.g. Prabhatala: Early trial:bandit activity on all four roads
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/History | crime | 8
+      e.g. Magnasaltus: Crime Wave
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/History | criminal | 3
+      e.g. Magnasaltus: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/NPCs | criminal | 11
+      e.g. Rundberg: Criminal archetype
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/NPCs | underworld | 5
+      e.g. Uxmalpan: Pragmatic AllianceUnderworld Queen Maceual
+s9 | link | DM reveal on | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/Relationships | underworld | 3
+      e.g. Uxmalpan: Muluc VukubPragmatic AllianceUnderworld Queen Maceual
+s9 | link | DM reveal on | eyes shut | frozen | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Hongpo: arcaneBlackMarket = false
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Summary/Foundations | criminal | 11
+      e.g. Ögedeigol: Criminal opportunityElevated
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Summary/Overview | criminal | 3
+      e.g. Ögedeigol: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | brib | 4
+      e.g. Khanörtöö: Some of the garrison and city watch take bribes from whoever has coin. A functioning court and prison mean crimes carry real consequences. Hired swords back the garrison.
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | crime | 8
+      e.g. Ögedeigol: The town watch patrols on a regular round, so petty theft is often caught and planned crime seldom is.
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | criminal | 11
+      e.g. Ögedeigol: Criminal Architecture & Public Order▲
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | gang | 2
+      e.g. Uxmalpan: There is money at Uxmalpan and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | smuggl | 3
+      e.g. Burjzamin: The garrison and city watch walk only the rounds the occupiers allow. A wrong done here goes before the court, and the guilty can be locked up for it. The garrison and city watch keep the gates, but smugglers have ways in beneath the walls.
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Defense | thieve | 1
+      e.g. Burjzamin: The garrison, now under occupier command, enforces the curfew at the checkpoints. Thieves are scarce now; the danger is informers and occupation officials, and the resistance works out of sight.
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Economics | criminal | 10
+      e.g. Hongpo: Civil disputesCriminal trialsNotary services
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | criminal | 19
+      e.g. Hongpo: A sizable gaol holding debtors, criminals, and political prisoners together.
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | organized | 42
+      e.g. Ögedeigol: An organized body of shoemakers producing footwear for an urban population under regulated standards.
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | thieve | 8
+      e.g. Hongpo: BacksThieves' GuildMerchant oligarchy
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Institutions | underground | 9
+      e.g. Burjzamin: Underground drainage carrying waste away from the streets. Rare, costly, and worth more than its cost in lives.
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Magic | extort | 4
+      e.g. Magnasaltus: Service costextortionate
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Power | criminal | 4
+      e.g. Hongpo: Criminal17
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Power | shadow | 1
+      e.g. Hongpo: The Shadow Compact
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | Systems/Power | thieve | 3
+      e.g. Hongpo: Thieves' Guild
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | World/History | bandit | 2
+      e.g. Prabhatala: Early trial:bandit activity on all four roads
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | World/History | crime | 8
+      e.g. Ögedeigol: Crime Wave
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | World/History | criminal | 3
+      e.g. Ögedeigol: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | World/NPCs | criminal | 11
+      e.g. Ögedeigol: Criminal archetype
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | World/NPCs | underworld | 5
+      e.g. Uxmalpan: Pragmatic AllianceUnderworld Queen Maceual
+s9 | link | no reveal | eyes shut | CRIME WORDS with every hideable house hidden | World/Relationships | underworld | 3
+      e.g. Uxmalpan: Muluc VukubPragmatic AllianceUnderworld Queen Maceual
+s9 | link | no reveal | eyes shut | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Hongpo: arcaneBlackMarket = false
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Summary/Foundations | criminal | 11
+      e.g. Rundberg: Criminal opportunityElevated
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Summary/Overview | criminal | 3
+      e.g. Ögedeigol: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | brib | 4
+      e.g. Rundberg: Some of the garrison and city watch take bribes from whoever has coin. A functioning court and prison mean crimes carry real consequences.
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | crime | 8
+      e.g. Rundberg: The city's record of crimes at Rundberg is not short, and the next few seasons will decide whether the law or the criminals gain on it.
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | criminal | 11
+      e.g. Rundberg: Criminal Architecture & Public Order▲
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | gang | 2
+      e.g. Uxmalpan: There is money at Uxmalpan and chances to take it, but no gang has formed: the watch is too strong to be worth crossing.
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | smuggl | 3
+      e.g. Burjzamin: The garrison and city watch walk only the rounds the occupiers allow. A wrong done here goes before the court, and the guilty can be locked up for it. The garrison and city watch keep the gates, but smugglers have ways in beneath the walls.
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Defense | thieve | 1
+      e.g. Burjzamin: The garrison, now under occupier command, enforces the curfew at the checkpoints. Thieves are scarce now; the danger is informers and occupation officials, and the resistance works out of sight.
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Economics | criminal | 10
+      e.g. Rundberg: Civil disputesCriminal trialsNotary services
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | criminal | 19
+      e.g. Rundberg: A sizable gaol holding debtors, criminals, and political prisoners together.
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | organized | 42
+      e.g. Rundberg: An organized body of shoemakers producing footwear for an urban population under regulated standards.
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | thieve | 8
+      e.g. Hongpo: BacksThieves' GuildMerchant oligarchy
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Institutions | underground | 9
+      e.g. Rundberg: Underground venues for illegal or barely-legal blood sport, hidden from the authorities that would close them.
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Magic | extort | 4
+      e.g. Magnasaltus: Service costextortionate
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Power | criminal | 4
+      e.g. Hongpo: Criminal17
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Power | shadow | 1
+      e.g. Hongpo: The Shadow Compact
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | Systems/Power | thieve | 3
+      e.g. Hongpo: Thieves' Guild
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/History | bandit | 2
+      e.g. Prabhatala: Early trial:bandit activity on all four roads
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/History | crime | 8
+      e.g. Ögedeigol: Crime Wave
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/History | criminal | 3
+      e.g. Ögedeigol: Military/GuardThose who would take the law into their own handsthe criminal network
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/NPCs | criminal | 11
+      e.g. Rundberg: Criminal archetype
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/NPCs | underworld | 5
+      e.g. Uxmalpan: Pragmatic AllianceUnderworld Queen Maceual
+s9 | link | no reveal | eyes shut | frozen | CRIME WORDS with every hideable house hidden | World/Relationships | underworld | 3
+      e.g. Uxmalpan: Muluc VukubPragmatic AllianceUnderworld Queen Maceual
+s9 | link | no reveal | eyes shut | frozen | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Hongpo: arcaneBlackMarket = false

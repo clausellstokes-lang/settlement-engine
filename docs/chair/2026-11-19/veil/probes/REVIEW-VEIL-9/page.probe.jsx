@@ -23,12 +23,13 @@ vi.mock(`${process.env.RV6_SRC}/src/lib/supabase.js`, () => ({ isConfigured: tru
     return { data: null, error: null }; } catch (e) { return { data: null, error: { message: String(e.message) } }; } } } }));
 const isRec = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
 const MARK = /vq6n[0-9]+z/i;
+const VOCAB = process.env.RV9_VOCAB ? new RegExp(process.env.RV9_VOCAB, 'i') : null;
 it('REVIEW-VEIL-9: the public page over the chains', async () => {
   const { fold, formsOf, hitsIn } = await import('/var/tmp/v16/rv9/fold.mjs');
   const pg = (await import(`${process.env.RV6_PGMOD}/node_modules/pg/lib/index.js`)).default;
   const React = (await import(`${SRC}/node_modules/react/index.js`)).default;
   const { render, fireEvent, waitFor, cleanup } = await import(`${SRC}/node_modules/@testing-library/react/dist/index.js`);
-  const { walkDossier, storeFor } = await import(`/var/tmp/v16/rv9/pageCensusWalk.shared.mjs`);
+  const { walkDossier, storeFor } = await import(`${SRC}/tests/components/pageCensusWalk.shared.mjs`);
   const gallery = await import(`${SRC}/src/lib/gallery.js`);
   const PublicDossierView = (await import(`${SRC}/src/components/PublicDossierView.jsx`)).default;
   const viewport = { matches: false };
@@ -53,6 +54,8 @@ it('REVIEW-VEIL-9: the public page over the chains', async () => {
       const openForms = new Set((s.institutions || []).filter(isRec).flatMap(formsOf));
       for (const list of [s.npcs, s.powerStructure?.factions, s.factions]) for (const c of (Array.isArray(list) ? list : []).filter(isRec)) for (const k of ['name', 'faction']) if (typeof c[k] === 'string') openForms.add(fold(c[k]));
       const forms = [...new Set(gone.flatMap(formsOf))].filter((g) => !openForms.has(g) && ![...openForms].some((o) => o.includes(g)));
+      const crim = (sh.houses || []).filter(isRec).filter((h) => /criminal/i.test(h.category || '') || (Array.isArray(h.tags) && h.tags.includes('criminal')));
+      const allCrimGone = crim.length > 0 && crim.every((h) => gone.includes(h));
       mocks.store = storeFor(s, vi.fn);
       let views = {};
       try { const { container } = render(React.createElement(PublicDossierView, { dossier: page, showHeader: true })); views = await walkDossier(container, { fireEvent, waitFor, expect }); }
@@ -61,6 +64,7 @@ it('REVIEW-VEIL-9: the public page over the chains', async () => {
       t.views += Object.keys(views).length;
       for (const [view, ls] of Object.entries(views)) for (const l of ls) { t.chars += l.length;
         if (MARK.test(l)) bump(`${kind} | MARKER on the page | ${view}`, `${sh.name}: ${l.slice(0, 200)}`);
+        if (VOCAB && sh.deltas > 0 && allCrimGone && VOCAB.test(l)) bump(`${kind} | CRIME WORDS with every hideable house hidden | ${view} | ${(l.match(VOCAB) || [''])[0].toLowerCase()}`, `${sh.name}: ${l.slice(0, 260)}`);
         for (const h of hitsIn(l, forms)) bump(`${kind} | HIDDEN HOUSE on the page | ${view} | ${h}`, `${sh.name}: ${l.slice(0, 220)}`); }
       // the raw response, every key and string, the same forms
       const walk = (v, p) => { if (Array.isArray(v)) v.forEach((x) => walk(x, `${p}[]`)); else if (isRec(v)) for (const [k, x] of Object.entries(v)) { if (!(/^(has|is)[A-Z]/.test(k) && x === false)) for (const h of hitsIn(k, forms)) bump(`${kind} | HIDDEN HOUSE in a KEY of the response | ${p}.<key> | ${h}`, `${sh.name}: ${k} = ${JSON.stringify(x).slice(0, 60)}`); walk(x, p ? `${p}.${k}` : k); } else if (typeof v === 'string') for (const h of hitsIn(v, forms)) bump(`${kind} | HIDDEN HOUSE in the response | ${p.replace(/\[\]/g, '[]')} | ${h}`, `${sh.name}: ${v.slice(0, 220)}`); };

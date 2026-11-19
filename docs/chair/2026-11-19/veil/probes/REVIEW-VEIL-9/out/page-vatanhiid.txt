@@ -1,0 +1,33 @@
+dvm212: 1 shares, 2 pages, no model 0, render threw 0, views 38, 154520 characters
+dvm212 | gallery | no reveal | marked, no eye | CRIME WORDS with every hideable house hidden | World/NPCs | assassin guildmaster | 1
+      e.g. Vatanhiid: Assassin Guildmaster
+dvm212 | gallery | no reveal | marked, no eye | CRIME WORDS with every hideable house hidden | World/Relationships | assassin guildmaster | 3
+      e.g. Vatanhiid: Local Fence · bitter · Assassin Guildmaster
+dvm212 | gallery | no reveal | marked, no eye | MARKER on the page | Summary/Overview | 4
+      e.g. Vatanhiid: A surge in criminal activity overwhelmed the authorities; vigilantes began to form vq6n399z
+dvm212 | gallery | no reveal | marked, no eye | MARKER on the page | Systems/Defense | 8
+      e.g. Vatanhiid: Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage. vq6n66z
+dvm212 | gallery | no reveal | marked, no eye | MARKER on the page | Systems/Institutions | 82
+      e.g. Vatanhiid: Specialized adventuring gear. Warded weapons, silver weapons, etc. vq6n79z
+dvm212 | gallery | no reveal | marked, no eye | MARKER on the page | Systems/Power | 7
+      e.g. Vatanhiid: Established merchant community; fund civic works and expect council access in return. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through
+dvm212 | gallery | no reveal | marked, no eye | MARKER on the page | World/History | 12
+      e.g. Vatanhiid: A surge in criminal activity overwhelmed the authorities; vigilantes began to form vq6n399z
+dvm212 | gallery | no reveal | marked, no eye | MARKER on the page | World/Relationships | 121
+      e.g. Vatanhiid: Altan-Gua Taichiud and Höelün Geniges sit on opposite sides of most questions and vote together on the few that touch their shared interests. vq6n257z
+dvm212 | link | no reveal | marked, no eye | CRIME WORDS with every hideable house hidden | World/NPCs | assassin guildmaster | 1
+      e.g. Vatanhiid: Assassin Guildmaster
+dvm212 | link | no reveal | marked, no eye | CRIME WORDS with every hideable house hidden | World/Relationships | assassin guildmaster | 3
+      e.g. Vatanhiid: Local Fence · bitter · Assassin Guildmaster
+dvm212 | link | no reveal | marked, no eye | MARKER on the page | Summary/Overview | 4
+      e.g. Vatanhiid: A surge in criminal activity overwhelmed the authorities; vigilantes began to form vq6n399z
+dvm212 | link | no reveal | marked, no eye | MARKER on the page | Systems/Defense | 8
+      e.g. Vatanhiid: Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage. vq6n66z
+dvm212 | link | no reveal | marked, no eye | MARKER on the page | Systems/Institutions | 82
+      e.g. Vatanhiid: Specialized adventuring gear. Warded weapons, silver weapons, etc. vq6n79z
+dvm212 | link | no reveal | marked, no eye | MARKER on the page | Systems/Power | 7
+      e.g. Vatanhiid: Established merchant community; fund civic works and expect council access in return. The craft guilds are close behind, contesting every pricing and quality-standard decision they try to push through
+dvm212 | link | no reveal | marked, no eye | MARKER on the page | World/History | 12
+      e.g. Vatanhiid: A surge in criminal activity overwhelmed the authorities; vigilantes began to form vq6n399z
+dvm212 | link | no reveal | marked, no eye | MARKER on the page | World/Relationships | 121
+      e.g. Vatanhiid: Altan-Gua Taichiud and Höelün Geniges sit on opposite sides of most questions and vote together on the few that touch their shared interests. vq6n257z

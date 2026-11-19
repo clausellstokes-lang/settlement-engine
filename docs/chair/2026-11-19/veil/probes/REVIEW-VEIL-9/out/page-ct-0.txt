@@ -1,0 +1,184 @@
+ct_0: 48 shares, 96 pages, no model 0, render threw 0, views 1794, 3997596 characters
+ct_1: 48 shares, 96 pages, no model 0, render threw 0, views 1764, 2635380 characters
+ct | gallery | DM reveal on | eyes shut | HIDDEN HOUSE in a KEY of the response | [][].data.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Vatannuur: arcaneBlackMarket = false
+ct | gallery | DM reveal on | eyes shut | MARKER on the page | Summary/Foundations | 2
+      e.g. Megaanthi: This reading includes the current condition: indebted to outside power vq6n137z.
+ct | gallery | DM reveal on | eyes shut | MARKER on the page | Summary/Overview | 2
+      e.g. Megaanthi: Active crisisIndebted to Outside Power vq6n137z
+ct | gallery | DM reveal on | eyes shut | MARKER on the page | Summary/Plot Hooks | 2
+      e.g. Megaanthi: Indebted to Outside Power vq6n137z
+ct | gallery | DM reveal on | eyes shut | MARKER on the page | Systems/Outlook | 2
+      e.g. Tiangou: 1 institution supplied only irregularly over a poor road (isolated trade): Citizen militia. vq6n80z
+ct | gallery | DM reveal on | eyes shut | MARKER on the page | World/History | 2
+      e.g. Tarkhanbulag: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n106z
+ct | gallery | DM reveal on | eyes shut | frozen | HIDDEN HOUSE in a KEY of the response | [][].data.economicState.safetyProfile.flags.<key> | black market (squeezed) | 1
+      e.g. Vatannuur: arcaneBlackMarket = false
+ct | gallery | DM reveal on | eyes shut | frozen | MARKER on the page | Summary/Foundations | 1
+      e.g. Megaanthi: This reading includes the current condition: indebted to outside power vq6n137z.
+ct | gallery | DM reveal on | eyes shut | frozen | MARKER on the page | Summary/Overview | 1
+      e.g. Megaanthi: Active crisisIndebted to Outside Power vq6n137z
+ct | gallery | DM reveal on | eyes shut | frozen | MARKER on the page | Summary/Plot Hooks | 1
+      e.g. Megaanthi: Indebted to Outside Power vq6n137z
+ct | gallery | DM reveal on | eyes shut | frozen | MARKER on the page | Systems/Outlook | 1
+      e.g. Tiangou: 1 institution supplied only irregularly over a poor road (isolated trade): Citizen militia. vq6n80z
+ct | gallery | DM reveal on | eyes shut | frozen | MARKER on the page | World/History | 1
+      e.g. Tarkhanbulag: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n106z
+ct | gallery | DM reveal on | marked, no eye | HIDDEN HOUSE in a KEY of the response | [][].data.economicState.safetyProfile.flags.<key> | black market (squeezed) | 1
+      e.g. Vatannuur: arcaneBlackMarket = false
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | Summary/Foundations | 1
+      e.g. Megaanthi: This reading includes the current condition: indebted to outside power vq6n137z.
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | Summary/Overview | 31
+      e.g. Palaiotion: The common people are pressing those in charge over guild recognition and fair wages, and each dispute grows louder than the last vq6n93z
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | Summary/Plot Hooks | 1
+      e.g. Megaanthi: Indebted to Outside Power vq6n137z
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | Systems/Defense | 38
+      e.g. Palaiotion: Gated stone defences. Costly to raise and no cheaper to keep up. vq6n19z
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | Systems/Institutions | 417
+      e.g. Palaiotion: Job board for torchbearers and porters, hired by the session at a day labourer’s wage. vq6n18z
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | Systems/Outlook | 1
+      e.g. Tiangou: 1 institution supplied only irregularly over a poor road (isolated trade): Citizen militia. vq6n80z
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | Systems/Power | 39
+      e.g. Palaiotion: Clergy hold substantial political authority alongside civic governance. vq6n29z vq6n21z vq6n129z
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | Systems/Services | 1
+      e.g. Palaiotion: Practical clothing for soldiers and servants. vq6n347z
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | World/History | 75
+      e.g. Palaiotion: The common people are pressing those in charge over guild recognition and fair wages, and each dispute grows louder than the last vq6n93z
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | World/Relationships | 688
+      e.g. Palaiotion: Demetrios Kontostephanos nursed Katakalon Kamytzes through a winter fever when no one else would come. Katakalon Kamytzes still owes the debt and still knows it. vq6n135z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | Summary/Foundations | 1
+      e.g. Megaanthi: This reading includes the current condition: indebted to outside power vq6n137z.
+ct | gallery | DM reveal on | unmarked | MARKER on the page | Summary/Overview | 31
+      e.g. Palaiotion: The common people are pressing those in charge over guild recognition and fair wages, and each dispute grows louder than the last vq6n93z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | Summary/Plot Hooks | 156
+      e.g. Palaiotion: The man who made the promise says he was told to break it, and will not say by whom. vq6n297z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | Systems/Defense | 50
+      e.g. Palaiotion: Gated stone defences. Costly to raise and no cheaper to keep up. vq6n19z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | Systems/Institutions | 437
+      e.g. Palaiotion: Job board for torchbearers and porters, hired by the session at a day labourer’s wage. vq6n18z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | Systems/Outlook | 1
+      e.g. Tiangou: 1 institution supplied only irregularly over a poor road (isolated trade): Citizen militia. vq6n80z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | Systems/Power | 43
+      e.g. Palaiotion: Clergy hold substantial political authority alongside civic governance. vq6n29z vq6n21z vq6n129z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | Systems/Services | 47
+      e.g. Palaiotion: Fencing stolen goods vq6n298z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | World/History | 75
+      e.g. Palaiotion: The common people are pressing those in charge over guild recognition and fair wages, and each dispute grows louder than the last vq6n93z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | World/Relationships | 688
+      e.g. Palaiotion: Demetrios Kontostephanos nursed Katakalon Kamytzes through a winter fever when no one else would come. Katakalon Kamytzes still owes the debt and still knows it. vq6n135z
+ct | gallery | no reveal | eyes shut | HIDDEN HOUSE in a KEY of the response | [][].data.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Vatannuur: arcaneBlackMarket = false
+ct | gallery | no reveal | eyes shut | MARKER on the page | Summary/Foundations | 2
+      e.g. Megaanthi: This reading includes the current condition: indebted to outside power vq6n137z.
+ct | gallery | no reveal | eyes shut | MARKER on the page | Summary/Overview | 2
+      e.g. Megaanthi: Active crisisIndebted to Outside Power vq6n137z
+ct | gallery | no reveal | eyes shut | MARKER on the page | Summary/Plot Hooks | 2
+      e.g. Megaanthi: Indebted to Outside Power vq6n137z
+ct | gallery | no reveal | eyes shut | MARKER on the page | Systems/Outlook | 2
+      e.g. Tiangou: 1 institution supplied only irregularly over a poor road (isolated trade): Citizen militia. vq6n80z
+ct | gallery | no reveal | eyes shut | MARKER on the page | World/History | 2
+      e.g. Tarkhanbulag: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n106z
+ct | gallery | no reveal | eyes shut | frozen | HIDDEN HOUSE in a KEY of the response | [][].data.economicState.safetyProfile.flags.<key> | black market (squeezed) | 1
+      e.g. Vatannuur: arcaneBlackMarket = false
+ct | gallery | no reveal | eyes shut | frozen | MARKER on the page | Summary/Foundations | 1
+      e.g. Megaanthi: This reading includes the current condition: indebted to outside power vq6n137z.
+ct | gallery | no reveal | eyes shut | frozen | MARKER on the page | Summary/Overview | 1
+      e.g. Megaanthi: Active crisisIndebted to Outside Power vq6n137z
+ct | gallery | no reveal | eyes shut | frozen | MARKER on the page | Summary/Plot Hooks | 1
+      e.g. Megaanthi: Indebted to Outside Power vq6n137z
+ct | gallery | no reveal | eyes shut | frozen | MARKER on the page | Systems/Outlook | 1
+      e.g. Tiangou: 1 institution supplied only irregularly over a poor road (isolated trade): Citizen militia. vq6n80z
+ct | gallery | no reveal | eyes shut | frozen | MARKER on the page | World/History | 1
+      e.g. Tarkhanbulag: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n106z
+ct | link | DM reveal on | eyes shut | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Vatannuur: arcaneBlackMarket = false
+ct | link | DM reveal on | eyes shut | MARKER on the page | Summary/Foundations | 2
+      e.g. Megaanthi: This reading includes the current condition: indebted to outside power vq6n137z.
+ct | link | DM reveal on | eyes shut | MARKER on the page | Summary/Overview | 2
+      e.g. Megaanthi: Active crisisIndebted to Outside Power vq6n137z
+ct | link | DM reveal on | eyes shut | MARKER on the page | Summary/Plot Hooks | 2
+      e.g. Megaanthi: Indebted to Outside Power vq6n137z
+ct | link | DM reveal on | eyes shut | MARKER on the page | Systems/Outlook | 2
+      e.g. Tiangou: 1 institution supplied only irregularly over a poor road (isolated trade): Citizen militia. vq6n80z
+ct | link | DM reveal on | eyes shut | MARKER on the page | World/History | 2
+      e.g. Tarkhanbulag: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n106z
+ct | link | DM reveal on | eyes shut | frozen | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 1
+      e.g. Vatannuur: arcaneBlackMarket = false
+ct | link | DM reveal on | eyes shut | frozen | MARKER on the page | Summary/Foundations | 1
+      e.g. Megaanthi: This reading includes the current condition: indebted to outside power vq6n137z.
+ct | link | DM reveal on | eyes shut | frozen | MARKER on the page | Summary/Overview | 1
+      e.g. Megaanthi: Active crisisIndebted to Outside Power vq6n137z
+ct | link | DM reveal on | eyes shut | frozen | MARKER on the page | Summary/Plot Hooks | 1
+      e.g. Megaanthi: Indebted to Outside Power vq6n137z
+ct | link | DM reveal on | eyes shut | frozen | MARKER on the page | Systems/Outlook | 1
+      e.g. Tiangou: 1 institution supplied only irregularly over a poor road (isolated trade): Citizen militia. vq6n80z
+ct | link | DM reveal on | eyes shut | frozen | MARKER on the page | World/History | 1
+      e.g. Tarkhanbulag: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n106z
+ct | link | DM reveal on | marked, no eye | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 1
+      e.g. Vatannuur: arcaneBlackMarket = false
+ct | link | DM reveal on | marked, no eye | MARKER on the page | Summary/Foundations | 1
+      e.g. Megaanthi: This reading includes the current condition: indebted to outside power vq6n137z.
+ct | link | DM reveal on | marked, no eye | MARKER on the page | Summary/Overview | 31
+      e.g. Palaiotion: The common people are pressing those in charge over guild recognition and fair wages, and each dispute grows louder than the last vq6n93z
+ct | link | DM reveal on | marked, no eye | MARKER on the page | Summary/Plot Hooks | 1
+      e.g. Megaanthi: Indebted to Outside Power vq6n137z
+ct | link | DM reveal on | marked, no eye | MARKER on the page | Systems/Defense | 38
+      e.g. Palaiotion: Gated stone defences. Costly to raise and no cheaper to keep up. vq6n19z
+ct | link | DM reveal on | marked, no eye | MARKER on the page | Systems/Institutions | 417
+      e.g. Palaiotion: Job board for torchbearers and porters, hired by the session at a day labourer’s wage. vq6n18z
+ct | link | DM reveal on | marked, no eye | MARKER on the page | Systems/Outlook | 1
+      e.g. Tiangou: 1 institution supplied only irregularly over a poor road (isolated trade): Citizen militia. vq6n80z
+ct | link | DM reveal on | marked, no eye | MARKER on the page | Systems/Power | 38
+      e.g. Palaiotion: Clergy hold substantial political authority alongside civic governance. vq6n29z vq6n21z vq6n129z
+ct | link | DM reveal on | marked, no eye | MARKER on the page | Systems/Services | 1
+      e.g. Palaiotion: Practical clothing for soldiers and servants. vq6n347z
+ct | link | DM reveal on | marked, no eye | MARKER on the page | World/History | 75
+      e.g. Palaiotion: The common people are pressing those in charge over guild recognition and fair wages, and each dispute grows louder than the last vq6n93z
+ct | link | DM reveal on | marked, no eye | MARKER on the page | World/Relationships | 648
+      e.g. Palaiotion: Demetrios Kontostephanos nursed Katakalon Kamytzes through a winter fever when no one else would come. Katakalon Kamytzes still owes the debt and still knows it. vq6n135z
+ct | link | DM reveal on | unmarked | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 1
+      e.g. Vatannuur: arcaneBlackMarket = false
+ct | link | DM reveal on | unmarked | MARKER on the page | Summary/Foundations | 1
+      e.g. Megaanthi: This reading includes the current condition: indebted to outside power vq6n137z.
+ct | link | DM reveal on | unmarked | MARKER on the page | Summary/Overview | 31
+      e.g. Palaiotion: The common people are pressing those in charge over guild recognition and fair wages, and each dispute grows louder than the last vq6n93z
+ct | link | DM reveal on | unmarked | MARKER on the page | Summary/Plot Hooks | 1
+      e.g. Megaanthi: Indebted to Outside Power vq6n137z
+ct | link | DM reveal on | unmarked | MARKER on the page | Systems/Defense | 38
+      e.g. Palaiotion: Gated stone defences. Costly to raise and no cheaper to keep up. vq6n19z
+ct | link | DM reveal on | unmarked | MARKER on the page | Systems/Institutions | 417
+      e.g. Palaiotion: Job board for torchbearers and porters, hired by the session at a day labourer’s wage. vq6n18z
+ct | link | DM reveal on | unmarked | MARKER on the page | Systems/Outlook | 1
+      e.g. Tiangou: 1 institution supplied only irregularly over a poor road (isolated trade): Citizen militia. vq6n80z
+ct | link | DM reveal on | unmarked | MARKER on the page | Systems/Power | 38
+      e.g. Palaiotion: Clergy hold substantial political authority alongside civic governance. vq6n29z vq6n21z vq6n129z
+ct | link | DM reveal on | unmarked | MARKER on the page | Systems/Services | 1
+      e.g. Palaiotion: Practical clothing for soldiers and servants. vq6n347z
+ct | link | DM reveal on | unmarked | MARKER on the page | World/History | 75
+      e.g. Palaiotion: The common people are pressing those in charge over guild recognition and fair wages, and each dispute grows louder than the last vq6n93z
+ct | link | DM reveal on | unmarked | MARKER on the page | World/Relationships | 648
+      e.g. Palaiotion: Demetrios Kontostephanos nursed Katakalon Kamytzes through a winter fever when no one else would come. Katakalon Kamytzes still owes the debt and still knows it. vq6n135z
+ct | link | no reveal | eyes shut | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Vatannuur: arcaneBlackMarket = false
+ct | link | no reveal | eyes shut | MARKER on the page | Summary/Foundations | 2
+      e.g. Megaanthi: This reading includes the current condition: indebted to outside power vq6n137z.
+ct | link | no reveal | eyes shut | MARKER on the page | Summary/Overview | 2
+      e.g. Megaanthi: Active crisisIndebted to Outside Power vq6n137z
+ct | link | no reveal | eyes shut | MARKER on the page | Summary/Plot Hooks | 2
+      e.g. Megaanthi: Indebted to Outside Power vq6n137z
+ct | link | no reveal | eyes shut | MARKER on the page | Systems/Outlook | 2
+      e.g. Tiangou: 1 institution supplied only irregularly over a poor road (isolated trade): Citizen militia. vq6n80z
+ct | link | no reveal | eyes shut | MARKER on the page | World/History | 2
+      e.g. Tarkhanbulag: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n106z
+ct | link | no reveal | eyes shut | frozen | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 1
+      e.g. Vatannuur: arcaneBlackMarket = false
+ct | link | no reveal | eyes shut | frozen | MARKER on the page | Summary/Foundations | 1
+      e.g. Megaanthi: This reading includes the current condition: indebted to outside power vq6n137z.
+ct | link | no reveal | eyes shut | frozen | MARKER on the page | Summary/Overview | 1
+      e.g. Megaanthi: Active crisisIndebted to Outside Power vq6n137z
+ct | link | no reveal | eyes shut | frozen | MARKER on the page | Summary/Plot Hooks | 1
+      e.g. Megaanthi: Indebted to Outside Power vq6n137z
+ct | link | no reveal | eyes shut | frozen | MARKER on the page | Systems/Outlook | 1
+      e.g. Tiangou: 1 institution supplied only irregularly over a poor road (isolated trade): Citizen militia. vq6n80z
+ct | link | no reveal | eyes shut | frozen | MARKER on the page | World/History | 1
+      e.g. Tarkhanbulag: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n106z

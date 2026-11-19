@@ -1,0 +1,3 @@
+chain s9: 11 towns, 44 shares, 308 reads, 176 houses hidden whole (summed over shares)
+s9 | economicState.safetyProfile.flags.<key> | towns: no reveal 2, DM 2 | spelled as the card 0, another form 40 | reads: gallery import importMap link map | shares: DM reveal on | every eye shut ; DM reveal on | every eye shut | frozen ; no reveal | every eye shut ; no reveal | every eye shut | frozen
+      e.g. Hongpo gallery: "black market (squeezed)" in "arcaneBlackMarket" = false

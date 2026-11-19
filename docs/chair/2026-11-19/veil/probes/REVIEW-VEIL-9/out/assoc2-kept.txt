@@ -1,0 +1,1224 @@
+towns by size [with a hideable house, with none]: {"thorp":[2,66],"hamlet":[5,63],"village":[8,60],"town":[27,41],"city":[53,15],"metropolis":[67,1]}
+forms sent with every hideable house withheld: 47368 | kept: 1222
+{"city":[51,0],"metropolis":[65,0]} sent-all-gone 232 | Narrow alleys, hidden markets, criminal activity | spatialLayout.quarters[].desc
+{"city":[51,0],"metropolis":[65,0]} sent-all-gone 232 | The Rat's Nest (tavern) | spatialLayout.quarters[].landmarks[]
+{"village":[4,0],"town":[21,0],"city":[37,0],"metropolis":[57,0]} sent-all-gone 119 | The climate's crime and the backing of its criminal houses set the chance, inside the climate's own floor and ceiling. | simulationTrace[].causes[].reason
+{"village":[4,0],"town":[21,0],"city":[37,0],"metropolis":[57,0]} sent-all-gone 119 | Read from the card's own house. | simulationTrace[].causes[].reason
+{"village":[4,0],"town":[21,0],"city":[37,0],"metropolis":[57,0]} sent-all-gone 119 | One handler per allegiance, dealt by standing. | simulationTrace[].downstreamEffects[].reason
+{"village":[3,0],"town":[15,0],"city":[30,0],"metropolis":[51,0]} sent-all-gone 99 | allegiance vector: greed | simulationTrace[].causes[].effect
+{"town":[16,0],"city":[31,0],"metropolis":[48,0],"village":[1,0]} sent-all-gone 96 | brings the guild a place for the money and the goods | simulationTrace[].causes[].effect
+{"city":[28,0],"metropolis":[43,0]} sent-all-gone 142 | The garrison and city watch keep the gates, but smugglers have ways in beneath the walls. | economicState.safetyProfile.guardEffectivenessDesc
+{"village":[2,0],"town":[11,0],"city":[26,0],"metropolis":[41,0]} sent-all-gone 80 | brings the guild information and small favours | simulationTrace[].causes[].effect
+{"village":[2,0],"town":[8,0],"city":[24,0],"metropolis":[38,0]} sent-all-gone 72 | brings the guild protection and decisions | simulationTrace[].causes[].effect
+{"town":[7,0],"city":[25,0],"metropolis":[38,0],"village":[1,0]} sent-all-gone 71 | allegiance vector: fear | simulationTrace[].causes[].effect
+{"city":[26,0],"metropolis":[35,0],"town":[10,0]} sent-all-gone 71 | The Patron No One Names | relationships[].typeName
+{"city":[26,0],"metropolis":[35,0],"town":[10,0]} sent-all-gone 71 | allegiance vector: forbidden_patron | simulationTrace[].causes[].effect
+{"village":[4,0],"town":[13,0],"city":[25,0],"metropolis":[34,0],"hamlet":[2,0],"thorp":[1,0]} sent-all-gone 158 | Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands | history.currentTensions[].description
+{"village":[4,0],"town":[13,0],"city":[25,0],"metropolis":[34,0],"hamlet":[2,0],"thorp":[1,0]} sent-all-gone 158 | Those who would take the law into their own hands | history.currentTensions[].factions[]
+{"village":[4,0],"town":[13,0],"city":[25,0],"metropolis":[34,0],"hamlet":[2,0],"thorp":[1,0]} sent-all-gone 158 | An expanded watch and a night curfew survive from the crackdown | history.currentTensions[].lastingEffects[]
+{"village":[4,0],"town":[13,0],"city":[25,0],"metropolis":[34,0],"hamlet":[2,0],"thorp":[1,0]} sent-all-gone 158 | Vigilante bands never fully disbanded and still operate quietly | history.currentTensions[].lastingEffects[]
+{"city":[15,0],"metropolis":[30,0]} sent-all-gone 45 | the guildmaster of thieves | npcs[].role
+{"village":[2,0],"city":[16,0],"metropolis":[27,0],"town":[5,0]} sent-all-gone 50 | No contract exists, and neither of them wants one. | relationships[].description
+{"city":[9,0],"metropolis":[26,0],"town":[3,0]} sent-all-gone 38 | the network's spider | npcs[].role
+{"town":[5,0],"metropolis":[25,0],"city":[15,0],"village":[1,0]} sent-all-gone 46 | Both of them think they have the better half of the bargain. | relationships[].description
+{"city":[17,0],"metropolis":[25,0]} sent-all-gone 42 | "Wizard's tower" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one. | simulationTrace[].causes[].reason
+{"town":[6,0],"city":[10,0],"metropolis":[24,0],"village":[1,0]} sent-all-gone 41 | A cold-blooded flaw gave the guild its opening. | simulationTrace[].causes[].reason
+{"city":[4,0],"metropolis":[24,0]} sent-all-gone 28 | "Foundling home" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one. | simulationTrace[].causes[].reason
+{"metropolis":[24,0],"city":[8,0]} sent-all-gone 64 | Scholars and researchers, gathered in number. | institutions[].desc
+{"city":[12,0],"metropolis":[23,0]} sent-all-gone 70 | State or noble-chartered coin production. | institutions[].desc
+{"city":[12,0],"metropolis":[23,0]} sent-all-gone 70 | Standardises currency across the region. | institutions[].desc
+{"city":[12,0],"metropolis":[23,0]} sent-all-gone 70 | Its seigniorage is revenue while precious metal reaches the dies. | institutions[].desc
+{"metropolis":[22,0],"city":[2,0]} sent-all-gone 48 | A formal schooling in music: amphitheatre, dormitories, and all. | institutions[].desc
+{"metropolis":[22,0],"city":[8,0]} sent-all-gone 60 | Every charm has a price, and custom work costs much more. | npcs[].presentation.impression
+{"metropolis":[22,0],"city":[8,0]} sent-all-gone 60 | Sells from the shelves; | npcs[].presentation.behaviour
+{"metropolis":[22,0],"city":[8,0]} sent-all-gone 60 | commissions need a deposit and a month. | npcs[].presentation.behaviour
+{"city":[12,0],"metropolis":[21,0]} sent-all-gone 66 | Polished and watchful. | npcs[].presentation.impression
+{"city":[12,0],"metropolis":[21,0]} sent-all-gone 66 | Measures every word as if someone were writing it down. | npcs[].presentation.impression
+{"city":[12,0],"metropolis":[21,0]} sent-all-gone 66 | Speaks well of everyone and commits to nothing. | npcs[].presentation.behaviour
+{"metropolis":[21,0],"city":[12,0],"town":[3,0]} sent-all-gone 36 | A suspicious flaw gave the guild its opening. | simulationTrace[].causes[].reason
+{"town":[3,0],"city":[12,0],"metropolis":[20,0]} sent-all-gone 35 | A cowardly flaw gave the guild its opening. | simulationTrace[].causes[].reason
+{"metropolis":[20,0],"city":[5,0]} sent-all-gone 50 | Specialized adventuring gear. | institutions[].desc
+{"metropolis":[20,0],"city":[5,0]} sent-all-gone 50 | Warded weapons, silver weapons, etc. | institutions[].desc
+{"city":[9,0],"metropolis":[19,0]} sent-all-gone 56 | Helpful in a way that asks for nothing obvious in return. | npcs[].presentation.impression
+{"city":[18,0],"metropolis":[19,0],"town":[2,0]} sent-all-gone 78 | Nervous under the smile. | npcs[].presentation.impression
+{"city":[18,0],"metropolis":[19,0],"town":[2,0]} sent-all-gone 78 | Their eyes keep going to the back door. | npcs[].presentation.impression
+{"city":[18,0],"metropolis":[19,0],"town":[2,0]} sent-all-gone 78 | Says little and wants you gone; | npcs[].presentation.behaviour
+{"city":[18,0],"metropolis":[19,0],"town":[2,0]} sent-all-gone 78 | if you mention certain names, the shop closes early. | npcs[].presentation.behaviour
+{"metropolis":[19,0],"city":[3,0]} sent-all-gone 44 | Treats every conversation as a trade. | npcs[].presentation.impression
+{"metropolis":[19,0],"city":[3,0]} sent-all-gone 44 | Will sell what they know, and buy what you know; | npcs[].presentation.behaviour
+{"metropolis":[19,0],"city":[3,0]} sent-all-gone 44 | the price depends on who else knows it. | npcs[].presentation.behaviour
+{"village":[1,0],"town":[7,0],"metropolis":[18,0],"city":[15,0]} sent-all-gone 41 | In company the two of them speak only of ordinary business. | relationships[].description
+{"town":[13,0],"city":[16,0],"metropolis":[18,0],"village":[1,0]} sent-all-gone 48 | holds a hidden allegiance | simulationTrace[].downstreamEffects[].effect
+{"town":[13,0],"city":[16,0],"metropolis":[18,0],"village":[1,0]} sent-all-gone 48 | The allegiance runs to the town's criminal power. | simulationTrace[].downstreamEffects[].reason
+{"city":[10,0],"metropolis":[18,0],"town":[1,0]} sent-all-gone 29 | A mendacious flaw gave the guild its opening. | simulationTrace[].causes[].reason
+{"city":[17,0],"metropolis":[18,0],"town":[5,0]} sent-all-gone 40 | A ruthless flaw gave the guild its opening. | simulationTrace[].causes[].reason
+{"metropolis":[9,0],"city":[18,0]} sent-all-gone 54 | Unremarkable clothes, a quiet voice and eyes that never stop moving. | npcs[].presentation.impression
+{"metropolis":[9,0],"city":[18,0]} sent-all-gone 54 | Talks only through someone you both know; | npcs[].presentation.behaviour
+{"metropolis":[9,0],"city":[18,0]} sent-all-gone 54 | strangers are told there is nothing for sale. | npcs[].presentation.behaviour
+{"town":[7,0],"metropolis":[17,0],"city":[8,0]} sent-all-gone 64 | Cheerful, ordinary and very ready to help. | npcs[].presentation.impression
+{"town":[7,0],"metropolis":[17,0],"city":[8,0]} sent-all-gone 64 | The shop looks like any other on the street. | npcs[].presentation.impression
+{"town":[7,0],"metropolis":[17,0],"city":[8,0]} sent-all-gone 64 | Sells the shop's goods with a smile and turns every question about the business into a joke. | npcs[].presentation.behaviour
+{"town":[4,0],"metropolis":[17,0],"city":[13,0]} sent-all-gone 34 | A greedy flaw gave the guild its opening. | simulationTrace[].causes[].reason
+{"city":[17,0],"metropolis":[13,0]} sent-all-gone 60 | General forges, farriers, and toolsmiths in each quarter. | institutions[].desc
+{"city":[8,0],"metropolis":[17,0],"town":[2,0]} sent-all-gone 27 | dependency.Blacksmiths (#-#) | simulationTrace[].causes[].source
+{"city":[14,0],"metropolis":[17,0],"town":[3,0]} sent-all-gone 34 | In the street they pass each other without a nod. | relationships[].description
+{"metropolis":[17,0],"city":[5,0]} sent-all-gone 44 | They let other people fill the silence. | npcs[].presentation.impression
+{"metropolis":[17,0],"city":[2,0]} sent-all-gone 38 | Ask the way anywhere in {S} and you will be given it from the cathedral. | publicProse.blocks.general:overview.siteLines[]
+{"metropolis":[17,0],"city":[2,0]} sent-all-gone 38 | Trains fighters for public spectacle. | institutions[].desc
+{"metropolis":[17,0],"city":[2,0]} sent-all-gone 38 | Recruits from prisoners, debtors, and volunteers. | institutions[].desc
+{"metropolis":[17,0],"city":[2,0]} sent-all-gone 38 | Feeds the arena circuit. | institutions[].desc
+{"metropolis":[17,0],"city":[9,0]} sent-all-gone 52 | Unremarkable, deliberately. | npcs[].presentation.impression
+{"metropolis":[17,0],"city":[9,0]} sent-all-gone 52 | The kind of person you would walk past twice. | npcs[].presentation.impression
+{"village":[1,0],"metropolis":[16,0],"city":[9,0],"town":[4,0]} sent-all-gone 30 | A corrupt flaw gave the guild its opening. | simulationTrace[].causes[].reason
+{"village":[1,0],"metropolis":[16,0],"city":[14,0],"town":[4,0]} sent-all-gone 35 | A self-serving flaw gave the guild its opening. | simulationTrace[].causes[].reason
+{"city":[14,0],"town":[6,0],"metropolis":[16,0]} sent-all-gone 36 | A manipulative flaw gave the guild its opening. | simulationTrace[].causes[].reason
+{"city":[4,0],"metropolis":[16,0]} sent-all-gone 40 | Friendly, easy, slightly too interested in where you're from. | npcs[].presentation.impression
+{"town":[2,0],"city":[13,0],"metropolis":[15,0],"village":[1,0]} sent-all-gone 31 | A paranoid flaw gave the guild its opening. | simulationTrace[].causes[].reason
+{"city":[10,0],"metropolis":[15,0]} sent-all-gone 50 | The soldiers enforce the law; | powerStructure.factionRelationships[].narrative
+{"city":[10,0],"metropolis":[15,0]} sent-all-gone 50 | they do not make it. | powerStructure.factionRelationships[].narrative
+{"city":[15,0],"metropolis":[11,0]} sent-all-gone 52 | Seems to have anything you might want, for a price. | npcs[].presentation.impression
+{"city":[15,0],"metropolis":[11,0]} sent-all-gone 52 | Names a price, takes coin in advance and arranges a place to collect. | npcs[].presentation.behaviour
+{"city":[15,0],"metropolis":[15,0],"town":[4,0]} sent-all-gone 68 | Polite and a little too careful with the till. | npcs[].presentation.impression
+{"city":[15,0],"metropolis":[15,0],"town":[4,0]} sent-all-gone 68 | Watches who comes in after you. | npcs[].presentation.impression
+{"city":[15,0],"metropolis":[15,0],"town":[4,0]} sent-all-gone 68 | questions about anything else get a shrug. | npcs[].presentation.behaviour
+{"city":[3,0],"metropolis":[15,0]} sent-all-gone 36 | Speaks only through others; | npcs[].presentation.behaviour
+{"metropolis":[15,0],"city":[7,0]} sent-all-gone 44 | It is the only credit for labourers, journeymen, and whoever the banks refuse. | institutions[].desc
+{"town":[7,0],"city":[13,0],"metropolis":[14,0]} sent-all-gone 68 | Lean, quiet and watchful. | npcs[].presentation.impression
+{"town":[7,0],"city":[13,0],"metropolis":[14,0]} sent-all-gone 68 | People on the street step aside without being asked. | npcs[].presentation.impression
+{"town":[7,0],"city":[13,0],"metropolis":[14,0]} sent-all-gone 68 | Asks who you are and who you know; | npcs[].presentation.behaviour
+{"town":[7,0],"city":[13,0],"metropolis":[14,0]} sent-all-gone 68 | strangers are tolerated, not welcomed. | npcs[].presentation.behaviour
+{"city":[13,0],"metropolis":[14,0]} sent-all-gone 54 | the keeper of the houses | npcs[].role
+{"city":[14,0]} sent-all-gone 28 | The mages at {S} keep the city's wards and answer hostile spells. | publicProse.blocks.defense:forces.arcane.sentence
+{"metropolis":[14,0],"city":[10,0]} sent-all-gone 48 | Magic items made to order. | defenseProfile.institutions.magicDef[].desc institutions[].desc
+{"metropolis":[14,0],"city":[3,0]} sent-all-gone 34 | {S} sets its days by the cathedral bells: the feasts, the burials and the hours of work all follow them. | publicProse.blocks.general:overview.siteLines[]
+{"metropolis":[14,0],"city":[6,0]} sent-all-gone 40 | Polite, reasonable and very clear about what things cost. | npcs[].presentation.impression
+{"metropolis":[14,0],"city":[6,0]} sent-all-gone 40 | Will arrange a theft, a return or a safe passage, for a price paid in advance. | npcs[].presentation.behaviour
+{"city":[14,0],"metropolis":[11,0]} sent-all-gone 50 | Friendly and confiding. | npcs[].presentation.impression
+{"city":[14,0],"metropolis":[11,0]} sent-all-gone 50 | Treats you as an old customer from the first word. | npcs[].presentation.impression
+{"city":[14,0],"metropolis":[11,0]} sent-all-gone 50 | Mentions what is available this week and who else has been asking for it. | npcs[].presentation.behaviour
+{"city":[5,0],"metropolis":[14,0]} sent-all-gone 38 | Charming and attentive, with a talent for making you say more than you meant to. | npcs[].presentation.impression
+{"city":[5,0],"metropolis":[14,0]} sent-all-gone 38 | Friendly and curious; | npcs[].presentation.behaviour
+{"city":[5,0],"metropolis":[14,0]} sent-all-gone 38 | remembers everything you say. | npcs[].presentation.behaviour
+{"city":[3,0],"metropolis":[13,0],"town":[1,0]} sent-all-gone 34 | Trains fighters for the crowd's amusement, drawn from prisoners, debtors, and volunteers. | institutions[].desc
+{"city":[3,0],"metropolis":[13,0],"town":[1,0]} sent-all-gone 34 | It supplies the arena circuit. | institutions[].desc
+{"city":[13,0]} sent-all-gone 26 | Houses given wholly to play. | institutions[].desc
+{"city":[13,0]} sent-all-gone 26 | Not all of them lawful. | institutions[].desc
+{"city":[10,0],"metropolis":[13,0],"town":[2,0],"village":[1,0]} sent-all-gone 26 | allegiance vector: hunger_for_status | simulationTrace[].causes[].effect
+{"city":[10,0],"metropolis":[13,0],"town":[2,0],"village":[1,0]} sent-all-gone 26 | A vain flaw gave the guild its opening. | simulationTrace[].causes[].reason
+{"metropolis":[13,0],"city":[5,0]} sent-all-gone 36 | Hears what is wanted and names a price; | npcs[].presentation.behaviour
+{"metropolis":[13,0],"city":[12,0]} sent-all-gone 50 | The garrison and city watch patrol on a regular round, so petty theft is often caught and planned crime seldom is. | economicState.safetyProfile.guardEffectivenessDesc
+{"city":[12,0],"metropolis":[13,0],"town":[3,0]} sent-all-gone 28 | A deceitful flaw gave the guild its opening. | simulationTrace[].causes[].reason
+{"village":[3,0],"city":[10,0],"metropolis":[12,0],"hamlet":[2,0],"town":[5,0],"thorp":[1,0]} sent-all-gone 66 | the criminal network | history.currentTensions[].factions[]
+{"town":[6,0],"metropolis":[12,0],"city":[10,0]} sent-all-gone 56 | Bored by anyone who is not useful. | npcs[].presentation.impression
+{"city":[12,0]} sent-all-gone 24 | Some of {S}'s work cannot go on without grapes, and the country around the city does not give enough of it, so the city buys from outside or that work stops. | publicProse.blocks.economy:economics.criticalImport.sentence
+{"city":[4,0],"metropolis":[12,0]} sent-all-gone 32 | {S} keeps a cathedral, a bishop's church that the clergy of the whole district answer to. | publicProse.blocks.general:overview.siteLines[]
+{"city":[8,0],"metropolis":[12,0]} sent-all-gone 40 | Soft voice, forgettable clothes and a habit of sitting with their back to the wall. | npcs[].presentation.impression
+{"city":[8,0],"metropolis":[12,0]} sent-all-gone 40 | Listens far more than they speak; | npcs[].presentation.behaviour
+{"city":[8,0],"metropolis":[12,0]} sent-all-gone 40 | asks what you know before saying what they know. | npcs[].presentation.behaviour
+{"city":[5,0],"metropolis":[12,0]} sent-all-gone 34 | Elegant, warm and attentive, with a voice that makes every visitor feel expected. | npcs[].presentation.impression
+{"city":[5,0],"metropolis":[12,0]} sent-all-gone 34 | asks who recommended the district. | npcs[].presentation.behaviour
+{"city":[10,0],"metropolis":[12,0],"town":[4,0]} sent-all-gone 26 | A callous flaw gave the guild its opening. | simulationTrace[].causes[].reason
+{"town":[5,0],"city":[11,0],"metropolis":[7,0]} sent-all-gone 46 | The criminal network reaches further than the merchant guilds right now. | powerStructure.factions[].desc
+{"town":[5,0],"city":[11,0],"metropolis":[7,0]} sent-all-gone 46 | Some merchants are paying for protection; | powerStructure.factions[].desc
+{"town":[5,0],"city":[11,0],"metropolis":[7,0]} sent-all-gone 46 | others have become silent partners. | powerStructure.factions[].desc
+{"city":[9,0],"metropolis":[11,0]} sent-all-gone 40 | A prostitution quarter, lawful or merely suffered. | institutions[].desc
+{"city":[11,0]} sent-all-gone 22 | Major religious services | availableServices.healing[].name
+{"city":[11,0]} sent-all-gone 22 | The great rites, feast day observances, and the rites of the faith for a whole region. | availableServices.healing[].desc
+{"metropolis":[11,0],"city":[5,0]} sent-all-gone 32 | Charming and open, as if nothing they do could possibly be wrong. | npcs[].presentation.impression
+{"metropolis":[11,0],"city":[5,0]} sent-all-gone 32 | Talks easily about the wealth around them and who is careless with it. | npcs[].presentation.behaviour
+{"metropolis":[11,0],"city":[2,0]} sent-all-gone 26 | law enforcement and external defence, stretched between multiple responsibilities. | powerStructure.factions[].desc
+{"town":[4,0],"city":[9,0],"metropolis":[10,0]} sent-all-gone 46 | A slow war with the guild: arrests are made, the gangs rebuild, deals are struck and quietly broken. | powerStructure.factions[].desc
+{"city":[1,0],"metropolis":[10,0],"town":[2,0]} sent-all-gone 26 | Loud and showy, proud of the school and its champions. | npcs[].presentation.impression
+{"city":[1,0],"metropolis":[10,0],"town":[2,0]} sent-all-gone 26 | Shows off the training yard and invites you to the next games. | npcs[].presentation.behaviour
+{"city":[10,0]} sent-all-gone 20 | Fixed houses for performance. | institutions[].desc
+{"metropolis":[10,0],"city":[2,0]} sent-all-gone 12 | Be asked for an opinion by those who lead Arcane Orders, once, this season. | npcs[].goal.short
+{"metropolis":[10,0],"city":[4,0],"town":[1,0]} sent-all-gone 30 | In public the two exchange formal nods. | relationships[].description
+{"metropolis":[10,0],"city":[4,0],"town":[1,0]} sent-all-gone 30 | Both parties consider this a problem. | relationships[].tension
+{"metropolis":[10,0],"city":[6,0]} sent-all-gone 32 | Thin, stern and tidy. | npcs[].presentation.impression
+{"metropolis":[10,0],"city":[6,0]} sent-all-gone 32 | The building behind them is quiet in a way that feels wrong. | npcs[].presentation.impression
+{"metropolis":[10,0],"city":[6,0]} sent-all-gone 32 | asks why you want to see the workhouse. | npcs[].presentation.behaviour
+{"metropolis":[10,0],"city":[2,0]} sent-all-gone 24 | Temple stores supplement grain shortage | economicState.activeChains[].magicNote
+{"town":[8,0],"city":[5,0],"metropolis":[9,0]} sent-all-gone 44 | Friendly in a way that makes it clear everything has a price. | npcs[].presentation.impression
+{"town":[8,0],"city":[5,0],"metropolis":[9,0]} sent-all-gone 44 | Will sell protection, information or passage; | npcs[].presentation.behaviour
+{"town":[8,0],"city":[5,0],"metropolis":[9,0]} sent-all-gone 44 | payment is up front and the terms are not open to talk. | npcs[].presentation.behaviour
+{"town":[6,0],"metropolis":[9,0],"city":[8,0]} sent-all-gone 46 | Several people stand nearby, saying nothing. | npcs[].presentation.impression
+{"town":[6,0],"metropolis":[9,0],"city":[8,0]} sent-all-gone 46 | Speaks briefly and lets one of the others see you out. | npcs[].presentation.behaviour
+{"city":[9,0]} sent-all-gone 9 | Earn a place among the leaders of Merchant Guild Council without buying it or marrying into it. | npcs[].goal.long
+{"city":[9,0]} sent-all-gone 18 | Sellsword companies under proper organisation, each mustering a few score blades, the largest some hundreds. | defenseProfile.institutions.mercenary[].desc institutions[].desc
+{"city":[9,0]} sent-all-gone 18 | Debtors, criminals, political prisoners. | institutions[].desc
+{"metropolis":[9,0],"city":[5,0]} sent-all-gone 28 | Undead don't need light or rest. | availableServices.employment[].desc
+{"metropolis":[9,0],"city":[5,0]} sent-all-gone 28 | Valuable for night-shift operations. | availableServices.employment[].desc
+{"metropolis":[9,0],"city":[2,0]} sent-all-gone 11 | Be in the room the next time Arcane Orders must decide something that matters. | npcs[].goal.short
+{"city":[7,0],"metropolis":[9,0]} sent-all-gone 32 | they trade here, but have little say in how the place is run. | powerStructure.factions[].desc
+{"city":[3,0],"metropolis":[9,0]} sent-all-gone 12 | Rise in Arcane Orders far enough that their word carries weight outside it. | npcs[].goal.long
+{"city":[3,0],"metropolis":[9,0]} sent-all-gone 24 | corrupt, with ties to the underworld | stress.cast.roles[].reason
+{"town":[3,0],"city":[8,0],"metropolis":[7,0]} sent-all-gone 36 | They denounce the guild from the pulpit; | powerStructure.factions[].desc
+{"town":[3,0],"city":[8,0],"metropolis":[7,0]} sent-all-gone 36 | the guild gives openly to the poor and makes the denunciations look selective. | powerStructure.factions[].desc
+{"town":[1,0],"city":[5,0],"metropolis":[8,0]} sent-all-gone 28 | Protection Arrangement | relationships[].typeName
+{"city":[2,0],"metropolis":[8,0]} sent-all-gone 20 | Rival guilds fought over who may sell what, and over a say in how the place is run | history.currentTensions[].description history.historicalEvents[].description
+{"city":[8,0]} sent-all-gone 16 | Pilgrimage destination | availableServices.healing[].name
+{"city":[8,0]} sent-all-gone 16 | Attracts pilgrims from across the region. | availableServices.healing[].desc
+{"city":[8,0]} sent-all-gone 16 | Economic and spiritual significance. | availableServices.healing[].desc
+{"city":[8,0]} sent-all-gone 16 | quarried stone for cathedral maintenance | economicState.tradeDependencies[].detail
+{"city":[8,0]} sent-all-gone 8 | dependency.City walls and gates | simulationTrace[].causes[].source
+{"city":[8,0]} sent-all-gone 8 | dependency.Cathedral (#+ only) | simulationTrace[].causes[].source
+{"metropolis":[8,0],"city":[2,0]} sent-all-gone 20 | Druidic forest management accelerates regrowth and sustainable yield | economicState.activeChains[].magicNote
+{"metropolis":[8,0],"city":[4,0]} sent-all-gone 24 | Ahead of the religious authorities in current influence, which they hold carefully: too much visible power invites accusations that they prefer to avoid. | powerStructure.factions[].desc
+{"metropolis":[8,0],"city":[5,0]} sent-all-gone 13 | Still the watch commander as well. | npcs[].structuralPosition
+{"city":[8,0],"metropolis":[6,0],"town":[1,0]} sent-all-gone 30 | Individual or small groups of professional fighters available for private contracts: bodyguard work, debt enforcement, or quiet removal of problems. | institutions[].desc
+{"town":[1,0],"metropolis":[8,0],"city":[4,0]} sent-all-gone 13 | "Stone quarry" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one. | simulationTrace[].causes[].reason
+{"town":[2,0],"city":[3,0],"metropolis":[7,0]} sent-all-gone 24 | Each treats the other as a reliable colleague. | relationships[].description
+{"town":[7,0],"city":[1,0],"metropolis":[3,0],"village":[1,0]} sent-all-gone 12 | Heads the leading crew while the seat fails; | npcs[].structuralPosition
+{"town":[7,0],"city":[1,0],"metropolis":[3,0],"village":[1,0]} sent-all-gone 12 | whatever the seat stops watching is there to take. | npcs[].structuralPosition
+{"town":[7,0],"city":[1,0],"metropolis":[3,0],"village":[1,0]} sent-all-gone 12 | Growing too openly now may make the crew the first thing a recovered seat goes after. | npcs[].activeConstraint
+{"town":[1,0],"city":[4,0],"metropolis":[7,0]} sent-all-gone 24 | Small for a place of this size; | powerStructure.factions[].desc
+{"town":[1,0],"city":[4,0],"metropolis":[7,0]} sent-all-gone 24 | it cannot enforce the law everywhere at once, and it knows it. | powerStructure.factions[].desc
+{"city":[4,0],"metropolis":[7,0],"town":[1,0]} sent-all-gone 24 | Required by Smelter but not available in Forest terrain | resourceAnalysis.imports.reasons.iron ore resourceAnalysis.imports.reasons.copper ore
+{"city":[7,0],"metropolis":[3,0],"town":[2,0]} sent-all-gone 24 | Every question has a price and every answer a cost. | npcs[].presentation.impression
+{"city":[7,0],"metropolis":[3,0],"town":[2,0]} sent-all-gone 24 | Will find a person or a fact for a fee; | npcs[].presentation.behaviour
+{"city":[7,0],"metropolis":[3,0],"town":[2,0]} sent-all-gone 24 | the fee rises with the danger. | npcs[].presentation.behaviour
+{"city":[7,0]} sent-all-gone 14 | The hall could change hands within the season and the city has already begun arranging itself for both answers. | publicProse.blocks.power:desk.successionRisk.sentence
+{"city":[7,0],"metropolis":[5,0]} sent-all-gone 24 | Alchemical remedies supplement treatment | economicState.activeChains[].magicNote
+{"metropolis":[7,0],"city":[6,0],"town":[1,0]} sent-all-gone 28 | Commercial Complicity | prominentRelationship.type relationships[].typeName
+{"city":[7,0]} sent-all-gone 14 | Every advantage the city holds is one it has paid for and must keep paying for. | publicProse.blocks.defense:posture.terrain.beside
+{"city":[7,0],"metropolis":[2,0],"town":[1,0]} sent-all-gone 20 | Fights unlawful or half-lawful, staged in hidden places. | institutions[].desc
+{"metropolis":[7,0],"city":[3,0]} sent-all-gone 20 | Some of the garrison and city watch take bribes from whoever has coin. | economicState.safetyProfile.guardEffectivenessDesc
+{"city":[4,0],"metropolis":[7,0]} sent-all-gone 11 | Do one thing for Arcane Orders this season that the people who lead it cannot ignore. | npcs[].goal.short
+{"city":[7,0],"metropolis":[3,0]} sent-all-gone 10 | Get the rival gangs through the season without borrowing. | npcs[].goal.short
+{"town":[1,0],"city":[6,0],"metropolis":[3,0]} sent-all-gone 20 | Talks about the price of fish, where any can be had and who has been in today; | npcs[].presentation.behaviour
+{"town":[1,0],"city":[6,0],"metropolis":[3,0]} sent-all-gone 20 | a good ear for news. | npcs[].presentation.behaviour
+{"town":[2,0],"metropolis":[6,0],"city":[3,0]} sent-all-gone 22 | In this trade, late is a message. | relationships[].tension
+{"town":[3,0],"metropolis":[6,0],"city":[5,0]} sent-all-gone 28 | Trade is brisk, and it is hard to say where honest business ends and crime begins. | economicState.situationDesc
+{"town":[3,0],"metropolis":[6,0],"city":[5,0]} sent-all-gone 28 | The richest traders work both sides. | economicState.situationDesc
+{"town":[2,0],"metropolis":[6,0],"city":[2,0]} sent-all-gone 10 | Someone has started digging near the place where the body was hidden. | relationships[].tension
+{"city":[5,0],"metropolis":[6,0]} sent-all-gone 22 | The garrison patrols the main paths; | economicState.safetyProfile.safetyDesc
+{"city":[5,0],"metropolis":[6,0]} sent-all-gone 22 | Charcoal furnaces reduce raw ore to refined metal. | institutions[].desc
+{"city":[5,0],"metropolis":[6,0]} sent-all-gone 22 | It stands between the mine and the smithy. | institutions[].desc
+{"city":[6,0],"metropolis":[1,0]} sent-all-gone 14 | Civic council with full administrative apparatus. | institutions[].desc
+{"city":[6,0],"metropolis":[2,0],"town":[1,0]} sent-all-gone 18 | Cheerful and full of river gossip, with a pipe always going. | npcs[].presentation.impression
+{"city":[6,0],"metropolis":[2,0],"town":[1,0]} sent-all-gone 18 | Talks about the river, the locks and the landings along it. | npcs[].presentation.behaviour
+{"city":[6,0],"metropolis":[4,0],"town":[1,0]} sent-all-gone 22 | Loud and friendly with a purse in every hand. | npcs[].presentation.impression
+{"city":[6,0],"metropolis":[4,0],"town":[1,0]} sent-all-gone 22 | Takes bets, sells places by the pit and will match a fighter for a fee. | npcs[].presentation.behaviour
+{"city":[3,0],"metropolis":[6,0],"town":[1,0]} sent-all-gone 20 | Both maintain professional courtesy in public. | relationships[].description prominentRelationship.full
+{"city":[6,0],"metropolis":[6,0]} sent-all-gone 12 | The witness has started talking where people can hear. | relationships[].tension
+{"metropolis":[6,0],"city":[2,0]} sent-all-gone 8 | "Post relay station" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one. | simulationTrace[].causes[].reason
+{"metropolis":[3,0],"city":[6,0]} sent-all-gone 9 | Learn to do the work at the inns and taverns with half as much grain. | npcs[].goal.long
+{"metropolis":[6,0],"city":[3,0]} sent-all-gone 18 | A mine of shafts and adits, with its winding gear and ore carts, worked whenever ore can be had. | institutions[].desc
+{"city":[6,0]} sent-all-gone 12 | People at {S} know their ground gives them no help: there is no hill and no narrows, and whatever defends the city had to be built by hand. | publicProse.blocks.defense:posture.terrain.beside
+{"city":[6,0],"metropolis":[2,0]} sent-all-gone 16 | Magical practitioners outside the seat hold no office of their own; | powerStructure.factions[].desc
+{"city":[6,0],"metropolis":[2,0]} sent-all-gone 16 | their influence is advisory and transactional. | powerStructure.factions[].desc
+{"city":[6,0]} sent-all-gone 12 | The Noble Governorship governs {S}. | publicProse.blocks.power:governance.text
+{"town":[3,0],"city":[4,0],"metropolis":[5,0]} sent-all-gone 12 | The Guard knows where Thieves' Guild works, and Thieves' Guild knows the patrol rota. | powerStructure.factionRelationships[].narrative
+{"city":[2,0],"metropolis":[5,0]} sent-all-gone 7 | "Caravan masters' exchange" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one. | simulationTrace[].causes[].reason
+{"city":[4,0],"metropolis":[5,0]} sent-all-gone 18 | # institutions depend on imported materials (Precious metals, Grain, Grain). | economicViability.warnings[].description
+{"city":[2,0],"metropolis":[5,0]} sent-all-gone 7 | Buy paper materials at the market in bulk this season, while the price is still fair. | npcs[].goal.short
+{"city":[4,0],"metropolis":[5,0]} sent-all-gone 18 | Ordinary clothes, soft hands and a calm, polite voice. | npcs[].presentation.impression
+{"city":[4,0],"metropolis":[5,0]} sent-all-gone 18 | People nearby go quiet when they speak. | npcs[].presentation.impression
+{"city":[4,0],"metropolis":[5,0]} sent-all-gone 18 | Meets only through someone trusted; | npcs[].presentation.behaviour
+{"city":[4,0],"metropolis":[5,0]} sent-all-gone 18 | strangers are watched before they are spoken to. | npcs[].presentation.behaviour
+{"city":[5,0],"metropolis":[4,0]} sent-all-gone 18 | The garrison holds the quarantine lines, but not everyone obeys. | economicState.safetyProfile.safetyDesc
+{"city":[5,0],"metropolis":[4,0]} sent-all-gone 18 | As of the founding survey, the Flood (# years ago) hit the settlement hard, and it has since recovered: the changes made to get through that crisis are still how the place works today. | history.legacyAnnotations[].annotation
+{"city":[5,0]} sent-all-gone 10 | The food trades at {S} are working, which would matter a great deal if the city were ever cut off. | publicProse.blocks.defense:threat.economic.sentence
+{"city":[2,0],"metropolis":[5,0],"town":[1,0]} sent-all-gone 16 | Ask at {S} which traders are honest and people laugh. | publicProse.blocks.power:desk.structureFlag.sentence
+{"city":[2,0],"metropolis":[5,0],"town":[1,0]} sent-all-gone 16 | The money behind the trade and the money behind the rackets is the same money. | publicProse.blocks.power:desk.structureFlag.sentence
+{"city":[2,0],"metropolis":[5,0]} sent-all-gone 7 | Have the old rights of the beast trainers read out and recognised before anyone challenges them. | npcs[].goal.short
+{"city":[4,0],"metropolis":[5,0]} sent-all-gone 9 | See the rival gangs out of debt for good, with money set aside for bad years. | npcs[].goal.long
+{"city":[5,0],"metropolis":[5,0]} sent-all-gone 20 | Standing army with genuine political weight; | powerStructure.factions[].desc
+{"city":[5,0],"metropolis":[1,0],"town":[1,0]} sent-all-gone 14 | The arrangement is three years old and has never been put in writing. | relationships[].description
+{"city":[5,0],"metropolis":[1,0],"town":[1,0]} sent-all-gone 14 | The runner knows both their names. | relationships[].tension
+{"metropolis":[5,0],"city":[2,0]} sent-all-gone 7 | Heads the casters in quiet times; | npcs[].structuralPosition
+{"metropolis":[5,0],"city":[2,0]} sent-all-gone 7 | their place is secure and their spells are in demand. | npcs[].structuralPosition
+{"metropolis":[5,0],"city":[2,0]} sent-all-gone 7 | In quiet times the seat slowly hems the casters in with rules; | npcs[].activeConstraint
+{"metropolis":[5,0],"city":[2,0]} sent-all-gone 7 | recognition comes with limits. | npcs[].activeConstraint
+{"metropolis":[5,0],"hamlet":[1,0],"city":[2,0]} sent-all-gone 8 | Leave behind people who will carry on what they believe. | npcs[].goal.long
+{"metropolis":[5,0],"city":[2,0]} sent-all-gone 14 | grew from a fishing village into a maritime hub | history.founding.reason
+{"metropolis":[5,0],"city":[3,0]} sent-all-gone 16 | With a little left over each year, {S} gets by on a spread of trades, and every year people argue over how to spend it. | publicProse.blocks.economy:economics.prosperityHeader.sentence
+{"town":[5,0]} sent-all-gone 10 | Keeps the charter, rolls, and civic archive | availableServices.information[].desc
+{"city":[5,0],"town":[1,0]} sent-all-gone 12 | Permanent performance venues. | institutions[].desc
+{"city":[5,0],"metropolis":[3,0]} sent-all-gone 16 | Every question is answered with a price. | npcs[].presentation.impression
+{"city":[5,0],"metropolis":[3,0]} sent-all-gone 16 | the money comes first. | npcs[].presentation.behaviour
+{"city":[3,0],"metropolis":[5,0]} sent-all-gone 16 | Animated corpses working. | institutions[].desc
+{"city":[3,0],"metropolis":[5,0]} sent-all-gone 8 | Commands those under arms while criminals pay some of the people in their ranks. | npcs[].structuralPosition
+{"city":[3,0],"metropolis":[5,0]} sent-all-gone 8 | Anyone sent to look into the payments is offered the same coin. | npcs[].activeConstraint
+{"city":[5,0],"metropolis":[2,0],"town":[1,0]} sent-all-gone 8 | Leads the faith among officials who take bribes; | npcs[].structuralPosition
+{"city":[5,0],"metropolis":[2,0],"town":[1,0]} sent-all-gone 8 | its good name rests on keeping clear of them. | npcs[].structuralPosition
+{"city":[5,0],"metropolis":[2,0],"town":[1,0]} sent-all-gone 8 | The faith still needs those same officials for its lands and its rights, so it cannot cut them off. | npcs[].activeConstraint
+{"city":[2,0],"metropolis":[5,0]} sent-all-gone 7 | Make sure every decision of Arcane Orders this season goes out under their own name. | npcs[].goal.short
+{"city":[5,0]} sent-all-gone 10 | The country around {S} is thick with creatures, and the city keeps both a wall and people to hold it, and both are in use constantly. | publicProse.blocks.defense:threat.beasts.sentence
+{"metropolis":[5,0],"city":[3,0]} sent-all-gone 8 | Dungeon delving supply district requires a compatible supporting institution. | simulationTrace[].causes[].reason
+{"city":[5,0]} sent-all-gone 10 | Military City Council | conflicts[].parties[] powerStructure.factions[].faction
+{"city":[5,0]} sent-all-gone 10 | Military officers hold decisive influence over civilian governance; | powerStructure.factions[].desc
+{"city":[5,0]} sent-all-gone 10 | the council ratifies what the commanders decide. | powerStructure.factions[].desc
+{"city":[5,0]} sent-all-gone 5 | Take on the work in Military City Council that no one else wants, and do it without complaint. | npcs[].goal.short
+{"city":[5,0]} sent-all-gone 5 | As the governing power, Military City Council inherits the settlement's public-legitimacy score (#). | simulationTrace[].causes[].reason
+{"metropolis":[4,0],"city":[5,0]} sent-all-gone 18 | An administrative apparatus of officials, clerks, and ward officers carries out the city's business, whoever sits above it. | institutions[].desc
+{"metropolis":[4,0],"city":[5,0]} sent-all-gone 18 | Functional, and moved by bureaucratic inertia. | institutions[].desc
+{"city":[5,0]} sent-all-gone 10 | A large house for the sick poor, of # to # beds. | institutions[].desc
+{"city":[5,0]} sent-all-gone 10 | {S} keeps its back to the land and its face to the water, and everything the city is good at begins at the tideline. | publicProse.blocks.economy:economics.terrainIdentity.sentence
+{"metropolis":[5,0],"city":[2,0]} sent-all-gone 7 | Find a patron among those who lead The Guard, and make themselves useful to them. | npcs[].goal.short
+{"city":[5,0]} sent-all-gone 5 | Still the guild archmage as well. | npcs[].structuralPosition
+{"village":[1,0],"town":[4,0]} sent-all-gone 10 | Friendly and talkative about the roads and the weather. | npcs[].presentation.impression
+{"village":[1,0],"town":[4,0]} sent-all-gone 10 | Chats easily, and asks what you might want moved. | npcs[].presentation.behaviour
+{"town":[2,0],"metropolis":[4,0],"city":[4,0]} sent-all-gone 20 | Since the siege began, nothing new has come in to be stored at {S}. | publicProse.blocks.general:overview.siteLines[]
+{"town":[4,0]} sent-all-gone 8 | Public rejection is breaking the Guild Council's grip at {S} faster than Guild Council can shore it up, and every measure taken to shore it up costs a little more of what remains. | publicProse.blocks.power:desk.successionHold.sentence
+{"town":[4,0]} sent-all-gone 4 | Guild Council leaves Thieves' Guild alone because stamping it out would cost more than it saves. | powerStructure.factionRelationships[].narrative
+{"town":[4,0],"city":[4,0],"metropolis":[3,0]} sent-all-gone 11 | Neither has yet pushed the other hard enough to start a fight. | powerStructure.factionRelationships[].narrative
+{"town":[4,0]} sent-all-gone 8 | foraged herbs and botanical ingredients | economicState.tradeDependencies[].detail
+{"town":[4,0],"metropolis":[4,0],"city":[2,0]} sent-all-gone 10 | "Salt works" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one. | simulationTrace[].causes[].reason
+{"town":[1,0],"city":[2,0],"metropolis":[4,0]} sent-all-gone 7 | Look for a way to do more at the brewery with the same hands. | npcs[].goal.short
+{"city":[4,0],"metropolis":[2,0],"town":[1,0]} sent-all-gone 14 | Stamp certified purity marks on tested metals. | availableServices.legal[].desc
+{"city":[4,0],"metropolis":[2,0],"town":[1,0]} sent-all-gone 14 | Legally required for trade in many places. | availableServices.legal[].desc
+{"city":[4,0]} sent-all-gone 8 | The older people of {S} say defences are easier to keep than to raise, so what the city built stands ahead of any present need. | publicProse.blocks.defense:wall.rationale.sentence
+{"city":[4,0]} sent-all-gone 8 | The City Council governs {S}. | publicProse.blocks.power:governance.text
+{"city":[4,0],"metropolis":[2,0]} sent-all-gone 12 | The guild masters, banded into a consortium, hold the real civic power. | institutions[].desc
+{"city":[4,0]} sent-all-gone 8 | The Merchant Guild Council at {S} has let quarrels drop that it could have won, because winning would have cost more than it was worth. | publicProse.blocks.power:desk.rulingStructure.sentence
+{"city":[4,0]} sent-all-gone 4 | Learn the plans of Religious Authorities against Merchant Guild Council before they can act on them. | npcs[].goal.short
+{"city":[4,0]} sent-all-gone 8 | Defines major city status. | institutions[].desc
+{"city":[4,0]} sent-all-gone 8 | {S}'s own food once came first from its fishing, and the grounds are worked out: what the city still raises for itself is the less for it. | publicProse.blocks.economy:economics.foodSources.sentence
+{"city":[2,0],"metropolis":[4,0]} sent-all-gone 6 | Do one thing for Royal Authority this season that the people who lead it cannot ignore. | npcs[].goal.short
+{"city":[3,0],"metropolis":[4,0]} sent-all-gone 7 | Bring The Guard a piece of news before anyone else does. | npcs[].goal.short
+{"city":[3,0],"metropolis":[4,0]} sent-all-gone 14 | A flood rose fast across the lower districts, carrying off livelihoods and leaving the ownership of half the ground in doubt | history.historicalEvents[].description
+{"city":[2,0],"metropolis":[4,0]} sent-all-gone 12 | Healers are overwhelmed. | stress.summary
+{"city":[3,0],"metropolis":[4,0]} sent-all-gone 7 | Win the warehouse district a lasting privilege that no other house can claim. | npcs[].goal.long
+{"city":[3,0],"metropolis":[4,0]} sent-all-gone 14 | command appointments are patronage, and the council knows it. | powerStructure.factions[].desc
+{"city":[4,0]} sent-all-gone 8 | Merchant Guild Council · Unstable (insurgency contests authority) | publicProse.blocks.overview:identity.governs
+{"metropolis":[4,0],"town":[1,0],"city":[3,0]} sent-all-gone 16 | An uncontrolled surge of magic left its mark on the temple district and on the people who were there, and the effects have never fully faded | history.historicalEvents[].description
+{"metropolis":[2,0],"city":[4,0]} sent-all-gone 12 | Folk in {S} pay for blessings and relics they half suspect are a fraud. | publicProse.blocks.warFaith:faith.templeFraud.sentence
+{"metropolis":[4,0],"city":[3,0]} sent-all-gone 7 | Find a patron among those who lead Arcane Orders, and make themselves useful to them. | npcs[].goal.short
+{"metropolis":[4,0],"city":[4,0]} sent-all-gone 8 | The friend has fallen ill inside. | relationships[].tension
+{"metropolis":[4,0],"city":[3,0]} sent-all-gone 14 | Magic broke loose over the residential district and the people who lived there, and the traces it left have lingered ever since | history.historicalEvents[].description
+{"metropolis":[4,0],"city":[3,0]} sent-all-gone 14 | The water came up with almost no warning and remade the riverside quarter, drowning livelihoods and unsettling every question of who owned what | history.historicalEvents[].description
+{"metropolis":[4,0],"city":[2,0]} sent-all-gone 12 | A royal or ducal appointee governs; | institutions[].desc
+{"metropolis":[4,0],"city":[2,0]} sent-all-gone 12 | the city operates as a noble fief. | institutions[].desc
+{"metropolis":[4,0],"city":[2,0]} sent-all-gone 12 | At {S} the usual work no longer yields enough herbal remedies, and the trade that makes it now leans on help beyond ordinary work. | publicProse.blocks.magic.arcaneReliance.sentence
+{"metropolis":[4,0],"city":[3,0],"town":[1,0]} sent-all-gone 8 | The lover wants the two of them to leave this place together. | relationships[].tension
+{"metropolis":[4,0],"city":[3,0]} sent-all-gone 14 | Professional cartographers, guild-organised, producing regional maps, sea charts, property surveys, and reconnaissance maps for the army. | institutions[].desc
+{"metropolis":[4,0],"city":[3,0]} sent-all-gone 7 | Pay the fair folk what is owed before the next full moon. | npcs[].goal.short
+{"town":[1,0],"city":[4,0]} sent-all-gone 5 | Earn a place among the leaders of Arcane Council without buying it or marrying into it. | npcs[].goal.long
+{"town":[1,0],"city":[4,0]} sent-all-gone 10 | The Siege is why this place looks as it does: it stood here before, but what stands today was rebuilt afterwards | history.historicalCharacter
+{"town":[4,0]} sent-all-gone 8 | A loose council of leading citizens sees to the town's common business. | institutions[].desc
+{"city":[4,0],"metropolis":[1,0]} sent-all-gone 10 | Both sides account for it as a cost of doing business. | relationships[].description
+{"city":[4,0],"metropolis":[1,0]} sent-all-gone 10 | The fee went up this quarter without explanation. | relationships[].tension
+{"city":[3,0],"metropolis":[4,0],"town":[1,0]} sent-all-gone 16 | Some of {S}'s clergy work with its thieves: relics are sold twice, alms go missing, and no one in office asks where the money went. | publicProse.blocks.warFaith:faith.templeFraud.sentence
+{"city":[3,0],"metropolis":[4,0],"town":[1,0]} sent-all-gone 16 | The fraud trades on the faith of ordinary folk. | publicProse.blocks.warFaith:faith.templeFraud.sentence
+{"city":[4,0]} sent-all-gone 8 | {S} lives on many trades, and no one of them carries the city. | publicProse.blocks.economy:economics.incomeMix.sentence
+{"city":[4,0]} sent-all-gone 8 | You notice {S}'s works more than anything beyond them: the settled country around the city holds few creatures. | publicProse.blocks.defense:threat.beasts.sentence
+{"city":[4,0],"metropolis":[2,0]} sent-all-gone 6 | Own a share in the supply of grain, so the work at the bakers can never be held to ransom. | npcs[].goal.long
+{"city":[3,0],"metropolis":[3,0],"town":[4,0]} sent-all-gone 10 | Its own crimes go unpunished, and its rivals are the ones who get arrested. | powerStructure.factionRelationships[].narrative
+{"city":[2,0],"metropolis":[4,0]} sent-all-gone 6 | Build the work at the bardic college into a trade that will feed the next generation here. | npcs[].goal.long
+{"city":[4,0]} sent-all-gone 4 | See the courthouses out of debt for good, with money set aside for bad years. | npcs[].goal.long
+{"city":[4,0]} sent-all-gone 4 | Get the blacksmiths through the season without borrowing. | npcs[].goal.short
+{"city":[4,0]} sent-all-gone 8 | The church and the city's thieves share what their faith pays. | publicProse.blocks.warFaith:faith.templeFraud.sentence
+{"city":[4,0],"metropolis":[2,0]} sent-all-gone 6 | Leave more money at the warehouse district than there was when they took charge. | npcs[].goal.long
+{"metropolis":[4,0],"city":[2,0]} sent-all-gone 6 | See the coaching inn out of debt for good, with money set aside for bad years. | npcs[].goal.long
+{"town":[1,0],"metropolis":[4,0],"city":[4,0]} sent-all-gone 18 | The garrison keeps order, and more harshly as the food runs down. | economicState.safetyProfile.safetyDesc
+{"town":[3,0],"city":[2,0],"metropolis":[4,0],"village":[1,0]} sent-all-gone 10 | One of the witnesses to the fire wants to confess before dying. | relationships[].tension
+{"city":[4,0]} sent-all-gone 8 | If the Military City Council at {S} falls, it will be at the hands of someone close to it. | publicProse.blocks.power:desk.rulingStructure.sentence
+{"city":[4,0]} sent-all-gone 4 | Be in the room the next time Military City Council must decide something that matters. | npcs[].goal.short
+{"city":[4,0]} sent-all-gone 4 | Earn a place among the leaders of Military City Council without buying it or marrying into it. | npcs[].goal.long
+{"city":[4,0]} sent-all-gone 4 | Be asked for an opinion by those who lead Military City Council, once, this season. | npcs[].goal.short
+{"city":[4,0]} sent-all-gone 8 | The Merchant oligarchy at {S} has lost the city's support, and no rival had to take it. | publicProse.blocks.power:desk.successionHold.sentence
+{"city":[2,0],"metropolis":[4,0]} sent-all-gone 6 | Make sure no new rule from those who govern costs the ropemaker's ropewalk anything this season. | npcs[].goal.short
+{"city":[4,0],"metropolis":[1,0]} sent-all-gone 5 | Get the adventurers' guilds excused from one tax or levy this season. | npcs[].goal.short
+{"metropolis":[2,0],"town":[4,0]} sent-all-gone 12 | The criminal network is stronger than they are. | powerStructure.factions[].desc
+{"metropolis":[2,0],"town":[4,0]} sent-all-gone 12 | The clergy preach against it loudly, and few people listen. | powerStructure.factions[].desc
+{"city":[4,0]} sent-all-gone 8 | Church institutions hold direct temporal power; | powerStructure.factions[].desc
+{"city":[4,0]} sent-all-gone 8 | tithes, land, and courts are all ecclesiastical. | powerStructure.factions[].desc
+{"city":[4,0]} sent-all-gone 4 | Religious Authorities had enough power + the right archetype to demand "Multiple monasteries" as an institutional ally. | simulationTrace[].causes[].reason
+{"city":[4,0],"town":[1,0]} sent-all-gone 10 | Processing foraging_areas but missing Elder Grove Council, Midwife for the full chain. | economicViability.suggestions[].description
+{"city":[4,0],"town":[1,0]} sent-all-gone 10 | Add Elder Grove Council and Midwife to complete the production chain | economicViability.suggestions[].suggestedFixes[]
+{"metropolis":[4,0],"city":[2,0]} sent-all-gone 6 | Find the veteran's lodge one more source of money. | npcs[].goal.short
+{"town":[4,0]} sent-all-gone 8 | The festivals bring bards, jugglers, and acrobats through. | institutions[].desc
+{"town":[1,0],"city":[4,0]} sent-all-gone 10 | Arcane Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds need Arcane Council to enforce their contracts and keep the law. | powerStructure.factionRelationships[].narrative
+{"city":[4,0]} sent-all-gone 8 | The city stands behind whoever sits at {S}, and that lets its ruler do things a ruler without the city could not try. | publicProse.blocks.power:desk.successionHold.sentence
+{"metropolis":[4,0],"city":[4,0]} sent-all-gone 16 | The gates are shut against the siege, and the garrison and city watch hold them. | economicState.safetyProfile.guardEffectivenessDesc
+{"metropolis":[4,0],"city":[2,0]} sent-all-gone 12 | A city-scale yard building large merchant ships and warships alike. | institutions[].desc
+{"metropolis":[4,0],"city":[2,0]} sent-all-gone 12 | It holds several dry docks, a ropewalk, a sail loft, and its own ironworks. | institutions[].desc
+{"metropolis":[4,0],"city":[2,0]} sent-all-gone 12 | It employs many, and matters to the state's defence. | institutions[].desc
+{"metropolis":[4,0],"city":[4,0]} sent-all-gone 16 | The garrison is not going out to look. | powerStructure.recentConflict
+{"town":[2,0],"metropolis":[4,0]} sent-all-gone 6 | Be given the secrets of Grain Holders to keep, as well as its errands to run. | npcs[].goal.long
+{"city":[4,0]} sent-all-gone 8 | The bishop's seat, and its presence marks a city as a major one. | institutions[].desc
+{"city":[4,0]} sent-all-gone 8 | {S} tolerates the Noble Governorship and no more. | publicProse.blocks.power:governance.text
+{"city":[4,0]} sent-all-gone 4 | Beat Merchant Guilds to the next opportunity, and win the credit for Craft Guilds. | npcs[].goal.short
+{"town":[4,0]} sent-all-gone 4 | Thieves' Guild has bought key people in Corrupt Council. | powerStructure.factionRelationships[].narrative
+{"town":[4,0]} sent-all-gone 8 | The region's principal adventuring hub, working under charter. | defenseProfile.institutions.charter[].desc institutions[].desc
+{"town":[4,0]} sent-all-gone 8 | Contracts are posted here, monster threats graded, equipment maintained, and the great operations beyond any militia coordinated from its floor. | defenseProfile.institutions.charter[].desc institutions[].desc
+{"city":[4,0]} sent-all-gone 8 | Whatever the kitchen gardens still give, sold early and gone by mid-morning. | availableServices.food[].desc
+{"city":[4,0]} sent-all-gone 8 | {S}'s wall is all that stands between the city and the siege, and every stretch of it is watched now. | publicProse.blocks.defense:forces.fortification.sentence
+{"city":[4,0]} sent-all-gone 4 | Be asked for an opinion by those who lead Noble Governorship, once, this season. | npcs[].goal.short
+{"city":[4,0]} sent-all-gone 4 | Become someone Noble Governorship cannot do without. | npcs[].goal.long
+{"city":[4,0]} sent-all-gone 8 | Danger has come to {S}, and the city meets it strongly defended. | publicProse.blocks.defense:posture.posture.beside
+{"village":[3,0],"hamlet":[1,0],"town":[1,0],"thorp":[1,0]} sent-all-gone 12 | Names a price for anything without asking where it came from. | npcs[].presentation.impression
+{"village":[3,0],"hamlet":[1,0],"town":[1,0],"thorp":[1,0]} sent-all-gone 12 | Buys at a quarter of the worth; | npcs[].presentation.behaviour
+{"village":[1,0],"city":[3,0],"town":[1,0]} sent-all-gone 5 | Secure rights for the brickmaker's brickyard that will outlast whoever governs now. | npcs[].goal.long
+{"town":[3,0]} sent-all-gone 3 | Secure rights for the merchant warehouses that will outlast whoever governs now. | npcs[].goal.long
+{"town":[1,0],"metropolis":[3,0],"city":[2,0]} sent-all-gone 6 | Win the houses of worship a lasting privilege that no other house can claim. | npcs[].goal.long
+{"town":[3,0]} sent-all-gone 6 | {S} keeps a working balance: the law is present, so is crime, and neither has the town to itself. | publicProse.blocks.defense:state.publicOrder.beside
+{"town":[3,0]} sent-all-gone 3 | processor.Docks/port facilities | simulationTrace[].causes[].source
+{"town":[3,0]} sent-all-gone 3 | Docks/port facilities converts raw inputs into chain output. | simulationTrace[].causes[].reason
+{"town":[2,0],"metropolis":[3,0],"city":[2,0]} sent-all-gone 14 | Guild-funded private security surcharges: effectively a privatised protection tax on trade. | economicState.incomeSources[].desc
+{"town":[3,0]} sent-all-gone 6 | They change coin from abroad. | institutions[].desc
+{"town":[3,0]} sent-all-gone 6 | Banking in its infancy. | institutions[].desc
+{"town":[3,0],"city":[1,0]} sent-all-gone 8 | Kept for the poor, the old, and the crippled who have no work in them, funded by church endowment and rich patrons. | institutions[].desc
+{"town":[3,0],"city":[1,0]} sent-all-gone 8 | It feeds and houses its residents, who repay the kindness in prayer for those who gave it. | institutions[].desc
+{"town":[3,0]} sent-all-gone 6 | A permanent circle, and a rare one. | institutions[].desc
+{"town":[3,0]} sent-all-gone 6 | Dear to build and dearer to keep, calling for magical skill past what a town usually commands. | institutions[].desc
+{"town":[3,0],"city":[1,0]} sent-all-gone 8 | A board where torchbearers and porters sign on by the session at a day labourer's wage. | institutions[].desc
+{"town":[3,0]} sent-all-gone 6 | People at {S} know the town's defence does not end with its weapons. | publicProse.blocks.defense:forces.arcane.sentence
+{"town":[3,0]} sent-all-gone 6 | {S} calls its hall the Guild Council in public and something shorter everywhere else. | publicProse.blocks.power:desk.governingTitle.sentence
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 10 | Books and broadsheets, where the technology has arrived. | institutions[].desc
+{"city":[3,0],"metropolis":[1,0]} sent-all-gone 8 | Every test has a fee and a wait. | npcs[].presentation.impression
+{"city":[3,0],"metropolis":[1,0]} sent-all-gone 8 | Assays at the posted rate; | npcs[].presentation.behaviour
+{"city":[3,0],"metropolis":[1,0]} sent-all-gone 8 | the seal costs extra. | npcs[].presentation.behaviour
+{"city":[3,0],"town":[2,0],"metropolis":[3,0]} sent-all-gone 16 | Easy-going on the surface, with a price ready for every favour. | npcs[].presentation.impression
+{"city":[3,0],"town":[2,0],"metropolis":[3,0]} sent-all-gone 16 | Will sell safe passage or a place to hide; | npcs[].presentation.behaviour
+{"city":[3,0],"metropolis":[1,0],"town":[1,0]} sent-all-gone 10 | A noble family is contesting a merchant's right to operate in their traditional market territory. | powerStructure.recentConflict
+{"city":[3,0]} sent-all-gone 3 | Make sure the work at the garrison never stops for want of iron and grain and fuel. | npcs[].goal.long
+{"city":[1,0],"town":[3,0],"metropolis":[1,0]} sent-all-gone 5 | Holds an office that runs from day to day, with no crisis to answer. | npcs[].structuralPosition
+{"city":[1,0],"town":[3,0],"metropolis":[1,0]} sent-all-gone 5 | Good work is expected and goes unnoticed; | npcs[].activeConstraint
+{"city":[1,0],"town":[3,0],"metropolis":[1,0]} sent-all-gone 5 | a mistake is remembered. | npcs[].activeConstraint
+{"city":[3,0]} sent-all-gone 3 | Rise in City Council far enough that their word carries weight outside it. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | Become someone City Council cannot do without. | npcs[].goal.long
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 5 | See the adventurers' guilds out of debt for good, with money set aside for bad years. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | Lay in a season of precious metals at the banking houses while it can still be had. | npcs[].goal.short
+{"city":[3,0],"town":[1,0],"metropolis":[2,0]} sent-all-gone 6 | Have the old rights of the bakers read out and recognised before anyone challenges them. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 6 | Abandoned babies and young children are received here and given plain care until apprenticeship, a family placement, or a childhood spent in the house itself. | institutions[].desc
+{"city":[3,0]} sent-all-gone 6 | Generally a church foundation. | institutions[].desc
+{"city":[3,0]} sent-all-gone 6 | The wheel in the wall admits a child by night, no name asked. | institutions[].desc
+{"city":[3,0]} sent-all-gone 6 | Whatever {S} earns goes first on food, and until the city can feed itself there is little left over for anything else. | publicProse.blocks.economy:economics.foodOnProsperity.sentence
+{"city":[3,0]} sent-all-gone 6 | The Merchant Guild Council at {S} has lost the city. | publicProse.blocks.power:desk.legitimacyBanner.sentence
+{"city":[3,0]} sent-all-gone 6 | What it announces is received as news from somewhere else, and the city goes on making its own arrangements. | publicProse.blocks.power:desk.legitimacyBanner.sentence
+{"city":[3,0]} sent-all-gone 6 | Public rejection is breaking the Merchant Guild Council's grip at {S} faster than Merchant Guild Council can shore it up, and every measure taken to shore it up costs a little more of what remains. | publicProse.blocks.power:desk.successionHold.sentence
+{"city":[3,0]} sent-all-gone 6 | The city would go on as it is if the arcane went away; | publicProse.blocks.magic.arcaneReliance.sentence
+{"city":[3,0]} sent-all-gone 3 | Find out which members of Merchant Guild Council are still friendly with Religious Authorities, and why. | npcs[].goal.short
+{"city":[3,0],"metropolis":[2,0],"town":[1,0]} sent-all-gone 12 | As of the founding survey, the Tyranny (# years ago) set up ways of doing things that have since changed: the way the settlement is ruled today was largely settled then. | history.legacyAnnotations[].annotation
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 10 | Quiet, plain and patient. | npcs[].presentation.impression
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 10 | Nothing about them is worth remembering. | npcs[].presentation.impression
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 10 | does not meet strangers twice in the same place. | npcs[].presentation.behaviour
+{"city":[3,0]} sent-all-gone 6 | The river decides what this city can move and when, and nobody here treats that as a hardship. | publicProse.blocks.economy:economics.terrainIdentity.sentence
+{"city":[3,0]} sent-all-gone 6 | {S} still keeps the shape the city took after the religious conflict, and that shape is older than anyone living, though the times have moved on. | publicProse.blocks.general:history.legacyLines[]
+{"city":[3,0]} sent-all-gone 6 | Though the present peace asks nothing of its defences, {S} keeps its city walls and gates in repair: mending costs less than building again. | publicProse.blocks.defense:wall.rationale.sentence
+{"city":[3,0]} sent-all-gone 6 | In {S} the faith is kept at a cathedral, parish churches and monasteries. | publicProse.blocks.warFaith:faith.faithTeaser.sentence
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 10 | VIABLE WITH CRITICAL DEPENDENCIES: {S} works well enough, as long as nobody cuts it off from the metals it buys in. | publicProse.blocks.viewModel:viability.summary
+{"city":[3,0],"town":[1,0],"metropolis":[2,0]} sent-all-gone 6 | Have the rights of the fish market set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 5 | Have the rights of the warehouse district set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 5 | Bring Royal Authority a piece of news before anyone else does. | npcs[].goal.short
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 5 | Find a patron they can name in public, and move to their side. | npcs[].goal.short
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 5 | Be given the secrets of Royal Authority to keep, as well as its errands to run. | npcs[].goal.long
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 5 | Bring every step of the trade, from the first goods to the last, under the roof of the vintner's cellars. | npcs[].goal.long
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 5 | Learn to do the work at the luxury goods quarter with half as much luxury materials. | npcs[].goal.long
+{"city":[3,0],"metropolis":[1,0]} sent-all-gone 4 | Leave more money at the cartographer's guild than there was when they took charge. | npcs[].goal.long
+{"city":[3,0],"metropolis":[1,0]} sent-all-gone 8 | The watch reports show a fine record of arrests. | relationships[].description
+{"city":[3,0]} sent-all-gone 6 | {S}'s food comes from more than one source, the grain harvest most of all, and together they do not quite cover what the city eats. | publicProse.blocks.economy:economics.foodSources.sentence
+{"city":[3,0]} sent-all-gone 6 | The Merchant Guild Council has lost {S}'s trust over crime. | publicProse.blocks.power:desk.legitimacyLens.sentence
+{"city":[3,0]} sent-all-gone 6 | {S} is governed by the Merchant Guild Council. | publicProse.blocks.power:governance.text
+{"city":[3,0]} sent-all-gone 3 | Collect what is owed to the monasteries before the season is out. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Win the sage's quarter a lasting privilege that no other house can claim. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | Keep the quarrel between Merchant Guild Council and Religious Authorities from turning into open trouble this season. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Find the apothecary district one more source of money. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Take on more hands at the dyer's dyehouse, and keep them busy all season. | npcs[].goal.short
+{"city":[3,0],"town":[1,0]} sent-all-gone 8 | The guards at {S} walk streets where they are not welcome, and that is more dangerous to them than any ambush outside. | publicProse.blocks.defense:status.override.sentence
+{"city":[3,0],"metropolis":[1,0]} sent-all-gone 4 | Win the next big piece of work away from the specialized metalworkers. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Learn who really runs the specialized metalworkers, and what it would take to replace them. | npcs[].goal.short
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 5 | Win the midwife's house a lasting privilege that no other house can claim. | npcs[].goal.long
+{"metropolis":[3,0],"city":[3,0],"town":[1,0]} sent-all-gone 7 | Find out exactly what was given away in the bargain, and whether it can be won back. | npcs[].goal.short
+{"metropolis":[3,0],"city":[2,0]} sent-all-gone 10 | Corpses raised to labour. | institutions[].desc
+{"metropolis":[3,0],"city":[2,0]} sent-all-gone 10 | Not everyone approves. | institutions[].desc
+{"metropolis":[3,0],"city":[3,0]} sent-all-gone 12 | Says little and lets someone else see you out. | npcs[].presentation.behaviour
+{"metropolis":[3,0],"city":[3,0]} sent-all-gone 12 | A formal house for the sale of costly goods: estates, ships, livestock, art, and now and then a whole household's goods. | institutions[].desc
+{"metropolis":[1,0],"city":[3,0]} sent-all-gone 4 | Keep the accounts of the warehouse district balanced, and show them to anyone who asks. | npcs[].goal.short
+{"metropolis":[1,0],"city":[3,0]} sent-all-gone 4 | Leave the chroniclers' exchange protected by law, so whoever runs the house next need not fight for the same rights. | npcs[].goal.long
+{"metropolis":[3,0],"city":[3,0]} sent-all-gone 6 | Secure rights for the tailor's guild that will outlast whoever governs now. | npcs[].goal.long
+{"metropolis":[3,0],"city":[2,0]} sent-all-gone 5 | Leave more money at the scroll scribe's desk than there was when they took charge. | npcs[].goal.long
+{"metropolis":[2,0],"city":[3,0]} sent-all-gone 10 | Plain-faced and silent. | npcs[].presentation.impression
+{"metropolis":[2,0],"city":[3,0]} sent-all-gone 10 | Looks at the door more than at you. | npcs[].presentation.impression
+{"metropolis":[2,0],"city":[3,0]} sent-all-gone 10 | Lets the question go unanswered and leaves by the other way. | npcs[].presentation.behaviour
+{"metropolis":[1,0],"city":[3,0]} sent-all-gone 4 | Build the work at the cartographer's guild into a trade that will feed the next generation here. | npcs[].goal.long
+{"metropolis":[3,0],"city":[3,0]} sent-all-gone 12 | Magic broke loose over the temple district and the people who lived there, and the traces it left have lingered ever since | history.historicalEvents[].description
+{"hamlet":[3,0],"thorp":[1,0],"town":[1,0]} sent-all-gone 10 | Ordinary and quiet, the kind of person who always seems to know someone. | npcs[].presentation.impression
+{"hamlet":[3,0],"thorp":[1,0],"town":[1,0]} sent-all-gone 10 | Buys nothing from anyone unvouched; | npcs[].presentation.behaviour
+{"town":[3,0]} sent-all-gone 6 | Every advantage the town holds is one it has paid for and must keep paying for. | publicProse.blocks.defense:posture.terrain.beside
+{"town":[3,0]} sent-all-gone 6 | It answers to no one in particular, but the work gets done. | institutions[].desc
+{"town":[3,0]} sent-all-gone 6 | Compact within walls, outlying farms and a weekly market field beyond the gates | spatialLayout.layout
+{"town":[3,0]} sent-all-gone 6 | people here live in a place built around courtyards, on endowed institutions and the caravan road. | publicProse.blocks.overview:identity.scope
+{"city":[3,0]} sent-all-gone 6 | Operational advantage | conflicts[].stakes powerStructure.conflicts[].stakes
+{"city":[3,0]} sent-all-gone 6 | The stakes are operational advantage. | conflicts[].desc powerStructure.conflicts[].desc
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 10 | grew around a ferry crossing that became the first bridge only three generations ago | history.founding.reason
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 10 | As of the founding survey, the Interregnum (# years ago) hit the settlement hard, and it has since recovered: the present calm was partly built in the rebuilding that followed. | history.legacyAnnotations[].annotation
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 5 | Get the scroll scribe's desk through the season without borrowing. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Get the city granaries excused from one tax or levy this season. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Make the furrier's district so needed by those who govern that no one dares touch the rights of the house. | npcs[].goal.long
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 5 | Become someone The Commercial Circle cannot do without. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | Double the work at the cartographer's guild, and find the hands to do it. | npcs[].goal.long
+{"city":[3,0],"metropolis":[1,0]} sent-all-gone 8 | Tests the purity of precious metals brought to market. | institutions[].desc
+{"city":[3,0]} sent-all-gone 6 | What governs {S} calls itself the Merchant Guild Council; | publicProse.blocks.power:desk.governingTitle.sentence
+{"city":[3,0]} sent-all-gone 3 | See Religious Authorities too weak to threaten Merchant Guild Council again. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | Make peace between Merchant Guild Council and Religious Authorities on terms Merchant Guild Council can live with. | npcs[].goal.long
+{"city":[3,0],"metropolis":[3,0]} sent-all-gone 12 | A civic council with the full apparatus of office beneath it. | institutions[].desc
+{"city":[3,0],"metropolis":[2,0],"town":[1,0]} sent-all-gone 6 | Get the rights of the bakers written down and sealed by those who govern, this season. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Get the chandler's shop excused from one tax or levy this season. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 6 | {S} sends its stone out half-finished, and nobody in the city is troubled by it. | publicProse.blocks.economy:economics.exploitation.sentence
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 10 | In {S} the church has the garrison at its side: soldiers keep the feast days, priests stand at the musters, and an offence against the faith is answered by armed men who call themselves crusaders. | publicProse.blocks.warFaith:faith.templeCrusader.sentence
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 5 | Close one of the routes that money takes into the rival gangs. | npcs[].goal.short
+{"city":[3,0],"metropolis":[1,0]} sent-all-gone 4 | Make Religious Authorities so much their own that it could not run a week without them. | npcs[].goal.long
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 10 | Druids call fish and bless the waters | economicState.activeChains[].magicNote
+{"city":[3,0]} sent-all-gone 6 | # institutions depend on imported materials (Trade access + grain, Precious metals, Grain). | economicViability.warnings[].description
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 10 | Someone is being prepared for a fall. | relationships[].tension
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 10 | At {S} the richest merchants and the criminal bosses are often the same people; | publicProse.blocks.power:desk.structureFlag.sentence
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 10 | a deal struck in the guild hall and a deal struck in a back room look much alike. | publicProse.blocks.power:desk.structureFlag.sentence
+{"city":[2,0],"metropolis":[3,0],"town":[2,0]} sent-all-gone 7 | The Guard and Thieves' Guild have a working arrangement. | powerStructure.factionRelationships[].narrative
+{"city":[2,0],"metropolis":[3,0],"town":[2,0]} sent-all-gone 7 | Patrol routes avoid certain streets. | powerStructure.factionRelationships[].narrative
+{"city":[2,0],"metropolis":[3,0],"town":[2,0]} sent-all-gone 7 | Certain arrests never happen. | powerStructure.factionRelationships[].narrative
+{"city":[2,0],"metropolis":[3,0],"town":[2,0]} sent-all-gone 7 | The rank and file may not know; | powerStructure.factionRelationships[].narrative
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 5 | Earn a place among the leaders of Thieves' Guild without buying it or marrying into it. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | Make the courthouses so needed by those who govern that no one dares touch the rights of the house. | npcs[].goal.long
+{"city":[3,0],"metropolis":[3,0]} sent-all-gone 6 | Someone has asked to see the old accounts. | relationships[].tension
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 10 | The case comes before the council this season. | prominentRelationship.phrasing relationships[].tension
+{"city":[3,0],"metropolis":[3,0]} sent-all-gone 6 | Secure a war contract before a rival does, or find a way to profit from the disruption instead of suffering it | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Own every step of the work that the tanners and the cobbler's guild now split between them. | npcs[].goal.long
+{"metropolis":[3,0],"town":[3,0]} sent-all-gone 6 | Heads the leading house in the trade in quiet times, though its word counts for little beyond the trade. | npcs[].structuralPosition
+{"metropolis":[3,0],"town":[3,0]} sent-all-gone 6 | Every new privilege it gathers in plain sight draws the eye of the seat and of its rivals. | npcs[].activeConstraint
+{"metropolis":[3,0],"city":[2,0],"town":[1,0]} sent-all-gone 6 | Get the houses of worship excused from one tax or levy this season. | npcs[].goal.short
+{"metropolis":[1,0],"city":[3,0]} sent-all-gone 4 | processor.Printing house | simulationTrace[].causes[].source
+{"metropolis":[1,0],"city":[3,0]} sent-all-gone 4 | Printing house converts raw inputs into chain output. | simulationTrace[].causes[].reason
+{"town":[3,0]} sent-all-gone 6 | Rare permanent circle. | institutions[].desc
+{"town":[3,0]} sent-all-gone 6 | Extremely expensive to construct and maintain. | institutions[].desc
+{"town":[3,0]} sent-all-gone 6 | Requires magical expertise beyond typical town resources. | institutions[].desc
+{"town":[3,0],"metropolis":[2,0]} sent-all-gone 10 | A good part of the iron ore {S}'s work uses must come from elsewhere; | publicProse.blocks.economy:economics.criticalImport.sentence
+{"town":[3,0]} sent-all-gone 3 | Become someone Church Council cannot do without. | npcs[].goal.long
+{"town":[3,0]} sent-all-gone 3 | Earn a place among the leaders of Church Council without buying it or marrying into it. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 6 | The Military City Council governs {S}. | publicProse.blocks.power:governance.text
+{"city":[3,0]} sent-all-gone 3 | Get the city granaries through the season without borrowing. | npcs[].goal.short
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 10 | More interested in the dead than the living. | npcs[].presentation.impression
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 10 | Gives the rate and turns away. | npcs[].presentation.behaviour
+{"city":[3,0]} sent-all-gone 6 | The Guard carries out what Merchant oligarchy decides. | powerStructure.factionRelationships[].narrative
+{"city":[3,0]} sent-all-gone 3 | Leave more money at the mint than there was when they took charge. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | Secure rights for the mine that will outlast whoever governs now. | npcs[].goal.long
+{"city":[3,0],"metropolis":[1,0]} sent-all-gone 4 | "Glassmakers" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one. | simulationTrace[].causes[].reason
+{"city":[3,0],"metropolis":[1,0]} sent-all-gone 4 | Collect what is owed to the craft guilds before the season is out. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Learn to do the work at the city granaries with half as much grain. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | Keep the banking houses working through the season even if the supply of precious metals should fail. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Secure rights for the wizard's tower that will outlast whoever governs now. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 6 | Merchant Guilds work under the rules City Council sets, and pay for a hearing in the hall when it wants something. | powerStructure.factionRelationships[].narrative
+{"city":[3,0],"metropolis":[1,0]} sent-all-gone 4 | Collect what is owed to the midwife's house before the season is out. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Be counted one day among those who lead City Council. | npcs[].goal.long
+{"city":[3,0],"metropolis":[1,0],"town":[1,0]} sent-all-gone 5 | Be remembered as the one who kept the chandler's shop out of debt. | npcs[].goal.long
+{"metropolis":[3,0],"city":[2,0]} sent-all-gone 10 | Multiple weak claimants | history.currentTensions[].factions[]
+{"metropolis":[3,0],"city":[2,0]} sent-all-gone 10 | Those who prefer the vacuum | history.currentTensions[].factions[]
+{"metropolis":[3,0],"city":[3,0]} sent-all-gone 6 | Find the ropemaker's ropewalk one more source of money. | npcs[].goal.short
+{"metropolis":[3,0],"city":[2,0]} sent-all-gone 5 | Look for a way to do more at the vintner's cellars with the same hands. | npcs[].goal.short
+{"metropolis":[3,0],"city":[2,0]} sent-all-gone 10 | what it asks for it generally gets, and the exceptions are few enough to name. | publicProse.blocks.power:desk.legitimacyBanner.sentence
+{"metropolis":[2,0],"city":[3,0]} sent-all-gone 5 | Get the crier's post excused from one tax or levy this season. | npcs[].goal.short
+{"metropolis":[1,0],"city":[3,0]} sent-all-gone 8 | The road into {S} is crowded: not with merchants but with families, carts piled with household goods, people who are clearly not from here and clearly not passing through. | arrivalScene
+{"metropolis":[1,0],"city":[3,0]} sent-all-gone 8 | The gate guard has stopped checking papers. | arrivalScene
+{"city":[3,0]} sent-all-gone 6 | Noble Families still have their titles, but the hall's offices have taken most of their power. | powerStructure.factionRelationships[].narrative
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 5 | Cut the spending at the mills by a tenth this season, and keep the work going. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Bring Military City Council a piece of news before anyone else does. | npcs[].goal.short
+{"city":[2,0],"metropolis":[3,0]} sent-all-gone 5 | Grow the work at the furrier's district by one more pair of hands, then another. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Find a patron among those who lead Military City Council, and make themselves useful to them. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Be given the secrets of Military City Council to keep, as well as its errands to run. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | Reach the top of Military City Council by the long road, one earned favour at a time. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | Grow the work at the specialized metalworkers by one more pair of hands, then another. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Pay every hand at the brewery in full and on time this season. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 6 | Senior druids who govern how their circle deals with the city. | institutions[].desc
+{"city":[3,0]} sent-all-gone 6 | They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land. | institutions[].desc
+{"city":[3,0]} sent-all-gone 6 | People take their marriages, inheritances and hard times to Religious Authorities, not to Ecclesiastical Council, and the two do not agree on who decides what. | powerStructure.factionRelationships[].narrative
+{"city":[3,0]} sent-all-gone 3 | Look for a way to do more at the luxury goods quarter with the same hands. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Win one ally of Religious Authorities over to the side of Ecclesiastical Council. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Be asked for an opinion by those who lead Ecclesiastical Council, once, this season. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Rise in Ecclesiastical Council far enough that their word carries weight outside it. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | Become someone Ecclesiastical Council cannot do without. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | See Religious Authorities too weak to threaten Ecclesiastical Council again. | npcs[].goal.long
+{"city":[1,0],"town":[2,0],"metropolis":[3,0]} sent-all-gone 6 | Rise in Grain Holders far enough that their word carries weight outside it. | npcs[].goal.long
+{"city":[1,0],"town":[2,0],"metropolis":[3,0]} sent-all-gone 6 | Become someone Grain Holders cannot do without. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | Train an apprentice at the cartographer's guild to take on part of the work. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 6 | Conjured game produces fish; | economicState.activeChains[].magicNote
+{"city":[3,0]} sent-all-gone 3 | Find a way to make do with less grain at the city granaries. | npcs[].goal.short
+{"city":[3,0],"metropolis":[1,0]} sent-all-gone 4 | Have the old rights of the carpenters read out and recognised before anyone challenges them. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Free the carpenters from depending on a single source of timber. | npcs[].goal.long
+{"city":[3,0],"town":[1,0]} sent-all-gone 8 | The air prickles faintly, the way it does where a great deal of spellwork is done. | arrivalScene
+{"city":[3,0]} sent-all-gone 3 | Win the major hospital first call on any help those who govern can give this season. | npcs[].goal.short
+{"city":[3,0],"metropolis":[1,0]} sent-all-gone 4 | Make the potter's workshop too sound for any creditor to threaten. | npcs[].goal.long
+{"metropolis":[1,0],"city":[3,0]} sent-all-gone 4 | Win the dyer's dyehouse first call on any help those who govern can give this season. | npcs[].goal.short
+{"metropolis":[1,0],"city":[3,0]} sent-all-gone 4 | Have those who govern confirm, in writing, who may give orders at the bowyers & fletchers. | npcs[].goal.short
+{"town":[1,0],"metropolis":[2,0],"city":[3,0]} sent-all-gone 12 | VIABLE WITH CRITICAL DEPENDENCIES: {S} can stand, but only while timber keeps arriving and the routes that bring it stay open. | publicProse.blocks.viewModel:viability.summary
+{"town":[1,0],"city":[3,0],"metropolis":[3,0]} sent-all-gone 7 | Build up a store of grain and water power at the mills large enough to last two bad years. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 6 | # institutions depend on imported materials (Precious metals, Capital + trade access, Timber). | economicViability.warnings[].description
+{"city":[3,0]} sent-all-gone 6 | Arcane Council has more say right now, and the clergy cannot accept it. | powerStructure.factions[].desc
+{"city":[3,0]} sent-all-gone 6 | The obstruction came from inside Arcane Council. | powerStructure.recentConflict
+{"city":[3,0]} sent-all-gone 6 | {S} has money to spend, and spends it on the city's buildings and their upkeep. | publicProse.blocks.economy:economics.prosperityRung.sentence
+{"city":[3,0]} sent-all-gone 6 | The fields answer the city and no further, so a single failure would be felt at once and a good season would not be noticed. | publicProse.blocks.economy:economics.foodTile.sentence
+{"city":[3,0],"metropolis":[1,0],"town":[1,0]} sent-all-gone 5 | Build Merchant Guilds into something Religious Authorities can only follow. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | Make the public bathhouse too sound for any creditor to threaten. | npcs[].goal.long
+{"city":[3,0],"metropolis":[1,0]} sent-all-gone 4 | Secure rights for the fish market that will outlast whoever governs now. | npcs[].goal.long
+{"city":[3,0],"metropolis":[3,0]} sent-all-gone 6 | Learn who controls the supply of metal ore and fuel, and get on good terms with them. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 6 | {S}'s river is busy, and the city is poor all the same, and so are the traders at its market. | publicProse.blocks.economy:economics.prosperityHeader.sentence
+{"city":[3,0]} sent-all-gone 3 | Win the tanner's yard a lasting privilege that no other house can claim. | npcs[].goal.long
+{"metropolis":[1,0],"city":[3,0]} sent-all-gone 4 | Keep the accounts of the enchanter's shop balanced, and show them to anyone who asks. | npcs[].goal.short
+{"metropolis":[3,0],"city":[2,0]} sent-all-gone 10 | the merchants gain while the seat is endorsed | stress.cast.stakes[].reason
+{"town":[3,0]} sent-all-gone 6 | Weathered and watchful, with a habit of standing near the door. | npcs[].presentation.impression
+{"town":[3,0]} sent-all-gone 6 | Asks who sent you and what you want before saying anything. | npcs[].presentation.behaviour
+{"town":[3,0]} sent-all-gone 6 | Operationally distinct from the command council: these are the watchmen, not the officers who govern. | powerStructure.factions[].desc
+{"town":[3,0]} sent-all-gone 6 | As long as {S}'s food trades keep working, the town has some provisions to fall back on if it is cut off. | publicProse.blocks.defense:threat.economic.sentence
+{"town":[3,0]} sent-all-gone 3 | Hand on the town granary with full stores, honest accounts and nothing owed. | npcs[].goal.long
+{"town":[3,0]} sent-all-gone 3 | Be given the secrets of Military Council to keep, as well as its errands to run. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 3 | Be remembered as the one who kept the inns and taverns out of debt. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 6 | Noble Governorship holds the seat and collects the taxes; | powerStructure.factionRelationships[].narrative
+{"city":[3,0]} sent-all-gone 6 | Religious Authorities tell people that Noble Governorship's rule is right and ordained. | powerStructure.factionRelationships[].narrative
+{"city":[3,0]} sent-all-gone 6 | What governs {S} calls itself the Noble Governorship; | publicProse.blocks.power:desk.governingTitle.sentence
+{"city":[3,0]} sent-all-gone 3 | "Major hospital" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one. | simulationTrace[].causes[].reason
+{"metropolis":[2,0],"city":[3,0]} sent-all-gone 10 | Beds, meals, and stabling, though with the roads held the rooms stand mostly empty. | availableServices.lodging[].desc
+{"city":[3,0],"town":[1,0]} sent-all-gone 4 | Have those who govern confirm, in writing, who may give orders at the fish market. | npcs[].goal.short
+{"city":[3,0],"metropolis":[2,0]} sent-all-gone 5 | Have those who govern confirm, in writing, who may give orders at the tailor's guild. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 6 | {S} sits on open ground that grows things easily, and most of the city lives by farming it. | publicProse.blocks.economy:economics.terrainIdentity.sentence
+{"city":[3,0]} sent-all-gone 3 | Keep the accounts of the red light district balanced, and show them to anyone who asks. | npcs[].goal.short
+{"metropolis":[1,0],"city":[3,0]} sent-all-gone 8 | Tense — Active Siege | economicState.safetyProfile.safetyLabel
+{"town":[3,0]} sent-all-gone 6 | The Corrupt Council governs {S}. | publicProse.blocks.power:governance.text
+{"city":[3,0]} sent-all-gone 3 | Make sure the work at the banking houses never stops for want of precious metals. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 6 | A reputed relic drew more pilgrims than the city could house, and the money and outsiders they carried in changed the place beyond return | history.historicalEvents[].description
+{"city":[3,0]} sent-all-gone 3 | Leave the monasteries protected by law, so whoever runs the house next need not fight for the same rights. | npcs[].goal.long
+{"city":[3,0]} sent-all-gone 6 | The garrison and city watch are well paid and well equipped, but are held for the defence, and few patrols can be spared from it. | economicState.safetyProfile.guardEffectivenessDesc
+{"city":[3,0]} sent-all-gone 6 | Nothing has come into {S} since the siege closed the roads, and what the city can still grow is not near enough. | publicProse.blocks.economy:economics.foodSecurityRung.sentence
+{"city":[3,0]} sent-all-gone 6 | Alchemical reagents, rare minerals, inks, and binding materials (bulk) | economicState.primaryImports[]
+{"city":[3,0]} sent-all-gone 6 | Call the Noble Governorship at {S} by any other title and you will be corrected, politely and at once. | publicProse.blocks.power:desk.governingTitle.sentence
+{"city":[3,0]} sent-all-gone 6 | A rival bloc that wants a say over rationing, conscription and defence spending, and disputes the emergency committee's hold on them. | powerStructure.factions[].desc
+{"city":[3,0]} sent-all-gone 6 | Disputes at {S} that the neighbours cannot settle go up to Noble Governorship. | publicProse.blocks.power:desk.stabilityHeader.sentence
+{"city":[3,0]} sent-all-gone 3 | Bring Noble Governorship a piece of news before anyone else does. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 3 | Be in the room the next time Noble Governorship must decide something that matters. | npcs[].goal.short
+{"city":[3,0]} sent-all-gone 6 | Seat of a bishop, and the mark of a first-rank city. | institutions[].desc
+{"village":[1,0],"metropolis":[2,0],"town":[2,0]} sent-all-gone 10 | Theft is rising even under the curfew, and the greater danger is informers and occupation officials; | economicState.safetyProfile.safetyDesc
+{"village":[1,0],"metropolis":[2,0],"town":[2,0]} sent-all-gone 10 | the resistance works out of sight. | economicState.safetyProfile.safetyDesc
+{"village":[2,0]} sent-all-gone 4 | Friendly and easy, as if every visitor were an old friend. | npcs[].presentation.impression
+{"village":[2,0]} sent-all-gone 4 | Chats about nothing much, then asks if you have anything you would like to sell. | npcs[].presentation.behaviour
+{"village":[2,0]} sent-all-gone 4 | Administrative oversight | availableServices.legal[].name
+{"village":[2,0]} sent-all-gone 4 | Manage the village's affairs day to day. | availableServices.legal[].desc
+{"village":[2,0]} sent-all-gone 4 | Allocate strips and common access. | availableServices.legal[].desc
+{"village":[2,0]} sent-all-gone 4 | Nobody has overthrown the Elected Reeve at {S}; | publicProse.blocks.power:desk.legitimacyBanner.sentence
+{"village":[2,0]} sent-all-gone 4 | Newcomers to {S} are told early which door to knock on, and it is not the Elected Reeve's. | publicProse.blocks.power:desk.legitimacyLens.sentence
+{"village":[1,0],"metropolis":[1,0],"city":[2,0]} sent-all-gone 8 | VIABLE WITH CRITICAL DEPENDENCIES: {S}'s trades run on timber brought in from elsewhere; | publicProse.blocks.viewModel:viability.summary
+{"village":[2,0]} sent-all-gone 2 | As the governing power, Elected Reeve inherits the settlement's public-legitimacy score (#). | simulationTrace[].causes[].reason
+{"town":[2,0]} sent-all-gone 4 | Grain and salted fish | economicState.primaryImports[]
+{"town":[2,0]} sent-all-gone 4 | Dice, cards, simple games of chance. | institutions[].desc
+{"town":[2,0]} sent-all-gone 4 | With the siege closing the roads, {S} has lost what passing trade used to leave behind, and the town feels the loss. | publicProse.blocks.economy:economics.prosperityHeader.sentence
+{"town":[2,0]} sent-all-gone 4 | Guild Council · Critical (under siege) | publicProse.blocks.overview:identity.governs
+{"town":[2,0]} sent-all-gone 4 | A thing done wrong at {S} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper. | publicProse.blocks.defense:threat.internal.sentence
+{"town":[2,0]} sent-all-gone 4 | Nobody gets into {S} and nobody gets out, and the town's ordinary business has stopped. | publicProse.blocks.power:desk.stabilityHeader.sentence
+{"town":[2,0]} sent-all-gone 4 | Poverty and insecurity have cost the Guild Council its standing. | publicProse.blocks.power:governance.text
+{"town":[2,0]} sent-all-gone 2 | Bring Guild Council a piece of news before anyone else does. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Do one thing for Guild Council this season that the people who lead it cannot ignore. | npcs[].goal.short
+{"town":[2,0],"city":[1,0],"metropolis":[1,0]} sent-all-gone 4 | Have the rights of the blacksmiths set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 2 | Find out which members of Guild Council are still friendly with Thieves' Guild, and why. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Find out which members of The Guard are still friendly with Thieves' Guild, and why. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 4 | Chariot fittings and iron | economicState.primaryImports[]
+{"town":[2,0]} sent-all-gone 4 | A small group of traders who come on market days; | powerStructure.factions[].desc
+{"town":[2,0]} sent-all-gone 4 | they speak up in small disputes but carry little weight beyond them. | powerStructure.factions[].desc
+{"town":[2,0]} sent-all-gone 4 | The weather that matters in this town is the weather out at sea, and everybody watches it whether or not they sail. | publicProse.blocks.economy:economics.terrainIdentity.sentence
+{"town":[2,0]} sent-all-gone 4 | {S} calls its hall the Town Mayor in public and something shorter everywhere else. | publicProse.blocks.power:desk.governingTitle.sentence
+{"town":[2,0]} sent-all-gone 3 | Behind Town Mayor by too much to challenge openly, so they get their way through petitions and procedure instead. | powerStructure.factions[].desc
+{"town":[2,0]} sent-all-gone 2 | Be asked for an opinion by those who lead Town Mayor, once, this season. | npcs[].goal.short
+{"town":[1,0],"city":[2,0],"metropolis":[1,0]} sent-all-gone 4 | Be remembered as the one who kept the brickmaker's brickyard out of debt. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 2 | Cut the spending at the taverns by a tenth this season, and keep the work going. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | dependency.Alchemist shop | simulationTrace[].causes[].source
+{"town":[2,0]} sent-all-gone 2 | dependency.Docks/port facilities | simulationTrace[].causes[].source
+{"town":[2,0]} sent-all-gone 4 | Test metal purity before coining. | availableServices.legal[].desc
+{"town":[2,0]} sent-all-gone 4 | Merchants from across the region, and luxuries to be had. | institutions[].desc
+{"town":[2,0]} sent-all-gone 4 | There is a line around {S} and it is kept: the gates shut, the works are repaired, and a stranger who comes by the road enters where the town intends. | publicProse.blocks.defense:forces.fortification.sentence
+{"town":[1,0],"metropolis":[1,0],"city":[2,0]} sent-all-gone 8 | The trading houses at {S} pay for their own armed guards, a private army that keeps order wherever the houses do business. | publicProse.blocks.power:desk.structureFlag.sentence
+{"town":[2,0]} sent-all-gone 4 | In {S}, the Guild Council's right to rule is contested. | publicProse.blocks.power:governance.text
+{"town":[1,0],"metropolis":[1,0],"city":[2,0]} sent-all-gone 4 | Leave the mint protected by law, so whoever runs the house next need not fight for the same rights. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 2 | Keep the quarrel between Guild Council and The Guard from turning into open trouble this season. | npcs[].goal.short
+{"town":[2,0],"city":[1,0]} sent-all-gone 3 | Stop The Guard from taking anything more from Thieves' Guild this season. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Leave the river ferry protected by law, so whoever runs the house next need not fight for the same rights. | npcs[].goal.long
+{"town":[1,0],"city":[2,0]} sent-all-gone 3 | Get rich enough from the work for Thieves' Guild to walk away whenever they like. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 2 | Rise in Guild Council far enough that their word carries weight outside it. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 2 | Outlast Thieves' Guild, and still be standing with Guild Council when they are gone. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 4 | The river carries the sounds of {S} to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water. | arrivalScene
+{"city":[2,0]} sent-all-gone 4 | A merchant shows off a new cloak, and several neighbours make a point of noticing. | arrivalScene
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | A claimed miracle is splitting the settlement: some would proclaim it and welcome the pilgrims it could bring, others call it a fraud that will bring nothing but strangers | history.currentTensions[].description
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | Those who would proclaim the miracle | history.currentTensions[].factions[]
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | Residents who want no crowds of strangers | history.currentTensions[].factions[]
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | Sceptics who doubt the miracle | history.currentTensions[].factions[]
+{"city":[2,0]} sent-all-gone 4 | The Guard carries out what City Council decides. | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 4 | {S} keeps a working balance: the law is present, so is crime, and neither has the city to itself. | publicProse.blocks.defense:state.publicOrder.beside
+{"city":[2,0]} sent-all-gone 4 | Decisions at {S} are slow because the whole City Council must agree, and once made they are rarely undone. | publicProse.blocks.power:desk.rulingStructure.sentence
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Have those who govern confirm, in writing, who may give orders at the warehouse district. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Keep the accounts of the specialized metalworkers balanced, and show them to anyone who asks. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Earn a place among the leaders of City Council without buying it or marrying into it. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Bring City Council a piece of news before anyone else does. | npcs[].goal.short
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Make the public bathhouse so needed by those who govern that no one dares touch the rights of the house. | npcs[].goal.long
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Get the fuller's fulling mill excused from one tax or levy this season. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Win new business for the cartographer's guild beyond the people who already come. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | The common people took up against those who ruled them over working conditions, and the reckoning it began has never been fully closed | history.historicalEvents[].description
+{"city":[2,0]} sent-all-gone 4 | Palaiologissa Palaiolagos | npcs[].name
+{"city":[2,0]} sent-all-gone 4 | Newcomers to {S} are told early which door to knock on, and it is not the Merchant Guild Council's. | publicProse.blocks.power:desk.legitimacyLens.sentence
+{"city":[2,0]} sent-all-gone 2 | Beat The Guard to the next opportunity, and win the credit for Merchant Guild Council. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Lure one capable person away from The Guard to work for Merchant Guild Council. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Make the banking houses too sound for any creditor to threaten. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Own every step of the work that the inns and taverns and the public bathhouse now split between them. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Win new business for the coaching inn beyond the people who already come. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Have the rights of the caravan masters' exchange set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Have those who govern confirm, in writing, who may give orders at the cartographer's guild. | npcs[].goal.short
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Make the work at the cartographer's guild the thing this place is known for. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Make Merchant Guild Council the first name people think of, ahead of The Guard. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | See the public bathhouse out of debt for good, with money set aside for bad years. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Bring every step of the trade, from the first goods to the last, under the roof of the blacksmiths. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Win the alchemist quarter a lasting privilege that no other house can claim. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Nearby resources (hunting_grounds, crossroads_position, iron_deposits…) shifted the selection odds. | simulationTrace[].causes[].reason
+{"city":[2,0]} sent-all-gone 4 | One figure took power by legal maneuvering and held it unchecked for a season, and the memory still governs who the city will trust with authority | history.historicalEvents[].description
+{"city":[2,0]} sent-all-gone 4 | When the river trade the city depended on failed, the wealth that had flowed through it dried up faster than anyone was prepared for | history.historicalEvents[].description
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | The crown governs the city from here, in person or through a royal governor. | institutions[].desc
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | The standing is high, and so is the scrutiny. | institutions[].desc
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | Hereditary landowners behind the Royal Authority; | powerStructure.factions[].desc
+{"city":[2,0]} sent-all-gone 4 | Noble Families live under the rule of Royal Authority but keep enough rights of their own (land, courts, levies) to bargain, not simply obey. | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 4 | People at {S} do not feel safe after dark, and they blame the Royal Authority for it. | publicProse.blocks.power:desk.legitimacyLens.sentence
+{"city":[2,0]} sent-all-gone 4 | The Royal Authority at {S} watches the city's temper closely: what it fears is the city turning on it. | publicProse.blocks.power:desk.rulingStructure.sentence
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Learn to do the work at the mills with half as much grain and water power. | npcs[].goal.long
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Take on the work in Royal Authority that no one else wants, and do it without complaint. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Keep the accounts of the banking houses balanced, and show them to anyone who asks. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Hand on the stable district with full stores, honest accounts and nothing owed. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Have the rights of the customs house set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Find a second supplier of grain, so one lost cart cannot stop the work at the city granaries. | npcs[].goal.short
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Find the theaters one more source of money. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Find out how much is owed by the customs house, and to whom. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | See the foundling home out of debt for good, with money set aside for bad years. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Train an apprentice at the brewery to take on part of the work. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Outlast the vintner's cellars, and hire the hands from there when the end comes. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Take on more hands at the chandler's shop, and keep them busy all season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Win the chandler's shop a voice whenever those who govern decide something that touches the work. | npcs[].goal.long
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Make the glassmakers too sound for any creditor to threaten. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Get the wizard's tower through the season without borrowing. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | {S}'s gate stands open, but the gatekeeper waves you through from a distance, and the well just inside has been roped off under a painted sign too weathered to read from horseback. | arrivalScene
+{"city":[2,0]} sent-all-gone 4 | Merchant Guild Council and Merchant Guilds are in high conflict over the right to raise a new levy. | conflicts[].desc powerStructure.conflicts[].desc
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 8 | Processing crossroads_position but missing Toll bridge for the full chain. | economicViability.suggestions[].description
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 8 | Add Toll bridge to complete the production chain | economicViability.suggestions[].suggestedFixes[]
+{"city":[2,0]} sent-all-gone 4 | As of the founding survey, the Great Construction (# years ago) set up ways of doing things that have since changed: the merchants lost the place they held then, and have never won it back. | history.legacyAnnotations[].annotation
+{"city":[2,0]} sent-all-gone 4 | Even so, the two are now at odds over the right to raise a new levy. | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 4 | There is stone out there and nobody has ever thought it worth selling beyond the city, which is the city's considered opinion rather than an oversight. | publicProse.blocks.economy:economics.exploitation.sentence
+{"city":[2,0]} sent-all-gone 4 | people here live in a place built around kin districts and an assembly ground. | publicProse.blocks.overview:identity.scope
+{"city":[2,0]} sent-all-gone 4 | The Merchant Guild Council still governs {S}, but every order takes more pushing, and others are quietly settling what it leaves undone. | publicProse.blocks.power:desk.legitimacyBanner.sentence
+{"city":[2,0]} sent-all-gone 2 | Leave the hired blades protected by law, so whoever runs the house next need not fight for the same rights. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Look for a way to do more at the charcoal kilns with the same hands. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Make the work at the blacksmiths the thing this place is known for. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Grow the work at the cartographer's guild by one more pair of hands, then another. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Build the work at the gambling halls into a trade that will feed the next generation here. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Nearby resources (grain_fields, crossroads_position, coal_deposits…) shifted the selection odds. | simulationTrace[].causes[].reason
+{"city":[2,0]} sent-all-gone 4 | Salted beef and grain | economicState.primaryImports[]
+{"city":[2,0]} sent-all-gone 4 | Ask who has legitimate authority here and you will get different answers depending on who you ask | history.historicalCharacter
+{"city":[2,0]} sent-all-gone 4 | {S} is arranged lengthwise on its water, and a stranger meets the city by walking upstream or down. | publicProse.blocks.economy:economics.terrainIdentity.sentence
+{"city":[2,0],"town":[1,0],"village":[1,0]} sent-all-gone 8 | Fewer merchants in {S} pay what the government asks, and more pay its rivals instead. | publicProse.blocks.stressors:overview.conditionDirection.sentence
+{"city":[2,0]} sent-all-gone 4 | Merchant Guild Council holds {S} with nothing to spare, and people are hedging their bets in case it slips. | publicProse.blocks.power:desk.stabilityHeader.sentence
+{"city":[2,0]} sent-all-gone 4 | The Merchant Guild Council at {S} is run by the houses that keep the account books, and it decides things the way a business does: by what pays. | publicProse.blocks.power:desk.rulingStructure.sentence
+{"city":[2,0]} sent-all-gone 2 | Merchant Guild Council leaves Thieves' Guild alone because stamping it out would cost more than it saves. | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 2 | Get the pawnbroker's shop excused from one tax or levy this season. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Keep the quarrel between The Guard and Thieves' Guild from turning into open trouble this season. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Make peace between The Guard and Thieves' Guild on terms The Guard can live with. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Grow the work at the luxury goods quarter until no one nearby can match it. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Learn the plans of Thieves' Guild against Merchant Guild Council before they can act on them. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Answer the next move by Thieves' Guild against Merchant Guild Council, quickly and in public. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Double the work at the chandler's shop, and find the hands to do it. | npcs[].goal.long
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 8 | Beginning in the mill and lumber district, the blaze took timber stockpiles and workshop buildings street by street until whole quarters were gone | history.historicalEvents[].description
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Have the rights of the luxury goods quarter set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 4 | Have the rights of the fuller's fulling mill set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 8 | If the help beyond ordinary work failed at {S}, the trade that makes its coal would yield less than it does now. | publicProse.blocks.magic.arcaneReliance.sentence
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Win so much for Religious Authorities that the contest with Merchant Guilds stops being a contest. | npcs[].goal.long
+{"metropolis":[1,0],"city":[2,0],"town":[1,0]} sent-all-gone 4 | Lure one capable person away from Religious Authorities to work for Merchant Guilds. | npcs[].goal.short
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 8 | Pale, precise and quiet, with a cold that seems to follow them. | npcs[].presentation.impression
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 8 | Asks what you want with the dead before saying anything else. | npcs[].presentation.behaviour
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 8 | The betrayal cost {S} something specific (a contract, a caravan, a name that vouched for the place), and the loss of it is only now working its way through the ledgers, arriving as bad news that seems | pressureSentence
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 6 | Both know it, and neither mentions it. | relationships[].tension
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 6 | Arabic-inspired, and it shows: built around courtyards and waterworks, on endowed institutions and the river trade. | publicProse.blocks.overview:identity.scope
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 4 | Make sure the work at the specialized metalworkers never stops for want of metal ore and fuel. | npcs[].goal.long
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 4 | Build up enough savings at the beast trainers to ride out two bad years. | npcs[].goal.long
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 8 | Little is left worth taking from the fishing grounds at {S} this year, and it will be some seasons before there is more. | publicProse.blocks.economy:economics.resourceCondition.sentence
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Join the specialized metalworkers and the luxury goods quarter into one concern too big to challenge. | npcs[].goal.long
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 6 | A governor appointed by king or duke holds sway, and the city runs as a noble fief. | institutions[].desc
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 4 | Buy wool and flax at the market in bulk this season, while the price is still fair. | npcs[].goal.short
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Win the next big piece of work away from the luxury goods quarter. | npcs[].goal.short
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 4 | Leave the fuller's fulling mill protected by law, so whoever runs the house next need not fight for the same rights. | npcs[].goal.long
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Get the warehouse district through the season without borrowing. | npcs[].goal.short
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Secure rights for the stable district that will outlast whoever governs now. | npcs[].goal.long
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 4 | Get the rights of the auction house written down and sealed by those who govern, this season. | npcs[].goal.short
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Nearby resources (hunting_grounds, ancient_grove, iron_deposits…) shifted the selection odds. | simulationTrace[].causes[].reason
+{"hamlet":[2,0]} sent-all-gone 4 | A free hamlet, with no lord's man set over it; | institutions[].desc
+{"hamlet":[2,0]} sent-all-gone 4 | the elders, agreeing among themselves, settle what the community holds in common. | institutions[].desc
+{"hamlet":[1,0],"city":[2,0]} sent-all-gone 6 | VIABLE BUT STRAINED: {S} grows less than it eats, and part of the difference arrives along the roads that meet there. | publicProse.blocks.viewModel:viability.summary
+{"town":[2,0],"metropolis":[1,0],"city":[1,0]} sent-all-gone 8 | the neutrals' broker | npcs[].role
+{"town":[2,0],"metropolis":[1,0],"city":[1,0]} sent-all-gone 8 | Third Bloc (Neutrals) | npcs[].institution.key powerStructure.factions[].faction
+{"town":[2,0],"metropolis":[1,0],"city":[1,0]} sent-all-gone 8 | Would support stability, if a price can be agreed. | powerStructure.factions[].desc
+{"town":[2,0],"metropolis":[1,0],"city":[1,0]} sent-all-gone 8 | Currently being courted by both sides. | powerStructure.factions[].desc
+{"town":[2,0],"metropolis":[1,0],"city":[1,0]} sent-all-gone 8 | both sides are courting it, for a price | stress.cast.stakes[].reason
+{"town":[1,0],"city":[2,0]} sent-all-gone 6 | {S} calls its hall the Arcane Council in public and something shorter everywhere else. | publicProse.blocks.power:desk.governingTitle.sentence
+{"town":[2,0],"city":[1,0]} sent-all-gone 6 | {S} is governed by the Arcane Council. | publicProse.blocks.power:governance.text
+{"town":[2,0],"metropolis":[1,0],"city":[1,0]} sent-all-gone 8 | The Neutrals will back whichever side meets their price. | publicProse.blocks.power:governance.text
+{"town":[1,0],"city":[2,0]} sent-all-gone 3 | Be asked for an opinion by those who lead Arcane Council, once, this season. | npcs[].goal.short
+{"town":[1,0],"city":[2,0]} sent-all-gone 3 | Be counted one day among those who lead Arcane Council. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 4 | Works precious metals and gemstones into rings, necklaces, seals, and luxury items. | institutions[].desc
+{"town":[2,0]} sent-all-gone 4 | Accepts commissions, appraises stones, and occasionally buys stolen goods from discreet customers. | institutions[].desc
+{"town":[2,0]} sent-all-gone 4 | Water or ox power turns logs into planks and beams for the construction trade whenever logs can be had, and a standing crew works it. | institutions[].desc
+{"town":[2,0]} sent-all-gone 4 | Watches your hands near the trays. | npcs[].presentation.impression
+{"town":[2,0]} sent-all-gone 4 | Keeps the best pieces locked away. | npcs[].presentation.impression
+{"town":[2,0]} sent-all-gone 4 | Asks your name before showing anything costly. | npcs[].presentation.behaviour
+{"town":[2,0]} sent-all-gone 4 | Every decision about {S} is taken by Military Council, and every answer comes from there. | publicProse.blocks.power:desk.stabilityHeader.sentence
+{"town":[1,0],"metropolis":[1,0],"city":[2,0]} sent-all-gone 4 | Secure a steady supply of grain for the bakers that no one else can cut off. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 2 | Get the apothecary's shop excused from one tax or levy this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 4 | The citadel on the high ground makes clear that this settlement has been defended before and expects to be again. | arrivalScene
+{"city":[2,0]} sent-all-gone 4 | Access to the criminal network's intelligence | conflicts[].issue powerStructure.conflicts[].issue
+{"city":[2,0]} sent-all-gone 4 | {S} has reserves deep enough to ride out most of what could happen to it. | publicProse.blocks.economy:economics.prosperityRung.sentence
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | Mesoamerican-inspired: built around a civic-ritual plaza, tribute, and market-and-waterworks. | publicProse.blocks.overview:identity.scope
+{"city":[2,0]} sent-all-gone 4 | Merchant Guild Council · Stable | publicProse.blocks.overview:identity.governs
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Carry the dragon's message to the person it named, and come back alive. | npcs[].goal.short
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Grow the work at the inns and taverns by one more pair of hands, then another. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | See Religious Authorities outgrow Merchant Guilds, so it never has to look over its shoulder again. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0],"town":[1,0]} sent-all-gone 4 | Turn the contest with Religious Authorities into a partnership on terms set by Merchant Guilds. | npcs[].goal.long
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Take on more hands at the bardic college, and keep them busy all season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Collect what is owed to the caravan masters' exchange before the season is out. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Find something the work at the banking houses can use in place of gold and silver ore. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Get the charcoal kilns excused from one tax or levy this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Make the river boatyard so needed by those who govern that no one dares touch the rights of the house. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Win the apothecary district a lasting privilege that no other house can claim. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Pay every hand at the smelter in full and on time this season. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | {S} is orderly in the way that a settlement is orderly when order is being enforced. | arrivalScene
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | The streets are clear. | arrivalScene
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | The rationing markers are painted on the doors. | arrivalScene
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | A guard patrol passes and everyone steps aside. | arrivalScene
+{"city":[2,0]} sent-all-gone 4 | Racks of new ironwork stand outside the workshops, waiting for the carts. | arrivalScene
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 8 | The garrison and city watch still walk the rounds, but hunger is eroding the order they keep. | economicState.safetyProfile.guardEffectivenessDesc
+{"city":[2,0],"metropolis":[1,0],"town":[1,0]} sent-all-gone 8 | Upstream supply chain impaired: leather or livestock or hunting disrupted | economicState.activeChains[].upstreamNote
+{"city":[2,0]} sent-all-gone 4 | People here are careful not to show off their money. | history.historicalCharacter
+{"city":[2,0]} sent-all-gone 4 | The Iron Dispute is long past, but flaunting wealth still looks like having learned nothing from it | history.historicalCharacter
+{"city":[2,0]} sent-all-gone 4 | Some of {S}'s work cannot go on without gold/silver ore, and the country around the city does not give enough of it, so the city buys from outside or that work stops. | publicProse.blocks.economy:economics.criticalImport.sentence
+{"city":[2,0]} sent-all-gone 4 | What the city makes it makes with hands and ground, and would go on making without a practitioner in it. | publicProse.blocks.magic.arcaneReliance.sentence
+{"city":[2,0]} sent-all-gone 2 | Answer the next move by Religious Authorities against Merchant Guild Council, quickly and in public. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Make the carpenters too sound for any creditor to threaten. | npcs[].goal.long
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Pay every hand at the warehouse district in full and on time this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Get the rights of the smelter written down and sealed by those who govern, this season. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Make the cartographer's guild so needed by those who govern that no one dares touch the rights of the house. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 4 | Corrupt City Council | conflicts[].parties[] powerStructure.factions[].faction
+{"city":[2,0]} sent-all-gone 4 | The Economic Divide taught everyone that pretending not to care about it is a luxury for people who already have it | history.historicalCharacter
+{"city":[2,0]} sent-all-gone 4 | Call the Corrupt City Council at {S} by any other title and you will be corrected, politely and at once. | publicProse.blocks.power:desk.governingTitle.sentence
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Bring every step of the trade, from the first goods to the last, under the roof of the merchant guilds. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Become someone Corrupt City Council cannot do without. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Build up enough savings at the garrison to ride out two bad years. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Find a patron among those who lead Corrupt City Council, and make themselves useful to them. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | See the city granaries out of debt for good, with money set aside for bad years. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Be in the room the next time Corrupt City Council must decide something that matters. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Win new business for the midwife's house beyond the people who already come. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Be counted one day among those who lead Corrupt City Council. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Rise in Corrupt City Council far enough that their word carries weight outside it. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Bring Corrupt City Council a piece of news before anyone else does. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Make the workhouse too sound for any creditor to threaten. | npcs[].goal.long
+{"city":[2,0],"town":[1,0],"metropolis":[1,0]} sent-all-gone 4 | Pay every hand at the woodcarver's workshop in full and on time this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Win new business for the ropemaker's ropewalk beyond the people who already come. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Leave the ropemaker's ropewalk protected by law, so whoever runs the house next need not fight for the same rights. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | As the governing power, Corrupt City Council inherits the settlement's public-legitimacy score (#). | simulationTrace[].causes[].reason
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | institution:Stable district | config._isolationSupport.paths[].evidence[] isolationSupport.paths[].evidence[]
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 8 | The water came up with almost no warning and remade the mill and lumber district, drowning livelihoods and unsettling every question of who owned what | history.historicalEvents[].description
+{"city":[2,0]} sent-all-gone 4 | Everything before the Plague Years is referred to as 'the old settlement'. | history.historicalCharacter
+{"city":[2,0]} sent-all-gone 4 | A cordon has gone up around one quarter of {S}, and the people inside it and the people outside it are already telling different stories about why: stories that will outlast the sickness whichever way | pressureSentence
+{"city":[2,0]} sent-all-gone 4 | The money spent bringing food in or making up the shortfall is money the city does not keep. | publicProse.blocks.economy:economics.foodOnProsperity.sentence
+{"city":[2,0]} sent-all-gone 4 | Some of {S}'s work cannot go on without clay, and the country around the city does not give enough of it, so the city buys from outside or that work stops. | publicProse.blocks.economy:economics.criticalImport.sentence
+{"city":[2,0]} sent-all-gone 4 | The sickness in {S} spreads further each week, and more households have someone ill. | publicProse.blocks.stressors:overview.conditionDirection.sentence
+{"city":[2,0]} sent-all-gone 4 | At {S} the city's business goes to the whole City-State Council, and everybody has learned how long the answer takes. | publicProse.blocks.power:desk.rulingStructure.sentence
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | Insecurity and hunger are the reason. | publicProse.blocks.power:governance.text
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Get the undead labor through the season without borrowing. | npcs[].goal.short
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Double the work at the bardic college, and find the hands to do it. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Have the rights of the cathedral set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Have the rights of the mercenary quarter set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Win the toll bridge a lasting privilege that no other house can claim. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Learn to do the work at the butchers with half as much livestock and game. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Get the cartographer's guild through the season without borrowing. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 4 | The Uprising changed what people here believe can happen to them, and that has been slower to rebuild than any building | history.historicalCharacter
+{"city":[2,0]} sent-all-gone 4 | Day-to-day trade here is run by Merchant Guilds more than by Merchant Guild Council, and taxes are bargained over, not ordered. | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 4 | The challenge to Merchant Guild Council in {S} comes from its own officials: taxes held back, decisions left unsigned, a coalition forming. | pressureSentence
+{"city":[2,0]} sent-all-gone 4 | Merchant Guild Council knows it, and cannot move against it without making it stronger. | pressureSentence
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | The last commission left traces that a determined investigator might find. | relationships[].tension
+{"city":[2,0]} sent-all-gone 4 | This city has no speciality and has never needed one; | publicProse.blocks.economy:economics.economicStrengths.sentence
+{"city":[2,0]} sent-all-gone 4 | Insecurity has left the Merchant Guild Council's right to rule contested in {S}. | publicProse.blocks.power:governance.text
+{"city":[2,0]} sent-all-gone 2 | Turn the contest with Merchant Guild Council into a partnership on terms set by Merchant Guilds. | npcs[].goal.long
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Heads the crew that has bought some of those who keep order, and works freely while they stay bought. | npcs[].structuralPosition
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Too many people know about the payments; | npcs[].activeConstraint
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | they hold the crew as much as they shield it. | npcs[].activeConstraint
+{"city":[2,0]} sent-all-gone 2 | Be remembered as the one who kept the citadel out of debt. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Win the chroniclers' exchange first call on any help those who govern can give this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Get to whatever both Merchant Guilds and Merchant Guild Council want this season first. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | See the cartographer's guild out of debt for good, with money set aside for bad years. | npcs[].goal.long
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Find someone in authority who would shield them if they talked. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Hand on the brothel with full stores, honest accounts and nothing owed. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Get the most out of the work at the post relay station while it runs well, and put the gains by. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Hand on the city granaries with full stores, honest accounts and nothing owed. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Get the mills excused from one tax or levy this season. | npcs[].goal.short
+{"city":[2,0],"town":[1,0],"metropolis":[1,0]} sent-all-gone 4 | Have the rights of the tailor's guild set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"city":[2,0],"metropolis":[2,0],"town":[1,0]} sent-all-gone 5 | Have those who govern confirm, in writing, who may give orders at the butchers. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Learn why people favour Merchant Guilds, and do better for Merchant Guild Council. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Get to whatever both Merchant Guild Council and Merchant Guilds want this season first. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 4 | Merchant City Council | conflicts[].parties[] powerStructure.factions[].faction
+{"city":[2,0],"town":[2,0]} sent-all-gone 8 | Who commands when danger comes | conflicts[].issue powerStructure.conflicts[].issue
+{"city":[2,0],"town":[2,0]} sent-all-gone 8 | The stakes are command. | conflicts[].desc powerStructure.conflicts[].desc
+{"city":[2,0]} sent-all-gone 4 | The Guard and Merchant Guilds are in moderate conflict over control of the market licensing process. | conflicts[].desc powerStructure.conflicts[].desc
+{"city":[2,0]} sent-all-gone 4 | Wealthy merchants dominate council seats; | powerStructure.factions[].desc
+{"city":[2,0]} sent-all-gone 4 | trade interests drive policy and taxation. | powerStructure.factions[].desc
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 8 | {S} still carries the mark of the religious conflict, and that mark is older than anyone living, though the times have moved on. | publicProse.blocks.general:history.legacyLines[]
+{"city":[2,0]} sent-all-gone 4 | Whatever comes out of the country is met by whoever the city has, whether or not they are the right answer to it. | publicProse.blocks.defense:forces.charter.sentence
+{"city":[2,0]} sent-all-gone 4 | Each season fewer dues reach the Merchant City Council at {S} on time. | publicProse.blocks.power:desk.legitimacyBanner.sentence
+{"city":[2,0]} sent-all-gone 4 | Call the Merchant City Council at {S} by any other title and you will be corrected, politely and at once. | publicProse.blocks.power:desk.governingTitle.sentence
+{"city":[2,0]} sent-all-gone 4 | {S} is governed by the Merchant City Council. | publicProse.blocks.power:governance.text
+{"city":[2,0]} sent-all-gone 4 | In {S}, the Merchant City Council's right to rule is contested. | publicProse.blocks.power:governance.text
+{"city":[2,0]} sent-all-gone 2 | Win the garrison a voice whenever those who govern decide something that touches the work. | npcs[].goal.long
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Build up enough savings at the craft guilds to ride out two bad years. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Build up enough savings at the citadel to ride out two bad years. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Make sure no new rule from those who govern costs the gambling halls anything this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Make the city granaries so needed by those who govern that no one dares touch the rights of the house. | npcs[].goal.long
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Get the most out of the work at the cartographer's guild while it runs well, and put the gains by. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | As the governing power, Merchant City Council inherits the settlement's public-legitimacy score (#). | simulationTrace[].causes[].reason
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Have the rights of the red light district set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Win the blacksmiths first call on any help those who govern can give this season. | npcs[].goal.short
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Take on more hands at the tanner's yard, and keep them busy all season. | npcs[].goal.short
+{"town":[1,0],"metropolis":[1,0],"city":[2,0]} sent-all-gone 8 | Paid soldiers are holding {S}'s walls against the siege, and so far they have held. | publicProse.blocks.defense:threat.invasion.sentence
+{"town":[1,0],"city":[2,0],"metropolis":[2,0]} sent-all-gone 5 | Heads the casters while the seat fails; | npcs[].structuralPosition
+{"town":[1,0],"city":[2,0],"metropolis":[2,0]} sent-all-gone 5 | if the seat needs their spells, it now owes them. | npcs[].structuralPosition
+{"town":[1,0],"city":[2,0],"metropolis":[2,0]} sent-all-gone 5 | Rights won from a weak seat are the first a recovered seat takes back. | npcs[].activeConstraint
+{"town":[2,0]} sent-all-gone 2 | Have the rights of the money changers set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 4 | Merchant Guilds work under the rules Church Council sets, and pay for a hearing in the hall when it wants something. | powerStructure.factionRelationships[].narrative
+{"town":[2,0]} sent-all-gone 4 | People take their marriages, inheritances and hard times to Religious Authorities, not to Church Council, and the two do not agree on who decides what. | powerStructure.factionRelationships[].narrative
+{"town":[2,0]} sent-all-gone 4 | The town takes its quarrels over land and law to the same people it takes its prayers to. | publicProse.blocks.power:desk.rulingStructure.sentence
+{"town":[2,0]} sent-all-gone 4 | {S} calls its hall the Church Council in public and something shorter everywhere else. | publicProse.blocks.power:desk.governingTitle.sentence
+{"town":[2,0]} sent-all-gone 4 | {S} is governed by the Church Council. | publicProse.blocks.power:governance.text
+{"town":[2,0],"metropolis":[1,0],"city":[2,0]} sent-all-gone 5 | Get the most out of the work at the merchant guilds while it runs well, and put the gains by. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Bring Church Council a piece of news before anyone else does. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Keep the quarrel between Church Council and Religious Authorities from turning into open trouble this season. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Keep the work going at the weavers through the season, whatever it takes. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Reach the top of Church Council by the long road, one earned favour at a time. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 2 | Be given the secrets of Church Council to keep, as well as its errands to run. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 4 | Required by Apothecary but not available in Riverside terrain | resourceAnalysis.imports.reasons.medicinal herbs
+{"town":[2,0]} sent-all-gone 4 | Disputes at {S} that the neighbours cannot settle go up to Church Council. | publicProse.blocks.power:desk.stabilityHeader.sentence
+{"town":[2,0]} sent-all-gone 2 | Get the rights of the inn written down and sealed by those who govern, this season. | npcs[].goal.short
+{"town":[1,0],"city":[2,0]} sent-all-gone 3 | Get the cobbler's guild to rely on the tanners for something no one else can supply. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Do one thing for Church Council this season that the people who lead it cannot ignore. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Be in the room the next time Church Council must decide something that matters. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 4 | The garrison and city watch are disciplined but resource-constrained: motivated with inadequate equipment and irregular pay. | economicState.safetyProfile.guardEffectivenessDesc
+{"city":[2,0]} sent-all-gone 4 | Ask about the place and you are told it is built around kin districts and an assembly ground. | publicProse.blocks.overview:identity.scope
+{"city":[2,0]} sent-all-gone 4 | Military City Council · Anxious — people fear the sickness more than they heed orders | publicProse.blocks.overview:identity.governs
+{"city":[2,0]} sent-all-gone 4 | {S} keeps its city walls and gates in repair, but fewer people turn out each season to man the defences, and the city is slow to notice. | publicProse.blocks.defense:wall.rationale.sentence
+{"city":[2,0]} sent-all-gone 4 | Almost nothing the Military City Council asks of {S} arrives. | publicProse.blocks.power:desk.legitimacyBanner.sentence
+{"city":[2,0]} sent-all-gone 4 | Newcomers to {S} are told early which door to knock on, and it is not the Military City Council's. | publicProse.blocks.power:desk.legitimacyLens.sentence
+{"city":[2,0]} sent-all-gone 4 | {S} calls its hall the Military City Council in public and something shorter everywhere else. | publicProse.blocks.power:desk.governingTitle.sentence
+{"city":[2,0],"metropolis":[2,0],"town":[1,0]} sent-all-gone 5 | Make the houses of worship too sound for any creditor to threaten. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Free the sage's quarter from depending on a single source of paper materials. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Become someone Military City Council cannot do without. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Take on more hands at the customs house, and keep them busy all season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Build the work at the chandler's shop into a trade that will feed the next generation here. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 4 | A surge of magic no one could contain marked the waterfront and everyone caught in it, and what it did has never entirely worn away | history.historicalEvents[].description
+{"city":[2,0],"town":[2,0]} sent-all-gone 4 | Merchant oligarchy leaves Thieves' Guild alone because stamping it out would cost more than it saves. | powerStructure.factionRelationships[].narrative
+{"city":[2,0],"town":[1,0]} sent-all-gone 3 | Keep the quarrel between Merchant oligarchy and Thieves' Guild from turning into open trouble this season. | npcs[].goal.short
+{"city":[2,0],"town":[1,0]} sent-all-gone 3 | Answer the next move by Thieves' Guild against Merchant oligarchy, quickly and in public. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Own a share in the supply of luxury materials, so the work at the luxury goods quarter can never be held to ransom. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Carry the name of the gambling halls beyond this place, so people come from far off for the work done there. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Pay every hand at the coaching inn in full and on time this season. | npcs[].goal.short
+{"city":[2,0],"town":[1,0]} sent-all-gone 3 | Outlast Thieves' Guild, and still be standing with Merchant oligarchy when they are gone. | npcs[].goal.long
+{"city":[2,0],"town":[1,0]} sent-all-gone 3 | Win one ally of Thieves' Guild over to the side of Merchant oligarchy. | npcs[].goal.short
+{"city":[2,0],"town":[1,0]} sent-all-gone 3 | Find out which members of Merchant oligarchy are still friendly with Thieves' Guild, and why. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Be remembered as the one who kept the veteran's lodge out of debt. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Pay every hand at the butchers in full and on time this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 4 | Home to a powerful spellcaster. | defenseProfile.institutions.magicDef[].desc institutions[].desc
+{"city":[2,0]} sent-all-gone 4 | A city may hold more than one. | defenseProfile.institutions.magicDef[].desc institutions[].desc
+{"city":[2,0]} sent-all-gone 4 | Merchant Guild Council holds the seat and collects the taxes; | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 4 | Religious Authorities tell people that Merchant Guild Council's rule is right and ordained. | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 4 | Merchant Guild Council governs, and how long Merchant Guild Council governs is an open question the city asks out loud. | publicProse.blocks.power:desk.stabilityHeader.sentence
+{"city":[2,0]} sent-all-gone 2 | Leave more money at the rival gangs than there was when they took charge. | npcs[].goal.long
+{"city":[2,0],"town":[1,0],"village":[2,0],"metropolis":[2,0]} sent-all-gone 7 | Avoid being forced to publicly declare support for either the governing power or the insurgency, and run out of reasons before the pressure does | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Leave more money at the dungeon delving supply district than there was when they took charge. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Have the rights of the specialized metalworkers set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 4 | Call the City Council at {S} by any other title and you will be corrected, politely and at once. | publicProse.blocks.power:desk.governingTitle.sentence
+{"city":[2,0]} sent-all-gone 2 | Be given the secrets of City Council to keep, as well as its errands to run. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Hand on the red light district with full stores, honest accounts and nothing owed. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Get the most out of the work at the coaching inn while it runs well, and put the gains by. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Collect what is owed to the beast trainers before the season is out. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Keep the accounts of the cartographer's guild balanced, and show them to anyone who asks. | npcs[].goal.short
+{"metropolis":[2,0],"town":[1,0],"city":[2,0]} sent-all-gone 5 | Grow the work at the cooper's yard until no one nearby can match it. | npcs[].goal.long
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Build up enough savings at the post relay station to ride out two bad years. | npcs[].goal.long
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 6 | A few bundles of drying herbs hang by the stalls, and there is little else to scent the lanes. | arrivalScene
+{"metropolis":[2,0],"city":[2,0],"town":[1,0]} sent-all-gone 10 | Most here accept the current authority's right to rule, but some question it openly and will not let the question drop | history.currentTensions[].description
+{"village":[2,0]} sent-all-gone 4 | Organised local defence, mustered against raiders and monsters alike. | defenseProfile.institutions.militia[].desc institutions[].desc
+{"village":[2,0]} sent-all-gone 4 | Steadier than the levies a hamlet can raise. | defenseProfile.institutions.militia[].desc institutions[].desc
+{"city":[2,0]} sent-all-gone 4 | # institutions depend on imported materials (Trade access + grain, Grain, Grain). | economicViability.warnings[].description
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | its people stop trusting their neighbours | stress.cast.roles[].reason
+{"city":[2,0]} sent-all-gone 4 | {S} is governed by the Military City Council. | publicProse.blocks.power:governance.text
+{"city":[2,0]} sent-all-gone 2 | Rise in Military City Council far enough that their word carries weight outside it. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Be counted one day among those who lead Military City Council. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Make the caravan masters' exchange too sound for any creditor to threaten. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Have the rights of the courthouses set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Make the smelter so needed by those who govern that no one dares touch the rights of the house. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Get the rights of the scroll scribe's desk written down and sealed by those who govern, this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 4 | Public rejection is breaking the Ecclesiastical Council's grip at {S} faster than Ecclesiastical Council can shore it up, and every measure taken to shore it up costs a little more of what remains. | publicProse.blocks.power:desk.successionHold.sentence
+{"city":[2,0]} sent-all-gone 4 | {S} calls its hall the Ecclesiastical Council in public and something shorter everywhere else. | publicProse.blocks.power:desk.governingTitle.sentence
+{"city":[2,0]} sent-all-gone 2 | Ecclesiastical Council leaves Thieves' Guild alone because stamping it out would cost more than it saves. | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 2 | End the bad blood between Ecclesiastical Council and Religious Authorities before the next generation inherits it. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Cut the spending at the city granaries by a tenth this season, and keep the work going. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Leave more money at the vintner's cellars than there was when they took charge. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Be given the secrets of Ecclesiastical Council to keep, as well as its errands to run. | npcs[].goal.long
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | See the weavers out of debt for good, with money set aside for bad years. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Win new business for the cobbler's guild beyond the people who already come. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Build Ecclesiastical Council up until it is beyond the reach of Religious Authorities. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Build Ecclesiastical Council up until it is beyond the reach of Thieves' Guild. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Bring Religious Authorities under the sway of Ecclesiastical Council, one member at a time. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | End the bad blood between Thieves' Guild and Ecclesiastical Council before the next generation inherits it. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | Control of the dock taxation authority | conflicts[].issue powerStructure.conflicts[].issue
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | The stakes are port revenue. | conflicts[].desc powerStructure.conflicts[].desc
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Get the rights of the crier's post written down and sealed by those who govern, this season. | npcs[].goal.short
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Secure rights for the auction house that will outlast whoever governs now. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Win the chroniclers' exchange a voice whenever those who govern decide something that touches the work. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Take on more hands at the tailor's guild, and keep them busy all season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 4 | Giollachríost MacLachlan | npcs[].name
+{"city":[2,0],"metropolis":[1,0],"town":[1,0]} sent-all-gone 8 | The seasons keep being profitable. | relationships[].tension
+{"city":[2,0]} sent-all-gone 2 | Make the gambling halls too sound for any creditor to threaten. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Win the bowyers & fletchers a lasting privilege that no other house can claim. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Find a way to make do with less grain at the inns and taverns. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Build up enough savings at the brewery to ride out two bad years. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Build up enough savings at the enchanter's shop to ride out two bad years. | npcs[].goal.long
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 8 | South-Asian-inspired, built around the tank and the bazaar, in quarters by trade, under temple and guild. | publicProse.blocks.overview:identity.scope
+{"city":[2,0],"town":[1,0]} sent-all-gone 6 | The Merchant oligarchy has lost {S}'s trust over crime. | publicProse.blocks.power:desk.legitimacyLens.sentence
+{"city":[2,0]} sent-all-gone 4 | A newcomer at {S} with a petition is sent to Merchant oligarchy; | publicProse.blocks.power:desk.stabilityHeader.sentence
+{"city":[2,0]} sent-all-gone 2 | Have those who govern confirm, in writing, who may give orders at the monasteries. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Leave more money at the inns and taverns than there was when they took charge. | npcs[].goal.long
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Build up enough savings at the auction house to ride out two bad years. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Have the old rights of the dyer's dyehouse read out and recognised before anyone challenges them. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Get the butchers through the season without borrowing. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Have those who govern confirm, in writing, who may give orders at the smelter. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Cut the spending at the ropemaker's ropewalk by a tenth this season, and keep the work going. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Learn who controls the supply of timber and rags, and get on good terms with them. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Be remembered as the one who kept the enchanter's shop out of debt. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | dependency.Multiple market squares | simulationTrace[].causes[].source
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 6 | the garrison and city watch sees to that. | economicState.safetyProfile.safetyDesc
+{"metropolis":[1,0],"city":[2,0],"town":[1,0]} sent-all-gone 8 | Everyone comes in by the gates, where the guard sees them. | economicState.safetyProfile.safetyDesc
+{"metropolis":[1,0],"city":[2,0],"town":[1,0]} sent-all-gone 8 | The adventurers' charter hall handles threats the watch cannot. | economicState.safetyProfile.safetyDesc
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 8 | Ordered (strong military presence) | powerStructure.stability
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Find out who died in the house before them, and what the dead one wants. | npcs[].goal.short
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Build up enough savings at the glassmakers to ride out two bad years. | npcs[].goal.long
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Make sure every decision of Thieves' Guild this season goes out under their own name. | npcs[].goal.short
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 4 | Be in the room the next time The Guild Alliance must decide something that matters. | npcs[].goal.short
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 6 | Tests precious metal brought to market for purity, charging by the assay. | institutions[].desc
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 6 | Banking and minting depend on it. | institutions[].desc
+{"town":[2,0]} sent-all-gone 4 | Wells, roads and the common ground | availableServices.legal[].desc
+{"town":[2,0],"city":[1,0]} sent-all-gone 6 | Parchment and wax tablets | economicState.primaryImports[]
+{"town":[2,0]} sent-all-gone 4 | A town near timber can supply an entire region's building needs. | institutions[].desc
+{"town":[2,0]} sent-all-gone 4 | An elected or appointed council governs; | powerStructure.factions[].desc
+{"town":[2,0]} sent-all-gone 4 | merchants, guilds, and prominent families compete for seats. | powerStructure.factions[].desc
+{"town":[2,0]} sent-all-gone 4 | Money at {S} is neither comfortable nor tight, and that is what people here expect of it. | publicProse.blocks.economy:economics.prosperityRung.sentence
+{"town":[2,0]} sent-all-gone 4 | {S} calls its hall the Town Council in public and something shorter everywhere else. | publicProse.blocks.power:desk.governingTitle.sentence
+{"town":[2,0]} sent-all-gone 2 | Find a patron among those who lead Town Council, and make themselves useful to them. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Secure rights for the carriers' guild that will outlast whoever governs now. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 2 | As the governing power, Town Council inherits the settlement's public-legitimacy score (#). | simulationTrace[].causes[].reason
+{"town":[2,0],"metropolis":[1,0],"city":[1,0]} sent-all-gone 8 | Craftspeople sit in rows, each row a different trade, each worker deep in their own work. | arrivalScene
+{"town":[2,0]} sent-all-gone 4 | A modest glassworks for bottles, panes, and goblets, dependent on silica sand, potash, and a practised furnace operator. | institutions[].desc
+{"town":[1,0],"city":[2,0]} sent-all-gone 6 | tells you what they think of your request and goes back to work. | npcs[].presentation.behaviour
+{"town":[1,0],"city":[2,0]} sent-all-gone 6 | {S} neither backs the Arcane Council nor moves against it, and the Arcane Council governs on its own strength alone. | publicProse.blocks.power:desk.successionHold.sentence
+{"town":[2,0]} sent-all-gone 2 | "Hunter's lodge" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one. | simulationTrace[].causes[].reason
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | The merchant class is outbuying noble landholdings. | powerStructure.recentConflict
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | Three estates have changed hands in the last decade. | powerStructure.recentConflict
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | The families that lost them have not forgotten. | powerStructure.recentConflict
+{"city":[2,0]} sent-all-gone 4 | The weather that matters in this city is the weather out at sea, and everybody watches it whether or not they sail. | publicProse.blocks.economy:economics.terrainIdentity.sentence
+{"city":[2,0]} sent-all-gone 4 | The city's difficulties are old ones, not emergencies, and it has the room to work on them. | publicProse.blocks.stressors:overview.crisisFraming.sentence
+{"city":[2,0]} sent-all-gone 2 | Find the alchemist quarter one more source of money. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Make the cooper's yard too sound for any creditor to threaten. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 4 | Arcane Council · Shaken — nobody trusts those in charge | publicProse.blocks.overview:identity.governs
+{"city":[2,0]} sent-all-gone 4 | Disputes at {S} that the neighbours cannot settle go up to Arcane Council. | publicProse.blocks.power:desk.stabilityHeader.sentence
+{"city":[2,0]} sent-all-gone 4 | Prosperity and strong defences have earned the Arcane Council the approval of {S}. | publicProse.blocks.power:governance.text
+{"city":[2,0]} sent-all-gone 2 | Grow the work at the merchant guilds until no one nearby can match it. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0],"town":[1,0]} sent-all-gone 4 | Make Merchant Guilds the first name people think of, ahead of Religious Authorities. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Nearby resources (grain_fields, hunting_grounds, iron_deposits…) shifted the selection odds. | simulationTrace[].causes[].reason
+{"city":[2,0]} sent-all-gone 4 | A revolt over tax relief set the commons against the ruling powers, and the account it opened is still not settled | history.historicalEvents[].description
+{"city":[2,0]} sent-all-gone 4 | People at {S} expect to hold against the usual trouble, and they claim no more than that. | publicProse.blocks.defense:posture.posture.beside
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Be counted one day among those who lead Thieves' Guild. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Leave the vintner's cellars protected by law, so whoever runs the house next need not fight for the same rights. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 4 | The city's count of its people at {S} is out of date with so many arriving, and nobody keeping order knows who is new. | publicProse.blocks.defense:state.publicOrder.beside
+{"city":[2,0]} sent-all-gone 4 | The city takes its quarrels over land and law to the same people it takes its prayers to. | publicProse.blocks.power:desk.rulingStructure.sentence
+{"city":[2,0]} sent-all-gone 4 | The church in {S} watches for heresy: a charm sold in the street or a spell worked behind a shutter can bring armed men to the door in the faith's name. | publicProse.blocks.warFaith:faith.templeHeresy.sentence
+{"city":[2,0]} sent-all-gone 2 | Be remembered as the one who kept the major hospital out of debt. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Confess to someone they trust, and ask for help getting out. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Take on the work in Ecclesiastical Council that no one else wants, and do it without complaint. | npcs[].goal.short
+{"city":[2,0],"town":[1,0],"metropolis":[1,0]} sent-all-gone 4 | See the mills out of debt for good, with money set aside for bad years. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Bring Ecclesiastical Council a piece of news before anyone else does. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Find a patron among those who lead Ecclesiastical Council, and make themselves useful to them. | npcs[].goal.short
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Grow the work at the toll bridge by one more pair of hands, then another. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Be in the room the next time Ecclesiastical Council must decide something that matters. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Make the river boatyard too sound for any creditor to threaten. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Hand on the specialized metalworkers with full stores, honest accounts and nothing owed. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Win the next big piece of work away from the cooper's yard. | npcs[].goal.short
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 4 | Leave the warehouse district protected by law, so whoever runs the house next need not fight for the same rights. | npcs[].goal.long
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 4 | Get the citadel through the season without borrowing. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 4 | Glad of anyone just off the road, and full of questions about it. | npcs[].presentation.impression
+{"town":[2,0]} sent-all-gone 4 | Trades road news for road news, and buys a drink for the best of it. | npcs[].presentation.behaviour
+{"town":[2,0]} sent-all-gone 4 | What it announces is received as news from somewhere else, and the town goes on making its own arrangements. | publicProse.blocks.power:desk.legitimacyBanner.sentence
+{"town":[2,0]} sent-all-gone 4 | Few in {S} still accept the Military Council's right to rule. | publicProse.blocks.power:governance.text
+{"town":[2,0]} sent-all-gone 2 | Military Council leaves Thieves' Guild alone because stamping it out would cost more than it saves. | powerStructure.factionRelationships[].narrative
+{"town":[2,0]} sent-all-gone 2 | Stop Thieves' Guild from taking anything more from Military Council this season. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Bring every step of the trade, from the first goods to the last, under the roof of the hunter's lodge. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 2 | See Thieves' Guild too weak to threaten Military Council again. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 2 | Win one ally of Thieves' Guild over to the side of Military Council. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Rise in Military Council far enough that their word carries weight outside it. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 2 | Keep the quarrel between Military Council and Thieves' Guild from turning into open trouble this season. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Make the courthouse so needed by those who govern that no one dares touch the rights of the house. | npcs[].goal.long
+{"town":[1,0],"city":[2,0]} sent-all-gone 3 | Leave more money at the smelter than there was when they took charge. | npcs[].goal.long
+{"town":[2,0],"city":[2,0]} sent-all-gone 4 | "Barge and river transport company" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one. | simulationTrace[].causes[].reason
+{"town":[2,0],"metropolis":[2,0]} sent-all-gone 8 | Clergy operate here but the church holds little civic authority; | powerStructure.factions[].desc
+{"town":[2,0],"metropolis":[2,0]} sent-all-gone 8 | organised crime has crowded out most formal moral influence. | powerStructure.factions[].desc
+{"town":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Keep taking money from Thieves' Guild without anyone asking where it comes from. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Build up enough savings at the toll bridge to ride out two bad years. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 4 | {S} tolerates the Arcane Council, no more. | publicProse.blocks.power:desk.legitimacyBanner.sentence
+{"city":[2,0]} sent-all-gone 4 | The Arcane Council has lost {S}'s trust over crime. | publicProse.blocks.power:desk.legitimacyLens.sentence
+{"city":[2,0]} sent-all-gone 4 | {S} tolerates the Arcane Council and no more. | publicProse.blocks.power:governance.text
+{"city":[2,0]} sent-all-gone 2 | Grow the work at the ropemaker's ropewalk by one more pair of hands, then another. | npcs[].goal.short
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Grow the work at the sawmill by one more pair of hands, then another. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 4 | They operate in the shadow of Noble Governorship, close enough to matter and too far behind to lead. | powerStructure.factions[].desc
+{"city":[2,0]} sent-all-gone 4 | Merchant Guilds work under the rules Noble Governorship sets, and pay for a hearing in the hall when it wants something. | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 4 | {S} neither backs the Noble Governorship nor opposes it. | publicProse.blocks.power:desk.legitimacyBanner.sentence
+{"city":[2,0]} sent-all-gone 4 | People at {S} do not feel safe after dark, and they blame the Noble Governorship for it. | publicProse.blocks.power:desk.legitimacyLens.sentence
+{"city":[2,0]} sent-all-gone 4 | Noble Governorship outweighs everyone at {S} who wants its place, and the whole city knows who they are. | publicProse.blocks.power:desk.successionRisk.sentence
+{"city":[2,0]} sent-all-gone 4 | Noble Governorship holds on, but has to watch them. | publicProse.blocks.power:desk.successionRisk.sentence
+{"city":[2,0]} sent-all-gone 4 | {S} neither backs the Noble Governorship nor moves against it, and the Noble Governorship governs on its own strength alone. | publicProse.blocks.power:desk.successionHold.sentence
+{"city":[2,0]} sent-all-gone 2 | Make the mercenary quarter so needed by those who govern that no one dares touch the rights of the house. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Secure rights for the scroll scribe's desk that will outlast whoever governs now. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Buy a share in the printing house before the season is out. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Find out how much is owed by the coaching inn, and to whom. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Win the city granaries a voice whenever those who govern decide something that touches the work. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Have the rights of the weavers set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Build the work at the cobbler's guild into a trade that will feed the next generation here. | npcs[].goal.long
+{"city":[2,0],"town":[1,0]} sent-all-gone 3 | Double the work at the tailor's guild, and find the hands to do it. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Win the banking houses first call on any help those who govern can give this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Take on more hands at the apothecary district, and keep them busy all season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Grow the work at the chandler's shop by one more pair of hands, then another. | npcs[].goal.short
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 8 | Cuts the talk short and gives no reason. | npcs[].presentation.behaviour
+{"town":[2,0]} sent-all-gone 4 | Surplus from local harvest sold to nearby settlements and passing merchants: steady income tied to the growing season. | economicState.incomeSources[].desc
+{"town":[2,0],"city":[1,0]} sent-all-gone 3 | Win the tanner's yard a voice whenever those who govern decide something that touches the work. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 4 | Medicinal herbs (taxed by occupation) | economicState.primaryExports[]
+{"city":[2,0]} sent-all-gone 2 | Gain ground for Religious Authorities at the expense of Merchant Guilds before the season is out. | npcs[].goal.short
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 8 | Waters rose with little warning and reshaped the harbour and coastal districts, drowning livelihoods and redrawing who owned what | history.historicalEvents[].description
+{"city":[2,0]} sent-all-gone 2 | Get the garrison through the season without borrowing. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Pay every hand at the customs house in full and on time this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Have those who govern confirm, in writing, who may give orders at the enchanter's shop. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Hand on the potter's workshop with full stores, honest accounts and nothing owed. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | "Smelter" was pulled in by the cascade pass: a chain-adjacent institution already on the roster created demand for this one. | simulationTrace[].causes[].reason
+{"city":[2,0]} sent-all-gone 4 | Merchant oligarchy and Craft Guilds are in high conflict over the right to raise a new levy. | conflicts[].desc powerStructure.conflicts[].desc
+{"city":[2,0]} sent-all-gone 4 | Noble Families live under the rule of Merchant oligarchy but keep enough rights of their own (land, courts, levies) to bargain, not simply obey. | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 4 | People notice it, but it has not yet cost the city anything it would miss. | publicProse.blocks.stressors:overview.conditionSeverity.sentence
+{"city":[2,0]} sent-all-gone 2 | Make sure no new rule from those who govern costs the city granaries anything this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Get to whatever both Merchant Guilds and Craft Guilds want this season first. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | They have a say on only a few matters; | powerStructure.factions[].desc
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | on everything else they side with whoever will deal with them that week. | powerStructure.factions[].desc
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Get the theaters through the season without borrowing. | npcs[].goal.short
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Have the old rights of the bardic college read out and recognised before anyone challenges them. | npcs[].goal.short
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Be in the room the next time The Merchant Bloc must decide something that matters. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 4 | Merchant Guilds work under the rules Arcane Council sets, and pay for a hearing in the hall when it wants something. | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 4 | {S}'s own food comes first of all from its herds, so one bad year for the herds is felt across the whole city. | publicProse.blocks.economy:economics.foodSources.sentence
+{"city":[2,0]} sent-all-gone 2 | Build the work at the toll bridge into a trade that will feed the next generation here. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Build the work at the specialized metalworkers into a trade that will feed the next generation here. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Be remembered as the one who kept the sawmill out of debt. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Be counted one day among those who lead The Merchant Bloc. | npcs[].goal.long
+{"metropolis":[2,0],"city":[2,0]} sent-all-gone 8 | Whatever the hall was arguing about before, the walls have settled the argument. | publicProse.blocks.power:desk.stabilityHeader.sentence
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Have the rights of the craft guilds set down so firmly that the next ruler must keep them too. | npcs[].goal.long
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Train an apprentice at the chandler's shop to take on part of the work. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Build up enough savings at the taverns to ride out two bad years. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 2 | Be remembered as the one who kept the courthouse out of debt. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 4 | The Guard is now about as strong as Corrupt Council. | powerStructure.factionRelationships[].narrative
+{"town":[2,0]} sent-all-gone 2 | Learn exactly what Corrupt Council and Thieves' Guild have agreed in private, and who agreed it. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Answer the next move by The Guard against Corrupt Council, quickly and in public. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Keep the dealings between Corrupt Council and Thieves' Guild out of sight for another season. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Bring Corrupt Council a piece of news before anyone else does. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Take on the work in Corrupt Council that no one else wants, and do it without complaint. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Be in the room the next time Corrupt Council must decide something that matters. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Find a patron among those who lead Corrupt Council, and make themselves useful to them. | npcs[].goal.short
+{"town":[2,0]} sent-all-gone 2 | Nearby resources (river_fish, managed_forest, ancient_grove…) shifted the selection odds. | simulationTrace[].causes[].reason
+{"city":[2,0]} sent-all-gone 4 | Merchant oligarchy and Merchant Guilds are in moderate conflict over an informer planted by one power in the other. | conflicts[].desc powerStructure.conflicts[].desc
+{"city":[2,0]} sent-all-gone 2 | Build the work at the mills into a trade that will feed the next generation here. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Own a share in the supply of timber, so the work at the carpenters can never be held to ransom. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Carry the name of the brickmaker's brickyard beyond this place, so people come from far off for the work done there. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Make the blacksmiths too sound for any creditor to threaten. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 4 | The Flood is where that line falls, not a clean line, but a real one | history.historicalCharacter
+{"city":[2,0]} sent-all-gone 2 | Double the work at the cobbler's guild, and find the hands to do it. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 4 | Merchant Guilds work under the rules Military City Council sets, and pay for a hearing in the hall when it wants something. | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 4 | if the city were cut off, it would have less to fall back on than it ought. | publicProse.blocks.defense:threat.economic.sentence
+{"city":[2,0]} sent-all-gone 4 | {S} puts up with the Military City Council. | publicProse.blocks.power:desk.legitimacyBanner.sentence
+{"city":[2,0]} sent-all-gone 4 | The Military City Council has lost {S}'s trust over crime. | publicProse.blocks.power:desk.legitimacyLens.sentence
+{"city":[2,0]} sent-all-gone 4 | {S} neither backs the Military City Council nor moves against it, and the Military City Council governs on its own strength alone. | publicProse.blocks.power:desk.successionHold.sentence
+{"city":[2,0]} sent-all-gone 4 | Call the Military City Council at {S} by any other title and you will be corrected, politely and at once. | publicProse.blocks.power:desk.governingTitle.sentence
+{"city":[2,0]} sent-all-gone 4 | {S} tolerates the Military City Council and no more. | publicProse.blocks.power:governance.text
+{"city":[2,0]} sent-all-gone 2 | Hand on the garrison with full stores, honest accounts and nothing owed. | npcs[].goal.long
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Keep the accounts of the vintner's cellars balanced, and show them to anyone who asks. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Make the work at the carpenters the thing this place is known for. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Bring every step of the trade, from the first goods to the last, under the roof of the midwife's house. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Have the old rights of the printing house read out and recognised before anyone challenges them. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 4 | The merchant guilds keep their own private security beside the garrison and city watch: real protection exists, but only for those with the right associations. | economicState.safetyProfile.guardEffectivenessDesc
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | Grow the work at the stone quarry until no one nearby can match it. | npcs[].goal.long
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 6 | The approach to {S} is blocked by a hasty checkpoint: overturned carts, armed men who are not the regular watch, a hard question about your business before you are allowed within sight of the gate. | arrivalScene
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 6 | Whatever is happening inside, they have decided strangers are a risk. | arrivalScene
+{"town":[2,0]} sent-all-gone 4 | Some of the town watch take bribes from whoever has coin. | economicState.safetyProfile.guardEffectivenessDesc
+{"town":[2,0]} sent-all-gone 4 | Stone-walled hill town, the keep visible above the market quarter | spatialLayout.layout
+{"town":[2,0]} sent-all-gone 4 | The town takes the easy half of this trade and sells the rest of it to whoever will do the hard half. | publicProse.blocks.economy:economics.exploitation.sentence
+{"town":[2,0]} sent-all-gone 4 | {S}'s own food comes first of all from its herds, so one bad year for the herds is felt across the whole town. | publicProse.blocks.economy:economics.foodSources.sentence
+{"town":[2,0]} sent-all-gone 4 | Some of {S}'s work cannot go on without gold/silver ore, and the country around the town does not give enough of it, so the town buys from outside or that work stops. | publicProse.blocks.economy:economics.criticalImport.sentence
+{"town":[2,0]} sent-all-gone 2 | Collect what is owed to the taverns before the season is out. | npcs[].goal.short
+{"town":[1,0],"city":[2,0]} sent-all-gone 3 | Keep the accounts of the potter's workshop balanced, and show them to anyone who asks. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 4 | With the caravans cut off by the siege, the city's defenders buy all of it. | institutions[].desc
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | command appointments are patronage, and the hall knows it. | powerStructure.factions[].desc
+{"city":[2,0]} sent-all-gone 4 | a merchant, with the seat itself in dispute | stress.cast.roles[].reason
+{"city":[2,0]} sent-all-gone 4 | Poverty and insecurity have cost the Merchant oligarchy its standing. | publicProse.blocks.power:governance.text
+{"city":[2,0]} sent-all-gone 2 | Leave the alchemist quarter protected by law, so whoever runs the house next need not fight for the same rights. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Collect what is owed to the stable district before the season is out. | npcs[].goal.short
+{"city":[2,0],"metropolis":[2,0]} sent-all-gone 4 | Collect what is owed to the customs house before the season is out. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Make sure no new rule from those who govern costs the public bathhouse anything this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 4 | Hereditary landowners behind the Noble Governorship; | powerStructure.factions[].desc
+{"city":[2,0]} sent-all-gone 4 | The Guard carries out what Noble Governorship decides. | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 4 | Whoever is working inside {S} has asked for nothing yet; | pressureSentence
+{"city":[2,0]} sent-all-gone 2 | Get the rights of the gambling halls written down and sealed by those who govern, this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Bring every step of the trade, from the first goods to the last, under the roof of the tanner's yard. | npcs[].goal.long
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 6 | A single figure seized power through armed negotiation and ruled without check for a time, and the memory still shapes who is trusted with authority | history.historicalEvents[].description
+{"city":[2,0]} sent-all-gone 4 | Beasts come out of the country at {S} steadily, and the city loses guards and gear to them faster than it replaces them. | publicProse.blocks.defense:status.override.sentence
+{"city":[2,0],"metropolis":[1,0]} sent-all-gone 3 | Get the veteran's lodge excused from one tax or levy this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Get the most out of the work at the sawmill while it runs well, and put the gains by. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Make the work at the chandler's shop the thing this place is known for. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 4 | The Corrupt Council at {S} has lost the town's support, and no rival had to take it. | publicProse.blocks.power:desk.successionHold.sentence
+{"town":[2,0]} sent-all-gone 2 | Make sure no one can trace the arrangement between Corrupt Council and Thieves' Guild back to them. | npcs[].goal.short
+{"town":[1,0],"city":[2,0]} sent-all-gone 3 | Nearby resources (hunting_grounds, ancient_grove, coal_deposits…) shifted the selection odds. | simulationTrace[].causes[].reason
+{"town":[2,0]} sent-all-gone 2 | Make the bond between Corrupt Council and Thieves' Guild so deep that neither can afford to break it. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 2 | Bring the dealings between Corrupt Council and Thieves' Guild into the open, whatever it costs. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 2 | Take on more hands at the taverns, and keep them busy all season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Leave the major hospital protected by law, so whoever runs the house next need not fight for the same rights. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Make the work at the wizard's tower safe from the next shortage, with more than one source for every need. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 4 | They operate in the shadow of Noble Families, close enough to matter and too far behind to lead. | powerStructure.factions[].desc
+{"city":[2,0]} sent-all-gone 4 | Two powers have stopped coming to Noble Governorship meetings. | powerStructure.recentConflict
+{"city":[2,0]} sent-all-gone 4 | Noble Families hold old rights Noble Governorship cannot take away; | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 4 | {S} has no effective government; | pressureSentence
+{"city":[2,0]} sent-all-gone 4 | Noble Families controls one district and the institutions inside it, a rival controls another, and the contested space between them is where things go wrong. | pressureSentence
+{"city":[2,0]} sent-all-gone 4 | Noble Governorship · Fractured — no stable governing authority | publicProse.blocks.overview:identity.governs
+{"city":[2,0]} sent-all-gone 2 | See Noble Governorship too weak to threaten Noble Families again. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Be given the secrets of Noble Governorship to keep, as well as its errands to run. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Stop Noble Families from taking anything more from Noble Governorship this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | See Noble Families too weak to threaten Noble Governorship again. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Secure rights for the warehouse district that will outlast whoever governs now. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | End the bad blood between Noble Governorship and Noble Families before the next generation inherits it. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Keep the accounts of the alchemist quarter balanced, and show them to anyone who asks. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Buy medicinal herbs and supplies at the market in bulk this season, while the price is still fair. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 4 | Fine goods of every kind, though the spice or silk the city wants never arrives. | institutions[].desc
+{"city":[2,0]} sent-all-gone 4 | The revolt in {S} is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take. | pressureSentence
+{"city":[2,0]} sent-all-gone 4 | The slave trade has stopped. | pressureSentence
+{"city":[2,0]} sent-all-gone 4 | What is left to settle is what {S} becomes afterwards, and who decides. | pressureSentence
+{"city":[2,0]} sent-all-gone 2 | Win new business for the craft guilds beyond the people who already come. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Win the stable district first call on any help those who govern can give this season. | npcs[].goal.short
+{"city":[2,0]} sent-all-gone 2 | Have the old rights of the cobbler's guild read out and recognised before anyone challenges them. | npcs[].goal.short
+{"metropolis":[1,0],"city":[2,0]} sent-all-gone 3 | See the governor's office out of debt for good, with money set aside for bad years. | npcs[].goal.long
+{"town":[2,0]} sent-all-gone 4 | There is stone out there and nobody has ever thought it worth selling beyond the town, which is the town's considered opinion rather than an oversight. | publicProse.blocks.economy:economics.exploitation.sentence
+{"city":[2,0]} sent-all-gone 4 | The old grounds filled generations ago, so the dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. | institutions[].desc
+{"city":[2,0]} sent-all-gone 4 | Since the siege closed the roads, no cart goes out to the new ground, and the newly dead wait in the charnel house. | institutions[].desc
+{"city":[2,0]} sent-all-gone 2 | See the tailor's guild out of debt for good, with money set aside for bad years. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Win the cartographer's guild a lasting privilege that no other house can claim. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 4 | The Guard no longer takes orders from Noble Governorship. | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 4 | Noble Governorship needs the taxes and loans of Merchant Guilds, and Merchant Guilds need Noble Governorship to enforce their contracts and keep the law. | powerStructure.factionRelationships[].narrative
+{"city":[2,0]} sent-all-gone 4 | Public opinion at {S} is doing nothing to the Noble Governorship either way, which leaves the hold resting entirely on what Noble Governorship can muster for itself. | publicProse.blocks.power:desk.successionHold.sentence
+{"city":[2,0]} sent-all-gone 2 | Leave Noble Governorship holding nothing that The Guard could not take away. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Turn the contest with The Guard into a partnership on terms set by Noble Governorship. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 2 | Make Noble Governorship the first name people think of, ahead of The Guard. | npcs[].goal.long
+{"city":[2,0]} sent-all-gone 4 | Required by Mill but not available in Desert/Arid terrain | resourceAnalysis.imports.reasons.grain
+{"city":[2,0]} sent-all-gone 4 | Walled desert city of pale stone, caravanserai outside the east gate, citadel above the wells | spatialLayout.layout
+{"city":[2,0]} sent-all-gone 4 | {S}'s gate is attended by its usual guards and, less usually, by several people in road-worn equipment who are clearly not local and clearly not merchants. | arrivalScene
+{"city":[2,0]} sent-all-gone 4 | The settlement is paying for help. | arrivalScene
+{"city":[2,0]} sent-all-gone 4 | The guards at {S} watch the country, not the city, and they do not stand down. | publicProse.blocks.defense:status.override.sentence

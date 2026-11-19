@@ -37,6 +37,7 @@ it('REVIEW-VEIL-9: the stored public prose by counterfactual', async () => {
       const scrub = (v) => { if (Array.isArray(v)) { for (let i = v.length - 1; i >= 0; i -= 1) { if (typeof v[i] === 'string' && (hid.has(v[i]) || hname.has(v[i]))) v.splice(i, 1); else scrub(v[i]); } } else if (isRec(v)) for (const k of Object.keys(v)) scrub(v[k]); };
       scrub(without); delete without.publicProse;
       let A; let B; try { const full = structuredClone(sh.data); delete full.publicProse; A = composePublicProse(full); B = composePublicProse(without); } catch (e) { bump(`${dbname} | compose threw`, `${sh.name}: ${String(e.message).slice(0, 120)}`); continue; }
+      let dep = 0; for (const site of new Set([...Object.keys(A?.blocks || {}), ...Object.keys(B?.blocks || {})])) { const a = sentences(A?.blocks?.[site]); const b = sentences(B?.blocks?.[site]); for (const x of a) if (!b.has(x)) { dep += 1; bump(`${dbname.replace(/_\d+$/, '')} | (control) the composer writes, with H only | ${site}`, `${sh.name}: "${x.slice(0, 160)}"`); } }
       for (const [read, body] of [['gallery', g], ['link', l]]) {
         const served = body?.publicProse?.blocks; if (!isRec(served)) { bump(`${dbname} | ${read} | NO publicProse served`, `${sh.name}: ${Object.keys(body || {}).length} keys`); continue; } withProse += 1;
         for (const site of Object.keys(served)) {

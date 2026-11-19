@@ -1,0 +1,92 @@
+ct_2: 48 shares, 96 pages, no model 0, render threw 0, views 1764, 2559466 characters
+ct_3: 48 shares, 96 pages, no model 0, render threw 0, views 1764, 3522460 characters
+ct | gallery | DM reveal on | eyes shut | HIDDEN HOUSE in a KEY of the response | [][].data.economicState.safetyProfile.flags.<key> | black market (squeezed) | 4
+      e.g. Fionnford: arcaneBlackMarket = false
+ct | gallery | DM reveal on | eyes shut | MARKER on the page | World/History | 2
+      e.g. Temürtash: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n128z
+ct | gallery | DM reveal on | eyes shut | frozen | HIDDEN HOUSE in a KEY of the response | [][].data.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Fionnford: arcaneBlackMarket = false
+ct | gallery | DM reveal on | eyes shut | frozen | MARKER on the page | World/History | 1
+      e.g. Temürtash: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n128z
+ct | gallery | DM reveal on | marked, no eye | HIDDEN HOUSE in a KEY of the response | [][].data.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Fionnford: arcaneBlackMarket = false
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | Summary/Overview | 29
+      e.g. Radhavalli: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands vq6n94z
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | Systems/Defense | 33
+      e.g. Radhavalli: A palisade or an earthen berm around the edge. It governs the approaches and slows an attack. vq6n18z
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | Systems/Institutions | 360
+      e.g. Radhavalli: Shapes and fires clay into bricks for building, whenever clay can be had. With them, structures can be made to last. Clay and fuel are needed. vq6n10z
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | Systems/Power | 43
+      e.g. Radhavalli: Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. vq6n30z vq6n22z vq6n131z
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | World/History | 82
+      e.g. Radhavalli: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands vq6n94z
+ct | gallery | DM reveal on | marked, no eye | MARKER on the page | World/Relationships | 597
+      e.g. Radhavalli: Padmini Kaur kept Rajesh Goswami's name out of a scandal that ruined two others. Rajesh Goswami has voted with Padmini Kaur ever since. vq6n134z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | Summary/Overview | 29
+      e.g. Radhavalli: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands vq6n94z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | Summary/Plot Hooks | 146
+      e.g. Radhavalli: An old family is deliberately inflaming tensions to drive out a newcomer who knows something vq6n279z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | Systems/Defense | 47
+      e.g. Radhavalli: A palisade or an earthen berm around the edge. It governs the approaches and slows an attack. vq6n18z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | Systems/Institutions | 380
+      e.g. Radhavalli: Shapes and fires clay into bricks for building, whenever clay can be had. With them, structures can be made to last. Clay and fuel are needed. vq6n10z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | Systems/Power | 46
+      e.g. Radhavalli: Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. vq6n30z vq6n22z vq6n131z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | Systems/Services | 22
+      e.g. Radhavalli: Receive and pass on goods along the smuggling chain. vq6n29z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | World/History | 82
+      e.g. Radhavalli: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands vq6n94z
+ct | gallery | DM reveal on | unmarked | MARKER on the page | World/Relationships | 597
+      e.g. Radhavalli: Padmini Kaur kept Rajesh Goswami's name out of a scandal that ruined two others. Rajesh Goswami has voted with Padmini Kaur ever since. vq6n134z
+ct | gallery | no reveal | eyes shut | HIDDEN HOUSE in a KEY of the response | [][].data.economicState.safetyProfile.flags.<key> | black market (squeezed) | 4
+      e.g. Fionnford: arcaneBlackMarket = false
+ct | gallery | no reveal | eyes shut | MARKER on the page | World/History | 2
+      e.g. Temürtash: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n128z
+ct | gallery | no reveal | eyes shut | frozen | HIDDEN HOUSE in a KEY of the response | [][].data.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Fionnford: arcaneBlackMarket = false
+ct | gallery | no reveal | eyes shut | frozen | MARKER on the page | World/History | 1
+      e.g. Temürtash: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n128z
+ct | link | DM reveal on | eyes shut | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 4
+      e.g. Fionnford: arcaneBlackMarket = false
+ct | link | DM reveal on | eyes shut | MARKER on the page | World/History | 2
+      e.g. Temürtash: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n128z
+ct | link | DM reveal on | eyes shut | frozen | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Fionnford: arcaneBlackMarket = false
+ct | link | DM reveal on | eyes shut | frozen | MARKER on the page | World/History | 1
+      e.g. Temürtash: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n128z
+ct | link | DM reveal on | marked, no eye | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Fionnford: arcaneBlackMarket = false
+ct | link | DM reveal on | marked, no eye | MARKER on the page | Summary/Overview | 29
+      e.g. Radhavalli: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands vq6n94z
+ct | link | DM reveal on | marked, no eye | MARKER on the page | Systems/Defense | 33
+      e.g. Radhavalli: A palisade or an earthen berm around the edge. It governs the approaches and slows an attack. vq6n18z
+ct | link | DM reveal on | marked, no eye | MARKER on the page | Systems/Institutions | 360
+      e.g. Radhavalli: Shapes and fires clay into bricks for building, whenever clay can be had. With them, structures can be made to last. Clay and fuel are needed. vq6n10z
+ct | link | DM reveal on | marked, no eye | MARKER on the page | Systems/Power | 40
+      e.g. Radhavalli: Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. vq6n30z vq6n22z vq6n131z
+ct | link | DM reveal on | marked, no eye | MARKER on the page | World/History | 82
+      e.g. Radhavalli: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands vq6n94z
+ct | link | DM reveal on | marked, no eye | MARKER on the page | World/Relationships | 585
+      e.g. Radhavalli: Padmini Kaur kept Rajesh Goswami's name out of a scandal that ruined two others. Rajesh Goswami has voted with Padmini Kaur ever since. vq6n134z
+ct | link | DM reveal on | unmarked | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Fionnford: arcaneBlackMarket = false
+ct | link | DM reveal on | unmarked | MARKER on the page | Summary/Overview | 29
+      e.g. Radhavalli: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands vq6n94z
+ct | link | DM reveal on | unmarked | MARKER on the page | Systems/Defense | 33
+      e.g. Radhavalli: A palisade or an earthen berm around the edge. It governs the approaches and slows an attack. vq6n18z
+ct | link | DM reveal on | unmarked | MARKER on the page | Systems/Institutions | 360
+      e.g. Radhavalli: Shapes and fires clay into bricks for building, whenever clay can be had. With them, structures can be made to last. Clay and fuel are needed. vq6n10z
+ct | link | DM reveal on | unmarked | MARKER on the page | Systems/Power | 40
+      e.g. Radhavalli: Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. vq6n30z vq6n22z vq6n131z
+ct | link | DM reveal on | unmarked | MARKER on the page | World/History | 82
+      e.g. Radhavalli: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands vq6n94z
+ct | link | DM reveal on | unmarked | MARKER on the page | World/Relationships | 585
+      e.g. Radhavalli: Padmini Kaur kept Rajesh Goswami's name out of a scandal that ruined two others. Rajesh Goswami has voted with Padmini Kaur ever since. vq6n134z
+ct | link | no reveal | eyes shut | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 4
+      e.g. Fionnford: arcaneBlackMarket = false
+ct | link | no reveal | eyes shut | MARKER on the page | World/History | 2
+      e.g. Temürtash: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n128z
+ct | link | no reveal | eyes shut | frozen | HIDDEN HOUSE in a KEY of the response | [].dossier.economicState.safetyProfile.flags.<key> | black market (squeezed) | 2
+      e.g. Fionnford: arcaneBlackMarket = false
+ct | link | no reveal | eyes shut | frozen | MARKER on the page | World/History | 1
+      e.g. Temürtash: Founded by:a discharged soldier who liked the view and had nowhere better to be vq6n128z

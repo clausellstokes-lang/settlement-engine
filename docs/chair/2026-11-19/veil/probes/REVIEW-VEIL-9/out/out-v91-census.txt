@@ -1,0 +1,52 @@
+ct | gallery | DM off | eyes shut | PHRASE SENT, ITS HOUSE WITHHELD | 10
+      e.g. Mayanek (tp0x33): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | gallery | DM off | eyes shut | frozen | PHRASE SENT, ITS HOUSE WITHHELD | 5
+      e.g. Mayanek (tp0x34): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | gallery | DM off | eyes shut | frozen | phrase absent | 19
+ct | gallery | DM off | eyes shut | phrase absent | 38
+ct | gallery | DM on | eyes shut | PHRASE SENT, ITS HOUSE WITHHELD | 10
+      e.g. Mayanek (tp0x35): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | gallery | DM on | eyes shut | frozen | PHRASE SENT, ITS HOUSE WITHHELD | 5
+      e.g. Mayanek (tp0x36): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | gallery | DM on | eyes shut | frozen | phrase absent | 19
+ct | gallery | DM on | eyes shut | phrase absent | 38
+ct | gallery | DM on | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 5
+      e.g. Mayanek (tp0x40): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | gallery | DM on | marked, no house eye | phrase absent | 19
+ct | gallery | DM on | unmarked (default veil on the link) | phrase absent | 19
+ct | gallery | DM on | unmarked (default veil on the link) | phrase sent, the house sent too | 5
+ct | import | DM off | eyes shut | PHRASE SENT, ITS HOUSE WITHHELD | 10
+      e.g. Mayanek (tp0x33): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | import | DM off | eyes shut | frozen | PHRASE SENT, ITS HOUSE WITHHELD | 5
+      e.g. Mayanek (tp0x34): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | import | DM off | eyes shut | frozen | phrase absent | 19
+ct | import | DM off | eyes shut | phrase absent | 38
+ct | import | DM on | eyes shut | PHRASE SENT, ITS HOUSE WITHHELD | 10
+      e.g. Mayanek (tp0x35): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | import | DM on | eyes shut | frozen | PHRASE SENT, ITS HOUSE WITHHELD | 5
+      e.g. Mayanek (tp0x36): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | import | DM on | eyes shut | frozen | phrase absent | 19
+ct | import | DM on | eyes shut | phrase absent | 38
+ct | import | DM on | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 5
+      e.g. Mayanek (tp0x40): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | import | DM on | marked, no house eye | phrase absent | 19
+ct | import | DM on | unmarked (default veil on the link) | phrase absent | 19
+ct | import | DM on | unmarked (default veil on the link) | phrase sent, the house sent too | 5
+ct | link | DM off | eyes shut | PHRASE SENT, ITS HOUSE WITHHELD | 10
+      e.g. Mayanek (tp0x33): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | link | DM off | eyes shut | frozen | PHRASE SENT, ITS HOUSE WITHHELD | 5
+      e.g. Mayanek (tp0x34): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | link | DM off | eyes shut | frozen | phrase absent | 19
+ct | link | DM off | eyes shut | phrase absent | 38
+ct | link | DM on | eyes shut | PHRASE SENT, ITS HOUSE WITHHELD | 10
+      e.g. Mayanek (tp0x35): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | link | DM on | eyes shut | frozen | PHRASE SENT, ITS HOUSE WITHHELD | 5
+      e.g. Mayanek (tp0x36): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | link | DM on | eyes shut | frozen | phrase absent | 19
+ct | link | DM on | eyes shut | phrase absent | 38
+ct | link | DM on | marked, no house eye | PHRASE SENT, ITS HOUSE WITHHELD | 5
+      e.g. Mayanek (tp0x40): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | link | DM on | marked, no house eye | phrase absent | 19
+ct | link | DM on | unmarked (default veil on the link) | PHRASE SENT, ITS HOUSE WITHHELD | 5
+      e.g. Mayanek (tp0x39): stored ["Smuggling operation"]; at $.publicProse.blocks.defense:posture.posture.field, $.publicProse.blocks.defense:posture.terrain.field, $.economicState.safetyProfile.guardEffectivenessDesc
+ct | link | DM on | unmarked (default veil on the link) | phrase absent | 19
