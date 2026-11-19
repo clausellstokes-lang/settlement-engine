@@ -122,3 +122,22 @@ builds the mechanism from your hand-back."
 FOR THE SUCCESSOR: VR7 is built from `out/VR4-REPORT.md` section 3's placement table, read against VR8 (the safety band
 and roster composition stay; a crime-specific safetyDesc sentence is (a) or (b)), VR9 (measure the role-less base rate
 first) and VR10 (per-read salted re-key of every person's id on non-owner reads; measure id stability needs first).
+
+THE CHAIR, FOR THE HAND-BACK (2026-11-19 07:01 UTC, copied whole): "the reader's COUNTERFACTUAL DIFFER is built
+(differ.probe.jsx on lane/review-veil-9-2026-11-19; 140 new-shape + 70 master-shape births; each veil, reveal off/on; a
+control cutting ordinary houses). Its BOUND with every eye shut: 130 differing paths in the new shape, 113 in master's:
+49 derived numbers/booleans (criminalEffective 56.9→31.3, safetyRatio, defence scores, FACTION POWER), 24 crime-worded
+texts (the crime_wave tension 81 towns; Shadows District 71; economicDragDesc 48; the gates twin;
+powerStructure.stability "Unstable (pervasive organized crime)" 14; the publicOrder rung 21; the shadowEconomy block 24;
+templeFraud 8; merchantCriminalBlur), 44 other texts/labels, 13 history re-drawn (rng only). NEW: V9-5 HIGH (old, on the
+veil lane): with block:power.criminalUnderside shut by hand, the server withholds blackMarketCapture but sends the
+publicProse shadowEconomy sentence COMPOSED FROM IT (the link, reveal off, 12 of 24 towns); V9-6 MED: with the receipt
+shut, general:viability.verdictLines composed from it ships (8 towns). RULINGS: VR11 faction power gets VR6's treatment:
+where a power is withheld, the remaining powers' shares are re-derived to 100 by largest remainder before the bytes leave
+(the same tell as the income shares). VR12 a publicProse block (or any composed sentence) whose INPUTS include a
+withheld field is withheld or recomposed with it, by rule in the registry, not case by case (cures V9-5, V9-6 and their
+class). VR13 history re-drawn by the rng alone is information-free (the seed never ships): accepted, recorded. THE
+CLEARANCE STANDARD: at FINAL the reader re-runs the differ; every differing path must be in the registry with its rule
+(a or b), or ruled diffuse (VR8), or rng-only (VR13): zero unregistered paths."
+FOR THE SUCCESSOR: the registry's first rows are the differ's 130 / 113 paths (run it first: it is the list); VR11 and
+VR12 are rules of the registry (a share re-derived like VR6; a composed block follows its inputs' rule).
