@@ -92,7 +92,11 @@ const SHORT_MARKED = [
   // RE-KEYED BY IDENTITY (BIRTH-3, 2026-11-17; the owner's supply rule, BR5 and BR8): r2s-famine-hamlet-2's dairy farmer now keeps the beasts
   // of the pasture it proves or buys them in; the same row, marked short of livestock, stands in r2r-hamlet-56, whose dairy the
   // story leaves idle (its pasture used up, nothing bought)
-  ['r2r-hamlet-56', 'services', 'Daily milk from cattle, goats, or sheep depending on region.', 'Short of livestock.'], // 06271 (was r2s-famine-hamlet-2)
+  // RE-KEYED BY IDENTITY (the last close's whole check, 2026-11-19; C1 (b), a stale anchor): point 68 (FR21/FR23/FR24: the
+  // common proves its pasture) puts r2r-hamlet-56's dairy to work (its Common grazing land; no gap row for the house), so its
+  // milk prints unmarked and the tab prints no line of what a short row is. The same row, marked short of livestock, with the
+  // line, stands in r2r-hamlet-1944 (the town LASTCLOSE-DOORS named for the same dairy in tailHouses1Gaps; measured at c02735d57).
+  ['r2r-hamlet-1944', 'services', 'Daily milk from cattle, goats, or sheep depending on region.', 'Short of livestock.'], // 06271 (was r2r-hamlet-56; before it r2s-famine-hamlet-2)
   // RE-KEYED BY IDENTITY (BIRTH-1, 2026-11-17): the birth now brings clay in for a brickmaker and a potter on a connected road
   // no siege shuts (`resourceGenerator.js :: importsBroughtAtBirth`), so r2s-famine-town-1's brickmaker and
   // r2s-occupied-city-3's potter are fed; the same rows, marked short of clay, stand in r2r-town-54 (a town on no road: the
