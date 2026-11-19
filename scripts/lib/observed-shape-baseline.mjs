@@ -7,7 +7,13 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **44**: schema 43's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
+ * `BASELINE_SCHEMA` is **45**: schema 44's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
+ * UNCHANGED, re-governed to THE LAST CLOSE (the chair's ruling CL26 of 2026-11-18, carried from the first close; the owner's word "Yes to both", 2026-11-18 about 19:07 UTC): the rounds' eleven new reads since the
+ * register was last frozen (e56e112e2) ADMITTED BY CAUSE, each with its class in the instrument's vocabulary and its
+ * landing; nothing declared, nothing gone. Its full rationale lives beside `LAST_CLOSE_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_FINAL_PASS_BASELINE_SCHEMA` is **44**: schema 43's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
  * UNCHANGED, re-governed to THE CLOSE'S FINAL PASS (the chair's ruling OR2 of 2026-11-15, its law carried to the FINAL PASS at f76fe38fd): one lawful shrink and one row recorded as uncured
  * instrument erosion. Its full rationale lives beside `FINAL_PASS_TARGET_SCHEMA` in
  * `migrate-observed-shape-readers.mjs`.
@@ -663,7 +669,10 @@ export const RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA = 42;
 /** The RETIRED close-of-round definition — schema 44's predecessor. Never redefined, never deleted, so a schema-43
  *  PREDECESSOR is still validated as schema 43. */
 export const RETIRED_CLOSE_ROUND_BASELINE_SCHEMA = 43;
-export const BASELINE_SCHEMA = 44;
+/** The RETIRED final-pass definition — schema 45's predecessor. Never redefined, never deleted, so a schema-44
+ *  PREDECESSOR is still validated as schema 44. */
+export const RETIRED_FINAL_PASS_BASELINE_SCHEMA = 44;
+export const BASELINE_SCHEMA = 45;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1488,8 +1497,18 @@ export function validateSchema43Baseline(baseline) {
   );
 }
 
-/** The LIVE envelope validator, bound to `BASELINE_SCHEMA` (schema 44, the close's final pass). */
+/** The RETIRED authority — schema 44's tagged envelope (the close's final pass), re-governed by schema 45 to the
+ *  last close. Re-bound to its own LITERAL. */
 export function validateSchema44Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_FINAL_PASS_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The LIVE envelope validator, bound to `BASELINE_SCHEMA` (schema 45, the last close). */
+export function validateSchema45Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

@@ -21,7 +21,8 @@
   "after-base: close-unprinted": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: NEVER PRINTED on the 1,080 births measured at the close: only arm 1 lists it (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed after the release: the line declares its thing through a draw door and its row leaves by --shrink",
   "after-base: close-false": "a line the round of 2026-11-14/15 wrote or reworded after the instrument's base: PRINTS IN TOWNS THAT LACK ITS THING (its count is in the table) on the 1,080 births measured at the close (the walker's 360 and the census's 720; measured at c090179c1; the table is docs/chair/2026-11-15/close/TAIL-CLOSE-PRESUMED-1-HANDBACK.md); banked BY HAND under the chair's ruling PT1 of 2026-11-15, against the letter of the door's base rule, as record 405's seven; owed FIRST in the next round: cured by its declaration and its twin, the row leaves in the cure's commit",
   "after-base: close-strip": "a strip site the round of 2026-11-14/15 wrote after the instrument's base: the pool passes the declared filter first and its lines are unwrapped only to be printed (not a draw); banked BY HAND under the chair's ruling PT2 of 2026-11-15, against the letter of the door's base rule, as record 405's row; owed after the release: the site reads the door's own text field and the row leaves",
-  "after-base: owner-2026-11-18": "a line written after the instrument's base (BAR5-MARKS's three siege twins of institutionDescVariants.js; BAR5-SAFETY's court-and-prison twin of guardLineUnderTheLaw.js) that the chair read TRUE WHERE IT PRINTS by a guarantee this walker does not read (the twin's own `crisis: under_siege`: a besieged town has defenders; the hired company's own trade, \"garrison work\" and \"garrison duty\", in its original's words; a twin only of lines drawn under `inst.hasCourtSystem && courthouse && inst.hasPrison`, safetyProfile.js:369-370, the constant has no other reader), and that a seat's own permission check twice refused to bank on the chair's ruling CL23; RECORDED BY THE OWNER'S OWN WORDS in the chair's session, 2026-11-18 04:41:48 UTC, verbatim: \"record the four\"; banked BY HAND by the chair, against the letter of the door's base rule, as record 405's seven and the tail close's PT1 rows; owed after the release: each line declares through a door what guarantees it, and the row leaves"
+  "after-base: owner-2026-11-18": "a line written after the instrument's base (BAR5-MARKS's three siege twins of institutionDescVariants.js; BAR5-SAFETY's court-and-prison twin of guardLineUnderTheLaw.js) that the chair read TRUE WHERE IT PRINTS by a guarantee this walker does not read (the twin's own `crisis: under_siege`: a besieged town has defenders; the hired company's own trade, \"garrison work\" and \"garrison duty\", in its original's words; a twin only of lines drawn under `inst.hasCourtSystem && courthouse && inst.hasPrison`, safetyProfile.js:369-370, the constant has no other reader), and that a seat's own permission check twice refused to bank on the chair's ruling CL23; RECORDED BY THE OWNER'S OWN WORDS in the chair's session, 2026-11-18 04:41:48 UTC, verbatim: \"record the four\"; banked BY HAND by the chair, against the letter of the door's base rule, as record 405's seven and the tail close's PT1 rows; owed after the release: each line declares through a door what guarantees it, and the row leaves",
+  "after-base: lastclose-true": "a line written after the instrument's base by the faults round or the last small round (FAULTS-DESKS point 64, FAULTS-ROWS point 65, LAST-VARIETY point 70) that is TRUE BY CONSTRUCTION wherever it prints, by a guarantee quoted here (CL21's proof (iii): every flagged thing guaranteed where the line prints, by its pool's key or by a declaration): (1) \"court or gaol\" in defense.generated.js is the ATOM'S OWN NAME in a line's `marks` (a declaration, not a printed sentence: the lines that carry it print only where a court or a gaol stands); (2) DS-DEF-3 Moderate v10 \"With no gaol at {settlement}, ...\" and (3) DS-DEF-3 Unsafe v4 \"{settlement} has no court and no gaol. ...\": each names the gaol only to deny it, and each declares `no court or gaol` in its own marks, so it prints only where neither stands; (4) to (6) the village Fish market's three cards (institutionDescVariants.js, FAULTS-ROWS FR20 (2): the catalogue line re-stated as the table's key, institutionalCatalog.js:178, and its twin \"... where salted and dried fish is sold ...\"; the pool #0's twin \"An open stall or small roofed market for salted and dried fish ...\") name the market their own house IS: BY THE POOL'S KEY (the card is the Fish market's own description). Banked BY HAND at the last close by the seat LASTCLOSE-DOORS under the chair's brief BRIEF-LASTCLOSE.md (the ruled ones) and the owner's word of 2026-11-18 ~19:07 UTC \"Yes to both\" (the refresh of the stored reference files), against the letter of the door's base rule, as record 405's rows, PT1's and the owner's four; owed after the release: each line declares through a door what guarantees it, and the row leaves"
  },
  "arm1": {
   "src/components/AccountPage.jsx": [
@@ -2462,6 +2463,24 @@
     "after-base: close-true",
     "With {settlement} under siege, quarrels over rations and theft of food are the trouble on its streets now.",
     "7ec4bbb368deec23"
+   ],
+   [
+    "prison",
+    "after-base: lastclose-true",
+    "court or gaol",
+    "cdfd7209ff905ccc"
+   ],
+   [
+    "prison",
+    "after-base: lastclose-true",
+    "With no gaol at {settlement}, nobody who does wrong here can be locked away; most go on living beside the people they wr",
+    "0f84b6bcdfe54ade"
+   ],
+   [
+    "prison",
+    "after-base: lastclose-true",
+    "{settlement} has no court and no gaol. Custom and neighbours answer what they can, and the rest goes unanswered.",
+    "214b6eabc4403e1c"
    ]
   ],
   "src/data/dossierStateProse/economy.generated.js": [
@@ -5209,6 +5228,24 @@
     "after-base: owner-2026-11-18",
     "Where a band of soldiers lodges and takes contracts between wars. While the siege holds the roads they hire out by the d",
     "b50dee27dd04b260"
+   ],
+   [
+    "market",
+    "after-base: lastclose-true",
+    "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait.",
+    "7d046b6c7ec09d67"
+   ],
+   [
+    "market",
+    "after-base: lastclose-true",
+    "An open-air stall or small covered market where salted and dried fish is sold. No fresh catch is landed here.",
+    "28300d5213e42c56"
+   ],
+   [
+    "market",
+    "after-base: lastclose-true",
+    "An open stall or small roofed market for salted and dried fish, brought in from elsewhere. The catch is no longer landed",
+    "d4df2c2a78573206"
    ]
   ],
   "src/data/institutionLadders.js": [
@@ -28878,6 +28915,11 @@
   [
    "src/domain/explanation.js",
    "(deriveAllStructuredHooks(settlement))",
+   "not-a-draw"
+  ],
+  [
+   "src/domain/facts/needNotBroughtIn.js",
+   "filterDeclared(declared, { facts: () => ({ tier }), poolId: 'trade-list:imports', surface: 'economic",
    "not-a-draw"
   ],
   [

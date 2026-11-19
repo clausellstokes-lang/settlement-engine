@@ -28,6 +28,10 @@ const CANONICAL_INSTITUTION_CHAIN = [
   'isolationPass',
   'factionCorrelationPass',
   'coherenceRepairPass',
+  // LASTCLOSE-DOORS (2026-11-19, the last close): assembleSettlement joins the chain, last: it declares mutates:['institutions']
+  // for the late re-read (readHouseDescsLate, FAULTS-ROWS point 65, the chair's FR14), which corrects a refused description in
+  // place after every roster write and is gated off a held roster (assembleSettlement.js:457). It adds or removes no house.
+  'assembleSettlement',
 ];
 
 // Scratch keys → the step that declares (and writes) them.

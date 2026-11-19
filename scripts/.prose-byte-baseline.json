@@ -55,26 +55,26 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 281298,
-      "gzip": 37154,
+      "raw": 287394,
+      "gzip": 37962,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 195233,
-      "gzip": 26610,
+      "raw": 196627,
+      "gzip": 26784,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 306982,
-      "gzip": 38767,
+      "raw": 307568,
+      "gzip": 38822,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 135398,
-      "gzip": 18681,
+      "raw": 136414,
+      "gzip": 18762,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
@@ -723,6 +723,38 @@
       "toRaw": 148435,
       "gzipAfter": 20910,
       "reason": "+600 B raw over the committed 147835 (gzip level 9: 20823 -> 20910), measured on disk at 70e557d5b (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: BAR6-CULTURE (JOIN-17 point 10, cd40ad0e0) +600, the declarations its batches added to the stressor and condition lines; they compose exactly (147835 -> 148435); 57.3 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE LAST CLOSE (2026-11-19; points 51/52/59, 61, 64, 70 of the sixth chair's landings): the landings' declared lines and twins of state prose, re-recorded once by LASTCLOSE-DOORS at the base cc11c9504 (the chair's ruling on its hand-back's §3 (3): the prose byte ratchet is a door figure; vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 281298,
+      "toRaw": 287394,
+      "gzipAfter": 37962,
+      "reason": "+6096 B raw over the committed 281298 (gzip level 9: 37154 -> 37962), measured on disk at cc11c9504 (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: DESKS-ECO/-DEF/-2 (points 51, 52, 59, ae4f90835) +1742; FAULTS-DESKS (point 64, f4e195512) +558; LAST-VARIETY (point 70, 8380df4de) +3796; they compose exactly (281298 -> 287394); 58.9 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE LAST CLOSE (2026-11-19; points 51/52/59, 61, 64, 70 of the sixth chair's landings): the landings' declared lines and twins of state prose, re-recorded once by LASTCLOSE-DOORS at the base cc11c9504 (the chair's ruling on its hand-back's §3 (3): the prose byte ratchet is a door figure; vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 195233,
+      "toRaw": 196627,
+      "gzipAfter": 26784,
+      "reason": "+1394 B raw over the committed 195233 (gzip level 9: 26610 -> 26784), measured on disk at cc11c9504 (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: DESKS-ECO/-DEF/-2 (points 51, 52, 59, ae4f90835) +905; FAULTS-NEED (point 61, 3ae86a8b3) +489; they compose exactly (195233 -> 196627); 49.9 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE LAST CLOSE (2026-11-19; points 51/52/59, 61, 64, 70 of the sixth chair's landings): the landings' declared lines and twins of state prose, re-recorded once by LASTCLOSE-DOORS at the base cc11c9504 (the chair's ruling on its hand-back's §3 (3): the prose byte ratchet is a door figure; vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 306982,
+      "toRaw": 307568,
+      "gzipAfter": 38822,
+      "reason": "+586 B raw over the committed 306982 (gzip level 9: 38767 -> 38822), measured on disk at cc11c9504 (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: DESKS-ECO/-DEF/-2 (points 51, 52, 59, ae4f90835) +586; they compose exactly (306982 -> 307568); 38.6 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE LAST CLOSE (2026-11-19; points 51/52/59, 61, 64, 70 of the sixth chair's landings): the landings' declared lines and twins of state prose, re-recorded once by LASTCLOSE-DOORS at the base cc11c9504 (the chair's ruling on its hand-back's §3 (3): the prose byte ratchet is a door figure; vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 135398,
+      "toRaw": 136414,
+      "gzipAfter": 18762,
+      "reason": "+1016 B raw over the committed 135398 (gzip level 9: 18681 -> 18762), measured on disk at cc11c9504 (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: DESKS-ECO/-DEF/-2 (points 51, 52, 59, ae4f90835) +1016; they compose exactly (135398 -> 136414); 38.2 per cent of its ceilingRaw"
     }
   ],
   "ceilingTransfersNewLeaves": [
