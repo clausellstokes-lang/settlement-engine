@@ -38,6 +38,7 @@
  */
 
 import { deriveAllActiveConditions } from './activeConditions.js';
+import { chainPrintName } from './display/chainPrintName.js';
 
 // ── Local typedefs ────────────────────────────────────────────────────────
 
@@ -494,12 +495,13 @@ function inferController(chain) {
 
 /**
  * @param {LegacyChain | null | undefined} chain
+ * @param {unknown} [printedResource] the source the page gives the chain (`chainPrintName`)
  * @returns {string[]}
  */
-function inferDependencies(chain) {
+function inferDependencies(chain, printedResource = chain?.resource) {
   /** @type {string[]} */
   const out = [];
-  if (chain?.resource) out.push(`resource: ${chain.resource}`);
+  if (chain?.resource) out.push(`resource: ${printedResource}`);
   if (Array.isArray(chain?.upstreamChains)) {
     for (const u of chain.upstreamChains) out.push(`upstream: ${u}`);
   }
@@ -547,6 +549,13 @@ export function deriveSupplyChainState(chain, settlement) {
   const baseStatus = canonicalSupplyChainStatus(chain.status);
   const regionalPressures = inferRegionalPressures(chain, settlement);
   const status = applyRegionalPressureToStatus(baseStatus, regionalPressures);
+  // The derived name and the dependency line are PRINTED words (the explanation rail, the causal views, the
+  // capacity and causal-state contributors, the counterfactual's labels): they are the name and source the page
+  // gives the chain (`chainPrintName`: the toll's by the town's access). `resource`, `resourceKey` and the id stay
+  // the record's (logic keys: the regional propagation and the goods matchers read them).
+  const shown = settlement
+    ? chainPrintName(chain, /** @type {{ config?: { tradeRouteAccess?: unknown } }} */ (settlement))
+    : { label: chain.label, resource: chain.resource };
 
   return {
     // @ts-ignore -- chain is non-null here (guarded above), so chainIdFromShape's null branch is unreachable.
@@ -554,7 +563,7 @@ export function deriveSupplyChainState(chain, settlement) {
     // Honor canonical `name` first so re-deriving a previously-derived
     // chain produces the same shape (idempotent contract). Falls back
     // to the legacy label / chainId on first-pass derivation.
-    name: chain.name || chain.label || chain.chainId || 'Unnamed chain',
+    name: chain.name || /** @type {string | undefined} */ (shown.label) || chain.chainId || 'Unnamed chain',
     needKey: chain.needKey,
     needLabel: chain.needLabel,
 
@@ -564,7 +573,7 @@ export function deriveSupplyChainState(chain, settlement) {
     legacyStatus: chain.legacyStatus || chain.status,
 
     controller:          inferController(chain),
-    dependencies:        inferDependencies(chain),
+    dependencies:        inferDependencies(chain, shown.resource),
     substitutes:         inferSubstitutes(chain),
     beneficiaries:       inferBeneficiaries(chain),
     victims:             inferVictims(chain),

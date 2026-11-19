@@ -94,7 +94,16 @@ describe('the Crisis page', () => {
       const rows = q.queryAllByTestId('crisis-cast-row');
       expect(rows.map((r) => r.getAttribute('data-role'))).toEqual(entry.cast.roles.map((r) => r.role));
       entry.cast.roles.forEach((r, j) => { expect(rows[j].textContent).toContain(r.name); expect(rows[j].textContent).toContain(r.reason); });
-      expect(q.queryAllByTestId('crisis-stake').length).toBe(entry.cast.stakes.length);
+      // re-keyed by identity (TAIL-CRISIS-6, K25 (c)): a row per stake the record holds, but none for a power the crisis has
+      // not touched (the record's split "it could side with either camp" with no quarrel and no seat: silence is true)
+      const stakeRows = q.queryAllByTestId('crisis-stake').length;
+      expect(stakeRows).toBeGreaterThanOrEqual(entry.cast.stakes.filter((k) => k.reason !== 'it could side with either camp').length);
+      expect(stakeRows).toBeLessThanOrEqual(entry.cast.stakes.length);
+      const stakeText = q.queryAllByTestId('crisis-stake').map((r) => r.textContent).join(' ');
+      // TAIL-CLOSE-TESTS-C: the liveness anchor: every stake the record gives a row prints its reason in the rows read here
+      entry.cast.stakes.filter((k) => k.reason !== 'it could side with either camp').forEach((k) => expect(stakeText).toContain(k.reason));
+      // anchored: the line above shows the stake rows' text is live (each held stake's reason prints in it)
+      expect(stakeText).not.toMatch(/no stake yet/);
       expect(q.queryAllByTestId('crisis-lever').length).toBe(entry.cast.levers.length);
       expect(q.getAllByTestId('crisis-see-first').length).toBeGreaterThan(0);
       expect(q.getByTestId('crisis-if-nothing').textContent).toBe(entry.viabilityNote);

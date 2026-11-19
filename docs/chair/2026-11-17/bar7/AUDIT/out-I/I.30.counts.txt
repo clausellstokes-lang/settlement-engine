@@ -1,0 +1,66 @@
+BAR7-AUDIT-I over 30 towns: 15 counted instances in 12 towns, 14 distinct lines · apart 76
+rule                 towns  inst  distinct  crisis/other   (apart: towns inst distinct)
+10i.pair                 1     1         1           0/1   
+5x.slash                 1     1         1           0/1   
+5x.slash-list            0     0         0           0/0   (1 1 1)
+6e.no-higher             1     1         1           1/0   
+6e.realm-world           0     0         0           0/0   (12 12 1)
+7x.occupied-seat         1     1         1           1/0   
+9a.order                 1     1         1           1/0   
+9g.food                  1     1         1           1/0   
+9g.food-soft             0     0         0           0/0   (1 1 1)
+9g.margin                1     2         2           2/0   
+9g.margin-mild           0     0         0           0/0   (2 2 1)
+9g.margin-war            0     0         0           0/0   (1 3 3)
+9g.source                1     1         1           0/1   
+9g.stores                1     1         1           0/1   
+9g.subsistence           1     1         1           0/1   
+9h.entrepot              1     1         1           0/1   
+9h.no-exports            1     1         1           1/0   
+9i.crews                 2     2         1           1/1   
+design.outside           0     0         0           0/0   (6 13 4)
+low.agree                0     0         0           0/0   (3 3 2)
+low.doubled              0     0         0           0/0   (19 31 24)
+low.generation           0     0         0           0/0   (9 9 9)
+low.hook-party           0     0         0           0/0   (1 1 1)
+controls: STANDS found 13/13 · EXPLAINED clean 16/16 · n/a 9
+C18905   9g.subsistence    STANDS    found          The hamlet is plainly past subsistence.
+C41011   9g.food           STANDS    found          Traders seldom reach Castelsinum, and people there seldom miss them: the town has more tha
+C15153   9g.margin         STANDS    found          Quirigich closes every year ahead.
+C41850   9g.source         STANDS    found          Lykopetra's own food comes first of all from its fishing, so one bad year for the fishing 
+C20830   9h.no-exports     STANDS    found          No significant exports.
+C32912   9h.entrepot       STANDS    found          Shattserai sells on goods it never made: some of what leaves the thorp entered it as impor
+C23038   9i.crews          STANDS    found          Rival crews at Bjornli are fighting over who runs the streets, and until one wins, people 
+C39691   9i.crews          STANDS    found          Rival crews at Gangapalli are fighting over who runs the streets, and until one wins, peop
+C5430    9a.order          STANDS    found          The garrison keeps order, and more harshly as the food runs down.
+C40850   7x.occupied-seat  STANDS    found          At Castelsinum one audience with the Feudal Appointee gets a decision, good or bad, and it
+C19351   10i.pair          STANDS    found          Nessa Lynch and Sorcha MacDonald are allies with separate interests.
+C16768   6e.no-higher      STANDS    found          Wants Satisfy the crown requisition order without stripping the settlement to the bone
+C25601   5x.slash          STANDS    found          Jómsmo's Weavers/Textile workers can offer less the longer its supplies stay short, and no
+C0350    design.outside    EXPLAINED clean          The crops failed here this year, and what food can still be bought from outside costs more
+C0351    design.outside    EXPLAINED clean          The settlement must decide what it can still afford to import, and the merchants are watch
+C7307    design.outside    EXPLAINED clean          One importer now brings in all the grain and has quadrupled the price; the locals are argu
+C7309    design.outside    EXPLAINED clean          The fishing failed here this year, and what food can still be bought from outside costs mo
+C33342   design.outside    EXPLAINED clean          One importer now brings in all the grain and has quadrupled the price; the locals are argu
+C45848   design.outside    EXPLAINED clean          One importer now brings in all the grain and has quadrupled the price; the locals are argu
+C18116   -                 EXPLAINED clean          A dispute over grazing rights and water access has run for two seasons, and the families o
+C18655   -                 EXPLAINED clean          A dispute over grazing rights and water access has run for two seasons, and the families o
+C19016   10i.pair          EXPLAINED clean          Refusing would cost the alliance its majority.
+C35191   -                 EXPLAINED clean          Craftspeople at Cerroripa answer to their guilds and the guilds settle their quarrels amon
+C46532   -                 EXPLAINED clean          Priests and mages in Kamenvich share authority: the church blesses the mages' work, and th
+C24744   -                 EXPLAINED clean          The road into Jómsmo becomes part of the settlement at a point you can't precisely identif
+C31302   10i.pair          EXPLAINED clean          NPC Relationships (87)▲
+C9756    -                 EXPLAINED clean          Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's bles
+C12371   9g.margin         EXPLAINED clean          Plavigorod closes every year ahead.
+C27960   9g.margin         EXPLAINED clean          Jómsmo closes every year ahead.
+C36932   -                 WEAK      not found      It is noticed, and so far it does little harm.
+C11472   -                 WEAK      not found      Secret: Lied about the death of a prisoner who died in the cells after a beating ordered f
+C211337  9h.no-exports-record STANDS    n/a            town not in this render
+C217617  9h.no-exports-record STANDS    n/a            town not in this render
+C93420   9h.no-exports     BOTH      n/a            town not in this render
+C61967   9g.margin         EXPLAINED n/a            town not in this render
+C58141   9g.margin         EXPLAINED n/a            town not in this render
+C48148   6e.crown          EXPLAINED n/a            town not in this render
+C48270   6e.crown          EXPLAINED n/a            town not in this render
+C48442   6e.crown          EXPLAINED n/a            town not in this render
+C24588   low.generation    EXPLAINED n/a            town not in this render

@@ -1,0 +1,16 @@
+192c192,196
+<   const flags = getInstFlags(config, institutions);
+---
+>   const __exN = globalThis.__U6_excludeNamed, __exP = globalThis.__U6_excludePresence;
+>   const __lc = (i) => String(i?.name || '').toLowerCase();
+>   const namedInst = __exN ? institutions.filter((i) => !__exN.some((k) => __lc(i).includes(k))) : institutions;
+>   const presenceInst = __exP ? institutions.filter((i) => !__exP.some((k) => __lc(i).includes(k))) : institutions;
+>   const flags = getInstFlags(config, namedInst);
+211c215
+<   const names = defenseTraditionNamesOf(institutions);
+---
+>   const names = defenseTraditionNamesOf(namedInst);
+237c241
+<     ? computeEffectiveMagicPresence(institutions, { ...config, nearbyResources: config.nearbyResources || [] }).score
+---
+>     ? computeEffectiveMagicPresence(presenceInst, { ...config, nearbyResources: config.nearbyResources || [] }).score

@@ -23,6 +23,7 @@
  *   famine-stores            famineStoresFindings         per surface (lane RUNG2-F13)
  *   migration-direction      migrationDirectionFindings   per surface (lane RUNG2-F13)
  *   crisis-cast-sense        crisisCastSenseFindings      once over the Tonight sheet and the page (lane RUNG2-F13)
+ *   page-census              pageCensusFindings           once over the rendered dossier's views (W2-A-LEAVES)
  *
  * The three RUNG2-F13 checks (crisisFactFindings.js) are the page battery's too: the soak's kind
  * 10, "crisis" (scripts/audit/soak-review/checks.mjs :: KIND_OF).
@@ -30,6 +31,11 @@
  * The three RUNG1B-F9 checks (readerContradictionFindings.js) read two rendered tabs side by
  * side, so like `hook-truth-page` they are the page battery's alone: the record battery the
  * generation receipt runs never sees them, and no receipt moves.
+ *
+ * `page-census` (W2-A-LEAVES, 2026-11-12; the second wave's rendered-dossier arm) reads the surfaces whose id is a
+ * rendered view, `'Group/Tab'` (the walk of tests/components/pageCensusWalk.shared.mjs), and reports one finding
+ * per census pattern the dossier carries, its row first in the detail. A caller that hands no such view gets
+ * none. Its corpus arm is scripts/census/page-census.mjs; every row's bar is zero.
  *
  * `crisis-blind-prose` (lane F12, rung 2, crisisBlindFindings.js) is a page check too: a calm
  * sentence printed under an active crisis it denies. It reads every surface at once and
@@ -51,6 +57,7 @@ import { crisisBlindFindings } from './crisisBlindFindings.js';
 import {
   crisisCastSenseFindings, famineStoresFindings, migrationDirectionFindings,
 } from './crisisFactFindings.js';
+import { pageCensusFindings, viewsOfSurfaces } from './pageCensusFindings.js';
 
 /**
  * @typedef {object} BatteryFinding
@@ -65,7 +72,7 @@ export const BATTERY_CHECKS = Object.freeze([
   'defense-words', 'faith-denial', 'food-words', 'hook-truth-record', 'hook-truth-page',
   'magic-words', 'seat-holder', 'tier-noun',
   'grade-vs-food', 'magic-absent-prose', 'crime-denied-and-listed', 'crisis-blind-prose',
-  'famine-stores', 'migration-direction', 'crisis-cast-sense',
+  'famine-stores', 'migration-direction', 'crisis-cast-sense', 'page-census',
 ]);
 
 /** The page checks that read two rendered tabs together: check → [surface, instrument]. */
@@ -81,7 +88,7 @@ const CRISIS_SURFACE_CHECKS = Object.freeze(/** @type {const} */ ([
 ]));
 const PAGE_ONLY = new Set([
   'hook-truth-page', 'crisis-blind-prose', ...READER_CHECKS.map(([check]) => check),
-  ...CRISIS_SURFACE_CHECKS.map(([check]) => check), 'crisis-cast-sense',
+  ...CRISIS_SURFACE_CHECKS.map(([check]) => check), 'crisis-cast-sense', 'page-census',
 ]);
 
 /**
@@ -141,6 +148,10 @@ export function coherenceBattery(settlement, surfaces, options = {}) {
       found = [{ surface: 'tonight', quote: '', detail: `instrument threw: ${str(error instanceof Error ? error.message : error)}` }];
     }
     for (const f of found) crisis.push({ check: 'crisis-cast-sense', surface: f.surface, quote: str(f.quote).trim(), detail: f.detail });
+  }
+  if (runs('page-census')) {
+    collect('page-census', 'page', () => pageCensusFindings(settlement, viewsOfSurfaces(surfaces ?? {})),
+      (f) => ({ quote: str(f.quote), detail: `${str(f.row)}: ${str(f.detail)}` }), crisis);
   }
   const at = out.filter((f) => f.check === 'hook-truth-record').length;
   return [...out.slice(0, at), ...page, ...out.slice(at), ...reader, ...crisis];

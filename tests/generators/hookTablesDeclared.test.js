@@ -28,21 +28,41 @@ const textOf = (row) => (typeof row === 'string' ? row : row.text);
 
 describe('the history hooks declare what their event does not guarantee', () => {
   // CENSUS-3e (R-AA): demographic_pressure's three hooks declare their migration direction (15 rows).
-  it('the fifteen declaring rows carry their atoms, every atom declarable', () => {
+  // W2-FIX-DATA (2026-11-13, the REVIEW-W2B cold list): guild_conflict's two guild hooks declare the guild (homed by facts/guild.js), and
+  // the crime wave's guard captain declares a watch, not any guard (a household levy has no captain): 15 → 17 rows.
+  // W2-FIX-DATA-5 (2026-11-13, ROUND-3-CUT-INCREMENT ww-544): the succession crisis's ailing and poisoned ruler exclude the vacant seat's crisis too (re-keyed by cause; still 17 rows).
+  // W2-FIX-DATA-HISTORY item C (2026-11-13, the review of the data lane, L4): the occupation's "former occupier officer"
+  // excludes an occupation in force ("former" says it is over; re-keyed by cause: 17 → 18 rows).
+  // W2-FIX-DATA-HISTORY item E (2026-11-13, CENSUS-2): the plague's healer declares the healer, and the wild magic's
+  // spreading district a town (re-keyed by cause: 18 → 20 rows). Item G (pf-160): the ailing and the poisoned ruler
+  // exclude an elders' council too (re-keyed by cause; still 20 rows).
+  // TAIL-HISTORY batch 1 (2026-11-15, the chair's Y1, Y7; READ-ALL 22261, 02538, B02462): the external threat's two war
+  // hooks ("wartime contracts", "the war party is suppressing") exclude `war: peace` (re-keyed by identity: 20 → 22 rows).
+  // TAIL-HISTORY-5 (2026-11-15, the chair's Y17; the exports' read X9 03015): the outside debt's creditor's agent "in town"
+  // excludes `crisis: under_siege` (re-keyed by identity: 22 → 23 rows).
+  it('the twenty-three declaring rows carry their atoms, every atom declarable', () => {
     const declaring = HISTORY_ROWS.filter(({ row }) => typeof row === 'object');
     expect(declaring.map(({ type, row }) => `${type}: ${[...(row.needs || []), ...(row.excludes || []).map((x) => `no ${x}`)].join(', ')}`)).toEqual([
-      'succession_crisis: no ruler: council',
-      'succession_crisis: no ruler: council',
+      'succession_crisis: no ruler: council, no ruler: elder, no crisis: succession_void',
+      'succession_crisis: no ruler: council, no ruler: elder, no crisis: succession_void',
       'economic_disparity: tier: >= town',
-      'guild_conflict: market',
+      'guild_conflict: guild',
+      'guild_conflict: guild',
+      'guild_conflict: market, guild', // BAR3-PLACES-3 (2026-11-15, C13868): "both guilds" declares the guild too
+      'external_threat: no war: peace', // TAIL-HISTORY batch 1: "…profits from wartime contracts"
+      'external_threat: no war: peace', // TAIL-HISTORY batch 1: "…the war party is suppressing"
       'resource_scarcity: market',
-      'crime_wave: guardPresence',
+      'crime_wave: watch',
+      'outside_debt: no crisis: under_siege', // TAIL-HISTORY-5: "A creditor's agent is in town…"
+      'occupation_legacy: no crisis: occupied',
       'market_crash: market',
+      'plague_years: healer',
       'great_flood: navigable',
       'great_flood: navigable',
       'heresy_trial: institution: temple',
       'pilgrimage_surge: institution: temple',
       'pilgrimage_surge: institution: temple',
+      'wild_magic: tier: ≥ town',
       'demographic_pressure: migration: influx',
       'demographic_pressure: migration: exodus',
       'demographic_pressure: migration: influx',
@@ -58,8 +78,8 @@ describe('the history hooks declare what their event does not guarantee', () => 
       ['the ailing ruler wants a final errand', { excludes: ['ruler: council'] }],
       ['someone is poisoning the ruler slowly', { excludes: ['ruler: council'] }],
       ['a hidden ledger documenting wage theft', { needs: ['tier: >= town'] }],
-      ['someone is sabotaging both guilds', { needs: ['market'] }],
-      ['a warehouse full of the scarce goods', { needs: ['market'] }],
+      ['someone is sabotaging both guilds', { needs: ['market', 'guild'] }], // BAR3-PLACES-3 (2026-11-15, C13868)
+      ['a store of the scarce goods', { needs: ['market'] }], // W2-FIX-DATA-HISTORY item G: the hook's words (was "a warehouse full of")
       ['a guard captain is on the payroll', { needs: ['guardPresence'] }],
       ['a ledger names who was warned', { needs: ['market'] }],
       ['a structure meant to hold back the water', { needs: ['navigable'] }],
@@ -101,14 +121,21 @@ describe('the outlook hooks carry their declarations beside the branches that pr
     expect(printed.includes('export const OUTLOOK_HOOK_SIBLINGS'), 'the printer carries no table of its own').toBe(false);
     // The old path still answers (scripts/lib/table-pools.mjs enrols the channel at foodBalance.js).
     expect((await import('../../src/generators/economy/foodBalance.js')).OUTLOOK_HOOK_SIBLINGS).toBe(OUTLOOK_HOOK_SIBLINGS);
-    expect(Object.keys(OUTLOOK_HOOK_SIBLINGS).length).toBe(3);
+    // COHERENCE-AGREE (2026-11-11): the timber line's second event, the war line, its three events in peace, the starving set.
+    expect(Object.keys(OUTLOOK_HOOK_SIBLINGS).map((k) => k.split(' ').slice(0, 4).join(' '))).toEqual([
+      'Something is killing the', 'War has taken the', 'The timber rafts stopped', 'Iron has doubled in', // TAIL-CRISIS K9: re-keyed by identity
+      'The iron carts are', 'A new toll on', 'The settlement is starving.']);
     for (const [key, set] of Object.entries(OUTLOOK_HOOK_SIBLINGS)) {
       expect(printed.includes(key), key.slice(0, 40)).toBe(true);
       expect(set[0].text).toBe(key);
       for (const a of set[0].needs) expect(assertDeclarable(a).dimension, a).toBeTruthy();
       if (set[1]) {
         expect(set[1].twinOf).toBe(key);
-        expect(set[1].excludes).toEqual(set[0].needs);
+        // RE-SPELLED 2026-11-12 (COHERENCE-AGREE-3, REVIEW-AGREE F4), stricter, not looser: a twin answers its
+        // original's needs AND keeps its original's refusals (the war line's twin asserts the war too, so it
+        // refuses the peace as its original does). For every set whose original refuses nothing — all but the
+        // war line and the three peace events — this is the assertion it was.
+        expect(set[1].excludes).toEqual([...set[0].needs, ...(set[0].excludes || [])]);
       }
     }
     // the [sea] case: the timber twin says no ships

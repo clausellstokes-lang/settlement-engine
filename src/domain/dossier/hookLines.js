@@ -39,6 +39,7 @@
 import { fnv1a32 } from '../../kernel/proseHash.js';
 import { drawDeclared, lineText } from '../facts/drawDeclared.js';
 import { pluralPowerName } from '../display/governanceAccount.js';
+import { powerSentenceName } from '../../data/people/powerSentenceName.js';
 
 /**
  * The issue families, in the order they are tested. A family is matched on the issue text
@@ -67,7 +68,10 @@ const ISSUE_FAMILIES = Object.freeze([
  * `{ name, plural }` and speaks its verbs, possessives and pronouns through the helpers below, so the
  * sentence agrees with the name it slots. Plurality is read by the head word, as the governance
  * account reads it (`domain/display/governanceAccount.js :: pluralPowerName`) — one reader for one fact.
- * @typedef {{ name: string, plural: boolean }} HookParty
+ * BAR6-POWERS (LAW 10h, the audit's C1980 and C76763): the NAME a line prints is the power's prose form (`powerSentenceName`,
+ * the one reader: "The Guard", never the roster label "Military/Guard" beside a verb), as `conflicts.js` and the Institutions
+ * tab print it; the KEY is the record's own spelling, so the draw keys on what it always keyed on and no hook is re-drawn.
+ * @typedef {{ name: string, plural: boolean, key: string }} HookParty
  */
 
 /**
@@ -83,8 +87,9 @@ const ISSUE_FAMILIES = Object.freeze([
  * @returns {HookParty}
  */
 export function hookPartyOf(name, fallback) {
-  const spelled = typeof name === 'string' && name !== '' ? name : fallback;
-  return Object.freeze({ name: spelled, plural: pluralPowerName(spelled) });
+  const key = typeof name === 'string' && name !== '' ? name : fallback;
+  const spelled = key === fallback ? key : powerSentenceName(key);
+  return Object.freeze({ name: spelled, plural: pluralPowerName(spelled), key });
 }
 
 // ── THE AGREEMENT, ONE HELPER PER WORD (the singular spelling is the line's old text, byte for byte) ──
@@ -133,7 +138,7 @@ const PROPERTY_LINES = Object.freeze([
   (a, b, issue) => `An inventory of ${issue} came up short, and ${a.name} and ${b.name} each say the other took the difference.`,
   (a, b, issue) => `${b.name} ${has(b)} produced an old deed bearing on ${issue}; it is good enough for ${a.name} to take seriously and old enough for ${a.name} to doubt.`,
   (a, b, issue) => `Someone has been moving what ${issue} covers out of the building at night, and both ${a.name} and ${b.name} assume the other arranged it.`,
-  (a, b, issue) => `${a.name} ${has(a)} offered to split ${issue} down the middle, and ${of(b)} own members cannot agree whether to take it.`,
+  (a, b, issue) => `${a.name} ${has(a)} offered to split ${issue} down the middle, and ${b.name} ${has(b)} not yet said whether ${it(b)} will take it.`, // BAR6-POWERS (LAW 6 › 6d-members' class, LAW 5W office): no members presumed of a power that may be one person
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
@@ -245,8 +250,8 @@ export function createConflictHookDraw(facts = null) {
     const parties = Array.isArray(conflict?.parties) ? conflict.parties : [];
     const pa = hookPartyOf(parties[0], 'One power');
     const pb = hookPartyOf(parties[1], 'another');
-    const a = pa.name;
-    const b = pb.name;
+    const a = pa.key; // the draw's key: the record's spelling (BAR6-POWERS 10h: the printed name is `pa.name`)
+    const b = pb.key;
     const rawIssue = typeof conflict?.issue === 'string' ? conflict.issue : '';
     // THE ISSUE RIDES MID-SENTENCE, so it is spoken the way the sentence needs it. The
     // record stores it as a Title-Case label ("Control of the dock taxation authority");

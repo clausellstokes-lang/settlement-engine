@@ -1,0 +1,2570 @@
+{
+ "before": {
+  "findings": 2430,
+  "pairs": 2368,
+  "towns": 633
+ },
+ "after": {
+  "findings": 2012,
+  "pairs": 1965,
+  "towns": 588
+ },
+ "changedWords": {
+  "notary": [
+   67,
+   0
+  ],
+  "guardCaptain": [
+   9,
+   0
+  ],
+  "smith": [
+   196,
+   0
+  ],
+  "physician": [
+   54,
+   0
+  ],
+  "prisoner": [
+   54,
+   0
+  ],
+  "mason": [
+   15,
+   0
+  ],
+  "armoury": [
+   23,
+   0
+  ]
+ },
+ "left": {
+  "n": 418,
+  "byWord": {
+   "notary": 67,
+   "guardCaptain": 9,
+   "smith": 196,
+   "physician": 54,
+   "prisoner": 54,
+   "mason": 15,
+   "armoury": 23
+  }
+ },
+ "entered": {
+  "n": 0,
+  "byWord": {}
+ },
+ "leftLines": [
+  {
+   "seed": "r2r-thorp-0",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Pro-magicAnti-magicRegulation advocates"
+  },
+  {
+   "seed": "r2r-thorp-0",
+   "word": "notary",
+   "view": "World/History",
+   "quote": "Pro-magicAnti-magicRegulation advocates"
+  },
+  {
+   "seed": "r2r-thorp-1",
+   "word": "guardCaptain",
+   "view": "Summary/Plot Hooks",
+   "quote": "A guard captain is on the payroll of the criminal network"
+  },
+  {
+   "seed": "r2r-thorp-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-thorp-5",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-6",
+   "word": "guardCaptain",
+   "view": "Summary/Plot Hooks",
+   "quote": "A guard captain is on the payroll of the criminal network"
+  },
+  {
+   "seed": "r2r-thorp-7",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-thorp-8",
+   "word": "guardCaptain",
+   "view": "Summary/Plot Hooks",
+   "quote": "A guard captain is on the payroll of the criminal network"
+  },
+  {
+   "seed": "r2r-thorp-11",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-12",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "What survives from that time says: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-thorp-14",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-16",
+   "word": "guardCaptain",
+   "view": "Summary/Plot Hooks",
+   "quote": "A guard captain is on the payroll of the criminal network"
+  },
+  {
+   "seed": "r2r-thorp-16",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-thorp-17",
+   "word": "guardCaptain",
+   "view": "Summary/Plot Hooks",
+   "quote": "A guard captain is on the payroll of the criminal network"
+  },
+  {
+   "seed": "r2r-thorp-18",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-22",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-thorp-22",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-24",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Families who lived through it tell it this way: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-thorp-25",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-thorp-25",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Offering of the Forge"
+  },
+  {
+   "seed": "r2r-thorp-26",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-26",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Larisa Sokolov has written down what Daria Lebedev owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-thorp-28",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-thorp-28",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-thorp-29",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-thorp-30",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-thorp-31",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-33",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-thorp-36",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-thorp-40",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-41",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-43",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "What survives from that time says: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-thorp-44",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-45",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-thorp-46",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "What survives from that time says: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-thorp-47",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-48",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-thorp-50",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-52",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-thorp-54",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "A notary's clerk hurries past with a satchel of contracts."
+  },
+  {
+   "seed": "r2r-thorp-55",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-55",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Contest of the Forge"
+  },
+  {
+   "seed": "r2r-thorp-56",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-57",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-thorp-59",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-hamlet-3",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Guta Müller has written down what Burkhard Wagner owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-hamlet-3",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Guta Müller has written down what Burkhard Wagner owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-hamlet-6",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-hamlet-7",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-hamlet-8",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Jabir al-Malik has written down what Musa al-Aziz owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-hamlet-9",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Essential intermediate step between forest and forge."
+  },
+  {
+   "seed": "r2r-hamlet-10",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2r-hamlet-10",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "The records of that time say: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-hamlet-11",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "A notary's clerk hurries past with a satchel of contracts."
+  },
+  {
+   "seed": "r2r-hamlet-11",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Valeria Cicero has written down what Yelena Severus owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-hamlet-11",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Valeria Cicero has written down what Yelena Severus owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-hamlet-12",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-hamlet-14",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-hamlet-15",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-hamlet-16",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Rain Chuc has written down what Uinal Cohuoh owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-hamlet-17",
+   "word": "guardCaptain",
+   "view": "Summary/Plot Hooks",
+   "quote": "A guard captain is on the payroll of the criminal network"
+  },
+  {
+   "seed": "r2r-hamlet-18",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-hamlet-18",
+   "word": "mason",
+   "view": "Systems/Economics",
+   "quote": "Stone Quarrying Stone masons work imported material;"
+  },
+  {
+   "seed": "r2r-hamlet-20",
+   "word": "guardCaptain",
+   "view": "Summary/Plot Hooks",
+   "quote": "A guard captain is on the payroll of the criminal network"
+  },
+  {
+   "seed": "r2r-hamlet-20",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-hamlet-21",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-hamlet-23",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "A notary's clerk hurries past with a satchel of contracts."
+  },
+  {
+   "seed": "r2r-hamlet-23",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Nero Nero has written down what Fabius Aquila owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-hamlet-23",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-hamlet-23",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Nero Nero has written down what Fabius Aquila owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-hamlet-29",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-hamlet-29",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Baothghalach MacCarthy has written down what Ide O'Brien owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-hamlet-31",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-hamlet-33",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Nirmala Balan has written down what Jyoti Chaudhary owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-hamlet-37",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Pro-magicAnti-magicRegulation advocates"
+  },
+  {
+   "seed": "r2r-hamlet-37",
+   "word": "notary",
+   "view": "World/History",
+   "quote": "Pro-magicAnti-magicRegulation advocates"
+  },
+  {
+   "seed": "r2r-hamlet-40",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-hamlet-41",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Pro-magicAnti-magicRegulation advocates"
+  },
+  {
+   "seed": "r2r-hamlet-41",
+   "word": "notary",
+   "view": "World/History",
+   "quote": "Pro-magicAnti-magicRegulation advocates"
+  },
+  {
+   "seed": "r2r-hamlet-42",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-hamlet-44",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-hamlet-48",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Pro-magicAnti-magicRegulation advocates"
+  },
+  {
+   "seed": "r2r-hamlet-48",
+   "word": "notary",
+   "view": "World/History",
+   "quote": "Pro-magicAnti-magicRegulation advocates"
+  },
+  {
+   "seed": "r2r-hamlet-52",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Essential intermediate step between forest and forge."
+  },
+  {
+   "seed": "r2r-hamlet-56",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Essential intermediate step between forest and forge."
+  },
+  {
+   "seed": "r2r-hamlet-57",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-hamlet-58",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Selmeg Naiman has written down what Gereltsetseg Naiman owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-hamlet-58",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Selmeg Naiman has written down what Gereltsetseg Naiman owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-hamlet-59",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Essential intermediate step between forest and forge."
+  },
+  {
+   "seed": "r2r-hamlet-59",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-village-1",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-village-3",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Procession of the Forge"
+  },
+  {
+   "seed": "r2r-village-5",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Jassim al-Farabi has written down what Jibril al-Jabbar owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-village-6",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-village-6",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Ian Byrne has written down what Rory Nolan owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-village-7",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2r-village-7",
+   "word": "guardCaptain",
+   "view": "Summary/Plot Hooks",
+   "quote": "A guard captain is on the payroll of the criminal network"
+  },
+  {
+   "seed": "r2r-village-9",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Kyriakos Alexios has written down what Stylianos Gregoraios owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-village-9",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-village-9",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-village-9",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Kyriakos Alexios has written down what Stylianos Gregoraios owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-village-10",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-village-11",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-village-12",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-village-17",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Ronan Carey has written down what Una Jordan owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-village-19",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-village-20",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Lesser Forge Fair"
+  },
+  {
+   "seed": "r2r-village-21",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-village-22",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Unn Bjornsson has written down what Hervor Gunnarsson owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-village-23",
+   "word": "guardCaptain",
+   "view": "Summary/Plot Hooks",
+   "quote": "A guard captain is on the payroll of the criminal network"
+  },
+  {
+   "seed": "r2r-village-24",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-village-24",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Dan Xiao has written down what Zhu Deng owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-village-25",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "A notary's clerk hurries past with a satchel of contracts."
+  },
+  {
+   "seed": "r2r-village-26",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Pro-magicAnti-magicRegulation advocates"
+  },
+  {
+   "seed": "r2r-village-26",
+   "word": "notary",
+   "view": "World/History",
+   "quote": "Pro-magicAnti-magicRegulation advocates"
+  },
+  {
+   "seed": "r2r-village-27",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-village-27",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Liutbirg Klein has written down what Yolanda Maier owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-village-28",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Ishwar Ghosh has written down what Durga Gupta owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-village-30",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-village-30",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-village-31",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Pro-magicAnti-magicRegulation advocates"
+  },
+  {
+   "seed": "r2r-village-31",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-village-31",
+   "word": "notary",
+   "view": "World/History",
+   "quote": "Pro-magicAnti-magicRegulation advocates"
+  },
+  {
+   "seed": "r2r-village-32",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "A letter found this year tells it this way: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-village-32",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-village-34",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "A notary's clerk hurries past with a satchel of contracts."
+  },
+  {
+   "seed": "r2r-village-34",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-village-36",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Xenia Cordus has written down what Nasidia Rufus owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-village-36",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Xenia Cordus has written down what Nasidia Rufus owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-village-37",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-village-39",
+   "word": "mason",
+   "view": "Summary/Overview",
+   "quote": "The mason's yard in Beikou is its busiest enterprise: one set of holy symbols coming down, another going up, and the same three workmen paid for both."
+  },
+  {
+   "seed": "r2r-village-39",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-village-40",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2r-village-40",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "An old story from that time: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-village-40",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Dharmaraj Banerjee has written down what Sanjay Gupta owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-village-42",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-village-44",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "An old story from that time: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-village-47",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "The records of that time say: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-village-49",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-village-52",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Wilhelm Lehmann has written down what Reinhard Huber owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2r-village-56",
+   "word": "mason",
+   "view": "Summary/Overview",
+   "quote": "The masons of Treford have stopped mid-job on the great house;"
+  },
+  {
+   "seed": "r2r-village-56",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-village-57",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-town-5",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2r-town-5",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-town-9",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "It stands between the mine and the smithy."
+  },
+  {
+   "seed": "r2r-town-9",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "Kept in the same week as The Forge Fair."
+  },
+  {
+   "seed": "r2r-town-10",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers."
+  },
+  {
+   "seed": "r2r-town-10",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-town-12",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2r-town-21",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-town-23",
+   "word": "armoury",
+   "view": "World/NPCs",
+   "quote": "Secret: Has been selling stores from the citadel's armoury and writing them off as rusted and broken"
+  },
+  {
+   "seed": "r2r-town-24",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2r-town-24",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2r-town-24",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-town-26",
+   "word": "smith",
+   "view": "Summary/Overview",
+   "quote": "Forge smoke hangs over everything here, and the ring of the anvils never quite stops."
+  },
+  {
+   "seed": "r2r-town-26",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial intermediate between mine and smithy."
+  },
+  {
+   "seed": "r2r-town-26",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-town-27",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2r-town-27",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2r-town-30",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2r-town-33",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-town-34",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial intermediate between mine and smithy."
+  },
+  {
+   "seed": "r2r-town-35",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2r-town-38",
+   "word": "smith",
+   "view": "Summary/Overview",
+   "quote": "Every forge you pass is making something meant for a war, and the carts on the road out are full of it."
+  },
+  {
+   "seed": "r2r-town-38",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "It stands between the mine and the smithy."
+  },
+  {
+   "seed": "r2r-town-38",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-town-39",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-town-40",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers."
+  },
+  {
+   "seed": "r2r-town-40",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-town-42",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2r-town-43",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-town-46",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2r-town-48",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2r-town-48",
+   "word": "prisoner",
+   "view": "Systems/Institutions",
+   "quote": "Prisoners, debtors, and the willing are made into fighters for public show, and sent on to feed the arenas."
+  },
+  {
+   "seed": "r2r-town-49",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial intermediate between mine and smithy."
+  },
+  {
+   "seed": "r2r-town-51",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers."
+  },
+  {
+   "seed": "r2r-town-53",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial step from what the mine yields to what the smith uses."
+  },
+  {
+   "seed": "r2r-town-53",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-town-54",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2r-town-54",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers."
+  },
+  {
+   "seed": "r2r-town-54",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Common Forge Fair"
+  },
+  {
+   "seed": "r2r-town-55",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2r-town-57",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2r-town-57",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2r-town-58",
+   "word": "prisoner",
+   "view": "Systems/Institutions",
+   "quote": "Prisoners, debtors, and the willing are made into fighters for public show, and sent on to feed the arenas."
+  },
+  {
+   "seed": "r2r-town-59",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2r-city-8",
+   "word": "prisoner",
+   "view": "World/NPCs",
+   "quote": "Secret: Lied about the death of a prisoner who died in the cells after a beating ordered from above"
+  },
+  {
+   "seed": "r2r-city-12",
+   "word": "prisoner",
+   "view": "Systems/Institutions",
+   "quote": "Prisoners, debtors, and the willing are made into fighters for public show, and sent on to feed the arenas."
+  },
+  {
+   "seed": "r2r-city-31",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "It stands between the mine and the smithy."
+  },
+  {
+   "seed": "r2r-city-31",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2r-city-32",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2r-city-34",
+   "word": "prisoner",
+   "view": "Systems/Institutions",
+   "quote": "Trains fighters for the crowd's amusement, drawn from prisoners, debtors, and volunteers."
+  },
+  {
+   "seed": "r2r-city-37",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2r-city-37",
+   "word": "prisoner",
+   "view": "Systems/Institutions",
+   "quote": "Trains fighters for the crowd's amusement, drawn from prisoners, debtors, and volunteers."
+  },
+  {
+   "seed": "r2r-city-43",
+   "word": "prisoner",
+   "view": "Systems/Institutions",
+   "quote": "Recruits from prisoners, debtors, and volunteers."
+  },
+  {
+   "seed": "r2r-city-44",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial step from what the mine yields to what the smith uses."
+  },
+  {
+   "seed": "r2r-city-47",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2r-city-47",
+   "word": "prisoner",
+   "view": "World/NPCs",
+   "quote": "Secret: Lied about the death of a prisoner who died in the cells after a beating ordered from above"
+  },
+  {
+   "seed": "r2r-city-49",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2r-city-51",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "It stands between the mine and the smithy."
+  },
+  {
+   "seed": "r2r-city-51",
+   "word": "prisoner",
+   "view": "World/NPCs",
+   "quote": "Secret: Lied about the death of a prisoner who died in the cells after a beating ordered from above"
+  },
+  {
+   "seed": "r2r-city-54",
+   "word": "prisoner",
+   "view": "Systems/Institutions",
+   "quote": "Trains fighters for the crowd's amusement, drawn from prisoners, debtors, and volunteers."
+  },
+  {
+   "seed": "r2r-city-58",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2r-metropolis-21",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-under_siege-thorp-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-under_siege-hamlet-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-under_siege-village-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-under_siege-village-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-under_siege-town-0",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2s-under_siege-town-0",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-under_siege-town-1",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2s-under_siege-town-3",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2s-under_siege-city-1",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Vigil of the Forge"
+  },
+  {
+   "seed": "r2s-under_siege-city-2",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial intermediate between mine and smithy."
+  },
+  {
+   "seed": "r2s-famine-thorp-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-famine-thorp-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-famine-thorp-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-famine-hamlet-3",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "The records of that time say: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-famine-village-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-famine-town-0",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial step from what the mine yields to what the smith uses."
+  },
+  {
+   "seed": "r2s-famine-town-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-famine-town-1",
+   "word": "armoury",
+   "view": "World/NPCs",
+   "quote": "Secret: Has been selling stores from the citadel's armoury and writing them off as rusted and broken"
+  },
+  {
+   "seed": "r2s-famine-town-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-famine-city-0",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-famine-city-0",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial step from what the mine yields to what the smith uses."
+  },
+  {
+   "seed": "r2s-famine-city-0",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers."
+  },
+  {
+   "seed": "r2s-famine-city-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-famine-city-1",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Old Forge Vigil"
+  },
+  {
+   "seed": "r2s-occupied-thorp-0",
+   "word": "mason",
+   "view": "Systems/Economics",
+   "quote": "Stone Quarrying Stone masons work imported material;"
+  },
+  {
+   "seed": "r2s-occupied-thorp-0",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Oda Schulz has written down what Aldric Wagner owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-occupied-hamlet-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-occupied-village-2",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Ultan Doyle has written down what Baothghalach Walsh owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-occupied-town-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-occupied-town-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-occupied-city-2",
+   "word": "prisoner",
+   "view": "World/Relationships",
+   "quote": "When Ollin Chuc's crew needs a prisoner released, Thunder Ek signs the order."
+  },
+  {
+   "seed": "r2s-occupied-city-3",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-politically_fractured-thorp-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-politically_fractured-hamlet-2",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Essential intermediate step between forest and forge."
+  },
+  {
+   "seed": "r2s-politically_fractured-hamlet-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-politically_fractured-village-0",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "A notary's clerk hurries past with a satchel of contracts."
+  },
+  {
+   "seed": "r2s-politically_fractured-village-0",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "A letter found this year tells it this way: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-politically_fractured-village-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-politically_fractured-town-1",
+   "word": "prisoner",
+   "view": "Systems/Institutions",
+   "quote": "Prisoners, debtors, and the willing are made into fighters for public show, and sent on to feed the arenas."
+  },
+  {
+   "seed": "r2s-politically_fractured-town-2",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial step from what the mine yields to what the smith uses."
+  },
+  {
+   "seed": "r2s-politically_fractured-town-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-indebted-thorp-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-indebted-thorp-3",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "A notary's clerk hurries past with a satchel of contracts."
+  },
+  {
+   "seed": "r2s-indebted-hamlet-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-indebted-hamlet-2",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Essential intermediate step between forest and forge."
+  },
+  {
+   "seed": "r2s-indebted-hamlet-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-indebted-village-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-recently_betrayed-thorp-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-recently_betrayed-thorp-1",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "An old story from that time: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-recently_betrayed-thorp-3",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Cassius Aquila has written down what Saturninus Varro owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-recently_betrayed-thorp-3",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Cassius Aquila has written down what Saturninus Varro owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-recently_betrayed-hamlet-3",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Great Forge Offering"
+  },
+  {
+   "seed": "r2s-recently_betrayed-village-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-recently_betrayed-village-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-recently_betrayed-town-0",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-recently_betrayed-town-1",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-recently_betrayed-town-1",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2s-recently_betrayed-town-1",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Common Forge Vigil"
+  },
+  {
+   "seed": "r2s-recently_betrayed-town-2",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2s-recently_betrayed-town-2",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial step from what the mine yields to what the smith uses."
+  },
+  {
+   "seed": "r2s-recently_betrayed-city-0",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-recently_betrayed-city-0",
+   "word": "prisoner",
+   "view": "World/NPCs",
+   "quote": "Secret: Lied about the death of a prisoner who died in the cells after a beating ordered from above"
+  },
+  {
+   "seed": "r2s-recently_betrayed-city-1",
+   "word": "prisoner",
+   "view": "Systems/Institutions",
+   "quote": "Trains fighters for the crowd's amusement, drawn from prisoners, debtors, and volunteers."
+  },
+  {
+   "seed": "r2s-recently_betrayed-city-2",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-recently_betrayed-city-2",
+   "word": "prisoner",
+   "view": "World/NPCs",
+   "quote": "Secret: Lied about the death of a prisoner who died in the cells after a beating ordered from above"
+  },
+  {
+   "seed": "r2s-recently_betrayed-city-3",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-recently_betrayed-city-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-recently_betrayed-city-3",
+   "word": "prisoner",
+   "view": "World/NPCs",
+   "quote": "Secret: Lied about the death of a prisoner who died in the cells after a beating ordered from above"
+  },
+  {
+   "seed": "r2s-infiltrated-thorp-0",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "A notary's clerk hurries past with a satchel of contracts."
+  },
+  {
+   "seed": "r2s-infiltrated-thorp-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-infiltrated-hamlet-0",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Essential intermediate step between forest and forge."
+  },
+  {
+   "seed": "r2s-infiltrated-hamlet-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-infiltrated-hamlet-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-infiltrated-village-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-infiltrated-town-1",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial step from what the mine yields to what the smith uses."
+  },
+  {
+   "seed": "r2s-infiltrated-town-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-infiltrated-town-2",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial step from what the mine yields to what the smith uses."
+  },
+  {
+   "seed": "r2s-infiltrated-town-2",
+   "word": "prisoner",
+   "view": "World/Relationships",
+   "quote": "Barlas Merkit could get the prisoner out if Abaqa Olqunu'ud asks, and Abaqa Olqunu'ud knows what asking will cost."
+  },
+  {
+   "seed": "r2s-infiltrated-town-2",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Common Forge Vigil"
+  },
+  {
+   "seed": "r2s-infiltrated-town-2",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Forge Feast"
+  },
+  {
+   "seed": "r2s-plague_onset-thorp-3",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "A letter found this year tells it this way: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-plague_onset-hamlet-0",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Vladimir Volkov has written down what Aleksander Lebedev owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-plague_onset-hamlet-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-plague_onset-hamlet-2",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Essential intermediate step between forest and forge."
+  },
+  {
+   "seed": "r2s-plague_onset-hamlet-2",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Sunita Balan has written down what Kaikeyyi Das owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-plague_onset-village-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-plague_onset-town-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-plague_onset-town-1",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "It stands between the mine and the smithy."
+  },
+  {
+   "seed": "r2s-plague_onset-town-3",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Vigil of the Forge"
+  },
+  {
+   "seed": "r2s-plague_onset-city-0",
+   "word": "prisoner",
+   "view": "World/NPCs",
+   "quote": "Secret: Lied about the death of a prisoner who died in the cells after a beating ordered from above"
+  },
+  {
+   "seed": "r2s-plague_onset-city-2",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers."
+  },
+  {
+   "seed": "r2s-succession_void-thorp-0",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-succession_void-thorp-2",
+   "word": "mason",
+   "view": "Summary/Overview",
+   "quote": "The masons of Tulummal have stopped mid-job on the great house;"
+  },
+  {
+   "seed": "r2s-succession_void-thorp-2",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-succession_void-thorp-3",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-succession_void-thorp-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-succession_void-hamlet-0",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "A notary's clerk hurries past with a satchel of contracts."
+  },
+  {
+   "seed": "r2s-succession_void-hamlet-0",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-succession_void-hamlet-0",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Antonia Corvinus has written down what Zenobia Silanus owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-succession_void-hamlet-1",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-succession_void-hamlet-2",
+   "word": "mason",
+   "view": "Summary/Overview",
+   "quote": "The masons of Weichturm have stopped mid-job on the great house;"
+  },
+  {
+   "seed": "r2s-succession_void-hamlet-2",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-succession_void-hamlet-3",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "A notary's clerk hurries past with a satchel of contracts."
+  },
+  {
+   "seed": "r2s-succession_void-hamlet-3",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-succession_void-hamlet-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-succession_void-village-0",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Pro-magicAnti-magicRegulation advocates"
+  },
+  {
+   "seed": "r2s-succession_void-village-0",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-succession_void-village-0",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Obaid al-Hakim has written down what Sharif al-Hakim owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-succession_void-village-0",
+   "word": "notary",
+   "view": "World/History",
+   "quote": "Pro-magicAnti-magicRegulation advocates"
+  },
+  {
+   "seed": "r2s-succession_void-village-1",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-succession_void-village-2",
+   "word": "mason",
+   "view": "Summary/Overview",
+   "quote": "The masons of Caerworth have stopped mid-job on the great house;"
+  },
+  {
+   "seed": "r2s-succession_void-village-2",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-succession_void-village-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-succession_void-village-3",
+   "word": "mason",
+   "view": "Summary/Overview",
+   "quote": "The masons of Easford have stopped mid-job on the great house;"
+  },
+  {
+   "seed": "r2s-succession_void-village-3",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-succession_void-town-0",
+   "word": "mason",
+   "view": "Summary/Overview",
+   "quote": "The masons of Shivamandal have stopped mid-job on the great house;"
+  },
+  {
+   "seed": "r2s-succession_void-town-0",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-succession_void-town-0",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial intermediate between mine and smithy."
+  },
+  {
+   "seed": "r2s-succession_void-town-1",
+   "word": "prisoner",
+   "view": "World/Relationships",
+   "quote": "When Uijah May's crew needs a prisoner released, Nahui Hau signs the order."
+  },
+  {
+   "seed": "r2s-succession_void-town-2",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-succession_void-town-2",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-succession_void-town-3",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-monster_pressure-thorp-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-monster_pressure-hamlet-2",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Vangchug Merkit has written down what Khongorzul Qonggirad owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-monster_pressure-hamlet-3",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Families who lived through it tell it this way: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-monster_pressure-village-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-monster_pressure-town-1",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-monster_pressure-town-2",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2s-monster_pressure-town-2",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Old Forge Offering"
+  },
+  {
+   "seed": "r2s-monster_pressure-town-3",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2s-monster_pressure-town-3",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers."
+  },
+  {
+   "seed": "r2s-monster_pressure-city-0",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial step from what the mine yields to what the smith uses."
+  },
+  {
+   "seed": "r2s-monster_pressure-city-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-monster_pressure-city-1",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-monster_pressure-city-1",
+   "word": "prisoner",
+   "view": "World/NPCs",
+   "quote": "Secret: Lied about the death of a prisoner who died in the cells after a beating ordered from above"
+  },
+  {
+   "seed": "r2s-monster_pressure-city-1",
+   "word": "prisoner",
+   "view": "World/Relationships",
+   "quote": "Niall Ryan could get the prisoner out if Kathleen O'Halloran asks, and Kathleen O'Halloran knows what asking will cost."
+  },
+  {
+   "seed": "r2s-monster_pressure-city-2",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-monster_pressure-city-3",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-insurgency-thorp-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-insurgency-thorp-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-insurgency-hamlet-1",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Essential intermediate step between forest and forge."
+  },
+  {
+   "seed": "r2s-insurgency-hamlet-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-insurgency-hamlet-3",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "Alexandros Alexios has written down what Niketas Argyros owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-insurgency-hamlet-3",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Families who lived through it tell it this way: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-insurgency-hamlet-3",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Alexandros Alexios has written down what Niketas Argyros owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-insurgency-village-1",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "A letter found this year tells it this way: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-insurgency-village-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-insurgency-village-3",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "A notary's clerk hurries past with a satchel of contracts."
+  },
+  {
+   "seed": "r2s-insurgency-town-0",
+   "word": "mason",
+   "view": "Systems/Economics",
+   "quote": "Stone Quarrying Stone masons work imported material;"
+  },
+  {
+   "seed": "r2s-insurgency-town-1",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2s-insurgency-town-3",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial intermediate between mine and smithy."
+  },
+  {
+   "seed": "r2s-religious_conversion-thorp-0",
+   "word": "mason",
+   "view": "Summary/Overview",
+   "quote": "The mason's yard in Palenqcalco is its busiest enterprise: one set of holy symbols coming down, another going up, and the same three workmen paid for both."
+  },
+  {
+   "seed": "r2s-religious_conversion-thorp-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-2",
+   "word": "mason",
+   "view": "Summary/Overview",
+   "quote": "The mason's yard in Raasziyarat is its busiest enterprise: one set of holy symbols coming down, another going up, and the same three workmen paid for both."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-2",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-2",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Essential intermediate step between forest and forge."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-2",
+   "word": "mason",
+   "view": "Systems/Economics",
+   "quote": "Stone Quarrying Stone masons work imported material;"
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-3",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-religious_conversion-village-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-religious_conversion-village-3",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Georgios II Gabalas has written down what Petros Kalojan owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-religious_conversion-town-0",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2s-religious_conversion-town-0",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial intermediate between mine and smithy."
+  },
+  {
+   "seed": "r2s-religious_conversion-town-3",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "It stands between the mine and the smithy."
+  },
+  {
+   "seed": "r2s-religious_conversion-town-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-religious_conversion-city-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-slave_revolt-thorp-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-slave_revolt-thorp-1",
+   "word": "mason",
+   "view": "Systems/Economics",
+   "quote": "Stone Quarrying Stone masons work imported material;"
+  },
+  {
+   "seed": "r2s-slave_revolt-hamlet-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-slave_revolt-hamlet-3",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Notburga Becker has written down what Leopold Klein owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-slave_revolt-village-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-slave_revolt-village-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-slave_revolt-village-3",
+   "word": "mason",
+   "view": "Systems/Economics",
+   "quote": "Stone Quarrying Stone masons work imported material;"
+  },
+  {
+   "seed": "r2s-slave_revolt-town-0",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-slave_revolt-town-0",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2s-slave_revolt-town-0",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial intermediate between mine and smithy."
+  },
+  {
+   "seed": "r2s-slave_revolt-town-0",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers."
+  },
+  {
+   "seed": "r2s-slave_revolt-town-1",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-slave_revolt-town-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-slave_revolt-town-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-slave_revolt-town-3",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2s-slave_revolt-city-3",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-slave_revolt-city-3",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "It stands between the mine and the smithy."
+  },
+  {
+   "seed": "r2s-slave_revolt-city-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-wartime-thorp-2",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "An old story from that time: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-wartime-hamlet-0",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Essential intermediate step between forest and forge."
+  },
+  {
+   "seed": "r2s-wartime-hamlet-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-wartime-hamlet-1",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Bright Forge Feast"
+  },
+  {
+   "seed": "r2s-wartime-hamlet-2",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Families who lived through it tell it this way: someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-wartime-hamlet-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-wartime-village-0",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Ruadh O'Neill has written down what Padraig Carey owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-wartime-village-1",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local coal fires the forges, but the iron is bought in;"
+  },
+  {
+   "seed": "r2s-wartime-village-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-wartime-town-0",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "It stands between the mine and the smithy."
+  },
+  {
+   "seed": "r2s-wartime-town-0",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers."
+  },
+  {
+   "seed": "r2s-wartime-town-2",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-wartime-town-3",
+   "word": "armoury",
+   "view": "Summary/Plot Hooks",
+   "quote": "Weapons from the armoury have been disappearing in small quantities for months."
+  },
+  {
+   "seed": "r2s-wartime-town-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-wartime-city-1",
+   "word": "prisoner",
+   "view": "Summary/Plot Hooks",
+   "quote": "A prisoner in their custody knows something valuable."
+  },
+  {
+   "seed": "r2s-mass_migration-thorp-2",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-mass_migration-thorp-3",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-mass_migration-hamlet-0",
+   "word": "notary",
+   "view": "Summary/Overview",
+   "quote": "A notary's clerk hurries past with a satchel of contracts."
+  },
+  {
+   "seed": "r2s-mass_migration-village-1",
+   "word": "physician",
+   "view": "Summary/Plot Hooks",
+   "quote": "Someone is poisoning the ruler slowly, and the physician knows"
+  },
+  {
+   "seed": "r2s-mass_migration-village-1",
+   "word": "notary",
+   "view": "World/Relationships",
+   "quote": "Jiahao Zhu has written down what Xiangyu Deng owes and left a copy with a notary."
+  },
+  {
+   "seed": "r2s-mass_migration-village-3",
+   "word": "smith",
+   "view": "World/Traditions",
+   "quote": "The Bright Forge Fair"
+  },
+  {
+   "seed": "r2s-mass_migration-town-0",
+   "word": "smith",
+   "view": "Summary/Overview",
+   "quote": "Zelenotsy lives by its forges: the clang of iron is in every lane."
+  },
+  {
+   "seed": "r2s-mass_migration-town-0",
+   "word": "smith",
+   "view": "Systems/Institutions",
+   "quote": "The industrial step from what the mine yields to what the smith uses."
+  },
+  {
+   "seed": "r2s-mass_migration-town-0",
+   "word": "smith",
+   "view": "Systems/Economics",
+   "quote": "Iron & Metalwork Local ore feeds the smithy directly."
+  },
+  {
+   "seed": "r2s-mass_migration-town-1",
+   "word": "prisoner",
+   "view": "Systems/Institutions",
+   "quote": "Prisoners, debtors, and the willing are made into fighters for public show, and sent on to feed the arenas."
+  },
+  {
+   "seed": "r2s-mass_migration-city-1",
+   "word": "prisoner",
+   "view": "World/NPCs",
+   "quote": "Secret: Lied about the death of a prisoner who died in the cells after a beating ordered from above"
+  }
+ ],
+ "enteredLines": [],
+ "_doc": "R1: the page list on the census 720 (dumps of c3913f999, census.sh ALONE, two workers), the page member (probes/W2-B-DECLARE/pagemeasure.mjs) with the instrument at c3913f999 (before) and with R1 (after); pagediff.mjs. Left: every line of the seven role words; entered: none."
+}

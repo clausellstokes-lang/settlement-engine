@@ -13,7 +13,7 @@
   "rows": [
     {
       "id": "foodways.FRAMES::one.0",
-      "text": "Most meals start from {A}.",
+      "text": "Its own food is {A}.",
       "needs": [],
       "excludes": [],
       "crisis": "calm",
@@ -22,7 +22,7 @@
     },
     {
       "id": "foodways.FRAMES::one.1",
-      "text": "The table rests on {A}.",
+      "text": "What it puts on the table itself is {A}.",
       "needs": [],
       "excludes": [],
       "crisis": "calm",

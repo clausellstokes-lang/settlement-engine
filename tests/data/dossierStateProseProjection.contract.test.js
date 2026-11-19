@@ -863,6 +863,10 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
         // double answers no migration (a keyed presence holds one key, and the double names none), so the
         // facts gate holds both walls states silent here, the same class as the seven below. A real
         // record answers its own direction (the desk suite's banner arm proves every banner speaks).
+        // + DS-DEF-2 Beasts & Monsters: settled, nothing organized :: threat=threat at W2-WRITE-5 A H4 (2026-11-13): its three threat twins declare `no guardPresence` ("nothing organised" is false beside a watch, the read's H4), and the calm admit-all double holds every presence, so the state admits no line under the double; a declared cause.
+        'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized :: threat=threat',
+        // + DS-DEF-2 Invasion & War: neither walls nor force :: threat=threat at W2-WRITE-12 (2026-11-14, REVIEW-W2-WRITE-2 HIGH 1): its threat lines declare `no mercenary` ("all the town has" is false beside a hired company), and the admit-all double holds every presence: the facts gate, the Beasts row's class.
+        'DS-DEF-2 :: Invasion & War: neither walls nor force :: threat=threat',
         'DS-STR-1 :: MASS MIGRATION :: walls=walls',
         'DS-STR-1 :: MASS MIGRATION :: walls=no walls',
         'DS-GEN-1 :: economic_disparity :: severity=minor with {"walls":"no walls"}',
@@ -871,7 +875,7 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
         'DS-GEN-1 :: occupation_legacy :: severity=major',
         'DS-GEN-1 :: occupation_legacy :: severity=catastrophic',
         'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=walls',
-        'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=no walls',
+        // W2-WRITE the walls-word mute (2026-11-13): 'Undefended :: walls=no walls' CURED and gone — v6, a no-walls line naming neither walls nor a force, speaks there.
       ],
     });
 
@@ -946,10 +950,22 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     // variety in the states where the corpus authored only one line for a value, and every
     // settlement in such a state prints the same sentence. That is a CORPUS bill, payable
     // by authoring, and hiding it would be the fail-open reading in a different coat.
+    // RE-KEYED BY IDENTITY (2026-11-18, BAR8-DESKS-2, ruling BR28 (3)): a pool KEYED BY A FOOD BAND (DS-GEN-3's
+    // `foodSecurity.label: <band>`) is read under THAT band, not the calm double's `secure`: the page draws the pool only
+    // where it prints the band. BAR8-DESKS-ECO declared the Import-Dependent lines `food: = importDependent`, so under the
+    // double's band only v4 (`food: ≥ secure`, never admitted under its own key) was left, and the pool's two walls states
+    // read thin (28 -> 30 DM, 29 -> 31 player); under the key's own band they hold five lines each, and the bill is back.
+    const FOOD_KEY_BAND = { Famine: 'famine', Deficit: 'deficit', 'Import-Dependent': 'importDependent', Pressured: 'pressured', Secure: 'secure', Surplus: 'surplus' };
+    const factsForKey = (/** @type {string} */ key) => {
+      const band = /** @type {Record<string, string>} */ (FOOD_KEY_BAND)[String(key).replace(/^foodSecurity\.label: /, '')];
+      return /^foodSecurity\.label: /.test(key) && band
+        ? { ...CALM_FACTS_ADMIT_ALL, famine: { ...CALM_FACTS_ADMIT_ALL.famine, band, shownBand: band } }
+        : CALM_FACTS_ADMIT_ALL;
+    };
     const thin = {};
     for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
-      thin[audience] = DIMENSION_STATES.filter(({ pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
-        pool, { slots: bagFor(pool), audience, dimensions: { ...others, [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL },
+      thin[audience] = DIMENSION_STATES.filter(({ key, pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
+        pool, { slots: bagFor(pool), audience, dimensions: { ...others, [dimension]: value }, facts: factsForKey(key) },
       ).length <= 1)).length;
     }
     // MEASURED at 2d5112851, and the two audiences DIFFER BY ONE. The design volume
@@ -976,6 +992,10 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     // so the FACTS gate empties them, not the dimension. Named exactly, so a new silence reds.
     // + DS-STR-1 MASS MIGRATION's two walls states at W4 PEOPLE second seat 2026-11-07 (the T2 arm's note above).
     expect(silent.map(({ id, key, dimension, value }) => `${id} :: ${key} :: ${dimension}=${value}`)).toEqual([
+      // + DS-DEF-2 Beasts & Monsters: settled, nothing organized :: threat=threat at W2-WRITE-5 A H4 (2026-11-13): its three threat twins declare `no guardPresence` ("nothing organised" is false beside a watch, the read's H4), and the calm admit-all double holds every presence, so the state admits no line under the double; a declared cause.
+      'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized :: threat=threat',
+      // + DS-DEF-2 Invasion & War: neither walls nor force :: threat=threat at W2-WRITE-12 (2026-11-14, REVIEW-W2-WRITE-2 HIGH 1): its threat lines declare `no mercenary`; the admit-all double holds every presence (the mute arm's own row, the same state).
+      'DS-DEF-2 :: Invasion & War: neither walls nor force :: threat=threat',
       'DS-STR-1 :: MASS MIGRATION :: walls=walls',
       'DS-STR-1 :: MASS MIGRATION :: walls=no walls',
       'DS-GEN-1 :: economic_disparity :: severity=minor',
@@ -984,7 +1004,7 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
       'DS-GEN-1 :: occupation_legacy :: severity=major',
       'DS-GEN-1 :: occupation_legacy :: severity=catastrophic',
       'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=walls',
-      'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=no walls',
+      // W2-WRITE the walls-word mute (2026-11-13): 'Undefended :: walls=no walls' CURED and gone — v6, a no-walls line naming neither walls nor a force, speaks there.
     ]);
   });
 
@@ -1102,7 +1122,7 @@ describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edi
     expect({ missing, orphan }).toEqual({ missing: [], orphan: [] });
     // Non-vacuity: the walk found the whole register, not an empty one.
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
-    expect(META_ROWS.length).toBe(856); // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
+    expect(META_ROWS.length).toBe(861); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 859 -> 861, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece): DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED // BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4): 856 -> 859, re-measured at the joined tree (2d80aa740): BAR4-HISTORY batch 2's three DS-GEN-16 -MARKED pools (155c7e1af) // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
     expect(META_ROWS.every((r) => r.meta)).toBe(true);
   });
 
@@ -1218,7 +1238,7 @@ describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edi
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6: present 341 -> 349.
     // MEASURED at this tip: exactly the RESOLVED / WIRING-UNRESOLVED split of the census. 341 / 368 -> 345 / 369
     // at W5 HIS construction (2026-11-07, ODQ §934.105): DS-GEN-16 gains LIVING-MEMORY and four LEGACY-* pools.
-    expect({ present, absent }).toEqual({ present: 488, absent: 368 }); // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool, a read pool, leaves (489 -> 488). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 343 -> 347 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 356 -> 361 (the five DS-DEF-12 pools each read) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 361 -> 365 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 365 -> 398 (the thirty-three new pools each read) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (341 -> 425; 368 -> 367) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (341 -> 433; 368 -> 367) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (341 -> 485; 368 -> 367) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (341 -> 489; 368 -> 368)
+    expect({ present, absent }).toEqual({ present: 492, absent: 369 }); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): absent 367 -> 369, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece): DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED, both read nothing the census lists // BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4): absent 364 -> 367, re-measured at the joined tree (2d80aa740): BAR4-HISTORY batch 2's three DS-GEN-16 -MARKED pools (155c7e1af): the census reads nothing for them, readsCount absent // R3-TABS L1 (2026-11-13): the posture lens reads the badge through a key table (POSTURE_POOL_OF_BADGE), which the census resolves: the four DS-DEF-1 readiness pools are read (488 -> 492; 368 -> 364). // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool, a read pool, leaves (489 -> 488). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 343 -> 347 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 356 -> 361 (the five DS-DEF-12 pools each read) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 361 -> 365 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 365 -> 398 (the thirty-three new pools each read) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (341 -> 425; 368 -> 367) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (341 -> 433; 368 -> 367) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (341 -> 485; 368 -> 367) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (341 -> 489; 368 -> 368)
     expect(present).toBe(CENSUS.rows.filter((r) => r.reads.length > 0).length);
   });
 
@@ -1561,10 +1581,13 @@ describe('SEAM car 4 — the three leaves, at their floors', () => {
     expect(META_ROWS.length - keys.length).toBe(unfired);
   });
 
-  it('⛔ RELATIONS: 165 rows with a direction, three ratified aliases, and a join of ZERO', () => {
-    expect(Object.keys(DOSSIER_RELATIONS).length).toBe(165);
+  // 165 → 169 at THE JOIN (JOIN-2, 2026-11-14): the defence lane's fundedGate and upkeep relations on the economicGates rows of
+  // src/generators/defenseGenerator.js (coherence-upkeep 94c5d408f..83883baaa), re-projected by the generator at the joined tree
+  // (that lane never regenerated the leaf); measured, re-keyed by identity.
+  it('⛔ RELATIONS: 169 rows with a direction, three ratified aliases, and a join of ZERO', () => {
+    expect(Object.keys(DOSSIER_RELATIONS).length).toBe(169);
     const rows = Object.values(DOSSIER_RELATIONS).flat();
-    expect(rows.length).toBe(165);
+    expect(rows.length).toBe(169);
     const directions = new Set(rows.map((r) => r.direction));
     expect([...directions]).toEqual(['a→b']);
     expect([...new Set(rows.map((r) => r.relation))]).toEqual(['consequence']);
@@ -1592,7 +1615,9 @@ describe('SEAM car 4 — the three leaves, at their floors', () => {
     // Non-vacuity: the resolver CAN resolve — ten rows join on exactly one endpoint.
     const half = Object.keys(DOSSIER_RELATIONS)
       .filter((key) => key.split('|').some((endpoint) => resolves(endpoint))).length;
-    expect(half).toBe(10);
+    // 10 → 11 at THE JOIN (JOIN-2, 2026-11-14): the defence lane's re-keyed relations put two keys on the aliased endpoint
+    // economicGates.military (fundedGate| and upkeep|) where the line had one (econOutput|); measured at the joined tree.
+    expect(half).toBe(11);
     expect(deskRoots.size).toBeGreaterThanOrEqual(60);
   });
 
@@ -2076,8 +2101,8 @@ describe('SEAM car 4d — the seat licence, computed where the census is visible
     // trusted: 708 pools, every one a sentence, and the reason is that none is a modifier yet.
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6: 709 -> 717.
     // 709 -> 717 at WIRING W3 (2026-11-07): the C1-C6 pools in DS-POW-5/-6.
-    expect(tally).toEqual({ 'sentence/not-a-modifier': 856 }); // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
-    expect(META_ROWS).toHaveLength(856); // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
+    expect(tally).toEqual({ 'sentence/not-a-modifier': 861 }); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 859 -> 861, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece): DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED // BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4): 856 -> 859, re-measured at the joined tree (2d80aa740): BAR4-HISTORY batch 2's three DS-GEN-16 -MARKED pools (155c7e1af) (BAR4-HISTORY-HANDBACK: not-a-modifier 856 -> 859) // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
+    expect(META_ROWS).toHaveLength(861); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 859 -> 861, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece): DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED // BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4): 856 -> 859, re-measured at the joined tree (2d80aa740): BAR4-HISTORY batch 2's three DS-GEN-16 -MARKED pools (155c7e1af) // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
     // ⛔ NO SHIPPED POOL IS A MODIFIER, which is why no clause can seat and why the `seat` key
     // is emitted nowhere: an ABSENT seat reads in the composer as the sentence.
     expect(modifiers, 'no shipped pool declares role modifier').toEqual([]);
@@ -2227,7 +2252,7 @@ describe('SEAM car 4d — the seat licence, computed where the census is visible
     const lands = (endpoint) => readPaths.some((p) => endpointReads(endpoint, p, ALIAS_OF));
     const joining = CENSUS.relations.rows.filter((r) => lands(r.a) && lands(r.b));
     const oneSide = CENSUS.relations.rows.filter((r) => lands(r.a) !== lands(r.b));
-    expect(CENSUS.relations.rows).toHaveLength(165);
+    expect(CENSUS.relations.rows).toHaveLength(169); // 165 → 169 at the join: the defence lane's relations (above)
     expect(joining, 'no row joins on both endpoints').toEqual([]);
     // THE NON-VACUITY CONTROL: the walk is not simply blind — rows DO land on one side.
     expect(oneSide.length, 'rows landing on exactly one endpoint').toBeGreaterThan(0);
@@ -2301,6 +2326,6 @@ describe('⭐⭐ REWRITE car 8a-4 — `kin`, the thread rule\'s typed half (SITT
     expect(META_ROWS.filter((r) => r.meta.kin !== undefined).map((r) => `${r.id} :: ${r.pool}`))
       .toEqual([]);
     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
-    expect(META_ROWS.length, 'over the whole shipped corpus, not a slice').toBe(856); // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
+    expect(META_ROWS.length, 'over the whole shipped corpus, not a slice').toBe(861); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 859 -> 861, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece): DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED // BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4): 856 -> 859, re-measured at the joined tree (2d80aa740): BAR4-HISTORY batch 2's three DS-GEN-16 -MARKED pools (155c7e1af) // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
   });
 });

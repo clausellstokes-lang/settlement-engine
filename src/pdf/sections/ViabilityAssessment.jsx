@@ -24,6 +24,7 @@ import { tokenCase } from '../../domain/display/labelCase.js';
 import { viabilityVerdict } from '../../domain/display/viabilityVerdict.js';
 import { stripViabilityToken, trimViabilitySummary } from '../../domain/display/viabilityFilter.js';
 import { StateProse } from '../primitives/StateProse.jsx';
+import { houseLabelsInText, institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
 
 const SEVERITY_TONE = {
   critical: 'bad', severe: 'bad', high: 'bad',
@@ -34,7 +35,16 @@ const SEVERITY_TONE = {
 export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse }) {
   const v = vm.viability;
   const verdict = viabilityVerdict(v);
-  const issues = v.issues || [];
+  // ROUND THREE, ruling (a): a stored sentence that names a house (the siege's "N institutions
+  // critically impaired by siege: Taverns (5-20), …", written at birth by viability.js) is read with
+  // each held house's label, as the page's Outlook reads it; the record keeps its bytes.
+  const houses = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  const housed = (/** @type {unknown} */ t) => (typeof t === 'string' ? houseLabelsInText(t, houses) : t);
+  const issues = (v.issues || []).map((iss) => ({
+    ...iss,
+    description: housed(iss?.description),
+    institution: iss?.institution ? institutionHouseLabel(iss.institution) : iss?.institution,
+  }));
   const warnings = (v.warnings || []).filter(Boolean);
   const violations = v.structuralViolations || [];
   const stressCons = v.stressConsequences || [];
@@ -185,7 +195,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
                 items={warnings}
                 tone="warn"
                 bullet="•"
-                itemRender={(w) => noteText(w)}
+                itemRender={(w) => housed(noteText(w))}
               />
             </View>
           )}
@@ -220,7 +230,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
             items={stressCons}
             tone="bad"
             bullet="·"
-            itemRender={(c) => label(c) || (typeof c === 'string' ? c : c?.text || '')}
+            itemRender={(c) => housed(label(c) || (typeof c === 'string' ? c : c?.text || ''))}
           />
         </View>
       )}

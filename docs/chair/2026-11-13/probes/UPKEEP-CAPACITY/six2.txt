@@ -1,0 +1,42 @@
+cold-town-116
+  base  63 Well-Defended    62/40/49/95/60  powers-changed=False
+  A     56 Well-Defended    58/38/36/83/56  powers-changed=False
+  B     62 Well-Defended    62/39/45/92/60  powers-changed=False
+  E     63 Well-Defended    62/40/49/95/60  powers-changed=False
+  BE    62 Well-Defended    62/39/45/92/60  powers-changed=False
+cold-city-227
+  base  70 Well-Defended    100/98/40/100/89  powers-changed=False
+  A     70 Well-Defended    100/96/40/100/89  powers-changed=False
+  B     72 Well-Defended    100/100/48/100/89  powers-changed=False
+  E     70 Well-Defended    100/98/40/100/89  powers-changed=False
+  BE    72 Well-Defended    100/100/48/100/89  powers-changed=False
+cold-thorp-0
+  base  25 Lightly Defended 25/22/31/21/0  powers-changed=False
+  A     23 Vulnerable       25/15/31/21/0  powers-changed=False
+  B     24 Lightly Defended 25/18/31/21/0  powers-changed=False
+  E     25 Lightly Defended 25/22/31/21/0  powers-changed=False
+  BE    24 Lightly Defended 25/18/31/21/0  powers-changed=False
+cold-village-65
+  base  18 Vulnerable       25/36/0/46/0  powers-changed=False
+  A     16 Vulnerable       24/23/0/46/0  powers-changed=False
+  B     17 Vulnerable       25/29/0/46/0  powers-changed=False
+  E     18 Vulnerable       25/36/0/46/0  powers-changed=False
+  BE    17 Vulnerable       25/29/0/46/0  powers-changed=False
+fresh6-metropolis-30
+  base  93 Fortress         100/100/66/100/99  powers-changed=False
+  A     93 Fortress         100/100/66/100/99  powers-changed=False
+  B     96 Fortress         100/100/81/100/99  powers-changed=False
+  E     93 Fortress         100/100/66/100/99  powers-changed=False
+  BE    96 Fortress         100/100/81/100/99  powers-changed=False
+cold-under_siege-town-52
+  base  49 Defensible       100/67/16/58/28  powers-changed=False
+  A     40 Defensible       90/53/0/54/28  powers-changed=False
+  B     46 Defensible       99/62/9/56/28  powers-changed=False
+  E     49 Defensible       100/67/16/58/28  powers-changed=False
+  BE    46 Defensible       99/62/9/56/28  powers-changed=False
+cold-town-139
+  base  41 Defensible       41/0/40/68/44  powers-changed=False
+  A     29 Lightly Defended 29/0/24/50/31  powers-changed=True
+  B     37 Lightly Defended 37/0/35/62/40  powers-changed=True
+  E     41 Defensible       41/0/40/68/44  powers-changed=False
+  BE    37 Lightly Defended 37/0/35/62/40  powers-changed=True

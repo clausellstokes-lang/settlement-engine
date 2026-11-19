@@ -33,22 +33,26 @@
  * DM-only by construction: `npcs[].goal` (and so `intent`) never reaches a public page (design §6.3).
  */
 
-import { GOAL_FAMILY_LINES, PERSONALITY_CLUSTER_OF, TIE_TYPE_TO_GOAL_SUBKIND } from '../../data/people/goalFamilies.js';
+import { GOAL_FAMILY_LINES, GOAL_LINE_MIN_MEMBERS, PERSONALITY_CLUSTER_OF, TIE_TYPE_TO_GOAL_SUBKIND } from '../../data/people/goalFamilies.js'; import { facesInPower } from '../../domain/people/cardPowers.js'; // BAR8 K-PEOPLE (14h): the power's members as the Power tab counts them
 import { familyOfInstitution, isLawEnforcementInstitution, isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { chainPrintName } from '../../domain/display/chainPrintName.js';
+import { powerSentenceName } from '../../domain/display/powerSentenceName.js';
 import { filterDeclared, lineText, resolveSibling } from '../../domain/facts/drawDeclared.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
 import { notePresumption, withPresumptionLedger } from '../../domain/facts/presumptionLedger.js';
 import { magicOf } from '../../domain/facts/magic.js';
+import { goodNeededNotBroughtIn, goodsNeededNotBroughtIn } from '../../domain/facts/needNotBroughtIn.js'; // FAULTS-NEED item 2 (11e.wantBuy): the page's need list
 import { allegianceOf, criminalHousesOf, criminalPowersOf, organizedCrimeOf } from '../../domain/people/allegiance.js';
 import { NPC_GOAL_SIBLINGS, SIEGE_GOALS, STRESS_GOAL_OVERRIDES, stressBucketOf } from '../npcGenerator.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
+import { faceOfRole } from '../../data/holderTitleForms.js'; // TAIL-TITLES K-C: the bucket keys the face
 import { clamp, clamp01 } from '../../kernel/math.js';
 
 /** @typedef {Record<string, any>} Rec */
 /** @typedef {'short' | 'long'} Vantage */
 /** @typedef {{ kind: 'npc' | 'power' | 'house' | 'chain', id: string }} GoalTarget */
-/** @typedef {{ family: string, kind: string, text: string, target: GoalTarget | null, slots: Rec, refs: string[], crisisNote?: string | null, notes?: Rec[] }} Candidate */
+/** @typedef {{ family: string, kind: string, text: string, target: GoalTarget | null, slots: Rec, refs: string[], crisisNote?: string | null, notes?: Rec[], refused?: boolean }} Candidate */
 
 /** The keyed fork family the goals draw under (declared in the fork census). */
 export const GOALS_FORK_LABEL = 'people-goals';
@@ -266,6 +270,10 @@ export function goalContextOf(settlement, cards, relationships) {
     tier: str(settlement.tier) || 'town',
     organized: organizedCrimeOf(settlement),
     facts: () => (facts ??= factsOf(view)),
+    /** FAULTS-NEED item 2: whether a dependency's good is one the page's need list says is needed and not brought in */
+    needUnmet: (/** @type {unknown} */ resource) => goodNeededNotBroughtIn(settlement, resource),
+    // LAST-VARIETY (LR6 (5)): the unmet goods themselves, as the need list prints them (the `want` cell's {resource})
+    needUnmetGoods: (/** @type {unknown} */ resource) => goodsNeededNotBroughtIn(settlement, resource),
     /** the held texts refused so far (the receipt's `refused`, per card) */
     refusals: { n: 0 },
     // the handler's agents: handler id → [{ agent, archetype }] (the agent's covert handler tie names the kind)
@@ -344,26 +352,34 @@ function pursuitChances(card, ctx) {
   };
 }
 
+/** The slots that name a power (`{guild}` names one where the allegiance is to a power, else a house as a house). */
+const PROSE_SLOTS = new Set(['power', 'rival', 'guild']);
+
 /**
  * Every line of a cell the record fills and admits, unheld: the candidates of one sub-kind.
  * @param {string} family @param {string} kind @param {Vantage} vantage @param {Rec} slots @param {GoalContext} ctx
- * @param {Set<string>} held @param {{ target?: GoalTarget | null, refs?: string[] }} [extra]
+ * @param {Set<string>} held @param {{ target?: GoalTarget | null, refs?: string[], members?: number }} [extra] `members`: the power's members as the Power tab counts them (BAR8 K-PEOPLE 14h)
  * @returns {Candidate[]}
  */
 function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
   const cell = arr(rec(rec(/** @type {Rec} */ (GOAL_FAMILY_LINES)[family])[kind])[vantage]);
   if (!cell.length) return [];
+  // POWERS-16 (the chair's ruling (r2): a faction named in a sentence takes its prose form, from one leaf): the line
+  // prints a power slot through display/powerSentenceName.js ("Military/Guard" -> "The Guard"); the slots kept on the
+  // card (the keyed intent) keep the record's names, so every reader that matches a power by name still finds it.
+  const said = Object.fromEntries(Object.entries(slots).map(([k, v]) => [k, PROSE_SLOTS.has(k) && typeof v === 'string' && v ? powerSentenceName(v) : v]));
   const poolId = `goalFamilies:${family}.${kind}.${vantage}`;
   /** @type {Candidate[]} */
   const out = [];
   for (const line of cell) {
     const { result: kept, notes } = quiet(() => filterDeclared([line], { facts: ctx.facts, poolId, surface: 'npcs' }));
     if (!kept.length) continue;
-    const text = fillLine(templateOf(line), slots);
+    const text = fillLine(templateOf(line), said);
     if (!text) continue;
     if (held.has(text)) { ctx.refusals.n += 1; continue; }
     const used = Object.fromEntries(slotsIn(templateOf(line)).map((k) => [k, slots[k]]));
-    out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes });
+    const fewMembers = typeof extra.members === 'number' && (GOAL_LINE_MIN_MEMBERS[templateOf(line)] ?? 0) > extra.members; // BAR8 K-PEOPLE (14h)
+    out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes, ...(fewMembers ? { refused: true } : {}) });
   }
   return out;
 }
@@ -392,7 +408,7 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
     const rankOf = (/** @type {number} */ r) => cards.find((c) => c !== card && arr(c?.memberships).some((x) => str(rec(x).power) === power && Number(rec(x).rank) === r));
     if (rank === 2 || rank === 3) {
       const above = rankOf(rank - 1);
-      if (above) push(cellCandidates('RANK', 'climb', vantage, { power, above: personName(above) }, ctx, held, { target: { kind: 'npc', id: String(above.id) }, refs: [String(above.id)] }));
+      if (above) push(cellCandidates('RANK', 'climb', vantage, { power, above: personName(above) }, ctx, held, { target: { kind: 'npc', id: String(above.id) }, refs: [String(above.id)], members: facesInPower(cards, power).length }));
     } else if (rank === 1) {
       const below = rankOf(2);
       if (below) push(cellCandidates('RANK', 'defend', vantage, { power, below: personName(below) }, ctx, held, { target: { kind: 'npc', id: String(below.id) }, refs: [String(below.id)] }));
@@ -422,15 +438,36 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
     const target = /** @type {GoalTarget} */ ({ kind: 'house', id: houseKey });
     if (hf) {
       push(cellCandidates('INSTITUTION', 'solvency', vantage, { house: hf }, ctx, held, { target }));
-      push(cellCandidates('INSTITUTION', 'charter', vantage, { house: hf }, ctx, held, { target }));
+      // POWERS-9 (ROUND-3-CUT-INCREMENT pf#51 pf#421): the house's rights FROM those who govern are no goal of a criminal
+      // house (it asks no seal of the seat) nor of the head of the governing power (it IS those who govern). The lines stay
+      // in the draw, marked refused, so no card's draw moves; a refused pick resolves draw-free (drawVantage)
+      const govPower = str(rec(ctx.powers.find((p) => p.isGoverning)).faction);
+      const refuseCharter = ctx.crimHouseNames.has(houseKey) || (!!govPower && memberships.some((m) => str(m.power) === govPower && Number(m.rank) === 1));
+      push(cellCandidates('INSTITUTION', 'charter', vantage, { house: hf }, ctx, held, { target }).map((c) => (refuseCharter ? { ...c, refused: true } : c)));
       if (impaired.length) push(cellCandidates('INSTITUTION', 'rebuilding', vantage, { house: hf }, ctx, held, { target }));
       if (TRADING_SHELVES.includes(shelf)) {
         const others = [...new Set(own.flatMap((ch) => arr(ch.processingInstitutions).map((n) => ctx.rosterByFamily.get(ctx.famKey(n)))).filter((n) => n && n !== houseKey))];
         for (const other of others) { const of = houseFill(other); if (of) push(cellCandidates('INSTITUTION', 'takeover', vantage, { house: hf, otherHouse: of }, ctx, held, { target: { kind: 'house', id: other } })); }
       }
-      for (const ch of impaired) push(cellCandidates('SUPPLY', 'impaired', vantage, { chain: str(ch.label), house: hf }, ctx, held, { target: { kind: 'chain', id: str(ch.chainId || ch.label) } }));
-      for (const d of ctx.depsByHouse.get(ctx.famKey(houseKey)) || []) { const rf = resourceFill(d.resource); if (rf) push(cellCandidates('SUPPLY', 'dependency', vantage, { resource: rf, house: hf }, ctx, held, { target })); }
-      if (TRADING_SHELVES.includes(shelf)) for (const ch of own.filter((x) => RUNNING_STATUSES.includes(str(x.status)))) push(cellCandidates('SUPPLY', 'expansion', vantage, { chain: str(ch.label), house: hf }, ctx, held, { target: { kind: 'chain', id: str(ch.chainId || ch.label) } }));
+      // a chain's name in a goal is PRINTED words (the NPCs tab, the summary, the PDF, the Foundry journal): it is the
+      // name the page gives the chain (`chainPrintName`: the toll by the town's access); the target id stays the record's
+      for (const ch of impaired) push(cellCandidates('SUPPLY', 'impaired', vantage, { chain: str(chainPrintName(ch, ctx.view).label), house: hf }, ctx, held, { target: { kind: 'chain', id: str(ch.chainId || ch.label) } }));
+      // FAULTS-NEED item 2 (11e.wantBuy; the sixth chair's BRIEF-FAULTS, 2026-11-18; vetoable by the owner): a dependency goal
+      // presumes a supply of its good ("Secure a steady supply of {resource} …", "Buy {resource} at the market …"), so it is
+      // dealt only where the good is brought in or had: where the page's own need list says it is needed and not brought in
+      // (`facts/needNotBroughtIn.js`, held equal to `tradeListDisplay.js :: importsAsPrinted().needed`), the lines stay in the
+      // draw, marked refused, so no other card's draw moves; a refused pick takes the family's next admitted goal (drawVantage)
+      for (const d of ctx.depsByHouse.get(ctx.famKey(houseKey)) || []) {
+        const rf = resourceFill(d.resource);
+        if (!rf) continue;
+        const unmet = ctx.needUnmet(d.resource);
+        push(cellCandidates('SUPPLY', 'dependency', vantage, { resource: rf, house: hf }, ctx, held, { target }).map((c) => (unmet ? { ...c, refused: true } : c)));
+        // LAST-VARIETY (item 2; LR2): where the good is needed and not brought in, the lines of a house that LACKS it (`want`);
+        // LR6 (5): its {resource} names only the goods the need list prints, never the dependency's whole compound
+        const wf = unmet ? resourceFill(ctx.needUnmetGoods(d.resource).join(' + ')) : '';
+        if (wf) push(cellCandidates('SUPPLY', 'want', vantage, { resource: wf, house: hf }, ctx, held, { target }));
+      }
+      if (TRADING_SHELVES.includes(shelf)) for (const ch of own.filter((x) => RUNNING_STATUSES.includes(str(x.status)))) push(cellCandidates('SUPPLY', 'expansion', vantage, { chain: str(chainPrintName(ch, ctx.view).label), house: hf }, ctx, held, { target: { kind: 'chain', id: str(ch.chainId || ch.label) } }));
     }
   }
   if (ctx.isolation) {
@@ -485,7 +522,7 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
 
   // CRISIS (a stress the record holds): today's overrides by the card's role bucket, and the siege goal
   if (ctx.stressType && STRESS_GOAL_OVERRIDES[ctx.stressType] && vantage === 'short') {
-    const bucket = stressBucketOf(str(card.role));
+    const bucket = stressBucketOf(str(faceOfRole(card))); // TAIL-TITLES K-C: the face, not the holder's form
     const o = bucket ? rec(STRESS_GOAL_OVERRIDES[ctx.stressType])[bucket] : null;
     if (o) {
       const spoken = (/** @type {string} */ l) => resolveSibling(l, NPC_GOAL_SIBLINGS, { facts: ctx.facts, poolId: 'npcGenerator:NPC_GOAL_SIBLINGS', surface: 'npcs', drawKind: 'T' });
@@ -529,6 +566,19 @@ function fitOf(family, card, ctx, vantage) {
 }
 
 /**
+ * The next admitted candidate after a refused pick: the rest of its family's list in order (wrapping), then the other
+ * drawn families' lists in their order. Draw-free. @param {Record<string, Candidate[]>} by @param {string} family
+ * @param {Candidate} picked @param {string[]} families @returns {Candidate | null}
+ */
+function admittedAfter(by, family, picked, families) {
+  const own = by[family] || [];
+  const at = own.indexOf(picked);
+  for (let k = 1; k < own.length; k += 1) { const c = own[(at + k) % own.length]; if (!c.refused) return c; }
+  for (const f of families) if (f !== family) { const c = (by[f] || []).find((x) => !x.refused); if (c) return c; }
+  return null;
+}
+
+/**
  * ONE WEIGHTED DRAW for one vantage: the family by weight, then the sub-kind evenly, then the line evenly.
  * @param {Rec} card @param {Record<string, Candidate[]>} by @param {GoalContext} ctx @param {Vantage} vantage
  * @param {{ weightedPick: Function, pick: Function }} fork @param {string | null} notFamily
@@ -541,7 +591,10 @@ function drawVantage(card, by, ctx, vantage, fork, notFamily) {
   const kinds = [...new Set(by[family].map((c) => c.kind))];
   const kind = kinds.length === 1 ? kinds[0] : fork.pick(kinds);
   const lines = by[family].filter((c) => c.kind === kind);
-  const chosen = lines.length === 1 ? lines[0] : fork.pick(lines);
+  const picked = lines.length === 1 ? lines[0] : fork.pick(lines);
+  // POWERS-9: a refused pick takes the next admitted candidate after it (its own family's first, then the families in
+  // their drawn order), draw-free; none admitted deals nothing
+  const chosen = picked?.refused ? admittedAfter(by, family, picked, families) : picked;
   return { chosen, weights };
 }
 

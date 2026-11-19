@@ -1,0 +1,61 @@
+#14	MED	gone	rr2s-thorp-calm-rand-1		
+#40	MED	gone	rr2s-thorp-calm-rand-1		
+#48	HIGH	gone	rr2s-thorp-famine-rand-1		
+#116	MED	exact	rr2s-hamlet-calm-rand-1	.history.historicalCharacter	
+#149	MED	exact	rr2s-hamlet-under_siege-rand-1	.history.historicalCharacter	
+#203	MED	gone	rr2s-hamlet-plague_onset-rand-1		
+#208	MED	exact	rr2s-hamlet-plague_onset-rand-1	.economicViability.plotHooks[].hook	
+#230	MED	exact	rr2s-hamlet-plague_onset-rand-1	.history.founding.stressNote	
+#250	MED	gone	rr2s-village-calm-port-1		
+#261	MED	gone	rr2s-village-calm-port-1		
+#267	MED	exact	rr2s-village-famine-rand-1	.history.currentTensions[].description	
+#293	MED	exact	rr2s-village-famine-rand-1	.relationships[].description	
+#327	HIGH	gone	rr2s-village-monster_pressure-rand-1		
+#328	MED	exact	rr2s-village-monster_pressure-rand-1	.relationships[].description	
+#329	MED	exact	rr2s-village-monster_pressure-rand-1	.relationships[].description	
+#335	MED	exact	rr2s-town-calm-rand-1	.history.historicalCharacter	
+#395	MED	exact	rr2s-town-under_siege-rand-1	.history.historicalCharacter	
+#402	MED	exact	rr2s-town-under_siege-rand-1	.npcs[].plotHooks[]	
+#518	MED	gone	rr2s-town-plague_onset-rand-1		
+#519	MED	gone	rr2s-town-plague_onset-rand-1		
+#520	MED	gone	rr2s-town-plague_onset-rand-1		
+#521	MED	gone	rr2s-town-plague_onset-rand-1		
+#522	MED	gone	rr2s-town-plague_onset-rand-1		
+#523	MED	gone	rr2s-town-plague_onset-rand-1		
+#524	MED	gone	rr2s-town-plague_onset-rand-1		
+#585	MED	exact	rr2s-town-plague_onset-rand-1	.npcs[].secret.what	
+#587	MED	exact	rr2s-town-plague_onset-rand-1	.relationships[].description	
+#589	MED	exact	rr2s-town-plague_onset-rand-1	.relationships[].tension	
+#601	HIGH	head	rr2s-town-indebted-port-1	.pressureSentence	The interest on Qal'atqala's debt now outpaces what the trade can bring in; the numbers have been quietly rearranged twice to hide it, and there is no third arr
+#651	HIGH	gone	rr2s-town-indebted-port-1		
+#653	MED	exact	rr2s-town-indebted-port-1	.relationships[].tension	
+#738	MED	exact	rr2s-city-calm-rand-1	.relationships[].description	
+#856	MED	gone	rr2s-city-famine-rand-1		
+#857	HIGH	gone	rr2s-city-famine-rand-1		
+#860	MED	exact	rr2s-city-under_siege+famine-rand-1	.pressureSentence	
+#980	MED	exact	rr2s-city-under_siege+famine-rand-1	.npcs[].secret.what	
+#984	MED	exact	rr2s-city-under_siege+famine-rand-1	.history.founding.reason	
+#1001	MED	exact	rr2s-city-occupied-rand-1	.pressureSentence	
+#1004	MED	exact	rr2s-city-occupied-rand-1	.economicViability.plotHooks[].hook	
+#1195	MED	exact	rr2s-metropolis-calm-rand-1	.relationships[].description	
+#1196	MED	exact	rr2s-metropolis-calm-rand-1	.relationships[].description	
+#1205	MED	exact	rr2s-metropolis-wartime-rand-1	.arrivalScene	
+#1210	MED	exact	rr2s-metropolis-wartime-rand-1	.npcs[].plotHooks[]	
+#1294	MED	exact	rr2s-metropolis-wartime-rand-1	.npcs[].goal.short	
+#1300	MED	head	rr2s-metropolis-wartime-rand-1	.npcs[].secret.what	Has been under-declaring the settlement's stores to the requisition officers and selling the concealed grain to both armies
+#1312	HIGH	gone	rr2s-metropolis-plague_onset-port-1		
+#1322	MED	gone	rr2s-metropolis-plague_onset-port-1		
+#1323	MED	gone	rr2s-metropolis-plague_onset-port-1		
+#1324	MED	exact	rr2s-metropolis-plague_onset-port-1	.npcs[].plotHooks[]	
+#1325	MED	gone	rr2s-metropolis-plague_onset-port-1		
+#1327	MED	gone	rr2s-metropolis-plague_onset-port-1		
+#1328	MED	gone	rr2s-metropolis-plague_onset-port-1		
+#1331	MED	gone	rr2s-metropolis-plague_onset-port-1		
+#1332	MED	gone	rr2s-metropolis-plague_onset-port-1		
+#1333	MED	gone	rr2s-metropolis-plague_onset-port-1		
+#1334	MED	gone	rr2s-metropolis-plague_onset-port-1		
+#1336	MED	exact	rr2s-metropolis-plague_onset-port-1	.economicViability.plotHooks[].hook	
+#1399	MED	exact	rr2s-metropolis-plague_onset-port-1	.npcs[].secret.what	
+#1416	MED	exact	rr2s-metropolis-plague_onset-port-1	.relationships[].description	
+#1417	MED	exact	rr2s-metropolis-plague_onset-port-1	.relationships[].tension	
+#1424	MED	exact	rr2s-metropolis-plague_onset-port-1	.history.founding.stressNote	

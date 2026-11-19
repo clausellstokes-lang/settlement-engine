@@ -1,0 +1,28 @@
+STYLE-2-MERGE-14, point 49 — the whole check at the save tip 11c565b96 (= 7b86cdfb0's code; 11c565b96 adds docs only: git diff --name-only 7b86cdfb0 11c565b96 = the book + two probe files).
+Tree: detached worktree /home/user/wt-s49c, node_modules from npm ci (lockfile equal to the line's), ledger ref review-fixes-2026-07-08 235efce1a.
+Command, by the chair's ruling of ~00:10 UTC (two unsharded runs died): for i in 1..6: npx vitest run --maxWorkers=2 --shard=i/6 --reporter=dot --reporter=json --outputFile=<rec14>/shard-i.json, one after another.
+COVERAGE checked before the run: vitest list --filesOnly = 3245 files; vitest's own partition (BaseSequencer.shard: sha1 of '/'+path, sorted, calculateShardRange) = 541,541,541,541,541,540 = 3245, disjoint by construction ('vitest list' ignores --shard, so the plan was computed from the sequencer's code); AFTER: each shard's JSON files EQUAL its plan; the union 3245 distinct = vitest list.
+shard 1/6 start 00:15:01
+shard 1/6 exit 1 00:27:13
+shard 2/6 start 00:27:13
+shard 2/6 KILLED by a container restart at ~00:36 (log kept as shard-2.killed-by-restart-0036.log); re-run alone
+shard 2/6 start 00:36:38
+shard 2/6 exit 1 00:49:16
+shard 3/6 start 00:49:16
+shard 3/6 exit 0 00:58:52
+shard 4/6 start 00:58:52
+shard 4/6 exit 1 01:09:04
+shard 5/6 start 01:09:04
+shard 5/6 exit 1 01:26:59
+shard 6/6 start 01:26:59
+shard 6/6 exit 1 01:41:54
+ALL-DONE
+SHARD 2 was KILLED by a container restart at ~00:36 UTC and RE-RUN ALONE (00:36:38-00:49:16); its killed log kept outside the tree.
+shard 1: files 541 plan 541 EQUAL · passed 5968 failed 1 pending 8 · failed suites 2
+shard 2: files 541 plan 541 EQUAL · passed 6909 failed 2 pending 36 · failed suites 4
+shard 3: files 541 plan 541 EQUAL · passed 5763 failed 0 pending 11 · failed suites 0
+shard 4: files 541 plan 541 EQUAL · passed 6668 failed 0 pending 16 · failed suites 2
+shard 5: files 541 plan 541 EQUAL · passed 7023 failed 1 pending 24 · failed suites 2
+shard 6: files 540 plan 540 EQUAL · passed 6740 failed 8 pending 45 · failed suites 5
+TOTAL passed 39071 failed 12 skipped 140 · files 3245 (distinct 3245; vitest list 3245; UNION EQUAL) · files failed at load 2
+Refs + local config: snap.sh pre-shards = post-shards (SNAP EQUAL), and equal across the restart.

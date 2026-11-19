@@ -17,7 +17,9 @@ import { generatePowerStructure } from '../../src/generators/power/rulingStructu
 import { FACTION_DESC_SIBLINGS } from '../../src/data/powerSiblings.js';
 
 // Re-keyed with cause (SW-B1 CONTRADICTIONS, STYLE-RULINGS-2 B1 with the 10:2x addition): the line's words re-spelled under the style law, the sibling row with it.
-const WELL_FUNDED = 'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.';
+// BAR2-PEOPLE (PP6, 2026-11-15; the chair's ruling PT3): RE-KEYED BY IDENTITY, the same line reworded to claim neither funding
+// nor order (it is written at the power step, before the safety profile; was "Well-funded city watch; it keeps order reliably ...")
+const WELL_FUNDED = 'City watch; it answers for keeping order and is growing more sure of its own authority.';
 const STRETCHED = 'City watch; law enforcement and external defence, stretched between multiple responsibilities.';
 // Re-keyed with cause (W3 POW third seat, the owner's style law of 2026-11-07, worklist #174): the description's words moved.
 const COMMANDERS = 'Military commanders and their officers carry the most weight; ordinary business waits on the needs of defence.';

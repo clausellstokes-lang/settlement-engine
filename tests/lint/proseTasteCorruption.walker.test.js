@@ -102,10 +102,18 @@ describe('the corruption closure is re-measured, and refused above the precedent
     const desk = deskCost.files.map((f) => f.replace(`${ROOT}/`, '')).sort();
     const leaf = leafCost.files.map((f) => f.replace(`${ROOT}/`, '')).sort();
     expect(desk.filter((f) => !leaf.includes(f)), 'the desk adds nothing the leaf does not').toEqual([]);
+    // COHERENCE-AGREE-8 (2026-11-13) gave supplyChainState.js an import of display/chainPrintName.js (the toll's printed
+    // name), whose goods identity reaches data/entityTags.js, which the desk now ships: re-keyed by that cause.
+    // BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4, on the chair's word of 16:44 UTC): the desk now reaches the round's
+    // one fact src/domain/facts/houseInputAtHand.js (BAR4-SCENES-2 HW1 6dd18224a, "this house is short" read by the mark and the scene),
+    // which imports lib/entities.js :: institutionHasAnyTag (BAR4-RECORD R1 b7d3da983), so the desk ships lib/entities.js too: re-keyed
+    // by that cause (the byte arm above unmoved).
     expect(leaf.filter((f) => !desk.includes(f)), 'what the desk already ships').toEqual([
+      'src/data/entityTags.js',
       'src/domain/people/membership.js',
       'src/domain/prosperityRank.js',
       'src/domain/settlement.schema.js',
+      'src/lib/entities.js',
     ]);
     expect(deskCost.bytes).toBeLessThanOrEqual(leafCost.bytes);
     expect(deskCost.bytes).toBeLessThanOrEqual(PRECEDENT_BYTES);

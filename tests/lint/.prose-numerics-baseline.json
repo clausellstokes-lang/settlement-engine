@@ -295,66 +295,54 @@
   },
   {
     "path": "src/components/new/SummaryTab.jsx",
-    "line": 75,
+    "line": 76,
     "category": "floatInterpolation",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/new/SummaryTab.jsx",
-    "line": 75,
+    "line": 76,
     "category": "percentToken",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/new/SummaryTab.jsx",
-    "line": 91,
+    "line": 94,
     "category": "floatInterpolation",
     "snippet": "{f.power}"
   },
   {
     "path": "src/components/new/SummaryTab.jsx",
-    "line": 91,
+    "line": 94,
     "category": "percentToken",
     "snippet": "{f.power}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 157,
+    "line": 166,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 163,
+    "line": 172,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },
   {
     "path": "src/components/new/tabs/DailyLifeTab.jsx",
-    "line": 249,
+    "line": 258,
     "category": "floatInterpolation",
     "snippet": "{storeAiProgress || 'Regenerating…'}"
   },
   {
     "path": "src/components/new/tabs/EconomicsGlance.jsx",
-    "line": 128,
+    "line": 134,
     "category": "floatInterpolation",
     "snippet": "{ecoScore}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 238,
-    "category": "floatInterpolation",
-    "snippet": "{Math.round(chain.magicRecovery * 100)}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 238,
-    "category": "percentToken",
-    "snippet": "{Math.round(chain.magicRecovery * 100)}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
     "line": 246,
     "category": "floatInterpolation",
     "snippet": "{incomeEntry.percentage}"
@@ -388,42 +376,12 @@
     "line": 438,
     "category": "percentToken",
     "snippet": "{src.percentage}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 572,
-    "category": "floatInterpolation",
-    "snippet": "{Math.round((fb.agricultureModifier||1)*100)}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 572,
-    "category": "percentToken",
-    "snippet": "{Math.round((fb.agricultureModifier||1)*100)}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 573,
-    "category": "multiplier",
-    "snippet": "{fb.stressModifier}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 574,
-    "category": "floatInterpolation",
-    "snippet": "{Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 574,
-    "category": "percentToken",
-    "snippet": "{Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
     "line": 663,
     "category": "percentToken",
-    "snippet": "`Shadow Economy: ${bmc}% capture`"
+    "snippet": "`Shadow Economy: ${bmc}% of trade unrecorded`"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
@@ -433,25 +391,25 @@
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 298,
+    "line": 299,
     "category": "floatInterpolation",
     "snippet": "{leg.score}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 510,
+    "line": 491,
     "category": "floatInterpolation",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 510,
+    "line": 491,
     "category": "percentToken",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 536,
+    "line": 517,
     "category": "floatInterpolation",
     "snippet": "{Math.round(rung.standing*100)}"
   },
@@ -763,13 +721,13 @@
   },
   {
     "path": "src/domain/magicProfile.js",
-    "line": 156,
+    "line": 172,
     "category": "floatInterpolation",
     "snippet": "`${religious.name} (power ${religious.power}) restricts arcane practice.`"
   },
   {
     "path": "src/domain/magicProfile.js",
-    "line": 164,
+    "line": 180,
     "category": "floatInterpolation",
     "snippet": "`${arcane.name} (power ${arcane.power}) normalizes arcane practice.`"
   },
@@ -919,7 +877,7 @@
   },
   {
     "path": "src/generators/steps/generateEconomy.js",
-    "line": 416,
+    "line": 417,
     "category": "floatInterpolation",
     "snippet": "`Chain depends on ${state.dependency.institution} (${state.dependency.severity || 'unspecified'}).`"
   },
@@ -931,13 +889,13 @@
   },
   {
     "path": "src/generators/steps/resolveResources.js",
-    "line": 586,
+    "line": 631,
     "category": "floatInterpolation",
     "snippet": "`Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.`"
   },
   {
     "path": "src/generators/steps/resolveResources.js",
-    "line": 586,
+    "line": 631,
     "category": "percentToken",
     "snippet": "`Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.`"
   },
@@ -1021,37 +979,37 @@
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 310,
+    "line": 329,
     "category": "floatInterpolation",
     "snippet": "{flow}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 379,
+    "line": 401,
     "category": "floatInterpolation",
     "snippet": "{iss.severity}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 478,
+    "line": 500,
     "category": "floatInterpolation",
     "snippet": "{fb.deficitPct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 478,
+    "line": 500,
     "category": "percentToken",
     "snippet": "{fb.deficitPct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 483,
+    "line": 505,
     "category": "floatInterpolation",
     "snippet": "{fb.coveragePct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 483,
+    "line": 505,
     "category": "percentToken",
     "snippet": "{fb.coveragePct}"
   },
@@ -1087,7 +1045,7 @@
   },
   {
     "path": "src/pdf/sections/HistoryFounding.jsx",
-    "line": 382,
+    "line": 388,
     "category": "floatInterpolation",
     "snippet": "{Math.round(min + span * p)}"
   },
@@ -1099,61 +1057,55 @@
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 183,
+    "line": 184,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 329,
+    "line": 339,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 382,
+    "line": 392,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 542,
+    "line": 548,
     "category": "floatInterpolation",
     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 542,
+    "line": 548,
     "category": "floatInterpolation",
     "snippet": "{fb.coveragePct != null ? ` · imports cover ${fb.coveragePct}% of gap` : ''}"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 542,
+    "line": 548,
     "category": "percentToken",
     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 102,
+    "line": 103,
     "category": "floatInterpolation",
     "snippet": "{p.criminalCapture.score}"
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 236,
+    "line": 237,
     "category": "floatInterpolation",
     "snippet": "{f.power}"
   },
   {
-    "path": "src/pdf/sections/Services.jsx",
-    "line": 240,
-    "category": "floatInterpolation",
-    "snippet": "{flow}"
-  },
-  {
     "path": "src/pdf/sections/SystemStateSnapshot.jsx",
-    "line": 150,
+    "line": 151,
     "category": "floatInterpolation",
     "snippet": "{row.score}"
   }

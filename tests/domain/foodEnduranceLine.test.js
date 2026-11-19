@@ -150,6 +150,22 @@ describe('the Defense tab carries one Food endurance line, and it is a door to t
     }), 'one Food endurance line per place');
   });
 
+  // 2 + 20 (W2-A-LEAVES, 2026-11-12; the second wave's ruling, its CONDITION half): the siege figure is a
+  // condition, and only a besieged place reads it in the indicative. The census counted "under siege the outlying
+  // fields are lost" outside a siege in 689 of 720 towns, and the stores read as two answers to one question.
+  it('2 + 20: outside a siege the line is a condition; only a besieged place reads it as fact', () => {
+    expectNoSeedFailures(collectSeedFailures(CORPUS, ({ seed, s }) => {
+      const sentence = DD.foodEnduranceLine(s).sentence;
+      if (s.economicState.foodSecurity.hasSiege) {
+        expect(sentence, seed).toMatch(/\bthe siege has taken the outlying fields\b/i);
+      } else {
+        expect(sentence, seed).toMatch(/\bunder siege the outlying fields would be lost\b/i);
+        // anchored: the same sentence matched 'would be lost' on the line above
+        expect(sentence, seed).not.toMatch(/\bare lost\b|\bcarries\b|\bcarry the\b(?<!would carry the)|\bfeeds it\b|\bstands? in reserve\b/i);
+      }
+    }), 'the siege figure is a condition outside a siege');
+  });
+
   it('one fact, one home: no months figure on the Defense tab speaks of food except the Food endurance line', () => {
     const FOOD_WORDS = /\b(?:granar(?:y|ies)|stores?|rations?|food|grain|larder|harvest(?:ed)?)\b/i;
     const FIGURE = /\b(?:\d+(?:\.\d+)?|a|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|a few) (?:months?|weeks?)\b|\b(?:a|two) years?\b/i;

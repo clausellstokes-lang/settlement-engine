@@ -1,0 +1,23 @@
+# STYLE-2-MERGE-13, point 49. The check at 7b86cdfb0 did not finish (suite2.summary.txt): no red of it can be named.
+# BELOW: the rehearsal check's reds at 91f581649 (finished), one a line, file > title, and what a fourteenth seat should expect at 7b86cdfb0.
+# EXPECTED STILL RED at 7b86cdfb0 (the line's carried set after point 48):
+tests/build/landingFixtureFreshness.test.js > a fresh derivation reproduces the committed module BYTE FOR BYTE
+tests/build/landingFixtureFreshness.test.js > the script's own --check arm agrees, and is wired to say how to fix it
+tests/data/foundingWorldBones.test.js > every promise holds in at least 19 of 20 forks at the card's dials (Mossgate)
+tests/property/dossierProseManifest.test.js > THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally is derived rather than described
+tests/property/dossierProseManifest.test.js > THE DRIFT ARM: no row added, no row removed, no row moved (1,038 rows at the merge)
+tests/property/dossierProseManifest.test.js > THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a pool is mixed
+tests/lint/newsHeadlineContract.walker.test.js > [FILE FAILED TO LOAD]
+tests/lint/newsVoiceContract.walker.test.js > [FILE FAILED TO LOAD]
+tests/lint/proseFamilyContract.walker.test.js > A1 · A2 · A3 · A5 · A6 (five titles)
+tests/lint/siteCoherenceRatchet.test.js > C1 — the live row set equals the frozen baseline (the sixteen rows)
+# EXPECTED GREEN at 7b86cdfb0 (red at 91f581649, cured by phase two's commits — a red here is NEW and a stop):
+tests/lint/presumedThings.walker.test.js > ARM 1 every source literal … ; ARM 1 no stale row ; ARM 3 no strip without its row   (49a: 55148a2f4, 3628f37cc, bfab7bdd8)
+tests/lint/observedShapeReaders.walker.test.js > SHRINK-ONLY ; A1/A7                                                          (49b: 7f2f84239)
+tests/lint/writerReach.walker.test.js > [FILE FAILED TO LOAD]                                                                  (49c: 5f78010f5, dbcdd5a96)
+tests/lint/factLayers.walker.test.js > POOLS ; READERS (and the first-total arm)                                               (49d: b4c3640bf, 19dd60303, a7bf9aa0e)
+tests/lint/tuningRegister.walker.test.js > the measured tree matches the committed inventory exactly                          (d02c3a058)
+tests/copy/voiceMechanics.test.js > per-file debt exactly matches the baseline                                                 (the lane's b861d1b22)
+tests/generators/institutionBudgetPromise.test.js > every one of sixty seeds is byte-identical …                               (7e0776804)
+# Each of the "expected green" files was run alone at or after its cure commit and passed (2k.5); tests/lint/sovereigntyLightingContract
+# 34/34 at 9b6b9962d. verify:dist NOT run at 7b86cdfb0 (it follows the check).

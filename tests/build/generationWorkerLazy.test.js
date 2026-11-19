@@ -447,7 +447,76 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //            (39) +518
 //   The sum closes exactly at the final tip's worker bundle. The largest: SW-10 HOOKS +25,794 (the hook pools), SW-7 POWER-SIDE
 //   +4,823, SW-B5 FRAMES +2,298, URBAN-FIX +1,440; SW-6 CRISIS-SURFACES -5,697. Recorded AT the measured figure; MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 2008268;
+// 2,008,268 -> 2,303,278 (2026-11-15, TAIL-CLOSE-WORKER-1, THE CLOSE OF THE TAIL ROUND; the W0-CLOSE idiom, the chair's ruling WB1
+// under the owner's delegation, ODQ §934.105 — the ceiling re-recorded ONCE at the close's tree at the measured figure, the bytes
+// attributed BY MERGE STAGE (not by every point), NO buy-back tonight (a later tidy may buy bytes back); VETOABLE BY THE OWNER):
+// A RISE OF 295,010 B. MEASURED by a fresh `npm run build` of each stage's tree in a scratch worktree, read by this file's own arm;
+// the base 7dc7757fa (the last re-record) reads 2,008,268 (the ceiling, exactly). By stage (the first-parent commit closing each
+// merge seat of lane/join-2026-11-14):
+//   STYLE-2-MERGE points 42-49 976db5b19 +70,863 (COHERENCE-QUARREL/-PRESUME/-POWERS/-AGREE, VISIBLE-BUGS, POOL-GUARD,
+//   W2-A-LEAVES, W2-B-DECLARE, the instrument lane) · JOIN-1 216eeb41f +135,871 (r2-code-a/-b, r3-code-c, r3-tabs, w2-write,
+//   w2-c-leaves, w2-fix-data, powers-follow-up, coherence-upkeep, agree-follow-up) · JOIN-2 7d12b40cb -11 · JOIN-3 b6a5f97ab 0 ·
+//   JOIN-4 e5b421802 +11,682 · JOIN-5 48fedbe98 +4,209 · JOIN-6 eb054d53f +17,402 (the tail wave's first points) · JOIN-7
+//   72c37436d +52,053 · JOIN-8 1b5db4a77 +20,957 · JOIN-9 ae50369d4 -16,679 · JOIN-10 dc4bae117 +30 · JOIN-11 ffdd541a0 -2,210 ·
+//   JOIN-12 f8042b61a +641 · the doors' close 73090ee9e +202 (the repeated secret's cure). The sum closes exactly: 2,008,268
+//   + 70,863 + 135,871 - 11 + 0 + 11,682 + 4,209 + 17,402 + 52,053 + 20,957 - 16,679 + 30 - 2,210 + 641 + 202 = 2,303,278, the
+//   close's worker bundle. The largest stages' candidates BY THE DIFF'S SOURCE SIZE, NOT BY A BUILD: JOIN-1 (institutionDescVariants,
+//   tradeListDisplay, dossierStateProse defense/general, historyData); STYLE-2-MERGE 42-49 (facts/registeredWords, pageCensusFindings,
+//   power/conflictIssues, generationCoherence, facts/factLayers); JOIN-7 (historyData, computeActiveChains, crisisStoppedRow,
+//   crisisDependence, defenseDisplay). The table: docs/chair/2026-11-15/close/TAIL-CLOSE-WORKER-1-HANDBACK.md. Recorded AT the
+//   measured figure; MONOTONE-DOWN from here.
+// 2,303,278 -> 2,312,179 (2026-11-15, BAR2-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR2; the chair's ruling B3 under the owner's
+// word of 2026-11-15 07:50 UTC, which deferred the size budgets to the chair, and the chair's decision A; VETOABLE BY THE OWNER):
+// A RISE OF 8,901 B. MEASURED by one fresh `npm run build` of each tree in a scratch clone, read by this file's own arm: the
+// line's closed tip 74ded1800 reads 2,303,278 (the ceiling, exactly); the round's joined tree (59185b62a + the sweep-a repair
+// 87bbb6c87) reads 2,312,179. The cause: the src/ cures of the round's five branches AS A WHOLE (lane/bar2-corpus, -services,
+// -places, -people, -labels: 39 first-parent commits 74ded1800..59185b62a); the worker carries the whole engine, so the shared-
+// domain excisions (labels' vite.config.js line: display/magicProvisionShown.js, facts/magicSource.js; sweep-a: facts/ironAtHand.js)
+// move no byte of it (customContentPreview.worker moves by the same +8,901). The app build's largest chunk moves over the same
+// span, for orientation: engine +5,463, data-lazy +3,803, crisisStoppedRow +1,688 (services SV6), engine-core +1,314. Recorded
+// AT the measured figure; MONOTONE-DOWN from here.
+// 2,312,179 -> 2,322,103 (2026-11-15, BAR3-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR3 (the joined line 98363cb84 + the sweep-a repair through 03abf16cd, merged 1ac74a4c0; the edge bundles re-derived 9d7c7fbc5 and holding after the last merge); the chair's
+// ruling B3 under the owner's word of 2026-11-15 07:50 UTC, which deferred the size budgets to the chair; VETOABLE BY THE OWNER):
+// A RISE OF 9,924 B. MEASURED by one fresh `npm run build` of each tree in a scratch clone, read by this file's own arm
+// (VERIFY_DIST=1): the line's closed tip 83fc14ad6 reads 2,312,179 (the ceiling, exactly); this tree reads 2,322,103. The cause:
+// the src/ cures of the round's seven branches AS A WHOLE (lane/bar3-corpus, -services, -places, -labels, -defecon, -people,
+// -powers: 8 first-parent commits 83fc14ad6..98363cb84) and the sweep seat's display leaf; the sweep seat's chunking cure
+// (vite.config.js: facts/sharedPower.js stays in engine-core) moves no byte of the worker (measured 2,322,103 before it and
+// after). customContentPreview.worker moves by the same +9,924. The app build over the same span, for orientation: engine
+// +5,447, engine-core +520 (of it +509 the chunking cure), data +120. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 2,322,103 -> 2,356,121 (2026-11-16, BAR4-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR4: the joined line 2d80aa740 + THE ONE MERGE of
+// 600b7683a (the repair seat BAR4-CLOSE-SWEEP and the first-paint seat BAR4-FIRSTPAINT), merged abf643259, the edge bundles re-derived
+// e8852a5b5; re-recorded ONCE under the chair's ruling B3, the owner's word of 2026-11-15 07:50 UTC deferring the size budgets to the
+// chair; VETOABLE BY THE OWNER): A RISE OF 34,018 B. MEASURED by one fresh `npm run build` of each tree in a scratch clone, read by this
+// file's own arm (VERIFY_DIST=1): the line's closed tip c4ac1ef84a reads 2,322,080 (23 under the old ceiling); this tree reads
+// 2,356,121. The cause: the src/ cures of the round's nine branches AS A WHOLE (the worker carries the whole engine); the largest by
+// their hand-backs' own measures: BAR4-SCENES-2 +13,714 at its tip over the joined f19c3b28b (2,342,187 -> 2,355,901: HW1's one fact for
+// "this house is short", `trade at work` and the namesake's one home), BAR4-HOUSES +4,657 (the atom, the reader, the late sets, the leaf),
+// BAR4-PEOPLE +3,898 (the pair readings); then BAR4-RECORD +3,229, BAR4-SAFETY +2,746, BAR4-HISTORY +2,669, BAR4-CORPUS-ECO +1,724,
+// BAR4-CORPUS-DEF +1,023, each on its own base; BAR4-FIRSTPAINT's seam moves no byte of the worker and the repair seat's last cures
+// +220. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 2,356,121 -> 2,525,028 (2026-11-18, CLOSE-DOORS-1B, THE CLOSE OF 2026-11-18: the working line 70e557d5b + the close's three merges,
+// merged 7a7204c00, the edge bundles re-derived 22e072a49; re-recorded ONCE under the chair's ruling CL12, ON THE OWNER'S WORD: on
+// 2026-11-18 at 03:42:43 UTC the owner wrote in the chair's chat, the whole of it, "I defer these to you:" then, after an empty line,
+// "the Vercel limit; "accept the worker size")", answering the chair's question of 03:24 UTC, and THE CHAIR ACCEPTED IT; it stays on
+// the owner's veto list by name): A RISE OF 168,907 B, OVER THE 60,000 STOP, accepted. MEASURED by one fresh `npm run build` of each
+// tree, read by this file's own arm (VERIFY_DIST=1): the last close's tip 6483322cc and the line before the rounds 600b7683a read
+// 2,356,121; this tree reads 2,525,028 (70e557d5b the same: the close's merges move no byte of the worker). THE CAUSE, MEASURED BY
+// ROUND (one build of each boundary of the line's first parent): the round BAR5 (JOIN-16 points 1 to 9, to db62ab299) +54,698;
+// SECRETS-1 and DEBT-1 (JOIN-17 points 30 to 32, 47666fd8f -> 580cc26c6) +50,887 (the rare secrets' tables); the round BAR6
+// (points 1 to 11, to 570e3c351) +25,413; then BIRTH-3 (point 33) +14,690, the sixth chair's points 36 to 53 +12,678, BAR7 (20 to
+// 29) +7,995, the seam (12 to 19) +2,546. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 2,525,028 -> 2,579,708 (2026-11-19, LASTCLOSE-SIGN, THE LAST CLOSE BEFORE THE DEPLOY: the landings' tip cc11c9504 (points 54 to
+// 70) + LASTCLOSE-DOORS (point 71, 8ecd28085), the edge bundles re-derived 319d75ac1; re-recorded ONCE as the brief lets the seat
+// (a rise under 60,000 B in one ceiling; the chair's message of 2026-11-19 names the figure); VETOABLE BY THE OWNER): A RISE OF
+// 54,680 B. MEASURED by one fresh `npm run build` of each tree, read by this file's own arm (VERIFY_DIST=1; at each step a scratch
+// copy of this file with the ceiling at 0, removed): the first close's tip 0dee69e17 reads 2,525,028; this tree 2,579,708. THE
+// CAUSE, BY LANDING STEP (one build at each first-parent landing commit over 0dee69e17): FAULTS-WATCH (point 66) +26,098; FAULTS-NEED
+// (61) +4,751; FAULTS-ROWS (65) +4,722; K-WATCH, K-POWERS, K-WATCH-2 (48, 49, 57) +4,333; LAST-DECLARE (69) +3,694; the desks
+// (51, 52, 59) +3,102; K-PEOPLE, PEOPLE-2 (50, 58) +2,997; FAULTS-PEOPLE (62) +1,705; FAULTS-BIRTH (63) +1,539; MARKS-2 (56) +891;
+// LAST-VARIETY (70) +561; FAULTS-BIRTH's follow-ups (68) +400; FAULTS-DESKS (64) +141; FR25 (67) +74; J-INCOME-2 (54) -328;
+// PDF-2b (55), FAULTS-TOOLS (60) and point 71 +0. Recorded AT the measured figure; MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 2579708;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
@@ -773,7 +842,7 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
     expect(
       bytes,
       `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is `
-      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling, 2026-11-07, MERGE-R2, ODQ §934.105). `
+      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling B3, 2026-11-15, the close of the round BAR3, as at the close of BAR2; before it WB1, ODQ §934.105). `
       + 'A RISE IS NEVER A LANE\'S EDIT: buy the bytes back, or take the ruling.',
     ).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
   });

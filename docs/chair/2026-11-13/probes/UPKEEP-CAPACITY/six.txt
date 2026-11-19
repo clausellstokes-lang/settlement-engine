@@ -1,0 +1,28 @@
+### cold-town-116 (town) holds: Alchemist shop, Caravaneer's post, Carriers' guild, Courthouse, Market square, Monastery or friary, Parish churches (2-5), Town hall, Town watch, Weekly market, Wizard's tower
+  base readiness  62 Well-Defended    military 62 beasts 40 order 49 supply 97 magic 50
+  A    readiness  56 Well-Defended    military 57 beasts 38 order 36 supply 89 magic 50
+  B    readiness  60 Well-Defended    military 62 beasts 39 order 45 supply 93 magic 50
+### cold-city-227 (city) holds: Alchemist quarter, Apothecary district, City hall, City walls and gates, Cobbler's guild, Daily markets, Enchanter's shop, Fish market, Furrier's district, Garrison, Mages' guild, Major annual fairs, Mercenary quarter, Merchant guilds (15-40), Multiple adventurers' guilds, Multiple courthouses, Multiple market squares, Parish churches (10-30), Professional city watch, Scroll scribe, Tailor's guild
+  base readiness  68 Well-Defended    military 100 beasts 98 order 40 supply 100 magic 78
+  A    readiness  68 Well-Defended    military 100 beasts 96 order 40 supply 100 magic 78
+  B    readiness  70 Well-Defended    military 100 beasts 100 order 48 supply 100 magic 78
+### cold-thorp-0 (thorp) holds: Access to parish church
+  base readiness  25 Lightly Defended military 25 beasts 22 order 31 supply 21 magic 0
+  A    readiness  23 Vulnerable       military 25 beasts 15 order 31 supply 21 magic 0
+  B    readiness  24 Lightly Defended military 25 beasts 18 order 31 supply 21 magic 0
+### cold-village-65 (village) holds: Adventurers' charter hall, Parish church
+  base readiness  18 Vulnerable       military 25 beasts 36 order 0 supply 46 magic 0
+  A    readiness  16 Vulnerable       military 24 beasts 23 order 0 supply 46 magic 0
+  B    readiness  17 Vulnerable       military 25 beasts 29 order 0 supply 46 magic 0
+### fresh6-metropolis-30 (metropolis) holds: Academy of magic, Apothecary district, City hall, Cobbler's guild, District markets (5-10), Elder Grove Council, Enchanter's shop, Fish market, Furrier's district, Great cathedral, Hospital network, International trade center, Mages' district, Major annual fairs, Massive prison, Massive walls and fortifications, Merchant guilds (50-100+), Multiple adventurers' guilds, Multiple court buildings, Multiple garrisons, Multiple market squares, Parish churches (50-100+), Professional city watch, Scroll scribe, Tailor's guild
+  base readiness  93 Fortress         military 100 beasts 100 order 66 supply 100 magic 99
+  A    readiness  93 Fortress         military 100 beasts 100 order 66 supply 100 magic 99
+  B    readiness  96 Fortress         military 100 beasts 100 order 81 supply 100 magic 99
+### cold-under_siege-town-52 (town, under_siege) holds: Barracks, Market square, Merchant guilds (3-8), Parish churches (2-5), Small hospital, Tailor's guild, Town hall, Town walls, Town watch, Weekly market
+  base readiness  49 Defensible       military 100 beasts 67 order 16 supply 58 magic 28
+  A    readiness  40 Defensible       military 90 beasts 53 order 0 supply 54 magic 28
+  B    readiness  46 Defensible       military 99 beasts 62 order 9 supply 56 magic 28
+### cold-town-139 (town) holds: Carriers' guild, Cobbler's guild, Fish market, Free company hall, Market square, Merchant guilds (3-8), Parish churches (2-5), Town hall, Town watch, Weekly market
+  base readiness  41 Defensible       military 41 beasts 0 order 40 supply 68 magic 44
+  A    readiness  29 Lightly Defended military 29 beasts 0 order 24 supply 50 magic 31
+  B    readiness  37 Lightly Defended military 37 beasts 0 order 35 supply 62 magic 40

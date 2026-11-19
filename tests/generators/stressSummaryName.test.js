@@ -102,7 +102,7 @@ describe('F8 — stress summaries render with the real settlement name', () => {
       expect(so.map((e) => e.summary), `stress/stressors parity (seed ${seed})`).toEqual(st.map((e) => e.summary));
     });
     expectNoSeedFailures(failures, 'no persisted stress entry carries a summaryRoll token');
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the ratchet's instruction; 2026-11-18): 19.0 s here under load; 20.3 s and 23.1 s on CI's ratchet runner (runs 44295605654, 44282875950)
 
   it('is deterministic — same config+seed reproduces identical summaries', () => {
     for (const type of ['under_siege', 'wartime', 'religious_conversion', 'plague_onset']) {

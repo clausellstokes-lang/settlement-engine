@@ -307,7 +307,9 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // 15/2 car 1b-2 fb0341b93 -> 19/4 PINS 37b1e746d -> 22/4 car 3 I7 6ca454d2b -> 18/3 F6 6d84aa834; nothing else moves them.
     // Every escalation still EXHAUSTS, and the layer channel is still silent (both lists empty at every stage).
     expect(Object.entries(byEdit).sort(), 'the config channel escalates on both world-fact edits, at the figures measured at this landing')
-      .toEqual([['E7 terrain to desert', 18], ['E8 culture to norse', 3]]);
+      // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; the draft names it for the merge seat): measured at the signed tree EQUAL to the lane's own tip 69b53decd: E7 18 -> 21, E8 3 held.
+      // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): measured by this file's census at the golden's tree 8c11f73ea: E7 21 -> 22, E8 3 -> 5 (the round's re-drawn casts and economy fields).
+      .toEqual([['E7 terrain to desert', 22], ['E8 culture to norse', 5]]);
     // 2026-10-31, the GS-2 merge (lane G2, ODQ §934.101) then chair ruling X-29 (cure lane T13), each measured:
     // GS-2 re-dealt the world-fact re-derivations, E7 30 -> 31 and E8 10 -> 9, and its derived conflicts put TWO
     // power-card trials on the layer channel, exhausting on V-EVIDENCE-CONFLICT; the X-29 restatement of the receipt's
@@ -324,7 +326,7 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     expect(Object.entries(liveById).sort(), 'what the cure LEAVES on the world-fact channel: ONE '
       + 'REFERENTIAL cross-key check, and no prose-count or citation check at all. EM-B2b owns this seam '
       + '(EM-R7 §6 declares it dark)')
-      .toEqual([['V-DEFENSE-INST', 21]]); // 2026-11-05 (LANDING-5, by stage): 35 -> 37 -> 36 -> 16 -> 17 -> 23 -> 26 -> 21 at the same seven steps as E7/E8 above
+      .toEqual([['V-DEFENSE-INST', 27]]); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): the same escalation counts as A2 (E7 22 + E8 5): 24 -> 27, measured by this file's own census at the golden's tree 8c11f73ea; STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalation counts as A2 (E7 21 + E8 3): 21 -> 24; // 2026-11-05 (LANDING-5, by stage): 35 -> 37 -> 36 -> 16 -> 17 -> 23 -> 26 -> 21 at the same seven steps as E7/E8 above
     // 2026-10-31, the GS-2 merge then chair ruling X-29 (cure lane T13): V-EVIDENCE-CONFLICT 8 -> 9 at the GS-2 re-deal,
     // then 9 -> 0, because the post-pass now restates the conflict citations from the merged record; V-DEFENSE-INST
     // unmoved at 35. The roster of what the cure leaves shrinks to one id.
@@ -388,7 +390,16 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // RE-KEYED at STYLE-2-MERGE point 46 (2026-11-13, the COHERENCE-POWERS merge 6aeaa4154; a figure its drafted record names for
     // the merge seat, mergeLadderHeldKeys A3): 62 -> 63, this arm's received value at the merged tree: the dual hat re-deals the cast
     // and the ties whose conflicts the post-pass restates (+1). `foreign` stays empty.
-    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(63);
+    // RE-KEYED at STYLE-2-MERGE point 47 (2026-11-13, BY MEASUREMENT, the chair's ruling (3) on STOP 47d): COMPOSED at point 47 —
+    // the line f572d12b7 reads 63, the COHERENCE-AGREE lane's own tip 69b53decd 66, the merge 22cc9ef7d 61. Against the line, by
+    // trial: JOINED 'E8 culture to norse town|germanic|plains|road|plagued|golden-master-v3'; LEFT the three 'E6 seat' trials on
+    // town|germanic|plains|road|civilized / frontier / safe|golden-master-v3. `foreign` stays empty (the rebuilt rows the record's own).
+    // RE-KEYED at the close of the rounds BAR5 to BAR8 (2026-11-18, CLOSE-DOORS-2, BY MEASUREMENT; record docs/shift-records/2026-11-18-the-close-of-the-
+    // rounds-bar5-to-bar8.json, the owner's word 2026-11-18 03:03:46 UTC): 61 -> 62, this arm's received value at the frozen line 70e557d5b and at the
+    // doors' branch over Part 1's final tip 0af60594a. Green (61) at 6c117344f; bisected on the line's first parent: first 62 at JOIN-17 point 26
+    // (BAR7-LINES, 870e80030; point 25's d94dbdcba reads 61): a pair's second tie in the first's sense re-deals the rival ties a conflict rides on
+    // (its declared conflicts, 29 of the 525), so one more trial's conflict citations are rebuilt by the post-pass. `foreign` stays empty.
+    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(62);
     const foreign = all.filter((trial) => trial.citesOwn === false).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: the line above proves the restatement fires on twelve live trials, so silence here is a cure.
     expect(foreign, `the receipt cites a conflict list that is not the merged record's own:\n${foreign.join('\n')}`).toEqual([]);
@@ -495,7 +506,9 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // 2026-10-31, chair ruling X-29 (cure lane T13; the GS-2 merge, ODQ §934.101): 458 -> 463 (noisy 40 -> 35), the
     // conflict-citation restatement (A2).
     // 2026-11-05 (LANDING-5, by stage): 463 -> 461 -> 462 -> 482 -> 481 -> 475 -> 472 -> 477 at the seven steps A2 names (noisy 35 -> 21).
-    expect(quiet.length, 'the trials in which no rung fires at all').toBe(477);
+    // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; the draft names it for the merge seat): measured at the signed tree EQUAL to the lane's own tip 69b53decd: 477 -> 474.
+    // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 474 -> 471, measured by this file's census at the golden's tree 8c11f73ea (A2's same cause: three more escalating trials).
+    expect(quiet.length, 'the trials in which no rung fires at all').toBe(471);
     // anchored: 463 of 498 trials are quiet by the expectation above, so this list is drawn from a live set.
     expect(noisyRepairs, `repairs moved with no rung firing at all:\n${noisyRepairs.join('\n')}`).toEqual([]);
     // anchored: the same census carries 35 noisy trials (A2), so the explanation below is exercised.
@@ -511,13 +524,15 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     const quiet = all.filter((trial) => trial.escalations.length === 0);
     // 2026-10-31, chair ruling X-29 (cure lane T13; the GS-2 merge): 458 -> 463, the restated conflict citations (A2).
     // 2026-11-05 (LANDING-5, by stage, as A5): 463 -> 477.
-    expect(quiet.length, 'the quiet trials, which are 477 of 498 once the ladder stops repairing held facts').toBe(477);
+    // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; the draft names it for the merge seat): measured at the signed tree EQUAL to the lane's own tip 69b53decd: 477 -> 474.
+    // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 474 -> 471, as A5.
+    expect(quiet.length, 'the quiet trials, which are 471 of 498 once the ladder stops repairing held facts').toBe(471);
     const drifted = quiet.filter((trial) => !trial.mergedIsPipeline).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: `quiet` is 463 rows by the expectation above.
     expect(drifted, 'a quiet trial whose merged record is not mergeTree + '
       + `recomputeReceipts of its own inputs — the guard changed something while doing nothing:\n${drifted.join('\n')}`).toEqual([]);
     const noisy = all.filter((trial) => trial.escalations.length > 0);
-    expect(noisy.length, 'and the blast radius of the ladder is exactly the config channel A2 measures').toBe(21); // X-29: 40 -> 35; 2026-11-05 (LANDING-5, by stage): 35 -> 21
+    expect(noisy.length, 'and the blast radius of the ladder is exactly the config channel A2 measures').toBe(27); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): as A2 (498 - 471): 24 -> 27; // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalation counts as A2 (498 - 474): 21 -> 24; // X-29: 40 -> 35; 2026-11-05 (LANDING-5, by stage): 35 -> 21
   }, SLOW);
 
   it('A7 · the chain: determinism and undo hold, and the power card stops making history it did not make', () => {

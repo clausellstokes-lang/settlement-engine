@@ -15,7 +15,9 @@ import {
 // Pushes import labels when demand exceeds supply; export bonus when surplus.
 // Builds on top of TRADE_DEPENDENCY_NEEDS (raw resources) without replacing it.
 // Returns source additions so the flat-list caller can retain exact ownership.
-export function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearbyResources, chainExports, chainImports) {
+// `refusedOnly` (COHERENCE-AGREE-6, F2): the goods only refused chains make (domain/chainYield.js ::
+// goodsOnlyRefusedChainsMake). The export bonus never sells one: the card says the chain does not yield it now.
+export function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearbyResources, chainExports, chainImports, refusedOnly = new Set()) {
   const projection = {
     customTradeEndpoints: [],
     nativeExportsAdded: [],
@@ -97,7 +99,7 @@ export function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearb
     }
 
     // ── Export bonus: supply substantially exceeds demand ─────────────────
-    if (gap < -2 && cfg.exportBonus && !alreadyExporting(cfg.exportBonus)) {
+    if (gap < -2 && cfg.exportBonus && !alreadyExporting(cfg.exportBonus) && !refusedOnly.has(cfg.exportBonus.toLowerCase())) {
       chainExports.push(cfg.exportBonus);
       projection.nativeExportsAdded.push(cfg.exportBonus);
     }

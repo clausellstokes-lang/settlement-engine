@@ -1,0 +1,43 @@
+[gate-tail] start:  10:00:23 up  1:35,  0 user,  load average: 0.46, 1.03, 1.27 · cores: 4
+page-census: rendering 12 dossiers (4 workers) into /tmp/page-census-iTr1LI
+FALL  r2r-city-0 P11
+FALL  r2r-city-0 P13
+FALL  r2r-city-0 P16powers
+FALL  r2r-city-0 P18
+FALL  r2r-city-0 P1b
+FALL  r2r-city-0 P6need
+FALL  r2r-hamlet-0 P17
+FALL  r2r-hamlet-0 P6need
+FALL  r2r-hamlet-0 P8any
+FALL  r2r-metropolis-0 P16powers
+FALL  r2r-metropolis-0 P18
+FALL  r2r-metropolis-0 P1b
+FALL  r2r-metropolis-0 P6need
+FALL  r2r-thorp-0 P13
+FALL  r2r-thorp-0 P6need
+FALL  r2r-town-0 P16powers
+FALL  r2r-town-0 P6need
+FALL  r2r-village-0 P6need
+FALL  r2s-indebted-village-0 P11
+FALL  r2s-indebted-village-0 P14
+FALL  r2s-indebted-village-0 P6need
+FALL  r2s-infiltrated-town-0 P4
+FALL  r2s-infiltrated-town-0 P6need
+FALL  r2s-insurgency-metropolis-0 P16powers
+FALL  r2s-insurgency-metropolis-0 P1b
+FALL  r2s-insurgency-metropolis-0 P6need
+FALL  r2s-occupied-hamlet-0 P11
+FALL  r2s-occupied-hamlet-0 P17
+FALL  r2s-occupied-hamlet-0 P6need
+FALL  r2s-occupied-hamlet-0 P8any
+FALL  r2s-occupied-hamlet-0 P9
+FALL  r2s-succession_void-city-0 P11
+FALL  r2s-succession_void-city-0 P16powers
+FALL  r2s-succession_void-city-0 P1b
+FALL  r2s-succession_void-city-0 P6need
+FALL  r2s-under_siege-thorp-0 P13
+FALL  r2s-under_siege-thorp-0 P17
+FALL  r2s-under_siege-thorp-0 P6need
+FALL  r2s-under_siege-thorp-0 P8any
+page-census --grid: 39 fall(s)
+[gate-tail] end:  10:00:52 up  1:35,  0 user,  load average: 2.38, 1.46, 1.41

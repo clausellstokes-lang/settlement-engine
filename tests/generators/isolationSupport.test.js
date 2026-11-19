@@ -173,12 +173,16 @@ describe('isolation support model', () => {
     ].find(item => item.category === 'Economic Isolation');
     expect(isolationAnalysis).toBeTruthy();
     // Asserted BEFORE the exclusion: the description must name this settlement's live
-    // capacity ratio, so the "no fatalism" assertion below cannot pass on an empty or
-    // re-shaped description.
-    expect(isolationAnalysis.description).toContain(
-      `${settlement.isolationSupport.capacity}/${settlement.isolationSupport.requiredCapacity}`,
-    );
-    // anchored: the capacity-ratio toContain above proves the description is live prose
+    // support paths, so the "no fatalism" assertion below cannot pass on an empty or
+    // re-shaped description. RE-KEYED by identity (UPKEEP-9, the increment's #ww-522): the
+    // anchor was this settlement's capacity ratio, which the page no longer prints (the
+    // capacity sum is machinery); the paths are the same live record the ratio was read beside.
+    const supportPaths = (settlement.isolationSupport.paths || []).map(path => path.type.replace(/_/g, ' ')).join(', ');
+    expect(supportPaths.length).toBeGreaterThan(0);
+    expect(isolationAnalysis.description).toContain(supportPaths);
+    // anchored: the support-paths toContain above proves the description is live prose
+    expect(isolationAnalysis.description).not.toMatch(/\d+\s*\/\s*\d+/);
+    // anchored: the support-paths toContain above proves the description is live prose
     expect(isolationAnalysis.description).not.toMatch(
       /permanently stunted regardless of slider values/i,
     );

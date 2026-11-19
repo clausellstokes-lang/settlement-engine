@@ -52,4 +52,7 @@ export const NOT_A_GOOD = Object.freeze([
   'Warehousing and logistics services', 'Route maps and intelligence', 'Massive food requirements',
   'Political legitimacy', 'Banking services', 'International banking', 'Legal services',
   'Advanced legal expertise', 'Advanced medical care', 'Overland freight revenue',
+  // NOLANE-1 (LV-CAPITAL): money, not a good brought in (the caravan masters' "Capital + trade access" need, cut to its
+  // first part by `computeActiveChains.js :: deriveImportsFromChains`); in no revenue home, so it prints nowhere.
+  'Capital',
 ]);

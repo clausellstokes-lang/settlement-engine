@@ -1,0 +1,71 @@
+{
+ "measuredAt": "8b09a7b7db60e4ee7633ba8ba2478719b1209ad3",
+ "base": "origin/master",
+ "births": 1082,
+ "rows": [
+  {
+   "file": "src/components/home/landingFixture.js",
+   "thing": "mill",
+   "text": " · goal: get the mill through the season without borrowing.",
+   "hash": "3179007cb3ffd6f1",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "· goal: get the mill through the season without borrowing."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 2,
+   "againstN": 0,
+   "printedSeeds": [
+    "lf-033 (the fixture, facts as born)",
+    "lf-033 (the fixture, facts after its weeks)"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".town.hooks[].rest"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/components/home/landingFixture.js",
+   "thing": "war",
+   "text": "Wartime pressure disrupts trade flows. Trade route strain disrupts trade flows.",
+   "hash": "db13c4c73cfa5ca3",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "wartime pressure disrupts trade flows. trade route strain disrupts trade flows."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 2,
+   "againstN": 2,
+   "printedSeeds": [
+    "lf-033 (the fixture, facts as born)",
+    "lf-033 (the fixture, facts after its weeks)"
+   ],
+   "againstSeeds": [
+    "lf-033 (the fixture, facts as born)",
+    "lf-033 (the fixture, facts after its weeks)"
+   ],
+   "paths": [
+    ".realm.whyTrace[].reason"
+   ],
+   "samples": [
+    {
+     "seed": "lf-033 (the fixture, facts as born)",
+     "path": ".realm.whyTrace[].reason",
+     "sentence": "Wartime pressure disrupts trade flows."
+    },
+    {
+     "seed": "lf-033 (the fixture, facts after its weeks)",
+     "path": ".realm.whyTrace[].reason",
+     "sentence": "Wartime pressure disrupts trade flows."
+    }
+   ],
+   "verdict": "close-false"
+  }
+ ]
+}

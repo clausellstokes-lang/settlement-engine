@@ -24,6 +24,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 // a corpus edit moves the row here instead of silently selecting a different settlement.
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 import { recordInvariants } from '../../src/domain/edit/recordInvariants.js';
+import { foodRowShown } from '../../src/domain/display/foodRowShown.js';
 
 const gen = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
 
@@ -53,9 +54,12 @@ describe('generators-domain-4 — single-writer food model', () => {
       const fb = s.economicViability?.metrics?.foodBalance;
       if (!fs || !fb) continue;
       compared++;
-      // Sign: deficitPct > 0 on foodSecurity ⇔ deficit > 0 on foodBalance.
-      expect((fb.deficit || 0) > 0, `${settType}|${terrainOverride}|${tradeRouteAccess} deficit-sign disagreement`)
-        .toBe((fs.deficitPct || 0) > 0);
+      // Sign AND magnitude: RE-KEYED BY IDENTITY (TAIL-DEFECON-5, ruling R3, one food ledger). The view READS the writer's
+      // split, so its shortfall is the Economics tab's own remainder (`foodRowShown.js`), pound for pound. It was keyed to
+      // the writer's per cent, which the writer itself lets read 0 beside a few pounds of a large need (STOP-1 below).
+      const row = foodRowShown(s, true);
+      expect(fb.deficit || 0, `${settType}|${terrainOverride}|${tradeRouteAccess} deficit disagreement with the tab's row`)
+        .toBe(row?.fb.deficit ?? 0);
       // Magnitude: foodBalance is a view — production & need equal foodSecurity's.
       expect(fb.dailyProduction).toBe(fs.dailyProduction);
       expect(fb.dailyNeed).toBe(fs.dailyNeed);
@@ -430,7 +434,11 @@ describe('FIX-G1 — the viability summary counts the list the record publishes'
     // base → 274. An isolated town is fed from outside only as far as its support receipt carries,
     // so 31 golden isolated towns (receipt `untenable`) now carry an uncovered local food deficit
     // and read NOT VIABLE — the "has N operational dependencies" sentence is the VIABLE verdict's.
-    expect(stating, 'no row stated a dependency count — the sweep judged nothing').toBeGreaterThan(250);
+    // RE-KEYED 250 → 220 BY MEASUREMENT (STYLE-2-MERGE point 47, 2026-11-13; the COHERENCE-AGREE merge 22cc9ef7d, a figure its
+    // drafted record names for the merge seat: "272 rows state a count -> 241, the floor > 250; offenders 0"), one cause: 272 on
+    // the lane's base -> 241 at the merge (the seventh seat's (c) re-deal re-judges the re-dealt holders' viability). The floor keeps the
+    // FIX-FOOD-ISOLATION ratio under the measure (250 of 274; 220 of 241), and the offenders below stay 0: the invariant itself.
+    expect(stating, 'no row stated a dependency count — the sweep judged nothing').toBeGreaterThan(220);
     expect(offenders, `\n${offenders.join('\n')}\n`).toEqual([]);
   }, 120_000);
 });

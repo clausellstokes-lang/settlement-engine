@@ -1,0 +1,348 @@
+diff --git a/src/data/defenceWeights.js b/src/data/defenceWeights.js
+index adff89a54..e7b645f84 100644
+--- a/src/data/defenceWeights.js
++++ b/src/data/defenceWeights.js
+@@ -14,6 +14,7 @@
+ export const DEFENCE_TUNING = Object.freeze({
+   walls: Object.freeze({ mil: 30, mon: 20 }),
+   wallKind: Object.freeze({ stone: 1, palisade: 0.6 }),
++  houseScale: Object.freeze({ least: 0.8, greatest: 1.2 }), // UPKEEP-CAPACITY C1 (the chair's ruling B): a house counts by its rung on its own ladder
+   garrison: Object.freeze({ mil: 28, mon: 20, int: 15 }),
+   militia: Object.freeze({ mil: 10, mon: 12, int: 8 }),
+   watch: Object.freeze({ mil: 7, int: 18 }),
+@@ -85,6 +86,7 @@ export const WATCH_IN_STEAD = Object.freeze({ hasMercenary: false, hasCharterHal
+ export const DEFENCE_WEIGHT_REASONS = Object.freeze({
+   walls: 'the largest built defence; holds against raiders and beasts alike',
+   wallKind: 'a stone wall at its full value; a palisade counts for less (the roster\'s "Palisade or earthworks", and any earthwork, reads as a palisade; the starting weight, for the owner\'s veto)',
++  houseScale: 'a house counts by its rung on its own ladder (the catalogue\'s scale tiers of the same function): the least rung at `least`, the greatest at `greatest`, evenly between, the middle at today\'s points; a one-rung ladder at 1; a part reads its greatest house (the owner: "a single alchemist should not have the same influence as an alchemist district"; the chair\'s ruling B)',
+   garrison: 'a standing professional force; it also keeps order',
+   militia: 'citizens under arms: less than soldiers, good against beasts',
+   watch: 'a police force first',
+diff --git a/src/domain/institutions/houseScale.js b/src/domain/institutions/houseScale.js
+new file mode 100644
+index 000000000..7b05615e3
+--- /dev/null
++++ b/src/domain/institutions/houseScale.js
+@@ -0,0 +1,116 @@
++/**
++ * institutions/houseScale.js — A HOUSE'S RUNG ON ITS OWN LADDER, read from the catalogue's one home for scale
++ * (UPKEEP-CAPACITY C1; the chair's ruling B on docs/chair/2026-11-13/UPKEEP-CAPACITY-MEASURE.md).
++ *
++ * The owner (2026-11-13): "tier or size/capacity should also be calculated for defense. A single alchemist should
++ * not have the same influence as an alchemist district". A house's scale is its rung on the ladder of the SAME
++ * function at several scales — `institutionLadders.js :: UPGRADE_CHAINS`, the catalogue's family ladders unioned
++ * with the authored cross-family pairs — restricted to the houses that do the job being asked about. This file
++ * holds NO table of names: every name it compares is the catalogue's own, and it compares them by identity
++ * (case-insensitive equality), never by keyword.
++ *
++ * WHAT "THE JOB" IS, the caller says: `jobsOf(house)` answers which jobs one house does, alone. The ladder of a job
++ * is the pairs of UPGRADE_CHAINS whose two names both do it, so a house that does a job on no such pair (the fish
++ * market among the markets) stands on a ladder of one rung. A house's rung is its depth on that ladder (1 = no
++ * lesser name does the job) and `of` is the ladder's top depth. Measured: on 3,756 births every house stands on the
++ * rung its ladder writes at the place's own tier (probes/UPKEEP-CAPACITY/measure2.txt).
++ *
++ * Pure: no randomness, no clock, no store. The ladders of one `jobsOf` are derived once and kept by its identity.
++ */
++import { UPGRADE_CHAINS } from '../../data/institutionLadders.js';
++import { institutionalCatalog } from '../../data/institutionalCatalog.js';
++import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
++
++/** @typedef {{ rung: number, of: number }} HouseRung */
++/** @typedef {(house: unknown) => ReadonlyArray<string>} JobsOf */
++
++/** @type {WeakMap<JobsOf, Map<string, Map<string, HouseRung>>>} */
++const LADDERS = new WeakMap();
++
++/** @param {unknown} house @returns {string} */
++const keyOf = (house) => nativeSemanticName(house).toLowerCase();
++
++/**
++ * Every job's ladder: job → (lowered catalogue name → its rung). Derived once per `jobsOf`.
++ * @param {JobsOf} jobsOf
++ * @returns {Map<string, Map<string, HouseRung>>}
++ */
++function laddersOf(jobsOf) {
++  const known = LADDERS.get(jobsOf);
++  if (known) return known;
++  /** @type {Map<string, Set<string>>} */
++  const jobsByName = new Map();
++  for (const name of new Set(UPGRADE_CHAINS.flat())) jobsByName.set(name.toLowerCase(), new Set(jobsOf({ name })));
++  /** @type {Map<string, Map<string, HouseRung>>} */
++  const out = new Map();
++  const jobs = new Set([...jobsByName.values()].flatMap((s) => [...s]));
++  for (const job of jobs) {
++    const doing = (/** @type {string} */ n) => jobsByName.get(n.toLowerCase())?.has(job) === true;
++    const edges = UPGRADE_CHAINS.filter(([lesser, greater]) => doing(lesser) && doing(greater))
++      .map(([lesser, greater]) => [lesser.toLowerCase(), greater.toLowerCase()]);
++    const names = [...new Set(edges.flat())];
++    /** @type {Map<string, number>} */
++    const depth = new Map();
++    /** @param {string} n @param {Set<string>} seen @returns {number} */
++    const depthOf = (n, seen) => {
++      if (depth.has(n)) return /** @type {number} */ (depth.get(n));
++      if (seen.has(n)) return 1;
++      seen.add(n);
++      const lessers = edges.filter(([, g]) => g === n).map(([l]) => l);
++      const d = lessers.length ? 1 + Math.max(...lessers.map((l) => depthOf(l, new Set(seen)))) : 1;
++      depth.set(n, d);
++      return d;
++    };
++    // One ladder per connected run of pairs: its top depth is the `of` of every name on it.
++    /** @type {Map<string, string>} */
++    const root = new Map(names.map((n) => [n, n]));
++    /** @param {string} n @returns {string} */
++    const find = (n) => { let r = n; while (root.get(r) !== r) r = /** @type {string} */ (root.get(r)); return r; };
++    for (const [l, g] of edges) root.set(find(l), find(g));
++    /** @type {Map<string, number>} */
++    const top = new Map();
++    for (const n of names) top.set(find(n), Math.max(top.get(find(n)) ?? 0, depthOf(n, new Set())));
++    out.set(job, new Map(names.map((n) => [n, Object.freeze({ rung: depthOf(n, new Set()), of: /** @type {number} */ (top.get(find(n))) })])));
++  }
++  LADDERS.set(jobsOf, out);
++  return out;
++}
++
++/**
++ * THE ONE READER: for each job any house on the roster does, the rung of every house doing it (a house on no
++ * ladder of that job stands on a ladder of one rung). The caller reads the house it wants (defence: the greatest).
++ * @param {unknown} institutions the roster
++ * @param {JobsOf} jobsOf which jobs one house does, alone; keep one function for the life of the module
++ * @returns {Record<string, HouseRung[]>}
++ */
++export function houseRungsOf(institutions, jobsOf) {
++  const ladders = laddersOf(jobsOf);
++  /** @type {Record<string, HouseRung[]>} */
++  const out = {};
++  for (const house of Array.isArray(institutions) ? institutions : []) {
++    const name = keyOf(house);
++    for (const job of jobsOf(house)) {
++      (out[job] ||= []).push(ladders.get(job)?.get(name) ?? Object.freeze({ rung: 1, of: 1 }));
++    }
++  }
++  return out;
++}
++
++/**
++ * THE RUNG A JOB'S LADDER WRITES AT A TIER (the counterfactual house, the chair's ruling on C1): the greatest rung of
++ * the job's ladders whose catalogue name is written at that tier; where none is written there (a watch at a thorp),
++ * the least rung. A house no roster holds, read from the same ladder: e.g. "the same place with a watch in its stead"
++ * is the place's own tier's watch (a village's Village watch, a city's Professional city watch).
++ * @param {string} job @param {string} tier @param {JobsOf} jobsOf
++ * @returns {HouseRung}
++ */
++export function jobRungAtTier(job, tier, jobsOf) {
++  const ladder = laddersOf(jobsOf).get(job);
++  if (!ladder || !ladder.size) return Object.freeze({ rung: 1, of: 1 });
++  const shelves = /** @type {Record<string, Record<string, unknown>>} */ (/** @type {any} */ (institutionalCatalog)[tier] || {});
++  const written = new Set(Object.values(shelves).flatMap((rows) => Object.keys(rows || {}).map((n) => n.toLowerCase())));
++  const at = [...ladder.entries()].filter(([n]) => written.has(n)).map(([, r]) => r);
++  if (at.length) return at.reduce((a, r) => ((r.rung - 1) / (r.of - 1) > (a.rung - 1) / (a.of - 1) ? r : a));
++  const all = [...ladder.values()];
++  return Object.freeze({ rung: 1, of: Math.max(...all.map((r) => r.of)) });
++}
+diff --git a/src/generators/defenseGenerator.js b/src/generators/defenseGenerator.js
+index 72a59624a..cba445323 100644
+--- a/src/generators/defenseGenerator.js
++++ b/src/generators/defenseGenerator.js
+@@ -45,6 +45,7 @@ import { readinessBandOf } from '../data/bandLadders.js';
+ import { deriveMagicReliance } from '../domain/magicReliance.js';
+ import { keepOf, keepOfRecord, fundedGate } from '../domain/facts/keep.js';
+ import { DEFENCE_TUNING as W, DEFENCE_WORDS, WATCH_IN_STEAD } from '../data/defenceWeights.js';
++import { houseRungsOf, jobRungAtTier } from '../domain/institutions/houseScale.js';
+ 
+ // ─── getDefenseInstitutions ───────────────────────────────────────────────────
+ /**
+@@ -68,6 +69,26 @@ const ARMED = new Set(['garrison', 'militia', 'watch', 'company', 'charter', 'ho
+ /** The small places (thorp, hamlet, village): the tiers the community's own defence is written for. */
+ const SMALL = W.community.arms;
+ 
++/**
++ * THE PARTS A HOUSE'S SCALE REACHES (UPKEEP-CAPACITY C1, the chair's ruling B), each with the opener it is read by
++ * below, asked of one house alone: its flags and its tradition names. Walls keep their kind, arcane its own tower
++ * and guild rows; the community rows, the crisis reliefs, the stores, the purse, the will and the ground take none.
++ * @type {Readonly<Record<string, (inst: any, names: Readonly<Record<string, boolean>>) => boolean>>}
++ */
++const SCALED_PARTS = Object.freeze({
++  garrison: (i) => i.hasGarrison, militia: (i) => i.hasMilitia, watch: (i) => i.hasWatch, court: (i) => i.hasCourtSystem,
++  prison: (i) => i.hasPrison, wardens: (_, n) => n.wardens, company: (i) => i.hasMercenary, charter: (i) => i.hasCharterHall,
++  clergy: (_, n) => n.divine, druids: (_, n) => n.druid, market: (i) => i.hasMarket, hospital: (i) => i.hasHospital,
++  alchemists: (_, n) => n.alchemy,
++});
++/** The scaled parts one house opens, alone (the one `jobsOf` the house-scale reader is handed). @param {unknown} house */
++const scaledPartsOfHouse = (house) => {
++  const one = [house];
++  const { inst } = getInstFlags({}, one);
++  const names = defenseTraditionNamesOf(one);
++  return Object.keys(SCALED_PARTS).filter((id) => SCALED_PARTS[id](inst, names));
++};
++
+ /** The months laid by → supply points, on diminishing returns (0..max). @param {number} months */
+ const storesPointsOf = (months) => {
+   const S = W.stores;
+@@ -247,11 +268,29 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+ 
+   /** @type {any[]} */
+   const parts = [];
+-  /** @param {Record<string, number>} dims */
+-  const clean = (dims) => Object.fromEntries(Object.entries(dims).filter(([, v]) => v));
++  // A HOUSE'S SCALE (UPKEEP-CAPACITY C1, the chair's ruling B): a scaled part's weights × its greatest house's factor,
++  // `least + (greatest - least) × (rung - 1) / (of - 1)` on that house's own ladder (a one-rung ladder 1), read from
++  // the catalogue's ladder by `houseScale.js :: houseRungsOf`. Read once, when a scaled part is first added.
++  /** @type {Record<string, Array<{ rung: number, of: number }>> | null} */
++  let rungs = null;
++  /** @param {string} id @returns {number} */
++  const scaleOf = (id) => {
++    if (!Object.hasOwn(SCALED_PARTS, id)) return 1;
++    rungs = rungs || houseRungsOf(institutions, scaledPartsOfHouse);
++    const S = W.houseScale;
++    // R2's counterfactual watch (a hired-only place with a watch in its stead) is the watch its own tier's ladder
++    // writes: a village's Village watch, a town's Town watch, a city's Professional city watch (the chair's ruling).
++    const on = instead && id === 'watch' ? [jobRungAtTier(id, tier, scaledPartsOfHouse)] : (rungs[id] || []);
++    return on.length ? Math.max(...on.map(({ rung, of }) => (of > 1 ? S.least + (S.greatest - S.least) * (rung - 1) / (of - 1) : 1))) : 1;
++  };
++  /** @param {Record<string, number>} dims @param {string} [id] the part, for its house's scale */
++  const clean = (dims, id) => {
++    const f = id ? scaleOf(id) : 1;
++    return Object.fromEntries(Object.entries(dims).filter(([, v]) => v).map(([d, v]) => [d, v * f]));
++  };
+   /** A part kept at a share of its full points. @param {string} group @param {string} id @param {any} dims */
+   const add = (group, id, dims, share = 1, extra = {}) => {
+-    const raw = clean(dims);
++    const raw = clean(dims, id);
+     if (!Object.keys(raw).length) return;
+     parts.push({ group, id, raw, dims: Object.fromEntries(Object.entries(raw).map(([d, v]) => [d, v * share])), ...extra });
+   };
+@@ -259,7 +298,7 @@ const computeDefenseScores = (settlement, keep, instead = null) => {
+   const F = (floor) => fundedGate(floor, keep);
+   /** A paid part: each score kept at its funded floor. @param {string} group @param {string} id @param {any} dims */
+   const paid = (group, id, dims) => {
+-    const raw = clean(dims);
++    const raw = clean(dims, id);
+     parts.push({ group, id, raw, dims: Object.fromEntries(Object.entries(raw).map(([d, v]) => [d, v * F(W.floors[d])])) });
+   };
+   const A = W.arcane;
+diff --git a/tests/generators/defenceHouseScale.test.js b/tests/generators/defenceHouseScale.test.js
+new file mode 100644
+index 000000000..e6cc2b068
+--- /dev/null
++++ b/tests/generators/defenceHouseScale.test.js
+@@ -0,0 +1,87 @@
++/**
++ * A HOUSE'S INFLUENCE ON DEFENCE FOLLOWS ITS SCALE (UPKEEP-CAPACITY C1; the chair's ruling B on
++ * docs/chair/2026-11-13/UPKEEP-CAPACITY-MEASURE.md). The owner: "A single alchemist should not have the same
++ * influence as an alchemist district". Each scaled part's weights are multiplied by its greatest house's factor:
++ * `least + (greatest − least) · (rung − 1) / (of − 1)` on that house's ladder (`houseScale.js :: houseRungsOf`,
++ * the catalogue's UPGRADE_CHAINS restricted to the houses that open the part); a one-rung ladder 1. Walls keep
++ * their kind, arcane its own rows; the community rows, the reliefs, the stores, the purse and the will take none.
++ */
++import { beforeAll, describe, expect, test } from 'vitest';
++import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
++import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
++import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
++import { defencePartsOf } from '../../src/generators/defenseGenerator.js';
++import { keepOfRecord } from '../../src/domain/facts/keep.js';
++import { houseRungsOf, jobRungAtTier } from '../../src/domain/institutions/houseScale.js';
++import { DEFENCE_TUNING } from '../../src/data/defenceWeights.js';
++
++const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
++/** @type {Record<string, any>} */
++const births = {};
++const KEYS = ['cold-city-227', 'cold-town-116', 'fresh6-metropolis-30', 'cold-under_siege-town-52', 'cold-thorp-0'];
++
++beforeAll(async () => {
++  await loadGenerationLawPayloads();
++  for (const key of KEYS) {
++    const m = /^[a-z0-9]+-(?:([a-z_]+)-)?(thorp|hamlet|village|town|city|metropolis)-\d+$/.exec(key);
++    const cfg = m[1]
++      ? birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: m[2], selectedStresses: [m[1]], selectedStressesRandom: false })
++      : birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: m[2] });
++    births[key] = generateSettlementPipeline(cfg, null, { seed: key, customContent: {} });
++  }
++}, 120000);
++
++/** The part's full measure (its points before pay, the rules and the crises). */
++const fullOf = (s, id) => defencePartsOf(s, keepOfRecord(s.economicState)).find((p) => p.id === id)?.full ?? null;
++/** The same record with one house renamed (the rest of the record untouched). */
++const swap = (s, from, to) => ({ ...s, institutions: s.institutions.map((i) => (i.name === from ? { ...i, name: to } : i)) });
++
++describe('a house counts by its rung on its own ladder', () => {
++  test('RED-FIRST: an alchemist quarter counts for more than an alchemist shop in the same city (1.2 against 0.8)', () => {
++    const city = births['cold-city-227'];
++    expect(city.institutions.some((i) => i.name === 'Alchemist quarter')).toBe(true);
++    const quarter = fullOf(city, 'alchemists');
++    const shop = fullOf(swap(swap(city, 'Alchemist quarter', 'Alchemist shop'), 'Apothecary district', 'Apothecary'), 'alchemists');
++    expect(quarter).not.toBeNull();
++    expect(shop).not.toBeNull();
++    expect(quarter / shop).toBeCloseTo(DEFENCE_TUNING.houseScale.greatest / DEFENCE_TUNING.houseScale.least, 1);
++  });
++
++  test('RED-FIRST: a barracks, a garrison and multiple garrisons count 0.8, 1 and 1.2 of the garrison\'s weights', () => {
++    const metro = births['fresh6-metropolis-30'];
++    const top = fullOf(metro, 'garrison');
++    const at = (name) => fullOf(swap(swap(metro, 'Multiple garrisons', name), 'Professional city watch', 'Town watch'), 'garrison');
++    const { least, greatest } = DEFENCE_TUNING.houseScale;
++    expect(at('Garrison') / top).toBeCloseTo(((least + greatest) / 2) / greatest, 2);
++    expect(at('Barracks') / top).toBeCloseTo(least / greatest, 2);
++  });
++
++  test('the factor is a row of the tuning table: least 0.8, greatest 1.2, the middle at today\'s points', () => {
++    expect(DEFENCE_TUNING.houseScale).toEqual({ least: 0.8, greatest: 1.2 });
++  });
++
++  test('the ladder is the catalogue\'s, restricted to the houses that do the job; a house on no pair is one rung', () => {
++    const jobs = (h) => (/^(barracks|garrison|multiple garrisons)$/i.test(String(h?.name)) ? ['garrison'] : /fish market/i.test(String(h?.name)) ? ['market'] : []);
++    const got = houseRungsOf([{ name: 'Barracks' }, { name: 'Garrison' }, { name: 'Multiple garrisons' }, { name: 'Fish market' }, { name: 'Mill' }], jobs);
++    expect(got.garrison).toEqual([{ rung: 1, of: 3 }, { rung: 2, of: 3 }, { rung: 3, of: 3 }]);
++    expect(got.market).toEqual([{ rung: 1, of: 1 }]);
++    expect(got.mill).toBeUndefined();
++  });
++
++  test('a counterfactual house is the rung its ladder writes at the place\'s tier (R2\'s watch in a hired force\'s stead)', () => {
++    const jobs = (h) => (/^(village watch|town watch|professional city watch)$/i.test(String(h?.name)) ? ['watch'] : []);
++    expect(jobRungAtTier('watch', 'village', jobs)).toEqual({ rung: 1, of: 3 });
++    expect(jobRungAtTier('watch', 'town', jobs)).toEqual({ rung: 2, of: 3 });
++    expect(jobRungAtTier('watch', 'city', jobs)).toEqual({ rung: 3, of: 3 });
++    expect(jobRungAtTier('watch', 'metropolis', jobs)).toEqual({ rung: 3, of: 3 });
++    expect(jobRungAtTier('watch', 'thorp', jobs)).toEqual({ rung: 1, of: 3 });
++  });
++
++  test('walls keep their kind and arcane its own rows: neither part moves when the roster\'s scale does', () => {
++    const town = births['cold-under_siege-town-52'];
++    const walls = fullOf(town, 'walls');
++    expect(fullOf(swap(town, 'Barracks', 'Multiple garrisons'), 'walls')).toBe(walls);
++    const city = births['cold-city-227'];
++    expect(fullOf(swap(city, 'Alchemist quarter', 'Alchemist shop'), 'arcane')).toBe(fullOf(city, 'arcane'));
++  });
++});
+diff --git a/tests/generators/defenseEconomicGate.test.js b/tests/generators/defenseEconomicGate.test.js
+index 1412a754d..2fe56b32b 100644
+--- a/tests/generators/defenseEconomicGate.test.js
++++ b/tests/generators/defenseEconomicGate.test.js
+@@ -120,8 +120,12 @@ describe('economic survival respects the actual economy', () => {
+   test('a healthy economy with identical buildings scores meaningfully higher', () => {
+     /** @param {any} d */
+     const supplyBeforeTheLimit = (d) => Math.round(d.filter((x) => x.group === 'SUSTAINS').reduce((a, x) => a + x.points, 0) * 4);
+-    const poor = partsOf(town({ priorityEconomy: 15, prosperity: 'Struggling' }));
+-    const rich = partsOf(town({ priorityEconomy: 80, prosperity: 'Prosperous' }));
++    // Re-keyed by identity (UPKEEP-CAPACITY C1, a house counts by its rung): the market this test was written for
++    // counts at today's points, so the town keeps a one-rung market house (the catalogue's Fish market) in the
++    // Market Square's stead; a market square is the least rung of its ladder and counts 0.8 of the market's weights.
++    const SAME_BUILDINGS = [{ name: 'Granary' }, { name: 'Grist Mill' }, { name: 'Fish market' }, { name: 'Town Watch' }];
++    const poor = partsOf(town({ priorityEconomy: 15, prosperity: 'Struggling', institutions: SAME_BUILDINGS }));
++    const rich = partsOf(town({ priorityEconomy: 80, prosperity: 'Prosperous', institutions: SAME_BUILDINGS }));
+     expect(poor.some((x) => x.id === 'sustainsHeld'), 'anchored: the limit binds this town').toBe(true);
+     expect(supplyBeforeTheLimit(rich)).toBeGreaterThan(supplyBeforeTheLimit(poor) + 15);
+     expect(supplyBeforeTheLimit(rich)).toBeGreaterThanOrEqual(60);
+diff --git a/tests/lint/.tuning-register.json b/tests/lint/.tuning-register.json
+index 9e6bbc638..9d3344fd2 100644
+--- a/tests/lint/.tuning-register.json
++++ b/tests/lint/.tuning-register.json
+@@ -3053,6 +3053,8 @@
+         "garrison.int": "points",
+         "garrison.mil": "points",
+         "garrison.mon": "points",
++        "houseScale.greatest": "multiplier",
++        "houseScale.least": "multiplier",
+         "hospital.mon": "points",
+         "hospital.sup": "points",
+         "market.sup": "points",

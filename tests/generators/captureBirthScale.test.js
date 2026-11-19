@@ -210,6 +210,9 @@ describe('birth-scale distribution sweep', () => {
     // RE-KEYED BY IDENTITY 2026-11-06 (LANDING-7 R-E12): 386/400 at this N, moved 393 → 386
     // by 433289899 (X-46 car 1 U2, the owner's historical bands), bisected; the floor is
     // re-derived from the measured rate in the manifest entry, 388 → 372 (alpha 1e-3, 3.809 sigma).
+    // RE-DERIVED 2026-11-15 (TAIL-CLOSE-SWEEP-B, the chair's E1): 326/400, moved 392 → 325 by 33b12cbef (the
+    // upkeep lane's merge; inside it 82c639b44, the declared defence-rating rebuild: 30 of 30 flipped cities
+    // born better defended, so more legitimate), bisected; floor 372 → 300 (alpha 1e-3, 3.348 sigma).
     const cityEquilibrium = envelope('capture.criminalCity.equilibrium');
     expect(
       countAtLeast(criminalCities, 'equilibrium'),

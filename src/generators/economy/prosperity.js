@@ -16,6 +16,9 @@ import {
   isTradeRouteDisconnected,
 } from '../../domain/tradeRouteSemantics.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
+import { resolveSibling } from '../../domain/facts/drawDeclared.js';
+import { factsOf } from '../../domain/facts/factsOf.js';
+import { PROSPERITY_RANK } from '../../domain/prosperityRank.js';
 
 
 // Public compatibility name retained for every generator caller. The vocabulary
@@ -24,16 +27,65 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 export const priorityToCategory = priorityBand;
 
 
-// deriveEconomicSituationDesc
+// deriveEconomicSituationDesc — `prosperityLabel` (COHERENCE-AGREE-3, F11) is the computed label the
+// record prints beside the line; where the economy slider's trade line contradicts it, the label wins.
 export const deriveEconomicSituationDesc = (
   config = {},
   _tier = 'town',
   institutions = [],
   foodSecurity = null,
-) => {
+  prosperityLabel = null,
+) => resolveSibling(situationDescOf(config, _tier, institutions, foodSecurity, prosperityLabel), PROSPERITY_LINE_SIBLINGS, {
+  facts: () => factsOf({ institutions }), poolId: 'prosperity:PROSPERITY_LINE_SIBLINGS', surface: 'economics', drawKind: 'T',
+});
+
+/**
+ * THE TRADE LINE AND THE PROSPERITY LABEL, ONE ANSWER (COHERENCE-AGREE-3, REVIEW-AGREE F11). The trade
+ * lines below are chosen by a band of the economy slider; the label beside them is computed. Where the
+ * slider's line says the opposite of the label ("Commerce is sluggish" beside "Prosperous"), the line is
+ * re-keyed to the label's own band: a label of Comfortable or better takes no slow-trade line, a label of
+ * Poor or worse no busy-trade line. The label's meaning is the ladder's (domain/prosperityRank.js ::
+ * PROSPERITY_RANK); this reads its rank and adds no meaning of its own.
+ */
+const SLOW_TRADE = Object.freeze(['low', 'very_low']);
+const BUSY_TRADE = Object.freeze(['high', 'very_high']);
+/** The band of the trade line a label's rank speaks for. @param {number} rank */
+const tradeBandOfRank = (rank) => (rank >= PROSPERITY_RANK.Wealthy ? 'very_high' : rank >= PROSPERITY_RANK.Prosperous ? 'high' : rank >= PROSPERITY_RANK.Moderate ? 'medium' : rank >= PROSPERITY_RANK.Poor ? 'low' : 'very_low');
+/**
+ * Does a trade line's band contradict the prosperity label? @param {string} band @param {unknown} label
+ * @returns {boolean}
+ */
+export const tradeBandContradictsLabel = (band, label) => {
+  const rank = PROSPERITY_RANK[/** @type {keyof typeof PROSPERITY_RANK} */ (String(label || ''))];
+  if (typeof rank !== 'number') return false;
+  return (SLOW_TRADE.includes(band) && rank >= PROSPERITY_RANK.Comfortable) || (BUSY_TRADE.includes(band) && rank <= PROSPERITY_RANK.Poor);
+};
+/**
+ * The trade lines by the band each is chosen for, read by the coherence receipt's agreement arm
+ * (generationCoherence.js) with `tradeBandContradictsLabel`, so the arm and this writer give one answer.
+ * Matched by opening words, so a market line's declared twin is read as its original.
+ * @type {ReadonlyArray<readonly [RegExp, string]>}
+ */
+export const TRADE_LINE_BANDS = Object.freeze([
+  [/^Trade is what this settlement lives on\./, 'very_high'],
+  [/^Trade is brisk, the guilds are well run/, 'high'],
+  [/^Commerce is sluggish;/, 'low'],
+  [/^Little coin changes hands here/, 'very_low'],
+  [/^Cut off as it is, the settlement runs itself well/, 'high'],
+  [/^With no outside trade, the settlement struggles/, 'low'],
+]);
+
+/** @param {string} econCat @param {unknown} label @returns {string} the band the trade line is chosen by */
+const tradeBandFor = (econCat, label) => (tradeBandContradictsLabel(econCat, label)
+  ? tradeBandOfRank(Number(PROSPERITY_RANK[/** @type {keyof typeof PROSPERITY_RANK} */ (String(label))]))
+  : econCat);
+
+/** @param {any} config @param {string} _tier @param {any[]} institutions @param {any} foodSecurity @param {unknown} [prosperityLabel] @returns {string} */
+const situationDescOf = (config, _tier, institutions, foodSecurity, prosperityLabel = null) => {
   const flags = getInstFlags(config, institutions);
   const stress = getStressFlags(config, institutions);
   const econCat = priorityToCategory(flags.economyOutput);
+  const tradeCat = tradeBandFor(econCat, prosperityLabel);
   const crimeCat = priorityToCategory(flags.criminalEffective);
   const route = config?.tradeRouteAccess || 'road';
   const worldLaw = resolveGenerationWorldLaw(null, config);
@@ -94,9 +146,9 @@ export const deriveEconomicSituationDesc = (
       return 'Goods come and go by magic: teleportation circles and planar contacts do the work of roads. Trade works, but only as long as the circles do.';
     if (stress.stateCrime)
       return 'Those in power take so much that little gets made, and what little is left over goes to them.';
-    if (econCat === 'very_high' || econCat === 'high')
+    if (tradeCat === 'very_high' || tradeCat === 'high')
       return 'Cut off as it is, the settlement runs itself well: skilled crafts, well-worked fields and shared stores keep it fed and supplied.';
-    if (econCat === 'low' || econCat === 'very_low')
+    if (tradeCat === 'low' || tradeCat === 'very_low')
       return 'With no outside trade, the settlement struggles to feed and supply itself. Everything is rationed, and there is nothing to spare for growing.';
     return 'The settlement feeds and supplies itself without outside trade, but it has little to spare and cannot get what it does not make.';
   }
@@ -107,12 +159,12 @@ export const deriveEconomicSituationDesc = (
     return 'Trade is brisk, and it is hard to say where honest business ends and crime begins. The richest traders work both sides.';
   if (stress.stateCrime)
     return "On paper the settlement's trade looks healthy. In fact, seizures, forced sales and unfair taxes keep people from making or selling much.";
-  if (econCat === 'very_high')
+  if (tradeCat === 'very_high')
     return 'Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.';
-  if (econCat === 'high')
+  if (tradeCat === 'high')
     return "Trade is brisk, the guilds are well run, and the settlement's coffers fill steadily.";
-  if (econCat === 'low') return 'Commerce is sluggish; markets meet infrequently and many crafts are in decline.';
-  if (econCat === 'very_low')
+  if (tradeCat === 'low') return 'Commerce is sluggish; markets meet infrequently and many crafts are in decline.';
+  if (tradeCat === 'very_low')
     return 'Little coin changes hands here; people barter, and few outsiders bother to come and trade.';
   if (crimeCat === 'high' || crimeCat === 'very_high')
     return 'Honest trade gets by, but a busy black market undercuts it.';
@@ -120,8 +172,52 @@ export const deriveEconomicSituationDesc = (
 };
 
 
+/**
+ * The config a place would carry with NO crisis in force (COHERENCE-UPKEEP-5, the chair's R3): the
+ * standing label's reading. Every crisis field is emptied, nothing else is touched.
+ * @param {any} config
+ */
+export const standingConfigOf = (config) => ({ ...config, stressTypes: [], stressType: undefined, intendedStressTypes: [] });
+
+/** The Subsistence draw: 40% Struggling, 30% Poor, 30% luckier (capped at Poor by the label). */
+const drawSubsistence = () => (_rng() < 0.4 ? 0 : _rng() < 0.5 ? 1 : 2);
+
 // deriveProsperityLabel
-export const deriveProsperityLabel = (prosperity, config = {}, institutions = []) => {
+export const deriveProsperityLabel = (prosperity, config = {}, institutions = []) =>
+  labelFromBase(prosperity, config, institutions, prosperity === 'Subsistence' ? drawSubsistence() : undefined);
+
+/**
+ * THE TWO LABELS, ONE DRAW (R3). `prosperity` is the printed label, exactly as
+ * `deriveProsperityLabel` reads it; `prosperityStanding` is the label from the base read with no
+ * crisis (`standingBase`, from `standingBaseProsperity`) under `standingConfigOf(config)`, with the
+ * SAME Subsistence draw replayed. A base is Subsistence only for an isolated thorp or hamlet,
+ * whatever the crisis, so the two bases are Subsistence together and the draw is taken once, where
+ * the printed label always took it.
+ * @param {string} prosperity @param {string} standingBase @param {any} [config] @param {any[]} [institutions]
+ * @returns {{ prosperity: string, prosperityStanding: string }}
+ */
+export const deriveProsperityLabels = (prosperity, standingBase, config = {}, institutions = []) => {
+  const subsistence = prosperity === 'Subsistence' ? drawSubsistence() : undefined;
+  return {
+    prosperity: labelFromBase(prosperity, config, institutions, subsistence),
+    prosperityStanding: labelFromBase(standingBase, standingConfigOf(config), institutions, subsistence),
+  };
+};
+
+/**
+ * The base prosperity with no crisis in force (R3): the food record and the base read under
+ * `standingConfigOf(config)`. Draw-free (the food record's only draw is a label-keyed fork).
+ * @param {string} tier @param {string} tradeRoute @param {any[]} institutions @param {any} config
+ * @param {any} instNames @param {any[]} incomeNormalized @returns {string}
+ */
+export const standingBaseProsperity = (tier, tradeRoute, institutions, config, instNames, incomeNormalized) => {
+  const standing = standingConfigOf(config);
+  const food = generateFoodSecurity(tier, institutions, { ...standing, tradeRouteAccess: tradeRoute });
+  return computeBaseProsperity(tier, tradeRoute, institutions, standing, instNames, incomeNormalized, food).label;
+};
+
+/** The label from a base, the Subsistence index handed in (drawn once by the caller). */
+const labelFromBase = (prosperity, config, institutions, subsistenceIdx) => {
   const flags = getInstFlags(config, institutions);
   const econOut = flags.economyOutput;
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
@@ -130,7 +226,7 @@ export const deriveProsperityLabel = (prosperity, config = {}, institutions = []
   let idx = BASE[prosperity] !== undefined ? BASE[prosperity] : 2;
   // Subsistence isolated settlements can still struggle further — 35% chance of Struggling
   if (prosperity === 'Subsistence') {
-    idx = _rng() < 0.4 ? 0 : _rng() < 0.5 ? 1 : 2; // 40% Struggling, 30% Poor, 30% luckier
+    idx = subsistenceIdx ?? idx; // the caller's one draw (unreachable without one: see deriveProsperityLabels)
     idx = Math.max(0, Math.min(1, idx)); // cap at Poor — subsistence can never be Moderate+
   }
   // Economy output adjustments — calibrated for truly random sliders (5-95 uniform)
@@ -300,10 +396,23 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _i
 /**
  * @param {string} tier @param {number} incomeSourceCount @param {number} exportCount
  * @param {boolean} hasMarketInst @param {{ growsMoreThanEats?: boolean } | null} [foodRecord]
+ * @param {ReadonlyArray<{ percentage?: unknown }> | null} [incomeSources] the income rows: "Highly diversified" only where
+ *   the income mix reads a broad spread (no row at INCOME_LEADER_FROM or over: `incomeMixPoolKey`'s own cut) (TAIL-DEFECON-3, D2, #10700: ONE HOME for the
+ *   fact the Economics tab states as "two or three sources between them"); without them, the count decides, as before
  * @returns {string}
  */
-export const deriveEconomicComplexity = (tier, incomeSourceCount, exportCount, hasMarketInst, foodRecord = null) => {
-  const label = complexityByExports(tier, incomeSourceCount, exportCount, hasMarketInst);
+/** The income mix's leader cut, the same number as `LEADER_FROM` in `src/domain/display/stateProse/economyStateProse.js`
+ * (that prose desk stays out of the generators' first-paint graph, so the cut is read here, and
+ * `tests/generators/tailDefeconBatch3Lines.test.js` pins the two to agree). */
+export const INCOME_LEADER_FROM = 20;
+export const deriveEconomicComplexity = (tier, incomeSourceCount, exportCount, hasMarketInst, foodRecord = null, incomeSources = null) => {
+  const spread = !incomeSources || incomeSources.every((row) => !(Number(row?.percentage) >= INCOME_LEADER_FROM));
+  // BAR2-LABELS LB3 (C4306): where one source is half the income or more, the label reads that concentration too: the
+  // count is held below every "diversified" cut (a city reads Concentrated; a town, at most Specialized).
+  // BAR2-LABELS-4: "half" is read as the definition (a share of 50 in 100), not a named tuning constant (tuningRegister's
+  // shrink-only UNREGISTERED_NAMED_CEILING).
+  const half = Array.isArray(incomeSources) && incomeSources.some((row) => Number(row?.percentage) * 2 >= 100);
+  const label = complexityByExports(tier, half ? Math.min(incomeSourceCount, 5) : spread ? incomeSourceCount : Math.min(incomeSourceCount, 8), exportCount, hasMarketInst);
   if (!foodRecord || foodRecord.growsMoreThanEats || !/surplus/i.test(label)) return label;
   // The small-place ladder's own no-surplus rung (no exports to sell, nothing over).
   return complexityByExports('hamlet', incomeSourceCount, 0, false);
@@ -332,3 +441,42 @@ const complexityByExports = (tier, incomeSourceCount, exportCount, hasMarketInst
               : exportCount >= 3
                 ? 'Subsistence with surplus'
                 : 'Subsistence — survival economy';
+
+/**
+ * DECLARED SIBLINGS (COHERENCE-AGREE, 2026-11-12). The economic situation's lines that name the
+ * town's market need the market home's atom (`domain/facts/market.js`); each twin says the same
+ * thing for a town with no market. Measured on 360 births (seeds agree-<tier>-<i>) before the
+ * change: "markets meet infrequently" printed in 7 towns with no market, "The market still opens"
+ * in 2, the rest in none. Keyed by the printed text; resolved through `resolveSibling` above.
+ * `alsoNeeds` declares what BOTH the line and its twin name besides the market (COHERENCE-AGREE-4): the
+ * theocratic pair names the church, so each needs the sacred house — true wherever it prints, since its
+ * branch (`priorityHelpers.js :: theocraticEconomy`) fires only beside a cathedral or a monastery.
+ * @param {string} text @param {string} twin @param {ReadonlyArray<string>} [alsoNeeds]
+ */
+const marketSet = (text, twin, alsoNeeds = []) => Object.freeze([
+  Object.freeze({ text, needs: Object.freeze(['market', ...alsoNeeds]) }),
+  Object.freeze(alsoNeeds.length
+    ? { text: twin, twinOf: text, needs: Object.freeze([...alsoNeeds]), excludes: Object.freeze(['market']) }
+    : { text: twin, twinOf: text, excludes: Object.freeze(['market']) }),
+]);
+export const PROSPERITY_LINE_SIBLINGS = Object.freeze({
+  'The market is shut and the caravans have stopped coming. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.': marketSet(
+    'The market is shut and the caravans have stopped coming. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.',
+    'The caravans have stopped coming and nothing is bought or sold. What coin there is goes on staying alive, and the only question anyone asks is how long the stores will last.'),
+  'Food is short, and those with grain hold the power. The market still opens, but most people cannot afford what is on the stalls, and those without grain are growing desperate.': marketSet(
+    'Food is short, and those with grain hold the power. The market still opens, but most people cannot afford what is on the stalls, and those without grain are growing desperate.',
+    'Food is short, and those with grain hold the power. What food is sold costs more than most people can pay, and those without grain are growing desperate.'),
+  'Fear of the sickness and the quarantine have emptied the market, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse.': marketSet(
+    'Fear of the sickness and the quarantine have emptied the market, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse.',
+    'Fear of the sickness and the quarantine keep people from trading, and everyday goods are hard to come by. Either trouble alone could be borne; together each makes the other worse.'),
+  'The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.': marketSet(
+    'The church controls most economic activity. Land, markets, and trade flow through religious institutions. Commerce is present but the church sets the terms.',
+    'The church controls most economic activity. Land and trade flow through religious institutions. Commerce is present but the church sets the terms.',
+    ['sacredHouse']),
+  'Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.': marketSet(
+    'Trade is what this settlement lives on. The markets are busy at all hours, and the guilds have a hand in every craft.',
+    'Trade is what this settlement lives on. Goods change hands at all hours, and the guilds have a hand in every craft.'),
+  'Commerce is sluggish; markets meet infrequently and many crafts are in decline.': marketSet(
+    'Commerce is sluggish; markets meet infrequently and many crafts are in decline.',
+    'Commerce is sluggish; little is bought or sold and many crafts are in decline.'),
+});

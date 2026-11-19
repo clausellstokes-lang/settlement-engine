@@ -389,9 +389,19 @@ export function handlerPoolOf(cards, power, crimHouses, agentCount = 0) {
 export function assignHandlers(cards, settlement) {
   if (!Array.isArray(cards)) return [];
   const ids = new Set(cards.map((c) => (c && c.id != null ? String(c.id) : null)).filter(Boolean));
-  const agents = cards
+  const unhandled = cards
     .map((card, at) => ({ card, at, a: allegianceOf(card) }))
     .filter((x) => x.a && !(x.a.handler && ids.has(x.a.handler) && x.a.handler !== String(x.card.id)));
+  // BAR6-PEOPLE (LAW 10, 10a; BRIEF-BAR6 fact (c); vetoable by the owner): NOBODY ANSWERS TO A POWER WHOSE SEAT HE HOLDS. The
+  // deal (A2) runs before the ranks (A3), so a card dealt an allegiance to a criminal power could be seated its first: "The
+  // head of Corrupt Council answers to Corrupt Council" (C179090, C179117, C179288). Here, after the ranks, an allegiance
+  // still to be handled whose power the card heads (rank 1) is withdrawn: the head IS the power, no agent of it. Draw-free;
+  // a held card whose handler stands is not touched (it is not among these).
+  const agents = unhandled.filter((x) => {
+    if (!(x.a?.power && membershipsOf(x.card).some((m) => m.power === x.a?.power && m.rank === 1))) return true;
+    delete x.card.allegiance;
+    return false;
+  });
   if (!agents.length) return [];
   const crimHouses = byName(criminalHousesOf(settlement));
   /** @type {Map<string, typeof agents>} */
@@ -412,8 +422,41 @@ export function assignHandlers(cards, settlement) {
       rec(x.card.allegiance).handler = String(handler.id);
       dealt.push(x.card);
     });
+    if (key === 'houses') ownHandlersOfTheSwap(group, handlers);
   }
   return dealt;
+}
+
+/**
+ * BAR8 K-PEOPLE (LAW 14 rule 14b; the chair's ruling BR13; vetoable by the owner): THE SWAP IS UNDONE. Where the houses'
+ * pool (allegiances that name no criminal power: the page prints each house's network apart) deals one agent of house A
+ * to a face of house B and one agent of B to a face of A, the round of the deal has crossed two networks that each had
+ * their own people to hand (C6183: house A's network handled ONLY by B's people, and B's ONLY by A's). The two agents
+ * exchange handlers, so each house's network is handled by its own people; every handler keeps the number of agents
+ * the deal gave it (the bound ceil(agents / handlers) holds). THE SWAP ONLY: a pair is exchanged only where neither
+ * house's network has any of its own people among its handlers, so a network handled one way by another house's face
+ * (`.cross`, the deal's design, the owner's question) is not touched. Draw-free; the first such pair in dealing order
+ * is exchanged first, until none is left.
+ * @param {Array<{ card: Rec }>} group the pool's agents, in dealing order @param {Rec[]} handlers the pool's handlers
+ */
+function ownHandlersOfTheSwap(group, handlers) {
+  const byId = new Map(handlers.map((h) => [String(h.id), h]));
+  const houseOfHandler = (/** @type {{ card: Rec }} */ x) => str(rec(rec(byId.get(str(rec(x.card.allegiance).handler))).institution).key);
+  const houseOfAgent = (/** @type {{ card: Rec }} */ x) => str(rec(x.card.allegiance).house);
+  const ownHandled = (/** @type {string} */ house) => group.some((z) => houseOfAgent(z) === house && houseOfHandler(z) === house);
+  for (let changed = true; changed;) {
+    changed = false;
+    for (const x of group) {
+      const a = houseOfAgent(x); const b = houseOfHandler(x);
+      if (!a || !b || a === b || ownHandled(a) || ownHandled(b)) continue;
+      const y = group.find((z) => z !== x && houseOfAgent(z) === b && houseOfHandler(z) === a);
+      if (!y) continue;
+      const hx = rec(x.card.allegiance).handler;
+      rec(x.card.allegiance).handler = rec(y.card.allegiance).handler;
+      rec(y.card.allegiance).handler = hx;
+      changed = true;
+    }
+  }
 }
 
 /**
@@ -425,7 +468,7 @@ export function assignHandlers(cards, settlement) {
  * @returns {Rec[]}
  */
 export function leaveAllegianceReceipts(settlement, dealt) {
-  const traces = dealt.map(({ card, flaw, p }) => {
+  const traces = dealt.filter(({ card }) => allegianceOf(card)).map(({ card, flaw, p }) => { // BAR6-PEOPLE (10a): a withdrawn allegiance leaves no receipt
     const a = /** @type {Allegiance} */ (allegianceOf(card));
     const handlerId = a.handler;
     return {

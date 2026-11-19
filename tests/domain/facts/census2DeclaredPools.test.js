@@ -87,13 +87,18 @@ describe('the declarations do their work on the real pools', () => {
   it("DS-GEN-13's open-market lines are refused under a siege where they deny it, and kept in calm", () => {
     const market = { ...TOWN, institutions: [{ name: 'Weekly market', category: 'Economy' }] };
     expect(read('DS-GEN-13', 'MARKET-OPEN', factsOf(market))).toEqual([1, 2, 3, 4]);
-    expect(read('DS-GEN-13', 'MARKET-OPEN', factsOf({ ...market, stress: [{ type: 'under_siege' }] }))).toEqual([2, 3, 4]);
+    // W2-WRITE (2026-11-13), re-keyed by identity: [2, 3, 4] -> [3, 4, 5] at the third seat's a191f6815 (v2, "lives off
+    // through-traffic", refused under a siege; v5, the siege's own line, added), then -> [5] at W2-WRITE-5 A (the read's
+    // M2 and M4: v3 "Visitors find X's market without asking" and v4 "where carts always stopped" refused under a siege).
+    expect(read('DS-GEN-13', 'MARKET-OPEN', factsOf({ ...market, stress: [{ type: 'under_siege' }] }))).toEqual([5]);
   });
 
   it("DS-GEN-13's NO-MARKET lines (trade 'at the gate, at the inn') are refused where neither stands", () => {
     // vid 3 is unit 5's twin, which presumes neither
     expect(read('DS-GEN-13', 'NO-MARKET', CALM)).toEqual([3]);
-    expect(read('DS-GEN-13', 'NO-MARKET', SIEGE)).toEqual([3]);
+    // W2-WRITE (2026-11-13), re-keyed by identity: [3] -> [4, 5, 6] at the fourth seat's 2f2aec623 (round two #325: v1-v3
+    // "what trade the town does is done ... on the road" refused under a siege; v4-v6, the siege's own lines, added).
+    expect(read('DS-GEN-13', 'NO-MARKET', SIEGE)).toEqual([4, 5, 6]);
     const gated = factsOf({ ...TOWN, institutions: [{ name: 'Town walls', category: 'Defense' }, { name: 'Tavern', category: 'Hospitality' }] });
     expect(gated.defence.gate && gated.hasInstitution('tavern')).toBe(true);
     expect(read('DS-GEN-13', 'NO-MARKET', gated)).toEqual([1, 2, 3]);

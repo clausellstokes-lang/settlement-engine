@@ -1047,12 +1047,18 @@ export async function buildObservedCorpus({
   // (osr-tier-25 under config 0 never does, under config 3 at 12); villages over the town cut
   // (configs 2: 368-397) never do within twelve. osr-tier-14 under CONFIGS[0] is taken.
   //
+  // RE-SEARCHED AT STYLE-2-MERGE point 47 (COHERENCE-AGREE): the lane's generation moved
+  // osr-tier-14's CONFIGS[0] town out of the town/city overlap, so it minted no tier candidate
+  // in twelve intervals. Re-searched over `osr-tier-0..39` by this header's rule: under CONFIGS[0]
+  // the minters are now osr-tier-19 (pop 2477, interval 5), -25 (pop 2394) and -28 (pop 2282);
+  // the lowest-numbered, osr-tier-19, is taken (its pop 2477 matches the original search's reading).
+  //
   // ⛔ WHY A BOUNDED VIEW AND NOT THE WHOLE PULSE RESULT. The pulse is the blast radius (1b's
   // law): a second campaign's full results would add rows to every pulse shape. Only the tier
   // candidates enter, under their real relative path (the F4 bounded-view precedent below), so
   // the shapes they touch are the ones the erosion took. Widen this pass only with the same
   // before/after row reconciliation, and never through `generated`.
-  const TIER_COVERAGE_SEED = 'osr-tier-14';
+  const TIER_COVERAGE_SEED = 'osr-tier-19';
   {
     const tierSettlement = generateSettlementPipeline(CONFIGS[0], null, { seed: TIER_COVERAGE_SEED, customContent: {} });
     const tierId = 'osr-tier';

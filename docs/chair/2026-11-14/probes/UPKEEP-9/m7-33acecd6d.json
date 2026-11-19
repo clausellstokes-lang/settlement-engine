@@ -1,0 +1,236 @@
+{
+ "n": 1490,
+ "C": {
+  "court.flagNoCourthouse": 185,
+  "court.safetyNamesCourt": 185,
+  "via.suggestions.description:marshlands is available locally. Add Chandler or Ropemaker or Merchant guilds (N": 15,
+  "gang.flagNoGangHouse": 250,
+  "via.suggestions.description:Processing marshlands but missing Chandler, Merchant guilds (N-N) for the full c": 3,
+  "via.suggestions.fix:Add Chandler and Merchant guilds (N-N) to complete the production chain": 3,
+  "tc.siege.band:strained": 177,
+  "tc.siege.band:critical": 18,
+  "tc.siege.band:adequate": 70,
+  "via.issues.description:N institutions critically impaired by siege: Weekly market, Market square, Taver": 35,
+  "tc.siege.band:surplus": 5,
+  "via.issues.description:N institutions critically impaired by siege: Taverns (N-N), Town granary, Mills,": 2,
+  "via.issues.description:N institutions critically impaired by siege: Weekly market, Market square, Money": 3,
+  "tc.siege.band:collapsed": 3,
+  "gang.lineNoGangHouse": 6,
+  "via.issues.description:N institutions critically impaired by siege: International trade center, Banking": 4,
+  "via.issues.description:N institutions critically impaired by siege: District markets (N-N), Multiple ma": 29,
+  "via.issues.description:N institutions critically impaired by siege: District markets (N-N), Internation": 3,
+  "via.issues.description:N institutions critically impaired by siege: Banking district, Inns and taverns ": 4,
+  "via.issues.description:N institutions critically impaired by siege: Banking district, Blacksmiths, Spec": 1,
+  "via.suggestions.description:Processing marshlands but missing Ropemaker, Merchant guilds (N-N) for the full ": 2,
+  "via.suggestions.fix:Add Ropemaker and Merchant guilds (N-N) to complete the production chain": 2,
+  "via.suggestions.description:Processing marshlands but missing Merchant guilds (N-N) for the full chain.": 1,
+  "via.suggestions.fix:Add Merchant guilds (N-N) to complete the production chain": 1,
+  "via.issues.description:N institutions critically impaired by siege: Taverns (N-N), Town granary, Mills.": 1,
+  "via.warnings.title:High Magic Priority: Informal Practice": 1,
+  "via.warnings.description:Magic priority is high, but thorp scale limits formal arcane infrastructure. Pra": 1,
+  "via.warnings.priorityNote:Magic priority is N; settlement scale constrains its institutional expression.": 1,
+  "via.warnings.fix:Add a tier-plausible hedge practitioner or alchemical workshop": 1,
+  "via.warnings.title:High Military Priority Without Defences": 1,
+  "via.warnings.description:Military slider is high but the settlement has no walls, garrison, or barracks.": 1,
+  "via.warnings.priorityNote:Military priority is N. Defence institutions are expected.": 1,
+  "via.warnings.description:Banking institutions exist but the economy priority is very low.": 1,
+  "via.warnings.priorityNote:Economy priority is only N.": 1,
+  "via.warnings.fix:Raise Economy priority or remove Banking institutions": 1,
+  "via.bankImpactBesideMerchants": 1,
+  "via.warnings.description:Town remains viable through local foodshed, reserves, seasonal access, patronage": 1,
+  "via.locallyViable.underSiege": 1,
+  "via.locallyViable.notViable": 1
+ },
+ "ex": {
+  "court.flagNoCourthouse": [
+   "rv2-calm-town-0",
+   "rv2-calm-town-1",
+   "rv2-calm-town-3",
+   "rv2-calm-town-10",
+   "rv2-calm-town-11",
+   "rv2-calm-town-12"
+  ],
+  "court.safetyNamesCourt": [
+   "rv2-calm-town-0",
+   "rv2-calm-town-1",
+   "rv2-calm-town-3",
+   "rv2-calm-town-10",
+   "rv2-calm-town-11",
+   "rv2-calm-town-12"
+  ],
+  "via.suggestions.description:marshlands is available locally. Add Chandler or Ropemaker or Merchant guilds (N": [
+   "rv2-calm-town-10",
+   "rv2-calm-town-38",
+   "rv2-famine-town-26",
+   "rv2-famine-town-32",
+   "rv2-famine-town-34",
+   "rv2-famine-city-9"
+  ],
+  "gang.flagNoGangHouse": [
+   "rv2-calm-city-4",
+   "rv2-calm-city-7",
+   "rv2-calm-city-8",
+   "rv2-calm-city-9",
+   "rv2-calm-city-10",
+   "rv2-calm-city-12"
+  ],
+  "via.suggestions.description:Processing marshlands but missing Chandler, Merchant guilds (N-N) for the full c": [
+   "rv2-calm-city-17",
+   "rv2-under_siege-town-25",
+   "rv3-monster_pressure-city-1"
+  ],
+  "via.suggestions.fix:Add Chandler and Merchant guilds (N-N) to complete the production chain": [
+   "rv2-calm-city-17",
+   "rv2-under_siege-town-25",
+   "rv3-monster_pressure-city-1"
+  ],
+  "tc.siege.band:strained": [
+   "rv2-under_siege-thorp-0",
+   "rv2-under_siege-thorp-1",
+   "rv2-under_siege-thorp-2",
+   "rv2-under_siege-thorp-3",
+   "rv2-under_siege-thorp-6",
+   "rv2-under_siege-thorp-7"
+  ],
+  "tc.siege.band:critical": [
+   "rv2-under_siege-thorp-4",
+   "rv2-under_siege-thorp-15",
+   "rv2-under_siege-thorp-34",
+   "rv2-under_siege-hamlet-12",
+   "rv2-under_siege-hamlet-20",
+   "rv2-under_siege-hamlet-22"
+  ],
+  "tc.siege.band:adequate": [
+   "rv2-under_siege-thorp-5",
+   "rv2-under_siege-thorp-9",
+   "rv2-under_siege-thorp-10",
+   "rv2-under_siege-thorp-20",
+   "rv2-under_siege-thorp-21",
+   "rv2-under_siege-thorp-22"
+  ],
+  "via.issues.description:N institutions critically impaired by siege: Weekly market, Market square, Taver": [
+   "rv2-under_siege-town-0",
+   "rv2-under_siege-town-1",
+   "rv2-under_siege-town-2",
+   "rv2-under_siege-town-3",
+   "rv2-under_siege-town-4",
+   "rv2-under_siege-town-6"
+  ],
+  "tc.siege.band:surplus": [
+   "rv2-under_siege-town-1",
+   "rv2-under_siege-town-9",
+   "rv2-under_siege-town-21",
+   "rv2-under_siege-town-32",
+   "rv2-under_siege-metropolis-33"
+  ],
+  "via.issues.description:N institutions critically impaired by siege: Taverns (N-N), Town granary, Mills,": [
+   "rv2-under_siege-town-9",
+   "rv2-under_siege-town-32"
+  ],
+  "via.issues.description:N institutions critically impaired by siege: Weekly market, Market square, Money": [
+   "rv2-under_siege-town-11",
+   "rv2-under_siege-town-18",
+   "rv2-under_siege-town-33"
+  ],
+  "tc.siege.band:collapsed": [
+   "rv2-under_siege-city-5",
+   "rv2-under_siege-city-19",
+   "rv3-under_siege+plague_onset-city-0"
+  ],
+  "gang.lineNoGangHouse": [
+   "rv2-under_siege-city-10",
+   "rv2-under_siege-city-31",
+   "rv2-succession_void-city-12",
+   "rv3-infiltrated-town-1",
+   "rv3-religious_conversion-town-2",
+   "rr2s-city-occupied-rand-1"
+  ],
+  "via.issues.description:N institutions critically impaired by siege: International trade center, Banking": [
+   "rv2-under_siege-metropolis-0",
+   "rv2-under_siege-metropolis-18",
+   "rv2-under_siege-metropolis-20",
+   "rv2-under_siege-metropolis-37"
+  ],
+  "via.issues.description:N institutions critically impaired by siege: District markets (N-N), Multiple ma": [
+   "rv2-under_siege-metropolis-1",
+   "rv2-under_siege-metropolis-2",
+   "rv2-under_siege-metropolis-3",
+   "rv2-under_siege-metropolis-4",
+   "rv2-under_siege-metropolis-5",
+   "rv2-under_siege-metropolis-6"
+  ],
+  "via.issues.description:N institutions critically impaired by siege: District markets (N-N), Internation": [
+   "rv2-under_siege-metropolis-9",
+   "rv2-under_siege-metropolis-15",
+   "rv2-under_siege-metropolis-24"
+  ],
+  "via.issues.description:N institutions critically impaired by siege: Banking district, Inns and taverns ": [
+   "rv2-under_siege-metropolis-13",
+   "rv2-under_siege-metropolis-26",
+   "rv2-under_siege-metropolis-30",
+   "rv2-under_siege-metropolis-38"
+  ],
+  "via.issues.description:N institutions critically impaired by siege: Banking district, Blacksmiths, Spec": [
+   "rv2-under_siege-metropolis-25"
+  ],
+  "via.suggestions.description:Processing marshlands but missing Ropemaker, Merchant guilds (N-N) for the full ": [
+   "rv2-wartime-town-14",
+   "rv3-wartime-town-0"
+  ],
+  "via.suggestions.fix:Add Ropemaker and Merchant guilds (N-N) to complete the production chain": [
+   "rv2-wartime-town-14",
+   "rv3-wartime-town-0"
+  ],
+  "via.suggestions.description:Processing marshlands but missing Merchant guilds (N-N) for the full chain.": [
+   "rv2-succession_void-town-36"
+  ],
+  "via.suggestions.fix:Add Merchant guilds (N-N) to complete the production chain": [
+   "rv2-succession_void-town-36"
+  ],
+  "via.issues.description:N institutions critically impaired by siege: Taverns (N-N), Town granary, Mills.": [
+   "rv3-under_siege+plague_onset-town-1"
+  ],
+  "via.warnings.title:High Magic Priority: Informal Practice": [
+   "rr2s-thorp-calm-port-1"
+  ],
+  "via.warnings.description:Magic priority is high, but thorp scale limits formal arcane infrastructure. Pra": [
+   "rr2s-thorp-calm-port-1"
+  ],
+  "via.warnings.priorityNote:Magic priority is N; settlement scale constrains its institutional expression.": [
+   "rr2s-thorp-calm-port-1"
+  ],
+  "via.warnings.fix:Add a tier-plausible hedge practitioner or alchemical workshop": [
+   "rr2s-thorp-calm-port-1"
+  ],
+  "via.warnings.title:High Military Priority Without Defences": [
+   "rr2s-town-plague_onset-rand-1"
+  ],
+  "via.warnings.description:Military slider is high but the settlement has no walls, garrison, or barracks.": [
+   "rr2s-town-plague_onset-rand-1"
+  ],
+  "via.warnings.priorityNote:Military priority is N. Defence institutions are expected.": [
+   "rr2s-town-plague_onset-rand-1"
+  ],
+  "via.warnings.description:Banking institutions exist but the economy priority is very low.": [
+   "rr2s-city-famine-rand-1"
+  ],
+  "via.warnings.priorityNote:Economy priority is only N.": [
+   "rr2s-city-famine-rand-1"
+  ],
+  "via.warnings.fix:Raise Economy priority or remove Banking institutions": [
+   "rr2s-city-famine-rand-1"
+  ],
+  "via.bankImpactBesideMerchants": [
+   "rr2s-city-famine-rand-1"
+  ],
+  "via.warnings.description:Town remains viable through local foodshed, reserves, seasonal access, patronage": [
+   "rww-town-under_siege-1"
+  ],
+  "via.locallyViable.underSiege": [
+   "rww-town-under_siege-1"
+  ],
+  "via.locallyViable.notViable": [
+   "rww-town-under_siege-1"
+  ]
+ }
+}

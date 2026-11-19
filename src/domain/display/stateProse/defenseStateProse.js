@@ -97,12 +97,14 @@
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../../data/monsterThreat.js';
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
 import { magicWorksAt } from '../../worldPulse/magicWorksAt.js';
-import { deriveMagicReliance, magicDialAbsent } from '../../magicReliance.js';
+import { magicDialAbsent } from '../../magicReliance.js'; import { relianceShownOf, magicDependentChainsShown, magicRoleHeld } from '../magicProvisionShown.js'; // BAR5-MAGIC (LAW 1 rule 1a): the word the page prints; BAR6-DEFDESK (9e): the row's own chains and the Military role
 import { SMALL_TIERS, TOWN_PLUS_TIERS } from '../../../data/constants.js';
 import { scoreBand } from '../defenseScoreBands.js';
+import { readinessBandOf } from '../../../data/bandLadders.js';
 import { DEFENSE_STRESS_STATUS } from '../defenseDisplay.js';
 import { migrationDirectionOfEntry, migrationDirectionOfStress } from '../../migrationDirection.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../../data/dossierStateProse/defense.generated.js';
+import { arcaneHousesBackNoForce } from './magicFlagTruth.js'; // BAR6-DEFDESK (9e.military): the arcane houses' backing
 import {
   DM_FIELD_FRAMED_BY_BLOCK, projectBesideDmField, readProsePath,
 } from './dmFieldProjection.js';
@@ -112,7 +114,9 @@ import { legibilityRung } from './legibilityRung.js';
 import { waterAccessKind } from '../../tradeRouteSemantics.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
-import { factsAnswered } from '../../facts/factsAnswered.js';
+import { factsAnswered } from '../../facts/factsAnswered.js'; import { courtHoldersOf, defenceOf } from '../../facts/defence.js'; // BAR8-DESKS-2 (BR32 (4)): the Legal row's own court keys the internal row; FAULTS-WATCH item 5: and its live prison
+import { corpusAdmittingCrimeLines, crimeLineFactsOf } from './crimeLineDisqualifiers.js';
+import { corpusAdmittingPostureLines } from './postureLineDisqualifiers.js';
 
 /**
  * The desk's corpus, typed at the import boundary — the generated leaves stay PURE DATA.
@@ -159,7 +163,9 @@ function properFill(value) {
   if (/[.!?]\s|[.!?]$/.test(value)) return undefined;
   if (/[0-9]/.test(value)) return undefined;
   if (/[a-z]+_[a-z]+/.test(value)) return undefined;
-  return /^[A-Z]/.test(value) ? value : undefined;
+  // L3 (R3-TABS): a capital in any script opens a proper name. `/^[A-Z]/` refused Ásey, Ögedeinuur and Ástun,
+  // and every line of this desk names `{settlement}`, so the whole desk fell silent in those towns.
+  return /^\p{Lu}/u.test(value) ? value : undefined;
 }
 
 /**
@@ -477,6 +483,16 @@ export function beastsRowPoolKey(monsterThreat, perimeter, force) {
 }
 
 /**
+ * The beasts row's two pools whose lines say the perimeter is HELD by people on it ("there is a wall to hold and
+ * there are people to hold it", "with a wall and armed people behind it"): a watch alone does not hold a
+ * perimeter (R3-TABS-4, the chair's ruling (c) on F7), so a watch-only town draws neither, and says nothing.
+ * @type {ReadonlySet<string>}
+ */
+const HELD_PERIMETER_POOLS = new Set(['Beasts & Monsters: plagued, perimeter AND organized force', 'Beasts & Monsters: frontier, credible deterrence']);
+/** @param {string|null} poolKey @param {boolean} watchOnly @returns {string|null} */
+const noHeldPerimeterByAWatch = (poolKey, watchOnly) => (poolKey && watchOnly && HELD_PERIMETER_POOLS.has(poolKey) ? null : poolKey);
+
+/**
  * DS-DEF-2 row 2 — INVASION & WAR: walls against a professional garrison or a militia.
  * TOTAL over the six situations the eight boolean combinations collapse into.
  * @type {Readonly<Record<string, string>>}
@@ -639,6 +655,16 @@ export function defenceSupplyPoolKey(chainModifiers, force) {
   return null;
 }
 
+/**
+ * ⛔ R3-TABS-4 (the chair's ruling (d) of 2026-11-14 on the fresh reader's F6, a carried class): the supply line
+ * that says the defenders are well supplied ("busy and well stocked", "kept supplied", "will not go short", "the
+ * supply book … balances") is NOT DRAWN under a siege or a famine in force: every line of its pool is false there
+ * (27 towns of the reader's 1,536 at the line's tip 976db5b19) and none is true, so the clause is silent.
+ * @param {string|null} poolKey @param {unknown} stress @returns {string|null}
+ */
+const noSupplyUnderACrisis = (poolKey, stress) => (poolKey === 'CHAIN: defence supplied'
+  && stressList(stress).some((entry) => entry?.type === 'under_siege' || entry?.type === 'famine') ? null : poolKey);
+
 /** @param {{economic?: unknown}|null|undefined} chainModifiers @returns {string|null} */
 export function foodTradesPoolKey(chainModifiers) {
   if (!chainModifiers || typeof chainModifiers !== 'object') return null;
@@ -678,8 +704,8 @@ function chainArm(chainModifiers, arm) {
  * re-derives from `settlement.institutions` through the canonical live filter, which is
  * why a ruined citadel does not read here as standing walls.
  *
- * @param {{name?: string, config?: {monsterThreat?: unknown}|null, institutions?: unknown,
- *   defenseProfile?: {scores?: {economic?: unknown}|null, chainModifiers?: {military?: unknown, economic?: unknown}|null}|null,
+ * @param {{name?: string, config?: {monsterThreat?: unknown}|null, institutions?: unknown, stress?: unknown,
+ *   defenseProfile?: {scores?: {economic?: unknown, military?: unknown}|null, chainModifiers?: {military?: unknown, economic?: unknown}|null}|null,
  *   economicState?: {compound?: {inst?: Record<string, unknown>}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{beasts: object|null, invasion: object|null, internal: object|null,
@@ -689,13 +715,33 @@ export function defenseThreatProse(settlement, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
   options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const dp = settlement?.defenseProfile || {};
-  const compound = settlement?.economicState?.compound?.inst || {};
+  // FAULTS-WATCH item 5: this desk reads no stamped `compound.inst` flag; the internal row's court and prison are the live roster's
   const slots = { settlement: properFill(text(settlement?.name)) };
 
   const forces = standingDefenseForces(settlement);
   const walls = forces.walls.present;
   const garrison = forces.garrison.present;
   const militia = forces.militia.present;
+  // ⛔ L0 (R3-TABS; the chair's ruling of 2026-11-13): "NO FORCE" READS EVERY ARMED BODY. A town has
+  // no force only when it holds no garrison, no militia (the household levy is one), no watch and no
+  // contracted company; the projection already carries all four. Read from three of them, a town whose
+  // force was its watch was "walls and nobody to put on them" while its force cards printed the watch
+  // (79 walled and 41 unwalled watch-only births of 884 at 9e57f5023). For the invasion row a contracted
+  // company stands with the paid professionals' pools; a watch, below, with none.
+  // ⛔ R3-TABS-4 (the chair's ruling (c) of 2026-11-14 on the fresh reader's F2 and F7; L0's note on the watch
+  // WITHDRAWN): A WATCH IS NOT THE TOWNSPEOPLE IN ARMS and not a force that holds a perimeter. The citizen-militia
+  // pools name a household levy ("Every household at … would send someone to the walls") and print only where the
+  // roster holds a militia or a levy (139 walled watch-only towns of the reader's 1,536 drew them at bb2bf91c5);
+  // the beasts row's held-perimeter lines ("a wall to hold and … people to hold it") print only beside a garrison,
+  // a militia or a contracted company (42 beside the watch's own line). THE WATCH-ONLY TOWN, walled or not, hears
+  // no sentence that says it has no force (L0's cure, kept) and none that names townspeople in arms: no pool this
+  // row's key can select holds a line true of it (the watch's own line is the force desk's, already on the tab),
+  // so the Invasion row's sentence, and the supply clause beside it, are SILENT there; the bar prints. FOR THE
+  // JOIN: the corpus owes a pool for "walls and a watch only" and for "a watch only".
+  const watch = forces.watch.present;
+  const contracted = forces.mercenary.present;
+  const force = garrison || militia || watch || contracted;
+  const watchOnly = watch && !garrison && !militia && !contracted;
 
   // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3f), as is every entry point on this leaf. The
   // spine key is this desk's own key function and every bag is unchanged; the candidates
@@ -735,13 +781,18 @@ export function defenseThreatProse(settlement, options = {}) {
   };
 
   return Object.freeze({
-    beasts: rung(beastsRowPoolKey(settlement?.config?.monsterThreat, walls, garrison || militia)),
+    beasts: rung(noHeldPerimeterByAWatch(beastsRowPoolKey(settlement?.config?.monsterThreat, walls, force), watchOnly)),
     invasion: rungWith(
-      invasionRowPoolKey(walls, garrison, militia),
-      defenceSupplyPoolKey(settlement?.defenseProfile?.chainModifiers, garrison || militia),
+      withinTheBar(watchOnly ? null : invasionRowPoolKey(walls, garrison || contracted, militia), dp.scores?.military),
+      noSupplyUnderACrisis(defenceSupplyPoolKey(settlement?.defenseProfile?.chainModifiers, force), settlement?.stress),
     ),
+    // ⛔ THE KEY READS THE LEGAL ROW'S OWN COURT (BAR8-DESKS-2, 2026-11-18; the chair's ruling BR32 (4), the reader's M1):
+    // the court is the one the Legal Infrastructure row prints (`defence.js :: courtHoldersOf`, the atom `court sits`: a
+    // courthouse, or a live house that drew a court service), not `compound.hasCourtSystem`, a NAME test that takes every
+    // town hall for a court. Read off the flag, ten towns of the thirty and the 720 drew the full legal chain's "A thing done
+    // wrong … goes somewhere and takes time" beside "Prison only / Detention without process. Arbitrary enforcement."
     internal: rung(internalRowPoolKey(
-      civicFlag(compound.hasCourtSystem), civicFlag(compound.hasPrison),
+      courtHoldersOf(settlement).length > 0, defenceOf(settlement).prison, // FAULTS-WATCH item 5: the row's own (live) prison, not `compound.hasPrison`
     )),
     economic: rungWith(
       economicRowPoolKey(dp.scores?.economic),
@@ -820,6 +871,86 @@ export const TERRAIN_DEFENCE_NAMES = Object.freeze(Object.keys(TERRAIN_DEFENCE_O
 export const TERRAIN_PRIZE_NAMES = Object.freeze(Object.keys(TERRAIN_PRIZE_OF));
 
 /**
+ * ⭐ L1, ONE LADDER FOR ONE NUMBER (R3-TABS; the chair's ruling of 2026-11-13). The posture line
+ * banded `readiness.score` on the aspects' ladder (`scoreBand`: 65/40/20) while the badge beside it
+ * bands the same score on the readiness ladder (`bandLadders.js :: readinessBandOf`: 76/55/38/24/12),
+ * so "Defensible" stood over "could not hold off a raid" and "Vulnerable" over "all but undefended"
+ * (the defence lane's fourth read, classes E and K). The line now reads the BADGE through its one
+ * home, `readinessBandOf` — the very label `readiness.label` holds (884 of 884 births at 9e57f5023):
+ * Fortress and Well-Defended read the strong pool, Defensible the adequate, Lightly Defended and
+ * Vulnerable the weak, Undefended the critical. No new words; all four pools kept.
+ * @type {Readonly<Record<string, string>>}
+ */
+const POSTURE_POOL_OF_BADGE = Object.freeze({
+  Fortress: 'readiness STRONG',
+  'Well-Defended': 'readiness STRONG',
+  Defensible: 'readiness ADEQUATE',
+  'Lightly Defended': 'readiness WEAK',
+  Vulnerable: 'readiness WEAK',
+  Undefended: 'readiness CRITICAL',
+});
+
+/**
+ * ⛔ L2, THE SENTENCE IS DRAWN WITHIN THE BAND ITS BAR PRINTS (R3-TABS; the chair's ruling of 2026-11-13;
+ * the defence lane's fourth read, classes A1 and F). Where the Invasion & War bar reads Strong
+ * (`scoreBand(scores.military)`, the band the tab prints beside it), no sentence says an attacker walks in:
+ * the Invasion row's two no-force pools ("walls and nobody to put on them", "no line and no force") and the
+ * posture's weak and critical pools ("could not hold off a raid", "would struggle to hold", "all but
+ * undefended") are silent there. The bar and the badge stay; nothing is said against them.
+ * @type {ReadonlySet<string>}
+ */
+/**
+ * ⛔ AND A LINE CLAIMS NO VERDICT THAT A BAND ON ITS OWN PAGE CAN DENY (R3-TABS-5; the chair's ruling (h) of 2026-11-14,
+ * found by the reader of the defence rating's rebuild: there a thorp's "Invasion & War" chip reads Critical over
+ * "credible against raiders" or "would see off a raid", 12 of its 972 births). Where the bar reads Critical, no pool is
+ * drawn that holds a line saying the place holds, deters or sees off a raid: walls with a garrison ("raiders stay away",
+ * "any attacker would think again", "the town could be held"), walls with townspeople ("credible against raiders",
+ * "would see off a raid") and a force with no walls ("It answers raiders well"); the row is silent there. The pools
+ * every line of which is true beside Critical (walls and nobody on them, no line and no force, armed citizens on their
+ * own ground) are drawn as before. 6 towns of the second reader's 1,536 at 268c40013 printed such a claim.
+ * @type {Readonly<Record<string, ReadonlySet<string>>>}
+ */
+const AGAINST_THE_BAR = Object.freeze({
+  STRONG: new Set(['Invasion & War: walls with NO force', 'Invasion & War: neither walls nor force', 'readiness WEAK', 'readiness CRITICAL']),
+  CRITICAL: new Set(['Invasion & War: walls AND professional garrison', 'Invasion & War: walls with citizen militia', 'Invasion & War: force with NO walls']),
+});
+/** @param {string|null} poolKey @param {unknown} militaryScore @returns {string|null} */
+function withinTheBar(poolKey, militaryScore) {
+  const band = typeof militaryScore === 'number' && Number.isFinite(militaryScore) ? scoreBand(militaryScore) : null;
+  return poolKey && band && AGAINST_THE_BAR[band]?.has(poolKey) ? null : poolKey;
+}
+
+/**
+ * ⛔ L2'S REVERSE (R3-TABS-4; the chair's ruling (a) of 2026-11-14 on the fresh reader's F1): NO STRONG POSTURE
+ * LINE BESIDE A WEAK OR CRITICAL INVASION & WAR BAR. The strong pool speaks of what the town can field and has
+ * built, which is that bar's own subject: "What Ingili can field and what Ingili has built are both in good
+ * order" stood over "Invasion & War — Weak" (2 of the reader's 1,536 at bb2bf91c5, 0 at the line's tip
+ * 976db5b19). Beside such a bar the posture draws no higher than the pool the line's tip drew for the town
+ * (`scoreBand` of the same readiness score, its ladder before L1), and says nothing where that too is strong.
+ * @param {string|null} poolKey @param {unknown} readinessScore @param {unknown} militaryScore @returns {string|null}
+ */
+function noStrongBesideAWeakBar(poolKey, readinessScore, militaryScore) {
+  if (poolKey !== 'readiness STRONG') return poolKey;
+  const bar = typeof militaryScore === 'number' && Number.isFinite(militaryScore) ? scoreBand(militaryScore) : null;
+  if (bar !== 'WEAK' && bar !== 'CRITICAL') return poolKey;
+  if (typeof readinessScore !== 'number' || !Number.isFinite(readinessScore)) return null;
+  const linePool = `readiness ${scoreBand(readinessScore)}`;
+  return linePool !== poolKey && CORPUS['DS-DEF-1'].pools[linePool] ? linePool : null;
+}
+
+/**
+ * ⛔ UNDER AN OCCUPATION THE POSTURE ROW IS SILENT, BESIDE ANY BAR (R3-TABS-5; the chair's ruling (c) of 2026-11-14 on
+ * the second reader's R1 and the carried C3). Every pool speaks of what the town's own people can hold against, two
+ * rows above the banner "Keeping order in … is the occupiers' business now … the arms in the town are theirs": "People
+ * at Muulcoba expect to hold against the usual trouble" there was the fallback above (2 towns) and the badge's own
+ * adequate pool (12), and the weak and critical pools spoke the same way. The strike runs FIRST, before the fallback:
+ * 64 of the second reader's 76 occupied towns printed a posture line at b5a335a46, none after. The badge and the
+ * Guard assessment stay; the banner names the occupation.
+ * @param {string|null} poolKey @param {unknown} stress @returns {string|null}
+ */
+const silentUnderAnOccupation = (poolKey, stress) => (stressList(stress).some((entry) => entry?.type === 'occupied') ? null : poolKey);
+
+/**
  * DS-DEF-1 lens 1 — THE READINESS BAND.
  *
  * ⭐ Reads `defenseProfile.readiness.score`, NOT `avgScore(scores)`. See the header: the
@@ -831,8 +962,8 @@ export const TERRAIN_PRIZE_NAMES = Object.freeze(Object.keys(TERRAIN_PRIZE_OF));
  */
 export function posturePoolKey(readinessScore) {
   if (typeof readinessScore !== 'number' || !Number.isFinite(readinessScore)) return null;
-  const key = `readiness ${scoreBand(readinessScore)}`;
-  return CORPUS['DS-DEF-1'].pools[key] ? key : null;
+  const key = POSTURE_POOL_OF_BADGE[readinessBandOf(readinessScore).label];
+  return key && CORPUS['DS-DEF-1'].pools[key] ? key : null;
 }
 
 /**
@@ -875,9 +1006,10 @@ export function strategicPrizePoolKey(terrain) {
  * against the registry. Reasoning about which fields "feel" DM-editable is how the
  * overwrite gets written.
  *
- * @param {{name?: string, defenseProfile?: {readiness?: {score?: unknown}|null}|null,
+ * @param {{name?: string, defenseProfile?: {readiness?: {score?: unknown}|null, scores?: {military?: unknown}|null}|null,
  *   resourceAnalysis?: {terrain?: unknown}|null,
- *   economicState?: {safetyProfile?: {guardEffectivenessDesc?: unknown}|null}|null
+ *   economicState?: {safetyProfile?: {guardEffectivenessDesc?: unknown}|null}|null,
+ *   stress?: unknown, institutions?: unknown
  *   }|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
  * @returns {Readonly<{posture: object|null, terrain: object|null, prize: object|null}>}
@@ -891,10 +1023,10 @@ export function defensePostureProse(settlement, options = {}) {
   // reader so this desk cannot spell the path differently from the registry that declares it.
   const dmField = readProsePath(settlement, DM_FIELD_FRAMED_BY_BLOCK['DS-DEF-1']);
 
-  /** @param {string|null} poolKey */
-  const projected = (poolKey) => {
+  /** @param {string|null} poolKey @param {typeof CORPUS} [corpus] */
+  const projected = (poolKey, corpus = CORPUS) => {
     if (!poolKey) return null;
-    const line = composeStateProse(CORPUS, 'DS-DEF-1', {
+    const line = composeStateProse(corpus, 'DS-DEF-1', {
       ...options,
       slots,
       spineKey: poolKey,
@@ -907,7 +1039,9 @@ export function defensePostureProse(settlement, options = {}) {
   };
 
   return Object.freeze({
-    posture: projected(posturePoolKey(settlement?.defenseProfile?.readiness?.score)),
+    posture: projected(withinTheBar(noStrongBesideAWeakBar(silentUnderAnOccupation(posturePoolKey(settlement?.defenseProfile?.readiness?.score), settlement?.stress),
+      settlement?.defenseProfile?.readiness?.score, settlement?.defenseProfile?.scores?.military), settlement?.defenseProfile?.scores?.military,
+    ), corpusAdmittingPostureLines(CORPUS, settlement)),
     terrain: projected(terrainDefencePoolKey(terrain)),
     prize: projected(strategicPrizePoolKey(terrain)),
   });
@@ -1007,9 +1141,12 @@ export function defenseCriminalProse(settlement, structureKey, options = {}) {
     seat: properFill(text(power.government)),
   };
 
+  // W2-A-LEAVES-2 (REVIEW-W2A F3): the capture lens's lines that deny a bought official are struck where the cast
+  // holds one (`crimeLineDisqualifiers.js`, enforced at the draw).
+  const corpus4 = corpusAdmittingCrimeLines(CORPUS, 'DS-DEF-4', crimeLineFactsOf(settlement, options.audience));
   /** @param {string|null} poolKey */
   const line = (poolKey) => (poolKey
-    ? composeStateProse(CORPUS, 'DS-DEF-4', {
+    ? composeStateProse(corpus4, 'DS-DEF-4', {
       ...options,
       slots,
       spineKey: poolKey,
@@ -1783,13 +1920,22 @@ export function navalDefensePoolKey(navy, port, blockaded) {
 }
 
 /**
+ * ⛔ THE ROUTE IS THE HOME OF "THIS IS A PORT" AND OF WHICH WATER IT STANDS ON (the chair's ruling to
+ * R3-TABS-2, 2026-11-14, "the port's two homes"). Every naval pool speaks of the SEA (its approaches, a
+ * harbour mouth, a fleet), and the key was offered wherever the roster's docks set `hasPort`: 61 river-route
+ * towns of the 720 and the 144 fresh births read "… has a harbour and nothing to hold it with; any vessel
+ * that wants the sea approaches has them". A naval line is now offered only where the route is the sea
+ * (`tradeRouteAccess` 'port', and the one water reading `waterAccessKind` says maritime, so an inland river
+ * port stays silent too); on a river or any other route the key offers nothing (the pool holds no line true
+ * of a river landing). A record with no config reads as before (A-11).
  * @param {{ config?: { terrainType?: unknown, tradeRouteAccess?: unknown } | null } | null | undefined} settlement
- * @returns {boolean} the record's own config says there is no water
+ * @returns {boolean} the record's own route is the sea (or the record carries no config)
  */
-const dryRecord = (settlement) => {
+const seaRoute = (settlement) => {
   const config = settlement?.config;
-  if (!config || typeof config !== 'object') return false;
-  return waterAccessKind(/** @type {string | null | undefined} */ (config.terrainType), /** @type {string | null | undefined} */ (config.tradeRouteAccess)) === 'none';
+  if (!config || typeof config !== 'object') return true;
+  return text(config.tradeRouteAccess) === 'port'
+    && waterAccessKind(/** @type {string | null | undefined} */ (config.terrainType), /** @type {string | null | undefined} */ (config.tradeRouteAccess)) === 'maritime';
 };
 
 /**
@@ -1836,7 +1982,7 @@ export function defenseSupportingProse(settlement, options = {}) {
     // override seats aerial docks in a dry city, which set `hasPort`; the port flag now also needs
     // `waterAccessKind` not 'none' (a record with no config reads as before).
     naval: rung(navalDefensePoolKey(
-      civicFlag(compound.hasNavy), civicFlag(compound.hasPort) && !dryRecord(settlement),
+      civicFlag(compound.hasNavy) && seaRoute(settlement), civicFlag(compound.hasPort) && seaRoute(settlement),
       stockpile ? stockpile.blockaded === true : false,
     )),
   });
@@ -1927,14 +2073,14 @@ export function hasNamedMagicChain(activeChains) {
 }
 
 /**
- * Does this place rely on magic? The one reading (`magicReliance.js :: deriveMagicReliance`) at
- * relied-upon or integral; the same answer the defence generator stores as `magicDependency`.
+ * Does this place rely on magic? THE WORD THE PAGE PRINTS (BAR5-MAGIC, LAW 1 rule 1a): the one reading as the page
+ * shows it (`magicProvisionShown.js :: relianceShownOf`) at relied-upon or integral. It re-derived the record's own
+ * reading before, so the desk said "part of the work holds up only with help beyond ordinary labour" under
+ * "Reliance on magic: None" (22 towns of the 720 at 600b7683a; C17061 C9617 C33713 C43125). The record is not touched.
  * @param {object} settlement @returns {boolean}
  */
 function reliesOnMagic(settlement) {
-  const { reading } = deriveMagicReliance(
-    /** @type {import('../../magicReliance.js').MagicRelianceSource} */ (settlement),
-  );
+  const reading = relianceShownOf(settlement);
   return reading === 'relied-upon' || reading === 'integral';
 }
 
@@ -1948,7 +2094,7 @@ function reliesOnMagic(settlement) {
  */
 function noMagicHere(settlement) {
   const source = /** @type {import('../../magicReliance.js').MagicRelianceSource} */ (settlement);
-  return magicDialAbsent(source) && deriveMagicReliance(source).reading === 'none';
+  return magicDialAbsent(source) && relianceShownOf(source) === 'none'; // BAR5-MAGIC: the word the page prints
 }
 
 /**
@@ -2006,7 +2152,11 @@ export function magicDependencyPoolKey(magicDependency, namedChain, magicAbsent 
 export function defenseMagicDependencyProse(settlement, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
   options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
-  const chains = settlement?.economicState?.activeChains;
+  // BAR6-DEFDESK (LAW 9's `9e.leans`; vetoable by the owner): the NAMED chain is drawn FROM THE CHAINS THE RELIANCE ROW NAMES
+  // (`magicProvisionShown.js :: magicDependentChainsShown`, the list the Magic tab prints after "for"), never the record's first
+  // chain with a magic note: "the usual work no longer yields enough baked goods" stood beside a row that named medical treatment
+  // (REVIEW-WIDE-6 C128358 C158346; C14460). With none of them named the pool is not the NAMED one. The record is not touched.
+  const chains = settlement ? magicDependentChainsShown(settlement) : [];
   const slots = {
     settlement: properFill(text(settlement?.name)),
     good: namedMagicChainGood(chains),
@@ -2027,7 +2177,14 @@ export function defenseMagicDependencyProse(settlement, options = {}) {
     })
     : null;
   // THE TWO FLAGS (W2 DEF construction C1, C2): said beside the dependency line, never alone.
-  const flagKey = magicFlagPoolKey(settlement?.economicState?.safetyProfile?.flags);
+  // BAR6-DEFDESK (LAW 9's `9e.military`; vetoable by the owner): the militarised flag is drawn at the economy step without the
+  // defences' own houses (`priorityHelpers.js :: getStressFlags`); its line is said only where the page's Military role holds
+  // something (`magicProvisionShown.js :: magicRoleHeld`: a house of magic among the defences), never beside "Military role:
+  // absent" (C62573 C164227). A reading at print: the stored flag is left as it is.
+  // And never where every arcane house the Institutions tab prints backs a power that is not a military one (its "Backs" lines,
+  // `powerSupport.js :: houseBacksOf`): "the arcane houses answer to them" beside each house backing the guild council.
+  const rawFlagKey = magicFlagPoolKey(settlement?.economicState?.safetyProfile?.flags);
+  const flagKey = rawFlagKey === 'FLAG: magicMilitarized' && (!magicRoleHeld(settlement, 'military') || arcaneHousesBackNoForce(settlement)) ? null : rawFlagKey;
   const flagLine = reliance && flagKey
     ? composeStateProse(CORPUS, 'DS-DEF-9', { ...options, slots, spineKey: flagKey })
     : null;

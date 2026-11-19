@@ -1,0 +1,9 @@
+{
+  "_": "BAR6-AUDIT-D · LAW 8's controls (BRIEF-BAR6-AUDIT, seat D). STANDS rows must be FOUND (an instance's line, its row, or its `against` holds the text, in that town); EXPLAINED rows must NOT be found (no instance's line or row holds the text); WEAK rows are reported apart. `bar` rows are the bar's last read (SECOND-CHECK.final72.json, rand-24..26).",
+  "8a": { "stands": ["C2044", "C25035", "C25141", "C73413", "C127752", "C145096", "C124324", "C16139", "C16118", "C217422"], "expect": ["C191251"], "bar": ["C8174", "C11307", "C0333", "C0927", "C5441", "C31652", "C3231"] },
+  "8b": { "stands": ["C93275", "C93688", "C88140"], "weak": ["C84503", "C20632"] },
+  "8c": { "stands": ["C211281", "C213905", "C217521", "C210715"], "bar": ["C42947", "C42011"] },
+  "8d": { "stands": ["C5702", "C26071", "C26077", "C33585", "C25863", "C96793"], "bar": ["C8475"] },
+  "8e": { "stands": ["C8633", "C25827"], "bar": ["C3874", "C3911", "C17893"] },
+  "neg": { "explained": ["C91105", "C91625", "C92201", "C94583", "C95095", "C95709", "C19306", "C37273", "C89452", "C93420", "C10978", "C86893", "C0343"] }
+}

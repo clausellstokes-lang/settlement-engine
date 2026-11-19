@@ -1,3 +1,5 @@
+import { keepOneDominant, withConflictRelations } from './factionDynamics.js'; // RECORD-MEASURE-2 G1; P19
+import { settleArcaneToPractitioners, settleClergyToFinalRoster } from './power/claimStanding.js'; // TAIL-POWERS-B-4 P31 (1); TAIL-CONTENT-CLOSE-1
 /**
  * generateSettlementPipeline.js — Pipeline-based settlement generation.
  *
@@ -15,7 +17,9 @@ import { runPipeline } from './pipeline.js';
 import { drawTies } from './people/ties.js';
 import { generateRepresentatives } from './people/representatives.js';
 import { dealGoals } from './people/goals.js';
+import { dealRareSecrets } from './people/rareSecrets.js'; // SECRETS-1: the very rare secrets, beside the goals
 import { generateConflicts } from './powerGenerator.js';
+import { carryBornQuarrels } from './power/conflicts.js';
 import { generateHistory } from './historyGenerator.js';
 import { enrichNpcCoherence, withHallCapture } from './narrativeGenerator.js'; // MERGE-CAR: CENSUS-4 R12's fitFactionRoster retired (the chair's SC-1 ruling: superseded by construction — memberships born by rank)
 import { enrichHistoryCoherence } from './narrative/historyCoherence.js';
@@ -48,6 +52,7 @@ import { createGenerationContext } from './generationContext.js';
 // Side-effect: registers all pipeline steps
 import './steps/index.js';
 import { takeAllegianceReceipts } from '../domain/people/allegiance.js';
+import { styledTitleOf } from '../data/faceHonorifics.js';
 
 /**
  * Generate a complete settlement using the pipeline.
@@ -194,6 +199,11 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
     }
   }
 
+  keepOneDominant(finalCtx.settlement?.powerStructure?.factions); // RECORD-MEASURE-2 G1: on the final roster, the label only
+  settleClergyToFinalRoster(finalCtx.settlement?.powerStructure?.factions); // TAIL-POWERS-B-4 (P31 (1)): the margins line reads the final roster
+  settleArcaneToPractitioners(finalCtx.settlement?.powerStructure?.factions, finalCtx.settlement); // TAIL-CONTENT-CLOSE-1: practitioners named only where one works magic
+  // TAIL-POWERS-B-2 (P19): a pair the conflicts hold at HIGH, called symbiotic or dependent, names the quarrel (draw-free)
+  if (finalCtx.settlement?.powerStructure) finalCtx.settlement.powerStructure = withConflictRelations(finalCtx.settlement.powerStructure, finalCtx.settlement.conflicts);
   if (typeof options.onComplete === 'function') {
     try { options.onComplete(finalCtx); } catch (e) { console.warn('[pipeline] onComplete threw:', e); }
   }
@@ -225,7 +235,7 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
  * Ids are never touched, so every edge still resolves.
  *
  * @param {Array<Record<string, unknown>>} relationships
- * @param {Array<{id?: string, name?: string, role?: string}>} npcs
+ * @param {Array<{id?: string, name?: string, role?: string, gender?: string}>} npcs
  * @param {unknown} [institutions] the place's roster, for the tie lines' force words (F1)
  * @returns {Array<Record<string, unknown>>}
  */
@@ -243,9 +253,9 @@ function refreshRelationshipProjections(relationships, npcs, institutions) {
     const next = {
       ...rel,
       npc1Name: first?.name  ?? rel.npc1Name,
-      npc1Role: first?.role  ?? rel.npc1Role,
+      npc1Role: first?.role != null ? styledTitleOf(first.role, first.gender) : rel.npc1Role, // COHERENCE-POWERS-8 (R2): the styled title, one home
       npc2Name: second?.name ?? rel.npc2Name,
-      npc2Role: second?.role ?? rel.npc2Role,
+      npc2Role: second?.role != null ? styledTitleOf(second.role, second.gender) : rel.npc2Role,
     };
     // Directed order matters: the generator built these as desc(npc1, npc2).
     // A legacy edge carrying no archetypeKey keeps the prose it shipped with.
@@ -583,16 +593,25 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // pair-saturation writer that drew here before the enrichment is retired. Drawn last, so it
     // moves no draw above it; a fresh tie names the cast as it stands, so no projection refresh.
     const finalRelationships = drawTies(roster, { config, institutions: settlement.institutions || [], tier: settlement.tier, government: settlement.powerStructure?.government ?? null }, getActiveRng());
-    const conflicts = generateConflicts(settlement.powerStructure?.factions || [], finalRelationships, config, settlement.institutions || [], roster);
+    // BAR3-CLOSE-SWEEP-B (2026-11-16, letter c; the chair's RG1c): the born quarrels are kept, the regen's draws join only
+    // for the pairs the born list does not name (conflicts.js :: carryBornQuarrels). Since BAR3-POWERS P3 (c0d013098) the
+    // relation rows echo the quarrels at any intensity, so the born rows' echoes stay true, and the rows of the newly drawn
+    // pairs take the generator's own twin below (withConflictRelations): every echo names a quarrel the record holds.
+    const { conflicts, drawn: drawnQuarrels } = carryBornQuarrels(
+      settlement.conflicts,
+      generateConflicts(settlement.powerStructure?.factions || [], finalRelationships, config, settlement.institutions || [], roster),
+    );
     // ALLEGIANCE-CAR4 (A9, the design §2): the regenerated cast's goals, dealt over the FINAL roster and its ties on this
     // regen's own keyed family, as birth deals them (people/goals.js); a preserved keeper's goal is the user's and is kept.
-    const goaledRoster = dealGoals({ ...settlement, config, conflicts }, roster, finalRelationships, getActiveRng(), { keep: new Set(preserved.map((p) => String(p.id))) });
+    // SECRETS-1 (2026-11-17, ruling RS1): the very rare secrets beside the goals, on this regen's seed (no draw); a keeper keeps theirs
+    const goaledRoster = dealRareSecrets({ ...settlement, config, conflicts }, dealGoals({ ...settlement, config, conflicts }, roster, finalRelationships, getActiveRng(), { keep: new Set(preserved.map((p) => String(p.id))) }), finalRelationships, { seed, keep: new Set(preserved.map((p) => String(p.id))), worldLaw: generationContext });
     // FIX-SECTION-REGEN (2026-11-09; car 2's finding): the hall-capture state is DERIVED from the cast, so a new cast
     // re-derives it, and the record must hold it — the seam above derives it on this regen's private view, which is
     // dropped. It is re-derived here over the FINAL roster (the user's canon merged in) through the full generation's
     // own seam and ONE writer (narrativeGenerator.js :: withHallCapture → hallCapture.js :: writeHallCapture), from the
     // RECORD's power structure, re-reading the writer's own birth seed (`rederive`) — draw-free, so it moves no draw.
-    const powerStructure = withHallCapture({ ...settlement, config, npcs: goaledRoster }, goaledRoster, { rederive: true });
+    const hallStructure = withHallCapture({ ...settlement, config, npcs: goaledRoster }, goaledRoster, { rederive: true });
+    const powerStructure = hallStructure ? withConflictRelations(hallStructure, drawnQuarrels) : hallStructure;
     // the record's trace keeps every other step's run; the subject's run is the regeneration's (re-stamped on the
     // trace's own clock, ts = position). Dormant: a record with no allegiance before or after carries no new key.
     const priorTrace = Array.isArray(/** @type {any} */ (settlement).simulationTrace) ? /** @type {any} */ (settlement).simulationTrace : [];

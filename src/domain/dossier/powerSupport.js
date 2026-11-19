@@ -51,6 +51,7 @@ import { institutionBackingFactionName } from '../display/institutionBackingFact
 import { factionArchetype, FACTION_ARCHETYPES as A } from '../factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { walkUserEdits } from '../userEdits.js';
+import { isCriminalInstitution } from '../corruption.js';
 import { BACKS_SEPARATOR, formatBacksValue, parseBacksValue } from '../userEditLines.js';
 import { backingRowFor } from '../../data/institutionBacking.js';
 import { FACE_SEAT, faceOfInstitution, familyOfInstitution, isFabricInstitution } from '../../data/institutionalCatalog.js';
@@ -269,11 +270,47 @@ export function houseBacksOf(settlement) {
       const backer = institutionBackingFactionName(inst, settlement);
       if (backer) add(backer, 'aligned', alignedWhy(archOf(backer)), 1);
     }
-    // THE DEFAULT: nothing landed, so the house answers to the seat at no weight.
-    if (list.length === 0 && ruler) list.push({ faction: ruler, basis: 'default', why: DEFAULT_BASIS, share: 0, weight });
+    // THE DEFAULT: nothing landed, so the house answers to the seat at no weight. COHERENCE-POWERS-7 (cold list
+    // REVIEW-W2A-3 #636): never a criminal house (corruption.js's one detector) — with no criminal power to land on it
+    // works outside the seat's law, not under it (a criminal ruler takes its houses above, as its kind's leader).
+    if (list.length === 0 && ruler && !isCriminalInstitution(inst)) list.push({ faction: ruler, basis: 'default', why: DEFAULT_BASIS, share: 0, weight });
     list.sort((x, y) => y.share - x.share || BASIS_RANK[x.basis] - BASIS_RANK[y.basis]);
     byHouse.set(key, list);
   }
+  return byHouse;
+}
+
+/**
+ * THE POWERS EACH HOUSE STANDS BEHIND, AS THE PAGE PRINTS THEM (BAR6-POWERS, LAW 10f-backs, the audit's C102099; the brief
+ * BAR6's fact (d), a reading at print, NARROWED by the chair's ruling of 2026-11-16 to the fault it counted): `houseBacksOf`
+ * with ONE reading more, THE RULER'S OWN SEAT DOES NOT BACK THE RULER'S HIGH RIVAL. The seat's house (`seatHouseName`, the
+ * Government shelf's first) lands its catalogue shares on the ruler AND on the leader of each other archetype its row
+ * names, so the page printed "Backs · Craft Guilds · Grand Guild Consortium" beside the two powers' HIGH quarrel (28 towns
+ * of the census's 720 at 600b7683a). Here a power the ruler is in high conflict with (`powerStructure.conflicts`, the
+ * quarrel the page prints) leaves the seat's list, its share to the ruler's own landing. A second power with NO such quarrel
+ * stays (a hall partly in another's pocket is true, and the line's interest); the DM's word and a founding mark stand.
+ * ⛔ PRINT ONLY. `houseBacksOf` stays the birth's arithmetic: `generators/people/castPowers.js` (the memberships) and
+ * `generators/power/rulerKin.js` deal the cast from it, so a change there re-draws people and ties (measured on the wide
+ * read's 150: 50 towns moved). The page's readers read this one.
+ * @param {SupportSettlement} settlement
+ * @returns {Map<string, HouseBack[]>}
+ */
+export function houseBacksShownOf(settlement) {
+  const byHouse = houseBacksOf(settlement);
+  const institutions = settlement?.institutions;
+  const ruler = Array.isArray(settlement?.powerStructure?.factions) ? powerIndex(settlement).ruler : null;
+  const seat = ruler && Array.isArray(institutions) ? seatHouseName(institutions) : null;
+  const list = seat ? byHouse.get(seat) : undefined;
+  const own = list ? list.find((b) => b.faction === ruler) : undefined;
+  if (!list || !own || list.some((b) => b.basis === 'authored' || b.basis === 'founded')) return byHouse;
+  const conflicts = /** @type {{ powerStructure?: { conflicts?: unknown } }} */ (settlement).powerStructure?.conflicts;
+  const rivals = new Set((Array.isArray(conflicts) ? conflicts : [])
+    .filter((c) => !!c && String(c.intensity).toLowerCase() === 'high' && Array.isArray(c.parties) && c.parties.includes(ruler))
+    .flatMap((c) => c.parties.filter((/** @type {unknown} */ p) => p !== ruler)));
+  const refused = list.filter((b) => rivals.has(b.faction));
+  if (!refused.length) return byHouse;
+  const moved = refused.reduce((sum, b) => sum + b.share, 0);
+  byHouse.set(/** @type {string} */ (seat), list.filter((b) => !rivals.has(b.faction)).map((b) => (b === own ? { ...b, share: b.share + moved } : b)));
   return byHouse;
 }
 
@@ -513,7 +550,7 @@ export function deriveFactionSupport(settlement) {
     const key = nameOf(f);
     if (key && !byFaction.has(key)) byFaction.set(key, []);
   }
-  const backs = houseBacksOf(settlement);
+  const backs = houseBacksShownOf(settlement); // BAR6-POWERS (10f-backs): the page's reading
   for (const inst of institutions) {
     const name = String(inst?.name || '');
     for (const back of backs.get(name) || []) {
@@ -540,7 +577,7 @@ export function deriveFactionSupport(settlement) {
 export function institutionBackers(settlement) {
   /** @type {Map<string, string[]>} */
   const byInstitution = new Map();
-  for (const [name, list] of houseBacksOf(settlement)) {
+  for (const [name, list] of houseBacksShownOf(settlement)) { // BAR6-POWERS (10f-backs): the page's reading
     if (list.length) byInstitution.set(name, list.map((b) => b.faction));
   }
   return byInstitution;

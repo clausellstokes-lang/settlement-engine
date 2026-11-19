@@ -7,7 +7,32 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **41**: schema 40's tagged numeric heuristic-leaf envelope, tag law and corpus
+ * `BASELINE_SCHEMA` is **45**: schema 44's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
+ * UNCHANGED, re-governed to THE LAST CLOSE (the chair's ruling CL26 of 2026-11-18, carried from the first close; the owner's word "Yes to both", 2026-11-18 about 19:07 UTC): the rounds' eleven new reads since the
+ * register was last frozen (e56e112e2) ADMITTED BY CAUSE, each with its class in the instrument's vocabulary and its
+ * landing; nothing declared, nothing gone. Its full rationale lives beside `LAST_CLOSE_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_FINAL_PASS_BASELINE_SCHEMA` is **44**: schema 43's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
+ * UNCHANGED, re-governed to THE CLOSE'S FINAL PASS (the chair's ruling OR2 of 2026-11-15, its law carried to the FINAL PASS at f76fe38fd): one lawful shrink and one row recorded as uncured
+ * instrument erosion. Its full rationale lives beside `FINAL_PASS_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_CLOSE_ROUND_BASELINE_SCHEMA` is **43**: schema 42's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
+ * UNCHANGED, re-governed to THE CLOSE OF THE ROUND OF 2026-11-14/15 (the chair's ruling OR2 of 2026-11-15; the
+ * chair's record 456): ONE rung, the round's causes, every moved row with one — the lawful shrinks retire with
+ * cause, the rows the detector lost while their reads still stand are recorded as UNCURED INSTRUMENT EROSION, and
+ * the round's new reads are admitted by cause with class and lane. Its full rationale lives beside
+ * `CLOSE_ROUND_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA` is **42**: schema 41's tagged numeric heuristic-leaf envelope, tag law, roster and bank (78/52)
+ * UNCHANGED, re-governed to THE AGREEMENT LANE'S TIER SEED (STYLE-2-MERGE point 47, COHERENCE-AGREE; the chair's
+ * ruling on STOP 47a, 2026-11-13): ONE rung, ONE cause — the agreement lane's generation moved the tier seed's
+ * town out of the overlap, so producer 2b's seed is re-searched by its own rule (osr-tier-14 -> osr-tier-19) in the
+ * corpus builder, a detector source. Its full rationale lives beside `AGREE_TIER_SEED_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA` is **41**: schema 40's tagged numeric heuristic-leaf envelope, tag law and corpus
  * definition UNCHANGED, re-governed to THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the
  * chair's FINAL RULING of 2026-11-09 21:2x: "a TRUE schema change, admitted by the ONE rung at the final tip"):
  * ONE rung, ONE cause — a NEW writer class, `played-worlds-writer` ("a writer that runs only in campaign time
@@ -633,7 +658,21 @@ export const RETIRED_TRAIN_CAR4_BASELINE_SCHEMA = 39;
  *  writer's admission (the chair's FINAL RULING 21:2x). Never redefined, never deleted, so a schema-40
  *  PREDECESSOR is still validated as schema 40. */
 export const RETIRED_PUBLIC_PROSE_BASELINE_SCHEMA = 40;
-export const BASELINE_SCHEMA = 41;
+/** The RETIRED played-worlds definition — schema 42's predecessor. Schema 42 re-governs it to the agreement
+ *  lane's tier seed (STOP 47a). Never redefined, never deleted, so a schema-41 PREDECESSOR is still validated
+ *  as schema 41. */
+export const RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA = 41;
+/** The RETIRED tier-seed definition — schema 43's predecessor. Schema 43 re-governs it to the close of the round
+ *  of 2026-11-14/15 (OR2). Never redefined, never deleted, so a schema-42 PREDECESSOR is still validated as
+ *  schema 42. */
+export const RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA = 42;
+/** The RETIRED close-of-round definition — schema 44's predecessor. Never redefined, never deleted, so a schema-43
+ *  PREDECESSOR is still validated as schema 43. */
+export const RETIRED_CLOSE_ROUND_BASELINE_SCHEMA = 43;
+/** The RETIRED final-pass definition — schema 45's predecessor. Never redefined, never deleted, so a schema-44
+ *  PREDECESSOR is still validated as schema 44. */
+export const RETIRED_FINAL_PASS_BASELINE_SCHEMA = 44;
+export const BASELINE_SCHEMA = 45;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1428,10 +1467,48 @@ export function validateSchema40Baseline(baseline) {
   );
 }
 
-/** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
- *  so the retired rungs above keep validating their own numbers while this one
- *  always names the authority. */
+/** The RETIRED authority — schema 41's tagged envelope (the played-worlds writer), re-governed by schema 42
+ *  to the agreement lane's tier seed (STOP 47a). Re-bound to its own LITERAL. */
 export function validateSchema41Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_PLAYED_WORLDS_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 42's tagged envelope (the agreement lane's tier seed), re-governed by schema 43
+ *  to the close of the round of 2026-11-14/15 (OR2). Re-bound to its own LITERAL. */
+export function validateSchema42Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 43's tagged envelope (the close of the round), re-governed by schema 44 to the
+ *  close's final pass. Re-bound to its own LITERAL. */
+export function validateSchema43Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_CLOSE_ROUND_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The RETIRED authority — schema 44's tagged envelope (the close's final pass), re-governed by schema 45 to the
+ *  last close. Re-bound to its own LITERAL. */
+export function validateSchema44Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_FINAL_PASS_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
+/** The LIVE envelope validator, bound to `BASELINE_SCHEMA` (schema 45, the last close). */
+export function validateSchema45Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 

@@ -1,0 +1,2762 @@
+[
+ {
+  "rule": "6a-size",
+  "town": "r2r-hamlet-20",
+  "tab": "Systems/Defense",
+  "line": "Rival crews at Jómsmark are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 99"
+  },
+  "why": "\"streets\" in a hamlet of 99",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2r-thorp-16",
+  "tab": "Systems/Defense",
+  "line": "The danger at Beizhou comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 10"
+  },
+  "why": "\"streets\" in a thorp of 10",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2s-slave_revolt-hamlet-2",
+  "tab": "Systems/Defense",
+  "line": "Rival crews at Cnocthwaite are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 98"
+  },
+  "why": "\"streets\" in a hamlet of 98",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2r-thorp-29",
+  "tab": "Systems/Defense",
+  "line": "The danger at Yurtbulag comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 11"
+  },
+  "why": "\"streets\" in a thorp of 11",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2s-occupied-hamlet-1",
+  "tab": "Summary/Overview",
+  "line": "The occupiers in Llanhurst's streets are the same faces as last season, and they no longer bother to look about them.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 95"
+  },
+  "why": "\"streets\" in a hamlet of 95",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2s-religious_conversion-thorp-1",
+  "tab": "Systems/Defense",
+  "line": "The danger at Mironitsa comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 26"
+  },
+  "why": "\"streets\" in a thorp of 26",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2s-occupied-hamlet-2",
+  "tab": "Summary/Overview",
+  "line": "The occupiers in Dunkelstift's streets are the same faces as last season, and they no longer bother to look about them.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 59"
+  },
+  "why": "\"streets\" in a hamlet of 59",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2s-occupied-thorp-3",
+  "tab": "Summary/Overview",
+  "line": "The occupiers in Víkberg's streets are the same faces as last season, and they no longer bother to look about them.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 18"
+  },
+  "why": "\"streets\" in a thorp of 18",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2r-thorp-10",
+  "tab": "Systems/Defense",
+  "line": "The danger at Tihogorod comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 10"
+  },
+  "why": "\"streets\" in a thorp of 10",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2s-slave_revolt-hamlet-0",
+  "tab": "Systems/Defense",
+  "line": "People at Velikoichi keep away from the streets where the revolt is being fought, and nobody walks them after dark.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 89"
+  },
+  "why": "\"streets\" in a hamlet of 89",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2s-slave_revolt-thorp-2",
+  "tab": "Systems/Defense",
+  "line": "People at Fenggang keep away from the streets where the revolt is being fought, and nobody walks them after dark.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 21"
+  },
+  "why": "\"streets\" in a thorp of 21",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2r-hamlet-1",
+  "tab": "Systems/Defense",
+  "line": "The danger at Divoino comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 90"
+  },
+  "why": "\"streets\" in a hamlet of 90",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2r-thorp-1",
+  "tab": "Summary/Overview",
+  "line": "The occupiers in Terrapolis's streets are the same faces as last season, and they no longer bother to look about them.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 30"
+  },
+  "why": "\"streets\" in a thorp of 30",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2r-hamlet-34",
+  "tab": "Systems/Defense",
+  "line": "The danger at Zoltandavan comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 50"
+  },
+  "why": "\"streets\" in a hamlet of 50",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2r-thorp-27",
+  "tab": "Summary/Overview",
+  "line": "The occupiers in Olympnea's streets are the same faces as last season, and they no longer bother to look about them.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 25"
+  },
+  "why": "\"streets\" in a thorp of 25",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2r-hamlet-19",
+  "tab": "Systems/Defense",
+  "line": "Nobody at Deirkala warns visitors about particular streets, because the warning would cover all of them.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 84"
+  },
+  "why": "\"streets\" in a hamlet of 84",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2r-village-49",
+  "tab": "Summary/Overview",
+  "line": "Causeways and managed water divide the settlement into organized neighborhoods.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 168"
+  },
+  "why": "\"neighborhoods\" in a village of 168",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2r-thorp-24",
+  "tab": "Summary/Overview",
+  "line": "The occupiers in Sanctaminus's streets are the same faces as last season, and they no longer bother to look about them.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 20"
+  },
+  "why": "\"streets\" in a thorp of 20",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2r-hamlet-54",
+  "tab": "Systems/Defense",
+  "line": "Nobody at Grímstad warns visitors about particular streets, because the warning would cover all of them.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 39"
+  },
+  "why": "\"streets\" in a hamlet of 39",
+  "seed": 617
+ },
+ {
+  "rule": "6a-size",
+  "town": "r2s-plague_onset-thorp-2",
+  "tab": "Systems/Defense",
+  "line": "The danger at Miropol comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 9"
+  },
+  "why": "\"streets\" in a thorp of 9",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2s-under_siege-village-0",
+  "tab": "Systems/Defense",
+  "line": "The danger at Izamtzal comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 281"
+  },
+  "why": "\"streets\" in a village of 281 (WEAK by the second check: one loose word)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2r-village-50",
+  "tab": "Systems/Power",
+  "line": "Criminal money would go a long way with the officials of Somakota: the village is poor, its streets are badly watched, and nobody has shut the door.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 386"
+  },
+  "why": "\"streets\" in a village of 386 (WEAK by the second check: one loose word)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2r-village-22",
+  "tab": "Systems/Defense",
+  "line": "Visitors to Jómsland are told which few streets to avoid, and the advice turns out to be right.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 328"
+  },
+  "why": "\"streets\" in a village of 328 (WEAK by the second check: one loose word)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2s-succession_void-hamlet-0",
+  "tab": "Summary/Overview",
+  "line": "People are going about their business, but there is a particular alertness to the street: people checking who is talking to whom.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 99"
+  },
+  "why": "\"the street\" in a hamlet of 99 (one street, or a foodways word: WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2r-village-53",
+  "tab": "Systems/Defense",
+  "line": "Rival crews at Dongan are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 269"
+  },
+  "why": "\"streets\" in a village of 269 (WEAK by the second check: one loose word)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2s-monster_pressure-thorp-0",
+  "tab": "Systems/Economics",
+  "line": "Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 16"
+  },
+  "why": "\"street kitchens\" in a thorp of 16 (one street, or a foodways word: WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2r-hamlet-31",
+  "tab": "Summary/Overview",
+  "line": "Nobody in the street pays attention.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 27"
+  },
+  "why": "\"the street\" in a hamlet of 27 (one street, or a foodways word: WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2r-village-15",
+  "tab": "Systems/Defense",
+  "line": "Visitors to Ulfborg are told which few streets to avoid, and the advice turns out to be right.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 283"
+  },
+  "why": "\"streets\" in a village of 283 (WEAK by the second check: one loose word)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2r-village-53",
+  "tab": "Systems/Power",
+  "line": "Each season it gets easier to buy an official at Dongan: the village stays poor, the streets stay badly guarded, and nobody in the Elder Council is mending either.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 269"
+  },
+  "why": "\"streets\" in a village of 269 (WEAK by the second check: one loose word)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2s-infiltrated-thorp-1",
+  "tab": "Systems/Economics",
+  "line": "Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 16"
+  },
+  "why": "\"street kitchens\" in a thorp of 16 (one street, or a foodways word: WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2s-politically_fractured-hamlet-0",
+  "tab": "Systems/Defense",
+  "line": "Cross a street at Zelenoichi and you may cross from one power's rules into another's.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 92"
+  },
+  "why": "\"a street\" in a hamlet of 92 (one street, or a foodways word: WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2s-recently_betrayed-thorp-3",
+  "tab": "Summary/Overview",
+  "line": "Conversations drop to a murmur as you pass, and people watch the street from their doorways.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 16"
+  },
+  "why": "\"the street\" in a thorp of 16 (one street, or a foodways word: WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2s-plague_onset-thorp-3",
+  "tab": "Summary/Overview",
+  "line": "More doors in Dharmaghat are shut each week, and fewer people stop in the street to talk.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 15"
+  },
+  "why": "\"the street\" in a thorp of 15 (one street, or a foodways word: WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2r-village-23",
+  "tab": "Systems/Defense",
+  "line": "Rival crews at Padmatala are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 271"
+  },
+  "why": "\"streets\" in a village of 271 (WEAK by the second check: one loose word)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2s-plague_onset-thorp-2",
+  "tab": "Summary/Overview",
+  "line": "More doors in Miropol are shut each week, and fewer people stop in the street to talk.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 9"
+  },
+  "why": "\"the street\" in a thorp of 9 (one street, or a foodways word: WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2r-village-56",
+  "tab": "Systems/Defense",
+  "line": "The danger at Treford comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 117"
+  },
+  "why": "\"streets\" in a village of 117 (WEAK by the second check: one loose word)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2s-succession_void-hamlet-3",
+  "tab": "Summary/Overview",
+  "line": "People are going about their business, but there is a particular alertness to the street: people checking who is talking to whom.",
+  "against": {
+   "tab": "record",
+   "line": "hamlet · population 28"
+  },
+  "why": "\"the street\" in a hamlet of 28 (one street, or a foodways word: WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2r-thorp-51",
+  "tab": "Summary/Overview",
+  "line": "Conversations drop to a murmur as you pass, and people watch the street from their doorways.",
+  "against": {
+   "tab": "record",
+   "line": "thorp · population 11"
+  },
+  "why": "\"the street\" in a thorp of 11 (one street, or a foodways word: WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2s-indebted-village-2",
+  "tab": "Systems/Power",
+  "line": "Criminal money would go a long way with the officials of Oberkirche: the village is poor, its streets are badly watched, and nobody has shut the door.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 318"
+  },
+  "why": "\"streets\" in a village of 318 (WEAK by the second check: one loose word)",
+  "seed": 617
+ },
+ {
+  "rule": "6a-w",
+  "town": "r2r-village-16",
+  "tab": "Systems/Defense",
+  "line": "Visitors to Flachbrücke are told which few streets to avoid, and the advice turns out to be right.",
+  "against": {
+   "tab": "record",
+   "line": "village · population 157"
+  },
+  "why": "\"streets\" in a village of 157 (WEAK by the second check: one loose word)",
+  "seed": 617
+ },
+ {
+  "rule": "6b-denied",
+  "town": "r2s-plague_onset-city-3",
+  "tab": "Summary/Overview",
+  "line": "Kiln smoke hangs over Xochiucan, and the dust of fired clay is on everything.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "Short of clay. Moulds and fires clay bricks for construction whenever clay can be had. Enables more permanent buildings. Requires clay and fuel."
+  },
+  "why": "a scene shows fired clay; the page itself says it is not made or not had",
+  "seed": 617
+ },
+ {
+  "rule": "6b-denied",
+  "town": "r2r-city-15",
+  "tab": "Summary/Overview",
+  "line": "Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Needed, and not brought in: spices, clay."
+  },
+  "why": "a scene shows spices; the page itself says it is not made or not had",
+  "seed": 617
+ },
+ {
+  "rule": "6b-denied",
+  "town": "r2s-plague_onset-village-2",
+  "tab": "Summary/Overview",
+  "line": "Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Needed, and not brought in: luxury goods, spices, fine textiles, clay, animal hides."
+  },
+  "why": "a scene shows spices; the page itself says it is not made or not had",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2s-wartime-hamlet-3",
+  "tab": "Summary/Overview",
+  "line": "Someone is churning butter in a doorway, and the rhythm of it carries.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes dairy; Produced locally: honey · medicinal herbs · Honey and beeswax · Foraged goods"
+  },
+  "why": "a scene shows churning; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2s-succession_void-village-3",
+  "tab": "Summary/Overview",
+  "line": "Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes spice; Produced locally: timber · medicinal herbs · honey · iron · metalwork · Herbal remedies · Potions and elixirs · Bows and crossbows · Arrows (sheaf) · Quality tools and weapons · Advanced weapons and armor · Religious services · Education (basic)"
+  },
+  "why": "a scene shows spices; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2s-mass_migration-city-1",
+  "tab": "Summary/Overview",
+  "line": "Spice and drying herbs scent every lane, and the stalls are piled with them.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes spice; Produced locally: salt · fish · Ship construction · Financial services · International banking services · Preserved foods · Salted fish · Smoked seafood"
+  },
+  "why": "a scene shows Spice; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2r-hamlet-7",
+  "tab": "Summary/Overview",
+  "line": "Someone is churning butter in a doorway, and the rhythm of it carries.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes dairy; Produced locally: honey · medicinal herbs · Honey and beeswax · Foraged goods"
+  },
+  "why": "a scene shows churning; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2r-village-5",
+  "tab": "Summary/Overview",
+  "line": "Someone is churning butter in a doorway, and the rhythm of it carries.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes dairy; Produced locally: (none)"
+  },
+  "why": "a scene shows churning; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2s-occupied-city-1",
+  "tab": "Summary/Overview",
+  "line": "Spice and drying herbs scent every lane, and the stalls are piled with them.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes spice; Produced locally: honey · medicinal herbs · coal · livestock · wool · dairy · Financial services · International banking services · Preserved foods · Leather goods · Honey and beeswax · Foraged goods · Cavalry mounts · Draft horses · Herbal remedies · Potions and elixirs · Processed textiles · Guild-manufactured goods · Finished clothing · Dyed cloth · Wild honey · Candles and wax · Cargo handling · Goods storage · Overland cargo transport · Escorted caravan"
+  },
+  "why": "a scene shows Spice; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2s-occupied-town-1",
+  "tab": "Summary/Overview",
+  "line": "Racks of drying fish and smoked meat stand beside the houses, laid in against the winter.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes fish; Produced locally: flour · grain · livestock · medicinal herbs · honey · Baked goods · Herbal remedies · Potions and elixirs · Wild honey · Flour and meal · Religious services · Education (basic)"
+  },
+  "why": "a scene shows drying fish; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2r-hamlet-0",
+  "tab": "Summary/Overview",
+  "line": "Someone is churning butter in a doorway, and the rhythm of it carries.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes dairy; Produced locally: (none)"
+  },
+  "why": "a scene shows churning; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2s-insurgency-hamlet-2",
+  "tab": "Summary/Overview",
+  "line": "Someone is churning butter in a doorway, and the rhythm of it carries.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes dairy; Produced locally: honey · medicinal herbs · Honey and beeswax · Foraged goods"
+  },
+  "why": "a scene shows churning; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2s-insurgency-village-3",
+  "tab": "Summary/Overview",
+  "line": "Someone is churning butter in a doorway, and the rhythm of it carries.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes dairy; Produced locally: dates · Dates and fruit · Religious services · Education (basic)"
+  },
+  "why": "a scene shows churning; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2r-village-44",
+  "tab": "Summary/Overview",
+  "line": "Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes spice; Produced locally: grain · flour · medicinal herbs · Religious services · Education (basic)"
+  },
+  "why": "a scene shows spices; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2r-hamlet-56",
+  "tab": "Summary/Overview",
+  "line": "Kiln smoke hangs over Polavich, and the dust of fired clay is on everything.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes pots; Produced locally: timber · medicinal herbs · honey · Honey and beeswax · Foraged goods"
+  },
+  "why": "a scene shows fired clay; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2r-village-20",
+  "tab": "Summary/Overview",
+  "line": "Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes spice; Produced locally: honey · medicinal herbs · stone · Herbal remedies · Potions and elixirs · Religious services · Education (basic)"
+  },
+  "why": "a scene shows spices; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2s-recently_betrayed-hamlet-2",
+  "tab": "Summary/Overview",
+  "line": "Someone is churning butter in a doorway, and the rhythm of it carries.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes dairy; Produced locally: honey · medicinal herbs · Honey and beeswax · Foraged goods"
+  },
+  "why": "a scene shows churning; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2r-town-27",
+  "tab": "Summary/Overview",
+  "line": "Spice and drying herbs scent every lane, and the stalls are piled with them.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes spice; Produced locally: game meat · animal hides · Furs and pelts · honey · medicinal herbs · Leather goods · Herbal remedies · Potions and elixirs · Guild-manufactured goods · Bows and crossbows · Arrows (sheaf) · Wild honey · Religious services · Education (basic)"
+  },
+  "why": "a scene shows Spice; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2s-indebted-village-0",
+  "tab": "Summary/Overview",
+  "line": "Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes spice; Produced locally: medicinal herbs · honey · coal · Herbal remedies · Potions and elixirs · Religious services · Education (basic)"
+  },
+  "why": "a scene shows spices; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2r-hamlet-54",
+  "tab": "Summary/Overview",
+  "line": "Someone is churning butter in a doorway, and the rhythm of it carries.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes dairy; Produced locally: honey · medicinal herbs · Honey and beeswax · Foraged goods"
+  },
+  "why": "a scene shows churning; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2s-infiltrated-hamlet-2",
+  "tab": "Summary/Overview",
+  "line": "Someone is churning butter in a doorway, and the rhythm of it carries.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes dairy; Produced locally: honey · medicinal herbs · Honey and beeswax · Foraged goods"
+  },
+  "why": "a scene shows churning; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2r-city-40",
+  "tab": "Summary/Overview",
+  "line": "Sacks of herbs and spices stand open in the doorways, and the smell of them clings to your clothes.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes spice; Produced locally: honey · medicinal herbs · coal · grain · flour · livestock · wool · dairy · animal hides · Baked goods · Cavalry mounts · Draft horses · Herbal remedies · Potions and elixirs · Medical care (basic) · Spellcasting (minor) · Processed textiles · Guild-manufactured goods · Preserved foods · Finished clothing · Dyed cloth · Boots and shoes · Wild honey · Candles and wax · Religious services · Education (basic) · Hospitality for travellers"
+  },
+  "why": "a scene shows spices; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-nomaker",
+  "town": "r2s-plague_onset-hamlet-2",
+  "tab": "Summary/Overview",
+  "line": "Kiln smoke hangs over Jayaagam, and the dust of fired clay is on everything.",
+  "against": {
+   "tab": "record",
+   "line": "no house makes pots; Produced locally: medicinal herbs · honey · Honey and beeswax · Foraged goods"
+  },
+  "why": "a scene shows fired clay; no house makes it and the page lists none made or sent out",
+  "seed": 617
+ },
+ {
+  "rule": "6b-out",
+  "town": "r2r-city-23",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Sacred wood · Ritual components · Iron ore · Weapons and armour · Candles and wax · Glassware · Books and manuscripts · Quality tools and weapons · Legal services (contracts, notarial) · Pilgrimage & religious tourism · Military contract services · Scholarly services (research access, rare texts)"
+  },
+  "why": "a scene sends Bolts of cloth out of the town; the page's exports carry none",
+  "seed": 617
+ },
+ {
+  "rule": "6b-out",
+  "town": "r2r-metropolis-49",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Ship passage · Recovered artefacts · Rare texts · Milled lumber · Spellcasting (minor) · Magical identification · Books and manuscripts · Higher education · Barrels and containers · River craft · Financial services (letters of credit) · Legal services (contracts, notarial) · Pilgrimage & religious tourism · Educational services (degrees, training) · Military contract services · Arcane services (identification, enchanting) · Maritime services (cargo, pilotage) · Scholarly services (research access, rare texts)"
+  },
+  "why": "a scene sends Bolts of cloth out of the town; the page's exports carry none",
+  "seed": 617
+ },
+ {
+  "rule": "6b-out",
+  "town": "r2r-city-38",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Ship passage · Salted fish · Smoked seafood · Fish oil · Shipbuilding timber · River craft · Cargo barges · Ship construction · Ocean-going vessels · River barges · Legal services (contracts, notarial) · Maritime services (cargo, pilotage) · Scholarly services (research access, rare texts) · Military services — garrison contracts and armed escort"
+  },
+  "why": "a scene sends Bolts of cloth out of the town; the page's exports carry none",
+  "seed": 617
+ },
+ {
+  "rule": "6b-out",
+  "town": "r2s-wartime-metropolis-1",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: River fish · Freshwater catch · Sacred wood · Ritual components · Quarried stone · Game meat · Hunting trophies · Salted fish · Smoked seafood · Candles and wax · Financial services (letters of credit) · Legal services (contracts, notarial) · Pilgrimage & religious tourism · Military contract services · Waterborne freight services (cargo, pilotage) · Scholarly services (research access, rare texts)"
+  },
+  "why": "a scene sends Bolts of cloth out of the town; the page's exports carry none",
+  "seed": 617
+ },
+ {
+  "rule": "6b-out",
+  "town": "r2s-wartime-metropolis-3",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Ship passage · Recovered artefacts · Rare texts · Salted fish · Smoked seafood · Fish oil · Spellcasting (minor) · Magical identification · Books and manuscripts · Higher education · Financial services (letters of credit) · Legal services (contracts, notarial) · Pilgrimage & religious tourism · Educational services (degrees, training) · Military contract services · Arcane services (identification, enchanting) · Maritime services (cargo, pilotage) · Scholarly services (research access, rare texts)"
+  },
+  "why": "a scene sends Bolts of cloth out of the town; the page's exports carry none",
+  "seed": 617
+ },
+ {
+  "rule": "6b-out",
+  "town": "r2r-town-58",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Sacred wood · Ritual components · Iron ore · Weapons and armour · Quality tools and weapons · Advanced weapons and armor · Bows and crossbows · Arrows (sheaf) · Financial services (letters of credit) · Legal services (contracts, notarial)"
+  },
+  "why": "a scene sends Bolts of cloth out of the town; the page's exports carry none",
+  "seed": 617
+ },
+ {
+  "rule": "6b-out",
+  "town": "r2s-occupied-town-0",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Reeds and thatch (taxed by occupation) · Peat fuel (taxed by occupation) · Waterfowl (taxed by occupation) · Sacred wood (taxed by occupation) · Ritual components (taxed by occupation) · Legal services (contracts, notarial)"
+  },
+  "why": "a scene sends Bolts of cloth out of the town; the page's exports carry none",
+  "seed": 617
+ },
+ {
+  "rule": "6b-out",
+  "town": "r2r-city-58",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Salted fish · Smoked seafood · Fish oil · Sea salt · Recovered artefacts · Rare texts · Ship passage · Spellcasting (minor) · Magical identification · Books and manuscripts · Financial services (letters of credit) · Legal services (contracts, notarial) · Pilgrimage & religious tourism · Military contract services · Maritime services (cargo, pilotage) · Scholarly services (research access, rare texts) · Alchemical trade (potions, reagents)"
+  },
+  "why": "a scene sends Bolts of cloth out of the town; the page's exports carry none",
+  "seed": 617
+ },
+ {
+  "rule": "6b-out",
+  "town": "r2r-metropolis-22",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Milled flour · Healing waters (bottled) · Pilgrim hospitality · Iron ore · Weapons and armour · River fish · Freshwater catch · Salted fish · Smoked seafood · Legal services (contracts, notarial) · Military contract services · Waterborne freight services (cargo, pilotage) · Scholarly services (research access, rare texts) · Alchemical trade (potions, reagents)"
+  },
+  "why": "a scene sends Bolts of cloth out of the town; the page's exports carry none",
+  "seed": 617
+ },
+ {
+  "rule": "6b-out",
+  "town": "r2s-infiltrated-village-0",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Coal"
+  },
+  "why": "a scene sends Bolts of cloth out of the town; the page's exports carry none",
+  "seed": 617
+ },
+ {
+  "rule": "6b-out",
+  "town": "r2r-city-13",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Salted fish · Smoked seafood · Fish oil · Sea salt · Recovered artefacts · Rare texts · Ship passage · Books and manuscripts · Higher education · Financial services (letters of credit) · Legal services (contracts, notarial) · Military contract services · Maritime services (cargo, pilotage) · Scholarly services (research access, rare texts)"
+  },
+  "why": "a scene sends Bolts of cloth out of the town; the page's exports carry none",
+  "seed": 617
+ },
+ {
+  "rule": "6b-out",
+  "town": "r2s-politically_fractured-town-0",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: River fish · Freshwater catch · Sacred wood · Ritual components · Salted fish · Smoked seafood"
+  },
+  "why": "a scene sends Bolts of cloth out of the town; the page's exports carry none",
+  "seed": 617
+ },
+ {
+  "rule": "6b-w",
+  "town": "r2r-town-45",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Raw gemstones · Spellcasting (minor) · Magical identification · Rare spices and exotic dyes (transit) · Caravan trade goods (transit) · Exotic imports (transit) · Cargo handling (transit) · Pilgrimage & religious tourism · Arcane services (identification, enchanting)"
+  },
+  "why": "a scene sends bales of wool out; the exports carry only part of what it shows (WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6b-w",
+  "town": "r2r-city-32",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Sacred wood · Ritual components · Coal · Quarried stone · Raw wool · Livestock · Milled timber · Candles and wax · Quality tools and weapons · Financial services (letters of credit) · Legal services (contracts, notarial) · Arcane services (identification, enchanting) · Scholarly services (research access, rare texts)"
+  },
+  "why": "a scene sends Bolts of cloth out; the exports carry only part of what it shows (WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6b-w",
+  "town": "r2s-monster_pressure-metropolis-3",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Pine planks · Charcoal · Mineral salts · Alum · Sulfur · Raw wool · Livestock · Sacred wood · Ritual components · Medicinal herbs · Wild honey · Financial services (letters of credit) · Legal services (contracts, notarial) · Pilgrimage & religious tourism · Educational services (degrees, training) · Military contract services · Arcane services (identification, enchanting) · Scholarly services (research access, rare texts)"
+  },
+  "why": "a scene sends Bolts of cloth out; the exports carry only part of what it shows (WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6b-w",
+  "town": "r2s-recently_betrayed-metropolis-0",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Iron ore · Weapons and armour · Rare spices and exotic dyes (transit) · Spellcasting (minor) · Magical identification · Magical item market · Weapon enchantment · News and information · Maps and charts · Financial services (letters of credit) · Legal services (contracts, notarial) · Pilgrimage & religious tourism · Educational services (degrees, training) · Military contract services · Arcane services (identification, enchanting) · Scholarly services (research access, rare texts)"
+  },
+  "why": "a scene sends bales of wool out; the exports carry only part of what it shows (WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6b-w",
+  "town": "r2s-infiltrated-town-1",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: River fish · Freshwater catch · Medicinal herbs · Wild honey · Refined iron ingots · Pig iron · Rare spices and exotic dyes (transit)"
+  },
+  "why": "a scene sends bales of wool out; the exports carry only part of what it shows (WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6b-w",
+  "town": "r2r-town-42",
+  "tab": "Summary/Overview",
+  "line": "Bolts of cloth and bales of wool fill the carts waiting on the road out.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Hewn timber · Pine planks · Raw wool · Live sheep · Furs and pelts · Game meat · Hunting trophies · Iron ore · Legal services (contracts, notarial)"
+  },
+  "why": "a scene sends Bolts of cloth out; the exports carry only part of what it shows (WEAK)",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2s-politically_fractured-hamlet-1",
+  "tab": "Systems/Economics",
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "record",
+   "line": "the metal houses: Resident smith (part-time)"
+  },
+  "why": "Advanced weapons and armor, Master-crafted weapons yielded; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2s-recently_betrayed-hamlet-1",
+  "tab": "Systems/Economics",
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "record",
+   "line": "the metal houses: Resident smith (part-time)"
+  },
+  "why": "Advanced weapons and armor, Master-crafted weapons yielded; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2r-town-57",
+  "tab": "Systems/Economics",
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "record",
+   "line": "resourceAnalysis.gaps: iron ore: Cannot produce final goods, limited to intermediate products"
+  },
+  "why": "Advanced weapons and armor, Master-crafted weapons yielded; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2s-religious_conversion-hamlet-0",
+  "tab": "Systems/Economics",
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "record",
+   "line": "resourceAnalysis.gaps: iron ore: Cannot produce final goods, limited to intermediate products"
+  },
+  "why": "Advanced weapons and armor, Master-crafted weapons yielded; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2s-under_siege-hamlet-3",
+  "tab": "Systems/Economics",
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "record",
+   "line": "the metal houses: Resident smith (part-time)"
+  },
+  "why": "Advanced weapons and armor, Master-crafted weapons yielded; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2r-hamlet-2",
+  "tab": "Systems/Economics",
+  "line": "Raw wool · Live sheep · Mineral salts · Alum · Sulfur · Reeds and thatch · Peat fuel · Waterfowl · Sacred wood · Ritual components · Quality tools and weapons · Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "the metal houses: Resident smith (part-time)"
+  },
+  "why": "Advanced weapons and armor exported; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2r-hamlet-53",
+  "tab": "Systems/Economics",
+  "line": "Salted fish · Smoked seafood · Fish oil · Healing waters (bottled) · Iron ore · Quality tools and weapons · Advanced weapons and armor · Preserved foods",
+  "against": {
+   "tab": "record",
+   "line": "the metal houses: Resident smith (part-time)"
+  },
+  "why": "Advanced weapons and armor exported; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2r-village-25",
+  "tab": "Systems/Economics",
+  "line": "iron · metalwork · Quality tools and weapons · Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "resourceAnalysis.gaps: iron ore: Cannot produce final goods, limited to intermediate products"
+  },
+  "why": "Advanced weapons and armor yielded; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2s-under_siege-village-0",
+  "tab": "Systems/Economics",
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "record",
+   "line": "resourceAnalysis.gaps: iron ore: Cannot produce final goods, limited to intermediate products"
+  },
+  "why": "Advanced weapons and armor, Master-crafted weapons yielded; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2r-village-25",
+  "tab": "Systems/Economics",
+  "line": "Medicinal herbs · Wild honey · Iron ore · Weapons and armour · Quality tools and weapons · Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "resourceAnalysis.gaps: iron ore: Cannot produce final goods, limited to intermediate products"
+  },
+  "why": "Advanced weapons and armor exported; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2r-hamlet-38",
+  "tab": "Systems/Economics",
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "record",
+   "line": "the metal houses: Resident smith (part-time)"
+  },
+  "why": "Advanced weapons and armor, Master-crafted weapons yielded; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2r-hamlet-5",
+  "tab": "Systems/Economics",
+  "line": "River fish · Freshwater catch · Grain surplus · Sacred wood · Ritual components · Salted fish · Smoked seafood · Ale (barrel) · Beer (barrel) · Quality tools and weapons · Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "the metal houses: Resident smith (part-time)"
+  },
+  "why": "Advanced weapons and armor exported; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2s-religious_conversion-hamlet-0",
+  "tab": "Systems/Economics",
+  "line": "Grain surplus · Sacred wood · Ritual components · Precious metals · Iron ore · Ale (barrel) · Beer (barrel) · Quality tools and weapons · Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "resourceAnalysis.gaps: iron ore: Cannot produce final goods, limited to intermediate products"
+  },
+  "why": "Advanced weapons and armor exported; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2r-town-57",
+  "tab": "Systems/Economics",
+  "line": "Medicinal herbs · Alchemical reagents · Wild honey · Sacred wood · Ritual components · Weapons and armour · Herbal remedies · Potions and elixirs · Quality tools and weapons · Advanced weapons and armor · Alchemical trade (potions, reagents)",
+  "against": {
+   "tab": "record",
+   "line": "resourceAnalysis.gaps: iron ore: Cannot produce final goods, limited to intermediate products"
+  },
+  "why": "Advanced weapons and armor exported; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2r-village-25",
+  "tab": "Systems/Economics",
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "record",
+   "line": "resourceAnalysis.gaps: iron ore: Cannot produce final goods, limited to intermediate products"
+  },
+  "why": "Advanced weapons and armor, Master-crafted weapons yielded; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2s-monster_pressure-hamlet-1",
+  "tab": "Systems/Economics",
+  "line": "honey · medicinal herbs · iron · metalwork · livestock · dairy · Honey and beeswax · Foraged goods · Quality tools and weapons · Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "the metal houses: Resident smith (part-time)"
+  },
+  "why": "Advanced weapons and armor yielded; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2r-hamlet-38",
+  "tab": "Systems/Economics",
+  "line": "Furs and pelts · Game meat · Hunting trophies · Iron ore · Quality tools and weapons · Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "the metal houses: Resident smith (part-time)"
+  },
+  "why": "Advanced weapons and armor exported; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2r-hamlet-36",
+  "tab": "Systems/Economics",
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "record",
+   "line": "resourceAnalysis.gaps: iron ore: Cannot produce final goods, limited to intermediate products"
+  },
+  "why": "Advanced weapons and armor, Master-crafted weapons yielded; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2r-town-57",
+  "tab": "Systems/Economics",
+  "line": "honey · medicinal herbs · iron · metalwork · Herbal remedies · Potions and elixirs · Quality tools and weapons · Advanced weapons and armor · Wild honey · Candles and wax · Religious services · Education (basic)",
+  "against": {
+   "tab": "record",
+   "line": "resourceAnalysis.gaps: iron ore: Cannot produce final goods, limited to intermediate products"
+  },
+  "why": "Advanced weapons and armor yielded; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-arms",
+  "town": "r2s-monster_pressure-hamlet-1",
+  "tab": "Systems/Economics",
+  "line": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons",
+  "against": {
+   "tab": "record",
+   "line": "the metal houses: Resident smith (part-time)"
+  },
+  "why": "Advanced weapons and armor, Master-crafted weapons yielded; no house of the town makes fine arms",
+  "seed": 617
+ },
+ {
+  "rule": "6c-halfway",
+  "town": "r2r-town-49",
+  "tab": "Systems/Resources",
+  "line": "Work on the animal hides here stops half-way: no leatherworkers' guild finishes it.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Leatherworking & Cordwaining · Manufacturing & crafts · Vulnerable · Outputs Boots and shoes · Saddles and harness · Leather armour"
+  },
+  "why": "the page says the animal hides is never finished here; it exports or yields the finished good",
+  "seed": 617
+ },
+ {
+  "rule": "6c-halfway",
+  "town": "r2r-metropolis-38",
+  "tab": "Systems/Resources",
+  "line": "Work on the timber here stops half-way: no charcoal burner finishes it.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Exports: Charcoal"
+  },
+  "why": "the page says the timber is never finished here; it exports or yields the finished good",
+  "seed": 617
+ },
+ {
+  "rule": "6c-halfway",
+  "town": "r2s-recently_betrayed-city-3",
+  "tab": "Systems/Resources",
+  "line": "Work on the animal hides here stops half-way: no leatherworkers' guild finishes it.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Leatherworking & Cordwaining · Manufacturing & crafts · Vulnerable · Outputs Boots and shoes · Saddles and harness · Leather armour"
+  },
+  "why": "the page says the animal hides is never finished here; it exports or yields the finished good",
+  "seed": 617
+ },
+ {
+  "rule": "6c-halfway",
+  "town": "r2s-mass_migration-town-0",
+  "tab": "Systems/Resources",
+  "line": "Work on the animal hides here stops half-way: no leatherworkers' guild finishes it.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Leatherworking & Cordwaining · Manufacturing & crafts · Vulnerable · Outputs Boots and shoes · Saddles and harness · Leather armour"
+  },
+  "why": "the page says the animal hides is never finished here; it exports or yields the finished good",
+  "seed": 617
+ },
+ {
+  "rule": "6c-halfway",
+  "town": "r2s-occupied-city-0",
+  "tab": "Systems/Resources",
+  "line": "Work on the animal hides here stops half-way: no leatherworkers' guild finishes it.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Leatherworking & Cordwaining · Manufacturing & crafts · Vulnerable · Outputs Boots and shoes · Saddles and harness · Leather armour"
+  },
+  "why": "the page says the animal hides is never finished here; it exports or yields the finished good",
+  "seed": 617
+ },
+ {
+  "rule": "6c-halfway",
+  "town": "r2r-village-8",
+  "tab": "Systems/Resources",
+  "line": "Work on the timber here stops half-way: no sawmill finishes it.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Timber & Lumber · Raw materials & fuel✓ Running · Outputs Barrels and containers · Milled lumber"
+  },
+  "why": "the page says the timber is never finished here; it exports or yields the finished good",
+  "seed": 617
+ },
+ {
+  "rule": "6c-rec",
+  "town": "r2s-religious_conversion-hamlet-0",
+  "tab": "record",
+  "line": "economicState.primaryExports: Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "institutions: Resident smith (part-time)"
+  },
+  "why": "hamlet of 80 exports fine arms; no full smith",
+  "seed": 617
+ },
+ {
+  "rule": "6c-rec",
+  "town": "r2r-hamlet-5",
+  "tab": "record",
+  "line": "economicState.primaryExports: Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "institutions: Resident smith (part-time)"
+  },
+  "why": "hamlet of 97 exports fine arms; no full smith",
+  "seed": 617
+ },
+ {
+  "rule": "6c-rec",
+  "town": "r2r-hamlet-2",
+  "tab": "record",
+  "line": "economicState.primaryExports: Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "institutions: Resident smith (part-time)"
+  },
+  "why": "hamlet of 76 exports fine arms; no full smith",
+  "seed": 617
+ },
+ {
+  "rule": "6c-rec",
+  "town": "r2s-recently_betrayed-hamlet-1",
+  "tab": "record",
+  "line": "economicState.primaryExports: Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "institutions: Resident smith (part-time)"
+  },
+  "why": "hamlet of 44 exports fine arms; no full smith",
+  "seed": 617
+ },
+ {
+  "rule": "6c-rec",
+  "town": "r2r-hamlet-53",
+  "tab": "record",
+  "line": "economicState.primaryExports: Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "institutions: Resident smith (part-time)"
+  },
+  "why": "hamlet of 95 exports fine arms; no full smith",
+  "seed": 617
+ },
+ {
+  "rule": "6c-rec",
+  "town": "r2s-monster_pressure-hamlet-1",
+  "tab": "record",
+  "line": "economicState.primaryExports: Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "institutions: Resident smith (part-time)"
+  },
+  "why": "hamlet of 64 exports fine arms; no full smith",
+  "seed": 617
+ },
+ {
+  "rule": "6c-rec",
+  "town": "r2r-hamlet-36",
+  "tab": "record",
+  "line": "economicState.primaryExports: Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "institutions: Resident smith (part-time)"
+  },
+  "why": "hamlet of 74 exports fine arms; no full smith",
+  "seed": 617
+ },
+ {
+  "rule": "6c-rec",
+  "town": "r2r-hamlet-38",
+  "tab": "record",
+  "line": "economicState.primaryExports: Advanced weapons and armor",
+  "against": {
+   "tab": "record",
+   "line": "institutions: Resident smith (part-time)"
+  },
+  "why": "hamlet of 47 exports fine arms; no full smith",
+  "seed": 617
+ },
+ {
+  "rule": "6c-unworked",
+  "town": "r2r-city-14",
+  "tab": "Systems/Resources",
+  "line": "No one here works the stone near Serrasinum.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Stone & Construction · Raw materials & fuel✓ Running · Outputs Quarried stone · Building materials"
+  },
+  "why": "the page says no one works the stone; a chain over it prints Running and yields its goods",
+  "seed": 617
+ },
+ {
+  "rule": "6c-unworked",
+  "town": "r2r-town-16",
+  "tab": "Systems/Resources",
+  "line": "No one here works the stone near Birkhel.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Stone & Construction · Raw materials & fuel✓ Running · Outputs Quarried stone · Building materials"
+  },
+  "why": "the page says no one works the stone; a chain over it prints Running and yields its goods",
+  "seed": 617
+ },
+ {
+  "rule": "6c-unworked",
+  "town": "r2r-metropolis-11",
+  "tab": "Systems/Resources",
+  "line": "No one here works the stone near Tighfell.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Stone & Construction · Raw materials & fuel✓ Running · Outputs Quarried stone · Building materials"
+  },
+  "why": "the page says no one works the stone; a chain over it prints Running and yields its goods",
+  "seed": 617
+ },
+ {
+  "rule": "6c-unworked",
+  "town": "r2s-insurgency-city-2",
+  "tab": "Systems/Resources",
+  "line": "No one here works the stone near Jalalkul.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Stone & Construction · Raw materials & fuel✓ Running · Outputs Quarried stone · Building materials"
+  },
+  "why": "the page says no one works the stone; a chain over it prints Running and yields its goods",
+  "seed": 617
+ },
+ {
+  "rule": "6c-unworked",
+  "town": "r2r-town-54",
+  "tab": "Systems/Resources",
+  "line": "No one here works the stone near Erdenbuurt.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Stone & Construction · Raw materials & fuel✓ Running · Outputs Quarried stone · Building materials"
+  },
+  "why": "the page says no one works the stone; a chain over it prints Running and yields its goods",
+  "seed": 617
+ },
+ {
+  "rule": "6c-unworked",
+  "town": "r2s-plague_onset-city-1",
+  "tab": "Systems/Resources",
+  "line": "No one here works the stone near Sundbø.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Stone & Construction · Raw materials & fuel✓ Running · Outputs Quarried stone · Building materials"
+  },
+  "why": "the page says no one works the stone; a chain over it prints Running and yields its goods",
+  "seed": 617
+ },
+ {
+  "rule": "6c-unworked",
+  "town": "r2s-mass_migration-city-0",
+  "tab": "Systems/Resources",
+  "line": "No one here works the stone near Fjordhammer.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Stone & Construction · Raw materials & fuel✓ Running · Outputs Quarried stone · Building materials"
+  },
+  "why": "the page says no one works the stone; a chain over it prints Running and yields its goods",
+  "seed": 617
+ },
+ {
+  "rule": "6c-unworked",
+  "town": "r2s-mass_migration-village-2",
+  "tab": "Systems/Resources",
+  "line": "No one here works the stone near Hisnistan.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Stone & Construction · Raw materials & fuel✓ Running · Outputs Quarried stone · Building materials"
+  },
+  "why": "the page says no one works the stone; a chain over it prints Running and yields its goods",
+  "seed": 617
+ },
+ {
+  "rule": "6c-unworked",
+  "town": "r2s-plague_onset-city-0",
+  "tab": "Systems/Resources",
+  "line": "No one here works the stone near Novono.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Stone & Construction · Raw materials & fuel✓ Running · Outputs Quarried stone · Building materials"
+  },
+  "why": "the page says no one works the stone; a chain over it prints Running and yields its goods",
+  "seed": 617
+ },
+ {
+  "rule": "6c-unworked",
+  "town": "r2r-city-29",
+  "tab": "Systems/Resources",
+  "line": "No one here works the stone near Kamalapalli.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Stone & Construction · Raw materials & fuel✓ Running · Outputs Quarried stone · Building materials"
+  },
+  "why": "the page says no one works the stone; a chain over it prints Running and yields its goods",
+  "seed": 617
+ },
+ {
+  "rule": "6c-unworked",
+  "town": "r2r-city-54",
+  "tab": "Systems/Resources",
+  "line": "No one here works the stone near Terralitus.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Stone & Construction · Raw materials & fuel✓ Running · Outputs Quarried stone · Building materials"
+  },
+  "why": "the page says no one works the stone; a chain over it prints Running and yields its goods",
+  "seed": 617
+ },
+ {
+  "rule": "6d-blurb",
+  "town": "r2r-metropolis-53",
+  "tab": "Systems/Power",
+  "line": "A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.",
+  "against": {
+   "tab": "record",
+   "line": "metropolis · population 42436"
+  },
+  "why": "a village-sized description in a metropolis of 42436",
+  "seed": 617
+ },
+ {
+  "rule": "6d-blurb",
+  "town": "r2r-metropolis-3",
+  "tab": "Systems/Power",
+  "line": "A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.",
+  "against": {
+   "tab": "record",
+   "line": "metropolis · population 26807"
+  },
+  "why": "a village-sized description in a metropolis of 26807",
+  "seed": 617
+ },
+ {
+  "rule": "6d-court",
+  "town": "r2s-under_siege-town-2",
+  "tab": "Summary/Overview",
+  "line": "The town is visibly governed: a hall of justice, a gaol.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Legal Infrastructure · Prison only"
+  },
+  "why": "\"hall of justice\"; the town keeps no court",
+  "seed": 617
+ },
+ {
+  "rule": "6d-court",
+  "town": "r2s-mass_migration-town-2",
+  "tab": "Summary/Overview",
+  "line": "The town is visibly governed: a hall of justice, a gaol.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Legal Infrastructure · Prison only"
+  },
+  "why": "\"hall of justice\"; the town keeps no court",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2r-city-20",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: wool · livestock · dairy · animal hides · timber · Defence services · Weapons training · Preserved foods · Leather goods · Processed textiles · Guild-manufactured goods · Barrels and containers · Fine wool cloth · Luxury manufactured goods · Fine metalwork and jewelry · Precious metals · Fuel wood"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2s-occupied-city-3",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: wool · livestock · dairy · animal hides · peat · honey · medicinal herbs · Defence services · Weapons training · Preserved foods · Leather goods · Processed textiles · Guild-manufactured goods · Fine wool cloth · Reeds and thatch"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2r-city-16",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: timber · fish · Books and manuscripts · Higher education · Information brokerage · Barrels and containers · Financial services · International banking services · Salted fish · Smoked seafood · Ship construction · Ocean-going vessels · River barges"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2r-city-21",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: peat · honey · medicinal herbs · iron · metalwork · game meat · Furs and pelts · Leather goods · Religious services · Education (basic) · Guild-manufactured goods · Quality tools and weapons · Advanced weapons and armor · Refined iron ingots · Pig iron · Reeds and thatch"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2s-politically_fractured-metropolis-0",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: Financial services · International banking services"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2r-metropolis-6",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: medicinal herbs · honey · Candles and wax · Religious services · Education (basic)"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2s-succession_void-metropolis-0",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: fish · Medical care (basic) · Spellcasting (minor) · Religious services · Hospitality for travellers · Salted fish · Smoked seafood"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2r-city-37",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: medicinal herbs · salt · Potions and elixirs · Alchemical reagents · Information brokerage · Ship construction · Financial services · International banking services · Spellcasting (minor) · Magical identification · Magical item market · Weapon enchantment · Preserved foods"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2s-occupied-city-2",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: peat · honey · medicinal herbs · iron · metalwork · Medical care (basic) · Spellcasting (minor) · Religious services · Hospitality for travellers · Honey and beeswax · Foraged goods · Herbal remedies · Potions and elixirs · Quality tools and weapons · Advanced weapons and armor · Wild honey · Candles and wax · Refined iron ingots · Pig iron · Reeds and thatch"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2r-city-38",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: salt · fish · River craft · Cargo barges · Salted fish · Smoked seafood · Ship construction · Ocean-going vessels · River barges"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2r-city-58",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: fish · salt · Spellcasting (minor) · Magical identification · Books and manuscripts · Higher education · Information brokerage · Ship construction · Financial services · International banking services · Preserved foods · Salted fish · Smoked seafood"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2s-slave_revolt-metropolis-1",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: peat · honey · medicinal herbs · game meat · animal hides · Furs and pelts · Honey and beeswax · Foraged goods · Leather goods · Candles and wax · Religious services · Education (basic) · Guild-manufactured goods · Reeds and thatch"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2s-succession_void-town-1",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: medicinal herbs · honey · Honey and beeswax · Foraged goods · Religious services · Education (basic)"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2r-city-33",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: timber · Leather goods · Guild-manufactured goods · Barrels and containers · Religious services · Education (basic)"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2r-city-34",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: salt · Spellcasting (minor) · Magical identification · Books and manuscripts · Higher education · Information brokerage · Barrels and containers · Financial services · International banking services · Preserved foods · Ship construction · Ocean-going vessels · River barges"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2r-town-36",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: Religious services · Education (basic)"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2s-infiltrated-metropolis-2",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: timber · peat · honey · medicinal herbs · Medical care (basic) · Spellcasting (minor) · Bows and crossbows · Arrows (sheaf) · Barrels and containers · Reeds and thatch · River craft · Cargo barges · Religious services · Hospitality for travellers"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2r-metropolis-54",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: iron · metalwork · Medical care (basic) · Spellcasting (minor) · Religious services · Hospitality for travellers · Quality tools and weapons · Advanced weapons and armor · Refined iron ingots · Pig iron"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2s-insurgency-metropolis-1",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: wool · livestock · dairy · animal hides · coal · Preserved foods · Leather goods · Cavalry mounts · Draft horses · Medical treatment · Surgery · Processed textiles · Guild-manufactured goods · Fine wool cloth · Defence services · Weapons training · Luxury manufactured goods · Fine metalwork and jewelry · Precious metals · Overland cargo transport · Escorted caravan"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-fields",
+  "town": "r2r-town-41",
+  "tab": "Systems/Economics",
+  "line": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+  "against": {
+   "tab": "record",
+   "line": "no farm house; Produced locally: game meat · animal hides · Furs and pelts · Leather goods · Religious services · Education (basic)"
+  },
+  "why": "\"Intensive plots\" credited with feeding a town that farms no fields",
+  "seed": 617
+ },
+ {
+  "rule": "6d-force",
+  "town": "r2r-village-18",
+  "tab": "Systems/Power",
+  "line": "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
+  "against": {
+   "tab": "record",
+   "line": "defence roster: no garrison, militia, watch or mercenaries"
+  },
+  "why": "\"Armed patrol of able-bodied residents\"; the town keeps no standing force",
+  "seed": 618
+ },
+ {
+  "rule": "6d-force",
+  "town": "r2r-village-54",
+  "tab": "Systems/Power",
+  "line": "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
+  "against": {
+   "tab": "record",
+   "line": "defence roster: no garrison, militia, watch or mercenaries"
+  },
+  "why": "\"Armed patrol of able-bodied residents\"; the town keeps no standing force",
+  "seed": 618
+ },
+ {
+  "rule": "6d-force",
+  "town": "r2r-village-47",
+  "tab": "Systems/Power",
+  "line": "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
+  "against": {
+   "tab": "record",
+   "line": "defence roster: no garrison, militia, watch or mercenaries"
+  },
+  "why": "\"Armed patrol of able-bodied residents\"; the town keeps no standing force",
+  "seed": 618
+ },
+ {
+  "rule": "6d-force",
+  "town": "r2r-village-20",
+  "tab": "Systems/Power",
+  "line": "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
+  "against": {
+   "tab": "record",
+   "line": "defence roster: no garrison, militia, watch or mercenaries"
+  },
+  "why": "\"Armed patrol of able-bodied residents\"; the town keeps no standing force",
+  "seed": 618
+ },
+ {
+  "rule": "6d-force",
+  "town": "r2s-recently_betrayed-hamlet-0",
+  "tab": "Systems/Power",
+  "line": "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
+  "against": {
+   "tab": "record",
+   "line": "defence roster: no garrison, militia, watch or mercenaries"
+  },
+  "why": "\"Armed patrol of able-bodied residents\"; the town keeps no standing force",
+  "seed": 618
+ },
+ {
+  "rule": "6d-force",
+  "town": "r2r-village-28",
+  "tab": "Systems/Power",
+  "line": "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
+  "against": {
+   "tab": "record",
+   "line": "defence roster: no garrison, militia, watch or mercenaries"
+  },
+  "why": "\"Armed patrol of able-bodied residents\"; the town keeps no standing force",
+  "seed": 618
+ },
+ {
+  "rule": "6d-force",
+  "town": "r2r-village-13",
+  "tab": "Systems/Power",
+  "line": "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
+  "against": {
+   "tab": "record",
+   "line": "defence roster: no garrison, militia, watch or mercenaries"
+  },
+  "why": "\"Armed patrol of able-bodied residents\"; the town keeps no standing force",
+  "seed": 618
+ },
+ {
+  "rule": "6d-force",
+  "town": "r2r-hamlet-52",
+  "tab": "Systems/Power",
+  "line": "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
+  "against": {
+   "tab": "record",
+   "line": "defence roster: no garrison, militia, watch or mercenaries"
+  },
+  "why": "\"Armed patrol of able-bodied residents\"; the town keeps no standing force",
+  "seed": 618
+ },
+ {
+  "rule": "6d-force",
+  "town": "r2r-hamlet-23",
+  "tab": "Systems/Power",
+  "line": "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.",
+  "against": {
+   "tab": "record",
+   "line": "defence roster: no garrison, militia, watch or mercenaries"
+  },
+  "why": "\"Armed patrol of able-bodied residents\"; the town keeps no standing force",
+  "seed": 618
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2r-thorp-27",
+  "tab": "Systems/Power",
+  "line": "The Household Council at Olympnea has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Household Council · 1 member"
+  },
+  "why": "Household Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2s-politically_fractured-village-3",
+  "tab": "Systems/Power",
+  "line": "The Elder Council at Medinashahr has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Elder Council · 1 member"
+  },
+  "why": "Elder Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2s-wartime-thorp-0",
+  "tab": "Systems/Power",
+  "line": "The Household Council at Amarghat has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Household Council · 1 member"
+  },
+  "why": "Household Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2r-thorp-7",
+  "tab": "Systems/Power",
+  "line": "The Elder Council at Breitdorf has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Elder Council · 1 member"
+  },
+  "why": "Elder Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2s-plague_onset-thorp-1",
+  "tab": "Systems/Power",
+  "line": "The Household Council at Somathal has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Household Council · 1 member"
+  },
+  "why": "Household Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2s-recently_betrayed-thorp-3",
+  "tab": "Systems/Power",
+  "line": "The Household Council at Castelstagnum has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Household Council · 1 member"
+  },
+  "why": "Household Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2s-monster_pressure-thorp-1",
+  "tab": "Systems/Power",
+  "line": "The Household Council at Llanbeck has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Household Council · 1 member"
+  },
+  "why": "Household Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2r-thorp-12",
+  "tab": "Systems/Power",
+  "line": "The Elder Council at Nahrhaven has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Elder Council · 1 member"
+  },
+  "why": "Elder Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2r-thorp-23",
+  "tab": "Systems/Power",
+  "line": "The Household Council at Zelenosk has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Household Council · 1 member"
+  },
+  "why": "Household Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2s-religious_conversion-hamlet-1",
+  "tab": "Systems/Power",
+  "line": "The Free Elder Council at Hagiolathra has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Free Elder Council · 1 member"
+  },
+  "why": "Free Elder Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2r-hamlet-35",
+  "tab": "Systems/Power",
+  "line": "The Elder Council at Sundoy has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Elder Council · 1 member"
+  },
+  "why": "Elder Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2s-mass_migration-thorp-2",
+  "tab": "Systems/Power",
+  "line": "The Elder Council at Malopol has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Elder Council · 1 member"
+  },
+  "why": "Elder Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2r-thorp-15",
+  "tab": "Systems/Power",
+  "line": "The Elder Council at Buyanshari has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Elder Council · 1 member"
+  },
+  "why": "Elder Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2s-infiltrated-thorp-0",
+  "tab": "Systems/Power",
+  "line": "The Elder Council at Pratolitus has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Elder Council · 1 member"
+  },
+  "why": "Elder Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2s-politically_fractured-hamlet-3",
+  "tab": "Systems/Power",
+  "line": "The Headman's Authority at Achillathra has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Headman's Authority · 1 member"
+  },
+  "why": "Headman's Authority has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2s-succession_void-thorp-1",
+  "tab": "Systems/Power",
+  "line": "The Elder Council at Schwarzdorf has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Elder Council · 1 member"
+  },
+  "why": "Elder Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2s-occupied-hamlet-0",
+  "tab": "Systems/Power",
+  "line": "The Elder Council at Qarahiid has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Elder Council · 1 member"
+  },
+  "why": "Elder Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2r-hamlet-39",
+  "tab": "Systems/Power",
+  "line": "The Free Elder Council at Fortecastra has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Free Elder Council · 1 member"
+  },
+  "why": "Free Elder Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2r-thorp-59",
+  "tab": "Systems/Power",
+  "line": "The Elder Council at Prabhapura has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Elder Council · 1 member"
+  },
+  "why": "Elder Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-members",
+  "town": "r2s-under_siege-thorp-0",
+  "tab": "Systems/Power",
+  "line": "The Elder Council at Qaradavan has left obvious decisions untaken because its members cannot agree on them.",
+  "against": {
+   "tab": "Systems/Power",
+   "line": "Elder Council · 1 member"
+  },
+  "why": "Elder Council has one member; the line speaks of its members",
+  "seed": 617
+ },
+ {
+  "rule": "6d-paid",
+  "town": "r2s-indebted-village-0",
+  "tab": "Systems/Defense",
+  "line": "Fortification and forces are present and paid, but the pressure on them never lets up.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "The citizen militia musters when needed but cannot maintain consistent patrol. Volunteers with other work to do; reliable in a crisis, absent during routine crime. Without courts or prison, enforcement relies entirely on fines, exile, or summary violence."
+  },
+  "why": "\"forces are present and paid\"; the town keeps no paid force",
+  "seed": 617
+ },
+ {
+  "rule": "6d-paid",
+  "town": "r2s-politically_fractured-thorp-2",
+  "tab": "Systems/Defense",
+  "line": "Fortification and forces are present and paid, but the pressure on them never lets up.",
+  "against": {
+   "tab": "record",
+   "line": "defence roster: no garrison, watch or mercenaries; militia only"
+  },
+  "why": "\"forces are present and paid\"; the town keeps no paid force",
+  "seed": 617
+ },
+ {
+  "rule": "6d-paid",
+  "town": "r2s-indebted-village-2",
+  "tab": "Systems/Defense",
+  "line": "Fortification and forces are present and paid, but the pressure on them never lets up.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "The citizen militia musters when needed but cannot maintain consistent patrol. Volunteers with other work to do; reliable in a crisis, absent during routine crime. Without courts or prison, enforcement relies entirely on fines, exile, or summary violence."
+  },
+  "why": "\"forces are present and paid\"; the town keeps no paid force",
+  "seed": 617
+ },
+ {
+  "rule": "6d-paid",
+  "town": "r2r-thorp-45",
+  "tab": "Systems/Defense",
+  "line": "Fortification and forces are present and paid, but the pressure on them never lets up.",
+  "against": {
+   "tab": "record",
+   "line": "defence roster: no garrison, watch or mercenaries; militia only"
+  },
+  "why": "\"forces are present and paid\"; the town keeps no paid force",
+  "seed": 617
+ },
+ {
+  "rule": "6e-sovereign",
+  "town": "r2r-hamlet-29",
+  "tab": "Systems/Services",
+  "line": "Collects the lord's dues and the tithe",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people, neighbour and founding name no lord, crown or noble"
+  },
+  "why": "\"the lord's\"; the town has no such sovereign and no crisis supplies one",
+  "seed": 618
+ },
+ {
+  "rule": "6e-sovereign",
+  "town": "r2s-indebted-village-0",
+  "tab": "Systems/Services",
+  "line": "Collects the lord's dues and the tithe",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people, neighbour and founding name no lord, crown or noble"
+  },
+  "why": "\"the lord's\"; the town has no such sovereign and no crisis supplies one",
+  "seed": 618
+ },
+ {
+  "rule": "6e-sovereign",
+  "town": "r2r-village-21",
+  "tab": "Systems/Services",
+  "line": "Collects the lord's dues and the tithe",
+  "against": {
+   "tab": "record",
+   "line": "government, powers, houses, people, neighbour and founding name no lord, crown or noble"
+  },
+  "why": "\"the lord's\"; the town has no such sovereign and no crisis supplies one",
+  "seed": 618
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2s-mass_migration-village-1",
+  "tab": "Systems/Defense",
+  "line": "Shangtian has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Weak▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2r-village-9",
+  "tab": "Systems/Defense",
+  "line": "Megalburg has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2s-indebted-village-3",
+  "tab": "Systems/Defense",
+  "line": "Chrissonea has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2s-famine-hamlet-0",
+  "tab": "Systems/Defense",
+  "line": "Montemare has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2s-mass_migration-hamlet-2",
+  "tab": "Systems/Defense",
+  "line": "Skaldby has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2s-religious_conversion-thorp-0",
+  "tab": "Systems/Defense",
+  "line": "Palenqcalco has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2r-hamlet-44",
+  "tab": "Systems/Defense",
+  "line": "Longzhou has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2r-hamlet-23",
+  "tab": "Systems/Defense",
+  "line": "Castelsaltus has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2r-city-0",
+  "tab": "Systems/Defense",
+  "line": "Nothing presses Goraka at present: its defences would make any attack costly, so raiders and rivals look elsewhere.",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Slavic-inspired, and it shows: built in timber compounds on land held in common, kin by kin. Governed by Merchant City Council · Tense — regional monster threat (config.monsterThreat = plagued)"
+  },
+  "why": "\"Nothing presses Goraka at present\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2r-hamlet-29",
+  "tab": "Systems/Defense",
+  "line": "Tighness has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2r-hamlet-42",
+  "tab": "Systems/Defense",
+  "line": "Zhongzhen has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2r-village-57",
+  "tab": "Systems/Defense",
+  "line": "Tlalche has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2s-mass_migration-thorp-0",
+  "tab": "Systems/Defense",
+  "line": "Erdenkotan has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2r-village-24",
+  "tab": "Systems/Defense",
+  "line": "Shandao has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2r-hamlet-2",
+  "tab": "Systems/Defense",
+  "line": "Tulumac has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2s-insurgency-hamlet-1",
+  "tab": "Systems/Defense",
+  "line": "Neuhof has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2s-religious_conversion-village-1",
+  "tab": "Systems/Defense",
+  "line": "Anwan has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2r-thorp-42",
+  "tab": "Systems/Defense",
+  "line": "Qaratala has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2s-indebted-hamlet-2",
+  "tab": "Systems/Defense",
+  "line": "Goldhausen has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7a-nothreat",
+  "town": "r2r-hamlet-25",
+  "tab": "Systems/Defense",
+  "line": "Rotbrücke has no wall, and nothing threatens it now that a wall would keep out.",
+  "against": {
+   "tab": "Systems/Defense",
+   "line": "Beasts & Monsters · Critical▼ (config.monsterThreat = frontier)"
+  },
+  "why": "\"nothing threatens it\" beside the page's own threat",
+  "seed": 617
+ },
+ {
+  "rule": "7b-defence",
+  "town": "r2s-under_siege-city-1",
+  "tab": "Systems/Defense",
+  "line": "Fresh repairs show on Torrivilla's city walls and gates; the city keeps its defences in working order against a real threat.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "City walls and gates · Defense · Impaired"
+  },
+  "why": "fresh repairs and defences in working order; the page calls the walls impaired",
+  "seed": 617
+ },
+ {
+  "rule": "7c-plenty",
+  "town": "r2s-plague_onset-town-0",
+  "tab": "Systems/Economics",
+  "line": "Ainkarez's food comes from more than one source, the herds most of all, so a poor year in one does not empty the town's tables.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Ainkarez grows about two parts in three of what it needs, and boats bring in about three parts in four of the rest. Some households still go short, and a bad season would leave more of them hungry."
+  },
+  "why": "\"does not empty the town's tables\": plenty or ease, unmarked, where the page says there is want",
+  "seed": 618
+ },
+ {
+  "rule": "7c-plenty",
+  "town": "r2s-plague_onset-town-3",
+  "tab": "Systems/Economics",
+  "line": "Ringford's food comes from more than one source, the grain harvest most of all, so a poor year in one does not empty the town's tables.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Ringford grows about three parts in four of what it needs, and carts bring in about three parts in four of the rest. Some households still go short, and a bad season would leave more of them hungry."
+  },
+  "why": "\"does not empty the town's tables\": plenty or ease, unmarked, where the page says there is want",
+  "seed": 618
+ },
+ {
+  "rule": "7c-plenty",
+  "town": "r2s-plague_onset-city-0",
+  "tab": "Systems/Economics",
+  "line": "With more than its grain harvest to rely on, Novono can take a bad season in one source without going hungry.",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Food Security · Pressured"
+  },
+  "why": "\"without going hungry\": plenty or ease, unmarked, where the page says there is want",
+  "seed": 618
+ },
+ {
+  "rule": "7c-plenty",
+  "town": "r2s-mass_migration-metropolis-2",
+  "tab": "Systems/Economics",
+  "line": "Its food comes from more than one source, the grain harvest most of all, so a poor year in one does not empty the metropolis's tables.",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Food Security · Pressured"
+  },
+  "why": "\"does not empty the metropolis's tables\": plenty or ease, unmarked, where the page says there is want",
+  "seed": 618
+ },
+ {
+  "rule": "7c-plenty",
+  "town": "r2s-famine-town-1",
+  "tab": "Summary/Overview",
+  "line": "Hongcheng's market handles more than the town could ever use.",
+  "against": {
+   "tab": "record",
+   "line": "stress.type = famine"
+  },
+  "why": "\"handles more than the town could ever use\": plenty or ease, unmarked, where the page says there is want",
+  "seed": 618
+ },
+ {
+  "rule": "7c-plenty",
+  "town": "r2s-slave_revolt-metropolis-2",
+  "tab": "Systems/Economics",
+  "line": "With more than its fishing to rely on, Weichfeld can take a bad season in one source without going hungry.",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Food Security · Pressured"
+  },
+  "why": "\"without going hungry\": plenty or ease, unmarked, where the page says there is want",
+  "seed": 618
+ },
+ {
+  "rule": "7c-plenty",
+  "town": "r2s-famine-city-3",
+  "tab": "Summary/Overview",
+  "line": "Vatanabad's market handles more than the city could ever use.",
+  "against": {
+   "tab": "record",
+   "line": "stress.type = famine"
+  },
+  "why": "\"handles more than the city could ever use\": plenty or ease, unmarked, where the page says there is want",
+  "seed": 618
+ },
+ {
+  "rule": "7c-plenty",
+  "town": "r2r-thorp-41",
+  "tab": "Systems/Economics",
+  "line": "Its food comes from more than one source, the fishing most of all, so a poor year in one does not empty the thorp's tables.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Xinyuan grows about three parts in four of what it needs, and trade brings in about half the rest. Magical provision makes up less than a fifth of what it needs. Some households still go short, and a bad season would leave more of them hungry."
+  },
+  "why": "\"does not empty the thorp's tables\": plenty or ease, unmarked, where the page says there is want",
+  "seed": 618
+ },
+ {
+  "rule": "7c-plenty",
+  "town": "r2s-plague_onset-metropolis-3",
+  "tab": "Systems/Economics",
+  "line": "Its food comes from more than one source, the herds most of all, so a poor year in one does not empty the metropolis's tables.",
+  "against": {
+   "tab": "Systems/Economics",
+   "line": "Umagrad grows about two parts in five of what it needs, and boats bring in about four parts in five of the rest. Divine provision makes up less than a fifth of what it needs. Some households still go short, and a bad season would leave more of them hungry."
+  },
+  "why": "\"does not empty the metropolis's tables\": plenty or ease, unmarked, where the page says there is want",
+  "seed": 618
+ },
+ {
+  "rule": "7c-plenty",
+  "town": "r2s-famine-town-0",
+  "tab": "Summary/Overview",
+  "line": "Gründorf's market handles more than the town could ever use.",
+  "against": {
+   "tab": "record",
+   "line": "stress.type = famine"
+  },
+  "why": "\"handles more than the town could ever use\": plenty or ease, unmarked, where the page says there is want",
+  "seed": 618
+ },
+ {
+  "rule": "7c-plenty",
+  "town": "r2s-slave_revolt-town-0",
+  "tab": "Systems/Economics",
+  "line": "With more than its herds to rely on, Novafossae can take a bad season in one source without going hungry.",
+  "against": {
+   "tab": "Summary/Overview",
+   "line": "Food Security · Pressured"
+  },
+  "why": "\"without going hungry\": plenty or ease, unmarked, where the page says there is want",
+  "seed": 618
+ },
+ {
+  "rule": "7c-plenty",
+  "town": "r2r-town-49",
+  "tab": "Systems/Economics",
+  "line": "Nobody here talks about the price of bread.",
+  "against": {
+   "tab": "Systems/Institutions",
+   "line": "Short of grain. Bread production. Guild-regulated prices."
+  },
+  "why": "\"Nobody here talks about the price of bread\": plenty or ease, unmarked, where the page says there is want",
+  "seed": 618
+ },
+ {
+  "rule": "7c-plenty",
+  "town": "r2s-famine-town-0",
+  "tab": "Summary/Overview",
+  "line": "Spice and drying herbs scent every lane, and the stalls are piled with them.",
+  "against": {
+   "tab": "record",
+   "line": "stress.type = famine"
+  },
+  "why": "\"stalls are piled with\": plenty or ease, unmarked, where the page says there is want",
+  "seed": 618
+ },
+ {
+  "rule": "7d-traffic",
+  "town": "r2s-succession_void-thorp-2",
+  "tab": "Summary/Overview",
+  "line": "Porters bent under loaded frames file past, and someone counts them in.",
+  "against": {
+   "tab": "record",
+   "line": "trade access isolated; imports none"
+  },
+  "why": "\"Porters\": laden arrivals at an isolated place that brings nothing in",
+  "seed": 617
+ },
+ {
+  "rule": "7w-tone",
+  "town": "r2s-famine-city-3",
+  "tab": "Summary/Overview",
+  "line": "Vatanabad looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce.",
+  "against": {
+   "tab": "record",
+   "line": "stress.type = famine"
+  },
+  "why": "\"loaded carts\": ordinary traffic under famine (WEAK by the second check: the work goes on, the tone is off)",
+  "seed": 617
+ },
+ {
+  "rule": "7w-tone",
+  "town": "r2s-occupied-village-3",
+  "tab": "Summary/Overview",
+  "line": "A work party heads out together, singing, with tools on their shoulders.",
+  "against": {
+   "tab": "record",
+   "line": "stress.type = occupied"
+  },
+  "why": "\"heads out together\": ordinary traffic under occupied (WEAK by the second check: the work goes on, the tone is off)",
+  "seed": 617
+ },
+ {
+  "rule": "7w-tone",
+  "town": "r2r-metropolis-4",
+  "tab": "Summary/Overview",
+  "line": "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's blessing.",
+  "against": {
+   "tab": "record",
+   "line": "stress.type = wartime"
+  },
+  "why": "\"crowd the road\": ordinary traffic under wartime (WEAK by the second check: the work goes on, the tone is off)",
+  "seed": 617
+ },
+ {
+  "rule": "7w-tone",
+  "town": "r2s-famine-metropolis-1",
+  "tab": "Summary/Overview",
+  "line": "Hongji looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce.",
+  "against": {
+   "tab": "record",
+   "line": "stress.type = famine"
+  },
+  "why": "\"loaded carts\": ordinary traffic under famine (WEAK by the second check: the work goes on, the tone is off)",
+  "seed": 617
+ },
+ {
+  "rule": "7w-tone",
+  "town": "r2r-village-58",
+  "tab": "Summary/Overview",
+  "line": "The smell of fresh bread meets you on the road in.",
+  "against": {
+   "tab": "record",
+   "line": "stress.type = famine"
+  },
+  "why": "\"on the road in\": ordinary traffic under famine (WEAK by the second check: the work goes on, the tone is off)",
+  "seed": 617
+ },
+ {
+  "rule": "7w-tone",
+  "town": "r2r-thorp-40",
+  "tab": "Summary/Overview",
+  "line": "A work party heads out together, singing, with tools on their shoulders.",
+  "against": {
+   "tab": "record",
+   "line": "stress.type = occupied"
+  },
+  "why": "\"heads out together\": ordinary traffic under occupied (WEAK by the second check: the work goes on, the tone is off)",
+  "seed": 617
+ },
+ {
+  "rule": "7w-tone",
+  "town": "r2r-hamlet-16",
+  "tab": "Summary/Overview",
+  "line": "Porters bent under loaded frames file past, and someone counts them in.",
+  "against": {
+   "tab": "record",
+   "line": "stress.type = famine"
+  },
+  "why": "\"Porters\": ordinary traffic under famine (WEAK by the second check: the work goes on, the tone is off)",
+  "seed": 617
+ },
+ {
+  "rule": "7w-tone",
+  "town": "r2s-famine-metropolis-2",
+  "tab": "Summary/Overview",
+  "line": "Caththwaite looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce.",
+  "against": {
+   "tab": "record",
+   "line": "stress.type = famine"
+  },
+  "why": "\"loaded carts\": ordinary traffic under famine (WEAK by the second check: the work goes on, the tone is off)",
+  "seed": 617
+ },
+ {
+  "rule": "7w-tone",
+  "town": "r2s-occupied-city-2",
+  "tab": "Summary/Overview",
+  "line": "Porters bent under loaded frames file past, and someone counts them in.",
+  "against": {
+   "tab": "record",
+   "line": "stress.type = occupied"
+  },
+  "why": "\"Porters\": ordinary traffic under occupied (WEAK by the second check: the work goes on, the tone is off)",
+  "seed": 617
+ }
+]

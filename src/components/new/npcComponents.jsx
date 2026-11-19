@@ -17,13 +17,15 @@ import { entityAnchor, entityIdFor, normalizeNpcTraits } from '../../domain/doss
 import { useEntityFocus } from '../dossier/useEntityFocus.js';
 import { describeCompromiseConjunction } from '../../domain/display/causeConjunctionContent.js';
 import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
+import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
 import { cardTieLines } from '../../domain/relationships/cardTies.js';
 import { cardPowerLine, cardPowerNames, cardHouseOf, governingNameOf } from '../../domain/people/cardPowers.js';
 import { cardInstitutionDoorOf } from '../../domain/people/cardDoor.js';
-import { seatKeeperOf } from '../../domain/people/seatKeeper.js';
+import { keeperFormOf, seatKeeperOf } from '../../domain/people/seatKeeper.js';
 import { shownHonorificOf } from '../../domain/people/seatKeeperDisplay.js';
 import { allegianceOf } from '../../domain/people/allegiance.js';
+import { rowMarkText } from '../../domain/display/crisisStoppedRow.js';
 import {
   NPC_GOALS, NPC_ROLE_ARCHETYPES, npcFacetOf,
 } from '../../domain/npc/npcBank.js';
@@ -127,6 +129,13 @@ export function NPCCategoryGroup({
 
 
 export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'}}) {
+  // R2-CODE-B round 3 (the increment's #pf-717 #pf-718, the chair's ruling): the keeper of an EMPTY seat is styled as the
+  // Power tab styles it ("Acting First Magnate"), from the powers lane's one home (people/seatKeeper.js), never by the
+  // bare title of the office no one holds. The stored role is read unchanged for everyone else.
+  const keeperSettlement = useStore(s => s.settlement);
+  const seatKeeper = seatKeeperOf(keeperSettlement);
+  const seatKeeperForm = seatKeeper ? keeperFormOf(keeperSettlement) : '';
+  const roleShown = (/** @type {unknown} */ id, /** @type {unknown} */ stored) => (seatKeeper && seatKeeperForm && seatKeeper.id && seatKeeper.id === id ? seatKeeperForm : stored);
   const [open,setOpen]=useState(false);
   // THE TWO PHONE FLOORS — the card's two paragraphs take the PROSE floor; the
   // role line beneath the names takes the CHROME floor.
@@ -154,7 +163,7 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
           {rel.flagDriven&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px',textTransform:'uppercase'}}>◆ Emergent</span>}
         </div>
         <button type="button" aria-expanded={open} aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'flex-start',gap:8,background:'none',border:'none',cursor:'pointer',padding:'0 14px 10px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
-          <div data-sf-chrome="" style={{flex:1,fontSize:chromeFontSize(FS.xs,mobile),color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
+          <div data-sf-chrome="" style={{flex:1,fontSize:chromeFontSize(FS.xs,mobile),color:MUTED}}>{roleShown(rel.from, rel.npc1Role)} · {rel.strength} · {roleShown(rel.to, rel.npc2Role)}</div>
           <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,flexShrink:0,paddingTop:2}}>{open?'▲':'▼'}</span>
         </button>
       </div>
@@ -180,6 +189,9 @@ export function ConflictCard({conflict:c}) {
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'12px 14px',marginBottom:10}}>
       <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:6}}>
         <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:d.color,background:`${d.color}18`,padding:'1px 6px',letterSpacing:'0.05em'}}>{d.label}</span>
+        {/* ROUND THREE (the cut's #389 "Moderate tensionMilitary Council vs …"): a space the copied text keeps between the
+            pill and the parties; a whitespace text node between flex items does not move the layout. */}
+        {' '}
         <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}><MentionText text={c.parties?.[0]} structural/> vs <MentionText text={c.parties?.[1]} structural/>{c.issue?` · ${c.issue}`:''}</span>
       </div>
       {!c.issue&&(c.desc||c.description)&&<p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 6px'}}><MentionText text={c.desc||c.description}/></p>}
@@ -188,6 +200,38 @@ export function ConflictCard({conflict:c}) {
   );
 }
 
+
+/**
+ * BAR6-PEOPLE (LAW 8, 8b.person; BRIEF-BAR6 fact (a)) set the house's mark IN FRONT of "How they deal", and only where the
+ * line matched twelve trade verbs ("How they deal Short of wool. Talks about who is weaving what ..."): every reader of the
+ * sixth read read it as broken (25 LOW rows), and 1,589 lines of a marked house's keeper of the census's 720 carried none.
+ * BAR7-CARDS item 1 (the chair's ruling CM1, 2026-11-17; vetoable by the owner): THE PERSON'S SENTENCES ARE LEFT AS
+ * WRITTEN. "How they deal" prints the birth-drawn `presentation.behaviour` as drawn, nothing set in front of it; the
+ * house's mark is the card's own line (`houseMarkShown`). Display only: no draw, no stored byte.
+ * @param {Record<string, any>} npc @param {Record<string, any> | null} [_settlement] kept for the callers' form
+ * @returns {string}
+ */
+export function dealingShown(npc, _settlement) {
+  return typeof npc?.presentation?.behaviour === 'string' ? npc.presentation.behaviour.trim() : '';
+}
+
+/**
+ * BAR7-CARDS item 1 (the chair's ruling CM1, 2026-11-17; vetoable by the owner): A PERSON'S CARD SAYS ITS HOUSE'S STATE
+ * ONCE. Every person who keeps a house the one leaf marks (`crisisStoppedRow.js :: rowMarkText`, kind `house`: the mark
+ * the Institutions and Services tabs print, "Stopped by the siege.", "Short of timber.") takes that mark as ONE LINE OF ITS
+ * OWN, straight under the card's house line; by the second check's rule 1 a card's mark covers what its rows say, so
+ * the card's deal, Wants and secret lines are covered at once with no line of prose touched. Null for a house the leaf
+ * marks not, a minted face (its "house" is a power), a DM's person. The PDF's person card prints the same line
+ * (`pdf/lib/viewModel.js :: houseMark`). Display only: no draw, no stored byte.
+ * @param {Record<string, any>} npc @param {Record<string, any> | null} settlement @returns {string | null}
+ */
+export function houseMarkShown(npc, settlement) {
+  const houseName = cardHouseOf(npc);
+  if (!houseName) return null;
+  const roster = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  const house = roster.find((r) => r && r.name === houseName);
+  return house ? rowMarkText(settlement, 'house', house) : null;
+}
 
 // Inline NPC card — replaces the removed NPCCard export. Exported for the dossier search
 // (BUILD-W2-SEARCH U2), which mounts a person through this same card.
@@ -298,9 +342,13 @@ export function NPCInlineCard({
   ));
   const wants = readWants.length > 0 ? readWants : (goalText ? [goalText] : []);
   const disposition = interiority?.disposition || [];
+  // THE STANDING IS PRINTED UNDER ITS OWN LABEL (2026-11-14): "established", "marginal" and "commanding" measure how much the person
+  // counts for in the town, not how they are disposed; the disposition list holds temperament, loyalty and fear.
+  const standingWord = interiority?.standing || '';
   // WIRING W3 C9 (R-W6, FOR THE OWNER'S VETO): how the face deals with strangers, the authored
   // `presentation.behaviour` line drawn at birth. X-48's look-and-voice class (`impression`) stays dark.
-  const dealing = typeof npc.presentation?.behaviour === 'string' ? npc.presentation.behaviour.trim() : '';
+  const dealing = dealingShown(npc, placeSettlement || settlement);
+  const houseMark = houseMarkShown(npc, placeSettlement || settlement); // BAR7-CARDS item 1 (CM1): the house's mark, once
   // NO CHIP REPEATS A WANT (2026-09-18). The `Goal:` chip went first, because the
   // card printed that one sentence three times over. The rule behind it is wider
   // than the goal, and keying it on a LABEL would have left the same defect a row
@@ -335,9 +383,17 @@ export function NPCInlineCard({
   // has an allegiance to the thieves guild" (the owner). The DM's line: "answers to {guild}, through {handler}".
   const allegiance = allegianceOf(npc);
   const allegianceGuild = allegiance ? (allegiance.power || allegiance.house || null) : null;
-  const allegianceHandler = allegiance?.handler
-    ? ((placeSettlement || settlement)?.npcs || []).find((n) => String(n?.id) === allegiance.handler)?.name || null
+  // ROUND THREE (the cut's #967 #968 #1097: "answers to Whisper market, through Achilles Melissenos", the Black market's
+  // black marketeer): the handler is named only where the record puts the handler in the house or power the person answers
+  // to — the handler's own house (`institution.key`) is it, or the handler holds a standing in it. Otherwise the line says
+  // whom the person answers to and names no go-between the record does not give that house (284 of 923 such lines, 105
+  // of the census's 720 + the readers' 80). The record's `handler` is unchanged.
+  const handlerCard = allegiance?.handler
+    ? ((placeSettlement || settlement)?.npcs || []).find((n) => String(n?.id) === allegiance.handler) || null
     : null;
+  const handlerOfHouse = !!handlerCard && !!allegianceGuild && (String(handlerCard.institution?.key || '') === allegianceGuild
+    || (Array.isArray(handlerCard.memberships) && handlerCard.memberships.some((m) => m?.power === allegianceGuild)));
+  const allegianceHandler = handlerOfHouse ? handlerCard?.name || null : null;
 
   // Pin UI is optional. When `onTogglePin` isn't provided (read-only views,
   // unsaved settlements) the icon doesn't render at all. `pinnedIds` is a Set
@@ -398,10 +454,16 @@ export function NPCInlineCard({
         {/* THE POWER LINE (PEOPLE-5A, M-1b): the card's house, then its standing in
             each power by rank — "first of X · second of Y" — read from its memberships. */}
         {cardLineTail && (nativeRole || showRoleArchetype) ? ' · ' : ''}
-        {cardDoor && <span data-testid="npc-institution-door"><EntityLink id={cardDoor.id} type={cardDoor.type} fallback={cardDoor.name} style={{ color: swatch.inkMag3, fontWeight: 600 }} /></span>}
+        {/* R2-CODE-B item 1: the house by the seam's label, without the catalogue's count range or
+            gate ("Merchant guilds (15-40)", "Dream parlors (high magic)"); `verbatim` so a resolved
+            link prints this label, not the index's raw catalogue key. */}
+        {cardDoor && <span data-testid="npc-institution-door"><EntityLink id={cardDoor.id} type={cardDoor.type} fallback={institutionHouseLabel(cardDoor.name)} verbatim style={{ color: swatch.inkMag3, fontWeight: 600 }} /></span>}
         {cardDoor && cardPowerTail ? ' · ' : ''}
         {cardPowerTail}
       </div>
+      {/* BAR7-CARDS item 1 (the chair's ruling CM1, 2026-11-17): the house's mark, ONE LINE OF ITS OWN straight under the
+          house line, said once; the person's sentences below print as written. */}
+      {houseMark && <div data-testid="npc-house-mark" style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,fontStyle:'italic'}}>{houseMark}</div>}
       {honorific && <div data-testid="npc-role" style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>{honorific}</div>}
         </div>
       )}
@@ -416,7 +478,9 @@ export function NPCInlineCard({
           )}
           {publicTraits.length > 0 && (
             <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:6,marginTop:6}}>
-              {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px'}}>{t.label}: {t.value}</span>)}
+              {/* R2-CODE-B-5 (the third seat's note: "Flaw: vainTemperament: clever"): two chips are two things; a space the
+                  copied text keeps between them. A whitespace text node between flex items does not move the layout. */}
+              {publicTraits.map((t,i) => <Fragment key={`${t.key}-${i}`}>{i > 0 && ' '}<span title={t.value} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px'}}>{t.label}: {t.value}</span></Fragment>)}
             </div>
           )}
           {(allegiance || npc.ousted) && (
@@ -440,6 +504,9 @@ export function NPCInlineCard({
                   border:`1px solid ${swatch.inkMag3}`,padding:'1px 6px',
                 }}>Exposed</span>
               )}
+              {/* ROUND THREE: the badge and the line are two things; a space the copied text keeps ("Hidden allegiance answers
+                  to …", never "Hidden allegianceanswers to …"). A whitespace text node between flex items does not move the layout. */}
+              {allegianceGuild && ' '}
               {allegianceGuild && (
                 <span style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,fontStyle:'italic'}}>answers to <MentionText text={allegianceGuild} structural/>{allegianceHandler && <>, through <MentionText text={allegianceHandler} structural/></>}</span>
               )}
@@ -483,7 +550,7 @@ export function NPCInlineCard({
               <span style={{fontWeight:700}}>Constraint: </span><MentionText text={npc.activeConstraint} selfId={entityIdFor('npc', npc)}/>
             </p>
           )}
-          {(wants.length > 0 || disposition.length > 0 || dealing) && (
+          {(wants.length > 0 || disposition.length > 0 || standingWord || dealing) && (
             <div style={{margin:'6px 0',display:'flex',flexDirection:'column',gap:2}}>
               {wants.length > 0 && (
                 // Each want goes through ProseParagraph: the first one is the goal the
@@ -496,6 +563,11 @@ export function NPCInlineCard({
                       {i > 0 ? ' · ' : ''}<ProseParagraph text={want} selfId={entityIdFor('npc', npc)} />
                     </Fragment>
                   ))}
+                </div>
+              )}
+              {standingWord && (
+                <div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4}}>
+                  <span style={{fontWeight:700,color:MUTED}}>Standing </span>{standingWord}
                 </div>
               )}
               {disposition.length > 0 && (

@@ -1,0 +1,39 @@
+# READ30 seeds — tree 65cb03ef1. Rule (select.mjs, executed; select.log): for each group, i = 0,1,2,...; within each i the sizes in the
+# order listed; take the first N births whose economicState.prosperity ranks strictly below economicState.prosperityStanding on
+# PROSPERITY_LABELS. Births: birthConfig({...DEFAULT_CONFIG, settType, selectedStresses:[crisis], selectedStressesRandom:false}),
+# generateSettlementPipeline(cfg, null, {seed, customContent:{}}). Every candidate examined qualified (no skips).
+# Groups: famine/under_siege/wartime x [city, metropolis] x 5; famine/under_siege/wartime x [town] x 5  (= 30).
+# The brief's counts sum to 30, leaving no slot for occupied/indebted/plague_onset; one each ([town, city], N=1) read as SUPPLEMENTARY, counted apart.
+rv2-famine-city-0
+rv2-famine-metropolis-0
+rv2-famine-city-1
+rv2-famine-metropolis-1
+rv2-famine-city-2
+rv2-under_siege-city-0
+rv2-under_siege-metropolis-0
+rv2-under_siege-city-1
+rv2-under_siege-metropolis-1
+rv2-under_siege-city-2
+rv2-wartime-city-0
+rv2-wartime-metropolis-0
+rv2-wartime-city-1
+rv2-wartime-metropolis-1
+rv2-wartime-city-2
+rv2-famine-town-0
+rv2-famine-town-1
+rv2-famine-town-2
+rv2-famine-town-3
+rv2-famine-town-4
+rv2-under_siege-town-0
+rv2-under_siege-town-1
+rv2-under_siege-town-2
+rv2-under_siege-town-3
+rv2-under_siege-town-4
+rv2-wartime-town-0
+rv2-wartime-town-1
+rv2-wartime-town-2
+rv2-wartime-town-3
+rv2-wartime-town-4
+rv2-occupied-town-0  # supplementary
+rv2-indebted-town-0  # supplementary
+rv2-plague_onset-town-0  # supplementary

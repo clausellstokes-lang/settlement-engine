@@ -1,0 +1,36 @@
+[gate-tail] start:  09:04:44 up 39 min,  0 user,  load average: 0.98, 0.90, 0.93 · cores: 4
+page-census: rendering 720 dossiers (2 workers) into /tmp/page-census-9QZpV1
+row        master integ banked  now  bar
+P1a             0    57     57    0    0  
+P1b            64    64     64    0    0  
+P2siege         —     —      0    0    0    (new row; 689 at the base)
+P3source        —     —      0    0    0    (new row; 74 at the base)
+P4              0   106     96    0    0  
+P5false         —     —      0    0    0    (new row; 306 at the base)
+P5b             0     2      0    0    0  
+P6need          —     —      0    0    0    (new row; 642 at the base)
+P7a           128   127    116  116    0  r2r-city-0 r2r-city-16 r2r-city-17
+P7b             0    27      0    0    0  
+P8any           0   220    129  123    0  r2r-hamlet-1 r2r-hamlet-11 r2r-hamlet-13
+P9            148   149    114  103    0  r2r-hamlet-1 r2r-hamlet-12 r2r-hamlet-14
+P10            18    17     17    0    0  
+P11           396   411    448    0    0  
+F4            274   245    202    0    0  
+P13           173   172    170    0    0  
+P14           183   167    148   23    0  r2r-hamlet-35 r2r-hamlet-4 r2r-hamlet-45
+P16three        0   331    179  179    0  r2r-city-10 r2r-city-14 r2r-city-16
+P16powers       0   291    281    0    0  
+P17           681   680    395  395    0  r2r-city-0 r2r-city-1 r2r-city-10
+P18           337   360    360  341    0  r2r-city-1 r2r-city-10 r2r-city-11
+P19             5     7      7    7    0  r2r-hamlet-34 r2r-town-9 r2r-village-23
+P20           689   689      0    0    0  
+NEW1           10    11     11   12    0  ROSE  r2r-city-32 r2r-city-41 r2r-city-9
+NEW2            0     3      6    6    0  r2r-town-29 r2r-village-2 r2s-indebted-hamlet-0
+P2            568   569    569  RETIRED → P2siege: two true quantities, by the owner's design
+P3any         172   190    190  RETIRED → P3source: it counted the words, not the explanation
+P6            463   296    296  RETIRED → P6need: it read the true half as the fault
+P5a             0   288    288  RETIRED → P5false: it counted every capture-pressure line beside a free hall, the true with the false
+page-census: ROSE on NEW1 — the register is shrink-only
+[gate-tail] end:  09:23:37 up 58 min,  0 user,  load average: 4.95, 4.07, 2.98
+[gate-tail] full log: /tmp/gate-tail.9096.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

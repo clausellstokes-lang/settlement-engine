@@ -1,0 +1,4 @@
+page-census: rendering 720 dossiers (4 workers) into <scratchpad>/pc/da7a567f4
+row        master integ banked  now  bar
+P6need          —     —      0    0    0    (new row; 642 at the base)
+page-census: the banked corpus reads at or under the register

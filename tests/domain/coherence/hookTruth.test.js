@@ -80,6 +80,41 @@ describe('settlementHookFacts — a fact the record does not carry licenses noth
     expect(hookTruthViolations(STARVING, facts)).toEqual([]);
   });
 
+  // R3-CODE-C-3, ROUND-3-CUT-INCREMENT #ww-868 (rww-thorp-plague_onset-1): "someone is poisoning the
+  // ruler slowly, and the physician knows" in a thorp governed by an Elder Council, with no physician.
+  // The row's `excludes: ['ruler: council']` did not hold: an Elder Council reads `ruler: elder`.
+  test('"the ruler" is refused where a council governs, of any kind; one ruler keeps it', () => {
+    const POISON = 'Someone is poisoning the ruler slowly, and the physician knows';
+    const ERRAND = 'The ailing ruler wants a final errand completed before naming a successor';
+    const ruledBy = (government) => settlementHookFacts({ tier: 'thorp', powerStructure: { government } });
+    for (const government of ['Elder Council', 'Household Council', 'Free Elder Council', 'Ecclesiastical Council', 'Church Council', 'High Theocratic Council', 'Merchant Council']) {
+      expect(ruledBy(government).ruledByCouncil, government).toBe(true);
+      expect(hookTruthViolations(ERRAND, ruledBy(government)).map((f) => f.code), government).toEqual(['one_ruler_where_a_council_governs']);
+    }
+    // anchored: one person rules here, so the same reader passes the same sentence
+    for (const government of ["Headman's Authority", 'Priestly Guidance', 'Royal Authority', 'Town Mayor', 'Occupation Authority']) {
+      expect(ruledBy(government).ruledByCouncil, government).toBe(false);
+      expect(hookTruthViolations(ERRAND, ruledBy(government)), government).toEqual([]);
+    }
+    // an absent government licenses nothing
+    expect(settlementHookFacts({ tier: 'thorp' }).ruledByCouncil).toBe(false);
+    expect(hookTruthViolations(POISON, settlementHookFacts({ tier: 'thorp' }))).toEqual([]);
+  });
+
+  test('"the physician" reads the roster: a healer, a monastic house or a hospital licenses it', () => {
+    const POISON = 'Someone is poisoning the ruler slowly, and the physician knows';
+    const lord = { tier: 'village', powerStructure: { government: 'Feudal Stewardship' } };
+    const none = settlementHookFacts({ ...lord, institutions: [{ name: 'Parish church', category: 'Religious' }] });
+    expect(hookTruthViolations(POISON, none).map((f) => f.code)).toEqual(['physician_without_a_healer']);
+    const healer = settlementHookFacts({ ...lord, institutions: [{ name: 'Village healer', category: 'Health' }] });
+    expect(healer.hasPhysician).toBe(true);
+    expect(hookTruthViolations(POISON, healer)).toEqual([]);
+    const hospital = settlementHookFacts({ ...lord, institutions: [{ name: 'Major hospital', category: 'Health' }] });
+    expect(hookTruthViolations(POISON, hospital)).toEqual([]);
+    // an unknown roster refuses nothing
+    expect(hookTruthViolations(POISON, settlementHookFacts(lord))).toEqual([]);
+  });
+
   test('a record with no defence roster does not deny a garrison', () => {
     const facts = settlementHookFacts({ tier: 'town', economicState: { foodSecurity: { label: 'Secure', storageMonths: 9 } } });
     expect(facts.defenseKnown).toBe(false);
@@ -110,12 +145,20 @@ describe('settlementHookFacts — a fact the record does not carry licenses noth
       .toContain('armed_force_without_one');
   });
 
-  test("a building's walls are not the settlement's walls", () => {
+  // R3-CODE-C-2, ROUND-3-CUT-INCREMENT #ww-4 (HIGH, rww-thorp-calm-1, Summary/Plot Hooks): re-keyed by
+  // identity (the walls arm on the sealed-walls hook) with its cause, the chair's ruling of
+  // 2026-11-13 (record 386: a hook that names walls reads the roster). It pinned the opposite
+  // ("a building's walls are not the settlement's walls"); the reader read the hook in a thorp
+  // whose page says "Unfortified. No perimeter walls." and found it false.
+  test("'inside the walls' is the place's walls; 'inside the walls of' a building is that building's", () => {
     const facts = settlementHookFacts({ tier: 'thorp', defenseProfile: { institutions: { walls: [] } } });
-    const findings = hookTruthViolations('Something was sealed inside the walls during construction, deliberately', facts);
-    // anchored: the same reader DOES refuse the fortification sentence on the next line, so
-    // this empty answer is a narrow matcher rather than a dead one.
-    expect(findings).toEqual([]);
+    expect(hookTruthViolations('Something was sealed inside the walls during construction, deliberately', facts).map((f) => f.code))
+      .toEqual(['walls_without_walls']);
+    // anchored: the same reader passes a building's walls, and the walled place's hook
+    expect(hookTruthViolations('Something was sealed inside the walls of the old chapel, deliberately', facts)).toEqual([]);
+    const walled = settlementHookFacts({ tier: 'thorp', institutions: [{ name: 'Palisade', category: 'Defense' }], defenseProfile: { institutions: { walls: ['Palisade'] } } });
+    expect(walled.hasWalls).toBe(true);
+    expect(hookTruthViolations('Something was sealed inside the walls during construction, deliberately', walled)).toEqual([]);
     expect(hookTruthViolations('The town walls have a gap nobody will admit to leaving.', facts).map((f) => f.code))
       .toContain('walls_without_walls');
   });

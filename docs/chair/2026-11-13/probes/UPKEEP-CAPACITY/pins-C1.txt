@@ -1,0 +1,5 @@
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — `--update` refuses to bank a declared overrun > ⛔ every LIVE declared row is refused against the LIVE register
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > baseline exactly matches the tree (airtight against any drift mode)
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > no file exceeds its baseline (new files get 0) — fix the types, do not widen
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — the declared-overrun ledger is honest > ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path)
+ FAIL  tests/lint/tuningRegister.walker.test.js > tuning register — the inventory is frozen and honest > the measured tree matches the committed inventory exactly

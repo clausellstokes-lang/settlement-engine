@@ -42,7 +42,7 @@ import { checkInstCompat } from '../structuralValidator.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { nativeSemanticNames } from '../../domain/content/customContentSemanticAuthority.js';
 import { defenseWordsFindings } from '../../domain/coherence/defenseWordsFindings.js'; // F1: one line
-import { CULTURE_PROFILES, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
+import { CULTURE_PROFILES, architecturalDetailRefused, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
 import { marketOf } from '../../domain/facts/market.js';
@@ -220,11 +220,26 @@ export function chooseClosing(settlement, magicReal) {
 function drawAdmitted(pool, { poolId, scoped, facts, speaks = () => true, cleanOnly = false }) {
   const ok = (/** @type {any} */ line) => speaks(line)
     && declarationAdmits(declarationOf(line), /** @type {any} */ (facts()), { crisisScoped: scoped }).admitted;
+  // R2-CODE-A-14 (the chair's ruling (s2)): A DRAW IS NOT MOVED: a refused line whose declared TWIN is admitted keeps
+  // its slot, and drawDeclared resolves it to the twin, so no redraw is spent. A closure table's twin is keyed on its
+  // original's template as the ledger writes it (`{name}`); twins never enter the draw (drawDeclared's domain).
+  const twinOf = (/** @type {any} */ line) => {
+    const t = textOf(line);
+    const own = typeof t === 'function' ? t('{name}') : t;
+    // BAR8-SCENES (the chair's grant under BR23, 2026-11-17): a line may have more than one twin, each for another state.
+    // BAR8-SCENES-3 (ruling BR25 (3), 2026-11-18): the LAST admitted twin answers, else the first: a later twin is the narrower
+    // state (the small working quarry's cart, last in its pool, where it is admitted; the empty road everywhere else). With one
+    // twin a line resolves exactly as it did
+    const twins = pool.filter((l) => l && typeof l === 'object' && typeof l.twinOf === 'string' && l.twinOf === own);
+    return twins.filter((l) => ok(l)).pop() ?? twins[0] ?? null;
+  };
+  const twinAdmitted = (/** @type {any} */ line) => { const twin = twinOf(line); return twin != null && ok(twin); };
   return drawDeclared(pool, {
+    twin: twinOf,
     draw: (p) => {
       const first = cleanOnly ? null : pickRandom(p);
-      if (!cleanOnly && (first == null || ok(first))) return first;
-      const clean = p.filter(ok);
+      if (!cleanOnly && (first == null || ok(first) || twinAdmitted(first))) return first;
+      const clean = p.filter((l) => ok(l) || twinAdmitted(l));
       return clean.length ? pickRandom(clean) : null;
     },
     facts, poolId, key: `${getActiveRng()?.seed ?? ''}::${poolId}`, surface: 'overview', drawKind: 'R', crisisScoped: scoped, // R-AT (CENSUS-1i unit 5): the settlement's identity
@@ -307,10 +322,16 @@ export function composeArrivalScene(settlement) {
       const profileKey = resolveCultureProfileKey(config.culture || 'germanic');
       const profile = CULTURE_PROFILES[profileKey];
       const details = profile?.architecturalDetails || [];
+      // W2-FIX-DATA-4 (REVIEW-W2A-3 #183; ROUND-3 #87 #112 #117): the materialized detail was chosen in resolveConfig, which
+      // answers only the tier; here the record is whole, so the row it came from is held to its own declaration too (a
+      // palisade, a river, a bathhouse). Refused there (and not already redrawn for a market it lacks), the sight beat is
+      // left out: no redraw, so no draw is added and no later beat moves (a redraw would land small places on a line their
+      // size makes false).
+      const materializedRefused = architecturalDetailRefused(materialized, profileKey, facts); // W2-FIX-DATA-12 item 2: the one reading, the PDF's too
       const drawnDetail = (!materialized || !speaks(materialized)) && details.length
         ? drawAdmitted(details, { poolId: `CULTURE_PROFILES.${profileKey}.architecturalDetails`, scoped: false, facts, speaks: (d) => speaks(textOf(d)), cleanOnly: Boolean(materialized) })
         : null;
-      const detail = materialized && speaks(materialized) ? materialized : (drawnDetail == null ? '' : textOf(drawnDetail)); // R-C (CENSUS-2d); CENSUS-1f: the redraw-once, declared
+      const detail = materialized && speaks(materialized) ? (materializedRefused ? '' : materialized) : (drawnDetail == null ? '' : textOf(drawnDetail)); // R-C (CENSUS-2d); CENSUS-1f: the redraw-once, declared
       if (detail) sight = `${sentenceCase(detail)}.`;
     }
   }

@@ -1,0 +1,115 @@
+tip-alone failing 94; base failing 44; tip-only 58; both 36; base-only 8
+TIP-ONLY FILES: 28
+   tests/build/engineBundleReplay.test.js
+   tests/build/engineServiceCore.test.js
+   tests/build/engineServiceStoreParity.test.js
+   tests/data/dossierStateProseProjection.contract.test.js
+   tests/data/foundingWorldBones.test.js
+   tests/domain/famineStoresOneRounding.test.js
+   tests/domain/townCartographyCalibration.test.js
+   tests/edgeFunctions/aiCharterBundle.freshness.test.js
+   tests/edgeFunctions/aiGroundingBundle.freshness.test.js
+   tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js
+   tests/edgeFunctions/edgeSharedBundleReproducibility.test.js
+   tests/generators/captureBirthScale.test.js
+   tests/generators/generationForkCensus.test.js
+   tests/lib/instantWorld/mundaneRealmAcceptance.test.js
+   tests/lint/factLayers.walker.test.js
+   tests/lint/mutationCoverageManifest.test.js
+   tests/lint/negativeAssertionAnchor.walker.test.js
+   tests/lint/observedShapeReaders.walker.test.js
+   tests/lint/poolDominance.walker.test.js
+   tests/lint/presumedThings.walker.test.js
+   tests/lint/proseFamilyContract.walker.test.js
+   tests/lint/rawColorLiteral.test.js
+   tests/lint/seedLoopTotality.walker.test.js
+   tests/lint/sourceCitationIntegrity.walker.test.js
+   tests/lint/writerReach.walker.test.js
+   tests/property/editCorpusRatchet.test.js
+   tests/property/statecraftExposureBand.test.js
+   tests/ui/defenseTabFlow.test.js
+BOTH FILES: 25
+   tests/build/landingFixtureFreshness.test.js
+   tests/components/dossierPhoneFloorAllViews.test.jsx
+   tests/domain/editWorldFactResources.test.js
+   tests/domain/intentAtlasSoakDistiller.test.js
+   tests/domain/mergeLadderHeldKeys.test.js
+   tests/domain/townCartographyCalibration.test.js
+   tests/domain/worldFactRederive.test.js
+   tests/generators/generationForkCensus.test.js
+   tests/generators/institutionBudgetPromise.test.js
+   tests/generators/nameHeldThroughAssembly.test.js
+   tests/generators/pipelinePinnedChoosers.test.js
+   tests/generators/pipelinePinnedMode.test.js
+   tests/generators/powerEconomyFreshness.test.js
+   tests/generators/rosterFinalUnderHeldRoster.test.js
+   tests/generators/x46NpcBand.test.js
+   tests/lint/newsHeadlineContract.walker.test.js
+   tests/lint/newsVoiceContract.walker.test.js
+   tests/lint/siteCoherenceRatchet.test.js
+   tests/pdf/goldenViewModel.test.js
+   tests/property/dmLayerGoldenIsolation.test.js
+   tests/property/dossierProseManifest.test.js
+   tests/property/editCorpusRatchet.test.js
+   tests/property/espionageDormancyFence.test.js
+   tests/property/generatorGoldenMaster.test.js
+   tests/property/heraldKnowledgeDeskGolden.test.js
+== TIP-ONLY TESTS
+   tests/build/engineBundleReplay.test.js > engine bundle replay — the bundle generates what the app generates > every golden-corpus config: the committed bundle's settlement JSON equals the in-process pipeline's, byte for byte
+   tests/build/engineBundleReplay.test.js > engine bundle replay — the bundle generates what the app generates > the engine-generate birth: for the three service cases, the bundle's stamped birth equals the in-process birth under the
+   tests/build/engineBundleReplay.test.js > engine bundle replay — the bundle generates what the app generates > the espionage fence's 360-settlement driven corpus: bundle equals in-process byte for byte, and its hash meets the fence
+   tests/build/engineServiceCore.test.js > the service runs the same core as the worker > the bundle's runGenerationRequest equals the in-process core for the service's request
+   tests/build/engineServiceStoreParity.test.js > the engine service answers the store's own requests with the store's own records > derive: the remote re-derivation of a store-born world equals the local one
+   tests/build/engineServiceStoreParity.test.js > the engine service answers the store's own requests with the store's own records > generate: an account that may customize, with custom content turned off — neither side stamps
+   tests/build/engineServiceStoreParity.test.js > the engine service answers the store's own requests with the store's own records > generate: the bundle's birth for the wire body equals the local core on the store's request, stamp i
+   tests/data/dossierStateProseProjection.contract.test.js > SEAM car 4d — the seat licence, computed where the census is visible > ⛔ ON THE COMMITTED FILES THE JOIN IS STILL ZERO — car 0 F1, re-derived here
+   tests/data/dossierStateProseProjection.contract.test.js > the dossier state-prose projection > is not stale against the two authored annexes
+   tests/data/foundingWorldBones.test.js > every Founding World keeps every promise on its card > every promise holds in at least 19 of 20 forks at the card's dials
+   tests/domain/famineStoresOneRounding.test.js > rung 2D · the held granary and the stores line read one rounding > soak1k-1582, -2452, -2962: a famine granary printed as six months is held, and the page says so
+   tests/domain/townCartographyCalibration.test.js > W8 the drawn corpus does not repeat itself > LIVE: each tier's argmax row re-measures at ZERO stacked buildings, and matches its record
+   tests/edgeFunctions/aiCharterBundle.freshness.test.js > aiCharter bundle is fresh > the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+   tests/edgeFunctions/aiGroundingBundle.freshness.test.js > Tier 6.8 — aiGrounding bundle is fresh > the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+   tests/edgeFunctions/aiOutputSchemaBundle.freshness.test.js > aiOutputSchema bundle is fresh > the current source tree matches the recorded hash (regenerate via npm run build:edge-shared)
+   tests/edgeFunctions/edgeSharedBundleReproducibility.test.js > edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) > aiCharterBundle.meta.json > the recorded sourceHash equals the builder hash over INDEX con
+   tests/edgeFunctions/edgeSharedBundleReproducibility.test.js > edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) > aiGroundingBundle.meta.json > the recorded sourceHash equals the builder hash over INDEX c
+   tests/edgeFunctions/edgeSharedBundleReproducibility.test.js > edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) > aiOutputSchemaBundle.meta.json > the recorded sourceHash equals the builder hash over INDE
+   tests/edgeFunctions/edgeSharedBundleReproducibility.test.js > edge-shared bundles reproduce AT THE COMMITTED TREE (the dirty-build class) > engineBundle.meta.json > the recorded sourceHash equals the builder hash over INDEX conten
+   tests/generators/captureBirthScale.test.js > birth-scale distribution sweep > overwhelming criminal presence reads contested/influenced at birth
+   tests/generators/generationForkCensus.test.js > EM-P2 — generation census by execution: the instrument, the classification, both channels > A1 — the instrument reaches the generator graph: mints split 4 direct / 106 via fork, no g
+   tests/generators/generationForkCensus.test.js > EM-P2 — generation census by execution: the instrument, the classification, both channels > A5 — the mint channel: four DIRECT mints, every seed root-prefixed, and one seed minted fo
+   tests/lib/instantWorld/mundaneRealmAcceptance.test.js > MG-4.2 — the twin-world envelope: a mundane realm is not a thinner realm > the recorded census figures are the ones the harness actually produces
+   tests/lint/factLayers.walker.test.js > nothing reads at or above its own layer (shrink-only) > READERS: every file reads exactly its banked LINES (by content, each with its reason), and no file reads outside the register
+   tests/lint/factLayers.walker.test.js > the layer table covers every leaf and every pool > every vocabulary dimension's home and every factsOf getter has a leaf row
+   tests/lint/mutationCoverageManifest.test.js > mutation-coverage manifest — the totality contract (E-A) > TOTALITY: every enumerated invariant file has a manifest entry
+   tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus
+   tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > the generation-facing quarantine is EXACT (a new, grown or unbanked offender reds)
+   tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the EXECUTED corpus > the producers ran and the corpus is not empty
+   tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+   tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+   tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > THE ERASURE GUARD: no frozen row has vanished from the DETECTOR while its read still stands
+   tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > the UNREVIEWED-UI cohort is ENFORCED, banked, and exactly its measured size
+   tests/lint/poolDominance.walker.test.js > no drawn pool prints more of one line than its register allows > every drawn pool has a row, and every row is a drawn pool
+   tests/lint/poolDominance.walker.test.js > no drawn pool prints more of one line than its register allows > no ceiling sits loose above its measure
+   tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+   tests/lint/presumedThings.walker.test.js > ARM 3 — the strip ban (W2-B-DECLARE item 3; record 288, ruling 1, B (iii)) > ⛔ no strip without its row: a new unwrap of a pool, in a shape the ban names, is red (draw it through a door)
+   tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A1 reconstructs the exact four-family AO-0 corpus twice from one build
+   tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A2 rejects malformed selector axes while retaining nulls and projected nested gaps
+   tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A3 freezes all 58 identities counts bytes digest and movement polarities
+   tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A5 closes twelve pulse-history records and pins overlapping headline aliases
+   tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A6 reaches the regional audit log while proving its selected prose zero
+   tests/lint/rawColorLiteral.test.js > raw-color-literal occurrence budget (A+ design-a11y.1) > raw-color literals match the committed budget exactly
+   tests/lint/seedLoopTotality.walker.test.js > seed-loop totality walker (habitat removal) > no NEW bare seed loop anywhere in the test corpus
+   tests/lint/seedLoopTotality.walker.test.js > seed-loop totality walker (habitat removal) > the generation-facing quarantine is EXACT (a new, grown or unbanked offender reds)
+   tests/lint/sourceCitationIntegrity.walker.test.js > source citation integrity — the live estate > ARM 2 — ONLY-SHRINKS: no NEW past-EOF citation in a live document
+   tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the EXECUTED corpus and the closures > the producers ran and the write population is not empty
+   tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE GROWTH LAW IS EXECUTED: a live-derived register is green and ONE planted dark identity reds
+   tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE MUTANT REDS: a synthetic written key on a judged shape with no reader is DARK, unregistered, ceiling 0
+   tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE SWAP MUTANT: a new dark identity at constant count reds with its identity named
+   tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count
+   tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+   tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the lit-dial arm > the lit arm changes no draw: the walker corpus is byte-identical beside the lit one, and the dials are passed on the arm’s own configs
+   tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > every DARK identity is REGISTERED or BANKED — the shrink-only comparison is clean
+   tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > the banked cohort is exact — a member now LIT or no longer written is stale, never silently spent
+   tests/property/editCorpusRatchet.test.js > the edit corpus ratchet: the re-entry seam and the merge over the 63-row corpus > A3 no merged object mixes a taken leaf with a settled leaf outside a declared consistency group
+   tests/property/statecraftExposureBand.test.js > STATECRAFT-BAND U1 — the seeded run: the chain at the band > dramatic_campaign fp-read-2, head on, twenty years: scandals inside the measured band and mobilizations at the dark twin
+   tests/ui/defenseTabFlow.test.js > T2-24 — magic does not function: no arcane provision, no magic-dependence reading > STOP-2: no "Arcane defense" force group (screen or print) in a dead-magic world, alchemist or not

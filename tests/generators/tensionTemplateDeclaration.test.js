@@ -14,6 +14,7 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { bootHarness, renderSurfaces } from '../../scripts/audit/soak-review/renderHarness.mjs';
 import { readerBattery } from '../../src/domain/coherence/readerBattery.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
 import { migrationOf } from '../../src/domain/facts/migration.js';
 import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.js';
@@ -58,8 +59,11 @@ describe('the tension template declaration (R-AL)', () => {
  * template's DATED words stand in (historyData.js `byMemory.dated`). Draw-free.
  */
 describe('URBAN-FIX D-1 — a tension\'s words follow its own event\'s age', () => {
-  /** Flagged at the parent: thorp, hamlet, village, town, city, metropolis (the Occupation), the Great Fire, the Tyranny. */
-  const FLAGGED = [108, 217, 128, 207, 28, 47, 353, 539];
+  /** Flagged at the parent: thorp, hamlet, village, town, city, metropolis (the Occupation), the Great Fire, the Tyranny.
+   * RE-KEYED BY IDENTITY (W2-FIX-DATA-5 item 1, ROUND-3 #1003): the thorp 108 and the town 207 held their dated
+   * Occupation tension under an occupation IN FORCE, where the template is now false and set aside; the thorp 552 and
+   * the town 219 hold a dated Occupation tension under a siege (the same template, the same memory words). */
+  const FLAGGED = [552, 217, 128, 219, 28, 47, 353, 539];
   /** The twelve (soak1k-0 … 11). */
   const TWELVE = Array.from({ length: 12 }, (_, i) => i);
 
@@ -82,7 +86,9 @@ describe('URBAN-FIX D-1 — a tension\'s words follow its own event\'s age', () 
     await ensureLaws();
     const strip = (s) => {
       const { history, ...rest } = s;
-      const { currentTensions, ...h } = history;
+      // RE-KEYED BY CAUSE (TAIL-HISTORY-3, the chair's Y13): the siege narrative copies the first tension's description
+      // after "… is still present in living memory:" (siegeCapability.js), so it is the tensions' words too (soak1k-2)
+      const { currentTensions, siegeNarrative: _copy, ...h } = history;
       return JSON.stringify({ ...rest, history: { ...h, tensionTypes: currentTensions.map((t) => t.type) }, generationCoherenceReceipt: null });
     };
     const seeds = [...TWELVE, ...FLAGGED];
@@ -116,19 +122,27 @@ describe('URBAN-FIX D-1 — a tension\'s words follow its own event\'s age', () 
     expect(differing).toBeGreaterThanOrEqual(FLAGGED.length);
   }, 300_000);
 
-  it('D-1b: a tension whose own event is ABSENT from the timeline names no past event (the template\'s lasting effects)', async () => {
+  it('D-1b: a tension whose own event is ABSENT from the timeline is not printed at all (the occupation\'s legacy)', async () => {
     await ensureLaws();
-    // births below city (and one city, one metropolis) holding an occupation tension with no Occupation on the timeline
-    const UNANCHORED = [24, 37, 38, 27, 142, 71];
+    // births below city (and one city, one metropolis) that held an occupation tension with no Occupation on the timeline
+    // RE-KEYED BY IDENTITY (W2-FIX-DATA-5 item 1, ROUND-3 #1003): 37 and 27 held the tension under an occupation IN
+    // FORCE, where it is now set aside; the hamlet 91 and the town 105 hold it unanchored under a siege.
+    // RE-KEYED BY CAUSE (W2-FIX-DATA-HISTORY item C, the chair's ruling of 2026-11-13: a history line speaks of an event only
+    // where the town's own timeline holds it; the review of the data lane, L4): the unanchored words still spoke of
+    // collaborators, resisters and seized property, a past the timeline does not hold. Such a tension is now set aside at the
+    // selection (`historyData.js :: tensionHeldByTimeline`), so these six hold none, and each still carries a tension.
+    const UNANCHORED = [24, 91, 38, 105, 142, 71];
+    /** A tension each of the six does carry (read off its birth): the liveness anchor of its tension list. */
+    const CARRIED = { 24: 'heresy_trial', 91: 'resource_scarcity', 38: 'resource_scarcity', 105: 'resource_scarcity', 142: 'external_threat', 71: 'resource_scarcity' };
     const failures = collectSeedFailures(UNANCHORED, (i) => {
       const s = birth(i).settlement;
-      const t = s.history.currentTensions.find((x) => x.type === 'occupation_legacy');
-      expect(t, `soak1k-${i}: an occupation tension`).toBeTruthy();
       expect(s.history.historicalEvents.some((e) => e.templateType === 'occupation_legacy'), `soak1k-${i}: no Occupation on the timeline`).toBe(false);
-      // anchored: `t` is asserted present two lines above and toMatch throws on a non-string, so a drifted record cannot pass
-      expect(t.description, `soak1k-${i}: names no past event`).not.toMatch(/\boccupation\b|\bended\b/i);
-      expect(t.factions.filter((f) => /^Former\b/.test(f)), `soak1k-${i}: no former participants`).toEqual([]);
+      expectAbsentWithAnchor(s.history.currentTensions.map((x) => x.type), 'occupation_legacy', CARRIED[i], `soak1k-${i}: no occupation tension`);
+      expect(JSON.stringify(s.history.currentTensions), `soak1k-${i}: the tensions' words are read`).toContain('"description":"');
+      // anchored: the line above proves the tensions' descriptions are on the string this pattern scans
+      expect(JSON.stringify(s.history.currentTensions), `soak1k-${i}: no collaborator or resister`).not.toMatch(/collaborat|resistance|occupier/i);
+      expect(s.history.currentTensions.length, `soak1k-${i}: the town still carries a current tension`).toBeGreaterThan(0);
     });
-    expectNoSeedFailures(failures, 'an unanchored tension names no past event');
+    expectNoSeedFailures(failures, 'no tension speaks of a past the timeline does not hold');
   }, 120_000);
 });

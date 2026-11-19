@@ -47,18 +47,22 @@ import { BACKING_ARCHETYPES } from '../../data/institutionBacking.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { deriveTradeCommodity } from '../tradeCommodity.js';
 import { governingFactionOf, nameOf } from '../../domain/rulingPower.js';
-import { FACE_SEAT, faceOfInstitution, isFabricInstitution, isNoPowerInstitution } from '../../data/institutionalCatalog.js';
+import { FACE_SEAT, faceOfInstitution, familyOfInstitution, isFabricInstitution, isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { hookPoolFor, POWER_BANDS, seatPoolFor } from './poolMap.js';
 import { powerBandOfRole } from '../npcGenerator.js';
 import { drawCardHooks, dualHatHouseOf, HOOKS_FORK_LABEL, houseKindOf, mintPowerFace, officeTitleFor, onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { OTHER_CARD_PREFIX, otherMintRowFor } from './mintTitles.js';
+import { titleForHolder } from '../../data/holderTitleForms.js'; // TAIL-TITLES K-C
 import { CLAIMANT_FACE, HOUSELESS_CRIMINAL_FACE } from '../../data/stressPowerFaces.js';
 import { stressPowerRowOf } from '../../domain/people/stressPowerFaces.js';
 import { isHideableHouse, isVeiledPower, veiledCardIdFor } from '../../domain/people/cardVeil.js';
 import { veiledEpithetFor } from '../npcDisplayNames.js';
 import { RUNG_KEYS, rungBandsForTier } from '../../domain/density/densityRungs.js';
+import { temperamentYieldsToSecret } from '../../data/npcData.js'; // BAR6-PEOPLE (10e-temper)
 import { allegianceOf, isCriminalPower, organizedCrimeOf } from '../../domain/people/allegiance.js';
 import { isSeatVacant } from '../../domain/people/seatKeeper.js';
+import { crimeFactionNameOf, crimeSignalOf, withTownsOwnUnderworld } from '../../domain/crimeSignal.js';
+import { coupContenders } from '../../domain/rulingPowerCoup.js';
 
 /** The keyed fork the late mints and the ranks draw under (declared in the fork census). */
 export const POWERS_FORK_LABEL = 'people-powers';
@@ -72,6 +76,21 @@ export { OTHER_CARD_PREFIX };
  */
 export const CAST_POWERS_TUNING = Object.freeze({ RANKS: 3, WEIGHT_ZERO_HOUSE: 0.5 });
 export const RANKS = CAST_POWERS_TUNING.RANKS;
+
+/**
+ * A NOBLE POWER IS FACED BY A NOBLE (COHERENCE-POWERS-6, item 1; the chair's ruling of 2026-11-13, standing, vetoable by the
+ * owner): a noble power that does not govern is faced by the head of a LANDED HOUSE on the roster where there is one, and
+ * otherwise by a lord of that body, minted and named (`CLAIMANT_FACE`'s row, "the lord"), who is styled a claimant only
+ * where the power itself claims. `landedFamilies`: the lord's own houses of the catalogue (the steward's family, which is
+ * the lord's appointee in a town and the noble governor above; the lord's reeve; the royal seat); its face heads the body
+ * where the house's LARGEST loyalty lands on it (the governor of Noble Families; never the monarch, whose largest loyalty is
+ * the government's). `standingBand`: the band of influence the body's face reads at, at least, from the body's standing as
+ * the Power tab prints it (`powerLabel`); never lowered. Pure data, no draw.
+ */
+export const NOBLE_BODY_FACE = Object.freeze({
+  landedFamilies: Object.freeze(["Lord's steward", "Lord's reeve", 'Royal seat']),
+  standingBand: Object.freeze({ Dominant: 'high', Strong: 'high', Significant: 'moderate', Minor: 'moderate', Suppressed: 'low' }),
+});
 
 /**
  * THE GUILD'S PUSH (the allegiance train, car 2, ALLEGIANCE-CAR2, 2026-11-08; the design §3.2, the
@@ -169,6 +188,25 @@ export function assignCastPowers(settlement, cards, rng, seed = settlement?._see
  */
 
 /**
+ * THE ROSTER'S SECRETS AS A LATE MINT'S DRAW REFUSES THEM (TAIL-CLOSE-SECRET-1): a line is held when the roster holds it OR
+ * holds the form it will carry — a late face's secret is rewritten after its draw to name no thieves' guild the town lacks
+ * (`crimeSignal.js :: withTownsOwnUnderworld`), so the draw's refusal (`npcGenerator.js`: `has`, then `add`) answers for
+ * that form. Draw-free: the refusal falls through its pool in seed order with no further roll.
+ * @extends {Set<string>}
+ */
+class CarriedSecrets extends Set {
+  /** @param {Iterable<string>} lines @param {(text: string) => string} carry */
+  constructor(lines, carry) {
+    super(lines);
+    /** @type {(text: string) => string} */
+    this.carry = carry;
+  }
+
+  /** @param {string} text @returns {boolean} */
+  has(text) { return super.has(text) || super.has(this.carry(text)); }
+}
+
+/**
  * A1 — LAND: every card's memberships (rank null) from the backing catalogue, the minted seat's,
  * and the `other` mints (R-P3, R-P4). Mints every fork of `people-powers` (mint, ranks, hooks) in
  * the order the one function minted them. `plan` is null where nothing ranks (no power, no cast).
@@ -252,11 +290,19 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
   const mintsBySent = (/** @type {Record<string, unknown>} */ f) => stressPowerRowOf(settlement, f)?.appointed === true
     || (stressPowerRowOf(settlement, f)?.claimant === true && !lineMemberOf(stressPowerRowOf(settlement, f), members.get(nameOf(f)) || []))
     || (isCriminalPower(f) && !housed(nameOf(f)));
-  const unfaced = factions.filter((f) => {
+  const sentFaced = factions.filter((f) => {
     const name = nameOf(f);
     return name && name !== governing && (!BACKING_ARCHETYPES.includes(backingArchetypeOf(f)) || mintsBySent(f))
       && !existingIds.has(mintIdOf(f));
   });
+  // COHERENCE-POWERS-6 (item 1): a noble body with no landed house's head among its members mints its lord, AFTER every
+  // other mint (the hook registry and the names the earlier mints read are as before)
+  // COHERENCE-POWERS-6 (item 2): in a vacancy the keeper's house heads no body that contests the seat
+  const keeperKey = keeperHouseKeyOf(settlement, institutions, governing, seatKey);
+  const contending = keeperKey ? contendersOf(settlement) : new Set();
+  const lordless = factions.filter((f) => isNobleBody(settlement, f, governing) && !sentFaced.includes(f)
+    && !existingIds.has(mintIdOf(f)) && !landedMemberOf(members.get(nameOf(f)) || [], contending.has(nameOf(f)) ? keeperKey : null));
+  const unfaced = [...sentFaced, ...lordless];
   if (unfaced.length) {
     const tier = String(settlement?.tier || 'town');
     const culture = String(config.culture || 'germanic');
@@ -264,13 +310,16 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
     // THE ONE REGISTRY (MERGE-234, the chair's ruling of 10:4x UTC: one writer per fact): the roster's
     // texts so far, read by the mint's body (no goal, secret, tell or speech repeated) and by the hook
     // draw below (no line the roster holds) — the mint draws NO hook of its own.
+    // the crime signal (one home) and the roster's crime faction as mergeNPCLists reads it, for the minted secrets
+    const crime = { signal: crimeSignalOf({ seats: factions, estate: institutions }), faction: crimeFactionNameOf(factions) }; // the crime home's reader (TAIL-CLOSE-SRC-4)
     const hookRegistry = {
       titles: new Set(cards.flatMap((c) => c?.plotHooks || [])),
       themes: new Set(),
       tells: new Set(cards.map((c) => c?.personality?.tell).filter(Boolean)),
       speech: new Set(cards.map((c) => c?.personality?.speech).filter(Boolean)),
       goals: new Set(cards.map((c) => c?.goal?.short).filter(Boolean)),
-      secrets: new Set(cards.map((c) => c?.secret?.what).filter(Boolean)),
+      // TAIL-CLOSE-SECRET-1: a line is held in the form a late face will CARRY (the rewrite below, after the draw)
+      secrets: new CarriedSecrets(cards.map((c) => c?.secret?.what).filter(Boolean), (text) => withTownsOwnUnderworld(text, crime.signal, crime.faction)),
     };
     const mintCtx = { tier, culture, config, economicState, powerStructure: settlement?.powerStructure, institutions, hookRegistry, worldLaw };
     // the pipeline's own npcConfig, as the birth seam spells it, for the hook draw's templates
@@ -287,13 +336,19 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
       const name = nameOf(f);
       const id = mintIdOf(f);
       existingIds.add(id);
-      const row = stressPowerRowOf(settlement, f)?.claimant === true ? CLAIMANT_FACE
+      const row = stressPowerRowOf(settlement, f)?.claimant === true || lordless.includes(f) ? CLAIMANT_FACE
         : isCriminalPower(f) && otherMintRowFor(name).fallback ? HOUSELESS_CRIMINAL_FACE : otherMintRowFor(name);
       const draw = () => mintPowerFace(row, mintCtx, { hook: false });
       const card = mintStream ? onStream(mintStream.fork(powerSlug(name)), draw) : draw();
+      // COHERENCE-POWERS-7 (leftover 1): a late face's secret names no thieves' guild the town lacks (the rule
+      // mergeNPCLists runs on the roster's cards; crimeSignal.js :: withTownsOwnUnderworld), after the draw
+      if (card.secret && typeof card.secret === 'object') {
+        card.secret = { ...card.secret, what: withTownsOwnUnderworld(card.secret.what, crime.signal, crime.faction) };
+        if (card.secret.what) hookRegistry.secrets.add(String(card.secret.what).trim()); // TAIL-CLOSE-SECRET-1: the carried text is held too
+      }
       card.id = id;
-      card.title = row.title;
-      card.role = row.title; // M-1b
+      card.title = titleForHolder(row.title, card.gender); // TAIL-TITLES K-C: the holder's form, after the draw
+      card.role = card.title; // M-1b: the role IS the title (the face stays on `institution.title`)
       // FIX-PUBLIC-VEIL: the veil bit at birth — a hidden power's mint (the stress infiltrator) or a criminal one's
       card.institution = { kind: 'power', key: name, family: null, title: row.title, veiled: isVeiledPower(f) };
       card.memberships = [];
@@ -308,7 +363,7 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
           let epithet = veiledEpithetFor(1, 2);
           for (let n = 2; taken.has(`${base} ${epithet}`.toLowerCase()); n += 1) epithet = veiledEpithetFor(n + 1, n + 2);
           card.name = `${base} ${epithet}`;
-        } else card.name = `${base} (${row.title})`;
+        } else card.name = `${base} (${card.title})`; // TAIL-TITLES K-C: the title it bears
       }
       lateMints.push(card);
       // the hook's pool from the mint's EFFECTIVE category (no title-table row is `magic`, so no swap here)
@@ -336,6 +391,10 @@ export function landMemberships(settlement, cards, rng, seed = settlement?._seed
  */
 export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
   const { all, plan } = landed;
+  // BAR6-PEOPLE (LAW 10 rule 10e-temper; vetoable by the owner): every secret of the cast is settled by now (the title's
+  // lines at birth, the overlay at this seam's head, the mints in `landMemberships`), so here, once, over the whole cast and
+  // before anything reads a rank: a temperament its own secret denies yields (npcData.js :: temperamentYieldsToSecret). No draw.
+  if (Array.isArray(all)) for (const card of all) temperamentYieldsToSecret(card);
   if (!plan) return all;
   const { powers, members, governing, seatKey, rankStream } = plan;
   // THE GUILD'S PUSH (car 2, A3): read once per town; a criminal power's own deal is never pushed
@@ -383,6 +442,8 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
       take(remaining.find((m) => m.card.institution?.kind === 'power' && m.card.institution?.key === power));
       // COHERENCE-POWERS-5 (N4): a claimant's party with no mint is faced by its member of the line
       if (!chosen.length) take(lineMemberOf(stressPowerRowOf(settlement, factions.find((f) => nameOf(f) === power)), remaining));
+      // COHERENCE-POWERS-6 (item 1): a noble body is faced by its landed house's head
+      if (!chosen.length && isNobleBody(settlement, factions.find((f) => nameOf(f) === power), governing)) take(landedMemberOf(remaining));
     }
     // FLOOR 2, THE RULER'S KIND (COHERENCE-POWERS): a ruler of a kind whose first is not of its kind (a
     // government that sent its own man) seats the heaviest house of its kind among its members second
@@ -416,6 +477,8 @@ export function rankPowers(settlement, landed, pushTuning = GUILD_PUSH_TUNING) {
   seatStressPowers(settlement, all, members);
   settleCrisisLeaders(settlement, all);
   keeperLeavesTheClaim(settlement, all);
+  keeperLeavesTheContest(settlement, all);
+  nobleFacesAtStanding(settlement, all, governing);
 
   // ── THE IMPORTANCE BAND, from the rank ──────────────────────────────────────────────────
   // The retired rung roll expressed itself through `importance` on EVERY figure (densityRungs.js:
@@ -519,8 +582,17 @@ function settleCrisisLeaders(settlement, all) {
  * @param {Record<string, any>} card @param {string} officeRole the role the office's own face draws through
  */
 export function raiseToOfficeBand(card, officeRole) {
-  const office = POWER_BANDS[powerBandOfRole(officeRole)];
+  raiseToBand(card, powerBandOfRole(officeRole));
+}
+
+/**
+ * The same raise to a named band (COHERENCE-POWERS-6, item 1: a noble body's face at its standing). Draw-free, idempotent.
+ * @param {Record<string, any>} card @param {string} band 'low' | 'moderate' | 'high'
+ */
+export function raiseToBand(card, band) {
+  const office = POWER_BANDS[/** @type {keyof typeof POWER_BANDS} */ (band)];
   const own = POWER_BANDS[/** @type {keyof typeof POWER_BANDS} */ (String(card?.influence || ''))];
+  if (!office) return;
   if (!card || !own || own.order >= office.order) return;
   const offset = Math.max(0, Math.min(office.span - 1, (Number(card.power) || own.floor) - own.floor));
   card.influence = office.level;
@@ -550,6 +622,98 @@ function keeperLeavesTheClaim(settlement, all) {
     const members = all.filter((c) => Array.isArray(c?.memberships) && c.memberships.some((m) => m.power === power));
     [...members.filter((c) => Number.isInteger(own(c).rank)).sort((a, b) => own(a).rank - own(b).rank),
       ...members.filter((c) => !Number.isInteger(own(c).rank))].forEach((c, i) => { own(c).rank = i < RANKS ? i + 1 : null; });
+  }
+}
+
+/**
+ * A NOBLE BODY (COHERENCE-POWERS-6, item 1): a noble power of the roster that does not govern and is not veiled; a claimant
+ * row's power is the claimants' rule's (its mint or its member of the line).
+ * @param {Record<string, any>} settlement @param {Record<string, any> | undefined} f @param {string | null} governing
+ * @returns {boolean}
+ */
+function isNobleBody(settlement, f, governing) {
+  const name = f ? nameOf(/** @type {any} */ (f)) : '';
+  return !!name && name !== governing && backingArchetypeOf(/** @type {any} */ (f)) === 'noble' && !isVeiledPower(f)
+    && stressPowerRowOf(settlement, f)?.claimant !== true;
+}
+
+/**
+ * The head of a landed house among a noble body's members: the face of one of the lord's own houses
+ * (NOBLE_BODY_FACE.landedFamilies) whose largest loyalty lands on the body; null where none stands.
+ * @param {Member[]} pool @param {string | null} [exceptKey] a house whose face may not head it (the keeper's, item 2)
+ * @returns {Member | null}
+ */
+function landedMemberOf(pool, exceptKey = null) {
+  return [...pool].sort((x, y) => x.at - y.at).find((m) => m.largest && m.card?.institution?.kind === 'house'
+    && (exceptKey === null || m.card.institution.key !== exceptKey)
+    && NOBLE_BODY_FACE.landedFamilies.includes(String(familyOfInstitution({ name: m.card.institution.key })?.key || ''))) || null;
+}
+
+/**
+ * THE FACE OF A NOBLE BODY READS AT THE BODY'S STANDING; A MINTED CLAIMANT AT THE SEAT IT CLAIMS (COHERENCE-POWERS-6, item 1;
+ * the chair's ruling of 2026-11-13): a noble body's first is raised to the band its standing gives (NOBLE_BODY_FACE.standingBand,
+ * from the `powerLabel` the Power tab prints), and a minted claimant (a claimant row's minted face) to the band of the seat
+ * it claims (the tier's seat role, poolMap.js :: seatPoolFor), never lowered (raiseToBand: no stream draws again).
+ * @param {Record<string, any>} settlement @param {Array<Record<string, any>>} all @param {string | null} governing
+ */
+function nobleFacesAtStanding(settlement, all, governing) {
+  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
+  const tier = String(settlement?.tier || 'town');
+  for (const f of factions) {
+    const power = nameOf(f);
+    const first = all.find((c) => Array.isArray(c?.memberships) && c.memberships.some((m) => m.power === power && m.rank === 1));
+    if (!first) continue;
+    const minted = first.institution?.kind === 'power' && first.institution?.key === power;
+    if (minted && stressPowerRowOf(settlement, f)?.claimant === true) raiseToOfficeBand(first, seatPoolFor(tier).role);
+    else if (isNobleBody(settlement, f, governing)) raiseToBand(first, NOBLE_BODY_FACE.standingBand[String(f.powerLabel || '')] || 'low');
+  }
+}
+
+/**
+ * The powers the Power tab prints as contesting the seat (rulingPowerCoup.js :: coupContenders, the challengers; read from
+ * the roster alone). @param {Record<string, any>} settlement @returns {Set<string>}
+ */
+function contendersOf(settlement) {
+  return new Set(coupContenders(/** @type {any} */ (settlement)).challengers.map((c) => c.name).filter(Boolean));
+}
+
+/**
+ * The house of the card that will keep an empty seat (the governing power's FLOOR 1: the dual hat's house, else the seat's
+ * house), or null where the seat is held or the keeper is a minted seat. Read at the land, before the ranks (item 2).
+ * @param {Record<string, any>} settlement @param {Array<Record<string, any>>} institutions @param {string | null} governing
+ * @param {string | null} seatKey @returns {string | null}
+ */
+function keeperHouseKeyOf(settlement, institutions, governing, seatKey) {
+  if (!governing || !isSeatVacant(settlement)) return null;
+  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
+  const rulerRow = factions.find((f) => nameOf(f) === governing) || null;
+  const hat = rulerRow ? dualHatHouseOf(institutions, rulerRow) : null;
+  return hat ? String(hat.house.name || '') || null : seatKey;
+}
+
+/**
+ * THE KEEPER OF AN EMPTY SEAT HEADS NO CONTENDER (COHERENCE-POWERS-6, item 2; the chair's ruling of 2026-11-13, vetoable by
+ * the owner; the same rule as keeperLeavesTheClaim, one step on): where a succession leaves the seat empty, the keeper (the
+ * governing power's first) who is first of a power the Power tab prints as contesting the seat gives that rung to the
+ * contender's own next person: the keeper stays a member, unranked, and the others' ranks are re-dealt in their order (the
+ * ranked first, the unranked after, in cast order). A noble body that contests is faced by its lord, minted at the land
+ * (item 1). Where no other member stands (none on the lane's corpora), the keeper keeps the rung. Draw-free.
+ * @param {Record<string, any>} settlement @param {Array<Record<string, any>>} all
+ */
+function keeperLeavesTheContest(settlement, all) {
+  if (!isSeatVacant(settlement)) return;
+  const governing = nameOf(governingFactionOf(settlement));
+  const keeper = all.find((c) => Array.isArray(c?.memberships) && c.memberships.some((m) => m.power === governing && m.rank === 1));
+  if (!keeper) return;
+  const contending = contendersOf(settlement);
+  for (const held of keeper.memberships.filter((m) => m.rank === 1 && m.power !== governing && contending.has(m.power))) {
+    const power = held.power;
+    const own = (/** @type {Record<string, any>} */ c) => c.memberships.find((m) => m.power === power);
+    const others = all.filter((c) => c !== keeper && Array.isArray(c?.memberships) && c.memberships.some((m) => m.power === power));
+    if (!others.length) continue;
+    held.rank = null;
+    [...others.filter((c) => Number.isInteger(own(c).rank)).sort((a, b) => own(a).rank - own(b).rank),
+      ...others.filter((c) => !Number.isInteger(own(c).rank))].forEach((c, i) => { own(c).rank = i < RANKS ? i + 1 : null; });
   }
 }
 

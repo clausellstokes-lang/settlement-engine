@@ -5,11 +5,24 @@
 import { getInstFlags, getStressFlags, pick, randInt } from '../helpers.js';
 import { createGenerationWorldLaw } from '../generationContext.js';
 import { nameOf } from '../../domain/rulingPower.js';
+import { powerSentenceName } from '../../domain/display/powerSentenceName.js';
 import { drawDeclared, lineText } from '../../domain/facts/drawDeclared.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
 import { getActiveRng } from '../../kernel/rngContext.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
 import { BASE_ISSUES, STRESS_ISSUES, castFilled, kindsOfPower } from './conflictIssues.js';
+import { guardPayOf } from '../../domain/facts/guardPay.js'; // BAR4-SAFETY (F1, SF1 b)
+
+/**
+ * BAR4-SAFETY (kind F1, REVIEW-BAR-4 C6022; the chair's SF1 (b), vetoable by the owner): the quarrel over the guard's cost
+ * draws "The guard has not been paid this month" exactly as before; where the guard's pay reads paid in full
+ * (`facts/guardPay.js :: guardPayOf`: the funded gate is 1), its TWIN prints IN PLACE (the same slot, no redraw): the quarrel
+ * over what the guard costs, without the claim that nobody was paid (bar0-city-under_siege+famine-rand-23: "The garrison and
+ * city watch are well paid and well equipped" on the same page).
+ */
+/** C6022's hook, read off its own row (the issue whose stakes are who pays for defence: its first hook), and its twin. */
+export const UNPAID_GUARD_HOOK = String(BASE_ISSUES.find((row) => row.stakes === 'Who pays for defence')?.hooks?.[0] ?? '');
+export const UNPAID_GUARD_HOOK_PAID_TWIN = String(lineText({ text: 'The guard is paid in full every month, and the other side wants to know whose purse it comes out of.', needs: ['guardPresence'] }));
 
 // buildConflictPlotHooks — the quarrel's plot hook (COHERENCE-QUARREL cure 2). One hook per
 // quarrel, as the dossier prints it (the chair's ruling 3): drawn from the issue's OWN hooks and
@@ -21,9 +34,9 @@ import { BASE_ISSUES, STRESS_ISSUES, castFilled, kindsOfPower } from './conflict
 //   instFlags          — institution flags (gov power name, criminal score)
 //   stressFlags        — active stress flags
 //   facts              — the town's facts, for a hook that declares a thing
-const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressFlags, facts = null) => {
+const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressFlags, facts = null, pay = null) => {
   // ONE HASH PER QUARREL: it picks the hook and the offer's wording, so no other draw moves.
-  const seedKey = `${getActiveRng()?.seed ?? ''}::${factionA.name}>${factionB.name}::${conflict?.issue}`;
+  const seedKey = `${getActiveRng()?.seed ?? ''}::${factionA.name}>${factionB.name}::${conflict?.id ?? conflict?.issue}`; // COHERENCE-POWERS-8 (#337): the issue's stable id (its text, for every issue but a reworded one)
   const seedHash = fnv1a32(seedKey);
   const flagHooks = [];
   if (stressFlags.merchantCriminalBlur)
@@ -45,11 +58,15 @@ const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressF
   const own = Array.isArray(conflict?.hooks) ? conflict.hooks : [];
   if (own.length) {
     // Each hook carries its own text as its id, so the ledger counts a line, not a slot.
-    const drawn = drawDeclared([...own, ...flagHooks].map((line) => ({ id: line, text: line })), {
+    // BAR2-PEOPLE (PP10): a declared hook keeps its declaration (and a twin its `twinOf`); its id is still its text
+    const drawn = drawDeclared([...own, ...flagHooks].map((line) => (typeof line === 'string' ? { id: line, text: line } : { ...line, id: line.text })), {
       draw: (pool) => pool[seedHash % pool.length], facts, key: seedKey,
       poolId: 'conflicts:HOOKS', surface: 'plot_hooks', drawKind: 'H',
     });
-    if (drawn.line != null) return [String(lineText(drawn.line))];
+    if (drawn.line != null) {
+      const hook = String(lineText(drawn.line));
+      return [hook === UNPAID_GUARD_HOOK && pay === 'full' ? UNPAID_GUARD_HOOK_PAID_TWIN : hook]; // BAR4-SAFETY (F1, SF1 b): the twin in place, no redraw
+    }
   }
   const govFacName = (instFlags == null ? void 0 : instFlags._govFacName) || '',
     isFeudal =
@@ -69,7 +86,8 @@ const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressF
         ? 'the next chapter assembly'
         : 'the next council session';
   return [
-    `A neutral figure is being pressured by both ${factionA.name} and ${factionB.name} to take a side before ${arbitrationVenue}.`,
+    // POWERS-16 (the chair's ruling (r2)): a power named in a sentence takes its prose form, from one leaf
+    `A neutral figure is being pressured by both ${powerSentenceName(factionA.name)} and ${powerSentenceName(factionB.name)} to take a side before ${arbitrationVenue}.`,
     'A letter has turned up showing that someone outside both powers paid for the last clash between them.',
     ...flagHooks,
   ].slice(0, 3);
@@ -133,7 +151,29 @@ const crossFactionRivalPairs = (powers, relationships, npcs) => {
 // in ten. Draws (on the caller's stream): the count, then one issue pick per conflict.
 //   powers (powerStructure.factions rows), relationships, config, institutions, npcs (the cast:
 //   each person's home power is read from its memberships — PEOPLE-3 HOOKS, never the grouping)
-export const generateConflicts = (powers, relationships, config = {}, institutions = [], npcs = []) => {
+/** @param {any} c @returns {string|null} the quarrel's pair, unordered */
+const pairKeyOf = (c) => (Array.isArray(c?.parties) && c.parties.length === 2 ? [...c.parties].map(String).sort().join('\u0000') : null);
+
+/**
+ * BAR3-CLOSE-SWEEP-B (2026-11-16, letter c; the chair's RG1c, vetoable by the owner): A QUARREL BETWEEN TWO POWERS DOES
+ * NOT END BECAUSE THE PEOPLE WERE RE-ROLLED. A section regen's conflict list keeps every born quarrel as it is, and takes
+ * its own draws only for the pairs the born list does not name, up to the cap (the born first): the draw's own ceiling
+ * (`generateConflicts :: randInt(1, 3)`), read here as a local, so the tuning estate gains no named constant. A conflict names powers
+ * only (`parties`, `issue`, `stakes`, `intensity`, `desc`, `plotHooks`): no person of the old cast is carried. `drawn` is
+ * returned beside the list so the caller twins only the rows of the pairs the born list did not name (their rows are the
+ * generator's un-twinned rows: a row is twinned only where a conflict names its pair). Pure; no draw.
+ * @param {ReadonlyArray<any>} born @param {ReadonlyArray<any>} regen
+ * @returns {{ conflicts: any[], drawn: any[] }}
+ */
+export function carryBornQuarrels(born, regen) {
+  const cap = 3; // generateConflicts :: randInt(1, 3), the most quarrels one draw deals
+  const kept = (Array.isArray(born) ? born : []).slice(0, cap);
+  const named = new Set(kept.map(pairKeyOf).filter(Boolean));
+  const drawn = (Array.isArray(regen) ? regen : []).filter((c) => !named.has(pairKeyOf(c))).slice(0, cap - kept.length);
+  return { conflicts: [...kept, ...drawn], drawn };
+}
+
+export const generateConflicts = (powers, relationships, config = {}, institutions = [], npcs = [], defenseProfile = null) => { // BAR4-SAFETY (SF1 b): the defence profile, for the guard's pay
   const named = (Array.isArray(powers) ? powers : [])
     .map((row) => ({ name: nameOf(row), category: row?.category, isGoverning: row?.isGoverning === true }))
     .filter((row) => row.name !== '');
@@ -155,7 +195,10 @@ export const generateConflicts = (powers, relationships, config = {}, institutio
       ...BASE_ISSUES,
       ...Object.keys(STRESS_ISSUES).filter((type) => stressTypes.includes(type)).flatMap((type) => STRESS_ISSUES[type]),
     ],
-    facts = () => factsOf({ institutions, config, powerStructure: { factions: powers } });
+    // BAR2-PEOPLE (PP10): the birth's crisis is handed in the stress shape (factsOf.js :: birthFactsOf's rule), so a hook
+    // that excludes the siege reads it; no other line of these pools declares a crisis
+    facts = () => factsOf({ institutions, config, stress: stressTypes.map((type) => ({ type })), powerStructure: { factions: powers }, defenseProfile }),
+    pay = guardPayOf({ institutions, defenseProfile }); // BAR4-SAFETY (F1, SF1 b): how the guard is paid, read off the same record
   for (let i = 0; i < conflictCount; i++) {
     const { factionA, factionB, ties } = rivalPairs[i];
     const applicableTemplates = issueTemplates.filter((template) => {
@@ -199,8 +242,9 @@ export const generateConflicts = (powers, relationships, config = {}, institutio
       issue: chosen.issue,
       stakes: chosen.stakes,
       intensity,
-      desc: `${factionA.name} and ${factionB.name} are in ${intensity} conflict over ${chosen.issue.toLowerCase()}. The stakes are ${chosen.stakes.toLowerCase()}.${touched ? ` It reaches ${touched.name} too, who are not a party to it.` : ''}`,
-      plotHooks: buildConflictPlotHooks(factionA, factionB, chosen, instFlags, stressFlags, facts),
+      // POWERS-16 (the chair's ruling (r2)): the powers named in the sentence take their prose form, from one leaf
+      desc: `${powerSentenceName(factionA.name)} and ${powerSentenceName(factionB.name)} are in ${intensity} conflict over ${chosen.issue.toLowerCase()}. The stakes are ${chosen.stakes.toLowerCase()}.${touched ? ` It reaches ${powerSentenceName(touched.name)} too, who are not a party to it.` : ''}`,
+      plotHooks: buildConflictPlotHooks(factionA, factionB, chosen, instFlags, stressFlags, facts, pay),
     });
   }
   return conflicts;

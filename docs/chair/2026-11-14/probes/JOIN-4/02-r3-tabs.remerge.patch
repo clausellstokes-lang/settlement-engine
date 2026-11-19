@@ -1,0 +1,28 @@
+4ebe3d6cbb5b2b0a48daac77ed54a1d0c415a993 join(JOIN-4 · 2): merge lane/r3-tabs-2026-11-13 at 68e9e97b5 — the second landing
+
+diff --git a/tests/lint/proseWiringCensus.walker.test.js b/tests/lint/proseWiringCensus.walker.test.js
+remerge CONFLICT (content): Merge conflict in tests/lint/proseWiringCensus.walker.test.js
+index e506b740f..77bf00bd4 100644
+--- a/tests/lint/proseWiringCensus.walker.test.js
++++ b/tests/lint/proseWiringCensus.walker.test.js
+@@ -1787,7 +1787,6 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
+     // beside a `stress` write gain a generator-write row (historyEventStrands.js:42, npcGenerator.js:176, :791). ⚠ FINDINGS,
+     // NOT JOINS, like the two rows above; the identifier (ratified) rows are unchanged at three.
+     // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 9 -> 10.
+-<<<<<<< c2c12792e (join(JOIN-4 · 1): merge lane/r3-code-c-2026-11-13 at da0f201e6 — the second landing)
+     // JOIN-2 (the true join, 2026-11-14): MEASURED by these four assertions at the joined tree and at every lane's merged tip
+     // (rows · endpoints · noCandidate · docblock): the line 976db5b19 14 · 4 · 85 · 37; r2-code-a 19 · 5 · 84 · 37; r3-tabs
+     // 14 · 4 · 85 · 41; coherence-upkeep (defence) 14 · 4 · 84 · 39; the other six lanes as the line. THE JOIN 19 · 5 · 83 · 43:
+@@ -1797,12 +1796,6 @@ describe('car 0f — the ALIAS DRAFT: measured, nothing ratified, no leaf writte
+     expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(5);
+     expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(83);
+     expect(draft.docblockReports.length, 'the withdrawn candidates, reported and never proposed').toBe(43); // COHERENCE-AGREE (2026-11-11): 36 -> 37, one docblock of the lane's that names an endpoint token, re-measured at its tip; reported, never proposed // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 28 -> 29 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 29 -> 34 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (28 -> 35) // W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (28 -> 36) // R3-TABS L2 (f0adcd83a, re-keyed by R3-TABS-2): the within-the-bar disqualifiers' docblocks name two endpoint tokens; reported, never proposed: 37 -> 39.
+-=======
+-    expect(draft.rows.length, 'candidate rows at this tip, docblock withdrawn').toBe(14); // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (9 -> 14) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (9 -> 15) // MERGE-WAVE at the W3 POW merge (2026-11-08): measured at the merged tip — 14: W3 POW's new candidate is one the W1/W2 side already proposes, so it counts once (additive would be 15)
+-    expect(draft.endpointsWithCandidate, 'endpoints with at least one candidate').toBe(4);
+-    expect(draft.noCandidate.length, 'and the wiring debt the SEAM and WAVE trains inherit').toBe(85);
+-    expect(draft.docblockReports.length, 'the withdrawn candidates, reported and never proposed').toBe(42); // R3-TABS-4 and R3-TABS-5 (2026-11-14, re-keyed with its cause, measured): 39 at bb2bf91c5 -> 41 at 301572583 -> 42 at 1ad5ca6e7, three docblocks of the lane's own posture strikes in defenseStateProse.js that name an endpoint token: reported, never proposed (the row arm below stays docblock-free). // COHERENCE-AGREE (2026-11-11): 36 -> 37, one docblock of the lane's that names an endpoint token, re-measured at its tip; reported, never proposed // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 28 -> 29 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 29 -> 34 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (28 -> 35) // W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (28 -> 36) // R3-TABS L2 (f0adcd83a, re-keyed by R3-TABS-2): the within-the-bar disqualifiers' docblocks name two endpoint tokens; reported, never proposed: 37 -> 39.
+->>>>>>> 68e9e97b5 (docs(R3-TABS-5): the hand-back current: (e) (d) (g), the ADDENDUM, the close)
+     expect(draft.rows.every((r) => r.evidence !== 'docblock'), 'no row rests on a comment').toBe(true);
+     // ⭐ `generator-write` IS AN AST READING NOW (SITTING §P.2-27, cure: the fold's R6). Five of
+     // the nine citations the first cut carried were not writes of world state at all — a

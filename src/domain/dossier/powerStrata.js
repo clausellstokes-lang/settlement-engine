@@ -32,6 +32,7 @@
 import { coupContenders } from '../rulingPowerCoup.js';
 import { governingFactionOf, nameOf, num } from '../rulingPower.js';
 import { factionArchetype } from '../factionArchetypes.js';
+import { powerSentenceName } from '../display/powerSentenceName.js';
 
 /** @typedef {import('../rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
 /** @typedef {import('../rulingPower.js').RulingFaction} RulingFaction */
@@ -439,6 +440,39 @@ export function withoutShownSentences(note, shown) {
 }
 
 /**
+ * BAR2-PEOPLE (PP2, the chair's ruling of 2026-11-15, vetoable by the owner): ONE HOME FOR WHO DECIDES. Under an
+ * occupation the power the occupation sent in decides (factionDynamics.js: the hall "carries out what" it "decides"),
+ * whatever the figures: the note named the strongest power ("made by Merchant Guilds" beside "The Guild Council carries
+ * out what Occupation Authority decides"). Elsewhere the decider is the outranking rival, the fact the relation line reads.
+ * An occupier is filed under the military category, so its name decides too (crisisCast.js :: isOccupier's rule, less its `garrison rule` alternative: no generated name carries it, and its defence word is the defence home's to read: BAR2-PEOPLE-3, the books, defenceFactReaders).
+ * @param {RulingPowerSettlement | null | undefined} settlement
+ * @returns {string | null}
+ */
+export function deciderOf(settlement) {
+  const governing = governingFactionOf(settlement);
+  if (!governing) return null;
+  const factions = /** @type {StrataFaction[]} */ (Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : []);
+  const occupier = factions.find((f) => f !== governing && nameOf(f) !== nameOf(governing)
+    && (factionArchetype(f) === 'occupation' || /occupation|occupying|imperial\s+presence|annex/i.test(nameOf(f) || '')));
+  return occupier ? nameOf(occupier) || null : outrankingRivalOf(settlement);
+}
+
+/**
+ * Does a relation line of the record already say that `decider` decides for the governing power ("<gov> carries out what
+ * <decider> decides.", "<gov> keeps the title; <decider> makes the decisions that matter.")? Then the note is silent.
+ * @param {RulingPowerSettlement | null | undefined} settlement @param {StrataFaction | null} governing @param {string} decider
+ * @returns {boolean}
+ */
+function relationNamesDecider(settlement, governing, decider) {
+  const rows = /** @type {Array<{ pair?: unknown, narrative?: unknown }>} */ (Array.isArray(settlement?.powerStructure?.factionRelationships) ? settlement.powerStructure.factionRelationships : []);
+  const gov = governing ? nameOf(governing) : null;
+  // BAR3-PEOPLE (P2, C5598 C7553; the chair's word of 19:53): ANY relation row of the pair is the pair's one home ("tense":
+  // the two do not agree on who decides; "competitive": taxes bargained, not ordered; "dependent": each props up the
+  // other): the note claims no decider beside it (67 of the 91 printing towns at 59185b62a held such a row)
+  return rows.some((row) => Array.isArray(row?.pair) && row.pair.includes(gov) && row.pair.includes(decider));
+}
+
+/**
  * A faction's crisis note as the dossier prints it. The "appears to govern" claim
  * stays only on the governing faction and only when a rival outranks it, and then
  * it names that rival; otherwise the sentence is dropped and the rest of the note
@@ -451,7 +485,10 @@ export function crisisNoteFor(settlement, faction) {
   const note = typeof faction?.crisisNote === 'string' ? faction.crisisNote : '';
   if (!note.includes(APPEARS_TO_GOVERN)) return note;
   const governing = governingFactionOf(settlement);
-  const rival = governing && faction === governing ? outrankingRivalOf(settlement) : null;
-  const said = rival ? `Holds the title; the decisions that matter are made by ${rival}.` : '';
+  const rival = governing && faction === governing ? deciderOf(settlement) : null;
+  // POWERS-16 (the chair's ruling (r2)): the rival named in the sentence takes its prose form, from one leaf
+  // BAR2-PEOPLE (PP2): a relation line that already names the decider is its one home; the note is then silent
+  const said = rival && !relationNamesDecider(settlement, governing, rival)
+    ? `Holds the title; the decisions that matter are made by ${powerSentenceName(rival)}.` : '';
   return note.replace(APPEARS_TO_GOVERN, said).replace(/\s{2,}/g, ' ').trim();
 }

@@ -1,0 +1,39 @@
+  8i.resource      towns    1 · instances     1 · distinct lines    1 · things    1 · held by the seam 0 · by cause crisis 1/1t
+  8i.surplus       towns    1 · instances     1 · distinct lines    1 · things    1 · held by the seam 0 · by cause calm-other 1/1t
+  8j.exports       towns    2 · instances     2 · distinct lines    2 · things    2 · held by the seam 0 · by cause born-calm 2/2t
+  8j.local         towns    1 · instances     1 · distinct lines    1 · things    1 · held by the seam 0 · by cause born-calm 1/1t
+  8j.outputs       towns    2 · instances     2 · distinct lines    1 · things    2 · held by the seam 2 (SEAM-ECON 8) · by cause born-calm 2/2t
+  8k.trade         towns    7 · instances     7 · distinct lines    5 · things    7 · held by the seam 6 (SEAM-SCENES 9, SEAM-SCENES 3, SEAM-SCENES 2) · by cause born-calm 3/3t · short-in-crisis 4/4t
+  8k.trade.mild    towns    6 · instances     7 · distinct lines    5 · things    6 · held by the seam 2 (SEAM-SCENES 3) · by cause crisis 7/6t
+PERSON LINES OF A MARKED HOUSE (8h census): kind · cause · mark in front / no mark (of them, a line of the person's own trade)
+  deal    short   lines   343 · mark in front   84 (trade 84) · no mark  259 (trade 248) · towns 94
+  deal    crisis  lines   279 · mark in front   42 (trade 42) · no mark  237 (trade 193) · towns 47
+  wants   short   lines   343 · mark in front    0 (trade 0) · no mark  343 (trade 16) · towns 94
+  wants   crisis  lines   279 · mark in front    0 (trade 0) · no mark  279 (trade 19) · towns 47
+  secret  short   lines   343 · mark in front    0 (trade 0) · no mark  343 (trade 267) · towns 94
+  secret  crisis  lines   279 · mark in front    0 (trade 0) · no mark  279 (trade 119) · towns 47
+  hook    short   lines     3 · mark in front    0 (trade 0) · no mark    3 (trade 3) · towns 3
+  hook    crisis  lines    35 · mark in front    0 (trade 0) · no mark   35 (trade 35) · towns 27
+CONTROLS (stands must be FOUND; explained must be clear of every rule of the seat)
+  8f stands    C8021   n/a                              town not in this render
+  8f stands    C40674  n/a                              town not in this render
+  8f stands    C41826  n/a                              town not in this render
+  8f stands    C41825  n/a                              town not in this render
+  8f stands    C33921  n/a                              town not in this render
+  8f stands    C4828   n/a                              town not in this render
+  8g stands    C39519  n/a                              town not in this render
+  8h stands    C2524   n/a                              town not in this render
+  8h stands    C8842   n/a                              town not in this render
+  8h stands    C43844  n/a                              town not in this render
+  8h explained C37251  n/a                              town not in this render
+  8i stands    C7539   n/a                              town not in this render
+  8i stands    C20104  n/a                              town not in this render
+  8i stands    C20287  n/a                              town not in this render
+  8i explained C19589  n/a                              town not in this render
+  8i explained C4179   n/a                              town not in this render
+  8j stands    C44447  n/a                              town not in this render
+  8k stands    C12508  n/a                              town not in this render
+  8k stands    C45015  n/a                              town not in this render
+  8k explained C37728  n/a                              town not in this render
+  8k explained C9756   n/a                              town not in this render
+controls off: 0

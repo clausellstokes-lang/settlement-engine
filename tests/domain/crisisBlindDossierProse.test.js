@@ -101,6 +101,7 @@ const BAND_FIELD = Object.freeze({
   food: (f, v) => ({ ...f, famine: { ...f.famine, band: v } }),
   prosperity: (f, v) => ({ ...f, prosperity: v }),
   crime: (f, v) => ({ ...f, crime: v }),
+  law: (f, v) => ({ ...f, lawBand: v }), // BAR5-SAFETY (2026-11-16): the `law` band (`lawBand.js`)
   stores: (f, v) => ({ ...f, storesMonths: v }),
 });
 const withInstitution = (f, kind, want) => {
@@ -123,6 +124,41 @@ const PRESENCE_SETTER = {
   starving: (f, _a, want) => ({ ...f, famine: { ...f.famine, starvingAllowed: want } }),
   ...Object.fromEntries(['fish', 'grain', 'game', 'livestock'].map((k) => [k, (f, _a, want) => ({
     ...f, foodSources: [...(f.foodSources || []).filter((x) => x !== k), ...(want ? [k] : [])] })])),
+  // BAR4-CORPUS-ECO (2026-11-16): the two atoms added beside the food sources (`leadingSourceSpent.js`, `ownPlots.js`)
+  'source spent': (f, _a, want) => ({ ...f, leadingSourceSpent: want }),
+  'own plots': (f, _a, want) => ({ ...f, ownPlots: want }),
+  // BAR4-CLOSE-SWEEP (2026-11-16): the round's other one-home presence atoms (`factVocabulary.js`: BAR4-CORPUS-DEF 6f8081add's
+  // `magic supply`, `danger coming`, `criminal income`, which DS-DEF / DS-GEN lines exclude; BAR4-HOUSES 3cf213071's `timber at hand`)
+  'magic supply': (f, _a, want) => ({ ...f, magicSupply: want }),
+  'danger coming': (f, _a, want) => ({ ...f, dangerComing: want }),
+  'criminal income': (f, _a, want) => ({ ...f, criminalIncome: want }),
+  'timber at hand': (f, _a, want) => ({ ...f, timberAtHand: want }),
+  // BAR6-POWERS (2026-11-16): `seat members` (`seatMembers.js`), declared by DS-POW-5 › council's counterforce line and its twin
+  'seat members': (f, _a, want) => ({ ...f, seatMembers: want }),
+  // DEBT-1 (2026-11-17): the presence atoms state pools declare since the table's last extension (one-home facts each):
+  // BAR6-CRIME's `crime wave` (`lawBand.js :: crimeWaveStands`) and `rival rings` (`rivalRings.js`), BAR6-DEFDESK's `monster
+  // frontier` (`monsterFrontier.js`), and `food surplus` (the food record's `growsMoreThanEats`)
+  'crime wave': (f, _a, want) => ({ ...f, crimeWave: want }),
+  'rival rings': (f, _a, want) => ({ ...f, rivalRings: want }),
+  'monster frontier': (f, _a, want) => ({ ...f, monsterFrontier: want }),
+  'food surplus': (f, _a, want) => ({ ...f, growsMoreThanEats: want }),
+  // BAR8-DESKS-2 (2026-11-18, ruling BR28 (1)): the round BAR8's two presence atoms (one-home facts each): DESKS-ECO's
+  // `critical import brought in` (`criticalImportBroughtIn.js`, DS-ECO-12 CRITICAL IMPORT v2 and its twin v4) and DESKS-DEF's
+  // `uprising` (`uprising.js`, DS-POW-4 Stable v3)
+  'critical import brought in': (f, _a, want) => ({ ...f, criticalImportBroughtIn: want }),
+  uprising: (f, _a, want) => ({ ...f, uprising: want }),
+  // FAULTS-DESKS (2026-11-18, FR6): `court or gaol` (`factsOf.js :: courtOrGaol`), declared by the seven record-of-crimes lines of DS-DEF-3
+  'court or gaol': (f, _a, want) => ({ ...f, courtOrGaol: want }),
+  // LAST-VARIETY (2026-11-18): `prison` (the defence home's own atom), declared by DS-DEF-3 › Safe v6 (`no prison`)
+  prison: (f, _a, want) => ({ ...f, defence: { ...f.defence, prison: want } }),
+  // FAULTS-NEED (FR2): `need not brought in` (keyed; `needNotBroughtIn.js`), declared by DS-ECO-8 POOR v1; the key's answer set,
+  // every other key as it was
+  'need not brought in': (f, a, want) => ({ ...f, needNotBroughtIn: { ...(f.needNotBroughtIn || {}), [a.key]: want } }),
+  // FAULTS-ROWS (FR12 (3)): `fish bought in` (`fishBoughtIn.js`), declared by the fish market's card (DESC_LATE_SIBLINGS)
+  'fish bought in': (f, _a, want) => ({ ...f, fishBoughtIn: want }),
+  // BAR8-DESKS-2 (2026-11-18, the chair's ruling BR34): `trade at work` (keyed; `tradeAtWork.js`), now declared by a crisis-scoped
+  // pool (DS-ECO-8 POOR v3: `no trade at work: building`); the key's answer set, every other key as it was
+  'trade at work': (f, a, want) => { const prior = f.tradeAtWork; return { ...f, tradeAtWork: (k) => (k === a.key ? want : (typeof prior === 'function' ? prior(k) : undefined)) }; },
   imports: (f, _a, want) => ({ ...f, imports: want ? ['X'] : [] }),
   exports: (f, _a, want) => ({ ...f, exports: want ? ['X'] : [] }),
   priest: (f, _a, want) => ({ ...f, faith: { ...f.faith, seniorCleric: want ? { name: 'X' } : null } }),
@@ -200,6 +236,24 @@ const SET_ASIDE = Object.freeze({
   "DS-STR-1 :: Overview's own section framing": 'the empty `stress[]` (the no-banner rung; R-DST-K): its key requires no crisis, so it cannot be mute under one — ratified by construction, the chair 2026-11-07 06:5x',
 });
 
+/**
+ * THE CELLS SET ASIDE BY POOL AND FAMILY (the chair's ruling K31, 2026-11-15, vetoable by the owner; the shape the
+ * crisis seat's TAIL-CRISIS-7 hand-back asked for). `SET_ASIDE` above lifts a pool WHOLE, so a pool declared mute under
+ * ONE family would red when it speaks under any other. A cell here is a pool-and-family DECLARED mute, named with its
+ * declaring commit: it must be mute (the arm reds if it speaks), and every other family that pool denies is still held
+ * to the law below (it must speak). Keyed `<block> :: <pool> :: <family>`, exact; a listed cell the walk never reaches
+ * is stale and reds. Measured by TAIL-CLOSE-POOLS-1 at the joined line 0b1248dbf: these five, each the `threat` family
+ * (read under a siege), and no other mute cell.
+ * @type {Readonly<Record<string, string>>}
+ */
+const SET_ASIDE_CELLS = Object.freeze({
+  'DS-POW-6 :: operation role duty evasion :: threat': 'f8e7326ce (W2-WRITE-SIDE-REST-2 D): v1-v3 declared off a siege (nothing arrives by road to evade the gate)',
+  'DS-GEN-13 :: ENTREPOT :: threat': '32ab37da (W2-WRITE-SIDE-REST-2 D): the siege Overview\'s road lines, v1 among them, declared off a siege',
+  'DS-ECO-10 :: POSTURE: vulnerable :: threat': 'c21abdd5 (W2-WRITE-SIDE-ECO-3 E ww500): v1-v3 declared off a siege (the way out is closed, not unreliable)',
+  'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized :: threat': '35acb7794 (W2-WRITE-5 A, H4): the threat twins v4-v6 declared off a siege and an occupation; v1-v3 speak only with no threat at hand',
+  'DS-ECO-12 :: INCOME WEIGHT: the religious houses :: threat': '13c6618e0 (W2-WRITE-5 A, H5): the no-house lines v3, v4 declared off a siege; the house lines v1, v2 read the compound `sacredHouse` the synthesised place cannot hold, and they still speak under a siege where a house stands (w5-village-under_siege-3 draws v1, v2, TAIL-CLOSE-POOLS-1\'s census)',
+});
+
 /** The instrument's claims about one variant's text under one place. */
 const claimsOf = (text, place) => crisisBlindFindings(place, { page: text });
 
@@ -240,13 +294,24 @@ describe('F12 · the crisis dimensions on the state-prose desks', () => {
     }
     expect(unmarked).toEqual([]);
     // Non-vacuity, measured at the cure: 29 variants carry a claim (some read by more than one family's representative).
-    expect(claims).toBeGreaterThanOrEqual(29);
+    // ⭐ THE FLOOR FOLLOWS THE CURES (the chair's K30 (a), 2026-11-15, vetoable by the owner): a LIVENESS pin of the finder,
+    // not a golden; the writing seats cured calm claims AT THE SOURCE and emptied what it counts: 23 by JOIN-4 · 6
+    // (1c01bdda, the first point measured; the earlier fall from 29 not located), 22 at 9eb08470a (corpus-def), 21 at
+    // 38a21278 (corpus-eco), 17 at 31a6f72e (corpus-def). Re-measured 17 at TAIL-CRISIS-7's tip (the joined line at 74688857c). No planted case holds it, so
+    // more cures can take it to zero: the pin then needs a plant, not a floor (the hand-back says so).
+    // 16 at BAR2-CORPUS batch 1 (2026-11-15, measured on the merged tree af120bdd4): a calm claim cured at the source.
+    // 15 at BAR3-CORPUS batch 1 (2026-11-15, measured on lane/bar3-corpus-2026-11-15 over 59185b62a): a calm claim cured at the source.
+    // 14 at BAR3-CORPUS-3 batch 3 (2026-11-15, measured on lane/bar3-corpus-2026-11-15 over 52f0a1684): DS-DEF-4 organized v4's "very little street violence" cured at the source.
+    // 13 at BAR4-CORPUS-DEF 6f8081add (2026-11-16, measured by BAR4-CLOSE-SWEEP on the joined line f19c3b28b against c4ac1ef84a; the
+    // seat's DECLARED rewording, its hand-back's inventory diff): DS-DEF-11 WALLED-QUIET v3's threat claim cured at the source (14 - 1).
+    expect(claims).toBeGreaterThanOrEqual(13);
   });
 
   it('a pool the marks partition is never mute under a crisis, and never draws a calm claim there', () => {
     const mute = [];
     const blind = [];
     const setAsideHeard = [];
+    /** @type {string[]} */ const cellsSeen = [];
     for (const [blockId, block] of Object.entries(LEAVES)) {
       if (UNMOUNTED_BLOCKS.includes(blockId)) continue;
       for (const [poolKey, pool] of Object.entries(block.pools || {})) {
@@ -261,6 +326,12 @@ describe('F12 · the crisis dimensions on the state-prose desks', () => {
             if (eligible.length > 0) setAsideHeard.push(`${blockId} :: ${poolKey} :: ${family}`);
             continue;
           }
+          const cell = `${blockId} :: ${poolKey} :: ${family}`;
+          if (cell in SET_ASIDE_CELLS) {
+            cellsSeen.push(cell);
+            if (eligible.length > 0) setAsideHeard.push(`${cell} (declared mute by ${SET_ASIDE_CELLS[cell]})`);
+            continue;
+          }
           const compound = compoundReadsOf(pool, read);
           if (eligible.length === 0) mute.push(`${blockId} :: ${poolKey} :: ${family}${compound.length ? ` (reads the compound ${compound.join(' · ')}: set it aside by name)` : ''}`);
           for (const v of eligible) if (claimsOf(v.text, placeUnder(type)).length) blind.push(`${blockId} :: ${poolKey} :: v${v.vid}`);
@@ -269,6 +340,8 @@ describe('F12 · the crisis dimensions on the state-prose desks', () => {
     }
     // The set-aside pools are each MUTE under every family they deny, or the entry is stale.
     expect(setAsideHeard, 'a set-aside pool now yields a line: lift it from SET_ASIDE').toEqual([]);
+    // Every set-aside cell is a cell the walk reaches (a pool that denies that family), or the entry is stale.
+    expect([...new Set(cellsSeen)].sort(), 'a set-aside cell the walk no longer reaches: lift it from SET_ASIDE_CELLS').toEqual(Object.keys(SET_ASIDE_CELLS).sort());
     // Measured at the ruling (2026-11-07): on the minimal place 46 mute cells, all but DS-STR-1's
     // and DS-CND-1's the fixture's lie (a market, a temple, a watch, a value the pool reads, absent);
     // on the pool's own record 8, of which DS-STR-1's 5 are set aside above and DS-CND-1 boom's 3

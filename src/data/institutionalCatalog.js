@@ -142,7 +142,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Common grazing land', face: null, required: true, tags: ['essential', 'agriculture'], priorityCategory: 'economy' },
       at: {
-        hamlet: { desc: 'Shared pasture for village livestock.' },
+        hamlet: { desc: "Shared pasture for the hamlet's livestock." },
         village: { desc: 'Shared pasture for village livestock, held in common alongside the open fields.' },
       },
       ceiling: { tier: 'village', reason: 'Commons are a rural institution; towns graze on leased or enclosed land outside the walls.' },
@@ -155,9 +155,9 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       ceiling: { tier: 'thorp', reason: 'A hamlet stores household by household; the granary is the town rung.' },
     },
     {
-      shared: { name: "Fisher's landing", face: 'the boat-headman', tradeRouteRequired: ['port', 'river'], terrainAccess: ['coastal', 'riverside'], desc: 'A rough landing with racks for drying and salting fish. Primary protein source near water.', tags: ['trade'], priorityCategory: 'economy' },
+      shared: { name: "Fisher's landing", face: 'the boat-headman', tradeRouteRequired: ['port', 'river'], terrainAccess: ['coastal', 'riverside'], desc: 'A rough landing with racks for drying and salting fish. Whenever fish can be had, the primary protein source near water.', tags: ['trade'], priorityCategory: 'economy' },
       at: {
-        thorp: { name: 'Fishing community', baseChance: 0.72, desc: "Nets, traps, and drying racks. The settlement's economy is inseparable from the water.", tags: ['food', 'water', 'economy'] },
+        thorp: { name: 'Fishing community', baseChance: 0.72, desc: "Nets, traps, and drying racks, kept by the households that fish the water.", tags: ['food', 'water', 'economy'] },
         hamlet: { baseChance: 0.55 },
         village: { baseChance: 0.55 },
       },
@@ -167,13 +167,13 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Fishmonger', face: 'the fishmonger' },
       at: {
-        village: { baseChance: 0.35, forbiddenTradeRoutes: ['isolated'], desc: 'Buys, salts, and sells fish. The link between fishing and consumption. Near water: fresh. Inland: dried or salted.', tags: ['trade'], priorityCategory: 'economy' },
+        village: { baseChance: 0.35, forbiddenTradeRoutes: ['isolated'], desc: 'Buys, salts, and sells fish, whenever fish can be had. The link between the fisher and the buyer. Near water: fresh. Inland: dried or salted.', tags: ['trade'], priorityCategory: 'economy' },
       },
       ceiling: { tier: 'village', reason: 'Absorbed by the fish market at town scale.' },
       successor: 'Fish market',
     },
     {
-      shared: { front: 'prime', name: 'Fish market', face: 'the master fishmonger', desc: "A covered fish market under the market wardens. The morning's catch or the week's salted barrels, sold by weight and inspected for rot.", tags: ['market', 'trade'], priorityCategory: 'government' },
+      shared: { front: 'prime', name: 'Fish market', face: 'the master fishmonger', desc: "A covered fish market under the market wardens. Whenever fish can be had, the morning's catch or the week's salted barrels are sold by weight and inspected for rot.", tags: ['market', 'trade'], priorityCategory: 'government' },
       at: {
         village: { baseChance: 0.3, desc: "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait." },
         town: { baseChance: 0.45 },
@@ -193,8 +193,8 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Dairy farmer', face: 'the dairy farmer', tags: ['food', 'trade'], priorityCategory: 'economy' },
       at: {
-        hamlet: { baseChance: 0.25, desc: 'Keeps cattle or goats for milk, butter, and cheese. The only reliable fat and protein source during grain shortages. Seasonal. Production peaks in summer.' },
-        village: { baseChance: 0.22, desc: 'Keeps cattle or goats for milk, butter, and soft cheese. Essential protein and fat during lean grain seasons. Sells the surplus to neighbours.' },
+        hamlet: { baseChance: 0.25, desc: 'A dairy for milk, butter, and cheese from cattle or goats, whenever livestock can be had. Seasonal. Production peaks in summer.' },
+        village: { baseChance: 0.22, desc: 'A dairy for milk, butter, and soft cheese, from cattle or goats, whenever livestock can be had. Any surplus goes to neighbours.' },
       },
       ceiling: { tier: 'village', reason: 'Dairying is rural; towns buy milk, butter, and cheese at market.' },
     },
@@ -213,7 +213,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       ceiling: { tier: 'village', reason: 'Fowling is a marsh and field trade; towns buy the birds at market.' },
     },
     {
-      shared: { name: "Woodcutter's camp", face: 'the camp foreman', terrainRequired: ['forest'], desc: 'Felling crews and a stacking yard at the forest edge. The settlement lives on timber, charcoal wood, and the carting of both.', tags: ['economy', 'timber'], priorityCategory: 'economy' },
+      shared: { name: "Woodcutter's camp", face: 'the camp foreman', terrainRequired: ['forest'], desc: 'Felling crews and a stacking yard at the forest edge, cutting timber and charcoal wood and carting both.', tags: ['economy', 'timber'], priorityCategory: 'economy' },
       at: {
         thorp: { baseChance: 0.55, desc: 'Seasonal felling and timber stacking. The whole settlement smells of fresh sawdust and pine resin.' },
         hamlet: { baseChance: 0.45 },
@@ -240,7 +240,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       ceiling: { tier: 'village', reason: 'Peat is cut for the household hearth; towns buy fuel through the charcoal and coal trade.' },
     },
     {
-      shared: { name: 'Mine', face: 'the mine captain', desc: 'A worked shaft or adit with hired crews, winding gear, and ore carts. Where the deposits run deep, the mine is the reason the settlement grew.', tags: ['trade'], priorityCategory: 'economy' },
+      shared: { name: 'Mine', face: 'the mine captain', desc: 'A mine of shafts and adits, with its winding gear and ore carts, worked whenever ore can be had.', tags: ['trade'], priorityCategory: 'economy' },
       at: {
         hamlet: { name: 'Mine (open cast)', baseChance: 0.2, desc: 'A shallow excavation or shaft dug to extract iron ore, coal, or stone. Employs the poorest labourers. Dangerous, dirty, and essential.' },
         village: { baseChance: 0.12, desc: 'A shaft or excavation to extract iron ore, coal, or stone. Requires capital and organisation a thorp cannot sustain, but a village near deposits can. Employs the poorest labourers.' },
@@ -250,19 +250,19 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Stone quarry', face: 'the quarry master', desc: 'A working quarry with dressed-stone yards and a crew of masons. Builds the walls and churches of half the region.', tags: ['trade'], priorityCategory: 'economy' },
+      shared: { name: 'Stone quarry', face: 'the quarry master', desc: 'A stone quarry and its dressing yards, worked whenever good stone can be had.', tags: ['trade'], priorityCategory: 'economy' },
       at: {
-        hamlet: { baseChance: 0.18, desc: 'Cuts and dresses stone blocks for construction. A crew of quarrymen with picks and wedges. Slow but the only way to get proper building material.' },
-        village: { baseChance: 0.15, desc: "Systematic extraction of building stone. A village on good quarry land can supply half a region's construction needs, and the quarry master knows it." },
+        hamlet: { baseChance: 0.18, desc: 'A stone quarry, opened by quarrymen with picks and wedges. Slow work, and the only source of proper building stone the place has had.' },
+        village: { baseChance: 0.15, desc: "A quarry of building stone, laid out in ordered workings. A village on good quarry land can supply half a region's construction needs, and the quarry master knows it." },
         town: { baseChance: 0.15 },
         city: { baseChance: 0.1 },
         metropolis: { baseChance: 0.1 },
       },
     },
     {
-      shared: { name: 'Salt works', face: 'the salt master', desc: "Evaporation pans or brine processing along the coast or riverbank. Salt is the settlement's most traded commodity by weight. Every household needs it.", tags: ['trade'], priorityCategory: 'economy' },
+      shared: { name: 'Salt works', face: 'the salt master', desc: "Evaporation pans and brine-works, at work whenever brine can be had. Every household needs salt.", tags: ['trade'], priorityCategory: 'economy' },
       at: {
-        hamlet: { baseChance: 0.2, desc: 'Evaporates naturally saline brine into the raw salt used for preservation. Viable only where salt flats, springs, or other workable brine deposits provide a local supply.' },
+        hamlet: { baseChance: 0.2, desc: 'Evaporates saline brine, whenever brine can be had, into the raw salt used for preservation. It works best where brine lies near.' },
         village: { baseChance: 0.14, tradeRouteRequired: ['port', 'river'], terrainAccess: ['coastal', 'riverside'] },
         town: { baseChance: 0.15, tradeRouteRequired: ['port', 'river'], terrainAccess: ['coastal', 'riverside'] },
         city: { baseChance: 0.12, tradeRouteRequired: ['port', 'river'], terrainAccess: ['coastal', 'riverside'] },
@@ -290,8 +290,8 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { name: 'Weekly market', face: null, exclusiveGroup: 'marketScale', tags: ['essential', 'market', 'trade'], priorityCategory: 'economy' },
       at: {
         hamlet: { name: 'Periodic market', baseChance: 0.12, desc: 'Monthly or seasonal trading day. No charter. Just habit, proximity, and a flat piece of ground.', tags: ['market', 'trade'] },
-        village: { baseChance: 0.6, desc: 'Local produce and goods. Requires royal/noble charter.', tags: ['market', 'trade'] },
-        town: { required: true, desc: 'Royal charter required. Major economic driver.' },
+        village: { baseChance: 0.6, desc: 'Local produce and goods. Requires a charter.', tags: ['market', 'trade'] },
+        town: { required: true, desc: 'Charter required. Major economic driver.' },
         city: { name: 'Daily markets', required: true, desc: 'Permanent market activity in multiple locations.' },
         metropolis: { name: 'District markets (5-10)', required: true, desc: 'Five to ten permanent specialized market districts: grain, livestock, cloth, metals, exotica.' },
       },
@@ -322,7 +322,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { front: 'prime', face: 'the senior guild master', tags: ['guild', 'trade'], priorityCategory: 'economy' },
       at: {
         town: { name: 'Merchant guilds (3-8)', baseChance: 0.8, desc: 'Control trade in specific goods.' },
-        city: { name: 'Merchant guilds (15-40)', baseChance: 0.95, desc: 'Powerful political force.' },
+        city: { name: 'Merchant guilds (15-40)', baseChance: 0.95, desc: 'They handle much of the city\'s trade.' }, // BAR2-PLACES (PL4): no power is claimed where no merchant power stands (the powers' own); was 'A power in the city\'s trade.'
         metropolis: { name: 'Merchant guilds (50-100+)', baseChance: 0.95, desc: 'Dozens of merchant guilds representing every major trade good and route. A formal guild parliament.' },
       },
     },
@@ -360,7 +360,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { face: 'the alewife', tags: ['food'], priorityCategory: 'economy' },
       at: {
         hamlet: { name: 'Alehouse', baseChance: 0.55, desc: "Home-brewed ale sold from someone's back room. The hamlet's main gathering place. News, disputes, and arrangements all happen here.", tags: ['food', 'trade'] },
-        village: { name: 'Ale house', baseChance: 0.8, desc: 'Home-based. Women brew and sell ale.' },
+        village: { name: 'Ale house', baseChance: 0.8, desc: 'Home-based. Ale brewed in the house and sold from it.' },
         town: { face: 'the tavern keeper', name: 'Taverns (5-20)', required: true, desc: 'Drinking establishments. Social hubs.' },
       },
       ceiling: { tier: 'town', reason: 'At city scale drink and lodging share one district row.' },
@@ -426,7 +426,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     // The town rung of the animal-trade ladder (Stable yard → Stable master → Beast trainers) in
     // supplyChainData; filed on Adventuring until 2026-09-30.
     {
-      shared: { front: 'front', name: 'Beast trainers', face: 'the beast master', desc: 'Common animals only. Horses, dogs, falcons.', tags: [], priorityCategory: 'adventuring' },
+      shared: { front: 'front', name: 'Beast trainers', face: 'the beast master', desc: 'Horses, dogs, falcons, trained for the saddle, the hunt and the glove.', tags: [], priorityCategory: 'adventuring' },
       at: {
         town: { baseChance: 0.3 },
         city: { baseChance: 0.45 },
@@ -442,7 +442,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'River ferry', face: 'the ferryman', tradeRouteRequired: ['river', 'port'], terrainAccess: ['riverside'], desc: "A flat-bottomed ferry crossing the river. The ferryman's family has held the crossing rights for generations. Essential for anyone who doesn't want a long walk to the nearest bridge.", tags: ['transport', 'trade'], priorityCategory: 'economy' },
+      shared: { name: 'River ferry', face: 'the ferryman', tradeRouteRequired: ['river', 'port'], terrainAccess: ['riverside'], desc: "A flat-bottomed ferry crossing the river. The ferryman's family holds the crossing rights, and every crossing pays the family its fare.", tags: ['transport', 'trade'], priorityCategory: 'economy' },
       at: {
         village: { baseChance: 0.45 },
         town: { baseChance: 0.4 },
@@ -476,7 +476,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Docks/port facilities', face: 'the wharfinger', tradeRouteRequired: ['port', 'river'], desc: 'If coastal or river access. Essential for bulk trade.', tags: ['port', 'trade'], priorityCategory: 'economy' },
+      shared: { name: 'Docks/port facilities', face: 'the wharfinger', tradeRouteRequired: ['port', 'river'], desc: 'Where the bulk trade is loaded and unloaded, and the cargoes are tallied in and out.', tags: ['port', 'trade'], priorityCategory: 'economy' },
       at: {
         town: { baseChance: 0.55, desc: 'River or coastal dock. Essential for bulk water trade and river transport.' },
         city: { baseChance: 0.6 },
@@ -549,7 +549,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Auction house', face: 'the auctioneer', desc: "Formal venue for selling high-value goods: estates, ships, livestock, art, and occasionally persons. Charges buyer's and seller's premiums.", tags: ['market'], priorityCategory: 'economy' },
+      shared: { name: 'Auction house', face: 'the auctioneer', desc: "Formal venue for selling high-value goods: estates, ships, livestock, art, and the contents of great houses. Charges buyer's and seller's premiums.", tags: ['market'], priorityCategory: 'economy' },
       at: {
         town: { baseChance: 0.1 },
         city: { baseChance: 0.35 },
@@ -566,9 +566,10 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     },
     // The town Mint was filed on Crafts and the city's Mint (official) on Economy until 2026-09-30.
     {
-      shared: { name: 'Mint (official)', face: 'the mint master', desc: 'State or noble-chartered coin production. Standardises currency across the region. Significant ongoing revenue via seigniorage.', tags: ['banking'], priorityCategory: 'economy' },
+      shared: { name: 'Mint (official)', face: 'the mint master', desc: 'State or noble-chartered coin production. Standardises currency across the region. Its seigniorage is revenue while precious metal reaches the dies.', tags: ['banking'], priorityCategory: 'economy' },
       at: {
-        town: { name: 'Mint', baseChance: 0.15, desc: 'Converts refined precious metal into standardised coinage. Requires noble or royal charter. Significant revenue for the granting authority.', priorityCategory: 'government' },
+        town: { name: 'Mint', baseChance: 0.15, desc: 'Converts refined precious metal into standardised coinage, under the charter of whoever rules. Revenue for the granting authority while metal comes in.', // BAR3-PLACES (H4/H2, 2026-11-15): no royal charter claimed (a sovereign city grants its own), no revenue claimed where no metal comes
+        priorityCategory: 'government' },
         city: { baseChance: 0.4 },
         metropolis: { baseChance: 0.4 },
       },
@@ -602,12 +603,12 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     // One identity name ('Mills (2-5)') from town up; the display seam drops the count so a city never
     // reads 'Mills (2-5)'.
     {
-      shared: { front: 'prime', name: 'Mills (2-5)', face: 'the miller', required: true, desc: 'Grain, fulling, and saw mills along every usable watercourse, many under guild or civic licence.', tags: ['essential'], priorityCategory: 'economy' },
+      shared: { front: 'prime', name: 'Mills (2-5)', face: 'the miller', required: true, desc: 'Wheels turn on every usable watercourse, many under guild or civic licence.', tags: ['essential'], priorityCategory: 'economy' },
       at: {
         thorp: { name: 'Access to external mill', fabric: true, desc: 'Must travel to manor/village mill. Home grinding often illegal.', tags: ['essential', 'agriculture'] },
-        hamlet: { name: 'Access to external mill', fabric: true, desc: 'Manor mill with milling monopoly (banalité).', tags: ['essential', 'agriculture'] },
+        hamlet: { name: 'Access to external mill', fabric: true, desc: 'Grain is taken out of the hamlet to be ground.', tags: ['essential', 'agriculture'] },
         village: { name: 'Mill', desc: 'Water or windmill with monopoly milling rights. The miller is often the wealthiest and most resented figure in the village.', tags: ['essential', 'food'], priorityCategory: 'crafts' },
-        town: { desc: 'Multiple mills for grain, fulling cloth.' },
+        town: { desc: 'Grain ground at several sites.' },
         city: {},
         metropolis: {},
       },
@@ -682,7 +683,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Apothecary district', face: 'the apothecary', desc: 'Multiple apothecary shops clustered together. Competition drives specialization. Some focus on chirurgery, others on herbal preparations, others on imported medicines. Herbalism kits, medicinal herbs, surgical supplies, and basic antidotes all available.', tags: ['healing', 'trade'], priorityCategory: 'crafts' },
       at: {
-        village: { name: 'Apothecary', baseChance: 0.45, desc: 'Sells herbal medicines, poultices, and common remedies. Distinct from the alchemist. No magical compounds, no acid flasks. Knows which roots treat fever and which mushrooms kill. Stocked with herbalism supplies.' },
+        village: { name: 'Apothecary', baseChance: 0.45, desc: 'Sells herbal medicines, poultices, and common remedies. No magical compounds, no acid flasks. Knows which roots treat fever and which mushrooms kill. Stocked with herbalism supplies.' },
         town: { name: 'Apothecary (established)', baseChance: 0.8, desc: 'A proper shop with a trained herbalist, stocked inventory, and a back room for consultations. Sells herbalism kit supplies, common antidotes, medicinal herbs, and basic surgical dressings. Some double as chirurgeons.' },
         city: { baseChance: 0.7, priorityCategory: 'economy' },
         metropolis: { baseChance: 0.75, priorityCategory: 'economy' },
@@ -698,9 +699,9 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { front: 'front', name: 'Sawmill (commercial)', face: 'the sawyer', desc: 'A water- or ox-powered mill producing planks and beams for the construction trade. Employs a permanent crew.', tags: ['trade'], priorityCategory: 'crafts' },
+      shared: { front: 'front', name: 'Sawmill (commercial)', face: 'the sawyer', desc: 'A water- or ox-powered mill producing planks and beams for the construction trade. Employs a permanent crew.', tags: ['trade', 'timber'], priorityCategory: 'crafts' },
       at: {
-        village: { name: 'Sawmill', baseChance: 0.35, desc: 'Water- or ox-powered saw. Converts raw logs to planks and beams. Expands construction and furniture output.' },
+        village: { name: 'Sawmill', baseChance: 0.35, desc: 'Water- or ox-powered saw. Converts raw logs to planks and beams whenever logs can be had, for building and furniture.' },
         town: { baseChance: 0.28, desc: "A water- or ox-powered mill producing planks and beams for the construction trade. A town near timber can supply an entire region's building needs. Employs a permanent crew." },
         city: { baseChance: 0.3 },
         metropolis: { baseChance: 0.3 },
@@ -716,7 +717,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { front: 'prime', name: 'Vintner', face: 'the vintner', desc: 'Produces and ages wine, either from local grapes or imported must. Sells in bulk to taverns and directly to wealthy clients. A vintner in a non-wine region is an importer-blender.', tags: ['food', 'trade'], priorityCategory: 'government' },
+      shared: { front: 'prime', name: 'Vintner', face: 'the vintner', desc: 'Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients.', tags: ['food', 'trade'], priorityCategory: 'government' },
       at: {
         town: { baseChance: 0.2 },
         city: { baseChance: 0.3 },
@@ -726,7 +727,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { front: 'front', name: 'Tanners', face: 'the tanner', desc: 'Leather production. Foul-smelling; sited by water and toward the settlement edge where the ground allows.', tags: ['leather'], priorityCategory: 'crafts' },
       at: {
-        village: { name: 'Tannery', baseChance: 0.3, desc: 'Converts hides into leather using oak bark. Foul-smelling. Placed downstream. Essential for shoes, harness, and straps.', tags: ['trade'] },
+        village: { name: 'Tannery', baseChance: 0.3, desc: 'Converts hides into leather using oak bark, whenever hides can be had. Foul-smelling. Placed downstream. Essential for shoes, harness, and straps.', tags: ['trade'] },
         town: { baseChance: 0.7, exclusiveGroup: 'tanneryScale' },
         city: { baseChance: 0.4, exclusiveGroup: 'tanneryScale' },
         metropolis: { baseChance: 0.4, exclusiveGroup: 'tanneryScale' },
@@ -767,7 +768,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { front: 'front', name: 'Potter', face: 'the potter', desc: 'Wheel-thrown pottery for domestic use. Plates, jugs, storage vessels. Fired in a small kiln.', tags: ['trade'], priorityCategory: 'crafts' },
+      shared: { front: 'front', name: 'Potter', face: 'the potter', desc: 'A wheel and a small kiln for domestic pottery: plates, jugs, storage vessels, made whenever clay can be had.', tags: ['trade'], priorityCategory: 'crafts' },
       at: {
         village: { baseChance: 0.35 },
         town: { baseChance: 0.5 },
@@ -776,7 +777,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { front: 'front', name: 'Brickmaker', face: 'the brickmaker', desc: 'Moulds and fires clay bricks for construction. Enables more permanent buildings. Requires clay deposits and fuel.', tags: ['trade'], priorityCategory: 'crafts' },
+      shared: { front: 'front', name: 'Brickmaker', face: 'the brickmaker', desc: 'Moulds and fires clay bricks for construction whenever clay can be had. Enables more permanent buildings. Requires clay and fuel.', tags: ['trade'], priorityCategory: 'crafts' },
       at: {
         village: { baseChance: 0.25 },
         town: { baseChance: 0.4 },
@@ -819,7 +820,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { front: 'front', name: 'Smelter', face: 'the smelt master', baseChance: 0.35, desc: 'Converts raw ore to refined metal using charcoal-fueled furnaces. The industrial intermediate between mine and smithy.', tags: ['trade'], priorityCategory: 'crafts' },
+      shared: { front: 'front', name: 'Smelter', face: 'the smelt master', baseChance: 0.35, desc: 'Converts raw ore to refined metal using charcoal-fueled furnaces, whenever ore can be had.', tags: ['trade'], priorityCategory: 'crafts' }, // W2-FIX-DATA-13 (the chair's 11:31 ruling, DATA-SMELTER): the default names neither the mine nor the smithy the roster may lack; the two variants keep them where both stand
       at: {
         town: {},
         city: {},
@@ -837,7 +838,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { front: 'front', name: 'Glassmakers', face: 'the glassmaker', desc: 'Windows, vessels, mirrors. Requires expertise.', tags: ['luxury'], priorityCategory: 'crafts' },
       at: {
-        town: { name: 'Glassblower', baseChance: 0.25, desc: 'Small-scale glasswork: bottles, window panes, goblets. Requires silica sand, potash, and a skilled furnace operator.', tags: ['trade'] },
+        town: { name: 'Glassblower', baseChance: 0.25, desc: 'Small-scale glasswork, when sand can be had: bottles, window panes, goblets. Requires silica sand, potash, and a skilled furnace operator.', tags: ['trade'] },
         city: { baseChance: 0.5 },
         metropolis: { baseChance: 0.55 },
       },
@@ -936,7 +937,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
         village: { face: 'the priest', name: 'Parish church', required: true, exclusiveGroup: 'religiousCenter', desc: 'Center of village life. Stone construction. Mandatory tithes.' },
         town: { name: 'Parish churches (2-5)', required: true, desc: 'Several houses of worship within town.' },
         city: { name: 'Parish churches (10-30)', required: true, desc: 'One per neighborhood.' },
-        metropolis: { name: 'Parish churches (50-100+)', required: true, desc: 'Hundreds of houses of worship across all districts. The faith is woven into every neighbourhood.', tags: ['religious', 'church'], priorityCategory: 'infrastructure' },
+        metropolis: { name: 'Parish churches (50-100+)', required: true, desc: 'Scores of parishes, from fifty to a hundred and more. The faith reaches every street of the city.', tags: ['religious', 'church'], priorityCategory: 'infrastructure' },
       },
     },
     {
@@ -945,7 +946,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
         thorp: { desc: 'A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever knew the dead best. The oldest markers have lost their names to the weather and are kept clear anyway.' },
         hamlet: { desc: 'A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does not wait for one. Families lie in rows by household, whatever their standing. That is the custom here, and has nothing to do with being poor.' },
         village: { name: 'Graveyard', desc: 'Consecrated ground beside the house of worship, on its own plot, with a resident priest to close it. The rite is held on the day of the death, with no wait for a travelling clergyman, and the congregation has begun keeping the names in the same book as the births. The ground nearest the wall is spoken for generations ahead, and everyone here can say who holds it.' },
-        town: { name: 'Parish burial grounds', desc: "Each congregation keeps its own ground beside its house of worship, and one that has filled its ground buries beyond the gate instead. The sexton holds the register of who lies where, which is the town's longest unbroken record and the one it reaches for in an inheritance dispute. Guilds buy plots together so their members lie among their trade." },
+        town: { name: 'Parish burial grounds', desc: "Each congregation keeps its own burial ground, and one that has filled its ground buries beyond the town's edge instead. The sexton holds the register of who lies where, which is the town's longest unbroken record and the one it reaches for in an inheritance dispute. Guilds buy plots together so their members lie among their trade." },
         city: { name: 'Burial grounds and charnel house', desc: "The old grounds inside the walls filled generations ago, so the dead are lifted once their term is up and their bones stacked in the charnel house to make room for the next. New ground has been bought outside the gates, and the carts that go out at dusk are a fixed part of the city's evening. Who is lifted and who is left where they lie is settled by what a family endowed." },
         metropolis: { name: 'Cemetery network', desc: 'Burial has left the walls entirely: grounds beyond every gate, each with its own road, its own gatekeepers, and a trade in plots that the revenue office watches. The local registers are copied into a central roll because no single ground can any longer say where its own dead are. Wards are assigned to grounds, so a family that moves across the city can find itself divided by the assignment.', priorityCategory: 'infrastructure' },
       },
@@ -1004,11 +1005,12 @@ export const INSTITUTION_FAMILIES = Object.freeze([
         village: { baseChance: 0.2, desc: 'A circle of druids tied to the land. They regulate the seasons, mediate disputes with wild creatures, and know which streams run clean. More common in forested or isolated settlements, but they adapt. Some circles tend city gardens or hidden urban groves.', tags: ['religious'], magicLicense: 'none', priorityCategory: 'magic' },
       },
       ceiling: { tier: 'village', reason: 'In towns and cities the druids speak through the Elder Grove Council.' },
+      successor: 'Elder Grove Council', // UPKEEP-CAPACITY C5 (the chair's G4): one function at two scales
     },
     // Its own text says it is found in cities; it was listed at town only, and on the Magic shelf,
     // until 2026-09-30.
     {
-      shared: { name: 'Elder Grove Council', face: 'the grove elder', desc: "A council of senior druids who govern their circle's relationship with the city. They may maintain a hidden grove beneath the streets, mediate between urban expansion and wild places, or serve as ecological advisors to the ruling authority. Found in cities that have made their peace with the wild.", tags: ['religious'], magicLicense: 'none', priorityCategory: 'military' },
+      shared: { name: 'Elder Grove Council', face: 'the grove elder', desc: "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to the ruling authority.", tags: ['religious'], magicLicense: 'none', priorityCategory: 'military' },
       at: {
         town: { baseChance: 0.15 },
         city: { baseChance: 0.2 },
@@ -1069,10 +1071,10 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       ceiling: { tier: 'village', reason: 'A town governs through a council or an appointee.' },
     },
     {
-      shared: { name: 'City administration', face: 'the chief administrator', exclusiveGroup: 'government', desc: 'An administrative apparatus of officials, clerks, and ward officers manages city affairs. Less formally constituted than a council but functional. Governance by bureaucratic inertia.', tags: ['civic'], priorityCategory: 'government' },
+      shared: { name: 'City administration', face: 'the chief administrator', exclusiveGroup: 'government', desc: 'An administrative apparatus of officials, clerks, and ward officers carries out the city\'s business, whoever sits above it. Functional, and moved by bureaucratic inertia.', tags: ['civic'], priorityCategory: 'government' },
       at: {
         village: { face: 'the reeve', name: 'Village reeve', baseChance: 0.92, desc: 'Elected from the peasantry. Organises labour obligations, mediates disputes, and represents the village to outside authority.' },
-        town: { face: 'the first councillor', name: 'Town council', baseChance: 0.9, desc: 'An informal council of prominent citizens manages town affairs in the absence of formal authority. Less accountable than an elected council, more stable than nothing.' },
+        town: { face: 'the first councillor', name: 'Town council', baseChance: 0.9, desc: 'A council of prominent citizens sees to the town\'s common affairs. Less accountable than an elected council, but steady.' },
         city: { baseChance: 0.92 },
         metropolis: { baseChance: 0.92 },
       },
@@ -1080,12 +1082,12 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Village elder', face: 'the village elder' },
       at: {
-        village: { baseChance: 0.95, exclusiveGroup: 'government', desc: 'The oldest or most respected resident guides village decisions in the absence of formal authority. Less official than a reeve, more stable than nothing.', tags: ['civic'], priorityCategory: 'government' },
+        village: { baseChance: 0.95, exclusiveGroup: 'government', desc: 'The oldest or most respected resident guides village decisions on the strength of standing alone; no office goes with it.', tags: ['civic'], priorityCategory: 'government' },
       },
       ceiling: { tier: 'village', reason: 'A town governs through a council or an appointee.' },
     },
     {
-      shared: { name: 'Mayor and council', face: 'the mayor', baseChance: 0.5, exclusiveGroup: 'government', desc: 'Elected civic council with full administrative apparatus.', tags: ['civic'], priorityCategory: 'government' },
+      shared: { name: 'Mayor and council', face: 'the mayor', baseChance: 0.5, exclusiveGroup: 'government', desc: 'Civic council with full administrative apparatus.', tags: ['civic'], priorityCategory: 'government' },
       at: {
         town: { desc: 'Elected or appointed town leadership.' },
         city: {},
@@ -1123,7 +1125,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Royal seat', face: 'the monarch', baseChance: 0.2, exclusiveGroup: 'government', desc: 'A royal governor or viceroy administers directly on behalf of the crown. High status, high scrutiny.', tags: ['civic'], priorityCategory: 'military' },
+      shared: { name: 'Royal seat', face: 'the monarch', baseChance: 0.2, exclusiveGroup: 'government', desc: "The crown's own seat of government, held by the monarch or by a governor in the crown's name. High status, high scrutiny.", tags: ['civic'], priorityCategory: 'military' },
       at: {
         city: {},
         metropolis: {},
@@ -1236,7 +1238,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
         village: { baseChance: 0.18, desc: 'Perimeter palisade or earthwork berm. Controls approach, slows attackers.' },
         town: { name: 'Town walls', baseChance: 0.5, desc: 'Stone fortifications with gates. Expensive to build and maintain.', priorityCategory: 'military' },
         city: { name: 'City walls and gates', required: true, desc: 'Masonry walls with towers. Multiple gatehouses.', tags: ['essential', 'defense', 'fortification'], priorityCategory: 'military' },
-        metropolis: { name: 'Massive walls and fortifications', required: true, desc: 'Layered wall systems: outer wall, inner wall, citadel ring. Multiple garrison zones and gatehouses.', tags: ['essential', 'defense', 'fortification'], priorityCategory: 'military' },
+        metropolis: { name: 'Massive walls and fortifications', required: true, desc: 'Layered wall systems: an outer wall and an inner wall, with gatehouses along both.', tags: ['essential', 'defense', 'fortification'], priorityCategory: 'military' },
       },
     },
     // Rolled without walls in 46 of 123 towns until 2026-09-30; `requiresAny` now enforces the
@@ -1274,7 +1276,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { lawEnforcement: true, face: 'the garrison commander', tags: ['military', 'defense'], priorityCategory: 'military' },
       at: {
         town: { name: 'Barracks', baseChance: 0.3, desc: 'Housing for guards or small garrison.', tags: ['military'] },
-        city: { name: 'Garrison', required: true, desc: 'Professional soldiers. Noble or royal.' },
+        city: { name: 'Garrison', required: true, desc: 'A professional force, under arms full-time.' },
         metropolis: { name: 'Multiple garrisons', required: true, desc: 'Garrison forces distributed across quarters. No single barracks can secure a metropolis.' },
       },
     },
@@ -1468,7 +1470,8 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { name: 'Smuggling waypoint', face: 'the smuggler', desc: 'Goods pass through here to avoid toll roads or customs checkpoints. The hamlet benefits from fees paid in kind.', tags: ['criminal', 'smuggling'], priorityCategory: 'criminal' },
       at: {
         hamlet: { baseChance: 0.09, tags: ['criminal'] },
-        village: { baseChance: 0.1, tags: ['criminal'] },
+        // BAR2-PLACES (PL4): the size word is the tier's own ("The hamlet" printed in a village of 251)
+        village: { baseChance: 0.1, tags: ['criminal'], desc: 'Goods pass through here to avoid toll roads or customs checkpoints. The village benefits from fees paid in kind.' },
         town: { name: 'Smuggling operation', baseChance: 0.45, desc: 'Illicit goods trade. Tax evasion.' },
         city: { face: 'the network\'s head', name: 'Smuggling network', baseChance: 0.6, desc: 'Organized contraband trade.' },
         metropolis: { face: 'the network\'s head', name: 'Smuggling network', baseChance: 0.6, desc: 'Organized contraband trade.' },
@@ -1486,7 +1489,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { face: 'the guildmaster of thieves', exclusiveGroup: 'criminalPower', tags: ['criminal'], priorityCategory: 'criminal' },
       at: {
         city: { name: "Thieves' guild chapter", baseChance: 0.6, minPopulation: 10000, desc: 'Organized crime chapter. 30-100 members.', thresholdNote: '10,000+ population for viable operation.' },
-        metropolis: { name: "Thieves' guild (powerful)", baseChance: 0.55, desc: 'Dominant criminal syndicate. Tolerated because the alternative (gang war) is worse.' },
+        metropolis: { name: "Thieves' guild (powerful)", baseChance: 0.55, desc: 'A criminal syndicate the city has never rooted out, for fear of the gang war that would follow.' }, // BAR2-PLACES (the chair's ruling (PL4), 2026-11-15): no ruling or dominant standing is claimed (the powers' own; a Minor or Suppressed guild printed "Dominant"); was 'Dominant criminal syndicate. Tolerated because the alternative (gang war) is worse.'
       },
     },
     {
@@ -1580,7 +1583,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       shared: { face: 'the musician', noPower: true, tags: [], priorityCategory: 'entertainment' },
       at: {
         village: { name: 'Village musician', baseChance: 0.25, desc: 'A resident singer, fiddler, or piper. Plays at festivals and weddings. Also a keeper of local history through song.' },
-        town: { face: 'the troupe leader', name: 'Traveling performers', baseChance: 0.8, desc: 'Bards, jugglers, acrobats visit during fairs.' },
+        town: { face: 'the troupe leader', name: 'Traveling performers', baseChance: 0.8, desc: 'Bards, jugglers, acrobats visit at festival time.' },
       },
       ceiling: { tier: 'town', reason: 'Cities keep permanent theaters.' },
       successor: 'Theaters',
@@ -1711,7 +1714,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Message network (high magic)', face: 'the message-master' },
       at: {
-        metropolis: { baseChance: 0.3, desc: 'Paired Speaking Stones set in a network. Each station costs as much as a merchant house, and only the crown or the great guilds keep one.', tags: ['arcane', 'exotic'], magicLicense: 'high', priorityCategory: 'exotic' },
+        metropolis: { baseChance: 0.3, desc: 'Paired Speaking Stones set in a network. Each station costs as much as a merchant house, and only the richest powers keep one.', tags: ['arcane', 'exotic'], magicLicense: 'high', priorityCategory: 'exotic' },
       },
     },
   ]),

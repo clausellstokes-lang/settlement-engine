@@ -1,0 +1,7 @@
+generator-golden-master tests/property/generatorGoldenMaster.test.js
+espionage-dormancy-fence tests/property/espionageDormancyFence.test.js
+dossier-prose-manifest tests/property/dossierProseManifest.test.js
+pdf-golden tests/pdf/goldenViewModel.test.js
+herald-knowledge-desk-golden tests/property/heraldKnowledgeDeskGolden.test.js
+preset-lighting-witness tests/simulation/presetLightingWitness.test.js
+cartography-calibration tests/domain/townCartographyCalibration.test.js

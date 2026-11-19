@@ -812,7 +812,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: true,
         entrepotNote:
-          'Furs originate in frontier/northern settlements and travel south through trading posts. Mid-route settlements profit from the trade.',
+          'Furs travel from the hunting grounds through trading posts, and the settlements along the route profit from the trade.', // BAR3-PLACES (H4, 2026-11-15): no northern origin claimed (a town hunting its own grounds printed it)
         minTier: 'hamlet',
       },
       {
@@ -867,6 +867,11 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: true,
         minTier: 'village',
+        // COHERENCE-AGREE-6 (REVIEW-AGREE-2 F1, the chair's ruling of 2026-11-12): the toll runs on every hub access,
+        // and its name says the access. Where the resource's own row (`RESOURCE_DATA.crossroads_position.requires`)
+        // refuses the town's access, the page prints the entry for that access instead
+        // (`domain/display/chainPrintName.js :: chainPrintName`); the record keeps the catalogue's strings.
+        namesByAccess: CHAIN_NAMES_BY_ACCESS.crossroads_trade, // data/chainAccessNames.js, the table's one home
       },
       {
         id: 'camel_caravan',
@@ -1497,3 +1502,4 @@ export const SUPPLY_CHAIN_NEEDS = {
 // chain's processingInstitutions and pays one seeded draw per boosted candidate, so
 // a reagent chain naming real magic institutions translates the stream and shifts a
 // golden. Measured, not assumed; the measurement is written up beside the spine.
+import { CHAIN_NAMES_BY_ACCESS } from './chainAccessNames.js'; // COHERENCE-AGREE-6 (F1): at the end, so no line above moves

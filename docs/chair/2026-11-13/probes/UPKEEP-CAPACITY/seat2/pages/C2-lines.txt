@@ -1,0 +1,225 @@
+  7 == foundry == replace [cold-city-155.txt]
+     - *Fortress: city walls and gates, held by the professional city watch. It leans on magic to hold.*
+     + *Fortress: city walls and gates, held by the garrison. It leans on magic to hold.*
+  7 == foundry == replace [cold-metropolis-19.txt]
+     - *Fortress: massive walls and fortifications, held by the professional city watch. It leans on magic to hold.*
+     + *Fortress: massive walls and fortifications, held by the multiple garrisons. It leans on magic to hold.*
+  6 == foundry == insert [cold-city-155.txt]
+     - 
+     + - Garrison: Professional soldiers, kept by noble or crown. \(required\)
+  6 == foundry == delete [cold-city-155.txt]
+     - - Garrison: Professional soldiers, kept by noble or crown. \(required\)
+     + 
+  5 == foundry == replace [cold-city-201.txt]
+     - - **Defence**: City walls and gates, Citadel, Professional city watch, Garrison, Mercenary quarter, Multiple adventurers&##; guilds.
+     + - **Defence**: City walls and gates, Citadel, Garrison, Professional city watch, Mercenary quarter, Multiple adventurers&##; guilds.
+  5 == foundry == replace [cold-metropolis-2.txt]
+     - - **Defence**: Massive walls and fortifications, Citadel, Professional city watch, Multiple garrisons, Mercenary quarter, Multiple adventurers&##; guilds.
+     + - **Defence**: Massive walls and fortifications, Citadel, Multiple garrisons, Professional city watch, Mercenary quarter, Multiple adventurers&##; guilds.
+  4 == foundry == insert [cold-city-227.txt]
+     - 
+     + - Garrison: A standing body of soldiers, in noble or royal pay. \(required\)
+  4 == foundry == delete [cold-city-227.txt]
+     - - Garrison: A standing body of soldiers, in noble or royal pay. \(required\)
+     + 
+  3 == foundry == insert [cold-metropolis-19.txt]
+     - 
+     + - Multiple garrisons: Garrisons spread through the quarters; no single barracks could secure a city this size. \(required\)
+  3 == foundry == delete [cold-metropolis-19.txt]
+     - - Multiple garrisons: Garrisons spread through the quarters; no single barracks could secure a city this size. \(required\)
+     + 
+  3 == foundry == insert [cold-metropolis-2.txt]
+     - 
+     + - Multiple garrisons: Troops quartered in several places at once, a metropolis being far too large for one garrison. \(required\)
+  3 == foundry == delete [cold-metropolis-2.txt]
+     - - Multiple garrisons: Troops quartered in several places at once, a metropolis being far too large for one garrison. \(required\)
+     + 
+  2 == foundry == insert [cold-city-120.txt]
+     - 
+     + - Garrison: Professional soldiers. Noble or royal. \(required\)
+  2 == foundry == delete [cold-city-120.txt]
+     - - Garrison: Professional soldiers. Noble or royal. \(required\)
+     + 
+  2 == foundry == replace [cold-city-155.txt]
+     - - **Defence**: City walls and gates, Citadel, Professional city watch, Garrison, Multiple adventurers&##; guilds.
+     + - **Defence**: City walls and gates, Citadel, Garrison, Professional city watch, Multiple adventurers&##; guilds.
+  2 == foundry == replace [cold-city-17.txt]
+     - - **Defence**: City walls and gates, Professional city watch, Garrison, Multiple adventurers&##; guilds.
+     + - **Defence**: City walls and gates, Garrison, Professional city watch, Multiple adventurers&##; guilds.
+  2 == foundry == replace [cold-city-227.txt]
+     - *Well-defended: city walls and gates, held by the professional city watch. It leans on magic to hold.*
+     + *Well-defended: city walls and gates, held by the garrison. It leans on magic to hold.*
+  2 == foundry == replace [cold-metropolis-33.txt]
+     - - **Defence**: Massive walls and fortifications, Professional city watch, Multiple garrisons, Multiple adventurers&##; guilds.
+     + - **Defence**: Massive walls and fortifications, Multiple garrisons, Professional city watch, Multiple adventurers&##; guilds.
+  2 == foundry == insert [cold-metropolis-33.txt]
+     - 
+     + - Multiple garrisons: Garrison forces distributed across quarters. No single barracks can secure a metropolis. \(required\)
+  2 == foundry == delete [cold-metropolis-33.txt]
+     - - Multiple garrisons: Garrison forces distributed across quarters. No single barracks can secure a metropolis. \(required\)
+     + 
+  1 == foundry == replace [cold-city-120.txt]
+     - - **Defence**: City walls and gates, Professional city watch, Garrison.
+     + - **Defence**: City walls and gates, Garrison, Professional city watch.
+  1 == foundry == replace [cold-city-120.txt]
+     - *Well-defended: city walls and gates, held by the professional city watch.*
+     + *Well-defended: city walls and gates, held by the garrison.*
+  1 == foundry == replace [cold-city-227.txt]
+     - - **Defence**: City walls and gates, Professional city watch, Garrison, Mercenary quarter, Multiple adventurers&##; guilds.
+     + - **Defence**: City walls and gates, Garrison, Professional city watch, Mercenary quarter, Multiple adventurers&##; guilds.
+  1 == foundry == replace [cold-famine-city-5.txt]
+     - *Defensible: city walls and gates, held by the professional city watch.*
+     + *Defensible: city walls and gates, held by the garrison.*
+  1 == foundry == replace [cold-metropolis-19.txt]
+     - - **Defence**: Massive walls and fortifications, Professional city watch, Multiple garrisons, Mercenary quarter, Multiple adventurers&##; guilds.
+     + - **Defence**: Massive walls and fortifications, Multiple garrisons, Professional city watch, Mercenary quarter, Multiple adventurers&##; guilds.
+  1 == foundry == replace [cold-under_siege-city-12.txt]
+     - *Defensible: city walls and gates, held by the professional city watch. It leans on magic to hold.*
+     + *Defensible: city walls and gates, held by the garrison. It leans on magic to hold.*
+  1 == foundry == replace [cold-wartime-city-30.txt]
+     - - **Defence**: City walls and gates, Citadel, Professional city watch, Garrison, Mercenary quarter.
+     + - **Defence**: City walls and gates, Citadel, Garrison, Professional city watch, Mercenary quarter.
+  1 == foundry == replace [cold-wartime-metropolis-8.txt]
+     - *Well-defended: massive walls and fortifications, held by the professional city watch. It leans on magic to hold.*
+     + *Well-defended: massive walls and fortifications, held by the multiple garrisons. It leans on magic to hold.*
+  7 == pdf == replace [cold-city-155.txt]
+     - Fortress: city walls and gates, held by the professional city watch. It leans on magic to hold.
+     + Fortress: city walls and gates, held by the garrison. It leans on magic to hold.
+  7 == pdf == replace [cold-metropolis-19.txt]
+     - Fortress: massive walls and fortifications, held by the professional city watch. It leans on magic to hold.
+     + Fortress: massive walls and fortifications, held by the multiple garrisons. It leans on magic to hold.
+  6 == pdf == insert [cold-city-155.txt]
+     - 
+     + Garrison | REQ | Professional soldiers, kept by noble or crown.
+  6 == pdf == delete [cold-city-155.txt]
+     - Garrison | REQ | Professional soldiers, kept by noble or crown.
+     + 
+  5 == pdf == replace [cold-city-201.txt]
+     - City walls and gates, Citadel, Professional city watch, Garrison, Mercenary quarter, Multiple adventurers' guilds.
+     + City walls and gates, Citadel, Garrison, Professional city watch, Mercenary quarter, Multiple adventurers' guilds.
+  5 == pdf == replace [cold-metropolis-2.txt]
+     - Massive walls and fortifications, Citadel, Professional city watch, Multiple garrisons, Mercenary quarter, Multiple adventurers' guilds.
+     + Massive walls and fortifications, Citadel, Multiple garrisons, Professional city watch, Mercenary quarter, Multiple adventurers' guilds.
+  4 == pdf == insert [cold-city-227.txt]
+     - 
+     + Garrison | REQ | A standing body of soldiers, in noble or royal pay.
+  4 == pdf == delete [cold-city-227.txt]
+     - Garrison | REQ | A standing body of soldiers, in noble or royal pay.
+     + 
+  3 == pdf == insert [cold-metropolis-19.txt]
+     - 
+     + Multiple garrisons | REQ | Garrisons spread through the quarters; no single barracks could secure a city this size.
+  3 == pdf == delete [cold-metropolis-19.txt]
+     - Multiple garrisons | REQ | Garrisons spread through the quarters; no single barracks could secure a city this size.
+     + 
+  3 == pdf == insert [cold-metropolis-2.txt]
+     - 
+     + Multiple garrisons | REQ | Troops quartered in several places at once, a metropolis being far too large for one garrison.
+  3 == pdf == delete [cold-metropolis-2.txt]
+     - Multiple garrisons | REQ | Troops quartered in several places at once, a metropolis being far too large for one garrison.
+     + 
+  2 == pdf == insert [cold-city-120.txt]
+     - 
+     + Garrison | REQ | Professional soldiers. Noble or royal.
+  2 == pdf == delete [cold-city-120.txt]
+     - Garrison | REQ | Professional soldiers. Noble or royal.
+     + 
+  2 == pdf == replace [cold-city-155.txt]
+     - City walls and gates, Citadel, Professional city watch, Garrison, Multiple adventurers' guilds.
+     + City walls and gates, Citadel, Garrison, Professional city watch, Multiple adventurers' guilds.
+  2 == pdf == replace [cold-city-17.txt]
+     - City walls and gates, Professional city watch, Garrison, Multiple adventurers' guilds.
+     + City walls and gates, Garrison, Professional city watch, Multiple adventurers' guilds.
+  2 == pdf == replace [cold-city-227.txt]
+     - Well-defended: city walls and gates, held by the professional city watch. It leans on magic to hold.
+     + Well-defended: city walls and gates, held by the garrison. It leans on magic to hold.
+  2 == pdf == replace [cold-metropolis-33.txt]
+     - Massive walls and fortifications, Professional city watch, Multiple garrisons, Multiple adventurers' guilds.
+     + Massive walls and fortifications, Multiple garrisons, Professional city watch, Multiple adventurers' guilds.
+  2 == pdf == insert [cold-metropolis-33.txt]
+     - 
+     + Multiple garrisons | REQ | Garrison forces distributed across quarters. No single barracks can secure a metropolis.
+  2 == pdf == delete [cold-metropolis-33.txt]
+     - Multiple garrisons | REQ | Garrison forces distributed across quarters. No single barracks can secure a metropolis.
+     + 
+  1 == pdf == replace [cold-city-120.txt]
+     - City walls and gates, Professional city watch, Garrison.
+     + City walls and gates, Garrison, Professional city watch.
+  1 == pdf == replace [cold-city-120.txt]
+     - Well-defended: city walls and gates, held by the professional city watch.
+     + Well-defended: city walls and gates, held by the garrison.
+  1 == pdf == replace [cold-city-227.txt]
+     - City walls and gates, Professional city watch, Garrison, Mercenary quarter, Multiple adventurers' guilds.
+     + City walls and gates, Garrison, Professional city watch, Mercenary quarter, Multiple adventurers' guilds.
+  1 == pdf == replace [cold-famine-city-5.txt]
+     - Defensible: city walls and gates, held by the professional city watch.
+     + Defensible: city walls and gates, held by the garrison.
+  1 == pdf == replace [cold-metropolis-19.txt]
+     - Massive walls and fortifications, Professional city watch, Multiple garrisons, Mercenary quarter, Multiple adventurers' guilds.
+     + Massive walls and fortifications, Multiple garrisons, Professional city watch, Mercenary quarter, Multiple adventurers' guilds.
+  1 == pdf == replace [cold-under_siege-city-12.txt]
+     - Defensible: city walls and gates, held by the professional city watch. It leans on magic to hold.
+     + Defensible: city walls and gates, held by the garrison. It leans on magic to hold.
+  1 == pdf == replace [cold-wartime-city-30.txt]
+     - City walls and gates, Citadel, Professional city watch, Garrison, Mercenary quarter.
+     + City walls and gates, Citadel, Garrison, Professional city watch, Mercenary quarter.
+  1 == pdf == replace [cold-wartime-metropolis-8.txt]
+     - Well-defended: massive walls and fortifications, held by the professional city watch. It leans on magic to hold.
+     + Well-defended: massive walls and fortifications, held by the multiple garrisons. It leans on magic to hold.
+ 10 == tab:defense == replace [cold-city-201.txt]
+     - Armed Forces & Fortifications # walls # forces # mercenary # charter # arcane ▲
+     + Armed Forces & Fortifications # walls # forces # mercenary # charter # arcane ▲
+  6 == tab:defense == insert [cold-city-155.txt]
+     - 
+     + Garrison | Professional soldiers, kept by noble or crown. | REQ
+  6 == tab:defense == delete [cold-city-155.txt]
+     - REQ | Garrison | Professional soldiers, kept by noble or crown.
+     + 
+  4 == tab:defense == replace [cold-city-17.txt]
+     - Armed Forces & Fortifications # wall # forces # charter # arcane ▲
+     + Armed Forces & Fortifications # wall # forces # charter # arcane ▲
+  4 == tab:defense == insert [cold-city-227.txt]
+     - 
+     + Garrison | A standing body of soldiers, in noble or royal pay. | REQ
+  4 == tab:defense == delete [cold-city-227.txt]
+     - REQ | Garrison | A standing body of soldiers, in noble or royal pay.
+     + 
+  3 == tab:defense == insert [cold-metropolis-19.txt]
+     - 
+     + Multiple garrisons | Garrisons spread through the quarters; no single barracks could secure a city this size. | REQ
+  3 == tab:defense == delete [cold-metropolis-19.txt]
+     - REQ | Multiple garrisons | Garrisons spread through the quarters; no single barracks could secure a city this size.
+     + 
+  3 == tab:defense == insert [cold-metropolis-2.txt]
+     - 
+     + Multiple garrisons | Troops quartered in several places at once, a metropolis being far too large for one garrison. | REQ
+  3 == tab:defense == delete [cold-metropolis-2.txt]
+     - REQ | Multiple garrisons | Troops quartered in several places at once, a metropolis being far too large for one garrison.
+     + 
+  2 == tab:defense == insert [cold-city-120.txt]
+     - 
+     + Garrison | Professional soldiers. Noble or royal. | REQ
+  2 == tab:defense == delete [cold-city-120.txt]
+     - REQ | Garrison | Professional soldiers. Noble or royal.
+     + 
+  2 == tab:defense == replace [cold-city-227.txt]
+     - Armed Forces & Fortifications # wall # forces # mercenary # charter # arcane ▲
+     + Armed Forces & Fortifications # wall # forces # mercenary # charter # arcane ▲
+  2 == tab:defense == insert [cold-metropolis-33.txt]
+     - 
+     + Multiple garrisons | Garrison forces distributed across quarters. No single barracks can secure a metropolis. | REQ
+  2 == tab:defense == delete [cold-metropolis-33.txt]
+     - REQ | Multiple garrisons | Garrison forces distributed across quarters. No single barracks can secure a metropolis.
+     + 
+  1 == tab:defense == replace [cold-city-120.txt]
+     - Armed Forces & Fortifications # wall # forces ▲
+     + Armed Forces & Fortifications # wall # forces ▲
+  1 == tab:defense == replace [cold-city-155.txt]
+     - Armed Forces & Fortifications # walls # forces # charter # arcane ▲
+     + Armed Forces & Fortifications # walls # forces # charter # arcane ▲
+  1 == tab:defense == replace [cold-famine-city-5.txt]
+     - Armed Forces & Fortifications # walls # forces # charter ▲
+     + Armed Forces & Fortifications # walls # forces # charter ▲
+  1 == tab:defense == replace [cold-wartime-city-30.txt]
+     - Armed Forces & Fortifications # walls # forces # mercenary # arcane ▲
+     + Armed Forces & Fortifications # walls # forces # mercenary # arcane ▲

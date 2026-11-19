@@ -59,10 +59,17 @@
  * and when a ceiling is loose. Under a foreign `--seed-prefix` the row-set checks are notes, not
  * findings: which one-draw pools a corpus happens to reach is itself chance.
  *
- * Usage (read-only unless `--tighten`):
+ * Usage (read-only unless a door: `--bank-new`, `--tighten`, `--rebase`, `--level-second`):
  *   node scripts/census/pool-dominance.mjs                  print the findings, then the worst twenty
  *   node scripts/census/pool-dominance.mjs --seed-prefix=p  the same, on the corpus re-seeded with prefix p
- *   node scripts/census/pool-dominance.mjs --tighten        lower every ceiling to today's measure (never raise one),
+ *   node scripts/census/pool-dominance.mjs --bank-new       bank a row for each drawn pool that has none, at the higher of
+ *                                                           the banked corpus's and the second corpus's readings, with its
+ *                                                           count of lines; touch no other row (the census header is
+ *                                                           re-taken as every door does). A lane's own new pool goes in here.
+ *   node scripts/census/pool-dominance.mjs --tighten        THE CHAIR'S DOOR (its ruling of 2026-11-12: a lane's tree is a
+ *                                                           re-dealt sample, so run lane by lane it walks every ceiling down
+ *                                                           the noise; used only on a ruling, as --rebase is):
+ *                                                           lower every ceiling to today's measure (never raise one),
  *                                                           drop the rows of pools no longer drawn, bank new pools,
  *                                                           and raise a row's count of distinct lines (never lower it);
  *                                                           a ceiling is lowered only to the higher of the banked
@@ -466,6 +473,33 @@ function rebase(table, register, holds) {
   return { _law: REGISTER_LAW, corpus: corpusIdentity(), census: censusOf(table, secondWave), pools: next };
 }
 
+const BANKED_NEW_REASON = 'banked by --bank-new (the chair\'s ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora\'s readings';
+
+/**
+ * THE NARROW DOOR (the chair's ruling of 2026-11-12): a row for each drawn pool that has none, at the higher of the
+ * banked corpus's and the second corpus's readings (the door's own rounding), with its count of lines. No existing
+ * row's ceiling, lines, targets or reason moves; no row leaves; the census header is re-taken from the measure.
+ * @param {Map<string, PoolMeasure>} table the banked corpus @param {Map<string, PoolMeasure>} second the second corpus
+ * @param {ReturnType<typeof readRegister>} register
+ * @returns {{ next: ReturnType<typeof readRegister>, banked: string[] }}
+ */
+export function bankNew(table, second, register) {
+  if (register.corpus !== corpusIdentity()) throw new Error('pool-dominance: --bank-new banks on the register\'s own corpus; the register names another (--rebase, on a ruling)');
+  const rows = register.pools || {};
+  /** @type {Record<string, RegisterRow>} */
+  const added = {};
+  for (const [pool, m] of table) {
+    if (rows[pool]) continue;
+    /** @param {'top1' | 'top5'} metric */
+    const higher = (metric) => ceil4(Math.max(m[metric], second.get(pool)?.[metric] ?? 0));
+    added[pool] = { top1: higher('top1'), top5: higher('top5'), lines: m.lines, reason: BANKED_NEW_REASON };
+  }
+  return {
+    next: { ...register, census: censusOf(table, register.census?.secondWave || []), pools: { ...rows, ...added } },
+    banked: Object.keys(added),
+  };
+}
+
 /** @param {string[]} argv @returns {string | undefined} */
 function seedPrefixArg(argv) {
   const arg = argv.find((a) => a.startsWith('--seed-prefix='));
@@ -506,8 +540,15 @@ function levelSecond(table, second, register) {
 function main() {
   const seedPrefix = seedPrefixArg(process.argv) || DEFAULT_SEED_PREFIX;
   const exact = seedPrefix === DEFAULT_SEED_PREFIX;
-  if ((process.argv.includes('--tighten') || process.argv.includes('--rebase') || process.argv.includes('--level-second')) && !exact) throw new Error('pool-dominance: the doors read the banked corpus only; drop --seed-prefix');
+  if ((process.argv.includes('--tighten') || process.argv.includes('--rebase') || process.argv.includes('--level-second') || process.argv.includes('--bank-new')) && !exact) throw new Error('pool-dominance: the doors read the banked corpus only; drop --seed-prefix');
   const table = measureDominance({ seedPrefix });
+  if (process.argv.includes('--bank-new')) {
+    const { next, banked } = bankNew(table, measureDominance({ seedPrefix: CONFIRM_SEED_PREFIX }), readRegister());
+    writeFileSync(REGISTER_PATH, `${JSON.stringify(next, null, 2)}\n`);
+    for (const pool of banked) console.log(`banked: ${pool} ${JSON.stringify(next.pools[pool])}`);
+    console.log(`pool-dominance: ${banked.length} new rows banked, no other row touched`);
+    return;
+  }
   if (process.argv.includes('--level-second')) {
     const { next, raised } = levelSecond(table, measureDominance({ seedPrefix: CONFIRM_SEED_PREFIX }), readRegister());
     writeFileSync(REGISTER_PATH, `${JSON.stringify(next, null, 2)}\n`);

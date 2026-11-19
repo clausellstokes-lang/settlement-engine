@@ -1,0 +1,39 @@
+  8h.wants.mild    towns    2 · instances     3 · distinct lines    3 · things    3 · held by the seam 0 · by cause crisis 3/2t
+  8i.chainStopped  towns    1 · instances     2 · distinct lines    2 · things    1 · held by the seam 0 · by cause crisis 2/1t
+  8i.resource      towns    1 · instances     1 · distinct lines    1 · things    1 · held by the seam 0 · by cause crisis 1/1t
+  8i.surplus       towns    1 · instances     1 · distinct lines    1 · things    1 · held by the seam 0 · by cause crisis 1/1t
+  8j.outputs       towns    1 · instances     1 · distinct lines    1 · things    1 · held by the seam 1 (SEAM-ECON 8) · by cause short-in-crisis 1/1t
+  8k.market        towns    1 · instances     1 · distinct lines    1 · things    1 · held by the seam 0 · by cause crisis 1/1t
+  8k.trade         towns    1 · instances     1 · distinct lines    1 · things    1 · held by the seam 1 (SEAM-SCENES 9) · by cause short-in-crisis 1/1t
+  8k.trade.mild    towns    1 · instances     1 · distinct lines    1 · things    1 · held by the seam 1 (SEAM-SCENES 3) · by cause crisis 1/1t
+PERSON LINES OF A MARKED HOUSE (8h census): kind · cause · mark in front / no mark (of them, a line of the person's own trade)
+  deal    short   lines    69 · mark in front   19 (trade 19) · no mark   50 (trade 48) · towns 22
+  deal    crisis  lines    77 · mark in front   17 (trade 17) · no mark   60 (trade 47) · towns 10
+  wants   short   lines    69 · mark in front    0 (trade 0) · no mark   69 (trade 2) · towns 22
+  wants   crisis  lines    77 · mark in front    0 (trade 0) · no mark   77 (trade 4) · towns 10
+  secret  short   lines    69 · mark in front    0 (trade 0) · no mark   69 (trade 49) · towns 22
+  secret  crisis  lines    77 · mark in front    0 (trade 0) · no mark   77 (trade 42) · towns 10
+  hook    crisis  lines     7 · mark in front    0 (trade 0) · no mark    7 (trade 7) · towns 5
+CONTROLS (stands must be FOUND; explained must be clear of every rule of the seat)
+  8f stands    C8021   FOUND 8f.short           short   Wool & Textile Trade Cloth is woven or finished here.
+  8f stands    C40674  FOUND 8f.short           short   Wool & Textile Trade Cloth is woven or finished here.
+  8f stands    C41826  FOUND 8f.short           short   Iron & Metalwork Metal is smelted or worked here.
+  8f stands    C41825  FOUND 8f.short           short   8%
+  8f stands    C33921  FOUND 8f.short           short   Apothecary & Alchemy An alchemical trade in reagents, preparations, and curative potions d
+  8f stands    C4828   FOUND 8f.chain           crisis  Timber Trade Local forest provides sustainable timber revenue; managed felling and sawmill
+  8g stands    C39519  FOUND 8g.export          short   Alchemical Trade · Service · Export○ Operational
+  8h stands    C2524   FOUND 8h.deal            crisis  How they deal Takes the toll and lifts the gate; heavy carts pay more, and so do people in
+  8h stands    C8842   FOUND 8h.deal            crisis  How they deal Talks horses with anyone; knows every rider who has come and gone this month
+  8h stands    C43844  FOUND 8h.deal            short   How they deal Shouts the price over the noise and turns back to the logs.
+  8h explained C37251  clear                            Sells by the sack and the cart; the price goes up before winter.
+  8i stands    C7539   FOUND 8i.chainStopped    crisis  Services · Repair and refit · Ship construction
+  8i stands    C20104  FOUND 8i.surplus         crisis  Maltster · Crafts
+  8i stands    C20287  FOUND 8i.resource        crisis  ✓ Fully exploited · Fish · medium value
+  8i explained C19589  clear                            Services · Grain milling (a day away)
+  8i explained C4179   clear                            Services · Fresh produce
+  8j stands    C44447  FOUND 8j.outputs         short   Flour and meal · Milled lumber
+  8k stands    C12508  FOUND 8k.trade           short   The clatter of looms follows you through Quirigich, from one shutter to the next.
+  8k stands    C45015  FOUND 8k.market          crisis  Outsiders see a busy market; the people who live here know the stories behind it."
+  8k explained C37728  clear                            Market day is when Mahakund fills: the roads bring buyers.
+  8k explained C9756   clear                            Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's bles
+controls off: 0

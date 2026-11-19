@@ -5,7 +5,7 @@ import Button from '../../primitives/Button.jsx';
 
 import {buildThreatAssessment, disasterReadinessScore} from '../../../domain/display/threatAssessment.js';
 import {NarrativeNote} from '../NarrativeNote';
-import { arcaneDefenseOf, blockListsCrime, criminalOpNote, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS, FOOD_STORES_DOOR, foodEnduranceLine } from '../../../domain/display/defenseDisplay.js';
+import { arcaneDefenseOf, blockListsCrime, criminalOpNote, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, deriveSafetyLine, criminalOpMark, DEFENSE_STRESS_STATUS, FOOD_STORES_DOOR, foodEnduranceLine } from '../../../domain/display/defenseDisplay.js';
 import EntityLink from '../../primitives/EntityLink.jsx';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
@@ -15,12 +15,13 @@ import { statusCase } from '../labelLadder.js';
 import { defenseDeskRead, criminalRingNoteRead } from '../defenseDeskRead.js';
 import { criminalStructureOf } from '../deskHostArgs.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
 import { isVeiled } from '../../../domain/display/galleryVeil.js';
 import { crisisSummaryForSurface } from '../../../domain/crisis/crisisSummaryVantage.js';
+// THE FORCE CARD PRINTS A HOUSE AS THE ROSTER DOES (R3-TABS-5, the chair's ruling (a)): through the label seam.
+import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). Every position on this tab used to
 // map its drawn sentences to one `<p>` EACH, so a five-lens position printed five paragraphs
 // that each opened on the town's name. The DRAW is unchanged: the lines handed over are the
@@ -159,6 +160,23 @@ export function sentencesNotIn(text, printed) {
   const sentences = t.split(/(?<=[.!?])\s+/);
   const kept = sentences.filter((x) => !(x.trim().split(/\s+/).length >= 8 && p.includes(x.trim())));
   return kept.length === sentences.length ? t : kept.join(' ');
+}
+
+/**
+ * ⛔ THE PAGE NEVER CUTS A SENTENCE IN THE MIDDLE (R3-TABS, the chair's ruling of 2026-11-13; round three's cut
+ * #1274 #1389 #718 #817 #1174 #1082). The crime-pattern rows were cut with `truncateAtWord(desc, 200)` and printed
+ * "The settlement's gates and walls are…" (339 of 1,657 rows on 884 births at 9e57f5023). `text` up to its last
+ * whole sentence within `maxChars`; the whole text where no sentence ends within it.
+ * @param {unknown} text @param {number} maxChars
+ * @returns {string}
+ */
+export function wholeSentencesWithin(text, maxChars) {
+  const t = typeof text === 'string' ? text.trim() : '';
+  if (t.length <= maxChars) return t;
+  const head = t.slice(0, maxChars + 1);
+  const ends = [...head.matchAll(/[.!?][\x22\x27)\]]?(?=\s|$)/g)]; // the closing quotes as \x22 \x27: a bare quote in this literal opened a string for the source scan of the mount walker
+  const last = ends[ends.length - 1];
+  return last ? t.slice(0, last.index + last[0].length) : t;
 }
 
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
@@ -330,20 +348,23 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // economic-capacity read per page, R2); the row with prose under its bar stays.
   const caps = deriveSupportingCapabilities(r).filter((cap) => cap.label !== 'Economic Backing');
   const guardAssessment = deriveGuardAssessment(r);
+  const safetyLine = deriveSafetyLine(r); // BAR6-CRIME (a) (c) (d): the public-order line as printed (a DM's own line by identity)
   // X-52 FOOD ENDURANCE (lane DEFENSE-3): the one food record read for a siege, one sentence.
   const foodEndurance = foodEnduranceLine(r);
   const defViolations = deriveDefenseVulnerabilities(r);
 
-  // Force card component
+  // Force card component. ⛔ NO PROVENANCE BADGE (R3-TABS, the chair's ruling b1, 2026-11-13): the
+  // card printed "REQ" for a 'required' source and "FORCED" for every other source but 'generated'
+  // ('coherence_repair', 'cascade', 'faction_boost', 'forced'), so a wall the coherence pass raised
+  // read as forced by the user. Both are the generator's provenance, which the page never shows; the
+  // Institutions tab's badge says who put a house there.
+  // ⛔ NO SURFACE PRINTS A CATALOGUE NAME'S BRACKET (R3-TABS-5, the chair's ruling (a) of 2026-11-14 on H3-T2): the
+  // card printed the catalogue key raw, "Gates (if walled)" (14 of 1,536 births at 301572583, every one walled). The
+  // name now goes through the seam the roster prints a house with; the dedupe below and every match keep the raw key.
   const ForceCard = ({inst:i,accent}) => (
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${accent||'#6b5340'}`,padding:'9px 12px',marginBottom:6}}>
-      <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
-        <div style={{flex:1}}>
-          <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>{i.name}</div>
-          {i.desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{i.desc}</div>}
-        </div>
-        {i.source&&i.source!=='generated'&&<span style={{fontSize:chromeFontSize(FS.micro, isMobile),fontWeight:700,color:swatch['#A0762A'],background:swatch['#F0E4C0'],padding:'1px 5px',letterSpacing:'0.04em',flexShrink:0}}>{i.source==='required'?'REQ':'FORCED'}</span>}
-      </div>
+      <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,marginBottom:i.desc?2:0}}>{institutionDisplayName(i)}</div>
+      {i.desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{i.desc}</div>}
     </div>
   );
 
@@ -390,7 +411,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       {/* ── THREAT ASSESSMENT ────────────────────────────────────────────── */}
       <div style={FLUSH_RULED}>
         <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Threat Assessment</div>
-        <div style={{fontSize:proseFontSize(FS.xxs, isMobile),color:MUTED,marginBottom:8,fontStyle:'italic'}}>Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. A longer bar is safer.</div>
+        <div style={{fontSize:proseFontSize(FS.xxs, isMobile),color:MUTED,marginBottom:8,fontStyle:'italic'}}>Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.</div>
         {/* ⛔ NO SENTENCE STACK ABOVE THE BARS (owner finding 3, 2026-09-18). DS-DEF-2's five
             readiness sentences used to print here as five paragraphs, one per row, ABOVE the
             rows they describe — so a reader had to pair sentence to bar by counting, and all
@@ -463,7 +484,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
             {safetyLabel&&!safetyLabel.includes('Moderate')&&<div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:orderColor,marginBottom:4}}>{statusCase(safetyLabel)}</div>}
             {/* THE DM'S FIELD, rendered exactly as before and BY IDENTITY. The corpus line sits
                 BESIDE it and never in its place. */}
-            {sp.safetyDesc&&<p style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{sp.safetyDesc}</p>}
+            {sp.safetyDesc&&<p style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{safetyLine}</p>}
             {orderBeside&&<p style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag3,lineHeight:1.55,margin:sp.safetyDesc?'6px 0 0':0,fontStyle:'italic'}}>{orderBeside}</p>}
           </div>}
 
@@ -491,9 +512,13 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                 // catch-all, or two names one rule matches) print it on the first row only.
                 const note = crimInsts.slice(0, i).some(prev => criminalOpNote(prev) === criminalOpNote(name))
                   ? null : criminalOpNote(name);
+                // BAR6-CRIME (f), LAW 8's 8e.crime (C8633): the operation's own house on the live roster, and the mark its
+                // card prints ("Stopped by the siege."), said before its note, as the Institutions tab says it
+                const mark = criminalOpMark(r, name);
                 return (
                   <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #8b1a1a',padding:'8px 12px'}}>
-                    <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.danger,marginBottom:note?3:0}}>{name}</div>
+                    <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.danger,marginBottom:(note||mark)?3:0}}>{name}</div>
+                    {mark&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.danger,fontWeight:700,lineHeight:1.4,marginBottom:note?2:0}}>{mark}</div>}
                     {note&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch['#5A3A2A'],lineHeight:1.4}}>{note}</div>}
                   </div>
                 );
@@ -501,10 +526,13 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
             </div>
           </div>}
 
-          {/* The criminal faction as ONE coupled line, name and band (T2-20): its description
-              lives on Power's roster and the capture state is Power's. */}
+          {/* The criminal faction as ONE line, by name (T2-20): its description lives on Power's
+              roster and the capture state is Power's. ⛔ AND SO DOES ITS STRENGTH (R3-TABS, cut #816,
+              the chair's ruling (c)): the band printed here was the faction's stored `powerLabel`,
+              stale against the faction's own figure on 1,105 of 3,247 factions at aac79b808 ("Thieves'
+              Guild · Minor" beside the Power tab's 18, which the generators' ladder calls Significant). */}
           {crimFaction&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8b0b0',borderLeft:'3px solid #8b1a1a',padding:'7px 13px',fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.danger}}>
-            Underworld: {crimFaction.faction}{crimFaction.powerLabel?` · ${crimFaction.powerLabel}`:''}
+            Underworld: {crimFaction.faction}
           </div>}
 
           {/* Crime types — as enforcement challenges, not economic statistics */}
@@ -516,11 +544,11 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                 // repeats a sentence the public-order paragraph above already printed (a slave
                 // revolt's "Active armed conflict between revolt participants …") keeps its name
                 // and the rest of its description; the sentence is said once, up there.
-                const desc = sentencesNotIn(ct.desc, sp.safetyDesc);
+                const desc = sentencesNotIn(ct.desc, safetyLine);
                 return (
                 <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',padding:'7px 10px'}}>
                   <div style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.inkMag2,marginBottom:desc?2:0}}>{ct.type}</div>
-                  {desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{truncateAtWord(desc, 200)}</div>}
+                  {desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{wholeSentencesWithin(desc, 200)}</div>}
                 </div>
                 );
               })}

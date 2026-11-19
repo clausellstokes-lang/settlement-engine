@@ -229,6 +229,14 @@
       "colour": false
     },
     {
+      "id": "exploiterMember",
+      "text": "one of a power that gains by the crisis",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
       "id": "exploiterLinked",
       "text": "the siege's profiteer, still selling what the siege cut off",
       "needs": [],

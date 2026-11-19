@@ -1,0 +1,15 @@
+[gate-tail] start:  08:59:33 up 34 min,  0 user,  load average: 0.24, 0.77, 0.95 · cores: 4
+[dossier-prose] seats: 856 sentence / 0 clause over 856 state pools (not-a-modifier 856)
+[dossier-prose]   src/data/dossierStateProse/economy.generated.js — 15 blocks, 444 variants
+[dossier-prose]   src/data/dossierStateProse/power.generated.js — 7 blocks, 301 variants
+[dossier-prose]   src/data/dossierStateProse/defense.generated.js — 12 blocks, 625 variants
+[dossier-prose]   src/data/dossierStateProse/warFaith.generated.js — 9 blocks, 449 variants
+[dossier-prose]   src/data/dossierStateProse/stressors.generated.js — 3 blocks, 394 variants
+[dossier-prose]   src/data/dossierStateProse/general.generated.js — 23 blocks, 735 variants
+[dossier-prose]   src/data/dossierCausalProse.generated.js — 78 blocks, 468 variants
+[dossier-prose]   src/data/dossierConnectives.generated.js — 4 (relation, seat) lists, 12 joints, 0 OWED against their floors
+[dossier-prose]   src/data/proseNorms.generated.js — 270 pools with a measured bit, 72 of them a DEPARTURE
+[dossier-prose]   src/data/dossierRelations.generated.js — 169 pairs, 3 ratified aliases, 0 rows joining a desk read on both endpoints
+[dossier-prose] section targets: 124 blocks declare one over 10 sections; 2 name none (DS-GEN-10, DS-HK-1)
+[dossier-prose] wrote 69 state blocks / 2948 variants across 6 desks, 78 causal families / 468 variants
+[gate-tail] end:  08:59:33 up 34 min,  0 user,  load average: 0.24, 0.77, 0.95

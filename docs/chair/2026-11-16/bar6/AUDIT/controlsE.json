@@ -1,0 +1,54 @@
+{
+  "_": "BAR6-AUDIT-E · LAW 9 controls. Each id: [rule group, the second check's verdict, file]. wide = review-wide-6/SECOND-CHECK.final221.json (towns rand-27..41); bar = review-bar-5/SECOND-CHECK.final72.json (rand-24..26). A STANDS control is FOUND when an instance of its rule group in its town holds its text (line, sentence or against); an EXPLAINED control must be found by no COUNTED instance of its group; WEAK rows are reported apart.",
+  "9a": {
+    "C8611": ["9a.collapsed", "STANDS", "wide"], "C14349": ["9a.collapsed", "STANDS", "wide"], "C26333": ["9a.collapsed", "STANDS", "wide"],
+    "C28848": ["9a.collapsed", "STANDS", "wide"], "C26311": ["9a.collapsed", "STANDS", "wide"], "C219464": ["9a.collapsed", "STANDS", "wide"],
+    "C42116": ["9a.collapsed", "STANDS", "bar"],
+    "C84676": ["9a.band-quiet", "STANDS", "wide"], "C86320": ["9a.band-quiet", "STANDS", "wide"], "C152996": ["9a.band-quiet", "STANDS", "wide"], "C85310": ["9a.band-quiet", "STANDS", "wide"],
+    "C131929": ["9a.structure", "STANDS", "wide"], "C143085": ["9a.structure", "STANDS", "wide"],
+    "C143088": ["9a.wave", "STANDS", "wide"], "C43177": ["9a.wave", "STANDS", "wide"],
+    "C183057": ["9a.curfew", "STANDS", "wide"], "C194447": ["9a.curfew", "STANDS", "wide"], "C198660": ["9a.curfew", "STANDS", "wide"],
+    "C187260": ["9a.watch-weak", "STANDS", "wide"], "C200637": ["9a.watch", "STANDS", "wide"], "C36857": ["9a.watch-weak", "WEAK", "bar"],
+    "C199950": ["9a.militia", "STANDS", "wide"],
+    "C157107": ["9a.balance", "STANDS", "wide"], "C162769": ["9a.balance", "WEAK", "wide"],
+    "C172465": ["9a.lawless", "STANDS", "wide"],
+    "C80552": ["9a.manned", "STANDS", "wide"],
+    "C213284": ["9a.hands", "STANDS", "wide"],
+    "C51048": ["9a.pay", "STANDS", "wide"],
+    "C154050": ["9a.contested", "STANDS", "wide"], "C155339": ["9a.contested", "STANDS", "wide"],
+    "C81673": ["9a.contested", "EXPLAINED", "wide"], "C82881": ["9a.contested", "EXPLAINED", "wide"], "C207455": ["9a.contested", "EXPLAINED", "wide"], "C151604": ["9a.contested", "EXPLAINED", "wide"],
+    "C18578": ["9a.contested", "EXPLAINED", "bar"]
+  },
+  "9b": {
+    "C88465": ["9b.subsistence", "STANDS", "wide"], "C89035": ["9b.subsistence", "WEAK", "wide"],
+    "C66113": ["9b.purse", "STANDS", "wide"], "C32519": ["9b.purse", "STANDS", "bar"], "C16520": ["9b.purse", "EXPLAINED", "bar"], "C61967": ["9b.purse", "EXPLAINED", "wide"], "C58141": ["9b.purse", "EXPLAINED", "wide"],
+    "C89075": ["9b.shadow", "WEAK", "wide"], "C83868": ["9b.shadow", "WEAK", "wide"], "C216091": ["9b.shadow", "WEAK", "wide"], "C216874": ["9b.shadow", "WEAK", "wide"]
+  },
+  "9c": {
+    "C128263": ["9c.putby", "STANDS", "wide"], "C33652": ["9c.putby", "EXPLAINED", "bar"], "C62474": ["9c.putby", "EXPLAINED", "wide"], "C99619": ["9c.putby", "EXPLAINED", "wide"], "C117522": ["9c.putby", "EXPLAINED", "wide"],
+    "C156726": ["9c.nothing-over", "STANDS", "wide"],
+    "C184150": ["9c.reassure", "STANDS", "wide"], "C40276": ["9c.reassure", "STANDS", "bar"],
+    "C90582": ["9c.fish-stopped", "STANDS", "wide"], "C17290": ["9c.fish-stopped", "STANDS", "bar"], "C96337": ["9c.fish-stopped", "WEAK", "wide"],
+    "C177322": ["9c.carts", "STANDS", "wide"], "C177698": ["9c.carts", "EXPLAINED", "wide"],
+    "C154358": ["9c.no-imports", "STANDS", "wide"],
+    "C39597": ["9c.game", "STANDS", "bar"]
+  },
+  "9d": {
+    "C193977": ["9d.isolated", "STANDS", "wide"], "C194173": ["9d.isolated", "STANDS", "wide"], "C194531": ["9d.isolated", "STANDS", "wide"], "C176731": ["9d.isolated", "EXPLAINED", "wide"],
+    "C211337": ["9d.no-exports", "STANDS", "wide"], "C217617": ["9d.no-exports", "STANDS", "wide"], "C93420": ["9d.no-exports", "EXPLAINED", "wide"]
+  },
+  "9e": {
+    "C14460": ["9e.leans", "STANDS", "wide"], "C128358": ["9e.leans", "STANDS", "wide"], "C158346": ["9e.leans", "STANDS", "wide"],
+    "C62573": ["9e.military", "STANDS", "wide"], "C164227": ["9e.military", "STANDS", "wide"],
+    "C32780": ["9e.quietly", "STANDS", "wide"],
+    "C84616": ["9e.heresy", "STANDS", "wide"], "C18731": ["9e.heresy", "WEAK", "wide"],
+    "C26440": ["9e.none", "WEAK", "wide"], "C183125": ["9e.none", "WEAK", "wide"],
+    "C110376": ["9e.if-help", "WEAK", "wide"], "C117636": ["9e.if-help", "WEAK", "wide"], "C78252": ["9e.if-help", "EXPLAINED", "wide"],
+    "C83538": ["9e.none", "EXPLAINED", "wide"], "C176732": ["9e.none", "EXPLAINED", "wide"], "C177702": ["9e.none", "EXPLAINED", "wide"], "C139724": ["9e.none", "EXPLAINED", "wide"],
+    "C40444": ["9e.none", "EXPLAINED", "bar"], "C31972": ["9e.none", "EXPLAINED", "bar"],
+    "C9617": ["9e.none", "STANDS", "bar"], "C33713": ["9e.none", "STANDS", "bar"], "C43125": ["9e.none", "STANDS", "bar"], "C29831": ["9e.none", "STANDS", "bar"], "C17061": ["9e.none", "STANDS", "bar"]
+  },
+  "9f": {
+    "C76517": ["9f.loyal", "STANDS", "wide"]
+  }
+}

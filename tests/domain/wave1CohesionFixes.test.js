@@ -137,8 +137,13 @@ describe('arcane_instability requires live magic (no wild-magic threats in munda
     expect(arcaneThreats(town({ priorityMagic: 15 }, 5))).toHaveLength(0);
   });
 
-  it('a magic-heavy town with weak arcane defenses DOES read instability', () => {
-    expect(arcaneThreats(town({ priorityMagic: 80 }, 20)).length).toBeGreaterThan(0);
+  // Re-keyed with cause (R3-CODE-C, the chair's ruling of 2026-11-13 on the defence lane's C-H1): a weak magical
+  // DEFENCE is a rating, not a fact about the world's magic, so it no longer reads as instability in any world; the
+  // record's own magical crisis does (step 5, the stressors).
+  it('a magic-heavy town with weak arcane defenses reads NO instability from the score; a magical crisis does', () => {
+    expect(arcaneThreats(town({ priorityMagic: 80 }, 20))).toHaveLength(0);
+    const crisis = { ...town({ priorityMagic: 80 }, 20), stress: { type: 'magical_instability', name: 'Magical instability' } };
+    expect(arcaneThreats(crisis).map((t) => t.originSurface)).toEqual(['stressors']);
   });
 });
 

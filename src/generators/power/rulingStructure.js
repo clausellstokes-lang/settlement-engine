@@ -10,7 +10,7 @@ import { getInstFlags, getPriorities, getStressFlags, priorityToMultiplier } fro
 import {
   applyLegitimacyMultipliers,
   computeCriminalCaptureState,
-  computeFactionRelationships,
+  computeFactionRelationships, boycottReadsRelation, // BAR3-POWERS (C27440)
   computePublicLegitimacy,
 } from '../factionDynamics.js';
 import { inferFactionCategory } from './factionCategories.js';
@@ -23,12 +23,14 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS, GOV_DESC_OF_UNNAMED_SEAT } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { courtHoldersOf } from '../../domain/facts/defence.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../../domain/facts/factsOf.js'; import { textOf } from '../../domain/facts/textOf.js'; import { MILITARY_GUARD_LABEL } from '../../data/factionLabelSiblings.js'; import { FACTION_DESC_SIBLINGS, GOV_DESC_OF_UNNAMED_SEAT, REEVE_ANSWERS_TO_ELECTORS, noGrazingQuarrelOf } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; import { occupiedSeatLine } from './governingStressVignettes.js'; // SIZE-3, R6, F1, F10, CENSUS-1c, CENSUS-4f, CENSUS-5c and CENSUS-5e (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
 
 import { renormalizeFactionPower } from './renormalizeFactionPower.js'; export { renormalizeFactionPower }; // LANDING-R2 (ODQ §934.105): moved verbatim to power/renormalizeFactionPower.js, re-exported for its importers
 import { normalizeAndAnnotateFactions } from './normalizeAndAnnotateFactions.js';
+import { forceLineOf, COUNCIL_BODIES, marketDayLineOf } from './militaryForceLine.js'; // BAR5-POWERS (1c-force): the military description reads the settled roster; BAR6-POWERS (10f-kind, 10f-tier): the seat's card by its kind, the merchants' by the tier
+import { settleClaimsToLabel } from './claimStanding.js'; // COHERENCE-POWERS-8: the claim table in its own module (F31's ceiling: a split, never a raise)
+export { settleClaimsToLabel };
 export { normalizeAndAnnotateFactions }; // COHERENCE-POWERS-3 (F12): moved verbatim to power/normalizeAndAnnotateFactions.js, re-exported for its importers
-
 
 export const generatePowerStructure = (
   tier,
@@ -220,7 +222,7 @@ export const generatePowerStructure = (
       ? (governingFaction =
           (topPriority > 65 &&
             {
-              military: "Headman's Authority",
+              military: lowerInstNames.some((n) => String(n).includes('headman')) ? "Headman's Authority" : null, // TAIL-POWERS-2 DA (P7, P8): said only where the roster holds a headman's house; with none, the size's civic seat below
               religion: 'Priestly Guidance',
               economy: 'Household Council',
               criminal: 'Elder Council',
@@ -330,7 +332,7 @@ export const generatePowerStructure = (
       'Household Council':
         'Settlement governed by heads of household; decisions by informal consensus among property owners.',
       'Elder Council': 'Respected elders guide the community; authority is moral and traditional rather than formal.',
-      'Elected Reeve': 'A reeve elected from the peasantry manages labour and mediates disputes under noble oversight.',
+      'Elected Reeve': noblePower > (tier === 'town' && !hasNobleInst ? 10 : 5) || hasNobleInst ? 'A reeve elected from the peasantry manages labour and mediates disputes under noble oversight.' : REEVE_ANSWERS_TO_ELECTORS, // BAR8-K-POWERS (14d, C44634): the noble it names is a noble power this step seats or a noble house; none, its twin (data/powerSiblings.js)
       'Feudal Stewardship':
         "A lord's steward administers the settlement; authority flows downward from the noble, not upward from residents.",
       'Feudal Appointee':
@@ -344,7 +346,7 @@ export const generatePowerStructure = (
       'Military City Council':
         'Military officers hold decisive influence over civilian governance; the council ratifies what the commanders decide.',
       'Ecclesiastical Council':
-        'Senior clergy hold effective civic authority alongside elected aldermen; religious law shapes civil policy.',
+        'Senior clergy hold effective civic authority through the council; religious law shapes civil policy.', // BAR3-POWERS (C5398): no elected body the roster lacks
       'Merchant City Council': 'Wealthy merchants dominate council seats; trade interests drive policy and taxation.',
       'Corrupt City Council':
         'Nominally elected, effectively purchased; council seats are openly traded among criminal and commercial interests.',
@@ -406,7 +408,7 @@ export const generatePowerStructure = (
     },
     // R-AM (CENSUS-1g): resolved where it is CHOSEN, not inside the table (an eager `said` noted a
     // description no birth printed); `said` hands every non-key back untouched, so nothing moves.
-    govDesc = said(govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByLabel[governingFaction] || GOV_DESC_OF_UNNAMED_SEAT[governingFaction] || govDescByFaction['Mixed Council']), // SW-B1 (P50): the seat's own line, from either table
+    govDesc = said((COUNCIL_BODIES.includes(govBody) && governingFaction !== govBody && (govDescByFaction[governingFaction] || govDescByLabel[governingFaction])) || govDescByLabel[govBody] || govDescByFaction[governingFaction] || govDescByLabel[governingFaction] || GOV_DESC_OF_UNNAMED_SEAT[governingFaction] || govDescByFaction['Mixed Council']), // SW-B1 (P50): the seat's own line, from either table; TAIL-POWERS-4 (03509): a town's council line only where the council governs; BAR6-POWERS (10f-kind, C121364): a city's and a metropolis's too (a High Theocratic Council takes the clergy's card, not the grand council's)
     priorityBonus = topPriority > 80 ? 18 : topPriority > 65 ? 12 : topPriority > 50 ? 6 : 0,
     govPower = [
       'Theocratic Council',
@@ -462,7 +464,7 @@ export const generatePowerStructure = (
                   : 'Established merchant community; fund civic works and expect council access in return.'
               : merchantAdjPower >= 10
                 ? 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.'
-                : said('A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.'),
+                : marketDayLineOf(tier, () => said('A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.')), // BAR6-POWERS (10f-tier, C128237): a small place's line
       // SW-8: "(dominant)" left the name (it printed); the cap reads the dominance itself.
       merchantDominant =
         (economicState == null ? void 0 : economicState.prosperity) === 'Wealthy' ||
@@ -522,7 +524,11 @@ export const generatePowerStructure = (
                 : priorityToCategory(priorities.military) === 'very_high'
                   ? "Militarised noble families whose landholdings double as fortified estates; they provide the settlement's heavy cavalry and expect political weight in return."
                   : noblePower > 20
-                    ? 'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the elected council cannot easily override.'
+                    // COHERENCE-POWERS-8 (the lane's row #295, rw3-metropolis-under_siege-1): "the elected council" only where a
+                    // council sits in the seat; under a duke, a guild consortium or a military council, the seat itself
+                    ? (['Town Council', 'City Council', 'Grand Council'].includes(String(governingFaction || ''))
+                      ? 'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the elected council cannot easily override.'
+                      : 'Landed noble families whose hereditary rights, land rents, and marriage networks give them structural influence the seat cannot easily override.')
                     : noblePower > 10
                       ? tier === 'metropolis'
                         ? 'Hereditary great families with land grants, court appointments, and dynastic marriage networks; structurally embedded in governance even when not formally in power.'
@@ -537,7 +543,7 @@ export const generatePowerStructure = (
     });
   }
   if (militaryPower > 5 && (tier !== 'thorp' || priorities.military > 60)) {
-    const militaryDesc = said(
+    const militaryDesc = forceLineOf(said(
         priorityToCategory(priorities.military) === 'very_high'
           ? militaryPower > 25
             ? ['city', 'metropolis'].includes(tier)
@@ -547,14 +553,14 @@ export const generatePowerStructure = (
           : priorityToCategory(priorities.military) === 'low'
             ? ['hamlet', 'village', 'thorp'].includes(tier)
               ? 'Part-time armed volunteers with limited organisation; authority is moral rather than institutional.'
-              : 'Undermanned and underfunded; unable to enforce law consistently and aware of it.'
+              : (Array.isArray(projection.stressEntries) ? projection.stressEntries.map((e) => e?.type) : config?.stressTypes || (config?.stressType ? [config.stressType] : [])).includes('wartime') ? 'Kept small before the war, and the war has put more on it than it was built to carry.' : Number(projection.militaryGate) >= 1 ? 'Small for a place of this size; it cannot enforce the law everywhere at once, and it knows it.' : 'Undermanned and underfunded; unable to enforce law consistently and aware of it.' // BAR3-POWERS (C11669): no "undermanned" under a war (the stress entries line 672 reads), no "underfunded" where PP11's gate (on the replay) reads 1; the draw not moved
             : ['thorp', 'hamlet', 'village'].includes(tier)
               ? "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical."
               : tier === 'town'
                 ? 'Town watch; it enforces ordinances, manages disorder, and reports to the council.'
                 : militaryPower > 18
-                  ? 'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.'
-                  : 'City watch; law enforcement and external defence, stretched between multiple responsibilities.'),
+                  ? 'City watch; it answers for keeping order and is growing more sure of its own authority.'
+                  : 'City watch; law enforcement and external defence, stretched between multiple responsibilities.'), projection.forces), // BAR5-POWERS (1c-force, PW1; R-Q): the settled roster's atoms, handed by the late replay only: no force the roster lacks
       militaryDescFinal =
         governingFaction && (governingFaction.toLowerCase().includes('military council') || governingFaction.toLowerCase().includes('martial'))
           ? militaryDesc +
@@ -582,14 +588,14 @@ export const generatePowerStructure = (
     religiousGate = ['village', 'town', 'city', 'metropolis'].includes(tier) || hasReligiousInst;
   if (religiousPower > 5 && religiousGate) {
     const religiousDesc =
-      priorities.criminal > 70 && priorities.religion < 35 && instFlags.criminalEffective > 60
+      priorities.criminal > 70 && priorities.religion < 35 && instFlags.criminalEffective > 60 && ['organized', 'semi-organized'].includes(factsOf({ institutions: nativeInstitutions, economicState }).crime) // BAR4-SAFETY (F3, SF1 d): organised crime only where the crime key reads an organisation
         ? 'Clergy operate here but the church holds little civic authority; organised crime has crowded out most formal moral influence.'
         : governingFaction && governingFaction.includes('Theocratic Council')
           ? 'Religious law governs directly; clergy are administrators as much as priests, and doctrine shapes civic ordinance.'
           : governingFaction && governingFaction.includes('Church Council')
             ? 'Church authority is the formal source of governing legitimacy here; clergy hold both spiritual and temporal jurisdiction.'
             : religiousPower > 24
-              ? lowerInstNames.some((name) => name.includes('cathedral') || name.includes('monastery'))
+              ? factsOf({ institutions: nativeInstitutions }).faith.hasChurch && /ecclesiastical/i.test(String(governingFaction || '')) // TAIL-POWERS-4 (04923): "all ecclesiastical" only under the church's own seat; TAIL-CLOSE-SRC-3: the church is the vocabulary's `church` atom
                 ? 'Church institutions hold direct temporal power; tithes, land, and courts are all ecclesiastical.'
                 : "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
               : religiousPower > 17
@@ -669,7 +675,7 @@ export const generatePowerStructure = (
       ? stressEntries.map((e) => e.type)
       : (config == null ? void 0 : config.stressTypes) || (stressType ? [stressType] : []),
     hasStress = (s) => stressTypes.includes(s);
-  applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions, stressEntries || []);
+  applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions, stressEntries || []); for (const f of factions) if (f.isGoverning) f.desc = occupiedSeatLine(f.faction, () => birthFactsOf({ institutions: nativeInstitutions, config: { ...config, stressTypes }, tier })) || f.desc; // TAIL-POWERS-2 P4: under an occupation the seat's line is its twin
   const standingForce = forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions })); normalizeAndAnnotateFactions(factions, standingForce, { annotate: false }); // F1: the standing lines name the force that stands; SW-B1 (P51): annotated below, after the last power write
   // Tag each faction with a category for power-economy correlation
   factions.forEach((f) => {
@@ -679,7 +685,7 @@ export const generatePowerStructure = (
     factions,
     config,
     stressFlags,
-    instFlags,
+    instFlags: { ...instFlags, garrisonStands: defenseFactsOf({ institutions: nativeInstitutions }).hasGarrison, noGrazingQuarrel: noGrazingQuarrelOf({ institutionNames: instNames, pastoral: economicState?.foodSecurity?.chains?.['Pastoral & livestock'] === true, grounds: config?.nearbyResources }) }, // TAIL-POWERS-3 P16 (G5): the garrison, for the military word; BAR8-K-POWERS (15b): the cascade's last quarrel where nothing grazes
     neighbourRelationship,
     instNames,
     priorities,
@@ -689,6 +695,7 @@ export const generatePowerStructure = (
     stressTypes,
     stressEntries: stressEntries || [],
     fallbackStressType: stressType,
+    failedFoodSource: economicState?.foodSecurity?.foodRecord?.failedSource ?? null, defenseLabel: projection.defenseLabel || null, militaryGate: projection.militaryGate ?? null, // POWERS-14 (NEW1): the record's readiness label, on the replay; PP11: its funding gate
   });
   // ── Public legitimacy & faction dynamics ────────────────────────────────
   // At this point defenseProfile isn't computed yet — we use a provisional
@@ -727,7 +734,8 @@ export const generatePowerStructure = (
 
   // Apply multipliers before relationship computation (relationships use final powers)
   applyLegitimacyMultipliers(factions, publicLegitimacy, tier);
-  annotateFactionStanding(factions, standingForce); // SW-B1 (P51): on the power order the cards print, after the multipliers' re-sort
+  settleClaimsToLabel(factions, tier, lowerInstNames, publicLegitimacy); // COHERENCE-POWERS-8 (POWERS-11: the roster read): no claim the label denies
+  annotateFactionStanding(factions, standingForce, { publicLegitimacy }); // SW-B1 (P51): on the power order the cards print, after the multipliers' re-sort; BAR4-HISTORY C14176 (FS2): the seat's legitimacy, for its coup reading
 
   const safetyRatio = safetyRatioOf(instFlags);
   // ALLEGIANCE-CAR2 (2026-11-08, the allegiance design §3.4, J-13 — ONE writer): the hall-capture state is
@@ -746,7 +754,7 @@ export const generatePowerStructure = (
       safetyRatio,
     },
     publicLegitimacy,
-    stressTypesArr, defenseFactsOf({ institutions: nativeInstitutions }), // R6: the soldiers line reads the place's forces
+    stressTypesArr, defenseFactsOf({ institutions: nativeInstitutions }), courtHoldersOf({ institutions: nativeInstitutions }).length > 0, // R6: the soldiers line reads the place's forces; FAULTS-WATCH FR25 (c): the roster's court, the Legal row's own function
   );
 
   return {
@@ -761,8 +769,8 @@ export const generatePowerStructure = (
     // type); a transfer of power (domain/rulingPower.js) keeps both in step
     // while previousGovernments records what the seat used to be.
     government: (factions.find((f) => f.isGoverning) || {}).faction || null,
-    stability,
-    recentConflict,
+    stability: /^Stable(;|$)/.test(String(stability)) && publicLegitimacy?.label === 'Legitimacy Crisis' ? String(stability).replace(/^Stable/, "Tense (the seat has lost the people's trust)") : stability, // TAIL-POWERS-3 P16 (G2): no bare "Stable" beside a Legitimacy Crisis (the stability is written before the legitimacy)
+    recentConflict: boycottReadsRelation(recentConflict, factionRelationships, governingFaction), // BAR3-POWERS (C27440): the boycott reads the pair's relation row
     publicLegitimacy,
     factionRelationships,
   };
@@ -789,4 +797,3 @@ export function captureClimateOf(settlement) {
 /** The sets this step can answer (R-Q): every set whose atoms are settled before the power step. */
 const FACTION_DESC_SIBLINGS_SETTLED = Object.freeze(Object.fromEntries(Object.entries(FACTION_DESC_SIBLINGS)
   .filter(([, set]) => !set.some((l) => [...(/** @type {any} */ (l).needs || []), ...(/** @type {any} */ (l).excludes || [])].includes('militia')))));
-

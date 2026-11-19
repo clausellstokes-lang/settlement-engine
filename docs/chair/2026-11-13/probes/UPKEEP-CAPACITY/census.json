@@ -1,0 +1,2238 @@
+{
+ "parts": {
+  "market": [
+   {
+    "family": "Fish market",
+    "shelf": "Economy",
+    "name": "Fish market",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "village",
+     "town",
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Furrier's district",
+    "shelf": "Economy",
+    "name": "Furrier's district",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Weekly market",
+    "shelf": "Economy",
+    "name": "Periodic market",
+    "rung": 1,
+    "of": 4,
+    "tiers": [
+     "hamlet"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Weekly market",
+    "shelf": "Economy",
+    "name": "Weekly market",
+    "rung": 2,
+    "of": 4,
+    "tiers": [
+     "village",
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Weekly market",
+    "shelf": "Economy",
+    "name": "Daily markets",
+    "rung": 3,
+    "of": 4,
+    "tiers": [
+     "city"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Weekly market",
+    "shelf": "Economy",
+    "name": "District markets (5-10)",
+    "rung": 4,
+    "of": 4,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": "5-10",
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Multiple market squares",
+    "shelf": "Economy",
+    "name": "Market square",
+    "rung": 1,
+    "of": 2,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Multiple market squares",
+    "shelf": "Economy",
+    "name": "Multiple market squares",
+    "rung": 2,
+    "of": 2,
+    "tiers": [
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Major annual fairs",
+    "shelf": "Economy",
+    "name": "Annual fair",
+    "rung": 1,
+    "of": 2,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Major annual fairs",
+    "shelf": "Economy",
+    "name": "Major annual fairs",
+    "rung": 2,
+    "of": 2,
+    "tiers": [
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "International trade center",
+    "shelf": "Economy",
+    "name": "International trade center",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Merchant guilds (3-8)",
+    "shelf": "Economy",
+    "name": "Merchant guilds (3-8)",
+    "rung": 1,
+    "of": 3,
+    "tiers": [
+     "town"
+    ],
+    "count": "3-8",
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Merchant guilds (3-8)",
+    "shelf": "Economy",
+    "name": "Merchant guilds (15-40)",
+    "rung": 2,
+    "of": 3,
+    "tiers": [
+     "city"
+    ],
+    "count": "15-40",
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Merchant guilds (3-8)",
+    "shelf": "Economy",
+    "name": "Merchant guilds (50-100+)",
+    "rung": 3,
+    "of": 3,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": "50-100+",
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Caravan masters' exchange",
+    "shelf": "Economy",
+    "name": "Caravaneer's post",
+    "rung": 2,
+    "of": 3,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Carriers' hiring hall",
+    "shelf": "Economy",
+    "name": "Carriers' guild",
+    "rung": 2,
+    "of": 2,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Auction house",
+    "shelf": "Economy",
+    "name": "Auction house",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "town",
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Cobbler's guild",
+    "shelf": "Crafts",
+    "name": "Cobbler's guild",
+    "rung": 2,
+    "of": 2,
+    "tiers": [
+     "town",
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   },
+   {
+    "family": "Tailor's guild",
+    "shelf": "Crafts",
+    "name": "Tailor's guild",
+    "rung": 2,
+    "of": 2,
+    "tiers": [
+     "town",
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "market"
+    ]
+   }
+  ],
+  "granary": [
+   {
+    "family": "Town granary",
+    "shelf": "Economy",
+    "name": "Town granary",
+    "rung": 1,
+    "of": 3,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "granary"
+    ]
+   },
+   {
+    "family": "Town granary",
+    "shelf": "Economy",
+    "name": "City granaries",
+    "rung": 2,
+    "of": 3,
+    "tiers": [
+     "city"
+    ],
+    "count": null,
+    "opens": [
+     "granary"
+    ]
+   },
+   {
+    "family": "Town granary",
+    "shelf": "Economy",
+    "name": "State granary complex",
+    "rung": 3,
+    "of": 3,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "granary"
+    ]
+   }
+  ],
+  "alchemists": [
+   {
+    "family": "Apothecary district",
+    "shelf": "Crafts",
+    "name": "Apothecary district",
+    "rung": 3,
+    "of": 3,
+    "tiers": [
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "alchemists"
+    ]
+   },
+   {
+    "family": "Alchemist quarter",
+    "shelf": "Crafts",
+    "name": "Alchemist shop",
+    "rung": 1,
+    "of": 2,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "alchemists"
+    ]
+   },
+   {
+    "family": "Alchemist quarter",
+    "shelf": "Crafts",
+    "name": "Alchemist quarter",
+    "rung": 2,
+    "of": 2,
+    "tiers": [
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "alchemists"
+    ]
+   }
+  ],
+  "clergyShrine": [
+   {
+    "family": "Wayside shrine",
+    "shelf": "Religious",
+    "name": "Wayside shrine",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "thorp",
+     "hamlet",
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "clergyShrine",
+     "parish"
+    ]
+   },
+   {
+    "family": "Monastery or friary",
+    "shelf": "Religious",
+    "name": "Monastery or friary",
+    "rung": 1,
+    "of": 3,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "clergyShrine",
+     "clergyStrong",
+     "hospital",
+     "parish"
+    ]
+   }
+  ],
+  "parish": [
+   {
+    "family": "Wayside shrine",
+    "shelf": "Religious",
+    "name": "Wayside shrine",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "thorp",
+     "hamlet",
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "clergyShrine",
+     "parish"
+    ]
+   },
+   {
+    "family": "Access to parish church",
+    "shelf": "Religious",
+    "name": "Access to parish church",
+    "rung": 1,
+    "of": 5,
+    "tiers": [
+     "thorp",
+     "hamlet"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "parish"
+    ]
+   },
+   {
+    "family": "Access to parish church",
+    "shelf": "Religious",
+    "name": "Parish church",
+    "rung": 2,
+    "of": 5,
+    "tiers": [
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "parish"
+    ]
+   },
+   {
+    "family": "Access to parish church",
+    "shelf": "Religious",
+    "name": "Parish churches (2-5)",
+    "rung": 3,
+    "of": 5,
+    "tiers": [
+     "town"
+    ],
+    "count": "2-5",
+    "opens": [
+     "clergy",
+     "parish"
+    ]
+   },
+   {
+    "family": "Access to parish church",
+    "shelf": "Religious",
+    "name": "Parish churches (10-30)",
+    "rung": 4,
+    "of": 5,
+    "tiers": [
+     "city"
+    ],
+    "count": "10-30",
+    "opens": [
+     "clergy",
+     "parish"
+    ]
+   },
+   {
+    "family": "Access to parish church",
+    "shelf": "Religious",
+    "name": "Parish churches (50-100+)",
+    "rung": 5,
+    "of": 5,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": "50-100+",
+    "opens": [
+     "clergy",
+     "parish"
+    ]
+   },
+   {
+    "family": "Priest (resident)",
+    "shelf": "Religious",
+    "name": "Priest (resident)",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "parish"
+    ]
+   },
+   {
+    "family": "Monastery or friary",
+    "shelf": "Religious",
+    "name": "Monastery or friary",
+    "rung": 1,
+    "of": 3,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "clergyShrine",
+     "clergyStrong",
+     "hospital",
+     "parish"
+    ]
+   },
+   {
+    "family": "Cathedral (10,000+ only)",
+    "shelf": "Religious",
+    "name": "Cathedral (10,000+ only)",
+    "rung": 1,
+    "of": 2,
+    "tiers": [
+     "city"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "clergyStrong",
+     "parish"
+    ]
+   },
+   {
+    "family": "Cathedral (10,000+ only)",
+    "shelf": "Religious",
+    "name": "Great cathedral",
+    "rung": 2,
+    "of": 2,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "clergyStrong",
+     "parish"
+    ]
+   }
+  ],
+  "clergy": [
+   {
+    "family": "Access to parish church",
+    "shelf": "Religious",
+    "name": "Access to parish church",
+    "rung": 1,
+    "of": 5,
+    "tiers": [
+     "thorp",
+     "hamlet"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "parish"
+    ]
+   },
+   {
+    "family": "Access to parish church",
+    "shelf": "Religious",
+    "name": "Parish church",
+    "rung": 2,
+    "of": 5,
+    "tiers": [
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "parish"
+    ]
+   },
+   {
+    "family": "Access to parish church",
+    "shelf": "Religious",
+    "name": "Parish churches (2-5)",
+    "rung": 3,
+    "of": 5,
+    "tiers": [
+     "town"
+    ],
+    "count": "2-5",
+    "opens": [
+     "clergy",
+     "parish"
+    ]
+   },
+   {
+    "family": "Access to parish church",
+    "shelf": "Religious",
+    "name": "Parish churches (10-30)",
+    "rung": 4,
+    "of": 5,
+    "tiers": [
+     "city"
+    ],
+    "count": "10-30",
+    "opens": [
+     "clergy",
+     "parish"
+    ]
+   },
+   {
+    "family": "Access to parish church",
+    "shelf": "Religious",
+    "name": "Parish churches (50-100+)",
+    "rung": 5,
+    "of": 5,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": "50-100+",
+    "opens": [
+     "clergy",
+     "parish"
+    ]
+   },
+   {
+    "family": "Monastery or friary",
+    "shelf": "Religious",
+    "name": "Monastery or friary",
+    "rung": 1,
+    "of": 3,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "clergyShrine",
+     "clergyStrong",
+     "hospital",
+     "parish"
+    ]
+   },
+   {
+    "family": "Cathedral (10,000+ only)",
+    "shelf": "Religious",
+    "name": "Cathedral (10,000+ only)",
+    "rung": 1,
+    "of": 2,
+    "tiers": [
+     "city"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "clergyStrong",
+     "parish"
+    ]
+   },
+   {
+    "family": "Cathedral (10,000+ only)",
+    "shelf": "Religious",
+    "name": "Great cathedral",
+    "rung": 2,
+    "of": 2,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "clergyStrong",
+     "parish"
+    ]
+   }
+  ],
+  "clergyStrong": [
+   {
+    "family": "Monastery or friary",
+    "shelf": "Religious",
+    "name": "Monastery or friary",
+    "rung": 1,
+    "of": 3,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "clergyShrine",
+     "clergyStrong",
+     "hospital",
+     "parish"
+    ]
+   },
+   {
+    "family": "Cathedral (10,000+ only)",
+    "shelf": "Religious",
+    "name": "Cathedral (10,000+ only)",
+    "rung": 1,
+    "of": 2,
+    "tiers": [
+     "city"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "clergyStrong",
+     "parish"
+    ]
+   },
+   {
+    "family": "Cathedral (10,000+ only)",
+    "shelf": "Religious",
+    "name": "Great cathedral",
+    "rung": 2,
+    "of": 2,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "clergyStrong",
+     "parish"
+    ]
+   }
+  ],
+  "hospital": [
+   {
+    "family": "Monastery or friary",
+    "shelf": "Religious",
+    "name": "Monastery or friary",
+    "rung": 1,
+    "of": 3,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "clergy",
+     "clergyShrine",
+     "clergyStrong",
+     "hospital",
+     "parish"
+    ]
+   },
+   {
+    "family": "Monastery or friary",
+    "shelf": "Religious",
+    "name": "Multiple monasteries",
+    "rung": 2,
+    "of": 3,
+    "tiers": [
+     "city"
+    ],
+    "count": null,
+    "opens": [
+     "hospital"
+    ]
+   },
+   {
+    "family": "Monastery or friary",
+    "shelf": "Religious",
+    "name": "Major monasteries (5-10)",
+    "rung": 3,
+    "of": 3,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": "5-10",
+    "opens": [
+     "hospital"
+    ]
+   },
+   {
+    "family": "Small hospital",
+    "shelf": "Religious",
+    "name": "Small hospital",
+    "rung": 1,
+    "of": 3,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "hospital"
+    ]
+   },
+   {
+    "family": "Small hospital",
+    "shelf": "Religious",
+    "name": "Major hospital",
+    "rung": 2,
+    "of": 3,
+    "tiers": [
+     "city"
+    ],
+    "count": null,
+    "opens": [
+     "hospital"
+    ]
+   },
+   {
+    "family": "Small hospital",
+    "shelf": "Religious",
+    "name": "Hospital network",
+    "rung": 3,
+    "of": 3,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "hospital"
+    ]
+   },
+   {
+    "family": "Healer (divine, 1st level)",
+    "shelf": "Magic",
+    "name": "Healer (divine, 1st level)",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "hospital"
+    ]
+   }
+  ],
+  "druids": [
+   {
+    "family": "Druid Circle",
+    "shelf": "Religious",
+    "name": "Druid Circle",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "druids"
+    ]
+   },
+   {
+    "family": "Elder Grove Council",
+    "shelf": "Religious",
+    "name": "Elder Grove Council",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "town",
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "druids",
+     "elders"
+    ]
+   }
+  ],
+  "elders": [
+   {
+    "family": "Elder Grove Council",
+    "shelf": "Religious",
+    "name": "Elder Grove Council",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "town",
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "druids",
+     "elders"
+    ]
+   },
+   {
+    "family": "Informal elder consensus",
+    "shelf": "Government",
+    "name": "Informal elder consensus",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "thorp",
+     "hamlet",
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "elders"
+    ]
+   },
+   {
+    "family": "Lord's reeve",
+    "shelf": "Government",
+    "name": "Lord's reeve",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "thorp"
+    ],
+    "count": null,
+    "opens": [
+     "elders"
+    ]
+   },
+   {
+    "family": "Household elder",
+    "shelf": "Government",
+    "name": "Household elder",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "thorp"
+    ],
+    "count": null,
+    "opens": [
+     "elders"
+    ]
+   },
+   {
+    "family": "Lord's steward",
+    "shelf": "Government",
+    "name": "Lord's steward",
+    "rung": 1,
+    "of": 3,
+    "tiers": [
+     "hamlet",
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "elders"
+    ]
+   },
+   {
+    "family": "City administration",
+    "shelf": "Government",
+    "name": "Village reeve",
+    "rung": 1,
+    "of": 3,
+    "tiers": [
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "elders"
+    ]
+   },
+   {
+    "family": "Village elder",
+    "shelf": "Government",
+    "name": "Village elder",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "elders"
+    ]
+   }
+  ],
+  "court": [
+   {
+    "family": "Democratic assembly",
+    "shelf": "Government",
+    "name": "Democratic assembly",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "court"
+    ]
+   },
+   {
+    "family": "City hall",
+    "shelf": "Infrastructure",
+    "name": "Town hall",
+    "rung": 1,
+    "of": 2,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "court"
+    ]
+   },
+   {
+    "family": "City hall",
+    "shelf": "Infrastructure",
+    "name": "City hall",
+    "rung": 2,
+    "of": 2,
+    "tiers": [
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "court"
+    ]
+   },
+   {
+    "family": "Courthouse",
+    "shelf": "Infrastructure",
+    "name": "Courthouse",
+    "rung": 1,
+    "of": 3,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "court"
+    ]
+   },
+   {
+    "family": "Courthouse",
+    "shelf": "Infrastructure",
+    "name": "Multiple courthouses",
+    "rung": 2,
+    "of": 3,
+    "tiers": [
+     "city"
+    ],
+    "count": null,
+    "opens": [
+     "court"
+    ]
+   },
+   {
+    "family": "Courthouse",
+    "shelf": "Infrastructure",
+    "name": "Multiple court buildings",
+    "rung": 3,
+    "of": 3,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "court"
+    ]
+   }
+  ],
+  "prison": [
+   {
+    "family": "Small prison/stocks",
+    "shelf": "Infrastructure",
+    "name": "Small prison/stocks",
+    "rung": 1,
+    "of": 3,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "prison"
+    ]
+   },
+   {
+    "family": "Small prison/stocks",
+    "shelf": "Infrastructure",
+    "name": "Large prison",
+    "rung": 2,
+    "of": 3,
+    "tiers": [
+     "city"
+    ],
+    "count": null,
+    "opens": [
+     "prison"
+    ]
+   },
+   {
+    "family": "Small prison/stocks",
+    "shelf": "Infrastructure",
+    "name": "Massive prison",
+    "rung": 3,
+    "of": 3,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "prison"
+    ]
+   }
+  ],
+  "walls": [
+   {
+    "family": "Palisade or earthworks",
+    "shelf": "Defense",
+    "name": "Palisade",
+    "rung": 1,
+    "of": 5,
+    "tiers": [
+     "thorp"
+    ],
+    "count": null,
+    "opens": [
+     "walls"
+    ]
+   },
+   {
+    "family": "Palisade or earthworks",
+    "shelf": "Defense",
+    "name": "Palisade or earthworks",
+    "rung": 2,
+    "of": 5,
+    "tiers": [
+     "hamlet",
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "walls"
+    ]
+   },
+   {
+    "family": "Palisade or earthworks",
+    "shelf": "Defense",
+    "name": "Town walls",
+    "rung": 3,
+    "of": 5,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "walls"
+    ]
+   },
+   {
+    "family": "Palisade or earthworks",
+    "shelf": "Defense",
+    "name": "City walls and gates",
+    "rung": 4,
+    "of": 5,
+    "tiers": [
+     "city"
+    ],
+    "count": null,
+    "opens": [
+     "walls"
+    ]
+   },
+   {
+    "family": "Palisade or earthworks",
+    "shelf": "Defense",
+    "name": "Massive walls and fortifications",
+    "rung": 5,
+    "of": 5,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "walls"
+    ]
+   },
+   {
+    "family": "Gates (if walled)",
+    "shelf": "Defense",
+    "name": "Gates (if walled)",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "walls"
+    ]
+   },
+   {
+    "family": "Citadel",
+    "shelf": "Defense",
+    "name": "Citadel",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "town",
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "walls"
+    ]
+   }
+  ],
+  "militia": [
+   {
+    "family": "Citizen militia",
+    "shelf": "Defense",
+    "name": "Citizen militia",
+    "rung": 2,
+    "of": 4,
+    "tiers": [
+     "hamlet",
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "militia"
+    ]
+   }
+  ],
+  "watch": [
+   {
+    "family": "Citizen militia",
+    "shelf": "Defense",
+    "name": "Town watch",
+    "rung": 3,
+    "of": 4,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "watch"
+    ]
+   },
+   {
+    "family": "Citizen militia",
+    "shelf": "Defense",
+    "name": "Professional city watch",
+    "rung": 4,
+    "of": 4,
+    "tiers": [
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "garrison",
+     "watch"
+    ]
+   },
+   {
+    "family": "Village watch",
+    "shelf": "Defense",
+    "name": "Village watch",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "watch"
+    ]
+   }
+  ],
+  "garrison": [
+   {
+    "family": "Citizen militia",
+    "shelf": "Defense",
+    "name": "Professional city watch",
+    "rung": 4,
+    "of": 4,
+    "tiers": [
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "garrison",
+     "watch"
+    ]
+   },
+   {
+    "family": "Barracks",
+    "shelf": "Defense",
+    "name": "Barracks",
+    "rung": 1,
+    "of": 3,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "garrison"
+    ]
+   },
+   {
+    "family": "Barracks",
+    "shelf": "Defense",
+    "name": "Garrison",
+    "rung": 2,
+    "of": 3,
+    "tiers": [
+     "city"
+    ],
+    "count": null,
+    "opens": [
+     "garrison"
+    ]
+   },
+   {
+    "family": "Barracks",
+    "shelf": "Defense",
+    "name": "Multiple garrisons",
+    "rung": 3,
+    "of": 3,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "garrison"
+    ]
+   }
+  ],
+  "company": [
+   {
+    "family": "Mercenary quarter",
+    "shelf": "Defense",
+    "name": "Free company hall",
+    "rung": 1,
+    "of": 2,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "company"
+    ]
+   },
+   {
+    "family": "Mercenary quarter",
+    "shelf": "Defense",
+    "name": "Mercenary quarter",
+    "rung": 2,
+    "of": 2,
+    "tiers": [
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "company"
+    ]
+   }
+  ],
+  "wardens": [
+   {
+    "family": "Warden's Lodge",
+    "shelf": "Defense",
+    "name": "Warden's Lodge",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "wardens"
+    ]
+   }
+  ],
+  "arcane": [
+   {
+    "family": "Wizard's tower",
+    "shelf": "Magic",
+    "name": "Traveling hedge wizard",
+    "rung": 1,
+    "of": 3,
+    "tiers": [
+     "hamlet"
+    ],
+    "count": null,
+    "opens": [
+     "arcane"
+    ]
+   },
+   {
+    "family": "Wizard's tower",
+    "shelf": "Magic",
+    "name": "Hedge wizard",
+    "rung": 2,
+    "of": 3,
+    "tiers": [
+     "village"
+    ],
+    "count": null,
+    "opens": [
+     "arcane"
+    ]
+   },
+   {
+    "family": "Wizard's tower",
+    "shelf": "Magic",
+    "name": "Wizard's tower",
+    "rung": 3,
+    "of": 3,
+    "tiers": [
+     "town",
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "arcane",
+     "arcaneTower",
+     "arcaneGuild"
+    ]
+   },
+   {
+    "family": "Mages' guild",
+    "shelf": "Magic",
+    "name": "Mages' guild",
+    "rung": 1,
+    "of": 2,
+    "tiers": [
+     "town",
+     "city"
+    ],
+    "count": null,
+    "opens": [
+     "arcane",
+     "arcaneGuild"
+    ]
+   },
+   {
+    "family": "Mages' guild",
+    "shelf": "Magic",
+    "name": "Mages' district",
+    "rung": 2,
+    "of": 2,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "arcane",
+     "arcaneGuild"
+    ]
+   },
+   {
+    "family": "Academy of magic",
+    "shelf": "Magic",
+    "name": "Academy of magic",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "arcane",
+     "arcaneGuild"
+    ]
+   },
+   {
+    "family": "Enchanter's shop",
+    "shelf": "Magic",
+    "name": "Enchanter's shop",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "arcane"
+    ]
+   },
+   {
+    "family": "Scroll scribe",
+    "shelf": "Magic",
+    "name": "Scroll scribe",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "town",
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "arcane"
+    ]
+   }
+  ],
+  "arcaneTower": [
+   {
+    "family": "Wizard's tower",
+    "shelf": "Magic",
+    "name": "Wizard's tower",
+    "rung": 3,
+    "of": 3,
+    "tiers": [
+     "town",
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "arcane",
+     "arcaneTower",
+     "arcaneGuild"
+    ]
+   }
+  ],
+  "arcaneGuild": [
+   {
+    "family": "Wizard's tower",
+    "shelf": "Magic",
+    "name": "Wizard's tower",
+    "rung": 3,
+    "of": 3,
+    "tiers": [
+     "town",
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "arcane",
+     "arcaneTower",
+     "arcaneGuild"
+    ]
+   },
+   {
+    "family": "Mages' guild",
+    "shelf": "Magic",
+    "name": "Mages' guild",
+    "rung": 1,
+    "of": 2,
+    "tiers": [
+     "town",
+     "city"
+    ],
+    "count": null,
+    "opens": [
+     "arcane",
+     "arcaneGuild"
+    ]
+   },
+   {
+    "family": "Mages' guild",
+    "shelf": "Magic",
+    "name": "Mages' district",
+    "rung": 2,
+    "of": 2,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "arcane",
+     "arcaneGuild"
+    ]
+   },
+   {
+    "family": "Academy of magic",
+    "shelf": "Magic",
+    "name": "Academy of magic",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "arcane",
+     "arcaneGuild"
+    ]
+   }
+  ],
+  "teleport": [
+   {
+    "family": "Teleportation circle",
+    "shelf": "Magic",
+    "name": "Teleportation circle",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "town",
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "teleport"
+    ]
+   }
+  ],
+  "charter": [
+   {
+    "family": "Adventurers' charter hall",
+    "shelf": "Adventuring",
+    "name": "Adventurers' charter hall",
+    "rung": 1,
+    "of": 2,
+    "tiers": [
+     "hamlet",
+     "village",
+     "town"
+    ],
+    "count": null,
+    "opens": [
+     "charter"
+    ]
+   },
+   {
+    "family": "Adventurers' charter hall",
+    "shelf": "Adventuring",
+    "name": "Multiple adventurers' guilds",
+    "rung": 2,
+    "of": 2,
+    "tiers": [
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "charter"
+    ]
+   },
+   {
+    "family": "Hireling hall",
+    "shelf": "Adventuring",
+    "name": "Hireling hall",
+    "rung": 1,
+    "of": 1,
+    "tiers": [
+     "town",
+     "city",
+     "metropolis"
+    ],
+    "count": null,
+    "opens": [
+     "charter"
+    ]
+   }
+  ]
+ },
+ "authoredPairs": [
+  {
+   "lesser": "Parish church",
+   "greater": "Parish churches (2-5)",
+   "lesserOpens": [
+    "clergy",
+    "parish"
+   ],
+   "greaterOpens": [
+    "clergy",
+    "parish"
+   ]
+  },
+  {
+   "lesser": "Parish church",
+   "greater": "Parish churches (10-30)",
+   "lesserOpens": [
+    "clergy",
+    "parish"
+   ],
+   "greaterOpens": [
+    "clergy",
+    "parish"
+   ]
+  },
+  {
+   "lesser": "Parish churches (2-5)",
+   "greater": "Parish churches (10-30)",
+   "lesserOpens": [
+    "clergy",
+    "parish"
+   ],
+   "greaterOpens": [
+    "clergy",
+    "parish"
+   ]
+  },
+  {
+   "lesser": "Citizen militia",
+   "greater": "Town watch",
+   "lesserOpens": [
+    "militia"
+   ],
+   "greaterOpens": [
+    "watch"
+   ]
+  },
+  {
+   "lesser": "Citizen militia",
+   "greater": "Professional city watch",
+   "lesserOpens": [
+    "militia"
+   ],
+   "greaterOpens": [
+    "garrison",
+    "watch"
+   ]
+  },
+  {
+   "lesser": "Town watch",
+   "greater": "Professional city watch",
+   "lesserOpens": [
+    "watch"
+   ],
+   "greaterOpens": [
+    "garrison",
+    "watch"
+   ]
+  },
+  {
+   "lesser": "Village watch",
+   "greater": "Town watch",
+   "lesserOpens": [
+    "watch"
+   ],
+   "greaterOpens": [
+    "watch"
+   ]
+  },
+  {
+   "lesser": "Palisade or earthworks",
+   "greater": "Town walls",
+   "lesserOpens": [
+    "walls"
+   ],
+   "greaterOpens": [
+    "walls"
+   ]
+  },
+  {
+   "lesser": "Town walls",
+   "greater": "City walls and gates",
+   "lesserOpens": [
+    "walls"
+   ],
+   "greaterOpens": [
+    "walls"
+   ]
+  },
+  {
+   "lesser": "Barracks",
+   "greater": "Garrison",
+   "lesserOpens": [
+    "garrison"
+   ],
+   "greaterOpens": [
+    "garrison"
+   ]
+  },
+  {
+   "lesser": "Hedge wizard",
+   "greater": "Wizard's tower",
+   "lesserOpens": [
+    "arcane"
+   ],
+   "greaterOpens": [
+    "arcane",
+    "arcaneTower",
+    "arcaneGuild"
+   ]
+  },
+  {
+   "lesser": "Traveling hedge wizard",
+   "greater": "Hedge wizard",
+   "lesserOpens": [
+    "arcane"
+   ],
+   "greaterOpens": [
+    "arcane"
+   ]
+  },
+  {
+   "lesser": "Alchemist shop",
+   "greater": "Alchemist quarter",
+   "lesserOpens": [
+    "alchemists"
+   ],
+   "greaterOpens": [
+    "alchemists"
+   ]
+  },
+  {
+   "lesser": "Wizard's tower",
+   "greater": "Mages' guild",
+   "lesserOpens": [
+    "arcane",
+    "arcaneTower",
+    "arcaneGuild"
+   ],
+   "greaterOpens": [
+    "arcane",
+    "arcaneGuild"
+   ]
+  },
+  {
+   "lesser": "Town granary",
+   "greater": "City granaries",
+   "lesserOpens": [
+    "granary"
+   ],
+   "greaterOpens": [
+    "granary"
+   ]
+  },
+  {
+   "lesser": "Town hall",
+   "greater": "City hall",
+   "lesserOpens": [
+    "court"
+   ],
+   "greaterOpens": [
+    "court"
+   ]
+  },
+  {
+   "lesser": "Carriers' hiring hall",
+   "greater": "Carriers' guild",
+   "lesserOpens": [],
+   "greaterOpens": [
+    "market"
+   ]
+  },
+  {
+   "lesser": "Carriers' guild",
+   "greater": "Caravan masters' exchange",
+   "lesserOpens": [
+    "market"
+   ],
+   "greaterOpens": []
+  },
+  {
+   "lesser": "Small prison/stocks",
+   "greater": "Large prison",
+   "lesserOpens": [
+    "prison"
+   ],
+   "greaterOpens": [
+    "prison"
+   ]
+  },
+  {
+   "lesser": "Courthouse",
+   "greater": "Multiple courthouses",
+   "lesserOpens": [
+    "court"
+   ],
+   "greaterOpens": [
+    "court"
+   ]
+  },
+  {
+   "lesser": "Merchant guilds (3-8)",
+   "greater": "Merchant guilds (15-40)",
+   "lesserOpens": [
+    "market"
+   ],
+   "greaterOpens": [
+    "market"
+   ]
+  },
+  {
+   "lesser": "Adventurers' charter hall",
+   "greater": "Multiple adventurers' guilds",
+   "lesserOpens": [
+    "charter"
+   ],
+   "greaterOpens": [
+    "charter"
+   ]
+  },
+  {
+   "lesser": "Apothecary (established)",
+   "greater": "Apothecary district",
+   "lesserOpens": [],
+   "greaterOpens": [
+    "alchemists"
+   ]
+  },
+  {
+   "lesser": "Apothecary",
+   "greater": "Apothecary district",
+   "lesserOpens": [],
+   "greaterOpens": [
+    "alchemists"
+   ]
+  },
+  {
+   "lesser": "Small hospital",
+   "greater": "Major hospital",
+   "lesserOpens": [
+    "hospital"
+   ],
+   "greaterOpens": [
+    "hospital"
+   ]
+  },
+  {
+   "lesser": "Fishmonger",
+   "greater": "Fish market",
+   "lesserOpens": [],
+   "greaterOpens": [
+    "market"
+   ]
+  },
+  {
+   "lesser": "Hunter's lodge",
+   "greater": "Furrier's district",
+   "lesserOpens": [],
+   "greaterOpens": [
+    "market"
+   ]
+  },
+  {
+   "lesser": "Periodic market",
+   "greater": "Weekly market",
+   "lesserOpens": [
+    "market"
+   ],
+   "greaterOpens": [
+    "market"
+   ]
+  },
+  {
+   "lesser": "Weekly market",
+   "greater": "Daily markets",
+   "lesserOpens": [
+    "market"
+   ],
+   "greaterOpens": [
+    "market"
+   ]
+  },
+  {
+   "lesser": "Daily markets",
+   "greater": "District markets (5-10)",
+   "lesserOpens": [
+    "market"
+   ],
+   "greaterOpens": [
+    "market"
+   ]
+  },
+  {
+   "lesser": "Market square",
+   "greater": "Multiple market squares",
+   "lesserOpens": [
+    "market"
+   ],
+   "greaterOpens": [
+    "market"
+   ]
+  },
+  {
+   "lesser": "Annual fair",
+   "greater": "Major annual fairs",
+   "lesserOpens": [
+    "market"
+   ],
+   "greaterOpens": [
+    "market"
+   ]
+  },
+  {
+   "lesser": "Merchant guilds (15-40)",
+   "greater": "Merchant guilds (50-100+)",
+   "lesserOpens": [
+    "market"
+   ],
+   "greaterOpens": [
+    "market"
+   ]
+  },
+  {
+   "lesser": "Waystation",
+   "greater": "Caravaneer's post",
+   "lesserOpens": [],
+   "greaterOpens": [
+    "market"
+   ]
+  },
+  {
+   "lesser": "Caravaneer's post",
+   "greater": "Caravan masters' exchange",
+   "lesserOpens": [
+    "market"
+   ],
+   "greaterOpens": []
+  },
+  {
+   "lesser": "Pack animal trader",
+   "greater": "Caravaneer's post",
+   "lesserOpens": [],
+   "greaterOpens": [
+    "market"
+   ]
+  },
+  {
+   "lesser": "City granaries",
+   "greater": "State granary complex",
+   "lesserOpens": [
+    "granary"
+   ],
+   "greaterOpens": [
+    "granary"
+   ]
+  },
+  {
+   "lesser": "Cobbler",
+   "greater": "Cobbler's guild",
+   "lesserOpens": [],
+   "greaterOpens": [
+    "market"
+   ]
+  },
+  {
+   "lesser": "Tailor",
+   "greater": "Tailor's guild",
+   "lesserOpens": [],
+   "greaterOpens": [
+    "market"
+   ]
+  },
+  {
+   "lesser": "Access to parish church",
+   "greater": "Parish church",
+   "lesserOpens": [
+    "clergy",
+    "parish"
+   ],
+   "greaterOpens": [
+    "clergy",
+    "parish"
+   ]
+  },
+  {
+   "lesser": "Parish churches (10-30)",
+   "greater": "Parish churches (50-100+)",
+   "lesserOpens": [
+    "clergy",
+    "parish"
+   ],
+   "greaterOpens": [
+    "clergy",
+    "parish"
+   ]
+  },
+  {
+   "lesser": "Monastery or friary",
+   "greater": "Multiple monasteries",
+   "lesserOpens": [
+    "clergy",
+    "clergyShrine",
+    "clergyStrong",
+    "hospital",
+    "parish"
+   ],
+   "greaterOpens": [
+    "hospital"
+   ]
+  },
+  {
+   "lesser": "Multiple monasteries",
+   "greater": "Major monasteries (5-10)",
+   "lesserOpens": [
+    "hospital"
+   ],
+   "greaterOpens": [
+    "hospital"
+   ]
+  },
+  {
+   "lesser": "Cathedral (10,000+ only)",
+   "greater": "Great cathedral",
+   "lesserOpens": [
+    "clergy",
+    "clergyStrong",
+    "parish"
+   ],
+   "greaterOpens": [
+    "clergy",
+    "clergyStrong",
+    "parish"
+   ]
+  },
+  {
+   "lesser": "Major hospital",
+   "greater": "Hospital network",
+   "lesserOpens": [
+    "hospital"
+   ],
+   "greaterOpens": [
+    "hospital"
+   ]
+  },
+  {
+   "lesser": "Lord's reeve",
+   "greater": "Lord's steward",
+   "lesserOpens": [
+    "elders"
+   ],
+   "greaterOpens": [
+    "elders"
+   ]
+  },
+  {
+   "lesser": "Lord's steward",
+   "greater": "Lord's appointee",
+   "lesserOpens": [
+    "elders"
+   ],
+   "greaterOpens": []
+  },
+  {
+   "lesser": "Village reeve",
+   "greater": "Town council",
+   "lesserOpens": [
+    "elders"
+   ],
+   "greaterOpens": []
+  },
+  {
+   "lesser": "Multiple courthouses",
+   "greater": "Multiple court buildings",
+   "lesserOpens": [
+    "court"
+   ],
+   "greaterOpens": [
+    "court"
+   ]
+  },
+  {
+   "lesser": "Large prison",
+   "greater": "Massive prison",
+   "lesserOpens": [
+    "prison"
+   ],
+   "greaterOpens": [
+    "prison"
+   ]
+  },
+  {
+   "lesser": "Palisade",
+   "greater": "Palisade or earthworks",
+   "lesserOpens": [
+    "walls"
+   ],
+   "greaterOpens": [
+    "walls"
+   ]
+  },
+  {
+   "lesser": "City walls and gates",
+   "greater": "Massive walls and fortifications",
+   "lesserOpens": [
+    "walls"
+   ],
+   "greaterOpens": [
+    "walls"
+   ]
+  },
+  {
+   "lesser": "Household levy",
+   "greater": "Citizen militia",
+   "lesserOpens": [],
+   "greaterOpens": [
+    "militia"
+   ]
+  },
+  {
+   "lesser": "Garrison",
+   "greater": "Multiple garrisons",
+   "lesserOpens": [
+    "garrison"
+   ],
+   "greaterOpens": [
+    "garrison"
+   ]
+  },
+  {
+   "lesser": "Free company hall",
+   "greater": "Mercenary quarter",
+   "lesserOpens": [
+    "company"
+   ],
+   "greaterOpens": [
+    "company"
+   ]
+  },
+  {
+   "lesser": "Mages' guild",
+   "greater": "Mages' district",
+   "lesserOpens": [
+    "arcane",
+    "arcaneGuild"
+   ],
+   "greaterOpens": [
+    "arcane",
+    "arcaneGuild"
+   ]
+  }
+ ]
+}

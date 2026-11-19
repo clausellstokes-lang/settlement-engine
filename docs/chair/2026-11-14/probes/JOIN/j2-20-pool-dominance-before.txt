@@ -1,0 +1,119 @@
+[gate-tail] start:  09:15:25 up 50 min,  0 user,  load average: 2.88, 2.92, 2.13 · cores: 4
+pool-dominance: a rise was read again on confirm
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:resource_scarcity: top1 0.3745 > ceiling 0.3359 (3.1 SE over 1418 draws in 566 towns); repeats on confirm: ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:resource_scarcity: top1 0.3771 > ceiling 0.3359 (3.3 SE over 1440 draws in 584 towns)
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:succession_crisis: top1 0.8208 > ceiling 0.639 (10.8 SE over 809 draws in 616 towns); repeats on confirm: ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:succession_crisis: top1 0.8073 > ceiling 0.639 (9.5 SE over 742 draws in 573 towns)
+ledger:NPC_STRUCTURE.criminal__stable__dominant: no row
+ledger:NPC_STRUCTURE.magic__corruption__dominant: no row
+ledger:NPC_STRUCTURE.magic__economic_stress__dominant: no row
+ledger:NPC_STRUCTURE.magic__governance_fractured__dominant: no row
+ledger:NPC_STRUCTURE.magic__stable__dominant: no row
+ledger:NPC_STRUCTURE.other__corruption__dominant: no row
+ledger:cultureProfiles:arabic.foodways: no row
+ledger:cultureProfiles:celtic.foodways: no row
+ledger:cultureProfiles:east_asian.foodways: no row
+ledger:cultureProfiles:germanic.foodways: no row
+ledger:cultureProfiles:greek.foodways: no row
+ledger:cultureProfiles:latin.foodways: no row
+ledger:cultureProfiles:mesoamerican.foodways: no row
+ledger:cultureProfiles:norse.foodways: no row
+ledger:cultureProfiles:slavic.foodways: no row
+ledger:cultureProfiles:south_asian.foodways: no row
+ledger:cultureProfiles:steppe.foodways: no row
+ledger:historyData:HISTORY_DESC_SIBLINGS: no row
+ledger:historyData:HISTORY_QUARTER_WORDS: no row
+ledger:historyData:HISTORY_SMALL_PLACE_WORDS: no row
+ledger:institutionDescVariants:city|Defense|Mercenary quarter: no row
+ledger:institutionDescVariants:city|Economy|Customs house: no row
+ledger:institutionDescVariants:city|Economy|Fish market: no row
+ledger:institutionDescVariants:city|Economy|Pawnbroker: no row
+ledger:institutionDescVariants:city|Economy|Toll bridge: no row
+ledger:institutionDescVariants:hamlet|Crafts|Maltster: no row
+ledger:institutionDescVariants:metropolis|Defense|Mercenary quarter: no row
+ledger:institutionDescVariants:metropolis|Economy|Customs house: no row
+ledger:institutionDescVariants:metropolis|Economy|Fish market: no row
+ledger:institutionDescVariants:metropolis|Economy|Pawnbroker: no row
+ledger:institutionDescVariants:metropolis|Economy|Toll bridge: no row
+ledger:institutionDescVariants:thorp|Religious|Burial ground: no row
+ledger:institutionDescVariants:town|Defense|Town watch: no row
+ledger:institutionDescVariants:town|Economy|Annual fair: no row
+ledger:institutionDescVariants:town|Economy|Customs house: no row
+ledger:institutionDescVariants:town|Economy|Fish market: no row
+ledger:institutionDescVariants:town|Economy|Pawnbroker: no row
+ledger:institutionDescVariants:town|Economy|Toll bridge: no row
+ledger:institutionDescVariants:town|Economy|Town granary: no row
+ledger:institutionDescVariants:village|Crafts|Brewer: no row
+ledger:institutionDescVariants:village|Crafts|Maltster: no row
+ledger:institutionDescVariants:village|Economy|Toll bridge: no row
+ledger:stressTypes:STRESS_TYPE_SIBLINGS: no row
+ledger:CULTURE_PROFILES.south_asian.architecturalDetails: no longer drawn
+ledger:NPC_STRUCTURE.criminal__contested__subordinate: no longer drawn
+ledger:NPC_STRUCTURE.criminal__corruption__subordinate: no longer drawn
+ledger:NPC_STRUCTURE.criminal__economic_stress__subordinate: no longer drawn
+ledger:NPC_STRUCTURE.magic__contested__subordinate: no longer drawn
+ledger:NPC_STRUCTURE.magic__corruption__subordinate: no longer drawn
+ledger:NPC_STRUCTURE.magic__economic_stress__subordinate: no longer drawn
+ledger:NPC_STRUCTURE.magic__governance_fractured__subordinate: no longer drawn
+ledger:NPC_STRUCTURE.magic__stable__subordinate: no longer drawn
+ledger:NPC_STRUCTURE.other__contested__subordinate: no longer drawn
+ledger:NPC_STRUCTURE.other__corruption__subordinate: no longer drawn
+ledger:NPC_STRUCTURE.religious__corruption__subordinate: no longer drawn
+ledger:institutionDescVariants:city|Religious|Elder Grove Council: no longer drawn
+ledger:institutionDescVariants:metropolis|Religious|Elder Grove Council: no longer drawn
+ledger:institutionDescVariants:town|Religious|Elder Grove Council: no longer drawn
+ledger:foodBalance:OUTLOOK_HOOK_SIBLINGS: top1 ceiling 0.649 sits above its measure 0.5875
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:corruption_scandal: top1 ceiling 0.5469 sits above its measure 0.3354
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:disputed_land: top1 ceiling 0.5774 sits above its measure 0.3518
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:economic_disparity: top1 ceiling 0.7738 sits above its measure 0.3654
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:external_threat: top1 ceiling 0.7151 sits above its measure 0.3452
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:generational_divide: top1 ceiling 0.5299 sits above its measure 0.3534
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:great_fire: top1 ceiling 0.7279 sits above its measure 0.3454
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:guild_conflict: top1 ceiling 0.387 sits above its measure 0.3353
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:heresy_trial: top1 ceiling 0.6777 sits above its measure 0.3564
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:infiltration_fear: top1 ceiling 0.8691 sits above its measure 0.3419
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:leadership_vacuum: top1 ceiling 0.5248 sits above its measure 0.3430
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:magical_controversy: top1 ceiling 0.8006 sits above its measure 0.3450
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:market_crash: top1 ceiling 0.5122 sits above its measure 0.3989
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:occupation_legacy: top1 ceiling 0.7752 sits above its measure 0.3524
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:outside_debt: top1 ceiling 0.5605 sits above its measure 0.3434
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:pilgrimage_surge: top1 ceiling 0.6675 sits above its measure 0.3507
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:plague_years: top1 ceiling 0.724 sits above its measure 0.4515
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:popular_uprising: top1 ceiling 0.5888 sits above its measure 0.3407
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:population_friction: top1 ceiling 0.8947 sits above its measure 0.3498
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:religious_tension: top1 ceiling 0.849 sits above its measure 0.3367
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:trade_collapse: top1 ceiling 0.6533 sits above its measure 0.3497
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:tyranny: top1 ceiling 0.6525 sits above its measure 0.3369
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:wild_magic: top1 ceiling 0.6946 sits above its measure 0.3855
+ledger:institutionDescVariants:town|Economy|River ferry: top1 ceiling 0.6175 sits above its measure 0.4157
+ledger:institutionDescVariants:village|Economy|River boatyard: top1 ceiling 0.6 sits above its measure 0.4058
+ledger:institutionServices:Annual fair.Seasonal trading: top1 ceiling 1 sits above its measure 0.9492
+ledger:institutionServices:Carriers' guild.Freight haulage: top1 ceiling 1 sits above its measure 0.9471
+ledger:institutionServices:Coaching inn.Horse change: top1 ceiling 1 sits above its measure 0.9066
+ledger:institutionServices:Coaching inn.Lodging: top1 ceiling 1 sits above its measure 0.9084
+ledger:institutionServices:Daily markets.Fresh produce: top1 ceiling 1 sits above its measure 0.8733
+ledger:institutionServices:Mine (open cast).Raw extraction: top1 ceiling 1 sits above its measure 0.8062
+ledger:institutionServices:River boatyard.Barge construction: top1 ceiling 1 sits above its measure 0.7774
+ledger:institutionServices:River boatyard.Boat repair: top1 ceiling 1 sits above its measure 0.8121
+ledger:institutionServices:River ferry.River crossing: top1 ceiling 1 sits above its measure 0.6130
+ledger:safetyProfile:SAFETY_LINE_SIBLINGS: top1 ceiling 0.8818 sits above its measure 0.7628
+98.0% / 100.0%  350 draws, 2 lines  ledger:institutionServices:Access to external mill.Grain milling (a day away)
+96.9% / 100.0%  162 draws, 2 lines  ledger:stressNarrative:STRESS_SUMMARY_SIBLINGS
+94.9% / 100.0%  236 draws, 2 lines  ledger:institutionServices:Annual fair.Seasonal trading
+94.7% / 100.0%  208 draws, 2 lines  ledger:institutionServices:Carriers' guild.Freight haulage
+91.1% / 100.0%  112 draws, 2 lines  ledger:institutionServices:Underground network.Discreet passage
+90.8% / 100.0%  513 draws, 2 lines  ledger:institutionServices:Coaching inn.Lodging
+90.7% / 100.0%  364 draws, 2 lines  ledger:institutionServices:Coaching inn.Horse change
+89.4% / 100.0%  47 draws, 3 lines  ledger:institutionDescVariants:village|Crafts|Tannery
+89.1% / 100.0%  64 draws, 3 lines  ledger:institutionDescVariants:town|Economy|Pawnbroker
+88.0% / 100.0%  25 draws, 2 lines  ledger:institutionServices:Brewer.Ale (barrel)
+87.3% / 100.0%  450 draws, 2 lines  ledger:institutionServices:Daily markets.Fresh produce
+83.1% / 100.0%  621 draws, 2 lines  ledger:cultureProfiles:slavic.foodways
+82.1% / 100.0%  809 draws, 3 lines  ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:succession_crisis
+81.2% / 100.0%  165 draws, 2 lines  ledger:institutionServices:River boatyard.Boat repair
+81.0% / 100.0%  1593 draws, 2 lines  ledger:factionLabelSiblings:FACTION_LABEL_SIBLINGS
+80.6% / 100.0%  289 draws, 2 lines  ledger:institutionServices:Mine (open cast).Raw extraction
+80.6% / 100.0%  36 draws, 3 lines  ledger:institutionDescVariants:village|Economy|Dairy farmer
+80.0% / 100.0%  5 draws, 2 lines  ledger:ARRIVAL_SENSES.kilns.lines
+79.2% / 100.0%  231 draws, 2 lines  ledger:npcGenerator:NPC_GOAL_SIBLINGS
+78.1% / 100.0%  128 draws, 4 lines  ledger:institutionDescVariants:town|Economy|Customs house
+pool-dominance: corpus quarrel (936 pools): 2 over, 43 unregistered, 15 stale, 35 loose, 0 notes
+[gate-tail] end:  09:19:52 up 54 min,  0 user,  load average: 3.33, 3.24, 2.49

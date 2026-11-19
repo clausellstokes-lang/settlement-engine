@@ -50,7 +50,9 @@ function pdfText(node, out = []) {
   return out;
 }
 /** Journal markdown back to plain words: the shared escaper's backslashes and the bold marks. */
-const unmark = (md) => String(md).replace(/\\(.)/g, '$1').replace(/\*\*/g, '');
+// The journal escapes an apostrophe as an HTML entity, which Foundry renders as the apostrophe (COHERENCE-AGREE:
+// a livestock line, "the herds' milk", first reached this corpus when grazing became a source by its own name).
+const unmark = (md) => String(md).replace(/\\(.)/g, '$1').replace(/\*\*/g, '').replace(/&#39;/g, "'");
 const count = (text, line) => text.split(line).length - 1;
 
 describe('the foodways line: one writer on the record, the same line on every surface', () => {
@@ -60,8 +62,11 @@ describe('the foodways line: one writer on the record, the same line on every su
     // Collected, so every seed runs and the failure count is the true count (seedLoopTotality).
     const failures = collectSeedFailures(SEEDS, ({ tier, seed }) => {
       const s = generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} });
-      const line = s.economicState.foodSecurity.foodRecord.foodwaysLine;
-      expect(typeof line === 'string' && line.length > 10, `${seed}: the record carries a line`).toBe(true);
+      const stored = s.economicState.foodSecurity.foodRecord.foodwaysLine;
+      expect(typeof stored === 'string' && stored.length > 10, `${seed}: the record carries a line`).toBe(true);
+      // BAR4-HOUSES (2026-11-16, the chair's FW1/FW1b): the line the surfaces print is the ONE READER's reading of the stored
+      // line (`foodwaysLineOf`: the famine's, the roster's, the crisis's), which the stored identity holds too
+      const line = /** @type {string} */ (foodwaysLineOf(s));
       lines.add(line);
 
       const { container, unmount } = render(<EconomicsTab settlement={s} economicState={s.economicState} narrativeNote={null} />);
@@ -88,7 +93,7 @@ describe('the foodways line: one writer on the record, the same line on every su
     expect(wrong).toEqual([]);
     // Measured 6 distinct lines over these 12 seeds (default configs share culture and terrain).
     expect(lines.size, 'the line is the place\'s own, not one sentence for all').toBeGreaterThanOrEqual(5);
-  });
+  }, 120_000); // its own budget: a corpus walk at the edge of the 20 s default on a CI runner under coverage (measured 2026-11-18: ~11 s there)
 });
 
 /**
@@ -104,7 +109,9 @@ describe('C-1 — the stored foodways line is the food record\'s line', () => {
   /** Golden rows whose receipt carried `battery.food-words` at the base (fe55408b9), town and up. */
   const ROWS = [
     'town|germanic|hills|road|civilized|golden-master-v3',
-    'city|germanic|plains|road|civilized|golden-master-v3',
+    // COHERENCE-AGREE (the chair's food-sources ruling, 2026-11-11): the plains city's grazing is a livestock
+    // source now; the planted condition (no staple held) is carried by the coastal port city, which holds fish.
+    'city|germanic|coastal|port|civilized|golden-master-v3',
     'metropolis|germanic|plains|road|civilized|golden-master-v3',
   ];
   const birthOf = (key) => {

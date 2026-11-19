@@ -27,6 +27,9 @@
  * kind's own catalogue text (`data/stressTypes.js`) presume. No line names a garrison, soldiers,
  * walls or a hospital (those are facts of their own), no figure, no tier noun, and a war line holds
  * for a town that profits from the war and one that pays for it (the summary's roll is not kept).
+ * Nor a body that keeps order or keeps the place safe (only an occupation's occupiers are the kind's own force), a merchant
+ * (the market's fact) or a street (a thorp has none): the call sites pass the entry and the name
+ * and no roster, so a line says "those who answer for", "those who sell", "out of doors" (R3-CODE-C-5).
  *
  * A kind this table does not know (an authored custom crisis) keeps its stored summary on every
  * surface: a line written for another crisis is worse than a repeat.
@@ -36,6 +39,8 @@
  */
 import { migrationDirectionOf } from './migrationDirection.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
+import { atomHolds } from '../facts/factVocabulary.js';
+import { lineText } from '../facts/drawDeclared.js';
 
 /**
  * The Latin square: surface → the vantage it prints in column k (k = 0..3). Every column holds
@@ -94,7 +99,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       traveller: 'In {name} you see hungry children at the doors, and long queues wherever food is handed out.',
       newcomer: 'Arriving in {name}, you are asked first whether you carry food, and only then what you want.',
       trade: 'In {name} food costs more every week, and people spend every coin they have on it.',
-      watch: 'In {name} the food stores are guarded day and night, and nobody carrying a sack goes unquestioned.',
+      watch: 'In {name} whatever food is put by is watched day and night, and nobody carrying a sack goes unquestioned.', // TAIL-CRISIS batch 5 (X9 13667): no stores or guards presumed
     },
     overview: {
       local: 'Every family in {name} is eating less than it did, and those with stores put by are not sharing.',
@@ -104,13 +109,13 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     },
     defence: {
       watch: 'Hunger has made {name} tense: what food is stored is watched day and night, and every quarrel over food turns ugly fast.',
-      official: 'Those who keep order in {name} spend their days guarding the stores and breaking up fights in the queues.',
+      official: 'Those who answer for {name} spend their days settling quarrels over food, and every week there are more of them.', // R3-CODE-C-3 #ww-15: no force is the kind's to promise
       local: 'In {name} stealing food is the crime of the season, and neighbours who once shared now bar their doors.',
       traveller: 'On the road into {name}, hungry eyes follow anyone carrying a sack or driving a cart.',
     },
     tonight: {
       official: '{name} has lost a second harvest. Its leaders have begun rationing, while the families who can afford it hoard what they have.',
-      watch: 'In {name} the food stores are under guard, and the guards are as hungry as everyone else.',
+      watch: 'In {name} what food is left is watched day and night, and those watching it are as hungry as everyone else.', // R3-CODE-C-3 #pf-85: watched, by whoever keeps it
       newcomer: 'Anyone who comes to {name} with food to sell is welcome; anyone who comes to eat is not.',
       trade: 'In {name} whoever holds grain decides who eats, and they know it.',
     },
@@ -119,11 +124,11 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     cover: {
       traveller: 'Foreign officials run {name} now; the locals answer their questions politely and say as little as they can.',
       newcomer: 'Newcomers to {name} are questioned by the occupiers\' officials before any local will say a word to them.',
-      trade: 'Everything sold in {name} pays the occupiers their due first, and the merchants keep their prices and their opinions to themselves.',
+      trade: 'Everything sold in {name} pays the occupiers their due first, and those who sell keep their prices and their opinions to themselves.', // R3-CODE-C-5: no merchant
       watch: 'At every road into {name}, the occupiers\' officials note who comes and goes.',
     },
     overview: {
-      local: 'In {name} people answer to foreign officials now, and mind what they say in the street.',
+      local: 'In {name} people answer to foreign officials now, and mind what they say out of doors.', // R3-CODE-C-5: no street
       trade: 'The occupiers take {name}\'s revenue, and the local offices work only under their eye.',
       official: '{name}\'s own leaders keep their titles, but every decision they make goes to the occupiers for approval.',
       newcomer: 'A newcomer in {name} is taken for the occupiers\' informer until they prove otherwise.',
@@ -157,7 +162,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     defence: {
       watch: '{name} is split between rival powers, and a quarrel where their ground meets can turn into a brawl.',
       official: 'No one in {name} can call everyone to its defence; each power guards its own ground and trusts nobody else\'s.',
-      local: 'People in {name} avoid the streets where one power\'s ground meets another\'s, most of all after dark.',
+      local: 'People in {name} keep away from where one power\'s ground meets another\'s, most of all after dark.', // R3-CODE-C-3 (CENSUS-2 c36): no streets in a thorp
       traveller: 'Crossing {name}, you pass from one power\'s ground to another\'s, and each side notes which way you came.',
     },
     tonight: {
@@ -169,7 +174,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
   }),
   indebted: pools({
     cover: {
-      traveller: 'The creditor\'s agents walk {name}\'s streets as if they owned them, and in a way they do: the place owes more than it can ever pay.',
+      traveller: 'The creditor\'s agents walk about {name} as if they owned it, and in a way they do: the place owes more than it can ever pay.', // R3-CODE-C-5: no streets
       newcomer: 'In {name}, a newcomer is asked straight away whether they come from the creditor.',
       trade: 'Much of what {name} earns goes straight to its creditor, and nothing is left over to build with.',
       watch: 'The creditor\'s agents in {name} keep a close eye on every cart that leaves and every coin that changes hands.',
@@ -182,9 +187,9 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     },
     defence: {
       watch: 'The creditor keeps its own people in {name}, watching where every coin goes.',
-      official: 'Those who keep order in {name} must keep it for the creditor too, and the people know it.',
+      official: 'Those who answer for {name} must answer to the creditor too, and the people know it.', // R3-CODE-C-5: no force is the kind's to promise
       local: 'People in {name} hide what little they have saved, in case the creditor\'s agents come asking.',
-      traveller: 'Passing through {name}, you meet the creditor\'s agents before you meet its own officials.',
+      traveller: 'Passing through {name}, you meet the creditor\'s agents before you meet anyone who speaks for the place.', // TAIL-CRISIS (READ-ALL 15481): no officials
     },
     tonight: {
       official: 'Every plan {name}\'s leaders make must first pass the creditor, and most of them do not.',
@@ -208,7 +213,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     },
     defence: {
       watch: '{name} is still looking for whoever betrayed it, and every unexplained absence draws a hard look.',
-      official: 'Those who keep {name} safe are questioning everyone who could have reached what was sold, and nobody is above suspicion.',
+      official: 'Those who answer for {name} are questioning everyone who could have reached what was sold, and nobody is above suspicion.', // R3-CODE-C-5 (the chair, 02:06Z): no keepers of its safety the kind does not promise
       local: 'In {name} neighbours watch one another now, and an old friend\'s late visit draws questions.',
       traveller: 'At {name}, travellers are asked their business twice, and their answers are remembered.',
     },
@@ -235,7 +240,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     defence: {
       watch: 'Agents of an outside interest move through {name} unchallenged, because nobody knows to look for them.',
       official: 'Those who answer for {name}\'s safety see no threat, and nobody has told them to look.',
-      local: 'People in {name} feel safe, and nothing they can see tells them otherwise.',
+      local: 'People in {name} do not know that outsiders have reached its decisions, and nothing they can see tells them so.', // TAIL-CRISIS (READ-ALL 15568): no claim that they feel safe
       traveller: 'A traveller who pays attention in {name} may see the same face in too many places.',
     },
     tonight: {
@@ -247,26 +252,26 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
   }),
   plague_onset: pools({
     cover: {
-      traveller: 'A sickness is spreading in {name}: doors are shut, and people keep their distance in the street.',
+      traveller: 'A sickness is spreading in {name}: doors are shut, and people keep their distance from one another.', // R3-CODE-C-5: no street
       newcomer: 'Anyone arriving in {name} is asked where they came from and whether they are well before anyone will take their hand.',
-      trade: 'Fewer people come to market in {name} since the sickness began, and some goods have stopped arriving altogether.',
+      trade: 'Fewer people come to {name} since the sickness began, and fewer goods come with them.', // TAIL-CRISIS batch 5 (X9 09896): no market presumed
       watch: 'In {name} some houses are marked and watched and others are not, and nobody seems to agree on the rules.',
     },
     overview: {
       local: 'The sickness in {name} is spreading, and people would rather argue over where it came from than stay indoors.',
-      trade: 'Travel is discouraged in {name}, fewer come to market, and the goods the carts used to bring run short.',
+      trade: 'Travel is discouraged in {name}, and fewer come and go than before the sickness.', // TAIL-CRISIS batch 5 (X9 29529 08228): no market, no carts presumed
       official: '{name}\'s leaders argue over where the sickness came from while it spreads.',
       newcomer: 'Newcomers in {name} are eyed as the likely source of the sickness, whatever the truth.',
     },
     defence: {
-      watch: 'Those trying to keep {name}\'s sick apart from the healthy are being ignored, and the quarantine holds nowhere.',
+      watch: 'Those trying to keep {name}\'s sick apart from the healthy are being resisted, and not everyone keeps the quarantine.', // R3-CODE-C #1386: the kind guarantees resistance, not a quarantine that holds nowhere
       official: 'Those in charge of {name} have ordered a quarantine they cannot make people keep.',
       local: 'In {name} some families shut themselves in and some carry on as before, and the sickness passes between them.',
       traveller: 'Coming into {name}, you pass shuttered doors, and nobody can tell you which houses hold the sick.',
     },
     tonight: {
       official: 'A sickness is spreading in {name}, and its leaders can neither agree where it came from nor get people to accept a quarantine.',
-      watch: 'The quarantine in {name} is kept in some streets and ignored in others, and the sickness goes where it likes.',
+      watch: 'The quarantine in {name} is kept in some houses and ignored in others, and the sickness goes where it likes.', // R3-CODE-C-5: no streets
       newcomer: 'Anyone new to {name} will be asked whether they carry the sickness, and few will believe the answer.',
       trade: 'With fewer buyers and fewer carts, {name}\'s trade shrinks for as long as the sickness lasts.',
     },
@@ -275,18 +280,18 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     cover: {
       traveller: 'Everyone you meet in {name} has a view on who should take the dead leader\'s seat, and nobody has taken it yet.',
       newcomer: 'Newcomers to {name} are courted by every claimant to the empty seat, each hoping to count one more friend.',
-      trade: 'Big business waits in {name} until a new leader is chosen, and the merchants hold back their coin.',
-      watch: 'In {name} the followers of rival claimants eye each other across the street, waiting for the first push.',
+      trade: 'Every large bargain in {name} waits until a new leader is chosen, and those with coin hold it back.', // R3-CODE-C-5: no merchant, no big business
+      watch: 'In {name} the followers of rival claimants eye each other warily, waiting for the first push.', // R3-CODE-C-5: no street
     },
     overview: {
       local: 'With the old leader dead and no one in their place, people in {name} wait to see who comes out on top.',
-      trade: 'Nothing large is decided in {name} until the seat is filled, and each office does as it sees fit meanwhile.',
-      official: 'Each office in {name} now runs itself, and no one has the standing to make them answer.',
+      trade: 'Nothing large is decided in {name} until the seat is filled, and meanwhile everyone does as they see fit.', // TAIL-CRISIS-2 (K11): no office
+      official: 'With the seat empty, no one in {name} has the standing to make anyone answer.', // TAIL-CRISIS-2 (K11): no office
       newcomer: 'A newcomer in {name} is soon asked which claimant they favour, and the answer is remembered.',
     },
     defence: {
       watch: 'Rivals for {name}\'s empty seat are gathering followers, and it may come to blows before anyone is chosen.',
-      official: 'With no one in {name}\'s seat, nobody can give the order that calls everyone to its defence.',
+      official: 'With {name}\'s seat empty, no order to call everyone to its defence would be obeyed by all.', // TAIL-CRISIS (READ-ALL B27943): an acting steward may give it; none can make it carry
       local: 'People in {name} keep clear of the claimants\' followers, who grow louder and bolder each week.',
       traveller: 'Travellers in {name} see the claimants\' followers gathering openly, and hear talk of who will strike first.',
     },
@@ -294,7 +299,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       official: 'No one in {name} has the standing to give an order others must obey, and every rival for the seat knows it.',
       watch: 'The rivals for {name}\'s empty seat each count their followers, and each fears the others will move first.',
       newcomer: 'Every claimant in {name} wants backing from outside, and anyone newly arrived will be asked for theirs.',
-      trade: 'Until {name} has a leader again, no large bargain can be struck there, and the merchants are losing patience.',
+      trade: 'Until {name} has a leader again, no large bargain can be struck there, and those waiting on one are losing patience.', // R3-CODE-C-3 #pf-667: no merchant is the kind's to promise
     },
   }),
   monster_pressure: pools({
@@ -302,7 +307,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       traveller: 'The roads around {name} are dangerous now: carts have gone missing, and a farmstead went up in flames last week.',
       newcomer: 'Anyone who reaches {name} by road is asked what they saw on the way, and listened to closely.',
       trade: 'Fewer carts reach {name} each month, and the drivers who still come travel in company and charge more for it.',
-      watch: 'Lookouts around {name} watch the roads and the edges of the fields, and nobody lingers outside once the light goes.',
+      watch: 'People in {name} keep an eye on the roads and the edges of the fields, and nobody lingers outside once the light goes.', // TAIL-CRISIS batch 5 (X9 15776): no lookouts presumed
     },
     overview: {
       local: 'Nobody in {name} goes out after dark now, and every family has a story of something seen at the edge of the fields.',
@@ -311,47 +316,47 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       newcomer: 'Newcomers who reach {name} by road are greeted with relief that they made it at all.',
     },
     defence: {
-      watch: 'Whatever is attacking around {name}, wolves, raiders or worse, is getting bolder, and the lookouts count the days between attacks.',
-      official: 'Those who keep {name} safe cannot cover every road and every field, and the attackers seem to know it.',
+      watch: 'Whatever is attacking around {name}, wolves, raiders or worse, is getting bolder, and people count the days between attacks.', // TAIL-CRISIS (READ-ALL 28783): no lookout the kind does not keep
+      official: 'Nobody in {name} can watch every road and every field at once, and the attackers seem to know it.', // R3-CODE-C-5: no keepers of its safety
       local: 'Families in {name} bring their animals in at dusk and bar their doors, and nobody works the far fields alone.',
       traveller: 'The roads to {name} are dangerous: travellers move in groups and by daylight, and some never arrive.',
     },
     tonight: {
       official: 'Those who answer for {name}\'s safety spend more on it every season, and still the attacks come.',
-      watch: 'The attacks around {name} follow a pattern, and the lookouts are beginning to see it.',
+      watch: 'The attacks around {name} follow a pattern, and people are beginning to see it.', // TAIL-CRISIS (READ-ALL 20063): no lookout
       newcomer: 'Anyone new to {name} who knows how to fight or track will be asked to help before they have unpacked.',
-      trade: 'Every cart that fails to reach {name} is food or goods it goes without, and the shortfall grows each week.',
+      trade: 'Every week the attacks go on, {name} goes without more of what it needs, and the shortfall grows.', // TAIL-CRISIS (READ-ALL 07290): no cart where nothing is brought in
     },
   }),
   insurgency: pools({
     cover: {
-      traveller: '{name} looks calm, but its offices are half empty and orders go unanswered; one of its strongest powers has turned against those in charge.',
+      traveller: 'In {name} orders go unanswered, and some of its people have turned against those in charge.', // TAIL-CRISIS K3: no office, no second power the kind does not guarantee; TAIL-CRISIS-4 (K18): not "looks calm" beside its own political violence
       newcomer: 'Newcomers to {name} are asked, quietly, whether they come on the government\'s business.',
-      trade: 'In {name} taxes are disputed and some offices no longer send their revenue on, and merchants are unsure whom they owe.',
-      watch: 'Nobody in {name} fights in the open; those watching are counting who still obeys the government and who has stopped.',
+      trade: 'In {name} taxes are disputed and some revenue is no longer sent on, and those who trade are unsure whom they owe.', // R3-CODE-C-5: no merchant; TAIL-CRISIS: no office
+      watch: 'In {name} both the government and those who defy it press people to say which side they are on, and those watching count who has stopped obeying.', // TAIL-CRISIS-4 (K18): every insurgency's record holds its political violence and its loyalty testing
     },
     overview: {
-      local: 'People in {name} are choosing between the government and the power that defies it, and many have stopped doing what the government asks.',
-      trade: 'Taxes in {name} are disputed, some offices keep the revenue they once sent on, and the government runs on habit.',
+      local: 'People in {name} are choosing between the government and those who defy it, and many have stopped doing what the government asks.', // TAIL-CRISIS K3: no second power
+      trade: 'Taxes in {name} are disputed, some revenue once sent on is kept back, and the government runs on habit.', // TAIL-CRISIS: no office
       official: 'Those in charge of {name} still give orders, but fewer of them are carried out each week.',
       newcomer: 'A newcomer in {name} soon learns that the government\'s word counts for less than it seems.',
     },
     defence: {
-      watch: 'There is no fighting in {name}\'s streets; the danger is quieter, officials who will not act and orders that go nowhere.',
-      official: 'Those who keep order in {name} cannot be sure whose side their own people are on.',
-      local: 'In {name} people keep out of the quarrel between the government and the power that defies it, and away from anyone asking questions.',
-      traveller: 'Passing through {name}, you would see nothing amiss unless you asked who is really in charge.',
+      watch: 'In {name} the quarrel over who is in charge has turned to violence, and orders go unheeded and dues unpaid.', // R3-CODE-C-5: no streets; TAIL-CRISIS (READ-ALL 22640): no officials; TAIL-CRISIS-4 (K18): not "no fighting" beside the record's political violence
+      official: 'Those who answer for {name} cannot be sure whose side their own people are on.', // R3-CODE-C-5: no force
+      local: 'In {name} people keep out of the quarrel between the government and those who defy it, and away from anyone asking questions.', // TAIL-CRISIS (READ-ALL 11471): no second power
+      traveller: 'Travellers in {name} are pressed, sooner or later, to say which side they are on, and both sides take note of the answer.', // TAIL-CRISIS (READ-ALL B14649); TAIL-CRISIS-4 (K18): the quarrel is in the open (the record's political violence), and every insurgency tests loyalty
     },
     tonight: {
-      official: 'Those in charge of {name} know one of its strongest powers is defying them, and cannot say so openly without making it stronger.',
-      watch: 'The power defying {name}\'s government grows quietly, and those watching it cannot act in the open.',
+      official: 'Those in charge of {name} know some of its people are defying them, and cannot say so openly without making the defiance stronger.', // TAIL-CRISIS (READ-ALL 22983): no second power
+      watch: 'The defiance of {name}\'s government grows, and those watching it count who still obeys and who has stopped.', // TAIL-CRISIS (READ-ALL 21315): no second power; TAIL-CRISIS-4 (K18): not "quietly" beside the record's political violence
       newcomer: 'Those in charge of {name} need something done that cannot be official, and someone new is whom they would ask.',
-      trade: 'Some of {name}\'s offices no longer send their revenue on, and the government runs on less each season.',
+      trade: 'Some of what {name} owes the government no longer reaches it, and the government runs on less each season.', // TAIL-CRISIS (READ-ALL 18222): no office
     },
   }),
   religious_conversion: pools({
     cover: {
-      traveller: '{name}\'s faith is in dispute: you hear two kinds of prayer in its streets, and people are careful which one they join.',
+      traveller: '{name}\'s faith is in dispute: you hear two kinds of prayer there, and people are careful which one they join.', // R3-CODE-C-5: no streets
       newcomer: 'Newcomers to {name} are asked, sooner or later, which faith they keep, and the answer decides who will deal with them.',
       trade: 'In {name} feast days and fairs are held twice over, once for each faith, and trade between the two grows harder.',
       watch: 'In {name} each faith watches the other\'s gatherings closely, and a loud sermon draws a crowd from both.',
@@ -364,8 +369,8 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     },
     defence: {
       watch: 'Arguments over faith in {name} run hot, and a feast day can end in a fight.',
-      official: 'Those who keep order in {name} are kept busy by quarrels between the faiths, and are trusted by neither.',
-      local: 'In {name} families keep away from the other faith\'s feasts, and words in the street can turn to blows.',
+      official: 'Those who answer for {name} are kept busy by quarrels between the faiths, and are trusted by neither.', // R3-CODE-C-5: no force
+      local: 'In {name} families keep away from the other faith\'s feasts, and words between neighbours can turn to blows.', // R3-CODE-C-5: no street
       traveller: 'Travellers in {name} do well to keep their prayers to themselves; both faiths are quick to take offence.',
     },
     tonight: {
@@ -380,7 +385,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       traveller: 'Work has stopped across {name}: the enslaved have downed their tools, and their owners stand by not knowing what to do.',
       newcomer: 'Newcomers to {name} are watched by owners and rebels alike, each wondering which side they will take.',
       trade: 'Less is made in {name} since the revolt began; the owners keep their gangs only on work they can watch.',
-      watch: 'Everyone in {name} set to keep order is busy with the revolt, and every other duty waits.',
+      watch: 'In {name} every watchful eye is on the revolt, and every other duty waits.', // R3-CODE-C-5: no force
     },
     overview: {
       local: 'Whole work gangs in {name} have downed their tools, and the owners argue over whether to bargain or to crack down.',
@@ -389,41 +394,42 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       newcomer: 'A newcomer in {name} is asked whether they keep slaves, and the answer marks them to both sides.',
     },
     defence: {
-      watch: '{name}\'s enslaved are in open defiance, and everyone set to keep order is busy containing them.',
-      official: 'Those who keep order in {name} are stretched thin containing the revolt, and have nothing left for anything else.',
+      watch: '{name}\'s enslaved are in open defiance, and their owners watch them day and night.', // R3-CODE-C-5: no force
+      official: 'Those who answer for {name} have their hands full with the revolt, and nothing left for anything else.', // R3-CODE-C-5: no force
       local: 'Owners in {name} lock their doors at night, and the enslaved who still work do so under watch.',
       traveller: 'Travellers through {name} find work stopped and owners on edge, and are asked whether they bring help.',
     },
     tonight: {
       official: 'Those in charge of {name} must choose between bargaining with the rebels and crushing them, and the owners press for the second.',
-      watch: 'The rebels in {name} have demands, and those keeping order wait to see whether anyone will listen.',
+      watch: 'The rebels in {name} have demands, and everyone waits to see whether anyone will listen.', // R3-CODE-C-5: no force
       newcomer: 'The rebels in {name} have demands and no one to carry them; an outsider could be that person.',
       trade: 'Every day the revolt in {name} lasts, less is made and the owners lose more, and their patience is running out.',
     },
   }),
   wartime: pools({
+    // BAR3-PLACES (H2, 2026-11-15): no crown, no kingdom: a city-state at war answers to no higher lord, so the line names the war's own officers (true wherever it prints).
     cover: {
-      traveller: '{name} is in a kingdom at war: army carts pass through, and the war is all anyone talks about.',
+      traveller: '{name} is at war: army carts pass through, and the war is all anyone talks about.',
       newcomer: 'Newcomers to {name} are asked whether they come from the front, and what news they bring.',
       trade: 'The war drives {name}\'s prices: some goods grow scarce, and a few people grow rich on the army\'s contracts.',
-      watch: '{name} watches its roads for deserters and spies, now that the kingdom is at war.',
+      watch: '{name} watches its roads for deserters and spies, now that the war has come.',
     },
     overview: {
       local: 'The war is far from {name}, but it touches every household: the prices, the news, the carts going by.',
-      trade: 'The war takes much of the kingdom\'s money, and in {name} prices move with every piece of news from the front.',
-      official: 'Every season the crown asks {name} for more, and its leaders must weigh what they owe the war against what the place needs.',
+      trade: 'The war takes much of the money there is, and in {name} prices move with every piece of news from the front.',
+      official: 'Every season the war asks {name} for more, and its leaders must weigh what they owe the war against what the place needs.',
       newcomer: 'Anyone new in {name} might be a deserter, a spy or a recruiter, and is treated warily until known.',
     },
     defence: {
       watch: 'In wartime {name} watches its roads for deserters, spies and the army\'s own requisition officers alike.',
-      official: 'Those who keep {name} safe have fewer hands than before, with men called away to the war.',
+      official: 'With men called away to the war, {name} has fewer hands than before to see to its own safety.', // R3-CODE-C-5: no keepers of its safety
       local: 'In {name} the families whose men were called up wait for news, and the rest keep an eye on the road.',
-      traveller: 'On the roads near {name} you meet army carts and the crown\'s officers, and give way to both.',
+      traveller: 'On the roads near {name} you meet army carts and the army\'s officers, and give way to both.',
     },
     tonight: {
-      official: 'The kingdom\'s war makes its demands on {name}, in men, carts and supplies, and its leaders must decide how much to give.',
-      watch: 'In {name} the crown\'s officers come for requisitions, and people watch closely what they take.',
-      newcomer: 'A crown officer wants more from {name} than it can spare, and someone new might find a way between giving in and refusing.',
+      official: 'The war makes its demands on {name}, in men, carts and supplies, and its leaders must decide how much to give.',
+      watch: 'In {name} the army\'s officers come for requisitions, and people watch closely what they take.',
+      newcomer: 'An army requisition officer wants more from {name} than it can spare, and someone new might find a way between giving in and refusing.',
       trade: 'In wartime {name}\'s trade follows the army: what the war needs sells, and the rest waits.',
     },
   }),
@@ -432,18 +438,18 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       cover: {
         traveller: 'Walking into {name}, you pass tents on both sides of the road: newcomers looking for a place to call home.',
         newcomer: 'The families arriving in {name} want a roof and work, and find too few of either to go round.',
-        trade: 'With so many new mouths in {name}, food is running short and there is not work for everyone who wants it.',
+        trade: 'With so many new mouths in {name}, there is not work for everyone who wants it.', // TAIL-CRISIS batch 5 (X9 31407): no shortage the food record denies
         watch: 'The newcomers\' camps in {name} grow every week, and the old households watch them uneasily.',
       },
       overview: {
         local: 'Families have been arriving all season, more than {name} has roofs or work for. They camp where they can, and the old households keep their distance.',
-        trade: 'Food in {name} is running short with so many more to feed, and there is not work enough for the newcomers.',
+        trade: '{name} has many more mouths to feed than it had, and there is not work enough for the newcomers.', // TAIL-CRISIS batch 5 (X9 10399 16309)
         official: '{name}\'s leaders are counting heads they have no plan for, and the newcomers keep coming.',
         newcomer: 'For the newcomers, {name} is a place to call home, if they can find a roof and someone who will hire them.',
       },
       defence: {
         watch: 'Newcomers keep arriving in {name}, and with them come quarrels over space and work that the old families expect someone to settle.',
-        official: 'Those who keep order in {name} are stretched by the newcomers, and some of the hungriest take what they cannot earn.',
+        official: 'Those who answer for {name} are stretched by the newcomers, and some of the hungriest take what they cannot earn.', // R3-CODE-C-5: no force
         local: 'Old families in {name} lock up what they once left out, and blame the newcomers for every theft.',
         traveller: 'On the road into {name}, you pass families camped wherever there is room, watching every cart that goes by.',
       },
@@ -456,10 +462,10 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
     }),
     departures: pools({
       cover: {
-        traveller: 'Every street in {name} has houses standing empty, their owners gone for good.',
+        traveller: 'Houses in {name} stand empty, their owners gone for good.', // R3-CODE-C-5: no streets, no count
         newcomer: 'A newcomer to {name} is welcomed eagerly: there are empty houses to fill and work nobody is left to do.',
         trade: 'Fewer buyers and fewer hands: {name}\'s fields go short of workers and its trade short of customers.',
-        watch: 'With so many gone from {name}, whole streets are dark at night and nobody watches them.',
+        watch: 'With so many gone from {name}, empty houses stand dark at night and nobody watches them.', // R3-CODE-C-5: no streets
       },
       overview: {
         local: 'Families keep leaving {name}, the ones who could afford to first, and those who stay do the work of the ones who went.',
@@ -469,7 +475,7 @@ export const CRISIS_SUMMARY_POOLS = Object.freeze({
       },
       defence: {
         watch: 'With so many gone, {name}\'s empty houses draw thieves and squatters, and fewer people are left to keep them out.',
-        official: 'Those who keep {name} safe have fewer to call on each season, and more empty houses to watch.',
+        official: 'Each season {name} has fewer people to call on for its safety, and more empty houses to watch.', // R3-CODE-C-5: no keepers of its safety
         local: 'In {name} those who stay keep an eye on their neighbours\' empty houses, and lock their own.',
         traveller: 'Walking through {name}, you pass house after empty house, and few people about to see who goes in.',
       },
@@ -512,22 +518,70 @@ export function crisisSummaryPoolsOf(entry) {
 }
 
 /**
+ * R3-CODE-C-10 (c) (the chair's ruling of 2026-11-14, vetoable by the owner; the ninth seat's H2-22): A LINE THAT NAMES
+ * WHERE THE FOOD COMES FROM READS THE FOOD RECORD. Two famine lines presume a harvest ("{name} has lost a second
+ * harvest.", "The harvest in {name} has failed"); where the record's facts hold no grain (the vocabulary's `grain`
+ * atom, read by `atomHolds`) each prints its twin, in the Crisis tab's own words for the same famine
+ * (generators/stressNarrative.js :: RENDERERS.famine: "{name} has gone short of food for a second season."), the
+ * rest of the line its own. Read only where a caller hands the facts; an unanswered atom keeps the line.
+ * rr3-metropolis-under_siege+famine-rand-1 (88,895, fed by its fish): "... has lost a second harvest."
+ */
+const NO_GRAIN_TWINS = Object.freeze({
+  famine: Object.freeze({
+    tonight: Object.freeze({ official: '{name} has gone short of food for a second season. Its leaders have begun rationing, while the families who can afford it hoard what they have.' }),
+    overview: Object.freeze({ official: '{name} has gone short of food, and its leaders are rationing what is left while they decide whom to feed first.' }),
+  }),
+});
+
+/**
+ * BAR4-SAFETY (kind F2, REVIEW-BAR-4 C2020 C20892; vetoable by the owner): WHETHER THE BESIEGERS MOVE HAS ONE HOME
+ * (`facts/siegeMotion.js :: siegeMotionOf`, read through the facts' `siegeMotion`): the siege condition's own status, the
+ * one the stressor desk's direction pool speaks ("The besiegers draw closer to {settlement} each week"). The Tonight
+ * sheet's watch line says the besiegers "have not moved": true only where the siege holds; where it advances or eases it
+ * prints its twin, true in that state. Read only where a caller hands the facts; an unanswered motion keeps the line.
+ * rr3: bar0-city-under_siege+famine-rand-21 (Qingkou), bar0-hamlet-under_siege-rand-23 (Darhankul).
+ */
+export const SIEGE_MOTION_TWINS = Object.freeze({
+  under_siege: Object.freeze({
+    tonight: Object.freeze({
+      watch: Object.freeze({
+        advancing: String(lineText({ text: 'The besiegers around {name} tighten their lines each week, and the lookouts wait for the night they attack.', needs: ['crisis: siege'] })),
+        easing: String(lineText({ text: 'The besiegers around {name} have pulled their lines back, and the lookouts watch for the night they return.', needs: ['crisis: siege'] })),
+      }),
+    }),
+  }),
+});
+
+/** @param {string} kind @param {string} surface @param {string} vantage @param {unknown} facts @returns {string} */
+function siegeMotionTwin(kind, surface, vantage, facts) {
+  const byMotion = /** @type {Record<string, Record<string, Record<string, Record<string, string>>>>} */ (SIEGE_MOTION_TWINS)[kind]?.[surface]?.[vantage];
+  const motion = byMotion && facts && typeof facts === 'object' ? /** @type {{ siegeMotion?: unknown }} */ (facts).siegeMotion : null;
+  return byMotion && typeof motion === 'string' ? byMotion[motion] ?? '' : '';
+}
+
+/**
  * The summary a named SURFACE prints: the line of the town's column in that surface's pool, the
  * settlement's name in its slot; the stored summary where the table has no line for the crisis
  * (an authored custom crisis) or no name is known. The crisis section is not a key here on
- * purpose: it keeps `entry.summary` itself.
+ * purpose: it keeps `entry.summary` itself. `facts` (optional, the record's facts: `factsOf`) lets a
+ * line that presumes a harvest read the record (NO_GRAIN_TWINS); with none handed, it prints as before.
  * @param {{ type?: unknown, summary?: unknown, direction?: unknown }|null|undefined} entry one `stress[]` entry
  * @param {unknown} name the settlement's name
  * @param {'cover'|'overview'|'defence'|'tonight'} surface
+ * @param {Parameters<typeof atomHolds>[1]} [facts] the record's facts
  * @returns {string|null}
  */
-export function crisisSummaryForSurface(entry, name, surface) {
+export function crisisSummaryForSurface(entry, name, surface, facts) {
   const stored = clean(entry?.summary) || null;
   const place = clean(name);
   const columns = SURFACE_VANTAGE_COLUMNS[/** @type {keyof typeof SURFACE_VANTAGE_COLUMNS} */ (surface)];
   const set = crisisSummaryPoolsOf(entry);
   if (!columns || !set || !place) return stored;
-  const vantage = columns[summaryColumnOf(place, clean(entry?.type))];
-  const line = clean(set[/** @type {keyof SurfacePools} */ (surface)]?.[vantage]);
+  const kind = clean(entry?.type);
+  const vantage = columns[summaryColumnOf(place, kind)];
+  const twins = /** @type {Record<string, Record<string, Record<string, string>>>} */ (NO_GRAIN_TWINS)[kind]?.[surface];
+  const twin = (twins?.[vantage] && facts && atomHolds('grain', facts) === false ? twins[vantage] : '')
+    || siegeMotionTwin(kind, surface, vantage, facts);
+  const line = clean(twin || set[/** @type {keyof SurfacePools} */ (surface)]?.[vantage]);
   return line ? line.replace(/\{name\}/g, place) : stored;
 }

@@ -10,11 +10,16 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 // THE TWO LABEL SEAMS (§934.13 / §934.22). `rawResource` is a catalogue key on a desert
 // town ('desert_salt', 'glass_sand', 'mountain_timber') and the processing names are
 // institution keys; both are PRINTS here, and nothing on this tab matches on them.
-import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js';
+import { resourceDisplayName, RESOURCE_DISPLAY_LABELS } from '../../../domain/display/resourceDisplayName.js';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 // READER-R1 ruling 3: the gap rows the DM reads are the record-read lines, in the house voice.
-import { resourceGapLines } from '../../../domain/display/validationOnPage.js';
+import { resourceGapLines, housesStillNeeded, exploitationGroupsShown } from '../../../domain/display/validationOnPage.js';
 import { FLUSH } from '../../../design/flush.js';
+import { tradeStoppedHere } from '../../../domain/display/chainStateShown.js';
+import { fullCardWordUnderSiege } from '../../../domain/display/economicsCrisisMarks.js'; // BAR3-LABELS-3 L3b
+import { plainGoodName } from '../../../domain/display/tradeListDisplay.js'; // W2-C-LEAVES-13 (15): no slash label
+import { commoditiesShown, FAILED_MARK } from '../../../domain/display/commoditiesShown.js'; // BAR5-FOOD (L3.failedFood)
+import { impliedGroundsOnPage } from '../../../domain/facts/houseInputAtHand.js'; // BIRTH-2: the grounds the houses prove (stored nowhere)
 
 /**
  * WHAT A RESOURCE DRAWS ON (`exploitation.*[].dependsOn`). Its only reader was Economics'
@@ -37,58 +42,80 @@ const valBg    = v => v==='high'?'#e8f5ec':v==='medium'?'#faf4e8':'#f0ead8';
  * (BUILD-W2-SEARCH U2, no behaviour change): `stage` is 'unexploited', 'partial' or 'full',
  * the section's three variants, so the dossier search mounts a chain through its own card.
  */
-export function ResourceChainCard({ chain, stage }) {
+export function ResourceChainCard({ chain, stage, settlement = null, moved = false }) {
   const mobile = useIsMobile();
+  // #452 (W2-C-LEAVES-3, ruled with R1): "Needs:" names only the houses the live roster does not hold by kind or trade.
+  const needs = stage === 'unexploited' ? housesStillNeeded(settlement, chain?.processingInstitutions) : [];
   if (stage === 'unexploited') return (
     <div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',padding:'10px 14px'}}>
       <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
         <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>Unexploited</span>
-        <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
+        <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
         <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
       </div>
       {/* Chain flow */}
       <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap',marginBottom:6}}>
-        <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
-        {(chain.intermediateGoods||[]).map((g,j)=>(
+        <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
+        {/* P1-a: a card the analysis filed worked that the record shows idle (exploitationCardShown :: moved) prints the
+            resource alone: the chain table's goods and what it draws on are not what the record holds of a spent ground. */}
+        {(moved ? [] : (chain.intermediateGoods||[])).map((g,j)=>(
           <React.Fragment key={j}>
             <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
-            <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span>
+            <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{plainGoodName(g)}</span>
           </React.Fragment>
         ))}
-        {(chain.finalProducts||[]).slice(0,2).map((g,j)=>(
+        {(chain.finalProducts||[]).slice(0,moved?0:2).map((g,j)=>(
           <React.Fragment key={j}>
             <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
             <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',padding:'1px 6px',fontWeight:600}}>{g}</span>
           </React.Fragment>
         ))}
       </div>
-      {chain.processingInstitutions?.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#5A3A10']}}>
-        Needs: {chain.processingInstitutions.map((n) => institutionDisplayName(n) || n).join(', ')}
+      {needs.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#5A3A10']}}>
+        Needs: {needs.map((n) => institutionDisplayName(n) || n).join(', ')}
       </div>}
-      <DrawsOn deps={chain.dependsOn} mobile={mobile} />
+      {!moved&&<DrawsOn deps={chain.dependsOn} mobile={mobile} />}
+    </div>
+  );
+  // V2 (TAIL-DISPLAY-CIVIC-3): the food a famine in force failed (validationOnPage.js :: famineFailedResourceOf), the
+  // resource alone, in the famine's own words ("The fishing failed this year", foodBalance.js): no flow and no grade of working
+  if (stage === 'failed') return (
+    <div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #8a2a1a',padding:'8px 14px'}}>
+      <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>✗ Failed this year</span>
+        <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
+      </div>
     </div>
   );
   if (stage === 'partial') return (
     <div style={{background:swatch['#F4FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #5a6a1a',padding:'10px 14px'}}>
       <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
         <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#3A5A1A'],background:swatch['#D8ECD8'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>Partial</span>
-        <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
+        <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
         <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
       </div>
       <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap'}}>
-        <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
-        {(chain.intermediateGoods||[]).map((g,j)=>(
-          <React.Fragment key={j}><span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span><span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span></React.Fragment>
+        <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
+        {/* P1: a card the analysis filed Unexploited that a chain works here (exploitationCardShown :: moved) prints
+            the resource alone: the filed goods are the chain table's promise, not the record. */}
+        {(moved ? [] : (chain.intermediateGoods||[])).map((g,j)=>(
+          <React.Fragment key={j}><span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span><span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{plainGoodName(g)}</span></React.Fragment>
         ))}
       </div>
       <DrawsOn deps={chain.dependsOn} mobile={mobile} />
     </div>
   );
+  // L3b (BAR3-LABELS-3, the chair's ruling of 2026-11-15 21:20 UTC; vetoable by the owner): under a siege that stops the
+  // field work, a Full card whose every chain card on the Economics tab prints a word that is not working takes THAT word
+  // (economicsCrisisMarks.js :: fullCardWordUnderSiege), never "Fully exploited": no new word.
+  const besieged = fullCardWordUnderSiege(settlement, chain);
+  // BAR3-CLOSE-SWEEP-B (2026-11-16, letter e): the siege's word takes no wash (the kill list's tinted callout): its danger INK
+  // and the card's danger RULE (borderLeft) carry the signal, as ClerkNote's plain form asks.
   return (
-    <div style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #1a5a28',padding:'8px 14px'}}>
+    <div data-testid={besieged ? 'resource-full-under-siege' : undefined} style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:besieged ? '3px solid #8b1a1a' : '3px solid #1a5a28',padding:'8px 14px'}}>
       <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
-        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.success,background:swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>✓ Fully exploited</span>
-        <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:besieged ? swatch.danger : swatch.success,background:besieged ? undefined : swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>{besieged ? besieged.charAt(0).toUpperCase() + besieged.slice(1) : '✓ Fully exploited'}</span>
+        <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{plainGoodName(resourceDisplayName(chain.rawResource))}</span>
         <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
       </div>
       <DrawsOn deps={chain.dependsOn} mobile={mobile} />
@@ -129,10 +156,14 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
 
   // Imports: object {critical:[], recommended:[], reasons:{}}
 
-  // Exploitation buckets
-  const unexploited    = [...(res.exploitation?.unexploited || [])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
-  const partExploited  = [...(res.exploitation?.partiallyExploited || [])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
-  const fullExploited  = [...(res.exploitation?.fullyExploited || [])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
+  // Exploitation buckets: the grade each card PRINTS (P1, W2-C-LEAVES-3): the chain model governs the yes or no where it
+  // takes the resource, through the one reader the "No one here works" sentence and the PDF read.
+  const shown = exploitationGroupsShown(r);
+  const byRes = (a,b)=>(a.card.rawResource||'').localeCompare(b.card.rawResource||'');
+  const unexploited    = [...shown.unexploited].sort(byRes);
+  const partExploited  = [...shown.partial].sort(byRes);
+  const fullExploited  = [...shown.full].sort(byRes);
+  const famineFailed   = [...shown.failed].sort(byRes);
 
   // Terrain accent color
   const terrainColor = {
@@ -164,17 +195,20 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
       </div>
 
       {/* ── CRITICAL IMPORTS (what they can't produce) ───────────────────── */}
-      {(unexploited.length>0||partExploited.length>0||fullExploited.length>0)&&<Section title="Resource Exploitation" collapsible defaultOpen>
+      {(unexploited.length>0||partExploited.length>0||fullExploited.length>0||famineFailed.length>0)&&<Section title="Resource Exploitation" collapsible defaultOpen>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
 
           {/* Unexploited — most interesting for DMs */}
-          {unexploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="unexploited"/>)}
+          {unexploited.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="unexploited" settlement={r} moved={x.moved}/>)}
 
           {/* Partially exploited */}
-          {partExploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="partial"/>)}
+          {partExploited.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="partial" moved={x.moved}/>)}
 
           {/* Fully exploited */}
-          {fullExploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="full"/>)}
+          {fullExploited.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="full" settlement={r}/>)}
+
+          {/* The food the famine failed (V2: the record's failed source) */}
+          {famineFailed.map((x,i)=><ResourceChainCard key={i} chain={x.card} stage="failed"/>)}
         </div>
       </Section>}
 
@@ -188,14 +222,31 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
       <DeskLines mount={GROUND_MOUNT} settlementName={r?.name} tier={r?.tier} rungs={[deskProse.strategicValue, deskProse.exploitation, deskProse.resourceCondition]} />
 
       {/* ── AVAILABLE RAW RESOURCES ───────────────────────────────────────── */}
-      {(r?.config?.nearbyResources?.length>0||res.availableResources?.length>0)&&<Section title="Nearby Resources" collapsible defaultOpen={true}>
+      {(r?.config?.nearbyResources?.length>0||res.availableResources?.length>0||impliedGroundsOnPage(r).there.length>0||impliedGroundsOnPage(r).used.length>0)&&<Section title="Nearby Resources" collapsible defaultOpen={true}>
         {(() => {
           const allRes = [...(r?.config?.nearbyResources || [])].sort();
-          const depleted = [...(r?.config?.nearbyResourcesDepleted || [])].sort();
+          // BIRTH-2 (BR4 (b), BR5; the audit's W1 and W2): THE GROUND A HOUSE PROVES is printed here and stored nowhere: there,
+          // under the section's own title without "Abundant" (one quarry does not prove plenty); used up, under "Depleted"
+          const implied = impliedGroundsOnPage(r);
+          const depleted = [...new Set([...(r?.config?.nearbyResourcesDepleted || []), ...implied.used])].sort();
           const abundant = allRes.filter(rk => !depleted.includes(rk));
           const customSet = new Set(r?.config?.nearbyResourcesCustom || []);
-          const fmtKey = rk => rk.replace(/_/g,' ').replace(/\b./g,c=>c.toUpperCase());
+          const fmtKey = rk => (!customSet.has(rk) && Object.hasOwn(RESOURCE_DISPLAY_LABELS, rk)) ? RESOURCE_DISPLAY_LABELS[rk] : rk.replace(/_/g,' ').replace(/\b./g,c=>c.toUpperCase()); // TAIL-DISPLAY-ECON-4 (X26): A RESOURCE'S NAME HAS ONE HOME, the catalogue's own label (RESOURCE_DATA[k].label, through the seam's verbatim table); a custom ground keeps its key's words
+          // W2-C-LEAVES-SIDE (the cut's #937): under a siege in force the grounds around the walls are not called
+          // "Abundant" (the tab's own food line says the siege has taken the outlying fields): the word of plenty is
+          // left out and the grounds print first, unlabelled, under the section's own title (never under "Depleted").
+          const besieged = tradeStoppedHere(r);
+          const abundantChips = abundant.map((rk,i)=>customSet.has(rk)
+            ? <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'2px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
+            : <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#FAF8F4'],border:'1px solid #88c880',padding:'2px 9px'}}>{fmtKey(rk)}</span>);
+          const provenChips = implied.there.filter(rk => !allRes.includes(rk)).sort().map((rk,i)=><span key={`p${i}`} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#FAF8F4'],border:'1px solid #88c880',padding:'2px 9px'}}>{fmtKey(rk)}</span>);
           return <>
+            {besieged&&abundant.length>0&&<div data-testid="resources-grounds-besieged" style={{marginBottom:8}}>
+              <div style={{display:'flex',flexWrap:'wrap',gap:5}}>{abundantChips}</div>
+            </div>}
+            {provenChips.length>0&&<div data-testid="resources-grounds-proven" style={{marginBottom:8}}>
+              <div style={{display:'flex',flexWrap:'wrap',gap:5}}>{provenChips}</div>
+            </div>}
             {depleted.length>0&&<div style={{marginBottom:8}}>
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}>Depleted</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
@@ -204,18 +255,17 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
                   : <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#8B3000'],background:swatch['#FFF3ED'],border:'1px solid #e08040',padding:'2px 9px',fontWeight:600}}>{fmtKey(rk)}</span>)}
               </div>
             </div>}
-            {abundant.length>0&&<div style={{marginBottom:res.availableResources?.length>0?8:0}}>
+            {!besieged&&abundant.length>0&&<div style={{marginBottom:res.availableResources?.length>0?8:0}}>
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.success,letterSpacing:'0.06em',marginBottom:4}}>Abundant</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {abundant.map((rk,i)=>customSet.has(rk)
-                  ? <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'2px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
-                  : <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#FAF8F4'],border:'1px solid #88c880',padding:'2px 9px'}}>{fmtKey(rk)}</span>)}
+                {abundantChips}
               </div>
             </div>}
             {res.availableResources?.length>0&&<div style={{paddingTop:6,borderTop:'1px solid #e8dcc8'}}>
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:MUTED,letterSpacing:'0.06em',marginBottom:4}}>Commodities available</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {res.availableResources.map((r2,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',padding:'2px 9px',textTransform:'capitalize'}}>{r2.replace(/_/g,' ')}</span>)}
+                {/* BAR5-FOOD (L3.failedFood): the famine's failed food is marked where it is listed (commoditiesShown.js) */}
+                {commoditiesShown(r).map((item,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',padding:'2px 9px',textTransform:'capitalize'}}>{item.failed ? `${item.label} (${FAILED_MARK})` : item.label}</span>)}
               </div>
             </div>}
           </>;

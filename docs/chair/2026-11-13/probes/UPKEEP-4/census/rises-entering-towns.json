@@ -1,0 +1,70 @@
+{
+ "4": {
+  "entering": [
+   "r2r-town-36",
+   "r2r-metropolis-53",
+   "r2s-religious_conversion-city-2"
+  ],
+  "leaving": [
+   "r2r-city-26"
+  ],
+  "facts": {
+   "r2r-town-36": [
+    "readiness: \"Well-Defended\" -> \"Defensible\"",
+    "readinessScore: 57 -> 44",
+    "scores: {\"military\": 62, \"monster\": 92, \"internal\": 43} -> {\"military\": 47, \"monster\": 71, \"internal\": 34}",
+    "legitimacy: \"Contested\" -> \"Legitimacy Crisis\"",
+    "powers: [47, 31, 22] -> [51, 26, 23]"
+   ],
+   "r2r-metropolis-53": [
+    "readiness: \"Well-Defended\" -> \"Fortress\"",
+    "readinessScore: 60 -> 80",
+    "scores: {\"military\": 67, \"monster\": 86, \"internal\": 55} -> {\"military\": 95, \"monster\": 100, \"internal\": 79}",
+    "legitimacy: \"Approved\" -> \"Endorsed\"",
+    "powers: [31, 18, 17, 11, 10, 8, 5] -> [33, 17, 16, 11, 10, 8, 5]"
+   ],
+   "r2s-religious_conversion-city-2": [
+    "readiness: \"Defensible\" -> \"Well-Defended\"",
+    "readinessScore: 51 -> 59",
+    "scores: {\"military\": 71, \"monster\": 79, \"internal\": 35} -> {\"military\": 89, \"monster\": 81, \"internal\": 43}",
+    "legitimacy: \"Contested\" -> \"Tolerated\"",
+    "powers: [24, 18, 12, 12, 11, 9, 8, 6] -> [28, 16, 12, 11, 11, 8, 8, 6]"
+   ],
+   "r2r-city-26": [
+    "readiness: \"Well-Defended\" -> \"Defensible\"",
+    "readinessScore: 55 -> 54",
+    "scores: {\"military\": 88, \"monster\": 75, \"internal\": 24} -> {\"military\": 87, \"monster\": 72, \"internal\": 24}",
+    "legitimacy: \"Approved\" -> \"Tolerated\"",
+    "powers: [46, 19, 16, 10, 9] -> [42, 19, 19, 10, 10]"
+   ]
+  }
+ },
+ "9": {
+  "entering": [
+   "r2s-famine-city-0"
+  ],
+  "leaving": [],
+  "facts": {
+   "r2s-famine-city-0": [
+    "readiness: \"Defensible\" -> \"Lightly Defended\"",
+    "readinessScore: 44 -> 37",
+    "scores: {\"military\": 78, \"monster\": 43, \"internal\": 27} -> {\"military\": 67, \"monster\": 38, \"internal\": 20}"
+   ]
+  }
+ },
+ "NEW-1": {
+  "entering": [
+   "r2r-village-8"
+  ],
+  "leaving": [],
+  "facts": {
+   "r2r-village-8": [
+    "readiness: \"Defensible\" -> \"Lightly Defended\"",
+    "readinessScore: 40 -> 34",
+    "scores: {\"military\": 91, \"monster\": 59, \"internal\": 32} -> {\"military\": 87, \"monster\": 42, \"internal\": 32}",
+    "legitimacy: \"Approved\" -> \"Tolerated\"",
+    "powers: [61, 39] -> [58, 42]"
+   ]
+  }
+ }
+}

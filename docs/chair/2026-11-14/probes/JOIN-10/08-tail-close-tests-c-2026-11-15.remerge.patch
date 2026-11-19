@@ -1,0 +1,43 @@
+commit a6b22f58b85985b424617b59ff034a876a356acb
+Merge: 2f8ffcaa3 2ef97b6e9
+Author: Claude <noreply@anthropic.com>
+Date:   Sun Nov 15 07:15:01 2026 +0000
+
+    Merge lane/tail-close-tests-c-2026-11-15 at 2ef97b6e9 (JOIN-10 point 8)
+    
+    The chair's LAND word: one point, --no-ff at the full hash 2ef97b6e9d68a5487d4a4d7350e40e1079837674 read back from origin at 07:14 UTC.
+    Merge base(s): 0b1248dbf. Files staged outside docs/: 5.
+    Declared-move commits brought in: 85cefdba5 (the golden carried, the owner's door).
+    Merged clean though both sides moved (outside docs/): tests/data/tailHistoryBatch6.test.js.
+    Conflicts: `tailHistoryBatch6.test.js` (test), close-tests-c against close-pools-2: both blocks stand verbatim, 3/3 green (§3).
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYXQJDGxfuGa1swK6Az
+
+diff --git a/tests/data/tailHistoryBatch6.test.js b/tests/data/tailHistoryBatch6.test.js
+remerge CONFLICT (content): Merge conflict in tests/data/tailHistoryBatch6.test.js
+index 403c98762..95ad3e864 100644
+--- a/tests/data/tailHistoryBatch6.test.js
++++ b/tests/data/tailHistoryBatch6.test.js
+@@ -113,7 +113,6 @@ describe('TAIL-HISTORY-5 batch 6: what the bar\'s readers met prints only where
+       const [i, seed] = key.split('|');
+       const [, gone, instead, witness] = /** @type {[string, RegExp, RegExp | null, string?]} */ (MUST_NOT[Number(i)]);
+       const s = textsOf(String(seed));
+-<<<<<<< 2f8ffcaa3 (JOIN-10 hand-back: point 7 (close-pools-2) in the table)
+       if (instead) {
+         // the patterns the town's texts match: the twin must be among them, the false words must not
+         expectAbsentWithAnchor([gone, instead].filter((re) => re.test(s)), gone, instead, `${key}: the false words out, the twin on the slot`);
+@@ -124,13 +123,11 @@ describe('TAIL-HISTORY-5 batch 6: what the bar\'s readers met prints only where
+         expect(original, `${key}: the original prints in ${witness}`).toBeTruthy();
+         expectPresentThenAbsent(before, s, original, `${key}: the slot is silent where the town makes the line false`);
+       }
+-=======
+       // TAIL-CLOSE-TESTS-C: the liveness anchor first: the twin on the same slot, or for a SILENT row the hooks it stands among
+       if (instead) expect(s, key).toMatch(/** @type {RegExp} */ (instead));
+       else expect(hooksOf(String(seed)).length, `${key}: the hooks the silent line stood among still print`).toBeGreaterThan(0);
+       // anchored: the branch above shows this town's slot is live (its twin prints, or its hooks print), so the absence is a cure
+       expect(s, key).not.toMatch(/** @type {RegExp} */ (gone));
+->>>>>>> 2ef97b6e9 (test(TAIL-CLOSE-TESTS-C, TC1): tailTies2Batch1 powerSiblings re-keyed by identity to the occupied seat's declared twin (a708f0cf))
+     }), 'the false lines');
+   }, 600_000);
+ 

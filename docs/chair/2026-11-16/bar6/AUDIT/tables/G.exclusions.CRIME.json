@@ -1,0 +1,307 @@
+[
+ {
+  "file": "src/domain/display/defenseDisplay.js",
+  "text": "A quarter given over to pleasure: a trade that runs at the edge of the law.",
+  "reason": "bound to its own house: the note of a Red light district house, a house the catalogue seats only at a town or larger; 'quarter' is that house's own word"
+ },
+ {
+  "file": "src/domain/display/defenseDisplay.js",
+  "text": "No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.",
+  "reason": "'this settlement' is the place's own name word, no size: the lexicon reads 'settlement' as a size word; the row prints only where no practitioner stands"
+ },
+ {
+  "file": "src/domain/display/defenseDisplay.js",
+  "text": "No arcane practitioner stands with the defence, so wards, detection and counterspell are beyond it.",
+  "reason": "no size claimed: 'beyond it' names the defence; the row prints only where a practitioner stands and the defence holds no arcane tradition (deriveSupportingCapabilities)"
+ },
+ {
+  "file": "src/domain/display/defenseDisplay.js",
+  "text": "…. Detection, wards, counterspell.",
+  "reason": "the Arcane Support row's Present note, printed only where the Magic tab's practitioner census and the defence's own arcane tradition both hold (W2-C-LEAVES-3); no size word in it"
+ },
+ {
+  "file": "src/domain/display/guardLineUnderTheLaw.js",
+  "text": "Nobody here is paid to keep order. A quarrel no longer goes to the heads of the oldest families; it is settled by whoever is stronger.",
+  "reason": "the twin of a no-watch line (NO_WATCH_SMALL), printed only where the safety writer's branch found no garrison, watch or militia; declares `law: > collapsed`'s exclusion"
+ },
+ {
+  "file": "src/domain/display/guardLineUnderTheLaw.js",
+  "text": "Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.",
+  "reason": "a match key of the no-watch line (NO_WATCH_SMALL), drawn only in the branch with no garrison, watch or militia: 'Nobody here is paid' is that branch's own fact"
+ },
+ {
+  "file": "src/domain/display/guardLineUnderTheLaw.js",
+  "text": "Nobody here is paid to keep order. A quarrel goes to the heads of the oldest families, though many come to blows first.",
+  "reason": "the same no-watch line's violent telling (quarrelUnderViolence), the same branch: no garrison, watch or militia"
+ },
+ {
+  "file": "src/domain/display/guardLineUnderTheLaw.js",
+  "text": " Thieves here know that the court sits and the cells are real.",
+  "reason": "the court's line, drawn only where a court and a prison stand (safetyProfile.js COURT_AND_PRISON); declares `law: > collapsed`"
+ },
+ {
+  "file": "src/domain/display/guardLineUnderTheLaw.js",
+  "text": "Embattled region. Fortification and forces are present and paid, but the pressure on them never lets up.",
+  "reason": "declares `force: paid` (BAR6-CRIME's new atom over orderForce.js); the class table (CLASS_DIMS, a shared tool) names no `force` dimension for office: named for BAR6-GUARD"
+ },
+ {
+  "file": "src/generators/safetyLineTruth.js",
+  "text": "…… held for the defence, and few patrols can be spared from it.",
+  "reason": "patrolTwin's siege head: `lawRef` is the force noun the caller's branch read off the roster (garrison, watch, militia), so the office it names stands"
+ },
+ {
+  "file": "src/generators/safetyLineTruth.js",
+  "text": "No one of the place is paid to keep order; the occupiers keep their own. A quarrel goes to the heads of the oldest families, and most are settled before they come to blows.",
+  "reason": "NO_WATCH_OCCUPIED: printed in the no-watch branch under an occupation (declares `crisis: occupation`); 'No one of the place is paid' is that branch's fact"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The garrison, now under occupier command, enforces",
+  "reason": "branch-bound: printed only where `inst.hasGarrison` (the occupation curfew's authority)"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The military command has taken charge of the streets",
+  "reason": "branch-bound: printed only where no garrison stands and the place is not small (`small` takes 'Those holding the place'); a town or larger has streets"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The garrison spends its days guarding the food",
+  "reason": "branch-bound: printed only where `inst.hasGarrison` (the famine's food guard)"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The garrison holds the quarantine lines",
+  "reason": "branch-bound: printed only where `inst.hasGarrison` (the plague's quarantine)"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The watch keeps the quarantine",
+  "reason": "branch-bound: printed only where `inst.hasWatch` and no garrison (the plague's quarantine)"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "Armed rebels are active. Patrols have changed their routes, some districts are closed off, ",
+  "reason": "branch-bound: the insurgency's line for a place that is not small (`small` takes its own line); its `guardPresence` twin is SAFETY_LINE_SIBLINGS'"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "Rebels and guards are fighting in the contested districts. People keep off certain streets, ",
+  "reason": "branch-bound: the slave revolt's line for a place that is not small (`small` takes its own); declared on `guardPresence` with a twin"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "and the regular patrols have stopped.",
+  "reason": "the tail of the same slave-revolt line, same branch and declaration"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "No stable governing authority. Enforcement is inconsistent; which power controls a district determines what rules apply.",
+  "reason": "branch-bound: printed only where the place is not small and a force stands (else 'No stable governing authority; whoever holds sway')"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "More people have arrived than there are roofs or work for, and newcomers and old residents quarrel in the streets. ",
+  "reason": "branch-bound: the migration line for a place that is not tiny (`tiny` takes 'quarrel over what there is'): a village or larger has streets"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The watch cannot tell one stranger from the next.",
+  "reason": "the same migration line's watch clause, resolved through SAFETY_LINE_SIBLINGS on ['watch'] with its twin"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The garrison is visible everywhere.",
+  "reason": "branch-bound: printed only where `inst.hasGarrison` (else 'Armed officials')"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The watch is present and responsive.",
+  "reason": "branch-bound: printed only where `inst.hasWatch` and no garrison"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The garrison is overwhelmed or corrupt.",
+  "reason": "branch-bound: printed only where `inst.hasGarrison`"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The citizen militia is well organised and willing: these are people defending their own homes. ",
+  "reason": "branch-bound: printed only where a militia stands and no garrison or watch"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "They do not patrol like professionals, but they know every lane.……",
+  "reason": "the tail of the same well-organised militia line (a militia, no garrison, no watch)"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The citizen militia musters when needed but cannot maintain consistent patrol. ",
+  "reason": "branch-bound: the same militia branch (no garrison, no watch)"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The siege has shut the roads, so what contraband is already inside is hoarded and sold dear by those who know the patrol schedules.",
+  "reason": "the siege's smuggling line: declares `crisis: siege`; 'patrols' are the siege's own (the force holding the walls)"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "An active … smuggling operation moves contraband through the settlement. The routes are established and the operators have learned the patrol schedules.……",
+  "reason": "the smuggling crime type, drawn only where a smuggling house or the smuggling flag stands; 'patrol' names enforcement in general"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": " The watch responds to the worst incidents but cannot contest territorial control.",
+  "reason": "branch-bound: printed only where `inst.hasWatch` and no garrison (the gang line's enforcement clause)"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": " The militia is composed of locals who know the gangs personally. Enforcement is complicated.",
+  "reason": "branch-bound: printed only where a militia stands and no garrison or watch"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "Territorial gangs control specific districts, extorting local businesses and residents. Violence is episodic rather than constant: mostly enforcing territorial boundaries.……",
+  "reason": "branch-bound: printed only where two gang houses stand and the place is not small"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "… Disputes are settled by whoever is stronger. Property is kept only by those who can defend it.……",
+  "reason": "the Lawlessness crime type's own claim, drawn only where the stress is lawlessness or the security ratio is lawless"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "Price gouging on medicines, protective herbs, and burial services.",
+  "reason": "branch-bound: printed only where a market or a merchant guild stands (else its own line)"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.",
+  "reason": "branch-bound: the slave revolt's crime line for a place that is not small; declared through SAFETY_LINE_SIBLINGS with its twin"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "Stolen and improvised weapons circulating in the revolt-held districts. Some are being smuggled in from outside. The black market is very active.",
+  "reason": "branch-bound: the revolt's weapons line for a place that is not small (`small` takes 'circulating among the rebels')"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "Suppliers adulterating grain and leather sold to the army's contracts. Inspectors are overworked or bribed. The settlement's reputation for reliable supply is being consumed for short-term profit.",
+  "reason": "branch-bound: war profiteering, drawn only under a war and a trade route: the grain and leather are the army's contracts (named no crown: SV1), not a claim of the town's own output"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "A pilgrim paid a fortune for a holy relic that is obviously fake. They want the fraud exposed without losing their faith in the process.",
+  "reason": "a plot hook (the second check's rule 2): the pilgrim and the relic are the hook's own fact"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "More people have arrived than there are roofs or work for, and newcomers and old residents quarrel in the streets. The watch cannot tell one stranger from the next.",
+  "reason": "a SAFETY_LINE_SIBLINGS key (the migration line, declared on ['watch'] with its twin); printed only where the place is not tiny"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "More people have arrived than there are roofs or work for, and newcomers and old residents quarrel in the streets. Whoever keeps order cannot tell one stranger from the next.",
+  "reason": "the twin of the same migration line (no watch), same branch: a village or larger"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets.",
+  "reason": "a SAFETY_LINE_SIBLINGS key: the slave revolt's crime line, declared on ['guardPresence'], printed only where the place is not small"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "Armed rebels are active. Patrols have changed their routes, some districts are closed off, and nobody is sure whose side a neighbour is on.",
+  "reason": "a SAFETY_LINE_SIBLINGS key: the insurgency line, declared on ['guardPresence'], printed only where the place is not small"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "Armed rebels are active. Some districts are closed off, and nobody is sure whose side a neighbour is on.",
+  "reason": "the twin of the insurgency line (no force), same not-small branch"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "Rebels and guards are fighting in the contested districts. People keep off certain streets, and the regular patrols have stopped.",
+  "reason": "a SAFETY_LINE_SIBLINGS key: the slave revolt's line, declared on ['guardPresence'], printed only where the place is not small"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The rebels hold some districts. People keep off those streets, and nobody walks them after dark.",
+  "reason": "the twin of the slave revolt's line (no force), same not-small branch"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "A hired company is on the books, but the coin to keep it runs short; it comes when called and leaves when the coin does.",
+  "reason": "a SAFETY_LINE_SIBLINGS row declared on the purse (`prosperity: ≤ poor`) and the hired company's presence (keptGuardLine's mercenary branch)"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The … … standard patrol coverage. Effective against opportunistic crime; ",
+  "reason": "STANDARD_PATROL: the frame's `lawRef` is the force noun the caller read off the roster, so the office it names stands"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "less effective against organized operations that can plan around patrol routes.",
+  "reason": "the tail of the same patrol frame (same force noun)"
+ },
+ {
+  "file": "src/generators/safetyProfile.js",
+  "text": "The … … the usual rounds. That stops a pickpocket or a brawl; anyone who has learned the rounds can work between them.",
+  "reason": "STANDARD_PATROL's second frame: the force noun is the roster's; 'the usual rounds' is read at print by patrolTruth where a supply is cut"
+ },
+ {
+  "file": "src/generators/structuralValidator.js",
+  "text": "Embattled region with no military force. Walls without defenders are a convenient funnel. A garrison, militia, or mercenary force is required.",
+  "reason": "a violation drawn only where an embattled region has walls and no military force: the rule's own condition is its claim"
+ },
+ {
+  "file": "src/generators/structuralValidator.js",
+  "text": "Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement.…",
+  "reason": "a funding violation drawn only where a force stands and the military gate is below 1; at 1 it takes FUNDED_EMBATTLED (settleFundingReasons)"
+ },
+ {
+  "file": "src/generators/structuralValidator.js",
+  "text": "A … without a garrison or professional guard is indefensible. City-scale settlements require permanent military infrastructure: the walls require someone to man them.",
+  "reason": "a structural-gap rule drawn only for a city-scale tier with no garrison or professional guard: the line names what is missing"
+ },
+ {
+  "file": "src/generators/structuralValidator.js",
+  "text": "A metropolis requires multiple garrisons or a professional guard force of hundreds. A single garrison cannot secure a city of this scale.",
+  "reason": "a structural-gap rule drawn only for a metropolis: the line names what a metropolis lacks"
+ },
+ {
+  "file": "src/generators/structuralValidator.js",
+  "text": "Subsistence economy. No trade routes means no imports, no exports, and no market participation. The settlement produces only what it needs to survive, and relies on its immediate environment entirely.",
+  "reason": "the subsistence-economy rule drawn only where the trade route is isolated: 'no trade routes' is its own condition"
+ },
+ {
+  "file": "src/generators/structuralValidator.js",
+  "text": "Any outside trade good (iron tools, salt, medicine) would be precious and potentially plot-relevant",
+  "reason": "a suggested fix under the isolated-route rule (advice to the DM, not a claim about the town)"
+ },
+ {
+  "file": "src/generators/structuralValidator.js",
+  "text": "Add a road, river, or port trade route as redundancy",
+  "reason": "a suggested fix (advice to the DM: add a route), not a claim the town has one"
+ },
+ {
+  "file": "src/generators/structuralValidator.js",
+  "text": "Add a road, river, crossroads, or port trade route",
+  "reason": "a suggested fix (advice to the DM: add a route), not a claim the town has one"
+ },
+ {
+  "file": "src/generators/structuralValidator.js",
+  "text": "A garrison without walls is untenable in an embattled region. Defenders have nowhere to make a stand.",
+  "reason": "a suggestion drawn only where a garrison stands without walls in an embattled region: the rule's condition"
+ },
+ {
+  "file": "src/generators/structuralValidator.js",
+  "text": "Military forces shelter behind walls. A garrison without a perimeter is a vulnerability on the frontier.",
+  "reason": "the same suggestion's other telling (frontier), same condition: a garrison stands without walls"
+ },
+ {
+  "file": "src/generators/structuralValidator.js",
+  "text": "Embattled region. Fortification and forces are present but chronically underfunded: poor equipment, low morale, and thin reinforcement.",
+  "reason": "UNDERFUNDED_LEADS: a match key of the funding reason drawn where a force stands and the gate is below 1"
+ }
+]

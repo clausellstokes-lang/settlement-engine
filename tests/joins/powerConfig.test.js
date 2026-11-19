@@ -121,7 +121,10 @@ describe('behavior: governing faction engages the legitimacy consumers', () => {
     // density factor changed this town's roster, and `-2` now lands on neutral governing power;
     // `-0` again gives a non-neutral governing faction (so do -1 and -4). Re-probed to `-1` the
     // same day, same cause (the chair's inverse calibration): -1, -4 and -6 of the first 40 do.
-    const s = gen({ ...BASE_CFG, settType: 'town' }, 'powercfg-leg-1');
+    // RE-PROBED 2026-11-13 (COHERENCE-AGREE-7, P3: the refill never fills a slot with a member the
+    // record's terrain refuses): `-1`'s re-dealt resources land it on neutral governing power; `-4`,
+    // the nearest seed that gives a non-neutral governing faction both before and after P3, is taken.
+    const s = gen({ ...BASE_CFG, settType: 'town' }, 'powercfg-leg-4');
     const ra = deriveCausalState(s).variables.ruling_authority;
     const govContrib = (ra.contributors || []).find((c) => c.effect === 'governing_power');
     expect(govContrib, 'deriveRulingAuthority must engage the governing faction').toBeTruthy();

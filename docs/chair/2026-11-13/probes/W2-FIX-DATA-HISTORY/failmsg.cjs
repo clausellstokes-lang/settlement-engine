@@ -1,0 +1,3 @@
+const fs=require('fs'); const rd=(f)=>{ const j=JSON.parse(fs.readFileSync(f)); const m=new Map(); for(const r of j.testResults) for(const a of r.assertionResults) if(a.status==='failed') m.set(r.name.split('/tests/')[1]+' :: '+a.title, (a.failureMessages||[]).join('\n').replace(/\/tmp\/[^\s'"]*?\/(basetree|wt|t[A-Z])\//g,'<T>/').split('\n').filter(l=>/^\s*[+-] /.test(l)).join('\n')); return m; };
+const A=rd(process.argv[2]), B=rd(process.argv[3]);
+for(const [k,v] of B){ const a=A.get(k)||''; if(a===v) continue; const al=new Set(a.split('\n')), bl=new Set(v.split('\n')); console.log('## '+k.slice(0,120)); for(const l of bl) if(!al.has(l)) console.log('  NEW '+l.slice(0,220)); for(const l of al) if(!bl.has(l)) console.log('  GONE '+l.slice(0,220)); }

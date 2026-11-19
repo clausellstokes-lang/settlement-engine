@@ -1,0 +1,18 @@
+== C5 (G4) vs C4b: births 3756; records differ 69
+READINESS moved 44 (up 32, down 12); mean all +0.01; min -1 max 1; bands 5 {('Lightly Defended', 'Defensible'): 2, ('Lightly Defended', 'Vulnerable'): 1, ('Defensible', 'Well-Defended'): 1, ('Vulnerable', 'Undefended'): 1}
+  fresh6: moved 6, band 0
+  thorp      moved    0 mean +0.00 min +0 max +0 bands 0
+  hamlet     moved    0 mean +0.00 min +0 max +0 bands 0
+  village    moved   12 mean -0.02 min -1 max +0 bands 2
+  town       moved   25 mean +0.03 min +0 max +1 bands 3
+  city       moved    6 mean +0.01 min +0 max +1 bands 0
+  metropolis moved    1 mean +0.00 min +0 max +1 bands 0
+  military  moved    2 (up 0, down 2) mean -0.00 min -1 max +0; bands 0 {}
+  monster   moved   69 (up 51, down 18) mean +0.02 min -3 max +3; bands 2 {('WEAK', 'ADEQUATE'): 1, ('ADEQUATE', 'STRONG'): 1}
+  internal  moved    0 (up 0, down 0) mean +0.00 min +0 max +0; bands 0 {}
+  economic  moved   24 (up 20, down 4) mean +0.01 min -2 max +2; bands 2 {('ADEQUATE', 'STRONG'): 1, ('WEAK', 'CRITICAL'): 1}
+  magical   moved   24 (up 19, down 5) mean +0.00 min -2 max +1; bands 2 {('CRITICAL', 'WEAK'): 2}
+  disaster  moved    0 (up 0, down 0) mean +0.00 min +0 max +0; bands 0 {}
+  MAGIC AGAINST THE PAGE: made 0 [], cured 0
+  AI THREATS: births changed 0 {}
+  COUPLING: power structure changed 5 (of which band changed 5), a power appears or vanishes 0, legitimacy label changed 0

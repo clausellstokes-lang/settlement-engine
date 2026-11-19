@@ -1,0 +1,19 @@
+== 130 /Those holding the place keep order/ | rv2-under_siege-thorp-0 [thorp, under_siege]; rv2-under_siege-thorp-15 [thorp, under_siege+famine]; rww-village-under_siege-1 [village, under_siege]
+== 3 /^Armed rebels are active, and nobody/ | rv3-insurgency-village-0 [village, insurgency]; rv3-insurgency-village-2 [village, insurgency]
+== 4 /^The rebels are loose and armed/ | rv3-slave_revolt-village-0 [village, slave_revolt]; rv4-slave_revolt-village-0 [village, slave_revolt]
+== 3 /whoever holds sway decides what rules apply/ | rv3-politically_fractured-village-0 [village, politically_fractured]; rv3-politically_fractured-village-2 [village, politically_fractured]
+== 1 /quarrel over what there is/ | rww-hamlet-mass_migration-1 [hamlet, mass_migration]
+== 1 /keep their own (?:mercenary companies|private security) beside the/ | rr2s-city-occupied-rand-1 [city, occupied]
+== 0 /^There is no watch\. When a quarrel/ | 
+== 329 /scrying, fraud,/ | rv2-under_siege-city-2 [city, under_siege]; rv2-famine-town-33 [town, famine]; rv2-calm-town-1 [town, calm]; rww-metropolis-under_siege-1 [metropolis, under_siege]
+== 51 /^A street gang controls part of the place/ | rv2-under_siege-town-3 [town, under_siege]; rv2-famine-town-4 [town, famine]; rr2s-city-occupied-rand-1 [city, occupied]; rv2-calm-town-0 [town, calm]
+== 6 /^Price gouging on medicines, protective herbs, and burial services\.$/ | rv3-plague_onset-village-0 [village, plague_onset]; rww-thorp-plague_onset-1 [thorp, plague_onset]; rv3-plague_onset-village-2 [village, plague_onset]
+== 0 /^False conversion declarations sold or arranged for a fee\. Forged certification of compliance\.$/ | 
+== 4 /^Armed fighting between the rebels/ | rv3-slave_revolt-village-0 [village, slave_revolt]; rv4-slave_revolt-village-0 [village, slave_revolt]
+== 4 /circulating among the rebels/ | rv3-slave_revolt-village-0 [village, slave_revolt]; rv4-slave_revolt-village-0 [village, slave_revolt]
+== 211 /^Some goods change hands here without a licence or a duty paid\.$/ | rv3-occupied-city-1 [city, occupied]; rv2-calm-town-24 [town, calm]; rww-metropolis-infiltrated-1 [metropolis, infiltrated]
+== 3 /^Theft of food, livestock, and stored goods by people with too little/ | rr2s-city-calm-rand-1 [city, calm]; rww-town-slave_revolt-1 [town, slave_revolt]; rr2s-metropolis-calm-rand-1 [metropolis, calm]
+== 3 /^Some of the .+ take bribes/ | rr2s-city-calm-rand-1 [city, calm]; rww-town-slave_revolt-1 [town, slave_revolt]; rr2s-metropolis-calm-rand-1 [metropolis, calm]
+== 1 /is chronically underpaid and poorly equipped/ | rww-city-famine-1 [city, famine]
+== 0 /exists on paper(?::|\.) Susceptible/ | 
+== 85 /keeps what rounds it can/ | rv2-under_siege-town-0 [town, under_siege]; rv4-under_siege+famine-town-0 [town, under_siege+famine]; rww-metropolis-under_siege-1 [metropolis, under_siege]

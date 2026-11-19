@@ -32,12 +32,13 @@
  */
 
 import { hookTruthViolations, settlementHookFacts, speakHookTruthfully } from '../coherence/hookTruth.js';
-import { CAST_REASONS, effectiveCastOf, requiredRolesOf } from './crisisCast.js';
+import { CAST_REASONS, STAND_IN_ROLE, STAND_IN_ROLE_FALLBACK, effectiveCastOf, requiredRolesOf } from './crisisCast.js';
 import { resolveDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
-import { institutionDisplayName } from '../display/institutionDisplayName.js';
+import { institutionHouseLabel } from '../display/institutionDisplayName.js';
 import { pluralPowerName } from '../display/governanceAccount.js';
+import { powerSentenceName } from '../display/powerSentenceName.js';
 
 /** @typedef {import('./crisisCast.js').CrisisCast} CrisisCast */
 /** @typedef {import('./crisisCast.js').CastRow} CastRow */
@@ -49,24 +50,9 @@ import { pluralPowerName } from '../display/governanceAccount.js';
  * @typedef {{ text: string, bound: 'cast' | 'lever', link: { kind: 'npc' | 'faction' | 'institution', id: string, label: string } | null }} CrisisHook
  */
 
-/** The noun each kind is spoken of by ("In the siege, …"). PROPOSAL N1 (the lane's report). */
-export const CRISIS_NOUN = Object.freeze(/** @type {Record<string, string>} */ ({
-  under_siege: 'siege',
-  famine: 'famine',
-  occupied: 'occupation',
-  politically_fractured: 'split between the powers',
-  indebted: 'debt crisis',
-  recently_betrayed: 'betrayal',
-  infiltrated: 'infiltration',
-  plague_onset: 'outbreak',
-  succession_void: 'succession crisis',
-  monster_pressure: 'raids',
-  insurgency: 'insurgency',
-  religious_conversion: 'conversion',
-  slave_revolt: 'revolt',
-  wartime: 'war',
-  mass_migration: 'migration',
-}));
+/** The noun each kind is spoken of by: its one home is the leaf `crisisNoun.js` (COHERENCE-UPKEEP-7), re-exported here. */
+export { CRISIS_NOUN } from './crisisNoun.js';
+import { CRISIS_NOUN } from './crisisNoun.js';
 
 /** The noun of last resort: an unknown kind, or a noun the record contradicts. */
 const PLAIN_NOUN = 'crisis';
@@ -82,7 +68,10 @@ const PLURAL_NOUNS = Object.freeze(new Set(['raids']));
  * @param {string} name @returns {string}
  */
 export function houseInProse(name) {
-  const label = institutionDisplayName(name).replace(/\s*\((?:\d+(?:\s*[-–]\s*\d+)?|district)\)\s*$/i, '').trim();
+  // ROUND THREE, ruling (a): the house's label first (the one display leaf: no count range, household
+  // range or floor, gate or condition; "(50-100+)" was missed by this function's own pattern), then the
+  // district tag a sentence does not speak.
+  const label = institutionHouseLabel(name).replace(/\s*\(district\)\s*$/i, '').trim();
   return /^[A-Z][^A-Z]*$/.test(label) ? label[0].toLowerCase() + label.slice(1) : label;
 }
 
@@ -133,9 +122,24 @@ function holderWords(s, row) {
   if (row.kind === 'npc') {
     const npc = (Array.isArray(s.npcs) ? s.npcs : []).find((n) => !!n && (str(n.id) || str(n.name)) === row.id);
     const house = str(firstRankMembershipOf(npc, powerOrderOf(s))?.power);
-    return house ? `${row.name} of ${house}` : row.name;
+    // TAIL-CRISIS-2 batch 3: a power named in a sentence takes its prose form from its leaf ("Military/Guard" → "The Guard")
+    return house ? `${row.name} of ${powerSentenceName(house)}` : row.name;
   }
-  return row.kind === 'institution' ? `the ${row.name}` : row.name;
+  // ROUND THREE item 4 (the chair's ruling): a hook names a house through houseInProse, never raw.
+  return row.kind === 'institution' ? `the ${houseInProse(row.name)}` : row.name;
+}
+
+/**
+ * ROUND THREE item 4, ruling (c) (the third seat's named twin: "the houses of worship is stirring it"): every
+ * LINE_ROLE_CLAUSE verb is singular, so a house whose label is a plural ("Houses of worship", "Inns and taverns") holds
+ * no clause: the cast hook is not written for it (the lever hook is unchanged). The head is the label before " of ", and a
+ * pair joined by "and" is plural; the head word's plural is the powers' own reader (`pluralPowerName`). No draw.
+ * @param {CastRow} row @returns {boolean}
+ */
+function pluralHouseHolder(row) {
+  if (row.kind !== 'institution') return false;
+  const head = houseInProse(row.name).split(/\s+of\s+/i)[0];
+  return /\sand\s/i.test(head) || pluralPowerName(head);
 }
 
 /** @param {CastRow} row */
@@ -173,6 +177,31 @@ export function leverAndLoserOf(cast) {
 const castSentence = (noun, clause, reason) => (CLAUSE_SAYS.has(reason) ? `In the ${noun}, ${clause}.` : `In the ${noun}, ${clause}: ${reason}.`);
 
 /**
+ * THE REASONS THAT ARE A VERB'S PREDICATE (TAIL-CRISIS-2 batch 3; READ-ALL 11595 11549 11671 11569 11668 B11049 B11090:
+ * "In the debt crisis, Eir Ragnarsson of Household Council is the one who would come to terms: holds the seat." — the clause
+ * after the colon has no subject). These reasons say what the HOLDER does, so they are said of the holder, as a relative
+ * clause beside its name ("Eir Ragnarsson of Household Council, who holds the seat, is the one who would come to terms."),
+ * never after a colon. The other reasons are a noun or a whole clause, which a colon can hold. No draw; no new words.
+ * @type {ReadonlySet<string>}
+ */
+const PREDICATE_REASONS = new Set(['leverRuns', 'instigatorRival', 'instigatorBacked', 'targetSeat', 'targetSeatContested', 'scapegoatSeat',
+  'scapegoatLever', 'defenderMilitary', 'defenderOffice', 'treaterSeat', 'face'].map((k) => /** @type {Record<string, unknown>} */ (CAST_REASONS)[k]).filter((r) => typeof r === 'string'));
+
+/**
+ * The cast hook's sentence, its reason said of the holder where the reason is a predicate.
+ * @param {string} noun @param {(holder: string) => string} clauseOf @param {string} words the holder's words @param {CastRow} holder
+ * @returns {string}
+ */
+function castSentenceOf(noun, clauseOf, words, holder) {
+  const reason = str(holder.reason);
+  if (CLAUSE_SAYS.has(reason) || !PREDICATE_REASONS.has(reason)) return castSentence(noun, clauseOf(words), reason);
+  // TAIL-CRISIS-3 (batch 3's inheritors read): the rival's reason is its POWER's standing ("already carries more weight than
+  // whoever holds the seat"), never the person's, so the clause is said of the person's power
+  const who = holder.kind !== 'npc' ? 'which' : reason === CAST_REASONS.instigatorRival ? 'whose power' : 'who';
+  return `In the ${noun}, ${clauseOf(`${words}, ${who} ${reason},`)}.`.replace(/,\.$/, '.');
+}
+
+/**
  * The lever hook's sentence for a noun. PROPOSAL L1 (with a loser) and L2 (none loses).
  * @param {string} noun @param {string} house @param {string} holder @param {import('./crisisCast.js').CastStake | null} loser
  */
@@ -194,9 +223,11 @@ function leverSentence(noun, house, holder, loser) {
  * @param {import('./crisisCast.js').CastStake} loser @returns {string}
  */
 function loserClause(loser) {
-  const plural = pluralPowerName(loser.factionId);
+  // TAIL-CRISIS-2 batch 3 (READ-ALL 20875: "Military/Guard loses most"): the power by its prose form (`powerSentenceName`)
+  const name = powerSentenceName(loser.factionId);
+  const plural = pluralPowerName(name);
   const reason = plural ? loser.reason.replace(/\bits\b/g, 'their') : loser.reason;
-  return `${loser.factionId} ${plural ? 'lose' : 'loses'} most, because ${reason}`;
+  return `${name} ${plural ? 'lose' : 'loses'} most, because ${reason}`;
 }
 
 /**
@@ -240,8 +271,8 @@ export function crisisHooksOf(settlement, entry, facts = settlementHookFacts(set
       facts: () => factsOf(settlement), poolId: `LINE_ROLE_CLAUSE.${holder.role}`, surface: 'crisis',
     }).line)
     : null;
-  if (holder && clauseOf && str(holder.reason)) {
-    const text = speakTrue((n) => castSentence(n, clauseOf(holderWords(s, holder)), holder.reason), noun, facts);
+  if (holder && clauseOf && str(holder.reason) && !pluralHouseHolder(holder)) {
+    const text = speakTrue((n) => castSentenceOf(n, clauseOf, holderWords(s, holder), holder), noun, facts);
     if (text) out.push({ text, bound: 'cast', link: linkOf(holder) });
   }
 
@@ -257,6 +288,9 @@ export function crisisHooksOf(settlement, entry, facts = settlementHookFacts(set
 
 // ── The crisis hook's name slot (CRISIS-2's open note; docs/DESIGN_CRISIS_TAB.md) ──────────
 
+/** The roles of a person minted to stand in (`STAND_IN_ROLE`), exactly: the plague slot's second fill reads them. */
+const STAND_IN_ROLE_RE = new RegExp(`^(?:${[...Object.values(STAND_IN_ROLE), STAND_IN_ROLE_FALLBACK].join('|')})$`);
+
 /**
  * The `{holder}` slot of each catalog `crisisHook` that NAMES a role the cast holds. `phrase` is
  * the sentence's own words for the role, which the slot replaces; `fill` says how the name
@@ -267,7 +301,14 @@ export function crisisHooksOf(settlement, entry, facts = settlementHookFacts(set
  * own open rows, so they are a proposal in the lane's report. A test
  * holds every phrase to occur exactly once in its catalog sentence, so this is a slot in the
  * sentence, never a second one.
- * @type {Readonly<Record<string, ReadonlyArray<{ role: CrisisRole, phrase: string, fill: string, kinds: ReadonlyArray<'npc' | 'faction' | 'institution'> }>>>}
+ *
+ * ⛔ A FILL THAT NAMES A ROLE READS THE ROSTER (R2-CODE-B-9; CENSUS-2 at the lane's tip, r2r-town-37:
+ * "Maisa ibn Battuta, the healer who identified the outbreak first, has gone quiet." of the dean of
+ * the parish churches). `holds` is the holder's OWN roster role the fill's words name: the slot fills
+ * only a holder whose card's `role` it matches, and a holder of another role leaves the sentence's own
+ * words. Of the five slots only the plague's fill keeps a role word ("the healer"); the others replace
+ * their phrase with the name and print no role, so they carry no `holds`.
+ * @type {Readonly<Record<string, ReadonlyArray<{ role: CrisisRole, phrase: string, fill: string, kinds: ReadonlyArray<'npc' | 'faction' | 'institution'>, holds?: RegExp }>>>}
  */
 export const CRISIS_HOOK_SLOTS = Object.freeze({
   under_siege: Object.freeze([
@@ -281,26 +322,43 @@ export const CRISIS_HOOK_SLOTS = Object.freeze({
     Object.freeze({ role: /** @type {CrisisRole} */ ('collaborator'), phrase: 'someone the players will recognise', fill: '{holder}, someone the players will recognise', kinds: Object.freeze(/** @type {const} */ (['npc'])) }),
   ]),
   plague_onset: Object.freeze([
-    Object.freeze({ role: /** @type {CrisisRole} */ ('lever'), phrase: 'The healer who identified the outbreak first', fill: '{holder}, the healer who identified the outbreak first,', kinds: Object.freeze(/** @type {const} */ (['npc'])) }),
+    // `holds`: the healers' roles the roster carries (the 720: the apothecary, the midwife, Healer, the hospitaller,
+    // the healer) and the physician; an office of a house (the dean, the priest, the hospital's master) is not one.
+    Object.freeze({ role: /** @type {CrisisRole} */ ('lever'), phrase: 'The healer who identified the outbreak first', fill: '{holder}, the healer who identified the outbreak first,', kinds: Object.freeze(/** @type {const} */ (['npc'])), holds: /\b(?:healers?|apothecar(?:y|ies)|midwi(?:fe|ves)|hospitallers?|physicians?)\b/i }),
+    // R2-CODE-B-12, the chair's ruling (c) (M6's minted half, r2s-plague_onset-thorp-0: "Jiahao Wu, the healer who
+    // identified the outbreak first" beside "No healer is kept here"): the person minted to stand in, whose role is
+    // what they do in lay words (`STAND_IN_ROLE`), is named without the word "healer"; the town keeps none.
+    Object.freeze({ role: /** @type {CrisisRole} */ ('lever'), phrase: 'The healer who identified the outbreak first', fill: '{holder}, who identified the outbreak first,', kinds: Object.freeze(/** @type {const} */ (['npc'])), holds: STAND_IN_ROLE_RE }),
+    // THE CHAIR'S RULING AT THE LANDING (2026-11-14, 13:38): both cures stand, each in its own case. Where no healer stands
+    // the stored hook is the data lane's slot-less twin (stressTypes.js, `needs: ['healer']`; 745c05a1f); a stand-in the
+    // cast minted is still named there, without "healer"; the twin keeps its own words only where the cast holds nobody.
+    Object.freeze({ role: /** @type {CrisisRole} */ ('lever'), phrase: 'The first person to name the outbreak', fill: '{holder}, the healer who first named the outbreak,', kinds: Object.freeze(/** @type {const} */ (['npc'])), holds: /\b(?:healers?|apothecar(?:y|ies)|midwi(?:fe|ves)|hospitallers?|physicians?)\b/i }),
+    Object.freeze({ role: /** @type {CrisisRole} */ ('lever'), phrase: 'The first person to name the outbreak', fill: '{holder}, the first to name the outbreak,', kinds: Object.freeze(/** @type {const} */ (['npc'])), holds: STAND_IN_ROLE_RE }),
   ]),
 });
 
 /**
  * The entry's crisis hook with its slots filled from the cast by name. A slot with no fitting
  * holder leaves the sentence's own words; a sentence that does not carry the phrase (a custom
- * kind, a DM's own text) is returned as it is.
+ * kind, a DM's own text) is returned as it is. A slot that `holds` a role fills only a holder
+ * whose own card on `roster` carries it (no card read, no role known: the sentence as written).
  * @param {string} kind @param {unknown} text @param {CrisisCast | null | undefined} cast
+ * @param {unknown} [roster] the record's `npcs`, where a slot's holder's own role is read
  * @returns {string}
  */
-export function slotCrisisHook(kind, text, cast) {
+export function slotCrisisHook(kind, text, cast, roster = []) {
   let line = str(text);
   const slots = CRISIS_HOOK_SLOTS[/** @type {keyof typeof CRISIS_HOOK_SLOTS} */ (kind)];
   if (!line || !slots || !cast) return line;
   const roles = Array.isArray(cast.roles) ? cast.roles : [];
+  const cards = /** @type {Array<{ id?: unknown, name?: unknown, role?: unknown }>} */ (Array.isArray(roster) ? roster : []);
+  /** @param {CastRow} row @returns {string} the holder's own roster role, the same card holderWords reads */
+  const rosterRoleOf = (row) => str(cards.find((n) => !!n && (str(n.id) || str(n.name)) === row.id)?.role);
   /** @type {Set<string>} one person fills one slot: two slots of one sentence name two people */
   const named = new Set();
   for (const slot of slots) {
-    const row = roles.find((r) => r.role === slot.role && slot.kinds.includes(r.kind) && !!str(r.name));
+    const row = roles.find((r) => r.role === slot.role && slot.kinds.includes(r.kind) && !!str(r.name)
+      && (!slot.holds || slot.holds.test(rosterRoleOf(r))));
     if (!row || named.has(`${row.kind}:${row.id}`) || !line.includes(slot.phrase)) continue;
     named.add(`${row.kind}:${row.id}`);
     const filled = slot.fill.split('{holder}').join(row.name);
@@ -320,6 +378,7 @@ export function slotCrisisHook(kind, text, cast) {
  */
 export function crisisHookFor(settlement, entry) {
   if (!entry || typeof entry !== 'object') return '';
-  const { cast } = effectiveCastOf(/** @type {never} */ (settlement && typeof settlement === 'object' ? settlement : {}), /** @type {never} */ (entry));
-  return slotCrisisHook(str(entry.type), entry.crisisHook, cast);
+  const s = /** @type {HookSettlement} */ (settlement && typeof settlement === 'object' ? settlement : {});
+  const { cast } = effectiveCastOf(/** @type {never} */ (s), /** @type {never} */ (entry));
+  return slotCrisisHook(str(entry.type), entry.crisisHook, cast, s.npcs);
 }

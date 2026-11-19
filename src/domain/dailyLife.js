@@ -44,6 +44,7 @@ import { deriveAllCapacities, CAPACITY_NAMES } from './capacityModel.js';
 import { deriveHistoryBeats } from './historyBeats.js';
 import { deriveAllNpcProfiles } from './npcProfile.js';
 import { deriveCausalState } from './causalState.js';
+import { powerPossessive } from './display/powerSentenceName.js';
 
 // ── Local typedefs ───────────────────────────────────────────────────────
 
@@ -170,10 +171,15 @@ function deriveFoodCulture(s, ctx) {
   const stableFood = foodChains.find(c => c.status === 'stable');
   const disruptedFood = foodChains.find(c => c.status !== 'stable');
 
+  // BAR5-WORLD (2026-11-16; LAW 5): a town under a famine or a siege is not told its bread is plentiful: the surplus band
+  // takes its twin, true while the stores hold (the measure's rule 3: a town in want is told what it still has).
+  const wanting = ctx.threats.some((t) => t.type === 'famine' || t.type === 'siege');
   let text;
   switch (food.band) {
     case 'surplus':
-      text = stableFood
+      text = wanting
+        ? 'The stores still hold: bread and broth reach most tables, and the households count what is left.'
+        : stableFood
         ? `Bread, broth, and ${stableFood.outputs?.[0] || 'staple grains'} are plentiful; markets close their stalls without empty crates.`
         : 'Bread and broth are plentiful; few households go to bed hungry.';
       break;
@@ -225,6 +231,9 @@ function deriveDawnWork(s, ctx) {
     text = 'The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked.';
   } else if (dominantCraftPower >= 25) {
     text = 'Smithy fires light before sunrise; guild-callers move from shop to shop, and apprentices haul water before the bell.';
+  } else if (dominantMerchantPower >= 30 && ctx.threats.some((t) => t.type === 'siege')) {
+    // BAR5-WORLD (2026-11-16; LAW 5): under a siege no caravan rolls; the merchants' dawn is a count of their stock.
+    text = 'The merchants count their stock before light, and the porters wait for loads that do not come; dawn brings the smell of woodsmoke and grain.';
   } else if (dominantMerchantPower >= 30) {
     text = 'Merchant caravans roll before light; porters and apprentices queue at the warehouses, and dawn brings the smell of woodsmoke and grain.';
   } else {
@@ -286,7 +295,8 @@ function deriveChildWarnings(s, ctx) {
   if (top.length === 0) {
     text = 'Children are warned about the usual things: the deep well, the strangers\' road, the woods at twilight.';
   } else {
-    const parts = top.map(t => threatWarning(t));
+    // R3-CODE-C (the chair's C-L4): two threats of one kind give one warning, said once ("the road past sundown; …; the road past sundown").
+    const parts = [...new Set(top.map(t => threatWarning(t)))];
     text = `Children are warned about ${parts.join('; ')}.`;
     for (const t of top) refs.push({ id: t.id, label: t.label, type: 'threat' });
   }
@@ -379,7 +389,8 @@ function deriveOutsiderImpressions(s, ctx) {
 
   const parts = [];
   if (dominantFaction) {
-    parts.push(`${dominantFaction.name}'s mark is on every door that matters`);
+    // R3-CODE-C (the chair's C-L4): the possessive through the one leaf that forms a power's ("Merchant Guilds's" → "Merchant Guilds'").
+    parts.push(`${powerPossessive(dominantFaction.name)} mark is on every door that matters`);
     refs.push({ id: dominantFaction.id, label: dominantFaction.name, type: 'faction' });
   }
   if (top && top.severityBand !== 'low') {
@@ -427,8 +438,9 @@ function deriveUnspokenTopics(s, ctx) {
     refs.push({ id: corruption.id, label: corruption.label, type: 'condition' });
   }
 
-  const text = topics.length
-    ? `Locals will not openly discuss ${topics.join('; or ')}.`
+  const said = [...new Set(topics)]; // R3-CODE-C (C-L4): a topic said once
+  const text = said.length
+    ? `Locals will not openly discuss ${said.join('; or ')}.`
     : 'Locals are happy to discuss most things; the usual private subjects stay private.';
 
   return slot('unspoken_topics', text, 'hidden threats + unresolved history wound + active corruption', refs);
@@ -466,8 +478,11 @@ function deriveRecentChanges(s, ctx) {
     refs.push({ id: t.id, label: t.label, type: 'threat' });
   }
 
-  const text = changes.length
-    ? `Recent changes: ${changes.join('; ')}.`
+  // R3-CODE-C (the chair's C-L4): the slot's label is "Recent changes" and every reader prints it beside the text
+  // ("Recent changes: Recent changes: …"), so the text does not repeat it; a change is said once.
+  const said = [...new Set(changes)].join('; ');
+  const text = said
+    ? `${said[0].toUpperCase()}${said.slice(1)}.`
     : 'The last few seasons have run their usual course. No notable shifts in the rhythm of the place.';
 
   return slot('recent_changes', text, 'history.recentDisruption + new conditions + acute threats', refs);

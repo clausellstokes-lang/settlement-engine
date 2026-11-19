@@ -37,7 +37,7 @@ const PARKED = Object.freeze({
   'STRESS_DESCS.under_siege[1]': 'guardPresence',
   'STRESS_DESCS.under_siege[2]': 'guardPresence',
   'STRESS_DESCS.famine[1]': 'guardPresence',
-  'STRESS_DESCS.famine[3]': 'guardPresence',
+  'STRESS_DESCS.famine[3]': 'patrol', // BAR2-PLACES (the chair's grant VW2, 2026-11-15; re-keyed by identity): order enforced and a patrol passing need a watch or a garrison
   'STRESS_DESCS.occupied[1]': 'guardPresence',
   'STRESS_DESCS.politically_fractured[1]': 'guardPresence',
   'STRESS_DESCS.recently_betrayed[0]': 'guardPresence',
@@ -69,6 +69,16 @@ export function expectedDeclaration(pool, line) {
   if (PARKED[line.lineId]) needs.push(PARKED[line.lineId]);
   return { needs, excludes: (line.excludes || []).map(norm), crisis };
 }
+
+/**
+ * CLOSE-DOORS-1A (2026-11-18, the chair's ruling CL17 (2)): THE FOUND SIDE IS NORMALIZED EXACTLY AS THE EXPECTED IS.
+ * `expectedDeclaration` puts `calm` last; a found declaration keeps the source's order, so a row that writes `calm` first
+ * (POLITICAL_FLAVOR.stable[2], SCENES-3 4efba5868) could never match: an asymmetry of the instrument. The list is a
+ * membership list (the draw reads it by `includes`/`some`: factVocabulary.js `crisisAdmits`, never an index). Only `calm`
+ * moves; every other entry stays compared in order.
+ * @param {readonly string[]} crisis
+ */
+export const calmLast = (crisis) => (crisis.includes('calm') ? [...crisis.filter((v) => v !== 'calm'), 'calm'] : [...crisis]);
 
 /** @param {string} id */
 const parseLineId = (id) => {
@@ -119,7 +129,7 @@ describe('STRESS_DESCS, CULTURE_PROFILES_DAILY and CULTURE_ARCHITECTURAL_DETAILS
       const wrong = rows.filter((r) => {
         const want = expectedDeclaration(r.pool, r.line);
         const have = declarationOf(r.node);
-        return JSON.stringify([have.needs, have.excludes, have.crisis]) !== JSON.stringify([want.needs, want.excludes, want.crisis]);
+        return JSON.stringify([have.needs, have.excludes, calmLast(have.crisis)]) !== JSON.stringify([want.needs, want.excludes, want.crisis]);
       }).map((r) => `${r.line.lineId}: ${JSON.stringify(declarationOf(r.node))} ≠ ${JSON.stringify(expectedDeclaration(r.pool, r.line))}`);
       expect(wrong, name).toEqual([]);
     }
@@ -153,10 +163,15 @@ export function declaredLiteralsOf(rel) {
     if (n.type === 'ObjectExpression') {
       const prop = (k) => n.properties.find((p) => p.type === 'Property' && (p.key.name === k || p.key.value === k));
       const t = prop('text');
-      if (t && typeof str(t.value) === 'string') {
+      // CLOSE-DOORS-1A (2026-11-18, the chair's ruling CL17 (1)): ONE SHAPE MORE: a `text` that is a conditional whose TWO
+      // branches are each a literal or a template is read as TWO texts, each carrying the row's one declaration
+      // (PRESSURE_SENTENCES.wartime(losing)[0], BAR7-SCENES 765a516a3). Every other shape stays unread, so it stays loud.
+      const texts = t && typeof str(t.value) === 'string' ? [str(t.value)]
+        : t && t.value.type === 'ConditionalExpression' && typeof str(t.value.consequent) === 'string' && typeof str(t.value.alternate) === 'string'
+          ? [str(t.value.consequent), str(t.value.alternate)] : [];
+      if (texts.length) {
         const arr = (k) => { const p = prop(k); return p && p.value.type === 'ArrayExpression' ? p.value.elements.map((e) => e.value) : []; };
-        const key = str(t.value);
-        out.set(key, [...(out.get(key) || []), { needs: arr('needs'), excludes: arr('excludes'), crisis: arr('crisis') }]);
+        for (const key of texts) out.set(key, [...(out.get(key) || []), { needs: arr('needs'), excludes: arr('excludes'), crisis: arr('crisis') }]);
       }
     }
     for (const k of Object.keys(n)) { const v = n[k]; if (Array.isArray(v)) v.forEach(walk); else if (v && typeof v.type === 'string') walk(v); }
@@ -193,7 +208,7 @@ describe('SPATIAL_TEXT (spatialGenerator.js, inline T cells; carried through tex
   // (R-B1 widened to a cell key — the chair's ruling this lane makes, recorded in the lane doc).
   const guaranteed = (lineId, a) => a.startsWith('terrain:')
     || (a === 'institution: temple' && /\.(sacred|shrine)$/.test(lineId))
-    || (a === 'walls' && /^villageLayouts\.(hills|desert)(\.walled)?$/.test(lineId))
+    || (a === 'walls' && /^villageLayouts\.(hills|desert)(\.walled(\.palisade)?)?$/.test(lineId))
     || (a === 'garrison' && lineId === 'townLayouts.mountain.garrison');
   it('every declaring ledger line is declared in place, exactly', () => {
     expect(inlineArm('SPATIAL_TEXT', 'src/generators/spatialGenerator.js', guaranteed)).toEqual([]);
@@ -203,7 +218,8 @@ describe('SPATIAL_TEXT (spatialGenerator.js, inline T cells; carried through tex
     const by = (head) => [...found.entries()].filter(([k]) => k.startsWith(head)).map(([, v]) => v[0]);
     expect(by('Great river city: bridge quarter')).toEqual([{ needs: ['river', 'market'], excludes: [], crisis: [] }]);
     expect(by('${sacredSubject} and green above the tideline')).toEqual([{ needs: ['coast'], excludes: [], crisis: [] }]);
-    expect(by('Close-built stone houses below the ${sacredHouse}')).toEqual([{ needs: ['gate'], excludes: [], crisis: [] }]);
+    // J1 (2026-11-14): the gate line where a gate stands, its twin without the gate where none does.
+    expect(by('Close-built stone houses below the ${sacredHouse}')).toEqual([{ needs: ['gate'], excludes: [], crisis: [] }, { needs: [], excludes: ['gate'], crisis: [] }]);
   });
 });
 
@@ -224,7 +240,12 @@ describe('PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor
     }
     expect(wrong).toEqual([]);
     // 17 -> 16 (COHERENCE-PRESUME): the mass-migration line no longer names a market, so it declares nothing
-    expect(declaring).toBe(16);
+    // 16 -> 18 (R2-CODE-A-3, round three #40 / #4): famine[0] and famine[4] presume a common store and need a granary
+    // 18 -> 21 (R2-CODE-A-6, CENSUS-2's writers): succession_void[5] needs a market, insurgency(street)[1] and slave_revolt[0] the middling band
+    // 21 -> 23 (TAIL-NARRATIVE, READ-ALL 20438/20439 and 00172): monster_pressure[1] needs a force that musters, [2] the hamlet tier
+    // 23 -> 28 (BAR6-SCENES, 2026-11-16; re-keyed by identity, this batch's own count): the size rows occupied[5],
+    // politically_fractured[0] and [5], mass_migration(strongeconomy)[0] (`tier`), and wartime(losing)[0] (`legitimacy crisis`)
+    expect(declaring).toBe(28);
   });
 });
 
@@ -236,7 +257,9 @@ import { CONDITION_ARCHETYPE_TEMPLATES, CONDITION_ARCHETYPE_SIBLINGS } from '../
 import { QUICK_GUIDE_SIBLINGS } from '../../../src/domain/summary/settlementQuickGuide.js';
 
 /** cells reworded under R-U since Phase A read them (counted by cause in their commit) */
-const REWORDED = new Set(['STRESS_TYPE_MAP.slave_revolt.viabilityNote']);
+// TAIL-HISTORY batch 1 (2026-11-15, the chair's Y2, Y7; READ-ALL 00169, 04385, 18890): the succession void's hook and note
+// and the insurgency's note claimed powers and offices a thorp lacks; reworded, no declaration (1 → 4 cells).
+const REWORDED = new Set(['STRESS_TYPE_MAP.slave_revolt.viabilityNote', 'STRESS_TYPE_MAP.succession_void.crisisHook', 'STRESS_TYPE_MAP.succession_void.viabilityNote', 'STRESS_TYPE_MAP.insurgency.viabilityNote']);
 
 /** @param {string} name @param {Record<string, any[]>} siblings @param {object|null} root the live table (null: by text alone) */
 function siblingArm(name, siblings, root) {
@@ -263,7 +286,7 @@ function siblingArm(name, siblings, root) {
 describe('the declared sibling sets stand beside their tables', () => {
   it('every declaring ledger line has its set, exactly; nothing else is declared', () => {
     for (const [name, siblings, root, n] of [
-      ['STRESS_TYPE_MAP', STRESS_TYPE_SIBLINGS, STRESS_TYPE_MAP, 4],
+      ['STRESS_TYPE_MAP', STRESS_TYPE_SIBLINGS, STRESS_TYPE_MAP, 5], // W2-FIX-DATA-7: the famine's hook declares `institution: mill` (its slot has a holder only where a mill stands), 4 → 5
       ['STRESSOR_SPINE_PHRASES', STRESSOR_SPINE_SIBLINGS, STRESSOR_SPINE_PHRASES, 2],
       ['CONDITION_ARCHETYPE_TEMPLATES', CONDITION_ARCHETYPE_SIBLINGS, CONDITION_ARCHETYPE_TEMPLATES, 6],
       ['QUICK_GUIDE_CLAUSES', QUICK_GUIDE_SIBLINGS, null, 9], // CENSUS-2g unit 7 (R-AY): the Slavic scope's `river` dropped, 7 → 6; RUNG-2 LANDING phase B: the inland Norse and Slavic forms declare `excludes: navigable`, 6 → 8; phase C unit 4: the Greek inland form aligned, 8 → 9

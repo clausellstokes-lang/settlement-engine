@@ -18,7 +18,25 @@
 // (lane DEFENSE-2, 2026-11-03; pinned by tests/domain/defenseRosterLines.test.js). A reworded
 // `secret` keeps every keyword npcGenerator.js :: getStressHistory branches on, and no reworded
 // secret or stakes gains or loses a word generateNPCs' criminal-secret and criminal-guild tests read
-// (they match substrings: 'defence' contains 'fence', so the rewording avoids that word).
+// (they match substrings: 'defence' contains 'fence', so the rewording avoids that word). R2-CODE-A-3 (round three HIGH #651 #327): no secret reads the {commodity} slot, which is the first export's scan label or, failing one, its first word ("the original recovered contract", "the milled operation", "medicinal milled"); the three lines that read it say what is true without it.
+
+// BAR8 K-PEOPLE (LAW 14 rule 14f; ruling BR14; vetoable by the owner, on the veto list as new vocabulary): A SECRET THAT
+// PRESUMES A COMMAND OR AN OFFICE TAKES A HOLDER TEST. The ten rows below whose words presume one (an authorised sortie,
+// terms of surrender, the settlement's emergency stores sold, a debt signed alone, an order signed or filed) carry
+// `holder`, in the vocabulary of the very rare rows (`rareSecrets.js :: HOLDER_KEYS`; here `roles`: the card's role holds
+// one of these whole words; `category`: the card's category is one of these; either answers; `notRoles`: the role holds
+// none of these; `keepsHouse`: the card is the face of a house of its own). The deal (`npcGenerator.js :: generateCrimeLevel`) reads it against the card as the record
+// keeps it at the deal (role, category, house): a drawn row the person fails is not dealt them, and the pool's other rows
+// carry the draw (no roll moves: the draw is the same, the resolution goes on). C6865: "Authorised an illegal sortie" on a
+// guild archmage with no seat.
+/** The town's own head or council, by the words of the card's role. */
+const HEAD_WORDS = Object.freeze(['lord', 'lady', 'mayor', 'governor', 'headman', 'boat-headman', 'monarch', 'elder', 'eldest', 'alderman', 'councillor', 'burgomaster', 'reeve', 'steward', 'castellan', 'regent']);
+/** An elder of a faith (the grove elder, the elder priest) is no head of the town. */
+const NOT_HEAD = Object.freeze(['grove', 'priest']);
+/** A command of the town's fighters: its head, or a military card. */
+const COMMAND_HOLDER = Object.freeze({ roles: Object.freeze([...HEAD_WORDS, 'commander', 'marshal']), category: Object.freeze(['military']), notRoles: NOT_HEAD });
+/** One who may sign or file for the town: its head, its purse, its law. */
+const SIGNS_HOLDER = Object.freeze({ roles: Object.freeze([...HEAD_WORDS, 'treasurer', 'chancellor', 'administrator', 'mint', 'magistrate']), notRoles: NOT_HEAD });
 
 export const STRESS_INSTITUTION_EFFECTS = {
   under_siege: [
@@ -26,14 +44,18 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret: "Secretly negotiating surrender terms with the besieging force, without the council's knowledge",
       stakes: "Treason. The defenders would execute them on the spot if they found out",
       excludes: ["ruler: lord","ruler: occupier"],
+      holder: Object.freeze({ ...COMMAND_HOLDER, roles: Object.freeze([...COMMAND_HOLDER.roles, 'envoy']) }), // BAR8 K-PEOPLE (14f): terms of surrender are a command's or an envoy's
     },
     {
       secret: "Has been rationing their own private food stores while publicly enforcing the communal rationing order",
       stakes: "Two of the people enforcing the rationing know about the stores; they've been paid to look the other way",
     },
     {
-      secret: "Passed information about the settlement's water supply to someone in the besieging camp three weeks ago",
+      // BAR5-THINGS (LAW 4 "the weeks"; REVIEW-BAR-5 C2000): the secret counts no weeks the siege's own age may deny ("The
+      // siege has entered its second week", narrativeText.js); it dates the betrayal by the siege itself
+      secret: "Passed information about the settlement's water supply to someone in the besieging camp in the first days of the siege",
       stakes: "People have already died because of it; they've been living with that knowledge",
+      needs: ["crisis: under_siege"], // BAR5-THINGS: the besieging camp is the siege's: declared
     },
     {
       secret: "Knows the barricade across the main approach is structurally compromised and has told no one",
@@ -41,14 +63,15 @@ export const STRESS_INSTITUTION_EFFECTS = {
       excludes: ["ruler: lord","ruler: occupier"],
     },
     {
-      secret: "Has already made personal arrangements to leave before the final assault. Their family left last week",
-      stakes: "{npc} saw them loading the cart. They don't know what {npc} understood",
+      secret: "Has already made personal arrangements to leave before the final assault. Their family is packed and waiting for the first gap in the lines",
+      stakes: "{npc} saw them packing the cart. They don't know what {npc} understood",
       needs: ["other npc"],
     },
     {
       secret: "The supplies they declared destroyed in a fire are actually hidden in a location only they know",
       stakes: "People are starving. The supplies could last another month",
       needs: ["starving"],
+      holder: Object.freeze({ keepsHouse: true }), // BAR8 K-PEOPLE (14f): the supplies are their own house's (`.supplies`: not a command)
     },
     {
       secret: "Is in contact with the besieging commander (not as a spy, as a former colleague)",
@@ -60,22 +83,24 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret: "Authorised an illegal sortie that failed. Five people died and no record was kept",
       stakes: "{npc} survived it. They know, and they've been drinking heavily ever since",
       needs: ["other npc"],
+      holder: COMMAND_HOLDER, // BAR8 K-PEOPLE (14f, C6865): a sortie is a command's
     },
     {
-      secret: "Has been skimming from the {commodity} reserves to pay a personal debt that predates the siege",
+      secret: "Has been skimming from the {food} reserves to pay a personal debt that predates the siege",
       stakes:
         "The shortage will be noticed when the final accounting is done. They're hoping they die before that happens",
     },
   ],
   famine: [
     {
-      secret: "Controls a hidden cache of {commodity} reserves that could feed the settlement for two more weeks",
+      secret: "Controls a hidden cache of {food} reserves that could feed the settlement for two more weeks",
       stakes: "{faction} suspects it. They've been watching the property",
     },
     {
       secret:
-        "Sold the settlement's emergency grain reserves three months ago at peak price and reported them destroyed in a flood",
+        "Sold off the settlement's emergency stores three months ago and reported them destroyed in a flood",
       stakes: "The flood was real. The reserves were already gone. The paperwork is missing one date",
+      holder: Object.freeze({ roles: Object.freeze([...HEAD_WORDS, 'granary', 'granaries', 'warehouse', 'quartermaster']), notRoles: NOT_HEAD }), // BAR8 K-PEOPLE (14f): the settlement's stores are its head's or their keeper's
     },
     {
       secret:
@@ -94,17 +119,25 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Helped engineer the original supply disruption that triggered the famine, believing it would only last a week",
+        "Helped cause the original shortfall that triggered the famine, believing it would only last a week",
       stakes: "It has lasted six. They did not anticipate this. They cannot undo it. They cannot admit it",
     },
     {
       secret:
-        "Is receiving {commodity} shipments through a covert route and selling them at triple the official price after dark",
+        "Is receiving {food} shipments through a covert route and selling them at triple the official price after dark",
       stakes: "Three people know. One of them is already dead. The other two don't know about each other",
+      excludes: ["crisis: under_siege"], text: "Is receiving {food} shipments through a covert route and selling them at triple the official price after dark", // BAR3-PLACES (H1, 2026-11-15): under a siege nothing comes in by any route; the slot takes the twin below
+    },
+    {
+      // BAR3-PLACES (H1): the siege twin of the covert route, reached only by resolution (`twinOf`): no draw moves.
+      secret: "Laid in a cellar of {food} before the siege closed the roads, and is selling it at triple the official price after dark",
+      stakes: "Three people know. One of them is already dead. The other two don't know about each other",
+      twinOf: "Is receiving {food} shipments through a covert route and selling them at triple the official price after dark",
+      needs: ["crisis: under_siege"],
     },
     {
       secret:
-        "Has documentation proving the famine was caused by export decisions made by {faction}, and has been paid to lose it",
+        "Has documentation proving the famine was made worse by decisions taken by {faction}, and has been paid to lose it", // BAR3-PLACES (H1, 2026-11-15): no export claimed (the failed food may be one the town never sold)
       stakes: "The documentation exists in another form. Somewhere",
     },
   ],
@@ -184,6 +217,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
         "The debt was not authorised by the council. They signed alone under pressure and have been hiding it for two years",
       stakes: "{faction} is about to discover this in the accounts they requested",
       excludes: ["ruler: lord","ruler: occupier"],
+      holder: SIGNS_HOLDER, // BAR8 K-PEOPLE (14f): they signed for the town
     },
     {
       secret:
@@ -193,8 +227,10 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret:
         "Knows the debt contains a clause that transfers significant civic assets to the creditor on default (a clause that was buried in the original document)",
-      stakes: "{npc} is a notary who helped draft it. They've been avoiding eye contact for six months",
+      // BAR5-THINGS (LAW 4 "the notary"): {npc} is any other card, never a notary by the record: the stakes name no office
+      stakes: "{npc} was in the room when it was signed. They've been avoiding eye contact for six months",
       needs: ["other npc"],
+      holder: Object.freeze({ roles: Object.freeze([...SIGNS_HOLDER.roles, 'exchange', 'banker', 'notary', 'scribe', 'clerk', 'lawyer', 'envoy']), category: Object.freeze(['government']), notRoles: NOT_HEAD }), // BAR8 K-PEOPLE (14f): one who read the town's document
     },
     {
       secret:
@@ -208,7 +244,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "The original {commodity} contract that created the debt was based on projections they knew were false at the time of signing",
+        "The original contract that created the debt was based on projections they knew were false at the time of signing",
       stakes:
         "The creditor's representative has begun asking questions that suggest they've found the original projection documents",
     },
@@ -294,6 +330,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret:
         "The quarantine order they're enforcing doesn't apply to shipments from a specific merchant they have a financial relationship with",
       stakes: "That merchant's last shipment arrived four days ago",
+      needs: ["market"], // R2-CODE-A-7 (step 1 item 4b): a merchant's shipments only where the roster holds a market
     },
     {
       secret:
@@ -307,7 +344,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Is hoarding medicinal {commodity} that should have been distributed, rationing it for their own use and close associates",
+        "Is hoarding medicines that should have been distributed, rationing them for their own use and close associates",
       stakes: "The official stores are now visibly insufficient. Someone will investigate where the gap is",
     },
   ],
@@ -336,15 +373,15 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Has been quietly removing records from the archive that would complicate the succession in ways they prefer not to see complicated",
-      stakes: "{npc} manages the archive and has noticed the gaps. They've raised it with {faction}",
+        "Has been quietly removing records that would complicate the succession in ways they prefer not to see complicated",
+      stakes: "{npc} keeps the settlement's records and has noticed the gaps. They've raised it with {faction}",
       needs: ["other npc"],
     },
   ],
   monster_pressure: [
     {
       secret:
-        "The attacks are not random. They sent a patrol into that territory three weeks ago and provoked something. No one came back. They filed a false report",
+        "The attacks are not random. They sent a party into that territory three weeks ago and provoked something. No one came back. They filed a false report",
       stakes: "The survivors' families believe their people died in an accident. They've been asking questions",
     },
     {
@@ -355,13 +392,14 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "The {commodity} operation they authorised six months ago disturbed a nesting site. The attacks started three weeks later",
+        "The work they authorised six months ago disturbed a nesting site. The attacks started three weeks later",
       stakes: "The connection shows on the maps. Anyone who reads them closely will make it",
+      holder: Object.freeze({ roles: Object.freeze([...HEAD_WORDS, 'mine', 'quarry', 'foreman', 'overseer', 'forester', 'builder']), category: Object.freeze(['military']), notRoles: NOT_HEAD }), // BAR8 K-PEOPLE (14f): the works (a pit, a clearing, a perimeter) were theirs to authorise
     },
     {
       secret:
-        "Has been selling information about patrol schedules to an outside party who claims to be a monster hunter, and may not be",
-      stakes: "The last three ambushes hit patrols on days that weren't in the standard rotation",
+        "Has been selling information about who travels the roads and when to an outside party who claims to be a monster hunter, and may not be",
+      stakes: "The last three attacks fell on people travelling on days they had told almost no one about",
     },
     {
       secret:
@@ -385,8 +423,8 @@ export const STRESS_INSTITUTION_EFFECTS = {
       needs: ["tier: ≥ town"], excludes: ["ruler: lord","ruler: occupier"],
     },
     {
-      secret: "Ordered a crackdown that killed people who had nothing to do with the insurgency, then falsified the reports to record them as insurgents",
-      stakes: "The families know their dead were innocent. One of them has kept everything",
+      secret: "Named people who had nothing to do with the insurgency as its ringleaders, then falsified the reports to record them as insurgents",
+      stakes: "The families know their people were innocent. One of them has kept everything",
     },
     {
       secret: "Has already negotiated their own safe passage with the insurgency's leadership in exchange for opening a gate on a night yet to be named",
@@ -458,11 +496,12 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret: "Signed the order closing the settlement to further arrivals, then made a paid exception for one group now already settled inside",
       stakes: "{npc} was turned away the same week. They saw the paid group admitted. They have not forgotten a face",
       needs: ["migration: influx","other npc"],
+      holder: Object.freeze({ ...SIGNS_HOLDER, category: Object.freeze(['military']) }), // BAR8 K-PEOPLE (14f): an order of the town's
     },
   ],
   wartime: [
     {
-      secret: "Has been under-declaring the settlement's stores to the requisition officers and selling the concealed {commodity} to both armies",
+      secret: "Has been under-declaring the settlement's stores to the requisition officers and selling the concealed {food} to both armies",
       stakes: "The next requisition will physically count what the ledgers claim. The ledgers are wrong by a wagon-train",
     },
     {
@@ -471,7 +510,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret: "Took a private share of the war contracts that made the settlement rich, routed through a merchant house that does not exist on paper",
-      stakes: "The house's accounts exist somewhere. A rival contractor has been looking for exactly this",
+      stakes: "The house's accounts exist somewhere. A rival contractor has been looking for exactly this", needs: ["prosperity: ≥ comfortable"], // R2-CODE-A-2 (cold #723): the war made the place rich
     },
     {
       secret: "Knows the war is going worse than the settlement has been told, and has been quietly moving their family and their wealth ahead of the news",
@@ -481,6 +520,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Authorised the seizure of a rival's property as a 'war measure', on evidence they invented",
       stakes: "The rival's heir survived the war the seizure was meant to fund, and has come home with the original documents",
+      holder: Object.freeze({ ...SIGNS_HOLDER, category: Object.freeze(['military']) }), // BAR8 K-PEOPLE (14f): a war measure is a command's or an office's
     },
     {
       secret: "Has been feeding the enemy's quartermasters the same false supply figures they feed their own, playing both requisitions for the skim",
@@ -521,7 +561,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "If the negotiation is discovered they hang as a traitor; if it fails the settlement burns. They have told no one",
     },
     {
-      secret: "Owned a share of the slave market and has been destroying the records of exactly whom they owned before those records can be turned against them",
+      secret: "Owned a share in the slaves worked here and has been destroying the records of exactly whom they owned before those records can be turned against them",
       stakes: "{npc} kept a copy. They have not yet decided what to do with it",
       needs: ["market","other npc"],
     },
@@ -532,6 +572,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Knows the revolt began because of a specific atrocity the authorities ordered and then denied",
       stakes: "The order exists in writing. This person filed it. They have been trying to make it disappear for six days",
+      holder: Object.freeze({ roles: Object.freeze([...HEAD_WORDS, 'scribe', 'clerk']), category: Object.freeze(['government', 'military']), notRoles: NOT_HEAD }), // BAR8 K-PEOPLE (14f): "This person filed it": an office's
     },
     {
       secret: "Has already arranged to flee with their wealth the moment the revolt breaks through, abandoning the defence they are publicly organising",
@@ -548,3 +589,30 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
   ],
 };
+
+/** @param {readonly string[]} words @returns {RegExp} whole words, lower case (the very rare rows' own test) */
+const crisisHolderWords = (words) => new RegExp(`(?:^|[^a-z'-])(?:${words.map((w) => w.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})(?:$|[^a-z'-])`);
+/**
+ * BAR8 K-PEOPLE (LAW 14 rule 14f; ruling BR14; vetoable by the owner): A CRISIS ROW'S HOLDER TEST (`data/stressInstitutionEffects.js`,
+ * `holder`), read against the card as the record keeps it at the deal: its role, category and house (its seats are not yet
+ * landed). The keys are the very rare rows' own (`data/rareSecrets.js :: HOLDER_KEYS`), the ones the crisis rows use:
+ * `roles` / `category` (either answers), `notRoles`, `notCategory`, `notHouses`, `keepsHouse`. No holder admits every card.
+ * @param {unknown} holder @param {unknown} card @returns {boolean}
+ */
+export function crisisHolderAdmits(holder, card) {
+  if (!holder || typeof holder !== 'object') return true;
+  const h = /** @type {{ roles?: string[], category?: string[], notRoles?: string[], notCategory?: string[], notHouses?: string[], keepsHouse?: boolean }} */ (holder);
+  const c = /** @type {{ role?: unknown, category?: unknown, institution?: { kind?: unknown, key?: unknown } }} */ (card && typeof card === 'object' ? card : {});
+  if (h.keepsHouse && c.institution?.kind !== 'house') return false;
+  const role = ` ${String(c.role ?? '').toLowerCase()} `;
+  const category = String(c.category ?? '').toLowerCase();
+  if (h.roles || h.category) {
+    const byRole = !!h.roles && crisisHolderWords(h.roles).test(role);
+    const byCategory = !!h.category && h.category.includes(category);
+    if (!byRole && !byCategory) return false;
+  }
+  if (h.notRoles && crisisHolderWords(h.notRoles).test(role)) return false;
+  if (h.notCategory && h.notCategory.includes(category)) return false;
+  if (h.notHouses && crisisHolderWords(h.notHouses).test(` ${String(c.institution?.key ?? '').toLowerCase()} `)) return false;
+  return true;
+}

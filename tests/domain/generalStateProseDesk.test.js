@@ -78,6 +78,7 @@ import {
   populationDirectionPoolKey,
 } from '../../src/domain/display/stateProse/generalStateProse.js';
 import { DOSSIER_STATE_PROSE_GENERAL } from '../../src/data/dossierStateProse/general.generated.js';
+import { shapeYieldingKey } from '../../src/domain/facts/shapingEvent.js'; // BAR4-HISTORY T1-SHAPE
 import {
   UNMOUNTED_BLOCKS, drawnAtMount, sentenceMountForBlock,
 } from '../../src/domain/display/stateProse/dossierMounts.js';
@@ -95,6 +96,7 @@ import { populationTrendBand } from '../../src/domain/display/trendLens.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { FOOD_SECURITY_BANDS, READINESS_BANDS } from '../../src/data/bandLadders.js';
 import { mustExtract } from '../helpers/sourceContract.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { fillShapeViolation, mergeSlotShapes, parseSlotShapes } from '../../scripts/lib/dossier-slot-shapes.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { drawnMember } from '../helpers/drawnProse.js';
@@ -114,7 +116,7 @@ const BLOCK_POOLS = Object.freeze({
   'DS-GEN-2': 3, 'DS-GEN-3': 42, 'DS-GEN-5': 5, 'DS-GEN-6': 9, 'DS-GEN-12': 5, 'DS-GEN-13': 9, /* W1 ECO construction (2026-11-07): +4 COMMERCE, +1 WAREHOUSES */
   'DS-GEN-7': 8, 'DS-GEN-17': 7, // W4 PEOPLE 2026-11-07: +2, the GREAT HOUSE lens (C5) — composed with W1 ECO's DS-GEN-13 9 (MERGE-WAVE at the W4 PEOPLE merge)
   // The history chapter (DESK-GEN2 car 1).
-  'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 10,
+  'DS-GEN-9': 15, 'DS-GEN-14': 3, 'DS-GEN-16': 13, // BAR4-HISTORY 155c7e1af (2026-11-16, re-keyed by BAR4-CLOSE-SWEEP): ANCHORED-OLD-, LEGACY-RECOVERED-, LEGACY-SHIFTED-MARKED, declared (10 + 3 -> 13)
   // The viability verdict and the plot-hook framing (DESK-GEN2 car 2).
   'DS-GEN-11': 5, 'DS-HK-1': 11, // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): the zero pool leaves (6 -> 5)
   // The notable connection (DESK-GEN2 car 4).
@@ -394,7 +396,12 @@ describe('DS-GEN-3 — ten lenses over one block, and three label traps', () => 
     );
     for (const label of labels) {
       // db3ed88c1: the famine pool declares `starving` · `famine`, read off the record's food band.
-      const record = { economicState: { foodSecurity: { label } } };
+      // BAR8-DESKS-ECO (item 6, 2026-11-17): every Import-Dependent line that says the food is bought or brought in now
+      // declares it (`food: = importDependent`, the band the page prints only where food is brought in), so that label's
+      // constructed record carries the food record a born Import-Dependent town carries (its band, and food brought in);
+      // the claim (each food label draws one line) is kept
+      const foodRecord = label === 'Import-Dependent' ? { foodRecord: { band: 'importDependent', normalImportPct: 30, gapPct: 0 } } : {};
+      const record = { economicState: { foodSecurity: { label, ...foodRecord } } };
       expect(draw({ foodSecurityLabel: label }, record).health, `${label} drew nothing`).toHaveLength(1);
     }
   });
@@ -552,8 +559,14 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
       { institutions: stalls, tradeRouteAccess: 'isolated' }, { institutions: stalls, tradeRouteAccess: 'road' },
     ]) {
       // db3ed88c1: the three market pools declare `market`, read off the record's live roster.
-      const record = { institutions: state.institutions, config: { tradeRouteAccess: state.tradeRouteAccess } };
+      // LEFT-LINES (L32, 2026-11-17): ENTREPOT v2's "the town" now declares its size band (v6 its small-place twin), so the
+      // constructed record carries a tier as every born record does; the claim (each market pool yields a sentence) is kept
+      const record = { tier: 'town', institutions: state.institutions, config: { tradeRouteAccess: state.tradeRouteAccess } };
       expectSentence(draw(state, record).market, JSON.stringify(state));
+      // BAR8-DESKS-ECO (READ-LEFT-LINES's LOW-3, 2026-11-17): beside the town record, a VILLAGE record, so ENTREPOT's
+      // small-place branch (v6, `tier: ≤ village`) is drawn here too; the claim (each market pool yields a sentence) is kept
+      const village = { ...record, tier: 'village' };
+      expectSentence(draw(state, village).market, `${JSON.stringify(state)} (a village)`);
     }
   });
 
@@ -841,6 +854,13 @@ describe('DS-GEN-6 — the route, the tier overlay, and the demoted deficit dime
           armToPool.set(arm, originRoutePoolKey(route));
           const noDocks = originArmKey({ route, terrainType, hasFoodDeficit, hasDocks: false });
           if (noDocks === 'ground') armToPool.set(noDocks, originRoutePoolKey(route));
+          // R2-CODE-A-4 (round three #7): the food record's imports are a producer input too — an isolated
+          // shortfall the record brings nothing in for founds on the `isolated.unsupplied` arm.
+          const unsupplied = originArmKey({ route, terrainType, hasFoodDeficit, hasFoodImport: false });
+          if (unsupplied === 'isolated.unsupplied') armToPool.set(unsupplied, originRoutePoolKey(route));
+          // …and its #215: the siege is an input — an isolated shortfall under a siege founds on `isolated.besieged`.
+          const besieged = originArmKey({ route, terrainType, hasFoodDeficit, siege: true });
+          if (besieged === 'isolated.besieged') armToPool.set(besieged, originRoutePoolKey(route));
         }
       }
     }
@@ -1221,6 +1241,10 @@ describe('the history chapter', () => {
       )?.key),
       livingMemoryEventName({ siegeNarrative: 'The Siege is still present in living memory: x.', currentTensions: [{}] })
         ? 'LIVING-MEMORY' : null,
+      // BAR4-HISTORY T1-SHAPE (the chair's SH1b, 2026-11-16): a pool that claims the shape yields its -MARKED twin where the
+      // record's character names ANOTHER event as the one that shaped the place (facts/shapingEvent.js :: shapeYieldingKey)
+      ...['ANCHORED-OLD', 'LEGACY-RECOVERED', 'LEGACY-SHIFTED'].map((key) => shapeYieldingKey(key, 'pilgrimage',
+        'The Siege is why this place looks as it does: it stood here before, but what stands today was rebuilt afterwards', DOSSIER_STATE_PROSE_GENERAL['DS-GEN-16'].pools)),
     ])].sort()).toEqual(poolsOf('DS-GEN-16').sort());
     expect(legacyPoolKey([])).toBeNull();
     expect(legacyPoolKey([{ annotation: '' }])).toBeNull();
@@ -1249,7 +1273,10 @@ describe('the history chapter', () => {
       expect(eventRecordPoolKey([{ ...blow(true, 5), severity }])).toBe('ANCHORED-RECENT');
       expect(eventRecordPoolKey([{ ...blow(false, 5), severity }])).toBe('RECORDED-UNANCHORED');
     }
-    expect(eventAnchorDimension(undefined)).toBeNull();
+    // re-keyed by the chair's ruling of 2026-11-13 (W2-B-DECLARE second seat): an absent flag is "not anchored" — the
+    // generator's own timeline reads it `e.anchored || false`; an unknown type still answers nothing
+    expect(eventAnchorDimension(undefined)).toBe('not anchored');
+    expect(eventAnchorDimension('yes')).toBeNull();
     expect(eventAnchorDimension(true)).toBe('anchored');
     expect(eventAnchorDimension(false)).toBe('not anchored');
     // The marker SELECTION is stated, not left to array order: the nearest ANCHORED row wins.
@@ -1306,9 +1333,13 @@ describe('the history chapter', () => {
     const religious = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-9'].pools['event type: religious'];
     const unslotted = religious.filter((v) => !(v.slots || []).includes('timeband_since'));
     expect(unslotted.length, 'the religious pool changed shape').toBeGreaterThan(0);
+    // W2-WRITE GEN-9 history events (2026-11-13): THE CURE THIS ARM NAMED, TAKEN AS A CORPUS ACT. The pool
+    // gains three duration-free lines that carry no anchor word (vids 5-7), so an anchored religious event
+    // older than a generation has lines to say; the arm is re-keyed by identity from "the silence holds" to
+    // "the silence is cured", and still reds if every duration-free line goes back to `not anchored`.
     expect(
-      unslotted.every((v) => (v.marks || []).includes('not anchored')),
-      'a duration-free ANCHORED variant appeared — the religious silence below is cured',
+      unslotted.some((v) => !(v.marks || []).includes('not anchored') && !(v.marks || []).includes('anchored')),
+      'the religious silence came back: no duration-free variant speaks over an anchored event',
     ).toBe(true);
   });
 });
@@ -1614,10 +1645,17 @@ describe('DS-GEN-18 — why these workshops, and the blocker that was in the wro
     // THE ORDER OF THE LIST IS NOT THE ORDER OF THE FILL: the first CONFORMING row wins, so
     // a roster whose first entry is plural still names its singular house.
     expect(craftInstitutionFill(['Glassmakers', 'Merchant guilds (3-8)', 'Smelter'])).toBe('Smelter');
-    // And where nothing conforms, both STALLED variants name the slot ⇒ the pool is SILENT.
+    // And where nothing conforms, the lines that name the slot are dropped. W2-WRITE-5 A, the read's M6 (2026-11-13),
+    // re-keyed by identity: STALLED's printing lines no longer name a house (the slot printed catalogue labels and
+    // said the house was "short of what it needs from upstream" where the chain model holds that it imports its
+    // feed), so a refused fill no longer silences the pool: it speaks through a line with no house in it, and the
+    // plural house still never reaches a singular seam.
     const withheld = { activeChains: [CHAIN({ upstreamMissing: ['stone'], processingInstitutions: ['Glassmakers'] })] };
     expect(craftReasonPoolKey(withheld), 'the KEY still resolves — the silence is the FILL\'s').toBe('STALLED');
-    expect(drawCraft(withheld), 'a plural house drew a singular sentence').toBeNull();
+    const spoken = drawCraft(withheld);
+    expectSentence(spoken, 'STALLED');
+    // anchored: expectSentence on the line above proves this same render drew a real, filled STALLED sentence
+    expect(spoken, 'a plural house drew a singular sentence').not.toMatch(/Glassmakers/);
     // Every fill this desk offers passes the ANNEX'S OWN shape checker, not a local twin.
     const shapes = mergedShapes();
     expect(fillShapeViolation(shapes.shapeOf('institution'), craftInstitutionFill(['Smelter']))).toBe('');
@@ -1641,6 +1679,9 @@ describe('DS-GEN-18 — why these workshops, and the blocker that was in the wro
     expect(line).toBe(drawnMember({
       leaf: 'general', blockId: 'DS-GEN-18', poolKey: 'STALLED', seed: 'craft',
       slots: { settlement: 'Thornwall', institution: 'Smelter' },
+      // W2-WRITE-5 A, the read's M6 (2026-11-13): STALLED's lines now declare the siege (a twin says the siege
+      // stopped the goods), so the anchor passes the facts the desk hands in (the drawnMember helper's cause 5).
+      facts: factsOf(TOWN),
     }));
     // The token itself must never reach a reader through any seam of this block.
     expect(fillShapeViolation(mergedShapes().shapeOf('resource'), 'warehouse_logistics')).toBe('ENGINE-TOKEN-IN-FILL');

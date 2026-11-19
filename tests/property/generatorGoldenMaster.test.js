@@ -18,6 +18,66 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-19 — THE LAST CLOSE BEFORE THE DEPLOY (points 54 to 70), THROUGH THE SIGNED DOOR (ODQ §934.105 and the owner's own word in the chair's chat,
+ *   2026-11-18 about 19:07 UTC, "Yes to both" (the refresh of the stored reference files again, and the golden door's signing); the chair's line "SIGN"
+ *   2026-11-19 01:04 UTC; record docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json; seat LASTCLOSE-SIGN, vetoable).
+ *   222 of 525 rows (thorp 12, hamlet 12, village 48, town 101, city 25, metropolis 24) against the first close's tip 0dee69e17 (which reproduces all 525).
+ *   THE CAUSE: the declared cures of the points landed over 0dee69e17 on lane/landing-pieces-2026-11-18, EACH ROW LAID TO ITS STEP by births at all
+ *   seventeen first-parent steps that touch src/, each step equal to its seat's declared count: J-INCOME-2 (54) incomeSources[].desc 36; K-WATCH and K-POWERS
+ *   (48, 49, 57) safetyProfile.guardEffectivenessDesc 93, powerStructure.factions[].desc 24, .recentConflict 12; K-PEOPLE (50, 58) relationships 7, npcs[].goal 9;
+ *   FAULTS-NEED (61) npcs[].goal 13; FAULTS-PEOPLE (62) npcs[].presentation.behaviour 48; FAULTS-WATCH (66) the gate text 2, availableServices.legal 1, and its
+ *   FR25 (67) relationships 3, prominentRelationship 1; FAULTS-BIRTH's follow-ups (68) resourceAnalysis.imports 36, .gaps 12; LAST-DECLARE (69) npcs[].secret 3;
+ *   LAST-VARIETY (70) npcs[].goal 13 (point 61's rows); the rest none. No person, house, tie or name in or out. Written at 1b2cb89f4. d08ae44c.. -> 079bfce6..
+ *
+ * 2026-11-18 — THE CLOSE OF THE ROUNDS BAR5 TO BAR8, THROUGH THE SIGNED DOOR (ODQ §934.105 and the owner's own word in the chair's chat, 2026-11-18 03:03:46 UTC,
+ *   the whole of the message: "yes: refresh the stored reference files and open the pull request.", answering the chair's message of 02:47:31 UTC; the
+ *   chair's line "SIGN" 06:57 UTC; record docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json; seat CLOSE-DOORS-2, vetoable).
+ *   485 of 525 rows (thorp 56, hamlet 84, village 84, town 93, city 84, metropolis 84) against the last green corpus 0ac61b4b4 (which reproduces all 525;
+ *   the chair's ruling CL11: the line's 6c117344f was already red, 285, the round BAR5 having joined before the BAR4 close). THE CAUSE: the declared cures
+ *   of every seat landed over 600b7683a..70e557d5b: BAR5 (things, chains, food, world, powers), BAR6 (powers, people, record, culture, scenes and the seam),
+ *   BIRTH-1, -2, -3 (the supply rule), BAR7 (lines, econ), SECRETS-1, LEFT-LINES, BAR8 (scenes, fish rows). FIELD-DIFFED by leaf path (the record's
+ *   familyCheck: 23 families, each with its declarers' file and line): relationships[] tension 276 / description 63 / proseVariant 60 / type, strength,
+ *   archetypeKey 57, powerStructure.factions[].desc 241, npcs[] secret 168 / goal 54 / presentation 24, resourceAnalysis.gaps 129, economicState imports 117 /
+ *   exports 75 / dependencies and chains 37 / food 35 / production 29 / income 10, availableServices 102, culturalIdentity 86, economicViability hooks 85 /
+ *   summary 46 / issues 37, arrivalScene 74, history 54, settlementReason 38, simulationTrace 37, conflicts 29, prominentRelationship 10; no person, house,
+ *   tie or name in or out. Written at the doors' branch 2f4eb8acf (it holds Part 1's final tip 0af60594a: the 525 byte-equal). 03f9688f.. -> d08ae44c..
+ *
+ * 2026-11-16 — THE CLOSE OF THE ROUND BAR4, THROUGH THE SIGNED DOOR (ODQ §934.105 and the owner's own words in the chair's chat: 2026-11-16 08:55:14 UTC, "Yes to the following:" /
+ *   "Later: a new yes for the example-town refresh when this round closes.", answering the chair's report of 08:30:14 UTC; and, the chair's own permission check having held the
+ *   first go-ahead at 17:40 UTC, 18:51:17 UTC, "Yes to plain yes for the example-town refresh.", answering the chair's ask of 17:42, 18:06 and 18:35 UTC;
+ *   record docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json; seat BAR4-CLOSE-DOORS-2, vetoable).
+ *   390 of 525 rows (thorp 56, hamlet 61, village 41, town 77, city 76, metropolis 79) against the stored corpus's tree c4ac1ef84a (which reproduces
+ *   all 525). THE CAUSE: the round's builder branches' declared cures (people, corpus-eco, record, houses, scenes; history, safety, services and
+ *   corpus-def move no row of the 525) and the repair seat's PD1 twin (relationships); the first-paint seam and the last re-key move none.
+ *   FIELD-DIFFED by leaf path: relationships[] description 214 / tension 3 / proseVariant 3 (people, PD1), economicViability.plotHooks[].hook 100 and
+ *   economicState.incomeSources[].desc 64 (corpus-eco), resourceAnalysis.gaps 88 with its entries in and out (record; the scenes seat's salt works),
+ *   culturalIdentity.foodways 70 and institutions[].desc 4 (houses), npcs[].secret what / stakes 47 (people), arrivalScene 1 (scenes); no key in or out.
+ *   Written at the doors' branch e942f648 (it holds Part 1's final tip 6483322cc). 6adede0d.. -> 03f9688f..
+ * 2026-11-16 — THE CLOSE OF THE ROUND BAR3, THROUGH THE SIGNED DOOR (ODQ §934.105 and the owner's own word in the chair's chat, 2026-11-15 20:30:10 UTC: "Yes that one too", answering the chair's question of 20:28:06 UTC;
+ *   record docs/shift-records/2026-11-16-the-close-of-the-round-bar3.json; seat BAR3-CLOSE-DOORS-2, vetoable).
+ *   521 of 525 rows (thorp 81, hamlet 84, village 83, town 105, city 84, metropolis 84) against the stored corpus's tree 83fc14ad6 (which reproduces
+ *   all 525). THE CAUSE: the round's seven builder branches' declared cures, joined at 98363cb84 (people, powers, places, defecon; corpus, services and
+ *   labels move no row), and the second repair seat's letter d (efdb3841d; it moves no golden row: the same bytes at fb59da43e and after its merge).
+ *   FIELD-DIFFED by leaf path, text leaves only: relationships[] description 349 / tension 301, powerStructure recentConflict 272 / factions[].desc 249 /
+ *   factionRelationships[].narrative 140, economicState...foodwaysLine 236 and culturalIdentity.foodways 212, npcs[].personality.dominant 145 (P7a),
+ *   institutions[].desc 70, economicState.safetyProfile economicDragDesc 60 / guardEffectivenessDesc 36, prominentRelationship 57, the entrepot note 37,
+ *   stress/stressors crisisHook 12, pressureSentence 7, arrivalScene 1, economicViability.plotHooks 1; no array length, no non-text leaf.
+ *   Written at b46b26d92's line (the doors' branch at 8694af277). 9fab7487.. -> 6adede0d..
+ *
+ * 2026-11-15 — THE CLOSE OF THE ROUND BAR2, THROUGH THE SIGNED DOOR (ODQ §934.105 and the owner's own word in the chair's chat, 2026-11-15 20:27:16 UTC:
+ *   "Yes refresh the reference"; record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json; seat BAR2-CLOSE-DOORS-2, vetoable).
+ *   418 of 525 rows (thorp 73, hamlet 29, village 43, town 105, city 84, metropolis 84) against the stored corpus's tree 74ded1800 (which reproduces
+ *   all 525). THE CAUSE: the round's five builder branches' declared cures, landed on lane/join-2026-11-14 at JOIN-13 points 3 to 6 (services
+ *   e13aeb702, places 65cea6643, people cb2573de4, labels ef40f6330). FIELD-DIFFED by leaf path, text leaves only: availableServices 216, institutions[].desc 237,
+ *   settlementReason[] 153, culturalIdentity.foodways and economicState...foodwaysLine 84, arrivalScene 10, relationships[] description 239 / tension 68 /
+ *   proseVariant 1, powerStructure.factions[].desc 168, npcs[] structuralPosition and activeConstraint 9, prominentRelationship 4, economicState.incomeSources[].desc 29;
+ *   no array length, no non-text leaf. Written at 1011a8a91. e74b9398.. -> 9fab7487..
+ *
+ * 2026-11-13 — STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
+ *   record docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json; the chair signs under the owner's delegation, vetoable).
+ *   525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) against record 46's post-state. THE CAUSE, ONE (first-parent step 22cc9ef7d): the COHERENCE-AGREE merge (lane/coherence-agree-2026-11-11 at 69b53decd; one fact, one answer: the town's own drawn record overrides a terrain or institution table, and a fact has one reader). LAW 2's SECOND CASE (the lane cut from 3575cf061): measured at the merge, the draft's '525 of 525' exactly. FIELD-DIFFED: resourceAnalysis and config's rolled resources, simulationTrace, economicState, economicViability, defenseProfile, culturalIdentity, the re-dealt holders' institutions, npcs, relationships, services, quarters, powers, conflicts, stress casts, history and arrival scene, activeConditions, the pressure line, and the derived coherence receipt, isolation support and structural violations; every family the draft declares.
+ *   Written from the staged tree S47 (the tree of 9e2ae9035 with the door paths carried from the branch). 5ef18089.. -> 7b7089fd..
+ *
  * 2026-11-13 — STYLE-2-MERGE RECORD 46, THE COHERENCE-POWERS MERGE OVER THE INTEGRATION BRANCH, THROUGH THE SIGNED DOOR (ODQ §934.105, THE STYLE WAVE'S MERGE, STYLE-2-MERGE;
  *   record docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json; the cloud chair signs under the owner's delegation, vetoable).
  *   393 of 525 rows (thorp 24, hamlet 12, village 84, town 105, city 84, metropolis 84) against record 43's post-state. THE CAUSE, ONE (first-parent step 6aeaa4154): the COHERENCE-POWERS merge (lane/coherence-powers-2026-11-11 at 313c67e2b; the owner's dual-hat law: the leader comes from a house of the town and keeps its hat, the powers stand on the houses). FIELD-DIFFED: npcs, relationships, conflicts, capture states, the stress casts, the coherence receipt, the trace, the prominent relationship and the pressure line, the families the draft declares.

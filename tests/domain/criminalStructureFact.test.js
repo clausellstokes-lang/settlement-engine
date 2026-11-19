@@ -42,4 +42,17 @@ describe('the criminal structure reads the roster and the one detector', () => {
   it('the name ladder still answers first: a thieves\' guild chapter is organized', () => {
     expect(deriveCriminalStructure({ institutions: [{ name: "Thieves' guild chapter", category: 'Criminal' }] })?.key).toBe('organized');
   });
+
+  // 5b (W2-A-LEAVES, 2026-11-12; the second wave's ruling): "Diffuse, no gang" printed beside a criminal power
+  // (2 of the census's 720: r2s-indebted-town-1, r2s-succession_void-town-1). The ladder read a fence's house as
+  // diffuse and never asked the roster. A gang is a gang: the crime signal's factions OUTRANK the name ladder.
+  it('5b: a criminal faction outranks the name ladder — a fence beside a thieves\' guild power is organized', () => {
+    const place = {
+      institutions: [{ name: 'Fence network', category: 'Criminal' }],
+      powerStructure: { factions: [{ faction: "Thieves' Guild", category: 'criminal', power: 20 }] },
+    };
+    expect(deriveCriminalStructure(place)?.key).toBe('organized');
+    // the control: the same fence with no criminal power is still diffuse
+    expect(deriveCriminalStructure({ institutions: place.institutions, powerStructure: { factions: [] } })?.key).toBe('diffuse');
+  });
 });

@@ -21,8 +21,10 @@
  * and the third answer to the Thieves' Guild"), variant 1 names the people, variant 2 says what it
  * means for the town. The rung's label is NOT in the line: `CAPTURE_RUNG_LABELS` carries it, the
  * skimmable skeleton beside the prose (the style law's §5 (4)). Every line is listed here FOR THE
- * OWNER'S VETO; nothing here imports or is imported by the generator.
+ * OWNER'S VETO; nothing here is imported by the generator, and the one import is the possessive leaf (a pure leaf).
  */
+
+import { powerPossessive, powerSentenceName } from './powerSentenceName.js'; // COHERENCE-POWERS-7 (R3): a power's possessive through the one leaf, never a hand-formed "'s"
 
 /**
  * One patron's receipt (a face of the ruling power's ranked three, or the steward of its empty seat).
@@ -156,10 +158,10 @@ export function criminalsOf(f) {
  */
 function askerLine(f) {
   const share = shareWords(f.share);
-  if (f.rank === 1) return `${f.name} heads ${f.ruler} and also holds ${share} in ${f.power}, so what ${f.power} wants from ${f.ruler} goes straight to the top.`;
-  if (f.rank === 2) return `${f.power} brings its requests to ${f.ruler} through ${f.name}, second in ${f.ruler}, who holds ${share} in ${f.power}.`;
-  if (f.rank === 3) return `${f.name} is third in ${f.ruler} and holds ${share} in ${f.power}, and carries ${f.power}'s requests to the two above.`;
-  return `While the seat of ${f.ruler} stands empty, its steward ${f.name} holds ${share} in ${f.power}, and ${f.power}'s requests go through ${f.name}.`;
+  if (f.rank === 1) return `${f.name} heads ${f.ruler} and also holds ${share} in ${powerSentenceName(f.power)}, so what ${powerSentenceName(f.power)} wants from ${f.ruler} goes straight to the top.`;
+  if (f.rank === 2) return `${powerSentenceName(f.power)} brings its requests to ${f.ruler} through ${f.name}, second in ${f.ruler}, who holds ${share} in ${powerSentenceName(f.power)}.`;
+  if (f.rank === 3) return `${f.name} is third in ${f.ruler} and holds ${share} in ${powerSentenceName(f.power)}, and carries ${powerPossessive(f.power)} requests to the two above.`;
+  return `While the seat of ${f.ruler} stands empty, its steward ${f.name} holds ${share} in ${powerSentenceName(f.power)}, and ${powerPossessive(f.power)} requests go through ${f.name}.`;
 }
 
 /**
@@ -182,15 +184,15 @@ export function boostWords(base, boost) {
 export const PATRONAGE_LINES = Object.freeze({
   // the face's open membership in another power (the boost is shown on the DM layer only, J-9)
   open: Object.freeze([
-    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, also holds ${shareWords(f.share)} in ${f.power}, and that lends ${f.power} weight it would not have on its own.`,
+    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, also holds ${shareWords(f.share)} in ${powerSentenceName(f.power)}, and that lends ${powerSentenceName(f.power)} weight it would not have on its own.`,
     (f) => askerLine(f),
-    (f) => `${f.name} serves ${f.ruler} and ${f.power} at once. While ${f.name} holds both places, ${f.power} counts for more here than its own members would make it.`,
+    (f) => `${f.name} serves ${f.ruler} and ${powerSentenceName(f.power)} at once. While ${f.name} holds both places, ${powerSentenceName(f.power)} counts for more here than its own members would make it.`,
   ]),
   // the face's hidden allegiance to a criminal power (DM-only; the public page shows base strength)
   hidden: Object.freeze([
-    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, secretly answers to ${f.power}, and that lends ${f.power} strength nobody outside the arrangement can see.`,
-    (f) => `${f.power} has its own voice in ${f.ruler}: ${f.name}, ${patronPlace(f.rank, f.ruler)}. The others there hear it as ${f.name}'s own opinion.`,
-    (f) => `Anyone who weighs ${f.power} by its known members leaves out ${f.name}, ${patronPlace(f.rank, f.ruler)}, who serves it in secret. Counting ${f.name}, ${f.power} is stronger than it looks.`,
+    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, secretly answers to ${powerSentenceName(f.power)}, and that lends ${powerSentenceName(f.power)} strength nobody outside the arrangement can see.`,
+    (f) => `${powerSentenceName(f.power)} has its own voice in ${f.ruler}: ${f.name}, ${patronPlace(f.rank, f.ruler)}. The others there hear it as ${f.name}'s own opinion.`,
+    (f) => `Anyone who weighs ${powerSentenceName(f.power)} by its known members leaves out ${f.name}, ${patronPlace(f.rank, f.ruler)}, who serves it in secret. Counting ${f.name}, ${powerSentenceName(f.power)} is stronger than it looks.`,
   ]),
 });
 
@@ -198,7 +200,9 @@ export const PATRONAGE_LINES = Object.freeze({
 export const CAPTURE_RUNG_LABELS = Object.freeze({
   // STYLE-2 SW-7 (FOR THE OWNER'S VETO, the census law: a proposal): the state machine's tokens printed plain; the keys stay.
   // Was 'None' · 'Adversarial' · 'Equilibrium' · 'Corrupted' · 'Capture'.
-  none: 'Free of the criminals', adversarial: 'Fighting the criminals', equilibrium: 'Living with the criminals', corrupted: 'Partly in criminal hands', capture: 'Run by the criminals',
+  // BAR2-PEOPLE (PP1, the chair's ruling of 2026-11-15, vetoable by the owner): the free rung's label claims only what the
+  // rung states, that the seat is not in the criminals' hold; it says nothing of crime in the town (was 'Free of the criminals')
+  none: 'The seat is not in criminal hands', adversarial: 'Fighting the criminals', equilibrium: 'Living with the criminals', corrupted: 'Partly in criminal hands', capture: 'Run by the criminals',
 });
 
 /** @type {Readonly<Record<'none' | 'adversarial' | 'equilibrium' | 'corrupted' | 'capture', readonly CaptureLine[]>>} */
@@ -206,20 +210,25 @@ export const CAPTURE_LINES = Object.freeze({
   // no agent in the ruling three; no criminal power strong enough to count; the ruler is not criminal
   none: Object.freeze([
     (f) => `Nobody at the head of ${f.ruler} answers to a criminal house, and no criminal power here is strong enough to push it.`,
-    (f) => `The head, the second and the third of ${f.ruler} make their own decisions; none of them takes orders from the criminals.`,
-    (f) => `${f.ruler} rules in its own name. A criminal house that wants something from it has to ask, pay or wait like anyone else.`,
+    // POWERS-15 (REVIEW-POWERS-5 D1; the chair's ruling of 2026-11-14: under an occupation no line says the hall decides
+    // for itself): the rung's fact is the criminals' standing against the hall, so the two syndicate lines claim that
+    // only (were "... make their own decisions; none of them takes orders ..." and "<ruler> rules in its own name")
+    (f) => `None of the head, the second and the third of ${f.ruler} takes orders from the criminals.`,
+    (f) => `No criminal house gives ${f.ruler} its orders. One that wants something from it has to ask, pay or wait like anyone else.`,
   ]),
   // the climate alone: a criminal power stands against the ruler and the ruler is winning; no agent in the three
+  // BAR4-HISTORY (C26840, WEAK, 2026-11-16): the degree word reads the rung, as its own relation row says it ("hunting ... in
+  // earnest but not catching all of it"): the ruler is ahead, not the fight won (was "is winning"; no longer, so the first-paint bytes do not rise)
   adversarial: Object.freeze([
-    (f) => `${criminalsOf(f)} works against ${f.ruler}, and ${f.ruler} is winning. Nobody at its head answers to the criminals.`,
-    (f) => `${f.ruler} and ${criminalsOf(f)} are openly at odds. ${f.ruler} goes after ${criminalsOf(f)}'s people when it can catch them, and nobody in ${f.ruler} protects them.`,
+    (f) => `${criminalsOf(f)} works against ${f.ruler}, and ${f.ruler} is ahead. Nobody at its head answers to the criminals.`,
+    (f) => `${f.ruler} and ${criminalsOf(f)} are openly at odds. ${f.ruler} goes after ${powerPossessive(criminalsOf(f))} people when it can catch them, and nobody in ${f.ruler} protects them.`,
     (f) => `${criminalsOf(f)} has no friend among the head, the second and the third of ${f.ruler}. It survives by staying out of their sight.`,
   ]),
   // one lesser agent in the three (the second or the third alone), or the climate alone (the two sides tolerate each other)
   equilibrium: Object.freeze([
     (f) => (f.agents.length
       ? `${answerClause(f)}, but the head does not. ${criminalsOf(f)} has a voice in ${f.ruler}, not the last word.`
-      : `${f.ruler} and ${criminalsOf(f)} leave each other alone. Nobody at the head of ${f.ruler} answers to ${criminalsOf(f)}, and neither side pushes the other.`),
+      : `Nobody at the head of ${f.ruler} answers to ${criminalsOf(f)}, and ${f.ruler} has not set out to stamp ${criminalsOf(f)} out.`), // TAIL-POWERS-B: the rung's tolerance, not a peace a quarrel or an escalation denies
     (f) => (f.agents.length
       ? `${namedAnswerClause(f)}. ${byRank(f)[0].name} can slow what ${f.ruler} decides against ${criminalsOf(f)}, but cannot stop it alone.`
       : `${f.ruler} knows what ${criminalsOf(f)} does and lets most of it go. ${criminalsOf(f)} keeps its business quiet enough to be let go.`),
@@ -234,7 +243,7 @@ export const CAPTURE_LINES = Object.freeze({
       ? `${namedAnswerClause(f)}. Whatever ${f.ruler} decides, ${criminalsOf(f)} has usually decided first.`
       : `The heads of ${f.ruler} take their share of the crime here and see that nobody else takes it from them.`),
     (f) => (f.agents.length
-      ? `${f.ruler} still holds the seat, but it does not act against ${criminalsOf(f)}. A case that touches ${criminalsOf(f)}'s business goes nowhere.`
+      ? `${f.ruler} still holds the seat, but it does not act against ${criminalsOf(f)}. A case that touches ${powerPossessive(criminalsOf(f))} business goes nowhere.`
       : `Nobody in ${f.ruler} will act against crime that pays ${f.ruler}. A case that touches its business goes nowhere.`),
   ]),
   // the head and the second answer to the criminals (the third too, sometimes)

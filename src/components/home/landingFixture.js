@@ -83,8 +83,8 @@ export const fixture = {
         "kind": "NPC",
         "tone": "success",
         "tag": "derived · npcs",
-        "lead": "Waitling Hayes, the eldest",
-        "rest": " · goal: settle one quarrel inside elder council before fearghus o'brien can settle it and take the credit."
+        "lead": "Fearghus O'Brien, elder",
+        "rest": " · goal: get the mill through the season without borrowing."
       },
       {
         "kind": "NPC",
@@ -94,7 +94,7 @@ export const fixture = {
         "rest": " · goal: have the old rights of the house of worship read out and recognised before anyone challenges them."
       }
     ],
-    "hooksMore": 4
+    "hooksMore": 3
   },
   "voice": {
     "receipts": [
@@ -118,9 +118,9 @@ export const fixture = {
       {
         "axis": "Trade connectivity",
         "from": "adequate",
-        "to": "strained",
-        "tone": "warning",
-        "reason": "Wartime pressure disrupts trade flows. Criminal pressure disrupts trade flows."
+        "to": "critical",
+        "tone": "danger",
+        "reason": "Wartime pressure disrupts trade flows. Trade route strain disrupts trade flows."
       },
       {
         "axis": "Religious authority",
@@ -134,22 +134,10 @@ export const fixture = {
         "from": "strained",
         "to": "critical",
         "tone": "danger",
-        "reason": "Public legitimacy 13 colors trust. Criminal pressure erodes communal trust."
+        "reason": "Public legitimacy 14 colors trust. Criminal pressure erodes communal trust."
       }
     ],
     "advance": [
-      {
-        "week": "Week 2",
-        "season": "the spring of year 1",
-        "headline": "Étaín Sullivan shields their people",
-        "text": "Étaín Sullivan is out to restore order."
-      },
-      {
-        "week": "Week 2",
-        "season": "the spring of year 1",
-        "headline": "Cnocby goes onto a war footing",
-        "text": "Cnocby is mustering its levies and doubling its watch."
-      },
       {
         "week": "Week 4",
         "season": "the spring of year 1",
@@ -157,22 +145,34 @@ export const fixture = {
         "text": "Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes behind."
       },
       {
+        "week": "Week 5",
+        "season": "the spring of year 1",
+        "headline": "Cnocby goes onto a war footing",
+        "text": "Cnocby is mustering its levies and doubling its watch."
+      },
+      {
         "week": "Week 9",
         "season": "the spring of year 1",
         "headline": "Elder Council captures an institution",
-        "text": "Control of Cnocby's multiple water sources is passing to Elder Council."
+        "text": "Control of Cnocby's water sources is passing to Elder Council."
       },
       {
-        "week": "Week 12",
+        "week": "Week 10",
         "season": "the spring of year 1",
-        "headline": "Caoilfhinn Gallagher pushes through reforms",
-        "text": "Caoilfhinn Gallagher is out to come through the crisis."
+        "headline": "Uathach O'Neill shields their people",
+        "text": "Uathach O'Neill means to come through the crisis, and shielding their people is the road they have taken."
       },
       {
-        "week": "Week 12",
+        "week": "Week 10",
         "season": "the spring of year 1",
         "headline": "Crime takes hold of Cnocby",
         "text": "Thieves and racketeers are working Cnocby's streets in the open."
+      },
+      {
+        "week": "Week 12",
+        "season": "the spring of year 1",
+        "headline": "Cnocby's trade routes break down",
+        "text": "Caravans are passing Cnocby by, and its traders have little to sell."
       }
     ],
     "chronicle": [
@@ -185,13 +185,13 @@ export const fixture = {
       {
         "kind": "stressor",
         "tone": "war",
-        "week": "Week 2",
-        "text": "Cnocby is mustering its levies and doubling its watch."
+        "week": "Week 4",
+        "text": "Skáloy, a town of Korl, has broken its faith pact with Keshigordu."
       },
       {
-        "kind": "trade",
-        "tone": "economic",
-        "week": "Week 12",
+        "kind": "crime",
+        "tone": "danger",
+        "week": "Week 10",
         "text": "Thieves and racketeers are working Cnocby's streets in the open."
       }
     ],

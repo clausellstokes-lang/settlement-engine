@@ -1,0 +1,177 @@
+{
+ "births": 1490,
+ "out": [
+  {
+   "thing": "garrison",
+   "text": "The garrison is present and responsive.",
+   "prints": 1,
+   "absent": 0,
+   "paths": {
+    ".economicState.safetyProfile.safetyDesc": 1
+   },
+   "ex": [],
+   "tiers": {
+    "town": 1
+   }
+  },
+  {
+   "thing": "watch",
+   "text": "The watch is present and responsive.",
+   "prints": 1,
+   "absent": 0,
+   "paths": {
+    ".economicState.safetyProfile.safetyDesc": 1
+   },
+   "ex": [],
+   "tiers": {
+    "town": 1
+   }
+  },
+  {
+   "thing": "militia",
+   "text": "The militia is present and responsive.",
+   "prints": 0,
+   "absent": 0,
+   "paths": {},
+   "ex": [],
+   "tiers": {}
+  },
+  {
+   "thing": "house: street gang",
+   "text": "A street gang controls part of the place, extorting local businesses a",
+   "prints": 45,
+   "absent": 0,
+   "paths": {
+    ".economicState.safetyProfile.crimeTypes[].desc": 45
+   },
+   "ex": [],
+   "tiers": {
+    "town": 45
+   }
+  },
+  {
+   "thing": "mercenary",
+   "text": "A mercenary company provides enforcement: professional and effective, ",
+   "prints": 0,
+   "absent": 0,
+   "paths": {},
+   "ex": [],
+   "tiers": {}
+  },
+  {
+   "thing": "garrison",
+   "text": "Hired swords back the garrison when the purse allows.",
+   "prints": 3,
+   "absent": 0,
+   "paths": {
+    ".economicState.safetyProfile.guardEffectivenessDesc": 3
+   },
+   "ex": [],
+   "tiers": {
+    "city": 3
+   }
+  },
+  {
+   "thing": "garrison",
+   "text": "Hired swords back the garrison.",
+   "prints": 385,
+   "absent": 0,
+   "paths": {
+    ".economicState.safetyProfile.guardEffectivenessDesc": 385
+   },
+   "ex": [],
+   "tiers": {
+    "city": 165,
+    "metropolis": 220
+   }
+  },
+  {
+   "thing": "house: adventurers' charter",
+   "text": "The adventurers' charter hall takes bounty work against threats, as fa",
+   "prints": 6,
+   "absent": 0,
+   "paths": {
+    ".economicState.safetyProfile.guardEffectivenessDesc": 6
+   },
+   "ex": [],
+   "tiers": {
+    "village": 5,
+    "hamlet": 1
+   }
+  },
+  {
+   "thing": "house: adventurers' charter",
+   "text": "The adventurers' charter hall coordinates emergency response to threat",
+   "prints": 0,
+   "absent": 0,
+   "paths": {},
+   "ex": [],
+   "tiers": {}
+  },
+  {
+   "thing": "house: adventurers' charter",
+   "text": "The adventurers' charter hall takes bounty work against threats, but t",
+   "prints": 29,
+   "absent": 0,
+   "paths": {
+    ".economicState.safetyProfile.guardEffectivenessDesc": 29
+   },
+   "ex": [],
+   "tiers": {
+    "hamlet": 15,
+    "village": 14
+   }
+  },
+  {
+   "thing": "house: hedge wizard",
+   "text": "Traveling hedge wizard",
+   "prints": 0,
+   "absent": 0,
+   "paths": {},
+   "ex": [],
+   "tiers": {}
+  },
+  {
+   "thing": "militia",
+   "text": " and a citizen militia to hold it.",
+   "prints": 0,
+   "absent": 0,
+   "paths": {},
+   "ex": [],
+   "tiers": {}
+  },
+  {
+   "thing": "house: alchemist",
+   "text": "The local alchemist supplements conventional trade.",
+   "prints": 14,
+   "absent": 0,
+   "paths": {
+    ".economicState.incomeSources[].desc": 14
+   },
+   "ex": [],
+   "tiers": {
+    "town": 10,
+    "city": 3,
+    "metropolis": 1
+   }
+  },
+  {
+   "thing": "mason",
+   "text": "Stone masons work imported material",
+   "prints": 0,
+   "absent": 0,
+   "paths": {},
+   "ex": [],
+   "tiers": {}
+  },
+  {
+   "thing": "temple",
+   "text": "Mandatory tithes plus rent income from church-owned land",
+   "prints": 0,
+   "absent": 0,
+   "paths": {},
+   "ex": [],
+   "tiers": {}
+  }
+ ]
+}

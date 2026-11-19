@@ -331,7 +331,10 @@
     {
      "lineId": "CULTURE_PROFILES.latin.civicPattern[0]",
      "text": "Councils, magistrates, patrons, and legal corporations compete through offices, charters, and public works.",
-     "needs": [],
+     "needs": [
+      "court",
+      "court sits"
+     ],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -424,8 +427,10 @@
     },
     {
      "lineId": "CULTURE_PROFILES.latin.foodways[1]",
-     "text": "Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic.",
-     "needs": [],
+     "text": "Market vendors and shared dining customs make food distribution visibly civic.",
+     "needs": [
+      "market"
+     ],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -675,7 +680,7 @@
     },
     {
      "lineId": "CULTURE_PROFILES.celtic.foodways[1]",
-     "text": "Herding and mixed farming produce a strongly seasonal food calendar.",
+     "text": "Herds and field grain set a strongly seasonal food calendar.",
      "needs": [],
      "excludes": [],
      "colour": false,
@@ -791,7 +796,10 @@
     {
      "lineId": "CULTURE_PROFILES.celtic.socialTexture[0]",
      "text": "Kinship and neighborhood obligations carry legal force, while poets, judges, and mediators preserve public memory.",
-     "needs": [],
+     "needs": [
+      "court",
+      "court sits"
+     ],
      "excludes": [],
      "colour": true,
      "stop": [
@@ -834,7 +842,9 @@
      "lineId": "CULTURE_PROFILES.arabic.builtForm[1]",
      "text": "Dense masonry quarters open onto caravan yards, covered lanes, and planted courtyards.",
      "needs": [],
-     "excludes": [],
+     "excludes": [
+      "crisis: threat"
+     ],
      "colour": false,
      "stop": [
       "tier (dense masonry quarters)",
@@ -870,7 +880,10 @@
     {
      "lineId": "CULTURE_PROFILES.arabic.civicPattern[0]",
      "text": "Judges, endowed institutions, leading households, and merchant notables share administration.",
-     "needs": [],
+     "needs": [
+      "court",
+      "court sits"
+     ],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -907,7 +920,9 @@
      "lineId": "CULTURE_PROFILES.arabic.exchangePattern[0]",
      "text": "Caravan organization, brokerage, credit, warehousing, and inspected weights sustain regional exchange.",
      "needs": [],
-     "excludes": [],
+     "excludes": [
+      "crisis: threat"
+     ],
      "colour": false,
      "stop": [
       "trade-route kind (caravan)"
@@ -982,7 +997,9 @@
      "needs": [
       "institution: school"
      ],
-     "excludes": [],
+     "excludes": [
+      "crisis: threat"
+     ],
      "colour": false,
      "stop": [
       "priest / faith presence beyond institution: temple (daily observance, shrines)",
@@ -995,7 +1012,9 @@
      "needs": [
       "institution: temple"
      ],
-     "excludes": [],
+     "excludes": [
+      "crisis: threat"
+     ],
      "colour": false,
      "stop": []
     }
@@ -1446,9 +1465,12 @@
      "lineId": "CULTURE_PROFILES.slavic.exchangePattern[0]",
      "text": "River trade, forest products, grain, wax, furs, and seasonal fairs connect households to wider routes.",
      "needs": [
-      "river"
+      "river",
+      "exports"
      ],
-     "excludes": [],
+     "excludes": [
+      "crisis: threat"
+     ],
      "colour": false,
      "stop": [
       "exports (forest products, wax, furs)"
@@ -1492,7 +1514,7 @@
     },
     {
      "lineId": "CULTURE_PROFILES.slavic.foodways[1]",
-     "text": "Fermentation, pickling, drying, and shared ovens stretch the harvest through winter.",
+     "text": "Fermentation, pickling, and drying stretch the harvest through winter.",
      "needs": [],
      "excludes": [],
      "colour": false,
@@ -1599,15 +1621,12 @@
     },
     {
      "lineId": "CULTURE_PROFILES.slavic.socialTexture[1]",
-     "text": "Shared ovens, bathhouses, wells, and seasonal work make private life unusually communal.",
-     "needs": [
-      "institution: bathhouse"
-     ],
+     "text": "Shared water and seasonal work make private life unusually communal.",
+     "needs": [],
      "excludes": [],
      "colour": false,
-     "stop": [
-      "shared ovens"
-     ]
+     "stop": [],
+     "note": "BAR2-PLACES-2 (2026-11-15, re-keyed by its text): was \"Shared ovens, bathhouses, wells, and seasonal work …\" needing institution: bathhouse (never answerable at the draw); no oven house, no bathhouse, no wells claimed"
     }
    ],
    "rendered": false
@@ -1748,13 +1767,11 @@
     },
     {
      "lineId": "CULTURE_PROFILES.east_asian.foodways[1]",
-     "text": "Shared waterworks, fermentation, and intensive garden production structure urban food supply.",
+     "text": "Fermentation, careful use of water, and intensive garden plots shape the food supply.",
      "needs": [],
      "excludes": [],
      "colour": false,
-     "stop": [
-      "tier (urban food supply)"
-     ]
+     "stop": []
     }
    ],
    "rendered": false
@@ -1784,7 +1801,9 @@
      "lineId": "CULTURE_PROFILES.east_asian.sacredLife[1]",
      "text": "Ritual calendars connect family memorials, neighborhood festivals, pilgrimage, and civic legitimacy.",
      "needs": [],
-     "excludes": [],
+     "excludes": [
+      "crisis: threat"
+     ],
      "colour": true,
      "stop": [
       "pilgrimage"
@@ -1996,7 +2015,7 @@
     },
     {
      "lineId": "CULTURE_PROFILES.mesoamerican.foodways[1]",
-     "text": "Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.",
+     "text": "Maize and other grain, grown intensively and redistributed through tribute, support dense populations.",
      "needs": [
       "population: >= middling"
      ],
@@ -2027,7 +2046,9 @@
      "needs": [
       "institution: temple"
      ],
-     "excludes": [],
+     "excludes": [
+      "crisis: threat"
+     ],
      "colour": false,
      "stop": [
       "pilgrimage"
@@ -2221,7 +2242,9 @@
      "needs": [
       "market"
      ],
-     "excludes": [],
+     "excludes": [
+      "crisis: threat"
+     ],
      "colour": false,
      "stop": [
       "trade-route kind (caravan or maritime)"
@@ -2265,7 +2288,9 @@
     {
      "lineId": "CULTURE_PROFILES.south_asian.foodways[1]",
      "text": "Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
-     "needs": [],
+     "needs": [
+      "tier: ≥ village"
+     ],
      "excludes": [],
      "colour": false,
      "stop": [
@@ -2294,7 +2319,9 @@
      "needs": [
       "institution: temple"
      ],
-     "excludes": [],
+     "excludes": [
+      "crisis: threat"
+     ],
      "colour": false,
      "stop": [
       "monastery (institution: monastery not presumed singly)",
@@ -2471,8 +2498,12 @@
     {
      "lineId": "CULTURE_PROFILES.steppe.civicPattern[1]",
      "text": "Political power depends on pasture access, herds, mobility, marriage alliances, and control of caravan corridors.",
-     "needs": [],
-     "excludes": [],
+     "needs": [
+      "livestock"
+     ],
+     "excludes": [
+      "crisis: threat"
+     ],
      "colour": false,
      "stop": [
       "trade-route kind (caravan corridors)"
@@ -2497,8 +2528,12 @@
     {
      "lineId": "CULTURE_PROFILES.steppe.exchangePattern[0]",
      "text": "Livestock, horses, felt, leather, transport, tribute, and caravan brokerage dominate exchange.",
-     "needs": [],
-     "excludes": [],
+     "needs": [
+      "livestock"
+     ],
+     "excludes": [
+      "crisis: threat"
+     ],
      "colour": false,
      "stop": [
       "exports (livestock, horses, felt)"
@@ -2605,7 +2640,8 @@
      "lineId": "CULTURE_PROFILES.steppe.defensePattern[0]",
      "text": "Mounted patrols, mobile musters, earthworks, corrals, and signal systems protect people and herds.",
      "needs": [
-      "militia"
+      "militia",
+      "livestock"
      ],
      "excludes": [],
      "colour": false,
@@ -2654,7 +2690,9 @@
     {
      "lineId": "CULTURE_PROFILES.steppe.socialTexture[0]",
      "text": "Clan, household, herd ownership, alliance, military following, and hospitality obligations organize public standing.",
-     "needs": [],
+     "needs": [
+      "livestock"
+     ],
      "excludes": [],
      "colour": true,
      "stop": [
@@ -2689,7 +2727,8 @@
      "lineId": "CULTURE_PROFILES.greek.builtForm[0]",
      "text": "Stone and plaster courtyard houses rise around an agora, stoas, shrines, and steep connecting lanes.",
      "needs": [
-      "market"
+      "market",
+      "tier: ≥ town"
      ],
      "excludes": [],
      "colour": false,
@@ -2700,7 +2739,8 @@
      "lineId": "CULTURE_PROFILES.greek.builtForm[1]",
      "text": "A fortified high precinct overlooks the market, theater, and workshops; where geography permits, it also overlooks a working harbor.",
      "needs": [
-      "market"
+      "market",
+      "tier: ≥ town"
      ],
      "excludes": [],
      "colour": false,
@@ -2739,7 +2779,10 @@
     {
      "lineId": "CULTURE_PROFILES.greek.civicPattern[0]",
      "text": "Assemblies, magistrates, councils, patrons, sanctuaries, and civic associations compete through public office.",
-     "needs": [],
+     "needs": [
+      "court",
+      "court sits"
+     ],
      "excludes": [],
      "colour": false,
      "stop": [

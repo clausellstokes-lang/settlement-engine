@@ -672,7 +672,93 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 //            LIBRARY-SIMPLE (35) -82 · GREEN-TIP (36) -23 · PULSE-SITES (36) +236 · REMOTE-PATH (37) -35 · RESIDUE
 //            (38) -4 · GEN-SPEED (39) -82 · CI-FIT (40) +26 · FOUNDING-WORLDS (41) +45 = 299,985.
 // (Steps at an equal raw closure are chunk-hash drift of tens of bytes, measured, not traced further.)
-const CLOSURE_BUDGET_BYTES = 1_121_260; // 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note above); was 1_104_215 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note above); was 1_075_758 (FIX-ARROW-PLAQUE's lane tip) / 1_075_589 (MERGE-WAVE step 4)
+// 2026-11-15, TAIL-CLOSE-DOORS-2 (THE CLOSE'S FINAL TREE, the joined line lane/join-2026-11-14 at f76fe38fd merged into
+// lane/tail-close-doors-2026-11-15): A RISE, the three first-paint budgets re-recorded under the owner's word of 2026-11-15 07:50 UTC in the chair's chat ("i defer all of hte waiting on me's to you"), by the chair's decision A; vetoable.
+// MEASURED by a fresh `npm run build` at the final tree, read by this file's own arms (VERIFY_DIST=1): the entry's static
+// closure reads 1,130,209 raw / 360,052 gzip / 302,161 Brotli. The chair's decision A: the prepared trim lands (on the
+// line: e44d42aaf, the trim of sixteen riders out of the first paint) and the budget is raised only by what is still
+// over, i.e. to the measured figures, with the compressed companions at their measured figures (this block's own form).
+//   raw    1,121,260 -> 1,130,209 (+8,949) · gzip 357,225 -> 360,052 (+2,827) · Brotli 299,985 -> 302,161 (+2,176).
+//   The cause: the round's generator and data growth reaching the first paint, net of the trim of sixteen riders
+//   (e44d42aaf). Not bisected by merge point at this pass (the size measure docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md
+//   read 1,130,109 raw at its earlier tree). VETOABLE: a veto reverts this commit and the arms read red again.
+// 2026-11-15, TAIL-CLOSE-DOORS-4, THE CLOSE'S FINAL TREE (the doors' branch after the cure, the presumed pass, the repair
+// lane/tail-close-sweep-d at dbbee9cc7 and the worker's ceiling, the edge bundles re-derived): the two compressed budgets
+// re-recorded at the close's final tree under the owner's word of 2026-11-15 07:50 UTC and the chair's decision A (ruling B2); vetoable. MEASURED by one fresh `npm run build`, read by this file's own arms (VERIFY_DIST=1):
+//   gzip 360,052 -> 360,054 (+2) · Brotli 302,161 -> 302,175 (+14); the raw closure holds under 1,130,209 (unchanged).
+//   The cause by name: the re-grounded landing paragraph (src/copy/landing.js, the repair seat TAIL-CLOSE-SWEEP-D: the "advance
+//   time" paragraph on the re-emitted sample's six beats), the one first-paint source the close changed since dfd45489c (the
+//   other src/ moves since, castPowers.js, stressFactions.js, candidateEvents.js, generationForkRegistry.js and the intent atlas
+//   distillate, are not first-paint modules). VETOABLE: a veto reverts this commit and the two arms read red again.
+// 2026-11-15, BAR2-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR2 (the joined line 59185b62a + the sweep-a repair 87bbb6c87, the
+// edge bundles re-derived): the three first-paint budgets re-recorded ONCE at this tree's measured figures under the chair's
+// ruling B3 (the owner's word of 2026-11-15 07:50 UTC deferred the size budgets to the chair; the chair's decision A); vetoable.
+// MEASURED by one fresh `npm run build` of this tree and of the line's closed tip 74ded1800 (which reads the old budgets exactly),
+// read by this file's own arms (VERIFY_DIST=1):
+//   raw 1,130,209 -> 1,131,667 (+1,458) · gzip 360,054 -> 360,516 (+462) · Brotli 302,175 -> 302,753 (+578).
+//   By chunk: engine-core +1,314 raw (gzip +435, Brotli +309); data +139 (+26, +28); index +5 (+1, +241); the other five
+//   first-paint chunks unmoved. The cause, by the round's five branches AS A WHOLE: the eager engine core's MEMBERSHIP moved
+//   (src/domain/display/foodBalanceBar.js and src/domain/facts/presence.js now route into it, by other branches of this round;
+//   three modules are excised from the engine's shared domain: labels' one line of vite.config.js, display/magicProvisionShown.js
+//   and facts/magicSource.js, and sweep-a's facts/ironAtHand.js) and the round's reworded src/data lines (the data chunk).
+//   VETOABLE: a veto reverts this commit and the three arms read red again.
+// 2026-11-15, BAR3-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR3 (the joined line 98363cb84 + the sweep-a repair through 03abf16cd, merged 1ac74a4c0; the edge bundles re-derived 9d7c7fbc5 and holding after the last merge): the three first-paint budgets re-recorded ONCE at this tree's measured
+// figures under the chair's ruling B3 (the owner's word of 2026-11-15 07:50 UTC deferred the size budgets to the chair); vetoable.
+// MEASURED by one fresh `npm run build` of this tree and of the line's closed tip 83fc14ad6 (which reads the old budgets exactly),
+// read by this file's own arms (VERIFY_DIST=1):
+//   raw 1,131,667 -> 1,132,308 (+641) · gzip 360,516 -> 360,742 (+226) · Brotli 302,753 -> 302,830 (+77).
+//   By chunk: engine-core +520 raw (gzip +173, Brotli +93); data +120 (+47, +16); index +1 (+6, -32); the other first-paint
+//   chunks unmoved. The cause, by the round's seven branches AS A WHOLE (corpus, services, places, labels, defecon, people,
+//   powers) and the sweep seat's repair: THE CURE'S OWN SHARE, measured at the tree before it (1,131,858 · 360,590 · 302,817):
+//   +450 raw, +152 gzip, +13 Brotli, the sweep seat's letter (g) (03abf16cd, vite.config.js: facts/sharedPower.js leaves the
+//   engine's shared-domain excisions and stays in the eager engine core, as textOf.js does, curing the boot smoke's
+//   coherence-lazy <-> data-lazy chunk cycle from BAR3-PEOPLE batch 1's new import): engine-core +509, index -59; the rest,
+//   +191 raw, +74 gzip, +64 Brotli, the branches' src/ bytes (the data chunk: the round's reworded src/data lines).
+//   VETOABLE: a veto reverts this commit and the three arms read red again.
+// 2026-11-16, BAR4-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR4 (the joined line 2d80aa740 + THE ONE MERGE of 600b7683a, the repair
+// seat BAR4-CLOSE-SWEEP at 1a5678df0 and the first-paint seat BAR4-FIRSTPAINT at bf16469d9, merged abf643259; the edge bundles
+// re-derived e8852a5b5): the three first-paint budgets re-recorded ONCE at this tree's measured figures under the chair's ruling B3
+// (the owner's word of 2026-11-15 07:50 UTC deferred the size budgets to the chair); vetoable. MEASURED by one fresh `npm run build`
+// of this tree and of the line's closed tip c4ac1ef84a (which reads 1,132,308 · 360,756 · 302,825: the old budgets, Brotli 5 under),
+// read by this file's own arms (VERIFY_DIST=1):
+//   raw 1,132,308 -> 1,139,072 (+6,764) · gzip 360,756 -> 362,621 (+1,865) · Brotli 302,830 -> 304,224 (+1,394; +1,399 over c4ac1ef84a).
+//   The cause, the round's branches AS A WHOLE (services, scenes, houses, corpus-eco, corpus-def, safety, people, history, record)
+//   and the two close seats; the largest by their hand-backs' own measures, each on its own base: BAR4-RECORD +4,901 raw / +1,714
+//   gzip / +1,437 Brotli (src/domain/facts/houseInputAtHand.js, eager by its folder, its home by the brief), BAR4-HOUSES +2,478 /
+//   +764 / +674 (foodways.js's two print-time readings and the leaf's six sentences ride the eager engine core), BAR4-CORPUS-ECO
+//   +1,492 / +363 / +419; then BAR4-CORPUS-DEF +957, BAR4-SAFETY +703, BAR4-PEOPLE +275 raw. BAR4-SCENES-2's one home for the
+//   namesake had pulled about +148,600 raw into first paint (1,291,683 at 7738e71be); BAR4-FIRSTPAINT's seam (factsOf reaches the
+//   heavy fact tables lazily) cured it at the cause, to 1,138,376 (below the joined f19c3b28b's 1,143,114: houseInputAtHand.js and
+//   timberAtHand.js left first paint with the rest), and the repair seat's last cures add +696 (src/domain/facts/pairPlace.js, 54
+//   lines, no import, eager by its folder: PD1b 4ed8a41e9; HR1's two table rows b6cb6f0d7). VETOABLE: a veto reverts this commit
+//   and the three arms read red again.
+// 2026-11-18, CLOSE-DOORS-1B, THE CLOSE OF 2026-11-18 (the working line 70e557d5b + the close's three merges, the last 635c9b57e,
+// merged 7a7204c00; the edge bundles re-derived 22e072a49): the three first-paint budgets re-recorded ONCE at this tree's measured
+// figures under the chair's ruling CL3 (the last closes' B3 carried; the owner's word of 2026-11-18 03:03:46 UTC, "yes: refresh the
+// stored reference files and open the pull request"); VETOABLE BY THE OWNER. MEASURED by one fresh `npm run build` of this tree and of
+// the last close's tip 6483322cc, read by this file's own arms (VERIFY_DIST=1):
+//   raw 1,139,072 -> 1,163,565 (+24,493) · gzip 362,621 -> 370,414 (+7,793) · Brotli 304,224 -> 310,664 (+6,440).
+//   THE CAUSE, MEASURED BY ROUND (one build of each boundary of the line's first parent, a scratch copy of this file with the
+//   budgets at 0, removed; raw / gzip / Brotli): BIRTH-3 (the sixth chair's point 33, e0242a12a) +10,582 / +3,415 / +2,941;
+//   the round BAR5 (JOIN-16 points 1 to 9, to db62ab299) +7,871 / +2,285 / +1,717; the round BAR6 (JOIN-17 points 1 to 11, to
+//   570e3c351) +3,515 / +1,263 / +991; then BAR7 (points 20 to 29) +2,378, the seam (12 to 19) +65, SECRETS-1 and DEBT-1 (30 to
+//   32) +18, the sixth chair's points 36 to 53 +64 raw; the close's own merges +0 raw (gzip +2, Brotli −13 against 70e557d5b).
+//   The line before the rounds, 600b7683a, reads 1,139,072 · 362,611 · 304,357. Recorded AT the measured figures; MONOTONE-DOWN.
+// 2026-11-19, LASTCLOSE-SIGN, THE LAST CLOSE BEFORE THE DEPLOY (the landings' tip cc11c9504, points 54 to 70, + LASTCLOSE-DOORS,
+// point 71, 8ecd28085; the edge bundles re-derived 319d75ac1): the three first-paint budgets re-recorded ONCE at this tree's measured
+// figures (rises under 60,000 B, the seat's to take by the brief; the owner's word of 2026-11-18 about 19:07 UTC, "Yes to both");
+// VETOABLE BY THE OWNER. MEASURED by one fresh `npm run build` of this tree and of the first close's tip 0dee69e17 (which reads
+// 1,163,565 · 370,414 · 310,664), read by this file's own arms (VERIFY_DIST=1):
+//   raw 1,163,565 -> 1,175,492 (+11,927) · gzip 370,414 -> 373,999 (+3,585) · Brotli 310,664 -> 313,994 (+3,330).
+//   THE CAUSE, BY LANDING STEP (one build at each first-parent landing commit, a scratch copy of this file with the budgets at 0,
+//   removed; raw / gzip / Brotli): FAULTS-NEED (point 61) +4,628 / +1,425 / +1,054; the desks (51, 52, 59) +2,489 / +730 / +699;
+//   FAULTS-BIRTH (63) +1,535 / +366 / +146; J-INCOME-2 (54) +1,093 / +417 / +390; K-PEOPLE, PEOPLE-2 (50, 58) +588 / +149 / +355;
+//   LAST-DECLARE (69) +522 / +160 / +283; K-WATCH, K-POWERS, K-WATCH-2 (48, 49, 57) +315 / +110 / +38; FAULTS-ROWS (65) +281 / +76 /
+//   +139; MARKS-2 (56) +224 / +64 / +112; FAULTS-WATCH (66) +87 / +42 / -126; FAULTS-DESKS (64) +84 / +20 / -42; LAST-VARIETY (70)
+//   +52 / +31 / -65; FAULTS-BIRTH's follow-ups (68) +29 / -25 / +6; FAULTS-PEOPLE (62) +0 / +16 / +180; FR25 (67) +0 / +14 / +78;
+//   PDF-2b (55) +0 / -18 / +46; FAULTS-TOOLS (60) +0; point 71 +0 raw (+8 / +37: a lazy chunk's hash in the entry's import map).
+//   Recorded AT the measured figures; MONOTONE-DOWN.
+const CLOSURE_BUDGET_BYTES = 1_175_492; // 2026-11-19, LASTCLOSE-SIGN: 1_163_565 -> 1_175_492 (note above); // 2026-11-18, CLOSE-DOORS-1B: 1_139_072 -> 1_163_565 (ruling CL3, note above); // 2026-11-16, BAR4-CLOSE-DOORS-1: 1_132_308 -> 1_139_072 (ruling B3, note above); 2026-11-15, BAR3-CLOSE-DOORS-1: 1_131_667 -> 1_132_308 (ruling B3, note above); 2026-11-15, BAR2-CLOSE-DOORS-1: 1_130_209 -> 1_131_667 (ruling B3, note above); 2026-11-15: re-recorded AT THE CLOSE's measured final tree under the owner's word of 07:50 UTC, the chair's decision A (note above); was 1_121_260 (STYLE WAVE) — 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note above); was 1_104_215 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note above); was 1_075_758 (FIX-ARROW-PLAQUE's lane tip) / 1_075_589 (MERGE-WAVE step 4)
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -702,8 +788,16 @@ const CLOSURE_BUDGET_BYTES = 1_121_260; // 2026-11-11: re-recorded AT THE STYLE 
 //     it spends ~11.3 kB / ~9.5 kB of headroom no measurement asks for.
 // Leaving both untouched is the only one of the three that neither spends owner headroom
 // nor weakens the instrument. Monotone-down unchanged; raises stay owner-signed.
-const CLOSURE_GZIP_BUDGET_BYTES = 357_225; // 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note at the raw budget); was 351_590 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note at the raw budget); was 342_975 (FIX-ARROW-PLAQUE's lane tip) / 342_846 (MERGE-WAVE step 4)
-const CLOSURE_BROTLI_BUDGET_BYTES = 299_985; // 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note at the raw budget); was 295_016 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note at the raw budget); was 288_470 (FIX-ARROW-PLAQUE's lane tip) / 288_452 (MERGE-WAVE step 4)
+// 2026-11-16, BAR3-CLOSE-DOORS-2, THE CLOSE OF THE ROUND BAR3, Part 2's seat (after the merge of lane/bar3-close-sweep-b-2026-11-16 at
+// f319ee76e, b46b26d92, and the edge bundles re-derived, 96f138f87): the gzip first-paint budget alone re-recorded ONCE at this tree's measured
+// figure under the chair's ruling B3 (vetoable); the raw and Brotli budgets hold and are unmoved. MEASURED by one fresh `npm run build`, read
+// by this file's own arm (VERIFY_DIST=1): gzip 360,742 -> 360,756 (+14), Brotli 302,825 (under 302,830). By chunk, against the merge commit
+// b46b26d92 built the same way (360,745): only `index` moves, +11 gzip (+114 Brotli), and no chunk's code moves but one: the engine-version
+// stamp in settlementGenerateAction (bb4d5a82 -> 8b2bdf5e, the edge bundle's re-derivation), whose new hash renames the chunks the index maps.
+// So: +3 the sweep's cures (its own measure, reproduced), +11 the chunk names re-hashed by the stamp of the rebuilt engine bundle.
+// VETOABLE: a veto reverts this commit and the arm reads red again.
+const CLOSURE_GZIP_BUDGET_BYTES = 373_999; // 2026-11-19, LASTCLOSE-SIGN: 370_414 -> 373_999 (note at the raw budget); // 2026-11-18, CLOSE-DOORS-1B: 362_621 -> 370_414 (ruling CL3, note at the raw budget); // 2026-11-16, BAR4-CLOSE-DOORS-1: 360_756 -> 362_621 (ruling B3, note at the raw budget); 2026-11-16, BAR3-CLOSE-DOORS-2: 360_742 -> 360_756 (ruling B3, note above); 2026-11-15, BAR3-CLOSE-DOORS-1: 360_516 -> 360_742 (ruling B3, note at the raw budget); 2026-11-15, BAR2-CLOSE-DOORS-1: 360_054 -> 360_516 (ruling B3, note at the raw budget); 2026-11-15, TAIL-CLOSE-DOORS-4: 360_052 -> 360_054 at the final tree (ruling B2, note at the raw budget); 2026-11-15: re-recorded AT THE CLOSE's measured final tree, the chair's decision A (note at the raw budget); was 357_225 (STYLE WAVE) — 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note at the raw budget); was 351_590 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note at the raw budget); was 342_975 (FIX-ARROW-PLAQUE's lane tip) / 342_846 (MERGE-WAVE step 4)
+const CLOSURE_BROTLI_BUDGET_BYTES = 313_994; // 2026-11-19, LASTCLOSE-SIGN: 310_664 -> 313_994 (note at the raw budget); // 2026-11-18, CLOSE-DOORS-1B: 304_224 -> 310_664 (ruling CL3, note at the raw budget); // 2026-11-16, BAR4-CLOSE-DOORS-1: 302_830 -> 304_224 (ruling B3, note at the raw budget); 2026-11-15, BAR3-CLOSE-DOORS-1: 302_753 -> 302_830 (ruling B3, note at the raw budget); 2026-11-15, BAR2-CLOSE-DOORS-1: 302_175 -> 302_753 (ruling B3, note at the raw budget); 2026-11-15, TAIL-CLOSE-DOORS-4: 302_161 -> 302_175 at the final tree (ruling B2, note at the raw budget); 2026-11-15: re-recorded AT THE CLOSE's measured final tree, the chair's decision A (note at the raw budget); was 299_985 (STYLE WAVE) — 2026-11-11: re-recorded AT THE STYLE WAVE's measured final tip (note at the raw budget); was 295_016 (MERGE-TRAIN) — 2026-11-09: re-recorded AT MERGE-TRAIN's measured final tip (note at the raw budget); was 288_470 (FIX-ARROW-PLAQUE's lane tip) / 288_452 (MERGE-WAVE step 4)
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -970,7 +1064,68 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     // point's tip: the base 2053a809c 717,151 · ALLEGIANCE-CAR1 -492 · CAR2 +1,447 · CAR3 0 · WRITE-TITLES-14 0 ·
     // OWNER-WORDS-DOSSIER -4 · the three small lanes 0 · CAR4 +8,351 (the goals, people/goals.js, and the title secrets) · the
     // cures after it 0. Sum: 717,151 - 492 + 1,447 - 4 + 8,351 = 726,453.
-    expect(size).toBeLessThan(726_454);
+    // CEILING 726_454 -> 867_093 (2026-11-15, TAIL-CLOSE-DOORS-2, THE CLOSE's final tree, the joined line at f76fe38fd;
+    // re-recorded under the owner's word of 2026-11-15 07:50 UTC in the chair's chat ("i defer all of hte waiting on me's to you"), by the chair's decision A; vetoable: the engine chunk's ceiling raised to its measured size): measured 867,092 at the final tree by a fresh
+    // `npm run build`, read by this arm (VERIFY_DIST=1); the bound is strict, so the measured figure + 1. Old 726,454, new
+    // 867,093, the difference +140,639. The cause: the round's generator and data growth (the close's generator cures and
+    // the tail lanes' data: the size measure docs/chair/2026-11-15/close/SIZE-BUDGETS-MEASURE.md read 865,589 at its earlier
+    // tree); the trim of sixteen riders (e44d42aaf) moved first-paint modules, not this chunk. Not bisected by merge point at
+    // this pass. VETOABLE: a veto reverts this commit and this arm reads red again.
+    // CEILING 867_093 -> 867_295 (2026-11-15, TAIL-CLOSE-DOORS-4, THE CLOSE's FINAL TREE, after the cure, the presumed pass, the
+    // repair and the worker's ceiling merged and the edge bundles re-derived; re-recorded at the close's final tree under the owner's word of 2026-11-15 07:50 UTC and the chair's decision A (ruling B2); vetoable): measured 867,294 by one
+    // fresh `npm run build`, read by this arm (VERIFY_DIST=1); the bound is strict, so the measured figure + 1. Old 867,093
+    // (measured 867,092 at dfd45489c), the difference +202. The cause by name: the cure of the repeated secret, b778c3f9a in
+    // src/generators/people/castPowers.js (lane/tail-close-secret; the late mint's registry of secrets answers for the form the
+    // secret will carry), the same +202 the worker bundle's attribution names; the repair's two engine files are format and
+    // types only (stressFactions.js imports unpacked, candidateEvents.js any-holes typed): no byte. VETOABLE: a veto reverts this
+    // commit and this arm reads red again.
+    // CEILING 867_295 -> 872_758 (2026-11-15, BAR2-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR2, the joined line 59185b62a + the
+    // sweep-a repair 87bbb6c87, the edge bundles re-derived; re-recorded ONCE under the chair's ruling B3, the owner's word of
+    // 2026-11-15 07:50 UTC deferring the size budgets to the chair, the chair's decision A; vetoable): measured 872,757 by one fresh
+    // `npm run build`, read by this arm (VERIFY_DIST=1); the bound is strict, so the measured figure + 1. Old 867,295 (the line's
+    // closed tip 74ded1800 measured 867,294, built the same way), the difference +5,463. The cause: the src/ cures of the round's
+    // five branches AS A WHOLE (lane/bar2-corpus, -services, -places, -people, -labels), with the chunk's MEMBERSHIP moved: two
+    // modules now route into the eager engine core (src/domain/display/foodBalanceBar.js, src/domain/facts/presence.js) and three
+    // are excised from the engine's shared domain (labels' one line of vite.config.js: display/magicProvisionShown.js,
+    // facts/magicSource.js; sweep-a's facts/ironAtHand.js: magicProvisionShown moved out of tradeListDisplay -4,925 into
+    // coherence-lazy +6,699). VETOABLE: a veto reverts this commit and this arm reads red again.
+    // CEILING 872_758 -> 878_205 (2026-11-15, BAR3-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR3 (the joined line 98363cb84 + the sweep-a repair through 03abf16cd, merged 1ac74a4c0; the edge bundles re-derived 9d7c7fbc5 and holding after the last merge);
+    // re-recorded ONCE under the chair's ruling B3, the owner's word of 2026-11-15 07:50 UTC deferring the size budgets to the
+    // chair; vetoable): measured 878,204 by one fresh `npm run build`, read by this arm (VERIFY_DIST=1); the bound is strict, so
+    // the measured figure + 1. Old 872,758 (the line's closed tip 83fc14ad6 measured 872,757, built the same way), the difference
+    // +5,447. The cause: the src/ cures of the round's seven branches AS A WHOLE (corpus, services, places, labels, defecon,
+    // people, powers) and the sweep seat's display leaf; the sweep seat's chunking cure (03abf16cd) moves no byte of this chunk
+    // (878,204 before it and after). VETOABLE: a veto reverts this commit and this arm reads red again.
+    // CEILING 878_205 -> 878_554 (2026-11-16, BAR3-CLOSE-DOORS-2, THE CLOSE OF THE ROUND BAR3, Part 2's seat, after the merge of
+    // lane/bar3-close-sweep-b-2026-11-16 at f319ee76e (b46b26d92) and the edge bundles re-derived (96f138f87); re-recorded ONCE under the
+    // chair's ruling B3, the owner's word of 2026-11-15 07:50 UTC deferring the size budgets to the chair; vetoable): measured 878,553 by
+    // one fresh `npm run build`, read by this arm (VERIFY_DIST=1); the bound is strict, so the measured figure + 1. The difference +348.
+    // The cause: BAR3-CLOSE-SWEEP-B's src/ cures (a 5bb670f5a history's native roster; c 1a5ee3639 + 23d590668 the section regen keeps the
+    // born quarrels; d efdb3841d; f ef1e2a8c9 the leaf split): the merge commit b46b26d92 alone, built the same way, reads 878,553 too
+    // (the sweep's own measure). VETOABLE: a veto reverts this commit and this arm reads red again.
+    // CEILING 878_554 -> 881_331 (2026-11-16, BAR4-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR4, after THE ONE MERGE of 600b7683a,
+    // merged abf643259, the edge bundles re-derived e8852a5b5; re-recorded ONCE under the chair's ruling B3, the owner's word of
+    // 2026-11-15 07:50 UTC deferring the size budgets to the chair; vetoable): measured 881,330 by one fresh `npm run build`, read by
+    // this arm (VERIFY_DIST=1); the bound is strict, so the measured figure + 1. The difference +2,777 (c4ac1ef84a, built the same way,
+    // reads 878,553). The cause, the round's branches AS A WHOLE; the largest by their hand-backs' own measures: BAR4-PEOPLE +2,315
+    // (the tie draw's pair readings and the title lines), BAR4-SAFETY +1,854 (safetyLineTruth, guardPay, conflicts, rulingStructure),
+    // BAR4-HISTORY +578 (the twins, the place and the legitimacy readings); the joined f19c3b28b read 882,001, BAR4-SCENES-2 882,000,
+    // BAR4-FIRSTPAINT 881,999, and the repair seat's last cures -669. VETOABLE: a veto reverts this commit and this arm reads red again.
+    // CEILING 881_331 -> 904_174 (2026-11-18, CLOSE-DOORS-1B, THE CLOSE OF 2026-11-18, after the close's three merges, merged 7a7204c00;
+    // re-recorded ONCE under the chair's ruling CL3, the owner's word of 2026-11-18 03:03:46 UTC; vetoable): measured 904,173 by one
+    // fresh `npm run build`, read by this arm (VERIFY_DIST=1); the bound is strict, so the measured figure + 1. The difference +22,843
+    // (6483322cc and 600b7683a, built the same way, read 881,330). THE CAUSE, MEASURED BY ROUND (one build of each boundary): SECRETS-1
+    // and DEBT-1 (JOIN-17 points 30 to 32) +8,731; BIRTH-3 and the sixth chair's points 36 to 53 (33 to 53) +5,416; BAR7 (points 20 to
+    // 29) +3,915; then BAR6 (1 to 11) +2,334, BAR5 (JOIN-16 1 to 9) +2,267, the seam (12 to 19) +180; the close's merges +0.
+    // CEILING 904_174 -> 909_928 (2026-11-19, LASTCLOSE-SIGN, THE LAST CLOSE BEFORE THE DEPLOY, after LASTCLOSE-DOORS (point 71) and
+    // the edge bundles re-derived (319d75ac1); re-recorded ONCE, a rise under 60,000 B, the seat's by the brief; vetoable): measured
+    // 909,927 by one fresh `npm run build`, read by this arm (VERIFY_DIST=1); the bound is strict, so the measured figure + 1. The
+    // difference +5,754 (0dee69e17, built the same way, reads 904,173). THE CAUSE, BY LANDING STEP (one build at each): K-WATCH,
+    // K-POWERS, K-WATCH-2 (48, 49, 57) +2,942; LAST-DECLARE (69) +1,150; FAULTS-PEOPLE (62) +1,026; MARKS-2 (56) +587; K-PEOPLE, PEOPLE-2
+    // (50, 58) +284; FAULTS-WATCH (66) +275; FAULTS-ROWS (65) +243; LAST-VARIETY (70) +157; FAULTS-NEED (61) +102; FAULTS-BIRTH's
+    // follow-ups (68) +74; FAULTS-BIRTH (63) +72; FR25 (67) +64; J-INCOME-2 (54) -1,222 (the rites' reader retired); the desks, PDF-2b,
+    // FAULTS-TOOLS, FAULTS-DESKS and point 71 +0.
+    expect(size).toBeLessThan(909_928);
   });
 
   // ── T13 TRANS: the transcendental kernel's CHUNK PLACEMENT ───────────────
@@ -1908,9 +2063,9 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 // ratification histories above each constant are the record of what that costs.
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
-    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_121_260); // STYLE-2-MERGE-7 closing act 7, 2026-11-11 (note at the constant: every byte by merge point); MERGE-TRAIN 1_104_215 before; MERGE-TRAIN, 2026-11-09 (note at the constant: every byte by car); FIX-ARROW-PLAQUE 1_075_758 before; (note at the constant); MERGE-WAVE step 4 1_075_589 / FIX-ARROW-SECTIONS 1_072_604 before
-    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(357_225); // STYLE-2-MERGE-7 closing act 7, 2026-11-11; MERGE-TRAIN 351_590 before; MERGE-TRAIN, 2026-11-09; FIX-ARROW-PLAQUE 342_975 before;; MERGE-WAVE step 4 342_846 before
-    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(299_985); // STYLE-2-MERGE-7 closing act 7, 2026-11-11; MERGE-TRAIN 295_016 before; MERGE-TRAIN, 2026-11-09; FIX-ARROW-PLAQUE 288_470 before;; MERGE-WAVE step 4 288_452 before
+    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_175_492); // LASTCLOSE-SIGN, 2026-11-19: 1_163_565 before; CLOSE-DOORS-1B, 2026-11-18, ruling CL3: 1_139_072 before; BAR4-CLOSE-DOORS-1, 2026-11-16, ruling B3: 1_132_308 before; BAR3-CLOSE-DOORS-1, 2026-11-15, ruling B3: 1_131_667 before; BAR2-CLOSE-DOORS-1, 2026-11-15, ruling B3: 1_130_209 before; TAIL-CLOSE-DOORS-2, 2026-11-15, the close's final tree, the owner's word of 07:50 UTC by the chair's decision A (note at the constant); STYLE-2-MERGE-7 1_121_260 before; STYLE-2-MERGE-7 closing act 7, 2026-11-11 (note at the constant: every byte by merge point); MERGE-TRAIN 1_104_215 before; MERGE-TRAIN, 2026-11-09 (note at the constant: every byte by car); FIX-ARROW-PLAQUE 1_075_758 before; (note at the constant); MERGE-WAVE step 4 1_075_589 / FIX-ARROW-SECTIONS 1_072_604 before
+    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(373_999); // LASTCLOSE-SIGN, 2026-11-19: 370_414 before; CLOSE-DOORS-1B, 2026-11-18, ruling CL3: 362_621 before; BAR4-CLOSE-DOORS-1, 2026-11-16, ruling B3: 360_756 before; BAR3-CLOSE-DOORS-2, 2026-11-16, ruling B3: 360_742 before; BAR3-CLOSE-DOORS-1, 2026-11-15, ruling B3: 360_516 before; BAR2-CLOSE-DOORS-1, 2026-11-15, ruling B3: 360_054 before; TAIL-CLOSE-DOORS-4, 2026-11-15, ruling B2: 360_052 before; TAIL-CLOSE-DOORS-2, 2026-11-15, the chair's decision A; STYLE-2-MERGE-7 357_225 before; STYLE-2-MERGE-7 closing act 7, 2026-11-11; MERGE-TRAIN 351_590 before; MERGE-TRAIN, 2026-11-09; FIX-ARROW-PLAQUE 342_975 before;; MERGE-WAVE step 4 342_846 before
+    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(313_994); // LASTCLOSE-SIGN, 2026-11-19: 310_664 before; CLOSE-DOORS-1B, 2026-11-18, ruling CL3: 304_224 before; BAR4-CLOSE-DOORS-1, 2026-11-16, ruling B3: 302_830 before; BAR3-CLOSE-DOORS-1, 2026-11-15, ruling B3: 302_753 before; BAR2-CLOSE-DOORS-1, 2026-11-15, ruling B3: 302_175 before; TAIL-CLOSE-DOORS-4, 2026-11-15, ruling B2: 302_161 before; TAIL-CLOSE-DOORS-2, 2026-11-15, the chair's decision A; STYLE-2-MERGE-7 299_985 before; STYLE-2-MERGE-7 closing act 7, 2026-11-11; MERGE-TRAIN 295_016 before; MERGE-TRAIN, 2026-11-09; FIX-ARROW-PLAQUE 288_470 before;; MERGE-WAVE step 4 288_452 before
 
     // ⭐ THE SETTLEMENT-EDITOR TRAIN'S SUMMED FIRST-PAINT PRICE, recorded by the member that
     // holds this file's row. The three budgets above are unmoved because the train's MEMBERSHIP

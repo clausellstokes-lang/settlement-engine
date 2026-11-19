@@ -1,0 +1,46 @@
+commit 8f222ff8776507ae073b0bf41b9078cabf6e7d4b
+subject join(JOIN-1 · 5): merge lane/w2-fix-data-2026-11-13 at 166d8b789
+parents bea2a1298046cd4eef98b45ae69ea24b2eb92386 166d8b789f8dacd35810c79bd86b23eae954c69f
+
+diff --git a/scripts/lib/table-pools.mjs b/scripts/lib/table-pools.mjs
+remerge CONFLICT (content): Merge conflict in scripts/lib/table-pools.mjs
+index 99a2a4c2a..4173e5f2d 100644
+--- a/scripts/lib/table-pools.mjs
++++ b/scripts/lib/table-pools.mjs
+@@ -116,12 +116,9 @@ export const NOT_TABLE_CHANNELS = Object.freeze({
+   DOSSIER_CONNECTIVE_DECLARATIONS: 'a list PARALLEL to each connective list, read by position (CENSUS-1h unit 7); the connectives are state-corpus joints, not an enrolled table',
+   FIELD_DECLARATIONS: 'the edit cards\' field declarations (domain/edit), not prose',
+   TENSION_TEMPLATE_DECLARATIONS: 'keyed by the tension template\'s TYPE beside the selection (CENSUS-1g unit 4); the history templates are not an enrolled table',
+-<<<<<<< bea2a1298 (join(JOIN-1 · 4): merge lane/powers-follow-up-2026-11-13 at 3909655c3)
+   TITLE_LINE_DECLARATIONS: 'the card titles\' secret and presentation lines, keyed by SURFACE then text (COHERENCE-POWERS-7 D, POWERS-9: water needs and the governed content topics), read by people/poolMap.js :: settleTitleLines; the title tables (TITLE_SECRETS, TITLE_PRESENTATIONS) are not an enrolled table',
+-=======
+   // W2-FIX-DATA-6, by the same ruling's test: no row of it prints (a template's needs / excludes / timeline flag, no text);
+   // keyed by TYPE like TENSION_TEMPLATE_DECLARATIONS, and the templates' printed text is not an enrolled table.
+   HISTORY_TEMPLATE_RECORD_DECLARATIONS: 'keyed by the history template\'s TYPE beside the selection (W2-FIX-DATA-2 dde3b1277, W2-FIX-DATA-5 dabdb6061): declarations only, no row of it prints; the history templates are not an enrolled table',
+   HISTORY_DESC_SIBLINGS: 'keyed by a history template\'s raw description text, resolved at the timeline\'s and the tension\'s print (W2-FIX-DATA-5, ROUND-3-CUT #331); the history templates are not an enrolled table',
+->>>>>>> 166d8b789 (chore(W2-FIX-DATA-10): the page census's three falls lowered by its shrink form, the 720 and the grid (section 2m))
+ });
+diff --git a/tests/domain/facts/textOf.test.js b/tests/domain/facts/textOf.test.js
+remerge CONFLICT (content): Merge conflict in tests/domain/facts/textOf.test.js
+index d4deba4e7..b5ad8b90d 100644
+--- a/tests/domain/facts/textOf.test.js
++++ b/tests/domain/facts/textOf.test.js
+@@ -28,18 +28,7 @@ describe('textOf', () => {
+     expect(rows.every((r) => typeof textOf(r) === 'function' || typeof textOf(r) === 'string')).toBe(true);
+     // 86 → 92 by cause: CENSUS-2f unit 2 (R-AP) declared the fish key's three bare lines and the faith key's bell, incense and hymn;
+     // 92 → 99: CENSUS-2f unit 7 — fish.dominant[1] declares `fish` (R-AP amended) and six read bare lines are marked colour (R-AO)
+-<<<<<<< bea2a1298 (join(JOIN-1 · 4): merge lane/powers-follow-up-2026-11-13 at 3909655c3)
+     // 99 → 105: R2-CODE-A item 4 — the port scene's four harbour rows declare `docks` and two shore rows (`coast`) join them
+     expect(rows.filter((r) => typeof r === 'object').length).toBe(105);
+-=======
+-    // 99 → 101: W2-FIX-DATA (the REVIEW-W2B cold list) — the smiths' ironwork carts (siege) and the arabic water for travellers (siege) declare
+-    // 101 → 105: W2-FIX-DATA-3 (REVIEW-W2A-3 #366, #2) — the smiths' three bare dominant lines ("Forge smoke hangs …",
+-    // "The hammering echoes through all of …", "… lives by its forges …") declare `tier: ≥ town` (fb48fb8bc), and the
+-    // mesoamerican craftspeople row ("Craftspeople sit in rows …") declares `market` (c0f8dd279); re-keyed by W2-FIX-DATA-6
+-    // 105 → 109: W2-FIX-DATA-HISTORY item F (9d952d02b; ROUND-3-CUT-INCREMENT ww-541, CENSUS-2) — the east-asian lanes of trades
+-    // (tier: ≥ town), the tea for a merchant and the oath on the scales (market), and the timber planks waiting for carts
+-    // (no crisis: under_siege) were bare; each declares now (re-keyed by identity with its cause).
+-    expect(rows.filter((r) => typeof r === 'object').length).toBe(109);
+->>>>>>> 166d8b789 (chore(W2-FIX-DATA-10): the page census's three falls lowered by its shrink form, the 720 and the grid (section 2m))
+   });
+ });

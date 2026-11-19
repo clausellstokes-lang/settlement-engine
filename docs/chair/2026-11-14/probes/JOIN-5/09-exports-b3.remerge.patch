@@ -1,0 +1,14 @@
+commit f4bb5f70c3fa89a47f49e3f40eee370b287637a9
+Merge: 96cfd68a7 a6dc3d16d
+Author: Claude <noreply@anthropic.com>
+Date:   Sat Nov 14 16:18:01 2026 +0000
+
+    join(JOIN-5 · 9): merge lane/exports-b3-2026-11-14 at a6dc3d16d — the third landing
+    
+    Tip read back from origin at 16:17 UTC: a6dc3d16d324f6a935a8d78853fb08bfd0dce41b
+    (not landed before; merge base c66333f0c, on join-surfaces' line).
+    No conflict; nothing moved by both sides.
+    Verify: 11 files changed, each equal to the lane's blob.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYazSdYC8v2Fj1WVnzT

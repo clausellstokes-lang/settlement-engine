@@ -1,0 +1,313 @@
+[
+ {
+  "id": "C18905",
+  "rule": "9g.subsistence",
+  "verdict": "STANDS",
+  "town": "bar0-hamlet-calm-rand-43",
+  "result": "found",
+  "text": "The hamlet is plainly past subsistence."
+ },
+ {
+  "id": "C41011",
+  "rule": "9g.food",
+  "verdict": "STANDS",
+  "town": "bar0-town-occupied-rand-44",
+  "result": "found",
+  "text": "Traders seldom reach Castelsinum, and people there seldom miss them: the town has more tha"
+ },
+ {
+  "id": "C15153",
+  "rule": "9g.margin",
+  "verdict": "STANDS",
+  "town": "bar0-city-wartime-rand-43",
+  "result": "found",
+  "text": "Quirigich closes every year ahead."
+ },
+ {
+  "id": "C41850",
+  "rule": "9g.source",
+  "verdict": "STANDS",
+  "town": "bar0-village-calm-rand-42",
+  "result": "found",
+  "text": "Lykopetra's own food comes first of all from its fishing, so one bad year for the fishing "
+ },
+ {
+  "id": "C20830",
+  "rule": "9h.no-exports",
+  "verdict": "STANDS",
+  "town": "bar0-hamlet-under_siege-rand-44",
+  "result": "found",
+  "text": "No significant exports."
+ },
+ {
+  "id": "C32912",
+  "rule": "9h.entrepot",
+  "verdict": "STANDS",
+  "town": "bar0-thorp-calm-rand-44",
+  "result": "found",
+  "text": "Shattserai sells on goods it never made: some of what leaves the thorp entered it as impor"
+ },
+ {
+  "id": "C23038",
+  "rule": "9i.crews",
+  "verdict": "STANDS",
+  "town": "bar0-metropolis-calm-rand-42",
+  "result": "found",
+  "text": "Rival crews at Bjornli are fighting over who runs the streets, and until one wins, people "
+ },
+ {
+  "id": "C39691",
+  "rule": "9i.crews",
+  "verdict": "STANDS",
+  "town": "bar0-town-occupied-rand-43",
+  "result": "found",
+  "text": "Rival crews at Gangapalli are fighting over who runs the streets, and until one wins, peop"
+ },
+ {
+  "id": "C5430",
+  "rule": "9a.order",
+  "verdict": "STANDS",
+  "town": "bar0-city-under_siege+famine-rand-43",
+  "result": "found",
+  "text": "The garrison keeps order, and more harshly as the food runs down."
+ },
+ {
+  "id": "C40850",
+  "rule": "7x.occupied-seat",
+  "verdict": "STANDS",
+  "town": "bar0-town-occupied-rand-44",
+  "result": "found",
+  "text": "At Castelsinum one audience with the Feudal Appointee gets a decision, good or bad, and it"
+ },
+ {
+  "id": "C19351",
+  "rule": "10i.pair",
+  "verdict": "STANDS",
+  "town": "bar0-hamlet-calm-rand-44",
+  "result": "found",
+  "text": "Nessa Lynch and Sorcha MacDonald are allies with separate interests."
+ },
+ {
+  "id": "C16768",
+  "rule": "6e.no-higher",
+  "verdict": "STANDS",
+  "town": "bar0-city-wartime-rand-44",
+  "result": "found",
+  "text": "Wants Satisfy the crown requisition order without stripping the settlement to the bone"
+ },
+ {
+  "id": "C25601",
+  "rule": "5x.slash",
+  "verdict": "STANDS",
+  "town": "bar0-metropolis-calm-rand-43",
+  "result": "found",
+  "text": "Jómsmo's Weavers/Textile workers can offer less the longer its supplies stay short, and no"
+ },
+ {
+  "id": "C0350",
+  "rule": "design.outside",
+  "verdict": "EXPLAINED",
+  "town": "bar0-city-under_siege+famine-rand-42",
+  "result": "clean",
+  "text": "The crops failed here this year, and what food can still be bought from outside costs more"
+ },
+ {
+  "id": "C0351",
+  "rule": "design.outside",
+  "verdict": "EXPLAINED",
+  "town": "bar0-city-under_siege+famine-rand-42",
+  "result": "clean",
+  "text": "The settlement must decide what it can still afford to import, and the merchants are watch"
+ },
+ {
+  "id": "C7307",
+  "rule": "design.outside",
+  "verdict": "EXPLAINED",
+  "town": "bar0-city-under_siege+famine-rand-44",
+  "result": "clean",
+  "text": "One importer now brings in all the grain and has quadrupled the price; the locals are argu"
+ },
+ {
+  "id": "C7309",
+  "rule": "design.outside",
+  "verdict": "EXPLAINED",
+  "town": "bar0-city-under_siege+famine-rand-44",
+  "result": "clean",
+  "text": "The fishing failed here this year, and what food can still be bought from outside costs mo"
+ },
+ {
+  "id": "C33342",
+  "rule": "design.outside",
+  "verdict": "EXPLAINED",
+  "town": "bar0-town-calm-rand-42",
+  "result": "clean",
+  "text": "One importer now brings in all the grain and has quadrupled the price; the locals are argu"
+ },
+ {
+  "id": "C45848",
+  "rule": "design.outside",
+  "verdict": "EXPLAINED",
+  "town": "bar0-village-famine-rand-44",
+  "result": "clean",
+  "text": "One importer now brings in all the grain and has quadrupled the price; the locals are argu"
+ },
+ {
+  "id": "C18116",
+  "rule": "-",
+  "verdict": "EXPLAINED",
+  "town": "bar0-hamlet-calm-rand-42",
+  "result": "clean",
+  "text": "A dispute over grazing rights and water access has run for two seasons, and the families o"
+ },
+ {
+  "id": "C18655",
+  "rule": "-",
+  "verdict": "EXPLAINED",
+  "town": "bar0-hamlet-calm-rand-43",
+  "result": "clean",
+  "text": "A dispute over grazing rights and water access has run for two seasons, and the families o"
+ },
+ {
+  "id": "C19016",
+  "rule": "10i.pair",
+  "verdict": "EXPLAINED",
+  "town": "bar0-hamlet-calm-rand-44",
+  "result": "clean",
+  "text": "Refusing would cost the alliance its majority."
+ },
+ {
+  "id": "C35191",
+  "rule": "-",
+  "verdict": "EXPLAINED",
+  "town": "bar0-town-calm-rand-43",
+  "result": "clean",
+  "text": "Craftspeople at Cerroripa answer to their guilds and the guilds settle their quarrels amon"
+ },
+ {
+  "id": "C46532",
+  "rule": "-",
+  "verdict": "EXPLAINED",
+  "town": "bar0-village-famine-rand-44",
+  "result": "clean",
+  "text": "Priests and mages in Kamenvich share authority: the church blesses the mages' work, and th"
+ },
+ {
+  "id": "C24744",
+  "rule": "-",
+  "verdict": "EXPLAINED",
+  "town": "bar0-metropolis-calm-rand-43",
+  "result": "clean",
+  "text": "The road into Jómsmo becomes part of the settlement at a point you can't precisely identif"
+ },
+ {
+  "id": "C31302",
+  "rule": "10i.pair",
+  "verdict": "EXPLAINED",
+  "town": "bar0-metropolis-calm-rand-44",
+  "result": "clean",
+  "text": "NPC Relationships (87)▲"
+ },
+ {
+  "id": "C9756",
+  "rule": "-",
+  "verdict": "EXPLAINED",
+  "town": "bar0-city-wartime-rand-42",
+  "result": "clean",
+  "text": "Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's bles"
+ },
+ {
+  "id": "C12371",
+  "rule": "9g.margin",
+  "verdict": "EXPLAINED",
+  "town": "bar0-city-wartime-rand-42",
+  "result": "clean",
+  "text": "Plavigorod closes every year ahead."
+ },
+ {
+  "id": "C27960",
+  "rule": "9g.margin",
+  "verdict": "EXPLAINED",
+  "town": "bar0-metropolis-calm-rand-43",
+  "result": "clean",
+  "text": "Jómsmo closes every year ahead."
+ },
+ {
+  "id": "C36932",
+  "rule": "-",
+  "verdict": "WEAK",
+  "town": "bar0-town-calm-rand-44",
+  "result": "not found",
+  "text": "It is noticed, and so far it does little harm."
+ },
+ {
+  "id": "C11472",
+  "rule": "-",
+  "verdict": "WEAK",
+  "town": "bar0-city-wartime-rand-42",
+  "result": "not found",
+  "text": "Secret: Lied about the death of a prisoner who died in the cells after a beating ordered f"
+ },
+ {
+  "id": "C211337",
+  "rule": "9h.no-exports-record",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C217617",
+  "rule": "9h.no-exports-record",
+  "verdict": "STANDS",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C93420",
+  "rule": "9h.no-exports",
+  "verdict": "BOTH",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C61967",
+  "rule": "9g.margin",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C58141",
+  "rule": "9g.margin",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C48148",
+  "rule": "6e.crown",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C48270",
+  "rule": "6e.crown",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C48442",
+  "rule": "6e.crown",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ },
+ {
+  "id": "C24588",
+  "rule": "low.generation",
+  "verdict": "EXPLAINED",
+  "result": "n/a",
+  "text": "town not in this render"
+ }
+]

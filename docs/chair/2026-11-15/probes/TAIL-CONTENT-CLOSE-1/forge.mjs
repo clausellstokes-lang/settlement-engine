@@ -1,0 +1,12 @@
+const W = process.argv[2];
+const sh = await import(W + '/tests/lint/presumedThings.shared.mjs');
+const { generateSettlementPipeline } = await import(W + '/src/generators/generateSettlementPipeline.js');
+const { loadGenerationLawPayloads } = await import(W + '/src/domain/density/densityCreateBoundary.js');
+const { factsOf } = await import(W + '/src/domain/facts/factsOf.js');
+await loadGenerationLawPayloads();
+const s = generateSettlementPipeline({ ...sh.corpusConfig('town') }, null, { seed: 'presume-town-25', customContent: {} });
+const f = factsOf(s);
+console.log('hasInstitution smith', f.hasInstitution?.('smith'), typeof f.hasInstitution);
+console.log('pressure:', s.pressureSentence?.slice(0, 120));
+console.log('npcs smith', (s.npcs||[]).filter(n=>/smith|forge/i.test((n.role||'')+(n.occupation||''))).map(n=>n.role||n.occupation));
+console.log('inst', (s.institutions||[]).map(i=>i.name).join('; '));

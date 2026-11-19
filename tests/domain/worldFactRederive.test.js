@@ -155,6 +155,12 @@ const CULTURE_READERS = Object.freeze([
   'src/generators/computeActiveChains.js',
   'src/generators/demandProfile.js',
   'src/generators/economy/foodBalance.js',
+  // 2026-11-18 (CLOSE-SWEEP S4 item 1; DEBT-1 part C 4f57f0c46, JOIN-17 point 31): economy/foodBaseNumbers.js JOINED the set
+  // through the word "agriculture" (`agricultureCapacity`, in grownShareOf's doc), its hunk moved verbatim out of
+  // foodBalance.js under the line ceiling; it reads no culture (the foodLand.js precedent: reported, not filtered).
+  // foodBalance.js stays a reader ("agriculture" in its own code). The re-derive runs the whole pipeline, which calls both
+  // moved readers through foodBalance.js's re-export (foodGenerator.js, foodBalance.js).
+  'src/generators/economy/foodBaseNumbers.js',
   // 2026-11-09 (STYLE-2 SW-7, 6f340466f): economy/prosperity.js LEFT the set. It was a "reader" only through the word
   // "agriculture" in one situation line ("efficient agriculture"), which the A2 rewrite replaced; it reads no culture.
   'src/generators/foodGenerator.js',
@@ -177,6 +183,10 @@ const CULTURE_READERS = Object.freeze([
   // "culture's" in one comment line beside the superseded foodways path; it reads no culture (the pipeline.js precedent:
   // reported, not filtered). Red on the lane's own tip 9ee7df1ba.
   'src/generators/recordBatteryFindings.js',
+  // 2026-11-11 (COHERENCE-AGREE): resourceGenerator.js JOINED the set through the word "Agriculture", the riverside
+  // terrain's strength as TERRAIN_DATA spells it, now a key of STRENGTH_SUPPORT; it reads no culture (the foodLand.js
+  // precedent: reported, not filtered).
+  'src/generators/resourceGenerator.js',
   'src/generators/steps/assembleSettlement.js',
   'src/generators/steps/buildGenerationContext.js',
   'src/generators/steps/economyReconcilePass.js',
@@ -542,15 +552,40 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // Record 46 of the style wave's merge, the coherence-powers merge over the integration branch (2026-11-13-style-2-merge-46-coherence-powers.json), from the stage at 6aeaa4154:
     // the generator master 083542bb.. -> 5ef18089.. (393 of 525 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('5ef18089839047b430fc851614b49210ac01988cbf19a1a6cd42f5bcc30b0256');
+    // Record 47 of the style wave's merge, the coherence-agree merge over the integration branch (2026-11-13-style-2-merge-47-coherence-agree.json), from the stage at 9e2ae9035:
+    // the generator master 5ef18089.. -> 7b7089fd.. (525 of 525 rows).
+    // The close of the tail round (2026-11-15-the-close-of-the-tail-round.json, TAIL-CLOSE-DOORS-3), at the line's final tree (f76fe38fd; the doors at 752d74a15):
+    // the generator master 7b7089fd.. -> e74b9398.. (525 of 525 rows).
+    // The close of the round BAR2 (2026-11-15-the-close-of-the-round-bar2.json, BAR2-CLOSE-DOORS-2), at the joined line's 1011a8a91:
+    // the generator master e74b9398.. -> 9fab7487.. (418 of 525 rows; the five builder branches' declared text cures).
+    // The close of the round BAR3 (2026-11-16-the-close-of-the-round-bar3.json, BAR3-CLOSE-DOORS-2), at the doors' branch over fb59da43e and the second
+    // repair seat's merge (b46b26d92): the generator master 9fab7487.. -> 6adede0d.. (521 of 525 rows; the round's declared text cures).
+    // The close of the round BAR4 (2026-11-16-the-close-of-the-round-bar4.json, BAR4-CLOSE-DOORS-2), at the doors' branch e942f648 (it holds
+    // Part 1's final tip 6483322cc): the generator master 6adede0d.. -> 03f9688f.. (390 of 525 rows; the round's declared cures, 1581ed12).
+    // The close of the rounds BAR5 to BAR8 (2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json, CLOSE-DOORS-2), at the doors' branch 2f4eb8acf (it
+    // holds Part 1's final tip 0af60594a): the generator master 03f9688f.. -> d08ae44c.. (485 of 525 rows; the rounds' declared cures, b3cfdbcc3).
+    // The last close before the deploy (2026-11-18-the-last-close-points-54-to-70.json, LASTCLOSE-SIGN), at lane/lastclose-sign-2026-11-18 over the
+    // landings' tip cc11c9504 (points 54 to 70): the generator master d08ae44c.. -> 079bfce6.. (222 of 525 rows; the points' declared cures, a7a25bd39).
+      .toBe('079bfce6d67fa99cfdd9a52f81d3c4dd1070390a1e8f8073795f39d5d0aa05c7');
     // Record 9, the composed-prose manifest signed ONCE at the wave's final tip (2026-11-08-merge-wave-9-composed-prose-
     // manifest.json), from the stage at 0c93f0ca0: the prose manifest f2d3410b.. -> 7bdc431e.. (1,050 of 1,050 rows).
     // Record 10 of the train, the composed-prose manifest signed ONCE at the train's final tip (2026-11-09-merge-train-10-
     // composed-prose-manifest.json), from the stage at 09c4435e0: the prose manifest 7bdc431e.. -> 083c8dd7.. (181 of 1,050 rows).
     // Closing act 2 of the style wave's merge, the composed-prose manifest signed ONCE at the final tip (2026-11-11-style-2-merge-
     // closing-2-composed-prose-manifest.json), from the stage at a3ea0d325: the prose manifest 083c8dd7.. -> 3b9ee8b6.. (1,050 of 1,050 rows).
+    // The close of the round BAR2 (2026-11-15-the-close-of-the-round-bar2.json, BAR2-CLOSE-DOORS-2), at the joined line's 1011a8a91, the
+    // surface left pending at the close of the tail round: the prose manifest 3b9ee8b6.. -> 551a5f5d.. (1,050 of 1,050 rows).
+    // The close of the round BAR3 (2026-11-16-the-close-of-the-round-bar3.json, BAR3-CLOSE-DOORS-2), at the doors' branch over fb59da43e and the
+    // second repair seat's merge: the prose manifest 551a5f5d.. -> be43267f.. (544 of 1,050 rows; the round's declared rewordings).
+    // The close of the round BAR4 (2026-11-16-the-close-of-the-round-bar4.json, BAR4-CLOSE-DOORS-2), at the doors' branch over Part 1's final tip
+    // 6483322cc, after the golden master and the fence: the prose manifest be43267f.. -> 99c8150a.. (734 of 1,050 rows; the round's declared cures).
+    // The close of the rounds BAR5 to BAR8 (2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json, CLOSE-DOORS-2), at the doors' branch over Part 1's
+    // final tip 0af60594a, after the golden master and the fence: the prose manifest 99c8150a.. -> b0ec7651.. (704 of 1,050 rows; the rounds' declared cures).
+    // The last close before the deploy (2026-11-18-the-last-close-points-54-to-70.json, LASTCLOSE-SIGN), on its branch over the landings' tip
+    // cc11c9504, after the golden master and the fence: the prose manifest b0ec7651.. -> e4f5a46b.. (832 of 1,050 rows; the points' declared cures,
+    // and the recorder's provenance moved by DESKS-2's A2).
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('3b9ee8b68fbe36183170cf0f6f1204a455c3c04abee124e6867f23e41601e2d7');
+      .toBe('e4f5a46b18e3b4f6025f5f6c9d7268f48f9984c42faddc576c3dae2ec36b96d1');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

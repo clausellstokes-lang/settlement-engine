@@ -1,0 +1,153 @@
+  4 == foundry == replace [cold-thorp-177.txt]
+     - - **Readiness:** Lightly Defended
+     + - **Readiness:** Vulnerable
+  1 == foundry == replace [cold-thorp-177.txt]
+     - *Lightly defended: no walls; the household levy is all that stands guard.*
+     + *Vulnerable: no walls; the household levy is all that stands guard.*
+  1 == foundry == replace [cold-thorp-70.txt]
+     - *Vulnerable: a palisade, held by the household levy.*
+     + *Undefended: a palisade, held by the household levy.*
+  1 == foundry == replace [cold-thorp-70.txt]
+     - - **Readiness:** Vulnerable
+     + - **Readiness:** Undefended
+  1 == foundry == replace [cold-wartime-thorp-34.txt]
+     - *Lightly defended: a palisade, held by the household levy.*
+     + *Vulnerable: a palisade, held by the household levy.*
+  1 == foundry == replace [fresh5-thorp-18.txt]
+     - *Lightly defended: a palisade, and no one trained to hold it.*
+     + *Vulnerable: a palisade, and no one trained to hold it.*
+  1 == foundry == replace [fresh6-hamlet-14.txt]
+     - *Lightly defended: no walls and no one under arms.*
+     + *Vulnerable: no walls and no one under arms.*
+ 20 == pdf == replace [cold-famine-hamlet-13.txt]
+     - #/#
+     + #/#
+ 16 == pdf == replace [cold-famine-hamlet-13.txt]
+     - Weak
+     + Critical
+  4 == pdf == replace [cold-thorp-177.txt]
+     - Defense: Lightly Defended
+     + Defense: Vulnerable
+  4 == pdf == replace [cold-thorp-177.txt]
+     - Lightly defended
+     + Vulnerable
+  2 == pdf == replace [cold-thorp-70.txt]
+     - #
+     + #
+  2 == pdf == replace [cold-thorp-70.txt]
+     - -# Defense
+     + -# Defense
+  1 == pdf == replace [cold-thorp-104.txt]
+     - Adequate
+     + Weak
+  1 == pdf == replace [cold-thorp-177.txt]
+     - Lightly defended: no walls; the household levy is all that stands guard.
+     + Vulnerable: no walls; the household levy is all that stands guard.
+  1 == pdf == replace [cold-thorp-70.txt]
+     - Defense: Vulnerable
+     + Defense: Undefended
+  1 == pdf == replace [cold-thorp-70.txt]
+     - Vulnerable: a palisade, held by the household levy.
+     + Undefended: a palisade, held by the household levy.
+  1 == pdf == replace [cold-thorp-70.txt]
+     - Vulnerable
+     + Undefended
+  1 == pdf == replace [cold-wartime-thorp-34.txt]
+     - Lightly defended: a palisade, held by the household levy.
+     + Vulnerable: a palisade, held by the household levy.
+  1 == pdf == replace [fresh5-thorp-18.txt]
+     - Lightly defended: a palisade, and no one trained to hold it.
+     + Vulnerable: a palisade, and no one trained to hold it.
+  1 == pdf == replace [fresh6-hamlet-14.txt]
+     - Lightly defended: no walls and no one under arms.
+     + Vulnerable: no walls and no one under arms.
+ 16 == tab:defense == replace [cold-famine-hamlet-13.txt]
+     - Weak ▼
+     + Critical ▼
+  4 == tab:defense == replace [cold-thorp-177.txt]
+     - Lightly defended
+     + Vulnerable
+  1 == tab:defense == replace [cold-famine-thorp-26.txt]
+     - Tighmere could deal with a brawl or a thief, but the thorp could not hold off a raid.
+     + Tighmere is all but undefended. Nothing in the thorp would stop a serious attack for long.
+  1 == tab:defense == replace [cold-hamlet-78.txt]
+     - Much of Ormoy's perimeter has nobody on it, and the people who live there seem used to that.
+     + You can walk into the centre of Ormoy without being stopped, challenged or counted by anybody at all.
+  1 == tab:defense == replace [cold-hamlet-93.txt]
+     - Much of Kamalapat's perimeter has nobody on it, and the people who live there seem used to that.
+     + Kamalapat is all but undefended. Nothing in the hamlet would stop a serious attack for long.
+  1 == tab:defense == replace [cold-thorp-104.txt]
+     - Adequate ▼
+     + Weak ▼
+  1 == tab:defense == replace [cold-thorp-129.txt]
+     - Neuhausen could deal with a brawl or a thief, but the thorp could not hold off a raid.
+     + Neuhausen is all but undefended. Nothing in the thorp would stop a serious attack for long.
+  1 == tab:defense == replace [cold-thorp-70.txt]
+     - Vulnerable
+     + Undefended
+  1 == tab:defense == replace [fresh5-hamlet-23.txt]
+     - Doirewick could deal with a brawl or a thief, but the hamlet could not hold off a raid.
+     + People at Doirewick know it could not survive a serious attack, so they take care not to provoke anyone who could mount one.
+  1 == tab:defense == replace [fresh5-thorp-51.txt]
+     - Devaagam has not been attacked lately, and if it were, it would struggle to hold.
+     + Devaagam is all but undefended. Nothing in the thorp would stop a serious attack for long.
+ 12 == tab:overview == replace [cold-hamlet-78.txt]
+     - Monster Defense Weak
+     + Monster Defense Critical
+  4 == tab:overview == replace [cold-thorp-177.txt]
+     - Lightly defended
+     + Vulnerable
+  1 == tab:overview == replace [cold-thorp-104.txt]
+     - Monster Defense Adequate
+     + Monster Defense Weak
+  1 == tab:overview == replace [cold-thorp-70.txt]
+     - Vulnerable
+     + Undefended
+  2 == tab:power == replace [cold-thorp-70.txt]
+     - Defense -#
+     + Defense -#
+  1 == tab:power == replace [cold-thorp-70.txt]
+     - # Legitimacy Crisis
+     + # Legitimacy Crisis
+  1 == tab:power == replace [fresh6-hamlet-14.txt]
+     - # Contested
+     + # Contested
+  6 == tab:substrate == delete [cold-famine-thorp-26.txt]
+     - Defense readiness Strained
+     + 
+  4 == tab:substrate == insert [cold-famine-thorp-26.txt]
+     - 
+     + Defense readiness Strained
+  3 == tab:substrate == insert [cold-hamlet-117.txt]
+     - 
+     + Defense readiness Critical
+  2 == tab:substrate == replace [cold-thorp-177.txt]
+     - Law & order Strained
+     + Law & order Critical
+  1 == tab:substrate == insert [cold-hamlet-200.txt]
+     - 
+     + Law & order Critical
+  1 == tab:substrate == delete [cold-hamlet-200.txt]
+     - Law & order Critical
+     + 
+  1 == tab:substrate == insert [cold-thorp-214.txt]
+     - 
+     + Law & order Strained
+  1 == tab:substrate == delete [cold-thorp-214.txt]
+     - Law & order Strained
+     + 
+  1 == tab:substrate == insert [cold-thorp-70.txt]
+     - 
+     + Infrastructure condition Strained
+  1 == tab:substrate == delete [cold-thorp-70.txt]
+     - Infrastructure condition Strained
+     + 
+  1 == tab:substrate == delete [cold-under_siege-hamlet-24.txt]
+     - Defense readiness Critical
+     + 
+  1 == tab:substrate == insert [cold-under_siege-thorp-23.txt]
+     - 
+     + Law & order Collapsed
+  1 == tab:substrate == delete [cold-under_siege-thorp-23.txt]
+     - Law & order Collapsed
+     + 

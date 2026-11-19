@@ -18,6 +18,8 @@ import { crisisBlindFindings } from '../../src/domain/coherence/crisisBlindFindi
 import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/economy.generated.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { variantByVid } from '../helpers/drawnProse.js';
 
 /** The one leaf variant whose text holds a fragment, slots filled with the place's name. */
 function leafLine(leaf, fragment, name) {
@@ -84,7 +86,7 @@ describe('rung 2D · the crisis-blind instrument reads the twelve sampled rows',
   });
 
   it('soak1k-2402: the one-earner line that says nothing is failing, under famine', () => {
-    expect(readOn(2402, (s) => leafLine(DOSSIER_STATE_PROSE_ECONOMY, 'on one trade.', s.name) /* W1 ECO (2026-11-07): the line reworded under the owner's style law, its claim and regex moved with it */.split(/(?<=\.)\s+/)[1])).toEqual([['nothing is failing', 'hunger']]);
+    expect(readOn(2402, (s) => variantByVid({ leaf: 'economy', blockId: 'DS-ECO-12', poolKey: 'INCOME MIX: one source carries the town', vid: 3, slots: { settlement: s.name } }) /* W1 ECO (2026-11-07): the line reworded under the owner's style law, its claim and regex moved with it. BAR4-CLOSE-SWEEP (2026-11-16): computed by its identity, DS-ECO-12 one source v3 (a literal anchor is the drawn-anchors law's), after BAR4-CORPUS-ECO 7354471e5's DECLARED rewording (C43690: "one trade" -> "one source of income"); its second sentence, the one read, unchanged */.split(/(?<=\.)\s+/)[1])).toEqual([['nothing is failing', 'hunger']]);
   });
 
   it('soak1k-5404: pilgrims queue patiently in a besieged city', () => {
@@ -109,8 +111,18 @@ describe('rung 2D · the crisis-blind instrument reads the twelve sampled rows',
     expect(readOn(3000, () => printed(WANT.competition))).toEqual([['stable institutional competition', 'unrest']]);
   });
 
+  // ⭐ RE-KEYED BY IDENTITY (TAIL-CRISIS-7): the line this row read, DS-ECO-10 POSTURE `established` v1, was re-said at
+  // 5132da377 (W2-WRITE-SIDE-ECO-2 C, round three's #309: the pool's key is the export posture and says nothing of how the
+  // town lives; landed at ba4cc210b), so its claim is CURED AT THE SOURCE, as the six census-cured rows above are: both
+  // halves asserted. The cure: no economy leaf line reads the claim under this famine (anchored on the one-earner line's
+  // claim, which the same leaves still carry and the same famine still reads). The instrument: it still reads the line as
+  // v1 printed it before the cure, on the same born record.
   it('soak1k-5402: the line that no one export matters, under a famine that took the herds', () => {
-    expect(readOn(5402, (s) => leafLine(DOSSIER_STATE_PROSE_ECONOMY, 'different goods', s.name) /* W1 ECO (2026-11-07): the line reworded under the owner's style law, its claim and regex moved with it */.split(/(?<=\.)\s+/)[0])).toEqual([['depends on none alone', 'hunger']]);
+    const name = born[5402].name;
+    const leafClaims = Object.values(DOSSIER_STATE_PROSE_ECONOMY).flatMap((block) => Object.values(block.pools || {}).flat())
+      .flatMap((v) => readOn(5402, () => v.text.replace(/\{settlement\}/g, name).replace(/\{tier\}|\{tierNoun\}/g, 'town')).map(([claim]) => claim));
+    expectAbsentWithAnchor(leafClaims, 'depends on none alone', 'nothing is failing', 'soak1k-5402: the economy leaves under its famine');
+    expect(readOn(5402, () => `${name} sends several different goods out to market; if one trade fails, the others still go.`)).toEqual([['depends on none alone', 'hunger']]);
   });
 
   // RE-KEYED BY CAUSE (ALLEGIANCE-CAR4, 03ff59084 THE GOALS REBUILT): the calm control's born want was the structural

@@ -83,6 +83,7 @@ import ProseBlock from '../ProseBlock.jsx'; // the shared one-paragraph renderer
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { FLUSH } from '../../../design/flush.js';
+import { prosperityInCrisisLine } from '../../../domain/display/prosperityInCrisis.js'; import { outputChipBesideWord } from '../../../domain/display/dossierViewModel.js';
 
 /**
  * The prosperity header: the page's one-line answer (the prosperity word) and its chips.
@@ -93,6 +94,7 @@ import { FLUSH } from '../../../design/flush.js';
  *
  * @param {object} props
  * @param {object} props.eco the economic state (prosperity, economicComplexity)
+ * @param {object|null} [props.settlement] the record, for the one sentence a crisis-lowered label carries
  * @param {string} props.prosColor
  * @param {string} props.tradeLabel
  * @param {number} props.ecoScore
@@ -100,10 +102,13 @@ import { FLUSH } from '../../../design/flush.js';
  * @param {object|null} [props.economyRung] the DS-ECO-8 rung the desk built
  */
 export default function EconomicsGlance({
-  eco, prosColor, tradeLabel, ecoScore,
+  eco, settlement = null, prosColor, tradeLabel, ecoScore,
   headerRung = null, economyRung = null,
 }) {
   const mobile = useIsMobile();
+  // The label a crisis in force has lowered says what the place is in ordinary years (the chair's
+  // ruling 1(a), REVIEW-UPKEEP-2): the one sentence, read from its one home, under the word.
+  const inCrisis = prosperityInCrisisLine(settlement);
   const header = drawnAtMount('economics.prosperityHeader', headerRung);
   const economyGlance = drawnAtMount('economics.economyTile', economyRung);
   // ONE paragraph: the desk's sentence where it speaks, the generator's datum where it does not.
@@ -116,6 +121,7 @@ export default function EconomicsGlance({
         <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:12,flexWrap:'wrap'}}>
           <div>
             <div style={{fontSize: FS['22'],fontWeight:700,color:prosColor,lineHeight:1.1,marginBottom:3}}>{eco.prosperity}</div>
+            {inCrisis&&<div data-testid="economics-prosperity-in-crisis" style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,fontStyle:'italic',marginBottom:3}}>{inCrisis}</div>}
             <div style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag3}}>{eco.economicComplexity}</div>
           </div>
           <div style={{display:'flex',gap:8,flexWrap:'wrap',alignItems:'flex-start'}}>
@@ -123,7 +129,7 @@ export default function EconomicsGlance({
               <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>Trade</div>
               <div style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag,textTransform:'capitalize'}}>{tradeLabel}</div>
             </div>
-            {ecoScore>0&&<div style={{textAlign:'center',background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'6px 12px'}}>
+            {outputChipBesideWord(ecoScore, eco.prosperity)&&<div style={{textAlign:'center',background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'6px 12px'}}>{/* UPKEEP-8 (#608): the word alone where the figure stands two bands from it */}
               <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>Output</div>
               <div style={{fontSize:FS.md,fontWeight:700,color:ecoScore>=60?'#1a5a28':ecoScore>=35?'#a0762a':'#8b1a1a'}}>{ecoScore}/100</div>
             </div>}

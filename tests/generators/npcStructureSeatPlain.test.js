@@ -21,7 +21,8 @@ const place = (category, { legitimacy = {}, capture = 'none', food = '', prosper
   powerStructure: {
     factions: category === 'government'
       ? [{ faction: 'Seat', category, power: 60, isGoverning: true }]
-      : [{ faction: 'Council', category: 'government', power: 60, isGoverning: true }, { faction: 'Seat', category, power: 60 }],
+      // POWERS-9 (re-keyed by identity): the old families' rows ('other') speak of the card's own body, a noble power
+      : [{ faction: 'Council', category: 'government', power: 60, isGoverning: true }, { faction: 'Seat', category: category === 'other' ? 'noble' : category, power: 60 }],
     publicLegitimacy: legitimacy, criminalCaptureState: capture,
   },
   economicState: { prosperity, foodSecurity: { label: food } },

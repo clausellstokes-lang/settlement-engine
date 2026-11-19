@@ -115,7 +115,7 @@
     },
     {
       "id": "thorp|Economy|Fishing community#0",
-      "text": "Nets, traps, and racks for drying. The thorp lives by the water and cannot be parted from it.",
+      "text": "Nets, traps, and racks for drying. Whoever fishes the water here keeps them.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -123,7 +123,7 @@
     },
     {
       "id": "thorp|Economy|Fishing community#1",
-      "text": "Its livelihood is the water itself. The nets, the traps, the drying racks are the whole of the economy.",
+      "text": "The nets, the traps, the drying racks, worked by the fishing households whenever fish can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -263,7 +263,7 @@
     },
     {
       "id": "thorp|Government|Lord's reeve#0",
-      "text": "A distant lord's man, set here to watch the settlement and remit what it owes. His writ is legitimate; his welcome is not.",
+      "text": "A distant lord's officer, set here to watch the settlement and remit what it owes. The writ is legitimate; the welcome is not.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -271,7 +271,7 @@
     },
     {
       "id": "thorp|Government|Lord's reeve#1",
-      "text": "Placed by a lord who never visits, he holds official charge of the settlement. The paperwork backs him. The neighbours do not.",
+      "text": "Placed by a lord who never visits, this officer holds official charge of the settlement. The paperwork backs the office. The neighbours do not.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -282,16 +282,14 @@
       "text": "A single household head speaks for the settlement without ever being chosen to. No office, no title, no vote. Simply the door people knock on when a thing has to be settled.",
       "needs": [],
       "excludes": [],
-      "crisis": [],
-      "colour": true
+      "crisis": []
     },
     {
       "id": "thorp|Government|Household elder#1",
       "text": "One head of household carries the settlement's voice by common habit, with no appointment behind it. Nobody named them to it; everybody defers to it anyway.",
       "needs": [],
       "excludes": [],
-      "crisis": [],
-      "colour": true
+      "crisis": []
     },
     {
       "id": "thorp|Infrastructure|Dwellings (1-8)#0",
@@ -407,7 +405,7 @@
     },
     {
       "id": "hamlet|Economy|Common grazing land#0",
-      "text": "Open pasture the village grazes in common.",
+      "text": "Open pasture the hamlet grazes in common.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -423,7 +421,7 @@
     },
     {
       "id": "hamlet|Economy|Fisher's landing#0",
-      "text": "A crude landing hung with racks for drying and salting the catch. Near water, it is the chief source of protein.",
+      "text": "A crude landing hung with racks for drying and salting the catch. Near water, and whenever fish can be had, it is the chief source of protein.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -431,7 +429,7 @@
     },
     {
       "id": "hamlet|Economy|Fisher's landing#1",
-      "text": "A rough jetty and its salting-and-drying racks. Where there is water, the fish are what the hamlet lives on.",
+      "text": "A rough jetty and its salting-and-drying racks, where the hamlet's catch is landed and cured whenever fish can be had.",
       "needs": [
         "tier: ≤ hamlet"
       ],
@@ -441,7 +439,7 @@
     },
     {
       "id": "hamlet|Economy|Shepherd#0",
-      "text": "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. He is a mainstay of the cloth trade.",
+      "text": "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. Wool is what the flocks are chiefly kept for.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -450,7 +448,7 @@
     },
     {
       "id": "hamlet|Economy|Shepherd#1",
-      "text": "Runs sheep for their wool and meat, moving the flocks with the seasons: down to the lowland in winter, up to the hills in summer. The textile trade leans on him.",
+      "text": "Runs sheep for their wool and meat, moving the flocks with the seasons: down to the lowland in winter, up to the hills in summer. Wool is the first of what the flocks yield.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -459,7 +457,7 @@
     },
     {
       "id": "hamlet|Economy|Dairy farmer#0",
-      "text": "Runs cattle or goats for their milk, butter, and cheese. The one dependable fat and protein when the grain runs short. The work is seasonal, and heaviest in summer.",
+      "text": "Milk, butter, and cheese from cattle or goats, whenever livestock can be had. The work is seasonal, and heaviest in summer.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -468,7 +466,7 @@
     },
     {
       "id": "hamlet|Economy|Dairy farmer#1",
-      "text": "Keeps a herd of cattle or goats for milk, butter, and cheese. In a bad grain year it is the only fat and protein to be had. Seasonal work, cresting in the summer months.",
+      "text": "A dairy for milk, butter, and cheese, from a herd of cattle or goats, whenever livestock can be had. Seasonal work, cresting in the summer months.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -477,7 +475,7 @@
     },
     {
       "id": "hamlet|Economy|Woodcutter's camp#0",
-      "text": "A forest-edge camp of fellers and a yard where the logs are stacked. Timber, charcoal wood, and the hauling of both keep the place alive.",
+      "text": "A forest-edge camp of fellers and a yard where the logs are stacked. Timber and the hauling of it are the camp's whole living.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -485,7 +483,7 @@
     },
     {
       "id": "hamlet|Economy|Woodcutter's camp#1",
-      "text": "Axe crews work the treeline and stack their cut in a yard nearby. The settlement's living is timber, wood for the charcoal kilns, and the carting of it.",
+      "text": "Axe crews work the treeline and stack their cut in a yard nearby. The crews live by timber and the carting of it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -503,7 +501,7 @@
     },
     {
       "id": "hamlet|Economy|Charcoal burner#1",
-      "text": "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.",
+      "text": "Works kilns in the woodland close by, turning timber into the fuel that burns hottest. Without the kilns nothing gets from the trees to the fire.",
       "needs": [
         "terrain: forest"
       ],
@@ -513,7 +511,7 @@
     },
     {
       "id": "hamlet|Economy|Peat cutter#0",
-      "text": "Cuts peat from the marsh nearby and dries it into blocks for the hearth. Seasonal work: what he sells is winter warmth.",
+      "text": "Cuts peat from the marsh nearby and dries it into blocks for the hearth. Seasonal work: what it sells is winter warmth.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -547,7 +545,7 @@
     },
     {
       "id": "hamlet|Economy|Stone quarry#0",
-      "text": "Cuts and dresses building stone into blocks. A gang of quarrymen work it with picks and wedges. Slow going, but the only source of proper building material there is.",
+      "text": "A stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges. Slow going, and the only proper building material the place has had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -555,7 +553,7 @@
     },
     {
       "id": "hamlet|Economy|Stone quarry#1",
-      "text": "Quarrymen with picks and wedges cut and dress the stone for building. It is slow, and it is the sole way to come by real building material.",
+      "text": "A quarry opened with picks and wedges, its stone cut and dressed for building by hand. Slow work, and the only real building stone the place has known.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -563,7 +561,7 @@
     },
     {
       "id": "hamlet|Economy|Salt works#0",
-      "text": "Boils or dries naturally saline brine, yielding the raw salt that preserves food. It works only where salt flats, springs, or other workable deposits provide a local supply.",
+      "text": "Boils or dries saline brine whenever brine can be had, yielding the raw salt that preserves food. It works best where workable brine lies close by.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -572,7 +570,7 @@
     },
     {
       "id": "hamlet|Economy|Salt works#1",
-      "text": "Evaporates brine to leave salt behind: the raw mineral used to preserve nearly everything. The works can operate only where a strong local brine source supports it.",
+      "text": "Evaporates brine, whenever brine can be had, to leave salt behind: the raw mineral used to preserve nearly everything. A strong brine source close by serves it best.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -711,7 +709,7 @@
     },
     {
       "id": "hamlet|Crafts|Access to external mill#0",
-      "text": "A manor mill holding the sole right to grind (the banalité).",
+      "text": "The hamlet's grain is carried elsewhere to be ground.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -719,7 +717,7 @@
     },
     {
       "id": "hamlet|Crafts|Access to external mill#1",
-      "text": "The lord's mill, and by banalité the only one grain may lawfully be ground at.",
+      "text": "Nothing is ground here; the grain goes out of the hamlet for grinding.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -728,7 +726,9 @@
     {
       "id": "hamlet|Crafts|Maltster#0",
       "text": "Turns barley into malt for the brewers. A small concern feeding the local alehouses, and one that only runs when grain is in surplus.",
-      "needs": [],
+      "needs": [
+        "institution: tavern"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false,
@@ -737,7 +737,9 @@
     {
       "id": "hamlet|Crafts|Maltster#1",
       "text": "Malts barley for brewing on a modest scale, supplying the alehouses nearby. It needs grain to spare before it can work at all.",
-      "needs": [],
+      "needs": [
+        "institution: tavern"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false,
@@ -846,7 +848,7 @@
     },
     {
       "id": "hamlet|Government|Lord's steward#0",
-      "text": "A lord's man runs the hamlet's holdings, gathers the rents, and speaks for noble authority.",
+      "text": "A lord's agent runs the hamlet's holdings, gathers the rents, and speaks for noble authority.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -854,7 +856,7 @@
     },
     {
       "id": "hamlet|Government|Lord's steward#1",
-      "text": "Acting for the lord, he administers the land, takes in rent, and imposes the noble's will.",
+      "text": "The office acts for the lord: it administers the land, takes in rent, and imposes the noble's will.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1062,7 +1064,7 @@
     },
     {
       "id": "village|Economy|Fishmonger#0",
-      "text": "Buys the catch, salts it, and sells it on. The trade that carries fish from the net to the table. By the water it comes fresh; inland, dried or salted.",
+      "text": "Buys fish whenever fish can be had, salts it, and sells it on. The trade that carries fish from the net to the table. By the water it comes fresh; inland, dried or salted.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1070,7 +1072,7 @@
     },
     {
       "id": "village|Economy|Fishmonger#1",
-      "text": "Deals in fish: bought, salted, and sold. It bridges the fisherman and the eater. Near water the stock is fresh, further inland dried or salted.",
+      "text": "Deals in fish, whenever fish can be had: bought, salted, and sold. It bridges the fisherman and the eater. Near water the stock is fresh, further inland dried or salted.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1098,7 +1100,7 @@
     },
     {
       "id": "village|Economy|Dairy farmer#0",
-      "text": "Runs cattle or goats for their milk, butter, and soft cheese. Vital protein and fat when the grain runs thin. What isn't used goes to the weekly market.",
+      "text": "Milk, butter, and soft cheese from cattle or goats, whenever livestock can be had. What isn't used is sold on.",
       "needs": [
         "market"
       ],
@@ -1108,7 +1110,7 @@
     },
     {
       "id": "village|Economy|Dairy farmer#1",
-      "text": "Keeps a herd of cattle or goats, yielding milk, butter, and soft cheese; in the lean grain months these are the settlement's protein and fat. The surplus is sold at the weekly market.",
+      "text": "A herd of cattle or goats, whenever livestock can be had, for milk, butter, and soft cheese. Any surplus is sold on.",
       "needs": [
         "market"
       ],
@@ -1190,7 +1192,7 @@
     },
     {
       "id": "village|Economy|Stone quarry#0",
-      "text": "Building stone cut in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact.",
+      "text": "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1198,7 +1200,7 @@
     },
     {
       "id": "village|Economy|Stone quarry#1",
-      "text": "The methodical winning of building stone. Set on the right ground, a village can meet half a region's need for it. Something the quarry master never forgets.",
+      "text": "A quarry for building stone, opened with method. Set on the right ground, a village can meet half a region's need for it. Something the quarry master never forgets.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1206,7 +1208,7 @@
     },
     {
       "id": "village|Economy|Salt works#0",
-      "text": "Evaporation pans and brine-works turn the local saline source into salt. By weight, it is the settlement's most traded product, and no household does without it.",
+      "text": "Evaporation pans and brine-works for making salt whenever brine can be had, and no household does without salt.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1214,7 +1216,7 @@
     },
     {
       "id": "village|Economy|Salt works#1",
-      "text": "Salt is won from local brine in broad evaporation pans. It is the settlement's most-traded good by weight and a necessity in every home.",
+      "text": "Broad evaporation pans, where salt is won from brine whenever brine can be had. Salt is a necessity in every home.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1230,7 +1232,7 @@
     },
     {
       "id": "village|Economy|Hunter's lodge#1",
-      "text": "Sends out hunting parties over the surrounding country and brings venison, pelts, and game to sell. It doubles as the local authority on the wilds, the safe trails and the treacherous ones.",
+      "text": "Whenever game can be had, it sends out hunting parties over the surrounding country and brings back venison, pelts, and game to sell. It doubles as the local authority on the wilds, the safe trails and the treacherous ones.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1238,7 +1240,7 @@
     },
     {
       "id": "village|Economy|Weekly market#0",
-      "text": "Local produce and wares. Held under royal or noble charter.",
+      "text": "Local produce and wares. Held under charter.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1250,7 +1252,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "CLOSE-DOORS-1A (2026-11-18): declared through its sibling set (DESC_VARIANT_SIBLINGS) by BAR6-HOUSES 9fa69a146 (SV1: `sovereign`, with its twin); no longer a colour line"
     },
     {
       "id": "village|Economy|Travelers' inn#0",
@@ -1270,7 +1273,7 @@
     },
     {
       "id": "village|Economy|Ale house#0",
-      "text": "Run from the home. The brewing and selling of ale is women's work.",
+      "text": "Run from the home. Ale is brewed and sold under the same roof.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1278,7 +1281,7 @@
     },
     {
       "id": "village|Economy|Ale house#1",
-      "text": "A household trade. Women brew the ale and sell it.",
+      "text": "A household trade. The ale is brewed at home and sold there.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1353,7 +1356,7 @@
     },
     {
       "id": "village|Economy|River ferry#0",
-      "text": "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Anyone unwilling to walk the distance to the nearest bridge depends on it.",
+      "text": "A flat-bottomed ferry over the river, the crossing rights held in one family. Carts, beasts and walkers wait their turn on the bank.",
       "needs": [
         "river"
       ],
@@ -1363,7 +1366,7 @@
     },
     {
       "id": "village|Economy|River ferry#1",
-      "text": "The river is crossed by a flat-bottomed ferry, worked by a family that has held the right to it for generations. Without it, the nearest bridge is a long walk off.",
+      "text": "The river is crossed here by a flat-bottomed ferry, worked by the family that holds the right to it.",
       "needs": [
         "river"
       ],
@@ -1411,7 +1414,7 @@
     },
     {
       "id": "village|Crafts|Mill#0",
-      "text": "A water- or wind-driven mill holding the sole right to grind. The miller tends to be the richest man in the village, and the least loved.",
+      "text": "Water or wind drives the grindstones, and with them goes the sole right to grind. Whoever keeps them tends to be the richest in the village, and the least loved.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1435,7 +1438,7 @@
     },
     {
       "id": "village|Crafts|Blacksmith#1",
-      "text": "Works metal full-time. Tools and horseshoes depend on him.",
+      "text": "Works metal full-time. Tools and horseshoes depend on this work.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1443,7 +1446,7 @@
     },
     {
       "id": "village|Crafts|Carpenter#0",
-      "text": "Houses, carts, and furniture, all his work.",
+      "text": "Houses, carts, and furniture, all of it made here.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1483,7 +1486,7 @@
     },
     {
       "id": "village|Crafts|Cooper#1",
-      "text": "Casks for storage and carriage, all his making.",
+      "text": "Casks for storage and carriage, all made here.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1491,7 +1494,7 @@
     },
     {
       "id": "village|Crafts|Apothecary#0",
-      "text": "Herbal medicines, poultices, and everyday remedies for sale. Not to be confused with the alchemist. Nothing magical here, no acid flasks. The proprietor knows the roots that break a fever and the mushrooms that end a life. Herbalism supplies on hand.",
+      "text": "Herbal medicines, poultices, and everyday remedies for sale. Nothing magical here, no acid flasks. The proprietor knows the roots that break a fever and the mushrooms that end a life. Herbalism supplies on hand.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1499,7 +1502,7 @@
     },
     {
       "id": "village|Crafts|Apothecary#1",
-      "text": "Sells poultices, common cures, and medicines drawn from herbs. Where the alchemist deals in magical compounds and acid, this trade does not. Its keeper can name which root treats fever and which mushroom kills, and keeps herbalism supplies in stock.",
+      "text": "Sells poultices, common cures, and medicines drawn from herbs. Magical compounds and acid are no part of this trade. Its keeper can name which root treats fever and which mushroom kills, and keeps herbalism supplies in stock.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1523,7 +1526,7 @@
     },
     {
       "id": "village|Crafts|Sawmill#0",
-      "text": "A saw driven by water or ox, cutting raw logs into planks and beams. It lifts what building and furniture-making the village can do.",
+      "text": "A saw driven by water or ox, for cutting raw logs into planks and beams whenever logs can be had, for building and furniture-making.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1531,7 +1534,7 @@
     },
     {
       "id": "village|Crafts|Sawmill#1",
-      "text": "Powered by water or ox, the saw reduces logs to planks and beams, widening the settlement's output of building timber and furniture.",
+      "text": "Powered by water or ox, the saw reduces logs to planks and beams whenever logs can be had, for building timber and furniture.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1539,8 +1542,10 @@
     },
     {
       "id": "village|Crafts|Brewer#0",
-      "text": "Turns malted grain into ale by the barrel. After the bakers, no trade eats more grain. It supplies both alehouses and homes.",
-      "needs": [],
+      "text": "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies both alehouses and homes.",
+      "needs": [
+        "institution: tavern"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false,
@@ -1549,7 +1554,9 @@
     {
       "id": "village|Crafts|Brewer#1",
       "text": "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here.",
-      "needs": [],
+      "needs": [
+        "institution: tavern"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false,
@@ -1557,7 +1564,7 @@
     },
     {
       "id": "village|Crafts|Tannery#0",
-      "text": "Turns hides to leather with oak bark. The stink of it keeps it downstream. Without it there are no shoes, no harness, no straps.",
+      "text": "Turns hides to leather with oak bark, whenever hides can be had. The stink of it keeps it downstream. Without it there are no shoes, no harness, no straps.",
       "needs": [
         "river"
       ],
@@ -1567,7 +1574,7 @@
     },
     {
       "id": "village|Crafts|Tannery#1",
-      "text": "Hides become leather here, cured with oak bark. It reeks, and so it sits downstream, but shoes, harness, and straps all depend on it.",
+      "text": "Hides become leather here whenever hides can be had, cured with oak bark. It reeks, and so it sits downstream, but shoes, harness, and straps all depend on it.",
       "needs": [
         "river"
       ],
@@ -1609,7 +1616,7 @@
     },
     {
       "id": "village|Crafts|Potter#0",
-      "text": "Throws pottery at the wheel for the household (plates, jugs, vessels for storage) and fires it in a small kiln.",
+      "text": "Pottery for the household (plates, jugs, vessels for storage), thrown at the wheel and fired in a small kiln whenever clay can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1617,7 +1624,7 @@
     },
     {
       "id": "village|Crafts|Potter#1",
-      "text": "Domestic ware thrown on the wheel: plates, jugs, and storage jars, all fired in a modest kiln.",
+      "text": "A wheel and a modest kiln for domestic ware: plates, jugs, and storage jars, made whenever clay can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1625,7 +1632,7 @@
     },
     {
       "id": "village|Crafts|Brickmaker#0",
-      "text": "Shapes and fires clay into bricks for building. With them, structures can be made to last. Clay deposits and fuel are needed.",
+      "text": "Shapes and fires clay into bricks for building, whenever clay can be had. With them, structures can be made to last. Clay and fuel are needed.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1633,7 +1640,7 @@
     },
     {
       "id": "village|Crafts|Brickmaker#1",
-      "text": "Clay is moulded and fired into building brick here, which allows sturdier, more lasting construction. The work depends on clay beds and fuel.",
+      "text": "Moulds and a kiln for building brick, fired whenever clay can be had; brick allows sturdier, more lasting construction. The work depends on clay and fuel.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1645,7 +1652,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "CLOSE-DOORS-1A (2026-11-18): declared through its sibling set (DESC_VARIANT_SIBLINGS) by BAR5-MARKS 8c0a3cd71 (L2: `crisis: famine` excluded, with its famine twin); no longer a colour line"
     },
     {
       "id": "village|Crafts|Cobbler#1",
@@ -1653,7 +1661,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "CLOSE-DOORS-1A (2026-11-18): declared through its sibling set (DESC_VARIANT_SIBLINGS) by BAR5-MARKS 8c0a3cd71 (L2: `crisis: famine` excluded, with its famine twin); no longer a colour line"
     },
     {
       "id": "village|Crafts|Tailor#0",
@@ -1698,7 +1707,7 @@
     },
     {
       "id": "village|Crafts|Woodcarver#1",
-      "text": "Carves both plain and decorative pieces from wood: handles for tools, religious figures, furniture inlay. For the church he shapes sacred images and reliquaries.",
+      "text": "Carves both plain and decorative pieces from wood: handles for tools, religious figures, furniture inlay. Sacred images and reliquaries are carved here too.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1707,7 +1716,7 @@
     },
     {
       "id": "village|Crafts|Village scribe#0",
-      "text": "One of the few here who can read and write. He copies letters, sets down plain contracts, and reads out documents for those who cannot. Usually the priest's helper or a layman schooled at a monastery.",
+      "text": "One of the few here who can read and write: letters copied, plain contracts set down, documents read out for those who cannot. Usually schooled at a monastery, or by whoever here could teach.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1723,7 +1732,7 @@
     },
     {
       "id": "village|Crafts|Cartographer's workshop#0",
-      "text": "A mapmaker who draws and sells his work: road maps of the region, property surveys, and rough sketches of the wilds pieced from travellers' tales. Uncommon enough that most villages lack one.",
+      "text": "A mapmaker's workshop, drawing and selling road maps of the region, property surveys, and rough sketches of the wilds pieced from travellers' tales. Uncommon enough that most villages lack one.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1857,7 +1866,7 @@
     },
     {
       "id": "village|Government|Village reeve#0",
-      "text": "Chosen from among the peasants, he arranges the work owed, settles quarrels, and stands for the village before any outside power.",
+      "text": "Chosen from among the peasants to arrange the work owed, settle quarrels, and stand for the village before any outside power.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1865,7 +1874,7 @@
     },
     {
       "id": "village|Government|Village reeve#1",
-      "text": "A peasant elected by his own. He parcels out the labour dues, mediates disputes, and speaks for the village to those above it.",
+      "text": "A peasant elected by the others, to parcel out the labour dues, mediate disputes, and speak for the village to those above it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1873,7 +1882,7 @@
     },
     {
       "id": "village|Government|Village elder#0",
-      "text": "In the want of any formal power, the oldest or most respected villager steers the decisions. Less official than a reeve, but better than no one at all.",
+      "text": "The oldest or most respected villager steers the decisions on standing alone, holds no office, and is heeded all the same.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1882,7 +1891,7 @@
     },
     {
       "id": "village|Government|Village elder#1",
-      "text": "Where no formal authority exists, the eldest or best-regarded resident guides what the village decides. Short of a reeve in standing, yet steadier than a vacancy.",
+      "text": "The eldest or best-regarded resident guides what the village decides: an authority of regard, not of office.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2019,7 +2028,7 @@
     },
     {
       "id": "village|Criminal|Fence (word of mouth)#0",
-      "text": "The one to see when stolen goods need moving without noise. He works from behind a legitimate trade.",
+      "text": "The one to see when stolen goods need moving without noise. The dealing is done from behind a legitimate trade.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2051,7 +2060,7 @@
     },
     {
       "id": "village|Entertainment|Village musician#0",
-      "text": "A singer, fiddler, or piper who lives here, playing the festivals and the weddings, and in his songs keeping the local history alive.",
+      "text": "A singer, fiddler, or piper who lives here, playing the festivals and the weddings, and in song keeping the local history alive.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2059,7 +2068,7 @@
     },
     {
       "id": "village|Entertainment|Village musician#1",
-      "text": "The village's own singer, fiddler, or piper, heard at every festival and wedding. Through his songs the settlement's history is remembered.",
+      "text": "The village's own singer, fiddler, or piper, heard at every festival and wedding. Through those songs the settlement's history is remembered.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2067,19 +2076,27 @@
     },
     {
       "id": "town|Economy|Fish market#0",
-      "text": "Covered stalls under the wardens' eye, selling the morning's catch or the week's salted barrels by weight, each checked for rot.",
-      "needs": [],
+      "text": "Covered stalls under the wardens' eye, selling the morning's catch or the week's salted barrels by weight whenever fish can be had, each checked for rot.",
+      "needs": [
+        "navigable",
+        "market"
+      ],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "W2-FIX-DATA (2026-11-13): read false by the REVIEW-W2B cold list; declares, with its twin in DESC_VARIANT_SIBLINGS"
     },
     {
       "id": "town|Economy|Fish market#1",
-      "text": "The market wardens keep a roofed fish market where fresh catch and salted barrels are weighed out and inspected before sale.",
-      "needs": [],
+      "text": "The market wardens keep a roofed fish market where, whenever fish can be had, fresh catch and salted barrels are weighed out and inspected before sale.",
+      "needs": [
+        "navigable",
+        "market"
+      ],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "W2-FIX-DATA (2026-11-13): read false by the REVIEW-W2B cold list; declares, with its twin in DESC_VARIANT_SIBLINGS"
     },
     {
       "id": "town|Economy|Charcoal burner#0",
@@ -2103,7 +2120,7 @@
     },
     {
       "id": "town|Economy|Mine#0",
-      "text": "A shaft or adit worked by hired crews with winding gear and ore carts. Where the deposits go deep, the mine is why the place grew at all.",
+      "text": "A mine of shafts and adits, with winding gear and ore carts at the head, worked whenever ore can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2111,7 +2128,7 @@
     },
     {
       "id": "town|Economy|Mine#1",
-      "text": "Hired crews, winding gear, and ore carts work a shaft into the deposits. Where they run deep, the settlement grew around the mine.",
+      "text": "A shaft driven into the deposits, with winding gear and ore carts at the pithead, worked whenever ore can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2119,7 +2136,7 @@
     },
     {
       "id": "town|Economy|Stone quarry#0",
-      "text": "A quarry with yards of dressed stone and its own masons. Half the region's walls and churches were cut here.",
+      "text": "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2127,7 +2144,7 @@
     },
     {
       "id": "town|Economy|Stone quarry#1",
-      "text": "Masons dress the stone in yards beside the working face. The quarry supplies walls and churches across half the region.",
+      "text": "Yards for dressing stone stand beside the quarry face, at work whenever good stone can be had.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2135,7 +2152,7 @@
     },
     {
       "id": "town|Economy|Weekly market#0",
-      "text": "Held by royal charter. The heart of the town's trade.",
+      "text": "Held by charter. The heart of the town's trade.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2143,7 +2160,7 @@
     },
     {
       "id": "town|Economy|Weekly market#1",
-      "text": "Requires a charter from the crown. A principal source of the town's trade.",
+      "text": "Requires a market charter. A principal source of the town's trade.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2171,7 +2188,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false
     },
     {
       "id": "town|Economy|Annual fair#1",
@@ -2179,7 +2196,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false
     },
     {
       "id": "town|Economy|Merchant guilds (3-8)#0",
@@ -2218,7 +2235,9 @@
     {
       "id": "town|Economy|Pawnbroker#0",
       "text": "Takes pledges and lends at steep interest, no questions asked. It is the only credit for labourers, journeymen, and whoever the banks refuse.",
-      "needs": [],
+      "needs": [
+        "institution: bank"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false,
@@ -2227,7 +2246,9 @@
     {
       "id": "town|Economy|Pawnbroker#1",
       "text": "High-interest loans against pledged goods, with no questions. For labourers, journeymen, and anyone the banks will not serve, it is the only lender.",
-      "needs": [],
+      "needs": [
+        "institution: bank"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false,
@@ -2331,7 +2352,7 @@
     },
     {
       "id": "town|Economy|Beast trainers#0",
-      "text": "Ordinary beasts only: horses, dogs, falcons.",
+      "text": "Horses, dogs and falcons, broken and trained to order.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2339,7 +2360,7 @@
     },
     {
       "id": "town|Economy|Beast trainers#1",
-      "text": "Horses, dogs, and falcons. Nothing more exotic.",
+      "text": "Horses, dogs, and falcons, each trained for its work.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2439,26 +2460,35 @@
     {
       "id": "town|Economy|Customs house#0",
       "text": "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it.",
-      "needs": [],
+      "needs": [
+        "institution: docks"
+      ],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "W2-FIX-DATA (2026-11-13): read false by the REVIEW-W2B cold list; declares, with its twin in DESC_VARIANT_SIBLINGS"
     },
     {
       "id": "town|Economy|Customs house#1",
       "text": "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.",
-      "needs": [],
+      "needs": [
+        "institution: docks"
+      ],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "W2-FIX-DATA (2026-11-13): read false by the REVIEW-W2B cold list; declares, with its twin in DESC_VARIANT_SIBLINGS"
     },
     {
       "id": "town|Economy|Town granary#0",
       "text": "Shared grain stores that even out the harvests and hold off famine.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: famine"
+      ],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "W2-FIX-DATA (2026-11-13): read false by the REVIEW-W2B cold list; declares, with its twin in DESC_VARIANT_SIBLINGS"
     },
     {
       "id": "town|Economy|Town granary#1",
@@ -2518,7 +2548,7 @@
     },
     {
       "id": "town|Economy|Auction house#0",
-      "text": "A formal house for the sale of costly goods: estates, ships, livestock, art, and now and then persons. It takes a premium from buyer and seller both.",
+      "text": "A formal house for the sale of costly goods: estates, ships, livestock, art, and now and then a whole household's goods. It takes a premium from buyer and seller both.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2526,7 +2556,7 @@
     },
     {
       "id": "town|Economy|Auction house#1",
-      "text": "The recognised venue for high-value lots, be they estates, ships, livestock, art, or on occasion persons. Both buyer and seller pay its premium.",
+      "text": "The recognised venue for high-value lots, be they estates, ships, livestock, art, or on occasion a debtor's whole house. Both buyer and seller pay its premium.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2584,7 +2614,7 @@
     },
     {
       "id": "town|Crafts|Mills (2-5)#0",
-      "text": "Several mills, some for grain, some for fulling cloth.",
+      "text": "Several sites grind the town's grain.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2592,7 +2622,7 @@
     },
     {
       "id": "town|Crafts|Mills (2-5)#1",
-      "text": "A handful of mills, grinding grain and fulling cloth.",
+      "text": "The town's grain is ground at a handful of sites.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2600,7 +2630,7 @@
     },
     {
       "id": "town|Crafts|Blacksmiths (3-10)#0",
-      "text": "Several smiths, each to his specialty.",
+      "text": "Several ironworkers, each to a specialty.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2616,7 +2646,7 @@
     },
     {
       "id": "town|Crafts|Jeweller#0",
-      "text": "Sets precious metal and gemstones into rings, necklaces, seals, and other luxuries. He works to commission, values stones, and now and then buys from customers who keep quiet about provenance.",
+      "text": "Sets precious metal and gemstones into rings, necklaces, seals, and other luxuries. The work is to commission; stones are valued, and now and then bought from customers who keep quiet about provenance.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2624,7 +2654,7 @@
     },
     {
       "id": "town|Crafts|Jeweller#1",
-      "text": "Rings, necklaces, seals, and finery, worked from gold and gemstone. He takes orders, appraises stones, and is not above the occasional purchase from a discreet seller.",
+      "text": "Rings, necklaces, seals, and finery, worked from gold and gemstone. Orders are taken, stones appraised, and the occasional purchase from a discreet seller is not refused.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2685,7 +2715,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "BAR4-HOUSES (2026-11-16, REVIEW-BAR-4 C40862): presumes timber the town works (`timber at hand`): declared on its late sibling set (DESC_LATE_SIBLINGS)"
     },
     {
       "id": "town|Crafts|Sawmill (commercial)#1",
@@ -2693,11 +2724,12 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "BAR4-HOUSES (2026-11-16, REVIEW-BAR-4 C40862): presumes timber the town works (`timber at hand`): declared on its late sibling set (DESC_LATE_SIBLINGS)"
     },
     {
       "id": "town|Crafts|Brewery#0",
-      "text": "Ale and beer brewed at commercial scale, supplying the town's taverns and the wider region. It eats grain and hires hands in quantity.",
+      "text": "Ale and beer brewed at commercial scale, supplying the town's taverns. It eats grain and hires hands in quantity.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2706,7 +2738,7 @@
     },
     {
       "id": "town|Crafts|Brewery#1",
-      "text": "A brewery working at commercial scale. It keeps the taverns stocked and sends beer across the region, and stands among the larger buyers of grain and employers in the town.",
+      "text": "A brewery working at commercial scale. It keeps the taverns stocked, and stands among the larger buyers of grain and employers in the town.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2715,7 +2747,7 @@
     },
     {
       "id": "town|Crafts|Vintner#0",
-      "text": "Makes and ages wine, whether from grapes grown near or must brought in. He sells by the barrel to taverns and by the bottle to the rich. Where no vine grows, he imports and blends instead.",
+      "text": "A cellar of presses and casks for wine, from grapes grown near or must brought in, whenever either can be had. Such wine as it holds goes by the barrel, and by the bottle to the rich.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2724,7 +2756,7 @@
     },
     {
       "id": "town|Crafts|Vintner#1",
-      "text": "Wine pressed and matured, from local fruit or imported must, sold in bulk to the taverns and direct to wealthy houses. In a region without vines, the vintner turns importer and blender.",
+      "text": "Wine pressed and matured from local fruit or imported must, when either comes to the cellar, and sold in bulk or direct to wealthy houses.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2857,7 +2889,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false
     },
     {
       "id": "town|Crafts|Smelter#1",
@@ -2865,7 +2897,7 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false
     },
     {
       "id": "town|Crafts|Chandler#0",
@@ -2885,7 +2917,7 @@
     },
     {
       "id": "town|Crafts|Glassblower#0",
-      "text": "Glass worked on a small scale: bottles, window panes, goblets. It calls for silica sand, potash, and a skilled hand at the furnace.",
+      "text": "Glass worked on a small scale, whenever sand reaches the furnace: bottles, window panes, goblets. It calls for silica sand, potash, and a skilled hand at the furnace.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2893,7 +2925,7 @@
     },
     {
       "id": "town|Crafts|Glassblower#1",
-      "text": "A modest glassworks making bottles, panes, and goblets, dependent on silica sand, potash, and a practised furnace operator.",
+      "text": "A modest glassworks for bottles, panes, and goblets, dependent on silica sand, potash, and a practised furnace operator.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2999,10 +3031,8 @@
     },
     {
       "id": "town|Religious|Parish burial grounds#0",
-      "text": "Ground beside each house of worship, with burial beyond the gate where a ground has filled its own. The sexton's register of who lies where is the town's longest unbroken record.",
-      "needs": [
-        "gate"
-      ],
+      "text": "A ground for each congregation, and burial out beyond the houses where a ground has filled. The sexton's register of who lies where is the town's longest unbroken record.",
+      "needs": [],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -3083,27 +3113,23 @@
     },
     {
       "id": "town|Religious|Elder Grove Council#0",
-      "text": "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land. Found where a city has come to terms with the wild.",
-      "needs": [
-        "tier: ≥ city"
-      ],
+      "text": "Senior druids who govern how their circle deals with the town. They may keep a grove hidden beneath the streets, hold the line between the town's spread and the wild, or advise its rulers on the land.",
+      "needs": [],
       "excludes": [],
       "crisis": [],
       "colour": false
     },
     {
       "id": "town|Religious|Elder Grove Council#1",
-      "text": "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters. It arises only in cities at peace with the wild.",
-      "needs": [
-        "tier: ≥ city"
-      ],
+      "text": "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.",
+      "needs": [],
       "excludes": [],
       "crisis": [],
       "colour": false
     },
     {
       "id": "town|Government|Lord's appointee#0",
-      "text": "A man of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
+      "text": "One of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3119,7 +3145,7 @@
     },
     {
       "id": "town|Government|Town council#0",
-      "text": "With no formal government in place, a loose council of leading citizens runs the town. It answers to no one in particular, but it beats having no one at all.",
+      "text": "A loose council of leading citizens sees to the town's common business. It answers to no one in particular, but the work gets done.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3128,7 +3154,7 @@
     },
     {
       "id": "town|Government|Town council#1",
-      "text": "Where nothing official exists, the town's notable men gather and govern by consensus. Less answerable than an elected body, and steadier than the void it fills.",
+      "text": "The town's notables gather and settle its common business by consensus. Less answerable than an elected body, but steady.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3172,20 +3198,18 @@
       "text": "Civic power belongs solely to the wealthy merchant families, and office is bought in all but name.",
       "needs": [],
       "excludes": [],
-      "crisis": [],
-      "colour": true
+      "crisis": []
     },
     {
       "id": "town|Government|Merchant oligarchy#1",
       "text": "A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases.",
       "needs": [],
       "excludes": [],
-      "crisis": [],
-      "colour": true
+      "crisis": []
     },
     {
       "id": "town|Government|Town crier#0",
-      "text": "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays his wage.",
+      "text": "The official voice, reading proclamations, market prices, and news at set hours in the market square. Town or guild pays the wage.",
       "needs": [
         "market"
       ],
@@ -3195,7 +3219,7 @@
     },
     {
       "id": "town|Government|Town crier#1",
-      "text": "At fixed times he stands in the market square and calls out the proclamations, the prices, and the news. His employer is the town, or else a guild.",
+      "text": "At fixed times the proclamations, the prices, and the news are called out in the market square. The town pays for it, or else a guild.",
       "needs": [
         "market"
       ],
@@ -3391,7 +3415,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "CLOSE-DOORS-1A (2026-11-18, the chair's ruling CL18): no longer a colour line: since BAR5-MARKS e8068a494 (L2/L4/L5) it carries the LATE declaration `excludes: ['crisis: under_siege']` with its siege twin (DESC_LATE_SIBLINGS), read after the draw; recorded here and not in `excludes`, as every late-declared key of this ledger is (institutionProseDeclared's column law counts only draw-time declarations)"
     },
     {
       "id": "town|Defense|Free company hall#1",
@@ -3399,7 +3424,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "CLOSE-DOORS-1A (2026-11-18, the chair's ruling CL18): no longer a colour line: since BAR5-MARKS e8068a494 (L2/L4/L5) it carries the LATE declaration `excludes: ['crisis: under_siege']` with its siege twin (DESC_LATE_SIBLINGS), read after the draw; recorded here and not in `excludes`, as every late-declared key of this ledger is (institutionProseDeclared's column law counts only draw-time declarations)"
     },
     {
       "id": "town|Defense|Warden's Lodge#0",
@@ -3620,7 +3646,7 @@
     },
     {
       "id": "town|Entertainment|Traveling performers#0",
-      "text": "Bards, jugglers, and acrobats, come for the fairs.",
+      "text": "Bards, jugglers, and acrobats, come for the festivals.",
       "needs": [
         "market"
       ],
@@ -3630,7 +3656,7 @@
     },
     {
       "id": "town|Entertainment|Traveling performers#1",
-      "text": "The fairs bring bards, jugglers, and acrobats through.",
+      "text": "The festivals bring bards, jugglers, and acrobats through.",
       "needs": [
         "market"
       ],
@@ -3800,7 +3826,7 @@
     },
     {
       "id": "city|Economy|Merchant guilds (15-40)#0",
-      "text": "A force to be reckoned with in politics.",
+      "text": "Much of the city's trade is in their hands.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3808,7 +3834,7 @@
     },
     {
       "id": "city|Economy|Merchant guilds (15-40)#1",
-      "text": "Politically, a power in their own right.",
+      "text": "Between them they handle much of the city's trade.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4030,7 +4056,7 @@
     },
     {
       "id": "city|Crafts|Mills (2-5)#0",
-      "text": "Mills for grain, fulling, and sawing line every usable stream, many licensed by guild or city.",
+      "text": "Wheels turn on every usable stream, many licensed by guild or city.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4039,7 +4065,7 @@
     },
     {
       "id": "city|Crafts|Mills (2-5)#1",
-      "text": "Every workable watercourse turns a grain, fulling, or saw mill, most under a guild's or the city's licence.",
+      "text": "Every workable watercourse turns a wheel, most under a guild's or the city's licence.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4088,7 +4114,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "FAULTS-ROWS (2026-11-18, the sixth chair's rulings FR3 and FR12 (2), in CL18's form): no longer a colour line: it presumes the goods it names, and carries the LATE declaration `excludes: ['need not brought in: spice', 'need not brought in: silk']` with its twin (DESC_LATE_SIBLINGS), read after the draw; recorded here and not in `excludes`, as every late-declared key of this ledger is (institutionProseDeclared's column law counts only draw-time declarations)"
     },
     {
       "id": "city|Crafts|Luxury goods quarter#1",
@@ -4096,7 +4123,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "FAULTS-ROWS (2026-11-18, the sixth chair's rulings FR3 and FR12 (2), in CL18's form): no longer a colour line: it presumes the goods it names, and carries the LATE declaration `excludes: ['need not brought in: spice', 'need not brought in: silk']` with its twin (DESC_LATE_SIBLINGS), read after the draw; recorded here and not in `excludes`, as every late-declared key of this ledger is (institutionProseDeclared's column law counts only draw-time declarations)"
     },
     {
       "id": "city|Crafts|Carpenters (5-15)#0",
@@ -4248,7 +4276,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "TAIL-HOUSES-2 batch 4: declares by its coast sibling set (DESC_VARIANT_SIBLINGS); a colour line declares nothing else"
     },
     {
       "id": "city|Crafts|Cartographer's guild#1",
@@ -4256,7 +4285,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "TAIL-HOUSES-2 batch 4: declares by its coast sibling set (DESC_VARIANT_SIBLINGS); a colour line declares nothing else"
     },
     {
       "id": "city|Crafts|Craft guilds (30-80)#0",
@@ -4327,7 +4357,9 @@
       "needs": [
         "walls"
       ],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -4399,7 +4431,7 @@
     },
     {
       "id": "city|Government|City administration#0",
-      "text": "Officials, clerks, and ward officers run the city's affairs between them. A looser arrangement than a council, but one that works. It governs by the momentum of its own paperwork.",
+      "text": "Officials, clerks, and ward officers do the city's daily business between them, whoever gives the orders. It runs by the momentum of its own paperwork.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4407,7 +4439,7 @@
     },
     {
       "id": "city|Government|City administration#1",
-      "text": "The city is administered by a standing body of officials, clerks, and ward officers, less formally constituted than a council yet functional all the same. What moves it is bureaucratic inertia.",
+      "text": "A standing body of officials, clerks, and ward officers carries out the city's administration, functional whatever rules above it. What moves it is bureaucratic inertia.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4415,7 +4447,7 @@
     },
     {
       "id": "city|Government|Mayor and council#0",
-      "text": "An elected council backed by a complete administrative staff.",
+      "text": "A civic council backed by a complete administrative staff.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4423,7 +4455,7 @@
     },
     {
       "id": "city|Government|Mayor and council#1",
-      "text": "A civic council put in by vote, with the full apparatus of office beneath it.",
+      "text": "A civic council with the full apparatus of office beneath it.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4479,7 +4511,7 @@
     },
     {
       "id": "city|Government|Royal seat#0",
-      "text": "A royal governor or viceroy administers the city directly for the crown. The standing is high, and so is the scrutiny.",
+      "text": "The crown governs the city from here, in person or through a royal governor. The standing is high, and so is the scrutiny.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4487,7 +4519,7 @@
     },
     {
       "id": "city|Government|Royal seat#1",
-      "text": "The crown governs here at first hand, through a royal governor or viceroy. Great prestige, and no less watchfulness.",
+      "text": "The crown governs here at first hand, whether the monarch sits in it or a viceroy does. Great prestige, and no less watchfulness.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4643,7 +4675,7 @@
     },
     {
       "id": "city|Defense|Garrison#0",
-      "text": "Professional soldiers, kept by noble or crown.",
+      "text": "A professional force, kept under arms for pay.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4651,7 +4683,7 @@
     },
     {
       "id": "city|Defense|Garrison#1",
-      "text": "A standing body of soldiers, in noble or royal pay.",
+      "text": "A standing force, paid to bear arms.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4660,18 +4692,26 @@
     {
       "id": "city|Defense|Mercenary quarter#0",
       "text": "Sellsword companies under proper organisation, mustering hundreds to thousands.",
-      "needs": [],
+      "needs": [
+        "tier: = metropolis",
+        "mercenary"
+      ],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "W2-FIX-DATA (2026-11-13): read false by the REVIEW-W2B cold list; declares, with its twin in DESC_VARIANT_SIBLINGS"
     },
     {
       "id": "city|Defense|Mercenary quarter#1",
       "text": "Organised bands of hired blades. Major forces, hundreds to thousands strong.",
-      "needs": [],
+      "needs": [
+        "tier: = metropolis",
+        "mercenary"
+      ],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "W2-FIX-DATA (2026-11-13): read false by the REVIEW-W2B cold list; declares, with its twin in DESC_VARIANT_SIBLINGS"
     },
     {
       "id": "city|Magic|Wizard's tower#0",
@@ -4889,7 +4929,7 @@
     },
     {
       "id": "city|Criminal|Contract killer#0",
-      "text": "A lone hand or small cell, in a place too small to keep an assassins guild. Work comes through criminal go-betweens: less dependable, but deniable.",
+      "text": "A lone hand or small cell with no assassins guild behind it. Work comes through criminal go-betweens: less dependable, but deniable.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4898,7 +4938,7 @@
     },
     {
       "id": "city|Criminal|Contract killer#1",
-      "text": "One killer, or a handful, in a place too small to keep an assassins guild. Contracts arrive by way of criminal intermediaries, less reliable and for that reason harder to trace back.",
+      "text": "One killer, or a handful, answering to no assassins guild. Contracts arrive by way of criminal intermediaries, less reliable and for that reason harder to trace back.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5139,7 +5179,7 @@
     },
     {
       "id": "metropolis|Religious|Parish churches (50-100+)#0",
-      "text": "Houses of worship in the hundreds, across every district. No neighbourhood is without the faith.",
+      "text": "Parishes by the score, anywhere from fifty to past a hundred. No street of the city is far from the faith.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5147,7 +5187,7 @@
     },
     {
       "id": "metropolis|Religious|Parish churches (50-100+)#1",
-      "text": "Hundreds of quarters, one house of worship to each, so that faith runs through every part of the city.",
+      "text": "Every quarter keeps its own parish, so that faith runs through every part of the city.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5194,7 +5234,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "CLOSE-DOORS-1A (2026-11-18, the chair's ruling CL18): no longer a colour line: since BAR5-MARKS e8068a494 (L2/L4/L5) it carries the LATE declaration `excludes: ['crisis: under_siege']` with its siege twin (DESC_LATE_SIBLINGS), read after the draw; recorded here and not in `excludes`, as every late-declared key of this ledger is (institutionProseDeclared's column law counts only draw-time declarations)"
     },
     {
       "id": "metropolis|Religious|Great cathedral#1",
@@ -5202,7 +5243,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "CLOSE-DOORS-1A (2026-11-18, the chair's ruling CL18): no longer a colour line: since BAR5-MARKS e8068a494 (L2/L4/L5) it carries the LATE declaration `excludes: ['crisis: under_siege']` with its siege twin (DESC_LATE_SIBLINGS), read after the draw; recorded here and not in `excludes`, as every late-declared key of this ledger is (institutionProseDeclared's column law counts only draw-time declarations)"
     },
     {
       "id": "metropolis|Religious|Hospital network#0",
@@ -5322,7 +5364,7 @@
     },
     {
       "id": "metropolis|Defense|Massive walls and fortifications#0",
-      "text": "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage.",
+      "text": "Walls within walls: an outer line and an inner line, with gatehouses at every stage.",
       "needs": [
         "garrison"
       ],
@@ -5332,7 +5374,7 @@
     },
     {
       "id": "metropolis|Defense|Massive walls and fortifications#1",
-      "text": "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses throughout.",
+      "text": "A defence built in layers, an outer wall and an inner wall, with gatehouses throughout.",
       "needs": [
         "garrison"
       ],
@@ -5406,7 +5448,7 @@
     },
     {
       "id": "metropolis|Criminal|Thieves' guild (powerful)#0",
-      "text": "The ruling criminal syndicate, suffered because open gang war would be worse.",
+      "text": "The criminal syndicate the city has never rooted out, for fear that open gang war would be worse.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5414,7 +5456,7 @@
     },
     {
       "id": "metropolis|Criminal|Thieves' guild (powerful)#1",
-      "text": "A dominant underworld power the city tolerates, the alternative being the bloodshed of rival gangs.",
+      "text": "An underworld power the city has never rooted out, the alternative being the bloodshed of rival gangs.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5600,7 +5642,7 @@
     },
     {
       "id": "metropolis|Exotic|Message network (high magic)#0",
-      "text": "A network of paired Speaking Stones. A station costs as much as a merchant house, so only the crown and the great guilds keep them.",
+      "text": "A network of paired Speaking Stones. A station costs as much as a merchant house, so only the richest powers keep them.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5612,7 +5654,8 @@
       "needs": [],
       "excludes": [],
       "crisis": [],
-      "colour": true
+      "colour": false,
+      "colourReadBy": "CLOSE-DOORS-1A (2026-11-18): declared through its sibling set (DESC_VARIANT_SIBLINGS) by BAR6-HOUSES 9fa69a146 (SV1: `sovereign`, with its twin); no longer a colour line"
     }
   ]
 }

@@ -332,7 +332,9 @@ export const ENGINE_FIELD_REGISTRY = Object.freeze([
       'src/domain/supplyChainState.js',
       'src/domain/worldPulse/stressorGates.js',
       'src/components/new/tabs/EconomicsTab.jsx',
-      'src/components/new/tabs/MagicTab.jsx',
+      // TAIL-DISPLAY-ECON · 1 (6e36000a): the Magic tab prints the card's own note through the one leaf
+      // (magicProvisionShown.js :: magicNoteShown), which reads the field; MagicTab.jsx reads it no longer
+      'src/domain/display/magicProvisionShown.js',
     ],
   },
   {
@@ -341,17 +343,18 @@ export const ENGINE_FIELD_REGISTRY = Object.freeze([
     producer: 'src/generators/chainMagicSubstitution.js',
     consumers: [
       'src/domain/supplyChainState.js',        // Wave 8: carried into the canonical envelope
-      'src/components/new/tabs/EconomicsTab.jsx',
+      // W2-C-LEAVES-5 item 5 (56f73d7e): the "N% recovery" chip left the Economics tab (a model's fraction: machinery);
+      // the record keeps the field, carried into the canonical envelope
     ],
   },
   {
     field: 'upstreamNote',
     path: 'economicState.activeChains[].upstreamNote',
     producer: 'src/generators/computeActiveChains.js',
+    // R2-CODE-B-SIDE item 1 (2ed36a430): the generator's upstream note left the chain card and the PDF's chain flow
+    // (no read either holds makes it true there); the record keeps it, carried into the canonical envelope.
     consumers: [
       'src/domain/supplyChainState.js',
-      'src/components/new/SupplyChainsPanel.jsx',
-      'src/pdf/sections/SupplyChainFlow.jsx',
     ],
   },
   {

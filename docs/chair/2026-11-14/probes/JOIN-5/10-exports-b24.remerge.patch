@@ -1,0 +1,44 @@
+commit d81721e1e73cd9b4182ad1a3bb4c20f9a51af343
+Merge: 06f36ad36 34d1880ae
+Author: Claude <noreply@anthropic.com>
+Date:   Sat Nov 14 16:23:14 2026 +0000
+
+    join(JOIN-5 · 10): merge lane/exports-b24-2026-11-14 at 34d1880ae — law (h): the lane's lines stand
+    
+    Tip read back from origin at 16:22 UTC: 34d1880ae09767eb5be31495b8289f450698170b
+    (not landed before; merge base c66333f0c; the chair's 16:16 message names it final).
+    ONE CODE CONFLICT, src/foundry/journalPages.js :: defensePage, the armed
+    forces' bullet: the provenance tag cured twice (law (h)): the lane's
+    (R2-CODE-B-13 M10, a48cf4126, landed at merge 6) and this builder's
+    (EXPORTS-B24 B4, 2779a3d6d). The code line is identical on both sides and
+    merged clean; the conflict was the comment above it only: THE LANE'S
+    COMMENT STANDS, the builder's yields. The builder's guard
+    tests/foundry/journalForcesNoProvenance.test.js is KEPT: green on the merged
+    tree (with the lane's tests/pdf/journalForceNoProvenance.test.js and the
+    builder's tests/pdf/cultureBlockTwoSurfaces.test.jsx: 3 files, 11/11).
+    The builder's B2 (cultureOnPage for
+    the Cultural notes) merged clean and stands.
+    Verify: 6 files changed; the 5 the joined line had not moved equal the lane's blob.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYazSdYC8v2Fj1WVnzT
+
+diff --git a/src/foundry/journalPages.js b/src/foundry/journalPages.js
+remerge CONFLICT (content): Merge conflict in src/foundry/journalPages.js
+index e5fffa977..eaab3ab1c 100644
+--- a/src/foundry/journalPages.js
++++ b/src/foundry/journalPages.js
+@@ -371,13 +371,9 @@ function defensePage(vm) {
+     kv('Safety', d.safetyLabel),
+     d.militaryStress ? kv('Military status', d.militaryStress.label || humanize(d.militaryStress.type)) : null,
+     forces.length ? md('', '## Armed forces', forces.map(f =>
+-<<<<<<< 06f36ad36 (docs(JOIN-5): the hand-back current at merge 9)
+       // ⛔ NO PROVENANCE TAG (R2-CODE-B-13, the reader's M10): the force's `source` ('required', 'generated',
+       // 'coherence_repair', …) is the generator's machinery, which the page never shows (the Defense tab's card
+       // dropped its badge by R3-TABS ruling b1); the line prints the house and what it is. @enforced-by tests/pdf/journalForceNoProvenance.test.js
+-=======
+-      // EXPORTS-B24 · B4: no provenance bracket ("(required)", "(generated)"…): the generator's key is not a fact of the town; the PDF's force row prints none.
+->>>>>>> 34d1880ae (docs(EXPORTS-B24): the hand-back current after B4 and B2 (counts, the lines read, the false lines left, the registers named))
+       bullet(typeof f === 'string' ? institutionHouseLabel(f) : `${institutionHouseLabel(f.name || '')}${f.desc ? `: ${f.desc}` : ''}`)) ) : null,
+     (d.criminalOps || []).length ? md('', '## Criminal operations', d.criminalOps.map(o =>
+       `- **${esc(o.name)}**${o.note ? `: ${esc(o.note)}` : ''}`)) : null,

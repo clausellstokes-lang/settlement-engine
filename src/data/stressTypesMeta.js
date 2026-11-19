@@ -26,7 +26,7 @@ export const STRESS_TYPE_META = {
   under_siege: {
     label: 'Under Siege',
     historyColour: 'military',
-    viabilityNote: 'Field work and trade have stopped, and everything now turns on how long the food and water last.',
+    viabilityNote: 'Trade by road, gate and water has stopped, only part of the usual food is still produced here, and everything now turns on how long the food and water last.',
   },
   famine: {
     label: 'Famine',
@@ -66,7 +66,7 @@ export const STRESS_TYPE_META = {
   succession_void: {
     label: 'Succession Void',
     historyColour: 'political',
-    viabilityNote: 'Big decisions wait for a new leader, and in the meantime each office does as it sees fit.',
+    viabilityNote: 'Big decisions wait for a new leader, and in the meantime the place gets by on old habit.', // TAIL-HISTORY batch 1 (the chair's Y2, Y7): the full map's reword, word for word
   },
   monster_pressure: {
     label: 'Beast & Raider Threat',
@@ -76,7 +76,7 @@ export const STRESS_TYPE_META = {
   insurgency: {
     label: 'Insurgency',
     historyColour: 'political',
-    viabilityNote: 'Taxes are disputed, some offices no longer send their revenue on, and the government runs on habit.',
+    viabilityNote: 'Taxes are disputed, some households no longer pay at all, and the government runs on habit.', // TAIL-HISTORY batch 1 (the chair's Y2, Y7): the full map's reword, word for word
   },
   religious_conversion: {
     label: 'Religious Conversion',
@@ -86,7 +86,7 @@ export const STRESS_TYPE_META = {
   slave_revolt: {
     label: 'Slave Revolt',
     historyColour: 'political',
-    viabilityNote: 'Owners keep their gangs only on work they can watch, less gets made, and everyone who keeps order is busy containing the revolt.',
+    viabilityNote: 'Owners keep their gangs only on work they can watch, and less gets made while the revolt lasts.',
   },
   wartime: {
     label: 'Wartime',

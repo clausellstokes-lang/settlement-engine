@@ -189,6 +189,120 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-19, THE LAST CLOSE BEFORE THE DEPLOY (points 54 to 70), SIGNED ON LASTCLOSE-SIGN's BRANCH ──
+ * THE HUNDRED-AND-SIXTEENTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own word in the chair's chat (2026-11-18,
+ * about 19:07 UTC, "Yes to both": the refresh of the stored reference files again, and the golden door's signing; ODQ §934.105; the
+ * chair's line "SIGN" 2026-11-19 01:04 UTC; for this close only); the record is
+ * docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json. THE FIRST CLOSE'S RULING CL5 (the last closes' EF1, vetoable):
+ * the move is the landed points' declared page text and record, re-taken only after every other arm of this fence read green at the
+ * tree (20 of 21). THE MOVERS, FOUND BY STEP: the corpus born at the first close's tip 0dee69e17 (which reproduces `cd67a3c1…`) and at
+ * each of the seventeen first-parent landing commits over it that touch src/, field-diffed by leaf family: K-WATCH and K-POWERS (48,
+ * 49, 57: the stock quarrel's no-grazing twin in recentConflict and the pressure sentence that repeats it, the Elected Reeve's twin)
+ * 20; K-PEOPLE (50, 58: secrets, presentations and goals under the holder refusals, one handler's swap cured with its tie and trace
+ * line) 42; MARKS-2 (56: salted fish on the imports) 3; FAULTS-NEED (61) and LAST-VARIETY (70) 12 each (goals; the same rows);
+ * FAULTS-PEOPLE (62: a hook true of the holder) 2; FAULTS-BIRTH (63) 17 and its follow-ups (68) 22 (gaps, need lists, imports);
+ * FAULTS-ROWS (65: the late re-read's twins) 9; FAULTS-WATCH (66: the gate's hours, the holding cells' twin) 10 and its FR25 (67: the
+ * judge's tie, a bargain's line) 11; LAST-DECLARE (69: the sawyer's secret) 9; the rest none. The espionage subsystem stays dormant.
+ * On THIS corpus 116 of 360 rows (thorp 11, hamlet 12, village 32, town 28, city 21, metropolis 12) move against 0dee69e17; 360/360
+ * hashes stay distinct. Written on LASTCLOSE-SIGN's branch after the golden master's commit (a7a25bd39), measured by
+ * scripts/audit/refence.mjs before the write.
+ *
+ * ── 2026-11-18, THE CLOSE OF THE ROUNDS BAR5 TO BAR8, SIGNED AT THE DOORS' BRANCH (CLOSE-DOORS-2) ──
+ * THE HUNDRED-AND-FIFTEENTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own word in the chair's chat (2026-11-18
+ * 03:03:46 UTC, the whole of the message, "yes: refresh the stored reference files and open the pull request.", answering the
+ * chair's message of 02:47:31 UTC; ODQ §934.105; the chair's line "SIGN" 06:57 UTC; for this close only); the record is
+ * docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json. THE CHAIR'S RULING CL5 (the last closes' EF1, vetoable):
+ * the move is the rounds' declared page text and record, re-taken only after every other arm of this fence read green at the tree
+ * (20 of 21). THE MOVERS, FOUND: every seat landed over 600b7683a..70e557d5b (the chair's ruling CL11: BAR5's nine branches, BAR6
+ * and its seam, BIRTH-1 to -3, BAR7, SECRETS-1, the leftovers round and BAR8) and Part 1 of the close (stored figures only, at
+ * 0af60594a: the 360 byte-equal); FIELD-DIFFED by leaf path: the golden's families (the ties' tensions, lines and, beside a warm or
+ * cold first tie, the second's kind and strength (BAR7-LINES); the powers' descriptions (BAR6-POWERS); the rare secrets (SECRETS-1);
+ * goals, conflicts and the coherence receipt that read a tie (BAR7-LINES); the supply gaps, imports and need lists (BAR5-CHAINS,
+ * BIRTH-1 to -3); exports, chains, production, income (BAR6-RECORD); the crier's line and the fish market's catch (BAR7-LINES,
+ * BAR8-FISH-ROWS); the foodways and the architecture (BAR5-FOOD, BAR6-CULTURE); the outlook hooks; the arrival; the history's events
+ * and tensions; the founding reasons (BAR5-WORLD); presentations (LEFT-LINES)) and, beyond them, the history's character (BAR5-MAGIC,
+ * BAR7-SCENES), the pressure sentence (BAR6-SEAM-SCENES), the war's crown lines in a stress note (BAR7-LINES), tempers and card
+ * twins (BAR6-PEOPLE, BAR5-POWERS), four houses' siege and supply twins, the dues owed and the bodyguards' line (BAR5-MARKS), a crime
+ * line (BAR6-CRIME) and a bargain's line where a conflict left. The espionage subsystem stays dormant.
+ * On THIS corpus 322 of 360 rows (thorp 25, hamlet 59, village 59, town 59, city 60, metropolis 60) move against the last green
+ * corpus 0ac61b4b4 (the tip of the BAR4 close, which reproduces `8e5881d6…`); 360/360 hashes stay distinct. Written on the doors'
+ * branch after the golden master's commit (b3cfdbcc3), measured by scripts/audit/refence.mjs before the write.
+ *
+ * ── 2026-11-16, THE CLOSE OF THE ROUND BAR4, SIGNED AT THE DOORS' BRANCH (BAR4-CLOSE-DOORS-2) ──
+ * THE HUNDRED-AND-FOURTEENTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own words in the chair's chat (2026-11-16
+ * 08:55:14 UTC, "Yes to the following:" / "Later: a new yes for the example-town refresh when this round closes.", answering the
+ * chair's report of 08:30:14 UTC; and, the chair's own permission check having held the first go-ahead at 17:40 UTC, 18:51:17 UTC,
+ * "Yes to plain yes for the example-town refresh.", answering the chair's ask of 17:42, 18:06 and 18:35 UTC; ODQ §934.105; for this
+ * close only); the record is docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json. THE CHAIR'S RULING EF1 (vetoable): the
+ * move is the round's declared page text, re-taken only after every other arm of this fence read green at the tree (20 of 21). THE
+ * MOVERS, FOUND: the round BAR4's builder branches as joined, the repair seat BAR4-CLOSE-SWEEP (PD1's tie twin) and Part 1 (stored
+ * figures only), at 6483322cc; FIELD-DIFFED by leaf path: tie descriptions, tensions and their variant index, the vintner's secret,
+ * the wharfinger's presentation, the prominent tie, the supply gaps (entries in and out: BAR4-RECORD, BAR4-SCENES-2), the foodways
+ * lines and two houses' descriptions (BAR4-HOUSES), the income lines and outlook hooks (BAR4-CORPUS-ECO), the arrival, the history's
+ * tensions and hooks and three powers' descriptions (BAR4-HISTORY), two ties' kind and strength where a pair's second tie takes the
+ * temper of its first (BAR4-PEOPLE TI1, declared), and the coherence receipt's quoted tie text (two towns: the same finding quoting
+ * the new tie line's sentences, its status unchanged). The espionage subsystem stays dormant.
+ * On THIS corpus 248 of 360 rows (thorp 38, hamlet 24, village 23, town 48, city 55, metropolis 60) move against the close of the
+ * round BAR3's post-state (the tree c4ac1ef84a, which reproduces `05b90d5f…`); 360/360 hashes stay distinct. Written on the doors'
+ * branch after the golden master's commit (1581ed12), measured by scripts/audit/refence.mjs before the write.
+ *
+ * ── 2026-11-16, THE CLOSE OF THE ROUND BAR3, SIGNED AT THE DOORS' BRANCH (BAR3-CLOSE-DOORS-2) ──
+ * THE HUNDRED-AND-THIRTEENTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own word of 2026-11-15 20:30:10 UTC in
+ * the chair's chat ("Yes that one too", answering the chair's question of 20:28:06 UTC; ODQ §934.105; for this close only); the
+ * record is docs/shift-records/2026-11-16-the-close-of-the-round-bar3.json. THE CHAIR'S RULING EF1 (vetoable): the move is the
+ * round's declared page text, re-taken only after every other arm of this fence read green at the tree (20 of 21). THE MOVERS,
+ * FOUND: the round BAR3's seven builder branches joined at 98363cb84 and the second repair seat's letter d (efdb3841d, merged at
+ * b46b26d92); FIELD-DIFFED by leaf path, text leaves only (no length, no non-text leaf): tie descriptions and tensions, the powers'
+ * descriptions, relationships' narratives and recent conflict, the foodways lines, the entrepot note, the people's dominant trait,
+ * the pressure line, house descriptions, the arrival, the safety, guard and drag lines, the crisis hooks, summaries, viability notes
+ * and cast reasons, the history's character and hooks, the viability issues, the prominent tie, two secrets and the coherence
+ * receipt's quoted tie text; each leaf beyond the golden master's own list traced by git log -S to a cure of the round (b7bf413a7,
+ * 808d2bb37, cfea7bb38, 7a4b48a84, decd2a1f8, aef83b4b5, efdb3841d). The espionage subsystem stays dormant.
+ * On THIS corpus 333 of 360 rows (thorp 49, hamlet 46, village 58, town 60, city 60, metropolis 60) move against the close of the
+ * round BAR2's post-state (the tree 83fc14ad6, which reproduces `abbfdfec…`); 360/360 hashes stay distinct. Written on the doors'
+ * branch after the golden master's commit, measured by scripts/audit/refence.mjs before the write.
+ *
+ * ── 2026-11-15, THE CLOSE OF THE ROUND BAR2, SIGNED AT THE JOINED LINE'S TREE (BAR2-CLOSE-DOORS-2) ──
+ * THE HUNDRED-AND-TWELFTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own word of 2026-11-15 20:27:16 UTC in
+ * the chair's chat ("Yes refresh the reference"; ODQ §934.105; for this close only); the record is
+ * docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json. THE CHAIR'S RULING EF1 (vetoable): the move is the round's
+ * declared page text, re-taken only after every other arm of this fence read green at the tree (20 of 21). THE MOVERS, FOUND: the
+ * five builder branches of the round BAR2 landed at JOIN-13 points 2 to 6 (services e13aeb702, places 65cea6643, people cb2573de4,
+ * labels ef40f6330); FIELD-DIFFED by leaf path, text leaves only (no length, no non-text leaf): tie descriptions and tensions, the
+ * people's positions, constraints, dealings and secrets, faction descriptions, house descriptions, service rows, origin rows, the
+ * arrival scene, the prominent tie, the pressure line, the safety and guard lines, one conflict hook; each traced by git log -S to a
+ * cure of the five (7f040c7e1, 8026d2c46, 0d36c3820, 41ef3a9b4, c4cc22e46, c1f9889ae). The espionage subsystem stays dormant.
+ * On THIS corpus 267 of 360 rows (thorp 20, hamlet 28, village 42, town 57, city 60, metropolis 60) move against the close of the
+ * tail round's post-state (the tree 74ded1800, which reproduces `d4f94b04…`); 360/360 hashes stay distinct. Written at the joined
+ * line's 1011a8a91 (the golden master's commit 5fd90b42a), measured by scripts/audit/refence.mjs before the write.
+ * `d4f94b04…` -> `abbfdfec…`.
+ *
+ * ── 2026-11-15, THE CLOSE OF THE TAIL ROUND, SIGNED AT THE LINE'S FINAL TREE (TAIL-CLOSE-DOORS-3) ──
+ * THE HUNDRED-AND-ELEVENTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own word of 2026-11-15 06:00 UTC in
+ * the chair's chat (ODQ §934.105; for this close only); the record is docs/shift-records/2026-11-15-the-close-of-the-tail-round.json.
+ * THE MOVERS, FOUND: the round's declared moves landed on lane/join-2026-11-14 since record 47 (the record's cause, by landing:
+ * the people re-drawn where a seat of power had no face, the data lane's fixes, the upkeep lanes' rebuild of the defence rating
+ * and the income rows, the made list's and the economy's cures, the crisis, houses, ties, narrative, powers, defecon, corpus,
+ * history, record and content lanes); the espionage subsystem stays dormant.
+ * On THIS corpus 360 of 360 rows (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60) move against record 47's
+ * post-state (the tree fce41f2b7, which reproduces `05f70cf9…`); 360/360 hashes stay distinct. Written at the line's final tree
+ * (f76fe38fd; the doors at 752d74a15 and the golden master's commit dec4ec241), measured by scripts/audit/refence.mjs before the
+ * write. `05f70cf9…` -> `d4f94b04…`.
+ *
+ * ── 2026-11-13, THE COHERENCE-AGREE MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 47) ──
+ * THE HUNDRED-AND-TENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
+ * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the coherence wave (the chair's ruling: this wave is the window for the lanes'
+ * own leaves, on condition of attribution at each merge point); the record is
+ * docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json. THE MOVER, FOUND: the COHERENCE-AGREE merge 22cc9ef7d
+ * (69b53decd into the integration branch); its cause one fact, one answer (the town's own drawn record overrides a terrain or
+ * institution table, and a fact has one reader): the resource roll's refused members refilled, the income, import, food,
+ * safety, defence and hook lines read off the record, the toll named at print time. FIELD-DIFFED: resourceAnalysis and the
+ * config's rolled resources, the economy, viability, defence, culture and trace families, the re-dealt holders' rosters, cast
+ * and ties, the coherence receipt and the isolation support; the espionage subsystem stays dormant.
+ * On THIS corpus 359 of 360 rows (thorp 60, hamlet 60, village 59, town 60, city 60, metropolis 60) move against record 46's
+ * post-state (the stage of f572d12b7) (`f3f4be91…`); 360/360 hashes stay distinct. Written from the staged tree (9e2ae9035 with
+ * the door paths carried from the integration branch), measured by scripts/audit/refence.mjs before the write. `f3f4be91…` -> `05f70cf9…`.
+ *
  * ── 2026-11-13, THE COHERENCE-POWERS MERGE OVER THE INTEGRATION BRANCH, SIGNED AT THE STYLE WAVE'S MERGE (STYLE-2-MERGE RECORD 46) ──
  * THE HUNDRED-AND-NINTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation of 2026-11-06,
  * inside a NAMED CHARTERED WINDOW: ODQ §934.105, the coherence wave (the chair's ruling: this wave is the window for the lanes'
@@ -1315,7 +1429,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'f3f4be914caae9183e6a29db79e7919a2c076dcec00e324963f92936cf6825f3';
+const PRE_COUPLING_CORPUS_SHA = '9829e655d0ac9d9f3d9b16d12bd1a26ec1faa1afbd7fe4573c06596b994b733b';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

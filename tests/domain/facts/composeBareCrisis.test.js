@@ -4,7 +4,9 @@
  * `crisis` (`needs: crisis`) now that CENSUS-1i unit 8 put the kernel's crisis marks on the
  * vocabulary's dimension:
  *   DS-FTH-1 SINK arc rising v1         "…Crisis has a way of ending indifference."
- *   DS-DEF-2 Economic Survival STRONG v3 "Trouble at {settlement} has not turned into a collapse…"
+ *   DS-DEF-2 Economic Survival STRONG v3 "{settlement} had money laid by before this trouble began…" (re-said at
+ *     9d0f258f3, W2-WRITE-4 round 3, the chair's ruling of 19:35: the row speaks of the purse, never of the crisis's
+ *     outcome; the same variant, its `crisis` mark kept; landed at ba4cc210b; re-keyed by identity, TAIL-CRISIS-7)
  * Refused in calm; admitted under any active crisis; the pool is never mute either way.
  *
  * @enforced-by npx vitest run tests/domain/facts/composeBareCrisis.test.js
@@ -34,7 +36,7 @@ function drawable(leaf, blockId, poolKey, facts) {
 
 const LINES = Object.freeze([
   [DOSSIER_STATE_PROSE_WAR_FAITH, 'DS-FTH-1', 'SINK: unaffiliated present, arc rising', /now that times are hard/], // W4 PEOPLE second seat 2026-11-07: re-keyed to the line's text after the first seat's faith style pass (05da0e050, the owner's style law)
-  [DOSSIER_STATE_PROSE_DEFENSE, 'DS-DEF-2', 'Economic Survival: STRONG', /has not turned into a collapse/],
+  [DOSSIER_STATE_PROSE_DEFENSE, 'DS-DEF-2', 'Economic Survival: STRONG', /had money laid by before this trouble began/], // TAIL-CRISIS-7: re-keyed to v3's text as 9d0f258f3 re-said it (the header)
 ]);
 
 describe('the compose · the two bare `needs: crisis` lines (R-I)', () => {

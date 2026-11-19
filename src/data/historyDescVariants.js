@@ -17,11 +17,11 @@
  */
 export const HISTORY_DESC_VARIANTS = Object.freeze({
   "succession_crisis": [
-    "The reigning ruler was failing in health, and rival claimants maneuvered quietly for the throne",
+    "The one who led was failing in health, and rivals maneuvered quietly to take that place",
     "As the ailing ruler declined, several would-be heirs positioned themselves to inherit",
   ],
   "economic_disparity": [
-    "A widening gulf between wealthy merchants and working poor breeds lasting resentment",
+    "A widening gulf between the well-off and the working poor breeds lasting resentment",
     "The merchant class prospers while common laborers fall behind, and the bitterness spreads",
   ],
   "religious_tension": [

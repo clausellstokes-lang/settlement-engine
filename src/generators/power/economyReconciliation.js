@@ -193,7 +193,7 @@ export function projectPowerGenerationIntent(
 function projectPower(
   intent,
   economicState,
-  { defenseLabel = null } = {},
+  { defenseLabel = null, militaryGate = null, forces = null } = {}, // PP11 (BAR2-PEOPLE-3): the funding gate rides beside the readiness label; BAR5-POWERS (PW1): the settled defence atoms
 ) {
   assertIntent(intent);
   const previousRng = setActiveRng(createPRNG(intent.rngSeed));
@@ -205,7 +205,7 @@ function projectPower(
       intent.config,
       intent.institutions,
       {
-        ...(defenseLabel ? { defenseLabel } : {}),
+        ...(defenseLabel ? { defenseLabel } : {}), ...(militaryGate != null ? { militaryGate } : {}), ...(forces ? { forces } : {}),
         ...(Array.isArray(intent.stressEntries) ? { stressEntries: intent.stressEntries } : {}),
       },
     );
@@ -329,6 +329,9 @@ export function reconcilePowerStructure(
   powerStructure.governingName = projected.governingName;
   powerStructure.government = projected.government;
   powerStructure.publicLegitimacy = projected.publicLegitimacy;
+  // POWERS-14 (the chair's ruling of 2026-11-14, NEW1): the stability label's defence word reads the record's readiness
+  // label, which only this replay holds (`defenseLabel`); the first pass's label stood before and could contradict it
+  powerStructure.stability = projected.stability;
   powerStructure.factionRelationships = projected.factionRelationships;
   powerStructure.powerProjectionVersion = projected.powerProjectionVersion;
   powerStructure.economyInputFingerprint =

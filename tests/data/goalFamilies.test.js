@@ -34,7 +34,8 @@ const EXPECTED_CELLS = {
   RANK: { climb: SIX, defend: SIX, enter: SIX },
   POWER: { tense: SIX, competitive: SIX, corrupted: SIX, conflict: SIX },
   INSTITUTION: { solvency: SIX, rebuilding: SIX, charter: SIX, takeover: SIX },
-  SUPPLY: { impaired: SIX, dependency: SIX, isolation: SIX, expansion: SIX },
+  // LAST-VARIETY (item 2, 2026-11-18; the chair's ruling LR2): `want`, two a vantage, dealt only where a dependency's good is needed and not brought in
+  SUPPLY: { impaired: SIX, dependency: SIX, isolation: SIX, expansion: SIX, want: { short: 2, long: 2 } },
   TIES: { rival_enemy: FIVE, debtor: FIVE, creditor: FIVE, ally: FIVE, family: FIVE, mentor_student: FIVE },
   PERSONALITY: Object.fromEntries(PERSONALITY_CLUSTERS.map((k) => [k, FOUR])),
   ALLEGIANCE: {
@@ -45,7 +46,7 @@ const EXPECTED_CELLS = {
   },
   UNCANNY: { haunting: SIX, components: SIX, commission: SIX, omen: SIX, bargain: SIX },
 };
-const EXPECTED_TOTALS = { RANK: 36, POWER: 48, INSTITUTION: 48, SUPPLY: 48, TIES: 60, PERSONALITY: 96, ALLEGIANCE: 128, UNCANNY: 60 };
+const EXPECTED_TOTALS = { RANK: 36, POWER: 48, INSTITUTION: 48, SUPPLY: 52, TIES: 60, PERSONALITY: 96, ALLEGIANCE: 128, UNCANNY: 60 };
 
 /** STYLE-RULINGS-2026-11-07 §2 law 3, verbatim, plus WIRING-RULINGS §7's named tic. */
 const STRUCK_TICS = [
@@ -81,8 +82,10 @@ function shapeViolations(table) {
           if (typeof text !== 'string' || !text) { out.push(`shape: ${family}.${sub}.${vantage} holds a non-line`); continue; }
           if (typeof entry !== 'string') {
             const keys = Object.keys(entry).sort().join(',');
-            if (keys !== 'line,needs') out.push(`shape: ${where} carries keys ${keys}`);
-            for (const atom of entry.needs || []) {
+            // POWERS-9 (the shape widened by one declared side, with its own check): a line whose words fail under a crisis
+            // in force declares it on its `excludes` side (the chair's siege ruling), each an atom of the vocabulary
+            if (keys !== 'line,needs' && keys !== 'excludes,line,needs') out.push(`shape: ${where} carries keys ${keys}`);
+            for (const atom of [...(entry.needs || []), ...(entry.excludes || [])]) {
               try { assertDeclarable(atom); } catch { out.push(`needs: '${atom}' is not a declarable atom — ${where}`); }
             }
           }
@@ -129,10 +132,10 @@ describe('goal families — the cells of design §6.6', () => {
     expect(actual).toEqual(EXPECTED_CELLS);
   });
 
-  test('the family totals are §6.6\'s 464 plus UNCANNY\'s 60, 524 in all', () => {
+  test('the family totals are §6.6\'s 464 plus UNCANNY\'s 60 plus LAST-VARIETY\'s 4, 528 in all', () => {
     const totals = Object.fromEntries(Object.entries(GOAL_FAMILY_LINES).map(([f, subs]) => [f, count(subs)]));
     expect(totals).toEqual(EXPECTED_TOTALS);
-    expect(Object.values(totals).reduce((a, b) => a + b, 0)).toBe(524);
+    expect(Object.values(totals).reduce((a, b) => a + b, 0)).toBe(528);
   });
 
   test('the table is frozen to its lines', () => {
@@ -189,6 +192,8 @@ describe('goal families — the shape law', () => {
     expect(shapeViolations(plant('POWER', 'tense', 'short', "Undo {rival}'s last gain this season.")).some((x) => x.startsWith('contract: "{rival}\'s"'))).toBe(true);
     expect(shapeViolations(plant('POWER', 'tense', 'long', 'See that {rival} needs {power} more than ever.')).some((x) => x.startsWith('contract: "{rival} needs"'))).toBe(true);
     expect(shapeViolations(plant('TIES', 'ally', 'long', { line: 'Stand with {other} at the market.', needs: ['bazaar'] })).some((x) => x.startsWith("needs: 'bazaar'"))).toBe(true);
+    // POWERS-9: the excludes side is checked as the needs side is
+    expect(shapeViolations(plant('SUPPLY', 'impaired', 'short', { line: 'Waste nothing at {house}.', needs: [], excludes: ['crisis: bazaar'] })).some((x) => x.startsWith("needs: 'crisis: bazaar'"))).toBe(true);
   });
 });
 

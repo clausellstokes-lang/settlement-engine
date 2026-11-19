@@ -129,7 +129,7 @@ export function ThePowers({ settlement, powers, factionSupport, showCoupChip = t
   if (!powers.length) return null;
 
   return (
-    <Section title={`The Powers (${powers.length})`} collapsible defaultOpen accent="#8b6a1a">
+    <Section title={seatListTitle(powers)} collapsible defaultOpen accent="#8b6a1a">
       <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, marginBottom: 8, lineHeight: 1.4 }}>
         Who holds and who contests the seat. Open a power to see the institutions behind it.
       </div>
@@ -363,15 +363,39 @@ export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, ro
 // ── THE WEB ──────────────────────────────────────────────────────────────────
 
 /**
- * @param {{ groups: import('../../../../domain/dossier/powerStrata.js').WebGroup[] }} props
+ * ⭐ A PAIR'S CHIP READS ONE RELATION (TAIL-DISPLAY-CIVIC, the chair's ruling X2 of 2026-11-14; READ-ALL 13341 10196
+ * 13403 04908 10188 23115 13395 06925 07168 07174 10187 03798 09976): the chip is the relationship row's `direction`, and
+ * the record's `powerStructure.conflicts` can hold the same two powers in a HIGH quarrel, which the Overview and the
+ * Relationships tab print ("High tension Merchant Guilds vs Craft Guilds") beside a chip that said "stable". Where the
+ * pair is in a high-intensity conflict the record names, the "stable" chip is not printed (114 chips in 107 of the
+ * census's 720 towns at f663a2699); the relation's own narrative stays, and an "escalating" or "declining" chip (the tie
+ * worsening or weakening, factionDynamics.js), which the quarrel does not contradict, stays.
+ * @param {unknown} conflicts the record's `powerStructure.conflicts`
+ * @returns {Set<string>} the pairs in a high quarrel, each keyed both ways
  */
-export function TheWeb({ groups }) {
+export function highQuarrelPairsOf(conflicts) {
+  const out = new Set();
+  for (const c of Array.isArray(conflicts) ? conflicts : []) {
+    const parties = Array.isArray(c?.parties) ? c.parties.filter((p) => typeof p === 'string') : [];
+    if (parties.length !== 2 || c?.intensity !== 'high') continue;
+    out.add(`${parties[0]}\u0000${parties[1]}`).add(`${parties[1]}\u0000${parties[0]}`);
+  }
+  return out;
+}
+/** The direction a pair's chip prints, or '' where a high quarrel contradicts it. @param {{ pair: string[], direction: string }} e @param {Set<string>} quarrels */
+const chipDirection = (e, quarrels) => (e.direction === 'stable' && quarrels.has(`${e.pair[0]}\u0000${e.pair[1]}`) ? '' : e.direction);
+
+/**
+ * @param {{ groups: import('../../../../domain/dossier/powerStrata.js').WebGroup[], conflicts?: unknown }} props
+ */
+export function TheWeb({ groups, conflicts = [] }) {
   // THE PHONE PROSE FLOOR — the per-edge narrative. Read BEFORE the early return
   // so the hook order is stable when no tie exists. The kind label, the glyph,
   // the counts and the direction pill keep their own steps.
   const mobile = useIsMobile();
   if (!groups.length) return null;
   const edgeCount = groups.reduce((n, g) => n + g.edges.length, 0);
+  const quarrels = highQuarrelPairsOf(conflicts);
 
   return (
     <Section title={`The Web (${edgeCount})`} collapsible defaultOpen accent="#4a6a1a">
@@ -391,6 +415,7 @@ export function TheWeb({ groups }) {
               <div>
                 {g.edges.map((e, i) => {
                   const last = i === g.edges.length - 1;
+                  const direction = chipDirection(e, quarrels);
                   return (
                     <div key={i} style={{ padding: '6px 10px', borderBottom: last ? 'none' : `1px solid ${SEAM}` }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
@@ -401,8 +426,8 @@ export function TheWeb({ groups }) {
                         <span style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag }}>
                           <EntityLink id={factionIdFromName(e.pair[1])} type="faction" fallback={e.pair[1]} style={{ color: swatch.inkMag }} />
                         </span>
-                        {e.direction && (
-                          <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, background: swatch['#FAF8F4'], border: `1px solid ${SEAM}`, padding: '0 5px', flexShrink: 0 }}>{e.direction}</span>
+                        {direction && (
+                          <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, background: swatch['#FAF8F4'], border: `1px solid ${SEAM}`, padding: '0 5px', flexShrink: 0 }}>{direction}</span>
                         )}
                       </div>
                       {e.narrative && <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, lineHeight: 1.45, margin: '3px 0 0' }}>{e.narrative}</p>}
@@ -416,6 +441,22 @@ export function TheWeb({ groups }) {
       </div>
     </Section>
   );
+}
+
+// ── The seat's heading ───────────────────────────────────────────────────────
+
+/**
+ * A COUNT READS THE LIST IT HEADS (R2-CODE-B-SIDE item 4; round three's #562 #712 #806 and ten more): ThePowers lists
+ * the seat and those who contest it, and TheFactions lists every power the record holds, and both were headed
+ * "The Powers (N)" with two counts (282 of the census's 720 towns). This list's heading names what it lists; "The
+ * Powers (N)" heads the whole roster alone. Declared below its one caller so no line above moves.
+ * @param {ReadonlyArray<{ role?: string }>} powers
+ * @returns {string}
+ */
+function seatListTitle(powers) {
+  const held = powers.some((p) => p.role === 'ruler');
+  if (!held) return `Contenders for the Seat (${powers.length})`;
+  return powers.length > 1 ? `The Seat and Its Contenders (${powers.length})` : 'The Seat';
 }
 
 // ── Composed strata block ────────────────────────────────────────────────────
@@ -442,7 +483,7 @@ export function PowerStrata({ settlement, powerStructure, expandedFaction, setEx
         focusIndex={focusIndex}
         focusedRowRef={focusedRowRef} shownOnTab={shownOnTab}
       />
-      <TheWeb groups={groups} />
+      <TheWeb groups={groups} conflicts={powerStructure?.conflicts} />
     </>
   );
 }

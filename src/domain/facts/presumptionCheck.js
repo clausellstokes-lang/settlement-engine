@@ -49,7 +49,7 @@ export function presumptionFindings(record, ledger, options = {}) {
 /**
  * The final record's facts, each read ONCE: the check runs after the record is final, so a
  * settled view is the same answer as the live one and costs one read per fact, not per atom.
- * @param {Readonly<Record<string, unknown>> & { hasInstitution(kind: string): boolean, hasOtherNpc(npc: unknown): boolean }} live
+ * @param {Readonly<Record<string, unknown>> & { hasInstitution(kind: string): boolean, hasOtherNpc(npc: unknown): boolean, sharesPower(pair: unknown): boolean|undefined, sharesPlace(pair: unknown): boolean|undefined, loneTie(pair: unknown): boolean|undefined }} live
  *   a `factsOf` object
  */
 function settledFacts(live) {
@@ -64,6 +64,9 @@ function settledFacts(live) {
   return Object.assign(view, {
     hasInstitution: (/** @type {string} */ k) => (kinds.has(k) ? kinds.get(k) : (kinds.set(k, live.hasInstitution(k)), kinds.get(k))),
     hasOtherNpc: (/** @type {unknown} */ n) => (others.has(n) ? others.get(n) : (others.set(n, live.hasOtherNpc(n)), others.get(n))),
+    sharesPower: (/** @type {unknown} */ pair) => live.sharesPower(pair), // R2-CODE-A-14 (s1): a pair's fact, read per line
+    sharesPlace: (/** @type {unknown} */ pair) => live.sharesPlace(pair), // BAR4-PEOPLE (the chair's ruling of 11:07): two more pair facts, read per line
+    loneTie: (/** @type {unknown} */ pair) => live.loneTie(pair),
   });
 }
 

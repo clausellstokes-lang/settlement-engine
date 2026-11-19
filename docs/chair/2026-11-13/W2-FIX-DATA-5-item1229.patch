@@ -1,0 +1,43 @@
+diff --git a/src/data/institutionDescColour.js b/src/data/institutionDescColour.js
+index e6ba727b9..60a824410 100644
+--- a/src/data/institutionDescColour.js
++++ b/src/data/institutionDescColour.js
+@@ -197,8 +197,8 @@ export const DESC_VARIANT_COLOUR_DECLARATIONS = Object.freeze({
+   "A handful of tunnels under the houses, cut to slip contraband past the law.": COLOUR,
+   "A singer, fiddler, or piper who lives here, playing the festivals and the weddings, and in his songs keeping the local history alive.": COLOUR,
+   "The village's own singer, fiddler, or piper, heard at every festival and wedding. Through his songs the settlement's history is remembered.": COLOUR,
+-  "A shaft or adit worked by hired crews with winding gear and ore carts. Where the deposits go deep, the mine is why the place grew at all.": COLOUR,
+-  "Hired crews, winding gear, and ore carts work a shaft into the deposits. Where they run deep, the settlement grew around the mine.": COLOUR,
++  "A mine of shafts and adits, with winding gear and ore carts at the head. Where the deposits ran deep, the mine is why the place grew at all.": COLOUR,
++  "Shafts driven into the deposits, with winding gear and ore carts at the pithead. Where they ran deep, the settlement grew around the mine.": COLOUR,
+   "A stone quarry, with yards beside it for dressing the stone. Half the region's building stone was cut here.": COLOUR,
+   "Yards for dressing stone stand beside the quarry face. Building stone from here has gone to every part of the region.": COLOUR,
+   "Held by royal charter. The heart of the town's trade.": COLOUR,
+diff --git a/src/data/institutionDescVariants.js b/src/data/institutionDescVariants.js
+index f7dc4df8d..b0679cbf6 100644
+--- a/src/data/institutionDescVariants.js
++++ b/src/data/institutionDescVariants.js
+@@ -511,8 +511,8 @@ const PAIRS = [
+     "Charcoal from woodland kilns feeds the smelters, the smithies, and the bake ovens. At this pace of metalwork, a forest lasts a generation.",
+   ],
+   [
+-    "A shaft or adit worked by hired crews with winding gear and ore carts. Where the deposits go deep, the mine is why the place grew at all.",
+-    "Hired crews, winding gear, and ore carts work a shaft into the deposits. Where they run deep, the settlement grew around the mine.",
++    "A mine of shafts and adits, with winding gear and ore carts at the head. Where the deposits ran deep, the mine is why the place grew at all.",
++    "Shafts driven into the deposits, with winding gear and ore carts at the pithead. Where they ran deep, the settlement grew around the mine.",
+   ],
+   [
+     "A stone quarry, with yards beside it for dressing the stone. Half the region's building stone was cut here.",
+diff --git a/src/data/institutionalCatalog.js b/src/data/institutionalCatalog.js
+index 730f69b20..e0f614998 100644
+--- a/src/data/institutionalCatalog.js
++++ b/src/data/institutionalCatalog.js
+@@ -240,7 +240,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
+       ceiling: { tier: 'village', reason: 'Peat is cut for the household hearth; towns buy fuel through the charcoal and coal trade.' },
+     },
+     {
+-      shared: { name: 'Mine', face: 'the mine captain', desc: 'A worked shaft or adit with hired crews, winding gear, and ore carts. Where the deposits run deep, the mine is the reason the settlement grew.', tags: ['trade'], priorityCategory: 'economy' },
++      shared: { name: 'Mine', face: 'the mine captain', desc: 'A mine of shafts and adits, with its winding gear and ore carts. Where the deposits ran deep, the mine is the reason the settlement grew.', tags: ['trade'], priorityCategory: 'economy' },
+       at: {
+         hamlet: { name: 'Mine (open cast)', baseChance: 0.2, desc: 'A shallow excavation or shaft dug to extract iron ore, coal, or stone. Employs the poorest labourers. Dangerous, dirty, and essential.' },
+         village: { baseChance: 0.12, desc: 'A shaft or excavation to extract iron ore, coal, or stone. Requires capital and organisation a thorp cannot sustain, but a village near deposits can. Employs the poorest labourers.' },

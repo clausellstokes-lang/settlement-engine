@@ -35,6 +35,7 @@ import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
 import { RESOURCE_TO_CHAINS } from '../../data/goods/chains.js';
 import { canonExports } from '../canonicalAccessors.js';
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
+import { chainPrintName } from '../display/chainPrintName.js';
 import { TIER_ORDER, tierAtLeast } from '../../data/constants.js';
 import { computeActiveChains, institutionMatchesProcessor } from '../../generators/computeActiveChains.js';
 import { isMaterializedCustomContent } from '../content/customContentSemanticAuthority.js';
@@ -384,7 +385,8 @@ export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {
           const entry = buildableEntryForProcessor(processor, settlement, existingNames);
           if (entry) {
             addGap(entry, 'upstream',
-              `${chain.label} currently imports ${catalogChain.label.toLowerCase()} the settlement could produce itself.`,
+              // printed words: the active chain is named as the page names it (`chainPrintName`)
+              `${chainPrintName(chain, settlement).label} currently imports ${catalogChain.label.toLowerCase()} the settlement could produce itself.`,
               { chainId: missingId, needKey, downstreamOf: chain.chainId });
             break;
           }

@@ -26,6 +26,9 @@ import { houseKindOf, SEAT_CARD_ID, seatHouseOf } from '../../../src/generators/
 import { otherMintRowFor } from '../../../src/generators/people/mintTitles.js';
 import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import { isVeiledPower, veiledOfPower, VEILED_CARD_PREFIX } from '../../../src/domain/people/cardVeil.js';
+import { isSeatVacant } from '../../../src/domain/people/seatKeeper.js';
+import { coupContenders } from '../../../src/domain/rulingPowerCoup.js';
+import { stressPowerRowOf } from '../../../src/domain/people/stressPowerFaces.js';
 import { leaderHouseOf, officeLiteralOf } from '../../helpers/dualHatOracle.js'; // COHERENCE-POWERS-3 (F9): the expectation's own oracle, literals
 
 /** Two military claimants (the density law's doubled niche), one seat, four military houses. */
@@ -70,8 +73,13 @@ function assertPowers(s, label) {
       // dual-hat leader's office (a house's face carrying the office in its role, first of the governing power), which
       // is exactly 0 where its house backs elsewhere and > 0 where it backs the governing power
       const office = m.power === governing && m.rank === 1 && card.institution?.kind === 'house' && card.role !== card.title;
-      if (office && m.share === 0) expect(Object.is(m.share, 0), `${label}: ${card.id} the office at share exactly 0`).toBe(true);
-      else expect(m.share, `${label}: ${card.id} share > 0`).toBeGreaterThan(0);
+      // COHERENCE-POWERS-6 (item 6; REVIEW-POWERS-2 N8): a share of exactly +0 is the DUAL-HAT OFFICE's signature and no one
+      // else's — the office is the one member a house joins at no weight (the office held whatever its house backs). The old
+      // arm `Object.is(m.share, 0)` INSIDE `m.share === 0` was a tautology (it could red only on -0, which the else arm also
+      // catches). Strict and tested: a clean +0 on any OTHER membership reds here; a -0, NaN or negative anywhere reds on the
+      // else arm (none is > 0). Made stricter, never looser.
+      if (Object.is(m.share, 0)) expect(office, `${label}: ${card.id} only the dual-hat office sits at share exactly +0 (${m.power})`).toBe(true);
+      else expect(m.share, `${label}: ${card.id} share > 0 (${m.power})`).toBeGreaterThan(0);
     }
     expect(new Set(card.memberships.map((m) => m.power)).size, `${label}: ${card.id} one membership per power`).toBe(card.memberships.length);
   }
@@ -255,6 +263,29 @@ describe('the people car — the powers\' people (step 3)', () => {
     expect(mints, 'the corpus mints faces').toBeGreaterThan(0);
   }, 300_000);
 
+  it('N8 (COHERENCE-POWERS-6 item 6): the share arm names the +0 the dual-hat office\'s alone — a planted +0 off the office reds, and a -0 on the office reds', async () => {
+    await ensureLaws();
+    const base = birth(5).settlement;
+    const govName = nameOf(governingFactionOf(base));
+    const isOffice = (c, m) => m.power === govName && m.rank === 1 && c.institution?.kind === 'house' && c.role !== c.title;
+    // the control: the real record passes the arm
+    expect(() => assertPowers(JSON.parse(JSON.stringify(base)), 'N8-control')).not.toThrow();
+    const plantShare = (pred, value) => {
+      const s = JSON.parse(JSON.stringify(base));
+      for (const c of s.npcs) for (const m of (c.memberships || [])) if (pred(c, m)) { m.share = value; return s; }
+      return null;
+    };
+    // (a) a clean +0 on a POSITIVE non-office membership: the zero arm reds — a +0 is the dual-hat office's alone. The
+    // shareSum arm is unmoved (a lowered share keeps the sum <= 1). With the arm made meaningful the +0 case has a live
+    // assertion of its own (the old arm reached the +0 only inside `m.share === 0`, where Object.is could not fail).
+    const planted = plantShare((c, m) => m.share > 0 && !isOffice(c, m), 0);
+    expect(planted, 'the fixture has a positive non-office membership to move').toBeTruthy();
+    expect(() => assertPowers(planted, 'N8-plant-nonoffice-zero')).toThrow();
+    // (b) a -0 on the office membership held at 0 (where its house backs elsewhere): never accepted, however it is spelled
+    const negZero = plantShare((c, m) => Object.is(m.share, 0) && isOffice(c, m), -0);
+    if (negZero) expect(() => assertPowers(negZero, 'N8-plant-office-negzero')).toThrow();
+  }, 90_000);
+
   it('determinism: the same seed gives the same memberships and ranks, twice', async () => {
     await ensureLaws();
     for (const i of [4, 5, 17]) {
@@ -340,7 +371,7 @@ describe('the guild\'s push (car 2): I-5 the floors hold under a maximal push; I
       }
     }
     const out = rankPowers(view, landed, tuning);
-    return { out, floors };
+    return { out, floors, view };
   }
   /** power -> [rank-1 id, rank-2 id, rank-3 id] */
   const ranksOf = (cards) => {
@@ -348,10 +379,25 @@ describe('the guild\'s push (car 2): I-5 the floors hold under a maximal push; I
     for (const c of cards) for (const m of c.memberships || []) if (m.rank) { if (!by.has(m.power)) by.set(m.power, []); by.get(m.power)[m.rank - 1] = c.id; }
     return by;
   };
-  /** I-5 by the deal: every power's floor picks hold their ranks (FLOOR 1 rank 1; FLOOR 2 the next). */
-  const floorFindings = (cards, floors) => {
+  /**
+   * I-5 by the deal: every power's floor picks hold their ranks (FLOOR 1 rank 1; FLOOR 2 the next). COHERENCE-POWERS-6
+   * (item 2): in a vacancy the keeper (the governing power's first) leads no contender and no succession power — its rank
+   * there is re-dealt to the next member (keeperLeavesTheContest / keeperLeavesTheClaim). So a floor pick equal to the
+   * keeper's own card, on such a power, is not required to hold: the oracle mirrors the ruled re-deal.
+   */
+  const floorFindings = (cards, floors, view) => {
     const ranks = ranksOf(cards); const out = [];
-    for (const [power, picks] of floors) picks.forEach((id, k) => { if ((ranks.get(power) || [])[k] !== id) out.push(`${power} rank ${k + 1}: ${(ranks.get(power) || [])[k]} where the floor is ${id}`); });
+    const governing = nameOf(governingFactionOf(view));
+    const keeper = ranks.get(governing)?.[0] || null;
+    const reDealt = new Set();
+    if (view && isSeatVacant(view) && keeper) {
+      for (const c of coupContenders(view).challengers) reDealt.add(c.name);
+      for (const f of view.powerStructure?.factions || []) if (stressPowerRowOf(view, f)?.stress === 'succession_void') reDealt.add(nameOf(f));
+    }
+    for (const [power, picks] of floors) picks.forEach((id, k) => {
+      if (reDealt.has(power) && id === keeper) return; // the keeper left this power's lead (item 2)
+      if ((ranks.get(power) || [])[k] !== id) out.push(`${power} rank ${k + 1}: ${(ranks.get(power) || [])[k]} where the floor is ${id}`);
+    });
     return out;
   };
 
@@ -376,7 +422,7 @@ describe('the guild\'s push (car 2): I-5 the floors hold under a maximal push; I
       if (!(s.npcs || []).some((n) => n.allegiance)) continue;
       const max = await redeal(s, i, MAXIMAL);
       const none = await redeal(s, i, NONE);
-      found.push(...floorFindings(max.out, max.floors).map((f) => `${i} ${f}`));
+      found.push(...floorFindings(max.out, max.floors, max.view).map((f) => `${i} ${f}`));
       floorsSeen += [...max.floors.values()].reduce((a, p) => a + p.length, 0);
       const rm = ranksOf(max.out); const rn = ranksOf(none.out);
       for (const [power, ids] of rm) if (JSON.stringify(ids) !== JSON.stringify(rn.get(power))) moved += 1;
@@ -393,7 +439,7 @@ describe('the guild\'s push (car 2): I-5 the floors hold under a maximal push; I
   it('I-5\'s control: the floor checker reds on a planted floor breach', async () => {
     const rows = await born();
     const { i, s } = rows.find(({ s }) => (s.npcs || []).some((n) => n.allegiance));
-    const { out, floors } = await redeal(s, i, MAXIMAL);
+    const { out, floors, view } = await redeal(s, i, MAXIMAL);
     const [power, picks] = [...floors].find(([, p]) => p.length);
     const holder = out.find((c) => c.id === picks[0]);
     const other = out.find((c) => c.id !== picks[0] && (c.memberships || []).some((m) => m.power === power));
@@ -401,7 +447,7 @@ describe('the guild\'s push (car 2): I-5 the floors hold under a maximal push; I
     const swap = (id, rank) => { const m = planted.find((c) => c.id === id).memberships.find((x) => x.power === power); m.rank = rank; };
     const was = other.memberships.find((m) => m.power === power).rank;
     swap(holder.id, was); swap(other.id, 1);
-    expect(floorFindings(planted, floors).length).toBeGreaterThan(0);
+    expect(floorFindings(planted, floors, view).length).toBeGreaterThan(0);
   }, 180_000);
 
   it('I-13: removing a card leaves every other card\'s push, and the ranks of every power it held no membership in, byte-identical', async () => {

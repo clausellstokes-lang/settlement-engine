@@ -464,7 +464,7 @@
     },
     {
       "id": "Village headman|Tithe and dues",
-      "text": "Collects the lord's dues and the temple tithe",
+      "text": "Collects the dues owed and the tithe",
       "needs": [
         "institution: temple"
       ],
@@ -482,7 +482,7 @@
     },
     {
       "id": "Village elder|Dispute mediation",
-      "text": "Arbitrates quarrels before they reach the lord's court",
+      "text": "Arbitrates quarrels before they come to judgment",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -522,7 +522,7 @@
     },
     {
       "id": "Town council|Dispute adjudication",
-      "text": "Hears civil pleas in the town court",
+      "text": "Hears the town's civil pleas at the council bench",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -949,7 +949,7 @@
     },
     {
       "id": "Blacksmith|Horseshoeing",
-      "text": "Essential for transport and cavalry",
+      "text": "Essential for carts, carriers, and working horses",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -1997,7 +1997,9 @@
     {
       "id": "Brewer|Ale (barrel)",
       "text": "Bulk supply to alehouses. Priced by barrel.",
-      "needs": [],
+      "needs": [
+        "institution: tavern"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -2116,7 +2118,7 @@
     },
     {
       "id": "Woodcarver|Religious carvings",
-      "text": "Crucifixes, reliquaries, saints' images.",
+      "text": "Devotional figures, holy images, and reliquaries.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2816,7 +2818,9 @@
       "id": "Coaching inn|Lodging",
       "text": "Beds, meals, and stabling for travelers on the road. Priced by quality.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -2824,7 +2828,9 @@
       "id": "Coaching inn|Horse change",
       "text": "Fresh relay horses for coaches and dispatch riders. Reduces travel time significantly.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -2960,7 +2966,9 @@
       "id": "Butchers (3-8)|Fresh meat",
       "text": "Beef, pork, mutton. Slaughtered and dressed on premises or nearby.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: hunger"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -3049,7 +3057,9 @@
     {
       "id": "River boatyard|Barge construction",
       "text": "Flat-bottomed cargo barges for river transport. Simpler than sea vessels.",
-      "needs": [],
+      "needs": [
+        "river"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -3057,7 +3067,9 @@
     {
       "id": "River boatyard|Boat repair",
       "text": "Hull patching, oar replacement, caulking. River traffic takes constant punishment.",
-      "needs": [],
+      "needs": [
+        "river"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -3170,7 +3182,9 @@
       "id": "Mine (open cast)|Raw extraction",
       "text": "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "tier: ≥ town"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -3466,7 +3480,9 @@
       "id": "Annual fair|Seasonal trading",
       "text": "Once-a-year market drawing merchants from across the region.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -4048,7 +4064,9 @@
       "id": "Carriers' guild|Freight haulage",
       "text": "Organised road transport for goods between towns. Reliable, guild-backed.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -4439,7 +4457,9 @@
       "id": "Daily markets|Fresh produce",
       "text": "Fruit, vegetables, dairy, and eggs. Available every morning.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -4664,7 +4684,9 @@
     {
       "id": "Fish market|Wholesale trade",
       "text": "Bulk purchase by taverns, institutions, and inland traders.",
-      "needs": [],
+      "needs": [
+        "institution: tavern"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -5041,7 +5063,9 @@
       "id": "Hired blades|Bodyguard service",
       "text": "Personal protection for merchants, officials, and travelers.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -5216,7 +5240,9 @@
     {
       "id": "Lord's appointee|Administrative orders",
       "text": "Implement the lord's directives at local level.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -5224,7 +5250,9 @@
     {
       "id": "Lord's appointee|Tax collection",
       "text": "Collect rents and taxes owed to the lord.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -5232,7 +5260,9 @@
     {
       "id": "Lord's appointee|Legal representation",
       "text": "Represent the lord's interests in local disputes.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -5240,7 +5270,9 @@
     {
       "id": "Lord's steward|Estate management",
       "text": "Oversee the lord's properties, staff, and revenues.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -5256,14 +5288,16 @@
     {
       "id": "Lord's steward|Supplier contracts",
       "text": "Negotiate supply contracts for the lord's household.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
     },
     {
       "id": "Luxury goods quarter|High-end retail",
-      "text": "Jewellery, fine clothing, rare spices, and luxury goods from across the world.",
+      "text": "Jewellery, fine clothing, and luxury goods from across the world.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -5563,7 +5597,9 @@
       "id": "Monastery or friary|Religious services",
       "text": "Rites, prayers, and observances. Open to locals and pilgrims.",
       "needs": [],
-      "excludes": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
       "crisis": [],
       "colour": false
     },
@@ -5796,7 +5832,9 @@
     {
       "id": "Noble governor|Noble administration",
       "text": "Govern in the name of the crown or great noble house.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -5923,7 +5961,7 @@
     },
     {
       "id": "Parish churches (10-30)|Full religious coverage",
-      "text": "Every district has a temple. Religious observance accessible to all.",
+      "text": "Every parish served. Religious observance accessible to all.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -6190,7 +6228,9 @@
     {
       "id": "River ferry|River crossing",
       "text": "Transport foot travelers and small goods across the river.",
-      "needs": [],
+      "needs": [
+        "river"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -6198,7 +6238,9 @@
     {
       "id": "River ferry|Small cargo",
       "text": "Move small amounts of cargo across the river.",
-      "needs": [],
+      "needs": [
+        "river"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -6222,7 +6264,9 @@
     {
       "id": "Royal seat|Royal audience",
       "text": "Rare opportunity to petition the monarch directly.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -6631,7 +6675,7 @@
     },
     {
       "id": "Town crier|Official announcements",
-      "text": "Proclaim laws, royal decrees, and official notices to the public.",
+      "text": "Proclaim laws, decrees and official notices to the public.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -6777,7 +6821,7 @@
     },
     {
       "id": "Village reeve|Administrative oversight",
-      "text": "Manage village affairs on behalf of the lord. Allocate strips and common access.",
+      "text": "Manage the village's affairs day to day. Allocate strips and common access.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -6794,7 +6838,9 @@
     {
       "id": "Village reeve|Tax collection",
       "text": "Collect dues owed to the lord and accounting for common resources.",
-      "needs": [],
+      "needs": [
+        "sovereign"
+      ],
       "excludes": [],
       "crisis": [],
       "colour": false
@@ -7265,7 +7311,7 @@
     },
     {
       "id": "Head-of-household consensus|Family decisions",
-      "text": "Matters affecting multiple families go to a council of heads. Slow but broadly legitimate.",
+      "text": "Matters affecting multiple families go to a council of heads, who settle them slowly, by talk.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -7407,7 +7453,7 @@
     },
     {
       "id": "Access to parish church|Last rites",
-      "text": "Funeral rites and burial. The priest manages the graveyard.",
+      "text": "Funeral rites, said by the parish priest, who comes or is sent for.",
       "needs": [],
       "excludes": [],
       "crisis": [],

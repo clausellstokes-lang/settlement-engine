@@ -37,6 +37,7 @@ import {
   impairedServicePoolKey, serviceCatalogPoolKey,
 } from '../../src/domain/display/stateProse/economyStateProse.js';
 import { drawnMember, poolMemberTexts } from '../helpers/drawnProse.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 afterEach(cleanup);
@@ -94,11 +95,19 @@ function settlement() {
   };
 }
 
-/** The two sentences this position draws, through the shipped read path. */
+/**
+ * The two sentences this position draws, through the shipped read path.
+ *
+ * 2026-11-15 (BAR2-CLOSE-SWEEP-B): the spec passes the facts the desk passes (`factsOf`, as
+ * `economyStateProse` hands in through `factsAnswered.js`). BAR2-CORPUS batch 1 (d89e61aac,
+ * C2273) declared `no crisis: under_siege` on DS-SUP-3 "ONE EXPECTED CATEGORY MISSING" v2, so the
+ * pool now declares fact atoms and a read with no facts draws nothing (drawnProse.js cause 5).
+ */
 function drawnPair(s) {
   const shared = {
     leaf: 'economy', blockId: 'DS-SUP-3', seed: SEED, audience: 'dm',
     slots: { settlement: TOWN, institution: HOUSE },
+    facts: factsOf(s),
   };
   return {
     catalog: drawnMember({

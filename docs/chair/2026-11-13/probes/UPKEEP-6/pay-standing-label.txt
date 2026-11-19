@@ -1,0 +1,5 @@
+other fields changed 0
+guard changed 507 {'capped': 505, 'same': 2}
+money changed 2051 of 3756 {'same': 751, 'capped': 1300}
+before a short-purse or crisis guard line beside "money enough for a long crisis": 652 | hunger/siege guard lines: 346
+after a short-purse or crisis guard line beside "money enough for a long crisis": 0 | hunger/siege guard lines: 0

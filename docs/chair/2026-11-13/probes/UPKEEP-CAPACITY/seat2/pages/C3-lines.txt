@@ -1,0 +1,261 @@
+  9 == foundry == replace [cold-thorp-115.txt]
+     - - **Readiness:** Vulnerable
+     + - **Readiness:** Lightly Defended
+  6 == foundry == replace [cold-thorp-115.txt]
+     - *Vulnerable: a palisade, held by the household levy.*
+     + *Lightly defended: a palisade, held by the household levy.*
+  3 == foundry == replace [cold-thorp-132.txt]
+     - - **Readiness:** Lightly Defended
+     + - **Readiness:** Defensible
+  3 == foundry == replace [cold-under_siege-thorp-18.txt]
+     - *Undefended: a palisade, held by the household levy.*
+     + *Vulnerable: a palisade, held by the household levy.*
+  3 == foundry == replace [cold-under_siege-thorp-18.txt]
+     - - **Readiness:** Undefended
+     + - **Readiness:** Vulnerable
+  2 == foundry == replace [cold-thorp-177.txt]
+     - *Vulnerable: no walls; the household levy is all that stands guard.*
+     + *Lightly defended: no walls; the household levy is all that stands guard.*
+  2 == foundry == replace [cold-thorp-211.txt]
+     - *Lightly defended: no walls; the household levy is all that stands guard.*
+     + *Defensible: no walls; the household levy is all that stands guard.*
+  1 == foundry == replace [cold-thorp-132.txt]
+     - *Lightly defended: a palisade, held by the household levy.*
+     + *Defensible: a palisade, held by the household levy.*
+  1 == foundry == replace [cold-wartime-village-39.txt]
+     - *Vulnerable: palisade or earthworks, held by the citizen militia.*
+     + *Lightly defended: palisade or earthworks, held by the citizen militia.*
+ 27 == pdf == replace [cold-famine-hamlet-0.txt]
+     - #/#
+     + #/#
+ 19 == pdf == replace [cold-thorp-115.txt]
+     - Critical
+     + Weak
+ 11 == pdf == replace [cold-thorp-115.txt]
+     - Weak
+     + Adequate
+  9 == pdf == replace [cold-thorp-115.txt]
+     - Defense: Vulnerable
+     + Defense: Lightly Defended
+  9 == pdf == replace [cold-thorp-115.txt]
+     - Vulnerable
+     + Lightly defended
+  7 == pdf == replace [cold-thorp-132.txt]
+     - #
+     + #
+  6 == pdf == replace [cold-thorp-115.txt]
+     - Vulnerable: a palisade, held by the household levy.
+     + Lightly defended: a palisade, held by the household levy.
+  4 == pdf == replace [cold-under_siege-thorp-18.txt]
+     - -# Defense
+     + -# Defense
+  3 == pdf == replace [cold-famine-village-1.txt]
+     - Adequate
+     + Strong
+  3 == pdf == replace [cold-thorp-132.txt]
+     - Defense: Lightly Defended
+     + Defense: Defensible
+  3 == pdf == replace [cold-thorp-132.txt]
+     - -# Defense
+     + # Defense
+  3 == pdf == replace [cold-thorp-132.txt]
+     - Lightly defended
+     + Defensible
+  3 == pdf == replace [cold-under_siege-thorp-18.txt]
+     - Defense: Undefended
+     + Defense: Vulnerable
+  3 == pdf == replace [cold-under_siege-thorp-18.txt]
+     - Undefended: a palisade, held by the household levy.
+     + Vulnerable: a palisade, held by the household levy.
+  3 == pdf == replace [cold-under_siege-thorp-18.txt]
+     - Undefended
+     + Vulnerable
+  2 == pdf == replace [cold-famine-thorp-10.txt]
+     - Critical
+     + Adequate
+  2 == pdf == replace [cold-thorp-177.txt]
+     - Vulnerable: no walls; the household levy is all that stands guard.
+     + Lightly defended: no walls; the household levy is all that stands guard.
+  2 == pdf == replace [cold-thorp-211.txt]
+     - Lightly defended: no walls; the household levy is all that stands guard.
+     + Defensible: no walls; the household levy is all that stands guard.
+  1 == pdf == replace [cold-thorp-132.txt]
+     - Lightly defended: a palisade, held by the household levy.
+     + Defensible: a palisade, held by the household levy.
+  1 == pdf == replace [cold-wartime-village-39.txt]
+     - Vulnerable: palisade or earthworks, held by the citizen militia.
+     + Lightly defended: palisade or earthworks, held by the citizen militia.
+  1 == pdf == replace [fresh6-thorp-52.txt]
+     - Bera Bjornsson, the household elder, holds the seat of the Headman's Authority. The Headman's Authority governs Skálberg. Skálberg tolerates the Headman's Authority and no more. Crime and weak defences are the reason. A 
+     + Bera Bjornsson, the household elder, holds the seat of the Headman's Authority. The Headman's Authority governs Skálberg. Skálberg tolerates the Headman's Authority and no more. Crime is the reason. A dispute over grazin
+ 19 == tab:defense == replace [cold-thorp-115.txt]
+     - Critical ▼
+     + Weak ▼
+ 11 == tab:defense == replace [cold-thorp-115.txt]
+     - Weak ▼
+     + Adequate ▼
+  9 == tab:defense == replace [cold-thorp-115.txt]
+     - Vulnerable
+     + Lightly defended
+  3 == tab:defense == replace [cold-famine-village-1.txt]
+     - Adequate ▼
+     + Strong ▼
+  3 == tab:defense == replace [cold-thorp-132.txt]
+     - Lightly defended
+     + Defensible
+  3 == tab:defense == replace [cold-under_siege-thorp-18.txt]
+     - Undefended
+     + Vulnerable
+  2 == tab:defense == replace [cold-famine-thorp-10.txt]
+     - Critical ▼
+     + Adequate ▼
+  1 == tab:defense == replace [cold-famine-thorp-10.txt]
+     - People at Xiguan know it could not survive a serious attack, so they take care not to provoke anyone who could mount one.
+     + Xiguan has not been attacked lately, and if it were, it would struggle to hold.
+  1 == tab:defense == replace [cold-thorp-115.txt]
+     - People at Amarpalli know it could not survive a serious attack, so they take care not to provoke anyone who could mount one.
+     + Amarpalli has not been attacked lately, and if it were, it would struggle to hold.
+  1 == tab:defense == replace [cold-thorp-211.txt]
+     - Olympvrysi could deal with a brawl or a thief, but the thorp could not hold off a raid.
+     + Olympvrysi is covered against what it is likely to face, with little left over; two troubles at once would be too many.
+  1 == tab:defense == replace [cold-thorp-72.txt]
+     - You can walk into the centre of Ononkotan without being stopped, challenged or counted by anybody at all.
+     + Ononkotan has not been attacked lately, and if it were, it would struggle to hold.
+  1 == tab:defense == replace [fresh5-thorp-10.txt]
+     - You can walk into the centre of Aryagiri without being stopped, challenged or counted by anybody at all.
+     + Aryagiri could deal with a brawl or a thief, but the thorp could not hold off a raid.
+  1 == tab:defense == replace [fresh5-thorp-56.txt]
+     - Ripamunicipium is all but undefended. Nothing in the thorp would stop a serious attack for long.
+     + Ripamunicipium could deal with a brawl or a thief, but the thorp could not hold off a raid.
+  1 == tab:defense == replace [fresh6-famine-thorp-18.txt]
+     - People at Hongba know it could not survive a serious attack, so they take care not to provoke anyone who could mount one.
+     + Much of Hongba's perimeter has nobody on it, and the people who live there seem used to that.
+  1 == tab:defense == replace [fresh6-thorp-52.txt]
+     - Skálberg could deal with a brawl or a thief, but the thorp could not hold off a raid.
+     + Skálberg is covered against what it is likely to face, with little left over; two troubles at once would be too many.
+ 11 == tab:overview == replace [cold-thorp-115.txt]
+     - Monster Defense Critical
+     + Monster Defense Weak
+  9 == tab:overview == replace [cold-thorp-115.txt]
+     - Vulnerable
+     + Lightly defended
+  3 == tab:overview == replace [cold-thorp-132.txt]
+     - Lightly defended
+     + Defensible
+  3 == tab:overview == replace [cold-under_siege-thorp-18.txt]
+     - Undefended
+     + Vulnerable
+  4 == tab:power == replace [cold-thorp-132.txt]
+     - # Legitimacy Crisis
+     + # Legitimacy Crisis
+  4 == tab:power == replace [cold-under_siege-thorp-18.txt]
+     - Defense -#
+     + Defense -#
+  3 == tab:power == delete [cold-thorp-132.txt]
+     - Defense -#
+     + 
+  2 == tab:power == replace [fresh6-thorp-12.txt]
+     - # Tolerated
+     + # Tolerated
+  1 == tab:power == replace [cold-thorp-211.txt]
+     - # Approved
+     + # Approved
+  1 == tab:power == replace [fresh6-thorp-52.txt]
+     - Bera Bjornsson, the household elder, holds the seat of the Headman's Authority. The Headman's Authority governs Skálberg. Skálberg tolerates the Headman's Authority and no more. Crime and weak defences are the reason. A 
+     + Bera Bjornsson, the household elder, holds the seat of the Headman's Authority. The Headman's Authority governs Skálberg. Skálberg tolerates the Headman's Authority and no more. Crime is the reason. A dispute over grazin
+  4 == tab:substrate == insert [cold-famine-thorp-10.txt]
+     - 
+     + Infrastructure condition Strained
+  4 == tab:substrate == delete [cold-famine-village-1.txt]
+     - Infrastructure condition Strained
+     + 
+  3 == tab:substrate == insert [cold-famine-thorp-10.txt]
+     - 
+     + Defense readiness Strained
+  3 == tab:substrate == insert [cold-famine-village-1.txt]
+     - 
+     + Infrastructure condition Adequate
+  3 == tab:substrate == delete [cold-thorp-234.txt]
+     - Public legitimacy Strained
+     + 
+  3 == tab:substrate == delete [cold-wartime-thorp-26.txt]
+     - Social trust Strained
+     + 
+  2 == tab:substrate == delete [cold-famine-thorp-6.txt]
+     - Defense readiness Strained
+     + 
+  2 == tab:substrate == delete [cold-famine-thorp-6.txt]
+     - Criminal opportunity Elevated
+     + 
+  2 == tab:substrate == insert [cold-hamlet-154.txt]
+     - 
+     + Healing capacity Strained
+  2 == tab:substrate == delete [cold-hamlet-154.txt]
+     - Healing capacity Strained
+     + 
+  2 == tab:substrate == replace [cold-thorp-195.txt]
+     - Law & order Critical
+     + Law & order Strained
+  2 == tab:substrate == insert [cold-thorp-234.txt]
+     - 
+     + Public legitimacy Strained
+  2 == tab:substrate == insert [cold-wartime-thorp-26.txt]
+     - 
+     + Social trust Strained
+  1 == tab:substrate == delete [cold-famine-thorp-10.txt]
+     - Infrastructure condition Critical | Defense readiness Critical
+     + 
+  1 == tab:substrate == insert [cold-famine-thorp-6.txt]
+     - 
+     + Defense readiness Strained | Criminal opportunity Elevated
+  1 == tab:substrate == insert [cold-hamlet-154.txt]
+     - 
+     + Economic capacity Strained
+  1 == tab:substrate == delete [cold-hamlet-154.txt]
+     - Economic capacity Strained
+     + 
+  1 == tab:substrate == delete [cold-thorp-132.txt]
+     - Infrastructure condition Strained | Defense readiness Strained
+     + 
+  1 == tab:substrate == replace [cold-thorp-177.txt]
+     - Law & order Critical
+     + Law & order Strained | Defense readiness Strained
+  1 == tab:substrate == delete [cold-thorp-191.txt]
+     - Law & order Strained
+     + 
+  1 == tab:substrate == insert [cold-thorp-191.txt]
+     - 
+     + Law & order Strained
+  1 == tab:substrate == insert [cold-thorp-211.txt]
+     - 
+     + Defense readiness Strained | Labor capacity Strained | Law & order Strained | Religious authority Strained
+  1 == tab:substrate == delete [cold-thorp-211.txt]
+     - Defense readiness Strained | Law & order Strained | Labor capacity Strained | Religious authority Strained
+     + 
+  1 == tab:substrate == replace [cold-thorp-72.txt]
+     - Infrastructure condition Critical
+     + Infrastructure condition Strained
+  1 == tab:substrate == insert [cold-thorp-97.txt]
+     - 
+     + Public legitimacy Strained | Food Strained
+  1 == tab:substrate == delete [cold-thorp-97.txt]
+     - Public legitimacy Strained | Defense readiness Strained | Food Strained
+     + 
+  1 == tab:substrate == insert [cold-under_siege-thorp-18.txt]
+     - 
+     + Food Critical
+  1 == tab:substrate == delete [cold-under_siege-thorp-18.txt]
+     - Food Critical
+     + 
+  1 == tab:substrate == replace [fresh5-thorp-56.txt]
+     - Defense readiness Critical | Labor capacity Critical | Infrastructure condition Strained
+     + Labor capacity Strained | Defense readiness Strained
+  1 == tab:substrate == insert [fresh6-famine-thorp-18.txt]
+     - 
+     + Criminal opportunity Elevated
+  1 == tab:substrate == insert [fresh6-thorp-12.txt]
+     - 
+     + Social trust Adequate
+  1 == tab:substrate == insert [fresh6-thorp-52.txt]
+     - 
+     + Public legitimacy Adequate

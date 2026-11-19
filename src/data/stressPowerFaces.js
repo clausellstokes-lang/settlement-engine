@@ -101,6 +101,9 @@ export const STRESS_POWER_FACES = Object.freeze([
  * A claimant in person (COHERENCE-POWERS-4, F3): the lord who presses the claim, on the monarch's own pool row
  * (people/poolMap.js :: 'the monarch'); a title faces already bear (mintTitles.js :: SEAT_MINT_TITLES, 'Noble Houses').
  */
-export const CLAIMANT_FACE = Object.freeze({ title: 'the lord', role: 'Duke/Duchess', category: 'government', titleKey: 'noble' });
+// COHERENCE-POWERS-7 (the chair's R1, from REVIEW-POWERS-FU F1): a lord of a noble body, and a claimant who does not hold
+// the seat, is NOT of the government — minted in the card pools' `other` category (the old families' own: npcStructure.js
+// gives it "Heads an old family …"), never the government's office and the governor's debts
+export const CLAIMANT_FACE = Object.freeze({ title: 'the lord', role: 'Duke/Duchess', category: 'other', titleKey: 'noble' });
 
 export const HOUSELESS_CRIMINAL_FACE = Object.freeze({ title: 'the guildmaster', role: 'Guildmaster', category: 'criminal', titleKey: 'lord' });

@@ -25,7 +25,7 @@ import { INSTITUTION_SERVICES } from '../../data/institutionServices.js';
 import { LOCALE_SERVICE_OVERRIDES } from '../../data/servicesData.js';
 import { GOODS_MODIFIERS_BY_TIER } from '../../data/goods/chains.js';
 import { identityForInstitution } from './institutionVocabulary.js';
-import { institutionDisplayName } from './institutionDisplayName.js';
+import { institutionHouseLabel } from './institutionDisplayName.js';
 // The backing relation lives in a leaf module so the generator's reader (castPowers via
 // powerSupport) does not drag this display module into the engine-shared, first-paint graph.
 import { institutionBackingFactionName } from './institutionBackingFaction.js';
@@ -272,7 +272,8 @@ export function deriveInstitutionProfile(institution, settlement = {}) {
   // way. §934.13's seam is a read-time label, never a rename. The `|| name` keeps the
   // 'Institution' fallback for an institution with no name at all.
   return {
-    name: institutionDisplayName(inst) || name,
+    // ROUND THREE, ruling (a): the profile's heading is the house's label (the one display leaf).
+    name: institutionHouseLabel(inst) || name,
     oneLiner: identityForInstitution(inst),
     contributions,
   };

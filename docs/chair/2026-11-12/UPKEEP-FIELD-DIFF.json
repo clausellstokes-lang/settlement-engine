@@ -1,0 +1,2394 @@
+{
+ "golden": {
+  "rows": 525,
+  "moved": 507,
+  "byTier": {
+   "thorp": 84,
+   "hamlet": 84,
+   "village": 84,
+   "town": 87,
+   "city": 84,
+   "metropolis": 84
+  },
+  "families": {
+   "defenseProfile": 507,
+   "economicState": 397,
+   "availableServices": 149,
+   "simulationTrace[]": 63,
+   "powerStructure": 63,
+   "activeConditions[]": 46,
+   "stress": 11,
+   "stressors": 11,
+   "relationships[]": 11,
+   "npcs[]": 11,
+   "prominentRelationship": 9,
+   "conflicts[]": 1
+  },
+  "paths": {
+   "defenseProfile.scores.disaster": {
+    "rows": 504,
+    "kind": "non-string"
+   },
+   "defenseProfile.scores.economic": {
+    "rows": 471,
+    "kind": "non-string"
+   },
+   "defenseProfile.economicGates.economic": {
+    "rows": 466,
+    "kind": "non-string"
+   },
+   "defenseProfile.economicGates.disaster": {
+    "rows": 466,
+    "kind": "non-string"
+   },
+   "defenseProfile.economicGates.monster": {
+    "rows": 466,
+    "kind": "non-string"
+   },
+   "defenseProfile.readiness.score": {
+    "rows": 419,
+    "kind": "non-string"
+   },
+   "economicState.foodSecurity.storageMonths": {
+    "rows": 328,
+    "kind": "non-string"
+   },
+   "economicState.foodSecurity.foodRecord.storageMonths": {
+    "rows": 328,
+    "kind": "non-string"
+   },
+   "defenseProfile.economicGates.military": {
+    "rows": 238,
+    "kind": "non-string"
+   },
+   "economicState.foodSecurity.resilienceScore": {
+    "rows": 227,
+    "kind": "non-string"
+   },
+   "defenseProfile.scores.internal": {
+    "rows": 214,
+    "kind": "non-string"
+   },
+   "defenseProfile.economicGates.internal": {
+    "rows": 214,
+    "kind": "non-string"
+   },
+   "defenseProfile.scores.military": {
+    "rows": 213,
+    "kind": "non-string"
+   },
+   "defenseProfile.scores.monster": {
+    "rows": 199,
+    "kind": "non-string"
+   },
+   "economicState.foodSecurity.storageNote": {
+    "rows": 160,
+    "kind": "string"
+   },
+   "availableServices.healing[].name": {
+    "rows": 98,
+    "kind": "string"
+   },
+   "availableServices.healing[].desc": {
+    "rows": 98,
+    "kind": "string"
+   },
+   "availableServices.healing#len": {
+    "rows": 98,
+    "kind": "non-string"
+   },
+   "economicState.safetyProfile.guardEffectivenessDesc": {
+    "rows": 96,
+    "kind": "string"
+   },
+   "availableServices.equipment#len": {
+    "rows": 64,
+    "kind": "non-string"
+   },
+   "availableServices.equipment[].institution": {
+    "rows": 64,
+    "kind": "string"
+   },
+   "availableServices.equipment[].desc": {
+    "rows": 64,
+    "kind": "string"
+   },
+   "availableServices.equipment[].name": {
+    "rows": 64,
+    "kind": "string"
+   },
+   "defenseProfile.readiness.border": {
+    "rows": 63,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.breakdown.defense": {
+    "rows": 63,
+    "kind": "non-string"
+   },
+   "powerStructure.publicLegitimacy.score": {
+    "rows": 63,
+    "kind": "non-string"
+   },
+   "defenseProfile.readiness.color": {
+    "rows": 63,
+    "kind": "string"
+   },
+   "defenseProfile.readiness.label": {
+    "rows": 63,
+    "kind": "string"
+   },
+   "defenseProfile.readiness.background": {
+    "rows": 63,
+    "kind": "string"
+   },
+   "simulationTrace[].causes[].reason": {
+    "rows": 63,
+    "kind": "string"
+   },
+   "activeConditions[].severity": {
+    "rows": 46,
+    "kind": "non-string"
+   },
+   "activeConditions[].severityBand": {
+    "rows": 25,
+    "kind": "string"
+   },
+   "availableServices.information#len": {
+    "rows": 21,
+    "kind": "non-string"
+   },
+   "availableServices.healing[].institution": {
+    "rows": 14,
+    "kind": "string"
+   },
+   "availableServices.lodging#len": {
+    "rows": 13,
+    "kind": "non-string"
+   },
+   "stressors.cast.stakes[].stake": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].npc2Name": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].goal.short": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].institution.title": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.target.id": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].physical.age": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].tension": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].allegiance": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].presentation.behaviour": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].description": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "stress.cast.stakes[].reason": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].archetypeKey": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].physical.clothes": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].physical.feature": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.short.target.kind": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].typeName": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].npc1Name": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.label": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "powerStructure.factionRelationships[].ratio": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "powerStructure.factionRelationships[].direction": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].title": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.isTolerated": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "npcs[].influence": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "availableServices.information[].institution": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "simulationTrace[].causes[].effect": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "availableServices.information[].desc": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "powerStructure.factionRelationships[].type": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].category": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].type": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "stress.cast.stakes[].stake": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "powerStructure.factions[].power": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "npcs[].plotHooks[]": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].structuralPosition": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.target.kind": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].handler": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].from": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].personality.dominant": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].strength": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].personality.speech": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.short.kind": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].goal.long": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "powerStructure.factions[].desc": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.short.key": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.target": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "relationships[].id": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "availableServices.information[].name": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].personality.tell": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].name": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.kind": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].institution.key": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].personality.flaw": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].personality.modifier": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.color": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].memberships[].power": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.crimMultiplier": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "npcs[].activeConstraint": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].npc2Role": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.short.target": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "npcs[].role": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].institution.family": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].presentation.impression": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].id": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "stressors.cast.stakes[].reason": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].covert": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].gender": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].npc1Role": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.govMultiplier": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "npcs[].memberships#len": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "npcs[].memberships[].share": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "relationships[].proseVariant": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "powerStructure.publicLegitimacy.bg": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.short.family": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.family": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.isContested": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "powerStructure.factionRelationships[].narrative": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].to": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].secret.stakes": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.key": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].power": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "npcs[].presentation.disposition": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.short.target.id": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].secret.what": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].physical.build": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "availableServices.transport#len": {
+    "rows": 10,
+    "kind": "non-string"
+   },
+   "prominentRelationship.phrasing": {
+    "rows": 9,
+    "kind": "string"
+   },
+   "prominentRelationship.tension": {
+    "rows": 9,
+    "kind": "string"
+   },
+   "prominentRelationship.full": {
+    "rows": 9,
+    "kind": "string"
+   },
+   "availableServices.legal#len": {
+    "rows": 7,
+    "kind": "non-string"
+   },
+   "availableServices.legal[].desc": {
+    "rows": 7,
+    "kind": "string"
+   },
+   "availableServices.legal[].name": {
+    "rows": 7,
+    "kind": "string"
+   },
+   "availableServices.legal[].institution": {
+    "rows": 6,
+    "kind": "string"
+   },
+   "availableServices.employment#len": {
+    "rows": 4,
+    "kind": "non-string"
+   },
+   "availableServices.employment[].institution": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "availableServices.employment[].name": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "availableServices.employment[].desc": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "availableServices.food#len": {
+    "rows": 3,
+    "kind": "non-string"
+   },
+   "prominentRelationship.npc2": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].parties[]": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "conflicts[].stakes": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].stakes": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "conflicts[].parties[]": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].desc": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "conflicts[].plotHooks[]": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "conflicts[].desc": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].issue": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "conflicts[].issue": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].plotHooks[]": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "availableServices.food[].name": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "availableServices.food[].institution": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "availableServices.food[].desc": {
+    "rows": 1,
+    "kind": "string"
+   }
+  }
+ },
+ "wide": {
+  "rows": 660,
+  "moved": 594,
+  "byTier": {
+   "village": 83,
+   "town": 152,
+   "city": 119,
+   "metropolis": 69,
+   "thorp": 84,
+   "hamlet": 87
+  },
+  "families": {
+   "defenseProfile": 560,
+   "economicState": 528,
+   "availableServices": 313,
+   "powerStructure": 129,
+   "simulationTrace[]": 115,
+   "activeConditions[]": 42,
+   "npcs[]": 22,
+   "relationships[]": 20,
+   "conflicts[]": 10,
+   "pressureSentence": 8,
+   "prominentRelationship": 6,
+   "economicViability": 6,
+   "stressors": 5,
+   "stress": 5,
+   "generationCoherenceReceipt": 4,
+   "conflicts": 4,
+   "stress[]": 1,
+   "stressors[]": 1
+  },
+  "paths": {
+   "defenseProfile.scores.disaster": {
+    "rows": 509,
+    "kind": "non-string"
+   },
+   "defenseProfile.economicGates.economic": {
+    "rows": 509,
+    "kind": "non-string"
+   },
+   "defenseProfile.economicGates.monster": {
+    "rows": 509,
+    "kind": "non-string"
+   },
+   "defenseProfile.economicGates.disaster": {
+    "rows": 501,
+    "kind": "non-string"
+   },
+   "economicState.foodSecurity.storageMonths": {
+    "rows": 477,
+    "kind": "non-string"
+   },
+   "economicState.foodSecurity.foodRecord.storageMonths": {
+    "rows": 477,
+    "kind": "non-string"
+   },
+   "defenseProfile.scores.economic": {
+    "rows": 449,
+    "kind": "non-string"
+   },
+   "defenseProfile.readiness.score": {
+    "rows": 408,
+    "kind": "non-string"
+   },
+   "economicState.foodSecurity.resilienceScore": {
+    "rows": 369,
+    "kind": "non-string"
+   },
+   "defenseProfile.economicGates.military": {
+    "rows": 337,
+    "kind": "non-string"
+   },
+   "defenseProfile.scores.military": {
+    "rows": 326,
+    "kind": "non-string"
+   },
+   "defenseProfile.scores.monster": {
+    "rows": 305,
+    "kind": "non-string"
+   },
+   "economicState.foodSecurity.storageNote": {
+    "rows": 294,
+    "kind": "string"
+   },
+   "defenseProfile.economicGates.internal": {
+    "rows": 266,
+    "kind": "non-string"
+   },
+   "defenseProfile.scores.internal": {
+    "rows": 249,
+    "kind": "non-string"
+   },
+   "availableServices.equipment#len": {
+    "rows": 188,
+    "kind": "non-string"
+   },
+   "availableServices.equipment[].desc": {
+    "rows": 178,
+    "kind": "string"
+   },
+   "availableServices.equipment[].name": {
+    "rows": 178,
+    "kind": "string"
+   },
+   "availableServices.equipment[].institution": {
+    "rows": 174,
+    "kind": "string"
+   },
+   "availableServices.healing#len": {
+    "rows": 162,
+    "kind": "non-string"
+   },
+   "economicState.safetyProfile.guardEffectivenessDesc": {
+    "rows": 139,
+    "kind": "string"
+   },
+   "defenseProfile.readiness.label": {
+    "rows": 131,
+    "kind": "string"
+   },
+   "defenseProfile.readiness.color": {
+    "rows": 131,
+    "kind": "string"
+   },
+   "defenseProfile.readiness.border": {
+    "rows": 131,
+    "kind": "string"
+   },
+   "defenseProfile.readiness.background": {
+    "rows": 131,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.breakdown.defense": {
+    "rows": 129,
+    "kind": "non-string"
+   },
+   "availableServices.healing[].name": {
+    "rows": 118,
+    "kind": "string"
+   },
+   "availableServices.healing[].desc": {
+    "rows": 118,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.score": {
+    "rows": 115,
+    "kind": "non-string"
+   },
+   "simulationTrace[].causes[].reason": {
+    "rows": 115,
+    "kind": "string"
+   },
+   "availableServices.food#len": {
+    "rows": 100,
+    "kind": "non-string"
+   },
+   "availableServices.healing[].institution": {
+    "rows": 87,
+    "kind": "string"
+   },
+   "availableServices.food[].desc": {
+    "rows": 75,
+    "kind": "string"
+   },
+   "availableServices.food[].name": {
+    "rows": 75,
+    "kind": "string"
+   },
+   "availableServices.food[].institution": {
+    "rows": 71,
+    "kind": "string"
+   },
+   "availableServices.transport#len": {
+    "rows": 59,
+    "kind": "non-string"
+   },
+   "availableServices.legal#len": {
+    "rows": 59,
+    "kind": "non-string"
+   },
+   "availableServices.legal[].institution": {
+    "rows": 55,
+    "kind": "string"
+   },
+   "availableServices.legal[].name": {
+    "rows": 55,
+    "kind": "string"
+   },
+   "availableServices.legal[].desc": {
+    "rows": 55,
+    "kind": "string"
+   },
+   "availableServices.transport[].name": {
+    "rows": 46,
+    "kind": "string"
+   },
+   "availableServices.transport[].desc": {
+    "rows": 46,
+    "kind": "string"
+   },
+   "availableServices.transport[].institution": {
+    "rows": 44,
+    "kind": "string"
+   },
+   "activeConditions[].severity": {
+    "rows": 42,
+    "kind": "non-string"
+   },
+   "powerStructure.factionRelationships[].ratio": {
+    "rows": 33,
+    "kind": "non-string"
+   },
+   "availableServices.lodging#len": {
+    "rows": 31,
+    "kind": "non-string"
+   },
+   "powerStructure.publicLegitimacy.bg": {
+    "rows": 29,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.color": {
+    "rows": 29,
+    "kind": "string"
+   },
+   "simulationTrace[].causes[].effect": {
+    "rows": 29,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.crimMultiplier": {
+    "rows": 29,
+    "kind": "non-string"
+   },
+   "powerStructure.publicLegitimacy.govMultiplier": {
+    "rows": 29,
+    "kind": "non-string"
+   },
+   "powerStructure.publicLegitimacy.label": {
+    "rows": 29,
+    "kind": "string"
+   },
+   "powerStructure.factions[].power": {
+    "rows": 29,
+    "kind": "non-string"
+   },
+   "defenseProfile.chainModifiers.military": {
+    "rows": 25,
+    "kind": "non-string"
+   },
+   "powerStructure.factions[].desc": {
+    "rows": 23,
+    "kind": "string"
+   },
+   "availableServices.employment#len": {
+    "rows": 22,
+    "kind": "non-string"
+   },
+   "npcs[].goal.intent.short.kind": {
+    "rows": 21,
+    "kind": "string"
+   },
+   "npcs[].goal.short": {
+    "rows": 21,
+    "kind": "string"
+   },
+   "npcs[].goal.long": {
+    "rows": 21,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.kind": {
+    "rows": 21,
+    "kind": "string"
+   },
+   "availableServices.lodging[].institution": {
+    "rows": 21,
+    "kind": "string"
+   },
+   "availableServices.lodging[].desc": {
+    "rows": 21,
+    "kind": "string"
+   },
+   "availableServices.lodging[].name": {
+    "rows": 21,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.family": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "relationships[].from": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].secret.what": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].category": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].presentation.behaviour": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].presentation.disposition": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].institution.title": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].physical.clothes": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "relationships[].proseVariant": {
+    "rows": 20,
+    "kind": "non-string"
+   },
+   "npcs[].memberships#len": {
+    "rows": 20,
+    "kind": "non-string"
+   },
+   "npcs[].goal.intent.short.key": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].role": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].personality.modifier": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].physical.age": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.short.family": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "relationships[].typeName": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].title": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].institution.key": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.short.target.id": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].id": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.key": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "relationships[].npc1Name": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "relationships[].to": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "relationships[].type": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "relationships[].npc1Role": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].physical.feature": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "relationships[].strength": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].personality.flaw": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.target.id": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "relationships[].npc2Role": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].personality.tell": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].name": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "relationships[].id": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "relationships[].description": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].plotHooks[]": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].personality.speech": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].secret.stakes": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].presentation.impression": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "relationships[].archetypeKey": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "relationships[].tension": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].power": {
+    "rows": 20,
+    "kind": "non-string"
+   },
+   "relationships[].npc2Name": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].memberships[].power": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].institution.family": {
+    "rows": 20,
+    "kind": "string"
+   },
+   "npcs[].personality.dominant": {
+    "rows": 19,
+    "kind": "string"
+   },
+   "npcs[].memberships[].share": {
+    "rows": 19,
+    "kind": "non-string"
+   },
+   "npcs[].physical.build": {
+    "rows": 19,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.target": {
+    "rows": 19,
+    "kind": "non-string"
+   },
+   "npcs[].goal.intent.long.target.kind": {
+    "rows": 19,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.short.target.kind": {
+    "rows": 19,
+    "kind": "string"
+   },
+   "npcs[].structuralPosition": {
+    "rows": 18,
+    "kind": "string"
+   },
+   "npcs[].activeConstraint": {
+    "rows": 18,
+    "kind": "string"
+   },
+   "npcs[].memberships[].rank": {
+    "rows": 18,
+    "kind": "non-string"
+   },
+   "npcs[].gender": {
+    "rows": 18,
+    "kind": "string"
+   },
+   "availableServices.information#len": {
+    "rows": 18,
+    "kind": "non-string"
+   },
+   "powerStructure.factionRelationships[].narrative": {
+    "rows": 17,
+    "kind": "string"
+   },
+   "npcs[].importance": {
+    "rows": 17,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.short.target": {
+    "rows": 17,
+    "kind": "non-string"
+   },
+   "availableServices.information[].name": {
+    "rows": 17,
+    "kind": "string"
+   },
+   "availableServices.information[].institution": {
+    "rows": 17,
+    "kind": "string"
+   },
+   "availableServices.information[].desc": {
+    "rows": 17,
+    "kind": "string"
+   },
+   "powerStructure.factionRelationships[].type": {
+    "rows": 16,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.isTolerated": {
+    "rows": 16,
+    "kind": "non-string"
+   },
+   "npcs[].influence": {
+    "rows": 16,
+    "kind": "string"
+   },
+   "powerStructure.factions[].faction": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "powerStructure.factions[].powerLabel": {
+    "rows": 14,
+    "kind": "string"
+   },
+   "powerStructure.factions[].category": {
+    "rows": 14,
+    "kind": "string"
+   },
+   "availableServices.employment[].desc": {
+    "rows": 14,
+    "kind": "string"
+   },
+   "availableServices.employment[].institution": {
+    "rows": 14,
+    "kind": "string"
+   },
+   "availableServices.employment[].name": {
+    "rows": 14,
+    "kind": "string"
+   },
+   "npcs[].institution.veiled": {
+    "rows": 13,
+    "kind": "non-string"
+   },
+   "powerStructure.publicLegitimacy.isApproved": {
+    "rows": 12,
+    "kind": "non-string"
+   },
+   "activeConditions[].severityBand": {
+    "rows": 12,
+    "kind": "string"
+   },
+   "powerStructure.factions[].rawPower": {
+    "rows": 12,
+    "kind": "non-string"
+   },
+   "npcs[].structuralRank": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].memberships[].veiled": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "relationships[].handler": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].allegiance": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "relationships[].covert": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "conflicts[].desc": {
+    "rows": 10,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].desc": {
+    "rows": 10,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.isEndorsed": {
+    "rows": 9,
+    "kind": "non-string"
+   },
+   "conflicts[].parties[]": {
+    "rows": 9,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].parties[]": {
+    "rows": 9,
+    "kind": "string"
+   },
+   "powerStructure.factionRelationships[].direction": {
+    "rows": 9,
+    "kind": "string"
+   },
+   "availableServices.criminal[].desc": {
+    "rows": 9,
+    "kind": "string"
+   },
+   "availableServices.criminal[].name": {
+    "rows": 9,
+    "kind": "string"
+   },
+   "availableServices.criminal#len": {
+    "rows": 9,
+    "kind": "non-string"
+   },
+   "availableServices.criminal[].institution": {
+    "rows": 9,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.isContested": {
+    "rows": 8,
+    "kind": "non-string"
+   },
+   "pressureSentence": {
+    "rows": 8,
+    "kind": "string"
+   },
+   "powerStructure.factionRelationships[].dmNote": {
+    "rows": 8,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].plotHooks[]": {
+    "rows": 8,
+    "kind": "string"
+   },
+   "conflicts[].plotHooks[]": {
+    "rows": 8,
+    "kind": "string"
+   },
+   "powerStructure.factionRelationships[].pair[]": {
+    "rows": 7,
+    "kind": "string"
+   },
+   "powerStructure.factions[].name": {
+    "rows": 7,
+    "kind": "string"
+   },
+   "conflicts[].intensity": {
+    "rows": 7,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].intensity": {
+    "rows": 7,
+    "kind": "string"
+   },
+   "powerStructure.factions[].contestsNiche": {
+    "rows": 7,
+    "kind": "string"
+   },
+   "powerStructure.factions[].captureState": {
+    "rows": 7,
+    "kind": "string"
+   },
+   "npcs[].settlementCondition": {
+    "rows": 6,
+    "kind": "string"
+   },
+   "prominentRelationship.full": {
+    "rows": 6,
+    "kind": "string"
+   },
+   "prominentRelationship.phrasing": {
+    "rows": 6,
+    "kind": "string"
+   },
+   "prominentRelationship.tension": {
+    "rows": 6,
+    "kind": "string"
+   },
+   "economicViability.plotHooks#len": {
+    "rows": 6,
+    "kind": "non-string"
+   },
+   "powerStructure.factionRelationships#len": {
+    "rows": 6,
+    "kind": "non-string"
+   },
+   "powerStructure.conflicts[].stakes": {
+    "rows": 6,
+    "kind": "string"
+   },
+   "conflicts[].issue": {
+    "rows": 6,
+    "kind": "string"
+   },
+   "conflicts[].stakes": {
+    "rows": 6,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].issue": {
+    "rows": 6,
+    "kind": "string"
+   },
+   "powerStructure.factionRelationships[].captureState": {
+    "rows": 6,
+    "kind": "string"
+   },
+   "powerStructure.factions[].modifier": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "powerStructure.factions[].isGoverning": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "simulationTrace[].downstreamEffects[].target": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "powerStructure.criminalCaptureState": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "stress.cast.stakes[].stake": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "stressors.cast.stakes[].factionId": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "stress.cast.stakes[].reason": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "stressors.cast.stakes[].stake": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "stressors.cast.stakes[].reason": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "stress.cast.stakes[].factionId": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "powerStructure.factions[].legitimacyCrisis": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "powerStructure.factions[].crisisNote": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.governanceFractured": {
+    "rows": 4,
+    "kind": "non-string"
+   },
+   "powerStructure.publicLegitimacy.isLegitimacyCrisis": {
+    "rows": 4,
+    "kind": "non-string"
+   },
+   "prominentRelationship.npc2": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "powerStructure.conflicts#len": {
+    "rows": 4,
+    "kind": "non-string"
+   },
+   "generationCoherenceReceipt.judgments[].evidence#len": {
+    "rows": 4,
+    "kind": "non-string"
+   },
+   "conflicts#len": {
+    "rows": 4,
+    "kind": "non-string"
+   },
+   "prominentRelationship.npc1": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "economicState.foodSecurity.foodRecord.storesHeld": {
+    "rows": 4,
+    "kind": "non-string"
+   },
+   "npcs[].stressNote": {
+    "rows": 3,
+    "kind": "string"
+   },
+   "prominentRelationship.type": {
+    "rows": 3,
+    "kind": "string"
+   },
+   "npcs[].allegiance.handler": {
+    "rows": 3,
+    "kind": "string"
+   },
+   "relationships[].flagDriven": {
+    "rows": 3,
+    "kind": "non-string"
+   },
+   "npcs[].allegiance.power": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "npcs[].allegiance.vector": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "stress.cast.roles[].name": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "stressors.cast.roles[].name": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "stressors.cast.roles[].id": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "stress.cast.roles[].id": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "stress[].cast.stakes[].reason": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stress[].cast.stakes[].stake": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stress[].cast.roles[].id": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stressors[].cast.roles[].name": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stressors[].cast.roles[].id": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stressors[].cast.stakes[].factionId": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stress[].cast.absent#len": {
+    "rows": 1,
+    "kind": "non-string"
+   },
+   "stress[].cast.roles#len": {
+    "rows": 1,
+    "kind": "non-string"
+   },
+   "stressors[].cast.roles#len": {
+    "rows": 1,
+    "kind": "non-string"
+   },
+   "stress[].cast.stakes[].factionId": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stressors[].cast.stakes[].reason": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stress[].cast.roles[].name": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stressors[].cast.absent#len": {
+    "rows": 1,
+    "kind": "non-string"
+   },
+   "stressors[].cast.stakes[].stake": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stressors.cast.roles#len": {
+    "rows": 1,
+    "kind": "non-string"
+   },
+   "powerStructure.factions[].modifiers": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stressors.cast.absent#len": {
+    "rows": 1,
+    "kind": "non-string"
+   },
+   "stress.cast.absent#len": {
+    "rows": 1,
+    "kind": "non-string"
+   },
+   "stress.cast.roles#len": {
+    "rows": 1,
+    "kind": "non-string"
+   },
+   "stressors.cast.roles[].role": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stressors.cast.roles[].reason": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stress.cast.roles[].reason": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stress.cast.roles[].role": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "simulationTrace[].downstreamEffects[].effect": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "simulationTrace[].downstreamEffects#len": {
+    "rows": 1,
+    "kind": "non-string"
+   },
+   "simulationTrace[].downstreamEffects[].reason": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "npcs[].allegiance.house": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "npcs[].allegiance.via": {
+    "rows": 1,
+    "kind": "string"
+   }
+  }
+ },
+ "fence": {
+  "rows": 360,
+  "moved": 346,
+  "byTier": {
+   "thorp": 60,
+   "hamlet": 60,
+   "village": 60,
+   "town": 46,
+   "city": 60,
+   "metropolis": 60
+  },
+  "families": {
+   "defenseProfile": 345,
+   "economicState": 300,
+   "availableServices": 114,
+   "powerStructure": 59,
+   "simulationTrace[]": 59,
+   "npcs[]": 18,
+   "relationships[]": 15,
+   "activeConditions[]": 10,
+   "conflicts[]": 8,
+   "prominentRelationship": 5,
+   "pressureSentence": 5,
+   "stress": 4,
+   "stressors": 4
+  },
+  "paths": {
+   "defenseProfile.scores.disaster": {
+    "rows": 328,
+    "kind": "non-string"
+   },
+   "defenseProfile.economicGates.disaster": {
+    "rows": 324,
+    "kind": "non-string"
+   },
+   "defenseProfile.economicGates.economic": {
+    "rows": 324,
+    "kind": "non-string"
+   },
+   "defenseProfile.economicGates.monster": {
+    "rows": 324,
+    "kind": "non-string"
+   },
+   "defenseProfile.scores.economic": {
+    "rows": 317,
+    "kind": "non-string"
+   },
+   "defenseProfile.readiness.score": {
+    "rows": 289,
+    "kind": "non-string"
+   },
+   "economicState.foodSecurity.foodRecord.storageMonths": {
+    "rows": 239,
+    "kind": "non-string"
+   },
+   "economicState.foodSecurity.storageMonths": {
+    "rows": 239,
+    "kind": "non-string"
+   },
+   "defenseProfile.economicGates.military": {
+    "rows": 194,
+    "kind": "non-string"
+   },
+   "defenseProfile.scores.monster": {
+    "rows": 192,
+    "kind": "non-string"
+   },
+   "defenseProfile.scores.military": {
+    "rows": 177,
+    "kind": "non-string"
+   },
+   "defenseProfile.economicGates.internal": {
+    "rows": 155,
+    "kind": "non-string"
+   },
+   "defenseProfile.scores.internal": {
+    "rows": 155,
+    "kind": "non-string"
+   },
+   "economicState.foodSecurity.resilienceScore": {
+    "rows": 124,
+    "kind": "non-string"
+   },
+   "economicState.safetyProfile.guardEffectivenessDesc": {
+    "rows": 119,
+    "kind": "string"
+   },
+   "economicState.foodSecurity.storageNote": {
+    "rows": 96,
+    "kind": "string"
+   },
+   "availableServices.equipment#len": {
+    "rows": 61,
+    "kind": "non-string"
+   },
+   "powerStructure.publicLegitimacy.breakdown.defense": {
+    "rows": 59,
+    "kind": "non-string"
+   },
+   "defenseProfile.readiness.background": {
+    "rows": 59,
+    "kind": "string"
+   },
+   "defenseProfile.readiness.label": {
+    "rows": 59,
+    "kind": "string"
+   },
+   "defenseProfile.readiness.border": {
+    "rows": 59,
+    "kind": "string"
+   },
+   "simulationTrace[].causes[].reason": {
+    "rows": 59,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.score": {
+    "rows": 59,
+    "kind": "non-string"
+   },
+   "defenseProfile.readiness.color": {
+    "rows": 59,
+    "kind": "string"
+   },
+   "availableServices.equipment[].desc": {
+    "rows": 59,
+    "kind": "string"
+   },
+   "availableServices.equipment[].name": {
+    "rows": 59,
+    "kind": "string"
+   },
+   "availableServices.equipment[].institution": {
+    "rows": 57,
+    "kind": "string"
+   },
+   "availableServices.healing#len": {
+    "rows": 51,
+    "kind": "non-string"
+   },
+   "availableServices.healing[].name": {
+    "rows": 42,
+    "kind": "string"
+   },
+   "availableServices.healing[].desc": {
+    "rows": 42,
+    "kind": "string"
+   },
+   "availableServices.food#len": {
+    "rows": 33,
+    "kind": "non-string"
+   },
+   "availableServices.healing[].institution": {
+    "rows": 30,
+    "kind": "string"
+   },
+   "availableServices.food[].desc": {
+    "rows": 25,
+    "kind": "string"
+   },
+   "availableServices.food[].institution": {
+    "rows": 25,
+    "kind": "string"
+   },
+   "availableServices.food[].name": {
+    "rows": 25,
+    "kind": "string"
+   },
+   "availableServices.legal#len": {
+    "rows": 24,
+    "kind": "non-string"
+   },
+   "availableServices.legal[].desc": {
+    "rows": 22,
+    "kind": "string"
+   },
+   "availableServices.legal[].institution": {
+    "rows": 22,
+    "kind": "string"
+   },
+   "availableServices.legal[].name": {
+    "rows": 22,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.color": {
+    "rows": 18,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.bg": {
+    "rows": 18,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.crimMultiplier": {
+    "rows": 18,
+    "kind": "non-string"
+   },
+   "powerStructure.publicLegitimacy.govMultiplier": {
+    "rows": 18,
+    "kind": "non-string"
+   },
+   "powerStructure.publicLegitimacy.label": {
+    "rows": 18,
+    "kind": "string"
+   },
+   "simulationTrace[].causes[].effect": {
+    "rows": 18,
+    "kind": "string"
+   },
+   "powerStructure.factions[].power": {
+    "rows": 18,
+    "kind": "non-string"
+   },
+   "npcs[].goal.intent.short.key": {
+    "rows": 17,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.family": {
+    "rows": 17,
+    "kind": "string"
+   },
+   "npcs[].goal.long": {
+    "rows": 17,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.short.family": {
+    "rows": 17,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.kind": {
+    "rows": 17,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.short.kind": {
+    "rows": 17,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.key": {
+    "rows": 17,
+    "kind": "string"
+   },
+   "npcs[].goal.short": {
+    "rows": 17,
+    "kind": "string"
+   },
+   "powerStructure.factionRelationships[].ratio": {
+    "rows": 16,
+    "kind": "non-string"
+   },
+   "npcs[].goal.intent.short.target.kind": {
+    "rows": 16,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.target.id": {
+    "rows": 16,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.short.target.id": {
+    "rows": 16,
+    "kind": "string"
+   },
+   "npcs[].memberships[].power": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].physical.build": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "relationships[].archetypeKey": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].secret.what": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "relationships[].to": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].institution.key": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "relationships[].typeName": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "relationships[].id": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].name": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].personality.flaw": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "relationships[].strength": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "relationships[].npc2Name": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].personality.speech": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "relationships[].description": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].power": {
+    "rows": 15,
+    "kind": "non-string"
+   },
+   "npcs[].physical.clothes": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].plotHooks[]": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "relationships[].type": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "relationships[].npc1Role": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].presentation.behaviour": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].secret.stakes": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "relationships[].from": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].title": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "relationships[].proseVariant": {
+    "rows": 15,
+    "kind": "non-string"
+   },
+   "npcs[].role": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].personality.tell": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].personality.dominant": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "relationships[].npc1Name": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "relationships[].tension": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].institution.title": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].presentation.impression": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].presentation.disposition": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].id": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].physical.feature": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "relationships[].npc2Role": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].physical.age": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "availableServices.transport#len": {
+    "rows": 15,
+    "kind": "non-string"
+   },
+   "npcs[].goal.intent.long.target.kind": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "powerStructure.factionRelationships[].type": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "powerStructure.factionRelationships[].narrative": {
+    "rows": 15,
+    "kind": "string"
+   },
+   "npcs[].gender": {
+    "rows": 14,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.short.target": {
+    "rows": 14,
+    "kind": "non-string"
+   },
+   "npcs[].institution.family": {
+    "rows": 14,
+    "kind": "string"
+   },
+   "powerStructure.factionRelationships[].direction": {
+    "rows": 14,
+    "kind": "string"
+   },
+   "npcs[].personality.modifier": {
+    "rows": 14,
+    "kind": "string"
+   },
+   "npcs[].category": {
+    "rows": 14,
+    "kind": "string"
+   },
+   "npcs[].goal.intent.long.target": {
+    "rows": 13,
+    "kind": "non-string"
+   },
+   "availableServices.lodging#len": {
+    "rows": 13,
+    "kind": "non-string"
+   },
+   "npcs[].memberships[].share": {
+    "rows": 13,
+    "kind": "non-string"
+   },
+   "npcs[].memberships#len": {
+    "rows": 13,
+    "kind": "non-string"
+   },
+   "npcs[].activeConstraint": {
+    "rows": 12,
+    "kind": "string"
+   },
+   "npcs[].structuralPosition": {
+    "rows": 12,
+    "kind": "string"
+   },
+   "powerStructure.factions[].powerLabel": {
+    "rows": 12,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.isContested": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "powerStructure.factions[].desc": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "availableServices.lodging[].institution": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "availableServices.lodging[].desc": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "availableServices.lodging[].name": {
+    "rows": 11,
+    "kind": "string"
+   },
+   "npcs[].memberships[].rank": {
+    "rows": 11,
+    "kind": "non-string"
+   },
+   "availableServices.transport[].desc": {
+    "rows": 10,
+    "kind": "string"
+   },
+   "availableServices.transport[].name": {
+    "rows": 10,
+    "kind": "string"
+   },
+   "activeConditions[].severity": {
+    "rows": 10,
+    "kind": "non-string"
+   },
+   "npcs[].importance": {
+    "rows": 9,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].desc": {
+    "rows": 8,
+    "kind": "string"
+   },
+   "conflicts[].desc": {
+    "rows": 8,
+    "kind": "string"
+   },
+   "availableServices.transport[].institution": {
+    "rows": 8,
+    "kind": "string"
+   },
+   "defenseProfile.chainModifiers.military": {
+    "rows": 8,
+    "kind": "non-string"
+   },
+   "npcs[].allegiance": {
+    "rows": 8,
+    "kind": "string"
+   },
+   "relationships[].handler": {
+    "rows": 8,
+    "kind": "string"
+   },
+   "relationships[].covert": {
+    "rows": 8,
+    "kind": "string"
+   },
+   "npcs[].influence": {
+    "rows": 8,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].parties[]": {
+    "rows": 7,
+    "kind": "string"
+   },
+   "conflicts[].parties[]": {
+    "rows": 7,
+    "kind": "string"
+   },
+   "npcs[].settlementCondition": {
+    "rows": 7,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.isTolerated": {
+    "rows": 7,
+    "kind": "non-string"
+   },
+   "activeConditions[].severityBand": {
+    "rows": 7,
+    "kind": "string"
+   },
+   "availableServices.employment#len": {
+    "rows": 7,
+    "kind": "non-string"
+   },
+   "powerStructure.publicLegitimacy.isEndorsed": {
+    "rows": 7,
+    "kind": "non-string"
+   },
+   "npcs[].memberships[].veiled": {
+    "rows": 6,
+    "kind": "non-string"
+   },
+   "powerStructure.factions[].isGoverning": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "powerStructure.factions[].category": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "powerStructure.factions[].faction": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "powerStructure.factions[].modifier": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "powerStructure.factions[].rawPower": {
+    "rows": 5,
+    "kind": "non-string"
+   },
+   "availableServices.employment[].desc": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "availableServices.employment[].name": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "availableServices.employment[].institution": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "npcs[].institution.veiled": {
+    "rows": 5,
+    "kind": "non-string"
+   },
+   "conflicts[].plotHooks[]": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].plotHooks[]": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "prominentRelationship.full": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "prominentRelationship.phrasing": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "prominentRelationship.tension": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "pressureSentence": {
+    "rows": 5,
+    "kind": "string"
+   },
+   "powerStructure.factions[].legitimacyCrisis": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.isLegitimacyCrisis": {
+    "rows": 4,
+    "kind": "non-string"
+   },
+   "powerStructure.factions[].crisisNote": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "powerStructure.publicLegitimacy.governanceFractured": {
+    "rows": 4,
+    "kind": "non-string"
+   },
+   "stress.cast.stakes[].reason": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "stressors.cast.stakes[].stake": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "stress.cast.stakes[].stake": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "stressors.cast.stakes[].reason": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].issue": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].stakes": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "conflicts[].stakes": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "conflicts[].issue": {
+    "rows": 4,
+    "kind": "string"
+   },
+   "stressors.cast.stakes[].factionId": {
+    "rows": 3,
+    "kind": "string"
+   },
+   "stress.cast.stakes[].factionId": {
+    "rows": 3,
+    "kind": "string"
+   },
+   "powerStructure.conflicts[].intensity": {
+    "rows": 3,
+    "kind": "string"
+   },
+   "conflicts[].intensity": {
+    "rows": 3,
+    "kind": "string"
+   },
+   "stressors.cast.roles[].id": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "stress.cast.roles[].id": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "stress.cast.roles[].reason": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "stress.cast.roles[].name": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "stressors.cast.roles[].name": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "stressors.cast.roles[].reason": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "powerStructure.factions[].captureState": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "prominentRelationship.npc2": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "prominentRelationship.npc1": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "availableServices.information[].institution": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "availableServices.information[].desc": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "availableServices.information[].name": {
+    "rows": 2,
+    "kind": "string"
+   },
+   "availableServices.information#len": {
+    "rows": 2,
+    "kind": "non-string"
+   },
+   "stress.cast.absent[].role": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stress.cast.absent[].reason": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stressors.cast.absent[].role": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stressors.cast.roles[].role": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stress.cast.roles[].role": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "stressors.cast.absent[].reason": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "prominentRelationship.type": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "npcs[].allegiance.handler": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "npcs[].allegiance.house": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "npcs[].allegiance.via": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "npcs[].allegiance.vector": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "powerStructure.factionRelationships[].dmNote": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "economicState.foodSecurity.foodRecord.storesHeld": {
+    "rows": 1,
+    "kind": "non-string"
+   },
+   "availableServices.criminal#len": {
+    "rows": 1,
+    "kind": "non-string"
+   },
+   "availableServices.criminal[].desc": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "availableServices.criminal[].institution": {
+    "rows": 1,
+    "kind": "string"
+   },
+   "availableServices.criminal[].name": {
+    "rows": 1,
+    "kind": "string"
+   }
+  }
+ },
+ "_doc": "COHERENCE-UPKEEP, base against tip, every moved leaf path with its row count and kind. RE-TAKEN 2026-11-13 by the fourth seat (COHERENCE-UPKEEP-4) after the merge of AGREE's final tip faa20bc6c (5e10fd07f). Base: AGREE's final tip faa20bc6c itself (the agreement lane without this lane). Tip: 6f95af557 (the lane's src is final there; later commits are docs and the edge bundles). golden = the generator golden master's 525 configurations (raw config, seed per row); wide = the lane's 660 (the 360 agree-<tier>-<i>, agree-thorp/hamlet-0..59, agree-force-<famine|wartime|under_siege>-<tier>-0..9, every browser dial random, grounded); fence = the espionage fence's driven corpus (SUBw4-fence1-<tier>-<route>-NNN, 360). Arrays are compared by index: an npcs[]/relationships[] path that moves by ORDER only is listed here; by person id no person is added, removed or renamed and no personality moves on any of the three corpora. `families`: births moved per root. Against the third seat's declared paths, three are new and each is declared in the draft record: npcs[].allegiance (the 660: power and handler of 25/33 cards in the 5 roster-changed births, draw-free, allegiance.js :: allegiancePowerFor and assignHandlers; golden and fence: index order only), powerStructure.factions[].modifiers (agree-metropolis-7, index order only), prominentRelationship.npc2 (golden; the prominent tie follows the ties)."
+}

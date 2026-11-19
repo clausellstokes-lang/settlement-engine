@@ -1,0 +1,542 @@
+[
+  {
+    "file": "src/data/faceHonorifics.js",
+    "text": "Captain of the Militia",
+    "reason": "AN HONORIFIC of the office's own words (`faceHonorifics.js`): \"of the Watch\", \"of the Militia\", \"of the Books\" name the holder's own house, the face of its own institution (the owner's pin M-1b)"
+  },
+  {
+    "file": "src/data/faceHonorifics.js",
+    "text": "Sergeant of the Watch",
+    "reason": "AN HONORIFIC of the office's own words (`faceHonorifics.js`): \"of the Watch\", \"of the Militia\", \"of the Books\" name the holder's own house, the face of its own institution (the owner's pin M-1b)"
+  },
+  {
+    "file": "src/data/faceHonorifics.js",
+    "text": "Captain of the Watch",
+    "reason": "AN HONORIFIC of the office's own words (`faceHonorifics.js`): \"of the Watch\", \"of the Militia\", \"of the Books\" name the holder's own house, the face of its own institution (the owner's pin M-1b)"
+  },
+  {
+    "file": "src/data/faceHonorifics.js",
+    "text": "Commander of the Watch",
+    "reason": "AN HONORIFIC of the office's own words (`faceHonorifics.js`): \"of the Watch\", \"of the Militia\", \"of the Books\" name the holder's own house, the face of its own institution (the owner's pin M-1b)"
+  },
+  {
+    "file": "src/data/faceHonorifics.js",
+    "text": "Keeper of the Books",
+    "reason": "AN HONORIFIC of the office's own words (`faceHonorifics.js`): \"of the Watch\", \"of the Militia\", \"of the Books\" name the holder's own house, the face of its own institution (the owner's pin M-1b)"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "touches a specific piece of jewellery when stressed",
+    "reason": "THE PERSON'S OWN body, clothes or things (an appearance, a tell): it presumes nothing of the town"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "functional armour with personal sigils",
+    "reason": "THE PERSON'S OWN body, clothes or things (an appearance, a tell): it presumes nothing of the town"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "mismatched armour pieces, each from a different campaign",
+    "reason": "THE PERSON'S OWN body, clothes or things (an appearance, a tell): it presumes nothing of the town"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "practical dress with chalk dust in every seam",
+    "reason": "THE PERSON'S OWN body, clothes or things (an appearance, a tell): it presumes nothing of the town"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "Cover up a minor corruption scandal before the regional lord hears of it",
+    "reason": "a LORD or a CROWN in a goal: DECLARED `needs: [sovereign]` in place (ruling SV1; sovereign by XA1 from a804fa1b5; read at the goal deal on the record `people/goals.js` hands it, the cast and the powers settled); the inventory's class table answers the class `sovereign` with `ruler`, `war`, `crisis` only: it predates the atom"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "Become indispensable to the crown: irreplaceable, never exposed",
+    "reason": "a LORD or a CROWN in a goal: DECLARED `needs: [sovereign]` in place (ruling SV1; sovereign by XA1 from a804fa1b5; read at the goal deal on the record `people/goals.js` hands it, the cast and the powers settled); the inventory's class table answers the class `sovereign` with `ruler`, `war`, `crisis` only: it predates the atom"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "Negotiate a tithe reduction with the local lord without compromising principle",
+    "reason": "a LORD or a CROWN in a goal: DECLARED `needs: [sovereign]` in place (ruling SV1; sovereign by XA1 from a804fa1b5; read at the goal deal on the record `people/goals.js` hands it, the cast and the powers settled); the inventory's class table answers the class `sovereign` with `ruler`, `war`, `crisis` only: it predates the atom"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "Expand into a trade that requires less hiding: spice or cloth, not people",
+    "reason": "A GOAL of the holder's own wanting: it presumes nothing of the town's state (\"expand into a trade\"; \"the northern district\" of a magical disturbance is a city goal of the magic category: size named for BAR6-DEFDESK's size atom after the join)"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "Identify the source of unexplained magical disturbances in the northern district",
+    "reason": "A GOAL of the holder's own wanting: it presumes nothing of the town's state (\"expand into a trade\"; \"the northern district\" of a magical disturbance is a city goal of the magic category: size named for BAR6-DEFDESK's size atom after the join)"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "Figure out who has been watering down their barrels before it reaches customers",
+    "reason": "A GOAL of the holder's own wanting: it presumes nothing of the town's state (\"expand into a trade\"; \"the northern district\" of a magical disturbance is a city goal of the magic category: size named for BAR6-DEFDESK's size atom after the join)"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "Knows that the decisive victory everyone celebrates was won through treachery, not skill",
+    "reason": "A FACTION LEADER'S SECRET drawn by the holder's own category (`npcData.js` secret pools keyed by category: the military leader's patrol routes, soldiers and weapons; the merchant's books): bound to the holder's own power, a secret of the holder's own (rule 2)"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "Discovery destroys their flock's trust and their own standing; some would call it heresy",
+    "reason": "A FACTION LEADER'S SECRET drawn by the holder's own category (`npcData.js` secret pools keyed by category: the military leader's patrol routes, soldiers and weapons; the merchant's books): bound to the holder's own power, a secret of the holder's own (rule 2)"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "Has been selling patrol routes and schedules to someone outside the settlement",
+    "reason": "A FACTION LEADER'S SECRET drawn by the holder's own category (`npcData.js` secret pools keyed by category: the military leader's patrol routes, soldiers and weapons; the merchant's books): bound to the holder's own power, a secret of the holder's own (rule 2)"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.",
+    "reason": "THE PERSON'S OWN body, clothes or things (an appearance, a tell): it presumes nothing of the town"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "Someone is paying their soldiers more than their salary. The soldiers aren't saying who.",
+    "reason": "A FACTION LEADER'S SECRET drawn by the holder's own category (`npcData.js` secret pools keyed by category: the military leader's patrol routes, soldiers and weapons; the merchant's books): bound to the holder's own power, a secret of the holder's own (rule 2)"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "The ambush that killed two of their best people wasn't random. Someone knew the patrol route.",
+    "reason": "A FACTION LEADER'S SECRET drawn by the holder's own category (`npcData.js` secret pools keyed by category: the military leader's patrol routes, soldiers and weapons; the merchant's books): bound to the holder's own power, a secret of the holder's own (rule 2)"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "A weapons cache they were responsible for is smaller than it should be. They haven't reported it yet.",
+    "reason": "A FACTION LEADER'S SECRET drawn by the holder's own category (`npcData.js` secret pools keyed by category: the military leader's patrol routes, soldiers and weapons; the merchant's books): bound to the holder's own power, a secret of the holder's own (rule 2)"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "Their bookkeeper has been taking a little from every sale for years, and the books balance only because the bookkeeper wrote them.",
+    "reason": "A FACTION LEADER'S SECRET drawn by the holder's own category (`npcData.js` secret pools keyed by category: the military leader's patrol routes, soldiers and weapons; the merchant's books): bound to the holder's own power, a secret of the holder's own (rule 2)"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "They agreed to hold a parcel for a traveller, and two different people have since come to collect it.",
+    "reason": "A FACTION LEADER'S SECRET drawn by the holder's own category (`npcData.js` secret pools keyed by category: the military leader's patrol routes, soldiers and weapons; the merchant's books): bound to the holder's own power, a secret of the holder's own (rule 2)"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "They buried someone last season that they refer to only as 'the traveller'. They will not say more.",
+    "reason": "A FACTION LEADER'S SECRET drawn by the holder's own category (`npcData.js` secret pools keyed by category: the military leader's patrol routes, soldiers and weapons; the merchant's books): bound to the holder's own power, a secret of the holder's own (rule 2)"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "…'s account books look clean because … keeps certain sales out of them. Both of them grow richer for it.",
+    "reason": "A TIE LINE stating a relation of the two people it names (their dealings, a debt, a feud): the office or size word is the pair's own (their people, their streets, their colours); it claims nothing of the town's state now; \"No magistrate has a say\" is true where none sits"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "… takes …'s silver every quarter day and looks the other way when …'s people pass. Each treats the other as a reliable colleague.",
+    "reason": "A TIE LINE stating a relation of the two people it names (their dealings, a debt, a feud): the office or size word is the pair's own (their people, their streets, their colours); it claims nothing of the town's state now; \"No magistrate has a say\" is true where none sits"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "… chooses where …'s people go, and … pays for their routes. The streets … uses are the quietest in the settlement.",
+    "reason": "A TIE LINE stating a relation of the two people it names (their dealings, a debt, a feud): the office or size word is the pair's own (their people, their streets, their colours); it claims nothing of the town's state now; \"No magistrate has a say\" is true where none sits"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "…'s people wear …'s colours and take …'s orders without question. No magistrate has a say over them.",
+    "reason": "A TIE LINE stating a relation of the two people it names (their dealings, a debt, a feud): the office or size word is the pair's own (their people, their streets, their colours); it claims nothing of the town's state now; \"No magistrate has a say\" is true where none sits"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "… carries …'s banner on every patrol. Crossing … is treated as heresy, and heresy is punished by ….",
+    "reason": "A TIE LINE stating a relation of the two people it names (their dealings, a debt, a feud): the office or size word is the pair's own (their people, their streets, their colours); it claims nothing of the town's state now; \"No magistrate has a say\" is true where none sits"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "… has declared a holy day on which no … may bear arms. … has a patrol scheduled for it.",
+    "reason": "A TIE LINE stating a relation of the two people it names (their dealings, a debt, a feud): the office or size word is the pair's own (their people, their streets, their colours); it claims nothing of the town's state now; \"No magistrate has a say\" is true where none sits"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "… funds …'s alms, and … vouches for …'s good character to anyone who asks. Both are paid in the same coin.",
+    "reason": "A TIE LINE stating a relation of the two people it names (their dealings, a debt, a feud): the office or size word is the pair's own (their people, their streets, their colours); it claims nothing of the town's state now; \"No magistrate has a say\" is true where none sits"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "… wants to store weapons beneath …'s altar. … has refused once and been asked again.",
+    "reason": "A TIE LINE stating a relation of the two people it names (their dealings, a debt, a feud): the office or size word is the pair's own (their people, their streets, their colours); it claims nothing of the town's state now; \"No magistrate has a say\" is true where none sits"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "… supplies …'s network with wards against detection. Each ward is sold at triple the guild price.",
+    "reason": "A TIE LINE stating a relation of the two people it names (their dealings, a debt, a feud): the office or size word is the pair's own (their people, their streets, their colours); it claims nothing of the town's state now; \"No magistrate has a say\" is true where none sits"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "…'s treasury borrowed from … to cover a bad harvest and has never cleared the debt. The interest is paid before the wages.",
+    "reason": "A TIE LINE stating a relation of the two people it names (their dealings, a debt, a feud): the office or size word is the pair's own (their people, their streets, their colours); it claims nothing of the town's state now; \"No magistrate has a say\" is true where none sits"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "… owes … more than the settlement collects in two years of taxes. … is paid first, every quarter.",
+    "reason": "A TIE LINE stating a relation of the two people it names (their dealings, a debt, a feud): the office or size word is the pair's own (their people, their streets, their colours); it claims nothing of the town's state now; \"No magistrate has a say\" is true where none sits"
+  },
+  {
+    "file": "src/data/npcData.js",
+    "text": "The family has asked … and … to end their quarrel before the next feast. Neither will apologise first.",
+    "reason": "A TIE LINE stating a relation of the two people it names (their dealings, a debt, a feud): the office or size word is the pair's own (their people, their streets, their colours); it claims nothing of the town's state now; \"No magistrate has a say\" is true where none sits"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "No traveller would sleep under that roof again, and some of the people named in those letters would come looking",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Offers a seat, a meal and the gossip of the road before you have taken your coat off.",
+    "reason": "the behaviour line of a presentation whose impression is DECLARED in `TITLE_LINE_DECLARATIONS.presentation` (excludes the siege, BAR6-PEOPLE or before): the pair is drawn and refused as one; the inventory does not read that channel"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Practical and unhurried. Shelves of pots behind them, every price chalked on the board.",
+    "reason": "BOUND TO ITS OWN HOUSE (the title table is the house's face): the word is the holder's own trade, office or house (\"the district\" of the district madam, the shipwright's launch, the brickmaker's thousands), never the town's size or a crisis"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Red dust in every line of the face and hands. Talks in thousands of bricks and cartloads.",
+    "reason": "BOUND TO ITS OWN HOUSE (the title table is the house's face): the word is the holder's own trade, office or house (\"the district\" of the district madam, the shipwright's launch, the brickmaker's thousands), never the town's size or a crisis"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Takes a monthly payment to keep patrols away from certain streets on certain nights",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "The streets that were left alone have seen crimes, and the payments are written down somewhere",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Travellers who followed the wrong map have died in the hills, and their companions remember who sold it",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Calm, unhurried and kind, with the steady hands of someone who has seen every kind of night.",
+    "reason": "BOUND TO ITS OWN HOUSE (the title table is the house's face): the word is the holder's own trade, office or house (\"the district\" of the district madam, the shipwright's launch, the brickmaker's thousands), never the town's size or a crisis"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Neat, unhurried and suspicious of every crate set down in front of the customs house.",
+    "reason": "BOUND TO ITS OWN HOUSE (the title table is the house's face): the word is the holder's own trade, office or house (\"the district\" of the district madam, the shipwright's launch, the brickmaker's thousands), never the town's size or a crisis"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Bored and impatient. The line is long and every traveller has a story.",
+    "reason": "DECLARED in the title table (`titleSecretsPresentations.js :: TITLE_LINE_DECLARATIONS.presentation`, read by `poolMap.js :: settleTitleLines`): `excludes: [crisis: under_siege]`; the inventory does not read that channel (its keys are the presentation's impression, the line above or this one)"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Charges travellers more than the posted toll and keeps the difference",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Watches every traveller coming and remembers them going.",
+    "reason": "DECLARED in the title table (`titleSecretsPresentations.js :: TITLE_LINE_DECLARATIONS.presentation`, read by `poolMap.js :: settleTitleLines`): `excludes: [crisis: under_siege]`; the inventory does not read that channel (its keys are the presentation's impression, the line above or this one)"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Bored and glad of company, with gossip about everyone who has crossed this week.",
+    "reason": "DECLARED in the title table (`titleSecretsPresentations.js :: TITLE_LINE_DECLARATIONS.presentation`, read by `poolMap.js :: settleTitleLines`): `excludes: [crisis: under_siege]`; the inventory does not read that channel (its keys are the presentation's impression, the line above or this one)"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Talks about the road and the travellers; knows who has passed and when.",
+    "reason": "the behaviour line of a presentation whose impression is DECLARED in `TITLE_LINE_DECLARATIONS.presentation` (excludes the siege, BAR6-PEOPLE or before): the pair is drawn and refused as one; the inventory does not read that channel"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Talks about the hunters, the trade routes and who has been buying furs this season.",
+    "reason": "BOUND TO ITS OWN HOUSE (the title table is the house's face): the word is the holder's own trade, office or house (\"the district\" of the district madam, the shipwright's launch, the brickmaker's thousands), never the town's size or a crisis"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Changes tired horses for fresh ones and sells the good ones on, giving travellers the worst of the stable",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Travellers whose coaches broke down have started comparing notes",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Keeps a room for a guest who never signs the book and whose visitors come and go at night",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Notes every traveller's name, face and baggage, and remembers all three.",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Too busy with the nets and boats for idle talk.",
+    "reason": "BOUND TO ITS OWN HOUSE (the title table is the house's face): the word is the holder's own trade, office or house (\"the district\" of the district madam, the shipwright's launch, the brickmaker's thousands), never the town's size or a crisis"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "The gang thinks the streets were lost in fair fights; if they knew the truth, they would turn",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Thin, stern and tidy. The building behind them is quiet in a way that feels wrong.",
+    "reason": "BOUND TO ITS OWN HOUSE (the title table is the house's face): the word is the holder's own trade, office or house (\"the district\" of the district madam, the shipwright's launch, the brickmaker's thousands), never the town's size or a crisis"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Overcharges travellers who do not know the fare, and keeps the difference",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "A traveller who knows the true fare would spread the word, and the regulars would stop crossing",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "The women are close to turning on the madam, and they know a great deal about the district's customers",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Pays a share of every house's takings to someone in authority who keeps the district open",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "If that arrangement became known, the district would close, and the person paid would deny it first",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Offers a drink and a seat; asks who recommended the district.",
+    "reason": "BOUND TO ITS OWN HOUSE (the title table is the house's face): the word is the holder's own trade, office or house (\"the district\" of the district madam, the shipwright's launch, the brickmaker's thousands), never the town's size or a crisis"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Tells a band on the road which caravans carry gold and when they leave",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "When the next caravan is robbed, the survivors will remember the questions the keeper asked",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Charges caravans for water and fodder they never receive",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "The caravan masters talk to one another along the road, and the stories are starting to match",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Generous and talkative, with a courtyard full of camels, carts and travellers from far away.",
+    "reason": "DECLARED in the title table (`titleSecretsPresentations.js :: TITLE_LINE_DECLARATIONS.presentation`, read by `poolMap.js :: settleTitleLines`): `excludes: [crisis: under_siege]`; the inventory does not read that channel (its keys are the presentation's impression, the line above or this one)"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Watches every caravan that comes in and remembers where it came from.",
+    "reason": "DECLARED in the title table (`titleSecretsPresentations.js :: TITLE_LINE_DECLARATIONS.presentation`, read by `poolMap.js :: settleTitleLines`): `excludes: [crisis: under_siege]`; the inventory does not read that channel (its keys are the presentation's impression, the line above or this one)"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Lets favoured caravan masters see the posted contracts before anyone else, for a share of their profit",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Has been keeping the deposits of caravans that never came back and writing them down as forfeit",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "The families of the lost caravan masters would want their money, and they know the rules",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Sells word of which caravans carry the richest loads to someone who waits on the road",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "When the next caravan is taken, its survivors will remember who knew its load",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Polite and watchful. Knows which caravan masters can be trusted and which cannot.",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Friendly and well-informed, with news of every road and every caravan.",
+    "reason": "DECLARED in the title table (`titleSecretsPresentations.js :: TITLE_LINE_DECLARATIONS.presentation`, read by `poolMap.js :: settleTitleLines`): `excludes: [crisis: under_siege]`; the inventory does not read that channel (its keys are the presentation's impression, the line above or this one)"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Well-fed, well-dressed and cold. Talks about people as goods.",
+    "reason": "BOUND TO ITS OWN HOUSE (the title table is the house's face): the word is the holder's own trade, office or house (\"the district\" of the district madam, the shipwright's launch, the brickmaker's thousands), never the town's size or a crisis"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Lost a traveller in the circle two years ago, and told the family they never arrived for the crossing",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "The family has learned the traveller did arrive, and wants to know what happened",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Builds to order; half paid at the start, a quarter at the launch, the rest at delivery.",
+    "reason": "THE LEXICON'S MISREADING: \"a quarter of the worth\" is a fraction, not a district; \"half paid at the start\" a price, not a size"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Feeds the travellers' horses poor hay and charges them for oats",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "That person would pay to keep it quiet, or make sure it stays quiet",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Cheerful and full of river gossip, with a pipe always going.",
+    "reason": "BOUND TO ITS OWN HOUSE (the title table is the house's face): the word is the holder's own trade, office or house (\"the district\" of the district madam, the shipwright's launch, the brickmaker's thousands), never the town's size or a crisis"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Buys at a quarter of the worth; pays in coin.",
+    "reason": "THE LEXICON'S MISREADING: \"a quarter of the worth\" is a fraction, not a district; \"half paid at the start\" a price, not a size"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Sends caravans out on the days that suit the merchant who pays most, and holds the others back",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Wrote a caravan down as departed that never left, and kept the escort's fee",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Asks who you travel with before saying which caravans have room.",
+    "reason": "BOUND TO ITS OWN HOUSE (the title table is the house's face): the word is the holder's own trade, office or house (\"the district\" of the district madam, the shipwright's launch, the brickmaker's thousands), never the town's size or a crisis"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Knows who killed a traveller on the road last year, and has kept quiet because it was a neighbour",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "The traveller's family is still asking, and the headman's silence will not last",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Lets the hospital's beds to travellers who are not sick, for coin, on the quiet nights",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "A sick traveller was turned away on one of those nights and died on the road",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Lets certain travellers cross the border paths without being stopped, for a fee",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Impatient with travellers who wander.",
+    "reason": "BOUND TO ITS OWN HOUSE (the title table is the house's face): the word is the holder's own trade, office or house (\"the district\" of the district madam, the shipwright's launch, the brickmaker's thousands), never the town's size or a crisis"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Well-fed, in good boots, and cold. Talks about people as stock.",
+    "reason": "BOUND TO ITS OWN HOUSE (the title table is the house's face): the word is the holder's own trade, office or house (\"the district\" of the district madam, the shipwright's launch, the brickmaker's thousands), never the town's size or a crisis"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Calls families out to the lord's fields on their own harvest days, unless they pay to be let off",
+    "reason": "a LORD: DECLARED `needs: [sovereign]` (ruling SV1; sovereign by XA1 from a804fa1b5) in the title table (`TITLE_LINE_DECLARATIONS.secret`, read by `poolMap.js :: settleTitleLines`; a reeve's own house gives the sovereign at the draw), or the stakes of a secret so declared, drawn and refused with it; the inventory does not read that channel"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Grazes their own animals on the lord's meadow and writes the hay down as poor",
+    "reason": "a LORD: DECLARED `needs: [sovereign]` (ruling SV1; sovereign by XA1 from a804fa1b5) in the title table (`TITLE_LINE_DECLARATIONS.secret`, read by `poolMap.js :: settleTitleLines`; a reeve's own house gives the sovereign at the draw), or the stakes of a secret so declared, drawn and refused with it; the inventory does not read that channel"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "The lord's people count the hay, and the count has been coming up short",
+    "reason": "a LORD: DECLARED `needs: [sovereign]` (ruling SV1; sovereign by XA1 from a804fa1b5) in the title table (`TITLE_LINE_DECLARATIONS.secret`, read by `poolMap.js :: settleTitleLines`; a reeve's own house gives the sovereign at the draw), or the stakes of a secret so declared, drawn and refused with it; the inventory does not read that channel"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Sings the old songs that tell who held which fields, and has changed the words for someone who pays",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Wrote a song that mocks a powerful neighbour, and sings it only where that neighbour is not",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Someone has started singing it where the neighbour can hear",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Tells the band the rich travellers took the other road, and sells the warning to the travellers",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "The band will learn of it from the first traveller it catches",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Travellers who drank from the well fell sick on the road, and their companions remember where",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "One who could not pay was found on the road in the morning",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  },
+  {
+    "file": "src/data/people/titleSecretsPresentations.js",
+    "text": "Watches every traveller and remembers where they came from.",
+    "reason": "DECLARED in the title table (`titleSecretsPresentations.js :: TITLE_LINE_DECLARATIONS.presentation`, read by `poolMap.js :: settleTitleLines`): `excludes: [crisis: under_siege]`; the inventory does not read that channel (its keys are the presentation's impression, the line above or this one)"
+  },
+  {
+    "file": "src/data/stressInstitutionEffects.js",
+    "text": "When the war ends, both sides will reconcile their books. The discrepancy points one direction",
+    "reason": "a SECRET or its STAKES: it states a deed of the holder's own, past or hidden, or what would follow its discovery (the second check's rule 2: it stands unless the page denies it); it claims nothing of the town's state now"
+  }
+]

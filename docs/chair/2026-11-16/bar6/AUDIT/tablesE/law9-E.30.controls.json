@@ -1,0 +1,855 @@
+[
+ {
+  "group": "9a",
+  "rule": "9a.collapsed",
+  "id": "C8611",
+  "verdict": "STANDS",
+  "town": "bar0-city-under_siege+famine-rand-30",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.collapsed",
+  "id": "C14349",
+  "verdict": "STANDS",
+  "town": "bar0-city-under_siege+famine-rand-32",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.collapsed",
+  "id": "C26333",
+  "verdict": "STANDS",
+  "town": "bar0-city-under_siege+famine-rand-36",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.collapsed",
+  "id": "C28848",
+  "verdict": "STANDS",
+  "town": "bar0-city-under_siege+famine-rand-37",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.collapsed",
+  "id": "C26311",
+  "verdict": "STANDS",
+  "town": "bar0-city-under_siege+famine-rand-36",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.collapsed",
+  "id": "C219464",
+  "verdict": "STANDS",
+  "town": "bar0-village-famine-rand-39",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.collapsed",
+  "id": "C42116",
+  "verdict": "STANDS",
+  "town": "bar0-village-famine-rand-24",
+  "section": "Systems/Defense",
+  "result": "found",
+  "text": "A thief is known by name within a day, and everyone shuns them until they make it right."
+ },
+ {
+  "group": "9a",
+  "rule": "9a.band-quiet",
+  "id": "C84676",
+  "verdict": "STANDS",
+  "town": "bar0-hamlet-calm-rand-33",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.band-quiet",
+  "id": "C86320",
+  "verdict": "STANDS",
+  "town": "bar0-hamlet-calm-rand-36",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.band-quiet",
+  "id": "C152996",
+  "verdict": "STANDS",
+  "town": "bar0-thorp-calm-rand-32",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.band-quiet",
+  "id": "C85310",
+  "verdict": "STANDS",
+  "town": "bar0-hamlet-calm-rand-34",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.structure",
+  "id": "C131929",
+  "verdict": "STANDS",
+  "town": "bar0-metropolis-calm-rand-36",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.structure",
+  "id": "C143085",
+  "verdict": "STANDS",
+  "town": "bar0-metropolis-calm-rand-39",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.wave",
+  "id": "C143088",
+  "verdict": "STANDS",
+  "town": "bar0-metropolis-calm-rand-39",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.wave",
+  "id": "C43177",
+  "verdict": "STANDS",
+  "town": "bar0-city-wartime-rand-28",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.curfew",
+  "id": "C183057",
+  "verdict": "STANDS",
+  "town": "bar0-town-occupied-rand-30",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.curfew",
+  "id": "C194447",
+  "verdict": "STANDS",
+  "town": "bar0-town-occupied-rand-38",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.curfew",
+  "id": "C198660",
+  "verdict": "STANDS",
+  "town": "bar0-town-occupied-rand-41",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.watch-weak",
+  "id": "C187260",
+  "verdict": "STANDS",
+  "town": "bar0-town-occupied-rand-33",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.watch",
+  "id": "C200637",
+  "verdict": "STANDS",
+  "town": "bar0-village-calm-rand-28",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.watch-weak",
+  "id": "C36857",
+  "verdict": "WEAK",
+  "town": "bar0-town-occupied-rand-24",
+  "section": "Systems/Defense",
+  "result": "MISS",
+  "text": "The town watch exists on paper."
+ },
+ {
+  "group": "9a",
+  "rule": "9a.militia",
+  "id": "C199950",
+  "verdict": "STANDS",
+  "town": "bar0-village-calm-rand-27",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.balance",
+  "id": "C157107",
+  "verdict": "STANDS",
+  "town": "bar0-thorp-calm-rand-41",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.balance",
+  "id": "C162769",
+  "verdict": "WEAK",
+  "town": "bar0-town-calm-rand-30",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.lawless",
+  "id": "C172465",
+  "verdict": "STANDS",
+  "town": "bar0-town-calm-rand-38",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.manned",
+  "id": "C80552",
+  "verdict": "STANDS",
+  "town": "bar0-city-wartime-rand-41",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.hands",
+  "id": "C213284",
+  "verdict": "STANDS",
+  "town": "bar0-village-famine-rand-31",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.pay",
+  "id": "C51048",
+  "verdict": "STANDS",
+  "town": "bar0-city-wartime-rand-31",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.contested",
+  "id": "C154050",
+  "verdict": "STANDS",
+  "town": "bar0-thorp-calm-rand-34",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.contested",
+  "id": "C155339",
+  "verdict": "STANDS",
+  "town": "bar0-thorp-calm-rand-37",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.contested",
+  "id": "C81673",
+  "verdict": "EXPLAINED",
+  "town": "bar0-hamlet-calm-rand-27",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.contested",
+  "id": "C82881",
+  "verdict": "EXPLAINED",
+  "town": "bar0-hamlet-calm-rand-29",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.contested",
+  "id": "C207455",
+  "verdict": "EXPLAINED",
+  "town": "bar0-village-calm-rand-37",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.contested",
+  "id": "C151604",
+  "verdict": "EXPLAINED",
+  "town": "bar0-thorp-calm-rand-28",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9a",
+  "rule": "9a.contested",
+  "id": "C18578",
+  "verdict": "EXPLAINED",
+  "town": "bar0-hamlet-under_siege-rand-26",
+  "section": "Systems/Defense",
+  "result": "clean",
+  "text": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, whic"
+ },
+ {
+  "group": "9b",
+  "rule": "9b.subsistence",
+  "id": "C88465",
+  "verdict": "STANDS",
+  "town": "bar0-hamlet-calm-rand-40",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9b",
+  "rule": "9b.subsistence",
+  "id": "C89035",
+  "verdict": "WEAK",
+  "town": "bar0-hamlet-calm-rand-41",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9b",
+  "rule": "9b.purse",
+  "id": "C66113",
+  "verdict": "STANDS",
+  "town": "bar0-city-wartime-rand-36",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9b",
+  "rule": "9b.purse",
+  "id": "C32519",
+  "verdict": "STANDS",
+  "town": "bar0-town-calm-rand-24",
+  "section": "World/Daily Life",
+  "result": "found",
+  "text": "The town pays its own way and has a little in hand."
+ },
+ {
+  "group": "9b",
+  "rule": "9b.purse",
+  "id": "C16520",
+  "verdict": "EXPLAINED",
+  "town": "bar0-hamlet-calm-rand-25",
+  "section": "World/Daily Life",
+  "result": "clean",
+  "text": "Nothing about Ioannochorion's condition asks to be remarked on."
+ },
+ {
+  "group": "9b",
+  "rule": "9b.purse",
+  "id": "C61967",
+  "verdict": "EXPLAINED",
+  "town": "bar0-city-wartime-rand-35",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9b",
+  "rule": "9b.purse",
+  "id": "C58141",
+  "verdict": "EXPLAINED",
+  "town": "bar0-city-wartime-rand-33",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9b",
+  "rule": "9b.shadow",
+  "id": "C89075",
+  "verdict": "WEAK",
+  "town": "bar0-hamlet-calm-rand-41",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9b",
+  "rule": "9b.shadow",
+  "id": "C83868",
+  "verdict": "WEAK",
+  "town": "bar0-hamlet-calm-rand-31",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9b",
+  "rule": "9b.shadow",
+  "id": "C216091",
+  "verdict": "WEAK",
+  "town": "bar0-village-famine-rand-35",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9b",
+  "rule": "9b.shadow",
+  "id": "C216874",
+  "verdict": "WEAK",
+  "town": "bar0-village-famine-rand-36",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9c",
+  "rule": "9c.putby",
+  "id": "C128263",
+  "verdict": "STANDS",
+  "town": "bar0-metropolis-calm-rand-35",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9c",
+  "rule": "9c.putby",
+  "id": "C33652",
+  "verdict": "EXPLAINED",
+  "town": "bar0-town-calm-rand-25",
+  "section": "Systems/Defense",
+  "result": "clean",
+  "text": "Padmavalli's food trades are failing, so less food is being put by than should be; if the town were "
+ },
+ {
+  "group": "9c",
+  "rule": "9c.putby",
+  "id": "C62474",
+  "verdict": "EXPLAINED",
+  "town": "bar0-city-wartime-rand-35",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9c",
+  "rule": "9c.putby",
+  "id": "C99619",
+  "verdict": "EXPLAINED",
+  "town": "bar0-metropolis-calm-rand-27",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9c",
+  "rule": "9c.putby",
+  "id": "C117522",
+  "verdict": "EXPLAINED",
+  "town": "bar0-metropolis-calm-rand-32",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9c",
+  "rule": "9c.nothing-over",
+  "id": "C156726",
+  "verdict": "STANDS",
+  "town": "bar0-thorp-calm-rand-40",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9c",
+  "rule": "9c.reassure",
+  "id": "C184150",
+  "verdict": "STANDS",
+  "town": "bar0-town-occupied-rand-31",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9c",
+  "rule": "9c.reassure",
+  "id": "C40276",
+  "verdict": "STANDS",
+  "town": "bar0-village-calm-rand-25",
+  "section": "Systems/Economics",
+  "result": "found",
+  "text": "With more than its herds to rely on, Aquaium can take a bad season in one source without going hungr"
+ },
+ {
+  "group": "9c",
+  "rule": "9c.fish-stopped",
+  "id": "C90582",
+  "verdict": "STANDS",
+  "town": "bar0-hamlet-under_siege-rand-29",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9c",
+  "rule": "9c.fish-stopped",
+  "id": "C17290",
+  "verdict": "STANDS",
+  "town": "bar0-hamlet-under_siege-rand-24",
+  "section": "Systems/Economics",
+  "result": "found",
+  "text": "What each holding grows goes to its own table; beyond that, what it puts on the table itself is the "
+ },
+ {
+  "group": "9c",
+  "rule": "9c.fish-stopped",
+  "id": "C96337",
+  "verdict": "WEAK",
+  "town": "bar0-hamlet-under_siege-rand-39",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9c",
+  "rule": "9c.carts",
+  "id": "C177322",
+  "verdict": "STANDS",
+  "town": "bar0-town-calm-rand-41",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9c",
+  "rule": "9c.carts",
+  "id": "C177698",
+  "verdict": "EXPLAINED",
+  "town": "bar0-town-calm-rand-41",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9c",
+  "rule": "9c.no-imports",
+  "id": "C154358",
+  "verdict": "STANDS",
+  "town": "bar0-thorp-calm-rand-35",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9c",
+  "rule": "9c.game",
+  "id": "C39597",
+  "verdict": "STANDS",
+  "town": "bar0-village-calm-rand-24",
+  "section": "Systems/Economics",
+  "result": "found",
+  "text": "What it puts on the table itself is the hunters' game."
+ },
+ {
+  "group": "9d",
+  "rule": "9d.isolated",
+  "id": "C193977",
+  "verdict": "STANDS",
+  "town": "bar0-town-occupied-rand-38",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9d",
+  "rule": "9d.isolated",
+  "id": "C194173",
+  "verdict": "STANDS",
+  "town": "bar0-town-occupied-rand-38",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9d",
+  "rule": "9d.isolated",
+  "id": "C194531",
+  "verdict": "STANDS",
+  "town": "bar0-town-occupied-rand-38",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9d",
+  "rule": "9d.isolated",
+  "id": "C176731",
+  "verdict": "EXPLAINED",
+  "town": "bar0-town-calm-rand-41",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9d",
+  "rule": "9d.no-exports",
+  "id": "C211337",
+  "verdict": "STANDS",
+  "town": "bar0-village-famine-rand-28",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9d",
+  "rule": "9d.no-exports",
+  "id": "C217617",
+  "verdict": "STANDS",
+  "town": "bar0-village-famine-rand-37",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9d",
+  "rule": "9d.no-exports",
+  "id": "C93420",
+  "verdict": "EXPLAINED",
+  "town": "bar0-hamlet-under_siege-rand-34",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.leans",
+  "id": "C14460",
+  "verdict": "STANDS",
+  "town": "bar0-city-under_siege+famine-rand-32",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.leans",
+  "id": "C128358",
+  "verdict": "STANDS",
+  "town": "bar0-metropolis-calm-rand-35",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.leans",
+  "id": "C158346",
+  "verdict": "STANDS",
+  "town": "bar0-town-calm-rand-27",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.military",
+  "id": "C62573",
+  "verdict": "STANDS",
+  "town": "bar0-city-wartime-rand-35",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.military",
+  "id": "C164227",
+  "verdict": "STANDS",
+  "town": "bar0-town-calm-rand-31",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.quietly",
+  "id": "C32780",
+  "verdict": "STANDS",
+  "town": "bar0-city-under_siege+famine-rand-39",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.heresy",
+  "id": "C84616",
+  "verdict": "STANDS",
+  "town": "bar0-hamlet-calm-rand-32",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.heresy",
+  "id": "C18731",
+  "verdict": "WEAK",
+  "town": "bar0-city-under_siege+famine-rand-33",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.none",
+  "id": "C26440",
+  "verdict": "WEAK",
+  "town": "bar0-city-under_siege+famine-rand-36",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.none",
+  "id": "C183125",
+  "verdict": "WEAK",
+  "town": "bar0-town-occupied-rand-30",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.if-help",
+  "id": "C110376",
+  "verdict": "WEAK",
+  "town": "bar0-metropolis-calm-rand-30",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.if-help",
+  "id": "C117636",
+  "verdict": "WEAK",
+  "town": "bar0-metropolis-calm-rand-32",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.if-help",
+  "id": "C78252",
+  "verdict": "EXPLAINED",
+  "town": "bar0-city-wartime-rand-40",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.none",
+  "id": "C83538",
+  "verdict": "EXPLAINED",
+  "town": "bar0-hamlet-calm-rand-30",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.none",
+  "id": "C176732",
+  "verdict": "EXPLAINED",
+  "town": "bar0-town-calm-rand-41",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.none",
+  "id": "C177702",
+  "verdict": "EXPLAINED",
+  "town": "bar0-town-calm-rand-41",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.none",
+  "id": "C139724",
+  "verdict": "EXPLAINED",
+  "town": "bar0-metropolis-calm-rand-38",
+  "result": "n/a",
+  "note": "town not in this render"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.none",
+  "id": "C40444",
+  "verdict": "EXPLAINED",
+  "town": "bar0-village-calm-rand-25",
+  "section": "Systems/Magic",
+  "result": "clean",
+  "text": "Nothing structural at Aquaium depends on arcane work."
+ },
+ {
+  "group": "9e",
+  "rule": "9e.none",
+  "id": "C31972",
+  "verdict": "EXPLAINED",
+  "town": "bar0-town-calm-rand-24",
+  "section": "Systems/Magic",
+  "result": "clean",
+  "text": "Nothing structural at Andronkastro depends on arcane work."
+ },
+ {
+  "group": "9e",
+  "rule": "9e.none",
+  "id": "C9617",
+  "verdict": "STANDS",
+  "town": "bar0-city-wartime-rand-24",
+  "section": "Systems/Magic",
+  "result": "found",
+  "text": "People at Ingines know that part of the city's work now holds up only with help beyond ordinary labo"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.none",
+  "id": "C33713",
+  "verdict": "STANDS",
+  "town": "bar0-town-calm-rand-25",
+  "section": "Systems/Magic",
+  "result": "found",
+  "text": "People at Padmavalli know that part of the town's work now holds up only with help beyond ordinary l"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.none",
+  "id": "C43125",
+  "verdict": "STANDS",
+  "town": "bar0-village-famine-rand-25",
+  "section": "Systems/Magic",
+  "result": "found",
+  "text": "People at Bjorney know that part of the village's work now holds up only with help beyond ordinary l"
+ },
+ {
+  "group": "9e",
+  "rule": "9e.none",
+  "id": "C29831",
+  "verdict": "STANDS",
+  "town": "bar0-thorp-calm-rand-24",
+  "section": "Summary/Overview",
+  "result": "found",
+  "text": "\"The settlement relies on arcane workings it does not entirely trust."
+ },
+ {
+  "group": "9e",
+  "rule": "9e.none",
+  "id": "C17061",
+  "verdict": "STANDS",
+  "town": "bar0-hamlet-under_siege-rand-24",
+  "section": "Summary/Overview",
+  "result": "found",
+  "text": "\"The settlement relies on arcane workings it does not entirely trust."
+ },
+ {
+  "group": "9f",
+  "rule": "9f.loyal",
+  "id": "C76517",
+  "verdict": "STANDS",
+  "town": "bar0-city-wartime-rand-40",
+  "result": "n/a",
+  "note": "town not in this render"
+ }
+]

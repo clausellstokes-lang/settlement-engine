@@ -11,6 +11,7 @@
  */
 import { annotateFactionStanding } from './factionStanding.js';
 import { MERCHANT_CRAFT_VOTE } from '../factionDynamics.js';
+import { legitimacyHeldTensions } from '../../data/historyData.js'; // BAR4-HISTORY C26792
 import { inferFactionCategory } from './factionCategories.js';
 import { backingArchetypeOf, RULER_KINDS } from '../../domain/dossier/powerSupport.js';
 import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js';
@@ -43,12 +44,12 @@ export function standingForceOf(institutions) {
 
 /**
  * Each power's standing sentence on a roster, by name, and its rank there.
- * @param {RosterSeat[]} roster the standing roster (standingRosterOf) @param {{ body: string }} force
+ * @param {RosterSeat[]} roster the standing roster (standingRosterOf) @param {{ body: string }} force @param {{ publicLegitimacy?: unknown } | null} [seat] its seat's legitimacy, for the coup reading (C14176)
  * @returns {Map<string, { standing: string, rank: number }>}
  */
-function standingsOf(roster, force) {
+function standingsOf(roster, force, seat = null) {
   const seats = roster.map((f) => ({ ...f, desc: '' }));
-  annotateFactionStanding(seats, force);
+  annotateFactionStanding(seats, force, seat); // BAR4-HISTORY C14176 (the chair's FS2): the seat's legitimacy, for the rank-1 line's coup reading
   return new Map(seats.map((f, rank) => [f.faction, { standing: String(f.desc || ''), rank }]));
 }
 
@@ -69,9 +70,9 @@ function foldedInto(gone, finalRoster) {
 
 /**
  * The descriptions' standing sentences settled to the final roster. `annotated` is the roster the power step's
- * standing sentences were written on (standingRosterOf, taken before the resize). A power whose sentence names a
- * power that left, or was written for a rank it no longer holds, takes the sentence the final roster gives it, in
- * place of the old one at its description's end. A power whose description does not end in the old sentence (a
+ * standing sentences were written on (standingRosterOf, taken before the resize). A power whose sentence the final
+ * roster no longer gives it (it names a power that left, or was written for a rank or figures it no longer holds;
+ * COHERENCE-POWERS-7) takes the sentence the final roster gives it, in place of the old one at its description's end. A power whose description does not end in the old sentence (a
  * description another step rewrote) is left as it is. Returns the same object where nothing moves.
  * @template {{ factions?: Array<Record<string, any>> }} P
  * @param {P} powerStructure the final roster @param {RosterSeat[]} annotated @param {{ body: string }} force
@@ -81,20 +82,21 @@ export function settleStandingToRoster(powerStructure, annotated, force) {
   const factions = Array.isArray(powerStructure?.factions) ? powerStructure.factions : null;
   if (!factions || !annotated.length) return powerStructure;
   const finalRoster = standingRosterOf(factions);
-  const onPage = new Set(finalRoster.map((f) => f.faction));
-  const gone = annotated.map((f) => f.faction).filter((name) => !onPage.has(name));
-  const before = standingsOf(annotated, force);
-  const after = standingsOf(finalRoster, force);
-  const namesGone = (/** @type {string} */ line) => gone.some((name) => line.toLowerCase().includes(name.toLowerCase()));
+  const before = standingsOf(annotated, force, { publicLegitimacy: /** @type {{ publicLegitimacy?: unknown }} */ (powerStructure)?.publicLegitimacy }); // BAR4-HISTORY C14176
+  const after = standingsOf(finalRoster, force, { publicLegitimacy: /** @type {{ publicLegitimacy?: unknown }} */ (powerStructure)?.publicLegitimacy });
   let moved = false;
   const next = factions.map((f) => {
     const name = String(f?.faction || '');
-    const old = before.get(name);
+    // COHERENCE-POWERS-7 (#291): a density-law rival is minted as a copy of its host, its host's standing sentence included;
+    // a power new to the roster whose description ends in another power's old sentence settles from it (POWERS-11: by desc)
+    const host = before.get(name) ? null : hostByStanding(String(f?.desc || ''), before);
+    const old = before.get(name) || (host ? before.get(host) : undefined);
     const now = after.get(name);
-    if (!old || !now || !old.standing || old.standing === now.standing) return f;
-    if (!namesGone(old.standing) && old.rank === now.rank) return f;
+    if (!old || !now || old.standing === now.standing) return f;
+    // COHERENCE-POWERS-7 (cold list REVIEW-W2A-3 #109 #713): a sentence the final roster no longer gives is settled
+    // whether or not the rank moved — the figures moved under it ("a slow war with the guild" after the guild left)
     const desc = String(f.desc || '');
-    const base = desc === old.standing ? '' : desc.endsWith(` ${old.standing}`) ? desc.slice(0, -old.standing.length - 1) : null;
+    const base = !old.standing ? desc : desc === old.standing ? '' : desc.endsWith(` ${old.standing}`) ? desc.slice(0, -old.standing.length - 1) : null; // FAULTS-WATCH item 3 (BR30 (3)): a power with NO old standing (13g) takes the final roster's sentence at its end
     if (base === null) return f;
     moved = true;
     return { ...f, desc: base && now.standing ? `${base} ${now.standing}` : (base || now.standing) };
@@ -111,6 +113,7 @@ export function settleStandingToRoster(powerStructure, annotated, force) {
  * @returns {H}
  */
 export function settleTensionsToRoster(history, powerStructure, annotated) {
+  history = legitimacyToSeat(history, powerStructure); // BAR4-HISTORY C26792: first, the legitimacy read against the seat
   const tensions = Array.isArray(history?.currentTensions) ? history.currentTensions : null;
   if (!tensions || !annotated.length) return history;
   const finalRoster = standingRosterOf(powerStructure?.factions || []);
@@ -135,6 +138,20 @@ export function settleTensionsToRoster(history, powerStructure, annotated) {
 }
 
 /**
+ * BAR4-HISTORY C26792 (the chair's grant, 2026-11-16): the legitimacy tension read against the record's final legitimacy:
+ * where the seat is approved or endorsed, its "openly and widely questioned" takes its twin, and where it is not, its own
+ * form (historyData.js :: legitimacyHeldTensions, which the history step and its section regeneration read too). Draw-free.
+ * Returns the same object where nothing moves.
+ * @template {{ currentTensions?: Array<Record<string, any>> }} H
+ * @param {H} history @param {{ factions?: Array<Record<string, any>>, publicLegitimacy?: { isApproved?: boolean } }} powerStructure @returns {H}
+ */
+function legitimacyToSeat(history, powerStructure) {
+  const tensions = Array.isArray(history?.currentTensions) ? history.currentTensions : null;
+  const next = tensions ? legitimacyHeldTensions(tensions, powerStructure) : tensions;
+  return next === tensions ? history : { ...history, currentTensions: next };
+}
+
+/**
  * The relationships' narratives settled to the final roster: the merchants' and craftsmen's vote names the landholding
  * power and needs it (factionDynamics.js :: MERCHANT_CRAFT_VOTE, a declared pair); where that power left, the row takes
  * the pair's sibling, which names none (the refused-winner rule: no roll). Returns the same object where nothing moves.
@@ -156,4 +173,19 @@ export function settleNarrativesToRoster(powerStructure, annotated) {
     return { ...row, narrative: MERCHANT_CRAFT_VOTE.sibling(merchants, craft) };
   });
   return moved ? { ...powerStructure, factionRelationships: next } : powerStructure;
+}
+
+/**
+ * The power whose old standing sentence a description ends in (or consists of): the host a density-law rival was minted
+ * from, read from the rival's own description, the settle's own test for a sentence at a description's end. Where
+ * several old sentences end it (two merchant powers share a closing sentence), the longest, the whole tail it carries.
+ * @param {string} desc @param {Map<string, { standing: string, rank: number }>} before @returns {string | null}
+ */
+function hostByStanding(desc, before) {
+  let host = null;
+  let best = 0;
+  for (const [name, { standing }] of before) {
+    if (standing && standing.length > best && (desc === standing || desc.endsWith(` ${standing}`))) { host = name; best = standing.length; }
+  }
+  return host;
 }

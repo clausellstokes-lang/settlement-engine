@@ -55,38 +55,38 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 234447,
-      "gzip": 31731,
+      "raw": 287394,
+      "gzip": 37962,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },
     "src/data/dossierStateProse/economy.generated.js": {
-      "raw": 170255,
-      "gzip": 23958,
+      "raw": 196627,
+      "gzip": 26784,
       "ceilingRaw": 393810,
       "ceilingGzip": 87513
     },
     "src/data/dossierStateProse/general.generated.js": {
-      "raw": 279568,
-      "gzip": 35664,
+      "raw": 307568,
+      "gzip": 38822,
       "ceilingRaw": 796761,
       "ceilingGzip": 177058
     },
     "src/data/dossierStateProse/power.generated.js": {
-      "raw": 124251,
-      "gzip": 17495,
+      "raw": 136414,
+      "gzip": 18762,
       "ceilingRaw": 357097,
       "ceilingGzip": 79355
     },
     "src/data/dossierStateProse/stressors.generated.js": {
-      "raw": 147483,
-      "gzip": 20773,
+      "raw": 148435,
+      "gzip": 20910,
       "ceilingRaw": 258858,
       "ceilingGzip": 57524
     },
     "src/data/dossierStateProse/warFaith.generated.js": {
-      "raw": 178226,
-      "gzip": 24601,
+      "raw": 180478,
+      "gzip": 25143,
       "ceilingRaw": 505306,
       "ceilingGzip": 112290
     },
@@ -109,8 +109,8 @@
       "ceilingGzip": 6751
     },
     "src/data/dossierRelations.generated.js": {
-      "raw": 28249,
-      "gzip": 2664,
+      "raw": 28926,
+      "gzip": 2673,
       "ceilingRaw": 43888,
       "ceilingGzip": 9753
     }
@@ -539,6 +539,222 @@
       "toRaw": 147483,
       "gzipAfter": 20773,
       "reason": "+7 B raw (gzip level 9: 20,772 -> 20,773): C8's word-only swaps in the stressors annex lines ('faction' -> 'power' and the map's hand wordings, Appendix X) projected through node scripts/generate-dossier-state-prose.mjs; no pool, variant, mark or slot added. The same commit SHRANK five leaves (defense -6, general -2, power -13, warFaith -7, the causal leaf -10), lowered in the same register commit. Measured per commit over bd07005b9..e63c6aae6: every leaf unmoved until e63c6aae6."
+    },
+    {
+      "car": "R3-TABS (the first seat, eaca79fcd, 2026-11-13; the chair ruling L1 \"one ladder for one number\"): the four DS-DEF-1 posture pools the badge now reads take readsCount",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 234453,
+      "toRaw": 234545,
+      "gzipAfter": 31738,
+      "reason": "+92 B over the chain (+100 over the committed 234445; the leaf had shrunk 8 B undeclared since its last row) (gzip level 9: 31731 -> 31738): eaca79fcd re-took the wiring census over the moved defence composer (L1: POSTURE_POOL_OF_BADGE resolves four DS-DEF-1 posture pools) and projected the leaves through node scripts/generate-dossier-state-prose.mjs, which writes `\"readsCount\": 1,` (25 B) into the poolMeta of those four pools; nothing else in the leaf moves (no pool, variant or word). The lane left the row undeclared; declared by its third seat at the lane tip after the merge of point 49 (--check exit 0)."
+    },
+    {
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 234545,
+      "toRaw": 262544,
+      "gzipAfter": 35291,
+      "reason": "+27999 B raw over the committed 234545 (gzip level 9: 31738 -> 35291): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
+    },
+    {
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 170551,
+      "toRaw": 184022,
+      "gzipAfter": 25652,
+      "reason": "+13767 B raw over the committed 170255 (gzip level 9: 23958 -> 25652): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
+    },
+    {
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 287856,
+      "toRaw": 297282,
+      "gzipAfter": 37947,
+      "reason": "+17714 B raw over the committed 279568 (gzip level 9: 35664 -> 37947): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
+    },
+    {
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 125681,
+      "toRaw": 130008,
+      "gzipAfter": 18272,
+      "reason": "+5757 B raw over the committed 124251 (gzip level 9: 17495 -> 18272): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
+    },
+    {
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147483,
+      "toRaw": 147666,
+      "gzipAfter": 20815,
+      "reason": "+183 B raw over the committed 147483 (gzip level 9: 20773 -> 20815): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
+    },
+    {
+      "car": "JOIN-2 (the true join's first refreeze, 2026-11-14; the chair's ruling of 09:09 UTC)",
+      "leaf": "src/data/dossierRelations.generated.js",
+      "fromRaw": 28249,
+      "toRaw": 28926,
+      "gzipAfter": 2673,
+      "reason": "+677 B raw over the committed 28249 (gzip level 9: 2664 -> 2673): measured at the joined tree after the state-prose generator ran through its door (a80825e8c), never summed. The six state desk leaves: the declared growth of the corpus lane (W2-WRITE, fdae163f3) and the data lane (W2-FIX-DATA, 8d2aa98b1), each already keyed on its own lane through this instrument, composed by the join. dossierRelations.generated.js (28,249 -> 28,926): the defence lane's (coherence-upkeep 26474cda9) fundedGate and upkeep relations on the economicGates rows in src/generators/defenseGenerator.js, re-projected by the generator here; that lane's undeclared growth (it never regenerated the leaf). No ceiling moved; every leaf under its ceiling."
+    },
+    {
+      "car": "the round of 2026-11-14/15: the corpus's truth cures (twins for a town's state and rewordings of state prose), by the chair's ruling PB1 of 2026-11-15 (the close; the chair's record 456)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 262544,
+      "toRaw": 266746,
+      "gzipAfter": 35585,
+      "reason": "+4202 B raw over the committed 262544 (gzip level 9: 35291 -> 35585), measured on disk at the joined line (04149c5ef) by TAIL-CLOSE-DOORS-1. The lanes that moved its source since the figure was last committed (3949fe371; git log --first-parent --merges over the leaf and the annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md): tail-corpus-def (4 merges), w2-write (3): twins for a town's state (a line declared off a state and its twin beside it) and rewordings of state prose under the corpus's truth cures. The leaf stands at 54.6 per cent of its ceilingRaw (488168)."
+    },
+    {
+      "car": "the round of 2026-11-14/15: the corpus's truth cures (twins for a town's state and rewordings of state prose), by the chair's ruling PB1 of 2026-11-15 (the close; the chair's record 456)",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 184022,
+      "toRaw": 185744,
+      "gzipAfter": 25784,
+      "reason": "+1722 B raw over the committed 184022 (gzip level 9: 25652 -> 25784), measured on disk at the joined line (04149c5ef) by TAIL-CLOSE-DOORS-1. The lanes that moved its source since the figure was last committed (3949fe371; git log --first-parent --merges over the leaf and the annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md): tail-corpus-eco (5), w2-write (1), w2-write-side-13 (1): twins for a town's state (a line declared off a state and its twin beside it) and rewordings of state prose under the corpus's truth cures. The leaf stands at 47.2 per cent of its ceilingRaw (393810)."
+    },
+    {
+      "car": "the round of 2026-11-14/15: the corpus's truth cures (twins for a town's state and rewordings of state prose), by the chair's ruling PB1 of 2026-11-15 (the close; the chair's record 456)",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 297282,
+      "toRaw": 298496,
+      "gzipAfter": 38078,
+      "reason": "+1214 B raw over the committed 297282 (gzip level 9: 37947 -> 38078), measured on disk at the joined line (04149c5ef) by TAIL-CLOSE-DOORS-1. The lanes that moved its source since the figure was last committed (3949fe371; git log --first-parent --merges over the leaf and the annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md): tail-corpus-eco (5), w2-write-side-13 (1): twins for a town's state (a line declared off a state and its twin beside it) and rewordings of state prose under the corpus's truth cures. The leaf stands at 37.5 per cent of its ceilingRaw (796761)."
+    },
+    {
+      "car": "the round of 2026-11-14/15: the corpus's truth cures (twins for a town's state and rewordings of state prose), by the chair's ruling PB1 of 2026-11-15 (the close; the chair's record 456)",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 130008,
+      "toRaw": 131321,
+      "gzipAfter": 18419,
+      "reason": "+1313 B raw over the committed 130008 (gzip level 9: 18272 -> 18419), measured on disk at the joined line (04149c5ef) by TAIL-CLOSE-DOORS-1. The lanes that moved its source since the figure was last committed (3949fe371; git log --first-parent --merges over the leaf and the annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md): tail-corpus-def (2), w2-write (1): twins for a town's state (a line declared off a state and its twin beside it) and rewordings of state prose under the corpus's truth cures. The leaf stands at 36.8 per cent of its ceilingRaw (357097)."
+    },
+    {
+      "car": "the round of 2026-11-14/15: the corpus's truth cures (twins for a town's state and rewordings of state prose), by the chair's ruling PB1 of 2026-11-15 (the close; the chair's record 456)",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147666,
+      "toRaw": 147835,
+      "gzipAfter": 20823,
+      "reason": "+169 B raw over the committed 147666 (gzip level 9: 20815 -> 20823), measured on disk at the joined line (04149c5ef) by TAIL-CLOSE-DOORS-1. The lanes that moved its source since the figure was last committed (3949fe371; git log --first-parent --merges over the leaf and the annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md): tail-corpus-def (1): twins for a town's state (a line declared off a state and its twin beside it) and rewordings of state prose under the corpus's truth cures. The leaf stands at 57.1 per cent of its ceilingRaw (258858)."
+    },
+    {
+      "car": "BAR2-CORPUS batch 1 (2026-11-15): REVIEW-BAR-2's rows of the corpus (rewordings of state prose, marks off a town's crisis), re-keyed by the seat under the chair's ruling CP2 after the merge of the joined line at dcb069bff",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 298496,
+      "toRaw": 298564,
+      "gzipAfter": 38092,
+      "reason": "+68 B raw over the committed 298496 (gzip level 9: 38078 -> 38092), measured on disk at the merged tree (af120bdd4) by BAR2-CORPUS: batch 1 (d89e61aac) reworded state prose so each line claims no more than every printing town bears, and marked lines off a crisis. The leaf stands at 37.5 per cent of its ceilingRaw (796761)."
+    },
+    {
+      "car": "BAR2-CORPUS batch 1 (2026-11-15): REVIEW-BAR-2's rows of the corpus (rewordings of state prose, marks off a town's crisis), re-keyed by the seat under the chair's ruling CP2 after the merge of the joined line at dcb069bff",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 131321,
+      "toRaw": 131329,
+      "gzipAfter": 18424,
+      "reason": "+8 B raw over the committed 131321 (gzip level 9: 18419 -> 18424), measured on disk at the merged tree (af120bdd4) by BAR2-CORPUS: batch 1 (d89e61aac) reworded state prose so each line claims no more than every printing town bears, and marked lines off a crisis. The leaf stands at 36.8 per cent of its ceilingRaw (357097)."
+    },
+    {
+      "car": "BAR3-CORPUS batches 1 and 2 (2026-11-15): the round's declared rewordings of state prose, re-recorded once by BAR3-CLOSE-SWEEP-B (2026-11-16) under the chair's ruling PB1 (2026-11-16 01:35 UTC, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 298564,
+      "toRaw": 298675,
+      "gzipAfter": 38100,
+      "reason": "+111 B raw over the committed 298564 (gzip level 9: 38092 -> 38100), measured on disk at fb59da43e: BAR3-CORPUS batch 1 (cc469b762) and batch 2 (b09297a27) reworded and marked state prose so each line claims no more than every printing town bears. THE ROSTER'S TOTAL FELL: the five state leaves the round moved went defense -17, economy -28, power -106 (lowered), general +111 (this row) and warFaith +1 (180300 -> 180301, b09297a27; its declared chain already ends at 181741, so no row can land on it and only its number moves), 39 bytes fewer together. The leaf stands at 37.5 per cent of its ceilingRaw (796761)."
+    },
+    {
+      "car": "BAR4 (2026-11-16): the round's declared twins and pools of state prose, re-recorded once by BAR4-CLOSE-DOORS-1 at the joined tree 2d80aa740 (the close of the round BAR4; the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 266746,
+      "toRaw": 269046,
+      "gzipAfter": 35811,
+      "reason": "+2331 B raw over the committed 266715 (the row chains from 266746, where the declared chain stood above the committed figure after an earlier shrink: +2300 over the chain) (gzip level 9: 35510 -> 35811), measured on disk at the joined tree: BAR4-CORPUS-DEF (6f8081add): the four twins (DS-DEF-11 WALLED-QUIET v6 v7, DS-DEF-2 WEAK v6, DS-DEF-9 magicDependency false v4) and the DS-DEF pools' `danger coming` declarations (BAR4-CORPUS-DEF-HANDBACK, the books my cures move: 266,715 -> 269,046). The leaf stands at 55.1 per cent of its ceilingRaw (488168)."
+    },
+    {
+      "car": "BAR4 (2026-11-16): the round's declared twins and pools of state prose, re-recorded once by BAR4-CLOSE-DOORS-1 at the joined tree 2d80aa740 (the close of the round BAR4; the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 185744,
+      "toRaw": 188975,
+      "gzipAfter": 26073,
+      "reason": "+3475 B raw over the committed 185500 (the row chains from 185744, where the declared chain stood above the committed figure after an earlier shrink: +3231 over the chain) (gzip level 9: 25695 -> 26073), measured on disk at the joined tree: BAR4-CORPUS-ECO (7354471e5): the seven twins of DS-ECO-9 (one source v4-v7, several v6-v8) and their declarations (BAR4-CORPUS-ECO-HANDBACK, the books my cures move: raw 185500 -> 188975, gzip 25695 -> 26073). The leaf stands at 48.0 per cent of its ceilingRaw (393810)."
+    },
+    {
+      "car": "BAR4 (2026-11-16): the round's declared twins and pools of state prose, re-recorded once by BAR4-CLOSE-DOORS-1 at the joined tree 2d80aa740 (the close of the round BAR4; the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 298675,
+      "toRaw": 301857,
+      "gzipAfter": 38286,
+      "reason": "+3182 B raw over the committed 298675 (gzip level 9: 38100 -> 38286), measured on disk at the joined tree: BAR4-HISTORY batch 2 (155c7e1af) +2693, the three DS-GEN-16 -MARKED pools of two (BAR4-HISTORY-HANDBACK: 298,675 -> 301,368 on its own base), and BAR4-SCENES (187c46f61) +489, DS-GEN-13 COMMERCE v6 and the monastery line's exclusion mark (BAR4-SCENES-2-HANDBACK: 298675 -> 299164 on its own base); the two compose exactly (2693 + 489 = 3182). The leaf stands at 37.9 per cent of its ceilingRaw (796761)."
+    },
+    {
+      "car": "THE CLOSE OF 2026-11-18 (JOIN-16 points 2 to 5, JOIN-17 points 4 to 31, the sixth chair's point 37): the landings' declared lines and twins of state prose, re-recorded once by CLOSE-DOORS-1A at the frozen tree 70e557d5b (the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 269046,
+      "toRaw": 281298,
+      "gzipAfter": 37154,
+      "reason": "+12252 B raw over the committed 269046 (gzip level 9: 35811 -> 37154), measured on disk at 70e557d5b (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: BAR5-SAFETY (JOIN-16 point 2, e02f01157) +431; BAR6-DEFDESK (JOIN-17 point 4, 53b856b10) +6008; SEAM-DESKS (point 18, 3a8366e29) -5; BAR7-DESKS (point 27, fc941ca9d) +4400; DEBT-1 (point 31, c935f2e23) -4; LEFT-LINES (point 37, f1ca75555) +1422; they compose exactly (269046 -> 281298); 57.6 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE CLOSE OF 2026-11-18 (JOIN-16 points 2 to 5, JOIN-17 points 4 to 31, the sixth chair's point 37): the landings' declared lines and twins of state prose, re-recorded once by CLOSE-DOORS-1A at the frozen tree 70e557d5b (the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 188975,
+      "toRaw": 195233,
+      "gzipAfter": 26610,
+      "reason": "+6258 B raw over the committed 188975 (gzip level 9: 26073 -> 26610), measured on disk at 70e557d5b (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: BAR5-FOOD (JOIN-16 point 5, f3ad5775f) +531; BAR6-ECON (JOIN-17 point 7, e4b2955f0) +4145, its two new pools among them; BAR7-DESKS (point 27, fc941ca9d) +1164; LEFT-LINES (point 37, f1ca75555) +418; they compose exactly (188975 -> 195233); 49.6 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE CLOSE OF 2026-11-18 (JOIN-16 points 2 to 5, JOIN-17 points 4 to 31, the sixth chair's point 37): the landings' declared lines and twins of state prose, re-recorded once by CLOSE-DOORS-1A at the frozen tree 70e557d5b (the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 301857,
+      "toRaw": 306982,
+      "gzipAfter": 38767,
+      "reason": "+5125 B raw over the committed 301857 (gzip level 9: 38286 -> 38767), measured on disk at 70e557d5b (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: BAR6-CULTURE (JOIN-17 point 10, cd40ad0e0) +2040; SEAM-CULTURE (point 13, 52984c09c) +1481; DEBT-1 (point 31, c935f2e23) -2; LEFT-LINES (point 37, f1ca75555) +1606; they compose exactly (301857 -> 306982); 38.5 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE CLOSE OF 2026-11-18 (JOIN-16 points 2 to 5, JOIN-17 points 4 to 31, the sixth chair's point 37): the landings' declared lines and twins of state prose, re-recorded once by CLOSE-DOORS-1A at the frozen tree 70e557d5b (the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 131329,
+      "toRaw": 135398,
+      "gzipAfter": 18681,
+      "reason": "+4175 B raw over the committed 131223 (gzip level 9: 18410 -> 18681), measured on disk at 70e557d5b (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: BAR5-POWERS (JOIN-16 point 4, 4045718d2) +139; BAR6-POWERS (JOIN-17 point 11, 570e3c351) +409; SEAM-DESKS (point 18, 3a8366e29) +418; BAR7-DESKS (point 27, fc941ca9d) +3209; they compose exactly (131223 -> 135398); the row chains from where the leaf's declared chain stood (131329, above the committed figure after an earlier shrink, which the chain arm admits); 37.9 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE CLOSE OF 2026-11-18 (JOIN-16 points 2 to 5, JOIN-17 points 4 to 31, the sixth chair's point 37): the landings' declared lines and twins of state prose, re-recorded once by CLOSE-DOORS-1A at the frozen tree 70e557d5b (the byte rows follow the chair's ruling B3, vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/stressors.generated.js",
+      "fromRaw": 147835,
+      "toRaw": 148435,
+      "gzipAfter": 20910,
+      "reason": "+600 B raw over the committed 147835 (gzip level 9: 20823 -> 20910), measured on disk at 70e557d5b (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: BAR6-CULTURE (JOIN-17 point 10, cd40ad0e0) +600, the declarations its batches added to the stressor and condition lines; they compose exactly (147835 -> 148435); 57.3 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE LAST CLOSE (2026-11-19; points 51/52/59, 61, 64, 70 of the sixth chair's landings): the landings' declared lines and twins of state prose, re-recorded once by LASTCLOSE-DOORS at the base cc11c9504 (the chair's ruling on its hand-back's §3 (3): the prose byte ratchet is a door figure; vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/defense.generated.js",
+      "fromRaw": 281298,
+      "toRaw": 287394,
+      "gzipAfter": 37962,
+      "reason": "+6096 B raw over the committed 281298 (gzip level 9: 37154 -> 37962), measured on disk at cc11c9504 (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: DESKS-ECO/-DEF/-2 (points 51, 52, 59, ae4f90835) +1742; FAULTS-DESKS (point 64, f4e195512) +558; LAST-VARIETY (point 70, 8380df4de) +3796; they compose exactly (281298 -> 287394); 58.9 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE LAST CLOSE (2026-11-19; points 51/52/59, 61, 64, 70 of the sixth chair's landings): the landings' declared lines and twins of state prose, re-recorded once by LASTCLOSE-DOORS at the base cc11c9504 (the chair's ruling on its hand-back's §3 (3): the prose byte ratchet is a door figure; vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/economy.generated.js",
+      "fromRaw": 195233,
+      "toRaw": 196627,
+      "gzipAfter": 26784,
+      "reason": "+1394 B raw over the committed 195233 (gzip level 9: 26610 -> 26784), measured on disk at cc11c9504 (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: DESKS-ECO/-DEF/-2 (points 51, 52, 59, ae4f90835) +905; FAULTS-NEED (point 61, 3ae86a8b3) +489; they compose exactly (195233 -> 196627); 49.9 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE LAST CLOSE (2026-11-19; points 51/52/59, 61, 64, 70 of the sixth chair's landings): the landings' declared lines and twins of state prose, re-recorded once by LASTCLOSE-DOORS at the base cc11c9504 (the chair's ruling on its hand-back's §3 (3): the prose byte ratchet is a door figure; vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/general.generated.js",
+      "fromRaw": 306982,
+      "toRaw": 307568,
+      "gzipAfter": 38822,
+      "reason": "+586 B raw over the committed 306982 (gzip level 9: 38767 -> 38822), measured on disk at cc11c9504 (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: DESKS-ECO/-DEF/-2 (points 51, 52, 59, ae4f90835) +586; they compose exactly (306982 -> 307568); 38.6 per cent of its ceilingRaw"
+    },
+    {
+      "car": "THE LAST CLOSE (2026-11-19; points 51/52/59, 61, 64, 70 of the sixth chair's landings): the landings' declared lines and twins of state prose, re-recorded once by LASTCLOSE-DOORS at the base cc11c9504 (the chair's ruling on its hand-back's §3 (3): the prose byte ratchet is a door figure; vetoable by the owner)",
+      "leaf": "src/data/dossierStateProse/power.generated.js",
+      "fromRaw": 135398,
+      "toRaw": 136414,
+      "gzipAfter": 18762,
+      "reason": "+1016 B raw over the committed 135398 (gzip level 9: 18681 -> 18762), measured on disk at cc11c9504 (raw; gzip level 9), each landing's delta read off the leaf at its first-parent merge: DESKS-ECO/-DEF/-2 (points 51, 52, 59, ae4f90835) +1016; they compose exactly (135398 -> 136414); 38.2 per cent of its ceilingRaw"
     }
   ],
   "ceilingTransfersNewLeaves": [

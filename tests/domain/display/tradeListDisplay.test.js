@@ -11,6 +11,7 @@ import { SUPPLY_CHAIN_NEEDS } from '../../../src/data/supplyChainData.js';
 import { TERRAIN_DATA } from '../../../src/data/geographyData.js';
 import { RESOURCE_DATA } from '../../../src/data/resourceData.js';
 import { assertDeclarable } from '../../../src/domain/facts/factVocabulary.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
 
 const place = (tier, extra = {}) => ({ tier, institutions: [], ...extra });
 
@@ -65,4 +66,31 @@ describe('the camel chain declares the desert (the lane ruling 2)', () => {
     const allowing = Object.entries(TERRAIN_DATA).filter(([, t]) => (t.allowedResources || []).includes('camel_herds')).map(([k]) => k);
     expect(allowing).toEqual(['desert']);
   });
+});
+
+describe('"Capital" is not a good shipped (NOLANE-1, LV-CAPITAL; the leaves lane\'s r2s-famine-city-0)', () => {
+  // A collected arm over census births (SECOND-WAVE-CENSUS dials) whose record carries "Capital" among its imports: the
+  // caravan masters' "Capital + trade access" need, cut to its first part. Money is not a good brought in, so it leaves
+  // the list as the other category errors do; every real import beside it still prints.
+  it('no birth prints "Capital" as an import; the goods beside it stay', async () => {
+    const { generateSettlementPipeline } = await import('../../../src/generators/generateSettlementPipeline.js');
+    const { birthConfig, loadGenerationLawPayloads } = await import('../../../src/domain/density/densityCreateBoundary.js');
+    const { DEFAULT_CONFIG } = await import('../../../src/store/configSlice.js');
+    await loadGenerationLawPayloads();
+    const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true,
+      selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+    let carrying = 0;
+    const failures = collectSeedFailures([['r2r-city-0', 'city'], ['r2r-city-1', 'city'], ['r2r-city-3', 'city']], ([seed, settType]) => {
+      const town = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType }), null, { seed, customContent: {} });
+      const imports = town.economicState.primaryImports;
+      if (!imports.includes('Capital')) return;
+      carrying++;
+      const shown = displayTradeList(imports, town, { side: 'imports', exports: town.economicState.primaryExports });
+      expect(shown.length, `${seed}: the guard — the real imports still print`).toBeGreaterThan(0);
+      // anchored: the length guard directly above shows the real imports print in this list
+      expect(shown, `${seed}: no "Capital" import`).not.toContain('Capital');
+    });
+    expectNoSeedFailures(failures, 'a birth printed "Capital" as an import, or lost its real imports');
+    expect(carrying, 'anchored: the births carry the record\'s "Capital"').toBeGreaterThan(0);
+  }, 120000);
 });

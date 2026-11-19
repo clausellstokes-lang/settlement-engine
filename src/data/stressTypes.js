@@ -28,8 +28,10 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "The settlement is surrounded. Someone in the leadership is considering terms. Someone else is considering a desperate sortie. The players arrive as this decision is being forced.",
+    // BAR3-PLACES-3 (the chair, 2026-11-15): "Field work and trade have stopped" in every siege town, where the food record still grows
+    // 14 to 43 in a hundred of the food (SIEGE_PRODUCTION_KEPT) in all 31 of the 720: trade by road, gate and water stops; a part is still produced (VETOABLE wording)
     viabilityNote:
-      "Field work and trade have stopped, and everything now turns on how long the food and water last.",
+      "Trade by road, gate and water has stopped, only part of the usual food is still produced here, and everything now turns on how long the food and water last.",
     historyColour: "military",
   },
   famine: {
@@ -37,8 +39,11 @@ export const STRESS_TYPE_MAP = {
     colour: "#8b5a1a",
     probability: 0.027,
     requiresTier: null,
+    // BAR3-PLACES-2 (C4510, 2026-11-15): the slot's holder is the famine's lever (the master fishmonger in 11 of the census's
+    // 21 mill towns, the miller, an elder, a reeve), and where the fishery is the source that failed, "has food" was read
+    // as the failed good itself: the hook names no good, only a store laid in before the shortage (true of every holder).
     crisisHook:
-      "A grain merchant has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
+      "A grain merchant has stores laid in before the shortage, enough to matter. They will sell, but their price is not money. The players can intervene in how this plays out.",
     viabilityNote: "No one can earn a normal living while the famine lasts, and every coin goes on food.",
     historyColour: "economic",
   },
@@ -110,8 +115,11 @@ export const STRESS_TYPE_MAP = {
     probability: 0.03,
     requiresTier: null,
     crisisHook:
-      "Three different powers have approached the players for support, each believing they represent the legitimate or best claim. All three are partly right.",
-    viabilityNote: "Big decisions wait for a new leader, and in the meantime each office does as it sees fit.",
+      // TAIL-HISTORY batch 1 (the chair's Y2; READ-ALL 00169 HIGH, 04385): "three different powers" and "each office"
+      // printed in a thorp of one power and no office; the words now claim no plurality of powers and no office (no
+      // atom counts the powers or the offices: a reword, no draw). VETOABLE wording (the owner's).
+      "The would-be successors have each approached the players for support, each believing theirs is the legitimate or best claim. Each of them is partly right.",
+    viabilityNote: "Big decisions wait for a new leader, and in the meantime the place gets by on old habit.",
     historyColour: "political",
   },
   monster_pressure: {
@@ -132,8 +140,10 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "The governing power knows what is happening but cannot admit it publicly without legitimising the insurgency. They need something done that cannot be official.",
+    // TAIL-HISTORY batch 1 (the chair's Y2; READ-ALL 18890): "some offices" printed in a hamlet of one headman; the
+    // households pay or refuse in every place. VETOABLE wording (the owner's).
     viabilityNote:
-      "Taxes are disputed, some offices no longer send their revenue on, and the government runs on habit.",
+      "Taxes are disputed, some households no longer pay at all, and the government runs on habit.",
     historyColour: "political",
   },
   religious_conversion: {
@@ -156,9 +166,11 @@ export const STRESS_TYPE_MAP = {
       "The revolt's leadership has demands. Some of them are negotiable. The governing power has not admitted this publicly, and one of them is attempting to open a back channel.",
     // R-U (CENSUS-2d; the chair's answer 2 to CENSUS-2c): presumes only the enslaved and their revolt.
     // "The slave market's commercial operations are suspended." presumed a slave market, which has
-    // no fact home (`institution: slave market` is listed under "needs a home").
+    // no fact home (`institution: slave market` is listed under "needs a home"). W2-FIX-DATA-13 (the chair's 13:01, R3C-REVOLTNOTE):
+    // "everyone who keeps order is busy containing the revolt" named keepers of order in 11 of 24 revolt towns with no
+    // force; the note now names none (its twin, stressTypesMeta.js, the same words). VETOABLE wording.
     viabilityNote:
-      "Owners keep their gangs only on work they can watch, less gets made, and everyone who keeps order is busy containing the revolt.",
+      "Owners keep their gangs only on work they can watch, and less gets made while the revolt lasts.",
     historyColour: "political",
   },
   wartime: {
@@ -166,8 +178,9 @@ export const STRESS_TYPE_MAP = {
     colour: "#5a2a0a",
     probability: 0.026,
     requiresTier: null,
+    // BAR3-PLACES (H2, 2026-11-15): no crown, no kingdom: a city-state at war answers to no higher lord, so the line names the war's own officers (true wherever it prints).
     crisisHook:
-      "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare. The governing power must decide whether to comply, negotiate, or find a third option.",
+      "An army requisition officer has arrived with orders that will strip the settlement of something it cannot spare. The governing power must decide whether to comply, negotiate, or find a third option.",
     viabilityNote:
       "The war takes most of the money: trade suffers, a few grow rich on army contracts, and the fields are short of the men called up.",
     historyColour: "military",
@@ -209,6 +222,16 @@ export const STRESS_TYPE_MAP = {
  * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs?: string[], excludes?: string[], twinOf?: string }>>>>}
  */
 export const STRESS_TYPE_SIBLINGS = Object.freeze({
+  // W2-FIX-DATA-7 (2026-11-13; CENSUS-2 kind a, the famine's grain merchant in 25 census towns, every one a thorp or a
+  // hamlet): the hook's "A grain merchant" is the slot `crisisHooks.js :: CRISIS_HOOK_SLOTS` fills with the lever's holder,
+  // and the lever is a person only where a mill stands (the miller, or a market's trader); where none stands it is the
+  // external mill, the slot stays empty and the line names a merchant the place lacks. Measured at bfadaa767 over 1,440
+  // births: the slot is empty in exactly the famine towns with no mill (25 census, 28 fresh) and filled in every one
+  // with a mill. VETOABLE wording (the owner's).
+  [STRESS_TYPE_MAP.famine.crisisHook]: Object.freeze([
+    Object.freeze({ text: STRESS_TYPE_MAP.famine.crisisHook, needs: ['institution: mill'] }),
+    Object.freeze({ text: 'Someone here still has food put by, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.', twinOf: STRESS_TYPE_MAP.famine.crisisHook, excludes: ['institution: mill'] }),
+  ]),
   [STRESS_TYPE_MAP.plague_onset.crisisHook]: Object.freeze([
     Object.freeze({ text: STRESS_TYPE_MAP.plague_onset.crisisHook, needs: ['healer'] }),
     Object.freeze({ text: 'The first person to name the outbreak has gone quiet. Their last message suggested the disease is not natural. Reaching them means crossing a quarantine that is not being enforced consistently.', twinOf: STRESS_TYPE_MAP.plague_onset.crisisHook, excludes: ['healer'] }),

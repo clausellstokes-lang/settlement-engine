@@ -71,7 +71,9 @@ describe('#10 — the port reason is gated on a docks or wharf institution', () 
     const failures = collectSeedFailures(runs, ({ tier, terrainType, ground, seed }) => {
       const [reason] = generateSettlementReason(tier, 'port', null, { terrainType, _seed: seed }, null, { hasDocks: false });
       expect(reason, `${terrainType} ${seed}`).toContain(ground);
-      expect(reason).toMatch(/wharf|docks/);
+      // R2-CODE-A-4 (#237, the chair's ruling): the route is the home of "this is a port"; the arm denies no docks and names none.
+      expect(reason).toMatch(/(?:trade has (?:always )?gone|traded|trades has always gone) by water/); // TAIL-NARRATIVE-2 B3: the route's trade by water, never the founders' purpose
+      expect(/wharf|docks|harbou?r/i.test(reason), `${terrainType} ${seed}: a denial or a house`).toBe(false);
       expect(ORIGIN_POOLS.road.includes(reason), `${terrainType} ${seed}: a road reason`).toBe(false);
     });
     expectNoSeedFailures(failures, 'a port route without docks founds on the named ground');

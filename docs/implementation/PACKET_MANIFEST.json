@@ -31009,8 +31009,8 @@
         {
           "_note": "CHOOSER 4 — draws three times. Its home is power/conflicts.js, not powerGenerator.js.",
           "path": "src/generators/power/conflicts.js",
-          "symbol": "export const generateConflicts = (powers, relationships, config = {}, institutions = [], npcs = []) => {",
-          "_reKeyed": "2026-11-07, MERGE-234 (the union of lanes 3 and 4): PEOPLE-3 HOOKS re-pointed the chooser to pair over the POWERS with each person's home read from its memberships (the `powers` and `npcs` parameters); the same function in the same file, re-keyed to the live signature so the manifest PEOPLE-4 TIES stages validates, as that lane re-keyed renderStressSummary"
+          "symbol": "export const generateConflicts = (powers, relationships, config = {}, institutions = [], npcs = [], defenseProfile = null) => {",
+          "_reKeyed": "2026-11-07, MERGE-234 (the union of lanes 3 and 4): PEOPLE-3 HOOKS re-pointed the chooser to pair over the POWERS with each person's home read from its memberships (the `powers` and `npcs` parameters); the same function in the same file, re-keyed to the live signature so the manifest PEOPLE-4 TIES stages validates, as that lane re-keyed renderStressSummary. 2026-11-16, BAR4-CLOSE-SWEEP: re-keyed again to the live signature: BAR4-SAFETY 2ee6f3a05 (SF1 (b), the chair's grant, DECLARED in its hand-back) added the trailing `defenseProfile = null` (the guard's pay, for the unpaid-guard hook's twin); the same function in the same file, its three draws unmoved"
         },
         {
           "_note": "The golden's hashing seam over the 525-row fixture. A1 asserts byte-identity, and version 1 moved 41 of 41 sampled rows here — this is where that failure appears.",
@@ -38645,7 +38645,8 @@
         },
         {
           "path": "src/generators/defenseGenerator.js",
-          "symbol": "const computeDefenseReadiness = (scores, threat, tier, magicExists = true) =>"
+          "symbol": "const computeDefenseReadiness = (scores, threat, tier, magicExists = true) =>",
+          "retiredBy": "§934.105 (the owner's design of 2026-11-13: defence is the sum of its parts; COHERENCE-UPKEEP-5 V3 at 82c639b44 replaced computeDefenseReadiness by the derived form)"
         },
         {
           "path": "src/generators/foodGenerator.js",

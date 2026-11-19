@@ -7,7 +7,7 @@
     "colour": false,
     "crisisScoped": false,
     "keyDeclares": {},
-    "lines": 13,
+    "lines": 14,
     "declaring": 2,
     "note": "Absence reasons stamped when a rule finds no candidate. noMilitary asserts no garrison or watch stands; the defender rule finds a garrison/watch only through a roster role or a live institution name, so a record whose defence facts hold a garrison or watch by another path would print it falsely — declared excludes. townCap 'the town already has one' is reachable at every tier."
   },
@@ -31,6 +31,14 @@
     {
       "id": "noGains",
       "text": "no power gains",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "noProfiteer",
+      "text": "no one is named for it",
       "needs": [],
       "excludes": [],
       "crisis": [],

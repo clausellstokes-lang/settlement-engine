@@ -22,10 +22,15 @@
  *     link to their in-context profile, which surfaces the compendium identity).
  */
 import { describe, it, expect, afterEach } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { render, screen, fireEvent, cleanup, within } from '@testing-library/react';
 import PowerTab from '../../src/components/new/tabs/PowerTab.jsx';
 import { SUPPORT_BASIS } from '../../src/domain/dossier/powerSupport.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { governingModifierWordsOf } from '../../src/domain/display/governingModifierWords.js';
+import { governingFactionOf } from '../../src/domain/rulingPower.js';
 import { rulingChainOf } from '../../src/domain/dossier/powerStrata.js';
 import { coupContenders, coupRiskLabel } from '../../src/domain/rulingPowerCoup.js';
 import { structuralLensOf } from '../../src/domain/spatial/cohesionWeave.js';
@@ -273,18 +278,50 @@ describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
     expect(screen.getByTestId('ruling-chain-npc').textContent).toBe('Serena Copperlane');
   });
 
-  it('STOP-1 (R7): the governing faction modifier rides the power line, its one home since T2-17 cut the Governing authority box', () => {
+  // RE-KEYED BY IDENTITY (POWERS-13, the bar's HIGH row #272; P4.8 ww#639 ww#980 pf#1 pf#23): the chip prints the
+  // modifier's PLAIN WORDS, and only where the town's record bears it out (display/governingModifierWords.js); the
+  // stored key ('corruption-riddled', 'mage-advised') is never printed. The guard town is the row's own,
+  // bar0-village-famine-rand-1 (the bar's probes' app shape): "Elder Council (significant) mage-advised" with no
+  // mage and no magic house; r2r-town-1 is its twin, an arcane house standing.
+  it('STOP-1 (R7): the governing faction modifier rides the power line, its one home since T2-17 cut the Governing authority box', async () => {
     const s = base();
     s.powerStructure.factions[0].modifier = 'corruption-riddled';
+    s.institutions = [{ name: "Thieves' guild chapter" }];
+    // POWERS-15 (REVIEW-POWERS-5 A5): the crime family is borne out by the HALL's rung, the fact its line on the same tab
+    // reads ("Criminal capture: Corrupted Officials"), never by a criminal house alone
+    s.powerStructure.criminalCaptureState = 'corrupted';
     render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
     const chip = screen.getByTestId('ruling-chain-modifier');
-    expect(chip.textContent).toBe('corruption-riddled');
-    expect(screen.getByTestId('ruling-chain').textContent.split('corruption-riddled').length - 1, 'said once on the page').toBe(1);
+    expect(chip.textContent).toBe('criminal sway');
+    expect(screen.getByTestId('ruling-chain').textContent.split('criminal sway').length - 1, 'said once on the page').toBe(1);
+    expectAbsentWithAnchor(screen.getByTestId('ruling-chain').textContent, 'corruption-riddled', 'Merchant Guild', 'the stored key is never printed');
+    cleanup();
+    const houseOnly = base(); // a criminal house stands and the hall is free of it: the chip is silent
+    houseOnly.powerStructure.factions[0].modifier = 'corruption-riddled';
+    houseOnly.institutions = [{ name: "Thieves' guild chapter" }];
+    render(<PowerTab powerStructure={houseOnly.powerStructure} settlement={houseOnly} narrativeNote={null} />);
+    expect(screen.getByTestId('ruling-chain').textContent, 'anchored: the chain block renders').toContain('Merchant Guild');
+    expect(screen.queryByTestId('ruling-chain-modifier'), 'the hall is free of the criminals: no "criminal sway"').toBeNull();
+    cleanup();
+    const bare = base();
+    bare.powerStructure.factions[0].modifier = 'corruption-riddled'; // no criminal house, no criminal power: not borne out
+    render(<PowerTab powerStructure={bare.powerStructure} settlement={bare} narrativeNote={null} />);
+    expectAbsentWithAnchor(screen.getByTestId('ruling-chain').textContent, 'corruption-riddled', 'Merchant Guild', 'an unborne modifier prints nothing');
+    expect(screen.queryByTestId('ruling-chain-modifier'), 'not borne out, no chip').toBeNull(); // anchored: the chain block renders (above)
     cleanup();
     render(<PowerTab powerStructure={base().powerStructure} settlement={base()} narrativeNote={null} />);
     expect(screen.getByTestId('ruling-chain').textContent).toContain('Merchant Guild');
     expect(screen.queryByTestId('ruling-chain-modifier'), 'no modifier, no chip').toBeNull(); // anchored: the chain block renders on this render
-  });
+    cleanup();
+    await loadGenerationLawPayloads();
+    const row = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'village', selectedStressesRandom: false, selectedStresses: ['famine'], _randomizePriorities: true }), null, { seed: 'bar0-village-famine-rand-1', customContent: {} });
+    expect(governingFactionOf(row)?.modifier, 'the guard town stores the key').toBe('mage-advised');
+    expect(governingModifierWordsOf(row), 'no mage, no magic house: nothing prints').toBe('');
+    const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+    const twin = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: 'town' }), null, { seed: 'r2r-town-1', customContent: {} });
+    expect(governingFactionOf(twin)?.modifier, 'the twin stores the key').toBe('arcane-advised');
+    expect(governingModifierWordsOf(twin), 'an arcane house stands: its plain words').toBe('mage counsel');
+  }, 60000);
 
   it('a pre-density settlement with no NPCs renders the chain as far as the data goes', () => {
     const s = base();
@@ -327,15 +364,20 @@ describe('UX consolidation — Power (T2-17..T2-19)', () => {
     expect(text).not.toContain('Governing authority'); // anchored: the chain block is on this render
   });
 
-  it('THE TRIM (2026-11-01): a modifier of 0 is not a chip, and the heading goes when nothing moved', () => {
+  // Re-keyed by identity, COHERENCE-POWERS-7 (the owner, 2026-11-13: show the ratings, never the machinery; cold list
+  // REVIEW-W2A-3 MEDIUM #20 #51 #107 #169 #199 #287): THE TRIM's moved chips are gone too — no modifier prints as a
+  // chip, moved or not, and the heading never prints; the score and its band stay (asserted on this render).
+  it('THE TRIM (2026-11-01), then the owner\'s ratings-not-machinery (2026-11-13): no modifier is a chip and the heading never prints', () => {
     const leg = town.powerStructure.publicLegitimacy;
     const mixed = { ...town, powerStructure: { ...town.powerStructure, publicLegitimacy: { ...leg, breakdown: { prosperity: 8, safety: 0, defense: -3, food: 0 } } } };
     const a = render(<PowerTab powerStructure={mixed.powerStructure} settlement={mixed} narrativeNote={null} publicDossier />).container.textContent;
-    expect(a).toContain('Breakdown');
-    expect(a).toContain('Prosperity +8');
-    expect(a).toContain('Defense -3');
-    expect(a).not.toContain('Safety 0'); // anchored: the two moved chips are asserted on this render
-    expect(a).not.toContain('Food 0');
+    expect(a).toContain('Public legitimacy');
+    expect(a).toContain(String(leg.score));
+    expect(a).not.toContain('Breakdown'); // anchored: the score is asserted on this render
+    expectAbsentWithAnchor(a, 'Prosperity +8', 'Public legitimacy', 'a modifier chip on the legitimacy block');
+    expectAbsentWithAnchor(a, 'Defense -3', 'Public legitimacy', 'a modifier chip on the legitimacy block');
+    expectAbsentWithAnchor(a, 'Safety 0', 'Public legitimacy', 'a modifier chip on the legitimacy block');
+    expectAbsentWithAnchor(a, 'Food 0', 'Public legitimacy', 'a modifier chip on the legitimacy block');
     cleanup();
     const still = { ...town, powerStructure: { ...town.powerStructure, publicLegitimacy: { ...leg, breakdown: { prosperity: 0, safety: 0, defense: 0, food: 0 }, governanceFractured: true } } };
     const b = render(<PowerTab powerStructure={still.powerStructure} settlement={still} narrativeNote={null} publicDossier />).container.textContent;
@@ -343,10 +385,13 @@ describe('UX consolidation — Power (T2-17..T2-19)', () => {
     expect(b).not.toContain('Breakdown'); // anchored: the fracture note on this render
   });
 
-  it('T2-18: the legitimacy breakdown label is "Breakdown" and the fracture note is one sentence', () => {
+  // Re-keyed by identity, COHERENCE-POWERS-7 (the owner, 2026-11-13: ratings, never the machinery): the breakdown and
+  // its label left the page; the score's own label stays.
+  it('T2-18, then 2026-11-13: no "Breakdown" label and no base figure; the fracture note is one sentence', () => {
     const text = view({ publicDossier: true });
-    expect(text).toContain('Breakdown');
-    expect(text).not.toContain('(base 50)'); // anchored: toContain('Breakdown') on this render
+    expect(text).toContain('Public legitimacy');
+    expect(text).not.toContain('Breakdown'); // anchored: toContain('Public legitimacy') on this render
+    expect(text).not.toContain('(base 50)'); // anchored: toContain('Public legitimacy') on this render
     const fractured = { ...town, powerStructure: { ...town.powerStructure, publicLegitimacy: { ...town.powerStructure.publicLegitimacy, governanceFractured: true } } };
     cleanup();
     const f = render(<PowerTab powerStructure={fractured.powerStructure} settlement={fractured} narrativeNote={null} publicDossier />).container.textContent;

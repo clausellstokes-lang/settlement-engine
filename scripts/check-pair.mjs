@@ -64,7 +64,7 @@ import { pathToFileURL } from 'node:url';
  * §0d's six-band duration vocabulary plus the general time words. Any of these ADDED by a
  * rewrite is a duration claim the pool key may not license (T5).
  */
-const DURATION = /\b(this season|within the year|years on|years old|a decade|a generation|older than its bearers|year|years|season|seasons|winter|winters|generation|generations|lifetime|decade|decades|month|months|week|weeks|day|days|ago|since|every|always|never|long|recent|lately|now|yet|still|already)\b/gi;
+const DURATION = /\b(this season|within the year|years on|years old|a decade|a generation|older than its bearers|older than anyone living|year|years|season|seasons|winter|winters|generation|generations|lifetime|decade|decades|month|months|week|weeks|day|days|ago|since|every|always|never|long|recent|lately|now|yet|still|already)\b/gi;
 /** §0d's QUANTITY_BANDS plus the authored magnitudes and the count NOUNS: a moved noun moves the band. */
 const COUNT = /\b(nobody|no one|a few souls|a few|a dozen or so|a dozen|dozens|a hundred or so|a hundred|several hundred|many hundreds|hundreds|thousands|a handful|a score|scores|most|all but|half|all|none|many|several|some|souls|people|households|families|hands|mouths|heads)\b/gi;
 /** The antithesis SHAPE, counted rather than the phrase, so a moved column still reads. */

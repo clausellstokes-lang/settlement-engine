@@ -15,7 +15,7 @@
  *   applyLegitimacyMultipliers → mutates faction array in place
  */
 
-import { LEGITIMACY_CUTS, legitimacyBandOf } from '../data/bandLadders.js';
+import { LEGITIMACY_CUTS, legitimacyBandOf } from '../data/bandLadders.js'; import { STRESS_POWER_FACES } from '../data/stressPowerFaces.js'; import { powerSentenceName, powerPossessive } from '../domain/display/powerSentenceName.js'; import { pluralPowerName } from '../domain/display/governanceAccount.js'; /** TAIL-POWERS-B (P3 + the agreement law): a power in a relation line takes its prose form (`say`) and the verb its number (`verb`). @param {{faction?: string} | null | undefined} f */ const say = (f) => powerSentenceName(f?.faction); /** @param {{faction?: string}} f @param {string} one @param {string} many */ const verb = (f, one, many) => (pluralPowerName(say(f)) ? many : one); // one line: the holder census keys this file by line
 // ── Public legitimacy contributions ──────────────────────────────────────────
 // Prosperity → ±20
 const PROSPERITY_CONTRIB = {
@@ -250,19 +250,22 @@ export function govCriminalRelation(gov, crim, crimCapture, publicLeg) {
 
   if (crimCapture === 'capture') {
     type = 'corrupted';
-    narrative = `${gov.faction} is a front. ${crim.faction} decides the taxes, who gets arrested and who gets office; the hall keeps up appearances because that suits ${crim.faction}.`;
+    narrative = `${say(gov)} is a front. ${say(crim)} decides the taxes, who gets arrested and who gets office; the hall keeps up appearances because that suits ${say(crim)}.`;
   } else if (crimCapture === 'corrupted') {
     type = 'corrupted';
-    narrative = `${crim.faction} has bought key people in ${gov.faction}. Its own crimes go unpunished, and its rivals are the ones who get arrested.`;
+    narrative = `${say(crim)} has bought key people in ${say(gov)}. Its own crimes go unpunished, and its rivals are the ones who get arrested.`;
   } else if (crimCapture === 'equilibrium') {
     type = 'tense';
-    narrative = `${gov.faction} leaves ${crim.faction} alone because stamping it out would cost more than it saves. ${crim.faction} keeps its head down, because it needs the hall standing to feed off it.`;
+    narrative = `${say(gov)} leaves ${say(crim)} alone because stamping it out would cost more than it saves. ${say(crim)} keeps its head down, because it needs the hall standing to feed off it.`;
   } else {
     type = 'competitive';
-    narrative = `${gov.faction} is hunting ${crim.faction} in earnest but not catching all of it; ${crim.faction} pulls back and regroups, and does not go away.`;
+    narrative = `${say(gov)} is hunting ${say(crim)} in earnest but not catching all of it; ${say(crim)} pulls back and regroups, and does not go away.`;
   }
 
-  direction = publicLeg.isLegitimacyCrisis ? 'escalating'    // governance crisis empowers crime
+  // TAIL-POWERS-B (the chair's ruling P13(2)): THE DIRECTION READS THE CAPTURE RUNG: the truce rung (equilibrium: the two
+  // tolerate each other) is 'stable' whatever the legitimacy; a crisis escalates only a rung the hall is fighting or losing.
+  direction = crimCapture === 'equilibrium' ? 'stable'
+            : publicLeg.isLegitimacyCrisis ? 'escalating'    // governance crisis empowers crime
             : publicLeg.isEndorsed          ? 'declining'     // strong governance suppresses crime
             : 'stable';
 
@@ -283,13 +286,18 @@ export function criminalMilitaryRelation(crim, mil, crimCapture, publicLeg) {
 
   if (crimCapture === 'corrupted' || crimCapture === 'capture') {
     type = 'corrupted';
-    narrative = `${mil.faction} and ${crim.faction} have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank and file may not know; the command does.`;
+    narrative = `${say(mil)} and ${say(crim)} have a working arrangement. Patrol routes avoid certain streets. Certain arrests never happen. The rank and file may not know; the command does.`;
   } else if (crimCapture === 'equilibrium') {
     type = 'tense';
-    narrative = `${mil.faction} knows where ${crim.faction} works, and ${crim.faction} knows the patrol rota. Neither pushes the other hard enough to start a fight.`;
+    // TAIL-POWERS-B: where the row is escalating (contested, or a legitimacy crisis) the line says "yet"
+    if (publicLeg.isContested || publicLeg.isLegitimacyCrisis) {
+      narrative = `${say(mil)} knows where ${say(crim)} works, and ${say(crim)} knows the patrol rota. Neither has yet pushed the other hard enough to start a fight.`;
+    } else {
+      narrative = `${say(mil)} knows where ${say(crim)} works, and ${say(crim)} knows the patrol rota. Neither pushes the other hard enough to start a fight.`;
+    }
   } else {
     type = 'competitive';
-    narrative = `${mil.faction} is hunting ${crim.faction} in earnest and making real arrests; ${crim.faction} knows the streets and the people better, hides, and comes back.`;
+    narrative = `${say(mil)} is hunting ${say(crim)} in earnest and making real arrests; ${say(crim)} knows the streets and the people better, hides, and comes back.`;
   }
 
   direction = publicLeg.isContested || publicLeg.isLegitimacyCrisis ? 'escalating' : 'stable';
@@ -321,6 +329,63 @@ export function withCaptureRelations(powerStructure, state) {
 }
 
 /**
+ * TAIL-POWERS-B-2 (the chair's P13(1)/P19, vetoable by the owner): ONE HOME FOR A PAIR'S STANDING. The relation rows are
+ * drawn before the conflicts exist, so a row can call a pair symbiotic or dependent, and 'stable', where the conflicts hold
+ * the same pair at HIGH. Called once on the final record, where both are final: such a row keeps its kind and its
+ * structural bargain (true beside a named quarrel) and takes a twin that names the quarrel, its direction escalating.
+ * Every other row is kept as it is. Draw-free; never mutates its input.
+ * @param {any} powerStructure @param {Array<{ parties?: string[], intensity?: string, issue?: string }>} conflicts
+ * @returns {any}
+ */
+export function withConflictRelations(powerStructure, conflicts) {
+  const rows = Array.isArray(powerStructure?.factionRelationships) ? powerStructure.factionRelationships : null;
+  // BAR3-POWERS (C21481, C51168; the chair's P3): a bargain ("each props up the other", "each needs the other") is false beside an open
+  // conflict of the same pair at ANY intensity, not only HIGH: every such row names the quarrel; only a HIGH one also turns the direction
+  const high = (Array.isArray(conflicts) ? conflicts : []).filter((c) => Boolean(c?.intensity) && Array.isArray(c.parties) && c.parties.length === 2 && c.issue);
+  if (!rows || !high.length) return powerStructure;
+  const ofPair = (/** @type {any} */ c, /** @type {string[]} */ pair) => (c.parties[0] === pair[0] && c.parties[1] === pair[1]) || (c.parties[0] === pair[1] && c.parties[1] === pair[0]);
+  const quarrelOf = (/** @type {string[]} */ pair) => high.find((c) => c.intensity === 'high' && ofPair(c, pair)) || high.find((c) => ofPair(c, pair)) || null; // the gravest first
+  let moved = false;
+  const factionRelationships = rows.map((row) => {
+    if (!row || !Array.isArray(row.pair)) return row;
+    const quarrel = quarrelOf(row.pair);
+    if (!quarrel) return row;
+    const issue = String(quarrel.issue).toLowerCase();
+    // TAIL-POWERS-B-4 (the chair's P31 (3), vetoable by the owner): the merchants' and craftsmen's vote ("vote together whenever
+    // trade is at stake") is false of a pair the conflicts hold at HIGH; it takes its twin, which names the quarrel
+    const narrative = String(row.narrative || '');
+    if (narrative === MERCHANT_CRAFT_VOTE.sibling(row.pair[0], row.pair[1]) || narrative.startsWith(`${row.pair[0]} and ${row.pair[1]} vote together against `)) {
+      moved = true;
+      return { ...row, direction: quarrel.intensity === 'high' ? 'escalating' : row.direction, narrative: MERCHANT_CRAFT_VOTE.atOdds(row.pair[0], row.pair[1], issue) };
+    }
+    if (row.type !== 'symbiotic' && row.type !== 'dependent') return row;
+    moved = true;
+    // TAIL-POWERS-B-4 (P31 (5)): the seat and the faith that "props up" its rule are not said to prop each other up beside a HIGH quarrel
+    const ordained = ORDAINED_SEAT.exec(narrative);
+    const direction = quarrel.intensity === 'high' ? 'escalating' : row.direction;
+    if (ordained) return { ...row, direction, narrative: `${ordained[1]}; ${ordained[2]} ${ordained[3] === 'tells' ? 'has' : 'have'} long told people that ${ordained[4]} rule is right and ordained, but the two are now at odds over ${issue}.` };
+    return { ...row, direction, narrative: `${narrative} Even so, the two are now at odds over ${issue}.` };
+  });
+  return moved ? { ...powerStructure, factionRelationships } : powerStructure;
+}
+
+/**
+ * BAR3-POWERS (C27440, the chair's P3, vetoable by the owner): "The merchants have stopped attending the sessions. Both sides are
+ * now acting as if the other has already lost." (governanceNarrative.js :: deriveBaselineConflict) beside the seat's relation row
+ * with a merchant power that holds the pair settled ("subordinate", "symbiotic" or "dependent", and "stable"): the relation row is
+ * the pair's one home, so the boycott takes its twin, the same levy debate with no walk-out. Draw-free; text only.
+ * @param {unknown} recentConflict @param {ReadonlyArray<any>} relations @param {unknown} seat @returns {any}
+ */
+export function boycottReadsRelation(recentConflict, relations, seat) {
+  const BOYCOTT = 'The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost.';
+  if (typeof recentConflict !== 'string' || !recentConflict.includes(BOYCOTT) || !seat) return recentConflict;
+  const settled = (Array.isArray(relations) ? relations : []).some((row) => Array.isArray(row?.pair) && row.pair.includes(seat)
+    && row.pair.some((name) => name !== seat && /merchant/i.test(String(name)))
+    && ['subordinate', 'symbiotic', 'dependent'].includes(row.type) && row.direction === 'stable');
+  return settled ? recentConflict.replace(BOYCOTT, 'The merchants have argued against every one of them, and nothing has been settled yet.') : recentConflict;
+}
+
+/**
  * Compute pairwise faction relationships.
  *
  * @param {Array}  factions
@@ -344,9 +409,15 @@ export const MERCHANT_CRAFT_VOTE = Object.freeze({
   needs: 'the landholding power it names',
   against: (/** @type {string} */ merchants, /** @type {string} */ craft, /** @type {string} */ landholders) => `${merchants} and ${craft} vote together against ${landholders}, then fight over who keeps the profit.`,
   sibling: (/** @type {string} */ merchants, /** @type {string} */ craft) => `${merchants} and ${craft} vote together whenever trade is at stake, then fight over who keeps the profit.`,
+  // TAIL-POWERS-B-4 (P31 (3)): the twin where the conflicts hold the pair at HIGH (withConflictRelations)
+  atOdds: (/** @type {string} */ merchants, /** @type {string} */ craft, /** @type {string} */ issue) => `${merchants} and ${craft} are at odds over ${issue}, and fight over who keeps the profit of the trade.`,
 });
 
-export function computeFactionRelationships(factions, tier, instFlags, publicLeg, stressTypes = [], defenseFacts = null) {
+/** The seat-and-faith row's dependent line (computeFactionRelationships), in either of its seat forms: its parts, for the
+ * HIGH twin (withConflictRelations). */
+const ORDAINED_SEAT = /^(.+ holds the seat(?: and collects the taxes)?); (.+) (tells|tell) people that (.+) rule is right and ordained\. Each props up the other\.$/;
+
+export function computeFactionRelationships(factions, tier, instFlags, publicLeg, stressTypes = [], defenseFacts = null, courtSits = null) { // FAULTS-WATCH FR25 (c): `courtSits`, the roster's court (`defence.js :: courtHoldersOf`, `court sits` at the draw); false strikes "courts" from the standing's rights; null keeps the line
   const rels = [];
   const stressed = t => stressTypes.includes(t);
 
@@ -387,21 +458,37 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
     const ratio = mil.power / Math.max(1, gov.power);
     let type, direction, narrative;
 
+    // R3-CODE-C (ROUND-3-CUT #1074, HIGH: "Merchant Guild Council gives the orders and Occupation Authority carries
+    // them out" beside the crisis's "its own officials take their orders"): a power an occupation sends in (the
+    // table's appointed row, data/stressPowerFaces.js) is filed under the military category, so `mil` can be the
+    // occupier. Its row says what the crisis is at every band: the hall carries out what the occupier decides (the
+    // subordinate frame, its parties the other way round). Its kind never says the hall commands (subordinate) or
+    // that each needs the other (symbiotic); the bands above those (tense, competitive) stand.
+    const occupier = STRESS_POWER_FACES.some((row) => row.appointed && row.power === mil.faction && stressed(row.stress));
+
     if (ratio <= 0.5) {
       type = 'subordinate';
       // R6 (soak 1000 rung 1, kind 4): the soldiers sentence needs soldiers on the record, a
       // garrison or a hired company (the defence-words check's own reading of the word).
       const soldiersStand = !defenseFacts || defenseFacts.hasGarrison || defenseFacts.hasMercenary;
-      narrative = `${mil.faction} carries out what ${gov.faction} decides.${soldiersStand ? ' The soldiers enforce the law; they do not make it.' : ''}`;
+      narrative = `${say(mil)} carries out what ${say(gov)} decides.${soldiersStand ? ' The soldiers enforce the law; they do not make it.' : ''}`;
     } else if (ratio <= 0.85) {
       type = 'symbiotic';
-      narrative = `${gov.faction} gives the orders and ${mil.faction} carries them out; each needs the other to stay strong.`;
+      narrative = `${say(gov)} gives the orders and ${say(mil)} carries them out; each needs the other to stay strong.`;
     } else if (ratio <= 1.2) {
       type = 'tense';
-      narrative = `${mil.faction} is now about as strong as ${gov.faction}. The hall asks for the commander's agreement instead of giving orders, and less and less is decided without it.`;
+      narrative = `${say(mil)} is now about as strong as ${say(gov)}. The hall asks for ${powerPossessive(mil.faction)} agreement instead of giving orders, and less and less is decided without it.`;
     } else {
       type = 'competitive';
-      narrative = `${mil.faction} no longer takes orders from ${gov.faction}. ${gov.faction} keeps the title; ${mil.faction} makes the decisions that matter.`;
+      // R3-CODE-C-2 (ROUND-3-CUT-INCREMENT #pf-591): "makes the decisions that matter" only where the force is the
+      // strongest power; beside a stronger one (Religious Authorities 47 to the Guard's 19) the first sentence stands alone.
+      const strongest = factions.every((f) => f === mil || (f.power || 0) <= (mil.power || 0));
+      narrative = `${say(mil)} no longer takes orders from ${say(gov)}.${strongest ? ` ${say(gov)} keeps the title; ${say(mil)} makes the decisions that matter.` : ''}`;
+    }
+    // The occupier's row (#1074): its kind from the same bands, never subordinate or symbiotic; its words the crisis's.
+    if (occupier) {
+      type = type === 'competitive' ? 'competitive' : 'tense';
+      narrative = `${say(gov)} carries out what ${say(mil)} decides.`;
     }
 
     direction = stressed('under_siege') ? 'escalating'  // military power rising in crisis
@@ -420,13 +507,15 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
 
     if (ratio >= 1.2) {
       type = 'competitive';
-      narrative = `Day-to-day trade here is run by ${merc.faction} more than by ${gov.faction}, and taxes are bargained over, not ordered.`;
+      // TAIL-POWERS-B: under an occupation the occupier orders the levy, so no bargained taxes are said
+      narrative = `Day-to-day trade here is run by ${say(merc)} more than by ${say(gov)}, and taxes are bargained over, not ordered.`;
+      if (stressed('occupied')) narrative = `Day-to-day trade here is run by ${say(merc)} more than by ${say(gov)}.`;
     } else if (ratio >= 0.6) {
       type = 'dependent';
-      narrative = `${gov.faction} needs the taxes and loans of ${merc.faction}, and ${merc.faction} needs ${gov.faction} to enforce its contracts and keep the law. Neither can afford to ruin the other.`;
+      narrative = `${say(gov)} needs the taxes and loans of ${say(merc)}, and ${say(merc)} ${verb(merc, 'needs', 'need')} ${say(gov)} to enforce ${verb(merc, 'its', 'their')} contracts and keep the law. Neither can afford to ruin the other.`;
     } else {
       type = 'subordinate';
-      narrative = `${merc.faction} works under the rules ${gov.faction} sets, and pays for a hearing in the hall when it wants something.`;
+      narrative = `${say(merc)} ${verb(merc, 'works', 'work')} under the rules ${say(gov)} sets, and ${verb(merc, 'pays', 'pay')} for a hearing in the hall when it wants something.`;
     }
 
     direction = (instFlags?.economyOutput > 65) ? 'escalating'    // merchant wealth growing
@@ -446,15 +535,20 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
                             (gov.faction || '').toLowerCase().includes('theocrat') ||
                             (gov.faction || '').toLowerCase().includes('ecclesiast');
 
-    if (govIsTheocratic) {
+    // R3-CODE-C-2 (#pf-590): a religious power that is not the governing one is another body; "the same people in
+    // practice" is said of none (their members are not shared), so a church government reads the same bands.
+    if (govIsTheocratic && rel === gov) {
       type = 'symbiotic';
-      narrative = `${rel.faction} and ${gov.faction} are the same people in practice; the hall rules because the faith says it may.`;
+      narrative = `${say(rel)} and ${say(gov)} are the same people in practice; the hall rules because the faith says it may.`;
     } else if (ratio >= 1.1) {
       type = 'tense';
-      narrative = `People take their marriages, inheritances and hard times to ${rel.faction}, not to ${gov.faction}, and the two keep quarrelling over who decides what.`;
+      // TAIL-POWERS-B: the standing, not a quarrel the record may not hold (were "and the two keep quarrelling over who decides what")
+      narrative = `People take their marriages, inheritances and hard times to ${say(rel)}, not to ${say(gov)}, and the two do not agree on who decides what.`;
     } else if (ratio >= 0.5) {
       type = 'dependent';
-      narrative = `${gov.faction} keeps order and collects the taxes; ${rel.faction} tells people that both are right and ordained. Each props up the other.`;
+      // TAIL-POWERS-B: the seat, not an order a siege, a famine, an insurgency or an occupation denies (was "keeps order")
+      // TAIL-POWERS-B-4 (P31 (5)): under an occupation the occupier takes the levy; the seat is said held, and no taxes are said
+      narrative = `${say(gov)} holds the seat${stressed('occupied') ? '' : ' and collects the taxes'}; ${say(rel)} ${verb(rel, 'tells', 'tell')} people that ${powerPossessive(gov.faction)} rule is right and ordained. Each props up the other.`;
     } else {
       type = 'subordinate';
       narrative = `${rel.faction} answers to ${gov.faction}. Its priests look after their flocks and have no say in the hall.`;
@@ -464,7 +558,15 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
               : stressed('plague_onset')         ? 'escalating'  // church gains legitimacy in crisis
               : 'stable';
 
-    addRel({ pair: [gov.faction, rel.faction], type, direction, ratio: Math.round(ratio*100)/100, narrative });
+    // R3-CODE-C-9 (the bar's n240; the chair's ruling of 2026-11-14, vetoable by the owner: the line reads the
+    // relationship's own standing, the fact the record prints beside it, and is not drawn where the record contradicts
+    // it; 77f0e6792's form). The subordinate line says the faith has "no say in the hall"; World/Faith gives the
+    // strongest religious power a voice in the town's affairs wherever one stands (dossier/faithReading.js ::
+    // factionLine: a small voice below 15, a voice, real weight from 30), and its own card on the Power tab gives it
+    // civic reach in every band (rulingStructure.js's religious desc: "limited" at the least). So it is not drawn.
+    // Gortfell (bar0-town-calm-rand-1): beside "A voice in the town's affairs belongs to the Religious Authorities."
+    // 149 of the reader's 1,722 births.
+    if (type !== 'subordinate') addRel({ pair: [gov.faction, rel.faction], type, direction, ratio: Math.round(ratio*100)/100, narrative });
   }
 
   // ── Governing ↔ Criminal ────────────────────────────────────────────────────
@@ -477,7 +579,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
 
     if (ratio >= 1.8) {
       type = 'competitive';
-      narrative = `${merc.faction} buys the materials, sets the prices and sells the goods; ${craft.faction} only makes them, and its masters are becoming hired hands in all but name.`;
+      narrative = `${say(merc)} ${verb(merc, 'buys', 'buy')} the materials, ${verb(merc, 'sets', 'set')} the prices and ${verb(merc, 'sells', 'sell')} the goods; ${say(craft)} only ${verb(craft, 'makes', 'make')} them, and ${verb(craft, 'its', 'their')} masters are becoming hired hands in all but name.`;
     } else if (ratio >= 0.7) {
       type = 'tense';
       // STYLE-2 B7 (SW-7, P9): "the landlords" was a fixed noun the roster did not hold; the line names the
@@ -487,7 +589,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
         : MERCHANT_CRAFT_VOTE.sibling(merc.faction, craft.faction);
     } else {
       type = 'tense';
-      narrative = `Only the masters of ${craft.faction} know how to make what ${merc.faction} sells, so the merchants pay their price.`;
+      narrative = `Only the masters of ${say(craft)} know how to make what ${say(merc)} ${verb(merc, 'sells', 'sell')}, so the merchants pay their price.`;
     }
 
     direction = (instFlags?.economyOutput > 65) ? 'escalating'  // expanding economy; who captures the surplus?
@@ -506,34 +608,40 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
 
     if (merP >= 20 && relP >= 15) {
       type = 'tense';
-      narrative = `${merc.faction} and ${rel.faction} want the same households' money: tithes on one side, debts and contracts on the other. Church land exemptions and the church's rules on lending are a standing grievance with the merchants.`;
+      narrative = `${say(merc)} and ${say(rel)} want the same households' money: tithes on one side, debts and contracts on the other. Church land exemptions and the church's rules on lending are a standing grievance with the merchants.`;
     } else if (merP > relP * 1.5) {
       type = 'competitive';
-      narrative = `${merc.faction} now has more money than ${rel.faction} has sway. Merchants pay for churches, ${!defenseFacts || defenseFacts.hasHospital ? 'hospitals' : 'charities'} and indulgences, and they set the terms.`; // F1: a hospital only where one stands
+      narrative = `${say(merc)} now ${verb(merc, 'has', 'have')} more money than ${say(rel)} ${verb(rel, 'has', 'have')} sway. Merchants pay for churches, ${!defenseFacts || defenseFacts.hasHospital ? 'hospitals' : 'charities'} and indulgences, and they set the terms.`; // F1: a hospital only where one stands
     } else {
       type = 'dependent';
-      narrative = `The money of ${merc.faction} pays for the charity of ${rel.faction}, and the charity keeps the poor quiet. Each needs the other, and neither likes it.`;
+      narrative = `The money of ${say(merc)} pays for the charity of ${say(rel)}, and the charity keeps the poor quiet. Each needs the other, and neither likes it.`;
     }
 
     addRel({ pair: [merc.faction, rel.faction], type, direction: 'stable', narrative });
   }
 
   // ── Noble ↔ Governing (feudal dynamics) ────────────────────────────────────
+  // R3-CODE-C-8 (the reader's L14; the chair's ruling (c) of 2026-11-14, vetoable by the owner): the subordinate line
+  // ("still have their titles, but ... have taken most of their power") is not drawn of the indebted crisis's own
+  // creditor power (data/stressPowerFaces.js, the indebted row): beside it the Power tab prints "Strained — the creditors
+  // have a say in every decision" (governanceNarrative.js). r2r-metropolis-33, 1 of 128 subordinate lines.
+  const nobleIsCreditor = !!noble && stressed('indebted')
+    && STRESS_POWER_FACES.some((row) => row.stress === 'indebted' && row.power === noble.faction);
   if (noble && gov && !gov.faction?.toLowerCase().includes('feudal')) {
     const ratio = noble.power / Math.max(1, gov.power);
-    let type, narrative;
+    let type, narrative; const weak = powerLabelOf(noble.power) === 'Suppressed'; // TAIL-POWERS-B (P1): a Suppressed house neither bargains nor holds a veto
 
-    type = ratio >= 0.9 ? 'tense'
-         : ratio >= 0.5 ? 'dependent'
+    type = ratio >= 0.9 && !weak ? 'tense'
+         : ratio >= 0.5 && !weak ? 'dependent'
          : 'subordinate';
 
-    narrative = ratio >= 0.9
-      ? `${noble.faction} hold old rights ${gov.faction} cannot take away; nothing about land, inheritance or levies gets done without their agreement.`
-      : ratio >= 0.5
-      ? `${noble.faction} live under the rule of ${gov.faction} but keep enough rights of their own (land, courts, levies) to bargain, not simply obey.`
-      : `${noble.faction} still have their titles, but merchant money and the hall's offices have taken most of their power.`;
+    narrative = type === 'tense'
+      ? `${say(noble)} ${verb(noble, 'holds', 'hold')} old rights ${say(gov)} cannot take away; nothing about land, inheritance or levies gets done without ${verb(noble, 'its', 'their')} agreement.`
+      : type === 'dependent'
+      ? `${say(noble)} ${verb(noble, 'lives', 'live')} under the rule of ${say(gov)} but ${verb(noble, 'keeps', 'keep')} enough rights of ${verb(noble, 'its', 'their')} own (${courtSits === false ? 'land, levies' : 'land, courts, levies'}) to bargain, not simply obey.` // FR25 (c): the twin, "courts" struck, where no court sits
+      : `${say(noble)} still ${verb(noble, 'has', 'have')} ${verb(noble, 'its', 'their')} titles, but ${merc && (merc.power || 0) > (noble.power || 0) ? 'merchant money and ' : ''}the hall's offices have taken most of ${verb(noble, 'its', 'their')} power.`; // R3-CODE-C-2 (#pf-90): merchant money only where a merchant power outranks them
 
-    addRel({ pair: [noble.faction, gov.faction], type, direction: 'declining', ratio: Math.round(ratio*100)/100, narrative });
+    if (!(type === 'subordinate' && nobleIsCreditor)) addRel({ pair: [noble.faction, gov.faction], type, direction: 'declining', ratio: Math.round(ratio*100)/100, narrative });
   }
 
   // Deduplicate by pair (sorted key) — prevents double-relationships
@@ -565,6 +673,16 @@ function renormTo100(factions) {
   shares.slice().sort((a, b) => b.remainder - a.remainder || a.i - b.i)
     .forEach((s) => { if (leftover > 0) { s.floor += 1; leftover -= 1; } });
   shares.forEach((s) => { factions[s.i].power = s.floor; });
+}
+
+/**
+ * A POWER'S LABEL FROM ITS FINAL SHARE (TAIL-POWERS batch 2: one home for the ladder the multipliers set, so a sentence
+ * that measures a power by its strength (the chair's ruling P1) reads the same bands the card prints).
+ * @param {number} power the renormalised share @returns {'Dominant' | 'Strong' | 'Significant' | 'Minor' | 'Suppressed'}
+ */
+export function powerLabelOf(power) {
+  const p = Number(power) || 0;
+  return p >= 35 ? 'Dominant' : p >= 25 ? 'Strong' : p >= 18 ? 'Significant' : p >= 10 ? 'Minor' : 'Suppressed';
 }
 
 /**
@@ -623,14 +741,20 @@ export function applyLegitimacyMultipliers(factions, publicLeg, _tier) {
 
   // Labels read the FINAL renormalised share so a faction's band matches its
   // displayed percentage.
-  factions.forEach(f => {
-    f.powerLabel = f.power >= 35 ? 'Dominant'
-                 : f.power >= 25 ? 'Strong'
-                 : f.power >= 18 ? 'Significant'
-                 : f.power >= 10 ? 'Minor'
-                 : 'Suppressed';
-  });
+  factions.forEach(f => { f.powerLabel = powerLabelOf(f.power); });
 
   // Sort by effective power descending
   factions.sort((a, b) => (b.power || 0) - (a.power || 0));
+}
+
+/**
+ * RECORD-MEASURE-2 G1 (candidate): ONE DOMINANT POWER. "Dominant" is the strongest power's word alone: a second power at
+ * the Dominant share reads "Strong", and where the two strongest hold the same share neither dominates (both "Strong").
+ * Labels only; no share moves. @param {Array<{ power?: number, powerLabel?: string }>} factions
+ */
+export function keepOneDominant(factions) {
+  const ranked = [...(factions || [])].filter((f) => f?.powerLabel === 'Dominant').sort((a, b) => (b.power || 0) - (a.power || 0));
+  if (ranked.length < 2) return;
+  const tie = (ranked[0].power || 0) === (ranked[1].power || 0);
+  ranked.forEach((f, i) => { if (i > 0 || tie) f.powerLabel = 'Strong'; });
 }

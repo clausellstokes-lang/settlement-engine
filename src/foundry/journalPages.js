@@ -35,10 +35,21 @@ import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage
 // ⛔ ONE HOME PER SENTENCE (STYLE-0 §3's keep-on rules, applied by STYLE-RULINGS-2 B4, 2026-11-09):
 // the crisis page's two print rules are the PDF's, from one module.
 import { stakeLines, unprintedFacts } from '../pdf/lib/crisisPrint.js';
-import { institutionDisplayName } from '../domain/display/institutionDisplayName.js';
-import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
-import { displayTradeList, revenuesOffTheLists } from '../domain/display/tradeListDisplay.js';
+// TAIL-CRISIS-7 (K26): a stake row is a sentence; its power takes its name from the one leaf ("The Guard split").
+import { powerSentenceName } from '../domain/display/powerSentenceName.js';
+// ROUND THREE, ruling (a): every house this journal prints is printed by its label, the one display leaf.
+import { houseLabelsInText, institutionHouseLabel } from '../domain/display/institutionDisplayName.js';
+import { tradeListsAsPrinted, revenuesOffTheLists, plainGoodName } from '../domain/display/tradeListDisplay.js';
+import { resourceDisplayName } from '../domain/display/resourceDisplayName.js'; // TAIL-EXPORTS-JOURNAL batch 2 (E1): the tab's resource name
 import { foodwaysLineOf } from '../domain/foodways.js';
+import { tradePillWord } from '../domain/display/tradePillWord.js'; // SURFACES-3 item 2 (r3): the tab's pill word
+import { foodWordShown } from '../domain/display/foodWordShown.js';
+// TAIL-EXPORTS-JOURNAL-2 batch 3 (the chair's rulings E3, E12): a row that lives on what a siege, an outbreak or a famine
+// stops is marked by the tabs' one leaf, and the page says once that its rows are of ordinary times.
+import { stoppingCrisesOf, rowStoppedBy, crisisMarkText, markedDescription, ordinaryTimesLine, isVentureMark } from '../domain/display/crisisStoppedRow.js';
+import { chainPrintName } from '../domain/display/chainPrintName.js'; // PDF-2b item 4: the view model's rows, paired by the record
+import { stoppedOnPage, shortOnPage, stoppedWordOnPage, chainCardOnPage } from '../pdf/lib/crisisMarksOnPage.js'; /* SURFACES-1 item 1: the tab's state in the tab's words; PDF-2 item 6: the card's (chainCardOnPage) */ // LEFT-PDF L1: the tab's income mark, the PDF's reader
+import { cultureOnPage } from '../pdf/lib/cultureOnPage.js'; // EXPORTS-B24 · B2: the PDF's culture block's reader
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
   servicesHeadline, resourcesHeadline, viabilityHeadline, historyHeadline,
@@ -80,6 +91,9 @@ const md = (...lines) => lines
   .replace(/\n{3,}/g, '\n\n');
 
 const bullet = (v) => (has(v) ? `- ${esc(v)}` : null);
+/** The Prosperity row's one sentence where a crisis in force lowered the label (the chair's ruling
+ *  1(a), REVIEW-UPKEEP-2): nested beneath that row, so the row and its sentence read together. */
+const inCrisisRow = (v) => (has(v) ? `  - ${esc(v)}` : null);
 
 /** The italic section lede — emitted only when the headline has something to say. */
 const lede = (headline) => (headline ? `*${esc(headline)}*` : null);
@@ -104,13 +118,14 @@ function overviewPage(vm, { historyPrinted = true } = {}) {
     kv('Terrain', id.terrain),
     kv('Government', id.governmentType),
     kv('Prosperity', o.prosperity),
+    inCrisisRow(o.prosperityInCrisis),
     kv('Safety', o.safety),
     kv('Viability', o.viabilityVerdict ? humanize(o.viabilityVerdict) : null),
     o.stress.length ? md('', '## Active crises', o.stress.map(x =>
       `- **${esc(x.label || 'Crisis')}**: ${esc(x.summary || '')}${x.hook ? ` *Hook: ${esc(x.hook)}*` : ''}`)) : null,
     o.arrivalScene ? md('', '## Arrival', `> ${esc(o.arrivalScene)}`) : null,
     o.pressureSentence ? md('', `*${esc(o.pressureSentence)}*`) : null,
-    o.settlementReason ? md('', '## Why this place exists', esc(o.settlementReason)) : null,
+    o.settlementReason ? md('', '## Settlement Origin', esc(o.settlementReason)) /* TAIL-EXPORTS-PDF-3 (ruling E23, the heading lent): the Overview tab's heading over the same line */ : null,
     // The historical character prints once per journal: on the History page where the variant has
     // one, else here (the keep-on rule; the chair's B4 ruling (2), 2026-11-09).
     !historyPrinted && o.character ? md('', '## Character', esc(o.character)) : null,
@@ -172,12 +187,12 @@ function crisisJournalPage(settlement) {
     '', `## ${esc(s.line)}`,
     s.summary ? esc(s.summary) : null,
     '', `### ${CRISIS_PAGE_COPY.cast}`,
-    s.cast.length ? s.cast.map(r => `- **${esc(r.roleLabel)}**: ${esc(r.name)} · ${esc(r.reason)}`) : `- ${CRISIS_PAGE_COPY.nobody}`,
+    s.cast.length ? s.cast.map(r => `- **${esc(r.roleLabel)}**: ${esc(r.kind === 'institution' ? institutionHouseLabel(r.name) : r.name)} · ${esc(r.reason)}`) : `- ${CRISIS_PAGE_COPY.nobody}`,
     s.stakes.length ? md('', `### ${CRISIS_PAGE_COPY.stakes}`,
-      s.stakeLines.rows.map(k => `- **${esc(k.factionId)}** ${CRISIS_PAGE_COPY.stake[k.stake]}: ${esc(k.reason)}.`),
+      s.stakeLines.rows.map(k => `- **${esc(powerSentenceName(k.factionId))}** ${CRISIS_PAGE_COPY.stake[k.stake]}: ${esc(k.reason)}.`),
       s.stakeLines.untouched ? `- ${esc(s.stakeLines.untouched)}` : null) : null,
     '', `### ${CRISIS_PAGE_COPY.levers}`,
-    s.levers.length ? s.levers.map(l => `- ${esc(l.institution)}${l.holderName ? `, held by ${esc(l.holderName)}` : ''}`) : `- ${CRISIS_PAGE_COPY.noLevers}`,
+    s.levers.length ? s.levers.map(l => `- ${esc(institutionHouseLabel(l.institution))}${l.holderName ? `, held by ${esc(l.holderName)}` : ''}`) : `- ${CRISIS_PAGE_COPY.noLevers}`,
     s.seeFirst.length ? md('', `### ${CRISIS_PAGE_COPY.seeFirst}`, s.seeFirst.map(f => `- **${esc(f.label)}**: ${esc(f.text)}`)) : null,
     s.ifNothingIsDone ? md('', `### ${CRISIS_PAGE_COPY.ifNothing}`, esc(s.ifNothingIsDone)) : null,
   ))) || null;
@@ -191,7 +206,9 @@ function npcQuickRefPage(vm) {
     '',
     '| Name | Role | Member of | Power |',
     '| --- | --- | --- | --- |',
-    npcs.map(n => `| ${esc(n.name)} | ${esc(n.title || '')} | ${esc(n.factionLabel || '')} | ${esc(n.power || 0)} |`),
+    // E5 (TAIL-EXPORTS-JOURNAL batch 2): a person who holds no power prints no empty "Member of" cell, which read as a
+    // label cut from its value; the journal's own mark for an empty cell (the Exploitation table's) says there is none.
+    npcs.map(n => `| ${esc(n.name)} | ${esc(n.title || '')} | ${n.factionLabel ? esc(n.factionLabel) : '—'} | ${esc(n.power || 0)} |`),
   );
 }
 
@@ -200,7 +217,11 @@ function notableNpcPage(n) {
     kv('Role', n.title),
     kv('Race', n.race),
     kv('Member of', n.factionLabel),
-    kv('House', n.house),
+    kv('House', n.house ? institutionHouseLabel(n.house) : n.house),
+    // LEFT-PDF L3 (the chair's ruling CM1; BRIEF-LEFT, 2026-11-17; vetoable by the owner): the house's mark, one line of its
+    // own straight under the house line, as the NPC tab's card and the PDF's person card print it (the view row's
+    // `houseMark`, `pdf/lib/viewModel.js`); the person's own sentences print as written.
+    n.house && n.houseMark ? `  - *${esc(n.houseMark)}*` : null,
     kv('Standing', n.powerLine),
     kv('Power', n.power),
     kv('Influence', n.influenceLabel),
@@ -239,7 +260,7 @@ function plotHooksPage(vm) {
   );
 }
 
-function powerPage(vm) {
+function powerPage(vm, houses = []) {
   const p = vm.power;
   return md(
     lede(powerHeadline(p, vm.identity)),
@@ -253,7 +274,7 @@ function powerPage(vm) {
       `- **${esc(f.name)}**${f.isGoverning ? ' *(governing)*' : ''}${f.description ? `: ${esc(f.description)}` : ''}`)) : null,
     p.tensions.length ? md('', '## Tensions', p.tensions.map(tn =>
       // The tension's key in words ("Resource scarcity"), no severity range ("minor / major").
-      `- **${esc(tn.label ? cap(humanize(tn.label)) : 'Tension')}**${tn.description ? `: ${esc(tn.description)}` : ''}`)) : null,
+      `- **${esc(tn.label ? cap(humanize(tn.label)) : 'Tension')}**${tn.description ? `: ${esc(houseLabelsInText(tn.description, houses))}` : ''}`)) : null,
     p.conflicts.length ? md('', '## Conflicts', p.conflicts.map(c =>
       `- **${esc((c.parties || []).join(' vs '))}**${c.intensity ? ` (${esc(c.intensity)})` : ''}${c.issue ? `: ${esc(c.issue)}` : ''}${c.stakes ? ` Stakes: ${esc(c.stakes)}` : ''}`)) : null,
   );
@@ -266,7 +287,8 @@ function identityPage(vm, settlement = vm.raw) {
     kv('Age', id.age),
     kv('Trade access', id.tradeAccess ? humanize(id.tradeAccess) : null),
     kv('Governing power', id.anchor.governingName),
-    kv('Cultural notes', id.anchor.culturalNotes),
+    // EXPORTS-B24 · B2: the PDF's notes box: the generated notes in a town or larger, held to their rows' declarations; the user's own always.
+    kv('Cultural notes', cultureOnPage(settlement, id.anchor.culturalNotes).notes),
     // FOOD-4: the food record's foodways line, through the one reader — the PDF chapter's row.
     kv('Foodways', foodwaysLineOf(settlement)),
     // ⛔ No '## Quarters' section before the plat (X-47); the view model keeps `id.quarters`.
@@ -289,45 +311,91 @@ function servicesPage(vm) {
   ) || null;
 }
 
-function institutionsPage(vm) {
+function institutionsPage(vm, settlement = vm.raw) {
   const detailed = vm.services.detailed || [];
   if (!detailed.length) return null;
+  // E12 (TAIL-EXPORTS-JOURNAL-2 batch 3): the Institutions tab's call (InstitutionsTab.jsx): each house read by the
+  // crisis leaf off the RECORD's house (the slice keeps the display name, not the catalogue id; servicesSlice maps the
+  // roster one to one), its mark before its description, the page's one head line where a house is marked.
+  const crises = stoppingCrisesOf(settlement);
+  const roster = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  const stoppedBy = new Map(detailed.map((i, idx) => [i, rowStoppedBy(settlement, 'house', roster[idx], crises)]));
+  const ordinaryLine = ordinaryTimesLine([...stoppedBy.values()].filter(Boolean));
+  const descOf = (i) => (stoppedBy.get(i) ? markedDescription(crisisMarkText(settlement, stoppedBy.get(i)), i.description) : i.description);
   const byCat = new Map();
   for (const inst of detailed) {
     if (!byCat.has(inst.category)) byCat.set(inst.category, []);
     byCat.get(inst.category).push(inst);
   }
   return md(
+    lede(ordinaryLine),
+    ordinaryLine ? '' : null,
     [...byCat.entries()].map(([cat, list]) => md(
       `## ${esc(cap(humanize(cat)))}`,
       // The institution label seam (ODQ 934.13): the VTT journal is a reader surface like
       // any other, and it printed the raw catalogue key beside a PDF that did not.
-      list.map(i => `- **${esc(institutionDisplayName(i))}**${i.status && i.status !== 'healthy' ? ` *(${esc(i.status)})*` : ''}${i.description ? `: ${esc(i.description)}` : ''}`),
+      list.map(i => `- **${esc(institutionHouseLabel(i))}**${i.status && i.status !== 'healthy' ? ` *(${esc(i.status)})*` : ''}${descOf(i) ? `: ${esc(descOf(i))}` : ''}`),
       '',
     )),
   );
 }
 
-function economicsPage(vm) {
+/**
+ * LEFT-PDF L1: the words after an income share's name, the tab's mark said as the Institutions tab's doors say a mark
+ * ("stopped", "curtailed, short"; `crisisMarksOnPage.js :: stoppedWordOnPage`); a share whose only mark is a failed
+ * venture's ("Failing: a failed venture.") takes that mark's own first word ("failing"). Null where the tab prints none.
+ * @param {object | null | undefined} settlement @param {Record<string, unknown>} src @returns {string | null}
+ */
+function incomeWordOnPage(settlement, src) {
+  const word = stoppedWordOnPage(settlement, 'income', src);
+  const short = shortOnPage(settlement, 'income', src);
+  const venture = short && isVentureMark(short) ? short.split(':')[0].toLowerCase() : null;
+  const words = [word, venture].filter(Boolean);
+  return words.length ? words.join(', ') : null;
+}
+
+function economicsPage(vm, settlement = vm.raw) { // W2-C-LEAVES-8: the settlement handed in (tonightPage's idiom), not read off vm.raw
   const e = vm.economics;
-  const fb = e.foodBalance || {};
+  const trade = tradeListsAsPrinted(settlement); // W2-C-LEAVES-7 item 8: the tab's lists (a siege that stops trade: no Imports row)
+  // E12 (TAIL-EXPORTS-JOURNAL-2 batch 3): an income share or a supply chain that lives on what the crisis stops is
+  // marked by the crisis leaf (an income share by the record's source, a chain by the record's chain id): a share,
+  // which prints no description, takes the leaf's word after its name (the Institutions tab's form for a row with no
+  // description); a chain, its mark before its description; the page's one head line where a row is marked.
+  const crises = stoppingCrisesOf(settlement);
+  // PDF-2b item 4 (the chair's second reader's LOW 1, 2026-11-18): the records of the rows the view model prints, in its
+  // order: it drops a chain with no print label (`viewModelBodySlices.js`, UPKEEP-14 (j)), so `e.chains[i]` pairs with
+  // these, never with `activeChains[i]` by bare index (a dropped chain would hand its word and its mark to the next row).
+  const records = (settlement?.economicState?.activeChains || []).filter((c) => chainPrintName(c, settlement).label);
+  // LEFT-PDF L1 (BRIEF-LEFT, 2026-11-17; vetoable by the owner): a share is marked as the Economics tab marks it, by its
+  // crisis AND by its houses short (`economicsCrisisMarks.js :: incomeMarkShown`, through the PDF's reader
+  // `crisisMarksOnPage.js`): its words after its name ("curtailed, short"), the head line's crisis and its short sentence.
+  const incomeStopped = (e.incomeSources || []).map((s) => stoppedOnPage(settlement, 'income', s));
+  const incomeWord = (e.incomeSources || []).map((s) => incomeWordOnPage(settlement, s));
+  const incomeShort = (e.incomeSources || []).some((s) => shortOnPage(settlement, 'income', s) !== null);
+  const chainStopped = (e.chains || []).map((_c, i) => rowStoppedBy(settlement, 'chain', records[i], crises));
+  const ordinaryLine = ordinaryTimesLine([...incomeStopped, ...chainStopped].filter(Boolean), incomeShort);
   return md(
     lede(economicsHeadline(e)),
     '',
+    lede(ordinaryLine),
+    ordinaryLine ? '' : null,
     kv('Prosperity', e.prosperity),
+    inCrisisRow(e.prosperityInCrisis),
     kv('Complexity', e.economicComplexity),
     // The resource label seam: a trade list may carry a raw RESOURCE_DATA key beside an
     // authored phrase, and the VTT journal printed both exactly as the record spells them.
     // F11 / CENSUS-3b unit 3: the journal reads the SCREEN's lists (one display reader).
-    kv('Exports', displayTradeList(e.primaryExports, vm.raw, { side: 'exports' }).map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
-    kv('Imports', displayTradeList(e.primaryImports, vm.raw, { side: 'imports', exports: e.primaryExports }).map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
-    fb.display ? kv('Food', fb.display) : (fb.deficit ? kv('Food deficit', fb.deficit) : kv('Food surplus', fb.surplus)),
-    (e.incomeSources || []).length ? md('', '## Income', e.incomeSources.map(s =>
-      `- ${esc(label(s.source) || s.source)}: ${esc(Math.round(s.percentage))}%`)) : null,
+    kv('Exports', trade.exports.map(x => tradePillWord(x, 'exports')).filter(Boolean).join(', ')),
+    kv('Imports', trade.imports.map(x => tradePillWord(x, 'imports')).filter(Boolean).join(', ')),
+    kv('Food', foodWordShown(settlement)?.label), // SURFACES-3 item 1: the food word's one home, or no row (its own Surplus/Balanced/Deficit went)
+    (e.incomeSources || []).length ? md('', '## Income', e.incomeSources.map((s, i) =>
+      `- ${esc(label(s.source) || s.source)}${incomeWord[i] ? ` (${esc(incomeWord[i])})` : ''}: ${esc(Math.round(s.percentage))}%`)) : null,
     // CENSUS-3c (R-P 2): the revenues that left the trade lists, where the record holds their fact.
     revenuesOffTheLists(vm.raw).length ? kv('Also earned (no share recorded)', revenuesOffTheLists(vm.raw).map((r) => r.text).join(', ')) : null,
-    (e.chains || []).length ? md('', '## Supply chains', e.chains.map(c =>
-      `- **${esc(c.name)}** *(${esc(c.status)})*${c.description ? `: ${esc(c.description)}` : ''}`)) : null,
+    // W2-C-LEAVES-7 item 9: the state the tab's card prints (chainStateShown.js :: chainAsShown; none: no state written).
+    (e.chains || []).length ? md('', '## Supply chains', e.chains.map((c, i) => { const rec = records[i]; const st = rec ? chainCardOnPage(rec, settlement).word.toLowerCase() : c.status; /* PDF-2 item 6: the tab card's word (chainCardOnPage) */
+      const desc = chainStopped[i] ? markedDescription(crisisMarkText(settlement, chainStopped[i]), c.description) : c.description;
+      return `- **${esc(c.name)}**${st ? ` *(${esc(st.replace(/_/g, ' '))})*` : ''}${desc ? `: ${esc(desc)}` : ''}`; })) : null,
   );
 }
 
@@ -338,12 +406,17 @@ function resourcesPage(vm) {
     '',
     kv('Terrain', r.terrain),
     kv('Strategic value', typeof r.strategicValue === 'object' ? (r.strategicValue?.label ?? r.strategicValue?.value) : r.strategicValue),
-    kv('Nearby resources', (r.nearbyAbundant || []).map(x => humanize(label(x) || x)).join(', ')),
-    kv('Depleted', (r.nearbyDepleted || []).map(x => humanize(label(x) || x)).join(', ')),
+    // LEFT-PDF L19: the grounds the houses prove print under the list's own title, as the Resources tab prints them (the
+    // view row's `nearbyProven`; a ground used up is in `nearbyDepleted`)
+    kv('Nearby resources', [...(r.nearbyAbundant || []), ...(r.nearbyProven || [])].map(nearbyResourceName).join(', ')),
+    kv('Depleted', (r.nearbyDepleted || []).map(nearbyResourceName).join(', ')),
     (r.chainRows || []).length ? md('', '## Exploitation',
       '| Resource | Status | Processing | Output |',
       '| --- | --- | --- | --- |',
-      r.chainRows.map(c => `| ${esc(humanize(c.resource))} | ${esc(c.status)} | ${esc(c.processing || '—')} | ${esc(c.output || '—')} |`)) : null,
+      // E1 (TAIL-EXPORTS-JOURNAL batch 2): the resource by the name the Resources tab's card prints, through the tab's own
+      // leaf (ResourcesTab.jsx :: ResourceChainCard: plainGoodName(resourceDisplayName(rawResource))), not a humanize of
+      // the journal's own ("gold/silver ore", "Oasis Water" beside the tab's "Gold and silver ore", "Oasis and water rights").
+      r.chainRows.map(c => `| ${esc(plainGoodName(resourceDisplayName(c.resource)))} | ${esc(c.status)} | ${esc(c.processing || '—')} | ${esc(c.output || '—')} |`)) : null,
   );
 }
 
@@ -360,7 +433,10 @@ function defensePage(vm) {
     kv('Safety', d.safetyLabel),
     d.militaryStress ? kv('Military status', d.militaryStress.label || humanize(d.militaryStress.type)) : null,
     forces.length ? md('', '## Armed forces', forces.map(f =>
-      bullet(typeof f === 'string' ? f : `${f.name || ''}${f.desc ? `: ${f.desc}` : ''}${f.source ? ` (${f.source})` : ''}`)) ) : null,
+      // ⛔ NO PROVENANCE TAG (R2-CODE-B-13, the reader's M10): the force's `source` ('required', 'generated',
+      // 'coherence_repair', …) is the generator's machinery, which the page never shows (the Defense tab's card
+      // dropped its badge by R3-TABS ruling b1); the line prints the house and what it is. @enforced-by tests/pdf/journalForceNoProvenance.test.js
+      bullet(typeof f === 'string' ? institutionHouseLabel(f) : `${institutionHouseLabel(f.name || '')}${f.desc ? `: ${f.desc}` : ''}`)) ) : null,
     (d.criminalOps || []).length ? md('', '## Criminal operations', d.criminalOps.map(o =>
       `- **${esc(o.name)}**${o.note ? `: ${esc(o.note)}` : ''}`)) : null,
     (d.vulnerabilities || []).length ? md('', '## Vulnerabilities',
@@ -387,7 +463,7 @@ function historyPage(vm) {
   );
 }
 
-function viabilityPage(vm) {
+function viabilityPage(vm, houses = []) {
   const v = vm.viability;
   return md(
     lede(viabilityHeadline(v)),
@@ -396,7 +472,7 @@ function viabilityPage(vm) {
     // The summary without its opening verdict token: the Verdict row above is the label (W7 HOOKS).
     v.summary ? md('', esc(stripViabilityToken(v.summary))) : null,
     (v.issues || []).length ? md('', '## Issues', v.issues.map(i =>
-      `- **${esc(i.title || 'Issue')}**${i.severity ? ` (${esc(i.severity)})` : ''}${i.description ? `: ${esc(i.description)}` : ''}`)) : null,
+      `- **${esc(i.title || 'Issue')}**${i.severity ? ` (${esc(i.severity)})` : ''}${i.description ? `: ${esc(houseLabelsInText(i.description, houses))}` : ''}`)) : null,
   );
 }
 
@@ -521,15 +597,15 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
     }
   }
   if (inc('plotHooks'))           push('Plot Hooks', plotHooksPage(vm));
-  if (inc('powerStructure'))      push('Power', powerPage(vm));
+  if (inc('powerStructure'))      push('Power', powerPage(vm, settlement?.institutions));
   if (inc('identityDailyLife'))   push('Identity & Daily Life', identityPage(vm, settlement));
   if (inc('services'))            push('Services', servicesPage(vm));
-  if (inc('institutions'))        push('Institutions', institutionsPage(vm));
-  if (inc('economicsTrade'))      push('Economics & Trade', economicsPage(vm));
+  if (inc('institutions'))        push('Institutions', institutionsPage(vm, settlement));
+  if (inc('economicsTrade'))      push('Economics & Trade', economicsPage(vm, settlement));
   if (inc('resourcesProduction')) push('Resources & Production', resourcesPage(vm));
   if (inc('defenseSecurity'))     push('Defense & Security', defensePage(vm));
   if (inc('historyFounding'))     push('History & Founding', historyPage(vm));
-  if (inc('viabilityAssessment')) push('Viability Assessment', viabilityPage(vm));
+  if (inc('viabilityAssessment')) push('Viability Assessment', viabilityPage(vm, settlement?.institutions));
   if (inc('relationships'))       push('Relationships & Neighbours', relationshipsPage(vm));
   if (inc('timeline'))            push('Timeline', timelinePage(vm, { faithUnlocked }));
 
@@ -548,3 +624,14 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
 }
 
 export default buildJournalPages;
+
+/**
+ * TAIL-DISPLAY-CIVIC-4 (V11, the chair's ruling of 2026-11-15 03:17 UTC): a nearby resource's name has one home, the
+ * catalogue's label (`resourceDisplayName.js :: RESOURCE_DISPLAY_LABELS`, which the Resources tab prints): "Mountain Pass",
+ * not the key through a formatter ("Defended Pass"). A key the table does not hold keeps the old words.
+ * @param {string} x @returns {string}
+ */
+function nearbyResourceName(x) {
+  return Object.hasOwn(RESOURCE_DISPLAY_LABELS, x) ? RESOURCE_DISPLAY_LABELS[x] : humanize(label(x) || x);
+}
+import { RESOURCE_DISPLAY_LABELS } from '../domain/display/resourceDisplayName.js';

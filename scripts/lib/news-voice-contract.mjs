@@ -219,8 +219,30 @@ const TOTAL_KEYS = Object.freeze(['identities', 'distinctValues', 'occurrences']
 // batch, and the home already sits in NEWS_VOICE_RETRO_ROWS; NO NEW PROSE. The same seating re-deals three neighbours: applied|
 // npc_exploit 2 → 1, applied|npc_reform 24 → 25, applied|npc_suppress 6 → 5; introductions, retirements and conservation hold
 // (395 − 1 = 394); the voice debt stays EMPTY at the line and at the merged tip.
+// ── RE-RECORDED 2026-11-15 BY TAIL-CLOSE-SWEEP-A (ruling SW1, the chair's, under the owner's delegation; vetoable) AT THE JOINED TIP
+// dc4bae117, IN ONE ACT WITH THE HEADLINE CONTRACT. 395/1/394/44 → 417/2/415/42. ONE CORPUS BUILD PER MERGE POINT of the joined line's
+// first parent (the throw below disabled in an untracked scratch copy only); six moves, each a generator change re-dealing the AO-0
+// year, attributed at the merge point (CONFIRMED by both sides' measurement; the in-lane first-parent walks are non-monotone because
+// the lanes merged the line mid-lane, so no single in-lane commit is claimed except the first): STYLE-2-MERGE point 43 (f922124d0,
+// COHERENCE-PRESUME; in-lane 9e4e0402a, the watch office falls to a veteran soldier) 395/1/394/44 → 395/1/394/43 (applied|npc_mobilize
+// leaves); point 46 (6aeaa4154, COHERENCE-POWERS) → 402/1/401/44; point 47 (22cc9ef7d / 460d16467, COHERENCE-AGREE) → 411/1/410/42;
+// JOIN-1 · 4 (bea2a1298, powers-follow-up at 3909655c3) → 408/1/407/41; JOIN-1 · 9 (33b12cbef, coherence-upkeep at c56fd565e) →
+// 418/2/416/42; JOIN-8 · 19 (3e482b329, tail-defecon-c at 849bd8679, a good exported only where a house works it) → 417/2/415/42
+// (applied|boom 3 → 2). HOMES ARRIVE applied|army_homecoming, applied|strategy_return_home; HOMES LEAVE applied|npc_bargain,
+// applied|npc_exploit, applied|trade_pressure, realm|realm_mass_migration. THE VOICE LAW HOLDS: no introduced summary at the tip reads
+// `can advance through`; the voice debt stays EMPTY. Conservation 417 − 2 = 415.
+// ── RE-RECORDED 2026-11-18 BY CLOSE-DOORS-1B (the close of 2026-11-18, the chair's seat; as BAR3-CLOSE-DOORS-1's ruling OC1, vetoable
+// by the owner) AT THE FROZEN TREE 70e557d5b, IN ONE ACT WITH THE HEADLINE AND PROSE-FAMILY CONTRACTS (the cause recorded once, here).
+// 417/2/415/42 → 419/2/417/42. ONE CORPUS BUILD, this library's own functions (the throw below disabled in an untracked scratch copy
+// only), run on the working tree, which differs from 70e557d5b only in register and test files outside src/ and one register-only
+// table no src module imports (src/domain/generation/generationForkRegistry.js). THE CAUSE: `git log --first-parent
+// 600b7683a..70e557d5b` over the prose-family walker's 23 EXPECTED_UNION paths is EMPTY (no landing of the span touches the pulse, the
+// events, the region, the news voice, the chronicle, the contract libraries or their baselines); the span's declared generation moves
+// re-deal the AO-0 year (not bisected: one build). TWO MORE INTRODUCTIONS, BOTH INTO STANDING HOMES: applied|boom 2 → 3, applied|
+// urban_fabric 14 → 15; no home arrives or leaves (42 holds); retirements 2 hold. THE VOICE LAW HOLDS: no introduced summary reads
+// `can advance through`; the voice debt stays EMPTY. Conservation 419 − 2 = 417.
 const CORPUS = Object.freeze({
-  pulseRoots: 12, introductions: 395, retirements: 1, finalEntries: 394, homes: 44,
+  pulseRoots: 12, introductions: 419, retirements: 2, finalEntries: 417, homes: 42,
 });
 
 export const NEWS_VOICE_PROTECTED_SUBSTRATE = Object.freeze([

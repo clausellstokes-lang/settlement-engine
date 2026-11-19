@@ -27,6 +27,7 @@ import { registerStep } from '../pipeline.js';
 import { generateEconomicState } from '../economicGenerator.js';
 import { recordTrace } from '../../domain/trace.js';
 import { deriveSupplyChainState } from '../../domain/supplyChainState.js';
+import { chainPrintName } from '../../domain/display/chainPrintName.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { deriveTradeLinks } from '../../domain/region/tradeLinks.js';
 import { withLedgerBlock } from '../../domain/facts/presumptionLedger.js';
@@ -424,12 +425,15 @@ export function emitChainTraces(ctx, economicState, tier, step = 'economyReconci
       });
     }
     if (chain.resource) {
+      // the receipt's words are PRINTED (the pipeline rail: "Because of Resource: …" and the reason): the source is
+      // the one the page gives the chain (`chainPrintName`: the toll's by the town's access)
+      const source = chainPrintName(chain, String(ctx.tradeRoute ?? '')).resource;
       causes.push({
-        source: `resource.${chain.resource}`,
+        source: `resource.${source}`,
         effect: chain.activatedByResource ? 'activates the chain' : 'enables the chain',
         reason: chain.activatedByResource
-          ? `${chain.resource} is the proximate cause of this chain running here.`
-          : `${chain.resource} is the input the chain depends on.`,
+          ? `${source} is the proximate cause of this chain running here.`
+          : `${source} is the input the chain depends on.`,
       });
     }
     if (state.substituteActive) {

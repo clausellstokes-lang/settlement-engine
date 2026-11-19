@@ -197,7 +197,29 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 40 -> 41 (LIVE)   THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL
+ *   schema 44 -> 45 (LIVE)   THE LAST CLOSE (the chair's ruling CL26 of 2026-11-18, carried from the first close): one rung,
+ *     eleven new reads since the register was last frozen (e56e112e2), each ADMITTED BY CAUSE with its class and
+ *     landing; nothing declared, nothing gone; topology, tag law, roster and bank (78/52) unchanged. Its full
+ *     rationale lives beside `LAST_CLOSE_TARGET_SCHEMA`.
+ *
+ *   schema 43 -> 44 (RETIRED) THE CLOSE'S FINAL PASS (the chair's ruling OR2 of 2026-11-15, its law carried to the FINAL PASS at f76fe38fd): one rung, two rows, each with its cause — the
+ *     quick guide's dead culture fallback struck at its root (WR2, d8b08402f) retires as a lawful shrink, and the
+ *     liveness predicate's `_worldPulseInactive` read, lost by the detector when SR5 (9cade66ce) passed the defence
+ *     buckets' entries to it, is RECORDED AS UNCURED INSTRUMENT EROSION; topology, tag law, roster and bank (78/52)
+ *     unchanged. Its full rationale lives beside `FINAL_PASS_TARGET_SCHEMA`.
+ *
+ *   schema 42 -> 43 (RETIRED) THE CLOSE OF THE ROUND OF 2026-11-14/15 (the chair's ruling OR2 of 2026-11-15; the
+ *     chair's record 456): one rung, the round's causes, every moved row with one — the lawful shrinks retire with
+ *     cause, the rows the detector lost while their reads still stand are RECORDED AS UNCURED INSTRUMENT EROSION,
+ *     and the round's new reads are ADMITTED BY CAUSE with class and lane; topology, tag law, roster and bank
+ *     (78/52) unchanged. Its full rationale lives beside `CLOSE_ROUND_TARGET_SCHEMA`.
+ *
+ *   schema 41 -> 42 (RETIRED) THE AGREEMENT LANE'S TIER SEED (STYLE-2-MERGE point 47, the chair's ruling on STOP
+ *     47a): one rung, one cause — producer 2b's tier seed re-searched by its own rule (osr-tier-14 -> osr-tier-19)
+ *     after COHERENCE-AGREE moved osr-tier-14's town out of the overlap; topology, tag law, roster and bank
+ *     (78/52) unchanged. Its full rationale lives beside `AGREE_TIER_SEED_TARGET_SCHEMA`.
+ *
+ *   schema 40 -> 41 (RETIRED) THE PLAYED-WORLDS WRITER'S ADMISSION (STYLE-2-MERGE closing act 5, the chair's FINAL
  *     RULING of 2026-11-09 21:2x): one rung, one cause — a NEW writer class, `played-worlds-writer` (a writer that
  *     runs only in campaign time and is dormant in the birth corpus), and its first declaration, `outcome on
  *     outcome` (writer worldPulse/convergence.js), its one row tagged; the roster 15 -> 16, the bank 77/51 ->
@@ -377,6 +399,10 @@ import {
   validateSchema38Baseline,
   validateSchema39Baseline,
   validateSchema40Baseline,
+  validateSchema41Baseline,
+  validateSchema42Baseline,
+  validateSchema43Baseline,
+  validateSchema44Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -1786,6 +1812,78 @@ export const PUBLIC_PROSE_TARGET_SCHEMA = 40;
  *  holds as at every rung: this rung lands walker-red, and its re-freeze lands next. */
 export const PLAYED_WORLDS_TARGET_SCHEMA = 41;
 
+/* ⭐⭐ THE SCHEMA 41 → 42 RUNG — THE AGREEMENT LANE'S TIER SEED (STYLE-2-MERGE point 47, COHERENCE-AGREE; the
+ *  chair's ruling on STOP 47a, 2026-11-13 10:20 UTC: "(B), MIGRATE NOW", one package, a row and not a branch).
+ *
+ *  THE CAUSE: the agreement lane's generation moved the tier seed's town out of the overlap. Producer 2b's
+ *  `osr-tier-14` under CONFIGS[0] no longer lands in the town/city overlap, so its pulse minted no tier candidate
+ *  in twelve intervals and the corpus builder THREW (observedShapeReaders, writerReach and proseFamilyContract
+ *  failed at load). Re-searched by producer 2b's own rule over `osr-tier-0..39` under CONFIGS[0]: the minters are
+ *  osr-tier-19 (pop 2477, interval 5), -25 (2394) and -28 (2282); the lowest, osr-tier-19, is taken. The corpus
+ *  builder is a DETECTOR SOURCE, so the seed is re-governed here: schema 41's topology, tag law, roster and bank
+ *  UNCHANGED; the reconciliation (every moved row classed WITNESSED / BINDING LOST, read by the chair before the
+ *  re-freeze) is recorded in the re-freeze commit. The delta is FOUR paths — the corpus builder and the three
+ *  bookkeeping paths; see `AGREE_TIER_SEED_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this
+ *  rung lands walker-red, and its re-freeze lands next. */
+export const AGREE_TIER_SEED_TARGET_SCHEMA = 42;
+
+/* ⭐⭐ THE SCHEMA 42 → 43 RUNG — THE CLOSE OF THE ROUND OF 2026-11-14/15 (the chair's ruling OR2 of 2026-11-15,
+ *  vetoable by the owner; the chair's record 456), made by TAIL-CLOSE-REACH-2 on TAIL-CLOSE-REACH-1's measurement.
+ *
+ *  THE CAUSE: the round's lanes, joined on lane/join-2026-11-14 after schema 42 was frozen at f5622ab8, moved the
+ *  read side and the executed corpus (originCount 14835 -> 15016, shapeCount 1732 -> 1741; seven generated
+ *  execution inputs regenerated by their own doors). No detector source moved. ONE rung re-governs the register to
+ *  the close of the round, every moved row with its cause and its class:
+ *    · the LAWFUL SHRINKS retire with cause (the read is gone from its file, or the read gained a writer);
+ *    · the rows the detector LOST while their reads still stand (the erasure guard's INSTRUMENT EROSION) are
+ *      RECORDED AS UNCURED INSTRUMENT EROSION, each named with its key, shape, site and the bisected cause or the
+ *      honest bound — never as a repair (the schema-39 precedent); none is a class-(a) identity (measured against
+ *      CLASS_A_PROTECTED_IDENTITIES);
+ *    · the round's NEW reads are ADMITTED BY CAUSE, each with its class in the instrument's vocabulary and the lane
+ *      that wrote it; a read that prints wrong or empty on a page would be a defect, not an admission (none found).
+ *  Schema 42's topology, tag law, roster and bank (78/52) UNCHANGED; the delta is the THREE bookkeeping paths; see
+ *  `CLOSE_ROUND_SCANNER_DELTA_PATHS`. The reconciliation is recorded row by row in the re-freeze commit's review
+ *  (docs/chair/2026-11-15/). The commit pair holds as at every rung: this rung lands walker-red, and its re-freeze
+ *  lands next. */
+export const CLOSE_ROUND_TARGET_SCHEMA = 43;
+
+/* ⭐⭐ THE SCHEMA 43 → 44 RUNG — THE CLOSE'S FINAL PASS (the chair's ruling OR2 of 2026-11-15, its law carried to the FINAL PASS at f76fe38fd), made by TAIL-CLOSE-REACH-2: "a second small
+ *  rung only if the first's law requires it for the new drift". It does: one of the two moved rows is a read the
+ *  detector LOST while it still stands, and a plain shrink-only --write would bank that loss as a repair.
+ *
+ *  THE CAUSES (the executed corpus did NOT move: its meta equals the schema-43 mint's exactly):
+ *    · `culture on settlement` in src/domain/summary/settlementQuickGuide.js — class R, a LAWFUL SHRINK: the read is
+ *      gone from the file, struck at its root by TAIL-CLOSE-SRC-4 · WR2 (d8b08402f, the chair's ruling WR2);
+ *    · `_worldPulseInactive on institutions` in src/domain/institutions/institutionRoster.js — class E, UNCURED
+ *      INSTRUMENT EROSION, recorded as such: the read still stands (:40, isLiveInstitution) and the file is unchanged;
+ *      TAIL-CLOSE-SRC-5 · SR5 (b) (9cade66ce) passes the defence buckets' entries to isLiveInstitution, the
+ *      parameter now binds a second shape and the ambiguity guard drops the finding (CONFIRMED: the merged tip with
+ *      only that call undone scans the row back). Not class-(a); a cure is a detector act.
+ *  Schema 43's topology, tag law, roster and bank (78/52) UNCHANGED; the delta is the THREE bookkeeping paths. */
+export const FINAL_PASS_TARGET_SCHEMA = 44;
+
+/* ⭐⭐ THE SCHEMA 44 → 45 RUNG — THE LAST CLOSE (the chair's ruling CL26 of 2026-11-18 05:23 UTC, on the owner's word of
+ *  05:13: "ONE RUNG THERE, under a ruling of its own"; made at the last close by LASTCLOSE-DOORS under the owner's word
+ *  "Yes to both", 2026-11-18 about 19:07 UTC; the chair's brief BRIEF-LASTCLOSE.md, the ruled ones).
+ *
+ *  THE CAUSE: the rounds landed on the working line after the register was last frozen at e56e112e2 (2026-11-16; the
+ *  first close admitted nothing, CL26: "THE OBSERVED SHAPES' IDENTITIES ARE NOT ADMITTED AT THIS CLOSE") moved the read side
+ *  and the executed corpus (originCount 15031 -> 15106, shapeCount 1741 -> 1748; the generated execution inputs
+ *  regenerated by their own doors). No detector source moved. ELEVEN identities moved, every one NEW, none gone
+ *  (reads 2200 -> 2214, identities 1542 -> 1552), each admitted by cause with its class (CL20's table, the first close):
+ *    · W (a writer in another layer than the birth): `institution on institutions` (display/crisisStoppedRow.js, JOIN-17
+ *      point 8); `_worldPulseInactive`, `isCustom`, `customDefinitionCategory`, `customDefinitionId on institutions`
+ *      (facts/sovereign.js, JOIN-17 point 2); `_userEdits on settlement` 2 -> 4 (userEdits.js, JOIN-16 point 2);
+ *    · C (a copy of a banked original): `name on factions` (stateProse/magicFlagTruth.js, JOIN-17 point 4;
+ *      facts/seatMembers.js, point 11; people/personHooks.js, FAULTS-PEOPLE, the sixth chair's point 62);
+ *      `custom on institutions` (facts/sovereign.js, point 2); `name on inst` (facts/supplyStory.js, point 33).
+ *  The two dead reads of CL20's table (class N, tradeListDisplay.js) were struck at the source by CLOSE-SWEEP before
+ *  this rung. NOTHING IS DECLARED: `EXPLAINED_WRITER_EXEMPTIONS` is untouched, so schema 44's topology, tag law, roster
+ *  and bank (78/52) stand UNCHANGED; the delta is the THREE bookkeeping paths (`LAST_CLOSE_SCANNER_DELTA_PATHS`). The
+ *  review (docs/chair/2026-11-18/lastclose/) records every row. The commit pair holds as at every rung: this rung lands
+ *  walker-red, and its re-freeze lands next. */
+export const LAST_CLOSE_TARGET_SCHEMA = 45;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -1870,6 +1968,10 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // GROWN at 41 (STYLE-2-MERGE closing act 5, 21:2x): one declaration of the new played-worlds-writer class,
   // `outcome on outcome`, one address (newsBody.js) and one read.
   [PLAYED_WORLDS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
+  [AGREE_TIER_SEED_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
+  [CLOSE_ROUND_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
+  [FINAL_PASS_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
+  [LAST_CLOSE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 78, taggedRows: 52 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -2518,6 +2620,37 @@ export const PLAYED_WORLDS_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/** The schema-41 → 42 delta: FOUR paths — the corpus builder (producer 2b's tier seed) and the three bookkeeping paths. */
+export const AGREE_TIER_SEED_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/lib/observed-shape-corpus.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+
+/** The schema-42 → 43 delta: the THREE bookkeeping paths (no detector source moved in the round; the generated
+ *  execution inputs the round regenerated are the transition's reviewable unscanned movement). */
+export const CLOSE_ROUND_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-43 → 44 delta: the THREE bookkeeping paths (no detector source moved at the final pass). */
+export const FINAL_PASS_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
+/** The schema-44 → 45 delta: the THREE bookkeeping paths (no detector source moved at the last close). */
+export const LAST_CLOSE_SCANNER_DELTA_PATHS = Object.freeze([
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -2596,6 +2729,14 @@ const PUBLIC_PROSE_SCANNER_TRANSITION_POLICY =
   'schema-39-to-40-public-prose-writer-v1';
 const PLAYED_WORLDS_SCANNER_TRANSITION_POLICY =
   'schema-40-to-41-played-worlds-writer-v1';
+const AGREE_TIER_SEED_SCANNER_TRANSITION_POLICY =
+  'schema-41-to-42-tier-seed-v1';
+const CLOSE_ROUND_SCANNER_TRANSITION_POLICY =
+  'schema-42-to-43-close-of-round-v1';
+const FINAL_PASS_SCANNER_TRANSITION_POLICY =
+  'schema-43-to-44-final-pass-v1';
+const LAST_CLOSE_SCANNER_TRANSITION_POLICY =
+  'schema-44-to-45-last-close-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -2655,6 +2796,10 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [TRAIN_CAR4_TARGET_SCHEMA]: TRAIN_CAR3_TARGET_SCHEMA,
   [PUBLIC_PROSE_TARGET_SCHEMA]: TRAIN_CAR4_TARGET_SCHEMA,
   [PLAYED_WORLDS_TARGET_SCHEMA]: PUBLIC_PROSE_TARGET_SCHEMA,
+  [AGREE_TIER_SEED_TARGET_SCHEMA]: PLAYED_WORLDS_TARGET_SCHEMA,
+  [CLOSE_ROUND_TARGET_SCHEMA]: AGREE_TIER_SEED_TARGET_SCHEMA,
+  [FINAL_PASS_TARGET_SCHEMA]: CLOSE_ROUND_TARGET_SCHEMA,
+  [LAST_CLOSE_TARGET_SCHEMA]: FINAL_PASS_TARGET_SCHEMA,
 });
 
 /**
@@ -2768,6 +2913,13 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   [TRAIN_CAR4_TARGET_SCHEMA]: validateSchema39Baseline,
   // The schema-41 rung's own predecessor (SW-B7b, the public prose writer), validated as schema 40.
   [PUBLIC_PROSE_TARGET_SCHEMA]: validateSchema40Baseline,
+  [PLAYED_WORLDS_TARGET_SCHEMA]: validateSchema41Baseline,
+  // The schema-43 rung's own predecessor (STYLE-2-MERGE point 47, the tier seed), validated as schema 42.
+  [AGREE_TIER_SEED_TARGET_SCHEMA]: validateSchema42Baseline,
+  // The schema-44 rung's own predecessor (the close of the round, OR2), validated as schema 43.
+  [CLOSE_ROUND_TARGET_SCHEMA]: validateSchema43Baseline,
+  // The schema-45 rung's own predecessor (the close's final pass), validated as schema 44.
+  [FINAL_PASS_TARGET_SCHEMA]: validateSchema44Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -3291,6 +3443,32 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // governed execution inputs (the dossier-state prose, the institution service keys, the prose
     // norms, …) by their documented commands after the predecessor was frozen, and the report
     // records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [LAST_CLOSE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: LAST_CLOSE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: LAST_CLOSE_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [FINAL_PASS_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: FINAL_PASS_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: FINAL_PASS_SCANNER_TRANSITION_POLICY,
+    reviewableUnscannedMovement: true,
+  })],
+  [CLOSE_ROUND_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: CLOSE_ROUND_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: CLOSE_ROUND_SCANNER_TRANSITION_POLICY,
+    // TRUE: the round regenerated governed execution inputs by their own doors after schema 42 was frozen,
+    // and the report records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [AGREE_TIER_SEED_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: AGREE_TIER_SEED_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: AGREE_TIER_SEED_SCANNER_TRANSITION_POLICY,
     reviewableUnscannedMovement: true,
   })],
   [PLAYED_WORLDS_TARGET_SCHEMA, Object.freeze({
@@ -4492,7 +4670,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : PLAYED_WORLDS_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : LAST_CLOSE_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -4508,8 +4686,14 @@ export function run(argv = process.argv.slice(2)) {
     MIGRATION_DIRECTION_TARGET_SCHEMA, PEOPLE_CAST_TARGET_SCHEMA,
     PEOPLE_LANDING_TARGET_SCHEMA, CAR_MERGE_TARGET_SCHEMA, WAVE_W2_TARGET_SCHEMA, WAVE_FOOD_TARGET_SCHEMA, WAVE_VEIL_TARGET_SCHEMA,
     TRAIN_CAR1_TARGET_SCHEMA, TRAIN_CAR2_TARGET_SCHEMA, TRAIN_CAR3_TARGET_SCHEMA,
-    TRAIN_CAR4_TARGET_SCHEMA, PUBLIC_PROSE_TARGET_SCHEMA, PLAYED_WORLDS_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${PLAYED_WORLDS_TARGET_SCHEMA} (live played-worlds leaf),`
+    TRAIN_CAR4_TARGET_SCHEMA, PUBLIC_PROSE_TARGET_SCHEMA, PLAYED_WORLDS_TARGET_SCHEMA,
+    AGREE_TIER_SEED_TARGET_SCHEMA, CLOSE_ROUND_TARGET_SCHEMA, FINAL_PASS_TARGET_SCHEMA,
+    LAST_CLOSE_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${LAST_CLOSE_TARGET_SCHEMA} (live last-close leaf),`
+      + ` ${FINAL_PASS_TARGET_SCHEMA} (retired final-pass leaf),`
+      + ` ${CLOSE_ROUND_TARGET_SCHEMA} (retired close-of-round leaf),`
+      + ` ${AGREE_TIER_SEED_TARGET_SCHEMA} (retired tier-seed leaf),`
+      + ` ${PLAYED_WORLDS_TARGET_SCHEMA} (retired played-worlds leaf),`
       + ` ${PUBLIC_PROSE_TARGET_SCHEMA} (retired public-prose leaf),`
       + ` ${TRAIN_CAR4_TARGET_SCHEMA} (retired allegiance-car4 leaf),`
       + ` ${TRAIN_CAR3_TARGET_SCHEMA} (retired allegiance-car3 leaf),`

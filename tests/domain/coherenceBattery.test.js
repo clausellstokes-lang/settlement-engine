@@ -41,6 +41,8 @@ describe('coherenceBattery — the seven instruments behind one call', () => {
       // F13 (rung 2, 2026-11-04): three crisis facts the page contradicts. One kind with F12's
       // (kind 10, crisis), pinned once at the composed list (the rung-2 window).
       'famine-stores', 'migration-direction', 'crisis-cast-sense',
+      // W2-A-LEAVES (2026-11-12): the rendered-dossier arm, one finding per census pattern over the views.
+      'page-census',
     ]);
   });
 

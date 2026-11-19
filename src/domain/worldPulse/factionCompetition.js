@@ -731,7 +731,7 @@ function factionVerbPhrase(candidateType) {
 /** @type {Readonly<Record<string, ReadonlyArray<string>>>} */
 const POWER_ACTION_SUMMARY = Object.freeze({
   faction_institution_capture: ["{name} means to put its own people in charge of {town}'s {target}.", "In {town}, {nameS} people are moving in on the {target}.", "Control of {town}'s {target} is passing to {name}.", "Whoever works at {town}'s {target} will soon answer to {name}."],
-  faction_institution_suppression: ["{name} is working to break the {target}'s standing in {town}."],
+  faction_institution_suppression: ['{name} is working to break the {targetS} standing in {town}.'],
   faction_government_challenge: ["{name} is challenging {town}'s rulers, and wants {pref} in their place.", "In {town}, {name} is gathering support to replace the rulers with {pref}.", "{town}'s rulers face a challenge from {name}, who want {pref}.", "{name} has turned against the rulers of {town} and is pressing for {pref}."],
   faction_service_bolster: ['{name} is doing more for the people of {town} while times are hard.'],
   faction_law_preference_push: ['{name} is pushing for {law} in {town}.'],
@@ -753,7 +753,8 @@ function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateT
   const id = `candidate.faction.${stablePart(candidateType)}.${stablePart(state.factionId)}.${tick}`;
   const pool = POWER_ACTION_SUMMARY[candidateType];
   const said = powerSentenceName(state.name); const rival = powerSentenceName(say.rival || 'its rival');
-  const fill = { town: townNameOf(item), pref: state.governmentPreference.replace(/_/g, ' '), target: 'institution', law: 'its own laws', ...say, name: said, nameS: powerPossessive(said), rival, rivalS: powerPossessive(rival) };
+  // COHERENCE-POWERS-6 item 8: {targetS} is the suppressed institution's possessive via the leaf, never a literal "'s" ("the craft guilds'", not "craft guilds's")
+  const fill = { town: townNameOf(item), pref: state.governmentPreference.replace(/_/g, ' '), target: 'institution', law: 'its own laws', ...say, name: said, nameS: powerPossessive(said), rival, rivalS: powerPossessive(rival), targetS: powerPossessive(say.target ?? 'institution') };
   const summary = pool ? fillLine(pickLine(pool, id), fill) : `${said} ${verb.doing} in ${fill.town}.`;
   return {
     id,

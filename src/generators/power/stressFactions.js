@@ -4,9 +4,12 @@
  * existing factions and injecting the crisis-specific ones.
  */
 import { random as _rng } from '../../kernel/rngContext.js';
-import { getInstFlags } from '../helpers.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, so no cited line moves
-import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA, FACTION_NAME_SIBLINGS } from '../../data/powerData.js'; import { noteDeclared } from '../../domain/facts/drawDeclared.js'; // CENSUS-1f: one line
+import { getInstFlags } from '../helpers.js';
+import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // F1
+import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA, FACTION_NAME_SIBLINGS } from '../../data/powerData.js';
+import { noteDeclared } from '../../domain/facts/drawDeclared.js'; // CENSUS-1f
 import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; // WIRING-W0 (R-W7 e)
+import { isCriminalOrThievesPower } from '../../domain/crimeSignal.js'; // TAIL-CLOSE-SRC-4
 
 /** A roster name compared loosely: case and a leading article set aside. */
 const nameKey = (name) => String(name || '').trim().toLowerCase().replace(/^the\s+/, '');
@@ -107,7 +110,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           power: 20,
           desc: 'Noble houses backing the current crown line; their support is conditional on continued royal favour and land grants.',
         })
-        : pushPoolNamed(factions, 'other', 20, 'Claims legitimate authority through different means; controls a distinct district or institution.'),
+        : pushPoolNamed(factions, 'other', 20, 'Claims legitimate authority through different means and has a following of its own.'),
       factions.push({
         faction: P && P.includes('Royal Authority') ? 'Reform Noble Bloc' : 'Third Bloc (Neutrals)',
         power: 15,
@@ -149,9 +152,12 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
     // the record is. It takes a real name like every stress faction, from the `other` pool: the
     // stress is political and "strategic, not extractive", so neither the merchant nor the noble
     // pool's framing fits, and `other` is the category the old placeholder inferred.
-    // `hidden: true` carries the fiction's fact; the description is unchanged.
+    // `hidden: true` carries the fiction's fact. COHERENCE-POWERS-8 (the lane's row #640, rw3-city-infiltrated-1): the
+    // description claimed "embedded assets in at least two powers", and no birth gives the infiltrator a card in another
+    // power or an agent anywhere (12 of 12 on the census's 720: its one face holds no other membership, and no card's
+    // hidden allegiance names it); it claims only the people it has.
     ke('infiltrated') &&
-      pushPoolNamed(factions, 'other', 15, 'An external interest with embedded assets in at least two powers. Its presence is not known to the settlement.', { hidden: true }),
+      pushPoolNamed(factions, 'other', 15, 'An external interest with its own people placed inside the settlement. Its presence is not known to the settlement.', { hidden: true }),
     ke('succession_void') &&
       (factions.forEach((N) => {
         (N.isGoverning && ((N.power = Math.round(N.power * 0.5)), (N.modifiers = [...(N.modifiers || []), 'vacant'])),
@@ -205,7 +211,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
       factions.push({
         faction: 'Monster Hunters / Adventurers',
         power: 10,
-        desc: 'Outside professionals brought in or passing through; temporarily powerful because they are useful.',
+        desc: 'Outside professionals brought in or passing through; wanted while the monsters are.',
       })),
     ke('insurgency') &&
       (function () {
@@ -298,7 +304,10 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           }) || {}
         ).faction;
         const N = typeof getInstFlags == 'function' ? getInstFlags(config || {}, institutions || []) : {},
-          ye = (N.militaryEffective || 50) >= 55 && (N.economyOutput || 50) >= 45;
+          ye = (N.militaryEffective || 50) >= 55 && (N.economyOutput || 50) >= 45,
+          // COHERENCE-POWERS-7 (cold list REVIEW-W2A-3 #709 #712): a town that governs itself as an independent polity
+          // ("No higher lord, no external charter": the roster's City-state government) has no crown to appoint or command
+          sovereign = (institutions || []).some((i) => /^city-state government$/i.test(String(i?.name || '')));
         (factions.forEach(function (he) {
           ((he.faction.toLowerCase().includes('military') ||
             he.faction.toLowerCase().includes('guard') ||
@@ -306,7 +315,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
             ((he.power = Math.round(he.power * 1.5)),
             (he.desc =
               (he.desc || '') +
-              ' Wartime has transformed this power from a civic institution into a primary power centre. Crown authority flows through military channels now.')),
+              (sovereign ? WARTIME_SOVEREIGN_MILITARY.text : ' Wartime has turned this power from a civic institution into an arm of the war. Crown authority over the war flows through military channels now.'))), // BAR3-POWERS (C9941): no rank the final roster may deny ("a primary power centre" printed beside a Minor power)
             (he.faction.toLowerCase().includes('merchant') || he.faction.toLowerCase().includes('guild')) &&
               (ye
                 ? ((he.power = Math.round(he.power * 1.2)),
@@ -316,7 +325,11 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
                 : ((he.power = Math.round(he.power * 0.8)),
                   (he.desc =
                     (he.desc || '') +
-                    ' Trade disruption and requisition are hurting the bottom line. The power is lobbying for compensation and receiving promises.'))),
+                    // TAIL-POWERS-B-4 (the chair's P31 (6), vetoable by the owner): 'guild' matches the Thieves' Guild, whose crisis
+                    // stake is a gain; a criminal power is not said to lobby for compensation: it takes its twin, true of it
+                    (isCriminalOrThievesPower(he) // the crime home's reader (TAIL-CLOSE-SRC-4)
+                      ? ' Shortage and requisition have pushed trade into the black market, where the guild takes its cut.'
+                      : ' Trade disruption and requisition are hurting the bottom line. The power is lobbying for compensation and receiving promises.')))),
             (he.faction.toLowerCase().includes('religious') || he.faction.toLowerCase().includes('church')) &&
               ((he.power = Math.round(he.power * 1.2)),
               (he.desc =
@@ -329,9 +342,9 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           factions.push({
             faction: 'War Council',
             power: ye ? 20 : 25,
-            desc: ye
-              ? "Crown-appointed emergency body coordinating supply, conscription, and military contracting. Currently functioning smoothly: the war is going well enough that its authority isn't contested."
-              : 'Crown-appointed emergency body with powers over requisition, conscription, and price controls. Unpopular. Accused of favouritism in contract awards. Probably correct on the military decisions.',
+            desc: (sovereign ? (/** @type {string} */ d) => d.replace(/^Crown-appointed emergency body/, 'Emergency body') : (/** @type {string} */ d) => d)(ye
+              ? "Crown-appointed emergency body coordinating supply, conscription, and military contracting. While the war goes well, few people ask what it does."
+              : 'Crown-appointed emergency body with powers over requisition, conscription, and price controls. Unpopular. Accused of favouritism in contract awards. Probably correct on the military decisions.'),
           }),
           ye ||
             factions.push({
@@ -361,7 +374,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
               (ye === 0
                 ? ' Losing congregation to the new faith faster than leadership acknowledges publicly.'
                 : ye === 1
-                  ? ' One of two rival sides claiming the legitimate succession: legal standing of their records is contested.'
+                  ? ' One of two rival sides, each claiming to be the true faith: the legal standing of their records is contested.'
                   : ' Formally compliant with the conversion order. Actual compliance among the congregation is harder to assess.'))),
             he.isGoverning &&
               ((he.power = Math.round(he.power * 0.88)),
@@ -438,3 +451,13 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           }));
       })());
 };
+
+/**
+ * THE SELF-GOVERNING TWIN OF THE WARTIME MILITARY LINE (COHERENCE-POWERS-7's crown cure, #709 #712; declared by POWERS-11
+ * for the reader's M4, presumedThings ARM 1): it is appended only under `ke('wartime')` in applyStressEventFactions, so it
+ * declares the crisis it names. Kept at the file's end so no cited line above it moves.
+ */
+const WARTIME_SOVEREIGN_MILITARY = Object.freeze({
+  text: ' Wartime has turned this power from a civic institution into an arm of the war. Authority over the war flows through military channels now.', // BAR3-POWERS (C9941): no rank
+  needs: Object.freeze(['crisis: wartime']),
+});

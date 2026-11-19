@@ -1,0 +1,15 @@
+# births 1490. Cells: (badge band, pool today, pool ruled): births
+#   (Fortress, STRONG, STRONG) 351
+#   (Vulnerable, CRITICAL, WEAK) CHANGES 304
+#   (Undefended, CRITICAL, WEAK) CHANGES 295
+#   (Lightly Defended, WEAK, ADEQUATE) CHANGES 140
+#   (Well-Defended, STRONG, STRONG) 139
+#   (Vulnerable, WEAK, WEAK) 104
+#   (Defensible, ADEQUATE, ADEQUATE) 90
+#   (Well-Defended, ADEQUATE, STRONG) CHANGES 50
+#   (Defensible, WEAK, ADEQUATE) CHANGES 17
+# six of (Lightly Defended, WEAK, ADEQUATE) CHANGES: rv2-calm-thorp-1(25) rv2-calm-thorp-4(34) rv2-calm-thorp-5(27) rv2-calm-thorp-7(25) rv2-calm-thorp-10(35) rv2-calm-thorp-14(29)
+# six of (Vulnerable, CRITICAL, WEAK) CHANGES: rv2-calm-thorp-2(17) rv2-calm-thorp-8(18) rv2-calm-thorp-9(15) rv2-calm-thorp-15(18) rv2-calm-thorp-18(18) rv2-calm-thorp-23(14)
+# six of (Undefended, CRITICAL, WEAK) CHANGES: rv2-calm-hamlet-2(5) rv2-calm-hamlet-12(9) rv2-calm-village-3(10) rv2-calm-village-16(11) rv2-calm-village-20(11) rv2-calm-village-22(9)
+# six of (Well-Defended, ADEQUATE, STRONG) CHANGES: rv2-calm-town-1(56) rv2-calm-town-4(62) rv2-calm-town-18(58) rv2-calm-town-23(57) rv2-calm-town-28(55) rv2-calm-town-34(55)
+# six of (Defensible, WEAK, ADEQUATE) CHANGES: rv2-calm-town-6(38) rv2-calm-town-7(38) rv2-calm-town-35(39) rv2-famine-town-6(39) rv2-under_siege-town-6(39) rv2-under_siege-town-15(39)

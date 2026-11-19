@@ -15,7 +15,7 @@ import { generateConflicts } from '../powerGenerator.js'; import { resolveFactio
 // (step 3) rolled them 16 steps ago with an empty name and stashed the
 // rng-derived choice in each entry's `summaryRoll`; we re-render here now that
 // the name exists.
-import { renderStressSummary } from '../stressNarrative.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // CENSUS-2c: one line, so no cited line moves
+import { renderStressSummary } from '../stressNarrative.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { STRESS_TYPE_SIBLINGS } from '../../data/stressTypes.js'; // CENSUS-2c: one line, so no cited line moves (W2-FIX-DATA-7: the catalogue cells' declared sets join it)
 import { generatePressureSentence, generateArrivalScene, generateCoherence } from '../narrativeGenerator.js';
 import { generateDefenseProfile } from '../defenseGenerator.js';
 import { settleCrimeLinesToSignal } from '../safetyProfile.js';
@@ -105,7 +105,7 @@ registerStep('assembleSettlement', {
   // summary in place with the real name (resolveStress rolled them name-blind) and
   // deletes the transient summaryRoll token — a declared in-place write of `stress`
   // (A+ P1.7 contract).
-  mutates: ['powerStructure', 'stress', 'relationships'], // relationships: PEOPLE-1 CAST — the coherence seam appends the `other` mints' ties (people/castPowers.js)
+  mutates: ['powerStructure', 'stress', 'relationships', 'npcs', 'institutions'], // institutions: FAULTS-ROWS (the chair's FR14) — the late re-read (readHouseDescsLate) stores a refused description's twin on institutions[].desc in place; relationships: PEOPLE-1 CAST — the coherence seam appends the `other` mints' ties (people/castPowers.js); npcs: BAR6-PEOPLE 10e-temper — the seam's rankPowers (people/castPowers.js) yields a card's temperament to its secret in place (data/npcData.js :: temperamentYieldsToSecret)
   phase: 'assembly',
 }, (ctx, rng) => {
   // The runner hands the pins through the context under its reserved key; absent pins mean
@@ -170,7 +170,7 @@ registerStep('assembleSettlement', {
     // the same local expression of the culture choice. culturalNotes keeps the
     // established PDF/AI compatibility field while the structured record gives
     // future engineers the seven explicit dimensions behind it.
-    culturalIdentity: culturalIdentity && foodwaysLineOf({ economicState }) ? Object.freeze({ ...culturalIdentity, foodways: foodwaysLineOf({ economicState }) }) : culturalIdentity, // URBAN-FIX C-1 ONE HOME: where the food record exists the stored foodways line IS the record's composed line (domain/foodways.js), the one the page prints; draw-free
+    culturalIdentity: culturalIdentity && foodwaysLineOf({ institutions, economicState }) ? Object.freeze({ ...culturalIdentity, foodways: foodwaysLineOf({ institutions, economicState }) }) : culturalIdentity, // URBAN-FIX C-1 ONE HOME: where the food record exists the stored foodways line IS the record's composed line (domain/foodways.js), the one the page prints; draw-free
     culturalNotes: culturalNotesFor(culturalIdentity),
     // Tier 1.2 — dual-write the stress array under both the legacy
     // `stress` name AND the canonical `stressors` name. Consumers that
@@ -210,13 +210,33 @@ registerStep('assembleSettlement', {
   // (stress + stressors — same object refs) and both shapes (bare object vs
   // array). Entries WITHOUT an own summaryRoll (custom-authored stressors that
   // carry their own summary) are left untouched.
+  // TAIL-CRISIS-5 (the chair's ruling K21; ORDER-MEASURE-1's cure C1b): each entry's roll and its CATALOGUE hook and note
+  // (the text as resolveStress stored it, before this pass resolves it) are kept here, so that THE LATE RE-READ below,
+  // after the last roster write, renders the same roll and resolves the same originals against the SETTLED record.
+  // Kept in the closure, never on the record: nothing of it persists or enters the golden hash.
+  /** @type {Map<object, { roll: unknown, crisisHook: unknown, viabilityNote: unknown }>} */
+  const stressLateReads = new Map();
+  /** One entry's summary, hook and note, rendered from its roll and its originals against the record as it stands. */
+  const readStressEntry = (/** @type {any} */ e, /** @type {{ roll: unknown, crisisHook: unknown, viabilityNote: unknown }} */ kept) => {
+    const facts = factsOf(settlement);
+    e.summary = renderStressSummary(e.type, settlement.name, kept.roll, e.direction, facts); // WIRING-W0: the entry's own direction; CENSUS-2c: declared sentences resolve (stressNarrative.js :: STRESS_SUMMARY_SIBLINGS) — MERGE-R2: both
+    // W2-FIX-DATA-7 (CENSUS-2 kind a; brief 5's ruling: this function only): the catalogue's own hook and note, stored
+    // on the entry, resolve through their declared sets (stressTypes.js :: STRESS_TYPE_SIBLINGS), draw-free. A hook
+    // with no admitted twin is kept and noted (the template the cast fills); a note with none is left off (nothing
+    // false is printed in its place). The hook stays the template: a twin carries no holder's name.
+    const cellOpts = { facts, poolId: 'stressTypes:STRESS_TYPE_SIBLINGS', surface: 'crisis', drawKind: /** @type {'T'} */ ('T') };
+    if (typeof kept.crisisHook === 'string') e.crisisHook = resolveSibling(kept.crisisHook, STRESS_TYPE_SIBLINGS, cellOpts);
+    if (typeof kept.viabilityNote === 'string') { const note = resolveSibling(kept.viabilityNote, STRESS_TYPE_SIBLINGS, { ...cellOpts, dropRefused: true }); if (note == null) delete e.viabilityNote; else e.viabilityNote = note; }
+  };
   const rerenderStressSummary = (container) => {
     if (!container) return;
     const entries = Array.isArray(container) ? container : [container];
     for (const e of entries) {
       if (e && typeof e === 'object'
           && Object.prototype.hasOwnProperty.call(e, 'summaryRoll')) {
-        e.summary = renderStressSummary(e.type, settlement.name, e.summaryRoll, e.direction, factsOf(settlement)); // WIRING-W0: the entry's own direction; CENSUS-2c: declared sentences resolve (stressNarrative.js :: STRESS_SUMMARY_SIBLINGS) — MERGE-R2: both
+        const kept = { roll: e.summaryRoll, crisisHook: e.crisisHook, viabilityNote: e.viabilityNote };
+        stressLateReads.set(e, kept);
+        readStressEntry(e, kept);
         delete e.summaryRoll;
       }
     }
@@ -232,7 +252,7 @@ registerStep('assembleSettlement', {
   // drawn (its relationship branch reads them; it runs on its own named child, so the move shifts
   // no other draw).
   settlement.arrivalScene     = inAssemblySubstream(rng, 'arrival-scene', () => generateArrivalScene(settlement));
-  settlement.defenseProfile   = generateDefenseProfile(settlement);
+  settlement.defenseProfile   = generateDefenseProfile(settlement, keepOfRecord(settlement.economicState)); settlement.economicState = withGuardPaidFromDefence(settlement); settlement.structuralViolations = settleFundingReasons(settlement.structuralViolations, settlement.defenseProfile?.economicGates?.military); // COHERENCE-UPKEEP-5 (R3): pay reads the standing label; COHERENCE-UPKEEP-6 (ruling A): the guard's purse clause from the profile just written; BAR2-LABELS-2 LB4 (the chair's grant LB7): the validator's funding reasons by the military gate
 
   // The final-economy pass already proved that power consumed the final
   // prosperity/safety/food tuple. Assert that proof before applying the one
@@ -248,7 +268,7 @@ registerStep('assembleSettlement', {
       settlement.powerStructure,
       settlement.economicState,
       ctx.powerIntent,
-      { defenseLabel: settlement.defenseProfile.readiness.label, pins },
+      { defenseLabel: settlement.defenseProfile.readiness.label, militaryGate: settlement.defenseProfile.economicGates?.military, pins, forces: factsOf(settlement).defence }, // BAR6-POWERS (10/g): the settled roster's defence atoms (`defenceOf`, through the fact home this file imports), for `militaryForceLine.js`
     );
     refreshPowerGenerationTraces(
       ctx,
@@ -309,7 +329,7 @@ registerStep('assembleSettlement', {
   // LABEL, which this never touches).
   const settledEconomy = settleCrimeLinesToSignal(
     settlement.economicState,
-    { seats: settlement.powerStructure?.factions, estate: settlement.institutions },
+    { seats: settlement.powerStructure?.factions, estate: settlement.institutions, tensions: settlement.history?.currentTensions, services: settlement.availableServices },
   );
   if (settledEconomy !== settlement.economicState) settlement.economicState = settledEconomy;
 
@@ -397,7 +417,7 @@ registerStep('assembleSettlement', {
   settlement.conflicts = inAssemblySubstream(
     rng,
     'faction-conflicts',
-    () => generateConflicts(settlement.powerStructure?.factions || [], settlement.relationships || [], effectiveConfig, settlement.institutions || [], settlement.npcs || []),
+    () => generateConflicts(settlement.powerStructure?.factions || [], settlement.relationships || [], effectiveConfig, settlement.institutions || [], settlement.npcs || [], settlement.defenseProfile),
   );
   if (settlement.powerStructure) {
     settlement.powerStructure = { ...settlement.powerStructure, conflicts: settlement.conflicts };
@@ -424,6 +444,17 @@ registerStep('assembleSettlement', {
     if (npcs !== settlement.npcs) settlement.npcs = npcs;
   }
   if (chooseOrPin(pins, 'powerStructure', () => UNPINNED) === UNPINNED) resolveFactionLabelsAtClose(settlement); // CENSUS-1i R-AW: a label whose fact settles late resolves here, against the final roster, after every roster writer (MERGE-CAR: after the people car's true-hook pass; the rename cascades through `memberships[].power` and a minted card's `institution.key`) (no roll); a HELD powerStructure is the DM's and is not renamed (EM-R3, LANDING-R2)
+  // ── THE LATE RE-READ (TAIL-CRISIS-5, the chair's ruling K21; ORDER-MEASURE-1 C1b, the cure-(b) shape of A6/A8/A12/A13).
+  // ⛔ AFTER THE LAST ROSTER WRITE (the resize, the reconcile, the label close above): each stress entry the name's pass (F8)
+  // rendered is rendered again from its KEPT roll, and its CATALOGUE hook and note (the originals, not the text the
+  // first pass left: a twin that is not itself a key, and a note the first pass dropped, are re-decided here) are resolved
+  // again, against the SETTLED record. Draw-free (the slot keeps its roll). A declaration whose needs read the powers
+  // (`rival power`, `shared power`, `ruling body`) is true here and nowhere earlier: the stored text is this pass's.
+  // THE WINDOW: between the first pass and this one (the arrival scene to the label close) the entry holds the first
+  // pass's text; no writer in that window reads a stress entry's summary, hook or note (TAIL-CRISIS-5, by grep), and
+  // whatever is added there must not, or must read it here. @enforced-by tests/generators/stressLateReRead.test.js
+  for (const [e, kept] of stressLateReads) readStressEntry(e, kept);
+  if (chooseOrPin(pins, 'institutions', () => UNPINNED) === UNPINNED) readHouseDescsLate(settlement); // TAIL-HOUSES-5 (H20): the late re-read reaches a house's description (below); a HELD roster is the DM's
 
   // Propagate the in-pipeline causal trace onto the settlement so
   // downstream consumers (PipelineRail, AI overlay, PDF) can read it.
@@ -476,3 +507,52 @@ registerStep('assembleSettlement', {
   // GENERATION-stamped twins the stressor promotion just minted.
   return { settlement: reapplyEventConditions(promoteStressorsToConditions(normalizeSettlement(settlement))) };
 });
+import { keepOfRecord } from '../../domain/facts/keep.js'; // at the END on purpose: this file's writes are cited by LINE (COHERENCE-UPKEEP)
+import { settleFundingReasons } from '../structuralValidator.js'; import { keptGuardLine, purseWordOfBand } from '../safetyProfile.js'; import { economicSurvivalBandOf } from '../../domain/display/defenseScoreBands.js'; import { standingLabelOf } from '../../domain/facts/keep.js'; // at the END for the same reason (COHERENCE-UPKEEP-6)
+
+/**
+ * THE GUARD ASSESSMENT SAYS WHAT THE TOWN CAN PAY FROM ONE HOME (COHERENCE-UPKEEP-6, the chair's ruling A on the
+ * third read): the Economic Survival band of the defence profile just written (`economicSurvivalBandOf`), so it is
+ * resolved here, after the profile. It reads defence; nothing defence reads is written by it (the power
+ * fingerprint reads the safety label, not this text). At the END of the file so no cited line moves.
+ * @param {any} settlement @returns {any} the economic state, its guard assessment resolved
+ */
+function withGuardPaidFromDefence(settlement) {
+  const es = settlement.economicState;
+  const safety = es?.safetyProfile;
+  if (!safety || typeof safety.guardEffectivenessDesc !== 'string') return es;
+  const pay = purseWordOfBand(economicSurvivalBandOf(settlement), standingLabelOf(es));
+  return { ...es, safetyProfile: { ...safety, guardEffectivenessDesc: keptGuardLine(safety.guardEffectivenessDesc, settlement.institutions || [], pay, { forceScore: settlement.defenseProfile?.scores?.military, tradeDependencies: es.tradeDependencies, militaryGate: settlement.defenseProfile?.economicGates?.military }) } }; // UPKEEP-8: the guard line's two readings of the record
+}
+
+// ── THE LATE RE-READ OF A HOUSE'S DESCRIPTION (TAIL-HOUSES-5, the chair's ruling H20; the pass K21 built, reached to the
+// houses). A description whose claim reads the powers is declared in `institutionDescVariants.js :: DESC_LATE_SIBLINGS`
+// (keyed by the whole description; the draw never reads it). Here, after the last roster write, a stored description that
+// is such a key (in the tier noun the draw spoke it in) resolves against the SETTLED record, and the twin is stored where
+// the original is refused. Draw-free; nothing declared, nothing written (byte-identical); a description a later writer
+// changed is no key and is left. @enforced-by tests/generators/houseDescLateReRead.test.js
+/** @param {any} settlement */
+function readHouseDescsLate(settlement) {
+  const keys = Object.keys(DESC_LATE_SIBLINGS);
+  if (!keys.length || !Array.isArray(settlement?.institutions)) return;
+  const noun = tierNounFor(settlement.tier);
+  const spoken = new Map(keys.map((k) => [speakTierNoun(k, noun), k]));
+  const facts = factsOf(settlement);
+  // FAULTS-ROWS (the chair's ruling FR20 (3)): the draw-time sibling sets FIRST, on the final facts. The draw reads only the
+  // FORCED crises (`assembleInstitutions.js :: settledStressTypes`: the confirm pass may drop an emergent one), so an emergent
+  // crisis that survived is read here, by the twins that exist (no new text); the first admitted member, as the draw resolves
+  // it (none admitted: kept and noted). Then the late table reads the result, as before.
+  const drawSpoken = new Map(Object.keys(DESC_VARIANT_SIBLINGS).map((k) => [speakTierNoun(k, noun), k]));
+  for (const inst of settlement.institutions) {
+    const drawKey = inst && typeof inst.desc === 'string' ? drawSpoken.get(inst.desc) : undefined;
+    if (drawKey !== undefined) {
+      const drawn = resolveSibling(drawKey, DESC_VARIANT_SIBLINGS, { facts, poolId: 'institutionDescVariants:DESC_VARIANT_SIBLINGS', surface: 'institutions', drawKind: 'H' });
+      if (typeof drawn === 'string' && drawn !== drawKey) inst.desc = speakTierNoun(drawn, noun);
+    }
+    const key = inst && typeof inst.desc === 'string' ? spoken.get(inst.desc) : undefined;
+    if (key === undefined) continue;
+    const text = resolveSibling(key, DESC_LATE_SIBLINGS, { facts, poolId: 'institutionDescVariants:DESC_LATE_SIBLINGS', surface: 'institutions', drawKind: 'H' });
+    if (typeof text === 'string' && text !== key) inst.desc = speakTierNoun(text, noun);
+  }
+}
+import { DESC_LATE_SIBLINGS, DESC_VARIANT_SIBLINGS } from '../../data/institutionDescVariants.js'; import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // TAIL-HOUSES-5 (H20): at the END, as above (this file's writes are cited by LINE)

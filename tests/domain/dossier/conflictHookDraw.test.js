@@ -10,6 +10,7 @@
  * (`src/generators/power/conflicts.js :: buildConflictPlotHooks`).
  */
 import { describe, expect, test } from 'vitest';
+import { powerSentenceName } from '../../../src/data/people/powerSentenceName.js';
 
 import { HOOK_LINE_POOLS, conflictIssueFamily, createConflictHookDraw } from '../../../src/domain/dossier/hookLines.js';
 import { collectPlotHooks } from '../../../src/domain/dossier/plotHooks.js';
@@ -52,7 +53,8 @@ describe('the conflict hooks are drawn, not fixed', () => {
     ]));
     const text = hooks.find((h) => h.category === 'faction')?.text || '';
     expect(text).toContain('Merchant Guilds');
-    expect(text).toContain('Military/Guard');
+    // BAR6-POWERS (2026-11-16, LAW 10h): a party prints its prose form (`powerSentenceName`: "The Guard"), never the roster label
+    expect(text).toContain(powerSentenceName('Military/Guard'));
     expect(text.toLowerCase()).toContain('the dock taxation authority');
   });
 

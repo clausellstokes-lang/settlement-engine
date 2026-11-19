@@ -1,0 +1,26 @@
+[gate-tail] start:  09:25:49 up  1:00,  0 user,  load average: 2.46, 3.43, 2.88 · cores: 4
+pool-dominance: a rise was read again on confirm
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:resource_scarcity: top1 0.3745 > ceiling 0.3359 (3.1 SE over 1418 draws in 566 towns); repeats on confirm: ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:resource_scarcity: top1 0.3771 > ceiling 0.3359 (3.3 SE over 1440 draws in 584 towns)
+ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:succession_crisis: top1 0.8208 > ceiling 0.639 (10.8 SE over 809 draws in 616 towns); repeats on confirm: ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:succession_crisis: top1 0.8073 > ceiling 0.639 (9.5 SE over 742 draws in 573 towns)
+98.0% / 100.0%  350 draws, 2 lines  ledger:institutionServices:Access to external mill.Grain milling (a day away)
+96.9% / 100.0%  162 draws, 2 lines  ledger:stressNarrative:STRESS_SUMMARY_SIBLINGS
+94.9% / 100.0%  236 draws, 2 lines  ledger:institutionServices:Annual fair.Seasonal trading
+94.7% / 100.0%  208 draws, 2 lines  ledger:institutionServices:Carriers' guild.Freight haulage
+91.1% / 100.0%  112 draws, 2 lines  ledger:institutionServices:Underground network.Discreet passage
+90.8% / 100.0%  513 draws, 2 lines  ledger:institutionServices:Coaching inn.Lodging
+90.7% / 100.0%  364 draws, 2 lines  ledger:institutionServices:Coaching inn.Horse change
+89.4% / 100.0%  47 draws, 3 lines  ledger:institutionDescVariants:village|Crafts|Tannery
+89.1% / 100.0%  64 draws, 3 lines  ledger:institutionDescVariants:town|Economy|Pawnbroker
+88.0% / 100.0%  25 draws, 2 lines  ledger:institutionServices:Brewer.Ale (barrel)
+87.3% / 100.0%  450 draws, 2 lines  ledger:institutionServices:Daily markets.Fresh produce
+83.1% / 100.0%  621 draws, 2 lines  ledger:cultureProfiles:slavic.foodways
+82.1% / 100.0%  809 draws, 3 lines  ledger:historyData:HISTORICAL_EVENTS_DATA.plotHooks:succession_crisis
+81.2% / 100.0%  165 draws, 2 lines  ledger:institutionServices:River boatyard.Boat repair
+81.0% / 100.0%  1593 draws, 2 lines  ledger:factionLabelSiblings:FACTION_LABEL_SIBLINGS
+80.6% / 100.0%  289 draws, 2 lines  ledger:institutionServices:Mine (open cast).Raw extraction
+80.6% / 100.0%  36 draws, 3 lines  ledger:institutionDescVariants:village|Economy|Dairy farmer
+80.0% / 100.0%  5 draws, 2 lines  ledger:ARRIVAL_SENSES.kilns.lines
+79.2% / 100.0%  231 draws, 2 lines  ledger:npcGenerator:NPC_GOAL_SIBLINGS
+78.1% / 100.0%  128 draws, 4 lines  ledger:institutionDescVariants:town|Economy|Customs house
+pool-dominance: corpus quarrel (936 pools): 2 over, 0 unregistered, 0 stale, 0 loose, 0 notes
+[gate-tail] end:  09:30:10 up  1:04,  0 user,  load average: 1.25, 2.30, 2.55

@@ -36,6 +36,7 @@ import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js
 import { proseToPlainText } from '../primitives/ProseText.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { factsOf } from '../../domain/facts/factsOf.js';
+import { prosperityInCrisisLed } from '../../domain/display/prosperityInCrisis.js'; // COHERENCE-UPKEEP-6 (ruling D(iii)): the sentence led by the word it explains
 export function Overview({ settlement, narrativeMode, vm, stateProse, historyPrinted = true }) {
   // ONE HOME PER EXPORT (the chair's B4 ruling (2), 2026-11-09): with History in the variant, the tension
   // descriptions and the historical character live there; without it (campaign_state), here in full.
@@ -100,6 +101,11 @@ export function Overview({ settlement, narrativeMode, vm, stateProse, historyPri
           { label: 'Stability',  value: statusCase(o.stability) },
         ]}
       />
+      {/* The Prosperity tile's label, where a crisis in force lowered it, says what the place is in
+          ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2): the vm's one sentence. */}
+      {o.prosperityInCrisis && (
+        <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{prosperityInCrisisLed(o.prosperityInCrisis)}</Text>
+      )}
 
       {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
       <StateProse stateProse={stateProse} tab="overview" />
@@ -180,13 +186,13 @@ export function Overview({ settlement, narrativeMode, vm, stateProse, historyPri
             <View style={{ marginBottom: 6 }}>
               <Text style={{ ...type.label, fontSize: pt['8'], color: palette.ink }}>Enforcement ratio</Text>
               <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second }}>
-                {enforcementWords(o.safetyRatio, settlement ? factsOf(settlement).guardPresence : true)}
+                {enforcementWords(o.safetyRatio, settlement ? factsOf(settlement).guardPresence : true, settlement ? criminalsStandHere(settlement?.economicState?.safetyProfile) || factsOf(settlement).crime !== 'none' : true)}
               </Text>
             </View>
           )}
           {o.foodBalance && (o.foodBalance.production != null || o.foodBalance.deficit != null) && (
             <View style={{ marginBottom: 6 }}>
-              <FoodBalanceBar fb={o.foodBalance} />
+              <FoodBalanceBar fb={settlement ? foodBlockShown(settlement, o.foodBalance) : o.foodBalance} />{/* TAIL-EXPORTS-PDF batch 1 (ruling E1): the tab's food row (foodCarrier.js), as the Economics chapter's block */}
             </View>
           )}
           {o.viabilityVerdict && (
@@ -312,7 +318,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse, historyPri
             <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>{`Historical character: ${historyAt}.`}</Text>
           ) : null}
           {o.settlementReason ? <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 3 }}>
-            <Text style={{ color: palette.muted }}>Reason settled: </Text>
+            <Text style={{ color: palette.muted }}>Settlement Origin: </Text>{/* TAIL-EXPORTS-PDF-3 (ruling E23): the origin line says where, not why: the heading the Overview tab prints over it */}
             {o.settlementReason}
           </Text> : null}
         </View>
@@ -566,12 +572,18 @@ export default Overview;
  * SW-9b-A (STYLE-2-CONTRADICTIONS §8, P9): where no force stands (`factsOf(record).guardPresence`, the
  * fact the safety lines read since SW-B6's ba0dc7cf9), the line says so in the guard assessment's own
  * words instead of setting "those who keep order" against the criminals.
- * @param {number} ratio @param {boolean} [guarded] @returns {string}
+ * @param {number} ratio @param {boolean} [guarded] @param {boolean} [criminals] @returns {string}
  */
-export function enforcementWords(ratio, guarded = true) {
+export function enforcementWords(ratio, guarded = true, criminals = true) {
   if (!guarded) return 'There is no watch.';
+  // TAIL-EXPORTS-PDF batch 1: where the record names no one working against the law (no criminal house, no crime
+  // pattern, no shadow share the tab prints: shadowEconomyShown.js :: criminalsStandHere) the line sets no one against
+  // "the criminals"; it says so in the Defense desk's own denial.
+  if (!criminals) return 'No criminal infrastructure has been identified.';
   if (!Number.isFinite(ratio)) return 'Not measured.';
   if (ratio >= 2) return 'Those who keep order clearly outmatch the criminals.';
   if (ratio >= 1) return 'Those who keep order roughly match the criminals.';
   return 'The criminals outmatch those who keep order.';
 }
+import { criminalsStandHere } from '../../domain/display/shadowEconomyShown.js'; // TAIL-EXPORTS-PDF batch 1
+import { foodBlockShown } from '../../domain/display/foodCarrier.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1): one home for the food row

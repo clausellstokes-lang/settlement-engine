@@ -1,0 +1,28 @@
+# base 995293e81
+births 1490 {"needs nothing, critical imports":171,"pays its way, poor":90,"keeps order, law critical":28,"a good not on the import list":168,"grammar: a mass noun keeps":17,"feeds itself, buys food":60}
+## needs nothing, critical imports
+   rv2-calm-thorp-0: VIABLE: Nothing Megalpolis needs to get through the year has to come from outside.
+   rv2-calm-thorp-3: VIABLE: Huyuan grows what it eats and makes what it needs, and owes no one for either.
+   rv2-calm-thorp-4: VIABLE: Navapeth grows what it eats and makes what it needs, and owes no one for either.
+## pays its way, poor
+   rv2-calm-thorp-2: Poor: VIABLE: Langensteig feeds itself and pays its own way.
+   rv2-calm-thorp-27: Poor: VIABLE BUT STRAINED: Grudets keeps order and pays its way, but it has to buy food to get through the year, and the food comes in by road.
+   rv2-calm-hamlet-8: Struggling: VIABLE: Bab-al-khel feeds itself and pays its own way.
+## keeps order, law critical
+   rv2-calm-thorp-27: VIABLE BUT STRAINED: Grudets keeps order and pays its way, but it has to buy food to get through the year, and the food comes in by road.
+   rv2-calm-village-19: VIABLE BUT STRAINED: Waldbrunn keeps order and pays its way, but it has to buy food to get through the year, and the food comes in by road.
+   rv2-calm-village-20: VIABLE BUT STRAINED: Khānpatan keeps order and pays its way, but it has to buy food to get through the year, and the food comes in by road.
+## a good not on the import list
+   rv2-calm-village-5: VIABLE WITH CRITICAL DEPENDENCIES: Beloin works well enough, as long as nobody cuts it off from the grain it buys in.
+   rv2-calm-village-11: VIABLE WITH CRITICAL DEPENDENCIES: Leontlathra can stand, but only while grain keep arriving and the routes that bring them stay open.
+   rv2-calm-village-12: VIABLE WITH CRITICAL DEPENDENCIES: Makroambelos works well enough, as long as nobody cuts it off from the grain it buys in.
+## grammar: a mass noun keeps
+   rv2-calm-village-11: VIABLE WITH CRITICAL DEPENDENCIES: Leontlathra can stand, but only while grain keep arriving and the routes that bring them stay open.
+   rv2-calm-village-35: VIABLE WITH CRITICAL DEPENDENCIES: Xochibalam can stand, but only while grain keep arriving and the routes that bring them stay open.
+   rv2-calm-town-1: VIABLE WITH CRITICAL DEPENDENCIES: Ingiås can stand, but only while grain keep arriving and the routes that bring them stay open.
+## feeds itself, buys food
+   rv2-calm-village-13: VIABLE: Skálhammer grows what it eats and makes what it needs, and owes no one for either.
+   rv2-calm-village-17: VIABLE: Nothing Cerrovallis needs to get through the year has to come from outside.
+   rv2-calm-village-29: VIABLE: Agioschorio grows what it eats and makes what it needs, and owes no one for either.
+# tip
+births 1490 {}

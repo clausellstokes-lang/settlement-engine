@@ -52,10 +52,18 @@ const SEAM_MODULE = 'resourceDisplayName';
 const THREADED = Object.freeze({
   'src/pdf/sections/ResourcesProduction.jsx': 'the terrain ADVANTAGES and CRITICALS tags',
   'src/pdf/sections/Overview.jsx': "the Geography chapter's advantages, criticals and nearby lists",
-  'src/foundry/journalPages.js': "the VTT journal's Exports and Imports rows",
   // ODQ §934.22 item 2 — threaded by lane 25 (the two rows this file used to carry as OWED).
   'src/components/new/tabs/EconomicsTab.jsx': 'the Imports pills on the Trade Profile',
+  // SURFACES-3 item 2 (r3, the tab's word governs): the trade pills' one word, the tab's, the PDF's and the journal's.
+  'src/domain/display/tradePillWord.js': 'the trade pills (an import through the seam; an export as the list spells it)',
+});
+
+/** RE-KEYED BY IDENTITY (SURFACES-3 item 2): these print their trade pills through `tradePillWord.js`, which threads the
+ * seam; each must still import and call it. */
+const THREADED_VIA_PILL = Object.freeze({
+  'src/foundry/journalPages.js': "the VTT journal's Exports and Imports rows",
   'src/pdf/sections/EconomicsTrade.jsx': 'the EXPORTS and IMPORTS bullet lists',
+  'src/components/new/tabs/EconomicsTab.jsx': 'the Exports and Imports pills on the Trade Profile',
 });
 
 
@@ -150,6 +158,13 @@ describe('the resource label seam — the installation holds', () => {
       expect(uses.length, `${file} uses the seam`).toBeGreaterThan(0);
     });
   }
+  for (const [file, what] of Object.entries(THREADED_VIA_PILL)) {
+    test(`${file} still renders ${what} through the trade pill's leaf`, () => {
+      const lines = readFileSync(join(ROOT, file), 'utf8').split('\n');
+      expect(lines.filter((l) => /^import\b/.test(l.trim()) && l.includes('tradePillWord')).length, `${file} imports the leaf`).toBe(1);
+      expect(lines.filter((l) => !/^import\b/.test(l.trim()) && l.includes('tradePillWord(')).length, `${file} uses the leaf`).toBeGreaterThan(0);
+    });
+  }
 
   /**
    * ODQ §934.22 item 2 — THE DEBT IS PAID, SO THE ROWS CAME OUT AND THE ARM TURNED OVER.
@@ -166,15 +181,15 @@ describe('the resource label seam — the installation holds', () => {
     const tab = readFileSync(join(ROOT, 'src/components/new/tabs/EconomicsTab.jsx'), 'utf8');
     // The ownership read and the terrain test take `imp`; only the printed pill takes the seam.
     expect(tab).toContain("tradeLabelOwnership(eco,'imports',imp)");
-    expect(tab).toContain('const impLabel=resourceDisplayName(imp);');
+    expect(tab).toContain("const impLabel=tradePillWord(imp,'imports');"); // re-keyed (SURFACES-3 item 2): the seam through the pill's leaf
     // The exclusion below measures the SPLIT, not an empty file: the two `toContain` lines
     // above read this same payload and would red first if the list stopped rendering.
-    // anchored: `const impLabel=resourceDisplayName(imp);` is pinned PRESENT on this same source one line above
+    // anchored: `const impLabel=tradePillWord(imp,'imports');` is pinned PRESENT on this same source one line above
     expect(tab).not.toContain("tradeLabelOwnership(eco,'imports',impLabel)");
 
     const pdf = readFileSync(join(ROOT, 'src/pdf/sections/EconomicsTrade.jsx'), 'utf8');
     expect(pdf).toContain('const ownership = tradeLabelOwnership(economy, direction, item);');
-    expect(pdf).toContain('const shown = label(resourceDisplayName(item));');
+    expect(pdf).toContain('const shown = label(tradePillWord(item, direction));'); // re-keyed (SURFACES-3 item 2)
     // anchored: both of the lines above are asserted PRESENT on this same payload.
     expect(pdf).not.toContain('tradeLabelOwnership(economy, direction, shown)');
   });

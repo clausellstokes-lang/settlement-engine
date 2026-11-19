@@ -29,6 +29,7 @@ import {
   foodTilePoolKey,
   granaryPoolKey,
   impairedServicePoolKey,
+  houseStoppedWhole,
   incomeMixPoolKey,
   leadingExploitation,
   leadingGoodNoun,
@@ -1026,7 +1027,8 @@ describe('DESK-7 — the {complexity} band, wired from the chair\'s eleven forms
     const drawnKeys = (tier, access, complexity) => new Set(seeds
       .map((seed) => economyStateProse(
         // CENSUS-3c: C3 v3 / C5 lines declare `market`; the measured town keeps one (a market square).
-        town({ economicState: { prosperity: tier, tradeAccess: access, economicComplexity: complexity }, institutions: [{ name: 'Market square' }] }),
+        // TAIL-CORPUS-ECO-2 (2026-11-15): C5 v2 ("feeds it and no more") declares `food: ≥ secure`; the measured town is fed.
+        town({ economicState: { prosperity: tier, tradeAccess: access, economicComplexity: complexity, foodSecurity: { foodRecord: { band: 'secure' } } }, institutions: [{ name: 'Market square' }] }),
         {}, { seed, audience: AUDIENCE_DM },
       ).prosperityHeader?.sentence)
       .filter(Boolean));
@@ -1315,6 +1317,9 @@ describe('DESK-ECON2 — DS-SUP-3, the catalog and its absences', () => {
       if (expected.includes('healing')) reached.add(serviceCatalogPoolKey([gap('healing')], tier));
     }
     reached.add(impairedServicePoolKey('Tannery'));
+    // BAR6-ECON (8e.open, 2026-11-16): the stopped house's twin, reached where the siege stops every service the house keeps
+    const besieged = { stress: { type: 'under_siege' }, stressors: { type: 'under_siege' }, availableServices: { Commerce: [{ name: 'Caravan organization', desc: 'Assemble merchants with compatible routes into shared caravans.', institution: 'Caravan masters\' exchange' }] } };
+    reached.add(houseStoppedWhole(impairedServicePoolKey('Caravan masters\' exchange'), besieged, 'Caravan masters\' exchange'));
     const authored = Object.keys(DOSSIER_STATE_PROSE_ECONOMY['DS-SUP-3'].pools).sort();
     expect([...reached].filter(Boolean).sort(), 'a DS-SUP-3 pool is unreachable')
       .toEqual(authored);
@@ -1358,7 +1363,9 @@ describe('W1 ECO — the construction lenses', () => {
     ['foodMeans', 'DS-ECO-9', 'HOW THE NEED IS MET: much of it brought in', base({ foodSecurity: { label: 'Pressured', foodRecord: { normalImportPct: 35, magicPct: 0 } } })],
     ['foodMeans', 'DS-ECO-9', 'HOW THE NEED IS MET: part of it by magic', base({ foodSecurity: { label: 'Secure', foodRecord: { normalImportPct: 0, magicPct: 12 } } })],
     ['foodSources', 'DS-ECO-9', 'FOOD SOURCES: one source', base({ foodSecurity: { label: 'Secure', activeChainsCount: 1, foodRecord: { foodSources: ['livestock'] } } })],
-    ['foodSources', 'DS-ECO-9', 'FOOD SOURCES: several, the largest named', base({ foodSecurity: { label: 'Secure', activeChainsCount: 2, foodRecord: { foodSources: ['fish', 'grain'] } } })],
+    // BAR4-CORPUS-ECO (2026-11-16): the record's own band beside its label (v1 now declares `food: ≥ importDependent`, as v2 and v3
+    // declared `food: ≥ secure`): a record with no band answers no band, and the pool was reached here by v1 alone
+    ['foodSources', 'DS-ECO-9', 'FOOD SOURCES: several, the largest named', base({ foodSecurity: { label: 'Secure', activeChainsCount: 2, foodRecord: { band: 'secure', foodSources: ['fish', 'grain'] } } })],
     ['foodSources', 'DS-ECO-9', 'FOOD SOURCES: four or more', base({ foodSecurity: { label: 'Secure', activeChainsCount: 4, foodRecord: { foodSources: ['grain', 'fish', 'livestock', 'game'] } } })],
     ['foodOnProsperity', 'DS-ECO-8', 'FOOD AND PROSPERITY: hunger holds the town down', base({ foodSecurity: { label: 'Active Famine', prosperityMod: { type: 'cap' } } })],
     ['foodOnProsperity', 'DS-ECO-8', 'FOOD AND PROSPERITY: the cost of food weighs on the town', base({ foodSecurity: { label: 'Pressured', prosperityMod: { type: 'penalty' } } })],
@@ -1386,9 +1393,12 @@ describe('W1 ECO — the construction lenses', () => {
   });
 
   it('is SILENT where the record does not hold the fact (R-W1: said only when not the default)', () => {
+    // BAR5-FOOD (2026-11-16, the chair's FD1): the rung keys on the word the page prints (`foodWordShown`, the food record's
+    // band), so the case's record carries the import-dependent band its label states (it carried `band: 'pressured'`,
+    // which the page prints as Pressured); the assertion is unchanged.
     const quiet = economyStateProse(base({
       safetyProfile: { flags: { arcaneBlackMarket: false, theocraticEconomy: false }, compound: { religionInfluence: 40, magicInfluence: 30 } },
-      foodSecurity: { label: 'Import-Dependent', activeChainsCount: 0, prosperityMod: null, foodRecord: { band: 'pressured', failedSource: null, normalImportPct: 45, magicPct: 0, foodSources: [] } },
+      foodSecurity: { label: 'Import-Dependent', activeChainsCount: 0, prosperityMod: null, foodRecord: { band: 'importDependent', failedSource: null, normalImportPct: 45, magicPct: 0, foodSources: [] } },
       activeChains: [{ label: 'Bread', upstreamWeak: [] }],
     }, { institutions: [{ name: 'Smithy' }], resourceAnalysis: { resourceConditions: [{ label: 'Salt Flats', condition: 'available', recoveryMode: 'manual' }], imports: { critical: [], reasons: {} } } }),
     {}, { seed: 'w1-quiet', audience: AUDIENCE_DM });

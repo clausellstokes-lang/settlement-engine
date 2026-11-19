@@ -1,0 +1,34 @@
+# STYLE-2-MERGE-15, point 49: the carried reds' BODIES, the line 9e57f5023 against the save tip (11c565b96's code), the seven carried files run alone at each tree
+# (npx vitest run --maxWorkers=2 --reporter=default --reporter=json <the seven files>; both trees: 7 files failed, 12 failed | 28 passed | 16 skipped; the same 14 red titles).
+# Each failure block of the default reporter, paths and timings folded, compared title by title. 12 EQUAL; the 2 that differ are the draft's declared prose movement (2k.2): +2 drift keys, +30 cells.
+keys line 14 tip 14 same keys True
+EQUAL   FAIL  tests/build/landingFixtureFreshness.test.js > the landing fixture is the engine at the committed seed > a fresh derivation reproduces the committed module BYTE FOR 
+EQUAL   FAIL  tests/build/landingFixtureFreshness.test.js > the landing fixture is the engine at the committed seed > the script's own --check arm agrees, and is wired to say how
+EQUAL   FAIL  tests/data/foundingWorldBones.test.js > every Founding World keeps every promise on its card > every promise holds in at least 19 of 20 forks at the card's dials
+EQUAL   FAIL  tests/lint/newsHeadlineContract.walker.test.js > complete Wizard News address and headline rewrite contract
+EQUAL   FAIL  tests/lint/newsVoiceContract.walker.test.js > cross-home Wizard News voice contract
+EQUAL   FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A1 reconstructs the exact four-family AO-0 corpus twice from one
+EQUAL   FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A2 rejects malformed selector axes while retaining nulls and pro
+EQUAL   FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A3 freezes all 58 identities counts bytes digest and movement po
+EQUAL   FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A5 closes twelve pulse-history records and pins overlapping head
+EQUAL   FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A6 reaches the regional audit log while proving its selected pro
+EQUAL   FAIL  tests/lint/siteCoherenceRatchet.test.js > site-coherence contradiction ratchet (Wave 0 — inventory freezing, never correctness) > C1 — the live row set equals the f
+DIFFER  FAIL  tests/property/dossierProseManifest.test.js > the composed-prose manifest — the DRIFT corpus, both audiences > ⭐ THE DRIFT ARM: no row added, no row removed, no row
+    --- line
+    +++ tip
+    @@ -2 +2 @@
+    -AssertionError: rows whose composed prose moved: expected [ …(1036) ] to deeply equal []
+    +AssertionError: rows whose composed prose moved: expected [ …(1038) ] to deeply equal []
+    @@ -742,0 +743,2 @@
+    ++   "town|germanic|mountain|random_trade|civilized|gm-seed-c::dm",
+    ++   "town|germanic|mountain|random_trade|civilized|gm-seed-c::player",
+DIFFER  FAIL  tests/property/dossierProseManifest.test.js > the composed-prose manifest — the DRIFT corpus, both audiences > ⭐⭐ THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally
+    --- line
+    +++ tip
+    @@ -20 +20 @@
+    -+     "cells": 390,
+    ++     "cells": 396,
+    @@ -25 +25 @@
+    -+     "cells": 73422,
+    ++     "cells": 73446,
+EQUAL   FAIL  tests/property/dossierProseManifest.test.js > the two controls no one-audience manifest can see > ⭐ THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a p

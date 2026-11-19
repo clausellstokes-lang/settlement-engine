@@ -270,7 +270,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'economics.seasonTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance', dimensions: ['hunger'],
   }),
   Object.freeze({
-    mount: 'economics.foodSecurity', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-9', rung: 'sentence', dimensions: ['hunger', 'walls'],
+    mount: 'economics.foodSecurity', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-9', rung: 'sentence', dimensions: ['crisis', 'hunger', 'walls'], // BAR4-CORPUS-ECO 7354471e5: SECURE v2 `no crisis` (E2)
   }),
   Object.freeze({
     mount: 'economics.commercialProfile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-12', rung: 'sentence', dimensions: ['hunger', 'walls'],
@@ -399,7 +399,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'defense.militaryStatus', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-8', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'defense.wallRationale', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-11', rung: 'sentence', dimensions: ['threat'],
+    mount: 'defense.wallRationale', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-11', rung: 'sentence', dimensions: ['threat', 'unrest'], // BAR4-CORPUS-DEF 6f8081add: WALLED-QUIET v2, v3 `no unrest`, twin v7 `unrest` (D3)
   }),
   Object.freeze({
     mount: 'defense.criminalStructure', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-4', rung: 'sentence', dimensions: ['unrest'],

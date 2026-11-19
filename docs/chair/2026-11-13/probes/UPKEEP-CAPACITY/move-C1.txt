@@ -1,0 +1,19 @@
+== C1: births 3756; records differ 2915
+READINESS moved 2677 (up 1297, down 1380); mean all +0.41; min -9 max 9; bands 343 {('Well-Defended', 'Fortress'): 137, ('Defensible', 'Well-Defended'): 35, ('Vulnerable', 'Undefended'): 26, ('Well-Defended', 'Defensible'): 36, ('Lightly Defended', 'Vulnerable'): 59, ('Defensible', 'Lightly Defended'): 45, ('Fortress', 'Well-Defended'): 4, ('Lightly Defended', 'Defensible'): 1}
+  fresh6: moved 477, band 58
+  thorp      moved  187 mean -0.35 min -2 max +0 bands 10
+  hamlet     moved  246 mean -0.55 min -3 max +0 bands 19
+  village    moved  218 mean -0.48 min -5 max +0 bands 31
+  town       moved  729 mean -2.39 min -9 max +0 bands 110
+  city       moved  749 mean +2.57 min +0 max +5 bands 92
+  metropolis moved  548 mean +3.96 min +0 max +9 bands 81
+  military  moved  760 (up 271, down 489) mean -0.14 min -12 max +14; bands 56 {('STRONG', 'ADEQUATE'): 30, ('WEAK', 'CRITICAL'): 3, ('ADEQUATE', 'WEAK'): 19, ('ADEQUATE', 'STRONG'): 4}
+  monster   moved 1776 (up 549, down 1227) mean -0.38 min -12 max +16; bands 324 {('ADEQUATE', 'STRONG'): 13, ('WEAK', 'CRITICAL'): 212, ('STRONG', 'ADEQUATE'): 44, ('ADEQUATE', 'WEAK'): 55}
+  internal  moved 2428 (up 1299, down 1129) mean +2.61 min -11 max +17; bands 614 {('WEAK', 'ADEQUATE'): 124, ('CRITICAL', 'WEAK'): 36, ('ADEQUATE', 'STRONG'): 254, ('ADEQUATE', 'WEAK'): 83, ('WEAK', 'CRITICAL'): 84, ('STRONG', 'ADEQUATE'): 33}
+  economic  moved 1284 (up 647, down 637) mean +0.07 min -14 max +8; bands 59 {('ADEQUATE', 'STRONG'): 9, ('ADEQUATE', 'WEAK'): 19, ('STRONG', 'ADEQUATE'): 25, ('WEAK', 'CRITICAL'): 6}
+  magical   moved  326 (up 18, down 308) mean -0.14 min -12 max +10; bands 28 {('WEAK', 'CRITICAL'): 13, ('ADEQUATE', 'WEAK'): 13, ('STRONG', 'ADEQUATE'): 1, ('ADEQUATE', 'STRONG'): 1}
+  disaster  moved    0 (up 0, down 0) mean +0.00 min +0 max +0; bands 0 {}
+  MAGIC AGAINST THE PAGE: made 4 ['cold-famine-town-77', 'cold-town-2', 'fresh5-infiltrated-town-0', 'fresh5-town-27'], cured 0
+  AI THREATS: births changed 285 {('lost', 'Civic stability at risk'): 203, ('gained', 'Civic stability at risk'): 52, ('gained', 'Economic fragility'): 19, ('gained', 'Magical instability'): 13}
+  COUPLING: power structure changed 337 (of which band changed 337), a power appears or vanishes 7, legitimacy label changed 37
+  powers in/out: {('in', 'Religious Authorities'): 1, ('in', 'The Devout Circle'): 1, ('out', "Thieves' Guild"): 1, ('out', 'The Shadow Compact'): 1, ('in', 'The Martial Alliance'): 1, ('in', 'The Shadow Compact'): 1, ('out', 'The Enlightened'): 1, ('out', 'The Order of the Watch'): 1, ('in', 'The Landed Bloc'): 1, ('in', 'Noble Families'): 1, ('out', 'The Independent Bloc'): 2, ('out', 'The Holy Compact'): 1, ('in', 'Arcane Orders'): 1, ('in', 'Noble Houses'): 1, ('out', 'Merchant Guilds'): 1, ('in', 'The Free Alliance'): 1, ('out', 'The Hidden Hand'): 1, ('in', 'The Tower Alliance'): 1, ('out', 'The Commercial Circle'): 1}

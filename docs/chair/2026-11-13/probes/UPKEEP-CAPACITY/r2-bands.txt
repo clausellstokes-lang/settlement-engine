@@ -1,0 +1,16 @@
+h-8ef42a051 readiness above 21 a higher band word 7
+    cold-hamlet-56 25 Lightly Defended against 23 Vulnerable
+    cold-hamlet-238 12 Vulnerable against 11 Undefended
+    cold-village-98 39 Defensible against 35 Lightly Defended
+    cold-village-220 24 Lightly Defended against 21 Vulnerable
+    fresh6-hamlet-22 24 Lightly Defended against 23 Vulnerable
+    cold-hamlet-91 24 Lightly Defended against 23 Vulnerable
+    cold-village-65 14 Vulnerable against 11 Undefended
+h-C0 readiness above 16 a higher band word 7
+    cold-hamlet-56 25 Lightly Defended against 23 Vulnerable
+    cold-hamlet-91 24 Lightly Defended against 23 Vulnerable
+    cold-hamlet-238 12 Vulnerable against 11 Undefended
+    cold-village-65 14 Vulnerable against 11 Undefended
+    cold-village-98 39 Defensible against 35 Lightly Defended
+    cold-village-220 24 Lightly Defended against 21 Vulnerable
+    fresh6-hamlet-22 24 Lightly Defended against 23 Vulnerable

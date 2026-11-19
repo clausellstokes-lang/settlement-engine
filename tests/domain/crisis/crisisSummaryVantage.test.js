@@ -6,7 +6,7 @@
  * column of a Latin square, so one PDF never prints one paragraph twice and sibling towns under
  * one crisis print different frames.
  */
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import {
   CRISIS_SUMMARY_POOLS, SUMMARY_COLUMNS, SURFACE_VANTAGE_COLUMNS, crisisSummaryForSurface, summaryColumnOf,
 } from '../../../src/domain/crisis/crisisSummaryVantage.js';
@@ -16,6 +16,10 @@ import { buildViewModel } from '../../../src/pdf/lib/viewModel.js';
 import { composeTonightSheet } from '../../../src/domain/summary/tonightSheet.js';
 import { composeCrisisPage } from '../../../src/domain/crisis/crisisPage.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
+import { deriveArmedForces } from '../../../src/domain/display/defenseDisplay.js';
+import { hasMarketInstitution } from '../../../src/domain/facts/market.js';
 
 const KINDS = Object.keys(STRESS_TYPE_MAP);
 const SURFACES = /** @type {const} */ (['cover', 'overview', 'defence', 'tonight']);
@@ -121,5 +125,96 @@ describe('#29 and the §8 floor — the crisis summary by surface, four vantages
       expect(new Set([cover, overview, entry.summary]).size, `${kind}: no surface repeats another`).toBe(3);
     });
     expectNoSeedFailures(failures, 'every surface prints its own line of the crisis');
+  });
+});
+
+// R3-CODE-C-3 (ROUND-3-CUT-INCREMENT #ww-15, #pf-85, #pf-667; CENSUS-2 c36): four lines presumed what their
+// crisis kind does not guarantee (the file's own law: a line states only what its kind guarantees and names no
+// force): a body that keeps order and guards the stores, merchants, streets. Reworded to what holds in a thorp with
+// no watch and no market and in a metropolis alike. THE GUARD TOWNS are the readers' own, born in the app's shape.
+describe('R3-CODE-C-3: a vantage promises no force, no merchant and no streets its kind does not', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const appShape = (seed) => {
+    const m = seed.match(/^(?:rww|rpf)-(\w+)-([a-z_+]+)-(\d+)$/);
+    const stresses = m[2] === 'calm' ? [] : m[2].split('+');
+    return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: stresses, _randomizePriorities: true }), null, { seed, customContent: {} });
+  };
+  const linesOf = (s) => (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [])
+    .flatMap((e) => SURFACES.map((sf) => crisisSummaryForSurface(e, s.name, sf) || ''));
+  it('the four lines, reworded', () => {
+    const reworded = [
+      ['famine.defence.official', CRISIS_SUMMARY_POOLS.famine.defence.official, /keep order|guard/i],
+      ['famine.tonight.watch', CRISIS_SUMMARY_POOLS.famine.tonight.watch, /guard/i],
+      ['succession_void.tonight.trade', CRISIS_SUMMARY_POOLS.succession_void.tonight.trade, /merchant/i],
+      ['politically_fractured.defence.local', CRISIS_SUMMARY_POOLS.politically_fractured.defence.local, /streets?/i],
+    ];
+    for (const [key, line, refused] of reworded) {
+      expect(typeof line === 'string' && line.trim().length > 0, `${key}: the reworded line is still in its pool`).toBe(true);
+      // anchored: the line is asserted a non-empty string of its pool on the line above, so a renamed or emptied entry reds there
+      expect(line, key).not.toMatch(refused);
+    }
+  });
+  it('rww-thorp-calm-1 (a famine; nobody paid to keep order): no line guards its stores', () => {
+    const s = appShape('rww-thorp-calm-1');
+    expect(linesOf(s).filter((l) => /guarding the stores|under guard|the guards/i.test(l))).toEqual([]);
+  });
+  it('rpf-thorp-succession_void-13 (no market, no merchant): no line speaks of its merchants', () => {
+    const s = appShape('rpf-thorp-succession_void-13');
+    expect(linesOf(s).filter((l) => /merchant/i.test(l))).toEqual([]);
+  });
+});
+
+// R3-CODE-C-5 (the third seat's "Found on the way", ruled by the chair as one rewording pass of the table): the same
+// presumption in the table's other lines. "Those who keep order" and "everyone set to keep order" (a force), "the
+// merchants" (a market's people) and "streets" (a size) are facts no crisis kind guarantees, and the call sites pass
+// no roster, so every line is worded to what holds in a thorp with no force and no market and in a metropolis alike.
+// The one line that keeps "keeping order" is the occupation's: its occupiers are the kind's own force. THE GUARD
+// TOWNS are births the rewording was not tuned on (the lane's fresh seeds, the census's dials), each printing its
+// family's false line at e2aa8e278.
+describe('R3-CODE-C-5: no line of the table promises a force, a merchant or a street', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  /** @param {[string, object][]} sets @returns {[string, string][]} */
+  const lines = (sets) => sets.flatMap(([kind, set]) => SURFACES.flatMap((sf) => Object.entries(set[sf]).map(([v, l]) => [`${kind}.${sf}.${v}`, l])));
+  const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
+  const born = (seed) => {
+    const m = seed.match(/^r2s-(\w+)-(thorp|hamlet|village|town|city|metropolis)-(\d+)$/);
+    return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...DIALS, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] }), null, { seed, customContent: {} });
+  };
+  const printed = (s) => (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [])
+    .flatMap((e) => SURFACES.map((sf) => crisisSummaryForSurface(e, s.name, sf) || ''));
+  it('no line names a body that keeps order, but the occupation\'s own', () => {
+    expect(lines(SETS).filter(([, l]) => /\bkeep(?:s|ing)? order\b/i.test(l)).map(([k]) => k)).toEqual(['occupied.defence.official']);
+  });
+  it('no line names a merchant', () => {
+    expect(lines(SETS).filter(([, l]) => /\bmerchants?\b/i.test(l)).map(([k]) => k)).toEqual([]);
+  });
+  it('no line names a street', () => {
+    expect(lines(SETS).filter(([, l]) => /\bstreets?\b/i.test(l)).map(([k]) => k)).toEqual([]);
+  });
+  it('r2s-slave_revolt-thorp-70 (a thorp of 12, no force): no line sets anyone to keep order', () => {
+    const s = born('r2s-slave_revolt-thorp-70');
+    const af = deriveArmedForces(s);
+    expect([s.tier, af.standing.length + af.contracted.length]).toEqual(['thorp', 0]);
+    expect(printed(s).filter((l) => /keep(?:s|ing)? order/i.test(l))).toEqual([]);
+  });
+  it('r2s-occupied-hamlet-70 (a hamlet of 47, no market): no line speaks of its merchants', () => {
+    const s = born('r2s-occupied-hamlet-70');
+    expect([s.tier, hasMarketInstitution(s.institutions)]).toEqual(['hamlet', false]);
+    expect(printed(s).filter((l) => /merchant/i.test(l))).toEqual([]);
+  });
+  it('r2s-plague_onset-thorp-70 (a thorp of 26): no line speaks of its streets', () => {
+    const s = born('r2s-plague_onset-thorp-70');
+    expect(s.tier).toBe('thorp');
+    expect(printed(s).filter((l) => /\bstreets?\b/i.test(l))).toEqual([]);
+  });
+  // The chair's ruling of 02:06Z: "Those who keep {name} safe" is the same presumption where no force stands.
+  it('no line names people who keep the place safe', () => {
+    expect(lines(SETS).filter(([, l]) => /\bkeeps? \S+ safe\b/i.test(l)).map(([k]) => k)).toEqual([]);
+  });
+  it('r2s-wartime-thorp-70 (a thorp of 29, no force): no line names its keepers', () => {
+    const s = born('r2s-wartime-thorp-70');
+    const af = deriveArmedForces(s);
+    expect([s.tier, af.standing.length + af.contracted.length]).toEqual(['thorp', 0]);
+    expect(printed(s).filter((l) => /\bkeeps? \S+ safe\b/i.test(l))).toEqual([]);
   });
 });

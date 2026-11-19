@@ -1,0 +1,4035 @@
+{
+ "measuredAt": "35878906c0f76c98b2aa9f4dae763a52c1184e76",
+ "base": "origin/master",
+ "births": 1080,
+ "rows": [
+  {
+   "file": "src/data/arrivalProse.js",
+   "thing": "house: fishmonger",
+   "text": "A fishmonger stands behind an empty slab, with nothing to shout a price for.",
+   "hash": "25388993ab24051b",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a fishmonger stands behind an empty slab, with nothing to shout a price for."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named fishmonger); its atom `house: fishmonger` waits for a factsOf getter",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/arrivalProse.js",
+   "thing": "bank",
+   "text": "A money changer sits at his table with little to do, counting the same coins from many mints again.",
+   "hash": "1ec06ea47599f4ac",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a money changer sits at his table with little to do, counting the same coins from many mints again."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/defenceWeights.js",
+   "thing": "quarters",
+   "text": "a house counts by its rung on its own ladder (the catalogue's scale tiers of the same function): the least rung at `least`, the greatest at `greatest`, evenly between, the middle at today's points; a one-rung ladder at 1; a part reads its greatest house (the owner: \"a single alchemist should not have the same influence as an alchemist district\"; the chair's ruling B)",
+   "hash": "dab3f8f460c43ca7",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a house counts by its rung on its own ladder (the catalogue's scale tiers of the same function): the least rung at `least`, the greatest at `greatest`, evenly between, the middle at today's points; a one-rung ladder at 1; a part reads its greatest house (the owner: \"a single alchemist should not have the same influence as an alchemist district\"; the chair's ruling b)"
+   ],
+   "leaf": "populationBand.js :: populationBandOf",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/defenceWeights.js",
+   "thing": "house: alchemist",
+   "text": "a house counts by its rung on its own ladder (the catalogue's scale tiers of the same function): the least rung at `least`, the greatest at `greatest`, evenly between, the middle at today's points; a one-rung ladder at 1; a part reads its greatest house (the owner: \"a single alchemist should not have the same influence as an alchemist district\"; the chair's ruling B)",
+   "hash": "dab3f8f460c43ca7",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a house counts by its rung on its own ladder (the catalogue's scale tiers of the same function): the least rung at `least`, the greatest at `greatest`, evenly between, the middle at today's points; a one-rung ladder at 1; a part reads its greatest house (the owner: \"a single alchemist should not have the same influence as an alchemist district\"; the chair's ruling b)"
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named alchemist); its atom `house: alchemist` waits for a factsOf getter",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/defenceWeights.js",
+   "thing": "armedForce",
+   "text": "citizens under arms: less than soldiers, good against beasts",
+   "hash": "070322a3c79ef856",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "citizens under arms: less than soldiers, good against beasts"
+   ],
+   "leaf": "factsOf.js :: guardPresence (watch ∨ garrison ∨ militia ∨ hired company); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/defenceWeights.js",
+   "thing": "armedForce",
+   "text": "unpaid soldiers desert slowly, never at once",
+   "hash": "ab0178fed5c9b792",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "unpaid soldiers desert slowly, never at once"
+   ],
+   "leaf": "factsOf.js :: guardPresence (watch ∨ garrison ∨ militia ∨ hired company); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/defenceWeights.js",
+   "thing": "house: druid",
+   "text": "today's points, with today's relief by faith, druids, arcana and alchemy; each acts once, on the parts it touches; war drains the stores, the purse and the market (R16); a crisis row's `crime` is what it does to crime, at the size the crime reading gave it (ruling 3), and war has none",
+   "hash": "d65952fd81d027b4",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "today's points, with today's relief by faith, druids, arcana and alchemy; each acts once, on the parts it touches; war drains the stores, the purse and the market (r16); a crisis row's `crime` is what it does to crime, at the size the crime reading gave it (ruling 3), and war has none"
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named druid); its atom `house: druid` waits for a factsOf getter",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/defenceWeights.js",
+   "thing": "market",
+   "text": "today's points, with today's relief by faith, druids, arcana and alchemy; each acts once, on the parts it touches; war drains the stores, the purse and the market (R16); a crisis row's `crime` is what it does to crime, at the size the crime reading gave it (ruling 3), and war has none",
+   "hash": "d65952fd81d027b4",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "today's points, with today's relief by faith, druids, arcana and alchemy; each acts once, on the parts it touches; war drains the stores, the purse and the market (r16); a crisis row's `crime` is what it does to crime, at the size the crime reading gave it (ruling 3), and war has none"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/defenceWeights.js",
+   "thing": "mason",
+   "text": "Masons at work on the defences",
+   "hash": "7113bb9dc677f2e7",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "masons at work on the defences"
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames (a quarry or a mason); its atom `institution: quarry` reads the kind; or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/defenceWeights.js",
+   "thing": "house: reeve",
+   "text": "Elders and reeve",
+   "hash": "0b1ee7ad902d6e15",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "elders and reeve"
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named reeve); its atom `house: reeve` waits for a factsOf getter",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/defenceWeights.js",
+   "thing": "house: alchemist",
+   "text": "Alchemists preserving the grain",
+   "hash": "0107514e56bc0677",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "alchemists preserving the grain"
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named alchemist); its atom `house: alchemist` waits for a factsOf getter",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "thing": "war",
+   "text": "no crisis: wartime",
+   "hash": "a9efc2bafe7d0b0e",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "no crisis: wartime"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "thing": "occupation",
+   "text": "{settlement}'s works were seldom tested by the settled country around it, and now they stand in the occupiers' hands.",
+   "hash": "aa1c240ac4a66e15",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "'s works were seldom tested by the settled country around it, and now they stand in the occupiers' hands."
+   ],
+   "leaf": "crisisKind.js (occupied) · rulerKind.js (occupier)",
+   "printed": 1,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2s-occupied-metropolis-3"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.defense:threat.beasts.sentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "thing": "armedForce",
+   "text": "{settlement} keeps paid soldiers behind its walls, so raiders keep their distance and an army would pay dearly; a long siege would be another matter.",
+   "hash": "0354993074b09fba",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "keeps paid soldiers behind its walls, so raiders keep their distance and an army would pay dearly; a long siege would be another matter."
+   ],
+   "leaf": "factsOf.js :: guardPresence (watch ∨ garrison ∨ militia ∨ hired company); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 77,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-town-13",
+    "r2r-city-2",
+    "r2r-city-3"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.defense:threat.invasion.sentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "thing": "streets",
+   "text": "{settlement} has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army.",
+   "hash": "27ba92837d0df93a",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "has no wall and no soldiers; its watch keeps the peace in the streets and would be no answer to an army."
+   ],
+   "leaf": "the record :: tier (factsOf(record).tier)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "thing": "famine",
+   "text": "no crisis: famine",
+   "hash": "5a38915ec8c8514b",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "no crisis: famine"
+   ],
+   "leaf": "famine.js :: famineOf · crisisKind.js (famine)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "thing": "armedForce",
+   "text": "{settlement} had money laid by before this trouble began, and its defenders are still paid from it.",
+   "hash": "23fd4ed1c58d0fc0",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "had money laid by before this trouble began, and its defenders are still paid from it."
+   ],
+   "leaf": "factsOf.js :: guardPresence (watch ∨ garrison ∨ militia ∨ hired company); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 26,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-city-10",
+    "r2r-city-40",
+    "r2r-metropolis-31"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.defense:threat.economic.sentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "thing": "armedForce",
+   "text": "The town went into this trouble with money in hand, and its defenders are still paid on time.",
+   "hash": "6a190dc43479000b",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "the town went into this trouble with money in hand, and its defenders are still paid on time."
+   ],
+   "leaf": "factsOf.js :: guardPresence (watch ∨ garrison ∨ militia ∨ hired company); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 8,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-town-35",
+    "r2s-politically_fractured-town-1",
+    "r2s-recently_betrayed-town-2"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.defense:threat.economic.sentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "thing": "armedForce",
+   "text": "{settlement}'s defenders are better off for the trades behind them, and they know it.",
+   "hash": "35f752f1ec916e32",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "'s defenders are better off for the trades behind them, and they know it."
+   ],
+   "leaf": "factsOf.js :: guardPresence (watch ∨ garrison ∨ militia ∨ hired company); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 32,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-town-35",
+    "r2r-city-3",
+    "r2r-city-5"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.defense:threat.invasion.sentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "thing": "famine",
+   "text": "food: > famine",
+   "hash": "6217a0ad86bfc3a8",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "food: > famine"
+   ],
+   "leaf": "famine.js :: famineOf · crisisKind.js (famine)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "thing": "granary",
+   "text": "no institution: granary",
+   "hash": "7a07521d8484e089",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "no institution: granary"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "thing": "armedForce",
+   "text": "Alchemy is practised at {settlement}, and some of what it makes goes to the town's defenders.",
+   "hash": "be15321593e855e8",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "alchemy is practised at",
+    ", and some of what it makes goes to the town's defenders."
+   ],
+   "leaf": "factsOf.js :: guardPresence (watch ∨ garrison ∨ militia ∨ hired company); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 1,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-town-10"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.defense:forces.arcane.sentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "thing": "armedForce",
+   "text": "Alchemical preparations made at {settlement} are among what its defenders can call on.",
+   "hash": "a2998e239900384a",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "alchemical preparations made at",
+    "are among what its defenders can call on."
+   ],
+   "leaf": "factsOf.js :: guardPresence (watch ∨ garrison ∨ militia ∨ hired company); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 28,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-city-5",
+    "r2r-city-19",
+    "r2r-city-41"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.defense:forces.arcane.sentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "thing": "famine",
+   "text": "With nobody at {settlement} paid to keep order, the hunger is policed by neighbours watching each other's doors.",
+   "hash": "4d85f97bd7a0b104",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "with nobody at",
+    "paid to keep order, the hunger is policed by neighbours watching each other's doors."
+   ],
+   "leaf": "famine.js :: famineOf · crisisKind.js (famine)",
+   "printed": 7,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-thorp-54",
+    "r2r-village-24",
+    "r2r-village-58"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.defense:status.override.sentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "thing": "famine",
+   "text": "no crisis: famine",
+   "hash": "5a38915ec8c8514b",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "no crisis: famine"
+   ],
+   "leaf": "famine.js :: famineOf · crisisKind.js (famine)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "thing": "famineToCome",
+   "text": "Nobody at {settlement} worries much about one poor harvest: the stores would cover it.",
+   "hash": "a2e3404ca0f4d924",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "nobody at",
+    "worries much about one poor harvest: the stores would cover it."
+   ],
+   "leaf": "crisisKind.js :: crisisFactsOf (no famine in force)",
+   "printed": 31,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-metropolis-1",
+    "r2r-metropolis-5",
+    "r2r-metropolis-6"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.economy:economics.foodSecurityRung.sentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/dossierStateProse/general.generated.js",
+   "thing": "occupation",
+   "text": "{settlement} is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace.",
+   "hash": "c6c53056134c456b",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "is under occupation; the streets are quiet because soldiers hold them, not because the town is at peace."
+   ],
+   "leaf": "crisisKind.js (occupied) · rulerKind.js (occupier)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/general.generated.js",
+   "thing": "occupation",
+   "text": "{settlement} is quiet under occupation: no unrest, and nobody doing anything they were not told to.",
+   "hash": "f7aba2e3cae3483a",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "is quiet under occupation: no unrest, and nobody doing anything they were not told to."
+   ],
+   "leaf": "crisisKind.js (occupied) · rulerKind.js (occupier)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/power.generated.js",
+   "thing": "war",
+   "text": "no crisis: wartime",
+   "hash": "a9efc2bafe7d0b0e",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "no crisis: wartime"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/power.generated.js",
+   "thing": "revolt",
+   "text": "no crisis: insurgency",
+   "hash": "9f64cc5bf3b45034",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "no crisis: insurgency"
+   ],
+   "leaf": "crisisKind.js (insurgency, slave_revolt)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/stressors.generated.js",
+   "thing": "occupation",
+   "text": "{settlement}'s taxes go to the occupier before the town sees them, and its officials take their orders from outside.",
+   "hash": "e8297d14fd6c1813",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "'s taxes go to the occupier before the town sees them, and its officials take their orders from outside."
+   ],
+   "leaf": "crisisKind.js (occupied) · rulerKind.js (occupier)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/stressors.generated.js",
+   "thing": "occupation",
+   "text": "{settlement} runs as before, but the occupier's officers sit in on its business and make no secret of it.",
+   "hash": "ba9926bada6b9a34",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "runs as before, but the occupier's officers sit in on its business and make no secret of it."
+   ],
+   "leaf": "crisisKind.js (occupied) · rulerKind.js (occupier)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/stressors.generated.js",
+   "thing": "occupation",
+   "text": "The occupiers are quartered inside the town, and the town's business is conducted around them.",
+   "hash": "71cfd98ad4c329cd",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "the occupiers are quartered inside the town, and the town's business is conducted around them."
+   ],
+   "leaf": "crisisKind.js (occupied) · rulerKind.js (occupier)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/stressors.generated.js",
+   "thing": "war",
+   "text": "{settlement} is at war, and the war has reached the town as absence: the men, the carts, and the ordinary expectation of next year.",
+   "hash": "5bb944e8ab92d013",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "is at war, and the war has reached the town as absence: the men, the carts, and the ordinary expectation of next year."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/dossierStateProse/warFaith.generated.js",
+   "thing": "temple",
+   "text": "The church in {settlement} hunts heresy openly: anyone suspected of working magic against the faith is denounced from the pulpit and handed to the authorities.",
+   "hash": "248f68a589794067",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "the church in",
+    "hunts heresy openly: anyone suspected of working magic against the faith is denounced from the pulpit and handed to the authorities."
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch: a wayside shrine is not a church)",
+   "printed": 2,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-metropolis-3",
+    "r2r-metropolis-28"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.warFaith:faith.templeHeresy.sentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/foundingSeeds.js",
+   "thing": "mill",
+   "text": "Grown up around an important river ford, this town has turned its wheel through an economic rift, a great migration, a religious war, an occupation, an arcane catastrophe, and a siege a generation gone. Upheaval after upheaval of the first rank, and the mills still turn. A chronicle of endurance, and of what endurance costs.",
+   "hash": "30df067f8f570ad2",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "grown up around an important river ford, this town has turned its wheel through an economic rift, a great migration, a religious war, an occupation, an arcane catastrophe, and a siege a generation gone. upheaval after upheaval of the first rank, and the mills still turn. a chronicle of endurance, and of what endurance costs."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/historyData.js",
+   "thing": "quarters",
+   "text": "the merchants' quarter",
+   "hash": "0b20b35cf5d9f7e9",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "the merchants' quarter"
+   ],
+   "leaf": "populationBand.js :: populationBandOf",
+   "printed": 51,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-77",
+    "presume-town-104",
+    "presume-town-156"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".history.historicalEvents[].description",
+    ".history.currentTensions[].description"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/historyData.js",
+   "thing": "quarters",
+   "text": "the residential district",
+   "hash": "d21c40d805c216b2",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "the residential district"
+   ],
+   "leaf": "populationBand.js :: populationBandOf",
+   "printed": 32,
+   "againstN": 1,
+   "printedSeeds": [
+    "presume-city-0",
+    "presume-city-10",
+    "presume-city-15"
+   ],
+   "againstSeeds": [
+    "r2s-succession_void-town-3"
+   ],
+   "paths": [
+    ".history.historicalEvents[].description"
+   ],
+   "samples": [
+    {
+     "seed": "r2s-succession_void-town-3",
+     "path": ".history.historicalEvents[].description",
+     "sentence": "Magic broke loose over the residential district and the people who lived there, and the traces it left have lingered ever since"
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/historyData.js",
+   "thing": "temple",
+   "text": "the temple district",
+   "hash": "3a3da5b46e268323",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "the temple district"
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch: a wayside shrine is not a church)",
+   "printed": 41,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-43",
+    "presume-town-57",
+    "presume-town-83"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".history.historicalEvents[].description"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/historyData.js",
+   "thing": "quarters",
+   "text": "the temple district",
+   "hash": "3a3da5b46e268323",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "the temple district"
+   ],
+   "leaf": "populationBand.js :: populationBandOf",
+   "printed": 41,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-43",
+    "presume-town-57",
+    "presume-town-83"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".history.historicalEvents[].description"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/historyData.js",
+   "thing": "quarters",
+   "text": "A fire out of {location} spread through {building_type} across entire districts before anyone could bring it under control",
+   "hash": "7130762978fa8f82",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a fire out of",
+    "spread through",
+    "across entire districts before anyone could bring it under control"
+   ],
+   "leaf": "populationBand.js :: populationBandOf",
+   "printed": 32,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-36",
+    "presume-town-75",
+    "presume-town-79"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".history.historicalEvents[].description",
+    ".history.currentTensions[].description"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/historyData.js",
+   "thing": "temple",
+   "text": "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.",
+   "hash": "cc27d2b3e3fca458",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a period of ambitious stone construction transformed the settlement's character. walls, civic buildings, or a cathedral raised from local quarry stone. the quarry workers became a political force."
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch: a wayside shrine is not a church)",
+   "printed": 25,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-30",
+    "presume-town-35",
+    "presume-town-73"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".history.historicalEvents[].description"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/historyData.js",
+   "thing": "temple",
+   "text": "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force.",
+   "hash": "dc29bf0a6a243a34",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a period of ambitious stone construction transformed the settlement's character. civic buildings or a cathedral raised from local quarry stone. the quarry workers became a political force."
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch: a wayside shrine is not a church)",
+   "printed": 5,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-55",
+    "presume-town-56",
+    "presume-town-58"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".history.historicalEvents[].description"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/historyData.js",
+   "thing": "quarters",
+   "text": "A catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a district of the settlement and the lives of its inhabitants.",
+   "hash": "4f6fa1145b7e6e27",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a catastrophic or transformative event tied to the local ley line concentration occurred, permanently altering a district of the settlement and the lives of its inhabitants."
+   ],
+   "leaf": "populationBand.js :: populationBandOf",
+   "printed": 10,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-32",
+    "presume-town-87",
+    "presume-town-127"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".history.historicalEvents[].description"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/historyData.js",
+   "thing": "quarters",
+   "text": "Affected district retains residual magical effects",
+   "hash": "83dece505758b019",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "affected district retains residual magical effects"
+   ],
+   "leaf": "populationBand.js :: populationBandOf",
+   "printed": 10,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-32",
+    "presume-town-87",
+    "presume-town-127"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".history.historicalEvents[].lastingEffects[]",
+    ".history.legacyAnnotations[].annotation"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/historyData.js",
+   "thing": "occupation",
+   "text": "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled",
+   "hash": "2cd838df6f39a521",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "when the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled"
+   ],
+   "leaf": "crisisKind.js (occupied) · rulerKind.js (occupier)",
+   "printed": 36,
+   "againstN": 36,
+   "printedSeeds": [
+    "presume-town-3",
+    "presume-town-6",
+    "presume-town-30"
+   ],
+   "againstSeeds": [
+    "presume-town-3",
+    "presume-town-6",
+    "presume-town-30"
+   ],
+   "paths": [
+    ".history.historicalEvents[].description"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-3",
+     "path": ".history.historicalEvents[].description",
+     "sentence": "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled"
+    },
+    {
+     "seed": "presume-town-6",
+     "path": ".history.historicalEvents[].description",
+     "sentence": "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled"
+    },
+    {
+     "seed": "presume-town-30",
+     "path": ".history.historicalEvents[].description",
+     "sentence": "When the occupiers left, they left behind a town of former collaborators and former resisters, none of it ever settled"
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: fishing",
+   "text": "The nets, the traps, the drying racks, worked by the fishing households whenever fish can be had.",
+   "hash": "ad4d730015aef93a",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "the nets, the traps, the drying racks, worked by the fishing households whenever fish can be had."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named fishing); its atom `house: fishing` waits for a factsOf getter",
+   "printed": 14,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-thorp-30",
+    "r2r-thorp-36",
+    "r2r-thorp-41"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: stone quarry",
+   "text": "A stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges. Slow going, and the only proper building material the place has had.",
+   "hash": "18425e5e902f9f93",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges. slow going, and the only proper building material the place has had."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named stone quarry); its atom `house: stone quarry` waits for a factsOf getter",
+   "printed": 3,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-hamlet-52",
+    "r2s-indebted-hamlet-2",
+    "r2s-monster_pressure-hamlet-2"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "resource: stone_quarry",
+   "text": "A stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges. Slow going, and the only proper building material the place has had.",
+   "hash": "18425e5e902f9f93",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges. slow going, and the only proper building material the place has had."
+   ],
+   "leaf": "the record :: config.nearbyResources (stone_quarry), less config.nearbyResourcesDepleted; its atom waits",
+   "printed": 3,
+   "againstN": 1,
+   "printedSeeds": [
+    "r2r-hamlet-52",
+    "r2s-indebted-hamlet-2",
+    "r2s-monster_pressure-hamlet-2"
+   ],
+   "againstSeeds": [
+    "r2s-indebted-hamlet-2"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "r2s-indebted-hamlet-2",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry, its blocks cut and dressed by a gang of quarrymen with picks and wedges."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: stone quarry",
+   "text": "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact.",
+   "hash": "159741114b9d0a37",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a building-stone quarry laid out in an ordered working. a village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named stone quarry); its atom `house: stone quarry` waits for a factsOf getter",
+   "printed": 3,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-village-20",
+    "r2r-village-45",
+    "r2s-insurgency-village-2"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "resource: stone_quarry",
+   "text": "A building-stone quarry laid out in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact.",
+   "hash": "159741114b9d0a37",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a building-stone quarry laid out in an ordered working. a village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact."
+   ],
+   "leaf": "the record :: config.nearbyResources (stone_quarry), less config.nearbyResourcesDepleted; its atom waits",
+   "printed": 3,
+   "againstN": 2,
+   "printedSeeds": [
+    "r2r-village-20",
+    "r2r-village-45",
+    "r2s-insurgency-village-2"
+   ],
+   "againstSeeds": [
+    "r2r-village-45",
+    "r2s-insurgency-village-2"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "r2r-village-45",
+     "path": ".institutions[].desc",
+     "sentence": "A building-stone quarry laid out in an ordered working."
+    },
+    {
+     "seed": "r2s-insurgency-village-2",
+     "path": ".institutions[].desc",
+     "sentence": "A building-stone quarry laid out in an ordered working."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: alehouse",
+   "text": "Turns malted grain into ale by the barrel. Only bread takes more of the grain. It supplies both alehouses and homes.",
+   "hash": "aa4c1c8765d2f77f",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "turns malted grain into ale by the barrel. only bread takes more of the grain. it supplies both alehouses and homes."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named alehouse); its atom `house: alehouse` waits for a factsOf getter",
+   "printed": 1,
+   "againstN": 1,
+   "printedSeeds": [
+    "presume-village-10"
+   ],
+   "againstSeeds": [
+    "presume-village-10"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-village-10",
+     "path": ".institutions[].desc",
+     "sentence": "It supplies both alehouses and homes."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: mine",
+   "text": "A mine of shafts and adits, with winding gear and ore carts at the head, worked whenever ore can be had.",
+   "hash": "d5ff96284cf2c8ec",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a mine of shafts and adits, with winding gear and ore carts at the head, worked whenever ore can be had."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named mine); its atom `house: mine` waits for a factsOf getter",
+   "printed": 50,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-42",
+    "presume-town-46",
+    "presume-town-51"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: stone quarry",
+   "text": "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had.",
+   "hash": "cb3660a159774dfe",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named stone quarry); its atom `house: stone quarry` waits for a factsOf getter",
+   "printed": 65,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-15",
+    "presume-town-34",
+    "presume-town-53"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "resource: stone_quarry",
+   "text": "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had.",
+   "hash": "cb3660a159774dfe",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had."
+   ],
+   "leaf": "the record :: config.nearbyResources (stone_quarry), less config.nearbyResourcesDepleted; its atom waits",
+   "printed": 65,
+   "againstN": 42,
+   "printedSeeds": [
+    "presume-town-15",
+    "presume-town-34",
+    "presume-town-53"
+   ],
+   "againstSeeds": [
+    "presume-town-34",
+    "presume-town-53",
+    "presume-town-57"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-34",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had."
+    },
+    {
+     "seed": "presume-town-53",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had."
+    },
+    {
+     "seed": "presume-town-57",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry, with yards beside it for dressing the stone, worked whenever good stone can be had."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: druid",
+   "text": "Senior druids who govern how their circle deals with the town. They may keep a grove hidden beneath the streets, hold the line between the town's spread and the wild, or advise its rulers on the land.",
+   "hash": "d7a110e6054be4fc",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "senior druids who govern how their circle deals with the town. they may keep a grove hidden beneath the streets, hold the line between the town's spread and the wild, or advise its rulers on the land."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named druid); its atom `house: druid` waits for a factsOf getter",
+   "printed": 5,
+   "againstN": 5,
+   "printedSeeds": [
+    "presume-town-4",
+    "presume-town-58",
+    "presume-town-92"
+   ],
+   "againstSeeds": [
+    "presume-town-4",
+    "presume-town-58",
+    "presume-town-92"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-4",
+     "path": ".institutions[].desc",
+     "sentence": "Senior druids who govern how their circle deals with the town."
+    },
+    {
+     "seed": "presume-town-58",
+     "path": ".institutions[].desc",
+     "sentence": "Senior druids who govern how their circle deals with the town."
+    },
+    {
+     "seed": "presume-town-92",
+     "path": ".institutions[].desc",
+     "sentence": "Senior druids who govern how their circle deals with the town."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "streets",
+   "text": "Senior druids who govern how their circle deals with the town. They may keep a grove hidden beneath the streets, hold the line between the town's spread and the wild, or advise its rulers on the land.",
+   "hash": "d7a110e6054be4fc",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "senior druids who govern how their circle deals with the town. they may keep a grove hidden beneath the streets, hold the line between the town's spread and the wild, or advise its rulers on the land."
+   ],
+   "leaf": "the record :: tier (factsOf(record).tier)",
+   "printed": 5,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-4",
+    "presume-town-58",
+    "presume-town-92"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: druid",
+   "text": "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.",
+   "hash": "48bd27e576abfdeb",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": false,
+   "frags": [
+    "a council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named druid); its atom `house: druid` waits for a factsOf getter",
+   "printed": 6,
+   "againstN": 6,
+   "printedSeeds": [
+    "presume-town-119",
+    "presume-town-120",
+    "presume-town-127"
+   ],
+   "againstSeeds": [
+    "presume-town-119",
+    "presume-town-120",
+    "presume-town-127"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-119",
+     "path": ".institutions[].desc",
+     "sentence": "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in pow"
+    },
+    {
+     "seed": "presume-town-120",
+     "path": ".institutions[].desc",
+     "sentence": "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in pow"
+    },
+    {
+     "seed": "presume-town-127",
+     "path": ".institutions[].desc",
+     "sentence": "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in pow"
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "streets",
+   "text": "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.",
+   "hash": "48bd27e576abfdeb",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": false,
+   "frags": [
+    "a council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters."
+   ],
+   "leaf": "the record :: tier (factsOf(record).tier)",
+   "printed": 6,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-119",
+    "presume-town-120",
+    "presume-town-127"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: alehouse",
+   "text": "Converts barley into malt for brewing. Small operation supplying local alehouses. Requires grain surplus.",
+   "hash": "a9cf19bb34fbbd00",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "converts barley into malt for brewing. small operation supplying local alehouses. requires grain surplus."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named alehouse); its atom `house: alehouse` waits for a factsOf getter",
+   "printed": 1,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-hamlet-27"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: alehouse",
+   "text": "Converts malted grain to ale in quantity. The largest consumer of grain after bread. Supplies alehouses and households.",
+   "hash": "736ab5d9380421e2",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "converts malted grain to ale in quantity. the largest consumer of grain after bread. supplies alehouses and households."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named alehouse); its atom `house: alehouse` waits for a factsOf getter",
+   "printed": 7,
+   "againstN": 7,
+   "printedSeeds": [
+    "presume-village-9",
+    "presume-village-13",
+    "presume-village-26"
+   ],
+   "againstSeeds": [
+    "presume-village-9",
+    "presume-village-13",
+    "presume-village-26"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-village-9",
+     "path": ".institutions[].desc",
+     "sentence": "Supplies alehouses and households."
+    },
+    {
+     "seed": "presume-village-13",
+     "path": ".institutions[].desc",
+     "sentence": "Supplies alehouses and households."
+    },
+    {
+     "seed": "presume-village-26",
+     "path": ".institutions[].desc",
+     "sentence": "Supplies alehouses and households."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: baker",
+   "text": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns through a forest a generation.",
+   "hash": "d38b7cb1d9f5c028",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. metalworking here burns through a forest a generation."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named baker); its atom `house: baker` waits for a factsOf getter",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: smelter",
+   "text": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns through a forest a generation.",
+   "hash": "d38b7cb1d9f5c028",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. metalworking here burns through a forest a generation."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named smelter); its atom `house: smelter` waits for a factsOf getter",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "smith",
+   "text": "Kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. Metalworking here burns through a forest a generation.",
+   "hash": "d38b7cb1d9f5c028",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "kiln crews in the surrounding woodland supply charcoal to the smelters, smiths, and bakers. metalworking here burns through a forest a generation."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames (a smith or metalworker); its atom `institution: smith` reads the kind; or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "smith",
+   "text": "Operates kilns in nearby woodland. Supplies fuel for smithing and baking. Essential intermediate step between forest and forge.",
+   "hash": "959ac324dde268f0",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "operates kilns in nearby woodland. supplies fuel for smithing and baking. essential intermediate step between forest and forge."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames (a smith or metalworker); its atom `institution: smith` reads the kind; or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "famine",
+   "text": "Communal grain storage. Buffers harvests, prevents famine.",
+   "hash": "b77abf521091f2db",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "communal grain storage. buffers harvests, prevents famine."
+   ],
+   "leaf": "famine.js :: famineOf · crisisKind.js (famine)",
+   "printed": 80,
+   "againstN": 79,
+   "printedSeeds": [
+    "presume-town-0",
+    "presume-town-1",
+    "presume-town-2"
+   ],
+   "againstSeeds": [
+    "presume-town-0",
+    "presume-town-1",
+    "presume-town-2"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-0",
+     "path": ".institutions[].desc",
+     "sentence": "Buffers harvests, prevents famine."
+    },
+    {
+     "seed": "presume-town-1",
+     "path": ".institutions[].desc",
+     "sentence": "Buffers harvests, prevents famine."
+    },
+    {
+     "seed": "presume-town-2",
+     "path": ".institutions[].desc",
+     "sentence": "Buffers harvests, prevents famine."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: hired blade",
+   "text": "Organised bands of hired blades, a few score to a few hundred strong.",
+   "hash": "058f2527f0e3fc48",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "organised bands of hired blades, a few score to a few hundred strong."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named hired blade); its atom `house: hired blade` waits for a factsOf getter",
+   "printed": 38,
+   "againstN": 23,
+   "printedSeeds": [
+    "presume-city-15",
+    "presume-city-17",
+    "presume-city-31"
+   ],
+   "againstSeeds": [
+    "presume-city-17",
+    "presume-city-31",
+    "presume-city-47"
+   ],
+   "paths": [
+    ".institutions[].desc",
+    ".defenseProfile.institutions.mercenary[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-city-17",
+     "path": ".institutions[].desc",
+     "sentence": "Organised bands of hired blades, a few score to a few hundred strong."
+    },
+    {
+     "seed": "presume-city-17",
+     "path": ".defenseProfile.institutions.mercenary[].desc",
+     "sentence": "Organised bands of hired blades, a few score to a few hundred strong."
+    },
+    {
+     "seed": "presume-city-31",
+     "path": ".institutions[].desc",
+     "sentence": "Organised bands of hired blades, a few score to a few hundred strong."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: fishing",
+   "text": "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. Specialist knowledge of river construction: shallow draft, flexible hull, replaceable parts.",
+   "hash": "20db476059d1b418",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats. specialist knowledge of river construction: shallow draft, flexible hull, replaceable parts."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named fishing); its atom `house: fishing` waits for a factsOf getter",
+   "printed": 52,
+   "againstN": 52,
+   "printedSeeds": [
+    "presume-village-2",
+    "presume-village-41",
+    "presume-village-55"
+   ],
+   "againstSeeds": [
+    "presume-village-2",
+    "presume-village-41",
+    "presume-village-55"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-village-2",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats."
+    },
+    {
+     "seed": "presume-village-41",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats."
+    },
+    {
+     "seed": "presume-village-55",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: fishing",
+   "text": "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats. Specialist knowledge: shallow draft, flexible hull, replaceable parts.",
+   "hash": "e93309dab034221e",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats. specialist knowledge: shallow draft, flexible hull, replaceable parts."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named fishing); its atom `house: fishing` waits for a factsOf getter",
+   "printed": 12,
+   "againstN": 12,
+   "printedSeeds": [
+    "presume-village-6",
+    "presume-village-38",
+    "presume-town-37"
+   ],
+   "againstSeeds": [
+    "presume-village-6",
+    "presume-village-38",
+    "presume-town-37"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-village-6",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats."
+    },
+    {
+     "seed": "presume-village-38",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats."
+    },
+    {
+     "seed": "presume-town-37",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: fishing",
+   "text": "Builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft. The work turns on a shallow draft, a hull that flexes, and parts made to be replaced.",
+   "hash": "83d03ab88fd81eb6",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft. the work turns on a shallow draft, a hull that flexes, and parts made to be replaced."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named fishing); its atom `house: fishing` waits for a factsOf getter",
+   "printed": 7,
+   "againstN": 7,
+   "printedSeeds": [
+    "presume-village-31",
+    "presume-city-22",
+    "r2r-village-53"
+   ],
+   "againstSeeds": [
+    "presume-village-31",
+    "presume-city-22",
+    "r2r-village-53"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-village-31",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft."
+    },
+    {
+     "seed": "presume-city-22",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft."
+    },
+    {
+     "seed": "r2r-village-53",
+     "path": ".institutions[].desc",
+     "sentence": "Builds and mends flat-bottomed boats for shallow water: punts, ferries, fishing craft."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "house: fishing",
+   "text": "Shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.",
+   "hash": "58a543b49791411a",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft. it takes a specialist's hand. shallow in the draft, supple in the hull, and built so parts can be swapped out."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named fishing); its atom `house: fishing` waits for a factsOf getter",
+   "printed": 7,
+   "againstN": 7,
+   "printedSeeds": [
+    "presume-village-25",
+    "presume-town-46",
+    "r2r-village-36"
+   ],
+   "againstSeeds": [
+    "presume-village-25",
+    "presume-town-46",
+    "r2r-village-36"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-village-25",
+     "path": ".institutions[].desc",
+     "sentence": "Shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft."
+    },
+    {
+     "seed": "presume-town-46",
+     "path": ".institutions[].desc",
+     "sentence": "Shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft."
+    },
+    {
+     "seed": "r2r-village-36",
+     "path": ".institutions[].desc",
+     "sentence": "Shallow-water boats, all flat-bottomed, made and repaired here: punts, ferries, and fishing craft."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "clergy",
+   "text": "A corner of the holding left out of the plough, banked with turf and marked with fieldstones. A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them. The oldest markers have lost their names to the weather and are kept clear anyway.",
+   "hash": "3479ae839c1d669b",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a corner of the holding left out of the plough, banked with turf and marked with fieldstones. a priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them. the oldest markers have lost their names to the weather and are kept clear anyway."
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch; seniorCleric); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 32,
+   "againstN": 32,
+   "printedSeeds": [
+    "r2r-thorp-0",
+    "r2r-thorp-3",
+    "r2r-thorp-9"
+   ],
+   "againstSeeds": [
+    "r2r-thorp-0",
+    "r2r-thorp-3",
+    "r2r-thorp-9"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "r2r-thorp-0",
+     "path": ".institutions[].desc",
+     "sentence": "A priest says the words when one can be brought in time;"
+    },
+    {
+     "seed": "r2r-thorp-3",
+     "path": ".institutions[].desc",
+     "sentence": "A priest says the words when one can be brought in time;"
+    },
+    {
+     "seed": "r2r-thorp-9",
+     "path": ".institutions[].desc",
+     "sentence": "A priest says the words when one can be brought in time;"
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "clergy",
+   "text": "A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.",
+   "hash": "9a5d98d5f035bdb6",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": false,
+   "frags": [
+    "a turf-banked corner of the holding, kept out of the plough and marked with fieldstones. a priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best."
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch; seniorCleric); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 24,
+   "againstN": 24,
+   "printedSeeds": [
+    "r2r-thorp-2",
+    "r2r-thorp-6",
+    "r2r-thorp-27"
+   ],
+   "againstSeeds": [
+    "r2r-thorp-2",
+    "r2r-thorp-6",
+    "r2r-thorp-27"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "r2r-thorp-2",
+     "path": ".institutions[].desc",
+     "sentence": "A priest speaks when one can be fetched in time;"
+    },
+    {
+     "seed": "r2r-thorp-6",
+     "path": ".institutions[].desc",
+     "sentence": "A priest speaks when one can be fetched in time;"
+    },
+    {
+     "seed": "r2r-thorp-27",
+     "path": ".institutions[].desc",
+     "sentence": "A priest speaks when one can be fetched in time;"
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionDescVariants.js",
+   "thing": "clergy",
+   "text": "Fieldstones on a low bank at the edge of the ploughland. The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.",
+   "hash": "d7dfdecbc2dbc7de",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": false,
+   "frags": [
+    "fieldstones on a low bank at the edge of the ploughland. the rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless."
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch; seniorCleric); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 42,
+   "againstN": 42,
+   "printedSeeds": [
+    "r2r-thorp-1",
+    "r2r-thorp-5",
+    "r2r-thorp-8"
+   ],
+   "againstSeeds": [
+    "r2r-thorp-1",
+    "r2r-thorp-5",
+    "r2r-thorp-8"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "r2r-thorp-1",
+     "path": ".institutions[].desc",
+     "sentence": "The rites wait for a priest when one can be fetched in time, and the neighbours say them when not;"
+    },
+    {
+     "seed": "r2r-thorp-5",
+     "path": ".institutions[].desc",
+     "sentence": "The rites wait for a priest when one can be fetched in time, and the neighbours say them when not;"
+    },
+    {
+     "seed": "r2r-thorp-8",
+     "path": ".institutions[].desc",
+     "sentence": "The rites wait for a priest when one can be fetched in time, and the neighbours say them when not;"
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionServices.js",
+   "thing": "clergy",
+   "text": "Funeral rites, said by the parish priest, who comes or is sent for.",
+   "hash": "c0f3deced43ff3eb",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "funeral rites, said by the parish priest, who comes or is sent for."
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch; seniorCleric); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/data/institutionalCatalog.js",
+   "thing": "house: mine",
+   "text": "A mine of shafts and adits, with its winding gear and ore carts, worked whenever ore can be had.",
+   "hash": "7c54c022f3c28fbd",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a mine of shafts and adits, with its winding gear and ore carts, worked whenever ore can be had."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named mine); its atom `house: mine` waits for a factsOf getter",
+   "printed": 45,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-16",
+    "presume-town-55",
+    "presume-town-77"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/institutionalCatalog.js",
+   "thing": "house: stone quarry",
+   "text": "A stone quarry and its dressing yards, worked whenever good stone can be had.",
+   "hash": "5e6eade704056c99",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a stone quarry and its dressing yards, worked whenever good stone can be had."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named stone quarry); its atom `house: stone quarry` waits for a factsOf getter",
+   "printed": 92,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-6",
+    "presume-town-14",
+    "presume-town-35"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/institutionalCatalog.js",
+   "thing": "resource: stone_quarry",
+   "text": "A stone quarry and its dressing yards, worked whenever good stone can be had.",
+   "hash": "5e6eade704056c99",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a stone quarry and its dressing yards, worked whenever good stone can be had."
+   ],
+   "leaf": "the record :: config.nearbyResources (stone_quarry), less config.nearbyResourcesDepleted; its atom waits",
+   "printed": 92,
+   "againstN": 69,
+   "printedSeeds": [
+    "presume-town-6",
+    "presume-town-14",
+    "presume-town-35"
+   ],
+   "againstSeeds": [
+    "presume-town-6",
+    "presume-town-14",
+    "presume-town-35"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-6",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry and its dressing yards, worked whenever good stone can be had."
+    },
+    {
+     "seed": "presume-town-14",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry and its dressing yards, worked whenever good stone can be had."
+    },
+    {
+     "seed": "presume-town-35",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry and its dressing yards, worked whenever good stone can be had."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionalCatalog.js",
+   "thing": "house: stone quarry",
+   "text": "A stone quarry, opened by quarrymen with picks and wedges. Slow work, and the only source of proper building stone the place has had.",
+   "hash": "3e644ef0dd5c3418",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a stone quarry, opened by quarrymen with picks and wedges. slow work, and the only source of proper building stone the place has had."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named stone quarry); its atom `house: stone quarry` waits for a factsOf getter",
+   "printed": 4,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-hamlet-16",
+    "r2r-hamlet-23",
+    "r2r-hamlet-48"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/institutionalCatalog.js",
+   "thing": "resource: stone_quarry",
+   "text": "A stone quarry, opened by quarrymen with picks and wedges. Slow work, and the only source of proper building stone the place has had.",
+   "hash": "3e644ef0dd5c3418",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a stone quarry, opened by quarrymen with picks and wedges. slow work, and the only source of proper building stone the place has had."
+   ],
+   "leaf": "the record :: config.nearbyResources (stone_quarry), less config.nearbyResourcesDepleted; its atom waits",
+   "printed": 4,
+   "againstN": 2,
+   "printedSeeds": [
+    "r2r-hamlet-16",
+    "r2r-hamlet-23",
+    "r2r-hamlet-48"
+   ],
+   "againstSeeds": [
+    "r2r-hamlet-23",
+    "r2r-hamlet-48"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "r2r-hamlet-23",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry, opened by quarrymen with picks and wedges."
+    },
+    {
+     "seed": "r2r-hamlet-48",
+     "path": ".institutions[].desc",
+     "sentence": "A stone quarry, opened by quarrymen with picks and wedges."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionalCatalog.js",
+   "thing": "house: druid",
+   "text": "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to the ruling authority.",
+   "hash": "58ae82300e837074",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": false,
+   "frags": [
+    "a council of senior druids who govern their circle's relationship with the settlement around it. they may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to the ruling authority."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named druid); its atom `house: druid` waits for a factsOf getter",
+   "printed": 102,
+   "againstN": 102,
+   "printedSeeds": [
+    "presume-town-35",
+    "presume-town-60",
+    "presume-town-74"
+   ],
+   "againstSeeds": [
+    "presume-town-35",
+    "presume-town-60",
+    "presume-town-74"
+   ],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-35",
+     "path": ".institutions[].desc",
+     "sentence": "A council of senior druids who govern their circle's relationship with the settlement around it."
+    },
+    {
+     "seed": "presume-town-60",
+     "path": ".institutions[].desc",
+     "sentence": "A council of senior druids who govern their circle's relationship with the settlement around it."
+    },
+    {
+     "seed": "presume-town-74",
+     "path": ".institutions[].desc",
+     "sentence": "A council of senior druids who govern their circle's relationship with the settlement around it."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/data/institutionalCatalog.js",
+   "thing": "streets",
+   "text": "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to the ruling authority.",
+   "hash": "58ae82300e837074",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": false,
+   "frags": [
+    "a council of senior druids who govern their circle's relationship with the settlement around it. they may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to the ruling authority."
+   ],
+   "leaf": "the record :: tier (factsOf(record).tier)",
+   "printed": 102,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-35",
+    "presume-town-60",
+    "presume-town-74"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".institutions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/data/stressInstitutionEffects.js",
+   "thing": "siege",
+   "text": "Has been skimming from the {food} reserves to pay a personal debt that predates the siege",
+   "hash": "0e6ab1db36a57be8",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "has been skimming from the",
+    "reserves to pay a personal debt that predates the siege"
+   ],
+   "leaf": "crisisKind.js :: crisisFactsOf (under_siege)",
+   "printed": 17,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-49",
+    "presume-town-99",
+    "presume-city-23"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".npcs[].secret.what"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/computeActiveChains.js",
+   "thing": "mercenary",
+   "text": "free company hall",
+   "hash": "2e032338502e118a",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "free company hall"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 26,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-23",
+    "presume-town-31",
+    "presume-town-53"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".npcs[].goal.long",
+    ".npcs[].goal.short"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/economy/incomeLineSiblings.js",
+   "thing": "house: alchemist",
+   "text": "Herbal remedies, minor alchemical preparations, and potion sales. The local alchemist supplements conventional trade.",
+   "hash": "876dfe3c4ebb2b12",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "herbal remedies, minor alchemical preparations, and potion sales. the local alchemist supplements conventional trade."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named alchemist); its atom `house: alchemist` waits for a factsOf getter",
+   "printed": 69,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-14",
+    "presume-town-47",
+    "presume-town-50"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicState.incomeSources[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/economy/incomeLineSiblings.js",
+   "thing": "siege",
+   "text": "Alchemical preparations and curative potions, sold only to the people inside while the siege keeps outside customers away.",
+   "hash": "61af27c3756972d6",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "alchemical preparations and curative potions, sold only to the people inside while the siege keeps outside customers away."
+   ],
+   "leaf": "crisisKind.js :: crisisFactsOf (under_siege)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/generators/economy/incomeLineSiblings.js",
+   "thing": "smith",
+   "text": "Local ore feeds the smithy directly. Metalwork income is not trade-route dependent.",
+   "hash": "ab7a101ef0ffa943",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "local ore feeds the smithy directly. metalwork income is not trade-route dependent."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames (a smith or metalworker); its atom `institution: smith` reads the kind; or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 120,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-village-14",
+    "presume-town-4",
+    "presume-town-6"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicState.incomeSources[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/economy/incomeLineSiblings.js",
+   "thing": "house: fuller",
+   "text": "Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region.",
+   "hash": "3e37b2807cf9474a",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "local flocks provide raw wool; weavers and fullers convert it to cloth sold across the region."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named fuller); its atom `house: fuller` waits for a factsOf getter",
+   "printed": 56,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-8",
+    "presume-town-15",
+    "presume-town-72"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicState.incomeSources[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/economy/incomeLineSiblings.js",
+   "thing": "mason",
+   "text": "Stone masons work imported material; the quarrying income notation reflects processing margin only.",
+   "hash": "2a5cd329ae915b0a",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "stone masons work imported material; the quarrying income notation reflects processing margin only."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames (a quarry or a mason); its atom `institution: quarry` reads the kind; or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/generators/economy/incomeLineSiblings.js",
+   "thing": "temple",
+   "text": "Mandatory tithes plus rent income from church-owned land dominating the local economy.",
+   "hash": "c8a73f95df97e915",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "mandatory tithes plus rent income from church-owned land dominating the local economy."
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch: a wayside shrine is not a church)",
+   "printed": 4,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-81",
+    "r2r-town-19",
+    "r2r-town-54"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicState.incomeSources[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/economy/incomeLineSiblings.js",
+   "thing": "market",
+   "text": "Market day stall fees and toll collection on goods entering the market.",
+   "hash": "c79b9048611f7e71",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "market day stall fees and toll collection on goods entering the market."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 300,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-village-7",
+    "presume-village-8",
+    "presume-village-9"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicState.incomeSources[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/economy/viability.js",
+   "thing": "house: hedge wizard",
+   "text": "Traveling hedge wizard",
+   "hash": "7077dab32aa4c85d",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "traveling hedge wizard"
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named hedge wizard); its atom `house: hedge wizard` waits for a factsOf getter",
+   "printed": 15,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-hamlet-25",
+    "r2r-hamlet-27",
+    "r2r-hamlet-40"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicViability.warnings[].suggestedFixes[]",
+    ".institutions[].name",
+    ".npcs[].goal.short",
+    ".defenseProfile.institutions.magicDef[].name",
+    ".npcs[].goal.long"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/narrative/settlementOriginProse.js",
+   "thing": "siege",
+   "text": "Isolated from major trade routes, and now under siege. The settlement cannot fully feed itself, and nothing comes in by road: it must make do with ",
+   "hash": "f7c055acd4ef435e",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "isolated from major trade routes, and now under siege. the settlement cannot fully feed itself, and nothing comes in by road: it must make do with"
+   ],
+   "leaf": "crisisKind.js :: crisisFactsOf (under_siege)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/generators/narrative/settlementOriginProse.js",
+   "thing": "siege",
+   "text": "Isolated from major trade routes, and short of what it eats. With the siege closing the roads, it must make do with ",
+   "hash": "effe163c2bf52282",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": false,
+   "frags": [
+    "isolated from major trade routes, and short of what it eats. with the siege closing the roads, it must make do with"
+   ],
+   "leaf": "crisisKind.js :: crisisFactsOf (under_siege)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/generators/narrative/settlementOriginProse.js",
+   "thing": "siege",
+   "text": "Isolated, and running a shortfall it cannot farm its way out of. The siege has closed the roads; it must make do with ",
+   "hash": "925c102ce92d3d22",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": false,
+   "frags": [
+    "isolated, and running a shortfall it cannot farm its way out of. the siege has closed the roads; it must make do with"
+   ],
+   "leaf": "crisisKind.js :: crisisFactsOf (under_siege)",
+   "printed": 2,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-village-43",
+    "r2s-under_siege-thorp-2"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".settlementReason[]"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/narrative/settlementOriginProse.js",
+   "thing": "siege",
+   "text": "Off the trade routes and under-fed by its own land, and now besieged: nothing comes in by road, and it must make do with ",
+   "hash": "50f49f4f02e1567f",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "off the trade routes and under-fed by its own land, and now besieged: nothing comes in by road, and it must make do with"
+   ],
+   "leaf": "crisisKind.js :: crisisFactsOf (under_siege)",
+   "printed": 1,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2s-under_siege-village-2"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".settlementReason[]"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/narrativeText.js",
+   "thing": "powersCount",
+   "text": " holds the power, and its two powers are each watching who holds ",
+   "hash": "07384650a4caf843",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "holds the power, and its two powers are each watching who holds"
+   ],
+   "leaf": "the record :: powerStructure.factions (a count dimension waits for factsOf)",
+   "printed": 2,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-village-24",
+    "r2s-famine-village-1"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".pressureSentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/narrativeText.js",
+   "thing": "walls",
+   "text": "The walls of ",
+   "hash": "a7bbc93356f774bd",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "the walls of"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 3,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2s-under_siege-thorp-2",
+    "r2s-under_siege-thorp-3",
+    "r2s-under_siege-city-1"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".pressureSentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/narrativeText.js",
+   "thing": "walls",
+   "text": " every morning, and the people on the walls watch each other as closely as they watch the enemy.",
+   "hash": "e9f1f8516a71c607",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "every morning, and the people on the walls watch each other as closely as they watch the enemy."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 5,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-49",
+    "r2r-metropolis-14",
+    "r2s-under_siege-thorp-0"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".pressureSentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/narrativeText.js",
+   "thing": "starving",
+   "text": " is two bad weeks from genuine starvation; the remaining ",
+   "hash": "88d8afcf70e3c04e",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "is two bad weeks from genuine starvation; the remaining"
+   ],
+   "leaf": "famine.js :: famineOf (starvingAllowed) · crisisKind.js (famine)",
+   "printed": 3,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2s-famine-town-3",
+    "r2s-famine-city-0",
+    "r2s-famine-metropolis-0"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".pressureSentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/narrativeText.js",
+   "thing": "market",
+   "text": " quiet. The market still opens, the queues still form, but the haggling has gone out of people. They take what they are given and calculate, silently, how long it will last.",
+   "hash": "1d112886fae02a95",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "quiet. the market still opens, the queues still form, but the haggling has gone out of people. they take what they are given and calculate, silently, how long it will last."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/generators/narrativeText.js",
+   "thing": "granary",
+   "text": " is being run, for the moment, by whoever holds the keys, the seals, and the granary: three things that used to be held by one office and are now held by three people who do not trust one another.",
+   "hash": "51c413ce8935c971",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "is being run, for the moment, by whoever holds the keys, the seals, and the granary: three things that used to be held by one office and are now held by three people who do not trust one another."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 6,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-48",
+    "presume-town-64",
+    "presume-town-145"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".pressureSentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/narrativeText.js",
+   "thing": "mill",
+   "text": " has drawn its edges inward (fields left unworked, a mill ",
+   "hash": "8fab5ca3e25b4060",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "has drawn its edges inward (fields left unworked, a mill"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 4,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2s-monster_pressure-village-1",
+    "r2s-monster_pressure-village-3",
+    "r2s-monster_pressure-town-2"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".pressureSentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/narrativeText.js",
+   "thing": "walls",
+   "text": " has learned the settlement's patterns (when the patrols pass, where the walls are thin) which is not something a beast does, and admitting that is the first hard conversation no one wants to open.",
+   "hash": "b451dfbb1b47849f",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "has learned the settlement's patterns (when the patrols pass, where the walls are thin) which is not something a beast does, and admitting that is the first hard conversation no one wants to open."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 4,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-51",
+    "presume-city-21",
+    "r2r-city-47"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".pressureSentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/narrativeText.js",
+   "thing": "garrison",
+   "text": " is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back.",
+   "hash": "477f2721e5d2d6ad",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the crown is paying. the men who left to fight have not come back."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 4,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-city-7",
+    "presume-city-72",
+    "r2s-wartime-city-1"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".pressureSentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/narrativeText.js",
+   "thing": "smith",
+   "text": "Being on the right side of it keeps the forges of ",
+   "hash": "b41ab4ca684010d7",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "being on the right side of it keeps the forges of"
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames (a smith or metalworker); its atom `institution: smith` reads the kind; or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 3,
+   "againstN": 1,
+   "printedSeeds": [
+    "presume-town-25",
+    "r2s-wartime-metropolis-0",
+    "r2s-wartime-metropolis-1"
+   ],
+   "againstSeeds": [
+    "presume-town-25"
+   ],
+   "paths": [
+    ".pressureSentence"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-25",
+     "path": ".pressureSentence",
+     "sentence": "Being on the right side of it keeps the forges of Shankou running day and night, and the fish trade has never paid better, and the place now needs the war to go on to pay for what the war has already cost it."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/generators/narrativeText.js",
+   "thing": "garrison",
+   "text": " is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.",
+   "hash": "65cf322223134a9b",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": false,
+   "frags": [
+    "is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/generators/narrativeText.js",
+   "thing": "war",
+   "text": " could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (",
+   "hash": "dab22a2ed49e260e",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition ("
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 9,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-city-25",
+    "r2r-thorp-11",
+    "r2r-thorp-16"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".pressureSentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/power/claimStanding.js",
+   "thing": "clergy",
+   "text": "Clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited.",
+   "hash": "0b709a73d26a9ccb",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "clergy are present but operate at the margins of civic life; their moral authority is real but their political leverage is limited."
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch; seniorCleric); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 186,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-village-14",
+    "presume-village-15",
+    "presume-village-16"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".powerStructure.factions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/power/claimStanding.js",
+   "thing": "practitioner",
+   "text": "Magical practitioners are consulted but not formally empowered. Their influence is advisory, transactional, and quietly resented.",
+   "hash": "95f82a94acb58095",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "magical practitioners are consulted but not formally empowered. their influence is advisory, transactional, and quietly resented."
+   ],
+   "leaf": "magicReliance.js :: magicPractitioners (NEW-2, 3; its atom waits for a factsOf reader)",
+   "printed": 245,
+   "againstN": 20,
+   "printedSeeds": [
+    "presume-town-25",
+    "presume-town-37",
+    "presume-town-57"
+   ],
+   "againstSeeds": [
+    "presume-city-7",
+    "presume-city-22",
+    "presume-city-27"
+   ],
+   "paths": [
+    ".powerStructure.factions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-city-7",
+     "path": ".powerStructure.factions[].desc",
+     "sentence": "Magical practitioners are consulted but not formally empowered."
+    },
+    {
+     "seed": "presume-city-22",
+     "path": ".powerStructure.factions[].desc",
+     "sentence": "Magical practitioners are consulted but not formally empowered."
+    },
+    {
+     "seed": "presume-city-27",
+     "path": ".powerStructure.factions[].desc",
+     "sentence": "Magical practitioners are consulted but not formally empowered."
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/generators/power/claimStanding.js",
+   "thing": "house: smuggling",
+   "text": "Underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it.",
+   "hash": "704028fc99b7d6b5",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "underworld effectively controls vice, smuggling, and key officials; the nominal government tolerates this because it cannot currently change it."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named smuggling); its atom `house: smuggling` waits for a factsOf getter",
+   "printed": 13,
+   "againstN": 6,
+   "printedSeeds": [
+    "presume-town-48",
+    "presume-city-68",
+    "presume-city-92"
+   ],
+   "againstSeeds": [
+    "presume-town-48",
+    "presume-city-92",
+    "r2r-town-8"
+   ],
+   "paths": [
+    ".powerStructure.factions[].desc"
+   ],
+   "samples": [
+    {
+     "seed": "presume-town-48",
+     "path": ".powerStructure.factions[].desc",
+     "sentence": "Underworld effectively controls vice, smuggling, and key officials;"
+    },
+    {
+     "seed": "presume-city-92",
+     "path": ".powerStructure.factions[].desc",
+     "sentence": "Underworld effectively controls vice, smuggling, and key officials;"
+    },
+    {
+     "seed": "r2r-town-8",
+     "path": ".powerStructure.factions[].desc",
+     "sentence": "Underworld effectively controls vice, smuggling, and key officials;"
+    }
+   ],
+   "verdict": "close-false"
+  },
+  {
+   "file": "src/generators/power/claimStanding.js",
+   "thing": "clergy",
+   "text": "The local clergy serve a real pastoral role; their moral authority has limited political reach but is genuinely respected.",
+   "hash": "9107f9a290c307d1",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "the local clergy serve a real pastoral role; their moral authority has limited political reach but is genuinely respected."
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch; seniorCleric); or a person among the town's people who holds the role (npcs[].role, npcs[].title)",
+   "printed": 12,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-village-2",
+    "presume-village-6",
+    "presume-village-7"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".powerStructure.factions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/power/claimStanding.js",
+   "thing": "watch",
+   "text": "Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.",
+   "hash": "ee08d7b2a92c842c",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "well-funded city watch; it keeps order reliably and is growing more sure of its own authority."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 166,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-city-3",
+    "presume-city-6",
+    "presume-city-7"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".powerStructure.factions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/power/claimStanding.js",
+   "thing": "watch",
+   "text": "City watch; law enforcement and external defence, stretched between multiple responsibilities.",
+   "hash": "a4feae8fbd269116",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "city watch; law enforcement and external defence, stretched between multiple responsibilities."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 50,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-city-0",
+    "presume-city-1",
+    "presume-city-21"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".powerStructure.factions[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/power/claimStanding.js",
+   "thing": "house: wizard's tower",
+   "text": "Wizard towers and mage guilds hold genuine political weight; their services are structurally irreplaceable and they know it.",
+   "hash": "4d1330db1a2e96c6",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "wizard towers and mage guilds hold genuine political weight; their services are structurally irreplaceable and they know it."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named wizard's tower); its atom `house: wizard's tower` waits for a factsOf getter",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/generators/power/claimStanding.js",
+   "thing": "house: mages' guild",
+   "text": "Wizard towers and mage guilds hold genuine political weight; their services are structurally irreplaceable and they know it.",
+   "hash": "4d1330db1a2e96c6",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "wizard towers and mage guilds hold genuine political weight; their services are structurally irreplaceable and they know it."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named mages' guild); its atom `house: mages' guild` waits for a factsOf getter",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/generators/power/claimStanding.js",
+   "thing": "practitioner",
+   "text": "Mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire.",
+   "hash": "773b4df68d59884d",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "mages and arcane practitioners hold real influence through monopoly on magical services and the latent fear their capabilities inspire."
+   ],
+   "leaf": "magicReliance.js :: magicPractitioners (NEW-2, 3; its atom waits for a factsOf reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/generators/power/stressFactions.js",
+   "thing": "war",
+   "text": " Wartime has transformed this power from a civic institution into a primary power centre. Authority flows through military channels now.",
+   "hash": "28bc9180db63875b",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "wartime has transformed this power from a civic institution into a primary power centre. authority flows through military channels now."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/generators/safetyProfile.js",
+   "thing": "garrison",
+   "text": "The garrison is present and responsive.",
+   "hash": "bfaf1ac389aa5b77",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "the garrison is present and responsive."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 41,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-11",
+    "presume-town-33",
+    "presume-town-56"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicState.safetyProfile.safetyDesc",
+    ".publicProse.blocks.defense:state.publicOrder.field",
+    ".publicProse.blocks.defense:state.firstSurvey.field"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/safetyProfile.js",
+   "thing": "watch",
+   "text": "The watch is present and responsive.",
+   "hash": "725d20415cc2c413",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "the watch is present and responsive."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 18,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-village-41",
+    "presume-town-23",
+    "presume-town-24"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicState.safetyProfile.safetyDesc",
+    ".publicProse.blocks.defense:state.publicOrder.field",
+    ".publicProse.blocks.defense:state.firstSurvey.field"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/safetyProfile.js",
+   "thing": "militia",
+   "text": "The militia is present and responsive.",
+   "hash": "1f7babebc77f3dfc",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "the militia is present and responsive."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 9,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-village-29",
+    "r2r-thorp-12",
+    "r2r-thorp-34"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicState.safetyProfile.safetyDesc",
+    ".publicProse.blocks.defense:state.publicOrder.field",
+    ".publicProse.blocks.defense:state.firstSurvey.field"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/safetyProfile.js",
+   "thing": "house: street gang",
+   "text": "A street gang controls part of the place, extorting local businesses and residents. Its violence comes and goes, mostly over its territory.",
+   "hash": "30e15d57becf1306",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "a street gang controls part of the place, extorting local businesses and residents. its violence comes and goes, mostly over its territory."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named street gang); its atom `house: street gang` waits for a factsOf getter",
+   "printed": 42,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-9",
+    "presume-town-11",
+    "presume-town-13"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicState.safetyProfile.crimeTypes[].desc"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/safetyProfile.js",
+   "thing": "mercenary",
+   "text": "A mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community.",
+   "hash": "2f02a9f898251b8a",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "a mercenary company provides enforcement: professional and effective, but loyal to the contract, not the community."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/generators/safetyProfile.js",
+   "thing": "garrison",
+   "text": "Hired swords back the garrison when the purse allows.",
+   "hash": "0cf783df9a059f04",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "hired swords back the garrison when the purse allows."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 35,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-city-49",
+    "presume-metropolis-16",
+    "presume-metropolis-17"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicState.safetyProfile.guardEffectivenessDesc",
+    ".publicProse.blocks.defense:posture.posture.field",
+    ".publicProse.blocks.defense:posture.prize.field",
+    ".publicProse.blocks.defense:posture.terrain.field"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/safetyProfile.js",
+   "thing": "garrison",
+   "text": "Hired swords back the garrison.",
+   "hash": "68c8744e982cf043",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "hired swords back the garrison."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 191,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-city-3",
+    "presume-city-6",
+    "presume-city-7"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicState.safetyProfile.guardEffectivenessDesc",
+    ".publicProse.blocks.defense:posture.posture.field",
+    ".publicProse.blocks.defense:posture.terrain.field",
+    ".publicProse.blocks.defense:posture.prize.field"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/safetyProfile.js",
+   "thing": "house: adventurers' charter",
+   "text": "The adventurers' charter hall takes bounty work against threats, as far as the purse runs.",
+   "hash": "df08e024b686f344",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "the adventurers' charter hall takes bounty work against threats, as far as the purse runs."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named adventurers' charter); its atom `house: adventurers' charter` waits for a factsOf getter",
+   "printed": 7,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-village-7",
+    "presume-village-22",
+    "presume-village-25"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicState.safetyProfile.guardEffectivenessDesc",
+    ".publicProse.blocks.defense:posture.posture.field",
+    ".publicProse.blocks.defense:posture.prize.field",
+    ".publicProse.blocks.defense:posture.terrain.field"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/generators/safetyProfile.js",
+   "thing": "house: adventurers' charter",
+   "text": "The adventurers' charter hall coordinates emergency response to threats.",
+   "hash": "ba8f5cbfc878053d",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "the adventurers' charter hall coordinates emergency response to threats."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named adventurers' charter); its atom `house: adventurers' charter` waits for a factsOf getter",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/generators/safetyProfile.js",
+   "thing": "house: adventurers' charter",
+   "text": "The adventurers' charter hall takes bounty work against threats, but the coin for bounties runs short.",
+   "hash": "e50ea71d15039105",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "the adventurers' charter hall takes bounty work against threats, but the coin for bounties runs short."
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named adventurers' charter); its atom `house: adventurers' charter` waits for a factsOf getter",
+   "printed": 16,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-village-18",
+    "r2r-hamlet-21",
+    "r2r-hamlet-23"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicState.safetyProfile.guardEffectivenessDesc",
+    ".publicProse.blocks.defense:posture.posture.field",
+    ".publicProse.blocks.defense:posture.terrain.field",
+    ".publicProse.blocks.defense:posture.prize.field"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/domain/display/threatAssessment.js",
+   "thing": "militia",
+   "text": " and a citizen militia to hold it.",
+   "hash": "7d5ce99f3faf03cf",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "and a citizen militia to hold it."
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/domain/display/tradeListDisplay.js",
+   "thing": "bank",
+   "text": "international banking services",
+   "hash": "93b4989065b31dd8",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "international banking services"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 150,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-town-25",
+    "presume-town-37",
+    "presume-town-42"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".economicState.activeChains[].outputs[]",
+    ".economicState.localProduction[]"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/domain/display/tradeListDisplay.js",
+   "thing": "market",
+   "text": "magical item market",
+   "hash": "f6c2f8cec0187fcb",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "magical item market"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/domain/dossier/faithReading.js",
+   "thing": "shrine",
+   "text": ", and the shrines answer to no named god.",
+   "hash": "4701f49f57ea8919",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    ", and the shrines answer to no named god."
+   ],
+   "leaf": "factsOf.js :: sacredHouse",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/domain/dossier/faithReading.js",
+   "thing": "siege",
+   "text": " has no church of its own, and the siege keeps its people from the next village’s parish church.",
+   "hash": "1913bc012cd632cc",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "has no church of its own, and the siege keeps its people from the next village's parish church."
+   ],
+   "leaf": "crisisKind.js :: crisisFactsOf (under_siege)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/domain/dossier/faithReading.js",
+   "thing": "temple",
+   "text": " has no church of its own, and the siege keeps its people from the next village’s parish church.",
+   "hash": "1913bc012cd632cc",
+   "side": "denies",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "has no church of its own, and the siege keeps its people from the next village's parish church."
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch: a wayside shrine is not a church)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "streets",
+   "text": "built in masonry around a civic square, and run by",
+   "hash": "572bca5c0a5feef9",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "built in masonry around a civic square, and run by"
+   ],
+   "leaf": "the record :: tier (factsOf(record).tier)",
+   "printed": 36,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-village-12",
+    "r2r-village-25",
+    "r2r-village-26"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.overview:identity.scope"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "market",
+   "text": "built on tribute, market and waterworks",
+   "hash": "c12e7c16fda61a28",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "built on tribute, market and waterworks"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "docks",
+   "text": "built around the agora and the harbour",
+   "hash": "7e2692648afeb175",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "built around the agora and the harbour"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 5,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-city-44",
+    "r2r-metropolis-13",
+    "r2r-metropolis-42"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.overview:identity.scope"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "streets",
+   "text": "built around the agora and the harbour",
+   "hash": "7e2692648afeb175",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "built around the agora and the harbour"
+   ],
+   "leaf": "the record :: tier (factsOf(record).tier)",
+   "printed": 5,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-city-44",
+    "r2r-metropolis-13",
+    "r2r-metropolis-42"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.overview:identity.scope"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "docks",
+   "text": "built around the harbour",
+   "hash": "1f82ae414df8d5e9",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "built around the harbour"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "streets",
+   "text": "built around the agora, and run by",
+   "hash": "d96b1152ced7cdec",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "built around the agora, and run by"
+   ],
+   "leaf": "the record :: tier (factsOf(record).tier)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "streets",
+   "text": "built around the agora, ",
+   "hash": "0f395a5a7ed7958b",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "built around the agora,"
+   ],
+   "leaf": "the record :: tier (factsOf(record).tier)",
+   "printed": 35,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-village-55",
+    "r2r-town-2",
+    "r2r-town-8"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.overview:identity.scope"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "quarters",
+   "text": "built around kin districts and an assembly ground",
+   "hash": "dfd49d19123694a3",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "built around kin districts and an assembly ground"
+   ],
+   "leaf": "populationBand.js :: populationBandOf",
+   "printed": 29,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-town-3",
+    "r2r-town-11",
+    "r2r-town-33"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.overview:identity.scope"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "streets",
+   "text": ", in quarters by trade and kin",
+   "hash": "ffd14e33c2e8c09a",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    ", in quarters by trade and kin"
+   ],
+   "leaf": "the record :: tier (factsOf(record).tier)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "streets",
+   "text": ", in quarters by trade,",
+   "hash": "c3105f78db3c9213",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    ", in quarters by trade,"
+   ],
+   "leaf": "the record :: tier (factsOf(record).tier)",
+   "printed": 39,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-town-4",
+    "r2r-town-7",
+    "r2r-town-18"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.overview:identity.scope"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "market",
+   "text": "tribute, and market-and-waterworks",
+   "hash": "0a7c913c886807b1",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    "tribute, and market-and-waterworks"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 19,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-city-16",
+    "r2r-city-20",
+    "r2r-city-21"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.overview:identity.scope"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "market",
+   "text": "tribute and market",
+   "hash": "a1e8e2c421cd8916",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "tribute and market"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 11,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-village-7",
+    "r2r-village-49",
+    "r2r-village-57"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.overview:identity.scope"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "market",
+   "text": "built on tribute and market",
+   "hash": "65d8643284a6d901",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "built on tribute and market"
+   ],
+   "leaf": "factsOf (the thing's own reader)",
+   "printed": 0,
+   "againstN": 0,
+   "printedSeeds": [],
+   "againstSeeds": [],
+   "paths": [],
+   "samples": [],
+   "verdict": "close-unprinted"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "temple",
+   "text": ", under temple and guild",
+   "hash": "9cac0021c265738c",
+   "side": "names",
+   "atBase": true,
+   "wholeAtBase": true,
+   "frags": [
+    ", under temple and guild"
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch: a wayside shrine is not a church)",
+   "printed": 35,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-town-4",
+    "r2r-town-7",
+    "r2r-town-18"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.overview:identity.scope"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/domain/summary/settlementQuickGuide.js",
+   "thing": "temple",
+   "text": ", under the temple",
+   "hash": "b885aa710423cdab",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    ", under the temple"
+   ],
+   "leaf": "faithReading.js :: faithReadingOf (hasChurch: a wayside shrine is not a church)",
+   "printed": 7,
+   "againstN": 0,
+   "printedSeeds": [
+    "r2r-village-1",
+    "r2r-village-28",
+    "r2r-metropolis-14"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".publicProse.blocks.overview:identity.scope"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  },
+  {
+   "file": "src/domain/facts/magic.js",
+   "thing": "house: academy",
+   "text": "academy of magic",
+   "hash": "8f8aa8b21d5ed32c",
+   "side": "names",
+   "atBase": false,
+   "wholeAtBase": false,
+   "frags": [
+    "academy of magic"
+   ],
+   "leaf": "institutions.js :: liveInstitutionNames, or a power of the name (a house named academy); its atom `house: academy` waits for a factsOf getter",
+   "printed": 58,
+   "againstN": 0,
+   "printedSeeds": [
+    "presume-metropolis-3",
+    "presume-metropolis-7",
+    "presume-metropolis-8"
+   ],
+   "againstSeeds": [],
+   "paths": [
+    ".npcs[].goal.long",
+    ".npcs[].goal.short",
+    ".economicViability.issues[].description",
+    ".publicProse.blocks.economy:services.impairedService.sentence"
+   ],
+   "samples": [],
+   "verdict": "close-true"
+  }
+ ]
+}

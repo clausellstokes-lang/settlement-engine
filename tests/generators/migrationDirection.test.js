@@ -10,6 +10,7 @@
  * reader at BOTH values — a departures record is not born today, so without these pins its
  * readers would be unexercised — and (3) the soak check that convicted the defect.
  */
+import { textOf } from '../../src/domain/facts/textOf.js'; // BAR6-SCENES (2026-11-16): a declared row's text
 import { describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { buildStressEntry } from '../../src/generators/stressGenerator.js';
@@ -121,10 +122,10 @@ describe('the readers at a DEPARTURES record', () => {
   it('the pressure line reads the record, not the economy', () => {
     const lines = PRESSURE_SENTENCES.mass_migration({ name: 'Vale', tier: 'town', migrationDirection: 'departures', compound: { economyOutput: 90 } });
     expect(lines).toHaveLength(3);
-    for (const line of lines) expect(migrationDirectionOfText(line), line).toBe('departures');
+    for (const line of lines) expect(migrationDirectionOfText(textOf(line)), textOf(line)).toBe('departures'); // BAR6-SCENES (2026-11-16): a row declares its size (`tier: ≥ village`); its text is read
     for (const economyOutput of [10, 90]) {
       for (const line of PRESSURE_SENTENCES.mass_migration({ name: 'Vale', tier: 'town', compound: { economyOutput } })) {
-        expect(migrationDirectionOfText(line), line).not.toBe('departures');
+        expect(migrationDirectionOfText(textOf(line)), textOf(line)).not.toBe('departures');
       }
     }
   });

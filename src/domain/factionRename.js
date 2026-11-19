@@ -93,6 +93,7 @@
  */
 
 import { substituteWholeWord } from '../lib/narrativeMutations.js';
+import { powerSentenceName } from './display/powerSentenceName.js';
 import { deepClone } from './clone.js';
 import { nameOf } from './rulingPower.js';
 import { rekeyUserEdit, walkUserEdits } from './userEdits.js';
@@ -661,10 +662,24 @@ function rewriteOwn(target, key, newName) {
 function rewriteProse(target, key, oldName, newName) {
   const current = target?.[key];
   if (typeof current !== 'string' || !current) return false;
-  const next = substituteWholeWord(current, oldName, newName);
+  const next = substituteName(current, oldName, newName);
   if (next === current) return false;
   target[key] = next;
   return true;
+}
+
+/**
+ * THE NAME AND ITS PROSE FORM FOLLOW TOGETHER (POWERS-16; the chair's ruling (r2): a faction named in a sentence takes
+ * its prose form, from one leaf, display/powerSentenceName.js). A sentence written through the leaf holds the power's
+ * PROSE FORM, not its label ("The Guard" for "Military/Guard"), so a rename moves both: the label, and, where the leaf
+ * gives the old name a form of its own, that form to the new name's ("Stop The Guard from ..." -> "Stop Military Party
+ * from ...", the label close's twin where no guard stands). A name the leaf leaves as it is moves once.
+ * @param {string} text @param {string} oldName @param {string} newName @returns {string}
+ */
+function substituteName(text, oldName, newName) {
+  const next = substituteWholeWord(text, oldName, newName);
+  const saidOld = powerSentenceName(oldName);
+  return saidOld && saidOld !== oldName ? substituteWholeWord(next, saidOld, powerSentenceName(newName)) : next;
 }
 
 /**
@@ -709,7 +724,7 @@ function rewriteProseList(target, key, oldName, newName) {
   for (let i = 0; i < list.length; i += 1) {
     const current = list[i];
     if (typeof current !== 'string' || !current) continue;
-    const next = substituteWholeWord(current, oldName, newName);
+    const next = substituteName(current, oldName, newName);
     if (next === current) continue;
     list[i] = next;
     moved = true;

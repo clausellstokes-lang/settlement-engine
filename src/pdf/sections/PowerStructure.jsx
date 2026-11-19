@@ -2,7 +2,7 @@
  * PowerStructure — chapter 02. Stability + legitimacy + factions.
  *
  * Mirrors PowerTab.jsx in full:
- *   - Public legitimacy banner with breakdown chips
+ *   - Public legitimacy banner: the score and its band (COHERENCE-POWERS-7: no breakdown in points; the owner, 2026-11-13)
  *   - Stability + governing authority (with the governing modifier, STOP-1) + governance fractured warning
  *   - Governance: the screen's one governance paragraph (OWNER-WORDS-DOSSIER item 3)
  *   - Stacked power-distribution bar (all factions in one viz)
@@ -26,7 +26,7 @@ import { type, palette, factionColors, space, pt, swatch } from '../theme.js';
 import { cap, label, humanize } from '../lib/format.js';
 import { anchorTarget } from '../primitives/EntityRef.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
-import { governingFactionOf } from '../../domain/rulingPower.js';
+import { governingModifierWordsOf } from '../../domain/display/governingModifierWords.js';
 import { WhoRunsThisTown } from './WhoRunsThisTown.jsx';
 import { governanceAccountOf } from '../../domain/display/governanceAccount.js';
 
@@ -34,8 +34,10 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse, prim
   const p = vm.power;
   const index = vm.entityIndex; // Phase-D id»card resolver
   const governing = p.factions.find(f => f.isGoverning);
-  // STOP-1 (R7): the governing faction's modifier, the twin of the screen's power-line chip.
-  const governingModifier = governing ? String(governingFactionOf(settlement)?.modifier || '') : '';
+  // STOP-1 (R7): the governing faction's modifier, the twin of the screen's power-line chip. POWERS-15 (REVIEW-POWERS-5
+  // A7; the chair's ruling of 2026-11-14: one reader for one fact on every surface): through the Power tab's own reader,
+  // in plain words and only where the town bears it out; the stored key is never printed
+  const governingModifier = governing ? governingModifierWordsOf(settlement) : '';
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -60,7 +62,6 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse, prim
           score={p.legitimacy.score ?? null}
           scoreLabel={cap(p.legitimacy.label) || ''}
           tone={legitTone(p.legitimacy.score)}
-          breakdown={p.legitimacyBreakdown}
           footer={p.governanceFractured ? 'Governance fractured.' : null}
         />
       )}

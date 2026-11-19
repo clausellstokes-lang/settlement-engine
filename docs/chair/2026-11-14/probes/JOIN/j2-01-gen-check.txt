@@ -1,0 +1,16 @@
+[gate-tail] start:  08:59:20 up 34 min,  0 user,  load average: 0.28, 0.80, 0.96 · cores: 4
+file:///home/user/j2wt/scripts/lib/dossier-annex-grammar.mjs:199
+  throw new Error(`${label}: ${message}`);
+        ^
+
+Error: the wiring census: is STALE against 2 of its own stamped files:
+  src/domain/display/stateProse/economyStateProse.js (census 1f730c5bac18, tree 3480fa792f16)
+  src/domain/display/stateProse/defenseStateProse.js (census 6a501d976c4c, tree f7bc0f32583f)
+  Its reading of what each pool tests was taken over a composer that has since moved, and poolMeta is projected from that reading. Re-take the census (`node scripts/wiring-census.mjs`) before regenerating the leaves.
+    at refuse (file:///home/user/j2wt/scripts/lib/dossier-annex-grammar.mjs:199:9)
+    at assertCensusCurrent (file:///home/user/j2wt/scripts/lib/dossier-annex-grammar.mjs:772:5)
+    at readCensus (file:///home/user/j2wt/scripts/generate-dossier-state-prose.mjs:584:3)
+    at async file:///home/user/j2wt/scripts/generate-dossier-state-prose.mjs:588:16
+
+Node.js v22.23.4
+[gate-tail] end:  08:59:20 up 34 min,  0 user,  load average: 0.28, 0.80, 0.96

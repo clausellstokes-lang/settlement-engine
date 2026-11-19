@@ -312,11 +312,14 @@ export const CROSS_ENTRY_TOTALS = Object.freeze({
  *  2026-10-01, the urban band (ODQ §934.86): `generationCoherenceReceipt.repairs` JOINS (9 -> 10). Over the
  *  re-generated corpus no world carries more than one repair, so the corpus can no longer test that collection's key
  *  for uniqueness; the arm's own words are "a row that loses its multi-entry observations must JOIN it". The set is
- *  the one tests/lint/recordRegisterTotality.walker.test.js A4 measures and prints. */
+ *  the one tests/lint/recordRegisterTotality.walker.test.js A4 measures and prints.
+ *  2026-11-13, UPKEEP-CAPACITY C2 (the chair's G1): `defenseProfile.institutions.garrison` JOINS (10 -> 11). The
+ *  professional city watch is the watch only, so no city of the corpus lists more than one garrison house. */
 export const KEY_UNPROVEN_AT_LENGTH_ONE = Object.freeze([
   'activeConditions',
   'activeConditions[].causes',
   'defenseProfile.institutions.charter',
+  'defenseProfile.institutions.garrison',
   'defenseProfile.institutions.mercenary',
   'defenseProfile.institutions.militia',
   'defenseProfile.institutions.watch',

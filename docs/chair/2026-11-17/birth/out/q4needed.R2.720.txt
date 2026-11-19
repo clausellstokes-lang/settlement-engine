@@ -1,0 +1,29 @@
+houses no longer marked 1410
+ 153 Potter unmarked, the page silent of clay · r2r-village-4, r2r-village-16, r2r-village-27
+ 137 Vintner unmarked, the page silent of grapes · r2r-town-18, r2r-town-22, r2r-town-33
+ 134 Weavers/Textile workers unmarked, the page silent of wool · r2r-town-8, r2r-town-14, r2r-town-17
+ 123 Brickmaker unmarked, the page silent of clay · r2r-village-6, r2r-town-10, r2r-town-16
+ 115 Cobbler's guild unmarked, the page silent of hides · r2r-town-6, r2r-town-14, r2r-town-15
+ 106 Fuller unmarked, the page silent of wool · r2r-village-14, r2r-village-26, r2r-village-28
+  95 Carpenters unmarked, the page silent of timber · r2r-town-5, r2r-town-22, r2r-town-31
+  94 Sawmill unmarked, the page silent of timber · r2r-village-4, r2r-village-6, r2r-village-14
+  90 Cooper unmarked, the page silent of timber · r2r-village-15, r2r-village-26, r2r-village-52
+  85 Tanner unmarked, the page silent of hides · r2r-town-6, r2r-town-14, r2r-town-16
+  61 Woodcarver unmarked, the page silent of timber · r2r-village-4, r2r-town-32, r2r-town-49
+  61 Tanners unmarked, the page silent of hides · r2r-town-2, r2r-town-13, r2r-town-15
+  38 Charcoal burner unmarked, the page silent of timber · r2r-hamlet-36, r2r-hamlet-52, r2r-town-40
+  25 Carpenter unmarked, the page silent of timber · r2r-hamlet-3, r2r-hamlet-17, r2r-hamlet-32
+  15 Blacksmiths unmarked, the page silent of iron · r2r-city-5, r2r-city-17, r2r-city-32
+  14 Resident smith unmarked, the page silent of iron · r2r-hamlet-10, r2r-hamlet-19, r2r-hamlet-26
+  14 Blacksmith unmarked, the page silent of iron · r2r-village-4, r2r-village-16, r2r-village-22
+  14 Specialized metalworkers unmarked, the page silent of iron · r2r-city-5, r2r-city-17, r2r-city-32
+  12 Glassblower unmarked, the page silent of glass sand · r2r-town-8, r2r-town-35, r2r-town-40
+   7 Cobbler unmarked, the page silent of hides · r2r-village-27, r2r-village-37, r2r-village-44
+   6 Tannery unmarked, the page silent of livestock or hides · r2r-village-9, r2r-village-14, r2s-infiltrated-village-0
+   4 Fishmonger unmarked, the page silent of fish · r2r-village-49, r2r-village-57, r2s-succession_void-village-0
+   2 Alchemist shop unmarked, the page silent of medicinal herbs or water from the hot springs · r2r-town-51, r2s-insurgency-town-2
+   1 Smelter unmarked beside "Needed, and not brought in: gold/silver ore" · r2r-city-5
+   1 Smelter unmarked, the page silent of iron ore or copper ore or gold or silver ore · r2r-city-17
+   1 Smelter unmarked beside "Needed, and not brought in: copper ore" · r2r-city-36
+   1 Apothecary unmarked, the page silent of medicinal herbs or water from the hot springs · r2s-mass_migration-village-0
+   1 Smelter unmarked, the page silent of iron · r2s-mass_migration-metropolis-1

@@ -77,7 +77,7 @@
       "lines": [
         {
           "lineId": "ARRIVAL_SCENES.river[0]",
-          "text": "The smell of the river reaches you before the settlement does: clean water, reeds, the particular mud of a working waterfront.",
+          "text": "The smell of the river reaches you before the settlement does: clean water, reeds, the particular mud of a bank that people use every day.",
           "needs": [],
           "excludes": [],
           "crisis": null,
@@ -97,14 +97,13 @@
           "lineId": "ARRIVAL_SCENES.river[2]",
           "text": "The river carries the sounds of {name} to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.",
           "needs": [
-            "institution: mill"
+            "institution: mill",
+            "institution: docks"
           ],
           "excludes": [],
           "crisis": null,
           "colour": false,
-          "stop": [
-            "jetty (docks not guaranteed)"
-          ]
+          "stop": []
         },
         {
           "lineId": "ARRIVAL_SCENES.river[3]",
@@ -321,7 +320,7 @@
         },
         {
           "lineId": "ARRIVAL_SCENES.ordinary[1]",
-          "text": "The road into {name} becomes a street at a point you can't precisely identify. The settlement grows around you gradually.",
+          "text": "The road into {name} becomes part of the settlement at a point you can't precisely identify. The houses gather around you gradually.",
           "needs": [],
           "excludes": [],
           "crisis": "any",
@@ -351,7 +350,9 @@
         {
           "lineId": "ARRIVAL_SCENES.ordinary[4]",
           "text": "A merchant argues with a carter on the road into {name} about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.",
-          "needs": [],
+          "needs": [
+            "market"
+          ],
           "excludes": [],
           "crisis": "any",
           "colour": true,

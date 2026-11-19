@@ -1,0 +1,173 @@
+{
+ "_": "BAR8-AUDIT-J controls: STANDS rows of the seat (must be FOUND by their sub-rule), EXPLAINED rows (must be clear of EVERY rule of the seat). Texts from review-bar-7/packets/index.bar7.json.gz (lane/read7-prep-2026-11-17); verdicts from SECOND-CHECK.final27.json and SECOND-CHECK.third54.json (lane/chair-2026-11-08).",
+ "rows": {
+  "C0893": {
+   "rule": "11a",
+   "group": "stands",
+   "town": "bar0-city-under_siege+famine-rand-45",
+   "section": "Systems/Economics",
+   "text": "Needed, and not brought in: iron ore, copper ore, gold and silver ore."
+  },
+  "C42813": {
+   "rule": "11a",
+   "group": "stands",
+   "town": "bar0-village-calm-rand-47",
+   "section": "Systems/Economics",
+   "text": "Needed, and not brought in: livestock."
+  },
+  "C34109": {
+   "rule": "11a",
+   "group": "stands",
+   "town": "bar0-town-calm-rand-46",
+   "section": "Systems/Economics",
+   "text": "Needed, and not brought in: quality textiles and cloth, livestock for meat and draft, clay, mineral hot springs."
+  },
+  "C19722": {
+   "rule": "11b",
+   "group": "stands",
+   "town": "bar0-metropolis-calm-rand-45",
+   "section": "Summary/Overview",
+   "text": "Half of Gantulgaabad seems to be gutting, salting or selling fish."
+  },
+  "C20700": {
+   "rule": "11b",
+   "group": "stands",
+   "town": "bar0-metropolis-calm-rand-45",
+   "section": "Systems/Services",
+   "text": "Fish sold daily from the morning catch."
+  },
+  "C20963": {
+   "rule": "11b",
+   "group": "stands",
+   "town": "bar0-metropolis-calm-rand-45",
+   "section": "Systems/Economics",
+   "text": "Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here."
+  },
+  "C36591": {
+   "rule": "11b",
+   "group": "stands",
+   "town": "bar0-town-occupied-rand-45",
+   "section": "Summary/Overview",
+   "text": "Racks of drying fish line the way in, and the smell of salt and catch is everywhere."
+  },
+  "C36970": {
+   "rule": "11b",
+   "group": "stands",
+   "town": "bar0-town-occupied-rand-45",
+   "section": "Systems/Services",
+   "text": "Fish sold daily from the morning catch."
+  },
+  "C42801": {
+   "rule": "11b",
+   "group": "stands",
+   "town": "bar0-village-calm-rand-47",
+   "section": "Systems/Economics",
+   "text": "Fish & Maritime Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here."
+  },
+  "C41716": {
+   "rule": "11b",
+   "group": "explained",
+   "town": "bar0-village-calm-rand-46",
+   "section": "Systems/Institutions",
+   "text": "Services · Salt production"
+  },
+  "C42154": {
+   "rule": "11b",
+   "group": "explained",
+   "town": "bar0-village-calm-rand-46",
+   "section": "World/NPCs",
+   "text": "How they deal Sells by the sack and the cart; the price goes up before winter."
+  },
+  "C43392": {
+   "rule": "11b",
+   "group": "explained",
+   "town": "bar0-village-famine-rand-45",
+   "section": "Summary/Overview",
+   "text": "The fishing failed this year and took most of the food produced here with it."
+  },
+  "C43737": {
+   "rule": "11b",
+   "group": "explained",
+   "town": "bar0-village-famine-rand-45",
+   "section": "Systems/Economics",
+   "text": "Of the food Vedamala raises for itself, its fishing comes first, and after a poor season for the fishing there is less to go round."
+  },
+  "C34102": {
+   "rule": "11c",
+   "group": "stands",
+   "town": "bar0-town-calm-rand-46",
+   "section": "Systems/Economics",
+   "text": "A good part of the clay Drumbeck's work uses must come from elsewhere; when none comes, that work stands idle."
+  },
+  "C38200": {
+   "rule": "11d",
+   "group": "stands",
+   "town": "bar0-town-occupied-rand-46",
+   "section": "Systems/Institutions",
+   "text": "Short of iron. Multiple smiths with specializations."
+  },
+  "C38039": {
+   "rule": "11d",
+   "group": "stands",
+   "town": "bar0-town-occupied-rand-46",
+   "section": "Summary/Overview",
+   "text": "The forges of Ulaanabad are quiet more often than not, for want of iron."
+  },
+  "C2853": {
+   "rule": "11e",
+   "group": "stands",
+   "town": "bar0-city-under_siege+famine-rand-46",
+   "section": "Systems/Institutions",
+   "text": "Services · Coin production"
+  },
+  "C8867": {
+   "rule": "11e",
+   "group": "stands",
+   "town": "bar0-city-wartime-rand-45",
+   "section": "World/NPCs",
+   "text": "Wants Buy stone and iron and grain at the market in bulk this season, while the price is still fair."
+  },
+  "C5157": {
+   "rule": "11e",
+   "group": "stands",
+   "town": "bar0-city-under_siege+famine-rand-47",
+   "section": "Summary/Overview",
+   "text": "Stalls sell reagents in stoppered jars, and the buyers know exactly what they want."
+  },
+  "C32296": {
+   "rule": "11e",
+   "group": "stands",
+   "town": "bar0-town-calm-rand-45",
+   "section": "Systems/Institutions",
+   "text": "Luxury goods available."
+  },
+  "C0423": {
+   "rule": "11e",
+   "group": "explained",
+   "town": "bar0-city-under_siege+famine-rand-45",
+   "section": "Systems/Institutions",
+   "text": "Services · Fresh produce · Street food (stopped)"
+  },
+  "C0453": {
+   "rule": "11e",
+   "group": "explained",
+   "town": "bar0-city-under_siege+famine-rand-45",
+   "section": "Systems/Institutions",
+   "text": "Services · District trading"
+  },
+  "C2821": {
+   "rule": "11e",
+   "group": "explained",
+   "town": "bar0-city-under_siege+famine-rand-46",
+   "section": "Systems/Institutions",
+   "text": "Services · Fresh produce · General trade"
+  },
+  "C5541": {
+   "rule": "11e",
+   "group": "explained",
+   "town": "bar0-city-under_siege+famine-rand-47",
+   "section": "Systems/Institutions",
+   "text": "Services · Fresh produce · General trade"
+  }
+ }
+}

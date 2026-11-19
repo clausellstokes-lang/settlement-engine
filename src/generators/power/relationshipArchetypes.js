@@ -5,7 +5,7 @@
  */
 import { random as _rng } from '../../kernel/rngContext.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
-import { HANDLER_TIE_ARCHETYPES, STRESS_ECONOMIC_EFFECTS } from '../../data/npcData.js';
+import { HANDLER_TIE_ARCHETYPES, REVERSED_TIE, STRESS_ECONOMIC_EFFECTS } from '../../data/npcData.js';
 import { drawDeclared } from '../../domain/facts/drawDeclared.js';
 
 export const computeRelTension = (factionA, factionB, stressFlags, instFlags) => {
@@ -141,7 +141,7 @@ const bothNamedTensions = (archetype) => {
   return indices;
 };
 
-/** @type {WeakMap<object, ReadonlyArray<Readonly<{ id: number, needs: string[], excludes: string[], crisis: string[] }>>>} */
+/** @type {WeakMap<object, ReadonlyArray<Readonly<{ id: number, needs: string[], excludes: string[], crisis: string[], trust?: 'none' | 'full' }>>>} BAR2-PEOPLE (PP4): a row's trust */
 const pairPoolCache = new WeakMap();
 /**
  * An archetype's tie indices as one declared pool: index i declares what its desc row
@@ -150,6 +150,18 @@ const pairPoolCache = new WeakMap();
  * declares a crisis (CENSUS-4c's ledger), so the union is a plain union.
  * @param {any} archetype
  */
+/**
+ * BAR2-PEOPLE (PP4, the chair's ruling of 2026-11-15, vetoable by the owner): ONE HOME FOR A PAIR'S TRUST. A line that
+ * states the pair's trust declares it (`trust: 'none'` "neither trusts the other at all"; `trust: 'full'` "trust
+ * completely", "trusts <B>'s word over any written contract"); a pair's later tie of another kind is admitted only where
+ * its line agrees with what the pair's first trust line stated (Weihu: Tian Ma and Xiao Gao "cooperate efficiently and
+ * neither trusts the other at all" and "disagree often and trust completely"). Draw-free: the refused index resolves
+ * like a held one. @param {ReadonlyArray<any>} lines @param {number} i @returns {'none' | 'full' | undefined}
+ */
+const trustOfRow = (lines, i) => {
+  const row = lines.length ? lines[i % lines.length] : null;
+  return row && typeof row === 'object' && (row.trust === 'none' || row.trust === 'full') ? row.trust : undefined;
+};
 const tiePairPool = (archetype) => {
   let pool = pairPoolCache.get(archetype);
   if (!pool) {
@@ -165,6 +177,7 @@ const tiePairPool = (archetype) => {
       needs: [...field(descLines, id, 'needs'), ...field(tensionLines, id, 'needs')],
       excludes: [...field(descLines, id, 'excludes'), ...field(tensionLines, id, 'excludes')],
       crisis: [...field(descLines, id, 'crisis'), ...field(tensionLines, id, 'crisis')],
+      trust: trustOfRow(descLines, id) ?? trustOfRow(tensionLines, id),
     })));
     pairPoolCache.set(archetype, pool);
   }
@@ -191,34 +204,69 @@ const tiePairPool = (archetype) => {
  * on the directed pair, so two ties of one archetype do not collapse onto one line). `facts` is the
  * birth's facts at the draw (R-V / R-Z: the roster and the government only; CENSUS-4c measured all
  * 30 declared rows settled there, 0 of 585 births differ); absent, a declared index is refused
- * (fail-closed, R-N).
+ * (fail-closed, R-N). R2-CODE-A-14 (the chair's ruling (s1)): the draw hands the PAIR as its context (`ctx.pair`,
+ * `[npc, partner]`), so a line about the two of them (`shared power`: "share a council bloc") reads the pair.
  * @param {Readonly<{ body: string, members: string, member: string }>} [force]
  * @param {object | (() => object) | null} [facts]
- * @returns {(archetype: any, npc: {name?: string}, partner: {name?: string}) =>
+ * @returns {(archetype: any, npc: {id?: string, name?: string}, partner: {id?: string, name?: string}) =>
  *   {archetypeKey: string | undefined, proseVariant: number, description: string, tension: string}}
  */
 export const createTieProseDraw = (force, facts = null) => {
-  /** @type {Map<unknown, {base: number, used: number}>} */
+  /** @type {Map<unknown, {base: number, used: number, printed: Set<number>}>} */
   const draws = new Map();
+  /** TAIL-TIES-2 (T6): each pair's FIRST tie of a kind, as its directed key (`npcData.js :: REVERSED_TIE`). @type {Map<string, string>} */
+  const firstOfPair = new Map();
+  /** BAR2-PEOPLE (PP4): each pair's trust, as its first trust line stated it (the two ids, unordered). @type {Map<string, string>} */
+  const trustOfPair = new Map();
   return (archetype, npc, partner) => {
     const archetypeKey = archetypeKeyOf(archetype);
     let draw = draws.get(archetype);
     if (!draw) {
-      draw = { base: fnv1a32(`${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`), used: 0 };
+      draw = { base: fnv1a32(`${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`), used: 0, printed: new Set() };
       draws.set(archetype, draw);
     }
     const size = archetype.tension.size;
     const named = bothNamedTensions(archetype);
-    const drawnVariant = draw.used < size || named.length === 0
+    const inHead = draw.used < size || named.length === 0;
+    const drawnVariant = inHead
       ? (draw.base + draw.used) % size
       : named[(draw.base + draw.used - size) % named.length];
     draw.used += 1;
     const pool = tiePairPool(archetype);
-    const resolved = drawDeclared(pool, {
-      draw: (p) => p[drawnVariant], facts, key: `${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`,
+    /** @param {{ draw: (p: ReadonlyArray<any>) => any, held?: Set<string>, heldKey?: (l: any) => string }} how */
+    const resolveAt = (how) => drawDeclared(pool, {
+      ...how, facts, ctx: { pair: [npc, partner] }, key: `${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`,
       poolId: `npcData:${archetypeKey && Object.hasOwn(HANDLER_TIE_ARCHETYPES, archetypeKey) ? 'HANDLER_TIE_ARCHETYPES' : 'STRESS_ECONOMIC_EFFECTS'}.${archetypeKey ?? archetype?.label}`, surface: 'relationships', drawKind: 'H',
     });
-    const proseVariant = resolved.line ? resolved.line.id : drawnVariant;
+    // R2-CODE-A-14: WITHOUT REPLACEMENT HOLDS THROUGH THE RESOLUTION. In the head of the cycle (the first `size` ties
+    // of the archetype in the town) a refused index resolves to an admitted index NO EARLIER TIE OF THE ARCHETYPE
+    // PRINTED (the indices printed are `held`, so drawDeclared's hash argmax passes over them; a drawn index an
+    // earlier resolution already printed is refused as held and resolves the same way). Draw-free: the drawn index is
+    // the cycle's as before, and a town whose draws are all admitted resolves exactly as before. Only where every
+    // admitted index is printed does it resolve as it did (a repeat, never a false line).
+    const trustKey = [String(npc?.id ?? npc?.name ?? ''), String(partner?.id ?? partner?.name ?? '')].sort().join('\u0000');
+    const pairTrust = trustOfPair.get(trustKey);
+    const contrary = pairTrust ? pool.filter((l) => l.trust && l.trust !== pairTrust).map((l) => String(l.id)) : [];
+    const held = inHead && (draw.printed.size || contrary.length) ? new Set([...[...draw.printed].map(String), ...contrary]) : null;
+    const once = held ? resolveAt({ draw: () => pool[drawnVariant], held, heldKey: (l) => String(l.id) }) : null;
+    // TAIL-TIES-2 (T6's vote lines refuse more indices under one ruler): PAST THE POOL'S END the cycle runs over the lines
+    // that name BOTH cards (above), so a refused overflow index resolves among THOSE first (the held set's rule: never a
+    // one-name line where an admitted two-name one stands); the whole pool only where none is admitted. Draw-free.
+    const overflow = !inHead && !once ? resolveAt({ draw: () => pool[drawnVariant], held: new Set([...pool.filter((l) => !named.includes(l.id)).map((l) => String(l.id)), ...contrary]), heldKey: (l) => String(l.id) }) : null;
+    const agreeing = contrary.length && !(once && once.line) && !(overflow && overflow.line) ? resolveAt({ draw: () => pool[drawnVariant], held: new Set(contrary), heldKey: (l) => String(l.id) }) : null;
+    const resolved = once && once.line ? once : overflow && overflow.line ? overflow : agreeing && agreeing.line ? agreeing : resolveAt({ draw: (p) => p[drawnVariant] });
+    const index = resolved.line ? resolved.line.id : drawnVariant;
+    draw.printed.add(index);
+    const statedTrust = resolved.line ? resolved.line.trust : undefined;
+    if (statedTrust && !trustOfPair.has(trustKey)) trustOfPair.set(trustKey, statedTrust);
+    // TAIL-TIES-2, the chair's ruling (T6): a second tie of the same kind between the same two cards, drawn the other way
+    // round, is written in the first tie's order (the pair's direction has one home); its index and draw are untouched.
+    const from = String(npc?.id ?? npc?.name ?? '');
+    const to = String(partner?.id ?? partner?.name ?? '');
+    const pairKey = `${archetypeKey ?? archetype?.label}::${[from, to].sort().join('\u0000')}`;
+    if (!firstOfPair.has(pairKey)) firstOfPair.set(pairKey, `${from}>${to}`);
+    const reversed = from !== to && firstOfPair.get(pairKey) === `${to}>${from}`;
+    const proseVariant = reversed ? REVERSED_TIE + index : index;
     return {
       archetypeKey,
       proseVariant,

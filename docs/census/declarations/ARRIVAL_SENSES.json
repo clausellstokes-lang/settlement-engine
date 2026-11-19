@@ -92,9 +92,11 @@
      "lineId": "ARRIVAL_SENSES.smiths.dominant[2]",
      "text": "Racks of new ironwork stand outside the workshops, waiting for the carts.",
      "needs": [],
-     "excludes": [],
+     "excludes": [
+      "crisis: under_siege"
+     ],
      "crisis": null,
-     "colour": true,
+     "colour": false,
      "stop": []
     },
     {
@@ -519,10 +521,13 @@
     {
      "lineId": "ARRIVAL_SENSES.fish.lines[1]",
      "text": "A fishmonger shouts a price over the slap of wet baskets.",
-     "needs": [],
+     "needs": [
+      "fish",
+      "market"
+     ],
      "excludes": [],
      "crisis": null,
-     "colour": true,
+     "colour": false,
      "stop": []
     },
     {
@@ -684,7 +689,7 @@
     },
     {
      "lineId": "ARRIVAL_SENSES.cloth.dominant[2]",
-     "text": "Bolts of cloth hang drying in long bright strips across every yard.",
+     "text": "Bolts of cloth hang drying in long bright strips across the yards.",
      "needs": [],
      "excludes": [],
      "crisis": "any",
@@ -825,7 +830,7 @@
     },
     {
      "lineId": "ARRIVAL_SENSES.faith.lines[1]",
-     "text": "The smell of incense drifts out into the press of the lane.",
+     "text": "The smell of incense drifts out into the lane.",
      "needs": [],
      "excludes": [],
      "crisis": null,
@@ -983,7 +988,7 @@
     },
     {
      "lineId": "ARRIVAL_SENSES.stone.dominant[1]",
-     "text": "Ore carts and stone carts grind along the road in a line that never seems to end.",
+     "text": "Laden carts from the workings grind along the road in a line that never seems to end.",
      "needs": [],
      "excludes": [
       "crisis: under_siege"
@@ -1037,7 +1042,7 @@
     },
     {
      "lineId": "ARRIVAL_SENSES.timber.lines[2]",
-     "text": "Curls of shavings blow across the lane from a carpenter's bench.",
+     "text": "Curls of shavings and chips of bark blow across the lane.",
      "needs": [],
      "excludes": [],
      "crisis": null,
@@ -1082,9 +1087,11 @@
      "lineId": "ARRIVAL_SENSES.timber.dominant[1]",
      "text": "Stacks of seasoning planks line the road in, taller than the carts that wait for them.",
      "needs": [],
-     "excludes": [],
-     "crisis": null,
-     "colour": true,
+     "excludes": [
+      "crisis: under_siege"
+     ],
+     "crisis": "any",
+     "colour": false,
      "stop": []
     },
     {

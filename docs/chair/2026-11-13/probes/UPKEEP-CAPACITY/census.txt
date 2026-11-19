@@ -1,0 +1,188 @@
+## market
+  Fish market [Economy] | Fish market | rung 1/1 | village,town,city,metropolis
+  Furrier's district [Economy] | Furrier's district | rung 1/1 | city,metropolis
+  Weekly market [Economy] | Periodic market | rung 1/4 | hamlet
+  Weekly market [Economy] | Weekly market | rung 2/4 | village,town
+  Weekly market [Economy] | Daily markets | rung 3/4 | city
+  Weekly market [Economy] | District markets (5-10) | rung 4/4 | metropolis | n=5-10
+  Multiple market squares [Economy] | Market square | rung 1/2 | town
+  Multiple market squares [Economy] | Multiple market squares | rung 2/2 | city,metropolis
+  Major annual fairs [Economy] | Annual fair | rung 1/2 | town
+  Major annual fairs [Economy] | Major annual fairs | rung 2/2 | city,metropolis
+  International trade center [Economy] | International trade center | rung 1/1 | metropolis
+  Merchant guilds (3-8) [Economy] | Merchant guilds (3-8) | rung 1/3 | town | n=3-8
+  Merchant guilds (3-8) [Economy] | Merchant guilds (15-40) | rung 2/3 | city | n=15-40
+  Merchant guilds (3-8) [Economy] | Merchant guilds (50-100+) | rung 3/3 | metropolis | n=50-100+
+  Caravan masters' exchange [Economy] | Caravaneer's post | rung 2/3 | town
+  Carriers' hiring hall [Economy] | Carriers' guild | rung 2/2 | town
+  Auction house [Economy] | Auction house | rung 1/1 | town,city,metropolis
+  Cobbler's guild [Crafts] | Cobbler's guild | rung 2/2 | town,city,metropolis
+  Tailor's guild [Crafts] | Tailor's guild | rung 2/2 | town,city,metropolis
+## granary
+  Town granary [Economy] | Town granary | rung 1/3 | town
+  Town granary [Economy] | City granaries | rung 2/3 | city
+  Town granary [Economy] | State granary complex | rung 3/3 | metropolis
+## alchemists
+  Apothecary district [Crafts] | Apothecary district | rung 3/3 | city,metropolis
+  Alchemist quarter [Crafts] | Alchemist shop | rung 1/2 | town
+  Alchemist quarter [Crafts] | Alchemist quarter | rung 2/2 | city,metropolis
+## clergyShrine
+  Wayside shrine [Religious] | Wayside shrine | rung 1/1 | thorp,hamlet,village
+  Monastery or friary [Religious] | Monastery or friary | rung 1/3 | town
+## parish
+  Wayside shrine [Religious] | Wayside shrine | rung 1/1 | thorp,hamlet,village
+  Access to parish church [Religious] | Access to parish church | rung 1/5 | thorp,hamlet
+  Access to parish church [Religious] | Parish church | rung 2/5 | village
+  Access to parish church [Religious] | Parish churches (2-5) | rung 3/5 | town | n=2-5
+  Access to parish church [Religious] | Parish churches (10-30) | rung 4/5 | city | n=10-30
+  Access to parish church [Religious] | Parish churches (50-100+) | rung 5/5 | metropolis | n=50-100+
+  Priest (resident) [Religious] | Priest (resident) | rung 1/1 | village
+  Monastery or friary [Religious] | Monastery or friary | rung 1/3 | town
+  Cathedral (10,000+ only) [Religious] | Cathedral (10,000+ only) | rung 1/2 | city
+  Cathedral (10,000+ only) [Religious] | Great cathedral | rung 2/2 | metropolis
+## clergy
+  Access to parish church [Religious] | Access to parish church | rung 1/5 | thorp,hamlet
+  Access to parish church [Religious] | Parish church | rung 2/5 | village
+  Access to parish church [Religious] | Parish churches (2-5) | rung 3/5 | town | n=2-5
+  Access to parish church [Religious] | Parish churches (10-30) | rung 4/5 | city | n=10-30
+  Access to parish church [Religious] | Parish churches (50-100+) | rung 5/5 | metropolis | n=50-100+
+  Monastery or friary [Religious] | Monastery or friary | rung 1/3 | town
+  Cathedral (10,000+ only) [Religious] | Cathedral (10,000+ only) | rung 1/2 | city
+  Cathedral (10,000+ only) [Religious] | Great cathedral | rung 2/2 | metropolis
+## clergyStrong
+  Monastery or friary [Religious] | Monastery or friary | rung 1/3 | town
+  Cathedral (10,000+ only) [Religious] | Cathedral (10,000+ only) | rung 1/2 | city
+  Cathedral (10,000+ only) [Religious] | Great cathedral | rung 2/2 | metropolis
+## hospital
+  Monastery or friary [Religious] | Monastery or friary | rung 1/3 | town
+  Monastery or friary [Religious] | Multiple monasteries | rung 2/3 | city
+  Monastery or friary [Religious] | Major monasteries (5-10) | rung 3/3 | metropolis | n=5-10
+  Small hospital [Religious] | Small hospital | rung 1/3 | town
+  Small hospital [Religious] | Major hospital | rung 2/3 | city
+  Small hospital [Religious] | Hospital network | rung 3/3 | metropolis
+  Healer (divine, 1st level) [Magic] | Healer (divine, 1st level) | rung 1/1 | village
+## druids
+  Druid Circle [Religious] | Druid Circle | rung 1/1 | village
+  Elder Grove Council [Religious] | Elder Grove Council | rung 1/1 | town,city,metropolis
+## elders
+  Elder Grove Council [Religious] | Elder Grove Council | rung 1/1 | town,city,metropolis
+  Informal elder consensus [Government] | Informal elder consensus | rung 1/1 | thorp,hamlet,village
+  Lord's reeve [Government] | Lord's reeve | rung 1/1 | thorp
+  Household elder [Government] | Household elder | rung 1/1 | thorp
+  Lord's steward [Government] | Lord's steward | rung 1/3 | hamlet,village
+  City administration [Government] | Village reeve | rung 1/3 | village
+  Village elder [Government] | Village elder | rung 1/1 | village
+## court
+  Democratic assembly [Government] | Democratic assembly | rung 1/1 | city,metropolis
+  City hall [Infrastructure] | Town hall | rung 1/2 | town
+  City hall [Infrastructure] | City hall | rung 2/2 | city,metropolis
+  Courthouse [Infrastructure] | Courthouse | rung 1/3 | town
+  Courthouse [Infrastructure] | Multiple courthouses | rung 2/3 | city
+  Courthouse [Infrastructure] | Multiple court buildings | rung 3/3 | metropolis
+## prison
+  Small prison/stocks [Infrastructure] | Small prison/stocks | rung 1/3 | town
+  Small prison/stocks [Infrastructure] | Large prison | rung 2/3 | city
+  Small prison/stocks [Infrastructure] | Massive prison | rung 3/3 | metropolis
+## walls
+  Palisade or earthworks [Defense] | Palisade | rung 1/5 | thorp
+  Palisade or earthworks [Defense] | Palisade or earthworks | rung 2/5 | hamlet,village
+  Palisade or earthworks [Defense] | Town walls | rung 3/5 | town
+  Palisade or earthworks [Defense] | City walls and gates | rung 4/5 | city
+  Palisade or earthworks [Defense] | Massive walls and fortifications | rung 5/5 | metropolis
+  Gates (if walled) [Defense] | Gates (if walled) | rung 1/1 | town
+  Citadel [Defense] | Citadel | rung 1/1 | town,city,metropolis
+## militia
+  Citizen militia [Defense] | Citizen militia | rung 2/4 | hamlet,village
+## watch
+  Citizen militia [Defense] | Town watch | rung 3/4 | town
+  Citizen militia [Defense] | Professional city watch | rung 4/4 | city,metropolis
+  Village watch [Defense] | Village watch | rung 1/1 | village
+## garrison
+  Citizen militia [Defense] | Professional city watch | rung 4/4 | city,metropolis
+  Barracks [Defense] | Barracks | rung 1/3 | town
+  Barracks [Defense] | Garrison | rung 2/3 | city
+  Barracks [Defense] | Multiple garrisons | rung 3/3 | metropolis
+## company
+  Mercenary quarter [Defense] | Free company hall | rung 1/2 | town
+  Mercenary quarter [Defense] | Mercenary quarter | rung 2/2 | city,metropolis
+## wardens
+  Warden's Lodge [Defense] | Warden's Lodge | rung 1/1 | town
+## arcane
+  Wizard's tower [Magic] | Traveling hedge wizard | rung 1/3 | hamlet
+  Wizard's tower [Magic] | Hedge wizard | rung 2/3 | village
+  Wizard's tower [Magic] | Wizard's tower | rung 3/3 | town,city,metropolis
+  Mages' guild [Magic] | Mages' guild | rung 1/2 | town,city
+  Mages' guild [Magic] | Mages' district | rung 2/2 | metropolis
+  Academy of magic [Magic] | Academy of magic | rung 1/1 | metropolis
+  Enchanter's shop [Magic] | Enchanter's shop | rung 1/1 | city,metropolis
+  Scroll scribe [Magic] | Scroll scribe | rung 1/1 | town,city,metropolis
+## arcaneTower
+  Wizard's tower [Magic] | Wizard's tower | rung 3/3 | town,city,metropolis
+## arcaneGuild
+  Wizard's tower [Magic] | Wizard's tower | rung 3/3 | town,city,metropolis
+  Mages' guild [Magic] | Mages' guild | rung 1/2 | town,city
+  Mages' guild [Magic] | Mages' district | rung 2/2 | metropolis
+  Academy of magic [Magic] | Academy of magic | rung 1/1 | metropolis
+## teleport
+  Teleportation circle [Magic] | Teleportation circle | rung 1/1 | town,city,metropolis
+## charter
+  Adventurers' charter hall [Adventuring] | Adventurers' charter hall | rung 1/2 | hamlet,village,town
+  Adventurers' charter hall [Adventuring] | Multiple adventurers' guilds | rung 2/2 | city,metropolis
+  Hireling hall [Adventuring] | Hireling hall | rung 1/1 | town,city,metropolis
+## authored pairs touching a part
+  Parish church -> Parish churches (2-5) | clergy,parish -> clergy,parish
+  Parish church -> Parish churches (10-30) | clergy,parish -> clergy,parish
+  Parish churches (2-5) -> Parish churches (10-30) | clergy,parish -> clergy,parish
+  Citizen militia -> Town watch | militia -> watch
+  Citizen militia -> Professional city watch | militia -> garrison,watch
+  Town watch -> Professional city watch | watch -> garrison,watch
+  Village watch -> Town watch | watch -> watch
+  Palisade or earthworks -> Town walls | walls -> walls
+  Town walls -> City walls and gates | walls -> walls
+  Barracks -> Garrison | garrison -> garrison
+  Hedge wizard -> Wizard's tower | arcane -> arcane,arcaneTower,arcaneGuild
+  Traveling hedge wizard -> Hedge wizard | arcane -> arcane
+  Alchemist shop -> Alchemist quarter | alchemists -> alchemists
+  Wizard's tower -> Mages' guild | arcane,arcaneTower,arcaneGuild -> arcane,arcaneGuild
+  Town granary -> City granaries | granary -> granary
+  Town hall -> City hall | court -> court
+  Carriers' hiring hall -> Carriers' guild |  -> market
+  Carriers' guild -> Caravan masters' exchange | market -> 
+  Small prison/stocks -> Large prison | prison -> prison
+  Courthouse -> Multiple courthouses | court -> court
+  Merchant guilds (3-8) -> Merchant guilds (15-40) | market -> market
+  Adventurers' charter hall -> Multiple adventurers' guilds | charter -> charter
+  Apothecary (established) -> Apothecary district |  -> alchemists
+  Apothecary -> Apothecary district |  -> alchemists
+  Small hospital -> Major hospital | hospital -> hospital
+  Fishmonger -> Fish market |  -> market
+  Hunter's lodge -> Furrier's district |  -> market
+  Periodic market -> Weekly market | market -> market
+  Weekly market -> Daily markets | market -> market
+  Daily markets -> District markets (5-10) | market -> market
+  Market square -> Multiple market squares | market -> market
+  Annual fair -> Major annual fairs | market -> market
+  Merchant guilds (15-40) -> Merchant guilds (50-100+) | market -> market
+  Waystation -> Caravaneer's post |  -> market
+  Caravaneer's post -> Caravan masters' exchange | market -> 
+  Pack animal trader -> Caravaneer's post |  -> market
+  City granaries -> State granary complex | granary -> granary
+  Cobbler -> Cobbler's guild |  -> market
+  Tailor -> Tailor's guild |  -> market
+  Access to parish church -> Parish church | clergy,parish -> clergy,parish
+  Parish churches (10-30) -> Parish churches (50-100+) | clergy,parish -> clergy,parish
+  Monastery or friary -> Multiple monasteries | clergy,clergyShrine,clergyStrong,hospital,parish -> hospital
+  Multiple monasteries -> Major monasteries (5-10) | hospital -> hospital
+  Cathedral (10,000+ only) -> Great cathedral | clergy,clergyStrong,parish -> clergy,clergyStrong,parish
+  Major hospital -> Hospital network | hospital -> hospital
+  Lord's reeve -> Lord's steward | elders -> elders
+  Lord's steward -> Lord's appointee | elders -> 
+  Village reeve -> Town council | elders -> 
+  Multiple courthouses -> Multiple court buildings | court -> court
+  Large prison -> Massive prison | prison -> prison
+  Palisade -> Palisade or earthworks | walls -> walls
+  City walls and gates -> Massive walls and fortifications | walls -> walls
+  Household levy -> Citizen militia |  -> militia
+  Garrison -> Multiple garrisons | garrison -> garrison
+  Free company hall -> Mercenary quarter | company -> company
+  Mages' guild -> Mages' district | arcane,arcaneGuild -> arcane,arcaneGuild

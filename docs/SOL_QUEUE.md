@@ -132,6 +132,13 @@ identically — read "OPUS-ERA" as "post-boundary era", which is yours.**
      the in-file note above the two `compareEntityArrays` calls records the non-repair.
      ⛔ **OWNER-OWED (ODQ §338.2)** — re-pointing it alters an anti-hallucination guard
      on a PAID AI surface and removing the arms is FAIL-OPEN. Leave them banked.
+   **2026-11-13, the schema-42 rung (STYLE-2-MERGE point 47, the COHERENCE-AGREE merge 22cc9ef7d): the join returns
+   FOUR rows.** The fourth is `supplyChains on settlement` at `src/domain/aiGrounding.js` (1 read), a second read SITE of
+   the identity the fence above banks: `groundingChains`' legacy fallback chain, added by COHERENCE-AGREE-8 (88f942e96),
+   ADMITTED ORDINARY by the chair's ruling (i) on STOP 47a (its writer an old save's or custom content's shape, outside
+   the corpus; the rung's review `docs/chair/2026-11-13/osr-rung42-agree-tier-seed-review.json`). It is documented by the
+   ruling, not at the read (the merge changed no `src/` byte); whether the grounding still wants the fallback is a later
+   seat's question on that file.
    The other eighteen identities are repaired or re-triaged (`c74048e4`, `e429a4e8`,
    `5afe9b2e`, `aed0fc0e`, `904b7bb0` — three of them were live user-visible holes),
    so this row must never again be read as naming them. ⚠ Any *new* writer-side-vs-

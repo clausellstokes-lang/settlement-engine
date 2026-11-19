@@ -106,7 +106,6 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // LANDING-R2 seat E (2026-11-07): the two raw readers the pool census merged in, each classified
   // by reading its one roster read (neither aggregates providers):
   'src/domain/facts/factsOf.js': 'delegates — birthFactsOf (census-1c unit 2, fbba809db) only HANDS `partial.institutions` on to factsOf, whose institution facts are answered by facts/institutions.js :: hasInstitution → liveInstitutionNames → liveInstitutions (the ruin filter). The file reads no row itself and credits nothing.',
-  'src/domain/display/validationOnPage.js': 'name-lookup/display — resourceGapLines (reader-r1 unit 2, d3b9280f6) resolves the ONE house a generator gap row already names (`institutions.find(i => i?.name === name)`, falling back to `{ name }`) so the gap line can word that house. It credits no institution with capacity and sums nothing.',
   'src/domain/coherence/hookTruth.js': 'existence-gate — reads `defenseProfile.institutions` ONLY to know whether the record carries a defence roster at all (`defenseKnown`: an unknown roster licenses nothing). Every defence and hospital FACT comes from defenseFacts.js :: defenseFactsOf, which reads the live roster through liveInstitutions(). Lane WIRING-2 (2026-11-03, HOOKS request 6) moved the facts there; before it this file was COMPLIANT through its own isLiveInstitution hospital read.',
   'src/domain/traditions/politics.js': 'existence/candidate — tradition-owner candidate membership (deferred; owner glance)',
   // MF-UC0 (ODQ §311.1, §441, §445.2): the underground SHEET's existence gate reads the RAW
@@ -165,6 +164,9 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/worldPulse/magicBufferModel.js': 'loss-count scalar — `loss.institutions` is the StrikeLoss COUNT of buildings one calamity would fell (an integer supplied by the calamity producer via magicBufferApply), never a settlement roster; the leaf is pure arithmetic that sees no settlement, roster, world or name, so there is no row to ruin-filter and no provider capacity is credited',
   // ── penalty-side: counts impaired/criminal for a PENALTY, not live crediting ─────
   'src/domain/corruption.js': 'penalty-side — criminal/corruption-impairment classifier (drag, not credit)',
+  // TAIL-TIES-10 (the chair's ruling T29 (3)): the crime fact's leaf. Its roster reads moved verbatim out of display/defenseDisplay.js
+  // (T28), which this walker read as COMPLIANT file-granularly only because it imports liveInstitutions for its Legal row.
+  'src/domain/facts/criminalStructureKey.js': 'penalty-side/name-lookup — criminalStructureKeyOf classifies the CRIMINAL structure by roster names (the thieves\' guild / syndicate / smuggling / fence ladder, THIEVES_GUILD_HOUSE) and hands the roster to crimeSignalOf / rivalRingsOf, and ringHousesOf (TAIL-CLOSE-SRC-5, SR5 (a): moved verbatim out of defenseDisplay.js :: ringWithoutSeat) names the same ladder\'s houses for the ring note; it credits no provider capacity. Moved verbatim (T28): it reads ruined rows exactly as the display did before the cut, so whether a ruined criminal house should key the structure is a behaviour question named for the owner, not this move\'s',
   // ALLEGIANCE-CAR1 (2026-11-08): the retired corruptionPass's roster read moved here with the deal (J-2), measured.
   'src/domain/people/allegiance.js': 'penalty-side — the allegiance deal reads the roster\'s CRIMINAL houses (isCriminalInstitution) for the corruption climate and organized-crime pressure (drag, not credit), as the retired corruptionPass did through corruption.js, and looks a card\'s house up by name (the handler pool, the `via` mark); it credits no provider capacity',
   'src/domain/state/deriveSystemState.js': 'penalty-side — countByStatus impaired/critical risk penalty (status-aware)',
@@ -212,7 +214,15 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // derives reports capacity, never sums it into a provider total.
   'src/domain/worldPulse/institutionStatusLifecycle.js': 'status-grader — grades operational/impaired/shell, so it MUST see the non-live rows liveInstitutions() drops (a shell IS _worldPulseInactive); carries its own isRuinedInstitution guard via institutionStatusModel.js, and credits no provider capacity',
   // ── display: renders the roster (showing a ruin is correct) ──────────────────────
-  'src/domain/display/defenseDisplay.js': 'display — defenseProfile.institutions force buckets, not the roster',
+  // ⭐ defenseDisplay.js's exempt row is DELETED (W2-C-LEAVES-SIDE, 2026-11-13, the chair's #575): its Legal
+  // Infrastructure row now reads the LIVE roster (`liveInstitutions`, a ruined courthouse tries no case), so this
+  // walker reads the file as compliant and asked for the row ("now routes through the ruin filter"). Its other reads
+  // of the defence buckets (`defenseProfile.institutions`) are unchanged and stay a display of what the town built.
+  // ⭐ TAIL-CLOSE-SRC-5 (the chair's ruling SR5, 2026-11-15): the Legal row's read left for the defence home (SR1), and the
+  // file is COMPLIANT again on its own reads, with no row: the bucket reads (`arcaneDefenseOf`, `deriveArmedForces`) are
+  // counted and listed as what the town fields, so they DECIDE what stands, and they now drop an entry whose house stands
+  // ruined on the current roster (`isLiveInstitution` / `liveInstitutions`); `ringWithoutSeat`'s house lookup moved
+  // verbatim to facts/criminalStructureKey.js :: ringHousesOf (its exempt row above). The discovery count is unmoved.
   'src/domain/display/institutionProfile.js': 'display — defenseProfile.institutions buckets',
   // ⭐ threatAssessment.js's exempt row is DELETED (lane DEFENSE, 2026-11-03): its rows now ask
   // `domain/defense/defenseFacts.js :: defenseFactsOf`, which reads the LIVE roster through
@@ -241,6 +251,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // ⚠ Do NOT re-add the row "just in case" — an exempt entry for a non-reader is
   // exactly the stale state that arm exists to forbid.
   'src/domain/display/visibilityAudit.js': 'display/audit — covert-dossier impairment read',
+  'src/domain/display/impairedListShown.js': 'name-lookup/display — BAR7-CARDS item 3 (2026-11-17; RULED EXEMPT BY THE CHAIR after the landing at a44495b59): impairedListMarked finds the roster row of each house the record\'s Outlook list NAMES, only to ask the mark leaf (crisisStoppedRow.js :: rowMarkText) for its mark; a ruined house takes no mark and falls out of the list. It sums nothing and credits no institution with capacity. Routing it through liveInstitutions() would KEEP a ruined house\'s name (a name the roster does not hold is kept), the opposite of a filter. The helper stood unscanned in ViabilityTab.jsx (a component file) before it moved to this leaf.',
 });
 
 /**
@@ -520,7 +531,18 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // roster read (SW-B2's 966709f9c, A·O2: the identity line reads the institutions), COMPLIANT (liveInstitutions), measured by this file's own scan.
     // COHERENCE-POWERS (2026-11-12): 109 -> 110, src/domain/dossier/seatHolder.js :: seatHouseFaceOf's roster-name read (EXEMPT above:
     // the seat's house where a house leads is faced by the dual-hat leader), measured by this file's own scan.
-    expect(readers.length).toBe(110);
+    // TAIL-TIES-10 (2026-11-15, T29 (3)): 110 -> 111, src/domain/facts/criminalStructureKey.js :: criminalStructureKeyOf's roster-name read
+    // (EXEMPT above; moved verbatim out of defenseDisplay.js, which stays a reader), measured by this file's own scan.
+    // BAR4-HOUSES (2026-11-16, the chair's ruling FW1): 111 -> 112, src/domain/foodways.js :: tilledOneFrame's roster read (the
+    // one-source foodways frame against the subsistence holdings), COMPLIANT (liveInstitutions), measured by this file's own scan.
+    // BAR5-FOOD (2026-11-16, L3.foodLineStopped): 112 -> 113, src/domain/facts/catchStopped.js :: catchStoppedBySiege's roster read (the
+    // fish trade's houses the siege stops), COMPLIANT (liveInstitutions), measured by this file's own scan.
+    // CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18): 113 -> 115, read from this arm's own failure message ("expected 115
+    // to be 113") at the frozen tree 70e557d5b: src/domain/display/impairedListShown.js :: impairedListMarked's roster-name read
+    // (BAR7-CARDS, JOIN-17 points 20 and 25; EXEMPT above, ruled by the chair after the landing at a44495b59) and
+    // src/domain/facts/sovereign.js :: liveNamesOf's roster read (BAR6-HOUSES, JOIN-17 point 2), COMPLIANT (a local
+    // `_worldPulseInactive` standing guard). The arm "every reader is COMPLIANT or EXEMPT" is green on both.
+    expect(readers.length).toBe(115);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

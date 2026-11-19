@@ -1,0 +1,36 @@
+ FAIL  tests/build/engineServiceStoreParity.test.js > the engine service answers the store's own requests with the store's own records > generate: the bundle's birth for the wire body equals the local core on the store's request, stamp included
+ FAIL  tests/build/engineServiceStoreParity.test.js > the engine service answers the store's own requests with the store's own records > generate: an account that may customize, with custom content turned off — neither side stamps
+ FAIL  tests/build/engineServiceStoreParity.test.js > the engine service answers the store's own requests with the store's own records > derive: the remote re-derivation of a store-born world equals the local one
+ FAIL  tests/components/dossierPhoneFloorAllViews.test.jsx > THE PHONE FLOORS — every dossier view > every line in every tab clears its floor (prose 14px, chrome 12px) at phone width
+ FAIL  tests/components/dossierPhoneFloorAllViews.test.jsx > THE PHONE FLOORS — every dossier view > desktop is untouched — the SAME walk, pinned to DESKTOP_BASELINE
+ FAIL  tests/generators/pipelinePinnedChoosers.test.js > EM-B2a3 — the institution and power choosers consult the pin seam > A1 — the null change: an unpinned run and pins {} leave the golden corpus byte-identical
+ FAIL  tests/generators/pipelinePinnedChoosers.test.js > EM-B2a3 — the institution and power choosers consult the pin seam > A6 — the pin bag is never written through, and the uncloned control keeps that honest
+ FAIL  tests/generators/stressSummaryName.test.js > F8 — stress summaries render with the real settlement name > leaves NO summaryRoll token on any persisted stress entry
+ FAIL  tests/generators/urbanBandInstitutions.test.js > G3 — the cumulative laws at generation > Beast trainers is rolled natively in towns, cities and metropolises
+ FAIL  tests/lint/poolDominance.walker.test.js > no drawn pool prints more of one line than its register allows > every drawn pool has a row, and every row is a drawn pool
+ FAIL  tests/lint/poolDominance.walker.test.js > no drawn pool prints more of one line than its register allows > no ceiling sits loose above its measure
+ FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A1 reconstructs the exact four-family AO-0 corpus twice from one build
+ FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A2 rejects malformed selector axes while retaining nulls and projected nested gaps
+ FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A3 freezes all 58 identities counts bytes digest and movement polarities
+ FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A5 closes twelve pulse-history records and pins overlapping headline aliases
+ FAIL  tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A6 reaches the regional audit log while proving its selected prose zero
+ FAIL  tests/lint/sourceCitationIntegrity.walker.test.js > source citation integrity — the live estate > ARM 2 — ONLY-SHRINKS: no NEW past-EOF citation in a live document
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the frozen shapesDigest EQUALS the in-process digest of corpus.shapes — two executions of one builder are one corpus by bit, not by count
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the EXECUTED corpus and the closures > the producers ran and the write population is not empty
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > every DARK identity is REGISTERED or BANKED — the shrink-only comparison is clean
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the live judgment > the banked cohort is exact — a member now LIT or no longer written is stale, never silently spent
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE MUTANT REDS: a synthetic written key on a judged shape with no reader is DARK, unregistered, ceiling 0
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE SWAP MUTANT: a new dark identity at constant count reds with its identity named
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the MUTANTS > THE GROWTH LAW IS EXECUTED: a live-derived register is green and ONE planted dark identity reds
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the lit-dial arm > the lit arm changes no draw: the walker corpus is byte-identical beside the lit one, and the dials are passed on the arm’s own configs
+ FAIL  tests/property/dossierProseManifest.test.js > the composed-prose manifest — the DRIFT corpus, both audiences > ⭐⭐ THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally is derived rather than described
+ FAIL  tests/property/dossierProseManifest.test.js > the composed-prose manifest — the DRIFT corpus, both audiences > ⭐ THE DRIFT ARM: no row added, no row removed, no row moved
+ FAIL  tests/property/dossierProseManifest.test.js > the two controls no one-audience manifest can see > ⭐ THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a pool is mixed
+ FAIL  tests/property/generatorGoldenMaster.test.js > generator golden master (cross-build output stability) > every config produces byte-identical output to the golden master
+ FAIL  tests/property/heraldKnowledgeDeskGolden.test.js > the knowledge desk — the non-omniscient Herald golden (captured first, byte-stable after) > THE REFILE MOVES NO CONTENT BYTE, AND EXACTLY THE DECLARED ITEMS CHANGE DESK
+ FAIL  tests/property/statecraftExposureBand.test.js > STATECRAFT-BAND U1 — the seeded run: the chain at the band > dramatic_campaign fp-read-2, head on, twenty years: scandals inside the measured band and mobilizations at the dark twin
+ FAIL  tests/domain/intentAtlasSoakDistiller.test.js > intent atlas soak prior — the committed artifact is reproducible > the documented default run reproduces the committed distillate byte for byte
+ FAIL  tests/lib/instantWorld/mundaneRealmAcceptance.test.js > MG-4.2 — the twin-world envelope: a mundane realm is not a thinner realm > the recorded census figures are the ones the harness actually produces
+ Test Files  15 failed | 526 passed | 4 skipped (545)
+      Tests  34 failed | 6758 passed | 45 skipped (6837)

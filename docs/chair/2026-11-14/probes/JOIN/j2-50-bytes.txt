@@ -1,0 +1,7 @@
+src/data/dossierStateProse/defense.generated.js 234545 -> 262544 gzip 31738 -> 35291
+src/data/dossierStateProse/economy.generated.js 170255 -> 184022 gzip 23958 -> 25652
+src/data/dossierStateProse/general.generated.js 279568 -> 297282 gzip 35664 -> 37947
+src/data/dossierStateProse/power.generated.js 124251 -> 130008 gzip 17495 -> 18272
+src/data/dossierStateProse/stressors.generated.js 147483 -> 147666 gzip 20773 -> 20815
+src/data/dossierStateProse/warFaith.generated.js 178226 -> 180300 gzip 24601 -> 25094
+src/data/dossierRelations.generated.js 28249 -> 28926 gzip 2664 -> 2673

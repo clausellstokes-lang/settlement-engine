@@ -13,6 +13,7 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { readinessBandOf } from '../../src/data/bandLadders.js';
 import {
   RECOGNISED_MONSTER_TIERS, SLOT_FILL_SHAPES, SLOT_FILL_TABLES, arcaneDefensePoolKey,
   beastsRowPoolKey, charterPoolKey, contractedForcePoolKey, countryWarrantsCharter,
@@ -49,6 +50,7 @@ import { DM_FIELD_FRAMED_BY_BLOCK, isDmEditableProsePath } from '../../src/domai
 import { DEFENSE_STRESS_STATUS, deriveCriminalStructure, deriveGuardAssessment, deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { deriveMagicReliance } from '../../src/domain/magicReliance.js';
+import { relianceShownOf } from '../../src/domain/display/magicProvisionShown.js'; // BAR5-MAGIC: the word the page prints
 import { codeOnly } from '../helpers/codeOnlySource.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { SMALL_TIERS, TIER_ORDER, TOWN_PLUS_TIERS } from '../../src/data/constants.js';
@@ -197,10 +199,12 @@ describe('the defense desk — the FIRST-SURVEY framing rests on a measurement',
       ...CLEAN_LABELS.map((label) => [label, undefined]),
       ...COMPOUND_CONDITIONS.map((c) => [`Tense — ${c}`, undefined]),
       ['Strained — Mass Migration', [{ type: 'mass_migration', direction: 'departures' }]],
-      ['Tense — Some Future Crisis', undefined],
+      // DEBT-1 (2026-11-17): the generic COMPOUND pool's lines declare the size band (`tier: ≥ village` / `≤ hamlet`,
+      // BAR6-DEFDESK be35850406, 0218a4df8) and the generator always writes a tier: the fixture answers it
+      ['Tense — Some Future Crisis', undefined, { tier: 'village' }],
     ];
-    for (const [label, stress] of swept) {
-      const drawn = defenseStateProse({ ...town(label), ...(stress ? { stress } : {}) }, { seed: `d-${label}`, audience: 'dm' });
+    for (const [label, stress, extra] of swept) {
+      const drawn = defenseStateProse({ ...town(label), ...(stress ? { stress } : {}), ...(extra || {}) }, { seed: `d-${label}`, audience: 'dm' });
       for (const key of ['publicOrder', 'firstSurvey']) {
         const rung = drawn[key]?.rung;
         if (rung?.sentence) {
@@ -310,12 +314,18 @@ const FORCE_NAME = Object.freeze({
 function fort({
   monsterThreat = 'frontier', walls = false, garrison = false, militia = false,
   hasCourtSystem = false, hasPrison = false, hasGranary = false, hasHospital = false,
-  hasChurch = false, economic = 50, ruined = false,
+  hasChurch = false, economic = 50, ruined = false, prosperity = undefined, storageMonths = undefined,
 } = {}) {
   const roster = [];
   if (walls) roster.push({ name: FORCE_NAME.walls });
   if (garrison) roster.push({ name: FORCE_NAME.garrison });
   if (militia) roster.push({ name: FORCE_NAME.militia });
+  // DEBT-1 (2026-11-17): the producer's flags are the defence home's own reading of the roster (`priorityHelpers.js ::
+  // getInstFlags`: hasCourtSystem = defenseFactsOf.hasCourt, hasPrison = .hasPrison), and BAR6-DEFDESK (be35850406) made the
+  // full legal chain's lines declare `court` and `prison`, which read the roster. A fixture with the flags and no rows
+  // was a town no generator births: the pool read unanswered (mute). The rows the flags stand for are now on the roster.
+  if (hasCourtSystem) roster.push({ name: 'Courthouse' });
+  if (hasPrison) roster.push({ name: 'Prison' });
   return {
     name: 'Thornwall', _seed: 'seed-def2',
     config: { monsterThreat },
@@ -325,7 +335,10 @@ function fort({
       ? roster.map((i) => ({ ...i, status: 'ruined', _worldPulseInactive: true }))
       : roster,
     defenseProfile: { scores: { economic } },
-    economicState: { compound: { inst: { hasCourtSystem, hasPrison, hasGranary, hasHospital, hasChurch } } },
+    economicState: { compound: { inst: { hasCourtSystem, hasPrison, hasGranary, hasHospital, hasChurch } }, ...(prosperity ? { prosperity } : {}),
+      // DEBT-1 (2026-11-17): the food record's months in store, which the economy always writes; BAR6-DEFDESK's CHAIN: food
+      // trades failing lines declare `stores` (be35850406), so a fixture that carries none reads that pool unanswered
+      ...(storageMonths !== undefined ? { foodSecurity: { storageMonths } } : {}) },
   };
 }
 
@@ -572,10 +585,13 @@ describe('DS-DEF-2 — ALIVENESS over every combination the generator can build'
                 for (const hasGranary of [true, false]) {
                   for (const hasHospital of [true, false]) {
                     for (const hasChurch of [true, false]) {
-                      for (const economic of [80, 50, 30, 10]) {
+                      // BAR4-CLOSE-SWEEP (2026-11-16): the record's prosperity label, an axis of the space since BAR4-CORPUS-DEF
+                      // 6f8081add (D3, DECLARED: every `Economic Survival: WEAK` line reads `prosperity: ≤ comfortable`, its twin
+                      // v6 `≥ prosperous`); the economy always writes it, the fixture did not, so the pool read unanswered (mute)
+                      for (const [economic, prosperity] of [80, 50, 30, 10].flatMap((e) => [[e, 'Moderate'], [e, 'Prosperous']])) {
                         const drawn = defenseThreatProse(fort({
                           monsterThreat, walls, garrison, militia, hasCourtSystem,
-                          hasPrison, hasGranary, hasHospital, hasChurch, economic,
+                          hasPrison, hasGranary, hasHospital, hasChurch, economic, prosperity,
                         }), { seed: 'sweep' });
                         for (const row of ['beasts', 'invasion', 'internal', 'economic', 'disaster']) {
                           const rung = drawn[row];
@@ -666,8 +682,13 @@ describe('DS-DEF-1 — the posture header, and a BLOCKER that had decayed', () =
     // derives from `readiness.score` — the mean PLUS a tier bonus MINUS a threat penalty.
     // Banding any other quantity would let the page print "Fortress" beside a sentence
     // calling the town effectively undefended.
+    // RE-KEYED BY IDENTITY (R3-TABS L1, the chair's ruling of 2026-11-13: one ladder for one number): the
+    // lens reads the BADGE's word for the score (`readinessBandOf`, the readiness ladder), no longer the
+    // aspects' ladder; 64 (Well-Defended) reads STRONG and 19 (Vulnerable) WEAK, where `scoreBand` said
+    // ADEQUATE and CRITICAL. tests/domain/defensePostureReadsBadge.test.js holds every score.
+    const POOL_OF_BADGE = { Fortress: 'STRONG', 'Well-Defended': 'STRONG', Defensible: 'ADEQUATE', 'Lightly Defended': 'WEAK', Vulnerable: 'WEAK', Undefended: 'CRITICAL' };
     for (const n of [90, 65, 64, 30, 19, 0]) {
-      expect(posturePoolKey(n)).toBe(`readiness ${scoreBand(n)}`);
+      expect(posturePoolKey(n)).toBe(`readiness ${POOL_OF_BADGE[readinessBandOf(n).label]}`);
     }
     expect(posturePoolKey(80)).toBe('readiness STRONG');
     expect(posturePoolKey(45)).toBe('readiness ADEQUATE');
@@ -676,7 +697,7 @@ describe('DS-DEF-1 — the posture header, and a BLOCKER that had decayed', () =
     // …and the generator really does write that field, on a real profile.
     const built = generateDefenseProfile(fort({ walls: true, garrison: true }));
     expect(typeof built.readiness.score).toBe('number');
-    expect(posturePoolKey(built.readiness.score)).toBe(`readiness ${scoreBand(built.readiness.score)}`);
+    expect(posturePoolKey(built.readiness.score)).toBe(`readiness ${POOL_OF_BADGE[built.readiness.label]}`);
   });
 
   it('an absent readiness score is SILENCE, not CRITICAL', () => {
@@ -1915,6 +1936,9 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
         tradeRouteAccess: 'road', priorityMagic: 85, priorityReligion: 80,
       }, null, { seed: `mx-${i}`, customContent: {} });
       if (s.defenseProfile?.magicDependency !== true) continue;
+      // BAR5-MAGIC (2026-11-16, LAW 1 rule 1a): the desk reads the reliance word THE PAGE PRINTS (`relianceShownOf`), which is
+      // never above the record's; a stored flag the page lowers to None or Present draws the false pool, as the page reads
+      if (!['relied-upon', 'integral'].includes(relianceShownOf(s))) continue;
       trueSeen++;
       expect(['relied-upon', 'integral'], `mx-${i} the flag is the reading`).toContain(deriveMagicReliance(s).reading);
       const drawn = defenseMagicDependencyProse(s, { seed: `mx-${i}`, audience: 'dm' });
@@ -2211,8 +2235,9 @@ describe('DS-DEF-2 · the supply-chain clauses (W2 DEF construction C6, 2026-11-
     expect(supplied.economic.sentence.length).toBeGreaterThan(bare.economic.sentence.length);
     expect(supplied.invasion.provenance.poolKey).toBe(bare.invasion.provenance.poolKey);
     // No force to supply: the force clause is not said, the food clause still is.
-    const unmanned = defenseThreatProse(withChains({ military: 6, economic: -8 }, { walls: true }), { seed: 'c6' });
-    const unmannedBare = defenseThreatProse(fort({ walls: true }), { seed: 'c6' });
+    // DEBT-1 (2026-11-17): the food record answers `stores` (see fort): the failing clause's lines declare a stores band
+    const unmanned = defenseThreatProse(withChains({ military: 6, economic: -8 }, { walls: true, storageMonths: 6 }), { seed: 'c6' });
+    const unmannedBare = defenseThreatProse(fort({ walls: true, storageMonths: 6 }), { seed: 'c6' });
     expect(unmanned.invasion.sentence).toBe(unmannedBare.invasion.sentence);
     expect(unmanned.economic.sentence.length).toBeGreaterThan(unmannedBare.economic.sentence.length);
   });

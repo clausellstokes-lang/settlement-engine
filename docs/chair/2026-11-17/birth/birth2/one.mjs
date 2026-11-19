@@ -1,0 +1,13 @@
+import fs from 'node:fs'; import zlib from 'node:zlib';
+const R = process.env.TREE + '/src';
+const RS = await import(R + '/domain/resourceSemantics.js'); const [file, seed, house] = process.argv.slice(2);
+const HI = await import(R + '/domain/facts/houseInputAtHand.js'); const SS = await import(R + '/domain/facts/supplyStory.js');
+const line = zlib.gunzipSync(fs.readFileSync(file)).toString().split('\n').find((l) => l.startsWith(`{"seed":"${seed}"`));
+const s = JSON.parse(line).s; const inst = s.institutions.find((i) => i.name === house);
+console.log('route', s.config.tradeRouteAccess, 'terrain', s.config.terrainOverride, 'stress', s.config.stressTypes);
+console.log('nearby', s.config.nearbyResources, 'depl', s.config.nearbyResourcesDepleted);
+console.log('imports', s.economicState.primaryImports);
+console.log('gaps', JSON.stringify(s.resourceAnalysis.gaps.filter((g) => g.institution === house)));
+console.log('story', SS.sourceStoryOf(s, inst, RS.resourceShortageImport), 'venture', HI.ventureHouseOf(s));
+console.log('reader desertSalt', HI.houseInputAtHand(s, 'desertSalt', inst, { rawResource: 'desert_salt' }), 'short', HI.housesShortOf(s).get(house));
+console.log('chains', JSON.stringify((s.economicState.activeChains||[]).filter(c=>(c.processingInstitutions||[]).includes(house)).map(c=>[c.resourceKey,c.status])));

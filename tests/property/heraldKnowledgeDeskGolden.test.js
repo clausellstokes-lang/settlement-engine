@@ -129,7 +129,19 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 446 → 440 at STYLE-2-MERGE RECORD 46, THE COHERENCE-POWERS MERGE (ODQ §934.105; record
     // docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json): the dual hat re-deals the fresh campaign's cast, so
     // its simulated year's news is re-dealt — on rr-fresh-full|1 99 section rows leave and 93 arrive (itemCount moves with them).
-    expect(Object.keys(manifest)).toHaveLength(440);
+    // 440 → 446 at STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE (ODQ §934.105; record
+    // docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json): the fresh campaign's simulated year reads the moved
+    // defence, power and food figures, so its news is re-dealt — on rr-fresh-full|1 29 section rows leave and 35 arrive (itemCount 438 → 444).
+    // 446 → 475 at THE CLOSE OF THE TAIL ROUND (TAIL-CLOSE-DOORS-3; the owner's word of 2026-11-15 06:00 UTC, ODQ §934.105; record
+    // docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): the round's declared moves re-deal the fresh campaign's cast
+    // and figures, so its simulated year's news is re-dealt — on rr-fresh-full|1 65 section rows leave and 94 arrive (itemCount 444 → 473).
+    // 475 → 475 at THE CLOSE OF THE ROUNDS BAR5 TO BAR8 (CLOSE-DOORS-2; the owner's word of 2026-11-18 03:03:46 UTC, ODQ §934.105; record
+    // docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json, the chair's ruling CL7, the cause named first): green at 6c117344f,
+    // first red at JOIN-17 point 21 (BIRTH-1, edb5cae92): the realm pulse's resource role reads the town's import list
+    // (tierResourceDynamics.resourceEconomicRole) and BIRTH-1's declared economicState.primaryImports makes soak-a import its hunting
+    // grounds' good, so one beat's reason reads "export and import" and the year re-deals one pulse beat (one section row out, one in;
+    // itemCount 473 unmoved). The content sha re-recorded through the door at the doors' branch over Part 1's final tip 0af60594a.
+    expect(Object.keys(manifest)).toHaveLength(475);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
@@ -190,6 +202,10 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       // the hidden allegiance and J-19's lit pulse re-deal the year at the stage of e5f88930b; the year's misjudgment beats are now 2 (15, 4), all on knowledge.
       // Re-dealt at MERGE-TRAIN RECORD 3, THE ALLEGIANCE-CAR3 MERGE (ODQ §934.105, THE TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-3-car3.json):
       // organizedCrime 0.05 and the round-robin deal re-deal the year at the stage of c6ded8e3a; the year's misjudgment beats are now 3 (15, 19, 4), all on knowledge.
+      // Re-dealt at STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE (ODQ §934.105, THE STYLE WAVE'S MERGE, 2026-11-13; record docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json):
+      // the year reads the moved defence, power and food figures at the stage of 9e2ae9035; the year's misjudgment beats are now 3 (15, 4, 45), all on knowledge.
+      // Re-dealt at THE CLOSE OF THE TAIL ROUND (ODQ §934.105, the owner's word of 2026-11-15 06:00 UTC; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json):
+      // the round's declared moves re-deal the year at the line's final tree (f76fe38fd); the year's misjudgment beats are now 3 (15, 19, 4), all on knowledge.
       expect(misjudged).toEqual([
         'wizard_news.15.belief_misjudgment.soak-a.soak-c',
         'wizard_news.19.belief_misjudgment.soak-a.soak-c',

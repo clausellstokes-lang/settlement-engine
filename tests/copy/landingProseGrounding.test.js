@@ -167,12 +167,15 @@ describe('the landing prose quotes the fixture it is about', () => {
       // 2026-11-11 (FOUNDING-WORLDS at the final tip 7ab12183f): re-grounded with body2 on the simulation cure's timeline
       // at lf-033; six beats, the conversion to Vael and the broken trade routes out, the Elder Council's capture of the
       // water and the reforms in.
-      ['restore order', 'restore order'],
-      ['war footing', 'war footing'],
+      // 2026-11-15 (TAIL-CLOSE-SWEEP-D item 1, at the doors' tip 73090ee9e): re-grounded with body2 on the close's
+      // re-emitted timeline at lf-033; six beats, the priest's "restore order" and the reforms out (the round re-drew
+      // the cast), Uathach O'Neill shielding their people and the broken trade routes in.
       ['the split between the faiths', 'the split between the faiths'],
+      ['war footing', 'war footing'],
       ['control of the village’s water was passing to the elder council', 'water sources is passing to elder council'],
-      ['pushing through reforms', 'pushes through reforms'],
+      ['uathach o\'neill set out to shield their people', 'uathach o\'neill shields their people'],
       ['crime took hold', 'crime takes hold'],
+      ['its trade routes had broken down', 'trade routes break down'],
     ]) {
       expect(
         headlines,

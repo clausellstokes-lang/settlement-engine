@@ -15,6 +15,11 @@ import { resolvePrimaryStress } from '../../src/generators/stressPriority.js';
 /** The surfaces' call (PowerTab, PowerStructure): the primary stress ranked by the caller, MERGE-TRAIN's boundary cure. @param {unknown} s */
 const governanceAccountOf = (s) => accountOf(s, { primaryStress: resolvePrimaryStress(governanceStressTypesOf(s)) });
 import { applyStressEventFactions } from '../../src/generators/power/stressFactions.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { seatKeeperLineOf } from '../../src/domain/people/seatKeeper.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const COUNCIL = 'Corrupt Council';
 const SEAT = {
@@ -80,11 +85,35 @@ describe('the chair\'s conditions (b) and (c), 2026-11-09', () => {
   it('(b) a vacant seat is the FIRST fact, and what fills the gap follows from the record', () => {
     const vacant = planted();
     vacant.powerStructure.factions[0].modifiers = ['vacant'];
+    // Re-keyed by identity (R3-CODE-C-3, #pf-260): "governs without a head" is said only where no one keeps the seat
+    // (people/seatKeeper.js :: seatKeeperOf, the governing power's rank-1 card); the planted cast's keeper is set aside
+    // here, and the arm below holds the keeper's case.
+    vacant.npcs = (vacant.npcs || []).map((n) => ({ ...n, memberships: (n.memberships || []).filter((m) => m?.rank !== 1) }));
     const g = governanceAccountOf(vacant);
     // Re-keyed by SW-9 (the owner's veto of the connective copy, 2026-11-09 03:5x): "Until it is filled," struck.
     expect(g.text.startsWith('No one holds the seat at Polaovo. The Corrupt Council governs without a head.')).toBe(true);
     vacant.powerStructure.factions.push({ faction: 'Noble Claimant Ivo', power: 10 }, { faction: 'Noble Claimant Mira', power: 9 });
     expect(governanceAccountOf(vacant).text.startsWith('No one holds the seat at Polaovo. Noble Claimant Ivo and Noble Claimant Mira contend for it.')).toBe(true);
+  });
+
+  // R3-CODE-C-3 (ROUND-3-CUT-INCREMENT #pf-260): a keeper keeps the empty seat (people/seatKeeper.js :: seatKeeperOf),
+  // so the power is not headless; the tab's seat row names the keeper, and this paragraph does not say it twice.
+  it('(b) with a keeper of the empty seat, the power is not said to govern without a head', () => {
+    const vacant = planted();
+    vacant.powerStructure.factions[0].modifiers = ['vacant'];
+    const power = vacant.powerStructure.factions[0].faction;
+    vacant.npcs = [{ id: 'keeper-1', name: 'Iulia Laenas', memberships: [{ power, rank: 1 }] }];
+    const text = governanceAccountOf(vacant).text;
+    expect(text.startsWith('No one holds the seat at Polaovo.')).toBe(true);
+    expectAbsentWithAnchor(text, 'governs without a head', 'No one holds the seat at Polaovo.', 'a kept seat is not headless');
+  });
+
+  it('THE GUARD TOWN rpf-city-succession_void+politically_fractured-13 (an acting governor keeps the seat)', async () => {
+    await loadGenerationLawPayloads();
+    const seed = 'rpf-city-succession_void+politically_fractured-13';
+    const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: 'city', selectedStressesRandom: false, selectedStresses: ['succession_void', 'politically_fractured'], _randomizePriorities: true }), null, { seed, customContent: {} });
+    expect(seatKeeperLineOf(s)).toMatch(/keeps the seat meanwhile/);
+    expectAbsentWithAnchor(governanceAccountOf(s).text, 'governs without a head', `No one holds the seat at ${s.name}.`, 'the acting governor keeps the seat');
   });
 
   it('(c) a fractured town NAMES the blocs the stress added, even with no relationship row, and drops the fractured line', () => {

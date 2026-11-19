@@ -5,6 +5,10 @@
  * the same impact sentence, so "Dependent on trade routes. Siege, road closure, or blockade
  * would impair operations." printed up to thirteen times on one tab. The impact prints once,
  * on the first card that carries it; every card keeps its own "Needs {resource}".
+ * RE-KEYED BY IDENTITY (W2-C-LEAVES-6 item 6, the chair's ruling on #920 #1044 #1047 #1049): the card states its need in
+ * ONE sentence (domain/display/chainNeedShown.js :: chainNeedLine) and the impact's boilerplate is now that sentence's
+ * shared clause (", which a siege, a closed road or a blockade would cut off" in calm; ": no trade road reaches <town>"
+ * on an isolated route): it prints once per tab, on the first card that states a need; every card keeps its own need.
  */
 import { afterEach, beforeAll, describe, expect, test } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
@@ -33,25 +37,21 @@ beforeAll(() => {
 }, 600000);
 afterEach(cleanup);
 
-describe('X-50: the Economics impact line prints once per tab', () => {
-  test('each dependency impact sentence prints once on the Economics tab, and every card keeps its need', () => {
+describe('X-50: the Economics need sentence\'s shared clause prints once per tab', () => {
+  test('the shared clause of the need sentence prints once on the Economics tab, and every card keeps its need', () => {
     const offenders = [];
     let shared = 0;
     let needLines = 0;
+    const SHARED = [', which a siege, a closed road or a blockade would cut off', ': no trade road reaches '];
     for (const { seed, text, deps } of ROWS) {
-      const impacts = [...new Set(deps.map((d) => d.impact).filter(Boolean))];
-      if (deps.length > impacts.length) shared += 1;
-      // the cards a tab renders carry a need line each; a tab that renders no dependent card
-      // prints no impact either way
-      const shown = countOf(text, 'Needs ');
-      if (shown > 0) needLines += shown;
-      for (const impact of impacts) {
-        const n = countOf(text, impact);
-        if (shown > 0 && n !== 1) offenders.push(`${seed}: printed ${n}x: ${impact}`);
-      }
+      if (deps.length > 1) shared += 1;
+      const shown = countOf(text, ' here depend on ') + countOf(text, ' here run on ');
+      needLines += shown;
+      const clauses = SHARED.reduce((n, c) => n + countOf(text, c), 0);
+      if (clauses > 1 || (shown > 0 && clauses === 0 && !text.includes('which the siege has cut off'))) offenders.push(`${seed}: the shared clause printed ${clauses}x beside ${shown} need lines`);
     }
     expect(needLines, 'the tabs rendered almost no need line').toBeGreaterThan(100);
-    expect(shared, 'no settlement had two chains under one impact').toBeGreaterThan(10);
+    expect(shared, 'no settlement had two dependent chains').toBeGreaterThan(10);
     expect(offenders, offenders.slice(0, 60).join('\n')).toEqual([]);
   });
 });

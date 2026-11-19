@@ -23,21 +23,22 @@
  */
 
 import { pickVariant } from '../kernel/proseHash.js';
+import { titleForHolder } from './holderTitleForms.js'; // TAIL-TITLES K-C: the holder's form, one leaf
 
 /** @typedef {string | { male: string, female: string }} Honorific */
 
 /** title → the pool of honorifics; the walker (tests/data/faceHonorifics.test.js) pins every face and mint title. @type {Readonly<Record<string, readonly Honorific[]>>} */
 export const FACE_HONORIFICS = Object.freeze({
-  "the boat-headman": ["Headman", "Boat-Master", "Skipper"],
+  "the boat-headman": [{ male: "Headman", female: "Boat-Master" }, "Boat-Master", "Skipper"], // TAIL-TITLES-2 KT1: one face, one word (her title "the boat-master")
   "the head shepherd": ["Head Shepherd", "Master Shepherd"],
-  "the camp foreman": ["Foreman", "Camp Master"],
+  "the camp foreman": [{ male: "Foreman", female: "Overseer" }, "Camp Master"], // TAIL-TITLES-2 KT1: her title "the camp overseer"
   "the eldest": ["Elder", "Eldest"],
-  "the eldest householder": ["Elder", "Goodman"],
+  "the eldest householder": ["Elder", { male: "Goodman", female: "Goodwife" }], // BAR3-PEOPLE-2 (P6, C33899 C35020): a personal honorific that names a sex takes the holder's form
   "the reeve": ["Reeve"],
   "the household elder": ["Elder", "Head of the Household"],
   "the fence": ["Fence"],
   "the outlaw host": ["Captain", "Outlaw Chief"],
-  "the dairy farmer": ["Dairyman", "Dairy Farmer"],
+  "the dairy farmer": [{ male: "Dairyman", female: "Dairy Farmer" }, "Dairy Farmer"], // BAR3-PEOPLE-2 (P6, C33899 C35020): a personal honorific that names a sex takes the holder's form
   "the collier": ["Collier", "Master Collier"],
   "the peat-reeve": ["Peat-Reeve", "Reeve"],
   "the mine captain": ["Mine Captain", "Captain", "Mine-Master"],
@@ -45,8 +46,8 @@ export const FACE_HONORIFICS = Object.freeze({
   "the salt master": ["Saltmaster", "Master of the Saltworks"],
   "the master of the hunt": ["Huntmaster", "Master of the Hunt"],
   "the pawnbroker": ["Pawnbroker", "Pawnmaster"],
-  "the innkeeper": ["Innkeeper", "Landlord", "Host"],
-  "the alewife": ["Alewife", "Brewster"],
+  "the innkeeper": ["Innkeeper", { male: "Landlord", female: "Landlady" }, "Host"], // BAR4-PEOPLE (P2, C2708 C18802): an everyday word that names a sex takes the holder's form
+  "the alewife": [{ male: "Brewster", female: "Alewife" }, "Brewster"], // POWERS-9 (ROUND-3-CUT-INCREMENT pf#250): no Alewife of a man; the pool's own "Brewster" (a man's "Brewer" named a brewery the town lacks: the census's kind a, 10 villages)
   "the caravanserai keeper": ["Caravanserai Keeper", "Host"],
   "the horse-coper": ["Horse-Coper", "Horse-Dealer"],
   "the stable keeper": ["Stablekeeper", "Ostler"],
@@ -54,9 +55,9 @@ export const FACE_HONORIFICS = Object.freeze({
   "the smith": ["Smith", "Blacksmith"],
   "the carpenter": ["Carpenter", "Wright"],
   "the steward": ["Steward", "Seneschal"],
-  "the headman": ["Headman", "Chief"],
+  "the headman": [{ male: "Headman", female: "Chief" }, "Chief"], // TAIL-TITLES-2 KT1: her title "the chief"
   "the militia captain": ["Captain", "Captain of the Militia"],
-  "the hedge wizard": ["Hedge Wizard", "Cunning-Man"],
+  "the hedge wizard": ["Hedge Wizard", { male: "Cunning-Man", female: "Cunning-Woman" }], // BAR4-PEOPLE (P2)
   "the charter master": ["Chartermaster", "Master of the Charter"],
   "the bandit contact": ["Go-Between"],
   "the smuggler": ["Smuggler"],
@@ -66,9 +67,9 @@ export const FACE_HONORIFICS = Object.freeze({
   "the wildfowler": ["Fowler", "Wildfowler"],
   "the waystation keeper": ["Waystation Keeper", "Host"],
   "the carriers' master": ["Master Carrier", "Carriers' Master"],
-  "the ferryman": ["Ferryman", "Ferry-Master"],
+  "the ferryman": [{ male: "Ferryman", female: "Ferry Keeper" }, "Ferry-Master"], // TAIL-TITLES-2 KT1: her title "the ferry keeper"
   "the boatwright": ["Boatwright", "Master Boatwright"],
-  "the toll-keeper": ["Toll-Keeper", "Tollman"],
+  "the toll-keeper": ["Toll-Keeper", { male: "Tollman", female: "Toll-Keeper" }], // BAR3-PEOPLE-2 (P6, C33899 C35020): a personal honorific that names a sex takes the holder's form
   "the miller": ["Miller", "Master Miller"],
   "the thatcher": ["Thatcher", "Master Thatcher"],
   "the cooper": ["Cooper", "Master Cooper"],
@@ -83,7 +84,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the brickmaker": ["Brickmaker", "Master Brickmaker"],
   "the cobbler": ["Cobbler", "Master Cobbler"],
   "the tailor": ["Tailor", "Master Tailor"],
-  "the midwife": ["Midwife", "Goodwife"],
+  "the midwife": [{ male: "Goodman", female: "Midwife" }, { male: "Goodman", female: "Goodwife" }], // COHERENCE-POWERS-7 (cold list #543 #569 #593 #657): a man is no Goodwife; POWERS-9 (pf#288, the chair's ruling): nor a Midwife
   "the woodcarver": ["Woodcarver", "Master Carver"],
   "the scribe": ["Scribe", "Clerk"],
   "the cartographer": ["Cartographer", "Mapmaker"],
@@ -97,8 +98,8 @@ export const FACE_HONORIFICS = Object.freeze({
   "the musician": ["Minstrel", "Bard"],
   "the senior guild master": ["Guildmaster", "Master of the Guild", "Warden of the Guild"],
   "the banker": ["Banker", "Master of the House"],
-  "the tavern keeper": ["Taverner", "Landlord", "Host"],
-  "the coaching-inn keeper": ["Innkeeper", "Landlord", "Host"],
+  "the tavern keeper": ["Taverner", { male: "Landlord", female: "Landlady" }, "Host"], // BAR4-PEOPLE (P2)
+  "the coaching-inn keeper": ["Innkeeper", { male: "Landlord", female: "Landlady" }, "Host"], // BAR4-PEOPLE (P2)
   "the post's master": ["Postmaster", "Master of the Post"],
   "the stable master": ["Stablemaster", "Master of Horse"],
   "the beast master": ["Beastmaster", "Master of Beasts"],
@@ -133,9 +134,9 @@ export const FACE_HONORIFICS = Object.freeze({
   "the alchemist": ["Alchemist", "Master Alchemist"],
   "the dean": ["Dean"],
   "the abbot": [{ male: "Abbot", female: "Abbess" }, { male: "Father Abbot", female: "Mother Abbess" }],
-  "the hospitaller": ["Hospitaller", "Brother Hospitaller"],
+  "the hospitaller": ["Hospitaller", { male: "Brother Hospitaller", female: "Sister Hospitaller" }], // BAR3-PEOPLE-2 (P6, C33899 C35020): a personal honorific that names a sex takes the holder's form
   "the almoner": ["Almoner"],
-  "the foundling-mother": ["Mother", "Matron"],
+  "the foundling-mother": [{ male: "Keeper", female: "Mother" }, { male: "Keeper", female: "Matron" }], // TAIL-TITLES-2 KT1: his title "the foundling-keeper"
   "the grove elder": ["Elder", "Grove-Warden"],
   "the lord's appointee": ["Bailiff", "Lord's Bailiff"],
   "the first councillor": ["First Councillor", "Councillor"],
@@ -158,12 +159,12 @@ export const FACE_HONORIFICS = Object.freeze({
   "the hiring master": ["Hiring Master"],
   "the blade captain": ["Captain", "Blade-Captain"],
   "the gang boss": ["Boss"],
-  "the front man": ["Frontman"],
+  "the front man": [{ male: "Frontman", female: "Nominal Owner" }], // TAIL-TITLES-2 KT1: her title "the nominal owner"
   "the rookery boss": ["Boss"],
   "the troupe leader": ["Troupe Leader", "Troupe Master"],
   "the theatre manager": ["Theatre Manager", "Manager"],
   "the house boss": ["Boss"],
-  "the madam": ["Madam"],
+  "the madam": [{ male: "Master", female: "Madam" }], // POWERS-9 (the chair's row: "Madam" on a man): the style follows the person
   "the pit boss": ["Pit Boss"],
   "the lanista": ["Lanista"],
   "the fortune teller": ["Fortune-Teller", "Seer"],
@@ -173,7 +174,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the slave-market master": ["Slavemaster"],
   "the chronicler": ["Chronicler"],
   "the master metalworker": ["Master Metalworker"],
-  "the luxury merchant": ["Merchant", "Merchant Prince"],
+  "the luxury merchant": ["Merchant", { male: "Merchant Prince", female: "Merchant Princess" }], // BAR3-PEOPLE-2 (P6, C33899 C35020): a personal honorific that names a sex takes the holder's form
   "the senior abbot": [{ male: "Lord Abbot", female: "Lady Abbess" }, { male: "Abbot", female: "Abbess" }],
   "the bishop": ["Bishop", "Lord Bishop"],
   "the hospital's master": ["Master", "Master of the Hospital"],
@@ -197,7 +198,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the ringleader": ["Ringleader"],
   "the trafficker": ["Trafficker"],
   "the college master": ["Master", "Master of the College"],
-  "the district madam": ["Madam"],
+  "the district madam": [{ male: "Master", female: "Madam" }], // POWERS-9: as "the madam"
   "the golem-master": ["Golem-Master"],
   "the necromancer-overseer": ["Overseer"],
   "the exchange master": ["Exchange Master", "Master of the Exchange"],
@@ -233,7 +234,7 @@ export const FACE_HONORIFICS = Object.freeze({
   "the reformer": ["Reformer"],
   "the investigator": ["Investigator"],
   "the bloc's speaker": ["Speaker"],
-  "the newcomers' spokesman": ["Spokesman"],
+  "the newcomers' spokesman": [{ male: "Spokesman", female: "Speaker" }], // TAIL-TITLES-2 KT1: her title "the newcomers' speaker"
   "the alliance's convenor": ["Convenor"],
   "the commoners' tribune": ["Tribune"],
   "the neutrals' broker": ["Broker"],
@@ -289,7 +290,7 @@ export const FACE_HONORIFICS_BY_CULTURE = Object.freeze({
     "the eldest": ["Sheikh"],
     "the village elder": ["Sheikh"],
     "the headman": ["Sheikh"],
-    "the lord": ["Emir"],
+    "the lord": [{ male: "Emir", female: "Emira" }], // BAR8 K-PEOPLE (14g, BR14, C36170): "Emir" is "the lord" of one sex; a woman who holds the seat is "Emira"
     "the governor": ["Wali"],
     "the royal governor": ["Wali"],
     "the priest": ["Imam"],
@@ -340,6 +341,31 @@ export const FACE_HONORIFICS_BY_CULTURE = Object.freeze({
   }),
 });
 
+/** A word folded for comparison: lower case, letters only. "the post's master" is folded "postsmaster", so it is not the registry's
+ * other office "the postmaster" (a town of the fresh 300, bar0-town-calm-rand-123, holds both, in two houses). @param {string} w */
+const foldWord = (w) => w.toLowerCase().replace(/[^a-z]/g, '');
+/** Every registry title as the honorific of its own office would print it bare ("the wharfinger" → "wharfinger"). */
+const OFFICE_NAMES = new Set(Object.keys(FACE_HONORIFICS).map((t) => foldWord(t.replace(/^the\s+/i, ''))));
+/**
+ * BAR6-PEOPLE (LAW 10 rule 10c; BRIEF-BAR6 fact (b); the owner's pin M-1b: a representative's role IS its institution's
+ * title; vetoable by the owner): A FACE'S HONORIFIC NEVER NAMES ANOTHER OFFICE. A form of a title's pool that is ANOTHER
+ * registry title's own name gives the face another house's title, which another person of the town may hold: the inland
+ * harbour master styled "Wharfinger" beside the docks' wharfinger ("Connection: Wharfinger Madhuri Rao", the wide read's
+ * C196525; 36 towns of the census's 720). Such a form is refused; a looser name for the title's own office (its own words
+ * hold the form: "Commander" of the garrison commander, "Innkeeper" of the coaching-inn keeper) stands. A pool whose every
+ * form is refused keeps its own (none is: the guard `tests/domain/bar6PeopleLaw10.test.js` lists the pools). Display only.
+ * @param {string} title @param {Honorific} form @returns {boolean}
+ */
+const namesAnotherOffice = (title, form) => {
+  const own = foldWord(title.replace(/^the\s+/i, ''));
+  return [typeof form === 'string' ? form : form.male, typeof form === 'string' ? form : form.female].some((f) => {
+    const w = foldWord(f);
+    return w !== own && OFFICE_NAMES.has(w) && !own.includes(w);
+  });
+};
+/** The pool's forms that name no other office (the whole pool where every form would be refused). @param {string} title @param {readonly Honorific[]} pool */
+export const ownOfficeForms = (title, pool) => { const kept = pool.filter((h) => !namesAnotherOffice(title, h)); return kept.length ? kept : pool; };
+
 /** The seat mint's fallback title, "the head of <power>" (mintTitles.js :: headOf). */
 const HEAD_OF = /^the head of (.+)$/i;
 
@@ -361,11 +387,35 @@ export function honorificOfTitle(title, gender, seed, place = {}) {
   const pool = (byCulture && Object.hasOwn(byCulture, t) && byCulture[t])
     || (place?.coastal === false && FACE_HONORIFICS_INLAND[t]) || FACE_HONORIFICS[t];
   if (pool) {
-    const h = /** @type {Honorific} */ (pickVariant(pool, seed));
+    const h = /** @type {Honorific} */ (pickVariant(ownOfficeForms(t, pool), seed)); // BAR6-PEOPLE (10c): never another office's name
     return typeof h === 'string' ? h : gender === 'female' ? h.female : h.male;
   }
   const head = HEAD_OF.exec(t);
   if (head) return `Head of ${head[1]}`;
   const bare = t.replace(/^the\s+/i, '');
   return bare.charAt(0).toUpperCase() + bare.slice(1);
+}
+
+/**
+ * THE STYLED TITLE (COHERENCE-POWERS-8, the chair's R2 from REVIEW-POWERS-FU F2): one home for the title a person is called
+ * by in words ("the lord", "the lady"), read by every row that names a person by role. A title whose registry form is
+ * gendered ({ male, female }) and whose last word is the masculine form's last word takes the feminine's for a woman:
+ * "the lord" → "the lady", "the abbot" → "the abbess", "the high priest" → "the high priestess" — the word her card's
+ * honorific already gives her. Any other title, every man's, and a value that is no title (missing, not a string) is
+ * returned as it is, so a row keeps exactly what it copied before. Pure, draw-free.
+ * @template T @param {T} title @param {unknown} gender @returns {T | string}
+ */
+export function styledTitleOf(title, gender) {
+  { const held = titleForHolder(title, gender); if (held !== title) return held; } // TAIL-TITLES K-C: the holder's form, one leaf
+  if (gender !== 'female' || typeof title !== 'string' || !title) return title;
+  const t = title;
+  const pool = FACE_HONORIFICS[t.trim()];
+  const form = (pool || []).find((h) => typeof h !== 'string');
+  if (!form || typeof form === 'string') return t;
+  const male = form.male.split(' ').at(-1) || ''; const female = form.female.split(' ').at(-1) || '';
+  const words = t.split(' ');
+  const last = words.at(-1) || '';
+  if (!male || male.toLowerCase() === female.toLowerCase() || last.toLowerCase() !== male.toLowerCase()) return t;
+  words[words.length - 1] = female.toLowerCase();
+  return words.join(' ');
 }

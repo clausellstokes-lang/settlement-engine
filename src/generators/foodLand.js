@@ -26,6 +26,23 @@ const CUSTOM_PRODUCER_CAPACITY_CAP = 0.6;
 const CUSTOM_CONSUMER_NEED_PER_ITEM = 0.1;
 const CUSTOM_CONSUMER_NEED_CAP = 0.5;
 
+/**
+ * THE FOOD RECORD'S DIVERSITY LINE, DECLARED (COHERENCE-AGREE-3, the chair's Part B (i) ruling B, 2026-11-12). A
+ * place whose roster works its own land (a farm, the common fields, a herd row) while no resource makes that land a
+ * named source (the chair's variant S: a source is a chain beyond the table) does not say "no established food
+ * chains": it lives from its own plots. The site (foodGenerator.js) chooses the twin by this file's own roster
+ * flags (`worksOwnLand`); the vocabulary's food-source atoms say what both lines refuse.
+ */
+export const NO_FOOD_CHAINS_LINE = 'no established food chains';
+export const OWN_PLOTS_LINE = 'lives from its own plots and commons; nothing grown beyond the table';
+const NO_SOURCE = Object.freeze(['grain', 'livestock', 'fish', 'game']);
+export const FOOD_RECORD_LINE_SIBLINGS = Object.freeze({
+  [NO_FOOD_CHAINS_LINE]: Object.freeze([
+    Object.freeze({ text: NO_FOOD_CHAINS_LINE, excludes: NO_SOURCE }),
+    Object.freeze({ text: OWN_PLOTS_LINE, twinOf: NO_FOOD_CHAINS_LINE, excludes: NO_SOURCE }),
+  ]),
+});
+
 // ── HOW MUCH THE LAND GROWS: one source (FIX-FOOD-ISOLATION second seat, the chair's ruling, 2026-11-07) ──
 // The food writer below and the isolation-support receipt (isolationSupport.js :: deriveIsolationSupport) both
 // read how much a place's land grows. They read it from different tables and disagreed: the receipt scored an
@@ -123,9 +140,13 @@ export function foodLandOf(tier, institutions, config, landRoute) {
   // ── THE FOOD SOURCES (FOOD-3) — the five resource+institution pairings the balance reads,
   // LARGEST CONTRIBUTION FIRST (the order of their bonuses below: grain .25, livestock .10, fish
   // .09, mill .08; game, the small-place hunt, last). A place whose pairings all miss lists none.
+  // COHERENCE-AGREE (the chair's food-sources ruling, 2026-11-11): worked land is a source by its own
+  // name — available fields or floodplain are grain, available grazing is livestock, read as the
+  // resource record reads availability, with or without a farm or pastoral row. Game and fish keep
+  // their rules, and the production bonus below stays paired as it was: naming a source grows nothing.
   const foodSources = /** @type {Array<'grain'|'livestock'|'fish'|'mill'|'game'>} */ ([
-    ['grain', (hasSubsistence || hasFarmland) && hasRes('grain_fields', 'fertile_floodplain')],
-    ['livestock', hasPastoral && hasRes('grazing_land')],
+    ['grain', hasRes('grain_fields', 'fertile_floodplain')],
+    ['livestock', hasRes('grazing_land')],
     ['fish', fishSource],
     ['mill', hasMill && hasRes('river_mills')],
     ['game', hasRes('hunting_grounds') && (hasHunting || ['thorp', 'hamlet', 'village'].includes(tier))],
@@ -180,6 +201,7 @@ export function foodLandOf(tier, institutions, config, landRoute) {
     hasSubsistence, hasFarmland, hasMill, hasGranary, hasCityGranary, hasStateGranary,
     hasPastoral, hasHunting, hasMarket, hasDruid, hasDivine, hasArcane,
     fishSource, foodSources, preservedSources,
+    worksOwnLand: hasSubsistence || hasFarmland || hasPastoral, // the roster works its own fields or commons (Part B (i))
     terrain, terrainAgri, effectiveAgri,
     customFoodImpact, customProducerCapacityBonus, customConsumerNeedBonus,
     hinterlandShare, grownShareOfNeed,

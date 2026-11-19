@@ -47,7 +47,7 @@
         },
         {
           "lineId": "POLITICAL_FLAVOR.political_heavy[3]",
-          "text": "Authority here has a provisional quality, as though everyone is still waiting for the arrangement that followed the ${event} to be replaced by a permanent one that never comes",
+          "text": "The ${event} decided who holds power here, and every household still tells it the way its own side remembers it",
           "needs": [],
           "excludes": [],
           "crisis": null,
@@ -56,15 +56,6 @@
         },
         {
           "lineId": "POLITICAL_FLAVOR.political_heavy[4]",
-          "text": "The factions here have long memories and short patience. The ${event} settled who held power without settling whether they should, and that second question has never closed",
-          "needs": [],
-          "excludes": [],
-          "crisis": null,
-          "colour": true,
-          "stop": []
-        },
-        {
-          "lineId": "POLITICAL_FLAVOR.political_heavy[5]",
           "text": "Governance is a performance everyone has agreed to keep up: the offices are filled, the seals are real, and beneath them the ${event} left a question of legitimacy that no one wants to reopen by answering",
           "needs": [],
           "excludes": [],
@@ -183,10 +174,12 @@
         {
           "lineId": "POLITICAL_FLAVOR.economic_heavy[0]",
           "text": "A settlement whose identity was built on commerce. The ${event} didn't create the merchant class here, but it defined what the merchant class could become",
-          "needs": [],
+          "needs": [
+            "market"
+          ],
           "excludes": [],
           "crisis": null,
-          "colour": true,
+          "colour": false,
           "stop": []
         },
         {
@@ -365,7 +358,10 @@
           "lineId": "POLITICAL_FLAVOR.catastrophic[7].other",
           "text": "The ${event} did not just change what happened next; it changed what the settlement believed was possible, and a people's sense of the possible is the slowest thing in the world to rebuild",
           "needs": [],
-          "excludes": [],
+          "excludes": [
+            "crisis: under_siege",
+            "crisis: plague_onset"
+          ],
           "crisis": null,
           "colour": true,
           "stop": []
@@ -374,7 +370,10 @@
           "lineId": "POLITICAL_FLAVOR.catastrophic[7].disasterOrMonster",
           "text": "Every plan made in this settlement now includes, unspoken, a contingency for the ${event} happening again, not because anyone expects it, but because expecting nothing was what the ${event} punished",
           "needs": [],
-          "excludes": [],
+          "excludes": [
+            "crisis: under_siege",
+            "crisis: plague_onset"
+          ],
           "crisis": null,
           "colour": true,
           "stop": []
@@ -504,14 +503,32 @@
           "lineId": "POLITICAL_FLAVOR.stable[2]",
           "text": "The kind of place that historians overlook and travellers remember fondly: no dramatic history, but a persistent one",
           "needs": [],
-          "excludes": [],
-          "crisis": "any",
+          "excludes": [
+            "crisis: under_siege",
+            "crisis: famine",
+            "crisis: occupied",
+            "crisis: plague_onset",
+            "crisis: wartime"
+          ],
+          "crisis": [
+            "calm",
+            "politically_fractured",
+            "indebted",
+            "recently_betrayed",
+            "infiltrated",
+            "succession_void",
+            "monster_pressure",
+            "insurgency",
+            "religious_conversion",
+            "slave_revolt",
+            "mass_migration"
+          ],
           "colour": true,
           "stop": []
         },
         {
           "lineId": "POLITICAL_FLAVOR.stable[3]",
-          "text": "Stable enough that its tensions are the slow kind: inherited grievances, unresolved inheritances, debts that have been rolled over so many times no one remembers the original amount",
+          "text": "Its oldest tensions are the slow kind: inherited grievances, unresolved inheritances, debts that have been rolled over so many times no one remembers the original amount",
           "needs": [],
           "excludes": [],
           "crisis": "calm",
@@ -539,7 +556,10 @@
         {
           "lineId": "POLITICAL_FLAVOR.stable[5].other",
           "text": "The kind of place where records are well-kept and disputes are resolved through precedent, not because the people are unusually reasonable, but because they have learned the cost of the alternative",
-          "needs": [],
+          "needs": [
+            "exports",
+            "law: ≥ strained"
+          ],
           "excludes": [],
           "crisis": "any",
           "colour": true,
@@ -548,7 +568,10 @@
         {
           "lineId": "POLITICAL_FLAVOR.stable[5].economic",
           "text": "A settlement that has built its identity around commerce rather than conflict. The ${event} proved that economic power endures longer than military prestige",
-          "needs": [],
+          "needs": [
+            "exports",
+            "law: ≥ strained"
+          ],
           "excludes": [],
           "crisis": "any",
           "colour": true,
@@ -560,7 +583,11 @@
           "needs": [
             "market"
           ],
-          "excludes": [],
+          "excludes": [
+            "crisis: hunger",
+            "crisis: under_siege",
+            "crisis: plague_onset"
+          ],
           "crisis": "any",
           "colour": false,
           "stop": []
@@ -576,7 +603,7 @@
         },
         {
           "lineId": "POLITICAL_FLAVOR.stable[8].ge2",
-          "text": "The tensions here are the domestic kind (inheritances, boundaries, precedence at the festival), and they are managed rather than resolved, passed down like the disputes they are, each generation adding a footnote and settling nothing",
+          "text": "Beside whatever else divides it, its oldest quarrels are the domestic kind (inheritances, boundaries, precedence at the festival), and they are managed rather than resolved, passed down like the disputes they are, each generation adding a footnote and settling nothing",
           "needs": [],
           "excludes": [],
           "crisis": "calm",
@@ -706,7 +733,8 @@
           "lineId": "POLITICAL_FLAVOR.magical_heavy[1]",
           "text": "A settlement with an unusual relationship to magic: the ${event} made it both more dependent on arcane resources and more wary of them simultaneously",
           "needs": [
-            "magic"
+            "magic",
+            "magic reliance: ≥ relied-upon"
           ],
           "excludes": [],
           "crisis": null,
@@ -737,7 +765,8 @@
           "lineId": "POLITICAL_FLAVOR.magical_heavy[4]",
           "text": "The settlement relies on arcane workings it does not entirely trust. The ${event} proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather",
           "needs": [
-            "magic"
+            "magic",
+            "magic reliance: ≥ relied-upon"
           ],
           "excludes": [],
           "crisis": null,
@@ -757,7 +786,8 @@
           "lineId": "POLITICAL_FLAVOR.magical_heavy[6]",
           "text": "The practitioners here are respected, consulted, and watched: all three at once, without contradiction. The ${event} taught the settlement that the useful and the dangerous are frequently the same people",
           "needs": [
-            "magic"
+            "magic",
+            "magic reliance: ≥ present"
           ],
           "excludes": [],
           "crisis": null,

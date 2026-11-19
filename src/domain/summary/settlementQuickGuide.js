@@ -14,15 +14,17 @@
 
 import { crisisHookFor } from '../crisis/crisisHooks.js';
 import { resolveSibling } from '../facts/drawDeclared.js';
-import { factsOf } from '../facts/factsOf.js';
+import { factsOf } from '../facts/factsOf.js'; import { guildHouseStands } from '../facts/guild.js'; // TAIL-CLOSE-SRC-4: one line
+import { atomHolds } from '../facts/factVocabulary.js';
 import { collectPlotHooks } from '../dossier/plotHooks.js';
 import { formatCount } from '../formatNumber.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { waterAccessKind } from '../tradeRouteSemantics.js';
 import { resolveTerrain } from '../resolveTerrain.js';
+import { populationBandOf } from '../facts/populationBand.js';
 import { pickVariant } from '../../kernel/proseHash.js';
-import { voicedLineOf } from './tonightSheet.js';
+import { foodBandOf, voicedLineOf } from './tonightSheet.js';
 
 const INFLUENCE_RANK = Object.freeze({
   high: 0,
@@ -90,7 +92,7 @@ const INFLUENCE_RANK = Object.freeze({
  * @property {unknown} [tier]
  * @property {unknown} [population]
  * @property {{ key?: unknown, label?: unknown }} [culturalIdentity]
- * @property {{ label?: unknown }} [culture]
+ * (TAIL-CLOSE-SRC-4, WR2: no culture block; the cultural identity above carries the label)
  * @property {unknown} [settlementReason]
  * @property {{
  *   historicalCharacter?: unknown,
@@ -105,7 +107,7 @@ const INFLUENCE_RANK = Object.freeze({
  * }} [powerStructure]
  * @property {{
  *   prosperity?: string | { tier?: unknown } | null,
- *   foodSecurity?: { label?: unknown },
+ *   foodSecurity?: { label?: unknown, foodRecord?: Parameters<typeof foodBandOf>[0] },
  *   primaryExports?: unknown,
  *   situationDesc?: unknown,
  * }} [economicState]
@@ -163,8 +165,8 @@ function composeIdentity(settlement) {
   const tier = cleanText(settlement.tier) || 'settlement';
   const population = finiteNumber(settlement.population);
   const cultureLabel = cleanText(
-    settlement.culturalIdentity?.label
-      || settlement.culture?.label,
+    settlement.culturalIdentity?.label, // TAIL-CLOSE-SRC-4 (WR2): the cultural identity's label is the one home; the culture's
+    // writer is the config, and no settlement record carries a culture label (the second, wrong-shape read is struck)
   );
   const cultureKey = cleanText(settlement.culturalIdentity?.key);
 
@@ -179,7 +181,7 @@ function composeIdentity(settlement) {
   const article = articleFor(descriptors);
 
   // X-43: the seat of government by its real name, here as on the Overview strip.
-  const phrase = seatIntoPhrase(scopePhrase(cultureKey, settlement), settlement);
+  const phrase = scopeAtSize(seatIntoPhrase(scopePhrase(cultureKey, settlement), settlement), settlement);
   if (phrase) {
     return sentence(`${name} is ${article} ${descriptors}${populationPhrase}, ${phrase}`);
   }
@@ -272,15 +274,40 @@ function scopeAgainstRecord(phrase, source) {
     out = out.replace('built for a pastoral life half-settled and half-moving', 'built on clan lines')
       .replace(', on pasture and earthwork', '');
   }
+  // TAIL-CRISIS-4 (K19, the layout line's law J1 carried to the quick guide): A CULTURE PHRASE NAMES ONLY WHAT STANDS.
+  // The tank is a water work on the roster (WATERWORKS_HOUSE, or a metropolis's water infrastructure; a village's wells
+  // and springs are not one), the bazaar a market (the market fact): each is struck where the record holds none
+  // (r2r-town-7: "Multiple water sources", wells and fountains, and no tank). A record with no roster is unread.
+  if (roster) { // the market is the market home's (`factsOf(...).market`); a clause the phrase lacks is a no-op replace (TAIL-CLOSE-SRC-4)
+    const tank = rosterHolds(source, WATERWORKS_HOUSE) || rosterHolds(source, WATER_INFRASTRUCTURE);
+    const bazaar = factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).market !== false;
+    if (!tank || !bazaar) {
+      out = tank ? out.replace('the tank and the bazaar', 'the tank')
+        : bazaar ? out.replace('the tank and the bazaar', 'the bazaar')
+          : out.replace(/built around the tank and the bazaar, (?:in quarters by trade, )?/, '');
+    }
+  }
+  // TAIL-CRISIS-4 (K19): a pastoral life needs herds on the food record (the vocabulary's `livestock`) or pasture among
+  // the resources (`grazing_land`); where the record holds neither, the small place takes the large tiers' own twin
+  // (r2r-hamlet-41, a coastal port fed by its fish). An unanswered record (no food sources, no resources) keeps it.
+  if (out.includes('built for a pastoral life half-settled and half-moving')) {
+    const herds = atomHolds('livestock', /** @type {Parameters<typeof atomHolds>[1]} */ (factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source))));
+    const land = /** @type {{ nearbyResources?: unknown }} */ (config || {}).nearbyResources;
+    const pasture = Array.isArray(land) ? land.includes('grazing_land') : undefined;
+    if (herds !== true && pasture !== true && (herds === false || pasture === false)) {
+      out = out.replace('built for a pastoral life half-settled and half-moving', 'built on clan lines');
+    }
+  }
   // the guild: "guild and estate" only where the roster holds a guild
-  if (roster && out.includes('run by guild and estate') && !factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).guild) {
+  // R2-CODE-B-SIDE item 5: the guild is a HOUSE on the roster, never a power that only contends (rosterHolds below).
+  if (roster && !guildHouseStands(/** @type {Parameters<typeof guildHouseStands>[0]} */ (source))) { // the guild home's house reading; a clause the phrase lacks is a no-op replace (TAIL-CLOSE-SRC-4)
     out = out.replace('run by guild and estate', 'run by its estates');
   }
   // earthworks: a defence fact of their own
   if (roster && out.includes('on pasture and earthwork') && !factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).defence.walls) {
     out = out.replace('on pasture and earthwork', 'on pasture');
   }
-  if (!config || typeof config !== 'object') return out;
+  if (!config || typeof config !== 'object') return scopeAtSize(out, source);
   const terrain = resolveTerrain(config);
   const water = waterAccessKind(terrain, config.tradeRouteAccess);
   const route = cleanText(config.tradeRouteAccess).toLowerCase();
@@ -311,7 +338,191 @@ function scopeAgainstRecord(phrase, source) {
           ? out.replace('the caravan road', 'the river trade')
           : out;
   }
-  return out;
+  // pasture: a small place's herding ground, only where the record's resources hold grazing land
+  if (out.includes(', on pasture') && Array.isArray(/** @type {{ nearbyResources?: unknown }} */ (config).nearbyResources)
+    && !(/** @type {{ nearbyResources: unknown[] }} */ (config).nearbyResources).includes('grazing_land')) {
+    out = out.replace(', on pasture and earthwork', '').replace(', on pasture', '');
+  }
+  return scopeAtSize(out, source);
+}
+
+/** The tiers in which plural streets, an agora, a civic square or masonry building are a size error. */
+const TINY_TIERS = new Set(['thorp', 'hamlet']);
+
+/**
+ * THE SCOPE PHRASE AT THE PLACE'S SIZE (R2-CODE-B item 5; the cold list REVIEW-W2A-3 #323 "built in
+ * masonry around a civic square" for a hamlet of 41, #365 "built around kin districts" for a hamlet
+ * of 53, #498 "in quarters by trade and kin" for a village of 105, #816 "built around the agora"
+ * where no market stands). THE CHAIR'S RULING of 2026-11-13 (the instrument lane's standard,
+ * registeredWords.js `streets` and `quarters`): plural streets, an agora, a civic or market square,
+ * building in masonry, neighbourhoods and suburbs are a size error in a thorp or a hamlet (the
+ * record's `tier`); quarters, districts (and wards, the same thing) are a size error below the
+ * middling population band (facts/populationBand.js :: populationBandOf). An agora is a market, so
+ * it also reads the market fact (factsOf(s).market). The clause that is false is struck or said at
+ * the place's size; nothing is added that the record does not hold. A record with no tier or
+ * population is legacy and unread. Display-time only.
+ * @param {string} phrase @param {SettlementQuickGuideSource} source @returns {string}
+ */
+function scopeAtSize(phrase, source) {
+  if (!phrase) return phrase;
+  const tier = cleanText(source?.tier).toLowerCase();
+  const tiny = TINY_TIERS.has(tier);
+  // R2-CODE-B-SIDE item 5: a village is small by its tier as well as by its people (the chair's ruling: "a village of up
+  // to about 350 people included"; a village of 372 is a town by its population band and still a village on its page).
+  const small = populationBandOf(/** @type {{ population?: unknown, tier?: unknown }} */ (source)) === 'small' || SMALL_TIERS.has(tier);
+  const roster = Array.isArray(/** @type {{ institutions?: unknown }} */ (source)?.institutions);
+  const noMarket = roster && factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source)).market === false;
+  let out = phrase;
+  if (tiny) {
+    out = out.replace('built in masonry around a civic square, and run by', 'run by')
+      .replace('built around a civic-ritual plaza, on tribute and the ritual calendar', 'built on tribute and the ritual calendar')
+      .replace('built around a civic-ritual plaza, tribute, and market-and-waterworks', 'built on tribute, market and waterworks');
+  }
+  if (tiny || noMarket) {
+    out = out.replace('built around the agora and the harbour', 'built around the harbour')
+      .replace('built around the agora, and run by', 'run by')
+      .replace('built around the agora, ', 'built ');
+  }
+  if (small) {
+    out = out.replace('built around kin districts and an assembly ground', 'built around kin')
+      .replace(', in quarters by trade and kin', ', kin by kin')
+      .replace(', in quarters by trade,', ',')
+      .replace('built in wards and courtyards', 'built around courtyards')
+      // R2-CODE-B-SIDE item 5: a bureau is an office no small place keeps (the increment's hamlet of 31).
+      .replace('ordered by bureau and lineage', 'ordered by lineage');
+  }
+  // R2-CODE-B-SIDE item 5: the houses and the office the phrase names, read against the roster (after the size reads,
+  // so a phrase is first said at the place's size). A record with no roster is legacy and unread.
+  return roster ? scopeAgainstRoster(out, source) : out;
+}
+
+/** A metropolis's water work (`institutionalCatalog.js`: "Multiple aqueducts, cisterns, and distributed fountains"). */
+const WATER_INFRASTRUCTURE = /\bwater infrastructure\b/i;
+/** A house that is waterworks: a conduit, a cistern, a fountain or a bathhouse (a well or a spring is not). */
+const WATERWORKS_HOUSE = /\baqueduct|\bcistern|\bwater system|\bwaterworks|\bfountain|\bbath(?:s|house)?\b/i;
+/** A house a gift endows: a church, a temple, a religious house, a school, a hospital or an almshouse (a shrine is not). */
+const ENDOWED_HOUSE = /\bchurch|\bcathedral|\btemple|\babbey|\bmonaster|\bfriary|\balmshouse|\bhospital|\bschool|\bcollege|\bacademy|\buniversity|\bmadrasa/i;
+/** A house that keeps an office: a court, a customs or tax house, a chancery (the seat of government is read by its own reader). */
+const OFFICE_HOUSE = /\bcourt|\bcustoms|\btax|\bchancery|\bbureau|\bmagistra/i;
+/** A guild house on the roster (a guild that is only a contending power is not a house: round three's #234). */
+const GUILD_HOUSE = /\bguild/i;
+
+/**
+ * Does the roster hold a live house of this kind? A road to another place's house ("Access to ...") is not one.
+ * @param {SettlementQuickGuideSource} source @param {RegExp} re @returns {boolean}
+ */
+function rosterHolds(source, re) {
+  return liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (source))
+    .map((inst) => cleanText(inst?.name))
+    .some((n) => !!n && !/^access to/i.test(n) && re.test(n));
+}
+
+/** The ruler kinds (facts/rulerKind.js) whose rule is not a civic association. */
+const NOT_CIVIC_RULE = new Set(['lord', 'priest', 'occupier']);
+
+/**
+ * THE SCOPE PHRASE'S HOUSES READ AGAINST THE ROSTER (R2-CODE-B-SIDE item 5; round three's #1 "built around courtyards
+ * and waterworks, on endowed institutions" in a thorp of 16 with neither, #234 "under temple and guild" with no guild,
+ * #513 "run by civic association" under a lord's appointee, the increment's "ordered by bureau and lineage" in a hamlet
+ * of 31; CENSUS-2's 57 lines of kind (a)). THE RULING: a frame that names an institution, a quarter or an office reads
+ * the roster; a frame that cannot be made true in a small place is not printed there. Each clause is struck where the
+ * roster (its live houses, never an "Access to ..." road to another place's) holds no such house (the office is
+ * struck in every small place by scopeAtSize itself). Nothing is added the record does not hold. Display-time only.
+ * @param {string} phrase @param {SettlementQuickGuideSource} source @returns {string}
+ */
+function scopeAgainstRoster(phrase, source) {
+  const holds = (/** @type {RegExp} */ re) => rosterHolds(source, re);
+  const facts = factsOf(/** @type {Parameters<typeof factsOf>[0]} */ (source));
+  let out = phrase;
+  if (!holds(WATERWORKS_HOUSE)) {
+    out = out.replace('built around courtyards and waterworks', 'built around courtyards')
+      .replace('tribute, and market-and-waterworks', 'tribute and market')
+      .replace('built on tribute, market and waterworks', 'built on tribute and market');
+  }
+  if (!holds(ENDOWED_HOUSE)) out = out.replace(', on endowed institutions and ', ', on ').replace(', on endowed institutions', '');
+  if (!holds(GUILD_HOUSE)) out = out.replace(', under temple and guild', ', under the temple');
+  if (!(governmentSeatName(/** @type {Parameters<typeof governmentSeatName>[0]} */ (source)) || holds(OFFICE_HOUSE))) {
+    out = out.replace('ordered by bureau and lineage', 'ordered by lineage');
+  }
+  if (NOT_CIVIC_RULE.has(String(facts.rulerKind))) {
+    out = out.replace(', and run by civic association', '').replace(' and civic association', '');
+  }
+  return scopeAgainstRule(out, source, facts);
+}
+
+/** A landed power: a noble house, the gentry, a lord's family (the power structure carries names). */
+const ESTATE_POWER = /\b(?:noble|gentry|landed|lord)/i;
+/** A guild power (never a criminal one: `facts/guild.js`'s own exclusion). */
+const GUILD_POWER = /\bguilds?\b/i;
+const CRIMINAL_POWER = /\b(?:thie(?:f|ves)|assassin|beggar|smuggler|criminal)/i;
+/** THE ONE TWIN under an occupation: who holds the place now. */
+const OCCUPIED_RULE = 'held, for now, by another power';
+
+/**
+ * The powers on the record whose names match, each with its own standing.
+ * @param {SettlementQuickGuideSource} source @param {RegExp} re
+ * @returns {Array<{ standing: string }>}
+ */
+function powersNamed(source, re) {
+  const factions = /** @type {{ powerStructure?: { factions?: unknown } | null }} */ (source)?.powerStructure?.factions;
+  return (Array.isArray(factions) ? factions : [])
+    .map((/** @type {{ faction?: unknown, powerLabel?: unknown } | null} */ f) => ({ name: cleanText(f?.faction), standing: cleanText(f?.powerLabel) }))
+    .filter((f) => !!f.name && re.test(f.name) && !CRIMINAL_POWER.test(f.name));
+}
+
+/**
+ * THE RULE THE PHRASE NAMES, READ AGAINST WHO RULES (TAIL-CRISIS-2, READ-ALL's quick-guide rows: "run by its estates"
+ * under an Elder Council, "run by patronage and law" in a thorp of household consensus, "run by civic association" under
+ * a headman, "held by clan and caravan" in an isolated occupied hamlet, "under temple and guild" where every guild is
+ * Suppressed, "built around the hall" where the roster holds none, "the harbour" where no docks stand, "timber" in the
+ * desert). Each clause prints only where the record holds its fact, from the record's own readers (`rulerKind`, the
+ * crisis, the route and the trade lists, the roster, a power's own standing):
+ *   estates          a lord rules, or a landed power stands (not Suppressed); else the clause is struck
+ *   patronage, law   not an elder's rule (an elder, headman or household council rules by custom: the twin says so)
+ *   civic association not an elder's rule (the lord's, priest's and occupier's are struck above)
+ *   clan             an elder's rule; caravan: a road that is not isolated, and goods in or out
+ *   guild            where the record holds guild powers, one of them stands (not Suppressed)
+ *   the hall         the seat (`seatIntoPhrase` names it) or nothing: no other hall stands on any roster
+ *   the harbour      docks on the roster
+ *   timber           not desert ground
+ * UNDER AN OCCUPATION (the crisis or the ruler), the rule clause says who holds the place: OCCUPIED_RULE.
+ * A record with no government is unread. Display-time only.
+ * @param {string} phrase @param {SettlementQuickGuideSource} source @param {ReturnType<typeof factsOf>} facts @returns {string}
+ */
+function scopeAgainstRule(phrase, source, facts) {
+  let out = phrase;
+  if (facts.terrain === 'desert') out = out.replace('built in timber compounds', 'built in compounds');
+  if (facts.hasInstitution('docks') === false) {
+    out = out.replace('the agora and the harbour', 'the agora').replace(/\bbuilt around the harbour, /, 'built ');
+  }
+  // a seat on the roster has already taken "the hall"'s place (`seatIntoPhrase`): what is left names a hall none holds
+  out = out.replace('built around the hall and the water, ', 'built by the water, ').replace('built around the hall, ', 'built ');
+  const kind = facts.rulerKind;
+  if (kind == null) return out;
+  const occupied = kind === 'occupier' || facts.crisis?.has?.('occupied') === true;
+  const elder = kind === 'elder';
+  const guilds = powersNamed(source, GUILD_POWER);
+  if (guilds.length && guilds.every((g) => g.standing === 'Suppressed')) {
+    out = out.replace('run by guild and estate', 'run by its estates').replace(', under temple and guild', ', under the temple');
+  }
+  const estates = kind === 'lord' || powersNamed(source, ESTATE_POWER).some((p) => !!p.standing && p.standing !== 'Suppressed');
+  const caravan = facts.route !== 'isolated' && ((facts.imports || []).length > 0 || (facts.exports || []).length > 0);
+  /** @type {ReadonlyArray<readonly [string, boolean, string]>} [the clause, does the record bear it, what prints if not] */
+  const clauses = [
+    [', and run by guild and estate', estates, ''],
+    [', and run by its estates', estates, ''],
+    ['run by patronage and law', !elder, 'run by custom more than by law'],
+    [', and run by civic association', !elder, ''],
+    [', held by clan and caravan', elder && caravan, elder ? ', held by clan' : ''],
+  ];
+  for (const [clause, holds, twin] of clauses) {
+    if (!out.includes(clause)) continue;
+    if (occupied) out = out.replace(clause, clause.startsWith(',') ? `, ${OCCUPIED_RULE}` : OCCUPIED_RULE);
+    else if (!holds) out = out.replace(clause, twin);
+  }
+  if (occupied) out = out.replace(', under temple and guild', `, ${OCCUPIED_RULE}`).replace(', under the temple', `, ${OCCUPIED_RULE}`);
+  // TAIL-CRISIS-4 (K19): the clan twin already says the clan; its rule clause is not said twice
+  return out.replace(/built on clan lines, held by clan(?! and)/, 'built on clan lines');
 }
 
 /**
@@ -779,7 +990,11 @@ function composeMaterialTruth(settlement) {
       ? economy.prosperity?.tier
       : economy.prosperity,
   );
-  const food = cleanText(economy.foodSecurity?.label);
+  // R2-CODE-B-6 (PART 5's row 1d): the food word from its ONE home, tonightSheet.js :: foodBandOf over the food record,
+  // so this line agrees with the Tonight sheet and the Daily Life tile (a "Secure" band whose record leaves a share of
+  // the need unmet reads "Pressured"; an import dependence with no imports reads "Deficit"). A record with no food
+  // record (a legacy save) keeps its stored label, as it always read.
+  const food = cleanText(foodBandOf(economy.foodSecurity?.foodRecord)?.label || economy.foodSecurity?.label);
   const topExport = cleanText(firstText(economy.primaryExports));
   const situation = cleanText(economy.situationDesc);
 

@@ -22,6 +22,7 @@ import { useEffect, useMemo } from 'react';
 import { FS, swatch } from './theme.js';
 import { formatCount } from '../domain/formatNumber.js';
 import { prosperityLabel } from '../domain/summary/tonightAtTheTable.js';
+import { prosperityInCrisisLine } from '../domain/display/prosperityInCrisis.js';
 import { composeTonightSheet, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
 import TonightSheet from './TonightSheet.jsx';
 import EconomyFreshnessNote from './new/EconomyFreshnessNote.jsx';
@@ -101,6 +102,9 @@ export default function TableView({ settlement, onClose }) {
   // components-dossier-library-3: prosperity is a STRING label, not a { tier }
   // object — the tolerant read is the SummaryTabV2 sibling.
   const prosperity = prosperityLabel(settlement?.economicState?.prosperity);
+  // The header's label, where a crisis in force lowered it, says what the place is in ordinary years
+  // (the chair's ruling 1(a), REVIEW-UPKEEP-2): the one sentence, at the head of the body.
+  const prosperityInCrisis = prosperityInCrisisLine(settlement);
 
   return (
     // Backdrop: a presentational scrim that dismisses only on a click of the
@@ -171,6 +175,11 @@ export default function TableView({ settlement, onClose }) {
           padding: '14px 16px',
           display: 'flex', flexDirection: 'column', gap: 14,
         }}>
+          {prosperityInCrisis && (
+            <p data-testid="tableview-prosperity-in-crisis" style={{ margin: 0, fontSize: FS.sm, color: CREAM_BODY, fontStyle: 'italic', lineHeight: 1.45 }}>
+              {prosperityInCrisis}
+            </p>
+          )}
           <TonightSheet sheet={sheet} palette={NIGHT_PALETTE} />
           {/* ECONOMY FRESHNESS (Wave R-4) — the header's prosperity label and the sheet's food
               fact are generation-time reads of the economy; neither is re-derived when an event

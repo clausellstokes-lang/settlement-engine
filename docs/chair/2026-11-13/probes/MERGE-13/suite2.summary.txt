@@ -1,0 +1,9 @@
+STYLE-2-MERGE-13, point 49 — the whole check at the save tip 7b86cdfb0: DID NOT FINISH (TWICE). No summary line, no JSON, no gate exit.
+Tree: a detached worktree of 7b86cdfb0 (/home/user/wt-s49b), node_modules from npm ci on the line's lockfile (symlinked), the ledger ref
+review-fixes-2026-07-08 fetched (235efce1a).
+Command (from the worktree root): npx vitest run --maxWorkers=2 --reporter=dot --reporter=json --outputFile=<file>
+Run 1: started 2026-11-13T23:29:10Z; KILLED by a container restart at ~23:33Z (about 4 minutes in; 14 'x' marks in its dot line).
+Run 2: started 2026-11-13T23:35:50Z; KILLED by a container restart at ~00:03Z (about 28 minutes in; 22 'x' marks in its dot line).
+The dot reporter prints no names before the end, so no red can be named from either partial log. NOTHING CLASSED.
+The rehearsal's whole check at 91f581649 (before phase two) FINISHED: 39,002 passed, 22 failed + 3 files at load, 197 skipped (3,245 files);
+its reds are listed in suite2.redrows.txt as the EXPECTED set, with which of them phase two's commits cure.

@@ -29,6 +29,7 @@ import { powerOrderOf, structuralStandingOf, STANDING } from '../domain/people/m
 import { seatCandidatesOf } from '../domain/dossier/seatHolder.js';
 import { isSeatVacant } from '../domain/people/seatKeeper.js';
 import { cardOfficeOf } from '../domain/people/cardPowers.js';
+import { CLAIMANT_FACE } from '../data/stressPowerFaces.js';
 
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const GOVERNANCE_FRACTURED = 'governance_fractured';
@@ -62,6 +63,75 @@ function getRank(standing, allFactions) {
   const isDominantOverall = myFac.faction === govFac?.faction ||
                             (myFac.power || 0) >= (govFac?.power || 0) * 0.85;
   return (isTop && isDominantOverall) ? 'dominant' : 'subordinate';
+}
+
+/**
+ * COHERENCE-POWERS-7: the card categories whose subordinate rows place the card "behind the leading one" of its own kind,
+ * and the power categories that are that kind: the trade's houses (economy) and the old families (the noble bodies).
+ * @type {Readonly<Record<string, readonly string[]>>}
+ */
+const HOUSE_KINDS = Object.freeze({ economy: Object.freeze(['economy']), other: Object.freeze(['noble']) });
+
+/**
+ * COHERENCE-POWERS-8 (round three #723 #725 #1398): the card categories whose subordinate rows place the card UNDER its own
+ * body's leaders ("Serves the faith under its leaders", "Holds a place under the crew's boss", "Works spells under the
+ * senior casters"), and the power categories that are that body. Such a row is false of the card that HEADS its power: the
+ * head of the strongest power of its kind reads its kind's head row; the head of a lesser one reads neither (the refusal's
+ * rule: it keeps its own goal and claims no position), since it leads its own body and is not the kind's leader.
+ * POWERS-9 (pf#636 #797 #831): the armed rows join them: "Leads a squad ..." is false of the garrison commander who heads
+ * the force; the head of the strongest armed power reads "Commands those under arms ...", the head of a lesser one no row.
+ * @type {Readonly<Record<string, readonly string[]>>}
+ */
+const UNDER_KINDS = Object.freeze({ religious: Object.freeze(['religious']), criminal: Object.freeze(['criminal']), magic: Object.freeze(['magic']), military: Object.freeze(['military']) });
+
+/**
+ * POWERS-9 (ROUND-3-CUT-INCREMENT pf#65 #77 #105 #246 #491 #530 #595 #596 #662 #663 #799): the card categories whose rows,
+ * at either rank, speak of the card's OWN BODY ("Heads an old family", "Belongs to a lesser old family", "Holds an office
+ * whose purse shrinks", "Works spells under the senior casters", "Holds a place under the crew's boss", "Serves the faith
+ * under its leaders"), and the power categories that are that body. Such a row is true only of a card whose first-rank
+ * power IS that body: a smith heading the Grain Holders is no old family's head, the occupier's governor (a military
+ * power) holds no office of the seat, a lone outlaw in no power has no boss. A card whose first-rank power is another
+ * kind, or none, reads no row (the refusal's rule: it keeps its own goal and claims no position). The government's body
+ * is the governing power or a power of its category. (The trade's rows speak of the card's own house, and the armed
+ * rows of the card's own squad: both stand where the card's power is another's.)
+ * @type {Readonly<Record<string, readonly string[]>>}
+ */
+const BODY_KINDS = Object.freeze({ government: Object.freeze(['government']), other: Object.freeze(['noble']), religious: UNDER_KINDS.religious, criminal: UNDER_KINDS.criminal, magic: UNDER_KINDS.magic });
+
+/**
+ * Whether the card's first-rank power is of its category's own body (BODY_KINDS); true for a category with no body.
+ * @param {string} cat @param {{ power?: string | null }} standing @param {Array<Record<string, any>>} factions @returns {boolean}
+ */
+function inItsBody(cat, standing, factions) {
+  const kinds = BODY_KINDS[cat];
+  if (!kinds) return true;
+  const mine = standing.power ? factions.find((f) => f.faction === standing.power) : null;
+  return !!mine && (kinds.includes(mine.category) || (cat === 'government' && !!mine.isGoverning));
+}
+
+/**
+ * Whether the card heads the strongest power of its own kind (so no house of its kind stands ahead of it).
+ * @param {{ standing: string, power?: string | null }} standing @param {Array<Record<string, any>>} factions
+ * @param {readonly string[] | undefined} kinds @returns {boolean}
+ */
+/**
+ * TAIL-TIES-3 (the chair's ruling (T11) of 2026-11-15, vetoable by the owner): the trade's and the old families' subordinate
+ * rows place the card's house BEHIND THE LEADING ONE of its kind ("Runs a smaller house behind the leading one", "the bigger
+ * houses take more of the trade"); where the town holds NO power of that kind (a hamlet whose only trade is a salt works, its
+ * master a member of the elders), there is no leading house and no bigger one, and the row is false: the card reads no row
+ * (the refusal's rule: it keeps its own goal and claims no position). @param {string} cat
+ * @param {Array<Record<string, any>>} factions @returns {boolean}
+ */
+function noHouseOfItsKind(cat, factions) {
+  const kinds = HOUSE_KINDS[cat];
+  return !!kinds && !factions.some((f) => kinds.includes(f.category));
+}
+
+function headsItsKind(standing, factions, kinds) {
+  if (!kinds || standing.standing !== STANDING.head) return false;
+  const mine = factions.find((f) => f.faction === standing.power);
+  if (!mine || !kinds.includes(mine.category)) return false;
+  return factions.filter((f) => kinds.includes(f.category)).every((f) => (f.power || 0) <= (mine.power || 0));
 }
 
 // ── Template library: category × condition × rank ─────────────────────────────
@@ -126,12 +196,12 @@ reg('government','economic_stress',
     constraint:'Every office is after the same few coins; making this one needed means taking from the others.' }
 );
 reg('government','contested',
-  { position:  'Holds the seat, but a rival claims it, and the matter is not settled.',
-    goal:      'Win the doubters back before the challenger to the seat wins them first.',
-    constraint:'Every hard move wins the rival new supporters; every delay gives the rival time.' },
-  { position:  'Holds an office that hangs on a seat someone else is trying to take.',
-    goal:      'Stay off both sides of the fight for the seat until it is plain who wins.',
-    constraint:'Waiting to see who wins keeps the office safe today and earns no thanks from the winner.' }
+  { position:  'Holds the seat, but many doubt its right to it, and the doubt has not gone away.',
+    goal:      'Win the doubters back before their doubt hardens into refusal.',
+    constraint:'Every hard move gives the doubters a new reason; every delay lets the doubt grow.' },
+  { position:  'Holds an office that hangs on a seat many people doubt.',
+    goal:      'Keep their office out of the arguments over the seat until it is plain which way people lean.',
+    constraint:'Keeping quiet keeps the office safe today and earns no credit with the seat or with its doubters.' }
 );
 reg('government','stable',
   { tags: CALM_ONLY, position:  'Holds the seat, and people accept it; there is room to act, not just to hold on.',
@@ -177,17 +247,17 @@ reg('military','economic_stress',
     constraint:'If anyone sees how thin the squad has worn, they will test it.' }
 );
 reg('military','contested',
-  { position:  'Commands those under arms while rivals fight over the seat, and each side wants them.',
-    goal:      'Keep everyone under their command out of the fight for the seat until it is settled.',
-    constraint:'Keeping those under arms out of the fight takes quiet work that cannot be owned in public.' },
-  { position:  'Leads a squad whose members are being pulled toward one side or the other in the fight for the seat.',
-    goal:      'Stop their squad splitting into two camps before the fight for the seat is over.',
+  { position:  'Commands those under arms while many doubt the seat\'s right, and both the seat and its doubters watch where they stand.',
+    goal:      'Keep everyone under their command out of the arguments over the seat until they are settled.',
+    constraint:'Keeping those under arms out of it takes quiet work that cannot be owned in public.' },
+  { position:  'Leads a squad whose members are split over whether the seat deserves obeying.',
+    goal:      'Stop their squad splitting into two camps over the seat.',
     constraint:'Some of the squad have loyalties of their own, and they do not all point the same way.' }
 );
 reg('military','stable',
   { tags: CALM_ONLY, position:  'Commands those under arms in quiet times; the work is keeping trouble from starting.',
     goal:      'Keep the drills, the patrols and the pay going, and the old hands in charge of them.',
-    constraint:'With nothing threatening, it is hard to win the coin and the say that would be needed if trouble came.' },
+    constraint:'It is hard to win the coin and the say that would be needed if worse trouble came.' }, // BAR2-PEOPLE (PP7): no 'nothing threatening' beside a constant monster threat (15 of 74 towns)
   { tags: CALM_ONLY, position:  'Leads a squad in quiet times, where the work is routine and the risks are low.',
     goal:      'Get their squad noticed for doing the dull work well, and earn a patron by it.',
     constraint:'Steady work earns no notice; getting ahead takes a crisis or a patron.' }
@@ -229,10 +299,10 @@ reg(cat,'economic_stress',
     constraint:'The work the big houses leave alone is the work that pays least.' }
 );
 reg(cat,'contested',
-  { position:  'Heads the leading house in the trade while rivals fight over the seat; whoever wins can make or break it.',
-    goal:      'Lend to both sides of the fight for the seat, so whoever wins owes them.',
+  { position:  'Heads the leading house in the trade while many doubt the seat\'s right; whatever the seat does next can make or break it.',
+    goal:      'Lend to the seat and to its doubters alike, so whoever wins the argument owes them.',
     constraint:'Keeping friends on both sides means neither side fully trusts the house.' },
-  { position:  'Runs a smaller house that sells to both sides in the fight for the seat.',
+  { position:  'Runs a smaller house that sells to the seat\'s people and to its doubters alike.',
     goal:      'Keep selling to every power without any of them treating their goods as its own.',
     constraint:'To both sides, staying out of it looks like fear or scheming.' }
 );
@@ -281,15 +351,15 @@ reg('religious','economic_stress',
     constraint:'With less to give, there is less reason for the post to exist.' }
 );
 reg('religious','contested',
-  { position:  'Leads the faith while rivals fight over the seat, and both sides want its blessing.',
-    goal:      'Give no blessing to either claimant until it is plain which one will hold the seat.',
-    constraint:'The longer it waits to bless one side, the less the blessing will be worth.' },
-  { position:  'Serves the faith under its leaders while rivals fight over the seat.',
-    goal:      'Back whichever claimant their superiors bless, and be seen to have waited for the word.',
+  { position:  'Leads the faith while many doubt the seat\'s right, and the seat wants its blessing.',
+    goal:      'Give the seat no blessing until it is plain the people will stand behind it.',
+    constraint:'The longer it waits to bless the seat, the less the blessing will be worth.' },
+  { position:  'Serves the faith under its leaders while many doubt the seat\'s right.',
+    goal:      'Follow their superiors\' word on the seat, and be seen to have waited for it.',
     constraint:'Following the leaders\' choice means setting aside one\'s own judgment, and paying for it whether they chose well or not.' }
 );
 reg('religious','stable',
-  { tags: CALM_ONLY, position:  'Leads the faith in quiet times, at peace with the seat beside it.',
+  { tags: CALM_ONLY, position:  'Leads the faith in quiet times, whatever it thinks of the seat beside it.', // BAR2-PEOPLE (PP7): no peace with the seat the faith may contest (20 of 75 towns)
     goal:      'Keep the faith at every naming, wedding and burial, and out of the seat\'s quarrels.',
     constraint:'With nothing pressing, it is easy to grow comfortable and hard to argue for growing.' },
   { tags: CALM_ONLY, position:  'Serves the faith under its leaders in quiet times.',
@@ -332,10 +402,10 @@ reg('criminal','economic_stress',
     constraint:'Staying worth keeping means showing a value that will last, which is hard to show in the middle of hard times.' }
 );
 reg('criminal','contested',
-  { position:  'Heads the crew while rivals fight over the seat and those who keep order look elsewhere.',
-    goal:      'Move into new rackets while the claimants to the seat are busy with each other.',
-    constraint:'Either side may turn on the crew to hurt the other, so today\'s freedom could end without warning.' },
-  { position:  'Holds a place in a crew that is pushing into new ground while the seat is fought over.',
+  { position:  'Heads the crew while many doubt the seat\'s right and those who keep order look elsewhere.',
+    goal:      'Move into new rackets while the seat is busy holding on to its own people.',
+    constraint:'The seat may turn on the crew to show it can still keep order, so today\'s freedom could end without warning.' },
+  { position:  'Holds a place in a crew that is pushing into new ground while the seat is in doubt.',
     goal:      'Grab their own share of the crew\'s new ground, so they keep it if the push fails.',
     constraint:'Ground taken in a push that fails is the first to be lost when the crew pulls back.' }
 );
@@ -383,12 +453,12 @@ reg('magic','economic_stress',
     constraint:'The spells people still buy in hard times are the humble ones that pay least.' }
 );
 reg('magic','contested',
-  { position:  'Heads the casters while rivals fight over the seat, and both sides want their spells.',
-    goal:      'Refuse every claimant who wants their spells, so whoever takes the seat cannot call them traitors.',
-    constraint:'Staying out of it means refusing both sides, and both will remember.' },
-  { position:  'Works spells under the senior casters while rivals fight over the seat.',
-    goal:      'Be useful to whoever wins the seat, and promise nothing to anyone before then.',
-    constraint:'Serving more than one side means keeping the work small enough that none of them sees a betrayal.' }
+  { position:  'Heads the casters while many doubt the seat\'s right, and the seat wants their spells.',
+    goal:      'Refuse the seat\'s calls on their spells, so no one can call them its tools.',
+    constraint:'Staying out of it means refusing the seat, and the seat will remember.' },
+  { position:  'Works spells under the senior casters while many doubt the seat\'s right.',
+    goal:      'Be useful to the seat without being seen as its creature, and promise nothing yet.',
+    constraint:'Serving the seat while it is in doubt means keeping the work small enough that no one calls it taking sides.' }
 );
 reg('magic','stable',
   { tags: CALM_ONLY, position:  'Heads the casters in quiet times; their place is secure and their spells are in demand.',
@@ -465,11 +535,37 @@ const HOLDS_THE_SEAT = 'Holds the seat.';
 /** The seat rows' opening (government × condition × dominant): the holder's words, no one else's (N3). */
 const HOLDS_A_SEAT = /^Holds the seat\b/;
 
+// ── A HEAD'S SECURE HOLD READS ITS OWN STANDING (BAR5-POWERS, LAW 1c-npc; the audit's C35627: 41 towns of the 720, 15 of the
+// fresh 300) ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+// The stable head rows are keyed on the town's calm and the house's rank; the same card prints the person's standing from
+// `npc.influence` (`npcInteriorityRead.js` INFLUENCE_WORD: low → "Standing marginal"). A row that says the hold is secure
+// and the say real is false beside "Standing marginal": for a head of low influence it takes its twin, which keeps the
+// rank (the leading house, the casters' head) and claims no say. Draw-free; the slot never empties.
+/** @type {Readonly<Record<string, string>>} */
+const LOW_STANDING_TWIN = Object.freeze({
+  'Heads the leading house in the trade in quiet times; its hold is secure and its say is real.':
+    'Heads the leading house in the trade in quiet times, though its word counts for little beyond the trade.',
+  'Heads the casters in quiet times; their place is secure and their spells are in demand.':
+    'Heads the casters in quiet times; their spells are in demand, though their word counts for little beyond them.',
+});
+/** The card's position as its standing bears it. @param {Record<string, any>} npc @param {unknown} position */
+const positionForStanding = (npc, position) => (npc?.influence === 'low' && typeof position === 'string' && LOW_STANDING_TWIN[position]) || position;
+
 /** The holder's house, second: the dual-hat holder's house title, as the seat row prints it; '' for a one-hat holder. @param {Record<string, any>} npc */
 function holderHouseLineOf(npc) {
   const title = String(npc?.title || '').trim();
   return cardOfficeOf(npc) && title ? `Still ${title} as well.` : '';
 }
+
+// ── A MINTED LORD PUSHES NO LINE OFF A CARD (COHERENCE-POWERS-6, item 3; REVIEW-POWERS-2 at 313c67e2b, section 6) ──────
+// A lord minted for a claim or for a noble body (people/castPowers.js, data/stressPowerFaces.js :: CLAIMANT_FACE's row) is a
+// card the cast gained after its people were dealt; counted in the cut it moved the cut, and a card that read its line lost
+// it. The cut is taken over the cast less those lords (each card's place among the others); a lord keeps the lines it reads
+// within the whole cast's cut, as before. Draw-free.
+/** @param {Record<string, any>} npc */
+const isMintedLord = (npc) => npc?.institution?.kind === 'power' && (npc?.institution?.title ?? npc?.title) === CLAIMANT_FACE.title; // TAIL-TITLES K-C: the face, not the holder's form
+/** The enrichment cut over a cast of `n`. @param {number} n */
+const cutOf = (n) => Math.min(5, Math.max(2, Math.floor(n * 0.45)));
 
 // ── Main export ────────────────────────────────────────────────────────────────
 export function enrichNPCsWithStructure(npcs, settlement) {
@@ -477,7 +573,8 @@ export function enrichNPCsWithStructure(npcs, settlement) {
 
   const powerFactions   = settlement.powerStructure?.factions || [];
   const condition       = getPrimaryCondition(settlement);
-  const TOP_N           = Math.min(5, Math.max(2, Math.floor(npcs.length * 0.45)));
+  const TOP_N           = cutOf(npcs.length);
+  const TOP_N_UNMINTED  = cutOf(npcs.filter((n) => !isMintedLord(n)).length); // item 3: the cut among the cards the cast was dealt
   /** @type {ReturnType<typeof factsOf> | null} */
   let facts = null;
 
@@ -493,12 +590,22 @@ export function enrichNPCsWithStructure(npcs, settlement) {
   const goalsNow = scored.map(({ npc }) => npc?.goal?.short);
   const holder = seatHolderAmong(npcs, settlement); // COHERENCE-POWERS-5 (N1): the seat's row is the holder's, office first
 
+  let unminted = 0; // item 3: each card's place among the cards the cast was dealt
   return scored.map(({ npc, standing }, idx) => {
     const isHolder = npc === holder;
-    if (idx >= TOP_N && !isHolder) return { ...npc, structuralRank: standing.standing };
+    const within = isMintedLord(npc) ? idx < TOP_N : unminted++ < TOP_N_UNMINTED;
+    if (!within && !isHolder) return { ...npc, structuralRank: standing.standing };
 
     const cat  = isHolder ? 'government' : npc.category || 'other';
-    const rank = isHolder ? 'dominant' : getRank(standing, powerFactions);
+    // POWERS-9: a row that speaks of the card's own body is not the card's where its first-rank power is another kind
+    if (!isHolder && !inItsBody(cat, standing, powerFactions)) return { ...npc, structuralRank: standing.standing };
+    // COHERENCE-POWERS-7 (the chair's R1): the trade's and the old families' subordinate rows say the card stands "behind the
+    // leading one" of its kind; the head of the strongest power of its own kind is that leading one, whatever its weight
+    // beside the ruler, and reads its kind's head row ("Heads the leading house in the trade", "Heads an old family")
+    const rank = isHolder ? 'dominant' : headsItsKind(standing, powerFactions, HOUSE_KINDS[cat] || UNDER_KINDS[cat]) ? 'dominant' : getRank(standing, powerFactions);
+    // COHERENCE-POWERS-8: a card that heads its power is never "under" its own body's leaders; a lesser body's head takes no row
+    if (!isHolder && UNDER_KINDS[cat] && standing.standing === STANDING.head && rank === 'subordinate') return { ...npc, structuralRank: standing.standing };
+    if (!isHolder && rank === 'subordinate' && noHouseOfItsKind(cat, powerFactions)) return { ...npc, structuralRank: standing.standing }; // TAIL-TIES-3 (T11)
     const key  = `${cat}__${condition}__${rank}`;
     const looked = T[key] ? key : T[`${cat}__stable__${rank}`] ? `${cat}__stable__${rank}` : OTHER_STABLE_DOMINANT;
     // ⭐ CENSUS-1d unit 2 (the chair's R-A ruling of 2026-11-05 02:30; Appendix B item 3, kind T):
@@ -535,7 +642,7 @@ export function enrichNPCsWithStructure(npcs, settlement) {
     return {
       ...npc,
       goal:               updatedGoal,
-      structuralPosition: isHolder && holderHouseLineOf(npc) ? `${lineText(tmpl.position)} ${holderHouseLineOf(npc)}` : lineText(tmpl.position),
+      structuralPosition: isHolder && holderHouseLineOf(npc) ? `${lineText(tmpl.position)} ${holderHouseLineOf(npc)}` : positionForStanding(npc, lineText(tmpl.position)), // BAR5-POWERS (1c-npc)
       activeConstraint:   lineText(tmpl.constraint),
       settlementCondition: condition,
       structuralRank:     standing.standing,

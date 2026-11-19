@@ -1,0 +1,330 @@
+{"seed":"rv2-calm-thorp-0","twice":[],"roles":[]}
+{"seed":"rv2-calm-thorp-1","twice":[],"roles":[]}
+{"seed":"rv2-calm-thorp-2","twice":[],"roles":[]}
+{"seed":"rv2-calm-thorp-3","twice":[],"roles":[]}
+{"seed":"rv2-calm-thorp-4","twice":[],"roles":[]}
+{"seed":"rv2-calm-thorp-5","twice":[],"roles":[]}
+{"seed":"rv2-calm-thorp-6","twice":[],"roles":[]}
+{"seed":"rv2-calm-thorp-7","twice":[],"roles":[]}
+{"seed":"rv2-calm-thorp-8","twice":[],"roles":[]}
+{"seed":"rv2-calm-thorp-9","twice":[],"roles":[]}
+{"seed":"rv2-calm-hamlet-0","twice":[],"roles":[]}
+{"seed":"rv2-calm-hamlet-1","twice":[],"roles":[]}
+{"seed":"rv2-calm-hamlet-2","twice":[],"roles":[]}
+{"seed":"rv2-calm-hamlet-3","twice":[],"roles":[]}
+{"seed":"rv2-calm-hamlet-4","twice":[],"roles":[]}
+{"seed":"rv2-calm-hamlet-5","twice":[],"roles":[]}
+{"seed":"rv2-calm-hamlet-6","twice":[],"roles":[]}
+{"seed":"rv2-calm-hamlet-7","twice":[],"roles":[]}
+{"seed":"rv2-calm-hamlet-8","twice":[],"roles":[]}
+{"seed":"rv2-calm-hamlet-9","twice":[],"roles":[]}
+{"seed":"rv2-calm-village-0","twice":[],"roles":[]}
+{"seed":"rv2-calm-village-1","twice":[],"roles":[]}
+{"seed":"rv2-calm-village-2","twice":[],"roles":[]}
+{"seed":"rv2-calm-village-3","twice":[],"roles":[]}
+{"seed":"rv2-calm-village-4","twice":[],"roles":[]}
+{"seed":"rv2-calm-village-5","twice":[],"roles":[]}
+{"seed":"rv2-calm-village-6","twice":[],"roles":[]}
+{"seed":"rv2-calm-village-7","twice":[],"roles":[]}
+{"seed":"rv2-calm-village-8","twice":[],"roles":[]}
+{"seed":"rv2-calm-village-9","twice":[],"roles":[]}
+{"seed":"rv2-calm-town-0","twice":[],"roles":[]}
+{"seed":"rv2-calm-town-1","twice":[],"roles":[["Wizard's tower","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-calm-town-2","twice":[],"roles":[["Alchemist shop","arcane(military/monster)+alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-calm-town-3","twice":[],"roles":[["Alchemist shop","arcane(military/monster)+alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-calm-town-4","twice":[],"roles":[["Wizard's tower","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-calm-town-5","twice":[],"roles":[]}
+{"seed":"rv2-calm-town-6","twice":[],"roles":[]}
+{"seed":"rv2-calm-town-7","twice":[],"roles":[["Alchemist shop","arcane(military/monster)+alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-calm-town-8","twice":[],"roles":[]}
+{"seed":"rv2-calm-town-9","twice":[],"roles":[["Alchemist shop","arcane(military/monster)+alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-calm-city-0","twice":[],"roles":[["Wizard's tower","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-calm-city-1","twice":[],"roles":[]}
+{"seed":"rv2-calm-city-2","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-calm-city-3","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-calm-city-4","twice":[],"roles":[]}
+{"seed":"rv2-calm-city-5","twice":[],"roles":[]}
+{"seed":"rv2-calm-city-6","twice":[],"roles":[["Elder Grove Council","druids(monster)+magic(magical)"]]}
+{"seed":"rv2-calm-city-7","twice":[],"roles":[["Elder Grove Council","druids(monster)+magic(magical)"]]}
+{"seed":"rv2-calm-city-8","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"],["Wizard's tower","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-calm-city-9","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-calm-metropolis-0","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-calm-metropolis-1","twice":[],"roles":[]}
+{"seed":"rv2-calm-metropolis-2","twice":[],"roles":[]}
+{"seed":"rv2-calm-metropolis-3","twice":[],"roles":[]}
+{"seed":"rv2-calm-metropolis-4","twice":[],"roles":[]}
+{"seed":"rv2-calm-metropolis-5","twice":[],"roles":[]}
+{"seed":"rv2-calm-metropolis-6","twice":[],"roles":[]}
+{"seed":"rv2-calm-metropolis-7","twice":[],"roles":[]}
+{"seed":"rv2-calm-metropolis-8","twice":[],"roles":[]}
+{"seed":"rv2-calm-metropolis-9","twice":[],"roles":[]}
+{"seed":"rv2-famine-thorp-0","twice":[],"roles":[]}
+{"seed":"rv2-famine-thorp-1","twice":[],"roles":[]}
+{"seed":"rv2-famine-thorp-2","twice":[],"roles":[]}
+{"seed":"rv2-famine-thorp-3","twice":[],"roles":[]}
+{"seed":"rv2-famine-thorp-4","twice":[],"roles":[]}
+{"seed":"rv2-famine-thorp-5","twice":[],"roles":[]}
+{"seed":"rv2-famine-thorp-6","twice":[],"roles":[]}
+{"seed":"rv2-famine-thorp-7","twice":[],"roles":[]}
+{"seed":"rv2-famine-thorp-8","twice":[],"roles":[]}
+{"seed":"rv2-famine-thorp-9","twice":[],"roles":[]}
+{"seed":"rv2-famine-hamlet-0","twice":[],"roles":[]}
+{"seed":"rv2-famine-hamlet-1","twice":[],"roles":[]}
+{"seed":"rv2-famine-hamlet-2","twice":[],"roles":[]}
+{"seed":"rv2-famine-hamlet-3","twice":[],"roles":[]}
+{"seed":"rv2-famine-hamlet-4","twice":[],"roles":[]}
+{"seed":"rv2-famine-hamlet-5","twice":[],"roles":[]}
+{"seed":"rv2-famine-hamlet-6","twice":[],"roles":[]}
+{"seed":"rv2-famine-hamlet-7","twice":[],"roles":[]}
+{"seed":"rv2-famine-hamlet-8","twice":[],"roles":[]}
+{"seed":"rv2-famine-hamlet-9","twice":[],"roles":[]}
+{"seed":"rv2-famine-village-0","twice":[],"roles":[]}
+{"seed":"rv2-famine-village-1","twice":[],"roles":[]}
+{"seed":"rv2-famine-village-2","twice":[],"roles":[]}
+{"seed":"rv2-famine-village-3","twice":[],"roles":[]}
+{"seed":"rv2-famine-village-4","twice":[],"roles":[]}
+{"seed":"rv2-famine-village-5","twice":[],"roles":[]}
+{"seed":"rv2-famine-village-6","twice":[],"roles":[["Hedge wizard","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-famine-village-7","twice":[],"roles":[["Healer (divine, 1st level)","hospital(economic/monster)+magic(magical)"]]}
+{"seed":"rv2-famine-village-8","twice":[],"roles":[]}
+{"seed":"rv2-famine-village-9","twice":[],"roles":[]}
+{"seed":"rv2-famine-town-0","twice":[],"roles":[]}
+{"seed":"rv2-famine-town-1","twice":[],"roles":[]}
+{"seed":"rv2-famine-town-2","twice":[],"roles":[]}
+{"seed":"rv2-famine-town-3","twice":[],"roles":[]}
+{"seed":"rv2-famine-town-4","twice":[],"roles":[]}
+{"seed":"rv2-famine-town-5","twice":[],"roles":[]}
+{"seed":"rv2-famine-town-6","twice":[],"roles":[]}
+{"seed":"rv2-famine-town-7","twice":[],"roles":[]}
+{"seed":"rv2-famine-town-8","twice":[],"roles":[]}
+{"seed":"rv2-famine-town-9","twice":[],"roles":[]}
+{"seed":"rv2-famine-city-0","twice":[],"roles":[["Mages' guild","arcane(military/monster)+magic(magical)"],["Elder Grove Council","druids(monster)+magic(magical)"]]}
+{"seed":"rv2-famine-city-1","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"],["Elder Grove Council","druids(monster)+magic(magical)"]]}
+{"seed":"rv2-famine-city-2","twice":[],"roles":[]}
+{"seed":"rv2-famine-city-3","twice":[],"roles":[["Elder Grove Council","druids(monster)+magic(magical)"]]}
+{"seed":"rv2-famine-city-4","twice":[],"roles":[["Alchemist quarter","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-famine-city-5","twice":[],"roles":[]}
+{"seed":"rv2-famine-city-6","twice":[],"roles":[]}
+{"seed":"rv2-famine-city-7","twice":[],"roles":[["Elder Grove Council","druids(monster)+magic(magical)"]]}
+{"seed":"rv2-famine-city-8","twice":[],"roles":[["Elder Grove Council","druids(monster)+magic(magical)"]]}
+{"seed":"rv2-famine-city-9","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-famine-metropolis-0","twice":[],"roles":[]}
+{"seed":"rv2-famine-metropolis-1","twice":[],"roles":[]}
+{"seed":"rv2-famine-metropolis-2","twice":[],"roles":[]}
+{"seed":"rv2-famine-metropolis-3","twice":[],"roles":[]}
+{"seed":"rv2-famine-metropolis-4","twice":[],"roles":[]}
+{"seed":"rv2-famine-metropolis-5","twice":[],"roles":[]}
+{"seed":"rv2-famine-metropolis-6","twice":[],"roles":[]}
+{"seed":"rv2-famine-metropolis-7","twice":[],"roles":[]}
+{"seed":"rv2-famine-metropolis-8","twice":[],"roles":[]}
+{"seed":"rv2-famine-metropolis-9","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-thorp-0","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-thorp-1","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-thorp-2","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-thorp-3","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-thorp-4","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-thorp-5","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-thorp-6","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-thorp-7","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-thorp-8","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-thorp-9","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-hamlet-0","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-hamlet-1","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-hamlet-2","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-hamlet-3","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-hamlet-4","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-hamlet-5","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-hamlet-6","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-hamlet-7","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-hamlet-8","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-hamlet-9","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-village-0","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-village-1","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-village-2","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-village-3","twice":[],"roles":[["Hedge wizard","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-under_siege-village-4","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-village-5","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-village-6","twice":[],"roles":[["Druid Circle","druids(monster)+magic(magical)"],["Hedge wizard","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-under_siege-village-7","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-village-8","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-village-9","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-town-0","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-town-1","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-town-2","twice":[],"roles":[["Alchemist shop","arcane(military/monster)+alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-under_siege-town-3","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-town-4","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-town-5","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-town-6","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-town-7","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-town-8","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-town-9","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-city-0","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-city-1","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-city-2","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-under_siege-city-3","twice":[],"roles":[["Elder Grove Council","druids(monster)+magic(magical)"],["Wizard's tower","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-under_siege-city-4","twice":[],"roles":[["Wizard's tower","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-under_siege-city-5","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"],["Elder Grove Council","druids(monster)+magic(magical)"]]}
+{"seed":"rv2-under_siege-city-6","twice":[],"roles":[["Wizard's tower","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-under_siege-city-7","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"],["Mages' guild","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-under_siege-city-8","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-under_siege-city-9","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-under_siege-metropolis-0","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-metropolis-1","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-metropolis-2","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-metropolis-3","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-metropolis-4","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-under_siege-metropolis-5","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-metropolis-6","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-metropolis-7","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-metropolis-8","twice":[],"roles":[]}
+{"seed":"rv2-under_siege-metropolis-9","twice":[],"roles":[]}
+{"seed":"rv2-wartime-thorp-0","twice":[],"roles":[]}
+{"seed":"rv2-wartime-thorp-1","twice":[],"roles":[]}
+{"seed":"rv2-wartime-thorp-2","twice":[],"roles":[]}
+{"seed":"rv2-wartime-thorp-3","twice":[],"roles":[]}
+{"seed":"rv2-wartime-thorp-4","twice":[],"roles":[]}
+{"seed":"rv2-wartime-thorp-5","twice":[],"roles":[]}
+{"seed":"rv2-wartime-thorp-6","twice":[],"roles":[]}
+{"seed":"rv2-wartime-thorp-7","twice":[],"roles":[]}
+{"seed":"rv2-wartime-thorp-8","twice":[],"roles":[]}
+{"seed":"rv2-wartime-thorp-9","twice":[],"roles":[]}
+{"seed":"rv2-wartime-hamlet-0","twice":[],"roles":[]}
+{"seed":"rv2-wartime-hamlet-1","twice":[],"roles":[]}
+{"seed":"rv2-wartime-hamlet-2","twice":[],"roles":[]}
+{"seed":"rv2-wartime-hamlet-3","twice":[],"roles":[]}
+{"seed":"rv2-wartime-hamlet-4","twice":[],"roles":[]}
+{"seed":"rv2-wartime-hamlet-5","twice":[],"roles":[]}
+{"seed":"rv2-wartime-hamlet-6","twice":[],"roles":[]}
+{"seed":"rv2-wartime-hamlet-7","twice":[],"roles":[]}
+{"seed":"rv2-wartime-hamlet-8","twice":[],"roles":[]}
+{"seed":"rv2-wartime-hamlet-9","twice":[],"roles":[]}
+{"seed":"rv2-wartime-village-0","twice":[],"roles":[]}
+{"seed":"rv2-wartime-village-1","twice":[],"roles":[]}
+{"seed":"rv2-wartime-village-2","twice":[],"roles":[]}
+{"seed":"rv2-wartime-village-3","twice":[],"roles":[]}
+{"seed":"rv2-wartime-village-4","twice":[],"roles":[]}
+{"seed":"rv2-wartime-village-5","twice":[],"roles":[]}
+{"seed":"rv2-wartime-village-6","twice":[],"roles":[]}
+{"seed":"rv2-wartime-village-7","twice":[],"roles":[]}
+{"seed":"rv2-wartime-village-8","twice":[],"roles":[]}
+{"seed":"rv2-wartime-village-9","twice":[],"roles":[]}
+{"seed":"rv2-wartime-town-0","twice":[],"roles":[]}
+{"seed":"rv2-wartime-town-1","twice":[],"roles":[]}
+{"seed":"rv2-wartime-town-2","twice":[],"roles":[]}
+{"seed":"rv2-wartime-town-3","twice":[],"roles":[]}
+{"seed":"rv2-wartime-town-4","twice":[],"roles":[["Alchemist shop","arcane(military/monster)+alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-wartime-town-5","twice":[],"roles":[["Alchemist shop","arcane(military/monster)+alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-wartime-town-6","twice":[],"roles":[]}
+{"seed":"rv2-wartime-town-7","twice":[],"roles":[]}
+{"seed":"rv2-wartime-town-8","twice":[],"roles":[]}
+{"seed":"rv2-wartime-town-9","twice":[],"roles":[]}
+{"seed":"rv2-wartime-city-0","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"],["Elder Grove Council","druids(monster)+magic(magical)"]]}
+{"seed":"rv2-wartime-city-1","twice":[],"roles":[["Elder Grove Council","druids(monster)+magic(magical)"]]}
+{"seed":"rv2-wartime-city-2","twice":[],"roles":[]}
+{"seed":"rv2-wartime-city-3","twice":[],"roles":[]}
+{"seed":"rv2-wartime-city-4","twice":[],"roles":[]}
+{"seed":"rv2-wartime-city-5","twice":[],"roles":[]}
+{"seed":"rv2-wartime-city-6","twice":[],"roles":[["Wizard's tower","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-wartime-city-7","twice":[],"roles":[]}
+{"seed":"rv2-wartime-city-8","twice":[],"roles":[["Wizard's tower","arcane(military/monster)+magic(magical)"],["Elder Grove Council","druids(monster)+magic(magical)"]]}
+{"seed":"rv2-wartime-city-9","twice":[],"roles":[["Alchemist quarter","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-wartime-metropolis-0","twice":[],"roles":[]}
+{"seed":"rv2-wartime-metropolis-1","twice":[],"roles":[]}
+{"seed":"rv2-wartime-metropolis-2","twice":[],"roles":[]}
+{"seed":"rv2-wartime-metropolis-3","twice":[],"roles":[]}
+{"seed":"rv2-wartime-metropolis-4","twice":[],"roles":[]}
+{"seed":"rv2-wartime-metropolis-5","twice":[],"roles":[]}
+{"seed":"rv2-wartime-metropolis-6","twice":[],"roles":[]}
+{"seed":"rv2-wartime-metropolis-7","twice":[],"roles":[]}
+{"seed":"rv2-wartime-metropolis-8","twice":[],"roles":[]}
+{"seed":"rv2-wartime-metropolis-9","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-thorp-0","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-thorp-1","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-thorp-2","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-thorp-3","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-thorp-4","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-thorp-5","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-thorp-6","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-thorp-7","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-thorp-8","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-thorp-9","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-hamlet-0","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-hamlet-1","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-hamlet-2","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-hamlet-3","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-hamlet-4","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-hamlet-5","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-hamlet-6","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-hamlet-7","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-hamlet-8","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-hamlet-9","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-village-0","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-village-1","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-village-2","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-village-3","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-village-4","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-village-5","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-village-6","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-village-7","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-village-8","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-village-9","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-town-0","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-town-1","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-town-2","twice":[],"roles":[["Alchemist shop","arcane(military/monster)+alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-succession_void-town-3","twice":[],"roles":[["Alchemist shop","arcane(military/monster)+alchemists(economic)+magic(magical)"]]}
+{"seed":"rv2-succession_void-town-4","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-town-5","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-town-6","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-town-7","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-town-8","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-town-9","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-city-0","twice":[],"roles":[["Wizard's tower","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-succession_void-city-1","twice":[],"roles":[["Elder Grove Council","druids(monster)+magic(magical)"]]}
+{"seed":"rv2-succession_void-city-2","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"],["Wizard's tower","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-succession_void-city-3","twice":[],"roles":[["Wizard's tower","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-succession_void-city-4","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"],["Mages' guild","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-succession_void-city-5","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-city-6","twice":[],"roles":[["Alchemist quarter","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv2-succession_void-city-7","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-city-8","twice":[],"roles":[["Elder Grove Council","druids(monster)+magic(magical)"]]}
+{"seed":"rv2-succession_void-city-9","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-metropolis-0","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-metropolis-1","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-metropolis-2","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-metropolis-3","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-metropolis-4","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-metropolis-5","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-metropolis-6","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-metropolis-7","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-metropolis-8","twice":[],"roles":[]}
+{"seed":"rv2-succession_void-metropolis-9","twice":[],"roles":[]}
+{"seed":"rv4-calm-thorp-0","twice":[],"roles":[]}
+{"seed":"rv4-under_siege-thorp-0","twice":[],"roles":[]}
+{"seed":"rv4-famine-thorp-0","twice":[],"roles":[]}
+{"seed":"rv4-recently_betrayed+religious_conversion-thorp-0","twice":[],"roles":[]}
+{"seed":"rv4-monster_pressure-thorp-0","twice":[],"roles":[]}
+{"seed":"rv4-calm-hamlet-0","twice":[],"roles":[]}
+{"seed":"rv4-under_siege-hamlet-0","twice":[],"roles":[]}
+{"seed":"rv4-famine-hamlet-0","twice":[],"roles":[]}
+{"seed":"rv4-wartime-hamlet-0","twice":[],"roles":[]}
+{"seed":"rv4-plague_onset+indebted-hamlet-0","twice":[],"roles":[]}
+{"seed":"rv4-calm-village-0","twice":[],"roles":[]}
+{"seed":"rv4-under_siege-village-0","twice":[],"roles":[]}
+{"seed":"rv4-famine-village-0","twice":[],"roles":[]}
+{"seed":"rv4-religious_conversion-village-0","twice":[],"roles":[]}
+{"seed":"rv4-slave_revolt-village-0","twice":[],"roles":[]}
+{"seed":"rv4-calm-town-0","twice":[],"roles":[["Alchemist shop","arcane(military/monster)+alchemists(economic)+magic(magical)"]]}
+{"seed":"rv4-under_siege+famine-town-0","twice":[],"roles":[]}
+{"seed":"rv4-recently_betrayed-town-0","twice":[],"roles":[["Elder Grove Council","druids(monster)+magic(magical)"]]}
+{"seed":"rv4-insurgency-town-0","twice":[],"roles":[]}
+{"seed":"rv4-occupied-town-0","twice":[],"roles":[]}
+{"seed":"rv4-calm-city-0","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"],["Wizard's tower","arcane(military/monster)+magic(magical)"]]}
+{"seed":"rv4-under_siege-city-0","twice":[],"roles":[["Apothecary district","alchemists(economic)+magic(magical)"]]}
+{"seed":"rv4-famine+wartime-city-0","twice":[],"roles":[]}
+{"seed":"rv4-politically_fractured-city-0","twice":[],"roles":[]}
+{"seed":"rv4-mass_migration-city-0","twice":[],"roles":[]}
+{"seed":"rv4-calm-metropolis-0","twice":[],"roles":[]}
+{"seed":"rv4-under_siege-metropolis-0","twice":[],"roles":[]}
+{"seed":"rv4-famine-metropolis-0","twice":[],"roles":[]}
+{"seed":"rv4-infiltrated+succession_void-metropolis-0","twice":[],"roles":[]}
+{"seed":"rv4-wartime+recently_betrayed-metropolis-0","twice":[],"roles":[]}

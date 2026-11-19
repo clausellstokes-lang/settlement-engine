@@ -21,6 +21,7 @@ import {
 import { applyUserEdit } from '../../src/domain/userEdits.js';
 import { deepClone } from '../../src/domain/clone.js';
 import { STRESS_ECONOMIC_EFFECTS } from '../../src/data/npcData.js';
+import { styledTitleOf } from '../../src/data/faceHonorifics.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
@@ -167,12 +168,15 @@ describe('the reference graph stays resolvable', () => {
     }
   });
 
+  // COHERENCE-POWERS-8 (R2, re-keyed by identity): a row's role word is its card's role in the one home of the styled
+  // title (faceHonorifics.js :: styledTitleOf: a woman lord is "the lady", a man's role is his role unchanged), so the
+  // copy is compared with that, exactly, never loosened.
   test('relationship name AND role copies match the NPC they point at', () => {
     for (const rel of parts.relationships || []) {
       expect(rel.npc1Name).toBe(byId.get(rel.from).name);
       expect(rel.npc2Name).toBe(byId.get(rel.to).name);
-      expect(rel.npc1Role).toBe(byId.get(rel.from).role);
-      expect(rel.npc2Role).toBe(byId.get(rel.to).role);
+      expect(rel.npc1Role).toBe(styledTitleOf(byId.get(rel.from).role, byId.get(rel.from).gender));
+      expect(rel.npc2Role).toBe(styledTitleOf(byId.get(rel.to).role, byId.get(rel.to).gender));
     }
   });
 

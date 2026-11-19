@@ -27,7 +27,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { tierNounFindings } from '../../src/domain/coherence/tierNounFindings.js';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
-import { INSTITUTION_DESC_VARIANTS } from '../../src/data/institutionDescVariants.js';
+import { DESC_LATE_SIBLINGS, DESC_VARIANT_SIBLINGS, INSTITUTION_DESC_VARIANTS } from '../../src/data/institutionDescVariants.js';
 import { INLAND_DESCRIPTIONS } from '../../src/data/inlandDescriptions.js';
 
 const PER_TIER = 8;
@@ -117,7 +117,12 @@ describe('the place\'s own noun in drawn institution text', () => {
         // whole pool speaks of water takes the row's authored inland text (src/data/inlandDescriptions.js).
         // Composed with lane TERRAIN-POOLS on the window branch (chair's ruling P3, as for dossierContent).
         const inland = INLAND_DESCRIPTIONS[`town|${inst.category}|${inst.name}`];
-        const pool = [canonical, ...(INSTITUTION_DESC_VARIANTS[`town|${inst.category}|${inst.name}`] || []), ...(inland ? [inland] : [])];
+        const drawn = [canonical, ...(INSTITUTION_DESC_VARIANTS[`town|${inst.category}|${inst.name}`] || []), ...(inland ? [inland] : [])];
+        // W2-FIX-DATA (2026-11-13): a member the record refuses resolves to its declared twin (DESC_VARIANT_SIBLINGS), an authored line of the same pool
+        // BAR4-HOUSES (2026-11-16): and to its LATE twin (DESC_LATE_SIBLINGS, resolved after the chains and the powers settle:
+        // the commercial sawmill without timber at hand, the town council under an occupation), an authored line of the same pool
+        const twinsIn = (/** @type {Record<string, any[]>} */ table) => drawn.flatMap((t) => (table[t] || []).filter((l) => l.twinOf === t).map((l) => l.text));
+        const pool = [...drawn, ...twinsIn(DESC_VARIANT_SIBLINGS), ...twinsIn(DESC_LATE_SIBLINGS)];
         if (!pool.includes(inst.desc)) moved.push(`${s.name} / ${inst.name}: ${inst.desc}`);
       }
     }

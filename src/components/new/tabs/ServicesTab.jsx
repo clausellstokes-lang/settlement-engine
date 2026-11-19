@@ -21,6 +21,7 @@ import { edged } from '../../../design/edgedBox.js';
 import InfoPill from '../../primitives/InfoPill.jsx';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { FLUSH, FLUSH_RULED, FLUSH_STACK } from '../../../design/flush.js';
+import { stoppingCrisesOf, rowStoppedBy, rowShortOf, rowMarkText, markedDescription, ordinaryTimesLine, setsWithMarkedHousesWorse } from '../../../domain/display/crisisStoppedRow.js';
 
 /**
  * ⛔ DS-SUP-3'S POSITION, BOUND ONCE AND SPELLED ONCE.
@@ -129,7 +130,8 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
   );
 
   // Chain impairment
-  const {tradeDeps, impaired, degraded, vulnerable, depReasons} = computeChainSets(settlement);
+  // BAR6-MARKS (8a.mild): the row's state word prints the leaf's worse state (`setsWithMarkedHousesWorse`)
+  const {tradeDeps, impaired, degraded, vulnerable, depReasons} = setsWithMarkedHousesWorse(settlement, computeChainSets(settlement));
   const serviceChainDepth = serviceChainDepthMap(settlement);
 
   // Build flat list for search
@@ -143,6 +145,19 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
     });
   });
 
+  // TAIL-SERVICES (the chair's ruling S1, 2026-11-14): under a siege, an outbreak or a famine a row that lives on what
+  // the crisis stops is MARKED before its description (which stays the description of ordinary times), and the tab
+  // says so once at its head. The one leaf decides (domain/display/crisisStoppedRow.js); a calm town marks nothing.
+  const crises = stoppingCrisesOf(settlement);
+  // TAIL-SERVICES-2 (ruling S5, 2026-11-15): the same leaf's second cause: a row its house makes from an input the page
+  // says never reaches that house is marked short of it, and the head says once what such a row is.
+  const stoppedBy = new Map(allServices.map((s) => [s.svc, typeof s.svc === 'object' ? rowStoppedBy(settlement, 'service', s.svc, crises) : null]));
+  const shortBy = new Map(allServices.map((s) => [s.svc, typeof s.svc === 'object' ? rowShortOf(settlement, 'service', s.svc) : null]));
+  const shown = (svc) => {
+    if (!stoppedBy.get(svc) && !shortBy.get(svc)) return svc;
+    return { ...svc, desc: markedDescription(rowMarkText(settlement, 'service', svc, crises), svc.desc) };
+  };
+  const ordinaryLine = ordinaryTimesLine([...stoppedBy.values()].filter(Boolean), [...shortBy.values()]); // LEFT-MARKS M3: the leaf reads a venture's mark as no short mark
   const query = search.trim().toLowerCase();
   const searchResults = query ? allServices.filter(s => s.text.includes(query)) : null;
   const missing = (J0[tier] || []).filter(k => !services?.[k]?.length);
@@ -247,6 +262,9 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
             "custom" marker lives here. */}
       </div>
 
+      {ordinaryLine && (
+        <div data-testid="services-ordinary-times" style={{padding:'6px 14px',fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A10'],fontStyle:'italic',...FLUSH}}>{ordinaryLine}</div>
+      )}
       {/* ── SEARCH ──────────────────────────────────────────────────────── */}
       <div style={FLUSH_RULED}>
         <div style={{position:'relative'}}>
@@ -275,7 +293,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                   <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:8}}>✓ {searchResults.length} result{searchResults.length!==1?'s':''} found</div>
                   {searchResults.map((r,i)=>(
                     <div key={i} style={{marginBottom:6}}>
-                      <ServiceItem svc={r.svc} accent={Ts[r.cat]?.accent||'#1a5a28'} isCriminal={r.cat==='criminal'} tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} settlement={settlement} chainDepth={serviceChainDepth.get((typeof r.svc==='string'?r.svc:r.svc?.institution||'').toLowerCase())}/>
+                      <ServiceItem svc={shown(r.svc)} accent={Ts[r.cat]?.accent||'#1a5a28'} isCriminal={r.cat==='criminal'} tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} settlement={settlement} chainDepth={serviceChainDepth.get((typeof r.svc==='string'?r.svc:r.svc?.institution||'').toLowerCase())}/>
                       <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,marginLeft:20,display:'block',marginTop:1}}>{Ts[r.cat]?.label}</span>
                     </div>
                   ))}
@@ -353,7 +371,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                         so the sentence cannot land under a row the list did not put first. */}
                     {[...list].sort(serviceOrder(impaired, degraded)).map((svc,i)=>(
                       <React.Fragment key={i}>
-                        <ServiceItem svc={svc} accent={meta.accent} isCriminal={isCriminal}
+                        <ServiceItem svc={shown(svc)} accent={meta.accent} isCriminal={isCriminal}
                           tradeDeps={tradeDeps} impaired={impaired} degraded={degraded} vulnerable={vulnerable} depReasons={depReasons} settlement={settlement} chainDepth={serviceChainDepth.get((typeof svc==='string'?svc:svc?.institution||'').toLowerCase())}
                           impactShown={impactPlan.get(svc)?.impactShown || false} impactCovers={impactPlan.get(svc)?.impactCovers || null}/>
                         {/* ── DS-SUP-3's SECOND LENS, UNDER THE ROW IT NAMES ──────────────

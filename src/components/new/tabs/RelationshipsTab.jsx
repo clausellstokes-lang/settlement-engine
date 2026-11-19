@@ -132,6 +132,11 @@ export function RelationshipsTab({ settlement:r, saveId=null, playerView=false, 
   });
 
   const hasAny=neighbours.length>0||rels.length>0||conflicts.length>0;
+  // R2-CODE-B item 4 (the cold list REVIEW-W2A-3 #29 #60): the empty line denied "conflicts" beside a
+  // record that holds them in their own homes, printed on the Overview's Tensions & Conflicts —
+  // `history.currentTensions` and `powerStructure.recentConflict`. Where either holds one, the line
+  // says only what this tab lacks: neighbours and ties between people.
+  const conflictsElsewhere=(Array.isArray(r.history?.currentTensions)&&r.history.currentTensions.length>0)||!!r.powerStructure?.recentConflict;
 
   return (
     <div>
@@ -254,7 +259,9 @@ export function RelationshipsTab({ settlement:r, saveId=null, playerView=false, 
           "Generate a settlement to see relationship data." on a generated thorp (STYLE-RULINGS-2
           B10(b); SW-9). `hasAny` reads exactly the three lists the line names. */}
       {!hasAny&&<div data-testid="relationships-empty" style={{padding:'32px 16px',textAlign:'center',color:MUTED,fontSize:proseFontSize(FS.md,mobile)}}>
-        No neighbours, ties between people or conflicts are recorded for this settlement.
+        {conflictsElsewhere
+          ? 'No neighbours or ties between people are recorded for this settlement.'
+          : 'No neighbours, ties between people or conflicts are recorded for this settlement.'}
       </div>}
     </div>
   );

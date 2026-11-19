@@ -500,7 +500,12 @@ jobs:
     # (scripts/vercel-ignore-build.mjs) requires this job green, so a cap that cuts a
     # passing run blocks the production deploy — which is why production has not
     # deployed since 09-16.
-    timeout-minutes: 45
+    # RE-TAKEN 2026-11-18 (the last close, LASTCLOSE-DOORS) BY THE RULE THE RATCHET'S
+    # CAP FOLLOWS (the longest CONCLUDED run × 1.5, rounded UP to the next 15): this job
+    # concluded in 30m38s at 19b67557d (run 44295605654, pull_request, measured by the
+    # chair), 66% of the cap of 45 on a job whose scoped suite still grows; 30m38s × 1.5
+    # = 45m57s → 60.
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       # Two suites read the LEDGER BRANCH by its local ref (scripts/audit/ledger-citations.mjs and

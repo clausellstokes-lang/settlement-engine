@@ -11,6 +11,11 @@
  * the projection under `defense:criminal` (`ringNote`); the shared tab prints the projected line
  * when present and renders locally, as before, when absent. One town per seeded variant: soak1k-10,
  * soak1k-11, soak1k-23 (the chair's 120-town sweep). Every anchor is the owner's own draw.
+ *
+ * RE-KEYED BY IDENTITY (W2-C-LEAVES-SIDE, 2026-11-13): soak1k-23 is a slave revolt whose Defense tab prints "Rebels and
+ * guards are fighting in the contested districts", where the chair's ruling leaves the organised-ring note out (it said
+ * the ring keeps the streets quiet: false there). Its variant is held by soak1k-41, the next town of the sweep that
+ * draws the same vantage and prints it.
  */
 import React from 'react';
 import { describe, it, expect, beforeAll, afterEach } from 'vitest';
@@ -35,9 +40,9 @@ function paragraphs(element) {
 }
 
 describe('the organized-ring note: the shared Defense tab prints the owner\'s seeded variant', () => {
-  it('soak1k-10, soak1k-11 and soak1k-23: each prints its seeded variant on the shared tab, three variants in all', () => {
+  it('soak1k-10, soak1k-11 and soak1k-41: each prints its seeded variant on the shared tab, three variants in all', () => {
     const variants = new Set();
-    for (const i of [10, 11, 23]) {
+    for (const i of [10, 11, 41]) {
       const owner = birth(i).settlement;
       const note = criminalStructureOf(owner)?.note;
       expect(typeof note === 'string' && note.length > 0, `soak1k-${i}: anchored, the town has an organized ring`).toBe(true);

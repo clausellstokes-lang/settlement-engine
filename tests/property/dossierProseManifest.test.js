@@ -39,8 +39,8 @@ import { join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
 import {
-  AUDIENCES, driftRun, goldenCorpus, keyOf, manifestBytes, MANIFEST_RECORDER_FILES, poolIndex,
-  recorderShas, sha256, stripComments, templateMatches,
+  AUDIENCES, cellsOfTown, driftRun, goldenCorpus, keyOf, literalLength, manifestBytes, MANIFEST_RECORDER_FILES,
+  mountsByBlock, poolIndex, recorderShas, resolveCandidates, sha256, stripComments, templateMatches, townOf,
 } from '../helpers/dossierManifest.js';
 import { classifyCell, classifyCells, VERDICTS } from '../../scripts/prose-manifest-diff.mjs';
 import { MANIFEST_PROVENANCE } from '../../scripts/prose-manifest-cells.mjs';
@@ -207,11 +207,19 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // 73,469 -> 73,397 (408/394/388 unmoved) at STYLE-2-MERGE CLOSING ACT 2, THE COMPOSED-PROSE MANIFEST AT THE STYLE WAVE'S FINAL TIP (ODQ §934.105, STYLE-2-MERGE, 2026-11-11; record docs/shift-records/2026-11-11-style-2-merge-closing-2-composed-prose-manifest.json),
     // at every merge point's tree (86 trees, point to point): SW-B1 CONTRADICTIONS (point 17) -72, every other point 0 (SW-B5, SW-B6, SW-7 and SW-8 move content, not count).
     // Towns unmoved at 516/3/3/3.
+    // 73,397 -> 72,744 (408/394/388 -> 402/390/394) at THE CLOSE OF THE ROUND BAR2, THE COMPOSED-PROSE MANIFEST AT THE JOINED LINE'S 1011a8a91 (ODQ §934.105 and the owner's word of 2026-11-15 20:27:16 UTC; record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json, BAR2-CLOSE-DOORS-2),
+    // the measured value of this arm's own failure: the tail round's declared moves since closing act 2, left pending at the last close (the same 72,744 and 402/390/394 measured at 74ded1800, so this round's cures move no count); not bisected by point.
+    // Towns unmoved at 516/3/3/3.
+    // 72,744 -> 72,614 (402/390/394 unmoved) at THE CLOSE OF THE ROUNDS BAR5 TO BAR8, THE COMPOSED-PROSE MANIFEST AT THE DOORS' BRANCH OVER PART 1'S FINAL TIP
+    // 0af60594a (ODQ §934.105 and the owner's word of 2026-11-18 03:03:46 UTC; record docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json,
+    // CLOSE-DOORS-2): the measured value of this arm's own failure at the frozen line 70e557d5b (the DRIFT cells byte-equal over Part 1's tip); 72,744 still at
+    // 6c117344f, so the round BAR5 moves no count and the -130 is the later rounds' declared cures (BAR6 to BAR8); not bisected by point.
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 73_397, towns: 516 },
-      'gm-seed-a': { cells: 408, towns: 3 },
-      'gm-seed-b': { cells: 394, towns: 3 },
-      'gm-seed-c': { cells: 388, towns: 3 },
+      'golden-master-v3': { cells: 72_614, towns: 516 },
+      'gm-seed-a': { cells: 402, towns: 3 },
+      'gm-seed-b': { cells: 390, towns: 3 },
+      'gm-seed-c': { cells: 394, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
     expect(Object.values(tally).reduce((n, r) => n + r.cells, 0)).toBe(run.cells.length);
@@ -552,9 +560,19 @@ describe('the two controls no one-audience manifest can see', () => {
     // from mixed pools at 88 fewer positions.
     // 220 -> 208 at F6 BUDGET-FLOOR (UNITS 1–4) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json): the moved worlds draw
     // from mixed pools at 12 fewer positions.
-    expect(differ.length, 'positions where the two faces draw differently').toBe(208);
+    // 208 -> 0, and the pools 1 -> 0, at THE CLOSE OF THE ROUND BAR2 (ODQ §934.105 and the owner's word of 2026-11-15 20:27:16 UTC;
+    // record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json, BAR2-CLOSE-DOORS-2; the chair's ruling MP1, vetoable),
+    // MEASURED over the DRIFT corpus at 1011a8a91 (the chair's own probe at 52f0a1684 reproduced): player cells 36,858 and DM cells
+    // 37,072 (the player face IS composed); player cells drawn from a dm-only variant 0 (no leak); positions that differ 0;
+    // DM-only positions 214. THE CAUSE, declared cures: `DS-ECO-6 :: TIER: minor shadow activity (≥3)`'s three dm-only variants
+    // (v1-v3) were declared `no organised crime` (b760d37d3, 0aa8326fe), so under organised crime BOTH faces now read the open
+    // twin v4 (172 positions: DM v4 172, player v4 172), and without it the DM reads v1 (36) while the player's canonical line is
+    // refused by its own declarations: a DM-only position, not a differing draw. THE OLD 208 ARE THOSE 172 + 36. So the audience
+    // control of this arm now lives in the ONE-SIDED arm below (the DM-only positions, the lawful direction; the player-only list
+    // stays empty), not in differing draws; the leak check above still runs over every position on both faces.
+    expect(differ.length, 'positions where the two faces draw differently').toBe(0);
     expect(new Set(differ.map((row) => `${row.dm.block} :: ${row.dm.pool}`)).size,
-      'over this many of the twelve mixed pools').toBe(1);
+      'over this many of the twelve mixed pools').toBe(0);
     // ⛔ REFUSAL 3: THE ONE-SIDED POSITIONS, WITH THEIR DIRECTION (the fold's P9). The leak
     // check above runs only over positions present on BOTH faces, so a position that exists on
     // one face alone was skipped and merely printed. The two directions are not the same fact:
@@ -569,7 +587,10 @@ describe('the two controls no one-audience manifest can see', () => {
     // 194 -> 203 at MERGE-TRAIN RECORD 10 (ODQ §934.105, THE TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-10-composed-prose-manifest.json), bisected at
     // every merge point's stage: ALLEGIANCE-CAR2 +15 (the guild's push re-deals which towns' hidden facets the player filter empties), CAR3 -6, every other point 0;
     // the lawful direction still (the player-only list stays empty).
-    expect(dmOnly.length, 'positions the DM sees and the player does not, pinned as lawful').toBe(203);
+    // 203 -> 214 at THE CLOSE OF THE ROUND BAR2 (record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json, BAR2-CLOSE-DOORS-2;
+    // the chair's ruling MP1), measured at 1011a8a91: among them the 36 positions of `DS-ECO-6 :: TIER: minor shadow activity (≥3)` where
+    // the DM reads v1 and the player's line is refused by its own declarations (above); the lawful direction still (player-only 0).
+    expect(dmOnly.length, 'positions the DM sees and the player does not, pinned as lawful').toBe(214);
     // The paired control on the direction split itself, so it cannot go vacuous.
     const synthetic = new Map([['a', { dm: {} }], ['b', { player: {} }], ['c', { dm: {}, player: {} }]]);
     expect([...synthetic].filter(([, seat]) => seat.player && !seat.dm).map(([at]) => at),
@@ -746,5 +767,58 @@ describe('the classifier — what KIND of movement, per cell', () => {
     // match sentences it never wrote.
     expect(templateMatches('{settlement} (walled).', 'Ashford (walled).')).toBe(true);
     expect(templateMatches('{settlement} (walled).', 'Ashford xwalledx.')).toBe(false);
+  });
+
+  // ⭐ THE LONGEST LITERAL WINS, AND A TIE STAYS AMBIGUOUS (2026-11-18, BAR8-DESKS-2, ruling BR32 (2)). DS-POW-5
+  // council's twin v6 is its original v2 less the word "whole", so v6's `{seat}` swallowed "whole Free Elder Council"
+  // and 260 cells read as matching two. The twin's words stand; the reader resolves to the longest literal text.
+  const COUNCIL = pools.get('DS-POW-5 :: council') || [];
+  const councilV2 = COUNCIL.find((v) => /goes to the whole \{seat\}, and everybody/.test(v.text));
+  const councilV6 = COUNCIL.find((v) => /goes to the \{seat\}, and everybody/.test(v.text));
+  /** @param {string} sentence @param {string} angle */
+  const readSentence = (sentence, angle) => resolveCandidates(
+    COUNCIL.filter((v) => v.angle === angle && templateMatches(v.text, sentence)),
+  );
+  test('a sentence of the original reads the original, though the shorter twin matches it too (DS-POW-5 council v2, v6)', () => {
+    expect([councilV2?.vid, councilV6?.vid], 'the two rows, found by their own words').toEqual([2, 6]);
+    const v2 = /** @type {any} */ (councilV2);
+    const sentence = v2.text.replace('{settlement}', 'Ashford').replace('{seat}', 'Free Elder Council');
+    // the premise of the cure: BOTH templates match this sentence (v6's slot takes "whole Free Elder Council")
+    expect([templateMatches(v2.text, sentence), templateMatches(/** @type {any} */ (councilV6).text, sentence)]).toEqual([true, true]);
+    const read = readSentence(sentence, v2.angle);
+    expect(read.chosen?.vid, sentence).toBe(2);
+    expect(read.ambiguous).toBe(false);
+  });
+  test('a sentence of the twin reads the twin (DS-POW-5 council v6)', () => {
+    const v6 = /** @type {any} */ (councilV6);
+    const sentence = v6.text.replace('{settlement}', 'Ashford').replace('{seat}', 'Lord Mayor');
+    expect(templateMatches(/** @type {any} */ (councilV2).text, sentence), 'the original refuses it').toBe(false);
+    const read = readSentence(sentence, v6.angle);
+    expect(read.chosen?.vid, sentence).toBe(6);
+    expect(read.ambiguous).toBe(false);
+  });
+  test('two templates of EQUAL literal text matching one sentence still red the arm (the law can still fail)', () => {
+    // planted: "A {x} town." and "A small {y}" both carry eight literal characters and both match "A small town."
+    const tied = [{ text: 'A {x} town.' }, { text: 'A small {y}' }];
+    expect(tied.map((t) => [literalLength(t.text), templateMatches(t.text, 'A small town.')])).toEqual([[8, true], [8, true]]);
+    expect(resolveCandidates(tied).ambiguous).toBe(true);
+    expect(resolveCandidates([tied[0], { text: 'A small {y}.' }])).toEqual({ chosen: { text: 'A small {y}.' }, ambiguous: false });
+    // AND THROUGH THE RECORDER ITSELF: a town that prints v2, read against a pool with a second row of v2's own
+    // literal text, records ambiguous cells (the arm's figure), and none against the shipped pool.
+    const v2 = /** @type {any} */ (councilV2);
+    const v2Cell = run.cells.find((c) => /** @type {any} */ (c).block === 'DS-POW-5' && /** @type {any} */ (c).pool === 'council'
+      && /** @type {any} */ (c).vid === v2.idx);
+    expect(v2Cell, 'a cell of the drift corpus prints v2').toBeTruthy();
+    const [key, audience] = String(/** @type {any} */ (v2Cell).cell).split('::');
+    const config = /** @type {any} */ (goldenCorpus().find((c) => keyOf(c) === key));
+    const { settlement, seed } = townOf(config);
+    const mounts = mountsByBlock();
+    const ambiguousOver = (/** @type {Map<string, any>} */ poolMap) => cellsOfTown(settlement, {
+      key, seed, audience, pools: poolMap, mounts,
+    }).filter((c) => /** @type {any} */ (c).ambiguous).length;
+    expect(ambiguousOver(pools), 'the shipped pool').toBe(0);
+    const tampered = new Map(pools);
+    tampered.set('DS-POW-5 :: council', [...COUNCIL, { ...v2, idx: 99, vid: 99 }]);
+    expect(ambiguousOver(tampered), 'a tied twin').toBeGreaterThan(0);
   });
 });

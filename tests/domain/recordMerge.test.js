@@ -226,7 +226,9 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
   it('A5 · a cross-entry total is atomic: incomeSources comes from R1 as one value', () => {
     const subjects = withIncome();
     // 2026-10-30, checked against the service re-map (ODQ §934.101): 61 at f39d5ae2^ and at f39d5ae2, unmoved.
-    expect(subjects.length, 'the rows whose income shares have two entries to re-cut').toBe(61);
+    // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4, the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 61 -> 50, the measured value of this arm's own
+    // run at the golden's tree 8c11f73ea: the round's declared economy moves (the income shares re-cut from the town's own record) leave 11 rows one entry.
+    expect(subjects.length, 'the rows whose income shares have two entries to re-cut').toBe(50);
 
     const notWhole = [];
     const survived = [];
@@ -263,7 +265,8 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
     // golden-master-v3) and U9 d207c8136 (the bottom end: the external mill is fabric) gives the two hamlets back. The row
     // that stays out is village|germanic|forest|isolated|civilized|golden-master-v3: the budget thins its optional draws
     // and it keeps one active chain where it kept seven at master a07ee4e0a.
-    expect(subjects.length, 'the rows whose active chains have an order to keep or to move').toBe(56);
+    // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat): 56 -> 61, the seventh seat's (c) re-deal (the draft: recordMerge A6 56 -> 61).
+    expect(subjects.length, 'the rows whose active chains have an order to keep or to move').toBe(61);
 
     const armOne = [];
     const armTwo = [];

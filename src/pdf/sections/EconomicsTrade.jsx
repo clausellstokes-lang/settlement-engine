@@ -28,11 +28,13 @@ import {
   tradeLabelOwnership,
 } from '../../domain/content/customTradeLabelOwnership.js';
 import { statusCase } from '../../domain/display/labelCase.js';
-import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the EXPORTS/IMPORTS lists
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js'; // §934.22 item 1(b) — the PROC row
+import { chainHousesOf } from '../../domain/display/chainHouses.js'; // R2-CODE-B item 1b (ruling R1): the PROC row's houses
 import { SupplyChainFlow } from './SupplyChainFlow.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
-import { revenuesOffTheLists } from '../../domain/display/tradeListDisplay.js'; // CENSUS-3c R-P 2 — the revenues that left the trade lists
+import { tradePillWord } from '../../domain/display/tradePillWord.js';
+import { foodBlockShown } from '../../domain/display/foodCarrier.js'; // SURFACES-3 item 1: the tab's food row
+import { revenuesOffTheLists, tradeListsAsPrinted } from '../../domain/display/tradeListDisplay.js'; // CENSUS-3c R-P 2 — the revenues that left the trade lists; W2-C-LEAVES-7 item 8 — the tab's trade lists
 
 function renderedTradeLabel(economy, direction, item) {
   // §934.22 item 2 — A PRINT GOES THROUGH THE SEAM, A MATCH NEVER DOES. The ownership read
@@ -41,7 +43,7 @@ function renderedTradeLabel(economy, direction, item) {
   // rather than at each `itemRender` call site is what keeps that split in ONE place, and it
   // is the shape tests/lint/resourceLabelSeam.census.test.js's owed row named.
   const ownership = tradeLabelOwnership(economy, direction, item);
-  const shown = label(resourceDisplayName(item));
+  const shown = label(tradePillWord(item, direction)); // SURFACES-3 item 2 (r3): the tab's word (an export as the list spells it)
   if (ownership.customOnly) {
     const members = ownership.members.length
       ? ` (incl. ${ownership.members.join(', ')})`
@@ -83,6 +85,20 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           { label: 'Trade', value: cap(e.tradeAccess) || '–' },
         ]}
       />
+      {/* The Prosperity tile's label, where a crisis in force lowered it, says what the place is in
+          ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2): the vm's one sentence. */}
+      {e.prosperityInCrisis && (
+        <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{prosperityInCrisisLed(e.prosperityInCrisis)}</Text>
+      )}
+
+      {/* TAIL-EXPORTS-PDF-2 (rulings E3/E17): under a crisis an income share or a chain that lives on what it stops is
+          marked by the tabs' one leaf (domain/display/crisisStoppedRow.js), and the chapter says so once. */}
+      {((line) => (line ? (
+        <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], marginBottom: space.xs }}>{line}</Text>
+      ) : null))(ordinaryTimesOnPage(settlement, [
+        ...(e.incomeSources || []).map((src) => /** @type {const} */ (['income', src])),
+        ...(flag('pdfVisualChains') ? (settlement?.economicState?.activeChains || []).filter((c) => c && c.status !== 'unexploited') : []).map((c) => /** @type {const} */ (['chain', c])),
+      ], { readings: false }))/* PDF-2b (item 3): the boolean the Economics tab's head line hands (econOrdinaryTimesLine) */}
 
       {/* ── Income sources ─────────────────────────────────────── */}
       {e.incomeSources?.length > 0 && (
@@ -99,11 +115,11 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
                 tone={s.isCriminal ? 'bad' : 'gold'}
                 height={3}
               />
-              {s.desc && (
+              {((desc) => (desc ? (
                 <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: -2, marginLeft: 6 }}>
-                  {s.desc}
+                  {desc}
                 </Text>
-              )}
+              ) : null))(incomeDescShown(settlement, s, ordinaryIncomeLineOf))/* PDF-2b (BRIEF-BAR8 item 4, 2026-11-18; vetoable by the owner): a stored short twin under no mark prints the trade's ordinary line, as the tab's row does, through the leaf both trees reach (domain/display/incomeOrdinaryLines.js, J-INCOME's 9d344fc9c, copied byte for byte); LEFT-PDF L1 (BRIEF-LEFT, 2026-11-17; vetoable by the owner): the Economics tab's row (economicsCrisisMarks.js :: incomeDescShown): its mark, crisis and short. The tab's ordinary line for a short twin under no mark (generators/economy/incomeLineSiblings.js) is a tree src/pdf may not reach (tests/architecture/layerBoundaries.test.js): LEFT by name */}
             </View>
           ))}
         </View>
@@ -121,7 +137,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
       })()}
 
       {/* ── Trade flows ───────────────────────────────────────── */}
-      {(e.primaryExports?.length > 0 || e.primaryImports?.length > 0 || e.localProduction?.length > 0) && (
+      {(() => { const trade = tradeListsAsPrinted(settlement); return (trade.exports.length > 0 || trade.imports.length > 0 || trade.local.length > 0) && ( /* W2-C-LEAVES-7 item 8: the tab's lists, one reader (a siege that stops trade: no IMPORTS) */
         <>
       <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
         TRADE FLOWS
@@ -131,7 +147,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           <View>
             <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.good }}>EXPORTS</Text>
             <BulletList
-              items={e.primaryExports}
+              items={trade.exports}
               tone="good"
               emptyText="None significant"
               itemRender={(item) => renderedTradeLabel(e, 'exports', item)}
@@ -140,11 +156,11 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
         }
         b={
           <View>
-            <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.warn }}>IMPORTS</Text>
+            {!trade.tradeStopped && <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.warn }}>IMPORTS</Text>}
             <BulletList
-              items={e.primaryImports}
+              items={trade.imports}
               tone="warn"
-              emptyText="None significant"
+              emptyText={trade.tradeStopped ? undefined : 'None significant'}
               itemRender={(item) => renderedTradeLabel(e, 'imports', item)}
             />
           </View>
@@ -153,7 +169,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           <View>
             <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>LOCAL PRODUCTION</Text>
             <BulletList
-              items={e.localProduction}
+              items={trade.local}
               tone="muted"
               emptyText="None recorded"
               itemRender={(item) => label(item)}
@@ -162,7 +178,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
         }
       />
         </>
-      )}
+      ); })()}
 
       {/* Entrepôt + necessity flags */}
       {(e.isEntrepot || e.necessityImports) && (
@@ -198,18 +214,20 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
       )}
 
       {/* Critical trade dependencies */}
-      {(e.tradeDependencies?.length > 0 || e.criticalImports?.length > 0) && (
+      {/* TAIL-EXPORTS-PDF batch 1 (ruling E1): the terrain's critical goods the tab prints (criticalImportsShown), never
+          the need list raw ("luxury goods" in a thorp of seven, 420 of 720). */}
+      {(() => { const criticalShown = criticalImportsShown(settlement); return (e.tradeDependencies?.length > 0 || criticalShown.length > 0) && (
         <View style={{ marginBottom: space.sm }}>
           <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             CRITICAL DEPENDENCIES
           </Text>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
-            {[...(e.tradeDependencies || []), ...(e.criticalImports || [])].map((d, i) => (
+            {[...(e.tradeDependencies || []), ...criticalShown].map((d, i) => (
               <Tag key={`dep-${i}`} tone="bad">{label(d)}</Tag>
             ))}
           </View>
         </View>
-      )}
+      ); })()}
 
       {hasFoodData(e.foodBalance) && (
         <>
@@ -218,7 +236,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             FOOD SECURITY
           </Text>
-          <FoodBalanceBlock fb={e.foodBalance} />
+          <FoodBalanceBlock fb={foodBlockShown(settlement, e.foodBalance)} />
         </>
       )}
 
@@ -234,7 +252,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
               chains={settlement?.economicState?.activeChains}
               instNames={(settlement?.institutions || []).map((inst) => inst.name || '')}
               primaryExports={settlement?.economicState?.primaryExports || []}
-              tier={settlement?.tier}
+              tier={settlement?.tier} town={settlement}
             />
           ) : e.chains.map((c, i) => (
             <StatusCard
@@ -244,8 +262,8 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
               status={c.status}
               statusLabel={cap(c.status)}
               meta={[
-                c.processingInstitutions?.length ? { label: 'PROC', value: c.processingInstitutions.map((n) => label(institutionDisplayName(n))).filter(Boolean).join(', ') } : null,
-                c.outputs?.length ? { label: 'OUT', value: c.outputs.map(label).filter(Boolean).join(', ') } : null,
+                c.processingInstitutions?.length ? { label: 'PROC', value: chainHousesOf(c.processingInstitutions, []).map((h) => label(h.name)).filter(Boolean).join(', ') } : null,
+                c.outputs?.length ? { label: chainYieldRefused(settlement?.economicState?.activeChains?.[i]) ? NORMALLY_YIELDS.toUpperCase() : 'OUT', value: c.outputs.map(label).filter(Boolean).join(', ') } : null,
                 c.dependency ? { label: 'DEP', value: depText(c.dependency) } : null,
                 c.incomeContribution != null ? { label: 'INC', value: smart(c.incomeContribution) } : null,
               ].filter(b => b && b.value)}
@@ -265,7 +283,8 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
             CUSTOM SUPPLY CHAINS · {e.customChains.length}
           </Text>
           {e.customChains.map((c, i) => {
-            const flow = [c.resource, ...(c.processingInstitutions || []), ...(c.outputs || [])]
+            // R2-CODE-B item 1b (ruling R1): the houses by the seam's house label, each once (chainHouses.js).
+            const flow = [c.resource, ...chainHousesOf(c.processingInstitutions, []).map((h) => h.name), ...(c.outputs || [])]
               .filter(Boolean)
               .map((n) => label(institutionDisplayName(n) || n) || String(n))
               .join(' » ');
@@ -333,15 +352,18 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
           T2-9 PDF parity: the same exploitation lists were printed in both chapters). */}
 
       {/* ── Shadow economy ─────────────────────────────────────── */}
-      {(e.shadowEconomy.captureRate != null || e.shadowEconomy.crimeTypes?.length > 0) && (
+      {/* TAIL-EXPORTS-PDF batch 1 (ruling E1): the capture line prints where the tab's Shadow Economy block does, at the
+          tab's floor (shadowCaptureShown), with the tab's figure ("Black market capture: 0% of economy" printed in all 720
+          towns); the crime patterns and the criminal chains, true where the record holds them, print as before. */}
+      {(shadowCaptureShown(settlement?.economicState?.safetyProfile) != null || e.shadowEconomy.crimeTypes?.length > 0 || e.shadowEconomy.criminalChains?.length > 0) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             SHADOW ECONOMY
           </Text>
-          {e.shadowEconomy.captureRate != null && (
+          {shadowCaptureShown(settlement?.economicState?.safetyProfile) != null && (
             <Text style={{ ...type.body, fontSize: pt['9'], color: palette.bad, marginBottom: 3 }}>
-              Black market capture: <Text style={{ fontWeight: 700 }}>{smart(e.shadowEconomy.captureRate)}%</Text> of economy
+              Black market capture: <Text style={{ fontWeight: 700 }}>{smart(shadowCaptureShown(settlement?.economicState?.safetyProfile))}%</Text> of economy
             </Text>
           )}
           {e.shadowEconomy.crimeTypes?.length > 0 && (
@@ -584,3 +606,12 @@ function crisisYieldWords(mod) {
   if (mod >= 0.25) return 'The crisis has left about a third of the usual local food production.';
   return 'The crisis has left little of the usual local food production.';
 }
+
+// COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
+import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
+import { prosperityInCrisisLed } from '../../domain/display/prosperityInCrisis.js'; // COHERENCE-UPKEEP-6 (ruling D(iii)): the sentence led by the word it explains
+import { shadowCaptureShown } from '../../domain/display/shadowEconomyShown.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1): the tab's floor
+import { criticalImportsShown } from '../../domain/display/criticalImportsShown.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1): the critical goods the tab prints
+import { ordinaryTimesOnPage } from '../lib/crisisMarksOnPage.js';
+import { incomeDescShown } from '../../domain/display/economicsCrisisMarks.js'; // LEFT-PDF L1: the tab's income row
+import { ordinaryIncomeLineOf } from '../../domain/display/incomeOrdinaryLines.js'; // PDF-2b item 4: the trade's ordinary line, the tab's reading

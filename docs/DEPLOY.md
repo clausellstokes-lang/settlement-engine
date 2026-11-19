@@ -20,6 +20,9 @@ After pushing to `origin/master`:
    script, not a bare `npx vite build`. That matters: only the npm script runs
    `prebuild` (`generate-sitemap.mjs`) and `postbuild` (`prerender-routes.mjs`),
    and the sitemap/prerender section of this runbook depends on both.
+   Since 2026-11-18 a push to a `lane/*` branch creates no Vercel deployment at all
+   (`vercel.json`'s `git.deploymentEnabled`), because every push to any branch spent
+   one deployment of the host's daily allowance and the working lanes had used it up; `master` deploys as before.
 
 3. **Supabase**: nothing happens automatically. Run the manual steps
    below.

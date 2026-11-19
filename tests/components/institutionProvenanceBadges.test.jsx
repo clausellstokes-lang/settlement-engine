@@ -112,7 +112,9 @@ describe('InstitutionsTab cards — the provenance badge', () => {
       ...base,
       institutions: [
         ...(base.institutions || []),
-        { id: 'institution.hedge_chapel', name: 'Hedge Chapel', category: 'religious', status: 'active', source: 'forced', tags: [] },
+        // RE-KEYED (R2-CODE-B item 2): a row the USER forced is stored as the deployed client stores every
+        // toggle (assembleInstitutions.js): `source: 'forced'` with `forcedByToggle: true`; the YOU mark reads that.
+        { id: 'institution.hedge_chapel', name: 'Hedge Chapel', category: 'religious', status: 'active', source: 'forced', forcedByToggle: true, tags: [] },
       ],
     };
     const container = renderInstitutions(forced);
@@ -133,14 +135,18 @@ describe('InstitutionsTab cards — the provenance badge', () => {
     // the key is the pill's second sentence, on the page header
     const pillText = container.querySelector('[data-testid="institutions-header"] [data-testid="info-pill-text"]');
     expect(pillText, 'the page\'s ? pill must render').toBeTruthy();
-    expect(pillText.textContent).toContain('history, you, the living world, or a dependency');
+    // RE-KEYED (R2-CODE-B round 3, ruling (b)): "REQ" (history) left the roster, so the key no longer
+    // promises it; the required row is unbadged (pinned below), and the key's other marks stand.
+    expect(pillText.textContent).toContain('you, the living world, or a dependency');
+    expect(pillText.textContent).not.toContain('history'); // anchored: the pill's text is read above
     // every mark the key promises is a glyph the badge really draws, each with its title
     const marks = [
-      institutionBadge({ name: 'A', source: 'required' }),
-      institutionBadge({ name: 'B', source: 'forced' }),
+      institutionBadge({ name: 'B', source: 'forced', forcedByToggle: true }), // RE-KEYED (R2-CODE-B item 2): the user's toggle
       institutionBadge({ name: 'C', source: 'auto-resolved' }),
     ];
-    expect(marks.map(m => m.label)).toEqual(['REQ', 'YOU', '→']);
+    expect(marks.map(m => m.label)).toEqual(['YOU', '→']);
+    // the generator's provenance prints no mark: a required row is unbadged, as an unstamped row is
+    expect(institutionBadge({ name: 'A', source: 'required' })).toEqual(institutionBadge({ name: 'A' }));
     for (const m of marks) {
       expect(String(m.label).trim(), 'a mark promised with no glyph is the defect this pins').not.toBe('');
       expect(typeof m.title).toBe('string');

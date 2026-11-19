@@ -17,6 +17,7 @@ import { HOUSE_MOTTO } from '../../design/organic/logo.js';
 import { BRAND_SEAL_PNG } from '../assets/brandSeal.js';
 import { humanize, num, stripZwnj, cap, label as toLabel } from '../lib/format.js';
 import { formatCount } from '../../domain/formatNumber.js';
+import { prosperityInCrisisLed } from '../../domain/display/prosperityInCrisis.js'; // COHERENCE-UPKEEP-6 (ruling D(iii)): the sentence led by the word it explains
 
 const TONE_COLOR = (key, fallback = palette.muted) => palette[key] || fallback;
 
@@ -168,8 +169,15 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
     : null;
   const govName = situation.power?.governingName || null;
 
-  const topExport = situation.economy?.topExport
-    || (overview.primaryExports?.[0] ? toLabel(overview.primaryExports[0]) : null);
+  // TAIL-EXPORTS-PDF-2 (the chair's ruling E15 (1)): the cover names the first export the tab's Exports print
+  // (tradeListDisplay.js :: tradeListsAsPrinted, the economics slice's `exportsShown`), with the mark that list keeps,
+  // and none where a siege stops trade: the record's raw first export ("Salted fish (naval route only)") printed on a
+  // village under siege that sends nothing out by any road. A view model without the slice reads as before.
+  const econ = vm?.economics;
+  const topExport = Array.isArray(econ?.exportsShown)
+    ? (!econ.tradeStopped && econ.exportsShown[0] ? toLabel(econ.exportsShown[0]) : null)
+    : (situation.economy?.topExport
+      || (overview.primaryExports?.[0] ? toLabel(overview.primaryExports[0]) : null));
 
   return (
     <Page size={pageGeo.A4.size} style={sheet.coverPage}>
@@ -266,6 +274,13 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             />
           )}
         </View>
+        {/* The Prosperity cell's label, where a crisis in force lowered it, says what the place is in
+            ordinary years (the chair's ruling 1(a), REVIEW-UPKEEP-2): the vm's one sentence. */}
+        {prosperity && overview.prosperityInCrisis && (
+          <Text style={{ fontFamily: 'Lora', fontSize: pt['10'], color: palette.second, fontStyle: 'italic', marginTop: 6 }}>
+            {prosperityInCrisisLed(overview.prosperityInCrisis)}
+          </Text>
+        )}
 
         {/* ── Power line ───────────────────────────────────────── */}
         {(govLabel || govName) && (

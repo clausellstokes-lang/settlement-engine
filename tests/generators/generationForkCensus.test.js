@@ -195,7 +195,31 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // control row's text; taken in the same act as the golden re-record).
 // -> de99d519 STYLE-2-MERGE record 46, the COHERENCE-POWERS merge (the dual hat re-deals the control row's cast, ranks and ties;
 // taken in the same act as the golden re-record).
-const GOLDEN_CONTROL_HASH = 'de99d51912d61b643bfd55b73f6bed4e28b360f67a9a3f7c3aaa69e1f451a753';
+// -> f4fc47a0 STYLE-2-MERGE record 47, the COHERENCE-AGREE merge (one fact, one answer: the control row's resource roll, economy and
+// defence read off its own record; taken in the same act as the golden re-record).
+// -> 7ae63229 the close of the tail round, 2026-11-15 (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's
+// chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json: the round's declared moves re-deal the control row,
+// a face for every seat of power and the cast drawn after it; the golden re-recorded 525 of 525 at dec4ec241, this row its control).
+// -> b05d0766 the close of the round BAR2, 2026-11-15 (BAR2-CLOSE-DOORS-2; the owner's word, 2026-11-15 20:27:16 UTC, in the chair's
+// chat; record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json: the places' and people's declared text cures re-word the
+// control row's institutions[].desc, settlementReason[] and relationships[].description; the golden re-recorded 418 of 525 at 1011a8a91).
+// -> c42b5f20 the close of the round BAR3, 2026-11-16 (BAR3-CLOSE-DOORS-2; the owner's word, 2026-11-15 20:30:10 UTC, "Yes that one too", in the
+// chair's chat; record docs/shift-records/2026-11-16-the-close-of-the-round-bar3.json: the round's declared text cures re-word the control row's
+// institutions[].desc, the foodways lines, powerStructure.factions[].desc and .recentConflict and relationships[].description, text leaves only;
+// the golden re-recorded 521 of 525, this row its control).
+// -> 5437998b the close of the round BAR4, 2026-11-16 (BAR4-CLOSE-DOORS-2; the owner's words, 2026-11-16 08:55:14 UTC and 18:51:17 UTC, "Yes to
+// plain yes for the example-town refresh.", in the chair's chat; record docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json: the people
+// branch's declared tie lines re-word the control row's relationships[].description, one text leaf only; the golden re-recorded 390 of 525 at
+// 1581ed12, this row its control).
+// -> 8bb20e96 the close of the rounds BAR5 to BAR8, 2026-11-18 (CLOSE-DOORS-2; the owner's word, 2026-11-18 03:03:46 UTC, "yes: refresh the stored
+// reference files and open the pull request.", in the chair's chat; record docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json:
+// the rounds' declared cures move the control row's relationships[].tension (BAR5-THINGS, the notary tension's words), history.historicalEvents
+// (BAR7-LINES, the iron dispute) and economicState.localProduction (BAR6-RECORD); the golden re-recorded 485 of 525 at b3cfdbcc3, this row its control).
+// -> 71ea4d5f the last close before the deploy, 2026-11-19 (LASTCLOSE-SIGN; the owner's word, 2026-11-18 about 19:07 UTC, "Yes to both", in the
+// chair's chat; the chair's line SIGN 2026-11-19 01:04 UTC; record docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json: K-WATCH's
+// declared cure (points 48, 49, 57: the watch's line by the hours it keeps) moves the control row's economicState.safetyProfile.guardEffectivenessDesc,
+// one text leaf, and no later point moves it; the golden re-recorded 222 of 525 at a7a25bd39, this row its control).
+const GOLDEN_CONTROL_HASH = '71ea4d5f28843f3a8027fe9ec2e23824d13c585a2df7b742cb4e000b01f65d4e';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -235,6 +259,19 @@ const CENSUS_ROW = {
 /** The seed the mint census sees minted FOUR times, and the vias that convict a blind wrapper. */
 const REPEATED_SEED = `${CENSUS_ROW._seed}::generatePower::power-structure`;
 const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
+// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 6, 05ec9b601): the stores are laid by at the label's share on a
+// SECOND call of the stores' writer after prosperity (economicState.js :: generateEconomicState), and that writer's one
+// draw is the label-keyed fork `food.cropFortune`, so the probe row mints it twice, both by fork: the second call draws
+// the same crop fortune BY DESIGN (no stream moves). Measured by A5: repeatedSeeds = cropFortune x2 [fork|fork] ;
+// power-structure x4. The power-structure quartet is unmoved.
+// 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record
+// docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): cropFortune x2 -> x3 [fork|fork|fork], measured by A5's own print at
+// the golden's tree 8c11f73ea (total=141 direct=4 viaFork=137): the cause by `git log -S cropFortune`, 7ac689418 "the food record's
+// magic share is the share of the pounds published" (lane/tail-record, landed at JOIN-11 point 8, 4e7c96d56): the food record is
+// re-derived once more, by the same label-keyed fork, so it draws the same crop fortune (no stream moves; the register's
+// economyReconcilePass|economicState row reads 'varies' with it). The power-structure quartet is unmoved.
+const STORES_SEED = `${CENSUS_ROW._seed}::generateEconomy::food.cropFortune`;
+const STORES_VIAS = ['fork', 'fork', 'fork'];
 // 2026-10-01, the urban band (ODQ §934.86): 96 -> 107 pickVariant calls on the probe row (+11, measured; the institution
 // registry rebuild changed what the same seed assembles); every call is still a real choice with its own seed.
 // 2026-10-31, tension variety (GS-1, ODQ §934.101): 107 -> 69 pickVariant calls and 6 -> 15 external fnv1a32 calls
@@ -286,6 +323,15 @@ const PICK_VARIANT_CALLS = 31;
 // RE-KEYED 2026-11-11 (COHERENCE-QUARREL cure 2): 15 -> 17, MEASURED. The probe row's two quarrels each
 // take one fnv1a32 for their plot hook (power/conflicts.js :: buildConflictPlotHooks: one hash of the seed, the
 // parties and the issue picks the hook and the offer's wording, draw-free). The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 6, 05ec9b601): 17 -> 18, MEASURED by A6 and traced: the stores' second
+// call (above, STORES_SEED) composes the foodways line again, one more fnv1a32 (domain/foodways.js ::
+// composeFoodwaysLine, `foodways|<identity>`). The register's fnv1a32External moves with it.
+// RE-KEYED 2026-11-12 (COHERENCE-UPKEEP, ruling 4 under (A), c19e96e23): 18 -> 42, MEASURED by A6 and traced: the
+// services keep each bought row by a draw-free roll after the seeded ones, one fnv1a32 of
+// `<seed>|upkeep|<institution>|<service>` per bought row evaluated while the place's share is below 1
+// (services/serviceRollMaterialization.js :: upkeepRoll). The probe row is Comfortable, so every bought row rolls:
+// 24 calls, counted on the probe row by a counter in a scratch tree (lodging 3, food 4, equipment 9, healing 3,
+// transport 3, commercial legal 2; every row kept). The register's fnv1a32External moves with it.
 // RE-KEYED 2026-11-13 (STYLE-2-MERGE point 46, the COHERENCE-POWERS merge, the chair's ruling on STOP 46b): 17 -> 16,
 // MEASURED by A6 and CONFIRMED caller by caller (a probe recording each external fnv1a32 caller's first src frame on
 // this probe row, at 3575cf061 against the merge): buildConflictPlotHooks 2 = 2, composeFoodwaysLine 1 = 1,
@@ -294,7 +340,31 @@ const PICK_VARIANT_CALLS = 31;
 // 1 -> 0: the base's 'mutual_leverage::npc_town_watch>npc_town_hall' tie key is no longer resolved, the dual hat having
 // re-dealt the probe row's cast and ties. No call site left the code (no changed line under src names fnv1a32); the
 // figure is the probe row's runtime count. The register's fnv1a32External moves with it.
-const FNV_EXTERNAL_CALLS = 16;
+// RE-KEYED 2026-11-14 (UPKEEP-10, THE MERGE of lane/integration-2026-11-07 at 976db5b19 into the defence lane): 24,
+// MEASURED by A6 at the merged tree and attributed caller by caller (a scratch dump of the hashed strings): foodways 3,
+// fingerprintPowerEconomyInput 6, upkeep rolls 6, the tie prose 7, the faction conflicts 2. THE TWO SIDES' CAUSES: the
+// line's 17 -> 16 above (resolveTieKey 1 -> 0); the lane's own 42 was never re-keyed after it moved, and measures 25 at
+// the lane's tip f943c9772, bisected on its first parent: 42 -> 24 at 44cddb372 (UPKEEP-5 F2: a house's own service is
+// never scaled, so 18 bought rows no longer roll: upkeep 24 -> 6), 24 -> 25 at 0c950f06c (UPKEEP-5 R3: one more
+// composeFoodwaysLine, foodways 2 -> 3). The merge: 25 - 1 = 24, no third cause. The register moves with it.
+// RE-KEYED 2026-11-14 (JOIN-3, THE TRUE JOIN on lane/join-2026-11-14 at 7d12b40cb; the book's 2h.7 (c): a FALL with its caller
+// named): 24 -> 23, MEASURED by A6 at the joined tree and attributed BY IDENTITY (a probe dumping each external fnv1a32 string
+// with its first src frame, at the joined tree, the line 976db5b19 and every lane's merged tip): foodways 3 and the upkeep rolls
+// 6 are the defence lane's strings exactly (its tip 26474cda9: 24); the tie prose's per-archetype offset
+// (power/relationshipArchetypes.js, via people/ties.js :: drawTies) 6 is the powers lane's strings exactly (its tip 77d7bcace:
+// 15; its cast re-deals the probe row's ties: 'Adela Hoffmann>Wolfger Dietrich::peer_rivalry' and 'Wolfger Dietrich>Volker
+// Becker::mutual_leverage' gone, 'Adela Hoffmann>Gunter Schwarz::peer_rivalry' new); fingerprintPowerEconomyInput 6 and the
+// faction conflicts 2 the line's. No other lane moves a string. The register moves with it.
+// RE-KEYED 2026-11-18 (THE CLOSE OF THE ROUNDS BAR5 TO BAR8, CLOSE-DOORS-2, the chair's ruling CL16): 23 -> 54, MEASURED by A6 at
+// the frozen line 70e557d5b and attributed caller by caller (a probe recording each external fnv1a32 call's string and first
+// src frames on the probe row, at the last green corpus 0ac61b4b4 and at every point named here): the 23 strings of 0ac61b4b4
+// stand byte for byte (foodways 3, fingerprintPowerEconomyInput 6, upkeep rolls 6, the tie prose 6, the faction conflicts 2);
+// the +31 are SECRETS-1's (JOIN-17 point 30, ecf56dd7d: 23 at point 29's fd93fb998, 54 at point 30; the top-up, point 32, moves
+// none): people/rareSecrets.js :: dealRareSecrets, the draw-free keyed reading its header names (`unit`, one fnv1a32 of
+// `<seed>::rare-secrets::<family>::<person id>`), the natures, deeds and ties families for each of the probe row's ten named
+// people (30) and the outsiders' `::place` (1). Every string is the record's own seed and a person's own id: no clock, no
+// order of iteration, no view state; the town's stream of draws untouched. The register's fnv1a32External moves with it.
+const FNV_EXTERNAL_CALLS = 54;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
@@ -322,7 +392,7 @@ const OFF_CORPUS_STEP = 'resolveConfig';
  */
 const DISPLAY_NAME_KEYED_SITES = [
   { site: 'src/generators/steps/assembleInstitutions.js:1004', channel: 'hash', marker: 'inst.name' }, // 2026-10-01, the urban band (ODQ §934.86): a pure line move, 774 -> 863; 2026-11-05 (LANDING-6, read per first-parent step): the same pickVariant line, 863 -> 888 terrain-pools (ac09ea83b) -> 891 its re-merge (fb5edb7f5) -> 910 car 3 (90dc22f18) -> 911 PINS (37b1e746d) -> 1004 F6 (6d84aa834)
-  { site: 'src/data/npcData.js:1635', channel: 'hash', marker: '?.name' }, // 2026-11-09 (STYLE-2-MERGE point 19, SW-10 HOOKS composed over SW-7): 1537 -> 1635, a pure line move (SW-10's NPC_FACTION_LOYALTY growth of 98 lines, 4ba2a241d..fbbe4a992, above SW-7's 1537), measured at the merged tree; 2026-11-09 (STYLE-2 SW-7, B10(b) the dealing pool): 1436 -> 1537, a pure line move (DEALING_TRAIT_FAMILY, NPC_DEALING_BY_TRAIT and dealingLineFor above it); 2026-11-08 (ALLEGIANCE-CAR1): 1435 -> 1436, a pure line move (the HANDLER_TIE_LINES import above it); 2026-11-07 (LANDING-R2, the pool census composed): a pure line move, 1334 -> 1342 census-4c unit 4 (99fbe262f) -> 1400 census-4g unit 2 (6e9cbc676) -> 1435 census-4h unit 4 (ea6b9e1eb), traced through every census commit touching the file; the pickVariant call and its marker unchanged (99fbe262f adds a `lines` field to the wrapper's trailer only)
+  { site: 'src/data/npcData.js:1683', channel: 'hash', marker: '?.name' }, // 2026-11-18 (CLOSE-DOORS-1B, ruling FA1's general form, the close of 2026-11-18: 1678 -> 1683, re-addressed by identity: the line at :1683 of the frozen tree 70e557d5b is byte-identical (sha256 f82b8da7…) to :1678 of 6483322cc, a pure line move: +2 at JOIN-16 point 9 (BAR5-THINGS, db62ab299), +3 at JOIN-17 point 8 (BAR6-PEOPLE, 57a3bda67)) // 2026-11-16 (BAR4-CLOSE-DOORS-1, ruling FA1's general form, the close of the round BAR4: 1676 -> 1678, re-addressed by identity: the line at :1678 of the merged tree is byte-identical (sha256 f82b8da7…) to :1676 of 2d80aa740, a pure line move by BAR4-CLOSE-SWEEP PD1b's two lines above it (4ed8a41e9: the pairPlace import at :7, the twin's gate made two lines at :1672)) // 2026-11-15 (BAR3-CLOSE-DOORS-1, ruling FA1, the close of the round BAR3: 1661 -> 1676, re-addressed by identity: the line at :1676 of 98363cb84 is byte-identical (sha256) to :1661 of the line's closed tip 83fc14ad6, the same pickVariant hash call, a pure line move by lane BAR3-PEOPLE batch 1's additions above it (the shared-power import and closureFor), no seed changed); 2026-11-15 (BAR2-PEOPLE-3, the books: 1637 -> 1661, re-addressed by its text: the same pickVariant hash call, its wrapper opened by BAR2-PEOPLE-2's batch C to write the shared-trade twin, no seed changed); 2026-11-15 (TAIL-TIES-2, ruling (T6)): 1635 -> 1637, a pure line move (the wrapper's body opened to read the stored order; the pickVariant call and its marker unchanged); 2026-11-09 (STYLE-2-MERGE point 19, SW-10 HOOKS composed over SW-7): 1537 -> 1635, a pure line move (SW-10's NPC_FACTION_LOYALTY growth of 98 lines, 4ba2a241d..fbbe4a992, above SW-7's 1537), measured at the merged tree; 2026-11-09 (STYLE-2 SW-7, B10(b) the dealing pool): 1436 -> 1537, a pure line move (DEALING_TRAIT_FAMILY, NPC_DEALING_BY_TRAIT and dealingLineFor above it); 2026-11-08 (ALLEGIANCE-CAR1): 1435 -> 1436, a pure line move (the HANDLER_TIE_LINES import above it); 2026-11-07 (LANDING-R2, the pool census composed): a pure line move, 1334 -> 1342 census-4c unit 4 (99fbe262f) -> 1400 census-4g unit 2 (6e9cbc676) -> 1435 census-4h unit 4 (ea6b9e1eb), traced through every census commit touching the file; the pickVariant call and its marker unchanged (99fbe262f adds a `lines` field to the wrapper's trailer only)
   { site: 'src/domain/townMap/glyphAssign.js:125', channel: 'mint', marker: 'createPRNG(`glyph:${seedId}`)' },
 ];
 
@@ -499,7 +569,13 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // channel is the record's: `dmLayer :: pinsFrom` structuredClones `source[key]` out of the
     // record, and `rederive` is the only caller a DM edit reaches. So the reproduction is
     // asserted on a RECORD-built bag, through `rederive`, with a no-op root override.
-    const record = unpinnedContext.settlement;
+    // RE-KEYED 2026-11-15, THE CHAIR'S RULING FC1 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on the owner's
+    // list; PM1's reading in pipelinePinnedMode): the record the reproduction claim is made on is the PRODUCT ENTRY's
+    // (`generateSettlementPipeline`), final-record passes included (keepOneDominant; TAIL-POWERS-B-2 batch 4's draw-free
+    // `withConflictRelations`, c1263e61c, merged at d700bda44), not the raw runner's `unpinnedContext.settlement`. The draw
+    // controls above keep their raw runner and their ctx-built bag.
+    const pinRowConfig = Object.fromEntries(Object.entries(PIN_ROW).filter(([key]) => key !== '_seed'));
+    const record = generateSettlementPipeline(pinRowConfig, null, { seed: PIN_ROW._seed, customContent: {} });
     const engine = { run: generateSettlementPipeline, getStepMeta };
     const declarations = { declarationsFor, isEditableCard };
     const npc0 = (record.npcs || [])[0] || {};
@@ -508,7 +584,6 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     };
     const { pins: recordPins } = pinsFrom(record, layer, declarations, engine);
     for (const key of CHOOSER_KEYS) expect(recordPins[key], `record pin ${key}`).toBeDefined();
-    const pinRowConfig = Object.fromEntries(Object.entries(PIN_ROW).filter(([key]) => key !== '_seed'));
     const rederived = rederive(record, pinRowConfig, layer, engine, declarations);
     expect(JSON.stringify(rederived.record), 'the record-built bag reproduces the record through rederive')
       .toBe(JSON.stringify(record));
@@ -551,7 +626,23 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // 2026-11-09, MERGE-TRAIN record 9 (the ALLEGIANCE-CAR4 merge, this arm's census at the merged tree): 118 -> 138, car 4's A9
     // (03ff59084, people/goals.js :: dealGoals): one `people-goals` family fork and one keyed fork per card on this row (+20);
     // direct 4, foreign 0. Re-keyed to the measured figure, never above it.
-    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(138);
+    // 2026-11-14, POWERS-15 on the powers lane (the chair's ruling: a fork a lane adds is declared or it is a finding; a
+    // RISE goes back to the lane, the merge book's 2h.7 (c)): 138 -> 139, measured by this arm at the lane's tip 0eb30242f
+    // (the line at 976db5b19 reads 134 under the same bound). DECLARED by COHERENCE-POWERS-6 item 1 (9fae351e1, the
+    // chair's ruling of 2026-11-13: a noble power that does not govern is faced by a lord of that body, minted and
+    // named), whose commit names the five: the row's Landed Gentry is faced by a minted lord, and the five new mints are
+    // all keyed to that card, none lost and no other moved (line -> tip, seed by seed): people-powers::mint::landed_gentry
+    // (the lord's own mint), people-powers::people-hooks::npc_power_landed_gentry (its hook),
+    // people-allegiance::npc_power_landed_gentry (its allegiance), people-ties::npc_power_landed_gentry (its tie),
+    // people-goals::npc_power_landed_gentry (its goals). Total 139, direct 4, via fork 135, foreign 0. The control hash
+    // (C1) moves with the generator master's re-record through the signed door at the join, not on this lane.
+    // 2026-11-15, THE CHAIR'S RULING FC2 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on the owner's list): 139 -> 141,
+    // each new mint named by identity (the row's mints listed at fce41f2b7, 134, and at the tree, 141, and diffed: the five
+    // npc_power_landed_gentry mints above, and ONE label more): golden-master-v3::generateEconomy::food.cropFortune [fork] 1 -> 3:
+    // the stores' second call after prosperity (05ec9b601, lane/coherence-upkeep, landed at JOIN-1·9 33b12cbef; its census re-key
+    // aa5a30899) and the food record's magic share (7ac689418, lane/tail-record, landed at JOIN-11 point 8 4e7c96d56): the same
+    // label-keyed fork each time, drawing the same crop fortune (no stream moves). No other label moved.
+    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(141);
     expect(viaFork.length, 'STOP-6: mints via the re-implemented fork').toBeGreaterThanOrEqual(31);
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
   }, 120_000);
@@ -578,7 +669,10 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(fresh.rows.length, 'anti-vacuity: the pair set is real before any equality is claimed').toBeGreaterThan(70);
     expect(fresh.steps.length, 'every registered step was perturbed').toBe(getStepOrder().length);
     // ALLEGIANCE-CAR1 (2026-11-08, J-2): 13 -> 12, MEASURED — corruptionPass, a drawing step, retired (its roll is the seam's)
-    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(12);
+    // R2-CODE-B-4 (ROUND THREE item 4, a DECLARED MOVE): 12 -> 13, MEASURED — resolveCrisisCast draws where an "Access to …"
+    // row was a famine's only lever house (record 375: never a lever): the cast's own rule mints its one temporary person,
+    // named on the step's own fork (rng.fork('resolveCrisisCast')), so no other step's stream moves.
+    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(13);
     process.stdout.write(`\n[A3e] corpus=${fresh.corpusRows} pairs=${fresh.rows.length}`
       + ` wall=${fresh.wallMs}ms drawingSteps=${fresh.drawingSteps.length}\n`);
 
@@ -636,12 +730,18 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     failOnDifference(differences, emitTier1Literal(fresh.rows));
     // LANDING-8 (2026-11-06, ODQ §934.105): 7 -> 11. The crisis cast writes copy-on-write (lane D, 8befe5a0d), so the four
     // `stress` rows' FINAL comparand reads 'varies' (same 9 / transformed 54), measured by this arm's fresh execution.
-    expect(variesRows.length, 'the varies rows of the FINAL comparand').toBe(11);
+    // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat;
+    // record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 11 -> 13, measured by this arm's fresh execution at
+    // the golden's tree 8c11f73ea: generateEconomy|economicState and economyReconcilePass|economicState read 'varies' (same 52 /
+    // transformed 11), the round's declared economy move (the economy read off the town's own record); disagreeing holds at 13.
+    // CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18): 13 -> 14, measured by this arm's fresh execution at the frozen tree
+    // 70e557d5b: the register's new row generateNarratives|economicState reads 'varies' (DEBT-2 D1, the sixth chair's point 36).
+    expect(variesRows.length, 'the varies rows of the FINAL comparand').toBe(14);
     // 2026-10-01, the urban band (ODQ §934.86): 18 -> 16 (measured). The institution rebuild moved the producedOnRecord
     // classes of isolationSupport (varies -> same) and generationRepairs (absent -> varies); the six varies rows stay six.
     // LANDING-8 (2026-11-06, ODQ §934.105): 17 -> 13, the same cause (8befe5a0d): the four `stress` rows' two comparands
     // now agree ('varies' both), because the record holds a copy of exactly what the stress steps produced.
-    expect(disagreeing.length, 'the rows where the two comparands disagree').toBe(13); // MERGE-234 (one tie writer): 14 -> 13, measured by this arm at the 1+2+3+4 tip — the seam's `::tie` fork is retired, so `relationships` is transformed on both comparands // 2026-11-07 PEOPLE-1 CAST: 13 -> 14, the seam's tie moves `relationships` on a crisis-cast row (A4's own reading) // lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress's produced value differs from the record where a crisis is cast (16 -> 17)
+    expect(disagreeing.length, 'the rows where the two comparands disagree').toBe(14); // CLOSE-DOORS-1B (2026-11-18): 13 -> 14, measured by this arm at the frozen tree 70e557d5b: economyReconcilePass|availableServices reads same on the record and varies after the step (BAR8-FISH-ROWS, the sixth chair's point 53, whose hand-back names this count); MERGE-234 (one tie writer): 14 -> 13, measured by this arm at the 1+2+3+4 tip — the seam's `::tie` fork is retired, so `relationships` is transformed on both comparands // 2026-11-07 PEOPLE-1 CAST: 13 -> 14, the seam's tie moves `relationships` on a crisis-cast row (A4's own reading) // lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress's produced value differs from the record where a crisis is cast (16 -> 17)
     expect(nonUnanimous.length, 'exactly one row lands in two places, and it is already varies').toBe(1);
     // ⛔ THERE IS NO producedPath, AND THAT IS A MEASUREMENT. If this ever becomes non-zero a
     // second path field is owed and the register is telling half a truth about WHERE.
@@ -682,7 +782,8 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // [direct|direct|direct]; the fork-minted member of the quartet is exactly what the
     // re-implementation buys, so the via list alone convicts a mock that did not take.
     expect(bySeed.get(REPEATED_SEED), `${REPEATED_SEED} vias`).toEqual(REPEATED_VIAS);
-    expect(repeated.map(([seed]) => seed), 'exactly one seed is minted more than once').toEqual([REPEATED_SEED]);
+    expect(bySeed.get(STORES_SEED), `${STORES_SEED} vias`).toEqual(STORES_VIAS);
+    expect(repeated.map(([seed]) => seed), 'exactly these two seeds are minted more than once').toEqual([STORES_SEED, REPEATED_SEED]);
   }, 120_000);
 
   it('A6 — the hash channel: 69 distinct pickVariant seeds, sixteen external fnv1a32 calls, and two censuses disjoint by construction', () => {

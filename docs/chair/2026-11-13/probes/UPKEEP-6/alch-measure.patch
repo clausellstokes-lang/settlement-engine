@@ -1,0 +1,5 @@
+--- a/src/generators/defenseGenerator.js
++++ b/src/generators/defenseGenerator.js
+@@ hasArcane @@
+-    hasArcane: magicOn && magPri >= G.arcane && (inst.hasMagicInst || names.arcane),
++    hasArcane: magicOn && magPri >= G.arcane && ((globalThis.__U6_alchNoArcane ? getInstFlags(config, institutions.filter((i) => !globalThis.__U6_alchNoArcane.some((h) => String(i?.name || '').toLowerCase().includes(h)))).inst.hasMagicInst : inst.hasMagicInst) || names.arcane),

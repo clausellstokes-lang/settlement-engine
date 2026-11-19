@@ -3,11 +3,11 @@
 // with a DIRECTION. Projected from the engine's OWN tables through the wiring census
 // (ARCH §5.2 sources (a) condition archetype -> system variable, (b) CAUSE_SIGNAL, (c) the
 // generator's recorded derivations); source (d), the sitting's ratified axis pairs, is empty.
-// MEASURED: 165 pairs over
-// 165 rows, every one running a->b.
+// MEASURED: 169 pairs over
+// 169 rows, every one running a->b.
 //
 // ⛔ THE JOIN IS EMPTY, AND THAT IS THE MEASUREMENT CAR 0 LANDED (F1, ARCH §16 item 9).
-// With the ratified aliases applied, 0 of 165
+// With the ratified aliases applied, 0 of 169
 // rows have BOTH endpoints resolving to a field a desk reads. The rows are keyed on PRODUCER
 // tokens (`condition:plague`, `system:food_security`) and the desks read settlement paths, so
 // no `consequence` and no `tension` joint is authorable anywhere on the shipped corpus and
@@ -1129,42 +1129,70 @@ export const DOSSIER_RELATIONS = /* #__PURE__ */ Object.freeze({
       "direction": "a→b"
     }
   ],
-  "src/generators/defenseGenerator.js::econOutput|economicGates.military": [
+  "src/generators/defenseGenerator.js::fundedGate|economicGates.military": [
     {
       "relation": "consequence",
       "source": "c",
       "direction": "a→b"
     }
   ],
-  "src/generators/defenseGenerator.js::econOutput|economicGates.monster": [
+  "src/generators/defenseGenerator.js::upkeep|economicGates.military": [
     {
       "relation": "consequence",
       "source": "c",
       "direction": "a→b"
     }
   ],
-  "src/generators/defenseGenerator.js::econOutput|economicGates.internal": [
+  "src/generators/defenseGenerator.js::fundedGate|economicGates.monster": [
     {
       "relation": "consequence",
       "source": "c",
       "direction": "a→b"
     }
   ],
-  "src/generators/defenseGenerator.js::econOutput|economicGates.economic": [
+  "src/generators/defenseGenerator.js::upkeep|economicGates.monster": [
     {
       "relation": "consequence",
       "source": "c",
       "direction": "a→b"
     }
   ],
-  "src/generators/defenseGenerator.js::instFlags|economicGates.disaster": [
+  "src/generators/defenseGenerator.js::fundedGate|economicGates.internal": [
     {
       "relation": "consequence",
       "source": "c",
       "direction": "a→b"
     }
   ],
-  "src/generators/defenseGenerator.js::economyOutput|economicGates.disaster": [
+  "src/generators/defenseGenerator.js::upkeep|economicGates.internal": [
+    {
+      "relation": "consequence",
+      "source": "c",
+      "direction": "a→b"
+    }
+  ],
+  "src/generators/defenseGenerator.js::fundedGate|economicGates.economic": [
+    {
+      "relation": "consequence",
+      "source": "c",
+      "direction": "a→b"
+    }
+  ],
+  "src/generators/defenseGenerator.js::upkeep|economicGates.economic": [
+    {
+      "relation": "consequence",
+      "source": "c",
+      "direction": "a→b"
+    }
+  ],
+  "src/generators/defenseGenerator.js::fundedGate|economicGates.disaster": [
+    {
+      "relation": "consequence",
+      "source": "c",
+      "direction": "a→b"
+    }
+  ],
+  "src/generators/defenseGenerator.js::upkeep|economicGates.disaster": [
     {
       "relation": "consequence",
       "source": "c",

@@ -210,6 +210,53 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // RE-KEYED BY IDENTITY 2026-11-12 (STYLE-2-MERGE-9, point 46): 51 of 60 moved by the COHERENCE-POWERS merge 6aeaa4154 (docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json:
   // the dual hat re-deals the cast); the line before the merge reads every digest green. Re-captured at the merge by this file's own loop (an
   // untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-13 (STYLE-2-MERGE-11, point 47): 60 of 60 moved by the COHERENCE-AGREE merge 22cc9ef7d (docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json:
+  // one fact, one answer: the resource roll's refused members refilled, the economy and defence read off the town's own record); the line before the merge reads every digest green. Re-captured at the merge by this file's own loop (an
+  // untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-15 (the close of the tail round, TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record
+  // docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 60 of 60 moved by the round's declared generation moves (the golden master
+  // re-recorded 525 of 525 under the same record: a face for every seat of power and the casts drawn after it). Re-captured at the golden's tree
+  // 8c11f73ea by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-15 (the close of the round BAR2, BAR2-CLOSE-DOORS-2; the owner's word, 2026-11-15 20:27:16 UTC, in the
+  // chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-round-bar2.json): 58 of 60 moved (x46-dark-thorp-005 and
+  // x46-dark-city-007 among them, the labels branch's two) by the round's five builder branches' declared text cures; the stored sixty
+  // reproduce at 74ded1800 (60 of 60). FIELD-DIFFED by leaf path, text leaves only: settlementReason, tie descriptions and tensions,
+  // the people's positions, constraints, dealings and secrets, service rows, faction and house descriptions, the foodways lines, the
+  // arrival scene, the slavic social texture and its culturalNotes mirror (534c29fac, BAR2-PLACES-2), the prominent tie, the pressure
+  // and safety lines. Re-captured at the joined line's 1011a8a91 by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-16 (the close of the round BAR3, BAR3-CLOSE-DOORS-2; the owner's word, 2026-11-15 20:30:10 UTC, "Yes that one too",
+  // in the chair's chat; record docs/shift-records/2026-11-16-the-close-of-the-round-bar3.json): 53 of 60 moved by the round's declared text cures;
+  // the stored sixty reproduce at 83fc14ad6 (60 of 60). FIELD-DIFFED by leaf path, text leaves only (no length, no non-text leaf): tie descriptions
+  // and tensions, the powers' recent conflict, descriptions and relationships' narratives, the foodways lines, the entrepot note, the people's
+  // dominant trait (P7a), the pressure line, the arrival, the drag and guard lines, the houses, the history's character and hook, the crisis hooks,
+  // summaries, viability notes and cast reasons (one of them the second repair seat's letter d, efdb3841d), the viability issues, the prominent tie,
+  // a secret and the coherence receipt's quoted tie text. Re-captured on the doors' branch after the merge b46b26d92 by this file's own loop (an
+  // untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-16 (the close of the round BAR4, BAR4-CLOSE-DOORS-2; the owner's words, 2026-11-16 08:55:14 UTC and 18:51:17 UTC,
+  // "Yes to plain yes for the example-town refresh.", in the chair's chat; record docs/shift-records/2026-11-16-the-close-of-the-round-bar4.json):
+  // 38 of 60 moved by the round's declared cures; the stored sixty reproduce at c4ac1ef84a (60 of 60). FIELD-DIFFED by leaf path: tie descriptions,
+  // a tension and its variant index (BAR4-PEOPLE, the repair seat's PD1 twin), the supply gaps with their entries in and out (BAR4-RECORD), the income
+  // lines and an outlook hook (BAR4-CORPUS-ECO), the foodways lines and three houses (BAR4-HOUSES), three powers' descriptions (BAR4-HISTORY), the
+  // arrival (BAR4-SCENES), the prominent tie, two secrets (BAR4-PEOPLE) and one conflict's hook twin (BAR4-SAFETY 2ee6f3a0). Re-captured on the doors'
+  // branch over Part 1's final tip 6483322cc (no byte under src/ moved since the capture) by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-18 (the close of the rounds BAR5 to BAR8, CLOSE-DOORS-2; the owner's word, 2026-11-18 03:03:46 UTC, "yes: refresh the
+  // stored reference files and open the pull request.", in the chair's chat; record docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json):
+  // 55 of 60 moved by the rounds' declared cures; the stored sixty reproduce at the last green corpus 0ac61b4b4 (60 of 60). FIELD-DIFFED by leaf path:
+  // the supply gaps, imports and need lists (BAR5-CHAINS, BIRTH-1 to -3), the powers' descriptions (BAR6-POWERS), the ties' tensions, lines and second
+  // ties' kinds (BAR5-THINGS, BAR6-PEOPLE, BAR7-LINES), the founding reasons (BAR5-WORLD), arrivals, the crier's and the fish market's rows, the rare
+  // secrets (SECRETS-1), card twins and tempers (BAR5-POWERS, BAR6-PEOPLE), the foodways and architecture, the outlook hooks, exports, production and
+  // income (BAR6-RECORD; one town's complexity label reads its exports' count), the goals and conflicts that read a tie, the history (BAR7-LINES,
+  // BAR5-MAGIC), a crime line and a pressure sentence. Re-captured at the frozen line 70e557d5b and again on the doors' branch over Part 1's final tip
+  // 0af60594a (the sixty byte-equal) by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-19 (the last close before the deploy, LASTCLOSE-SIGN; the owner's word, 2026-11-18 about 19:07 UTC, "Yes to both",
+  // in the chair's chat; the chair's line SIGN 2026-11-19 01:04 UTC; record docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json):
+  // 23 of 60 moved by the landed points' declared cures; the stored sixty reproduce at the first close's tip 0dee69e17 (60 of 60). MEASURED BY STEP,
+  // this file's own loop (an untracked probe) at each of the seventeen first-parent landing commits over 0dee69e17 that touch src/: MARKS-2 (56)
+  // city-005; K-WATCH and K-POWERS (48, 49, 57) village-000; K-PEOPLE and PEOPLE-2 (50, 58) village-009, town-001, -004, -008, city-005, -007,
+  // metropolis-009; FAULTS-NEED (61) city-001, -002, -007, metropolis-006, -007, -008, re-moved by LAST-VARIETY (70) (the goals); FAULTS-ROWS (65)
+  // town-002, -003, -005; FAULTS-WATCH (66) town-007 and its FR25 (67) hamlet-004; FAULTS-BIRTH's follow-ups (68) hamlet-007, village-003,
+  // city-004; LAST-DECLARE (69) village-001, town-009; no other step moves one. Re-captured at a7a25bd39's tree by this file's own loop, twice and
+  // equal (fixture tests/fixtures/x46-npc-band-dark-digests.json).
   const DARK =/** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));

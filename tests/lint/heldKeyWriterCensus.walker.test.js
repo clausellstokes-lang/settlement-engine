@@ -241,13 +241,25 @@ const DISCOVERY_EXEMPT = Object.freeze([
   { symbol: 'recordTrace', reason: 'appends a receipt to `simulationTrace` through the run\'s deterministic clock, the sanctioned cross-cutting ledger, never a held key.' },
   { symbol: 'takeAllegianceReceipts', reason: 'takes (and forgets) the receipts the seam left in a module WeakMap keyed by the settlement; it writes no key on the record.' },
   { symbol: 'factsOf', reason: 'a pure READ of the record\'s declared facts, handed to renderStressSummary as its facts bag; it returns a new object and writes nothing at all.' },
+  { symbol: 'resolveSibling', reason: 'W2-FIX-DATA-7: resolves a stress entry\'s stored catalogue hook and note through their declared sets (stressTypes.js :: STRESS_TYPE_SIBLINGS), draw-free; touches `stress`, a READING, never a held key.' },
   // URBAN-FIX C-1 (935c961fd), composed at STYLE-2-MERGE point 25: the food record's composed line, read for the stored foodways.
   { symbol: 'foodwaysLineOf', reason: 'a pure READ of economicState.foodSecurity.foodRecord.foodwaysLine (trimmed, or null); it writes nothing at all.' },
+  // COHERENCE-UPKEEP (d7d7f7787, the keep home), named at the lane's whole-suite run 2026-11-12.
+  { symbol: 'economicSurvivalBandOf', reason: 'a pure READ of the defence profile just written (defenseProfile.scores.economic, its Economic Survival band), handed to the guard line; it writes nothing (COHERENCE-UPKEEP-6, the chair\'s ruling A: one home for pay).' },
+  { symbol: 'keptGuardLine', reason: 'a pure function from the guard assessment\'s text, the roster and a purse word to the same text with its purse clause; it writes nothing itself (the assembly\'s withGuardPaidFromDefence puts the text back on the economic state; COHERENCE-UPKEEP-6, ruling A).' },
+  // BAR2-LABELS-2 LB4 (the chair's grant LB7, 2026-11-15): the validator's funding reasons read the military gate, late.
+  { symbol: 'settleFundingReasons', reason: 'a pure function from the structural violations and the military gate (defenseProfile.economicGates.military) to the same rows, a funding reason twinned where the gate is 1; it writes nothing itself (the assembly stores structuralViolations, a READING).' },
+  { symbol: 'purseWordOfBand', reason: 'a pure map from the Economic Survival band to the purse word the guard lines are declared on; it writes nothing (COHERENCE-UPKEEP-6, ruling A).' },
+  { symbol: 'standingLabelOf', reason: 'a pure READ of the standing prosperity label (else the printed one), the guard line\'s fallback where a record has no band; it writes nothing (COHERENCE-UPKEEP-6).' },
+  { symbol: 'keepOfRecord', reason: 'a pure READ of the standing prosperity label (economicState.prosperityStanding, else the label) into what the place can keep up ({ bought, funded }, domain/facts/keep.js), handed to generateDefenseProfile; it writes nothing at all (COHERENCE-UPKEEP-5, R3).' },
   // COHERENCE-POWERS-3 (F1, F2), classed by COHERENCE-POWERS-4 (2026-11-12), each read from its own body.
   { symbol: 'seatFacesFoldedByDualHat', reason: 'a pure READ over the record (0 or 1: the seat\'s face the dual hat folded), handed to the density law as part of the mass; it writes nothing at all.' },
   { symbol: 'standingRosterOf', reason: 'a pure READ: the roster the standing sentences were written on, copied before the resize; it returns a new array and writes nothing.' },
   { symbol: 'standingForceOf', reason: 'a pure READ of the institutions for the standing sentence\'s force word; it returns a new object and writes nothing.' },
-  { symbol: 'settleTensionsToRoster', reason: 're-names a tension\'s parties inside `history` for the final roster (copy-on-write, no draw); `history` is not a held key.' },
+  { symbol: 'settleTensionsToRoster', reason: 're-names a tension\'s parties inside `history` for the final roster (copy-on-write, no draw); `history` is not a held key.' },  // TAIL-HOUSES-5 (the chair's ruling H20): the late re-read of a house's description (`readHouseDescsLate`, the file's own
+  // function, called only where the DM holds no `institutions`: the same pin gate) speaks a late twin in the tier noun.
+  { symbol: 'speakTierNoun', reason: 'a pure map from a line and a tier noun to the line spoken in that noun (stateProseKernel.js); it writes nothing. The late re-read stores its result on `institutions[].desc` only where `institutions` is not held.' },
+  { symbol: 'tierNounFor', reason: 'a pure READ of the tier word as the tier noun (weaveBlock.js), or null; it writes nothing.' },
 ]);
 
 /** The held denominator, DERIVED from its producers and never re-typed. */
@@ -283,8 +295,21 @@ function liveStepRows() {
 // already had. The writer-step count is unmoved at 12: both retiring steps still write `npcs`.
 // ALLEGIANCE-CAR1 (2026-11-08): 14 -> 13, `corruptionPass|npcs|mutates` RETIRED with the step (J-2): the allegiance
 // is dealt at the coherence seam, inside assembleSettlement (whose row names `npcs` through generateCoherence), measured.
+// DEBT-2 · D2 (2026-11-17): 13 -> 14, `assembleSettlement|npcs|mutates` (point 33: the step declares the write it already made; measured, the row's note).
+// LASTCLOSE-DOORS (2026-11-19, the last close): 14 -> 15, `assembleSettlement|institutions|mutates` (FAULTS-ROWS, point 65, FR14: the step declares the late re-read's write; the row's note).
 const STEP_ROSTER = Object.freeze([
   'assembleInstitutions|institutions|provides',
+  'assembleSettlement|institutions|mutates', // 2026-11-19 LASTCLOSE-DOORS (FAULTS-ROWS, point 65, b6c14e8cb, the chair's FR14 declared it): the
+  // late re-read (steps/assembleSettlement.js :: readHouseDescsLate) stores a refused description's twin on institutions[].desc in place.
+  // A HELD ROSTER IS NEVER REWRITTEN, BY ITS OWN GATE: the call stands only under `chooseOrPin(pins, 'institutions', () => UNPINNED) ===
+  // UNPINNED` (assembleSettlement.js:457, TAIL-HOUSES-5 H20, 5d906f6e4), so under held institutions the write never fires (read in the
+  // source, not re-measured on the 526). Counts unmoved (11 writer steps: assembleSettlement already wrote; 22 steps).
+  'assembleSettlement|npcs|mutates', // 2026-11-17 DEBT-2 · D2 (point 33, BIRTH-3 8b0506eae declared it): the seam's rankPowers yields a
+  // card's temperament to its secret in place (data/npcData.js :: temperamentYieldsToSecret), already at the line's ed1d43529 undeclared
+  // (strict probe, onStrictViolation: `assembleSettlement[npcs]` on 2 of 526 configs, the golden 525 + contract-metropolis-plains-crossroads).
+  // UNDER A HELD ROSTER (pins npcs + relationships, rosterFinalUnderHeldRoster's form) the write fires on 0 of 526 and the held roster is
+  // byte-identical in ctx and on the record on all 526, at ed1d43529 and at e0242a12a: no held roster is rewritten. Measured; counts unmoved
+  // (11 writer steps: assembleSettlement already wrote; 22 steps).
   'assembleSettlement|powerStructure|mutates',
   'assembleSettlement|relationships|mutates', // 2026-11-07 PEOPLE-1 CAST: the coherence seam appends the `other` mints' ties (people/castPowers.js)
   'cascadePass|institutions|mutates',

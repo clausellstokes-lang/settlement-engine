@@ -1,0 +1,166 @@
+births 3756; fresh6 720
+
+== STEP 2: births holding each rung, by the place's tier (thorp hamlet village town city metropolis) ==
+births by tier [540, 540, 620, 752, 752, 552]
+  alchemists Alchemist shop                     1/2     0    0    0  108    0    0
+  alchemists Alchemist quarter                  2/2     0    0    0    0  413  112
+  alchemists Apothecary district                1/1     0    0    0    0  625  549
+  arcane     Traveling hedge wizard             1/5     0    6    0    0    0    0
+  arcane     Hedge wizard                       2/5     0    0   21    3   36    0
+  arcane     Wizard's tower                     3/5     0    0    0   64  176   39
+  arcane     Mages' guild                       4/5     0    0    0   13  327    0
+  arcane     Mages' district                    5/5     0    0    0    0    0  436
+  arcane     Academy of magic                   1/1     0    0    0    0    0  445
+  arcane     Enchanter's shop                   1/1     0    0    0    0  300  403
+  arcane     Scroll scribe                      1/1     0    0    0   41  379  415
+  charter    Adventurers' charter hall          1/2     0   62   78  226    0    0
+  charter    Multiple adventurers' guilds       2/2     0    0    0    0  612  545
+  charter    Hireling hall                      1/1     0    0    0  108   82    6
+  clergy     Access to parish church            1/5   398  540    0    0    0    0
+  clergy     Parish church                      2/5     0    0  620    0    0    0
+  clergy     Parish churches (2-5)              3/5     0    0    0  752    0    0
+  clergy     Parish churches (10-30)            4/5     0    0    0    0  752    0
+  clergy     Parish churches (50-100+)          5/5     0    0    0    0    0  552
+  clergy     Cathedral (10,000+ only)           1/2     0    0    0    0  118    0
+  clergy     Great cathedral                    2/2     0    0    0    0    0  410
+  clergy     Monastery or friary                1/1     0    0    0  137    0    0
+  company    Free company hall                  1/2     0    0    0   90    0    0
+  company    Mercenary quarter                  2/2     0    0    0    0  439  434
+  court      Courthouse                         1/3     0    0    0  304    0    0
+  court      Multiple courthouses               2/3     0    0    0    0  752    0
+  court      Multiple court buildings           3/3     0    0    0    0    0  552
+  court      Town hall                          1/2     0    0    0  752    0    0
+  court      City hall                          2/2     0    0    0    0  752  552
+  court      Democratic assembly                1/1     0    0    0    0   33   39
+  druids     Druid Circle                       1/1     0    0   24    0    0    0
+  druids     Elder Grove Council                1/1     0    0    0   52  223  325
+  garrison   Barracks                           1/3     0    0    0  182    0    0
+  garrison   Garrison                           2/3     0    0    0    0  752    0
+  garrison   Multiple garrisons                 3/3     0    0    0    0    0  552
+  garrison   Professional city watch            1/1     0    0    0    0  752  552
+  hospital   Monastery or friary                1/3     0    0    0  137    0    0
+  hospital   Small hospital                     1/3     0    0    0  100    0    0
+  hospital   Major hospital                     2/3     0    0    0    0  381    0
+  hospital   Multiple monasteries               2/3     0    0    0    0  420    0
+  hospital   Hospital network                   3/3     0    0    0    0    0  451
+  hospital   Major monasteries (5-10)           3/3     0    0    0    0    0  418
+  hospital   Healer (divine, 1st level)         1/1     0    0   40    0    0    0
+  market     Periodic market                    1/4     0   35    0    0    0    0
+  market     Weekly market                      2/4     0    0  146  752    0    0
+  market     Daily markets                      3/4     0    0    0    0  752    0
+  market     District markets (5-10)            4/4     0    0    0    0    0  552
+  market     Merchant guilds (3-8)              1/3     0    0    0  456    0    0
+  market     Merchant guilds (15-40)            2/3     0    0    0    0  664    0
+  market     Merchant guilds (50-100+)          3/3     0    0    0    0    0  520
+  market     Annual fair                        1/2     0    0    0  232    0    0
+  market     Market square                      1/2     0    0    0  752    0    0
+  market     Major annual fairs                 2/2     0    0    0    0  494  429
+  market     Multiple market squares            2/2     0    0    0    0  752  552
+  market     Auction house                      1/1     0    0    0   21  266  372
+  market     Caravaneer's post                  1/1     0    0    0  156    0    0
+  market     Carriers' guild                    1/1     0    0    0  217    0    0
+  market     Cobbler's guild                    1/1     0    0    0  228  577  495
+  market     Fish market                        1/1     0    0   84  335  593  510
+  market     Furrier's district                 1/1     0    0    0    0  458  480
+  market     International trade center         1/1     0    0    0    0    0  466
+  market     Tailor's guild                     1/1     0    0    0  240  556  500
+  militia    Citizen militia                    1/1     0  126  130    0    0    0
+  prison     Small prison/stocks                1/3     0    0    0  150    0    0
+  prison     Large prison                       2/3     0    0    0    0  487    0
+  prison     Massive prison                     3/3     0    0    0    0    0  540
+  walls      Palisade                           1/5   166    0    0    0    0    0
+  walls      Palisade or earthworks             2/5     0  119  137    0    0    0
+  walls      Town walls                         3/5     0    0    0  477    0    0
+  walls      City walls and gates               4/5     0    0    0    0  752    0
+  walls      Massive walls and fortifications   5/5     0    0    0    0    0  552
+  walls      Citadel                            1/1     0    0    0   70  489  387
+  walls      Gates (if walled)                  1/1     0    0    0   63    0    0
+  wardens    Warden's Lodge                     1/1     0    0    0   97    0    0
+  watch      Village watch                      1/3     0    0   37    0    0    0
+  watch      Town watch                         2/3     0    0    0  752    0    0
+  watch      Professional city watch            3/3     0    0    0    0  752  552
+  two rungs of one ladder in one birth (part: by tier): {}
+  a part open with no house on its ladder (gap): {}
+
+== STEP 3/4: each candidate against base (E on) ==
+-- A: moved 2093 of 3756 (up 0, down 2093); mean over movers -3.65, over all -2.04; min -20, max 0; bands changed 498 {('Lightly Defended', 'Vulnerable'): 184, ('Vulnerable', 'Undefended'): 76, ('Defensible', 'Lightly Defended'): 142, ('Well-Defended', 'Defensible'): 75, ('Fortress', 'Well-Defended'): 19, ('Lightly Defended', 'Undefended'): 2}
+   fresh6: moved 367 of 720, band changed 85
+   thorp      n  540 moved  223 mean  -0.73 min   -3 max   +0 bands   28  mean score  19.3 ->  18.6
+   hamlet     n  540 moved  282 mean  -1.10 min   -5 max   +0 bands   47  mean score  17.0 ->  15.9
+   village    n  620 moved  354 mean  -1.17 min  -10 max   +0 bands   53  mean score  15.4 ->  14.2
+   town       n  752 moved  751 mean  -7.19 min  -20 max   +0 bands  350  mean score  39.4 ->  32.2
+   city       n  752 moved  483 mean  -0.70 min   -2 max   +0 bands   20  mean score  69.0 ->  68.3
+   metropolis n  552 moved    0 mean  +0.00 min   +0 max   +0 bands    0  mean score  77.1 ->  77.1
+-- B: moved 2674 of 3756 (up 1297, down 1377); mean over movers +0.59, over all +0.42; min -9, max 9; bands changed 335 {('Vulnerable', 'Undefended'): 28, ('Lightly Defended', 'Vulnerable'): 58, ('Defensible', 'Lightly Defended'): 44, ('Well-Defended', 'Defensible'): 37, ('Well-Defended', 'Fortress'): 117, ('Defensible', 'Well-Defended'): 46, ('Fortress', 'Well-Defended'): 5}
+   fresh6: moved 477 of 720, band changed 61
+   thorp      n  540 moved  187 mean  -0.35 min   -2 max   +0 bands   10  mean score  19.3 ->  19.0
+   hamlet     n  540 moved  246 mean  -0.54 min   -3 max   +0 bands   17  mean score  17.0 ->  16.5
+   village    n  620 moved  216 mean  -0.47 min   -4 max   +0 bands   31  mean score  15.4 ->  15.0
+   town       n  752 moved  728 mean  -2.43 min   -9 max   +0 bands  114  mean score  39.4 ->  37.0
+   city       n  752 moved  749 mean  +2.63 min   +0 max   +5 bands   85  mean score  69.0 ->  71.6
+   metropolis n  552 moved  548 mean  +3.96 min   +0 max   +9 bands   78  mean score  77.1 ->  81.1
+-- R: moved 0 of 3756 (up 0, down 0); mean over movers +0.00, over all +0.00; min 0, max 0; bands changed 0 {}
+   fresh6: moved 0 of 720, band changed 0
+   thorp      n  540 moved    0 mean  +0.00 min   +0 max   +0 bands    0  mean score  19.3 ->  19.3
+   hamlet     n  540 moved    0 mean  +0.00 min   +0 max   +0 bands    0  mean score  17.0 ->  17.0
+   village    n  620 moved    0 mean  +0.00 min   +0 max   +0 bands    0  mean score  15.4 ->  15.4
+   town       n  752 moved    0 mean  +0.00 min   +0 max   +0 bands    0  mean score  39.4 ->  39.4
+   city       n  752 moved    0 mean  +0.00 min   +0 max   +0 bands    0  mean score  69.0 ->  69.0
+   metropolis n  552 moved    0 mean  +0.00 min   +0 max   +0 bands    0  mean score  77.1 ->  77.1
+-- AW: moved 2204 of 3756 (up 97, down 2107); mean over movers -3.74, over all -2.19; min -20, max 2; bands changed 552 {('Lightly Defended', 'Vulnerable'): 205, ('Vulnerable', 'Undefended'): 80, ('Vulnerable', 'Lightly Defended'): 1, ('Defensible', 'Lightly Defended'): 155, ('Well-Defended', 'Defensible'): 82, ('Fortress', 'Well-Defended'): 21, ('Undefended', 'Vulnerable'): 6, ('Lightly Defended', 'Undefended'): 2}
+   fresh6: moved 391 of 720, band changed 91
+   thorp      n  540 moved  223 mean  -0.73 min   -3 max   +0 bands   28  mean score  19.3 ->  18.6
+   hamlet     n  540 moved  319 mean  -0.86 min   -5 max   +2 bands   50  mean score  17.0 ->  16.1
+   village    n  620 moved  370 mean  -0.94 min  -10 max   +1 bands   48  mean score  15.4 ->  14.5
+   town       n  752 moved  751 mean  -8.17 min  -20 max   +0 bands  402  mean score  39.4 ->  31.3
+   city       n  752 moved  541 mean  -0.86 min   -3 max   +0 bands   24  mean score  69.0 ->  68.1
+   metropolis n  552 moved    0 mean  +0.00 min   +0 max   +0 bands    0  mean score  77.1 ->  77.1
+
+== STEP 4: share in each band by tier (base | A | B | R | AW), percent ==
+  thorp      15/57/28/0/0/0 | 16/59/24/0/0/0 | 16/58/26/0/0/0 | 15/57/28/0/0/0 | 16/59/24/0/0/0
+  hamlet     24/59/17/0/0/0 | 26/63/11/0/0/0 | 24/60/15/0/0/0 | 24/59/17/0/0/0 | 25/64/11/0/0/0
+  village    33/52/13/1/0/0 | 37/52/10/0/0/0 | 36/51/12/1/0/0 | 33/52/13/1/0/0 | 37/52/10/1/0/0
+  town       1/15/32/34/17/1 | 5/25/36/25/9/0 | 1/18/34/33/13/0 | 1/15/32/34/17/1 | 7/27/35/23/8/0
+  city       0/0/1/14/52/34 | 0/0/1/14/53/32 | 0/0/1/9/50/40 | 0/0/1/14/52/34 | 0/0/1/15/53/32
+  metropolis 0/0/0/2/38/60 | 0/0/0/2/38/60 | 0/0/0/0/28/72 | 0/0/0/2/38/60 | 0/0/0/2/38/60
+  (bands in order: Undefended, Vulnerable, Lightly Defended, Defensible, Well-Defended, Fortress)
+
+== STEP 4: fullness: births with >=1 score at 100, mean scores at 100, readiness at 100 — by tier ==
+  thorp      base:   0 0.00 top0 | A:   0 0.00 top0 | B:   0 0.00 top0 | R:   0 0.00 top0 | AW:   0 0.00 top0
+  hamlet     base:   0 0.00 top0 | A:   0 0.00 top0 | B:   0 0.00 top0 | R:   0 0.00 top0 | AW:   0 0.00 top0
+  village    base:   1 0.00 top0 | A:   0 0.00 top0 | B:   1 0.00 top0 | R:   1 0.00 top0 | AW:   2 0.00 top0
+  town       base:  65 0.10 top0 | A:  25 0.03 top0 | B:  46 0.06 top0 | R:  65 0.10 top0 | AW:  22 0.03 top0
+  city       base: 655 1.60 top0 | A: 650 1.53 top0 | B: 692 1.87 top0 | R: 655 1.60 top0 | AW: 637 1.49 top0
+  metropolis base: 524 2.22 top0 | A: 524 2.22 top0 | B: 544 2.62 top1 | R: 524 2.22 top0 | AW: 524 2.22 top0
+
+== STEP 4: per score, mean by tier (mil mon int eco mag), base -> A -> B ==
+  thorp      base  22.1  11.5  13.6  20.2   0.0 | A  22.1   8.6  12.9  20.1   0.0 | B  22.1   9.9  13.2  20.1   0.0
+  hamlet     base  29.3  15.4  12.6  20.3   0.3 | A  29.0  11.3  11.8  20.0   0.3 | B  29.2  13.2  12.2  20.2   0.3
+  village    base  32.5  16.7  11.6  24.1   3.4 | A  31.8  13.2  10.5  23.6   3.3 | B  32.2  15.2  11.1  24.0   3.3
+  town       base  54.1  42.4  33.8  57.7  27.9 | A  48.6  36.0  20.4  50.3  24.5 | B  52.4  39.8  28.9  55.7  27.1
+  city       base  97.2  89.8  55.2  88.4  44.5 | A  97.2  89.1  53.1  87.6  44.5 | B  97.7  92.1  63.6  90.2  44.5
+  metropolis base  98.0  94.3  58.9  97.8  67.3 | A  98.0  94.3  58.9  97.8  67.3 | B  99.2  97.6  73.1  98.7  67.4
+
+== STEP 4: the size row: mean readiness without it, by tier (base, A, B) ==
+  thorp      size +12.0  base:   7.3 A:   6.6 B:   7.0 R:   7.3
+  hamlet     size  +8.0  base:   9.0 A:   7.9 B:   8.5 R:   9.0
+  village    size  +4.0  base:  11.4 A:  10.2 B:  11.0 R:  11.4
+  town       size  +2.0  base:  37.4 A:  30.2 B:  35.0 R:  37.4
+  city       size  +0.0  base:  69.0 A:  68.3 B:  71.6 R:  69.0
+  metropolis size  +0.0  base:  77.1 A:  77.1 B:  81.1 R:  77.1
+
+== per part: mean points among births holding it, base -> A -> B -> R ==
+  garrison   n 1486 11.85 -> 11.28 -> 12.51 -> 11.85 -> 11.28
+  militia    n  256  4.49 ->  4.46 ->  4.47 ->  4.49 ->  4.46
+  watch      n 2093  4.42 ->  4.05 ->  4.99 ->  4.42 ->  4.05
+  court      n 2056  3.51 ->  2.98 ->  3.74 ->  3.51 ->  2.98
+  prison     n 1177  2.70 ->  2.33 ->  2.91 ->  2.70 ->  2.33
+  wardens    n   97  2.20 ->  2.18 ->  2.19 ->  2.20 ->  2.18
+  company    n  963  2.78 ->  2.69 ->  3.26 ->  2.78 ->  2.69
+  charter    n 1682  8.74 ->  8.17 ->  9.76 ->  8.74 ->  8.17
+  clergy     n 1660  4.12 ->  3.22 ->  4.01 ->  4.12 ->  3.22
+  druids     n  463  2.06 ->  2.06 ->  2.06 ->  2.06 ->  2.06
+  market     n 2271  1.64 ->  1.58 ->  1.84 ->  1.64 ->  1.58
+  hospital   n 1242  2.71 ->  2.31 ->  2.84 ->  2.71 ->  2.31
+  alchemists n 1170  1.42 ->  1.37 ->  1.50 ->  1.42 ->  1.37
+  walls      n 2203  9.23 ->  9.23 ->  9.23 ->  9.23 ->  8.91

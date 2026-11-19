@@ -1,0 +1,13 @@
+commit 3b873a03af5d1e737b1f400ecf87eaf33fd12d98
+Merge: ea050024a 78dd629bd
+Author: Claude <noreply@anthropic.com>
+Date:   Sat Nov 14 16:31:52 2026 +0000
+
+    join(JOIN-5 · P1): merge lane/w2-fix-data-2026-11-13 at 78dd629bd — the chair's second point, final
+    
+    Read at 16:31 UTC: 78dd629bd99740f2d98255f27d6a4f7f657cb678 (equal to the lane's tip; last landed e6e1893f4 (merge 2); merge base e6e1893f4).
+    No conflict.
+    Verify: 7 files the lane moved; 7 staged; every file the joined line had not moved equals the lane's blob.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYazSdYC8v2Fj1WVnzT

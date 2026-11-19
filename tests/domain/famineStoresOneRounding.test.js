@@ -10,6 +10,15 @@
  * printed "Stores: a granary, six months of grain." and `coh:famine-stores` fired. `soak1k-1846`
  * (5.6) and `-2962` (5.8) are the rung's next two seeds; `soak1k-3605` (12.1, held before and
  * after) is the control.
+ * RE-KEYED BY IDENTITY (COHERENCE-AGREE, the chair's food-sources ruling of 2026-11-11): worked land now
+ * counts as a food source, and a preserved source adds its quarter month to the stores, so `-1846` reads
+ * 6.8 and `-3605` 13; the same members are `soak1k-2452` (city, famine, granary, 5.6) and `soak1k-1589`
+ * (12.1, held), found by scanning the soak corpus for the condition.
+ * RE-KEYED BY IDENTITY (TAIL-DEFECON-6): COHERENCE-UPKEEP's stores move (05ec9b60, the chair's ruling 6 of 2026-11-12: the
+ * full granary keeps boughtShare('stores', keepOf(prosperity)) of its months; 225 of the 360 moved, every one down) lays
+ * `soak1k-2452` by at 5.3 months, an open granary that prints five and is not held, so it no longer stands in the condition.
+ * Scanning soak1k-952 to -3952 outward from it, the only other famine granary at 5.5–5.9 months is `soak1k-1445` (a
+ * metropolis, 5.9, held): the arm's third member. -1582 (5.6) and -2962 (5.5) stand, and the control -1589 holds.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
@@ -24,7 +33,7 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 const born = {};
 beforeAll(async () => {
   await ensureLaws();
-  for (const i of [1582, 1846, 2962, 3605]) born[i] = birth(i).settlement;
+  for (const i of [1582, 1445, 2962, 1589]) born[i] = birth(i).settlement;
 }, 240_000);
 
 /** @param {number} storageMonths @param {boolean} stressFamine */
@@ -32,10 +41,12 @@ const recordAt = (storageMonths, stressFamine = true) => deriveFoodRecord({
   dailyNeed: 100, dailyProduction: 35, deficitPct: 65, surplusPct: 0, stressFamine, storageMonths, hasGranary: true,
 });
 
+  // RE-KEYED BY IDENTITY (R2-CODE-B-3 item 2a, the chair's ruling: the words contain the figure, "about" from a month up):
+  // the same records, the same held/open reading and the same rounding; the span now says "about".
 describe('rung 2D · the held granary and the stores line read one rounding', () => {
   // LANDING-R2 seat E: one parameterless test over the three seeds, every seed run and collected.
-  it('soak1k-1582, -1846, -2962: a famine granary printed as six months is held, and the page says so', () => {
-    const failures = collectSeedFailures([1582, 1846, 2962], (i) => {
+  it('soak1k-1582, -1445, -2962: a famine granary printed as six months is held, and the page says so', () => {
+    const failures = collectSeedFailures([1582, 1445, 2962], (i) => {
       const s = born[i];
       const record = s.economicState.foodSecurity.foodRecord;
       expect(record, `soak1k-${i}`).toMatchObject({ band: 'famine', hasGranary: true });
@@ -43,24 +54,24 @@ describe('rung 2D · the held granary and the stores line read one rounding', ()
       expect(record.storageMonths, `soak1k-${i}`).toBeLessThan(FAMINE_HELD_STORE_MONTHS);
       expect(record.storesHeld, `soak1k-${i}`).toBe(true);
       const words = foodStoresWords(record);
-      expect(words, `soak1k-${i}`).toBe(`Stores: a granary of six months that ${HELD_STORES_WORDS}.`);
+      expect(words, `soak1k-${i}`).toBe(`Stores: a granary of about six months that ${HELD_STORES_WORDS}.`);
       expect(famineStoresFindings(s, words), `soak1k-${i}`).toHaveLength(0);
       expect(foodEnduranceLine(s)?.sentence, `soak1k-${i}`).toContain(HELD_STORES_WORDS);
     });
     expectNoSeedFailures(failures, 'every six-month famine granary reads as held');
   });
 
-  it('soak1k-3605 (the control): twelve months, held before and after', () => {
-    const record = born[3605].economicState.foodSecurity.foodRecord;
+  it('soak1k-1589 (the control): twelve months, held before and after', () => {
+    const record = born[1589].economicState.foodSecurity.foodRecord;
     expect(record).toMatchObject({ band: 'famine', hasGranary: true, storesHeld: true });
-    expect(foodStoresWords(record)).toBe(`Stores: a granary of twelve months that ${HELD_STORES_WORDS}.`);
+    expect(foodStoresWords(record)).toBe(`Stores: a granary of about twelve months that ${HELD_STORES_WORDS}.`);
   });
 
   it('the boundary is the printed figure: 5.49 prints five and is open, 5.5 prints six and is held', () => {
     expect(recordAt(5.49).storesHeld).toBe(false);
-    expect(foodStoresWords(recordAt(5.49))).toBe('Stores: a granary, five months of grain.');
+    expect(foodStoresWords(recordAt(5.49))).toBe('Stores: a granary, about five months of grain.');
     expect(recordAt(5.5).storesHeld).toBe(true);
-    expect(foodStoresWords(recordAt(5.5))).toBe(`Stores: a granary of six months that ${HELD_STORES_WORDS}.`);
+    expect(foodStoresWords(recordAt(5.5))).toBe(`Stores: a granary of about six months that ${HELD_STORES_WORDS}.`);
     expect(recordAt(6).storesHeld).toBe(true);
     expect('storesHeld' in recordAt(12, false)).toBe(false);
   });

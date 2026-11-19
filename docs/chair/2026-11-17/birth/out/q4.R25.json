@@ -1,0 +1,1035 @@
+{
+ "base": "/tmp/claude-0/-home-user-settlement-engine/e9e30391-0e2b-5326-8cea-85ed7a9ad32b/scratchpad/base",
+ "tip": "/tmp/claude-0/-home-user-settlement-engine/e9e30391-0e2b-5326-8cea-85ed7a9ad32b/scratchpad/proto",
+ "rule": "R2,R5",
+ "pops": {
+  "150": {
+   "towns": 150,
+   "marksBase": 381,
+   "marksTip": 155,
+   "townsMarkedTip": 58,
+   "bornCalmTip": 7,
+   "bornCalmTownsTip": 7,
+   "bornCalmTownsBase": 38,
+   "spentCalmTip": 25,
+   "townsLinesMoved": 68,
+   "newLines": {
+    "IMPORT Timber": {
+     "towns": 32,
+     "three": [
+      "bar0-hamlet-calm-rand-27",
+      "bar0-hamlet-calm-rand-29",
+      "bar0-village-famine-rand-32"
+     ]
+    },
+    "IMPORT Clay and raw materials": {
+     "towns": 29,
+     "three": [
+      "bar0-village-famine-rand-35",
+      "bar0-village-calm-rand-31",
+      "bar0-village-calm-rand-39"
+     ]
+    },
+    "IMPORT Raw hides and animal products": {
+     "towns": 25,
+     "three": [
+      "bar0-village-famine-rand-34",
+      "bar0-village-famine-rand-35",
+      "bar0-village-calm-rand-31"
+     ]
+    },
+    "IMPORT Wool": {
+     "towns": 20,
+     "three": [
+      "bar0-village-famine-rand-30",
+      "bar0-village-calm-rand-37",
+      "bar0-town-calm-rand-39"
+     ]
+    },
+    "IMPORT Grapes and must": {
+     "towns": 19,
+     "three": [
+      "bar0-town-calm-rand-37",
+      "bar0-town-occupied-rand-41",
+      "bar0-city-wartime-rand-31"
+     ]
+    },
+    "IMPORT Iron ore": {
+     "towns": 9,
+     "three": [
+      "bar0-hamlet-calm-rand-29",
+      "bar0-hamlet-calm-rand-37",
+      "bar0-village-famine-rand-29"
+     ]
+    },
+    "MARK Charcoal burner: Short of coal.": {
+     "towns": 2,
+     "three": [
+      "bar0-metropolis-calm-rand-30",
+      "bar0-metropolis-calm-rand-37"
+     ]
+    },
+    "IMPORT Salted fish": {
+     "towns": 1,
+     "three": [
+      "bar0-village-famine-rand-30"
+     ]
+    },
+    "IMPORT Medicinal herbs": {
+     "towns": 1,
+     "three": [
+      "bar0-village-famine-rand-37"
+     ]
+    },
+    "IMPORT Glass sand": {
+     "towns": 1,
+     "three": [
+      "bar0-town-occupied-rand-36"
+     ]
+    }
+   },
+   "goneLines": {
+    "MARK Potter: Short of clay.": {
+     "towns": 23,
+     "three": [
+      "bar0-village-calm-rand-39",
+      "bar0-town-calm-rand-27",
+      "bar0-town-calm-rand-30"
+     ]
+    },
+    "GAP No clay reaches the potter.": {
+     "towns": 23,
+     "three": [
+      "bar0-village-calm-rand-39",
+      "bar0-town-calm-rand-27",
+      "bar0-town-calm-rand-30"
+     ]
+    },
+    "MARK Brickmaker: Short of clay.": {
+     "towns": 21,
+     "three": [
+      "bar0-village-famine-rand-35",
+      "bar0-village-calm-rand-31",
+      "bar0-village-calm-rand-39"
+     ]
+    },
+    "GAP No clay reaches the brickmaker.": {
+     "towns": 21,
+     "three": [
+      "bar0-village-famine-rand-35",
+      "bar0-village-calm-rand-31",
+      "bar0-village-calm-rand-39"
+     ]
+    },
+    "MARK Cooper: Short of timber.": {
+     "towns": 20,
+     "three": [
+      "bar0-village-famine-rand-32",
+      "bar0-village-famine-rand-37",
+      "bar0-village-famine-rand-38"
+     ]
+    },
+    "MARK Vintner: Short of grapes.": {
+     "towns": 19,
+     "three": [
+      "bar0-town-calm-rand-37",
+      "bar0-town-occupied-rand-41",
+      "bar0-city-wartime-rand-31"
+     ]
+    },
+    "GAP No grapes reach the vintner.": {
+     "towns": 19,
+     "three": [
+      "bar0-town-calm-rand-37",
+      "bar0-town-occupied-rand-41",
+      "bar0-city-wartime-rand-31"
+     ]
+    },
+    "NEEDED Needed, and not brought in: grapes": {
+     "towns": 19,
+     "three": [
+      "bar0-town-calm-rand-37",
+      "bar0-town-occupied-rand-41",
+      "bar0-city-wartime-rand-31"
+     ]
+    },
+    "MARK Weavers/Textile workers: Short of wool.": {
+     "towns": 18,
+     "three": [
+      "bar0-town-calm-rand-39",
+      "bar0-town-occupied-rand-29",
+      "bar0-town-occupied-rand-33"
+     ]
+    },
+    "MARK Carpenters (5-15): Short of timber.": {
+     "towns": 17,
+     "three": [
+      "bar0-town-calm-rand-27",
+      "bar0-town-calm-rand-30",
+      "bar0-town-occupied-rand-31"
+     ]
+    },
+    "MARK Cobbler's guild: Short of hides.": {
+     "towns": 16,
+     "three": [
+      "bar0-town-calm-rand-39",
+      "bar0-town-calm-rand-40",
+      "bar0-town-occupied-rand-32"
+     ]
+    },
+    "MARK Fuller: Short of wool.": {
+     "towns": 15,
+     "three": [
+      "bar0-village-famine-rand-30",
+      "bar0-village-calm-rand-37",
+      "bar0-city-wartime-rand-29"
+     ]
+    },
+    "GAP No timber reaches the sawmill.": {
+     "towns": 15,
+     "three": [
+      "bar0-village-famine-rand-33",
+      "bar0-village-calm-rand-30",
+      "bar0-village-calm-rand-31"
+     ]
+    },
+    "NEEDED Needed, and not brought in: timber": {
+     "towns": 13,
+     "three": [
+      "bar0-hamlet-calm-rand-29",
+      "bar0-village-famine-rand-37",
+      "bar0-village-famine-rand-39"
+     ]
+    },
+    "MARK Tanner (established): Short of hides.": {
+     "towns": 12,
+     "three": [
+      "bar0-town-calm-rand-28",
+      "bar0-town-calm-rand-38",
+      "bar0-town-calm-rand-39"
+     ]
+    },
+    "NEEDED Needed, and not brought in: clay": {
+     "towns": 11,
+     "three": [
+      "bar0-village-famine-rand-35",
+      "bar0-town-calm-rand-30",
+      "bar0-town-calm-rand-31"
+     ]
+    },
+    "MARK Sawmill (commercial): Short of timber.": {
+     "towns": 11,
+     "three": [
+      "bar0-town-occupied-rand-31",
+      "bar0-city-wartime-rand-33",
+      "bar0-city-wartime-rand-34"
+     ]
+    },
+    "MARK Charcoal burner: Short of timber.": {
+     "towns": 10,
+     "three": [
+      "bar0-hamlet-calm-rand-27",
+      "bar0-hamlet-calm-rand-29",
+      "bar0-village-calm-rand-31"
+     ]
+    },
+    "GAP No timber reaches the charcoal burner.": {
+     "towns": 10,
+     "three": [
+      "bar0-hamlet-calm-rand-27",
+      "bar0-hamlet-calm-rand-29",
+      "bar0-village-calm-rand-31"
+     ]
+    },
+    "NEEDED Needed, and not brought in: mountain_timber": {
+     "towns": 10,
+     "three": [
+      "bar0-hamlet-calm-rand-29",
+      "bar0-village-calm-rand-30",
+      "bar0-village-calm-rand-31"
+     ]
+    },
+    "MARK Tanners: Short of hides.": {
+     "towns": 8,
+     "three": [
+      "bar0-town-calm-rand-27",
+      "bar0-town-occupied-rand-34",
+      "bar0-city-wartime-rand-33"
+     ]
+    },
+    "MARK Woodcarver: Short of timber.": {
+     "towns": 7,
+     "three": [
+      "bar0-town-occupied-rand-32",
+      "bar0-city-wartime-rand-37",
+      "bar0-metropolis-calm-rand-28"
+     ]
+    },
+    "MARK Blacksmith: Short of iron.": {
+     "towns": 4,
+     "three": [
+      "bar0-village-famine-rand-29",
+      "bar0-village-famine-rand-33",
+      "bar0-village-calm-rand-32"
+     ]
+    },
+    "MARK Sawmill: Short of timber.": {
+     "towns": 4,
+     "three": [
+      "bar0-village-famine-rand-33",
+      "bar0-village-calm-rand-30",
+      "bar0-village-calm-rand-31"
+     ]
+    },
+    "MARK Tannery: Short of livestock or hides.": {
+     "towns": 4,
+     "three": [
+      "bar0-village-famine-rand-34",
+      "bar0-village-famine-rand-35",
+      "bar0-village-calm-rand-31"
+     ]
+    },
+    "GAP No livestock or hides reaches the tannery.": {
+     "towns": 4,
+     "three": [
+      "bar0-village-famine-rand-34",
+      "bar0-village-famine-rand-35",
+      "bar0-village-calm-rand-31"
+     ]
+    },
+    "MARK Carpenter: Short of timber.": {
+     "towns": 3,
+     "three": [
+      "bar0-village-famine-rand-38",
+      "bar0-village-famine-rand-39",
+      "bar0-village-calm-rand-31"
+     ]
+    },
+    "MARK Blacksmiths (3-10): Short of iron.": {
+     "towns": 3,
+     "three": [
+      "bar0-city-wartime-rand-30",
+      "bar0-city-wartime-rand-31",
+      "bar0-city-wartime-rand-37"
+     ]
+    },
+    "MARK Specialized metalworkers: Short of iron.": {
+     "towns": 3,
+     "three": [
+      "bar0-city-wartime-rand-30",
+      "bar0-city-wartime-rand-31",
+      "bar0-city-wartime-rand-37"
+     ]
+    },
+    "MARK Carpenter (part-time): Short of timber.": {
+     "towns": 2,
+     "three": [
+      "bar0-hamlet-calm-rand-27",
+      "bar0-hamlet-calm-rand-29"
+     ]
+    },
+    "MARK Resident smith (part-time): Short of iron.": {
+     "towns": 2,
+     "three": [
+      "bar0-hamlet-calm-rand-29",
+      "bar0-hamlet-calm-rand-37"
+     ]
+    },
+    "NEEDED Needed, and not brought in: animal hides": {
+     "towns": 2,
+     "three": [
+      "bar0-village-famine-rand-35",
+      "bar0-village-calm-rand-32"
+     ]
+    },
+    "NEEDED Needed, and not brought in: Timber and building wood": {
+     "towns": 2,
+     "three": [
+      "bar0-village-calm-rand-33",
+      "bar0-city-wartime-rand-33"
+     ]
+    },
+    "MARK Smelter: Short of iron ore or copper ore or gold or silver ore.": {
+     "towns": 2,
+     "three": [
+      "bar0-city-wartime-rand-30",
+      "bar0-city-wartime-rand-31"
+     ]
+    },
+    "GAP No iron ore, copper ore or gold or silver ore reaches the smelter.": {
+     "towns": 2,
+     "three": [
+      "bar0-city-wartime-rand-30",
+      "bar0-city-wartime-rand-31"
+     ]
+    },
+    "MARK Fishmonger: Short of fish.": {
+     "towns": 1,
+     "three": [
+      "bar0-village-famine-rand-30"
+     ]
+    },
+    "GAP No fish reaches the fishmonger.": {
+     "towns": 1,
+     "three": [
+      "bar0-village-famine-rand-30"
+     ]
+    },
+    "NEEDED Needed, and not brought in: fish": {
+     "towns": 1,
+     "three": [
+      "bar0-village-famine-rand-30"
+     ]
+    },
+    "NEEDED Needed, and not brought in: metals": {
+     "towns": 1,
+     "three": [
+      "bar0-village-famine-rand-33"
+     ]
+    },
+    "MARK Apothecary: Short of medicinal herbs or water from the hot springs.": {
+     "towns": 1,
+     "three": [
+      "bar0-village-famine-rand-37"
+     ]
+    },
+    "GAP No medicinal herbs or water from the hot springs reaches the apothecary.": {
+     "towns": 1,
+     "three": [
+      "bar0-village-famine-rand-37"
+     ]
+    },
+    "NEEDED Needed, and not brought in: medicinal herbs": {
+     "towns": 1,
+     "three": [
+      "bar0-village-famine-rand-37"
+     ]
+    },
+    "MARK Cobbler: Short of hides.": {
+     "towns": 1,
+     "three": [
+      "bar0-village-calm-rand-32"
+     ]
+    },
+    "MARK Glassblower: Short of glass sand.": {
+     "towns": 1,
+     "three": [
+      "bar0-town-occupied-rand-36"
+     ]
+    },
+    "GAP No glass sand reaches the glassblower.": {
+     "towns": 1,
+     "three": [
+      "bar0-town-occupied-rand-36"
+     ]
+    },
+    "NEEDED Needed, and not brought in: glass sand": {
+     "towns": 1,
+     "three": [
+      "bar0-town-occupied-rand-36"
+     ]
+    },
+    "NEEDED Needed, and not brought in: glass_sand": {
+     "towns": 1,
+     "three": [
+      "bar0-town-occupied-rand-36"
+     ]
+    },
+    "NEEDED Needed, and not brought in: iron ore": {
+     "towns": 1,
+     "three": [
+      "bar0-city-wartime-rand-30"
+     ]
+    }
+   },
+   "leftCalm": {
+    "Dairy farmer · livestock": {
+     "towns": 5,
+     "three": [
+      "bar0-hamlet-calm-rand-27",
+      "bar0-hamlet-calm-rand-28",
+      "bar0-hamlet-calm-rand-29"
+     ]
+    },
+    "Salt works · salt": {
+     "towns": 1,
+     "three": [
+      "bar0-metropolis-calm-rand-27"
+     ]
+    },
+    "Luxury goods quarter · luxury goods": {
+     "towns": 1,
+     "three": [
+      "bar0-metropolis-calm-rand-34"
+     ]
+    }
+   }
+  },
+  "720": {
+   "towns": 720,
+   "marksBase": 2066,
+   "marksTip": 652,
+   "townsMarkedTip": 249,
+   "bornCalmTip": 30,
+   "bornCalmTownsTip": 29,
+   "bornCalmTownsBase": 144,
+   "spentCalmTip": 124,
+   "townsLinesMoved": 376,
+   "newLines": {
+    "IMPORT Clay and raw materials": {
+     "towns": 176,
+     "three": [
+      "r2r-village-4",
+      "r2r-village-6",
+      "r2r-village-16"
+     ]
+    },
+    "IMPORT Raw hides and animal products": {
+     "towns": 163,
+     "three": [
+      "r2r-village-9",
+      "r2r-village-14",
+      "r2r-village-27"
+     ]
+    },
+    "IMPORT Timber": {
+     "towns": 157,
+     "three": [
+      "r2r-hamlet-3",
+      "r2r-hamlet-17",
+      "r2r-hamlet-32"
+     ]
+    },
+    "IMPORT Wool": {
+     "towns": 146,
+     "three": [
+      "r2r-village-14",
+      "r2r-village-26",
+      "r2r-village-28"
+     ]
+    },
+    "IMPORT Grapes and must": {
+     "towns": 137,
+     "three": [
+      "r2r-town-18",
+      "r2r-town-22",
+      "r2r-town-33"
+     ]
+    },
+    "IMPORT Iron ore": {
+     "towns": 43,
+     "three": [
+      "r2r-hamlet-10",
+      "r2r-hamlet-19",
+      "r2r-hamlet-26"
+     ]
+    },
+    "IMPORT Glass sand": {
+     "towns": 12,
+     "three": [
+      "r2r-town-8",
+      "r2r-town-35",
+      "r2r-town-40"
+     ]
+    },
+    "MARK Charcoal burner: Short of coal.": {
+     "towns": 11,
+     "three": [
+      "r2r-metropolis-2",
+      "r2r-metropolis-28",
+      "r2r-metropolis-40"
+     ]
+    },
+    "IMPORT Medicinal herbs": {
+     "towns": 4,
+     "three": [
+      "r2r-village-13",
+      "r2r-town-51",
+      "r2s-insurgency-town-2"
+     ]
+    },
+    "IMPORT Salted fish": {
+     "towns": 4,
+     "three": [
+      "r2r-village-49",
+      "r2r-village-57",
+      "r2s-succession_void-village-0"
+     ]
+    },
+    "MARK Apothecary: Short of herbs.": {
+     "towns": 1,
+     "three": [
+      "r2r-village-13"
+     ]
+    },
+    "MARK Smelter: Short of iron ore.": {
+     "towns": 1,
+     "three": [
+      "r2r-metropolis-33"
+     ]
+    }
+   },
+   "goneLines": {
+    "GAP No clay reaches the potter.": {
+     "towns": 155,
+     "three": [
+      "r2r-village-4",
+      "r2r-village-16",
+      "r2r-village-27"
+     ]
+    },
+    "MARK Potter: Short of clay.": {
+     "towns": 153,
+     "three": [
+      "r2r-village-4",
+      "r2r-village-16",
+      "r2r-village-27"
+     ]
+    },
+    "MARK Vintner: Short of grapes.": {
+     "towns": 137,
+     "three": [
+      "r2r-town-18",
+      "r2r-town-22",
+      "r2r-town-33"
+     ]
+    },
+    "GAP No grapes reach the vintner.": {
+     "towns": 137,
+     "three": [
+      "r2r-town-18",
+      "r2r-town-22",
+      "r2r-town-33"
+     ]
+    },
+    "NEEDED Needed, and not brought in: grapes": {
+     "towns": 137,
+     "three": [
+      "r2r-town-18",
+      "r2r-town-22",
+      "r2r-town-33"
+     ]
+    },
+    "MARK Weavers/Textile workers: Short of wool.": {
+     "towns": 134,
+     "three": [
+      "r2r-town-8",
+      "r2r-town-14",
+      "r2r-town-17"
+     ]
+    },
+    "GAP No clay reaches the brickmaker.": {
+     "towns": 124,
+     "three": [
+      "r2r-village-6",
+      "r2r-town-10",
+      "r2r-town-16"
+     ]
+    },
+    "MARK Brickmaker: Short of clay.": {
+     "towns": 123,
+     "three": [
+      "r2r-village-6",
+      "r2r-town-10",
+      "r2r-town-16"
+     ]
+    },
+    "MARK Cobbler's guild: Short of hides.": {
+     "towns": 115,
+     "three": [
+      "r2r-town-6",
+      "r2r-town-14",
+      "r2r-town-15"
+     ]
+    },
+    "MARK Fuller: Short of wool.": {
+     "towns": 106,
+     "three": [
+      "r2r-village-14",
+      "r2r-village-26",
+      "r2r-village-28"
+     ]
+    },
+    "NEEDED Needed, and not brought in: clay": {
+     "towns": 102,
+     "three": [
+      "r2r-village-6",
+      "r2r-village-16",
+      "r2r-village-48"
+     ]
+    },
+    "MARK Carpenters (5-15): Short of timber.": {
+     "towns": 95,
+     "three": [
+      "r2r-town-5",
+      "r2r-town-22",
+      "r2r-town-31"
+     ]
+    },
+    "GAP No timber reaches the sawmill.": {
+     "towns": 94,
+     "three": [
+      "r2r-village-4",
+      "r2r-village-6",
+      "r2r-village-14"
+     ]
+    },
+    "MARK Cooper: Short of timber.": {
+     "towns": 90,
+     "three": [
+      "r2r-village-15",
+      "r2r-village-26",
+      "r2r-village-52"
+     ]
+    },
+    "MARK Tanner (established): Short of hides.": {
+     "towns": 85,
+     "three": [
+      "r2r-town-6",
+      "r2r-town-14",
+      "r2r-town-16"
+     ]
+    },
+    "MARK Sawmill (commercial): Short of timber.": {
+     "towns": 79,
+     "three": [
+      "r2r-town-2",
+      "r2r-town-29",
+      "r2r-town-34"
+     ]
+    },
+    "MARK Woodcarver: Short of timber.": {
+     "towns": 61,
+     "three": [
+      "r2r-village-4",
+      "r2r-town-32",
+      "r2r-town-49"
+     ]
+    },
+    "MARK Tanners: Short of hides.": {
+     "towns": 61,
+     "three": [
+      "r2r-town-2",
+      "r2r-town-13",
+      "r2r-town-15"
+     ]
+    },
+    "MARK Charcoal burner: Short of timber.": {
+     "towns": 49,
+     "three": [
+      "r2r-hamlet-36",
+      "r2r-hamlet-52",
+      "r2r-town-40"
+     ]
+    },
+    "GAP No timber reaches the charcoal burner.": {
+     "towns": 49,
+     "three": [
+      "r2r-hamlet-36",
+      "r2r-hamlet-52",
+      "r2r-town-40"
+     ]
+    },
+    "NEEDED Needed, and not brought in: mountain_timber": {
+     "towns": 49,
+     "three": [
+      "r2r-hamlet-36",
+      "r2r-hamlet-52",
+      "r2r-village-4"
+     ]
+    },
+    "NEEDED Needed, and not brought in: timber": {
+     "towns": 46,
+     "three": [
+      "r2r-hamlet-45",
+      "r2r-hamlet-52",
+      "r2r-hamlet-57"
+     ]
+    },
+    "MARK Sawmill: Short of timber.": {
+     "towns": 15,
+     "three": [
+      "r2r-village-4",
+      "r2r-village-6",
+      "r2r-village-14"
+     ]
+    },
+    "MARK Blacksmiths (3-10): Short of iron.": {
+     "towns": 15,
+     "three": [
+      "r2r-city-5",
+      "r2r-city-17",
+      "r2r-city-32"
+     ]
+    },
+    "MARK Resident smith (part-time): Short of iron.": {
+     "towns": 14,
+     "three": [
+      "r2r-hamlet-10",
+      "r2r-hamlet-19",
+      "r2r-hamlet-26"
+     ]
+    },
+    "MARK Blacksmith: Short of iron.": {
+     "towns": 14,
+     "three": [
+      "r2r-village-4",
+      "r2r-village-16",
+      "r2r-village-22"
+     ]
+    },
+    "MARK Specialized metalworkers: Short of iron.": {
+     "towns": 14,
+     "three": [
+      "r2r-city-5",
+      "r2r-city-17",
+      "r2r-city-32"
+     ]
+    },
+    "MARK Carpenter (part-time): Short of timber.": {
+     "towns": 13,
+     "three": [
+      "r2r-hamlet-3",
+      "r2r-hamlet-17",
+      "r2r-hamlet-32"
+     ]
+    },
+    "MARK Carpenter: Short of timber.": {
+     "towns": 12,
+     "three": [
+      "r2r-village-9",
+      "r2r-village-13",
+      "r2r-village-15"
+     ]
+    },
+    "MARK Glassblower: Short of glass sand.": {
+     "towns": 12,
+     "three": [
+      "r2r-town-8",
+      "r2r-town-35",
+      "r2r-town-40"
+     ]
+    },
+    "GAP No glass sand reaches the glassblower.": {
+     "towns": 12,
+     "three": [
+      "r2r-town-8",
+      "r2r-town-35",
+      "r2r-town-40"
+     ]
+    },
+    "NEEDED Needed, and not brought in: glass sand": {
+     "towns": 12,
+     "three": [
+      "r2r-town-8",
+      "r2r-town-35",
+      "r2r-town-40"
+     ]
+    },
+    "NEEDED Needed, and not brought in: glass_sand": {
+     "towns": 12,
+     "three": [
+      "r2r-town-8",
+      "r2r-town-35",
+      "r2r-town-40"
+     ]
+    },
+    "NEEDED Needed, and not brought in: metals": {
+     "towns": 8,
+     "three": [
+      "r2r-hamlet-30",
+      "r2r-hamlet-35",
+      "r2r-village-26"
+     ]
+    },
+    "NEEDED Needed, and not brought in: Timber and building wood": {
+     "towns": 8,
+     "three": [
+      "r2r-town-7",
+      "r2r-metropolis-19",
+      "r2s-indebted-metropolis-0"
+     ]
+    },
+    "MARK Cobbler: Short of hides.": {
+     "towns": 7,
+     "three": [
+      "r2r-village-27",
+      "r2r-village-37",
+      "r2r-village-44"
+     ]
+    },
+    "NEEDED Needed, and not brought in: timber (for large vessels)": {
+     "towns": 6,
+     "three": [
+      "r2r-hamlet-3",
+      "r2r-village-53",
+      "r2r-city-14"
+     ]
+    },
+    "MARK Tannery: Short of livestock or hides.": {
+     "towns": 6,
+     "three": [
+      "r2r-village-9",
+      "r2r-village-14",
+      "r2s-infiltrated-village-0"
+     ]
+    },
+    "GAP No livestock or hides reaches the tannery.": {
+     "towns": 6,
+     "three": [
+      "r2r-village-9",
+      "r2r-village-14",
+      "r2s-infiltrated-village-0"
+     ]
+    },
+    "GAP No salt reaches the salt works.": {
+     "towns": 6,
+     "three": [
+      "r2r-village-36",
+      "r2r-village-53",
+      "r2r-town-3"
+     ]
+    },
+    "NEEDED Needed, and not brought in: medicinal herbs": {
+     "towns": 4,
+     "three": [
+      "r2r-village-13",
+      "r2r-town-51",
+      "r2s-insurgency-town-2"
+     ]
+    },
+    "MARK Salt works: Short of salt.": {
+     "towns": 4,
+     "three": [
+      "r2r-village-36",
+      "r2r-village-53",
+      "r2r-town-3"
+     ]
+    },
+    "MARK Fishmonger: Short of fish.": {
+     "towns": 4,
+     "three": [
+      "r2r-village-49",
+      "r2r-village-57",
+      "r2s-succession_void-village-0"
+     ]
+    },
+    "GAP No fish reaches the fishmonger.": {
+     "towns": 4,
+     "three": [
+      "r2r-village-49",
+      "r2r-village-57",
+      "r2s-succession_void-village-0"
+     ]
+    },
+    "NEEDED Needed, and not brought in: fish": {
+     "towns": 4,
+     "three": [
+      "r2r-village-49",
+      "r2r-village-57",
+      "r2s-succession_void-village-0"
+     ]
+    },
+    "MARK Smelter: Short of iron ore or copper ore or gold or silver ore.": {
+     "towns": 4,
+     "three": [
+      "r2r-city-5",
+      "r2r-city-17",
+      "r2r-city-36"
+     ]
+    },
+    "GAP No iron ore, copper ore or gold or silver ore reaches the smelter.": {
+     "towns": 4,
+     "three": [
+      "r2r-city-5",
+      "r2r-city-17",
+      "r2r-city-36"
+     ]
+    },
+    "NEEDED Needed, and not brought in: animal hides": {
+     "towns": 3,
+     "three": [
+      "r2r-village-14",
+      "r2s-religious_conversion-village-3",
+      "r2s-wartime-village-2"
+     ]
+    },
+    "MARK Apothecary: Short of medicinal herbs or water from the hot springs.": {
+     "towns": 2,
+     "three": [
+      "r2r-village-13",
+      "r2s-mass_migration-village-0"
+     ]
+    },
+    "GAP No medicinal herbs or water from the hot springs reaches the apothecary.": {
+     "towns": 2,
+     "three": [
+      "r2r-village-13",
+      "r2s-mass_migration-village-0"
+     ]
+    },
+    "MARK Alchemist shop: Short of medicinal herbs or water from the hot springs.": {
+     "towns": 2,
+     "three": [
+      "r2r-town-51",
+      "r2s-insurgency-town-2"
+     ]
+    },
+    "GAP No medicinal herbs or water from the hot springs reaches the alchemist shop.": {
+     "towns": 2,
+     "three": [
+      "r2r-town-51",
+      "r2s-insurgency-town-2"
+     ]
+    },
+    "NEEDED Needed, and not brought in: iron ore": {
+     "towns": 2,
+     "three": [
+      "r2r-city-36",
+      "r2s-indebted-metropolis-0"
+     ]
+    },
+    "MARK Smelter: Short of iron.": {
+     "towns": 1,
+     "three": [
+      "r2s-mass_migration-metropolis-1"
+     ]
+    }
+   },
+   "leftCalm": {
+    "Dairy farmer · livestock": {
+     "towns": 14,
+     "three": [
+      "r2r-hamlet-12",
+      "r2r-hamlet-14",
+      "r2r-hamlet-19"
+     ]
+    },
+    "Salt works · salt": {
+     "towns": 8,
+     "three": [
+      "r2r-hamlet-18",
+      "r2r-town-15",
+      "r2r-town-29"
+     ]
+    },
+    "Charcoal burner · timber": {
+     "towns": 4,
+     "three": [
+      "r2r-hamlet-26",
+      "r2r-hamlet-48",
+      "r2r-hamlet-59"
+     ]
+    },
+    "Luxury goods quarter · luxury goods": {
+     "towns": 4,
+     "three": [
+      "r2r-city-21",
+      "r2r-city-23",
+      "r2r-metropolis-17"
+     ]
+    }
+   }
+  }
+ }
+}

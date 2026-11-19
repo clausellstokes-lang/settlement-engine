@@ -32,7 +32,8 @@ describe('row 95 — the dropped scope slots take a twin that presumes nothing',
   });
   it('a mesoamerican place with no market prints the twin; with a market, the original', () => {
     expect(cultureScopeLine(place('mesoamerican', []))).toMatch(/on tribute and the ritual calendar/);
-    expect(cultureScopeLine(place('mesoamerican', [{ name: 'Market square', category: 'Economy' }]))).toMatch(/market-and-waterworks/);
+    // R2-CODE-B-SIDE item 5: the waterworks are a house the roster holds, so the original is read with one.
+    expect(cultureScopeLine(place('mesoamerican', [{ name: 'Market square', category: 'Economy' }, { name: 'Aqueduct or water system' }]))).toMatch(/market-and-waterworks/);
   });
   it('a south-asian place with no market or temple prints the twin', () => {
     expect(cultureScopeLine(place('south_asian', []))).toMatch(/built around the tank, in quarters by trade and kin/);

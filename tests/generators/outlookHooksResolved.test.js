@@ -10,23 +10,29 @@ import { describe, expect, it } from 'vitest';
 import { deriveSupplyRiskAnalysis, OUTLOOK_HOOK_SIBLINGS } from '../../src/generators/economy/foodBalance.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
 
-const TIMBER = Object.keys(OUTLOOK_HOOK_SIBLINGS).find((t) => t.includes('shipbuilding'));
-const TWIN = OUTLOOK_HOOK_SIBLINGS[TIMBER].find((l) => l.twinOf).text;
+// COHERENCE-AGREE (2026-11-11): the timber line has two events, each with its navigable original and
+// its twin; a place draws one by its size. Re-keyed by identity: every navigable original, every twin.
+const TIMBER_SETS = Object.values(OUTLOOK_HOOK_SIBLINGS).filter((set) => set[0].needs?.includes('navigable'));
+const ORIGINALS = TIMBER_SETS.map((set) => set[0].text);
+const TWINS = TIMBER_SETS.map((set) => set.find((l) => l.twinOf).text);
 const INSTITUTIONS = [{ name: 'Sawmill', category: 'Crafts' }];
 const BALANCE = { deficit: 0, dailyProduction: 10, dailyNeed: 10 };
+// BAR3-DEFECON-2 (2026-11-15, C48585): the timber events say a supply has stopped, so they read the record's own import list
+// (the iron hooks' rule); this fixture town must import timber, so its record now lists the import it presumes.
 const hooksFor = (config) => deriveSupplyRiskAnalysis(800, { mustImport: ['timber'] }, INSTITUTIONS, config,
-  BALANCE, () => factsOf({ institutions: INSTITUTIONS, config, tier: 'town' })).plotHooks.map((h) => h.hook);
+  BALANCE, () => factsOf({ institutions: INSTITUTIONS, config, tier: 'town', economicState: { primaryImports: ['Timber'] } })).plotHooks.map((h) => h.hook);
 
 describe('the outlook hooks resolve (CENSUS-1f unit 3)', () => {
   it('a plains road town is not told its shipbuilding stalls', () => {
     const hooks = hooksFor({ tradeRouteAccess: 'road', terrainType: 'plains', tier: 'town' });
-    expect(hooks).toContain(TWIN);
-    expect(hooks).not.toContain(TIMBER); // anchored: the same hooks are proven to carry the twin on the line above
+    expect(TIMBER_SETS).toHaveLength(2);
+    expect(hooks.filter((h) => TWINS.includes(h))).toHaveLength(1);
+    expect(hooks.filter((h) => ORIGINALS.includes(h))).toEqual([]); // anchored: the same hooks are proven to carry one twin on the line above
   });
 
   it('a coastal port keeps the shipbuilding line', () => {
     const hooks = hooksFor({ tradeRouteAccess: 'port', terrainType: 'coastal', tier: 'town' });
-    expect(hooks).toContain(TIMBER);
+    expect(hooks.filter((h) => ORIGINALS.includes(h))).toHaveLength(1);
   });
 });
 
@@ -61,7 +67,14 @@ describe('the starving outlook set (CENSUS-3g unit 5)', () => {
   });
 
   it('the twin answers the moderate gap only', () => {
-    expect(SET[1]).toMatchObject({ twinOf: STARVING, excludes: ['food: ≤ deficit'], needs: ['food: ≤ pressured'] });
+    // R3-CODE-C-2 (CENSUS-2 kind a): re-keyed by identity (the moderate twin's declaration) with its cause: a
+    // merchant who offers food must be able to come, so the twin, like its original, refuses an isolated route
+    // and a siege; the famine there reads the set's third member, which names no merchant.
+    expect(SET[1]).toMatchObject({ twinOf: STARVING, excludes: ['food: ≤ deficit', 'route: isolated', 'crisis: under_siege'], needs: ['food: ≤ pressured'] });
+    // TAIL-CRISIS (READ-ALL 21965): re-keyed by identity with its cause: the banditry member refuses a siege (no road to
+    // rob on), and a besieged famine reads the fourth member.
+    expect(SET[2]).toEqual({ text: 'The settlement is starving, and its hungriest are turning to banditry.', needs: ['food: ≤ deficit'], excludes: ['crisis: under_siege'] });
+    expect(SET[3]).toEqual({ text: 'The settlement is starving, and its hungriest steal what food they can find.', needs: ['food: ≤ deficit', 'crisis: under_siege'] });
   });
 });
 

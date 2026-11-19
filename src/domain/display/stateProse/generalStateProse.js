@@ -81,11 +81,12 @@ import { TIME_BANDS, timeBandOf, timeBandWord } from '../heraldCausalGrammar.js'
 import { composeStateProse } from './composeStateProse.js';
 import { generalStateProseCandidates } from './generalStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
+import { powerSentenceName } from '../powerSentenceName.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { defenceOf } from '../../facts/defence.js';
 import { marketOf } from '../../facts/market.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
-import { factsAnswered } from '../../facts/factsAnswered.js';
+import { factsAnswered } from '../../facts/factsAnswered.js'; import { shapeYieldingKey } from '../../facts/shapingEvent.js'; // BAR4-HISTORY T1-SHAPE
 
 /** @typedef {import('./legibilityRung.js').LegibilityRung} LegibilityRung */
 
@@ -452,7 +453,10 @@ export function yearBand(years) {
   const band = timeBandOf(years, 52);
   // COHERENCE-PRESUME (the chair's ruling B): the herald's ladder calls up to twenty-five years "a decade",
   // and the page printed "a decade old" beside "23y ago". In years, past fifteen a span is a generation.
-  return band.id === 'a_decade' && years > 15 ? (TIME_BANDS.find((b) => b.id === 'a_generation') ?? band) : band;
+  // BAR7-LINES (the LOW "a generation old" of 40 to 60 years, 100 towns of the 720): from forty years the generation band
+  // says two generations; it keeps its id, so a reader that asks which band it is reads what it read before
+  const generation = band.id === 'a_decade' && years > 15 ? (TIME_BANDS.find((b) => b.id === 'a_generation') ?? band) : band;
+  return generation.id === 'a_generation' && years >= 40 ? /** @type {typeof band} */ (/** @type {unknown} */ (Object.freeze({ ...generation, attributive: "two generations'", span: 'two generations', since: 'two generations on', predicate: 'two generations old' }))) : generation;
 }
 
 /**
@@ -570,15 +574,18 @@ function nearestEvent(list) {
 }
 
 /**
- * DS-GEN-9's demoted `anchor` dimension (kernel law 5). STRICTLY BOOLEAN, and `undefined` is
- * NOT "not anchored": measured over 202 generated events the field is a real boolean on most
- * rows and simply absent on others, and an absent flag is a record that has not answered the
- * question rather than one that answered no. An unanswered dimension reads as silence.
+ * DS-GEN-9's demoted `anchor` dimension (kernel law 5). An ABSENT flag is "not anchored" (the chair's ruling of
+ * 2026-11-13 to W2-B-DECLARE's second seat, on the writing lane's request): the generator sets `anchored: true` only
+ * on an event its anchor pass put in (`historyGenerator.js`, the anchor replacement), and its own timeline reads every
+ * other event as `anchored: e.anchored || false` — so an event with no flag is one the anchor pass did not place, not
+ * one whose answer is unknown. Measured on the census's 720 births: 70 towns' marker events carry no flag, and the
+ * pool fell silent in every one (law 5 silences a pool partitioned by a dimension the desk did not answer). A value
+ * that is neither a boolean nor absent answers nothing.
  * @param {unknown} anchored @returns {string|null} a value of STATE_MARK_DIMENSIONS.anchor
  */
 export function eventAnchorDimension(anchored) {
   if (anchored === true) return 'anchored';
-  if (anchored === false) return 'not anchored';
+  if (anchored === false || anchored === undefined) return 'not anchored';
   return null;
 }
 
@@ -1288,8 +1295,15 @@ export function institutionsPoolKey(inst, record = undefined) {
   const hasHospital = record && typeof record === 'object'
     ? defenceOf(/** @type {{ institutions?: unknown }} */ (record)).hospital
     : inst.hasHospital === true;
+  // COHERENCE-AGREE (the chair's note of 2026-11-11): GARRISONED says "paid hands keep the town
+  // safe", so given the record it reads the defence home's paid forces — a garrison, a watch or a
+  // hired company — never the flag bag's military row, which counts walls and a militia too.
+  const defence = record && typeof record === 'object' ? defenceOf(/** @type {{ institutions?: unknown }} */ (record)) : null;
+  const paidHands = defence
+    ? defence.garrison || defence.watch || defence.mercenary || inst.hasNavy === true
+    : inst.hasMilitaryInst === true || inst.hasNavy === true || inst.hasWatch === true;
   const key = (inst.hasCourtSystem === true && inst.hasPrison === true) ? 'ADMINISTERED'
-    : (inst.hasMilitaryInst === true || inst.hasNavy === true || inst.hasWatch === true) ? 'GARRISONED'
+    : paidHands ? 'GARRISONED'
       : inst.hasMagicInst === true ? 'LETTERED'
         : (inst.hasGranary === true || hasHospital) ? 'PROVISIONED'
           : 'BARE';
@@ -1912,8 +1926,10 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
         candidates: generalStateProseCandidates('DS-GEN-2', readings),
         slots: {
           ...slots,
-          faction: properFill(text(parties[0])),
-          faction2: properFill(text(parties[1])),
+          // TAIL-DISPLAY-CIVIC-3 V1: a power named in a sentence takes the one leaf's form ("Military/Guard" -> "The Guard",
+          // display/powerSentenceName.js); no pool of this desk sets an article before {faction} or {faction2}
+          faction: properFill(powerSentenceName(text(parties[0]))),
+          faction2: properFill(powerSentenceName(text(parties[1]))),
           issue: phraseFill(conflict?.issue),
           stakes: phraseFill(conflict?.stakes),
         },
@@ -2110,7 +2126,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       const line = relLine(crossEngagementPoolKey(row), {
         ...slots,
         counterpart: properFill(text(/** @type {{partnerSettlement?: unknown}} */ (row)?.partnerSettlement)),
-        faction: properFill(text(/** @type {{factionName?: unknown}} */ (row)?.factionName)),
+        faction: properFill(powerSentenceName(text(/** @type {{factionName?: unknown}} */ (row)?.factionName))),
       });
       return line && line.sentence ? line : null;
     }));
@@ -2197,7 +2213,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       record: recordKey
         ? legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-16', {
           ...options,
-          spineKey: recordKey,
+          spineKey: shapeYieldingKey(recordKey, calamityFill(calamityRow?.name), hist.historicalCharacter, CORPUS['DS-GEN-16'].pools), // BAR4-HISTORY T1-SHAPE (SH1b): one shaping event a page (facts/shapingEvent.js)
           candidates: generalStateProseCandidates('DS-GEN-16', readings),
           slots: {
             ...slots,
@@ -2210,7 +2226,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       // memory, at DS-GEN-16's one speaking position (`history.legacy`).
       legacy: Object.freeze([
         livingMemoryName ? legacyLine('LIVING-MEMORY', { calamity: calamityFill(livingMemoryName) }) : null,
-        legacy ? legacyLine(legacy.key, {
+        legacy ? legacyLine(/** @type {string} */ (shapeYieldingKey(legacy.key, calamityFill(legacy.row.eventName), hist.historicalCharacter, CORPUS['DS-GEN-16'].pools)), { // BAR4-HISTORY T1-SHAPE (SH1b)
           calamity: calamityFill(text(legacy.row.eventName)),
           timeband_age: timebandAgeFill(legacy.row.yearsAgo),
         }) : null,

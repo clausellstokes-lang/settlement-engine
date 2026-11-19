@@ -1,0 +1,5 @@
+--- a/src/generators/priorityHelpers.js
++++ b/src/generators/priorityHelpers.js
+@@ getInstitutionNames @@
+-    hasHospital:      hasAny(names, ['hospital','monastery','healer','friary']),
++    hasHospital:      home.hasHospital || home.hasHealer, // COHERENCE-AGREE-6 (F8 (ii)): the defence home's hospital or healer (defenseFactsOf)

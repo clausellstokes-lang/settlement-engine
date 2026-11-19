@@ -1,0 +1,586 @@
+## cold-famine-hamlet-13
+  tab before: Critical ▼ | The hamlet has never needed to think about what is outside it, and does not.
+  tab after:  Critical ▼ | The hamlet has never needed to think about what is outside it, and does not.
+  pdf after:  Beasts & Monsters | Critical | Quiet country and no organised defence, which is all the country asks.
+## cold-famine-thorp-26
+  tab before: Critical ▼ | Whoever walks out of Tighmere, in any direction and at any hour, meets nothing that would justify a watch.
+  tab after:  Critical ▼ | Whoever walks out of Tighmere, in any direction and at any hour, meets nothing that would justify a watch.
+  pdf after:  Beasts & Monsters | Critical | Quiet country and no organised defence, which is all the country asks.
+## cold-hamlet-117
+  tab before: Critical ▼ | Großplatz keeps no organized defense against the country, and in a heartland this quiet the arrangement is a reasonable one rather than a gap.
+  tab after:  Critical ▼ | Großplatz keeps no organized defense against the country, and in a heartland this quiet the arrangement is a reasonable one rather than a gap.
+  pdf after:  Beasts & Monsters | Critical | Quiet country and no organised defence, which is all the country asks.
+## cold-hamlet-200
+  tab before: Critical ▼ | Invasion & War
+  tab after:  Critical ▼ | Invasion & War
+  pdf after:  Beasts & Monsters | Critical | Wild country all round and nobody organised to meet it; any creature of real size would get in.
+## cold-hamlet-78
+  tab before: Weak ▼ | The country around Ormoy is thick with creatures and the hamlet has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+  tab after:  Critical ▼ | The country around Ormoy is thick with creatures and the hamlet has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+  pdf after:  Beasts & Monsters | Critical | Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. No specialist monster hunters.
+## cold-hamlet-93
+  tab before: Weak ▼ | The country around Kamalapat is thick with creatures and the hamlet has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+  tab after:  Critical ▼ | The country around Kamalapat is thick with creatures and the hamlet has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+  pdf after:  Beasts & Monsters | Critical | Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. No specialist monster hunters.
+## cold-thorp-104
+  tab before: Adequate ▼ | The thorp takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.
+  tab after:  Weak ▼ | The thorp takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.
+  pdf after:  Beasts & Monsters | Weak | A palisade and a militia, as most frontier places have: enough for most creatures, not for several attacks at once.
+## cold-thorp-129
+  tab before: Critical ▼ | Invasion & War
+  tab after:  Critical ▼ | Invasion & War
+  pdf after:  Beasts & Monsters | Critical | Wild country all round and nobody organised to meet it; any creature of real size would get in.
+## cold-thorp-177
+  tab before: Weak ▼ | Víkkvam keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the thorp arrives afterwards.
+  tab after:  Critical ▼ | Víkkvam keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the thorp arrives afterwards.
+  pdf after:  Beasts & Monsters | Critical | Active frontier with a militia but no perimeter. Defense is reactive. Attackers choose the point of engagement. Adequate for routine threats; exposed to anything coordinated.
+## cold-thorp-214
+  tab before: Weak ▼ | The country around Ulaanbash is thick with creatures and the thorp has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+  tab after:  Critical ▼ | The country around Ulaanbash is thick with creatures and the thorp has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+  pdf after:  Beasts & Monsters | Critical | Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. No specialist monster hunters.
+## cold-thorp-46
+  tab before: Critical ▼ | The thorp has never needed to think about what is outside it, and does not.
+  tab after:  Critical ▼ | The thorp has never needed to think about what is outside it, and does not.
+  pdf after:  Beasts & Monsters | Critical | Quiet country and no organised defence, which is all the country asks.
+## cold-thorp-70
+  tab before: Weak ▼ | Darhanserai's walls and fighters are holding against the creatures, but each season wears them down, and the thorp is barely keeping up.
+  tab after:  Critical ▼ | Darhanserai's walls and fighters are holding against the creatures, but each season wears them down, and the thorp is barely keeping up.
+  pdf after:  Beasts & Monsters | Critical | Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. No specialist monster hunters.
+## cold-under_siege-hamlet-24
+  tab before: Weak ▼ | The country around Saraibalik is thick with creatures and the hamlet has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+  tab after:  Critical ▼ | The country around Saraibalik is thick with creatures and the hamlet has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+  pdf after:  Beasts & Monsters | Critical | Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. No specialist monster hunters.
+## cold-under_siege-thorp-23
+  tab before: Weak ▼ | Invasion & War
+  tab after:  Critical ▼ | Invasion & War
+  pdf after:  Beasts & Monsters | Critical | Wild country all round and nobody organised to meet it; any creature of real size would get in.
+## cold-wartime-hamlet-37
+  tab before: Weak ▼ | Invasion & War
+  tab after:  Critical ▼ | Invasion & War
+  pdf after:  Beasts & Monsters | Critical | Wild country all round and nobody organised to meet it; any creature of real size would get in.
+## cold-wartime-thorp-34
+  tab before: Weak ▼ | The country around Rundhafen is thick with creatures and the thorp has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+  tab after:  Critical ▼ | The country around Rundhafen is thick with creatures and the thorp has answered it properly: there is a wall to hold and there are people to hold it, and both are in use constantly.
+  pdf after:  Beasts & Monsters | Critical | Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. No specialist monster hunters.
+## fresh5-hamlet-23
+  tab before: Weak ▼ | Doirewick's walls and fighters are holding against the creatures, but each season wears them down, and the hamlet is barely keeping up.
+  tab after:  Critical ▼ | Doirewick's walls and fighters are holding against the creatures, but each season wears them down, and the hamlet is barely keeping up.
+  pdf after:  Beasts & Monsters | Critical | Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. No specialist monster hunters.
+## fresh5-thorp-18
+  tab before: Weak ▼ | Invasion & War
+  tab after:  Critical ▼ | Invasion & War
+  pdf after:  Beasts & Monsters | Critical | Wild country all round and nobody organised to meet it; any creature of real size would get in.
+## fresh5-thorp-51
+  tab before: Weak ▼ | Devaagam's walls and fighters are holding against the creatures, but each season wears them down, and the thorp is barely keeping up.
+  tab after:  Critical ▼ | Devaagam's walls and fighters are holding against the creatures, but each season wears them down, and the thorp is barely keeping up.
+  pdf after:  Beasts & Monsters | Critical | Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. No specialist monster hunters.
+## fresh6-hamlet-14
+  tab before: Critical ▼ | Whoever walks out of Makroikon, in any direction and at any hour, meets nothing that would justify a watch.
+  tab after:  Critical ▼ | Whoever walks out of Makroikon, in any direction and at any hour, meets nothing that would justify a watch.
+  pdf after:  Beasts & Monsters | Critical | Quiet country and no organised defence, which is all the country asks.
+## cold-famine-hamlet-13
+  - **Burial ground**: A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does n
+  - **Wayside shrine**: A plain spot for prayer. No clergy.
+  : Funeral rites and burial. The priest manages the graveyard.
+  A plain spot for prayer. No clergy.
+  A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does not wait for one. Fami
+  Clergy care
+  Clerical care. Basic wound and disease management.
+  Deficit: 69 · divine provision covers 45
+  Funeral rites and burial. The priest manages the graveyard.
+  In famine. Hunger is the disaster this row grades, and it has already come. Clergy provide basic wound care: better than nothing, worse than a hospital.
+  No food comes into Quirigcoatl by trade. Divine provision makes up a little more. Most households go short, and hunger is already here.
+  Production: 68 lbs/day + 45 by divine provision Need: 182 lbs/day Short: 69 lbs/day
+  Ward leaders, tribute officers, priestly institutions, military societies, and dynastic households divide authority.
+  divine provision covers 45
+## cold-famine-thorp-26
+  *One person worth knowing: Toirdelbach Walsh, the household elder, first of Priestly Guidance.*
+  *Priestly Guidance governs.*
+  - **Burial ground**: A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever kn
+  - **Governing power:** Priestly Guidance
+  - **Member of:** Priestly Guidance
+  - **Priestly Guidance** *(governing)*: The priest guides the community, and disputes are brought to the priest to settle.
+  - **Priestly Guidance** split: gains and loses by it at once.
+  - **Standing:** first of Priestly Guidance
+  - **Toirdelbach Walsh** (the household elder · bears the brunt): Wants to hold the people of the Priestly Guidance together through the famine, and remember who helped.
+  - In the famine, Toirdelbach Walsh of Priestly Guidance takes the worst of it: the one with the least say in the house the crisis hits. *(Famine)*
+  : Funeral rites and burial. The priest manages the graveyard.
+  A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever knew the dead best. The
+  Backs Priestly Guidance
+  Celtic-inspired, and it shows: built around kin districts and an assembly ground, on pasture. Governed by Priestly Guidance · Desperate — hunger is eroding order
+  Clergy care
+  Clerical care. Basic wound and disease management.
+  Deficit: 9 · imports cover 38% of gap · divine provision covers 6
+  Each season it gets easier to buy an official at Tighmere: the thorp stays poor, the streets stay badly guarded, and nobody in the Priestly Guidance is mending either.
+  Free of the criminals . Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Free of the criminals. Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Funeral rites and burial. The priest manages the graveyard.
+  Household elder · first of Priestly Guidance
+  In famine. Hunger is the disaster this row grades, and it has already come. Clergy provide basic wound care: better than nothing, worse than a hospital.
+  In the famine, Toirdelbach Walsh of Priestly Guidance takes the worst of it: the one with the least say in the house the crisis hits.
+  One person worth knowing: Toirdelbach Walsh, the household elder, first of Priestly Guidance.
+  Priestly Guidance
+  Priestly Guidance (1) ▲
+  Priestly Guidance 100
+  Priestly Guidance governs.
+  Priestly Guidance split · gains and loses by it at once
+  Production: 14 lbs/day + 9 imported + 6 by divine provision Need: 38 lbs/day Short: 9 lbs/day
+  Ruler Priestly Guidance Religious Strong ▼
+  THE RULING THREE OF PRIESTLY GUIDANCE
+  The power Priestly Guidance (strong) church-guided
+  The priest guides the community, and disputes are brought to the priest to settle.
+  The question of who might replace the Priestly Guidance at Tighmere does not come up, because there is nobody the thorp would name if it did.
+  The ruling three of Priestly Guidance
+  The thorp has no church of its own; its people walk to the next village’s parish church for the rites. The thorp is governed by the Priestly Guidance. Devotion runs deep, and the rites set the rhyth
+  Tighmere grows about a third of what it eats, and carts bring in a little of the rest. Divine provision makes up a little more. Many households go short, and a bad season would bring real hunger.
+  Toirdelbach Walsh, the household elder, holds the seat of the Priestly Guidance. The Priestly Guidance governs Tighmere. Poverty and crime have cost the Priestly Guidance its standing. Few in Tighmere
+  Wants to hold the people of the Priestly Guidance together through the famine, and remember who helped.
+  divine provision covers 6
+  | Toirdelbach Walsh | the household elder | Priestly Guidance | 1 |
+## cold-hamlet-117
+  : Funeral rites and burial. The priest manages the graveyard.
+  Clergy care
+  Clerical care. Basic wound and disease management.
+  Deficit: 70 · divine provision covers 47
+  Funeral rites and burial. The priest manages the graveyard.
+  In famine. Hunger is the disaster this row grades, and it has already come. Clergy provide basic wound care: better than nothing, worse than a hospital.
+  No food comes into Großplatz by trade. Divine provision makes up a little more. Most households go short, and hunger is already here.
+  Production: 57 lbs/day + 47 by divine provision Need: 174 lbs/day Short: 70 lbs/day
+  divine provision covers 47
+## cold-hamlet-200
+  *Priestly Guidance governs.*
+  *Two people worth knowing; Gnaeus Gallus, the elder priest, first of Priestly Guidance, carries the most weight.*
+  - **Gnaeus Gallus** (the elder priest · bears the brunt): Wants to get the people of the Priestly Guidance a fair share of guards before it runs out.
+  - **Governing power:** Priestly Guidance
+  - **Member of:** Priestly Guidance
+  - **Priestly Guidance** *(governing)*: The priest guides the community, and disputes are brought to the priest to settle.
+  - **Priestly Guidance** gains: the church gains while the seat struggles.
+  - **Role:** the elder priest
+  - **Standing:** first of Priestly Guidance
+  - **Wayside shrine**: A plain spot for prayer. No clergy.
+  - In the raids, Gnaeus Gallus of Priestly Guidance takes the worst of it: the one with the least say in the house the crisis hits. *(Beast &amp; Raider Threat)*
+  A plain spot for prayer. No clergy.
+  Backs Priestly Guidance
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+  Elder Priest
+  Free of the criminals . Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Free of the criminals. Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Head · Gnaeus Gallus , the elder priest
+  Head · Gnaeus Gallus, the elder priest
+  In the raids, Gnaeus Gallus of Priestly Guidance takes the worst of it: the one with the least say in the house the crisis hits.
+  Latin-inspired, and it shows: built in masonry around a civic square, and run by patronage and law. Governed by Priestly Guidance · Tense (monster pressure from surrounding region)
+  People at Terravicus grumble, but nobody in the hamlet stands ready to lead them, so Priestly Guidance is safe in the hall.
+  Priestly Guidance
+  Priestly Guidance (1) ▲
+  Priestly Guidance 100
+  Priestly Guidance gains · the church gains while the seat struggles
+  Priestly Guidance governs.
+  Priestly Guidance · first of Priestly Guidance
+  Production: 87 lbs/day + 1 by divine provision Need: 88 lbs/day
+  Ruler Priestly Guidance Religious Strong ▼
+  THE RULING THREE OF PRIESTLY GUIDANCE
+  The Priestly Guidance governs Terravicus. Its seat is held by Gnaeus Gallus, the elder priest. Few in Terravicus still accept the Priestly Guidance's right to rule. Poverty and crime have cost it its 
+  The defences of Terravicus were built for quieter years than these, as Gnaeus Gallus, the elder priest, warned at the last muster.
+  The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. The hamlet is governed by the Priestly Guidance. Devotion runs through every part of life here
+  The power Priestly Guidance (strong) church-guided
+  The priest guides the community, and disputes are brought to the priest to settle.
+  The ruling three of Priestly Guidance
+  The seat Gnaeus Gallus , the elder priest
+  Two people worth knowing; Gnaeus Gallus, the elder priest, first of Priestly Guidance, carries the most weight.
+  Wants to get the people of the Priestly Guidance a fair share of guards before it runs out.
+  What threatens the Priestly Guidance at Terravicus is heresy more than any rival: a rival creed challenges its right to govern, and everybody involved knows it.
+  divine provision covers 1
+  first of Priestly Guidance
+  the elder priest
+  the elder priest · bears the brunt
+  | Gnaeus Gallus | the elder priest | Priestly Guidance | 1 |
+## cold-hamlet-78
+  - **Burial ground**: A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does n
+  - **Religious Authorities**: Church holds substantial temporal power; tithes fund civic works and the clergy&#39;s opinion on appointments carries decisive weight.
+  - **Wayside shrine**: A plain spot for prayer. No clergy.
+  A plain spot for prayer. No clergy.
+  A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does not wait for one. Fami
+  Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight.
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+## cold-hamlet-93
+  *Ask who matters here and you hear four names; Esha Chaudhary, the militia captain, third of Priestly Guidance, comes first.*
+  *Priestly Guidance governs, with Religious Authorities pressing close behind.*
+  - **Burial ground**: A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does n
+  - **Governing power:** Priestly Guidance
+  - **Member of:** Priestly Guidance
+  - **Priestly Guidance** *(governing)*: The priest guides the community, and disputes are brought to the priest to settle.
+  - **Religious Authorities**: Church holds substantial temporal power; tithes fund civic works and the clergy&#39;s opinion on appointments carries decisive weight. The gap between them and Priestly Gu
+  - **Role:** the elder priest
+  - **Shakuntala Chatterjee** (the elder priest · Holds the seat): Wants to give Shiv Basu one task this season that will show whether they can be trusted.
+  - **Standing:** first of Priestly Guidance
+  - **Standing:** second of Priestly Guidance
+  - **Standing:** third of Priestly Guidance
+  A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does not wait for one. Fami
+  Ask who matters here and you hear four names; Esha Chaudhary, the militia captain, third of Priestly Guidance, comes first.
+  Backs Priestly Guidance
+  Carpenter (part-time) · second of Priestly Guidance
+  Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. The gap between them and Priestly Guidance is narrow. A single shift 
+  Citizen militia · third of Priestly Guidance
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+  Elder Priest
+  Free of the criminals . Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Free of the criminals. Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Head · Shakuntala Chatterjee , the elder priest
+  Head · Shakuntala Chatterjee, the elder priest
+  Priestly Guidance
+  Priestly Guidance (3) ▲
+  Priestly Guidance 52
+  Priestly Guidance governs, with Religious Authorities pressing close behind.
+  Priestly Guidance · first of Priestly Guidance
+  Ruler Priestly Guidance Religious Dominant ▼
+  Shakuntala Chatterjee, the elder priest, holds the seat of the Priestly Guidance. The Priestly Guidance governs Kamalapat. In Kamalapat, the Priestly Guidance's right to rule is contested. Poverty and
+  Show the rest of Priestly Guidance that Shiv Basu can be wrong, without ever saying so aloud. — Own a share in the supply of iron, so the work at the citizen militia can never be held to ransom.
+  South-Asian-inspired: built around the tank, in quarters by trade and kin. Governed by Priestly Guidance · Tense — regional monster threat
+  THE RULING THREE OF PRIESTLY GUIDANCE
+  The Priestly Guidance at Kamalapat rules by its faith: every decision is checked against doctrine first, and only then against what the hamlet needs.
+  The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. The hamlet is governed by the Priestly Guidance. Devotion runs deep, and the rites set the rhy
+  The power Priestly Guidance (dominant) church-guided
+  The priest guides the community, and disputes are brought to the priest to settle.
+  The ruling three of Priestly Guidance
+  The seat Shakuntala Chatterjee , the elder priest
+  Visitors to Kamalapat are quietly told to stay polite to Religious Authorities as well as to Priestly Guidance, and nobody says why.
+  first of Priestly Guidance
+  the carpenter · weak · the elder priest
+  the elder priest
+  the elder priest · Holds the seat
+  the elder priest · grudging · the militia captain
+  the militia captain · stable · the elder priest
+  | Esha Chaudhary | the militia captain | Priestly Guidance | 10 |
+  | Shakuntala Chatterjee | the elder priest | Priestly Guidance | 2 |
+  | Shiv Basu | the carpenter | Priestly Guidance | 3 |
+## cold-thorp-104
+  - **Burial ground**: A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever kn
+  - **Wayside shrine**: Simple prayer marker. No resident clergy.
+  A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever knew the dead best. The
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+  Simple prayer marker. No resident clergy.
+## cold-thorp-129
+  - **Burial ground**: A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever kn
+  - **Wayside shrine**: Simple prayer marker. No resident clergy.
+  A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever knew the dead best. The
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+  Simple prayer marker. No resident clergy.
+## cold-thorp-177
+  - **Burial ground**: A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.
+  - **Wayside shrine**: A modest prayer marker. No clergy in residence.
+  : Funeral rites and burial. The priest manages the graveyard.
+  A modest prayer marker. No clergy in residence.
+  A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+  Funeral rites and burial. The priest manages the graveyard.
+## cold-thorp-214
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+## cold-thorp-46
+  *Ask who matters here and you hear two names; Ughul Taichiud, the elder priest, first of Priestly Guidance, comes first.*
+  *Priestly Guidance governs.*
+  - **Burial ground**: A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.
+  - **Governing power:** Priestly Guidance
+  - **Member of:** Priestly Guidance
+  - **Priestly Guidance** *(governing)*: The priest guides the community, and disputes are brought to the priest to settle.
+  - **Role:** the elder priest
+  - **Standing:** first of Priestly Guidance
+  - **Standing:** second of Priestly Guidance
+  - **Ughul Taichiud** (the elder priest · Holds the seat): Wants to keep Timur Taichiud in second place by giving them enough to want and nothing to take.
+  - **Wayside shrine**: Simple prayer marker. No resident clergy.
+  A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.
+  Ask who matters here and you hear two names; Ughul Taichiud, the elder priest, first of Priestly Guidance, comes first.
+  Backs Priestly Guidance
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+  Elder Priest
+  Fishing community · second of Priestly Guidance
+  Free of the criminals . Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Free of the criminals. Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Head · Ughul Taichiud , the elder priest
+  Head · Ughul Taichiud, the elder priest
+  Priestly Guidance
+  Priestly Guidance (2) ▲
+  Priestly Guidance 100
+  Priestly Guidance governs.
+  Priestly Guidance · first of Priestly Guidance
+  Ruler Priestly Guidance Religious Dominant ▼
+  Simple prayer marker. No resident clergy.
+  Stand by Ughul Taichiud in their next quarrel, whoever it is with. — Be the first person Priestly Guidance would turn to, before anyone thinks to ask Ughul Taichiud.
+  Steppe-inspired. Ask about the place and you are told it is built for a pastoral life half-settled and half-moving, held by clan and caravan. Governed by Priestly Guidance · Stable
+  THE RULING THREE OF PRIESTLY GUIDANCE
+  The power Priestly Guidance (dominant) church-guided
+  The priest guides the community, and disputes are brought to the priest to settle.
+  The question of who might replace the Priestly Guidance at Vatanordu does not come up, because there is nobody the thorp would name if it did.
+  The ruling three of Priestly Guidance
+  The seat Ughul Taichiud , the elder priest
+  The thorp has no church of its own; its people walk to the next village’s parish church for the rites. The thorp is governed by the Priestly Guidance. Devotion runs deep, and the rites set the rhyth
+  Vatanordu is governed by the Priestly Guidance. Ughul Taichiud, the elder priest, holds its seat. In Vatanordu, the Priestly Guidance's right to rule is contested. Poverty and weak defences are the re
+  first of Priestly Guidance
+  the boat-headman · strong · the elder priest
+  the elder priest
+  the elder priest · Holds the seat
+  the elder priest · genuine · the boat-headman
+  | Timur Taichiud | the boat-headman | Priestly Guidance | 2 |
+  | Ughul Taichiud | the elder priest | Priestly Guidance | 2 |
+## cold-thorp-70
+  *Priestly Guidance governs, with Religious Authorities pressing close behind.*
+  *Two people worth knowing; Oyun Kiyad, the camp foreman, second of Priestly Guidance, carries the most weight.*
+  - **Burial ground**: A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.
+  - **Governing power:** Priestly Guidance
+  - **Member of:** Priestly Guidance
+  - **Oyun Kiyad** (the camp foreman · bears the brunt): Wants to get the people of the Priestly Guidance a fair share of food before it runs out.
+  - **Priestly Guidance** *(governing)*: The priest guides the community, and disputes are brought to the priest to settle.
+  - **Priestly Guidance** split: gains and loses by it at once.
+  - **Religious Authorities**: Church holds substantial temporal power; tithes fund civic works and the clergy&#39;s opinion on appointments carries decisive weight.
+  - **Standing:** first of Priestly Guidance
+  - **Standing:** second of Priestly Guidance
+  - In the famine, Oyun Kiyad of Priestly Guidance takes the worst of it: the one with the least say in the house the crisis hits. *(Famine)*
+  A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.
+  Backs Priestly Guidance
+  Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight.
+  Clergy care
+  Clerical care. Basic wound and disease management.
+  Each season it gets easier to buy an official at Darhanserai: the thorp stays poor, the streets stay badly guarded, and nobody in the Priestly Guidance is mending either.
+  Free of the criminals . Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Free of the criminals. Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Household elder · first of Priestly Guidance
+  In famine. Hunger is the disaster this row grades, and it has already come. Clergy provide basic wound care: better than nothing, worse than a hospital.
+  In the famine, Oyun Kiyad of Priestly Guidance takes the worst of it: the one with the least say in the house the crisis hits.
+  Make sure Borchigid Borjigin is not left behind by the changes in the work. — Rise past Borchigid Borjigin in Priestly Guidance on their own merit, owing no one for the climb.
+  Pay every hand at the household in full and on time this season. — Lead Priestly Guidance so long and so well that no one, Oyun Kiyad included, thinks of replacing them.
+  People take their marriages, inheritances and hard times to Religious Authorities, not to Priestly Guidance, and the two keep quarrelling over who decides what.
+  Priestly Guidance
+  Priestly Guidance (2) ▲
+  Priestly Guidance 32
+  Priestly Guidance governs, with Religious Authorities pressing close behind.
+  Priestly Guidance split · gains and loses by it at once
+  Priestly Guidance ~ Religious Authorities stable
+  Ruler Priestly Guidance Religious Strong ▼
+  Steppe-inspired. Ask about the place and you are told it is built for a pastoral life half-settled and half-moving, held by clan and caravan. Governed by Priestly Guidance · Desperate — hunger is e
+  THE RULING THREE OF PRIESTLY GUIDANCE
+  The Priestly Guidance at Darhanserai rules by its faith: every decision is checked against doctrine first, and only then against what the thorp needs.
+  The Priestly Guidance governs Darhanserai. Its seat is held by Borchigid Borjigin, the household elder. Poverty and crime have cost the Priestly Guidance its standing. Few in Darhanserai still accept 
+  The challenger at Darhanserai is now the stronger side, but the Priestly Guidance has not changed hands yet. What happens next depends on who moves first.
+  The power Priestly Guidance (strong) church-guided
+  The priest guides the community, and disputes are brought to the priest to settle.
+  The ruling three of Priestly Guidance
+  Two people worth knowing; Oyun Kiyad, the camp foreman, second of Priestly Guidance, carries the most weight.
+  Wants to get the people of the Priestly Guidance a fair share of food before it runs out.
+  Woodcutter's camp · second of Priestly Guidance
+  | Borchigid Borjigin | the household elder | Priestly Guidance | 2 |
+  | Oyun Kiyad | the camp foreman | Priestly Guidance | 3 |
+## cold-under_siege-hamlet-24
+  *Priestly Guidance governs.*
+  *Two people worth knowing; Manduhai Kereit, the militia captain, second of Priestly Guidance, carries the most weight.*
+  - **Burial ground**: A walled plot gated against livestock, kept by the households in turn. The rite waits for a priest passing through; the burial does not.
+  - **Governing power:** Priestly Guidance
+  - **Manduhai Kereit** (the militia captain · defends): Wants to keep the Priestly Guidance standing long enough for someone else to end the siege.
+  - **Member of:** Priestly Guidance
+  - **Priestly Guidance** *(governing)*: The priest guides the community, and disputes are brought to the priest to settle.
+  - **Priestly Guidance** split: gains and loses by it at once.
+  - **Role:** the elder priest
+  - **Standing:** first of Priestly Guidance
+  - **Standing:** second of Priestly Guidance
+  - **Wayside shrine**: A plain spot for prayer. No clergy.
+  - **Yesüi Qonggirad** (the elder priest · Holds the seat): Secret: Is in contact with the besieging commander \(not as a spy, as a former colleague\).
+  - In the siege, Manduhai Kereit of Priestly Guidance leads the defence: holds the office of the guard. *(Under Siege)*
+  A plain spot for prayer. No clergy.
+  A walled plot gated against livestock, kept by the households in turn. The rite waits for a priest passing through; the burial does not.
+  Backs Priestly Guidance
+  Citizen militia · second of Priestly Guidance
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+  Deficit: 16 · divine provision covers 11
+  Each season it gets easier to buy an official at Saraibalik: the hamlet stays poor, the streets stay badly guarded, and nobody in the Priestly Guidance is mending either.
+  Elder Priest
+  Free of the criminals . Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Free of the criminals. Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Head · Yesüi Qonggirad , the elder priest
+  Head · Yesüi Qonggirad, the elder priest
+  In the siege, Manduhai Kereit of Priestly Guidance leads the defence: holds the office of the guard.
+  No food comes into Saraibalik by trade. Divine provision makes up a little more. Most households go short, and hunger is already here.
+  Priestly Guidance
+  Priestly Guidance (2) ▲
+  Priestly Guidance 100
+  Priestly Guidance governs.
+  Priestly Guidance split · gains and loses by it at once
+  Priestly Guidance · first of Priestly Guidance
+  Production: 13 lbs/day + 11 by divine provision Need: 40 lbs/day Short: 16 lbs/day
+  Ruler Priestly Guidance Religious Strong ▼
+  Steppe-inspired; people here live in a place built for a pastoral life half-settled and half-moving, held by clan and caravan. Governed by Priestly Guidance · Critical (under siege); monsters on the 
+  THE RULING THREE OF PRIESTLY GUIDANCE
+  Take over one of Yesüi Qonggirad&#39;s duties in Priestly Guidance this season, and be seen to do it well. — Keep the settlement intact whatever the cost to themselves
+  Take over one of Yesüi Qonggirad's duties in Priestly Guidance this season, and be seen to do it well. — Keep the settlement intact whatever the cost to themselves
+  The Priestly Guidance at Saraibalik rules by its faith: every decision is checked against doctrine first, and only then against what the hamlet needs.
+  The hamlet has no church of its own; its people walk to the next village’s parish church for the rites. The hamlet is governed by the Priestly Guidance. Devotion runs deep, and the rites set the rhy
+  The power Priestly Guidance (strong) church-guided
+  The priest guides the community, and disputes are brought to the priest to settle.
+  The question of who might replace the Priestly Guidance at Saraibalik does not come up, because there is nobody the hamlet would name if it did.
+  The ruling three of Priestly Guidance
+  The seat Yesüi Qonggirad , the elder priest
+  Two people worth knowing; Manduhai Kereit, the militia captain, second of Priestly Guidance, carries the most weight.
+  Wants to keep the Priestly Guidance standing long enough for someone else to end the siege.
+  Yesüi Qonggirad, the elder priest, holds the seat of the Priestly Guidance. The Priestly Guidance governs Saraibalik. Poverty and crime have cost the Priestly Guidance its standing. Few in Saraibalik
+  divine provision covers 11
+  first of Priestly Guidance
+  the elder priest
+  the elder priest · Holds the seat
+  the elder priest · bitter · the militia captain
+  the militia captain · stable · the elder priest
+  | Manduhai Kereit | the militia captain | Priestly Guidance | 9 |
+  | Yesüi Qonggirad | the elder priest | Priestly Guidance | 1 |
+## cold-under_siege-thorp-23
+  "The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere"
+  *One person worth knowing: Ergene Taichiud, the household elder, first of Priestly Guidance.*
+  *Priestly Guidance governs.*
+  - **Governing power:** Priestly Guidance
+  - **Member of:** Priestly Guidance
+  - **Priestly Guidance** *(governing)*: The priest guides the community, and disputes are brought to the priest to settle.
+  - **Priestly Guidance** split: gains and loses by it at once.
+  - **Standing:** first of Priestly Guidance
+  - **Wayside shrine**: Simple prayer marker. No resident clergy.
+  - In the siege, Ergene Taichiud of Priestly Guidance is the one who would come to terms: holds the seat. *(Under Siege)*
+  : Funeral rites and burial. The priest manages the graveyard.
+  Backs Priestly Guidance
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+  Free of the criminals . Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Free of the criminals. Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Funeral rites and burial. The priest manages the graveyard.
+  Household elder · first of Priestly Guidance
+  In the siege, Ergene Taichiud of Priestly Guidance is the one who would come to terms: holds the seat.
+  One person worth knowing: Ergene Taichiud, the household elder, first of Priestly Guidance.
+  Priestly Guidance
+  Priestly Guidance (1) ▲
+  Priestly Guidance 100
+  Priestly Guidance governs.
+  Priestly Guidance split · gains and loses by it at once
+  Ruler Priestly Guidance Religious Dominant ▼
+  Simple prayer marker. No resident clergy.
+  Steppe-inspired. Ask about the place and you are told it is built for a pastoral life half-settled and half-moving, held by clan and caravan. Governed by Priestly Guidance · Critical (under siege)
+  THE RULING THREE OF PRIESTLY GUIDANCE
+  The Priestly Guidance at Sübeteiserai rules by its faith: every decision is checked against doctrine first, and only then against what the thorp needs.
+  The Priestly Guidance governs Sübeteiserai. Its seat is held by Ergene Taichiud, the household elder. Few in Sübeteiserai still accept the Priestly Guidance's right to rule. Poverty and crime have c
+  The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere
+  The power Priestly Guidance (dominant) church-guided
+  The priest guides the community, and disputes are brought to the priest to settle.
+  The question of who might replace the Priestly Guidance at Sübeteiserai does not come up, because there is nobody the thorp would name if it did.
+  The ruling three of Priestly Guidance
+  The thorp has no church of its own; its people walk to the next village’s parish church for the rites. The thorp is governed by the Priestly Guidance. Devotion runs through every part of life here, 
+  | Ergene Taichiud | the household elder | Priestly Guidance | 1 |
+## cold-wartime-hamlet-37
+  - **Burial ground**: A walled plot gated against livestock, kept by the households in turn. The rite waits for a priest passing through; the burial does not.
+  - **Wayside shrine**: A plain spot for prayer. No clergy.
+  A plain spot for prayer. No clergy.
+  A walled plot gated against livestock, kept by the households in turn. The rite waits for a priest passing through; the burial does not.
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+## cold-wartime-thorp-34
+  - **Burial ground**: A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever kn
+  - **Religious Authorities**: Church holds substantial temporal power; tithes fund civic works and the clergy&#39;s opinion on appointments carries decisive weight. The pastoral burden of wartime \(the
+  A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever knew the dead best. The
+  Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. The pastoral burden of wartime (the called-up praying before departur
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+  Deficit: 3 · divine provision covers 2
+  No food comes into Rundhafen by trade. Divine provision makes up a little more. Some households still go short, and a bad season would leave more of them hungry.
+  Production: 45 lbs/day + 2 by divine provision Need: 50 lbs/day Short: 3 lbs/day
+  divine provision covers 2
+## fresh5-hamlet-23
+  - **Burial ground**: A walled plot gated against livestock, kept by the households in turn. The rite waits for a priest passing through; the burial does not.
+  - **Religious Authorities**: Church holds substantial temporal power; tithes fund civic works and the clergy&#39;s opinion on appointments carries decisive weight. They operate in the shadow of the go
+  - **Wayside shrine**: A plain spot for prayer. No clergy.
+  : Funeral rites and burial. The priest manages the graveyard.
+  A plain spot for prayer. No clergy.
+  A walled plot gated against livestock, kept by the households in turn. The rite waits for a priest passing through; the burial does not.
+  Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. They operate in the shadow of the governing council but not comfortab
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+  Doirewick is governed by the Household Council. Lasairfhiona O'Connor, the household elder, holds its seat. Weak defences keeps Doirewick from more than tolerating the Household Council. The priest ha
+  Funeral rites and burial. The priest manages the graveyard.
+  The priest has been asking questions about a local family&#39;s practices. The family has become very quiet.
+  The priest has been asking questions about a local family's practices. The family has become very quiet.
+## fresh5-thorp-18
+  - **Burial ground**: A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever kn
+  - **Wayside shrine**: A modest prayer marker. No clergy in residence.
+  A corner of the holding left out of the plough, banked with turf and marked with fieldstones. No clergy lives near enough to speak over anyone, so the words are said by whoever knew the dead best. The
+  A modest prayer marker. No clergy in residence.
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+## fresh5-thorp-51
+  *One person worth knowing: Tara Ahuja, the elder priest, first of Priestly Guidance.*
+  *Priestly Guidance governs.*
+  - **Burial ground**: A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.
+  - **Governing power:** Priestly Guidance
+  - **Member of:** Priestly Guidance
+  - **Priestly Guidance** *(governing)*: The priest guides the community, and disputes are brought to the priest to settle.
+  - **Role:** the elder priest
+  - **Standing:** first of Priestly Guidance
+  - **Tara Ahuja** (the elder priest · Holds the seat): Wants to put their own work in order, down to the last detail.
+  - **Wayside shrine**: A modest prayer marker. No clergy in residence.
+  A modest prayer marker. No clergy in residence.
+  A turf-banked corner of the holding, kept out of the plough and marked with fieldstones. No clergy is near enough to speak, so the words fall to whoever knew the dead best.
+  Backs Priestly Guidance
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+  Elder Priest
+  Free of the criminals . Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Free of the criminals. Nobody at the head of Priestly Guidance answers to a criminal house, and no criminal power here is strong enough to push it.
+  Head · Tara Ahuja , the elder priest
+  Head · Tara Ahuja, the elder priest
+  One person worth knowing: Tara Ahuja, the elder priest, first of Priestly Guidance.
+  Parties: Priestly Guidance vs Popular candidate vs Religious Authorities
+  Priestly Guidance
+  Priestly Guidance (1) ▲
+  Priestly Guidance / Popular candidate / Religious Authorities
+  Priestly Guidance 100
+  Priestly Guidance Popular candidate Religious Authorities
+  Priestly Guidance governs.
+  Priestly Guidance · first of Priestly Guidance
+  Ruler Priestly Guidance Religious Dominant ▼
+  South-Asian-inspired, built around the tank, in quarters by trade and kin. Governed by Priestly Guidance · Tense — regional monster threat
+  THE RULING THREE OF PRIESTLY GUIDANCE
+  The Priestly Guidance governs Devaagam. Its seat is held by Tara Ahuja, the elder priest. Poverty and weak defences have left the Priestly Guidance's right to rule contested in Devaagam. The church wa
+  The power Priestly Guidance (dominant) church-guided
+  The priest guides the community, and disputes are brought to the priest to settle.
+  The question of who might replace the Priestly Guidance at Devaagam does not come up, because there is nobody the thorp would name if it did.
+  The ruling three of Priestly Guidance
+  The seat Tara Ahuja , the elder priest
+  The thorp has no church of its own; its people walk to the next village’s parish church for the rites. The thorp is governed by the Priestly Guidance. Devotion runs through every part of life here, 
+  What threatens the Priestly Guidance at Devaagam is heresy more than any rival: a rival creed challenges its right to govern, and everybody involved knows it.
+  first of Priestly Guidance
+  the elder priest
+  the elder priest · Holds the seat
+  | Tara Ahuja | the elder priest | Priestly Guidance | 3 |
+## fresh6-hamlet-14
+  - **Burial ground**: A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does n
+  - **Religious Authorities**: Church holds substantial temporal power; tithes fund civic works and the clergy&#39;s opinion on appointments carries decisive weight. The gap between them and Feudal Stew
+  - **Wayside shrine**: Simple prayer location. No clergy.
+  A walled plot at the edge of the settlement, gated against livestock and kept by the households in turn. The rite is held when a priest comes through, and the burial itself does not wait for one. Fami
+  Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight. The gap between them and Feudal Stewardship is narrow. A single shift
+  Clergy care
+  Clergy provide basic wound care: better than nothing, worse than a hospital.
+  Clerical care. Basic wound and disease management.
+  Simple prayer location. No clergy.

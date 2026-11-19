@@ -1,0 +1,2 @@
+page-census: rendering 60 dossiers (4 workers) into <scratchpad>/pc/lim.17f1af7bd
+P6need          —     —    642   53    0  over the bar  r2r-city-0 r2r-city-12 r2r-city-36  (new row; 642 at the base)

@@ -13,6 +13,7 @@ import { describe, expect, it } from 'vitest';
 
 import { HOOK_LINE_POOLS, createConflictHookDraw } from '../../../src/domain/dossier/hookLines.js';
 import { factsOf } from '../../../src/domain/facts/factsOf.js';
+import { powerSentenceName } from '../../../src/data/people/powerSentenceName.js';
 
 const GUARDED = factsOf({ tier: 'town', institutions: [{ name: 'Town watch' }] });
 
@@ -65,8 +66,9 @@ describe('the conflict hooks agree with a plural power', () => {
   it('a singular party reads the old sentence, byte for byte', () => {
     const lines = everyLine('property', 'Elder Council', "Thieves' Guild");
     expect(lines).toContain("Elder Council has posted guards on what it says is its own, and Thieves' Guild says church land claims on guild property was never Elder Council's to hold.");
-    // the head word decides: "Military/Guard" and "Thieves' Guild" are one body each
+    // the head word decides: "Military/Guard" and "Thieves' Guild" are one body each. BAR6-POWERS (2026-11-16, LAW 10h): the
+    // roster label prints in its prose form ("The Guard", `powerSentenceName`), and agrees in the singular
     const mixed = everyLine('licence', 'Military/Guard', 'Merchant Guilds');
-    expect(mixed).toContain('Military/Guard has begun issuing its own papers over control of the market licensing process, and Merchant Guilds are refusing to honour them.');
+    expect(mixed).toContain(`${powerSentenceName('Military/Guard')} has begun issuing its own papers over control of the market licensing process, and Merchant Guilds are refusing to honour them.`);
   });
 });

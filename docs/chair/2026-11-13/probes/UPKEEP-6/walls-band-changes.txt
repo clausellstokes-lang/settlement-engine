@@ -1,0 +1,153 @@
+# COHERENCE-UPKEEP-6, B: the kind of wall, measured (births6.mjs; 05b8ee712 against the B build; 3,036 + 720 fresh6)
+# columns of the band list: size, birth, score before, score after, band before, band after
+births by wall kind {'none': 1553, 'palisade': 422, 'stone': 1781}
+byte-identical record fields {'none': 1553, 'stone': 1781}
+moved {'palisade': 422}
+score change ('hamlet', 'palisade') n 119 mean -4.17 min -5 max -4
+score change ('thorp', 'palisade') n 166 mean -4.16 min -5 max -4
+score change ('village', 'palisade') n 137 mean -4.15 min -5 max -3
+band changes 144 Counter({('hamlet', 'Lightly Defended', 'Vulnerable'): 33, ('thorp', 'Lightly Defended', 'Vulnerable'): 29, ('village', 'Lightly Defended', 'Vulnerable'): 21, ('thorp', 'Vulnerable', 'Undefended'): 20, ('hamlet', 'Vulnerable', 'Undefended'): 16, ('village', 'Vulnerable', 'Undefended'): 13, ('village', 'Defensible', 'Lightly Defended'): 6, ('thorp', 'Defensible', 'Lightly Defended'): 4, ('hamlet', 'Defensible', 'Lightly Defended'): 2})
+   hamlet cold-famine-hamlet-3 26 21 Lightly Defended Vulnerable
+   hamlet cold-famine-hamlet-32 26 22 Lightly Defended Vulnerable
+   hamlet cold-famine-hamlet-33 13 9 Vulnerable Undefended
+   hamlet cold-famine-hamlet-9 12 8 Vulnerable Undefended
+   hamlet cold-hamlet-110 25 21 Lightly Defended Vulnerable
+   hamlet cold-hamlet-112 24 20 Lightly Defended Vulnerable
+   hamlet cold-hamlet-114 25 21 Lightly Defended Vulnerable
+   hamlet cold-hamlet-119 38 34 Defensible Lightly Defended
+   hamlet cold-hamlet-138 12 8 Vulnerable Undefended
+   hamlet cold-hamlet-139 27 23 Lightly Defended Vulnerable
+   hamlet cold-hamlet-151 15 10 Vulnerable Undefended
+   hamlet cold-hamlet-154 24 19 Lightly Defended Vulnerable
+   hamlet cold-hamlet-168 27 22 Lightly Defended Vulnerable
+   hamlet cold-hamlet-199 27 23 Lightly Defended Vulnerable
+   hamlet cold-hamlet-217 26 22 Lightly Defended Vulnerable
+   hamlet cold-hamlet-236 14 9 Vulnerable Undefended
+   hamlet cold-hamlet-24 27 23 Lightly Defended Vulnerable
+   hamlet cold-hamlet-30 25 20 Lightly Defended Vulnerable
+   hamlet cold-hamlet-42 27 23 Lightly Defended Vulnerable
+   hamlet cold-hamlet-43 25 21 Lightly Defended Vulnerable
+   hamlet cold-hamlet-5 26 22 Lightly Defended Vulnerable
+   hamlet cold-hamlet-6 26 21 Lightly Defended Vulnerable
+   hamlet cold-hamlet-62 15 11 Vulnerable Undefended
+   hamlet cold-hamlet-66 25 21 Lightly Defended Vulnerable
+   hamlet cold-hamlet-73 15 10 Vulnerable Undefended
+   hamlet cold-hamlet-78 25 21 Lightly Defended Vulnerable
+   hamlet cold-hamlet-85 25 21 Lightly Defended Vulnerable
+   hamlet cold-hamlet-89 26 22 Lightly Defended Vulnerable
+   hamlet cold-under_siege-hamlet-21 14 9 Vulnerable Undefended
+   hamlet cold-under_siege-hamlet-25 26 22 Lightly Defended Vulnerable
+   hamlet cold-under_siege-hamlet-29 24 20 Lightly Defended Vulnerable
+   hamlet cold-wartime-hamlet-1 25 21 Lightly Defended Vulnerable
+   hamlet cold-wartime-hamlet-14 24 20 Lightly Defended Vulnerable
+   hamlet cold-wartime-hamlet-20 26 22 Lightly Defended Vulnerable
+   hamlet cold-wartime-hamlet-26 25 21 Lightly Defended Vulnerable
+   hamlet cold-wartime-hamlet-35 12 7 Vulnerable Undefended
+   hamlet fresh5-hamlet-10 12 8 Vulnerable Undefended
+   hamlet fresh5-hamlet-23 25 21 Lightly Defended Vulnerable
+   hamlet fresh5-hamlet-26 13 8 Vulnerable Undefended
+   hamlet fresh5-hamlet-34 15 11 Vulnerable Undefended
+   hamlet fresh5-hamlet-41 26 22 Lightly Defended Vulnerable
+   hamlet fresh5-hamlet-45 24 20 Lightly Defended Vulnerable
+   hamlet fresh5-hamlet-47 25 21 Lightly Defended Vulnerable
+   hamlet fresh6-famine-hamlet-10 13 9 Vulnerable Undefended
+   hamlet fresh6-famine-hamlet-5 26 22 Lightly Defended Vulnerable
+   hamlet fresh6-famine-hamlet-7 14 10 Vulnerable Undefended
+   hamlet fresh6-hamlet-0 15 11 Vulnerable Undefended
+   hamlet fresh6-hamlet-10 26 21 Lightly Defended Vulnerable
+   hamlet fresh6-hamlet-39 38 33 Defensible Lightly Defended
+   hamlet fresh6-under_siege-hamlet-11 12 8 Vulnerable Undefended
+   hamlet fresh6-wartime-hamlet-16 25 20 Lightly Defended Vulnerable
+   thorp cold-famine-thorp-1 27 23 Lightly Defended Vulnerable
+   thorp cold-famine-thorp-13 15 11 Vulnerable Undefended
+   thorp cold-famine-thorp-14 12 7 Vulnerable Undefended
+   thorp cold-thorp-103 12 8 Vulnerable Undefended
+   thorp cold-thorp-13 14 10 Vulnerable Undefended
+   thorp cold-thorp-131 25 21 Lightly Defended Vulnerable
+   thorp cold-thorp-153 27 23 Lightly Defended Vulnerable
+   thorp cold-thorp-158 27 23 Lightly Defended Vulnerable
+   thorp cold-thorp-187 15 11 Vulnerable Undefended
+   thorp cold-thorp-188 26 22 Lightly Defended Vulnerable
+   thorp cold-thorp-191 27 22 Lightly Defended Vulnerable
+   thorp cold-thorp-196 27 22 Lightly Defended Vulnerable
+   thorp cold-thorp-214 26 22 Lightly Defended Vulnerable
+   thorp cold-thorp-234 26 22 Lightly Defended Vulnerable
+   thorp cold-thorp-5 26 22 Lightly Defended Vulnerable
+   thorp cold-thorp-57 24 20 Lightly Defended Vulnerable
+   thorp cold-thorp-60 26 22 Lightly Defended Vulnerable
+   thorp cold-thorp-70 14 10 Vulnerable Undefended
+   thorp cold-thorp-98 26 21 Lightly Defended Vulnerable
+   thorp cold-under_siege-thorp-12 13 9 Vulnerable Undefended
+   thorp cold-under_siege-thorp-14 14 10 Vulnerable Undefended
+   thorp cold-under_siege-thorp-2 26 21 Lightly Defended Vulnerable
+   thorp cold-under_siege-thorp-35 14 10 Vulnerable Undefended
+   thorp cold-wartime-thorp-34 26 21 Lightly Defended Vulnerable
+   thorp cold-wartime-thorp-37 27 23 Lightly Defended Vulnerable
+   thorp fresh5-thorp-10 24 20 Lightly Defended Vulnerable
+   thorp fresh5-thorp-13 14 9 Vulnerable Undefended
+   thorp fresh5-thorp-17 24 20 Lightly Defended Vulnerable
+   thorp fresh5-thorp-20 38 34 Defensible Lightly Defended
+   thorp fresh5-thorp-27 12 7 Vulnerable Undefended
+   thorp fresh5-thorp-29 25 21 Lightly Defended Vulnerable
+   thorp fresh5-thorp-35 38 34 Defensible Lightly Defended
+   thorp fresh5-thorp-56 24 20 Lightly Defended Vulnerable
+   thorp fresh5-thorp-6 15 11 Vulnerable Undefended
+   thorp fresh5-thorp-7 27 23 Lightly Defended Vulnerable
+   thorp fresh6-famine-thorp-1 12 8 Vulnerable Undefended
+   thorp fresh6-famine-thorp-11 15 11 Vulnerable Undefended
+   thorp fresh6-thorp-0 14 10 Vulnerable Undefended
+   thorp fresh6-thorp-1 12 8 Vulnerable Undefended
+   thorp fresh6-thorp-10 26 22 Lightly Defended Vulnerable
+   thorp fresh6-thorp-12 15 11 Vulnerable Undefended
+   thorp fresh6-thorp-21 39 35 Defensible Lightly Defended
+   thorp fresh6-thorp-22 25 20 Lightly Defended Vulnerable
+   thorp fresh6-thorp-35 27 23 Lightly Defended Vulnerable
+   thorp fresh6-thorp-36 25 21 Lightly Defended Vulnerable
+   thorp fresh6-thorp-38 13 9 Vulnerable Undefended
+   thorp fresh6-thorp-39 27 23 Lightly Defended Vulnerable
+   thorp fresh6-thorp-50 25 20 Lightly Defended Vulnerable
+   thorp fresh6-under_siege-thorp-13 26 22 Lightly Defended Vulnerable
+   thorp fresh6-wartime-thorp-0 14 10 Vulnerable Undefended
+   thorp fresh6-wartime-thorp-10 12 7 Vulnerable Undefended
+   thorp fresh6-wartime-thorp-12 25 20 Lightly Defended Vulnerable
+   thorp fresh6-wartime-thorp-17 39 35 Defensible Lightly Defended
+   village cold-famine-village-1 28 23 Lightly Defended Vulnerable
+   village cold-famine-village-2 12 8 Vulnerable Undefended
+   village cold-famine-village-21 13 9 Vulnerable Undefended
+   village cold-famine-village-34 14 10 Vulnerable Undefended
+   village cold-famine-village-6 25 21 Lightly Defended Vulnerable
+   village cold-under_siege-village-13 26 22 Lightly Defended Vulnerable
+   village cold-under_siege-village-9 26 21 Lightly Defended Vulnerable
+   village cold-village-10 14 10 Vulnerable Undefended
+   village cold-village-126 38 34 Defensible Lightly Defended
+   village cold-village-136 39 35 Defensible Lightly Defended
+   village cold-village-163 15 11 Vulnerable Undefended
+   village cold-village-164 13 9 Vulnerable Undefended
+   village cold-village-169 26 22 Lightly Defended Vulnerable
+   village cold-village-173 27 22 Lightly Defended Vulnerable
+   village cold-village-174 12 8 Vulnerable Undefended
+   village cold-village-19 27 22 Lightly Defended Vulnerable
+   village cold-village-213 13 9 Vulnerable Undefended
+   village cold-village-26 38 33 Defensible Lightly Defended
+   village cold-village-42 26 22 Lightly Defended Vulnerable
+   village cold-village-48 26 22 Lightly Defended Vulnerable
+   village cold-village-49 41 37 Defensible Lightly Defended
+   village cold-village-61 25 21 Lightly Defended Vulnerable
+   village cold-village-70 25 21 Lightly Defended Vulnerable
+   village cold-village-86 27 22 Lightly Defended Vulnerable
+   village cold-village-92 26 22 Lightly Defended Vulnerable
+   village cold-wartime-village-0 38 34 Defensible Lightly Defended
+   village fresh5-indebted-village-1 24 20 Lightly Defended Vulnerable
+   village fresh5-occupied-village-9 25 21 Lightly Defended Vulnerable
+   village fresh5-plague_onset-village-4 12 8 Vulnerable Undefended
+   village fresh5-succession_void-village-2 15 11 Vulnerable Undefended
+   village fresh5-under_siege-village-7 27 23 Lightly Defended Vulnerable
+   village fresh5-under_siege-village-8 16 11 Vulnerable Undefended
+   village fresh5-village-40 24 20 Lightly Defended Vulnerable
+   village fresh5-village-5 24 20 Lightly Defended Vulnerable
+   village fresh5-village-59 24 20 Lightly Defended Vulnerable
+   village fresh6-under_siege-village-19 13 9 Vulnerable Undefended
+   village fresh6-village-54 27 23 Lightly Defended Vulnerable
+   village fresh6-village-6 24 20 Lightly Defended Vulnerable
+   village fresh6-village-9 40 36 Defensible Lightly Defended
+   village fresh6-wartime-village-12 14 10 Vulnerable Undefended

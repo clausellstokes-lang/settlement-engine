@@ -1063,7 +1063,7 @@ function deriveDefenseReadiness(s) {
     const c = Math.round((led.readinessScore - 50) * 0.6);
     score += c;
     push(contributors, 'defenseProfile.readiness.score', 'measured', c,
-      `Defense readiness score: ${led.readinessScore}.`);
+      `Defense readiness score: ${Math.round(led.readinessScore)}.`); // whole points on the page; the record may carry tenths (COHERENCE-UPKEEP-5)
   }
   // Walls present — read the classified walls DATA, not a stringify regex
   // (the profile always contains the literal key "walls", so the old regex

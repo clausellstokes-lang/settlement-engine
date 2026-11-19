@@ -58,7 +58,7 @@ describe('unit 1 — the crisis-scoped flags stand only where a calm line is (R-
 });
 
 // ── UNIT 2 — the remaining tables ────────────────────────────────────────────────────────────
-import { expectedDeclaration, declaredLiteralsOf } from './census2dTables.test.js';
+import { expectedDeclaration, declaredLiteralsOf, calmLast } from './census2dTables.test.js';
 import { extractSettlementContext } from '../../../src/components/new/dailyLifeLogic.js';
 import { withPresumptionLedger } from '../../../src/domain/facts/presumptionLedger.js';
 
@@ -128,7 +128,7 @@ describe('POLITICAL_FLAVOR — the cascade\'s rows carry the ledger\'s declarati
     'POLITICAL_FLAVOR.religious_heavy[2]': ['institution: temple'],
   };
   /** atoms the row writes in place of the ledger's, by cause (CENSUS-2f unit 5, R-AE's composite landed at `fc45cc1`) */
-  const WRITTEN_FOR = { 'POLITICAL_FLAVOR.religious_heavy[0]': ['sacredHouse'], 'POLITICAL_FLAVOR.religious_heavy[2]': ['sacredHouse'] };
+  const WRITTEN_FOR = { 'POLITICAL_FLAVOR.religious_heavy[0]': ['sacredHouse'], 'POLITICAL_FLAVOR.religious_heavy[2]': ['church'] }; // TAIL-NARRATIVE (READ-ALL 00014): religious_heavy[2]'s local clergy needs a church (a wayside shrine keeps none)
   it('every row declares what its ledger lines say (a closure\'s branches share one row)', () => {
     const want = {};
     for (const pool of ledger('POLITICAL_FLAVOR').pools) for (const line of pool.lines) {
@@ -142,7 +142,7 @@ describe('POLITICAL_FLAVOR — the cascade\'s rows carry the ledger\'s declarati
     const wrong = Object.entries(want).filter(([k, d]) => {
       const [, pool, i] = /^(\w+)\[(\d+)\]$/.exec(k);
       const have = declarationOf(POLITICAL_FLAVOR[pool][Number(i)]);
-      return JSON.stringify({ needs: have.needs, excludes: have.excludes, crisis: have.crisis }) !== d;
+      return JSON.stringify({ needs: have.needs, excludes: have.excludes, crisis: calmLast(have.crisis) }) !== d; // CL17 (2): the found side normalized as the expected is (census2dTables.test.js `calmLast`)
     });
     expect(wrong).toEqual([]);
   });

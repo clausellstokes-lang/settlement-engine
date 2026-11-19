@@ -160,7 +160,13 @@ describe('complete Wizard News address and headline rewrite contract', () => {
     // 2026-11-09 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge, c6ded8e3a; e9070d614's organized-crime rate 0.10 → 0.05 re-dealing the year, at
     // news-headline-contract.mjs's ADDRESS_TOTALS): 44/2/88/0/88/606/792 → 43/2/86/0/86/602/790; one home in, two out. Every row stays indicative.
     // 43/86/602/790 → 44/88/623/790 at the style wave's final tip (STYLE-2-MERGE-7, closing act 4; the causes at news-headline-contract.mjs).
-    expect(baseline.addressTotality.totals).toEqual({ homes: 44, fields: 2, identities: 88, prospectiveIdentities: 0, indicativeIdentities: 88, distinctValues: 623, occurrences: 790 });
+    // 2026-11-15 (TAIL-CLOSE-SWEEP-A at the joined tip dc4bae117, six merge points' generator re-deals, at news-voice-contract.mjs's RE-RECORDED block):
+    // 44/2/88/0/88/623/790 → 42/2/84/0/84/659/834; two homes in, four out. Every row stays indicative.
+    // 2026-11-15 (BAR3-CLOSE-DOORS-1, the close of the round BAR3, the chair's ruling OC1, at news-headline-contract.mjs's ADDRESS_TOTALS):
+    // 42/2/84/0/84/659/834 → 42/2/84/0/84/660/834; no home or address in or out, four rows move a count. Every row stays indicative.
+    // 2026-11-18 (CLOSE-DOORS-1B, the close of 2026-11-18, at the frozen tree 70e557d5b, at news-headline-contract.mjs's ADDRESS_TOTALS):
+    // 42/2/84/0/84/660/834 → 42/2/84/0/84/664/838; no home or address in or out, four rows move a count (applied|boom, applied|urban_fabric). Every row stays indicative.
+    expect(baseline.addressTotality.totals).toEqual({ homes: 42, fields: 2, identities: 84, prospectiveIdentities: 0, indicativeIdentities: 84, distinctValues: 664, occurrences: 838 });
   });
 
   it('A3 freezes both raw lanes and all 26 exact rewrite counts', () => {

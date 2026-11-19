@@ -77,7 +77,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.under_siege.viabilityNote",
-          "text": "Field work and trade have stopped, and everything now turns on how long the food and water last.",
+          "text": "Trade by road, gate and water has stopped, only part of the usual food is still produced here, and everything now turns on how long the food and water last.",
           "needs": [],
           "excludes": [],
           "crisis": [
@@ -134,8 +134,10 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.famine.crisisHook",
-          "text": "A grain merchant has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
-          "needs": [],
+          "text": "A grain merchant has stores laid in before the shortage, enough to matter. They will sell, but their price is not money. The players can intervene in how this plays out.",
+          "needs": [
+            "institution: mill"
+          ],
           "excludes": [],
           "crisis": [
             "famine"
@@ -1195,7 +1197,7 @@
       "lines": [
         {
           "lineId": "STRESS_TYPE_MAP.wartime.crisisHook",
-          "text": "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare. The governing power must decide whether to comply, negotiate, or find a third option.",
+          "text": "An army requisition officer has arrived with orders that will strip the settlement of something it cannot spare. The governing power must decide whether to comply, negotiate, or find a third option.",
           "needs": [],
           "excludes": [],
           "crisis": [

@@ -16,29 +16,42 @@ import { FACTION_VERB_PHRASES } from '../../src/domain/worldPulse/factionCompeti
 
 describe('powerSentenceName / powerPossessive', () => {
   it('a slashed label reads as its first name, and a bloc\'s plural takes a bare apostrophe', () => {
-    expect(powerSentenceName('Military/Guard')).toBe('Military');
+    // POWERS-16 (the chair's ruling (r2), re-keyed by identity): the catalogue label's prose form is a name a sentence holds,
+    // "The Guard" (display/powerSentenceName.js :: PROSE_FORMS); a slashed label NOT in the table keeps the first-name rule
+    expect(powerSentenceName('Military/Guard')).toBe('The Guard');
     expect(powerSentenceName('Monster Hunters / Adventurers')).toBe('Monster Hunters');
     expect(powerSentenceName('Weavers/Textile workers')).toBe('Weavers');
     expect(powerSentenceName('Town Council')).toBe('Town Council');
     expect(powerPossessive('Religious Authorities')).toBe("Religious Authorities'");
     expect(powerPossessive('Merchant Guilds')).toBe("Merchant Guilds'");
     expect(powerPossessive('Monster Hunters / Adventurers')).toBe("Monster Hunters'");
-    expect(powerPossessive('Military/Guard')).toBe("Military's");
+    expect(powerPossessive('Military/Guard')).toBe("The Guard's");
     expect(powerPossessive('Elder Council')).toBe("Elder Council's");
     expect(powerPossessive("Headman's Authority")).toBe("Headman's Authority's");
     expect(powerPossessive('The Peerage')).toBe("The Peerage's");
     expect(powerPossessive('its rival')).toBe("its rival's");
+    // COHERENCE-POWERS-6 (item 8): a plural ending in a VOWEL + s is a plural too (the old rule missed it)
+    expect(powerPossessive('Noble Houses')).toBe("Noble Houses'");
+    expect(powerPossessive('craft guilds')).toBe("craft guilds'");
+    expect(powerPossessive('Multiple market squares')).toBe("Multiple market squares'");
+    expect(powerPossessive('Banking houses')).toBe("Banking houses'");
+    expect(powerPossessive('Front businesses')).toBe("Front businesses'");
+    // the singular -us / -ss / -is endings keep "'s"
+    expect(powerPossessive('Head-of-household consensus')).toBe("Head-of-household consensus's");
+    expect(powerPossessive('duchess')).toBe("duchess's");
+    expect(powerPossessive('crisis')).toBe("crisis's");
   });
 });
 
 describe('on a real run, no power-move line prints a slashed label or a plural "\'s"', () => {
-  // lf-001/-009/-010 carried a plural "'s" at the base, lf-004/-006 a slashed label.
-  const SEEDS = ['lf-001', 'lf-004', 'lf-006', 'lf-009', 'lf-010'];
+  // lf-001/-009/-010 carried a plural "'s" at the base, lf-004/-006 a slashed label; lf-003/-007/-014 carry a
+  // plural-named SUPPRESSED INSTITUTION in a body ("market squares", "merchant guilds", "mills") — the item-8 target.
+  const SEEDS = ['lf-001', 'lf-003', 'lf-004', 'lf-006', 'lf-007', 'lf-009', 'lf-010', 'lf-014'];
   it('every power-move headline and body, on every seed', async () => {
     const { analyze } = await import('../../scripts/generate-landing-fixture.mjs');
     const failures = collectSeedFailures(SEEDS, (seed) => {
-      const lines = analyze(seed).news.filter((e) => e?.kind === 'applied'
-        && /^candidate\.faction\.faction_/.test(String(e.sourceEventId || '')));
+      const faction = analyze(seed).news.filter((e) => /^candidate\.faction\.faction_/.test(String(e.sourceEventId || '')));
+      const lines = faction.filter((e) => e?.kind === 'applied');
       expect(lines.length, `${seed}: anti-vacuity`).toBeGreaterThan(0);
       const bad = [];
       for (const e of lines) {
@@ -46,6 +59,14 @@ describe('on a real run, no power-move line prints a slashed label or a plural "
         const name = did ? String(e.headline).slice(0, -did.length) : String(e.headline);
         const text = `${e.headline} | ${e.summary}`;
         if (/\//.test(text) || /(?:ies|[bcdfghjklmnpqrtvwxyz]s)$/i.test(name) && text.includes(`${name}'s`)) bad.push(text);
+      }
+      // COHERENCE-POWERS-6 (item 8): the suppression line's possessive TARGET — "break the <target> standing" — read
+      // through the leaf, not a literal "'s". The suppression "doing" line is a QUEUED proposal (not applied), so it is
+      // scanned over every faction entry. A plural target given a literal "'s" prints "...s's standing" ("craft guilds's",
+      // "market squares's"); a correctly-formed plural bares it ("...s' standing"). A singular town's "'s" is never a target.
+      for (const e of faction) {
+        const sup = String(e.summary || '').match(/break the (.+?) standing/);
+        if (sup && /s's$/.test(sup[1])) bad.push(`${e.summary}  [plural target "${sup[1]}"]`);
       }
       expect(bad).toEqual([]);
     });

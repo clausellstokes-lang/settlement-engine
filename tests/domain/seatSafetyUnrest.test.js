@@ -23,9 +23,14 @@ import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const POOL = DOSSIER_STATE_PROSE_POWER['DS-POW-4'].pools['riskLabel: Stable (no challengers)'];
-/** The pool's own seat-safety variant, found by the instrument under a succession crisis. */
-const SEAT_SAFE = POOL.find((v) => crisisBlindFindings({ stress: [{ type: 'succession_void' }] }, { power: v.text })
-  .some((f) => f.claim === 'the seat is safe'));
+/**
+ * The pool's seat-safety variant, BY IDENTITY: v3. TAIL-CORPUS-DEF-2 batch 3 (2026-11-15) retired its claim ("{faction} is
+ * safe in the hall" was false in 27 of the 49 census towns that printed it: a Legitimacy Crisis, a Desperate town), so the
+ * instrument no longer finds the claim in the pool; the line keeps its vid, its `no unrest` and its place, in new words.
+ * The instrument's liveness is shown on the RETIRED words (`RETIRED`), and its silence on the line's new ones.
+ */
+const SEAT_SAFE = POOL.find((v) => v.vid === 3);
+const RETIRED = 'People at X grumble, but nobody in the town stands ready to lead them, so X is safe in the hall.';
 
 /** @type {Record<number, any>} */
 const born = {};
@@ -35,8 +40,10 @@ beforeAll(async () => {
 }, 180_000);
 
 describe('rung 2D · the seat-safety line is denied by unrest as well as succession', () => {
-  it('the pool carries the seat-safety variant (non-vacuity)', () => {
+  it('the pool carries the seat-safety variant (non-vacuity), and no variant of the pool makes the claim now', () => {
     expect(SEAT_SAFE).toBeDefined();
+    expect(crisisBlindFindings({ stress: [{ type: 'succession_void' }] }, { power: RETIRED }).map((f) => f.claim)).toContain('the seat is safe');
+    expect(POOL.filter((v) => crisisBlindFindings({ stress: [{ type: 'succession_void' }] }, { power: v.text }).length)).toEqual([]);
   });
 
   // LANDING-R2 seat E: the two seed tables run as plain parameterless tests, every seed collected.
@@ -44,8 +51,10 @@ describe('rung 2D · the seat-safety line is denied by unrest as well as success
     const failures = collectSeedFailures([[1, 'slave_revolt'], [3001, 'insurgency']], ([i, type]) => {
       const s = born[i];
       expect((Array.isArray(s.stress) ? s.stress : [s.stress]).map((x) => x?.type), `soak1k-${i}`).toContain(type);
-      const hits = crisisBlindFindings(s, { power: SEAT_SAFE.text });
+      // the instrument reads the RETIRED words as crisis-blind under the unrest family, and the line's new words not at all
+      const hits = crisisBlindFindings(s, { power: RETIRED });
       expect(hits.map((f) => [f.claim, f.family]), `soak1k-${i} (${type})`).toEqual([['the seat is safe', 'unrest']]);
+      expect(crisisBlindFindings(s, { power: SEAT_SAFE.text }), `soak1k-${i} (${type}): v3's new words`).toEqual([]);
     });
     expectNoSeedFailures(failures, 'the seat-safety line reads crisis-blind under each unrest crisis');
   });

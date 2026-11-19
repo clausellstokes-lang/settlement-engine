@@ -32,13 +32,16 @@
 import { getInstFlags, getStressFlags } from '../helpers.js';
 import { computeRelTension, createTieProseDraw, handlerArchetypeFor, HANDLER_LEVERAGE_KINDS } from '../power/relationshipArchetypes.js';
 import { allegianceOf } from '../../domain/people/allegiance.js';
-import { STRESS_ECONOMIC_EFFECTS } from '../../data/npcData.js';
+import { STRESS_ECONOMIC_EFFECTS, TIE_TEMPER, tieIndexOf } from '../../data/npcData.js';
 import { backingRowFor } from '../../data/institutionBacking.js';
 import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js';
 import { random as _rng } from '../../kernel/rngContext.js';
 import { onStream, seatHouseOf, SEAT_CARD_ID } from './representatives.js';
 import { birthFactsOf } from '../../domain/facts/factsOf.js';
+import { pairSharesPlaceOf } from './pairPlace.js';
+import { sharesPower } from '../../domain/facts/sharedPower.js';
 import { tieArchetype } from '../npc/tieKind.js';
+import { styledTitleOf } from '../../data/faceHonorifics.js';
 
 /** The keyed fork family the ties draw under (declared in the fork census). */
 export const TIES_FORK_LABEL = 'people-ties';
@@ -82,17 +85,10 @@ export function targetWeightOf(card) {
   return weight === 0 ? 0.5 : weight;
 }
 
-/** The powers a card belongs to. @param {Record<string, any>} card @returns {Set<string>} */
-const powersOf = (card) => new Set((Array.isArray(card?.memberships) ? card.memberships : [])
-  .map((m) => String(m?.power || '')).filter(Boolean));
-
-/** Whether two cards share a power (any membership in common). */
-export function sharesPower(a, b) {
-  const mine = powersOf(a);
-  if (!mine.size) return false;
-  for (const p of powersOf(b)) if (mine.has(p)) return true;
-  return false;
-}
+/** Whether two cards share a power (any membership in common): the shared-power home's own rule
+ * (`domain/facts/sharedPower.js`, R2-CODE-A-14, the chair's ruling (s1)), moved there verbatim so the
+ * target's weight here and the `shared power` atom a tie line declares are one reading; re-exported. */
+export { sharesPower };
 
 /**
  * THE TIES: one outgoing tie per card that has a peer, in roster order.
@@ -119,7 +115,15 @@ export function drawTies(cards, place, rng, only = {}) {
   // government only, R-Z) — without it every declared tie index is refused (fail-closed, R-N).
   const tier = place?.tier ?? config.tier;
   const government = place?.government ?? null;
-  const drawTieProse = createTieProseDraw(forceWordsOf(defenseFactsOf({ institutions })), () => birthFactsOf({ institutions, config, tier, powerStructure: { government } }));
+  // BAR4-PEOPLE (the chair's ruling TI1): the draw's facts are the birth's, with the ties between each pair counted
+  // BEFORE any prose is drawn (the `lone tie` atom: a line that says two do not speak needs them to carry no other)
+  // and the `shared place` atom read in the order the line will be WRITTEN (a second tie of a pair's kind is written in the
+  // first tie's order: `relationshipArchetypes.js`, TAIL-TIES-2 T6), so the one who names a successor is the one who heads
+  /** @type {Map<string, number>} */
+  const tieCount = new Map();
+  /** @type {{ order: [any, any] | null }} the tie being written: its two cards in the order its line names them */
+  const writing = { order: null };
+  const drawTieProse = createTieProseDraw(forceWordsOf(defenseFactsOf({ institutions })), () => withPairTies(birthFactsOf({ institutions, config, tier, powerStructure: { government } }), tieCount, writing));
   const family = rng.fork(TIES_FORK_LABEL);
   const weightOf = new Map(cast.map((c) => [c, targetWeightOf(c)]));
 
@@ -153,7 +157,11 @@ export function drawTies(cards, place, rng, only = {}) {
   };
 
   const sources = only?.sources ? cast.filter((c) => only.sources.has(c.id)) : cast;
-  return sources.map((from) => {
+  // BAR4-PEOPLE (the chair's ruling TI1 of 2026-11-16, vetoable by the owner): TWO PASSES. First EVERY DRAW, card by card on
+  // its own fork exactly as before (the target, the kind, the strength); then the prose, which draws nothing, in the same
+  // order. So the pair's ties are known before a line is chosen, and a pair's SECOND tie takes the temper of its first
+  // (`inTemperOf`): no draw is added, moved or re-ordered.
+  const drafts = sources.map((from) => {
     const others = cast.filter((c) => c !== from && c.id !== from.id);
     const weights = others.map((c) => weightOf.get(c) * (sharesPower(from, c) ? SHARED_POWER_FACTOR : 1));
     const fork = family.fork(String(from.id));
@@ -167,25 +175,111 @@ export function drawTies(cards, place, rng, only = {}) {
         : tieArchetype(computeRelTension(from, to, stressFlags, instFlags), from, to); // CENSUS-4 R3: the tie rule, resolved after the roll (MERGE-CAR)
       const pool = RELATIONSHIP_STRENGTHS[archetype.type] || RELATIONSHIP_STRENGTHS.respect;
       const strength = pool[Math.floor(_rng() * pool.length)];
-      const { archetypeKey, proseVariant, description, tension } = drawTieProse(archetype, from, to);
-      return {
-        id: `tie_${from.id}`,
-        from: from.id,
-        to: to.id,
-        type: archetype.type,
-        typeName: archetype.label,
-        description,
-        tension,
-        strength,
-        npc1Name: from.name,
-        npc2Name: to.name,
-        npc1Role: from.role,
-        npc2Role: to.role,
-        archetypeKey,
-        proseVariant,
-        flagDriven: stressFlags.anyActive && FLAG_DRIVEN.has(archetype),
-        ...(handler ? { covert: true, handler: true } : {}),
-      };
+      return { from, to, archetype, strength, handler };
     });
   });
+  for (const { from, to } of drafts) tieCount.set(pairKeyOf(from, to), (tieCount.get(pairKeyOf(from, to)) || 0) + 1);
+  /** @type {Map<string, 'warm' | 'cold' | null>} each pair's first tie's temper, as drawn and printed */
+  const firstTemper = new Map();
+  /** @type {Map<object, Map<string, string>>} each kind's first tie of a pair, as `<from id>><to id>` (its written order) */
+  const firstOrder = new Map();
+  return drafts.map((draft) => {
+    const { from, to, handler } = draft;
+    const key = pairKeyOf(from, to);
+    const { archetype, strength } = firstTemper.has(key) && !handler ? inTemperOf(firstTemper.get(key) ?? null, draft.archetype, draft.strength) : draft;
+    const orders = firstOrder.get(archetype) || new Map();
+    firstOrder.set(archetype, orders);
+    writing.order = orders.get(key) === `${String(to.id)}>${String(from.id)}` ? [to, from] : [from, to];
+    if (!orders.has(key)) orders.set(key, `${String(from.id)}>${String(to.id)}`);
+    const { archetypeKey, proseVariant, description, tension } = drawTieProse(archetype, from, to);
+    writing.order = null;
+    if (!firstTemper.has(key)) firstTemper.set(key, temperOfTie(archetype, strength, proseVariant));
+    return {
+      id: `tie_${from.id}`,
+      from: from.id,
+      to: to.id,
+      type: archetype.type,
+      typeName: archetype.label,
+      description,
+      tension,
+      strength,
+      npc1Name: from.name,
+      npc2Name: to.name,
+      npc1Role: styledTitleOf(from.role, from.gender), // COHERENCE-POWERS-8 (R2): the role word her card styles her by
+      npc2Role: styledTitleOf(to.role, to.gender),
+      archetypeKey,
+      proseVariant,
+      flagDriven: stressFlags.anyActive && FLAG_DRIVEN.has(archetype),
+      ...(handler ? { covert: true, handler: true } : {}),
+    };
+  });
+}
+
+/** The two ids of a pair, unordered. @param {Record<string, any>} a @param {Record<string, any>} b */
+const pairKeyOf = (a, b) => [String(a?.id ?? ''), String(b?.id ?? '')].sort().join('\u0000');
+
+/**
+ * The birth's facts with the pair's lone tie answered from the ties this draw holds (`pairPlace.js :: pairIsLoneOf`
+ * answers it from a record's relationships; the birth's record has none yet), and the pair's place read in the order the
+ * tie being written names them. The (frozen) facts object is the prototype, so every other getter reads as before.
+ * @param {object} facts @param {Map<string, number>} counts @param {{ order: [any, any] | null }} writing
+ */
+function withPairTies(facts, counts, writing) {
+  /** @param {unknown} pair */
+  const isPair = (pair) => Array.isArray(pair) && pair.length === 2;
+  return Object.freeze(Object.create(facts, {
+    loneTie: { enumerable: true, value: (/** @type {unknown} */ pair) => (isPair(pair) ? (counts.get(pairKeyOf(/** @type {any[]} */ (pair)[0], /** @type {any[]} */ (pair)[1])) ?? 0) <= 1 : undefined) },
+    sharesPlace: { enumerable: true, value: (/** @type {unknown} */ pair) => {
+      if (!isPair(pair)) return undefined;
+      const p = /** @type {[any, any]} */ (pair);
+      const order = writing.order && pairKeyOf(writing.order[0], writing.order[1]) === pairKeyOf(p[0], p[1]) ? writing.order : p;
+      return pairSharesPlaceOf(null, order);
+    } },
+  }));
+}
+
+/** A kind and strength's temper (`npcData.js :: TIE_TEMPER`). @param {unknown} type @param {unknown} strength @returns {'warm' | 'cold' | null} */
+function temperOfKind(type, strength) {
+  const kind = typeof type === 'string' && Object.hasOwn(TIE_TEMPER, type) ? /** @type {Record<string, 'warm' | 'cold'>} */ (TIE_TEMPER[/** @type {keyof typeof TIE_TEMPER} */ (type)]) : null;
+  if (!kind) return null;
+  return (typeof strength === 'string' && Object.hasOwn(kind, strength) ? kind[strength] : kind['*']) ?? null;
+}
+
+/**
+ * A drawn tie's temper: its kind and strength's, or warm where its printed line declares the pair's trust full.
+ * @param {any} archetype @param {string} strength @param {number} variant
+ */
+function temperOfTie(archetype, strength, variant) {
+  const index = Number.isInteger(variant) ? tieIndexOf(variant) : -1;
+  const rows = index < 0 ? [] : [archetype?.desc?.lines, archetype?.tension?.lines].filter((l) => Array.isArray(l) && l.length).map((l) => l[index % l.length]);
+  if (rows.some((r) => r && typeof r === 'object' && r.trust === 'full')) return 'warm';
+  return temperOfKind(archetype?.type, strength);
+}
+
+/**
+ * A pair's SECOND tie in the temper of its first (the chair's TI1; no draw): beside a warm first tie an enemy's or a
+ * rival's kind is a respect's (BAR7-LINES: a rival is cold, so it no longer stands for "neither"); beside a cold first tie a
+ * warm strength is its kind's first (a devoted teacher → a formal one; a deep respect → a grudging one), and a kind warm at
+ * every strength (an ally's) is a rival's at its rung (BAR7-LINES, 10i: one pair, one sense). A line that
+ * declares a trust the first denies is held by the prose draw itself (`relationshipArchetypes.js`, BAR2-PEOPLE PP4).
+ * @param {'warm' | 'cold' | null} first @param {any} archetype @param {string} strength
+ */
+function inTemperOf(first, archetype, strength) {
+  const own = temperOfKind(archetype?.type, strength);
+  const rung = Math.max(0, (RELATIONSHIP_STRENGTHS[/** @type {keyof typeof RELATIONSHIP_STRENGTHS} */ (archetype?.type)] || []).indexOf(strength));
+  if (first === 'warm' && own === 'cold') {
+    // BAR7-LINES (10i, C19351): a rival is cold now (`TIE_TEMPER`), so beside a warm first tie an enemy's or a rival's kind
+    // is a respect's, at its rung's strength short of deep (mild, serious, mortal → grudging, genuine, genuine): the second
+    // tie says no more than the first allows, and names no rivalry beside an ally (was: a rival's, under TI1)
+    return { archetype: STRESS_ECONOMIC_EFFECTS.genuine_respect, strength: RELATIONSHIP_STRENGTHS.respect[Math.min(rung, 1)] };
+  }
+  if (first === 'cold' && own === 'warm') {
+    const pool = RELATIONSHIP_STRENGTHS[/** @type {keyof typeof RELATIONSHIP_STRENGTHS} */ (archetype.type)] || [];
+    const cooler = pool.find((s) => temperOfKind(archetype.type, s) !== 'warm');
+    // BAR7-LINES (10i): a kind warm at every strength (an ally's) has no cooler rung: beside a cold first tie it is a rival's,
+    // at the same rung (weak, moderate, strong → professional, personal, bitter), as an enemy's kind turns the other way
+    if (cooler === undefined) return { archetype: STRESS_ECONOMIC_EFFECTS.peer_rivalry, strength: RELATIONSHIP_STRENGTHS.rival[rung] ?? RELATIONSHIP_STRENGTHS.rival[0] };
+    return { archetype, strength: cooler };
+  }
+  return { archetype, strength };
 }

@@ -25,9 +25,15 @@ import { flag } from '../../lib/flags.js';
 import { plotHookText } from '../../lib/proseSeams.js';
 import { collectPlotHooks } from '../../domain/dossier/plotHooks.js';
 import { crisisNoteFor } from '../../domain/dossier/powerStrata.js';
-import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
+import { deriveFoodBalance, deriveProsperityPosture, deriveViability } from '../../domain/display/dossierViewModel.js';
 import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
+// SEAM-PDF item 3 (2026-11-17; BAR6-ECON's C88465): the complexity label as the Economics tab prints it (no "Subsistence" beside a
+// purse past survival), the one reading (`labelBands.js :: complexityLabelShown`), at every print of it below.
+import { complexityLabelShown } from '../../domain/display/labelBands.js';
 import { criticalIssuesOf, stressEffectsOf, viabilityIssueText } from '../../domain/display/validationOnPage.js';
+// BAR7-CARDS (2026-11-17): the Outlook's impaired list and a person's house mark, read by the tabs' own leaves.
+import { stressEffectsShown } from '../../domain/display/impairedListShown.js';
+import { rowMarkText } from '../../domain/display/crisisStoppedRow.js';
 import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
 import { humanize } from './format.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
@@ -242,7 +248,7 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
         governingName: governing?.faction || governing?.name || null,
       },
       economy: {
-        complexity: ec?.economicComplexity || null,
+        complexity: complexityLabelShown(ec) || null,
         topExport: labelOfThing(ec?.primaryExports?.[0]),
       },
       defense: {
@@ -302,7 +308,7 @@ function identitySlice(s, canonical = s) {
     anchor: {
       governingName:  governing?.faction || governing?.name || null,
       prosperity:     ec?.prosperity || null,
-      complexity:     ec?.economicComplexity || null,
+      complexity:     complexityLabelShown(ec) || null,
       safety:         sp?.safetyLabel || null,
       // ⚠ AN UNCOMPUTED ECONOMY IS NOT A BALANCED ONE. deriveFoodBalance returns
       // `available:false` with 0/0 for a settlement whose economy was never
@@ -383,7 +389,7 @@ function overviewSlice(active, ai, useAi) {
     arrivalScene:       useAi ? (ai?.arrivalScene || ai?.aiNarrative?.arrivalScene || null) : null,
     pressureSentence:   useAi ? (ai?.pressureSentence || ai?.aiNarrative?.pressureSentence || null) : null,
     character:          s?.history?.historicalCharacter || null,
-    prosperity,
+    prosperity,         prosperityInCrisis: deriveProsperityPosture(s).inCrisis, // ruling 1(a): the label's ordinary-years sentence, or null (one line: the line-keyed FPZ rows below stay put)
     prosperityTone:     PROSPERITY_TONE[(prosperity || '').toLowerCase()] || 'muted',
     safety,
     safetyTone:         SAFETY_TONE[(safety || '').toLowerCase()] || 'muted',
@@ -399,7 +405,7 @@ function overviewSlice(active, ai, useAi) {
       summary:    s?.economicViability?.foodSecurity?.summary || s?.economicViability?.metrics?.foodBalance?.summary || null,
     },
     economyOutput:      ec?.compound?.economyOutput ?? null,
-    economicComplexity: ec?.economicComplexity || null,
+    economicComplexity: complexityLabelShown(ec) || null,
     defenseScores:      dp?.scores || {},
     defenseScoreAvg:    avgScore(dp?.scores),
     defenseReadiness:   dp?.readiness || null,
@@ -571,6 +577,16 @@ function isArcaneChain(ch) {
   return ARCANE_CHAIN_IDS.some(a => id.includes(a)) || /arcane|magic|spell/.test(label);
 }
 
+/**
+ * BAR7-CARDS item 2: the mark the leaf gives the card's house, read from the record's roster row of that name.
+ * @param {any} s the settlement record @param {string | null} houseName @returns {string | null}
+ */
+function houseMarkOf(s, houseName) {
+  if (!houseName) return null;
+  const row = (Array.isArray(s?.institutions) ? s.institutions : []).find((r) => r && r.name === houseName);
+  return row ? rowMarkText(s, 'house', row) : null;
+}
+
 function viabilitySlice(active) {
   const s = active || {};
   const v = s?.economicViability || {};
@@ -583,7 +599,9 @@ function viabilitySlice(active) {
   // render twice (they get their own PDF sections).
   // READER-R1 ruling 2: a CRITICAL stress consequence is one of the critical issues (the
   // summary and `metrics.criticalIssueCount` count it); only the others are stress effects.
-  const stressConsequences = stressEffectsOf(v);
+  // BAR7-CARDS item 3 (2026-11-17; the seam's PDF seat's LEFT item 2): the list "N institutions critically impaired by
+  // siege" prints the houses the Outlook tab prints, by the one leaf both read (`impairedListShown.js`), not the record's.
+  const stressConsequences = stressEffectsShown(stressEffectsOf(v), s);
   // pdf-3: by_design items are pushed to the settlement-root structuralViolations
   // (structuralValidator), NOT economicViability.issues — so the old issues-only
   // filter was permanently empty and those authored plot seeds printed as garbled
@@ -751,7 +769,9 @@ function npcsSlice(active) {
     // to, so the affiliation chip can link to that faction with no name match.
     // PEOPLE-5A (M-1b): the affiliation is the card's FIRST-RANK power, read from its memberships.
     const firstPower = firstPowerOf(n, powerOrder);
-    const factionRefName = labelOfFactionRef(firstPower || n?.faction || n?.category);
+    // NEVER A CATEGORY KEY (COHERENCE-UPKEEP-7, the chair's ruling F2; the fourth read's C-L3): a person in no power
+    // has no label here, so the journal prints no "Member of" row and an empty table cell, never "magic" or "other".
+    const factionRefName = labelOfFactionRef(firstPower || n?.faction);
     return {
       id: n?.id || entityIdFor('npc', n),
       factionLink: factionRefName ? factionIdFromName(factionRefName) : null,
@@ -768,6 +788,11 @@ function npcsSlice(active) {
       // (PEOPLE-5A wires the print: `house` is the house's name, `powerLine` the ranked line).
       // A pre-car record carries neither.
       house: cardHouseOf(n),
+      // BAR7-CARDS item 2 (the chair's ruling CM1, 2026-11-17; vetoable by the owner): THE HOUSE'S MARK, ONE LINE OF ITS
+      // OWN under the card's house line, as the NPC tab's card prints it: the house's `rowMarkText`
+      // (`crisisStoppedRow.js`, the leaf the Institutions and Services tabs read), said once; null for a house it marks
+      // not, a minted face, a DM's person. The person's own sentences (`dealing`, the secrets) print as written.
+      houseMark: houseMarkOf(s, cardHouseOf(n)),
       powers: Array.isArray(n?.memberships)
         ? n.memberships.map((m) => ({ power: m?.power || null, rank: m?.rank ?? null }))
         : [],
@@ -934,7 +959,11 @@ function labelOfHook(h) {
  * The engine sometimes emits severity as an array (`['minor', 'major']`),
  * a min/max object (`{ min: 'minor', max: 'major' }`), or just a string.
  * Without normalization, an array renders as "minormajor" because react-pdf
- * joins array children with no separator. Pick the strongest readable form.
+ * joins array children with no separator.
+ * ⛔ A RANGE IS NOT A RATING (the chair's ruling, R3-TABS second seat): a tension's
+ * record holds the template's list of severities, unresolved, so more than one
+ * severity is a range and NO word is returned (it was joined "minor / major");
+ * nothing is chosen for the reader. One severity returns that word.
  */
 function normSeverity(s) {
   if (s == null) return null;
@@ -942,14 +971,12 @@ function normSeverity(s) {
   if (Array.isArray(s)) {
     const parts = s.map(x => (typeof x === 'string' ? x : (x?.label || x?.value || ''))).filter(Boolean);
     if (parts.length === 0) return null;
-    if (parts.length === 1) return parts[0];
-    // "minor / major" reads correctly; the worst element is usually last
-    return parts.join(' / ');
+    return new Set(parts).size === 1 ? parts[0] : null;
   }
   if (typeof s === 'object') {
     if (s.label) return s.label;
     if (s.value) return String(s.value);
-    if (s.max && s.min && s.max !== s.min) return `${s.min} / ${s.max}`;
+    if (s.max && s.min && s.max !== s.min) return null;
     if (s.max) return s.max;
     if (s.min) return s.min;
     if (s.level) return s.level;

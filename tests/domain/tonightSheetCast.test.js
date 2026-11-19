@@ -17,6 +17,7 @@ import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { CrisisSections } from '../../src/pdf/sections/CrisisSections.jsx';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { institutionHouseLabel } from '../../src/domain/display/institutionDisplayName.js';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const KINDS = Object.keys(STRESS_TYPE_MAP);
@@ -111,10 +112,13 @@ describe('the print block and the journal page print the Crisis tab\'s cast', ()
           // 2026-11-07 PEOPLE-1 CAST: the journal page is MARKDOWN, and the cast now surfaces names the rung roster
           // never did — a HOUSE row "Inns and taverns (district)" and a person "Nessa O'Dwyer" — whose parentheses and
           // apostrophes the page escapes; the comparison reads the page with its escapes removed, the claim unchanged.
-          if (!crisisPage.markdown.includes(esc(r.name))) throw new Error(`journal misses ${r.name}`);
+          // RE-KEYED (R2-CODE-B round 3, ruling (a)): the journal names a HOUSE row by its label too (moved up).
+          const shown = r.kind === 'institution' ? institutionHouseLabel(r.name) : r.name;
+          if (!crisisPage.markdown.includes(esc(shown))) throw new Error(`journal misses ${r.name}`);
           // re-keyed by identity (SW-9b-B A13): the print reads as the tab does, "{role}: {name} · {reason}" (the reason a
           // fragment, never a sentence after a full stop).
-          if (!printed.includes(`${r.roleLabel}: ${r.name} · ${r.reason}`)) throw new Error(`print misses ${r.roleLabel} ${r.name}`);
+          // RE-KEYED (R2-CODE-B round 3, ruling (a)): a HOUSE row prints by the house's label, as the tab's door does.
+          if (!printed.includes(`${r.roleLabel}: ${shown} · ${r.reason}`)) throw new Error(`print misses ${r.roleLabel} ${r.name}`);
         }
         if (!printed.includes(section.line)) throw new Error(`print misses ${section.line}`);
       }

@@ -1,0 +1,19 @@
+RISE  readers src/generators/economy/viability.js magic: const hasMagicInst = magicHouses.arcane || magicHouses.teleport || instNames.some((n) => n.includes('alchemist'));
+RISE  readers src/generators/priorityHelpers.js crime: hasGangInfra: hasAny(names, ['street gang','multiple criminal factions']),
+RISE  readers src/generators/safetyLineTruth.js crime: n += name.includes('multiple criminal') ? 2 : name.includes('street gang') ? 1 : 0;
+FALL  readers src/generators/defenseGenerator.js faith: (relPri >= 65 && hasInst('shrine','temple','friary'))
+FALL  readers src/generators/defenseGenerator.js faith: const hasDivineStrong = magicOn && relPri >= 65 && hasInst('cathedral','monastery','great cathedral');
+FALL  readers src/generators/defenseGenerator.js faith: hasInst('cathedral','monastery','great cathedral','parish church') ||
+FALL  readers src/generators/defenseGenerator.js faith: || hasInst('healer','monastery','cathedral','divine','healing','druid','wizard','mage','arcane','enchant');
+FALL  readers src/generators/defenseGenerator.js healer: || hasInst('healer','monastery','cathedral','divine','healing','druid','wizard','mage','arcane','enchant');
+FALL  readers src/generators/defenseGenerator.js crime: const hasCrimOrg = hasInst('fence','smuggl','gang','outlaw');
+FALL  readers src/generators/defenseGenerator.js magic: hasInst('wizard','mages','arcane','enchant','spellcasting','academy of magic','mages\' district')
+FALL  readers src/generators/defenseGenerator.js magic: if (hasInst('wizard\'s tower')) military += 5;
+FALL  readers src/generators/defenseGenerator.js magic: || hasInst('healer','monastery','cathedral','divine','healing','druid','wizard','mage','arcane','enchant');
+FALL  readers src/generators/economy/viability.js magic: n.includes('alchemist') ||
+FALL  readers src/generators/economy/viability.js magic: n.includes('arcane') ||
+FALL  readers src/generators/economy/viability.js magic: n.includes('mage') ||
+FALL  readers src/generators/economy/viability.js magic: n.includes('wizard') ||
+FALL  readers src/generators/priorityHelpers.js crime: hasGangInfra: hasAny(names, ['street gang','multiple criminal factions','front business']),
+fact-layers door: 3 rise(s), 14 fall(s)
+REFUSED: the register is shrink-only; cure the rise, never bank it.

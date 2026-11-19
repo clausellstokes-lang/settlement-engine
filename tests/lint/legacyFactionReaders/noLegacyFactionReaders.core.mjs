@@ -37,7 +37,8 @@ export const OTHER_SHAPES = Object.freeze({
   'src/components/compendium/FactionEventBanner.jsx': 'the compendium palette',
   'src/components/home/HomeSampleDossier.jsx': 'a static sample dossier',
   'src/components/map/NpcTrailSection.jsx': 'the ladder record',
-  'src/components/new/SummaryTab.jsx:36': 'w = powerStructure', 'src/components/new/SummaryTab.jsx:48': 'FactionBar(ps.factions)',
+  // SummaryTab.jsx's two rows (:36 'w = powerStructure', :48 'FactionBar(ps.factions)') LEFT at TAIL-CLOSE-SRC-1 item 3: the
+  // character sentence reads its powers as `ps` (POWERS_RECEIVER) and FactionBar takes them as `powers`; no site remains.
   'src/components/new/tabs/HistoryTab.jsx': 'a tension\'s faction names', 'src/components/new/tabs/OverviewTab.jsx': 'a tension\'s faction names',
   'src/components/new/tabs/PowerTab.jsx': 'r = powerStructure',
   'src/components/settlement/EventComposer.jsx:179': 'the DM\'s custom powers',
@@ -56,10 +57,19 @@ export const OTHER_SHAPES = Object.freeze({
   'src/generators/power/economyReconciliation.js': 'the power projection', 'src/generators/power/governanceNarrative.js': 'the powers (param)',
   // re-keyed by identity 337/500/682 -> 345/508/690 (MERGE-TRAIN at the ALLEGIANCE-CAR3 merge: the same three tension reads, moved 8 lines by car 3's dmPowerViewOf import and the opt-in dmView, composed over the integration's +3)
   // re-keyed by identity 345/508/690 -> 346/509/691 (COHERENCE-POWERS-4: the same three tension reads, moved one line by the third seat's seatKeeperOf import, F7)
-  'src/pdf/lib/viewModel.js:346': 'a tension', 'src/pdf/lib/viewModel.js:509': 'a tension', 'src/pdf/lib/viewModel.js:691': 'a tension', // W4 PEOPLE second seat (merging the car): re-keyed +3 by line, #29's crisisSummaryForSurface import and cover/overview vantage lines above them
+  // re-keyed by identity 346/509/691 -> 352/515/709 (CLOSE-DOORS-1B, 2026-11-18, the close: the same three tension reads, byte-identical
+  // lines; +3/+3/+3 at JOIN-17 point 12, BAR6-SEAM-PDF b4dbbd71f, and +3/+3/+15 at point 20, BAR7-CARDS bbd69cf65, lines added above them)
+  'src/pdf/lib/viewModel.js:352': 'a tension', 'src/pdf/lib/viewModel.js:515': 'a tension', 'src/pdf/lib/viewModel.js:709': 'a tension', // W4 PEOPLE second seat (merging the car): re-keyed +3 by line, #29's crisisSummaryForSurface import and cover/overview vantage lines above them
   'src/pdf/sections/PowerStructure.jsx': 'vm.power',
   // COHERENCE-POWERS-3 F2 (28c93c9da): a tension's parties, re-named for the final roster (settleTensionsToRoster); read as viewModel's are
-  'src/generators/power/rosterText.js:123': 'a tension',
+  // re-keyed by identity 123 -> 124 (POWERS-10, the reader's M4 at 96a6ced46: the same tension read, moved one line by 943e34d6f's
+  // settleStandingToRoster, COHERENCE-POWERS-7 H-c); re-keyed by identity 124 -> 126 (BAR4-HISTORY, 2026-11-16: the same tension
+  // read, moved two lines by C26792's import and its legitimacy read, each statement on its own line as powerStructure's
+  // packing law asks)
+  'src/generators/power/rosterText.js:126': 'a tension',
+  // COHERENCE-POWERS-7 leftover 1 (1022e9887): withTownsOwnUnderworld reads the town's crime signal (`crimeSignalOf`'s
+  // criminal powers' names, roster order), the class defenseDisplay.js's row names; read by POWERS-10 at the site
+  'src/domain/crimeSignal.js:91': 'the crime signal',
   // density plan / ladder rows that PEOPLE-1 retires with the roster (kept so the draft is exact at the base):
   'src/generators/density/applyDensityLaw.js:269': 'the density plan', 'src/generators/density/applyDensityLaw.js:375': 'a powerStructure copy',
   'src/generators/density/applyDensityLaw.js:476': 'the density plan',

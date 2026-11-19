@@ -1,0 +1,127 @@
+# The lane's commits by seat, gathered by script (W2-FIX-DATA-10, 2026-11-14): git log --no-merges 96d698de7..3e0b6b610 --not origin/lane/integration-2026-11-07, the seat read from the subject's tag; each seat's counts are in its hand-back's table (docs/chair/2026-11-13/W2-FIX-DATA-HANDBACK*.md, docs/chair/2026-11-14/W2-FIX-DATA-HANDBACK-8.md, -9.md, W2-FIX-DATA-HISTORY-HANDBACK.md)
+(untagged)	31f57e8eb	docs(W2-WRITE): the hand-back carries the chair's new order (the cold list first; the reading law) and the town per case for each new line
+(untagged)	91c6b7553	docs(W2-WRITE): the hand-back current through stage 2; the new lines for the owner's veto; the scratch tools for the second seat
+(untagged)	b9ae6d233	W2-WRITE (stage 2 · the key-implied words): twenty unreached lines declare what they name; 3 full-stores lines with no granary
+(untagged)	6e296ed51	W2-WRITE (stage 2 · DEF-9, pattern 13): the repeated clause leaves the magic-reliance line
+(untagged)	e949ca9a5	W2-WRITE (stage 2 · ECO-12, pattern 8's income half): the religious-houses lines declare the house; 3 lines for a place with none
+(untagged)	4efcd2b30	W2-WRITE (stage 2 · POW-5, NEW-V9): "no law but the gang bosses'" disqualified where a guard stands; 1 line for that case
+(untagged)	901e4d441	W2-WRITE (stage 2 · DEF-3, pattern 14c): district lines declare the size they presume; 4 lines that name none
+(untagged)	e3831d922	docs(W2-WRITE): the hand-back, current after stage 1
+(untagged)	b18ef2a3f	W2-WRITE (stage 1 · ECO-6): off-book trade where no guild stands — 3 player lines
+(untagged)	6fa03f9f1	W2-WRITE (stage 1 · POW-6): the commander advisory where no garrison stands — 3 lines
+(untagged)	c85805ea0	W2-WRITE (stage 1 · FTH-4): heresy where no church stands — 6 lines
+(untagged)	63791bdb4	W2-WRITE (stage 1 · GEN-3): readiness and the military score where walls stand with nobody to hold them — 6 lines
+(untagged)	2f156207f	W2-WRITE (stage 1 · GEN-5/GEN-6): the river route on a coast — 9 lines, the pools' `river` moved onto each line
+(untagged)	d7ca1936e	W2-WRITE (stage 1 · GEN-9): history's event lines that leave the anchor unsaid — 24 lines, 8 pools
+W2-FIX-DATA	4114cf5a6	build(W2-FIX-DATA): re-emit the edge bundles (charter §0.11: the last commit, alone)
+W2-FIX-DATA	11a58946a	docs(W2-FIX-DATA): the hand-back and the draft shift record
+W2-FIX-DATA	e43a4b545	chore(W2-FIX-DATA): re-take the wiring census through its own writer
+W2-FIX-DATA	bcc2e38b2	test(W2-FIX-DATA): the lane's tests meet the estate's test walkers; the defence twin pins read the defence sets
+W2-FIX-DATA	b91fcfe11	fix(W2-FIX-DATA): five history lines reworded to presume nothing false (REVIEW-W2B cold list)
+W2-FIX-DATA	a85032aca	fix(W2-FIX-DATA): three history hooks declare the house they presume (REVIEW-W2B cold list)
+W2-FIX-DATA	121588cc4	fix(W2-FIX-DATA): the steppe felt tents stand beside no timber houses (REVIEW-W2B cold list)
+W2-FIX-DATA	b3a5fc4ba	fix(W2-FIX-DATA): five arrival beats declare what makes them false (REVIEW-W2B cold list)
+W2-FIX-DATA	5c1e94f5a	fix(W2-FIX-DATA): two service lines reworded to presume nothing false (REVIEW-W2B cold list)
+W2-FIX-DATA	3efd5044d	fix(W2-FIX-DATA): three service lines exclude a siege, each with its twin (REVIEW-W2B cold list)
+W2-FIX-DATA	4c4a1c269	fix(W2-FIX-DATA): institution descriptions declare what makes them false, each with a twin (REVIEW-W2B cold list)
+W2-FIX-DATA	915bf42db	fix(W2-FIX-DATA): institution descriptions reworded to presume nothing false (REVIEW-W2B cold list)
+W2-FIX-DATA-10	3e0b6b610	chore(W2-FIX-DATA-10): the lighting census re-taken by its ritual after the line's merge (the lane's new test files and titles)
+W2-FIX-DATA-10	23bfefde3	fix(W2-FIX-DATA-10): the Brewer's "After the bakers, no trade eats more grain" leaves the villages with no baker (presumed-things fresh hit, class 4)
+W2-FIX-DATA-10	71b593200	fix(W2-FIX-DATA-10): the Great Harvest Compact names "the guilds" its gate makes true, not "the merchant guilds" (presumed-things fresh hit, class 4)
+W2-FIX-DATA-10	338479f68	chore(W2-FIX-DATA-10): the presumed-things registers' 80 stale rows leave by the door's shrink form (the line's rows the lane's cures answered)
+W2-FIX-DATA-10	35bf691cb	chore(W2-FIX-DATA-10): the pool-dominance register re-derived after the line's merge (the line's one new pool, by --bank-new)
+W2-FIX-DATA-10	3fa3f5f25	chore(W2-FIX-DATA-10): the prose byte baseline re-derived after the line's merge (defense.generated.js shrank 2 raw bytes)
+W2-FIX-DATA-10	6eb1cc194	chore(W2-FIX-DATA-10): the wiring census re-derived by its own script after the line's merge
+W2-FIX-DATA-2	379186c96	docs(W2-FIX-DATA-2): the hand-back, saved on the chair's stop-and-save (items 1-4 done, 5 not started, 6 parked)
+W2-FIX-DATA-2	4101e30a1	fix(W2-FIX-DATA-2): the culture's lines too big for a small place take the tier at the materializer (REVIEW-W2B cold list)
+W2-FIX-DATA-2	dde3b1277	fix(W2-FIX-DATA-2): a tension the record's own power or purse makes false is set aside; a guild war needs a guild (REVIEW-W2B cold list)
+W2-FIX-DATA-2	cd879f8dc	fix(W2-FIX-DATA-2): the history's place words declare the size and the water they presume (REVIEW-W2B cold list)
+W2-FIX-DATA-3	34520a697	docs(W2-FIX-DATA-3): the hand-back at the chair's stop, and the draft record's measures at 5e0060000
+W2-FIX-DATA-3	5e0060000	build(W2-FIX-DATA-3): re-emit the edge-shared bundles after the round's three lines (charter §0.11: the last code commit, alone)
+W2-FIX-DATA-3	fb48fb8bc	fix(W2-FIX-DATA-3): a place of one forge does not "live by its forges" (REVIEW-W2A-3 #366, the chair's ruling)
+W2-FIX-DATA-3	c0f8dd279	fix(W2-FIX-DATA-3): rows of craftspeople, a row to each trade, stand only where a market does (REVIEW-W2A-3 #2, the chair's ruling)
+W2-FIX-DATA-3	5c9a5677f	fix(W2-FIX-DATA-3): a ceremonial precinct over a busy plaza is a town's (REVIEW-W2A-3 #33, the chair's ruling)
+W2-FIX-DATA-3	1e93f4d11	build(W2-FIX-DATA-3): re-emit the edge-shared bundles (charter §0.11: the last commit, alone)
+W2-FIX-DATA-3	ec78d1c19	fix(W2-FIX-DATA-3): a town prints no two current tensions of one template type (a regression the lane's own cure commit left)
+W2-FIX-DATA-3	cf2e00b19	fix(W2-FIX-DATA-3): a timeline hook is noted in the ledger by its own row in the template (the chair's ruling on the carried red)
+W2-FIX-DATA-3	7574ae27e	docs(W2-FIX-DATA-3): the hand-back, current after items 1, 3, 4 and 5 (item 2 parked)
+W2-FIX-DATA-3	b9ca70eb4	fix(W2-FIX-DATA-3): a mine that works a shaft is not called surface digging (REVIEW-W2-FIX-DATA F3)
+W2-FIX-DATA-3	84188d317	chore(W2-FIX-DATA-3): re-take the wiring census through its own writer, after the Elder Grove Council's declarations went with their word
+W2-FIX-DATA-3	b7f2b3d69	fix(W2-FIX-DATA-3): the Elder Grove Council names its place by its own size (REVIEW-W2-FIX-DATA F4)
+W2-FIX-DATA-3	79c35053e	fix(W2-FIX-DATA-3): the inland auction house sells a household's goods, not persons (the second seat's item 5)
+W2-FIX-DATA-3	146ad0eab	fix(W2-FIX-DATA-3): the institution description reads the crisis the birth has settled, in the app's shape (REVIEW-W2-FIX-DATA F1)
+W2-FIX-DATA-4	ac76a8e40	docs(W2-FIX-DATA-4): the hand-back by file near 400k tokens — six items cured, both lists' state line by line, the rulings copied, the exact next step
+W2-FIX-DATA-4	3a8884961	fix(W2-FIX-DATA-4 item 6): the docks are described, never by the catalogue's condition for them (ROUND-3 HIGH #1343)
+W2-FIX-DATA-4	7f473b363	fix(W2-FIX-DATA-4 item 5): a sense line that fills the place needs the house it names (ROUND-3 HIGH #46 #600; REVIEW-W2A-3 #184)
+W2-FIX-DATA-4	80b1672f0	fix(W2-FIX-DATA-4 item 4): the arrival holds the culture's materialized detail to its own declaration (ROUND-3 HIGH #87 #112 #117; REVIEW-W2A-3 #183)
+W2-FIX-DATA-4	f3f532b5b	fix(W2-FIX-DATA-4 item 3): a house the cascade adds meets the declared draw (REVIEW-W2-FIX-DATA F2, parked by the third seat; REVIEW-W2A-3 #502)
+W2-FIX-DATA-4	ed29fdeb8	docs(W2-FIX-DATA-4): the hand-back, items 1 and 2 (the quarry rows cured by the chair's ruling)
+W2-FIX-DATA-4	dde2c8a98	fix(W2-FIX-DATA-4 item 2): a stone quarry is named for what it is, never as worked now (REVIEW-W2A-3 HIGH #236 #421; the chair's ruling)
+W2-FIX-DATA-4	ce6c467aa	fix(W2-FIX-DATA-4 item 1): the river's boatyard and ferry in a coastal port with no river speak of the water (REVIEW-W2A-3 #502 #507 #508)
+W2-FIX-DATA-4	41da5c95c	docs(W2-FIX-DATA-4): the hand-back opened; the two HIGH quarry rows parked (the depleted reading needs a vocabulary word)
+W2-FIX-DATA-5	90f0a7b9b	docs(W2-FIX-DATA-5): the hand-back by file near 400k tokens — #1003 and the five INCREMENT HIGH rows cured, #17 #331 cured, the lists' state line by line, every ruling copied
+W2-FIX-DATA-5	18fcc08ca	fix(W2-FIX-DATA-5 item 4): under a siege the fair's merchants and the toll bridge's steady fees are not claimed (R2 #973, #238)
+W2-FIX-DATA-5	9b79adb58	fix(W2-FIX-DATA-5 item 3e): the fair's trading under a siege says no merchant can reach it (ROUND-3-CUT-INCREMENT ww-494 HIGH, R2 #982)
+W2-FIX-DATA-5	727d4a479	fix(W2-FIX-DATA-5 item 3d): no forge making for a war where the record holds no war (ROUND-3-CUT-INCREMENT ww-1157 HIGH)
+W2-FIX-DATA-5	ad7e89558	fix(W2-FIX-DATA-5 item 3c): no open, cheerful politics in the arrival under a siege (ROUND-3-CUT-INCREMENT ww-473 HIGH)
+W2-FIX-DATA-5	b2a9831da	fix(W2-FIX-DATA-5 item 3b): no hook of an ailing or poisoned ruler while the seat stands empty (ROUND-3-CUT-INCREMENT ww-544 HIGH)
+W2-FIX-DATA-5	58376910a	fix(W2-FIX-DATA-5 item 3a): a thorp's history raises no civic buildings or cathedral (ROUND-3-CUT-INCREMENT ww-25 HIGH)
+W2-FIX-DATA-5	1fbfb8261	fix(W2-FIX-DATA-5 item 2b): a village's great fire burns no districts, quarters or streets (ROUND-3 #331)
+W2-FIX-DATA-5	a640fc16f	fix(W2-FIX-DATA-5 item 2a): a thorp whose people go to a neighbour's parish church does not say no clergy is near (ROUND-3 #17)
+W2-FIX-DATA-5	dabdb6061	fix(W2-FIX-DATA-5 item 1): the occupation's legacy is no tension of an occupation in force (ROUND-3 #1003 HIGH, R2 #1036)
+W2-FIX-DATA-6	bfadaa767	docs(W2-FIX-DATA-6): the hand-back by file near the context mark: steps 1-2 done, step 3 carried by ruling, step 4's two cures and every row left line by line, the rulings copied
+W2-FIX-DATA-6	72804c5a2	fix(W2-FIX-DATA-6 item 4b): the mages' guild's ley-line dependency names no licensing the guild does not offer (REVIEW-W2A-3 #919)
+W2-FIX-DATA-6	43e80bfde	fix(W2-FIX-DATA-6 item 4a): under a siege the coaching inn takes no traveller off the road and sends no relay horse out (CENSUS-2 kind b)
+W2-FIX-DATA-6	bc0c29a37	docs(W2-FIX-DATA-6): the hand-back opened: H1 and the three more lane reds, M2, L2, the step-3 stop at its door, the rulings copied
+W2-FIX-DATA-6	5f17347c8	fix(W2-FIX-DATA-6 H1k): the seven pools the fifth seat's cures made drawn take their rows by the narrow door (poolDominance "every drawn pool has a row")
+W2-FIX-DATA-6	400733f41	docs(W2-FIX-DATA-6 L2): the third hand-back's pool table takes the reviewer's figures, the table of record
+W2-FIX-DATA-6	2993063f3	docs(W2-FIX-DATA-6 M2): the draft shift record declares the cartography calibration corpus UNMOVED by measure; the PDF row takes the register's own name
+W2-FIX-DATA-6	cc39beadf	fix(W2-FIX-DATA-6 H1j): the fair's siege twin names no market it does not declare (presumedThings ARM 1)
+W2-FIX-DATA-6	492b7b969	fix(W2-FIX-DATA-6 H1i): the two rows the fifth seat's great-fire cure left stale leave the widened register by its door
+W2-FIX-DATA-6	88ce863eb	fix(W2-FIX-DATA-6 H1h): the three resolveConfig.js writes the prose census cites are back on their lines (REVIEW-W2-FIX-DATA-34520a697 H1)
+W2-FIX-DATA-6	2ac107fd4	fix(W2-FIX-DATA-6 H1g): the table census reads the culture's twins and rules the history template declarations out, each by the chair's test (REVIEW-W2-FIX-DATA-34520a697 H1)
+W2-FIX-DATA-6	4fbc44569	fix(W2-FIX-DATA-6 H1f): the wiring census re-made through its own door after the fifth seat's declarations (proseWiringCensus car 0, car 5b DRY READ)
+W2-FIX-DATA-6	6133ec2f7	fix(W2-FIX-DATA-6 H1e): the lane's seven bare seed loops run every case through the corpus helper (REVIEW-W2-FIX-DATA-34520a697 H1)
+W2-FIX-DATA-6	36aee6246	fix(W2-FIX-DATA-6 H1d): the lane's ten guard files take their mutation-manifest rationales (REVIEW-W2-FIX-DATA-34520a697 H1)
+W2-FIX-DATA-6	557356542	fix(W2-FIX-DATA-6 H1c): the stressorEdits frozen file set names assembleInstitutions.js, with its cause (REVIEW-W2-FIX-DATA-34520a697 H1)
+W2-FIX-DATA-6	0b525f669	fix(W2-FIX-DATA-6 H1b): the arrival declarations pin re-keyed 101 -> 105 by identity (REVIEW-W2-FIX-DATA-34520a697 H1)
+W2-FIX-DATA-6	cf1f41af3	fix(W2-FIX-DATA-6 H1a): the culture ledger carries the precinct's declaration (REVIEW-W2-FIX-DATA-34520a697 H1)
+W2-FIX-DATA-7	8e79b0237	docs(W2-FIX-DATA-7): the hand-back opened: row 1 read true by measure (the Town hall is the court), row 2 cured, the chair's added row for row 4 copied
+W2-FIX-DATA-7	82a7c6002	fix(W2-FIX-DATA-7 row 2): the stress cells' resolution pool takes its row by the narrow door (poolDominance "every drawn pool has a row")
+W2-FIX-DATA-7	745c05a1f	fix(W2-FIX-DATA-7 row 2): the catalogue's stored crisis hook and note resolve through their declared sets at rerenderStressSummary (CENSUS-2 kind a: the famine's grain merchant, the plague's healer, t
+W2-FIX-DATA-8	fb00318d9	docs(W2-FIX-DATA-8): handed back by file near the mark; what is left is section 2, line by line
+W2-FIX-DATA-8	c0bab8c28	docs(W2-FIX-DATA-8): the chair's three messages of 03:08, 03:15 and 03:18 copied (point 49 at 976db5b19 and the word; the shallow-clone merge-base hazard; section 2m)
+W2-FIX-DATA-8	0af07e0f1	docs(W2-FIX-DATA-8): the hand-back current: row 4's houses of work cured (7802efdb7)
+W2-FIX-DATA-8	7802efdb7	fix(W2-FIX-DATA-8 row 4): a house of work speaks of the house, not of the whole town's living (the chair's added row, 23:48; ROUND-3-CUT-INCREMENT ww-924, the cut's #93)
+W2-FIX-DATA-8	fdd50f740	docs(W2-FIX-DATA-8): the hand-back current: row 4's apothecary cured (343c26791)
+W2-FIX-DATA-8	343c26791	fix(W2-FIX-DATA-8 row 4): the village apothecary names no alchemist (CENSUS-2 a/alchemist; HANDBACK-6 section 8 row 4)
+W2-FIX-DATA-8	268c2991d	docs(W2-FIX-DATA-8): row 4 read in part: the auction's persons and the royal governor gone at the tip, the peat cutter's marsh parked, the "hundreds" reword's register door named
+W2-FIX-DATA-8	4a39dd6f7	docs(W2-FIX-DATA-8): the hand-back opened: row 3 done (the brewer's two writers cured, five lines read), the chair's two messages copied, the instruments committed
+W2-FIX-DATA-8	2a522e633	fix(W2-FIX-DATA-8 row 3): the brewer's barrel trade supplies alehouses only where one stands (ROUND-3-CUT-INCREMENT ww-1416; CENSUS-2 a/inn)
+W2-FIX-DATA-8	2d10312aa	fix(W2-FIX-DATA-8 row 3): the brewer's description pool takes its row by the narrow door (poolDominance "every drawn pool has a row")
+W2-FIX-DATA-8	991b2506b	fix(W2-FIX-DATA-8 row 3): the village brewer names the alehouses it supplies only where one stands (ROUND-3-CUT-INCREMENT ww-1415; CENSUS-2 a/inn)
+W2-FIX-DATA-9	34f48f48d	docs(W2-FIX-DATA-9): the chair's ruling of 04:58 on the instrument's fresh hits after the line's merge copied, for the successor's close
+W2-FIX-DATA-9	46a91fa23	docs(W2-FIX-DATA-9): the chair's hazard (04:37) and count rulings (04:46-04:48) copied; where the close stands at the hand-back
+W2-FIX-DATA-9	964756c41	docs(W2-FIX-DATA-9): HANDED BACK BY FILE past the chair's 330,000: the history merged (38c93321d); the line's merge measured and aborted unlanded (the fifteen conflicts; the presumed-things registers'
+W2-FIX-DATA-9	720408840	docs(W2-FIX-DATA-9): the rows not reached written under LEFT FOR AFTER THE JOIN (the chair's 04:15 and 04:19 messages); the close next
+W2-FIX-DATA-9	7242361a1	docs(W2-FIX-DATA-9): the hand-back current: the Mine cured (383f1d9a7); the chair's change of order (04:15) copied
+W2-FIX-DATA-9	383f1d9a7	fix(W2-FIX-DATA-9 row 4): the Mine of town size or more claims no crews at work, for its deposits may be spent (ROUND-3-CUT-INCREMENT ww-103, R3 #1229; the fifth seat's patch)
+W2-FIX-DATA-9	1c0ce22db	docs(W2-FIX-DATA-9): the hand-back opened: row 4's parish churches cured (792b1d11f, 12ed5e860), the Mine measured, the instruments
+W2-FIX-DATA-9	12ed5e860	fix(W2-FIX-DATA-9 row 4): the parish churches' four stale rows leave the widened presumed-things register by its door (--shrink)
+W2-FIX-DATA-9	792b1d11f	fix(W2-FIX-DATA-9 row 4): the metropolis's parish churches give a figure true of fifty to a hundred and more, never "hundreds" (ROUND-3-CUT-INCREMENT ww-331)
+W2-FIX-DATA-HISTORY	864948c8b	docs(W2-FIX-DATA-HISTORY): handed back by file: the chair's succession ruling (ruled, not built), the other lane's rows each marked, the red guards with their doors, the instruments committed, the new
+W2-FIX-DATA-HISTORY	35b822e64	docs(W2-FIX-DATA-HISTORY): the chair's rows of 00:20 against the branch, each cured, residual or not done with its facts
+W2-FIX-DATA-HISTORY	476892528	docs(W2-FIX-DATA-HISTORY): the census at the tip read into the hand-back (318 -> 61 in the six files)
+W2-FIX-DATA-HISTORY	506e1cecf	docs(W2-FIX-DATA-HISTORY): the hand-back current after the merge; the succession hooks' dominance named as a stop
+W2-FIX-DATA-HISTORY	974ea7492	chore(W2-FIX-DATA-HISTORY): after the merge, the registers this branch's items left behind, each through its own door
+W2-FIX-DATA-HISTORY	6bd3ff844	docs(W2-FIX-DATA-HISTORY): the hand-back current after items D, B, E, F, R and G; the rows line by line; parks and stops
+W2-FIX-DATA-HISTORY	009ee1466	fix(W2-FIX-DATA-HISTORY item G): the ailing ruler, the hoarded goods, the purge and the pilgrimage say only what the town holds (ROUND-3-CUT-INCREMENT pf-160, ww-1230, ww-1261; CENSUS-2 historyData.js
+W2-FIX-DATA-HISTORY	79376ba81	chore(W2-FIX-DATA-HISTORY): the registers of items A to F through their own doors
+W2-FIX-DATA-HISTORY	9d952d02b	fix(W2-FIX-DATA-HISTORY item F): the arrival and the inland fish stall say only what the town holds (ROUND-3-CUT-INCREMENT ww-541; CENSUS-2 kinds a and b on arrivalProse.js and inlandDescriptions.js)
+W2-FIX-DATA-HISTORY	ab58c3ec3	fix(W2-FIX-DATA-HISTORY item E): the resource events and two timeline hooks say only what the town holds (CENSUS-2's historyGenerator.js :: generateRelationshipEvent writer; ROUND-3-CUT-INCREMENT ww-2
+W2-FIX-DATA-HISTORY	825bcf243	fix(W2-FIX-DATA-HISTORY item B): the culture's foodways sentence speaks in the foodways reader's own words, so it stands only where the place's table makes it true (ROUND-3-CUT-INCREMENT ww-10, ww-345
+W2-FIX-DATA-HISTORY	c7888bdc7	fix(W2-FIX-DATA-HISTORY item D): a culture detail of a larger place does not print in a small one; each takes a small-place twin (review L4; CENSUS-2 kind c on cultureProfiles.js :: architecturalDetai
+W2-FIX-DATA-HISTORY	1938f8149	docs(W2-FIX-DATA-HISTORY): the hand-back opened, items A, C and L with their counts, the rulings copied
+W2-FIX-DATA-HISTORY	01f58571f	fix(W2-FIX-DATA-HISTORY item L): the shortage's lead says what the town lives on by its income shares, "mostly" only where that is so (the chair's row: the first cut's #267, round two's #368; ROUND-3-
+W2-FIX-DATA-HISTORY	3384e3b58	fix(W2-FIX-DATA-HISTORY item C): the occupation's legacy only where the timeline holds the occupation; no "former occupier officer" under one in force (review L4; ROUND-3-CUT-INCREMENT ww-254, ww-724,
+W2-FIX-DATA-HISTORY	0bdeef11c	fix(W2-FIX-DATA-HISTORY item A): the Economic Divide, the trade dispute and the crash need the market they speak of (ROUND-3-CUT-INCREMENT ww-543, ww-572, ww-1524; CENSUS-2 historyDescVariants.js econ

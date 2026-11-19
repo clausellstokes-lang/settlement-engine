@@ -1,0 +1,11 @@
+# STYLE-2-MERGE-15, point 49: THE WHOLE CHECK at 11c565b96 (= 7b86cdfb0's code + the thirteenth seat's documents commit), in SIX SHARDS (record 418), FINISHED.
+# tree: a detached scratch worktree at 11c565b96, node_modules by npm ci (exit 0), the ledger ref review-fixes-2026-07-08 fetched (235efce1a); refs + local config snapshotted before and after (EQUAL).
+# command, one shard after another: npx vitest run --shard=<i>/6 --maxWorkers=2 --reporter=dot --reporter=json --outputFile=<out outside the repo>/shard-<i>.json
+shard 1/6  exit 1  2026-11-14T01:12:31Z .. 2026-11-14T01:26:22Z  files 541 (failed 1)  tests 5977: passed 5967, failed 1, skipped 9
+shard 2/6  exit 1  2026-11-14T01:26:22Z .. 2026-11-14T01:43:09Z  files 541 (failed 2)  tests 6947: passed 6909, failed 2, skipped 36
+shard 3/6  exit 0  2026-11-14T01:43:09Z .. 2026-11-14T01:56:13Z  files 541 (failed 0)  tests 5774: passed 5759, failed 0, skipped 15
+shard 4/6  exit 1  2026-11-14T01:56:13Z .. 2026-11-14T02:10:00Z  files 541 (failed 1)  tests 6684: passed 6668, failed 0, skipped 16
+shard 5/6  exit 1  2026-11-14T02:10:00Z .. 2026-11-14T02:34:15Z  files 541 (failed 1)  tests 7048: passed 7023, failed 1, skipped 24
+shard 6/6  exit 1  2026-11-14T02:34:15Z .. 2026-11-14T02:54:40Z  files 540 (failed 2)  tests 6793: passed 6740, failed 8, skipped 45
+TOTAL: files 3245 (7 failed: 5 with failed tests + 2 at load), tests 39223: passed 39066, failed 12 + 2 files at load, skipped 145. Wall time 01:12:31Z .. 02:54:40Z (6,129 s).
+Every red is the line's CARRIED set after point 48 (2j.6; 2k.5 (b)); none of the rehearsal's ten cured reds is red (presumedThings, observedShapeReaders, writerReach, factLayers, tuningRegister, voiceMechanics, institutionBudgetPromise: all green). The reds, file > title: suite.redrows.txt.

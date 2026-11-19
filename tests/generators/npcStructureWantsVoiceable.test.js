@@ -22,6 +22,9 @@ const CONDITIONS = {
   stable: {},
 };
 
+/** The power category that is a card category's own body (POWERS-9: the old families' is a noble power). @param {string} c */
+const bodyOf = (c) => (c === 'other' ? 'noble' : c);
+
 /** Every goal the enricher writes, by `category__condition__rank`. */
 function allGoals() {
   /** @type {Record<string, string>} */
@@ -34,16 +37,22 @@ function allGoals() {
       // identity: A still heads the category's top power, dominant, and B the lesser, subordinate)
       const factions = [
         ...(category === 'government' ? [] : [{ faction: 'Hall', category: 'government', power: 100, isGoverning: true }]),
-        { faction: 'Top', category, power: 100, ...(category === 'government' ? { isGoverning: true } : {}) },
-        { faction: 'Second', category, power: 10 },
+        // POWERS-9 (re-keyed by identity): the old families' rows ('other') speak of the card's own body, a noble power
+        // (npcStructure.js :: BODY_KINDS); the fixture's two powers of that category are noble bodies, as before in kind
+        { faction: 'Top', category: bodyOf(category), power: 100, ...(category === 'government' ? { isGoverning: true } : {}) },
+        { faction: 'Second', category: bodyOf(category), power: 10 },
       ];
       const settlement = { ...state, powerStructure: { ...(state.powerStructure || {}), factions } };
       // MERGE-CAR-2 (2026-11-08): the cards in the people car's shape (the rank axis reads the first-rank
       // membership; `factionAffiliation` left the card at PEOPLE-5): A heads Top (dominant), B heads Second
-      // (subordinate — a lesser power of the category), the two ranks the affiliations meant.
+      // (subordinate — a lesser power of the category; since COHERENCE-POWERS-8 a member below A in Top), the two ranks the
+      // affiliations meant.
       const npcs = [
         { name: 'A', category, memberships: [{ power: 'Top', rank: 1, share: 1 }], role: 'Head' },
-        { name: 'B', category, memberships: [{ power: 'Second', rank: 1, share: 1 }], role: 'Second' },
+        // COHERENCE-POWERS-8 (re-keyed by identity): B reads the subordinate row as a member BELOW the first of Top (rank 2),
+        // since the head of a lesser power of the faith, the crews or the casters is never "under" its own body's leaders
+        // (npcStructure.js :: UNDER_KINDS); the same two rows, dominant and subordinate, for every category
+        { name: 'B', category, memberships: [{ power: 'Top', rank: 2, share: 0.5 }], role: 'Second' },
       ];
       for (const npc of enrichNPCsWithStructure(npcs, settlement)) {
         expect(npc.settlementCondition).toBe(condition);

@@ -22,8 +22,10 @@
  *
  * Pure: no randomness, no clock.
  */
-import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
-import { liveInstitutions } from '../institutions/institutionRoster.js';
+// TAIL-TIES-6 (the chair's ruling (T23)): the live roster's native names and the access-only row live in the pure leaf
+// `liveInstitutionNames.js` (one home; `display/clergyHouse.js` reads them there, from the eager chunk, with no edge into this one).
+import { ACCESS_ONLY, liveInstitutionNames } from './liveInstitutionNames.js';
+export { ACCESS_ONLY, liveInstitutionNames };
 
 /** kind → the native-name pattern that means it. @type {Readonly<Record<string, RegExp>>} */
 export const INSTITUTION_KIND_PATTERNS = Object.freeze({
@@ -49,15 +51,6 @@ export const INSTITUTION_KIND_PATTERNS = Object.freeze({
 export const INSTITUTION_KINDS = Object.freeze(Object.keys(INSTITUTION_KIND_PATTERNS));
 
 /**
- * The live roster's native names.
- * @param {{ institutions?: unknown } | null | undefined} record
- * @returns {string[]}
- */
-export function liveInstitutionNames(record) {
-  return liveInstitutions(record).map((inst) => String(nativeSemanticName(inst) || '')).filter(Boolean);
-}
-
-/**
  * THE ONE READER.
  * @param {{ institutions?: unknown } | null | undefined} record a settlement record (or any record carrying `institutions`)
  * @param {string} kind a key of INSTITUTION_KIND_PATTERNS
@@ -70,8 +63,34 @@ export function hasInstitution(record, kind) {
 }
 
 /**
- * A row that names ACCESS to a neighbour's facility ('Access to external mill', 'Access to parish
- * church') is not that institution standing here (CENSUS-1c unit 6, the vocabulary rulings §6; the
- * faith home already reads the church row as access-only, `faithReading.js :: faithReadingOf`).
+ * A GRAIN mill's name, lower-cased (a Mill, Mills (2-5)): a sawmill saws and a maltster malts, and neither grinds flour;
+ * an "access to external" row is a neighbour's (TAIL-CLOSE-SRC-4: moved verbatim from `generators/computeActiveChains.js
+ * :: gateKeywordPredicate`'s 'grain mill' row, TAIL-DEFECON-C-4 D33, into the institutions home; the `mill` kind above is
+ * the wider "a mill of any kind").
+ * @param {string} n an institution's name, lower-cased @returns {boolean}
  */
-export const ACCESS_ONLY = /^access to\b/i;
+export const namesGrainMill = (n) => (n === 'mill' || n.startsWith('mills (')) && !n.includes('access to external');
+
+/**
+ * A food record's source that keeps GRAIN: a grain field, or a mill (the food record's own key for the mill it grinds
+ * at). TAIL-CLOSE-SRC-4: moved verbatim from `generators/economy/foodBalance.js :: foodStoreWord` (R2-CODE-A item 1)
+ * into the institutions home, the mill's.
+ * @param {unknown} s a food record's source key @returns {boolean}
+ */
+export const isGrainFoodSource = (s) => s === 'grain' || s === 'mill';
+
+/**
+ * The crafts a roster lacks, by the viability advice's own words (TAIL-DEFECON-3 #30890: the advice names only the crafts
+ * the roster lacks). TAIL-CLOSE-SRC-4: moved verbatim from `generators/economy/viability.js`'s craft-diversity fix into
+ * the institutions home, the smith's (a name holding "smith" counts: a goldsmith works metal too).
+ * @param {ReadonlyArray<string>} names the roster's names, lower-cased @returns {string[]}
+ */
+export const craftsAbsentFrom = (names) => [['smiths', 'smith'], ['weavers', 'weav'], ['tanners', 'tann']].filter(([, w]) => !names.some((n) => n.includes(w))).map(([c]) => c);
+
+/**
+ * Whether a roster holds a bank or a house of money, by name (a moneylender among them). TAIL-CLOSE-SRC-4: moved verbatim
+ * from `generators/economy/viability.js`'s banking-without-economy warning into the institutions home, the bank's; the
+ * `bank` kind above is the narrower "a bank, a money changer or a counting house".
+ * @param {ReadonlyArray<string>} names the roster's names, lower-cased @returns {boolean}
+ */
+export const namesBankOrMoneyHouse = (names) => names.some((n) => n.includes('bank') || n.includes('money'));

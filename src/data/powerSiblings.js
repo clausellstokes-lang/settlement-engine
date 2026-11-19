@@ -23,10 +23,17 @@ export const BASELINE_CONFLICT_SIBLINGS = Object.freeze({
   // not guarantee. Each twin is the chair's ruling (R-G; recorded with its share in
   // docs/CENSUS_5_LANE_2026-11-04.md, "CENSUS-5b"); this site is a T lookup, so a twin moves only
   // the births whose record refuses the original. The militia captain's branch is reached with NO
-  // military institution, and the two market lines' branches with no market-named house.
+  // military institution, and the two market lines' branches with no market-named house. R2-CODE-A item 5 (P3): a twin names no office or house its site's facts (the roster's names) cannot verify.
+  // BAR5-THINGS (the chair's LD1, 2026-11-16: `governanceNarrative.js:479` is this seat's, that one line and its declaration):
+  // the register's `court` word now reads "civilian courts" (REVIEW-BAR-5 C31780), so the line declares the court it names;
+  // its twin names the disputes, not a court, where the roster holds none
+  'The military commanders are pushing for expanded authority over civilian courts, and the council is losing ground.': Object.freeze([
+    Object.freeze({ text: 'The military commanders are pushing for expanded authority over civilian courts, and the council is losing ground.', needs: Object.freeze(['court', 'guardPresence']) }), // the commanders: the site's own gate (a military house)
+    Object.freeze({ text: "The military commanders are pushing for expanded authority over the town's disputes, and the council is losing ground.", twinOf: 'The military commanders are pushing for expanded authority over civilian courts, and the council is losing ground.', needs: Object.freeze(['guardPresence']), excludes: Object.freeze(['court']) }),
+  ]),
   'The village militia captain is pushing for authority over disputes that the reeve used to handle.': Object.freeze([
     Object.freeze({ text: 'The village militia captain is pushing for authority over disputes that the reeve used to handle.', needs: Object.freeze(['militia']) }),
-    Object.freeze({ text: 'The strongest armed household is pushing for authority over disputes that the reeve used to handle.', twinOf: 'The village militia captain is pushing for authority over disputes that the reeve used to handle.', excludes: Object.freeze(['militia']) }),
+    Object.freeze({ text: 'The strongest armed household is pushing for authority over disputes the community used to settle for itself.', twinOf: 'The village militia captain is pushing for authority over disputes that the reeve used to handle.', excludes: Object.freeze(['militia']) }),
   ]),
   'The miller and the largest farming household are in dispute over prices and access.': Object.freeze([
     Object.freeze({ text: 'The miller and the largest farming household are in dispute over prices and access.', needs: Object.freeze(['institution: mill']) }),
@@ -42,10 +49,53 @@ export const BASELINE_CONFLICT_SIBLINGS = Object.freeze({
   ]),
   'The church wants approval rights over market day activities. The village reeve disagrees.': Object.freeze([
     Object.freeze({ text: 'The church wants approval rights over market day activities. The village reeve disagrees.', needs: Object.freeze(['market']) }),
-    Object.freeze({ text: 'The church wants approval rights over who may trade and when. The village reeve disagrees.', twinOf: 'The church wants approval rights over market day activities. The village reeve disagrees.', excludes: Object.freeze(['market']) }),
+    Object.freeze({ text: 'The most devout households want a say over who may trade and when, and not everyone here agrees.', twinOf: 'The church wants approval rights over market day activities. The village reeve disagrees.', excludes: Object.freeze(['market']) }),
+  ]),
+  // TAIL-POWERS-4 (B02464; 20987, 00170): a thorp holds no "families on each side", a hamlet or a village no "three
+  // estates" (the site's facts carry the tier); each twin claims what the smaller place bears.
+  'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.': Object.freeze([
+    Object.freeze({ text: 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.', needs: Object.freeze(['tier: ≥ hamlet']) }),
+    Object.freeze({ text: 'A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.', twinOf: 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.', excludes: Object.freeze(['tier: ≥ hamlet']) }),
+  ]),
+  // BAR8-K-POWERS (rule 15b, the audit's C31732; BRIEF-BAR8 K-POWERS 4, the chair's BR15; THE TWIN, vetoable by the owner): the
+  // cascade's last fallback (`governanceNarrative.js :: deriveBaselineConflict`) is the grazing quarrel above, true of most
+  // small places (every hamlet and village of the census holds grazing). A place with NO grazing at all takes, before the set
+  // resolves, the quarrel over the ground it does have (`noGrazingQuarrelOf`, below the table).
+  'The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.': Object.freeze([
+    Object.freeze({ text: 'The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.', needs: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: 'A merchant has bought land the old landholding family once held, and the family has not forgotten.', twinOf: 'The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.', excludes: Object.freeze(['tier: ≥ town']) }),
   ]),
 });
 
+/** A house that keeps beasts or grazing (the detector's own words, `tests/helpers/pageLaws/law15K.mjs`). */
+const GRAZING_HOUSE = /grazing|pasture|herd|shepherd|livestock|cattle|sheep|goat|ranch|dairy|stockyard|horse|stable|drover/i;
+/** A ground of the land: grazing, fields, farms, forest, foraging or hunting (the same). */
+const LAND_GROUND = /forag|hunt|grass|pasture|meadow|plain|steppe|farm|fertile|grain|orchard|mill|herb|grove|forest|wood(?!.*ship)|grazing|herds/i;
+/** The grounds a quarrel can be over, in order, and how the line names each. @type {ReadonlyArray<readonly [RegExp, string]>} */
+const QUARREL_GROUNDS = Object.freeze([
+  [/marsh/i, 'the marsh'], [/harbour|coast|shore|beach/i, 'the shore'],
+]);
+
+/**
+ * BAR8-K-POWERS (rule 15b; the chair's BR15): THE QUARREL OVER THE GROUND THE PLACE HAS, where it has no grazing. The grazing
+ * quarrel presumes grazing; the boundary is the second check's, and thin (C31732 STANDS in a thorp whose grounds are a deep
+ * harbour, ship timber and ruins; C30951 and C31349, the same record but for a foraging or a hunting ground, were EXPLAINED:
+ * a farming or foraging place can quarrel over grazing). So the twin is taken only where the place holds no grazing house,
+ * no running pastoral chain and no ground of the land (grass, pasture, field, farm, forest, foraging or hunting ground); its
+ * subject is read off the place's own grounds (the marsh, the shore), else its water.
+ * Pure: a reading of the arguments, no draw.
+ * @param {{ institutionNames?: ReadonlyArray<string>, pastoral?: boolean, grounds?: ReadonlyArray<unknown> }} place
+ * @returns {string | null} the twin, or null where the place grazes (the stock line stands)
+ */
+export function noGrazingQuarrelOf({ institutionNames = [], pastoral = false, grounds = [] }) {
+  const names = (Array.isArray(institutionNames) ? institutionNames : []).map((n) => String(n || ''));
+  const own = (Array.isArray(grounds) ? grounds : []).map((g) => String(g || ''));
+  if (pastoral === true || names.some((n) => GRAZING_HOUSE.test(n)) || own.some((g) => LAND_GROUND.test(g))) return null;
+  const ground = QUARREL_GROUNDS.find(([re]) => own.some((g) => re.test(g)));
+  return ground
+    ? `A dispute over rights on ${ground[1]} and access to water has run for two seasons, and those on each side of it no longer speak to one another.`
+    : 'A dispute over water access has run for two seasons, and those on each side of it no longer speak to one another.';
+}
 // CENSUS-5e unit 2 (2026-11-05; the chair's answer 1 to CENSUS-5d, R-AN / R-U): the town military
 // modifier's set (`MILITARY_MODIFIER_SIBLINGS`: garrison-backed / arms-backed) dissolved. Garrison
 // differs between the power step and the final record on 9 of 2,121 steps, so it is not settled
@@ -84,13 +134,26 @@ const declaredSet = (text, needs, twin) => Object.freeze([
 export const FACTION_DESC_SIBLINGS = Object.freeze({
   'Town watch; it enforces ordinances, manages disorder, and reports to the council.': declaredSet(
     'Town watch; it enforces ordinances, manages disorder, and reports to the council.', ['watch']),
-  'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.': declaredSet(
-    'Well-funded city watch; it keeps order reliably and is growing more sure of its own authority.', ['watch']),
+  // BAR2-PEOPLE (PP6, the chair's rulings PP6 and PT3 of 2026-11-15, vetoable by the owner): was "Well-funded city watch; it
+  // keeps order reliably ...", false in 57 of the 101 towns that printed it (a coordinated crime wave or irregular pay beside
+  // it); the power step cannot read the safety profile, so the line claims neither the funding nor the order, and keeps `watch`
+  'City watch; it answers for keeping order and is growing more sure of its own authority.': declaredSet(
+    'City watch; it answers for keeping order and is growing more sure of its own authority.', ['watch']),
   'City watch; law enforcement and external defence, stretched between multiple responsibilities.': declaredSet(
     'City watch; law enforcement and external defence, stretched between multiple responsibilities.', ['watch']),
   'A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.': declaredSet(
     'A small group of traders who come on market days; they speak up in small disputes but carry little weight beyond them.', ['market']),
 });
+
+/**
+ * BAR8-K-POWERS (rule 14d, the audit's C44634; BRIEF-BAR8 K-POWERS 3; THE TWIN, vetoable by the owner): THE ELECTED REEVE'S
+ * LINE NAMES A NOBLE ONLY WHERE ONE STANDS. "... under noble oversight" printed in every village whose seat is the Elected
+ * Reeve, with no noble power, house or person on the record (the 720: 8 of 8). `rulingStructure.js` reads it at the draw:
+ * the original where the step seats a noble power (the noble roster's own gate) or the place holds a noble house
+ * (`hasNobleInst`); else the twin, the one elected answering to the people who chose them (true of every elected reeve);
+ * `applyDensityLaw.js :: reeveToRoster` reads it again after the roster's trim.
+ */
+export const REEVE_ANSWERS_TO_ELECTORS = 'One of the peasantry, elected by the rest, manages labour and mediates disputes, and answers to the people who chose them.';
 
 /**
  * SW-B1 CONTRADICTIONS (STYLE-RULINGS-2 B1(b), the SURFACES audit's P50; 2026-11-09): the government
@@ -101,8 +164,11 @@ export const FACTION_DESC_SIBLINGS = Object.freeze({
  */
 export const GOV_DESC_OF_UNNAMED_SEAT = Object.freeze({
   'Elder Consensus': 'The elders of the hamlet decide things together, and people follow them out of respect.',
-  'Free Elder Council': 'The elders of the hamlet decide things together, and no lord stands over them.',
-  "Headman's Authority": 'A headman settles disputes and gives the orders here.',
+  // TAIL-TIES-2 (rows 20473 / 10615 / 00909 and 02676, 2026-11-15): a seat's line claims no more than every town that
+  // holds the seat bears: an occupier's governor stands over an occupied hamlet's elders and gives its orders, and a
+  // lord may live in a free hamlet (the seat is read at the power step, before the crisis: the line names neither).
+  'Free Elder Council': 'The elders of the hamlet decide things together, and none of them rules alone.',
+  "Headman's Authority": 'A headman settles disputes and speaks for the community.',
   'Priestly Guidance': 'The priest guides the community, and disputes are brought to the priest to settle.',
   'Town Mayor': "A mayor runs the town's day-to-day business.",
   'Grand Guild Council': 'The guilds of the metropolis govern together; the richer the guild, the more say it has.',
