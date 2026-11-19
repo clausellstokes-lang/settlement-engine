@@ -382,20 +382,51 @@ describe('npm run check ↔ parallel ci.yml gate parity', () => {
   });
 
   it('gives the measured full-suite ratchet enough CI timeout headroom', () => {
-    // 135, raised from 90 on 2026-09-20 in the same commit as the cap it pins. 90 was itself
-    // set that morning with NO concluded run to measure — both of PR #53's first runs were cut
-    // at 45 — and its comment promised to tighten to measured-plus-headroom once a real figure
-    // arrived. It arrived, and it was not slack: both runs at f76ddf0ab CONCLUDED GREEN at
-    // 62m37s (35541172706, push) and 82m08s (35541276693, pull_request) — the SAME commit, a
-    // twenty-minute spread between two runners, and 82m08s is 91% of the 90-minute cap. The
-    // rule this cap now follows is the longest CONCLUDED run × 1.5, rounded up to the next 15:
-    // 82m08s × 1.5 = 123m12s → 135 (the job's own comment carries the run ids).
     // THE DIRECTION OF THIS PIN: it exists so the cap cannot drift back BELOW the measured
     // suite, so it is raised with a fresh measurement and never lowered to match a run that was
-    // cut. A cut run is not evidence that a smaller cap suffices.
+    // cut. A cut run is not evidence that a smaller cap suffices. The rule the cap follows is the
+    // longest CONCLUDED run × 1.5, rounded up to the next 15.
+    // HISTORY: 135 on the serial job from 2026-09-20 (82m08s × 1.5 → 135). By 2026-11-19 the
+    // serial step concluded at 113m45s and 132m33s and was CUT at 134m28s twice, so the suite
+    // was SHARDED (CI-SHARD) rather than given another cap: the suite now runs in the matrix job
+    // `check-tests-shard`, six shards, and `check-tests` is the verdict over their merged report.
+    // The shard cap is the estimate the job's comment carries (the largest local shard is 19.1%
+    // of the suite; 19.1% of 132m33s plus set-up = 26m20s × 1.5 → 45), TIGHTENED by the same
+    // rule at the first concluded shard figure; the verdict runs no test and carries 10.
     const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
-    const testsJob = jobBody(ci, 'check-tests');
-    expect(testsJob).toMatch(/^\s*timeout-minutes:\s*135\s*$/m);
+    const shardJob = jobBody(ci, 'check-tests-shard');
+    const verdictJob = jobBody(ci, 'check-tests');
+    expect(shardJob, 'ci.yml must declare the check-tests-shard matrix job').toBeTruthy();
+    expect(shardJob).toMatch(/^\s*timeout-minutes:\s*45\s*$/m);
+    expect(verdictJob).toMatch(/^\s*timeout-minutes:\s*10\s*$/m);
+  });
+
+  it('the sharded ratchet judges ALL six shards once, and the verdict cannot be skipped', () => {
+    // What the serial job guaranteed and the sharded shape must keep: ONE verdict, over the
+    // WHOLE source phase, by the ratchet's own code. The partition itself is vitest's sequencer
+    // and the merge refuses an overlap, a missing shard and a wrong count
+    // (tests/lint/vitestShardMerge.test.js drives each refusal); this pins the WIRING.
+    const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+    const shardJob = jobBody(ci, 'check-tests-shard');
+    const verdictJob = jobBody(ci, 'check-tests');
+    const shardList = shardJob.match(/^\s*shard:\s*\[([^\]]+)\]\s*$/m)?.[1].split(',').map((s) => Number(s.trim()));
+    expect(shardList, 'the matrix must list its shards explicitly').toEqual([1, 2, 3, 4, 5, 6]);
+    expect(shardJob).toMatch(/^\s*fail-fast:\s*false\s*$/m);
+    const shardRuns = runCommands(shardJob).join('\n');
+    expect(shardRuns).toMatch(/node scripts\/test-ratchet-shard\.mjs\s*\\?\s*"\$\{\{ matrix\.shard \}\}" 6 /);
+    // The shard keeps everything the serial job carried: the database, its URL, the ledger ref.
+    expect(shardJob).toMatch(/^\s*postgres:\s*$/m);
+    expect(shardJob).toMatch(/CUSTOM_CONTENT_CONCURRENCY_DATABASE_URL:/);
+    expect(shardRuns).toContain('+refs/heads/review-fixes-2026-07-08:refs/heads/review-fixes-2026-07-08');
+
+    expect(verdictJob.match(/^\s*needs:\s*\[([^\]]+)\]\s*$/m)?.[1].trim()).toBe('check-tests-shard');
+    expect(verdictJob, 'the verdict must run after a failed shard, to fail closed with a reason')
+      .toMatch(/^\s*if:\s*\$\{\{\s*!cancelled\(\)\s*\}\}\s*$/m);
+    const verdictRuns = runCommands(verdictJob).join('\n');
+    expect(verdictRuns).toMatch(/node scripts\/merge-vitest-shard-reports\.mjs --count 6 /);
+    expect(verdictRuns).toMatch(/npm run test:ratchet -- --from-log "\$RUNNER_TEMP\/test-ratchet-merged\.json"/);
+    expect(verdictJob).toMatch(/SHARDS_RESULT:\s*\$\{\{\s*needs\.check-tests-shard\.result\s*\}\}/);
+    expect(verdictRuns).toContain('if [ "$SHARDS_RESULT" != success ]; then');
   });
 
   it('every setup-node use reads the repository runtime pin', () => {

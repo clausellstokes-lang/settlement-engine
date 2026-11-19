@@ -198,6 +198,25 @@ export function runnerCommandOf({ verifyDist = false, outputFile }) {
 }
 
 /**
+ * The environment each phase's runner is spawned with; exported so the CI shard runner
+ * (scripts/test-ratchet-shard.mjs) spawns its shard of the source phase with the SAME
+ * environment `run` gives the whole one, never a hand copy. Moved here out of `run`
+ * unchanged (CI-SHARD, 2026-11-19): the source phase strips both dist switches, the
+ * strict phase sets both, and the runner is told the report path it must write.
+ */
+export function runnerEnvOf({ verifyDist = false, outputFile }, baseEnv = process.env) {
+  const runnerEnv = { ...baseEnv, TEST_RATCHET_OUTPUT_FILE: outputFile };
+  if (verifyDist) {
+    runnerEnv.VERIFY_DIST = '1';
+    runnerEnv.VERIFY_ENGINE_REMOTE_DIST = '1';
+  } else {
+    delete runnerEnv.VERIFY_DIST;
+    delete runnerEnv.VERIFY_ENGINE_REMOTE_DIST;
+  }
+  return runnerEnv;
+}
+
+/**
  * THE FLAGGED DIST (DIST-FLAGGED, 2026-11-10; the chair's D1). The production artifact is the
  * FLAGGED build — docs/DEPLOY.md sets VITE_ENGINE_REMOTE=true on Vercel, and a flagged build
  * carries no generator (vite.config.js :: engineAbsentWhenRemote) — yet until this line no gate
@@ -981,16 +1000,15 @@ export async function run(argv = []) {
   } else {
     const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'test-ratchet-'));
     OUT = path.join(TMP, 'results.json');
-    const runnerEnv = { ...process.env, TEST_RATCHET_OUTPUT_FILE: OUT };
-    if (VERIFY_DIST) runnerEnv.VERIFY_DIST = '1';
-    else delete runnerEnv.VERIFY_DIST;
+    // runnerEnvOf: VERIFY_DIST and VERIFY_ENGINE_REMOTE_DIST set for the strict phase,
+    // both stripped for the source phase.
+    const runnerEnv = runnerEnvOf({ verifyDist: VERIFY_DIST, outputFile: OUT });
     // THE FLAGGED DIST (D1; remoteDistBuildCommandOf above). Built before the strict runner,
     // and the runner told to REQUIRE it. A build that fails is a closed failure, never a
     // skip. Under the injected runner seam alone (the meta-gate's fake vitest, which reads
     // no dist) nothing is built unless TEST_RATCHET_REMOTE_BUILD_CMD names a command; the
     // real runner always gets the real build.
     if (VERIFY_DIST) {
-      runnerEnv.VERIFY_ENGINE_REMOTE_DIST = '1';
       const remoteBuild = process.env.TEST_RATCHET_REMOTE_BUILD_CMD
         || (process.env.TEST_RATCHET_RUN_CMD ? null : remoteDistBuildCommandOf());
       if (remoteBuild) {
@@ -1006,7 +1024,7 @@ export async function run(argv = []) {
           ]);
         }
       }
-    } else delete runnerEnv.VERIFY_ENGINE_REMOTE_DIST;
+    }
     try {
       runnerOutput = execSync(
         process.env.TEST_RATCHET_RUN_CMD
