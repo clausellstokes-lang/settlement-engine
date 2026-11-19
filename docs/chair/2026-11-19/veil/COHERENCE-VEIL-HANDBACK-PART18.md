@@ -102,3 +102,23 @@ wording exactly from served data alone, else (b) withhold wherever a hidden-whol
 spatialLayout.quarters withheld whole (nothing draws it on a non-owner page); two rows (the diffuse safety bands, NPC
 roster composition) and the `npc_veiled_` id prefix left for the chair or the owner. AWAITING THE CHAIR'S ANSWER: nothing
 of VR4 is built.
+
+THE CHAIR'S RULINGS ON THE VR4 PROPOSAL (2026-11-19 06:53 UTC, copied whole; each vetoable by the owner): "VR7: THE
+MECHANISM IS APPROVED as proposed: one ROSTER-CHOICE REGISTRY module (path, chooser, house predicate, rule) read by 212
+and the twin alike; (a) RECOMPOSE where SQL rebuilds the served-roster wording EXACTLY from served data alone, (b)
+WITHHOLD everywhere else a house hidden whole could have chosen it; NO stored twin and no new key on the saved record;
+the guards as proposed (a registry walker red on any unregistered roster predicate or crime-name regex; a born
+counterfactual test in both engines). VR8, the diffuse rows: LEAVE THEM DIFFUSE, RECORDED: the overall safety band
+(safetyLabel) and the roster's general composition are statistical signals, not a tell of a house; they stay, named in
+the pull request as known residual signals for the owner's veto. BUT any safetyDesc or other sentence that names crime
+SPECIFICALLY (organised crime's foothold, a black market, smugglers) is not diffuse: it is (a) or (b). VR9, the
+holders: before you blank a role, MEASURE the base rate of people shown with no role on unveiled pages; if role-less
+people are rare (a blank role would itself tell), the holder's card is withheld WHOLE with its ties instead; if they are
+common, blanking stands. VR10, the `npc_veiled_` prefix: do not touch the saved record; try instead a per-read re-key of
+EVERY person's id on non-owner reads (salted, consistent within one payload), so no prefix or pattern tells; measure
+whether any non-owner view needs an id stable across reads; if one does, report it and it becomes the owner's question
+(re-minting at birth changes the saved record). Push your report and the measurement with your V8-9 work; your successor
+builds the mechanism from your hand-back."
+FOR THE SUCCESSOR: VR7 is built from `out/VR4-REPORT.md` section 3's placement table, read against VR8 (the safety band
+and roster composition stay; a crime-specific safetyDesc sentence is (a) or (b)), VR9 (measure the role-less base rate
+first) and VR10 (per-read salted re-key of every person's id on non-owner reads; measure id stability needs first).
