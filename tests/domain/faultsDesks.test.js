@@ -118,13 +118,13 @@ const MOD_LAST_LINE = rowOf(MOD_LAST);
 const head = (/** @type {number} */ vid) => textOf(vid).slice(0, 30).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const body = (/** @type {string} */ row) => row.replace(/^\d+\.\s+/, '');
 
-describe('FR7: the numbering guard refuses a renumbering and a re-use, by text', { timeout: 120_000 }, () => {
+describe('FR7: the numbering guard refuses a renumbering and a re-use, by text', () => {
   it('NEGATIVE: the annex as committed passes the guard (and the whole --check)', () => {
     const r = project(ANNEX);
     // anchored: the same output is asserted below to be the whole --check's success (exit 0), so the run is live
     expect(r.out).not.toContain(GUARD);
     expect(r.status, r.out.slice(-1500)).toBe(0);
-  });
+  }, 120_000); // its own budget (moved from the describe's options for SUITE_ARG_FORM, the last close)
 
   it('POSITIVE: two rows of one pool swapped (each text would take the other\'s vid) is RENUMBERED', () => {
     const r = project(plant([[MOD3, `3. ${body(MOD4)}`], [MOD4, `4. ${body(MOD3)}`]]));
@@ -132,7 +132,7 @@ describe('FR7: the numbering guard refuses a renumbering and a re-use, by text',
     expect(r.out).toContain(GUARD);
     expect(r.out).toMatch(new RegExp(`DS-DEF-3 :: Moderate: RENUMBERED: the text "${head(3)}.*stood at v3 at the baseline and would take v4`));
     expect(r.out).toMatch(new RegExp(`DS-DEF-3 :: Moderate: RENUMBERED: the text "${head(4)}.*stood at v4 at the baseline and would take v3`));
-  });
+  }, 120_000); // its own budget (moved from the describe's options for SUITE_ARG_FORM, the last close)
 
   it('POSITIVE: a vid handed a text another vid holds is RE-USED (and nothing is RENUMBERED)', () => {
     const r = project(plant([[MOD4, `4. ${body(MOD3)}`]]));
@@ -141,7 +141,7 @@ describe('FR7: the numbering guard refuses a renumbering and a re-use, by text',
     expect(r.out).toMatch(new RegExp(`DS-DEF-3 :: Moderate: RE-USED: v4 named "${head(4)}.*the baseline's v3`));
     // anchored: the same output carries the RE-USED refusal (asserted above), so the guard ran and spoke
     expect(r.out).not.toContain('RENUMBERED');
-  });
+  }, 120_000); // its own budget (moved from the describe's options for SUITE_ARG_FORM, the last close)
 
   it('POSITIVE: BAR6-DEFDESK\'s shape, a line inserted before older ones with the rows below renumbered, is refused', () => {
     const from = ANNEX.indexOf('**`Moderate`**\n');
@@ -156,14 +156,14 @@ describe('FR7: the numbering guard refuses a renumbering and a re-use, by text',
     expect(r.out).toContain(GUARD);
     expect(r.out).toMatch(new RegExp(`DS-DEF-3 :: Moderate: RENUMBERED: the text "${head(3)}.*stood at v3 at the baseline and would take v4`));
     expect(r.out).toMatch(new RegExp(`DS-DEF-3 :: Moderate: RE-USED: v3 named "${head(3)}`));
-  });
+  }, 120_000); // its own budget (moved from the describe's options for SUITE_ARG_FORM, the last close)
 
   it('POSITIVE: a number gone from a pool is DROPPED', () => {
     const r = project(plant([[`${MOD4}\n`, '']]));
     expect(r.status).not.toBe(0);
     expect(r.out).toContain(GUARD);
     expect(r.out).toMatch(new RegExp(`DS-DEF-3 :: Moderate: DROPPED: v4 "${head(4)}`));
-  });
+  }, 120_000); // its own budget (moved from the describe's options for SUITE_ARG_FORM, the last close)
 
   /** v3's own words cut at its first comma: a rewording in place, under the same number and tags */
   const REWORDED = `${textOf(3).split(',')[0]}.`;
@@ -176,7 +176,7 @@ describe('FR7: the numbering guard refuses a renumbering and a re-use, by text',
     expect(r.out).toMatch(/DS-DEF-3 :: Moderate: REWORDED: v3 would change its words in place/);
     // anchored: the same output carries the REWORDED refusal (asserted above), so the guard ran and spoke
     expect(r.out).not.toMatch(/RENUMBERED|RE-USED|DROPPED/);
-  });
+  }, 120_000); // its own budget (moved from the describe's options for SUITE_ARG_FORM, the last close)
 
   it('NEGATIVE: the same rewording WITH its row passes the guard; a row for another number, or another text, does not', () => {
     const annex = plant([[MOD3, reworded]]);
@@ -194,14 +194,14 @@ describe('FR7: the numbering guard refuses a renumbering and a re-use, by text',
     ])) {
       expect(project(annex, [wrong]).out).toMatch(why);
     }
-  });
+  }, 120_000); // its own budget (moved from the describe's options for SUITE_ARG_FORM, the last close)
 
   it('NEGATIVE: a new line at the NEXT number passes the guard (the --check then finds the leaf stale)', () => {
     const r = project(plant([[MOD_LAST_LINE, `${MOD_LAST_LINE}\n${MOD_LAST + 1}. \`[visitor · tier: ≥ village]\` A planted line at the next number.`]]));
     // anchored: the same output is asserted on the next line to reach the --check's staleness test, past the guard
     expect(r.out).not.toContain(GUARD);
     expect(r.out).toContain('is stale; run `npm run gen:dossier-prose`');
-  });
+  }, 120_000); // its own budget (moved from the describe's options for SUITE_ARG_FORM, the last close)
 });
 
 // ─── 13d (FR6): the atom and the seven lines ─────────────────────────────────────────────────────────────────────────

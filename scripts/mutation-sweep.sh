@@ -143,6 +143,15 @@ MUTATED_FILES=(
   src/domain/display/validationOnPage.js
   src/data/arrivalProse.js
   src/generators/steps/generateNarratives.js
+  src/generators/economy/incomeLineSiblings.js
+  src/data/faceHonorifics.js
+  src/data/people/handlerTieLines.js
+  src/generators/power/rulingStructure.js
+  src/domain/facts/forceHours.js
+  src/generators/people/goals.js
+  src/generators/people/poolMap.js
+  src/data/institutionDescVariants.js
+  src/generators/servicesGenerator.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -1747,6 +1756,82 @@ check_caught "bar8-scenes/nobody looks hungry wants the food band secure or bett
 #      title_matches=1; restored => 9 passed.
 perl -0pi -e 's/^  boughtFishRowsInPlace\(/  if (0) boughtFishRowsInPlace(/m' src/generators/steps/generateNarratives.js
 check_caught "bar8-fish-rows/where the fish is bought in the catch row is its inland alternative" src/generators/steps/generateNarratives.js "npx vitest run tests/generators/bar8FishRows.test.js --no-file-parallelism" "BOUGHT: the fish bought in, the Fish market sells its \"Preserved fish\" with its own words, and no morning catch"
+
+
+# 132. THE FISHED-OUT INCOME LINE ASKS THE FISH STORY FIRST (BAR8 J-INCOME-2 item 2, 11b, the sixth chair's point 54, 2026-11-17). The rites line
+#      is put back where every fishery is fished out, so "rites keep the catch coming, and it is landed and sold here" prints
+#      again; tests/generators/bar8Income.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 10 passed; planted => 2 red, 8 passed,
+#      title_matches=1; restored byte-identically => 10 passed.
+perl -0pi -e 's/if \(f\.fisheryExhausted\) return bought\(\/\\bsalt\(\?:ed\)\? fish\\b\/i\) \? FISH_BOUGHT_LINE : \x27\x27;/if (f.fisheryExhausted) return FISH_RITES_LINE;/' src/generators/economy/incomeLineSiblings.js
+check_caught "bar8-income/the fished-out income line asks the fish story first" src/generators/economy/incomeLineSiblings.js "npx vitest run tests/generators/bar8Income.test.js --no-file-parallelism" "a constructed record: bought in, the bought line; nothing bought, no sentence; a live fishery keeps its line"
+
+# 133. "EMIR" IS THE ARABIC LORD OF ONE SEX (BAR8 K-PEOPLE 14g, BR14, C36170, point 50). The woman's title is put back to "Emir";
+#      tests/generators/bar8People.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 12 passed; planted => 1 red, 11 passed,
+#      title_matches=1; restored byte-identically => 12 passed.
+perl -0pi -e 's/\{ male: "Emir", female: "Emira" \}/{ male: "Emir", female: "Emir" }/' src/data/faceHonorifics.js
+check_caught "bar8-people/the arabic lord of one sex" src/data/faceHonorifics.js "npx vitest run tests/generators/bar8People.test.js --no-file-parallelism" "a woman who holds the seat is Emira, a man Emir, on the resolver and on the card door"
+
+# 134. A TIE LINE THAT HOLDS SOMEONE INSIDE DECLARES THE PRISON, EACH LINE ALONE (BAR8 PEOPLE-2 13b, point 58). The held friend's
+#      description (C37891) loses its `needs: ['prison']`; tests/generators/bar8People2.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 6 passed; planted => 1 red, 5 passed,
+#      title_matches=1; restored byte-identically => 6 passed.
+perl -0pi -e 's/ needs: \[\x27prison\x27\] \}, (\/\/ BAR8 K-PEOPLE \(13b, C37891\))/ }, $1/' src/data/people/handlerTieLines.js
+check_caught "bar8-people-2/the held friend declares the prison" src/data/people/handlerTieLines.js "npx vitest run tests/generators/bar8People2.test.js --no-file-parallelism" "every line that holds someone inside declares \`prison\`; the three of them are found"
+
+# 135. THE ELECTED REEVE ANSWERS TO A NOBLE ONLY WHERE ONE STANDS (BAR8-K-POWERS 14d, C44634, point 49). Every reeve takes the
+#      "under noble oversight" line again; tests/generators/bar8Powers.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 5 passed; planted => 1 red, 4 passed,
+#      title_matches=1; restored byte-identically => 5 passed.
+perl -0pi -e 's/\x27Elected Reeve\x27: noblePower > \(tier === \x27town\x27 && !hasNobleInst \? 10 : 5\) \|\| hasNobleInst \?/\x27Elected Reeve\x27: true ?/' src/generators/power/rulingStructure.js
+check_caught "bar8-powers/the elected reeve answers to a noble only where one stands" src/generators/power/rulingStructure.js "npx vitest run tests/generators/bar8Powers.test.js --no-file-parallelism" "14d: the Elected Reeve answers to a noble only where one stands"
+
+# 136. THE WATCH ON ITS ROUNDS BY DAY ONLY WHERE THE FORCE WALKS BY DAY (BAR8-K-WATCH 13e, C42053, point 48). The atom stops
+#      reading the force's night-only text, so a night watch walks "most hours of the day" again; tests/generators/bar8Watch.test.js
+#      must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 10 passed; planted => 5 red, 5 passed,
+#      title_matches=1; restored byte-identically => 10 passed.
+perl -0pi -e 's/return houses\.some\(\(f\) => !nightOnlyText\(f\?\.desc\) && !mustersOnlyAtNeed\(f\?\.desc\)\);/return houses.some((f) => !mustersOnlyAtNeed(f?.desc));/' src/domain/facts/forceHours.js
+check_caught "bar8-watch/the watch on its rounds by day only where the force walks by day" src/domain/facts/forceHours.js "npx vitest run tests/generators/bar8Watch.test.js --no-file-parallelism" "the atom \`force walks by day\` reads the force's own text (constructed rosters)"
+
+# 137. A DEPENDENCY GOAL PRESUMES A SUPPLY ONLY OF A GOOD BROUGHT IN OR HAD (FAULTS-NEED item 2, 11e.wantBuy, point 61). The
+#      refusal where the need list names the good is taken off, so "Buy {resource} at the market" is dealt beside "Needed, and
+#      not brought in"; tests/generators/faultsNeed.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 11 passed; planted => 1 red, 10 passed,
+#      title_matches=1; restored byte-identically => 11 passed.
+perl -0pi -e 's/\.map\(\(c\) => \(unmet \? \{ \.\.\.c, refused: true \} : c\)\)\);/.map((c) => c));/' src/generators/people/goals.js
+check_caught "faults-need/a dependency goal presumes a supply only of a good brought in or had" src/generators/people/goals.js "npx vitest run tests/generators/faultsNeed.test.js --no-file-parallelism" "the towns of the sample: no card wants a supply of a good the page says is needed and not brought in; dependency goals still deal"
+
+# 138. THE FISHMONGER TALKS OF THE BOATS AND THE CATCH ONLY WHERE A CATCH IS LANDED (FAULTS-PEOPLE FR5, point 62). The settle step
+#      no longer prints the row's twin where its declaration refuses the row; tests/generators/faultsPeople.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 9 passed; planted => 2 red, 7 passed,
+#      title_matches=1; restored byte-identically => 9 passed.
+perl -0pi -e 's/if \(twin && card\.presentation\?\.behaviour === /if (0 && twin && card.presentation?.behaviour === /' src/generators/people/poolMap.js
+check_caught "faults-people/the fishmonger talks of the catch only where a catch is landed" src/generators/people/poolMap.js "npx vitest run tests/generators/faultsPeople.test.js --no-file-parallelism" "settleTitleLines on a constructed card: the twin in the slot where no catch is landed; the boats where it is"
+
+# 139. THE FAIR OFFERS NO LUXURY THE NEED LIST SAYS IS NOT BROUGHT IN (FAULTS-ROWS FR3, point 65). The fair's first line drops
+#      its `need not brought in: luxury` exclusion, so "Luxury goods available." prints beside "Needed, and not brought in:
+#      luxury goods."; tests/generators/faultsRows.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 15 passed; planted => 2 red, 13 passed,
+#      title_matches=1; restored byte-identically => 15 passed.
+perl -0pi -e 's/(\{ text: "Regional merchants\. Luxury goods available\.", excludes: Object\.freeze\(\[\x27crisis: under_siege\x27), \x27need not brought in: luxury\x27\]\)/$1])/' src/data/institutionDescVariants.js
+check_caught "faults-rows/the fair offers no luxury the need list says is not brought in" src/data/institutionDescVariants.js "npx vitest run tests/generators/faultsRows.test.js --no-file-parallelism" "UNMET: the twin prints in the line's place, beside the page's own \"Needed, and not brought in\" luxury"
+
+# 140. THE NAME SLOT CLAIMS NO FIELD (FAULTS-TOOLS item 1, the chair's ruling CL25, point 60). The matcher stops striking the name
+#      slots, so "{settlement}" claims the record's `settlement` field again; tests/generators/faultsTools.test.js must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 8 passed; planted => 3 red, 5 passed,
+#      title_matches=1; restored byte-identically => 8 passed.
+perl -0pi -e 's/const body = NAME_SLOTS\.reduce\(\(t, slot\) => t\.split\(`\{\$\{slot\}\}`\)\.join\(\x27 \x27\), String\(text \|\| \x27\x27\)\);/const body = String(text || \x27\x27);/' src/domain/prose/entryWalker.js
+check_caught "faults-tools/the name slot claims no field" src/domain/prose/entryWalker.js "npx vitest run tests/generators/faultsTools.test.js --no-file-parallelism" "the NAME SLOT claims no field; a slot naming a field, and the bare word, still do"
+
+# 141. THE HOLDING CELLS HOLD "PENDING TRIAL" ONLY WHERE A COURT SITS (FAULTS-WATCH item 7, FR22 (3), point 66). The twin
+#      "Short-term detention until a fine is paid." is no longer written where no court sits; tests/generators/faultsWatch.test.js
+#      must red.
+#      Measured in a scratch worktree (LASTCLOSE-SIGN, 2026-11-19, the tree of 319d75ac1): clean => 26 passed; planted => 2 red, 24 passed,
+#      title_matches=1; restored byte-identically => 26 passed.
+perl -0pi -e 's/if \(svc\?\.name === \x27Holding cells\x27 && svc\.desc === HOLDING_CELLS_PENDING_TRIAL\) svc\.desc = HOLDING_CELLS_UNTIL_FINE;/if (0) svc.desc = HOLDING_CELLS_UNTIL_FINE;/' src/generators/servicesGenerator.js
+check_caught "faults-watch/the holding cells hold pending trial only where a court sits" src/generators/servicesGenerator.js "npx vitest run tests/generators/faultsWatch.test.js --no-file-parallelism" "every town of the guard that holds the row: the twin exactly where no court sits, the original exactly where one does"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

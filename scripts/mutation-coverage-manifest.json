@@ -4614,6 +4614,46 @@
     "tests/generators/power/bar2PeoplePowers.test.js": {
       "kind": "rationale",
       "rationale": "Introduced by the BAR2-PEOPLE seat, batch A (rulings PP1, PP2, PP9, PP10) in commit 7f040c7e. It pins, on census births, that the powers say what the record holds: the hall's free rung's label claims only the rung; under an occupation the strata's note is silent where a relation line already names the decider (src/domain/dossier/powerStrata.js); the mine captain's lines claim the trade, not present work on ore (src/data/people/dmPowerLines.js); and under a siege the checkpoint's and quay's hooks take a twin and the occupier's standing line says it decides (src/generators/power/conflictIssues.js, src/generators/power/factionStanding.js). The mutation it kills: restoring any old line or the strata's second decider reds its refused pair, which the header records red at the base f8042b61; KEEP pairs green before and after. Entered by BAR2-CLOSE-SWEEP-B at the close of BAR2 (2026-11-15): the round's branch wrote the test beside its cure and left it without a manifest entry (TOTALITY red at the joined tip 52f0a1684). No planted regression has been run for it; a sweep plant would re-plant the same cure-revert the commit already describes, and is owed when the sweep next touches the named writer."
+    },
+    "tests/generators/bar8Income.test.js": {
+      "kind": "mutation",
+      "label": "bar8-income/the fished-out income line asks the fish story first"
+    },
+    "tests/generators/bar8People.test.js": {
+      "kind": "mutation",
+      "label": "bar8-people/the arabic lord of one sex"
+    },
+    "tests/generators/bar8People2.test.js": {
+      "kind": "mutation",
+      "label": "bar8-people-2/the held friend declares the prison"
+    },
+    "tests/generators/bar8Powers.test.js": {
+      "kind": "mutation",
+      "label": "bar8-powers/the elected reeve answers to a noble only where one stands"
+    },
+    "tests/generators/bar8Watch.test.js": {
+      "kind": "mutation",
+      "label": "bar8-watch/the watch on its rounds by day only where the force walks by day"
+    },
+    "tests/generators/faultsNeed.test.js": {
+      "kind": "mutation",
+      "label": "faults-need/a dependency goal presumes a supply only of a good brought in or had"
+    },
+    "tests/generators/faultsPeople.test.js": {
+      "kind": "mutation",
+      "label": "faults-people/the fishmonger talks of the catch only where a catch is landed"
+    },
+    "tests/generators/faultsRows.test.js": {
+      "kind": "mutation",
+      "label": "faults-rows/the fair offers no luxury the need list says is not brought in"
+    },
+    "tests/generators/faultsTools.test.js": {
+      "kind": "mutation",
+      "label": "faults-tools/the name slot claims no field"
+    },
+    "tests/generators/faultsWatch.test.js": {
+      "kind": "mutation",
+      "label": "faults-watch/the holding cells hold pending trial only where a court sits"
     }
   },
   "meta": {

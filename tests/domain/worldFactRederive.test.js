@@ -564,7 +564,9 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // Part 1's final tip 6483322cc): the generator master 6adede0d.. -> 03f9688f.. (390 of 525 rows; the round's declared cures, 1581ed12).
     // The close of the rounds BAR5 to BAR8 (2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json, CLOSE-DOORS-2), at the doors' branch 2f4eb8acf (it
     // holds Part 1's final tip 0af60594a): the generator master 03f9688f.. -> d08ae44c.. (485 of 525 rows; the rounds' declared cures, b3cfdbcc3).
-      .toBe('d08ae44c734208f800195d73a83ab90fc7643b02d46a010e347472a88376c18b');
+    // The last close before the deploy (2026-11-18-the-last-close-points-54-to-70.json, LASTCLOSE-SIGN), at lane/lastclose-sign-2026-11-18 over the
+    // landings' tip cc11c9504 (points 54 to 70): the generator master d08ae44c.. -> 079bfce6.. (222 of 525 rows; the points' declared cures, a7a25bd39).
+      .toBe('079bfce6d67fa99cfdd9a52f81d3c4dd1070390a1e8f8073795f39d5d0aa05c7');
     // Record 9, the composed-prose manifest signed ONCE at the wave's final tip (2026-11-08-merge-wave-9-composed-prose-
     // manifest.json), from the stage at 0c93f0ca0: the prose manifest f2d3410b.. -> 7bdc431e.. (1,050 of 1,050 rows).
     // Record 10 of the train, the composed-prose manifest signed ONCE at the train's final tip (2026-11-09-merge-train-10-
@@ -579,8 +581,11 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // 6483322cc, after the golden master and the fence: the prose manifest be43267f.. -> 99c8150a.. (734 of 1,050 rows; the round's declared cures).
     // The close of the rounds BAR5 to BAR8 (2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json, CLOSE-DOORS-2), at the doors' branch over Part 1's
     // final tip 0af60594a, after the golden master and the fence: the prose manifest 99c8150a.. -> b0ec7651.. (704 of 1,050 rows; the rounds' declared cures).
+    // The last close before the deploy (2026-11-18-the-last-close-points-54-to-70.json, LASTCLOSE-SIGN), on its branch over the landings' tip
+    // cc11c9504, after the golden master and the fence: the prose manifest b0ec7651.. -> e4f5a46b.. (832 of 1,050 rows; the points' declared cures,
+    // and the recorder's provenance moved by DESKS-2's A2).
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('b0ec76516e242cdefdf7ed5898af5ac00c0ee92541963addb0c697f93b5e794e');
+      .toBe('e4f5a46b18e3b4f6025f5f6c9d7268f48f9984c42faddc576c3dae2ec36b96d1');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

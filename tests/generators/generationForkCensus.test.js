@@ -215,7 +215,11 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // reference files and open the pull request.", in the chair's chat; record docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json:
 // the rounds' declared cures move the control row's relationships[].tension (BAR5-THINGS, the notary tension's words), history.historicalEvents
 // (BAR7-LINES, the iron dispute) and economicState.localProduction (BAR6-RECORD); the golden re-recorded 485 of 525 at b3cfdbcc3, this row its control).
-const GOLDEN_CONTROL_HASH = '8bb20e966e6779efabd8b49efac2f3749a63015230df66380677f580200129e4';
+// -> 71ea4d5f the last close before the deploy, 2026-11-19 (LASTCLOSE-SIGN; the owner's word, 2026-11-18 about 19:07 UTC, "Yes to both", in the
+// chair's chat; the chair's line SIGN 2026-11-19 01:04 UTC; record docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json: K-WATCH's
+// declared cure (points 48, 49, 57: the watch's line by the hours it keeps) moves the control row's economicState.safetyProfile.guardEffectivenessDesc,
+// one text leaf, and no later point moves it; the golden re-recorded 222 of 525 at a7a25bd39, this row its control).
+const GOLDEN_CONTROL_HASH = '71ea4d5f28843f3a8027fe9ec2e23824d13c585a2df7b742cb4e000b01f65d4e';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',

@@ -248,6 +248,15 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // income (BAR6-RECORD; one town's complexity label reads its exports' count), the goals and conflicts that read a tie, the history (BAR7-LINES,
   // BAR5-MAGIC), a crime line and a pressure sentence. Re-captured at the frozen line 70e557d5b and again on the doors' branch over Part 1's final tip
   // 0af60594a (the sixty byte-equal) by this file's own loop (an untracked probe), twice and equal.
+  // RE-KEYED BY IDENTITY 2026-11-19 (the last close before the deploy, LASTCLOSE-SIGN; the owner's word, 2026-11-18 about 19:07 UTC, "Yes to both",
+  // in the chair's chat; the chair's line SIGN 2026-11-19 01:04 UTC; record docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json):
+  // 23 of 60 moved by the landed points' declared cures; the stored sixty reproduce at the first close's tip 0dee69e17 (60 of 60). MEASURED BY STEP,
+  // this file's own loop (an untracked probe) at each of the seventeen first-parent landing commits over 0dee69e17 that touch src/: MARKS-2 (56)
+  // city-005; K-WATCH and K-POWERS (48, 49, 57) village-000; K-PEOPLE and PEOPLE-2 (50, 58) village-009, town-001, -004, -008, city-005, -007,
+  // metropolis-009; FAULTS-NEED (61) city-001, -002, -007, metropolis-006, -007, -008, re-moved by LAST-VARIETY (70) (the goals); FAULTS-ROWS (65)
+  // town-002, -003, -005; FAULTS-WATCH (66) town-007 and its FR25 (67) hamlet-004; FAULTS-BIRTH's follow-ups (68) hamlet-007, village-003,
+  // city-004; LAST-DECLARE (69) village-001, town-009; no other step moves one. Re-captured at a7a25bd39's tree by this file's own loop, twice and
+  // equal (fixture tests/fixtures/x46-npc-band-dark-digests.json).
   const DARK =/** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));

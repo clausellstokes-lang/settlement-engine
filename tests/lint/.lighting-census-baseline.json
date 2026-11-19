@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "22e072a49f8e613e5e670a4c1cb0d3f0f20a7788",
-  "measuredBy": "CLOSE-DOORS-1B",
-  "date": "2026-11-18",
-  "note": "CLOSE-DOORS-1B (2026-11-18, the close of 2026-11-18, after the second merge 8d7c2af33): files 3641 -> 3682, exactly the 41 test files the line added since 6483322cc and none deleted (one or two a landing: BAR5, JOIN-16 points 1 to 9; BAR6 to BAR8, JOIN-17 points 2 to 30; the sixth chair's points 33 to 53; the close seats' merges), parked 468 -> 471, credited 3173 -> 3211, titles 30647 -> 30955, suiteTitles 8448 -> 8562",
-  "files": 3682,
+  "measuredAtSha": "061b9d29e88a0c99ed0bab46804237cab2a62be2",
+  "measuredBy": "LASTCLOSE-SIGN",
+  "date": "2026-11-19",
+  "note": "LASTCLOSE-SIGN (2026-11-19, the last close before the deploy, refrozen once more after the C6 cure of tests/domain/faultsDesks.test.js (its FR7 suite budget moved from the describe options to its eight arms, SUITE_ARG_FORM): files 3682 -> 3699, exactly the 17 test files points 54 to 70 added since the first close tip 0dee69e17 and none deleted (J-INCOME-2 bar8Income; MARKS-2 bar8Marks2; K-WATCH and K-POWERS bar8Watch, bar8Powers; K-PEOPLE and PEOPLE-2 bar8People, bar8People2; the desks bar8DesksEco, bar8DesksDef; FAULTS-TOOLS, -NEED, -PEOPLE, -BIRTH, -DESKS, -ROWS, -WATCH one each; LAST-DECLARE lastDeclare; LAST-VARIETY lastVariety), parked 471 -> 471 (the one parked by FAULTS-DESKS's describe options cured), credited 3211 -> 3228, titles 30955 -> 31153, suiteTitles 8562 -> 8626",
+  "files": 3699,
   "parked": 471,
-  "credited": 3211,
-  "titles": 30955,
-  "suiteTitles": 8562
+  "credited": 3228,
+  "titles": 31153,
+  "suiteTitles": 8626
 }

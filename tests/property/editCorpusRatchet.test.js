@@ -593,7 +593,11 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 70e557d5b and at the doors' branch over Part 1's final tip 0af60594a; E1 and E5 unmoved. ACCUMULATED: 2179 at 6c117344f (the round BAR5's nine
     // branches, JOIN-16 points 1 to 9, +6) and -3 over JOIN-17's points and the sixth chair's (the rounds' re-dealt readings E6 reaches); not bisected
     // by point. The ride-along's chain population below stands at [129, 143] (measured with this figure in place).
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([695, 275, 2176]);
+    // 2026-11-19, the last close before the deploy (LASTCLOSE-SIGN, BY MEASUREMENT; record docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json,
+    // the owner's word 2026-11-18 about 19:07 UTC, "Yes to both"; the chair's line SIGN 2026-11-19 01:04 UTC): [695, 275, 2176] -> [695, 275, 2179], this arm's
+    // received value at the landings' tip cc11c9504 (points 54 to 70 over the first close's tip 0dee69e17, where 2176 holds); E1 and E5 unmoved. ACCUMULATED over
+    // points 54 to 70 (the re-dealt readings E6 reaches: the goals, ties, secrets and supply lists the points' declared cures move), not bisected by point.
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([695, 275, 2179]);
     // an npc ROLE reached ZERO readings over the whole corpus until CRISIS, recorded so the figure is not silence.
     // 2026-11-05 (LANDING-6, the same bisection): 0 → 48 CRISIS (d3e072368: the crisis record carries its derived cast,
     // and the cast is chosen by role) → 63 SELF-VOUCH (0be13b5cb) → 32 car 3 (90dc22f18) → 24 PINS (37b1e746d) → 28 F6
