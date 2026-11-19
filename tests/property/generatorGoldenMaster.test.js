@@ -18,6 +18,17 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-19 — THE LAST CLOSE BEFORE THE DEPLOY (points 54 to 70), THROUGH THE SIGNED DOOR (ODQ §934.105 and the owner's own word in the chair's chat,
+ *   2026-11-18 about 19:07 UTC, "Yes to both" (the refresh of the stored reference files again, and the golden door's signing); the chair's line "SIGN"
+ *   2026-11-19 01:04 UTC; record docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json; seat LASTCLOSE-SIGN, vetoable).
+ *   222 of 525 rows (thorp 12, hamlet 12, village 48, town 101, city 25, metropolis 24) against the first close's tip 0dee69e17 (which reproduces all 525).
+ *   THE CAUSE: the declared cures of the points landed over 0dee69e17 on lane/landing-pieces-2026-11-18, EACH ROW LAID TO ITS STEP by births at all
+ *   seventeen first-parent steps that touch src/, each step equal to its seat's declared count: J-INCOME-2 (54) incomeSources[].desc 36; K-WATCH and K-POWERS
+ *   (48, 49, 57) safetyProfile.guardEffectivenessDesc 93, powerStructure.factions[].desc 24, .recentConflict 12; K-PEOPLE (50, 58) relationships 7, npcs[].goal 9;
+ *   FAULTS-NEED (61) npcs[].goal 13; FAULTS-PEOPLE (62) npcs[].presentation.behaviour 48; FAULTS-WATCH (66) the gate text 2, availableServices.legal 1, and its
+ *   FR25 (67) relationships 3, prominentRelationship 1; FAULTS-BIRTH's follow-ups (68) resourceAnalysis.imports 36, .gaps 12; LAST-DECLARE (69) npcs[].secret 3;
+ *   LAST-VARIETY (70) npcs[].goal 13 (point 61's rows); the rest none. No person, house, tie or name in or out. Written at 1b2cb89f4. d08ae44c.. -> 079bfce6..
+ *
  * 2026-11-18 — THE CLOSE OF THE ROUNDS BAR5 TO BAR8, THROUGH THE SIGNED DOOR (ODQ §934.105 and the owner's own word in the chair's chat, 2026-11-18 03:03:46 UTC,
  *   the whole of the message: "yes: refresh the stored reference files and open the pull request.", answering the chair's message of 02:47:31 UTC; the
  *   chair's line "SIGN" 06:57 UTC; record docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json; seat CLOSE-DOORS-2, vetoable).
