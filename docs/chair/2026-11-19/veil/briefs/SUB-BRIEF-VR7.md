@@ -63,6 +63,22 @@ SERVER on born towns; the twin's equality beside it, never instead of it.
   eye shut; Reveal DM off and on), both stored shapes (the new; master's, `RV9_GEN` = `/home/user/wt/master`), the
   gallery read AND the link: ZERO unregistered paths.
 
+## RULING VR16 (the chair, 2026-11-19 09:22 UTC, on design 1 below; vetoable by the owner), copied whole
+"DESIGN 1 IS APPROVED: a field NO non-owner page draws is withheld on EVERY non-owner read whatever the veil (VR14
+(iii) extended to undrawn text), so its absence tells nothing; only DRAWN fields take a conditional rule, (a) recompose
+by preference. Three conditions: (1) PROVE "UNDRAWN", do not trust the census. A born test renders every surface a
+non-owner can reach from the corpus: the shared page's every tab at desktop and phone width, the party link, the public
+page, the map, and every export a non-owner can trigger (PDF, journal, print, if reachable). Render each twice, from the
+served payload as is and with the withheld-always fields put back: the output must be BYTE-EQUAL. A field that moves a
+byte is DRAWN and takes (a) or (b) instead. Run it through the server's payload (VR15). (2) THE IMPORT never carries
+what a non-owner page withholds. Measure first, as you said. Where the importer's app needs a withheld field, it is
+re-derived at the save from the served data alone (as publicProse is recomposed), or the app reads its absence as an
+ordinary "not known". A field that neither can cover comes to me BEFORE you build around it. (3) The owner's own reads
+and the owner's exports of their own town are untouched: withhold-always is for non-owner reads only." VR9 and VR10
+ACCEPTED as measured. ORDER: R1, then R2 under VR16; B/C/D; then VR15 (b); then E.
+So R2 carries, red first, the render-twice born test of condition (1) (`tests/security/` or `tests/components/`, a
+basename that avoids the mutation manifest's name pattern unless it owes a row) and the import measure of (2).
+
 ## THE SEAT'S DESIGN (binding where it says so)
 1. PREFER THE UNCONDITIONAL RULE (binding). A conditional withhold ("only where a house is hidden") makes the field's
    ABSENCE a tell of the hidden house. So: a field no non-owner page draws (VR7-MEASURE M3: 77 of the 130) is withheld
@@ -89,7 +105,10 @@ SERVER on born towns; the twin's equality beside it, never instead of it.
    twin. One module, two engines, a walker binding them.
 5. THE STAGES (each ONE commit, red first, the gate's count stated before and after; stop at your mark after the stage
    in hand):
-   R1 the module, the export, `--check`, the walker (red on: a call of a registered predicate — `isHideableHouse`,
+   R1 (MAY RUN BESIDE THE B/C/D BUILDER: it touches ONLY the new files — the module, the export script, the two json
+      files, the walker, the walker's mutation-manifest row; NOT 212, NOT the twin, NOT galleryVeil.js; the walker's
+      "symbol exists / names its row id" checks bind only rows marked `built: true`, and R1 marks none)
+      the module, the export, `--check`, the walker (red on: a call of a registered predicate — `isHideableHouse`,
       `isCriminalInstitution`, `institutionMatchesRegex`/`institutionMatchesNativeName` with a crime pattern,
       `crimeSignalOf`, `getInstFlags`' crime flags, `criminalHousesOf`, the VR4 §4 G1 list — from a `src/generators/**`
       or composer site no row names; a new regex literal over institution names matching
