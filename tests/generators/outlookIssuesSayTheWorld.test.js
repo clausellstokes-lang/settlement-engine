@@ -92,7 +92,7 @@ describe('THE LAW: births with the dial at its extreme, small to large, calm and
     }
     expect(failures).toEqual([]);
     expect(printed, 'the arcane-house row must print somewhere in the law\'s births').toBeGreaterThan(0);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the last close's whole check, 2026-11-19): 10.1 s here under load
 
   test('a besieged or failing isolated town is never told it "remains viable"', () => {
     const failures = [];

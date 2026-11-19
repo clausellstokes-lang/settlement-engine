@@ -95,7 +95,7 @@ describe('tier scaling — population grows with tier', () => {
     const cities = generateMany({ settType: 'city',  culture: 'germanic' });
     expect(averageOf(cities, s => s.population))
       .toBeGreaterThan(averageOf(towns, s => s.population));
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the last close's whole check, 2026-11-19): 11.0 s here under load
 
   it('city institutions are not fewer than village institutions', () => {
     // Even with the dedup collapse, a city should still carry more

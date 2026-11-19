@@ -136,3 +136,14 @@ JSON reporter to files, nothing else running (the same script as the base run):
 - The reds of §2's two LEFT lists (LASTCLOSE-SIGN's) and §3 (the chair's).
 - Scratch only, never committed: the base worktree (`/tmp/claude-0/basewt`), the first-close worktree (`/tmp/claude-0/closewt`),
   the probes and the OSR artifacts under `/tmp/claude-0/`.
+
+## 6 · THE WHOLE CHECK'S FOLLOW-UP (the chair's message of 2026-11-19 04:21 UTC; merged f1d139667 first, a fast-forward)
+
+| red at c02735d57 | class | proof | cure (one commit each) |
+|---|---|---|---|
+| `tests/domain/composeStateProse.test.js` "variants: expected 3054 to be 3033" | (a) | the same 21 lines re-taken everywhere else at this close (points 51/52/59 +9, 61 +1, 64 +1, 70 +10) | the pin 3033 → 3054 in the file's form |
+| `tests/domain/display/needMetUnderAnotherName.test.js` "expected [] to include 'mountain_timber'" | (b) | r2r-village-3's need is TRULY met: point 63's second ring (5eb9f6add; measured at its parent: iron only and the need; at the merge: managed_forest proven and no need) proves its forest by its Woodcutter's camp; the Resources tab prints it, the camp tells a local story, no house is short, `imports.critical` no longer names mountain timber | re-keyed by identity to r2r-village-20 (a village, no crisis; one of the 720's four that still print it needed; no import meets it under any name); red in scratch on the old anchor |
+| `tests/pdf/pdf2ReadsTheTabs.test.jsx` negatives "a proven ground: expected ['grazing_land']" | (b) | on r2r-village-0 and bar0-village-calm-rand-28 the PDF's `nearbyProven` and the tab's `impliedGroundsOnPage().there` print the same `grazing_land`, kept by a live Common grazing land (`groundsKeptOf`): point 68 (FR23), true and agreed | re-keyed to r2r-village-15 and bar0-village-calm-rand-30 (the lowest of 9 and 8 villages that print none of the faults), in CENSUS/WIDE and NEGATIVES; the file 9/9 |
+| the six durations | — | — | five take `}, 120_000); // its own budget, … N s here under load` (populationBandRoll 14.1, moneyChangersTownFloor 12.3, distribution 11.0, pipeline.property 10.6, outlookIssuesSayTheWorld 10.1); the sixth, economicsFoodStores "the stores sentence has one writer", ALREADY carries `}, 120000);` (since TRIM-2 R3, 04a46ec49): unchanged |
+
+Each file alone green; eslint clean on each; `sovereigntyLightingContract.walker` once at the end: 34/34 (no move).

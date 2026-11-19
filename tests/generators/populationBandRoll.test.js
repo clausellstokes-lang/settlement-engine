@@ -36,7 +36,7 @@ describe('the owner\'s table, generated', () => {
       }
     }
     expect(outside).toEqual([]); // anchored: every row above is a generated record of the chosen tier
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the last close's whole check, 2026-11-19): 14.1 s here under load
 
   test("a 'custom' population of 60 generates a hamlet", () => {
     const record = generate({ settType: 'custom', population: 60 }, 'x46-custom-60');
