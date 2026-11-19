@@ -3,10 +3,17 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 954,
-    "printOneLine": 667,
+    "pools": 960,
+    "printOneLine": 670,
     "measuredUnder30Draws": 151,
     "highestSharesOver150Draws": [
+      {
+        "pool": "ledger:institutionDescVariants:DESC_VARIANT_SIBLINGS",
+        "top1": 0.9915,
+        "top5": 1,
+        "draws": 3411,
+        "lines": 2
+      },
       {
         "pool": "ledger:institutionServices:Access to external mill.Grain milling (a day away)",
         "top1": 0.98,
@@ -82,13 +89,6 @@
         "top1": 0.8772,
         "top5": 1,
         "draws": 407,
-        "lines": 2
-      },
-      {
-        "pool": "ledger:institutionServices:Daily markets.Fresh produce",
-        "top1": 0.8734,
-        "top5": 1,
-        "draws": 450,
         "lines": 2
       }
     ],
@@ -5875,6 +5875,24 @@
       "top5": 0.13,
       "lines": 42,
       "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:goalFamilies:SUPPLY.want.short": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-18; BRIEF-LASTCLOSE.md, the ruled ones: the last small round's pool, LAST-VARIETY, point 70): the door's own bankNew narrowed to this pool (a drawn pool with no row, at the higher of the two corpora's readings), NOT --bank-new, which would also bank the base's three unregistered pools (listed for the chair)"
+    },
+    "ledger:goalFamilies:SUPPLY.want.long": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-18; BRIEF-LASTCLOSE.md, the ruled ones: the last small round's pool, LAST-VARIETY, point 70): the door's own bankNew narrowed to this pool (a drawn pool with no row, at the higher of the two corpora's readings), NOT --bank-new, which would also bank the base's three unregistered pools (listed for the chair)"
+    },
+    "ledger:settlementOriginProse:ORIGIN_DECLARED": {
+      "top1": 1,
+      "top5": 1,
+      "lines": 1,
+      "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-18; BRIEF-LASTCLOSE.md, the ruled ones: the last small round's pool, LAST-DECLARE, point 69): the door's own bankNew narrowed to this pool (a drawn pool with no row, at the higher of the two corpora's readings), NOT --bank-new, which would also bank the base's three unregistered pools (listed for the chair)"
     }
   }
 }
