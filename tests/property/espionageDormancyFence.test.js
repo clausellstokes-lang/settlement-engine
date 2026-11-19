@@ -189,6 +189,24 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-19, THE LAST CLOSE BEFORE THE DEPLOY (points 54 to 70), SIGNED ON LASTCLOSE-SIGN's BRANCH ──
+ * THE HUNDRED-AND-SIXTEENTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own word in the chair's chat (2026-11-18,
+ * about 19:07 UTC, "Yes to both": the refresh of the stored reference files again, and the golden door's signing; ODQ §934.105; the
+ * chair's line "SIGN" 2026-11-19 01:04 UTC; for this close only); the record is
+ * docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json. THE FIRST CLOSE'S RULING CL5 (the last closes' EF1, vetoable):
+ * the move is the landed points' declared page text and record, re-taken only after every other arm of this fence read green at the
+ * tree (20 of 21). THE MOVERS, FOUND BY STEP: the corpus born at the first close's tip 0dee69e17 (which reproduces `cd67a3c1…`) and at
+ * each of the seventeen first-parent landing commits over it that touch src/, field-diffed by leaf family: K-WATCH and K-POWERS (48,
+ * 49, 57: the stock quarrel's no-grazing twin in recentConflict and the pressure sentence that repeats it, the Elected Reeve's twin)
+ * 20; K-PEOPLE (50, 58: secrets, presentations and goals under the holder refusals, one handler's swap cured with its tie and trace
+ * line) 42; MARKS-2 (56: salted fish on the imports) 3; FAULTS-NEED (61) and LAST-VARIETY (70) 12 each (goals; the same rows);
+ * FAULTS-PEOPLE (62: a hook true of the holder) 2; FAULTS-BIRTH (63) 17 and its follow-ups (68) 22 (gaps, need lists, imports);
+ * FAULTS-ROWS (65: the late re-read's twins) 9; FAULTS-WATCH (66: the gate's hours, the holding cells' twin) 10 and its FR25 (67: the
+ * judge's tie, a bargain's line) 11; LAST-DECLARE (69: the sawyer's secret) 9; the rest none. The espionage subsystem stays dormant.
+ * On THIS corpus 116 of 360 rows (thorp 11, hamlet 12, village 32, town 28, city 21, metropolis 12) move against 0dee69e17; 360/360
+ * hashes stay distinct. Written on LASTCLOSE-SIGN's branch after the golden master's commit (a7a25bd39), measured by
+ * scripts/audit/refence.mjs before the write.
+ *
  * ── 2026-11-18, THE CLOSE OF THE ROUNDS BAR5 TO BAR8, SIGNED AT THE DOORS' BRANCH (CLOSE-DOORS-2) ──
  * THE HUNDRED-AND-FIFTEENTH MOVEMENT OF THIS CONSTANT, through the door under the owner's own word in the chair's chat (2026-11-18
  * 03:03:46 UTC, the whole of the message, "yes: refresh the stored reference files and open the pull request.", answering the
@@ -1411,7 +1429,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'cd67a3c1e430139ff29b6107a5faa60645761525df31d4fd3504b4d2b33b4e22';
+const PRE_COUPLING_CORPUS_SHA = '9829e655d0ac9d9f3d9b16d12bd1a26ec1faa1afbd7fe4573c06596b994b733b';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
