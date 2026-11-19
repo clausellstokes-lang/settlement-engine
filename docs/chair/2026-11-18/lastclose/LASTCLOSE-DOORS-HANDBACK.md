@@ -84,7 +84,34 @@ Base reds by name: `tests/lint` 35 tests in 21 files + 1 file that could not loa
 3. **`proseCorpusBytes`** (RAW ×4 exact, GZIP band, the defense leaf): both prompts give "the size and byte ceilings" to
    LASTCLOSE-SIGN; if the chair reads the prose byte ratchet as a door of mine, it is one run.
 
-## 4 · THE NET (C7) — NET-STATUS
+## 4 · THE NET (C7), at 40ecbd681 (the tree of every re-take; this commit adds only this file)
+
+The whole list again at the tip, after one fresh `npm run build`, each directory through `sh scripts/gate-tail.sh`, the
+JSON reporter to files, nothing else running (the same script as the base run):
+
+| | base cc11c9504 | tip |
+|---|---|---|
+| `tests/lint` | 35 red tests in 21 files + 1 file that could not load | **6 red, 3 files + the 3 below**: mutationCoverageManifest TOTALITY (the same 11 files by name at both), sovereigntyLightingContract (the same message: 3699 against 3682), proseCorpusBytes ×2 (the same messages), poolDominance (6 → 3: the base's three, §3), proseComposed A0b (2103 against 2097, §3). NONE NEW; every message of the six read at both |
+| `tests/joins` | 1 | 0 (425/425) |
+| `tests/data` | 5 | 0 (575/575) |
+| `tests/architecture` | 0 | 0 (347/347) |
+| `tests/property` | 6 | the same 6 (LASTCLOSE-SIGN's golden door) |
+| `tests/build` (VERIFY_DIST=1) | 9 | the same 9 (LASTCLOSE-SIGN's: the committed engine bundle and the size ceilings; the figures unmoved by this seat) |
+| `tests/domain/supplyStoryLaw.test.js` | 1 | 0 (11/11) |
+
+- Every cleared test was also run alone, green at its commit (each commit message names the run): tailHouses1Gaps 2/2,
+  presumedThings.walker 43/43, dossierStateProseProjection.contract 79/79, the six prose walkers (108/108 after the
+  pins), presumptionClasses.walker 16/16, generationForkRegistry.contract 3/3 (generationForkCensus 6/7, A1 SIGN's),
+  heldKeyWriterCensus.walker 7/7, mutationOrder, supplyStoryLaw L5, tuningRegister.walker 76/76,
+  ledgerCitationIntegrity 10/10 (with the ref), observedShapeReaders.walker 47/47, the instrument's three files 120/120,
+  writerReach.walker 52/52, ciCheckParity + soakRegister 15/15. Each was red at the base (the tables of §2), but
+  ciCheckParity and soakRegister (green at both; they read the cap).
+- `tests/lint` by message at base and tip: above. Files this seat ADDS (they move the estate's counts, LASTCLOSE-SIGN's, re-taken
+  last): `docs/chair/2026-11-18/lastclose/LASTCLOSE-DOORS-HANDBACK.md`, `osr-rung45-last-close-review.json`,
+  `tools/lastclose-presumed.mjs`, `tools/lastclose-pooldom.mjs`, `tools/osr-rung45-review-builder.py`; no test file added.
+- Both type gates: `typecheck:ratchet` exit 0 (167, ceiling 167); `typecheck:domain:strict` exit 0 (1113, ceiling 1113).
+- `npx eslint` on the 18 JS files this seat changed (outside `docs/`): exit 0.
+- Every push ran its hooks (the lane's three fast gates); all accepted, the workflow file's included.
 
 ## 5 · WHAT I LEFT, BY NAME
 
