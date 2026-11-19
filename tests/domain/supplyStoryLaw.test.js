@@ -15,7 +15,8 @@
  *   (L3) no import feeds a taker on its used-up ground.
  *   (L4) the seed's choice: the same seed twice tells the same story; an implied ground is on no stored field (the birth
  *        writes no land list: it runs over a frozen config).
- *   (L5) the odds hold over the census's 720 (bands below); the towns with a failed venture number 10 to 20.
+ *   (L5) the odds hold over the census's 720 (bands below); the towns with a failed venture number 9 to 20 (the floor re-recorded at
+ *        the last close, FR17: 10 -> 9, the measured count; see the arm).
  *   (BR7) THE BIRTH AND THE PRINT READ ONE STORY: the record's own gap for each source house is the story the print reads,
  *        and the birth, read again over its own product, brings no word in.
  *   (W1) THE ROUND TRIP: ten towns with an implied ground, generated again by the product's regenerate (the saved config
@@ -257,7 +258,7 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
     expect(found, 'a house whose surfaces tell two stories').toEqual([]);
   }, 1_800_000);
 
-  test('L5 · the odds hold over the census\'s 720, and a failed venture stands in 10 to 20 of its towns', () => {
+  test('L5 · the odds hold over the census\'s 720, and a failed venture stands in 9 to 20 of its towns', () => {
     let there = 0, implied = 0, ventures = 0, usedConnected = 0, boughtConnected = 0;
     expectNoSeedFailures(collectSeedFailures(CENSUS, (seed) => {
       const s = town(seed);
@@ -280,7 +281,12 @@ describe('BIRTH-2: the seed picks the supply story; every part of the page tells
     expect(there / implied, `the there-share of the implied grounds (${there} of ${implied})`).toBeLessThan(0.87);
     expect(usedConnected, 'houses that can buy in, on a used-up ground, on a connected route').toBeGreaterThan(20);
     expect(boughtConnected / usedConnected, `the bought share (${boughtConnected} of ${usedConnected}; the odds ${SUPPLY_ODDS.boughtIn} of ${SUPPLY_ODDS.outOf})`).toBeGreaterThan(0.6);
-    expect(ventures, 'the towns of the 720 with a failed venture').toBeGreaterThanOrEqual(10);
+    // THE FLOOR RE-RECORDED AT THE MEASURED COUNT (the last close, LASTCLOSE-DOORS, 2026-11-19; the chair's ruling FR17, vetoable):
+    // 10 -> 9. FAULTS-BIRTH (point 63, 5eb9f6add) read the failed venture's pick ONCE and proved a taker's implied ground by the
+    // houses that keep or yield it (the second ring): towns that had told a venture now tell a local or bought story, and the
+    // ventures over the 720 went 11 -> 9 (measured at its landing and again here at cc11c9504, with point 68's commons on top).
+    // THE ODDS STAY (FR17): the venture's own odds are unchanged; the count fell because fewer houses reach the venture's pick.
+    expect(ventures, 'the towns of the 720 with a failed venture').toBeGreaterThanOrEqual(9);
     expect(ventures, 'the towns of the 720 with a failed venture').toBeLessThanOrEqual(20);
   }, 1_800_000);
 
