@@ -296,8 +296,14 @@ function liveStepRows() {
 // ALLEGIANCE-CAR1 (2026-11-08): 14 -> 13, `corruptionPass|npcs|mutates` RETIRED with the step (J-2): the allegiance
 // is dealt at the coherence seam, inside assembleSettlement (whose row names `npcs` through generateCoherence), measured.
 // DEBT-2 · D2 (2026-11-17): 13 -> 14, `assembleSettlement|npcs|mutates` (point 33: the step declares the write it already made; measured, the row's note).
+// LASTCLOSE-DOORS (2026-11-19, the last close): 14 -> 15, `assembleSettlement|institutions|mutates` (FAULTS-ROWS, point 65, FR14: the step declares the late re-read's write; the row's note).
 const STEP_ROSTER = Object.freeze([
   'assembleInstitutions|institutions|provides',
+  'assembleSettlement|institutions|mutates', // 2026-11-19 LASTCLOSE-DOORS (FAULTS-ROWS, point 65, b6c14e8cb, the chair's FR14 declared it): the
+  // late re-read (steps/assembleSettlement.js :: readHouseDescsLate) stores a refused description's twin on institutions[].desc in place.
+  // A HELD ROSTER IS NEVER REWRITTEN, BY ITS OWN GATE: the call stands only under `chooseOrPin(pins, 'institutions', () => UNPINNED) ===
+  // UNPINNED` (assembleSettlement.js:457, TAIL-HOUSES-5 H20, 5d906f6e4), so under held institutions the write never fires (read in the
+  // source, not re-measured on the 526). Counts unmoved (11 writer steps: assembleSettlement already wrote; 22 steps).
   'assembleSettlement|npcs|mutates', // 2026-11-17 DEBT-2 · D2 (point 33, BIRTH-3 8b0506eae declared it): the seam's rankPowers yields a
   // card's temperament to its secret in place (data/npcData.js :: temperamentYieldsToSecret), already at the line's ed1d43529 undeclared
   // (strict probe, onStrictViolation: `assembleSettlement[npcs]` on 2 of 526 configs, the golden 525 + contract-metropolis-plains-crossroads).
