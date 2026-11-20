@@ -1,4 +1,4 @@
-# SEAT-7 — HAND-BACK (kept current at every push; last written 2026-11-20T19:58:22Z, read from `date -u`)
+# SEAT-7 — HAND-BACK (kept current at every push; last written 2026-11-20T20:14:19Z, read from `date -u`)
 
 **For the next owner of this lane: this file, `SEAT-6-HANDBACK.md` (items 53 to 68, §4 to §6), `SEAT-6-TO-LIGHT.md`, `SEAT-5-HANDBACK.md` §1 (items 1 to 52) and `briefs/` are all you need.** Every ruling in force: SEAT-5's 1 to 52, SEAT-6's 53 to 68, this file's 69 on.
 
@@ -17,6 +17,8 @@ Branch `lane/seat-7-2026-11-20` (origin), fast-forwarded to `ce9462b55`: the cha
 71. **THE OWNER: THE TRAIN SHIPS LIT** (SEAT-6 item 67, verbatim there). The lane still builds OFF BY DEFAULT, byte-identical dark; the flip is the chair's one unit at the close.
 
 72. **THE SHIPPED STATE IS L1 (the chair, 20:02Z, replacing item 67's wording "arm D, with the contest at today's figures: your L1", which the chair names its own error):** the flip is TWO dials, `seatLaw.js :: NEW_SETTLEMENT_SEAT_LAW_VERSION = HOLDER_SEAT_LAW_VERSION` and `seatCircumstances.js :: SEAT_CONTEST_LIT = true`; `SEAT_CIRCUMSTANCE_TUNING` UNTOUCHED (every factor 1; LP's proposed figures stay an unsigned draft, never applied). Reasons: L1 is the law as designed and tested (the kind read `contestKindOf`), D only the dial's dark half; the owner's headline does not move (D → L1 on the visitor pool: calm places turning contested 0, stopping 0); L1 closes the tell under D (a hidden holder leaving the field can shift the public `power:desk` risk label, TO-LIGHT §4c). Three units from it: (A) THE OWNER'S PLAIN TABLE, D → L1 on the visitor's 600; (B) U8, THE FLIP'S CENSUS, ONE whole-suite run on a flipped copy (the only one allowed); both in `briefs/FLIP-CENSUS.md`, builder BFL. (C) TO-LIGHT §4 goes to the security lane as it stands; nothing built here.
+
+73. **NO PACKED LINES; ONE RATCHET RUN BEFORE LANDING (the chair, 20:14Z, every lane):** no statement is packed onto a shared line to save a line (`tests/generators/powerStructure.test.js` F31 counts packed lines in `src/generators/power/` against a shrink-only ceiling per file); a line ceiling in the way is cured by a leaf, never by packing. BEFORE THE LANE ASKS TO LAND: ONE `npm run test:ratchet` (`scripts/check-test-ratchet.mjs`, exclusive mutex) at the tip with the line's tip merged in, UNFLIPPED, to a log, read BY NAME against `docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv` on the chair's branch (NOT yet on origin at 20:15Z): a row not on that list is a stored figure or golden the lane moved (named with its cause) or a real red, cured on the lane first. FLIP-CENSUS's control ("red without the flip") is taken as ONE unflipped `test:ratchet` at BFL's own cut (the same base as the flipped copy, so the two compare); the landing run, with the line merged, is a separate run at the lane's end.
 
 ## 2. THE UNITS
 
