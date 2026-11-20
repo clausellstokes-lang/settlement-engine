@@ -1356,6 +1356,22 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   Hooks first; ties on the commit the chair names when the goals work lands; every line to the chair in files of
   about forty before any build. (The measure's `born.mjs` was missing from the record: added now.)
 
+- **THE TAKER OF A SEAT IS READ FROM THE TRANSFER'S OWN SENTENCE, UNDER FOUR CONDITIONS (2026-11-20, 14:44 UTC; SEAT-5's stop
+  and measure, `briefs/U4-CURE2-REPORT.md` at 4780d9e6c on `lane/seat-2026-11-20-u4-cure2-wip`; THIS AMENDS THE
+  CHAIR'S 14:32 "never from its sentence"):** the structured keys cannot carry it: at birth the seat already has a
+  symbiotic edge with its military power (163 of 900 default towns: a structured read would name the military
+  everywhere); after a coup it finds two takers (82 towns a step); `previousGovernments` names the outgoing form;
+  `ascendant` goes silent after a second lawful transfer; a new stored key is refused before the deploy (CS2).
+  RULED: the writer-reach identity `narrative on factionRelationships` IS RE-RECORDED WITH ITS CAUSE, like
+  `recentConflict on powerStructure` and `priorityMilitary on config`, ON: (1) ONE matcher for the transfer's own
+  sentences; (2) A FROZEN LIST of every wording those sentences have had under the seat's law, with a test that
+  pins today's output into the list (a rewording must ADD the old wording or it reds) and a fixture of a town
+  born at the frozen wording; (3) three arms by measure: the birth edge with the military names nobody; no two
+  takers after U5; a power the DM renames after a transfer answers the right power or nobody, never a wrong one;
+  (4) the CS11 arm red first (a non-owner audience: the served document alone, no criminal and no hidden power).
+  All three identities to the security reader. A NAMED SURVIVOR FOR AFTER THE DEPLOY, the owner's: a stored
+  marker for a change of hands, which retires the sentence read.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4109,3 +4125,15 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   EIGHT APPROVED AS WRITTEN; the dean's reworded ("Allowed a burial in consecrated ground that the rule forbids,
   because the family begged for it."); L4 CLEARED TO BUILD (23 + 7 + 9 rows) on S9's merged tip.
   `prompts/PAGE-8.txt` WRITTEN AHEAD OF NEED (PAGE-6 tells the chair at 215,000; seated beside it then).
+- 14:44 UTC · FRAME-6: P1b-F MERGED GREEN (62490b28b; lane da8b5958f): the ruled wording; exactly the 126 owner pages by the clause
+  alone; the stored record 1,245 of 1,245 and non-owner pages 11,205 of 11,205 identical (its builder's); the
+  parity test 0 disagreements on 1,215 towns; `tests/lint` whole red only on `tuningRegister`'s three named rows;
+  A FINDING BY DESIGN: the frame picks among the rung's keepers by its hash, so its outsider face may be another
+  keeper than the crisis page's first (frame-calm-town-80): NO RULE CHANGE; to be looked at on the owner's six
+  sheets. Its count by the chair's read 225,497 at 14:15 (its own estimate 200,000); next C2, then the six
+  sheets. THE CAUSES' LINES, DIVIDED TO STOP DOUBLE WORK (14:39 to 14:45): PAGE-5's builder (out since 14:37;
+  `briefs/CAUSE-LINES-1.md` at 4f48cd6e4) writes crime_wave and guild_conflict
+  (`lines/CAUSES-crime_wave-guild_conflict.md`); PAGE-7's builder (brief CL2 at 530ae8415) writes resource_scarcity,
+  external_threat and succession_crisis, then outside_debt, legitimacy_crisis and great_flood; every file to the
+  chair before the data file is built. DEPTH-1's proposal ruled (section 2). SEAT-5's stop on the taker ruled
+  (section 2).
