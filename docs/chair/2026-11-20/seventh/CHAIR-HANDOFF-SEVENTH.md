@@ -590,6 +590,31 @@ parts of the whole check (at the close).
   63 wants sharing a frame; in five settlements three tension texts each stood twice word for word. FORTUNE-1's
   one-page sheet (`FOR-THE-OWNER.md` at 9edcc112e) SENT TO THE OWNER as a file.
 
+- **About 10:56 UTC, 2026-11-20 (the chair's estimate), THE OWNER (verbatim, his own quotation of the chair's four
+  findings left out):** "How would you fix these?" (labels that argue with the story; the machine talking;
+  sameness; misfits). ANSWERED AT 11:04 UTC FROM CAUSES READ IN THE CODE (a reading helper: 120 births; PAGE-1's
+  first message agrees where they overlap). SAID: ONE KIND OF MISTAKE IN ALL FOUR: a thing worked out early or on
+  its own is printed beside a thing that knows more. (1) SAFETY is worked out before the town knows who holds the
+  hall (`safetyProfile.js :: generateSafetyProfile`: the watch against the criminals' houses, a court floor that
+  lands exactly on "Moderate"; it never reads capture): BOTH MEASURES STAY; on the DM's page the label carries the
+  fact it could not see, as wealth does in a famine; NEVER on a shared page. OUTPUT is the economy dial after its
+  drags, the same scale at every size (38 to 47 for a healthy town at untouched dials): NO GRADE OUT OF 100; in
+  words, what holds the town back. (2) The cast's reason: the dealing is stored: stop storing it and strip it at
+  render for saved towns (C1). "Religious Authorities gains": through `powerVerb` (C2). "MARGINAL": 88.5% of
+  cards, 39% of those who lead a power; a keyword match with a misspelt keyword (`'guild_master'` against the role
+  'Guild Master'): the card stops printing the word and says the fact; the keyword's correction changes a stored
+  field and waits for a count of its readers. (3) The mirrored want: a sentence and its mirror are one (the goals
+  lane). ACROSS TOWNS: 29 kinds of tension, one sentence and one fixed side list each; crime wave in 24% of
+  settlements (the chair's estimate from that: about one visitor in seven sees its sentence twice in three
+  forges): the two spare wordings a kind used always; sides named from the town, a side the town lacks dropped;
+  about 30 new wordings for the commonest eight kinds; never a new tension. (4) THE DEAN: priest, abbot, bishop
+  and dean have no title rows, so they fall into a catch-all that holds officials' lines: write theirs (about a
+  dozen), tag the lines that presume an office, a misfit card takes its next admitted line with no new roll. THE
+  MAGISTRATE: want and secret are dealt apart: a conviction want refused to one whose secret is taking money to
+  betray the office; THE COST SAID: it removes the accidental hypocrite. ALSO PUT TO THE OWNER, HIS TO ANSWER:
+  whether a bought hall with a crime wave should put the crime wave's own people on a calm town's sheet (6 calm
+  towns of 330; today it does not); the chair leans yes and built nothing.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -796,6 +821,28 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   secret or want that contradicts its holder; F6 thin pages): NO BUILD until the chair rules; for F1 the owner's
   rule decides the shape: more ways to SAY a tension that is there, sides named from the town's own powers and
   houses, never a new tension.
+
+- **THE FIXES OF THE PAGE'S FOUR FAULTS, AS DIRECTIONS (11:05 UTC; sent to PAGE-1 as leads to verify and to
+  propose on; nothing built until its proposal is ruled):** (a) safety: both measures stay; a DM-only qualifier
+  through one reader that takes an audience and fails closed; a guard for two labels two steps apart with no line
+  between; (b) output in words against what the town's own dial and market could make, with the drag named; (c)
+  "marginal" off the card, the fact in its place; the keyword's correction by its own door after a count of every
+  reader of `influence`; (d) tensions: the spare wordings always; sides from the town; new wordings for the
+  commonest eight; each choice on the town's own keyed fork; (e) title rows for priest, abbot, bishop and dean; the
+  catch-all's office lines tagged to their holders; a misfit takes its next admitted line, draw-free.
+- **TO GOALS-1 (10:58 and 11:05 UTC):** the five reworded lines APPROVED; the refusal of the two gentle rival lines
+  under a harsh tie APPROVED; A SENTENCE AND ITS MIRROR ARE ONE (a template is never held twice in a town with
+  the same slot values in either order); THE CONVICTION WANT AGAINST A PAID-CORRUPTION SECRET: counted first; the
+  refusal built there (draw-free; reads the card's own secret) IF it stands on at least 1 card in 200, else
+  nothing; the count goes in its hand-back either way.
+- **TO FRAME-4 (10:58 UTC):** C1 APPROVED, STORED (the cast stops storing how it was dealt; the surfaces also strip
+  it at render, with a test on an old stored row; a census and a guard); C2 APPROVED, render (the Stakes rows
+  through `powerNameInProse` and `powerVerb`); THE WORKING LINE MERGED INTO THE LANE first; CF11 stands, the
+  question put to the owner.
+- **TO TRAD-3 (10:58 UTC):** THE LANE IS ITS OWN at 441ec3b32; unit 2 (the proof of a withholding;
+  `lane/trad-2-2026-11-20-u2` at d820b9731) read cold; ITS BUILDER'S TWO NOTICES ARE PLANTS TO RUN (a hidden
+  house's name written by a DM into `history.founding.foundedBy`; a DM-authored house whose tags differ from the
+  catalogue's): by CTR11 the reader's text carries neither; the result to the chair at once, for the security lane.
 
 ## 3. The queue, in order
 
@@ -3116,3 +3163,17 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   towns in a browser (Zuuhan, Al-zamin, Hochbrunn: 9.1 to 9.6 seconds each; the first forge on a cold server 30
   seconds), a village (Stredovo) and a city (Oberholz) by components. `prompts/PAGE-1.txt` WRITTEN, seated after
   this push from the working line.
+- 10:54 UTC · SEATED AT 10:54: PAGE-1 (session_019yED1SBsrfrBKHe1u4vKmw; from the working line 0c906948; outcome
+  `lane/page-1-2026-11-20`; first message within 40 minutes) and FORTUNE-2 (session_019yED1NNf9XQihkNdEoboJC; on
+  `lane/fortune-1-2026-11-20`; outcome `lane/fortune-2-2026-11-20`; it writes nothing until "THE LANE IS YOURS";
+  FORTUNE-1 hands over at U1's merge or at 350,000 by the chair's rule). THE ADDENDUM TO THE OWNER GIVEN (the
+  village, the city, the corrected example, the wider sameness).
+- 11:07 UTC · THE OWNER ASKED HOW THE CHAIR WOULD FIX THE FOUR FAULTS: ANSWERED FROM CAUSES (section 1); the directions sent to
+  PAGE-1, GOALS-1 and FRAME-4 (section 2). HAND-OVERS: TRAD-2 "TRAD-PART 441ec3b32, HANDED OVER" (344,138): TRAD-3
+  OWNS THE LANE; unit 2 relayed unread. FRAME-4 at about 265,000 (N1 and B6 merged at be9032b02; U0's builder out;
+  B11 to read): `prompts/FRAME-5.txt` WRITTEN, seated after this push. FORTUNE-2's first message: on 3c48af25c; the
+  instruments reproduce the proposal's outputs byte for byte (1 min 51 s). PAGE-1's first message: on 0c9069489;
+  five of the six faults located in the code. SAFETY NET 8 was due at 10:58: its pass is this entry (the counts:
+  VEIL-24 335,815 at 10:20 by its own read; SEAT-2 462,127, relaying only; TRAD-2 344,138, handed over; FRAME-4
+  about 265,000; FORTUNE-1 about 305,000 by the chair's rule; GOALS-1, NAMES-4, PAGE-1, FORTUNE-2, VEIL-25, TRAD-3
+  and SEAT-3 under 200,000). NEXT NET in 45 minutes.
