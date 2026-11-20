@@ -2114,12 +2114,26 @@ declare
   sd text;
   signal boolean;
   crim_house boolean;
+  -- R3-CURE (VEIL-23's builder): the governing powers' names, the powers power.entry withholds, the withheld powers' tokens
+  gov_names text[];
+  ps_out text[];
+  wn text[];
+  pth text[];
   -- registry: safety.crimeTypes (each type by the flags that raise it: safetyProfile.js's crime types and the stress flags
   -- they read, priorityHelpers.js :: getStressFlags; criminalEffective moves only with hasCriminalInst among the houses)
+  -- R3-CURE (VEIL-23's builder, unit 3): EVERY type the engine writes is a key (tests/lint/rosterChoicePools.walker.test.js
+  -- holds the map equal to safetyProfile.js's own set); a crisis's type is raised by no house ([]); 'contested property'
+  -- by a standing religious house (safetyProfile.js, RELIGIOUS_HOUSE). A type the map does not hold: unsure, WITHHELD
   raisers jsonb := '{"Smuggling": ["hasSmuggling"], "Organized guild crime": ["hasThievesGuild", "hasCriminalInst"],
     "Street gang activity": ["hasGangInfra"], "Criminal governance": ["hasCriminalInst"], "Arcane black market": ["hasCriminalInst"],
     "Religious fraud": ["hasCriminalInst"], "Commercial crime": ["hasCriminalInst"], "Survival crime": ["hasCriminalInst"],
-    "Magical crime": ["hasCriminalInst"], "Background crime": ["hasCriminalInst"], "Lawlessness": ["hasCriminalInst"]}';
+    "Magical crime": ["hasCriminalInst"], "Background crime": ["hasCriminalInst"], "Lawlessness": ["hasCriminalInst"],
+    "State predation": [], "desperation theft": [], "black market food": [], "resistance activity": [], "collaboration fraud": [],
+    "quarantine violation": [], "plague profiteering": [], "debt evasion": [], "political violence": [], "loyalty testing": [],
+    "information trade": [], "revolt violence": [], "escape networks": [], "informant pressure": [], "weapons trade": [],
+    "underground worship": [], "religious fraud": [], "contested property": ["religiousHouse"], "informant networks": [],
+    "war profiteering": [], "deserter networks": [], "conscription fraud": [], "displacement crime": [], "cultural friction": [],
+    "black market passage": []}';
   -- registry: safety.plotHooks (each hook of safetyProfile.js's closed pool by the flag that raises it; [] raised by no house)
   hooks jsonb := jsonb_build_object(
     'A local family wants evidence of tax extortion gathered quietly, but the extorter wears an official badge.', '[]'::jsonb,
@@ -2131,6 +2145,9 @@ declare
     'A pilgrim paid a fortune for a holy relic that is obviously fake. They want the fraud exposed without losing their faith in the process.', '["hasCriminalInst"]'::jsonb,
     'A guild merchant hired the party, then asked for something the guild forbids; the pay is good, and someone else in the guild already knows.', '["hasCriminalInst"]'::jsonb,
     'The merchant guild''s private security force just detained someone, with no legal authority to do so. The watch is looking the other way.', '["hasGangInfra"]'::jsonb,
+    -- R3-CURE (unit 3): the two tellings safetyProfile.js :: said writes from SAFETY_LINE_SIBLINGS, each by its sibling's flags
+    'The merchant guild''s private security force just detained someone, with no legal authority to do so. No one with the authority to stop it is trying.', '["hasGangInfra"]'::jsonb,
+    'The settlement''s chaplain also leads its armed men, and is authorizing military action for reasons that sound theological.', '[]'::jsonb,
     'The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.', '["hasSmuggling"]'::jsonb,
     'A smuggler wants one crate moved quietly and will pay well, but will not say what is in it.', '["hasSmuggling"]'::jsonb,
     'The smugglers have stopped moving their usual goods this week, and nobody can say why.', '["hasSmuggling"]'::jsonb,
@@ -2157,11 +2174,55 @@ begin
                   from jsonb_array_elements(case when jsonb_typeof(p -> 'institutions') = 'array' then p -> 'institutions' else '[]' end) e
                  where jsonb_typeof(e) = 'object' and not (public._gallery_veil_inst_id(e) = any(served_ids)));
   whole := cardinality(gone) > 0;
+  -- R3-CURE (unit 1, the chair's ruling of 07:31: THE POWER RULE GOVERNS; a power a hidden house raises leaves WHOLE): the
+  -- names of the governing powers (VR42: never removed, in either list) and of the powers withheld below
+  gov_names := array(select v from jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) f,
+    lateral (select f ->> 'faction' as v where jsonb_typeof(f -> 'faction') = 'string' union select f ->> 'name' where jsonb_typeof(f -> 'name') = 'string') w
+    where jsonb_typeof(f) = 'object' and f -> 'isGoverning' = 'true'::jsonb);
+  ps_out := array(select v from jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) e,
+    lateral (select e ->> 'faction' as v where jsonb_typeof(e -> 'faction') = 'string' union select e ->> 'name' where jsonb_typeof(e -> 'name') = 'string') w
+    where jsonb_typeof(e) = 'object' and coalesce(e -> 'isGoverning', 'null') <> 'true'::jsonb
+      and (translate(public._gallery_veil_str(e -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'
+           or public._gallery_veil_str(coalesce(e -> 'faction', e -> 'name')) ~* 'thie'));
   if whole and jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then
     s := jsonb_set(s, '{powerStructure,factions}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> '{powerStructure,factions}') with ordinality x(e, o)
       where not (jsonb_typeof(e) = 'object' and coalesce(e -> 'isGoverning', 'null') <> 'true'::jsonb
                  and (translate(public._gallery_veil_str(e -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'
                       or public._gallery_veil_str(coalesce(e -> 'faction', e -> 'name')) ~* 'thie'))), '[]'));
+  end if;
+  -- R3-CURE (unit 2): master's stored shape, the top-level factions[] (the powers' twin list, as R4 reads it): the same rule,
+  -- an entry naming a power withheld above leaves too, and one naming a governing power stays (VR42)
+  if whole and jsonb_typeof(s -> 'factions') = 'array' then
+    s := jsonb_set(s, '{factions}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s -> 'factions') with ordinality x(e, o)
+      where not (jsonb_typeof(e) = 'object' and coalesce(e -> 'isGoverning', 'null') <> 'true'::jsonb
+                 and not (public._gallery_veil_str(e -> 'faction') = any(gov_names) or public._gallery_veil_str(e -> 'name') = any(gov_names))
+                 and (translate(public._gallery_veil_str(e -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'
+                      or public._gallery_veil_str(coalesce(e -> 'faction', e -> 'name')) ~* 'thie'
+                      or public._gallery_veil_str(e -> 'faction') = any(ps_out) or public._gallery_veil_str(e -> 'name') = any(ps_out)))), '[]'));
+    -- (VR11/VR31 on this list too: where the rule above took an entry, a share set left is re-derived to 100 by largest
+    -- remainder, as below)
+    n1 := (select count(*) from jsonb_array_elements(s -> 'factions') e where jsonb_typeof(e) = 'object');
+    if n1 > 0 and n1 < (select count(*) from jsonb_array_elements(doc -> 'factions') e where jsonb_typeof(e) = 'object')
+       and not exists (select 1 from jsonb_array_elements(s -> 'factions') e where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'power') <> 'number') then
+      bas := array(select case when (e ->> 'power')::numeric between 0 and 1e12
+                               then case when public._gallery_veil_num_zero((e ->> 'power')::numeric) then 0::float8 else (e ->> 'power')::float8 end else 0::float8 end
+                     from jsonb_array_elements(s -> 'factions') with ordinality x(e, o) where jsonb_typeof(e) = 'object' order by o);
+      tot := 0;
+      foreach bv in array bas loop tot := tot + bv; end loop;
+      if not tot > 0 then bas := array_fill(1::float8, array[cardinality(bas)]); tot := cardinality(bas); end if;
+      q := array(select (b / tot) * 100 from unnest(bas) with ordinality u(b, k) order by k);
+      sh := array(select floor(v)::int from unnest(q) with ordinality u(v, k) order by k);
+      give := 100 - coalesce((select sum(x) from unnest(sh) x), 0);
+      for ix in select k from unnest(q) with ordinality u(v, k) order by v - floor(v) desc, k loop
+        exit when give <= 0;
+        sh[ix] := sh[ix] + 1;
+        give := give - 1;
+      end loop;
+      s := jsonb_set(s, '{factions}', coalesce((
+        select jsonb_agg(case when jsonb_typeof(e) = 'object' then e || jsonb_build_object('power', sh[r::int]) else e end order by o)
+          from (select e, o, count(*) filter (where jsonb_typeof(e) = 'object') over (order by o) as r
+                  from jsonb_array_elements(s -> 'factions') with ordinality x(e, o)) z), '[]'));
+    end if;
   end if;
   -- registry: power.share (VR11, VR31: wherever any power is withheld, whatever withheld it, the served shares re-derived to
   -- 100 by LARGEST REMAINDER from the served `power` (a JSON number from 0 to 10^12, else 0; a sum of 0 shares equally),
@@ -2209,6 +2270,60 @@ begin
   end if;
   if not whole then return s; end if;
 
+  -- R3-CURE (unit 2; the chair's ruling of 07:39: "LEAVES WHOLE" MEANS EVERY COPY): the withheld powers' tokens (the name and
+  -- the id of every power of `pub`'s two lists that neither served list names) leave every STRUCTURED copy: a conflict
+  -- between powers (both lists) and a tension naming one, whole; a power's `contestsNiche` naming one; a person's membership
+  -- of one, an affiliation key naming one, and the goal that targets one or names one (its intent and its two sentences go
+  -- together). Prose composed over the powers is R5's (registry power.desc). What is left is dense, in order (VR21).
+  names := array(select v from (select jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) f
+                                union all select jsonb_array_elements(case when jsonb_typeof(s -> 'factions') = 'array' then s -> 'factions' else '[]' end)) q,
+    lateral (select q.f ->> 'faction' as v where jsonb_typeof(q.f -> 'faction') = 'string' union select q.f ->> 'name' where jsonb_typeof(q.f -> 'name') = 'string') w);
+  wn := array(select distinct v from (select jsonb_array_elements(case when jsonb_typeof(p #> '{powerStructure,factions}') = 'array' then p #> '{powerStructure,factions}' else '[]' end) f
+                                      union all select jsonb_array_elements(case when jsonb_typeof(p -> 'factions') = 'array' then p -> 'factions' else '[]' end)) q,
+    lateral (select q.f ->> 'faction' as v where jsonb_typeof(q.f -> 'faction') = 'string' union select q.f ->> 'name' where jsonb_typeof(q.f -> 'name') = 'string'
+             union select q.f ->> 'id' where jsonb_typeof(q.f -> 'id') = 'string') w
+    where jsonb_typeof(q.f) = 'object' and v <> ''
+      and not (public._gallery_veil_str(q.f -> 'faction') = any(names) or public._gallery_veil_str(q.f -> 'name') = any(names)));
+  if cardinality(wn) > 0 then
+    foreach sd in array array['powerStructure', 'top'] loop
+      pth := case when sd = 'top' then array['conflicts'] else array['powerStructure', 'conflicts'] end;
+      if jsonb_typeof(s #> pth) = 'array' then
+        s := jsonb_set(s, pth, coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> pth) with ordinality x(e, o)
+          where not (jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'parties') = 'array' and exists (select 1 from jsonb_array_elements(e -> 'parties') pn
+            where (jsonb_typeof(pn) = 'string' and (pn #>> '{}') = any(wn))
+               or (jsonb_typeof(pn) = 'object' and (public._gallery_veil_str(pn -> 'faction') = any(wn) or public._gallery_veil_str(pn -> 'name') = any(wn) or public._gallery_veil_str(pn -> 'id') = any(wn)))))), '[]'));
+      end if;
+    end loop;
+    if jsonb_typeof(s #> '{history,currentTensions}') = 'array' then
+      s := jsonb_set(s, '{history,currentTensions}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> '{history,currentTensions}') with ordinality x(e, o)
+        where not (jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'factions') = 'array'
+                   and exists (select 1 from jsonb_array_elements(e -> 'factions') fn where jsonb_typeof(fn) = 'string' and (fn #>> '{}') = any(wn)))), '[]'));
+    end if;
+    foreach sd in array array['powerStructure', 'top'] loop
+      pth := case when sd = 'top' then array['factions'] else array['powerStructure', 'factions'] end;
+      if jsonb_typeof(s #> pth) = 'array' then
+        s := jsonb_set(s, pth, (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'contestsNiche') = 'string' and (e ->> 'contestsNiche') = any(wn)
+                                                              then e - 'contestsNiche' else e end order by o), '[]')
+                                  from jsonb_array_elements(s #> pth) with ordinality x(e, o)));
+      end if;
+    end loop;
+    if jsonb_typeof(s -> 'npcs') = 'array' then
+      s := jsonb_set(s, '{npcs}', (select coalesce(jsonb_agg(case when jsonb_typeof(n) <> 'object' then n else
+          (n - (select coalesce(array_agg(k), '{}') from unnest(array['faction', 'factionAffiliation', 'affiliation', 'factionId']) k
+                 where jsonb_typeof(n -> k) = 'string' and (n ->> k) = any(wn))
+             - (case when jsonb_typeof(n -> 'goal') = 'object' and (
+                   public._gallery_veil_str(n #> '{goal,intent,short,target,id}') = any(wn) or public._gallery_veil_str(n #> '{goal,intent,long,target,id}') = any(wn)
+                   or exists (select 1 from unnest(wn) w where position(public._gallery_veil_case_fold(w) in public._gallery_veil_case_fold(public._gallery_veil_str(n #> '{goal,short}'))) > 0
+                                                         or position(public._gallery_veil_case_fold(w) in public._gallery_veil_case_fold(public._gallery_veil_str(n #> '{goal,long}'))) > 0))
+                then array['goal'] else '{}'::text[] end))
+          || case when jsonb_typeof(n -> 'memberships') = 'array' then jsonb_build_object('memberships', (select coalesce(jsonb_agg(m order by mo), '[]')
+               from jsonb_array_elements(n -> 'memberships') with ordinality y(m, mo)
+              where not (jsonb_typeof(m) = 'object' and (public._gallery_veil_str(m -> 'power') = any(wn) or public._gallery_veil_str(m -> 'faction') = any(wn)
+                                                          or public._gallery_veil_str(m -> 'name') = any(wn) or public._gallery_veil_str(m -> 'id') = any(wn))))) else '{}'::jsonb end
+        end order by o), '[]') from jsonb_array_elements(s -> 'npcs') with ordinality x(n, o)));
+    end if;
+  end if;
+
   -- the stored and the served house flags (economicState.safetyProfile.compound.inst, else economicState.compound.inst)
   fl := coalesce(case when jsonb_typeof(p #> '{economicState,safetyProfile,compound,inst}') = 'object' then p #> '{economicState,safetyProfile,compound,inst}' end,
                  case when jsonb_typeof(p #> '{economicState,compound,inst}') = 'object' then p #> '{economicState,compound,inst}' end, '{}');
@@ -2216,6 +2331,12 @@ begin
                   case when jsonb_typeof(s #> '{economicState,compound,inst}') = 'object' then s #> '{economicState,compound,inst}' end, '{}');
   raised := (select jsonb_object_agg(k, not coalesce(sfl -> k = 'true'::jsonb, false) and not coalesce(fl -> k = 'false'::jsonb, false))
                from unnest(array['hasCriminalInst', 'hasSmuggling', 'hasThievesGuild', 'hasGangInfra', 'hasMarket']) k);
+  -- R3-CURE (unit 3): a religious house hidden whole, where no served one stands, raised 'contested property' (safetyProfile.js)
+  raised := raised || jsonb_build_object('religiousHouse',
+    exists (select 1 from unnest(gone) g where g ~ '(church|cathedral|temple|monaster|friary|shrine|abbey|chapel)' and g !~ '^access to')
+    and not exists (select 1 from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
+                     where jsonb_typeof(e) = 'object' and public._gallery_veil_str(e -> 'name') ~* '(church|cathedral|temple|monaster|friary|shrine|abbey|chapel)'
+                       and public._gallery_veil_str(e -> 'name') !~* '^access to'));
   beneath := exists (select 1 from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
                       where jsonb_typeof(e) = 'object' and public._gallery_veil_str(e -> 'name') ~* 'smuggling (network|operation)|underground (network|city)');
   es := s -> 'economicState';
@@ -2287,13 +2408,13 @@ begin
       end if;
     end if;
     -- registry: safety.crimeTypes ((b) BY ATTRIBUTION, VR39: an entry leaves where a flag that raises its type was raised by a
-    -- hidden house; an entry a shown house or a crisis raises stays; an entry with no type: unsure, withheld. VR29: the
-    -- array stays an array)
+    -- hidden house; an entry a shown house or a crisis raises stays; an entry with no type, or a type the map does not hold
+    -- (R3-CURE unit 3): unsure, withheld. VR29: the array stays an array)
     if jsonb_typeof(s #> '{economicState,safetyProfile,crimeTypes}') = 'array' then
       s := jsonb_set(s, '{economicState,safetyProfile,crimeTypes}', coalesce((select jsonb_agg(e order by o)
         from jsonb_array_elements(s #> '{economicState,safetyProfile,crimeTypes}') with ordinality x(e, o)
-       where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'type') = 'string'
-         and not exists (select 1 from jsonb_array_elements_text(coalesce(raisers -> (e ->> 'type'), '[]')) fk where (raised -> fk) = 'true'::jsonb)), '[]'));
+       where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'type') = 'string' and raisers ? (e ->> 'type')
+         and not exists (select 1 from jsonb_array_elements_text(raisers -> (e ->> 'type')) fk where (raised -> fk) = 'true'::jsonb)), '[]'));
     end if;
     -- registry: safety.plotHooks ((b): a hook stays where it is of the pool and no flag that raises it was raised by a hidden
     -- house; a hook the pool does not hold: unsure, withheld)

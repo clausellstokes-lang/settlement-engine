@@ -1687,19 +1687,19 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     expect(paths).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
-  it('V8-4 THE TOP-LEVEL POWER\'S FLOOR: an entry of master\'s top-level factions[] that IS a shown power (its faction or name, in the one fold, a shown power\'s faction or name) keeps that name, as powerStructure.factions[] does (the chair\'s ruling (1)), key by key: the reader\'s row, by `name`, upper-cased; an entry whose string names no shown power stays swept (the hidden house\'s own name, a longer name that holds it, an entry flagged hidden), and one whose `name` is the hidden house\'s own leaves whole; every read, Reveal DM off and on, server against twin 0 paths', async () => {
+  it('V8-4 THE TOP-LEVEL POWER\'S FLOOR: an entry of master\'s top-level factions[] that IS a shown power (its faction or name, in the one fold, a shown power\'s faction or name) keeps that name, as powerStructure.factions[] does (the chair\'s ruling (1)), key by key: the reader\'s row, by `name`, upper-cased; an entry whose string names no shown power stays swept (the hidden house\'s own name, a longer name that holds it, an entry flagged hidden), and one whose `name` is the hidden house\'s own leaves whole; every read, Reveal DM off and on, server against twin 0 paths. RE-RECORDED BY THE CHAIR\'S RULING (07:31 UTC, R3-CURE unit 1): THE POWER RULE GOVERNS; a power a hidden house raises (the Thieves\' Guild beside a hidden thieves\' house) is not a shown power and leaves WHOLE (galleryRosterChoices.pglite.test.js, unit 1), so the floor is pinned on a shown power NO hidden house raises: a merchant power beside a hidden house whose name holds its name', async () => {
     const bad = []; const paths = [];
-    const TG = "Thieves' Guild";
+    const TG = 'Merchant Guild';
     const town = {
       name: 'Saltmere', tier: 'town',
-      institutions: [hiddenHouse('inst-tg', "Thieves' guild (powerful)"), { id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
+      institutions: [hiddenHouse('inst-tg', "Merchant guild (powerful)"), { id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
       factions: [
         { faction: TG, power: 10, desc: 'A shown power, top-level list.' },
         { name: TG, power: 9, desc: 'gp1 the same power by its name key' },
-        { faction: "THIEVES' GUILD", power: 8, desc: 'gp2 the same power upper-cased' },
-        { faction: "Thieves' guild (powerful)", power: 7, desc: 'gp3 an entry named as the hidden house' },
-        { faction: "Thieves' Guild of the Docks", power: 6, desc: 'gp4 a longer name that holds the hidden one' },
-        { faction: TG, name: "Thieves' guild (powerful)", power: 5, desc: 'gp5 its name is the hidden house\'s own' },
+        { faction: "MERCHANT GUILD", power: 8, desc: 'gp2 the same power upper-cased' },
+        { faction: "Merchant guild (powerful)", power: 7, desc: 'gp3 an entry named as the hidden house' },
+        { faction: "Merchant Guild of the Docks", power: 6, desc: 'gp4 a longer name that holds the hidden one' },
+        { faction: TG, name: "Merchant guild (powerful)", power: 5, desc: 'gp5 its name is the hidden house\'s own' },
         { faction: TG, power: 3, hidden: true, desc: 'gp7 an entry flagged hidden' },
       ],
       powerStructure: { factions: [{ faction: TG, power: 10, desc: 'A shown power.' }, { faction: 'Council', power: 40 }] },
@@ -1707,7 +1707,7 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     const want = [
       { faction: TG, power: 10, desc: 'A shown power, top-level list.' },
       { name: TG, power: 9, desc: 'gp1 the same power by its name key' },
-      { faction: "THIEVES' GUILD", power: 8, desc: 'gp2 the same power upper-cased' },
+      { faction: "MERCHANT GUILD", power: 8, desc: 'gp2 the same power upper-cased' },
       { power: 7, desc: 'gp3 an entry named as the hidden house' },
       { power: 6, desc: 'gp4 a longer name that holds the hidden one' },
       { power: 3, hidden: true, desc: 'gp7 an entry flagged hidden' },
@@ -1717,7 +1717,7 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     const floorAt = /^\$\.(powerStructure\.factions\[0\]\.faction|factions\[[012]\]\.(faction|name))$/;
     for (const { tag, doc } of everyRead(r)) {
       if (!isRec(doc)) { bad.push(`${tag}: no document`); continue; }
-      bad.push(...arrivals(doc, "Thieves' guild (powerful)").map(a => `${tag}: ${a}`));
+      bad.push(...arrivals(doc, "Merchant guild (powerful)").map(a => `${tag}: ${a}`));
       bad.push(...arrivals(doc, TG, { notAt: floorAt }).map(a => `${tag}: ${a}`));
       bad.push(...arrivals(doc, 'gp5').map(a => `${tag}: ${a}`));
       if (doc.powerStructure?.factions?.[0]?.faction !== TG) bad.push(`${tag}: powerStructure.factions[0] lost its name`);

@@ -1,0 +1,62 @@
++ Received
+
+- []
++ [
++   "default+dm/live gallery page changed: npcs[id=npc_mages_guild].goal.intent.long.family",
++   "default+dm/live gallery page changed: npcs[id=npc_mages_guild].goal.intent.long.key",
++   "default+dm/live gallery page changed: npcs[id=npc_mages_guild].goal.intent.long.kind",
++   "default+dm/snapshot gallery page changed: npcs[id=npc_mages_guild].goal.intent.long.family",
++   "default+dm/snapshot gallery page changed: npcs[id=npc_mages_guild].goal.intent.long.key",
++   "default+dm/snapshot gallery page changed: npcs[id=npc_mages_guild].goal.intent.long.kind",
++ ]
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js:379:54
+    377|         }
+    378|       }
+    379|       expect(faults, faults.slice(0, 20).join('\n')).toEqual([]);
+       |                                                      ^
+    380|       expect(control.rows).toBeGreaterThan(0);
+    381|     }, TOWN_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/galleryServerVeil.pglite.test.js > the server-side share veil (211) — execution against the real SQL and the real client read > server-veil-metropolis-3: nothing the page hides is sent; no page changes; 210 is red on the same rows
+AssertionError: default+dm/live gallery page changed: npcs[id=npc_smelter].goal.intent.long.family
+default+dm/live gallery page changed: npcs[id=npc_smelter].goal.intent.long.key
+default+dm/live gallery page changed: npcs[id=npc_smelter].goal.intent.long.kind
+default+dm/snapshot gallery page changed: npcs[id=npc_smelter].goal.intent.long.family
+default+dm/snapshot gallery page changed: npcs[id=npc_smelter].goal.intent.long.key
+default+dm/snapshot gallery page changed: npcs[id=npc_smelter].goal.intent.long.kind: expected [ …(6) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "default+dm/live gallery page changed: npcs[id=npc_smelter].goal.intent.long.family",
++   "default+dm/live gallery page changed: npcs[id=npc_smelter].goal.intent.long.key",
++   "default+dm/live gallery page changed: npcs[id=npc_smelter].goal.intent.long.kind",
++   "default+dm/snapshot gallery page changed: npcs[id=npc_smelter].goal.intent.long.family",
++   "default+dm/snapshot gallery page changed: npcs[id=npc_smelter].goal.intent.long.key",
++   "default+dm/snapshot gallery page changed: npcs[id=npc_smelter].goal.intent.long.kind",
++ ]
+
+ ❯ tests/security/galleryServerVeil.pglite.test.js:379:54
+    377|         }
+    378|       }
+    379|       expect(faults, faults.slice(0, 20).join('\n')).toEqual([]);
+       |                                                      ^
+    380|       expect(control.rows).toBeGreaterThan(0);
+    381|     }, TOWN_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  2 failed | 78 passed (80)
+   Start at  08:07:10
+   Duration  1628.99s (transform 4.84s, setup 90ms, import 888ms, tests 1627.46s, environment 0ms)
+
+[gate-tail] end:  08:34:19 up  1:05,  0 user,  load average: 2.44, 4.96, 4.82
+[gate-tail] full log: /tmp/gate-tail.8517.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
