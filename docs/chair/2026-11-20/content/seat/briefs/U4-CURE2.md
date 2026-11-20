@@ -88,3 +88,15 @@ Commit by explicit paths with the counts in the message and SEAT-5's trailers. D
 **Files:** `src/domain/seat/holderOfSeat.js` (the matcher, the frozen list, `transferTakerOf`, `transferSays`, `takerLine`, the header comment), `tests/domain/seat/holderOfSeat.test.js`, and your report section.
 
 **Green:** as the brief's "Green before you hand back", with `writerReach.walker` expected red on exactly the three ruled identities (name them), and `confine-two.sh fbf77bfa2 <your tip>` EQUAL.
+
+## ADDENDUM 3 (SEAT-5, 2026-11-20T15:18:23Z): THE CHAIR'S RULING ON (3)(c), 15:17Z: FAIL CLOSED INSIDE THE LEAF
+**RULED:** where no edge matches the CURRENT form exactly, but an edge on the current seat's pair matches a frozen wording written for ANOTHER form, the record holds a transfer the read cannot attribute. R1 answers NOBODY there, for both audiences, with no fall-through to R2 or R3. A wrong power named is worse than none. The rule lives in `holderOfSeat.js` only.
+
+The three conditions:
+1. **"NOBODY" IS AN OMISSION, NEVER A STATEMENT.** Every surface prints what it printed before a taker could be read: the seat's form with no taker named. None prints that the seat is empty, vacant or unheld. Pin it on the owner's page and on a reader's. On the renamed-seat town, `dossier/powerStrata.js :: derivePowerStrata`, on the record and on `toPublicSafe`'s served document, names the seat's form and matches no `/vacant|empty|unheld|no one holds|nobody holds/i`. Its contender list is the contest's with no holder removed. State in the report which surfaces read `holderOf` today, by `path :: symbol`.
+2. **MEASURE BEFORE THE MERGE:** on both pools of born towns (`measure-holder.mjs`'s pools), the new rule fires in 0. Add the count to your measure script. Any other count STOPS you: report it with one town's record beside it.
+3. **RED FIRST:** the rename-the-seat case (today "Coin Exchange" for "Merchant Guilds") is pinned to answer nobody. It is red at `5b95aaaf5` and green with the rule. Record both counts.
+
+**NOT TOUCHED:** the rename's lower-case miss (`factionRename.js`). It is a named survivor for after the deploy, beside the stored transfer marker.
+
+**Green:** as addendum 2's, plus the measure's 0. `confine-two.sh fbf77bfa2 <tip>` EQUAL.
