@@ -15,6 +15,10 @@ Mark 450,000 by the chair's read; successor seated at 360,000. Read with: DEPTH-
 5. THE TIES (157 pairs): brief `briefs/BUILD-TIES.md` (bef0a4704): layout (A), appended after the goals reserve, ONE `drawnIndices`
    list (the chair 18:52, with its conditions). Then the kernel-mix check on the six tie pools (switch only where a line runs above ~1.5x
    its share), the built tie gain by size. 6. The owner's file. 7. "DEPTH <commit>".
+RULE (the chair 20:14): BEFORE "DEPTH <commit>": ONE `npm run test:ratchet` at the tip (the ONE whole-suite run allowed; exclusive mutex;
+to a log, never a pipe), read BY NAME against origin/lane/chair-2026-11-08 `docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv`: a row not
+listed is a stored figure moved by our wording (named, with its cause) or a real red, cured on the lane first. THE TIES wait for the goals
+lane's cure of three line reds (narrativeQualityCorpus GS-1 x2, powerStructure F31): the chair names its commit; no packed statements.
 RULE (the chair 19:28): no unit may raise the first-paint closure unless a first-paint surface needs it and the chair has ruled it.
 
 ## State

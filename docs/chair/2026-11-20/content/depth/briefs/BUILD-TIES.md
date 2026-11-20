@@ -50,3 +50,10 @@ GREEN AT YOUR TIP: your test; every test file under tests/ naming `createTiePros
 A golden that moves (`tests/property/generatorGoldenMaster.test.js` and its manifest readers) is NAMED with before and after, never
 re-recorded. ANSWER (at most 250 words): shas; base lengths per archetype (head, reserve) read; red-first receipts; every count line; the
 goals measure before and after; every moved pin with seeds out/in.
+
+AMENDED (DEPTH-3, 20:14 UTC by `date -u`; the chair's rule of 20:14 UTC; governs where it differs above): THE TIES ARE BUILT ON THE CURED LAW: the
+goals lane cures three reds on the working line first and the chair names that cure's commit; your base contains it. NO STATEMENTS PACKED ONTO A
+SHARED LINE in `src/generators/power/` (`tests/generators/powerStructure.test.js` F31 counts them against a shrink-only ceiling). Two GS-1 tests
+are in your governing files and must be green at your tip at full strength: `tests/generators/narrativeQualityCorpus.test.js` "relationship
+archetype pools hold eight variants each (GS-1)" and "relationship tie prose is drawn without replacement per settlement (GS-1)" (read the
+goals cure's form of them first; extend, never weaken), with F31 itself.
