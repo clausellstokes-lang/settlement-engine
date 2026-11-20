@@ -301,6 +301,38 @@ export function measureSlots(rows) {
   }
   return out;
 }
+/**
+ * A SENTENCE REPEATED INSIDE ONE PLACE (the chair, 2026-11-20 20:14: one of the owner's stop conditions). Per place, the
+ * sentences printed TWICE OR MORE within one surface FAMILY (familyOf: the web dossier is one family, each PDF form one,
+ * the session sheet one), at any positions, the same position included (two cards in one list printing one line: count()'s
+ * table (c) keys by stored path and counts only two different slots, so it never saw that case). Pure, one size's rows.
+ * Returns the places holding at least one repeat, and per (family, sentence): the places repeating it, `onePosition` (the
+ * places where ONE position printed it twice or more: the same-list case), the most times one place prints it, its
+ * positions (door slot keys) and its stored paths (attributionOf).
+ * @param {Array<{ surfaces: Record<string, Array<any[]>>, stored: Record<string, string[]> }>} rows
+ */
+export function repeatsInPlace(rows) {
+  /** @type {Map<string, { family: string, sentence: string, at: Set<number>, one: Set<number>, times: number, positions: Set<string>, paths: Set<string> }>} */ const rep = new Map();
+  const hit = new Set();
+  rows.forEach((row, i) => {
+    const heads = storedHeads(row.stored);
+    /** @type {Map<string, { n: number, positions: Set<string>, per: Map<string, number>, paths: Set<string> }>} */ const seen = new Map();
+    for (const [surface, lines] of Object.entries(row.surfaces)) for (const line of lines) for (const s of sentencesOf(line[0])) {
+      const k = `${familyOf(surface)}\u0000${s}`; let o = seen.get(k); if (!o) { o = { n: 0, positions: new Set(), per: new Map(), paths: new Set() }; seen.set(k, o); }
+      const pos = slotKey(surface, line); o.n++; o.positions.add(pos); o.per.set(pos, (o.per.get(pos) || 0) + 1); for (const p of attributionOf(s, row.stored, heads)) o.paths.add(p);
+    }
+    for (const [k, o] of seen) {
+      if (o.n < 2) continue;
+      hit.add(i);
+      const [family, sentence] = k.split('\u0000');
+      let r = rep.get(k); if (!r) { r = { family, sentence, at: new Set(), one: new Set(), times: 0, positions: new Set(), paths: new Set() }; rep.set(k, r); }
+      r.at.add(i); if ([...o.per.values()].some((c) => c >= 2)) r.one.add(i); r.times = Math.max(r.times, o.n); for (const x of o.positions) r.positions.add(x); for (const x of o.paths) r.paths.add(x);
+    }
+  });
+  const sentences = [...rep.values()].map((r) => ({ family: r.family, sentence: r.sentence, places: r.at.size, onePosition: r.one.size, placeIdx: [...r.at], oneIdx: [...r.one], times: r.times, positions: [...r.positions].sort(), paths: [...r.paths].sort() }))
+    .sort((a, b) => b.places - a.places || (a.family < b.family ? -1 : a.family > b.family ? 1 : a.sentence < b.sentence ? -1 : 1));
+  return { places: hit.size, of: rows.length, sentences };
+}
 /** How a slot is met again: `top` (one a place) or `seen` (many a place). @param {{ perPlace: number }} m @returns {'top' | 'seen'} */
 export const byOf = (m) => (m.perPlace <= ONE_A_PLACE ? 'top' : 'seen');
 /** The share a DM meets again: shareAll for a one-a-place slot, SEEN for a many-a-place slot. @param {any} m @param {'top' | 'seen'} [by] */

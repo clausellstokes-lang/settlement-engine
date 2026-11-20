@@ -23,7 +23,7 @@ const opt = (/** @type {string} */ k, /** @type {string} */ d) => process.argv.f
 const NAME = opt('name', 'RANKED');
 const BESIDE = opt('beside', '');
 const BAR = 0.15; const BOLD = 0.2; const SEEN_BAR = 0.3;
-const { slots } = JSON.parse(readFileSync(readingPath, 'utf8'));
+const { slots, repeats } = JSON.parse(readFileSync(readingPath, 'utf8'));
 const V = /** @type {any[]} */ (Object.values(slots));
 const ROOT = new URL('../../../../../../../', import.meta.url).pathname;
 
@@ -129,6 +129,9 @@ const moved = (/** @type {any} */ o) => {
   }
   return marks.length ? `**MOVED** ${marks.join(', ')}` : '';
 };
+/** hxd's own ranking (the beside reading's slots over the bar, by weight), for the `beside #` column. */
+const besideRank = new Map(beside ? Object.values(beside).filter((o) => Object.values(o.sizes).some((e) => e.shareAll > BAR))
+  .map((o) => [o.slot, Object.values(o.sizes).reduce((a, e) => a + e.topPlaces, 0)]).sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).map(([k], i) => [k, i + 1]) : []);
 
 // ── the pool row of a sentence: the file, the symbol and the key that hold it (THE CARD'S SECRET) ──
 const idx = moduleIndex();
@@ -196,9 +199,12 @@ function poolRowOf(sentence) {
 const L = [];
 const overBy = (/** @type {string} */ s) => ranked.filter((r) => r.o.sizes[s]?.shareAll > BAR).length;
 const seenOverBy = (/** @type {string} */ s) => seenRows.filter((r) => r.o.sizes[s]?.by === 'seen' && r.o.sizes[s].seen > SEEN_BAR).length;
-L.push(`# ${NAME} — the door's first reading (SAME-2 brief D part 2)`, '');
+L.push(beside ? `# ${NAME} — the visitor's pool, a one-off measure beside hxd (SAME-2 brief D part 3)` : `# ${NAME} — the door's first reading (SAME-2 brief D part 2)`, '');
 L.push(`Tree **${tree}**. Reading: \`${readingPath.split('/').slice(-1)[0]}\` from the run \`${slots && V[0] ? JSON.parse(readFileSync(readingPath, 'utf8')).dir.split('/').slice(-2).join('/') : '?'}\` (150 places a size, six sizes), measured with \`scripts/sameness-census.mjs :: measureSlots\` (the door's slot key and attribution); no new render. Classes are the register's (\`?\` = the rule's guess).`, '');
 L.push('## SUMMARY LINES', '');
+if (repeats) {
+  L.push(`- **A SENTENCE REPEATED INSIDE ONE PLACE** (the owner's stop condition; first): places printing one sentence twice or more within one surface family, per size — ${SIZES.map((s) => { const r = repeats[s]; return `${s} ${r.places}/${r.of} (STORY ${r.story}; STORY at ONE position ${r.storyOnePosition})`; }).join(', ')}. STORY = a STATE or NARRATIVE position; the CATALOGUE/LABEL repeats (a house's name twice) are counted apart. "At one position" is two cards or ties in one list printing one wording.`);
+}
 L.push(`- Rows over the bar (commonest sentence on more than 15% of ALL places of a size): **${ranked.length}** slots; per size: ${SIZES.map((s) => `${s} ${overBy(s)}`).join(', ')}.`);
 L.push(`- COVERED BY NOTHING YET: **${ranked.filter((r) => nothing(r.lanes)).length}** of the ${ranked.length} (of them, ${ranked.filter((r) => nothing(r.lanes) && r.lanes.length > 1).length} carry only an unsure \`?\` lane beside it); rows with any \`?\` lane: ${ranked.filter((r) => r.lanes.some((x) => x.includes(' ? '))).length}.`);
 L.push(`- Many-a-place (meet is SEEN at some size): **${seenRows.length}** slots; over the 30% bar per size: ${SIZES.map((s) => `${s} ${seenOverBy(s)}`).join(', ')}.`);
@@ -214,12 +220,29 @@ ranked.slice(0, 5).forEach((r, i) => L.push(`  ${i + 1}. weight ${r.w} — \`${m
 L.push('- Top five STATE and NARRATIVE rows by weight:');
 ranked.filter((r) => /^(STATE|NARRATIVE)/.test(r.o.cls)).slice(0, 5).forEach((r) => L.push(`  ${ranked.indexOf(r) + 1}. weight ${r.w} — \`${md(r.o.slot)}\` — ${r.o.cls} — ${attribution(r.o)} — "${md(cut(heaviest(r.o).sentence, 100))}" — ${r.lanes.join('; ')}`));
 L.push('');
+if (beside) {
+  const here = new Set(ranked.map((r) => r.o.slot));
+  L.push(`- BESIDE (\`${BESIDE.split('/').slice(-1)[0]}\`): over the bar here **${ranked.length}**, there ${besideRank.size}; here only ${[...here].filter((k) => !besideRank.has(k)).length}, there only ${[...besideRank.keys()].filter((k) => !here.has(k)).length}. Rows whose commonest sentence MOVED beyond 4 SE at some size: **${ranked.filter((r) => moved(r.o)).length}** of the ${ranked.length}.`, '');
+}
 if (beside) L.push(`Beside: \`${BESIDE.split('/').slice(-1)[0]}\`. **MOVED** marks a size whose commonest-sentence share (over all places) differs between the two pools by more than 4 SE of a binomial share at the beside reading (150 places): the arrow reads beside → this.`, '');
+if (repeats) {
+  L.push('## A SENTENCE REPEATED INSIDE ONE PLACE (the chair, 20:14)', '');
+  L.push('Measured by `scripts/sameness-census.mjs :: repeatsInPlace` over every place of the run: a sentence printed twice or more inside ONE place within one surface FAMILY (the web dossier is one family, each PDF form one, the session sheet one), at any positions, the same position included. Sentences are MASKED (each place\'s names to `#`, digits to `0`), so one wording printed twice with other names in it counts: the frame repeats. SIDE: STORY where a position\'s register class is STATE or NARRATIVE (the fault), FURNITURE where every position is CATALOGUE or LABEL (a house\'s name or a caption twice is not the fault), UNROWED where no position has a register row (fewer than 5 places print it). Every repeated sentence, per size, is in `REPEATS.tsv` beside this file.', '');
+  L.push('| size | places with a repeat | at ONE position | with a STORY repeat | STORY at ONE position | sentences repeated (STORY / FURNITURE / UNROWED) |', '|---|---|---|---|---|---|');
+  for (const s of SIZES) { const r = repeats[s]; const n = (/** @type {string} */ side) => r.sentences.filter((x) => x.side === side).length; L.push(`| ${s} | ${r.places}/${r.of} | ${r.onePosition} | ${r.story} | **${r.storyOnePosition}** | ${r.sentences.length} (${n('STORY')} / ${n('FURNITURE')} / ${n('UNROWED')}) |`); }
+  L.push('', '### The STORY repeats, by the places that print them twice (at most 25 a size; one-position places first)', '');
+  L.push('| size | places (at one position) | family | most in one place | class | positions | attribution | sentence (masked) |', '|---|---|---|---|---|---|---|---|');
+  for (const s of SIZES) {
+    const rows = repeats[s].sentences.filter((x) => x.side === 'STORY').sort((a, b) => b.onePosition - a.onePosition || b.places - a.places || (a.sentence < b.sentence ? -1 : 1)).slice(0, 25);
+    for (const x of rows) L.push(`| ${s} | ${x.places} (${x.onePosition}) | ${x.family} | ${x.times} | ${x.classes.join(', ')} | ${x.positions.slice(0, 3).map((k) => `\`${md(k)}\``).join('<br>')}${x.positions.length > 3 ? ` +${x.positions.length - 3}` : ''} | ${x.paths.length ? x.paths.slice(0, 3).map((k) => `\`${k}\``).join(', ') : 'COMPOSED'} | ${md(cut(x.sentence))} |`);
+  }
+  L.push('');
+}
 L.push('## THE RANKED TABLE (by weight)', '');
 L.push('Weight: the places printing the slot\'s commonest sentence, summed over the six sizes (the commonest sentence is taken per size; the sentence shown is the heaviest size\'s). A size cell: `top places/150 (shareAll) · shareIn`; **bold** over 20%.', '');
-L.push(`| # | weight | ${SIZES.join(' | ')} | class | surface \\| position | attribution | commonest sentence (masked) | lane |${beside ? ' moved |' : ''}`);
-L.push(`|---|---|${SIZES.map(() => '---').join('|')}|---|---|---|---|---|${beside ? '---|' : ''}`);
-ranked.forEach((r, i) => L.push(`| ${i + 1} | ${r.w} | ${SIZES.map((s) => sizeCell(r.o.sizes[s])).join(' | ')} | ${r.o.cls} | \`${md(r.o.slot)}\` | ${md(attribution(r.o))} | ${md(cut(heaviest(r.o).sentence))} | ${md(r.lanes.join('; '))} |${beside ? ` ${moved(r.o)} |` : ''}`));
+L.push(`| # | weight | ${SIZES.join(' | ')} | class | surface \\| position | attribution | commonest sentence (masked) | lane |${beside ? ' beside # | moved |' : ''}`);
+L.push(`|---|---|${SIZES.map(() => '---').join('|')}|---|---|---|---|---|${beside ? '---|---|' : ''}`);
+ranked.forEach((r, i) => L.push(`| ${i + 1} | ${r.w} | ${SIZES.map((s) => sizeCell(r.o.sizes[s])).join(' | ')} | ${r.o.cls} | \`${md(r.o.slot)}\` | ${md(attribution(r.o))} | ${md(cut(heaviest(r.o).sentence))} | ${md(r.lanes.join('; '))} |${beside ? ` ${besideRank.get(r.o.slot) ?? 'under the bar'} | ${moved(r.o)} |` : ''}`));
 L.push('');
 L.push('## MANY-A-PLACE (meet is SEEN), ranked by SEEN against the 30% bar', '');
 L.push('A size cell: `SEEN (shareAll of the commonest sentence)`, **bold** over 30%; `top x%` where that size prints at most 1.5 sentences a place (its meet is shareAll).', '');
@@ -249,6 +272,12 @@ if (!beside) {
 }
 writeFileSync(join(outDir, `${NAME}.md`), `${L.join('\n')}\n`);
 
+// ── REPEATS.tsv ──
+if (repeats && !beside) {
+  const T = [['size', 'family', 'side', 'places', 'onePosition', 'mostInOnePlace', 'classes', 'positions', 'attribution', 'sentence (masked)'].join('\t')];
+  for (const s of SIZES) for (const x of repeats[s].sentences) T.push([s, x.family, x.side, x.places, x.onePosition, x.times, x.classes.join('; '), `${x.positions.slice(0, 4).join(' ;; ')}${x.positions.length > 4 ? ` ;; +${x.positions.length - 4}` : ''}`, x.paths.slice(0, 4).join('; ') || 'COMPOSED', x.sentence].join('\t').replace(/\n/g, ' '));
+  writeFileSync(join(outDir, 'REPEATS.tsv'), `# tree ${tree}; ${readingPath.split('/').slice(-1)[0]}; scripts/sameness-census.mjs :: repeatsInPlace; masked sentences\n${T.join('\n')}\n`);
+}
 // ── FULL.tsv ──
 if (!beside) {
   const T = [['slot', 'size', 'places', 'of', 'distinct', 'perPlace', 'topPlaces', 'shareAll', 'shareIn', 'by', 'SEEN', 'class', 'attribution', 'lane', 'commonest sentence'].join('\t')];

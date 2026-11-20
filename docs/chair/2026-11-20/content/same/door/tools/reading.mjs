@@ -9,16 +9,25 @@
  */
 import { writeFileSync } from 'node:fs';
 import {
-  SIZES, attributionOf, byOf, measureSlots, moduleIndex, moduleOf, readRegister, readSize, sentencesOf, slotKey, storedHeads,
+  SIZES, attributionOf, byOf, measureSlots, moduleIndex, moduleOf, readRegister, readSize, repeatsInPlace, sentencesOf, slotKey, storedHeads,
 } from '../../../../../../../scripts/sameness-census.mjs';
 
 const [dir, out] = process.argv.slice(2);
 const reg = readRegister();
 const idx = moduleIndex();
 /** @type {Record<string, any>} */ const slots = {};
+/** @type {Record<string, any>} */ const repeats = {};
+/** A repeat's side: STORY (a STATE or NARRATIVE position), FURNITURE (every position CATALOGUE or LABEL), else UNROWED. */
+const sideOf = (/** @type {string[]} */ cls) => (cls.some((c) => /^(STATE|NARRATIVE)/.test(c)) ? 'STORY' : cls.length && cls.every((c) => /^(CATALOGUE|LABEL)/.test(c)) ? 'FURNITURE' : 'UNROWED');
 for (const size of SIZES) {
   const rows = readSize(dir, size);
   const t = measureSlots(rows);
+  // A SENTENCE REPEATED INSIDE ONE PLACE (scripts/sameness-census.mjs :: repeatsInPlace), each classed by its positions' register rows
+  const rp = repeatsInPlace(rows);
+  for (const r of rp.sentences) { r.classes = [...new Set(r.positions.map((k) => reg.rows[k]?.class || '(no row)'))].sort(); r.side = sideOf(r.classes.filter((c) => c !== '(no row)')); }
+  const placesOf = (/** @type {any[]} */ rs, /** @type {'placeIdx' | 'oneIdx'} */ f) => new Set(rs.flatMap((r) => r[f])).size;
+  const story = rp.sentences.filter((r) => r.side === 'STORY');
+  repeats[size] = { places: rp.places, of: rp.of, onePosition: placesOf(rp.sentences, 'oneIdx'), story: placesOf(story, 'placeIdx'), storyOnePosition: placesOf(story, 'oneIdx'), sentences: rp.sentences };
   /** @type {Map<string, Map<string, { places: Set<number>, paths: Set<string> }>>} */ const by = new Map();
   rows.forEach((row, i) => {
     const heads = storedHeads(row.stored);
@@ -39,5 +48,5 @@ for (const size of SIZES) {
   }
   console.log(`${size}: ${rows.length} places, ${t.size} slots`);
 }
-writeFileSync(out, JSON.stringify({ dir, slots }));
+writeFileSync(out, JSON.stringify({ dir, slots, repeats }));
 console.log(`slots ${Object.keys(slots).length}`);
