@@ -4682,6 +4682,10 @@
     "tests/data/arrivalPoolsDeepened.test.js": {
       "kind": "rationale",
       "rationale": "THE ARRIVAL PARAGRAPH'S THIN POOLS DEEPENED (L2, PAGE-2/PAGE-6, 2026-11-20; docs/chair/2026-11-20/content/page/briefs/L2.md). Its catching power is EXECUTED in the test body, not asserted: it births the measure's own 300 towns (hxd-<size>-<i>, 50 a size, DEFAULT_CONFIG) through the real pipeline and reads the stored arrivalScene, and it reds three ways: when a deepened pool holds fewer entries than its base count plus the lines L2 appended (an appended line removed), when the exact chance that at least two of three distinct towns share an arrival sentence word for word is not below its stated target of 18% (the base read 22.9%), and when an appended line is printed where its own declaration is refused by the town's record through the real readers (factsOf, factVocabulary.js :: declarationAdmits), or no appended line is printed at all (the admission arm cannot pass vacuously). Every anchor is computed from the pool's own export, never quoted. All three arms were RED on the base data files (3 failed of 3) and green with the appended lines (the commit bodies name them)."
+    },
+    "tests/generators/arrivalLandmarkSaid.test.js": {
+      "kind": "rationale",
+      "rationale": "THE LANDMARK SAID FROM THE HOUSE THAT STANDS (ARRIVAL-LINES-2-BUILD, PAGE-8, 2026-11-20; the chair's read of 20:02 and its common rules of 20:31). It holds the door of src/data/arrivalLandmarkWordings.js over every slot of the four landmark branches, each drawn line COMPUTED from structuralValidator.js :: checkInstCompat at a held roll: a new wording is never said where its house is absent, no row (the drawn line included) is said where the record refuses its walls, gate or church, nothing that excludes the siege is said under siege, nothing admitted answers null, the keyed pick reads no stream, and no line of checkInstCompat is copied into the file. Red first on the drafted file (the branch-and-index door missing); a sweep plant would re-plant the same removals the test's own refused-record controls already prove red."
     }
   },
   "meta": {

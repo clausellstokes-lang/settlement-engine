@@ -1,5 +1,17 @@
 # ARRIVAL-LINES-2: the landmark tranche, each new line beside a line of its pool (PAGE-8's drafting seat, written 2026-11-20 19:28 UTC by `date -u`)
 
+> **THE CHAIR'S READ (20:02): 31 OF 32 APPROVED**, with three cures and one strike, marked in place below. Built in
+> `src/data/arrivalLandmarkWordings.js` (ARRIVAL-LINES-2-BUILD), keyed by branch, each row by its id (`<branch>/+k`, k =
+> NEW [k] below). There every cathedral row also declares `church` (the presumed-things walker's atom for the word
+> "cathedral"; the faith reading's `hasChurch`, true wherever a cathedral stands), and the two "streets" rows (great
+> cathedral [9], cathedral [2]) declare `tier: ≥ village` (the size class). **28 are in the file; three are HELD for the
+> chair's word**, a walker reddening their approved words: citadel [3] ("rather than": the style law; proposed "...
+> plainly built to be held, not admired."), citadel [7] ("The road in": the presumption classes' arrival from outside;
+> proposed "The road passes beneath the citadel, close enough to see how thick its foundations are."), great cathedral
+> [16] ("from far off", the same class; proposed "... built to be seen from a long way off, and it is."). **NOT WIRED:**
+> the arrival site knows the drawn line only by its text (`checkInstCompat` returns `textOf` of its row), so naming its
+> branch and index there is stopped for the chair's ruling (its word of 20:50).
+
 For the chair's eye before any builder is cut. Nothing under `src/` or `tests/` was written. The measure is
 `measures/page-8/arrival2/measure.mjs` (forge once, cache, read the cache; the projection below parses THIS file's lines).
 900 places: the chair's recipe (`hxd-${size}-${i}`, `DEFAULT_CONFIG` untouched), 150 a size, forged at a614d7664 (L2 and S9 merged).
@@ -84,7 +96,7 @@ climate, season, species, crime, event or person; no digit, em dash or exclamati
 2. EXISTING [1]: A cathedral dominates the skyline. Larger than anything else in the settlement, which may say something about what matters here.
    **NEW [3]: The roofs of the settlement gather around the great cathedral the way a crowd gathers around a speaker.**  _(house: ["great cathedral"])_
 3. EXISTING [0]: The great cathedral's spire is the tallest thing for miles.
-   **NEW [4]: Carved figures line the front of the great cathedral, row above row, worn to the same grey.**  _(house: ["great cathedral"])_
+   **NEW [4]: Carved figures line the front of the great cathedral, row above row.**  _(house: ["great cathedral"])_  [CURED by the chair, 20:02: ends at "row above row"; was "..., worn to the same grey" (an age)]
 4. EXISTING [1]: A cathedral dominates the skyline. Larger than anything else in the settlement, which may say something about what matters here.
    **NEW [5]: Wherever the road bends, the great cathedral is somewhere above the rooftops ahead.**  _(house: ["great cathedral"])_
 5. EXISTING [0]: The great cathedral's spire is the tallest thing for miles.
@@ -96,7 +108,7 @@ climate, season, species, crime, event or person; no digit, em dash or exclamati
 8. EXISTING [1]: A cathedral dominates the skyline. Larger than anything else in the settlement, which may say something about what matters here.
    **NEW [9]: The streets all seem to lean toward the great cathedral, as if it were the reason they were laid down.**  _(house: ["great cathedral"])_
 9. EXISTING [0]: The great cathedral's spire is the tallest thing for miles.
-   **NEW [10]: The great cathedral's bells are the loudest thing in the settlement, and they carry far out along the road.**  _(house: ["great cathedral"])_
+   ~~NEW [10]: The great cathedral's bells are the loudest thing in the settlement, and they carry far out along the road.~~  [STRUCK by the chair, 20:02: the senses beat already rings the faith's bells in the same paragraph]
 10. EXISTING [1]: A cathedral dominates the skyline. Larger than anything else in the settlement, which may say something about what matters here.
    **NEW [11]: Coloured glass glints in the great cathedral's windows from a long way down the road.**  _(house: ["great cathedral"])_
 11. EXISTING [0]: The great cathedral's spire is the tallest thing for miles.
@@ -116,7 +128,7 @@ climate, season, species, crime, event or person; no digit, em dash or exclamati
 2. EXISTING [1]: The cathedral bell tower is the first thing visible from this direction.
    **NEW [3]: A cathedral of plain, heavy stone rises out of the middle of the settlement.**  _(house: ["cathedral"])_
 3. EXISTING [0]: A stone cathedral anchors the high ground.
-   **NEW [4]: The cathedral is the largest building in sight, and the houses around it keep a respectful distance.**  _(house: ["cathedral"])_
+   **NEW [4]: The cathedral rises well above the houses around it, which keep a respectful distance.**  _(house: ["cathedral"])_  [CURED by the chair, 20:02: was "The cathedral is the largest building in sight, and the houses around it keep a respectful distance." (a citadel may stand)]
 
 ## LANDMARK massive wall / citadel (the third branch, `has('massive wall', 'citadel')`: 2 lines at the base, +6; houses: "citadel" (4), "walls" (2))
 1. EXISTING [0]: The walls are serious. High stone, maintained, with watchtowers spaced to cover every angle.  _(needs: ["walls"])_
@@ -136,7 +148,7 @@ climate, season, species, crime, event or person; no digit, em dash or exclamati
 1. EXISTING [0]: A wall circuit, unremarkable but intact.  _(needs: ["walls"]; excludes: ["crisis: under_siege"])_
    **NEW [2]: A plain wall runs round the settlement, no higher than it needs to be.**  _(house: ["walls"]; needs: ["walls"])_
 2. EXISTING [1]: The gatehouse arch frames the main road.  _(needs: ["gate"])_
-   **NEW [3]: The road narrows to pass through the gate, and carts take their turn.**  _(house: ["gates"]; needs: ["gate"])_
+   **NEW [3]: The road narrows to pass through the gate, and carts take their turn.**  _(house: ["gates"]; needs: ["gate"]; excludes: ["crisis: under_siege"])_  [CURED by the chair, 20:02: the excludes added]
 3. EXISTING [0]: A wall circuit, unremarkable but intact.  _(needs: ["walls"]; excludes: ["crisis: under_siege"])_
    **NEW [4]: The wall is the first thing you reach on the road in, and the houses begin just inside it.**  _(house: ["walls"]; needs: ["walls"])_
 4. EXISTING [1]: The gatehouse arch frames the main road.  _(needs: ["gate"])_

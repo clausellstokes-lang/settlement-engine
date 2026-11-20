@@ -3,6 +3,7 @@
 // RUN (from the tree's root; every forge through the gate mutex, the machine is shared):
 //   sh scripts/gate-mutex.sh --run -- node <this> forge "$PWD" 150 <cache.json>     # forge once, cache (about 2 min)
 //   node <this> measure "$PWD" <cache.json> [<lines.md>]                             # read the cache; light
+//   node <this> compare <before-cache.json> <after-cache.json>                       # what moved between two forges
 // With <lines.md> (ARRIVAL-LINES-2-TO-CHAIR.md) it also PROJECTS the share after the drafted lines are wired.
 //
 // THE PLACES: the chair's recipe (PAGE-1's measure A): SIZES x i in 0..N-1, seed `hxd-${size}-${i}`, DEFAULT_CONFIG untouched.
@@ -56,7 +57,45 @@ if (MODE === 'forge') {
   out(`FORGED ${places.length} places (${SIZES.join(', ')} x ${N}) in ${((Date.now() - t0) / 1000).toFixed(0)}s -> ${OUT}`);
   process.exit(0);
 }
-if (MODE !== 'measure') { console.error('mode: forge | measure'); process.exit(2); }
+// ═════════════════════════════════════════ COMPARE (two caches: the paragraph moved, by size and by beat) ═════════════════════════
+if (MODE === 'compare') {
+  const [A, B] = [L, ...rest].map((f) => JSON.parse(readFileSync(f, 'utf8')).places);
+  const bySeed = new Map(B.map((p) => [p.seed, p]));
+  const moved = {}; const other = [];
+  for (const a of A) { const b = bySeed.get(a.seed); if (!b) { other.push(`${a.seed} missing`); continue; }
+    if (a.arrivalScene !== b.arrivalScene) moved[a.size] = (moved[a.size] || 0) + 1;
+    for (const k of ['size', 'tier', 'name', 'culture', 'route', 'terrain']) if (a[k] !== b[k]) other.push(`${a.seed} ${k}`);
+    if (JSON.stringify(a.names) !== JSON.stringify(b.names)) other.push(`${a.seed} names`); if (JSON.stringify(a.stress) !== JSON.stringify(b.stress)) other.push(`${a.seed} stress`);
+    for (const k of Object.keys(a.held)) if (k in b.held && a.held[k] !== b.held[k]) other.push(`${a.seed} held[${k}]`); } // atoms both forges answered
+  out(`COMPARE: arrivalScene moved in ${Object.values(moved).reduce((x, y) => x + y, 0)} of ${A.length} places (${Object.entries(moved).map(([k, v]) => `${k} ${v}`).join(', ')}); other cached fields moved: ${other.length}${other.length ? ' ' + other.slice(0, 10).join(', ') : ''}`);
+  process.exit(0);
+}
+// ═════════════════════════════════════════ DUMP / DUMPDIFF (the 300 whole, two trees) ═════════════════════════════════════════
+//   node <this> dump <tree> 50 <out.json>   (through the gate mutex)   ·   node <this> dumpdiff <before.json> <after.json>
+if (MODE === 'dump') {
+  const [nArg = '50', OUT] = rest;
+  const { generateSettlementPipeline } = await import(`${L}/src/generators/generateSettlementPipeline.js`);
+  const { birthConfig, loadGenerationLawPayloads } = await import(`${L}/src/domain/density/densityCreateBoundary.js`);
+  const { DEFAULT_CONFIG } = await import(`${L}/src/store/configSlice.js`);
+  const { SIZES } = await import(`${L}/tests/components/pageCensusWalk.shared.mjs`);
+  await loadGenerationLawPayloads();
+  const all = {};
+  for (const size of SIZES) for (let i = 0; i < Number(nArg); i++) { const seed = `hxd-${size}-${i}`; all[seed] = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: size }), null, { seed, customContent: {} }); }
+  writeFileSync(OUT, JSON.stringify(all)); out(`DUMPED ${Object.keys(all).length} -> ${OUT}`); process.exit(0);
+}
+if (MODE === 'dumpdiff') {
+  const [A, B] = [L, rest[0]].map((f) => JSON.parse(readFileSync(f, 'utf8')));
+  const paths = new Map(); let identical = 0;
+  const walk = (x, y, path) => {
+    if (x === y) return;
+    if (typeof x !== typeof y || x === null || y === null || typeof x !== 'object') { const k = path.replace(/\[\d+\]/g, '[]'); paths.set(k, (paths.get(k) || 0) + 1); return; }
+    for (const key of new Set([...Object.keys(x), ...Object.keys(y)])) walk(x[key], y[key], Array.isArray(x) ? `${path}[${key}]` : `${path}.${key}`);
+  };
+  for (const seed of Object.keys(A)) { const before = paths.size, cnt = [...paths.values()].reduce((s, v) => s + v, 0); walk(A[seed], B[seed], ''); if ([...paths.values()].reduce((s, v) => s + v, 0) === cnt && paths.size === before) identical++; }
+  out(`DUMPDIFF: ${Object.keys(A).length} records; identical ${identical}; differing field paths: ${[...paths].map(([k, v]) => `${k} ${v}`).join(', ') || 'none'}`);
+  process.exit(0);
+}
+if (MODE !== 'measure') { console.error('mode: forge | measure | compare | dump | dumpdiff'); process.exit(2); }
 
 // ═════════════════════════════════════════ MEASURE ═════════════════════════════════════════
 const [CACHE, LINES] = rest;
@@ -117,7 +156,10 @@ const asFn = (line) => { const x = textOf(line); return typeof x === 'function' 
 const add = (id, beat, lines, hook = false) => pools.push({ id, beat, lines: lines.map((l) => ({ fn: asFn(l), hook, raw: l })) });
 for (const [k, v] of Object.entries(ARRIVAL_SCENES)) add(`ARRIVAL_SCENES.${k}`, 'scene', v, true);
 for (const [k, v] of Object.entries(STRESS_DESCS)) add(`STRESS_DESCS.${k}`, 'vignette', v, true);
-for (const b of BRANCHES) add(`LANDMARK ${b.id}`, 'landmark', b.lines.map((l) => l.text));
+// THE BUILT TREE (ARRIVAL-LINES-2-BUILD): where `src/data/arrivalLandmarkWordings.js` exists, a landmark pool is its branch's
+// drawn rows and its new wordings, so a printed new wording is attributed (index >= 2 is a new wording).
+let LANDMARK_WORDINGS = null; try { ({ LANDMARK_WORDINGS } = await import(`${L}/src/data/arrivalLandmarkWordings.js`)); } catch { /* the base tree */ }
+for (const b of BRANCHES) { const w = LANDMARK_WORDINGS?.find((x) => x.branch === b.id); add(`LANDMARK ${b.id}`, 'landmark', w ? [...w.drawn, ...w.said].map((r) => r.text) : b.lines.map((l) => l.text)); }
 for (const [k, p] of Object.entries(CULTURE_PROFILES)) pools.push({ id: `BUILT ${k}`, beat: 'built detail', lines: (p.architecturalDetails || []).map((d) => ({ fn: () => `${sentenceCase(String(textOf(d)).trim())}.` })) });
 pools.push({ id: 'BUILT twins', beat: 'built detail', lines: Object.values(CULTURE_LINE_SIBLINGS).flatMap((rows) => rows.filter((r) => r.twinOf).map((r) => ({ fn: () => `${sentenceCase(String(r.text).trim())}.` }))) });
 for (const s of ARRIVAL_SENSES) for (const f of ['lines', 'dominant']) if (s[f]?.length) add(`ARRIVAL_SENSES.${s.key}.${f}`, 'senses', s[f]);
@@ -220,7 +262,7 @@ for (const size of SIZES) {
 // a landmark line whose house is NOT among the native names (the found mechanism's own gap; reported, not cured here)
 const houseless = [];
 for (const pl of places) for (const b of pl.beats.filter((x) => x.pool.beat === 'landmark')) {
-  const br = BRANCHES.find((x) => `LANDMARK ${x.id}` === b.pool.id); const line = br.lines[b.idx];
+  const br = BRANCHES.find((x) => `LANDMARK ${x.id}` === b.pool.id); const line = br.lines[b.idx]; if (!line) continue; // a new wording: the build's own test holds its house
   const houseOk = line.house.some((h) => pl.names.some((n) => n.includes(h)));
   const needsOk = (line.needs || []).every((a) => pl.held[a] === true) && (line.excludes || []).every((a) => pl.held[a] === false);
   if (!houseOk || !needsOk) houseless.push(`${pl.seed} [${b.pool.id} #${b.idx}${houseOk ? '' : ' house absent'}${needsOk ? '' : ' declaration refused'}]`);
@@ -232,6 +274,16 @@ const houseNames = new Map();
 for (const pl of places) { const br = landmarkBranchOf(pl.names, pl.tier); if (!br) continue; for (const l of br.lines) for (const h of l.house) for (const n of pl.names) if (n.includes(h)) houseNames.set(`${br.id} :: ${h}`, new Set([...(houseNames.get(`${br.id} :: ${h}`) || []), n])); }
 for (const [k, v] of houseNames) out(`   ${k} <- ${[...v].join(' | ')}`);
 
+// ═════ 8. UNDER SIEGE: places printing a landmark row that excludes `crisis: under_siege` while the record holds it
+{
+  const rowsOf = (id) => { const w = LANDMARK_WORDINGS?.find((x) => `LANDMARK ${x.branch}` === id); if (w) return [...w.drawn, ...w.said]; const br = BRANCHES.find((x) => `LANDMARK ${x.id}` === id); return br ? br.lines : []; };
+  const hits = [];
+  for (const pl of places) for (const b of pl.beats.filter((x) => x.pool.beat === 'landmark')) {
+    const r = rowsOf(b.pool.id).find((x) => x.text === b.text);
+    if (r && (r.excludes || []).includes('crisis: under_siege') && pl.held['crisis: under_siege'] === true) hits.push(`${pl.seed} "${r.text}"`);
+  }
+  out(`\n8. UNDER SIEGE: ${hits.length} of ${places.length} places print a landmark line that excludes the siege, under siege${hits.length ? ': ' + hits.join(', ') : ''}; places under siege at all: ${places.filter((p) => p.held['crisis: under_siege'] === true).length}`);
+}
 let priceFrom = null;
 // ═════ 7. THE PRICE: how many lines each pool would need. A pool of n lines drawn by D places of N, its lines printed c_1..c_n
 // times, gives a pair of places the same line with p = Σ c(c-1) / N(N-1). Appending k lines (or, for a LANDMARK branch, k keyed
@@ -247,7 +299,7 @@ let priceFrom = null;
     const g = bySize(size); const N = g.length; stats[size] = [];
     for (const p of pools) {
       const counts = new Map(); for (const pl of g) for (const b of pl.beats) if (b.pool === p) counts.set(b.idx, (counts.get(b.idx) || 0) + 1);
-      if (counts.size) stats[size].push({ id: p.id, beat: p.beat, n: p.lines.length, counts: [...counts.values()], N });
+      if (counts.size) stats[size].push({ id: p.id, beat: p.beat, n: p.beat === 'landmark' ? 2 : p.lines.length, counts: [...counts.values()], N }); // a landmark branch: checkInstCompat's two lines (its wordings are what the price adds)
     }
   }
   const pairOf = (r, k) => { const D = r.counts.reduce((a, b) => a + b, 0); const sc = r.n / (r.n + k); let s = 0; for (const c of r.counts) { const x = c * sc; s += x * (x - 1); } if (k) { const y = D / (r.n + k); s += k * y * Math.max(0, y - 1); } return Math.max(0, s) / (r.N * (r.N - 1)); };
@@ -294,7 +346,7 @@ const md = readFileSync(LINES, 'utf8');
 const drafted = new Map(); let cur = null;
 for (const raw of md.split('\n')) {
   const h = /^## (\S+(?: [^(]+?)?)\s*\(/.exec(raw); if (h) { cur = h[1].trim(); continue; }
-  const m = /\*\*NEW \[\d+\]: (.+?)\*\*(?:\s+_\((.*)\)_)?\s*$/.exec(raw.trim().replace(/^\d+\.\s+/, ''));
+  const m = /\*\*NEW \[\d+\]: (.+?)\*\*(?:\s+_\((.*?)\)_)?(?:\s+\[[^\]]*\])?\s*$/.exec(raw.trim().replace(/^\d+\.\s+/, '')); // a [CURED ...] note may follow; a ~~STRUCK~~ line is not read
   if (!m || !cur) continue;
   const decl = { needs: [], excludes: [], crisis: [], twinOf: null, house: null };
   for (const part of (m[2] || '').split(/;\s*(?=[a-zA-Z]+:)/)) {
@@ -322,7 +374,10 @@ const project = (salt) => places.map((pl) => {
       const br = BRANCHES.find((x) => `LANDMARK ${x.id}` === b.pool.id); const line = br.lines[b.idx];
       const extra = (drafted.get(`LANDMARK ${br.id}`) || []).filter((d) => (d.house || []).some((h) => pl.names.some((n) => n.includes(h))) && heldOK(pl, d, false));
       // the drawn line's own house answers first: a wording of another house of the branch is said only where that house stands
-      const family = [b.text, ...extra.map((d) => d.text.split('{name}').join(pl.name))];
+      // the chair's wiring (20:02): the drawn line passes the door's filter too; nothing admitted -> the built detail speaks
+      // (projected as no landmark sentence: the built detail it would print is not in the cache)
+      const family = [...(line && heldOK(pl, line, false) ? [b.text] : []), ...extra.map((d) => d.text.split('{name}').join(pl.name))];
+      if (!family.length) return null;
       return { pool: b.pool, text: family[pickMixed(family.length, `${pl.seed}${salt}::landmark`)] };
     }
     if (!add) return b;
@@ -342,7 +397,7 @@ const project = (salt) => places.map((pl) => {
     let text = chosen.text.split('{name}').join(pl.name);
     if (b.pool.lines[0]?.hook) text = speakTierNoun(text, tierNounFor(pl.tier));
     return { pool: b.pool, text };
-  });
+  }).filter(Boolean);
   return { ...pl, beats };
 });
 const projected = project('');
