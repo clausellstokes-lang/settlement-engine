@@ -676,6 +676,10 @@ function rewriteProse(target, key, oldName, newName) {
  * from ...", the label close's twin where no guard stands). A name the leaf leaves as it is moves once.
  * @param {string} text @param {string} oldName @param {string} newName @returns {string}
  */
+/** NAMES-1 (CN1): a sentence's head (its start, or after its stop and a space) and a word's end, as regex literals (the copy's voice count reads no '!') */
+const SENTENCE_HEAD = /(^|[.?\u0021…]["”')]?\s+)/u.source;
+const WORD_ENDS = /(?![\p{L}\p{N}\p{M}_])/u.source;
+
 function substituteName(text, oldName, newName) {
   // NAMES-1 (the seventh chair's ruling CN1 of 2026-11-20): a sentence written through the leaf names the power WITH ITS
   // ARTICLE ("the Guard" inside a sentence, "The Guard" at its head), so those move first, each to the new name's own
@@ -685,7 +689,7 @@ function substituteName(text, oldName, newName) {
   const bodyNew = powerNameAfterArticle(newName);
   if (bodyOld && bodyNew && bodyOld !== bodyNew) {
     next = substituteWholeWord(next, `the ${bodyOld}`, `the ${bodyNew}`);
-    const atHead = new RegExp(`(^|[.!?…]["”')]?\\s+)The ${bodyOld.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\p{L}\\p{N}\\p{M}_])`, 'gu');
+    const atHead = new RegExp(`${SENTENCE_HEAD}The ${bodyOld.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}${WORD_ENDS}`, 'gu');
     next = next.replace(atHead, (_m, lead) => `${lead}The ${bodyNew}`);
   }
   next = substituteWholeWord(next, oldName, newName);

@@ -21,7 +21,7 @@ import { random as _rng } from "../kernel/rngContext.js";
 import { pickRandom2 } from "./helpers.js"; /** A drawn history event of one type, by name ("this event" where none): the pool rows' own draw, in its own statement (TAIL-CLOSE-SRC-4, the chair's SR3 (a): the row keeps its declaration, the filter is read here). @param {any[]} r @param {string} type @returns {string} */ const drawnEventOfType = (r, type) => pickRandom2(r.filter((s) => s.type === type))?.name || "this event"; // one line, so no cited line moves
 import { speakTierNoun } from "../domain/display/stateProse/stateProseKernel.js";
 import { prosperityLabelOf } from "../domain/prosperityRank.js"; import { PROSPERITY_WORDS } from "../domain/facts/factVocabulary.js"; // BAR7-SCENES (item 3): the war row reads the purse by the prosperity atom's own ladder
-import { powerSentenceName } from "../domain/display/powerSentenceName.js"; // BAR6-SCENES (LAW 10 rule 10h): a power inside a sentence takes its prose form
+import { powerNameWithArticle } from "../domain/display/powerSentenceName.js"; // BAR6-SCENES (LAW 10 rule 10h): a power inside a sentence takes its prose form; NAMES-1 (CN1): and its article
 import { tierNounFor } from "../domain/display/stateProse/weaveBlock.js"; import { foodStoreWord, FAILED_SOURCE_WORDS } from "./economy/foodBalance.js"; // R2-CODE-A item 1: one line, so no cited line moves
 
 // AMENDMENT B — THE CASING PASS. The ${govFaction}/${topFaction} interpolations
@@ -110,7 +110,7 @@ const powersHeld = (r) => (typeof r.powerCount === 'number' ? r.powerCount : 0);
 
 /** BAR6-SCENES (LAW 10 rule 10h; F's census): a power named inside a pressure sentence takes its prose form ("The Guard", never the
  * roster label "Military/Guard": r2s-politically_fractured-metropolis-0); an empty name stays empty, so each slot's own fallback prints. */
-const say = (/** @type {unknown} */ n) => (n ? powerSentenceName(n) : n);
+const say = (/** @type {unknown} */ n) => (n ? powerNameWithArticle(n) : n); // NAMES-1 (CN1, the seventh chair's ruling, vetoable by the owner): WITH ITS ARTICLE, lower-case ("the Elder Council"); a slot that opens a sentence takes its capital from capFirst; the tier's own wording ("the town council") reads as before
 const PRESSURE_ROWS = {
   under_siege: (r) => [
     `${r.name} is surrounded. Supply lines are cut, morale is fracturing, and ${r.govFaction || "the leadership"} is deciding whether to negotiate terms or hold out for relief that may not be coming.`, // R2-CODE-A-3 (the increment's ww-1070, ww-1225): who treats is the seat's holder (the crisis cast's treater, cast after this line), so the line names the governing power, never the first card
@@ -132,7 +132,7 @@ const PRESSURE_ROWS = {
     `${r.name} is occupied; ${r.govFaction || "the administration"} still meets, but nothing it decides stands until the occupiers agree.`,
     `The occupation of ${r.name} has lasted long enough to split it: some families now work with the occupiers and some hide the people who fight them, often on the same street.`,
     `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "The most senior local official"} is simultaneously expected to enforce the occupiers' directives and protect the people those directives are aimed at: a position that is becoming untenable.`,
-    `The occupiers of ${r.name} are careful to leave the forms of local rule in place (${r.govFaction || "the council"} still meets, still signs, still presides) which fools no one and is not meant to.`,
+    `The occupiers of ${r.name} are careful to leave the forms of local rule in place: ${r.govFaction || "the council"} still meets, still signs, still presides, which fools no one and is not meant to.`, // NAMES-1 (CN1): the power named with its article, outside a bracket
     `Every household in ${r.name} has decided what it would do if the occupiers asked it for names, and every one of them hopes it is never asked.`,
     { text: `The curfew in ${r.name} is enforced unevenly, and the unevenness is the point: no one can be sure which night, or which street, or which face at the checkpoint will decide that the rules apply to them.`, needs: ['tier: ≥ village'] }, // BAR6-SCENES (LAW 5 widened, the size class; BRIEF-BAR6 B4): a street is a village's or larger; a smaller place resolves to the next row
   ],

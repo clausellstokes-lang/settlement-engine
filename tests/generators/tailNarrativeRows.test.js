@@ -95,7 +95,7 @@ describe('B1 the narrative text rows read the town (TAIL-NARRATIVE batch 1)', ()
 
   it('the branches without a birth: one power in both slots, the powers counted, a quiet history beside no great event', () => {
     const indebted = PRESSURE_SENTENCES.indebted({ name: 'X', topFaction: 'Old Council', govFaction: 'New Council' });
-    expect(String(indebted[1])).toContain('Old Council took the loans and New Council is repaying them');
+    expect(String(indebted[1])).toContain('The Old Council took the loans and the New Council is repaying them'); // NAMES-1 (CN1): the article
     const fractured = (/** @type {number} */ n) => PRESSURE_SENTENCES.politically_fractured({ name: 'X', powerCount: n, topNPCName: 'A', topNPCRole: 'elder' });
     expect(String(fractured(3)[1])).toContain('Three powers in X are each waiting for one of the others to slip');
     expect(String(fractured(3)[2])).toContain('the only person all three powers will still speak to');

@@ -24,7 +24,18 @@
  * OWNER'S VETO; nothing here is imported by the generator, and the one import is the possessive leaf (a pure leaf).
  */
 
-import { powerPossessive, powerSentenceName } from './powerSentenceName.js'; // COHERENCE-POWERS-7 (R3): a power's possessive through the one leaf, never a hand-formed "'s"
+import { powerNameWithArticle, powerPossessive, powerSentenceName } from './powerSentenceName.js'; // COHERENCE-POWERS-7 (R3): a power's possessive through the one leaf, never a hand-formed "'s"
+
+/**
+ * A POWER IN A SENTENCE TAKES ITS ARTICLE (NAMES-1, the seventh chair's ruling CN1 of 2026-11-20, vetoable by the owner):
+ * every line below names a power (the ruler, the power a patron lends to, the criminal power an agent answers to) through
+ * the one leaf's article form, "the Elder Council" inside a sentence and "The Elder Council" at its head; its possessive is
+ * that form with the leaf's own ending ("the Merchant Guilds'", "the Elder Council's"). The title `rulingHeadOf` is a
+ * heading and keeps the roster's spelling. @param {unknown} name @param {boolean} [start] @returns {string}
+ */
+const the = (name, start = false) => powerNameWithArticle(name, start);
+/** @param {unknown} name @param {boolean} [start] @returns {string} the article form's possessive */
+const theOwn = (name, start = false) => `${the(name, start)}${powerPossessive(name).slice(powerSentenceName(name).length)}`;
 
 /**
  * One patron's receipt (a face of the ruling power's ranked three, or the steward of its empty seat).
@@ -52,10 +63,10 @@ import { powerPossessive, powerSentenceName } from './powerSentenceName.js'; // 
 
 /** A patron's place, as an appositive: "second in the Elder Council". @param {PatronFacts['rank']} rank @param {string} ruler */
 export function patronPlace(rank, ruler) {
-  if (rank === 1) return `the head of ${ruler}`;
-  if (rank === 2) return `second in ${ruler}`;
-  if (rank === 3) return `third in ${ruler}`;
-  return `steward of ${ruler} while its seat stands empty`;
+  if (rank === 1) return `the head of ${the(ruler)}`; // NAMES-1 (CN1): the ruler with its article
+  if (rank === 2) return `second in ${the(ruler)}`;
+  if (rank === 3) return `third in ${the(ruler)}`;
+  return `steward of ${the(ruler)} while its seat stands empty`;
 }
 
 /** A share in plain words: "a half share". @param {number} share */
@@ -117,10 +128,10 @@ export function answerClause(f) {
   const guilds = guildsOf(f);
   if (guilds.length === 1) {
     const who = listWords(agents.map((a) => RANK_WORDS[a.rank]));
-    return `${cap(who)} of ${f.ruler} ${agents.length === 1 ? 'answers' : 'answer'} to ${guilds[0]}`;
+    return `${cap(who)} of ${the(f.ruler)} ${agents.length === 1 ? 'answers' : 'answer'} to ${the(guilds[0])}`; // NAMES-1 (CN1)
   }
   const [first, ...rest] = agents;
-  return `${cap(RANK_WORDS[first.rank])} of ${f.ruler} answers to ${first.guild} and ${listWords(rest.map((a) => `${RANK_WORDS[a.rank]} to ${a.guild}`))}`;
+  return `${cap(RANK_WORDS[first.rank])} of ${the(f.ruler)} answers to ${the(first.guild)} and ${listWords(rest.map((a) => `${RANK_WORDS[a.rank]} to ${the(a.guild)}`))}`;
 }
 
 /**
@@ -131,22 +142,26 @@ export function answerClause(f) {
 export function namedAnswerClause(f) {
   const agents = byRank(f);
   const guilds = guildsOf(f);
-  if (agents.length === 1) return `${agents[0].name}, ${RANK_WORDS[agents[0].rank]} of ${f.ruler}, answers to ${agents[0].guild}`;
+  if (agents.length === 1) return `${agents[0].name}, ${RANK_WORDS[agents[0].rank]} of ${the(f.ruler)}, answers to ${the(agents[0].guild)}`; // NAMES-1 (CN1)
   const people = agents.map((a) => `${a.name}, ${RANK_WORDS[a.rank]}`);
   if (guilds.length === 1) {
-    return `In ${f.ruler}, ${people.slice(0, -1).map((p) => `${p},`).join(' ')} and ${people[people.length - 1]}, ${agents.length === 2 ? 'both' : 'all'} answer to ${guilds[0]}`;
+    return `In ${the(f.ruler)}, ${people.slice(0, -1).map((p) => `${p},`).join(' ')} and ${people[people.length - 1]}, ${agents.length === 2 ? 'both' : 'all'} answer to ${the(guilds[0])}`;
   }
   const [first, ...rest] = agents;
-  return `In ${f.ruler}, ${first.name}, ${RANK_WORDS[first.rank]}, answers to ${first.guild}, and ${listWords(rest.map((a) => `${a.name}, ${RANK_WORDS[a.rank]}, to ${a.guild}`))}`;
+  return `In ${the(f.ruler)}, ${first.name}, ${RANK_WORDS[first.rank]}, answers to ${the(first.guild)}, and ${listWords(rest.map((a) => `${a.name}, ${RANK_WORDS[a.rank]}, to ${the(a.guild)}`))}`;
 }
 
 /** @param {string} s */
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
-/** The criminal names a rung's line speaks of: the agents' guilds, else the underworld. @param {CaptureFacts} f */
+/**
+ * The criminal names a rung's line speaks of: the agents' guilds, else the underworld, each with its article (NAMES-1,
+ * CN1: "the Thieves' Guild and the Night Market"); a line that opens on them sets the capital (`cap`).
+ * @param {CaptureFacts} f
+ */
 export function criminalsOf(f) {
-  if (f.agents.length) return listWords(guildsOf(f));
-  return f.underworld || 'the criminal houses';
+  if (f.agents.length) return listWords(guildsOf(f).map((g) => the(g)));
+  return f.underworld ? the(f.underworld) : 'the criminal houses';
 }
 
 /**
@@ -158,10 +173,11 @@ export function criminalsOf(f) {
  */
 function askerLine(f) {
   const share = shareWords(f.share);
-  if (f.rank === 1) return `${f.name} heads ${f.ruler} and also holds ${share} in ${powerSentenceName(f.power)}, so what ${powerSentenceName(f.power)} wants from ${f.ruler} goes straight to the top.`;
-  if (f.rank === 2) return `${powerSentenceName(f.power)} brings its requests to ${f.ruler} through ${f.name}, second in ${f.ruler}, who holds ${share} in ${powerSentenceName(f.power)}.`;
-  if (f.rank === 3) return `${f.name} is third in ${f.ruler} and holds ${share} in ${powerSentenceName(f.power)}, and carries ${powerPossessive(f.power)} requests to the two above.`;
-  return `While the seat of ${f.ruler} stands empty, its steward ${f.name} holds ${share} in ${powerSentenceName(f.power)}, and ${powerPossessive(f.power)} requests go through ${f.name}.`;
+  // NAMES-1 (CN1): every power with its article, "The" where it opens the line
+  if (f.rank === 1) return `${f.name} heads ${the(f.ruler)} and also holds ${share} in ${the(f.power)}, so what ${the(f.power)} wants from ${the(f.ruler)} goes straight to the top.`;
+  if (f.rank === 2) return `${the(f.power, true)} brings its requests to ${the(f.ruler)} through ${f.name}, second in ${the(f.ruler)}, who holds ${share} in ${the(f.power)}.`;
+  if (f.rank === 3) return `${f.name} is third in ${the(f.ruler)} and holds ${share} in ${the(f.power)}, and carries ${theOwn(f.power)} requests to the two above.`;
+  return `While the seat of ${the(f.ruler)} stands empty, its steward ${f.name} holds ${share} in ${the(f.power)}, and ${theOwn(f.power)} requests go through ${f.name}.`;
 }
 
 /**
@@ -184,15 +200,16 @@ export function boostWords(base, boost) {
 export const PATRONAGE_LINES = Object.freeze({
   // the face's open membership in another power (the boost is shown on the DM layer only, J-9)
   open: Object.freeze([
-    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, also holds ${shareWords(f.share)} in ${powerSentenceName(f.power)}, and that lends ${powerSentenceName(f.power)} weight it would not have on its own.`,
+    // NAMES-1 (CN1): the ruler and the power with their article ("The" where the power opens a sentence)
+    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, also holds ${shareWords(f.share)} in ${the(f.power)}, and that lends ${the(f.power)} weight it would not have on its own.`,
     (f) => askerLine(f),
-    (f) => `${f.name} serves ${f.ruler} and ${powerSentenceName(f.power)} at once. While ${f.name} holds both places, ${powerSentenceName(f.power)} counts for more here than its own members would make it.`,
+    (f) => `${f.name} serves ${the(f.ruler)} and ${the(f.power)} at once. While ${f.name} holds both places, ${the(f.power)} counts for more here than its own members would make it.`,
   ]),
   // the face's hidden allegiance to a criminal power (DM-only; the public page shows base strength)
   hidden: Object.freeze([
-    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, secretly answers to ${powerSentenceName(f.power)}, and that lends ${powerSentenceName(f.power)} strength nobody outside the arrangement can see.`,
-    (f) => `${powerSentenceName(f.power)} has its own voice in ${f.ruler}: ${f.name}, ${patronPlace(f.rank, f.ruler)}. The others there hear it as ${f.name}'s own opinion.`,
-    (f) => `Anyone who weighs ${powerSentenceName(f.power)} by its known members leaves out ${f.name}, ${patronPlace(f.rank, f.ruler)}, who serves it in secret. Counting ${f.name}, ${powerSentenceName(f.power)} is stronger than it looks.`,
+    (f) => `${f.name}, ${patronPlace(f.rank, f.ruler)}, secretly answers to ${the(f.power)}, and that lends ${the(f.power)} strength nobody outside the arrangement can see.`,
+    (f) => `${the(f.power, true)} has its own voice in ${the(f.ruler)}: ${f.name}, ${patronPlace(f.rank, f.ruler)}. The others there hear it as ${f.name}'s own opinion.`,
+    (f) => `Anyone who weighs ${the(f.power)} by its known members leaves out ${f.name}, ${patronPlace(f.rank, f.ruler)}, who serves it in secret. Counting ${f.name}, ${the(f.power)} is stronger than it looks.`,
   ]),
 });
 
@@ -209,48 +226,49 @@ export const CAPTURE_RUNG_LABELS = Object.freeze({
 export const CAPTURE_LINES = Object.freeze({
   // no agent in the ruling three; no criminal power strong enough to count; the ruler is not criminal
   none: Object.freeze([
-    (f) => `Nobody at the head of ${f.ruler} answers to a criminal house, and no criminal power here is strong enough to push it.`,
+    // NAMES-1 (CN1): every rung's line names the ruler and the criminals with their article ("The" at a line's head)
+    (f) => `Nobody at the head of ${the(f.ruler)} answers to a criminal house, and no criminal power here is strong enough to push it.`,
     // POWERS-15 (REVIEW-POWERS-5 D1; the chair's ruling of 2026-11-14: under an occupation no line says the hall decides
     // for itself): the rung's fact is the criminals' standing against the hall, so the two syndicate lines claim that
     // only (were "... make their own decisions; none of them takes orders ..." and "<ruler> rules in its own name")
-    (f) => `None of the head, the second and the third of ${f.ruler} takes orders from the criminals.`,
-    (f) => `No criminal house gives ${f.ruler} its orders. One that wants something from it has to ask, pay or wait like anyone else.`,
+    (f) => `None of the head, the second and the third of ${the(f.ruler)} takes orders from the criminals.`,
+    (f) => `No criminal house gives ${the(f.ruler)} its orders. One that wants something from it has to ask, pay or wait like anyone else.`,
   ]),
   // the climate alone: a criminal power stands against the ruler and the ruler is winning; no agent in the three
   // BAR4-HISTORY (C26840, WEAK, 2026-11-16): the degree word reads the rung, as its own relation row says it ("hunting ... in
   // earnest but not catching all of it"): the ruler is ahead, not the fight won (was "is winning"; no longer, so the first-paint bytes do not rise)
   adversarial: Object.freeze([
-    (f) => `${criminalsOf(f)} works against ${f.ruler}, and ${f.ruler} is ahead. Nobody at its head answers to the criminals.`,
-    (f) => `${f.ruler} and ${criminalsOf(f)} are openly at odds. ${f.ruler} goes after ${powerPossessive(criminalsOf(f))} people when it can catch them, and nobody in ${f.ruler} protects them.`,
-    (f) => `${criminalsOf(f)} has no friend among the head, the second and the third of ${f.ruler}. It survives by staying out of their sight.`,
+    (f) => `${cap(criminalsOf(f))} works against ${the(f.ruler)}, and ${the(f.ruler)} is ahead. Nobody at its head answers to the criminals.`,
+    (f) => `${the(f.ruler, true)} and ${criminalsOf(f)} are openly at odds. ${the(f.ruler, true)} goes after ${powerPossessive(criminalsOf(f))} people when it can catch them, and nobody in ${the(f.ruler)} protects them.`,
+    (f) => `${cap(criminalsOf(f))} has no friend among the head, the second and the third of ${the(f.ruler)}. It survives by staying out of their sight.`,
   ]),
   // one lesser agent in the three (the second or the third alone), or the climate alone (the two sides tolerate each other)
   equilibrium: Object.freeze([
     (f) => (f.agents.length
-      ? `${answerClause(f)}, but the head does not. ${criminalsOf(f)} has a voice in ${f.ruler}, not the last word.`
-      : `Nobody at the head of ${f.ruler} answers to ${criminalsOf(f)}, and ${f.ruler} has not set out to stamp ${criminalsOf(f)} out.`), // TAIL-POWERS-B: the rung's tolerance, not a peace a quarrel or an escalation denies
+      ? `${answerClause(f)}, but the head does not. ${cap(criminalsOf(f))} has a voice in ${the(f.ruler)}, not the last word.`
+      : `Nobody at the head of ${the(f.ruler)} answers to ${criminalsOf(f)}, and ${the(f.ruler)} has not set out to stamp ${criminalsOf(f)} out.`), // TAIL-POWERS-B: the rung's tolerance, not a peace a quarrel or an escalation denies
     (f) => (f.agents.length
-      ? `${namedAnswerClause(f)}. ${byRank(f)[0].name} can slow what ${f.ruler} decides against ${criminalsOf(f)}, but cannot stop it alone.`
-      : `${f.ruler} knows what ${criminalsOf(f)} does and lets most of it go. ${criminalsOf(f)} keeps its business quiet enough to be let go.`),
-    (f) => `${f.ruler} still rules, and ${criminalsOf(f)} still works the streets. The two have settled on what each will put up with from the other.`,
+      ? `${namedAnswerClause(f)}. ${byRank(f)[0].name} can slow what ${the(f.ruler)} decides against ${criminalsOf(f)}, but cannot stop it alone.`
+      : `${the(f.ruler, true)} knows what ${criminalsOf(f)} does and lets most of it go. ${cap(criminalsOf(f))} keeps its business quiet enough to be let go.`),
+    (f) => `${the(f.ruler, true)} still rules, and ${criminalsOf(f)} still works the streets. The two have settled on what each will put up with from the other.`,
   ]),
   // an agent head; or the second and the third; or a criminal ruling power, with or without an agent
   corrupted: Object.freeze([
     (f) => (f.agents.length
-      ? `${answerClause(f)}.${f.rulerCriminal ? ` ${f.ruler} itself is run as a criminal concern.` : ''}`
-      : `${f.ruler} is itself run as a criminal concern, so the people who make the laws here are the ones who profit from breaking them.`),
+      ? `${answerClause(f)}.${f.rulerCriminal ? ` ${the(f.ruler, true)} itself is run as a criminal concern.` : ''}`
+      : `${the(f.ruler, true)} is itself run as a criminal concern, so the people who make the laws here are the ones who profit from breaking them.`),
     (f) => (f.agents.length
-      ? `${namedAnswerClause(f)}. Whatever ${f.ruler} decides, ${criminalsOf(f)} has usually decided first.`
-      : `The heads of ${f.ruler} take their share of the crime here and see that nobody else takes it from them.`),
+      ? `${namedAnswerClause(f)}. Whatever ${the(f.ruler)} decides, ${criminalsOf(f)} has usually decided first.`
+      : `The heads of ${the(f.ruler)} take their share of the crime here and see that nobody else takes it from them.`),
     (f) => (f.agents.length
-      ? `${f.ruler} still holds the seat, but it does not act against ${criminalsOf(f)}. A case that touches ${powerPossessive(criminalsOf(f))} business goes nowhere.`
-      : `Nobody in ${f.ruler} will act against crime that pays ${f.ruler}. A case that touches its business goes nowhere.`),
+      ? `${the(f.ruler, true)} still holds the seat, but it does not act against ${criminalsOf(f)}. A case that touches ${powerPossessive(criminalsOf(f))} business goes nowhere.`
+      : `Nobody in ${the(f.ruler)} will act against crime that pays ${the(f.ruler)}. A case that touches its business goes nowhere.`),
   ]),
   // the head and the second answer to the criminals (the third too, sometimes)
   capture: Object.freeze([
-    (f) => `${answerClause(f)}. ${f.ruler} keeps its name and its seal, and ${criminalsOf(f)} gives the orders.`,
-    (f) => `${namedAnswerClause(f)}. What ${criminalsOf(f)} wants, ${f.ruler} now decides.`,
-    (f) => `${f.ruler} rules for ${criminalsOf(f)} now. Anyone who brings a complaint against ${criminalsOf(f)} brings it to the very people who answer to ${guildsOf(f).length > 1 ? 'them' : 'it'}.`,
+    (f) => `${answerClause(f)}. ${the(f.ruler, true)} keeps its name and its seal, and ${criminalsOf(f)} gives the orders.`,
+    (f) => `${namedAnswerClause(f)}. What ${criminalsOf(f)} wants, ${the(f.ruler)} now decides.`,
+    (f) => `${the(f.ruler, true)} rules for ${criminalsOf(f)} now. Anyone who brings a complaint against ${criminalsOf(f)} brings it to the very people who answer to ${guildsOf(f).length > 1 ? 'them' : 'it'}.`,
   ]),
 });
 

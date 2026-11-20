@@ -22,11 +22,11 @@ describe('secondMentions: the first mention keeps the full name; a later one in 
       .toBe('Isidora Serranus has taken a precaution against Salinator Silanus that he was not meant to discover.');
   });
 
-  it('the surname where the gender is shared; the role where the surname is too; the given name where the role is too', () => {
+  it('the role where the gender is shared (the chair\'s order); the surname where the role is too; the given name last', () => {
+    expect(secondMentions('Sigvald Ljotsson wants Eilif Dagsson\'s position, and Eilif Dagsson wants Sigvald Ljotsson\'s reputation.', [M('Sigvald Ljotsson', 'the reeve'), M('Eilif Dagsson', 'the priest')]))
+      .toBe('Sigvald Ljotsson wants Eilif Dagsson\'s position, and the priest wants the reeve\'s reputation.');
     expect(secondMentions('Sigvald Ljotsson wants Eilif Dagsson\'s position, and Eilif Dagsson wants Sigvald Ljotsson\'s reputation.', [M('Sigvald Ljotsson'), M('Eilif Dagsson')]))
       .toBe('Sigvald Ljotsson wants Eilif Dagsson\'s position, and Dagsson wants Ljotsson\'s reputation.');
-    expect(secondMentions('Ana Ruiz needs Bea Ruiz\'s seal, and Bea Ruiz needs Ana Ruiz\'s silence.', [F('Ana Ruiz', 'the abbess'), F('Bea Ruiz', 'the smith')]))
-      .toBe('Ana Ruiz needs Bea Ruiz\'s seal, and the smith needs the abbess\'s silence.');
     expect(secondMentions('Ana Ruiz needs Bea Ruiz\'s seal, and Bea Ruiz needs Ana Ruiz\'s silence.', [F('Ana Ruiz'), F('Bea Ruiz')]))
       .toBe('Ana Ruiz needs Bea Ruiz\'s seal, and Bea needs Ana\'s silence.');
   });

@@ -27,6 +27,7 @@ import { DOSSIER_STATE_PROSE_STRESSORS } from '../../src/data/dossierStateProse/
 import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../src/data/dossierStateProse/warFaith.generated.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
 import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
+import { powerNameWithArticle } from '../../src/domain/display/powerSentenceName.js';
 
 /** CENSUS-5: the no-walls read hands facts too (a pool may declare fact atoms): calm, every presence fact held but the perimeter. */
 // W4 PEOPLE second seat 2026-11-07: + the migration's birth direction, so a walls pool that also declares its
@@ -58,8 +59,8 @@ const DRAWN = Object.freeze({
 function member(b, vid) {
   const text = variantByVid({
     leaf: 'power', blockId: 'DS-POW-2', poolKey: 'siege matched', vid,
-    slots: { settlement: b.name, faction: b.governingName },
-  });
+    slots: { settlement: b.name, faction: powerNameWithArticle(b.governingName) },
+  }).replace(/(^|[.!?]\s+)the (?=\p{Lu})/gu, '$1The '); // NAMES-1 (CN1): the article, "The" where the fill opens a sentence
   return speakTierNoun(text, b.tier);
 }
 

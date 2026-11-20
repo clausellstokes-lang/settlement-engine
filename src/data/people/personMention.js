@@ -9,8 +9,9 @@
  * THE RULE, sentence by sentence. A person's FIRST mention keeps the full name. A LATER mention in the same sentence is:
  *   1. a PRONOUN from that person's own `gender` ('male' / 'female'), where no other person the sentence names shares
  *      that gender;
- *   2. else the SURNAME (the name's last word), where no other person the sentence names carries it;
- *   3. else the ROLE as the card states it ("the gang boss"), where no other person the sentence names holds it;
+ *   2. else the ROLE as the card states it ("the gang boss": it tells a DM who the person is), where no other person
+ *      the sentence names holds it (the chair's order, 2026-11-20);
+ *   3. else the SURNAME (the name's last word), where no other person the sentence names carries it;
  *   4. else the GIVEN NAME (the name's first word), where no other person the sentence names carries it;
  *   5. else the full name, as before (two cards of one name and one role: nothing shorter tells them apart).
  * A card with no gender (an older stored town's card) takes 2-5.
@@ -39,6 +40,10 @@ const CLAUSE_OPENERS = Object.freeze(new Set(['and', 'but', 'so', 'yet', 'or', '
   'though', 'although', 'until', 'unless', 'when', 'whenever', 'where', 'wherever', 'if', 'since', 'that', 'whether',
   'once', 'as', 'after', 'before']));
 
+/** a name stands on its own: no letter or digit before it, none after (regex literals, so the copy's voice count reads no '!') */
+const NOT_AFTER_LETTER = /(?<![\p{L}\p{N}])/u.source;
+const NOT_BEFORE_LETTER = /(?![\p{L}\p{N}])/u.source;
+
 /** @param {unknown} v @returns {string} */
 const str = (v) => (typeof v === 'string' ? v.trim() : '');
 /** @param {string} s @returns {string} */
@@ -54,10 +59,10 @@ const capFirst = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 function mentionOf(p, named) {
   const others = named.filter((q) => q !== p);
   if ((p.gender === 'female' || p.gender === 'male') && !others.some((q) => q.gender === p.gender)) return { pronoun: p.gender };
+  if (p.role && !others.some((q) => q.role.toLowerCase() === p.role.toLowerCase())) return { word: p.role };
   const words = p.name.split(/\s+/);
   const surname = words[words.length - 1];
   if (words.length > 1 && !others.some((q) => q.name.split(/\s+/).includes(surname))) return { word: surname };
-  if (p.role && !others.some((q) => q.role.toLowerCase() === p.role.toLowerCase())) return { word: p.role };
   if (words.length > 1 && !others.some((q) => q.name.split(/\s+/).includes(words[0]))) return { word: words[0] };
   return null;
 }
@@ -83,7 +88,7 @@ function oneSentence(sentence, people) {
   /** @type {Array<{ p: { name: string, gender: string, role: string, shared: boolean }, start: number, end: number }>} */
   const hits = [];
   for (const p of [...people].sort((a, b) => b.name.length - a.name.length)) {
-    const re = new RegExp(`(?<![\\p{L}\\p{N}])${esc(p.name)}(?![\\p{L}\\p{N}])`, 'gu');
+    const re = new RegExp(`${NOT_AFTER_LETTER}${esc(p.name)}${NOT_BEFORE_LETTER}`, 'gu');
     for (let m = re.exec(sentence); m; m = re.exec(sentence)) {
       const start = m.index; const end = start + p.name.length;
       if (!hits.some((h) => start < h.end && end > h.start)) hits.push({ p, start, end });

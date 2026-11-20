@@ -44,7 +44,7 @@ import { pickVariant } from '../kernel/proseHash.js';
 import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf, founderForOrigin, oneFounderRow } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
 import { resolvePrimaryStress } from './stressPriority.js'; import { wartimeGoesWell } from './stressNarrative.js'; // BAR2-PLACES (PL6)
 import { migrationDirectionOfStress, migrationDirectionOfConfig } from '../domain/migrationDirection.js';
-import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
+import { pick, pickRandom, pickRandom2, random01 } from './helpers.js'; import { powerNameWithArticle } from '../domain/display/powerSentenceName.js'; // NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): a coherence note names a power with its article; one line, so no cited line moves
 import { resolveTerrain } from '../domain/resolveTerrain.js';
 import { deriveTradeCommodity } from './tradeCommodity.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; // R2-CODE-A-7: the roster's courthouses (record 422), read from the defence home (R2-CODE-A-10)
 
@@ -593,7 +593,7 @@ const genCoherence = settlement => {
       type: 'power_economic',
       severity: 'notable',
       tab: 'economics',
-      note: `${crimeFaction.faction} holds ${crimeFaction.power}% of power in this transit hub. A portion of import/export flow is likely controlled outside official channels. Stated trade figures may not reflect actual volumes.`,
+      note: `${powerNameWithArticle(crimeFaction.faction, true)} holds ${crimeFaction.power}% of power in this transit hub. A portion of import/export flow is likely controlled outside official channels. Stated trade figures may not reflect actual volumes.`,
     });
   }
 
@@ -640,7 +640,7 @@ const genCoherence = settlement => {
       type: 'power_economic',
       severity: 'notable',
       tab: 'power',
-      note: `Economic activity flows through religious institutions, but formal governance rests with ${govFaction.faction}. Whoever controls trade and tithes has a say the official seat must reckon with.`, // BAR3-PLACES (C18651, 2026-11-15): no power over the seat claimed (a Strong governorship beside a Minor clergy printed it)
+      note: `Economic activity flows through religious institutions, but formal governance rests with ${powerNameWithArticle(govFaction.faction)}. Whoever controls trade and tithes has a say the official seat must reckon with.`, // BAR3-PLACES (C18651, 2026-11-15): no power over the seat claimed (a Strong governorship beside a Minor clergy printed it)
     });
   }
 
@@ -654,7 +654,7 @@ const genCoherence = settlement => {
       type: 'power_economic',
       severity: 'notable',
       tab: 'overview',
-      note: `${crimeFaction.faction} controls ${crimeFaction.power}% of power here. Stated prosperity reflects gross output. A meaningful share flows outside official taxation.`,
+      note: `${powerNameWithArticle(crimeFaction.faction, true)} controls ${crimeFaction.power}% of power here. Stated prosperity reflects gross output. A meaningful share flows outside official taxation.`,
     });
   }
 
