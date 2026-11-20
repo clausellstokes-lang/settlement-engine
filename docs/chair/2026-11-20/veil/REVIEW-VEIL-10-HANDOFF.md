@@ -82,3 +82,17 @@ origin/lane/review-veil-9-2026-11-19) stands whole: its section 2 (VR4 to VR17),
     person's id, name and `npc.<slug>` nowhere), `closed.probe.jsx` (the closed read and the tile columns beside it),
     `timing.probe.jsx` (as ruled). Also the master shape (`RV10_GEN=/home/user/wt/master`, `RV10_TPL=xp212`) for the
     tile, gaps and switch probes, which Phase 1B did not reach.
+
+## 5. Cold reads asked by the chair (01:15 UTC)
+
+- (1) THE REGISTRY, origin/lane/veil-r1-2026-11-20 at 8943ce807 (147 rows; 31 diffuse, 11 rng). VR26 (the inversion test)
+  EXECUTED on two diffuse rows (`inversion.probe.jsx`, 86 born towns with a hideable house, DEFAULT veil, served by
+  get_gallery_dossier on x212; the engine's own exports): `economy.prosperity` (and its copy `tile.prosperity`): re-derived
+  from the STORED town = the stored label 86/86 (sanity); re-derived from the SERVED document != the served label in
+  29/86 (`labelFromBase` drops one band at criminalEffective >= 65; `getInstFlags` over the served houses gives the
+  lower figure). `safety.safetyLabel`: sanity 86/86; FAILS in 28/86 (served "Moderate", public code over the served
+  houses "Safe"). VR8's condition (withhold the raw criminalEffective / safetyRatio / militaryEffective) is not enough:
+  the terms are recomputable from the served config and houses. `legitimacy.score` equals its re-derivation (a function of
+  served labels). The rng rows: no seed on the gallery or link read (`_seed` and the receipt's seed are stored only).
+- (2) VR27: 27 underscore helpers executable by anon on x212 (27 on x211): `doors/helpers-x212.txt`; V10-8.
+- (3) VEIL-VR17's mechanism: waiting for its commit.
