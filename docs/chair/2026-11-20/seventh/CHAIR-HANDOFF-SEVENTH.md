@@ -1423,6 +1423,41 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   chair's): on the veil gate's towns the sentence composed from the served document equals the sentence composed
   from the possible-world document; a sheet or export surface left unwired is wired there.
 
+- **THE SEAT, CONDITION (3)(c): A RENAMED SEAT FAILS CLOSED (15:17 UTC).** SEAT-5's builder found (pre-existing in U3's
+  leaf): after a transfer, a DM's rename of the SEAT re-keys the edge's pair but the narrative keeps the old form in
+  lower case, which the whole-word substitution misses; R1 goes silent, R3 answers, and a heavier merchant power is
+  named in the taker's place ("Coin Exchange" for "Merchant Guilds"), for owner and reader alike. RULED (SEAT-5's
+  recommendation): where no edge matches the current form exactly but an edge on the current seat's pair matches a
+  frozen wording written for another form, R1 ANSWERS NOBODY, with no fall-through, for both audiences. CONDITIONS:
+  "nobody" is an OMISSION, never a statement that the seat is empty (pinned on the owner's page and a reader's); the
+  rule fires in 0 born towns, measured before the merge; the rename plant red first. The rename's lower-case miss
+  (`factionRename.js`) is NOT touched: a named survivor for after the deploy, beside the stored transfer marker.
+- **THE DISPLAY'S WORDS, READ BY THE CHAIR ON THEIR BRANCHES (15:16 UTC).** SAFETY (`safetyShown.js` at 58fa4078c, with
+  its tally of printed lines): APPROVED AS WRITTEN (five law clauses, two seat clauses, the wave clause, the form
+  "<Label> day to day; <clause>."; the audience fails closed; a new surface that reads the capture rung on the owner's
+  page only: on the list for the security reader at the join). OUTPUT (`outputInWords.js` at ac0ccdd80): TWO CHANGES
+  BEFORE ITS MERGE: (1) three fractions reworded to match their neighbours: "about two thirds", "about three
+  quarters", "about four fifths"; (2) THE DRAG AS A PLAIN FACT, built in the display lane with no weight and no
+  generator change: where the words are below "nearly all" and the town has no market by the market's own home, the
+  line ends ", held back by having no market." (the generator's own rule: `priorityHelpers.js`, `marketInstMult`:
+  no market always lowers the output); one arm through the generator's own function (output without a market is
+  lower than with one, all else equal) so that the clause cannot outlive the rule it states; no other drag named,
+  none ranked.
+- **CRIME_WAVE's AND GUILD_CONFLICT's CAUSE LINES (15:18 UTC).** The chair read all 52 lines of
+  `lines/CAUSES-crime_wave-guild_conflict.md` at ae06f1618 (`lane/page-5-2026-11-20`): 46 APPROVED AS WRITTEN, SIX
+  REWORDED: rival_rings 2 "More than one criminal crew operates here, none master of the others, and crime is
+  rising."; force_unpaid_or_cut 1 "Crime is rising, and those who keep order here serve unpaid, or on pay that is
+  short or has been cut."; contraband_water 1 "Crime is rising here, where smuggling goes on and boats can come and
+  go by water."; guilds_rule 1 "This place is governed by a power of trade, so the quarrel over who may sell is also
+  one over how it is run."; ships 1 "Vessels put in here, and the guild and those who would trade outside it are at
+  odds over who may sell their cargo."; fair 3 "Not everyone who sells here at fair time is of the guild, and who
+  may trade is fought over." THE FILE'S TWO NOTES, RULED: every house predicate reads the LIVE roster (a ruined,
+  removed or remnant house is no cause; a parity disagreement that is only this is listed, not cured); A CUSTOM HOUSE
+  IS NEVER MATCHED BY ITS NAME (red first: a DM's "Black Market Tavern" prints no black market line). Hideable, this
+  batch: the file's nine and law_thin, no_force, force_unpaid_or_cut, guilds_rule, rival_power. THE CAUSES' BUILD WAS
+  GIVEN TO PAGE-7 AT ONCE, BEFORE THE HAND-OVER (new files only; every existing file of the trouble half stays
+  PAGE-5's until "THE LANE IS YOURS"): brief `briefs/CAUSES-DATA.md` at 5731eb9bc.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -1465,6 +1500,15 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   recommendation unless the four days matter to him: no allowance left this week finishes everything; the veil
   alone has several stages and a final read left), or (2) EXTRA USAGE OR ANOTHER ACCOUNT, and every lane at full
   pace. Until he answers the chair works toward (1).
+
+- **THE SIX SESSION SHEETS: DELIVERED TO THE OWNER AT 15:20 UTC (2026-11-20)** (`docs/chair/2026-11-20/content/frame6/SIX-SHEETS.txt` at
+  09a024516 on `lane/frame-6-2026-11-20`): three calm towns byte for byte the line's, three framed before and after.
+  THE CHAIR'S READING, TOLD TO HIM, four weak points, each asked of FRAME-6 as a question with a count: (1) a side
+  voiced by a person of another walk (the innkeeper for "The Guard"): is the link in the record; (2) a side printed
+  "(no one named)" while the record holds a person of that power ("The High Priestess"); (3) a framed scarcity that
+  never names the short resource, where the old sheet's hook did (timber); (4) a town framed because its hall is
+  captured drops the Mayor and never says so. OWED: the answers, the chair's rulings, and the sheets again if any
+  ruling changes them. Also seen, not this lane's: a calm thorp's three hooks speak of papers and a street.
 
 ## 5. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -4230,3 +4274,21 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   builder 8 curing them on `lane/goals-3-2026-11-20-b8` (brief b4cd9f8c3); `prompts/GOALS-4.txt` written (68dd714eb)
   and GOALS-4 seated 15:03 (session_019yED1PeMjUXXn4rS5rbzvj), THEN STOOD DOWN at 15:10 under the marks ruling.
   A THIRD STAMP FAULT OF THE CHAIR, recorded: a message stamped "14:53" when the clock read 14:52.
+- 15:21 UTC · AFTER NET 13, SEVEN MORE MESSAGES AND THE CHAIR'S OWN READS. SEAT-5: B4e built the four conditions on
+  `lane/seat-2026-11-20-u4-cure2-wip` at 5b95aaaf5 (one matcher `holderOfSeat.js :: transferSentenceSays`; the frozen
+  list `TRANSFER_WORDINGS`, 4 rows; the born military edge names nobody; the CS11 arm convicted by two plants;
+  writerReach red on exactly the three ruled identities; confinement EQUAL) and found the renamed-seat fault: RULED
+  (section 2). FRAME-6: the six sheets at 09a024516; tests/lint whole after P1B-F 3270/3271 (only the tuning
+  register's three rows); C2's builder out; READ BY THE CHAIR AND DELIVERED TO THE OWNER (section 4), four questions
+  sent. PAGE-6: L2's builder returned (324e95796, unpushed until classified): green on its own test, 14.2% three in a
+  row on the 300 (from 22.9%), BUT 14 importer files red only with L2: seed-pinned towns to re-key by cause; shape
+  pins; and CONTENT LAWS that touch approved lines (bar4ScenePresumption A1: 10 of 720, new fish, livestock and
+  arcane lines print where every such house is short or stopped; narrativeArrival: the river line "Trees lean over
+  the water…" holds no river word, port NEW[6] no maritime word): declarations first; any word change comes to the
+  chair as exact text. Four files red at its lane's base too (generatorGoldenMaster, espionageDormancyFence,
+  nameHeldThroughAssembly, worldFactRederive): the line's known reds. DEPTH-2: before-count on the line:
+  principled-dominant cards holding a corruption-theme hook 8 of 125 (town 1/17, city 3/45, metropolis 4/58); the
+  wider "straight" family 56 of 972; branch 3acb2c28b. PAGE-7: fourteen rewordings applied; `briefs/CAUSES-DATA.md`
+  5731eb9bc; GIVEN THE CAUSES' BUILD NOW (section 2). THE CHAIR READ, on their branches, SAFETY's and OUTPUT's
+  modules whole and crime_wave's and guild_conflict's 52 cause lines: verdicts in section 2. Net 14 set for 16:00
+  (trig_0142xaiUJsAnJSHeTi4k8FAq).
