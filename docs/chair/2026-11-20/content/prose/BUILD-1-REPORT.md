@@ -334,3 +334,48 @@ Still red BY NAME, raised by nobody: the byte ratchet's RAW arm (all six leaves 
 
 EXECUTED: every figure in the (b) table; the four pools by their marks; the parked text's identity; the door's refusal and its re-run; the manifest's red and green; the arm's 91 -> 0 and 16 -> 13; every re-key's before and after; the (d) figures; every gate line; the confinement.
 INFERRED: that `composeStateProse.test.js` was red at 71702a768 (from its literal); that grouping by n is a different threshold, not the existing one (a reading of the test's own text).
+
+ADDENDUM 2 (0d155704f): `composeStateProse.test.js`'s corpus pin, the pin BUILD-1 left red. RED at 82164879d: "variants: expected 3176 to be 3054", Tests 1 failed / 50 passed (51). Re-keyed 3054 -> 3176 with its cause; GREEN after: Tests 51 passed (51), exit 0 (EXECUTED). The sweep of `tests/` for 3054, 3522, 2814, 3194, 3662, 2954 and 861 found no other corpus pin left unre-keyed. The other hits are BUILD-1's own comments on re-keyed lines, a seed list in `sentenceSlotFallback.test.js`, and pool counts of 861, which BUILD-1 did not move (EXECUTED: the grep; each file holding them green at 6581c349c except proseComposed's A0b).
+
+## BUILD-1-CURE ADDENDUM 3 (PROSE-3)
+
+The chair's ruling of 2026-11-20 22:17 UTC on (b), brief `briefs/BUILD-1-CURE-ADDENDUM-3.md` at 31ae339ad. One commit, **1d9b72ad1**, `tests/domain/stateProseKernel.test.js` only (`package.json` and the lock untouched).
+
+WHAT CHANGED (EXECUTED, read back and run): the two sweeps are ONE FORM over every pool of three or more variants (781 pools), grouped by n. Each group is tested against three bounds written as functions of n:
+- the pooled chi-square against the critical value at n − 1 df, p = 0.001, computed in the test (regularised incomplete gamma over a Lanczos ln-Gamma, inverted by bisection);
+- the deepest pooled departure against `0.15 × sd(n) / sd(3)`;
+- the append share against `(1/(n+1)) × (1 ± 0.08)`.
+
+The per-pool z (< 4.5), the slot reach, and the floors `>= 500` pools and `500 × APPEND_SEEDS` run over the widened class. The modulus contrast (70-80 %, < 40 %) stays on the n = 3 group, where its constants were measured. The header says why ("A pool that grows past three variants must not leave the sweep ...").
+
+- GUARD (i), a new row, `⭐ THE n = 3 CASE, TO THE DIGIT`: the three bounds at n = 3 are 13.816, 0.15 and 23.00-27.00, and the table's p = 0.001 value holds for every n the corpus has (16.266 ... 32.909).
+- GUARD (ii): the n = 3 group is the old `length === 3` pool list, its figures printed beside the old form's. EQUAL to the old row as it ran at 82164879d (EXECUTED: the old code with a temporary print, at 0d155704f, whose diff from 82164879d is one other test file): 486 pools; chi-square 1.7008938271604936; deepest 0.02674897119341324; max z 3.4294678887547416 at economy :: DS-ECO-11 :: TERRAIN: Forest slot 1; append 24.99372427983539 %; modulus 74.969 % and 33.283 %. Same verdicts.
+- TOO FEW POOLS TO TEST AT p = 0.001: a named, asserted list in each row, never skipped. The rule (one rule for every group): a fixed bound tests a group at p = 0.001 only when it is at least the 0.001 normal quantile in that group's own standard errors (Bonferroni over the n slots for the deepest departure; one share for the append). Below that, a uniform draw breaches the bound by chance. Departure: n = 5 (43 pools), 6 (40), 7 (35), 8 (8), 9 (7), 10 (6), 11 (3), 12 (1), 13 (2). Append: n = 9 to 13. Their figures are printed. The chi-square, z, reach and the append property still run over them.
+
+| n | pools | chi-square / bound | departure / bound | append % / band | verdict |
+|---|---|---|---|---|---|
+| 3 | 486 | 1.701 / 13.816 | 0.0267 / 0.1500 | 24.994 / 23.000-27.000 | pass |
+| 4 | 150 | 5.629 / 16.266 | 0.0823 / 0.1378 | 19.840 / 18.400-21.600 | pass |
+| 5 | 43 | 4.734 / 18.467 | 0.1026 / 0.1273 (listed) | 16.719 / 15.333-18.000 | pass |
+| 6 | 40 | 4.295 / 20.515 | 0.1023 / 0.1186 (listed) | 14.294 / 13.143-15.429 | pass |
+| 7 | 35 | 3.782 / 22.458 | 0.0869 / 0.1113 (listed) | 12.423 / 11.500-13.500 | pass |
+| 8 | 8 | 7.401 / 24.322 | **0.2100 / 0.1052 (listed)** | 10.931 / 10.222-12.000 | pass (departure not testable) |
+| 9 | 7 | 7.046 / 26.124 | **0.1989 / 0.1000 (listed)** | 9.914 / 9.200-10.800 (listed) | chi-square pass |
+| 10 | 6 | 13.587 / 27.877 | **0.3050 / 0.0955 (listed)** | 9.483 / 8.364-9.818 (listed) | chi-square pass |
+| 11 | 3 | 12.270 / 29.588 | **0.3624 / 0.0915 (listed)** | 8.317 / 7.667-9.000 (listed) | chi-square pass |
+| 12 | 1 | 10.940 / 31.264 | **0.4433 / 0.0879 (listed)** | 7.400 / 7.077-8.308 (listed) | chi-square pass |
+| 13 | 2 | 11.181 / 32.909 | **0.3377 / 0.0848 (listed)** | 7.500 / 6.571-7.714 (listed) | chi-square pass |
+
+FOR THE CHAIR, PLAINLY: n = 8 to 13's measured departures sit OVER bound(n) (bold). Each of those groups has 1 to 8 pools; with that few, a perfectly uniform draw's pooled share wanders more than bound(n) by chance (bound(n) is 0.3182 × √pools of its standard errors). So the rule above lists them instead of failing them. n = 5 to 7 are listed by the same rule though they pass. If the chair holds those groups testable, they FAIL and this is a STOP; nothing was loosened to pass them. Every group passes its chi-square, the test's own exact uniformity check at p = 0.001.
+
+RUNTIME beside the budgets (EXECUTED, alone, through the mutex): the uniform row 11,968 ms (budget 120_000), the append row 5,916 ms (budget 60_000); neither raised.
+
+THE GATES at 1d9b72ad1 (EXECUTED, through the mutex):
+
+| gate | count line | exit |
+|---|---|---|
+| `tests/domain/stateProseKernel.test.js` | Tests 39 passed (39) | 0 |
+| `npx vitest run tests/lint` WHOLE | Test Files 3 failed / 217 passed (220); Tests 3 failed / 3258 passed (3261): proseCorpusBytes RAW and GZIP, proseComposed A0b (the owner's size signings, named in (d)); `ledgerCitationIntegrity.test.js` fails to load: not run, the ledger ref is not fetchable here | 1 |
+| `npx eslint tests/domain/stateProseKernel.test.js` | no output | 0 |
+
+EXECUTED: every figure in the table and the guards; the old run's figures; the runtimes; the gates. INFERRED: that the testability rule is the significance the chair meant (my reading of "too few pools to be tested at that significance").
