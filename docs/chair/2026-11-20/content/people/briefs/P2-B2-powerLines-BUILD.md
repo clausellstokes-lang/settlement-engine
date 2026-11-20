@@ -41,3 +41,34 @@ Never push, never a pull request, never `--no-verify`. Final message at most 250
 
 ## HELD OUT (the integrator, 17:58 UTC, on M6's §F in `LINES-power-tranche2.md`)
 Do NOT write these five ruled wordings until the integrator relays the chair's ruling to you by message: `closingGap` 1 and 2 (false where they print: the merchants already stand above), `arcaneInShadow` 2 and 3 (false at a tie), `clergyAhead` 2 ("quietly"). Build everything else. If the ruling reaches you before your cure commit, apply it in that commit; otherwise list the five as held in your final message.
+
+## THE CHAIR'S RULING OF 18:14 UTC ON M6 (verbatim; it REPLACES the HELD OUT section and WIDENS B2)
+"LINES power-tranche2 (6a137f274): READ WHOLE, all 78, against `factionStanding.js` (lines 141-154, 167-172, 248-253, 289-292, 301-304, 325-327). APPROVED FOR B2 WITH THE CHANGES BELOW. Your four faults are right; my ruled lines are withdrawn where false.
+
+F1 closingGap (the merchants ABOVE by 1 to 12: line 251). Today's index 0 and my ruled 1 and 2 are NOT ELIGIBLE anywhere (truth outranks canonical-at-zero; a seedless record takes the first eligible). No degree word: 12 is not "a little". The pool, the card's own power said as "they" (the card is any of five names, line 238):
+1 "The merchants stand ahead of them in influence here."
+2 "In influence here the merchants come before them."
+3 "They count here, but the merchants count for more."
+4 "They stand behind the merchants in influence here."
+5 "Trade counts here for more than birth and land."
+6 [market] "They carry less weight here than the merchants of the market."
+7 [population: large] "In a place this large the merchants stand ahead of them in influence."
+F2 atTable ON THE SEAT: the writer's cure, in B2, red first: at rank 2 the GOVERNING seat prints neither `atTable` nor `worthBuying`; the "...powers stand almost level" line STAYS (it speaks of the place). No new sentence. Give me worthBuying's count on the seat, and list every line of `factionStanding.js` B2 touches (the who-rules lane's join).
+F3 TIES: the caller passes the branch's own computed `level` as an eligibility flag (not a vocabulary atom). arcaneInShadow index 0, ruled 2 and 3 EXCLUDE level; noblesAhead index 0 EXCLUDES level.
+F4 clergyAhead 2: STRUCK.
+
+THE 78 AS WRITTEN, EXCEPT:
+- noblesAhead says "they", never "the noble families": 1 "For all the merchants' money, they have not been overtaken here." 2 "The merchants have not overtaken them in influence here." 3 "Land and birth count here for no less than trade." 4 "They are at least the merchants' equal in influence here." 5 "They have no less say here than the merchants who trade at the market." 6 "They have no less say here than the merchants who handle what the place sends out." 7 "They hold land and name here, and in influence the merchants have not passed them." 8 "Well off as the place is, the merchants have not overtaken them in influence."
+- arcaneInShadow 11: if the monastery atom holds for a friary: "With a church here and a house of monks or friars besides, the faith stands no lower than the arcane orders."
+- clergyAhead 5: "In public matters the clergy come before the arcane orders here."
+- outpaced 6: "The craft guilds are present, but the merchants have the larger say, and the prices are theirs to set." (a Suppressed guild has no say)
+- LOCAL_MERCHANTS 6: STRUCK (local reach against the place's exports).
+- landed outpaced: 1 "...; they keep their land, but money carries more weight here." 2 "Landed families in a place where merchant capital counts for more than land." 7 "In a place this large, the landed families are outpaced by merchant capital, though they keep their land." (no "old", no "titles")
+- noble competitive 3 ends "...; in civic politics they compete with merchant money."
+The four facts in 83-96% of metropolises: a named survivor (the dark laws')."
+
+INTEGRATOR'S READING FOR THE BUILDER:
+- B2 now builds the SECOND TRANCHE too: every wording of `LINES-power-tranche2.md` §D (with needs and excludes as written there; M6's scripts `measures/m6-*.mjs` hold them as data), with the changes above, in the same data file and pass. Pick it up with `git -C <your worktree> cherry-pick -x 6a137f274` if your base lacks it (your base a37dde2ce has it).
+- `src/generators/power/factionStanding.js` is ADDED to your files, for F2 (the governing seat at rank 2 prints neither `atTable` nor `worthBuying`; red first) and F3 (the computed `level` handed as an eligibility flag to the pick) ONLY. List every line you touch there, as written, in your final message, and worthBuying's count on the seat (before your cure, over the 900 places).
+- "the four facts ... a named survivor": the metropolis codas' sameness is not yours to cure; name it in your test as a survivor where your shares test meets it.
+- Your red test #1 now also covers the codas: no POOLED coda sentence in more than 20% of a size's places (150 a size), M6 projected 0/5/7/17/13/17%.

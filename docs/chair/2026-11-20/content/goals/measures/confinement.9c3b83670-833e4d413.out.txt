@@ -1,0 +1,59 @@
+trees.mjs: births at 9c3b83670
+names3 born: exit codes 0,0
+trees.mjs: births at 833e4d413
+names3 born: exit codes 0,0
+trees.mjs: 9c3b83670 -> 833e4d413
+## golden: documents 525 · identical 357 · with a non-string difference 168 · differing strings 2716 · of them passing the word check (none) 2716 · other 0
+| relationships[].description | 1331 | 168 |
+| relationships[].tension | 1331 | 168 |
+| prominentRelationship.phrasing | 18 | 18 |
+| prominentRelationship.full | 18 | 18 |
+| prominentRelationship.tension | 18 | 18 |
+NON-STRING city|germanic|plains|road|civilized|golden-master-v3 relationships[38].proseVariant: 5 -> 8
+NON-STRING city|germanic|plains|road|civilized|golden-master-v3 relationships[39].proseVariant: 6 -> 9
+NON-STRING city|germanic|plains|road|civilized|golden-master-v3 relationships[42].proseVariant: 7 -> 10
+NON-STRING city|germanic|hills|road|civilized|golden-master-v3 relationships[33].proseVariant: 3 -> 9
+NON-STRING city|germanic|hills|road|civilized|golden-master-v3 relationships[37].proseVariant: 4 -> 10
+NON-STRING city|germanic|hills|road|civilized|golden-master-v3 relationships[46].proseVariant: 2 -> 8
+NON-STRING city|germanic|forest|isolated|civilized|golden-master-v3 relationships[43].proseVariant: 3 -> 11
+NON-STRING city|germanic|forest|isolated|civilized|golden-master-v3 relationships[45].proseVariant: 4 -> 12
+NON-STRING city|germanic|forest|isolated|civilized|golden-master-v3 relationships[52].proseVariant: 5 -> 8
+NON-STRING city|germanic|riverside|river|civilized|golden-master-v3 relationships[29].proseVariant: 65538 -> 65544
+NON-STRING city|germanic|riverside|river|civilized|golden-master-v3 relationships[30].proseVariant: 3 -> 9
+NON-STRING city|germanic|riverside|river|civilized|golden-master-v3 relationships[34].proseVariant: 4 -> 10
+NON-STRING city|germanic|coastal|port|civilized|golden-master-v3 relationships[37].proseVariant: 4 -> 8
+NON-STRING city|germanic|coastal|port|civilized|golden-master-v3 relationships[45].proseVariant: 6 -> 9
+NON-STRING city|germanic|coastal|port|civilized|golden-master-v3 relationships[46].proseVariant: 7 -> 10
+NON-STRING city|germanic|mountain|road|civilized|golden-master-v3 relationships[30].proseVariant: 5 -> 9
+NON-STRING city|germanic|mountain|road|civilized|golden-master-v3 relationships[31].proseVariant: 1 -> 12
+NON-STRING city|germanic|mountain|road|civilized|golden-master-v3 relationships[35].proseVariant: 2 -> 8
+NON-STRING city|germanic|desert|road|civilized|golden-master-v3 relationships[32].proseVariant: 7 -> 12
+NON-STRING city|germanic|desert|road|civilized|golden-master-v3 relationships[39].proseVariant: 1 -> 9
+## census: documents 720 · identical 465 · with a non-string difference 255 · differing strings 5025 · of them passing the word check (none) 5025 · other 0
+| relationships[].description | 2490 | 255 |
+| relationships[].tension | 2490 | 255 |
+| prominentRelationship.phrasing | 13 | 13 |
+| prominentRelationship.full | 13 | 13 |
+| prominentRelationship.tension | 13 | 13 |
+| pressureSentence | 6 | 6 |
+NON-STRING r2r-town-13 relationships[17].proseVariant: 65541 -> 65546
+NON-STRING r2r-town-13 relationships[20].proseVariant: 65542 -> 65547
+NON-STRING r2r-town-14 relationships[25].proseVariant: 2 -> 8
+NON-STRING r2r-town-14 relationships[27].proseVariant: 3 -> 9
+NON-STRING r2r-town-17 relationships[23].proseVariant: 2 -> 10
+NON-STRING r2r-town-17 relationships[25].proseVariant: 6 -> 11
+NON-STRING r2r-town-25 relationships[22].proseVariant: 7 -> 12
+NON-STRING r2r-town-28 relationships[32].proseVariant: 4 -> 10
+NON-STRING r2r-town-28 relationships[33].proseVariant: 5 -> 11
+NON-STRING r2r-town-29 relationships[29].proseVariant: 7 -> 8
+NON-STRING r2r-town-31 relationships[25].proseVariant: 1 -> 10
+NON-STRING r2r-town-32 relationships[28].proseVariant: 6 -> 11
+NON-STRING r2r-town-34 relationships[30].proseVariant: 4 -> 8
+NON-STRING r2r-town-34 relationships[31].proseVariant: 5 -> 9
+NON-STRING r2r-town-37 relationships[17].proseVariant: 4 -> 9
+NON-STRING r2r-town-39 relationships[23].proseVariant: 2 -> 9
+NON-STRING r2r-town-40 relationships[28].proseVariant: 0 -> 8
+NON-STRING r2r-town-45 relationships[23].proseVariant: 2 -> 9
+NON-STRING r2r-town-45 relationships[31].proseVariant: 3 -> 8
+NON-STRING r2r-town-48 relationships[23].proseVariant: 0 -> 9
+exit 0

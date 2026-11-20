@@ -1,0 +1,170 @@
+towns: 300 (50 per size) in 36s; lib /home/user/settlement-engine
+
+== GOAL KINDS where the busiest town holds more people than the cell has templates (kind/vantage · draws · templates · max in one town · short by)
+INSTITUTION/solvency/long             1060   6  20  short by 14
+RANK/enter/short                      1231   6  19  short by 13
+TIES/rival_enemy/long                  787   5  17  short by 12
+RANK/enter/long                       1274   6  18  short by 12
+POWER/tense/long                       576   6  17  short by 11
+INSTITUTION/solvency/short             989   6  16  short by 10
+POWER/tense/short                      592   6  15  short by 9
+TIES/rival_enemy/short                 795   5  13  short by 8
+INSTITUTION/charter/long               821   6  14  short by 8
+INSTITUTION/charter/short              787   6  12  short by 6
+POWER/competitive/short                 96   6  12  short by 6
+POWER/competitive/long                 110   6  11  short by 5
+TIES/ally/long                         540   5  10  short by 5
+TIES/ally/short                        487   5  10  short by 5
+SUPPLY/expansion/short                 352   6  10  short by 4
+SUPPLY/expansion/long                  341   6   9  short by 3
+RANK/climb/short                       435   6   8  short by 2
+TIES/debtor/long                       221   5   7  short by 2
+TIES/mentor_student/short              295   5   7  short by 2
+SUPPLY/dependency/long                 328   6   8  short by 2
+PERSONALITY/sway/long                  272   4   5  short by 1
+RANK/climb/long                        372   6   7  short by 1
+PERSONALITY/grudge/long                231   4   5  short by 1
+PERSONALITY/forbidden_patron/long      117   4   5  short by 1
+TIES/debtor/short                      216   5   6  short by 1
+SUPPLY/dependency/short                301   6   7  short by 1
+TIES/mentor_student/long               272   5   6  short by 1
+TIES/creditor/short                    149   5   6  short by 1
+
+== TIE ARCHETYPES (key · type · draws · pool size · max in one town · short by)
+mutual_leverage              political         1494   8  26  short by 18
+peer_rivalry                 rival             1387   8  20  short by 12
+old_debt                     debtor_creditor   1495   8  20  short by 12
+wary_alliance                ally              1176   8  20  short by 12
+mentor_legacy                mentor_student    1287   8  19  short by 11
+genuine_respect              respect            890   8  13  short by 5
+bitter_history               enemy              436   8  11  short by 3
+family_complication          family             401   8   9  short by 1
+handler_partnership          patron_client      134   6   5  ok
+handler_leverage_debt        debtor_creditor     28   4   2  ok
+handler_leverage_crime       debtor_creditor     17   4   2  ok
+handler_leverage_secret      debtor_creditor     14   4   2  ok
+handler_patron               patron_client       67   6   3  ok
+handler_leverage_loved       debtor_creditor     13   4   1  ok
+mil_crim_suppression         enemy               62   8   4  ok
+mil_crim_corruption          ally                43   8   3  ok
+
+== REPEATS IN ONE TOWN by size: share of towns with a repeat / mean repeats a town
+size        short(masker)   long(masker)    goal(template)  tie-desc(masker) tie-tension(masker) tie(index)
+thorp         0% /  0.00     2% /  0.02     2% /  0.02     0% /  0.00      0% /  0.00         0% /  0.00
+hamlet        4% /  0.04     2% /  0.02    12% /  0.12     0% /  0.00      0% /  0.00         0% /  0.00
+village      14% /  0.16    14% /  0.14    44% /  0.58     2% /  0.02      2% /  0.02         2% /  0.02
+town         78% /  2.10    70% /  1.90    96% /  5.42    22% /  0.40     20% /  0.52        22% /  0.56
+city        100% / 10.06   100% /  9.82   100% / 29.54    94% / 11.12     96% / 11.80        96% / 13.64
+metropolis  100% / 18.46   100% / 18.42   100% / 52.16   100% / 22.04    100% / 22.86       100% / 26.84
+
+unmatched template keys: 0
+
+goal people-vantages: 17992; repeats NO rotation could avoid with today's templates: 2636 (14.7%)
+demand (max people of one town) by size, for the kinds short somewhere: thorp hamlet village town city metropolis · templates
+TIES/rival_enemy/long                  1   2   2   7  17  15 · 5
+INSTITUTION/solvency/short             1   2   3   6  14  16 · 6
+PERSONALITY/sway/long                  1   1   2   3   5   4 · 4
+TIES/rival_enemy/short                 2   3   4   7  11  13 · 5
+RANK/climb/long                        1   2   3   5   5   7 · 6
+INSTITUTION/solvency/long              2   1   4   7  16  20 · 6
+PERSONALITY/grudge/long                1   2   2   2   4   5 · 4
+PERSONALITY/forbidden_patron/long      1   2   1   2   2   5 · 4
+POWER/competitive/long                 1   0   4   5   9  11 · 6
+TIES/ally/long                         2   2   2   5   9  10 · 5
+TIES/ally/short                        1   2   2   6   9  10 · 5
+TIES/debtor/short                      0   1   2   3   5   6 · 5
+SUPPLY/expansion/long                  0   3   3   5   9   7 · 6
+RANK/climb/short                       0   2   2   5   6   8 · 6
+SUPPLY/dependency/short                0   1   0   4   7   7 · 6
+SUPPLY/expansion/short                 0   2   3   3  10   8 · 6
+INSTITUTION/charter/long               0   2   3   8  13  14 · 6
+RANK/enter/short                       0   1   2   9  15  19 · 6
+INSTITUTION/charter/short              0   2   3   6  12  11 · 6
+POWER/competitive/short                0   1   5   5  12  10 · 6
+TIES/debtor/long                       0   1   2   3   7   5 · 5
+TIES/mentor_student/short              0   2   3   6   7   7 · 5
+SUPPLY/dependency/long                 0   1   1   4   6   8 · 6
+TIES/mentor_student/long               0   1   1   6   6   6 · 5
+RANK/enter/long                        0   2   4   8  16  18 · 6
+POWER/tense/short                      0   2   4   9  11  15 · 6
+TIES/creditor/short                    0   1   1   3   4   6 · 5
+POWER/tense/long                       0   2   4   6  12  17 · 6
+
+ties: 8944; repeats NO rotation could avoid with today's pools: 1749 (19.6%)
+peer_rivalry                           2   3   5  11  17  20 · 8
+old_debt                               1   4   5  12  19  20 · 8
+mutual_leverage                        1   2   6   8  18  26 · 8
+genuine_respect                        1   3   3   8  13  12 · 8
+wary_alliance                          1   2   4   8  15  20 · 8
+bitter_history                         1   1   2   3   8  11 · 8
+family_complication                    1   1   1   3   9   8 · 8
+mentor_legacy                          0   3   5  12  14  19 · 8
+
+== DEPTH TABLE (c): cell · pool · busiest city · busiest metropolis · max any town · T1 (≤2 a town) · T2 (unique in city, ≤2 in metropolis) · T3 (max+2)
+TIES/rival_enemy/long                   5   17   15   17    4   12   14
+TIE:old_debt                            8   19   20   20    2   11   14
+TIE:mutual_leverage                     8   18   26   26    5   10   20
+INSTITUTION/solvency/long               6   16   20   20    4   10   16
+RANK/enter/long                         6   16   18   18    3   10   14
+RANK/enter/short                        6   15   19   19    4    9   15
+TIE:peer_rivalry                        8   17   20   20    2    9   14
+INSTITUTION/solvency/short              6   14   16   16    2    8   12
+TIE:wary_alliance                       8   15   20   20    2    7   14
+INSTITUTION/charter/long                6   13   14   14    1    7   10
+TIE:mentor_legacy                       8   14   19   19    2    6   13
+POWER/tense/long                        6   12   17   17    3    6   13
+TIES/rival_enemy/short                  5   11   13   13    2    6   10
+INSTITUTION/charter/short               6   12   11   12    0    6    8
+POWER/competitive/short                 6   12   10   12    0    6    8
+POWER/tense/short                       6   11   15   15    2    5   11
+TIE:genuine_respect                     8   13   12   13    0    5    7
+TIES/ally/long                          5    9   10   10    0    4    7
+TIES/ally/short                         5    9   10   10    0    4    7
+SUPPLY/expansion/short                  6   10    8   10    0    4    6
+POWER/competitive/long                  6    9   11   11    0    3    7
+SUPPLY/expansion/long                   6    9    7    9    0    3    5
+TIES/debtor/long                        5    7    5    7    0    2    4
+TIES/mentor_student/short               5    7    7    7    0    2    4
+PERSONALITY/sway/long                   4    5    4    5    0    1    3
+TIE:family_complication                 8    9    8    9    0    1    3
+SUPPLY/dependency/short                 6    7    7    7    0    1    3
+TIES/mentor_student/long                5    6    6    6    0    1    3
+TIE:bitter_history                      8    8   11   11    0    0    5
+RANK/climb/short                        6    6    8    8    0    0    4
+SUPPLY/dependency/long                  6    6    8    8    0    0    4
+RANK/climb/long                         6    5    7    7    0    0    3
+PERSONALITY/grudge/long                 4    4    5    5    0    0    3
+PERSONALITY/forbidden_patron/long       4    2    5    5    0    0    3
+TIES/debtor/short                       5    5    6    6    0    0    3
+TIES/creditor/short                     5    4    6    6    0    0    3
+PERSONALITY/sway/short                  4    4    4    4    0    0    2
+PERSONALITY/fear/long                   4    3    4    4    0    0    2
+PERSONALITY/greed/short                 4    4    4    4    0    0    2
+PERSONALITY/greed/long                  4    3    4    4    0    0    2
+PERSONALITY/grudge/short                4    4    4    4    0    0    2
+PERSONALITY/hunger_for_status/long      4    4    3    4    0    0    2
+PERSONALITY/impulse/long                4    4    4    4    0    0    2
+PERSONALITY/kindness/long               4    4    2    4    0    0    2
+PERSONALITY/impulse/short               4    2    4    4    0    0    2
+SUPPLY/impaired/long                    6    4    6    6    0    0    2
+PERSONALITY/kindness/short              4    3    3    4    0    0    2
+INSTITUTION/takeover/short              6    6    4    6    0    0    2
+RANK/defend/long                        6    5    5    5    0    0    1
+PERSONALITY/forbidden_patron/short      4    2    3    3    0    0    1
+PERSONALITY/duty/long                   4    3    3    3    0    0    1
+RANK/defend/short                       6    4    5    5    0    0    1
+TIES/creditor/long                      5    4    3    4    0    0    1
+PERSONALITY/duty/short                  4    3    3    3    0    0    1
+PERSONALITY/mastery/short               4    3    3    3    0    0    1
+PERSONALITY/caution/long                4    3    3    3    0    0    1
+PERSONALITY/conviction/long             4    3    2    3    0    0    1
+TIES/family/long                        5    3    4    4    0    0    1
+INSTITUTION/takeover/long               6    4    5    5    0    0    1
+PERSONALITY/fear/short                  4    2    3    3    0    0    1
+SUPPLY/want/short                       2    1    1    1    0    0    1
+PERSONALITY/mastery/long                4    2    2    3    0    0    1
+TIES/family/short                       5    4    4    4    0    0    1
+TIE:handler_partnership                 6    3    5    5    0    0    1
+SUPPLY/want/long                        2    1    1    1    0    0    1
+TOTAL goal lines  T1 25  T2 110  T3 243
+TOTAL tie pairs   T1 13  T2 49  T3 91
