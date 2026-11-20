@@ -53,10 +53,11 @@ const LIST_FN = netCurrentFn('list_gallery_maps');
 const SAFE_FN = netCurrentFn('_gallery_world_snapshot_is_safe');
 const PUBLISH_FN = netCurrentFn('publish_map');
 // 211: the map veils each member by its own listing veil and (F7) refuses a frozen copy past the
-// server's bound, so the member path runs 211's _gallery_veil* helpers: load them all, net-current.
+// server's bound, so the member path runs 211's _gallery_veil* helpers: load them all, net-current. VEIL-DOORS (212):
+// the member's chronicle runs the _gallery_doors_* helpers: loaded the same way.
 const VEIL_HELPER_FNS = [...new Set(readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f))
   .flatMap((f) => [...readFileSync(resolve(MIGRATIONS_DIR, f), 'utf-8')
-    .matchAll(/^create\s+or\s+replace\s+function\s+public\.(_gallery_veil\w*)\s*\(/gim)].map((m) => m[1])))]
+    .matchAll(/^create\s+or\s+replace\s+function\s+public\.(_gallery_(?:veil|doors)\w*)\s*\(/gim)].map((m) => m[1])))]
   .map(netCurrentFn);
 
 // A second account — its settlements must NEVER be projected by another owner's

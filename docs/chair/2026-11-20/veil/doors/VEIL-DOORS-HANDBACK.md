@@ -80,7 +80,14 @@ against the default veil's classes: secret, hooks, rumour/war truth, housekeepin
 - 04704a660: galleryDoors.pglite 7 of 7 (server against twin, default and hand veils, Reveal DM off and on, the closed
   answer), walker 6 of 6; typecheck:domain:strict exit 0; typecheck:ratchet exit 0 (167, ceiling 167); lint 0 errors;
   mutationCoverageManifest 10 of 10; galleryVeilCures' rollback arm green in a scratch tree of the same bytes.
-- tests/security whole: RUNNING at this commit (the next commit records its count lines).
+- tests/security whole at 04704a660: Test Files 2 failed | 156 passed | 1 skipped (159); Tests 11 failed | 1992 passed | 1
+  skipped (2004). BOTH CAUSES THIS SEAT'S, both cured by re-keying BY IDENTITY in the next commit: (i)
+  galleryMapMemberCount.pglite (3): it loads only `_gallery_veil*` helpers net-current, so get_gallery_map's new call to
+  `_gallery_doors_chronicle` did not exist there; its loader now takes `_gallery_(veil|doors)*` -> 11 of 11. (ii)
+  galleryServerVeil.pglite (8, every born row): its pin "the map member equals the listing" held an UNMARKED member to the
+  unveiled listing; VR23 rules that member takes the default veil, so for the unmarked share its reference page is now the
+  party link's (the default veil), for every marked share still the listing's -> 17 of 17. The whole directory was NOT
+  re-run after the re-keys (the two files were; the other 156 files passed on the same SQL).
 - Measured on 140 births (89 hideable), the default veil: stability A/B 11, A/C 1; prosperity 34 / 7; government 0/12.
   The reader's repros (origin/lane/review-veil-10-2026-11-20) were NOT re-run as reds by this seat (my own repros of the
   same rows were: next seat runs theirs).
@@ -113,7 +120,7 @@ debt is older than this work, and its cure is stored public tiles (VR28's "publi
 ## 8. Stored figures this change moves (not re-frozen here; VEIL-19 takes each door once)
 The lighting census (new test titles: galleryDoors.pglite 7, galleryDoors.walker 6); the wiring census and the writers'
 reach (a new module, src/domain/display/galleryDoors.js, imported by tests only); scripts/mutation-coverage-manifest.json
-(two rationale rows, added). No new top-level named numeric constant in src/.
+(two rationale rows, added); two pins RE-KEYED by identity (section 4: galleryMapMemberCount's helper loader, galleryServerVeil's map-member reference page). No new top-level named numeric constant in src/.
 
 ## 9. LEFT FOR THE NEXT SEAT (the chair's rulings of 01:20–01:40 UTC), in order
 1. The ONE-ROW dossier read (needs a third hunk in get_gallery_dossier: the tile-rows join, or a one-row tile helper);

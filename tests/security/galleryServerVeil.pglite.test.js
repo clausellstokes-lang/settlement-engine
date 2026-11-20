@@ -365,8 +365,12 @@ describe('the server-side share veil (211) — execution against the real SQL an
           const member = map.members.find((mm) => mm.settlement)?.settlement;
           if (!member) faults.push(`${tag} map: no member`);
           else {
-            fault(`${tag} map member shows what the listing hides`, carried(member, now.gPage).readable);
-            fault(`${tag} map member lacks what the listing shows`, carried(now.gPage, member).paths);
+            // VEIL-DOORS (VR23, re-keyed by identity): a member is read through its own veil, and an UNMARKED member takes
+            // the default veil, as the party link's unmarked share does: its reference page is then the link's, else the listing's
+            const refPage = name === 'unmarked' ? now.lPage : now.gPage;
+            const refName = name === 'unmarked' ? 'the party link' : 'the listing';
+            fault(`${tag} map member shows what ${refName} hides`, carried(member, refPage).readable);
+            fault(`${tag} map member lacks what ${refName} shows`, carried(refPage, member).paths);
             fault(`${tag} map member carries a role its card withholds`, rolesItsCardWithholds(member));
           }
         }
