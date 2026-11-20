@@ -531,6 +531,36 @@ parts of the whole check (at the close).
   culture as a weight: a unit of the who-rules train. THE PRICE SAID: the deploy moves later; at the close the owner
   signs three dark rules together, shown on towns born with all three lit.
 
+- **About 09:58 UTC, 2026-11-20 (the hour is the chair's estimate: the message carries none), THE OWNER (verbatim):**
+  "Last thing, amongst the government types, there are to be considered appropriate exceptions for office seats very
+  specific. Currently, we have it designed that an NPC from a power who is derived from an institution be put in the
+  leadership role wearing dual hats. I would make one or two very appropriate exceptions, a king does not wear a dual
+  hat. His power may be from any of the powers, but the king is not an NPC that is say also a shop owner. The king can
+  be of the merchant power, military power, etc. we have those titles now so it's not a separate power to what we
+  already have. This is distinct from a mayor who absolutely can and should follow as designed. What are your thoughts
+  to this? So what are your expectations of generated settlements now as designed?"
+  ANSWERED AT 10:10 UTC FROM A COUNT (`measures/holistic/crown.mjs`, `crown2.mjs`, `crown3.mjs` and their outputs; 450
+  fresh towns: 300 at untouched settings, 150 with every dial random): AGREED AND MADE LAW (CS22 below). WHAT BORN
+  TOWNS DO TODAY: 343 seats of an elder, headman, reeve, mayor or the first of a council, guild, merchant, faith,
+  military or arcane seat: EVERY ONE held by the keeper of a place of the town (the dual hat); 57 governors and
+  stewards sent by another: one hat, their own office's house; 12 royal seats (6 cities and 6 metropolises of 150:
+  the `Royal seat` row is born at those two sizes only): one hat, the card titled "the monarch" on the Royal seat; 5
+  criminal seats; 33 small places the chair's quick reader could not sort (its limit, not a finding). THE MONARCH'S
+  POWERS TODAY: "Royal Authority 0.6 + Noble Families or Noble Houses 0.4" in 11 of the 12, the crown's alone in 1
+  (an occupied city): never merchant, military, faith or arcane. SAID TO THE OWNER: no king keeps a shop today; the
+  rule changes three things: a GUARD, so the titles' wiring can never put a crown word on a keeper
+  (`representatives.js :: dualHatHouseOf`'s civic branch hands the heaviest trade house to any ruler not on the
+  appointed list); HIS POWER weighed among the town's own powers (new birth behaviour: dark, measured first); AT A
+  CHANGE OF HANDS a person of the winning power who keeps no place. ON "ONE OR TWO" THE CHAIR STOPS AT THE CROWN
+  (king and emperor: one rule at two sizes): every other office read on those towns reads right with its second hat;
+  JARL IS THE NORSE WORD OF THE HEADMAN ROW (village to metropolis), so he keeps two hats as the mayor does, and
+  becomes King only on a royal seat at city size. THE CHAIR'S READING SAID ALOUD FOR THE OWNER TO CORRECT: "not a
+  separate power" = the king needs no power of his own kind. A royal seat is rare: about 1 large place in 13 (11 of
+  the 12 with no occupier or governor beside the crown, by a rough read). THE EXPECTATION SAID, BY SIZE, WITH WHAT IS
+  MEASURED TOLD FROM WHAT IS NOT: the cures are each measured alone and none is lit; NOBODY HAS MEASURED THEM
+  TOGETHER (fortune moves a ruler's standing; standing feeds who can be challenged and which calm towns the session
+  sheet frames): THE JOINT COUNT AND A DOZEN WHOLE TOWNS WITH EVERY RULE LIT GO TO THE OWNER BEFORE ANY SIGN-OFF.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -613,6 +643,30 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   read, not invented); (d) dark with the rest of the table until the owner signs; (e) the measure for the owner:
   the governing kind by culture, before and after, at untouched settings (today three towns in four under a civic
   body in every culture alike).
+
+- **CS22, THE CROWN WEARS ONE HAT (2026-11-20, 10:12 UTC; on the owner's word of this hour, quoted in section 1; sent
+  to SEAT-3):** (a) a seat read as the sovereign's own is held by a person who keeps NO house of the town but the
+  seat's own (the Royal seat's face); in the seat lane's `briefs/RULINGS.md` (c) the words "its person a dual hat
+  from the royal house" are STRUCK; "out of `APPOINTED_GOVERNMENTS` for that reading only" means the TITLE's family
+  and the holder's rule only, never the gate of `representatives.js :: dualHatHouseOf`, which answers null on the
+  sovereign reading as it does today. (b) HIS POWER MAY BE ANY OF THE TOWN'S OWN POWERS: weighed among the open
+  powers by the one table's circumstances with culture as one weight (CS5, CS21); never a criminal or hidden power;
+  never a power minted for him; new birth behaviour, so under the seat law, DARK, on its own fork; its unit rides
+  with CS21's: MEASURE AND PROPOSE FIRST, no build before the chair rules. (c) AT A CHANGE OF HANDS a power that
+  takes a crowned seat and keeps the form puts on it a person of that power who keeps no house; until that is built
+  no keeper is ever titled with a crown word. (d) THE GUARD, red first, no later than U12: no card carries a crown
+  word (`cultureOfficeTitles.js :: officeWordInfo(word).crown`) together with a house other than the seat's own.
+  (e) EVERYONE ELSE AS DESIGNED (the owner: "a mayor who absolutely can and should follow as designed"): a culture's
+  word for those offices changes the WORD, never the hat. ALREADY ONE HAT BY EARLIER RULINGS: the one sent by
+  another (2026-11-11); the criminal seat. (f) U12's measure adds the count of born seats read as the sovereign's
+  own, by culture.
+- **`src/generators/factionDynamics.js` HAS ONE OWNER AT A TIME (09:56 UTC):** the chair had told SEAT-3 that
+  FORTUNE-1 "edits none of your files": WRONG: the seat's U6 (relation lines) and FORTUNE-1's standing rule
+  (`computePublicLegitimacy`) both edit it. The chair grants the file on request; the second owner merges the
+  first's tip before it touches it.
+- **A FLOOR IS NEVER LOWERED TO FIT (10:13 UTC, to FRAME-4):** where two-sided framing (B9: 93 framed towns to 58)
+  leaves a test's pool under its floor (`frame2NamesRule`: over 300 needed, 272 read), the pool it reads is widened
+  by the fair rule until the floor holds; the seat first says what the floor counts.
 
 ## 3. The queue, in order
 
@@ -2841,3 +2895,19 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   A RULE FROM THIS PASS: THE CHAIR READS EVERY WORKING SEAT'S COUNT AT LEAST EVERY 45 MINUTES, AND AT EVERY MESSAGE
   FROM A SEAT WHOSE MARK IS 250,000 OR LESS; a seat that is found building with its own hands is told to staff it
   or hand over in the same message.
+- 10:13 UTC · THE OWNER'S QUESTION ON THE KING ANSWERED FROM A COUNT AND RULED (CS22; section 1 holds the words and the
+  figures). HAND-OVERS RECEIVED: FRAME-3 "FRAME-PART 167d532b5, HANDED OVER" (09:56): FRAME-4 TOLD "THE LANE IS YOURS
+  at 167d532b5" (10:13) with the relay "B9 at lane/frame-3-2026-11-20-b9 0ed7e47c5, UNREAD; one red left:
+  `frame2NamesRule`'s pool floor, 272 of over 300" and the ruling on that floor; B11 still out. NAMES-3 "835fabd2d,
+  HANDED OVER" (10:08): item 3 BUILT at 9ddfcaa5a on the line merged at 55c4de58a: the stored survivor 5 to 0; the
+  contradicting verbs and "it" of a plural-named power in six files as CV7 narrows them; the possessive through
+  `personMention.js :: qualifiedPossessives` (census 54 to 1, golden 8 to 0); confinement 0c9069489 to 9ddfcaa5a 0
+  non-string (golden 899 strings, census 971); NOT RUN AT ITS TIP: `tests/lint` whole, the governing suites, the
+  figures' new hashes, the 720's render past 422; NOT DONE: one crime-knowledge possessive (its try moved draws,
+  reverted). NOBODY BUT ITS BUILDER HAS READ ITEM 3: `prompts/NAMES-4.txt` CARRIES AN ADDENDUM: a cold read of the
+  diff first, then the runs; the crime-knowledge possessive a NAMED SURVIVOR for after the deploy. `prompts/GOALS-1.txt`
+  CARRIES AN ADDENDUM: seated BESIDE NAMES-4 on the same commit 835fabd2d (not the line's tip), so the goals fix
+  loses no hour. TRAD-2 pushed dd13d18cc (10:04): unit 1 merged (CTR11's reader view with a guard of 7 planted
+  rows; `drawDeclared` keys; houses through the helper), the line merged at 0c9069489, the lighting census by its
+  door; `tests/lint` whole 219 of 221 at the merge (the census, cured after; `composeStateProseFence`'s star test
+  timing out at 20 s under two builders' load: alone 10/10): TRAD-3 SEATED BESIDE IT (session_019yED1SiYbAAwbQrFRB3nAD).

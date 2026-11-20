@@ -1,0 +1,34 @@
+towns 450. form of rule · towns · seat held by a person of the seat's own house · by a KEEPER of another place (dual hat) · no person found · [on the code's appointed list]
+Elder Council                   132  own   0  keeper 115  none  17   office "Elder"  e.g. the head shepherd at Shepherd collective; the boat-master at Fisher's landing
+Household Council                25  own   0  keeper  20  none   5   office "Household Elder"  e.g. the boat-headman at Fishing community; the head shepherd at Shepherd collective
+Noble Governorship               20  own   0  keeper   0  none  20  [appointed]  office "Lord Mayor"
+Headman's Authority              19  own   0  keeper  17  none   2   office "Headman"  e.g. the boat-headman at Fisher's landing; the boat-master at Fisher's landing
+Free Elder Council               19  own   0  keeper  10  none   9   office "Elder"  e.g. the boat-headman at Fisher's landing; the mine captain at Mine (open cast)
+Town Mayor                       17  own   0  keeper  17  none   0   office "Mayor"  e.g. the senior guild master at Merchant guilds (3-8); the warehouse factor at Merchant warehouses
+Town Council                     17  own   0  keeper  17  none   0   office "Mayor"  e.g. the senior guild master at Merchant guilds (3-8); the master smith at Blacksmiths (3-10)
+Grand Council                    17  own   0  keeper  17  none   0   office "Lord Mayor"  e.g. the exchange master at International trade center; the senior guild master at Merchant guilds (50-100+)
+Ducal Governorship               16  own   0  keeper   0  none  16  [appointed]  office "Lord Mayor"
+Elected Reeve                    15  own   0  keeper  15  none   0   office "Reeve"  e.g. the miller at Mill; the mine captain at Mine
+Feudal Stewardship               14  own   0  keeper   0  none  14  [appointed]  office "Elder"
+Guild Council                    14  own   0  keeper  14  none   0   office "Alderman"  e.g. the senior guild master at Merchant guilds (3-8); the wharfinger at Docks/port facilities
+City Council                     14  own   0  keeper  14  none   0   office "Lord Mayor"  e.g. the senior guild master at Merchant guilds (15-40); the senior craft-guild master at Craft guilds (30-80)
+Merchant Guild Council           14  own   0  keeper  14  none   0   office "Master of the Guilds"  e.g. the senior guild master at Merchant guilds (15-40)
+Royal Authority                  12  own   0  keeper   0  none  12  [appointed]  office "Lord Mayor"
+Grand Guild Consortium           12  own   0  keeper  12  none   0   office "Master of the Guilds"  e.g. the exchange master at International trade center; the senior guild master at Merchant guilds (50-100+)
+Merchant oligarchy               10  own   0  keeper  10  none   0   office "First Magnate"  e.g. the senior guild master at Merchant guilds (3-8); the senior guild master at Merchant guilds (15-40)
+City-State Council               10  own   0  keeper  10  none   0   office "First Councillor"  e.g. the senior guild master at Merchant guilds (15-40); the exchange master at International trade center
+Grand Merchant Oligarchy          8  own   0  keeper   8  none   0   office "First Magnate"  e.g. the exchange master at International trade center
+Feudal Appointee                  7  own   0  keeper   0  none   7  [appointed]  office "Mayor"
+Democratic assembly               6  own   0  keeper   6  none   0   office "Speaker of the Assembly"  e.g. the senior craft-guild master at Craft guilds (30-80); the exchange master at International trade center
+Church Council                    5  own   0  keeper   5  none   0   office "Warden of the Council"  e.g. the dean at Parish churches (2-5)
+Arcane Council                    5  own   0  keeper   5  none   0   office "Archmage of the Council"  e.g. the wizard at Wizard's tower; the guild archmage at Mages' guild
+Corrupt Council                   4  own   3  keeper   0  none   1   office "Mayor"
+Military Council                  4  own   0  keeper   4  none   0   office "Captain-Mayor"  e.g. the watch captain at Town watch
+High Theocratic Council           4  own   0  keeper   4  none   0   office "Lord Protector of the Faith"  e.g. the dean at Parish churches (50-100+)
+Military City Council             3  own   0  keeper   3  none   0   office "Lord Marshal"  e.g. the watch commander at Professional city watch
+Merchant City Council             2  own   0  keeper   2  none   0   office "Lord Burgomaster"  e.g. the senior guild master at Merchant guilds (15-40); the banker at Banking houses
+Priestly Guidance                 1  own   0  keeper   1  none   0   office "Elder Priest"  e.g. the priest at Parish church
+Arcane Senate                     1  own   0  keeper   1  none   0   office "Archmage of the Senate"  e.g. the librarian at Great library
+Shadow Senate                     1  own   0  keeper   0  none   1   office "Lord Mayor"
+Grand Merchant Senate             1  own   0  keeper   1  none   0   office "Doge"  e.g. the exchange master at International trade center
+Grand Military Council            1  own   0  keeper   1  none   0   office "Lord Marshal"  e.g. the watch commander at Professional city watch
