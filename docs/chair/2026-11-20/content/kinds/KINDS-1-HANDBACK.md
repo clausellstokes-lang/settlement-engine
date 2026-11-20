@@ -39,7 +39,7 @@ started on the line's tip `062504aa8`. A successor needs this file and the brief
 |---|---|---|---|
 | K0 | `briefs/K0.md` | `lane/kinds-1-2026-11-20-k0` @ 99a4a462e | MERGED (2565118b9). Calibration held. |
 | K1 | `briefs/K1.md` | `lane/kinds-1-2026-11-20-k1` @ 6a5132049 | MERGED (4b6fada00). Dark: 525/720 identical, 0 differences. Lit A/B/B50 in `out/law2-compare.md`; sent to the chair ~22:4x. Moved `tensionByMemory` to `src/generators/history/`. The ONE born-with pin: `troubleLawWiring.test.js` "1. CREATE (dark)" (list it for the flip). |
-| K2 | `briefs/K2.md` | `lane/kinds-1-2026-11-20-k2` | builder out |
+| K2 | `briefs/K2.md` | `lane/kinds-1-2026-11-20-k2` (worktree `../kinds-k2`, file UNCOMMITTED) | STOPPED ON A FINDING 22:1x: arm 5 (legacy edge: a place with no `settlement.config` re-rolls history under the FORM's law via `regenSectionAction`'s `settlement.config \|\| config`). Other arms green; fixture visitor-city-3. Ruling asked of the chair 22:22 (my rec: cure shape 1 with `settlement._config` before the form; pin shape 2). |
 | K3 | `briefs/K3.md` | — | waits on K2 (reds it cures: tuningRegister x4, proseWiringCensus x2, lighting census) |
 
 ## K0 BASELINE (visitor pool, 150 a size; `out/baseline.md`)
@@ -53,6 +53,9 @@ guild / crime / commonest first / troubles 0-1-2-3+: thorp 0/11.3/scarcity 17.3/
 
 ## STORED FIGURES MOVED
 None yet.
+
+## FIRST PAINT +58 RAW: NAMED (22:2x)
+The entry's preload list gains `"assets/trouble-law-<hash>.js",` (33 B) and 8 lazy-import index arrays gain its index (25 B); normalised, the entry equals the line's byte for byte (`out/k1/firstpaint/FIRSTPAINT-58.md`). No code.
 
 ## RUNNING COST
 K1's build: first paint 1,177,726 / 374,679 / 314,569 (line 1,177,668 / 374,670 / 314,580: +58 raw, to be named at the two runs); worker 2,632,557 (line 2,631,236: +1,321); the leaf in its own chunk `trouble-law` (1,274 B), outside the entry closure.
