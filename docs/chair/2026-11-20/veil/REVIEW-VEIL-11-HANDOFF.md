@@ -1,4 +1,4 @@
-# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 06:02 UTC by date -u, before FINAL)
+# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 06:10 UTC by date -u, before FINAL)
 
 The review: `REVIEW-VEIL-11.md` beside this file. Probes and outputs: `probes/REVIEW-VEIL-11/`. **No verdict; 212 is NOT
 cleared.** My predecessors' hand-offs stand whole and are read from origin only (`git show
@@ -87,3 +87,9 @@ Run any probe: `RV6_SRC=<tree> [RV10_GEN=<master tree>] RV10_TPL=<chain> RV10_N=
     owner's list. Coming cold to a security reader before it lands (this one if there is room after FINAL): SEAT-1
     (`lane/seat-2026-11-20`), who holds and contests the seat; no new stored key, the holder derived at render from the
     served document and never naming a criminal or hidden power on a non-owner page; it moves stored prose on new towns.
+20. RULED VR44 (the chair, 06:10 UTC, from section 3j): the stability tile (`get_gallery_dossier`'s column, the lists, the
+    og card) is the BAND WORD ALONE for every row on every non-owner read, marked or unmarked. At FINAL: `r2a.probe.jsx`'s
+    arm C ("stability tile is a band word alone") must read 0 on both shapes, unmarked and marked, Reveal DM off and on; and
+    the black market's capture must be absent on every marked read and equal to the owner's on an unmarked one (arm B).
+    Next cold reads in order of landing: "R3", "R4" (`lane/veil-22-2026-11-20`, from d136940c3), then "DOORS-IN" (VEIL-DOORS-3
+    handed back partial at 3e1115c81: VR40, a shared map's world sends no chronicle).
