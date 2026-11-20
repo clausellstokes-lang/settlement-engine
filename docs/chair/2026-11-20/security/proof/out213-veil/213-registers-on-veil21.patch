@@ -1,4 +1,4 @@
-From 42766d6f0a89bddd815404faada890be6ebf0112 Mon Sep 17 00:00:00 2001
+From 4752cd67d392ee58b61cda79d0f5270bd5171f5f Mon Sep 17 00:00:00 2001
 From: Claude <noreply@anthropic.com>
 Date: Fri, 20 Nov 2026 03:19:20 +0000
 Subject: [PATCH] registers(213): the rehearsal wave, the migration head and
@@ -10,21 +10,26 @@ wave 'function-grants-default-deny', documented-manual-reversal by its own @roll
 tests/ops/migrationRehearsal.test.js (head 213, 92 pending from 121, the wave rows, the
 boundaries string, the snapshot counts, an assertion block for the wave), ARCHITECTURE.md
 (migrations 213), docs/CURRENT_STATE.md (contiguous to 213; 10 ahead of production's 203),
-docs/DEPLOY.md (head file 213 and its paragraph).
+docs/DEPLOY.md (head file 213 and its paragraph), and the veil's own head pin in
+tests/security/galleryVeilSignalCopies.pglite.test.js ('the chain applies whole': the last file is 213's) and its rollback arm in
+tests/security/galleryVeilCures.pglite.test.js ("001..212 then 212's down" built as buildDb(212), not every
+file on disk, which now ends at 213).
 
 Proven on the local composition (veil-21's tip + 213's commit + this one): tests/docs,
 tests/ops, migrationSequenceAll, migrationOrdering, the walker and the manifest test, 300 of
-300; check-migration-head: 213 files, contiguous.
+300; tests/security whole 2015 of 2017 with the two veil pins red, then both files 37 of 37 after them; check-migration-head: 213 files, contiguous.
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_019yED1RVtJUCyQ9a24ZdmFx
 ---
- ARCHITECTURE.md                        |  2 +-
- docs/CURRENT_STATE.md                  |  4 +--
- docs/DEPLOY.md                         | 10 +++++++-
- scripts/ops/migrationRehearsalCore.mjs | 35 +++++++++++++++++++++++++-
- tests/ops/migrationRehearsal.test.js   | 28 +++++++++++++++------
- 5 files changed, 66 insertions(+), 13 deletions(-)
+ ARCHITECTURE.md                               |  2 +-
+ docs/CURRENT_STATE.md                         |  4 +--
+ docs/DEPLOY.md                                | 10 +++++-
+ scripts/ops/migrationRehearsalCore.mjs        | 35 ++++++++++++++++++-
+ tests/ops/migrationRehearsal.test.js          | 28 ++++++++++-----
+ .../security/galleryVeilCures.pglite.test.js  |  2 +-
+ .../galleryVeilSignalCopies.pglite.test.js    |  2 +-
+ 7 files changed, 68 insertions(+), 15 deletions(-)
 
 diff --git a/ARCHITECTURE.md b/ARCHITECTURE.md
 index 0da809e78..3cd519818 100644
@@ -236,6 +241,32 @@ index e5917e522..4d1154f1f 100644
      });
    });
  });
+diff --git a/tests/security/galleryVeilCures.pglite.test.js b/tests/security/galleryVeilCures.pglite.test.js
+index dba5480f9..49e013350 100644
+--- a/tests/security/galleryVeilCures.pglite.test.js
++++ b/tests/security/galleryVeilCures.pglite.test.js
+@@ -1203,7 +1203,7 @@ describe('COHERENCE-VEIL-2: the review rows on 211, executed', () => {
+     expect(down212).toEqual(['212_share_veil_later_cures.down.sql']);
+     const down = readdirSync(ROLLBACK).filter((f) => /^211_.*\.down\.sql$/.test(f));
+     expect(down).toEqual(['211_server_side_share_veil.down.sql']);
+-    const rolled = await buildDb();
++    const rolled = await buildDb(212);
+     expect(rolled.failed).toEqual([]);
+     const CATALOGUE = `select p.oid::regprocedure::text as sig, md5(p.prosrc) as body, p.provolatile, p.prosecdef, p.proconfig::text as config,
+         p.proacl::text as acl, pg_get_userbyid(p.proowner) as owner, pg_get_function_result(p.oid) as result
+diff --git a/tests/security/galleryVeilSignalCopies.pglite.test.js b/tests/security/galleryVeilSignalCopies.pglite.test.js
+index e4466b672..36a947463 100644
+--- a/tests/security/galleryVeilSignalCopies.pglite.test.js
++++ b/tests/security/galleryVeilSignalCopies.pglite.test.js
+@@ -175,7 +175,7 @@ describe('the shut grouping\'s signal survives every copy a non-owner surface ma
+ 
+   it('the chain applies whole: every migration on disk', () => {
+     expect(LIVE.failed).toEqual([]);
+-    expect(LIVE.files.at(-1)).toMatch(/^212_/);
++    expect(LIVE.files.at(-1)).toMatch(/^213_/);
+   });
+ 
+   /** Draw at a viewport: every width query's listeners hear the change (hooks/useIsMobile.js caches per breakpoint). */
 -- 
 2.43.0
 

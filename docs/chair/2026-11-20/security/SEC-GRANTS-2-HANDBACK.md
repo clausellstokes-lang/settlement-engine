@@ -124,10 +124,15 @@ that is not on the written list, including anything made by hand; anything else:
 ## Declared reds on this branch (by construction, the chair's ruling of 02:42 UTC)
 The gap at 211–212: `migrationContiguity`, `migrationSequenceAll` (gapless arm), `docCounts` and
 `architectureFreshness` (the count reads 211 files against the final 213), `migrationRehearsal` (whole file).
-**On the composition** (veil-21 + 3a6102946 + the register commit, made there as 42766d6f0): tests/docs, tests/ops,
+**On the composition** (veil-21 + 3a6102946 + the register commit, made there as 4752cd67d): tests/docs, tests/ops,
 the sequence and ordering tests, the walker and the manifest test **300 of 300**; `check-migration-head`: 213 files,
-contiguous. At the close the lines both lanes changed resolve to 213's values; `out213-veil/213-registers-on-veil21.patch`
-applies cleanly on the veil's registers. **Green here:** tests/security 1919 of 1920 (the gap alone); the walker 10/10;
+contiguous; **tests/security whole 2015 of 2017**, the two reds being the veil's own pins on "212 is the last file",
+both ATTRIBUTED (37 of 37 on clean veil-21) and both cured in the composition's register commit (37 of 37 after):
+`galleryVeilSignalCopies.pglite.test.js` ("the chain applies whole": `/^212_/` → `/^213_/`) and
+`galleryVeilCures.pglite.test.js` (its rollback arm built "001..212" as `buildDb()`, every file on disk, now `buildDb(212)`).
+Those two files exist only on the veil lane, so their lines are in the patch, not in this branch's commit. At the close
+the lines both lanes changed resolve to 213's values; `out213-veil/213-registers-on-veil21.patch` (the composition's
+commit, 7 files) applies cleanly on veil-21's tree (`git apply --check`). **Green here:** tests/security 1919 of 1920 (the gap alone); the walker 10/10;
 `typecheck:ratchet`, `typecheck:domain:strict`, `lint`. Stored figures moved: the migration count (211→213 with the
 veil), the repo head (212→213), pending 91→92 from 121 and 12→13 from 200 — written in the register commit, not frozen
 by me.
