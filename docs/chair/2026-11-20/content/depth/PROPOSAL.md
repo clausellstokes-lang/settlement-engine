@@ -49,6 +49,37 @@ re-drawn. (A tie with NO stored variant would re-hash over the longer pool: 0 su
 
 **What moves in a NEW town** (the shared two-tree tool, `trees.mjs 43ab0f5eb <probe> --words=none`): see §5.
 
+## 5. What moves in a new town (EXECUTED: `trees.mjs 43ab0f5eb 284880c7e`, golden 525 + census 720; `measure/nonstring.mjs`)
+
+THE ONE STORED NUMBER THAT MOVES: `relationships[].proseVariant` (golden 11,052 ties in 523 documents; census 15,544 in 606):
+every tie of a lengthened archetype re-opens at `fnv % size` with the new size. No other number, boolean, key, order or array
+length moves, except `generationCoherenceReceipt.judgments[record_coherence_battery].findings` in 35 golden documents (±1: the
+same "role-only person" finding counted once more or less, read from the changed prose; no new kind of finding, none lost).
+THE STRINGS THAT MOVE: `npcs[].plotHooks[]` (11,498 / 16,677), `relationships[].description` and `.tension` (every tie above),
+`prominentRelationship.*` (416 / 274: it quotes a tie), `pressureSentence` (2 / 90: it quotes a tie's tension), the receipt's
+`findings[].evidence/path/detail` (golden 106 documents), and three the brief did not foresee:
+- `relationships[].archetypeKey/type/typeName/strength` of a pair's SECOND tie (1 golden, 3 census): `ties.js :: temperOfTie` reads
+  the first tie's printed row's `trust`, and `inTemperOf` then turns the second tie (§2 (c));
+- `npcs[].secret.what/stakes` (71 golden cards, 9 census): `src/generators/people/rareSecrets.js :: dealRareSecrets`, after the
+  hooks, ties and goals: `holderAdmits` (`notHookWords`) reads the card's hook text against `SPOUSE_WORDS`/`KIN_WORDS`, and
+  `namedFor` (`ownLinesOf`: goals and hook) drops a person the card's own lines name; the admitted list's length changes, and the
+  row is `fnv1a32(<seed>::rare-secrets::<family>::<id>::row) % standing.length`. Draw-free (read by a helper; the observed rows,
+  ghost, firstWord, parentOf, are `src/data/rareSecrets.js :: RARE_TIES`'s);
+- `npcs[].goal.long` (1 / 1).
+Saved towns: nothing moves (§3). Any change of a hook's or tie's text moves these the same way; it is no cost of THIS tranche alone.
+
+## 6. What the chair rules
+
+1. **A tie line is a PAIR** (§2 (a)): the tranche is 80 descriptions AND 80 tensions in `npcData.js :: STRESS_ECONOMIC_EFFECTS`, each
+   tension written as its description's beat. The brief lists "tensions" as not mine; I read that as the town's tensions
+   (`history.currentTensions`), not a tie's own tension line. Rule which.
+2. **A hook is two files**: the pool row (`npcData.js :: NPC_FACTION_LOYALTY`) and its theme tag (`domain/hookThemes.js ::
+   AUTHORED_HOOK_THEMES`); each new hook takes one of the 18 themes its group already speaks, in about the group's proportion.
+3. **The tranche lands short of 30% at city**: ties 37.2%, hooks 31.5%. The chair's bill (+157 / +96) stands as the second tranche.
+4. **Order**: hooks first (their pools are free now); ties after the goals seat lands, on the commit the chair names.
+5. **The golden**: every tie's `proseVariant` and the pressure sentence move in new towns: one cause per signed shift, so hooks and
+   ties are two shifts, never one.
+
 ## 4. The first tranche: placement and its measured gain
 
 | pool | group | rows now | add | rows after |
