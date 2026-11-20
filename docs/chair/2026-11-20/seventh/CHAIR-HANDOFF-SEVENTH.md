@@ -1246,6 +1246,29 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   to five Endorsed in a hundred calm places at untouched settings at every size, never without two reasons; the
   reason PRINTED, composed at render from the document in hand; DARK; the numbers the owner's to sign.
 
+- **THE CORRECTED KEYWORD IS NOT A PLAIN CORRECTION: IT MOVES TO THE SEAT'S TRAIN, DARK (2026-11-20, 13:59 UTC; PAGE-3's trial
+  at f4a434660, `measures/page-3/K-trial-f4a434660.out.txt` at 56f5b0db1; THIS REPLACES THE RULING OF 11:36 "PART K, A
+  PLAIN CORRECTION"):** the one-line fold moves the band of exactly three roles (273 cards in 151 of 300 towns) AND,
+  outside every class the chair had allowed: THE POWERS' CONFLICTS (`powerStructure.conflicts`: parties swap,
+  Military or Guard to Guild Council; 34 TOWNS LOSE THEIR CONFLICT), `factionRelationships[]`, 26 pressure
+  sentences, about 42 goals, one tie between unmoved cards (golden 44 towns of 525; census 89 of 720). A card's band
+  feeds which powers are strong and which quarrel at birth: that is the who-rules law's subject. RULED: K lands
+  only under the seat's birth law (`_seatLawVersion`), dark, lit with it; SEAT-4 takes it as a unit ("UK"),
+  MEASURE AND PROPOSE FIRST (towns that gain, lose or swap a conflict by size; the contender table with and
+  without it; Wealthiest Merchant a separate arm). THE CHAIR HAD TOLD THE OWNER IT WAS CONFINED TO CARDS AND TIES:
+  WRONG; told to him at 14:0x. The display fix (S1) already takes "marginal" off every card, saved towns included.
+- **THE TRADITIONS' HOLE, THE ROUTE (13:59 UTC, on TRAD-4's surprise: the security lane's fold is on no base of its lane):**
+  NOT the security file carried over, NOT a copy of its rule: for a reader the dead's cause is chosen only among
+  events whose name shares NO WORD with any name the record holds (case-folded runs of letters; a bracketed
+  qualifier's words included; every held word of any length but a closed stop list; an event word that BEGINS
+  WITH a held word counts, so plurals and possessives are caught): STRICTLY WIDER than 212's sweep by construction;
+  plants red first (the reader's; a plural; a possessive; a three-letter name); the born count of clauses lost
+  said; A PARITY ARM AT THE JOIN (every event the security lane's sweep withholds is one the leaf skips).
+- **THE CONTENT LANE SPLITS IN TWO (13:59 UTC; PAGE-3 at about 215,000 after an hour, nothing merged; its two predecessors'
+  370,000 likewise):** PAGE-5 THE TROUBLE (the sides table's follow-up and merge; S6; the causes) and PAGE-6 PEOPLE
+  AND PLACE (L2's 76 lines; L4 with the seven reworked lines; S9 as a post-pass; the guard): path-disjoint, each
+  seated on PAGE-3's final tip, prompts `PAGE-5.txt` and `PAGE-6.txt`.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -3900,3 +3923,16 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   builder), L4 with S9 (`-s-wip` f2957d5be: six importer reds): all UNFINISHED, forwarded to PAGE-3. SEAT-3's
   relay: U4 at `lane/seat-2026-11-20-u4-wip` (7506bd780; final tip 0fa999bf6 pushing): forwarded to SEAT-4 with
   the two walkers ruled (section 2). REVIEW-VEIL-13: the TRAD-SHARE verdict pushed; stopped, waiting for R3.
+- 14:00 UTC · CI AT POINT 82 READ BY A HELPER (run 44742902237 at 43ab0f5eb, finished 13:50; the detail in the scratchpad's
+  `ci82/REPORT.md`): 41,740 tests, 20 FAILED: THE SAME TWENTY BY NAME AS AT 0c906948, NOTHING NEW; the two expected
+  changes of message (`generationForkCensus` A1 receives 26932f67...; `espionageDormancyFence` FENCE 1 receives
+  bf6f92cd...); `bar3People2Rows` not among the failures; five jobs red (the test ratchet, build and dist,
+  coverage floors, the golden under tr_TR, and the summary job). THE FIVE SIZE FIGURES ROSE AGAIN, for the close's
+  tally and the owner's signature: worker 2,587,733 against 2,579,708 (+3,620 since 0c906948); engine chunk
+  913,178 against 909,928 (+2,212); first paint raw 1,177,668 against 1,175,492 (+1,208); gzip 374,681 against
+  373,999 (+281); Brotli 314,577 against 313,994 (+307). THIS LINE GOES INTO THE LANDINGS FILE WITH THE NEXT ROW.
+  ALSO AT 13:57 TO 13:59: SEAT-3's last relay (U4 final at 0fa999bf6 on `-u4-wip`; its builder stopped); PAGE-3's
+  K trial and its stop at its successor point (hand-back a953dd48c; everything on origin: `-s7-wip` 688682b22,
+  `-k-wip` b2f8fe25e): told to add the chair's answers and the split to its hand-back and to send "PAGE-PART
+  <commit>, HANDED OVER"; TRAD-4's surprise ruled (section 2). THE BILL FOR CROSS-TOWN REPEATS is still being
+  measured by the helper (groups, a simulation of added lines, culture).
