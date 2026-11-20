@@ -336,12 +336,6 @@
     "snippet": "{storeAiProgress || 'Regenerating…'}"
   },
   {
-    "path": "src/components/new/tabs/EconomicsGlance.jsx",
-    "line": 134,
-    "category": "floatInterpolation",
-    "snippet": "{ecoScore}"
-  },
-  {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
     "line": 246,
     "category": "floatInterpolation",

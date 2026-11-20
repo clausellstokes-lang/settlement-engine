@@ -1,0 +1,48 @@
+[gate-tail] start:  12:14:22 up  1:20,  0 user,  load average: 12.70, 13.71, 13.42 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a30251bfb579f8154
+
+ ❯ tests/domain/display/outputInWords.test.jsx (8 tests | 2 failed) 12505ms
+     × the Economics header 363ms
+     × the PDF Economics chapter 59ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/display/outputInWords.test.jsx > every surface prints the words, and no grade out of 100 > the Economics header
+AssertionError: the line prints: expected 'ComfortableSubsistence economyTraderi…' to contain 'It gets about three parts in four of …'
+
+Expected: "It gets about three parts in four of what its work could yield; having no market holds it back most."
+Received: "ComfortableSubsistence economyTraderiverOutput38/100Rossleigh pays its way from year to year, and nobody here calls the thorp poor.Income Sources▲90%Harvest What the households grow and raise on their holdings; the main living at this scale.10%Timber Trade Local forest provides sustainable timber revenue; managed felling keeps production consistent.Rossleigh lives largely on one source of income. It is doing well enough now, but if that source has a bad year, the whole thorp has a bad year. Not enough of the stone that Rossleigh needs comes from the country here.Trade Profile▲ExportsHealing waters (bottled)ImportsNo recorded imports.Needed, and not brought in: stone, salt.Ask what this thorp sells and you get one answer, given without hesitation and without a second item.Food Security▲Production: 42 lbs/dayNeed: 40 lbs/dayRossleigh grows a little more than it eats, with some to put by against a bad year.No granary; about a month and a half in household stores.What each holding grows goes to its own table; beyond that, what it puts on the table itself is the day's catch.The thorp eats. It is not a subject anyone raises unprompted.Rossleigh's own food comes from its fishing and from the holdings its families till, so a bad season for either is felt at every table.Economic Flows▼?What is made here and what it depends on."
+
+ ❯ tests/domain/display/outputInWords.test.jsx:119:39
+    117|       const { container } = render(<EconomicsTab settlement={town} sav…
+    118|       const text = container.textContent || '';
+    119|       expect(text, 'the line prints').toContain(String(outputInWords(t…
+       |                                       ^
+    120|       expect(text, 'no grade out of 100').not.toMatch(/\d+\/100/);
+    121|       const exact = [...container.querySelectorAll('div,span,p')].filt…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/domain/display/outputInWords.test.jsx > every surface prints the words, and no grade out of 100 > the PDF Economics chapter
+AssertionError: the line prints: expected [ 'Rossleigh', …(50) ] to include 'It gets about three parts in four of …'
+ ❯ tests/domain/display/outputInWords.test.jsx:131:47
+    129|       const vm = buildViewModel({ settlement: town });
+    130|       const tree = EconomicsTrade({ settlement: town, narrativeMode: f…
+    131|       expect(leaves(tree), 'the line prints').toContain(String(outputI…
+       |                                               ^
+    132|       const strips = find(tree, (n) => typeof n.type === 'function' &&…
+    133|       expect(strips.length, 'anchored: the chapter\'s strip renders').…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 6 passed (8)
+   Start at  12:14:24
+   Duration  28.62s (transform 10.36s, setup 137ms, import 14.82s, tests 12.50s, environment 797ms)
+
+[gate-tail] end:  12:14:53 up  1:20,  0 user,  load average: 13.30, 13.76, 13.45
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/gate-tail.25982.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit 1

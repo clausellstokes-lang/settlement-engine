@@ -1,0 +1,18 @@
+  181 |
+  182 |   useEffect(() => {
+> 183 |     void loadList(galleryQuery);
+      |          ^^^^^^^^ Avoid calling setState() directly within an effect
+  184 |     // Cleanup bumps the token, and THAT is what retires an in-flight load on a
+  185 |     // query change or an unmount: a superseded promise finds `gen` behind the
+  186 |     // current one and writes nothing. It replaces the old local `cancelled`  react-hooks/set-state-in-effect
+
+/home/user/settlement-engine/.claude/worktrees/agent-a30251bfb579f8154/src/pdf/sections/Cover.jsx
+  18:20  warning  'num' is defined but never used. Allowed unused vars must match /^_/u  no-unused-vars
+
+✖ 38 problems (0 errors, 38 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+
+[gate-tail] end:  13:20:31 up  2:26,  0 user,  load average: 20.67, 18.08, 15.64
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/gate-tail.19317.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+exit 0

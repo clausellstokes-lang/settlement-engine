@@ -39,7 +39,8 @@
  *   `economics.seasonTile`        DS-ECO-2   glance (the Season tile, campaign-only)
  *
  * ⭐ UX CONSOLIDATION 2026-10-30 (RULINGS-T2 T2-1, T2-3, T2-8; RUBRIC R2). ONE prosperity
- * home: the header word, with the Output score printed ONCE on the header chip. The Economy
+ * home: the header word (the Output chip it carried left with PAGE-1's OUTPUT unit, 2026-11-20:
+ * no grade out of 100; `domain/display/outputInWords.js` says it in words under the word). The Economy
  * tile restated both (1000/1000 identical) and is cut; the Food tile is cut because the Food
  * Security section is the food fact's home and now opens on every town. The header carries
  * ONE paragraph: DS-ECO-1's, on every view (the shared page prints the owner's player-view
@@ -83,7 +84,7 @@ import ProseBlock from '../ProseBlock.jsx'; // the shared one-paragraph renderer
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { FLUSH } from '../../../design/flush.js';
-import { prosperityInCrisisLine } from '../../../domain/display/prosperityInCrisis.js'; import { outputChipBesideWord } from '../../../domain/display/dossierViewModel.js';
+import { prosperityInCrisisLine } from '../../../domain/display/prosperityInCrisis.js'; import { outputInWords } from '../../../domain/display/outputInWords.js';
 
 /**
  * The prosperity header: the page's one-line answer (the prosperity word) and its chips.
@@ -97,18 +98,19 @@ import { prosperityInCrisisLine } from '../../../domain/display/prosperityInCris
  * @param {object|null} [props.settlement] the record, for the one sentence a crisis-lowered label carries
  * @param {string} props.prosColor
  * @param {string} props.tradeLabel
- * @param {number} props.ecoScore
  * @param {object|null} [props.headerRung] the DS-ECO-1 rung the desk built
  * @param {object|null} [props.economyRung] the DS-ECO-8 rung the desk built
  */
 export default function EconomicsGlance({
-  eco, settlement = null, prosColor, tradeLabel, ecoScore,
+  eco, settlement = null, prosColor, tradeLabel,
   headerRung = null, economyRung = null,
 }) {
   const mobile = useIsMobile();
   // The label a crisis in force has lowered says what the place is in ordinary years (the chair's
   // ruling 1(a), REVIEW-UPKEEP-2): the one sentence, read from its one home, under the word.
   const inCrisis = prosperityInCrisisLine(settlement);
+  // PAGE-1 OUTPUT (F3b): no grade out of 100 beside the word; what the town's work yields, in words, from its one reader.
+  const outputLine = outputInWords({ ...(settlement || {}), economicState: eco });
   const header = drawnAtMount('economics.prosperityHeader', headerRung);
   const economyGlance = drawnAtMount('economics.economyTile', economyRung);
   // ONE paragraph: the desk's sentence where it speaks, the generator's datum where it does not.
@@ -123,16 +125,13 @@ export default function EconomicsGlance({
             <div style={{fontSize: FS['22'],fontWeight:700,color:prosColor,lineHeight:1.1,marginBottom:3}}>{eco.prosperity}</div>
             {inCrisis&&<div data-testid="economics-prosperity-in-crisis" style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,fontStyle:'italic',marginBottom:3}}>{inCrisis}</div>}
             <div style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag3}}>{eco.economicComplexity}</div>
+            {outputLine&&<div data-testid="economics-output-in-words" style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,marginTop:3}}>{outputLine}</div>}
           </div>
           <div style={{display:'flex',gap:8,flexWrap:'wrap',alignItems:'flex-start'}}>
             <div style={{textAlign:'center',background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'6px 12px'}}>
               <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>Trade</div>
               <div style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag,textTransform:'capitalize'}}>{tradeLabel}</div>
             </div>
-            {outputChipBesideWord(ecoScore, eco.prosperity)&&<div style={{textAlign:'center',background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'6px 12px'}}>{/* UPKEEP-8 (#608): the word alone where the figure stands two bands from it */}
-              <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>Output</div>
-              <div style={{fontSize:FS.md,fontWeight:700,color:ecoScore>=60?'#1a5a28':ecoScore>=35?'#a0762a':'#8b1a1a'}}>{ecoScore}/100</div>
-            </div>}
           </div>
         </div>
         {economyGlance?.sentence&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}>{economyGlance.sentence}</p>}

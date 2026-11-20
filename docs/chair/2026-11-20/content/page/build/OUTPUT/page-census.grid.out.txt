@@ -1,0 +1,7 @@
+[gate-tail] start:  13:20:43 up  2:26,  0 user,  load average: 19.48, 17.95, 15.63 · cores: 4
+page-census: rendering 12 dossiers (1 workers) into /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/page-census-cybnFK
+page-census --grid: 0 fall(s)
+[gate-tail] end:  13:24:09 up  2:29,  0 user,  load average: 20.98, 19.57, 16.75
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/gate-tail.20657.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+exit 0

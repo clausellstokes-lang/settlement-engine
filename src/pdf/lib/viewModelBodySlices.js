@@ -25,7 +25,7 @@ import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { resourceGapLines, exploitationGroupsShown, housesStillNeeded } from '../../domain/display/validationOnPage.js';
 import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
-import { deriveProsperityPosture } from '../../domain/display/dossierViewModel.js';
+import { deriveProsperityPosture } from '../../domain/display/dossierViewModel.js'; import { outputInWords } from '../../domain/display/outputInWords.js';
 import { foodBlockShown } from '../../domain/display/foodCarrier.js'; // TAIL-EXPORTS-PDF batch 1
 import { tradeListsAsPrinted } from '../../domain/display/tradeListDisplay.js'; // TAIL-EXPORTS-PDF batch 1
 import { impliedGroundsOnPage } from '../../domain/facts/houseInputAtHand.js'; // LEFT-PDF L19: the grounds the Resources tab reads
@@ -74,7 +74,7 @@ export function economicsSlice(active) {
     prosperity:         ec.prosperity || null,
     prosperityInCrisis: deriveProsperityPosture(s).inCrisis, // ruling 1(a): the label's ordinary-years sentence, or null
     economicComplexity: complexityLabelShown(ec) || null,
-    economyOutput:      ec.compound?.economyOutput ?? null,
+    outputInWords:      outputInWords(s), // PAGE-1 OUTPUT (F3b): no grade out of 100; what the town's work yields, in words (the tab's one reader)
     tradeAccess:        ec.tradeAccess || s?.config?.tradeRouteAccess || null,
     incomeSources:      normalizeIncomeSources(ec.incomeSources || []),
     primaryExports:     ec.primaryExports || [], primaryImports: ec.primaryImports || [],

@@ -1,0 +1,7 @@
+ FAIL  tests/lint/exportTokenCoverage.test.js > export-token coverage census (Wave 0 — predicate liveness, never correctness) > the corpus vocabulary is live and the census is not measuring an empty set
+ FAIL  tests/lint/institutionTable.walker.test.js > the column census, measured across the estate > PINS `settlement.services` PERMANENTLY ABSENT — the key is never written, on any tier
+ FAIL  tests/lint/institutionTable.walker.test.js > the column census, measured across the estate > finds `whoIsExempt` EMPTY on every settlement, and no `bailiff` in any office column
+ FAIL  tests/lint/ledgerCitationIntegrity.test.js [ tests/lint/ledgerCitationIntegrity.test.js ]
+ FAIL  tests/lint/noLegacyFactionReaders.walker.test.js > no legacy faction readers outside FPZ (PEOPLE-5, M-2; landed by PEOPLE-LAND) > every read outside the FPZ list is red; zero at the landing
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > the admitted instruments: each reads EXACTLY its named counts, and only these two are admitted
+ FAIL  tests/lint/siteCoherenceRatchet.test.js > site-coherence contradiction ratchet (Wave 0 — inventory freezing, never correctness) > C5 anti-vacuity — the corpus is exactly 462 settlements with zero generation errors
