@@ -490,6 +490,20 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     17:49 answer and PART 28 section 8 send "R3 <commit>" first; the chair's 19:21 and 19:45 messages send IMPORT-DOOR first.
     ASKED at 19:5x; until answered the seat follows the latest (19:45): the tell's cure, IMPORT-DOOR, "R3 <commit>".
 
+67. THE CHAIR, 20:03 (REPLACES ruling 66's open order, the chair's 17:49 order and PART 28 section 8's): (1) THE ORDER: the
+    tell's cure, IMPORT-DOOR, THEN "R3 <commit>": the security reader's prompt holds the import door's own cold line and three
+    questions, so ONE seating reads both; an "R3" before the import door would cost a second reader. (2) RULING 60's HUSK: GO:
+    THE ROW LEAVES WHOLE, both engines, red first (the red arm, then the cure), on two conditions: the list's count after the
+    row leaves is one of the parts GATE-1 reads (a list one shorter must still be a member's list for the size; if not, STOP
+    with the list's lengths in nothing-hidden births); the sweep of the `institution` key stays for rows that carry no name of
+    the hidden house in their text. Relayed to R3-TELL-3 at 20:0x. (3) FOR THE CLOSE, NOT BUILT NOW: the who-rules lane's
+    survey names eight shared surfaces the lit law adds or changes (`docs/chair/2026-11-20/content/seat/SEAT-6-TO-LIGHT.md`
+    section 4 on `lane/seat-6-2026-11-20`) and recommends a `gallerySanitizer.pglite` arm with a hidden taker and a hidden
+    retired holder: built on the JOINED tree, in this lane's file, after the seat lane has landed; with the fortune lane's
+    seven surfaces when its file names them (`merits` rides `breakdown` to every share: safe only under ruling 65).
+    THE COUNT: 281,566 by the chair's read at 19:44 (the seat's own estimate ran low); VEIL-29's prompt at 330,000, seated at
+    360,000; PART 29 is its whole inheritance.
+
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
@@ -514,7 +528,7 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 | L the four walkers | not started | ruling 34 |
 | DOORS 3e1115c81 | `lane/veil-doors-3-2026-11-20` (hand-back `docs/chair/2026-11-20/veil/doors/VEIL-DOORS-3-HANDBACK.md` there: read whole before the merge) | merge `--no-ff` after R3 and R4, every hunk read, the two inside `import_gallery_dossier` hardest; ONE builder: rulings 19, 20, the reader's repros, the acceptance run at the merged tree |
 | stored figures, E | not started | once at the merged tree; then E (ruling 25) |
-| R3-TELL-3 the tell's cure | `briefs/R3-TELL-3-BRIEF.md`; worktree `/home/user/wt/r3tell3`, branch `v28-r3tell3` (pushed as `lane/veil-28-r3tell3-2026-11-20`) | LAUNCHED by VEIL-28 (section 6). One builder on 212. |
+| R3-TELL-3 the tell's cure | `briefs/R3-TELL-3-BRIEF.md`; worktree `/home/user/wt/r3tell3`, branch `v28-r3tell3` (pushed as `lane/veil-28-r3tell3-2026-11-20` when it returns) | LAUNCHED 19:5x at 8508431da; unit 4b's cure GO (ruling 67 (2)), relayed. One builder on 212. |
 | IMPORT-DOOR | `briefs/IMPORT-DOOR-BRIEF.md` (rulings 56, 57) | after the tell's cure (ruling 66); "IMPORT-DOOR <commit>" its own line |
 | CHAINS-ROW | brief to cut (ruling 64) | after R3; its PLAUSIBLE read first |
 
@@ -589,6 +603,9 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
   PART 28 re-read (its diff since 33d4ffbab: rulings 58-61, sections 3, 4, 6, 8). The instrument f95ce89a5 read whole
   (signature, probe, analyzer, verify) and merged 68f8874c3 (docs and measure only).
 - 19:47 PART 29 begun; R3-TELL-3's brief committed; its builder launched (section 8).
+- 19:5x pushed 8508431da (no suite ran); R3-TELL-3 launched. A REFUSAL: the seat's permission check denied the push guard
+  that kills a hook's `npm run check`; it stands; the push was watched without the kill.
+- 20:03 the chair: ruling 67 (the order; ruling 60's husk GO, relayed; the seat lane's surfaces for the close; the count).
 
 ## 7. THE JOIN (the chair's word in VEIL-25's prompt): what the join must re-prove on the joined document
 The working line (origin/lane/join-2026-11-14, at 0c906948 when this was written) and four content lanes ADD SERVED TEXT at
@@ -617,6 +634,7 @@ THE LANE: `lane/veil-28-2026-11-20`, tip = the commit carrying this section (rea
 MERGED BY VEIL-28: R3-TELL-2's instrument (68f8874c3).
 RUNNING (subagents of this seat): R3-TELL-3, the tell's cure (`briefs/R3-TELL-3-BRIEF.md`; `/home/user/wt/r3tell3`, `v28-r3tell3`;
 databases `t3_*`); the pool part A rebuild (`/var/tmp/v18/t2/pool-t2sig-2`, a background shell of the seat).
-NEXT, IN ORDER: R3-TELL-3 read once, re-run, merged; IMPORT-DOOR; "R3 <commit>" with the LOWER towns by rule (ruling 66 for the
-order); CHAINS-ROW (64); R6; R4-CURE-2 (+ ruling 53's fold, the brief amended at launch); R5 (59's walker first); R7; L; the doors
-(+ 57 (d)'s test); the stored figures; E (58 §4: both gates on every door; 63: the lit pools before the flip).
+NEXT, IN ORDER (ruling 67): R3-TELL-3 (with ruling 60's husk, 67 (2)) read once, re-run, merged; IMPORT-DOOR; "R3 <commit>"
+with the LOWER towns by rule and the IMPORT-DOOR line; CHAINS-ROW (64); R6; R4-CURE-2 (+ ruling 53's fold, the brief amended at launch); R5 (59's walker first); R7; L; the doors
+(+ 57 (d)'s test); the stored figures; AT THE CLOSE ruling 67 (3)'s arm and 65's red on the joined tree; E (58 §4: both gates
+on every door; 63: the lit pools before the flip).
