@@ -612,6 +612,8 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 - 19:47 PART 29 begun; R3-TELL-3's brief committed; its builder launched (section 8).
 - 19:5x pushed 8508431da (no suite ran); R3-TELL-3 launched. A REFUSAL: the seat's permission check denied the push guard
   that kills a hook's `npm run check`; it stands; the push was watched without the kill.
+- 21:0x the chair: VEIL-29 seated (20:21); the count 367,717 at 21:03; `k.svc.institution` gone at the tip (relayed).
+- 21:04 R3-TELL-3's status (b3b533027) pushed `-wip`; not merge-ready (STOPS); PART 29 section 8 for the hand-over.
 - 20:03 the chair: ruling 67 (the order; ruling 60's husk GO, relayed; the seat lane's surfaces for the close; the count).
 
 ## 7. THE JOIN (the chair's word in VEIL-25's prompt): what the join must re-prove on the joined document
@@ -658,11 +660,19 @@ THE TELL'S STATE (rulings 58, 61, 62, 67):
   f95ce89a5 (212 6260803d; `out/v28/tell2-seat/pool-meta.txt`). VEIL-29 rebuilds it in ITS container: `sh
   docs/chair/2026-11-20/veil/out/v27/tell2/measure/tell2.sh <worktree> <outdir> <tpl>` (section 4; part A ~114 CPU-min, part B
   ~46). Against a cure's tree, `measure/verify.sh` first.
-RUNNING (a subagent of THIS seat; it returns to VEIL-28): R3-TELL-3, the tell's cure (`briefs/R3-TELL-3-BRIEF.md`; worktree
-`/home/user/wt/r3tell3`, branch `v28-r3tell3` at 8508431da; databases `t3_*`; outputs `out/v28/tell3/`; hand-back
-`out/v28/tell3/TELL3-HANDBACK.md`), unit 4b's cure GO (ruling 67 (2)), relayed 20:0x. ON ITS RETURN (the chair, 20:21): under
-400,000 the seat reads its diff once, re-runs its red and green, merges, then hands over; past 400,000 its branch is pushed as
-`lane/veil-28-r3tell3-wip-2026-11-20`, one line through the chair, and the lane is handed over (by 420,000 in any case).
+R3-TELL-3, THE TELL'S CURE: NOT MERGED. PUSHED `lane/veil-28-r3tell3-wip-2026-11-20` at b3b533027 (21:04 UTC; the builder's
+own status line, NOT YET READ OR RE-RUN BY THE SEAT): 95f2ddfb8 RED (the analyzer's (a)-(d) and the red arms, at 8508431da);
+efba72444 CURE (the drag key served as null; ruling 60's non-criminal husk leaves whole; 212 `707822e6…01ae` and the twin);
+b3b533027 hand-back DRAFT (`out/v28/tell3/TELL3-HANDBACK.md`) and green records. UNITS: 1 done (red 88/92); 2 done (GATE-1 4/92
+after; 7 LOWER BY RULE, not 11); 3 NO ENGINE CHANGE (non-governing criminal rows served on 0 gated reads), its unconditional
+shown-power tooth NOT DONE; 4 STOPS: `safetyDesc` absent (2 towns) and `currentTensions` empty (1) can only be cured by SENDING
+(the chair's word), criminal imports several (1) is the counterfactual's own; `k.svc.institution` struck, the gate confirms
+it gone; 4b done on both conditions (the list's count is not a GATE-1 part; 0 born rows reached). GATE-2 STILL RED (34 Fisher
+cells, joint families): a STOP for the chair. GREEN by the builder: serverVeil + hand rows 43/43, harnesses 8/8, walkers 17/17,
+`--check` 0, the R3 gate HIGHER 0 / EQUAL 79 / LOWER 13; the born test and the acceptance run still running at the push.
+VEIL-29: read the hand-back draft, take the chair's rulings on the three STOPS, re-staff a builder from b3b533027 (the tooth,
+the STOPS' cures), then read the whole diff once, re-run red and green, merge. The builder (a subagent of VEIL-28) may finish
+its runs and commit more on its local branch `v28-r3tell3` in VEIL-28's container: what is not pushed by then is lost.
 NEXT, IN ORDER (ruling 67): R3-TELL-3 merged; IMPORT-DOOR (`briefs/IMPORT-DOOR-BRIEF.md`); "R3 <commit>" with the LOWER towns by
 rule and the IMPORT-DOOR line; CHAINS-ROW (64, its PLAUSIBLE read first); R6; R4-CURE-2 (`briefs/R4-CURE-2-BRIEF.md` AMENDED AT
 LAUNCH by the draft in ruling 66: one id-as-text helper per engine, the six 212 sites repointed, R3-CURE-7's walker re-stated,
