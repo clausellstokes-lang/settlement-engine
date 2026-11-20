@@ -1,0 +1,788 @@
+[
+ {
+  "town": "Tarkhankotan",
+  "tier": "town",
+  "k": 171,
+  "id": "npc_courthouse",
+  "a": {
+   "short": "Be asked for an opinion by those who lead the Town Council, once, this season.",
+   "long": "Turn the bargain with Zanabazar Urgench into real trust over the years.",
+   "intent": {
+    "short": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Town Council"
+     }
+    },
+    "long": {
+     "family": "TIES",
+     "kind": "ally",
+     "key": "protect_ally",
+     "target": {
+      "kind": "npc",
+      "id": "npc_mint"
+     }
+    }
+   }
+  },
+  "b": {
+   "short": "Be asked for an opinion by those who lead the Town Council, once, this season.",
+   "long": "Protect Zanabazar Urgench from anyone who would bring them down.",
+   "intent": {
+    "short": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Town Council"
+     }
+    },
+    "long": {
+     "family": "TIES",
+     "kind": "ally",
+     "key": "protect_ally",
+     "target": {
+      "kind": "npc",
+      "id": "npc_mint"
+     }
+    }
+   }
+  },
+  "tiesOf": [
+   {
+    "to": "npc_courthouse",
+    "from": "npc_mint",
+    "type": "ally",
+    "moved": false,
+    "corrTo": false
+   },
+   {
+    "to": "npc_almshouse",
+    "from": "npc_courthouse",
+    "type": "ally",
+    "moved": false,
+    "corrTo": false
+   }
+  ]
+ },
+ {
+  "town": "Oxteucan",
+  "tier": "city",
+  "k": 205,
+  "id": "npc_multiple_courthouses",
+  "a": {
+   "short": "Do Acatl Chan one useful favour this season, unasked.",
+   "long": "Lead the Merchant Guild Council one day, with Morning Star Chuc's blessing or without it.",
+   "intent": {
+    "short": {
+     "family": "TIES",
+     "kind": "ally",
+     "key": "protect_ally",
+     "target": {
+      "kind": "npc",
+      "id": "npc_hired_blades"
+     }
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "climb",
+     "key": "secure_office",
+     "target": {
+      "kind": "npc",
+      "id": "npc_merchant_guilds_15_40"
+     }
+    }
+   }
+  },
+  "b": {
+   "short": "Warn Acatl Chan of any trouble before it reaches them.",
+   "long": "Lead the Merchant Guild Council one day, with Morning Star Chuc's blessing or without it.",
+   "intent": {
+    "short": {
+     "family": "TIES",
+     "kind": "ally",
+     "key": "protect_ally",
+     "target": {
+      "kind": "npc",
+      "id": "npc_hired_blades"
+     }
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "climb",
+     "key": "secure_office",
+     "target": {
+      "kind": "npc",
+      "id": "npc_merchant_guilds_15_40"
+     }
+    }
+   }
+  },
+  "tiesOf": [
+   {
+    "to": "npc_specialized_metalworkers",
+    "from": "npc_multiple_courthouses",
+    "type": "ally",
+    "moved": false,
+    "corrTo": false
+   },
+   {
+    "to": "npc_multiple_courthouses",
+    "from": "npc_hired_blades",
+    "type": "respect",
+    "moved": false,
+    "corrTo": false
+   },
+   {
+    "to": "npc_multiple_courthouses",
+    "from": "npc_scroll_scribe",
+    "type": "ally",
+    "moved": false,
+    "corrTo": false
+   }
+  ]
+ },
+ {
+  "town": "Khanbaliq",
+  "tier": "city",
+  "k": 214,
+  "id": "npc_brewery",
+  "a": {
+   "short": "Pay every hand at the brewery in full and on time this season.",
+   "long": "Be given the secrets of the Merchant Guilds to keep, as well as its errands to run.",
+   "intent": {
+    "short": {
+     "family": "INSTITUTION",
+     "kind": "solvency",
+     "key": "control_institution",
+     "target": {
+      "kind": "house",
+      "id": "Brewery"
+     }
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "b": {
+   "short": "Pay every hand at the brewery in full and on time this season.",
+   "long": "Reach the top of the Merchant Guilds by the long road, one earned favour at a time.",
+   "intent": {
+    "short": {
+     "family": "INSTITUTION",
+     "kind": "solvency",
+     "key": "control_institution",
+     "target": {
+      "kind": "house",
+      "id": "Brewery"
+     }
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "tiesOf": [
+   {
+    "to": "npc_mercenary_quarter",
+    "from": "npc_brewery",
+    "type": "debtor_creditor",
+    "moved": false,
+    "corrTo": false
+   }
+  ]
+ },
+ {
+  "town": "Khanbaliq",
+  "tier": "city",
+  "k": 214,
+  "id": "npc_dungeon_delving_supply_district",
+  "a": {
+   "short": "Bring Ghazan Urgench together with someone who can help them.",
+   "long": "Reach the top of the Merchant Guilds by the long road, one earned favour at a time.",
+   "intent": {
+    "short": {
+     "family": "TIES",
+     "kind": "ally",
+     "key": "protect_ally",
+     "target": {
+      "kind": "npc",
+      "id": "npc_specialized_metalworkers"
+     }
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "b": {
+   "short": "Bring Ghazan Urgench together with someone who can help them.",
+   "long": "Rise in the Merchant Guilds far enough that their word carries weight outside it.",
+   "intent": {
+    "short": {
+     "family": "TIES",
+     "kind": "ally",
+     "key": "protect_ally",
+     "target": {
+      "kind": "npc",
+      "id": "npc_specialized_metalworkers"
+     }
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "tiesOf": [
+   {
+    "to": "npc_specialized_metalworkers",
+    "from": "npc_dungeon_delving_supply_district",
+    "type": "respect",
+    "moved": false,
+    "corrTo": false
+   }
+  ]
+ },
+ {
+  "town": "Hvaliino",
+  "tier": "city",
+  "k": 231,
+  "id": "npc_veiled_61c95b406ec18464",
+  "a": {
+   "short": "Bring Yaroslava Ivanov together with someone who can help them.",
+   "long": "See the rookery out of debt for good, with money set aside for bad years.",
+   "intent": {
+    "short": {
+     "family": "TIES",
+     "kind": "ally",
+     "key": "protect_ally",
+     "target": {
+      "kind": "npc",
+      "id": "npc_garrison"
+     }
+    },
+    "long": {
+     "family": "INSTITUTION",
+     "kind": "solvency",
+     "key": "control_institution",
+     "target": {
+      "kind": "house",
+      "id": "Rookery"
+     }
+    }
+   }
+  },
+  "b": {
+   "short": "Keep the friendship with Yaroslava Ivanov quiet, where it does the most good.",
+   "long": "See the rookery out of debt for good, with money set aside for bad years.",
+   "intent": {
+    "short": {
+     "family": "TIES",
+     "kind": "ally",
+     "key": "protect_ally",
+     "target": {
+      "kind": "npc",
+      "id": "npc_garrison"
+     }
+    },
+    "long": {
+     "family": "INSTITUTION",
+     "kind": "solvency",
+     "key": "control_institution",
+     "target": {
+      "kind": "house",
+      "id": "Rookery"
+     }
+    }
+   }
+  },
+  "tiesOf": [
+   {
+    "to": "npc_veiled_61c95b406ec18464",
+    "from": "npc_garrison",
+    "type": "ally",
+    "moved": false,
+    "corrTo": false
+   },
+   {
+    "to": "npc_veiled_61c95b406ec18464",
+    "from": "npc_mills_2_5",
+    "type": "family",
+    "moved": false,
+    "corrTo": false
+   },
+   {
+    "to": "npc_blacksmiths_3_10",
+    "from": "npc_veiled_61c95b406ec18464",
+    "type": "respect",
+    "moved": false,
+    "corrTo": false
+   }
+  ]
+ },
+ {
+  "town": "Breggorod",
+  "tier": "metropolis",
+  "k": 257,
+  "id": "npc_smelter",
+  "a": {
+   "short": "Beat Ruslan Zhukova at something this season, in front of people who matter.",
+   "long": "Reach the top of the Merchant Guilds by the long road, one earned favour at a time.",
+   "intent": {
+    "short": {
+     "family": "TIES",
+     "kind": "rival_enemy",
+     "key": "settle_rivalry",
+     "target": {
+      "kind": "npc",
+      "id": "npc_weavers_textile_workers"
+     }
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "b": {
+   "short": "Beat Ruslan Zhukova at something this season, in front of people who matter.",
+   "long": "Earn a place among the leaders of the Merchant Guilds without buying it or marrying into it.",
+   "intent": {
+    "short": {
+     "family": "TIES",
+     "kind": "rival_enemy",
+     "key": "settle_rivalry",
+     "target": {
+      "kind": "npc",
+      "id": "npc_weavers_textile_workers"
+     }
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "tiesOf": [
+   {
+    "to": "npc_smelter",
+    "from": "npc_carpenters_5_15",
+    "type": "enemy",
+    "moved": false,
+    "corrTo": false
+   },
+   {
+    "to": "npc_weavers_textile_workers",
+    "from": "npc_smelter",
+    "type": "political",
+    "moved": false,
+    "corrTo": false
+   }
+  ]
+ },
+ {
+  "town": "Khutulunkotan",
+  "tier": "metropolis",
+  "k": 260,
+  "id": "npc_beast_trainers",
+  "a": {
+   "short": "See someone who wronged them lose face in public this season.",
+   "long": "Rise in the Merchant Guilds far enough that their word carries weight outside it.",
+   "intent": {
+    "short": {
+     "family": "PERSONALITY",
+     "kind": "grudge",
+     "key": "indulge_trait",
+     "target": null
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "b": {
+   "short": "See someone who wronged them lose face in public this season.",
+   "long": "Reach the top of the Merchant Guilds by the long road, one earned favour at a time.",
+   "intent": {
+    "short": {
+     "family": "PERSONALITY",
+     "kind": "grudge",
+     "key": "indulge_trait",
+     "target": null
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "tiesOf": [
+   {
+    "to": "npc_coaching_inn",
+    "from": "npc_beast_trainers",
+    "type": "rival",
+    "moved": false,
+    "corrTo": false
+   }
+  ]
+ },
+ {
+  "town": "Khutulunkotan",
+  "tier": "metropolis",
+  "k": 260,
+  "id": "npc_barge_and_river_transport_company",
+  "a": {
+   "short": "Get the barge and river transport company excused from one tax or levy this season.",
+   "long": "Earn a place among the leaders of the Merchant Guilds without buying it or marrying into it.",
+   "intent": {
+    "short": {
+     "family": "INSTITUTION",
+     "kind": "charter",
+     "key": "control_institution",
+     "target": {
+      "kind": "house",
+      "id": "Barge and river transport company"
+     }
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "b": {
+   "short": "Get the barge and river transport company excused from one tax or levy this season.",
+   "long": "Rise in the Merchant Guilds far enough that their word carries weight outside it.",
+   "intent": {
+    "short": {
+     "family": "INSTITUTION",
+     "kind": "charter",
+     "key": "control_institution",
+     "target": {
+      "kind": "house",
+      "id": "Barge and river transport company"
+     }
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "tiesOf": [
+   {
+    "to": "npc_sawmill_commercial",
+    "from": "npc_barge_and_river_transport_company",
+    "type": "enemy",
+    "moved": false,
+    "corrTo": false
+   }
+  ]
+ },
+ {
+  "town": "Neadbridge",
+  "tier": "metropolis",
+  "k": 282,
+  "id": "npc_ropemaker",
+  "a": {
+   "short": "Have the last word in the next argument that matters.",
+   "long": "Bring the Merchant Guilds under the sway of the Craft Guilds, one member at a time.",
+   "intent": {
+    "short": {
+     "family": "PERSONALITY",
+     "kind": "sway",
+     "key": "indulge_trait",
+     "target": null
+    },
+    "long": {
+     "family": "POWER",
+     "kind": "tense",
+     "key": "expand_influence",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "b": {
+   "short": "Have the last word in the next argument that matters.",
+   "long": "Build the Craft Guilds up until it is beyond the reach of the Merchant Guilds.",
+   "intent": {
+    "short": {
+     "family": "PERSONALITY",
+     "kind": "sway",
+     "key": "indulge_trait",
+     "target": null
+    },
+    "long": {
+     "family": "POWER",
+     "kind": "tense",
+     "key": "expand_influence",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "tiesOf": [
+   {
+    "to": "npc_brickmaker",
+    "from": "npc_ropemaker",
+    "type": "respect",
+    "moved": false,
+    "corrTo": false
+   }
+  ]
+ },
+ {
+  "town": "Hartkoppel",
+  "tier": "metropolis",
+  "k": 289,
+  "id": "npc_river_boatyard",
+  "a": {
+   "short": "Find out what Wolfger Steiner really wants in return.",
+   "long": "Be counted one day among those who lead the Merchant Guilds.",
+   "intent": {
+    "short": {
+     "family": "TIES",
+     "kind": "debtor",
+     "key": "repay_debt",
+     "target": {
+      "kind": "npc",
+      "id": "npc_international_trade_center"
+     }
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "b": {
+   "short": "Make sure no one else learns how much is owed to Wolfger Steiner.",
+   "long": "Be counted one day among those who lead the Merchant Guilds.",
+   "intent": {
+    "short": {
+     "family": "TIES",
+     "kind": "debtor",
+     "key": "repay_debt",
+     "target": {
+      "kind": "npc",
+      "id": "npc_international_trade_center"
+     }
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "tiesOf": [
+   {
+    "to": "npc_international_trade_center",
+    "from": "npc_river_boatyard",
+    "type": "debtor_creditor",
+    "moved": false,
+    "corrTo": false
+   }
+  ]
+ },
+ {
+  "town": "Itzatepec",
+  "tier": "metropolis",
+  "k": 296,
+  "id": "npc_woodcarver",
+  "a": {
+   "short": "Get the woodcarver's workshop through the season without borrowing.",
+   "long": "Be counted one day among those who lead the Craft Guilds.",
+   "intent": {
+    "short": {
+     "family": "INSTITUTION",
+     "kind": "solvency",
+     "key": "control_institution",
+     "target": {
+      "kind": "house",
+      "id": "Woodcarver"
+     }
+    },
+    "long": {
+     "family": "RANK",
+     "kind": "enter",
+     "key": "secure_office",
+     "target": {
+      "kind": "power",
+      "id": "Craft Guilds"
+     }
+    }
+   }
+  },
+  "b": {
+   "short": "Get the woodcarver's workshop through the season without borrowing.",
+   "long": "Build the Craft Guilds up until it is beyond the reach of the Merchant Guilds.",
+   "intent": {
+    "short": {
+     "family": "INSTITUTION",
+     "kind": "solvency",
+     "key": "control_institution",
+     "target": {
+      "kind": "house",
+      "id": "Woodcarver"
+     }
+    },
+    "long": {
+     "family": "POWER",
+     "kind": "tense",
+     "key": "expand_influence",
+     "target": {
+      "kind": "power",
+      "id": "Merchant Guilds"
+     }
+    }
+   }
+  },
+  "tiesOf": [
+   {
+    "to": "npc_workhouse",
+    "from": "npc_woodcarver",
+    "type": "ally",
+    "moved": false,
+    "corrTo": false
+   }
+  ]
+ },
+ {
+  "town": "Weißberg",
+  "tier": "metropolis",
+  "k": 297,
+  "id": "npc_pawnbroker",
+  "a": {
+   "short": "Get the rights of the pawnbroker's shop written down and sealed by those who govern, this season.",
+   "long": "Make Eadgyth Weber admit, in public, that they were wrong.",
+   "intent": {
+    "short": {
+     "family": "INSTITUTION",
+     "kind": "charter",
+     "key": "control_institution",
+     "target": {
+      "kind": "house",
+      "id": "Pawnbroker"
+     }
+    },
+    "long": {
+     "family": "TIES",
+     "kind": "rival_enemy",
+     "key": "settle_rivalry",
+     "target": {
+      "kind": "npc",
+      "id": "npc_stable_district"
+     }
+    }
+   }
+  },
+  "b": {
+   "short": "Get the rights of the pawnbroker's shop written down and sealed by those who govern, this season.",
+   "long": "Settle things with Eadgyth Weber for good, one way or another.",
+   "intent": {
+    "short": {
+     "family": "INSTITUTION",
+     "kind": "charter",
+     "key": "control_institution",
+     "target": {
+      "kind": "house",
+      "id": "Pawnbroker"
+     }
+    },
+    "long": {
+     "family": "TIES",
+     "kind": "rival_enemy",
+     "key": "settle_rivalry",
+     "target": {
+      "kind": "npc",
+      "id": "npc_stable_district"
+     }
+    }
+   }
+  },
+  "tiesOf": [
+   {
+    "to": "npc_stable_district",
+    "from": "npc_pawnbroker",
+    "type": "political",
+    "moved": false,
+    "corrTo": false
+   }
+  ]
+ }
+]

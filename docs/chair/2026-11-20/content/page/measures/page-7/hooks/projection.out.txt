@@ -1,0 +1,1 @@
+PROJ towns 40: tension hooks on the record 303; toPublicSafe default 0; default+veil 0; veilPublicPayload(default) 0; toPublicSafe full 303; full+default veil 0; full+veil with the owner's deltas lifting tab:plot_hooks and class:tension:hooks 303

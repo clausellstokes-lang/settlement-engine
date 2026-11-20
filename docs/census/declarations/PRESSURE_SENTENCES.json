@@ -32,7 +32,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.under_siege[1]",
-          "text": "The siege has entered its second week; ${govFaction} controls the rationing and the gates, which means they control everything else too, for now.",
+          "text": "The siege has entered its second week; ${govFaction} ${agree(govFaction, 'controls', 'control')} the rationing and the gates, which means they control everything else too, for now.",
           "needs": [
             "gate"
           ],
@@ -343,7 +343,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.politically_fractured[5]",
-          "text": "The last thing ${topFaction} and its rivals agreed on in ${name} was that the disagreement should not be allowed to reach the streets; that agreement is the only thing holding, and it is fraying.",
+          "text": "The last thing ${topFaction} and ${agree(topFaction, 'its', 'their')} rivals agreed on in ${name} was that the disagreement should not be allowed to reach the streets; that agreement is the only thing holding, and it is fraying.",
           "needs": [
             "tier: ≥ village"
           ],
@@ -901,7 +901,7 @@
         },
         {
           "lineId": "PRESSURE_SENTENCES.insurgency(street)[1]",
-          "text": "The streets of ${name} have gone quiet, and everyone is waiting for something to break. ${govFaction} gives orders that are heard and not obeyed, and each one weakens it further.",
+          "text": "The streets of ${name} have gone quiet, and everyone is waiting for something to break. ${govFaction} ${agree(govFaction, 'gives', 'give')} orders that are heard and not obeyed, and each one weakens ${agree(govFaction, 'it', 'them')} further.",
           "needs": [
             "population: ≥ middling"
           ],
@@ -1053,7 +1053,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.mass_migration(weakeconomy)[0]",
-          "text": "${name} is taking in more people than it can feed. The newcomers came for work the town no longer has, and ${govFaction} is rationing what there is between families who have lived here for generations and families who arrived last month.",
+          "text": "${name} is taking in more people than it can feed. The newcomers came for work the town no longer has, and ${govFaction} ${agree(govFaction, 'is', 'are')} rationing what there is between families who have lived here for generations and families who arrived last month.",
           "needs": [
             "deficit"
           ],
@@ -1182,7 +1182,7 @@
       "lines": [
         {
           "lineId": "PRESSURE_SENTENCES.wartime(losing)[0]",
-          "text": "${name} is losing people and resources to a war it did not choose the terms of. Conscription has taken some of its skilled hands. ${govFaction} signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.",
+          "text": "${name} is losing people and resources to a war it did not choose the terms of. Conscription has taken some of its skilled hands. ${govFaction} signed a requisition order last week that ${agree(govFaction, 'it', 'they')} cannot afford and could not refuse. The settlement is loyal. It is also running thin.",
           "needs": [],
           "excludes": [
             "legitimacy crisis"

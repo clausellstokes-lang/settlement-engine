@@ -1,0 +1,9 @@
+HOME src/domain/facts/guild.js :: guildOf (factsOf(record).guild); factsOf vs guildOf disagreements: 0
+SIZE thorp: towns 150, guild_conflict 0, guildless 0
+SIZE hamlet: towns 150, guild_conflict 2, guildless 1
+SIZE village: towns 150, guild_conflict 1, guildless 0
+SIZE town: towns 150, guild_conflict 49, guildless 0
+SIZE city: towns 150, guild_conflict 75, guildless 0
+SIZE metropolis: towns 150, guild_conflict 88, guildless 0
+TOTAL guild_conflict 215, guildless 1
+REC hxd-hamlet-29 | hamlet | pop 82 | house false | inst: Subsistence farming; Common grazing land; Periodic market; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source | powers: Elder Council [government]
