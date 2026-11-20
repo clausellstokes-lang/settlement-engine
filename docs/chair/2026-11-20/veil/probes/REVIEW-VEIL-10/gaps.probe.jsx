@@ -23,8 +23,9 @@ it('gaps', async () => {
   await loadGenerationLawPayloads();
   const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
   let n = 0; const census = {};
-  for (const size of ['town', 'city', 'city', 'metropolis', 'metropolis']) for (const crisis of ['none', 'infiltrated', 'insurgency', 'occupied', 'indebted', 'none']) {
-    const seed = `rv10-gap-${size}-${crisis}-${n}`;
+  const SIZES = (process.env.RV10_SIZES || 'town,city,city,metropolis,metropolis').split(','); const CRISES = (process.env.RV10_CRISES || 'none,infiltrated,insurgency,occupied,indebted,none').split(','); const NN = Number(process.env.RV10_N || 1);
+  for (let k = 0; k < NN; k += 1) for (const size of SIZES) for (const crisis of CRISES) {
+    const seed = NN > 1 ? `rv10-gap-${size}-${crisis}-${k}-${n}` : `rv10-gap-${size}-${crisis}-${n}`;
     let A = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: size, ...(crisis !== 'none' ? { selectedStresses: [crisis], selectedStressesRandom: false } : {}) }), null, { seed, customContent: {} });
     if (compose) { A = { ...A }; delete A.publicProse; A = withPP(A, compose(A)); } A = JSON.parse(JSON.stringify(A));
     const stored = arrays(A);

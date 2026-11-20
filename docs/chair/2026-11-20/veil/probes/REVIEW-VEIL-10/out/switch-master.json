@@ -1,0 +1,809 @@
+{
+ "towns": [
+  {
+   "seed": "rv10-sw-village-none-1",
+   "dm": false,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-village-none-1",
+   "dm": true,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-village-infiltrated-2",
+   "dm": false,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-village-infiltrated-2",
+   "dm": true,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-village-insurgency-3",
+   "dm": false,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-village-insurgency-3",
+   "dm": true,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-village-occupied-4",
+   "dm": false,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-village-occupied-4",
+   "dm": true,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-village-indebted-5",
+   "dm": false,
+   "parts": 8,
+   "show": 8,
+   "hand": 6,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-village-indebted-5",
+   "dm": true,
+   "parts": 9,
+   "show": 9,
+   "hand": 7,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-village-none-6",
+   "dm": false,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-village-none-6",
+   "dm": true,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-town-none-7",
+   "dm": false,
+   "parts": 13,
+   "show": 13,
+   "hand": 11,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-town-none-7",
+   "dm": true,
+   "parts": 14,
+   "show": 14,
+   "hand": 12,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-town-infiltrated-8",
+   "dm": false,
+   "parts": 8,
+   "show": 8,
+   "hand": 7,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-town-infiltrated-8",
+   "dm": true,
+   "parts": 9,
+   "show": 9,
+   "hand": 8,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-town-insurgency-9",
+   "dm": false,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-town-insurgency-9",
+   "dm": true,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-town-occupied-10",
+   "dm": false,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-town-occupied-10",
+   "dm": true,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-town-indebted-11",
+   "dm": false,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-town-indebted-11",
+   "dm": true,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-town-none-12",
+   "dm": false,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-town-none-12",
+   "dm": true,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-none-13",
+   "dm": false,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-none-13",
+   "dm": true,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-infiltrated-14",
+   "dm": false,
+   "parts": 28,
+   "show": 28,
+   "hand": 21,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-infiltrated-14",
+   "dm": true,
+   "parts": 29,
+   "show": 29,
+   "hand": 22,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-insurgency-15",
+   "dm": false,
+   "parts": 23,
+   "show": 23,
+   "hand": 19,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-insurgency-15",
+   "dm": true,
+   "parts": 24,
+   "show": 24,
+   "hand": 20,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-occupied-16",
+   "dm": false,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-occupied-16",
+   "dm": true,
+   "parts": 4,
+   "show": 4,
+   "hand": 4,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-indebted-17",
+   "dm": false,
+   "parts": 18,
+   "show": 18,
+   "hand": 14,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-indebted-17",
+   "dm": true,
+   "parts": 19,
+   "show": 19,
+   "hand": 15,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-none-18",
+   "dm": false,
+   "parts": 27,
+   "show": 27,
+   "hand": 20,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-none-18",
+   "dm": true,
+   "parts": 28,
+   "show": 28,
+   "hand": 21,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-none-19",
+   "dm": false,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-none-19",
+   "dm": true,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-infiltrated-20",
+   "dm": false,
+   "parts": 23,
+   "show": 23,
+   "hand": 18,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-infiltrated-20",
+   "dm": true,
+   "parts": 24,
+   "show": 24,
+   "hand": 19,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-insurgency-21",
+   "dm": false,
+   "parts": 18,
+   "show": 18,
+   "hand": 14,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-insurgency-21",
+   "dm": true,
+   "parts": 19,
+   "show": 19,
+   "hand": 15,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-occupied-22",
+   "dm": false,
+   "parts": 31,
+   "show": 31,
+   "hand": 19,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-occupied-22",
+   "dm": true,
+   "parts": 32,
+   "show": 32,
+   "hand": 20,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-indebted-23",
+   "dm": false,
+   "parts": 42,
+   "show": 42,
+   "hand": 32,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-indebted-23",
+   "dm": true,
+   "parts": 43,
+   "show": 43,
+   "hand": 33,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-none-24",
+   "dm": false,
+   "parts": 42,
+   "show": 42,
+   "hand": 32,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-city-none-24",
+   "dm": true,
+   "parts": 43,
+   "show": 43,
+   "hand": 33,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-none-25",
+   "dm": false,
+   "parts": 3,
+   "show": 3,
+   "hand": 3,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-none-25",
+   "dm": true,
+   "parts": 4,
+   "show": 4,
+   "hand": 4,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-infiltrated-26",
+   "dm": false,
+   "parts": 33,
+   "show": 33,
+   "hand": 26,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-infiltrated-26",
+   "dm": true,
+   "parts": 34,
+   "show": 34,
+   "hand": 27,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-insurgency-27",
+   "dm": false,
+   "parts": 13,
+   "show": 13,
+   "hand": 10,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-insurgency-27",
+   "dm": true,
+   "parts": 14,
+   "show": 14,
+   "hand": 11,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-occupied-28",
+   "dm": false,
+   "parts": 23,
+   "show": 23,
+   "hand": 17,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-occupied-28",
+   "dm": true,
+   "parts": 24,
+   "show": 24,
+   "hand": 18,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-indebted-29",
+   "dm": false,
+   "parts": 46,
+   "show": 46,
+   "hand": 33,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-indebted-29",
+   "dm": true,
+   "parts": 47,
+   "show": 47,
+   "hand": 34,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-none-30",
+   "dm": false,
+   "parts": 28,
+   "show": 28,
+   "hand": 22,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-none-30",
+   "dm": true,
+   "parts": 29,
+   "show": 29,
+   "hand": 23,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-none-31",
+   "dm": false,
+   "parts": 38,
+   "show": 38,
+   "hand": 28,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-none-31",
+   "dm": true,
+   "parts": 39,
+   "show": 39,
+   "hand": 29,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-infiltrated-32",
+   "dm": false,
+   "parts": 28,
+   "show": 28,
+   "hand": 23,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-infiltrated-32",
+   "dm": true,
+   "parts": 29,
+   "show": 29,
+   "hand": 24,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-insurgency-33",
+   "dm": false,
+   "parts": 38,
+   "show": 38,
+   "hand": 29,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-insurgency-33",
+   "dm": true,
+   "parts": 39,
+   "show": 39,
+   "hand": 30,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-occupied-34",
+   "dm": false,
+   "parts": 33,
+   "show": 33,
+   "hand": 22,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-occupied-34",
+   "dm": true,
+   "parts": 34,
+   "show": 34,
+   "hand": 23,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-indebted-35",
+   "dm": false,
+   "parts": 37,
+   "show": 37,
+   "hand": 28,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-indebted-35",
+   "dm": true,
+   "parts": 38,
+   "show": 38,
+   "hand": 29,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-none-36",
+   "dm": false,
+   "parts": 43,
+   "show": 43,
+   "hand": 33,
+   "state": "hidden"
+  },
+  {
+   "seed": "rv10-sw-metropolis-none-36",
+   "dm": true,
+   "parts": 44,
+   "show": 44,
+   "hand": 34,
+   "state": "hidden"
+  }
+ ],
+ "unreachable": {
+  "field:institution:<id>:services": {
+   "n": 50,
+   "ex": "rv10-sw-village-indebted-5 dm=false field:institution:fence-word-of-mouth:services hidden=false"
+  },
+  "field:institution:<id>:people": {
+   "n": 216,
+   "ex": "rv10-sw-village-indebted-5 dm=false field:institution:fence-word-of-mouth:people hidden=false"
+  },
+  "field:faction:<id>:members": {
+   "n": 16,
+   "ex": "rv10-sw-city-none-18 dm=false field:faction:faction.thieves_guild:members hidden=false"
+  },
+  "field:faction:<id>:goals": {
+   "n": 16,
+   "ex": "rv10-sw-city-none-18 dm=false field:faction:faction.thieves_guild:goals hidden=false"
+  },
+  "field:faction:<id>:conflicts": {
+   "n": 16,
+   "ex": "rv10-sw-city-none-18 dm=false field:faction:faction.thieves_guild:conflicts hidden=false"
+  }
+ },
+ "showVsHand": {
+  "gallery dm=false factions[].members": {
+   "n": 8,
+   "ex": "rv10-sw-city-none-18: SHOW=[{\"id\":\"npc_7\",\"name\":\"Dzizib Nah\",\"role\":\"Assassin Guildmaster\",\"title\":\"Huehue\",\"category\":\"criminal\",\"physical\":{\"age\":\"early sixties\",\"build\":\"barrel-chested\",\"clothes\":\"good boots and cheap every | HAND=undefined"
+  },
+  "link dm=false factions[].members": {
+   "n": 8,
+   "ex": "rv10-sw-city-none-18: SHOW=[{\"id\":\"npc_7\",\"name\":\"Dzizib Nah\",\"role\":\"Assassin Guildmaster\",\"title\":\"Huehue\",\"category\":\"criminal\",\"physical\":{\"age\":\"early sixties\",\"build\":\"barrel-chested\",\"clothes\":\"good boots and cheap every | HAND=undefined"
+  },
+  "gallery dm=true factions[].members": {
+   "n": 8,
+   "ex": "rv10-sw-city-none-18: SHOW=[{\"id\":\"npc_7\",\"goal\":{\"long\":\"Build insulation between themselves and consequences\",\"short\":\"Eliminate the threat before it becomes a bigger threat\"},\"name\":\"Dzizib Nah\",\"role\":\"Assassin Guildmaster\" | HAND=undefined"
+  },
+  "link dm=true factions[].members": {
+   "n": 8,
+   "ex": "rv10-sw-city-none-18: SHOW=[{\"id\":\"npc_7\",\"name\":\"Dzizib Nah\",\"role\":\"Assassin Guildmaster\",\"title\":\"Huehue\",\"category\":\"criminal\",\"physical\":{\"age\":\"early sixties\",\"build\":\"barrel-chested\",\"clothes\":\"good boots and cheap every | HAND=undefined"
+  }
+ },
+ "hideVsDefault": {
+  "dm=true npcs[].corrupt": {
+   "n": 504,
+   "ex": "rv10-sw-village-indebted-5: HIDEALL=undefined | NONFAMILY=false"
+  },
+  "dm=true factions[].members[].corrupt": {
+   "n": 481,
+   "ex": "rv10-sw-village-indebted-5: HIDEALL=undefined | NONFAMILY=false"
+  },
+  "dm=true npcs[].corruptTies": {
+   "n": 13,
+   "ex": "rv10-sw-city-insurgency-15: HIDEALL=undefined | NONFAMILY={}"
+  },
+  "dm=true npcs[].corruptionVector": {
+   "n": 13,
+   "ex": "rv10-sw-city-insurgency-15: HIDEALL=undefined | NONFAMILY=\"greed\""
+  },
+  "dm=true factions[].members[].corruptTies": {
+   "n": 11,
+   "ex": "rv10-sw-city-insurgency-15: HIDEALL=undefined | NONFAMILY={}"
+  },
+  "dm=true factions[].members[].corruptionVector": {
+   "n": 11,
+   "ex": "rv10-sw-city-insurgency-15: HIDEALL=undefined | NONFAMILY=\"greed\""
+  }
+ },
+ "later": [
+  {
+   "seed": "rv10-sw-village-indebted-5",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Fence (word of mouth)"
+  },
+  {
+   "seed": "rv10-sw-town-none-7",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Front businesses"
+  },
+  {
+   "seed": "rv10-sw-town-infiltrated-8",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Street gang"
+  },
+  {
+   "seed": "rv10-sw-city-infiltrated-14",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Smuggling network"
+  },
+  {
+   "seed": "rv10-sw-city-insurgency-15",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Smuggling network"
+  },
+  {
+   "seed": "rv10-sw-city-indebted-17",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Rookery"
+  },
+  {
+   "seed": "rv10-sw-city-none-18",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Smuggling network"
+  },
+  {
+   "seed": "rv10-sw-city-infiltrated-20",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Smuggling network"
+  },
+  {
+   "seed": "rv10-sw-city-insurgency-21",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Smuggling network"
+  },
+  {
+   "seed": "rv10-sw-city-occupied-22",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Multiple criminal factions"
+  },
+  {
+   "seed": "rv10-sw-city-indebted-23",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Smuggling network"
+  },
+  {
+   "seed": "rv10-sw-city-none-24",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Smuggling network"
+  },
+  {
+   "seed": "rv10-sw-metropolis-infiltrated-26",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Smuggling network"
+  },
+  {
+   "seed": "rv10-sw-metropolis-insurgency-27",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Thieves' guild (powerful)"
+  },
+  {
+   "seed": "rv10-sw-metropolis-occupied-28",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Thieves' guild (powerful)"
+  },
+  {
+   "seed": "rv10-sw-metropolis-indebted-29",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Smuggling network"
+  },
+  {
+   "seed": "rv10-sw-metropolis-none-30",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Multiple criminal factions"
+  },
+  {
+   "seed": "rv10-sw-metropolis-none-31",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Smuggling network"
+  },
+  {
+   "seed": "rv10-sw-metropolis-infiltrated-32",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Smuggling network"
+  },
+  {
+   "seed": "rv10-sw-metropolis-insurgency-33",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Smuggling network"
+  },
+  {
+   "seed": "rv10-sw-metropolis-occupied-34",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Thieves' guild (powerful)"
+  },
+  {
+   "seed": "rv10-sw-metropolis-indebted-35",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Smuggling network"
+  },
+  {
+   "seed": "rv10-sw-metropolis-none-36",
+   "newHouseSent": false,
+   "renamedSent": false,
+   "oldHadId": false,
+   "oldName": "Smuggling network"
+  }
+ ]
+}
