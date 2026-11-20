@@ -995,6 +995,22 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   light is not changed. The law-1 readings are LISTED for the owner (the clause, its trigger term, how many of
   twenty towns print it, by size).
 
+- **R3, THE TELL QUESTION SHARPENED (2026-11-20, 12:09 UTC, on VEIL-25's own check of five LOWER towns):** `income.criminalRow`
+  (the registry's VR14 (ii)) COUNTS as a ruled fail-closed rule: a row whose weight a hidden house raised is not
+  served: the seven LOWER towns that rest on it do not block the merge. BUT in each of the seven the house-free
+  counterfactual still carries a criminal income row, so THE ATTACK IS RE-STATED: a served page is judged against
+  what a town with NOTHING hidden could show UNDER SOME SETTING OF THE OWNER'S OWN SWITCHES (a page with no
+  criminal income row is every town's page with the criminal switch off): THE TELL, if there is one, is a
+  COMBINATION no nothing-hidden town produces under any setting (some criminal content a switch-off page would
+  not show, together with the absence of the income row and the criminal powers). For each of the seven, then all
+  thirteen: the served page beside the house-free town's served page under each switch setting; fields that match
+  neither are the tell, cured toward withholding. R3 merges "GREEN TOWARD WITHHOLDING, THE TELL QUESTION OPEN";
+  the reader's verdict gates E.
+- **THE GOALS DEAL'S DRAW IS NOT MADE INDEPENDENT OF THE HELD SET IN THIS ROUND (12:05 UTC, on GOALS-2's measure):**
+  it would move 2,620 goals in 153 of 300 towns once (499 changing family); a named survivor for after the
+  deploy, with its design (held lines kept in the list marked refused and resolved draw-free; the uncanny chance
+  rolled always) and a second cross-card read it found (the uncanny roll is consumed only under the cap).
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
