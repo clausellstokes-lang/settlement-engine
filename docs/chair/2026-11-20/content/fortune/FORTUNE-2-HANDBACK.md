@@ -1,4 +1,4 @@
-# FORTUNE-2 hand-back (kept current; last written 2026-11-20 13:18:59 UTC by `date -u`)
+# FORTUNE-2 hand-back (kept current; last written 2026-11-20 13:37:50 UTC by `date -u`)
 
 For a successor (FORTUNE-3): this file and the briefs (`briefs/COMMON.md`, `U2.md` to `U4.md`) are all you need.
 Lane branch `lane/fortune-2-2026-11-20` (taken at 57a79cc2d, FORTUNE-1's hand-over). The chair is
@@ -27,14 +27,15 @@ at most 300 words, with your count (the chair reads the true one; your own runs 
 |---|---|---|---|
 | briefs corrected for FORTUNE-2 | DONE | lane/fortune-2-2026-11-20 | 1b050c590, b079b6a89 |
 | U1 law leaf, dark | MERGED, GREEN (chair accepted 13:17) | merge 2daa80771 of bc3c5cc8e; censuses re-taken 4822cff0b | pushed |
-| U2 fortune | BUILDER OUT (seated ~12:15), not returned | lane/fortune-2-u2-2026-11-20 (LOCAL worktree scratchpad/wt-u2, from 4822cff0b) | — |
-| U3 standing + play-time guard | BUILDER OUT (seated ~12:15), not returned | lane/fortune-2-u3-2026-11-20 (LOCAL worktree scratchpad/wt-u3, from 4822cff0b) | — |
+| U2 fortune | BUILDER OUT (seated ~12:15); WIP = its red test only, prosperity.js not yet changed | local lane/fortune-2-u2-2026-11-20, PUSHED as lane/fortune-2-2026-11-20-u2-wip | d0b3fc4ea (wip) |
+| U3 standing + play-time guard | BUILDER OUT (seated ~12:15); WIP = source edits and both tests, its gates running | local lane/fortune-2-u3-2026-11-20, PUSHED as lane/fortune-2-2026-11-20-u3-wip | 383903a85 (wip) |
 | readerShapeResolver 260>256 | OPEN (ruling 4) | — | — |
 | U4 FS7 | after U2+U3 and the line's merge | lane/fortune-2-u4-2026-11-20 | — |
 | re-measure forced on; owner's page re-check; confinement; final hand-back; "FORTUNE <commit>" | after U4 | — | — |
 
-The builders' worktrees live in THIS container's scratchpad; a successor in another container cannot read them:
-ask the chair whether they were pushed (they were told not to push; the integrator merges locally).
+The chair, 13:31 UTC (usage warning): nothing stays only in a container. Every builder branch is pushed as
+`lane/fortune-2-2026-11-20-uN-wip` now and after every return; a successor fetches those. No new measuring helpers; one
+builder at a time unless a second is already running.
 
 ## 3. The integrator's routine at a merge (as done for U1)
 
