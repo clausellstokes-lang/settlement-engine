@@ -568,6 +568,28 @@ parts of the whole check (at the close).
   generated in the running app and every page a DM can open saved as text and pictures by a helper (the scratch
   folder `exp/`), read by the chair before it answers: the experience described from the pages, not from counts.
 
+- **THE CHAIR'S ANSWER ON THE EXPERIENCE (10:47 UTC, 2026-11-20; then an addendum the same turn), FROM A READ OF THE
+  PAGES:** three towns forged in the running app as a signed-out visitor (a visitor may forge ONLY a town: one a
+  day and two rerolls; about ten seconds each; twenty pages in four groups) and, by the helper's fallback, a
+  village and a city rendered through the app's own page components (the premium owner's view; not seen in a
+  browser). SAID TO THE OWNER: THE GOOD: the first screen (a paragraph of the place that carries the town's own
+  state: "rationing markers painted on the doors" in the famine town), "Open Tonight" (one screen an evening can be
+  run from), the Power page with its DM-only "who really runs this town" (fronts, and what is held over each),
+  people cards (place, rank, flaw, want, how they deal, secret, ties), one hook a person and all different in the
+  town checked, the crisis page's brunt, lever and fall. WHERE IT DROPS: thin pages (Daily Life one sentence;
+  Traditions three names and dates; Rumours empty); labels that argue with the story ("Safety: Moderate" beside
+  "Law & order: Critical"; "Output 23/100" beside "nobody here calls the town poor"); the machine's words on a
+  DM's page ("next in line, the first choice already holding a role that contradicts this one"; "Religious
+  Authorities gains"; "Standing marginal" on a guild's head); sameness (a mirrored want in one town; the same
+  tension sentence in two of three towns); misfits (a dean's protection racket "targeting the very merchants
+  they're supposed to serve"; a bribed magistrate who wants to "keep faith with what they hold true"). ONE EXAMPLE
+  THE CHAIR GAVE WAS WRONG AND IS CORRECTED IN THE ADDENDUM: the boundary-stone sentence is the culture's line (it
+  stands in a Germanic city with no land dispute), not built from the dispute. THE ADDENDUM: the village (six
+  people; small trade-true secrets; "the boat-master and Reeve") reads best of all; its tensions name a "legal
+  class" and "merchants" the village's own page says it lacks; the city (63 people, about 150 hooks) shows 18 of
+  63 wants sharing a frame; in five settlements three tension texts each stood twice word for word. FORTUNE-1's
+  one-page sheet (`FOR-THE-OWNER.md` at 9edcc112e) SENT TO THE OWNER as a file.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -751,6 +773,29 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   join. ALSO: FS7 is EXHAUSTIVE for the new combinations (every line a pool can pick for Comfortable or Prosperous
   at thorp to village and for Poor or Moderate at city and metropolis is read); `factionDynamics.js` is FORTUNE-1's
   until "factionDynamics released at <commit>" (SEAT-3 told); a one-page plain file for the owner is owed.
+
+- **THE DEALER'S REASON IS NEVER SAID TO THE DM (10:48 UTC, to FRAME-4; from the chair's read of the pages):** how a
+  cast was dealt (a fallback, "next in line, the first choice already holding a role that contradicts this one")
+  is printed today on the Crisis tab and as a hook on the Open Tonight sheet: on no surface may it be; the reason a
+  person is named is a fact of the town or nothing; a census of every cast-reason string a surface can print, with
+  a guard. With it: the Stakes rows' verb after a power through `powerVerb`; a power in those sentences through
+  `powerNameInProse`.
+- **FORTUNE, THE TOP BAND: KEEP 15 (10:48 UTC):** the second column measured (Prosperous 15 to 24 opens Endorsed for
+  a Prosperous place with one further merit) and REJECTED: at untouched settings the merit is nearly absent (3
+  calm towns of 416), so the band stays under 1%, and 24 ranks Prosperous above Wealthy. Units' order accepted (U1
+  the leaf; U2 fortune and U3 standing in parallel; U4 FS7). FS7 ALSO READS THE STANDING SENTENCE'S REASON CLAUSES
+  ("Weak defences keep <town> from more than tolerating <ruler>" stood on a bought council and on a calm village's
+  reeve): under the new rule a place at its size's usual defence never prints the defence clause.
+- **GOALS-1's NEW LINES READ BY THE CHAIR (10:48 UTC; T1: 25 goal lines in 10 cells, 13 tie pairs in 5 archetypes;
+  `GOALS-1-NEW-LINES-DRAFT.md` at 4bea286af):** 21 goal lines and 12 pairs APPROVED AS WRITTEN; SENT BACK:
+  solvency/long 3 (two "them"), solvency/long 4 (presumes the house sells), enter/long 1 (denies its kind), enter/
+  long 2 (a mentor's want: REPLACED or the cell stops one short), mentor_legacy 1 (presumes letters). A CHECK ASKED:
+  a gentle rival line never handed by rotation to the holder of a harsh enemy tie.
+- **PAGE-1 (10:50 UTC): A SEAT TO MEASURE AND PROPOSE ON SIX FAULTS OF THE PAGE AS READ** (`prompts/PAGE-1.txt`: F1
+  sameness across towns; F2 sides blind to the town; F3 labels that argue; F4 the machine's words on a card; F5 a
+  secret or want that contradicts its holder; F6 thin pages): NO BUILD until the chair rules; for F1 the owner's
+  rule decides the shape: more ways to SAY a tension that is there, sides named from the town's own powers and
+  houses, never a new tension.
 
 ## 3. The queue, in order
 
@@ -3061,3 +3106,13 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   CHAIR'S RULE T1; rotation's rungs (another house, untied, no shared power) in its builder's hands; the ties'
   frozen head its own unit. THE OWNER CLARIFIED HIS QUESTION AT ABOUT 10:30 (section 1): three whole towns are being
   captured from the running app for the chair to read before it answers.
+- 10:50 UTC · THE OWNER'S CLARIFIED QUESTION ANSWERED FROM THE PAGES (section 1). SIX MESSAGES READ AT 10:45: FRAME-3's relay
+  (B11 at lane/frame-3-2026-11-20-b11 31922415e, UNREAD): forwarded to FRAME-4 with three findings of the chair's
+  read; FRAME-4 had merged B9 (2a95ecc4e; 58 of 330: thorp 0, hamlet 8, village 15, town 5, city 12, metropolis 18;
+  lint whole 2 reds: the lighting census re-taken by its door, `tuningRegister`'s two named rows unsigned; 225,000
+  tokens by its record). FORTUNE-1: the owner's page (9edcc112e) and the second column (KEEP 15, section 2); about
+  305,000 by the chair's rule: `prompts/FORTUNE-2.txt` WRITTEN, seated after this push. GOALS-1: both batches of
+  new lines read (section 2). THE CAPTURE HELPER'S FILES (the scratch folder `exp/`, not in the repository): three
+  towns in a browser (Zuuhan, Al-zamin, Hochbrunn: 9.1 to 9.6 seconds each; the first forge on a cold server 30
+  seconds), a village (Stredovo) and a city (Oberholz) by components. `prompts/PAGE-1.txt` WRITTEN, seated after
+  this push from the working line.
