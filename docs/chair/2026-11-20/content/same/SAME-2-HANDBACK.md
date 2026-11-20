@@ -1,6 +1,6 @@
 # SAME-2 HAND-BACK (kept current at every push)
 
-Last written: 2026-11-20 19:01 UTC.
+Last written: 2026-11-20 19:28 UTC.
 
 SEAT: SAME-2 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/SAME-2.txt` (SAME-1.txt is the assignment, renamed). Seated 17:49 UTC beside SAME-1; THE LANE IS YOURS at 36c5214d0 (the chair, 18:52). Branch `lane/same-2-2026-11-20`. Read SAME-1-HANDBACK.md for everything before 18:52 (the standing orders hold).
 
@@ -17,3 +17,5 @@ THE CHAIR, 18:55: (1) Daily Life's pools go through `drawDeclared.js :: filterDe
 RED ON THE MERGED TREE (found by SAME-2): the hideable walker's TOTALITY arm, two goals-lane tables unregistered (`src/data/people/goalSecretRefusals.js :: GOAL_SECRET_REFUSAL_RARE_KEYS`, `:: GOAL_SECRET_REFUSED_CLUSTERS`): builder H's unit 0. THIS LANE IS NOT PUSHED past d737077ad until H's cure is merged.
 
 THE CHAIR, 19:00 (19:01 UTC read): THE VISITOR'S POOL is a ONE-OFF measure, not a standing corpus (the door stays hxd). Run ONCE after the door is merged and RANKED.md stands: the same ranked table on a visitor's 900 (`measure-lit.mjs :: visitorJob` at ce3a4e9f6) beside the hxd table, each slot whose top sentence moves by more than the noise between the pools marked (hxd births every place at a monster frontier on a road: frontier and road lines are overstated there; the visitor column is what the owner is shown). The renderer's plan option (~20 lines) is granted; it changes no check. "SAME-CENSUS <commit>" carries BOTH tables. (Builder D's part 3, by message after part 2.)
+
+H MERGED 30a9fb5c6 (pushed): phase 3 units 0-5 (report `hideable/PHASE3-REPORT.md`). Bank 154 by key, EXISTING_CEILING 250, HAND_CEILING 44; DS-HK-1 proved; DM_BY_CONSTRUCTION arm empty until "DAILY <commit>" (gate and test not yet on any branch); FREE_TEXT_READ false PENDING the chair's word on the word table (sent 19:4x). FOUND: 8 by-key lines false (DESC_VARIANT_SIBLINGS / SERVICE_DESC_SIBLINGS keyed by sentences, "organi[sz]ed"): asked the chair to read sentence keys by the free-text form; asked whether GOAL_FAMILY_LINES POWER::corrupted (12) is a crime fact. ON THE CHAIR'S WORD: builder H (resume) sets the precise forms, banks the free-text reds, removes false by-key rows, lowers the ceiling.
