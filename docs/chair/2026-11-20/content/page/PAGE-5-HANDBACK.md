@@ -1,4 +1,4 @@
-# PAGE-5's hand-back: THE TROUBLE (kept current at every push; last written 2026-11-20 14:36 UTC by `date -u`)
+# PAGE-5's hand-back: THE TROUBLE (kept current at every push; last written 2026-11-20 14:48 UTC by `date -u`)
 
 Read this, then `PAGE-3-HANDBACK.md` (sections 0, 0a, 4b), `briefs/BUILDER-RULES.md`, `briefs/T1.md` (S6),
 `briefs/S7.md` + `briefs/S7-FOLLOWUP.md` (sides). PAGE-5 integrates; builders (the Agent tool) build. PAGE-6 owns the
@@ -160,3 +160,14 @@ const T = {
 const PLAIN = { great_flood: 4 };
 const WORDS = { 'crime_wave:rival_rings': 3, 'guild_conflict:guilds_rule': 3, 'guild_conflict:rival_power': 3, 'guild_conflict:fair': 3, 'resource_scarcity:war_levy': 3, 'external_threat:old_threat': 3, 'external_threat:war': 3, 'legitimacy_crisis:rival_power': 3, 'outside_debt:creditors_sit': 3, 'great_flood:river': 3, 'succession_crisis:old_succession': 3 };
 ```
+
+## 6. Lines batch 1 (crime_wave, guild_conflict): ae06f1618, UNREAD BY PAGE-5 (the chair reads every line)
+
+`lines/CAUSES-crime_wave-guild_conflict.md` (brief `briefs/CAUSE-LINES-1.md`; dispatched 14:37, before the chair's 14:39
+change; PAGE-7 uses it and writes none of its own). crime_wave 28 lines (11 causes x2, rival rings x3, plain 3);
+guild_conflict 24 (6 x2, guilds_rule/rival_power/fair x3, plain 3). The builder's notes for the reader seat: (1) the house
+predicates in `sim.mjs` read `t.institutions`, not the LIVE roster: the reader must test the live roster (a ruined house
+would make a line false; none seen in a 300-town probe); (2) the small-place crime `.replace` is dead (its strings are not
+in the stored sentence: the ruled dead branch); (3) guild_conflict's anchored sentence is guild-against-guild past tense and
+prints exactly where old_guild_war holds; (4) plain lines name no house, so a hidden house may sit behind one;
+(5) trade_center and luxury_quarter say trade passes outside the guild by the chair's ruling, not by a record field.
