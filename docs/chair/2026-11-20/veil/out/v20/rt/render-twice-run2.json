@@ -1,0 +1,170 @@
+{
+ "rows": [
+  "conditions.severity",
+  "conditions.severityBand",
+  "defence.readiness.score",
+  "compound.criminalEffective",
+  "compound.criminalPreStress",
+  "compound.magicInfluence",
+  "compound.militaryEffective",
+  "compound.religionInfluence",
+  "safety.compound.criminalEffective",
+  "safety.compound.criminalPreStress",
+  "safety.compound.economyOutput",
+  "safety.compound.magicInfluence",
+  "safety.compound.militaryEffective",
+  "safety.compound.religionInfluence",
+  "food.storageMonths",
+  "food.storageNote",
+  "income.weight",
+  "economy.situationDesc",
+  "safety.flags.anyActive",
+  "safety.flags.arcaneBlackMarket",
+  "safety.flags.merchantArmy",
+  "safety.flags.religiousFraud",
+  "safety.flags.merchantCriminalBlur",
+  "history.timeline.anchored",
+  "history.timeline.year",
+  "history.event.anchored",
+  "history.legacy",
+  "history.siegeNarrative",
+  "npcs.memberships.veiled",
+  "npcs.stressNote",
+  "power.fingerprint",
+  "power.contestsNiche",
+  "power.rawPower",
+  "power.relation.ratio",
+  "power.relation.direction",
+  "legitimacy.breakdown",
+  "legitimacy.crimMultiplier",
+  "legitimacy.govMultiplier",
+  "legitimacy.flags",
+  "power.factions.legitimacyCrisis",
+  "prose.posture.posture",
+  "prose.posture.prize",
+  "prose.posture.terrain",
+  "prose.state.firstSurvey",
+  "prose.state.publicOrder.field",
+  "prose.state.publicOrder.rung.glance",
+  "prose.incomeWeight.alias",
+  "prose.shadowEconomy.alias",
+  "prose.prosperityHeader.detail",
+  "prose.prosperity.glance",
+  "prose.legitimacyBanner",
+  "prose.legitimacyLens",
+  "prose.stabilityHeader",
+  "prose.successionRisk",
+  "prose.conditionSeverity.glance",
+  "spatial.quarters",
+  "cast.absent",
+  "cast.roles",
+  "cast.stakes"
+ ],
+ "knownDrawn": [
+  "cast.roles",
+  "cast.stakes",
+  "conditions.severity",
+  "defence.readiness.score",
+  "power.relation.direction"
+ ],
+ "towns": [
+  {
+   "town": "town-calm-0",
+   "surface": "gallery",
+   "width": "desktop",
+   "grafted": 117,
+   "unaligned": 105,
+   "differing": 0
+  },
+  {
+   "town": "town-calm-0",
+   "surface": "gallery",
+   "width": "phone",
+   "grafted": 117,
+   "unaligned": 105,
+   "differing": 0
+  },
+  {
+   "town": "town-calm-0",
+   "surface": "link",
+   "width": "desktop",
+   "grafted": 117,
+   "unaligned": 105,
+   "differing": 0
+  },
+  {
+   "town": "town-calm-0",
+   "surface": "link",
+   "width": "phone",
+   "grafted": 117,
+   "unaligned": 105,
+   "differing": 0
+  },
+  {
+   "town": "city-infiltrated-1",
+   "surface": "gallery",
+   "width": "desktop",
+   "grafted": 140,
+   "unaligned": 142,
+   "differing": 0
+  },
+  {
+   "town": "city-infiltrated-1",
+   "surface": "gallery",
+   "width": "phone",
+   "grafted": 140,
+   "unaligned": 142,
+   "differing": 0
+  },
+  {
+   "town": "city-infiltrated-1",
+   "surface": "link",
+   "width": "desktop",
+   "grafted": 140,
+   "unaligned": 142,
+   "differing": 0
+  },
+  {
+   "town": "city-infiltrated-1",
+   "surface": "link",
+   "width": "phone",
+   "grafted": 140,
+   "unaligned": 142,
+   "differing": 0
+  },
+  {
+   "town": "metropolis-calm-2",
+   "surface": "gallery",
+   "width": "desktop",
+   "grafted": 133,
+   "unaligned": 282,
+   "differing": 0
+  },
+  {
+   "town": "metropolis-calm-2",
+   "surface": "gallery",
+   "width": "phone",
+   "grafted": 133,
+   "unaligned": 282,
+   "differing": 0
+  },
+  {
+   "town": "metropolis-calm-2",
+   "surface": "link",
+   "width": "desktop",
+   "grafted": 133,
+   "unaligned": 282,
+   "differing": 0
+  },
+  {
+   "town": "metropolis-calm-2",
+   "surface": "link",
+   "width": "phone",
+   "grafted": 133,
+   "unaligned": 282,
+   "differing": 0
+  }
+ ],
+ "drawnRows": {},
+ "moved": []
+}

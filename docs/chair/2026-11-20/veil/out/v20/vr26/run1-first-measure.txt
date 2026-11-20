@@ -1,0 +1,7 @@
+     × TOTAL: every diffuse row is re-derived here or names what is not served 7ms
+     × MAIN: the rows a visitor re-derives otherwise are exactly the known ones (shrink-only; R3/R6 empty it) 1902ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+AssertionError: expected [ 'tile.prosperity' ] to deeply equal []
+AssertionError: expected [ 'defence.scores.internal', …(12) ] to deeply equal []
+      Tests  2 failed | 2 passed (4)
+exit 1

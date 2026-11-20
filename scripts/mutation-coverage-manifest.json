@@ -1864,6 +1864,14 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/shareRenderTwice.pglite.test.jsx": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/rosterChoiceInversion.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/galleryUnlisted.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"

@@ -65,8 +65,8 @@ WHAT THE READ FOUND FOR THE STAGES (no row is changed here; each is the stage's 
 | 1. First act, measured | DONE (section 2) |
 | 2. Merge R1, read it, its gate | DONE (section 3): all four runs reproduced |
 | 3a. VR25, the import's derivers | BUILT (section 5); two walker rows wait on the chair |
-| 3b. R2's render-twice harness | not started |
-| 3c. VR26's inversion harness | not started |
+| 3b. R2's render-twice harness | BUILT, green 4 of 4 (section 5b); FIVE ROWS CALLED UNDRAWN ARE DRAWN: R2's |
+| 3c. VR26's inversion harness | BUILT, green 4 of 4 (section 5c); SEVEN ROWS INVERT, `safetyLabel` among them: to the chair |
 | 4. "B/C/D <commit>" | waiting on the chair |
 | 5. R2 to R7 | not started |
 | 6. VR17, DOORS | waiting on the chair |
@@ -118,6 +118,56 @@ baseline: zero `any` holes; `seedLoopTotality`: one loop asserting inline), TWO 
 THE SURPRISE SENT (02:0x UTC, before the build): the served `publicLegitimacy.score` gives back the withheld prosperity
 (one contribution class fits the score in 72 of 72 towns, always the stored label's; 9 towns where the hidden house moved
 prosperity told). Proposed: the score, label and colours re-classed under VR19 with prosperity. Awaiting the chair.
+
+## 5b. R2's RENDER-TWICE HARNESS, VR16 (1) (02:30 UTC)
+
+`tests/security/shareRenderTwice.pglite.test.jsx` (helper `tests/security/veilChain.shared.mjs`, shared with 5c): three
+born towns stored with the DEFAULT veil on a pglite chain of every migration, read as anon by the CLIENT'S OWN
+`src/lib/gallery.js :: fetchPublicDossier` (its sanitiser and veil seam; the party link through its unlisted slug), the
+rpc routed to the chain; rendered by `PublicDossierView` (the player view), every group, sub-tab and disclosure, desktop
+and phone; each panel's HTML compared, React's generated ids normalised. A = the served document with every
+withhold-always row of the registry removed (the rows not marked drawn); B = A with each such path's STORED value grafted
+back. ARMS: CONTROL (A twice byte-equal); RED (the safety band removed and grafted: B differs); MAIN (every row but the
+known drawn ones grafted back: byte-equal on every surface, width and town); DRAWN (shrink-only). THE FIRST RUN FOUND
+(`out/v20/rt/run1-first-measure.txt`), each row alone moving a byte on the visitor's page: **`conditions.severity`**
+(Summary/Foundations' chips), **`defence.readiness.score`**, **`power.relation.direction`** (Systems/Power),
+**`cast.stakes`** (the Plot Hooks tab draws the crisis hooks on the public page), **`cast.roles`** (one metropolis).
+They are `KNOWN_DRAWN`: R2 classes each (a) or (b) and strikes it. GREEN 4 of 4 at the second run
+(`out/v20/rt/run2-green.txt`, `render-twice-run2.json`). NOT REACHED (named in the file for R2): the campaign map's
+member dossier; there is no export a non-owner can trigger (VR4 section 2b). The graft aligns arrays by length, else by
+id, name or archetype; the unaligned counts are in the json (a row whose stored array the veil reshaped is grafted only
+where it aligns: R2 should read them before it relies on the MAIN arm for an array row).
+
+## 5c. VR26's INVERSION HARNESS (02:30 UTC)
+
+`tests/security/rosterChoiceInversion.pglite.test.js`: eight born towns, the default veil, Reveal DM off and on, read as
+anon by `get_gallery_dossier`. The visitor's re-derivation over the SERVED document: prosperity and the standing label
+(`servedProsperityOutcomes`; a Subsistence base is not re-derivable, its town set aside), then `generateDefenseProfile`,
+`generateSafetyProfile`'s band, `computePublicLegitimacy`, `composePublicProse`. ARMS: TOTAL (every diffuse row
+re-derived or naming what is not served: food's two rows, the compositions, the conflicts, overcoming, DOORS's three
+tile columns); FIDELITY (on the stored town every deriver reproduces the stored value: 0 unfaithful); RED (a served
+score moved by hand is caught); MAIN (frozen, shrink-only). MEASURED (`out/v20/vr26/inverting-run2.json`): rows a visitor
+re-derives otherwise ONLY where a house is hidden: **`defence.scores.internal`, `economy.prosperity`,
+`economy.prosperityStanding`, `legitimacy.score`, `legitimacy.label`, `legitimacy.colours`, `safety.safetyLabel`** (VR8's
+diffuse band: sent to the chair for a ruling). Six composed prose rows differ even where nothing is hidden (the composer
+reads what the projection does not serve: "cannot be re-derived", R5's by VR12). GREEN 4 of 4 (`run2-green.txt`).
+Both new pglite files took the manifest's `pglite-executed` rationale (VR1's form); the manifest test 10 of 10.
+
+## 5d. HANDED BACK AT THE MARK (02:3x UTC)
+
+THE MARK: `get_session` reads `used_tokens 0` in this container (the field is not reported); by the seat's own count
+it stands near 400,000 of SV8's 450,000, so the seat hands back after this push. Nothing is running. Every commit is
+pushed (the tip: the commit carrying this file). 211's two files untouched (proved at the cut and at the last commit);
+212, its rollback and the twin's rule files NOT OPENED by this seat.
+DONE: items 1, 2, 3a, 3b, 3c. WAITING ON THE CHAIR: (i) the legitimacy score's inversion of prosperity (and now the six
+other inverting rows, `safetyLabel` with them); (ii) the two walker rows of VR25 (`ruinFilterRoster`'s exemption and pin
+116 -> 117; `observedShapeReaders`' "magicExists on config", a measured false finding); (iii) "B/C/D <commit>".
+FOR THE SUCCESSOR, in order: item 4 (merge VEIL-19's final tip on "B/C/D <commit>", the acceptance run must exit 0);
+item 5 R2, which now has its proof machinery: build the withhold-always rows in 212 and the twin; class the five
+KNOWN_DRAWN rows (a)/(b) and strike them; re-class prosperity and overcoming (the chair's 01:20 ruling) and whatever the
+chair rules on the seven inverting rows; the gate's count before and after. The stored figures this seat's files move
+(the lighting census +4 files: R1's walker, the import test, the two pglite tests; the test ratchet) are taken ONCE at
+the merged tree (item 6).
 
 ## 6. How the instruments are re-made
 
