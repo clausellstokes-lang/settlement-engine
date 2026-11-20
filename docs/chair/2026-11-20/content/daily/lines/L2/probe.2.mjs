@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 /**
  * RUN (from the repository root):
- *   node docs/chair/2026-11-20/content/daily/lines/L2/probe.2.mjs > docs/chair/2026-11-20/content/daily/lines/L2/probe.2.out.txt 2>&1
+ *   node docs/chair/2026-11-20/content/daily/lines/L2/probe.2.mjs > docs/chair/2026-11-20/content/daily/lines/L2/probe.2b.out.txt 2>&1
+ * (L2b, the chair's ruling of 18:47: the beat by its event's name, crime wounds fall through, the defence ratings are no threat,
+ * the power part only where the top power clearly leads, the second outsider part by keyed pick.)
  *
  * DAILY-1 · L2 — the probe of the pools in pools.2.mjs over M1's births (150 a size, seeds hxd-<size>-0..149, PAGE-9's THIN
  * recipe, copied from measures/M1/measure.m1.mjs). For each place and slot: the branches the record takes, the ELIGIBLE
@@ -18,7 +20,7 @@ import { FOOD, COMMONER, COMMONER_DM, OUTSIDER, UNSPOKEN, RECENT } from './pools
 const HERE = dirname(fileURLToPath(import.meta.url));
 const L = resolve(HERE, '../../../../../../..');
 const REL = 'docs/chair/2026-11-20/content/daily/lines/L2';
-console.log(`RE-RUN: node ${REL}/probe.2.mjs > ${REL}/probe.2.out.txt 2>&1`);
+console.log(`RE-RUN: node ${REL}/probe.2.mjs > ${REL}/probe.2b.out.txt 2>&1`);
 
 const { generateSettlementPipeline } = await import(`${L}/src/generators/generateSettlementPipeline.js`);
 const { birthConfig, loadGenerationLawPayloads } = await import(`${L}/src/domain/density/densityCreateBoundary.js`);
@@ -41,6 +43,9 @@ const { ACCESS_ONLY } = await import(`${L}/src/domain/facts/liveInstitutionNames
 const { liveInstitutions } = await import(`${L}/src/domain/institutions/institutionRoster.js`);
 const { isVeiledPower } = await import(`${L}/src/domain/people/cardVeil.js`);
 const { pickVariantMixed } = await import(`${L}/src/kernel/proseHash.js`);
+const { leaderLeadOfRecord } = await import(`${L}/src/domain/facts/leaderLead.js`);
+const { EVENT_TYPE_NAMES } = await import(`${L}/src/data/historyData.js`);
+const { VISIBLE_CAPACITY_LENSES } = await import(`${L}/src/domain/capacityModel.js`);
 const { powerNameWithArticle, powerNameAfterArticle, powerPossessive, fillAgreement } = await import(`${L}/src/domain/display/powerSentenceName.js`);
 const { SOURCE_WORDS } = await import(`${L}/src/domain/foodways.js`);
 const { recordBattery, RECORD_BATTERY_CHECKS } = await import(`${L}/src/domain/coherence/recordBattery.js`);
@@ -63,6 +68,7 @@ if (process.env.L2_CACHE) {
 
 // ── the record tests a wording may declare (fact home first; the nearest field where no home answers, named) ──
 const safe = (f, d = undefined) => { try { return f(); } catch { return d; } };
+const liveNames = (rec) => liveInstitutions(rec).map((i) => String(i?.name || '')).filter((n) => n && !ACCESS_ONLY.test(n));
 const srcs = (c) => c.f.foodSources || [];
 const importsGrain = (c) => (safe(() => c.f.imports, []) || []).some((g) => /\bgrain\b/i.test(typeof g === 'string' ? g : String(g?.name ?? g?.good ?? '')));
 const PROSPEROUS = ['prosperous', 'comfortable'], POOR = ['poor', 'struggling'];
@@ -87,6 +93,8 @@ export const NEEDS = {
   noGuard: ['!factsOf(r).guardPresence', (r, c) => !c.f.guardPresence],
   watch: ['defenceOf(r).watch', (r, c) => !!c.d.watch],
   gate: ['defenceOf(r).gate', (r, c) => !!c.d.gate],
+  legitimacyGrave: ['deriveCausalState().bands.public_legitimacy critical or collapsed', (r, c) => ['critical', 'collapsed'].includes(c.causal.bands.public_legitimacy)],
+  smuggling: ['OWNER-ONLY: a live house /smuggl/ (liveInstitutionNames; the crime key criminalStructureKey.js reads the same names) or an income row /smuggl/ (economicState.incomeSources, criminalIncome.js\'s list)', (r, c) => liveNames(r).some((n) => /smuggl/i.test(n)) || (r.economicState?.incomeSources || []).some((i) => /smuggl/i.test(String(i?.source ?? i?.name ?? i?.label ?? '')))],
   healer: ['defenceOf(r).healer || defenceOf(r).hospital', (r, c) => !!(c.d.healer || c.d.hospital)],
   noHealer: ['!(defenceOf(r).healer || defenceOf(r).hospital)', (r, c) => !(c.d.healer || c.d.hospital)],
   gov: ['rulerKindOf(r) !== null (powerStructure.government named)', (r, c) => c.kind !== null],
@@ -118,6 +126,7 @@ function ctxOf(r) {
     chains: deriveAllSupplyChainStates(r), conditions: deriveAllActiveConditions(r), threats: deriveAllThreatProfiles(r),
     capacities: deriveAllCapacities(r), causal: deriveCausalState(r), history: deriveHistoryBeats(r),
     gov: String(r.powerStructure?.government ?? ''), kind: rulerKindOf(r), body: rulingBodyOf(r),
+    lead: leaderLeadOfRecord(r).leadOverSecond, event: String(deriveHistoryBeats(r).recentDisruption?.references?.eventName ?? ''),
   };
 }
 const holds = (x, r, c) => x.needs.every((n) => NEEDS[n][1](r, c));
@@ -125,7 +134,8 @@ const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 function fill(t, c, bare = false) {
   if (bare) return cap(fillAgreement(t, { gov: c.gov, power: c.dom?.name ?? '' }).replace(/\{[^}]*\}/g, 'NAME'));
   const names = { gov: c.gov, power: c.dom?.name ?? '' };
-  let s = fillAgreement(t, names);
+  const ev = c.event.replace(/^the\s+/i, '');
+  let s = fillAgreement(t, names).replace(/\{Event\}/g, `The ${ev}`).replace(/\{event\}/g, `the ${ev}`);
   s = s.replace(/\{Gov\}/g, powerNameWithArticle(c.gov, true)).replace(/\{gov\}/g, powerNameWithArticle(c.gov))
     .replace(/\{power's\}/g, `the ${powerPossessive(powerNameAfterArticle(names.power))}`)
     .replace(/\{Power\}/g, powerNameWithArticle(names.power, true)).replace(/\{power\}/g, powerNameWithArticle(names.power));
@@ -148,6 +158,10 @@ const formOf = (t) => {
     default: return 'any';
   }
 };
+/** L2b (ruling 3): the defence's ORDER and SUPPLY ratings are no threat in any slot */
+const isRating = (t) => t.originSurface === 'defenseProfile' && (t.type === 'unrest' || t.type === 'economic_collapse');
+/** L2b (ruling 1): an event of a crime or corruption kind, by data/historyData.js :: EVENT_TYPE_NAMES */
+const CRIME_EVENT_NAMES = new Set([EVENT_TYPE_NAMES.crime_wave, EVENT_TYPE_NAMES.corruption_scandal]);
 function foodCulture(r, c) {
   const band = c.capacities.capacities.food_production.band;
   const wanting = c.threats.some((t) => t.type === 'famine' || t.type === 'siege');
@@ -169,41 +183,39 @@ function commonerDm(r, c) {
   const parts = branch ? [pick('commoner_resentments_dm', branch, COMMONER_DM[branch], r, c)] : [];
   return { parts, text: parts.map((p) => p.text).join(' ') };
 }
-const LENS_ORDER = ['healing', 'administrative', 'food_production', 'defense', 'magical'];
 function outsider(r, c) {
   const parts = [];
-  if (c.dom) parts.push(pick('outsider_impressions', 'power', OUTSIDER.power, r, c));
-  const open = c.threats.filter((t) => t.visibility === 'open').sort((a, b) => b.severity - a.severity)[0];
-  let tBranch = null;
-  if (open && open.severityBand !== 'low') { tBranch = `threat.${open.type}.${formOf(open)}`; if (OUTSIDER[tBranch]) parts.push(pick('outsider_impressions', tBranch, OUTSIDER[tBranch], r, c)); }
-  const strained = CAPACITY_NAMES.filter((n) => BAD.includes(c.capacities.bands[n]));
-  if (strained.length >= 3) {
-    const lens = LENS_ORDER.find((n) => strained.includes(n) && !(n === 'defense' && tBranch === 'threat.unrest.order'));
-    if (lens) parts.push(pick('outsider_impressions', `services.${lens}`, OUTSIDER[`services.${lens}`], r, c));
-  }
-  if (!parts.length && !c.top && !open) parts.push(pick('outsider_impressions', 'ordinary', OUTSIDER.ordinary, r, c));
+  if (c.dom) parts.push(c.lead === null || c.lead > 6 ? pick('outsider_impressions', 'power', OUTSIDER.power, r, c) : pick('outsider_impressions', 'power.level', OUTSIDER['power.level'], r, c));
+  const open = c.threats.filter((t) => t.visibility === 'open' && !isRating(t)).sort((a, b) => b.severity - a.severity)[0];
+  let real = false;
+  if (open && open.severityBand !== 'low') { const b = `threat.${open.type}.${formOf(open)}`; if (OUTSIDER[b]) { parts.push(pick('outsider_impressions', b, OUTSIDER[b], r, c)); real = true; } }
+  const lenses = VISIBLE_CAPACITY_LENSES.filter((n) => BAD.includes(c.capacities.bands[n])).map((n) => `services.${n}`);
+  const strained9 = CAPACITY_NAMES.filter((n) => BAD.includes(c.capacities.bands[n])).length;
+  const options = real ? (strained9 >= 3 ? lenses : []) : [...lenses, 'ordinary'];
+  const second = pickVariantMixed(options, `${r.name}::dailyLife.outsider_impressions::second`);
+  if (second) parts.push(pick('outsider_impressions', second, OUTSIDER[second], r, c));
   return { parts, text: parts.map((p) => p.text).filter(Boolean).join(' ') };
 }
 function unspoken(r, c) {
   const parts = [];
   const wound = c.history.unresolvedWound;
-  const type = Array.isArray(r.history?.currentTensions) && typeof r.history.currentTensions[0] === 'object' ? r.history.currentTensions[0]?.type : undefined;
-  if (wound && UNSPOKEN[`wound.${type}`]) parts.push(pick('unspoken_topics', `wound.${type}`, UNSPOKEN[`wound.${type}`], r, c));
-  for (const t of c.threats.filter((x) => x.visibility === 'hidden' || x.visibility === 'rumored')) {
-    const b = `hidden.${t.type}`; if (UNSPOKEN[b] && !parts.some((p) => p.branch === b)) parts.push(pick('unspoken_topics', b, UNSPOKEN[b], r, c));
-  }
-  return { parts, text: parts.map((p) => p.text).filter(Boolean).join(' '), woundType: wound ? type ?? '(no type)' : null };
+  const ts = (Array.isArray(r.history?.currentTensions) ? r.history.currentTensions : []).map((t) => (t && typeof t === 'object' ? t.type : undefined));
+  const CRIME_WOUND = ['crime_wave', 'corruption_scandal'];
+  // L2b (ruling 2): a crime wound falls to the next tension the record holds that a pool can say; a non-crime wound stays as it is
+  let type = ts[0];
+  if (wound && CRIME_WOUND.includes(type)) type = ts.slice(1).find((x) => !CRIME_WOUND.includes(x) && UNSPOKEN[`wound.${x}`]);
+  if (wound && type && UNSPOKEN[`wound.${type}`]) parts.push(pick('unspoken_topics', `wound.${type}`, UNSPOKEN[`wound.${type}`], r, c));
+  return { parts, text: parts.map((p) => p.text).filter(Boolean).join(' '), woundType: wound ? ts[0] ?? '(no type)' : null, fell: wound && type !== ts[0] };
 }
 function recent(r, c) {
   const parts = [];
   const beat = c.history.recentDisruption;
-  const beatText = typeof beat?.text === 'string' && beat.text.trim() ? beat.text.trim().replace(/([^.!?])$/, '$1.') : '';
-  if (beatText) parts.push({ branch: 'beat', n: 1, w: null, text: cap(beatText) });
+  if (beat && c.event && !CRIME_EVENT_NAMES.has(c.event)) parts.push(pick('recent_changes', 'beat', RECENT.beat, r, c));
   const fresh = c.conditions.filter((x) => (x.duration?.elapsedTicks ?? 0) < 2);
   for (const k of fresh.slice(0, 2)) { const b = `condition.${k.archetype}`; if (RECENT[b] && !parts.some((p) => p.branch === b)) parts.push(pick('recent_changes', b, RECENT[b], r, c)); }
-  const acute = c.threats.filter((t) => t.visibility === 'open' && (t.currentStage === 'imminent' || t.currentStage === 'realized')).sort((a, b) => b.severity - a.severity);
+  const acute = c.threats.filter((t) => t.visibility === 'open' && !isRating(t) && (t.currentStage === 'imminent' || t.currentStage === 'realized')).sort((a, b) => b.severity - a.severity);
   for (const t of acute.slice(0, 2)) { const b = `threat.${t.type}.${formOf(t)}.${t.currentStage}`; if (RECENT[b] && !parts.some((p) => p.branch === b)) parts.push(pick('recent_changes', b, RECENT[b], r, c)); }
-  const anySource = !!beat || fresh.length > 0 || c.threats.some((t) => t.currentStage === 'imminent' || t.currentStage === 'realized');
+  const anySource = !!beat || fresh.length > 0 || c.threats.some((t) => !isRating(t) && (t.currentStage === 'imminent' || t.currentStage === 'realized'));
   if (!parts.length && !anySource) parts.push(pick('recent_changes', 'calm', RECENT.calm, r, c));
   return { parts, text: parts.map((p) => p.text).filter(Boolean).join(' ') };
 }
@@ -248,7 +260,6 @@ for (const k of SLOTKEYS) for (const s of SIZES) console.log(`  ${k} ${s}: top s
 console.log(`\n════ 2. BRANCHES — reach % · need = ceil(reach/0.15) · MIN eligible over the places taking it (SHORT where min < need)`);
 const branchStats = new Map();
 for (const x of rows) for (const k of SLOTKEYS) for (const p of x.out[k].parts) {
-  if (p.branch === 'beat') continue;
   const key = `${k}:${p.branch}`; const e = branchStats.get(key) || {}; (e[x.size] ||= []).push(p.n); branchStats.set(key, e);
 }
 let short = 0, zero = 0;
@@ -267,7 +278,6 @@ for (const k of SLOTKEYS) console.log(line(`${k}: min (eligible - need) over bra
 
 // ── 3. FALSE LINES ──
 console.log(`\n════ 3. FALSE LINES — places by size printing a clause the record test says is false (must be 0)`);
-const liveNames = (rec) => liveInstitutions(rec).map((i) => String(i?.name || '')).filter((n) => n && !ACCESS_ONLY.test(n));
 const anyLive = (rec, re) => liveNames(rec).some((n) => re.test(n));
 const quarters = (rec) => (Array.isArray(rec?.spatialLayout?.quarters) ? rec.spatialLayout.quarters : []);
 const landmarks = (rec) => quarters(rec).flatMap((q) => (Array.isArray(q?.landmarks) ? q.landmarks.map(String) : []));
@@ -321,7 +331,6 @@ const WORDS = [
 const CRIME = /\bcrim|\bsmuggl|\bcorrupt|\bthie(?:f|ves)\b|\bbrib|\bblack market|\bgraft\b|\bvigilant/i;
 const RULE7 = /\b(?:spring|summer|autumn|winter|harvest|rain|snow|frost|storm|drought|years?|months?|weeks?|seasons?|ago)\b|\d/i;
 const LABELS = /civic stability at risk|economic fragility|frontier monster pressure|region overrun with monsters|referenced as|has come to a head|obvious unspoken weight|new shape of things|"the wound"/i;
-const TODAY_KEPT_RULE7 = new Set([FOOD.strained[0].t, RECENT.calm[0].t]); // today's index-0 texts kept: "each month", "seasons"
 const fl = new Map(); const flEx = new Map();
 const hit = (label, x, ex) => { const e = fl.get(label) || {}; e[x.size] = (e[x.size] || 0) + 1; fl.set(label, e); if (!flEx.has(label)) flEx.set(label, `${x.seed}: ${ex.slice(0, 120)}`); };
 for (const x of rows) {
@@ -333,10 +342,10 @@ for (const x of rows) {
     for (const p of out.parts) {
       if (p.w && !holds(p.w, r, c)) mark(`${k}: a DECLARED need false (construction)`, p.text);
       for (const [clause, f] of M1_CLAUSES) if (p.text.toLowerCase().includes(clause.toLowerCase()) && f(r)) mark(`${k}: M1 clause "${clause}"`, p.text);
-      if (p.branch === 'beat') { if (CRIME.test(p.text)) mark(`${k}: the beat's own text names crime (record text)`, p.text); if (RULE7.test(p.text)) mark(`${k}: the beat's own text carries a date or age (record text, rule 7)`, p.text); continue; }
       for (const [label, re, test, exempt] of WORDS) if (re.test(p.bare) && !(exempt && p.w?.needs.includes(exempt)) && !test(r, c)) mark(`${k}: word ${label}`, p.text);
-      if (CRIME.test(p.text) && k !== 'commoner_resentments_dm') mark(`${k}: a crime word (rule 6)`, p.text);
-      if (RULE7.test(p.text) && !TODAY_KEPT_RULE7.has(p.w?.t)) mark(`${k}: a rule-7 word`, p.text);
+      if (CRIME.test(p.bare) && k !== 'commoner_resentments_dm') mark(`${k}: a crime word (rule 6)`, p.text);
+      if (RULE7.test(p.bare)) mark(`${k}: a rule-7 word`, p.text);
+      if (RULE7.test(p.text) && !RULE7.test(p.bare)) mark(`${k}: a rule-7 word inside a record name (record text, e.g. an event's name)`, p.text);
       if (LABELS.test(p.text)) mark(`${k}: a machine label (rule 5)`, p.text);
     }
     const text = out.text;
@@ -359,7 +368,7 @@ console.log(`\n════ 4. WORDINGS: count, and any outside 8..30 words when
 const allPools = { food_culture: FOOD, commoner_resentments: COMMONER, commoner_resentments_dm: COMMONER_DM, outsider_impressions: OUTSIDER, unspoken_topics: UNSPOKEN, recent_changes: RECENT };
 for (const [k, pools] of Object.entries(allPools)) console.log(`  ${k}: ${Object.keys(pools).length} branches, ${Object.values(pools).reduce((n, p) => n + p.length, 0)} wordings`);
 const wc = new Map();
-for (const x of rows) for (const k of SLOTKEYS) for (const p of x.out[k].parts) if (p.branch !== 'beat' && p.text) { const n = p.text.split(/\s+/).length; if (n < 8 || n > 30) wc.set(p.text, n); }
+for (const x of rows) for (const k of SLOTKEYS) for (const p of x.out[k].parts) if (p.text) { const n = p.text.split(/\s+/).length; if (n < 8 || n > 30) wc.set(p.text, n); }
 console.log(`  printed parts outside 8..30 words: ${wc.size}${wc.size ? '\n    ' + [...wc].map(([t, n]) => `${n}: ${t}`).join('\n    ') : ''}`);
 const never = [];
 const used = new Set(rows.flatMap((x) => SLOTKEYS.flatMap((k) => x.out[k].parts.map((p) => p.w?.t)).filter(Boolean)));
@@ -371,25 +380,26 @@ console.log(`\n════ 5. FEEDS (share of ${N}, %)`);
 console.log(HDR);
 const R = (label, f) => console.log(line(label, (s) => pct(bySize(s).filter(f).length)));
 R('unspoken: a wound held (deriveHistoryBeats.unresolvedWound)', (x) => !!x.c.history.unresolvedWound);
-R('unspoken: the wound is crime_wave or corruption_scandal (EMPTY by rule 6)', (x) => ['crime_wave', 'corruption_scandal'].includes(x.out.unspoken_topics.woundType));
-R('unspoken: ALT EMPTY if a crime wound fell to the next sayable tension', (x) => { const ts = (x.rec.history?.currentTensions || []).filter((t) => t && typeof t === 'object'); return !ts.some((t) => UNSPOKEN[`wound.${t.type}`]); });
+R('unspoken: the wound is crime_wave or corruption_scandal', (x) => ['crime_wave', 'corruption_scandal'].includes(x.out.unspoken_topics.woundType));
+R('unspoken: a crime wound FELL to the next sayable tension (L2b)', (x) => !!x.out.unspoken_topics.fell && !!x.out.unspoken_topics.text);
+R('unspoken: EMPTY (a crime wound with no sayable tension after it, or no pool)', (x) => !x.out.unspoken_topics.text);
 R('commoner: legitimacy strained+ / food strained+ / uprising', (x) => x.out.commoner_resentments.parts.some((p) => p.branch === 'legitimacy'));
 R('  food strained+', (x) => x.out.commoner_resentments.parts.some((p) => p.branch === 'food'));
 R('  uprising (factsOf.uprising)', (x) => x.out.commoner_resentments.parts.some((p) => p.branch === 'uprising'));
 R('commoner_dm (OWNER-ONLY): criminal_opportunity >= 70 / >= 55', (x) => x.out.commoner_resentments_dm.parts.some((p) => p.branch === 'crime70'));
 R('  >= 55 (and < 70)', (x) => x.out.commoner_resentments_dm.parts.some((p) => p.branch === 'crime55'));
-R('outsider: power named / power veiled (no D) / threat said / service said', (x) => x.out.outsider_impressions.parts.some((p) => p.branch === 'power'));
+R('outsider: power named (clearly leads)', (x) => x.out.outsider_impressions.parts.some((p) => p.branch === 'power'));
 R('  dominant power veiled or criminal: not named', (x) => x.c.domVeiled);
+R('  powers level (leaderLeadOfRecord leadOverSecond <= 6): power.level said', (x) => x.out.outsider_impressions.parts.some((p) => p.branch === 'power.level'));
+R('  ordinary said (keyed pick, no real threat)', (x) => x.out.outsider_impressions.parts.some((p) => p.branch === 'ordinary'));
 R('  threat said', (x) => x.out.outsider_impressions.parts.some((p) => p.branch.startsWith('threat.')));
-R('  service said (a VISIBLE lens among >=3 strained)', (x) => x.out.outsider_impressions.parts.some((p) => p.branch.startsWith('services.')));
-R('  >=3 strained but no visible lens to say (internal-only: nothing said)', (x) => { const st = CAPACITY_NAMES.filter((n) => BAD.includes(x.c.capacities.bands[n])); return st.length >= 3 && !x.out.outsider_impressions.parts.some((p) => p.branch.startsWith('services.')); });
+R('  service said (keyed pick among strained VISIBLE lenses)', (x) => x.out.outsider_impressions.parts.some((p) => p.branch.startsWith('services.')));
 R('recent: the beat / a new condition said / an acute threat said / calm', (x) => x.out.recent_changes.parts.some((p) => p.branch === 'beat'));
 R('  new condition said', (x) => x.out.recent_changes.parts.some((p) => p.branch.startsWith('condition.')));
 R('  acute threat said', (x) => x.out.recent_changes.parts.some((p) => p.branch.startsWith('threat.')));
 R('  calm pool', (x) => x.out.recent_changes.parts.some((p) => p.branch === 'calm'));
 R('  EMPTY (a source held, none sayable: crime condition etc.)', (x) => !x.out.recent_changes.text);
-R('  the beat text carries "(N years ago)" (record text, rule 7)', (x) => /years? ago/.test(x.out.recent_changes.parts.find((p) => p.branch === 'beat')?.text || ''));
-R('  the beat text opens "As of the founding survey" (record text)', (x) => /^As of the founding survey/.test(x.out.recent_changes.parts.find((p) => p.branch === 'beat')?.text || ''));
+R('  a beat held but NOT said (its event a crime or corruption kind)', (x) => !!x.c.history.recentDisruption && !x.out.recent_changes.parts.some((p) => p.branch === 'beat'));
 R('food: a food source listed (factsOf.foodSources)', (x) => srcs(x.c).length > 0);
 
 // ── 6. EXAMPLES (first two places of each size) ──

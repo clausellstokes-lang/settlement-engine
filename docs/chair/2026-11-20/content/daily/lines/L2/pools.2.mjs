@@ -35,7 +35,7 @@ export const FOOD = Object.freeze({
     w('The place grows more than it eats, and it shows in every household.', ['growsMore']),
     w('Fish is eaten fresh most days, and there is plenty of it.', ['fish']),
     w('There is fresh bread every day, and plenty of it to go round.', ['grain']),
-    w('Milk, cheese and meat are common fare, and there is no shortage of any of them.', ['livestock']),
+    w('Meat is common fare here, and there is no shortage of it.', ['livestock']),
     w('The hunters bring in more than enough, and game is often in the pot.', ['game']),
     w('Flour from the mill is never short, and nobody goes without bread.', ['mill']),
     w('The place eats well and can afford to; even an ordinary supper has something extra in it.', ['prosperous']),
@@ -53,7 +53,7 @@ export const FOOD = Object.freeze({
     w('Fish, fresh or dried, is the mainstay of most meals.', ['fish']),
     w('Bread is the mainstay of the table, with whatever else the household can add to it.', ['grain']),
     w('What the hunters bring home goes into the common pot, and it stretches a long way.', ['game']),
-    w('Milk and cheese from the herds fill out plain meals.', ['livestock']),
+    w('What the herds give fills out plain meals.', ['livestock']),
     w('The grain is bought in rather than grown here, so bread is never wasted.', ['grainImport']),
     w('Flour comes from the mill, and the bread made from it is the backbone of most suppers.', ['mill']),
     w('The better-off eat well, and the rest eat plainly but enough.', ['notSmall']),
@@ -61,7 +61,6 @@ export const FOOD = Object.freeze({
     w('Money is short, so meals are plain, but nobody goes without.', ['poor']),
   ],
   strained: [
-    w('Loaves shrink each month; householders stretch what they can.', ['grainHeld']),
     w('Food is tighter than it should be, and households stretch what they have.'),
     w('There is less to eat than people would like, and nothing is thrown away.'),
     w('Portions are small, and the stew is often thinner than anyone would like.'),
@@ -75,7 +74,7 @@ export const FOOD = Object.freeze({
     w('Families here have little money, and they eat less than they would like.', ['poor']),
   ],
   critical: [
-    w('Rations are tight; the poor eat watered stew and the well-off hoard quietly.'),
+    w('Rations are tight, and the poor eat watered stew.'),
     w('Food is short, and many households go to bed hungry.'),
     w('Every meal is measured out, and the poorest eat least.'),
     w('There is not enough food to go round, and everyone knows it.'),
@@ -100,7 +99,7 @@ export const COMMONER = Object.freeze({
     w('Many here feel that {gov} no longer listens to people like them.', ['gov']),
     w('Ordinary people grumble that {gov} {gov|looks|look} after {gov|its|their} own first.', ['gov']),
     w('People bring their complaints to {gov} and expect little to come of them.', ['gov']),
-    w('There is open doubt here about whether {gov} {gov|has|have} any right to decide for everyone.', ['gov']),
+    w('There is open doubt here about whether {gov} {gov|has|have} any right to decide for everyone.', ['gov', 'legitimacyGrave']),
     w('People do as {gov} {gov|says|say}, but few of them think well of {gov|it|them}.', ['gov']),
     w('Few here would say that {gov} {gov|speaks|speak} for them.', ['gov']),
     w('Talk among neighbours turns, sooner or later, to what {gov} {gov|has|have} got wrong lately.', ['gov']),
@@ -145,18 +144,20 @@ export const COMMONER_DM = Object.freeze({
     w('People grumble that honest folk are pressed hard while lawbreakers with money walk free.'),
   ],
   crime55: [
-    w('Commoners resent the smugglers who pay no tax while honest carts queue.', ['gate', 'route'], ['gate']),
-    w('Commoners resent the smugglers who slip goods past while honest traders pay their dues.', ['market'], ['market']),
-    w('People grumble that smuggled goods undercut honest sellers at the market.', ['market'], ['market']),
-    w('Honest carriers resent waiting their turn while smugglers come and go as they please.', ['route']),
-    w('Commoners grumble that smugglers do well here while honest folk do not.'),
-    w('People resent that smugglers seem to prosper while those who keep the rules go without.'),
+    w('Commoners resent the smugglers who pay no tax while honest carts queue.', ['smuggling', 'gate', 'route'], ['gate', 'a smuggling house where the record names one']),
+    w('Commoners resent the smugglers who slip goods past while honest traders pay their dues.', ['smuggling', 'market'], ['market', 'a smuggling house where the record names one']),
+    w('People grumble that smuggled goods undercut honest sellers at the market.', ['smuggling', 'market'], ['market', 'a smuggling house where the record names one']),
+    w('Honest carriers resent waiting their turn while smugglers come and go as they please.', ['smuggling', 'route'], ['a smuggling house where the record names one']),
+    w('People grumble that those who break the rules do better here than those who keep them.'),
+    w('Honest folk say that crime pays better here than work.'),
+    w('People resent how little is done about wrongdoing that everyone knows of.'),
   ],
 });
 
 // ───────────────────────────── outsider_impressions ─────────────────────────────
 export const OUTSIDER = Object.freeze({
-  // the dominant power (highest power of deriveAllFactionProfiles), never a veiled one (cardVeil.js :: isVeiledPower)
+  // the dominant power (highest power of deriveAllFactionProfiles), never a veiled one (cardVeil.js :: isVeiledPower), only where it
+  // clearly leads (L2b, ruling 4a: power.level below)
   power: [
     w("Outsiders notice {power's} mark is on every door that matters."),
     w('A visitor soon learns that little happens here without {power}.'),
@@ -171,21 +172,13 @@ export const OUTSIDER = Object.freeze({
     w('The faith is everywhere here, and {power} {power|is|are} plainly its voice.', ['power.religious', 'sacred'], ['sacred house']),
     w('Guards answering to {power} are among the first faces a visitor meets.', ['power.military', 'guard'], ['guard force']),
   ],
-  // the most severe OPEN threat, band above low, said as an outsider sees it; one pool per kind (and form)
-  'threat.unrest.order': [ // defenseProfile.scores.internal < 50: the defence's ORDER rating is low (label "Civic stability at risk")
-    w('There is little here to keep order, and a visitor can see it.'),
-    w('Keeping the peace here rests on goodwill more than on any force.'),
-    w('Order here is kept lightly, and a stranger notices how little stands behind it.'),
-    w('Order here depends on people keeping it among themselves.'),
-    w('The means of keeping order here are slight, and a visitor sees it soon enough.'),
-    w('A visitor gets the sense that order here is kept by habit rather than by force.'),
-    w('A visitor looks in vain for a watchman; there is none.', ['noGuard']),
-    w('A visitor sees no one whose task it is to keep order.', ['noGuard']),
-    w('Nobody here is paid to keep the peace, and it shows.', ['noGuard']),
-    w('The watch is small for the ground it has to cover.', ['watch'], ['watch']),
-    w('Few of the watch are about, and a visitor wonders how they keep order with so few.', ['watch'], ['watch']),
-    w('Those who keep order here are spread thin, and a visitor can tell.', ['guard'], ['guard force']),
+  // L2b (the chair's ruling 4a): where the top power does not clearly lead (leaderLead.js :: leaderLeadOfRecord(r).leadOverSecond <= 6,
+  // the threshold factionStanding.js holds before "No one clearly leads here")
+  'power.level': [
+    w('Ask who decides things here, and a visitor hears more than one name.'),
+    w('No single name comes up first when a visitor asks who holds sway here.'),
   ],
+  // the most severe OPEN threat that is not a defence RATING (L2b, ruling 3), band above low, said as an outsider sees it; one pool per kind (and form)
   'threat.unrest.void': [ // a Leadership void condition (dominant_npc_removed)
     w('The place has lost a leading figure, and visitors hear a good deal about who comes next.'),
     w('With a leading figure gone, a visitor finds people unsure whose word counts now.'),
@@ -193,12 +186,6 @@ export const OUTSIDER = Object.freeze({
   'threat.unrest.stressor': [
     w('The place is unsettled, and a visitor feels it in the way people talk.'),
     w('Tempers are short here, and strangers are watched with some care.'),
-  ],
-  'threat.economic_collapse.supply': [ // defenseProfile.scores.economic < 40: the defence's SUPPLY rating is low (label "Economic fragility")
-    w('Little seems to be kept in store here, and a visitor notices how thin the stocks are.'),
-    w('The place lives close to the bone, with not much laid by.'),
-    w('A visitor can see there is little put by against a bad turn.'),
-    w('Reserves here are thin, and people do not hide it.'),
   ],
   'threat.economic_collapse.route': [ // a trade_route_cut condition
     w('A trade route the place relies on has been cut, and visitors hear about it at once.'),
@@ -257,8 +244,9 @@ export const OUTSIDER = Object.freeze({
     w('People here are uneasy about magic, and a visitor notices how they speak of it.', ['magic']),
     w('Something is wrong with the magic here, and people would rather a visitor did not ask.', ['magic']),
   ],
-  // three or more capacities strained (today's trigger); said of the first strained VISIBLE lens
-  // (capacityModel.js :: VISIBLE_CAPACITY_LENSES), in the order healing, administrative, food_production, defense, magical
+  // L2b (the chair's ruling 4b): a strained VISIBLE lens (capacityModel.js :: VISIBLE_CAPACITY_LENSES) chosen BY THE KEYED PICK
+  // ('<name>::dailyLife.outsider_impressions::second'): at a place with a real threat among its strained visible lenses where three or
+  // more of the nine are strained (today's trigger); at a place with no real threat among its strained visible lenses AND `ordinary`
   'services.healing': [
     w('Anyone who falls ill here waits a long while to be seen.', ['healer'], ['healer or hospital']),
     w('The healers have more sick to see than they can manage.', ['healer'], ['healer or hospital']),
@@ -289,12 +277,25 @@ export const OUTSIDER = Object.freeze({
     w('The watch is stretched thin, and a visitor can tell.', ['watch'], ['watch']),
     w('Nobody stands guard here, and a visitor walks in unchallenged.', ['noGuard']),
     w('Its defences are thin, and a visitor sees how little stands ready.'),
+    // L2b (the chair's ruling 3): the ORDER lines, folded in from the retired threat branch, said only when the defence lens is strained
+    w('There is little here to keep order, and a visitor can see it.'),
+    w('Keeping the peace here rests on goodwill more than on any force.'),
+    w('Order here is kept lightly, and a stranger notices how little stands behind it.'),
+    w('Order here depends on people keeping it among themselves.'),
+    w('The means of keeping order here are slight, and a visitor sees it soon enough.'),
+    w('A visitor gets the sense that order here is kept by habit rather than by force.'),
+    w('A visitor looks in vain for a watchman; there is none.', ['noGuard']),
+    w('A visitor sees no one whose task it is to keep order.', ['noGuard']),
+    w('Nobody here is paid to keep the peace, and it shows.', ['noGuard']),
+    w('The watch is small for the ground it has to cover.', ['watch'], ['watch']),
+    w('Few of the watch are about, and a visitor wonders how they keep order with so few.', ['watch'], ['watch']),
+    w('Those who keep order here are spread thin, and a visitor can tell.', ['guard'], ['guard force']),
   ],
   'services.magical': [
     w('Those who work magic here have more asked of them than they can give.', ['magic']),
     w('Magical help is hard to come by here, however much it is wanted.', ['magic']),
   ],
-  // no power, no threat, no strained lens said (never taken in M1)
+  // L2b (ruling 4b): one of the keyed options of the second part at a place with no real threat
   ordinary: [
     w("The settlement reads to outsiders as ordinary. Quiet streets, predictable bells, faces that don't yet know yours.", ['notSmall', 'sacred'], ['sacred house']),
     w('Outsiders find the place ordinary: quiet, unremarkable, and in no hurry.'),
@@ -447,16 +448,10 @@ export const UNSPOKEN = Object.freeze({
     w('People here do not talk about the wild magic, and they do not like being asked.'),
     w("Those touched by the magic are not discussed in their hearing, or in a stranger's."),
   ],
-  // a hidden or rumoured threat (today's first source): only arcane instability is said; corruption, cult and the
-  // unclassified kind have no wording (rule 6; no plain words)
-  'hidden.arcane_instability': [
-    w('Talk of magic going wrong is kept low, and never in front of strangers.', ['magic']),
-    w('People here do not speak of the trouble with magic, whatever they suspect.', ['magic']),
-  ],
 });
 
 // ───────────────────────────── recent_changes ─────────────────────────────
-// (1) the recent-disruption beat's own text, verbatim; (2) a condition new this turn (elapsedTicks < 2), one pool per
+// (1) the recent-disruption beat BY ITS EVENT'S NAME (L2b; was its own text, verbatim); (2) a condition new this turn (elapsedTicks < 2), one pool per
 // archetype of CONDITION_ARCHETYPE_TEMPLATES (corruption_exposed and regional_criminal_pressure have NO pool: rule 6);
 // (3) an acute OPEN threat, one pool per kind, form and stage (imminent, realized); (4) the calm pool.
 export const RECENT = Object.freeze({
@@ -511,7 +506,7 @@ export const RECENT = Object.freeze({
     w('Something has gone badly wrong here, and the whole place is caught up in it.'),
   ],
   'condition.magical_instability': [
-    w('Magic here has started to misbehave: surging wild, failing, or falling silent.'),
+    w('Magic here has started to misbehave, and nobody trusts it to work as it should.'),
     w('Magic in the place has begun to behave strangely, and nobody is sure why.'),
   ],
   'condition.trade_route_cut': [
@@ -648,30 +643,6 @@ export const RECENT = Object.freeze({
     w('Times are good, and people have the leisure to make and enjoy fine things.'),
   ],
   // acute threats (currentStage imminent or realized), open only
-  'threat.unrest.order.imminent': [
-    w('Keeping order now rests on too few shoulders, and people are aware of it.'),
-    w('There is little now to keep a quarrel from turning into something worse.'),
-    w('Order is holding, but only just, and there is little to hold it with.'),
-    w('Those in charge have few means of keeping order, and everyone knows it.'),
-    w('The peace here is fragile, and it would not take much to break it.'),
-    w('Order here now hangs on people keeping their tempers.'),
-    w('There is not much to keep the peace with, and people know it.'),
-    w('Little stands ready to keep order if a quarrel turns ugly.'),
-    w('Keeping the peace has come to depend on goodwill alone.', ['noGuard']),
-    w('People are keeping the peace among themselves, with nobody else to do it.', ['noGuard']),
-    w('The watch is too few for what is asked of it, and order is fragile.', ['watch'], ['watch']),
-    w('Keeping order has become hard work for the few who do it.', ['guard'], ['guard force']),
-  ],
-  'threat.unrest.order.realized': [
-    w('Order has frayed: there is next to nothing here to keep the peace.'),
-    w('Order now depends on each household minding its own.'),
-    w('Keeping order is beyond what the place can manage at present.'),
-    w('Order has worn thin, and nobody is placed to mend it.'),
-    w('Quarrels are settled, when they are settled at all, with nobody to stand between.'),
-    w('Keeping the peace has fallen to the households themselves.', ['noGuard']),
-    w('There is no one to keep order here but the people themselves.', ['noGuard']),
-    w('The watch can no longer keep order on its own.', ['watch'], ['watch']),
-  ],
   'threat.unrest.void.imminent': [
     w('With a leading figure gone, order is under strain.'),
     w('The loss of a leading figure has left a gap nobody has filled, and it shows.'),
@@ -687,17 +658,6 @@ export const RECENT = Object.freeze({
   'threat.unrest.stressor.realized': [
     w('Unrest has broken out, and it has not yet died down.'),
     w('The place is in uproar, and those in charge are struggling to calm it.'),
-  ],
-  'threat.economic_collapse.supply.imminent': [
-    w('There is little laid by, and a bad turn would be felt at once.'),
-    w('The place lives from hand to mouth, with nothing much put aside.'),
-    w('Little is held in reserve, and people know how thin the margin is.'),
-    w('The place has few reserves to fall back on if trouble comes.'),
-  ],
-  'threat.economic_collapse.supply.realized': [
-    w('The place has next to nothing in reserve, and every household feels it.'),
-    w('There is nothing laid by; the place lives from one day to the next.'),
-    w('Reserves are all but gone, and nobody can say how the place would weather a blow.'),
   ],
   'threat.economic_collapse.route.imminent': [
     w('Trade is close to breaking down, and money is getting scarce.'),
@@ -791,9 +751,21 @@ export const RECENT = Object.freeze({
     w('Magic in the place has gone badly wrong.', ['magic']),
     w('The magic here has broken loose, and nobody knows how to settle it.', ['magic']),
   ],
+  // L2b (the chair's ruling 1): the recent-disruption beat said BY ITS EVENT'S NAME (beat.references.eventName, with its article: "the
+  // Siege"), no age, no "founding survey"; an event of a crime or corruption kind (data/historyData.js :: EVENT_TYPE_NAMES: "The Crime
+  // Wave", "The Scandal") is not said
+  beat: [
+    w('The place still lives with what {event} left behind.'),
+    w('People here still talk of {event}, and of what it changed.'),
+    w('What {event} left behind is still part of daily life here.'),
+    w('{Event} still shapes how people here go about things.'),
+    w('Talk here still comes back, sooner or later, to {event}.'),
+    w('Much of how the place works now goes back to {event}.'),
+    w('The mark {event} left on the place has not faded.'),
+    w('Ask how things came to be as they are here, and {event} soon comes up.'),
+  ],
   // nothing recent, nothing new, nothing acute (the fallback)
   calm: [
-    w('The last few seasons have run their usual course. No notable shifts in the rhythm of the place.'),
     w('Nothing much has changed here lately; the days go on as they always have.'),
     w('Life goes on as usual, and nobody can point to anything new.'),
     w('It has been a quiet stretch, with nothing out of the ordinary to report.'),
