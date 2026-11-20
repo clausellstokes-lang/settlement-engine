@@ -32,7 +32,7 @@ import { join } from 'node:path';
 import { describe, expect, it, afterEach } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
-import { composeTonightSheet, sideReadOf, TONIGHT_COPY } from '../../../src/domain/summary/tonightSheet.js';
+import { composeTonightSheet, seatLineOf, sideReadOf, TONIGHT_COPY } from '../../../src/domain/summary/tonightSheet.js';
 import { FRAME_REASONS, FRAME_TIE_GLOSS } from '../../../src/domain/tension/troubleCast.js';
 import { powerNameInProse } from '../../../src/domain/display/governanceAccount.js';
 import { LAMP_ACCENTS } from '../../../src/design/organic/lampTones.js';
@@ -51,6 +51,8 @@ const FRAME_COPY = Object.freeze({
   nobody: 'No one here is named for it.',
   wants: 'Wants to',
   wantsSame: 'Wants the same as',
+  // FRAME-7 · F5R: the label of the framed sheet's seat line (`seatLineOf`), the calm sheet's own seat label
+  seat: 'Holds the seat',
 });
 const PINNED_REASONS = Object.freeze({
   seat: 'because {they} [holds|hold] the seat',
@@ -234,6 +236,13 @@ function classify(seed, s) {
       else record('a secret or temperament', r.wants);
     }
   }
+  // FRAME-7 · F5R: the seat line, where the sheet carries one: the label, then the record's own name and office
+  if (sheet.seat) {
+    const line = seatLineOf(sheet.seat);
+    if (!line.startsWith(`${FRAME_COPY.seat}: `)) failures.push(`${seed}: the seat line "${line}" opens on no closed-set label`);
+    record('the seat\'s holder', sheet.seat.name);
+    if (sheet.seat.role) record('the seat\'s office', sheet.seat.role);
+  }
   return { failures, reasonsSeen, sideKinds: frame.sides.map((d) => d.kind) };
 }
 
@@ -251,7 +260,7 @@ describe('CF9 (a): the frame\'s own words are exactly the closed set', () => {
     const cast = proseLiterals(read('src/domain/tension/troubleCast.js')).filter((lit) => !tables.has(lit));
     expect(cast, 'troubleCast.js: a prose literal outside FRAME_REASONS / FRAME_TIE_GLOSS').toEqual([]);
     const sheetSrc = read('src/domain/summary/tonightSheet.js');
-    const frameFns = ['frameOf', 'troubleNameOf', 'sideReadOf', 'framePeopleOf', 'frameHooksOf'];
+    const frameFns = ['frameOf', 'troubleNameOf', 'sideReadOf', 'framePeopleOf', 'frameHooksOf', 'frameSeatOf', 'seatLineOf'];
     const sheet = frameFns.flatMap((name) => proseLiterals(functionSource(sheetSrc, name)));
     expect(sheet, 'tonightSheet.js: a prose literal in the frame\'s code path').toEqual([]);
     // the scan is live: it finds every word of the two tables where it is written

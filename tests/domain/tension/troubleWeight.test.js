@@ -217,7 +217,9 @@ const HALL_AND_CRIME_WAVE = Object.freeze({
   'frame-calm-city-49': 'Merchant oligarchy',
   'frame-calm-metropolis-51': 'Ducal Governorship',
 });
-const ALREADY_FRAMED_W2 = Object.freeze({ seed: 'frame-calm-city-14', hall: 'Merchant oligarchy', pin: 'd9c0870f07fe7c2a' });
+// FRAME-7 · F5R (the seat's holder is a printed line on every framed sheet) re-recorded city-14's pin: d9c0870f07fe7c2a ->
+// e86b7ab4dfdd0bf8, its sheet gaining the `seat` field (Saoirse O'Meara, First Magnate, on no side of the crime wave)
+const ALREADY_FRAMED_W2 = Object.freeze({ seed: 'frame-calm-city-14', hall: 'Merchant oligarchy', pin: 'e86b7ab4dfdd0bf8' });
 
 describe('W4: a hall in criminal hands with a live crime wave opens the owner\'s sheet on that crime wave (CF12)', () => {
   const crimeWaveAt = (s) => s.history.currentTensions.findIndex((t) => t.type === 'crime_wave');
@@ -255,7 +257,7 @@ describe('W4: a hall in criminal hands with a live crime wave opens the owner\'s
     expectNoSeedFailures(failures, 'a calm town with a taken hall and a crime wave opens on the crime wave for the owner');
   }, 300000);
 
-  it(`${ALREADY_FRAMED_W2.seed}: framed by the same crime wave on W2, which outranks W4: it keeps its sheet byte for byte`, () => {
+  it(`${ALREADY_FRAMED_W2.seed}: framed by the same crime wave on W2, which outranks W4: its sheet is its pin (moved by FRAME-7 · F5R alone)`, () => {
     const s = born(ALREADY_FRAMED_W2.seed);
     expect(takenHalls(s)).toEqual([ALREADY_FRAMED_W2.hall]);
     expect(troubleOfWeight(s)).toMatchObject({ at: crimeWaveAt(s), tension: { type: 'crime_wave' }, strain: { strain: 'W2', grade: 'high-conflict' } });
@@ -263,6 +265,8 @@ describe('W4: a hall in criminal hands with a live crime wave opens the owner\'s
     expect(digest(JSON.stringify(sheet))).toBe(ALREADY_FRAMED_W2.pin);
     // the chair's condition for keeping it (2026-11-20, 11:21 UTC): no side of the crime wave is missing from its people to voice
     expect(sheet.people.map((p) => p.side)).toEqual(sheet.frame.sides.map((d) => d.words));
+    // FRAME-7 · F5R: and the seat's holder, on no side, is the sheet's seat line
+    expect(sheet.seat).toMatchObject({ name: 'Saoirse O\'Meara', role: 'First Magnate' });
   });
 
   it('both facts, each needed: no taken hall, a hall below corrupted, or no crime wave, and there is no W4', () => {
