@@ -361,6 +361,24 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     `availableServices` family: a row with no `institution` key is treated alike by both engines.
     ORDER (16:45): R3-CURE-7's merge; R3-CURE-8; the key-level table and the Defense-key proof; the tell's cure under ruling
     54; then "R3 <commit>". The successor (VEIL-28) is seated at 360,000.
+56. THE CHAIR, 17:00 (sent as "veil ruling 55"; numbered 56 here, 55 being R3-CURE-8): WHAT AN IMPORTER MAY RECEIVE IS THE
+    DOCUMENT THE SHARE SERVES TO THAT READER UNDER THE VEIL, AND NOTHING ELSE; the clone is built from the served document,
+    never the stored row; if the veil cannot be applied the import fails closed. ONE VEIL, EVERY DOOR. MEASURED AT decc8c9e7
+    (helper, `out/v27/imp/`): (a) 212's `import_gallery_dossier` (212 its latest) runs the veil as the gallery read does and
+    adds the income-weight strip: its `data` is byte-equal to the gallery read's on every share, both chains, Reveal off and
+    on; a marked share's hidden house reaches neither. An UNMARKED share (no veil record) is served exactly by the gallery and
+    the import alike and only the link takes the default veil: 211's DECIDED design ("an unmarked share read as a listing is
+    served exactly; the link's readers are players"), which is what TRAD-4's red met (it compared the import with the LINK).
+    Before 211 the import ignored the veil; 211 alone left 13 traces (cured by 212). `fetchDossierForImport` reads no veil
+    (it strips seed, `_config`, notes; the civility mask). A FROZEN share's import returns the LIVE name and tier (the doors'
+    hunks cure it; their copy of the function lacks 212's weight strip: the merge keeps both). (b) NO REGISTRY ROW OR HOST FOR
+    ANY DOOR: rows are keyed by payload path; the inversion test reads only `get_gallery_dossier` as anon with a veil record
+    always written; nothing lists the functions that return a dossier. (c) DOORS WITHOUT THE VEIL (by search of the latest
+    definitions): `get_unlisted_map` (168: the world snapshot as stored, anyone with the link); the tile columns
+    (`_gallery_public_tile_rows`, 147: three values derived from `data`, behind the gallery lists and the dossier);
+    `import_gallery_map` (072) goes through `get_gallery_map` (211, its world snapshot sent as stored); the client's
+    worldExport 'player' variant (the owner hands the file: PLAUSIBLE that a hidden house travels). Stage IMPORT-DOOR
+    (`briefs/IMPORT-DOOR-BRIEF.md`) after R3-CURE-8 and before E; "IMPORT-DOOR <commit>" to the reader as its own line.
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|

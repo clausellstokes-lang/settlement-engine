@@ -1,0 +1,96 @@
+imp_x212	p-base-import.json	served: Corvine Syndicate (feared)=1 | Corvine Syndicate=1 | inst-crow-9=1
+		dossier: Corvine Syndicate (feared)=1 | Corvine Syndicate=1 | inst-crow-9=1
+		clone:   Corvine Syndicate (feared)=1 | Corvine Syndicate=1 | inst-crow-9=1
+		fetchDossierForImport moved 0 path(s): 
+imp_x212	p-basedm-import.json	served: Corvine Syndicate (feared)=1 | Corvine Syndicate=1 | inst-crow-9=1
+		dossier: Corvine Syndicate (feared)=1 | Corvine Syndicate=1 | inst-crow-9=1
+		clone:   Corvine Syndicate (feared)=1 | Corvine Syndicate=1 | inst-crow-9=1
+		fetchDossierForImport moved 0 path(s): 
+imp_x212	p-dm-import.json	served: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		dossier: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		clone:   Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		fetchDossierForImport moved 0 path(s): 
+imp_x212	p-snap-import.json	served: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		dossier: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		clone:   Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		fetchDossierForImport moved 0 path(s): 
+imp_x212	p-snapdm-import.json	served: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		dossier: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		clone:   Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		fetchDossierForImport moved 0 path(s): 
+imp_x212	p-veil-import.json	served: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		dossier: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		clone:   Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		fetchDossierForImport moved 0 path(s): 
+imp_x212	rv7a-base-import.json	served: Thieves' guild (powerful)=12 | Thieves' guild=13 | inst-777=1 | The Velvet Hand=1 | smuggling network=2 | Black market=4 | Assassins' guild=3
+		dossier: Thieves' guild (powerful)=12 | Thieves' guild=13 | inst-777=1 | The Velvet Hand=1 | smuggling network=2 | Black market=4 | Assassins' guild=3
+		clone:   Thieves' guild (powerful)=11 | Thieves' guild=12 | inst-777=1 | The Velvet Hand=1 | smuggling network=1 | Black market=3 | Assassins' guild=2
+		fetchDossierForImport moved 0 path(s): 
+imp_x212	rv7a-dm-import.json	served: Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1
+		dossier: Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1
+		clone:   Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1
+		fetchDossierForImport moved 0 path(s): 
+imp_x212	rv7a-veil-import.json	served: Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1
+		dossier: Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1
+		clone:   Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1
+		fetchDossierForImport moved 0 path(s): 
+imp_x212	rv7d-base-import.json	served: Thieves' guild (powerful)=3 | Thieves' guild=4 | Hidden shrine of the Drowned=2
+		dossier: Thieves' guild (powerful)=3 | Thieves' guild=4 | Hidden shrine of the Drowned=2
+		clone:   Thieves' guild (powerful)=2 | Thieves' guild=3 | Hidden shrine of the Drowned=1
+		fetchDossierForImport moved 0 path(s): 
+imp_x212	rv7d-dm-import.json	served: Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+		dossier: Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+		clone:   Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+		fetchDossierForImport moved 0 path(s): 
+imp_x212	rv7d-veil-import.json	served: Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+		dossier: Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+		clone:   Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+		fetchDossierForImport moved 0 path(s): 
+imp_xp212	p-base-import.json	served: Corvine Syndicate (feared)=1 | Corvine Syndicate=1 | inst-crow-9=1
+		dossier: Corvine Syndicate (feared)=1 | Corvine Syndicate=1 | inst-crow-9=1
+		clone:   Corvine Syndicate (feared)=1 | Corvine Syndicate=1 | inst-crow-9=1
+		fetchDossierForImport moved 0 path(s): 
+imp_xp212	p-basedm-import.json	served: Corvine Syndicate (feared)=1 | Corvine Syndicate=1 | inst-crow-9=1
+		dossier: Corvine Syndicate (feared)=1 | Corvine Syndicate=1 | inst-crow-9=1
+		clone:   Corvine Syndicate (feared)=1 | Corvine Syndicate=1 | inst-crow-9=1
+		fetchDossierForImport moved 0 path(s): 
+imp_xp212	p-dm-import.json	served: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		dossier: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		clone:   Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		fetchDossierForImport moved 0 path(s): 
+imp_xp212	p-snap-import.json	served: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		dossier: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		clone:   Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		fetchDossierForImport moved 0 path(s): 
+imp_xp212	p-snapdm-import.json	served: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		dossier: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		clone:   Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		fetchDossierForImport moved 0 path(s): 
+imp_xp212	p-veil-import.json	served: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		dossier: Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		clone:   Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+		fetchDossierForImport moved 0 path(s): 
+imp_xp212	rv7a-base-import.json	served: Thieves' guild (powerful)=12 | Thieves' guild=13 | inst-777=1 | The Velvet Hand=1 | smuggling network=2 | Black market=4 | Assassins' guild=3
+		dossier: Thieves' guild (powerful)=12 | Thieves' guild=13 | inst-777=1 | The Velvet Hand=1 | smuggling network=2 | Black market=4 | Assassins' guild=3
+		clone:   Thieves' guild (powerful)=11 | Thieves' guild=12 | inst-777=1 | The Velvet Hand=1 | smuggling network=1 | Black market=3 | Assassins' guild=2
+		fetchDossierForImport moved 0 path(s): 
+imp_xp212	rv7a-dm-import.json	served: Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1
+		dossier: Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1
+		clone:   Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1
+		fetchDossierForImport moved 0 path(s): 
+imp_xp212	rv7a-veil-import.json	served: Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1
+		dossier: Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1
+		clone:   Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1
+		fetchDossierForImport moved 0 path(s): 
+imp_xp212	rv7d-base-import.json	served: Thieves' guild (powerful)=3 | Thieves' guild=4 | Hidden shrine of the Drowned=2
+		dossier: Thieves' guild (powerful)=3 | Thieves' guild=4 | Hidden shrine of the Drowned=2
+		clone:   Thieves' guild (powerful)=2 | Thieves' guild=3 | Hidden shrine of the Drowned=1
+		fetchDossierForImport moved 0 path(s): 
+imp_xp212	rv7d-dm-import.json	served: Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+		dossier: Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+		clone:   Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+		fetchDossierForImport moved 0 path(s): 
+imp_xp212	rv7d-veil-import.json	served: Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+		dossier: Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+		clone:   Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+		fetchDossierForImport moved 0 path(s): 

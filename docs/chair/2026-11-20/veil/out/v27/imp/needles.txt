@@ -1,0 +1,74 @@
+=== imp_x212
+p	base	gallery	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 [$.data.institutions[0].id:"inst-crow-9"]
+p	base	import	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 [$.data.institutions[0].id:"inst-crow-9"]
+p	base	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	basedm	gallery	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 [$.data.institutions[0].id:"inst-crow-9"]
+p	basedm	import	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 [$.data.institutions[0].id:"inst-crow-9"]
+p	basedm	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	dm	gallery	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	dm	import	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	dm	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snap	gallery	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snap	import	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snap	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snapdm	gallery	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snapdm	import	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snapdm	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	veil	gallery	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	veil	import	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	veil	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+rv7a	base	gallery	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=13 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | inst-777=1 [$.institutions[5].id:"inst-777"] | The Velvet Hand=1 [$.institutions[5].name:"The Velvet Hand"] | smuggling network=2 [$.institutions[5].desc:"Born as the smuggling network, renamed b" ; $.economicState.compound.inst.names[5]:"smuggling network"] | Black market=4 [$.npcs[2].id:"npc.black_market_broker" ; $.npcs[2].name:"Black market broker"] | Assassins' guild=3 [$.institutions[4].name:"Assassins' guild" ; $.economicState.compound.inst.names[4]:"assassins' guild"]
+rv7a	base	import	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=13 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | inst-777=1 [$.institutions[5].id:"inst-777"] | The Velvet Hand=1 [$.institutions[5].name:"The Velvet Hand"] | smuggling network=2 [$.institutions[5].desc:"Born as the smuggling network, renamed b" ; $.economicState.compound.inst.names[5]:"smuggling network"] | Black market=4 [$.npcs[2].id:"npc.black_market_broker" ; $.npcs[2].name:"Black market broker"] | Assassins' guild=3 [$.institutions[4].name:"Assassins' guild" ; $.economicState.compound.inst.names[4]:"assassins' guild"]
+rv7a	base	link	Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1 [$.powerStructure.factions[0].faction:"Assassins' Guild"]
+rv7a	dm	gallery	Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1 [$.powerStructure.factions[0].faction:"Assassins' Guild"]
+rv7a	dm	import	Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1 [$.powerStructure.factions[0].faction:"Assassins' Guild"]
+rv7a	dm	link	Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1 [$.powerStructure.factions[0].faction:"Assassins' Guild"]
+rv7a	veil	gallery	Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1 [$.powerStructure.factions[0].faction:"Assassins' Guild"]
+rv7a	veil	import	Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1 [$.powerStructure.factions[0].faction:"Assassins' Guild"]
+rv7a	veil	link	Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1 [$.powerStructure.factions[0].faction:"Assassins' Guild"]
+rv7d	base	gallery	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=4 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Hidden shrine of the Drowned=2 [$.institutions[1].name:"Hidden shrine of the Drowned" ; $.economicState.compound.inst.names[1]:"hidden shrine of the drowned"]
+rv7d	base	import	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=4 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Hidden shrine of the Drowned=2 [$.institutions[1].name:"Hidden shrine of the Drowned" ; $.economicState.compound.inst.names[1]:"hidden shrine of the drowned"]
+rv7d	base	link	Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+rv7d	dm	gallery	Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+rv7d	dm	import	Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+rv7d	dm	link	Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+rv7d	veil	gallery	Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+rv7d	veil	import	Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+rv7d	veil	link	Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+=== imp_xp212
+p	base	gallery	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 [$.data.institutions[0].id:"inst-crow-9"]
+p	base	import	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 [$.data.institutions[0].id:"inst-crow-9"]
+p	base	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	basedm	gallery	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 [$.data.institutions[0].id:"inst-crow-9"]
+p	basedm	import	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 [$.data.institutions[0].id:"inst-crow-9"]
+p	basedm	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	dm	gallery	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	dm	import	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	dm	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snap	gallery	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snap	import	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snap	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snapdm	gallery	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snapdm	import	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snapdm	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	veil	gallery	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	veil	import	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	veil	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+rv7a	base	gallery	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=13 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | inst-777=1 [$.institutions[5].id:"inst-777"] | The Velvet Hand=1 [$.institutions[5].name:"The Velvet Hand"] | smuggling network=2 [$.institutions[5].desc:"Born as the smuggling network, renamed b" ; $.economicState.compound.inst.names[5]:"smuggling network"] | Black market=4 [$.npcs[2].id:"npc.black_market_broker" ; $.npcs[2].name:"Black market broker"] | Assassins' guild=3 [$.institutions[4].name:"Assassins' guild" ; $.economicState.compound.inst.names[4]:"assassins' guild"]
+rv7a	base	import	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=13 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | inst-777=1 [$.institutions[5].id:"inst-777"] | The Velvet Hand=1 [$.institutions[5].name:"The Velvet Hand"] | smuggling network=2 [$.institutions[5].desc:"Born as the smuggling network, renamed b" ; $.economicState.compound.inst.names[5]:"smuggling network"] | Black market=4 [$.npcs[2].id:"npc.black_market_broker" ; $.npcs[2].name:"Black market broker"] | Assassins' guild=3 [$.institutions[4].name:"Assassins' guild" ; $.economicState.compound.inst.names[4]:"assassins' guild"]
+rv7a	base	link	Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1 [$.powerStructure.factions[0].faction:"Assassins' Guild"]
+rv7a	dm	gallery	Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1 [$.powerStructure.factions[0].faction:"Assassins' Guild"]
+rv7a	dm	import	Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1 [$.powerStructure.factions[0].faction:"Assassins' Guild"]
+rv7a	dm	link	Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1 [$.powerStructure.factions[0].faction:"Assassins' Guild"]
+rv7a	veil	gallery	Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1 [$.powerStructure.factions[0].faction:"Assassins' Guild"]
+rv7a	veil	import	Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1 [$.powerStructure.factions[0].faction:"Assassins' Guild"]
+rv7a	veil	link	Thieves' guild (powerful)=0 | Thieves' guild=0 | inst-777=0 | The Velvet Hand=0 | smuggling network=0 | Black market=0 | Assassins' guild=1 [$.powerStructure.factions[0].faction:"Assassins' Guild"]
+rv7d	base	gallery	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=4 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Hidden shrine of the Drowned=2 [$.institutions[1].name:"Hidden shrine of the Drowned" ; $.economicState.compound.inst.names[1]:"hidden shrine of the drowned"]
+rv7d	base	import	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=4 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Hidden shrine of the Drowned=2 [$.institutions[1].name:"Hidden shrine of the Drowned" ; $.economicState.compound.inst.names[1]:"hidden shrine of the drowned"]
+rv7d	base	link	Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+rv7d	dm	gallery	Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+rv7d	dm	import	Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+rv7d	dm	link	Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+rv7d	veil	gallery	Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+rv7d	veil	import	Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0
+rv7d	veil	link	Thieves' guild (powerful)=0 | Thieves' guild=0 | Hidden shrine of the Drowned=0

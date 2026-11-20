@@ -1,0 +1,14 @@
+== imp_x212 import only
+PASS | e05 | V7-2 | a hidden tie's tension in pressureSentence, amended
+PASS | e06 | V7-2 | a hidden appearance in the impression, amended
+PASS | e07 | keep | KEEP: the events' names, the people, the tie's ends
+checks 36 | PASS 36 | FAIL 0
+== imp_x212 gallery+link+import
+checks 37 | PASS 37 | FAIL 0
+== imp_xp212 import only
+PASS | e05 | V7-2 | a hidden tie's tension in pressureSentence, amended
+PASS | e06 | V7-2 | a hidden appearance in the impression, amended
+PASS | e07 | keep | KEEP: the events' names, the people, the tie's ends
+checks 36 | PASS 36 | FAIL 0
+== imp_xp212 gallery+link+import
+checks 37 | PASS 37 | FAIL 0

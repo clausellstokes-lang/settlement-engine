@@ -1,0 +1,28 @@
+_gallery_public_tile_rows	147	-	definer	settlements	table (	(default PUBLIC)
+admin_remove_gallery_map	171	-	definer	saved_maps	jsonb	service_role
+admin_set_content_banned	171	-	definer	saved_maps,settlements	jsonb	service_role
+admin_soft_delete_map	171	-	definer	saved_maps	jsonb	service_role
+apply_create_route_command	193	-	definer	settlements	jsonb	authenticated
+apply_cut_trade_route_command	183	-	definer	settlements	jsonb	authenticated
+apply_import_reconciliation_command	184	-	definer	saved_maps,settlements	jsonb	authenticated
+bump_map_import	106	-	definer	saved_maps	void	authenticated
+compare_and_swap_campaign_content_binding	186	-	definer	saved_maps	jsonb	authenticated
+get_gallery_dossier	212	VEIL	definer	settlements	table (	authenticated, anon
+get_gallery_map	211	VEIL	definer	saved_maps,settlements	jsonb language plpgsql security definer 	anon, authenticated
+get_unlisted_dossier	212	VEIL	definer	settlements	jsonb	authenticated, anon
+get_unlisted_map	168	-	definer	saved_maps	jsonb	authenticated, anon
+import_gallery_dossier	212	VEIL	definer	settlements	table (	authenticated
+import_gallery_map	072	-	definer	saved_maps	jsonb language plpgsql security definer 	authenticated
+list_featured_maps	168	-	definer	saved_maps	table (id uuid, public_slug text, name t	authenticated, anon
+list_gallery_maps	148	-	definer	saved_maps,settlements	table(	anon, authenticated
+list_my_unlisted_maps	168	-	definer	saved_maps	table (id uuid, unlisted_slug text, name	authenticated
+list_open_report_targets	173	-	definer	saved_maps,settlements	table (	authenticated
+mutate_settlement_batch	179	-	definer	settlements	integer	authenticated
+persist_world_pulse_advance	102	-	definer	saved_maps,settlements	jsonb	authenticated
+publish_map	148	-	definer	saved_maps,settlements	text	authenticated
+purge_expired_plan_inactive_assets	165	-	definer	saved_maps,settlements	jsonb	service_role
+report_gallery_map	173	-	definer	saved_maps	uuid	authenticated
+rotate_map_unlisted_slug	168	-	definer	saved_maps	text	authenticated
+set_featured_map	168	-	definer	saved_maps	void	authenticated
+share_map_unlisted	168	-	definer	saved_maps	text	authenticated
+unpublish_map	059	-	definer	saved_maps	void	authenticated

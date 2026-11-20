@@ -1,0 +1,76 @@
+read plant p on imp_x211 into /var/tmp/v18/m27/imp/out-imp_x211
+=== imp_x211
+p	base	gallery	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 
+p	base	import	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 [
+p	base	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	basedm	gallery	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=
+p	basedm	import	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1
+p	basedm	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	dm	gallery	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	dm	import	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	dm	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snap	gallery	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snap	import	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snap	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snapdm	gallery	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snapdm	import	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	snapdm	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	veil	gallery	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	veil	import	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+p	veil	link	Corvine Syndicate (feared)=0 | Corvine Syndicate=0 | inst-crow-9=0
+rv7a	base	gallery	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=14 [$.npcs[0].title:"Voice of
+rv7a	base	import	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=14 [$.npcs[0].title:"Voice of 
+rv7a	base	link	Thieves' guild (powerful)=11 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.economicState.compound.inst.names[2]:"thieves' guild (powerful)"] | Thieves' guild=13 [$.npcs[0].ti
+rv7a	dm	gallery	Thieves' guild (powerful)=11 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.economicState.compound.inst.names[2]:"thieves' guild (powerful)"] | Thieves' guild=13 [$.npcs[0].t
+rv7a	dm	import	Thieves' guild (powerful)=11 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.economicState.compound.inst.names[2]:"thieves' guild (powerful)"] | Thieves' guild=13 [$.npcs[0].ti
+rv7a	dm	link	Thieves' guild (powerful)=11 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.economicState.compound.inst.names[2]:"thieves' guild (powerful)"] | Thieves' guild=13 [$.npcs[0].titl
+rv7a	veil	gallery	Thieves' guild (powerful)=11 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.economicState.compound.inst.names[2]:"thieves' guild (powerful)"] | Thieves' guild=13 [$.npcs[0]
+rv7a	veil	import	Thieves' guild (powerful)=11 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.economicState.compound.inst.names[2]:"thieves' guild (powerful)"] | Thieves' guild=13 [$.npcs[0].
+rv7a	veil	link	Thieves' guild (powerful)=11 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.economicState.compound.inst.names[2]:"thieves' guild (powerful)"] | Thieves' guild=13 [$.npcs[0].ti
+rv7d	base	gallery	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=5 [$.institutio
+rv7d	base	import	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=5 [$.institution
+rv7d	base	link	Thieves' guild (powerful)=1 [$.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=3 [$.economicState.compound.inst.names[0]:"thieves' guild (powerful)" ;
+rv7d	dm	gallery	Thieves' guild (powerful)=2 [$.economicState.compound.inst.names[0]:"thieves' guild (powerful)" ; te.safetyProfile.criminalInstitutions[0]:"Thieves' guild (powerful)"] | Thieves' guild
+rv7d	dm	import	Thieves' guild (powerful)=2 [$.economicState.compound.inst.names[0]:"thieves' guild (powerful)" ; te.safetyProfile.criminalInstitutions[0]:"Thieves' guild (powerful)"] | Thieves' guild=
+rv7d	dm	link	Thieves' guild (powerful)=2 [$.economicState.compound.inst.names[0]:"thieves' guild (powerful)" ; te.safetyProfile.criminalInstitutions[0]:"Thieves' guild (powerful)"] | Thieves' guild=4 
+rv7d	veil	gallery	Thieves' guild (powerful)=2 [$.economicState.compound.inst.names[0]:"thieves' guild (powerful)" ; te.safetyProfile.criminalInstitutions[0]:"Thieves' guild (powerful)"] | Thieves' gui
+rv7d	veil	import	Thieves' guild (powerful)=2 [$.economicState.compound.inst.names[0]:"thieves' guild (powerful)" ; te.safetyProfile.criminalInstitutions[0]:"Thieves' guild (powerful)"] | Thieves' guil
+rv7d	veil	link	Thieves' guild (powerful)=2 [$.economicState.compound.inst.names[0]:"thieves' guild (powerful)" ; te.safetyProfile.criminalInstitutions[0]:"Thieves' guild (powerful)"] | Thieves' guild=
+read plant p on imp_x210 into /var/tmp/v18/m27/imp/out-imp_x210
+=== imp_x210
+p	base	gallery	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 
+p	base	import	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 [
+p	base	link	Corvine Syndicate (feared)=1 [$.dossier.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.dossier.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9
+p	basedm	gallery	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=
+p	basedm	import	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1
+p	basedm	link	Corvine Syndicate (feared)=1 [$.dossier.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.dossier.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow
+p	dm	gallery	Corvine Syndicate (feared)=2 [$.data.institutions[0].name:"Corvine Syndicate (feared)" ; member_overrides.$veil.deltas[1].address:"card:institution:corvine-syndicate-feare"] | Corvine Syn
+p	dm	import	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 [$.
+p	dm	link	Corvine Syndicate (feared)=2 [$.dossier.institutions[0].name:"Corvine Syndicate (feared)" ; member_overrides.$veil.deltas[1].address:"card:institution:corvine-syndicate-feare"] | Corvine Syn
+p	snap	gallery	Corvine Syndicate (feared)=3 [$.data.institutions[0].name:"Corvine Syndicate (feared)" ; member_overrides.$veil.deltas[1].address:"card:institution:corvine-syndicate-feare"] | Corvine S
+p	snap	import	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 [
+p	snap	link	Corvine Syndicate (feared)=2 [$.dossier.institutions[0].name:"Corvine Syndicate (feared)" ; member_overrides.$veil.deltas[1].address:"card:institution:corvine-syndicate-feare"] | Corvine S
+p	snapdm	gallery	Corvine Syndicate (feared)=3 [$.data.institutions[0].name:"Corvine Syndicate (feared)" ; member_overrides.$veil.deltas[1].address:"card:institution:corvine-syndicate-feare"] | Corvine
+p	snapdm	import	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1
+p	snapdm	link	Corvine Syndicate (feared)=2 [$.dossier.institutions[0].name:"Corvine Syndicate (feared)" ; member_overrides.$veil.deltas[1].address:"card:institution:corvine-syndicate-feare"] | Corvine
+p	veil	gallery	Corvine Syndicate (feared)=2 [$.data.institutions[0].name:"Corvine Syndicate (feared)" ; member_overrides.$veil.deltas[1].address:"card:institution:corvine-syndicate-feare"] | Corvine S
+p	veil	import	Corvine Syndicate (feared)=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | Corvine Syndicate=1 [$.data.institutions[0].name:"Corvine Syndicate (feared)"] | inst-crow-9=1 [
+p	veil	link	Corvine Syndicate (feared)=2 [$.dossier.institutions[0].name:"Corvine Syndicate (feared)" ; member_overrides.$veil.deltas[1].address:"card:institution:corvine-syndicate-feare"] | Corvine S
+rv7a	base	gallery	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=14 [$.npcs[0].title:"Voice of
+rv7a	base	import	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=14 [$.npcs[0].title:"Voice of 
+rv7a	base	link	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=14 [$.npcs[0].title:"Voice of th
+rv7a	dm	gallery	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=15 [$.npcs[0].title:"Voice of t
+rv7a	dm	import	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=15 [$.npcs[0].title:"Voice of th
+rv7a	dm	link	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=14 [$.npcs[0].title:"Voice of the 
+rv7a	veil	gallery	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=14 [$.npcs[0].title:"Voice of
+rv7a	veil	import	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=14 [$.npcs[0].title:"Voice of 
+rv7a	veil	link	Thieves' guild (powerful)=12 [$.npcs[0].title:"Voice of the ThievesGuildPowerful" ; $.institutions[2].name:"Thieves' guild (powerful)"] | Thieves' guild=14 [$.npcs[0].title:"Voice of th
+rv7d	base	gallery	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=5 [$.institutio
+rv7d	base	import	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=5 [$.institution
+rv7d	base	link	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=5 [$.institutions[
+rv7d	dm	gallery	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=6 [$.npcs[0].secr
+rv7d	dm	import	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=6 [$.npcs[0].secre
+rv7d	dm	link	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=5 [$.institutions[0]
+rv7d	veil	gallery	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=5 [$.institutio
+rv7d	veil	import	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=5 [$.institution
+rv7d	veil	link	Thieves' guild (powerful)=3 [$.institutions[0].name:"Thieves' guild (powerful)" ; $.economicState.compound.inst.names[0]:"thieves' guild (powerful)"] | Thieves' guild=5 [$.institutions[

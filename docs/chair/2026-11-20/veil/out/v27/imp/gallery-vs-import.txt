@@ -1,0 +1,44 @@
+== imp_x212: gallery vs import (data), paths that differ
+rv7a-base: differ: 0
+rv7a-veil: differ: 0
+rv7a-dm: differ: 0
+rv7b-base: differ: 0
+rv7b-veil: differ: 0
+rv7b-dm: differ: 0
+rv7c-base: differ: 0
+rv7c-veil: differ: 0
+rv7c-dm: differ: 0
+rv7d-base: differ: 0
+rv7d-veil: differ: 0
+rv7d-dm: differ: 0
+rv7e-base: differ: 0
+rv7e-veil: differ: 0
+rv7e-dm: differ: 0
+gallery Rookford town import Rookford town p-base: differ: 0
+gallery Rookford town import Rookford town p-basedm: differ: 0
+gallery Rookford town import Rookford town p-veil: differ: 0
+gallery Rookford town import Rookford town p-dm: differ: 0
+gallery Rookford town import Rookford town p-snap: differ: 0
+gallery Rookford town import Rookford town p-snapdm: differ: 0
+== imp_xp212: gallery vs import (data), paths that differ
+rv7a-base: differ: 0
+rv7a-veil: differ: 0
+rv7a-dm: differ: 0
+rv7b-base: differ: 0
+rv7b-veil: differ: 0
+rv7b-dm: differ: 0
+rv7c-base: differ: 0
+rv7c-veil: differ: 0
+rv7c-dm: differ: 0
+rv7d-base: differ: 0
+rv7d-veil: differ: 0
+rv7d-dm: differ: 0
+rv7e-base: differ: 0
+rv7e-veil: differ: 0
+rv7e-dm: differ: 0
+gallery Rookford town import Rookford town p-base: differ: 0
+gallery Rookford town import Rookford town p-basedm: differ: 0
+gallery Rookford town import Rookford town p-veil: differ: 0
+gallery Rookford town import Rookford town p-dm: differ: 0
+gallery Rookford town import Rookford town p-snap: differ: 0
+gallery Rookford town import Rookford town p-snapdm: differ: 0
