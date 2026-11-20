@@ -175,3 +175,13 @@ parts of the whole check (at the close).
   (`docs/chair/2026-11-15/close/VETO-LIST.md` on the line, its short list's Part E) into settled since, a judgement
   call with a recommendation, or the owner's hand alone; the chair rules from its table. Pull request #74 read (four
   commits, ten files, test helpers and the push hook only): ruling SV5; the prompt `prompts/GIT-DOOR.txt`.
+- 00:18 UTC · **GIT-DOOR SEATED** (created 00:17:33 UTC): session_019yED1PvzMDqi2GX675xge2, `lane/git-door-2026-11-20` from the
+  line's 29ec255fe (ruling SV5). A SAFETY NET armed for 01:15 UTC (trig_01EFmPozjfS1z1EvYtvoBJiv: it reads the seats
+  and the earlier chairs' branches for movement by another hand).
+- 00:18 UTC · **RULING SV6: THE FRESH READER IS SEATED NOW, NOT AT E** (`prompts/REVIEW-VEIL-10.txt`). Eight reviews each
+  found what the one before missed, and every finding sent before E is cured in the list instead of after it. PHASE
+  1B, a cold pass at bedd5a392: what is new since the last cold pass (V8-9's closed answer, V8-2/4/5, the criminal
+  switch) and WHAT THE DIFFER CANNOT SEE (order and gaps, counts and totals, ids and slugs, sizes and times, every
+  other door onto a shared town: the gallery's list and cards, search, snapshots; what a non-owner can make the app
+  write; the text around the page). PHASE 2 is FINAL at E's checksum, by the sixth chair's reader's own steps. Past
+  450,000 tokens before FINAL, FINAL goes to a fresh reader from its hand-off.
