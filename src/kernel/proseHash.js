@@ -87,3 +87,15 @@ export function pickVariantMixed(pool, seed) {
   if (pool.length === 1 || !seed) return pool[0];
   return pool[mix32(fnv1a32(String(seed))) % pool.length];
 }
+
+/**
+ * A CONTENT ADDRESS: the key of a table by a line's text (e.g. `hookThemes.js :: themeOfText` looking a hook's
+ * theme up in its digest). It is NEVER a choice: it selects nothing from a pool, it names the text it was given.
+ * A keyed pick goes through `fnv1a32`, `pickVariant` or `pickVariantMixed`, which the fork census counts
+ * (tests/generators/generationForkCensus.test.js A6); `textKey` reaches `fnv1a32` by an intra-module call, so
+ * the census does not count it, and its importers under src/ are a closed list that test holds.
+ * @param {string} str @returns {number} the unsigned 32-bit `fnv1a32(str)`
+ */
+export function textKey(str) {
+  return fnv1a32(str);
+}

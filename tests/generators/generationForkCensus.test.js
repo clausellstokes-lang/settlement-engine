@@ -34,8 +34,8 @@
  * counted. That is a property, not a convenience, and A6 asserts it.
  */
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { readdirSync, readFileSync } from 'node:fs';
+import { join, relative, resolve, sep } from 'node:path';
 
 import { describe, expect, it, vi } from 'vitest';
 
@@ -373,6 +373,37 @@ const PICK_VARIANT_CALLS = 31;
 // `<seed>::generatePopulation::people-hooks::npc_town_watch::npcData:NPC_FACTION_LOYALTY::<drawn>::<candidate>`. No roll is spent:
 // the town's stream of draws is untouched. The register's fnv1a32External moves with it.
 const FNV_EXTERNAL_CALLS = 55;
+/**
+ * THE CLOSED LIST OF `textKey`'S IMPORTERS UNDER src/ (CURE-THEMES-TEXTKEY, the chair's ruling of 2026-11-20 21:12 UTC).
+ * `src/kernel/proseHash.js :: textKey` is a CONTENT ADDRESS (the key of a table by a line's text), never a choice, and it
+ * reaches `fnv1a32` by an intra-module call, so A6's wrapper does not count it and FNV_EXTERNAL_CALLS counts keyed CHOICES
+ * only. That exemption is only honest while every importer is attributed here by name: a new importer reds A6 until it is.
+ */
+const TEXT_KEY_IMPORTERS = ['src/domain/hookThemes.js'];
+
+/** Every module under src/ that imports `textKey` from proseHash.js, COMPUTED by scanning (never quoted). @returns {string[]} */
+function importersOfTextKey() {
+  const found = [];
+  const walk = (dir) => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) { walk(path); continue; }
+      if (!/\.(?:[cm]?js|jsx|ts|tsx)$/.test(entry.name)) continue;
+      const source = readFileSync(path, 'utf8');
+      const clauses = [...source.matchAll(/(?:^|\n)\s*(?:import|export)\b([^;]*?)\bfrom\s*['"]([^'"]+)['"]/g)]
+        .filter((m) => /(?:^|\/)proseHash(?:\.js)?$/.test(m[2])).map((m) => m[1]);
+      const named = clauses.some((clause) => /\btextKey\b/.test(clause));
+      const viaNamespace = clauses.some((clause) => {
+        const ns = /\*\s*as\s+([A-Za-z_$][\w$]*)/.exec(clause);
+        return ns !== null && new RegExp(`\\b${ns[1].replace(/\$/g, '\\$')}\\s*\\.\\s*textKey\\b`).test(source);
+      });
+      const viaDynamic = /\bimport\s*\(\s*['"][^'"]*proseHash(?:\.js)?['"]\s*\)/.test(source) && /\btextKey\b/.test(source);
+      if (named || viaNamespace || viaDynamic) found.push(relative(process.cwd(), path).split(sep).join('/'));
+    }
+  };
+  walk(resolve(process.cwd(), 'src'));
+  return found.filter((rel) => rel !== 'src/kernel/proseHash.js').sort();
+}
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
@@ -813,6 +844,10 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     const hashStrings = new Set(seen.hashes);
     expect([...pickSeeds].filter((seed) => hashStrings.has(seed)),
       'a pickVariant seed reached the fnv1a32 wrapper: the two censuses overlap').toEqual([]);
+    // textKey is a content address the wrapper does not see (intra-module); its importers are a CLOSED LIST, so a lookup
+    // cannot grow into an uncounted choice: a new importer reds here until it is attributed in TEXT_KEY_IMPORTERS.
+    expect(importersOfTextKey(), 'the importers of proseHash.js :: textKey under src/ (attribute a new one in TEXT_KEY_IMPORTERS)')
+      .toEqual(TEXT_KEY_IMPORTERS);
 
     // The three DISPLAY-NAME-KEYED sites, named as observed data. EM-P1b owns their cure; this
     // packet asserts nothing about it, only that the register still names where they are.

@@ -1,0 +1,33 @@
+# A6 callers probe (CURE-THEMES-TEXTKEY, DEPTH-4): each external fnv1a32 call on the census row (golden-master-v3, town/germanic/riverside/river/civilized),
+# attributed to its first src/ stack frame outside src/kernel/proseHash.js; sha256(strings) is the first 12 hex of the caller's hashed strings joined by newlines (no string quoted).
+# The census's two mocks, byte-equivalent; the probe file is scratch, never committed.
+
+## this lane's tip (textKey; lane/depth-4-2026-11-20-themes)
+total external fnv1a32 calls on the census row: 55
+    6  src/data/economyFingerprint.js :: fingerprintPowerEconomyInput  sha256(strings)=a17617c969ca
+    1  src/domain/facts/drawDeclared.js :: freshAdmitted  sha256(strings)=8351886d0e1f
+    3  src/domain/foodways.js :: composeFoodwaysLine  sha256(strings)=1fbddcce9cad
+   31  src/generators/people/rareSecrets.js :: unit  sha256(strings)=8a91907ddd4c
+    2  src/generators/power/conflicts.js :: buildConflictPlotHooks  sha256(strings)=a9794417e357
+    6  src/generators/power/relationshipArchetypes.js :: <anonymous>  sha256(strings)=e183bc853ee3
+    6  src/generators/services/serviceRollMaterialization.js :: upkeepRoll  sha256(strings)=62ffb5847875
+
+## a097ee662 (the unit before the cure)
+total external fnv1a32 calls on the census row: 1065
+    6  src/data/economyFingerprint.js :: fingerprintPowerEconomyInput  sha256(strings)=a17617c969ca
+    1  src/domain/facts/drawDeclared.js :: freshAdmitted  sha256(strings)=8351886d0e1f
+    3  src/domain/foodways.js :: composeFoodwaysLine  sha256(strings)=1fbddcce9cad
+ 1010  src/domain/hookThemes.js :: themeOfText  sha256(strings)=d00cfd58dfe8
+   31  src/generators/people/rareSecrets.js :: unit  sha256(strings)=8a91907ddd4c
+    2  src/generators/power/conflicts.js :: buildConflictPlotHooks  sha256(strings)=a9794417e357
+    6  src/generators/power/relationshipArchetypes.js :: <anonymous>  sha256(strings)=e183bc853ee3
+    6  src/generators/services/serviceRollMaterialization.js :: upkeepRoll  sha256(strings)=62ffb5847875
+
+## ed5813d40 (the line before DEPTH-2 hooks tranche 2)
+total external fnv1a32 calls on the census row: 54
+    6  src/data/economyFingerprint.js :: fingerprintPowerEconomyInput  sha256(strings)=a17617c969ca
+    3  src/domain/foodways.js :: composeFoodwaysLine  sha256(strings)=1fbddcce9cad
+   31  src/generators/people/rareSecrets.js :: unit  sha256(strings)=8a91907ddd4c
+    2  src/generators/power/conflicts.js :: buildConflictPlotHooks  sha256(strings)=a9794417e357
+    6  src/generators/power/relationshipArchetypes.js :: <anonymous>  sha256(strings)=e183bc853ee3
+    6  src/generators/services/serviceRollMaterialization.js :: upkeepRoll  sha256(strings)=62ffb5847875

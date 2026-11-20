@@ -24,15 +24,15 @@ import { fileURLToPath } from 'node:url';
 import { NPC_FACTION_LOYALTY, NPC_FACTION_LOYALTY_THEMES } from '../src/data/npcData.js';
 import { HOOK_THEMES, hookThemeKey } from '../src/domain/hookThemes.js';
 import { lineText } from '../src/domain/facts/drawDeclared.js';
-import { fnv1a32 } from '../src/kernel/proseHash.js';
+import { textKey } from '../src/kernel/proseHash.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 export const DIGEST_FILE = 'src/domain/hookThemes.js';
 export const OPEN = '// <hook-theme-digest>';
 export const CLOSE = '// </hook-theme-digest>';
 
-/** The digest key of a hook text: base-36 fnv1a32 of its fold. @param {unknown} text @returns {string} */
-export const digestKeyOf = (text) => fnv1a32(hookThemeKey(text)).toString(36);
+/** The digest key of a hook text: base-36 fnv1a32 of its fold, by `textKey` (a content address). @param {unknown} text @returns {string} */
+export const digestKeyOf = (text) => textKey(hookThemeKey(text)).toString(36);
 
 /**
  * What is wrong with the authored themes, if anything (alignment, closure, hash collisions).
@@ -82,7 +82,7 @@ export function computeThemeDigest(pools, themes) {
 export function poolOrderFingerprint(pools) {
   const seq = Object.entries(pools).flatMap(([key, lines]) => lines.map((line, i) => `${key}:${i}:${digestKeyOf(lineText(/** @type {any} */ (line)))}`));
   const sizes = Object.entries(pools).map(([key, lines]) => `${key} ${lines.length}`).join(', ');
-  return `${fnv1a32(seq.join('\n')).toString(36)} over ${seq.length} lines (${sizes})`;
+  return `${textKey(seq.join('\n')).toString(36)} over ${seq.length} lines (${sizes})`;
 }
 
 /** The block's source text, markers included. @param {Record<string, string>} digest @param {string} fingerprint @returns {string} */
