@@ -130,7 +130,9 @@ describe('the pool (every twentieth row of the census\'s 720)', () => {
     expect(found.slice(0, 20), `${found.length} mid-sentence capitals`).toEqual([]);
   });
 
-  it('CN3i: the prose form of every power and house the veil can hide holds its name as the veil folds it', () => {
+  // NAMES-2: the title in the negative form of its sibling arms (CN1, CN3ii); the claim is unchanged and its pool is born, not
+  // pinned (`hideable` > 0 below): the anti-vacuity walker's Rule 2 reads `const born = []` as a literal list
+  it('CN3i: no power or house the veil can hide has a prose form that drops its name as the veil folds it', () => {
     /** @type {string[]} */ const found = [];
     let hideable = 0;
     for (const { seed, town } of born) {
