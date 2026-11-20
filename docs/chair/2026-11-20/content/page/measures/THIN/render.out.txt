@@ -1,0 +1,3 @@
+RE-RUN: sh scripts/gate-mutex.sh --run -- node docs/chair/2026-11-20/content/page/measures/THIN/run-render.thin.mjs 10 > docs/chair/2026-11-20/content/page/measures/THIN/render.out.txt 2>&1
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 1701 after 0 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+page-THIN render: 60 towns planned, vitest exit 0, log /home/user/settlement-engine/docs/chair/2026-11-20/content/page/measures/THIN/.run/render.log

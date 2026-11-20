@@ -1,0 +1,89 @@
+RE-RUN: node docs/chair/2026-11-20/content/page/measures/THIN/prints.thin.mjs > docs/chair/2026-11-20/content/page/measures/THIN/prints.out.txt 2>&1
+rendered towns: 60 (thorp 10, hamlet 10, village 10, town 10, city 10, metropolis 10); views per town 24; PDF/canon_dossier rendered on 60/60
+positive control: the clause recent_changes quotes from the history found on World/History on 26 towns (World/History rendered on 60)
+probe: the words "daily life" contained in some printed line on 60/60 towns (the walker reached the tab)
+
+════ B. per candidate: items in the 60 / items printed (any sentence contained) on the OWNER PAGE / on the PDF DM document / nowhere; where
+
+[dailyLife.food_culture] COUNT: items 60; owner page 0; PDF 0; nowhere 60
+   by size (printed anywhere/items): thorp 0/10 · hamlet 0/10 · village 0/10 · town 0/10 · city 0/10 · metropolis 0/10
+   views: —
+   not printed, e.g. hxd-city-0: "Loaves shrink each month; livestock & dairy is scarce, and householders stretch what arrives." | hxd-city-1: "Rations are tight: hunting & trapping is substituted, and the poor eat watered stew."
+
+[dailyLife.dawn_work] COUNT: items 60; owner page 0; PDF 0; nowhere 60
+   by size (printed anywhere/items): thorp 0/10 · hamlet 0/10 · village 0/10 · town 0/10 · city 0/10 · metropolis 0/10
+   views: —
+   not printed, e.g. hxd-city-0: "Bakers light their ovens first, then the smiths; the watch changes as the gates open." | hxd-city-1: "Dawn work is the search for food. Foragers leave before light, and the granary queue forms before the ovens ar"
+
+[dailyLife.gathering_places] COUNT: items 60; owner page 0; PDF 0; nowhere 60
+   by size (printed anywhere/items): thorp 0/10 · hamlet 0/10 · village 0/10 · town 0/10 · city 0/10 · metropolis 0/10
+   views: —
+   not printed, e.g. hxd-city-0: "By midday people are gathered at the fish market, the inns and taverns (district): talking, trading, and watch" | hxd-city-1: "By midday people are gathered at the fish market, the inns and taverns (district): talking, trading, and watch"
+
+[dailyLife.child_warnings] COUNT: items 60; owner page 0; PDF 0; nowhere 60
+   by size (printed anywhere/items): thorp 0/10 · hamlet 0/10 · village 0/10 · town 0/10 · city 0/10 · metropolis 0/10
+   views: —
+   not printed, e.g. hxd-city-0: "Children are warned about the road past sundown; crowds that gather quickly." | hxd-city-1: "Children are warned about the road past sundown."
+
+[dailyLife.commoner_resentments] COUNT: items 60; owner page 0; PDF 0; nowhere 60
+   by size (printed anywhere/items): thorp 0/10 · hamlet 0/10 · village 0/10 · town 0/10 · city 0/10 · metropolis 0/10
+   views: —
+   not printed, e.g. hxd-city-0: "Commoners resent the smugglers who pay no tax while honest carts queue; and rising bread prices and merchants " | hxd-city-1: "Commoners resent the smugglers who pay no tax while honest carts queue; and rising bread prices and merchants "
+
+[dailyLife.outsider_impressions] COUNT: items 60; owner page 0; PDF 0; nowhere 60
+   by size (printed anywhere/items): thorp 0/10 · hamlet 0/10 · village 0/10 · town 0/10 · city 0/10 · metropolis 0/10
+   views: —
+   not printed, e.g. hxd-city-0: "Outsiders notice Democratic assembly's mark is on every door that matters; region overrun with monsters is the" | hxd-city-1: "Outsiders notice Royal Authority's mark is on every door that matters; frontier monster pressure is the obviou"
+
+[dailyLife.unspoken_topics] COUNT: items 60; owner page 0; PDF 0; nowhere 60
+   by size (printed anywhere/items): thorp 0/10 · hamlet 0/10 · village 0/10 · town 0/10 · city 0/10 · metropolis 0/10
+   views: —
+   not printed, e.g. hxd-city-0: "Locals will not openly discuss the matter referenced as "the wound"." | hxd-city-1: "Locals will not openly discuss the matter referenced as "the wound"."
+
+[dailyLife.recent_changes] COUNT: items 60; owner page 26; PDF 26; nowhere 34
+   by size (printed anywhere/items): thorp 2/10 · hamlet 5/10 · village 4/10 · town 4/10 · city 5/10 · metropolis 6/10
+   views: World/History(26) PDF/canon_dossier(26)
+   not printed, e.g. hxd-city-2: "As of the founding survey, the Guild War (27 years ago) hit the settlement hard, and it has since recovered: t" | hxd-city-3: "The last few seasons have run their usual course. No notable shifts in the rhythm of the place."
+
+[viability.warnings[].title] COUNT: items 30; owner page 0; PDF 0; nowhere 30
+   by size (printed anywhere/items): thorp 0/0 · hamlet 0/0 · village 0/0 · town 0/10 · city 0/10 · metropolis 0/10
+   views: —
+   not printed, e.g. hxd-city-0: "Trade Dependencies" | hxd-city-1: "Trade Dependencies"
+
+[viability.warnings[].description] COUNT: items 30; owner page 0; PDF 0; nowhere 30
+   by size (printed anywhere/items): thorp 0/0 · hamlet 0/0 · village 0/0 · town 0/10 · city 0/10 · metropolis 0/10
+   views: —
+   not printed, e.g. hxd-city-0: "4 institutions depend on imported materials (Precious metals, Timber, Livestock / game). Standard for this tra" | hxd-city-1: "20 institutions depend on imported materials (Trade access + grain, Trade access + commodities, Precious metal"
+
+[viability.dependencies[].title] COUNT: items 81; owner page 0; PDF 0; nowhere 81
+   by size (printed anywhere/items): thorp 0/0 · hamlet 0/3 · village 0/6 · town 0/8 · city 0/27 · metropolis 0/37
+   views: —
+   not printed, e.g. hxd-city-0: "Imports metals" | hxd-city-0: "Imports staple food at urban scale"
+
+[viability.dependencies[].description] COUNT: items 81; owner page 0; PDF 0; nowhere 81
+   by size (printed anywhere/items): thorp 0/0 · hamlet 0/3 · village 0/6 · town 0/8 · city 0/27 · metropolis 0/37
+   views: —
+   not printed, e.g. hxd-city-0: "Settlement must import metals to support local industries." | hxd-city-0: "A city cannot grow its staples within its walls; it depends on a steady grain supply from the surrounding regi"
+
+[viability.summary] COUNT: items 60; owner page 0; PDF 0; nowhere 60
+   by size (printed anywhere/items): thorp 0/10 · hamlet 0/10 · village 0/10 · town 0/10 · city 0/10 · metropolis 0/10
+   views: —
+   not printed, e.g. hxd-city-0: "✓ VIABLE: Settlement can survive but has 3 operational dependencies that require active management. 1 plot hoo" | hxd-city-1: "✓ VIABLE: Settlement can survive but has 2 operational dependencies that require active management. 1 plot hoo"
+
+[magic.contributors[].reason] COUNT: items 405; owner page 0; PDF 0; nowhere 405
+   by size (printed anywhere/items): thorp 0/52 · hamlet 0/59 · village 0/69 · town 0/60 · city 0/75 · metropolis 0/90
+   views: (no sentence >= 12 chars)(60)
+   not printed, e.g. hxd-city-0: "Magic level: medium." | hxd-city-0: "No arcane institutions. Practice is informal or absent."
+
+════ B. viability.summary: is it reworded? (the record's sentence vs ViabilityTab's: trimViabilitySummary(deriveViability(t).summary body), canonicalViewModel default-on, src/lib/flagRegistry.js:48)
+  COUNT: the record summary's trimmed body (a sentence of it) contained in Systems/Outlook on 0/60 (Outlook rendered on 60)
+  hxd-thorp-0: RECORD "✓ VIABLE: Settlement is economically self-sufficient and historically plausible."
+      OUTLOOK PRINTS: ✓ Viable ¶ Rossleigh feeds itself and pays its own way. ¶ Judged at the first survey; not re-run since. ¶ A handful of things about this thorp cannot all be true at once, and everyone here has their own explanation.
+  hxd-village-0: RECORD "✓ VIABLE: Settlement is economically self-sufficient and historically plausible."
+      OUTLOOK PRINTS: ✓ Viable ¶ Dobroki gets through the year on its own land and trades, and goes without what they do not provide. ¶ Judged at the first survey; not re-run since. ¶ Supply in isolation ¶ People at Dobroki make do with what they have; a good year is enough and a bad one is lean.
+  hxd-city-0: RECORD "✓ VIABLE: Settlement can survive but has 3 operational dependencies that require active management. 1 plot hooks available."
+      OUTLOOK PRINTS: ✓ Viable ¶ Petenhuitz can stand, but only while metals keep arriving and the routes that bring them stay open. ¶ Judged at the first survey; not re-run since.
+  hxd-metropolis-0: RECORD "✓ VIABLE: Settlement can survive but has 3 operational dependencies that require active management. 0 plot hooks available."
+      OUTLOOK PRINTS: ✓ Viable ¶ Shangjin can stand, but only while the goods it buys in keep arriving and the routes that bring them stay open. ¶ Judged at the first survey; not re-run since.
+
+  where the dependency titles print (sample hxd-city-0): "Imports metals" -> nowhere | "Imports staple food at urban scale" -> nowhere | "Imports bulk materials and fuel" -> nowhere

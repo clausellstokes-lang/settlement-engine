@@ -1,0 +1,354 @@
+RE-RUN: node docs/chair/2026-11-20/content/page/measures/THIN/measure.thin.mjs > docs/chair/2026-11-20/content/page/measures/THIN/measure.out.txt 2>&1
+births: 300 in 34s; slots food_culture,dawn_work,gathering_places,child_warnings,commoner_resentments,outsider_impressions,unspoken_topics,recent_changes
+
+════ A. CANDIDATES BY SIZE (50 towns a size): fill / distinct texts / top share of one text among the holders (FLAG > 25%)
+
+[dailyLife.food_culture]
+  thorp      fill 50/50  distinct   9  top  70% FLAG  top text (35): "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  hamlet     fill 50/50  distinct  12  top  48% FLAG  top text (24): "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  village    fill 50/50  distinct   8  top  50% FLAG  top text (25): "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  town       fill 50/50  distinct  12  top  54% FLAG  top text (27): "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  city       fill 50/50  distinct  18  top  24%  top text (12): "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  metropolis fill 50/50  distinct  18  top  30% FLAG  top text (15): "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  ALL 300: distinct 38
+
+[dailyLife.dawn_work]
+  thorp      fill 50/50  distinct   2  top  94% FLAG  top text (47): "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked."
+  hamlet     fill 50/50  distinct   4  top  88% FLAG  top text (44): "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked."
+  village    fill 50/50  distinct   3  top  88% FLAG  top text (44): "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked."
+  town       fill 50/50  distinct   4  top  48% FLAG  top text (24): "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked."
+  city       fill 50/50  distinct   3  top  80% FLAG  top text (40): "Bakers light their ovens first, then the smiths; the watch changes as the gates open."
+  metropolis fill 50/50  distinct   3  top  78% FLAG  top text (39): "Bakers light their ovens first, then the smiths; the watch changes as the gates open."
+  ALL 300: distinct 4
+
+[dailyLife.gathering_places]
+  thorp      fill 50/50  distinct   2  top  90% FLAG  top text (45): "People gather where they can: the well, the bridge, the open square."
+  hamlet     fill 50/50  distinct   8  top  66% FLAG  top text (33): "People gather where they can: the well, the bridge, the open square."
+  village    fill 50/50  distinct  10  top  64% FLAG  top text (32): "People gather where they can: the well, the bridge, the open square."
+  town       fill 50/50  distinct   4  top  46% FLAG  top text (23): "By midday people are gathered at the weekly market, the inn (multiple): talking, trading, and watching."
+  city       fill 50/50  distinct   4  top  66% FLAG  top text (33): "By midday people are gathered at the fish market, the inns and taverns (district): talking, trading, and watching."
+  metropolis fill 50/50  distinct   2  top  98% FLAG  top text (49): "By midday people are gathered at the steps of Great cathedral, the fish market, the inns and taverns (district): talking, trading, and watching."
+  ALL 300: distinct 24
+
+[dailyLife.child_warnings]
+  thorp      fill 50/50  distinct  11  top  34% FLAG  top text (17): "Children are warned about crowds that gather quickly; the empty stalls in the trade quarter; the road past sundown."
+  hamlet     fill 50/50  distinct  12  top  32% FLAG  top text (16): "Children are warned about crowds that gather quickly; the empty stalls in the trade quarter."
+  village    fill 50/50  distinct  10  top  30% FLAG  top text (15): "Children are warned about crowds that gather quickly; the empty stalls in the trade quarter."
+  town       fill 50/50  distinct   7  top  38% FLAG  top text (19): "Children are warned about crowds that gather quickly."
+  city       fill 50/50  distinct   5  top  62% FLAG  top text (31): "Children are warned about the road past sundown."
+  metropolis fill 50/50  distinct   5  top  60% FLAG  top text (30): "Children are warned about the road past sundown."
+  ALL 300: distinct 20
+
+[dailyLife.commoner_resentments]
+  thorp      fill 50/50  distinct   4  top  64% FLAG  top text (32): "Commoners resent the council's indifference to ordinary complaints."
+  hamlet     fill 50/50  distinct   6  top  70% FLAG  top text (35): "Commoners resent the council's indifference to ordinary complaints."
+  village    fill 50/50  distinct   4  top  88% FLAG  top text (44): "Commoners resent the council's indifference to ordinary complaints."
+  town       fill 50/50  distinct   7  top  34% FLAG  top text (17): "Commoners voice the small grievances of any town: the gate fee, the rain on market day, the council's favorite tavern."
+  city       fill 50/50  distinct   8  top  40% FLAG  top text (20): "Commoners resent rising bread prices and merchants who claim they cannot help it."
+  metropolis fill 50/50  distinct   5  top  56% FLAG  top text (28): "Commoners resent rising bread prices and merchants who claim they cannot help it."
+  ALL 300: distinct 9
+
+[dailyLife.outsider_impressions]
+  thorp      fill 50/50  distinct   9  top  54% FLAG  top text (27): "Outsiders notice Elder Council's mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several civic services ru"
+  hamlet     fill 50/50  distinct  15  top  38% FLAG  top text (19): "Outsiders notice Elder Council's mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several civic services ru"
+  village    fill 50/50  distinct  10  top  48% FLAG  top text (24): "Outsiders notice Religious Authorities' mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several civic serv"
+  town       fill 50/50  distinct  19  top  16%  top text (8): "Outsiders notice Religious Authorities' mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several civic serv"
+  city       fill 50/50  distinct  30  top  10%  top text (5): "Outsiders notice City Council's mark is on every door that matters; frontier monster pressure is the obvious unspoken weight; several civic services r"
+  metropolis fill 50/50  distinct  25  top  12%  top text (6): "Outsiders notice Grand Council's mark is on every door that matters."
+  ALL 300: distinct 91
+
+[dailyLife.unspoken_topics]
+  thorp      fill 50/50  distinct   1  top 100% FLAG  top text (50): "Locals will not openly discuss the matter referenced as "the wound"."
+  hamlet     fill 50/50  distinct   1  top 100% FLAG  top text (50): "Locals will not openly discuss the matter referenced as "the wound"."
+  village    fill 50/50  distinct   1  top 100% FLAG  top text (50): "Locals will not openly discuss the matter referenced as "the wound"."
+  town       fill 50/50  distinct   1  top 100% FLAG  top text (50): "Locals will not openly discuss the matter referenced as "the wound"."
+  city       fill 50/50  distinct   1  top 100% FLAG  top text (50): "Locals will not openly discuss the matter referenced as "the wound"."
+  metropolis fill 50/50  distinct   1  top 100% FLAG  top text (50): "Locals will not openly discuss the matter referenced as "the wound"."
+  ALL 300: distinct 1
+
+[dailyLife.recent_changes]
+  thorp      fill 50/50  distinct  38  top  18%  top text (9): "Civic stability at risk has come to a head."
+  hamlet     fill 50/50  distinct  47  top   6%  top text (3): "Civic stability at risk has come to a head."
+  village    fill 50/50  distinct  48  top   4%  top text (2): "Civic stability at risk has come to a head."
+  town       fill 50/50  distinct  42  top  16%  top text (8): "The last few seasons have run their usual course. No notable shifts in the rhythm of the place."
+  city       fill 50/50  distinct  38  top  16%  top text (8): "The last few seasons have run their usual course. No notable shifts in the rhythm of the place."
+  metropolis fill 50/50  distinct  43  top  10%  top text (5): "The last few seasons have run their usual course. No notable shifts in the rhythm of the place."
+  ALL 300: distinct 241
+
+[viability.warnings[].title]
+  thorp      fill  0/50  distinct   0  top   0%  top text (0): ""
+  hamlet     fill  0/50  distinct   0  top   0%  top text (0): ""
+  village    fill  0/50  distinct   0  top   0%  top text (0): ""
+  town       fill 45/50  distinct   1  top 100% FLAG  top text (45): "Trade Dependencies"
+  city       fill 50/50  distinct   1  top 100% FLAG  top text (50): "Trade Dependencies"
+  metropolis fill 49/50  distinct   1  top 100% FLAG  top text (49): "Trade Dependencies"
+  ALL 300: distinct 1
+
+[viability.warnings[].description]
+  thorp      fill  0/50  distinct   0  top   0%  top text (0): ""
+  hamlet     fill  0/50  distinct   0  top   0%  top text (0): ""
+  village    fill  0/50  distinct   0  top   0%  top text (0): ""
+  town       fill 45/50  distinct  15  top  29% FLAG  top text (13): "7 institutions depend on imported materials (Trade access + grain, Trade access, Grain). Standard for this trade route: vulnerability if supply is dis"
+  city       fill 50/50  distinct  39  top   6%  top text (3): "14 institutions depend on imported materials (Trade access + grain, Trade access + commodities, Grain). Standard for this trade route: vulnerability i"
+  metropolis fill 49/50  distinct  30  top  10%  top text (5): "22 institutions depend on imported materials (Trade access + commodities, Trade access + commodities, Trade access + harbour). Standard for this trade"
+  ALL 300: distinct 84
+
+[viability.dependencies[].title]
+  thorp      fill  0/50  distinct   0  top   0%  top text (0): ""
+  hamlet     fill  5/50  distinct   2  top  60% FLAG  top text (3): "Food Import Requirement"
+  village    fill 30/50  distinct   5  top  63% FLAG  top text (19): "Imports grain"
+  town       fill 32/50  distinct   7  top  53% FLAG  top text (17): "Imports grain"
+  city       fill 50/50  distinct   9  top 100% FLAG  top text (50): "Imports bulk materials and fuel"
+  metropolis fill 50/50  distinct  10  top 100% FLAG  top text (50): "Imports bulk materials and fuel"
+  ALL 300: distinct 11
+
+[viability.dependencies[].description]
+  thorp      fill  0/50  distinct   0  top   0%  top text (0): ""
+  hamlet     fill  5/50  distinct   4  top  40% FLAG  top text (2): "Settlement must import metals to support local industries."
+  village    fill 30/50  distinct   5  top  63% FLAG  top text (19): "Settlement must import grain to support local industries."
+  town       fill 32/50  distinct   7  top  53% FLAG  top text (17): "Settlement must import grain to support local industries."
+  city       fill 50/50  distinct   9  top 100% FLAG  top text (50): "A city consumes building materials and fuel faster than any local hinterland can supply."
+  metropolis fill 50/50  distinct  10  top 100% FLAG  top text (50): "A metropolis consumes building materials and fuel faster than any local hinterland can supply."
+  ALL 300: distinct 16
+
+[viability.summary]
+  thorp      fill 50/50  distinct   8  top  82% FLAG  top text (41): "✓ VIABLE: Settlement is economically self-sufficient and historically plausible."
+  hamlet     fill 50/50  distinct  12  top  64% FLAG  top text (32): "✓ VIABLE: Settlement is economically self-sufficient and historically plausible."
+  village    fill 50/50  distinct  10  top  38% FLAG  top text (19): "✓ VIABLE: Settlement can survive but has 1 operational dependency that require active management. 0 plot hooks available."
+  town       fill 50/50  distinct  18  top  34% FLAG  top text (17): "✓ VIABLE: Settlement can survive but has 1 operational dependency that require active management. 1 plot hooks available."
+  city       fill 50/50  distinct   7  top  30% FLAG  top text (15): "✓ VIABLE: Settlement can survive but has 3 operational dependencies that require active management. 1 plot hooks available."
+  metropolis fill 50/50  distinct   8  top  34% FLAG  top text (17): "✓ VIABLE: Settlement can survive but has 4 operational dependencies that require active management. 1 plot hooks available."
+  ALL 300: distinct 37
+
+[magic.contributors[].reason]
+  thorp      fill 50/50  distinct   7  top 100% FLAG  top text (50): "Magic level: medium."
+  hamlet     fill 50/50  distinct   7  top 100% FLAG  top text (50): "Magic level: medium."
+  village    fill 50/50  distinct  24  top 100% FLAG  top text (50): "Magic level: medium."
+  town       fill 50/50  distinct  17  top 100% FLAG  top text (50): "Magic level: medium."
+  city       fill 50/50  distinct  15  top 100% FLAG  top text (50): "Magic level: medium."
+  metropolis fill 50/50  distinct  13  top 100% FLAG  top text (50): "Magic level: medium."
+  ALL 300: distinct 30
+
+════ A. FLAGS (every text holding > 25% of a size's holders): 130
+  FLAG dailyLife.food_culture | thorp | 35/50 (70%) | "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  FLAG dailyLife.food_culture | hamlet | 24/50 (48%) | "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  FLAG dailyLife.food_culture | village | 25/50 (50%) | "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  FLAG dailyLife.food_culture | town | 27/50 (54%) | "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  FLAG dailyLife.food_culture | metropolis | 15/50 (30%) | "Hearty grain bread and turnip-and-onion stews dominate the table; meat appears at festivals and on the wealthier streets."
+  FLAG dailyLife.dawn_work | thorp | 47/50 (94%) | "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked."
+  FLAG dailyLife.dawn_work | hamlet | 44/50 (88%) | "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked."
+  FLAG dailyLife.dawn_work | village | 44/50 (88%) | "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked."
+  FLAG dailyLife.dawn_work | town | 24/50 (48%) | "The walls claim the first hours: the watch musters thin at first light, and ordinary work waits until the rounds are walked."
+  FLAG dailyLife.dawn_work | town | 16/50 (32%) | "Bakers light their ovens first, then the smiths; the watch changes as the gates open."
+  FLAG dailyLife.dawn_work | city | 40/50 (80%) | "Bakers light their ovens first, then the smiths; the watch changes as the gates open."
+  FLAG dailyLife.dawn_work | metropolis | 39/50 (78%) | "Bakers light their ovens first, then the smiths; the watch changes as the gates open."
+  FLAG dailyLife.gathering_places | thorp | 45/50 (90%) | "People gather where they can: the well, the bridge, the open square."
+  FLAG dailyLife.gathering_places | hamlet | 33/50 (66%) | "People gather where they can: the well, the bridge, the open square."
+  FLAG dailyLife.gathering_places | village | 32/50 (64%) | "People gather where they can: the well, the bridge, the open square."
+  FLAG dailyLife.gathering_places | town | 23/50 (46%) | "By midday people are gathered at the weekly market, the inn (multiple): talking, trading, and watching."
+  FLAG dailyLife.gathering_places | town | 20/50 (40%) | "By midday people are gathered at the fish market, the inn (multiple): talking, trading, and watching."
+  FLAG dailyLife.gathering_places | city | 33/50 (66%) | "By midday people are gathered at the fish market, the inns and taverns (district): talking, trading, and watching."
+  FLAG dailyLife.gathering_places | metropolis | 49/50 (98%) | "By midday people are gathered at the steps of Great cathedral, the fish market, the inns and taverns (district): talking, trading, and watching."
+  FLAG dailyLife.child_warnings | thorp | 17/50 (34%) | "Children are warned about crowds that gather quickly; the empty stalls in the trade quarter; the road past sundown."
+  FLAG dailyLife.child_warnings | hamlet | 16/50 (32%) | "Children are warned about crowds that gather quickly; the empty stalls in the trade quarter."
+  FLAG dailyLife.child_warnings | hamlet | 15/50 (30%) | "Children are warned about crowds that gather quickly; the empty stalls in the trade quarter; the road past sundown."
+  FLAG dailyLife.child_warnings | village | 15/50 (30%) | "Children are warned about crowds that gather quickly; the empty stalls in the trade quarter."
+  FLAG dailyLife.child_warnings | village | 13/50 (26%) | "Children are warned about crowds that gather quickly; the empty stalls in the trade quarter; the road past sundown."
+  FLAG dailyLife.child_warnings | town | 19/50 (38%) | "Children are warned about crowds that gather quickly."
+  FLAG dailyLife.child_warnings | town | 14/50 (28%) | "Children are warned about the road past sundown; crowds that gather quickly."
+  FLAG dailyLife.child_warnings | town | 13/50 (26%) | "Children are warned about crowds that gather quickly; the road past sundown."
+  FLAG dailyLife.child_warnings | city | 31/50 (62%) | "Children are warned about the road past sundown."
+  FLAG dailyLife.child_warnings | city | 13/50 (26%) | "Children are warned about the usual things: the deep well, the strangers' road, the woods at twilight."
+  FLAG dailyLife.child_warnings | metropolis | 30/50 (60%) | "Children are warned about the road past sundown."
+  FLAG dailyLife.child_warnings | metropolis | 14/50 (28%) | "Children are warned about the usual things: the deep well, the strangers' road, the woods at twilight."
+  FLAG dailyLife.commoner_resentments | thorp | 32/50 (64%) | "Commoners resent the council's indifference to ordinary complaints."
+  FLAG dailyLife.commoner_resentments | hamlet | 35/50 (70%) | "Commoners resent the council's indifference to ordinary complaints."
+  FLAG dailyLife.commoner_resentments | village | 44/50 (88%) | "Commoners resent the council's indifference to ordinary complaints."
+  FLAG dailyLife.commoner_resentments | town | 17/50 (34%) | "Commoners voice the small grievances of any town: the gate fee, the rain on market day, the council's favorite tavern."
+  FLAG dailyLife.commoner_resentments | town | 15/50 (30%) | "Commoners resent the council's indifference to ordinary complaints."
+  FLAG dailyLife.commoner_resentments | city | 20/50 (40%) | "Commoners resent rising bread prices and merchants who claim they cannot help it."
+  FLAG dailyLife.commoner_resentments | city | 15/50 (30%) | "Commoners voice the small grievances of any town: the gate fee, the rain on market day, the council's favorite tavern."
+  FLAG dailyLife.commoner_resentments | metropolis | 28/50 (56%) | "Commoners resent rising bread prices and merchants who claim they cannot help it."
+  FLAG dailyLife.commoner_resentments | metropolis | 16/50 (32%) | "Commoners voice the small grievances of any town: the gate fee, the rain on market day, the council's favorite tavern."
+  FLAG dailyLife.outsider_impressions | thorp | 27/50 (54%) | "Outsiders notice Elder Council's mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several civic services run short. Visitors notice missing watch, slow service, or shuttered shops."
+  FLAG dailyLife.outsider_impressions | hamlet | 19/50 (38%) | "Outsiders notice Elder Council's mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several civic services run short. Visitors notice missing watch, slow service, or shuttered shops."
+  FLAG dailyLife.outsider_impressions | village | 24/50 (48%) | "Outsiders notice Religious Authorities' mark is on every door that matters; civic stability at risk is the obvious unspoken weight; several civic services run short. Visitors notice missing watch, slow service, or shuttered shops."
+  FLAG dailyLife.unspoken_topics | thorp | 50/50 (100%) | "Locals will not openly discuss the matter referenced as "the wound"."
+  FLAG dailyLife.unspoken_topics | hamlet | 50/50 (100%) | "Locals will not openly discuss the matter referenced as "the wound"."
+  FLAG dailyLife.unspoken_topics | village | 50/50 (100%) | "Locals will not openly discuss the matter referenced as "the wound"."
+  FLAG dailyLife.unspoken_topics | town | 50/50 (100%) | "Locals will not openly discuss the matter referenced as "the wound"."
+  FLAG dailyLife.unspoken_topics | city | 50/50 (100%) | "Locals will not openly discuss the matter referenced as "the wound"."
+  FLAG dailyLife.unspoken_topics | metropolis | 50/50 (100%) | "Locals will not openly discuss the matter referenced as "the wound"."
+  FLAG viability.warnings[].title | town | 45/45 (100%) | "Trade Dependencies"
+  FLAG viability.warnings[].title | city | 50/50 (100%) | "Trade Dependencies"
+  FLAG viability.warnings[].title | metropolis | 49/49 (100%) | "Trade Dependencies"
+  FLAG viability.warnings[].description | town | 13/45 (29%) | "7 institutions depend on imported materials (Trade access + grain, Trade access, Grain). Standard for this trade route: vulnerability if supply is disrupted."
+  FLAG viability.dependencies[].title | hamlet | 3/5 (60%) | "Food Import Requirement"
+  FLAG viability.dependencies[].title | hamlet | 2/5 (40%) | "Imports metals"
+  FLAG viability.dependencies[].title | village | 19/30 (63%) | "Imports grain"
+  FLAG viability.dependencies[].title | town | 17/32 (53%) | "Imports grain"
+  FLAG viability.dependencies[].title | city | 50/50 (100%) | "Imports bulk materials and fuel"
+  FLAG viability.dependencies[].title | city | 30/50 (60%) | "Imports staple food at urban scale"
+  FLAG viability.dependencies[].title | city | 16/50 (32%) | "Imports metals"
+  FLAG viability.dependencies[].title | city | 14/50 (28%) | "Imports grain"
+  FLAG viability.dependencies[].title | city | 13/50 (26%) | "Imports timber"
+  FLAG viability.dependencies[].title | metropolis | 50/50 (100%) | "Imports bulk materials and fuel"
+  FLAG viability.dependencies[].title | metropolis | 50/50 (100%) | "Imports finished goods and luxuries"
+  FLAG viability.dependencies[].title | metropolis | 27/50 (54%) | "Imports staple food at urban scale"
+  FLAG viability.dependencies[].title | metropolis | 20/50 (40%) | "Imports metals"
+  FLAG viability.dependencies[].description | hamlet | 2/5 (40%) | "Settlement must import metals to support local industries."
+  FLAG viability.dependencies[].description | village | 19/30 (63%) | "Settlement must import grain to support local industries."
+  FLAG viability.dependencies[].description | town | 17/32 (53%) | "Settlement must import grain to support local industries."
+  FLAG viability.dependencies[].description | city | 50/50 (100%) | "A city consumes building materials and fuel faster than any local hinterland can supply."
+  FLAG viability.dependencies[].description | city | 30/50 (60%) | "A city cannot grow its staples within its walls; it depends on a steady grain supply from the surrounding region."
+  FLAG viability.dependencies[].description | city | 16/50 (32%) | "Settlement must import metals to support local industries."
+  FLAG viability.dependencies[].description | city | 14/50 (28%) | "Settlement must import grain to support local industries."
+  FLAG viability.dependencies[].description | city | 13/50 (26%) | "Settlement must import timber to support local industries."
+  FLAG viability.dependencies[].description | metropolis | 50/50 (100%) | "A metropolis consumes building materials and fuel faster than any local hinterland can supply."
+  FLAG viability.dependencies[].description | metropolis | 50/50 (100%) | "An imperial metropolis depends on a constant inflow of finished goods, textiles, and luxuries its populace and elite demand."
+  FLAG viability.dependencies[].description | metropolis | 27/50 (54%) | "A metropolis cannot grow its staples within its walls; it depends on a steady grain supply from the surrounding region."
+  FLAG viability.dependencies[].description | metropolis | 20/50 (40%) | "Settlement must import metals to support local industries."
+  FLAG viability.summary | thorp | 41/50 (82%) | "✓ VIABLE: Settlement is economically self-sufficient and historically plausible."
+  FLAG viability.summary | hamlet | 32/50 (64%) | "✓ VIABLE: Settlement is economically self-sufficient and historically plausible."
+  FLAG viability.summary | village | 19/50 (38%) | "✓ VIABLE: Settlement can survive but has 1 operational dependency that require active management. 0 plot hooks available."
+  FLAG viability.summary | village | 15/50 (30%) | "✓ VIABLE: Settlement is economically self-sufficient and historically plausible."
+  FLAG viability.summary | town | 17/50 (34%) | "✓ VIABLE: Settlement can survive but has 1 operational dependency that require active management. 1 plot hooks available."
+  FLAG viability.summary | city | 15/50 (30%) | "✓ VIABLE: Settlement can survive but has 3 operational dependencies that require active management. 1 plot hooks available."
+  FLAG viability.summary | city | 15/50 (30%) | "✓ VIABLE: Settlement can survive but has 2 operational dependencies that require active management. 0 plot hooks available."
+  FLAG viability.summary | metropolis | 17/50 (34%) | "✓ VIABLE: Settlement can survive but has 4 operational dependencies that require active management. 1 plot hooks available."
+  FLAG magic.contributors[].reason | thorp | 50/50 (100%) | "Magic level: medium."
+  FLAG magic.contributors[].reason | thorp | 50/50 (100%) | "No arcane institutions. Practice is informal or absent."
+  FLAG magic.contributors[].reason | thorp | 50/50 (100%) | "Moderate magic: services costly."
+  FLAG magic.contributors[].reason | thorp | 50/50 (100%) | "Baseline risk for medium magic: moderate."
+  FLAG magic.contributors[].reason | thorp | 50/50 (100%) | "No religious faction: acceptance defaults to indifferent."
+  FLAG magic.contributors[].reason | thorp | 15/50 (30%) | "Too poor to keep magic stocked: one step less available."
+  FLAG magic.contributors[].reason | hamlet | 50/50 (100%) | "Magic level: medium."
+  FLAG magic.contributors[].reason | hamlet | 50/50 (100%) | "No arcane institutions. Practice is informal or absent."
+  FLAG magic.contributors[].reason | hamlet | 50/50 (100%) | "Moderate magic: services costly."
+  FLAG magic.contributors[].reason | hamlet | 50/50 (100%) | "Baseline risk for medium magic: moderate."
+  FLAG magic.contributors[].reason | hamlet | 50/50 (100%) | "No religious faction: acceptance defaults to indifferent."
+  FLAG magic.contributors[].reason | hamlet | 30/50 (60%) | "Too poor to keep magic stocked: one step less available."
+  FLAG magic.contributors[].reason | village | 50/50 (100%) | "Magic level: medium."
+  FLAG magic.contributors[].reason | village | 50/50 (100%) | "Moderate magic: services costly."
+  FLAG magic.contributors[].reason | village | 50/50 (100%) | "Baseline risk for medium magic: moderate."
+  FLAG magic.contributors[].reason | village | 49/50 (98%) | "No arcane institutions. Practice is informal or absent."
+  FLAG magic.contributors[].reason | village | 46/50 (92%) | "Religious Authorities dominates arcane influence. Opposition is open."
+  FLAG magic.contributors[].reason | village | 33/50 (66%) | "Too poor to keep magic stocked: one step less available."
+  FLAG magic.contributors[].reason | town | 50/50 (100%) | "Magic level: medium."
+  FLAG magic.contributors[].reason | town | 50/50 (100%) | "Moderate magic: services costly."
+  FLAG magic.contributors[].reason | town | 50/50 (100%) | "Baseline risk for medium magic: moderate."
+  FLAG magic.contributors[].reason | town | 47/50 (94%) | "No arcane institutions. Practice is informal or absent."
+  FLAG magic.contributors[].reason | town | 34/50 (68%) | "medical role of magic is regular but not foundational."
+  FLAG magic.contributors[].reason | town | 23/50 (46%) | "Religious Authorities dominates arcane influence. Opposition is open."
+  FLAG magic.contributors[].reason | town | 21/50 (42%) | "Religious and arcane powers in rough balance: wary coexistence."
+  FLAG magic.contributors[].reason | city | 50/50 (100%) | "Magic level: medium."
+  FLAG magic.contributors[].reason | city | 50/50 (100%) | "Moderate magic: services costly."
+  FLAG magic.contributors[].reason | city | 50/50 (100%) | "Baseline risk for medium magic: moderate."
+  FLAG magic.contributors[].reason | city | 47/50 (94%) | "medical role of magic is regular but not foundational."
+  FLAG magic.contributors[].reason | city | 40/50 (80%) | "Religious and arcane powers in rough balance: wary coexistence."
+  FLAG magic.contributors[].reason | city | 39/50 (78%) | "Arcane institution(s) without dominant faction presence: fragmented control."
+  FLAG magic.contributors[].reason | city | 39/50 (78%) | "economic role of magic is regular but not foundational."
+  FLAG magic.contributors[].reason | city | 39/50 (78%) | "infrastructure role of magic is regular but not foundational."
+  FLAG magic.contributors[].reason | city | 18/50 (36%) | "3 arcane institution(s) extend public availability."
+  FLAG magic.contributors[].reason | city | 15/50 (30%) | "2 arcane institution(s) extend public availability."
+  FLAG magic.contributors[].reason | metropolis | 50/50 (100%) | "Magic level: medium."
+  FLAG magic.contributors[].reason | metropolis | 50/50 (100%) | "Arcane institution(s) without dominant faction presence: fragmented control."
+  FLAG magic.contributors[].reason | metropolis | 50/50 (100%) | "Moderate magic: services costly."
+  FLAG magic.contributors[].reason | metropolis | 50/50 (100%) | "Baseline risk for medium magic: moderate."
+  FLAG magic.contributors[].reason | metropolis | 50/50 (100%) | "Religious and arcane powers in rough balance: wary coexistence."
+  FLAG magic.contributors[].reason | metropolis | 50/50 (100%) | "economic role of magic is regular but not foundational."
+  FLAG magic.contributors[].reason | metropolis | 50/50 (100%) | "medical role of magic is regular but not foundational."
+  FLAG magic.contributors[].reason | metropolis | 50/50 (100%) | "infrastructure role of magic is regular but not foundational."
+  FLAG magic.contributors[].reason | metropolis | 41/50 (82%) | "4 arcane institution(s) extend public availability."
+
+════ B. viabilityFilter.js :: isViabilityItem over the 300: which list drops each item (first rule that fires, in the predicate's order)
+
+  warnings: 144 items over 300 towns; by rule and title:
+     144  TITLES(Trade Dependencies) | sev=note type=- cat=- | "Trade Dependencies"
+  warnings COUNT LINE: TITLES 144
+
+  dependencies: 400 items over 300 towns; by rule and title:
+     100  SEV(dependency) | sev=dependency type=- cat=Provisioning at Scale | "Imports bulk materials and fuel"
+      62  SEV(dependency) | sev=dependency type=- cat=Resource Import | "Imports grain"
+      57  SEV(dependency) | sev=dependency type=- cat=Provisioning at Scale | "Imports staple food at urban scale"
+      51  SEV(dependency) | sev=dependency type=- cat=Resource Import | "Imports metals"
+      50  SEV(dependency) | sev=dependency type=- cat=Provisioning at Scale | "Imports finished goods and luxuries"
+      24  SEV(dependency) | sev=dependency type=- cat=Resource Import | "Imports timber"
+      17  SEV(dependency) | sev=dependency type=- cat=Resource Import | "Imports Bulk grain and flour"
+      16  SEV(dependency) | sev=dependency type=- cat=Resource Import | "Imports Bulk grain and foodstuffs"
+      10  SEV(dependency) | sev=dependency type=- cat=Resource Import | "Imports Timber and building wood"
+       9  SEV(dependency) | sev=dependency type=- cat=Resource Import | "Imports timber (for large vessels)"
+       4  SEV(dependency) | sev=dependency type=- cat=Food Production | "Food Import Requirement"
+  dependencies COUNT LINE: SEV 400
+
+  viability.summary: the record's spelling vs the trimmed display spelling (trimViabilitySummary ∘ stripViabilityToken); the tab prints deriveViability().summary (canonicalViewModel default-on) — see prints.out.txt for what is printed
+  record summary SHAPES (digits as N): 7
+     111  ✓ VIABLE: Settlement can survive but has N operational dependencies that require active management. N plot hooks available.
+      93  ✓ VIABLE: Settlement is economically self-sufficient and historically plausible.
+      52  ✓ VIABLE: Settlement can survive but has N operational dependency that require active management. N plot hooks available.
+      19  △ VIABLE WITH PROVISIONING STRAIN: N% of daily food need remains uncovered.
+      14  ✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover N% of daily food need.
+       8  ✗ NOT VIABLE: N critical issues prevent settlement survival.
+       3  ✗ NOT VIABLE: N critical issue prevents settlement survival.
+
+════ C. AUDIENCE. (1) the stored record paths each reader TOUCHES (a proxy over the record, EXECUTED on 12 towns, 2 a size); (2) whether the public projection toPublicSafe(record) serves it (top key on PUBLIC_TOPLEVEL_KEYS, no PRIVATE_KEY_RE segment), and (3) the re-derivation on toPublicSafe(record) equal to the owner's text over all 300 (EXECUTED).
+
+  ctx.profiles: touches 5 paths; NOT served by the public projection: none
+    powerStructure, powerStructure.factions, powerStructure.factions[], powerStructure.governingName, powerStructure.publicLegitimacy
+
+  ctx.chains: touches 20 paths; NOT served by the public projection: none
+    activeConditions, activeConditions.length, activeConditions[], activeConditions[].affectedSystems, activeConditions[].affectedSystems[], activeConditions[].archetype, activeConditions[].causes, activeConditions[].causes[], activeConditions[].description, activeConditions[].duration, activeConditions[].id, activeConditions[].label, activeConditions[].severity, activeConditions[].status, activeConditions[].triggeredAt, config, config.tradeRouteAccess, economicState, economicState.activeChains, economicState.activeChains[]
+
+  ctx.conditions: touches 15 paths; NOT served by the public projection: none
+    activeConditions, activeConditions.length, activeConditions[], activeConditions[].affectedSystems, activeConditions[].affectedSystems[], activeConditions[].archetype, activeConditions[].causes, activeConditions[].causes[], activeConditions[].description, activeConditions[].duration, activeConditions[].id, activeConditions[].label, activeConditions[].severity, activeConditions[].status, activeConditions[].triggeredAt
+
+  ctx.threats: touches 30 paths; NOT served by the public projection: none
+    activeConditions, activeConditions.length, activeConditions[], activeConditions[].affectedSystems, activeConditions[].affectedSystems[], activeConditions[].archetype, activeConditions[].causes, activeConditions[].causes[], activeConditions[].description, activeConditions[].duration, activeConditions[].id, activeConditions[].label, activeConditions[].severity, activeConditions[].status, activeConditions[].triggeredAt, config, config.monsterThreat, defenseProfile, defenseProfile.scores, economicState, economicState.foodSecurity, institutions, institutions.length, institutions[], institutions[].name, institutions[].source, stress, stressors, stressors.label, stressors.type
+
+  ctx.capacities: touches 48 paths; NOT served by the public projection: none
+    activeConditions, activeConditions.length, activeConditions[], activeConditions[].affectedSystems, activeConditions[].affectedSystems[], activeConditions[].archetype, activeConditions[].causes, activeConditions[].causes[], activeConditions[].description, activeConditions[].duration, activeConditions[].id, activeConditions[].label, activeConditions[].severity, activeConditions[].status, activeConditions[].triggeredAt, availableServices, availableServices.healing, availableServices.healing[], config, config.magicExists, config.magicLevel, config.monsterThreat, config.priorityMagic, config.tradeRouteAccess, defenseProfile, defenseProfile.magicDependency, defenseProfile.readiness, defenseProfile.scores, economicState, economicState.activeChains, economicState.activeChains[], economicState.foodSecurity, economicState.primaryExports, institutions, institutions.length, institutions[], institutions[].name, institutions[].source, population, powerStructure, powerStructure.factions, powerStructure.factions[], powerStructure.governingName, powerStructure.publicLegitimacy, stress, stressors, stressors.label, stressors.type
+
+  ctx.causal: touches 82 paths; NOT served by the public projection: npcs[].plotHooks, npcs[].plotHooks[], npcs[].secret
+    activeConditions, activeConditions.length, activeConditions[], activeConditions[].affectedSystems, activeConditions[].affectedSystems[], activeConditions[].archetype, activeConditions[].causes, activeConditions[].causes[], activeConditions[].description, activeConditions[].duration, activeConditions[].id, activeConditions[].label, activeConditions[].severity, activeConditions[].status, activeConditions[].triggeredAt, availableServices, availableServices.healing, availableServices.healing[], config, config.magicExists, config.magicLevel, config.monsterThreat, config.priorityMagic, config.tradeRouteAccess, defenseProfile, defenseProfile.institutions, defenseProfile.magicDependency, defenseProfile.readiness, defenseProfile.scores, economicState, economicState.activeChains, economicState.activeChains[], economicState.economicComplexity, economicState.foodSecurity, economicState.prosperity, economicState.safetyProfile, institutions, institutions.length, institutions[], institutions[].catalogId, institutions[].name, institutions[].source, npcs, npcs.length, npcs[], npcs[].allegiance, npcs[].category, npcs[].goal, npcs[].id, npcs[].influence, npcs[].institution, npcs[].memberships, npcs[].memberships[], npcs[].name, npcs[].plotHooks, npcs[].plotHooks[], npcs[].power, npcs[].presentation, npcs[].role, npcs[].secret, npcs[].structuralPosition, npcs[].structuralRank, population, powerStructure, powerStructure.factions, powerStructure.factions[], powerStructure.governingName, powerStructure.government, powerStructure.publicLegitimacy, relationships, relationships.length, relationships[], relationships[].description, relationships[].from, relationships[].npc2Name, relationships[].tension, relationships[].to, relationships[].type, relationships[].typeName, stress, stressors, stressors.type
+
+  ctx.history: touches 9 paths; NOT served by the public projection: none
+    economicState, history, history.currentTensions, history.currentTensions[], history.founding, history.historicalEvents, history.historicalEvents[], history.legacyAnnotations, history.legacyAnnotations[]
+
+  s.institutions: touches 33 paths; NOT served by the public projection: none
+    institutions, institutions.length, institutions[], institutions[].baseChance, institutions[].cascadeAdded, institutions[].cascadeBoost, institutions[].catalogId, institutions[].category, institutions[].coherenceRepair, institutions[].desc, institutions[].exclusiveGroup, institutions[].exclusiveGroupCoexists, institutions[].facets, institutions[].forbiddenResources, institutions[].forbiddenResources[], institutions[].forbiddenTradeRoutes, institutions[].forbiddenTradeRoutes[], institutions[].magicLicense, institutions[].name, institutions[].priorityCategory, institutions[].required, institutions[].serviceKeys, institutions[].serviceKeys[], institutions[].source, institutions[].tags, institutions[].tags[], institutions[].terrainAccess, institutions[].terrainAccess[], institutions[].terrainRequired, institutions[].terrainRequired[], institutions[].tier, institutions[].tradeRouteRequired, institutions[].tradeRouteRequired[]
+
+  viability.warnings: touches 3 paths; NOT served by the public projection: none
+    economicViability, economicViability.warnings, economicViability.warnings[]
+
+  viability.dependencies: touches 3 paths; NOT served by the public projection: none
+    economicViability, economicViability.dependencies, economicViability.dependencies[]
+
+  viability.summary: touches 2 paths; NOT served by the public projection: none
+    economicViability, economicViability.summary
+
+  magicProfile: touches 104 paths; NOT served by the public projection: npcs[].plotHooks, npcs[].plotHooks[], npcs[].secret
+    activeConditions, activeConditions.length, activeConditions[], activeConditions[].affectedSystems, activeConditions[].affectedSystems[], activeConditions[].archetype, activeConditions[].causes, activeConditions[].causes[], activeConditions[].description, activeConditions[].duration, activeConditions[].id, activeConditions[].label, activeConditions[].severity, activeConditions[].status, activeConditions[].triggeredAt, availableServices, availableServices.healing, availableServices.healing[], config, config.magicExists, config.magicLevel, config.monsterThreat, config.priorityMagic, config.tradeRouteAccess, defenseProfile, defenseProfile.institutions, defenseProfile.magicDependency, defenseProfile.readiness, defenseProfile.scores, economicState, economicState.activeChains, economicState.activeChains[], economicState.economicComplexity, economicState.foodSecurity, economicState.prosperity, economicState.safetyProfile, institutions, institutions.length, institutions[], institutions[].baseChance, institutions[].cascadeAdded, institutions[].cascadeBoost, institutions[].catalogId, institutions[].category, institutions[].coherenceRepair, institutions[].desc, institutions[].exclusiveGroup, institutions[].exclusiveGroupCoexists, institutions[].facets, institutions[].forbiddenResources, institutions[].forbiddenTradeRoutes, institutions[].magicLicense, institutions[].name, institutions[].priorityCategory, institutions[].required, institutions[].serviceKeys, institutions[].source, institutions[].tags, institutions[].terrainAccess, institutions[].terrainRequired, institutions[].tier, institutions[].tradeRouteRequired, npcs, npcs.length, npcs[], npcs[].allegiance, npcs[].category, npcs[].goal, npcs[].id, npcs[].influence, npcs[].institution, npcs[].memberships, npcs[].memberships[], npcs[].name, npcs[].plotHooks, npcs[].plotHooks[], npcs[].power, npcs[].presentation, npcs[].role, npcs[].secret, npcs[].structuralPosition, npcs[].structuralRank, npcs[].title, population, powerStructure, powerStructure.factions, powerStructure.factions[], powerStructure.governingName, powerStructure.government, powerStructure.publicLegitimacy, relationships, relationships.length, relationships[], relationships[].description, relationships[].from, relationships[].npc2Name, relationships[].tension, relationships[].to, relationships[].type, relationships[].typeName, stress, stressors, stressors.label, stressors.type
+
+  per candidate: the readers it uses (INFERRED, dailyLife.js) and the public re-derivation (EXECUTED, 300)
+  dailyLife.food_culture: readers ctx.capacities+ctx.chains+ctx.threats; private paths touched: none; public re-derivation equal 300/300, differs 0
+  dailyLife.dawn_work: readers ctx.capacities+ctx.profiles+ctx.threats; private paths touched: none; public re-derivation equal 300/300, differs 0
+  dailyLife.gathering_places: readers s.institutions; private paths touched: none; public re-derivation equal 300/300, differs 0
+  dailyLife.child_warnings: readers ctx.threats; private paths touched: none; public re-derivation equal 300/300, differs 0
+  dailyLife.commoner_resentments: readers ctx.causal+ctx.capacities+ctx.conditions; private paths touched: npcs[].plotHooks, npcs[].plotHooks[], npcs[].secret; public re-derivation equal 300/300, differs 0
+  dailyLife.outsider_impressions: readers ctx.capacities+ctx.profiles+ctx.threats; private paths touched: none; public re-derivation equal 300/300, differs 0
+  dailyLife.unspoken_topics: readers ctx.threats+ctx.history+ctx.conditions; private paths touched: none; public re-derivation equal 300/300, differs 0
+  dailyLife.recent_changes: readers ctx.history+ctx.conditions+ctx.threats; private paths touched: none; public re-derivation equal 300/300, differs 0
+  viability.warnings[].title: readers viability.warnings; private paths touched: none; public re-derivation equal 300/300, differs 0
+  viability.warnings[].description: readers viability.warnings; private paths touched: none; public re-derivation equal 300/300, differs 0
+  viability.dependencies[].title: readers viability.dependencies; private paths touched: none; public re-derivation equal 300/300, differs 0
+  viability.dependencies[].description: readers viability.dependencies; private paths touched: none; public re-derivation equal 300/300, differs 0
+  viability.summary: readers viability.summary; private paths touched: none; public re-derivation equal 300/300, differs 0
+  magic.contributors[].reason: readers magicProfile; private paths touched: npcs[].plotHooks, npcs[].plotHooks[], npcs[].secret; public re-derivation equal 300/300, differs 0
+
+  NOTE (INFERRED, read): the npcs[].secret / npcs[].plotHooks touch is deriveAllNpcProfiles (npcProfile.js:623,631) bundling them into a profile; causalState.js:1320 uses only p.rank of it, and the public re-derivation above is equal on 300/300 (EXECUTED): a TOUCH, not a value read (factLayers.js counts touch).
+
+  towns with a hidden/rumored threat in ctx.threats (unspoken_topics names them; outsider/child/recent may sort them in): 0/300
+  towns with history.unresolvedWound (unspoken_topics' "the wound" line): 300/300
+  a hidden/rumored threat's LABEL contained in the slot text (EXECUTED): child_warnings 0, outsider_impressions 0, recent_changes 0, dawn_work 0, food_culture 0 (of 300)
+
+done in 48s

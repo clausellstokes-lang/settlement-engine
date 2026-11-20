@@ -1,0 +1,616 @@
+{
+ "summaryA": {
+  "dailyLife.food_culture": {
+   "thorp": {
+    "fill": 50,
+    "distinct": 9,
+    "top": 0.7,
+    "flag": true
+   },
+   "hamlet": {
+    "fill": 50,
+    "distinct": 12,
+    "top": 0.48,
+    "flag": true
+   },
+   "village": {
+    "fill": 50,
+    "distinct": 8,
+    "top": 0.5,
+    "flag": true
+   },
+   "town": {
+    "fill": 50,
+    "distinct": 12,
+    "top": 0.54,
+    "flag": true
+   },
+   "city": {
+    "fill": 50,
+    "distinct": 18,
+    "top": 0.24,
+    "flag": false
+   },
+   "metropolis": {
+    "fill": 50,
+    "distinct": 18,
+    "top": 0.3,
+    "flag": true
+   }
+  },
+  "dailyLife.dawn_work": {
+   "thorp": {
+    "fill": 50,
+    "distinct": 2,
+    "top": 0.94,
+    "flag": true
+   },
+   "hamlet": {
+    "fill": 50,
+    "distinct": 4,
+    "top": 0.88,
+    "flag": true
+   },
+   "village": {
+    "fill": 50,
+    "distinct": 3,
+    "top": 0.88,
+    "flag": true
+   },
+   "town": {
+    "fill": 50,
+    "distinct": 4,
+    "top": 0.48,
+    "flag": true
+   },
+   "city": {
+    "fill": 50,
+    "distinct": 3,
+    "top": 0.8,
+    "flag": true
+   },
+   "metropolis": {
+    "fill": 50,
+    "distinct": 3,
+    "top": 0.78,
+    "flag": true
+   }
+  },
+  "dailyLife.gathering_places": {
+   "thorp": {
+    "fill": 50,
+    "distinct": 2,
+    "top": 0.9,
+    "flag": true
+   },
+   "hamlet": {
+    "fill": 50,
+    "distinct": 8,
+    "top": 0.66,
+    "flag": true
+   },
+   "village": {
+    "fill": 50,
+    "distinct": 10,
+    "top": 0.64,
+    "flag": true
+   },
+   "town": {
+    "fill": 50,
+    "distinct": 4,
+    "top": 0.46,
+    "flag": true
+   },
+   "city": {
+    "fill": 50,
+    "distinct": 4,
+    "top": 0.66,
+    "flag": true
+   },
+   "metropolis": {
+    "fill": 50,
+    "distinct": 2,
+    "top": 0.98,
+    "flag": true
+   }
+  },
+  "dailyLife.child_warnings": {
+   "thorp": {
+    "fill": 50,
+    "distinct": 11,
+    "top": 0.34,
+    "flag": true
+   },
+   "hamlet": {
+    "fill": 50,
+    "distinct": 12,
+    "top": 0.32,
+    "flag": true
+   },
+   "village": {
+    "fill": 50,
+    "distinct": 10,
+    "top": 0.3,
+    "flag": true
+   },
+   "town": {
+    "fill": 50,
+    "distinct": 7,
+    "top": 0.38,
+    "flag": true
+   },
+   "city": {
+    "fill": 50,
+    "distinct": 5,
+    "top": 0.62,
+    "flag": true
+   },
+   "metropolis": {
+    "fill": 50,
+    "distinct": 5,
+    "top": 0.6,
+    "flag": true
+   }
+  },
+  "dailyLife.commoner_resentments": {
+   "thorp": {
+    "fill": 50,
+    "distinct": 4,
+    "top": 0.64,
+    "flag": true
+   },
+   "hamlet": {
+    "fill": 50,
+    "distinct": 6,
+    "top": 0.7,
+    "flag": true
+   },
+   "village": {
+    "fill": 50,
+    "distinct": 4,
+    "top": 0.88,
+    "flag": true
+   },
+   "town": {
+    "fill": 50,
+    "distinct": 7,
+    "top": 0.34,
+    "flag": true
+   },
+   "city": {
+    "fill": 50,
+    "distinct": 8,
+    "top": 0.4,
+    "flag": true
+   },
+   "metropolis": {
+    "fill": 50,
+    "distinct": 5,
+    "top": 0.56,
+    "flag": true
+   }
+  },
+  "dailyLife.outsider_impressions": {
+   "thorp": {
+    "fill": 50,
+    "distinct": 9,
+    "top": 0.54,
+    "flag": true
+   },
+   "hamlet": {
+    "fill": 50,
+    "distinct": 15,
+    "top": 0.38,
+    "flag": true
+   },
+   "village": {
+    "fill": 50,
+    "distinct": 10,
+    "top": 0.48,
+    "flag": true
+   },
+   "town": {
+    "fill": 50,
+    "distinct": 19,
+    "top": 0.16,
+    "flag": false
+   },
+   "city": {
+    "fill": 50,
+    "distinct": 30,
+    "top": 0.1,
+    "flag": false
+   },
+   "metropolis": {
+    "fill": 50,
+    "distinct": 25,
+    "top": 0.12,
+    "flag": false
+   }
+  },
+  "dailyLife.unspoken_topics": {
+   "thorp": {
+    "fill": 50,
+    "distinct": 1,
+    "top": 1,
+    "flag": true
+   },
+   "hamlet": {
+    "fill": 50,
+    "distinct": 1,
+    "top": 1,
+    "flag": true
+   },
+   "village": {
+    "fill": 50,
+    "distinct": 1,
+    "top": 1,
+    "flag": true
+   },
+   "town": {
+    "fill": 50,
+    "distinct": 1,
+    "top": 1,
+    "flag": true
+   },
+   "city": {
+    "fill": 50,
+    "distinct": 1,
+    "top": 1,
+    "flag": true
+   },
+   "metropolis": {
+    "fill": 50,
+    "distinct": 1,
+    "top": 1,
+    "flag": true
+   }
+  },
+  "dailyLife.recent_changes": {
+   "thorp": {
+    "fill": 50,
+    "distinct": 38,
+    "top": 0.18,
+    "flag": false
+   },
+   "hamlet": {
+    "fill": 50,
+    "distinct": 47,
+    "top": 0.06,
+    "flag": false
+   },
+   "village": {
+    "fill": 50,
+    "distinct": 48,
+    "top": 0.04,
+    "flag": false
+   },
+   "town": {
+    "fill": 50,
+    "distinct": 42,
+    "top": 0.16,
+    "flag": false
+   },
+   "city": {
+    "fill": 50,
+    "distinct": 38,
+    "top": 0.16,
+    "flag": false
+   },
+   "metropolis": {
+    "fill": 50,
+    "distinct": 43,
+    "top": 0.1,
+    "flag": false
+   }
+  },
+  "viability.warnings[].title": {
+   "thorp": {
+    "fill": 0,
+    "distinct": 0,
+    "top": 0,
+    "flag": false
+   },
+   "hamlet": {
+    "fill": 0,
+    "distinct": 0,
+    "top": 0,
+    "flag": false
+   },
+   "village": {
+    "fill": 0,
+    "distinct": 0,
+    "top": 0,
+    "flag": false
+   },
+   "town": {
+    "fill": 45,
+    "distinct": 1,
+    "top": 1,
+    "flag": true
+   },
+   "city": {
+    "fill": 50,
+    "distinct": 1,
+    "top": 1,
+    "flag": true
+   },
+   "metropolis": {
+    "fill": 49,
+    "distinct": 1,
+    "top": 1,
+    "flag": true
+   }
+  },
+  "viability.warnings[].description": {
+   "thorp": {
+    "fill": 0,
+    "distinct": 0,
+    "top": 0,
+    "flag": false
+   },
+   "hamlet": {
+    "fill": 0,
+    "distinct": 0,
+    "top": 0,
+    "flag": false
+   },
+   "village": {
+    "fill": 0,
+    "distinct": 0,
+    "top": 0,
+    "flag": false
+   },
+   "town": {
+    "fill": 45,
+    "distinct": 15,
+    "top": 0.28888888888888886,
+    "flag": true
+   },
+   "city": {
+    "fill": 50,
+    "distinct": 39,
+    "top": 0.06,
+    "flag": false
+   },
+   "metropolis": {
+    "fill": 49,
+    "distinct": 30,
+    "top": 0.10204081632653061,
+    "flag": false
+   }
+  },
+  "viability.dependencies[].title": {
+   "thorp": {
+    "fill": 0,
+    "distinct": 0,
+    "top": 0,
+    "flag": false
+   },
+   "hamlet": {
+    "fill": 5,
+    "distinct": 2,
+    "top": 0.6,
+    "flag": true
+   },
+   "village": {
+    "fill": 30,
+    "distinct": 5,
+    "top": 0.6333333333333333,
+    "flag": true
+   },
+   "town": {
+    "fill": 32,
+    "distinct": 7,
+    "top": 0.53125,
+    "flag": true
+   },
+   "city": {
+    "fill": 50,
+    "distinct": 9,
+    "top": 1,
+    "flag": true
+   },
+   "metropolis": {
+    "fill": 50,
+    "distinct": 10,
+    "top": 1,
+    "flag": true
+   }
+  },
+  "viability.dependencies[].description": {
+   "thorp": {
+    "fill": 0,
+    "distinct": 0,
+    "top": 0,
+    "flag": false
+   },
+   "hamlet": {
+    "fill": 5,
+    "distinct": 4,
+    "top": 0.4,
+    "flag": true
+   },
+   "village": {
+    "fill": 30,
+    "distinct": 5,
+    "top": 0.6333333333333333,
+    "flag": true
+   },
+   "town": {
+    "fill": 32,
+    "distinct": 7,
+    "top": 0.53125,
+    "flag": true
+   },
+   "city": {
+    "fill": 50,
+    "distinct": 9,
+    "top": 1,
+    "flag": true
+   },
+   "metropolis": {
+    "fill": 50,
+    "distinct": 10,
+    "top": 1,
+    "flag": true
+   }
+  },
+  "viability.summary": {
+   "thorp": {
+    "fill": 50,
+    "distinct": 8,
+    "top": 0.82,
+    "flag": true
+   },
+   "hamlet": {
+    "fill": 50,
+    "distinct": 12,
+    "top": 0.64,
+    "flag": true
+   },
+   "village": {
+    "fill": 50,
+    "distinct": 10,
+    "top": 0.38,
+    "flag": true
+   },
+   "town": {
+    "fill": 50,
+    "distinct": 18,
+    "top": 0.34,
+    "flag": true
+   },
+   "city": {
+    "fill": 50,
+    "distinct": 7,
+    "top": 0.3,
+    "flag": true
+   },
+   "metropolis": {
+    "fill": 50,
+    "distinct": 8,
+    "top": 0.34,
+    "flag": true
+   }
+  },
+  "magic.contributors[].reason": {
+   "thorp": {
+    "fill": 50,
+    "distinct": 7,
+    "top": 1,
+    "flag": true
+   },
+   "hamlet": {
+    "fill": 50,
+    "distinct": 7,
+    "top": 1,
+    "flag": true
+   },
+   "village": {
+    "fill": 50,
+    "distinct": 24,
+    "top": 1,
+    "flag": true
+   },
+   "town": {
+    "fill": 50,
+    "distinct": 17,
+    "top": 1,
+    "flag": true
+   },
+   "city": {
+    "fill": 50,
+    "distinct": 15,
+    "top": 1,
+    "flag": true
+   },
+   "metropolis": {
+    "fill": 50,
+    "distinct": 13,
+    "top": 1,
+    "flag": true
+   }
+  }
+ },
+ "audience": {
+  "dailyLife.food_culture": {
+   "same": 300,
+   "diff": 0,
+   "privPaths": []
+  },
+  "dailyLife.dawn_work": {
+   "same": 300,
+   "diff": 0,
+   "privPaths": []
+  },
+  "dailyLife.gathering_places": {
+   "same": 300,
+   "diff": 0,
+   "privPaths": []
+  },
+  "dailyLife.child_warnings": {
+   "same": 300,
+   "diff": 0,
+   "privPaths": []
+  },
+  "dailyLife.commoner_resentments": {
+   "same": 300,
+   "diff": 0,
+   "privPaths": [
+    "npcs[].plotHooks",
+    "npcs[].plotHooks[]",
+    "npcs[].secret"
+   ]
+  },
+  "dailyLife.outsider_impressions": {
+   "same": 300,
+   "diff": 0,
+   "privPaths": []
+  },
+  "dailyLife.unspoken_topics": {
+   "same": 300,
+   "diff": 0,
+   "privPaths": []
+  },
+  "dailyLife.recent_changes": {
+   "same": 300,
+   "diff": 0,
+   "privPaths": []
+  },
+  "viability.warnings[].title": {
+   "same": 300,
+   "diff": 0,
+   "privPaths": []
+  },
+  "viability.warnings[].description": {
+   "same": 300,
+   "diff": 0,
+   "privPaths": []
+  },
+  "viability.dependencies[].title": {
+   "same": 300,
+   "diff": 0,
+   "privPaths": []
+  },
+  "viability.dependencies[].description": {
+   "same": 300,
+   "diff": 0,
+   "privPaths": []
+  },
+  "viability.summary": {
+   "same": 300,
+   "diff": 0,
+   "privPaths": []
+  },
+  "magic.contributors[].reason": {
+   "same": 300,
+   "diff": 0,
+   "privPaths": [
+    "npcs[].plotHooks",
+    "npcs[].plotHooks[]",
+    "npcs[].secret"
+   ]
+  }
+ }
+}

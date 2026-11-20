@@ -1,0 +1,8 @@
+RE-RUN: (PAGE-9's check on texts.json) node -e over texts.json counting towns whose dailyLife.recent_changes holds each phrase
+2026-11-20 17:28 UTC EXECUTED by PAGE-9 over the 300 (texts.json):
+towns with "has come to a head": 185 of 300
+towns with "civic stability at risk" (any case): 154 of 300
+towns with "The last few seasons have run their usual course": 21 of 300
+example (thorp, 9 of 50 towns this exact text): "Civic stability at risk has come to a head."
+READING: recent_changes passes ruling 17's top-share test only because it splices a town's own history; its clause
+"<machine label> has come to a head" is the model's working on a DM's page (the F4 class) in about half the towns.
