@@ -1,0 +1,13 @@
+# FRAME-6 · brief SIX — the six sheets for the owner (measure only; nothing under src/ or tests/ changes)
+
+Written 2026-11-20T14:40Z (`date -u`) by FRAME-6 on `lane/frame-6-2026-11-20`. Source: the chair's order (13:31 and 13:48 UTC: P1b-F, C2, then the six sheets for the owner) and FRAME-4.txt YOUR LIST item 5 ("THREE CALM SHEETS BYTE-IDENTICAL to today's line and THREE FRAMED SHEETS BEFORE AND AFTER"). Each point vetoable by the owner.
+
+**Read whole first:** `docs/chair/2026-11-20/content/FRAME-6-HANDBACK.md` (the count; the instruments); `frame5/CF12-CAPTURED-HALL-RESULTS.md` § "The scripts" (its `compare.mjs` formatter is the format to reuse: sides as "words: who — why. Wants…", people to voice as "name · role [why: side] — reason — line", hooks with their source); `frame5/CF12-SHEETS.txt` (the precedent file); `src/domain/summary/tonightSheet.js` (`composeTonightSheet`, its `audience` option).
+
+**Trees:** BEFORE = today's line, an archive of `43ab0f5eb` (`lane/join-2026-11-14`; it carries no frame code). AFTER = the lane tip your worktree holds. Births at each tree with that tree's own generator: `generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} })`. Sheets composed with `{ audience: 'owner' }` at the tip (the line's composer takes no audience; call it as the line does). Also compose the tip's sheet for a stranger (no options) and say whether it equals the BEFORE sheet byte for byte, for every town in the file.
+
+**Choose, from the 330-town calm pool** (`frame6/tools/pool.mjs 55`; seeds `frame-calm-<tier>-<i>`):
+1. THREE CALM towns, three different tiers, each with no trouble of weight at the tip (`troubleCast.js :: troubleOfWeight` null), whose owner sheet at the tip is BYTE-IDENTICAL to the line's: state the equality as a digest pair (sha256 of the composed sheet JSON, 16 hex) and print the sheet once.
+2. THREE FRAMED towns, three different tiers AND three different strains (one W1 seat, one W3 material, one W4 hall-captured from CF12's five: town-20, town-80, city-12, city-49, metropolis-51), none already in `CF12-SHEETS.txt` except the W4 one if no other W4 exists. Print BEFORE (the line) and AFTER (the tip, owner), and say for each the strain, the opening trouble and why it was chosen (first of its strain and tier by seed index).
+
+**Output:** `docs/chair/2026-11-20/content/frame6/SIX-SHEETS.txt` (plain text, the CF12 file's header style: what each block is, the trees by sha) and `frame6/SIX-SHEETS-RESULTS.md` (the choice, the digests, the stranger equality, the script verbatim). One commit by explicit paths: `docs(FRAME-6 · SIX): ...`. Change nothing under `src/` or `tests/`.
