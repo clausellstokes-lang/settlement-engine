@@ -105,7 +105,9 @@ born without the key STAY, every family. The arm: 0 husks of 550; the kept rows 
   r3m-metropolis-wartime-0-59, r3m-town-insurgency-1-94, r3m-town-none-0-17, r3m-town-none-0-23, r3m-town-none-1-91,
   r3m-town-under_siege-0-18, r3m-town-under_siege-0-28, r3m-town-under_siege-1-88, r3m-town-under_siege-1-98,
   r3m-town-wartime-0-29.
-- R3's born test WHOLE and THE ACCEPTANCE RUN: BORN_ACC
+- R3's born test WHOLE (`tests/security/galleryRosterChoices.pglite.test.js`): 37 of 37, exit 0 (`born-green.txt`,
+  `born-green-measures.txt`). THE ACCEPTANCE RUN (run-all-v27.sh, last, no other job on v27x211/v27x212): EXIT 0, 40 PASS,
+  0 FAIL, 44 s (`acceptance.txt`; responses in /var/tmp/v18/out/v28/t3acc).
 - eslint on the touched source and test: exit 0 (`eslint.txt`). VR27: no new 212 helper, nothing to revoke; the rollback
   untouched. 211 and 212 sha256 below (`hashes.txt`).
 
@@ -140,5 +142,5 @@ COMMITS: 95f2ddfb8 (red: out/v27/tell2/measure/{tell2-an.mjs,tell2.sh}; out/v28/
 red/window.txt,red/done.txt,verify-red/verify.txt,red-arms.txt,red-arms-measures.txt}; tests/security/galleryVeilTell3.pglite.test.js);
 efba72444 (the cure: src/domain/display/galleryRosterChoices.js, supabase/migrations/212_share_veil_later_cures.sql,
 src/domain/veil/rosterChoiceRegistry.js, the test file, out/v28/tell3/{green-arms.txt,green-arms-measures.txt,eslint.txt});
-the hand-back commit (this file, green records, measure/). 212 sha256 707822e672bc400c8edada1f2aee0b51c51a968728f312f874a9af67903c01ae
+b3b533027 (the hand-back draft, the green records, measure/); the closing commit (this file, born-green*, acceptance.txt). THE LANE PASSED TO VEIL-29 (the seat, 21:2x): this stage stops here, re-staffed from b3b533027; no further cure. 212 sha256 707822e672bc400c8edada1f2aee0b51c51a968728f312f874a9af67903c01ae
 (was 1c15e3ac…ebc7); 211 eface6d093933170b9541fe630068c26e5bd41477e95e913ae7168e373be0b01 (unchanged).
