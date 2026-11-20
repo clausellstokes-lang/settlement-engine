@@ -248,6 +248,17 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     Merge it with both, then "CURATE <commit>" to the chair. If R3-CURE-4 narrows power.entry's reach, the condition is
     re-checked before R3's merge and the chair told what changed. THE HAND-OVER POINT for VEIL-25: R3's merge or 380,000
     tokens by its record, whichever comes first; VEIL-26 is seated beside it; after the hand-over VEIL-25 only relays builders.
+41. THE CHAIR, 12:09: (1) `income.criminalRow` (registry VR14 (ii)) IS A RULED FAIL-CLOSED RULE: a row whose weight a
+    hidden house raised is not served; the seven LOWER towns resting on it do not block R3. (2) THE TELL QUESTION, SHARPENED:
+    the served page is judged against what a town WITH NOTHING HIDDEN could show UNDER SOME SETTING OF THE OWNER'S SWITCHES.
+    A page without the criminal income row is what every town shows with the criminal switch off, so its absence alone is
+    no tell; the tell, if any, is a COMBINATION (some criminal content a switch-off page would not show, together with the
+    income row's and the criminal powers' absence). Per LOWER town (the seven first, then all thirteen): is the served page
+    equal, in every criminal-related field, to the regenerated house-free town's page under SOME switch setting? Yes for all:
+    no tell. No: the differing fields are the tell; the cure withholds or re-derives them too. The instrument goes in the
+    lane as one more column of R3-CURE-4's gate if cheap (relayed to its builder 12:1x); else the reader builds its own.
+    (3) R3 merges "GREEN TOWARD WITHHOLDING, THE TELL QUESTION OPEN" once R3-CURE-4 is in and green; its line names the seven.
+    VEIL-26 is read in and has re-made the instruments.
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
@@ -332,6 +343,7 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
 - 11:42 the Curate notice returned (1bd894613), read, re-run; its sentence to the chair.
 - 11:43 the chair ruled the notice (ruling 40); the notice's builder resumed for the words and the condition (11:44). R3 red at 06e9e64b3 re-run: born test 6 of 37 red, each a cure's new arm (`out/v25/rerun/born-red-06.txt`).
 - 11:55 the Curate notice merged 7ddf4876f (re-run: red 3/16, green 25/25).
+- 12:09 the chair: ruling 41; the tell column relayed to R3-CURE-4 (12:10). The seat's own check of five LOWER towns at 9b18835d1 matches D1 (`out/v25/lower-check-9b.txt`).
 
 ## 7. THE JOIN (the chair's word in VEIL-25's prompt): what the join must re-prove on the joined document
 The working line (origin/lane/join-2026-11-14, at 0c906948 when this was written) and four content lanes ADD SERVED TEXT at
