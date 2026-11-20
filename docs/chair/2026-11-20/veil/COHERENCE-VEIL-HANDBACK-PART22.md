@@ -114,3 +114,8 @@ UNIT 2 STOPPED AGAIN (03:42 UTC): the explained-writer table is in `scripts/chec
 detector file; rows key by `<key> on <shape>` (it would cover the 14 frozen rows); `writer` must be a src file writing the
 key (only `src/store/configSlice.js`); no admitted `mechanism` fits a served config. Both doors are the governed baseline.
 To the chair: (A) the three as KNOWN, NAMED reds with the schema-46 rung as debt (the seat recommends), or (B) the rung now.
+
+THE CHAIR (03:47 UTC): NEITHER (A) NOR (B): (C) CURE THE CAUSE IN THE CODE: the import builds its config through the
+canonical door (DEFAULT_CONFIG by the house's own normalizer); red first the scanner (4 -> 1); fidelity holds; bounded: if
+it still reds, STOP and the governed rung becomes its own unit on the line. A fresh bounded builder (`briefs/OSR-C-BRIEF.md`).
+"V10-2 cabdfaa69" is in: the chair reads it; the seat merges on its word.
