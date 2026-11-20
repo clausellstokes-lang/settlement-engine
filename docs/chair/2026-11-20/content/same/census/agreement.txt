@@ -1,0 +1,67 @@
+# The chair's census.mjs (origin/lane/chair-2026-11-08 bca8c6fe3) re-run at 669e2d72e, 50 a size (hxd), beside the rendered hxd rows that hold the same path
+# (a rendered slot is keyed by the SHORTEST stored path holding the sentence: recentConflict's sentence is also stored at pressureSentence, so most of it files there)
+
+census.mjs rows: same 961, differ 0, new at tip 0, gone at tip 0
+
+== economicState.situationDesc
+thorp      census.mjs tip: 35/50 top 0.7 seen 0.496 dist 8   committed: 35/50
+hamlet     census.mjs tip: 33/50 top 0.66 seen 0.447 dist 8   committed: 33/50
+village    census.mjs tip: 32/50 top 0.64 seen 0.433 dist 8   committed: 32/50
+town       census.mjs tip: 45/50 top 0.9 seen 0.811 dist 4   committed: 45/50
+city       census.mjs tip: 44/50 top 0.88 seen 0.775 dist 5   committed: 44/50
+metropolis census.mjs tip: 45/50 top 0.9 seen 0.81 dist 4   committed: 45/50
+
+== powerStructure.recentConflict
+thorp      census.mjs tip: 27/50 top 0.54 seen 0.301 dist 13   committed: 27/50
+           rendered web:Summary/Overview         24/50 top 0.48 seen 0.236 dist 25 (slot source pressureSentence)
+           rendered web:Systems/Power            24/33 top 0.73 seen 0.545 dist 5 (slot source pressureSentence)
+           rendered pdf:canon_dossier            24/37 top 0.65 seen 0.434 dist 11 (slot source pressureSentence)
+           rendered pdf:draft_brief              24/37 top 0.65 seen 0.434 dist 11 (slot source pressureSentence)
+           rendered session                      24/37 top 0.65 seen 0.434 dist 11 (slot source pressureSentence)
+           rendered web:Systems/Power            3/15 top 0.2 seen 0.07 dist 21 (slot source powerStructure.recentConflict)
+           rendered pdf:canon_dossier            3/15 top 0.2 seen 0.07 dist 21 (slot source powerStructure.recentConflict)
+           rendered pdf:draft_brief              3/15 top 0.2 seen 0.07 dist 21 (slot source powerStructure.recentConflict)
+hamlet     census.mjs tip: 24/50 top 0.48 seen 0.243 dist 16   committed: 24/50
+           rendered web:Summary/Overview         12/50 top 0.24 seen 0.055 dist 51 (slot source pressureSentence)
+           rendered web:Systems/Power            12/34 top 0.35 seen 0.144 dist 34 (slot source powerStructure.recentConflict)
+           rendered pdf:canon_dossier            12/30 top 0.4 seen 0.154 dist 27 (slot source pressureSentence)
+           rendered pdf:canon_dossier            12/34 top 0.35 seen 0.144 dist 34 (slot source powerStructure.recentConflict)
+           rendered pdf:draft_brief              12/30 top 0.4 seen 0.154 dist 27 (slot source pressureSentence)
+           rendered pdf:draft_brief              12/34 top 0.35 seen 0.144 dist 34 (slot source powerStructure.recentConflict)
+           rendered session                      12/30 top 0.4 seen 0.154 dist 27 (slot source pressureSentence)
+           rendered web:Systems/Power            12/14 top 0.86 seen 0.725 dist 3 (slot source pressureSentence)
+village    census.mjs tip: 24/50 top 0.48 seen 0.253 dist 14   committed: 24/50
+           rendered web:Summary/Overview         9/50 top 0.18 seen 0.042 dist 46 (slot source pressureSentence)
+           rendered web:Systems/Power            7/23 top 0.3 seen 0.107 dist 27 (slot source powerStructure.recentConflict)
+           rendered pdf:canon_dossier            9/36 top 0.25 seen 0.079 dist 29 (slot source pressureSentence)
+           rendered pdf:canon_dossier            7/23 top 0.3 seen 0.107 dist 27 (slot source powerStructure.recentConflict)
+           rendered pdf:draft_brief              9/36 top 0.25 seen 0.079 dist 29 (slot source pressureSentence)
+           rendered pdf:draft_brief              7/23 top 0.3 seen 0.107 dist 27 (slot source powerStructure.recentConflict)
+           rendered session                      9/36 top 0.25 seen 0.079 dist 29 (slot source pressureSentence)
+town       census.mjs tip: 31/50 top 0.62 seen 0.39 dist 12   committed: 31/50
+           rendered web:Summary/Overview         9/50 top 0.18 seen 0.034 dist 53 (slot source pressureSentence)
+           rendered web:Systems/Power            22/35 top 0.63 seen 0.395 dist 25 (slot source powerStructure.recentConflict)
+           rendered pdf:canon_dossier            9/35 top 0.26 seen 0.068 dist 36 (slot source pressureSentence)
+           rendered pdf:canon_dossier            22/35 top 0.63 seen 0.395 dist 25 (slot source powerStructure.recentConflict)
+           rendered pdf:draft_brief              9/35 top 0.26 seen 0.068 dist 36 (slot source pressureSentence)
+           rendered pdf:draft_brief              22/35 top 0.63 seen 0.395 dist 25 (slot source powerStructure.recentConflict)
+           rendered session                      9/35 top 0.26 seen 0.068 dist 36 (slot source pressureSentence)
+           rendered web:Systems/Power            9/10 top 0.9 seen 0.8 dist 3 (slot source pressureSentence)
+city       census.mjs tip: 27/50 top 0.54 seen 0.344 dist 10   committed: 27/50
+           rendered web:Summary/Overview         12/50 top 0.24 seen 0.064 dist 46 (slot source pressureSentence)
+           rendered web:Systems/Power            15/30 top 0.5 seen 0.292 dist 23 (slot source powerStructure.recentConflict)
+           rendered pdf:canon_dossier            15/30 top 0.5 seen 0.292 dist 23 (slot source powerStructure.recentConflict)
+           rendered pdf:draft_brief              15/30 top 0.5 seen 0.292 dist 23 (slot source powerStructure.recentConflict)
+           rendered web:Systems/Power            12/17 top 0.71 seen 0.559 dist 3 (slot source pressureSentence)
+           rendered pdf:canon_dossier            12/35 top 0.34 seen 0.13 dist 31 (slot source pressureSentence)
+           rendered pdf:draft_brief              12/35 top 0.34 seen 0.13 dist 31 (slot source pressureSentence)
+           rendered session                      12/35 top 0.34 seen 0.13 dist 31 (slot source pressureSentence)
+metropolis census.mjs tip: 30/50 top 0.6 seen 0.379 dist 10   committed: 30/50
+           rendered web:Summary/Overview         6/50 top 0.12 seen 0.023 dist 53 (slot source pressureSentence)
+           rendered web:Systems/Power            24/38 top 0.63 seen 0.407 dist 19 (slot source powerStructure.recentConflict)
+           rendered pdf:canon_dossier            24/38 top 0.63 seen 0.407 dist 19 (slot source powerStructure.recentConflict)
+           rendered pdf:draft_brief              24/38 top 0.63 seen 0.407 dist 19 (slot source powerStructure.recentConflict)
+           rendered pdf:canon_dossier            6/36 top 0.17 seen 0.044 dist 39 (slot source pressureSentence)
+           rendered pdf:draft_brief              6/36 top 0.17 seen 0.044 dist 39 (slot source pressureSentence)
+           rendered session                      6/36 top 0.17 seen 0.044 dist 39 (slot source pressureSentence)
+           rendered web:Systems/Power            6/10 top 0.6 seen 0.467 dist 3 (slot source pressureSentence)
