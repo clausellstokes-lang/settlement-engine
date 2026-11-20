@@ -237,6 +237,10 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     -> 86. Nothing is withheld on that read and nothing is revealed. It stands. Recorded: the trigger is "the sum is not 100",
     not "a member was withheld", so an old stored set that does not sum to 100 is normalized on a page with nothing hidden
     (harmless; a generated town sums to 100).
+39. THE CHAIR, 11:24: (a) the Curate notice is BUILT NOW, beside R3-CURE-4 (it touches no line of 212): one builder
+    (`briefs/CURATE-NOTICE-BRIEF.md`), one sentence, one condition, a red-first render test, display only, the owner's Curate
+    screen alone; THE SENTENCE IS AUTHORED: its words go to the chair before it merges. (b) The owner's list carries the
+    renamed criminal house's lost label (with its count) and ruling 38 (e)'s normalized shares.
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
@@ -250,6 +254,7 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 | R1 registry, R2 withhold-always, V10-2 | merged (4ddf8c60c, d136940c3, b5cb22caf) | read cold: they hold |
 | VR47 the honorific | merged df6809f9c, bundles e4cce485f (VEIL-23) | done; the owner's count in section 5 |
 | R3 roster choices | `lane/veil-24-r3c2-2026-11-20` at 9b18835d1 (R3 411565ff9, cures 06e9e64b3, b907c75c9, 9b18835d1; 212 `cde846131969c93a094ef518a1ce8dec74d33dff1532b91f3e3dca5310ad79e2`, rollback `40357bed…65b1`); R3-CURE-4 on `v25-r3c4` (worktree `/home/user/wt/r3c4`, brief `briefs/R3-CURE-4-BRIEF.md`) | NOT MERGED. b907c75c9 and 9b18835d1 READ LINE BY LINE BY THIS SEAT (11:13-11:25): they hold as built; the husk (ruling 38 (a)), the exemption (38 (b)), the gate's three conditions (37 (b)), VR34 (b) (38 (c)) and the owner's counts go to R3-CURE-4. Seat's notes from the read: a DM-renamed SERVED criminal house loses its operations-list label (the re-derivation matches the catalogue name only; toward withholding); the born arm's Defense-key check covers the 14 seeds of the first cure, not the 92 (R3-CURE-4 unit 3 makes the gate the 92). Re-runs: section 6. |
+| CURATE notice (ruling 38 (c), 39) | `v25-curate` (worktree `/home/user/wt/curate`, cut at ae77ff26f; brief `briefs/CURATE-NOTICE-BRIEF.md`) | BUILDING (launched 11:22); its sentence to the chair before the merge |
 | R6 tests | `lane/veil-22-r6-2026-11-20` 7d9ebd078 | COMPLETE, NOT MERGED; merge after R3 and re-run its MAIN arm (red 50 at R6's base: `cast.stakes` by R3's power, `cast.roles` wording by R3 or R5) |
 | R4 the people | `lane/veil-22-r4-2026-11-20` a4b89bf9d (R4 dfa031f3e + first cure) | NOT GREEN. NEXT after R3: the R4-CURE-2 builder (STOP 1, STOP 3, the switch's one salt, the catalogue as the red; VR48 its own commit). Draft brief at the seat; committed when launched. |
 | R5 composed prose, R7 | not started | R5 after R4 (rulings 14, 28, 32); R7 after R6 |
@@ -295,6 +300,11 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
 - A CALMER CRIME PICTURE on some shared pages (ruling 30): where the veil withholds toward safety, the Defense reading a
   visitor works out from the page can come out LOWER than the same town would show with the hidden houses truly gone: 13
   of 92 generated towns at the second R3 cure; never HIGHER. The counts by rule are OWED with the R3 merge.
+- A RENAMED CRIMINAL HOUSE'S LINE in the criminal-operations list (seat's note on R3-CURE-2): where some criminal house is
+  hidden, a SHOWN criminal house the DM renamed loses its line in the operations list on a shared page (the list is rebuilt
+  from catalogue names only). Toward withholding. COUNT: OWED (R3-CURE-4 or the seat).
+- AN OLD TOWN'S POWER SHARES (ruling 38 (e)): if an old stored town's power shares do not add up to 100, a shared page shows
+  them rescaled to 100, even when nothing is hidden. The same powers, in the same order; only the numbers differ.
 - THE REASON AFTER "Unstable" on an old page's card: after the doors' merge, the card shows the band word alone ("Unstable")
   on every read that is not the owner's (VR44).
 
@@ -307,7 +317,8 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
 - 10:28 the chair: the gate per town against the regenerated counterfactual, the control reported not gated, on three
   conditions; LOWER does not block on ruled rules; R5's order (rulings 30, 32, 37 as PART 25 carries them).
 - 11:12 THE LANE IS YOURS at 214c36dde; branch fast-forwarded; 211 proved. Ruling 38. b907c75c9 and 9b18835d1 read line by
-  line; their reds and greens re-run (`out/v25/rerun/`); R3-CURE-4 brief written (11:16).
+  line; their reds and greens re-run (`out/v25/rerun/`); R3-CURE-4 brief written and its builder launched (11:16).
+- 11:24 the chair: the Curate notice now, beside R3-CURE-4 (ruling 39); its builder launched 11:22.
 
 ## 7. THE JOIN (the chair's word in VEIL-25's prompt): what the join must re-prove on the joined document
 The working line (origin/lane/join-2026-11-14, at 0c906948 when this was written) and four content lanes ADD SERVED TEXT at
