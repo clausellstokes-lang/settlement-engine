@@ -155,3 +155,60 @@ Check D vs B: places whose base score (score − merit points), calm or age diff
 - **C** (calm): top band (Endorsed) / top two (Endorsed+Approved) by size: thorp 3.9% / 31.4% · hamlet 13.1% / 53.5% · village 8.2% / 43.3% · town 19.3% / 54.1% · city 20% / 61.8% · metropolis 19% / 41.9%
 - **D** (all): top band (Endorsed) / top two (Endorsed+Approved) by size: thorp 5.3% / 23.3% · hamlet 10.7% / 38.7% · village 6.7% / 31.3% · town 14.7% / 42% · city 17.3% / 46.7% · metropolis 15.3% / 32%
 - **D** (calm): top band (Endorsed) / top two (Endorsed+Approved) by size: thorp 7.8% / 34.3% · hamlet 16.2% / 55.6% · village 10.3% / 46.4% · town 20.2% / 56% · city 23.6% / 62.7% · metropolis 20% / 43.8%
+
+---
+
+# SECOND RUN (appended): the old pool `chair600`, and what separates Endorsed from Approved
+
+**Pool** = `measure-lit.mjs :: POOLS.chair600`, verbatim: config `{ ...DEFAULT_CONFIG, settType: size }`, birth `generateSettlementPipeline({ ...birthConfig(config), ...FORCE }, null, { seed, customContent: {} })`, seeds `hxd-<size>-0..99`, 100 a size, 600 a state, NO `_randomizePriorities` (every record read `_randomizePriorities !== true`: EXECUTED). Same trees and forcing as above: A = 6011487af no marker; B = 6011487af + `_fortuneLawVersion: 2`; C = d70401690 + `_fortuneLawVersion: 2`. 0 errors. Calm = `!t.stress`; calm n by size 70 · 66 · 70 · 70 · 73 · 67 in every state, equal to `CHAIR.calmN` in measure-lit.mjs (the calm n the chair recorded for this pool), a calibration that holds. Runner `run2.mjs` (run.mjs plus a pool switch and the breakdown recorded); outputs `hA.jsonl` `hB.jsonl` `hC.jsonl`.
+
+## chair600: Endorsed % / Endorsed+Approved % by size (count/n in brackets)
+
+| state | subset | thorp | hamlet | village | town | city | metropolis |
+|---|---|---|---|---|---|---|---|
+| A | all | 0 / 2 (0·2/100) | 0 / 0 (0·0/100) | 0 / 1 (0·1/100) | 0 / 26 (0·26/100) | 30 / 80 (30·80/100) | 62 / 80 (62·80/100) |
+| A | calm | 0 / 2.9 (0·2/70) | 0 / 0 (0·0/66) | 0 / 1.4 (0·1/70) | 0 / 37.1 (0·26/70) | 41.1 / 100 (30·73/73) | 91 / 100 (61·67/67) |
+| B | all | 0 / 20 (0·20/100) | 0 / 25 (0·25/100) | 0 / 26 (0·26/100) | 0 / 20 (0·20/100) | 0 / 29 (0·29/100) | 0 / 14 (0·14/100) |
+| B | calm | 0 / 28.6 (0·20/70) | 0 / 36.4 (0·24/66) | 0 / 37.1 (0·26/70) | 0 / 28.6 (0·20/70) | 0 / 38.4 (0·28/73) | 0 / 19.4 (0·13/67) |
+| C | all | 0 / 22 (0·22/100) | 3 / 27 (3·27/100) | 2 / 28 (2·28/100) | 0 / 26 (0·26/100) | 1 / 33 (1·33/100) | 1 / 21 (1·21/100) |
+| C | calm | 0 / 31.4 (0·22/70) | 4.5 / 39.4 (3·26/66) | 2.9 / 40 (2·28/70) | 0 / 35.7 (0·25/70) | 1.4 / 43.8 (1·32/73) | 1.5 / 29.9 (1·20/67) |
+
+## Side by side: visitor (150 a size) vs chair600 (100 a size), Endorsed % / Endorsed+Approved %, all places (calm in second block)
+
+**all places**
+
+| state | pool | thorp | hamlet | village | town | city | metropolis |
+|---|---|---|---|---|---|---|---|
+| A | visitor | 1.3 / 6.7 | 1.3 / 10.7 | 2 / 6.7 | 15.3 / 44 | 42 / 74 | 38.7 / 74.7 |
+| A | chair600 | 0 / 2 | 0 / 0 | 0 / 1 | 0 / 26 | 30 / 80 | 62 / 80 |
+| B | visitor | 2 / 21.3 | 6.7 / 34.7 | 4.7 / 26 | 13.3 / 38.7 | 12.7 / 44 | 13.3 / 30 |
+| B | chair600 | 0 / 20 | 0 / 25 | 0 / 26 | 0 / 20 | 0 / 29 | 0 / 14 |
+| C | visitor | 2.7 / 21.3 | 8.7 / 37.3 | 5.3 / 29.3 | 14 / 40.7 | 14.7 / 46 | 14.7 / 30.7 |
+| C | chair600 | 0 / 22 | 3 / 27 | 2 / 28 | 0 / 26 | 1 / 33 | 1 / 21 |
+
+**calm only**
+
+| state | pool | thorp | hamlet | village | town | city | metropolis |
+|---|---|---|---|---|---|---|---|
+| A | visitor | 2 / 9.8 (n 102) | 2 / 16.2 (n 99) | 3.1 / 10.3 (n 97) | 21.1 / 57.8 (n 109) | 57.3 / 92.7 (n 110) | 53.3 / 99 (n 105) |
+| A | chair600 | 0 / 2.9 (n 70) | 0 / 0 (n 66) | 0 / 1.4 (n 70) | 0 / 37.1 (n 70) | 41.1 / 100 (n 73) | 91 / 100 (n 67) |
+| B | visitor | 2.9 / 31.4 (n 102) | 10.1 / 49.5 (n 99) | 7.2 / 38.1 (n 97) | 18.3 / 51.4 (n 109) | 17.3 / 60 (n 110) | 17.1 / 41 (n 105) |
+| B | chair600 | 0 / 28.6 (n 70) | 0 / 36.4 (n 66) | 0 / 37.1 (n 70) | 0 / 28.6 (n 70) | 0 / 38.4 (n 73) | 0 / 19.4 (n 67) |
+| C | visitor | 3.9 / 31.4 (n 102) | 13.1 / 53.5 (n 99) | 8.2 / 43.3 (n 97) | 19.3 / 54.1 (n 109) | 20 / 61.8 (n 110) | 19 / 41.9 (n 105) |
+| C | chair600 | 0 / 31.4 (n 70) | 4.5 / 39.4 (n 66) | 2.9 / 40 (n 70) | 0 / 35.7 (n 70) | 1.4 / 43.8 (n 73) | 1.5 / 29.9 (n 67) |
+
+## What separates Endorsed from Approved (state B, visitor pool, pooled over sizes)
+
+Breakdown terms (`publicLegitimacy.breakdown`): prosperity, safety, defense, food; score = clamp(50 + their sum), held on all 900 (EXECUTED). The visitor B pool was re-born with the breakdown recorded (`Bbd.jsonl`): identical seeds, labels and scores to B.jsonl. Endorsed n = 79, Approved n = 213.
+
+| term | mean, Endorsed | mean, Approved | difference | Endorsed places that this term carries over the cut (removing it drops the score below 75) |
+|---|---|---|---|---|
+| prosperity | 14.5 | 12.4 | 2.1 | 78 of 79 |
+| safety | 17.8 | 4.1 | 13.8 | 79 of 79 |
+| defense | 0.4 | 0.2 | 0.2 | 3 of 79 |
+| food | -0.0 | -0.0 | -0.0 | 0 of 79 |
+
+Places with a positive safety term: Endorsed 79 of 79, Approved 51 of 213.
+
+**ONE LINE:** SAFETY separates them. Every Endorsed place in B carries a safety term of +15 or +20 (79/79; mean +17.8 against +4.1 for Approved, of whom 162/213 have no positive safety term). Prosperity is just as load-bearing in the cut arithmetic (removing it drops 78/79 below 75; removing safety drops 79/79), but Approved places mostly have it too (mean +12.4 vs +14.5). So Endorsed = prosperity AND safety together; Approved is mostly prosperity without safety. Defense carries 3; food carries none.
+
