@@ -162,7 +162,11 @@ function worldStressorFor(worldState, settlementId) {
   return mine ? normalizeStressor(mine) : null;
 }
 
-export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpenTableView, publicDossier = false, playerView = false, worldState = null}) {
+export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpenTableView, publicDossier: publicDossierPassed, playerView: playerViewPassed, worldState = null}) {
+  // PAGE-4 SAFETY-MOUNT (the chair's ruling of 15:58): the Safety line's audience is read from the two props AS PASSED, so an
+  // omitted prop is a reader; every other use of the two flags keeps its default of false, exactly as the signature gave it.
+  const publicDossier = publicDossierPassed === undefined ? false : publicDossierPassed;
+  const playerView = playerViewPassed === undefined ? false : playerViewPassed;
   const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
   // THE STRESS LIST AND THE GENERAL DESK, BOTH LIFTED ABOVE THE EARLY RETURN (rules-of-hooks,
   // the note on `mobile` above). ⭐ WHY THE DESK IS MEMOISED (ARCH §4.1, X-F9, SEAM car 3g):
@@ -199,7 +203,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   // PAGE-1 SAFETY (F3a; the chair's ruling of 11:24): the Safety label as born, and ON THE OWNER'S PAGE ONLY the one line
   // beside it where Foundations' Law & order stands two or more steps away, or the record holds what the label could not
   // see. A gallery, shared or player page is a reader: the born label alone, byte for byte (safetyShown.js fails closed).
-  const safetyShown = safetyShownOf(r, safetyAudienceOf({ publicDossier, playerView }));
+  const safetyShown = safetyShownOf(r, safetyAudienceOf({ publicDossier: publicDossierPassed, playerView: playerViewPassed }));
   const hist = r.history || {};
   const ra = r.resourceAnalysis || {};
   // THE IDENTITY LINE (SW-B7b): composed owner-side; a shared page prints the line shipped at

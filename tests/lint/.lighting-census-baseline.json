@@ -24,12 +24,12 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "c01804e5d36727b3db95b8003c755fd462902b0a",
+  "measuredAtSha": "03c6a857158162b78faa62bcc04bf5b9716ae9a1",
   "measuredBy": "PAGE-4",
   "date": "2026-11-20",
-  "note": "PAGE-4's merge of OUTPUT with OUTPUT-FIX (tests/domain/display/outputInWords.test.jsx and its titles)",
-  "files": 3714,
-  "parked": 472,
+  "note": "PAGE-4 SAFETY-MOUNT merge: tests/components/safetyMount.test.jsx added (the Safety line audience fails closed at the mount)",
+  "files": 3715,
+  "parked": 473,
   "credited": 3242,
   "titles": 31271,
   "suiteTitles": 8660

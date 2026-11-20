@@ -1,0 +1,98 @@
+tree: ab01d4cc5 (untouched)
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 28136 after 9 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a73c735c63d168c2c
+
+ ❯ tests/components/dossierPhoneFloorAllViews.test.jsx (2 tests | 2 failed) 20683ms
+     × every line in every tab clears its floor (prose 14px, chrome 12px) at phone width 13364ms
+     × desktop is untouched — the SAME walk, pinned to DESKTOP_BASELINE 6531ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/components/dossierPhoneFloorAllViews.test.jsx > THE PHONE FLOORS — every dossier view > every line in every tab clears its floor (prose 14px, chrome 12px) at phone width
+AssertionError: 
+1 line(s) render below their phone floor.
+Wrap prose in proseFontSize(<the desktop FS token>, mobile) and chrome in chromeFontSize(...) from src/design/proseScale.js, binding `mobile` once per component with useIsMobile() above any early return:
+  12px < 14px  [prose]  Systems/Magic  ::  Magic in the world at large, not the city's own:
+: expected [ { view: 'Systems/Magic', …(4) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "floor": 14,
++     "kind": "prose",
++     "size": 12,
++     "text": "Magic in the world at large, not the city's own:",
++     "view": "Systems/Magic",
++   },
++ ]
+
+ ❯ tests/components/dossierPhoneFloorAllViews.test.jsx:948:7
+    946|       + 'component with useIsMobile() above any early return:\n'
+    947|       + `${report}\n`,
+    948|     ).toEqual([]);
+       |       ^
+    949|
+    950|     // ── THE EXACT PIN, so a surface cannot go 46 -> 1 and stay green…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/components/dossierPhoneFloorAllViews.test.jsx > THE PHONE FLOORS — every dossier view > desktop is untouched — the SAME walk, pinned to DESKTOP_BASELINE
+AssertionError: 
+DESKTOP_BASELINE mismatch. Each number counts lines rendered ABOVE the breakpoint, so a diff means an FS token, a fold or a surface moved on desktop — which proseFontSize/chromeFontSize (identity when mobile===false) must never do.
+Deliberate? Re-measure, re-record DESKTOP_BASELINE in the same car, and name the moved token in the commit message.
+: expected { 'Summary/Overview': { …(2) }, …(19) } to deeply equal { 'Summary/Overview': { …(2) }, …(19) }
+
+- Expected
++ Received
+
+@@ -26,12 +26,12 @@
+    "Systems/Institutions": {
+      "measured": 72,
+      "sub14": 72,
+    },
+    "Systems/Magic": {
+-     "measured": 3,
+-     "sub14": 3,
++     "measured": 4,
++     "sub14": 4,
+    },
+    "Systems/Outlook": {
+      "measured": 2,
+      "sub14": 2,
+    },
+@@ -58,12 +58,12 @@
+    "World/History": {
+      "measured": 18,
+      "sub14": 18,
+    },
+    "World/NPCs": {
+-     "measured": 284,
+-     "sub14": 284,
++     "measured": 293,
++     "sub14": 293,
+    },
+    "World/Relationships": {
+      "measured": 176,
+      "sub14": 174,
+    },
+
+ ❯ tests/components/dossierPhoneFloorAllViews.test.jsx:975:7
+    973|       + `Deliberate? Re-measure, re-record DESKTOP_BASELINE in the sam…
+    974|       + `moved token in the commit message.\n`,
+    975|     ).toEqual(DESKTOP_BASELINE);
+       |       ^
+    976|
+    977|     // The floors are a PHONE rule, so the desktop walk must still be …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  17:05:27
+   Duration  27.10s (transform 6.46s, setup 54ms, import 5.80s, tests 20.68s, environment 468ms)
+

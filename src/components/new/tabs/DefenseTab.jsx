@@ -180,7 +180,11 @@ export function wholeSentencesWithin(text, maxChars) {
   return last ? t.slice(0, last.index + last[0].length) : t;
 }
 
-export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
+export function DefenseTab({ settlement:r, narrativeNote, publicDossier: publicDossierPassed, playerView: playerViewPassed}) {
+  // PAGE-4 SAFETY-MOUNT (the chair's ruling of 15:58): the Safety line's audience is read from the two props AS PASSED, so an
+  // omitted prop is a reader; every other use of the two flags keeps its default of false, exactly as the signature gave it.
+  const publicDossier = publicDossierPassed === undefined ? false : publicDossierPassed;
+  const playerView = playerViewPassed === undefined ? false : playerViewPassed;
   const [expandedThreat, setExpandedThreat] = useState(null);
   const [showForces, setShowForces] = useState(true);
   // Mobile: let the threat row wrap and the label flex, so a long threat name
@@ -314,7 +318,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // line beside it where the law stands two or more steps away or the record holds what the label could not see (the
   // Threat row's "Internal security" names the same label on this tab, so this banner's line answers for the tab, and the
   // section opens on the owner's page wherever there is a line; the qualifier is null for every reader, so theirs is as was).
-  const safetyShown = safetyShownOf(r, safetyAudienceOf({ publicDossier, playerView }));
+  const safetyShown = safetyShownOf(r, safetyAudienceOf({ publicDossier: publicDossierPassed, playerView: playerViewPassed }));
   const safetyLabel = safetyShown.label || '';
   const _bmc         = sp.blackMarketCapture || 0;
 

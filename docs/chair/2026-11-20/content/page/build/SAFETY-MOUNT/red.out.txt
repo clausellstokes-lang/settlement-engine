@@ -1,0 +1,88 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 10588 after 4 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a44384be88bcfd7d8
+
+ ✓ tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > a town with an owner's line exists among the chair's 300 2ms
+ ✓ tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > overview: both props passed as false (the owner's page) still prints the line 223ms
+ × tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > overview: mounted with neither prints no owner's line 96ms
+   → expected <div …(2)></div> to be null
+ × tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > overview: mounted with publicDossier only prints no owner's line 80ms
+   → expected <div …(2)></div> to be null
+ × tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > overview: mounted with playerView only prints no owner's line 73ms
+   → expected <div …(2)></div> to be null
+ ✓ tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > defense: both props passed as false (the owner's page) still prints the line 74ms
+ × tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > defense: mounted with neither prints no owner's line 85ms
+   → expected <p …(2)></p> to be null
+stdout | tests/components/safetyMount.test.jsx > (2) THE MOUNT CENSUS: every mount of OverviewTab and DefenseTab in src/ passes both props or is a reader page > the census finds the two tabs mounted, and every use of them is a JSX mount
+SAFETY MOUNT CENSUS: 2 mount(s)
+  src/components/OutputContainer.jsx <DefenseTab> passes [publicDossier, playerView] BOTH
+  src/components/OutputContainer.jsx <OverviewTab> passes [publicDossier, playerView] BOTH
+
+ × tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > defense: mounted with publicDossier only prints no owner's line 90ms
+   → expected <p …(2)></p> to be null
+ × tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > defense: mounted with playerView only prints no owner's line 90ms
+   → expected <p …(2)></p> to be null
+ ✓ tests/components/safetyMount.test.jsx > (2) THE MOUNT CENSUS: every mount of OverviewTab and DefenseTab in src/ passes both props or is a reader page > the census finds the two tabs mounted, and every use of them is a JSX mount 1ms
+ ✓ tests/components/safetyMount.test.jsx > (2) THE MOUNT CENSUS: every mount of OverviewTab and DefenseTab in src/ passes both props or is a reader page > no mount passes neither or one of publicDossier and playerView (unless it is a reader page) 0ms
+ ✓ tests/components/safetyMount.test.jsx > (2) THE MOUNT CENSUS: every mount of OverviewTab and DefenseTab in src/ passes both props or is a reader page > NEGATIVE CONTROLS: planted mounts with neither, one, a spread, and a component map are caught 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 6 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > overview: mounted with neither prints no owner's line
+ FAIL  tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > overview: mounted with publicDossier only prints no owner's line
+ FAIL  tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > overview: mounted with playerView only prints no owner's line
+AssertionError: expected <div …(2)></div> to be null
+
+- Expected:
+null
+
++ Received:
+<div
+  data-testid="overview-safety-beside-law"
+  style="font-size: 12px; color: rgb(61, 43, 26); font-style: italic; line-height: 1.4; margin-top: 3px;"
+>
+  Moderate day to day; crime is rising faster than those in charge can answer it.
+</div>
+
+ ❯ tests/components/safetyMount.test.jsx:80:39
+     78|         const { queryByTestId, container } = render(<Tab settlement={O…
+     79|         expect(container.innerHTML.length).toBeGreaterThan(0);
+     80|         expect(queryByTestId(testId)).toBeNull(); // anchored: the own…
+       |                                       ^
+     81|         expectPresentThenAbsent(before, container.textContent ?? '', O…
+     82|       });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯
+
+ FAIL  tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > defense: mounted with neither prints no owner's line
+ FAIL  tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > defense: mounted with publicDossier only prints no owner's line
+ FAIL  tests/components/safetyMount.test.jsx > (1) the Safety line's audience is read from the props AS PASSED: an omitted prop is a reader > defense: mounted with playerView only prints no owner's line
+AssertionError: expected <p …(2)></p> to be null
+
+- Expected:
+null
+
++ Received:
+<p
+  data-testid="defense-safety-beside-law"
+  style="font-size: 12px; color: rgb(61, 43, 26); line-height: 1.55; margin: 0px 0px 6px; font-style: italic;"
+>
+  Moderate day to day; crime is rising faster than those in charge can answer it.
+</p>
+
+ ❯ tests/components/safetyMount.test.jsx:80:39
+     78|         const { queryByTestId, container } = render(<Tab settlement={O…
+     79|         expect(container.innerHTML.length).toBeGreaterThan(0);
+     80|         expect(queryByTestId(testId)).toBeNull(); // anchored: the own…
+       |                                       ^
+     81|         expectPresentThenAbsent(before, container.textContent ?? '', O…
+     82|       });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  6 failed | 6 passed (12)
+   Start at  17:44:50
+   Duration  9.26s (transform 3.80s, setup 53ms, import 7.24s, tests 1.32s, environment 542ms)
+
