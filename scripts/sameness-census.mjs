@@ -187,6 +187,277 @@ export function classOf(r) {
   return { cls: 'NARRATIVE?', why: `many sentences (${r.distinct}) composed per place; pool or story not proven` };
 }
 
+// ── THE DOOR (brief 2, docs/chair/2026-11-20/content/same/SAME-1-DOOR-BRIEF.md) ──
+/** THE REGISTER: scripts/census/sameness-census.register.json. */
+export const REGISTER_PATH = join(ROOT, 'scripts/census/sameness-census.register.json');
+/** The corpus the register is banked on, and its confirmation corpus (the same plan under another prefix). */
+export const CORPUS = Object.freeze({ prefix: 'hxd', confirm: 'hxu', n: 50, sizes: SIZES });
+/** A slot printing at most this many sentences a place is met again by its TOP share; else by its SEEN. */
+export const ONE_A_PLACE = 1.5;
+/** RED, unregistered, from this many places of one size (MIN_PLACES_MEASURE in the header says why). */
+export const MIN_PLACES = 5;
+/** A rise reds beyond this many standard errors of a share at the ceiling (NOISE_SE_MEASURE in the header). */
+export const NOISE_SE = 3;
+
+/** An index of a place's stored sentences by their first 16 characters (the containment attribution). @param {Record<string, string[]>} stored */
+export function storedHeads(stored) {
+  /** @type {Map<string, string[]>} */ const m = new Map();
+  for (const t of Object.keys(stored)) { const h = t.slice(0, 16); const a = m.get(h); if (a) a.push(t); else m.set(h, [t]); }
+  return m;
+}
+/**
+ * THE ATTRIBUTION: the stored paths of a printed sentence: the paths that hold it word for word, else (SAME-1's
+ * amendment, 2026-11-20: a label-prefixed line, "Constraint: <stored sentence>") the paths of the LONGEST stored sentence
+ * the printed one contains; else none (composed at display). The printed sentence stays the measured text.
+ * @param {string} s @param {Record<string, string[]>} stored @param {Map<string, string[]>} heads @returns {string[]}
+ */
+export function attributionOf(s, stored, heads) {
+  if (stored[s]?.length) return stored[s];
+  let best = '';
+  for (let i = 1; i + 25 <= s.length; i++) {
+    const a = heads.get(s.slice(i, i + 16)); if (!a) continue;
+    for (const t of a) if (t.length > best.length && s.startsWith(t, i)) best = t;
+  }
+  return best ? stored[best] : [];
+}
+/** A stored path's arity fold: `stress[].summary` and `stress.summary` are one field printed at one place. @param {string} p */
+export const arityFold = (p) => p.replace(/\[\]/g, '');
+const shorter = (/** @type {string} */ a, /** @type {string} */ b) => a.length - b.length || (a < b ? -1 : a > b ? 1 : 0);
+/**
+ * THE POSITION: where the page prints a line, whatever it says — the renderer's fourth field: on the web the chain of
+ * named React components that rendered the whole line below the tab's panel, on the PDF the chain of named components
+ * below SettlementPDF, on the session sheet the leaf's key path. @param {string} surface @param {any[]} line
+ */
+export const positionOf = (surface, line) => `${surface} | ${line[3] ?? '?'}`;
+/**
+ * THE ALIAS RULE (written into the register's `identity.fields`): a printed sentence can be held word for word by
+ * several stored paths (a mirror, a copy, a quotation). Its FIELD is the path THIS POSITION PRINTS: of the sentence's
+ * paths (arity-folded: `stress[].x` is `stress.x`), the one ranked first at its position, the ranking being how many
+ * printed sentences at that position each path holds over both corpora at the write (then the shorter path). A position
+ * the register has not ranked, or a sentence holding no ranked path, takes its shortest path: a path new to the register
+ * is a new slot, as law 1 intends. Only positions with two or more paths are written.
+ * @param {Iterable<[string, string[]]>} held each printed sentence's position and attribution, over both corpora
+ * @param {Record<string, string[]>} [known] the register's ranking: kept as it is, new paths appended after it
+ * @returns {Record<string, string[]>}
+ */
+export function fieldsOf(held, known = {}) {
+  /** @type {Map<string, Map<string, Map<string, number>>>} position -> fold -> path -> n */ const at = new Map();
+  for (const [pos, paths] of held) {
+    let m = at.get(pos); if (!m) { m = new Map(); at.set(pos, m); }
+    for (const p of paths) { const f = arityFold(p); let g = m.get(f); if (!g) { g = new Map(); m.set(f, g); } g.set(p, (g.get(p) || 0) + 1); }
+  }
+  /** @type {Record<string, string[]>} */ const out = {};
+  for (const pos of [...new Set([...at.keys(), ...Object.keys(known)])].sort()) {
+    const m = at.get(pos) || new Map();
+    const ranked = [...m.values()].map((g) => { const reps = [...g].sort((x, y) => y[1] - x[1] || shorter(x[0], y[0])); return { rep: reps[0][0], n: reps.reduce((a, r) => a + r[1], 0) }; })
+      .sort((x, y) => y.n - x.n || shorter(x.rep, y.rep)).map((x) => x.rep);
+    const keep = known[pos] || [];
+    const list = [...keep, ...ranked.filter((r) => !keep.some((k) => arityFold(k) === arityFold(r)))];
+    if (list.length >= 2) out[pos] = list;
+  }
+  return out;
+}
+/** The field of a printed sentence at a position, by the register's ranking. @param {string[]} paths @param {string[] | undefined} ranking */
+export function fieldOf(paths, ranking) {
+  if (!paths.length) return '~';
+  const folds = new Set(paths.map(arityFold));
+  const hit = (ranking || []).find((r) => folds.has(arityFold(r)));
+  return `@${hit ?? [...paths].sort(shorter)[0]}`;
+}
+/**
+ * THE SLOT KEY: `<surface> | <position> | <field>`: where the page prints the sentence (positionOf) and the field that
+ * position prints there (fieldOf: `@<path>`, or `~` for a sentence composed at display). The stored paths are the slot's
+ * attribution, recorded beside it (`paths`).
+ * @param {string} surface @param {any[]} line @param {string} field
+ */
+export const slotKey = (surface, line, field) => `${positionOf(surface, line)} | ${field}`;
+/**
+ * Every printed sentence's position and attribution in a run's rows (the input fieldsOf ranks).
+ * @param {Array<{ surfaces: Record<string, any[][]>, stored: Record<string, string[]> }>} rows
+ * @returns {Generator<[string, string[]]>}
+ */
+export function* heldIn(rows) {
+  for (const row of rows) {
+    const heads = storedHeads(row.stored);
+    for (const [surface, lines] of Object.entries(row.surfaces)) for (const line of lines) for (const s of sentencesOf(line[0])) {
+      const paths = attributionOf(s, row.stored, heads); if (paths.length) yield [positionOf(surface, line), paths];
+    }
+  }
+}
+
+/**
+ * THE DOOR'S MEASURE (one size): per slot, places (holders), distinct sentences, sentences a place, TOP (the commonest
+ * sentence's places / holders), SEEN (count()'s), the commonest sentence, and its attribution (path -> places).
+ * @param {Array<{ surfaces: Record<string, Array<[string, string, string?, string?]>>, stored: Record<string, string[]> }>} rows
+ * @param {Record<string, string[]>} fields the register's `identity.fields`
+ */
+export function measureSlots(rows, fields) {
+  /** @type {Map<string, { bySentence: Map<string, Set<number>>, paths: Map<string, Set<number>>, exactOnly: boolean }>} */ const slots = new Map();
+  rows.forEach((row, i) => {
+    const heads = storedHeads(row.stored);
+    for (const [surface, lines] of Object.entries(row.surfaces)) for (const line of lines) for (const s of sentencesOf(line[0])) {
+      const paths = attributionOf(s, row.stored, heads);
+      const key = slotKey(surface, line, fieldOf(paths, fields[positionOf(surface, line)]));
+      let sl = slots.get(key); if (!sl) { sl = { bySentence: new Map(), paths: new Map(), exactOnly: true }; slots.set(key, sl); }
+      if (paths.length && !row.stored[s]?.length) sl.exactOnly = false;
+      let st = sl.bySentence.get(s); if (!st) { st = new Set(); sl.bySentence.set(s, st); } st.add(i);
+      for (const p of paths) { let ps = sl.paths.get(p); if (!ps) { ps = new Set(); sl.paths.set(p, ps); } ps.add(i); }
+    }
+  });
+  /** @type {Map<string, { places: number, distinct: number, perPlace: number, top: number, seen: number, sentence: string, paths: Record<string, number>, contained: boolean }>} */ const out = new Map();
+  for (const [key, sl] of slots) {
+    /** @type {Map<number, { c: number, sh: number }>} */ const per = new Map(); let top = ''; let topN = 0;
+    for (const [s, st] of sl.bySentence) {
+      if (st.size > topN || (st.size === topN && s < top)) { topN = st.size; top = s; }
+      for (const i of st) { const o = per.get(i) || { c: 0, sh: 0 }; o.c++; o.sh += st.size - 1; per.set(i, o); }
+    }
+    const H = per.size; let seen = 0; for (const o of per.values()) seen += o.sh / o.c / Math.max(1, H - 1); seen /= H;
+    const perPlace = [...per.values()].reduce((a, o) => a + o.c, 0) / H;
+    out.set(key, { places: H, distinct: sl.bySentence.size, perPlace: +perPlace.toFixed(2), top: +(topN / H).toFixed(4), seen: +seen.toFixed(4), sentence: top,
+      paths: Object.fromEntries([...sl.paths].map(([p, st]) => [p, st.size]).sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))), contained: !sl.exactOnly });
+  }
+  return out;
+}
+/** @param {{ top: number, seen: number, perPlace: number }} m @param {'top' | 'seen'} [by] */
+export const meetOf = (m, by) => ((by || (m.perPlace <= ONE_A_PLACE ? 'top' : 'seen')) === 'top' ? m.top : m.seen);
+/** A share rounded UP to 0.01, so a ceiling never sits below its reading. @param {number} x */
+export const ceil2 = (x) => Math.min(1, Math.ceil(x * 100 - 1e-9) / 100);
+/**
+ * The standard error of a share AT the ceiling over the reading's places (binomial over holders; SEEN's error taken over
+ * places the same way). The share is floored at half a place, so a ceiling at 0 or 1 still allows a place's noise.
+ * @param {number} ceiling @param {number} places
+ */
+export function shareError(ceiling, places) {
+  const n = Math.max(1, places); const c = Math.min(Math.max(ceiling, 0.5 / n), 1 - 0.5 / n);
+  return Math.sqrt((c * (1 - c)) / n);
+}
+
+/** @returns {any} the register */
+export function readRegister(path = REGISTER_PATH) { return JSON.parse(readFileSync(path, 'utf8')); }
+
+/**
+ * THE JUDGE: one reading (per size, a measureSlots table) against the register. RED: `unregistered` (a slot printed in
+ * >= MIN_PLACES places of a size with no entry for that size) and `over` (an entry's meet above its ceiling beyond
+ * NOISE_SE errors; it stays red only if the confirmation repeats it: confirmRises). NOTE: `rare` (a slot below
+ * MIN_PLACES with no entry), `stale` (an entry whose slot this reading does not print), `loose` (a ceiling above its meet
+ * beyond the noise; repeated on both readings it prompts --tighten). Every finding names its key.
+ * @param {Record<string, Map<string, any>>} table @param {any} register @param {{ minPlaces?: number, noiseSe?: number }} [opts]
+ */
+export function judge(table, register, opts = {}) {
+  const minPlaces = opts.minPlaces ?? MIN_PLACES; const noise = opts.noiseSe ?? NOISE_SE;
+  const rows = register.rows || {};
+  /** @type {{ unregistered: any[], over: any[], rare: any[], stale: any[], loose: any[] }} */
+  const f = { unregistered: [], over: [], rare: [], stale: [], loose: [] };
+  for (const size of Object.keys(table)) for (const [slot, m] of table[size]) {
+    const e = rows[slot]?.sizes?.[size];
+    if (!e) { (m.places >= minPlaces ? f.unregistered : f.rare).push({ slot, size, m, text: `${size} ${slot}: printed in ${m.places} places, no row` }); continue; }
+    const meet = meetOf(m, e.by); const se = shareError(e.ceiling, m.places);
+    if (meet > e.ceiling + noise * se + 1e-9) f.over.push({ slot, size, meet, text: `${size} ${slot}: meet ${meet.toFixed(2)} > ceiling ${e.ceiling} (${((meet - e.ceiling) / se).toFixed(1)} SE over ${m.places} places)` });
+    else if (e.ceiling - meet > noise * se + 1e-9) f.loose.push({ slot, size, meet, text: `${size} ${slot}: ceiling ${e.ceiling} above meet ${meet.toFixed(2)} (${((e.ceiling - meet) / se).toFixed(1)} SE)` });
+  }
+  for (const [slot, row] of Object.entries(rows)) for (const size of Object.keys(row.sizes || {})) {
+    if (table[size] && !table[size].has(slot)) f.stale.push({ slot, size, text: `${size} ${slot}: no longer printed (last ${row.sizes[size].meet} in ${row.sizes[size].places} places)` });
+  }
+  return f;
+}
+/**
+ * A RISE MUST REPEAT: an `over` of the first reading stays red only if the second reading is over too; else it is a note
+ * printed with both readings. A loose ceiling is a --tighten prompt only when loose on both.
+ * @param {ReturnType<typeof judge>} first @param {ReturnType<typeof judge>} second
+ */
+export function confirmRises(first, second) {
+  const k = (/** @type {any} */ x) => `${x.size}\u0000${x.slot}`;
+  const overAgain = new Map(second.over.map((x) => [k(x), x])); const looseAgain = new Map(second.loose.map((x) => [k(x), x]));
+  const both = (/** @type {any} */ x, /** @type {Map<string, any>} */ m) => `${x.text}; ${CORPUS.confirm}: ${m.get(k(x))?.text.split(': ').slice(1).join(': ')}`;
+  return {
+    ...first,
+    over: first.over.filter((x) => overAgain.has(k(x))).map((x) => ({ ...x, text: both(x, overAgain) })),
+    loose: first.loose.filter((x) => looseAgain.has(k(x))).map((x) => ({ ...x, second: looseAgain.get(k(x)) })),
+    notes: [
+      ...first.over.filter((x) => !overAgain.has(k(x))).map((x) => `${x.text}; does not repeat on ${CORPUS.confirm}`),
+      ...first.loose.filter((x) => !looseAgain.has(k(x))).map((x) => `${x.text}; not loose on ${CORPUS.confirm}`),
+    ],
+  };
+}
+
+/** The class and reason of a door slot: the hand classes, then classOf's rule, read off its commonest sentence. @param {string} slot @param {any} m @param {any} [idx] */
+export function classifySlot(slot, m, idx) {
+  const field = slot.split(' | ').pop() || '~';
+  const surface = slot.split(' | ')[0];
+  const paths = Object.keys(m.paths || {});
+  const mod = idx ? moduleOf(m.sentence, idx)?.file || 'unfound' : 'unfound';
+  const heading = surface === 'session' ? slot.split(' | ')[1] : '(none)';
+  const pseudo = { source: field === '~' ? `COMPOSED@${heading}` : field.slice(1), module: mod, top: m.sentence, distinct: m.distinct, holders: m.places, seen: m.seen, perPlace: m.perPlace, heading };
+  for (const p of field === '~' ? [] : [field.slice(1), ...paths]) { const hit = handClassOf({ ...pseudo, source: p }); if (hit) return { cls: hit.cls, reason: hit.why }; }
+  const c = classOf(pseudo);
+  return { cls: c.cls, reason: c.why };
+}
+const NEW_REASON = 'written by --write (brief 2): a printed slot with no row, at the higher of hxd and hxu';
+/**
+ * --write: an entry for every slot printed in >= MIN_PLACES places of a size (on either reading) with none, at the HIGHER
+ * of the two readings rounded up to 0.01, classed from the classes file; a stale entry (printed on neither reading)
+ * retires by name into `retired` with its last reading. It never raises a ceiling: a confirmed rise refuses the whole write.
+ * @param {Record<string, Map<string, any>>} first @param {Record<string, Map<string, any>>} second @param {any} register
+ * @param {{ classify?: (slot: string, m: any) => { cls: string, reason: string }, fields?: Record<string, string[]>, minPlaces?: number }} [opts]
+ * @returns {{ refused: string[], next: any, changed: string[] }}
+ */
+export function writeRows(first, second, register, opts = {}) {
+  const minPlaces = opts.minPlaces ?? MIN_PLACES;
+  const rises = confirmRises(judge(first, register), judge(second, register)).over;
+  if (rises.length) return { refused: rises.map((x) => `refused: ${x.text} (a write never raises a ceiling)`), next: register, changed: [] };
+  const next = JSON.parse(JSON.stringify(register)); next.rows ||= {}; next.retired ||= {};
+  if (opts.fields) next.identity = { ...(next.identity || {}), fields: opts.fields };
+  const changed = [];
+  for (const size of Object.keys(first)) {
+    const keys = new Set([...first[size].keys(), ...(second[size]?.keys() || [])]);
+    for (const slot of [...keys].sort()) {
+      if (next.rows[slot]?.sizes?.[size]) continue;
+      const a = first[size].get(slot); const b = second[size]?.get(slot);
+      if (Math.max(a?.places || 0, b?.places || 0) < minPlaces) continue;
+      const hi = [a, b].filter(Boolean).sort((x, y) => meetOf(y) - meetOf(x) || y.places - x.places)[0];
+      const by = /** @type {'top' | 'seen'} */ (hi.perPlace <= ONE_A_PLACE ? 'top' : 'seen');
+      const meet = Math.max(a ? meetOf(a, by) : 0, b ? meetOf(b, by) : 0);
+      const ref = a || b;
+      if (!next.rows[slot]) {
+        const c = (opts.classify || classifySlot)(slot, ref);
+        next.rows[slot] = { class: c.cls, reason: c.reason, sentence: cut(ref.sentence), paths: {}, sizes: {} };
+      }
+      const row = next.rows[slot];
+      for (const [p, n] of Object.entries(ref.paths || {})) row.paths[p] = Math.max(row.paths[p] || 0, n);
+      row.sizes[size] = { places: ref.places, distinct: ref.distinct, top: ref.top, seen: ref.seen, by, meet: +meet.toFixed(4), ceiling: ceil2(meet) };
+      changed.push(`+ ${size} ${slot}: ceiling ${row.sizes[size].ceiling} (${by} ${a ? meetOf(a, by).toFixed(2) : '-'} / ${b ? meetOf(b, by).toFixed(2) : '-'}; ${NEW_REASON})`);
+    }
+  }
+  for (const [slot, row] of Object.entries(next.rows)) {
+    for (const size of Object.keys(row.sizes)) {
+      if (!first[size] || first[size].has(slot) || second[size]?.has(slot)) continue;
+      next.retired[`${slot} @ ${size}`] = { class: row.class, reason: row.reason, last: row.sizes[size] };
+      delete row.sizes[size];
+      changed.push(`- ${size} ${slot}: retired (printed on neither reading; last ${row.sizes?.[size]?.meet ?? next.retired[`${slot} @ ${size}`].last.meet})`);
+    }
+    if (!Object.keys(row.sizes).length) delete next.rows[slot];
+  }
+  return { refused: [], next, changed };
+}
+/**
+ * --tighten (THE CHAIR'S DOOR): each ceiling loose on both readings is lowered to the higher of the two readings (rounded
+ * up to 0.01). It never raises one: a lowered value at or above the old ceiling is not written.
+ * @param {Record<string, Map<string, any>>} first @param {Record<string, Map<string, any>>} second @param {any} register
+ */
+export function tighten(first, second, register) {
+  const { loose } = confirmRises(judge(first, register), judge(second, register));
+  const next = JSON.parse(JSON.stringify(register)); const changed = [];
+  for (const x of loose) {
+    const e = next.rows[x.slot].sizes[x.size];
+    const hi = Math.max(meetOf(first[x.size].get(x.slot), e.by), meetOf(second[x.size].get(x.slot), e.by));
+    const c = ceil2(hi);
+    if (c >= e.ceiling) continue;
+    changed.push(`v ${x.size} ${x.slot}: ceiling ${e.ceiling} -> ${c}`);
+    e.ceiling = c;
+  }
+  return { next, changed };
+}
+
 // ── IO ──
 /** @param {string} dir */
 export function readRun(dir) {
@@ -212,37 +483,114 @@ function tablesText(size, c) {
     `# ${size}: table (c) PRINTED TWICE INSIDE ONE PLACE (one family) — ${c.twice.length} rows`, ...c.twice.map((t) => `${String(t.places).padStart(3)} places  ${t.family}\n      slots: ${t.slots.join('\n             ')}\n      e.g.: ${cut(t.example, 160)}`), ''].join('\n');
 }
 
+/**
+ * Render a plan (`<prefix>-<size>-<i>`, n a size) through the renderer's own vitest config, <workers> forks, into
+ * `<out>/rows/`. @param {string} prefix @param {number} n @param {number} workers @param {string} out @returns {Promise<string>} the wall time
+ */
+async function renderRun(prefix, n, workers, out) {
+  const plan = SIZES.flatMap((size) => Array.from({ length: n }, (_, i) => ({ seed: `${prefix}-${size}-${i}`, size })));
+  mkdirSync(join(out, 'rows'), { recursive: true });
+  writeFileSync(join(out, 'vitest.same-census.config.mjs'), `import react from '${join(ROOT, 'node_modules/@vitejs/plugin-react/dist/index.js')}';
+export default { root: '${ROOT}', plugins: [react()], test: { environment: 'node', include: ['${RENDER}'], testTimeout: 300000, pool: 'forks', fileParallelism: false, server: { deps: { inline: [/@testing-library\\//] } } } };
+`);
+  const t0 = Date.now();
+  console.log(`sameness-census: rendering ${plan.length} places (${workers} workers) into ${out}`);
+  await Promise.all(Array.from({ length: workers }, (_, w) => {
+    const part = join(out, `plan.${w}.json`);
+    writeFileSync(part, JSON.stringify(plan.filter((_, i) => i % workers === w)));
+    return new Promise((resolve) => {
+      const child = spawn('npx', ['vitest', 'run', '--config', join(out, 'vitest.same-census.config.mjs')], {
+        cwd: ROOT, env: { ...process.env, SAME_CENSUS_OUT: join(out, 'rows'), SAME_CENSUS_PLAN: part }, stdio: ['ignore', 'pipe', 'pipe'],
+      });
+      /** @type {Buffer[]} */ const log = [];
+      child.stdout.on('data', (d) => log.push(d)); child.stderr.on('data', (d) => log.push(d));
+      child.on('close', (code) => { writeFileSync(join(out, `render.${w}.log`), Buffer.concat(log)); resolve(code); });
+    });
+  }));
+  const wall = ((Date.now() - t0) / 60000).toFixed(1);
+  writeFileSync(join(out, 'wall.txt'), `${wall} min, ${plan.length} places, ${workers} workers\n`);
+  console.log(`sameness-census: rendered in ${wall} min`);
+  return wall;
+}
+
+const REGISTER_LAW = 'TWO LAWS (SAME-1 brief 2, the sameness door). A PRINTED SLOT WITH NO ROW REDS: every slot (surface | printed position | field) the page prints in MIN_PLACES or more places of a size, over the corpus `corpus` names, has an entry for that size. A CEILING ONLY TIGHTENS: an entry\'s ceiling bounds `meet` (TOP share where the slot prints at most 1.5 sentences a place, SEEN otherwise; `by` names which); --write adds entries and retires stale ones by name into `retired` and never raises a ceiling; --tighten (the chair\'s door) lowers a ceiling loose on both readings and never raises one. Nothing edits this file by hand. Held by tests/lint/samenessCensus.walker.test.js and `node scripts/sameness-census.mjs --check`.';
+const IDENTITY_RULE = 'A slot is keyed `<surface> | <position> | <field>`. POSITION: where the page prints the line, whatever it says (the renderer\'s component chain; the session sheet\'s key path). FIELD: `~` for a sentence composed at display; else, of the stored paths that hold the printed sentence (word for word, or the longest stored sentence it contains), the one ranked first at that position in `fields` below (arity-folded), else the shortest. `fields` ranks every position\'s paths by how many printed sentences each held over both corpora at the write; a known ranking is never reordered, new paths join after it.';
+/** An empty register on this corpus (the first --write fills it). */
+export const emptyRegister = () => ({ _law: REGISTER_LAW, corpus: { ...CORPUS, sizes: [...SIZES] }, identity: { _rule: IDENTITY_RULE, fields: {} }, rows: {}, retired: {} });
+const sameCorpus = (/** @type {any} */ c) => JSON.stringify(c) === JSON.stringify({ ...CORPUS, sizes: [...SIZES] });
+
+/**
+ * THE DOOR'S CLI: --check | --write | --tighten [--from=<hxd run>] [--confirm=<hxu run>] [--workers=4] [--out=<dir>]
+ * [--register=<path>] [--n=<n>] (a foreign n or prefix is a flake probe: the register's corpus check is waived and said so).
+ * @param {'check' | 'write' | 'tighten'} mode
+ */
+async function door(mode) {
+  const t0 = Date.now();
+  const regPath = arg('register', REGISTER_PATH);
+  const register = existsSync(regPath) ? readRegister(regPath) : (mode === 'write' ? emptyRegister() : null);
+  if (!register) { console.error(`sameness-census --${mode}: no register at ${regPath}`); process.exit(2); }
+  const n = Number(arg('n', String(CORPUS.n))); const prefix = arg('seed-prefix', CORPUS.prefix); const workers = Number(arg('workers', '4'));
+  const probe = n !== CORPUS.n || prefix !== CORPUS.prefix;
+  if (!sameCorpus(register.corpus)) { console.error(`sameness-census --${mode}: the register is banked on another corpus (${JSON.stringify(register.corpus)})`); process.exit(2); }
+  if (probe && mode !== 'check') { console.error(`sameness-census --${mode}: writes only on the register's corpus`); process.exit(2); }
+  if (probe) console.log(`sameness-census --check: A PROBE (prefix ${prefix}, n ${n}), not the register's corpus`);
+  const base = arg('out') || mkdtempSync(join(tmpdir(), 'same-door-'));
+  const readOrRender = async (/** @type {string | undefined} */ dir, /** @type {string} */ pfx, /** @type {string} */ name) => {
+    if (dir) return readRun(dir);
+    await renderRun(pfx, n, workers, join(base, name)); return readRun(join(base, name));
+  };
+  const firstRun = await readOrRender(arg('from'), prefix, prefix);
+  const t1 = Date.now();
+  /** @type {any} */ let secondRun = null;
+  const second = async () => { secondRun ||= await readOrRender(arg('confirm'), prefix === CORPUS.confirm ? CORPUS.prefix : CORPUS.confirm, 'confirm'); return secondRun; };
+  let fields = register.identity?.fields || {};
+  if (mode === 'write') {
+    const s2 = await second();
+    fields = fieldsOf((function* () { for (const r of [firstRun, s2]) for (const size of SIZES) if (r[size]) yield* heldIn(r[size]); })(), fields);
+  }
+  const tableOf = (/** @type {any} */ run) => Object.fromEntries(SIZES.filter((s) => run[s]).map((s) => [s, measureSlots(run[s], fields)]));
+  const first = tableOf(firstRun);
+  const idx = moduleIndex();
+  const say = (/** @type {string} */ x) => console.log(x);
+  if (mode === 'check') {
+    let f = judge(first, register);
+    /** @type {string[]} */ let notes = [];
+    let confirmed = false;
+    if (f.over.length) { const t = tableOf(await second()); const c = confirmRises(f, judge(t, register)); notes = c.notes; f = c; confirmed = true; }
+    for (const x of f.unregistered) say(`RED unregistered: ${x.text}`);
+    for (const x of f.over) say(`RED rise: ${x.text}`);
+    for (const x of notes) say(`NOTE rise on one reading: ${x}`);
+    for (const x of f.stale) say(`NOTE stale: ${x.text}`);
+    for (const x of f.loose) say(`NOTE loose${confirmed ? ' (on both readings)' : ` (on ${prefix}; --tighten reads both)`}: ${x.text}`);
+    say(`NOTE: ${f.rare.length} slot-sizes printed in fewer than ${MIN_PLACES} places with no row (under the threshold, not judged)`);
+    const rows = Object.keys(register.rows).length;
+    say(`sameness-census --check: ${f.unregistered.length} unregistered, ${f.over.length} rises (red); ${notes.length} one-reading rises, ${f.stale.length} stale, ${f.loose.length} loose (notes); ${rows} rows; render ${((t1 - t0) / 60000).toFixed(1)} min, wall ${((Date.now() - t0) / 60000).toFixed(1)} min${confirmed ? ` (confirmed on ${CORPUS.confirm})` : ' (no confirmation needed)'}`);
+    process.exit(f.unregistered.length || f.over.length ? 1 : 0);
+  }
+  const t2 = tableOf(await second());
+  if (mode === 'write') {
+    const r = writeRows(first, t2, register, { fields, classify: (slot, m) => classifySlot(slot, m, idx) });
+    if (r.refused.length) { for (const x of r.refused) say(x); say('sameness-census --write: NOTHING WRITTEN'); process.exit(1); }
+    writeFileSync(regPath, `${JSON.stringify(r.next, null, 1)}\n`);
+    for (const x of r.changed) say(x);
+    say(`sameness-census --write: ${r.changed.length} changes; ${Object.keys(r.next.rows).length} rows; wall ${((Date.now() - t0) / 60000).toFixed(1)} min`);
+    return;
+  }
+  const r = tighten(first, t2, register);
+  writeFileSync(regPath, `${JSON.stringify(r.next, null, 1)}\n`);
+  for (const x of r.changed) say(x);
+  say(`sameness-census --tighten: ${r.changed.length} ceilings lowered; wall ${((Date.now() - t0) / 60000).toFixed(1)} min`);
+}
+
 async function main() {
+  for (const mode of /** @type {const} */ (['check', 'write', 'tighten'])) if (process.argv.includes(`--${mode}`)) return door(mode);
   const prefix = arg('seed-prefix', 'hxd');
   const n = Number(arg('n', '50'));
   const workers = Number(arg('workers', '4'));
   const from = arg('from');
-  if (!process.argv.includes('--measure') && !from) { console.error('sameness-census: --measure or --from=<dir>'); process.exit(2); }
+  if (!process.argv.includes('--measure') && !from) { console.error('sameness-census: --measure, --from=<dir>, --check, --write or --tighten'); process.exit(2); }
   const out = from || arg('out') || mkdtempSync(join(tmpdir(), 'same-census-'));
-  if (!from) {
-    const plan = SIZES.flatMap((size) => Array.from({ length: n }, (_, i) => ({ seed: `${prefix}-${size}-${i}`, size })));
-    mkdirSync(join(out, 'rows'), { recursive: true });
-    writeFileSync(join(out, 'vitest.same-census.config.mjs'), `import react from '${join(ROOT, 'node_modules/@vitejs/plugin-react/dist/index.js')}';
-export default { root: '${ROOT}', plugins: [react()], test: { environment: 'node', include: ['${RENDER}'], testTimeout: 300000, pool: 'forks', fileParallelism: false, server: { deps: { inline: [/@testing-library\\//] } } } };
-`);
-    const t0 = Date.now();
-    console.log(`sameness-census: rendering ${plan.length} places (${workers} workers) into ${out}`);
-    await Promise.all(Array.from({ length: workers }, (_, w) => {
-      const part = join(out, `plan.${w}.json`);
-      writeFileSync(part, JSON.stringify(plan.filter((_, i) => i % workers === w)));
-      return new Promise((resolve) => {
-        const child = spawn('npx', ['vitest', 'run', '--config', join(out, 'vitest.same-census.config.mjs')], {
-          cwd: ROOT, env: { ...process.env, SAME_CENSUS_OUT: join(out, 'rows'), SAME_CENSUS_PLAN: part }, stdio: ['ignore', 'pipe', 'pipe'],
-        });
-        /** @type {Buffer[]} */ const log = [];
-        child.stdout.on('data', (d) => log.push(d)); child.stderr.on('data', (d) => log.push(d));
-        child.on('close', (code) => { writeFileSync(join(out, `render.${w}.log`), Buffer.concat(log)); resolve(code); });
-      });
-    }));
-    const wall = ((Date.now() - t0) / 60000).toFixed(1);
-    writeFileSync(join(out, 'wall.txt'), `${wall} min, ${plan.length} places, ${workers} workers\n`);
-    console.log(`sameness-census: rendered in ${wall} min`);
-  }
+  if (!from) await renderRun(prefix, n, workers, out);
   const run = readRun(out);
   const total = Object.values(run).reduce((a, r) => a + r.length, 0);
   console.log(`sameness-census: ${total} places read from ${out}`);
