@@ -22,6 +22,17 @@ The other 19 read as different wants from every reserve line of their cluster (s
 never backing down; grudge: spoiling, the looked-down-on, the unforgotten wrong; greed: making others pay, people owing
 them; fear: owing to someone who could use it).
 
-## Files 6–7
+## File 6 (6 new PERSONALITY lines)
 
-Read at their writing; the verdicts are added below with each file.
+**Duplicates: none. Near-restatements: none.** grudge/short 10.1 "Keep a careful watch this season on someone they cannot
+stand." (reserve: spoiling a good thing) · grudge/long 15.1 "Count among their friends no one who ever laughed at them."
+(reserve: the looked-down-on asking help; the unforgotten wrong) · greed/long 16.1 "Turn every favour they ever do into
+money, sooner or later." (reserve: half the people owing them money; making others pay) · impulse/long 19.1 "Spend their
+last coin on something wonderful, and never regret it." (reserve: slipping away; no unwanted work) · forbidden_patron/long
+27.1 "Leave behind secrets that keep people guessing long after they are gone." (reserve: everyone's confidant; a foot in
+every camp) · sway/long 28.1 "Be listened to here even by those who dislike them." (reserve: proved right; never backing
+down; a following). Each a different want.
+
+## File 7
+
+Read at its writing; the verdicts are added below with it.

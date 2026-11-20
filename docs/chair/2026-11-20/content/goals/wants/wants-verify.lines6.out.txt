@@ -1,0 +1,60 @@
+base /tmp/claude-0/-home-user-settlement-engine/1b606ed5-1f0a-5e1b-bf32-8b8b1c4098bc/scratchpad/base300.json · after /tmp/claude-0/-home-user-settlement-engine/1b606ed5-1f0a-5e1b-bf32-8b8b1c4098bc/scratchpad/lines6born.json · append 360 lines in 34 cells: {"RANK/enter/short":45,"RANK/enter/long":45,"TIES/rival_enemy/short":28,"TIES/rival_enemy/long":28,"TIES/ally/short":16,"TIES/ally/long":17,"INSTITUTION/solvency/short":17,"INSTITUTION/solvency/long":17,"INSTITUTION/charter/short":12,"INSTITUTION/charter/long":13,"RANK/climb/short":10,"PERSONALITY/sway/long":8,"PERSONALITY/grudge/long":6,"TIES/mentor_student/long":6,"PERSONALITY/sway/short":4,"TIES/mentor_student/short":5,"PERSONALITY/grudge/short":4,"POWER/tense/short":16,"POWER/tense/long":16,"TIES/debtor/long":4,"RANK/climb/long":4,"TIES/debtor/short":4,"PERSONALITY/greed/long":3,"SUPPLY/expansion/long":4,"PERSONALITY/greed/short":2,"SUPPLY/expansion/short":3,"ALLEGIANCE/warrant/short":2,"PERSONALITY/fear/long":1,"RANK/defend/long":1,"POWER/competitive/short":8,"POWER/competitive/long":8,"TIES/creditor/short":1,"PERSONALITY/impulse/long":1,"PERSONALITY/forbidden_patron/long":1}
+
+size        vantage  before   after   (new lines held a town, after)
+town        short     19.9%    5.9%   13.34
+town        long      18.8%    5.5%   13.30
+city        short     36.4%   12.4%   31.42
+city        long      36.0%   12.5%   33.24
+metropolis  short     47.3%   18.2%   45.08
+metropolis  long      47.2%   18.0%   47.86
+
+THE MOVES over 300 towns: 13612 holdings changed text (293 towns touched): onto a new line 9830 · within an appended cell, to another of its lines 3748 · holdings of cells not appended (the cascade) 34
+by the holding's cell before (appended cells marked *): onto a new line · within cell · cascade
+  *RANK/enter/long                            1099 · 158 · 0
+  *RANK/enter/short                           1080 · 133 · 0
+  *INSTITUTION/solvency/long                  707 · 260 · 0
+  *INSTITUTION/solvency/short                 661 · 238 · 0
+  *INSTITUTION/charter/long                   581 · 206 · 0
+  *TIES/rival_enemy/short                     666 · 107 · 0
+  *TIES/rival_enemy/long                      654 · 110 · 0
+  *INSTITUTION/charter/short                  541 · 197 · 0
+  *POWER/tense/short                          431 · 140 · 0
+  *POWER/tense/long                           426 · 137 · 0
+  *TIES/ally/long                             425 · 97 · 0
+  *TIES/ally/short                            378 · 90 · 0
+  *RANK/climb/short                           259 · 150 · 0
+  *RANK/climb/long                            132 · 195 · 0
+  *SUPPLY/expansion/short                     127 · 168 · 0
+  *SUPPLY/expansion/long                      147 · 141 · 0
+  *TIES/mentor_student/short                  143 · 124 · 0
+  *PERSONALITY/sway/long                      183 · 73 · 0
+  *TIES/mentor_student/long                   150 · 92 · 0
+  *PERSONALITY/grudge/long                    135 · 79 · 0
+  *TIES/debtor/long                           106 · 89 · 0
+  *TIES/debtor/short                          102 · 85 · 0
+  *PERSONALITY/sway/short                     101 · 79 · 0
+  *PERSONALITY/grudge/short                   100 · 70 · 0
+  *PERSONALITY/greed/long                     80 · 72 · 0
+  *ALLEGIANCE/warrant/short                   56 · 85 · 0
+  *PERSONALITY/greed/short                    65 · 57 · 0
+  *POWER/competitive/long                     69 · 37 · 0
+  *RANK/defend/long                           24 · 78 · 0
+  *POWER/competitive/short                    55 · 37 · 0
+  *PERSONALITY/forbidden_patron/long          29 · 40 · 0
+  *PERSONALITY/impulse/long                   27 · 39 · 0
+  *TIES/creditor/short                        20 · 45 · 0
+  *PERSONALITY/fear/long                      22 · 40 · 0
+   INSTITUTION/takeover/long                  9 · 0 · 1
+   INSTITUTION/takeover/short                 8 · 0 · 2
+   TIES/family/short                          2 · 0 · 7
+   SUPPLY/impaired/long                       2 · 0 · 4
+   TIES/family/long                           3 · 0 · 2
+   TIES/creditor/long                         2 · 0 · 3
+   PERSONALITY/caution/long                   5 · 0 · 0
+   SUPPLY/dependency/long                     2 · 0 · 3
+   INSTITUTION/rebuilding/long                2 · 0 · 1
+   PERSONALITY/kindness/long                  2 · 0 · 1
+   PERSONALITY/fear/short                     1 · 0 · 1
+   ALLEGIANCE/keep_patron/short               1 · 0 · 1
+
+identical goal sentences inside one town, after: 0 (over 300 towns)

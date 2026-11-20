@@ -167,3 +167,15 @@ move once, for one cause, instead of once per file.
 order) · `wants-verify.mjs` (+ `.bill1/2/3`, `.file1` (placeholders), `.lines1` (written lines) `.out.txt`) ·
 `wants-goals-final.mjs` (+ `.base`, `.lines1` `.out.txt`) · `want-lines-append.mjs` · `want-lines-check.mjs` (+ `.out.txt`)
 · `WANT-LINES-1.md` (60 lines; files 2–7 follow the build order when GOALS-3 resumes me).
+
+## Addendum (17:0x UTC): POWER/competitive put first in file 6, the tranche still 380
+
+The chair's order of 17:00 UTC: meet the 24 mirrors left after file 5, all on POWER/competitive's existing lines. Measured
+(placeholders appended to each vantage, files 1–5 written): k = 4 → 4 mirrors, 5 → 2, 6 → 1, 7 → 0, 8, 12, 18 → 0. Its
+cross-town share is small (0.14–0.15 points), so the mirrors set the count: **+8 a vantage, 16 lines**, first in file 6.
+Born with file 6's written lines: mirror 0. Kept INSIDE the 380: the build order's last 16 lines give way (their fall is
+the smallest of the tranche): INSTITUTION/solvency/short 1 · PERSONALITY/grudge/long 1 · RANK/defend/long 1 · TIES/ally/short
+1 · TIES/rival_enemy/long 1 · PERSONALITY/impulse/short 1 · TIES/rival_enemy/short 1 · PERSONALITY/grudge/short 1 ·
+TIES/ally/long 1 · RANK/enter/short 2 · TIES/debtor/long 1 · RANK/enter/long 1 · POWER/tense/short 1 ·
+INSTITUTION/charter/short 1 · TIES/debtor/short 1. File 6 = the 16 + build-order lines 301–344; file 7 = lines 345–364.
+The tranche now touches 35 cells (POWER/competitive's two vantages added; none dropped whole).
