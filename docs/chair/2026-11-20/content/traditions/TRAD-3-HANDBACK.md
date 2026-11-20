@@ -130,3 +130,14 @@ stress `type`s); the draw key (`String(_seed ?? id)`); the public search (unit 2
   typecheck:domain:strict 0, eslint 0. NEXT: unit 4b (the chair, 12:25: the drawn set's floor EXCLUDES the hideable
   class; the kind phrases' totality), then TRAD-SHARE. Forwarded to the security lane by the chair: `brokerageLegalityOf`
   reads a house's own tags (an illegal brokerage with its function eye hidden may stop counting as hideable in the veil).
+- 2026-11-20 13:15 UTC — UNIT 4b MERGED (`3ce74726c`; merge `5b71ae685`). Red re-run by TRAD-3 at `3d49049e4`: 1 failed | 2 passed
+  (the 4b block): "expected [ 'The Great Feast', …(2) ] to deeply equal [ 'The Great Feast' ]". Greens at the merge: the
+  five traditions files 94/94; `tests/lint` whole 220/221 files, 3285/3286, the one red the lighting census, re-taken by
+  its door in the commit that carries this line (titles 31310 → 31313, suiteTitles 8670 → 8671); typecheck:ratchet 0,
+  typecheck:domain:strict 0, eslint 0. THE CONFINEMENT, re-run by TRAD-3 at this lane's last code commit: base
+  `441ec3b32` (archive) vs tip `5b71ae685`: 1,245 documents BYTE-IDENTICAL, sha256
+  `d70950941f330c629335d601a3a49848dc49722834080931add4c58dda6a002a` on both (the same as TRAD-2's at the line).
+  4b's measures (builder, executed): drawn sets shrunk 0 of 432; descriptions moved 0. Totality of the kind phrases holds
+  as code stands (builder's scratch test, deleted; NOT a committed arm). TRAD-SHARE IS SENT AT THIS PUSH. HANDED OVER to
+  TRAD-4 at this push; no builder of TRAD-3 is out. What is left: units 5 (CTR10) and 6 (the measures; the 30 + 12
+  samples), CTR11's "other direction" line: TRAD-4's.

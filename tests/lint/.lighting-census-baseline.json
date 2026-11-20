@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "3d49049e485e1cbabe28026dfc6eb3661a6ffac1",
+  "measuredAtSha": "5b71ae6855d19ce2b3fa8ecec4f898ee1898cab5",
   "measuredBy": "TRAD-3",
   "date": "2026-11-20",
-  "note": "unit 4 merged (the chair plants and items 3-5): new arms in two existing test files",
+  "note": "unit 4b merged at 5b71ae685: three test titles",
   "files": 3711,
   "parked": 472,
   "credited": 3239,
-  "titles": 31310,
-  "suiteTitles": 8670
+  "titles": 31313,
+  "suiteTitles": 8671
 }
