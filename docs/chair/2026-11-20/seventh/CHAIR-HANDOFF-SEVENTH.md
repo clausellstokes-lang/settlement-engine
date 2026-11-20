@@ -679,6 +679,13 @@ parts of the whole check (at the close).
   settlements on the page are still owed before he signs. DECIDED IN THE ANSWER (he had been asked three times and
   had deferred): the thin pages' first half goes in before the deploy.
 
+- **About 15:44 UTC, 2026-11-20, THE OWNER (verbatim):** "So do what you can to comprehensively fix the sameness fault as
+  much as you can". WHAT IT ORDERS, AS THE CHAIR READS IT: not the one sentence just found but THE WHOLE FAULT, as
+  far as it can be cured before the deploy: every sentence the page prints is measured (so no field is again left
+  unread), the worst are cured in order of weight, and the people's lines get their further tranches, wants
+  included (the chair had held wants for after the deploy: that ruling is withdrawn). What stays his: the size rise
+  the new lines cost and the golden's re-signing, both at the close.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -1553,6 +1560,47 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   sentence in more than about a quarter of a size's places is not printed and comes to the chair; every audience
   fails closed, each slot's reads listed for the security reader; the page's added words to the chair before the
   merge. THE SECOND HALF (the four slots whose pools need mending) and Safety's floors stay after the deploy.
+
+- **THE SAMENESS PROGRAM (15:52 UTC, on the owner's order of about 15:44).** THE CHAIR'S CENSUS OF EVERY STORED
+  SENTENCE (`measures/stored-census/census.mjs`, `narr.mjs`, `census.json`, `census.narrative.out.txt`: 50 places a
+  size, seeds hxd-<size>-0..49, the line 43ab0f5eb; every string leaf of 25 characters or more by its path; the
+  place's own names masked; TOP = places printing the commonest sentence; SEEN = the mean share of a place's
+  sentences at a path that a second place also prints). WORST PRINTED FIELDS: `economicState.situationDesc` ("Trade
+  proceeds at an ordinary pace for a settlement of this size.") 35 of 50 thorps, 45 towns, 44 cities;
+  `powerStructure.recentConflict` 27 to 31 of 50 at every size; `npcs[].activeConstraint` ("With nothing pressing…")
+  28 of 49 thorps, 33 of 48 towns, 35 of 37 cities; `npcs[].structuralPosition` 31 of 50 towns, 32 of 46 cities;
+  `safetyDesc` 28 of 50 thorps, 33 of 50 cities; `economicDragDesc` 33 of 46 cities;
+  `economicViability.dependencies[]` 50 of 50 cities; `tradeDependencies[].impact` one sentence everywhere;
+  `settlementReason[]` one text in 50 of 50 cities; `factionRelationships[].narrative` 36 of 50 cities, 29 towns;
+  `factions[].desc` 27 of 50 thorps; `history.founding.*` 17 to 19 of 50; `spatialLayout.quarters[].desc` ten texts
+  for every city (SEEN 91%); `entrepotNote` 40 of 44 cities; a trouble's `plotHooks` and `lastingEffects` 27 of 50
+  cities (the crime wave's). PEOPLE'S LINES AT CITY SIZE (SEEN): hooks 49%, tie lines 55%, tie tensions 56%, secrets
+  26%, wants 23 to 25%, impressions 25%, behaviour 23%. NOT PRINTED BY ANY PAGE (so not cured): a person's tell,
+  speech, build and clothes (30, 30, 3 and 57 texts), `economicViability.summary`, two food notes. NOT YET MEASURED:
+  the sentences the page COMPOSES at render (the state prose pools): SAME-1's first unit.
+  THE ONE PATTERN FOR A SENTENCE-A-BRANCH FIELD: (1) a default sentence that says nothing is replaced by one that
+  says something the record holds (the place's own goods, roads, houses, powers), each wording declaring the facts
+  it needs; (2) then several wordings a branch, chosen by keyed hash with NO NEW DRAW, so nothing else in a born
+  town moves (the two-tree tool: 0 non-string differences); (3) the bar: no sentence in more than about 15% of a
+  size's places; (4) every new pool in its own new data file, registered; the presumption walkers green by
+  declaration; (5) a saved town keeps its stored sentence; (6) a file another lane holds gets a new data file and
+  one call line, on the chair's word.
+  THE ROUTING: SAME-1 (new seat; `prompts/SAME-1.txt`): the rendered census of every sentence the page prints, then
+  a DOOR (`scripts/sameness-census.mjs`, a register, two laws: a printed slot with no row reds; a ceiling only
+  tightens), then the before and after of every unit. PLACE-1 (new; `prompts/PLACE-1.txt`): situationDesc first,
+  safetyDesc, economicDragDesc, the dependencies' and warnings' text, the trade impact, the entrepot notes.
+  PEOPLE-1 (new; `prompts/PEOPLE-1.txt`): activeConstraint, structuralPosition and the quarters (free files, built
+  first); settlementReason, founding, the relations' narrative and the smallest places' power description (lines
+  now; built only on the commit the chair names: `narrativeGenerator.js` is the goals lane's until it lands;
+  `factionDynamics.js` and `power/rulingStructure.js` the fortune lane's). DEPTH-2: the recent conflict is ORDERED
+  BUILT before the deploy on the chair's read of its lines; second tranches of hooks and ties toward "a second city
+  repeats under 30%" (the bill: ties +157, hooks +96 in all; 80 and 60 are written). GOALS-3, after "GOALS
+  <commit>": THE WANTS' TRANCHE (the bill: +180 short, +200 long), measured by pool, trade-true, lines to the chair,
+  a second landing. PAGE-7, after the causes: a trouble's own hooks and lasting effects (three fixed a kind today)
+  become need-gated pools, three chosen by keyed hash; third wordings where three in a row stays above 15%. PAGE-6,
+  after L2: a second tranche for the thinnest arrival pools (three in a row under 10%).
+  WHAT IT COSTS AND WHOSE IT IS: several hundred new lines, each read by the chair; three more lanes to join at the
+  close; the app's download grows (the size rise and the golden's re-signing are the owner's, at the close).
 
 ## 3. The queue, in order
 
@@ -4408,3 +4456,9 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   merged PAGE-5's tip as a35dd28a5. DEPTH-2's measuring helper is out on `briefs/MEASURE-CONFLICT.md` (7fdc73bbb);
   the hooks builder is in its tests. FORTUNE-3 has the seven conditions verbatim and is checking play-time `reBand`
   read-only.
+- 15:53 UTC · THE OWNER ORDERED THE SAMENESS FAULT CURED COMPREHENSIVELY (section 1). The chair measured every stored
+  sentence of 300 places itself (section 2; files under `measures/stored-census/`), checked which fields the page
+  prints and which lanes hold their files, and set THE SAMENESS PROGRAM (section 2): three prompts written
+  (`SAME-1.txt`, `PLACE-1.txt`, `PEOPLE-1.txt`), seated after this push; DEPTH-2, GOALS-3, PAGE-7 and PAGE-6 given
+  their further units by message. Earlier the same hour: the owner asked again for the chair's expectations and was
+  answered (section 1); the thin pages' first half ordered (section 2).
