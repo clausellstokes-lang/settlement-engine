@@ -25,7 +25,10 @@ started on the line's tip `062504aa8`. A successor needs this file and the brief
    one import line; room made by moving ONE tension-side helper of `buildHistoricalEvent` to a leaf under
    `src/generators/history/` (never a hook-side one: the trouble lane `lane/page-10-2026-11-20` moves one; the join is a
    union of imports); file ends at or under its ceiling (under: baseline lowered by its door). No packed lines.
-7. First paint: the leaf is excised from engine-core and pinned to its own `trouble-law` chunk (the fortune lane's U6
+7. THE CHAIR, 22:01 UTC (every law lane): a dark-control TEST is a differential in one tree, never a stored digest of
+   whole births; a test meaning "under law 1" forces law 1 in its own config; EXACTLY ONE test pins what a new place is
+   born with (follows the dial) and is listed for the flip; the two-tree proof lives in the merge message, not a pin.
+8. First paint: the leaf is excised from engine-core and pinned to its own `trouble-law` chunk (the fortune lane's U6
    pattern); at the join the vite rows are a UNION with the fortune lane's.
 
 ## UNITS
