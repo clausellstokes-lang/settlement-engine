@@ -20,7 +20,7 @@
 import { crisisHookFor } from './crisisHooks.js';
 import { crisisContainer } from '../facts/crisisKind.js';
 import { CRISIS_ROLE_LABEL, STAKE_REASONS, effectiveCastOf } from './crisisCast.js';
-import { composeTonightSheet } from '../summary/tonightSheet.js';
+import { composeTonightSheet, TONIGHT_AUDIENCES } from '../summary/tonightSheet.js';
 import { entityIdFor } from '../dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
@@ -226,16 +226,38 @@ function stakeShown(s, govName, k) {
   return many ? { stake: 'untouchedMany', reason: k.reason.replace(/^it\b/, 'they') } : { stake: 'untouched', reason: k.reason };
 }
 
+/** @typedef {import('../summary/tonightSheet.js').TonightOptions} CrisisPageOptions */
+
+/**
+ * WHO READS THE PAGE (FRAME-4 · U0; the chair, 2026-11-20: P1b's and P4a's new lines are drawn FOR THE OWNER ONLY, behind
+ * an explicit audience argument, and a reader who is not the owner gets today's crisis page byte for byte): the readers
+ * are the session sheet's own closed set (`TONIGHT_AUDIENCES`, not a second set). The page is the owner's ONLY when
+ * `options.audience` is exactly `'owner'`; any other value, a missing `audience` or no options at all is a reader who is
+ * not the owner: FAIL CLOSED.
+ * @param {CrisisPageOptions | null | undefined} options
+ * @returns {boolean}
+ */
+export function crisisPageForOwner(options) {
+  return !!options && typeof options === 'object' && options.audience === TONIGHT_AUDIENCES.owner;
+}
+
 /**
  * Compose the whole page: one section per active crisis, worst first.
+ *
+ * THE AUDIENCE (FRAME-4 · U0): every production caller says who reads the page (`{ audience }`, the closed set of
+ * `crisisPageForOwner`). Owner-only content is composed only where `forOwner`; today the page holds none, so every
+ * reader gets the same page: the argument is the seam the owner-only lines draw behind. The sheet's facts the page reads
+ * are composed for the same reader (the sheet fails closed too; its facts are the same for every reader).
  * @param {PageSettlement | null | undefined} settlement
+ * @param {CrisisPageOptions | null} [options]
  * @returns {CrisisPageSection[]}
  */
-export function composeCrisisPage(settlement) {
+export function composeCrisisPage(settlement, options) {
   const s = settlement && typeof settlement === 'object' ? settlement : {};
   const entries = crisisEntriesOf(s);
   if (!entries.length) return [];
-  const facts = composeTonightSheet(/** @type {Parameters<typeof composeTonightSheet>[0]} */ (s)).facts;
+  const forOwner = crisisPageForOwner(options);
+  const facts = composeTonightSheet(/** @type {Parameters<typeof composeTonightSheet>[0]} */ (s), forOwner ? { audience: TONIGHT_AUDIENCES.owner } : null).facts;
   // THE PLACE'S OWN NOUN (lane RUNG1-TRUTH unit B, 2026-11-04): the nature copy and the cast's
   // reason vocabulary write "the town" for a place of any size ("a crisis of the town itself",
   // "the town's defence, …"), and rung 1 counted 326 + 8 of 1,000 non-towns printing it. Every

@@ -712,7 +712,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} publicDossier={publicDossier} playerView={playerView} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />;
       case 'institutions': return <InstitutionsTab settlement={s} canAuthor={npcAuthoringAllowed} />;
-      case 'crisis':     return <CrisisTab settlement={s} canAuthor={npcAuthoringAllowed} />;
+      case 'crisis':     return <CrisisTab settlement={s} canAuthor={npcAuthoringAllowed} audience={!publicDossier && !playerView ? 'owner' : playerView ? 'player' : 'gallery'} />;
       case 'power':      return (
         <>
           <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} worldState={owningWorldState} />

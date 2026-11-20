@@ -184,7 +184,8 @@ function tonightPage(settlement) {
  * town. Rides the Tonight chapter's inclusion.
  */
 function crisisJournalPage(settlement) {
-  const sections = composeCrisisPage(settlement);
+  // THE OWNER'S PAGE (FRAME-4 · U0): the Foundry module is the DM's own export, built from their own record
+  const sections = composeCrisisPage(settlement, { audience: TONIGHT_AUDIENCES.owner });
   if (!sections.length) return null;
   // The two facts print once, on the Tonight page this page rides; every house keeps its own stake row
   // (the PDF's rules, pdf/lib/crisisPrint.js; veto 3). A cast row reads as the tab's does: "{name} · {reason}"

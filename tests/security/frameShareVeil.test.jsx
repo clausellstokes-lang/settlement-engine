@@ -27,6 +27,12 @@
  *      town's shared read, open the Tonight sheet the way a viewer does (the Overview's "Open Tonight" sets the
  *      persisted `tableViewOpen` preference, and the page mounts the Table View on it: the security lane's gap, which
  *      this file does not cure); the sheet DRAWS there, and none of the frame's lines is on the page.
+ *   7. THE CRISIS PAGE'S READER (FRAME-4 · U0, the chair's ruling of 2026-11-20: P1b's and P4a's lines are drawn for the
+ *      owner only, behind the crisis page's explicit audience argument): towns born in a crisis; the owner's own
+ *      surfaces (the live editor and the owner's saved view) mount the Crisis tab with the audience 'owner' (liveness:
+ *      the tab draws its page); the gallery page (default and DM content shared) and the party link (Reveal DM off and
+ *      on) mount NO Crisis tab (OutputContainer's own gate, the security lane's, untouched), so no crisis page is composed
+ *      there for anyone, and any Crisis tab a page did mount would carry a reader who is not the owner.
  * The PDF and the Foundry module carry no player variant (`PDF_VARIANTS`, pinned below: a new variant reds here and must
  * be classed before it ships).
  */
@@ -37,6 +43,17 @@ import { cloneElement } from 'react';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, waitFor, within } from '@testing-library/react';
 
+// FRAME-4 · U0: the Crisis tab, recorded as it is mounted (who the page says reads it), and rendered as it is
+const crisisMounts = vi.hoisted(() => /** @type {Array<{ said: boolean, audience: unknown }>} */ ([]));
+vi.mock('../../src/components/new/tabs/CrisisTab.jsx', async (importOriginal) => {
+  const real = await importOriginal();
+  const { createElement } = await import('react');
+  function RecordedCrisisTab(props) {
+    crisisMounts.push({ said: Object.prototype.hasOwnProperty.call(props, 'audience'), audience: props.audience });
+    return createElement(real.default, props);
+  }
+  return { ...real, default: RecordedCrisisTab };
+});
 vi.mock('../../src/lib/supabase.js', () => ({
   supabase: { from: vi.fn(), rpc: vi.fn(() => Promise.resolve({ data: [], error: null })) },
   isConfigured: true,
@@ -63,6 +80,8 @@ import { PDF_VARIANTS } from '../../src/pdf/variants.js';
 import TableView from '../../src/components/TableView.jsx';
 import PublicDossierView from '../../src/components/PublicDossierView.jsx';
 import PartyLinkView from '../../src/components/PartyLinkView.jsx';
+import OutputContainer from '../../src/components/OutputContainer.jsx';
+import { composeCrisisPage, hasActiveCrisis } from '../../src/domain/crisis/crisisPage.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 afterEach(() => { cleanup(); vi.clearAllMocks(); useStore.getState().userPrefs = {}; });
@@ -284,6 +303,74 @@ describe('CF3: the frame reaches no shared page', () => {
       }
     });
     expectNoSeedFailures(failures, 'on every born town, the sheet opens on the gallery page and the party link, and the frame never rides it');
+  }, 600000);
+
+  test('U0: the owner\'s own surfaces mount the Crisis tab for the owner; the gallery page and the party link mount none', async () => {
+    // B7's forced births (`b7-<kind>-<tier>-<i>`): one crisis of each nature the P-units draw on (a natural famine, the
+    // engineered infiltration, the external debt)
+    const CRISIS = [['b7-famine-town-0', 'famine'], ['b7-infiltrated-town-0', 'infiltrated'], ['b7-indebted-town-0', 'indebted']];
+    const towns = [];
+    for (const [seed, kind] of CRISIS) {
+      const s = generateSettlementPipeline({ settType: 'town', stressType: kind }, null, { seed, customContent: {} });
+      towns.push({ seed, s, reads: await sharedReadsOf(s) });
+    }
+    /** Render a page, wait for its tab strip, open the Crisis tab where the page offers one; what was mounted, for whom. */
+    const visit = async (element) => {
+      crisisMounts.length = 0;
+      const view = render(element);
+      await within(view.container).findByRole('tab', { name: /Overview/ }, { timeout: 60000 });
+      const tab = view.container.querySelector('#sf-tab-crisis');
+      let drew = false;
+      if (tab) {
+        fireEvent.click(tab);
+        await waitFor(() => expect(view.container.querySelector('[data-testid="crisis-tab"]')).toBeTruthy(), { timeout: 60000 });
+        drew = view.container.querySelectorAll('[data-testid="crisis-section"]').length > 0;
+      }
+      const out = { offered: !!tab, drew, mounts: crisisMounts.slice() };
+      cleanup();
+      return out;
+    };
+    const seen = new Map();
+    for (const { seed, s, reads } of towns) {
+      const pages = [
+        ['owner', 'the live editor', <OutputContainer key="e" settlement={s} />],
+        ['owner', "the owner's saved view", <OutputContainer key="v" settlement={s} readOnly saveId="u0-own-save" />],
+        ['stranger', 'the gallery page', <PublicDossierView key="g" dossier={reads.gallery} />],
+        ['stranger', 'the gallery page (DM content shared)', <PublicDossierView key="d" dossier={reads.galleryDmFull} />],
+        ['stranger', "the party link's page (Reveal DM off)", <PartyLinkView key="p" dossier={reads.partyLink} auth={{ user: null }} onReport={() => {}} />],
+        ['stranger', "the party link's page (Reveal DM on)", <PartyLinkView key="q" dossier={{ ...reads.partyLink, shareDm: true }} auth={{ user: null }} onReport={() => {}} />],
+      ];
+      const got = [];
+      for (const [who, where, element] of pages) {
+        try { got.push({ who, where, ...(await visit(element)) }); } catch (error) { cleanup(); got.push({ who, where, error }); }
+      }
+      seen.set(seed, { s, reads, got });
+    }
+    const failures = collectSeedFailures([...seen.keys()], (seed) => {
+      const { s, reads, got } = seen.get(seed);
+      expect(hasActiveCrisis(s), `${seed}: born in its crisis`).toBe(true);
+      for (const key of ['gallery', 'galleryDmFull', 'partyLink']) {
+        // the shared record still holds the crisis: the absence below is the page's gate, not a calm town
+        expect(hasActiveCrisis(reads[key].settlement), `${seed} ${key}: the shared record holds the crisis`).toBe(true);
+        for (const options of [undefined, {}, { audience: TONIGHT_AUDIENCES.player }, { audience: TONIGHT_AUDIENCES.gallery }]) {
+          expect(composeCrisisPage(reads[key].settlement, options), `${seed} ${key}: a stranger's page is today's`).toEqual(composeCrisisPage(reads[key].settlement));
+        }
+      }
+      for (const { who, where, offered, drew, mounts, error } of got) {
+        if (error) throw error;
+        if (who === 'owner') {
+          expect(offered, `${seed} on ${where}: the Crisis tab is offered`).toBe(true);
+          expect(drew, `${seed} on ${where}: the Crisis tab draws its page`).toBe(true);
+          expect(mounts.length, `${seed} on ${where}: the Crisis tab mounted`).toBeGreaterThan(0);
+          for (const m of mounts) expect(m, `${seed} on ${where}: mounted for the owner`).toEqual({ said: true, audience: TONIGHT_AUDIENCES.owner });
+        } else {
+          expect(offered, `${seed} on ${where}: no Crisis tab is offered`).toBe(false);
+          expect(mounts, `${seed} on ${where}: no Crisis tab is mounted`).toEqual([]);
+          for (const m of mounts) expect(m.audience, `${seed} on ${where}: never the owner`).not.toBe(TONIGHT_AUDIENCES.owner);
+        }
+      }
+    });
+    expectNoSeedFailures(failures, 'on every crisis town, the owner\'s surfaces mount the Crisis tab for the owner, and no shared page mounts one');
   }, 600000);
 
   test('one door: only the sheet\'s composer imports the trouble cast', () => {

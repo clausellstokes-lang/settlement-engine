@@ -183,8 +183,12 @@ export function CrisisSection({ section, canAuthor = false, roster = [] }) {
   );
 }
 
-export default function CrisisTab({ settlement, canAuthor = false }) {
-  const sections = useMemo(() => composeCrisisPage(settlement), [settlement]);
+/**
+ * FRAME-4 · U0: `audience` is who reads the page (the session sheet's closed set, threaded from where the tab is mounted,
+ * as the Table View's is); with no prop the tab composes as a reader who is not the owner (fail closed).
+ */
+export default function CrisisTab({ settlement, canAuthor = false, audience }) {
+  const sections = useMemo(() => composeCrisisPage(settlement, { audience }), [settlement, audience]);
   const roster = useMemo(() => castRosterOf(settlement), [settlement]);
   if (!sections.length) return null;
   return (
