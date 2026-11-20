@@ -25,7 +25,7 @@
  * paint weight.
  */
 
-import { hopWeeks } from './distanceRead.js';
+import { hopWeeks, setSpatialLedger, dropSpatialLedger } from './distanceRead.js';
 
 /**
  * A regional impact as it travels (only the fields the queue reads; the full shape
@@ -144,4 +144,29 @@ export function enforceLimit(ledger) {
   const out = {};
   for (const k of kept) out[k] = ledger[k];
   return out;
+}
+
+/**
+ * Fold the arrival queue back onto worldState at the end of the pulse's apply pass
+ * (`applyWorldPulse.js :: applyWorldPulseOutcomes`, which calls it only under the
+ * spatial-canon marker): PRESENT while impacts are in transit, DROPPED when empty,
+ * so an emptied world stays byte-identical to a dormant one (`dropSpatialLedger`
+ * drops the namespace with its last sub-ledger).
+ *
+ * MOVED VERBATIM (U5-CURE2, 2026-11-20) out of the apply pass, which stands at its
+ * shrink-only size ceiling: the six lines below are its own, byte for byte, the
+ * accessors the same two it imported. Pure; returns a new worldState (or the same
+ * reference when there is nothing to drop).
+ * @param {Record<string, unknown>} state   the worldState the apply pass is building
+ * @param {ArrivalLedger|undefined} spatialArrivals   the ledger after this tick's drain and parks
+ * @returns {Record<string, unknown>}
+ */
+export function foldSpatialArrivals(state, spatialArrivals) {
+  const nextArrivals = spatialArrivals && Object.keys(spatialArrivals).length ? spatialArrivals : null;
+  if (nextArrivals) {
+    state = setSpatialLedger(state, 'spatialArrivals', nextArrivals);
+  } else {
+    state = dropSpatialLedger(state, 'spatialArrivals');
+  }
+  return state;
 }

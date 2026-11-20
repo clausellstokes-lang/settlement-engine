@@ -9,8 +9,8 @@ import { deityIdOf } from './pantheon.js';
 // one import is how a later reader concludes there are two builders.
 import { commitDeityEmbed } from '../deityCommitEmbed.js';
 import { queueRegionalImpacts, addRegionalChannels, mintDirectedChannel } from '../region/graph.js';
-import { activeSpatialDigest, getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
-import { parkArrivals, drainDueArrivals } from '../spatial/spatialArrival.js';
+import { activeSpatialDigest, getSpatialLedger } from '../spatial/distanceRead.js';
+import { parkArrivals, drainDueArrivals, foldSpatialArrivals } from '../spatial/spatialArrival.js';
 import { storageCapacityMonths, withStoresMonths } from './foodStockpile.js';
 import { applyRelationshipPatch, relationshipKeyFromEdge } from './relationshipEvolution.js';
 import { applyWarIntentOutcome, stampDeploymentRecall } from './warIntent.js';
@@ -1132,14 +1132,12 @@ export function applyWorldPulseOutcomes({
   // SPATIAL: fold the arrival queue back onto worldState — PRESENT only under the
   // marker while impacts are in transit, DROPPED (dormant / byte-identical) when
   // empty or on the aspatial path. ensureWorldState's conditional-ledger pass then
-  // clones it like every other conditional key.
+  // clones it like every other conditional key. The fold's body moved VERBATIM into
+  // the arrival ledger's own module beside park/drain (U5-CURE2: the size ratchet's
+  // room for the coup path's one argument) — see `foldSpatialArrivals` there; the
+  // marker guard stays here, where the park and the drain are guarded too.
   if (spatialDigest) {
-    const nextArrivals = spatialArrivals && Object.keys(spatialArrivals).length ? spatialArrivals : null;
-    if (nextArrivals) {
-      state = setSpatialLedger(state, 'spatialArrivals', nextArrivals);
-    } else {
-      state = dropSpatialLedger(state, 'spatialArrivals');
-    }
+    state = foldSpatialArrivals(state, spatialArrivals);
   }
 
   return {
