@@ -60,3 +60,12 @@ improvise, if:
 DO NOT: push, merge, open a pull request, take the lighting or wiring census, touch any other file, or read a gate
 through a pipe (use `scripts/gate-tail.sh`). Every time label comes from `date -u`. Keep your report short: the
 receipts, the figures table before and after, and anything you stopped on.
+
+## Addendum (the chair, 20:17 UTC: no veto; three conditions)
+
+(a) The proof is the build. First paint must come back to the base's 1,177,668 raw within +231 B, and `vendorPdfLazy`'s
+seven failing arms must be green again. (b) The report states in one sentence each why `engineCoreLazyEdge` and
+`factHomesLazy` were green on the fault. The depth lane is widening `engineCoreLazyEdge` to see an engine-core edge
+into a lazy-pinned module, and the guarded list here is the second half of the same net. (c) When the pin is merged on
+the lane, PAGE-7 sends the chair "FIRSTPAINT <commit>" at once. PAGE-9 carries the same 2.1 MB and merges the pin
+before any unit of its own.
