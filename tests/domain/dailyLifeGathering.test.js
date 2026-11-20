@@ -42,17 +42,27 @@ const has = (/** @type {any} */ r, /** @type {RegExp} */ re) => names(r).some((n
   || quarters(r).some((/** @type {any} */ q) => re.test(String(q?.name || '')));
 const at = (/** @type {string} */ seed) => /** @type {{ seed: string, rec: any }} */ (births.find((b) => b.seed === seed));
 const text = (/** @type {any} */ rec) => /** @type {import('../../src/domain/dailyLife.js').DailyLifeSlot} */ (deriveDailyLifeSlot('gathering_places', rec)).text;
+/** the pool line a printed text came from (each `{house}` any words), the liveness anchor of every exclusion below */
+const lineOf = (/** @type {string} */ t) => [...GATHERING_NAMED, ...GATHERING_PLAIN]
+  .find((l) => new RegExp(`^${l.text.replace(/[.*+?^$()|[\]\\]/g, '\\$&').replace(/\\?\{\w+\\?\}/g, '.+')}$`).test(t));
 
 describe('the red: the falsest gathering lines M1 found', () => {
   it('hxd-thorp-0 prints no bridge and no open square it lacks', () => {
     const { rec } = at('hxd-thorp-0');
-    if (!has(rec, /\bbridges?\b/i)) expect(text(rec)).not.toMatch(/the bridge/);
-    if (!has(rec, /\bsquares?\b|\bplaza\b|\bgreen\b/i)) expect(text(rec)).not.toMatch(/the open square/);
+    const t = text(rec);
+    expect(lineOf(t), `"${t}"`).toBeTruthy();
+    // anchored: the same text is pinned live on the line above (a line of its pool)
+    if (!has(rec, /\bbridges?\b/i)) expect(t).not.toMatch(/the bridge/);
+    // anchored: the same text is pinned live at this test's head (a line of its pool)
+    if (!has(rec, /\bsquares?\b|\bplaza\b|\bgreen\b/i)) expect(t).not.toMatch(/the open square/);
   });
   it('a metropolis names its houses with the article and no bracket (hxd-metropolis-0..2)', () => {
     for (const seed of ['hxd-metropolis-0', 'hxd-metropolis-1', 'hxd-metropolis-2']) {
       const s = /** @type {any} */ (deriveDailyLifeSlot('gathering_places', at(seed).rec));
+      expect(lineOf(s.text), `${seed}: "${s.text}"`).toBeTruthy();
+      // anchored: the same text is pinned live on the line above (a line of its pool)
       expect(s.text, seed).not.toMatch(/[()]/);
+      // anchored: the same text is pinned live two lines above (a line of its pool)
       expect(s.text, seed).not.toMatch(/(?<!the )\b[A-Z]\w+ cathedral\b/);
       for (const ref of s.references) expect(s.text, `${seed}: ${ref.label}`).toContain(`the ${institutionSentenceNoun(ref.label)}`);
     }
@@ -74,6 +84,7 @@ describe('the route on born places (ruling 12): eligible by declared atoms, then
         const row = (rec.institutions || []).find((/** @type {any} */ i) => i?.id === ref.id || i?.name === ref.label);
         expect(row && isLiveInstitution(row) && !isHideableHouse(row) && !ACCESS_ONLY.test(String(row.name)), `${seed}: ${ref.label}`).toBe(true);
       }
+      // anchored: the same text is pinned live above (`own`, a line of its pool, checked truthy and eligible)
       expect(s.text, seed).not.toMatch(/\btowns?\b/i);
     }
   });
@@ -92,6 +103,9 @@ describe('the route on born places (ruling 12): eligible by declared atoms, then
   it('a place with no true line prints the EMPTY string (ruling 3), and a thorp without fields is never told of them', () => {
     expect(text({ name: 'Nowhere', institutions: [] })).toBe('');
     const town = { name: 'Brigg', tier: 'town', institutions: [{ name: 'Water source' }, { name: 'Farmland' }] };
-    expect(text(town)).not.toMatch(/fields?\b/);
+    const t = text(town);
+    expect(lineOf(t), `"${t}"`).toBeTruthy();
+    // anchored: the same text is pinned live on the line above (a line of its pool)
+    expect(t).not.toMatch(/fields?\b/);
   });
 });

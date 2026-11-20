@@ -56,13 +56,19 @@ describe('the red: the falsest dawn lines M1 found', () => {
   it('hxd-thorp-0 prints no walls and no watch it lacks', () => {
     const { rec } = at('hxd-thorp-0');
     const text = slotOf(rec).text;
+    expect(ownLine(text), `"${text}"`).toBeTruthy();
+    // anchored: the same text is pinned live on the line above (a line of its branch's pool)
     if (!defenceOf(rec).walls) expect(text).not.toMatch(/\bwalls\b/i);
+    // anchored: the same text is pinned live at this test's head (a line of its branch's pool)
     if (!factsOf(rec).guardPresence) expect(text).not.toMatch(/\bthe watch\b/i);
   });
   it('a hamlet with no bakery (hxd-hamlet-7) is not told the bakers light their ovens', () => {
     const { rec } = at('hxd-hamlet-7');
     expect(hasInstitution(rec, 'bakery')).toBe(false);
-    expect(slotOf(rec).text).not.toMatch(/\bbakers?\b/i);
+    const text = slotOf(rec).text;
+    expect(ownLine(text), `"${text}"`).toBeTruthy();
+    // anchored: the same text is pinned live on the line above (a line of its branch's pool)
+    expect(text).not.toMatch(/\bbakers?\b/i);
   });
 });
 
@@ -80,6 +86,7 @@ describe('the route on born places (ruling 11): eligible by declared atoms, then
         expect(row && isLiveInstitution(row) && !isHideableHouse(row) && !ACCESS_ONLY.test(String(row.name)), `${seed}: ${ref.label}`).toBe(true);
         expect(s.text, `${seed}: ${ref.label}`).toContain(`the ${institutionSentenceNoun(ref.label)}`);
       }
+      // anchored: the same text is pinned live above (`own`, a line of its branch's pool, checked truthy and eligible)
       expect(s.text, seed).not.toMatch(/[()]|\btowns?\b/i);
     }
   });
