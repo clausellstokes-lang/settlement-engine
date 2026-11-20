@@ -247,6 +247,40 @@ describe('describeTradition — who keeps it, who presides, who pays (CTR1, CTR7
     expect(singular).toEqual([]);
   });
 
+  it('a PLURAL power takes a plural verb in every POWER_FRAMES kind (powerSentenceName.js :: powerVerb); a singular power keeps its singular verb', () => {
+    // the keeping power alone (no house fits, no owner): the seat for a founding rite, the faith for the stars, the
+    // merchantry for a fair. The religious archetype is read from the category, so its plural power is the faith's own.
+    const kinds = [
+      ['seat', 'founding', 'feast', { faction: 'Merchant Guilds', category: 'economy', isGoverning: true, power: 30 }],
+      ['religious', 'stars', 'feast', { faction: 'Religious Authorities', category: 'religious', power: 30 }],
+      ['merchantry', 'hunt', 'fair', { faction: 'Merchant Guilds', category: 'economy', power: 30 }],
+    ];
+    const SINGULAR = /\b[Tt]he (?:Merchant Guilds|Religious Authorities) (?:meets|oversees|keeps|has|pays)\b/;
+    const AS_SUBJECT = /\bThe (?:Merchant Guilds|Religious Authorities) (?:meet|oversee|keep)\b/;
+    const singular = [];
+    const subject = new Set();
+    for (const [kind, el, act, power] of kinds) {
+      for (let i = 1; i <= 12; i += 1) {
+        const t = town({ institutions: [], npcs: [], powerStructure: { factions: [power] }, _seed: `verb-${i}` });
+        const d = describeTradition(rite(i, el, act), t, { audience: 'owner' });
+        if (d.parts.keeper !== 'power') singular.push(`${kind}#${i}: no power keeps it: ${d.text}`);
+        if (SINGULAR.test(d.text)) singular.push(`${kind}#${i}: ${d.text}`);
+        if (AS_SUBJECT.test(d.text)) subject.add(kind);
+      }
+    }
+    expect(singular).toEqual([]);
+    // anchored: the twelve seeds reach the frame whose subject is the power in every kind (the plural verb stands)
+    expect([...subject].sort()).toEqual(['merchantry', 'religious', 'seat']);
+    const council = [];
+    for (let i = 1; i <= 12; i += 1) {
+      const t = town({ institutions: [], npcs: [], powerStructure: { factions: [{ faction: 'Elder Council', category: 'government', isGoverning: true, power: 30 }] }, _seed: `verb-${i}` });
+      council.push(describeTradition(rite(i, 'founding', 'feast'), t, { audience: 'owner' }).text);
+    }
+    expect(council.some((x) => /\bThe Elder Council oversees it\./.test(x))).toBe(true);
+    // anchored: the line above asserts the singular verb stands for the same council in these same texts
+    expect(council.filter((x) => /\bthe Elder Council oversee\b/i.test(x))).toEqual([]);
+  });
+
   it('THE ECONOMY BAND FOR A READER is ranked over the incomes a reader can be served: a criminal income row (isCriminal, withheld whole by the gallery veil) neither outranks the market taxes nor counts beside them', () => {
     const crime = { source: 'Smuggling & Black Markets', percentage: 35, isCriminal: true };
     const taxes = { source: 'Market Taxes', percentage: 30 };

@@ -19,6 +19,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   ACT_LEADS, ELEMENT_GLOSS, HOUSE_FRAMES, POWER_FRAMES, OWNER_FRAMES, CAUSE_FRAMES, ECONOMY_FRAMES, KEEPER_HOUSES, ECONOMY_FIT,
+  POWER_FRAME_VERBS,
 } from '../../src/data/traditionDescriptionTable.js';
 import { describeTradition } from '../../src/domain/traditions/traditionDescription.js';
 import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
@@ -78,8 +79,27 @@ describe('traditionDescriptionFrames — the closed set', () => {
   });
 
   it('every frame slot is one of the slots the leaf fills', () => {
-    const SLOTS = new Set(['house', 'House', 'person', 'title', 'power', 'Power', 'owner', 'Owner', 'town', 'Town', 'age', 'foundedBy', 'event', 'when', 'income', 'Income', 'is', 'brings']);
+    const SLOTS = new Set(['house', 'House', 'person', 'title', 'power', 'Power', 'owner', 'Owner', 'town', 'Town', 'age', 'foundedBy', 'event', 'when', 'income', 'Income', 'is', 'brings', ...Object.keys(POWER_FRAME_VERBS)]);
     for (const t of templates()) for (const m of t.text.matchAll(/\{(\w+)\}/g)) expect(SLOTS.has(m[1]), `${t.home}: {${m[1]}}`).toBe(true);
+  });
+});
+
+/** A frame whose subject is the power: its verb must be a POWER_FRAME_VERBS slot (the power's number chooses it). */
+const POWER_SUBJECT = /\{Power\}\s+(\S+)/;
+const bareVerbAfterPower = (list) => list.filter((t) => {
+  const m = POWER_SUBJECT.exec(t.text);
+  return m && !(/^\{(\w+)\}$/.test(m[1]) && Object.hasOwn(POWER_FRAME_VERBS, m[1].slice(1, -1)));
+}).map((t) => t.home);
+
+describe('traditionDescriptionFrames — a power\'s verb takes its number (the chair\'s ruling of 2026-11-20)', () => {
+  it('every frame whose subject is {Power} hands its verb as a POWER_FRAME_VERBS slot (powerSentenceName.js :: powerVerb)', () => {
+    expect(templates().filter((t) => POWER_SUBJECT.test(t.text)).length).toBeGreaterThan(0);
+    expect(bareVerbAfterPower(templates())).toEqual([]);
+  });
+
+  it('RED FIRST: a bare verb planted after {Power} is named', () => {
+    expect(bareVerbAfterPower([{ home: 'power.seat.planted', text: '{Power} keeps it.' }, { home: 'power.seat.ok', text: '{Power} {keeps} it.' }]))
+      .toEqual(['power.seat.planted']);
   });
 });
 

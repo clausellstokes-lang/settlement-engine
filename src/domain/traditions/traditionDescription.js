@@ -51,6 +51,7 @@ import { pickVariant } from '../../kernel/proseHash.js';
 import { powerNameInProse } from '../display/governanceAccount.js';
 import { institutionHouseLabel } from '../display/institutionDisplayName.js';
 import { houseSentenceName } from '../../data/houseSentenceName.js';
+import { powerVerb } from '../../data/people/powerSentenceName.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { isHideableHouse, isVeiledPower } from '../people/cardVeil.js';
@@ -61,6 +62,7 @@ import { factsOf } from '../facts/factsOf.js';
 import {
   ACT_LEADS, CRISIS_SCOPED_ACTS, ELEMENT_GLOSS, CRISIS_SCOPED_ELEMENTS, KEEPER_HOUSES, HOUSE_FRAMES, POWER_FRAMES,
   OWNER_FRAMES, CAUSE_FRAMES, DEAD_EVENT_TYPES, DEAD_EVENT_SEVERITIES, ECONOMY_FIT, ECONOMY_FRAMES, ECONOMY_RANKS,
+  POWER_FRAME_VERBS,
 } from '../../data/traditionDescriptionTable.js';
 
 /** @typedef {import('./genesis.js').TraditionRec} TraditionRec */
@@ -344,7 +346,11 @@ export function describeTradition(recIn, settlementIn, options = {}) {
     } else if (want) {
       const power = powerFor(want, settlement, reader);
       if (power) {
-        s2 = fill(draw(POWER_FRAMES[want], seed, `${id}#power`, `power.${want}`, facts), { power: powerNameInProse(power), Power: powerNameInProse(power, true) });
+        // the power's verb takes the power's number (the line's one reader, powerSentenceName.js :: powerVerb)
+        /** @type {Record<string, string>} */
+        const verbs = {};
+        for (const [slot, [one, many]] of Object.entries(POWER_FRAME_VERBS)) verbs[slot] = powerVerb(power, one, many);
+        s2 = fill(draw(POWER_FRAMES[want], seed, `${id}#power`, `power.${want}`, facts), { ...verbs, power: powerNameInProse(power), Power: powerNameInProse(power, true) });
         parts.keeper = 'power';
         named.powers.push(power);
       }

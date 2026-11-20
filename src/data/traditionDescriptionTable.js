@@ -172,11 +172,22 @@ export const HOUSE_FRAMES = Object.freeze({
   ]),
 });
 
-/** S2, WHO KEEPS IT, a power: by the engine's own owner archetype (politics.js :: desiredArchetype, design §6). */
+/**
+ * S2, WHO KEEPS IT, a power: by the engine's own owner archetype (politics.js :: desiredArchetype, design §6). A frame
+ * whose subject is the power hands its verb as a SLOT (POWER_FRAME_VERBS), and the power's own number chooses the form
+ * through the line's one reader (data/people/powerSentenceName.js :: powerVerb): "the Elder Council oversees it", "the
+ * Merchant Guilds oversee it".
+ */
 export const POWER_FRAMES = Object.freeze({
-  seat: Object.freeze(['It is overseen by {power}.', 'It falls to {power}.', '{Power} oversees it.']),
-  religious: Object.freeze(['It falls to {power}.', 'It is in the keeping of {power}.', '{Power} keeps it.']),
-  merchantry: Object.freeze(['Its cost is met by {power}.', 'It is paid for by {power}.', '{Power} meets its cost.']),
+  seat: Object.freeze(['It is overseen by {power}.', 'It falls to {power}.', '{Power} {oversees} it.']),
+  religious: Object.freeze(['It falls to {power}.', 'It is in the keeping of {power}.', '{Power} {keeps} it.']),
+  merchantry: Object.freeze(['Its cost is met by {power}.', 'It is paid for by {power}.', '{Power} {meets} its cost.']),
+});
+/** A power's verb slot in POWER_FRAMES: its singular form, then its plural (powerVerb's `one`, `many`). */
+export const POWER_FRAME_VERBS = Object.freeze({
+  oversees: Object.freeze(['oversees', 'oversee']),
+  keeps: Object.freeze(['keeps', 'keep']),
+  meets: Object.freeze(['meets', 'meet']),
 });
 
 /** S2, WHO KEEPS IT, in play: the record's own owner (ownerKind, ownerLabel), and nothing beside it; never the subject
