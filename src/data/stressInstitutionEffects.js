@@ -19,6 +19,12 @@
 // `secret` keeps every keyword npcGenerator.js :: getStressHistory branches on, and no reworded
 // secret or stakes gains or loses a word generateNPCs' criminal-secret and criminal-guild tests read
 // (they match substrings: 'defence' contains 'fence', so the rewording avoids that word). R2-CODE-A-3 (round three HIGH #651 #327): no secret reads the {commodity} slot, which is the first export's scan label or, failing one, its first word ("the original recovered contract", "the milled operation", "medicinal milled"); the three lines that read it say what is true without it.
+// NAMES-3 (the seventh chair's rulings CV1 and CV7 of 2026-11-20, vetoable by the owner): A VERB WHOSE SUBJECT IS {faction}
+// TAKES THE POWER'S OWN NUMBER, never one the line carries ("they"/"their" after it stand, CV7 (1)). In a `stakes` line it is
+// written in the agreement form, `{power|is|are}` (NAMES-4: named `power`, not the retired word; npcGenerator.js hands the stakes' {faction} power to `data/people/powerSentenceName.js :: fillAgreement` as `power`). A `secret` is also
+// read back as a PATTERN by three readers whose slot is `{[a-z]+}` (rareSecrets.js, crisisFactFindings.js, tonightSheet.js),
+// so a secret's agreeing verb away from the name is a slot of its own, named by its singular form (`{has}`); npcGenerator.js
+// fills it through the one reader (a verb right after the name, "considers", takes NAMES-2's `withPowerVerb` there).
 
 // BAR8 K-PEOPLE (LAW 14 rule 14f; ruling BR14; vetoable by the owner, on the veto list as new vocabulary): A SECRET THAT
 // PRESUMES A COMMAND OR AN OFFICE TAKES A HOLDER TEST. The ten rows below whose words presume one (an authorised sortie,
@@ -94,7 +100,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
   famine: [
     {
       secret: "Controls a hidden cache of {food} reserves that could feed the settlement for two more weeks",
-      stakes: "{faction} suspects it. They've been watching the property",
+      stakes: "{faction} {power|suspects|suspect} it. They've been watching the property",
     },
     {
       secret:
@@ -215,7 +221,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret:
         "The debt was not authorised by the council. They signed alone under pressure and have been hiding it for two years",
-      stakes: "{faction} is about to discover this in the accounts they requested",
+      stakes: "{faction} {power|is|are} about to discover this in the accounts they requested",
       excludes: ["ruler: lord","ruler: occupier"],
       holder: SIGNS_HOLDER, // BAR8 K-PEOPLE (14f): they signed for the town
     },
@@ -340,7 +346,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret:
         "Falsified the initial case count to prevent panic, and now the actual count is far higher than the official record",
-      stakes: "{faction} is about to do their own independent count as part of a resource audit",
+      stakes: "{faction} {power|is|are} about to do their own independent count as part of a resource audit",
     },
     {
       secret:
@@ -428,7 +434,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret: "Has already negotiated their own safe passage with the insurgency's leadership in exchange for opening a gate on a night yet to be named",
-      stakes: "The night is close. {faction} still believes this person is loyal",
+      stakes: "The night is close. {faction} still {power|believes|believe} this person is loyal",
       needs: ["gate"],
     },
     {
@@ -488,7 +494,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       needs: ["migration: exodus"],
     },
     {
-      secret: "Knows the migration was triggered by something upstream (a failed harvest, a war, a purge) that {faction} helped cause and has been concealing",
+      secret: "Knows the migration was triggered by something upstream (a failed harvest, a war, a purge) that {faction} helped cause and {has} been concealing",
       stakes: "The newcomers carry the proof in their own stories, if anyone here thinks to listen",
       needs: ["migration: influx"],
     },
