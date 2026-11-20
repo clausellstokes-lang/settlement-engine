@@ -241,6 +241,13 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     (`briefs/CURATE-NOTICE-BRIEF.md`), one sentence, one condition, a red-first render test, display only, the owner's Curate
     screen alone; THE SENTENCE IS AUTHORED: its words go to the chair before it merges. (b) The owner's list carries the
     renamed criminal house's lost label (with its count) and ruling 38 (e)'s normalized shares.
+40. THE CHAIR, 11:43: THE CURATE NOTICE RULED. Its words, verbatim: "While a criminal house is hidden, the town's criminal
+    powers stay off the shared page too, so they cannot give the house away. Show the house to show them, or leave it hidden
+    and they stay off." Its condition: the switch reads shown or partly AND a criminal house's whole-house eye is hidden AND
+    the town HAS a criminal power (a sentence about powers that are not there would send a DM hunting); that arm red first.
+    Merge it with both, then "CURATE <commit>" to the chair. If R3-CURE-4 narrows power.entry's reach, the condition is
+    re-checked before R3's merge and the chair told what changed. THE HAND-OVER POINT for VEIL-25: R3's merge or 380,000
+    tokens by its record, whichever comes first; VEIL-26 is seated beside it; after the hand-over VEIL-25 only relays builders.
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
@@ -320,6 +327,7 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
   line; their reds and greens re-run (`out/v25/rerun/`); R3-CURE-4 brief written and its builder launched (11:16).
 - 11:24 the chair: the Curate notice now, beside R3-CURE-4 (ruling 39); its builder launched 11:22.
 - 11:42 the Curate notice returned (1bd894613), read, re-run; its sentence to the chair.
+- 11:43 the chair ruled the notice (ruling 40); the notice's builder resumed for the words and the condition (11:44). R3 red at 06e9e64b3 re-run: born test 6 of 37 red, each a cure's new arm (`out/v25/rerun/born-red-06.txt`).
 
 ## 7. THE JOIN (the chair's word in VEIL-25's prompt): what the join must re-prove on the joined document
 The working line (origin/lane/join-2026-11-14, at 0c906948 when this was written) and four content lanes ADD SERVED TEXT at
