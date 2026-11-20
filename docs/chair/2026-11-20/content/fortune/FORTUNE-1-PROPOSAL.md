@@ -501,3 +501,21 @@ U3 standing and its play-time guard (FS2): `factionDynamics.js`, `power/rulingSt
 guard on `reBand` (no edit while the cuts stand).
 U4 the readers' agreement (FS7): the reading of twenty towns a size, cures by cause where the cause is a label's reader.
 Then the measure re-taken on the built rule forced on, the confinement while dark, the hand-back.
+
+## 14. The registers the build's edits would move (added on the chair's word of 09:56Z: `factionDynamics.js` has one owner at a time)
+
+Read from the line at `0c9069489` by grepping every register for the two paths; each is re-taken BY ITS OWN DOOR on the
+merged tree by whoever lands second. FS2's unit asks the chair first ("factionDynamics.js for FORTUNE?") and edits ONLY
+`computePublicLegitimacy`, its contribution tables and its helpers there, never the relation lines.
+
+| register | `prosperity.js` (U2) | `factionDynamics.js` (U3) | moves because |
+|---|---|---|---|
+| `scripts/.observed-shape-readers-baseline.json` (its `sha256`/`size` file rows; the per-file reader counts) | sha256 and size | sha256 and size | any edit of the file; reader counts only if the edit reads a new field (none planned: the law arrives as an argument) |
+| `tests/lint/.tuning-inventory.json` and `tests/lint/.tuning-register.json` | a NEW table (`FORTUNE_LAW_TUNING`, DRAFT rows) if the figures live here, else in the law leaf; P2 named count (1 today) unchanged; P3 bare decimals (13 today) must not rise | P3 bare decimals (36 today) must not rise; the defence usual range and its 4 points are integers, so none is added | `tuningRegister` names every new table by id; the figures land DRAFT, signed by none |
+| `tests/lint/presumedThings.register.json`, `presumedThings.widened.register.json`, `presumptionClasses.register.json` | rows keyed by the file's lines: re-taken if a banked line moves | the same | line-keyed rows |
+| `tests/lint/factLayers.register.json` | not keyed | rows keyed by line text (the faith name test, a relation line): untouched unless a banked line moves | line text |
+| `scripts/mutation-coverage-manifest.json` | the R3 row (`deriveProsperityLabels`) names the file: unchanged unless that function moves | rows name the relation narratives and `govCriminalRelation`: untouched | rationale text only |
+| born-town registers (the lighting census, the wiring census, the golden 525, the census 720) | ZERO while dark (the confinement hash proves it) | ZERO while dark | the law mints `{}` |
+
+The seat's U1 already moved `densityCreateBoundary.js`'s rows and the walker `tests/lint/densityCreateBoundary.walker.test.js`
+on its own branch; this lane's U1 adds one more row to each at the same lines (12.2).
