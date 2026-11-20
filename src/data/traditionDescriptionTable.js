@@ -8,12 +8,13 @@
  * samples: "make sure that it has appropriate pool and prose conditions".
  *
  * EVERY SLOT IS A POOL, AND EVERY LINE IS A DECLARED LINE (CTR10) drawn through the one draw (`facts/drawDeclared.js ::
- * drawDeclared`): the composer's selector (`kernel/proseHash.js :: pickVariant` on the record's stable id) runs over the
- * FULL pool; a line the record does not admit resolves to its declared TWIN (`twinOf`), else to the admitted argmax.
- * A line that presumes a thing DECLARES it (`needs` / `excludes` over the closed vocabulary, `facts/factVocabulary.js`);
- * a line that presumes nothing beyond what its slot's own choice guarantees (the house the leaf found, the power, the
- * owner, the founding, the event, the income's rank) says so with the house's colour mark (`colour: true`, R-AO: "read;
- * presumes nothing"), so no line of this table is silent (TRAD-4 unit 5; tests/lint/traditionDescriptionFrames.walker).
+ * drawDeclared`): the composer's selector (`kernel/proseHash.js :: pickVariantMixed` on the record's stable id) runs
+ * over the FULL pool; a line the record does not admit resolves to its declared TWIN (`twinOf`), else to the admitted
+ * argmax. A line that presumes a thing DECLARES it (`needs` / `excludes` over the closed vocabulary,
+ * `facts/factVocabulary.js`); a line that presumes nothing beyond what its slot's own choice guarantees (the house the
+ * leaf found, the power, the owner, the founding, the event, the income's rank) says so with the house's colour mark
+ * (`colour: true`, R-AO: "read; presumes nothing"), so no line of this table is silent (TRAD-4 unit 5;
+ * tests/lint/traditionDescriptionFrames.walker).
  * THE CRISIS DIMENSION: the leads of a feast and of a fair, and the harvest's gloss, can clash with a town's present
  * crisis, so their pools OPT IN as crisis-scoped (silence then reads as calm): a line safe under any crisis says so
  * (`crisis: ['any']`); a line that contradicts a crisis family EXCLUDES it and has a TWIN that says only what is kept.
