@@ -118,11 +118,12 @@ import {
   RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA,
   RETIRED_CLOSE_ROUND_BASELINE_SCHEMA,
   RETIRED_FINAL_PASS_BASELINE_SCHEMA,
+  RETIRED_LAST_CLOSE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema45Baseline,
+  validateSchema46Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -313,7 +314,13 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  * 45 = schema 44's topology, tag law, roster and bank, re-governed to THE LAST CLOSE (the chair's ruling CL26 of 2026-11-18, carried from the first close; the owner's word "Yes to both", 2026-11-18 about 19:07 UTC): the
  *     rounds' eleven new reads since the last freeze (e56e112e2) are admitted by cause with class and landing (the W
  *     and C identities of CL20's table and FAULTS-PEOPLE's `name on factions`); nothing declared, nothing gone; the
- *     bank 78/52. THE LIVE AUTHORITY.
+ *     bank 78/52 (RETIRED).
+ * 46 = schema 45's topology, tag law and corpus definition, re-governed to THE FORTUNE MERITS WRITER'S
+ *     ADMISSION (the chair's ruling of 2026-11-20 22:18 UTC (FORTUNE U5a-CURE item 2, route B)): ONE declaration
+ *     of the conditional-generator-branch class, `merits on breakdown` (writer fortune/fortuneMerits.js, which
+ *     writes the key only under the fortune law, `_fortuneLawVersion: 2`, which the corpus's CONFIGS never
+ *     carry); the roster 16 -> 17, the bank 78/52 -> 79/53, and the one new row
+ *     (src/domain/fortune/fortuneMerits.js x1) admitted TAGGED. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -354,6 +361,7 @@ export {
   RETIRED_AGREE_TIER_SEED_BASELINE_SCHEMA,
   RETIRED_CLOSE_ROUND_BASELINE_SCHEMA,
   RETIRED_FINAL_PASS_BASELINE_SCHEMA,
+  RETIRED_LAST_CLOSE_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1587,6 +1595,23 @@ export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
       + ' only in campaign time, so the birth corpus never observes the write. Read once by'
       + ' src/domain/display/newsBody.js :: itemSettlementIds (item.outcome?.affectedSettlementIds).',
   }),
+  // ⭐⭐ THE SCHEMA-46 RUNG'S ONE DECLARATION — the fortune merits (FORTUNE U5a-CURE item 2, route B), under the
+  // chair's ruling of 2026-11-20 22:18 UTC. The FIFTH class (`conditional-generator-branch`, the `isCriminal` and
+  // `migrationDirection` precedent): the corpus RUNS the assembly step whose tail calls settleMeritsOfRule, and still
+  // never sees the key, because fortuneMerits.js :: meritedLegitimacy writes `breakdown.merits` only under the fortune
+  // law (`_fortuneLawVersion: 2`), and the corpus builder's Producer 1 births CONFIGS that carry no marker, so law 1,
+  // which writes no byte (FS5). The read is fortuneMerits.js's own `breakdown?.merits` (baseScoreOf). Route (A), a
+  // corpus writer, is impossible while the law is dark. Gate 0 reads the write as the object-literal key
+  // `merits: added`.
+  Object.freeze({
+    identity: 'merits on breakdown',
+    mechanism: 'conditional-generator-branch',
+    writer: 'src/domain/fortune/fortuneMerits.js',
+    ruling: 'FORTUNE U5a-CURE item 2, route B — the chair\'s ruling of 2026-11-20 22:18 UTC',
+    why: 'Written only under the fortune law (_fortuneLawVersion: 2), by meritedLegitimacy at the assembly'
+      + ' step\'s tail (settleMeritsOfRule); the corpus\'s CONFIGS never carry that marker, so every corpus'
+      + ' world reads law 1, which writes no byte, and the read has no observed writer by construction.',
+  }),
 ]);
 
 /** The mechanisms an entry may claim. TOTAL positive predicate: an unlisted
@@ -1709,7 +1734,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema45Baseline(baseline);
+  validateSchema46Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -3276,8 +3301,14 @@ export function baselineOf({
       'is recorded as UNCURED INSTRUMENT EROSION (SR5, 9cade66ce), never as a repair; nothing declared (RETIRED).',
       'SCHEMA 45 = schema 44\'s topology, tag law, roster and bank, re-governed to THE LAST CLOSE (the chair\'s ruling CL26):',
       'the rounds\' eleven new reads since the last freeze (e56e112e2) are admitted by cause with class and landing; nothing',
-      'declared, nothing gone. Every moved row, with its cause, is recorded in the rung\'s review (docs/chair/2026-11-18/lastclose/).',
-      'Of the sixteen declared bank entries FIFTEEN bank reads today; `isCriminal on incomeSources`',
+      'declared, nothing gone. Every moved row, with its cause, is recorded in the rung\'s review (docs/chair/2026-11-18/lastclose/) (RETIRED).',
+      'SCHEMA 46 = schema 45\'s topology, tag law and corpus definition, re-governed to THE FORTUNE MERITS WRITER\'S',
+      'ADMISSION (the chair\'s ruling of 2026-11-20 22:18 UTC, FORTUNE U5a-CURE item 2, route B): fortuneMerits.js',
+      'writes `breakdown.merits` only under the fortune law (`_fortuneLawVersion: 2`), which the corpus\'s CONFIGS never',
+      'carry, and its one guarded read has no observed writer by construction. The conditional-generator-branch class',
+      'explains it: ONE declaration, `merits on breakdown`, the roster 16 -> 17; the one new row is admitted TAGGED and',
+      'nothing else moves.',
+      'Of the seventeen declared bank entries SIXTEEN bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
       'The byte-frozen detector is unchanged; its output is narrowed by THREE clearing filters —',
@@ -3287,7 +3318,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–44 are the RETIRED numeric predecessors.',
+      'Schemas 4–45 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3461,7 +3492,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema45Baseline,
+    validateBaseline: validateSchema46Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,
