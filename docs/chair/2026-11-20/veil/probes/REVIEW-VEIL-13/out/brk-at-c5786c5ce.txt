@@ -1,0 +1,44 @@
+  defaults shape: array keys=["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"] sample=["card:institution:inst_rv13_quill","field:institution:inst_rv13_quill:description","field:institution:inst_rv13_quill:function","field:institution:inst_rv13_quill:services"]
+rv13-brk-village-none-0-1: plant tags-only=true; default veil holds its card: card:institution:inst_rv13_quill; isHideable(stored)=true
+  dm=false: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  DEFAULT VEIL dm=false: SERVER hits 0 | TWIN hits 0
+  dm=true: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  DEFAULT VEIL dm=true: SERVER hits 0 | TWIN hits 0
+  dm=false: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  CONTROL unmarked dm=false: SERVER hits 1 e.g. ["Quillmarrow Listening House"] | TWIN hits 1 e.g. ["Quillmarrow Listening House"]
+rv13-brk-village-infiltrated-0-2: plant tags-only=true; default veil holds its card: card:institution:inst_rv13_quill; isHideable(stored)=true
+  dm=false: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  DEFAULT VEIL dm=false: SERVER hits 0 | TWIN hits 0
+  dm=true: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  DEFAULT VEIL dm=true: SERVER hits 0 | TWIN hits 0
+  dm=false: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  CONTROL unmarked dm=false: SERVER hits 1 e.g. ["Quillmarrow Listening House"] | TWIN hits 1 e.g. ["Quillmarrow Listening House"]
+rv13-brk-village-indebted-0-3: plant tags-only=true; default veil holds its card: card:institution:inst_rv13_quill; isHideable(stored)=true
+  dm=false: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  DEFAULT VEIL dm=false: SERVER hits 0 | TWIN hits 0
+  dm=true: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  DEFAULT VEIL dm=true: SERVER hits 0 | TWIN hits 0
+  dm=false: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  CONTROL unmarked dm=false: SERVER hits 1 e.g. ["Quillmarrow Listening House"] | TWIN hits 1 e.g. ["Quillmarrow Listening House"]
+rv13-brk-village-none-0-4: plant tags-only=true; default veil holds its card: card:institution:inst_rv13_quill; isHideable(stored)=true
+  dm=false: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  DEFAULT VEIL dm=false: SERVER hits 0 | TWIN hits 0
+  dm=true: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  DEFAULT VEIL dm=true: SERVER hits 0 | TWIN hits 0
+  dm=false: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  CONTROL unmarked dm=false: SERVER hits 1 e.g. ["Quillmarrow Listening House"] | TWIN hits 1 e.g. ["Quillmarrow Listening House"]
+rv13-brk-town-none-0-5: plant tags-only=true; default veil holds its card: card:institution:inst_rv13_quill; isHideable(stored)=true
+  dm=false: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  DEFAULT VEIL dm=false: SERVER hits 0 | TWIN hits 0
+  dm=true: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  DEFAULT VEIL dm=true: SERVER hits 0 | TWIN hits 0
+  dm=false: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  CONTROL unmarked dm=false: SERVER hits 1 e.g. ["Quillmarrow Listening House"] | TWIN hits 1 e.g. ["Quillmarrow Listening House"]
+rv13-brk-town-infiltrated-0-6: plant tags-only=true; default veil holds its card: card:institution:inst_rv13_quill; isHideable(stored)=true
+  dm=false: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  DEFAULT VEIL dm=false: SERVER hits 0 | TWIN hits 0
+  dm=true: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  DEFAULT VEIL dm=true: SERVER hits 0 | TWIN hits 0
+  dm=false: public-safe copy keeps the plant's tags: ["brokerage","criminal"]; isHideable(public-safe)=true
+  CONTROL unmarked dm=false: SERVER hits 1 e.g. ["Quillmarrow Listening House"] | TWIN hits 1 e.g. ["Quillmarrow Listening House"]
+CENSUS: 16 born towns (criminal dial 85), 6 illegal brokerages; by category|priorityCategory|clandestine: {"Criminal|criminal|clan=false":6}; hideable by tags ALONE: 0 []
