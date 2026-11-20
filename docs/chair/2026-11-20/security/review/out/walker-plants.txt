@@ -1,0 +1,12 @@
+P1_new_definer:  Tests 1 failed | 9 passed (10)
+× every function a visitor may execute is on the allowlist, by full signature 9ms
+P1b_revoke_public_only:  Tests 1 failed | 9 passed (10)
+× every function a visitor may execute is on the allowlist, by full signature 8ms
+P2_check_removed:  Tests 1 failed | 9 passed (10)
+× a listed trigger returns trigger; a listed door is SECURITY DEFINER and its caller check is in its body 9ms
+P3_check_hollowed:  Tests 10 passed (10)
+P4_nullslip_where:  Tests 1 failed | 9 passed (10)
+× a listed trigger returns trigger; a listed door is SECURITY DEFINER and its caller check is in its body 9ms
+P5_nullslip_revert:  Tests 2 failed | 8 passed (10)
+× a listed trigger returns trigger; a listed door is SECURITY DEFINER and its caller check is in its body 9ms
+× SECOND ARM: no SECURITY DEFINER function a visitor may execute has a guard a NULL can slip 14ms

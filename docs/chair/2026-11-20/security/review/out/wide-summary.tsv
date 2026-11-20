@@ -1,0 +1,360 @@
+pass1|anon|_deity_chart_axes_valid(jsonb)|t|{}|f|1
+pass1|anon|_gallery_world_snapshot_is_safe(jsonb)|t|{}|f|1
+pass1|anon|account_is_active(uuid)|t|{}|f|52
+pass1|anon|add_gallery_comment(uuid,text)|f|{}|f|79
+pass1|anon|bump_public_view(text,text)|t|{"settlements": 1, "gallery_views": 1}|f|1
+pass1|anon|bump_public_view(text,text)|t|{}|f|54
+pass1|anon|claim_current_session(text)|f|{}|f|28
+pass1|anon|current_user_has_premium_access()|t|{}|f|1
+pass1|anon|current_user_is_highest()|t|{}|f|1
+pass1|anon|current_user_is_privileged()|t|{}|f|1
+pass1|anon|current_user_is_support_or_higher()|t|{}|f|1
+pass1|anon|delete_gallery_comment(uuid)|f|{}|f|52
+pass1|anon|format_ticket_number(bigint)|t|{}|f|1
+pass1|anon|founder_seats_taken()|t|{}|f|1
+pass1|anon|founders_roll()|t|{}|f|1
+pass1|anon|get_ai_pricing()|t|{}|f|1
+pass1|anon|get_gallery_dossier(text)|t|{}|f|28
+pass1|anon|get_gallery_map(text)|t|{}|f|27
+pass1|anon|get_gallery_map(text)|t|{"saved_maps": 1}|f|1
+pass1|anon|get_gallery_reaction_state(uuid)|t|{}|f|52
+pass1|anon|get_gallery_vote_state(uuid)|t|{}|f|52
+pass1|anon|get_my_security_question_ids()|t|{}|f|1
+pass1|anon|get_unlisted_dossier(text)|t|{}|f|28
+pass1|anon|get_unlisted_map(text)|t|{}|f|28
+pass1|anon|has_dossier_entitlement(uuid)|t|{}|f|52
+pass1|anon|has_surveyor_entitlement()|t|{}|f|1
+pass1|anon|import_gallery_dossier(text)|t|{}|f|28
+pass1|anon|is_current_session()|t|{}|f|1
+pass1|anon|list_curated_dossiers()|t|{}|f|1
+pass1|anon|list_featured_dossiers()|t|{}|f|1
+pass1|anon|list_featured_maps()|t|{}|f|1
+pass1|anon|list_founder_seats_public()|t|{}|f|1
+pass1|anon|list_gallery_comments(uuid)|t|{}|f|52
+pass1|anon|list_gallery_dossiers(integer,integer,text,text,jsonb,boolean)|t|{}|f|55
+pass1|anon|list_gallery_maps(integer,integer,text,text,jsonb)|t|{}|f|55
+pass1|anon|list_gallery_more_by_creator(text,integer)|t|{}|f|28
+pass1|anon|list_gallery_reports(text,integer)|t|{}|f|28
+pass1|anon|list_my_gallery_dossiers()|t|{}|f|1
+pass1|anon|list_my_tickets()|t|{}|f|1
+pass1|anon|list_my_unlisted_dossiers()|t|{}|f|1
+pass1|anon|list_my_unlisted_maps()|t|{}|f|1
+pass1|anon|list_open_report_targets()|t|{}|f|1
+pass1|anon|my_transfer_case_status()|t|{}|f|1
+pass1|anon|publish_map(uuid,text,text,text[],boolean,text,text,boolean,jsonb,jsonb,text,jsonb)|f|{}|f|187
+pass1|anon|publish_settlement(uuid)|f|{}|f|52
+pass1|anon|reactivate_free_settlement(uuid)|f|{}|f|52
+pass1|anon|record_referral_intent(text)|f|{}|f|28
+pass1|anon|report_gallery_comment(uuid,text,text)|f|{}|f|106
+pass1|anon|report_gallery_dossier(uuid,text,text)|f|{}|f|106
+pass1|anon|resolve_gallery_report(uuid,text,text)|f|{}|f|106
+pass1|anon|resolve_report_target(text,uuid,text,text)|f|{}|f|133
+pass1|anon|revoke_settlement_unlisted(uuid)|f|{}|f|52
+pass1|anon|rotate_map_unlisted_slug(uuid)|f|{}|f|52
+pass1|anon|rotate_settlement_unlisted_slug(uuid)|f|{}|f|52
+pass1|anon|set_auto_reload_settings(boolean,integer,integer,integer)|f|{}|f|1
+pass1|anon|set_founder_credit_listed(boolean)|f|{}|f|1
+pass1|anon|set_my_security_answers(text,text,text,text)|f|{}|f|109
+pass1|anon|share_map_unlisted(uuid)|f|{}|f|52
+pass1|anon|share_settlement_unlisted(uuid)|f|{}|f|52
+pass1|anon|spend_credits(text,text,text)|f|{}|f|82
+pass1|anon|surveyor_byok_clear(text)|f|{}|f|28
+pass1|anon|surveyor_byok_set(text,text)|f|{}|f|55
+pass1|anon|surveyor_byok_status(text)|f|{}|f|28
+pass1|anon|surveyor_price_estimates()|f|{}|f|1
+pass1|anon|surveyor_settings_get()|f|{}|f|1
+pass1|anon|surveyor_settings_set(jsonb)|f|{}|f|1
+pass1|anon|toggle_gallery_reaction(uuid,text)|f|{}|f|79
+pass1|anon|toggle_gallery_vote(uuid)|f|{}|f|52
+pass1|anon|unpublish_map(uuid)|f|{}|f|52
+pass1|anon|unpublish_settlement(uuid)|f|{}|f|52
+pass1|anon|update_display_name(text)|f|{}|f|28
+pass1|anon|validate_redeem_code(text)|f|{}|f|28
+pass1|anon|welcome_credit_available(uuid)|t|{}|f|52
+pass1|authenticated|_deity_chart_axes_valid(jsonb)|t|{}|f|1
+pass1|authenticated|_gallery_world_snapshot_is_safe(jsonb)|t|{}|f|1
+pass1|authenticated|account_is_active(uuid)|t|{}|f|52
+pass1|authenticated|add_gallery_comment(uuid,text)|f|{"user_action_rate_limits": 1}|f|78
+pass1|authenticated|add_gallery_comment(uuid,text)|t|{"gallery_comments": 1, "user_action_rate_limits": 1}|f|1
+pass1|authenticated|apply_create_route_command(uuid,text,uuid,uuid,timestamp with time zone,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb)|f|{}|f|181
+pass1|authenticated|apply_custom_content_command(uuid,text,text,jsonb)|f|{}|f|106
+pass1|authenticated|apply_cut_trade_route_command(uuid,text,uuid,timestamp with time zone,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb)|f|{}|f|130
+pass1|authenticated|apply_import_reconciliation_command(uuid,text,text,uuid,uuid,text,text,jsonb,jsonb)|f|{}|f|262
+pass1|authenticated|apply_reviewed_supply_chain_command(uuid,text,text,jsonb)|f|{}|f|106
+pass1|authenticated|bump_public_view(text,text)|t|{"settlements": 1, "gallery_views": 1}|f|1
+pass1|authenticated|bump_public_view(text,text)|t|{}|f|54
+pass1|authenticated|claim_current_session(text)|t|{}|f|28
+pass1|authenticated|compare_and_swap_campaign_content_binding(uuid,text,text,uuid,text,jsonb,jsonb)|f|{}|f|184
+pass1|authenticated|current_user_has_premium_access()|t|{}|f|1
+pass1|authenticated|current_user_is_highest()|t|{}|f|1
+pass1|authenticated|current_user_is_privileged()|t|{}|f|1
+pass1|authenticated|current_user_is_support_or_higher()|t|{}|f|1
+pass1|authenticated|delete_gallery_comment(uuid)|f|{}|f|51
+pass1|authenticated|delete_gallery_comment(uuid)|t|{"gallery_comments": 1}|f|1
+pass1|authenticated|export_custom_content_archive(uuid)|f|{}|f|51
+pass1|authenticated|export_custom_content_archive(uuid)|t|{}|f|1
+pass1|authenticated|format_ticket_number(bigint)|t|{}|f|1
+pass1|authenticated|founder_seats_taken()|t|{}|f|1
+pass1|authenticated|founders_roll()|t|{}|f|1
+pass1|authenticated|get_ai_pricing()|t|{}|f|1
+pass1|authenticated|get_credit_balance(uuid)|f|{}|f|51
+pass1|authenticated|get_credit_balance(uuid)|t|{}|f|1
+pass1|authenticated|get_gallery_dossier(text)|t|{}|f|28
+pass1|authenticated|get_gallery_map(text)|t|{"saved_maps": 1}|f|1
+pass1|authenticated|get_gallery_map(text)|t|{}|f|27
+pass1|authenticated|get_gallery_reaction_state(uuid)|t|{}|f|52
+pass1|authenticated|get_gallery_vote_state(uuid)|t|{}|f|52
+pass1|authenticated|get_my_email_preferences()|t|{}|f|1
+pass1|authenticated|get_my_operator_service_export()|t|{}|f|1
+pass1|authenticated|get_my_operator_unread_count()|t|{}|f|1
+pass1|authenticated|get_my_security_question_ids()|t|{}|f|1
+pass1|authenticated|get_unlisted_dossier(text)|t|{}|f|28
+pass1|authenticated|get_unlisted_map(text)|t|{}|f|28
+pass1|authenticated|has_dossier_entitlement(uuid)|t|{}|f|52
+pass1|authenticated|has_surveyor_entitlement()|t|{}|f|1
+pass1|authenticated|import_custom_content_archive(uuid,text,text,jsonb)|f|{}|f|106
+pass1|authenticated|import_gallery_dossier(text)|t|{}|f|28
+pass1|authenticated|is_current_session()|t|{}|f|1
+pass1|authenticated|list_curated_dossiers()|t|{}|f|1
+pass1|authenticated|list_featured_dossiers()|t|{}|f|1
+pass1|authenticated|list_featured_maps()|t|{}|f|1
+pass1|authenticated|list_founder_seats_public()|t|{}|f|1
+pass1|authenticated|list_gallery_comments(uuid)|t|{}|f|52
+pass1|authenticated|list_gallery_dossiers(integer,integer,text,text,jsonb,boolean)|t|{}|f|55
+pass1|authenticated|list_gallery_maps(integer,integer,text,text,jsonb)|t|{}|f|55
+pass1|authenticated|list_gallery_more_by_creator(text,integer)|t|{}|f|28
+pass1|authenticated|list_gallery_reports(text,integer)|t|{}|f|28
+pass1|authenticated|list_my_gallery_dossiers()|t|{}|f|1
+pass1|authenticated|list_my_operator_messages(integer,timestamp with time zone,uuid)|f|{}|f|51
+pass1|authenticated|list_my_operator_messages(integer,timestamp with time zone,uuid)|t|{}|f|1
+pass1|authenticated|list_my_tickets()|t|{}|f|1
+pass1|authenticated|list_my_unlisted_dossiers()|t|{}|f|1
+pass1|authenticated|list_my_unlisted_maps()|t|{}|f|1
+pass1|authenticated|list_open_report_targets()|t|{}|f|1
+pass1|authenticated|list_ticket_thread(uuid)|t|{}|f|52
+pass1|authenticated|mark_operator_message_read(uuid)|t|{}|f|52
+pass1|authenticated|mutate_settlement_batch(uuid,jsonb,uuid[],jsonb)|f|{}|f|52
+pass1|authenticated|mutate_settlement_batch(uuid,jsonb,uuid[],jsonb)|t|{}|f|1
+pass1|authenticated|my_transfer_case_status()|t|{}|f|1
+pass1|authenticated|publish_map(uuid,text,text,text[],boolean,text,text,boolean,jsonb,jsonb,text,jsonb)|f|{}|f|187
+pass1|authenticated|publish_settlement(uuid)|f|{}|f|52
+pass1|authenticated|reactivate_free_settlement(uuid)|f|{}|f|52
+pass1|authenticated|record_referral_intent(text)|t|{}|f|28
+pass1|authenticated|report_gallery_comment(uuid,text,text)|f|{"user_action_rate_limits": 1}|f|104
+pass1|authenticated|report_gallery_comment(uuid,text,text)|t|{"gallery_comment_reports": 1, "user_action_rate_limits": 1}|f|2
+pass1|authenticated|report_gallery_dossier(uuid,text,text)|f|{}|f|105
+pass1|authenticated|report_gallery_dossier(uuid,text,text)|t|{"gallery_reports": 1}|f|1
+pass1|authenticated|resolve_gallery_report(uuid,text,text)|f|{}|f|106
+pass1|authenticated|resolve_report_target(text,uuid,text,text)|f|{}|f|133
+pass1|authenticated|revoke_settlement_unlisted(uuid)|f|{}|f|52
+pass1|authenticated|rotate_map_unlisted_slug(uuid)|f|{}|f|52
+pass1|authenticated|rotate_settlement_unlisted_slug(uuid)|f|{}|f|52
+pass1|authenticated|set_auto_reload_settings(boolean,integer,integer,integer)|f|{}|f|1
+pass1|authenticated|set_curated(uuid,boolean,integer)|f|{}|f|52
+pass1|authenticated|set_featured(uuid,boolean,integer)|f|{}|f|52
+pass1|authenticated|set_featured_map(uuid,boolean,integer)|f|{}|f|52
+pass1|authenticated|set_founder_credit_listed(boolean)|f|{}|f|1
+pass1|authenticated|set_my_email_preference(uuid,text,boolean)|f|{}|f|79
+pass1|authenticated|set_my_security_answers(text,text,text,text)|f|{}|f|109
+pass1|authenticated|set_my_telemetry_consent(uuid,jsonb,text)|f|{}|f|79
+pass1|authenticated|share_map_unlisted(uuid)|f|{}|f|52
+pass1|authenticated|share_settlement_unlisted(uuid)|f|{}|f|52
+pass1|authenticated|spend_credits(text,text,text)|f|{}|f|82
+pass1|authenticated|surveyor_byok_clear(text)|t|{}|f|28
+pass1|authenticated|surveyor_byok_set(text,text)|f|{}|f|55
+pass1|authenticated|surveyor_byok_status(text)|t|{}|f|28
+pass1|authenticated|surveyor_price_estimates()|t|{}|f|1
+pass1|authenticated|surveyor_settings_get()|t|{}|f|1
+pass1|authenticated|surveyor_settings_set(jsonb)|t|{"surveyor_user_settings": 1}|f|1
+pass1|authenticated|toggle_gallery_reaction(uuid,text)|f|{}|f|78
+pass1|authenticated|toggle_gallery_reaction(uuid,text)|f|{"user_action_rate_limits": 1}|f|1
+pass1|authenticated|toggle_gallery_vote(uuid)|f|{"user_action_rate_limits": 1}|f|51
+pass1|authenticated|toggle_gallery_vote(uuid)|t|{"gallery_votes": 1, "user_action_rate_limits": 1}|f|1
+pass1|authenticated|unpublish_map(uuid)|f|{}|f|52
+pass1|authenticated|unpublish_settlement(uuid)|f|{}|f|52
+pass1|authenticated|update_display_name(text)|t|{"profiles": 1}|f|26
+pass1|authenticated|update_display_name(text)|t|{"profiles": 1}|t|2
+pass1|authenticated|validate_redeem_code(text)|t|{}|f|28
+pass1|authenticated|welcome_credit_available(uuid)|f|{}|f|51
+pass1|authenticated|welcome_credit_available(uuid)|t|{}|f|1
+pass2|anon|_deity_chart_axes_valid(jsonb)|t|{}|f|15
+pass2|anon|_gallery_world_snapshot_is_safe(jsonb)|t|{}|f|15
+pass2|anon|account_is_active(uuid)|t|{}|f|780
+pass2|anon|add_gallery_comment(uuid,text)|f|{}|f|1185
+pass2|anon|bump_public_view(text,text)|t|{}|f|810
+pass2|anon|bump_public_view(text,text)|t|{"settlements": 1, "gallery_views": 1}|f|15
+pass2|anon|claim_current_session(text)|f|{}|f|420
+pass2|anon|current_user_has_premium_access()|t|{}|f|15
+pass2|anon|current_user_is_highest()|t|{}|f|15
+pass2|anon|current_user_is_privileged()|t|{}|f|15
+pass2|anon|current_user_is_support_or_higher()|t|{}|f|15
+pass2|anon|delete_gallery_comment(uuid)|f|{}|f|780
+pass2|anon|format_ticket_number(bigint)|t|{}|f|15
+pass2|anon|founder_seats_taken()|t|{}|f|15
+pass2|anon|founders_roll()|t|{}|f|15
+pass2|anon|get_ai_pricing()|t|{}|f|15
+pass2|anon|get_gallery_dossier(text)|t|{}|f|420
+pass2|anon|get_gallery_map(text)|t|{}|f|405
+pass2|anon|get_gallery_map(text)|t|{"saved_maps": 1}|f|15
+pass2|anon|get_gallery_reaction_state(uuid)|t|{}|f|780
+pass2|anon|get_gallery_vote_state(uuid)|t|{}|f|780
+pass2|anon|get_my_security_question_ids()|t|{}|f|15
+pass2|anon|get_unlisted_dossier(text)|t|{}|f|420
+pass2|anon|get_unlisted_map(text)|t|{}|f|420
+pass2|anon|has_dossier_entitlement(uuid)|t|{}|f|780
+pass2|anon|has_surveyor_entitlement()|t|{}|f|15
+pass2|anon|import_gallery_dossier(text)|t|{}|f|420
+pass2|anon|is_current_session()|t|{}|f|15
+pass2|anon|list_curated_dossiers()|t|{}|f|15
+pass2|anon|list_featured_dossiers()|t|{}|f|15
+pass2|anon|list_featured_maps()|t|{}|f|15
+pass2|anon|list_founder_seats_public()|t|{}|f|15
+pass2|anon|list_gallery_comments(uuid)|t|{}|f|780
+pass2|anon|list_gallery_dossiers(integer,integer,text,text,jsonb,boolean)|t|{}|f|825
+pass2|anon|list_gallery_maps(integer,integer,text,text,jsonb)|t|{}|f|825
+pass2|anon|list_gallery_more_by_creator(text,integer)|t|{}|f|420
+pass2|anon|list_gallery_reports(text,integer)|t|{}|f|420
+pass2|anon|list_my_gallery_dossiers()|t|{}|f|15
+pass2|anon|list_my_tickets()|t|{}|f|15
+pass2|anon|list_my_unlisted_dossiers()|t|{}|f|15
+pass2|anon|list_my_unlisted_maps()|t|{}|f|15
+pass2|anon|list_open_report_targets()|t|{}|f|15
+pass2|anon|my_transfer_case_status()|t|{}|f|15
+pass2|anon|publish_map(uuid,text,text,text[],boolean,text,text,boolean,jsonb,jsonb,text,jsonb)|f|{}|f|2805
+pass2|anon|publish_settlement(uuid)|f|{}|f|780
+pass2|anon|reactivate_free_settlement(uuid)|f|{}|f|780
+pass2|anon|record_referral_intent(text)|f|{}|f|420
+pass2|anon|report_gallery_comment(uuid,text,text)|f|{}|f|1590
+pass2|anon|report_gallery_dossier(uuid,text,text)|f|{}|f|1590
+pass2|anon|resolve_gallery_report(uuid,text,text)|f|{}|f|1590
+pass2|anon|resolve_report_target(text,uuid,text,text)|f|{}|f|1995
+pass2|anon|revoke_settlement_unlisted(uuid)|f|{}|f|780
+pass2|anon|rotate_map_unlisted_slug(uuid)|f|{}|f|780
+pass2|anon|rotate_settlement_unlisted_slug(uuid)|f|{}|f|780
+pass2|anon|set_auto_reload_settings(boolean,integer,integer,integer)|f|{}|f|15
+pass2|anon|set_founder_credit_listed(boolean)|f|{}|f|15
+pass2|anon|set_my_security_answers(text,text,text,text)|f|{}|f|1635
+pass2|anon|share_map_unlisted(uuid)|f|{}|f|780
+pass2|anon|share_settlement_unlisted(uuid)|f|{}|f|780
+pass2|anon|spend_credits(text,text,text)|f|{}|f|1230
+pass2|anon|surveyor_byok_clear(text)|f|{}|f|420
+pass2|anon|surveyor_byok_set(text,text)|f|{}|f|825
+pass2|anon|surveyor_byok_status(text)|f|{}|f|420
+pass2|anon|surveyor_price_estimates()|f|{}|f|15
+pass2|anon|surveyor_settings_get()|f|{}|f|15
+pass2|anon|surveyor_settings_set(jsonb)|f|{}|f|15
+pass2|anon|toggle_gallery_reaction(uuid,text)|f|{}|f|1185
+pass2|anon|toggle_gallery_vote(uuid)|f|{}|f|780
+pass2|anon|unpublish_map(uuid)|f|{}|f|780
+pass2|anon|unpublish_settlement(uuid)|f|{}|f|780
+pass2|anon|update_display_name(text)|f|{}|f|420
+pass2|anon|validate_redeem_code(text)|f|{}|f|420
+pass2|anon|welcome_credit_available(uuid)|t|{}|f|780
+pass2|authenticated|_deity_chart_axes_valid(jsonb)|t|{}|f|15
+pass2|authenticated|_gallery_world_snapshot_is_safe(jsonb)|t|{}|f|15
+pass2|authenticated|account_is_active(uuid)|t|{}|f|780
+pass2|authenticated|add_gallery_comment(uuid,text)|f|{"user_action_rate_limits": 1}|f|1170
+pass2|authenticated|add_gallery_comment(uuid,text)|t|{"gallery_comments": 1, "user_action_rate_limits": 1}|f|15
+pass2|authenticated|apply_create_route_command(uuid,text,uuid,uuid,timestamp with time zone,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb)|f|{}|f|2715
+pass2|authenticated|apply_custom_content_command(uuid,text,text,jsonb)|f|{}|f|1590
+pass2|authenticated|apply_cut_trade_route_command(uuid,text,uuid,timestamp with time zone,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb,jsonb)|f|{}|f|1950
+pass2|authenticated|apply_import_reconciliation_command(uuid,text,text,uuid,uuid,text,text,jsonb,jsonb)|f|{}|f|3930
+pass2|authenticated|apply_reviewed_supply_chain_command(uuid,text,text,jsonb)|f|{}|f|1590
+pass2|authenticated|bump_public_view(text,text)|t|{"settlements": 1, "gallery_views": 1}|f|15
+pass2|authenticated|bump_public_view(text,text)|t|{}|f|810
+pass2|authenticated|claim_current_session(text)|t|{}|f|420
+pass2|authenticated|compare_and_swap_campaign_content_binding(uuid,text,text,uuid,text,jsonb,jsonb)|f|{}|f|2760
+pass2|authenticated|current_user_has_premium_access()|t|{}|f|15
+pass2|authenticated|current_user_is_highest()|t|{}|f|15
+pass2|authenticated|current_user_is_privileged()|t|{}|f|15
+pass2|authenticated|current_user_is_support_or_higher()|t|{}|f|15
+pass2|authenticated|delete_gallery_comment(uuid)|f|{}|f|765
+pass2|authenticated|delete_gallery_comment(uuid)|t|{"gallery_comments": 1}|f|15
+pass2|authenticated|export_custom_content_archive(uuid)|f|{}|f|750
+pass2|authenticated|export_custom_content_archive(uuid)|t|{}|f|30
+pass2|authenticated|format_ticket_number(bigint)|t|{}|f|15
+pass2|authenticated|founder_seats_taken()|t|{}|f|15
+pass2|authenticated|founders_roll()|t|{}|f|15
+pass2|authenticated|get_ai_pricing()|t|{}|f|15
+pass2|authenticated|get_credit_balance(uuid)|f|{}|f|750
+pass2|authenticated|get_credit_balance(uuid)|t|{}|f|30
+pass2|authenticated|get_gallery_dossier(text)|t|{}|f|420
+pass2|authenticated|get_gallery_map(text)|t|{"saved_maps": 1}|f|15
+pass2|authenticated|get_gallery_map(text)|t|{}|f|405
+pass2|authenticated|get_gallery_reaction_state(uuid)|t|{}|f|780
+pass2|authenticated|get_gallery_vote_state(uuid)|t|{}|f|780
+pass2|authenticated|get_my_email_preferences()|t|{}|f|15
+pass2|authenticated|get_my_operator_service_export()|t|{}|f|15
+pass2|authenticated|get_my_operator_unread_count()|t|{}|f|15
+pass2|authenticated|get_my_security_question_ids()|t|{}|f|15
+pass2|authenticated|get_unlisted_dossier(text)|t|{}|f|420
+pass2|authenticated|get_unlisted_map(text)|t|{}|f|420
+pass2|authenticated|has_dossier_entitlement(uuid)|t|{}|f|780
+pass2|authenticated|has_surveyor_entitlement()|t|{}|f|15
+pass2|authenticated|import_custom_content_archive(uuid,text,text,jsonb)|f|{}|f|1590
+pass2|authenticated|import_gallery_dossier(text)|t|{}|f|420
+pass2|authenticated|is_current_session()|t|{}|f|15
+pass2|authenticated|list_curated_dossiers()|t|{}|f|15
+pass2|authenticated|list_featured_dossiers()|t|{}|f|15
+pass2|authenticated|list_featured_maps()|t|{}|f|15
+pass2|authenticated|list_founder_seats_public()|t|{}|f|15
+pass2|authenticated|list_gallery_comments(uuid)|t|{}|f|780
+pass2|authenticated|list_gallery_dossiers(integer,integer,text,text,jsonb,boolean)|t|{}|f|825
+pass2|authenticated|list_gallery_maps(integer,integer,text,text,jsonb)|t|{}|f|825
+pass2|authenticated|list_gallery_more_by_creator(text,integer)|t|{}|f|420
+pass2|authenticated|list_gallery_reports(text,integer)|t|{}|f|420
+pass2|authenticated|list_my_gallery_dossiers()|t|{}|f|15
+pass2|authenticated|list_my_operator_messages(integer,timestamp with time zone,uuid)|f|{}|f|765
+pass2|authenticated|list_my_operator_messages(integer,timestamp with time zone,uuid)|t|{}|f|15
+pass2|authenticated|list_my_tickets()|t|{}|f|15
+pass2|authenticated|list_my_unlisted_dossiers()|t|{}|f|15
+pass2|authenticated|list_my_unlisted_maps()|t|{}|f|15
+pass2|authenticated|list_open_report_targets()|t|{}|f|15
+pass2|authenticated|list_ticket_thread(uuid)|t|{}|f|780
+pass2|authenticated|mark_operator_message_read(uuid)|t|{}|f|780
+pass2|authenticated|mutate_settlement_batch(uuid,jsonb,uuid[],jsonb)|f|{}|f|765
+pass2|authenticated|mutate_settlement_batch(uuid,jsonb,uuid[],jsonb)|t|{}|f|30
+pass2|authenticated|my_transfer_case_status()|t|{}|f|15
+pass2|authenticated|publish_map(uuid,text,text,text[],boolean,text,text,boolean,jsonb,jsonb,text,jsonb)|f|{}|f|2805
+pass2|authenticated|publish_settlement(uuid)|f|{}|f|780
+pass2|authenticated|reactivate_free_settlement(uuid)|f|{}|f|780
+pass2|authenticated|record_referral_intent(text)|t|{}|f|420
+pass2|authenticated|report_gallery_comment(uuid,text,text)|f|{"user_action_rate_limits": 1}|f|1560
+pass2|authenticated|report_gallery_comment(uuid,text,text)|t|{"gallery_comment_reports": 1, "user_action_rate_limits": 1}|f|30
+pass2|authenticated|report_gallery_dossier(uuid,text,text)|f|{}|f|1575
+pass2|authenticated|report_gallery_dossier(uuid,text,text)|t|{"gallery_reports": 1}|f|15
+pass2|authenticated|resolve_gallery_report(uuid,text,text)|f|{}|f|1590
+pass2|authenticated|resolve_report_target(text,uuid,text,text)|f|{}|f|1995
+pass2|authenticated|revoke_settlement_unlisted(uuid)|f|{}|f|780
+pass2|authenticated|rotate_map_unlisted_slug(uuid)|f|{}|f|780
+pass2|authenticated|rotate_settlement_unlisted_slug(uuid)|f|{}|f|780
+pass2|authenticated|set_auto_reload_settings(boolean,integer,integer,integer)|f|{}|f|15
+pass2|authenticated|set_curated(uuid,boolean,integer)|f|{}|f|780
+pass2|authenticated|set_featured(uuid,boolean,integer)|f|{}|f|780
+pass2|authenticated|set_featured_map(uuid,boolean,integer)|f|{}|f|780
+pass2|authenticated|set_founder_credit_listed(boolean)|f|{}|f|15
+pass2|authenticated|set_my_email_preference(uuid,text,boolean)|f|{}|f|1168
+pass2|authenticated|set_my_email_preference(uuid,text,boolean)|t|{"email_preferences": 2}|f|17
+pass2|authenticated|set_my_security_answers(text,text,text,text)|f|{}|f|1635
+pass2|authenticated|set_my_telemetry_consent(uuid,jsonb,text)|f|{}|f|1185
+pass2|authenticated|share_map_unlisted(uuid)|f|{}|f|780
+pass2|authenticated|share_settlement_unlisted(uuid)|f|{}|f|780
+pass2|authenticated|spend_credits(text,text,text)|f|{}|f|1230
+pass2|authenticated|surveyor_byok_clear(text)|t|{}|f|420
+pass2|authenticated|surveyor_byok_set(text,text)|f|{}|f|825
+pass2|authenticated|surveyor_byok_status(text)|t|{}|f|420
+pass2|authenticated|surveyor_price_estimates()|t|{}|f|15
+pass2|authenticated|surveyor_settings_get()|t|{}|f|15
+pass2|authenticated|surveyor_settings_set(jsonb)|t|{"surveyor_user_settings": 1}|f|15
+pass2|authenticated|toggle_gallery_reaction(uuid,text)|f|{"user_action_rate_limits": 1}|f|66
+pass2|authenticated|toggle_gallery_reaction(uuid,text)|f|{}|f|1118
+pass2|authenticated|toggle_gallery_reaction(uuid,text)|t|{"gallery_reactions": 1, "user_action_rate_limits": 1}|f|1
+pass2|authenticated|toggle_gallery_vote(uuid)|f|{"user_action_rate_limits": 1}|f|765
+pass2|authenticated|toggle_gallery_vote(uuid)|t|{"gallery_votes": 1, "user_action_rate_limits": 1}|f|15
+pass2|authenticated|unpublish_map(uuid)|f|{}|f|780
+pass2|authenticated|unpublish_settlement(uuid)|f|{}|f|780
+pass2|authenticated|update_display_name(text)|t|{"profiles": 1}|f|390
+pass2|authenticated|update_display_name(text)|t|{"profiles": 1}|t|30
+pass2|authenticated|validate_redeem_code(text)|t|{}|f|420
+pass2|authenticated|welcome_credit_available(uuid)|f|{}|f|750
+pass2|authenticated|welcome_credit_available(uuid)|t|{}|f|30

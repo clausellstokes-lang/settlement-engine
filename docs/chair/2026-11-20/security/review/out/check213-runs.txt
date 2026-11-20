@@ -1,0 +1,8 @@
+# CHECK_213.sql, one row per state (columns: closed_still_open_count|missing|service_role_lacking|anon_doors_open|signed_in_doors_closed|guards_in_place|unlisted_open_count)
+001..210 (no emergency)                          178|0|0|4|0|0|178
+001..210+emergency+211+212 (before 213)          21|0|0|1|0|0|21
+... then 213                                     0|0|0|0|0|5|0
+001..210+emergency+ticket lines+211+212+213      0|0|0|0|0|5|0
+001..210+two BYOK revokes+211+212+213            0|0|0|0|0|5|0
+001..203+emergency+204..212+213                  0|0|0|0|0|5|0
+001..210+emergency+213+ROLLBACK                  21|0|0|0|0|0|21

@@ -1,0 +1,102 @@
+SIGNUP profiles=2
+PROFILE direct update ok
+PROFILE opt-in ok
+PROFILE avatar ok
+PROFILE update_display_name ok
+ERROR:  That name can't be used here. Think this is wrong? Feedback & support.
+CONTEXT:  PL/pgSQL function update_display_name(text) line 17 at RAISE
+PROFILE security answers ok
+PROFILE security ids rows=2
+PROFILE email pref ok
+ERROR:  unknown email category: nope
+CONTEXT:  PL/pgSQL function set_my_email_preference(uuid,text,boolean) line 10 at RAISE
+PROFILE email prefs ok
+SESSION claim ok
+SAVE town insert ok
+SAVE town update ok
+SAVE town upsert ok
+SAVE batch ok
+MAP insert ok
+MAP update ok
+PUBLISH town slug present=true
+PUBLISH importable ok
+SHARE town unlisted present=true
+SHARE town rotate present=true
+PUBLISH map present=true
+SHARE map unlisted present=true
+SHARE map rotate present=true
+MINE dossiers rows=1
+MINE unlisted rows=1
+MINE unlisted maps rows=1
+ANON list dossiers rows=1
+ANON list maps rows=0
+ANON curated rows=0
+ANON featured rows=0
+ANON featured maps rows=0
+ANON dossier name=Probe Town
+ANON gallery map ok=true
+ANON unlisted dossier name=Probe Town
+ANON unlisted map ok=true
+ANON more-by-creator rows=0
+ANON bump view ok
+ANON founders_roll rows=0
+ANON seats taken ok
+ANON seats public rows=30
+ANON comments rows=0
+ANON vote state ok
+ANON ai pricing ok
+U1 vote=(1,t)
+U1 reaction ok
+U1 comment ok
+ERROR:  That comment can't be posted. Think this is wrong? Feedback & support.
+CONTEXT:  PL/pgSQL function add_gallery_comment(uuid,text) line 31 at RAISE
+U1 report dossier ok
+U1 report comment ok
+U1 import rows=0
+TICKET insert numbered=true
+TICKET my tickets rows=1
+TICKET owner thread rows=0
+TICKET other user thread rows=0
+ERROR:  permission denied for function list_ticket_thread
+SELF credit balance=1
+ERROR:  get_credit_balance: not authorized to read another user's credit balance
+CONTEXT:  PL/pgSQL function get_credit_balance(uuid) line 13 at RAISE
+SELF welcome ok
+SELF surveyor entitlement=true
+ERROR:  BYOK is not configured (app.settings.byok_secret unset)
+CONTEXT:  PL/pgSQL function _surveyor_byok_secret() line 6 at RAISE
+SQL statement "insert into public.surveyor_byok_keys (
+    user_id, provider, ciphertext, created_at, rotated_at,
+    health, last_verified_at, last_checked_at, last_error_class,
+    probe_tier, probe_checked_at, probe_model, probe_version, probe_profile
+  )
+  values (
+    v_uid, v_provider, pgp_sym_encrypt(p_key, public._surveyor_byok_secret()), now(), now(),
+    'unverified', null, null, null,
+    null, null, null, null, null
+  )
+  on conflict (user_id, provider)
+  do update set
+    ciphertext       = excluded.ciphertext,
+    rotated_at       = now(),
+    health           = 'unverified',   -- 143: a rotated key must re-prove itself
+    last_verified_at = null,
+    last_checked_at  = null,
+    last_error_class = null,
+    probe_tier       = null,           -- 191: and must re-EARN its tier
+    probe_checked_at = null,
+    probe_model      = null,
+    -- L-7a: the exam receipt clears WITH the tier. A profile outliving the tier that
+    -- summarised it would coach the next key about a previous key's mistakes, which is
+    -- the same class of lie 143's health reset exists to prevent.
+    probe_version    = null,
+    probe_profile    = null"
+PL/pgSQL function surveyor_byok_set(text,text) line 15 at SQL statement
+EDGE service byok_get present=false
+EDGE service credit balance=1
+EDGE service civility_blocked=true
+CRON (no role) credit balance=1
+UNPUBLISH ok
+MAP delete ok
+SAVE delete ok
+DELETION request ok

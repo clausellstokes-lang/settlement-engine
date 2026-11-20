@@ -1,0 +1,8 @@
+add_gallery_comment(uuid,text)|settlement:PUBLICOK Town public=true|16
+delete_gallery_comment(uuid)|comment by 11111111-1111-1111-1111-111111111111|16
+report_gallery_comment(uuid,text,text)|comment by 11111111-1111-1111-1111-111111111111|16
+report_gallery_comment(uuid,text,text)|comment by 22222222-2222-2222-2222-222222222222|16
+report_gallery_dossier(uuid,text,text)|settlement:PUBLICOK Town public=true|16
+set_my_email_preference(uuid,text,boolean)|user 11111111-1111-1111-1111-111111111111|17
+toggle_gallery_reaction(uuid,text)|settlement:PUBLICOK Town public=true|1
+toggle_gallery_vote(uuid)|settlement:PUBLICOK Town public=true|16
