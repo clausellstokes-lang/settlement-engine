@@ -184,7 +184,10 @@ const KNOWN_UNCONVERTED = Object.freeze({
     'TRUE MEMBER. The second copy of the same table in the same file — a fork of a fork.',
   'src/domain/contradictions.js:222':
     'CONTEXTUALLY SCOPED, not the class — but only just. ARCANE_INST is selected by `p.archetype === \'arcane\'`, so it searches for an already-arcane faction\'s seat rather than deciding arcane-ness. It is entirely ambiguous tokens, though, so it will happily accept a masonry tower as an arcane order\'s home and report no contradiction. A real (small) false negative, recorded rather than fixed: the fix is the same conversion the TRUE MEMBERS need.',
-  'src/domain/worldPulse/stressorDynamics.js:53':
+  // RE-POINTED 53 → 55 on 2026-11-20 (SEAT-1 train 1, U4 THE CONTEST, merged by SEAT-5): the pattern text is
+  // byte-identical; U4 added exactly two imports (`seatsByHolder`, `SEAT_CONTEST_LIT`) above the table. Address rot,
+  // not a new site.
+  'src/domain/worldPulse/stressorDynamics.js:55':
     'TRUE MEMBER, and the sharpest: the arcane row is ENTIRELY ambiguous (sanctum|college|conclave|circle|enclave|atheneum|spire) with no unambiguous token at all, so every match it makes is a guess.',
   'src/domain/worldPulse/tierOutcomeApply.js:143':
     'TRUE MEMBER. A ruined settlement\'s institution fate: academy|library|sage|college|school route to "abandoned" beside the real arcane tokens.',

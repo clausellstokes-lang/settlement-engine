@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "4353c1d1a35cbe4e0f78cb06adbd9cad5c374903",
-  "measuredBy": "SEAT-3",
+  "measuredAtSha": "1ce25f05d53590d602ef7fda5d5e66dade6f4e08",
+  "measuredBy": "SEAT-5",
   "date": "2026-11-20",
-  "note": "after U3 (the holder leaf) merged at 688d2b565",
-  "files": 3708,
+  "note": "SEAT-1 train 1 U4 THE CONTEST with U4-CURE and U4-CURE2 merged (seatContest.test.js new; holderOfSeat.test.js arms 9-12)",
+  "files": 3709,
   "parked": 473,
-  "credited": 3235,
-  "titles": 31260,
-  "suiteTitles": 8649
+  "credited": 3236,
+  "titles": 31285,
+  "suiteTitles": 8658
 }
