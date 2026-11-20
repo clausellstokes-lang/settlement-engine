@@ -366,6 +366,26 @@ parts of the whole check (at the close).
   kept from criminals and from misuse. THE TIME GUESS MOVED AGAIN, said plainly: three to four days for all of who
   rules; the titles table goes to a seat of its own so it is written in parallel.
 
+- **2026-11-20, about 05:50 UTC, THE OWNER (verbatim, the whole message):** "I want to make one exception, a third
+  example and I want your ideas of it. There is a rare chance that a legitimate business can also be a front wearing
+  dual hat as both voluntary criminal institution and legitimate business. This doesn't show on the page at all but it
+  is a tag. In this case if they rose to power, they would be both underboss and the legitimate leader answering only
+  to themselves. The only case where a legitimate NPC can wear both hats of ruler what are your thoughts?" THE CHAIR'S
+  THOUGHTS, GIVEN IN FULL THE SAME TURN, READ IN THE CODE FIRST: yes; the record already holds most of it by the
+  owner's own word of 2026-11-08 (`people/allegiance.js`: a card of a legitimate house may carry a hidden allegiance,
+  its link through a front, with a handler it answers to); the new case is the same secret with NOBODY ABOVE HIM, so
+  it is built as a rare kind of the existing private field, no new key, already stripped from every shared page.
+  SHAPED AS (CS20): only where crime already stands on the town's record; only houses of a front class; only the
+  willing kind (greed or ambition, never fear; the personality rule of 8 November kept); rare, by a count the owner
+  sees (towns holding a front; towns born with him in the seat); if he holds the seat it is captured by that fact, the
+  black-and-red card shows the same person, one card, never Crime Bosses, legitimacy his as the front; in every other
+  capture the criminal card never shows the ruler or anyone of the hall (held by a test). **THE CHAIR'S ONE
+  DISAGREEMENT, SAID ONCE:** shown nowhere, the tag does nothing in the many towns where he never takes the seat; the
+  chair would show the DM alone a small mark on that house's card. BUILT THE OWNER'S WAY (nowhere) unless the owner
+  says yes; a one-line switch. SECRECY SAID: a town with a front and the same town without are identical on every
+  shared page; the mark feeds no figure a visitor could recompute; the security reader tests it. TIME: inside work
+  already ordered; the guess does not move.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -1730,3 +1750,7 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   the count is not zero, is ruled then. BECAUSE OF ITS MARK (about 300k of 350k): the reader's repros and the
   acceptance run are TAKEN OFF its list and pass to the lane's owner at the merge.
   **(3) TITLES-1 is session_019yED1PhdgLkBrJssKB9smM; SEAT-1 is session_019yED1PyQxQZi2zHJeLhhLu.**
+- 05:49 UTC · **THE OWNER'S THIRD CASE, THE PRINCIPAL FRONT: CS20 RULED AND SENT** (section 1 holds the words and the chair's
+  thoughts; `prompts/SEAT-1.txt` ADDENDUM 4 holds the ruling in full; sent into SEAT-1's running turn). OPEN WITH THE
+  OWNER, one yes or no: whether the DM alone sees a mark on the front's own card (the chair recommends yes; built as
+  "nowhere" meanwhile). FRAME-2 is session_019yED1SkacgZyeUgMMGhdL4 (seated 05:45 UTC from 4203eb655).
