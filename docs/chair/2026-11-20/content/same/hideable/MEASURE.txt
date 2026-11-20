@@ -16,3 +16,9 @@ SAME-1 brief 3 (the hideable-house walker), its MEASURE FIRST, recorded 2026-11-
    DS-DEF-4 > structure diffuse vids 2, 4 (crime wave); capture none vid 2 (organised crime)
 
 Sent to the chair: two rulings owed (A: DS-DEF-4 exempt by declaration, or re-cut by its owner; B: widen corpusPools, an existing file, or register the new pools by hand).
+
+PHASE 1 (2026-11-20 17:28 UTC, on the chair's 17:25 rulings; nothing committed by the builder):
+(B1) A poolTable row is needed but NOT enough: corpusPools reads only the six hard-coded CORPUS_LEAVES files (the dossier state prose generated from docs/content/RECEIPT_POOLS_DOSSIER_STATE.md by scripts/generate-dossier-state-prose.mjs, npm run gen:dossier-prose). Reaching it = a DS-<desk>- block in that .md + regeneration + the poolTable row (e.g. "DS-DEF-3::Safe": { "layer": 5, "src": "placed: its lines declare `crime wave` (...)" }). Non-DS pools (npcData, arrivalProse, tensionCauses, goalFamilies...) are reached by no row.
+(B2) A totality arm needs no edit to factLayers.shared.mjs (PLAUSIBLE until built): an exported src/data constant that is an array of strings or {text|line} rows (or an object of such arrays), imported outside src/data by a file calling pick( / drawDeclared( / weightedPick( / pickVariant(.
+(PROSE-1, 6f35097b6, docs only) NEW public lines needing a crime fact or hideable house: PROSE-LINES-1 §7 DS-ECO-6 > minor shadow activity lines 6-11 (organised crime; PROSE-1 flagged it); PROSE-LINES-2 §4 DS-DEF-4 > black market lines 1-6 and §17 DS-POW-6 > duty evasion lines 4-7, which declare NO atom: the pool KEY carries the house. Rule 1 must read the pool key as well as the declarations.
+Sent to the chair; phase 2 waits for its word on (B1).
