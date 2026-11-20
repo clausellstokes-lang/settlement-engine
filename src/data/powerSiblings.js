@@ -233,6 +233,7 @@ export const QUARREL_POOLS = Object.freeze({
     quarrel({ id: 'ma2-gates', text: 'The garrison wants the say over who comes in at the gates, a say the council has kept until now.', needs: ['garrison', 'gate'] }),
     quarrel({ id: 'ma3-officers', text: "The garrison's officers want their soldiers answerable to them alone, not to the civil court.", needs: ['garrison', 'court'] }),
     quarrel({ id: 'ma4-fines', text: "The watch has started setting fines on the spot, and the council says setting fines was never the watch's business.", needs: ['watch'] }),
+    quarrel({ id: 'ma5-walls', text: "The garrison wants a larger share of the settlement's money for the walls, and the council is giving ground.", needs: ['garrison', 'walls'] }),
   ]),
   // the else sub-branch (neither the commanders' nor the civic one, which keeps its one line). mb1 ("The militia want to
   // decide who keeps the night watch, …", [militia]) is WITHHELD: both presumed-things arms read its "night watch" as
