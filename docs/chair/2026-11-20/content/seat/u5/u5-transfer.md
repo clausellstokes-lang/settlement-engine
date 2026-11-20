@@ -1,6 +1,6 @@
 # U5 acceptance: the built transfer on the proposal's two pools (every rate under today's standing)
 
-One command: `node docs/chair/2026-11-20/content/seat/u5/measure-u5.mjs --force-law _seatLawVersion=2` (371 s). Per town the heaviest contender (`coupContenders(s).challengers[0]` on that law's record) takes the seat by coup through `transferRulingPower`, the circumstances handed in as the coup path would hand them; OLD = the town as born; LAW = the same record with `_seatLawVersion: 2`. Then a second and a third coup in a row, each by the heaviest contender of the moment. FORCED = the town born with the forced keys, its first transfer compared with LAW's.
+One command: `node docs/chair/2026-11-20/content/seat/u5/measure-u5.mjs --force-law _seatLawVersion=2` (532 s). Per town the heaviest contender (`coupContenders(s).challengers[0]` on that law's record) takes the seat by coup through `transferRulingPower`, the circumstances handed in as the coup path would hand them; OLD = the town as born; LAW = the same record with `_seatLawVersion: 2`. Then a second and a third coup in a row, each by the heaviest contender of the moment. FORCED = the town born with the forced keys, its first transfer compared with LAW's.
 
 ## default (900 towns, 0 birth errors), under today's standing
 
@@ -13,7 +13,7 @@ One command: `node docs/chair/2026-11-20/content/seat/u5/measure-u5.mjs --force-
 | large | OLD | 300 | 0 | 0 (0%) | 300 (100%) | 71 | 2 | 0 | 0 | 139 | 88 | 300 of 300 | 0 · 0 · 0 | 0 · 0 · 0 / 0 · 0 · 0 |
 | large | LAW | 300 | 0 | 2 (0.7%) | 298 (99.3%) | 0 | 2 | 0 | 0 | 139 | 159 | 300 of 300 | 0 · 0 · 0 | 0 · 0 · 0 / 0 · 0 · 0 |
 
-Totals: OLD kept 0, renamed 660; LAW kept 36 (5.7%, under today's standing), renamed 595. **R1 answers more than one taker: LAW 0 (all three coups), OLD 0.** Retired edges written (LAW): 1008, in the 'retired' wording 1008, read as an 'edge' wording 0. **The unattributed read (the fail-closed rule, `unattributedTransferOn`) fires: LAW 0 by the answer, 0 by the predicate**; OLD 0 / 0.
+Totals: OLD kept 0, renamed 660; LAW kept 36 (5.7%, under today's standing), renamed 595. **R1 answers more than one taker: LAW 0 (all three coups), OLD 0.** Retired edges written (LAW): 1008, in the 'retiredEdge' wording 1008, read as an 'edge' wording 0. **The unattributed read (the fail-closed rule, `unattributedTransferOn`) fires: LAW 0 by the answer, 0 by the predicate**; OLD 0 / 0.
 
 ### The chair's condition 1 (CS22): 0 towns keep a crowned form under the law
 
@@ -32,7 +32,7 @@ FORCED births: 0 errors; towns whose forced first transfer differs from LAW's: 1
 | large | OLD | 320 | 0 | 0 (0%) | 320 (100%) | 143 | 17 | 9 | 7 | 27 | 117 | 320 of 320 | 0 · 0 · 0 | 0 · 0 · 0 / 0 · 0 · 0 |
 | large | LAW | 320 | 0 | 28 (8.8%) | 292 (91.3%) | 12 | 7 | 9 | 7 | 37 | 248 | 320 of 320 | 0 · 0 · 0 | 0 · 0 · 0 / 0 · 0 · 0 |
 
-Totals: OLD kept 0, renamed 667; LAW kept 88 (13.6%, under today's standing), renamed 559. **R1 answers more than one taker: LAW 0 (all three coups), OLD 0.** Retired edges written (LAW): 1020, in the 'retired' wording 1020, read as an 'edge' wording 0. **The unattributed read (the fail-closed rule, `unattributedTransferOn`) fires: LAW 0 by the answer, 0 by the predicate**; OLD 0 / 0.
+Totals: OLD kept 0, renamed 667; LAW kept 88 (13.6%, under today's standing), renamed 559. **R1 answers more than one taker: LAW 0 (all three coups), OLD 0.** Retired edges written (LAW): 1020, in the 'retiredEdge' wording 1020, read as an 'edge' wording 0. **The unattributed read (the fail-closed rule, `unattributedTransferOn`) fires: LAW 0 by the answer, 0 by the predicate**; OLD 0 / 0.
 
 ### The chair's condition 1 (CS22): 5 towns keep a crowned form under the law
 

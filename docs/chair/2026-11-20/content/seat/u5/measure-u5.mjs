@@ -16,7 +16,7 @@
  *   - towns where R1 answers MORE THAN ONE taker (the edges on the current form in the transfer's edge wording, read by
  *     `holderOfSeat.js :: transferSentenceSays`): must be 0 under the law; then the same after a SECOND and a THIRD coup
  *     in a row (each by that town's heaviest contender of the moment; arm (4)'s shape on born towns);
- *   - every retired edge a coup writes: in `TRANSFER_WORDINGS`' ONE 'retired' wording, and never read as an 'edge' wording;
+ *   - every retired edge a coup writes: in `TRANSFER_WORDINGS`' ONE 'retiredEdge' wording, and never read as an 'edge' wording;
  *   - `holderOfSeat.js`'s unattributed-transfer read (Addendum 3) firing: `holderOf` answering R1 with nobody where
  *     `transferTakerOf` finds no taker, and, as a second witness, the leaf's own predicate re-spelled over the exported
  *     matcher (an edge on the seat's pair in an edge wording for SOME form): must be 0 under the law, every step;
@@ -186,11 +186,11 @@ for (const [pool, jobs] of Object.entries(POOLS)) {
         }
         const takers = r1Takers(s);
         if (takers.length > 1) { t.twoTakers[step] += 1; if (t.twoTakerTowns.length < 12) t.twoTakerTowns.push({ seed: job.seed, step: step + 1, takers }); }
-        // the retired edges this coup wrote (competitive, naming the winner): each in the list's ONE 'retired' wording, none an 'edge'
+        // the retired edges this coup wrote (competitive, naming the winner): each in the list's ONE 'retiredEdge' wording, none an 'edge'
         for (const rel of s.powerStructure?.factionRelationships || []) {
           if (rel?.type !== 'competitive' || !String(rel.narrative).endsWith(` until ${c.winner} took it.`)) continue;
           t.retiredEdges += 1;
-          if (transferSentenceSays(rel.narrative, 'retired', c.winner, c.form)) t.retiredInList += 1;
+          if (transferSentenceSays(rel.narrative, 'retiredEdge', c.winner, c.form)) t.retiredInList += 1;
           if ((rel.pair || []).some((n) => transferSentenceSays(rel.narrative, 'edge', n, null))) t.retiredReadAsEdge += 1;
         }
         const u = unattributed(s);
@@ -234,7 +234,7 @@ for (const [pool, r] of Object.entries(out.pools)) {
   const sum = (law, key) => BANDS.reduce((a, b) => a + (Array.isArray(r[law][b][key]) ? r[law][b][key].reduce((x, y) => x + y, 0) : r[law][b][key]), 0);
   L.push('', `Totals: OLD kept ${sum('old', 'kept')}, renamed ${sum('old', 'renamed')}; LAW kept ${sum('law', 'kept')} (${pct(sum('law', 'kept'), sum('law', 'kept') + sum('law', 'renamed'))}, under today's standing), renamed ${sum('law', 'renamed')}. `
     + `**R1 answers more than one taker: LAW ${sum('law', 'twoTakers')} (all three coups), OLD ${sum('old', 'twoTakers')}.** `
-    + `Retired edges written (LAW): ${sum('law', 'retiredEdges')}, in the 'retired' wording ${sum('law', 'retiredInList')}, read as an 'edge' wording ${sum('law', 'retiredReadAsEdge')}. `
+    + `Retired edges written (LAW): ${sum('law', 'retiredEdges')}, in the 'retiredEdge' wording ${sum('law', 'retiredInList')}, read as an 'edge' wording ${sum('law', 'retiredReadAsEdge')}. `
     + `**The unattributed read (the fail-closed rule, \`unattributedTransferOn\`) fires: LAW ${sum('law', 'unattributedByAnswer')} by the answer, ${sum('law', 'unattributedByPredicate')} by the predicate**; OLD ${sum('old', 'unattributedByAnswer')} / ${sum('old', 'unattributedByPredicate')}.`);
   const other = Object.assign({}, ...BANDS.map((b) => r.law[b].r1Other));
   if (Object.keys(other).length) L.push('', `LAW, R1 not naming the winner after the first coup: ${JSON.stringify(other)}.`);

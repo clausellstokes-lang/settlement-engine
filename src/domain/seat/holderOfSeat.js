@@ -132,13 +132,13 @@ export function isCrownedForm(form, tier) {
   return word === null || officeWordInfo(word)?.crown === true;
 }
 
-/** @typedef {'edge' | 'conflict' | 'retired'} TransferSentence */
+/** @typedef {'edge' | 'conflict' | 'retiredEdge'} TransferSentence */
 /**
  * @typedef {Object} TransferWording
  * @property {TransferSentence} sentence  `'edge'`: the seat's edge with its taker (`factionRelationships[].narrative`);
- *   `'conflict'`: the transfer's own line (`powerStructure.recentConflict`); `'retired'` (U5, the chair's cure (1) of
+ *   `'conflict'`: the transfer's own line (`powerStructure.recentConflict`); `'retiredEdge'` (U5, the chair's cure (1) of
  *   16:43Z): a former holder's edge on the seat, retired at a transfer under the seat law. R1 never asks for a
- *   `'retired'` wording: the class exists so that wording is pinned and can never be read as an `'edge'`. In that row the
+ *   `'retiredEdge'` wording: the class exists so that wording is pinned and can never be read as an `'edge'`. In that row the
  *   free `{from}` slot holds the power that lost the seat and `{form}` the form it held
  * @property {string} wording  the sentence with its slots: `{taker}` (the taker's name, exact), `{form}` (the new form,
  *   lower case, exact), and the free slots `{from}` (the outgoing form) and `{cause}` (the cause), which match any text
@@ -151,7 +151,7 @@ export function isCrownedForm(form, tier) {
  * form (the chair's condition 2: the seat changed hands without a reshaping), the coup's and the lawful passage's. A
  * change of wording ADDS a row here and never replaces one: `holderOfSeat.test.js` drives the real transfer on every
  * cause, under both laws, and reds until the new wording is in the list. The edge U5 RETIRES ("<old holder> held the
- * <form> until <taker> took it.") is ONE row of its own class, `'retired'`, and never an `'edge'` row: R1 must never
+ * <form> until <taker> took it.") is ONE row of its own class, `'retiredEdge'`, and never an `'edge'` row: R1 must never
  * read a loser as a taker, nor fall to Addendum 3's "nobody" on it (`seatTransfer.test.js`, arm (10)).
  * @type {ReadonlyArray<Readonly<TransferWording>>}
  */
@@ -162,7 +162,7 @@ export const TRANSFER_WORDINGS = Object.freeze([
   Object.freeze({ sentence: /** @type {TransferSentence} */ ('conflict'), wording: 'Power passed to {taker} by {cause}; the government now sits as a {form}, and the {from} keep their place among the powers.' }),
   Object.freeze({ sentence: /** @type {TransferSentence} */ ('conflict'), wording: '{taker} seized the {form} and left the government as it stood.' }),
   Object.freeze({ sentence: /** @type {TransferSentence} */ ('conflict'), wording: 'Power passed to {taker} by {cause}; the {form} stands as it was.' }),
-  Object.freeze({ sentence: /** @type {TransferSentence} */ ('retired'), wording: '{from} held the {form} until {taker} took it.' }),
+  Object.freeze({ sentence: /** @type {TransferSentence} */ ('retiredEdge'), wording: '{from} held the {form} until {taker} took it.' }),
 ]);
 
 /** A wording's slots, and one literal run escaped for a pattern. */
