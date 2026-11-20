@@ -27,7 +27,13 @@
  * WHAT MUST HOLD, for each grouping G and each surface S:
  *   (A) S with G shut draws NONE of G's lines (the lines the gallery page draws with G open and not with G shut);
  *   (B) THE CONTROL: S with G open draws every line of G's DERIVED block (the lines the open page loses when only the
- *       signal names G), and Defense's derived block is non-empty on every town (the test is live).
+ *       signal names G), and Defense's derived block is non-empty on every town, at a desktop's and a phone's width;
+ *   (C) where the registry withholds one evidence key for a hidden house (crimeTypes or criminalInstitutions), the
+ *       derived block is not drawn though the grouping is open (intended: the page cannot prove it open);
+ *   (D) no shared page offers a print, PDF, journal, Foundry or download control: those surfaces run on the viewer's
+ *       own saved record only (SettlementDetail), never on a page model.
+ * Each surface is walked at a desktop's width and, for the page, the civility-masked page, the map member and a clone,
+ * at a phone's (375 px), each against its own width's reference.
  */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -38,7 +44,7 @@ import { resolve, join } from 'node:path';
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
 const TOWN_TIMEOUT_MS = 1_800_000;
 
-const H = vi.hoisted(() => ({ db: null, uid: '', last: null, store: {} }));
+const H = vi.hoisted(() => ({ db: null, uid: '', last: null, store: {}, width: 1280, listeners: new Map(), controls: [] }));
 vi.mock('../../src/lib/supabase.js', () => {
   const tableFns = new Set(['get_gallery_dossier', 'import_gallery_dossier']);
   const served = new Set(['get_gallery_dossier', 'get_unlisted_dossier', 'import_gallery_dossier', 'get_gallery_map']);
@@ -159,7 +165,12 @@ describe('the shut grouping\'s signal survives every copy a non-owner surface ma
       PublicDossierView: (await import('../../src/components/PublicDossierView.jsx')).default,
       CampaignWorldView: (await import('../../src/components/gallery/CampaignWorldView.jsx')).default,
     };
-    window.matchMedia = Object.assign(vi.fn((q) => ({ media: q, matches: false, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {} })), { SF_CONTROLLED: true });
+    // A viewport the test sets: desktop (1280) or a phone (375); a width query answers by it, and its listeners hear a change.
+    const answers = (q) => { const max = /max-width:\s*(\d+)/.exec(q); const min = /min-width:\s*(\d+)/.exec(q);
+      return (!max || H.width <= Number(max[1])) && (!min || H.width >= Number(min[1])) && !!(max || min); };
+    window.matchMedia = Object.assign(vi.fn((q) => ({ media: q, get matches() { return answers(q); },
+      addEventListener(_t, fn) { H.listeners.set(fn, q); }, removeEventListener(_t, fn) { H.listeners.delete(fn); },
+      addListener(fn) { H.listeners.set(fn, q); }, removeListener(fn) { H.listeners.delete(fn); } })), { SF_CONTROLLED: true });
   }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('the chain applies whole: every migration on disk', () => {
@@ -167,11 +178,23 @@ describe('the shut grouping\'s signal survives every copy a non-owner surface ma
     expect(LIVE.files.at(-1)).toMatch(/^212_/);
   });
 
+  /** Draw at a viewport: every width query's listeners hear the change (hooks/useIsMobile.js caches per breakpoint). */
+  function atWidth(width) {
+    H.width = width;
+    for (const [fn, q] of H.listeners) fn({ matches: window.matchMedia(q).matches, media: q });
+  }
+  /** A control that would print, export or download the town: a shared page must offer none (those surfaces run on the
+   *  viewer's own saved record only: SettlementDetail). */
+  const EXPORT_CONTROL = /\b(print|pdf|foundry|journal|download)\b|\bexport (to|as|this|the)\b/i;
   /** Every line a rendered element's walk draws, as `<view> :: <line>`. */
   async function linesOfWalk(container) {
     const views = await lib.walkDossier(container, { fireEvent: lib.fireEvent, waitFor: lib.waitFor, expect });
     const out = new Set();
     for (const [view, ls] of Object.entries(views)) for (const l of ls) out.add(`${view} :: ${l}`);
+    for (const el of container.querySelectorAll('button, a, [role="button"], [role="menuitem"]')) {
+      const label = `${el.textContent || ''} ${el.getAttribute('aria-label') || ''} ${el.getAttribute('title') || ''}`.trim();
+      if (EXPORT_CONTROL.test(label)) H.controls.push(label.slice(0, 80));
+    }
     return out;
   }
   /** A page model drawn as the gallery's detail page and the party link draw it. */
@@ -237,6 +260,19 @@ describe('the shut grouping\'s signal survives every copy a non-owner surface ma
             'a JSON round trip of the page model': await drawPage({ ...page, settlement: JSON.parse(JSON.stringify(s)) }),
             'a spread of the page model': await drawPage({ ...page, settlement: { ...s } }),
           };
+          // the same at a phone's width (MobileTabStrip and the phone prose floor), the plain page its reference there
+          atWidth(375);
+          try {
+            drawn[label]['the gallery page at phone width'] = await drawPage(page);
+            drawn[label]['the gallery page, civility-masked, at phone width'] = new Set([...await drawPage(civPage)].map(unmask));
+            drawn[label]['the campaign map member at phone width'] = await drawMapMember(map, record.name);
+            drawn[label]['a structuredClone of the page model at phone width'] = await drawPage({ ...page, settlement: structuredClone(s) });
+            if (label === 'open') {
+              const marked = structuredClone(s);
+              veil.markVeiled(marked, [...veil.veilGroupingsOf(s), 'block:defense.criminalStructure']);
+              drawn['signal at phone width'] = await drawPage({ ...page, settlement: marked });
+            }
+          } finally { atWidth(1280); }
           if (label === 'open') {
             // G's DERIVED block: what the open page loses when only the signal names G (its data untouched)
             for (const g of FAMILY) {
@@ -244,24 +280,45 @@ describe('the shut grouping\'s signal survives every copy a non-owner surface ma
               veil.markVeiled(marked, [...veil.veilGroupingsOf(s), g]);
               drawn[`signal ${g}`] = await drawPage({ ...page, settlement: marked });
             }
+            // (C) the registry withholds one of the evidence keys for a hidden house (VR7): the block does not draw
+            for (const key of ['criminalInstitutions', 'crimeTypes']) {
+              const withheld = structuredClone(s);
+              delete withheld.economicState.safetyProfile[key];
+              drawn[`withheld ${key}`] = await drawPage({ ...page, settlement: withheld });
+            }
           }
         }
-        const open = drawn.open['the gallery page'];
+        const PHONE = ' at phone width';
         let defenseDerived = 0;
         for (const g of FAMILY) {
-          const lines = [...open].filter((x) => !drawn[g]['the gallery page'].has(x));
-          const derived = [...open].filter((x) => !drawn[`signal ${g}`].has(x));
+          // each width's own reference: the plain gallery page at that width
+          const ref = (surface) => (surface.endsWith(PHONE) ? 'the gallery page at phone width' : 'the gallery page');
+          const linesAt = (surface) => [...drawn.open[ref(surface)]].filter((x) => !drawn[g][ref(surface)].has(x));
+          const derivedAt = (surface) => (surface.endsWith(PHONE)
+            ? (g === 'block:defense.criminalStructure' ? [...drawn.open[ref(surface)]].filter((x) => !drawn['signal at phone width'].has(x)) : [])
+            : [...drawn.open['the gallery page']].filter((x) => !drawn[`signal ${g}`].has(x)));
+          const lines = linesAt('the gallery page');
+          const derived = derivedAt('the gallery page');
           if (g === 'block:defense.criminalStructure') defenseDerived = derived.length;
           expect(lines.length, `${g}: shutting it removes something from the gallery page (the row is live)`).toBeGreaterThan(0);
+          if (g === 'block:defense.criminalStructure') expect(derivedAt(`x${PHONE}`).length, 'the derived block is drawn at a phone\'s width too (the arm is live)').toBeGreaterThan(0);
           for (const [surface, set] of Object.entries(drawn[g])) {
             // (A) with G shut, no line of G on any surface
-            const told = lines.filter((x) => set.has(x));
+            const told = linesAt(surface).filter((x) => set.has(x));
             for (const x of told.slice(0, 2)) faults.push(`${g} SHUT, ${surface} draws: ${x.slice(0, 160)}`);
             // (B) the control: with G open the derived block is drawn on the surface
             const ctl = drawn.open[surface];
-            for (const x of derived.filter((y) => !ctl.has(y)).slice(0, 2)) faults.push(`${g} OPEN, ${surface} lacks the derived line: ${x.slice(0, 160)}`);
+            for (const x of derivedAt(surface).filter((y) => !ctl.has(y)).slice(0, 2)) faults.push(`${g} OPEN, ${surface} lacks the derived line: ${x.slice(0, 160)}`);
+          }
+          // (C) the registry's withholding of an evidence key: the open grouping's derived block is not drawn
+          if (g === 'block:defense.criminalStructure') {
+            for (const key of ['criminalInstitutions', 'crimeTypes']) {
+              for (const x of derived.filter((y) => drawn[`withheld ${key}`].has(y)).slice(0, 2)) faults.push(`${key} withheld, the page draws: ${x.slice(0, 160)}`);
+            }
           }
         }
+        // (D) no shared page offers print, PDF, journal, Foundry or a download: those run on the viewer's own record only
+        expect([...new Set(H.controls)], 'an export control on a non-owner page').toEqual([]);
         expect(defenseDerived, 'Defense\'s criminal architecture has a derived block on this town (the control is live)').toBeGreaterThan(0);
         expect(faults, faults.slice(0, 24).join('\n')).toEqual([]);
       }, TOWN_TIMEOUT_MS);

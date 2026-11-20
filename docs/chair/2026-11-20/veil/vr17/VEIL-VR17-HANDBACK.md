@@ -84,7 +84,7 @@ audience.
 
 | Run | At | Result |
 |---|---|---|
-| the born test `tests/security/galleryVeilSignalCopies.pglite.test.js` (two born towns x both stored shapes; each family grouping shut alone; 8 surfaces) | the base's bytes (git archive of bedd5a392) | **RED: 4 failed, 1 passed (5)**; the offences are exactly the six copying surfaces, 4 town-shapes each: the gallery page civility-masked, the party link civility-masked, the campaign map member, a structuredClone, a JSON round trip, a spread (`out/born-red-at-bedd5a392.txt`); the plain page and plain link held |
+| the born test `tests/security/galleryVeilSignalCopies.pglite.test.js` (two born towns x both stored shapes; each family grouping shut alone; 8 surfaces at a desktop's width, 4 at a phone's; arms (C) and (D), section 8) | the base's bytes (git archive of bedd5a392) | **RED: 4 failed, 1 passed (5)**; the offences, 4 town-shapes each: the six copying surfaces (the gallery page civility-masked, the party link civility-masked, the campaign map member, a structuredClone, a JSON round trip, a spread), their three phone-width twins, and arm (C) for each withheld key (`out/born-red-at-bedd5a392.txt`); the plain page and plain link held |
 | the same | the tip | **GREEN: 5 passed (5)**, the open-grouping control included on every surface |
 | the walker `tests/lint/veilCopySites.walker.test.js` | the tip | **6 passed (6)** |
 | its plant 1: an unregistered `structuredClone` of the page model in `PublicDossierView` | the tip, planted | **1 failed, 5 passed**: the registration arm, naming `src/components/PublicDossierView.jsx :: PublicDossierView :: structuredClone`; restored by cp, cmp equal, 6 passed |
@@ -139,3 +139,46 @@ importer's own library draws the derived block (measured at the base with the im
 the tab reads with `publicDossier` false, by reading the code, not drawn); that no record a visitor reaches lacks
 `safetyProfile` while its grouping is open (where one did, the block would be withheld: the safe direction, executed on a
 bare page model in the walker).
+
+## 8. RULING VR18, AS AMENDED (the seventh chair, 01:15 UTC; vetoable by the owner): what stayed owed, answered (written 2026-11-20T01:59Z)
+
+The chair approved the evidence mechanism in place of the key. Each item, measured:
+
+1. **The real pipeline, end to end.** The born test's surfaces "the gallery page, civility-masked" and "the party link,
+   civility-masked" run the real client (sanitizeDossier -> veilPublicPayload -> veilDeep, the town's own name carrying a
+   word the mask rewrites; the test asserts the rewrite happened): with Defense's grouping OPEN they draw its derived
+   lines (the control, arm (B)), with it SHUT they draw none (arm (A)). Green at the tip.
+2. **A derived block found by what a surface DRAWS.** The born test reads lines drawn, never who calls isVeiled: every
+   tab walked (every group, sub-tab and disclosure) on the gallery page, the party link, the campaign map's member, both
+   civility-masked pages and three copies, at a desktop's width, and at a phone's (375 px: MobileTabStrip and the phone
+   prose floor) for the page, the civility-masked page, the map member and a clone, each grouping shut and open, each
+   width against its own reference. Print, the PDF, the journal and Foundry: arm (D) asserts no shared page offers a
+   print, PDF, journal, Foundry or download control (the pattern executed against the owner's own labels: "Export PDF",
+   "PDF Dossier", "Foundry VTT Module", "Print" all match; the Economics "Exports(3)" disclosure does not): those run on
+   the viewer's own saved record only (SettlementDetail). Green at the tip (5 of 5); the base: section 4.
+3. **Master's stored shape.** origin/master (db832c892)'s generator returns both arrays
+   (`generators/safetyProfile.js`); born from master's own generator, 60 towns over the six tiers: **60 of 60 carry
+   both** (`out/arrays-master-db832c892.txt`; the tip's generator: 60 of 60, `out/arrays-tip.txt`;
+   `measure/arrays.probe.jsx`). So a record of master's shape draws the block for a visitor exactly as before where open;
+   a record lacking either array would never draw it for a visitor (none found).
+4. **The registry withholding an evidence key for a hidden house.** Arm (C): on the OPEN page, `criminalInstitutions`
+   or `crimeTypes` deleted as the registry would withhold it: the derived block is not drawn. Green at the tip. (At the
+   base 212 never deletes either key for a hidden house: the open control passed with the default veil's houses hidden
+   whole, so the arrays survive house hiding today.)
+5. **The map member.** It now follows the DM's eyes (the server's removal reaches it). V10-4 (a never-listed member
+   served through the sanitiser only) is not worked round on the client.
+
+**The chair's measure: is any OTHER identity-keyed mark lost the same way on a non-owner path? NO.** The estate's 70
+`new WeakMap()` / `new WeakSet()` registers in src (`grep -rnE "new Weak(Map|Set)\(" src`), read by pattern: every
+display-side one (crisisStoppedRow x5, stateProseKernel :: FACT_DECLARATION, houseInputAtHand x4, supplyStory ::
+ON_RECORD, warReach :: READ, drawDeclared :: DECLARED_POOL, causalState x2, houseScale :: LADDERS, linkMentions, the
+spatial and world-pulse memos, the PDF's two) is a MEMO: get, else compute, then set, so a copy recomputes the same
+value. The three RECEIPTS (allegiance.js, goals.js, rareSecrets.js) are birth-time traces set by the generator, never
+present on a page model that arrives as JSON, so identical on the served page and any copy. No `Symbol(` key on the
+display, dossier, gallery or civility path. VEILED_GROUPINGS was the one identity-keyed mark carrying a veil decision.
+(EXECUTED: the grep and the set/get sites read; PLAUSIBLE: that every memo's compute is pure, read from the pattern, not
+each body.)
+
+THE GIT HAZARD (the chair's 00:11 and 01:08 messages): checked before the push and after: `core.bare` false, user
+"Claude", every commit of this seat authored by the harness identity, no repository variable (GIT_DIR, GIT_WORK_TREE,
+...) in the environment; tests run from a plain shell; no push without something to send.
