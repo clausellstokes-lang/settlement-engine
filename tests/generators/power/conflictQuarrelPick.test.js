@@ -33,7 +33,13 @@ import { clearActiveRng, getActiveRng, setActiveRng } from '../../../src/kernel/
 /** @type {Readonly<Record<string, ReadonlyArray<{ id: string, text: string | null, needs: ReadonlyArray<string> }>>>} */
 const POOLS = /** @type {any} */ (SIBLINGS).QUARREL_POOLS ?? {};
 const POOL_OF = (/** @type {string} */ ledgerPool) => ledgerPool.replace(/^governanceNarrative:/, '');
-const isQuarrelNote = (/** @type {{ pool?: unknown }} */ e) => typeof e?.pool === 'string' && /^governanceNarrative:(GRAZING|LEVIES)$/.test(e.pool);
+const isQuarrelNote = (/** @type {{ pool?: unknown }} */ e) => typeof e?.pool === 'string' && e.pool.startsWith('governanceNarrative:') && Object.hasOwn(POOLS, POOL_OF(e.pool));
+/** The three atoms the chair's leave added for the small places' quarrels (`facts/rosterGrounds.js`). */
+const NEW_ATOMS = Object.freeze(['water source', 'access to external mill', 'common grazing land']);
+/** The military rung's two pools (the chair's word of 16:22 UTC): the commanders' sub-branch, and the else sub-branch. */
+const MILITARY = Object.freeze(['MILITARY_COURT', 'MILITARY_ARMED']);
+/** A sentence the rewriter garbled: a doubled word, a doubled article, a possessive meetings, a doubled space or stop. @param {string} s */
+const garbled = (s) => /\b(\w+)\s+\1\b/i.test(s) || /\bthe the\b|\bthe The\b|'s meetings|\s{2}|\.\.|undefined|null/.test(s) || !/^[A-Z].*\.$/.test(s);
 
 /** The measure's birth (`depth/conflict/birth.mjs`): DEFAULT_CONFIG at the size, seed hxd-<size>-<i>. @param {string} size @param {number} i */
 function born(size, i) {
@@ -85,7 +91,7 @@ describe('BUILD-CONFLICT · the recent conflict picks its everyday quarrel by ke
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   it('the pools: index 0 of each is the rung line it serves, and every line declares its needs in the vocabulary', () => {
-    expect(Object.keys(POOLS).sort()).toEqual(['GRAZING', 'LEVIES']);
+    expect(Object.keys(POOLS).sort()).toEqual(['GRAZING', 'LEVIES', 'MILITARY_ARMED', 'MILITARY_COURT']);
     // the one row with no text is the field rotation's, whose literal stays at the site
     expect(Object.values(POOLS).flat().filter((l) => l.text === null).map((l) => l.needs)).toEqual([['tier: village']]);
     for (const [name, pool] of Object.entries(POOLS)) {
@@ -152,5 +158,56 @@ describe('BUILD-CONFLICT · the recent conflict picks its everyday quarrel by ke
       const printed = new Set(picked.map((b) => b.record.powerStructure?.recentConflict));
       expect(printed.size, `${size}: the stored sentences follow the picks`).toBeGreaterThanOrEqual(byLine.size);
     }
+  }, 600_000);
+
+  it('(e) over hxd-thorp-0..19 and hxd-hamlet-0..19: a quarrel on each of the three new atoms prints, and every printed quarrel\'s needs hold', () => {
+    const picked = ['thorp', 'hamlet'].flatMap(birthsOf).filter((b) => b.pick);
+    expect(picked.length, 'places whose baseline quarrel printed and was picked').toBeGreaterThanOrEqual(20);
+    for (const { seed, record, pick } of picked) {
+      const line = lineOf(/** @type {any} */ (pick));
+      expect(declarationAdmits(declarationOf(line), /** @type {any} */ (factsOf(record))).refused, `${seed}: ${line?.id}`).toEqual([]);
+    }
+    for (const atom of NEW_ATOMS) {
+      const ids = (POOLS.GRAZING || []).filter((l) => l.needs.includes(atom)).map((l) => l.id);
+      expect(ids.length, `GRAZING holds a quarrel needing ${atom}`).toBeGreaterThan(0);
+      expect(picked.some((b) => ids.includes(/** @type {any} */ (b.pick).lineId)), `a quarrel needing ${atom} prints in 40 small places`).toBe(true);
+    }
+  }, 600_000);
+
+  it('(f) the military rung picks among its pools: over hxd-city-0..39 and hxd-metropolis-0..19 its quarrels\' needs hold, and more than one prints', () => {
+    for (const name of MILITARY) expect(Array.isArray(POOLS[name]), `the ${name} pool`).toBe(true);
+    const births = [...Array.from({ length: 40 }, (_, i) => born('city', i)), ...Array.from({ length: 20 }, (_, i) => born('metropolis', i))];
+    const military = births.filter((b) => b.pick && MILITARY.includes(POOL_OF(/** @type {any} */ (b.pick).pool)));
+    expect(military.length, 'places whose military rung printed and was picked').toBeGreaterThanOrEqual(3);
+    for (const { seed, record, pick } of military) {
+      const line = lineOf(/** @type {any} */ (pick));
+      expect(line, `${seed}: the noted line is a pool line`).not.toBe(null);
+      expect(declarationAdmits(declarationOf(line), /** @type {any} */ (factsOf(record))).refused, `${seed}: ${line?.id}`).toEqual([]);
+    }
+    expect(new Set(military.map((b) => /** @type {any} */ (b.pick).lineId)).size, 'distinct military quarrels').toBeGreaterThan(1);
+  }, 600_000);
+
+  it('(g) the rewriter garbles no military quarrel: every line of both pools, under every council label, prints whole', () => {
+    for (const name of MILITARY) expect(Array.isArray(POOLS[name]), `the ${name} pool`).toBe(true);
+    const MIL = { criminalEffective: 20, militaryEffective: 80, economyOutput: 50, religionInfluence: 30 };
+    const rosters = [
+      { tier: 'town', instNames: ['Town hall', 'Courthouse', 'Town watch', 'Garrison', 'Town walls', 'Town gate'] },
+      { tier: 'city', instNames: ['City hall', 'Courthouse', 'City watch', 'Garrison', 'City walls', 'Gatehouse'] },
+      { tier: 'village', instNames: ['Village militia'] },
+      { tier: 'hamlet', instNames: ['Village militia', 'Watch post'] },
+    ];
+    const seats = [null, 'Town Council', 'Merchant Guild Council', 'Elder Council'];
+    /** @type {Map<string | number, Set<string>>} */ const reached = new Map();
+    for (const roster of rosters) for (const seat of seats) for (let i = 0; i < 60; i += 1) {
+      const factions = seat ? [{ faction: seat, isGoverning: true, category: 'government' }] : [];
+      const { result, rolls } = underCountingStream(`hxd-mil-${i}`, () => withPresumptionLedger(() => buildGovernanceLabels(/** @type {any} */ ({ ...BASE, ...roster, factions, governingFaction: seat, instFlags: MIL }))));
+      expect(rolls).toBe(0);
+      const note = result.ledger.filter(isQuarrelNote).pop();
+      if (!note || !MILITARY.includes(POOL_OF(note.pool))) continue;
+      const said = String(result.result.recentConflict);
+      expect(garbled(said), `${roster.tier} under ${seat}: ${said}`).toBe(false);
+      (reached.get(note.lineId) ?? reached.set(note.lineId, new Set()).get(note.lineId))?.add(said);
+    }
+    for (const name of MILITARY) for (const line of POOLS[name] || []) expect(reached.has(line.id), `${name} ${line.id} printed and was read`).toBe(true);
   }, 600_000);
 });
