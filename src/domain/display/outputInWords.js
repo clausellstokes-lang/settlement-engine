@@ -22,8 +22,18 @@
  * at zero). The drag clause waits for the generator to export its weights as a registered table (or to store the
  * factors), which is generators/ work, not a display lane's.
  *
+ * THE DRAG AS A PLAIN FACT (OUTPUT-FIX, PAGE-4; the chair's ruling of 2026-11-20 15:16 UTC: "it needs no weight and no
+ * generator change"). One drag only, and stated, never ranked or weighed: where the words are below "nearly all" AND the
+ * town holds no market by the market's own home (`factsOf(record).market`, the home `priorityHelpers.js` itself reads as
+ * `hasMarket`), the line ends ", held back by having no market." No other drag is named; no number is said. The clause
+ * names the market to deny it, so it is DECLARED (`excludes: ['market']`) and printed through the list door
+ * (`filterDeclared`): the vocabulary's `market` atom reads that same home, so it prints only where the record holds no
+ * live market. The test's arm holds the clause to the rule it states: through the generator's own `getInstFlags`, all
+ * else equal, the output without a market is lower than with one.
+ *
  * WHAT IT SAYS (no figure out of 100, none of the model's working):
- *   "It gets about three parts in four of what its work could yield."
+ *   "It gets about three quarters of what its work could yield."
+ *   "It gets about half of what its work could yield, held back by having no market."
  *   "It gets all its work could yield."
  *   "It gets more than its work alone could yield."
  * Null where the record holds no figure or no dial (then the surface prints nothing in the figure's place).
@@ -31,8 +41,11 @@
  * Pure: no store, no React, no rng.
  */
 
+import { factsOf } from '../facts/factsOf.js';
+import { filterDeclared, lineText } from '../facts/drawDeclared.js';
+
 /**
- * @typedef {{ economicState?: { compound?: { economyOutput?: unknown, raw?: { economy?: unknown } | null } | null } | null }} OutputRecord
+ * @typedef {{ institutions?: unknown, economicState?: { compound?: { economyOutput?: unknown, raw?: { economy?: unknown } | null } | null } | null }} OutputRecord
  */
 
 /** The named fractions, as [parts, of, words]: the share is said as the one it stands nearest. */
@@ -42,13 +55,16 @@ const FRACTIONS = Object.freeze(/** @type {ReadonlyArray<readonly [number, numbe
   [1, 4, 'about a quarter'],
   [1, 3, 'about a third'],
   [1, 2, 'about half'],
-  [2, 3, 'about two parts in three'],
-  [3, 4, 'about three parts in four'],
-  [4, 5, 'about four parts in five'],
+  [2, 3, 'about two thirds'],
+  [3, 4, 'about three quarters'],
+  [4, 5, 'about four fifths'],
   [9, 10, 'nearly all'],
   [1, 1, 'all'],
   [6, 5, 'more than'],
 ]));
+
+/** The rung at and above which no drag is named (the chair's ruling: the drag clause holds only below "nearly all"). */
+const NEARLY_ALL = FRACTIONS.findIndex((row) => row[2] === 'nearly all');
 
 /** @param {unknown} v @returns {number | null} */
 const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
@@ -78,5 +94,10 @@ export function outputInWords(settlement) {
   if (!r) return null;
   if (r.words === 'all') return 'It gets all its work could yield.';
   if (r.words === 'more than') return 'It gets more than its work alone could yield.';
-  return `It gets ${r.words} of what its work could yield.`;
+  const plain = `It gets ${r.words} of what its work could yield.`;
+  if (FRACTIONS.findIndex((row) => row[2] === r.words) >= NEARLY_ALL) return plain;
+  // the one drag, stated: declared, so it prints only where the market's own home holds no live market
+  const [held] = filterDeclared([{ text: `It gets ${r.words} of what its work could yield, held back by having no market.`,
+    excludes: ['market'] }], { facts: () => factsOf(settlement), poolId: 'outputInWords:noMarket', surface: 'economics', drawKind: 'A' });
+  return held ? lineText(held) : plain;
 }

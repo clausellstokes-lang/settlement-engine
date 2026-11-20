@@ -1,0 +1,70 @@
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "tests/domain/display/outputInWords.test.jsx: 1 un-anchored negative assertion(s) at line(s) 134 (frozen ceiling 0). A bare not.toContain/not.toMatch/not.toHaveProperty passes just as happily when the COLLECTION drifted away as when the member was correctly excluded — it outlives the regression it was written to catch. Pair it with a liveness anchor: expectPresentThenAbsent(before, after, member) for a removal, expectAbsentWithAnchor(collection, member, anchor) for a selection (tests/helpers/anchoredNegatives.js). If the anchor is genuinely structural, say why with an \"// anchored: <reason>\" marker — AND MIND THE RULE, which has cost a lane two attempts: the marker is read ONLY on the assertion's own line or the ONE line immediately above it. A marker WRAPPED across two comment lines does NOT count, because the line abutting the assertion is then the continuation rather than the marker. Keep it on one line, or put \"anchored:\" on the comment's LAST line.",
++ ]
+
+ ❯ tests/lint/negativeAssertionAnchor.walker.test.js:850:24
+    848|       }
+    849|     }
+    850|     expect(violations).toEqual([]);
+       |                        ^
+    851|   });
+    852|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+AssertionError: declare the thing on the line (needs or excludes, with its twin), never add a row: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/outputInWords.js :: market :: \" of what its work could yield, held back by having no market.\"",
++ ]
+
+ ❯ tests/lint/presumedThings.walker.test.js:444:92
+    442|     const fresh = hits.filter((h) => !banked.has(key(h.file, h.thing, …
+    443|     expect(fresh.map((h) => `${h.file} :: ${h.thing} :: ${JSON.stringi…
+    444|       'declare the thing on the line (needs or excludes, with its twin…
+       |                                                                                            ^
+    445|   });
+    446|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+AssertionError: the live TEST-title count moved from SP-C's measured 18,471 — this is the evidence layer, the exact figure two cuts in a row stated wrongly in prose, and the reason it is asserted rather than described: expected 31228 to be 31225 // Object.is equality
+
+- Expected
++ Received
+
+- 31225
++ 31228
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:7562:10
+    7560|         + ' is the evidence layer, the exact figure two cuts in a row …
+    7561|         + ' the reason it is asserted rather than described')
+    7562|         .toBe(CENSUS.titles);
+       |          ^
+    7563|       // …AND THE SUITE LAYER IS COUNTED TOO, WHICH IS WHAT MAKES THE …
+    7564|       // that merged the two arrays again would leave `titles` at 23,6…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  3 failed | 217 passed (220)
+      Tests  3 failed | 3268 passed (3271)
+   Start at  16:09:24
+   Duration  1262.79s (transform 31.78s, setup 6.38s, import 1006.37s, tests 1615.12s, environment 30ms)
+
+[gate-tail] end:  16:30:27 up  2:00,  0 user,  load average: 2.19, 3.37, 4.78
