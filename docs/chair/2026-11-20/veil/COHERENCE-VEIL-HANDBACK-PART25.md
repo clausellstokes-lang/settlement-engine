@@ -289,7 +289,7 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
 - 10:20 PART 25 checked against the chair's list; ruling 30 restored to the chair's word (DIFFERS; the 13 LOWER towns put to it).
 - 10:21 the chair's rulings on R3-CURE-2 (ruling 37); relayed to R3-CURE-3 10:24. VEIL-25 seated (session_019yED1QCGsC1hjJ6rjiboyE).
 - 10:28 the chair re-worded ruling 30 (LOWER does not block, on three conditions) and the acceptance's independence; VEIL-25's five gaps cured 10:29.
-- 10:3x R3-CURE-3 returned at its mark (9b18835d1), pushed; a goal husk found (a leak, not cured). The seat's record read
+- 11:00 R3-CURE-3 committed; returned at its mark (9b18835d1), pushed; a goal husk found (a leak, not cured). The seat's record read
   375,094 tokens: R3 cannot merge before the 400,000 point, so this seat hands over now (11:01).
 
 ## 7. HANDED OVER (to VEIL-25, session_019yED1QCGsC1hjJ6rjiboyE, at the chair's 10:17 plan)
