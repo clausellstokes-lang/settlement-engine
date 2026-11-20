@@ -259,9 +259,9 @@ const _getTierConstraints = (text, instNames, tier, govOverride, magicWorks = tr
 
 // ─── checkInstCompat ──────────────────────────────────────────────────────────
 /**
- * Return a short flavour string describing a visually distinctive institution
- * present in this settlement, used to build the arrival scene.
- * Returns null if no distinctive institution is found.
+ * The drawn landmark of a visually distinctive institution, WITH its branch and its index there (`landmarkOf`;
+ * ARRIVAL-LINES-2, the chair's ruling (ii) of 2026-11-20 22:34): `{ text, branch, index, line }`, `text` the string
+ * the arrival scene prints, exactly as before. Returns null if no distinctive institution is found.
  *
  * @param {Array}  institutions - Institution objects
  * @param {string} tier
@@ -281,49 +281,49 @@ export const checkInstCompat = (institutions, tier, _magicPriority) => {
   const has   = (...keywords) => keywords.some(k => names.some(n => n.includes(k)));
 
   if (has('great cathedral')) {
-    return pickRandom([
+    return landmarkOf('great cathedral', [
       "The great cathedral's spire is the tallest thing for miles.",
       'A cathedral dominates the skyline. Larger than anything else in the settlement, which may say something about what matters here.',
     ]);
   }
   if (has('cathedral') && tier !== 'thorp' && tier !== 'hamlet') {
-    return pickRandom([
+    return landmarkOf('cathedral', [
       'A stone cathedral anchors the high ground.',
       'The cathedral bell tower is the first thing visible from this direction.',
     ]);
   }
   if (has('massive wall', 'citadel')) {
-    return textOf(pickRandom([
+    return landmarkOf('massive wall / citadel', [
       { text: 'The walls are serious. High stone, maintained, with watchtowers spaced to cover every angle.', needs: ['walls'] },
       'The citadel on the high ground makes clear that this settlement has been defended before and expects to be again.',
-    ]));
+    ]);
   }
   if (has('wall', 'gatehouse') && !has('massive')) {
-    return textOf(pickRandom([
+    return landmarkOf('wall / gatehouse', [
       { text: 'A wall circuit, unremarkable but intact.', needs: ['walls'], excludes: ['crisis: under_siege'] },
       { text: 'The gatehouse arch frames the main road.', needs: ['gate'] },
-    ]));
+    ]);
   }
   if (has('wizard', 'mage') && has('tower')) {
-    return pickRandom([
+    return landmarkOf('mage tower', [
       "A tower rises above the roofline in a way that isn't architectural. It was added later, and whoever added it wasn't interested in fitting in.",
       'The mage tower catches the light differently from the other buildings.',
     ]);
   }
   if (has('major port')) {
-    return textOf(pickRandom([
+    return landmarkOf('major port', [
       { text: 'The harbour cranes are visible from the road: tall, necessary, industrial.', needs: ['navigable'] },
       { text: 'Half the settlement seems to be about the water.', needs: ['navigable'] },
-    ]));
+    ]);
   }
   if (has('palace', 'royal seat')) {
-    return textOf(pickRandom([
+    return landmarkOf('palace / royal seat', [
       'The palace complex sits on the highest point of the settlement and does not look apologetic about it.',
       { text: 'Flags on the palace towers. Someone is in residence.', excludes: ['crisis: succession'] },
-    ]));
+    ]);
   }
   if (has('university', 'academy of magic')) {
-    return pickRandom([
+    return landmarkOf('university', [
       'The university buildings take up more of the skyline than you expected.',
       'A complex of old stone buildings (the university) anchors the northern quarter.',
     ]);
@@ -934,4 +934,17 @@ export function settleFundingReasons(violations, militaryGate) {
     return { ...v, reason: FUNDED_EMBATTLED + reason.slice(lead.length) };
   });
   return changed ? out : violations;
+}
+
+/**
+ * ARRIVAL-LINES-2 (the chair's ruling (ii) of 2026-11-20 22:34): one branch's landmark, drawn by the ONE `pickRandom`
+ * the branch always drew (same roll, same array), handed back WITH its branch and its index in the branch, and its row
+ * (`line`, a declared `{ text, needs?, excludes? }` or a bare string) so its declaration has one home. `text` is the row
+ * read through `textOf` (R-C), the string the arrival scene printed before.
+ * @param {string} branch @param {ReadonlyArray<string | { text: string, needs?: string[], excludes?: string[] }>} lines
+ * @returns {{ text: string, branch: string, index: number, line: string | { text: string, needs?: string[], excludes?: string[] } }}
+ */
+function landmarkOf(branch, lines) {
+  const line = pickRandom(lines);
+  return { text: textOf(line), branch, index: lines.indexOf(line), line };
 }

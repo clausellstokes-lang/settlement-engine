@@ -24,7 +24,7 @@ const REACHES = /** @type {Record<string, string[]>} */ ({
 /** checkInstCompat's own line of a branch at an index: its one roll held at the slot's floor (never quoted). */
 const drawnAt = (/** @type {string} */ branch, /** @type {number} */ index) => {
   setActiveRng({ random: () => (index + 0.5) / 2 });
-  try { return /** @type {string} */ (checkInstCompat(REACHES[branch].map((name) => ({ name })), 'city', 50)); } finally { clearActiveRng(); }
+  try { return /** @type {string} */ (checkInstCompat(REACHES[branch].map((name) => ({ name })), 'city', 50)?.text); } finally { clearActiveRng(); }
 };
 const factsWith = ({ walls = true, gate = true, church = true, siege = false } = {}) => ({
   defence: { walls, gate },

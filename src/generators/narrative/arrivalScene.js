@@ -313,7 +313,7 @@ export function composeArrivalScene(settlement) {
   // SIGHT: a landmark the native institutions imply, else the culture's built detail.
   let sight = null;
   if (!underStress) {
-    sight = checkInstCompat(institutions, tier, config.priorityMagic ?? 50);
+    sight = checkInstCompat(institutions, tier, config.priorityMagic ?? 50)?.text ?? null; // ARRIVAL-LINES-2 (ruling (ii)): the landmark comes back with its branch and index; its text, as before
     if (sight && !speaks(sight)) sight = null;
     if (!sight) {
       const materialized = typeof culturalIdentity?.architecturalDetail === 'string'
