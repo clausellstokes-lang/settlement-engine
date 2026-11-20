@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "31a053445069b18f67ab296e4551505be1bf9ffa",
-  "measuredBy": "chair landing helper, point 84 (kernel-mix bd42d63c7 + goals-3 f721d11cd)",
+  "measuredAtSha": "36215e5114c9dc85d7698644b5c4db55dba6771c",
+  "measuredBy": "goals-4",
   "date": "2026-11-20",
-  "note": "the line at point 84: the kernel commit (bd42d63c7) adds test titles to tests/kernel/proseHash.test.js, merged with GOALS-3 at f721d11cd",
+  "note": "GOALS-4 builder 10, the wants' tranche: test titles added and renamed in tests/data/goalFamilies.test.js (the 380-lines arm, 3 titles; two cell-count titles renamed), tests/generators/people/goalSentencesOnceInTown.test.js ((t) renamed), tests/generators/bar8People.test.js (THE POSITIVE's town renamed)",
   "files": 3712,
   "parked": 475,
   "credited": 3237,
-  "titles": 31257,
-  "suiteTitles": 8659
+  "titles": 31260,
+  "suiteTitles": 8660
 }
