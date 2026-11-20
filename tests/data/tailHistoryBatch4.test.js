@@ -33,13 +33,17 @@ const scene = (/** @type {string} */ seed) => String(bornCensus(seed).arrivalSce
 /** [seed, the false words, what prints instead on the same slot (a reword, or the declared line's twin)] */
 const MUST_NOT = [
   ['r2r-thorp-9', /routes you have never travelled/, /A broker sits in the shade, matching buyers to whatever the neighbours have to spare/],
-  ['r2s-wartime-thorp-2', /routes you have never travelled/, /A broker sits in the shade, matching buyers to whatever the neighbours have to spare/],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2s-wartime-thorp-2 -> r2s-wartime-thorp-3, a besieged-route thorp of
+  // the same crisis where the broker is refused and its twin prints on the slot
+  ['r2s-wartime-thorp-3', /routes you have never travelled/, /A broker sits in the shade, matching buyers to whatever the neighbours have to spare/],
   ['r2r-thorp-48', /records every cartload/, /A clerk records every sack and basket that comes in from the fields/],
   ['r2s-politically_fractured-town-2', /fill the carts waiting on the road out/, /Bolts of cloth and bales of wool are stacked in the shops, and none of it is going anywhere/], // BAR6-SCENES (2026-11-16, LAW 6 rule 6b; re-keyed by identity): the twin reworded
   ['r2r-village-47', /herbs and spices fill the carts/, /A doorway here and there sells remedies/], // BAR6-SCENES (2026-11-16, LAW 6 rule 6b; re-keyed by identity): an isolated village with no spice made, sold or brought in: the spice sacks' twin holds the slot
   ['r2r-thorp-4', /a master's mark/, /An errand-runner hurries past, a household's mark stitched on his sleeve/],
-  ['r2r-thorp-3', /Horse traders/, /Herders show their animals at the edge of the settlement/],
-  ['r2r-thorp-57', /A moneylender sits at a low table/, /An old woman sits at a low table by her door/],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-thorp-3 -> r2r-thorp-55, a thorp keeping no horse whose slot prints the twin
+  ['r2r-thorp-55', /Horse traders/, /Herders show their animals at the edge of the settlement/],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-thorp-57 -> r2r-hamlet-33, a hamlet (the twin's `tier: ≤ hamlet`) whose slot prints the twin
+  ['r2r-hamlet-33', /A moneylender sits at a low table/, /An old woman sits at a low table by her door/],
 ];
 /** [seed, the true sibling that must still print] */
 const KEEP = [
@@ -47,7 +51,9 @@ const KEEP = [
   // address re-taken: lane BAR3-PLACES batch 1 refuses the broker where no market stands (r2r-thorp-43 holds none: its table of
   // books), and the line prints in the census's market towns; the address is the branch's own KEEP town for this line
   // (`bar3PlacesRows.test.js`, "H1: the broker of far goods where a market stands"). The line and the arm are unchanged.
-  ['r2s-monster_pressure-city-0', /A broker sits in the shade, matching buyers to goods from routes you have never travelled/],
+  // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2s-monster_pressure-city-0 -> r2r-metropolis-62, a market town (the
+  // line's `market`) with a road open; bar3PlacesRows.test.js's H1 KEEP takes the same address
+  ['r2r-metropolis-62', /A broker sits in the shade, matching buyers to goods from routes you have never travelled/],
   ['r2r-thorp-47', /A clerk records every cartload that passes in a careful ledger/],
   ['r2r-town-0', /Bolts of cloth and bales of wool fill the carts waiting on the road out/],
   ['r2r-village-40', /A moneylender sits at a low table with a queue of familiar faces waiting/],

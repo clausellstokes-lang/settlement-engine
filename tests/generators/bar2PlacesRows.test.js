@@ -19,6 +19,17 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { ARRIVAL_TENSIONS } from '../../src/data/arrivalProse.js';
+import { textOf } from '../../src/domain/facts/textOf.js';
+
+/**
+ * RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): "what prints instead" on an
+ * arrival slot, COMPUTED from the slot's own pool export, never quoted: any of its lines but the flagged words (`{name}` any name).
+ * The reader's town stays the guard town; the slot is shown live whichever of its lines the draw lands on.
+ * @param {ReadonlyArray<any>} pool @param {RegExp} gone @returns {RegExp}
+ */
+const slotOf = (pool, gone) => new RegExp(pool.map((l) => { const t = textOf(l); return String(typeof t === 'function' ? t('@@NAME@@') : t); })
+  .filter((t) => !gone.test(t)).map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split('@@NAME@@').join('[^"]+?')).join('|'));
 
 const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
 /** The census's own configuration for its two seed families (CENSUS-3 seedcfg.mjs, r2r- and r2s-). @param {string} seed */
@@ -55,9 +66,13 @@ describe('BAR2-PLACES: the rows read the town', () => {
     ['C14951 no mill claimed', 'r2r-thorp-1', /All three still hold/, /Built on the river: it gives the place its water, and carries what the fields produce, as it always has\./],
     ['C25910 no public ovens', 'r2r-village-25', /Public ovens/, /Market vendors and shared dining customs make food distribution visibly civic\./],
     ['C26954 no shared ovens', 'r2r-thorp-23', /and shared ovens stretch/, /Fermentation, pickling, and drying stretch the harvest through winter\./],
-    ['C26954 class: the arrival oven', 'r2r-thorp-10', /Smoke rises from a shared oven/, /Smoke rises from a household oven, and a neighbour stops in to share its warmth\./],
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): r2r-thorp-10 -> r2r-thorp-23, a slavic thorp (the row above's
+    // own town) whose people line is the oven's reword
+    ['C26954 class: the arrival oven', 'r2r-thorp-23', /Smoke rises from a shared oven/, /Smoke rises from a household oven, and a neighbour stops in to share its warmth\./],
     ['C14917 no crowd', 'r2r-hamlet-5', /for a crowd to gather/, /loudly enough for the neighbours to stop and listen\./],
-    ['C23710 no busy street', 'r2r-thorp-49', /through a busy street/, /Well-fed children run errands from door to door\./],
+    // RE-KEYED BY IDENTITY 2026-11-20 (L2, the chair's word of 15:35; the arrival pools APPENDED, so the draw moved): the anchor was 'Well-fed children run errands from door to door.';
+    // the thorp keeps the guard, its tension slot computed from the prosperous pool
+    ['C23710 no busy street', 'r2r-thorp-49', /through a busy street/, slotOf(ARRIVAL_TENSIONS.prosperous, /through a busy street/)],
     // RE-KEYED BY IDENTITY 2026-11-18 (BAR8-SCENES-3, BR25 (4)): the anchor was the endless line in r2r-hamlet-6; BAR8-SCENES (K's 15a)
     // refused it below a village, and the small working quarry's twin prints there now, by design. The same claim (no ore claimed; the
     // slot says what the record bears) on the line that prints, and beside it a town of a village or more where the endless line prints
