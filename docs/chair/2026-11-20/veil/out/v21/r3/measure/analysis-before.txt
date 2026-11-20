@@ -1,0 +1,84 @@
+towns 140 with hideable 92 hidden-free 48 threw 0
+   9 ALL towns power sum!=100 off   e.g. r3m-town-infiltrated-0-12: 87
+  11 CONTROL KEY off diffuse   e.g. r3m-village-under_siege-0-8: 
+  29 CONTROL KEY off null   e.g. r3m-village-insurgency-0-4: 
+   1 CONTROL KEY off organized   e.g. r3m-town-infiltrated-1-82: 
+   7 CONTROL KEY off semi-organized   e.g. r3m-city-indebted-0-36: 
+   3 KEY dm diffuse   e.g. r3m-town-indebted-0-16: 
+  10 KEY dm null   e.g. r3m-town-under_siege-1-88: 
+  29 KEY dm organized   e.g. r3m-town-infiltrated-0-12: 
+  50 KEY dm semi-organized   e.g. r3m-city-infiltrated-0-32: 
+   3 KEY off diffuse   e.g. r3m-town-indebted-0-16: 
+  10 KEY off null   e.g. r3m-town-under_siege-1-88: 
+  29 KEY off organized   e.g. r3m-town-infiltrated-0-12: 
+  50 KEY off semi-organized   e.g. r3m-city-infiltrated-0-32: 
+   1 VR39 type not in free pool dm Arcane black market   e.g. r3m-metropolis-wartime-1-139: Arcane black market
+  15 VR39 type not in free pool dm Magical crime   e.g. r3m-town-infiltrated-0-12: Magical crime
+   5 VR39 type not in free pool dm Organized guild crime   e.g. r3m-metropolis-politically_fractured-0-60: Organized guild crime
+   5 VR39 type not in free pool dm Religious fraud   e.g. r3m-metropolis-politically_fractured-1-140: Religious fraud
+  59 VR39 type not in free pool dm Smuggling   e.g. r3m-city-infiltrated-0-32: Smuggling
+   2 VR39 type not in free pool dm Street gang activity   e.g. r3m-city-infiltrated-1-112: Street gang activity
+  18 VR39 type not in free pool dm null   e.g. r3m-city-under_siege-0-48: null
+   1 VR39 type not in free pool off Arcane black market   e.g. r3m-metropolis-wartime-1-139: Arcane black market
+  15 VR39 type not in free pool off Magical crime   e.g. r3m-town-infiltrated-0-12: Magical crime
+   5 VR39 type not in free pool off Organized guild crime   e.g. r3m-metropolis-politically_fractured-0-60: Organized guild crime
+   5 VR39 type not in free pool off Religious fraud   e.g. r3m-metropolis-politically_fractured-1-140: Religious fraud
+  59 VR39 type not in free pool off Smuggling   e.g. r3m-city-infiltrated-0-32: Smuggling
+   2 VR39 type not in free pool off Street gang activity   e.g. r3m-city-infiltrated-1-112: Street gang activity
+  18 VR39 type not in free pool off null   e.g. r3m-city-under_siege-0-48: null
+   9 economy.complexity dm   e.g. r3m-city-insurgency-0-44: Diversified — broad institutional economic base | B Highly diversified — multiple major revenue streams
+   9 economy.complexity off   e.g. r3m-city-insurgency-0-44: Diversified — broad institutional economic base | B Highly diversified — multiple major revenue streams
+  41 history.tension.crimeWave dm   e.g. r3m-town-infiltrated-0-12: {"type":"crime_wave","f":["Military/Guard","Those who would take the law into their own hands","Thieves' Guild"]}
+  41 history.tension.crimeWave off   e.g. r3m-town-infiltrated-0-12: {"type":"crime_wave","f":["Military/Guard","Those who would take the law into their own hands","Thieves' Guild"]}
+   1 institutions.desc dm   e.g. r3m-city-under_siege-1-118: Merchant oligarchy: Wealthy merchant families hold exclusive civic power; political office is effect | B Wealthy merchant families hold the civic offices; political office is effectivel
+   1 institutions.desc off   e.g. r3m-city-under_siege-1-118: Merchant oligarchy: Wealthy merchant families hold exclusive civic power; political office is effect | B Wealthy merchant families hold the civic offices; political office is effectivel
+   6 power withheld already off   e.g. r3m-town-infiltrated-0-12: 5->4
+  24 power.entry dm c=criminal   e.g. r3m-city-politically_fractured-0-40: Thieves' Guild
+  10 power.entry dm c=economy   e.g. r3m-metropolis-indebted-0-56: The Trade Compact
+   1 power.entry dm c=government   e.g. r3m-metropolis-insurgency-1-134: Commons' Reform Assembly
+   6 power.entry dm c=magic   e.g. r3m-city-insurgency-0-44: Arcane Orders
+   4 power.entry dm c=military   e.g. r3m-city-insurgency-1-104: The Garrison Bloc
+   5 power.entry dm c=noble   e.g. r3m-city-infiltrated-1-112: The Landed Bloc
+   3 power.entry dm c=other   e.g. r3m-city-politically_fractured-1-120: The Grey Council
+   5 power.entry dm c=religious   e.g. r3m-city-insurgency-1-104: Religious Authorities
+  24 power.entry off c=criminal   e.g. r3m-city-politically_fractured-0-40: Thieves' Guild
+  10 power.entry off c=economy   e.g. r3m-metropolis-indebted-0-56: The Trade Compact
+   1 power.entry off c=government   e.g. r3m-metropolis-insurgency-1-134: Commons' Reform Assembly
+   6 power.entry off c=magic   e.g. r3m-city-insurgency-0-44: Arcane Orders
+   4 power.entry off c=military   e.g. r3m-city-insurgency-1-104: The Garrison Bloc
+   5 power.entry off c=noble   e.g. r3m-city-infiltrated-1-112: The Landed Bloc
+   1 power.entry off c=other   e.g. r3m-city-politically_fractured-1-120: The Grey Council
+   5 power.entry off c=religious   e.g. r3m-city-insurgency-1-104: Religious Authorities
+  25 power.relation.entry dm   e.g. r3m-city-politically_fractured-0-40: {"pair":["Merchant Guild Council","Thieves' Guild"],"type":"tense","dir":"stable"}
+   9 power.relation.entry off   e.g. r3m-metropolis-under_siege-0-68: {"pair":["Grand Military Council","Merchant Guilds"],"type":"subordinate","dir":"stable"}
+   6 power.share sum!=100 off   e.g. r3m-town-infiltrated-0-12: 87
+  92 prose.criminal dm   e.g. r3m-town-infiltrated-0-12: {"capture":null,"ringNote":"Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down  | B {"structure":{"glance":"","sentence":"The criminal interest at Makro
+  92 prose.criminal off   e.g. r3m-town-infiltrated-0-12: {"capture":null,"ringNote":"Ask who runs crime here and the answer is one ring. It sets the rules and keeps to them, it can be bargained with, and it puts down  | B {"structure":{"glance":"","sentence":"The criminal interest at Makro
+   1 safety.crimeTypes only-in-A dm Arcane black market   e.g. r3m-metropolis-wartime-1-139: Arcane black market
+   1 safety.crimeTypes only-in-A dm Background crime   e.g. r3m-city-none-0-33: Background crime
+   6 safety.crimeTypes only-in-A dm Commercial crime   e.g. r3m-metropolis-politically_fractured-1-140: Commercial crime
+   6 safety.crimeTypes only-in-A dm Magical crime   e.g. r3m-city-insurgency-0-44: Magical crime
+   5 safety.crimeTypes only-in-A dm Organized guild crime   e.g. r3m-metropolis-politically_fractured-0-60: Organized guild crime
+   5 safety.crimeTypes only-in-A dm Religious fraud   e.g. r3m-metropolis-politically_fractured-1-140: Religious fraud
+  59 safety.crimeTypes only-in-A dm Smuggling   e.g. r3m-city-infiltrated-0-32: Smuggling
+   2 safety.crimeTypes only-in-A dm Street gang activity   e.g. r3m-city-infiltrated-1-112: Street gang activity
+  14 safety.crimeTypes only-in-A dm Survival crime   e.g. r3m-town-indebted-0-16: Survival crime
+  18 safety.crimeTypes only-in-A dm null   e.g. r3m-city-under_siege-0-48: null
+   1 safety.crimeTypes only-in-A off Arcane black market   e.g. r3m-metropolis-wartime-1-139: Arcane black market
+   1 safety.crimeTypes only-in-A off Background crime   e.g. r3m-city-none-0-33: Background crime
+   6 safety.crimeTypes only-in-A off Commercial crime   e.g. r3m-metropolis-politically_fractured-1-140: Commercial crime
+   6 safety.crimeTypes only-in-A off Magical crime   e.g. r3m-city-insurgency-0-44: Magical crime
+   5 safety.crimeTypes only-in-A off Organized guild crime   e.g. r3m-metropolis-politically_fractured-0-60: Organized guild crime
+   5 safety.crimeTypes only-in-A off Religious fraud   e.g. r3m-metropolis-politically_fractured-1-140: Religious fraud
+  59 safety.crimeTypes only-in-A off Smuggling   e.g. r3m-city-infiltrated-0-32: Smuggling
+   2 safety.crimeTypes only-in-A off Street gang activity   e.g. r3m-city-infiltrated-1-112: Street gang activity
+  14 safety.crimeTypes only-in-A off Survival crime   e.g. r3m-town-indebted-0-16: Survival crime
+  18 safety.crimeTypes only-in-A off null   e.g. r3m-city-under_siege-0-48: null
+  46 safety.economicDragDesc dm   e.g. r3m-town-infiltrated-0-12: Some goods change hands here without a licence or a duty paid. | B Some goods change hands here without a licence or a duty paid. It is noticed, and so far it does little harm.
+  46 safety.economicDragDesc off   e.g. r3m-town-infiltrated-0-12: Some goods change hands here without a licence or a duty paid. | B Some goods change hands here without a licence or a duty paid. It is noticed, and so far it does little harm.
+  50 safety.guardEffectivenessDesc dm   e.g. r3m-town-infiltrated-0-12: s and miss the careful. Everyone comes and goes by the gates, so smugglers have to get past the garrison and town watch. | B n around patrol routes. Everyone comes and goes by the gates, so smugglers have to get past the garrison and
+  50 safety.guardEffectivenessDesc off   e.g. r3m-town-infiltrated-0-12: s and miss the careful. Everyone comes and goes by the gates, so smugglers have to get past the garrison and town watch. | B n around patrol routes. Everyone comes and goes by the gates, so smugglers have to get past the garrison and
+  55 safety.plotHooks only-in-A dm   e.g. r3m-city-infiltrated-0-32: "The smugglers have stopped moving their usual goods this week, and nobody can say why."
+  21 safety.safetyDesc dm   e.g. r3m-city-infiltrated-0-32: Crime is a persistent and visible problem. The garrison is overwhelmed or corrupt. Travelers are advised to move in groups and keep valuables hidden. Walls slow entry but don't solve what happens inside them. | B A mix of safer and m
+  21 safety.safetyDesc off   e.g. r3m-city-infiltrated-0-32: Crime is a persistent and visible problem. The garrison is overwhelmed or corrupt. Travelers are advised to move in groups and keep valuables hidden. Walls slow entry but don't solve what happens inside them. | B A mix of safer and m
+free pool types: political violence | loyalty testing | information trade | Survival crime | black market food | debt evasion | Commercial crime | Background crime | resistance activity | collaboration fraud | war profiteering | deserter networks | conscription fraud | desperation theft | displacement crime | cultural friction | black market passage

@@ -2070,6 +2070,278 @@ begin
   return s;
 end $$;
 
+-- ── R3: the roster choices ──────────────────────────────────────────────────────────────────────────
+-- [212: NEW] public._gallery_veil_roster_choices
+-- VEIL-22 (R3; SUB-BRIEF-VR7 point 5; the chairs' VR7, VR11/VR31, VR21, VR29, VR39, VR42 and the power observable, each
+-- vetoable by the owner): THE DRAWN CONDITIONAL ROWS. `doc` is the veiled body, `pub` the projection the veil ran on. On
+-- every marked read, before _gallery_veil_withhold_always: wherever the veil has withheld a POWER (fewer than `pub` held),
+-- the served shares are re-derived to 100 by largest remainder and every relation that names an unserved power goes with
+-- it (VR31: whatever withheld it). WHERE A HOUSE IS HIDDEN WHOLE (a house of `pub` that `doc` no longer lists), each row
+-- chosen from the roster is (a) rebuilt exactly from what is served, or (b) withheld where a hidden house could have chosen
+-- it. A flag "a hidden house raised" is one the stored record holds true (or does not hold: unsure) that the served houses
+-- no longer raise (_gallery_veil_second_homes recomposed the served flags by the engine's own table, item C). What is left
+-- is dense, in order (VR21). A fixed-path pass: no text is scanned but the fields named. Twin: galleryRosterChoices.js ::
+-- applyRosterChoices, rule for rule.
+create or replace function public._gallery_veil_roster_choices(doc jsonb, pub jsonb)
+returns jsonb language plpgsql immutable as $$
+declare
+  s jsonb := doc;
+  p jsonb := case when jsonb_typeof(pub) = 'object' then pub else '{}'::jsonb end;
+  served_ids text[];
+  gone text[];
+  whole boolean;
+  fl jsonb;
+  sfl jsonb;
+  raised jsonb;
+  names text[];
+  n0 int;
+  n1 int;
+  withheld boolean;
+  shares boolean;
+  bas float8[];
+  tot float8;
+  bv float8;
+  q float8[];
+  sh int[];
+  give int;
+  ix int;
+  es jsonb;
+  tier text;
+  cnt int;
+  lbl text;
+  mkt boolean;
+  beneath boolean;
+  sd text;
+  signal boolean;
+  crim_house boolean;
+  -- registry: safety.crimeTypes (each type by the flags that raise it: safetyProfile.js's crime types and the stress flags
+  -- they read, priorityHelpers.js :: getStressFlags; criminalEffective moves only with hasCriminalInst among the houses)
+  raisers jsonb := '{"Smuggling": ["hasSmuggling"], "Organized guild crime": ["hasThievesGuild", "hasCriminalInst"],
+    "Street gang activity": ["hasGangInfra"], "Criminal governance": ["hasCriminalInst"], "Arcane black market": ["hasCriminalInst"],
+    "Religious fraud": ["hasCriminalInst"], "Commercial crime": ["hasCriminalInst"], "Survival crime": ["hasCriminalInst"],
+    "Magical crime": ["hasCriminalInst"], "Background crime": ["hasCriminalInst"], "Lawlessness": ["hasCriminalInst"]}';
+  -- registry: safety.plotHooks (each hook of safetyProfile.js's closed pool by the flag that raises it; [] raised by no house)
+  hooks jsonb := jsonb_build_object(
+    'A local family wants evidence of tax extortion gathered quietly, but the extorter wears an official badge.', '[]'::jsonb,
+    'The garrison chaplain and the commander are the same person, who is authorizing military action for reasons that sound theological.', '[]'::jsonb,
+    'Someone approached the party seeking legitimate authority to settle a dispute. The only "authority" here is the guild.', '["hasCriminalInst"]'::jsonb,
+    'Someone approached the party seeking legitimate authority to settle a dispute. The only "authority" here is whoever holds this quarter.', '["hasCriminalInst"]'::jsonb,
+    'Someone approached the party seeking legitimate authority to settle a dispute. The only "authority" here is whoever holds this stretch of road.', '["hasCriminalInst"]'::jsonb,
+    'A part from the wizard''s tower has gone missing, and the black market has it; the fence wants a price the wizard will not pay.', '["hasCriminalInst"]'::jsonb,
+    'A pilgrim paid a fortune for a holy relic that is obviously fake. They want the fraud exposed without losing their faith in the process.', '["hasCriminalInst"]'::jsonb,
+    'A guild merchant hired the party, then asked for something the guild forbids; the pay is good, and someone else in the guild already knows.', '["hasCriminalInst"]'::jsonb,
+    'The merchant guild''s private security force just detained someone, with no legal authority to do so. The watch is looking the other way.', '["hasGangInfra"]'::jsonb,
+    'The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.', '["hasSmuggling"]'::jsonb,
+    'A smuggler wants one crate moved quietly and will pay well, but will not say what is in it.', '["hasSmuggling"]'::jsonb,
+    'The smugglers have stopped moving their usual goods this week, and nobody can say why.', '["hasSmuggling"]'::jsonb,
+    'A smuggled load went missing on the way in, and the people who paid for it are asking questions.', '["hasSmuggling"]'::jsonb,
+    'The smugglers have gone quiet since the siege closed the roads, and someone wants to know what their last load was.', '["hasSmuggling"]'::jsonb,
+    'The last smuggled load before the siege went missing, and the people who paid for it are asking questions.', '["hasSmuggling"]'::jsonb);
+  -- registry: institutions.desc (the three declared pairs a roster-moved fact, 'rival power', chooses between:
+  -- institutionDescVariants.js, TAIL-HOUSES-5 batch 8)
+  rival text[] := array[
+    'Wealthy merchant families hold exclusive civic power; political office is effectively purchased.',
+    'Wealthy merchant families hold the civic offices; political office is effectively purchased.',
+    'Civic power belongs solely to the wealthy merchant families, and office is bought in all but name.',
+    'Civic power rests with the wealthy merchant families, and office is bought in all but name.',
+    'A handful of rich merchant houses monopolise power here; a political post is, in practice, something one purchases.',
+    'A handful of rich merchant houses hold the seat of power here; a political post is, in practice, something one purchases.'];
+begin
+  if jsonb_typeof(s) is distinct from 'object' then return doc; end if;
+  -- registry: power.entry (VR42: THE GOVERNING POWER'S ROW IS NEVER REMOVED; any other criminal power, by its seat's mark or a
+  -- thieves' name (factionDynamics.js's isCrim), where a house is hidden whole: the criminal power is raised by the crime
+  -- reading a hidden house moves, rulingStructure.js)
+  served_ids := array(select public._gallery_veil_inst_id(e) from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
+                       where jsonb_typeof(e) = 'object');
+  gone := array(select public._gallery_veil_case_fold(public._gallery_veil_str(e -> 'name'))
+                  from jsonb_array_elements(case when jsonb_typeof(p -> 'institutions') = 'array' then p -> 'institutions' else '[]' end) e
+                 where jsonb_typeof(e) = 'object' and not (public._gallery_veil_inst_id(e) = any(served_ids)));
+  whole := cardinality(gone) > 0;
+  if whole and jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then
+    s := jsonb_set(s, '{powerStructure,factions}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> '{powerStructure,factions}') with ordinality x(e, o)
+      where not (jsonb_typeof(e) = 'object' and coalesce(e -> 'isGoverning', 'null') <> 'true'::jsonb
+                 and (translate(public._gallery_veil_str(e -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'
+                      or public._gallery_veil_str(coalesce(e -> 'faction', e -> 'name')) ~* 'thie'))), '[]'));
+  end if;
+  -- registry: power.share (VR11, VR31: wherever any power is withheld, whatever withheld it, the served shares re-derived to
+  -- 100 by LARGEST REMAINDER from the served `power` (a JSON number from 0 to 10^12, else 0; a sum of 0 shares equally),
+  -- the floors, then one more to each of the largest remainders, ties by order: _gallery_veil_apply's income rule)
+  n0 := (select count(*) from jsonb_array_elements(case when jsonb_typeof(p #> '{powerStructure,factions}') = 'array' then p #> '{powerStructure,factions}' else '[]' end) e where jsonb_typeof(e) = 'object');
+  n1 := (select count(*) from jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) e where jsonb_typeof(e) = 'object');
+  -- (VR31: a power the projection itself withheld, a hidden one off a Reveal-DM read, leaves the stored shares short of 100:
+  -- served shares that do not sum to 100 are re-derived too)
+  -- (a share set is one where every served power carries a JSON number: a record whose powers carry none, an old one, has
+  -- no shares to re-derive, and none is added)
+  shares := n1 > 0 and not exists (select 1 from jsonb_array_elements(s #> '{powerStructure,factions}') e
+                                    where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'power') <> 'number');
+  withheld := n1 < n0 or (shares and (select sum((e ->> 'power')::numeric) from jsonb_array_elements(s #> '{powerStructure,factions}') e
+                                       where jsonb_typeof(e) = 'object') <> 100);
+  if withheld and shares then
+    bas := array(select case when jsonb_typeof(e -> 'power') = 'number' and (e ->> 'power')::numeric between 0 and 1e12
+                             then case when public._gallery_veil_num_zero((e ->> 'power')::numeric) then 0::float8 else (e ->> 'power')::float8 end else 0::float8 end
+                   from jsonb_array_elements(s #> '{powerStructure,factions}') with ordinality x(e, o) where jsonb_typeof(e) = 'object' order by o);
+    tot := 0;
+    foreach bv in array bas loop tot := tot + bv; end loop;
+    if not tot > 0 then bas := array_fill(1::float8, array[cardinality(bas)]); tot := cardinality(bas); end if;
+    q := array(select (b / tot) * 100 from unnest(bas) with ordinality u(b, k) order by k);
+    sh := array(select floor(v)::int from unnest(q) with ordinality u(v, k) order by k);
+    give := 100 - coalesce((select sum(x) from unnest(sh) x), 0);
+    for ix in select k from unnest(q) with ordinality u(v, k) order by v - floor(v) desc, k loop
+      exit when give <= 0;
+      sh[ix] := sh[ix] + 1;
+      give := give - 1;
+    end loop;
+    s := jsonb_set(s, '{powerStructure,factions}', coalesce((
+      select jsonb_agg(case when jsonb_typeof(e) = 'object' then e || jsonb_build_object('power', sh[r::int]) else e end order by o)
+        from (select e, o, count(*) filter (where jsonb_typeof(e) = 'object') over (order by o) as r
+                from jsonb_array_elements(s #> '{powerStructure,factions}') with ordinality x(e, o)) z), '[]'));
+  end if;
+  -- registry: power.relation.entry
+  -- registry: power.relation.direction (VR37 (b): the word goes with its relation): wherever a power is withheld, a relation
+  -- stays only where both of its `pair` name a served power (one that is not an object or names none: unsure, withheld)
+  if withheld and jsonb_typeof(s #> '{powerStructure,factionRelationships}') = 'array' then
+    names := array(select v from jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) f,
+      lateral (select f ->> 'faction' as v where jsonb_typeof(f -> 'faction') = 'string' union select f ->> 'name' where jsonb_typeof(f -> 'name') = 'string') w);
+    s := jsonb_set(s, '{powerStructure,factionRelationships}', coalesce((select jsonb_agg(e order by o)
+      from jsonb_array_elements(s #> '{powerStructure,factionRelationships}') with ordinality x(e, o)
+     where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'pair') = 'array' and jsonb_array_length(e -> 'pair') > 0
+       and not exists (select 1 from jsonb_array_elements(e -> 'pair') pn where jsonb_typeof(pn) <> 'string' or not ((pn #>> '{}') = any(names)))), '[]'));
+  end if;
+  if not whole then return s; end if;
+
+  -- the stored and the served house flags (economicState.safetyProfile.compound.inst, else economicState.compound.inst)
+  fl := coalesce(case when jsonb_typeof(p #> '{economicState,safetyProfile,compound,inst}') = 'object' then p #> '{economicState,safetyProfile,compound,inst}' end,
+                 case when jsonb_typeof(p #> '{economicState,compound,inst}') = 'object' then p #> '{economicState,compound,inst}' end, '{}');
+  sfl := coalesce(case when jsonb_typeof(s #> '{economicState,safetyProfile,compound,inst}') = 'object' then s #> '{economicState,safetyProfile,compound,inst}' end,
+                  case when jsonb_typeof(s #> '{economicState,compound,inst}') = 'object' then s #> '{economicState,compound,inst}' end, '{}');
+  raised := (select jsonb_object_agg(k, not coalesce(sfl -> k = 'true'::jsonb, false) and not coalesce(fl -> k = 'false'::jsonb, false))
+               from unnest(array['hasCriminalInst', 'hasSmuggling', 'hasThievesGuild', 'hasGangInfra', 'hasMarket']) k);
+  beneath := exists (select 1 from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
+                      where jsonb_typeof(e) = 'object' and public._gallery_veil_str(e -> 'name') ~* 'smuggling (network|operation)|underground (network|city)');
+  es := s -> 'economicState';
+
+  -- registry: economy.complexity ((a): prosperity.js :: deriveEconomicComplexity over the SERVED rows: the tier, the income
+  -- rows' count and shares, the exports' count, a served house whose name holds market, trading, merchant or guild, the
+  -- food record; an input the ladder cannot read: withheld)
+  if jsonb_typeof(es) = 'object' and es ? 'economicComplexity' then
+    if jsonb_typeof(es -> 'tier') = 'string' and jsonb_typeof(es -> 'incomeSources') = 'array' and jsonb_typeof(es -> 'primaryExports') = 'array' then
+      tier := es ->> 'tier';
+      cnt := jsonb_array_length(es -> 'incomeSources');
+      mkt := exists (select 1 from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e,
+                            lateral (select public._gallery_veil_case_fold(public._gallery_veil_str(e -> 'name')) as n) h
+                      where jsonb_typeof(e) = 'object' and (position('market' in h.n) > 0 or position('trading' in h.n) > 0 or position('merchant' in h.n) > 0 or position('guild' in h.n) > 0));
+      if exists (select 1 from jsonb_array_elements(es -> 'incomeSources') r where jsonb_typeof(r -> 'percentage') = 'number' and (r ->> 'percentage')::numeric * 2 >= 100) then
+        cnt := least(cnt, 5);
+      elsif exists (select 1 from jsonb_array_elements(es -> 'incomeSources') r where jsonb_typeof(r -> 'percentage') = 'number' and (r ->> 'percentage')::numeric >= 20) then
+        cnt := least(cnt, 8);
+      end if;
+      lbl := case when tier in ('metropolis', 'city') then case when cnt >= 9 then 'Highly diversified ' || chr(8212) || ' multiple major revenue streams'
+                                                            when cnt >= 6 then 'Diversified ' || chr(8212) || ' broad institutional economic base'
+                                                            else 'Concentrated ' || chr(8212) || ' fewer revenue streams than scale suggests' end
+                  when tier = 'town' then case when mkt and cnt >= 6 then 'Diversified market economy'
+                                               when cnt >= 4 then 'Specialized production and trade'
+                                               else 'Limited ' || chr(8212) || ' narrow economic base for this scale' end
+                  when tier = 'village' then case when mkt then 'Mixed subsistence and market'
+                                                  when jsonb_array_length(es -> 'primaryExports') >= 4 then 'Agricultural surplus with trade links'
+                                                  else 'Subsistence with minor surplus' end
+                  when jsonb_array_length(es -> 'primaryExports') >= 3 then 'Subsistence with surplus'
+                  else 'Subsistence ' || chr(8212) || ' survival economy' end;
+      if public._gallery_veil_truthy(es #> '{foodSecurity,foodRecord}') and not public._gallery_veil_truthy(es #> '{foodSecurity,foodRecord,growsMoreThanEats}')
+         and lbl ~* 'surplus' then
+        lbl := 'Subsistence ' || chr(8212) || ' survival economy';
+      end if;
+      s := jsonb_set(s, '{economicState,economicComplexity}', to_jsonb(lbl));
+    else
+      s := s #- '{economicState,economicComplexity}';
+    end if;
+  end if;
+
+  if jsonb_typeof(s #> '{economicState,safetyProfile}') = 'object' then
+    -- registry: safety.economicDragDesc ((b): the line reads the black-market share, which moves with hasCriminalInst, the
+    -- market flag and the organised crime the houses' names read (safetyProfile.js, factsOf(...).crime); withheld where a
+    -- hidden house raised either flag or carried such a name; VR42: a criminal governing body moves none of them)
+    if (s #> '{economicState,safetyProfile}') ? 'economicDragDesc'
+       and ((raised -> 'hasCriminalInst') = 'true'::jsonb or (raised -> 'hasMarket') = 'true'::jsonb
+            or exists (select 1 from unnest(gone) g where position('thieves'' guild' in g) > 0 or position('thieves guild' in g) > 0
+                         or position('multiple criminal' in g) > 0 or position('underground city' in g) > 0 or position('front business' in g) > 0)) then
+      s := s #- '{economicState,safetyProfile,economicDragDesc}';
+    end if;
+    -- registry: safety.guardEffectivenessDesc ((a): safetyLineTruth.js :: gatesSmugglersLine for the served houses: where
+    -- none moves goods beneath the walls, the twin, its force noun read back from the sentence)
+    if not beneath and jsonb_typeof(s #> '{economicState,safetyProfile,guardEffectivenessDesc}') = 'string' then
+      s := jsonb_set(s, '{economicState,safetyProfile,guardEffectivenessDesc}', to_jsonb(regexp_replace(s #>> '{economicState,safetyProfile,guardEffectivenessDesc}',
+        ' The ([^.]+) keeps? the gates, but smugglers have ways in beneath the walls\.', ' Everyone comes and goes by the gates, so smugglers have to get past the \1.')));
+    end if;
+    -- registry: safety.safetyDesc ((a) the foothold word for the served houses, safetyLineTruth.js :: footholdWord; the Very
+    -- Safe gates line, whose twin is resolved by the facts, and the criminal-governance line a hidden house raised: withheld)
+    if jsonb_typeof(s #> '{economicState,safetyProfile,safetyDesc}') = 'string' then
+      sd := s #>> '{economicState,safetyProfile,safetyDesc}';
+      if (not beneath and position(' The guard keeps the gates, but smugglers have ways in beneath the walls.' in sd) > 0)
+         or (position('The criminals are the government here.' in sd) > 0 and (raised -> 'hasCriminalInst') = 'true'::jsonb) then
+        s := s #- '{economicState,safetyProfile,safetyDesc}';
+      elsif position('organized crime has a limited foothold.' in sd) > 0
+            and not coalesce(sfl -> 'hasCriminalInst' = 'true'::jsonb, false)
+            and not exists (select 1 from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
+                             where jsonb_typeof(e) = 'object' and (public._gallery_veil_str(e -> 'name') || ' ' || public._gallery_veil_str(e -> 'catalogId')) ~* 'thieves|criminal|gang|smuggler|fence|gambl') then
+        s := jsonb_set(s, '{economicState,safetyProfile,safetyDesc}', to_jsonb(replace(sd, 'organized crime has a limited foothold.', 'organized crime has found no foothold.')));
+      end if;
+    end if;
+    -- registry: safety.crimeTypes ((b) BY ATTRIBUTION, VR39: an entry leaves where a flag that raises its type was raised by a
+    -- hidden house; an entry a shown house or a crisis raises stays; an entry with no type: unsure, withheld. VR29: the
+    -- array stays an array)
+    if jsonb_typeof(s #> '{economicState,safetyProfile,crimeTypes}') = 'array' then
+      s := jsonb_set(s, '{economicState,safetyProfile,crimeTypes}', coalesce((select jsonb_agg(e order by o)
+        from jsonb_array_elements(s #> '{economicState,safetyProfile,crimeTypes}') with ordinality x(e, o)
+       where jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'type') = 'string'
+         and not exists (select 1 from jsonb_array_elements_text(coalesce(raisers -> (e ->> 'type'), '[]')) fk where (raised -> fk) = 'true'::jsonb)), '[]'));
+    end if;
+    -- registry: safety.plotHooks ((b): a hook stays where it is of the pool and no flag that raises it was raised by a hidden
+    -- house; a hook the pool does not hold: unsure, withheld)
+    if jsonb_typeof(s #> '{economicState,safetyProfile,plotHooks}') = 'array' then
+      s := jsonb_set(s, '{economicState,safetyProfile,plotHooks}', coalesce((select jsonb_agg(e order by o)
+        from jsonb_array_elements(s #> '{economicState,safetyProfile,plotHooks}') with ordinality x(e, o)
+       where jsonb_typeof(e) = 'string' and hooks ? (e #>> '{}')
+         and not exists (select 1 from jsonb_array_elements_text(hooks -> (e #>> '{}')) fk where (raised -> fk) = 'true'::jsonb)), '[]'));
+    end if;
+  end if;
+
+  -- the served crime signal (crimeSignal.js :: crimeSignalOf): a served power whose seat is criminal, a served criminal house
+  crim_house := exists (select 1 from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
+                         where jsonb_typeof(e) = 'object'
+                           and (translate(public._gallery_veil_str(e -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'
+                                or translate(public._gallery_veil_str(e -> 'priorityCategory'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'));
+  signal := crim_house or exists (select 1 from jsonb_array_elements(case when jsonb_typeof(s #> '{powerStructure,factions}') = 'array' then s #> '{powerStructure,factions}' else '[]' end) e
+                                   where jsonb_typeof(e) = 'object' and translate(public._gallery_veil_str(e -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal');
+  -- registry: history.tension.crimeWave ((b): the crime_wave tension where the SERVED crime signal is false)
+  if not signal and jsonb_typeof(s #> '{history,currentTensions}') = 'array' then
+    s := jsonb_set(s, '{history,currentTensions}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> '{history,currentTensions}') with ordinality x(e, o)
+      where not (jsonb_typeof(e) = 'object' and e -> 'type' = '"crime_wave"'::jsonb)), '[]'));
+  end if;
+  -- registry: history.event.crimeWave ((b): an event of type crime_wave, and its timeline copy, where no served criminal house stands)
+  if not crim_house then
+    foreach sd in array array['historicalEvents', 'eventsTimeline'] loop
+      if jsonb_typeof(s #> array['history', sd]) = 'array' then
+        s := jsonb_set(s, array['history', sd], coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> array['history', sd]) with ordinality x(e, o)
+          where not (jsonb_typeof(e) = 'object' and e -> 'type' = '"crime_wave"'::jsonb)), '[]'));
+      end if;
+    end loop;
+  end if;
+  -- registry: institutions.desc ((b): a description of a declared pair the roster-moved fact 'rival power' chose, withheld)
+  if jsonb_typeof(s -> 'institutions') = 'array' then
+    s := jsonb_set(s, '{institutions}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' and jsonb_typeof(e -> 'desc') = 'string' and (e ->> 'desc') = any(rival)
+                                                                        then e - 'desc' else e end order by o), '[]')
+                                           from jsonb_array_elements(s -> 'institutions') with ordinality x(e, o)));
+  end if;
+  -- registry: prose.criminal ((b): the criminal desk, composed from the crime key over the roster, by the house's eye)
+  if jsonb_typeof(s #> '{publicProse,blocks}') = 'object' then
+    s := jsonb_set(s, '{publicProse,blocks}', (s #> '{publicProse,blocks}') - 'defense:criminal');
+  end if;
+  return s;
+end $$;
+
+-- VR27 (as amended): called only inside the definer reads (by _gallery_veil), revoked by name
+revoke execute on function public._gallery_veil_roster_choices(jsonb, jsonb) from public, anon, authenticated;
+
 -- [212: RESTATED (211's statement, with the cure)] public._gallery_veil
 -- VEIL-21 (R2): 211's statement, and _gallery_veil_withhold_always run on every body it returns: last on the veiled body,
 -- and, where the share is unmarked (no veil: 211 returned no body and the reads served their projection as before), on
@@ -2093,9 +2365,10 @@ begin
   -- VEIL-21 (R2): an unmarked listing is served as before (the reads take `body` where it is given), but for what no
   -- non-owner read sends whatever the veil (_gallery_veil_withhold_always): the gallery read, the import and the campaign
   -- map's member (get_gallery_map serves `body` where there is one), each its own projection less those rows
+  -- VEIL-22 (R3): and the roster choices before it (nothing is hidden whole there: VR31's shares alone can move)
   if res is null then
     return jsonb_build_object('served', public._gallery_veil_served(ov, null, to_jsonb(people), copy))
-      || case when jsonb_typeof(pub) = 'object' then jsonb_build_object('body', public._gallery_veil_withhold_always(pub)) else '{}'::jsonb end;
+      || case when jsonb_typeof(pub) = 'object' then jsonb_build_object('body', public._gallery_veil_withhold_always(public._gallery_veil_roster_choices(pub, pub))) else '{}'::jsonb end;
   end if;
   body := public._gallery_veil_apply(pub, res);
   -- a person card with neither a name nor a role is dropped, as the client's projection drops it
@@ -2104,6 +2377,8 @@ begin
     body := jsonb_set(body, '{npcs}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(body -> 'npcs') with ordinality x(e, o)
       where jsonb_typeof(e) <> 'object' or public._gallery_veil_truthy(e -> 'name') or public._gallery_veil_truthy(e -> 'role')), '[]'));
   end if;
+  -- VEIL-22 (R3): the drawn conditional rows (the roster choices), then R2's step
+  body := public._gallery_veil_roster_choices(body, pub);
   -- VEIL-21 (R2): last, what no non-owner read sends whatever the veil
   body := public._gallery_veil_withhold_always(body);
   return jsonb_build_object(
