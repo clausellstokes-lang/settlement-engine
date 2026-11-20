@@ -1,0 +1,2187 @@
+{
+ "tally": {
+  "band economy.prosperity": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "band economy.prosperityStanding": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "band safety.safetyLabel": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "band defence.readiness.label": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "band defence.readiness.colours": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "band legitimacy.label+colours": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "precise legitimacy.score (from served labels)": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "precise defence.scores.disaster": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "precise defence.scores.economic": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "precise defence.scores.internal": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "precise defence.scores.magical": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "precise defence.scores.military": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "precise defence.scores.monster": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "precise defence.economicGates": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "precise food.record.storageMonths (served standing share)": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "precise food.record.storageMonths (visitor standing)": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:state.publicOrder.beside <- safety": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:state.publicOrder.rung.sentence <- safety": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:threat.economic.sentence <- safety": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:wall.rationale.sentence <- safety": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose economy:economics.prosperityHeader.sentence <- safety": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose economy:economics.prosperityRung.sentence <- safety": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose stressors:overview.conditionSeverity.sentence <- safety": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:state.publicOrder.beside <- defence": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:state.publicOrder.rung.sentence <- defence": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:threat.economic.sentence <- defence": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:wall.rationale.sentence <- defence": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose economy:economics.prosperityHeader.sentence <- defence": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose economy:economics.prosperityRung.sentence <- defence": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose stressors:overview.conditionSeverity.sentence <- defence": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:state.publicOrder.beside <- prosperity": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:state.publicOrder.rung.sentence <- prosperity": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:threat.economic.sentence <- prosperity": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:wall.rationale.sentence <- prosperity": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose economy:economics.prosperityHeader.sentence <- prosperity": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose economy:economics.prosperityRung.sentence <- prosperity": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "prose stressors:overview.conditionSeverity.sentence <- prosperity": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "precise conditions.severity (vs re-promotion)": {
+   "n": 50,
+   "sane": 50,
+   "fails": 0,
+   "ex": []
+  },
+  "derive threw": {
+   "n": 3,
+   "sane": 3,
+   "fails": 3,
+   "ex": [
+    "rv10-inv-village-wartime-0-7: [rngContext] a PRNG helper was called with no active seeded RNG. The result woul",
+    "rv10-inv-village-indebted-1-76: [rngContext] a PRNG helper was called with no active seeded RNG. The result woul",
+    "rv10-inv-village-none-1-78: [rngContext] a PRNG helper was called with no active seeded RNG. The result woul"
+   ]
+  }
+ },
+ "promo": {
+  "prosperity": [],
+  "safety": [],
+  "readiness": [],
+  "standing": []
+ },
+ "vocab": {
+  "Moderate": 12,
+  "Very Safe": 7,
+  "Dangerous — Insurgency": 1,
+  "Tense — Debt Crisis": 4,
+  "Controlled — Occupation Curfew": 4,
+  "Strained — Political Fracture": 2,
+  "Safe": 4,
+  "Volatile — Political Fracture": 3,
+  "Strained — Wartime": 3,
+  "Tense — Insurgency": 3,
+  "Strained — Insurgency": 3,
+  "Tense — Wartime": 1,
+  "Tense — Political Fracture": 1,
+  "Strained — Debt Crisis": 2
+ },
+ "food": {
+  "calls": 53,
+  "sameBirth": 11,
+  "births": 11,
+  "direct": 0,
+  "ex": []
+ },
+ "names": [],
+ "namesN": 0,
+ "comp": [
+  {
+   "seed": "rv10-inv-village-none-0-1",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 4,
+   "incRowsS": 4,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-village-none-0-2",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 2,
+   "incRowsS": 2,
+   "powA": 100,
+   "powS": 100,
+   "facA": 2,
+   "facS": 2,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-village-none-0-3",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 5,
+   "incRowsS": 5,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-village-infiltrated-0-4",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 2,
+   "incRowsS": 2,
+   "powA": 100,
+   "powS": 100,
+   "facA": 2,
+   "facS": 2,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-village-insurgency-0-5",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 79,
+   "incRowsA": 3,
+   "incRowsS": 2,
+   "powA": 100,
+   "powS": 100,
+   "facA": 2,
+   "facS": 2,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-village-indebted-0-6",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 4,
+   "incRowsS": 4,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-village-occupied-0-9",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 6,
+   "incRowsS": 6,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-village-politically_fractured-0-10",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 2,
+   "incRowsS": 2,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-town-none-0-12",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 5,
+   "incRowsS": 5,
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-town-none-0-13",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 8,
+   "incRowsS": 8,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-town-infiltrated-0-14",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 9,
+   "incRowsS": 9,
+   "powA": 100,
+   "powS": 92,
+   "facA": 5,
+   "facS": 4,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-town-indebted-0-16",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 6,
+   "incRowsS": 6,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-town-politically_fractured-0-20",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 8,
+   "incRowsS": 8,
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-town-none-0-22",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 11,
+   "incRowsS": 11,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-town-none-0-23",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 9,
+   "incRowsS": 9,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-town-infiltrated-0-24",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 9,
+   "incRowsS": 9,
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-town-insurgency-0-25",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 87,
+   "incRowsA": 8,
+   "incRowsS": 7,
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-town-indebted-0-26",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 9,
+   "incRowsS": 9,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-town-none-0-28",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 8,
+   "incRowsS": 8,
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-town-occupied-0-29",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 4,
+   "incRowsS": 4,
+   "powA": 100,
+   "powS": 100,
+   "facA": 2,
+   "facS": 2,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-city-none-0-43",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 10,
+   "incRowsS": 10,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-city-insurgency-0-45",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 82,
+   "incRowsA": 13,
+   "incRowsS": 12,
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-city-none-0-48",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 9,
+   "incRowsS": 9,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-51",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 82,
+   "incRowsA": 11,
+   "incRowsS": 10,
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7,
+   "conflictsA": 3,
+   "conflictsS": 3
+  },
+  {
+   "seed": "rv10-inv-village-none-1-71",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 3,
+   "incRowsS": 3,
+   "powA": 100,
+   "powS": 100,
+   "facA": 1,
+   "facS": 1,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-village-none-1-72",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 3,
+   "incRowsS": 3,
+   "powA": 100,
+   "powS": 100,
+   "facA": 2,
+   "facS": 2,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-village-none-1-73",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 6,
+   "incRowsS": 6,
+   "powA": 100,
+   "powS": 100,
+   "facA": 2,
+   "facS": 2,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-village-infiltrated-1-74",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 1,
+   "incRowsS": 1,
+   "powA": 100,
+   "powS": 100,
+   "facA": 2,
+   "facS": 2,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-village-insurgency-1-75",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 2,
+   "incRowsS": 2,
+   "powA": 100,
+   "powS": 100,
+   "facA": 2,
+   "facS": 2,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-village-wartime-1-77",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 1,
+   "incRowsS": 1,
+   "powA": 100,
+   "powS": 100,
+   "facA": 1,
+   "facS": 1,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-village-occupied-1-79",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 4,
+   "incRowsS": 4,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-village-politically_fractured-1-80",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 3,
+   "incRowsS": 3,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-town-none-1-81",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 9,
+   "incRowsS": 9,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 3,
+   "conflictsS": 3
+  },
+  {
+   "seed": "rv10-inv-town-none-1-82",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 6,
+   "incRowsS": 6,
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-town-none-1-83",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 7,
+   "incRowsS": 7,
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-town-infiltrated-1-84",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 9,
+   "incRowsS": 9,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-town-insurgency-1-85",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 79,
+   "incRowsA": 6,
+   "incRowsS": 5,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-town-indebted-1-86",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 5,
+   "incRowsS": 5,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-town-none-1-88",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 5,
+   "incRowsS": 5,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-town-politically_fractured-1-90",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 9,
+   "incRowsS": 9,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-town-none-1-93",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 6,
+   "incRowsS": 6,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 3,
+   "conflictsS": 3
+  },
+  {
+   "seed": "rv10-inv-town-infiltrated-1-94",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 6,
+   "incRowsS": 6,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-town-wartime-1-97",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 8,
+   "incRowsS": 8,
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-city-indebted-1-106",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 9,
+   "incRowsS": 9,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 3,
+   "conflictsS": 3
+  },
+  {
+   "seed": "rv10-inv-city-occupied-1-109",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 12,
+   "incRowsS": 12,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-city-insurgency-1-115",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 82,
+   "incRowsA": 14,
+   "incRowsS": 13,
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-city-wartime-1-117",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 11,
+   "incRowsS": 11,
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-city-none-1-118",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 11,
+   "incRowsS": 11,
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-city-politically_fractured-1-120",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 7,
+   "incRowsS": 7,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-metropolis-indebted-1-136",
+   "hidden": 0,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 14,
+   "incRowsS": 14,
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8,
+   "conflictsA": 2,
+   "conflictsS": 2
+  }
+ ],
+ "towns": [
+  {
+   "seed": "rv10-inv-village-none-0-1",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Moderate",
+   "pband": "Comfortable",
+   "poServed": "\"Chaltun pays nobody to keep the peace, and trouble here is settled among its own people.\"",
+   "poSwap": "\"Chaltun pays nobody to keep the peace, and trouble here is settled among its own people.\"",
+   "poBeside": "\"Chaltun pays nobody to keep the peace, and trouble here is settled among its own people.\"",
+   "ratioA": 0.5,
+   "ratioS": 0.5,
+   "ratioServed": 0.5,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-village-none-0-2",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Very Safe",
+   "pband": "Poor",
+   "poServed": "\"Hagioakra has no watch; its neighbours notice anything out of place, and are quick to say so.\"",
+   "poSwap": "\"Hagioakra has no watch; its neighbours notice anything out of place, and are quick to say so.\"",
+   "poBeside": "\"Hagioakra has no watch; its neighbours notice anything out of place, and are quick to say so.\"",
+   "ratioA": 11.5,
+   "ratioS": 11.5,
+   "ratioServed": 11.5,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-village-none-0-3",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Moderate",
+   "pband": "Wealthy",
+   "poServed": "\"Nobody at Eascombe is paid to keep order; what order the place has, its own people keep.\"",
+   "poSwap": "\"Nobody at Eascombe is paid to keep order; what order the place has, its own people keep.\"",
+   "poBeside": "\"Nobody at Eascombe is paid to keep order; what order the place has, its own people keep.\"",
+   "ratioA": 0.3,
+   "ratioS": 0.3,
+   "ratioServed": 0.3,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-village-infiltrated-0-4",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Moderate",
+   "pband": "Comfortable",
+   "poServed": "\"With no gaol at Albacastra, nobody who does wrong here can be locked away; most go on living beside the people they wronged.\"",
+   "poSwap": "\"With no gaol at Albacastra, nobody who does wrong here can be locked away; most go on living beside the people they wronged.\"",
+   "poBeside": "\"With no gaol at Albacastra, nobody who does wrong here can be locked away; most go on living beside the people they wronged.\"",
+   "ratioA": 0.6,
+   "ratioS": 0.6,
+   "ratioServed": 0.6,
+   "sevServed": "\"This is the first thing anyone in Albacastra will tell you about, and most of what is done there now is done around it.\"",
+   "sevSwap": "\"This is the first thing anyone in Albacastra will tell you about, and most of what is done there now is done around it.\"",
+   "sevStored": [
+    0.55
+   ],
+   "sevCf": [
+    0.55
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-village-insurgency-0-5",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Dangerous — Insurgency",
+   "pband": "Struggling",
+   "poServed": "\"People at Skaldaker keep to their own doorways after dark, and nobody goes to the far end of the place without a reason.\"",
+   "poSwap": "\"People at Skaldaker keep to their own doorways after dark, and nobody goes to the far end of the place without a reason.\"",
+   "poBeside": "\"People at Skaldaker keep to their own doorways after dark, and nobody goes to the far end of the place without a reason.\"",
+   "ratioA": 0.1,
+   "ratioS": 0.1,
+   "ratioServed": 0.1,
+   "sevServed": "\"The village is at its limit. There is no capacity left to absorb this, and nothing behind it that could absorb the next thing.\"",
+   "sevSwap": "\"The village is at its limit. There is no capacity left to absorb this, and nothing behind it that could absorb the next thing.\"",
+   "sevStored": [
+    0.81
+   ],
+   "sevCf": [
+    0.81
+   ],
+   "sevBandServed": [
+    "critical"
+   ],
+   "incomeGone": [
+    "Shadow Economy (untaxed):21"
+   ]
+  },
+  {
+   "seed": "rv10-inv-village-indebted-0-6",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Tense — Debt Crisis",
+   "pband": "Comfortable",
+   "poServed": "\"The law at Niedermoor moves quickest when a debt is owed to the village's creditors.\"",
+   "poSwap": "\"The law at Niedermoor moves quickest when a debt is owed to the village's creditors.\"",
+   "poBeside": "\"The law at Niedermoor moves quickest when a debt is owed to the village's creditors.\"",
+   "ratioA": 1.9,
+   "ratioS": 1.9,
+   "ratioServed": 1.9,
+   "sevServed": "\"Above everything else, this is what the village is living through now.\"",
+   "sevSwap": "\"Above everything else, this is what the village is living through now.\"",
+   "sevStored": [
+    0.55
+   ],
+   "sevCf": [
+    0.55
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-village-occupied-0-9",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Controlled — Occupation Curfew",
+   "pband": "Poor",
+   "poServed": "\"There is a curfew at Uaxacbalam now, and checkpoints; ordinary theft has dropped, and people fear informers more than thieves.\"",
+   "poSwap": "\"There is a curfew at Uaxacbalam now, and checkpoints; ordinary theft has dropped, and people fear informers more than thieves.\"",
+   "poBeside": "\"There is a curfew at Uaxacbalam now, and checkpoints; ordinary theft has dropped, and people fear informers more than thieves.\"",
+   "ratioA": 0.6,
+   "ratioS": 0.6,
+   "ratioServed": 0.6,
+   "sevServed": "\"The strain is severe. Uaxacbalam is meeting it by giving up things it would rather keep.\"",
+   "sevSwap": "\"The strain is severe. Uaxacbalam is meeting it by giving up things it would rather keep.\"",
+   "sevStored": [
+    0.59
+   ],
+   "sevCf": [
+    0.59
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-village-politically_fractured-0-10",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Strained — Political Fracture",
+   "pband": "Struggling",
+   "poServed": "\"At Tikalac a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.\"",
+   "poSwap": "\"At Tikalac a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.\"",
+   "poBeside": "\"At Tikalac a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.\"",
+   "ratioA": 1.7,
+   "ratioS": 1.7,
+   "ratioServed": 1.7,
+   "sevServed": "\"Above everything else, this is what the village is living through now.\"",
+   "sevSwap": "\"Above everything else, this is what the village is living through now.\"",
+   "sevStored": [
+    0.73
+   ],
+   "sevCf": [
+    0.73
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-none-0-12",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Moderate",
+   "pband": "Wealthy",
+   "poServed": "\"Shripuram has people who keep order, and order holds about as well as anyone here expects.\"",
+   "poSwap": "\"Shripuram has people who keep order, and order holds about as well as anyone here expects.\"",
+   "poBeside": "\"Shripuram has people who keep order, and order holds about as well as anyone here expects.\"",
+   "ratioA": 1.6,
+   "ratioS": 1.6,
+   "ratioServed": 1.6,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-none-0-13",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Safe",
+   "pband": "Wealthy",
+   "poServed": "\"Crime at Muultitlan stays small: things are taken occasionally and the taking does not spread, because the people who would spread it are known.\"",
+   "poSwap": "\"Crime at Muultitlan stays small: things are taken occasionally and the taking does not spread, because the people who would spread it are known.\"",
+   "poBeside": "\"Crime at Muultitlan stays small: things are taken occasionally and the taking does not spread, because the people who would spread it are known.\"",
+   "ratioA": 2.2,
+   "ratioS": 2.2,
+   "ratioServed": 2.2,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-infiltrated-0-14",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Very Safe",
+   "pband": "Wealthy",
+   "poServed": "\"The town's record of crimes at Qaryahdarya is short: enforcement far outweighs the criminals, and there is little to write down.\"",
+   "poSwap": "\"The town's record of crimes at Qaryahdarya is short: enforcement far outweighs the criminals, and there is little to write down.\"",
+   "poBeside": "\"The town's record of crimes at Qaryahdarya is short: enforcement far outweighs the criminals, and there is little to write down.\"",
+   "ratioA": 4.1,
+   "ratioS": 4.1,
+   "ratioServed": 4.1,
+   "sevServed": "\"It is felt every week, though not everywhere and not badly.\"",
+   "sevSwap": "\"It is felt every week, though not everywhere and not badly.\"",
+   "sevStored": [
+    0.39
+   ],
+   "sevCf": [
+    0.39
+   ],
+   "sevBandServed": [
+    "medium"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-indebted-0-16",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Tense — Debt Crisis",
+   "pband": "Poor",
+   "poServed": "\"At Megalkastro the creditors' agent decides which wrongs are worth pursuing, and the debts come first.\"",
+   "poSwap": "\"At Megalkastro the creditors' agent decides which wrongs are worth pursuing, and the debts come first.\"",
+   "poBeside": "\"At Megalkastro the creditors' agent decides which wrongs are worth pursuing, and the debts come first.\"",
+   "ratioA": 0.3,
+   "ratioS": 0.3,
+   "ratioServed": 0.3,
+   "sevServed": "\"Megalkastro now spends real hands and coin on this.\"",
+   "sevSwap": "\"Megalkastro now spends real hands and coin on this.\"",
+   "sevStored": [
+    0.49
+   ],
+   "sevCf": [
+    0.49
+   ],
+   "sevBandServed": [
+    "medium"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-politically_fractured-0-20",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Strained — Political Fracture",
+   "pband": "Prosperous",
+   "poServed": "\"At Qinghu a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.\"",
+   "poSwap": "\"At Qinghu a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.\"",
+   "poBeside": "\"At Qinghu a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.\"",
+   "ratioA": 1.7,
+   "ratioS": 1.7,
+   "ratioServed": 1.7,
+   "sevServed": "\"The pressure is genuine now. Choices are being made because of it that would not have been made otherwise.\"",
+   "sevSwap": "\"The pressure is genuine now. Choices are being made because of it that would not have been made otherwise.\"",
+   "sevStored": [
+    0.49
+   ],
+   "sevCf": [
+    0.49
+   ],
+   "sevBandServed": [
+    "medium"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-none-0-22",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Volatile — Political Fracture",
+   "pband": "Comfortable",
+   "poServed": "\"Each power at Shivabagh keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.\"",
+   "poSwap": "\"Each power at Shivabagh keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.\"",
+   "poBeside": "\"Each power at Shivabagh keeps its own list of offences, so a wrong punished in one district goes unpunished in the next.\"",
+   "ratioA": 0.9,
+   "ratioS": 0.9,
+   "ratioServed": 0.9,
+   "sevServed": "\"Above everything else, this is what the town is living through now.\"",
+   "sevSwap": "\"Above everything else, this is what the town is living through now.\"",
+   "sevStored": [
+    0.55
+   ],
+   "sevCf": [
+    0.55
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-none-0-23",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Strained — Wartime",
+   "pband": "Poor",
+   "poServed": "\"Strangers at Yucheng are watched and questioned; the war has made everyone careful.\"",
+   "poSwap": "\"Strangers at Yucheng are watched and questioned; the war has made everyone careful.\"",
+   "poBeside": "\"Strangers at Yucheng are watched and questioned; the war has made everyone careful.\"",
+   "ratioA": 2.8,
+   "ratioS": 2.8,
+   "ratioServed": 2.8,
+   "sevServed": "\"This is the first thing anyone in Yucheng will tell you about, and most of what is done there now is done around it.\"",
+   "sevSwap": "\"This is the first thing anyone in Yucheng will tell you about, and most of what is done there now is done around it.\"",
+   "sevStored": [
+    0.66
+   ],
+   "sevCf": [
+    0.66
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-infiltrated-0-24",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Very Safe",
+   "pband": "Comfortable",
+   "poServed": "\"Nothing much happens to people at Darhannuur. The watch is heavier than anything working against it, by a margin the town does not have to think about.\"",
+   "poSwap": "\"Nothing much happens to people at Darhannuur. The watch is heavier than anything working against it, by a margin the town does not have to think about.\"",
+   "poBeside": "\"Nothing much happens to people at Darhannuur. The watch is heavier than anything working against it, by a margin the town does not have to think about.\"",
+   "ratioA": 5.1,
+   "ratioS": 5.1,
+   "ratioServed": 5.1,
+   "sevServed": "\"It is felt every week, though not everywhere and not badly.\"",
+   "sevSwap": "\"It is felt every week, though not everywhere and not badly.\"",
+   "sevStored": [
+    0.35
+   ],
+   "sevCf": [
+    0.35
+   ],
+   "sevBandServed": [
+    "medium"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-insurgency-0-25",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Tense — Insurgency",
+   "pband": "Prosperous",
+   "poServed": "\"Patrols at Maghton have changed their routes, and some districts are closed to anyone without business there.\"",
+   "poSwap": "\"Patrols at Maghton have changed their routes, and some districts are closed to anyone without business there.\"",
+   "poBeside": "\"Patrols at Maghton have changed their routes, and some districts are closed to anyone without business there.\"",
+   "ratioA": 3,
+   "ratioS": 3,
+   "ratioServed": 3,
+   "sevServed": "\"This is the first thing anyone in Maghton will tell you about, and most of what is done there now is done around it.\"",
+   "sevSwap": "\"This is the first thing anyone in Maghton will tell you about, and most of what is done there now is done around it.\"",
+   "sevStored": [
+    0.59
+   ],
+   "sevCf": [
+    0.59
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": [
+    "Black Market Revenue:13"
+   ]
+  },
+  {
+   "seed": "rv10-inv-town-indebted-0-26",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Tense — Debt Crisis",
+   "pband": "Comfortable",
+   "poServed": "\"The creditors' accounts come first at Khannagar: what enforcement the town can afford goes where their agent directs, not where the crime is.\"",
+   "poSwap": "\"The creditors' accounts come first at Khannagar: what enforcement the town can afford goes where their agent directs, not where the crime is.\"",
+   "poBeside": "\"The creditors' accounts come first at Khannagar: what enforcement the town can afford goes where their agent directs, not where the crime is.\"",
+   "ratioA": 0.2,
+   "ratioS": 0.2,
+   "ratioServed": 0.2,
+   "sevServed": "\"The pressure is genuine now. Choices are being made because of it that would not have been made otherwise.\"",
+   "sevSwap": "\"The pressure is genuine now. Choices are being made because of it that would not have been made otherwise.\"",
+   "sevStored": [
+    0.45
+   ],
+   "sevCf": [
+    0.45
+   ],
+   "sevBandServed": [
+    "medium"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-none-0-28",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Moderate",
+   "pband": "Poor",
+   "poServed": "\"Visitors to Lykolathra are told which few streets to avoid, and the advice turns out to be right.\"",
+   "poSwap": "\"Visitors to Lykolathra are told which few streets to avoid, and the advice turns out to be right.\"",
+   "poBeside": "\"Visitors to Lykolathra are told which few streets to avoid, and the advice turns out to be right.\"",
+   "ratioA": 0.8,
+   "ratioS": 0.8,
+   "ratioServed": 0.8,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-occupied-0-29",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Controlled — Occupation Curfew",
+   "pband": "Poor",
+   "poServed": "\"Only those holding the occupiers' passes may be out after dark at Megaleia, and anyone caught without one is taken in.\"",
+   "poSwap": "\"Only those holding the occupiers' passes may be out after dark at Megaleia, and anyone caught without one is taken in.\"",
+   "poBeside": "\"Only those holding the occupiers' passes may be out after dark at Megaleia, and anyone caught without one is taken in.\"",
+   "ratioA": 0.3,
+   "ratioS": 0.3,
+   "ratioServed": 0.3,
+   "sevServed": "\"The strain is severe. Megaleia is meeting it by giving up things it would rather keep.\"",
+   "sevSwap": "\"The strain is severe. Megaleia is meeting it by giving up things it would rather keep.\"",
+   "sevStored": [
+    0.59
+   ],
+   "sevCf": [
+    0.59
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-city-none-0-43",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Very Safe",
+   "pband": "Prosperous",
+   "poServed": "\"The city's record of crimes at Qal'atdarya is short: enforcement far outweighs the criminals, and there is little to write down.\"",
+   "poSwap": "\"The city's record of crimes at Qal'atdarya is short: enforcement far outweighs the criminals, and there is little to write down.\"",
+   "poBeside": "\"The city's record of crimes at Qal'atdarya is short: enforcement far outweighs the criminals, and there is little to write down.\"",
+   "ratioA": 6.5,
+   "ratioS": 6.5,
+   "ratioServed": 6.5,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-city-insurgency-0-45",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Tense — Insurgency",
+   "pband": "Prosperous",
+   "poServed": "\"Some districts of Raventun are closed off now, and whatever happens there goes unrecorded and unpunished.\"",
+   "poSwap": "\"Some districts of Raventun are closed off now, and whatever happens there goes unrecorded and unpunished.\"",
+   "poBeside": "\"Some districts of Raventun are closed off now, and whatever happens there goes unrecorded and unpunished.\"",
+   "ratioA": 7.6,
+   "ratioS": 7.6,
+   "ratioServed": 7.6,
+   "sevServed": "\"The pressure is genuine now. Choices are being made because of it that would not have been made otherwise.\"",
+   "sevSwap": "\"The pressure is genuine now. Choices are being made because of it that would not have been made otherwise.\"",
+   "sevStored": [
+    0.4
+   ],
+   "sevCf": [
+    0.4
+   ],
+   "sevBandServed": [
+    "medium"
+   ],
+   "incomeGone": [
+    "Black Market Revenue:18"
+   ]
+  },
+  {
+   "seed": "rv10-inv-city-none-0-48",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Very Safe",
+   "pband": "Wealthy",
+   "poServed": "\"You can walk Kleinhafen at any hour without trouble, and the people who live there do the same without a second thought.\"",
+   "poSwap": "\"You can walk Kleinhafen at any hour without trouble, and the people who live there do the same without a second thought.\"",
+   "poBeside": "\"You can walk Kleinhafen at any hour without trouble, and the people who live there do the same without a second thought.\"",
+   "ratioA": 7.6,
+   "ratioS": 7.6,
+   "ratioServed": 7.6,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-51",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Strained — Insurgency",
+   "pband": "Comfortable",
+   "poServed": "\"People at Weichkoppel keep to their own doorways after dark, and nobody goes to the far end of the place without a reason.\"",
+   "poSwap": "\"People at Weichkoppel keep to their own doorways after dark, and nobody goes to the far end of the place without a reason.\"",
+   "poBeside": "\"People at Weichkoppel keep to their own doorways after dark, and nobody goes to the far end of the place without a reason.\"",
+   "ratioA": 1.4,
+   "ratioS": 1.4,
+   "ratioServed": 1.4,
+   "sevServed": "\"It is felt every week, though not everywhere and not badly.\"",
+   "sevSwap": "\"It is felt every week, though not everywhere and not badly.\"",
+   "sevStored": [
+    0.43
+   ],
+   "sevCf": [
+    0.43
+   ],
+   "sevBandServed": [
+    "medium"
+   ],
+   "incomeGone": [
+    "Black Market Revenue:18"
+   ]
+  },
+  {
+   "seed": "rv10-inv-village-none-1-71",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Moderate",
+   "pband": "Poor",
+   "poServed": "\"At Fengba old wrongs are remembered for years, and some are still being argued over.\"",
+   "poSwap": "\"At Fengba old wrongs are remembered for years, and some are still being argued over.\"",
+   "poBeside": "\"At Fengba old wrongs are remembered for years, and some are still being argued over.\"",
+   "ratioA": 0.2,
+   "ratioS": 0.2,
+   "ratioServed": 0.2,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-village-none-1-72",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Moderate",
+   "pband": "Poor",
+   "poServed": "\"Visitors to Faromunicipium are told which few streets to avoid, and the advice turns out to be right.\"",
+   "poSwap": "\"Visitors to Faromunicipium are told which few streets to avoid, and the advice turns out to be right.\"",
+   "poBeside": "\"Visitors to Faromunicipium are told which few streets to avoid, and the advice turns out to be right.\"",
+   "ratioA": 0.2,
+   "ratioS": 0.2,
+   "ratioServed": 0.2,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-village-none-1-73",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Safe",
+   "pband": "Comfortable",
+   "poServed": "\"Visitors to Maghwood see nobody keeping watch, and come to no harm all the same.\"",
+   "poSwap": "\"Visitors to Maghwood see nobody keeping watch, and come to no harm all the same.\"",
+   "poBeside": "\"Visitors to Maghwood see nobody keeping watch, and come to no harm all the same.\"",
+   "ratioA": 2.8,
+   "ratioS": 2.8,
+   "ratioServed": 2.8,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-village-infiltrated-1-74",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Moderate",
+   "pband": "Moderate",
+   "poServed": "\"With no gaol at Agioscastron, nobody who does wrong here can be locked away; most go on living beside the people they wronged.\"",
+   "poSwap": "\"With no gaol at Agioscastron, nobody who does wrong here can be locked away; most go on living beside the people they wronged.\"",
+   "poBeside": "\"With no gaol at Agioscastron, nobody who does wrong here can be locked away; most go on living beside the people they wronged.\"",
+   "ratioA": 0.5,
+   "ratioS": 0.5,
+   "ratioServed": 0.5,
+   "sevServed": "\"The pressure is genuine now. Choices are being made because of it that would not have been made otherwise.\"",
+   "sevSwap": "\"The pressure is genuine now. Choices are being made because of it that would not have been made otherwise.\"",
+   "sevStored": [
+    0.43
+   ],
+   "sevCf": [
+    0.43
+   ],
+   "sevBandServed": [
+    "medium"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-village-insurgency-1-75",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Strained — Insurgency",
+   "pband": "Struggling",
+   "poServed": "\"Nobody at Tlaltzin will say whose side they are on, and visitors are asked their business at every turn.\"",
+   "poSwap": "\"Nobody at Tlaltzin will say whose side they are on, and visitors are asked their business at every turn.\"",
+   "poBeside": "\"Nobody at Tlaltzin will say whose side they are on, and visitors are asked their business at every turn.\"",
+   "ratioA": 1.8,
+   "ratioS": 1.8,
+   "ratioServed": 1.8,
+   "sevServed": "\"The village is at its limit. There is no capacity left to absorb this, and nothing behind it that could absorb the next thing.\"",
+   "sevSwap": "\"The village is at its limit. There is no capacity left to absorb this, and nothing behind it that could absorb the next thing.\"",
+   "sevStored": [
+    0.81
+   ],
+   "sevCf": [
+    0.81
+   ],
+   "sevBandServed": [
+    "critical"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-village-wartime-1-77",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Tense — Wartime",
+   "pband": "Struggling",
+   "poServed": "\"Strangers at Svetomir are watched and questioned; the war has made everyone careful.\"",
+   "poSwap": "\"Strangers at Svetomir are watched and questioned; the war has made everyone careful.\"",
+   "poBeside": "\"Strangers at Svetomir are watched and questioned; the war has made everyone careful.\"",
+   "ratioA": 0.8,
+   "ratioS": 0.8,
+   "ratioServed": 0.8,
+   "sevServed": "\"Svetomir is at breaking point; one more blow and it will not recover as it was.\"",
+   "sevSwap": "\"Svetomir is at breaking point; one more blow and it will not recover as it was.\"",
+   "sevStored": [
+    0.76
+   ],
+   "sevCf": [
+    0.76
+   ],
+   "sevBandServed": [
+    "critical"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-village-occupied-1-79",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Controlled — Occupation Curfew",
+   "pband": "Poor",
+   "poServed": "\"At Víkset you are stopped and questioned at the checkpoints, and nobody is out after curfew.\"",
+   "poSwap": "\"At Víkset you are stopped and questioned at the checkpoints, and nobody is out after curfew.\"",
+   "poBeside": "\"At Víkset you are stopped and questioned at the checkpoints, and nobody is out after curfew.\"",
+   "ratioA": 4.5,
+   "ratioS": 4.5,
+   "ratioServed": 4.5,
+   "sevServed": "\"The strain is severe. Víkset is meeting it by giving up things it would rather keep.\"",
+   "sevSwap": "\"The strain is severe. Víkset is meeting it by giving up things it would rather keep.\"",
+   "sevStored": [
+    0.73
+   ],
+   "sevCf": [
+    0.73
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-village-politically_fractured-1-80",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Volatile — Political Fracture",
+   "pband": "Moderate",
+   "poServed": "\"What counts as an offence at Archodion depends on who is asked, because each power keeps its own rules and enforces them on its own people.\"",
+   "poSwap": "\"What counts as an offence at Archodion depends on who is asked, because each power keeps its own rules and enforces them on its own people.\"",
+   "poBeside": "\"What counts as an offence at Archodion depends on who is asked, because each power keeps its own rules and enforces them on its own people.\"",
+   "ratioA": 0.1,
+   "ratioS": 0.1,
+   "ratioServed": 0.1,
+   "sevServed": "\"Above everything else, this is what the village is living through now.\"",
+   "sevSwap": "\"Above everything else, this is what the village is living through now.\"",
+   "sevStored": [
+    0.65
+   ],
+   "sevCf": [
+    0.65
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-none-1-81",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Very Safe",
+   "pband": "Wealthy",
+   "poServed": "\"You can walk Stredko at any hour without trouble, and the people who live there do the same without a second thought.\"",
+   "poSwap": "\"You can walk Stredko at any hour without trouble, and the people who live there do the same without a second thought.\"",
+   "poBeside": "\"You can walk Stredko at any hour without trouble, and the people who live there do the same without a second thought.\"",
+   "ratioA": 4,
+   "ratioS": 4,
+   "ratioServed": 4,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-none-1-82",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Very Safe",
+   "pband": "Prosperous",
+   "poServed": "\"Nothing much happens to people at Kamenko. The watch is heavier than anything working against it, by a margin the town does not have to think about.\"",
+   "poSwap": "\"Nothing much happens to people at Kamenko. The watch is heavier than anything working against it, by a margin the town does not have to think about.\"",
+   "poBeside": "\"Nothing much happens to people at Kamenko. The watch is heavier than anything working against it, by a margin the town does not have to think about.\"",
+   "ratioA": 5.1,
+   "ratioS": 5.1,
+   "ratioServed": 5.1,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-none-1-83",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Safe",
+   "pband": "Moderate",
+   "poServed": "\"Visitors feel safe at Großkoppel, and it is plain that somebody keeps it that way.\"",
+   "poSwap": "\"Visitors feel safe at Großkoppel, and it is plain that somebody keeps it that way.\"",
+   "poBeside": "\"Visitors feel safe at Großkoppel, and it is plain that somebody keeps it that way.\"",
+   "ratioA": 2.4,
+   "ratioS": 2.4,
+   "ratioServed": 2.4,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-infiltrated-1-84",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Moderate",
+   "pband": "Comfortable",
+   "poServed": "\"Ardhurst has people who keep order, and order holds about as well as anyone here expects.\"",
+   "poSwap": "\"Ardhurst has people who keep order, and order holds about as well as anyone here expects.\"",
+   "poBeside": "\"Ardhurst has people who keep order, and order holds about as well as anyone here expects.\"",
+   "ratioA": 0.3,
+   "ratioS": 0.3,
+   "ratioServed": 0.3,
+   "sevServed": "\"It is felt every week, though not everywhere and not badly.\"",
+   "sevSwap": "\"It is felt every week, though not everywhere and not badly.\"",
+   "sevStored": [
+    0.45
+   ],
+   "sevCf": [
+    0.45
+   ],
+   "sevBandServed": [
+    "medium"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-insurgency-1-85",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Strained — Insurgency",
+   "pband": "Comfortable",
+   "poServed": "\"Some districts of Uxmalbalam are closed off now, and whatever happens there goes unrecorded and unpunished.\"",
+   "poSwap": "\"Some districts of Uxmalbalam are closed off now, and whatever happens there goes unrecorded and unpunished.\"",
+   "poBeside": "\"Some districts of Uxmalbalam are closed off now, and whatever happens there goes unrecorded and unpunished.\"",
+   "ratioA": 1.3,
+   "ratioS": 1.3,
+   "ratioServed": 1.3,
+   "sevServed": "\"This is more than the town was built to carry, and everything else waits on it.\"",
+   "sevSwap": "\"This is more than the town was built to carry, and everything else waits on it.\"",
+   "sevStored": [
+    0.77
+   ],
+   "sevCf": [
+    0.77
+   ],
+   "sevBandServed": [
+    "critical"
+   ],
+   "incomeGone": [
+    "Shadow Economy (untaxed):21"
+   ]
+  },
+  {
+   "seed": "rv10-inv-town-indebted-1-86",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Tense — Debt Crisis",
+   "pband": "Struggling",
+   "poServed": "\"At Jayakot the creditors' agent decides which wrongs are worth pursuing, and the debts come first.\"",
+   "poSwap": "\"At Jayakot the creditors' agent decides which wrongs are worth pursuing, and the debts come first.\"",
+   "poBeside": "\"At Jayakot the creditors' agent decides which wrongs are worth pursuing, and the debts come first.\"",
+   "ratioA": 1.4,
+   "ratioS": 1.4,
+   "ratioServed": 1.4,
+   "sevServed": "\"Above everything else, this is what the town is living through now.\"",
+   "sevSwap": "\"Above everything else, this is what the town is living through now.\"",
+   "sevStored": [
+    0.51
+   ],
+   "sevCf": [
+    0.51
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-none-1-88",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Moderate",
+   "pband": "Wealthy",
+   "poServed": "\"Order at Tenokin could tip either way: a few fewer watchmen or one bolder gang would be felt on the streets within the season.\"",
+   "poSwap": "\"Order at Tenokin could tip either way: a few fewer watchmen or one bolder gang would be felt on the streets within the season.\"",
+   "poBeside": "\"Order at Tenokin could tip either way: a few fewer watchmen or one bolder gang would be felt on the streets within the season.\"",
+   "ratioA": 0.9,
+   "ratioS": 0.9,
+   "ratioServed": 0.9,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-politically_fractured-1-90",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Tense — Political Fracture",
+   "pband": "Moderate",
+   "poServed": "\"Cross a street at Burjtappa and you may cross from one power's rules into another's.\"",
+   "poSwap": "\"Cross a street at Burjtappa and you may cross from one power's rules into another's.\"",
+   "poBeside": "\"Cross a street at Burjtappa and you may cross from one power's rules into another's.\"",
+   "ratioA": 10.3,
+   "ratioS": 10.3,
+   "ratioServed": 10.3,
+   "sevServed": "\"Above everything else, this is what the town is living through now.\"",
+   "sevSwap": "\"Above everything else, this is what the town is living through now.\"",
+   "sevStored": [
+    0.55
+   ],
+   "sevCf": [
+    0.55
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-none-1-93",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Moderate",
+   "pband": "Moderate",
+   "poServed": "\"The town's record of crimes at Pianovallis is not short, and the next few seasons will decide whether the law or the criminals gain on it.\"",
+   "poSwap": "\"The town's record of crimes at Pianovallis is not short, and the next few seasons will decide whether the law or the criminals gain on it.\"",
+   "poBeside": "\"The town's record of crimes at Pianovallis is not short, and the next few seasons will decide whether the law or the criminals gain on it.\"",
+   "ratioA": 1.8,
+   "ratioS": 1.8,
+   "ratioServed": 1.8,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-infiltrated-1-94",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Moderate",
+   "pband": "Prosperous",
+   "poServed": "\"Fionnworth keeps a working balance: the law is present, so is crime, and neither has the town to itself.\"",
+   "poSwap": "\"Fionnworth keeps a working balance: the law is present, so is crime, and neither has the town to itself.\"",
+   "poBeside": "\"Fionnworth keeps a working balance: the law is present, so is crime, and neither has the town to itself.\"",
+   "ratioA": 0.4,
+   "ratioS": 0.4,
+   "ratioServed": 0.4,
+   "sevServed": "\"Fionnworth now spends real hands and coin on this.\"",
+   "sevSwap": "\"Fionnworth now spends real hands and coin on this.\"",
+   "sevStored": [
+    0.37
+   ],
+   "sevCf": [
+    0.37
+   ],
+   "sevBandServed": [
+    "medium"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-town-wartime-1-97",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Strained — Wartime",
+   "pband": "Prosperous",
+   "poServed": "\"Strangers at Kripanagar are watched and questioned; the war has made everyone careful.\"",
+   "poSwap": "\"Strangers at Kripanagar are watched and questioned; the war has made everyone careful.\"",
+   "poBeside": "\"Strangers at Kripanagar are watched and questioned; the war has made everyone careful.\"",
+   "ratioA": 8.5,
+   "ratioS": 8.5,
+   "ratioServed": 8.5,
+   "sevServed": "\"It is felt every week, though not everywhere and not badly.\"",
+   "sevSwap": "\"It is felt every week, though not everywhere and not badly.\"",
+   "sevStored": [
+    0.42
+   ],
+   "sevCf": [
+    0.42
+   ],
+   "sevBandServed": [
+    "medium"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-city-indebted-1-106",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Strained — Debt Crisis",
+   "pband": "Prosperous",
+   "poServed": "\"The creditors' accounts come first at Weißgrund: what enforcement the city can afford goes where their agent directs, not where the crime is.\"",
+   "poSwap": "\"The creditors' accounts come first at Weißgrund: what enforcement the city can afford goes where their agent directs, not where the crime is.\"",
+   "poBeside": "\"The creditors' accounts come first at Weißgrund: what enforcement the city can afford goes where their agent directs, not where the crime is.\"",
+   "ratioA": 2.5,
+   "ratioS": 2.5,
+   "ratioServed": 2.5,
+   "sevServed": "\"The pressure is genuine now. Choices are being made because of it that would not have been made otherwise.\"",
+   "sevSwap": "\"The pressure is genuine now. Choices are being made because of it that would not have been made otherwise.\"",
+   "sevStored": [
+    0.29
+   ],
+   "sevCf": [
+    0.29
+   ],
+   "sevBandServed": [
+    "medium"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-city-occupied-1-109",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Controlled — Occupation Curfew",
+   "pband": "Poor",
+   "poServed": "\"At Tighbeck you are stopped and questioned at the checkpoints, and nobody is out after curfew.\"",
+   "poSwap": "\"At Tighbeck you are stopped and questioned at the checkpoints, and nobody is out after curfew.\"",
+   "poBeside": "\"At Tighbeck you are stopped and questioned at the checkpoints, and nobody is out after curfew.\"",
+   "ratioA": 1.8,
+   "ratioS": 1.8,
+   "ratioServed": 1.8,
+   "sevServed": "\"Above everything else, this is what the city is living through now.\"",
+   "sevSwap": "\"Above everything else, this is what the city is living through now.\"",
+   "sevStored": [
+    0.51
+   ],
+   "sevCf": [
+    0.51
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-city-insurgency-1-115",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Tense — Insurgency",
+   "pband": "Comfortable",
+   "poServed": "\"Some districts of Gortshaw are closed off now, and whatever happens there goes unrecorded and unpunished.\"",
+   "poSwap": "\"Some districts of Gortshaw are closed off now, and whatever happens there goes unrecorded and unpunished.\"",
+   "poBeside": "\"Some districts of Gortshaw are closed off now, and whatever happens there goes unrecorded and unpunished.\"",
+   "ratioA": 2.9,
+   "ratioS": 2.9,
+   "ratioServed": 2.9,
+   "sevServed": "\"Above everything else, this is what the city is living through now.\"",
+   "sevSwap": "\"Above everything else, this is what the city is living through now.\"",
+   "sevStored": [
+    0.55
+   ],
+   "sevCf": [
+    0.55
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": [
+    "Black Market Revenue:18"
+   ]
+  },
+  {
+   "seed": "rv10-inv-city-wartime-1-117",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Strained — Wartime",
+   "pband": "Moderate",
+   "poServed": "\"The war has made people at Innisleigh wary of anyone they do not know, and prices and curfews are set by order.\"",
+   "poSwap": "\"The war has made people at Innisleigh wary of anyone they do not know, and prices and curfews are set by order.\"",
+   "poBeside": "\"The war has made people at Innisleigh wary of anyone they do not know, and prices and curfews are set by order.\"",
+   "ratioA": 6.3,
+   "ratioS": 6.3,
+   "ratioServed": 6.3,
+   "sevServed": "\"Above everything else, this is what the city is living through now.\"",
+   "sevSwap": "\"Above everything else, this is what the city is living through now.\"",
+   "sevStored": [
+    0.62
+   ],
+   "sevCf": [
+    0.62
+   ],
+   "sevBandServed": [
+    "high"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-city-none-1-118",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Safe",
+   "pband": "Prosperous",
+   "poServed": "\"Visitors feel safe at Petencoba, and it is plain that somebody keeps it that way.\"",
+   "poSwap": "\"Visitors feel safe at Petencoba, and it is plain that somebody keeps it that way.\"",
+   "poBeside": "\"Visitors feel safe at Petencoba, and it is plain that somebody keeps it that way.\"",
+   "ratioA": 3,
+   "ratioS": 3,
+   "ratioServed": 3,
+   "sevServed": "null",
+   "sevSwap": "null",
+   "sevStored": [],
+   "sevCf": [],
+   "sevBandServed": [],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-city-politically_fractured-1-120",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Volatile — Political Fracture",
+   "pband": "Moderate",
+   "poServed": "\"At Grünthal a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.\"",
+   "poSwap": "\"At Grünthal a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.\"",
+   "poBeside": "\"At Grünthal a quarrel is settled by whichever power the quarrelling households look to, and the answers seldom match.\"",
+   "ratioA": 0.3,
+   "ratioS": 0.3,
+   "ratioServed": 0.3,
+   "sevServed": "\"Grünthal now spends real hands and coin on this.\"",
+   "sevSwap": "\"Grünthal now spends real hands and coin on this.\"",
+   "sevStored": [
+    0.45
+   ],
+   "sevCf": [
+    0.45
+   ],
+   "sevBandServed": [
+    "medium"
+   ],
+   "incomeGone": []
+  },
+  {
+   "seed": "rv10-inv-metropolis-indebted-1-136",
+   "hid": 0,
+   "safeFail": false,
+   "prosFail": false,
+   "band": "Strained — Debt Crisis",
+   "pband": "Comfortable",
+   "poServed": "\"The law at Miloki moves quickest when a debt is owed to the metropolis's creditors.\"",
+   "poSwap": "\"The law at Miloki moves quickest when a debt is owed to the metropolis's creditors.\"",
+   "poBeside": "\"The law at Miloki moves quickest when a debt is owed to the metropolis's creditors.\"",
+   "ratioA": 10.4,
+   "ratioS": 10.4,
+   "ratioServed": 10.4,
+   "sevServed": "\"It is felt every week, though not everywhere and not badly.\"",
+   "sevSwap": "\"It is felt every week, though not everywhere and not badly.\"",
+   "sevStored": [
+    0.35
+   ],
+   "sevCf": [
+    0.35
+   ],
+   "sevBandServed": [
+    "medium"
+   ],
+   "incomeGone": []
+  }
+ ]
+}

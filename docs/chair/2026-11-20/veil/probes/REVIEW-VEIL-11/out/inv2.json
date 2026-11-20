@@ -1,0 +1,126 @@
+{
+ "defence.readiness.label": {
+  "towns": 87,
+  "sane": 87,
+  "fails": 8,
+  "ex": [
+   "rv10-inv-village-none-0-8: served Undefended | from served Vulnerable",
+   "rv10-inv-metropolis-infiltrated-0-64: served Well-Defended | from served Fortress",
+   "rv10-inv-metropolis-insurgency-0-65: served Defensible | from served Well-Defended"
+  ]
+ },
+ "defence.readiness.colours": {
+  "towns": 87,
+  "sane": 87,
+  "fails": 8,
+  "ex": [
+   "rv10-inv-village-none-0-8: served #8b1a1a|#fdf4f4|#e8c0c0 | from served #8a3010|#fdf8ec|#e8c080",
+   "rv10-inv-metropolis-infiltrated-0-64: served #1a3a6a|#f0f4fa|#a8c0d8 | from served #1a4a2a|#f0faf2|#a8d8b0",
+   "rv10-inv-metropolis-insurgency-0-65: served #5a6a1a|#f4f8ec|#b8d0a8 | from served #1a3a6a|#f0f4fa|#a8c0d8"
+  ]
+ },
+ "defence.scores.*": {
+  "towns": 87,
+  "sane": 87,
+  "fails": 76,
+  "ex": [
+   "rv10-inv-village-none-0-8: served {\"disaster\":37,\"economic\":12,\"internal\":2,\"magicDependency\":true,\"magical\":0,\"mi | from served {\"disaster\":37,\"economic\":12,\"internal\":15,\"magicDependency\":true,\"magical\":0,\"m",
+   "rv10-inv-town-none-0-11: served {\"disaster\":56,\"economic\":77,\"internal\":47,\"magicDependency\":false,\"magical\":61, | from served {\"disaster\":56,\"economic\":77,\"internal\":56,\"magicDependency\":false,\"magical\":61,",
+   "rv10-inv-town-none-0-18: served {\"disaster\":56,\"economic\":96,\"internal\":39,\"magicDependency\":true,\"magical\":62,\" | from served {\"disaster\":56,\"economic\":96,\"internal\":46,\"magicDependency\":true,\"magical\":62,\""
+  ]
+ },
+ "defence.economicGates": {
+  "towns": 87,
+  "sane": 87,
+  "fails": 0,
+  "ex": []
+ },
+ "food.resilienceScore": {
+  "towns": 87,
+  "sane": 47,
+  "fails": 0,
+  "ex": []
+ },
+ "food.record.storageMonths": {
+  "towns": 87,
+  "sane": 44,
+  "fails": 0,
+  "ex": []
+ },
+ "legitimacy.label+colours": {
+  "towns": 87,
+  "sane": 87,
+  "fails": 0,
+  "ex": []
+ },
+ "prose defense:state.publicOrder.beside": {
+  "towns": 87,
+  "sane": 87,
+  "fails": 63,
+  "ex": [
+   "rv10-inv-village-none-0-8: served \"The war has made people at Deirfort wary of anyone they do not know, and prices and curfe | from served \"Strangers at Deirfort are watched and questioned; the war has made everyone careful.\"",
+   "rv10-inv-town-none-0-11: served \"Order at Bhagabari could tip either way: a few fewer watchmen or one bolder gang would be | from served \"The town's record of crimes at Bhagabari is not short, and the next few seasons will deci",
+   "rv10-inv-town-insurgency-0-15: served \"Some districts of Qinggang are closed off now, and whatever happens there goes unrecorded | from served \"People at Qinggang keep to their own doorways after dark, and nobody goes to the far end "
+  ]
+ },
+ "prose defense:state.publicOrder.rung.sentence": {
+  "towns": 87,
+  "sane": 87,
+  "fails": 63,
+  "ex": [
+   "rv10-inv-village-none-0-8: served \"The war has made people at Deirfort wary of anyone they do not know, and prices and curfe | from served \"Strangers at Deirfort are watched and questioned; the war has made everyone careful.\"",
+   "rv10-inv-town-none-0-11: served \"Order at Bhagabari could tip either way: a few fewer watchmen or one bolder gang would be | from served \"The town's record of crimes at Bhagabari is not short, and the next few seasons will deci",
+   "rv10-inv-town-insurgency-0-15: served \"Some districts of Qinggang are closed off now, and whatever happens there goes unrecorded | from served \"People at Qinggang keep to their own doorways after dark, and nobody goes to the far end "
+  ]
+ },
+ "prose defense:threat.economic.sentence": {
+  "towns": 87,
+  "sane": 87,
+  "fails": 57,
+  "ex": [
+   "rv10-inv-town-none-0-21: served \"Al-khel's accounts have money in hand: the town can buy what a bad season needs without g | from served \"The town could go through a bad season with its arrangements intact, and the people who w",
+   "rv10-inv-town-wartime-0-27: served \"The town went into this trouble with money in hand, and so far the money has held.\" | from served \"Campoporta had money laid by before this trouble began, and the trouble is still being pa",
+   "rv10-inv-town-politically_fractured-0-30: served \"Whatever the present trouble costs Jabalkala, the town is paying it from money it had put | from served \"Whatever the present trouble costs Jabalkala, the town is paying it from money it had put"
+  ]
+ },
+ "prose defense:wall.rationale.sentence": {
+  "towns": 87,
+  "sane": 87,
+  "fails": 43,
+  "ex": [
+   "rv10-inv-village-none-0-8: served \"No wall marks where Deirfort ends; the last houses simply give way to open country.\" | from served \"Deirfort is too small to wall and knows it; the village's safety is its neighbours, its d",
+   "rv10-inv-town-insurgency-0-15: served \"Qinggang's accounts keep its town walls in repair and stretch no further, so the defences | from served \"Qinggang keeps its town walls in repair, but fewer people turn out each season to man the",
+   "rv10-inv-town-wartime-0-17: served \"Prabhavalli is as big as places that usually raise a wall of stone, and it never has; whe | from served \"Prabhavalli's accounts show nothing spent on a wall: the money a place its size would put"
+  ]
+ },
+ "prose economy:economics.prosperityHeader.sentence": {
+  "towns": 87,
+  "sane": 87,
+  "fails": 32,
+  "ex": [
+   "rv10-inv-town-none-0-11: served \"Bhagabari pays its way from year to year, and nobody here calls the town poor.\" | from served \"With a little left over each year, Bhagabari gets by on a market trade, and every year pe",
+   "rv10-inv-town-none-0-18: served \"Bayarordu pays its way from year to year, and nobody here calls the town poor.\" | from served \"Nothing about Bayarordu looks rich or poor: the crossroads is busy enough, the market is ",
+   "rv10-inv-town-occupied-0-19: served \"Beloino sits on its road and stays poor all the same.\" | from served \"Little that comes past Beloino stops there. The town is poor, and its people say so to an"
+  ]
+ },
+ "prose economy:economics.prosperityRung.sentence": {
+  "towns": 87,
+  "sane": 87,
+  "fails": 50,
+  "ex": [
+   "rv10-inv-village-none-0-8: served \"Families in Deirfort mend what they have and put off buying anything new.\" | from served \"Deirfort is short more often than not. Some needs are met and some are postponed, and whi",
+   "rv10-inv-town-none-0-11: served \"Bhagabari's purse closes every year ahead. The margin is not large but it is dependable,  | from served \"People here put things by, and can. That is the difference between this town and a poorer",
+   "rv10-inv-town-insurgency-0-15: served \"The town never quite makes ends meet. Every month something it needs waits for money that | from served \"The shortage at Qinggang shows in small things: a repair not made, a stall not restocked,"
+  ]
+ },
+ "prose stressors:overview.conditionSeverity.sentence": {
+  "towns": 87,
+  "sane": 87,
+  "fails": 39,
+  "ex": [
+   "rv10-inv-town-insurgency-0-15: served \"Above everything else, this is what the town is living through now.\" | from served \"The strain is severe. Qinggang is meeting it by giving up things it would rather keep.\"",
+   "rv10-inv-town-wartime-0-17: served \"The strain is severe. Prabhavalli is meeting it by giving up things it would rather keep. | from served \"Above everything else, this is what the town is living through now.\"",
+   "rv10-inv-town-occupied-0-19: served \"The strain is severe. Beloino is meeting it by giving up things it would rather keep.\" | from served \"This is the first thing anyone in Beloino will tell you about, and most of what is done t"
+  ]
+ }
+}
