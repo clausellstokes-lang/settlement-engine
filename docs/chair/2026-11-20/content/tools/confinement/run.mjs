@@ -32,7 +32,9 @@ if (mode === 'born') {
   codes = await Promise.all((corpus === 'both' ? ['golden', 'census'] : [corpus]).map((c) => go({ NAMES3_OUT: out, NAMES3_CORPUS: c }, join(out, `born.${c}.log`))));
 } else {
   const { censusPlan } = await import(join(tree, 'tests/components/pageCensusWalk.shared.mjs'));
-  const plan = censusPlan('r2'); mkdirSync(join(out, 'views'), { recursive: true });
+  // --seeds=a,b,c renders those rows only, in that order (a check of one town; the first row a worker renders is cold)
+  const only = arg('seeds', '') ? arg('seeds', '').split(',') : null;
+  const plan = only ? only.map((seed) => censusPlan('r2').find((r) => r.seed === seed)).filter(Boolean) : censusPlan('r2'); mkdirSync(join(out, 'views'), { recursive: true });
   codes = await Promise.all(Array.from({ length: workers }, (_, w) => {
     const part = join(out, `plan.${w}.json`); writeFileSync(part, JSON.stringify(plan.filter((_, i) => i % workers === w)));
     return go({ NAMES3_OUT: join(out, 'views'), NAMES3_PLAN: part }, join(out, `render.${w}.log`));
