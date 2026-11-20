@@ -1844,3 +1844,57 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   named and unsigned on the line until the close and the owner's yes.
   ALSO: this session's worker was restarted at about 06:00 UTC in the middle of a commit and push of this record
   (exit 137); the commit had been made (2124fc61), the push had not: pushed after the restart; nothing lost.
+- 06:13 UTC · **FIVE REPORTS: A SEAT REFUSED A MERGE; THE DOORS HANDED BACK PARTIAL; R2 HOLDS WITH ONE FINDING FOR THE MERGE; THE SEAT'S
+  PROPOSAL APPROVED AND ITS FIRST UNITS ORDERED.**
+  **(1) NAMES-2: its merge of the line into its branch was REFUSED BY ITS OWN PERMISSION CHECK** (it reported and routed
+  round nothing). THE INSTRUCTION IS WITHDRAWN (no word of the chair's can authorise what a seat's own check refused):
+  it works from its tip as it stands; THE CHAIR MERGES ITS BRANCH INTO THE LINE at the landing and re-takes the lighting
+  census there; one red is known by its base and named (the negative-anchor walker, cured on the line by point 76).
+  A RULE FOR EVERY LATER PROMPT: a merge of the line into a seat's branch is asked, never required; where it is refused
+  the chair merges at the landing.
+  **(2) VEIL-DOORS-3: "DOORS 3e1115c81", PARTIAL, at its mark.** BUILT, red first: VR40 (the share editor sends no
+  chronicle, its control shown as not shareable yet; A BORN WORLD PUBLISHED THROUGH THE EDITOR'S OWN PATH NOW SUCCEEDS:
+  it raised at 97efb7fcf; both map reads drop a stored chronicle; the guard untouched); the stressor catalogue read
+  whole (one label leaked, "Infiltration network": withheld). MEASURED: VR41's loss 42 of 1,393, all a matching gap;
+  the goods labels come only from exports and criminal chains are not exportable; VR43's count statement written (0
+  locally; a database older than migration 091 CAN hold such a row). `tests/security` whole green (2,013 passed). ITS
+  212 IS 8773ece9…, composed with the lane's at the merge. LEFT: VR41's two narrowings; the acceptance run.
+  **(3) REVIEW-VEIL-11's COLD READ OF R2: R2 HOLDS** (the re-stamp of served memberships reconstructs exactly, 96 of 96
+  reads per shape; the black market's share absent on every marked read and equal to the owner's on unmarked ones:
+  it tells marked from unmarked, which is already public; the raw measures absent from every served row). **ONE
+  INTEGRATION FINDING, HIGH FOR THE MERGE, RULED AS VR44:** R2 strips the stability's CAUSE from the body on every read,
+  unmarked included, while the doors' tile rows keep migration 147's raw stability for an unmarked row: once merged,
+  the `stability` column of `get_gallery_dossier`, the lists and the og card would send "Unstable (pervasive organized
+  crime)" beside a body that says "Unstable". **THE TILE'S STABILITY IS THE BAND WORD ALONE FOR EVERY ROW ON EVERY READ
+  THAT IS NOT THE OWNER'S** (VR19 (b) governs; VR23's sparing of unmarked rows does not cover a crime-worded cause).
+  FOR THE OWNER'S LIST: an old listed page's card loses the reason after the word "Unstable".
+  **(4) VEIL-22: V10-2 MERGED (d136940c3), R3 AND R4 BUILDING in parallel.** ORDERED FOR THE DOORS' MERGE at its next
+  stage boundary, one builder, one commit, red first: VR44; VR41's two narrowings (42 to 0, with the born arm); the
+  reader's repros and the acceptance run at the merged tree; then "DOORS-IN <commit>".
+  **(5) SEAT-1's PROPOSAL (43ec2a952, `docs/chair/2026-11-20/content/seat/SEAT-1-PROPOSAL.md`, items 1 to 17), READ
+  WHOLE AND APPROVED.** ITS MEASURES (1,860 born towns; the BEFORE column equal to the shipped `coupContenders` town by
+  town, 0 mismatches): THE HOLDER LEAF answers every town (default / presets): the dual hat 365 / 213, the same-kind
+  power 96 / 243, the office itself 413 / 444, the appointed 26 / 60; two rules disagree in 2 towns of 1,860; no veiled
+  holder at birth. **CS3 ALONE DOES THE OWNER'S WORK** (default, contending towns): craft 2 to 37, nobles 98 to 115,
+  mages 29 to 71; merchants stop contesting their own seats, 450 to 145; towns with no contender 240 to 269 (the holder
+  was the only power standing: calm towns stay calm). CS4 alone weighs craft down (presets 191 to 167), so it lights
+  only with CS5; CS5 at bounded factors adds two or three per kind, only where the record holds the circumstance. A
+  SIMULATED RUN (the real pulse, 168 towns, 2 seeds, 52 ticks): the rate of coups unchanged (6 and 6; 37 and 36); A SEAT
+  FALLING TO ITS OWN HOLDER 4 to 0 and 9 to 0; craft wins its first seats. CAPTURE IS ALMOST NEVER BORN (0 of 900;
+  1 of 960): the second card is a card for play; the crime-worded forms are born in 0 default towns and 22 preset
+  towns, and it is the NAME, not the hidden allegiances, that carries their criminal hold (18 of 21 fall with an
+  ordinary front). NO SINGLE RULER WHO ANSWERS TO NO ONE IS BORN AT CITY OR METROPOLIS (`sovereignOf` means a lord
+  stands over the town): king and emperor could never show.
+  **RULED** (sent into its turn; in full in `prompts/SEAT-2.txt`): the law lands DARK and is lit LAST on the owner's
+  word; CS17 narrowed to a licensed pair's reason and a recorded transfer (its twelve draft history lines were noise
+  and half invented a cause: withdrawn); THE SOVEREIGN: Royal Authority on a royal-seat house with no overlord on
+  record is the sovereign's own seat (at most 16 and 29 towns); CS16 as proposed (the ordinary front; a lord-first
+  corruptible draw at a raised rate, a draft figure, dark until signed); CS20 with J-1 AND I-1 AMENDED BY THIS CHAIR ON
+  THE OWNER'S WORD (a principal's power is null; a principal in the seat is capture and the capturing power is
+  himself); the gate: a criminal power stands or the black market's share above 20; the rate the owner's (1 in 200 or
+  1 in 50); the card's choice (Crime Bosses at 3 or more operations, 0.75 or more of the lawful sources and a share of
+  20 or more); the fixed line "No council: a few bosses held in a delicate balance, each keeping the others in check.";
+  the person after a coup named, not cured, in train 1.
+  **"BUILD U1, U2, U3 NOW"** (the law, the one table and the kind, the holder: disjoint from the content lanes); U4 and
+  after wait for "BUILD-ON at <commit>" once the names are on the line. SEAT-1 is at about 290,000 tokens: **SEAT-2 is
+  seated beside it** (`prompts/SEAT-2.txt`) and takes the lane at a clean boundary.
