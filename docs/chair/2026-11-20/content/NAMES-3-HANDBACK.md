@@ -234,20 +234,20 @@ relationships[].tension 24/19 · pressureSentence 16/16 · npcs[].secret.what 5/
 ## 7. Stored figures moved AGAIN by 9ddfcaa5a (named, signed by nobody, before and after NOT re-read)
 
 The confinement shows each moves by prose strings alone: golden 242 more towns' strings, census 280 towns'.
-- \`tests/property/generatorGoldenMaster.test.js\` (already red on the line; now 242 more of its 525 towns' strings differ).
-- \`tests/generators/generationForkCensus.test.js\` A1 (the control row's hash, if its town carries a moved string).
-- The golden-corpus arms of \`pipelinePinnedChoosers\`, \`rosterFinalUnderHeldRoster\` and \`powerEconomyFreshness\` A4.
-- \`tests/domain/worldFactRederive.test.js\` A7.
-- \`tests/property/espionageDormancyFence.test.js\` FENCE 1 (the driven golden).
+- `tests/property/generatorGoldenMaster.test.js` (already red on the line; now 242 more of its 525 towns' strings differ).
+- `tests/generators/generationForkCensus.test.js` A1 (the control row's hash, if its town carries a moved string).
+- The golden-corpus arms of `pipelinePinnedChoosers`, `rosterFinalUnderHeldRoster` and `powerEconomyFreshness` A4.
+- `tests/domain/worldFactRederive.test.js` A7.
+- `tests/property/espionageDormancyFence.test.js` FENCE 1 (the driven golden).
 
 NOT RUN at the tip: these files, so their new hashes are not read. The successor runs them and records the before and after.
 
 ## 8. Gates at the tip (94a93e24b, content = 9ddfcaa5a + the revert)
 
-- **Green, EXECUTED:** \`npm run typecheck:ratchet\` 167/167; \`npm run typecheck:domain:strict\` 1113/1113; \`npm run lint\` exit 0; both
-  presumption doors 0 fresh / 0 stale; the new test and \`proseDrawnAnchors\`, 18/18; the 7 composer files, 79/79.
+- **Green, EXECUTED:** `npm run typecheck:ratchet` 167/167; `npm run typecheck:domain:strict` 1113/1113; `npm run lint` exit 0; both
+  presumption doors 0 fresh / 0 stale; the new test and `proseDrawnAnchors`, 18/18; the 7 composer files, 79/79.
 - **NOT RUN at the tip:**
-  - \`tests/lint\` WHOLE (last run green at \`d1d8ffff8\`, 220/3,271). It is EXPECTED red on \`sovereigntyLightingContract\` "THE CENSUS IS AN
+  - `tests/lint` WHOLE (last run green at `d1d8ffff8`, 220/3,271). It is EXPECTED red on `sovereigntyLightingContract` "THE CENSUS IS AN
     ASSERTION": the new test file adds 1 file and its titles. Re-take that count by its door at the landing, as the chair does.
   - The governing suites of the changed modules.
   - The rendered measure on all 720.
@@ -257,6 +257,6 @@ NOT RUN at the tip: these files, so their new hashes are not read. The successor
 - **CONFIRMED by execution:** the tool's reproduction; the item 2 verdict; item 3's confinement (0 non-string; every changed string
   number-only or possessive-only, with the bare name kept); the stored measure (5 → 0 verbs; 54 → 1 and 8 → 0 possessives); red first and
   green; the gates listed green; the reverted possessive's moved draw and its 12 stale rows.
-- **PLAUSIBLE:** that the 12 stale rows come from \`drawnRanges\`' tracing.
-- **NOT DONE / NOT RUN:** the rendered figure on all 720 at the tip (2 on 422); \`tests/lint\` whole and the governing suites at the tip;
+- **PLAUSIBLE:** that the 12 stale rows come from `drawnRanges`' tracing.
+- **NOT DONE / NOT RUN:** the rendered figure on all 720 at the tip (2 on 422); `tests/lint` whole and the governing suites at the tip;
   the stored figures' new hashes; the one survivor of (d).
