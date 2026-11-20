@@ -1,0 +1,25 @@
+towns 140, with shared rows 139
+kind:eye  towns-moved / towns-where-the-eye-held-a-field
+0/110	conflict:description
+0/110	conflict:hooks
+0/110	conflict:stakes
+0/140	event:description
+0/140	event:hooks
+0/140	event:lastingEffects
+0/29	faction:capture
+0/140	faction:description
+0/140	institution:description
+0/140	institution:function
+0/94	npc:constraint
+0/77	npc:corruption
+0/140	npc:goals
+0/140	npc:hooks
+0/140	npc:personality
+0/140	npc:physical
+0/140	npc:secret
+0/140	npc:ties
+0/140	relationship:description
+0/140	relationship:tension
+0/140	tension:description
+0/140	tension:hooks
+0/132	tension:lastingEffects
