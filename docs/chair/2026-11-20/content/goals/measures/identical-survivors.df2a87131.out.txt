@@ -1,0 +1,21 @@
+hxd-city-5 (Oxteucan) x2 "Beat the Merchant Guilds to the next opportunity, and win the credit for the Craft Guilds."
+   npc_blacksmiths_3_10.short [POWER/competitive] rung=twice moved=no
+   npc_potter.short [POWER/competitive] rung=stands moved=no
+hxd-city-49 (Villafossae) x2 "Be obeyed without ever having to raise their voice."
+   npc_professional_city_watch.long [PERSONALITY/sway] rung=- moved=no
+   npc_charlatan_fortune_tellers.long [PERSONALITY/sway] rung=twice moved=no
+hxd-metropolis-11 (Hongbu) x2 "Know something about everyone who matters here."
+   npc_hospital_network.long [PERSONALITY/forbidden_patron] rung=- moved=no
+   npc_charlatan_fortune_tellers.long [PERSONALITY/forbidden_patron] rung=twice moved=no
+hxd-metropolis-19 (Vysokono) x2 "Settle every score before they die."
+   npc_harbour_master_s_office.long [PERSONALITY/grudge] rung=- moved=no
+   npc_charlatan_fortune_tellers.long [PERSONALITY/grudge] rung=twice moved=no
+hxd-metropolis-23 (Spitzfeld) x2 "Bring the Merchant Guilds under the sway of the Craft Guilds, one member at a time."
+   npc_carpenters_5_15.long [POWER/tense] rung=twice moved=no
+   npc_glassmakers.long [POWER/tense] rung=stands moved=no
+hxd-metropolis-33 (Ardglen) x2 "Win one ally of the Merchant Guilds over to the side of the Craft Guilds."
+   npc_fuller.short [POWER/tense] rung=twice moved=no
+   npc_bakers_5_15.short [POWER/tense] rung=stands moved=no
+hxd-metropolis-33 (Ardglen) x2 "Keep the quarrel between the Craft Guilds and the Merchant Guilds from turning into open trouble this season."
+   npc_tailor_s_guild.short [POWER/tense] rung=twice moved=no
+   npc_ropemaker.short [POWER/tense] rung=stands moved=no
