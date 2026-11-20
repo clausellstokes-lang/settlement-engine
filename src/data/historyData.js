@@ -1198,7 +1198,7 @@ export const HISTORICAL_EVENTS_DATA = [
     // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
     byMemory: { unanchored: { description: 'Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run',
         factions: ['Guild members', 'Those who would trade outside the guild', 'Non-guild workers'],
-        plotHooks: [{ text: "A guild master's records have gone missing ahead of an audit", needs: ['guild'] }, { text: 'A journeyman denied mastership has proof the exam was rigged', needs: ['guild'] }, { text: 'Someone is sabotaging both sides to destabilize the market for a third party', needs: ['market', 'guild'] }] } },
+      } }, // HOOKS-BUILD (PAGE-7, 2026-11-20): the hook copy went; a tension's hooks are the kind's pool (troubleHooks.js), line for line so no cited line moves
     severity: ['minor', 'major'],
   },
   {
@@ -1213,6 +1213,9 @@ export const HISTORICAL_EVENTS_DATA = [
       { text: 'The threat is being exaggerated by someone who profits from wartime contracts', excludes: ['war: peace'] }, // TAIL-HISTORY batch 1 (the chair's Y1; READ-ALL 22261, 02538, B02462): a war's words, where a war is in force
       { text: 'A diplomatic channel exists that the war party is suppressing', excludes: ['war: peace'] }, // TAIL-HISTORY batch 1 (the chair's Y1; READ-ALL 22261, 02538, B02462): a war's words, where a war is in force
       'The threat has an agent already inside the settlement',
+      'Someone has been testing how quickly the place answers an alarm, and nobody ordered a drill', // HOOKS-BUILD (the chair, 20:03 UTC 2026-11-20): three more the timeline's event can say at peace, so four stand there (pool dominance)
+      'A map of the approaches drawn up at the time of the alarm has gone missing',
+      'One of those who brought the first news of the danger has come back, and tells it differently now',
     ],
     // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
     byMemory: { unanchored: { description: 'News of approaching danger divides the community on how to respond' } },
@@ -1252,7 +1255,7 @@ export const HISTORICAL_EVENTS_DATA = [
     // TAIL-HISTORY Y13 (the chair's ruling, 2026-11-15: Y5 widened to every type; READ-ALL's aftermath shape): the words where the timeline holds no event of this type (historyGenerator.js :: tensionByMemory): a live quarrel, present tense, no past event (VETOABLE wording, the owner's)
     byMemory: { unanchored: { description: 'Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands',
         factions: ['Official guards', 'Those who would take the law into their own hands', 'Criminal organisations'],
-        plotHooks: ['The crime wave is coordinated. Someone is directing it to create a pretext', { text: 'A guard captain is on the payroll of the criminal network', needs: ['watch'] }, 'Those who would take the law into their own hands have picked out a culprit on bad information'] } },
+      } }, // HOOKS-BUILD (PAGE-7, 2026-11-20): the hook copy went; a tension's hooks are the kind's pool (troubleHooks.js), line for line so no cited line moves
     severity: ['minor', 'major'],
   },
   {
