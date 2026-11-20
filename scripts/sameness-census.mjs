@@ -344,10 +344,8 @@ export function confirmRises(first, second) {
     ...first,
     over: first.over.filter((x) => overAgain.has(k(x))).map((x) => ({ ...x, text: both(x, overAgain) })),
     loose: first.loose.filter((x) => looseAgain.has(k(x))).map((x) => ({ ...x, second: looseAgain.get(k(x)) })),
-    notes: [
-      ...first.over.filter((x) => !overAgain.has(k(x))).map((x) => `${x.text}; does not repeat on ${CORPUS.confirm}`),
-      ...first.loose.filter((x) => !looseAgain.has(k(x))).map((x) => `${x.text}; not loose on ${CORPUS.confirm}`),
-    ],
+    notes: first.over.filter((x) => !overAgain.has(k(x))).map((x) => `${x.text}; does not repeat on ${CORPUS.confirm}`),
+    looseNotes: first.loose.filter((x) => !looseAgain.has(k(x))).map((x) => `${x.text}; not loose on ${CORPUS.confirm}`),
   };
 }
 
@@ -528,14 +526,15 @@ async function door(mode) {
   const say = (/** @type {string} */ x) => console.log(x);
   if (mode === 'check') {
     let f = judge(first, register);
-    /** @type {string[]} */ let notes = [];
+    /** @type {string[]} */ let notes = []; /** @type {string[]} */ let looseNotes = [];
     let confirmed = false;
-    if (f.over.length) { const t = await second(); const c = confirmRises(f, judge(t, register)); notes = c.notes; f = c; confirmed = true; }
+    if (f.over.length) { const t = await second(); const c = confirmRises(f, judge(t, register)); notes = c.notes; looseNotes = c.looseNotes; f = c; confirmed = true; }
     for (const x of f.unregistered) say(`RED unregistered: ${x.text}`);
     for (const x of f.over) say(`RED rise: ${x.text}`);
     for (const x of notes) say(`NOTE rise on one reading: ${x}`);
     for (const x of f.stale) say(`NOTE stale: ${x.text}`);
     for (const x of f.loose) say(`NOTE loose${confirmed ? ' (on both readings)' : ` (on ${prefix}; --tighten reads both)`}: ${x.text}`);
+    for (const x of looseNotes) say(`NOTE loose on one reading: ${x}`);
     say(`NOTE: ${f.rare.length} slot-sizes printed in fewer than ${MIN_PLACES} places with no row (under the threshold, not judged)`);
     const rows = Object.keys(register.rows).length;
     say(`sameness-census --check: ${f.unregistered.length} unregistered, ${f.over.length} rises (red); ${notes.length} one-reading rises, ${f.stale.length} stale, ${f.loose.length} loose (notes); ${rows} rows; render ${((t1 - t0) / 60000).toFixed(1)} min, wall ${((Date.now() - t0) / 60000).toFixed(1)} min${confirmed ? ` (confirmed on ${CORPUS.confirm})` : ' (no confirmation needed)'}`);
