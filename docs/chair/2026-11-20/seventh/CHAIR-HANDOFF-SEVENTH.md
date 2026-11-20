@@ -1404,3 +1404,9 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   it will integrate R2 and hand back near 330,000. **SEAT VEIL-22 NOW, BESIDE IT** (`prompts/VEIL-22.txt`): it
   reads and re-makes the instruments and writes NOTHING to the lane until the chair's words "THE LANE IS YOURS at
   <commit>"; then it launches R3 and R4.
+- 04:40 UTC · **SEATED: VEIL-22** (created 04:40:39 UTC), session_019yED1NRw6QHpT9CiDD2hvR, on the veil lane's tip (0d28ccf19
+  when read), its own branch `lane/veil-22-2026-11-20` to be cut at the hand-over. VEIL-21 told: it stays the one
+  writer until "R2 <commit>"; it does NOT launch R3 and R4 if it would stop with builders in flight; VEIL-22
+  launches them when the chair gives it the lane. TWENTY SEATS OPENED BY THIS CHAIR. WORKING (ten): VEIL-21,
+  VEIL-22 (reading), VEIL-DOORS-3, REVIEW-VEIL-11 (waiting for R2), REVIEW-GRANTS-1, GIT-DOOR, FRAME-1, NAMES-1,
+  SEAT-MEASURE; the rest done. THE SAFETY NET OF 05:15 UTC reads these ten.
