@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "91708ca946953aa17094aa55b359fbfb938d9ba3",
-  "measuredBy": "FORTUNE-3 U4 builder",
+  "measuredAtSha": "4044990a4ba6aa469765eb2db70f5fb14a93b3c6",
+  "measuredBy": "FORTUNE-4",
   "date": "2026-11-20",
-  "note": "FS7 F1 (91708ca94): economyStateProse.js reads isSizeRelativeFortune from the fortune law leaf, so FORTUNE_LAW_TUNING gains a dependent; no value moved",
+  "note": "re-taken by its own door at the U5a merge (4044990a4): FORTUNE_LAW_TUNING.standing gains the merits rows (meritPoints, weatheredWithinYears, endorsedMinReasons; vocabulary weatheredSeverity, rulerTroubleKinds) and the dependent fortuneMerits.js; the lane side of the conflict carried U4 F1 (economyStateProse.js)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1464,8 +1464,8 @@
       "exported": true,
       "idiom": "literal",
       "keys": 4,
-      "line": 111,
-      "spanDigest": "086d1631a7ca5049f4af6d6de021f64ca1d6c5ed43945fbd2dc6b74b1cf56008",
+      "line": 122,
+      "spanDigest": "342f99a7279e4accad12dc6ed4af096384327e0abb649f923021b7c9fdfba7e0",
       "leaves": {
         "developmentFigure": 1,
         "magicScale": 0.6,
@@ -1512,16 +1512,28 @@
         "standing.safetyUsualRange.city.0": "Unsafe",
         "standing.safetyUsualRange.city.1": "Moderate",
         "standing.safetyUsualRange.metropolis.0": "Moderate",
-        "standing.safetyUsualRange.metropolis.1": "Moderate"
+        "standing.safetyUsualRange.metropolis.1": "Moderate",
+        "standing.meritPoints": 10,
+        "standing.weatheredWithinYears": 40,
+        "standing.endorsedMinReasons": 2,
+        "standing.weatheredSeverity": "catastrophic",
+        "standing.rulerTroubleKinds.0": "succession_crisis",
+        "standing.rulerTroubleKinds.1": "corruption_scandal",
+        "standing.rulerTroubleKinds.2": "tyranny",
+        "standing.rulerTroubleKinds.3": "popular_uprising",
+        "standing.rulerTroubleKinds.4": "legitimacy_crisis",
+        "standing.rulerTroubleKinds.5": "leadership_vacuum"
       },
       "dependents": [
         "src/domain/density/densityCreateBoundary.js",
         "src/domain/display/stateProse/economyStateProse.js",
+        "src/domain/fortune/fortuneMerits.js",
         "src/generators/economy/prosperity.js",
         "src/generators/factionDynamics.js",
         "src/generators/power/rulingStructure.js"
       ],
       "namedDependents": [
+        "src/domain/fortune/fortuneMerits.js",
         "src/generators/economy/prosperity.js",
         "src/generators/factionDynamics.js"
       ]
