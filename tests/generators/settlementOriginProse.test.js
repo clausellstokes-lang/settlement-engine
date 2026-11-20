@@ -47,6 +47,12 @@ import {
 import { generateSettlementReason } from '../../src/generators/narrativeGenerator.js';
 import { createGenerationWorldLaw } from '../../src/generators/generationContext.js';
 import { gen } from '../simulation/simHelpers.js';
+import { ORIGIN_VARIANTS } from '../../src/data/settlementReasonVariants.js';
+
+/** PEOPLE-2 B3 (2026-11-20): a road line as the pipeline prints it: a row of the road pool, or a wording of the road arm's
+ *  variants (`src/data/settlementReasonVariants.js`) with its slots filled. @param {string} line */
+const isRoadLine = (line) => ORIGIN_POOLS.road.includes(line)
+  || ORIGIN_VARIANTS.road.some((row) => new RegExp(`^${row.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{(ground|export|routeWay)\\\}/g, '(.+?)')}$`).test(line));
 
 afterEach(() => clearActiveRng());
 
@@ -386,17 +392,19 @@ describe('RR — the REAL pipeline, not only the pool module', () => {
   test('pin:corpus-diversity — 60 seeds on the DEFAULT config no longer print ONE body', () => {
     const bodies = new Set(CORPUS.map((seed) => originOf(gen(DEFAULT_CFG, seed))));
     // PT2-5 measured exactly 1 here. Anything above 1 is the cure; the road pool
-    // holds five, and the whole pool must be reachable through the pipeline.
-    expect(bodies.size, `distinct origin bodies over ${CORPUS.length} default-config seeds`).toBe(5);
-    for (const b of bodies) expect(ORIGIN_POOLS.road).toContain(b);
+    // holds five. Widened to the variant pool at PEOPLE-2 B3 (2026-11-20): the road pool's
+    // line is the head of a list the town's own facts extend (src/data/settlementReasonVariants.js),
+    // so the corpus prints at least the pool's five, and every body is a road line.
+    expect(bodies.size, `distinct origin bodies over ${CORPUS.length} default-config seeds`).toBeGreaterThanOrEqual(5);
+    for (const b of bodies) expect(isRoadLine(b), b).toBe(true);
   });
 
   test('pin:per-settlement-identity — two settlements on the same route+terrain differ', () => {
     const a = originOf(gen(DEFAULT_CFG, 'rr-twin-a'));
     const b = originOf(gen(DEFAULT_CFG, 'rr-twin-b'));
-    // Both are road-arm bodies (same route, same terrain) …
-    expect(ORIGIN_POOLS.road).toContain(a);
-    expect(ORIGIN_POOLS.road).toContain(b);
+    // Both are road-arm bodies (same route, same terrain) … (widened to the variant pool at PEOPLE-2 B3)
+    expect(isRoadLine(a), a).toBe(true);
+    expect(isRoadLine(b), b).toBe(true);
     // … and the rung nevertheless carries identity, which is what PT2-5 said it
     // could not. (These two seeds are pinned because they DO differ; the corpus
     // pin above proves the effect is not a lucky pair.)

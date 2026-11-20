@@ -104,7 +104,8 @@ registerStep('generateNarratives', {
   const settlementReason = generateSettlementReason(
     tier, tradeRoute, null, { ...effectiveConfig, _seed: ctx._seed },
     economicViability?.metrics?.foodBalance || null,
-    { hasDocks, hasTravellerHouse: hasInstitution(estate, 'tavern') }, // R2-CODE-A-4 (#154): an inn or a tavern serves travellers
+    { hasDocks, hasTravellerHouse: hasInstitution(estate, 'tavern'), // R2-CODE-A-4 (#154): an inn or a tavern serves travellers
+      ...{ record: { tier, population, institutions, config: effectiveConfig, economicState, economicViability, resourceAnalysis, powerStructure, stress: ctx.stress, npcs: ctx.npcs } } }, // PEOPLE-2 B3 (the chair, 17:13): the record the step holds, for factsOf (src/data/settlementReasonVariants.js); spread, since the writer's roster JSDoc (not this lane's line) names only the two flags
   );
   // Stamp the pipeline seed onto the config so generateHistory's prose-variant selection
   // (draw-free) is stable per settlement — effectiveConfig itself carries no _seed.

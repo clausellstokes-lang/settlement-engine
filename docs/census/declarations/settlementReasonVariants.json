@@ -1,0 +1,1004 @@
+{
+  "id": "settlementReasonVariants",
+  "source": "src/data/settlementReasonVariants.js :: ORIGIN_VARIANTS (road · river · crossroads) · SMALL_PLACE_VARIANTS · CITY_DEFICIT_VARIANTS · METROPOLIS_VARIANTS",
+  "drawKind": "H",
+  "drawSite": "src/data/settlementReasonVariants.js :: variedReasonLines → variedLine: drawDeclared([today's line, ...the eligible wordings], { draw: pickVariantMixed(pool, key) }) (no roll), called from narrativeGenerator.js :: generateSettlementReason's closing line; the facts are factsOf over the record steps/generateNarratives.js hands (roster.record)",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "PEOPLE-2 B3 (2026-11-20; the chair's rulings of 17:13 and 17:21 UTC). Today's line is the head of the combined list at the pick, never a stored row. Beside the atoms, a row is eligible only where its slots fill from the facts ({ground}: the terrain; {export}: the first of exported: flour|hides|ale|arms; {routeWay}: the route) and, where it carries input \"food import\", where the writer's own food balance brings food in (importCoverage > 0). No row needs a hideable house or a fact about crime.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "ORIGIN_VARIANTS.road::road.1",
+      "pool": "ORIGIN_VARIANTS.road",
+      "where": "settlementReason[0], the road arm (after settlementOriginProse.js :: ORIGIN_POOLS.road)",
+      "text": "It stands on the road {ground}, and the road is how people and goods reach it.",
+      "needs": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "ground"
+      ],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.road::road.2",
+      "pool": "ORIGIN_VARIANTS.road",
+      "where": "settlementReason[0], the road arm (after settlementOriginProse.js :: ORIGIN_POOLS.road)",
+      "text": "Built beside the road {ground}; what the place sells goes out along it, and what it buys comes in.",
+      "needs": [
+        "exports",
+        "imports"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "ground"
+      ],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.road::road.3",
+      "pool": "ORIGIN_VARIANTS.road",
+      "where": "settlementReason[0], the road arm (after settlementOriginProse.js :: ORIGIN_POOLS.road)",
+      "text": "A road settlement with a market of its own, where goods that come along the road are bought and sold.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.road::road.4",
+      "pool": "ORIGIN_VARIANTS.road",
+      "where": "settlementReason[0], the road arm (after settlementOriginProse.js :: ORIGIN_POOLS.road)",
+      "text": "It stands where the road meets the river, and goods come in by both.",
+      "needs": [
+        "river",
+        "navigable"
+      ],
+      "excludes": [
+        "crisis: under_siege",
+        "route: river"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.road::road.5",
+      "pool": "ORIGIN_VARIANTS.road",
+      "where": "settlementReason[0], the road arm (after settlementOriginProse.js :: ORIGIN_POOLS.road)",
+      "text": "The road climbs to it through the hills, and every load comes up that road.",
+      "needs": [
+        "terrain: hills"
+      ],
+      "excludes": [
+        "crisis: under_siege",
+        "navigable"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.road::road.6",
+      "pool": "ORIGIN_VARIANTS.road",
+      "where": "settlementReason[0], the road arm (after settlementOriginProse.js :: ORIGIN_POOLS.road)",
+      "text": "The road winds up to it through the mountains, and every load comes up that road.",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [
+        "crisis: under_siege",
+        "navigable"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.road::road.7",
+      "pool": "ORIGIN_VARIANTS.road",
+      "where": "settlementReason[0], the road arm (after settlementOriginProse.js :: ORIGIN_POOLS.road)",
+      "text": "It stands on the road, and its {export} goes out along it to be sold.",
+      "needs": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "export"
+      ],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.road::road.8",
+      "pool": "ORIGIN_VARIANTS.road",
+      "where": "settlementReason[0], the road arm (after settlementOriginProse.js :: ORIGIN_POOLS.road)",
+      "text": "Built on the road across the open plain, among its own grain fields.",
+      "needs": [
+        "terrain: plains",
+        "grain"
+      ],
+      "excludes": [
+        "famine"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.river::river.1",
+      "pool": "ORIGIN_VARIANTS.river",
+      "where": "settlementReason[0], the river arm (after settlementOriginProse.js :: ORIGIN_POOLS.river)",
+      "text": "It stands on the river {ground}, and the river is its way in and out.",
+      "needs": [],
+      "excludes": [
+        "crisis: under_siege",
+        "terrain: riverside"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "ground"
+      ],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.river::river.2",
+      "pool": "ORIGIN_VARIANTS.river",
+      "where": "settlementReason[0], the river arm (after settlementOriginProse.js :: ORIGIN_POOLS.river)",
+      "text": "Built on the river, with landing stages where boats tie up to load and unload.",
+      "needs": [
+        "docks"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.river::river.3",
+      "pool": "ORIGIN_VARIANTS.river",
+      "where": "settlementReason[0], the river arm (after settlementOriginProse.js :: ORIGIN_POOLS.river)",
+      "text": "Built on the river; its people fish it, and draw their water from it.",
+      "needs": [
+        "fish",
+        "river"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.river::river.4",
+      "pool": "ORIGIN_VARIANTS.river",
+      "where": "settlementReason[0], the river arm (after settlementOriginProse.js :: ORIGIN_POOLS.river)",
+      "text": "A river settlement whose market takes in what comes by water and what comes by land.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.river::river.5",
+      "pool": "ORIGIN_VARIANTS.river",
+      "where": "settlementReason[0], the river arm (after settlementOriginProse.js :: ORIGIN_POOLS.river)",
+      "text": "A river settlement; its {export} goes out by the river to be sold.",
+      "needs": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "export"
+      ],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.crossroads::crossroads.1",
+      "pool": "ORIGIN_VARIANTS.crossroads",
+      "where": "settlementReason[0], the crossroads arm (after settlementOriginProse.js :: ORIGIN_POOLS.crossroads)",
+      "text": "Built where the roads cross; its market draws buyers from every direction.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.crossroads::crossroads.2",
+      "pool": "ORIGIN_VARIANTS.crossroads",
+      "where": "settlementReason[0], the crossroads arm (after settlementOriginProse.js :: ORIGIN_POOLS.crossroads)",
+      "text": "It stands where roads cross {ground}.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "ground"
+      ],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.crossroads::crossroads.3",
+      "pool": "ORIGIN_VARIANTS.crossroads",
+      "where": "settlementReason[0], the crossroads arm (after settlementOriginProse.js :: ORIGIN_POOLS.crossroads)",
+      "text": "Built at a crossroads; its {export} goes out along its roads.",
+      "needs": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "export"
+      ],
+      "inputs": []
+    },
+    {
+      "id": "ORIGIN_VARIANTS.crossroads::crossroads.4",
+      "pool": "ORIGIN_VARIANTS.crossroads",
+      "where": "settlementReason[0], the crossroads arm (after settlementOriginProse.js :: ORIGIN_POOLS.crossroads)",
+      "text": "Built where the roads cross; travellers from every road find an inn here.",
+      "needs": [
+        "institution: tavern",
+        "tier: ≤ town",
+        "route: crossroads"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.1",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "A few households {ground}, each with its own work.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "ground"
+      ],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.2",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "A handful of homes {ground}, where any newcomer is noticed at once.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "ground"
+      ],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.3",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "Fishing is part of how the households here feed themselves.",
+      "needs": [
+        "fish"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.4",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "Grain from their own fields feeds the households here.",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [
+        "famine"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.5",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "Herds are part of how the households here feed themselves.",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.6",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "Hunting is part of how the households here feed themselves.",
+      "needs": [
+        "game"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.7",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "There is no market here; what a household cannot make, it must get elsewhere or do without.",
+      "needs": [],
+      "excludes": [
+        "market"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.8",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "In most years there is just enough here, and little put by.",
+      "needs": [
+        "prosperity: ≤ poor"
+      ],
+      "excludes": [
+        "famine"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.9",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "The place is small, but its households want for little.",
+      "needs": [
+        "prosperity: ≥ comfortable"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.10",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "There is no temple here; for the rites, people go to the nearest place that has one.",
+      "needs": [
+        "church access"
+      ],
+      "excludes": [
+        "temple",
+        "church"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.11",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "The place sends out its {export} to be sold.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "export"
+      ],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.12",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "What little needs deciding here is decided by the elders together.",
+      "needs": [
+        "ruling body",
+        "ruler: elder"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.13",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "A palisade rings the few houses here.",
+      "needs": [
+        "palisade"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.14",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "The fields here grow more than the households eat.",
+      "needs": [
+        "food surplus"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "SMALL_PLACE_VARIANTS::small.15",
+      "pool": "SMALL_PLACE_VARIANTS",
+      "where": "settlementReason[1], thorp and hamlet (after narrativeGenerator.js :: SMALL_PLACE_TIER_LINES)",
+      "text": "What the place has to sell is taken elsewhere to market.",
+      "needs": [
+        "exports"
+      ],
+      "excludes": [
+        "market"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.1",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "The city eats more than its own fields can grow; the rest comes in {routeWay}.",
+      "needs": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "routeWay"
+      ],
+      "inputs": [
+        "food import"
+      ]
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.2",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "Its own fields cannot fill the city's grain stores.",
+      "needs": [
+        "institution: granary"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.3",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "Part of what the city eats is bought at its market, not grown by its own people.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": [
+        "food import"
+      ]
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.4",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "The city lands fish of its own, but still eats more than its fields and its catch provide.",
+      "needs": [
+        "fish"
+      ],
+      "excludes": [
+        "fish bought in"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.5",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "Even its fish is bought in now; the city grows and catches less than it eats.",
+      "needs": [
+        "fish bought in"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.6",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "Barges bring food in by the river to a city its own fields cannot feed.",
+      "needs": [
+        "river",
+        "docks"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": [
+        "food import"
+      ]
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.7",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "Boats bring in food by water; its own fields cannot feed a city this size.",
+      "needs": [
+        "coast",
+        "docks"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": [
+        "food import"
+      ]
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.8",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "Its herds and its fields cannot feed the whole city; the rest must come from outside.",
+      "needs": [
+        "livestock",
+        "grain"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": [
+        "food import"
+      ]
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.9",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "The city can afford to buy what its own fields cannot grow, and it has to.",
+      "needs": [
+        "prosperity: ≥ comfortable"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": [
+        "food import"
+      ]
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.10",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "A city this size {ground} eats more than its own fields can grow.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "ground"
+      ],
+      "inputs": []
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.11",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "Grain from outside is ground here alongside its own; the city's fields cannot feed it.",
+      "needs": [
+        "institution: mill",
+        "grain"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": [
+        "food import"
+      ]
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.12",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "Carts of food come in at its gates; its own fields cannot feed it.",
+      "needs": [
+        "gate",
+        "imports"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": [
+        "food import"
+      ]
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.13",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "A city of this many people eats more than its own fields can grow.",
+      "needs": [
+        "population: large"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.14",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "Some of what is eaten here comes in {routeWay}; the city's own fields cannot grow enough.",
+      "needs": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "routeWay"
+      ],
+      "inputs": [
+        "food import"
+      ]
+    },
+    {
+      "id": "CITY_DEFICIT_VARIANTS::city.15",
+      "pool": "CITY_DEFICIT_VARIANTS",
+      "where": "settlementReason[1], a city with a meaningful food gap (after the one gap line)",
+      "text": "The fields around the city {ground} cannot feed it; the rest is bought in.",
+      "needs": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "ground"
+      ],
+      "inputs": [
+        "food import"
+      ]
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.1",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "Buyers and sellers from across the region come here to trade.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.2",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "Disputes from across the region are brought to court here.",
+      "needs": [
+        "court"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.3",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "Its council decides matters for the whole region, not only for the city.",
+      "needs": [
+        "ruler: council"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.4",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "Its lord's decisions reach well beyond the walls.",
+      "needs": [
+        "ruler: lord",
+        "walls"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.5",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "Coin for the region's trade is lent, changed and kept here.",
+      "needs": [
+        "institution: bank"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.6",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "Barges from up and down the river unload here.",
+      "needs": [
+        "river",
+        "docks"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.7",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "Ships from along the coast unload here.",
+      "needs": [
+        "coast",
+        "docks"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.8",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "Its {export} is sold across the region.",
+      "needs": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "export"
+      ],
+      "inputs": []
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.9",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "The region's roads meet here, and its trade with them.",
+      "needs": [
+        "route: crossroads"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.10",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "The region's trade and its business come to this city {ground}.",
+      "needs": [],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [
+        "ground"
+      ],
+      "inputs": []
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.11",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "Students from across the region come here to study.",
+      "needs": [
+        "institution: school"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.12",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "Prices across the region follow what is paid here.",
+      "needs": [
+        "market"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.13",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "The rules the region's trades work by are set here.",
+      "needs": [
+        "guild"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.14",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "Contracts for the region's trade are drawn up and sealed here.",
+      "needs": [
+        "legal house"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    },
+    {
+      "id": "METROPOLIS_VARIANTS::metropolis.15",
+      "pool": "METROPOLIS_VARIANTS",
+      "where": "settlementReason[1], a metropolis outside a siege (after the one line; under a siege its twin stands alone)",
+      "text": "People from across the region come here to be treated.",
+      "needs": [
+        "hospital"
+      ],
+      "excludes": [
+        "crisis: under_siege"
+      ],
+      "crisis": [],
+      "colour": false,
+      "slots": [],
+      "inputs": []
+    }
+  ]
+}

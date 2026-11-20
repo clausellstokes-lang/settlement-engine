@@ -3,7 +3,7 @@
   "corpus": "[{\"tier\":\"thorp\",\"n\":150},{\"tier\":\"hamlet\",\"n\":200},{\"tier\":\"village\",\"n\":350},{\"tier\":\"town\",\"n\":550},{\"tier\":\"city\",\"n\":350},{\"tier\":\"metropolis\",\"n\":150},{\"tier\":\"village\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"famine\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"wartime\"},{\"tier\":\"town\",\"n\":50,\"stress\":\"under_siege\"},{\"tier\":\"city\",\"n\":50,\"stress\":\"under_siege\"}]",
   "census": {
     "_note": "Figures for the second wave, never a red: re-written by every door.",
-    "pools": 960,
+    "pools": 966,
     "printOneLine": 670,
     "measuredUnder30Draws": 151,
     "highestSharesOver150Draws": [
@@ -5911,6 +5911,42 @@
       "top5": 0.5724,
       "lines": 15,
       "reason": "banked BY ITS OWN ROW at the last close (LASTCLOSE-DOORS, 2026-11-19, the chair's ruling on its hand-back's §3 (1)), through the door's own bankNew narrowed to this pool (at the higher of the two corpora's readings), NOT --bank-new: point 68's imports list (FR24); 15 lines, top1 0.13, not lopsided; registered at the last close"
+    },
+    "ledger:settlementReasonVariants:CITY_DEFICIT_VARIANTS": {
+      "top1": 0.14,
+      "top5": 0.5734,
+      "lines": 16,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:settlementReasonVariants:METROPOLIS_VARIANTS": {
+      "top1": 0.1555,
+      "top5": 0.5676,
+      "lines": 15,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:settlementReasonVariants:ORIGIN_VARIANTS.crossroads": {
+      "top1": 0.3192,
+      "top5": 0.785,
+      "lines": 9,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:settlementReasonVariants:ORIGIN_VARIANTS.river": {
+      "top1": 0.1848,
+      "top5": 0.702,
+      "lines": 10,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:settlementReasonVariants:ORIGIN_VARIANTS.road": {
+      "top1": 0.2308,
+      "top5": 0.7397,
+      "lines": 13,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
+    },
+    "ledger:settlementReasonVariants:SMALL_PLACE_VARIANTS": {
+      "top1": 0.1343,
+      "top5": 0.5458,
+      "lines": 20,
+      "reason": "banked by --bank-new (the chair's ruling of 2026-11-12, COHERENCE-AGREE-4): a drawn pool with no row, at the higher of the two corpora's readings"
     }
   }
 }

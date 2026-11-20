@@ -20,7 +20,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { generateSettlementReason } from '../../src/generators/narrativeGenerator.js';
-import { originArmKey, originVariantKey } from '../../src/generators/narrative/settlementOriginProse.js';
+import { GROUND_PHRASE, originArmKey, originVariantKey } from '../../src/generators/narrative/settlementOriginProse.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
@@ -42,8 +42,14 @@ function maskOf(/** @type {any} */ t) {
   const names = new Set();
   const add = (/** @type {unknown} */ x) => { if (typeof x === 'string' && x.trim().length > 2) names.add(x.trim()); };
   add(t.name);
-  for (const p of t.npcs || []) { add(p.name); for (const w of String(p.name || '').split(/\s+/)) if (w.length > 3) add(w); }
-  for (const f of t.powerStructure?.factions || []) { add(f.name); add(f.faction); }
+  for (const p of t.npcs || []) {
+    add(p.name);
+    for (const w of String(p.name || '').split(/\s+/)) if (w.length > 3) add(w);
+  }
+  for (const f of t.powerStructure?.factions || []) {
+    add(f.name);
+    add(f.faction);
+  }
   const list = [...names].sort((a, b) => b.length - a.length);
   const re = list.length ? new RegExp(list.map(esc).join('|'), 'g') : null;
   return (/** @type {string} */ s) => (re ? s.replace(re, '#') : s).replace(/\d+/g, '0');
@@ -92,7 +98,7 @@ beforeAll(async () => {
         const hits = rows.filter((r) => r.re.test(line));
         if (!hits.length) continue;
         const admitted = (/** @type {any} */ f) => hits.some((h) => drawDeclared([h.row], { draw: (p) => p[0], facts: f, poolId: 'test' }).resolvedBy === 'drawn');
-        const filledHere = hits.some((h) => V.fillWording(h.row.text, V.slotsOf(facts)) === line);
+        const filledHere = hits.some((h) => V.fillWording(h.row.text, V.slotsOf(facts, GROUND_PHRASE)) === line);
         for (const h of hits) PRINTED.set(`${h.pool} :: ${h.row.text}`, (PRINTED.get(`${h.pool} :: ${h.row.text}`) || 0) + 1);
         if (!admitted(facts)) ADMIT_MISSES.push(`${seed}: ${line}`);
         if (!filledHere) SLOT_MISSES.push(`${seed}: ${line}`);
@@ -134,9 +140,9 @@ describe('2. a seedless record, and a place with no eligible wording, keep their
 
   it('variedReasonLines hands back the very lines it was given: no seed, no facts, no eligible wording', () => {
     expect(V).not.toBeNull();
-    const ctx = (/** @type {Record<string, unknown>} */ over) => ({ tier: 'city', route: 'road', config: { terrainType: 'plains', _seed: 'b3-unit-1' }, foodBalance: GAP, roster: { hasDocks: false, record: RECORD }, siege: false, hasFoodDeficit: true, originArmKey, originVariantKey, ...over });
+    const ctx = (/** @type {Record<string, unknown>} */ over) => ({ tier: 'city', route: 'road', config: { terrainType: 'plains', _seed: 'b3-unit-1' }, foodBalance: GAP, roster: { hasDocks: false, record: RECORD }, seed: 'b3-unit-1', siege: false, hasFoodDeficit: true, originArmKey, originVariantKey, groundPhrase: GROUND_PHRASE, ...over });
     const lines = generateSettlementReason('city', 'road', null, { terrainType: 'plains' }, GAP, { hasDocks: false });
-    expect(V.variedReasonLines(lines, ctx({ config: { terrainType: 'plains' } }))).toBe(lines); // no seed
+    expect(V.variedReasonLines(lines, ctx({ seed: undefined }))).toBe(lines); // no seed
     expect(V.variedReasonLines(lines, ctx({ roster: { hasDocks: false } }))).toBe(lines); // no facts
     // a city whose record answers no wording: no house, no terrain, no food source, nothing brought in
     const bareCity = { tier: 'city', institutions: [], config: { tradeRouteAccess: 'isolated', stressTypes: [] }, economicState: {} };

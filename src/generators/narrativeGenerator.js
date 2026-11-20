@@ -828,7 +828,7 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
     lines.push(pickVariant(SMALL_PLACE_TIER_LINES, seed ? `${seed}::settlement-tier-line::${tier}` : null));
   }
 
-  return lines;
+  return variedReasonLines(lines, { tier, route, config: _config, seed: _config._seed, specialResources: _config.specialResources ?? null, foodBalance, roster, siege: siegeInForce, hasFoodDeficit, originArmKey, originVariantKey, groundPhrase: GROUND_PHRASE }); // PEOPLE-2 B3 (the chair, 17:21): the wordings that follow today's line, picked by pickVariantMixed on the record's own facts (src/data/settlementReasonVariants.js); the lines as they came where none is eligible
 };
 
 // ─── generatePressureSentence ─────────────────────────────────────────────────
@@ -1119,3 +1119,6 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null, 
     },
   };
 };
+// PEOPLE-2 B3: at the END, so no cited line moves; the data file imports no generator, so the writer hands it the origin's own arm, key and ground phrases
+import { variedReasonLines } from '../data/settlementReasonVariants.js';
+import { GROUND_PHRASE, originArmKey, originVariantKey } from './narrative/settlementOriginProse.js';

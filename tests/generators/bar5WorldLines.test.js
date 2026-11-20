@@ -60,6 +60,13 @@ const ROADSIDE = 'It stands roadside, where the day is measured in traffic: what
 const FOUNDING_FIRED_AT_BASE = Object.freeze([
   'bar0-metropolis-calm-rand-25', 'bar0-village-famine-rand-23', 'bar0-village-famine-rand-25',
 ]);
+/** What each prints (re-keyed by identity at PEOPLE-2 B3, 2026-11-20: the road arm's line is the head of a list the town's own
+ *  facts extend, `src/data/settlementReasonVariants.js`; the three print a road wording now, and none tells a founding). */
+const PRINTS_NOW = Object.freeze({
+  'bar0-metropolis-calm-rand-25': 'It stands on the road, and its grain goes out along it to be sold.',
+  'bar0-village-famine-rand-23': 'It stands on the road, and its grain goes out along it to be sold.',
+  'bar0-village-famine-rand-25': 'It stands on the road out on the open plain, and the road is how people and goods reach it.',
+});
 
 describe('BAR5-WORLD (a): the founding is told once, by the History', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
@@ -82,7 +89,7 @@ describe('BAR5-WORLD (a): the founding is told once, by the History', () => {
   it('the towns it fired in at the base print the same row, telling no founding (every town)', () => {
     expectNoSeedFailures(collectSeedFailures(FOUNDING_FIRED_AT_BASE, (seed) => {
       const s = born(seed);
-      expect(originOf(s), `${seed}: the same pick, reworded`).toBe(ROADSIDE);
+      expect(originOf(s), `${seed}: the road arm's line, re-keyed by identity`).toBe(PRINTS_NOW[/** @type {keyof typeof PRINTS_NOW} */ (seed)]);
       const tabs = { 'Summary/Overview': [originOf(s)], 'World/History': [`Origin: · ${s.history?.founding?.reason}`] };
       expect(LAW4.law4n({ record: s, tabs, town: seed }).filter((i) => i.law === '4n-founding').map((i) => i.line)).toEqual([]);
     }), 'the founding told once');

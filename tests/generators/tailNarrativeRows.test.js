@@ -165,8 +165,8 @@ describe('B3 the origin line says where the place stands and what the record hol
   const origin = (seed) => String(born(seed).settlementReason?.[0]);
   /** [id, seed, must not print, what prints instead] */
   const CURED = /** @type {Array<[string, string, RegExp, RegExp]>} */ ([
-    ['B20939', 'r2s-plague_onset-thorp-0', /most of what it owns arrived/, /its news has always come on somebody else's cart\.$/], // BAR2-PLACES (PL2, 2026-11-15): re-keyed by its text (no generations claimed),
-    ['09370', 'r2s-famine-city-3', /^Founded at a junction/, /^Built at a junction, and the oldest logic there is applies/],
+    ['B20939', 'r2s-plague_onset-thorp-0', /most of what it owns arrived/, /^Built beside the road in the forest; what the place sells goes out along it, and what it buys comes in\.$/], // BAR2-PLACES (PL2, 2026-11-15): re-keyed by its text (no generations claimed); re-keyed by identity at PEOPLE-2 B3 (2026-11-20): the town prints a road wording on its own facts (src/data/settlementReasonVariants.js),
+    ['09370', 'r2s-famine-city-3', /^Founded at a junction/, /^It stands where roads cross out on the open plain\.$/], // re-keyed by identity at PEOPLE-2 B3 (2026-11-20): a crossroads wording on the town's own terrain
     ['11941', 'r2r-metropolis-14', /^It exists because travellers/, /^It stands where the roads meet, on ground travellers stopped at long before anyone built here\.$/],
     ['09398', 'r2s-famine-town-2', /for the shelter of its anchorage/, /^Built on the coast around the shelter of its anchorage, and the sea has set the terms/],
     ['B20803', 'r2s-under_siege-metropolis-1', /The sea gives the settlement its living/, /the sea has set the terms of its living ever since\.$/],
@@ -196,8 +196,8 @@ describe('B3 the origin line says where the place stands and what the record hol
   const KEEP = /** @type {Array<[string, string, RegExp]>} */ ([
     // re-keyed by identity (BAR5-WORLD, 2026-11-16): the same row (ORIGIN_POOLS.road[2]) reworded to tell no founding (LAW 4:
     // the founding is the History's); the town and the pick unchanged
-    ['09400 struck: a place, not a cause', 'r2r-thorp-40', /^It stands roadside, where the day is measured in traffic/],
-    ['22374 struck: trade on every road, no siege', 'r2s-famine-town-0', /^Built at a major crossroads, and trade comes in on every road\.$/],
+    ['09400 struck: a place, not a cause', 'r2r-thorp-40', /^Built beside the road out on the open plain; what the place sells goes out along it/], // re-keyed by identity at PEOPLE-2 B3 (2026-11-20): a road wording on the town's own facts (src/data/settlementReasonVariants.js); no cause, as the row
+    ['22374 struck: trade on every road, no siege', 'r2s-famine-town-0', /^It stands where roads cross out on the open plain\.$/], // re-keyed by identity at PEOPLE-2 B3 (2026-11-20): a crossroads wording on the town's own terrain
     ['port.coastal[1]', 'r2r-town-51', /^A seaport\. The tide sets the working day/],
     ['unsupplied[0] at an 8% gap', 'r2r-thorp-23', /^Isolated from major trade routes\. The settlement cannot fully feed itself, and no food comes in from outside: /],
     ['the magic path the receipt holds', 'r2r-town-12', /through carriage by magic or the tracks in a good season — or not at all\.$/],
