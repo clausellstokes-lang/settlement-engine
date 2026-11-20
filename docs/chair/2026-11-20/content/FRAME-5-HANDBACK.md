@@ -19,6 +19,12 @@ Cast and weight disagree on 0 towns. The opening trouble is unchanged from FRAME
 
 26. **The line merge is refused by FRAME-5's own permission check** (11:15 UTC). The auto-mode classifier denied `git merge`. Reported to the chair, which offered to push a base branch that holds the merge with ruling 12's re-pins.
 
+27. **CF12, by the owner's word** (the chair, 11:15 UTC; the owner, verbatim: "Do all of these, every last one predeploy"). It applies where a calm town's record holds a hall at `captureState` 'corrupted' or worse AND a crime_wave among its current tensions. There, the owner's Open Tonight sheet (PEOPLE TO VOICE and its hooks) draws from the crime wave's own sides as the record holds them.
+    - Its law: owner audience only (shared, public and player-printed paths stay byte for byte today's); no new draw; every town without both facts stays byte-identical; the count before and after by size, with the 6 sheets before and after as plain text; one cause, one builder, one commit, red first.
+    - Its place: after C1 and U0's merge, beside P1b and P4a.
+    - Measured by FRAME-5 at `9e23a094d` (`count/cf12.mjs pool.json <src/>`): 6 calm towns (town 2, city 3, metropolis 1). In each, the corrupted hall is the ruling power. Five keep today's sheet. frame-calm-city-14 is already framed, by that same crime_wave (W2).
+    - Readable without the security lane: `powerStructure.factions[].captureState` is a record field, and the veil deletes it on shared paths (a second lock behind the audience gate).
+
 ## EACH UNIT: STATE, BRANCH, COMMIT
 
 | unit | state | commit | receipts |
