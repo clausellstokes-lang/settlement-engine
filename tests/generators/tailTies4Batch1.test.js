@@ -46,7 +46,10 @@ const NOT = [
   ['r2r-thorp-38', 'lender', 'no market'], ['r2r-village-22', 'lender', 'no market'], ['r2r-village-47', 'lender', 'no market'],
 ];
 /** [seed, line] a true print at the base */
-const KEEP = [['r2r-city-2', 'sea'], ['r2r-city-10', 'scales'], ['r2r-town-0', 'lender']];
+// 2026-11-20 (DEPTH-2 hooks tranche 2, the chair's words of 16:22 and 16:35 UTC): re-picked by a probe of r2r-city-0..149 and
+// r2r-town-0..59 (the second tranche grew `other` 70 -> 100 and `economy` 38 -> 44): sea r2r-city-2 -> r2r-city-16 (maritime),
+// scales r2r-city-10 -> r2r-city-1, lender r2r-town-0 -> r2r-town-8; INSTEAD r2r-city-6, r2r-city-40 -> r2r-city-42, r2r-city-62 (river towns).
+const KEEP = [['r2r-city-16', 'sea'], ['r2r-city-1', 'scales'], ['r2r-town-8', 'lender']];
 
 describe('TAIL-TIES-4 batch 1: a cargo needs an open route; scales and a shop need a market (T18)', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
@@ -60,7 +63,7 @@ describe('TAIL-TIES-4 batch 1: a cargo needs an open route; scales and a shop ne
   });
 
   it("INSTEAD: a river town's cargo is lost on its way here (the sea line's twin keeps the draw)", () => {
-    const failures = collectSeedFailures(['r2r-city-6', 'r2r-city-40', 'r2r-metropolis-16'], (seed) => {
+    const failures = collectSeedFailures(['r2r-city-42', 'r2r-city-62', 'r2r-metropolis-16'], (seed) => {
       expect(hooks(seed).some((h) => h.includes(L.way)), seed).toBe(true);
     });
     expectNoSeedFailures(failures, "every river town's cargo is lost on its way here");

@@ -63,10 +63,14 @@ const NOT = [
   ['r2s-occupied-metropolis-0', 'theatre', 'an occupation curfew'], ['r2s-occupied-metropolis-2', 'theatre', 'an occupation curfew'],
 ];
 /** [seed, line] a true print at the base */
+// 2026-11-20 (DEPTH-2 hooks tranche 2, the chair's words of 16:22 and 16:35 UTC): re-picked by a probe of r2r-city-0..149 (the
+// second tranche grew `other` 70 -> 100 and `economy` 38 -> 44): traveller r2r-city-0 -> r2r-city-1, cousin r2r-city-3 -> r2r-city-5,
+// drinks r2r-city-5 -> r2r-city-6, shipment r2r-city-1 -> r2r-city-9, sea r2r-city-2 -> r2r-city-16 (maritime);
+// INSTEAD r2r-city-6, r2r-city-40 -> r2r-city-42, r2r-city-62 (river towns, as the two that left).
 const KEEP = [
-  ['r2r-city-0', 'traveller'], ['r2r-city-3', 'cousin'], ['r2r-city-5', 'drinks'], ['r2r-city-1', 'customer'], ['r2r-city-4', 'petition'],
-  ['r2r-city-0', 'suppliers'], ['r2r-city-1', 'shipment'], ['r2r-city-3', 'captain'], ['r2r-city-1', 'district'], ['r2r-city-1', 'armoury'],
-  ['r2r-city-2', 'sea'], ['r2s-succession_void-hamlet-0', 'quarrel'],
+  ['r2r-city-1', 'traveller'], ['r2r-city-5', 'cousin'], ['r2r-city-6', 'drinks'], ['r2r-city-1', 'customer'], ['r2r-city-4', 'petition'],
+  ['r2r-city-0', 'suppliers'], ['r2r-city-9', 'shipment'], ['r2r-city-3', 'captain'], ['r2r-city-1', 'district'], ['r2r-city-1', 'armoury'],
+  ['r2r-city-16', 'sea'], ['r2s-succession_void-hamlet-0', 'quarrel'],
 ];
 
 describe('TAIL-TIES batch 2: a hook presumes only what the town holds (T3)', () => {
@@ -81,7 +85,7 @@ describe('TAIL-TIES batch 2: a hook presumes only what the town holds (T3)', () 
   });
 
   it('INSTEAD: a cargo lost inland is lost on its way here (the sea line\'s twin keeps the draw)', () => {
-    const failures = collectSeedFailures(['r2r-city-6', 'r2r-city-40', 'r2r-city-55'], (seed) => { expect(hooks(seed).some((h) => h.includes(L.road)), seed).toBe(true); });
+    const failures = collectSeedFailures(['r2r-city-42', 'r2r-city-62', 'r2r-city-55'], (seed) => { expect(hooks(seed).some((h) => h.includes(L.road)), seed).toBe(true); });
     expectNoSeedFailures(failures, 'a cargo lost inland is lost on its way here');
   });
 
