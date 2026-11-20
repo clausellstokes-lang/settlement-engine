@@ -337,6 +337,14 @@ parts of the whole check (at the close).
   before anything is built; if near none, whether capture should be commoner is a tuning choice brought to the owner
   with numbers). THE TIME GUESS MOVED: about half a day more on the two to three days.
 
+- **2026-11-20, about 05:20 UTC, THE OWNER (verbatim, the whole message):** "Crime bosses I think is the best term for
+  group of them." TAKEN AS the name of the second ruler card where two or more criminal houses stand behind a captured
+  seat: the card is headed "Crime Bosses". THE CHAIR'S OWN LIST OF PACT NAMES (the Accord, the Truce, the Division, the
+  Understanding, the Quiet Table), offered to the owner to strike, IS WITHDRAWN. Said back to the owner the same turn:
+  the group card lists each boss with their house and carries one fixed line for the owner's point (none of them rules
+  alone; each keeps the others in check); one criminal house: one card for that house's boss under the house's own
+  title. CS15 (b) amended (SEAT-1's ADDENDUM 2).
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
