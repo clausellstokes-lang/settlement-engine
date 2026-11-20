@@ -39,3 +39,16 @@ nulled (VR9's holder pass: R4's, named there).
 regeneration under all 16 switch settings, plus the possible-world signature by tier). AT THE PRE-R3 LANE 15567e597
 (`out/tell-at-15567e597.txt`): 92 towns with a hideable house (the gate's 92); my recompute of the gate, server: HIGHER
 21, EQUAL 65, LOWER 6 per Reveal arm; twin = server on every read. My gate CAN FAIL; at R3 it must read HIGHER 0.
+
+## 3. Cold read: "TRAD-SHARE 1f3cdc135" (written 13:39 UTC). A HOLE.
+
+THE HOLE (executed, `traddead.probe.jsx`, `out/traddead-at-1f3cdc135-on-212.txt`): the reader's dead-clause skips events whose
+name holds a FULL held name (`traditionDescription.js :: heldNamesOf`); 212's sweep also takes an event by a hidden house's
+BARE form. Plant: the house renamed "<n> (word of mouth)", a great fire named "The <n> Fire": 212 withholds the event, the
+served rows say "…in memory of the great fire, 2 years ago": 16/16 reads; control served and recalled 16/16. Cure: fold
+the bare form in `heldNamesOf`, red first by this plant.
+LOWER (executed, `tradfloor.probe.jsx`): no eye of any card kind moves a row in 140 born towns; a DM-made power with no
+mapped category takes its archetype from its hideable `description`: the keeper moves in 25/140 (plant).
+HOLDS, executed on 4 towns only (`out/trad-smoke-at-1f3cdc135.txt`): rows equal with every hideable row removed; served rows
+byte-equal to the client's on gallery and link, lane chain and 212, nothing hidden / default / every Curate address
+hidden, Reveal off and on; a pre-change save serves none. NOT DONE: import (stub missing then); the 140-town round trip.

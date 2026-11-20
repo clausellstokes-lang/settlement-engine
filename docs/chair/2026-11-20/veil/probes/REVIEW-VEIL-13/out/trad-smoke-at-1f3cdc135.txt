@@ -1,0 +1,199 @@
+towns 4, with shared rows 4
+0/4	(1) rows equal with every hideable row and field removed from the input
+0/3	(1b) genesis set equal without the hideable rows (preview towns)
+0/3	(1b) no tradition of the set stands on a hideable house or veiled power (owner or name)
+0/4	(2) the composed publicProse carries the rows as sharedTraditionRowsOf draws them
+0/4	(2) served rows byte-equal to the client's (lane gallery nothing hidden dm=false)
+0/4	(4) a town saved before the change serves no rows (lane gallery nothing hidden dm=false)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (lane gallery nothing hidden dm=false)
+0/4	(2) served rows byte-equal to the client's (lane link nothing hidden dm=false)
+0/4	(4) a town saved before the change serves no rows (lane link nothing hidden dm=false)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (lane link nothing hidden dm=false)
+4/4	(2) served a document (lane import nothing hidden dm=false)
+0/4	(2) served rows byte-equal to the client's (lane gallery nothing hidden dm=true)
+0/4	(4) a town saved before the change serves no rows (lane gallery nothing hidden dm=true)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (lane gallery nothing hidden dm=true)
+0/4	(2) served rows byte-equal to the client's (lane link nothing hidden dm=true)
+0/4	(4) a town saved before the change serves no rows (lane link nothing hidden dm=true)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (lane link nothing hidden dm=true)
+4/4	(2) served a document (lane import nothing hidden dm=true)
+0/4	(2) served rows byte-equal to the client's (lane gallery default veil dm=false)
+0/4	(4) a town saved before the change serves no rows (lane gallery default veil dm=false)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (lane gallery default veil dm=false)
+0/4	(2) served rows byte-equal to the client's (lane link default veil dm=false)
+0/4	(4) a town saved before the change serves no rows (lane link default veil dm=false)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (lane link default veil dm=false)
+4/4	(2) served a document (lane import default veil dm=false)
+0/4	(2) served rows byte-equal to the client's (lane gallery default veil dm=true)
+0/4	(4) a town saved before the change serves no rows (lane gallery default veil dm=true)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (lane gallery default veil dm=true)
+0/4	(2) served rows byte-equal to the client's (lane link default veil dm=true)
+0/4	(4) a town saved before the change serves no rows (lane link default veil dm=true)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (lane link default veil dm=true)
+4/4	(2) served a document (lane import default veil dm=true)
+0/4	(2) served rows byte-equal to the client's (lane gallery EVERY Curate address hidden dm=false)
+0/4	(4) a town saved before the change serves no rows (lane gallery EVERY Curate address hidden dm=false)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (lane gallery EVERY Curate address hidden dm=false)
+0/4	(2) served rows byte-equal to the client's (lane link EVERY Curate address hidden dm=false)
+0/4	(4) a town saved before the change serves no rows (lane link EVERY Curate address hidden dm=false)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (lane link EVERY Curate address hidden dm=false)
+4/4	(2) served a document (lane import EVERY Curate address hidden dm=false)
+0/4	(2) served rows byte-equal to the client's (lane gallery EVERY Curate address hidden dm=true)
+0/4	(4) a town saved before the change serves no rows (lane gallery EVERY Curate address hidden dm=true)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (lane gallery EVERY Curate address hidden dm=true)
+0/4	(2) served rows byte-equal to the client's (lane link EVERY Curate address hidden dm=true)
+0/4	(4) a town saved before the change serves no rows (lane link EVERY Curate address hidden dm=true)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (lane link EVERY Curate address hidden dm=true)
+4/4	(2) served a document (lane import EVERY Curate address hidden dm=true)
+0/4	(2) served rows byte-equal to the client's (veil212 gallery nothing hidden dm=false)
+0/4	(4) a town saved before the change serves no rows (veil212 gallery nothing hidden dm=false)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (veil212 gallery nothing hidden dm=false)
+0/4	(2) served rows byte-equal to the client's (veil212 link nothing hidden dm=false)
+0/4	(4) a town saved before the change serves no rows (veil212 link nothing hidden dm=false)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (veil212 link nothing hidden dm=false)
+4/4	(2) served a document (veil212 import nothing hidden dm=false)
+0/4	(2) served rows byte-equal to the client's (veil212 gallery nothing hidden dm=true)
+0/4	(4) a town saved before the change serves no rows (veil212 gallery nothing hidden dm=true)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (veil212 gallery nothing hidden dm=true)
+0/4	(2) served rows byte-equal to the client's (veil212 link nothing hidden dm=true)
+0/4	(4) a town saved before the change serves no rows (veil212 link nothing hidden dm=true)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (veil212 link nothing hidden dm=true)
+4/4	(2) served a document (veil212 import nothing hidden dm=true)
+0/4	(2) served rows byte-equal to the client's (veil212 gallery default veil dm=false)
+0/4	(4) a town saved before the change serves no rows (veil212 gallery default veil dm=false)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (veil212 gallery default veil dm=false)
+0/4	(2) served rows byte-equal to the client's (veil212 link default veil dm=false)
+0/4	(4) a town saved before the change serves no rows (veil212 link default veil dm=false)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (veil212 link default veil dm=false)
+4/4	(2) served a document (veil212 import default veil dm=false)
+0/4	(2) served rows byte-equal to the client's (veil212 gallery default veil dm=true)
+0/4	(4) a town saved before the change serves no rows (veil212 gallery default veil dm=true)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (veil212 gallery default veil dm=true)
+0/4	(2) served rows byte-equal to the client's (veil212 link default veil dm=true)
+0/4	(4) a town saved before the change serves no rows (veil212 link default veil dm=true)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (veil212 link default veil dm=true)
+4/4	(2) served a document (veil212 import default veil dm=true)
+0/4	(2) served rows byte-equal to the client's (veil212 gallery EVERY Curate address hidden dm=false)
+0/4	(4) a town saved before the change serves no rows (veil212 gallery EVERY Curate address hidden dm=false)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (veil212 gallery EVERY Curate address hidden dm=false)
+0/4	(2) served rows byte-equal to the client's (veil212 link EVERY Curate address hidden dm=false)
+0/4	(4) a town saved before the change serves no rows (veil212 link EVERY Curate address hidden dm=false)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (veil212 link EVERY Curate address hidden dm=false)
+4/4	(2) served a document (veil212 import EVERY Curate address hidden dm=false)
+0/4	(2) served rows byte-equal to the client's (veil212 gallery EVERY Curate address hidden dm=true)
+0/4	(4) a town saved before the change serves no rows (veil212 gallery EVERY Curate address hidden dm=true)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (veil212 gallery EVERY Curate address hidden dm=true)
+0/4	(2) served rows byte-equal to the client's (veil212 link EVERY Curate address hidden dm=true)
+0/4	(4) a town saved before the change serves no rows (veil212 link EVERY Curate address hidden dm=true)
+1/4	(5) the rows name nothing the served document withholds, nor any event by name (veil212 link EVERY Curate address hidden dm=true)
+4/4	(2) served a document (veil212 import EVERY Curate address hidden dm=true)
+
+EXAMPLES
+(2) served a document (lane import nothing hidden dm=false)
+   town-none-0-1: null
+   town-infiltrated-0-2: null
+   city-none-0-3: null
+   city-infiltrated-0-4: null
+(2) served a document (lane import nothing hidden dm=true)
+   town-none-0-1: null
+   town-infiltrated-0-2: null
+   city-none-0-3: null
+   city-infiltrated-0-4: null
+(2) served a document (lane import default veil dm=false)
+   town-none-0-1: null
+   town-infiltrated-0-2: null
+   city-none-0-3: null
+   city-infiltrated-0-4: null
+(2) served a document (lane import default veil dm=true)
+   town-none-0-1: null
+   town-infiltrated-0-2: null
+   city-none-0-3: null
+   city-infiltrated-0-4: null
+(2) served a document (lane import EVERY Curate address hidden dm=false)
+   town-none-0-1: null
+   town-infiltrated-0-2: null
+   city-none-0-3: null
+   city-infiltrated-0-4: null
+(2) served a document (lane import EVERY Curate address hidden dm=true)
+   town-none-0-1: null
+   town-infiltrated-0-2: null
+   city-none-0-3: null
+   city-infiltrated-0-4: null
+(2) served a document (veil212 import nothing hidden dm=false)
+   town-none-0-1: null
+   town-infiltrated-0-2: null
+   city-none-0-3: null
+   city-infiltrated-0-4: null
+(2) served a document (veil212 import nothing hidden dm=true)
+   town-none-0-1: null
+   town-infiltrated-0-2: null
+   city-none-0-3: null
+   city-infiltrated-0-4: null
+(2) served a document (veil212 import default veil dm=false)
+   town-none-0-1: null
+   town-infiltrated-0-2: null
+   city-none-0-3: null
+   city-infiltrated-0-4: null
+(2) served a document (veil212 import default veil dm=true)
+   town-none-0-1: null
+   town-infiltrated-0-2: null
+   city-none-0-3: null
+   city-infiltrated-0-4: null
+(2) served a document (veil212 import EVERY Curate address hidden dm=false)
+   town-none-0-1: null
+   town-infiltrated-0-2: null
+   city-none-0-3: null
+   city-infiltrated-0-4: null
+(2) served a document (veil212 import EVERY Curate address hidden dm=true)
+   town-none-0-1: null
+   town-infiltrated-0-2: null
+   city-none-0-3: null
+   city-infiltrated-0-4: null
+(5) the rows name nothing the served document withholds, nor any event by name (lane gallery nothing hidden dm=false)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (lane link nothing hidden dm=false)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (lane gallery nothing hidden dm=true)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (lane link nothing hidden dm=true)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (lane gallery default veil dm=false)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (lane link default veil dm=false)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (lane gallery default veil dm=true)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (lane link default veil dm=true)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (lane gallery EVERY Curate address hidden dm=false)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (lane link EVERY Curate address hidden dm=false)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (lane gallery EVERY Curate address hidden dm=true)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (lane link EVERY Curate address hidden dm=true)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (veil212 gallery nothing hidden dm=false)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (veil212 link nothing hidden dm=false)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (veil212 gallery nothing hidden dm=true)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (veil212 link nothing hidden dm=true)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (veil212 gallery default veil dm=false)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (veil212 link default veil dm=false)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (veil212 gallery default veil dm=true)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (veil212 link default veil dm=true)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (veil212 gallery EVERY Curate address hidden dm=false)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (veil212 link EVERY Curate address hidden dm=false)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (veil212 gallery EVERY Curate address hidden dm=true)
+   city-infiltrated-0-4: "the flood"
+(5) the rows name nothing the served document withholds, nor any event by name (veil212 link EVERY Curate address hidden dm=true)
+   city-infiltrated-0-4: "the flood"
