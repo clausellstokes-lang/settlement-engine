@@ -366,8 +366,8 @@ describe('(6) the circumstances: each a pure read of what the town records, held
     ['occupation', 'a power carrying the occupied modifier', (s) => withPowers(s, (fs) => fs.map((f) => (f.faction === 'Noble Houses' ? { ...f, modifiers: ['occupied'] } : f)))],
   ];
 
-  test.each(CASES)('%s is held on %s, and on nothing else', async (circ, _what, plant) => {
-    expect(await heldBy(plant(calm()))).toEqual([circ]);
+  test('each circumstance is held on its own planted record, and on nothing else (16 cases)', async () => {
+    for (const [circ, what, plant] of CASES) expect(await heldBy(plant(calm())), `${circ} on ${what}`).toEqual([circ]);
   });
 
   test('none reads a hidden fact: the infiltrated stress, a hidden creditor, a veiled craft power', async () => {
@@ -472,13 +472,10 @@ describe('(9) the old law is byte-identical to the base', () => {
   // `coupContenders` on merchantCityCouncil() at the base d61c05637, before this unit's code (recorded by the builder).
   const BASE_JSON = '{"governing":{"faction":"City Council","category":"government","power":30,"isGoverning":true,"modifiers":[]},"challengers":[{"name":"Merchant Guilds","archetype":"merchant","power":25,"weight":23.75},{"name":"Noble Houses","archetype":"noble","power":20,"weight":22},{"name":"Temple of the Dawn","archetype":"religious","power":15,"weight":15}],"incumbent":{"name":"City Council","power":30,"govMultiplier":0.9,"amplifiedWeight":27,"gated":true}}';
 
-  test.each([
-    ['absent', undefined],
-    ['1', 1],
-    ['the string "2" (a foreign value)', '2'],
-    ['an unshipped 3', 3],
-  ])('the law %s reads the old law, byte for byte', (_label, version) => {
-    expect(JSON.stringify(coupContenders(withLaw(merchantCityCouncil(), version)))).toBe(BASE_JSON);
+  test('the law absent, 1, the string "2" (a foreign value) or an unshipped 3 reads the old law, byte for byte', () => {
+    for (const [label, version] of [['absent', undefined], ['1', 1], ['"2"', '2'], ['3', 3]]) {
+      expect(JSON.stringify(coupContenders(withLaw(merchantCityCouncil(), version))), label).toBe(BASE_JSON);
+    }
   });
 
   test('a partial settlement with no config at all (the old partial call\'s shape) reads the old law', () => {
