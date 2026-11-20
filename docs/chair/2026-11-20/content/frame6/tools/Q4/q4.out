@@ -1,0 +1,123 @@
+{
+ "framed": 63,
+ "byStrain": {
+  "W3": 26,
+  "W1": 19,
+  "W4": 5,
+  "W2": 13
+ },
+ "voiced": 166,
+ "voicedByRule": {
+  "hook": 17,
+  "tie": 72,
+  "seat": 23,
+  "head": 7,
+  "trade": 16,
+  "commander": 11,
+  "criminal": 20
+ },
+ "powerSides": 52,
+ "powerSidesNoMember": 11,
+ "powerSidesNoLink": 5,
+ "labelSidesByRule": {
+  "hook": 17,
+  "tie": 60,
+  "seat": 12,
+  "head": 7,
+  "trade": 13,
+  "criminal": 5
+ },
+ "byHash": 143,
+ "byFallback": 23,
+ "nullSides": 21,
+ "nullPowerSides": 2,
+ "nullPowerSidesWithPerson": 2,
+ "nullWhy": {
+  "every member is named by role (isOfficeStandIn), off the live roster": 1,
+  "its live members hold other sides": 1
+ },
+ "W3": 26,
+ "W3names": 0,
+ "W3ecoHookLost": 4,
+ "W3ecoHookNamesShort": 2,
+ "W3displaced": {
+  "a face's own hook": 4
+ },
+ "seatOnLine": 63,
+ "seatDropped": 33,
+ "seatDroppedByStrain": {
+  "W3": 16,
+  "W1": 2,
+  "W4": 3,
+  "W2": 12
+ },
+ "seatKept": {
+  "W3:because his own trouble is part of it": 1,
+  "W1:because he holds the seat": 6,
+  "W1:because she holds the seat": 8,
+  "W1:because he heads the Elder Council": 1,
+  "W1:because he heads the Headman's Authority": 1,
+  "W1:because he heads the Elected Reeve": 1,
+  "W4:because she and Grata Tubertus are partners in something neither will name": 1,
+  "W3:because she holds the seat": 4,
+  "W3:because he holds the seat": 4,
+  "W4:because she and Abdullah al-Andalusi are partners in something neither will name": 1,
+  "W3:because she heads the Grand Guild Consortium": 1,
+  "W2:because she holds the seat": 1
+ },
+ "W4": 5,
+ "W4capWords": 0,
+ "W4capPowerNamed": 0
+}
+
+# Q1 power-named sides voiced by a non-member
+frame-calm-village-45: "The Religious Authorities" <- Saad al-Ghazali (the miller) rule=tie hash=0.541/0.7 member=false tieToMember=false powerMembers=2 head=Suhad al-Hakim
+frame-calm-village-48: "The Religious Authorities" <- Radmila Bykov (the carriers' master) rule=tie hash=0.753/0.7 member=false tieToMember=true powerMembers=1 head=Olivija Karpov
+frame-calm-village-53: "The Religious Authorities" <- Rajan Choudhry (the brewster) rule=tie hash=0.746/0.7 member=false tieToMember=false powerMembers=1 head=Esha Khanna
+frame-calm-village-75: "The Religious Authorities" <- Checheyigen Mangghud (the miller) rule=tie hash=0.043/0.7 member=false tieToMember=false powerMembers=1 head=Bayasgalan Geniges
+frame-calm-village-81: "The Religious Authorities" <- Noyans Jalayir (the quarry master) rule=tie hash=0.085/0.7 member=false tieToMember=true powerMembers=1 head=Ariun Naiman
+frame-calm-town-20: "The Guard" <- Barlas Arlat (the innkeeper) rule=trade hash=0.476/0.5 member=false tieToMember=true powerMembers=3 head=Khurelbaatar Geniges
+frame-calm-city-8: "The Guard" <- Ome Dzul (the mint master) rule=tie hash=0.179/0.7 member=false tieToMember=false powerMembers=5 head=Ixquil Ul
+frame-calm-city-12: "The Guard" <- Iulia Pulvillus (the stable master) rule=trade hash=0.032/0.5 member=false tieToMember=true powerMembers=8 head=Iulia Paullus
+frame-calm-city-35: "The Guard" <- Cyriak Friedmann (the gang boss) rule=tie hash=0.066/0.7 member=false tieToMember=false powerMembers=6 head=Florentin Hartmann
+frame-calm-metropolis-51: "The Guard" <- Phokas Nestongos (the coaching-inn keeper) rule=trade hash=0.112/0.5 member=false tieToMember=true powerMembers=9 head=Argyros Zonoras
+frame-calm-metropolis-64: "The Guard" <- Tian Yamamoto (the guild's master) rule=tie hash=0.441/0.7 member=false tieToMember=true powerMembers=9 head=Daiyu Deng
+
+# Q2 null sides of a power with a person
+frame-calm-hamlet-17: "The Religious Authorities" (profiteer, ladder criminal,tie,trade,office) members=The High Priestess -> every member is named by role (isOfficeStandIn), off the live roster
+frame-calm-hamlet-74: "The Military Party" (profiteer, ladder criminal,tie,trade,office) members=Albina Brutus -> its live members hold other sides
+
+# Q3 W3 frames
+frame-calm-hamlet-7: trade_collapse impaired=[iron:Iron ore deposits; petty_mining:Iron ore deposits] kw=[iron,metalwork,ore,quarrying] ownerNames=[] {} lineNames=[iron] ecoHookLost="A new toll on the iron road has made metal dear. P…"(Strategic Resource) namesShort=true displaces=a face's own hook
+frame-calm-hamlet-35: trade_collapse impaired=[livestock:Grazing land] kw=[livestock,dairy,grazing] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-hamlet-49: resource_scarcity impaired=[fuel:Coal or peat deposits] kw=[fuel,heating,coal,peat] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-village-20: resource_scarcity impaired=[leather:Hunting grounds] kw=[leather,hides,hunting] ownerNames=[] {} lineNames=[] ecoHookLost="The timber carts stopped coming a month ago, and t…"(Resource Conflict) namesShort=false displaces=a face's own hook
+frame-calm-town-1: outside_debt impaired=[herbalism:Wild foraging areas] kw=[herbalism,remedies,foraging] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-town-33: trade_dispute impaired=[weapons_armor:Iron ore deposits; iron:Iron ore deposits] kw=[iron,ore,metalwork] ownerNames=[] {} lineNames=[iron] ecoHookLost="A new toll on the iron road has made metal dear. P…"(Strategic Resource) namesShort=true displaces=a face's own hook
+frame-calm-town-56: trade_collapse impaired=[animal_husbandry:Grazing land; textiles:Grazing land; textile_finishing:Grazing land] kw=[horse,grazing,textiles,cloth,textile,clothing] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-town-68: trade_collapse impaired=[hunting:Hunting grounds; leather:Hunting grounds] kw=[hunting,trapping,leather,hides] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-town-74: trade_collapse impaired=[smelting:Iron ore deposits; reed_marsh:Marshlands] kw=[smelting,refining,iron,ore,marsh,harvest,marshlands] ownerNames=[] {} lineNames=[] ecoHookLost="The timber carts stopped coming a month ago, and t…"(Resource Conflict) namesShort=false displaces=a face's own hook
+frame-calm-city-22: outside_debt impaired=[alchemy:Magical ley line node; magical_goods:Magical ley line node; weapons_armor:Iron ore deposits; iron:Iron ore deposits; smelting:Iron ore deposits] kw=[alchemy,reagents,ley,items,enchanting,iron,ore,metalwork,smelting,refining] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-city-23: trade_dispute impaired=[bowyer_fletcher:Managed woodland; timber:Managed woodland] kw=[bowyer,fletcher,woodland,timber,lumber] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-city-27: outside_debt impaired=[fortification:Stone quarry; stone:Stone quarry] kw=[fortifications,stone,quarry,construction] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-city-30: outside_debt impaired=[weapons_armor:Iron ore deposits; luxury_goods:Precious metal veins; bowyer_fletcher:Managed woodland; timber:Managed woodland; iron:Iron ore deposits; smelting:Iron ore deposits; precious_metals_mining:Precious metal veins] kw=[iron,ore,metal,bowyer,fletcher,woodland,timber,lumber,metalwork,smelting,refining,metals,coinage] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-city-52: trade_dispute impaired=[textiles:Grazing land; weapons_armor:Iron ore deposits; textile_finishing:Grazing land; leather_goods:Grazing land; iron:Iron ore deposits; smelting:Iron ore deposits] kw=[textiles,cloth,grazing,iron,ore,textile,clothing,leather,leatherworking,cordwaining,metalwork,smelting,refining] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-metropolis-1: trade_dispute impaired=[fortification:Stone quarry; leather:Hunting grounds; food_processing:Grain fields; luxury_goods:Precious metal veins; stone:Stone quarry; precious_metals_mining:Precious metal veins; furs_north:Hunting grounds] kw=[fortifications,stone,quarry,leather,hides,hunting,grain,metal,construction,metals,coinage,furs,pelts] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-metropolis-5: trade_dispute impaired=[fuel:Coal or peat deposits] kw=[fuel,heating,coal,peat] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-metropolis-12: trade_dispute impaired=[leather:Hunting grounds; bowyer_fletcher:Managed woodland; timber:Managed woodland; reed_marsh:Marshlands; furs_north:Hunting grounds] kw=[leather,hides,hunting,bowyer,fletcher,woodland,timber,lumber,marsh,harvest,marshlands,furs,pelts] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-metropolis-14: trade_dispute impaired=[luxury_goods:Precious metal veins; precious_metals_mining:Precious metal veins] kw=[metal,metals,coinage] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-metropolis-21: outside_debt impaired=[textiles:Grazing land; leather:Hunting grounds; food_processing:Grain fields; textile_finishing:Grazing land; leather_goods:Grazing land; furs_north:Hunting grounds] kw=[textiles,cloth,grazing,leather,hides,hunting,grain,textile,clothing,leatherworking,cordwaining,furs,pelts] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-metropolis-22: trade_dispute impaired=[textiles:Grazing land; weapons_armor:Iron ore deposits; textile_finishing:Grazing land; leather_goods:Grazing land; iron:Iron ore deposits; fuel:Coal or peat deposits; smelting:Iron ore deposits] kw=[textiles,cloth,grazing,iron,ore,textile,clothing,leather,leatherworking,cordwaining,metalwork,fuel,heating,coal,peat,smelting,refining] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-metropolis-39: trade_dispute impaired=[fortification:Stone quarry; textiles:Grazing land; weapons_armor:Iron ore deposits; textile_finishing:Grazing land; leather_goods:Grazing land; iron:Iron ore deposits; stone:Stone quarry; smelting:Iron ore deposits] kw=[fortifications,stone,quarry,textiles,cloth,grazing,iron,ore,textile,clothing,leather,leatherworking,cordwaining,metalwork,construction,smelting,refining] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-metropolis-44: outside_debt impaired=[textiles:Grazing land; food_processing:Grain fields; weapons_armor:Iron ore deposits; luxury_goods:Precious metal veins; textile_finishing:Grazing land; iron:Iron ore deposits; smelting:Iron ore deposits; precious_metals_mining:Precious metal veins] kw=[textiles,cloth,grazing,grain,iron,ore,metal,textile,clothing,metalwork,smelting,refining,metals,coinage] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-metropolis-48: resource_scarcity impaired=[textiles:Grazing land; leather:Hunting grounds; textile_finishing:Grazing land; leather_goods:Grazing land; furs_north:Hunting grounds] kw=[textiles,cloth,grazing,leather,hides,hunting,textile,clothing,leatherworking,cordwaining,furs,pelts] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-metropolis-53: trade_dispute impaired=[textiles:Grazing land; weapons_armor:Iron ore deposits; textile_finishing:Grazing land; leather_goods:Grazing land; iron:Iron ore deposits; smelting:Iron ore deposits] kw=[textiles,cloth,grazing,iron,ore,textile,clothing,leather,leatherworking,cordwaining,metalwork,smelting,refining] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-metropolis-57: resource_scarcity impaired=[textiles:Grazing land; weapons_armor:Iron ore deposits; luxury_goods:Precious metal veins; textile_finishing:Grazing land; iron:Iron ore deposits; smelting:Iron ore deposits; precious_metals_mining:Precious metal veins] kw=[textiles,cloth,grazing,iron,ore,metal,textile,clothing,metalwork,smelting,refining,metals,coinage] ownerNames=[] {} lineNames=[] ecoHookLost=none
+frame-calm-metropolis-59: resource_scarcity impaired=[textiles:Grazing land; textile_finishing:Grazing land] kw=[textiles,cloth,grazing,textile,clothing] ownerNames=[] {} lineNames=[] ecoHookLost=none
+
+# Q4 W4 frames
+frame-calm-town-20: captured=[Town Mayor:corrupted (governing)] seat=Abu Said Mangghud seatOnOwner=false capWordsOnOwner=false capturedPowerNamedOnOwner=false
+frame-calm-town-80: captured=[Town Mayor:corrupted (governing)] seat=Pacuvius Celer seatOnOwner=false capWordsOnOwner=false capturedPowerNamedOnOwner=false
+frame-calm-city-12: captured=[Merchant Guild Council:corrupted (governing)] seat=Vibia Paullus seatOnOwner=true capWordsOnOwner=false capturedPowerNamedOnOwner=false
+frame-calm-city-49: captured=[Merchant oligarchy:corrupted (governing)] seat=Samira ibn Jubayr seatOnOwner=true capWordsOnOwner=false capturedPowerNamedOnOwner=false
+frame-calm-metropolis-51: captured=[Ducal Governorship:corrupted (governing)] seat=Alexandros Hexamilites seatOnOwner=false capWordsOnOwner=false capturedPowerNamedOnOwner=false

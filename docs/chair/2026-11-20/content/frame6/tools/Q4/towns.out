@@ -1,0 +1,133 @@
+===== frame-calm-town-20
+weight {"strain":"W4","grade":"hall-captured"} at 0
+seat Abu Said Mangghud
+  POWER Town Mayor | arch other | cat other | pow 27 | gov true | capture corrupted | members Abu Said Mangghud, Arghun Önggirad, Khurelbaatar Geniges
+  POWER Merchant Guilds | arch merchant | cat economy | pow 19 | gov undefined | capture undefined | members Chimgee Chagatai, Otgonbayar Noyakin, Abu Said Mangghud, Nomun Borjigin, Abu Said Samarkand, Barlas Arlat, Hulegu Khwarezm, Enkhjargal Fergana
+  POWER Religious Authorities | arch religious | cat religious | pow 18 | gov undefined | capture undefined | members Purevdulam Qonggirad, Regünjid Jadaran, Naiman Ongirad
+  POWER Military/Guard | arch military | cat military | pow 14 | gov undefined | capture undefined | members Khurelbaatar Geniges, Chilaun Taichiud, Namsrai Budaad
+  POWER Craft Guilds | arch merchant | cat economy | pow 13 | gov undefined | capture undefined | members Khongorzul Tayichi'ud, Oyun Mangghud, Otgonbayar Noyakin, Namsrai Budaad, Dokuz Tanghud, Börte Merv, Ergene Samarkand, Liqian Önggirad, Rentsendorj Arulad, Dolgorsüren Salji'ud, Alaqai Ba'arin, Jamukha Yorqin, Jalayir Merkit, Unurtsetseg Ba'arin, Ughul Tayichi'ud, Maghan Jadaran
+  POWER Landed Gentry | arch noble | cat noble | pow 9 | gov undefined | capture undefined | members Hoelun Khwarezm, Abu Said Mangghud, Mönkhtsetseg Samarkand
+  NPC npc_mine Abu Said Mangghud | Mayor | the mine captain | economy | pow 10 | inst "Mine" | mem [{"power":"Landed Gentry","rank":2,"share":0.5,"veiled":false},{"power":"Merchant Guilds","rank":3,"share":0.5,"veiled":false},{"power":"Town Mayor","rank":1,"share":0,"veiled":false}]  
+  NPC npc_merchant_guilds_3_8 Chimgee Chagatai | the senior guild master | the senior guild master | economy | pow 2 | inst "Merchant guilds (3-8)" | mem [{"power":"Merchant Guilds","rank":1,"share":1,"veiled":false}]  
+  NPC npc_town_watch Khurelbaatar Geniges | the watch captain | the watch captain | military | pow 9 | inst "Town watch" | mem [{"power":"Military/Guard","rank":1,"share":0.6,"veiled":false},{"power":"Town Mayor","rank":3,"share":0.4,"veiled":false}]  
+  NPC npc_parish_churches_2_5 Purevdulam Qonggirad | the dean | the dean | religious | pow 7 | inst "Parish churches (2-5)" | mem [{"power":"Religious Authorities","rank":1,"share":1,"veiled":false}]  
+  NPC npc_smelter Khongorzul Tayichi'ud | the smelt master | the smelt master | other | pow 2 | inst "Smelter" | mem [{"power":"Craft Guilds","rank":1,"share":1,"veiled":false}]  
+  NPC npc_power_landed_gentry Hoelun Khwarezm | the lord | the lord | other | pow 3 | inst "Landed Gentry" | mem [{"power":"Landed Gentry","rank":1,"share":1,"veiled":false}]  
+  NPC npc_town_granary Arghun Önggirad | the granary reeve | the granary reeve | government | pow 1 | inst "Town granary" | mem [{"power":"Town Mayor","rank":2,"share":1,"veiled":false}]  
+  NPC npc_weavers_textile_workers Otgonbayar Noyakin | the master weaver | the master weaver | other | pow 1 | inst "Weavers/Textile workers" | mem [{"power":"Craft Guilds","rank":3,"share":0.6,"veiled":false},{"power":"Merchant Guilds","rank":2,"share":0.4,"veiled":false}]  
+  NPC npc_monastery_or_friary Regünjid Jadaran | the abbess | the abbess | religious | pow 1 | inst "Monastery or friary" | mem [{"power":"Religious Authorities","rank":2,"share":1,"veiled":false}]  
+  NPC npc_small_hospital Naiman Ongirad | the hospitaller | the hospitaller | religious | pow 2 | inst "Small hospital" | mem [{"power":"Religious Authorities","rank":3,"share":1,"veiled":false}]  
+  NPC npc_bowyers_fletchers_guild Namsrai Budaad | the bowyer | the bowyer | other | pow 2 | inst "Bowyers & fletchers (guild)" | mem [{"power":"Craft Guilds","rank":null,"share":0.6,"veiled":false},{"power":"Military/Guard","rank":3,"share":0.4,"veiled":false}]  
+  NPC npc_veteran_s_lodge Chilaun Taichiud | the lodge master | the lodge master | military | pow 2 | inst "Veteran's lodge" | mem [{"power":"Military/Guard","rank":2,"share":1,"veiled":false}]  
+  NPC npc_apothecary_established Oyun Mangghud | the apothecary | the apothecary | other | pow 3 | inst "Apothecary (established)" | mem [{"power":"Craft Guilds","rank":2,"share":1,"veiled":false}]  
+  NPC npc_mills_2_5 Mönkhtsetseg Samarkand | the miller | the miller | other | pow 1 | inst "Mills (2-5)" | mem [{"power":"Landed Gentry","rank":3,"share":1,"veiled":false}]  
+  NPC npc_craft_guilds_5_15 Dokuz Tanghud | the senior craft-guild master | the senior craft-guild master | economy | pow 2 | inst "Craft guilds (5-15)" | mem [{"power":"Craft Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_fish_market Nomun Borjigin | the master fishmonger | the master fishmonger | economy | pow 3 | inst "Fish market" | mem [{"power":"Merchant Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_stone_quarry Abu Said Samarkand | the quarry master | the quarry master | economy | pow 2 | inst "Stone quarry" | mem [{"power":"Merchant Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_inn_multiple Barlas Arlat | the innkeeper | the innkeeper | other | pow 2 | inst "Inn (multiple)" | mem [{"power":"Merchant Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_taverns_5_20 Hulegu Khwarezm | the tavern keeper | the tavern keeper | other | pow 3 | inst "Taverns (5-20)" | mem [{"power":"Merchant Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_veiled_ac14a003085da863 Enkhjargal Fergana | the nominal owner | the nominal owner | criminal | pow 2 | inst "Front businesses" | mem [{"power":"Merchant Guilds","rank":null,"share":0.3,"veiled":false}]  
+  NPC npc_carriers_guild Börte Merv | the carriers' master | the carriers' master | economy | pow 1 | inst "Carriers' guild" | mem [{"power":"Craft Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_carpenters_5_15 Ergene Samarkand | the master carpenter | the master carpenter | other | pow 3 | inst "Carpenters (5-15)" | mem [{"power":"Craft Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_tanners Liqian Önggirad | the tanner | the tanner | other | pow 3 | inst "Tanners" | mem [{"power":"Craft Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_brickmaker Rentsendorj Arulad | the brickmaker | the brickmaker | other | pow 1 | inst "Brickmaker" | mem [{"power":"Craft Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_tailor_s_guild Dolgorsüren Salji'ud | the tailor | the tailor | other | pow 2 | inst "Tailor's guild" | mem [{"power":"Craft Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_butchers_3_8 Alaqai Ba'arin | the master butcher | the master butcher | other | pow 3 | inst "Butchers (3-8)" | mem [{"power":"Craft Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_bakers_5_15 Jamukha Yorqin | the master baker | the master baker | other | pow 2 | inst "Bakers (5-15)" | mem [{"power":"Craft Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_chandler Jalayir Merkit | the chandler | the chandler | other | pow 2 | inst "Chandler" | mem [{"power":"Craft Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_alchemist_shop Unurtsetseg Ba'arin | the alchemist | the alchemist | magic | pow 1 | inst "Alchemist shop" | mem [{"power":"Craft Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_cooper Ughul Tayichi'ud | the cooper | the cooper | other | pow 1 | inst "Cooper" | mem [{"power":"Craft Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_cobbler_s_guild Maghan Jadaran | the cobbler | the cobbler | other | pow 3 | inst "Cobbler's guild" | mem [{"power":"Craft Guilds","rank":null,"share":1,"veiled":false}]  
+  NPC npc_veiled_9a6e883e21b7e86a Bochak Samarkand | the gang boss | the gang boss | criminal | pow 2 | inst "Street gang" | mem []  
+  TIE Silent Partnership Abu Said Mangghud -> Bochak Samarkand
+  TIE Professional Rivalry Chimgee Chagatai -> Nomun Borjigin
+  TIE Mentor and Successor Khurelbaatar Geniges -> Jalayir Merkit
+  TIE Outstanding Debt Purevdulam Qonggirad -> Börte Merv
+  TIE Outstanding Debt Khongorzul Tayichi'ud -> Purevdulam Qonggirad
+  TIE Outstanding Debt Hoelun Khwarezm -> Abu Said Mangghud
+  TIE Family Complication Arghun Önggirad -> Dolgorsüren Salji'ud
+  TIE Genuine Respect Otgonbayar Noyakin -> Jamukha Yorqin
+  TIE Pragmatic Alliance Regünjid Jadaran -> Arghun Önggirad
+  TIE Unresolved History Naiman Ongirad -> Jamukha Yorqin
+  TIE Professional Rivalry Namsrai Budaad -> Jalayir Merkit
+  TIE Mutual Leverage Chilaun Taichiud -> Arghun Önggirad
+  TIE Outstanding Debt Oyun Mangghud -> Unurtsetseg Ba'arin
+  TIE Mutual Leverage Mönkhtsetseg Samarkand -> Dokuz Tanghud
+  TIE Mutual Leverage Dokuz Tanghud -> Abu Said Samarkand
+  TIE Mutual Leverage Nomun Borjigin -> Jalayir Merkit
+  TIE Family Complication Abu Said Samarkand -> Arghun Önggirad
+  TIE Professional Rivalry Barlas Arlat -> Chilaun Taichiud
+  TIE Mentor and Successor Hulegu Khwarezm -> Abu Said Mangghud
+  TIE Genuine Respect Enkhjargal Fergana -> Nomun Borjigin
+  TIE Professional Rivalry Börte Merv -> Dokuz Tanghud
+  TIE Mentor and Successor Ergene Samarkand -> Abu Said Mangghud
+  TIE Genuine Respect Liqian Önggirad -> Otgonbayar Noyakin
+  TIE Professional Rivalry Rentsendorj Arulad -> Otgonbayar Noyakin
+  TIE Mutual Leverage Dolgorsüren Salji'ud -> Otgonbayar Noyakin
+  TIE Outstanding Debt Alaqai Ba'arin -> Regünjid Jadaran
+  TIE Pragmatic Alliance Jamukha Yorqin -> Alaqai Ba'arin
+  TIE Unresolved History Jalayir Merkit -> Bochak Samarkand
+  TIE Outstanding Debt Unurtsetseg Ba'arin -> Ughul Tayichi'ud
+  TIE Family Complication Ughul Tayichi'ud -> Enkhjargal Fergana
+  TIE Professional Rivalry Maghan Jadaran -> Khongorzul Tayichi'ud
+  TIE Mentor and Successor Bochak Samarkand -> Oyun Mangghud
+  TENSION 0 crime_wave ["Military/Guard","Those who would take the law into their own hands","the criminal network"] | Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands | hooks ["The crime wave is coordinated. Someone is directing it to create a pretext","A guard captain is on the payroll of the criminal network","Those who would take the law into their own hands have picked out a culprit on bad information"]
+  CHAINS [{"id":"fortification","status":"impaired","res":"Stone quarry"},{"id":"herbalism","status":"vulnerable","res":"Wild foraging areas"},{"id":"bowyer_fletcher","status":"impaired","res":"Managed woodland"},{"id":"beekeeping_wax","status":"vulnerable","res":"Wild foraging areas"},{"id":"timber","status":"impaired","res":"Managed woodland"},{"id":"stone","status":"impaired","res":"Stone quarry"},{"id":"food_processing","status":"vulnerable","res":"Grain fields"},{"id":"garrison","status":"vulnerable","res":"Standing Watch"},{"id":"hospital","status":"vulnerable","res":"Hospital & Surgery"},{"id":"grain","status":"running","res":"Grain fields"},{"id":"brewing","status":"running","res":"Grain fields"},{"id":"parish","status":"running","res":"Faith & Worship"},{"id":"black_market","status":"operational","res":"Black market"},{"id":"guild_crime","status":"operational","res":"Organised Crime"},{"id":"adventuring_escort","status":"operational","res":"Adventuring & Escort"},{"id":"tavern_social","status":"operational","res":"Taverns & Social Life"},{"id":"law_governance","status":"operational","res":"Law & Governance"},{"id":"caravan_trade","status":"vulnerable","res":"Caravan & Overland Trade"}]
+  CAST [{"words":"The Guard","label":"Official guards","archetype":"enforcer","face":{"kind":"trade","rule":"trade","reason":"because the trouble touches his trade","npcId":"npc_inn_multiple","name":"Barlas Arlat"}},{"words":"Those who would take the law into their own hands","label":"Those who would take the law into their own hands","archetype":"challenger","face":{"kind":"tie","rule":"hook","reason":"because her own trouble is part of it","npcId":"npc_butchers_3_8","name":"Alaqai Ba'arin"}},{"words":"The criminal network","label":"Criminal organisations","archetype":"criminal","face":{"kind":"outsider","rule":"outsider","reason":"not named here; Hulegu Khwarezm keeps the taverns, where strangers lodge, and would know of them","viaId":"npc_taverns_5_20","viaName":"Hulegu Khwarezm"}}]
+  PEOPLE ["Barlas Arlat|side","Alaqai Ba'arin|side"]
+  HOOKS [{"text":"Someone keeps paying off their small debts around the place before they can, and has left no name.","source":"Alaqai Ba'arin"},{"text":"They have seen the same unmarked cart pass their door three nights running, and have not wondered why.","source":"Barlas Arlat"},{"text":"They have promised the same order to two buyers, and both are due to collect on the same morning.","source":"Abu Said Mangghud"}]
+  LINE PEOPLE ["Abu Said Mangghud|seat","Purevdulam Qonggirad|cleric"]
+  LINE HOOKS [{"text":"They have promised the same order to two buyers, and both are due to collect on the same morning.","source":"Abu Said Mangghud"},{"text":"They've noticed the same group of faces at multiple locations where incidents occurred. No one else has.","source":"Khurelbaatar Geniges"},{"text":"The iron carts are three weeks late and the carters will not say why. Broken tools stay broken, and work waits.","source":"Strategic Resource"}]
+===== frame-calm-hamlet-17
+weight {"strain":"W1","grade":"legitimacy-below-45"} at 0
+seat Mustafa al-Malik
+  POWER Headman's Authority | arch government | cat government | pow 46 | gov true | capture undefined | members Mustafa al-Malik
+  POWER Religious Authorities | arch religious | cat religious | pow 42 | gov undefined | capture undefined | members The High Priestess
+  POWER Military Party | arch military | cat military | pow 12 | gov undefined | capture undefined | members The Veteran Soldier
+  NPC npc_alehouse Mustafa al-Malik | Headman | the brewster | other | pow 2 | inst "Alehouse" | mem [{"power":"Headman's Authority","rank":1,"share":1,"veiled":false}]  
+  NPC npc.religious_authorities_high_priestess_0 The High Priestess | High Priestess |  | undefined | pow undefined | inst null | mem [{"power":"Religious Authorities","rank":1,"share":1}]  
+  NPC npc.military_guard_watch_captain_0 The Veteran Soldier | Veteran Soldier |  | undefined | pow undefined | inst null | mem [{"power":"Military Party","rank":1,"share":1}]  
+  TIE Family Complication Mustafa al-Malik -> The High Priestess
+  TIE Unresolved History The High Priestess -> The Veteran Soldier
+  TIE Professional Rivalry The Veteran Soldier -> Mustafa al-Malik
+  TENSION 0 succession_crisis ["Headman's Authority","Popular candidate","Religious Authorities"] | Who will lead next is the quarrel of the day, and the would-be successors are each gathering support | hooks ["A would-be heir approaches outsiders to investigate a rival's past"]
+  CHAINS [{"id":"forage","status":"vulnerable","res":"Foraging areas"},{"id":"parish","status":"running","res":"Faith & Worship"},{"id":"tavern_social","status":"operational","res":"Taverns & Social Life"}]
+  CAST [{"words":"The Headman's Authority","label":"Legitimate heir","archetype":"authority","face":{"kind":"office","rule":"seat","reason":"because he holds the seat","npcId":"npc_alehouse","name":"Mustafa al-Malik"}},{"words":"Popular candidate","label":"Popular candidate","archetype":"challenger","face":null},{"words":"The Religious Authorities","label":"Power behind throne","archetype":"profiteer","face":null}]
+  PEOPLE ["Mustafa al-Malik|side"]
+  HOOKS [{"text":"Their apprentice has been talking to a rival, and came back with an offer to buy them out.","source":"Mustafa al-Malik"},{"text":"They overheard two people they know settle a bribe, and do not know whom to tell.","source":"The High Priestess"},{"text":"The member has been hidden by his own side, and the other side is offering a reward.","source":"Headman's Authority vs Military Party"}]
+  LINE PEOPLE ["Mustafa al-Malik|seat"]
+  LINE HOOKS [{"text":"They overheard two people they know settle a bribe, and do not know whom to tell.","source":"The High Priestess"},{"text":"The member has been hidden by his own side, and the other side is offering a reward.","source":"Headman's Authority vs Military Party"},{"text":"A visitor from a neighbouring place has been given two different answers, and wants to know which one is true.","source":"Religious Authorities vs Military Party"}]
+===== frame-calm-village-20
+weight {"strain":"W3","grade":"impaired-chain"} at 1
+seat Nomun Barlas
+  POWER Religious Authorities | arch religious | cat religious | pow 46 | gov undefined | capture undefined | members Zagdaakhüü Mangghud
+  POWER Elected Reeve | arch government | cat other | pow 40 | gov true | capture undefined | members Nomun Barlas, Nomun Noyakin, Abaqa Jalayir, Jochi Olqunu'ud, Günji Olqunu'ud, Tümer Merkit
+  POWER Military Party | arch military | cat military | pow 14 | gov undefined | capture undefined | members The Veteran Soldier
+  NPC npc_parish_church Zagdaakhüü Mangghud | the priest | the priest | religious | pow 6 | inst "Parish church" | mem [{"power":"Religious Authorities","rank":1,"share":1,"veiled":false}]  
+  NPC npc_fishmonger Nomun Barlas | Reeve | the fishmonger | economy | pow 10 | inst "Fishmonger" | mem [{"power":"Elected Reeve","rank":1,"share":1,"veiled":false}]  
+  NPC npc_dairy_farmer Nomun Noyakin | the dairy farmer | the dairy farmer | other | pow 2 | inst "Dairy farmer" | mem [{"power":"Elected Reeve","rank":2,"share":1,"veiled":false}]  
+  NPC npc_cooper Abaqa Jalayir | the cooper | the cooper | other | pow 2 | inst "Cooper" | mem [{"power":"Elected Reeve","rank":3,"share":1,"veiled":false}]  
+  NPC npc_mill Jochi Olqunu'ud | the miller | the miller | other | pow 3 | inst "Mill" | mem [{"power":"Elected Reeve","rank":null,"share":1,"veiled":false}]  
+  NPC npc_tannery Günji Olqunu'ud | the tanner | the tanner | other | pow 1 | inst "Tannery" | mem [{"power":"Elected Reeve","rank":null,"share":1,"veiled":false}]  
+  NPC npc_cobbler Tümer Merkit | the cobbler | the cobbler | other | pow 1 | inst "Cobbler" | mem [{"power":"Elected Reeve","rank":null,"share":1,"veiled":false}]  
+  NPC npc_sawmill Güyük Naiman | the sawyer | the sawyer | other | pow 1 | inst "Sawmill" | mem []  
+  NPC npc_brewer Vangchug Ongirad | the brewer | the brewer | other | pow 1 | inst "Brewer" | mem []  
+  NPC npc.military_guard_watch_captain_0 The Veteran Soldier | Veteran Soldier |  | undefined | pow undefined | inst null | mem [{"power":"Military Party","rank":1,"share":1}]  
+  TIE Outstanding Debt Zagdaakhüü Mangghud -> Nomun Noyakin
+  TIE Mentor and Successor Nomun Barlas -> Günji Olqunu'ud
+  TIE Mentor and Successor Nomun Noyakin -> Nomun Barlas
+  TIE Genuine Respect Abaqa Jalayir -> Tümer Merkit
+  TIE Mutual Leverage Jochi Olqunu'ud -> Zagdaakhüü Mangghud
+  TIE Outstanding Debt Günji Olqunu'ud -> Nomun Barlas
+  TIE Professional Rivalry Tümer Merkit -> Günji Olqunu'ud
+  TIE Outstanding Debt Güyük Naiman -> Zagdaakhüü Mangghud
+  TIE Outstanding Debt Vangchug Ongirad -> Zagdaakhüü Mangghud
+  TIE Genuine Respect The Veteran Soldier -> Nomun Barlas
+  TENSION 0 generational_divide ["Traditionalists","Progressives","Pragmatic middle"] | The young want to change how things are done, and the old will not let them | hooks ["A traditional practice conceals something the elders don't want examined","A young reformer has uncovered records that undermine the old guard's legitimacy","The 'new idea' being promoted was actually tried once before, and failed badly"]
+  TENSION 1 resource_scarcity ["Those hoarding what they can","Those who cannot pay the prices","Those who would fix a fair price"] | A critical resource is running short, and some are hoarding it while others cannot pay the prices asked | hooks ["The scarcity was engineered. Someone destroyed the competing supply route","An alternative source exists but the information is being suppressed"]
+  CHAINS [{"id":"leather","status":"impaired","res":"Hunting grounds"},{"id":"parish","status":"running","res":"Faith & Worship"}]
+  CAST [{"words":"Those hoarding what they can","label":"Those hoarding what they can","archetype":"profiteer","face":{"kind":"tie","rule":"tie","reason":"because she and Tümer Merkit are rivals, and neither gives the other ground","npcId":"npc_tannery","name":"Günji Olqunu'ud"}},{"words":"Those who cannot pay the prices","label":"Those who cannot pay the prices","archetype":"payer","face":{"kind":"tie","rule":"tie","reason":"because he and Günji Olqunu'ud are rivals, and neither gives the other ground","npcId":"npc_cobbler","name":"Tümer Merkit"}},{"words":"Those who would fix a fair price","label":"Those who would fix a fair price","archetype":"reformer","face":{"kind":"trade","rule":"trade","reason":"because the trouble touches his trade","npcId":"npc_mill","name":"Jochi Olqunu'ud"}}]
+  PEOPLE ["Günji Olqunu'ud|side","Tümer Merkit|side","Jochi Olqunu'ud|side"]
+  HOOKS [{"text":"They overheard two people they know settle a bribe, and do not know whom to tell.","source":"Jochi Olqunu'ud"},{"text":"Their son has been seen at night with people who do not work, and comes home with coin.","source":"Günji Olqunu'ud"},{"text":"They lent their savings to a friend who has since left, and the friend's family says there was no loan.","source":"Tümer Merkit"}]
+  LINE PEOPLE ["Nomun Barlas|seat","Zagdaakhüü Mangghud|cleric"]
+  LINE HOOKS [{"text":"A rival has hired away their two best hands in one week, on wages the rival cannot afford for long.","source":"Nomun Barlas"},{"text":"The timber carts stopped coming a month ago, and the builders are bidding against each other for what is left in the yards.","source":"Resource Conflict"},{"text":"A traditional practice conceals something the elders don't want examined.","source":"Generational Divide"}]
