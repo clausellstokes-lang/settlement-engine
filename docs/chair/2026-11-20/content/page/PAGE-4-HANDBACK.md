@@ -1,6 +1,6 @@
 # PAGE-4's hand-back (the display lane after PAGE-1)
 
-Kept current at every push; last written 17:00 UTC 2026-11-20 (`date -u`). A successor needs THIS FILE and the briefs
+Kept current at every push; last written 17:14 UTC 2026-11-20 (`date -u`). A successor needs THIS FILE and the briefs
 under `docs/chair/2026-11-20/content/page/briefs/` only. The seat's prompt:
 `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PAGE-4.txt`. PAGE-1's hand-back
 (`PAGE-1-HANDBACK.md`, true at `a67e1b502`) holds the rulings 1-8 and the measures; this file adds what came after.
@@ -37,6 +37,26 @@ under `docs/chair/2026-11-20/content/page/briefs/` only. The seat's prompt:
   merges missed them): MAGIC's caption sits under the phone prose floor (12px < 14px), a DEFECT; World/NPCs 284 -> 293
   (CARD) and Systems/Magic 3 -> 4 (MAGIC) owed; `pdf.vm` moved by OUTPUT. OUT: PIN-FIX (brief `ab01d4cc5`). FROM NOW ON
   each merge also runs `tests/components/dossierPhoneFloorAllViews.test.jsx` and `tests/ui/safetyReaderBytes.test.jsx`.
+
+## THE LANE'S RULES AT EVERY MERGE (PAGE-4's practice; the last one the chair's 17:13 ruling)
+
+- Read the builder's diff once, line by line. Re-run its red at its base, on a `git archive` of that commit with its new
+  test files copied in (never a mixed tree). Run green at the merged tip.
+- A register both sides moved (`docs/content/wiring-census.json`, `phoneChromeFloor.census.test.js`,
+  `rawColorLiteral.test.js` BUDGET, `.lighting-census-baseline.json`) is RE-MEASURED BY ITS DOOR at the merged tree,
+  never summed. Wiring: `node scripts/wiring-census.mjs`, then `--check`. Lighting:
+  `LIGHTING_CENSUS_REFREEZE='<seat>' LIGHTING_CENSUS_NOTE='<cause>' npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js`
+  on a CLEAN tree, then the walker plainly. A builder's worktree under `.claude/worktrees/` counts as dirty: PAGE-4 put
+  `.claude/worktrees/` in `.git/info/exclude` (local only).
+- THE SIX GATES, each to a file (`scratchpad/gates.sh <outdir>`; recipe: `sh scripts/gate-tail.sh <cmd>`): the lighting
+  walker; `node scripts/wiring-census.mjs --check`; `npx vitest run tests/lint` WHOLE (needs the local
+  `review-fixes-2026-07-08` ref); `npm run typecheck:ratchet`; `npm run typecheck:domain:strict`; `npm run lint`.
+- AND BOTH PINS (the chair, 17:13: a rule of the lane): `npx vitest run tests/components/dossierPhoneFloorAllViews.test.jsx`
+  and `npx vitest run tests/ui/safetyReaderBytes.test.jsx`. A moved figure is re-taken by its door with its cause. The
+  phone walk's door is its own run's figures. The reader pin's door is `SAFETY_READER_BYTES_RECORD=1`.
+- While a builder runs, every heavy run goes through `sh scripts/gate-mutex.sh --run -- <cmd>`.
+- A builder's worktree is cut by the harness from origin/main. Its prompt must make it `git checkout -b <branch> <lane sha>`
+  first.
 
 ## The rulings that came after PAGE-1's list (the chair's; each vetoable by the owner)
 
