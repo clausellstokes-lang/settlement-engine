@@ -6,10 +6,14 @@
 // construction: two ties print one template where they print one index of one archetype. A PLACE counts once per size
 // where any template prints twice or more; once per archetype where a template of that archetype does. `repeats` is the
 // sum over places of k-1 per template held k times.
+// With a fourth argument (a path), it also writes THE BOTH-EXHAUSTED LIST (addendum A2, for the depth lane): by archetype and
+// size, the places where an archetype printed one template twice and the repeat ties. Under TIES-HOLD a repeat is printed
+// only where the pool AND the reserve hold no line the tie may take (every line taken, or refused by its trust clause or
+// its declarations), so at the cure's tip each row counts the places where both were exhausted for that archetype.
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-const [, , L, nA = '150', out = ''] = process.argv;
+const [, , L, nA = '150', out = '', listOut = ''] = process.argv;
 if (!L) { console.error('usage: node tie-template-twice.mjs <tree> [n=150] [out]'); process.exit(2); }
 const t0 = Date.now();
 const imp = (p) => import(pathToFileURL(path.join(L, p)).href);
@@ -19,7 +23,7 @@ const { DEFAULT_CONFIG } = await imp('src/store/configSlice.js');
 const { SIZES } = await imp('tests/components/pageCensusWalk.shared.mjs');
 await loadGenerationLawPayloads();
 const REV = 1 << 16;
-const bySize = new Map(); const byArch = new Map(); let ties = 0;
+const bySize = new Map(); const byArch = new Map(); const byArchSize = new Map(); let ties = 0;
 for (const size of SIZES) {
   const R = { towns: 0, ties: 0, places: 0, repeats: 0 }; bySize.set(size, R);
   for (let i = 0; i < +nA; i++) {
@@ -33,7 +37,10 @@ for (const size of SIZES) {
       m.set(k, (m.get(k) || 0) + 1);
     }
     const archs = new Set();
-    for (const [k, n] of m) if (n > 1) { R.repeats += n - 1; archs.add(k.split('#')[0]); }
+    for (const [k, n] of m) if (n > 1) {
+      R.repeats += n - 1; const a = k.split('#')[0]; archs.add(a);
+      const cell = byArchSize.get(`${a}\t${size}`) || { places: new Set(), repeats: 0 }; cell.places.add(i); cell.repeats += n - 1; byArchSize.set(`${a}\t${size}`, cell);
+    }
     if (archs.size) R.places++;
     for (const a of archs) byArch.set(a, (byArch.get(a) || 0) + 1);
   }
@@ -47,3 +54,9 @@ lines.push('places by archetype (a place counts once per archetype with a templa
 for (const [a, n] of [...byArch].sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0]))) lines.push(`  ${a.padEnd(24)}${String(n).padStart(6)}`);
 const text = lines.join('\n') + '\n';
 process.stdout.write(text); if (out) fs.writeFileSync(out, text);
+if (listOut) {
+  const rows = [`# both-exhausted list: tree ${L}; ${nA}/size; archetype, size, places, repeat ties`, 'archetype\tsize\tplaces\trepeats'];
+  const order = new Map(SIZES.map((sz, j) => [sz, j]));
+  for (const [k, c] of [...byArchSize].sort((x, y) => x[0].split('\t')[0].localeCompare(y[0].split('\t')[0]) || order.get(x[0].split('\t')[1]) - order.get(y[0].split('\t')[1]))) rows.push(`${k}\t${c.places.size}\t${c.repeats}`);
+  fs.writeFileSync(listOut, rows.join('\n') + '\n');
+}

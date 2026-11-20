@@ -1,4 +1,4 @@
-ties: 26548; elapsed 114.5s; tree /tmp/claude-0/-home-user-settlement-engine/a807bdac-f58c-5701-a27f-e9cb3f61f7b9/scratchpad/trees-b11/tree-d874c81e9; 150/size
+ties: 26548; elapsed 106.0s; tree /tmp/claude-0/-home-user-settlement-engine/a807bdac-f58c-5701-a27f-e9cb3f61f7b9/scratchpad/trees-b11/tree-d874c81e9; 150/size
 size            towns     ties   places  repeats
 thorp             150       71        0        0
 hamlet            150      466        0        0

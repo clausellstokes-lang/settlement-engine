@@ -1,0 +1,31 @@
+# trees.mjs d874c81e9 38bab73ea --words=none (the base and the cure's tip: items 1,2,4,5,7, addendum A, A2, B, C)
+## golden: documents 525 · identical 391 · with a non-string difference 82 · differing strings 386 · of them passing the word check (none) 386 · other 0
+| relationships[].tension | 234 | 134 |
+| relationships[].description | 131 | 82 |
+| prominentRelationship.phrasing | 7 | 7 |
+| prominentRelationship.full | 7 | 7 |
+| prominentRelationship.tension | 7 | 7 |
+## census: documents 720 · identical 513 · with a non-string difference 135 · differing strings 1020 · of them passing the word check (none) 1020 · other 0
+| relationships[].tension | 568 | 197 |
+| relationships[].description | 432 | 149 |
+| prominentRelationship.phrasing | 7 | 7 |
+| prominentRelationship.tension | 7 | 7 |
+| prominentRelationship.full | 5 | 5 |
+| pressureSentence | 1 | 1 |
+
+# born-paths.mjs d874c81e9 -> 38bab73ea (every path that differs, docs per path; proseVariant is the only non-string path)
+golden: docs moved 134
+  .prominentRelationship.full 7
+  .prominentRelationship.phrasing 7
+  .prominentRelationship.tension 7
+  .relationships[].description 82
+  .relationships[].proseVariant 82
+  .relationships[].tension 134
+census: docs moved 207
+  .pressureSentence 1
+  .prominentRelationship.full 5
+  .prominentRelationship.phrasing 7
+  .prominentRelationship.tension 7
+  .relationships[].description 149
+  .relationships[].proseVariant 135
+  .relationships[].tension 197
