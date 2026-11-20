@@ -5,18 +5,32 @@ chair's word "THE LANE IS YOURS at 1f3cdc135" (13:27 UTC). A successor needs thi
 only. TRAD-3's hand-back (`TRAD-3-HANDBACK.md`) stays as history: its §1 (the rulings, 1–12) is IN FORCE and not
 restated; this file adds what came after.
 
-## 1. RULINGS SINCE TRAD-3's HAND-BACK (the seventh chair's; each vetoable by the owner)
-13. THE WORKING LINE IS NOT MERGED INTO THIS LANE (the chair, 13:32, after this session's own permission check refused
-    `git merge --no-ff 43ab0f5eb`): the lane stays on `1f3cdc135`'s base; THE CHAIR JOINS THE LINE AT THE LANDING. So no
-    new line may need point 82: NO PRONOUN AFTER A POWER'S NAME (repeat the name or recast); a verb after a power still
-    through `powerVerb` (in the base).
-14. THE TOTALITY OF THE KIND PHRASES IS A COMMITTED ARM (an eligible event type with no phrase omits the clause; red
-    first): in unit 5.
-15. THE ACCOUNT'S WEEKLY USAGE WARNING (the chair, 13:32; the window resets 2026-11-24 15:00 UTC): every branch a
-    builder holds is pushed, unfinished included (`-wip`), now and after every return; ONE builder at a time; no new
-    measuring helpers; short turns.
-16. ORDER: unit 5 with one builder; then unit 6's samples for the owner (thirty by the fair rule, twelve from towns in
-    crisis), which the owner is waiting to read.
+## 1. THE RULINGS IN FORCE, ONE LIST (the seventh chair's unless marked; each vetoable by the owner)
+1. TRAD-3-HANDBACK §1, items 1–12, IN FORCE (CTR1–CTR11; the names rules; the leaf moves no born town; tests/lint whole
+   and the census by its door at every merge; never --no-verify, a force push, master or a pull request).
+2. THE WORKING LINE IS NOT MERGED INTO THIS LANE (13:32): the chair joins it at the landing; no new line needs point 82
+   (no pronoun after a power's name; a verb after a power through `powerVerb`). The kernel's mixed pick came by
+   CHERRY-PICK of `bd42d63c7` only (17:32; here `e32c9b27e`): never merge `lane/kernel-mix-2026-11-20` (it holds the line).
+3. A REF OUTSIDE `refs/heads/lane/*` IS NEVER PUSHED (14:31); builders' branches push as `lane/trad-4-2026-11-20-uN-wip`;
+   `git ls-remote` before every push; never commit on a branch while its push is in flight.
+4. THE READER'S DEAD-CAUSE WORD RULE (13:59, re-stated 15:10; unit 7): an event whose name shares a word with any held
+   name (letters and apostrophes; held word less end apostrophes and 's; stop list `HELD_NAME_STOP_WORDS`; prefix catch;
+   the whole name, full and bare, as a floor) is never the reader's cause. "great" on "The Great Fire" is right by it.
+5. In the READER's view a power keeps no field any faction eye can remove (`CARD_KINDS.faction.fields`; unit 7).
+6. THE IMPORT DOOR IS NOT A LEAK (17:25): an unmarked share is served exactly to an importer, by design (211); the
+   veil's other un-veiled doors are the veil lane's. That a clone re-draws its traditions stays (a named survivor).
+7. CRISIS: an excluded feast/fair/harvest-thanks line yields to its twin under ANY active crisis (the base's calmest;
+   TRAD-4's ruling at unit 5).
+8. THE GLOSS FLOOR IS THREE A POOL (TRAD-4, not vetoed).
+9. NO FIRST SENTENCE SAYS "KEPT" TWICE (unit 9).
+10. NO TOWN PRINTS A SENTENCE TWICE (17:04/17:55; unit 10): rotation inside the town's set over the surface's set
+    (`shownTraditions.js :: descriptionSetOf`: the owner's set, or for a reader the DRAWN set, CTR11); a keeper's fourth
+    and fifth wording ("too", `KEEPER_FRAMES_TOO`, NEVER a pick); only beyond the fifth is the keeper sentence left out; the
+    payer left out where its slot runs short. Bar 0 of 432, owner and reader.
+11. THE FOUNDER PHRASE ENDS THE FOUNDING SENTENCE (18:16; unit 11): the chair's three frames verbatim; the reader's
+    `foundingBare` untouched.
+12. THE LEAF PICKS BY `pickVariantMixed` (17:18; unit 11's second commit), key `${seed}::${id}#<slot>`; unit 6's counts
+    re-taken after it; the owner's files re-cut ONCE after units 10 and 11 and the pick.
 
 ## 2. THE UNITS
 | unit | what | state | commit |
@@ -27,8 +41,8 @@ restated; this file adds what came after.
 | 6 | the measures and the owner's 30 + 12 samples, the plain-words file | MERGED (docs and tools only) | `a39c93689`; merge `5f49c7779` |
 | 8 | the import path and the round trip > 4 towns (brief `briefs/TRAD-4-U8-IMPORT-ROUNDTRIP.md`) | CLOSED: round trip green on 140; the import door is NOT a leak (the chair, 17:25: an unmarked share is served exactly to an importer, by design). See §7 | `14f16760b` on `lane/trad-4-2026-11-20-u8-wip` (not merged) |
 | 9 | no first sentence says "kept" twice (brief `briefs/TRAD-4-U9-KEPT-TWICE.md`) | READ WHOLE, red re-run 1/29 at `d003f7be8`, MERGED | `992df7da9`; merge `7955e5304` |
-| 10 | no town prints the same sentence in two of its rites (the chair 17:04; brief `briefs/TRAD-4-U10-ONE-TOWN-ROTATION.md`: measure first, then the rotation; bar 0 of 432) | builder out, worktree scratchpad/u10, branch `trad4-u10` from `833a20e13` | — |
-| — | ONE call line: take the kernel's mixed pick (`pickVariant`'s finalizer) when the chair names its commit; unit 6's count re-taken | waits on the chair | — |
+| 10 | no town prints a sentence twice (brief `briefs/TRAD-4-U10-ONE-TOWN-ROTATION.md`) | READ WHOLE by TRAD-4, reds re-run at `833a20e13` 14 failed of 138, MERGED; its merge gates were RUNNING at the hand-over (see §8) | `ea1e2ffaa` (`lane/trad-4-2026-11-20-u10-wip`); merge `9530bd22f` |
+| 11 | the founder phrase last (commit 1) and the mixed pick at the leaf's one pick (commit 2) (brief `briefs/TRAD-4-U11-FOUNDER-LAST.md` with its ADDENDUM) | BUILDER OUT in TRAD-4's container (worktree scratchpad/u11, branch `trad4-u11` from `e97a917b7`): TRAD-4 pushes it as `lane/trad-4-2026-11-20-u11-wip` when it returns, if its session lives; else TRAD-5 re-staffs from the brief | — |
 | — | CTR11's "other direction" line for the owner (where a DM SHOWS the criminal income, the reader still ranks without it), with its born count | open | — |
 
 ## 3. FOR THE OWNER (plain text beside this file)
@@ -86,6 +100,23 @@ here, "the import path applies no share veil", was wrong; the chair has correcte
 - What the exercise found that is the veil lane's: four other doors with no veil (two map snapshots, the tile values,
   perhaps the player export): a stage of theirs.
 
+## 8. THE HAND-OVER: WHAT TRAD-5 DOES FIRST (written 2026-11-20 18:2x UTC)
+1. UNIT 10's MERGE GATES: TRAD-4 started them at `9530bd22f` (tests/lint whole; the 23 test files naming traditionDescription,
+   shownTraditions, dossierSearch, the PDF section or the tab; typecheck:ratchet; typecheck:domain:strict; eslint; the
+   confinement). If TRAD-4's "Updated" line below does not give them, RE-RUN THEM at the lane's tip. Expected: tests/lint
+   220/221 (the lighting census by count: the builder measured 31354 → 31369); re-take the census BY ITS DOOR on a clean
+   tree (`LIGHTING_CENSUS_REFREEZE='TRAD-5' LIGHTING_CENSUS_NOTE='<why>' npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js`,
+   then the same plainly: 34/34). The frames walker's COUNT pin moved 125 → 143 (unit 10: the 18 "too" lines). Unit 10's
+   measures (builder, executed): 0 of 432 towns repeat a sentence (before: 94 owner / 93 reader); "too" printed 8 times,
+   never alone or first; 0 towns reach a sixth rite of one keeper; 11 payer sentences left out; moved owner 139 / reader
+   138 of 1,232. KNOWN LIMIT: the PDF with a lit mirror prints a sentence twice in 2 towns (Silberwiese, Hisntappa: mirror
+   rows the owner's set drops, described alone); the player tab 0.
+2. UNIT 11: merge it after reading it whole (red re-run at `e97a917b7`), confine, census by its door.
+3. THEN re-take unit 6's measures on the final leaf (`out-trad4/RUN.txt`: every command) and RE-CUT the owner's files
+   ONCE by the same rule (`TRAD-4-SAMPLES-30.txt`, `TRAD-4-SAMPLES-CRISIS-12.txt`, `TRAD-4-MEASURES.txt`); say in them what
+   moved since the chair handed the first cut to the owner (rotation, "too", founder last, "held", the mixed pick).
+4. The confinement: `born.mjs` at the base (`git archive 0c9069489`, sha `d70950941f33…a002a`) vs the tip, `cmp`.
+
 ## Updated (append at each later commit, with `date -u`)
 - 2026-11-20 13:33 UTC — the lane taken at `1f3cdc135`; pushed; unit 5's brief written.
 - 2026-11-20 14:5x UTC — units 7 and 5 built, pushed as `-wip` lane branches; unit 7 waits on the chair's ruling on the word rule; this file is the successor's start.
@@ -118,3 +149,4 @@ here, "the import path applies no share veil", was wrong; the chair has correcte
   The chair (17:04): the owner's four files are with the owner. UNIT 10 out. The kernel's mixed pick: the chair asked the
   key shape; sent (`${seed}::${id}#done`, one `draw` call site for every slot).
 - 2026-11-20 17:27 UTC — §7 CORRECTED (the import door is not a leak). The kernel's mixed pick: `lane/kernel-mix-2026-11-20` (bd42d63c7) sits on the working line 43ab0f5eb; its merge was started, met the census baseline conflict, and was ABORTED (the line would enter against ruling 13): asked of the chair, (A) merge with the line, or (B) the commit re-cut onto this lane's base.
+- 2026-11-20 18:2x UTC — UNIT 10 MERGED (`9530bd22f`); unit 11 out; the hand-over written (§1 the rulings, §8 the next steps).
