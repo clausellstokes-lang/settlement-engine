@@ -191,18 +191,11 @@ function FullCard({ npc, index }) {
           npc.race ? { label: 'Race', value: humanize(npc.race) } : null,
           npc.gender ? { label: 'Sex', value: humanize(npc.gender) } : null,
           npc.age ? { label: 'Age', value: npc.age } : null,
-          // 'INFL' is SPELLED OUT rather than re-cased: tokenCase('INFL') is 'Infl',
-          // which is not a word, and an abbreviation that reads as a typo in sentence
-          // case has to become the word it abbreviates or stay an abbreviation.
-          npc.influenceLabel ? { label: 'Influence', value: npc.influenceLabel } : null,
+          // PAGE-1 CARD (F4, 2026-11-20): the record's fact as the people card's Standing row prints it (the view row's
+          // `standingLine`, cardStandingRead.js), never the stored `influence` band ("Influence: low").
+          npc.standingLine ? { label: 'Standing', value: npc.standingLine } : null,
         ].filter(Boolean)}
       />
-
-      {npc.influenceDescription && (
-        <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 2, fontStyle: 'italic' }}>
-          {safe(npc.influenceDescription)}
-        </Text>
-      )}
 
       {/* PEOPLE-5A (M-1b): the card's house and its standing in each power by rank. */}
       {(npc.house || npc.powerLine) && (

@@ -224,7 +224,9 @@ function notableNpcPage(n) {
     n.house && n.houseMark ? `  - *${esc(n.houseMark)}*` : null,
     kv('Standing', n.powerLine),
     kv('Power', n.power),
-    kv('Influence', n.influenceLabel),
+    // PAGE-1 CARD (F4, 2026-11-20): the record's fact (the view row's `firstOfLine`, cardStandingRead.js: each power the
+    // person stands first of and its weight here), never the stored `influence` band ("Influence: low").
+    kv('First of', n.firstOfLine),
     n.blurb ? md('', esc(n.blurb)) : null,
     n.personality ? md('', '## Personality', esc(n.personality)) : null,
     n.motivation ? md('', '## Wants', esc(n.motivation)) : null,

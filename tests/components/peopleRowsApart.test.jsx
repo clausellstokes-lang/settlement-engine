@@ -3,7 +3,8 @@
  * peopleRowsApart.test.jsx — R2-CODE-B-5: the people surfaces print two things as two things, and a separator only
  * between two of them. No word changes.
  *
- *   HEADER — the NPCs tab's tally prints "1 high influence" alone, never "1 high influence ·" with nothing after it
+ *   HEADER — the NPCs tab prints no influence tally at all (PAGE-1 CARD, F4, 2026-11-20: the tally counted the stored
+ *            `influence` band, a keyword misread at birth); it once printed "1 high influence ·" with nothing after it
  *            (the increment's rpf-hamlet-succession_void-13).
  *   CHIPS  — the card's trait chips are two things: the copied text keeps a space between them ("Flaw: vain
  *            Temperament: clever", never "Flaw: vainTemperament: clever"; the third seat's note).
@@ -39,19 +40,20 @@ const headerOf = (npcs) => {
 beforeEach(() => { useStore.setState({ settlement: null, savedSettlements: [], editMode: false }); });
 afterEach(cleanup);
 
-describe('HEADER — the tally\'s separator stands only between two counts', () => {
-  test('high influence and nothing moderate: the count alone, no dangling separator', () => {
-    const { tally, text } = headerOf([person('npc_0', 'Alda Reeve', 'high'), person('npc_1', 'Bran Smith', 'low')]);
-    expect(tally).toBe('1 high influence');
-    expectAbsentWithAnchor(text, '1 high influence ·', '1 high influence', 'a separator with nothing after it');
-  });
-  test('both counts: one separator between them, as before', () => {
-    const { tally } = headerOf([person('npc_0', 'Alda Reeve', 'high'), person('npc_1', 'Bran Smith', 'moderate')]);
-    expect(tally).toBe('1 high influence · 1 moderate');
-  });
-  test('moderate alone: the count alone', () => {
-    const { tally } = headerOf([person('npc_1', 'Bran Smith', 'moderate')]);
-    expect(tally).toBe('1 moderate');
+describe('HEADER — no influence tally (PAGE-1 CARD, F4)', () => {
+  test('high, moderate or low: the header counts the people and prints no band tally, no dangling separator', () => {
+    for (const roster of [
+      [person('npc_0', 'Alda Reeve', 'high'), person('npc_1', 'Bran Smith', 'low')],
+      [person('npc_0', 'Alda Reeve', 'high'), person('npc_1', 'Bran Smith', 'moderate')],
+      [person('npc_1', 'Bran Smith', 'moderate')],
+    ]) {
+      const { tally, text } = headerOf(roster);
+      cleanup();
+      const anchor = `${roster.length} Key Figures`;
+      expect(text).toContain(anchor);
+      expect(tally).toBe('');
+      expectAbsentWithAnchor(text, 'high influence', anchor, 'the influence tally');
+    }
   });
 });
 

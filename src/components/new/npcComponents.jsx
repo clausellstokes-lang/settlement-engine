@@ -17,6 +17,7 @@ import { entityAnchor, entityIdFor, normalizeNpcTraits } from '../../domain/doss
 import { useEntityFocus } from '../dossier/useEntityFocus.js';
 import { describeCompromiseConjunction } from '../../domain/display/causeConjunctionContent.js';
 import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
+import { cardStandingLine } from '../../domain/display/cardStandingRead.js';
 import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
 import { cardTieLines } from '../../domain/relationships/cardTies.js';
@@ -74,7 +75,6 @@ export function NPCCategoryGroup({
   category,
   label,
   group,
-  impFilter,
   search,
   pinnedIds,
   onTogglePin,
@@ -86,7 +86,6 @@ export function NPCCategoryGroup({
   const color = catColor(category);
   const displayLabel = label || (category.charAt(0).toUpperCase() + category.slice(1));
   const filtered = group.filter(npc => {
-    if (impFilter && impFilter !== 'all' && npc.influence !== impFilter) return false;
     if (search) {
       const q = search.toLowerCase();
       return (npc.name||'').toLowerCase().includes(q) ||
@@ -287,12 +286,11 @@ export function NPCInlineCard({
   // THE PHONE PROSE FLOOR — every SENTENCE in the expanded card (the
   // compromise phrase, the replacement note, the whereabouts line, the
   // structural position, the constraint, the wants, the disposition and the
-  // secret). The trait chips, the influence dots, the name and the labels are
-  // glanced at rather than read, and keep their own scale.
+  // secret). The trait chips, the name and the labels are glanced at rather than read, and keep their own scale.
+  // ⛔ NO INFLUENCE DOTS (PAGE-1 CARD, F4, 2026-11-20): the header's ●/●●/●●● read the stored `influence`, a keyword
+  // misread at birth (88.6% of the chair's 300 towns' cards one dot). The Standing row below says the record's fact.
   const mobile = useIsMobile();
   const color = catColor(npc.category);
-  const infDots = npc.influence==='high' ? '●●●' : npc.influence==='moderate' ? '●●' : '●';
-  const infColor = npc.influence==='high' ? '#a0762a' : npc.influence==='moderate' ? '#6b5340' : '#9c8068';
   const traits = normalizeNpcTraits(npc);
   // Bank edits declare a role archetype and goal facet. Preserve the NPC's richer
   // authored office/title while making the declared archetype visible, and only
@@ -342,9 +340,10 @@ export function NPCInlineCard({
   ));
   const wants = readWants.length > 0 ? readWants : (goalText ? [goalText] : []);
   const disposition = interiority?.disposition || [];
-  // THE STANDING IS PRINTED UNDER ITS OWN LABEL (2026-11-14): "established", "marginal" and "commanding" measure how much the person
-  // counts for in the town, not how they are disposed; the disposition list holds temperament, loyalty and fear.
-  const standingWord = interiority?.standing || '';
+  // THE STANDING IS THE RECORD'S FACT (PAGE-1 CARD, F4, 2026-11-20): the powers the person stands first of and each one's
+  // weight here, read from the power's own figure (cardStandingRead.js), never the stored `influence` band ("marginal" on
+  // 88.6% of cards, a keyword misread at birth). First of no power: no row.
+  const standingWord = cardStandingLine(npc, placeSettlement || settlement) || '';
   // WIRING W3 C9 (R-W6, FOR THE OWNER'S VETO): how the face deals with strangers, the authored
   // `presentation.behaviour` line drawn at birth. X-48's look-and-voice class (`impression`) stays dark.
   const dealing = dealingShown(npc, placeSettlement || settlement);
@@ -417,7 +416,6 @@ export function NPCInlineCard({
           <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap'}}>
             <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag}}>{npc.name}</span>
             {!cardDoor && <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>{npc.title}</span>}
-            <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:infColor,marginLeft:'auto',flexShrink:0}}>{infDots}</span>
           </div>
         </div>
         {pinAvailable && (
@@ -535,10 +533,18 @@ export function NPCInlineCard({
           {tieLines.length>0 && (
             <div data-testid="npc-card-ties" style={{display:'flex',flexDirection:'column',gap:2,margin:'6px 0',fontSize:proseFontSize(FS.xs, mobile)}}>
               {tieLines.map((t,i)=>(
+                t.direction==='own' ? (
                 <div key={`tie-${i}`} data-tie-direction={t.direction} style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap'}}>
-                  <span style={{fontWeight:800,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.04em'}}>{t.direction==='own'?(t.kind||'Tie'):'Called by'}</span>
-                  <span style={{color:swatch.inkMag2}}>{t.withId?<EntityLink id={t.withId} type="npc" fallback={t.withName}/>:t.withName}{t.direction==='calledBy'&&t.kind?` · ${t.kind}`:''}</span>
+                  <span style={{fontWeight:800,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.04em'}}>{t.kind||'Tie'}</span>
+                  <span style={{color:swatch.inkMag2}}>{t.withId?<EntityLink id={t.withId} type="npc" fallback={t.withName}/>:t.withName}</span>
                 </div>
+                ) : (
+                // PAGE-1 CARD (F4, 2026-11-20): a tie another person holds toward this one, in plain words, never the
+                // "CALLED BY" header: "<name> holds a tie to them: <kind>". The tie's own prose is the generator's.
+                <div key={`tie-${i}`} data-tie-direction={t.direction} style={{color:swatch.inkMag2}}>
+                  {t.withId?<EntityLink id={t.withId} type="npc" fallback={t.withName}/>:t.withName}{t.kind?` holds a tie to them: ${t.kind}`:' holds a tie to them'}
+                </div>
+                )
               ))}
             </div>
           )}

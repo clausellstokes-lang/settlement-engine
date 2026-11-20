@@ -44,6 +44,7 @@ import { buildDossierEntityIndex, entityIdFor, slugifyEntity } from '../../domai
 import { factionIdFromName } from '../../lib/entities.js';
 import { cardHouseOf, cardPowerLine, firstPowerOf, governingNameOf, powerOrderOf } from '../../domain/people/cardPowers.js';
 import { seatKeeperOf } from '../../domain/people/seatKeeper.js';
+import { cardStandingLine, cardFirstOfWeights } from '../../domain/display/cardStandingRead.js';
 import { ownerGenerationContracts } from './generationContracts.js';
 // The four settlement-body chapters and the shared small readers moved out under
 // THE DECOMPOSITION WAVE (lane D); buildViewModel below still calls them in the
@@ -753,14 +754,11 @@ function npcsSlice(active) {
       }
       return false;
     });
-    // Influence might be string label, object, or numeric
-    const inf = n?.influence;
-    let influenceLabel = null, influenceDescription = null;
-    if (typeof inf === 'string') influenceLabel = inf;
-    else if (inf && typeof inf === 'object') {
-      influenceLabel = inf.label || inf.level || null;
-      influenceDescription = inf.description || null;
-    }
+    // ⛔ NO INFLUENCE LABEL (PAGE-1 CARD, F4, 2026-11-20): the PDF's "Influence: low" and the journal's printed the stored
+    // `influence` band, a keyword misread at birth (88.6% of the chair's 300 towns' cards "low"). Both print the record's
+    // fact instead, from the people card's one reader: the powers the person stands first of and each one's weight here.
+    const standingLine = cardStandingLine(n, s);
+    const firstOfLine = cardFirstOfWeights(n, s).map((p) => `${p.power}, ${p.weightHere}`).join('; ') || null;
     // Engine plotHooks is array of strings; titles aren't present as a separate field for some npcs
     const npcRace = n?.race || n?.culture || culture;
     // Phase-D anchor identity. `id` keys this NPC's card anchor (matches the
@@ -798,9 +796,8 @@ function npcsSlice(active) {
         : [],
       powerLine: cardPowerLine(n, powerOrder, governingName, !!keeper && keeper.id === n.id) || null, // COHERENCE-POWERS: the leader's office (screen parity; F7: an empty seat's keeper)
       power: n?.power || 0,
-      influence: inf,
-      influenceLabel,
-      influenceDescription,
+      standingLine,
+      firstOfLine,
       blurb: n?.blurb || n?.description || null,
       personality: personalityStr,
       motivation: motivationStr,
