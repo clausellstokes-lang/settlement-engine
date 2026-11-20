@@ -19,4 +19,4 @@ for (const p of U5_PATCHES) {
   if (n !== 1) throw new Error(`patch ${p.id}: ${n} matches in ${p.file}`);
   writeFileSync(f, src.replace(p.find, () => p.replace));
 }
-console.log(`u5 tree ${out}: ${U5_PATCHES.map((p) => p.id).join(', ')} (U5_SAFETY=${process.env.U5_SAFETY ?? 'offset'} U5_POINTS=${process.env.U5_POINTS ?? 10} U5_WINDOW=${process.env.U5_WINDOW ?? 60} U5_MERITS=${process.env.U5_MERITS ?? 'principled,weathered'} U5_GATE=${process.env.U5_GATE ?? 45})`);
+console.log(`u5 tree ${out}: ${U5_PATCHES.map((p) => p.id).join(', ')} (U5_SAFETY=${process.env.U5_SAFETY ?? 'offset'} U5_POINTS=${process.env.U5_POINTS ?? 10} U5_WINDOW=${process.env.U5_WINDOW ?? 40} U5_MERITS=${process.env.U5_MERITS ?? 'principled,weathered'} U5_GATE=${process.env.U5_GATE ?? 45})`);

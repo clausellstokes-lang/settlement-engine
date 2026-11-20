@@ -13,14 +13,14 @@
 // Environment knobs (each defaults to the proposal's value):
 //   U5_SAFETY=offset|points|off   PART 1's form
 //   U5_POINTS=10                  the points of one merit
-//   U5_WINDOW=60                  the weathered catastrophe's window in years ("living memory")
+//   U5_WINDOW=40                  the weathered catastrophe's window in years (a generation; 60 measured as the alternative)
 //   U5_MERITS=principled,weathered  the merits counted (also: kindly, founding — the measured alternatives)
 //   U5_GATE=45                    the standing a place must hold before its merits count (Tolerated's cut)
 const F = 'src/generators/factionDynamics.js';
 const PIPE = 'src/generators/generateSettlementPipeline.js';
 const SAFETY = process.env.U5_SAFETY ?? 'offset';
 const POINTS = Number(process.env.U5_POINTS ?? 10);
-const WINDOW = Number(process.env.U5_WINDOW ?? 60);
+const WINDOW = Number(process.env.U5_WINDOW ?? 40);
 const MERITS = (process.env.U5_MERITS ?? 'principled,weathered').split(',').filter(Boolean);
 const GATE = Number(process.env.U5_GATE ?? 45);
 // DRAFT: each size's usual range of the calm safety ladder, p10 to p90 on the derivation set (seeds hxe-<size>-<0..99>,

@@ -1,0 +1,18 @@
+SAFETY: each size's usual range of the calm ladder (p10..p90 of the band index; towns whose label is on the ladder)
+ladder: 0 Dangerous, 1 Unsafe, 2 Moderate, 3 Safe, 4 Very Safe
+
+calm:
+thorp       n  64  p10 2 p90 2  [Moderate .. Moderate]  (Dangerous 4, Unsafe 0, Moderate 60, Safe 0, Very Safe 0)
+hamlet      n  65  p10 2 p90 2  [Moderate .. Moderate]  (Dangerous 3, Unsafe 0, Moderate 62, Safe 0, Very Safe 0)
+village     n  72  p10 2 p90 2  [Moderate .. Moderate]  (Dangerous 0, Unsafe 0, Moderate 72, Safe 0, Very Safe 0)
+town        n  77  p10 2 p90 2  [Moderate .. Moderate]  (Dangerous 0, Unsafe 0, Moderate 74, Safe 3, Very Safe 0)
+city        n  66  p10 1 p90 2  [Unsafe .. Moderate]  (Dangerous 0, Unsafe 20, Moderate 46, Safe 0, Very Safe 0)
+metropolis  n  71  p10 2 p90 2  [Moderate .. Moderate]  (Dangerous 0, Unsafe 0, Moderate 71, Safe 0, Very Safe 0)
+
+every town on the ladder:
+thorp       n  69  p10 2 p90 2  [Moderate .. Moderate]  (Dangerous 4, Unsafe 0, Moderate 65, Safe 0, Very Safe 0)
+hamlet      n  67  p10 2 p90 2  [Moderate .. Moderate]  (Dangerous 3, Unsafe 0, Moderate 64, Safe 0, Very Safe 0)
+village     n  73  p10 2 p90 2  [Moderate .. Moderate]  (Dangerous 0, Unsafe 0, Moderate 73, Safe 0, Very Safe 0)
+town        n  78  p10 2 p90 2  [Moderate .. Moderate]  (Dangerous 0, Unsafe 0, Moderate 75, Safe 3, Very Safe 0)
+city        n  69  p10 1 p90 2  [Unsafe .. Moderate]  (Dangerous 0, Unsafe 21, Moderate 48, Safe 0, Very Safe 0)
+metropolis  n  73  p10 2 p90 2  [Moderate .. Moderate]  (Dangerous 0, Unsafe 0, Moderate 73, Safe 0, Very Safe 0)
