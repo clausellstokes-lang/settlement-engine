@@ -263,6 +263,29 @@ parts of the whole check (at the close).
   measure and design now, BUILD AFTER THE DEPLOY (it moves who rules in every new town, every reference town, and
   the powers pages the security lane is finishing); the owner may order it before.
 
+- **2026-11-20, answered by 04:32 UTC, THE OWNER (verbatim):** "Next I'm always perplexed that we sometimes have
+  settlements that have a guild council that competes with the merchant guilds or crafts guilds. It seems redundant.
+  Can you check and see if that makes sense to you? Shouldn't a guild council represent the seat that is led by the
+  power of a merchant guild or craft guild? And can you check for the other counterparts? Of course the type of
+  government is different than the power that rules though there is a strong correlation. For example, the
+  government type could be an autocracy but it is the merchant guilds who installed a king of their own on the
+  thrown, creating a merchant king type scenario. And all of the other combinations of counterparts between
+  appropriate powers and government types at play with this. What are your thoughts?" ANSWERED FROM THE CODE: the
+  owner is right, and for every kind. THE CAUSE: the ruling BODY is itself a row of the powers, marked governing
+  (`src/generators/power/rulingStructure.js`), and `coupContenders` takes the three heaviest non-governing powers
+  with no regard to the ruler's kind. WHAT EXISTS (the owner's law of 2026-11-11, the dual hat, as built in
+  `src/generators/power/rulerKin.js`): a council of a kind is drawn only where the town has a house of that kind; a
+  power of the ruler's own kind with NO house behind it folds into the ruler; with a house, both stand. ONE TOWN IN
+  HAND, not a count: Hákonberg: the Feudal Appointee rules, the Landed Gentry "contests the seat", and Alfhild
+  Andersson is first of both. THE CHAIR'S VIEW, GIVEN: THREE things kept apart: the FORM of government; the POWER
+  THAT HOLDS THE SEAT; the PERSON in it, from that power's house. The seat is an office, not a rival; the holder
+  never contests its own seat; two distinct blocs of one kind may still be rivals; form and holder drawn separately
+  with weights (usual pairs common, unusual ones with a stated reason); it also delivers the earlier rule (every
+  power can hold a seat). TIMING AS BEFORE: count and design now, build after the deploy (it changes how a town's
+  rule is stored). A CORRECTION SAID BY NAME: the chair had told the owner craftsmen have no ruling body at all;
+  `RULER_KINDS` lists craft and a "Guild Council" label exists, reached through a town's own governing house: not
+  counted; the count settles it. SEAT-MEASURE's count and map were widened by a message into its running turn.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
