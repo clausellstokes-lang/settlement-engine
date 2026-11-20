@@ -54,6 +54,19 @@ const leafOf = (blockId) => Object.keys(LEAVES).find((k) => LEAVES[k] && LEAVES[
 const DIM_VALUES = new Set(Object.values(STATE_MARK_DIMENSIONS).flat());
 const WORKER = process.env.MAP_WORKER || '0';
 
+/** Every string under publicProse.blocks (aliases or not: a match anywhere counts). */
+function storedStrings(prose) {
+  const out = []; const walk = (v) => { if (typeof v === 'string') out.push(v); else if (v && typeof v === 'object') for (const x of Object.values(v)) walk(x); };
+  walk(prose && prose.blocks); return out;
+}
+/** The template as a regex: each {slot} a lazy wildcard, the corpus 'town' also matching the size noun. */
+function templateRe(text, size) {
+  const cap = size[0].toUpperCase() + size.slice(1);
+  const src = String(text).split(/(\{[^}]+\})/).map((t) => (t.startsWith('{') && t.endsWith('}') ? '[\\s\\S]*?'
+    : t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\btown\b/g, `(?:town|${size})`).replace(/\bTown\b/g, `(?:Town|${cap})`))).join('');
+  return new RegExp(src);
+}
+
 function signature(v) {
   const marks = Array.isArray(v.marks) ? v.marks : [];
   return {
@@ -70,6 +83,7 @@ for (const row of PLAN) {
     rec.draws = []; rec.calls = {}; rec.reads = 0; rec.drawsDirect = 0;
     const prose = await birthAndCompose(row, { before() { rec.on = true; }, after() { rec.on = false; } });
     writeFileSync(`${OUT}/${row.seed}.instr.json`, JSON.stringify(prose));
+    const strings = storedStrings(prose);
     const seen = new Set(); const lines = []; const out = { inScope: 0, outOfScope: 0 };
     for (const d of rec.draws) {
       const leaf = leafOf(d.blockId);
@@ -85,9 +99,8 @@ for (const row of PLAN) {
       lines.push(JSON.stringify({
         size: row.size, seed: row.seed, leaf, path: d.path, blockId: d.blockId, poolKey: d.poolKey,
         poolLength: pool.length, eligibleVids, chosenVid, chosenText: d.chosen ? d.chosen.text : null,
-        poolIsLeafPool: pool === LEAVES[leaf][d.blockId]?.pools?.[d.poolKey],
+        stored: d.chosen ? (() => { const re = templateRe(d.chosen.text, row.size); return strings.some((x) => re.test(x)); })() : false,
         excluded: pool.filter((v) => !eligibleSet.has(v)).map(signature),
-        eligibleSig: (d.eligible || []).map(signature),
       }));
     }
     if (lines.length) appendFileSync(`${OUT}/draws.${WORKER}.jsonl`, `${lines.join('\n')}\n`);
