@@ -1,0 +1,9 @@
+cards: 9012; elapsed 58.4s; tree /home/user/settlement-engine; 50/size; reserve exported; closed list 119 rows from /home/user/settlement-engine/src/data/people/goalSecretRefusals.js
+size         towns  cards identical mirror template>2 template=2 tieDesc tieTension tieIndex refusal  venal unmatched nocell
+thorp           50     65         0      0          0          0       0          0        0       0      7         0      1
+hamlet          50    170         0      0          0          0       0          0        0       0     15         0      2
+village         50    387         0      0          0          0       0          0        0       0     65         0      4
+town            50   1196         0      0          0         16       5          7        7       0    236         0      6
+city            50   3002         2     30          7        352     288        288      334       0    711         0      3
+metropolis      50   4192         5     50         15        963     665        675      790       0   1001         0      7
+TOTAL          300   9012         7     80         22       1331     958        970     1131       0   2035         0     23
