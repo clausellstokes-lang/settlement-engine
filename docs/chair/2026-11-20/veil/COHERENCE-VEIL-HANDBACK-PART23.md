@@ -175,3 +175,49 @@ the app relies on that). Names, roles and every tie between people are unchanged
 **THE SUCCESSOR (07:14):** VEIL-23 (session_019yED1SPikQqQKF16wCQQfC) is seated beside this seat on its tip and writes
 nothing until the chair's word. THE HAND-OVER at the first clean boundary (after "R3", or after the R4 cure merged green,
 or at 380,000 tokens): this file current with a section "the hand-over", then "<stage> <commit>, HANDED OVER".
+
+## 8. THE HAND-OVER (to VEIL-23, on the chair's word of 07:24 UTC; written 07:24 UTC)
+
+THE MARK: the chair read this seat's true count from the session record: **381,559 tokens** (this seat's own estimate ran
+about a third low; `get_session` reads 0). This seat hands over now and is afterwards only a RELAY for the builders it
+started (their reports return to its session): it reads no diff, merges nothing, briefs nothing.
+
+**MERGED ON THE LANE (`lane/veil-22-2026-11-20`; tip: the commit carrying this file):** 463d0362c (the cut) -> V10-2
+`--no-ff` **d136940c3** -> VS1 (b)'s alignment **b5cb22caf** (cherry-picked from e56a0d42f; VS1's reds zero; the seat's
+re-run 9 of 9). Records only besides: the gate (section 4), PART 23, `briefs/R4-CURE-BRIEF.md`. 212 on the lane is still
+`05b915ab…8f10` (no stage after R2 is merged); 211 `eface6d0…`/`ce8474ff…` unchanged.
+
+**BRANCHES AND BUILDERS (pushed as transport; none for a pull request):**
+| Stage | Branch (origin) | Commit | Brief | State, and what it owes |
+|---|---|---|---|---|
+| R3 | `lane/veil-22-r3-2026-11-20` (worktree `/home/user/wt/r3`, `v22-r3`) | 9e082aa0a | `briefs/R3-BRIEF.md` + the launch's VR42/economicDragDesc addendum (section 0) | BUILT, NOT GREEN, builder STOPPED (its mark). 14 rows built; twin in new `galleryRosterChoices.js`; 212 -> `04693646…959e`, rollback -> `653ae8b2…b2f4` (its commit message garbles one hash line; the hand-back's are right). Born red 7/11 -> green 11/11; acceptance EXIT 0 (40 PASS); harnesses 58/58; `--check`, typechecks, eslint 0; cost: Langengrund Reveal-DM 570.7 ms (bound 709.0), link 2.16x 211, 50/500/500 1.97x. THE ONE RED: `galleryVeilHandRows` V8-4 (8 lines "powerStructure.factions[0] lost its name": its hand row's "Thieves' Guild" is raised by the hidden "Thieves' guild chapter"; the 03:15 power observable withholds it) — **SENT TO THE CHAIR FOR A RULING (07:18 UTC)**: the seat holds the observable governs, V8-4 re-recorded on a shown power no hidden house raises, its floor and sweep arms kept, plus an arm that the raised power leaves WHOLE. Two observables not met as worded, both by SHOWN houses (`out/v21/r3/measure-observables.txt`): "Magical crime" in 2 towns (control allows); semi-organized labels above the control pool. UNCOMMITTED in its worktree: the reruns' outputs `out/v21/r3/guards-security-rerun.txt` (1 failed of 68: V8-4) and `guards-exits.txt`; `guards-twin.txt` (the twin batch) did not finish. NOT READ BY THIS SEAT: the diff. |
+| R4 | `lane/veil-22-r4-2026-11-20` (worktree `/home/user/wt/r4`, `v22-r4`) | dfa031f3e (+ the cure's commit to come) | `briefs/R4-BRIEF.md`, then `briefs/R4-CURE-BRIEF.md` + the chair's 07:10 additions + VR46's teeth (iv), (v) + VEIL-23's cures (1) to (3), all relayed to the cure builder (section 7; 07:25 UTC) | R4 NOT GREEN (guards pinning byte-stable ids: galleryServerVeil 10/17, publicSafe 7/56, galleryVeilSignalCopies 4/5, criminalVeilSwitch 1/9). **R4-CURE BUILDER RUNNING** in this seat's session: owes the salt red (seven executions + forced generic plan) and VOLATILE, the volatility catalogue, cost before/after, the twin's one salt a projection, every guard red re-stated under VR46 with teeth (i)-(v), the substring and key search for stored ids (two plants), numeric ids re-keyed (a plant), the withheld holders' names searched in every served string (a hit outside R5's or the doors' rows is tier 1: STOP), then R2-BRIEF's green list (acceptance, render-twice, inversion, guards, typechecks). Its report returns to this seat: relayed UNREAD. |
+| R6 | `lane/veil-22-r6-2026-11-20` (worktree `/home/user/wt/r6`, `v22-r6`) | 7d9ebd078 | `briefs/R6-BRIEF.md` + the seat's units | COMPLETE, NOT MERGED, waits on R3 (its MAIN arm red 50: `cast.stakes` (R3), `cast.roles` reason wording (R3/R5)). VR45 at 6978a8fc2; rosterChoiceInversion aligned 6 -> 3 (7334bdf11); the blackMarketCapture condition proven (7d9ebd078). Builders ended. |
+
+**THE RULINGS SINCE THIS SEAT'S PROMPT (each vetoable by the owner):** VR42 (the governing power's row stays); the
+blackMarketCapture page column CONFIRMED and its condition proven; VR44 (the tile's stability, the band word alone, every
+non-owner read: at the doors' merge); the six alias paths hosted by R5 (each bound to its target's rule; red first on the
+30 reads; the new row count in the "R5" line); THE GATE AT E: the four readings (gallery and link, both shapes)
+UNREGISTERED 0, any path left named; VR45 (key order); THE SALT (sections 6, 7); VR46 (the guards modulo the read's
+person-id bijection, five teeth); CTR9 (TRAD-1's traditions text under `publicProse` must show as not differing; if R5
+edits `publicProse.js` or `publicProseCompose.js`, the chair is told which lines).
+
+**WHAT THIS SEAT WOULD DO NEXT, IN ORDER, AND WHY:**
+1. The chair's ruling on V8-4 (pending), then an R3-CURE builder (V8-4 re-recorded or the rule changed as ruled; R3's
+   uncommitted rerun outputs committed; the twin batch `guards-twin.txt` re-run, `criminalVeilSwitch` and
+   `observedShapeReaders` named), then READ R3's diff line by line and merge it (R3 first: R4 places its call line after
+   R3's; R5 derives from R3's inputs). Send "R3 <commit>".
+2. R4 when its cure returns green: read line by line (the salt's volatility first), merge after R3, the call-line order
+   at the merge, the volatility catalogue checked by hand. "R4 <commit>".
+3. R6 merged after R3 (re-run its MAIN arm at the merged tree: it must go green on R3's rows).
+4. R5 (composed prose; the six alias rows; CTR9's composers), then R7.
+5. DOORS 3e1115c81 `--no-ff` after R3 and R4, every hunk read, the two inside `import_gallery_dossier` hardest; ONE
+   builder: VR44, VR41's two narrowings, the reader's repros and the acceptance run at the merged tree, AND VEIL-23's cure
+   (4): the frozen share's NAME and TIER columns come from the raw copy (`src.j`): a born arm that the column equals the
+   served body's name and tier on every read, with a planted town whose name holds a hidden house's name; else read both
+   from the body. "DOORS-IN <commit>" with 212's sha256. VR43's one-row count into the deploy note.
+6. The gate's four readings again (target UNREGISTERED 0), the stored figures once at the merged tree, then E.
+
+**THE INSTRUMENTS in this container** (for any seat that shares it; VEIL-23 has its own): the cluster `/var/tmp/v18pg`
+(socket `/var/tmp/rv7`), `/var/tmp/v18/{pgmod,lib,rv9,base,t-d1369}`, R1's runner and tally in `/var/tmp/v18/`, master
+`/home/user/wt/master`, worktrees `/home/user/wt/{r3,r4,r6}`; the gate's invocation `out/v22/gate/gate-queue.sh`.
