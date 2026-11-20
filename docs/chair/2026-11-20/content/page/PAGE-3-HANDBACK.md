@@ -1,4 +1,4 @@
-# PAGE-3's hand-back (kept current at every push; last written 2026-11-20 13:00 UTC by `date -u`)
+# PAGE-3's hand-back (kept current at every push; last written 2026-11-20 13:41 UTC by `date -u`)
 
 Read this, then `PAGE-2-HANDBACK.md` (its section 1, the rulings in force, still governs where this file is silent),
 then `briefs/BUILDER-RULES.md` and the brief of the unit you take. PAGE-3 integrates; builders (the Agent tool) build.
@@ -19,13 +19,19 @@ then `briefs/BUILDER-RULES.md` and the brief of the unit you take. PAGE-3 integr
 | unit | state | branch | commit | next |
 |---|---|---|---|---|
 | S6 | PAGE-2's builder; awaiting origin | lane/page-2-2026-11-20-t1 | (12dc0f96c local there) | read once, re-run red/green, censuses, confinement, merge FIRST |
-| sides table | a89859e6f READ by PAGE-3, red/green re-run; merged on local `page3/s7-merge` (00ec2d54e + census commit); the chair's six changes (13:22) out to PAGE-3's builder on `page3/s7-fix` (brief `briefs/S7-FOLLOWUP.md`) | lane/page-2-2026-11-20-s7 | a89859e6f | read the follow-up, re-run, re-take the lighting census, merge, one line to the chair |
+| sides table | a89859e6f READ by PAGE-3, red/green re-run, merged with its manifest row (00ec2d54e) and the lighting census refrozen (3707→3708 files); tests/lint 220/220 there. The chair's six changes (13:22, `briefs/S7-FOLLOWUP.md`): the builder STOPPED at its first check: change 1 is wrong by the code (only 7 template sides are ever written over; 8 of 11 `named` rows never hold a name; 4 rows without `named` do). ASKED THE CHAIR 13:4x: does {power} fill from the stored side or the roster by `means`, and what of the four? Changes 2-6 hold; change 5 needs the case arm to accept the case of the side a fixed row stands for | origin `lane/page-3-2026-11-20-s7-wip` (merge + census + brief, 688682b22) | a89859e6f | on the ruling: build the follow-up (a builder, brief S7-FOLLOWUP.md + the ruling), read, re-run, re-take the census, merge into the lane, one line to the chair |
 | L2 | PAGE-2's builder; uncommitted | lane/page-2-2026-11-20-l2 | | lines to the chair; merge third |
 | L4/S9/S3 | PAGE-2's builder; uncommitted | lane/page-2-2026-11-20-s | | seven reworded lines to the chair; merge fourth |
 | L1 | NOT DISPATCHED (builds on S6's tip) | | | dispatch on T2.md once S6 is on origin |
-| K | PAGE-3's builder, PHASE 1 (trial) | lane/page-3-2026-11-20-k (local, /home/user/wt-page3-k) | | read trial; Phase 2 on PAGE-3's word; merge LAST |
+| K | PAGE-3's builder, PHASE 1 (trial) running | origin `lane/page-3-2026-11-20-k-wip` (brief only so far) | | the trial result to the chair in ONE message; Phase 2 only on the chair's word |
 
-## 3. Owed at the join (the chair, 13:22)
+## 3. THE CHAIR'S ORDER OF 13:32 (usage warning on)
+
+PAGE-3 does THREE things only: (a) the sides table with the six changes, merged, its commit to the chair; (b) S6 when
+its follow-up lands; (c) K's trial result to the chair in one message. L1, L2, L4/S9 and K's build wait on origin until
+the chair says. Every branch pushed (`-wip` when unfinished) after every return; this file current at every push.
+
+## 4. Owed at the join (the chair, 13:22)
 
 - A PARITY TEST on the joined tree: this lane's `src/data/tensionSideMeanings.js` and the session sheet's
   `src/domain/tension/sideArchetypes.js` (origin/lane/frame-5-2026-11-20) must agree on what a side means.
