@@ -1643,3 +1643,16 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   F3 and F4 after the deploy. ALSO READ: NAMES-1 is building (four builders, one per family of composers; locally,
   on its 720 towns: full names repeated in one sentence 12,054 to 0; bare power labels in sentences 20,449 to 5,898, the
   rest its builders' families; nothing pushed yet).
+- 05:29 UTC · **POINT 76 IS ON THE LINE: `lane/join-2026-11-14` at 7e0c77ae** (the merge 4b9ca37e05f3, `--no-ff`, its tree
+  8d9063a4b8e4 equal to GIT-DOOR's 9718d685c; then the row of point 76 in the landings table). AT THE MERGED TREE,
+  here: the eight changed test files 85 of 85; `tests/lint` WHOLE (the rule since point 75's miss): 218 of 219 files,
+  3,257 of 3,258 tests in 724 s; THE ONE RED WAS THIS CLONE, NOT THE TREE: `domainAnyCastBaseline`'s attribution arm
+  asks that each commit a ledger row names resolves in the object store, and this container's clone is shallow (the
+  commit d7ea69a4b was absent); the three commits the ledger names were fetched and the file re-run: 19 of 19, with
+  `ledgerCitationIntegrity` read against the records branch fetched as CI fetches it (`review-fixes-2026-07-08`, one
+  commit deep): 10 of 10. A CORRECTION OF THE CHAIR'S OWN WORD TO GIT-DOOR: the chair had written "my clone has the
+  ledger ref"; it did not (checked after the word was sent); it was fetched before the re-run, and the seat is told.
+  A THING FOR EVERY LATER MERGE CHECK IN A FRESH CONTAINER: fetch the records branch as CI does and the commits the
+  any-cast ledger names BEFORE `tests/lint` whole, or two files read red by the clone alone.
+  PLAUSIBLE UNTIL THIS PULL REQUEST'S CI HAS RUN at 7e0c77ae: the six shards under the 60-minute cap; the hook's
+  budget on a runner.
