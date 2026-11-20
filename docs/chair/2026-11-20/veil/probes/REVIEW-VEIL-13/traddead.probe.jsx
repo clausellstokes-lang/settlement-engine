@@ -26,7 +26,7 @@ it('traddead', async () => {
   const CV = await import(`${SRC}/src/domain/people/cardVeil.js`);
   const veil = await import(`${SRC}/src/domain/display/galleryVeil.js`);
   await loadGenerationLawPayloads();
-  const out = []; let n = 0; let tried = 0; const T = { red: 0, control: 0, n: 0 };
+  const out = []; let n = 0; let tried = 0; const T = { red: 0, control: 0, n: 0 }; const R = {};
   const dials = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: false, magicExists: true, contentProfile: 'grounded', priorities: { ...(DEFAULT_CONFIG.priorities || {}), criminal: 85 } };
   for (let k = 0; k < 40 && T.n < 8; k += 1) for (const size of ['town', 'city', 'metropolis']) {
     n += 1; const seed = `rv13-dead-${size}-${k}-${n}`;
@@ -35,9 +35,9 @@ it('traddead', async () => {
     const dead = (shownTraditionsOf(A, []).recs || []).some((r) => r?.coreMotif?.element === 'the-dead' && !(/\.0$/.test(String(r.id)) && r.foundedYear === 1));
     if (!dead) continue; tried += 1; if (T.n >= 8) continue;
     const old = String(hid[0].name); const bare = old.replace(/\s*\([^)]*\)\s*$/, '');
-    for (const arm of ['PLANT', 'CONTROL']) {
-      const B = clone(A); const h = (B.institutions || []).find((x) => x.name === old); h.name = `${bare} (word of mouth)`;
-      const evName = arm === 'PLANT' ? `The ${bare} Fire` : 'The Granary Fire';
+    for (const arm of ['PLANT', 'PLURAL', 'POSSESSIVE', 'THREE', 'CONTROL']) {
+      const B = clone(A); const h = (B.institutions || []).find((x) => x.name === old); const hb = arm === 'THREE' ? 'Vex' : bare; h.name = `${hb} (word of mouth)`;
+      const evName = { PLANT: `The ${bare} Fire`, PLURAL: `The ${bare}s Fire`, POSSESSIVE: `The ${bare}'s Fire`, THREE: 'The Vex Fire', CONTROL: 'The Granary Fire' }[arm];
       B.history = B.history || {}; B.history.historicalEvents = [...(B.history.historicalEvents || []), { id: `evt_rv13_${n}`, name: evName, templateType: 'great_fire', severity: 'major', yearsAgo: 2, description: 'The fire took a street.' }];
       const rows = sharedTraditionRowsOf(B); const deadRows = (rows || []).filter((r) => /fire/i.test(r.text));
       const saved = PP.withPublicProse(clone(B), composePublicProse(B));
@@ -52,11 +52,13 @@ it('traddead', async () => {
         const recalls = servedRows.some((r) => /fire/i.test(String(r?.text || '')) && /2 years ago|two years ago/.test(String(r?.text || '')));
         const houseServed = (D?.institutions || []).some((x) => String(x?.name || '').startsWith(bare));
         out.push(`${seed} ${arm} dm=${dm}: house served=${houseServed}; event "${evName}" served=${servedEv}; served rows recall the fire=${recalls}${recalls ? ' :: ' + JSON.stringify(servedRows.find((r) => /fire/i.test(String(r?.text || '')))?.text).slice(0, 200) : ''}`);
-        if (arm === 'PLANT') { T.n += dm ? 1 : 0; if (recalls && !servedEv) T.red += 1; } else if (recalls && servedEv) T.control += 1;
+        const r = R[arm] = R[arm] || { reads: 0, recalls: 0, servedEv: 0, recallsWithheld: 0 }; r.reads += 1; if (recalls) r.recalls += 1; if (servedEv) r.servedEv += 1; if (recalls && !servedEv) r.recallsWithheld += 1;
+        if (arm === 'PLANT') { T.n += dm ? 1 : 0; if (recalls && !servedEv) T.red += 1; } else if (arm === 'CONTROL' && recalls && servedEv) T.control += 1;
       }
       if (arm === 'PLANT' && !deadRows.length) out.push(`  (the plant's rows do not recall the fire at save: ${JSON.stringify((rows || []).map((r) => r.text)).slice(0, 200)})`);
     }
   }
+  out.unshift(...Object.entries(R).map(([a, r]) => `${a}: reads ${r.reads}; rows recall the fire ${r.recalls}; event served ${r.servedEv}; RECALLS A WITHHELD EVENT ${r.recallsWithheld}`));
   out.unshift(`towns with a hideable house and a rite of the dead tried: ${tried}; PLANT reads where the rows recall a fire the served history lacks: ${T.red}; CONTROL reads recalling a served fire: ${T.control}`);
   writeFileSync(process.env.RV10_OUT, out.join('\n') + '\n'); await db.end();
 }, 14_400_000);

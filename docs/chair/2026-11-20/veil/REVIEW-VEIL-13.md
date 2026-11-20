@@ -61,3 +61,11 @@ hidden, Reveal off and on; a pre-change save serves none. NOT DONE: import (stub
 4. A chain: `sh $R12/chain.sh <db> 212 /var/tmp/v16/wt-<c>/supabase/migrations && PGHOST=/var/tmp/rv7 psql -U postgres -qd <db> -f $R13/seed.sql`
 5. A probe: `env RV6_SRC=/var/tmp/v16/wt-<c> RV10_TPL=<db> RV10_OUT=<out> sh $R12/run.sh $R13/<probe>.probe.jsx <log>` (tell/r3: RV9_N=2 is the gate's pool; RV13_TOWNS=<tags> narrows tell)
 Chains used: x212 = 15567e597; pre212 = 302850b0b; r3c4 = c5786c5ce; trad = 1f3cdc135 (`chain.sh trad 999`).
+
+## 4. Re-read: "TRAD-SHARE-2 3ba5ee73f" (written 16:03 UTC). HOLDS (my plant and three sisters).
+
+Executed (`traddead.probe.jsx`, arms PLANT bare / PLURAL / POSSESSIVE / THREE "Vex" / CONTROL; 8 towns, Reveal off and on;
+`out/traddead4-at-<c>-on-<chain>.txt`): at 1f3cdc135 on x212 each plant recalls a WITHHELD fire 16/16; at 3ba5ee73f 0/16 on
+x212 and on the lane chain (no recall at all). CONTROL "The Granary Fire": served 16/16, recalled 8/16 after (16/16 before):
+the four towns lost hold a house named with "granary" (`holdsAName("The Granary Fire", ["town granary"])` = true): toward
+withholding, by the rule as built. Command: `env RV6_SRC=/var/tmp/v16/wt-3ba5ee73f RV10_TPL=x212 RV10_OUT=<out> sh $R12/run.sh $R13/traddead.probe.jsx <log>`.
