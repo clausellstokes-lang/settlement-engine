@@ -31,7 +31,7 @@ it('rk', async () => {
   const N = Number(process.env.RV10_N || 1); let n = 0; const sample = {};
   const doors = [['gallery', 'anon', null, 'select data as d from public.get_gallery_dossier($1)', (r) => r.d],
     ['link', 'anon', null, 'select public.get_unlisted_dossier($1) as d', (r) => r.d?.dossier],
-    ['import', 'authenticated', '22222222-2222-2222-2222-222222222222', 'select public.import_gallery_dossier($1) as d', (r) => r.d?.data ?? r.d?.dossier ?? r.d]];
+    ['import', 'authenticated', '22222222-2222-2222-2222-222222222222', 'select data as d from public.import_gallery_dossier($1)', (r) => r?.d]];
   for (let k = 0; k < N; k += 1) for (const size of ['village', 'town', 'city', 'metropolis']) for (const crisis of ['none', 'infiltrated', 'insurgency', 'indebted', 'politically_fractured', 'none']) {
     n += 1; const seed = `rv12-rk-${size}-${crisis}-${k}-${n}`;
     let A = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...dials, settType: size, ...(crisis !== 'none' ? { selectedStresses: [crisis], selectedStressesRandom: false } : {}) }), null, { seed, customContent: {} });
@@ -65,7 +65,7 @@ it('rk', async () => {
         if (!sample[door]) sample[door] = (docs[0].npcs || []).slice(0, 3).map((p) => p?.id);
         for (const d of docs.slice(0, 2)) {
           const { out, keys } = strings(d);
-          const whole = out.filter((s) => storedS.includes(s)); const sub = storedS.filter((s) => out.some((x) => x !== s && x.includes(s))); const key = storedS.filter((s) => keys.some((x) => x.includes(s)));
+          const whole = out.filter((s) => storedS.includes(s)); const bnd = (s) => new RegExp(`(^|[^0-9a-z])${s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^0-9a-z])`, 'i'); const sub = storedS.filter((s) => out.some((x) => x !== s && bnd(s).test(x))); const key = storedS.filter((s) => keys.some((x) => x.includes(s)));
           bump(`(ii) ${door} no stored id served whole (${tag})`, whole.length > 0, `${seed}: ${whole.slice(0, 3)}`);
           bump(`(ii) ${door} no stored id as a substring (${tag})`, sub.length > 0, `${seed}: ${sub.slice(0, 2)} in "${(out.find((x) => sub[0] && x.includes(sub[0])) || '').slice(0, 80)}"`);
           bump(`(ii) ${door} no stored id as a key (${tag})`, key.length > 0, `${seed}: ${key.slice(0, 3)}`);
@@ -77,7 +77,8 @@ it('rk', async () => {
             if (m.has(st) && m.get(st) !== sv) bad = `split ${st}`; if (inv.has(sv) && inv.get(sv) !== st) bad = `collision ${sv}`; m.set(st, sv); inv.set(sv, st); }
           bump(`(iv) ${door} re-key a bijection (${tag})`, !!bad || cardSet.size !== cards.length, `${seed}: ${bad || 'duplicate card id'}`);
           // (i) every re-keyed-form string names a served card; the ties' ends name served cards
-          const form = /^npc_[0-9a-f]{16}$/; const dangling = out.filter((s) => form.test(s) && !cardSet.has(s));
+          const form = /^npc_[0-9a-f]{16}$/; const dpaths = []; const walk = (v, p) => { if (typeof v === 'string') { if (form.test(v) && !cardSet.has(v)) dpaths.push(p.replace(/\.\d+/g, '[]')); } else if (Array.isArray(v)) v.forEach((x, i) => walk(x, `${p}.${i}`)); else if (v && typeof v === 'object') for (const [kk, x] of Object.entries(v)) walk(x, `${p}.${kk}`); }; walk(d, ''); const sCards = new Set((A.npcs || []).map((p) => String(p?.id))); const spaths = new Set(); const swalk = (v, p) => { if (typeof v === 'string') { if (/^npc_/.test(v) && !sCards.has(v) && !/^npc_(veiled|power)_/.test(v)) spaths.add(p.replace(/\.\d+/g, '[]')); } else if (Array.isArray(v)) v.forEach((x, i) => swalk(x, `${p}.${i}`)); else if (v && typeof v === 'object') for (const [kk, x] of Object.entries(v)) swalk(x, `${p}.${kk}`); }; swalk(A, '');
+          const dangling = dpaths.filter((dp) => !spaths.has(dp)); for (const dp of dpaths) bump(`(i) dangling at ${dp} (${door}; stored dangles there too: ${spaths.has(dp)})`, false, '');
           bump(`(i) ${door} re-keyed refs name a served card (${tag})`, dangling.length > 0, `${seed}: ${dangling.slice(0, 2)}`);
           const tieEnds = (d.relationships || []).flatMap((r) => ['from', 'to', 'npc1Id', 'npc2Id'].map((f) => r?.[f]).filter((x) => x !== undefined));
           const tieBad = tieEnds.filter((x) => !cardSet.has(String(x)));

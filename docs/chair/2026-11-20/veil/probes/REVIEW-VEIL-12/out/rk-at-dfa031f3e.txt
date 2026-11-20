@@ -1,0 +1,54 @@
+0/96	(v) gallery K reads all differ
+0/192	(ii) gallery no stored id served whole
+0/192	(ii) gallery no stored id as a substring
+0/192	(ii) gallery no stored id as a key
+0/192	(iv) gallery re-key a bijection
+0/192	(i) gallery re-keyed refs name a served card
+0/192	(i) gallery every tie end names a served card
+64/64	NUMBER gallery planted number id re-keyed
+0/192	NAME gallery an unserved person's name in no served string
+0/96	(v) link K reads all differ
+0/192	(ii) link no stored id served whole
+0/192	(ii) link no stored id as a substring
+0/192	(ii) link no stored id as a key
+0/192	(iv) link re-key a bijection
+0/192	(i) link re-keyed refs name a served card
+0/192	(i) link every tie end names a served card
+64/64	NUMBER link planted number id re-keyed
+0/192	NAME link an unserved person's name in no served string
+0/96	(v) import K reads all differ
+0/192	(ii) import no stored id served whole
+0/192	(ii) import no stored id as a substring
+0/192	(ii) import no stored id as a key
+0/192	(iv) import re-key a bijection
+0/192	(i) import re-keyed refs name a served card
+0/192	(i) import every tie end names a served card
+64/64	NUMBER import planted number id re-keyed
+0/192	NAME import an unserved person's name in no served string
+0/28	(i) dangling at .npcs[].goal.intent.short.target.id (gallery; stored dangles there too: true)
+0/28	(i) dangling at .npcs[].goal.intent.short.target.id (import; stored dangles there too: true)
+0/16	(i) dangling at .npcs[].goal.intent.long.target.id (gallery; stored dangles there too: true)
+0/16	(i) dangling at .npcs[].goal.intent.long.target.id (import; stored dangles there too: true)
+0/112	NAME link towns with unserved people
+0/56	NAME gallery towns with unserved people
+0/56	NAME import towns with unserved people
+0/2	(i) dangling at .simulationTrace[].targetId (gallery; stored dangles there too: true)
+0/2	(i) dangling at .simulationTrace[].targetId (import; stored dangles there too: true)
+0/8	(i) dangling at .stress.cast.roles[].id (gallery; stored dangles there too: true)
+0/8	(i) dangling at .stressors.cast.roles[].id (gallery; stored dangles there too: true)
+0/8	(i) dangling at .stress.cast.roles[].id (link; stored dangles there too: true)
+0/8	(i) dangling at .stressors.cast.roles[].id (link; stored dangles there too: true)
+0/8	(i) dangling at .stress.cast.roles[].id (import; stored dangles there too: true)
+0/8	(i) dangling at .stressors.cast.roles[].id (import; stored dangles there too: true)
+EX NUMBER gallery planted number id re-keyed (unmarked dm=false) :: rv12-rk-village-none-0-1: cards ["npc_bc126c468ff3f977",90001,"npc_ccc91c56085cacae"] numSeen true || rv12-rk-village-none-0-1: cards ["npc_1391ab84e71dc4e1",90001,"npc_90e37a06da23c93b"] numSeen true
+EX NUMBER link planted number id re-keyed (unmarked dm=false) :: rv12-rk-village-none-0-1: cards ["npc_984b18a8140d5229",90001,"npc_6bd017b3670d7c86"] numSeen true || rv12-rk-village-none-0-1: cards ["npc_16adc278915a65e2",90001,"npc_45155c01331414d5"] numSeen true
+EX NUMBER import planted number id re-keyed (unmarked dm=false) :: rv12-rk-village-none-0-1: cards ["npc_63ea87524a6d11f3",90001,"npc_cfb869cb1cd54785"] numSeen true || rv12-rk-village-none-0-1: cards ["npc_1849aec6c4d8fd7c",90001,"npc_5b28b633a668ede1"] numSeen true
+EX NUMBER gallery planted number id re-keyed (unmarked dm=true) :: rv12-rk-village-none-0-1: cards ["npc_39a5cca7ae28232e",90001,"npc_311e09ed4155bac9"] numSeen true || rv12-rk-village-none-0-1: cards ["npc_74ff56232fbcd033",90001,"npc_6e16275b9f3c9b20"] numSeen true
+EX NUMBER link planted number id re-keyed (unmarked dm=true) :: rv12-rk-village-none-0-1: cards ["npc_9932e3444e3d049f",90001,"npc_f91e0d3aca746e25"] numSeen true || rv12-rk-village-none-0-1: cards ["npc_204d966e976bc27b",90001,"npc_45acbdc22c62c305"] numSeen true
+EX NUMBER import planted number id re-keyed (unmarked dm=true) :: rv12-rk-village-none-0-1: cards ["npc_f01143c8bd86e529",90001,"npc_fca0948341a3bce9"] numSeen true || rv12-rk-village-none-0-1: cards ["npc_029f02732ab141a1",90001,"npc_f29046a3425b5181"] numSeen true
+EX NUMBER gallery planted number id re-keyed (marked dm=false) :: rv12-rk-village-none-0-1: cards ["npc_aea106f0784c3bfd",90001,"npc_d04affd4a7db48bf"] numSeen true || rv12-rk-village-none-0-1: cards ["npc_05b62974de70d7be",90001,"npc_ecf853a7bc4f01e9"] numSeen true
+EX NUMBER link planted number id re-keyed (marked dm=false) :: rv12-rk-village-none-0-1: cards ["npc_c859e549cfab1845",90001,"npc_6d4757b2ddc63bc0"] numSeen true || rv12-rk-village-none-0-1: cards ["npc_fe56ffae5f9fd75f",90001,"npc_edffa7a03e6c748b"] numSeen true
+EX NUMBER import planted number id re-keyed (marked dm=false) :: rv12-rk-village-none-0-1: cards ["npc_f26efed4474cad65",90001,"npc_ba770f67ac651eef"] numSeen true || rv12-rk-village-none-0-1: cards ["npc_9c4de9c25f09c79f",90001,"npc_d945b354c537bb4f"] numSeen true
+EX NUMBER gallery planted number id re-keyed (marked dm=true) :: rv12-rk-village-none-0-1: cards ["npc_4ae75c645a712b15",90001,"npc_dd46f3428ca7005b"] numSeen true || rv12-rk-village-none-0-1: cards ["npc_56d99732cca7add5",90001,"npc_488e167c196dd63c"] numSeen true
+EX NUMBER link planted number id re-keyed (marked dm=true) :: rv12-rk-village-none-0-1: cards ["npc_64b0af4c97763d7d",90001,"npc_d1eb6664b57000f0"] numSeen true || rv12-rk-village-none-0-1: cards ["npc_64891430dfb39f06",90001,"npc_e604a03898fc41ef"] numSeen true
+EX NUMBER import planted number id re-keyed (marked dm=true) :: rv12-rk-village-none-0-1: cards ["npc_9416799fc8e0ad3e",90001,"npc_f77de7554ae344e3"] numSeen true || rv12-rk-village-none-0-1: cards ["npc_b869e7277ddf7406",90001,"npc_2fa7ee64d4eb76f3"] numSeen true

@@ -1,0 +1,14 @@
+0/29	no nameless power row (gallery dm=false)
+0/29	VR42 governing row present where its name is served (gallery dm=false)
+0/29	no nameless power row (link dm=false)
+0/29	VR42 governing row present where its name is served (link dm=false)
+0/29	no nameless power row (gallery dm=true)
+0/29	VR42 governing row present where its name is served (gallery dm=true)
+0/29	no nameless power row (link dm=true)
+0/29	VR42 governing row present where its name is served (link dm=true)
+0/1	VR42 criminal government: row present (gallery dm=false)
+0/1	VR42 criminal government: row present (link dm=false)
+0/1	VR42 criminal government: row present (gallery dm=true)
+0/1	VR42 criminal government: row present (link dm=true)
+LABELS {"gallery dm=false diffuse":5,"link dm=false diffuse":5,"gallery dm=true diffuse":5,"link dm=true diffuse":5,"gallery dm=false null":18,"link dm=false null":18,"gallery dm=true null":18,"link dm=true null":18,"gallery dm=false semi-organized":5,"link dm=false semi-organized":5,"gallery dm=true semi-organized":5,"link dm=true semi-organized":5,"gallery dm=false organized":1,"link dm=false organized":1,"gallery dm=true organized":1,"link dm=true organized":1}
+GOV {"other:Elected Reeve":2,"government:Elder Council":11,"government:Headman's Authority":1,"economy:Guild Council":2,"other:Town Mayor":1,"religious:Church Council":1,"government:Noble Governorship":1,"government:Household Council":2,"noble:Feudal Appointee":1,"government:Town Council":3,"criminal:Corrupt Council":1,"military:Military Council":1,"government:City Council":1,"magic:Arcane Council":1}
