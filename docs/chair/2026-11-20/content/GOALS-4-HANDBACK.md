@@ -105,15 +105,21 @@ The two edge bundles (aiCharter, aiOutputSchema) read `src/kernel/proseHash.js` 
 11. The line merges into the lane before the cure's merge (20:36). Before each landing request, read `ci/LINE-NOW.md` and `ci/RED-AT-LINE.tsv` on the chair's branch.
 12. The sameness door's row (card `goal.short` repeated by a second place: town 0.16, city 0.27, metropolis 0.35 at the line) is the wants' to cure and should FALL. Its three figures go beside ours in "WANTS <commit>" (20:50).
 13. RULE 8 RE-RULED (21:27): NO whole `npm run test:ratchet`. Instead, (a) the build and the two VERIFY_DIST tests; (b) ONE run of `tests/generators`, `tests/data`, `tests/lint` and `tests/build`, plus `tests/domain/<dir>/` for each `src/domain/<dir>/` touched. Run them through the mutex, one heavy run at a time, and read the failing rows by name against `ci/RED-AT-LINE.tsv`.
+15. The chair's 21:30 rulings (A), (A2), (B) and (C) above are in force.
 14. A successor re-reads this file and COMMON-RULES.txt whole before its first merge.
 
-## Awaiting the chair (sent about 21:20 UTC)
+## The chair's 21:30 rulings on builder 11's three STOPs (RULED; builder 11 resumed on them from 7b670cd8b)
 
-- (A) Builder 11's condition-(a) STOP. `src/generators/people/ties.js :: temperOfTie` reads the PRINTED index's `trust: 'full'` (warm). That sets `firstTemper`, and `inTemperOf` uses it to choose the archetype and strength of the pair's later ties. GOALS-4 recommends that the temper is read from today's RESOLVED index (before any replacement), which `drawTieProse` would hand out beside `proseVariant`. The depth lane's ties wait on this.
-- (B) The colourMarks4h ledger, `docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json`, is hand-written, has no door, and lacks all 26 reserve rows.
-- (C) Two pronoun-test reds to word:
-  - mil_crim_corruption.tension#7 (offer: "…against the household's known earnings.");
-  - gov_econ_dependence.desc#1 (offer: "…and so decides what may be spent.").
+The addendum is `goals/briefs/GOALS-4-B11-ADDENDUM.md` (8be7f4b81).
+
+- (A) The temper is read from today's RESOLVED index, never the printed line's declaration.
+- (A2) TIES-HOLD: no tie template twice within one place. The pick walks the pool, then the reserve, then the least printed; no draw is added; 0 non-string differences. It is measured by size before and after, with a target of 0. The both-exhausted list goes to the depth lane, whose 157 pairs land AFTER this.
+- (B) The 26 ledger rows are written by a script that reads the data's declarations. The 26 rows go in the merge message, to the chair's eye.
+- (C) Both wordings are approved as offered.
+
+The landing is ONE: "WANTS <commit>" carries the wants AND this cure.
+
+DECOMPOSITION FOR AFTER THE DEPLOY: the hand-written ledger `docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json` gets a door.
 
 ## Listed for the join
 
