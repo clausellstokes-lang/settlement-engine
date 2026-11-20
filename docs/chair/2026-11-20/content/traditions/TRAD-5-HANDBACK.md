@@ -62,13 +62,13 @@ chair's word "THE LANE IS YOURS at a7473f47c" (18:44 UTC). A successor needs THI
 19. PUSH: only `refs/heads/lane/*` (this branch and its builders' `-wip`); plain pushes with the hooks; never
     `--no-verify`, a force push, master, or A PULL REQUEST; `git ls-remote` and the commits' author read before every push;
     never a push with nothing to send; no hosted database, credential, `supabase` or deploy.
+20. NOT THIS LANE'S FILES: `genesis.js`, `traditionCorpus.js`, `publicSafe.js`, `galleryVeil.js`, `cardVeil.js`,
+    `supabase/`, `tests/security/` beyond the traditions' own born test, `drawDeclared.js`, `factVocabulary.js` (read only).
 21. FIRST PAINT (the chair, 19:59 UTC, every lane): with "TRAD <commit>", ONE `npm run build` at the tip, then
     `VERIFY_DIST=1` on `tests/build/vendorPdfLazy.test.js` and `tests/build/generationWorkerLazy.test.js` through the mutex,
     and first paint's raw, gzip and Brotli figures and the worker's, at the lane's BASE by the same build too (the difference
     is the lane's). A rise is cured on the lane: an eager file declares an atom BY NAME; the code that answers it is imported
     only on the lazy side; THE TRADITIONS' WORDINGS ARE NEVER IMPORTED BY AN EAGER MODULE.
-20. NOT THIS LANE'S FILES: `genesis.js`, `traditionCorpus.js`, `publicSafe.js`, `galleryVeil.js`, `cardVeil.js`,
-    `supabase/`, `tests/security/` beyond the traditions' own born test, `drawDeclared.js`, `factVocabulary.js` (read only).
 
 ## 2. THE UNITS (earlier units: TRAD-4-HANDBACK §2)
 | unit | what | state | commit |
