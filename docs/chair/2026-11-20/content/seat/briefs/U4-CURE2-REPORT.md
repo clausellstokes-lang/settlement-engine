@@ -191,3 +191,52 @@ Arms (a) and (c) pin behaviour that the base leaf already has.
 CONFIRMED (executed here): every count, hash and rename answer above. PLAUSIBLE: that no other DM path renames a power after a
 transfer. I grepped `src/domain/events/` and the callers of `applyFactionRenameToSettlement`. The other caller,
 `src/generators/power/factionLabelClose.js`, runs at birth.
+
+## Addendum 3 (the chair 15:17Z): fail closed inside the leaf. Builder B4e, `7483c33e5`. Written 2026-11-20T15:35:38Z, read from `date -u`.
+
+**STATUS: GREEN.** The renamed-seat case now answers nobody. The measure counts 0 on both pools. Nothing was pushed. No register,
+census or baseline was touched. `factionRename.js` is not touched: its lower-case miss stays as the named survivor.
+
+**The rule.** It lives in `holderOfSeat.js :: unattributedTransferOn`. It fires where `transferTakerOf` finds no edge for the
+current form, but an edge on the current seat's pair is a frozen edge wording for its other power and some form. In that case
+`holderOf` returns `rule` 'R1' with no holder, `refused` false and the office's `kind`. This holds for both audiences, and the read
+never falls through to R2 or R3. The one matcher, `transferSentenceSays`, now takes `form` null to mean "any form".
+
+**Red first (condition 3).** Arm (12) on `5b95aaaf5`'s leaf: `holderOfSeat.test.js` gives 3 failed, 47 passed.
+- The two renamed-seat tests (coup and election) fail with "expected { rule: 'R3', … } to match object { rule: 'R1', holder: null, … }",
+  that is, Coin Exchange.
+- Condition 1 fails with "record: expected [ 'Merchant Guilds', … ] to deeply equal [ 'Coin Exchange', … ]": the wrong holder was
+  removed from the contest.
+
+With the rule, `holderOfSeat.test.js` and `seatContest.test.js` pass 75 of 75.
+
+**Condition 1: "nobody" is an omission.** On the renamed seat (seat law 2), `dossier/powerStrata.js :: derivePowerStrata` runs on
+the record and on the served document. In both, the ruler is the seat's form, 'The Gilded Compact', and no row matches
+`/vacant|empty|unheld|no one holds|nobody holds/i`. The contenders equal the contest's with no holder removed (the old law's list),
+and Coin Exchange and Merchant Guilds both stand in it. The surfaces that read `holderOf` today: one caller,
+`src/domain/rulingPowerCoup.js :: coupContenders`, with the owner audience and only under the seat law. It uses the answer only to
+remove the holder from the challengers. Every page reaches it through `coupContenders`:
+- `dossier/powerStrata.js :: derivePowerStrata`
+- `components/dossier/EngineSections.jsx`
+- `components/new/powerDeskRead.js`
+- `display/stateProse/powerStateProse.js` and `printProse.js`
+- `generators/power/factionStanding.js`
+- the world pulse readers
+
+No page prints `holderOf`'s answer itself, so "nobody" can only leave a holder in the contest. It cannot print a vacancy.
+
+**Condition 2: the measure.** I added (e) to `measure-u4cure2.mjs` and ran it from a scratch copy with `--root` (211 s, 0 errors).
+- The rule fires at birth in **0 of 900** default towns and **0 of 960** presets towns.
+- It fires in 0 towns after every real transfer (coup and election, steps #1 to #3).
+- The built R1 equals the verbatim sentence read in 660 of 660 (default) and 668 of 668 (presets) towns at every step.
+
+**Green.**
+- The 20 files that name `holderOfSeat` or `rulingPowerCoup`, plus `engineCoreLazyEdge`, `layerBoundaries` and
+  `densityCreateBoundary.walker`: 21 files, 555 of 555.
+- `writerReach.walker`: 1 failed, 51 passed. Measured per identity, exactly the three ruled identities differ:
+  `narrative on factionRelationships`, `recentConflict on powerStructure` and `priorityMilitary on config`.
+- `typecheck:ratchet`: 167 of 167. `typecheck:domain:strict`: 1113 of 1113. `lint`: 0 errors, 38 warnings, none in a touched file.
+- `confine-two.sh fbf77bfa2 7483c33e5`: base and tip both give `all 36ee5bb0…d8ce89 1245`. EQUAL.
+
+CONFIRMED (executed here): every count and hash above. PLAUSIBLE: that no page prints `holderOf`'s answer. I read this from the one
+importer and did not render any page.
