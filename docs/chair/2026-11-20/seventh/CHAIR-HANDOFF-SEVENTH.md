@@ -5242,3 +5242,11 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   the long pole of the deploy). `prompts/DAILY-1.txt` WRITTEN (a new lane for the Daily Life slots; seated after
   this push). Eight notifications read at 17:38 and ruled (section 2, "Rulings of 17:37 to 17:42"). The net-16
   trigger fired at 17:35 after the pass was done; net 17 is set 45 minutes on.
+- 17:45 UTC · DAILY-1 SEATED at 17:44 on the working line (session_019yED1PbWpqcpuYta68kBgG; `lane/daily-1-2026-11-20`).
+  `prompts/SAME-2.txt` brought up to date (the walker merged at d7fb46735; phase 3: the hand-listed pools' lines are
+  not yet read). RULED AT 17:45: F5 (FRAME-6 stopped at a red, rightly): the seat's holder becomes a PRINTED LINE on
+  the framed sheet in all four renderers, one function, and Session Mode keeps the holder visible; built after C2b,
+  the sentence to the chair on six sheets first. PROSE-1 cuts BUILD-1 (files 1 and 2) as its last unit; files 3 and
+  4 (123 lines) are with the chair; their build is PROSE-2's. SAME-1's brief 3: an exemption stands only with the
+  line of code that withholds its block; the gap (hand-listed pools' lines unread) is phase 3, SAME-2's. SEAT-6: U5's
+  cure unit B5b out (the class renamed `retiredEdge`, the three callers wired); the VISITOR measure out.
