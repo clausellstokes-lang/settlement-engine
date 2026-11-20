@@ -619,5 +619,5 @@ describe('Tier 1 — the century leg on a light hand-authored realm', () => {
     const verdict = livenessOf(legs.shippedB);
     expect(verdict.executable).toBe(true);
     expect(verdict.failures).toEqual([]);
-  }, 600_000);
+  }, 720_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 281.0 s in its shard here / 243.3 s in the last close's serial check; about 450.1 s on a CI runner (the measured factor), within three quarters of its 600 s; x 1.5 -> 720 s
 });

@@ -37,7 +37,7 @@ describe('the metropolis roll thins past 50,000 to 1,000,000, harder at every do
     expect(pops[pops.length - 1]).toBeLessThanOrEqual(1000000);
     expect(pops[0]).toBeGreaterThanOrEqual(15000);
     expect(pops.every(Number.isInteger)).toBe(true);
-  }, 180000);
+  }, 300_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 196.7 s on CI's ratchet shard 6 (run 44494042373, past its 180 s), 124.8 s alone here; 196.7 s x 1.5 -> 300 s
 
   test('the table is the one home, and the band reads its body', () => {
     expect(METROPOLIS_ROLL_TUNING).toEqual({ bodyMin: 15000, bodyMax: 50000, tailMax: 1000000, thinning: 0.5, tailShare: 0.3 });
