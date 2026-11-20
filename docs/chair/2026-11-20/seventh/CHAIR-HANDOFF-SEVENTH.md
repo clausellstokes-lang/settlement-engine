@@ -4034,3 +4034,27 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   PAGE-1's WORDS FOR THE CARD READ (`words/PAGE-1-WORDS.md` on bcac8ab77): APPROVED: the dots gone; "Standing:
   first of <power>, <weight>" with eleven plain weights ("the strongest power here" … "one of the lesser powers
   here"); the tie's header "<name> holds a tie to them: <kind>"; the people tab's tally and dots filter removed.
+- 14:30 UTC · READ AT 14:21 AND 14:28, ANSWERED BY 14:29: THE GOALS GATE IS MET (GOALS-3, 14:24): builder 7 merged at 293edcb9e (red 8 of 48
+  at the old sources; green 285 of 286 over 40 files, the one a known stored row); IDENTICAL SENTENCES 0 AT EVERY
+  SIZE (the base's 3 gone); mirror 83; a template more than twice 14 (it was 1,165 at the lane's base); the
+  pairing 0; pushed 2cff56a6a; owed in order: the confinement, `tests/lint` whole, both censuses, the owner's
+  file, the hand-back, "GOALS <commit>"; no successor (about 245,000 by its own count). VEIL-26 (about 278,000):
+  R3-CURE-5's MERGE BEGUN (4661a1353 into its lane); the rulings of 14:24 go into PART 27; then "HANDED OVER".
+  VEIL-27 SEATED BESIDE IT at 14:28 (session_019yED1RmuijyUDwGxU73uSf; on `lane/veil-26-2026-11-20`; outcome
+  `lane/veil-27-2026-11-20`). REVIEW-VEIL-14 IS SEATED ONLY WHEN VEIL-27 REPORTS THE TELL COLUMN GATED GREEN (this
+  replaces "when R3's merge has begun" in net 13's stored text). SEAT-5 SEATED at 14:20
+  (session_019yED1NuFeX8MzWoCcNqNHt) and read in: the holder measure and the confinement (EQUAL, 36ee5bb0... over
+  1,245) reproduce. FORTUNE-3 read in: the seven instruments reproduce byte for byte. PAGE-1 "PAGE-PART a67e1b502,
+  HANDED OVER" (244,461 at 14:15): PAGE-4 TOLD "THE LANE IS YOURS at a67e1b502" (14:29): CARD and MAGIC done and
+  unmerged; OUTPUT and SAFETY still out, relayed by PAGE-1. MAGIC's WORDS READ AND APPROVED ("The <place> leans on
+  magic for <list>, but its arcane strength is weak."; "Nothing in the <place> depends on magic, though its arcane
+  strength is fair."; the caption "Magic in the world at large, not the <place>'s own:"); its Overview line may
+  print to every audience on three tested conditions (the document in hand only; its chains a subset of that
+  audience's Magic tab; listed for the security reader). OUTPUT's STOP RULED: no mirror of the generator's weights
+  in a display file; the drag clause names only a plain fact of the record (no market or fair), or reads terms the
+  record itself stores, else is omitted. PAGE-5: THE SIDES TABLE MERGED (c5da1cfb3 on `lane/page-5-2026-11-20`,
+  tip 6a75cb07e; red 6 of 15, green 15 of 15; the lighting census by its door): forwarded to PAGE-4 at 14:23; its
+  causes proposal ruled (section 2). PAGE-6: its three finishing briefs on `lane/page-6-2026-11-20-lines`
+  (fb2efbf50); `pool-dominance.mjs --tighten`, THE CHAIR'S DOOR, MAY BE RUN BY IT ONCE at L2's merge by the
+  chair's word (the cause and every moved ceiling recorded; it stops if a ceiling would loosen); the chair's
+  landing helper takes it again on the line. R3-CURE-5 relayed FINISHED by VEIL-25 at 14:22 (section 2).
