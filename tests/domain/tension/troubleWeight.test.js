@@ -20,7 +20,7 @@ import { describe, it, expect } from 'vitest';
 import { createHash } from 'node:crypto';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { composeTonightSheet, TONIGHT_COPY } from '../../../src/domain/summary/tonightSheet.js';
-import { castTroubleFrame } from '../../../src/domain/tension/troubleCast.js';
+import { castTroubleFrame, troubleOfWeight } from '../../../src/domain/tension/troubleCast.js';
 import { buildJournalPages } from '../../../src/foundry/journalPages.js';
 import { buildViewModel } from '../../../src/pdf/lib/viewModel.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../../helpers/seedFailures.js';
@@ -62,6 +62,13 @@ const CALM_WITHOUT_WEIGHT = Object.freeze({
   'frame-calm-metropolis-4': 'b8f48be71e29eff3',
   'frame-calm-metropolis-6': 'fd4daaeaa82379ae',
   'frame-calm-metropolis-7': '13a0b282dc50e6e4',
+  // FRAME-2 · B9 (W2 as written: both powers): calm towns that LOSE their frame keep today's sheet. Each was framed by a
+  // high conflict with only one of its powers a side and holds no other trouble of weight: hamlet-45 and city-0 a
+  // crime_wave, city-4 a corruption_scandal. Measured as the rows above, in an archive of the line `e356c94f2` (born there
+  // and at the tip to the same record; the line's sheet is the pin, and the tip composes it for the owner and a stranger).
+  'frame-calm-hamlet-45': 'eb21c108edea150b',
+  'frame-calm-city-0': 'a9ca38f47427c312',
+  'frame-calm-city-4': '4a1451e63d8106ca',
 });
 
 /** The journal's Tonight page text of two of them at `7e0c77ae2`, unchanged at the line `e356c94f2` (re-measured): the rendered sheet is held, not only the object. */
@@ -98,7 +105,8 @@ const WITH_WEIGHT = Object.freeze([
   { seed: 'frame-calm-hamlet-19', type: 'corruption_scandal', at: 0, why: 'legitimacy below 45; the scandal names the ruling power as its first side' },
   { seed: 'frame-calm-village-76', type: 'legitimacy_crisis', at: 0, why: 'the incumbent ungated (graded with legitimacy below 30)' },
   { seed: 'frame-calm-village-49', type: 'succession_crisis', at: 1, why: 'legitimacy below 45 outranks the impaired chain the market crash at #0 is about' },
-  { seed: 'frame-calm-city-4', type: 'corruption_scandal', at: 2, why: 'a high conflict whose party is a side' },
+  // re-seated at B9: city-4's corruption_scandal names one power of its high row only, so it casts no frame now (pinned above)
+  { seed: 'frame-calm-city-8', type: 'crime_wave', at: 0, why: 'a high conflict whose two powers are both sides' },
   { seed: 'frame-calm-village-20', type: 'resource_scarcity', at: 1, why: 'an impaired chain, a material tension' },
 ]);
 
@@ -134,6 +142,43 @@ describe('a town in crisis keeps its crisis sheet, byte for byte', () => {
     });
     expectNoSeedFailures(failures, 'a town in crisis keeps the sheet of 7e0c77ae2 with the names rule alone');
   }, 300000);
+});
+
+/**
+ * W2 AS WRITTEN (FRAME-2 · B9, the chair's ruling of 2026-11-20: "a high conflict gives a trouble weight only where BOTH
+ * of the row's powers are sides of the tension"). Measured on the 330-town calm pool: `frame-calm-hamlet-45` holds one
+ * high row (Free Elder Council vs Military Party) and no other strain (legitimacy 48, the incumbent gated, food Secure,
+ * no creditor power, no impaired chain); its one tension, a crime_wave, names the Military Party and not the Elder
+ * Council, so it holds no trouble of weight and casts no frame. `frame-calm-city-8` holds the row Military/Guard vs
+ * Thieves' Guild and no other strain; its crime_wave at #0 names both, so it opens there.
+ */
+const ONE_POWER_A_SIDE = Object.freeze({ seed: 'frame-calm-hamlet-45', row: ['Free Elder Council', 'Military Party'] });
+const BOTH_POWERS_SIDES = Object.freeze({ seed: 'frame-calm-city-8', row: ['Military/Guard', "Thieves' Guild"] });
+
+describe('W2 as written: a high conflict weighs only where both its powers are the tension\'s sides (B9)', () => {
+  const sideKey = (v) => String(v).toLowerCase().replace(/^the\s+/, '');
+  const highRows = (s) => s.powerStructure.conflicts.filter((r) => r.intensity === 'high').map((r) => r.parties);
+  const sidesOf = (t) => t.factions.map(sideKey);
+
+  it(`${ONE_POWER_A_SIDE.seed}: only one of its high row's powers is a side of its tension, so it casts no frame and keeps today's sheet`, () => {
+    const s = born(ONE_POWER_A_SIDE.seed);
+    // the measure's premises, anchored on the record: the one high row, one of its powers a side, the other not
+    expect(highRows(s)).toEqual([ONE_POWER_A_SIDE.row]);
+    const tensions = s.history.currentTensions;
+    expect(tensions.some((t) => ONE_POWER_A_SIDE.row.some((p) => sidesOf(t).includes(sideKey(p)))), 'a side names one of the powers').toBe(true);
+    expect(tensions.some((t) => ONE_POWER_A_SIDE.row.every((p) => sidesOf(t).includes(sideKey(p)))), 'no tension names both').toBe(false);
+    expect(troubleOfWeight(s)).toBe(null);
+    expect(castTroubleFrame(s)).toBe(null);
+    expect(composeTonightSheet(s, OWNER).frame).toBeUndefined();
+  });
+
+  it(`${BOTH_POWERS_SIDES.seed}: both of its high row's powers are sides of its crime_wave, so it opens there on W2`, () => {
+    const s = born(BOTH_POWERS_SIDES.seed);
+    expect(highRows(s)).toContainEqual(BOTH_POWERS_SIDES.row);
+    expect(troubleOfWeight(s)).toMatchObject({ at: 0, tension: { type: 'crime_wave' }, strain: { strain: 'W2', grade: 'high-conflict', powers: BOTH_POWERS_SIDES.row } });
+    expect(castTroubleFrame(s)).toMatchObject({ type: 'crime_wave', at: 0 });
+    expect(composeTonightSheet(s, OWNER).frame?.type).toBe('crime_wave');
+  });
 });
 
 describe('a calm town with a trouble of weight opens on the trouble the order picks (liveness)', () => {

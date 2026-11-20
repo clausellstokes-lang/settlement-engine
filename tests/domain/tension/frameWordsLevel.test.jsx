@@ -125,15 +125,18 @@ const LEVEL_RE = new RegExp(`\\b(?:${LEVEL_BREAKING.map((w) => (w.endsWith('*') 
  * Born calm towns whose owner's sheet carries a frame, measured over troubleCast.test.js's `frame-cast-<tier>-<i>`
  * pool (every one of its fifty frames, none in crisis), chosen so that between them every reason of FRAME_REASONS
  * fires and a side stands absent: hamlet-46 (the seat, a rivalry, an absent side), village-43 (the hook, a creditor),
- * town-36 (an outsider reached through a keeper, a debtor), town-40 (trade), city-6 and city-19 (the criminal power,
- * a commander), city-20 (the criminal house, a silent partnership), metropolis-18 (a power's head).
+ * town-36 (an outsider reached through a keeper, a debtor), town-40 (trade), city-6 and city-38 (the criminal power,
+ * a commander), city-20 (the criminal house, a silent partnership), metropolis-18 (a power's head). RE-SEATED at
+ * FRAME-2 · B9 (W2 as written: both powers), measured over troubleCast.test.js's re-seated pool: city-19 and
+ * metropolis-2 cast no frame now; city-38 (crime_wave: a commander, a hook, the criminal power) stands where city-19
+ * stood (crime_wave: the same three), and metropolis-3 (trade_dispute: two trades, a tie) keeps the tier at three.
  */
 const POOL = Object.freeze({
   hamlet: [23, 46, 52],
   village: [43, 65],
   town: [36, 40, 59],
-  city: [6, 19, 20],
-  metropolis: [1, 2, 18],
+  city: [6, 38, 20],
+  metropolis: [1, 3, 18],
 });
 const TOWNS = Object.entries(POOL).flatMap(([tier, at]) => at.map((i) => {
   const seed = `frame-cast-${tier}-${i}`;

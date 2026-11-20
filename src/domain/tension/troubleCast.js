@@ -180,7 +180,9 @@ export const WEIGHT_GRADES = Object.freeze([
  *             is not read as one about it).
  *   material  the types about a material strain short of a crisis (W3); never `guild_conflict`, never
  *             `economic_disparity`.
- * A tension is about a high conflict (W2) by its SIDES, not its type: a side whose words are one of the row's two powers.
+ * A tension is about a high conflict (W2) by its SIDES, not its type: BOTH of the row's two powers are sides of it (FRAME-2
+ * · B9, the chair's ruling of 2026-11-20: "its sides are the powers of W2", read as written; a conflict over an unrelated
+ * issue, with only one of its powers a side, carries no trouble).
  */
 export const WEIGHT_MATTER = Object.freeze({
   seat: Object.freeze(['legitimacy_crisis', 'succession_crisis', 'leadership_vacuum', 'tyranny', 'popular_uprising']),
@@ -231,7 +233,7 @@ export function troubleOfWeight(settlement) {
     : coup.incumbent.gated === false ? 'seat-ungated'
       : legitimacy < LEGITIMACY_CUTS.tolerated ? 'legitimacy-below-45' : '';
   const ruler = sideKey(coup.incumbent.name);
-  // W2: two powers in a recorded conflict at intensity high
+  // W2: two powers in a recorded conflict at intensity high, a tension about it only where both are its sides
   const high = /** @type {Array<{ parties?: unknown, intensity?: unknown }>} */ (arr(ps.conflicts))
     .filter((r) => !!r && typeof r === 'object' && r.intensity === 'high' && arr(r.parties).filter((p) => str(p)).length === 2);
   // W3: a material strain short of a crisis
@@ -249,7 +251,7 @@ export function troubleOfWeight(settlement) {
     if (seat && (WEIGHT_MATTER.seat.includes(type) || (WEIGHT_MATTER.seatWhereItNamesTheRuler.includes(type) && !!ruler && sides.includes(ruler)))) {
       about.push({ strain: 'W1', grade: seat });
     }
-    const row = high.find((r) => arr(r.parties).some((p) => sides.includes(sideKey(p))));
+    const row = high.find((r) => arr(r.parties).every((p) => sides.includes(sideKey(p))));
     if (row) about.push({ strain: 'W2', grade: 'high-conflict', powers: arr(row.parties).map(str) });
     if (material && WEIGHT_MATTER.material.includes(type)) about.push({ strain: 'W3', grade: material });
     if (!about.length) continue;

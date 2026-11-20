@@ -4,7 +4,7 @@
  * may name a criminal faction as a side; on a page players see, that gives away what the DM hid").
  *
  * Born calm towns that carry a TROUBLE OF WEIGHT (FRAME-2 · B2, CF11: only such a town casts a frame), one or more of
- * every tier that births one, hamlet to metropolis, three of them with a frame that names the criminal power (chosen by
+ * every tier that births one, hamlet to metropolis, two of them with a frame that names the criminal power (chosen by
  * measuring the 330-town calm pool: docs/chair/2026-11-20/content/frame2/B2-WEIGHT-RESULTS.md). No calm thorp of the
  * 330 holds a trouble of weight, so no thorp casts a frame to veil; the thorps' sheets are held byte-identical to the
  * working line's by tests/domain/tension/troubleWeight.test.js. (FRAME-1's eight towns were re-seated at B2c: five of
@@ -63,19 +63,29 @@ import { PDF_VARIANTS } from '../../src/pdf/variants.js';
 import TableView from '../../src/components/TableView.jsx';
 import PublicDossierView from '../../src/components/PublicDossierView.jsx';
 import PartyLinkView from '../../src/components/PartyLinkView.jsx';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 afterEach(() => { cleanup(); vi.clearAllMocks(); useStore.getState().userPrefs = {}; });
 
 // Each with its trouble of weight as measured: hamlet-7 trade_collapse (an impaired chain); village-0 tyranny (legitimacy
-// below 45); village-76 legitimacy_crisis (the incumbent ungated); town-1 outside_debt (an impaired chain); city-0
-// crime_wave, city-4 corruption_scandal and metropolis-1 crime_wave (a high conflict; the criminal power on a side);
-// metropolis-5 trade_dispute (an impaired chain).
+// below 45); village-76 legitimacy_crisis (the incumbent ungated); town-1 outside_debt (an impaired chain); city-8 and
+// metropolis-8 crime_wave (a high conflict between the Military/Guard and the Thieves' Guild, both of them its sides; the
+// criminal power on a side); metropolis-1 trade_dispute #2 and metropolis-5 trade_dispute (an impaired chain).
+// RE-SEATED at FRAME-2 · B9 (W2 as written, the chair's ruling: a high conflict weighs only where BOTH its powers are
+// the tension's sides): city-0 (crime_wave; its high row is the Craft Guilds vs the Thieves' Guild, and the Craft Guilds
+// are no side) and city-4 (corruption_scandal; the City Council vs the Craft Guilds, the Craft Guilds no side) cast no
+// frame now, and keep today's sheet (pinned in tests/domain/tension/troubleWeight.test.js); metropolis-1's crime_wave
+// at #0 names the Military/Guard and the Thieves' Guild, but each of its high rows sets one of them against a power no
+// side names (the Grand Guild Consortium, the Merchant Guilds, the Craft Guilds), so it opens on its trade_dispute at #2
+// (an impaired chain), with no criminal side. city-8 and metropolis-8 are the first crime_wave opener of each tier that births one
+// (12 survive on the 330-town pool: city 8, 14, 25, 33, 35, 45, 57; metropolis 8, 19, 56, 64, 68, every one with the
+// criminal power on its third side), chosen by identity.
 const BORN = [
   ['frame-calm-hamlet-7', 'hamlet'], ['frame-calm-village-0', 'village'], ['frame-calm-village-76', 'village'],
-  ['frame-calm-town-1', 'town'], ['frame-calm-city-0', 'city'], ['frame-calm-city-4', 'city'],
+  ['frame-calm-town-1', 'town'], ['frame-calm-city-8', 'city'], ['frame-calm-metropolis-8', 'metropolis'],
   ['frame-calm-metropolis-1', 'metropolis'], ['frame-calm-metropolis-5', 'metropolis'],
 ];
-const WITH_CRIMINAL = new Set(['frame-calm-city-0', 'frame-calm-city-4', 'frame-calm-metropolis-1']);
+const WITH_CRIMINAL = new Set(['frame-calm-city-8', 'frame-calm-metropolis-8']);
 
 /**
  * The digests of every shared read, per town, measured at the base 85fccf898 (FRAME_VEIL_PRINT=<file> writes them there),
@@ -83,15 +93,17 @@ const WITH_CRIMINAL = new Set(['frame-calm-city-0', 'frame-calm-city-4', 'frame-
  * metropolis-1) re-measured to the same digests. RE-MEASURED at the merge of the line (FRAME-3, by the chair's ruling of
  * 2026-11-20) by this file's own FRAME_VEIL_PRINT door in an archive of the line `e356c94f2`, which carries no frame code:
  * the line's final names work (point 77) changes generated prose, so every shared read of every town moved; the base is
- * now the line.
+ * now the line. FRAME-2 · B9 (re-seated under W2 as written): city-8 and metropolis-8 measured by the same door in an
+ * archive of the line `e356c94f2`, in the same run that gave the six kept towns their pinned digests again, and held
+ * equal at the tip; city-0's and city-4's rows left with their towns.
  */
 const DIGESTS = Object.freeze({
   'frame-calm-hamlet-7': Object.freeze({ gallery: '124ff33bddb5283d', galleryDmFull: '146bcb5d33de08d9', partyLink: '1113cb954bd598e1', imported: '5a349a1637786d2a', worldPlayer: '400ca8e595b27aef' }),
   'frame-calm-village-0': Object.freeze({ gallery: '8d26ab7fb85b8e56', galleryDmFull: 'e125edffe9ec531e', partyLink: 'bb0173cd3a8168c3', imported: '75edf25721e4f9a5', worldPlayer: '5525cabd392986d1' }),
   'frame-calm-village-76': Object.freeze({ gallery: '8f93b50759a87be4', galleryDmFull: 'bbba7ceceddba038', partyLink: '9321fd48ed18044f', imported: 'd5d0b750d328d55c', worldPlayer: 'ba7d857c7346fa23' }),
   'frame-calm-town-1': Object.freeze({ gallery: '594c0f4e581e1503', galleryDmFull: '04129133b43dbb5a', partyLink: '29ad2c4bc13527c6', imported: '0cfd209c7c2f3231', worldPlayer: '524aa22612e6cfad' }),
-  'frame-calm-city-0': Object.freeze({ gallery: '5e53c32aec7c08bf', galleryDmFull: '380649863271c85c', partyLink: '636b4e4365f36f6e', imported: '171cc79c2f73193d', worldPlayer: '02df4b5c24d3741e' }),
-  'frame-calm-city-4': Object.freeze({ gallery: 'f96d64366e6369ae', galleryDmFull: '0e7f895a98a387e2', partyLink: '067c6ff8cf12eeb3', imported: 'cee1709e8a37a839', worldPlayer: 'de15499aed7e8230' }),
+  'frame-calm-city-8': Object.freeze({ gallery: '8a1fb34d51a02402', galleryDmFull: '14941410eb8f06e4', partyLink: 'e5201063a77a0652', imported: '22d36cf721e99b17', worldPlayer: '314767bceab656e9' }),
+  'frame-calm-metropolis-8': Object.freeze({ gallery: '1c84d1c415ab8511', galleryDmFull: '76f353a996e449e6', partyLink: '70a9d6184469f483', imported: '1aad6f4c026af231', worldPlayer: '5076ec24c35e8232' }),
   'frame-calm-metropolis-1': Object.freeze({ gallery: '34211488b2aab264', galleryDmFull: 'deccba4eb7587686', partyLink: 'a7aeb69a51aedfd8', imported: 'cca06e8dbce684fa', worldPlayer: '32a95948b1009748' }),
   'frame-calm-metropolis-5': Object.freeze({ gallery: 'e2af948b1e6224d3', galleryDmFull: 'ff023d73c2d56d8c', partyLink: 'c023565c1009067d', imported: 'cfa6fe241eeccbab', worldPlayer: '33a85130672d749e' }),
 });
@@ -141,42 +153,51 @@ const tableOf = (s, audience) => {
 
 describe('CF3: the frame reaches no shared page', () => {
   test(`${BORN.length} born towns: live on the owner's record; every shared read byte-identical to the base and frame-free`, async () => {
-   for (const [seed, tier] of BORN) {
-    const s = birth(seed, tier);
     if (process.env.FRAME_VEIL_PRINT) { // the measuring run (at the base, where no frame exists): the digests only
-      const reads = await sharedReadsOf(s);
-      appendFileSync(process.env.FRAME_VEIL_PRINT, `${JSON.stringify([seed, Object.fromEntries(Object.entries(reads).map(([k, v]) => [k, digest(v)]))])}\n`);
-      continue;
+      for (const [seed, tier] of BORN) {
+        const reads = await sharedReadsOf(birth(seed, tier));
+        appendFileSync(process.env.FRAME_VEIL_PRINT, `${JSON.stringify([seed, Object.fromEntries(Object.entries(reads).map(([k, v]) => [k, digest(v)]))])}\n`);
+      }
+      return;
     }
-    const own = composeTonightSheet(s, { audience: 'owner' });
-    // 1. liveness
-    expect(own.frame, 'the owner\'s record casts a frame').toBeTruthy();
-    if (WITH_CRIMINAL.has(seed)) expect(own.frame.sides.some((d) => d.kind === 'criminal'), 'a side names the criminal power').toBe(true);
-    const lines = frameLinesOf(own);
-    const ownText = tableOf(s, 'owner').text;
-    for (const line of lines) expect(ownText, `the owner's Table View prints "${line}"`).toContain(line[0].toUpperCase() + line.slice(1));
+    // every town's shared reads first (the reads are async; collectSeedFailures is synchronous), then every town is
+    // asserted and its failures collected, so a red reports every failing town, not the first (seedLoopTotality)
+    const towns = new Map();
+    for (const [seed, tier] of BORN) {
+      const s = birth(seed, tier);
+      towns.set(seed, { s, reads: await sharedReadsOf(s) });
+    }
+    const failures = collectSeedFailures([...towns.keys()], (seed) => {
+      const { s, reads } = towns.get(seed);
+      const own = composeTonightSheet(s, { audience: 'owner' });
+      // 1. liveness
+      expect(own.frame, 'the owner\'s record casts a frame').toBeTruthy();
+      if (WITH_CRIMINAL.has(seed)) expect(own.frame.sides.some((d) => d.kind === 'criminal'), 'a side names the criminal power').toBe(true);
+      const lines = frameLinesOf(own);
+      const ownText = tableOf(s, 'owner').text;
+      for (const line of lines) expect(ownText, `the owner's Table View prints "${line}"`).toContain(line[0].toUpperCase() + line.slice(1));
 
-    const reads = await sharedReadsOf(s);
-    // 2. byte-identity with the base
-    const got = Object.fromEntries(Object.entries(reads).map(([k, v]) => [k, digest(v)]));
-    expect(got).toEqual(DIGESTS[seed]);
-    // 3. absence
-    for (const [key, read] of Object.entries(reads)) {
-      const shared = recordOf(key, read);
-      expect(shared && typeof shared === 'object', `${key} hands the page a record`).toBe(true);
-      expect(shared._seed, `${key} carries no seed`).toBeUndefined();
-      expect(composeTonightSheet(shared).frame ?? null, `${key}: no frame`).toBe(null);
-      expect(composeTonightSheet(shared, { audience: 'owner' }).frame ?? null, `${key}: no frame even for the owner (the second lock)`).toBe(null);
-      const { text, drew } = tableOf(shared);
-      expect(drew, `${key}: the Table View draws the sheet`).toBe(true);
-      for (const line of lines) expect(text.includes(line[0].toUpperCase() + line.slice(1)), `${key} prints "${line}"`).toBe(false);
-      expect(text.includes(TONIGHT_COPY.sides), `${key} prints the sides' eyebrow`).toBe(false);
-    }
-   }
+      // 2. byte-identity with the base
+      const got = Object.fromEntries(Object.entries(reads).map(([k, v]) => [k, digest(v)]));
+      expect(got).toEqual(DIGESTS[seed]);
+      // 3. absence
+      for (const [key, read] of Object.entries(reads)) {
+        const shared = recordOf(key, read);
+        expect(shared && typeof shared === 'object', `${key} hands the page a record`).toBe(true);
+        expect(shared._seed, `${key} carries no seed`).toBeUndefined();
+        expect(composeTonightSheet(shared).frame ?? null, `${key}: no frame`).toBe(null);
+        expect(composeTonightSheet(shared, { audience: 'owner' }).frame ?? null, `${key}: no frame even for the owner (the second lock)`).toBe(null);
+        const { text, drew } = tableOf(shared);
+        expect(drew, `${key}: the Table View draws the sheet`).toBe(true);
+        for (const line of lines) expect(text.includes(line[0].toUpperCase() + line.slice(1)), `${key} prints "${line}"`).toBe(false);
+        expect(text.includes(TONIGHT_COPY.sides), `${key} prints the sides' eyebrow`).toBe(false);
+      }
+    });
+    expectNoSeedFailures(failures, 'every born town is live on the owner\'s record, and every shared read is byte-identical to the base and frame-free');
   }, 600000);
 
   test(`the gate is the FIRST lock: on the owner's own seeded record, a reader who is not the owner gets the no-frame sheet (${BORN.length} born towns)`, () => {
-    for (const [seed, tier] of BORN) {
+    const failures = collectSeedFailures(BORN, ([seed, tier]) => {
       const s = birth(seed, tier);
       expect(typeof s._seed === 'string' && s._seed.length > 0, `${seed}: the owner's record carries its seed`).toBe(true);
       // liveness: the owner casts the frame
@@ -199,7 +220,8 @@ describe('CF3: the frame reaches no shared page', () => {
         expect(sheet.frame ?? null, `${seed} ${label}: no frame`).toBe(null);
         expect(sheet, `${seed} ${label}: exactly the no-frame sheet`).toEqual(noFrame);
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'on every born town\'s own seeded record, a reader who is not the owner gets the no-frame sheet');
   }, 600000);
 
   test('the audiences are a closed, frozen set; only the owner\'s draws the frame', () => {
@@ -212,9 +234,7 @@ describe('CF3: the frame reaches no shared page', () => {
     const towns = [];
     for (const [seed, tier] of BORN) {
       const s = birth(seed, tier);
-      const lines = frameLinesOf(composeTonightSheet(s, { audience: 'owner' }));
-      expect(lines.length, `${seed}: the owner's frame has lines to look for`).toBeGreaterThan(1);
-      towns.push({ seed, lines, reads: await sharedReadsOf(s) });
+      towns.push({ seed, lines: frameLinesOf(composeTonightSheet(s, { audience: 'owner' })), reads: await sharedReadsOf(s) });
     }
     /** Open the sheet on a rendered page as a viewer does: the Overview's "Open Tonight", then the page mounts the Table View. */
     const openSheetOn = async (element) => {
@@ -230,21 +250,40 @@ describe('CF3: the frame reaches no shared page', () => {
       useStore.getState().userPrefs = {};
       return out;
     };
+    // every page of every town opened (async), each page's outcome kept, its own error included (a page that fails to
+    // open is cleaned up and the next one opens); then every town asserted and its failures collected (seedLoopTotality)
+    const opened = new Map();
     for (const { seed, lines, reads } of towns) {
       const pages = [
         ['the gallery page', <PublicDossierView key="g" dossier={reads.gallery} />],
         ['the gallery page (DM content shared)', <PublicDossierView key="d" dossier={reads.galleryDmFull} />],
         ["the party link's page", <PartyLinkView key="p" dossier={reads.partyLink} auth={{ user: null }} onReport={() => {}} />],
       ];
+      const seen = [];
       for (const [where, element] of pages) {
-        const got = await openSheetOn(element);
+        try {
+          seen.push({ where, got: await openSheetOn(element) });
+        } catch (error) {
+          cleanup();
+          useStore.getState().userPrefs = {};
+          seen.push({ where, error });
+        }
+      }
+      opened.set(seed, { lines, seen });
+    }
+    const failures = collectSeedFailures([...opened.keys()], (seed) => {
+      const { lines, seen } = opened.get(seed);
+      expect(lines.length, `${seed}: the owner's frame has lines to look for`).toBeGreaterThan(1);
+      for (const { where, got, error } of seen) {
+        if (error) throw error;
         expect(got.sheet.length, `${seed} on ${where}: the sheet drew`).toBeGreaterThan(0);
         expect(got.sides, `${seed} on ${where}: no sides`).toBe(false);
         expect(got.sheet.includes(TONIGHT_COPY.trouble), `${seed} on ${where}: the sheet opens on no trouble`).toBe(false);
         expect(got.page.includes(TONIGHT_COPY.sides), `${seed} on ${where}: the sides' eyebrow`).toBe(false);
         for (const line of lines) expect(got.page.includes(line[0].toUpperCase() + line.slice(1)), `${seed} on ${where} prints "${line}"`).toBe(false);
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'on every born town, the sheet opens on the gallery page and the party link, and the frame never rides it');
   }, 600000);
 
   test('one door: only the sheet\'s composer imports the trouble cast', () => {
