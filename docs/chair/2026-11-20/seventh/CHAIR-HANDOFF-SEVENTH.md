@@ -1074,3 +1074,19 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   arms. **VR35 IS RE-ORDERED BY IT:** V10-5's re-measure comes AFTER `power.entry` is built: a power that leaves with
   its house no longer accounts for its name, and the positive account then drops its mentions rightly (VEIL-19's
   156 strings were counted while that power was still served).
+- 03:25 UTC · **VEIL-DOORS-2: ITEMS 1, 2, 3 DONE AND A TIER-1 SURPRISE (its message of 03:24 UTC; its tree at ebe9387a2,
+  a native chain, read as anon).** THE COST CONDITIONS ARE MET: the dossier read takes its one row's tiles: 116 ms at
+  50 public rows and 103 ms at 500 (the base 231 ms and 1.97 s); the unmarked list 1.01 times bedd5a392. THE
+  SURPRISE: (1) on a LIVE share under the default veil the chronicle serves "A new Smugglers den was established."
+  and "The Smugglers den closed or was dissolved." for a criminal house the town NO LONGER HAS: the doors' name
+  search knows only houses still in the projection. (2) In SNAPSHOT mode (the default) a criminal house added AFTER
+  the freeze is named the same way; every post-freeze entry is shown; the columns `name` and `tier` follow the live
+  row after a rename or a tier shift. **RULING VR41 (vetoable):** (a) the seat's rule is the base and is built now:
+  on a marked share an entry whose type acts on a town entity is served only where its target RESOLVES to a card
+  the served body shows, else withheld whole; (a-ii) its loss is measured and one narrowing tried with the
+  event-type table: an entry of a removal type that itself carries its target's catalogue identity or category,
+  of a class that is not hideable, with nothing found in its strings by the name search run over the catalogue's
+  hideable names, is served; one that cannot prove it stays withheld; (b) snapshot mode: entries later than
+  `$veil.at` withheld (no usable time: withheld); `name` and `tier` read from the frozen copy on the dossier and
+  the lists. FOR THE OWNER'S LIST: a shared town's chronicle loses its entries about things that are gone (unless
+  the narrowing holds). The reader has it for FINAL.
