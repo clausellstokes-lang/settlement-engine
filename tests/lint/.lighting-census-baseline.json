@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "54e450f40ba89e42a9cc7f19281ebd7dc9d96bb4",
-  "measuredBy": "FRAME-6",
+  "measuredAtSha": "d8a061fa93dc9975e37d11858534c3ff1e0e4bd1",
+  "measuredBy": "FRAME-7",
   "date": "2026-11-20",
-  "note": "F1-F2 and P4A merged at 54e450f40 (frameSheetRulings.test.js, crisisCreditorLine.test.js)",
-  "files": 3721,
+  "note": "FRAME-7: C2b (a) merged (d8a061fa9): +1 test file tests/components/crisisStakeFollowups.test.jsx",
+  "files": 3722,
   "parked": 473,
-  "credited": 3248,
-  "titles": 31331,
-  "suiteTitles": 8681
+  "credited": 3249,
+  "titles": 31333,
+  "suiteTitles": 8682
 }
