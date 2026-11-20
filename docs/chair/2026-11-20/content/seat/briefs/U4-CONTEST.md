@@ -19,3 +19,5 @@
 **Acceptance on the pools (executed, after green):** under a script in `docs/chair/2026-11-20/content/seat/u4/`, the contender table per kind on both pools, BEFORE and with the law (dial dark), beside the proposal's section (2) CS3 column (default: craft 2 → 37, nobles 98 → 115, merchants 450 → 145, no-contender towns 240 → 269). Differences are findings, reported with their towns.
 
 **Cut from:** the commit carrying U1, U2 and U3, which SEAT-1 names when it dispatches you.
+
+## CURE (the chair, 06:28Z): `seat/seatCircumstances.js` joins engine-core like `holderOfSeat.js`: pin it in `vite.config.js :: FIRSTPAINT2_LAZY_DOMAIN` (added to your manifest for that entry); greens add `tests/architecture/layerBoundaries.test.js` and `tests/architecture/engineCoreLazyEdge.test.js`. The TITLES-1 resolver's agreed name is `officeTitleOf` (U12's business).
