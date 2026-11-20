@@ -28,6 +28,11 @@ Branch `lane/depth-3-2026-11-20` (lane given at 461272505, 19:33 UTC; merged as 
 9. ORDER: cure merge (build figures) -> themes merge (build figures) -> `tests/lint` WHOLE -> ONE `npm run test:ratchet` read BY NAME against
    origin/lane/chair-2026-11-08 `docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv` -> "DEPTH <commit>" with the build's three figures (the
    chair lands the lane) -> tranche 3 -> merge the landed line when named -> the ties -> the owner's file -> "DEPTH <commit>".
+11. THE WORKING LINE MOVED (20:36): lane/join-2026-11-14 = 062504aa8 (point 85: arrival lines, fitted secrets); it touches npcData.js and
+   the pool-dominance register as this lane does: MERGE THE LINE BEFORE "DEPTH <commit>" (the register by its own door, never by hand;
+   npcData.js should merge by text: tell the chair if it does not). The line's tip, figures and known reds: origin/lane/chair-2026-11-08
+   `docs/chair/2026-11-20/seventh/ci/LINE-NOW.md` beside RED-AT-LINE.tsv. DEPTH-4: READ `docs/chair/2026-11-20/seventh/prompts/COMMON-RULES.txt`
+   there (it postdates your prompt; rule 2, A LITERAL HAS ONE HOME: an existing line is never copied into a pool file as its index 0).
 10. Hand-over (20:21): under 400,000 read/merge; past it push `-wip`, relay a line, hand over by 420,000.
 
 ## Open builders (each returns to DEPTH-3 while it holds the lane; to DEPTH-4 after)
