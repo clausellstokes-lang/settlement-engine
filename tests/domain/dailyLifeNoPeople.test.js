@@ -13,6 +13,7 @@
 import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 vi.mock('../../src/domain/npcProfile.js', async (importOriginal) => {
   const actual = /** @type {Record<string, any>} */ (await importOriginal());
@@ -46,13 +47,15 @@ beforeAll(async () => {
   }
 }, 120_000);
 
+const at = (/** @type {string} */ seed) => /** @type {{ seed: string, rec: any }} */ (births.find((b) => b.seed === seed));
 /** @param {any} rec */
 const textsOf = (rec) => { const life = deriveDailyLife(rec); return Object.fromEntries(DAILY_LIFE_SLOTS.map((k) => [k, life.slots[k].text])); };
 
 describe('daily life reads no person of its own (the dead call removed)', () => {
   it('deriveDailyLife adds no deriveAllNpcProfiles call beyond the substrate derivers it builds', () => {
     const spy = /** @type {import('vitest').Mock} */ (/** @type {unknown} */ (deriveAllNpcProfiles));
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births.map((b) => b.seed), (seed) => {
+      const { rec } = at(seed);
       spy.mockClear();
       deriveAllFactionProfiles(rec); deriveAllSupplyChainStates(rec); deriveAllActiveConditions(rec); deriveAllThreatProfiles(rec);
       deriveAllCapacities(rec); deriveCausalState(rec); deriveHistoryBeats(rec);
@@ -60,7 +63,8 @@ describe('daily life reads no person of its own (the dead call removed)', () => 
       spy.mockClear();
       deriveDailyLife(rec);
       expect(spy.mock.calls.length, `${seed}: deriveDailyLife's own calls`).toBe(substrate);
-    }
+    });
+    expectNoSeedFailures(failures, 'deriveDailyLife adds no deriveAllNpcProfiles call of its own on any born place');
   });
 
   it('the fixture covers 30 born places, five of each size', () => {
@@ -69,7 +73,8 @@ describe('daily life reads no person of its own (the dead call removed)', () => 
   });
 
   it('every slot text equals the pre-change text and the text on the toPublicSafe document', () => {
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births.map((b) => b.seed), (seed) => {
+      const { rec } = at(seed);
       const now = textsOf(rec);
       // DAILY-2 B1b C3 moved `gathering_places` by design (LINES-1 as the chair ruled): the parity of C1's removal holds
       // on the other seven slots; the eighth is held by `tests/domain/dailyLifeGathering.test.js` and the owner-vs-public check below.
@@ -79,6 +84,7 @@ describe('daily life reads no person of its own (the dead call removed)', () => 
       const { gathering_places: _now, dawn_work: _nowDawn, child_warnings: _nowChild, ...nowKept } = now;
       expect(nowKept, `${seed}: before vs after`).toEqual(kept);
       expect(textsOf(toPublicSafe(rec)), `${seed}: owner vs toPublicSafe`).toEqual(now);
-    }
+    });
+    expectNoSeedFailures(failures, 'every born place keeps its pre-change texts and its toPublicSafe texts');
   });
 });

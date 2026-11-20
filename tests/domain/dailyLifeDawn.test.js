@@ -26,6 +26,7 @@ import { isLiveInstitution } from '../../src/domain/institutions/institutionRost
 import { ACCESS_ONLY } from '../../src/domain/facts/liveInstitutionNames.js';
 import { isHideableHouse } from '../../src/domain/people/cardVeil.js';
 import { institutionSentenceNoun } from '../../src/domain/display/institutionSentenceNoun.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 /** @type {Array<{ seed: string, size: string, rec: any }>} */
@@ -74,9 +75,10 @@ describe('the red: the falsest dawn lines M1 found', () => {
 
 describe('the route on born places (ruling 11): eligible by declared atoms, then the keyed pick', () => {
   it('every place prints a line of its branch\'s pool whose atoms it holds, its houses live, nameable and said with "the"', () => {
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births.map((b) => b.seed), (seed) => {
+      const { rec } = at(seed);
       const s = slotOf(rec);
-      if (!s.text) continue;
+      if (!s.text) return;
       const own = ownLine(s.text);
       expect(own, `${seed}: "${s.text}"`).toBeTruthy();
       const { branch, line } = /** @type {{ branch: string, line: any }} */ (own);
@@ -88,19 +90,24 @@ describe('the route on born places (ruling 11): eligible by declared atoms, then
       }
       // anchored: the same text is pinned live above (`own`, a line of its branch's pool, checked truthy and eligible)
       expect(s.text, seed).not.toMatch(/[()]|\btowns?\b/i);
-    }
+    });
+    expectNoSeedFailures(failures, 'every born place prints an eligible line of its branch\'s pool, its houses live and said with "the"');
   });
   it('the defence pool is taken only under a real outside threat at medium or above (ruling 8)', () => {
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births.map((b) => b.seed), (seed) => {
+      const { rec } = at(seed);
       const own = ownLine(slotOf(rec).text);
       if (own?.branch === 'defence') expect(outsideThreat(rec), seed).toBe(true);
-    }
+    });
+    expectNoSeedFailures(failures, 'a born place takes the defence pool only under a real outside threat at medium or above');
   });
   it('a calm thorp or hamlet holds at least seven eligible default lines (ruling 8)', () => {
-    for (const { seed, size, rec } of births) {
-      if (size !== 'thorp' && size !== 'hamlet') continue;
+    const failures = collectSeedFailures(births.map((b) => b.seed), (seed) => {
+      const { size, rec } = at(seed);
+      if (size !== 'thorp' && size !== 'hamlet') return;
       expect(filterDeclared(DAWN_WORK.default, { facts: factsOf(rec) }).length, seed).toBeGreaterThanOrEqual(7);
-    }
+    });
+    expectNoSeedFailures(failures, 'every born thorp and hamlet holds at least seven eligible default lines');
   });
   it('the pick is pickVariantMixed over the eligible lines on `<name>::dailyLife.dawn_work::<branch>`; a nameless record takes index 0', () => {
     const calm = { name: 'Ashby', tier: 'thorp', institutions: [{ name: 'Water source' }, { name: 'Dwellings (1-8)' }, { name: 'Subsistence farming' }] };

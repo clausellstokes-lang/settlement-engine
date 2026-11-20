@@ -22,6 +22,7 @@ import { institutionSentenceNoun } from '../../src/domain/display/institutionSen
 import { isLiveInstitution, liveInstitutions } from '../../src/domain/institutions/institutionRoster.js';
 import { ACCESS_ONLY } from '../../src/domain/facts/liveInstitutionNames.js';
 import { isHideableHouse } from '../../src/domain/people/cardVeil.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 /** @type {Array<{ seed: string, rec: any }>} */
@@ -57,7 +58,7 @@ describe('the red: the falsest gathering lines M1 found', () => {
     if (!has(rec, /\bsquares?\b|\bplaza\b|\bgreen\b/i)) expect(t).not.toMatch(/the open square/);
   });
   it('a metropolis names its houses with the article and no bracket (hxd-metropolis-0..2)', () => {
-    for (const seed of ['hxd-metropolis-0', 'hxd-metropolis-1', 'hxd-metropolis-2']) {
+    const failures = collectSeedFailures(['hxd-metropolis-0', 'hxd-metropolis-1', 'hxd-metropolis-2'], (seed) => {
       const s = /** @type {any} */ (deriveDailyLifeSlot('gathering_places', at(seed).rec));
       expect(lineOf(s.text), `${seed}: "${s.text}"`).toBeTruthy();
       // anchored: the same text is pinned live on the line above (a line of its pool)
@@ -65,16 +66,18 @@ describe('the red: the falsest gathering lines M1 found', () => {
       // anchored: the same text is pinned live two lines above (a line of its pool)
       expect(s.text, seed).not.toMatch(/(?<!the )\b[A-Z]\w+ cathedral\b/);
       for (const ref of s.references) expect(s.text, `${seed}: ${ref.label}`).toContain(`the ${institutionSentenceNoun(ref.label)}`);
-    }
+    });
+    expectNoSeedFailures(failures, 'every born metropolis names its houses with the article and no bracket');
   });
 });
 
 describe('the route on born places (ruling 12): eligible by declared atoms, then the keyed pick', () => {
   it('every place prints a line of its pool whose atoms it holds, its houses live, nameable and said with "the"', () => {
     const lines = [...GATHERING_NAMED, ...GATHERING_PLAIN];
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births.map((b) => b.seed), (seed) => {
+      const { rec } = at(seed);
       const s = /** @type {any} */ (deriveDailyLifeSlot('gathering_places', rec));
-      if (!s.text) continue;
+      if (!s.text) return;
       const branch = s.references.length ? 'named' : 'plain';
       const eligible = filterDeclared(branch === 'named' ? GATHERING_NAMED : GATHERING_PLAIN, { facts: factsOf(rec) });
       const own = lines.find((l) => new RegExp(`^${l.text.replace(/[.*+?^$()|[\]\\]/g, '\\$&').replace(/\\?\{\w+\\?\}/g, '.+')}$`).test(s.text));
@@ -86,7 +89,8 @@ describe('the route on born places (ruling 12): eligible by declared atoms, then
       }
       // anchored: the same text is pinned live above (`own`, a line of its pool, checked truthy and eligible)
       expect(s.text, seed).not.toMatch(/\btowns?\b/i);
-    }
+    });
+    expectNoSeedFailures(failures, 'every born place prints an eligible line of its pool, its houses live and nameable');
   });
   it('the pick is pickVariantMixed over the eligible lines on `<name>::dailyLife.gathering_places::<branch>`', () => {
     const plain = { name: 'Ashby', tier: 'thorp', institutions: [{ name: 'Water source' }, { name: 'Dwellings (1-8)' }, { name: 'Subsistence farming' }] };
