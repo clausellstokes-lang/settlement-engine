@@ -23,7 +23,7 @@
   "totals": {
     "pools": 861,
     "blocks": 69,
-    "variants": 3194,
+    "variants": 3176,
     "resolved": 492,
     "unresolved": 369,
     "resolvedWithPredicate": 321,
@@ -4422,7 +4422,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 7,
+      "variants": 3,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -4466,7 +4466,7 @@
       },
       "declares": [],
       "lineDeclares": {
-        "colour": 5,
+        "colour": 1,
         "no criminal income": 2,
         "no organised crime": 1
       },
@@ -4742,7 +4742,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 6,
+      "variants": 2,
       "grammars": 1,
       "predicate": [
         {
@@ -14203,7 +14203,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 12,
+      "variants": 6,
       "grammars": 2,
       "predicate": [
         {
@@ -14261,7 +14261,7 @@
         "no crisis: famine": 1,
         "no crisis: under_siege": 1,
         "no organised crime": 4,
-        "organised crime": 7
+        "organised crime": 1
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -37221,7 +37221,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 7,
+      "variants": 3,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
@@ -37256,7 +37256,7 @@
       "declares": [],
       "lineDeclares": {
         "gate": 1,
-        "no crisis: under_siege": 7
+        "no crisis: under_siege": 3
       },
       "undeclared": 0,
       "crisisScoped": false
@@ -55869,7 +55869,7 @@
         "DS-ECO-6 :: TIER: significant off-book activity (≥15)",
         "DS-ECO-6 :: TIER: minor shadow activity (≥3)"
       ],
-      "variants": 25,
+      "variants": 19,
       "grammars": 5,
       "blocks": [
         "DS-ECO-6"
@@ -56370,7 +56370,7 @@
       "pools": [
         "DS-DEF-4 :: FIXTURE: black market"
       ],
-      "variants": 6,
+      "variants": 2,
       "grammars": 1,
       "blocks": [
         "DS-DEF-4"
@@ -67796,7 +67796,7 @@
       "subject": "structure null (nothing organized recognized)",
       "fields": [],
       "readingFunction": "criminalStructurePoolKey",
-      "count": "7 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -67846,7 +67846,7 @@
         "settlement.economicState.compound.inst.hasBlackMarket"
       ],
       "readingFunction": "criminalFixturePoolKey",
-      "count": "6 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -69136,7 +69136,7 @@
         "eco.safetyProfile.blackMarketCapture"
       ],
       "readingFunction": "shadowEconomyPoolKey",
-      "count": "12 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "6 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -72243,7 +72243,7 @@
       "subject": "operation role duty evasion",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "7 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
