@@ -126,3 +126,128 @@ Whole table: `map/TOWN-LINES-BUILD1.md` (block · pool · vid · the line · non
 
 EXECUTED: FIRST's three checks; my reading of the six faith rows with the five fills; every walker probe before and after; every door and gate run above with its count line; both 900-place measures; the over-bar tables; the confinement; the "town" count and its stored-prose speak check; the per-pin causes (each counted pool by pool on the leaves: uniform segments, repeated openers, three-variant pools, the histogram, the trailing-coordinate entries).
 INFERRED: why six touched pools stay at 21% to 23% (sampling or mark exclusions); the speak pass on the screen and print routes and on lines not printed at a non-town size (read from the code); that ledgerCitationIntegrity would red without the ref.
+
+## BUILD-1-CURE (PROSE-3)
+
+Branch `lane/prose-3-2026-11-20-build1-cure`, cut AT `13c57d9f6` (BUILD-1's commits kept, none rewritten). Base `87f03395b`. Brief: `docs/chair/2026-11-20/content/prose/briefs/BUILD-1-CURE.md` at f43495b12 (the chair's rulings (a)-(d) of 20:49 UTC). Nothing pushed; no pull request; no `--no-verify`; the whole suite not run; every heavy run through `sh scripts/gate-mutex.sh --run`, every gate through `sh scripts/gate-tail.sh` to a file.
+
+### (a) THE CURE: the five lines declare, the register returns to 1 and 3
+
+| commit | what |
+|---|---|
+| 7d2161b7b | the five lines' declarations (source rows + `npm run gen:dossier-prose`) and the register's two values restored |
+| 8cb46702f | the wiring census re-taken by its door (the declarations moved two of its rows) |
+| acedb0ac9 | the observed-shape baseline re-frozen by its door (the regenerated economy leaf is a scan input; provenance only). THE CODE TIP |
+| (this section) | docs: this report |
+
+- WHAT THE REGISTER COUNTS (EXECUTED, read and run): `src/domain/facts/declarationRegisters.js`: "per pool, the lines that carry no declaration and whose pool is not ruled `{colour}`". Undeclared lines, so no STOP. A FACT OF THE BRIEF CORRECTED: the register lives at `tests/lint/undeclaredLines.register.json`, but its test is `tests/domain/facts/declarationRegisters.test.js` (not under `tests/lint`), and it names POOLS with their counts, not the lines.
+- RED FIRST (EXECUTED): with the two values restored (`git diff 87f03395b -- tests/lint/undeclaredLines.register.json` empty), `declarationRegisters.test.js` exit 1, "Tests 1 failed | 7 passed (8)": `THE UNDECLARED-LINES REGISTER — shrink-only > no pool's undeclared count rose, and no undeclared pool appeared unpinned`, rose `["DS-ECO-2::FOOD: deficit: 1 → 3", "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated: 3 → 6"]`.
+- THE DECLARATIONS (EXECUTED): the source document's no-atom declaration `colour` (R-AO; `factVocabulary.js :: COLOUR_MARK`: "a no-atom declaration — 'read; presumes nothing' — which the projector and the undeclared register count as declared; the draw, the kernel and the ledger read it as silence"). Copied from DS-ECO-11 STRATEGIC VALUE #5 `[unfolding · colour]` and #6 `[counterforce · colour]` (base rows, the same block). DS-ECO-2 carries NO colour row at the base or the tip, so the brief's "same block" cannot be met there; its two lines take the desk's form, DS-ECO-1 COMBINATION C2 #2 `[ledger · colour]` (a base row).
+  - DS-ECO-2 FOOD: deficit #4 `[ledger]` -> `[ledger · colour]`; #5 `[unfolding]` -> `[unfolding · colour]`
+  - DS-ECO-11 ECONOMIC STRENGTHS: the roster is populated #4 `[counterforce]` -> `[counterforce · colour]`; #5 `[threshold]` -> `[threshold · colour]`; #6 `[unfolding]` -> `[unfolding · colour]`
+  - Why none needs an atom (INFERRED, read): the deficit lines presume only the pool's own state, as base #1 does; the block's `crisis: any` is NOT an empty declaration (it admits only under an active crisis, `factVocabulary.js` line 786), so it was not used. Strengths #5 ("stands on something its own country or its approach supplies") holds by construction: the roster is `terrain.economicStrengths`, filtered (`resourceGenerator.js:978`).
+- GREEN (EXECUTED): `npm run gen:dossier-prose` then `-- --check` exit 0 ("verified 69 state blocks / 3194 variants across 6 desks"); only `economy.generated.js` moved (five `marks: ["colour"]`). `declarationRegisters.test.js` "Tests 8 passed (8)", exit 0.
+- PINS THE DECLARATIONS MOVED, each by its door in its own commit (EXECUTED): the wiring census (`--dry`: STALE, 2 rows, delta 48 bytes; FOOD: deficit `undeclared 3 -> 1`, `lineDeclares` gains `colour: 2`; STRENGTHS `undeclared 6 -> 3`, `lineDeclares {} -> {colour: 3}`; `--check` 0, "verified 861 pools / 3194 variants / 169 relation rows against 7 stamped files"); the observed-shape baseline (`--write`: "froze 2214 finding(s) / 1552 identit(ies) across 444 file(s)", the same figures; the gate exit 1 -> 0; `observedShapeReaders.walker.test.js` 47 passed). No shrink-only door raised.
+
+THE GATES at the code tip acedb0ac9 (EXECUTED, each to a file through the mutex):
+
+| gate | count line | exit |
+|---|---|---|
+| `tests/domain/facts/declarationRegisters.test.js` (the undeclared-lines test) | Tests 8 passed (8) | 0 |
+| `tests/domain/facts/census2DeclaredPools.test.js` | Tests 10 passed (10) | 0 |
+| `tests/domain/stateProseKernel.test.js` | Tests 38 passed (38) | 0 |
+| `tests/lint/proseComposed.walker.test.js` | Tests 1 failed / 86 passed (87): A0b, 2336 > 2103, named in (d) | 1 |
+| `tests/lint/proseEntryContradiction.walker.test.js` | Tests 29 passed (29) | 0 |
+| `tests/lint/proseMoveGrammar.walker.test.js` | Tests 54 passed (54) | 0 |
+| `tests/lint/proseWaveGate.walker.test.js` | Tests 44 passed (44) | 0 |
+| `tests/lint/proseWiringCensus.walker.test.js` | Tests 79 passed (79) | 0 |
+| `tests/property/dossierProseManifest.test.js` | Tests 2 failed / 18 passed (20): THE DRIFT ARM (1050 rows, red at the base too) and THE MIXED-POOL AUDIENCE ARM (91), both as BUILD-1 left them | 1 |
+| `npx vitest run tests/lint` WHOLE | Test Files 3 failed / 217 passed (220); Tests 3 failed / 3258 passed (3261) | 1 |
+
+The whole-lint reds, named: `proseCorpusBytes` RAW and GZIP and `proseComposed` A0b (the three of (d), BUILD-1's own three); and the file `ledgerCitationIntegrity.test.js`, which fails to load ("fatal: Not a valid object name refs/heads/review-fixes-2026-07-08"): **not run: the ledger ref is not fetchable here** (never green, never mine; no fetch attempted). The first whole-lint run, after 8cb46702f, also named `observedShapeReaders.walker.test.js` (the economy leaf, a scan input, drifted); acedb0ac9 is its door's re-freeze, and it is green in this run.
+
+THE CONFINEMENT (EXECUTED): the two-tree tool fetched from `origin/lane/names-3-2026-11-20` (`docs/chair/2026-11-20/content/tools/confinement/`, all seven files) into scratch, never into the lane; `node <scratch>/trees.mjs 87f03395b acedb0ac9 <scratch>/confine-work --words=none` from this worktree through the mutex; births exit 0,0 at each revision; exit 0. golden: documents 525 · identical 525 · **non-string differences 0** · differing strings 0. census: documents 720 · identical 720 · **non-string differences 0** · differing strings 0.
+
+### (b) THE KERNEL TEST'S THREE-VARIANT FLOOR: seventeen pools, sixteen of floor
+
+RECONCILED (EXECUTED, every pool of the six leaves read at a `git archive` of the base and at the tip): three-variant pools **501 at the base, 484 at the tip; 17 left the class, 0 entered** (861 pools both sides; pools of four or more 275 -> 298). The commit's "seventeen, 501 -> 484" counts POOLS; the chair's "sixteen from 500" counts the FLOOR (500 -> 484), which sat one pool under the base count. The pools that left are seventeen:
+
+| desk · block · pool | variants before -> after |
+|---|---|
+| economy · DS-ECO-2 · FOOD: deficit | 3 -> 5 |
+| economy · DS-ECO-11 · TERRAIN: Plains | 3 -> 4 |
+| economy · DS-ECO-11 · ECONOMIC STRENGTHS: the roster is populated | 3 -> 6 |
+| economy · DS-ECO-12 · INCOME MIX: one source carries the town | 3 -> 8 |
+| economy · DS-ECO-12 · TRADE PROFILE: exports and imports both present | 3 -> 8 |
+| economy · DS-ECO-12 · CRITICAL IMPORT: the land cannot give it | 3 -> 7 |
+| power · DS-POW-2 · recentConflict present | 3 -> 8 |
+| power · DS-POW-4 · riskLabel: Holding | 3 -> 6 |
+| power · DS-POW-5 · governing body name: a SLOT, never a baked noun | 3 -> 7 |
+| power · DS-POW-6 · operation role duty evasion | 3 -> 7 |
+| defense · DS-DEF-2 · Internal Security: no legal infrastructure | 3 -> 7 |
+| defense · DS-DEF-3 · First-Survey qualification (the reading is a first look) | 3 -> 7 |
+| defense · DS-DEF-4 · structure null (nothing organized recognized) | 3 -> 7 |
+| defense · DS-DEF-5 · garrison PRESENT | 3 -> 7 |
+| defense · DS-DEF-5 · arcane defense ABSENT | 3 -> 7 |
+| stressors · DS-STR-1 · Overview's own section framing | 3 -> 5 |
+| general · DS-GEN-11 · criticalIssueCount: critical contradictions on the record | 3 -> 7 |
+
+WHERE THEY ARE COUNTED AFTER: **no arm counts them for the property the floor guarded.** The two lowered floors sit in `tests/domain/stateProseKernel.test.js :: the state-prose reader — law 6, the index-stable draw > ⭐ UNIFORM ON THE THREE-VARIANT CORPUS: chi-square 4.20 on 5,470,000 reads` (per-slot uniformity, and every slot reached) and `... > ⭐ APPEND-SAFE: a fourth wording moves about a QUARTER, and every mover moves TO it`; both filter `row.pool.length === 3` (EXECUTED, read). The arms that sweep EVERY shipped pool, four-plus included, check other things: `... > ⭐ THE SHIPPED STATE CORPUS NEVER REACHES THE MODULUS FALLBACK` (distinct, contiguous vids: the draw's precondition, not its reach) and `... > ⭐ A FACT NEVER MOVES: the drawn variant is a member of the same eligible set as before` (set membership, six seeds). `the state-prose reader — the avalanche draw > reaches every variant of a power-of-two pool on the degenerate seed family` reaches every slot of a SYNTHETIC eight-variant pool, not the corpus. No other test that reads the state leaves or `drawVariant` carries a reach, uniformity or chi-square arm over shipped pools (EXECUTED: the grep; INFERRED: that nothing outside it does). By the chair's rule, the floor fell where the thing it counts did NOT move to a home counted elsewhere.
+
+### (c) THE MIXED-POOL AUDIENCE ARM: what the 91 are (an answer, no code)
+
+MEASURED (EXECUTED: a scratch re-statement of the arm's own `differ` pairing through the test's helper `tests/helpers/dossierManifest.js :: driftRun, poolIndex`, DRIFT corpus 525 towns, both faces, 73,800 cells; at the tip it reproduces the test: 16 mixed, 91 differing, 214 DM-only, 0 player-only):
+
+| | mixed pools | positions where the faces differ | DM-only positions | player-only |
+|---|---|---|---|---|
+| base 87f03395b | 13 | **0** | 214 | 0 |
+| tip acedb0ac9 | 16 | **91** | 214 | 0 |
+
+The arm was ZERO at the base for EVERY pool, including DS-ECO-6 minor shadow, mixed before BUILD-1 (its base dm-only v1-v3 are declared `no organised crime`, so they make DM-only positions, not differing draws). All 91 come from BUILD-1's dm-only lines.
+
+| pool | cell / position | positions (towns) | dm-only vids | DM face drew / player face drew |
+|---|---|---|---|---|
+| DS-ECO-6 · TIER: minor shadow activity (≥3) | `economics.shadowEconomy` rung 0 | 88 (60 city, 24 metropolis, 4 town) | v1-v3 (base), v6-v11 (BUILD-1) | DM v10 / player v5 x86; DM v6 / player v5 x1 (gm-seed-b); DM v7 / player v4 x1 (gm-seed-c) |
+| DS-POW-6 · operation role duty evasion | `power.criminalUnderside` rung 0 | 3 (town · plains · port · golden-master-v3; town · auto · random_trade · gm-seed-b; town · plains · road · gm-seed-a) | v4-v7 (BUILD-1) | DM v6 / player v1; DM v7 / player v3; DM v6 / player v3 |
+| DS-DEF-4 · structure null | `defense.criminalStructure` | 0 | v4-v7 | (DS-DEF-4 fires on no town of the corpus: the test's own `MOUNTS_THE_CORPUS_DOES_NOT_REACH`) |
+| DS-DEF-4 · FIXTURE: black market | `defense.criminalStructure` | 0 | v3-v6 | (the same) |
+
+(The recorder's `vid` is the 0-based position in the authored pool; converted to annex vids here: DS-ECO-6 minor shadow numbers from 0, so position = vid; DS-POW-6 duty evasion numbers from 1, so vid = position + 1. EXECUTED, both read off the leaves.)
+
+THE DM-ONLY SLOTS THE DESKS ALREADY CARRY (INFERRED, read):
+
+| slot (`path :: symbol`) | fed by | printed by | a state-prose kernel pool? |
+|---|---|---|---|
+| `src/domain/display/stateProse/economyStateProse.js :: arcaneMarketPoolKey`, `theocraticEconomyPoolKey`, `hiddenHousePoolKey` (DS-ECO-6 FLAG/FACET pools, every line dm-only) | `safetyProfile.flags.arcaneBlackMarket` / `.theocraticEconomy`; the first live house with `facets.subterranean` / `clandestine` | `src/components/new/tabs/EconomicsTab.jsx` `<DeskLines mount={SHADOW_ECONOMY_MOUNT} rungs={[arcaneMarket, theocraticEconomy, hiddenHouse]}>`, under the tier line | yes |
+| `src/domain/display/stateProse/powerStateProse.js :: gmAdvisoryPoolKey` (DS-POW-6 GM ADVISORY, two pools, every line dm-only) | `power.factionRelationships` | `src/components/new/tabs/PowerTab.jsx` `drawnAdvisory` at `UNDERSIDE_MOUNT` | yes |
+| the same desk's `captureReading` (DS-POW-6 capture pressure ADVANCING / RECOVERING, capture reached an AGENT / a LEADER, every line dm-only) | the capture ladder | PowerTab `drawnCapture` at `UNDERSIDE_MOUNT` | yes |
+| `src/domain/display/stateProse/defenseStateProse.js :: criminalCapturePoolKey` (DS-DEF-4 lens 2: `capture corrupted`, `capture capture`, every line dm-only) | `powerStructure.criminalCaptureState` | NO SURFACE: `DefenseTab.jsx` prints only `['structure']` of the criminal desk (line 325), `printProse.js` only `criminal.structure` (line 571) | yes (composed, printed nowhere) |
+| `src/data/people/dmPowerLines.js :: PATRONAGE_LINES`, `CAPTURE_LINES` | `src/domain/people/patronage.js :: patronageOf`, `dmPowerViewOf`; `src/domain/people/hallCapture.js :: hallCaptureOf`, `hallReceipt` | `src/components/new/tabs/WhoRunsThisTownPanel.jsx` (PowerTab mounts it only `!publicDossier && !playerView`); `src/pdf/sections/WhoRunsThisTown.jsx` | NO (closures over a receipt; the kernel never draws them) |
+
+THE MOVE, ONE LINE PER POOL (INFERRED, read; no code):
+- DS-ECO-6 minor shadow (v6-v11; its base v1-v3 by the same design): NO existing slot keys on this tier (the FLAG/FACET lenses key on flags and facets; `TIER: a large share off the books (≥30)` is the tier slot at another tier). One would have to be made: a dm-only pool keyed on the same tier, a fourth rung of the existing `DeskLines` row at `economics.shadowEconomy`.
+- DS-POW-6 duty evasion (v4-v7): NO existing slot keys on an operation role (`gmAdvisory` keys on relationships, `captureReading` on the ladder). One would have to be made: a dm-only pool keyed on `operation role duty evasion`, a further rung at `UNDERSIDE_MOUNT`, where the DM's dm-only rungs already print.
+- DS-DEF-4 structure null (v4-v7): NO slot keys on the structure, and the block's one dm-only lens (capture) prints nowhere. One would have to be made AND printed: a dm-only rung at `defense.criminalStructure` beside `structure`.
+- DS-DEF-4 FIXTURE: black market (v3-v6): the same; the fixture is said beside the structure line (`withSaid`), so its dm-only lines need that same new rung.
+
+### (d) THE BYTE RATCHET AND A0b's CEILING: red by name, raised by nobody
+
+`scripts/.prose-byte-baseline.json` is byte-identical at the base and the tip (EXECUTED). Level-9 gzip, as the test measures (EXECUTED at both trees; BUILD-1's tip figures from its report above):
+
+| leaf | committed raw · gzip | ceiling raw · gzip | base | BUILD-1 tip 13c57d9f6 | this tip acedb0ac9 |
+|---|---|---|---|---|---|
+| defense | 287394 · 37962 | 488168 · 108482 | 287394 · 37962 | 302700 · 40123 | 302700 · 40123 |
+| economy | 196627 · 26784 | 393810 · 87513 | 196627 · 26784 | 215992 · 29279 | **216267 · 29284** (+275 raw, +5 gzip: the five `colour` marks) |
+| general | 307568 · 38822 | 796761 · 177058 | 307568 · 38822 | 312541 · 39521 | 312541 · 39521 |
+| power | 136414 · 18762 | 357097 · 79355 | 136414 · 18762 | 141457 · 19440 | 141457 · 19440 |
+| stressors | 148435 · 20910 | 258858 · 57524 | 148435 · 20910 | 149042 · 21015 | 149042 · 21015 |
+| warFaith | 180478 · 25143 | 505306 · 112290 | 180478 · 25143 | 181969 · 25290 | 181969 · 25290 |
+
+RAW is EXACT: all six red. GZIP's 1 % band: four red (defense, economy, general, power). Every leaf is under its ceiling.
+
+A0b (`tests/lint/proseComposed.walker.test.js :: A0b — the text claims every declared field and no other > ⭐ THE SHIPPED CORPUS READING, printed and held SHRINK-ONLY`). What it counts, in its own words: "A0b · the AUTHORING debt on the shipped corpus, before a byte of the rewrite moves"; an under-claim is "a line that states less than its pool reads (it claims nothing false)"; "SHRINK-ONLY, and NOT an exact pin. The rewrite wave pays this debt down; a car that ADDS a claim the census does not license reds here on the day it lands." Figures (EXECUTED: the arm re-stated over each tree's leaves and wiring census, reproducing the test's own tip figures): under-claims **2103 at the base (= the ceiling, 1282 + 821 OWED), 2336 at the tip** (BUILD-1's +233; the cure's declarations moved none); over-claims 19 and 19 (ceiling 19); implicit negations 13 and 13 (ceiling 13); pools carrying a finding 305 and 305.
+
+### EXECUTED vs INFERRED (this section)
+
+EXECUTED: the register's reading, its red and its green; the declarations, the door and its check; both re-takes and their gates; every gate line above; the three-variant census at both trees; the mixed-pool re-statement at both trees and its per-pool table; the byte figures at both trees; A0b at both trees; the confinement.
+INFERRED (read, not run): why the five lines need no atom; that no test outside those grepped sweeps four-plus pools for reach; every row of the dm-only-slot table and the move plan; that DS-DEF-4's capture lens is printed nowhere.
