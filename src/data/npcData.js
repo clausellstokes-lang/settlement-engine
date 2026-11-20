@@ -2235,7 +2235,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${s.name} needs something this season that lies just past what ${r.name} has always refused.`, colour: true },
       { line: (r, s) =>
-        `${r.name} has asked ${s.name} for an introduction ${s.name} would rather keep to themselves.`, colour: true },
+        `${r.name} has asked ${s.name} for an introduction that has not yet been made.`, colour: true },
     ]),
     type: 'political',
   },
