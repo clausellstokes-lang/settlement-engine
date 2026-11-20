@@ -474,6 +474,13 @@ const phrasePattern = (words) => {
  * `factsOf` getter.
  * @type {Record<string, RegisteredWord>}
  */
+/**
+ * BUILD-CONFLICT (DEPTH-2, 2026-11-20; the chair's leave for three atoms): a family whose atom has LANDED, read by the
+ * family's own door ("cured … by the atom when it lands", the widened register's `family` reason): the common grazing is
+ * answered by `common grazing land` (`facts/rosterGrounds.js`, the roster's 'Common grazing land' row).
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+const HOUSE_FAMILY_ATOMS = Object.freeze({ 'common grazing': Object.freeze(['common grazing land']) });
 const HOUSE_FAMILIES = (() => {
   /** @type {Set<string>} */ const names = new Set();
   for (const tier of Object.values(institutionalCatalog)) for (const shelf of Object.values(tier || {})) for (const n of Object.keys(shelf || {})) names.add(n);
@@ -497,8 +504,8 @@ const HOUSE_FAMILIES = (() => {
     // that name counts as the house (a Thieves' Guild on the powers' roster)
     const stem = new RegExp(key.split(' ').map((w) => w.replace(/'s$|s'$/, '').replace(/(?:ery|ers|er|ry|y)$/, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\S*\\s+'), 'i');
     out[`house: ${key}`] = {
-      kind: 'thing', layer: 'P', leaf: `institutions.js :: liveInstitutionNames, or a power of the name (a house named ${key}); its atom \`house: ${key}\` waits for a factsOf getter`,
-      words: re, atoms: [], absent: (_f, rosterNames, record) => !rosterHas(rosterNames, stem) && !powerNames(record).some((n) => stem.test(n)),
+      kind: 'thing', layer: 'P', leaf: `institutions.js :: liveInstitutionNames, or a power of the name (a house named ${key}); ${HOUSE_FAMILY_ATOMS[key] ? `its atom \`${HOUSE_FAMILY_ATOMS[key].join('\`, \`')}\` (BUILD-CONFLICT)` : `its atom \`house: ${key}\` waits for a factsOf getter`}`,
+      words: re, atoms: [...(HOUSE_FAMILY_ATOMS[key] || [])], absent: (_f, rosterNames, record) => !rosterHas(rosterNames, stem) && !powerNames(record).some((n) => stem.test(n)),
       pageWithdrawn: PAGE_WITHDRAWN.house,
     };
   }

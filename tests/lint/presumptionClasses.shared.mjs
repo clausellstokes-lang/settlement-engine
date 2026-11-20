@@ -91,7 +91,7 @@ export const CLASS_DIMS = Object.freeze({
   threat: [...C, 'walls', 'palisade', 'gate', 'organised crime', 'crime', 'ruler', 'rival power', 'watch', 'garrison', 'patrol', 'militia', 'soldiers', 'monster frontier', 'crime wave'],
   size: ['tier', 'population'],
   goods: [...GOODS, 'exported'],
-  resource: [...GOODS, 'terrain', 'coast', 'river'],
+  resource: [...GOODS, 'terrain', 'coast', 'river', 'common grazing land'], // BUILD-CONFLICT (DEPTH-2): the common grazing joins the class it answers (below)
   office: ['court', 'prison', 'watch', 'militia', 'garrison', 'patrol', 'soldiers', 'commander', 'mercenary', 'institution', 'ruling body', 'guild', 'ruler', 'rival power', 'walls', 'palisade', 'gate', 'tier', 'population', 'temple', 'church', 'priest', 'clergy', 'crime', 'organised crime', 'force', 'court sits', 'seat held', 'seat members', 'paid watch'],
   sovereign: ['ruler', 'war', 'crisis', 'sovereign', 'legitimacy crisis'],
 });
@@ -100,6 +100,8 @@ export const CLASS_DIMS = Object.freeze({
 // named below: `court sits` (BAR6-CULTURE, `factsOf.js :: courtSits`, a court on the live roster) → office and law;
 // `seat held` (BAR6-PEOPLE, `seatHeld.js`) → office; `seat members` (BAR6-POWERS, `seatMembers.js`, "members cannot") →
 // office; `paid watch` (BAR6-PEOPLE, `guardPay.js :: paidWatchOf`, a watch that is not the unpaid rota) → office and law.
+// `common grazing land` (BUILD-CONFLICT, DEPTH-2, the chair's leave of 2026-11-20: `rosterGrounds.js`, the roster's 'Common grazing land'
+// row) → resource: the grazing word of a quarrel over the commons is answered by the commons standing.
 // `legacy ruin` (BAR6-CULTURE, `legacyRuin.js`) JOINS NO CLASS: no class of the lexicon names a ruin built upon ("Much of
 // what stands now was built after the fire" reads as no class), and a class it does not answer would credit that class's
 // lines with a fact they do not presume. Its class is the lexicon's to make (the walker's own form), left for the close.
