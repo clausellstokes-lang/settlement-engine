@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "acf2c218047d29c8373b6542eda593d18e6f0105",
-  "measuredBy": "FORTUNE-1 U1",
+  "measuredAtSha": "c48db76b064d7bb83e2c37f9c2b9ee3ffac185ad",
+  "measuredBy": "FORTUNE-2 U2 builder",
   "date": "2026-11-20",
-  "note": "the fortune law table, DRAFT (FS1, FS2)",
+  "note": "FORTUNE-1 U2 (c48db76b0): src/generators/economy/prosperity.js now reads FORTUNE_LAW_TUNING (developmentFigure, magicScale, depthExpectation) under the fortune law, so the table gains a dependent; no value moved, no bare decimal added (prosperity.js stays at 13)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1498,9 +1498,12 @@
         "standing.defenceBound": 10
       },
       "dependents": [
-        "src/domain/density/densityCreateBoundary.js"
+        "src/domain/density/densityCreateBoundary.js",
+        "src/generators/economy/prosperity.js"
       ],
-      "namedDependents": []
+      "namedDependents": [
+        "src/generators/economy/prosperity.js"
+      ]
     },
     "src/domain/npc/livedExperienceFunnel.js#FUNNEL_TUNING": {
       "exported": true,
@@ -9331,6 +9334,6 @@
     "unregisteredNamed": 541,
     "bareDecimals": 6877,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 188
+    "zeroNamedDependentTables": 187
   }
 }
