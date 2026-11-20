@@ -10,7 +10,7 @@ Seat: GOALS-4, the wants' build, under the seventh chair (session_019yED1SUxGVHy
 |---|---|---|
 | `lane/goals-4-2026-11-20` (pushed) | `d874c81e9` | 021557d4d, with the join at 8196e5712 merged (f839ce8e9), d8b174237 (builder 10's addendum), 7495d3170 (the base measure, 150 a size), 0728f311a (builder 11's brief), and the join's line at 062504aa8 merged (d874c81e9, clean; the chair's 20:36 order: the line goes in before the cure). |
 | `lane/goals-4-2026-11-20-b10` → pushed as `…-b10-wip` | `d83633b9b` | Builder 10's wants build: DONE, not merged. Base d8b174237. Worktree `/home/user/wt-b10`. |
-| `lane/goals-4-2026-11-20-b11` (local only) | in progress | Builder 11's cure unit. Base 0728f311a; it is told to merge d874c81e9 before its draw cure. Worktree `/home/user/wt-b11`. |
+| `lane/goals-4-2026-11-20-b11` → pushed as `…-b11-wip` | `7b670cd8b` | Builder 11's cure unit. d874c81e9 merged at 1f973dfb9. Report: `goals/briefs/GOALS-4-B11-REPORT.md`. LANDED: items 1, 2, 4, 5, 7, 8. THREE STOPS sent to the chair at about 21:20 UTC, awaiting rulings. (A) Condition (a): `ties.js :: temperOfTie` reads the printed index's `trust: 'full'`, and that steers the pair's later ties. GOALS-4 recommends reading the temper from today's resolved index. (B) The colourMarks4h ledger `docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json` is hand-written with no door and lacks all 26 reserve rows. (C) Two pronoun-test reds to word: mil_crim_corruption.tension#7 and gov_econ_dependence.desc#1. Worktree `/home/user/wt-b11`. |
 
 The scratch worktrees `/home/user/wt-base` (f839ce8e9) and `/home/user/wt-pre` (0a4edcff3) are detached and used for measures only.
 
