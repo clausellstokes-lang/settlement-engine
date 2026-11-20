@@ -48,10 +48,12 @@
  *                       event whole when its name holds a hidden name, so for a READER (TRAD-3 unit 4, the chair's item 3)
  *                       the choice is only among events whose name holds no house, person or power name the WHOLE record
  *                       holds (hidden or shown: heldNamesOf), and the event is named by its KIND (DEAD_EVENT_PHRASES),
- *                       never by `event.name`. "Holds" is the chair's WORD rule (TRAD-4 unit 7, 13:59 UTC; holdsAName):
- *                       the event's name shares no word with any held name (letter runs, case-folded, a qualifier's words
- *                       in, HELD_NAME_STOP_WORDS out, an event word that begins with a held word caught), strictly wider
- *                       than any by-name withholding, a hidden house's bare form (migration 212's sweep) among them.
+ *                       never by `event.name`. "Holds" is the chair's WORD rule (TRAD-4 unit 7; 13:59 UTC, re-stated
+ *                       15:10 UTC; holdsAName): the event's name shares no word with any held name (runs of letters and
+ *                       apostrophes, case-folded, a held word less its end apostrophes and possessive 's, a qualifier's
+ *                       words in, HELD_NAME_STOP_WORDS out, an event word that begins with a held word caught), with the
+ *                       whole name, full and bare, as its floor: wider than any by-name withholding, a hidden house's
+ *                       bare form (migration 212's sweep) among them.
  *   S3 economy          RANKS the fitting income (chief / lesser) and COUNTS the incomes ('only') over the view's
  *                       incomeSources: the criminal income row (`isCriminal: true`), the one row the veil withholds whole
  *                       (gallerySecondHomes.js :: withholdCriminalIncome, on the veil lane), is out of the view.
@@ -210,18 +212,30 @@ function heldNamesOf(whole) {
 export const HELD_NAME_STOP_WORDS = Object.freeze(['the', 'a', 'an', 'of', 'and', 'in', 'on', 'at', 'by', 'for', 'to']);
 
 /**
- * THE CHAIR'S WORD RULE (TRAD-4 unit 7): does an event's name share a word with any of the names? Both sides are
- * case-folded and cut into runs of letters (`\p{L}`; digits, marks and punctuation separate); every word of a name counts,
- * its bracketed qualifier's too, of any length, but HELD_NAME_STOP_WORDS; an event word that BEGINS WITH a held word counts
- * as that word (a plural or a possessive: "Fences'" for "Fence"). Strictly wider than any by-name withholding (a whole
- * name, or a hidden house's bare form, shares its words with the event that holds it).
+ * THE CHAIR'S WORD RULE (TRAD-4 unit 7; the chair, 13:59 UTC, re-stated 15:10 UTC, ADDENDUM 1): does an event's name
+ * share a word with any of the names? (a) A WORD is a maximal run of letters and apostrophes (U+0027, U+2019 and U+02BC all
+ * read as the apostrophe), case-folded: an apostrophe never splits a word; digits, marks and other punctuation separate.
+ * (b) A HELD word: its end apostrophes dropped, then a trailing possessive 's, then every inner apostrophe deleted
+ * ("Cobbler's" → cobbler; "Smiths'" → smiths; "O'Brien's" → obrien); every word of a name counts, its bracketed
+ * qualifier's too, of any length, but HELD_NAME_STOP_WORDS. (c) An EVENT word: every apostrophe deleted, nothing dropped.
+ * (d) An event word that BEGINS WITH a held word counts as that word. (e) THE WHOLE-NAME FLOOR: the event's name holding a
+ * name whole, full or bare (less its bracketed qualifier), at the start of a word, as the rule before it read: a held name
+ * of stop words alone is still caught.
  * @param {string} eventName @param {ReadonlyArray<string>} names @returns {boolean}
  */
 export function holdsAName(eventName, names) {
   /** @param {string} s @returns {string[]} */
-  const wordsOf = (s) => s.toUpperCase().toLowerCase().match(/\p{L}+/gu) || [];
-  const held = [...new Set(names.flatMap(wordsOf))].filter((w) => !HELD_NAME_STOP_WORDS.includes(w));
-  return wordsOf(eventName).some((w) => held.some((h) => w.startsWith(h)));
+  const wordsOf = (s) => s.toUpperCase().toLowerCase().replace(/[\u2019\u02BC]/g, "'").match(/[\p{L}']+/gu) || [];
+  const held = [...new Set(names.flatMap(wordsOf).map((w) => w.replace(/^'+|'+$/g, '').replace(/'s$/, '').replace(/'/g, '')))]
+    .filter((w) => w && !HELD_NAME_STOP_WORDS.includes(w));
+  const words = wordsOf(eventName).map((w) => w.replace(/'/g, ''));
+  if (words.some((w) => held.some((h) => w.startsWith(h)))) return true;
+  const text = eventName.toLowerCase();
+  const whole = names.flatMap((n) => { const full = n.trim().toLowerCase(); return [full, full.replace(/\s*\([^)]*\)\s*$/, '')]; }).filter(Boolean);
+  return whole.some((n) => {
+    for (let i = text.indexOf(n); i >= 0; i = text.indexOf(n, i + 1)) if (i === 0 || !/[\p{L}\p{N}]/u.test(text[i - 1])) return true;
+    return false;
+  });
 }
 
 /**

@@ -499,3 +499,39 @@ describe('the reader\'s dead-cause word rule (TRAD-4 unit 7, the chair\'s ruling
     expect(reader).not.toMatch(/great fire|2 years ago/);
   });
 });
+
+describe('the word rule RE-STATED (ADDENDUM 1, the chair, 15:10 UTC): a word is a run of letters and apostrophes; the whole name stays as a floor', () => {
+  it('A POSSESSIVE HELD NAME against the bare event: "Cobbler\'s guild" / "The Cobbler Riots" is caught', () => {
+    expect(holdsAName('The Cobbler Riots', ["Cobbler's guild"])).toBe(true);
+  });
+
+  it('THE REVERSE: "Cobbler" / "The Cobbler\'s Fall" is caught (the event word "cobblers" begins with the held "cobbler")', () => {
+    expect(holdsAName("The Cobbler's Fall", ['Cobbler'])).toBe(true);
+  });
+
+  it('A PLURAL POSSESSIVE: "Smiths\' Hall" / "Smith\'s Fire" is caught (held "smiths", event "smiths")', () => {
+    expect(holdsAName("Smith's Fire", ["Smiths' Hall"])).toBe(true);
+  });
+
+  it('A CURLY APOSTROPHE (U+2019) and the modifier apostrophe (U+02BC) read as the apostrophe', () => {
+    expect(holdsAName('Smith’s Fire', ['Smiths’ Hall'])).toBe(true);
+    expect(holdsAName('Smithʼs Fire', ['Smithsʼ Hall'])).toBe(true);
+    expect(holdsAName("Smith's Fire", ['Smiths’ Hall'])).toBe(true);
+  });
+
+  it('AN INNER APOSTROPHE is deleted: "O\'Brien\'s Mill" / "The OBriens Flood" and "D\'Arcy Hall" / "The Darcy Fire" are caught', () => {
+    expect(holdsAName('The OBriens Flood', ["O'Brien's Mill"])).toBe(true);
+    expect(holdsAName('The Darcy Fire', ["D'Arcy Hall"])).toBe(true);
+  });
+
+  it('THE WHOLE-NAME FLOOR (full and bare form): a held name made only of stop words is still caught', () => {
+    expect(holdsAName('The At Fire', ['At'])).toBe(true);
+    expect(holdsAName('The By and By Siege', ['By and By (old)'])).toBe(true);
+  });
+
+  it('CONTROL THAT MUST KEEP ITS CAUSE: a held possessive against an event that only begins with s ("People\'s Council" / "The Siege")', () => {
+    expect(holdsAName('The Siege', ["People's Council", "Cobbler's guild", "Tailor's guild"])).toBe(false);
+    const t = town({ powerStructure: { factions: [...town().powerStructure.factions, { faction: "People's Council", category: 'government', power: 5 }] } });
+    expect(describeTradition(rite(1, 'the-dead', 'vigil'), t, { audience: 'reader' }).text).toMatch(/in memory of the siege(?: since then)?, 40 years ago/);
+  });
+});
