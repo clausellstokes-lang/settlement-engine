@@ -154,6 +154,20 @@ parts of the whole check (at the close).
   the real database; not to close the rest by hand (a wrong revoke breaks saving or sharing): the proven script
   comes; never to paste a key or the secret into the chat.
 
+- **2026-11-20, between the clock's readings of 01:59 and 02:07 UTC, the owner, in three messages:** (1) the answers
+  to the chair's three questions (verbatim): "all three were tru" / "after i did step 2 it was 0" / "i only ran
+  those two lines". TAKEN AS: before the two revokes anon could execute both key functions and any signed-in user
+  could read another's key ON PRODUCTION (V10-8 CONFIRMED THERE); the count of stored keys printed 0 (the chair's
+  reading of an answer that could also mean the check after the revokes; said so to the owner); nothing but the two
+  revokes was run, so the rest of the class is still open. (2) and (3) PRODUCTION'S OWN LIST of the functions anon
+  may execute, pasted twice (a table, then a CSV), each cut by the SQL editor at its first 100 rows
+  (`_assert_service_admin_actor` to `gen_external_name`). THE CHAIR'S COMPARISON (recorded 02:10 UTC): 100 of 100 names
+  are in SEC-GRANTS's local catalogue of master's chain; of the chain's names in that range the only ones missing
+  on production are `_surveyor_byok_secret` (the owner's revoke took) and pgcrypto's eight (another schema there):
+  the first evidence that production equals the chain. TOLD TO THE OWNER: what the answers mean; that with no key
+  stored only the master secret could have been taken and replacing it costs nothing; a one-cell query that the
+  editor cannot cut; that the full script comes only after an independent read.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -671,3 +685,56 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   branch and commit); its branch holds only its own new files; a refusal of that too is to be reported, with each
   result sent to the chair in a message. It was told NOT to redo the split (its prompt's item 1 was overtaken) and
   to read VR17 cold first. LESSON FOR THE NEXT PROMPT: never order a path checkout in a seat's first act.
+- 02:10 UTC · **SEC-GRANTS: "EMERGENCY 6c389a2ee" (tip 8bfca18b; `docs/chair/2026-11-20/security/`), its message of 01:50
+  UTC.** Built and proven on master's chain 001..203 (db832c892), scratch PostgreSQL 16: of the 283 functions anon or
+  authenticated may execute, **157 INTERNAL** (all SECURITY DEFINER; no caller in `src/`, `api/` or an edge
+  user-token client; 99 called by edge functions with the service key, which keeps them): revoked from PUBLIC, anon
+  and authenticated in ONE transaction, service_role granted; 85 DELIBERATE DOORS; 1 DOOR THAT TRUSTS A PARAMETER
+  (`account_is_active(uuid)`: for 213); left out: 12 visitor-needed (a policy, a constraint, an INVOKER trigger or
+  body), 15 INVOKER helpers, 13 triggers. EXECUTED on the chain: the reader's two calls succeed before and are
+  denied after as anon and as authenticated; the check 157 rows before, none after; the script twice without
+  error; the product flows byte-identical before and after; an 810-call harness changed only the 157; before the
+  script 77 of the 157 ran to completion as anon (`handle_premium_downgrade`, `purge_analytics_for_user` among
+  them). The seat ADDED the revoke from PUBLIC (without it a function never revoked from PUBLIC stays callable).
+  **THE CHAIR'S OWN READ (independent of the seat's method):** the 157 names searched in `src/` and `api/` at
+  master, the line and the veil lane: 18 are mentioned, each a comment or an ACTION NAME passed to the
+  `admin-actions` edge function, none a direct call; the edge functions' calls on a client built with the caller's
+  token extracted afresh: the seat's ten names exactly, none on the list; the stripe webhook holds the service key;
+  both triggers on `auth.users` (`handle_new_user`, `sync_profile_email`) are SECURITY DEFINER, so the revoke
+  from PUBLIC cannot reach the sign-up path through them. **SENT TO REVIEW-VEIL-10 for its one cold read** (does it
+  break the app: roles outside the three, defaults, views, constraints, policies on every schema; does it close the
+  class; the script itself). **SENT BACK TO THE SEAT, one commit ("EMERGENCY-2"):** the owner's check reshaped for
+  Supabase's SQL editor (it cut the owner's paste at 100 rows and shows only the last result of several
+  statements: one statement per block, each answer in one row); a production pre-flight (anything THERE that
+  references one of the 157 as a visitor: must be empty; it catches objects made by hand); a true/false query for
+  whether the secret is set, without printing it; a smoke list and the one-function undo. NOT HANDED TO THE OWNER
+  UNTIL THE READ IS DONE. NO SEPARATE STOP-GAP: the dangerous set is dozens of functions, not a handful, so a short
+  list would leave most of it open (the chair had floated one to the owner at 02:03 and takes it back).
+- 02:10 UTC · **CI-FIT HANDED BACK "CI-FIT 0dcf81021" (01:56 UTC; past its mark, finished) AND POINT 75 IS MERGED BY THE
+  CHAIR:** `lane/join-2026-11-14` 741c595a0 (merge; tree 9d180f21361c equal to the seat's) and 85fccf89 (the row),
+  pushing. The four expiries were honestly long on a runner (1.44 to 1.58 times the seat's box; a shard adds 5 to 13
+  per cent per test): budgets 480, 540, 360, 300 s (the CI figure times 1.5); sixteen more by estimate; the two
+  browser jobs in Playwright's image with a launch probe; the ratchet's budget reader. The chair read every changed
+  test line (only the budget argument moves) and re-ran eight files at the merge: 212 of 212. PLAUSIBLE until pull
+  request #75's own run: the image pull, both suites in the container. **OPEN: THE SHARD CAP** (shard 6 took 36m01s
+  of 45; the house rule is the measured figure times 1.5, so 60): ruled after this run's six figures are read; the
+  cap is pinned in `tests/build/ciCheckParity.test.js` and goes to a CI seat as a rider.
+- 02:10 UTC · **REVIEW-VEIL-11'S READ (1), its message of 01:58 UTC, REPLACES ITS PREDECESSOR'S TABLE** (86 born towns with a
+  hideable house, control 50 without; x212, default veil, anon; the predecessor's 29 and 28 of 86 reproduced; a
+  control on EVERY row). TIER 1: `defence.scores.internal` ALONE (75, control 0; the other five scores and the
+  gates 0 and 0); `conditions.severity` 7 and `severityBand` served raw though registered withhold-always (R2 not
+  built); THE SHARES: the served income sum under 100 in 50 of 86 AND 6 of 50 control towns (the gap is the withheld
+  row's share), faction power 4 and 1. TIER 2: prosperity 29, prosperityStanding 33, safety 28, readiness 7; the
+  prose rows chosen by a band (publicOrder 20, all inside the band's 28; prosperityHeader 10; Rung 29; the
+  severity sentence 2). PASS: legitimacy label and colours, `threat.economic`, `wall.rationale`, conflicts; no
+  withheld name anywhere in the read, 0 of 86. THE PROMOTION TEST: no band separates count or kind; the prosperity
+  band tells ONE BIT (hidden criminal strength at or over 65, 27 of 29): stays tier 2.
+  **RULING VR31, A SERVED LIST OF SHARES SUMS OVER WHAT IS SERVED (vetoable):** income percentages and faction power
+  are recomposed whenever the veil withholds ANY member, whatever the reason; item D's condition widens from
+  house-hidden to any-withheld; FINAL holds 100 on the control. **RULING VR32, PRECISE ONLY THROUGH A SERVED BAND
+  IS TIER 2 (vetoable):** a figure that EQUALS its re-derivation from served values passes VR26's second branch
+  (`storageMonths` exact from the served standing 86 of 86; `resilienceScore`; `legitimacy.score`); tier 1's "no
+  precise figure that carries its term" means a figure that DIFFERS from what the served document gives. Both, and
+  the correction of "scores.*" to "internal alone", went to VEIL-20 and the reader. FOR THE OWNER'S LIST, the
+  residual in exact words: on 29 of 86 towns with a hidden criminal house a visitor who recomputes the prosperity
+  band can tell that something criminal and strong is hidden; not which house, how many, or its name.
