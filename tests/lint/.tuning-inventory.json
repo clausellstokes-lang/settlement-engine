@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "99ff3c9cce37bf6a5370c975520c2684553ad743",
-  "measuredBy": "FORTUNE-2 U3 builder",
+  "measuredAtSha": "6279d04335ee44321d98a1f18f46c3c9d64a67b1",
+  "measuredBy": "FORTUNE-2 (U2+U3 merge)",
   "date": "2026-11-20",
-  "note": "FORTUNE-1 U3 (FS2): src/generators/factionDynamics.js :: computePublicLegitimacy reads FORTUNE_LAW_TUNING.standing under the fortune law (version 2, dark), so the DRAFT table gains a dependent; no value moved, no bare decimal added",
+  "note": "re-taken by the integrator at the merged tree of U2 and U3: FORTUNE_LAW_TUNING gains its dependents prosperity.js, factionDynamics.js, rulingStructure.js; no value moved; the stale measuredAtSha acf2c2180 (U1 builder pre-amend) replaced on the chair ruling of 13:17",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1499,10 +1499,12 @@
       },
       "dependents": [
         "src/domain/density/densityCreateBoundary.js",
+        "src/generators/economy/prosperity.js",
         "src/generators/factionDynamics.js",
         "src/generators/power/rulingStructure.js"
       ],
       "namedDependents": [
+        "src/generators/economy/prosperity.js",
         "src/generators/factionDynamics.js"
       ]
     },
