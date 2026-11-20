@@ -155,3 +155,24 @@ the renamed-house and reach counts (twin). PLAUSIBLE: the server's equality on t
 Last line: commits dbff7eeb3 (units 1-2 cure: galleryRosterChoices.js, 212, its rollback, galleryRosterChoices.pglite.test.js,
 run outputs), c4e2b1ab2 (units 2-5 measures: out/v25/r3c5/measure/*, unit2-*, unit3-*, unit45-counts.txt, vr27-revokes.txt), and
 101fae14d (WIP: this file and the first GREEN outputs) and the final hand-back commit (this file, the guard and cost outputs); 212 sha256 70c6eb4582b4a9282d7ec1221c4214ae4143e514ad208f3e838eaa301220a124.
+
+## ADDENDUM — THE ID GAP (the chair's ruling of 14:21 UTC, relayed from the lane owner's read of dbff7eeb3)
+- THE GAP, TOWARD SENDING (CONFIRMED by red): both engines matched a person's pre-sweep goal and memberships by id only
+  where the id was a STRING (twin `typeof o.id === 'string'`; 212 `jsonb_typeof(n -> 'id') = 'string'`), and so did the
+  husk arm's `husksOf`. A person with a number id or no id kept a swept goal or membership as a husk.
+- RED, COMMITTED (dc6227ead; `ids-red.txt`, 2 failed of 23): plant `HAND_IDS` ("Tollhaven"). Its hidden house "Thieves'
+  guild (powerful)" folds bare to the guild's name, as on metropolis-7. Two people, one with id 41 and one with no id, each
+  hold a goal aimed at and naming the guild and a membership of it. Faults: 24 in the new arm (both people, goal and
+  membership, gallery, import and twin, both shapes, Reveal DM on) and 24 in the husk arm, which now matches people by id as
+  text (`idKey`).
+- THE CURE (both engines): a person is matched by its id AS TEXT for any scalar id (twin `idKeyOf`: a non-empty string
+  itself, a finite number or a boolean by String(); 212: `->>` of a string, number or boolean id, written inline, so no new
+  helper and no new revoke). A person with NO id (the empty string included) is judged against EVERY person of `pub`: its
+  goal leaves where a naming pre-sweep goal holds it (`@>` / `heldBy`); a membership leaves where a naming pre-sweep
+  membership of any person holds it. This fails toward withholding: a no-id person's remnant held by another person's naming
+  row also leaves.
+- GREEN: born test 23 of 23 (`ids-green-born.txt`: 12 people-reads judged; husk arm: 264 documents, 174,407 objects, no
+  structured husk outside the key level); galleryServerVeil + hand rows 43 of 43; eslint 0. 212 sha256 is now
+  `6260803d1c4dddc13831f0e72c7e3ee0c88e4853e74c56e1c384b4251efb0218`; its rollback and 211 are unchanged (`ids-sha256.txt`).
+- NOT RE-RUN AFTER THIS CURE: the six guards, the harnesses, the twin batch, the acceptance run and the cost law. They were
+  green at dbff7eeb3 (above). The change touches only the people branch of the copy pass.

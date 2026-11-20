@@ -2399,16 +2399,20 @@ begin
              -- (R3-CURE-4, unit 1: the goal leaves WHOLE where it names a withheld power now, or where the same person's goal
              -- in `pub` (by the person's id, a string) named one before the sweep stripped its sentence and its target id)
              - (case when jsonb_typeof(n -> 'goal') = 'object' and (public._gallery_veil_copy_names('goal', n -> 'goal', wn_ids, hits)
-                   or (jsonb_typeof(n -> 'id') = 'string' and exists (select 1 from jsonb_array_elements(case when jsonb_typeof(p -> 'npcs') = 'array' then p -> 'npcs' else '[]' end) pq
-                                                                  where jsonb_typeof(pq) = 'object' and pq -> 'id' = n -> 'id' and public._gallery_veil_copy_names('goal', pq -> 'goal', wn_ids, hits))))
+                   -- (R3-CURE-5, the chair 14:21: A GAP TOWARD SENDING: the person by its id AS TEXT for any scalar id, `->>`;
+                   -- a person with no id, the empty string included, against every person of `pub`, where a naming goal holds it)
+                   or exists (select 1 from jsonb_array_elements(case when jsonb_typeof(p -> 'npcs') = 'array' then p -> 'npcs' else '[]' end) pq
+                               where jsonb_typeof(pq) = 'object' and public._gallery_veil_copy_names('goal', pq -> 'goal', wn_ids, hits)
+                                 and case when coalesce(case when jsonb_typeof(n -> 'id') in ('string', 'number', 'boolean') then n ->> 'id' end, '') <> '' then coalesce(case when jsonb_typeof(pq -> 'id') in ('string', 'number', 'boolean') then pq ->> 'id' end, '') = coalesce(case when jsonb_typeof(n -> 'id') in ('string', 'number', 'boolean') then n ->> 'id' end, '')
+                                          else (pq -> 'goal') @> (n -> 'goal') end))
                 then array['goal'] else '{}'::text[] end))
           || case when jsonb_typeof(n -> 'memberships') = 'array' then jsonb_build_object('memberships', (select coalesce(jsonb_agg(m order by mo), '[]')
                from jsonb_array_elements(n -> 'memberships') with ordinality y(m, mo)
               where not (public._gallery_veil_copy_names('member', m, wn_ids, hits)
-                         or (jsonb_typeof(m) = 'object' and jsonb_typeof(n -> 'id') = 'string'
+                         or (jsonb_typeof(m) = 'object'
                              and exists (select 1 from jsonb_array_elements(case when jsonb_typeof(p -> 'npcs') = 'array' then p -> 'npcs' else '[]' end) pq,
                                                        jsonb_array_elements(case when jsonb_typeof(pq -> 'memberships') = 'array' then pq -> 'memberships' else '[]' end) z
-                                          where jsonb_typeof(pq) = 'object' and pq -> 'id' = n -> 'id' and z @> m and public._gallery_veil_copy_names('member', z, wn_ids, hits)))))) else '{}'::jsonb end
+                                          where jsonb_typeof(pq) = 'object' and (coalesce(case when jsonb_typeof(n -> 'id') in ('string', 'number', 'boolean') then n ->> 'id' end, '') = '' or coalesce(case when jsonb_typeof(pq -> 'id') in ('string', 'number', 'boolean') then pq ->> 'id' end, '') = coalesce(case when jsonb_typeof(n -> 'id') in ('string', 'number', 'boolean') then n ->> 'id' end, '')) and z @> m and public._gallery_veil_copy_names('member', z, wn_ids, hits)))))) else '{}'::jsonb end
         end order by o), '[]') from jsonb_array_elements(s -> 'npcs') with ordinality x(n, o)));
     end if;
     -- R3-CURE-2 (found by the fold: "faction.thieves_guild" under Reveal DM): a simulation-trace entry a top-level string of

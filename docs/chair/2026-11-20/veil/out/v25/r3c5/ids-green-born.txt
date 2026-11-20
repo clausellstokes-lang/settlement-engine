@@ -1,0 +1,14 @@
+[gate-tail] start:  14:35:55 up  3:23,  0 user,  load average: 1.26, 1.10, 1.03 · cores: 4
+
+ RUN  v4.1.8 /home/user/wt/r3c4
+
+
+ Test Files  1 passed (1)
+      Tests  23 passed (23)
+   Start at  14:35:56
+   Duration  593.59s (transform 3.86s, setup 47ms, import 164ms, tests 593.26s, environment 0ms)
+
+[gate-tail] end:  14:45:49 up  3:33,  0 user,  load average: 2.12, 2.00, 1.57
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/935e9849-d0bd-5207-a89c-bbccbd16db44/scratchpad/gate-tail.13593.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)
+EXIT 0

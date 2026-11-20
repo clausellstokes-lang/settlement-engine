@@ -341,11 +341,16 @@ function withholdPowerCopies(s, pub, ps) {
       if (!isRec(n)) return n;
       const o = { ...n };
       for (const k of NPC_AFFILIATION_KEYS) if (typeof o[k] === 'string' && named(o[k])) delete o[k];
-      // the same person before the sweep (by its id, a string): its goal and its memberships as the projection held them
-      const before = typeof o.id === 'string' ? objectsOf(pub.npcs).filter(q => q.id === o.id) : [];
-      if (isRec(o.goal) && (goalNames(o.goal) || before.some(q => goalNames(q.goal)))) delete o.goal;
+      // the same person before the sweep: its goal and its memberships as the projection held them. R3-CURE-5 (the chair,
+      // 14:21 UTC: A GAP TOWARD SENDING, the id was matched only where it was a string): the person by its id AS TEXT for any
+      // scalar id (idKeyOf); a person with NO id is judged against EVERY person of `pub`: its goal or a membership leaves where
+      // a naming pre-sweep one holds it (heldBy, 212's `@>`)
+      const key = idKeyOf(o.id);
+      const before = key !== '' ? objectsOf(pub.npcs).filter(q => idKeyOf(q.id) === key) : [];
+      const anyone = key === '' ? objectsOf(pub.npcs) : [];
+      if (isRec(o.goal) && (goalNames(o.goal) || before.some(q => goalNames(q.goal)) || anyone.some(q => goalNames(q.goal) && heldBy(q.goal, o.goal)))) delete o.goal;
       if (Array.isArray(o.memberships)) {
-        const m0 = before.flatMap(q => objectsOf(q.memberships));
+        const m0 = (key !== '' ? before : anyone).flatMap(q => objectsOf(q.memberships));
         o.memberships = o.memberships.filter(m => !(memberNames(m) || husk(m0, memberNames, m)));
       }
       return o;
@@ -366,6 +371,12 @@ function heldBy(a, b) {
   if (isRec(a) && isRec(b)) return Object.keys(b).every(k => Object.prototype.hasOwnProperty.call(a, k) && heldBy(a[k], b[k]));
   if (Array.isArray(a) && Array.isArray(b)) return b.every(y => a.some(x => heldBy(x, y)));
   return !isRec(a) && !Array.isArray(a) && !isRec(b) && !Array.isArray(b) && a === b;
+}
+
+/** R3-CURE-5: a person's id AS TEXT: a non-empty string as itself, a finite number or a boolean by its String() (212: the
+ * jsonb scalar's text, `->>`); anything else, the empty string included, '' (no id). @param {unknown} v @returns {string} */
+function idKeyOf(v) {
+  return typeof v === 'string' ? v : (typeof v === 'number' && Number.isFinite(v)) || typeof v === 'boolean' ? String(v) : '';
 }
 
 /** An id as a string: a string as itself, a finite number by its String() (212: the JSON number's text). @param {unknown} v @returns {string} */
