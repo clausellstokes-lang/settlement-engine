@@ -2052,6 +2052,63 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   PAGE-9 (session_019yED1Qk8mk5vDPmqDbLpGw, beside PAGE-4 at 369,770); PEOPLE-2
   (session_019yED1QfbBhtLaDuWfGxc42, beside PEOPLE-1 at 320,304 and burning 40,000 a quarter hour).
 
+### Rulings of 17:23 to 17:30 UTC (seventeen notifications read at 17:23; each ruling vetoable by the owner)
+
+- **THE IMPORT DOOR, CORRECTED (the chair's "ruling 55" of 17:00 is the veil lane's RULING 56; what the chair told
+  the owner at 17:01 was OVERSTATED and was corrected to him at 17:24).** VEIL-27's helper measured on the lane's tip
+  (43d4c309b; `out/v27/imp/`): 212 RESTATES `import_gallery_dossier`; its `data` is byte-equal to the gallery read on
+  every share, both chains, Reveal off and on; on a MARKED share the hidden house reaches nothing. TRAD-4's red was an
+  UNMARKED share compared with the party link: "an unmarked share read as a listing is served exactly" is 211's
+  DECIDED design, and IT STANDS (not re-opened). So nothing a publisher marked hidden reached an importer under 212.
+  STILL TRUE, INFERRED AND NOT SEEN: the live site has no 212, so an import there can hand over what a publisher did
+  mark hidden: the known weakness 212 cures. WHAT THE EXERCISE FOUND THAT IS NEW: THE REGISTRY COVERS PAYLOAD PATHS,
+  NOT DOORS, and these doors serve stored data WITHOUT the veil: `get_unlisted_map` (the world snapshot as stored, to
+  anyone with the link); `get_gallery_map`'s world snapshot, which `import_gallery_map` reaches; the three tile
+  values of `_gallery_public_tile_rows`; plausibly the client's world export 'player' file. APPROVED:
+  `briefs/IMPORT-DOOR-BRIEF.md`: a door-census walker, red first; the cures; after R3-CURE-8, before E; its own line
+  to the security reader. At the doors' merge a frozen share must not import the live name and tier, and both the
+  doors' cure and 212's weight strip are kept, as a test. Ruling 52's owed cost item is MET (587 ms against 797).
+  TRAD-4: its hand-back's section 7 corrected; the WIP test 14f16760b is not merged as a red. `prompts/VEIL-28.txt`
+  and `prompts/REVIEW-VEIL-14.txt` re-written to the measured truth.
+- **THE CONTEST HAS BEEN MEASURED LIT ("MEASURE-LIT e2a9a31cf", SEAT-5's last unit; 17,220 births, 0 errors; the
+  calibration reproduces the chair's joint reading exactly).** Calm places whose seat reads contested, % thorp to
+  metropolis: TODAY: default pool 0/3.7/75.5/10.3/0/0, presets pool 0/4.5/20/4.4/0/0, the chair's 600
+  0/7.6/70/8.6/0/0. THE SEAT LAW ALONE (under today's standing): default 0/2.8/68.6/1.9/0/0; presets
+  0/4.5/12.4/1.8/0/0. THE SEAT LAW AND FORTUNE: default 0/0/2/0/4.8/0; presets 0/0/0/2.7/4.8/4.1; the chair's 600
+  0/1.5/17.1/8.6/16.4/10.4. LIGHTING THE CONTEST (L1) moves no calm-contested count in any pool; the PROPOSED FIGURES
+  (LP) add a handful (presets: villages 12.4 to 14.3, towns 1.8 to 3.5 under today's standing; with fortune villages 0
+  to 1.9, towns 2.7 to 3.5, cities 4.8 to 5.6; one city in the chair's 600). Where LP bites is the protection of
+  crisis-born incumbents in large places (metropolis with both laws: default 46.5 to 41.9%; the chair's 600 48.5 to
+  39.4%). OPEN, ASKED OF SEAT-6 BEFORE ANY OF IT GOES TO THE OWNER: why the default pool and the chair's 600 differ
+  (calm villages contested with both laws: 2 of 102 against 12 of 70), and which pool is what a visitor gets who
+  touches no setting.
+- **U5 (the transfer unit) RETURNED: `lane/seat-2026-11-20-u5-wip` at 9a05215bc, UNREAD; forwarded to SEAT-6.** Its
+  builder names one red (`statusUnionTotality.walker` A3, from cure (1)'s class word 'retired') and that no caller is
+  wired (`applyWorldPulse.js` calls `transferRulingPower`). The chair's word in advance: the walker goes green BY
+  DECLARATION; no merge until the callers are answered and the fail-closed arm fires 0 after every transfer.
+- **THE STATE SENTENCES (PROSE-1: PROSE-LINES-1 6a33026e8, 15 pools, 56 lines; PROSE-LINES-2 63665b37a, 20 pools, 81
+  lines): ALL 137 READ; APPROVED TO BUILD with six changes.** (1) NO NEW LINE SAYS "THE TOWN" (a thorp is not one,
+  nor a metropolis); existing lines untouched, and counted. (2) DM-ONLY for every new line of a pool whose state is
+  a fact about crime (minor shadow activity; the black market; duty evasion; nothing organised): 18 lines. (3) THE
+  RECENT CONFLICT'S state lines must not swell a calm place's small quarrel into "the trouble": five reworded to
+  "the quarrel". (4) Ten more rewordings (a state line never denies the seat's own line: "no court sits", not
+  "nobody decides a quarrel"). (5) One line to check against its block's state. (6) A QUESTION ABOVE THE LANE: the
+  Outlook verdict's pool draws at 108 of 300 places, "the coherence check found critical contradictions, or the
+  battery judgment failed": which, and the three commonest. Also ruled: the bar for PROSE (over all places, by
+  reach); DS-POW-2 #1 ("who won it") takes the resolved dispute as a need; the faith teaser's licence is not widened
+  unread; LINES-3 and LINES-4 (the remaining pools of 120 over the bar) are to be drafted.
+- **SAME-1's HIDEABLE WALKER STOPPED AT ITS MEASURE, RIGHTLY. RULED:** (A) rule 1 binds NEW wordings (not on the
+  line at 43ab0f5eb): red; the fourteen EXISTING state wordings that need a crime fact are a committed shrink-only
+  list and were sent to the veil lane as a question for its fifth stage. (B) `corpusPools` (861 pools, 3,054
+  wordings) does not reach the seats' NEW pools (DEPTH-2's, PAGE-6's, PAGE-7's, GOALS-3's): THE LANES REGISTER (the
+  exact row SAME-1 names; a pool the layers walker cannot see is already a gap in "registered"), a hand list in a
+  new file bridges until they have, and a TOTALITY ARM makes a later pool unable to escape. Rule 2's list today: 409
+  house readings across 372 wordings in 219 pools, committed as data for the security reader.
+- **SMALL ANSWERS.** FRAME-7's two questions (the order is P4a done, then P4b; F3 and F4 are in FRAME-6's hand-back
+  at 6544bc887). FRAME-6's LINT1: if reading the right key in `creditorOf` changes the creditor line, the builder
+  stops and both sentences come to the chair. PEOPLE-1: the power-of-two law is not extended; no wording is dropped.
+  TRAD-4's count by the chair's read is 353,332 (it reckoned 390,000): no successor now.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -5072,3 +5129,8 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   principled-and-venal count is NOT cured (1,014 to 1,019); three figures the chair gave him from the census were
   overstated by the tool's slot fault (the Outlook verdict is on 50 / 70 / 60% of all thorps / hamlets / towns, not
   100%; the no-wards line on 24 to 26%; the stakes' reason on 14 to 30% of all places).
+- 17:30 UTC · SEVENTEEN NOTIFICATIONS READ AT 17:23 AND RULED BY 17:30 (section 2, "Rulings of 17:23 to 17:30"). A CORRECTION TO
+  THE OWNER, MADE AT 17:24: the chair's import warning of 17:01 was overstated (with 212 an import equals the gallery
+  read; the red was an unmarked share). MEASURE-LIT IS IN (the contest measured lit; one question open on the two
+  pools). U5 returned and forwarded to SEAT-6. All 137 state sentences read. `prompts/VEIL-28.txt` and
+  `prompts/REVIEW-VEIL-14.txt` corrected. NET 16 fires at 17:35.
