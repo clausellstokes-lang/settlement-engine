@@ -956,6 +956,29 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   (generic sides named from the town's powers) IS HELD until FRAME-5 says what its lane reads from a tension's
   sides and whether more sides that are powers would change which calm towns it frames (the 58 of 330).
 
+- **A TENSION'S SIDES ARE NAMED AT RENDER, NEVER IN THE STORED RECORD (2026-11-20, 11:58 UTC; on FRAME-5's probe;
+  this REPLACES the stored S7 and S8 of the 11:36 ruling):** the session sheet's lane finds each side's archetype
+  and face from the STORED words (`troubleCast.js :: troubleOfWeight` compares by `sideKey`; `templateLabelOf(type,
+  i, raw)`, then `GENERATOR_REPLACED_SIDES` for the generator's own fixed slots only): on its 330-town pool a
+  rename of 147 sides in 128 towns left the framed count at 58 but changed 27 faces and left 21 of 174 framed
+  sides with NO archetype and NO face. SO: `tensions[].factions` stays the template's words for every reader, pin
+  and rename path. PAGE-2 writes DATA ONLY (every one of the 87 side slots: the party it means, the house it
+  presumes, the wording where the town lacks that house; a totality test; read row by row by the chair). PAGE-1
+  builds ONE display reader and every surface that prints a side (the power's name where the record in hand
+  holds the party meant; the no-house wording where the town lacks the house; else the template's words), which
+  reads only the document it is given (a served document that lacks a withheld power falls to the template's
+  words), with a guard that no surface prints a side except through it. AT THE JOIN the session sheet's three
+  side labels call the same reader. S6 and L1 (a tension's description) are unchanged.
+- **K's FIFTH CLASS (11:58 UTC):** 12 goals in 300 towns move on cards neither corrected nor tied to a corrected
+  card: the cause is the goals deal's TOWN HELD SET (`goals.js :: cellCandidates` refuses a held text BEFORE the
+  draw, so a later card's candidate list changes length): accepted as a class of K's trial, reported apart with
+  its two changes of kind and target; not cured on PAGE-2's lane; GOALS-2 asked whether the rotation unit already
+  replaces that filter; the joined tree is re-measured by the chair.
+- **CF12 AS A FOURTH, WEAKEST STRAIN (W4, 'hall-captured' with a crime wave; FRAME-5's brief at abeadbf23): AGREED:**
+  the frame's own gate and ladder carry it; no other town's opening moves (measured first by its builder); the
+  owner's audience only, with the gate named and tested; both counts said (58 under today's rule; 58 plus those of
+  the 5 that W4 opens).
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -3398,3 +3421,11 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   INFLUENCE, NOT A CARD'S (the chair had told the owner the play simulation reads it: corrected to him); 2,754 of
   3,357 moved ties touch no corrected card and move in prose only, through the town's rotation counter. VEIL-26's
   first message: read in; R3-CURE-4's branch is not on origin until VEIL-25's builder returns.
+- 11:57 UTC · GOALS-2 SEATED BESIDE GOALS-1 (session_019yED1NJXMMt7PyqWYP96sX; on `lane/goals-1-2026-11-20` at b0dade238;
+  outcome `lane/goals-2-2026-11-20`). SEAT-4 NOT SEATED YET: `lane/seat-3-2026-11-20` is not on origin (SEAT-3's
+  `tests/lint` still running): SEAT-3 told to push with its hand-back and send "SEAT-3 PUSHED <commit>"; the
+  chair seats SEAT-4 on that commit. SAFETY NET 10 armed for about 12:37.
+- 11:59 UTC · THREE MESSAGES READ AT 11:57, ANSWERED AT 11:58: FRAME-5's line merge green and pushed (3497f68a7; `tests/lint`
+  whole 3,270 of 3,271: `tuningRegister`'s two named rows); CF12's brief (abeadbf23); C1's builder on `frame5-c1`;
+  ITS ANSWER ON THE SIDES (section 2): the stored sides stay; S7 and S8 become display. PAGE-2's twelve goals
+  explained (section 2). GOALS-2 seated and asked about the held-set filter.
