@@ -1,0 +1,176 @@
+FRAME-5 · CF12 — the six calm towns whose record holds a hall at captureState corrupted AND a crime_wave: the OWNER's Open Tonight sheet, before (base 8991b83b2) and after (CF12), as plain text.
+Every other reader (no options, {}, 'player', 'gallery'; the gallery read and the party link) gets the BEFORE sheet, byte for byte.
+Format: each side is 'words: who — why. Wants…'; each person to voice is 'name · role [why: side] — reason — line'; each hook ends with its source in parentheses.
+
+=== frame-calm-town-20 (town)
+--- BEFORE (today's owner sheet)
+Opening: Khurelbaatar Geniges has taken a new apprentice, and Jalayir Merkit has heard the apprentice is being taught things the chandler never was.
+People to voice:
+  - Abu Said Mangghud · Mayor [seat] — Covered up a cave-in that killed three men by sealing the gallery and reporting them as run off.
+  - Purevdulam Qonggirad · the dean [cleric] — Wants to settle one quarrel inside the Religious Authorities before Regünjid Jadaran can settle it and take the credit.
+Hooks:
+  * They have promised the same order to two buyers, and both are due to collect on the same morning. (Abu Said Mangghud)
+  * They've noticed the same group of faces at multiple locations where incidents occurred. No one else has. (Khurelbaatar Geniges)
+  * The iron carts are three weeks late and the carters will not say why. Broken tools stay broken, and work waits. (Strategic Resource)
+--- AFTER (CF12)
+Opening: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands.
+The trouble: Crime wave
+Its three sides:
+  - The Guard: Barlas Arlat · the innkeeper — Because the trouble touches his trade. Wants to find a patron among those who lead the Merchant Guilds, and make themselves useful to them.
+  - Those who would take the law into their own hands: Alaqai Ba'arin · the master butcher — Because her own trouble is part of it. Wants to learn the secret of someone they envy.
+  - The criminal network: (no one named) — Not named here; Hulegu Khwarezm keeps the taverns, where strangers lodge, and would know of them.
+  The trouble's own hooks:
+    * The crime wave is coordinated. Someone is directing it to create a pretext.
+    * A guard captain is on the payroll of the criminal network.
+    * Those who would take the law into their own hands have picked out a culprit on bad information.
+People to voice:
+  - Barlas Arlat · the innkeeper [side: The Guard] — because the trouble touches his trade — Wants to find a patron among those who lead the Merchant Guilds, and make themselves useful to them.
+  - Alaqai Ba'arin · the master butcher [side: Those who would take the law into their own hands] — because her own trouble is part of it — Wants to learn the secret of someone they envy.
+Hooks:
+  * Someone keeps paying off their small debts around the place before they can, and has left no name. (Alaqai Ba'arin)
+  * They have seen the same unmarked cart pass their door three nights running, and have not wondered why. (Barlas Arlat)
+  * They have promised the same order to two buyers, and both are due to collect on the same morning. (Abu Said Mangghud)
+--- the tip's weight: {"strain":"W4","grade":"hall-captured"} at #0
+
+=== frame-calm-town-80 (town)
+--- BEFORE (today's owner sheet)
+Opening: The Town Mayor has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet.
+People to voice:
+  - Pacuvius Celer · Mayor [seat] — Wants to ask Moderatus Scaeva for a favour that settles a share of the debt.
+  - Varro Strabo · the dean [cleric] — Wants to learn a new skill from someone who knows it better.
+Hooks:
+  * They received orders from above that contradict what they know to be right. They haven't acted on either yet. (Titia Cato)
+  * A shipment they weren't expecting arrived and is now in their warehouse. They don't know who sent it or what to do. (Pacuvius Celer)
+  * The promise was made in writing, and the paper is now in the hands of someone who wants a price for it. (Town Mayor vs Merchant Guilds)
+--- AFTER (CF12)
+Opening: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands.
+The trouble: Crime wave
+Its three sides:
+  - The Guard: Titia Cato · the watch captain — Because she commands the Guard. Wants to close one of the routes that money takes into the front businesses.
+  - Those who would take the law into their own hands: Accia Cicero · the tavern keeper — Because the trouble touches her trade. Wants to learn who controls the supply of grain, and get on good terms with them.
+  - The criminal network: (no one named) — Not named here; Xenia Publicola keeps the inn, where strangers lodge, and would know of them.
+  The trouble's own hooks:
+    * The crime wave is coordinated. Someone is directing it to create a pretext.
+    * A guard captain is on the payroll of the criminal network.
+    * Those who would take the law into their own hands have picked out a culprit on bad information.
+People to voice:
+  - Titia Cato · the watch captain [side: The Guard] — because she commands the Guard — Wants to close one of the routes that money takes into the front businesses.
+  - Accia Cicero · the tavern keeper [side: Those who would take the law into their own hands] — because the trouble touches her trade — Wants to learn who controls the supply of grain, and get on good terms with them.
+Hooks:
+  * They received orders from above that contradict what they know to be right. They haven't acted on either yet. (Titia Cato)
+  * They have been invited to the wedding of someone who once ruined their family, and refusing would be noticed. (Accia Cicero)
+  * A shipment they weren't expecting arrived and is now in their warehouse. They don't know who sent it or what to do. (Pacuvius Celer)
+--- the tip's weight: {"strain":"W4","grade":"hall-captured"} at #0
+
+=== frame-calm-city-12 (city)
+--- BEFORE (today's owner sheet)
+Opening: Corvus Cordus has recently broken an unwritten rule of the contest. Sabina Nasica is deciding what that permits.
+People to voice:
+  - Vibia Paullus · Master of the Guilds [seat] — Wants to put away more coin this season than last.
+  - Statius Sabinus · the dean [cleric] — Wants to keep the old lessons between them and Moderatus Corvinus private.
+Hooks:
+  * A master craftsman will pay well to have his best apprentice struck from the list. (Merchant Guild Council vs Craft Guilds)
+  * They've been approached by someone who knows things about their research that were never made public. (Seianus Caesar)
+  * A report they wrote years ago blamed the wrong person for a death, and the right one has just come back. (Iulia Paullus)
+--- AFTER (CF12)
+Opening: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands.
+The trouble: Crime wave
+Its three sides:
+  - The Guard: Iulia Pulvillus · the stable master — Because the trouble touches her trade. Wants to get the stable district excused from one tax or levy this season.
+  - Those who would take the law into their own hands: Vibia Paullus · Master of the Guilds — Because she and Grata Tubertus are partners in something neither will name. Wants to put away more coin this season than last.
+  - The Thieves' Guild: Vita Salinator · the gang boss — Because she heads the Thieves' Guild, which works outside the law. Wants to show Fronto Gratus how far they have both come since the lessons ended.
+  The trouble's own hooks:
+    * The crime wave is coordinated. Someone is directing it to create a pretext.
+    * A guard captain is on the payroll of the criminal network.
+    * Those who would take the law into their own hands have picked out a culprit on bad information.
+People to voice:
+  - Iulia Pulvillus · the stable master [side: The Guard] — because the trouble touches her trade — Wants to get the stable district excused from one tax or levy this season.
+  - Vibia Paullus · Master of the Guilds [side: Those who would take the law into their own hands] — because she and Grata Tubertus are partners in something neither will name — Wants to put away more coin this season than last.
+  - Vita Salinator · the gang boss [side: The Thieves' Guild] — because she heads the Thieves' Guild, which works outside the law — Wants to show Fronto Gratus how far they have both come since the lessons ended.
+Hooks:
+  * Their master craftsman is talking to a rival. They haven't confronted them. They're not sure what they'd do. (Vibia Paullus)
+  * A family they once ruined has a son who has just come of age, and he has started asking where they sleep. (Vita Salinator)
+  * They have promised the same order to two buyers, and both are due to collect on the same morning. (Iulia Pulvillus)
+--- the tip's weight: {"strain":"W4","grade":"hall-captured"} at #0
+
+=== frame-calm-city-49 (city)
+--- BEFORE (today's owner sheet)
+Opening: The Merchant oligarchy has been debating market levies for three months. The merchants have argued against every one of them, and nothing has been settled yet.
+People to voice:
+  - Samira ibn Jubayr · First Magnate [seat] — Wants to find out what it would cost to buy their way free of the Thieves' Guild.
+  - Imad al-Hassan · the dean [cleric] — Wants to gain ground for the Religious Authorities at the expense of the Merchant Guilds before the season is out.
+Hooks:
+  * The ward on their vaults was not broken but bypassed, which only someone who knew how it was made could do. (Hasan al-Wahabi)
+  * They have promised the same order to two buyers, and both are due to collect on the same morning. (Samira ibn Jubayr)
+  * Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow. (Lujain al-Omani)
+--- AFTER (CF12)
+Opening: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands.
+The trouble: Crime wave
+Its three sides:
+  - The Guard: Lujain al-Omani · the garrison commander — Because she commands the Guard. Wants to prove what Maalik al-Tabari answers to.
+  - Those who would take the law into their own hands: Samira ibn Jubayr · First Magnate — Because she and Abdullah al-Andalusi are partners in something neither will name. Wants to find out what it would cost to buy their way free of the Thieves' Guild.
+  - The Thieves' Guild: Saida ibn Khaldun · the gang boss — Because she heads the Thieves' Guild, which works outside the law. Wants to win over one of Abdullah al-Andalusi's friends.
+  The trouble's own hooks:
+    * The crime wave is coordinated. Someone is directing it to create a pretext.
+    * A guard captain is on the payroll of the criminal network.
+    * Those who would take the law into their own hands have picked out a culprit on bad information.
+People to voice:
+  - Lujain al-Omani · the garrison commander [side: The Guard] — because she commands the Guard — Wants to prove what Maalik al-Tabari answers to.
+  - Samira ibn Jubayr · First Magnate [side: Those who would take the law into their own hands] — because she and Abdullah al-Andalusi are partners in something neither will name — Wants to find out what it would cost to buy their way free of the Thieves' Guild.
+  - Saida ibn Khaldun · the gang boss [side: The Thieves' Guild] — because she heads the Thieves' Guild, which works outside the law — Wants to win over one of Abdullah al-Andalusi's friends.
+Hooks:
+  * They have promised the same order to two buyers, and both are due to collect on the same morning. (Samira ibn Jubayr)
+  * Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow. (Lujain al-Omani)
+  * The guard captain has a file. They know because someone who works for the guard captain also works for them. (Saida ibn Khaldun)
+--- the tip's weight: {"strain":"W4","grade":"hall-captured"} at #0
+
+=== frame-calm-metropolis-51 (metropolis)
+--- BEFORE (today's owner sheet)
+Opening: Sevaste Kyriadotes has one favour left to call in, and is saving it. Euphrosyne Melissenos knows, and is watching for it.
+People to voice:
+  - Alexandros Hexamilites · the governor [seat] — Wants to get the better side of every bargain struck this season.
+  - Manuela Zaoutzes · the dean [cleric] — Wants to ask Constantinos Phokas for advice on one hard decision this season.
+Hooks:
+  * Their most trusted advisor hasn't been seen in four days. The official story changes each time it's told. (Alexandros Hexamilites)
+  * A recruit they turned away has since joined a different outfit. The different outfit is now paying them to monitor this one. (Sevaste Kyriadotes)
+  * They received orders from above that contradict what they know to be right. They haven't acted on either yet. (Vranas Kontostephanos)
+--- AFTER (CF12)
+Opening: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands.
+The trouble: Crime wave
+Its three sides:
+  - The Guard: Phokas Nestongos · the coaching-inn keeper — Because the trouble touches his trade. Wants to keep Penelope Chortasmenos from calling in what is owed this season.
+  - Those who would take the law into their own hands: Angelos Niketas · the master furrier — Because his own trouble is part of it. Wants to bring the Merchant Guilds a piece of news before anyone else does.
+  - The Thieves' Guild: Gregorios Zoe · the network's head — Because he heads the Thieves' Guild, which works outside the law. Wants to keep the accounts of the smuggling network balanced, and show them to anyone who asks.
+  The trouble's own hooks:
+    * The crime wave is coordinated. Someone is directing it to create a pretext.
+    * A guard captain is on the payroll of the criminal network.
+    * Those who would take the law into their own hands have picked out a culprit on bad information.
+People to voice:
+  - Phokas Nestongos · the coaching-inn keeper [side: The Guard] — because the trouble touches his trade — Wants to keep Penelope Chortasmenos from calling in what is owed this season.
+  - Angelos Niketas · the master furrier [side: Those who would take the law into their own hands] — because his own trouble is part of it — Wants to bring the Merchant Guilds a piece of news before anyone else does.
+  - Gregorios Zoe · the network's head [side: The Thieves' Guild] — because he heads the Thieves' Guild, which works outside the law — Wants to keep the accounts of the smuggling network balanced, and show them to anyone who asks.
+Hooks:
+  * The guard captain has a file. They know because someone who works for the guard captain also works for them. (Gregorios Zoe)
+  * They saw an accident that was no accident, and the person responsible knows they saw it. (Phokas Nestongos)
+  * A partner died owing them money, and the partner's heir says the debt was paid in a letter nobody can find. (Angelos Niketas)
+--- the tip's weight: {"strain":"W4","grade":"hall-captured"} at #0
+=== frame-calm-city-14 (city) — UNCHANGED, byte for byte (already opened by this same crime wave on W2, which outranks W4; all three of its sides are among its people to voice)
+--- BEFORE and AFTER (the owner's sheet, the same)
+Opening: Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands.
+The trouble: Crime wave
+Its three sides:
+  - The Guard: Rhiannon Byrne · the garrison commander — Because she commands the Guard. Wants to bring Emmet MacEwan of the front businesses in before the season is out.
+  - Those who would take the law into their own hands: Waitling Whelan · the house boss — Because he and Saoirse O'Meara are bound by something one holds over the other. Wants to keep the friendship with Ivor O'Leary quiet, where it does the most good.
+  - The Thieves' Guild: Niall Carey · the network's head — Because he heads the Thieves' Guild, which works outside the law. Wants to collect every coin they are owed, however small.
+  The trouble's own hooks:
+    * The crime wave is coordinated. Someone is directing it to create a pretext.
+    * A guard captain is on the payroll of the criminal network.
+    * Those who would take the law into their own hands have picked out a culprit on bad information.
+People to voice:
+  - Rhiannon Byrne · the garrison commander [side: The Guard] — because she commands the Guard — Wants to bring Emmet MacEwan of the front businesses in before the season is out.
+  - Waitling Whelan · the house boss [side: Those who would take the law into their own hands] — because he and Saoirse O'Meara are bound by something one holds over the other — Wants to keep the friendship with Ivor O'Leary quiet, where it does the most good.
+  - Niall Carey · the network's head [side: The Thieves' Guild] — because he heads the Thieves' Guild, which works outside the law — Wants to collect every coin they are owed, however small.
+Hooks:
+  * Three guards have gone missing in the same district on night patrol. The report filed says they deserted. (Rhiannon Byrne)
+  * A valuable item came through their network recently. Three different parties have asked about it quietly. (Niall Carey)
+  * They're protecting someone from something worse. The someone doesn't know and wouldn't thank them. (Waitling Whelan)

@@ -391,3 +391,119 @@ describe('CF3: the frame reaches no shared page', () => {
     expect(Object.keys(PDF_VARIANTS).sort()).toEqual(['campaign_state', 'canon_dossier', 'draft_brief', 'timeline_packet']);
   });
 });
+
+/**
+ * FRAME-5 · CF12 (the chair's CF11 amended, 2026-11-20): A HALL IN CRIMINAL HANDS WITH A LIVE CRIME WAVE (W4) DRAWS FOR
+ * THE OWNER ONLY. Capture is what the share veil hides (display/publicSafe.js deletes `captureState` from every power row
+ * of a public projection; the DM layer keeps it), so on every shared path the sheet is TODAY'S, byte for byte. The five
+ * calm towns of the 330-town pool that W4 frames (a power at `captureState` corrupted, a `crime_wave` among their
+ * tensions, no other trouble of weight; measured in docs/chair/2026-11-20/content/frame5/CF12-CAPTURED-HALL-RESULTS.md):
+ *   1. LIVENESS: the owner's own record opens on the crime wave (W4), and its sheet is not today's.
+ *   2. THE FIRST LOCK: on that same seeded record, no options, `{}`, `'player'` and `'gallery'` compose today's sheet.
+ *   3. THE SHARED READS (the gallery read, default and DM content shared; the party link): every reader, the owner
+ *      included, composes today's sheet; and where the veil has deleted `captureState` the record holds no W4 even with
+ *      its seed handed back (the SECOND lock, never the first).
+ *   4. ON THE PAGES: the gallery page (default, DM content shared) and the party link's page (Reveal DM off and on) open
+ *      today's sheet, with no sides and none of the owner's frame lines.
+ * TODAY is the base 8991b83b2: each digest below was written there by this block's own door (CF12_VEIL_PRINT=<file>), in
+ * an archive of that commit.
+ */
+describe('CF12: a hall in criminal hands with a live crime wave draws for the owner only', () => {
+  const W4_BORN = [['frame-calm-town-20', 'town'], ['frame-calm-town-80', 'town'], ['frame-calm-city-12', 'city'], ['frame-calm-city-49', 'city'], ['frame-calm-metropolis-51', 'metropolis']];
+  const SHARED_KEYS = ['gallery', 'galleryDmFull', 'partyLink'];
+  const STRANGER_READERS = [['no options', []], ['{}', [{}]], ["{ audience: 'player' }", [{ audience: TONIGHT_AUDIENCES.player }]], ["{ audience: 'gallery' }", [{ audience: TONIGHT_AUDIENCES.gallery }]]];
+  const EVERY_READER = [...STRANGER_READERS, ["{ audience: 'owner' }", [{ audience: TONIGHT_AUDIENCES.owner }]]];
+  /**
+   * The shared reads whose record keeps no `captureState` on any power row (measured at the base by the door). The gallery
+   * read with DM content shared keeps it (the DM layer), and its sheet is the seeded record's: there the first lock and the
+   * missing seed hold the frame back, as they hold back every strain's.
+   */
+  const VEILED = new Set(['gallery', 'partyLink']);
+  /** Today's sheets at the base, by town: the seeded record's, each shared read's, and each page's sheet text. */
+  const TODAY = Object.freeze({
+    'frame-calm-town-20': Object.freeze({ seeded: 'd0d5036ee3166d5d', gallery: '7d4e8243b449b935', galleryDmFull: 'd0d5036ee3166d5d', partyLink: '7d4e8243b449b935', pageGallery: 'a164d9fc3f7692fe', pageGalleryDm: '1984854d1c0e72dc', pagePartyLink: 'a164d9fc3f7692fe', pagePartyLinkDm: 'a164d9fc3f7692fe' }),
+    'frame-calm-town-80': Object.freeze({ seeded: '0784580bafc90b0f', gallery: '83bb1d9fe390e496', galleryDmFull: '0784580bafc90b0f', partyLink: '83bb1d9fe390e496', pageGallery: '126742f0d588b970', pageGalleryDm: '6beb6f5ffb912a4c', pagePartyLink: '126742f0d588b970', pagePartyLinkDm: '126742f0d588b970' }),
+    'frame-calm-city-12': Object.freeze({ seeded: 'fba3eba5d1cfe000', gallery: 'f90f8903b6c1ddda', galleryDmFull: 'fba3eba5d1cfe000', partyLink: 'f90f8903b6c1ddda', pageGallery: '7572dcb094c83e4e', pageGalleryDm: 'b1615ae330ca5887', pagePartyLink: '7572dcb094c83e4e', pagePartyLinkDm: '7572dcb094c83e4e' }),
+    'frame-calm-city-49': Object.freeze({ seeded: '3396a0085c6038b7', gallery: 'e8972ef18c6064ff', galleryDmFull: '3396a0085c6038b7', partyLink: 'e8972ef18c6064ff', pageGallery: '1b34b6727b04945f', pageGalleryDm: '8b345dd8cdb50e39', pagePartyLink: '1b34b6727b04945f', pagePartyLinkDm: '1b34b6727b04945f' }),
+    'frame-calm-metropolis-51': Object.freeze({ seeded: '26998fa42bb502f5', gallery: '2f1c225266d1827a', galleryDmFull: '26998fa42bb502f5', partyLink: '2f1c225266d1827a', pageGallery: '2ea68c783a42ff58', pageGalleryDm: '6c76aedfcedf2aa2', pagePartyLink: '2ea68c783a42ff58', pagePartyLinkDm: '2ea68c783a42ff58' }),
+  });
+  const print = process.env.CF12_VEIL_PRINT;
+  const keepsCapture = (rec) => (rec?.powerStructure?.factions || []).some((f) => f && Object.hasOwn(f, 'captureState'));
+
+  /** Open the sheet on a rendered page as a viewer does (the Overview's "Open Tonight"), as the B3 arm above does. */
+  const openSheetOn = async (element) => {
+    const view = render(element);
+    const open = await within(view.container).findByText(TONIGHT_COPY.open, {}, { timeout: 60000 });
+    fireEvent.click(open.closest('button') || open);
+    view.rerender(cloneElement(element));
+    await waitFor(() => expect(view.container.querySelector('[data-tonight-sheet]')).toBeTruthy(), { timeout: 60000 });
+    const sheet = view.container.querySelector('[data-tonight-sheet]');
+    const out = { page: view.container.textContent || '', sheet: sheet.textContent || '', sides: !!sheet.querySelector('[data-tonight-sides]') };
+    cleanup();
+    useStore.getState().userPrefs = {};
+    return out;
+  };
+
+  test(`${W4_BORN.length} born towns: the owner's sheet opens on the crime wave; every other reader, every shared read and every page is today's`, async () => {
+    const { troubleOfWeight, castTroubleFrame } = await import('../../src/domain/tension/troubleCast.js');
+    const towns = new Map();
+    for (const [seed, tier] of W4_BORN) {
+      const s = birth(seed, tier);
+      const reads = await sharedReadsOf(s);
+      const lines = frameLinesOf(composeTonightSheet(s, { audience: TONIGHT_AUDIENCES.owner }));
+      const pages = [
+        ['pageGallery', <PublicDossierView key="g" dossier={reads.gallery} />],
+        ['pageGalleryDm', <PublicDossierView key="d" dossier={reads.galleryDmFull} />],
+        ['pagePartyLink', <PartyLinkView key="p" dossier={reads.partyLink} auth={{ user: null }} onReport={() => {}} />],
+        ['pagePartyLinkDm', <PartyLinkView key="q" dossier={{ ...reads.partyLink, shareDm: true }} auth={{ user: null }} onReport={() => {}} />],
+      ];
+      const opened = {};
+      for (const [key, element] of pages) {
+        try { opened[key] = await openSheetOn(element); } catch (error) { cleanup(); useStore.getState().userPrefs = {}; opened[key] = { error }; }
+      }
+      towns.set(seed, { s, reads, lines, opened });
+    }
+    if (print) { // the measuring run, at the base (no W4 exists there): today's digests and which reads keep the field
+      for (const [seed, { s, reads, opened }] of towns) {
+        const row = { seeded: digest(composeTonightSheet(s)) };
+        for (const key of SHARED_KEYS) { row[key] = digest(composeTonightSheet(recordOf(key, reads[key]))); row[`${key}KeepsCapture`] = keepsCapture(recordOf(key, reads[key])); }
+        for (const [key, got] of Object.entries(opened)) row[key] = got.error ? `ERROR ${got.error}` : digest(got.sheet);
+        appendFileSync(print, `${JSON.stringify([seed, row])}\n`);
+      }
+      return;
+    }
+    const failures = collectSeedFailures([...towns.keys()], (seed) => {
+      const { s, reads, lines, opened } = towns.get(seed);
+      const today = TODAY[seed];
+      expect(today, `${seed}: today's digests are pinned`).toBeTruthy();
+      // 1. liveness: the owner's own record opens on the crime wave, on W4, and its sheet is not today's
+      expect(troubleOfWeight(s)?.strain, `${seed}: W4`).toEqual({ strain: 'W4', grade: 'hall-captured' });
+      const own = composeTonightSheet(s, { audience: TONIGHT_AUDIENCES.owner });
+      expect(own.frame?.type, `${seed}: the owner's sheet opens on the crime wave`).toBe('crime_wave');
+      expect(digest(own), `${seed}: the owner's sheet is not today's (else the equalities below prove nothing)`).not.toBe(today.seeded);
+      expect(lines.length, `${seed}: the owner's frame has lines to look for`).toBeGreaterThan(1);
+      // 2. the first lock: every reader who is not the owner, on the owner's own seeded record
+      for (const [label, args] of STRANGER_READERS) expect(digest(composeTonightSheet(s, ...args)), `${seed} ${label}: today's sheet`).toBe(today.seeded);
+      // 3. the shared reads: today's sheet for every reader; the veiled record holds no W4, its seed handed back or not
+      for (const key of SHARED_KEYS) {
+        const shared = recordOf(key, reads[key]);
+        expect(shared._seed, `${seed} ${key}: no seed`).toBeUndefined();
+        expect(shared.history.currentTensions.some((t) => t.type === 'crime_wave'), `${seed} ${key}: the crime wave is still on the record`).toBe(true);
+        expect(keepsCapture(shared), `${seed} ${key}: captureState ${VEILED.has(key) ? 'deleted' : 'kept (the DM layer)'}`).toBe(!VEILED.has(key));
+        if (VEILED.has(key)) {
+          expect(troubleOfWeight(shared), `${seed} ${key}: no W4 on the veiled record`).toBe(null);
+          expect(castTroubleFrame({ ...shared, _seed: s._seed }), `${seed} ${key}: no frame with the seed handed back (the second lock)`).toBe(null);
+        }
+        for (const [label, args] of EVERY_READER) expect(digest(composeTonightSheet(shared, ...args)), `${seed} ${key} ${label}: today's sheet`).toBe(today[key]);
+      }
+      // 4. on the pages: the gallery page and the party link, Reveal DM off and on
+      for (const [key, got] of Object.entries(opened)) {
+        if (got.error) throw got.error;
+        expect(digest(got.sheet), `${seed} on ${key}: today's sheet`).toBe(today[key]);
+        expect(got.sides, `${seed} on ${key}: no sides`).toBe(false);
+        for (const line of lines) expect(got.page.includes(line[0].toUpperCase() + line.slice(1)), `${seed} on ${key} prints "${line}"`).toBe(false);
+      }
+    });
+    expectNoSeedFailures(failures, 'on every W4 town, the owner\'s sheet opens on the crime wave and every other reader, read and page is today\'s');
+  }, 900000);
+});
