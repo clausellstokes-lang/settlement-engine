@@ -114,17 +114,21 @@ const WITH_CRIMINAL = new Set(['frame-calm-city-8', 'frame-calm-metropolis-8']);
  * the line's final names work (point 77) changes generated prose, so every shared read of every town moved; the base is
  * now the line. FRAME-2 · B9 (re-seated under W2 as written): city-8 and metropolis-8 measured by the same door in an
  * archive of the line `e356c94f2`, in the same run that gave the six kept towns their pinned digests again, and held
- * equal at the tip; city-0's and city-4's rows left with their towns.
+ * equal at the tip; city-0's and city-4's rows left with their towns. RE-MEASURED at FRAME-6's merge of the line
+ * `43ab0f5eb` (point 82, the names' agreement work: it changes generated prose): a scratch copy of this file's
+ * shared reads, run in an archive of the line (no frame code) and at the merged tip, gives the same digests for all
+ * eight towns, and reproduces every row below at the pre-merge lane `5b7d57c70`; five towns' rows moved (village-0,
+ * city-8, metropolis-8: the DM-full read and the import; metropolis-1 and metropolis-5: every read).
  */
 const DIGESTS = Object.freeze({
   'frame-calm-hamlet-7': Object.freeze({ gallery: '124ff33bddb5283d', galleryDmFull: '146bcb5d33de08d9', partyLink: '1113cb954bd598e1', imported: '5a349a1637786d2a', worldPlayer: '400ca8e595b27aef' }),
-  'frame-calm-village-0': Object.freeze({ gallery: '8d26ab7fb85b8e56', galleryDmFull: 'e125edffe9ec531e', partyLink: 'bb0173cd3a8168c3', imported: '75edf25721e4f9a5', worldPlayer: '5525cabd392986d1' }),
+  'frame-calm-village-0': Object.freeze({ gallery: '8d26ab7fb85b8e56', galleryDmFull: 'ddad1c05249f1636', partyLink: 'bb0173cd3a8168c3', imported: '939333559e30b3a5', worldPlayer: '5525cabd392986d1' }),
   'frame-calm-village-76': Object.freeze({ gallery: '8f93b50759a87be4', galleryDmFull: 'bbba7ceceddba038', partyLink: '9321fd48ed18044f', imported: 'd5d0b750d328d55c', worldPlayer: 'ba7d857c7346fa23' }),
   'frame-calm-town-1': Object.freeze({ gallery: '594c0f4e581e1503', galleryDmFull: '04129133b43dbb5a', partyLink: '29ad2c4bc13527c6', imported: '0cfd209c7c2f3231', worldPlayer: '524aa22612e6cfad' }),
-  'frame-calm-city-8': Object.freeze({ gallery: '8a1fb34d51a02402', galleryDmFull: '14941410eb8f06e4', partyLink: 'e5201063a77a0652', imported: '22d36cf721e99b17', worldPlayer: '314767bceab656e9' }),
-  'frame-calm-metropolis-8': Object.freeze({ gallery: '1c84d1c415ab8511', galleryDmFull: '76f353a996e449e6', partyLink: '70a9d6184469f483', imported: '1aad6f4c026af231', worldPlayer: '5076ec24c35e8232' }),
-  'frame-calm-metropolis-1': Object.freeze({ gallery: '34211488b2aab264', galleryDmFull: 'deccba4eb7587686', partyLink: 'a7aeb69a51aedfd8', imported: 'cca06e8dbce684fa', worldPlayer: '32a95948b1009748' }),
-  'frame-calm-metropolis-5': Object.freeze({ gallery: 'e2af948b1e6224d3', galleryDmFull: 'ff023d73c2d56d8c', partyLink: 'c023565c1009067d', imported: 'cfa6fe241eeccbab', worldPlayer: '33a85130672d749e' }),
+  'frame-calm-city-8': Object.freeze({ gallery: '8a1fb34d51a02402', galleryDmFull: '7c4f3004f438b38f', partyLink: 'e5201063a77a0652', imported: 'd31b82eda3d4a173', worldPlayer: '314767bceab656e9' }),
+  'frame-calm-metropolis-8': Object.freeze({ gallery: '1c84d1c415ab8511', galleryDmFull: 'c9f803cfd78bb446', partyLink: '70a9d6184469f483', imported: 'bc751fbd2328757c', worldPlayer: '5076ec24c35e8232' }),
+  'frame-calm-metropolis-1': Object.freeze({ gallery: '73f4831adcee5e1a', galleryDmFull: '1cfb77d8ddc6ed5b', partyLink: '0e4f3d9b8d9788ec', imported: '48a245ea30369e91', worldPlayer: '24eceed7ecd3472c' }),
+  'frame-calm-metropolis-5': Object.freeze({ gallery: '26724a5b8c311ee5', galleryDmFull: '68fb08eb328b0bf0', partyLink: '4f1d44e149a6e994', imported: 'bac67d106c0d2368', worldPlayer: '15dd10a083768265' }),
 });
 
 const digest = (v) => createHash('sha256').update(JSON.stringify(v)).digest('hex').slice(0, 16);
