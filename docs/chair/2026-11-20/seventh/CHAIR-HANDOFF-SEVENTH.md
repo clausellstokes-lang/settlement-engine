@@ -2000,3 +2000,38 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   holder leaf reads `seatHolder.js :: seatCandidatesOf` and filters `ousted` itself (through `powerStrata.js` it
   would close a cycle once the contest imports the holder), and the two new leaves are pinned in
   `vite.config.js :: FIRSTPAINT2_LAZY_DOMAIN`. The resolver's agreed name is `officeTitleOf`.
+- 06:45 UTC · **TRAD-1's PROPOSAL READ WHOLE AND "BUILD" GIVEN; VEIL-22's GATE.**
+  **(1) TRAD-1** (39caf40ae, `docs/chair/2026-11-20/content/traditions/TRAD-1-PROPOSAL.md`; 432 born towns, 6 tiers by
+  12 cultures by 6 seeds; 1,232 printed rites). THE MEASURE (a prototype, the owner's page): a keeper that is a house
+  or an owner 51.4 per cent, a power 39.7, a cause 35.1, the economy 28.1; the SHORT form 7.5 per cent (hearth,
+  long-sun, greening and stone are the thin elements; thorps 12 per cent); the most repeated whole description 7 in
+  432 (all short forms); the most repeated shape with the town's name masked 10 in 432 (the market fair). ITS TABLE
+  (closed, authored): houses by element then act, as a body that keeps or a place that holds; the person is the
+  house card's own title; powers follow the engine's own owner table (`politics.js :: desiredArchetype`); ONLY TWO
+  PAIRINGS ASSERT A CAUSE: the founding core (index 0, `foundedYear` 1) with the record's own founding (its age and
+  founders); a rite of the dead with the latest siege, fire, flood or plague the record holds, naming no victor and
+  no cost; the economy states a rank only; THE TABLE HOLDS NO HIDEABLE HOUSE. STRUCK BY THE SEAT ON READING ITS OWN
+  SENTENCES: the stone element with a quarry, the field element with farmland, an invented office ("the
+  fair-wardens"), and the record's trappings (they presume a temple, water and guilds the town may not hold).
+  THE SHARE: the owner's set equals the shared page's in 1 of 432 towns today. 1,333 reader descriptions name nothing
+  the served document lacks.
+  **THE CHAIR'S READ OF ALL TWENTY-FOUR SAMPLES: NOT NOISE** (each keeper and person the record's own; restraint where
+  nothing fits). A FAIR DOZEN WENT TO THE OWNER (every second sample, the short form among them), with two
+  tightenings said and one pattern named (every town's founding rite follows one shape). **"BUILD" GIVEN, RULED:**
+  CTR9 first (its manifest gains `publicProse.js`, `publicProseCompose.js` and the reader's branch of the tab; the
+  shape chosen to fit the house's block-and-alias form under `publicProse`); the reader's text composed owner-side
+  with the class filters, the leaf's default audience 'reader'; THE DEAD'S CAUSE ONLY FOR AN EVENT THE RECORD GRADES
+  MAJOR OR CATASTROPHIC; the economy sentence reworded out of its ledger voice; a third fair and feast frame; CTR5's
+  proof in two arms (a planted hideable row; a lit mirror whose owner is a criminal seat) plus the inversion on the
+  drawn text; the search index composed with the view's own audience. It owes "TRAD-SHARE <commit>" when CTR9 is
+  merged green (the security reader reads that part first), then "TRAD <commit>".
+  **(2) VEIL-22's GATE, R2's owed readings, through the server at d136940c3** (R2 and V10-2): UNREGISTERED paths: the
+  party link in the new shape 125 to 38; master's shape 145 to 66 on the gallery read and 132 to 55 on the link. All
+  96 unregistered paths matched against EVERY registry row, built or not: 90 wait on a row already written (R4 52,
+  R5 22, R3 12, the second homes 2, apply 2); **SIX HAD NO ROW AT ALL since R1's gate**: the three alias blocks of
+  `economy:economics` under `publicProse.blocks` (`incomeMix`, `criminalLine`): on 30 of 30 reads the served town
+  lacks the key its house-free counterfactual carries. CONFIRMED: R5 hosts them as alias rows, each bound to its
+  target's rule (an alias is served exactly when its target is). A RULE ADDED FOR "E": the gate's four readings
+  (the gallery and the link, both stored shapes) show UNREGISTERED 0, any path left named with its reason. V10-2's
+  guards 176 of 177 (VS1 (b), 21 lines pinning behaviour from before R2, being aligned by a test-only builder).
+  Running there: R3, R4, the R6 re-cut. VEIL-22 at about 200,000 tokens.
