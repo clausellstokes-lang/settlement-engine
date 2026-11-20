@@ -40,6 +40,14 @@ Read this, then `PAGE-5-HANDBACK.md` (§2 S6 row, §5 the ruled tables, §6 the 
   toPublicSafe` drops `plotHooks` by default, 0 of 303; keep that arm): TROUBLE-LINES-2 numbering: crime_wave 2 (watch +
   organised crime), 9 (watch), 10 (organised crime), 11 (rival rings), 12 (law ≤ critical); guild_conflict 12;
   external_threat 8; succession_crisis 1, 2, 3, 8 (ruler, in doubt); legitimacy_crisis 9 (needs as in TROUBLE-LINES-2).
+  THE COUNT IS TWELVE, BY NAME (the chair asked, 20:03: eleven or twelve): crime_wave 5 (2, 9, 10, 11, 12) + guild_conflict 1
+  (12) + external_threat 1 (8) + succession_crisis 4 (1, 2, 3, 8) + legitimacy_crisis 1 (9) = 12. The chair's "eleven"
+  (16:35) is the same list miscounted, not a different one. The judgement lines, for the security reader: by
+  `cardVeil.js :: isHideableHouse` / `isVeiledPower` only the criminal, clandestine or illegal houses and the hidden or
+  criminal powers are hideable. So crime 2, 10, 11 and guild 12 (organised crime, rival rings) are certain. Crime 9 and
+  external 8 (the watch, guardPresence: a lawful force), crime 12 (the law band) and legitimacy 9 (seat outranked) are
+  counted because the causes' hideable rows count the force, the law and the outranking. Succession 1, 2, 3, 8 (the
+  ruler's kind) are counted only where in doubt. If the reader rules the ruler's kind public, the count is eight.
 - LASTING EFFECTS: printed in the PDF only; a later unit AFTER the hooks; every effect needing a hideable fact is struck.
 - FIRST PAINT, EVERY LANE (the chair's ruling, 19:59; DEPTH-3 found 2.1 MB put into first paint by an eager vocabulary
   file reaching a lazy-pinned module through a new facts module; no lint test sees it; THIS lane granted `house` and
