@@ -393,11 +393,14 @@ describe('npm run check ↔ parallel ci.yml gate parity', () => {
     // The shard cap is the estimate the job's comment carries (the largest local shard is 19.1%
     // of the suite; 19.1% of 132m33s plus set-up = 26m20s × 1.5 → 45), TIGHTENED by the same
     // rule at the first concluded shard figure; the verdict runs no test and carries 10.
+    // THE HOUSE RULE APPLIED (point 76, 2026-11-20): the longest concluded shard is shard 6 at 36m04s
+    // (run 44659169256 at 85fccf898; 36m01s the run before); × 1.5 = 54m06s → 60. The job is found by
+    // its identity (`check-tests-shard`), never by position, so the pin follows the job, not a line.
     const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
     const shardJob = jobBody(ci, 'check-tests-shard');
     const verdictJob = jobBody(ci, 'check-tests');
     expect(shardJob, 'ci.yml must declare the check-tests-shard matrix job').toBeTruthy();
-    expect(shardJob).toMatch(/^\s*timeout-minutes:\s*45\s*$/m);
+    expect(shardJob).toMatch(/^\s*timeout-minutes:\s*60\s*$/m);
     expect(verdictJob).toMatch(/^\s*timeout-minutes:\s*10\s*$/m);
   });
 

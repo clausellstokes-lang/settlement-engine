@@ -22,10 +22,10 @@ describe('COHERENCE-POWERS-7 (R3) · the DM view forms no possessive of a power 
   it('the patron who carries a plural power\'s requests: "Merchant Guilds\' requests"; a singular: "the Thieves\' Guild\'s"', () => {
     const at3 = { name: 'Ada Vell', rank: 3, ruler: 'Town Council', power: 'Merchant Guilds', share: 0.3, boost: 2 };
     const line = PATRONAGE_LINES.open.map((l) => l(at3)).find((t) => t.includes('requests'));
-    expectAbsentWithAnchor(line, "Guilds's", "carries Merchant Guilds' requests to the two above.", 'the plural possessive');
+    expectAbsentWithAnchor(line, "Guilds's", "carries the Merchant Guilds' requests to the two above.", 'the plural possessive'); // NAMES-1 (CN1): the article
     const steward = { ...at3, rank: 'steward' };
     const lineS = PATRONAGE_LINES.open.map((l) => l(steward)).find((t) => t.includes('requests'));
-    expect(lineS).toContain("Merchant Guilds' requests go through Ada Vell.");
+    expect(lineS).toContain("the Merchant Guilds' requests go through Ada Vell."); // NAMES-1 (CN1): the article
     const crim = { ruler: 'Town Council', agents: [], rulerCriminal: false, underworld: null };
     const said = [...CAPTURE_LINES.adversarial, ...CAPTURE_LINES.equilibrium].map((l) => l(crim)).join(' ');
     expect(said).toContain("the criminal houses' people");

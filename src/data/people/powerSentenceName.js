@@ -47,6 +47,24 @@ export function powerNameAfterArticle(name) {
 }
 
 /**
+ * A POWER IN A SENTENCE TAKES ITS ARTICLE (NAMES-1, the seventh chair's ruling CN1 of 2026-11-20, vetoable by the owner;
+ * the owner, 2026-11-20: "Do it pre deploy. I like it."): a catalogue label is a category, not a proper noun, so a sentence
+ * that names a power says "the Feudal Appointee", "the Religious Authorities", never "Feudal Appointee has been debating
+ * market levies". THE ONE BODY of `domain/display/governanceAccount.js :: powerNameInProse` (which returns it, under its
+ * own name and in its own home), here so a data-layer composer reads it without a data -> engine-core edge: "The" at the
+ * head of a sentence, "the" inside one, before the prose form with its own "The" struck ("Military/Guard" -> "the Guard",
+ * "The Independent Bloc" -> "the Independent Bloc"). A label in a table, a chip, a heading, a list or a key keeps the
+ * roster's spelling; only sentences take this. ⛔ THE VEIL (CN3 (i)): "the" + the name still holds the name as the share
+ * veil's search folds it. @enforced-by tests/lint/namesInSentences.walker.test.js
+ * @param {unknown} name @param {boolean} [start] the name opens its sentence @returns {string} '' for no name
+ */
+export function powerNameWithArticle(name, start = false) {
+  const body = powerNameAfterArticle(String(name ?? '').trim());
+  if (!body) return '';
+  return `${start ? 'The' : 'the'} ${body}`;
+}
+
+/**
  * A chip or a rank line that names a power by its roster label ("first of Military/Guard"), set inside a sentence: each
  * catalogue label in PROSE_FORMS takes its prose form ("first of The Guard"). For a sentence that quotes a chip whole
  * (pdf/lib/headlines.js :: npcsHeadline); the chip itself keeps the roster's label.

@@ -1,0 +1,926 @@
+ONE TOWN, WHOLE PAGE TEXT: r2r-town-0, BEFORE (85fccf898, the line before the names work)
+Written 2026-11-20 06:16 UTC by NAMES-2. Every tab of the dossier as the owner sees it (premium, the DM view), every disclosure open, one line per block, in reading order. Rendered through the real OutputContainer from the town as stored.
+
+=== Summary/Overview ===
+Farosaltustown· 708 pop.· road· 146 years old
+Latin-inspired. Ask about the place and you are told it is built in masonry around a civic square, and run by patronage and law. Governed by Corrupt Council · Unstable (pervasive organized crime); monsters on the roads
+"It came through the Economic Divide and the Succession Crisis without losing its options, its neighbours or its temper, and the people here count all three as achievements"
+Hills
+Open Tonight
+The place
+The road into Farosaltus becomes part of the settlement at a point you can't precisely identify. The houses gather around you gradually. A wall circuit, unremarkable but intact. Bolts of cloth and bales of wool fill the carts waiting on the road out. A notary's clerk hurries past with a satchel of contracts. Patched roofs and patched clothes say money is short here.
+Systems Health▲?Safety, viability and defense, read side by side. As judged at the first survey · Food Security is re-judged as your campaign goes on.
+Prosperity
+Struggling
+Safety
+Moderate
+Viability
+Viable
+Defense
+Vulnerable
+Reliance on magic
+None
+Monster DefenseCritical
+Economic ResilienceAdequate
+Magical CapabilityCritical
+Food SecuritySecure
+Farosaltus's market lives off through-traffic. Craftspeople at Farosaltus answer to their guilds and the guilds settle their quarrels among themselves. A merchant at Farosaltus can store a cargo in the town's warehouses and sell it when the price suits. The town is visibly governed: a hall of justice, a gaol.
+Tensions & Conflicts▲?Who is at odds with whom, and how badly.
+▸
+The one who led was failing in health, and rivals maneuvered quietly to take that place
+Corrupt CouncilPopular candidateThieves' Guild
+Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run
+Guild membersThose who would trade outside the guildNon-guild workers
+Corrupt Council vs Thieves' GuildModerate
+Stolen goods sold openly
+Farosaltus's ruler is old and the succession is disputed; Corrupt Council already has its candidate ready.
+Settlement Origin▲
+The road was here first. The settlement grew along its verge, and its news has always come on somebody else's cart.
+Notable connection
+A newcomer keeps trying to reconcile Drusilla Cato and Tertullian Scipio, and is about to learn why nobody else does.
+Full relationship web →
+
+=== Summary/Foundations ===
+Foundations
+?What is holding up and what is under strain.
+What is holding, what is strained
+Settlement foundations
+Public legitimacyLegitimacy crisis
+Law & orderCritical
+Defense readinessStrained
+Criminal opportunityElevated
+Economic capacityStrained
+Social trustStrained
+Ruling authorityStrained
+Religious authorityStrained
+Healing capacityStrained
+Infrastructure conditionStrained
+Housing pressureAdequate
+Magical stabilityAdequate
+Strength of the powersAdequate
+Labor capacityAdequate
+FoodSecure
+Trade connectivityAdequate
+Reliance on magic: None
+
+=== Summary/Plot Hooks ===
+NPCs
+Laevinus Scipio
+A sealed letter arrived for them three weeks ago. They haven't opened it. They won't say why.
+Sabinus Crispus
+Their second has been meeting with the people they answer to, and orders have started arriving without passing through them.
+Torquatus Flaccus
+They received a directive from the hierarchy that contradicts their own theology. Compliance is expected.
+Pompeia Scipio
+A traveller passed through asking which nights their door is left unbarred, and was gone by morning.
+Gratus Calvus
+Someone left an item in their care and hasn't returned. The item is valuable. The absence is now suspicious.
+Tertullian Scipio
+Someone keeps paying off their small debts around the place before they can, and has left no name.
+Macrina Cicero
+Someone has been using their name to frighten shopkeepers, and the shopkeepers have begun paying the wrong people.
+Lepidus Serranus
+They promised the same post to two people, and both have already told their families.
+Plinius Moderatus
+Someone has been asking the neighbours what time they leave in the morning and when they come home.
+Antonia Strabo
+Something they were told had been burned has turned up for sale.
+Piso Flaccus
+Their scales were tested and found heavy in their favour, and they swear someone changed them overnight.
+Drusilla Cato
+A buyer has paid them in advance for a whole season of goods, far above the price, and will not say what the goods are for.
+Lucia Piso
+A document they were asked to witness contained a clause they noticed at the time and said nothing about.
+Salinator Silanus
+Their master craftsman is talking to a rival. They haven't confronted them. They're not sure what they'd do.
+Rutilius Sabinus
+They received a deposition in a civil case that, if acted on, would be correct, and would ruin someone they need.
+Iulius Lepidus
+A clerk in their office has been copying letters at night, and the copies have turned up in a rival's hands.
+Isidora Serranus
+Their spouse has been making payments to someone every month for years, and will not say who.
+Relationships
+Corrupt Council vs Thieves' Guild
+A merchant has found his own stolen cloth for sale two streets away.
+History
+Political Event
+A would-be heir approaches outsiders to investigate a rival's past
+Guild Conflict
+A guild master's records have gone missing ahead of an audit
+A journeyman denied mastership has proof the exam was rigged
+Someone is sabotaging both sides to destabilize the market for a third party
+
+=== Systems/Institutions ===
+?Each house: what it is, who it backs, what it offers. The badge says who put it here: you, the living world, or a dependency.
+BreweryCrafts
+Commercial-scale ale and beer production. Supplies the town's taverns and regional distribution. Major grain consumer and employer.
+Connection: Master Brewer Antonia Strabo
+BacksMerchant Guilds
+ServicesAle production
+Cobbler's guildCrafts
+Organised cobblers who shoe the town in boots, shoes, and sandals, with quality kept under strict regulation.
+Connection: Cobbler Plinius Moderatus
+BacksCorrupt Council
+ServicesMilitary bootsStandard boots
+Craft guildsCrafts
+They set the standard of work, the prices, and the terms of apprenticeship.
+Connection: Guildmaster Piso Flaccus
+ServicesQuality certificationApprenticeship programs
+MillsCraftsVulnerable
+Several sites grind the town's grain.
+Connection: Master Miller Gratus Calvus
+ServicesGrain grinding
+Weavers/Textile workersCrafts
+The making of cloth, usually under a guild.
+Connection: Master Weaver Pompeia Scipio
+BacksCorrupt CouncilMerchant Guilds
+ServicesCloth production
+Street gangCriminal
+An organised crew of cutpurses and toughs, some 10 to 30 of them.
+Connection: Boss Macrina Cicero
+BacksThieves' Guild
+ServicesPetty crime
+Town wallsDefenseVulnerable
+Masonry walls pierced by gates. Dear to build, dearer to maintain.
+ServicesGate control
+Town watchDefenseVulnerable
+Part-time guards. Night patrol and gate duty.
+Connection: Tribune Sabinus Crispus
+ServicesGate dutyNight patrol
+Fish marketEconomy
+The market wardens keep a roofed fish market where, whenever fish can be had, carted barrels of salt fish are weighed out and inspected before sale.
+Connection: Master Fishmonger Drusilla Cato
+ServicesPreserved fishWholesale trade
+InnsEconomy
+Lodging for traveling merchants.
+Connection: Host Isidora Serranus
+ServicesAccommodation
+Market squareEconomyVulnerable
+Central plaza for weekly markets and fairs.
+ServicesWeekly market
+Merchant warehousesEconomy
+Warehouse facilities for merchants storing goods awaiting sale, transit, or seasonal distribution. Essential infrastructure for any trade route settlement.
+Connection: Factor Salinator Silanus
+ServicesGoods storage
+TavernsEconomyVulnerable
+Houses for drink. And for company.
+Connection: Host Lucia Piso
+ServicesShort accommodationDrink serviceMeals
+Town granaryEconomyVulnerable
+Communal grain storage. Buffers harvests, prevents famine.
+Connection: Granary Reeve Lepidus Serranus
+ServicesGrain storage
+Weekly marketEconomyVulnerable
+Requires a market charter. A principal source of the town's trade.
+ServicesGeneral trade
+TheatersEntertainment
+Fixed houses for performance.
+Connection: Manager Tertullian Scipio
+BacksMerchant GuildsCorrupt Council
+ServicesPerformances
+Mayor and councilGovernment
+The town's leadership, whether elected or named to office.
+Connection: Lord Mayor Laevinus Scipio
+ServicesCivic administration
+CourthouseInfrastructure
+Borough court for local justice.
+Connection: Justice Iulius Lepidus
+ServicesCivil disputesCriminal trials
+Small prison/stocksInfrastructure
+Holding cells and public punishment.
+Connection: Gaoler Rutilius Sabinus
+ServicesFine paymentHolding cellsPublic punishment
+Town hallInfrastructure
+Meeting place and administrative center.
+ServicesDispute arbitrationPermit applicationsTax payment
+Burial groundsReligious
+A ground for each congregation, and burial out beyond the houses where a ground has filled. The sexton's register of who lies where is the town's longest unbroken record.
+ServicesBurial
+Houses of worshipReligious
+Several quarters, each with its house of worship.
+Connection: Dean Torquatus Flaccus
+ServicesLife ceremoniesReligious services
+The fabric of the place
+HousingInfrastructure
+Multi-story timber and stone buildings.
+ServicesLodging (rooms to let)
+Multiple water sourcesInfrastructure
+Wells, fountains, or piped water.
+
+=== Systems/Services ===
+?What can be bought or hired here, and what is short.
+Not available for a town: Information.
+Everything a traveller expects at Farosaltus is here but one.
+Criminal services(3)▲
+Muscle for hire
+Rough up a target, intimidate a debtor, move a problem: informal, no contract.
+Petty crime
+Pickpocketing, muggings, and opportunistic theft in their territory.
+Street gang
+Protection racket
+Pay or have your premises damaged. The gangs are territorial and consistent.
+Employment(1)▲
+Apprenticeship programs
+Formal training under a master craftsperson. Multi-year commitment.
+Craft guilds
+Entertainment(1)▲
+Performances
+Plays, comedies, tragedies, and spectacles performed by professional companies.
+Theaters
+Goods & crafts(5)▲
+Cloth production
+Weave wool, linen, and other fibres into cloth for clothing and trade.
+Weavers/Textile workers
+General trade Vulnerable
+Agricultural produce, household goods, livestock. The economic heartbeat of the week.
+Weekly market
+Military boots
+Thick-soled marching boots.
+Cobbler's guild
+Standard boots
+Guild-certified boots. Quality-marked, price-regulated.
+Weekly market Vulnerable
+Regular market days with produce, goods, and livestock.
+Market square
+Food & drink(6)▲
+Ale production
+Bulk ale for taverns and households. Staple beverage where water is unsafe.
+Brewery
+Drink service Vulnerable
+Ale, wine, and spirits across multiple establishments.
+Taverns
+Grain grinding Vulnerable
+Grind grain into flour for bread and other foods.
+Mills
+Meals Vulnerable
+Hot food in most establishments. Quality ranges from pottage to roasted meats.
+Preserved fish
+Smoked, dried, and salt-preserved fish for storage and inland trade.
+Fish market
+Wholesale trade
+Bulk purchase by taverns, institutions, and inland traders.
+Healing(3)▲
+Burial
+Interment in the congregation's ground, with the rite that congregation keeps.
+Burial grounds
+Life ceremonies
+Births, marriages, and funerals across several congregations.
+Houses of worship
+Religious services
+Several congregations covering different districts or communities.
+Legal & financial(15)▲
+Civic administration
+Day-to-day governance of the settlement. Planning, budgeting, and dispute resolution.
+Mayor and council
+Civil disputes
+Settle contract/property issues
+Courthouse
+Criminal trials
+Judge crimes
+Dispute arbitration
+Bring commercial and civil disputes before a magistrate.
+Town hall
+Fine payment
+Pay fines to secure release from detention.
+Small prison/stocks
+Gate control Vulnerable
+Control who enters and exits. Levy tolls on goods.
+Town walls
+Gate duty Vulnerable
+Check travelers entering and leaving. Note unusual visitors.
+Town watch
+Goods storage
+Secure, dry storage for trade goods awaiting sale or onward shipment.
+Merchant warehouses
+Grain storage Vulnerable
+Municipal grain reserves. Buffers the settlement against poor harvests.
+Town granary
+Holding cells
+Short-term detention pending trial or payment of fines.
+Night patrol Vulnerable
+Patrol the streets after dark. Deter crime and respond to incidents.
+Permit applications
+Apply for construction, business, and trade permits.
+Public punishment
+Stocks and pillory for public shaming and minor offenses.
+Quality certification
+Guild mark indicating goods meet agreed standards.
+Tax payment
+Pay annual and quarterly taxes and levies.
+Lodging(3)▲
+Accommodation
+Beds from dormitory to private room. Quality varies by establishment.
+Inns
+Lodging (rooms to let)
+A room let in a private house, by the night or the week.
+Housing
+Short accommodation Vulnerable
+Beds or floor space available in most taverns.
+
+=== Systems/Economics ===
+Struggling
+Diversified market economy
+Trade
+road
+Output
+37/100
+Farosaltus sits on its road and stays poor all the same.
+Income Sources▲
+20%
+CriminalShadow Economy (untaxed) Untaxed trade, fencing and theft bring money in here, but it goes to the criminals who run them and the treasury sees none of it.
+19%
+Market Taxes Market day stall fees and toll collection on goods entering the market.
+17%
+Guild Fees Annual licensing fees and fines levied by guild oversight.
+10%
+Court Fees & Fines Filing fees, fines levied on offenders, and fees for notarial and legal certification services.
+Gate Tolls Entry and exit tolls collected at the town gates from merchants and travellers.
+Property Rents Ground rents on civic-owned buildings, stalls, and residential plots within the walls.
+8%
+Wool & Textile Trade Local flocks provide raw wool, and cloth is woven or finished here.
+6%
+Grain Sales Grain purchased from farming regions and resold or processed locally; margin depends on stable supply routes.
+Ask what Farosaltus lives on and you will hear more than one trade named. Honest traders in Farosaltus are up against its biggest business, and nobody has told them what it is. The country around Farosaltus does not give the town enough luxury goods for what the town needs of it.
+Trade Profile▲
+Exports
+Raw woolSacred woodRitual componentsGuild-manufactured goodsLegal services (contracts, notarial)
+Imports
+GrainIncense, ritual oil, and vestment materialsIron ore (local iron mines exhausted)Raw hides and animal productsReplacement arms and basic equipmentSaltStolen silver plateUndeclared wine and oil
+Settlement necessity
+Needed, and not brought in: luxury goods, spices.
+The carts that leave Farosaltus carry several kinds of goods, not one.
+Produced locally
+livestockwooldairyanimal hidesGuild-manufactured goodsBoots and shoesReligious servicesEducation (basic)
+Food Security▲
+Production: 1,174 lbs/day+ 242 importedNeed: 1,416 lbs/day
+What is grown here and brought in covers each day's food.
+Stores: a granary, about five months of grain.
+Its own food is the herds' milk and mutton. Market vendors and shared dining customs make food distribution visibly civic.
+In an ordinary season Farosaltus has enough to eat, or near enough.
+Farosaltus leans first on its herds for its food, so a bad season for the herds is felt at every table.
+Economic Flows (9 active)▲?What is made here and what it depends on.
+All (9)Issues (3)✓ Productive (2)Services (1)
+Standing WatchDefense & securityVulnerable
+Via
+Town watch
+Outputs
+Defence servicesWeapons training
+Law enforcement, patrol and gate control here depend on iron brought in, which a siege, a closed road or a blockade would cut off.
+Taverns & Social LifeEntertainment & cultureVulnerable
+Taverns
+LodgingMeals and drinkStabling
+Meals, ale and lodging here depend on grain brought in.
+Textiles & ClothManufacturing & crafts✓ Running
+From
+Grazing land
+Weavers/Textile workers
+Guild-manufactured goods
+Leatherworking & CordwainingManufacturing & craftsVulnerable
+Cobbler's guild
+Boots and shoesSaddles and harnessLeather goods
+Faith & WorshipReligion & civic✓ Running
+Houses of worship
+Religious servicesEducation (basic)Poor relief
+Organised CrimeCriminal economy○ Operational
+Street gang
+Information brokerageGuild protectionContract killing
+Performance & TheaterEntertainment & culture○ Operational
+Theaters
+PerformancesMusic and song
+Law & GovernanceReligion & civic○ Operational
+Courthouse · Town hall
+Civil disputesCriminal trialsNotary services
+Service economy
+Legal ServicesServiceExport○ Operational
+Via:courthouse
+Legal services
+Some of the work at Farosaltus needs goods that nothing here makes.
+Shadow Economy: 20% of trade unrecorded▲
+Off-book
+Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and the stalls that pay their fees lose custom to the ones that do not.
+Criminal supply chains
+Guild crime · Operational
+The duties gathered at Farosaltus fall short of the trade that plainly goes on there, and nobody is pressed to make up the difference.
+
+=== Systems/Resources ===
+Terrain
+Hills
+What the land offers
+✓ Mining✓ Sheep herding✓ Wool production
+Resource Exploitation▲
+PartialWoolhigh value
+Wool→cloth→dyed fabric
+Draws on: sheep, grazing land
+✓ Fully exploitedLivestockmedium value
+Draws on: grazing land
+A newcomer to Farosaltus soon hears what its ground is worth to the powers around it, and how little of that worth stays in the town. The town takes the easy half of this trade and sells the rest of it to whoever will do the hard half. Nothing more can be taken from the iron ore deposits at Farosaltus. Until somebody pays to open new workings, the hands that worked there are idle or gone elsewhere.
+Nearby Resources▲
+Depleted
+Iron Ore Deposits
+Abundant
+Ancient GroveOpen Grazing LandPrecious Metal Veins
+Commodities available
+Open Grazing Landlivestockwooldairyanimal hidesAncient Grovemedicinal herbshoneyPrecious Metal Veinsluxury
+Export Potential▲
+cloth, dyed fabric
+Partial processing - worked only to semi-finished goods
+
+=== Systems/Power ===
+Who runs this place??Who holds power and how firmly.
+The powerCorrupt Council (strong)criminal sway
+The seatLaevinus Scipio, the mayor
+Public legitimacy
+26Legitimacy Crisis
+Governance fractured.
+Stability
+Unstable (pervasive organized crime); monsters on the roads
+Laevinus Scipio, the mayor, holds the seat of the Corrupt Council. The Corrupt Council governs Farosaltus. Poverty and weak defences have cost the Corrupt Council its standing. Few in Farosaltus still accept its right to rule. People inside the hall have been bought by the Thieves' Guild. The hall still sits, but its arrests and its offices are no longer its own to give.
+The Seat and Its Contenders (2)▲
+Who holds and who contests the seat. Open a power to see the institutions behind it.
+RulerCorrupt CouncilCriminalStrong▲
+Institutions behind this power (15)
+Held under this authority
+Town granary
+Mills
+Weavers/Textile workers
+Cobbler's guild
+Burial grounds
+Mayor and council
+Housing
+Multiple water sources
+Town hall
+Small prison/stocks
+Town watch
+Theaters
+Town walls
+Courthouse
+Under the ruling power, with no power of its own kind here
+Houses of worship
+ContenderMerchant GuildsMerchantMinor▼
+The Powers (3)▲
+38
+37
+25
+⚠
+Corrupt Council
+↑ Holds powerCriminal38▼
+↳9 members · first Laevinus Scipio · second Lepidus Serranus · third Plinius Moderatus
+Thieves' Guild
+Criminal37▲
+↳1 member · first Macrina Cicero
+Criminal organisations have captured significant influence; corruption is systemic, not exceptional. The gap between them and the governing council is narrow. A single shift in patronage, scandal, or armed muscle could swap their positions.
+Merchant Guilds
+Contests the seatMerchant25▼
+↳8 members · first Salinator Silanus · second Pompeia Scipio · third Antonia Strabo
+The Web (2)▲
+How the powers stand to one another, grouped by the kind of tie.
+◆Corrupted(1)
+Corrupt Council◆Thieves' Guildescalating
+Thieves' Guild has bought key people in Corrupt Council. Its own crimes go unpunished, and its rivals are the ones who get arrested.
+↔Dependent(1)
+Corrupt Council↔Merchant Guildsstable
+Corrupt Council needs the taxes and loans of Merchant Guilds, and Merchant Guilds need Corrupt Council to enforce their contracts and keep the law. Neither can afford to ruin the other.
+The shape of authority
+The Corrupt Council at Farosaltus rules by fear and favours, not consent, so its real danger is one of its own people turning on it.
+Rule and succession
+Merchant Guilds could now take the hall from Corrupt Council at Farosaltus; Corrupt Council keeps it only because the office is still its own.
+Crime and the hall
+Someone has bought a member of Corrupt Council at Farosaltus: news of Corrupt Council's business now goes where it should not. There is money at Farosaltus that does not come from the market, and people will not say where it does come from. Some officials of the Corrupt Council at Farosaltus have an understanding with Thieves' Guild, and each owes it something different; every one of them is a thread the party can pull.
+Who really runs this town
+For the DM only. Nothing here appears on a player view or a shared page.
+The ruling three of Corrupt Council
+Head · Laevinus Scipio, the mayor
+Second · Lepidus Serranus, the granary reeve
+Third · Plinius Moderatus, the cobbler
+The hall
+Partly in criminal hands. Corrupt Council is itself run as a criminal concern, so the people who make the laws here are the ones who profit from breaking them.
+Patron deity
+Assign a patron god to awaken the settlement’s religion layer. Upgrade to premiumAvailable at launch to author and assign deities.
+RulerCorrupt CouncilCriminalStrong▼
+ContenderMerchant GuildsMerchantMinor▲
+Institutions behind this power (10)
+A commercial house of this power
+Fish market
+Weekly market
+Market square
+Inns
+Taverns
+Merchant warehouses
+Brewery
+Craft guilds
+↑ Holds powerCriminal38▲
+The governing body is systematically compromised; offices are sold and justice is purchasable.
+Criminal37▼
+Contests the seatMerchant25▲
+Established merchant community; fund civic works and expect council access in return. They are always at the table, but cannot set their own terms. The criminal network reaches further than the merchant guilds right now. Some merchants are paying for protection; others have become silent partners.
+
+=== Systems/Defense ===
+Defensive posture
+Vulnerable
+Guard assessment
+The town watch patrols on a regular round, so petty theft is often caught and planned crime seldom is. A wrong done here goes before the court, and the guilty can be locked up for it. Everyone comes and goes by the gates, so smugglers have to get past the town watch.
+Farosaltus has people under arms, but too few and too badly placed to hold off a serious attack for long.
+Threat Assessment
+Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
+Beasts & Monsters
+Critical▼
+Invasion & War
+Adequate▼
+Internal Security
+Offenders at Farosaltus are arrested, heard and held, and each case is written down, so people expect a hearing, not a beating.
+Economic Survival
+Farosaltus can pay for its own emergencies for a while, but every hard season brings the end of the money closer.
+Disasters & Famine
+Weak▼
+Food endurance: Under siege the outlying fields would be lost; the granary would carry the town for about five months at full rations, about eleven months on half, and what is still harvested would stretch it further.
+Criminal Architecture & Public Order▲
+A mix of safer and more exposed areas. The watch covers the main paths; quieter spots after dark carry genuine risk. Residents know which corners to avoid. The walls keep the trouble inside, off the roads beyond.
+Farosaltus has people who keep order, and order holds about as well as anyone here expects.
+Criminal structure: Organized syndicate
+Crime here answers to one ring. It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.
+Active criminal operations
+Street Gang
+Controls specific territory through violence. Extorts local businesses. Competes with the law for street-level authority.
+Underworld: Corrupt Council
+Active crime patterns
+Street gang activity
+A street gang controls part of the place, extorting local businesses and residents. Its violence comes and goes, mostly over its territory.
+Crime at Farosaltus has an order to it. What is permitted is permitted by somebody, random violence is put down because it draws attention, and the arrangement is stable enough to negotiate with. Criminal gangs keep a footing at Farosaltus, through the streets they hold or the businesses they front.
+Armed Forces & Fortifications1 wall 1 force ▲
+Fortifications
+Town walls
+Masonry walls pierced by gates. Dear to build, dearer to maintain.
+Farosaltus's accounts keep its town walls in repair and stretch no further, so the defences stand and too few people man them.
+Standing forces
+Town watch
+Part-time guards. Night patrol and gate duty.
+There is a line around Farosaltus and it is kept: the gates shut, the works are repaired, and a stranger who comes by the road enters where the town intends. Come to Farosaltus by the road and you come in by a gate, where someone sees you come. There are people walking the town at Farosaltus at night, and the town's sense of itself rests more on that than on anything at the gate. The town sends whoever it can against things they are not trained for, and pays for it each time. The town keeps no defence against anything it cannot see.
+Supporting Capabilities▲
+Arcane SupportNone
+No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.
+Legal InfrastructureCourt + Prison
+Full enforcement chain. Arrest, prosecute, detain.
+Medical ReadinessClergy care
+Clerical care. Basic wound and disease management.
+
+=== Systems/Magic ===
+Magic
+Medium
+Envelope
+Availabilitylimited
+Legalityregulated
+Institutional controlunregulated
+Service costcostly
+Riskmoderate
+Religious acceptanceindifferent
+Roles
+Reliance on magic: None
+Economic role: occasional
+Military role: absent
+Medical role: absent
+Infrastructure role: occasional
+Reliance on magic, as judged at the first survey
+Whatever magic reaches Farosaltus, the town does not rest on it: nothing it lives by would stop without it.
+
+=== Systems/Outlook ===
+✓ Viable
+Farosaltus gets through the year, buying in what its own land and trades do not provide.
+Judged at the first survey; not re-run since.
+
+=== World/NPCs ===
+17 Key Figures?The people worth knowing and what each one holds.2 high influence · 1 moderate
+↺ Reroll
+All●●● High●● Moderate● Low
+Corrupt Council (3)▲
+Laevinus Scipio●●●
+▲
+Mayor and council · first of Corrupt Council
+Lord Mayor
+Flaw: overbearing
+Mentor and SuccessorDrusilla Cato
+Called byMacrina Cicero · Outstanding Debt
+Called byLepidus Serranus · Outstanding Debt
+Called byPlinius Moderatus · Mentor and Successor
+Holds the seat in name, but fewer people come when called, and some orders go unanswered.
+Constraint: Cannot mend what is broken without bringing to light the quiet deals that keep the place running now.
+Wants Make sure no one can trace the arrangement between Corrupt Council and Thieves' Guild back to them.
+Standing commanding
+How they deal Keeps you at a distance, and makes you prove you are worth their time.
+Secret: Was directly responsible for a death that was ruled an accident
+Lepidus Serranus●
+Town granary · second of Corrupt Council
+Granary Reeve
+Flaw: imperious
+Outstanding DebtLaevinus Scipio
+Holds an office under a seat that fewer people now obey; the office is only as strong as the seat.
+Constraint: Moving to protect the office looks like a grab; standing still means falling with the seat.
+Wants Win two more people in Corrupt Council over to their side before Laevinus Scipio notices.
+Standing marginal
+How they deal Happy to talk about the farms and who brought in what this year.
+Secret: Mixes old and mouldy grain into the stores to make the measure look full
+Plinius Moderatus●
+Cobbler's guild · third of Corrupt Council
+Cobbler
+Flaw: lazy Temperament: clever
+Mentor and SuccessorLaevinus Scipio
+Called bySabinus Crispus · Mentor and Successor
+Wants Win two more people in Corrupt Council over to their side before Lepidus Serranus notices.
+Disposition clever
+How they deal Polite, but asks where you are from before taking an order for new shoes.
+Secret: Has been reading Drusilla Cato's correspondence through an intermediary. Nothing damaging yet. But they keep looking
+Thieves' Guild (1)▲
+Macrina Cicero●
+Street gang · first of Thieves' Guild
+Boss
+Temperament: intuitive
+Called byIulius Lepidus · Professional Rivalry
+Wants Learn exactly what Thieves' Guild and Corrupt Council have agreed in private, and who agreed it.
+Disposition intuitive
+How they deal Asks who you are and who you know; strangers are tolerated, not welcomed.
+Secret: Owes more to a rival crew than the gang could ever pay, and has been paying it with the gang's territory
+Merchant Guilds (3)▲
+Pompeia Scipio●
+Weavers/Textile workers · second of Merchant Guilds · member of Corrupt Council
+Master Weaver
+Mentor and SuccessorSabinus Crispus
+Called byPiso Flaccus · Genuine Respect
+Wants Find out who else knows about the arrangement between Corrupt Council and Thieves' Guild.
+How they deal Shows the best bolts and explains the work; happy to talk to anyone who admires it.
+Secret: Has been taking work from the weavers' wives at half the rate and selling the cloth as their own shop's
+Antonia Strabo●
+Brewery · third of Merchant Guilds
+Master Brewer
+Flaw: hypocritical Temperament: magnanimous
+Pragmatic AllianceIsidora Serranus
+Called bySalinator Silanus · Family Complication
+Wants Keep Salinator Silanus from using the family name for their own ends.
+Disposition magnanimous
+How they deal Generous with a cup and with talk; hears everything the taverns say.
+Secret: Keeps a still in the back that makes a spirit no one has been licensed to sell
+Salinator Silanus●
+Merchant warehouses · first of Merchant Guilds
+Factor
+Flaw: hypocritical Temperament: brave
+Family ComplicationAntonia Strabo
+Called byIsidora Serranus · Pragmatic Alliance
+Heads the leading house in the trade while the seat fails; deals still get done where orders do not.
+Constraint: Taking new freedoms too openly makes whoever next holds the seat see the house as a threat.
+Wants Make sure their work and Antonia Strabo's never clash in public this season.
+Disposition brave
+How they deal Asks what you are moving and where it came from before saying whether there is room.
+Secret: Owes Drusilla Cato a debt from before either of them held their current position: one that Drusilla Cato has never formally called in
+Unranked members (9)▲
+Sabinus Crispus●●●
+Town watch · member of Corrupt Council
+Tribune
+Flaw: suspicious Temperament: magnanimous
+Mentor and SuccessorPlinius Moderatus
+Called byPompeia Scipio · Mentor and Successor
+Called byTorquatus Flaccus · Outstanding Debt
+Wants Find a way to make do with less iron at the town watch.
+How they deal Answers questions without volunteering anything, and watches who you talk to next.
+Secret: The person who raised them was not their parent, and that parent is someone significant
+Gratus Calvus●
+Mills · member of Corrupt Council
+Master Miller
+Temperament: unflappable
+Family ComplicationIulius Lepidus
+Wants Stay out of every quarrel they can this season.
+Disposition unflappable
+How they deal Talks freely about the harvest and who brought what to the mill; it is a good place to hear who is short this year.
+Secret: Was present when Iulius Lepidus did something they've never accounted for publicly. Neither has acknowledged the other was there
+Tertullian Scipio●
+Theaters · member of Merchant Guilds · member of Corrupt Council
+Manager
+Flaw: callous Temperament: unflappable
+Mutual LeverageIulius Lepidus
+Called byDrusilla Cato · Unresolved History
+Wants Win the theaters first call on any help those who govern can give this season.
+How they deal Offers a seat at the next performance and a tour of the house; wants to know if you have any money to put into a play.
+Secret: Lets the theatre's cellar be used at night by people whose business it does not ask about
+Drusilla Cato●
+Fish market · member of Merchant Guilds
+Master Fishmonger
+Flaw: stubborn Temperament: astute
+Unresolved HistoryTertullian Scipio
+Called byLaevinus Scipio · Mentor and Successor
+Wants Learn what Tertullian Scipio has been saying about them, and to whom.
+Disposition astute
+How they deal Haggles with pleasure; the price drops for anyone who buys a lot and comes back.
+Secret: Sells yesterday's fish as this morning's, washed and packed in fresh ice, and has made people sick more than once
+Lucia Piso●
+Taverns · member of Merchant Guilds
+Host
+Wants Win a title, a seat or an honour, however small.
+How they deal Helps you as far as it pays them to, and no further.
+Secret: Has information about a competitor that would ruin them, obtained through clearly illegal means
+Piso Flaccus●
+Craft guilds · member of Merchant Guilds
+Guildmaster
+Flaw: suspicious Temperament: diplomatic
+Genuine RespectPompeia Scipio
+Wants Have those who govern confirm, in writing, who may give orders at the craft guilds.
+Disposition diplomatic
+How they deal Friendly on the surface, but soon asks where you are staying and who sent you.
+Secret: Has been delaying vital information from reaching the decision-makers
+Isidora Serranus●
+Inns · member of Merchant Guilds
+Flaw: suspicious Temperament: scholarly
+Pragmatic AllianceSalinator Silanus
+Called byAntonia Strabo · Pragmatic Alliance
+Wants Have those who govern confirm, in writing, who may give orders at the inn.
+Disposition scholarly
+How they deal Friendly while the coin lasts; asks for payment up front from anyone they have not seen before.
+Secret: Reads the letters guests leave in their rooms, and sells what is in them to whoever asks the right way
+Iulius Lepidus●
+Courthouse · member of Corrupt Council
+Justice
+Flaw: hypocritical Temperament: wise
+Professional RivalryMacrina Cicero
+Called byGratus Calvus · Family Complication
+Called byRutilius Sabinus · Outstanding Debt
+Called byTertullian Scipio · Mutual Leverage
+Called byLucia Piso · Mutual Leverage
+Wants Help Gratus Calvus with one thing this season, as family should.
+Disposition wise
+How they deal Gives careful answers that are true as far as they go, and they never go far.
+Secret: Is the illegitimate heir to a title currently held by someone who doesn't know they exist
+Rutilius Sabinus●
+Small prison/stocks · member of Corrupt Council
+Gaoler
+Flaw: greedy
+Outstanding DebtIulius Lepidus
+Wants Catch Macrina Cicero with something from the street gang on them, in front of witnesses.
+How they deal Gives the visiting hours and nothing more.
+Secret: Knows something about Salinator Silanus that Salinator Silanus believes no one else knows, and has been deciding for months whether to use it
+In no power (1)▲
+Torquatus Flaccus●●
+Houses of worship
+Dean
+Temperament: stalwart
+Outstanding DebtSabinus Crispus
+Wants Get the rights of the houses of worship written down and sealed by those who govern, this season.
+Standing established
+Disposition stalwart
+How they deal Answers slowly, checks what you say against what they know, and gives little at a first meeting.
+Secret: Possesses a relic that was officially declared destroyed, and kept it because they couldn't face destroying something real
+
+=== World/Relationships ===
+NPC Relationships (17)▲
+All (17)Allies (2)Rivals (1)Enemies (1)Leverage (4)
+Laevinus ScipioMentor and SuccessorDrusilla Cato
+the mayor · devoted · the master fishmonger
+▲
+Laevinus Scipio once told a full room that Drusilla Cato was the best pupil they had taught. Laevinus Scipio has not said it since.
+Drusilla Cato has begun teaching Laevinus Scipio's methods as Drusilla Cato's own.
+Macrina CiceroOutstanding DebtLaevinus Scipio
+the gang boss · substantial · the mayor
+Macrina Cicero owes Laevinus Scipio a large sum in coin, borrowed in a bad year and repaid in small amounts ever since.
+Macrina Cicero has offered to clear what is left of the debt in one payment. Laevinus Scipio would rather be repaid in favours.
+Salinator SilanusFamily ComplicationAntonia Strabo
+the warehouse factor · close · the brewer
+Salinator Silanus married into Antonia Strabo's family. Antonia Strabo opposed the match and still calls Salinator Silanus by surname.
+Salinator Silanus's child wants to marry into Antonia Strabo's household. Neither parent has given an answer.
+Lepidus SerranusOutstanding DebtLaevinus Scipio
+the granary reeve · minor · the mayor
+Laevinus Scipio kept Lepidus Serranus's name out of a scandal that ruined two others. Lepidus Serranus has voted with Laevinus Scipio ever since.
+Laevinus Scipio has mentioned the debt aloud, at a dinner, in front of Lepidus Serranus's partners.
+Plinius ModeratusMentor and SuccessorLaevinus Scipio
+the cobbler · lifelong · the mayor
+Plinius Moderatus made Laevinus Scipio's career, and Laevinus Scipio rarely says so.
+Laevinus Scipio now operates in ways Plinius Moderatus would not approve of. Neither discusses the divergence directly.
+Antonia StraboPragmatic AllianceIsidora Serranus
+the brewer · strong · the innkeeper
+Antonia Strabo and Isidora Serranus are allies because each has reckoned what the other would cost as an enemy. The friendship is courteous, and it lasts only while that reckoning holds.
+The threat that brought Antonia Strabo and Isidora Serranus together is gone. Neither has said so aloud.
+Pompeia ScipioMentor and SuccessorSabinus Crispus
+the master weaver · devoted · the watch captain
+Sabinus Crispus owes their place to Pompeia Scipio and has kept others from climbing the same way. The two of them remember it differently.
+Pompeia Scipio has one favour left to call in, and is saving it. Sabinus Crispus knows, and is watching for it.
+Sabinus CrispusMentor and SuccessorPlinius Moderatus
+the watch captain · formal · the cobbler
+Sabinus Crispus taught Plinius Moderatus everything, including how to get the better of Sabinus Crispus.
+A third party has asked Sabinus Crispus, quietly, whether Plinius Moderatus can be trusted. The answer took too long.
+Piso FlaccusGenuine RespectPompeia Scipio
+the senior craft-guild master · genuine · the master weaver
+Pompeia Scipio once told the council that Piso Flaccus was right and Pompeia Scipio was wrong. Piso Flaccus has not forgotten it.
+Piso Flaccus has made a mistake that Pompeia Scipio is bound to report. Pompeia Scipio has not reported it.
+Gratus CalvusFamily ComplicationIulius Lepidus
+the miller · close · the magistrate
+Gratus Calvus and Iulius Lepidus are cousins on opposite sides of the settlement's politics. Their grandmother still seats them together.
+Iulius Lepidus has gone into business against Gratus Calvus's partners, and the family expects Gratus Calvus to keep the peace.
+Rutilius SabinusOutstanding DebtIulius Lepidus
+the gaoler · crushing · the magistrate
+Iulius Lepidus nursed Rutilius Sabinus through a winter fever when no one else would come. Rutilius Sabinus still owes the debt and still knows it.
+Rutilius Sabinus has refused Iulius Lepidus a small favour for the first time in years.
+Tertullian ScipioMutual LeverageIulius Lepidus
+the theatre manager · unbreakable · the magistrate
+Tertullian Scipio and Iulius Lepidus sit on opposite sides of most questions and vote together on the few that touch their shared interests.
+Iulius Lepidus has written down what Tertullian Scipio owes and left a sealed copy with a third party.
+Iulius LepidusProfessional RivalryMacrina Cicero
+the magistrate · professional · the gang boss
+Every gain Iulius Lepidus makes, Macrina Cicero answers within the season, and people here have learned to expect it.
+Iulius Lepidus has recently broken an unwritten rule of the contest. Macrina Cicero is deciding what that permits.
+Drusilla CatoUnresolved HistoryTertullian Scipio
+the master fishmonger · serious · the theatre manager
+The quarrel between Drusilla Cato and Tertullian Scipio is old enough that no one else remembers the cause. They remember. They have simply stopped explaining.
+A newcomer keeps trying to reconcile Drusilla Cato and Tertullian Scipio, and is about to learn why nobody else does.
+Isidora SerranusPragmatic AllianceSalinator Silanus
+the innkeeper · weak · the warehouse factor
+Isidora Serranus and Salinator Silanus joined against a threat that has since passed, and each is now asking what the alliance is still for.
+Isidora Serranus has taken a precaution against Salinator Silanus that Salinator Silanus was not meant to discover. Salinator Silanus has discovered it.
+Lucia PisoMutual LeverageIulius Lepidus
+the tavern keeper · stable · the magistrate
+Lucia Piso and Iulius Lepidus each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.
+The balance between Lucia Piso and Iulius Lepidus has recently shifted. Iulius Lepidus has noticed; Lucia Piso has not, yet.
+Torquatus FlaccusOutstanding DebtSabinus Crispus
+the dean · minor · the watch captain
+Torquatus Flaccus borrowed Sabinus Crispus's good name to win a post. Sabinus Crispus has never asked for it back.
+Sabinus Crispus has begun to count the debt Torquatus Flaccus owes among Sabinus Crispus's assets, and has had it written down before witnesses.
+Active Conflicts (1)
+Moderate tension Corrupt Council vs Thieves' Guild · Stolen goods sold openly
+At stake: Reputation and profit
+
+=== World/Daily Life ===
+Food
+Secure
+Access
+Road
+Culture
+Latin
+Whoever keeps Farosaltus's purse pays the most pressing debt each month and lets the rest wait.
+Generate Daily Life: Narrative refinement
+
+=== World/Traditions ===
+The founding traditions of Farosaltus.
+✒
+The Quiet Feast
+Charter
+Kept in Seedtime, the third week.
+⚖
+The Common Market Fair
+Market
+Kept in Highsun, the third and fourth weeks.
+◆
+The Standing Stone Offering
+Stone
+Kept in Deepwinter, the tenth week.
+
+=== World/History ===
+Farosaltus146 years old↺ Reroll
+"It came through the Economic Divide and the Succession Crisis without losing its options, its neighbours or its temper, and the people here count all three as achievements"
+Current Tensions (2)▲
+Succession Crisis
+The one who led was failing in health, and rivals maneuvered quietly to take that place
+Corrupt CouncilPopular candidateThieves' Guild
+Guild Conflict
+Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run
+Guild membersThose who would trade outside the guildNon-guild workers
+Founding▲
+Origin:began when a merchant realised the local sheep produced finer wool than anything available on the open market
+Founded by:merchants recognising economic potential before anyone else did
+Early trial:poor early harvests
+How survived:by making enough right decisions to survive the wrong ones
+Generations of patching and rebuilding have nearly hidden the plan Farosaltus was laid out to.
+Major Historical Events (2)▲
+Founded
+Now
+146y
+56y
+Economic
+Political
+The Succession CrisisPoliticalmajor
+The ruler of the time was aging or ill, and potential heirs jockeyed for position
+56y ago
+Last century
+▼
+The Economic DivideEconomicmajor
+The merchant class prospers while common laborers fall behind, and the bitterness spreads
+146y ago
+Ancient
+Nobody in Farosaltus has finished putting right the legacy the succession crisis left, and that legacy is two generations old.
+
+=== World/Rumors & News ===
+Available at launch
+What Farosaltus has heard from the rest of the realm, true or not, as the news reaches it. Beside each telling, what the DM knows to be true.
+
+=== World/War ===
+Available at launch
+From here you raise Farosaltus's troops, send them out, call them home, and read what they report back.
+
+=== World/Faith ===
+Faith
+Parish churches keep the faith in the town. Folk attend on the great feast days and keep the lesser rites at home.
+The faith’s god and the church’s name are yours to set.
+
+=== Notes/DM Notes ===
+DM Notes
+Type freely. Save this settlement to keep your notes with it.
+
+=== Notes/AI Notes ===
+Campaign Context
+Woven into AI narration as established campaign flavor. Settlement facts still win where they conflict. It may therefore appear in generated prose, including shared narration if you publish it; otherwise it stays DM-private. You confirm it before each AI run, and DM Notes are never included.
+Type freely. Save this settlement to keep your notes with it.
+
+=== Notes/Chronicle ===
+No chronicle yet.

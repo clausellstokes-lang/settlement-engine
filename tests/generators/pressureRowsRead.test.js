@@ -46,7 +46,7 @@ describe('A1b the courts only where a courthouse stands', () => {
     const none = String(/** @type {any} */ (PRESSURE_SENTENCES.religious_conversion({ name: 'X', hasCourt: false, govFaction: 'Town Council' })[1]).text);
     // anchored: the next line asserts the same row printed its council clause
     expect(none).not.toMatch(/court/i);
-    expect(none).toContain('that Town Council is not equipped to resolve quickly');
+    expect(none).toContain('that the Town Council is not equipped to resolve quickly'); // NAMES-1 (CN1): the article
   });
 });
 

@@ -54,6 +54,7 @@ import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 import { codeOnly } from '../helpers/codeOnlySource.js';
 import { gitResolvesCommit, UNRESOLVABLE_WELL_FORMED_SHA } from '../helpers/gitObjectStore.js';
+import { fixtureGit } from '../helpers/gitFixture.js';
 import {
   measureTree, discoverTables, tableSpan, flattenLeaves, spanDigest, astKeyNames,
   countBareDecimals, countUnregisteredNamed, resolveDependents,
@@ -1605,7 +1606,7 @@ describe('tuning register — the refreeze ritual refuses', () => {
     // whatever state the dock happens to be in when the gate runs.
     const dir = mkdtempSync(join(tmpdir(), 'tunereg-git-'));
     try {
-      execFileSync('git', ['init', '-q'], { cwd: dir });
+      fixtureGit(dir, ['init', '-q']);
       writeFileSync(join(dir, 'someone-elses-work.js'), 'export const x = 1;\n', 'utf8');
       const args = {
         root: dir,

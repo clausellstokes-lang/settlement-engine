@@ -35,7 +35,7 @@ describe('HOOK_LINE_POOLS: the declared lines', () => {
     expect(lines.filter((l) => typeof l !== 'string' || l.includes('[object Object]'))).toEqual([]);
     const guarded = lines.filter((l) => l.includes('has posted guards'));
     expect(guarded.length).toBeGreaterThan(0);
-    for (const l of guarded) expect(l).toMatch(/^A\d+ has posted guards on what it says is its own, and B\d+ says a land claim on the mill was never A\d+'s to hold\.$/);
+    for (const l of guarded) expect(l).toMatch(/^The A\d+ has posted guards on what it says is its own, and the B\d+ says a land claim on the mill was never the A\d+'s to hold\.$/); // NAMES-1 (CN1): the article
   });
   it('the food-gap lines that say grain or food is coming in are refused under a siege; the forward-buying line needs a market', () => {
     const fg = HOOK_LINE_POOLS.foodGap;
