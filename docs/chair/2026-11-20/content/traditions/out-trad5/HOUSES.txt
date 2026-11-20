@@ -1,0 +1,89 @@
+THE HOUSES THE POOLS NEED — for the security reader at the join (TRAD-5 unit 12, written 2026-11-20 19:35 UTC).
+Made by tools/houses.mjs (out-trad5/RUN.txt, command 17), never by hand; this heading and the CRIME section below are set
+around the tool's body. The leaf: src/domain/traditions/traditionDescription.js :: describeTradition; its table
+src/data/traditionDescriptionTable.js :: KEEPER_HOUSES (RELIGIOUS_HOUSES and MARKET_PLACES are its own rows). Each id's
+name by src/data/institutionalCatalog.js :: catalogIdForName; each verdict by src/domain/people/cardVeil.js ::
+isHideableHouse, CALLED on the house as the catalogue births it at every tier it stands at, and on every house of these
+ids born in the calm pool. RESULT: 57 houses, 0 hideable (0 of 4,000 born). No STOP.
+
+houses=57; hideable=0; ids with no catalogue row=0; atoms that read a house: institution: smith, market; atoms that read no house: navigable (ELEMENT_GLOSS.first-landing); river (ELEMENT_GLOSS.river); coast (ELEMENT_GLOSS.tide)
+born check (calm/pool.ndjson): houses of these ids born in the pool=4000; isHideableHouse TRUE as born=0
+
+name | catalogue id | needed by | via | catalogue shelf at tiers | verdict
+Annual fair | annual_fair | needs "market" (ELEMENT_GLOSS.market) | via needs atom | Economy at town | isHideableHouse: FALSE
+Auction house | auction_house | needs "market" (ELEMENT_GLOSS.market) | via needs atom | Economy at town, city, metropolis | isHideableHouse: FALSE (3 tiers read)
+Barge and river transport company | barge_and_river_transport_company | keeper (element river, a body) | via KEEPER_HOUSES | Economy at town, city, metropolis | isHideableHouse: FALSE (3 tiers read)
+Blacksmith | blacksmith | keeper (element forge, a body); needs "institution: smith" (ELEMENT_GLOSS.forge) | via KEEPER_HOUSES, needs atom | Crafts at village | isHideableHouse: FALSE
+Blacksmiths (3-10) | blacksmiths_3_10 | keeper (element forge, a body); needs "institution: smith" (ELEMENT_GLOSS.forge) | via KEEPER_HOUSES, needs atom | Crafts at town, city, metropolis | isHideableHouse: FALSE (3 tiers read)
+Burial ground | burial_ground | keeper (element the-dead, a place) | via KEEPER_HOUSES | Religious at thorp, hamlet | isHideableHouse: FALSE (2 tiers read)
+Burial grounds and charnel house | burial_grounds_and_charnel_house | keeper (element the-dead, a place) | via KEEPER_HOUSES | Religious at city | isHideableHouse: FALSE
+Caravaneer's post | caravaneer_s_post | needs "market" (ELEMENT_GLOSS.market) | via needs atom | Economy at town | isHideableHouse: FALSE
+Carriers' guild | carriers_guild | needs "market" (ELEMENT_GLOSS.market) | via needs atom | Economy at town | isHideableHouse: FALSE
+Cathedral (10,000+ only) | cathedral_10_000_only | keeper (element the-dead, a body); keeper (element stars, a body); keeper (act offering, a body); keeper (act vigil, a body) | via RELIGIOUS_HOUSES | Religious at city | isHideableHouse: FALSE
+Cemetery network | cemetery_network | keeper (element the-dead, a place) | via KEEPER_HOUSES | Religious at metropolis | isHideableHouse: FALSE
+City granaries | city_granaries | keeper (element harvest, a place) | via KEEPER_HOUSES | Economy at city | isHideableHouse: FALSE
+Cobbler's guild | cobbler_s_guild | needs "market" (ELEMENT_GLOSS.market) | via needs atom | Crafts at town, city, metropolis | isHideableHouse: FALSE (3 tiers read)
+Colosseum/arena | colosseum_arena | keeper (act contest, a place) | via KEEPER_HOUSES | Entertainment at metropolis | isHideableHouse: FALSE
+Communal root cellar | communal_root_cellar | keeper (element harvest, a place) | via KEEPER_HOUSES | Economy at thorp | isHideableHouse: FALSE
+Daily markets | daily_markets | keeper (element market, a place); keeper (act fair, a place); needs "market" (ELEMENT_GLOSS.market) | via MARKET_PLACES, needs atom | Economy at city | isHideableHouse: FALSE
+District markets (5-10) | district_markets_5_10 | keeper (element market, a place); keeper (act fair, a place); needs "market" (ELEMENT_GLOSS.market) | via MARKET_PLACES, needs atom | Economy at metropolis | isHideableHouse: FALSE
+Druid Circle | druid_circle | keeper (element greening, a body) | via KEEPER_HOUSES | Religious at village | isHideableHouse: FALSE
+Elder Grove Council | elder_grove_council | keeper (element greening, a body) | via KEEPER_HOUSES | Religious at town, city, metropolis | isHideableHouse: FALSE (3 tiers read)
+Fish market | fish_market | needs "market" (ELEMENT_GLOSS.market) | via needs atom | Economy at village, town, city, metropolis | isHideableHouse: FALSE (4 tiers read)
+Fisher's landing | fisher_s_landing | keeper (element tide, a place) | via KEEPER_HOUSES | Economy at hamlet, village | isHideableHouse: FALSE (2 tiers read)
+Fishing community | fishing_community | keeper (element tide, a body) | via KEEPER_HOUSES | Economy at thorp | isHideableHouse: FALSE
+Furrier's district | furrier_s_district | keeper (element hunt, a place); needs "market" (ELEMENT_GLOSS.market) | via KEEPER_HOUSES, needs atom | Economy at city, metropolis | isHideableHouse: FALSE (2 tiers read)
+Gladiatorial school | gladiatorial_school | keeper (act contest, a body) | via KEEPER_HOUSES | Entertainment at town, city, metropolis | isHideableHouse: FALSE (3 tiers read)
+Graveyard | graveyard | keeper (element the-dead, a place) | via KEEPER_HOUSES | Religious at village | isHideableHouse: FALSE
+Great cathedral | great_cathedral | keeper (element the-dead, a body); keeper (element stars, a body); keeper (act offering, a body); keeper (act vigil, a body) | via RELIGIOUS_HOUSES | Religious at metropolis | isHideableHouse: FALSE
+Harbour master's office | harbour_master_s_office | keeper (element tide, a body) | via KEEPER_HOUSES | Economy at town, city, metropolis | isHideableHouse: FALSE (3 tiers read)
+Hunter's lodge | hunter_s_lodge | keeper (element hunt, a body) | via KEEPER_HOUSES | Economy at hamlet, village, town | isHideableHouse: FALSE (3 tiers read)
+International trade center | international_trade_center | needs "market" (ELEMENT_GLOSS.market) | via needs atom | Economy at metropolis | isHideableHouse: FALSE
+Major annual fairs | major_annual_fairs | needs "market" (ELEMENT_GLOSS.market) | via needs atom | Economy at city, metropolis | isHideableHouse: FALSE (2 tiers read)
+Major monasteries (5-10) | major_monasteries_5_10 | keeper (element the-dead, a body); keeper (element stars, a body); keeper (act offering, a body); keeper (act vigil, a body) | via RELIGIOUS_HOUSES | Religious at metropolis | isHideableHouse: FALSE
+Market square | market_square | keeper (element market, a place); keeper (act fair, a place); needs "market" (ELEMENT_GLOSS.market) | via MARKET_PLACES, needs atom | Economy at town | isHideableHouse: FALSE
+Merchant guilds (15-40) | merchant_guilds_15_40 | needs "market" (ELEMENT_GLOSS.market) | via needs atom | Economy at city | isHideableHouse: FALSE
+Merchant guilds (3-8) | merchant_guilds_3_8 | needs "market" (ELEMENT_GLOSS.market) | via needs atom | Economy at town | isHideableHouse: FALSE
+Merchant guilds (50-100+) | merchant_guilds_50_100 | needs "market" (ELEMENT_GLOSS.market) | via needs atom | Economy at metropolis | isHideableHouse: FALSE
+Mill | mill | keeper (element harvest, a place) | via KEEPER_HOUSES | Crafts at village | isHideableHouse: FALSE
+Mills (2-5) | mills_2_5 | keeper (element harvest, a place) | via KEEPER_HOUSES | Crafts at town, city, metropolis | isHideableHouse: FALSE (3 tiers read)
+Monastery or friary | monastery_or_friary | keeper (element the-dead, a body); keeper (element stars, a body); keeper (act offering, a body); keeper (act vigil, a body) | via RELIGIOUS_HOUSES | Religious at town | isHideableHouse: FALSE
+Multiple market squares | multiple_market_squares | keeper (element market, a place); keeper (act fair, a place); needs "market" (ELEMENT_GLOSS.market) | via MARKET_PLACES, needs atom | Economy at city, metropolis | isHideableHouse: FALSE (2 tiers read)
+Multiple monasteries | multiple_monasteries | keeper (element the-dead, a body); keeper (element stars, a body); keeper (act offering, a body); keeper (act vigil, a body) | via RELIGIOUS_HOUSES | Religious at city | isHideableHouse: FALSE
+Parish burial grounds | parish_burial_grounds | keeper (element the-dead, a place) | via KEEPER_HOUSES | Religious at town | isHideableHouse: FALSE
+Parish church | parish_church | keeper (element the-dead, a body); keeper (element stars, a body); keeper (act offering, a body); keeper (act vigil, a body) | via RELIGIOUS_HOUSES | Religious at village | isHideableHouse: FALSE
+Parish churches (10-30) | parish_churches_10_30 | keeper (element the-dead, a body); keeper (element stars, a body); keeper (act offering, a body); keeper (act vigil, a body) | via RELIGIOUS_HOUSES | Religious at city | isHideableHouse: FALSE
+Parish churches (2-5) | parish_churches_2_5 | keeper (element the-dead, a body); keeper (element stars, a body); keeper (act offering, a body); keeper (act vigil, a body) | via RELIGIOUS_HOUSES | Religious at town | isHideableHouse: FALSE
+Parish churches (50-100+) | parish_churches_50_100 | keeper (element the-dead, a body); keeper (element stars, a body); keeper (act offering, a body); keeper (act vigil, a body) | via RELIGIOUS_HOUSES | Religious at metropolis | isHideableHouse: FALSE
+Periodic market | periodic_market | keeper (element market, a place); keeper (act fair, a place); needs "market" (ELEMENT_GLOSS.market) | via MARKET_PLACES, needs atom | Economy at hamlet | isHideableHouse: FALSE
+Priest (resident) | priest_resident | keeper (element the-dead, a body); keeper (element stars, a body); keeper (act offering, a body); keeper (act vigil, a body) | via RELIGIOUS_HOUSES | Religious at village | isHideableHouse: FALSE
+Resident smith (part-time) | resident_smith_part_time | keeper (element forge, a body); needs "institution: smith" (ELEMENT_GLOSS.forge) | via KEEPER_HOUSES, needs atom | Crafts at hamlet | isHideableHouse: FALSE
+River boatyard | river_boatyard | keeper (element river, a place) | via KEEPER_HOUSES | Economy at village, town, city, metropolis | isHideableHouse: FALSE (4 tiers read)
+River ferry | river_ferry | keeper (element river, a body) | via KEEPER_HOUSES | Economy at village, town, city, metropolis | isHideableHouse: FALSE (4 tiers read)
+Specialized metalworkers | specialized_metalworkers | keeper (element forge, a body) | via KEEPER_HOUSES | Crafts at city, metropolis | isHideableHouse: FALSE (2 tiers read)
+State granary complex | state_granary_complex | keeper (element harvest, a place) | via KEEPER_HOUSES | Economy at metropolis | isHideableHouse: FALSE
+Tailor's guild | tailor_s_guild | needs "market" (ELEMENT_GLOSS.market) | via needs atom | Crafts at town, city, metropolis | isHideableHouse: FALSE (3 tiers read)
+Town granary | town_granary | keeper (element harvest, a place) | via KEEPER_HOUSES | Economy at town | isHideableHouse: FALSE
+Wayside shrine | wayside_shrine | keeper (element the-dead, a place); keeper (element stars, a place); keeper (act offering, a place); keeper (act vigil, a place) | via RELIGIOUS_HOUSES | Religious at thorp, hamlet, village | isHideableHouse: FALSE (3 tiers read)
+Weekly market | weekly_market | keeper (element market, a place); keeper (act fair, a place); needs "market" (ELEMENT_GLOSS.market) | via MARKET_PLACES, needs atom | Economy at village, town | isHideableHouse: FALSE (2 tiers read)
+Wildfowler | wildfowler | keeper (element hunt, a body) | via KEEPER_HOUSES | Economy at village | isHideableHouse: FALSE
+
+## DOES ANY WORDING READ A FACT ABOUT CRIME? No wording names one; the leaf reads crime only to leave it out.
+grep -n -i "crim|crime|thie|smuggl|black.market|underworld|clandestin|hideable|veiled" over the leaf and the table:
+- the table: one hit, a comment, src/data/traditionDescriptionTable.js :: KEEPER_HOUSES:
+    " * The table holds no kind the gallery veil may hide whole (people/cardVeil.js :: isHideableHouse). The founding"
+  No line of any pool, and no income of ECONOMY_FIT, names a criminal income, a crime house or a criminal power.
+- the leaf, the reader's view (traditionDescription.js :: readerView): the three classes are dropped before any wording:
+    ".filter((i) => !isHideableHouse(recordOf(i))).map(withoutFunction),"
+    "powerStructure: { ...ps, factions: listOf(ps.factions).filter((f) => !isVeiledPower(f)).map(powerFloor) },"
+    "economicState: { ...economy, incomeSources: listOf(economy.incomeSources).filter((r) => recordOf(r).isCriminal !== true) },"
+  and again at each pick (traditionDescription.js :: houseFor, powerFor, ownerFor):
+    "const inst = houses.find((i) => idOf(i) === id && !(reader && isHideableHouse(i)));"
+    "const barred = (f) => (reader ? isVeiledPower(f) : f.hidden === true);"
+    "if (!inst || (reader && isHideableHouse(inst))) return null;"
+- what the OWNER's page still reads (named, never worded): (a) the payer's rank counts the criminal income row among the
+  town's incomes (traditionDescription.js :: compose, "// the rank and the 'only' count: for a reader, over the view (no
+  criminal income row; CTR11, the census above)"): it moves the rank word on 17 of 1,232 owner rites (TRAD-5-MEASURES.txt),
+  and no wording names the income; (b) powerFor and ownerFor bar only a hidden power for the owner, so a criminal power
+  that is not hidden could be named as a keeper (its name, not its crime): measured over the six pools (calm and five
+  crises, a scratch check outside the tree), 0 owner rites and 0 reader rites name a veiled power.

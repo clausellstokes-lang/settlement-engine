@@ -24,6 +24,10 @@
 // slot (townRepeats), with the slot that ran out where one did.
 // - CTR11's OTHER DIRECTION (the owner's list): the printed rites whose OWNER economy sentence differs from the one the
 //   record less its criminal income rows (`isCriminal: true`, the class the reader's view drops) would print.
+//
+// TRAD-5 unit 12 (2026-11-20): the leaf's one pick is kernel/proseHash.js :: pickVariantMixed since unit 11 (the leaf's
+// draw and drawTurn); the re-derivation of the drawn line (drawnBefore) now reads it too, else every draw would count as a
+// disagreement or a turn. The figures are otherwise read as before.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { descriptionSetOf, sharedTraditionRowsOf, shownTraditionsOf } from '../../../../../../src/domain/traditions/shownTraditions.js';
@@ -31,7 +35,7 @@ import { deriveFoundingTraditions } from '../../../../../../src/domain/tradition
 import { describeTradition, describeTraditions } from '../../../../../../src/domain/traditions/traditionDescription.js';
 import { withPresumptionLedger } from '../../../../../../src/domain/facts/presumptionLedger.js';
 import { lineText } from '../../../../../../src/domain/facts/drawDeclared.js';
-import { pickVariant } from '../../../../../../src/kernel/proseHash.js';
+import { pickVariantMixed } from '../../../../../../src/kernel/proseHash.js';
 import { TRADITION_ELEMENTS } from '../../../../../../src/data/traditionCorpus.js';
 import {
   ACT_LEADS, ELEMENT_GLOSS, OWNER_FRAMES, HOUSE_FRAMES, POWER_FRAMES, CAUSE_FRAMES, ECONOMY_FRAMES, KEEPER_FRAMES_TOO,
@@ -53,10 +57,10 @@ const TOO_RES = Object.values(KEEPER_FRAMES_TOO).flat().map((l) => new RegExp(`^
 const printsToo = (text) => String(text || '').split(/(?<=\.) (?=\p{Lu})/u).some((x) => TOO_RES.some((re) => re.test(x)));
 /** every sentence printed in two or more of the texts */
 const twiceIn = (texts) => { const m = new Map(); for (const t of texts) for (const x of String(t || '').split(/(?<=\.) (?=\p{Lu})/u).filter(Boolean)) m.set(x, (m.get(x) || 0) + 1); return [...m].filter(([, n]) => n >= 2); };
-/** the line the leaf's draw picks BEFORE resolution: pickVariant over the pool less its twins, on the leaf's key */
+/** the line the leaf's draw picks BEFORE resolution: pickVariantMixed (TRAD-5 unit 12: the leaf's pick since unit 11) over the pool less its twins, on the leaf's key */
 const drawnBefore = (pool, seed, id, suffix) => {
   const domain = pool.some(isTwin) ? pool.filter((l) => !isTwin(l)) : pool;
-  return String(lineText(pickVariant(domain, `${seed}::${id}${suffix}`)) ?? '');
+  return String(lineText(pickVariantMixed(domain, `${seed}::${id}${suffix}`)) ?? '');
 };
 
 /**
@@ -211,7 +215,7 @@ function main() {
   out.push('# read from the presumption ledger (`pool`, `lineId`), the drawn line re-read by the leaf\'s own key; a refusal to nothing is seen where the slot always draws (gloss)');
   out.push(`# re-derivation disagreements with the ledger: ${mismatch} (and ${turned} draws the unit 10 rotation turned)`);
   out.push(`# towns of this pool holding a stress (a crisis the record holds: crisis-scoped lines answer to it): ${stressed} of ${towns.length}`);
-  out.push('# drawn-top: the most DRAWN line (before any refusal) and its share; the pick is kernel/proseHash.js :: pickVariant, fnv1a32(key) % pool size');
+  out.push('# drawn-top: the most DRAWN line (before any refusal) and its share; the pick is kernel/proseHash.js :: pickVariantMixed, mix32(fnv1a32(key)) % pool size');
   let dom = null;
   for (const [id, p] of [...pools].sort((a, b) => (a[0] < b[0] ? -1 : 1))) {
     const top = [...p.lines].sort((a, b) => b[1] - a[1])[0]; const share = top[1] / p.draws;
