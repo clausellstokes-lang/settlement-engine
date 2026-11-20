@@ -25,11 +25,11 @@ node wants-mirrors.mjs ../../../../../.. /tmp/lines380.json /tmp/wants-mirrors-w
 ```
 
 
-**Measured with every line as it now stands** (the 300 measure towns, the 380 appended in memory; \`wants-verify.final.out.txt\`,
-\`wants-mirrors.final.out.txt\`): a second city repeats **12.0% · 12.1%** of a first city's short · long wants (36.4% · 36.0% at
+**Measured with every line as it now stands** (the 300 measure towns, the 380 appended in memory; `wants-verify.final.out.txt`,
+`wants-mirrors.final.out.txt`): a second city repeats **12.0% · 12.1%** of a first city's short · long wants (36.4% · 36.0% at
 363cea0ab); a metropolis **17.4% · 17.5%** (47.3% · 47.2%). The lane's gates: **identical 0, refusal 0; mirror 0** (83 at
-the base). Checker: **shapeViolations 0** over cells + reserve + the 380 (\`want-lines-check.out.txt\`). Reserve check: 32
-PERSONALITY lines read, the chair's 17:37 ruling applied (\`want-lines-reserve.out.txt\`, \`PERSONALITY-RESERVE-CHECK.md\`).
+the base). Checker: **shapeViolations 0** over cells + reserve + the 380 (`want-lines-check.out.txt`). Reserve check: 32
+PERSONALITY lines read, the chair's 17:37 ruling applied (`want-lines-reserve.out.txt`, `PERSONALITY-RESERVE-CHECK.md`).
 
 ### RANK/climb/short · 6 → 17 (+11)
 
