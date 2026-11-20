@@ -25,7 +25,7 @@ restated; this file adds what came after.
 | 7 | REVIEW-VEIL-13's hole: the reader's dead-cause by the chair's word rule (re-stated 15:10, ADDENDUM 1); no power archetype from a hideable field | READ WHOLE, reds re-run 16/90 at `ef605266f`, greens 90/90, MERGED; "TRAD-SHARE-2" sent | `edfeb052d`; merge `18414593c` |
 | 5 | CTR10 finished: every frame a declared line (70 bare → 0), floors by arms, gloss pools raised to 3 (+32 lines), crisis arms, the totality arm, census rows (Appendix B), the printed export | READ WHOLE, reds re-run 6/66 at `c38ba7886`, MERGED | `22be32bea`; merge `89311c175` |
 | 6 | the measures and the owner's 30 + 12 samples, the plain-words file | MERGED (docs and tools only) | `a39c93689`; merge `5f49c7779` |
-| 8 | the import path and the round trip > 4 towns (brief `briefs/TRAD-4-U8-IMPORT-ROUNDTRIP.md`) | STOPPED AT A RED (the import path applies no share veil: a hidden hideable house named on the importer's page, 34 names in 31 of 140 towns); WIP held for the chair's ruling, NOT read line by line yet | `14f16760b` on `lane/trad-4-2026-11-20-u8-wip` |
+| 8 | the import path and the round trip > 4 towns (brief `briefs/TRAD-4-U8-IMPORT-ROUNDTRIP.md`) | CLOSED (the chair, 17:00): round trip green on 140; the import door handed to the veil lane (VEIL RULING 55, VEIL-27). See §7 | `14f16760b` on `lane/trad-4-2026-11-20-u8-wip` (not merged) |
 | 9 | no first sentence says "kept" twice (brief `briefs/TRAD-4-U9-KEPT-TWICE.md`) | builder out, worktree scratchpad/u9 | — |
 | — | CTR11's "other direction" line for the owner (where a DM SHOWS the criminal income, the reader still ranks without it), with its born count | open | — |
 
@@ -68,6 +68,24 @@ and reader reproduce TRAD-3-HANDBACK §5 exactly (1,232 rites; SHORT 8.7%; top s
 - THEN: "TRAD-SHARE-2 <commit>" to the chair once unit 7 is merged and green; then unit 5; then unit 6 (brief DRAFT
   `briefs/TRAD-4-U6-MEASURES.md`: stamp its base at dispatch).
 
+## 7. THE IMPORT DOOR (unit 8's finding; handed to the veil lane by the chair, 17:00 UTC, VEIL RULING 55)
+VEIL RULING 55: what an importer may receive is the document the share serves to that reader under the veil, and nothing
+else; the clone is built from the served document, never the stored row; if the veil cannot be applied the import fails
+closed. The cure is the veil lane's (VEIL-27, seeded with `14f16760b`); THIS LANE TOUCHES NOTHING MORE OF THE IMPORT PATH.
+- THE FINDING (unit 8's builder, executed): `import_gallery_dossier` (latest definition, migration 131) runs the sanitizer
+  and the member splice only; `src/lib/gallery.js :: fetchDossierForImport` adds the confidential strip and
+  `veilPublicPayload` (a civility mask). A planted hideable (Criminal) house the DM hid reaches the clone and the
+  importer's own page names it as a keeper: 34 names in 31 of 140 towns. Not chased: the import path never reads the DM's
+  `$veil` deltas, so a clone carries every hidden house on every tab.
+- GREEN beside it: the save/serve round trip on 140 towns (client and the real sanitizer in pglite: byte-equal, nothing
+  hidden, dense ids); the clone's drawn rows equal the served rows, 140 of 140.
+- A NAMED SURVIVOR FOR THE OWNER (stays): 0 of 140 clones show the importer the set the gallery served (the seed is
+  scrubbed; the sanitizer drops `traditions`, so a clone re-draws); after the veil's cure a clone re-draws only from
+  houses the share served.
+- REPRO: `git fetch origin lane/trad-4-2026-11-20-u8-wip && git worktree add --detach <dir> 14f16760b`, link
+  `node_modules`, then in `<dir>`: `sh scripts/gate-tail.sh npx vitest run tests/security/traditionDescriptionSharedPage.test.js`
+  (≈131 s; the unit-8 block: 7 passed, 1 failed, the importer's-owner-page arm).
+
 ## Updated (append at each later commit, with `date -u`)
 - 2026-11-20 13:33 UTC — the lane taken at `1f3cdc135`; pushed; unit 5's brief written.
 - 2026-11-20 14:5x UTC — units 7 and 5 built, pushed as `-wip` lane branches; unit 7 waits on the chair's ruling on the word rule; this file is the successor's start.
@@ -91,3 +109,4 @@ and reader reproduce TRAD-3-HANDBACK §5 exactly (1,232 rites; SHORT 8.7%; top s
   criminal income); 146 of the 432 "calm" towns hold a pressure of their own. Findings sent to the chair: "kept" twice
   (unit 9), and `kernel/proseHash.js :: pickVariant`'s `% 4` lean (not ours). UNIT 8 stopped at a red on the import path
   (above): the chair rules which document is "served" to an importer and the cure (not this lane's files).
+- 2026-11-20 17:01 UTC — UNIT 8 CLOSED by the chair (§7). Left: unit 9; then ONE call line taking the kernel's mixed pick when the chair names its commit (unit 6's count re-taken).
