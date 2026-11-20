@@ -288,7 +288,7 @@ PERSONALITY lines read, the chair's 17:37 ruling applied (`want-lines-reserve.ou
 8. Have {house} written into the laws here as a house no ruler may close.  <sub>1:10.2</sub>
 9. Win {house} the right to judge quarrels among the people who work there.  <sub>2:10.1</sub>
 10. Have the rights of {house} carved or painted where everyone can read them.  <sub>2:10.2</sub>
-11. Win {house} the right to work and trade without paying the tolls others pay.  <sub>2:10.3</sub>
+11. Win {house} freedom from the tolls and dues that others pay.  <sub>2:10.3</sub>
 12. Win {house} the right to take on new hands without leave from anyone.  <sub>3:13.1</sub>
 13. Win {house} the right to set the terms for the work done there.  <sub>3:13.2</sub>
 14. Have the rights of {house} kept in the same place as the laws here.  <sub>4:12.1</sub>
@@ -454,7 +454,7 @@ PERSONALITY lines read, the chair's 17:37 ruling applied (`want-lines-reserve.ou
 
 ### PERSONALITY/greed/short · 4 → 7 (+3)
 
-5. Sell something this season for twice what it cost them.  <sub>4:15.1</sub>
+5. Come out of one bargain this season with twice what they put in.  <sub>4:15.1</sub>
 6. Charge one person this season for something they used to get free.  <sub>5:20.1</sub>
 7. Ask a higher share this season of anything they have a hand in.  <sub>7:3.1</sub>
 

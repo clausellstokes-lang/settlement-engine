@@ -224,7 +224,7 @@ Existing (two of four, verbatim):
 - Get the better side of every bargain struck this season.
 
 New:
-1. Sell something this season for twice what it cost them.
+1. Come out of one bargain this season with twice what they put in.
 
 ### 16 · TIES/mentor_student/short · +1 (cell 7 → 8)
 Holders: either end (dean, lord, company captain, sage, scroll scribe, mine captain, miller).

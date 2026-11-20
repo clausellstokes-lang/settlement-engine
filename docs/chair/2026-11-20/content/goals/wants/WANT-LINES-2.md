@@ -173,7 +173,7 @@ Existing (two of six, verbatim):
 New:
 1. Win {house} the right to judge quarrels among the people who work there.
 2. Have the rights of {house} carved or painted where everyone can read them.
-3. Win {house} the right to work and trade without paying the tolls others pay.
+3. Win {house} freedom from the tolls and dues that others pay.
 
 ### 11 · PERSONALITY/grudge/long · +2 (cell 4 → 6)
 Holders: a card whose temperament or flaw wants scores settled or what others have (fortune teller, ropemaker, gang
