@@ -493,6 +493,7 @@
   {"pool":"src/data/narrativeData.js :: ARRIVAL_SCENES::guild","sha":"099fa44cb967","house":"walls"},
   {"pool":"src/data/narrativeData.js :: ARRIVAL_SCENES::guild","sha":"acebc1326b52","house":"institution: smith"},
   {"pool":"src/data/narrativeData.js :: ARRIVAL_SCENES::ordinary","sha":"cb3f9d4e6a7a","house":"market"},
+  {"pool":"src/data/narrativeData.js :: ARRIVAL_SCENES::port","sha":"0895332115e6","house":"docks"},
   {"pool":"src/data/narrativeData.js :: ARRIVAL_SCENES::port","sha":"249bfcb9248a","house":"docks"},
   {"pool":"src/data/narrativeData.js :: ARRIVAL_SCENES::port","sha":"358a2adb54c1","house":"docks"},
   {"pool":"src/data/narrativeData.js :: ARRIVAL_SCENES::port","sha":"461f00e6575d","house":"docks"},
