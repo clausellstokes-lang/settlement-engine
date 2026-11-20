@@ -1458,6 +1458,52 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   GIVEN TO PAGE-7 AT ONCE, BEFORE THE HAND-OVER (new files only; every existing file of the trouble half stays
   PAGE-5's until "THE LANE IS YOURS"): brief `briefs/CAUSES-DATA.md` at 5731eb9bc.
 
+- **U5 "MERITS OF RULE": APPROVED AS PROPOSED, DARK, SEVEN CONDITIONS (15:30 UTC).** The chair read the whole proposal
+  (`docs/chair/2026-11-20/content/fortune/U5-PROPOSAL.md` at 64db7ba3d on `lane/fortune-2-2026-11-20-u5-wip`; twelve
+  sections; three seed sets: hxd 600, hxr 600 with every dial random, hxu 1,200). ITS MEASURE: two merits, +10 each
+  (DRAFT), only upward, only at Tolerated or better, only with no trouble of today about the ruler and no capture:
+  THE PRINCIPLED RULER (rank 1 of the governing power, dominant trait in the card's `straight` family, no vice flaw:
+  4 to 13% of calm places, flat by size) and A CATASTROPHE WEATHERED WITHIN 40 YEARS (3 to 17%, flat; "any age"
+  grows 21% to 78% with size and was refused). SAFETY by the size's usual range (p10 to p90: Moderate everywhere but
+  the city, Unsafe to Moderate): it moves only a calm city's Unsafe (-8 to 0) and puts the calm city level with the
+  other sizes (Approved 18% pooled without it, 39% with it; the others 35 to 46%). ENDORSED AMONG CALM PLACES AT
+  UNTOUCHED SETTINGS: today 0/0/0/0/41/91% (it was size, not merit); under the ruled fortune rule 0 everywhere; WITH
+  U5, pooled over two sets, 3.6/3.6/2.8/5.4/2.3/3.0% thorp to metropolis, never on fewer than two reasons (43 of 43).
+  FS4 holds on three sets (no score falls; the Legitimacy Crisis share unchanged at every size); the contest's
+  protected shares do not move; the capture rung differs in 0 of 600, 0 of 1,200 and 1 of 600. A CORRECTION OF THE
+  CHAIR'S OWN FIGURE: "safety costs about 4 at every size in calm places" is WRONG: calm places lose 0 to 1.8; the 4
+  is the mean over all places, crisis-born included (told to the owner). CONDITIONS: (1) all rows DRAFT, the owner's
+  at the close; (3) THE STRUCTURAL COST: the ruler's card and the history are born after the standing, so the merits
+  are a LATE STEP that re-bands; THE BIRTH'S POWERS STAND (no multiplier re-run: the measured shape); BUT NO PRINTED
+  WORD MAY CONTRADICT THE STORED BAND: a census of every birth reader of a band above Tolerated first; word-writers
+  re-run in the late step (pure, idempotent) or proved the same at both bands; number-writers listed and left; an arm
+  that re-running the word-writers changes nothing on every moved town; play-time `reBand` verified in the code to
+  have this shape; (4) the legacy clause reads no free text: one matcher over the legacy generator's own exported
+  list, a pin, a made-up wording that reds; (5) the merit names its own trait list, tested equal to the card's
+  family; (6) the reason printed at render by the birth step's own predicates; its sentences to the chair first;
+  (7) `breakdown.merits` listed for the security reader (the capture rung conditions it). Build: FORTUNE-3's, after
+  the hand-over; the merits under the seat's law are read in the joint measure. OPEN FOR THE OWNER'S EYE: a calm
+  city's unsafe streets no longer cost its ruler; with every dial random Endorsed reads 5/19/13/26/21/14%.
+- **A NEW SAMENESS FAULT, FOUND BY THE CHAIR'S OWN READ OF THE SIX SHEETS AND MEASURED (15:28 UTC):**
+  `powerStructure.recentConflict` (one sentence a branch of `power/governanceNarrative.js`; printed on the Summary
+  tab, in the governance paragraph, the PDF and as a calm place's sheet opening) IS SHARED, names masked, BY 27 of 50
+  thorps, 24 hamlets, 24 villages (the grazing and water dispute) AND 31 of 50 towns, 27 cities, 30 metropolises (the
+  market levies debate): `measures/recent-conflict/rc.mjs`, `rc.out.txt` (seeds hxd-<size>-0..49 at 43ab0f5eb). No
+  earlier measure read this field. RULED: A SECOND UNIT OF THE DEPTH LANE, MEASURE AND PROPOSE FIRST: the two default
+  branches choose by keyed hash, no new draw, among small everyday quarrels each needing a house or fact the record
+  holds; target no sentence in more than about 15% of a size's places; a census of the field's readers (some match
+  its words); whether it is built before the deploy is ruled on DEPTH-2's count. No lane's branch touches
+  `governanceNarrative.js` or `powerSiblings.js` today (checked against nine lanes' tips).
+- **THE SMALLEST PLACES, MEASURED (a helper, 150 places; `measures/small-hooks/report.txt`, 15:26 UTC).** Lines that
+  fail a record test (a guild, a guard, a market, a court, walls, a temple the record lacks): 3 of 50 thorps, 3
+  hamlets, 4 villages, most of them idioms ("old guard", "keeps watch at night"). Paper words (records, letters,
+  documents): 23/18/31 of 50, part of it the history hooks' own lead-ins (`historyGenerator.js`, ECHO_PREFIXES).
+  Thorps of 5 to 29 people draw 24 kinds of trouble, tyranny, a heresy trial and a popular uprising among them.
+  ONE FALSE PRESUMPTION IN THE RECORD: hxd-hamlet-29 holds a `guild_conflict` with no guild: PAGE-7 counts it on its
+  900 towns before the guild lines are wired; a cure, if any, is by cause in the generator. NOT ORDERED BEFORE THE
+  DEPLOY, A NAMED SURVIVOR: sized siblings for the troubles' hooks at thorp and hamlet, and the kinds a thorp may
+  draw (a generator change: born towns move).
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4292,3 +4338,14 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   5731eb9bc; GIVEN THE CAUSES' BUILD NOW (section 2). THE CHAIR READ, on their branches, SAFETY's and OUTPUT's
   modules whole and crime_wave's and guild_conflict's 52 cause lines: verdicts in section 2. Net 14 set for 16:00
   (trig_0142xaiUJsAnJSHeTi4k8FAq).
+- 15:31 UTC · FIVE MORE MESSAGES, TWO MEASURES, THREE RULINGS. PAGE-5 "PAGE-PART f7f5986b5, HANDED OVER": S6 MERGED 464fc1b98
+  (red 3 of 14, green 14 of 14; census 48757947f; 74 of 525 golden fingerprints moved, signed by none, equal with
+  descriptions masked; three in a row 39.9% to 38.9%); PAGE-7 GIVEN THE LANE at 15:25 and its causes builder is out
+  (`lane/page-7-2026-11-20-causes`; crime and guild lines with the six rewordings at 19e7f7932; brief and addendum
+  9e4ba24b6). VEIL-27 took the lane; R3-CURE-6 MERGED 99416745f (212 sha256 6260803d…0218; red re-run 2 of 23
+  failing, green 23 of 23); PART 28 begun (72913fc86); two builders out: R3-CURE-7 (ruling 53's tooth and walker,
+  test-only unless it reds) and R3-TELL unit 1 (the possible-world rule's measure and cost; it stops for a ruling on
+  the cost). FORTUNE-2: U2 and U3 MERGED (6279d0433, 8ec9782f6), registers re-taken, gates running; "U5-PROPOSAL
+  64db7ba3d": READ AND RULED (section 2); FORTUNE-3 told to write the brief (docs only). The chair's helper returned
+  the smallest places' measure; the chair measured the recent-conflict sentence itself: both in section 2, files
+  under `measures/`. DEPTH-2 given the second unit (measure and propose); PAGE-7 asked for one count.

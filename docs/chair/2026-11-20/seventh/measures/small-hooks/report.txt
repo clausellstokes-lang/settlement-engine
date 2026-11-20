@@ -1,0 +1,709 @@
+SMALL-PLACE HOOKS MEASURE. Tree: /home/user/wt/line | 50 towns each of thorp, hamlet, village, seeds hxd-<size>-0..49 | composeTonightSheet(town) alone.
+Lines: tension description = history.currentTensions[].description; tension hook = its plotHooks[]; sheet hook = composeTonightSheet(town).hooks[].text (sentence-cased by the composer, source = hooks[].source). All counts are towns (a town printing a line twice counts once).
+
+===== 1. TENSION KINDS BY SIZE =====
+
+thorp: population min 5 max 29 mean 16.1; towns with no tension: 0/50; tensions per town: 0:0 1:48 2:2 3:0 4:0
+    6  resource_scarcity
+    6  external_threat
+    4  outside_debt
+    4  great_flood
+    4  crime_wave
+    3  succession_crisis
+    2  wild_magic
+    2  population_friction
+    2  infiltration_fear
+    2  generational_divide
+    2  magical_controversy
+    2  leadership_vacuum
+    2  plague_years
+    1  occupation_legacy
+    1  heresy_trial
+    1  pilgrimage_surge
+    1  religious_tension
+    1  popular_uprising
+    1  trade_collapse
+    1  great_fire
+    1  legitimacy_crisis
+    1  corruption_scandal
+    1  tyranny
+    1  demographic_pressure
+  sheet hooks per town: 0:0 1:0 2:2 3:48
+
+hamlet: population min 20 max 99 mean 61.9; towns with no tension: 0/50; tensions per town: 0:0 1:48 2:1 3:1 4:0
+   10  resource_scarcity
+    7  crime_wave
+    4  external_threat
+    4  corruption_scandal
+    4  tyranny
+    3  succession_crisis
+    2  generational_divide
+    2  trade_collapse
+    2  plague_years
+    2  infiltration_fear
+    2  disputed_land
+    1  leadership_vacuum
+    1  demographic_pressure
+    1  guild_conflict
+    1  wild_magic
+    1  population_friction
+    1  legitimacy_crisis
+    1  outside_debt
+    1  popular_uprising
+    1  religious_tension
+    1  great_flood
+    1  magical_controversy
+  sheet hooks per town: 0:0 1:0 2:0 3:50
+
+village: population min 77 max 397 mean 217.7; towns with no tension: 0/50; tensions per town: 0:0 1:30 2:20 3:0 4:0
+    7  wild_magic
+    6  legitimacy_crisis
+    6  external_threat
+    5  succession_crisis
+    4  outside_debt
+    4  resource_scarcity
+    3  popular_uprising
+    3  plague_years
+    3  infiltration_fear
+    3  pilgrimage_surge
+    3  magical_controversy
+    2  great_fire
+    2  religious_tension
+    2  corruption_scandal
+    2  great_flood
+    2  disputed_land
+    2  market_crash
+    2  occupation_legacy
+    2  generational_divide
+    2  population_friction
+    1  heresy_trial
+    1  leadership_vacuum
+    1  crime_wave
+    1  tyranny
+    1  demographic_pressure
+  sheet hooks per town: 0:0 1:0 2:0 3:50
+
+===== 2. EACH TENSION KIND: DISTINCT DESCRIPTIONS AND HOOKS AS PRINTED (towns printing it, by size) =====
+
+--- corruption_scandal ---
+  tension descriptions (2 distinct):
+    [thorp  1 hamlet  4 village  1] Evidence of official corruption has surfaced but powerful figures resist investigation
+    [thorp  0 hamlet  0 village  1] Proof of official graft has come to light, and the implicated are blocking any inquiry
+  tension hooks (3 distinct):
+    [thorp  1 hamlet  4 village  2] The investigator who uncovered the corruption has received a death threat
+    [thorp  1 hamlet  4 village  2] A key witness can be found, but won't speak without protection
+    [thorp  1 hamlet  4 village  2] The corruption goes higher than anyone yet suspects; those pressing to expose it are being used
+
+--- crime_wave ---
+  tension descriptions (1 distinct):
+    [thorp  4 hamlet  7 village  1] Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands
+  tension hooks (2 distinct):
+    [thorp  4 hamlet  7 village  1] The crime wave is coordinated. Someone is directing it to create a pretext
+    [thorp  4 hamlet  7 village  1] Those who would take the law into their own hands have picked out a culprit on bad information
+
+--- demographic_pressure ---
+  tension descriptions (1 distinct):
+    [thorp  1 hamlet  1 village  1] Newcomers have come faster than they can be housed or given work, and the old families and the new now compete for the same jobs
+  tension hooks (2 distinct):
+    [thorp  1 hamlet  1 village  1] The relief meant for the newcomers is being skimmed, and the shortfall is being blamed on the newcomers
+    [thorp  1 hamlet  1 village  1] The newcomers fled something, and that something has followed them here
+
+--- disputed_land ---
+  tension descriptions (1 distinct):
+    [thorp  0 hamlet  2 village  2] A land claim from an old charter contradicts current occupation, with both sides legally plausible
+  tension hooks (3 distinct):
+    [thorp  0 hamlet  2 village  2] The original charter is held in a private archive whose owner has gone missing
+    [thorp  0 hamlet  2 village  2] Something of value was found on the disputed land, which is why the claim is suddenly being pressed
+    [thorp  0 hamlet  2 village  2] A forged document is about to be introduced as evidence; someone knows it's fake
+
+--- external_threat ---
+  tension descriptions (3 distinct):
+    [thorp  6 hamlet  2 village  2] News of approaching danger divides the community on how to respond
+    [thorp  0 hamlet  2 village  3] News of approaching danger divided the community on how to respond
+    [thorp  0 hamlet  0 village  1] Word of a gathering threat split the settlement over whether to fight, treat, or flee
+  tension hooks (3 distinct):
+    [thorp  6 hamlet  4 village  6] The threat has an agent already inside the settlement
+    [thorp  1 hamlet  2 village  2] The threat is being exaggerated by someone who profits from wartime contracts
+    [thorp  1 hamlet  2 village  2] A diplomatic channel exists that the war party is suppressing
+
+--- generational_divide ---
+  tension descriptions (1 distinct):
+    [thorp  2 hamlet  2 village  2] The young want to change how things are done, and the old will not let them
+  tension hooks (3 distinct):
+    [thorp  2 hamlet  2 village  2] A traditional practice conceals something the elders don't want examined
+    [thorp  2 hamlet  2 village  2] A young reformer has uncovered records that undermine the old guard's legitimacy
+    [thorp  2 hamlet  2 village  2] The 'new idea' being promoted was actually tried once before, and failed badly
+
+--- great_fire ---
+  tension descriptions (1 distinct):
+    [thorp  1 hamlet  0 village  2] Fire is the settlement's standing fear, and who may build in timber and thatch, who keeps watch at night and who pays for it are argued over every season
+  tension hooks (3 distinct):
+    [thorp  1 hamlet  0 village  2] Small fires keep starting at the same few houses, and nobody believes it is chance
+    [thorp  1 hamlet  0 village  2] Someone is quietly buying the houses most at risk of fire, cheaply, before any rule is made
+    [thorp  1 hamlet  0 village  2] A rule against thatch is being pressed by one household, and it would ruin exactly its rivals
+
+--- great_flood ---
+  tension descriptions (1 distinct):
+    [thorp  4 hamlet  1 village  2] Rising water is the settlement's standing fear, and every wet season reopens the quarrel over who must dig the ditches, who keeps the low ground, and who pays for both
+  tension hooks (3 distinct):
+    [thorp  4 hamlet  1 village  2] The ditches that carry off the water are choked, and the household bound to clear them refuses
+    [thorp  4 hamlet  1 village  2] Someone is buying the low ground cheaply from frightened owners, and seems very sure the water will not come
+    [thorp  0 hamlet  0 village  2] A bank meant to hold back the water is being quietly left to rot, and someone knows why
+
+--- guild_conflict ---
+  tension descriptions (1 distinct):
+    [thorp  0 hamlet  1 village  0] Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run
+  tension hooks (3 distinct):
+    [thorp  0 hamlet  1 village  0] A guild master's records have gone missing ahead of an audit
+    [thorp  0 hamlet  1 village  0] A journeyman denied mastership has proof the exam was rigged
+    [thorp  0 hamlet  1 village  0] Someone is sabotaging both sides to destabilize the market for a third party
+
+--- heresy_trial ---
+  tension descriptions (1 distinct):
+    [thorp  1 hamlet  0 village  1] An accusation of heresy against a prominent figure is splitting the faithful, and those in authority are being pressed to take a side
+  tension hooks (3 distinct):
+    [thorp  1 hamlet  0 village  1] The evidence against the accused is fabricated, and a witness is almost ready to say so
+    [thorp  1 hamlet  0 village  1] The doctrine under accusation is quietly practised by more of the leading households than would admit it
+    [thorp  1 hamlet  0 village  1] A relic held as evidence against the accused has gone missing, and each side blames the other
+
+--- infiltration_fear ---
+  tension descriptions (2 distinct):
+    [thorp  2 hamlet  0 village  2] Rumours (some true) of enemy agents within the settlement are stirring suspicion and denunciations
+    [thorp  0 hamlet  2 village  1] Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations
+  tension hooks (5 distinct):
+    [thorp  2 hamlet  2 village  3] One of the loudest voices warning about infiltration is themselves an agent
+    [thorp  2 hamlet  2 village  3] An innocent person has been identified as a spy and is about to be executed
+    [thorp  0 hamlet  0 village  3] The agents' handler is someone the village trusts, and the players have already met them
+    [thorp  2 hamlet  0 village  0] The agents' handler is someone the thorp trusts, and the players have already met them
+    [thorp  0 hamlet  2 village  0] The agents' handler is someone the hamlet trusts, and the players have already met them
+
+--- leadership_vacuum ---
+  tension descriptions (1 distinct):
+    [thorp  2 hamlet  1 village  1] No one holds a firm grip on the leadership, and those who would take it are each too weak to win it
+  tension hooks (3 distinct):
+    [thorp  2 hamlet  1 village  1] A sealed document naming who should lead has turned up, and someone wants it destroyed before it is read
+    [thorp  2 hamlet  1 village  1] One claimant has manufactured evidence of a mandate they actually lack
+    [thorp  2 hamlet  1 village  1] The vacuum is being maintained deliberately by an outside power that benefits from the instability
+
+--- legitimacy_crisis ---
+  tension descriptions (1 distinct):
+    [thorp  1 hamlet  1 village  6] The right of the current authority to rule is openly and widely questioned, and no one can agree on who, if anyone, holds a legitimate claim
+  tension hooks (3 distinct):
+    [thorp  1 hamlet  1 village  6] A document that would settle the question of legitimacy exists, and both sides would rather it stayed lost
+    [thorp  1 hamlet  1 village  6] Those in power are paying people to speak for them at the gatherings, because no one will do it for free
+    [thorp  1 hamlet  1 village  6] A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with
+
+--- magical_controversy ---
+  tension descriptions (1 distinct):
+    [thorp  2 hamlet  1 village  3] Debate over the role and regulation of magic divides the community
+  tension hooks (3 distinct):
+    [thorp  2 hamlet  1 village  3] A recent magical accident was covered up and the victims silenced
+    [thorp  2 hamlet  1 village  3] An anti-magic agitator is secretly using magic themselves
+    [thorp  2 hamlet  1 village  3] Something was sealed away using magic years ago and the seal is weakening
+
+--- market_crash ---
+  tension descriptions (2 distinct):
+    [thorp  0 hamlet  0 village  1] Talk of a coming crash in trade goods sets neighbour against neighbour: some buy as if prices can only rise, others are calling in what they are owed
+    [thorp  0 hamlet  0 village  1] Talk of a coming crash in salt sets neighbour against neighbour: some buy as if prices can only rise, others are calling in what they are owed
+  tension hooks (3 distinct):
+    [thorp  0 hamlet  0 village  2] A ledger names who has been warned to sell, and who has not
+    [thorp  0 hamlet  0 village  2] A family on the brink of ruin blames a rival for stirring the panic, and wants proof
+    [thorp  0 hamlet  0 village  2] Someone is quietly buying up other people's debts, and nobody knows who
+
+--- occupation_legacy ---
+  tension descriptions (1 distinct):
+    [thorp  1 hamlet  0 village  2] The occupation ended long ago, but the families who collaborated and the families who resisted still keep apart
+  tension hooks (3 distinct):
+    [thorp  1 hamlet  0 village  2] A collaborator family's wartime fortune was built on betrayals that are finally surfacing
+    [thorp  1 hamlet  0 village  2] Resistance fighters kept records that would expose people still in power
+    [thorp  1 hamlet  0 village  2] A former occupier officer has returned under a false identity
+
+--- outside_debt ---
+  tension descriptions (1 distinct):
+    [thorp  4 hamlet  1 village  4] The settlement owes a heavy debt to an outside power, and the power is preparing to collect
+  tension hooks (3 distinct):
+    [thorp  4 hamlet  1 village  4] The original loan documents contain a clause that was never disclosed publicly
+    [thorp  4 hamlet  1 village  4] A creditor's agent is in town conducting a quiet assessment before enforcement
+    [thorp  4 hamlet  1 village  4] The debt could be voided, if someone can prove it was obtained through fraud
+
+--- pilgrimage_surge ---
+  tension descriptions (1 distinct):
+    [thorp  1 hamlet  0 village  3] A claimed miracle is splitting the settlement: some would proclaim it and welcome the pilgrims it could bring, others call it a fraud that will bring nothing but strangers
+  tension hooks (3 distinct):
+    [thorp  1 hamlet  0 village  3] The miracle can be explained mundanely, and the person who can explain it is being kept quiet
+    [thorp  1 hamlet  0 village  3] One family hopes to buy the office that would authenticate the miracle, and the profits that would follow
+    [thorp  1 hamlet  0 village  3] A rival shrine claims the relic at the heart of the miracle is theirs, stolen, and has sent someone to recover it
+
+--- plague_years ---
+  tension descriptions (1 distinct):
+    [thorp  2 hamlet  2 village  3] Fear of sickness runs through the settlement, and every fever reopens the quarrel over who is shut indoors, who is kept away, and who has the right to decide
+  tension hooks (2 distinct):
+    [thorp  2 hamlet  2 village  3] A family taken by fever swears it came in with a traveller off the road, and wants that traveller found
+    [thorp  2 hamlet  2 village  3] Someone is using the fear of fever to keep a rival household shut indoors, and out of a bargain
+
+--- popular_uprising ---
+  tension descriptions (1 distinct):
+    [thorp  1 hamlet  1 village  3] The common people are pressing those in charge over better working conditions, and each dispute grows louder than the last
+  tension hooks (3 distinct):
+    [thorp  1 hamlet  1 village  3] Someone is keeping a list of who speaks loudest for the demands, and passing it to those in charge
+    [thorp  1 hamlet  1 village  3] An outside hand is quietly paying for the agitation, and will want something for it
+    [thorp  1 hamlet  1 village  3] A concession has been promised to the common people, and someone in authority means to break the promise
+
+--- population_friction ---
+  tension descriptions (2 distinct):
+    [thorp  1 hamlet  1 village  2] A recently arrived group and the established population are locked in sustained, low-level conflict
+    [thorp  1 hamlet  0 village  0] A recently arrived group and the established population fell into sustained, low-level conflict
+  tension hooks (3 distinct):
+    [thorp  2 hamlet  1 village  2] The newcomers fled something, and that something has sent agents after them
+    [thorp  2 hamlet  1 village  2] A series of 'accidents' targeting newcomers is being attributed to chance
+    [thorp  2 hamlet  1 village  2] An old family is deliberately inflaming tensions to drive out a newcomer who knows something
+
+--- religious_tension ---
+  tension descriptions (2 distinct):
+    [thorp  1 hamlet  1 village  1] Different faiths or interpretations compete for influence and converts
+    [thorp  0 hamlet  0 village  1] Rival faiths and doctrines contended for followers and standing in the community
+  tension hooks (3 distinct):
+    [thorp  1 hamlet  1 village  2] A relic claimed by both sides has resurfaced in a private collection
+    [thorp  1 hamlet  1 village  2] The reformist leader is being blackmailed into silence
+    [thorp  1 hamlet  1 village  2] Someone is staging miracles for one side, and whoever is paying for them has not been named
+
+--- resource_scarcity ---
+  tension descriptions (15 distinct):
+    [thorp  1 hamlet  2 village  2] A critical resource is running short, and some are hoarding it while others cannot pay the prices asked
+    [thorp  0 hamlet  1 village  1] Among the trades the place lives by, the fish trade is under strain. The levy has taken workers from the fields, and less will be harvested this year.
+    [thorp  1 hamlet  0 village  0] Settlement cannot cover ~20 lbs of food per day (67% of needs) and has no dependable trade route.
+    [thorp  1 hamlet  0 village  0] The sickness is spreading among those who hunt, and the ones still out face a lean season and a hard winter.
+    [thorp  1 hamlet  0 village  0] Settlement cannot cover ~24 lbs of food per day (67% of needs) and has no dependable trade route.
+    [thorp  1 hamlet  0 village  0] Settlement cannot cover ~10 lbs of food per day (63% of needs) and has no dependable trade route.
+    [thorp  1 hamlet  0 village  0] A critical resource became scarce, causing hoarding and price gouging
+    [thorp  0 hamlet  1 village  0] The fishing failed this year and took most of the food produced here with it. The winter ahead will be hungry.
+    [thorp  0 hamlet  1 village  0] Among the trades the place lives by, the fish trade is under strain. The sickness is spreading among those who crew the boats, and the ones still at sea face a thin catch and a hard winter.
+    [thorp  0 hamlet  1 village  0] Settlement cannot cover ~122 lbs of food per day (68% of needs) and has no dependable trade route.
+    [thorp  0 hamlet  1 village  0] The levy has taken workers from the fields, and less will be harvested this year.
+    [thorp  0 hamlet  1 village  0] The sickness is spreading among those who tend the herds, and the ones still at work face a lean year and a hard winter.
+    [thorp  0 hamlet  1 village  0] Settlement cannot cover ~109 lbs of food per day (66% of needs) and has no dependable trade route.
+    [thorp  0 hamlet  1 village  0] Among the trades the place lives by, the fish trade is under strain. The occupiers are fed from local stores, so the food has to stretch about a fifth further than before.
+    [thorp  0 hamlet  0 village  1] Among the trades the place lives by, the timber trade is under strain. The sickness is spreading among those who work the fields, and the ones still at work face a short harvest and a hard winter.
+  tension hooks (3 distinct):
+    [thorp  6 hamlet 10 village  4] The scarcity was engineered. Someone destroyed the competing supply route
+    [thorp  6 hamlet 10 village  4] An alternative source exists but the information is being suppressed
+    [thorp  0 hamlet  1 village  1] A store of the scarce goods is being kept off the market on purpose
+
+--- succession_crisis ---
+  tension descriptions (3 distinct):
+    [thorp  2 hamlet  2 village  2] Who will lead next is the quarrel of the day, and the would-be successors are each gathering support
+    [thorp  1 hamlet  1 village  2] The ruler of the time was aging or ill, and potential heirs jockeyed for position
+    [thorp  0 hamlet  0 village  1] The one who led was failing in health, and rivals maneuvered quietly to take that place
+  tension hooks (3 distinct):
+    [thorp  3 hamlet  3 village  5] A would-be heir approaches outsiders to investigate a rival's past
+    [thorp  0 hamlet  0 village  1] The ailing ruler wants a final errand completed before naming a successor
+    [thorp  0 hamlet  0 village  1] Someone is poisoning the ruler slowly, and someone in the household knows
+
+--- trade_collapse ---
+  tension descriptions (2 distinct):
+    [thorp  0 hamlet  2 village  0] Whether the trade the settlement lives on is about to fail is the quarrel of the day: some see buyers going elsewhere, others see nothing but rumour
+    [thorp  1 hamlet  0 village  0] The overland trade that had made the settlement what it was collapsed, and the prosperity it once brought bled away over a handful of lean years
+  tension hooks (6 distinct):
+    [thorp  0 hamlet  2 village  0] Someone with power would rather the trade went elsewhere, and is quietly making it harder
+    [thorp  0 hamlet  2 village  0] A trader swears a rival is spreading rumours to drive the buyers away, and has the letters to prove it
+    [thorp  0 hamlet  2 village  0] An old contract obliges a distant partner to trade here, if anyone can enforce it
+    [thorp  1 hamlet  0 village  0] The route could be reopened, but someone with power prefers it stay closed
+    [thorp  1 hamlet  0 village  0] A caravan master swears the collapse was arranged, and kept the correspondence to prove it
+    [thorp  1 hamlet  0 village  0] An old contract still obliges a distant partner to trade here, if anyone can enforce it
+
+--- tyranny ---
+  tension descriptions (1 distinct):
+    [thorp  1 hamlet  4 village  1] Whether one person is taking more power than anyone granted is the quarrel of the day, and every new rule is read as a step toward tyranny
+  tension hooks (3 distinct):
+    [thorp  1 hamlet  4 village  1] Someone close to authority is gathering powers no one granted, and keeps the papers that show it locked away
+    [thorp  1 hamlet  4 village  1] A household that spoke out against the new rules has had its goods seized on a pretext, and wants them back
+    [thorp  1 hamlet  4 village  1] Someone is paying for praise of a strong hand in the street, and stands to profit if it comes
+
+--- wild_magic ---
+  tension descriptions (1 distinct):
+    [thorp  2 hamlet  1 village  7] Strange flares of magic come without warning, and what causes them, and what to do about the people they touch, is argued over by everyone
+  tension hooks (3 distinct):
+    [thorp  2 hamlet  1 village  7] The flares are no accident: someone is working magic they cannot control, and hiding the notes
+    [thorp  2 hamlet  1 village  7] A child touched by a flare is showing something the family cannot conceal
+    [thorp  2 hamlet  1 village  7] The flares come more often in one part of the settlement, and those in charge are pretending otherwise
+
+===== 3. PRESUMPTION TABLE =====
+Match rule: whole word, case-insensitive, listed word with optional plural s/es. Each row: [towns printing it by size] {where} {tension kind or sheet source}. For classes with a record test: "lacks" = of those towns, how many hold NO such thing in the record.
+
+--- (a) street, streets, alley, quarter, district, ward | count only ---
+  towns printing any line of this class: thorp  1 hamlet  4 village  3; distinct lines: 4
+  [thorp  1 hamlet  4 village  1] {tension hook} {tyranny} Someone is paying for praise of a strong hand in the street, and stands to profit if it comes
+  [thorp  1 hamlet  1 village  0] {sheet hook} {Tyranny} Someone is paying for praise of a strong hand in the street, and stands to profit if it comes.
+  [thorp  0 hamlet  0 village  1] {sheet hook} {Jaguar Kab} A petition they set aside has gathered names from half their street, and the people who signed it want an answer this week.
+  [thorp  0 hamlet  0 village  1] {sheet hook} {Yellow Corn May} Their best customer owes them a year's takings and has started avoiding their street.
+
+--- (b) papers, records, ledger, letter, written, writing, signature, seal, document | count only ---
+  towns printing any line of this class: thorp 23 hamlet 18 village 30; distinct lines: 45
+  [thorp  4 hamlet  1 village  4] {tension hook} {outside_debt} The original loan documents contain a clause that was never disclosed publicly
+  [thorp  1 hamlet  1 village  6] {tension hook} {legitimacy_crisis} A document that would settle the question of legitimacy exists, and both sides would rather it stayed lost
+  [thorp  4 hamlet  1 village  2] {sheet hook} {External Debt} The original loan documents contain a clause that was never disclosed publicly.
+  [thorp  2 hamlet  2 village  2] {tension hook} {generational_divide} A young reformer has uncovered records that undermine the old guard's legitimacy
+  [thorp  3 hamlet  2 village  1] {sheet hook} {Occupation Legacy Event} Resistance fighters kept records that would expose people still in power.
+  [thorp  1 hamlet  4 village  1] {tension hook} {tyranny} Someone close to authority is gathering powers no one granted, and keeps the papers that show it locked away
+  [thorp  2 hamlet  1 village  3] {tension hook} {magical_controversy} Something was sealed away using magic years ago and the seal is weakening
+  [thorp  1 hamlet  0 village  3] {sheet hook} {Legitimacy Crisis} A document that would settle the question of legitimacy exists, and both sides would rather it stayed lost.
+  [thorp  0 hamlet  2 village  2] {tension hook} {disputed_land} A forged document is about to be introduced as evidence; someone knows it's fake
+  [thorp  2 hamlet  1 village  1] {tension hook} {leadership_vacuum} A sealed document naming who should lead has turned up, and someone wants it destroyed before it is read
+  [thorp  2 hamlet  1 village  1] {sheet hook} {Generational Divide} A young reformer has uncovered records that undermine the old guard's legitimacy.
+  [thorp  1 hamlet  0 village  2] {tension hook} {occupation_legacy} Resistance fighters kept records that would expose people still in power
+  [thorp  0 hamlet  0 village  2] {tension hook} {market_crash} A ledger names who has been warned to sell, and who has not
+  [thorp  2 hamlet  0 village  0] {sheet hook} {Occupation Legacy Event} A letter found this year tells it this way: a former occupier officer has returned under a false identity.
+  [thorp  1 hamlet  1 village  0] {sheet hook} {Disaster Event} A letter found this year tells it this way: the threat has an agent already inside the settlement.
+  [thorp  2 hamlet  0 village  0] {sheet hook} {Leadership Vacuum} A sealed document naming who should lead has turned up, and someone wants it destroyed before it is read.
+  [thorp  0 hamlet  2 village  0] {tension hook} {trade_collapse} A trader swears a rival is spreading rumours to drive the buyers away, and has the letters to prove it
+  [thorp  0 hamlet  2 village  0] {sheet hook} {Trade Collapse} A trader swears a rival is spreading rumours to drive the buyers away, and has the letters to prove it.
+  [thorp  1 hamlet  1 village  0] {sheet hook} {Tyranny} Someone close to authority is gathering powers no one granted, and keeps the papers that show it locked away.
+  [thorp  0 hamlet  1 village  1] {sheet hook} {Magical Event} Something was sealed away using magic years ago and the seal is weakening.
+  [thorp  0 hamlet  0 village  1] {sheet hook} {Ollin Chel} A document they were asked to witness contained a clause they noticed at the time and said nothing about.
+  [thorp  0 hamlet  1 village  0] {sheet hook} {Disputed Land} A forged document is about to be introduced as evidence; someone knows it's fake.
+  [thorp  0 hamlet  1 village  0] {tension hook} {guild_conflict} A guild master's records have gone missing ahead of an audit
+  [thorp  0 hamlet  1 village  0] {sheet hook} {Guild Conflict} A guild master's records have gone missing ahead of an audit.
+  [thorp  0 hamlet  0 village  1] {sheet hook} {Talib al-Malik} A letter addressed to them was opened before it arrived, and the sender says it carried money.
+  [thorp  0 hamlet  0 village  1] {sheet hook} {Occupation Legacy Event} A letter found this year tells it this way: a collaborator family's wartime fortune was built on betrayals that are finally surfacing.
+  [thorp  1 hamlet  0 village  0] {sheet hook} {Magical Event} A letter found this year tells it this way: an anti-magic agitator is secretly using magic themselves.
+  [thorp  0 hamlet  0 village  1] {sheet hook} {Infiltration Fear Event} A letter found this year tells it this way: an innocent person has been identified as a spy and is about to be executed.
+  [thorp  0 hamlet  0 village  1] {sheet hook} {Infiltration Fear Event} A letter found this year tells it this way: one of the loudest voices warning about infiltration is themselves an agent.
+  [thorp  0 hamlet  1 village  0] {sheet hook} {Religious Event} A letter found this year tells it this way: someone is staging miracles for one side, and whoever is paying for them has not been named.
+  [thorp  1 hamlet  0 village  0] {sheet hook} {Magical Event} A letter found this year tells it this way: something was sealed away using magic years ago and the seal is weakening.
+  [thorp  1 hamlet  0 village  0] {sheet hook} {Infiltration Fear Event} A letter found this year tells it this way: the agents' handler is someone the thorp trusts, and the players have already met them.
+  [thorp  1 hamlet  0 village  0] {sheet hook} {Religious Event} A letter found this year tells it this way: the condemned doctrine is quietly practised still, by more of the thorp's leaders than would admit it.
+  [thorp  1 hamlet  0 village  0] {sheet hook} {Religious Event} A letter found this year tells it this way: the reformist leader is being blackmailed into silence.
+  [thorp  0 hamlet  1 village  0] {sheet hook} {Disaster Event} A letter found this year tells it this way: the threat is being exaggerated by someone who profits from wartime contracts.
+  [thorp  0 hamlet  1 village  0] {sheet hook} {Souta Gao} A partner died owing them money, and the partner's heir says the debt was paid in a letter nobody can find.
+  [thorp  0 hamlet  0 village  1] {sheet hook} {Athanasios Chrysoberges} An old letter of theirs, written in anger years ago, has been shown to the person it was about.
+  [thorp  0 hamlet  0 village  1] {sheet hook} {Photeine Dalassenos} Someone has been reading the private letters kept in their care, and two of those letters were confessions.
+  [thorp  1 hamlet  0 village  0] {sheet hook} {Magical Controversy} Something was sealed away using magic years ago and the seal is weakening.
+  [thorp  0 hamlet  0 village  1] {sheet hook} {Economic Event} The records of that time say: a merchant is funding both the reform movement and the suppression of it.
+  [thorp  1 hamlet  0 village  0] {sheet hook} {Religious Event} The records of that time say: a relic claimed by both sides has resurfaced in a private collection.
+  [thorp  1 hamlet  0 village  0] {sheet hook} {Economic Event} The records of that time say: an alternative source exists but the information is being suppressed.
+  [thorp  1 hamlet  0 village  0] {sheet hook} {Religious Event} The records of that time say: someone is staging miracles for one side, and whoever is paying for them has not been named.
+  [thorp  0 hamlet  0 village  1] {sheet hook} {Infiltration Fear Event} The records of that time say: the agents' handler is someone the village trusts, and the players have already met them.
+  [thorp  1 hamlet  0 village  0] {sheet hook} {Religious Event} The records of that time say: the reformist leader is being blackmailed into silence.
+
+--- (c) market, stall, market day | test: institution name contains "market" (other than "black market") ---
+  towns printing any line of this class: thorp  0 hamlet  2 village  2; of those, record lacks it: thorp  0 hamlet  0 village  0; distinct lines: 4
+  [thorp  0 hamlet  1 village  1] lacks [thorp  0 hamlet  0 village  0] {tension hook} {resource_scarcity} A store of the scarce goods is being kept off the market on purpose
+  [thorp  0 hamlet  1 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Resource Scarcity} A store of the scarce goods is being kept off the market on purpose.
+  [thorp  0 hamlet  0 village  1] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Merchant Guilds vs Religious Authorities} Someone is moving stall markers after dark, and both sides have set a man to watch.
+  [thorp  0 hamlet  1 village  0] lacks [thorp  0 hamlet  0 village  0] {tension hook} {guild_conflict} Someone is sabotaging both sides to destabilize the market for a third party
+
+--- (d) guild | test: institution or power name contains "guild" ---
+  towns printing any line of this class: thorp  0 hamlet  1 village  2; of those, record lacks it: thorp  0 hamlet  1 village  0; distinct lines: 5
+  [thorp  0 hamlet  1 village  0] lacks [thorp  0 hamlet  1 village  0] {tension hook} {guild_conflict} A guild master's records have gone missing ahead of an audit
+  [thorp  0 hamlet  1 village  0] lacks [thorp  0 hamlet  1 village  0] {sheet hook} {Guild Conflict} A guild master's records have gone missing ahead of an audit.
+  [thorp  0 hamlet  1 village  0] lacks [thorp  0 hamlet  1 village  0] {tension description} {guild_conflict} Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run
+  [thorp  0 hamlet  0 village  1] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Beast & Raider Threat} In the raids, Záleif Magnusson of Merchant Guilds takes the worst of it: the one with the least say in a power that loses by the crisis.
+  [thorp  0 hamlet  0 village  1] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Beast & Raider Threat} The raids turn on the citizen militia, run by Rian Murray: if it gives way, Merchant Guilds lose most, because their own people feel the crisis first.
+
+--- (e) court, magistrate, judge, trial | test: institution name contains court/magistrate/tribunal ---
+  towns printing any line of this class: thorp  0 hamlet  0 village  0; of those, record lacks it: thorp  0 hamlet  0 village  0; distinct lines: 0
+
+--- (f) guard, watch, garrison, captain, militia | test: institution name contains guard/watch/garrison/militia/barracks ---
+  towns printing any line of this class: thorp  3 hamlet  3 village  8; of those, record lacks it: thorp  3 hamlet  2 village  4; distinct lines: 10
+  [thorp  2 hamlet  2 village  2] lacks [thorp  2 hamlet  2 village  1] {tension hook} {generational_divide} A young reformer has uncovered records that undermine the old guard's legitimacy
+  [thorp  2 hamlet  1 village  1] lacks [thorp  2 hamlet  1 village  0] {sheet hook} {Generational Divide} A young reformer has uncovered records that undermine the old guard's legitimacy.
+  [thorp  1 hamlet  0 village  2] lacks [thorp  1 hamlet  0 village  2] {tension description} {great_fire} Fire is the settlement's standing fear, and who may build in timber and thatch, who keeps watch at night and who pays for it are argued over every season
+  [thorp  0 hamlet  1 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Recently Betrayed} In the betrayal, Omkara Bhatt of The Guard, who speaks for the power that gains from the crisis, from a house that power backs, is stirring it.
+  [thorp  0 hamlet  0 village  1] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Beast & Raider Threat} In the raids, Rian Murray of The Guard, who runs the office that decides how the crisis goes, holds the key to it.
+  [thorp  0 hamlet  0 village  1] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Wartime} In the war, Hildigunn Gormsson of The Guard leads the defence.
+  [thorp  0 hamlet  0 village  1] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Wartime} In the war, Ix Chup Moo of The Guard leads the defence.
+  [thorp  0 hamlet  0 village  1] lacks [thorp  0 hamlet  0 village  1] {sheet hook} {Merchant Guilds vs Religious Authorities} Someone is moving stall markers after dark, and both sides have set a man to watch.
+  [thorp  0 hamlet  0 village  1] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Beast & Raider Threat} The raids turn on the citizen militia, run by Rian Murray: if it gives way, Merchant Guilds lose most, because their own people feel the crisis first.
+  [thorp  0 hamlet  0 village  1] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Wartime} The war turns on the citizen militia, run by Ix Chup Moo: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+
+--- (g) walls, gate, gates | test: institution name contains wall/gate ---
+  towns printing any line of this class: thorp  0 hamlet  0 village  0; of those, record lacks it: thorp  0 hamlet  0 village  0; distinct lines: 0
+
+--- (h) council, hall, chamber | test: power or institution name contains council/hall ---
+  towns printing any line of this class: thorp  6 hamlet  6 village  3; of those, record lacks it: thorp  0 hamlet  0 village  0; distinct lines: 17
+  [thorp  0 hamlet  1 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Recently Betrayed} In the betrayal, it is aimed at Andreas Braun of Elder Council, who holds the seat, and the right to it is already in dispute.
+  [thorp  1 hamlet  0 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Indebted to Outside Power} In the debt crisis, Asuka Li of Elder Council, who holds the seat, is the one who would come to terms.
+  [thorp  1 hamlet  0 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Indebted to Outside Power} In the debt crisis, Hans Schneider of Elder Council, who holds the seat, is the one who would come to terms.
+  [thorp  0 hamlet  1 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Indebted to Outside Power} In the debt crisis, Sergei Pavlov of Free Elder Council, who holds the seat, is the one who would come to terms.
+  [thorp  1 hamlet  0 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Indebted to Outside Power} In the debt crisis, Viktoriya Morozov of Elder Council, who holds the seat, is the one who would come to terms.
+  [thorp  0 hamlet  1 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Famine} In the famine, Faris al-Aziz of Elder Council takes the worst of it: the one with the least say in a power that loses by the crisis.
+  [thorp  1 hamlet  0 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Famine} In the famine, Hans Schneider of Elder Council takes the worst of it: the only one named here of a power that loses by the crisis.
+  [thorp  1 hamlet  0 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Famine} In the famine, Philipp Wagner of Elder Council takes the worst of it: the only one named here of a power that loses by the crisis.
+  [thorp  0 hamlet  1 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Famine} In the famine, Sergei Pavlov of Free Elder Council takes the worst of it: the only one named here of a power that loses by the crisis.
+  [thorp  1 hamlet  0 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Famine} In the famine, Wolfhard Schmidt of Elder Council takes the worst of it: the only one named here of a power that loses by the crisis.
+  [thorp  0 hamlet  1 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Insurgency} In the insurgency, it is aimed at Lan Guo of Elder Council, who holds the seat, and the right to it is already in dispute.
+  [thorp  1 hamlet  0 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Under Siege} In the siege, Taha al-Hassan of Elder Council, who holds the seat, is the one who would come to terms.
+  [thorp  0 hamlet  1 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Succession Void} In the succession crisis, it is aimed at Elder Council: the governing house.
+  [thorp  0 hamlet  0 village  1] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Religious Conversion} The conversion turns on the house of worship, run by Grima Bjornsson: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+  [thorp  0 hamlet  1 village  0] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Politically Fractured} The split between the powers turns on the adventurers' charter hall, run by Nirmala Desai: if it gives way, Feudal Stewardship loses most, because its own people feel the crisis first.
+  [thorp  0 hamlet  0 village  1] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Politically Fractured} The split between the powers turns on the carriers' hiring hall, run by Yuna Tang: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+  [thorp  0 hamlet  0 village  1] lacks [thorp  0 hamlet  0 village  0] {sheet hook} {Wartime} The war turns on the citizen militia, run by Ix Chup Moo: if it gives way, Elder Council loses most, because its own people feel the crisis first.
+
+--- (i) temple, cathedral, church, shrine, priest | test: institution or power name contains temple/cathedral/church/shrine/monastery/chapel/religious ---
+  towns printing any line of this class: thorp  1 hamlet  0 village  3; of those, record lacks it: thorp  0 hamlet  0 village  0; distinct lines: 1
+  [thorp  1 hamlet  0 village  3] lacks [thorp  0 hamlet  0 village  0] {tension hook} {pilgrimage_surge} A rival shrine claims the relic at the heart of the miracle is theirs, stolen, and has sent someone to recover it
+
+--- (j) apprentice, buyers, shop, workshop | count only ---
+  towns printing any line of this class: thorp  0 hamlet  2 village  1; distinct lines: 4
+  [thorp  0 hamlet  2 village  0] {tension hook} {trade_collapse} A trader swears a rival is spreading rumours to drive the buyers away, and has the letters to prove it
+  [thorp  0 hamlet  2 village  0] {sheet hook} {Trade Collapse} A trader swears a rival is spreading rumours to drive the buyers away, and has the letters to prove it.
+  [thorp  0 hamlet  2 village  0] {tension description} {trade_collapse} Whether the trade the settlement lives on is about to fail is the quarrel of the day: some see buyers going elsewhere, others see nothing but rumour
+  [thorp  0 hamlet  0 village  1] {sheet hook} {Merchant Guilds vs Elder Council} If the loan is paid, a workshop closes; someone wants it paid by any means.
+
+--- (k) noble, lord, heir, crown, throne | count only ---
+  towns printing any line of this class: thorp  7 hamlet  8 village  7; distinct lines: 5
+  [thorp  5 hamlet  5 village  3] {sheet hook} {Political Event} A would-be heir approaches outsiders to investigate a rival's past.
+  [thorp  3 hamlet  3 village  5] {tension hook} {succession_crisis} A would-be heir approaches outsiders to investigate a rival's past
+  [thorp  2 hamlet  2 village  1] {sheet hook} {Succession Crisis} A would-be heir approaches outsiders to investigate a rival's past.
+  [thorp  1 hamlet  1 village  2] {tension description} {succession_crisis} The ruler of the time was aging or ill, and potential heirs jockeyed for position
+  [thorp  0 hamlet  1 village  0] {sheet hook} {Souta Gao} A partner died owing them money, and the partner's heir says the debt was paid in a letter nobody can find.
+
+===== 4. FIFTEEN WORST EXAMPLES AT THORP AND HAMLET =====
+Ranking: number of failed record tests (c)-(i) in the line, then number of count-only classes (a)(b)(j)(k) hit, then thorp before hamlet, then smaller population. One example per distinct line (text compared without the composer added capital/final period); every place that town prints it is listed.
+
+1. "A young reformer has uncovered records that undermine the old guard's legitimacy"
+   printed as: tension hook (source: generational_divide) + sheet hook (source: Generational Divide); classes hit: b,f; failed tests: f
+   town: hxd-thorp-13 (thorp), population 7
+   institutions: Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source
+   powers: Elder Council [government]
+
+2. "A guild master's records have gone missing ahead of an audit"
+   printed as: tension hook (source: guild_conflict) + sheet hook (source: Guild Conflict); classes hit: b,d; failed tests: d
+   town: hxd-hamlet-29 (hamlet), population 82
+   institutions: Subsistence farming; Common grazing land; Periodic market; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source
+   powers: Elder Council [government]
+
+3. "Fire is the settlement's standing fear, and who may build in timber and thatch, who keeps watch at night and who pays for it are argued over every season"
+   printed as: tension description (source: great_fire); classes hit: f; failed tests: f
+   town: hxd-thorp-31 (thorp), population 29
+   institutions: Subsistence farming; Access to external mill; Access to parish church; Burial ground; Household elder; Dwellings (1-8); Water source
+   powers: Elder Council [government]
+
+4. "Guild and non-guild traders are fighting over who may sell what, and over a say in how the place is run"
+   printed as: tension description (source: guild_conflict); classes hit: d; failed tests: d
+   town: hxd-hamlet-29 (hamlet), population 82
+   institutions: Subsistence farming; Common grazing land; Periodic market; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source
+   powers: Elder Council [government]
+
+5. "A trader swears a rival is spreading rumours to drive the buyers away, and has the letters to prove it"
+   printed as: tension hook (source: trade_collapse) + sheet hook (source: Trade Collapse); classes hit: b,j; failed tests: none
+   town: hxd-hamlet-30 (hamlet), population 39
+   institutions: Subsistence farming; Common grazing land; Wayside inn; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source
+   powers: Elder Council [government]
+
+6. "A partner died owing them money, and the partner's heir says the debt was paid in a letter nobody can find."
+   printed as: sheet hook (source: Souta Gao); classes hit: b,k; failed tests: none
+   town: hxd-hamlet-41 (hamlet), population 69
+   institutions: Subsistence farming; Common grazing land; Stone quarry; Salt works; Wayside inn; Alehouse; Access to external mill; Carpenter (part-time); Access to parish church; Burial ground; Village headman; Dwellings (5-25); Water source; Mine (open cast)
+   powers: Headman's Authority [government]
+
+7. "A document that would settle the question of legitimacy exists, and both sides would rather it stayed lost"
+   printed as: tension hook (source: legitimacy_crisis) + sheet hook (source: Legitimacy Crisis); classes hit: b; failed tests: none
+   town: hxd-thorp-36 (thorp), population 5
+   institutions: Subsistence farming; Shepherd collective; Access to external mill; Burial ground; Dwellings (1-8); Water source
+   powers: Elder Council [government]
+
+8. "The original loan documents contain a clause that was never disclosed publicly"
+   printed as: tension hook (source: outside_debt) + sheet hook (source: External Debt); classes hit: b; failed tests: none
+   town: hxd-thorp-5 (thorp), population 5
+   institutions: Subsistence farming; Fishing community; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source
+   powers: Elder Council [government]
+
+9. "A sealed document naming who should lead has turned up, and someone wants it destroyed before it is read"
+   printed as: tension hook (source: leadership_vacuum) + sheet hook (source: Leadership Vacuum); classes hit: b; failed tests: none
+   town: hxd-thorp-34 (thorp), population 7
+   institutions: Subsistence farming; Fishing community; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source
+   powers: The Independent Bloc [other]; Elder Council [government]
+
+10. "A would-be heir approaches outsiders to investigate a rival's past."
+   printed as: sheet hook (source: Political Event); classes hit: k; failed tests: none
+   town: hxd-thorp-43 (thorp), population 8
+   institutions: Subsistence farming; Access to external mill; Burial ground; Household elder; Dwellings (1-8); Water source
+   powers: Elder Council [government]
+
+11. "The ruler of the time was aging or ill, and potential heirs jockeyed for position"
+   printed as: tension description (source: succession_crisis); classes hit: k; failed tests: none
+   town: hxd-thorp-39 (thorp), population 10
+   institutions: Subsistence farming; Fishing community; Access to external mill; Access to parish church; Burial ground; Head-of-household consensus; Dwellings (1-8); Water source
+   powers: Household Council [government]
+
+12. "Someone close to authority is gathering powers no one granted, and keeps the papers that show it locked away"
+   printed as: tension hook (source: tyranny) + sheet hook (source: Tyranny); classes hit: b; failed tests: none
+   town: hxd-thorp-40 (thorp), population 10
+   institutions: Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source
+   powers: Elder Council [government]
+
+13. "Someone is paying for praise of a strong hand in the street, and stands to profit if it comes"
+   printed as: tension hook (source: tyranny) + sheet hook (source: Tyranny); classes hit: a; failed tests: none
+   town: hxd-thorp-40 (thorp), population 10
+   institutions: Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source
+   powers: Elder Council [government]
+
+14. "The records of that time say: an alternative source exists but the information is being suppressed."
+   printed as: sheet hook (source: Economic Event); classes hit: b; failed tests: none
+   town: hxd-thorp-11 (thorp), population 11
+   institutions: Subsistence farming; Fishing community; Access to external mill; Access to parish church; Burial ground; Head-of-household consensus; Dwellings (1-8); Water source
+   powers: Household Council [government]
+
+15. "A letter found this year tells it this way: something was sealed away using magic years ago and the seal is weakening."
+   printed as: sheet hook (source: Magical Event); classes hit: b; failed tests: none
+   town: hxd-thorp-45 (thorp), population 11
+   institutions: Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Household elder; Dwellings (1-8); Water source
+   powers: Elder Council [government]
+
+===== 5. SHARES =====
+thorp: >=1 line failing a record test (c)-(i): 3/50 (6%) [on the session sheet itself: 2/50]; >=1 line in class (a) or (b): 23/50 (46%); either: 24/50
+hamlet: >=1 line failing a record test (c)-(i): 3/50 (6%) [on the session sheet itself: 2/50]; >=1 line in class (a) or (b): 18/50 (36%); either: 18/50
+village: >=1 line failing a record test (c)-(i): 4/50 (8%) [on the session sheet itself: 1/50]; >=1 line in class (a) or (b): 31/50 (62%); either: 33/50
+
+Raw records per town (seed | pop | institutions | powers | tension types | opening):
+hxd-thorp-0 | 20 | Subsistence farming; Fishing community; Woodcutter's camp; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source | Elder Council[government] | wild_magic | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-1 | 8 | Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Household elder; Dwellings (1-8); Water source | Elder Council[government] | population_friction | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-2 | 27 | Subsistence farming; Communal root cellar; Fishing community; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source; Palisade | Elder Council[government] | infiltration_fear | A dispute over water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-3 | 24 | Subsistence farming; Fishing community; Woodcutter's camp; Access to external mill; Access to parish church; Burial ground; Head-of-household consensus; Dwellings (1-8); Water source | Household Council[government] | succession_crisis | Esha Bakshi has begun to act like someone who considers the debt paid. Shanti Bhat does not.
+hxd-thorp-4 | 13 | Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Informal elder consensus; Dwellings (1-8); Water source; Household levy | Elder Council[government] | generational_divide | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-5 | 5 | Subsistence farming; Fishing community; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source | Elder Council[government] | outside_debt | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-6 | 17 | Subsistence farming; Shepherd collective; Access to external mill; Burial ground; Household elder; Dwellings (1-8); Water source; Household levy; Palisade | Elder Council[government] | magical_controversy | Farms nearby have been abandoned after attacks. The community cannot agree on whether to shelter in place, build defences, or leave.
+hxd-thorp-7 | 15 | Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Household elder; Dwellings (1-8); Water source | Elder Council[government] | resource_scarcity,occupation_legacy | Under Siege. The besiegers around Raschowk tighten their lines each week, and the lookouts wait for the night they attack. Taha al-Hassan is the one who would come to terms.
+hxd-thorp-8 | 22 | Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Household elder; Dwellings (1-8); Water source | Elder Council[government] | heresy_trial | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-9 | 24 | Subsistence farming; Fishing community; Access to external mill; Wayside shrine; Access to parish church; Burial ground; Dwellings (1-8); Water source | Elder Council[government] | infiltration_fear | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-10 | 10 | Subsistence farming; Woodcutter's camp; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source | Elder Council[government] | great_flood | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-11 | 11 | Subsistence farming; Fishing community; Access to external mill; Access to parish church; Burial ground; Head-of-household consensus; Dwellings (1-8); Water source | Household Council[government] | succession_crisis | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-12 | 17 | Subsistence farming; Fishing community; Access to external mill; Burial ground; Head-of-household consensus; Dwellings (1-8); Water source; Household levy | Household Council[government] | external_threat | A dispute over rights on the shore and access to water has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-13 | 7 | Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source | Elder Council[government] | generational_divide | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-14 | 27 | Subsistence farming; Access to external mill; Wayside shrine; Burial ground; Household elder; Dwellings (1-8); Water source | Elder Council[government] | pilgrimage_surge | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-15 | 21 | Subsistence farming; Fishing community; Access to external mill; Wayside shrine; Access to parish church; Burial ground; Dwellings (1-8); Water source; Palisade; Household levy | Elder Council[government] | external_threat | Farms nearby have been abandoned after attacks. The community cannot agree on whether to shelter in place, build defences, or leave.
+hxd-thorp-16 | 17 | Subsistence farming; Fishing community; Access to external mill; Access to parish church; Burial ground; Head-of-household consensus; Dwellings (1-8); Water source | Household Council[government] | religious_tension | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-17 | 5 | Subsistence farming; Woodcutter's camp; Access to external mill; Burial ground; Dwellings (1-8); Water source | Elder Council[government] | resource_scarcity | Disease Outbreak. Anyone new to Qaryatkarez will be asked whether they carry the sickness, and few will believe the answer. Nasr al-Malik holds the key to it.
+hxd-thorp-18 | 18 | Subsistence farming; Access to external mill; Access to parish church; Burial ground; Informal elder consensus; Dwellings (1-8); Water source | Elder Council[government] | resource_scarcity | Famine. In Altwiese what food is left is watched day and night, and those watching it are as hungry as everyone else. The worst of it falls on Wolfhard Schmidt.
+hxd-thorp-19 | 29 | Subsistence farming; Shepherd collective; Access to external mill; Wayside shrine; Burial ground; Informal elder consensus; Dwellings (1-8); Water source; Palisade; Household levy | The Independent Bloc[other]; Elder Council[government] | leadership_vacuum | Politically Fractured. Anyone new in Cobaha is worth winning over, and every power will try before the week is out. Smoke Ahau is stirring it.
+hxd-thorp-20 | 22 | Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Household elder; Dwellings (1-8); Water source | Elder Council[government] | resource_scarcity | Disease Outbreak. Anyone new to Shattmahal will be asked whether they carry the sickness, and few will believe the answer. Othman ibn Ahmed holds the key to it.
+hxd-thorp-21 | 19 | Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source; Palisade | Elder Council[government] | plague_years | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-22 | 27 | Subsistence farming; Shepherd collective; Access to external mill; Burial ground; Dwellings (1-8); Water source; Palisade | War Council[military]; Elder Council[government] | external_threat | Wartime. An army requisition officer wants more from Lundhavn than it can spare, and someone new might find a way between giving in and refusing.
+hxd-thorp-23 | 16 | Subsistence farming; Communal root cellar; Fishing community; Access to external mill; Burial ground; Head-of-household consensus; Dwellings (1-8); Water source; Household levy; Outlaw shelter | Household Council[government] | crime_wave | Vsevolod Volkov has hired away Radmila Kozlov's best assistant. Radmila Kozlov has said nothing about it, to anyone.
+hxd-thorp-24 | 14 | Subsistence farming; Fishing community; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source | Elder Council[government] | plague_years | A dispute over rights on the shore and access to water has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-25 | 13 | Subsistence farming; Fishing community; Access to external mill; Access to parish church; Burial ground; Head-of-household consensus; Dwellings (1-8); Water source; Palisade; Household levy | Household Council[government] | wild_magic | Farms nearby have been abandoned after attacks. The community cannot agree on whether to shelter in place, build defences, or leave.
+hxd-thorp-26 | 10 | Subsistence farming; Fishing community; Access to external mill; Access to parish church; Burial ground; Informal elder consensus; Dwellings (1-8); Water source | Elder Council[government] | population_friction | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-27 | 16 | Subsistence farming; Communal root cellar; Shepherd collective; Access to external mill; Burial ground; Dwellings (1-8); Water source; Palisade; Household levy | Elder Council[government] | popular_uprising | Farms nearby have been abandoned after attacks. The community cannot agree on whether to shelter in place, build defences, or leave.
+hxd-thorp-28 | 23 | Subsistence farming; Communal root cellar; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Household elder; Dwellings (1-8); Water source; Outlaw shelter | Elder Council[government] | crime_wave | Juliana Botaneiates and Heracles Akropolites are tied by a debt not yet paid. Heracles Akropolites has begun to act like someone who considers the debt paid. Juliana Botaneiates does not.
+hxd-thorp-29 | 11 | Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source | Elder Council[government] | great_flood | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-30 | 13 | Subsistence farming; Woodcutter's camp; Access to external mill; Access to parish church; Burial ground; Informal elder consensus; Dwellings (1-8); Water source; Palisade | Elder Council[government] | trade_collapse | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-31 | 29 | Subsistence farming; Access to external mill; Access to parish church; Burial ground; Household elder; Dwellings (1-8); Water source | Elder Council[government] | great_fire | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-32 | 6 | Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source | Elder Council[government] | external_threat | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-33 | 25 | Subsistence farming; Shepherd collective; Access to external mill; Wayside shrine; Access to parish church; Burial ground; Household elder; Dwellings (1-8); Water source | Elder Council[government] | outside_debt | Indebted to Outside Power. Every coin Gorask earns is spoken for before it arrives, and the creditor decides what is left. Viktoriya Morozov is the one who would come to terms.
+hxd-thorp-34 | 7 | Subsistence farming; Fishing community; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source | The Independent Bloc[other]; Elder Council[government] | leadership_vacuum | Politically Fractured. Two or three powers each hold part of Stormland, and none will give way, so nothing that needs them all gets done. Ljot Haraldsson is stirring it.
+hxd-thorp-35 | 23 | Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source; Palisade; Household levy | Elder Council[government] | outside_debt | Farms nearby have been abandoned after attacks. The community cannot agree on whether to shelter in place, build defences, or leave.
+hxd-thorp-36 | 5 | Subsistence farming; Shepherd collective; Access to external mill; Burial ground; Dwellings (1-8); Water source | Elder Council[government] | legitimacy_crisis | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-37 | 27 | Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Informal elder consensus; Dwellings (1-8); Water source | Elder Council[government] | corruption_scandal | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-38 | 8 | Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source | Grain Holders[economy]; Elder Council[government] | resource_scarcity | Famine and Indebted to Outside Power. In Hartdorf whoever holds grain decides who eats, and they know it. The worst of it falls on Hans Schneider.
+hxd-thorp-39 | 10 | Subsistence farming; Fishing community; Access to external mill; Access to parish church; Burial ground; Head-of-household consensus; Dwellings (1-8); Water source | Household Council[government] | succession_crisis | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-40 | 10 | Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source | Elder Council[government] | tyranny | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-41 | 26 | Subsistence farming; Communal root cellar; Shepherd collective; Access to external mill; Burial ground; Head-of-household consensus; Dwellings (1-8); Water source; Outlaw shelter | Household Council[government] | crime_wave,external_threat | Beast & Raider Threat. Anyone new to Zelenosk who knows how to fight or track will be asked to help before they have unpacked. Josip Popov holds the key to it.
+hxd-thorp-42 | 8 | Subsistence farming; Access to external mill; Access to parish church; Burial ground; Household elder; Dwellings (1-8); Water source | Elder Council[government] | great_flood | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-43 | 8 | Subsistence farming; Access to external mill; Burial ground; Household elder; Dwellings (1-8); Water source | Elder Council[government] | outside_debt | Indebted to Outside Power. Every coin Yuncheng earns is spoken for before it arrives, and the creditor decides what is left. Asuka Li is the one who would come to terms.
+hxd-thorp-44 | 10 | Subsistence farming; Access to external mill; Access to parish church; Burial ground; Household elder; Dwellings (1-8); Water source | Elder Council[government] | resource_scarcity | Disease Outbreak and Famine. Hartgrund has gone short of food for a second season. Its leaders have begun rationing, while the families who can afford it hoard what they have. The worst of it falls on Philipp Wagner.
+hxd-thorp-45 | 11 | Subsistence farming; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Household elder; Dwellings (1-8); Water source | Elder Council[government] | great_flood | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-46 | 23 | Subsistence farming; Communal root cellar; Fishing community; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source | Elder Council[government] | external_threat | A dispute over grazing rights and water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-47 | 21 | Subsistence farming; Fishing community; Access to external mill; Access to parish church; Burial ground; Dwellings (1-8); Water source; Household levy | Elder Council[government] | magical_controversy | A dispute over water access has run for two seasons, and those on each side of it no longer speak to one another.
+hxd-thorp-48 | 10 | Subsistence farming; Communal root cellar; Shepherd collective; Access to external mill; Access to parish church; Burial ground; Head-of-household consensus; Dwellings (1-8); Water source; Household levy; Local fence | Household Council[government] | crime_wave | The council has asked Skadi Sigmundsson and Jarl Thorsson to audit each other's accounts. Both agreed, and neither is comfortable.
+hxd-thorp-49 | 17 | Subsistence farming; Communal root cellar; Fishing community; Access to external mill; Burial ground; Dwellings (1-8); Water source | Elder Council[government] | demographic_pressure | Mass Migration. Whoever takes charge of the newcomers in Darhanhiid will decide who may stay and who must go, and will want something in return. Shahrukh Taichiud holds the key to it.
+hxd-hamlet-0 | 66 | Subsistence farming; Common grazing land; Peat cutter; Periodic market; Access to external mill; Carpenter (part-time); Wayside shrine; Access to parish church; Burial ground; Village headman; Dwellings (5-25); Water source; Adventurers' charter hall; Palisade or earthworks; Citizen militia | Headman's Authority[government]; Merchant Guilds[economy] | external_threat | Diebold Hoffmann has publicly backed a plan that Peregrina Schneider thinks will fail. Peregrina Schneider has said so once, in private.
+hxd-hamlet-1 | 20 | Subsistence farming; Common grazing land; Fisher's landing; Pack animal trader; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source | Elder Council[government] | corruption_scandal | Recently Betrayed. People new to Steinfurt are the only ones with no motive for the betrayal, which makes them useful to anyone hunting the traitor. It is aimed at Andreas Braun.
+hxd-hamlet-2 | 58 | Subsistence farming; Common grazing land; Hunter's lodge; Alehouse; Access to external mill; Wayside shrine; Access to parish church; Burial ground; Village headman; Dwellings (5-25); Water source; Adventurers' charter hall; Dairy farmer | Headman's Authority[government] | resource_scarcity | Famine. In Mikrochorion whoever holds grain decides who eats, and they know it. The worst of it falls on Irini Bryennios.
+hxd-hamlet-3 | 39 | Subsistence farming; Common grazing land; Fisher's landing; Dairy farmer; Woodcutter's camp; Access to external mill; Resident smith (part-time); Access to parish church; Burial ground; Dwellings (5-25); Water source; Stable yard | Elder Council[government] | generational_divide | The family has taken a side in a quarrel between Stefan Koch and Nora Neumann, and both of them think it is the wrong side.
+hxd-hamlet-4 | 64 | Subsistence farming; Common grazing land; Fisher's landing; Access to external mill; Resident smith (part-time); Access to parish church; Burial ground; Dwellings (5-25); Water source; Shepherd | Elder Council[government] | resource_scarcity | Famine. Anyone who comes to Medinaqala with food to sell is welcome; anyone who comes to eat is not. The worst of it falls on Faris al-Aziz.
+hxd-hamlet-5 | 93 | Subsistence farming; Common grazing land; Access to external mill; Access to parish church; Burial ground; Informal elder consensus; Dwellings (5-25); Water source; Bandit affiliate | Free Elder Council[government] | crime_wave | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-hamlet-6 | 57 | Subsistence farming; Common grazing land; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source | Elder Council[government] | trade_collapse | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-hamlet-7 | 81 | Subsistence farming; Common grazing land; Peat cutter; Mine (open cast); Hunter's lodge; Access to external mill; Carpenter (part-time); Access to parish church; Burial ground; Informal elder consensus; Dwellings (5-25); Water source; Palisade or earthworks; Citizen militia | Military/Guard[military]; Free Elder Council[government] | corruption_scandal | Recently Betrayed. People new to Bhagagram are the only ones with no motive for the betrayal, which makes them useful to anyone hunting the traitor. Omkara Bhatt is stirring it.
+hxd-hamlet-8 | 56 | Subsistence farming; Common grazing land; Fisher's landing; Access to external mill; Carpenter (part-time); Access to parish church; Burial ground; Informal elder consensus; Dwellings (5-25); Water source; Palisade or earthworks; Citizen militia | Free Elder Council[government] | resource_scarcity | Disease Outbreak. With fewer buyers and fewer carts, Zlatomir's trade shrinks for as long as the sickness lasts. Dobroslav Sokolov holds the key to it.
+hxd-hamlet-9 | 55 | Subsistence farming; Common grazing land; Fisher's landing; Access to external mill; Access to parish church; Burial ground; Informal elder consensus; Dwellings (5-25); Water source | Free Elder Council[government] | plague_years | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-hamlet-10 | 62 | Subsistence farming; Common grazing land; Dairy farmer; Charcoal burner; Access to external mill; Resident smith (part-time); Wayside shrine; Access to parish church; Burial ground; Dwellings (5-25); Water source | Elder Council[government] | tyranny | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-hamlet-11 | 92 | Subsistence farming; Common grazing land; Fisher's landing; Salt works; Wayside inn; Pack animal trader; Access to external mill; Wayside shrine; Access to parish church; Burial ground; Informal elder consensus; Dwellings (5-25); Water source | Free Elder Council[government] | infiltration_fear | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-hamlet-12 | 90 | Subsistence farming; Common grazing land; Access to external mill; Access to parish church; Burial ground; Lord's steward; Dwellings (5-25); Water source; Palisade or earthworks; Citizen militia | Feudal Stewardship[government] | resource_scarcity | Famine. Anyone who comes to Magnapolis with food to sell is welcome; anyone who comes to eat is not. The worst of it falls on Marcella Silanus.
+hxd-hamlet-13 | 38 | Subsistence farming; Common grazing land; Fisher's landing; Hunter's lodge; Alehouse; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source | Elder Council[government] | resource_scarcity,external_threat | Wartime. An army requisition officer wants more from Kallipolis than it can spare, and someone new might find a way between giving in and refusing.
+hxd-hamlet-14 | 68 | Subsistence farming; Common grazing land; Fisher's landing; Alehouse; Access to external mill; Resident smith (part-time); Access to parish church; Burial ground; Village headman; Dwellings (5-25); Water source; Fence (word of mouth); Palisade or earthworks; Citizen militia | Headman's Authority[government]; Military/Guard[military] | crime_wave | Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off.
+hxd-hamlet-15 | 65 | Subsistence farming; Common grazing land; Woodcutter's camp; Mine (open cast); Alehouse; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source | Elder Council[government] | resource_scarcity | Disease Outbreak. With fewer buyers and fewer carts, Niederwiese's trade shrinks for as long as the sickness lasts. Ottmar Schäfer holds the key to it.
+hxd-hamlet-16 | 95 | Subsistence farming; Common grazing land; Access to external mill; Wayside shrine; Access to parish church; Burial ground; Informal elder consensus; Dwellings (5-25); Water source | Free Elder Council[government] | plague_years | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-hamlet-17 | 64 | Subsistence farming; Common grazing land; Peat cutter; Stone quarry; Pack animal trader; Access to external mill; Resident smith (part-time); Access to parish church; Burial ground; Dwellings (5-25); Water source; Smuggling waypoint; Charcoal burner | Elder Council[government] | crime_wave | Trebonianus Severus and Accia Silanus each hold something over the other. Trebonianus Severus has asked Accia Silanus for a second favour before repaying the first, which would put him two favours ahead.
+hxd-hamlet-18 | 84 | Subsistence farming; Common grazing land; Fisher's landing; Mine (open cast); Access to external mill; Access to parish church; Burial ground; Lord's steward; Dwellings (5-25); Water source; Adventurers' charter hall | The Independent Bloc[other]; Feudal Stewardship[government] | leadership_vacuum | Politically Fractured. Anything in Navanand that needs all its powers to agree, from a repair to a ruling, waits, and the waiting costs everyone. Chitragupta Deshpande is stirring it.
+hxd-hamlet-19 | 28 | Subsistence farming; Common grazing land; Stone quarry; Stable yard; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source | Elder Council[government] | corruption_scandal | Constantinos Comnenus has made a mistake that Eirene Argyros is bound to report. Eirene Argyros has not reported it.
+hxd-hamlet-20 | 58 | Subsistence farming; Common grazing land; Access to external mill; Access to parish church; Burial ground; Village headman; Dwellings (5-25); Water source | Headman's Authority[government] | disputed_land | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-hamlet-21 | 83 | Subsistence farming; Common grazing land; Access to external mill; Access to parish church; Burial ground; Village headman; Dwellings (5-25); Water source; Palisade or earthworks; Citizen militia | Grain Holders[economy]; Headman's Authority[government] | resource_scarcity | Famine. In Evangelathra what food is left is watched day and night, and those watching it are as hungry as everyone else. The worst of it falls on Philippos Chrysoberges.
+hxd-hamlet-22 | 85 | Subsistence farming; Common grazing land; Charcoal burner; Peat cutter; Hunter's lodge; Wayside inn; Caravanserai; Access to external mill; Wayside shrine; Access to parish church; Burial ground; Dwellings (5-25); Water source | Elder Council[government] | succession_crisis | Succession Void. No one in Sanctafundus has the standing to give an order others must obey, and every rival for the seat knows it.
+hxd-hamlet-23 | 46 | Subsistence farming; Common grazing land; Access to external mill; Resident smith (part-time); Access to parish church; Burial ground; Lord's steward; Dwellings (5-25); Water source | Feudal Stewardship[government] | external_threat | Beast & Raider Threat. Those who answer for Madinatbazaar's safety spend more on it every season, and still the attacks come. Daoud ibn Khalid holds the key to it.
+hxd-hamlet-24 | 93 | Subsistence farming; Common grazing land; Alehouse; Stable yard; Access to external mill; Access to parish church; Burial ground; Informal elder consensus; Dwellings (5-25); Water source | Free Elder Council[government] | infiltration_fear | Notker Weber has recently secured something that makes Sigrid Schäfer's hold obsolete. The politeness continues, for now.
+hxd-hamlet-25 | 55 | Subsistence farming; Common grazing land; Stone quarry; Pawnbroker; Wayside inn; Access to external mill; Wayside shrine; Access to parish church; Burial ground; Village headman; Dwellings (5-25); Water source; Alehouse | Headman's Authority[government] | demographic_pressure | Mass Migration. In Ravenin the quarrels between old families and newcomers come more often now, and each is harder to settle. Radomir Ivanov holds the key to it.
+hxd-hamlet-26 | 98 | Subsistence farming; Common grazing land; Fisher's landing; Mine (open cast); Access to external mill; Carpenter (part-time); Access to parish church; Burial ground; Lord's steward; Dwellings (5-25); Water source | Occupation Authority[military]; Feudal Stewardship[government] | resource_scarcity | Under Occupation. The occupiers watch Agiosambelos for the resistance, and the resistance watches for its chance. The occupier's orders come through Maroula Bryennios.
+hxd-hamlet-27 | 31 | Subsistence farming; Common grazing land; Fisher's landing; Alehouse; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source; Palisade or earthworks; Citizen militia; Shepherd | Elder Council[government] | disputed_land | Dietmar Becker and Thecla Wolf will both present proposals at the next council session. Only one will be accepted.
+hxd-hamlet-28 | 77 | Subsistence farming; Common grazing land; Access to external mill; Access to parish church; Burial ground; Informal elder consensus; Dwellings (5-25); Water source | Free Elder Council[government] | resource_scarcity | Indebted to Outside Power and Famine. In Polagrad what food is left is watched day and night, and those watching it are as hungry as everyone else. The worst of it falls on Sergei Pavlov.
+hxd-hamlet-29 | 82 | Subsistence farming; Common grazing land; Periodic market; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source | Elder Council[government] | guild_conflict | A dispute over field rotation and grazing rights has divided the village for most of this season.
+hxd-hamlet-30 | 39 | Subsistence farming; Common grazing land; Wayside inn; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source | Elder Council[government] | trade_collapse | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-hamlet-31 | 75 | Subsistence farming; Common grazing land; Fisher's landing; Hunter's lodge; Alehouse; Stable yard; Access to external mill; Access to parish church; Burial ground; Village headman; Dwellings (5-25); Water source; Bandit affiliate | Headman's Authority[government]; Military Party[military] | crime_wave | Manuela Angelos wants to bring a third member into the alliance. Helene Argyros thinks the newcomer would take her place.
+hxd-hamlet-32 | 50 | Subsistence farming; Common grazing land; Dairy farmer; Mine (open cast); Stone quarry; Alehouse; Access to external mill; Wayside shrine; Access to parish church; Burial ground; Dwellings (5-25); Water source; Resident smith (part-time) | Elder Council[government] | wild_magic | Werner Schäfer now operates in ways Franz Schulz would not approve of. Neither discusses the divergence directly.
+hxd-hamlet-33 | 53 | Subsistence farming; Common grazing land; Woodcutter's camp; Peat cutter; Alehouse; Stable yard; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source; Citizen militia; Palisade or earthworks | Military/Guard[military]; Elder Council[government] | population_friction | A document Eleni Dalassenos and Trifena Bryennios each believed only they possessed has turned up in someone else's hands.
+hxd-hamlet-34 | 23 | Subsistence farming; Common grazing land; Fisher's landing; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source; Palisade or earthworks; Citizen militia | Elder Council[government] | tyranny | Minghao Zhou has taken on a client Wen Gao turned away on principle.
+hxd-hamlet-35 | 21 | Subsistence farming; Common grazing land; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source; Palisade or earthworks; Citizen militia; Dairy farmer | Elder Council[government] | tyranny | Zorica Bykov now operates in ways Bogdan Novikov would not approve of. Neither discusses the divergence directly.
+hxd-hamlet-36 | 71 | Subsistence farming; Common grazing land; Fisher's landing; Alehouse; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source; Palisade or earthworks; Citizen militia; Wayside inn | Elder Council[government] | legitimacy_crisis | Insurgency. Those in charge of Dongdao need something done that cannot be official, and someone new is whom they would ask. It is aimed at Lan Guo.
+hxd-hamlet-37 | 58 | Subsistence farming; Common grazing land; Shepherd; Access to external mill; Access to parish church; Burial ground; Lord's steward; Dwellings (5-25); Water source | Feudal Stewardship[government] | outside_debt | Indebted to Outside Power. Every plan Ononkhand's leaders make must first pass the creditor, and most of them do not. Dokuz Kereit is the one who would come to terms.
+hxd-hamlet-38 | 35 | Subsistence farming; Common grazing land; Access to external mill; Access to parish church; Burial ground; Village headman; Dwellings (5-25); Water source; Shepherd | Headman's Authority[government] | popular_uprising | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-hamlet-39 | 71 | Subsistence farming; Common grazing land; Stone quarry; Salt works; Stable yard; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source; Shepherd; Pack animal trader | Elder Council[government] | generational_divide | Someone else is working to pull Erdenebayar Barlas and Qutlugh Tayichi'ud apart.
+hxd-hamlet-40 | 67 | Subsistence farming; Common grazing land; Fisher's landing; Hunter's lodge; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source; Bandit affiliate; Dairy farmer | Elder Council[government]; The Independent Bloc[other] | crime_wave | Infiltrated. What is said in Dunkelkoppel's councils keeps reaching people who should not hear it, and nobody has worked out how.
+hxd-hamlet-41 | 69 | Subsistence farming; Common grazing land; Stone quarry; Salt works; Wayside inn; Alehouse; Access to external mill; Carpenter (part-time); Access to parish church; Burial ground; Village headman; Dwellings (5-25); Water source; Mine (open cast) | Headman's Authority[government] | corruption_scandal | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-hamlet-42 | 57 | Subsistence farming; Common grazing land; Fisher's landing; Hunter's lodge; Periodic market; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source; Smuggling waypoint | Elder Council[government] | resource_scarcity,crime_wave,external_threat | Wartime. In wartime Ripavetum's trade follows the army: what the war needs sells, and the rest waits.
+hxd-hamlet-43 | 99 | Subsistence farming; Common grazing land; Access to external mill; Wayside shrine; Access to parish church; Burial ground; Informal elder consensus; Dwellings (5-25); Water source | Free Elder Council[government] | religious_tension | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-hamlet-44 | 20 | Subsistence farming; Common grazing land; Woodcutter's camp; Access to external mill; Carpenter (part-time); Access to parish church; Burial ground; Dwellings (5-25); Water source | Elder Council[government] | succession_crisis | Dan Luo has asked Yu Zhang for a vote against his own interests. It is the first payment Dan Luo has asked for.
+hxd-hamlet-45 | 93 | Subsistence farming; Common grazing land; Hunter's lodge; Access to external mill; Carpenter (part-time); Wayside shrine; Access to parish church; Burial ground; Lord's steward; Dwellings (5-25); Water source; Adventurers' charter hall; Dairy farmer | Feudal Stewardship[government] | tyranny | Bahija al-Amin corrected Latif al-Farabi in public last month, and was right.
+hxd-hamlet-46 | 33 | Subsistence farming; Common grazing land; Fisher's landing; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source; Fence (word of mouth) | Elder Council[government] | crime_wave | A third party has asked Aristoteles Akropolites, quietly, whether Romanos Angelos can be trusted. The answer took too long.
+hxd-hamlet-47 | 69 | Subsistence farming; Common grazing land; Shepherd; Charcoal burner; Salt works; Stable yard; Access to external mill; Access to parish church; Burial ground; Village headman; Dwellings (5-25); Water source; Peat cutter; Pack animal trader; Carpenter (part-time) | The Highborn Circle[noble]; Headman's Authority[government] | succession_crisis | Succession Void. Until Celono has a leader again, no large bargain can be struck there, and those waiting on one are losing patience. Zorica Aleksandrov is stirring it.
+hxd-hamlet-48 | 86 | Subsistence farming; Common grazing land; Shepherd; Alehouse; Stable yard; Access to external mill; Wayside shrine; Access to parish church; Burial ground; Lord's steward; Dwellings (5-25); Water source; Dairy farmer; Wayside inn | Feudal Stewardship[government] | great_flood | Nerva Flavius and Vera Cato respect each other, and it is real. Nerva Flavius and Vera Cato are about to be on opposite sides of an important decision.
+hxd-hamlet-49 | 21 | Subsistence farming; Common grazing land; Access to external mill; Access to parish church; Burial ground; Dwellings (5-25); Water source | Elder Council[government] | magical_controversy | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-village-0 | 366 | Farmland; Common grazing land; Beekeeper; Ale house; Mill; Apothecary; Cobbler; Woodcarver; Parish church; Graveyard; Priest (resident); Village headman; Dwellings (15-100); Multiple water sources; Village musician; Dairy farmer | Headman's Authority[government]; Religious Authorities[religious] | great_fire | Anna Korolev has been telling clients that Alexei Klimov's work is slipping. Two of the clients have repeated it to Alexei Klimov.
+hxd-village-1 | 182 | Farmland; Common grazing land; Mill; Sawmill; Cartographer's workshop; Parish church; Graveyard; Priest (resident); Lord's steward; Dwellings (15-100); Multiple water sources | Religious Authorities[religious]; Feudal Stewardship[government] | popular_uprising | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-village-2 | 264 | Farmland; Common grazing land; Fisher's landing; Dairy farmer; Salt works; River ferry; Mill; Parish church; Graveyard; Priest (resident); Village reeve; Dwellings (15-100); Multiple water sources; Stable master; River boatyard; Fuller | Elected Reeve[other]; Religious Authorities[religious] | succession_crisis | Huana Cohuoh and Jaguar Cohuoh are tied by a debt not yet paid. Huana Cohuoh has offered to clear what is left of the debt in one payment. Jaguar Cohuoh would rather be repaid in favours.
+hxd-village-3 | 77 | Farmland; Common grazing land; Fisher's landing; River ferry; Mill; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources | Religious Authorities[religious]; Elder Council[government] | legitimacy_crisis | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-village-4 | 231 | Farmland; Common grazing land; Mine; Pack animal trader; Mill; Blacksmith; Apothecary; Dyer; Potter; Midwife; Village scribe; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Stable master | Religious Authorities[religious]; Elder Council[government] | plague_years,external_threat | A post opens at midsummer, and only Stoycho Dmitriev or Inna Dmitriev can fill it.
+hxd-village-5 | 90 | Farmland; Common grazing land; Fisher's landing; Salt works; River ferry; Mill; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; River boatyard | Religious Authorities[religious]; Elder Council[government] | legitimacy_crisis | Insurgency. The defiance of Baizhen's government grows, and those watching it count who still obeys and who has stopped. Ning Song is stirring it.
+hxd-village-6 | 302 | Farmland; Common grazing land; Woodcutter's camp; Mine; Pack animal trader; Mill; Blacksmith; Bowyer & fletcher; Cobbler; Woodcarver; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources | Religious Authorities[religious]; Elder Council[government] | heresy_trial,great_fire | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-village-7 | 99 | Farmland; Common grazing land; Fisher's landing; River boatyard; Mill; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Palisade or earthworks; Citizen militia | Religious Authorities[religious]; Elder Council[government] | infiltration_fear | Frodi Njálsson has asked Brynhild Thorsson for a loan. It is the first time a debt between teacher and student has run that way.
+hxd-village-8 | 105 | Farmland; Common grazing land; Travelers' inn; Mill; Blacksmith; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Citizen militia; Adventurers' charter hall | Religious Authorities[religious]; Elder Council[government] | legitimacy_crisis,religious_tension | Religious Conversion. A newcomer in Hákonoy is pressed to choose a faith, and whichever they choose, half the place will notice. Grima Bjornsson is stirring it.
+hxd-village-9 | 276 | Farmland; Common grazing land; Peat cutter; Caravanserai; Toll bridge; Mill; Cartographer's workshop; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Palisade or earthworks; Thatcher | Religious Authorities[religious]; Elder Council[government] | outside_debt,wild_magic | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-village-10 | 156 | Farmland; Common grazing land; Fisher's landing; Dairy farmer; Salt works; Weekly market; Stable master; River ferry; River boatyard; Mill; Parish church; Graveyard; Priest (resident); Village elder; Dwellings (15-100); Multiple water sources | Religious Authorities[religious]; Elder Council[government] | resource_scarcity | Disease Outbreak. With fewer buyers and fewer carts, Chinggisdavan's trade shrinks for as long as the sickness lasts. Ghazan Jadaran holds the key to it.
+hxd-village-11 | 385 | Farmland; Common grazing land; Woodcutter's camp; Charcoal burner; River ferry; Mill; Blacksmith; Apothecary; Sawmill; Brewer; Cobbler; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Ale house; Stable master; River boatyard | Elder Council[government]; Religious Authorities[religious] | plague_years | Swanhild Krause has recently broken an unwritten rule of the contest. Gunter Werner is deciding what that permits.
+hxd-village-12 | 258 | Farmland; Common grazing land; Woodcutter's camp; Mine; Travelers' inn; Mill; Bowyer & fletcher; Tailor; Parish church; Graveyard; Priest (resident); Village elder; Dwellings (15-100); Multiple water sources; Adventurers' charter hall; Blacksmith | Religious Authorities[religious]; Elder Council[government] | corruption_scandal,succession_crisis | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-village-13 | 92 | Farmland; Common grazing land; Fisher's landing; Mill; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Palisade or earthworks; Citizen militia | Religious Authorities[religious]; Elder Council[government] | great_flood,legitimacy_crisis | Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off.
+hxd-village-14 | 355 | Farmland; Common grazing land; Fish market; Mine; Weekly market; Ale house; Mill; Brickmaker; Cobbler; Midwife; Woodcarver; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Dairy farmer; Blacksmith; Brewer | Elder Council[government]; Merchant Guilds[economy]; Religious Authorities[religious] | legitimacy_crisis,pilgrimage_surge | Sophronios Chomatenos corrected Despoina Chrysoberges in public last month, and was right.
+hxd-village-15 | 216 | Farmland; Common grazing land; Woodcutter's camp; Ale house; Carriers' hiring hall; Stable master; Mill; Blacksmith; Carpenter; Thatcher; Apothecary; Bowyer & fletcher; Parish church; Graveyard; Priest (resident); Village elder; Dwellings (15-100); Multiple water sources; Wildfowler; Midwife | Religious Authorities[religious]; The Independent Bloc[other]; Elder Council[government] | leadership_vacuum,succession_crisis | Politically Fractured. Anything in Zhongyuan that needs all its powers to agree, from a repair to a ruling, waits, and the waiting costs everyone. Zhiwei Wang is stirring it.
+hxd-village-16 | 99 | Farmland; Common grazing land; Fisher's landing; Salt works; River ferry; Mill; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Palisade or earthworks; Citizen militia; River boatyard | Religious Authorities[religious]; Elder Council[government] | wild_magic | Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off.
+hxd-village-17 | 322 | Farmland; Common grazing land; Charcoal burner; Stable master; Mill; Blacksmith; Apothecary; Brewer; Village scribe; Parish church; Graveyard; Priest (resident); Lord's steward; Dwellings (15-100); Multiple water sources; Palisade or earthworks; Citizen militia; Maltster; Sawmill | Military/Guard[military]; Religious Authorities[religious]; Feudal Stewardship[government] | external_threat | Wartime. An army requisition officer wants more from Bjornby than it can spare, and someone new might find a way between giving in and refusing. Hildigunn Gormsson leads the defence.
+hxd-village-18 | 175 | Farmland; Common grazing land; Dairy farmer; Ale house; Mill; Blacksmith; Apothecary; Tannery; Midwife; Cartographer's workshop; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources | Religious Authorities[religious]; Elder Council[government] | disputed_land | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-village-19 | 129 | Farmland; Common grazing land; Dairy farmer; Weekly market; Mill; Midwife; Wayside shrine; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources | Merchant Guilds[economy]; Elder Council[government] | disputed_land | A dispute over field rotation and grazing rights has divided the village for most of this season.
+hxd-village-20 | 285 | Farmland; Common grazing land; Woodcutter's camp; Hunter's lodge; Ale house; Mill; Carpenter; Bowyer & fletcher; Sawmill; Cartographer's workshop; Parish church; Graveyard; Priest (resident); Village headman; Dwellings (15-100); Multiple water sources; Dairy farmer | Headman's Authority[government]; Religious Authorities[religious] | outside_debt,resource_scarcity | Killian Carey has one favour left to call in, and is saving it. Réalt Burke knows, and is watching for it.
+hxd-village-21 | 233 | Farmland; Common grazing land; Fish market; Travelers' inn; Caravanserai; Mill; Blacksmith; Tannery; Cartographer's workshop; Parish church; Graveyard; Priest (resident); Druid Circle; Lord's steward; Dwellings (15-100); Multiple water sources; Weekly market | Merchant Guilds[economy]; Religious Authorities[religious]; Feudal Stewardship[government] | market_crash,wild_magic | A dispute over field rotation and grazing rights has divided the village for most of this season.
+hxd-village-22 | 327 | Farmland; Common grazing land; Fisher's landing; Weekly market; Waystation; River ferry; Mill; Apothecary; Village scribe; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Fish market; Shepherd; River boatyard; Cooper; Sawmill | Merchant Guilds[economy]; Religious Authorities[religious]; Elder Council[government] | magical_controversy | A dispute over field rotation and grazing rights has divided the village for most of this season.
+hxd-village-23 | 86 | Farmland; Common grazing land; Woodcutter's camp; Mill; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources | Religious Authorities[religious]; Elder Council[government] | corruption_scandal | Recently Betrayed. Whoever betrayed Qaryahdeh may still be there, and those looking for them have not given up. Said al-Din is stirring it.
+hxd-village-24 | 255 | Farmland; Common grazing land; Charcoal burner; Hunter's lodge; Ale house; Mill; Bowyer & fletcher; Dyer; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources | Religious Authorities[religious]; Elder Council[government] | pilgrimage_surge,wild_magic | Photeine Dalassenos is about to call it in.
+hxd-village-25 | 191 | Farmland; Common grazing land; Beekeeper; Mill; Blacksmith; Apothecary; Parish church; Graveyard; Priest (resident); Informal elder consensus; Dwellings (15-100); Multiple water sources; Midwife | Religious Authorities[religious]; Elder Council[government] | wild_magic | Muluc Chi has asked Huitzil Dzul for a second favour before repaying the first, which would put the apothecary two favours ahead.
+hxd-village-26 | 189 | Farmland; Common grazing land; Fisher's landing; Travelers' inn; Mill; Fuller; Cartographer's workshop; Parish church; Graveyard; Priest (resident); Village reeve; Dwellings (15-100); Multiple water sources; Stable master | Religious Authorities[religious]; Elected Reeve[other] | magical_controversy | Njal Bjornsson corrected Lodmund Ketilsson in public last month, and was right.
+hxd-village-27 | 397 | Farmland; Common grazing land; Dairy farmer; Beekeeper; Woodcutter's camp; Charcoal burner; Mill; Carpenter; Sawmill; Parish church; Graveyard; Priest (resident); Village reeve; Dwellings (15-100); Multiple water sources; Thatcher | Religious Authorities[religious]; Elected Reeve[other] | occupation_legacy | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-village-28 | 110 | Farmland; Common grazing land; Fisher's landing; Salt works; River boatyard; Mill; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; River ferry | Elder Council[government]; Religious Authorities[religious] | plague_years,wild_magic | A post opens at midsummer, and only Juan Luo or Bixia Xie can fill it.
+hxd-village-29 | 378 | Farmland; Common grazing land; Stone quarry; Hunter's lodge; Weekly market; Ale house; Stable master; Mill; Thatcher; Apothecary; Dyer; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Hedge wizard; Fence (word of mouth); Fish market; Midwife | Merchant Guilds[economy]; Religious Authorities[religious]; Elder Council[government] | crime_wave,external_threat | Beast & Raider Threat. Those who answer for Ráðset's safety spend more on it every season, and still the attacks come. The worst of it falls on Záleif Magnusson.
+hxd-village-30 | 136 | Farmland; Common grazing land; Fisher's landing; Salt works; Stable master; River boatyard; Mill; Cartographer's workshop; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Palisade or earthworks; Citizen militia; River ferry | Military/Guard[military]; Elder Council[government] | resource_scarcity,external_threat | Wartime. In Chalpan the army's officers come for requisitions, and people watch closely what they take. Ix Chup Moo leads the defence.
+hxd-village-31 | 386 | Farmland; Common grazing land; Fisher's landing; Fishmonger; Shepherd; Dairy farmer; Weekly market; Waystation; River ferry; Mill; Fuller; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Stable master; Dyer | Elder Council[government]; Merchant Guilds[economy]; Religious Authorities[religious] | occupation_legacy | Someone else has learned what favour Aziz al-Rahman owes Abbas al-Rashidi, and now has a hold on the priest too.
+hxd-village-32 | 335 | Farmland; Common grazing land; Woodcutter's camp; Charcoal burner; Mill; Sawmill; Tannery; Potter; Tailor; Midwife; Parish church; Graveyard; Priest (resident); Lord's steward; Dwellings (15-100); Multiple water sources; Stable master; Maltster | Religious Authorities[religious]; Creditor's Representative[other]; Feudal Stewardship[government] | outside_debt,religious_tension | Indebted to Outside Power. The creditor's people in Uaxactepec are watching for anything worth taking in place of payment. Jaguar Kab is the one who would come to terms.
+hxd-village-33 | 370 | Farmland; Common grazing land; Fish market; Stone quarry; Caravanserai; Pack animal trader; Stable master; Mill; Bowyer & fletcher; Tannery; Potter; Brickmaker; Cartographer's workshop; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Weekly market; Sawmill | Elder Council[government]; Merchant Guilds[economy]; Religious Authorities[religious] | market_crash | A dispute over field rotation and grazing rights has divided the village for most of this season.
+hxd-village-34 | 93 | Farmland; Common grazing land; Woodcutter's camp; Salt works; Mill; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Palisade or earthworks; Citizen militia | Religious Authorities[religious]; Elder Council[government] | popular_uprising,great_flood | Pulvillus Gratus has written down what Tullia Flaccus owes and left a sealed copy with a third party.
+hxd-village-35 | 134 | Farmland; Common grazing land; Fisher's landing; River boatyard; Mill; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Village musician; River ferry | Religious Authorities[religious]; Elder Council[government] | succession_crisis | Dong Lin has been telling clients that Tianhao Wei's work is slipping. Two of the clients have repeated it to Tianhao Wei.
+hxd-village-36 | 93 | Farmland; Common grazing land; Mill; Thatcher; Village scribe; Parish church; Graveyard; Priest (resident); Village headman; Dwellings (15-100); Multiple water sources; Stable master | Headman's Authority[government]; Religious Authorities[religious] | infiltration_fear | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-village-37 | 143 | Farmland; Common grazing land; Dairy farmer; Mine; Mill; Sawmill; Parish church; Graveyard; Priest (resident); Village reeve; Dwellings (15-100); Multiple water sources | Religious Authorities[religious]; Elected Reeve[other] | resource_scarcity | Disease Outbreak. Anyone new to Makroeia will be asked whether they carry the sickness, and few will believe the answer. Prokopios Hexamilites holds the key to it.
+hxd-village-38 | 294 | Farmland; Common grazing land; Fisher's landing; Peat cutter; Salt works; Travelers' inn; River ferry; River boatyard; Mill; Woodcarver; Parish church; Graveyard; Priest (resident); Village headman; Dwellings (15-100); Multiple water sources; Citizen militia; Weekly market; Maltster; Cooper | Military/Guard[military]; Merchant Guilds[economy]; Headman's Authority[government] | external_threat | Beast & Raider Threat. Anyone new to Kilfell who knows how to fight or track will be asked to help before they have unpacked. Rian Murray holds the key to it.
+hxd-village-39 | 137 | Farmland; Common grazing land; Woodcutter's camp; Mill; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources | Religious Authorities[religious]; Elder Council[government] | legitimacy_crisis | Insurgency. Those in charge of Nektarakra need something done that cannot be official, and someone new is whom they would ask. Eudoxia Gabalas is stirring it.
+hxd-village-40 | 266 | Farmland; Common grazing land; Mill; Bowyer & fletcher; Woodcarver; Parish church; Graveyard; Priest (resident); Village headman; Dwellings (15-100); Multiple water sources; Adventurers' charter hall; Shepherd; Maltster | Headman's Authority[government]; Religious Authorities[religious]; Military Party[military] | wild_magic | A post opens at midsummer, and only Vasileios Gregoraios or Athanasia Comnenus can fill it.
+hxd-village-41 | 77 | Farmland; Common grazing land; Woodcutter's camp; Mill; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources | Religious Authorities[religious]; Elder Council[government] | outside_debt,pilgrimage_surge | Dawon Song has asked Haruto Ma for a vote against his own interests. It is the first payment Dawon Song has asked for.
+hxd-village-42 | 159 | Farmland; Common grazing land; Fisher's landing; River ferry; Mill; Midwife; Parish church; Graveyard; Priest (resident); Village elder; Dwellings (15-100); Multiple water sources; Maltster | Religious Authorities[religious]; Elder Council[government] | succession_crisis,generational_divide | Succession Void. Until Wuzhou has a leader again, no large bargain can be struck there, and those waiting on one are losing patience. Zhu Chen is stirring it.
+hxd-village-43 | 305 | Farmland; Common grazing land; Stone quarry; Travelers' inn; Caravanserai; Mill; Carpenter; Sawmill; Cobbler; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources | Religious Authorities[religious]; Elder Council[government] | tyranny | A patron they share has let it be known there is room for only Ai Sun or Dewei Wu at the next table.
+hxd-village-44 | 116 | Farmland; Common grazing land; Mill; Wayside shrine; Parish church; Graveyard; Priest (resident); Village reeve; Dwellings (15-100); Multiple water sources | Religious Authorities[religious]; Elected Reeve[other] | demographic_pressure,magical_controversy | Mass Migration. In Bayarbuurt the quarrels between old families and newcomers come more often now, and each is harder to settle. Unurtsetseg Naiman holds the key to it.
+hxd-village-45 | 368 | Farmland; Common grazing land; Fish market; Stone quarry; Ale house; Mill; Blacksmith; Apothecary; Tannery; Cartographer's workshop; Parish church; Graveyard; Priest (resident); Village reeve; Dwellings (15-100); Multiple water sources; Sawmill | Elected Reeve[other]; Merchant Guilds[economy]; Religious Authorities[religious] | external_threat | Kateryna Pavlov and Yuri Frolov respect each other, and it is real. Kateryna Pavlov is being pressed to act against Yuri Frolov, and has not mentioned it.
+hxd-village-46 | 274 | Farmland; Common grazing land; Fisher's landing; Wildfowler; Woodcutter's camp; Mine; Pawnbroker; Mill; Brickmaker; Cobbler; Parish church; Graveyard; Priest (resident); Village reeve; Dwellings (15-100); Multiple water sources; Blacksmith | Elected Reeve[other]; Religious Authorities[religious] | popular_uprising | Yang Wang has recently secured something that makes Chunhua Zhao's hold obsolete. The politeness continues, for now.
+hxd-village-47 | 106 | Farmland; Common grazing land; Fisher's landing; River ferry; Mill; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources | Elder Council[government]; Religious Authorities[religious] | infiltration_fear,population_friction | A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.
+hxd-village-48 | 263 | Farmland; Common grazing land; Mill; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources | Religious Authorities[religious]; Elder Council[government] | population_friction | Demetrios Alexios and Angelos Gregoraios are tied by a debt not yet paid. Demetrios Alexios has refused Angelos Gregoraios a small favour for the first time in years.
+hxd-village-49 | 198 | Farmland; Common grazing land; Weekly market; Caravanserai; Stable master; Mill; Sawmill; Parish church; Graveyard; Priest (resident); Dwellings (15-100); Multiple water sources; Village watch; Palisade or earthworks | Merchant Guilds[economy]; Elder Council[government] | generational_divide | Qasim ibn Rashid and Zahra al-Aziz are teacher and heir. Zahra al-Aziz corrected Qasim ibn Rashid in public last month, and was right.
