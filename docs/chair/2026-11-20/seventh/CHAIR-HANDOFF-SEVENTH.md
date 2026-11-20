@@ -192,6 +192,22 @@ parts of the whole check (at the close).
   shorthand, nothing). STILL TO RUN: the two lines for `list_ticket_thread`. Whether anyone used the admin doors
   before tonight is a question only the API logs answer: said as the owner's call.
 
+- **2026-11-20, answered by 03:39 UTC, the owner (verbatim):** "So what are your holistic comprehensive thoughts on a
+  generated settlement? In your own words, barring the dimulator". ANSWERED FIRST, from the page (the three towns of
+  the earlier read re-read: `rv2-calm-town-9001` Hákonberg, `rv2-calm-village-9002` Plavisk, `rv2-famine-city-9003`
+  Xinyuan; not the screens, not a DM at a table). THE VIEW: a good town to run and a hard one to start. GOOD: it is
+  one place (the spent iron mines reach the import list, the impaired weapon trade, the garrison's dependence and the
+  defence page; the six months of grain agrees on three pages); the writing has a voice; the hooks are small human
+  problems; a crisis re-orders the page and names three people (who bears it, who holds the lever, who profits).
+  WEAK: the 31 personal hooks sit on top of the town, almost none touching its own troubles (the debt, the iron);
+  the session sheet of a calm town leads with a relationship beat while the creditor's agent is on another page and
+  the debt's three sides carry no names; category labels used as names with no article or pronoun ("Feudal
+  Appointee has been debating…"); an abstract history; true-but-odd facts (magic "Relied upon" at 25 of 4,270
+  pounds a day); about 6,800 words, 31 people and 40 hooks at equal weight. RECOMMENDED FIRST: every town gets the
+  crisis town's frame (its sharpest trouble first, three named people on its three sides), a handful of personal
+  hooks tied to it, the names mended: editing, not structure. NOT KNOWN: sameness across many towns; what a real DM
+  says. THE SLOT (the intake rule): the first content round after the deploy (task 10) takes these rows.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
