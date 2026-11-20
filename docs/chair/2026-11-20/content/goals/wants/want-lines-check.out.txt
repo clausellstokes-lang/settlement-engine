@@ -1,0 +1,18 @@
+tree /home/user/wt-b9; files WANT-LINES-1.md; new lines 60 in 12 cells
+lifted checker: tests/data/goalFamilies.test.js, 71 lines (const STRUCK_TICS … function shapeViolations)
+shapeViolations over cells + reserve + new lines: 0
+  RANK/enter/short: 6 → 21 (+15)
+  RANK/enter/long: 6 → 22 (+16)
+  TIES/rival_enemy/short: 5 → 14 (+9)
+  TIES/rival_enemy/long: 5 → 9 (+4)
+  TIES/ally/short: 5 → 8 (+3)
+  TIES/ally/long: 5 → 9 (+4)
+  INSTITUTION/solvency/short: 6 → 8 (+2)
+  INSTITUTION/solvency/long: 6 → 8 (+2)
+  INSTITUTION/charter/short: 6 → 7 (+1)
+  INSTITUTION/charter/long: 6 → 8 (+2)
+  RANK/climb/short: 6 → 7 (+1)
+  PERSONALITY/sway/long: 4 → 5 (+1)
+new-line slots outside the cell's own slot set: 0
+existing lines quoted: 24, not verbatim: 0
+controls: a planted bad slot reds it true; a planted tic reds it true
