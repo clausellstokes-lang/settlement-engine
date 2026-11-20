@@ -1,4 +1,4 @@
-# PAGE-6's hand-back (PEOPLE AND PLACE: L2, L4, S9, the guard). Kept current at every push; last written 2026-11-20 14:20 UTC by `date -u`
+# PAGE-6's hand-back (PEOPLE AND PLACE: L2, L4, S9, the guard). Kept current at every push; last written 2026-11-20 14:33 UTC by `date -u`
 
 A successor needs this file and the briefs only: `briefs/BUILDER-RULES.md`, `briefs/L2-FINISH.md`, `briefs/L4-FINISH.md`,
 `briefs/S9-POST.md` (and the designs they cite: `briefs/L2.md`, `briefs/S-v2.md`). PAGE-6 integrates; builders (the Agent
@@ -7,18 +7,24 @@ tool) build. PAGE-5 owns the other half (a tension's wording, sides, causes): ne
 
 ## 1. State
 
-- Started on d448de3a3 (PAGE-3's tip). The lane `lane/page-6-2026-11-20` is NOT yet given ("THE LANE IS YOURS at <commit>"
-  awaited): nothing under `src/`/`tests/`, nothing merged. Docs ride on origin `lane/page-6-2026-11-20-lines` (cut from
-  d448de3a3), to be cherry-picked onto the lane once given.
-- Two-tree base births at d448de3a3 cached in this container's scratchpad `cw/` (self-check 525/525, 720/720 identical).
+- THE LANE IS PAGE-6's (the chair, 14:06; PAGE-3's final tip 79710682d, 14:13). `lane/page-6-2026-11-20` = 79710682d + the
+  docs carried from `lane/page-6-2026-11-20-lines` (that side branch is history now). Nothing under `src/`/`tests/` merged yet.
+- THE CHAIR'S READ (14:17): L2's 76 lines: 73 approved, three changes (river NEW[6] "Trees lean…", smoke NEW[4] "Smoke on the
+  skyline…", norse NEW[5] gains `excludes: ['crisis: hunger']`; in `briefs/L2-FINISH.md`); the seven reworked L4 lines approved.
+  NEW ORDER: L2, then S9 (post-pass), then L4 AFTER a mercy row per title is read (`lines/L4-MERCY-TO-CHAIR.md`, sent 14:34,
+  awaiting the read); S9's `admits` gives a principled card that row; count the principled office-holders who gain one.
+- 14:29 the container restarted (memory, most likely: two builders' gates + a push hook at once). Since: every gate and push
+  through `sh scripts/gate-mutex.sh --run -- …`, one at a time. core.bare false, no "Fixture" author, checked after.
+- Two-tree base births at d448de3a3 cached in scratchpad `cw/` (src/tests identical to 79710682d).
 
 ## 2. Units
 
-| unit | state | source | next |
+| unit | state | where | next |
 |---|---|---|---|
-| L2 (76 arrival lines) | lines sent to the chair (`lines/L2-LINES-TO-CHAIR.md`, built by script: 0 existing lines moved); awaiting its read | origin `lane/page-2-2026-11-20-l2-wip` 609c52c5d | builder on `L2-FINISH.md`; PAGE-6 reads the diff, re-runs red/green, takes the lighting and wiring censuses, `pool-dominance --tighten` ON THE CHAIR'S RULING (it is the chair's door), merges |
-| L4 (office secrets) | the seven reworked sent (`lines/L4-SEVEN-TO-CHAIR.md`); no existing row reworded | origin `lane/page-2-2026-11-20-s-wip` f2957d5be (L4 + the REFUSED S9) | builder on `L4-FINISH.md` (L4 split out; three anchored tests re-keyed by cause; three fingerprints named, unsigned) |
-| S9 (post-pass) + the guard | brief written | — | builder on `S9-POST.md` after L4 merges |
+| L2 | builder out (finish: three changes, manifest row, gates) | worktree /home/user/wt-p6-l2, branch `page6/l2` | read diff once, red/green, censuses (lighting, wiring) by their doors, `pool-dominance --tighten` only on the chair's ruling (asked 14:23), merge |
+| S9 post-pass | builder out (field list first; may STOP) | /home/user/wt-p6-s9, `page6/s9` | read, re-run, merge before L4 |
+| L4 | waits for the mercy rows' read | origin `lane/page-2-2026-11-20-s-wip` f2957d5be | builder on `L4-FINISH.md` + the mercy rows as each title's fourth row, registered into S9's pass |
+| the guard | after L4 | | S9-POST.md commit 2 |
 
 ## 3. Measures (to fill)
 
