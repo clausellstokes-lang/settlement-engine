@@ -4577,3 +4577,15 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   (activeConstraint, structuralPosition) and M2 (quarters) measuring; M3 and M4 queued. DEPTH-2 (about 240,000 by
   its own figure): the hooks' nine reds sorted (eight its own: ceilings, a line-keyed site, four seed-pinned tests;
   one the line's, `generationForkCensus` A1), builder curing.
+- 16:13 UTC · PAGE-6: S9's POST-PASS BUILT at c727a4d17 (`lane/page-6-2026-11-20-s9-wip`, unread by it): `factionLeaderSecret.js ::
+  settleMisfitSecrets`, once a town, called from `narrativeGenerator.js :: enrichNpcCoherence` after
+  `landMemberships` (ACCEPTED as ONE call line; the goals lane changes that file and lands first: the chair resolves
+  the join); red 4 of 4, green 4 of 4; on the 300: another trade's wrong on clergy cards 9.8% to 4.5%, justice 9.9%
+  to 7.7%, watch 1.1% to 0.4%; 119 cards moved, all misfits; other cards 0, town fields 0; survivors: 38 misfits keep
+  their draw (the economic-betrayal pool admits nothing for them), 3 kept for a secret-bound presentation; one
+  importer red re-keyed by cause. A FAULT OF THE CHAIR'S TO CORRECT TO THE OWNER: the chair told him twice that "a
+  principled person beside a bought official's secret, on 1,014 of 5,452 cards" was being cured; PAGE-6's measure of
+  that clash reads 7 cards, cured to 5, BY A DIFFERENT DEFINITION, and nothing yet shows the 1,014 falling. ASKED OF
+  PAGE-6 before its merge: by PAGE-1's own script, how many of the 1,014 remain after S9 and after L4 as briefed;
+  whether L4 adds "principled" to the guard at `npcData.js:2548`; what would cure the rest and what it would move.
+  TOLD TO THE OWNER the same turn: that item is unproven until measured.
