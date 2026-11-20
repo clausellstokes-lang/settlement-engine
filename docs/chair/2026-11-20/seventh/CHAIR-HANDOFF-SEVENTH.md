@@ -2506,3 +2506,33 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   called by nobody). THE LAST CLOSE'S SEQUENCE IS THIS CLOSE'S CHECKLIST: the stored figures with a door (a seat);
   then, under the owner's yes, the golden door; then the edit corpus ratchet, the edge bundles, the mutation
   manifest's totality, the size ceilings, the lighting census, last.
+- 08:38 UTC · **CTR11: A WORD THAT BETRAYS A WITHHELD ROW WITHOUT NAMING IT (found by TRAD-2's builder; a class for every lane
+  that writes a reader's text); SEAT-3 SEATED; the net re-armed.** TRAD-2 (08:36), executed and confirmed in the
+  code: the description's economy clause picks its band ("Nothing brings X more than…", "A good share of what X
+  takes in…", "X lives by … alone.") by the fitting income's INDEX in the full `economicState.incomeSources`, the
+  criminal row included; on the veil's lane `applyVeil` removes that row (`gallerySecondHomes.js ::
+  withholdCriminalIncome`) under three addresses hidden by default; of 96 born towns 9 hold a criminal row and IN 2
+  THE DRAWN TEXT DIFFERS FROM WHAT THE VEIL SERVES (Bergholz: "A good share…" beside a served top income of Market
+  Taxes 22%): it names nothing hidden, and its rank word says something hidden outranks market taxes. RULED AS
+  CTR11: THE READER'S TEXT IS A FUNCTION ONLY OF FACTS NO ACT OF THE DM CAN HIDE: not only what it names but every
+  word it chooses: a rank, a share word, a count, a superlative, an "only" is computed over the rows a reader can
+  ever be served (the withholding predicate's CLASS excluded, never by name); the owner's page unchanged; red first
+  on the two towns; a census of every such clause of the leaf with a guard; the keeper's CHOICE held to the same
+  rule; FOR THE OWNER'S LIST: where a DM shows the criminal income the reader's sentence still ranks without it.
+  THE CLASS SENT ON (08:38): to REVIEW-VEIL-12 for its cold read of R5 and for FINAL (every served sentence whose
+  rank word or count is computed over rows that include a withheld row; the test a counterfactual: the same town
+  with the row truly absent prints the same sentence), and to VEIL-24 for R5's brief (the six alias rows under
+  `publicProse.blocks.economy:…{incomeMix,criminalLine}` first). ALSO FROM TRAD-2: "The market squares is where it
+  is kept" (a plural house, a singular verb): into its unit 1; its lane pushed (`lane/trad-2-2026-11-20`).
+  SEAT-2 (08:32): THE LINE MERGED INTO ITS LANE at 6ad3e03d1 (its own permission check allowed it); the censuses
+  re-taken; `tests/lint` whole 220 of 220 files, 3,271 of 3,271 (its base's red left with the merge); pushed
+  268f73378; the hashing script for the zero-difference proof is being built in its lane (`briefs/CONFINE.md`, with
+  a planted control that must read DIFFER); U2 still building. SEAT-3 SEATED 08:36 (session_019yED1Sc68y5MpiArTSxJ24;
+  `lane/seat-3-2026-11-20` from `lane/seat-2-2026-11-20`; `prompts/SEAT-3.txt`). Told to SEAT-2: take U2's return,
+  U3 too only if under 400,000 by the chair's read, then hand over; the hand-back self-contained.
+  FRAME-3 (08:34): the lane taken (cut by fast-forward at 1fe37f10e); `tests/lint` whole running at the cut; THE
+  THREE RE-PINS MEASURED IN ARCHIVES: calm at e356c94f: 13 of 24 unchanged, the 11 that move EQUAL the merged tree's
+  digests; crisis at the line plus B5's diff alone: 4 of 6 unchanged, the two that move equal the merged tree's;
+  the veil test's shared reads: 8 of 8 towns re-printed by the test's own door. Told: its half ends at B10's merge;
+  FRAME-4 (prompt written) is seated at its line-merge commit.
+  THE SAFETY NET (7) is armed for 09:47 UTC (trig_01Pj2GUfWWQdLDYLn1ojS5mb); the CI read for 08:39.
