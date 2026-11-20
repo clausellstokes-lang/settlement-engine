@@ -1,4 +1,4 @@
-# GOALS-4 · the hand-back (kept current; state at 20:52 UTC, 2026-11-20)
+# GOALS-4 · the hand-back (HANDED OVER at 21:3x UTC, 2026-11-20, by rule 13: past 420,000 by my estimate with the half)
 
 Seat: GOALS-4, the wants' build, under the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Orders: `docs/chair/2026-11-20/seventh/prompts/GOALS-4.txt` and `GOALS-4-ADDENDUM.txt` on `lane/chair-2026-11-08`, plus the chair's messages listed below. The lane was given at 18:46 UTC ("THE LANE IS YOURS at 021557d4d").
 
@@ -80,7 +80,7 @@ The two edge bundles (aiCharter, aiOutputSchema) read `src/kernel/proseHash.js` 
    - First paint's three figures beside the line's (1,177,668 raw / 374,676 gzip / 314,472 Brotli at 8196e5712).
    - The worker before (build at the base) and after (2,617,934 at 8196e5712).
    - A rise in first paint is cured on the lane (the chair's 19:59 rule) and listed in the rulings.
-5. ONE `npm run test:ratchet`, to a log. Its rows are read by name against `RED-AT-LINE.tsv` and `LINE-NOW.md` on the chair's branch.
+5. NOT test:ratchet (ruling 13): ONE run of tests/generators, tests/data, tests/lint and tests/build through the mutex. Read its failing rows by name against `ci/RED-AT-LINE.tsv`.
 6. FOR THE OWNER: a plain file with twenty wants of one city, before and after.
 7. ONE message, "WANTS <commit>", carrying:
    - the measures before and after;
@@ -90,14 +90,49 @@ The two edge bundles (aiCharter, aiOutputSchema) read `src/kernel/proseHash.js` 
    - test:ratchet's counts;
    - the token count.
 
-## Rulings received (the chair, 2026-11-20 UTC)
+## Every ruling in force (ONE list; the chair's messages, 2026-11-20 UTC, and COMMON-RULES.txt on `lane/chair-2026-11-08`, which governs where this list is silent)
 
-- 17:53: three lines (one stands, two reworded in 25b63efbc); {targetHouse} checked first.
-- 18:46: the lane given; one builder; red first.
-- 19:59: the build check. First paint must not rise; an eager file declares an atom by name; data files are never eagerly imported.
-- 20:13: the cure unit comes first; test:ratchet before every landing request.
-- 20:17: the six rewordings; the writerReach re-freeze rule; the two-tree claim accepted.
-- 20:27: the "introduction" rewording and the pronoun test.
-- 20:30: the draw cure (the corrected trust law) and its conditions (a)–(d).
-- 20:36: the line moved to 062504aa8 and is merged before the cure; LINE-NOW.md and COMMON-RULES.txt (rule 2: a literal has one home).
-- 20:50: rule (ii) is covered by the corrected law; the sameness door's sentence is the wants' to cure.
+1. The one source is `WANT-LINES-FINAL.md` at 25b63efbc (17:53: one line stands as written, two are reworded). {targetHouse} is checked first.
+2. The lane was given at 021557d4d (18:46). One builder per unit, red first. Goals keep `fork.pick`; `pickVariantMixed` does not apply to them. The named survivor stays named: `goals.js :: cellCandidates`. The golden master is reported UNSIGNED. The cell counts in `tests/data/goalFamilies.test.js` move by their door (the owner's veto). `pool-dominance.mjs --tighten` stays on the lane's own rows; STOP if a ceiling would loosen.
+3. First paint must not rise; a rise is cured on the lane (19:59; COMMON-RULES 7). An eager file declares an atom BY NAME; the answering code is imported only on the lazy side; a data file of wordings is never eagerly imported.
+4. The cure unit comes before the wants' merge (20:13).
+5. The six presumptionClasses lines are reworded by the chair (20:17). A walker that still reds a line goes to the chair; it is never banked around.
+6. The writerReach digest is re-frozen BY ITS DOOR on the lane, because the door's report is identical at both trees and no identity is new. The cause goes beside it, and the hand-back lists it for the security reader (20:17; COMMON-RULES 9).
+7. The two-tree claim for the wants is "0 differences outside `npcs[].goal`". OWED: what reads `goal.intent.target` outside the card (20:17).
+8. The mutual_leverage "introduction" reserve line becomes "${r.name} has asked ${s.name} for an introduction that has not yet been made." (20:27). The pronoun test comes red first, and every red goes to the chair to word.
+9. The draw cure under the corrected trust law (20:30, 20:50): a replacement that DECLARES a trust stands in only for the same trust; one that declares NONE may stand in for any trust, in rung (i) and in rule (ii) alike. The conditions: (a) every stored field except the prose and the variant is byte-equal, else STOP; (b) a planted different-trust arm; (c) the measure of places printing a template twice; (d) moved towns by count, unsigned.
+10. The pool pin follows the law: head eight, frozen and distinct; reserves beyond it; both fields of equal length. F31's line is unpacked and no ceiling is raised. A3 and A7 are re-recorded by the file's door with their cause. The edge bundles are the chair's, at the close (20:30).
+11. The line merges into the lane before the cure's merge (20:36). Before each landing request, read `ci/LINE-NOW.md` and `ci/RED-AT-LINE.tsv` on the chair's branch.
+12. The sameness door's row (card `goal.short` repeated by a second place: town 0.16, city 0.27, metropolis 0.35 at the line) is the wants' to cure and should FALL. Its three figures go beside ours in "WANTS <commit>" (20:50).
+13. RULE 8 RE-RULED (21:27): NO whole `npm run test:ratchet`. Instead, (a) the build and the two VERIFY_DIST tests; (b) ONE run of `tests/generators`, `tests/data`, `tests/lint` and `tests/build`, plus `tests/domain/<dir>/` for each `src/domain/<dir>/` touched. Run them through the mutex, one heavy run at a time, and read the failing rows by name against `ci/RED-AT-LINE.tsv`.
+14. A successor re-reads this file and COMMON-RULES.txt whole before its first merge.
+
+## Awaiting the chair (sent about 21:20 UTC)
+
+- (A) Builder 11's condition-(a) STOP. `src/generators/people/ties.js :: temperOfTie` reads the PRINTED index's `trust: 'full'` (warm). That sets `firstTemper`, and `inTemperOf` uses it to choose the archetype and strength of the pair's later ties. GOALS-4 recommends that the temper is read from today's RESOLVED index (before any replacement), which `drawTieProse` would hand out beside `proseVariant`. The depth lane's ties wait on this.
+- (B) The colourMarks4h ledger, `docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json`, is hand-written, has no door, and lacks all 26 reserve rows.
+- (C) Two pronoun-test reds to word:
+  - mil_crim_corruption.tension#7 (offer: "…against the household's known earnings.");
+  - gov_econ_dependence.desc#1 (offer: "…and so decides what may be spent.").
+
+## Listed for the join
+
+- Houses: none chosen by a wording of this lane. The 380 lines use `{house}` and `{power}` as the goals deal hands them; no line selects by a hideable house or a crime fact.
+- Class-table and vocabulary rows: NONE edited.
+- writerReach: shapesDigest 7350e7ff → fd3443e1, for the security reader. Owed at the merged tip (ruling 6).
+
+## Stored figures the lane's units moved (named; signed by none)
+
+- generationForkCensus A1: 7c466b88 → b47efa6d, at builder 10's tip.
+- The golden master: 525 of 525 rows (builder 10).
+- Builder 11's (d): golden 109 and census 158 towns moved, only tie tension text and its copies.
+- editCorpusRatchet: A3 327 → 328, A7 275 → 278 (cause: GOALS-3's merge 31a053445; the row is named above).
+- The (u) fixture d3937c3f8 → d8b174237.
+- The lighting census titles 31,257 → 31,260.
+- The writerReach digest (above).
+
+## The lane's running cost in worker bytes
+
+- NOT MEASURED: no build has run on the lane.
+- The line's worker is 2,617,934 at 8196e5712. The 380 wants are the round's largest single addition to it.
+- The successor builds once at the base (d874c81e9) and once at the merged tip (ruling 3, COMMON-RULES 8a).
