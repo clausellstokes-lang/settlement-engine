@@ -1,0 +1,82 @@
+pool T1 relation MR.dep: houses church, hospital, market, institution: monastery · other atoms exports, imports, prosperity: ≥ comfortable, prosperity: ≤ moderate, population: large
+pool T1 relation GE.sub: houses court sits, docks, institution: bank · other atoms exports, prosperity: ≥ comfortable
+pool T1 relation GM.sub+soldiers: houses soldiers, garrison, walls, court sits · other atoms population: large
+pool T1 relation GM.sub: houses walls · other atoms none
+pool T1 relation GM.sym: houses walls, court sits, garrison, militia, paid watch · other atoms population: large
+pool T1 relation GM.tense: houses none · other atoms ruler: elder
+pool T1 relation GR.dep: houses church · other atoms priest, population: small
+pool T1 relation GR.tense: houses church · other atoms priest, ruling body, population: small, prosperity: ≤ poor
+pool T1 relation GE.dep: houses court sits, market · other atoms exports, prosperity: ≤ moderate, prosperity: ≥ comfortable
+pool T1 relation MR.tense: houses church, market · other atoms none
+pool T1 relation MC.vote: houses market · other atoms exports, ruling body, prosperity: ≥ comfortable
+pool T1 relation MC.vote-against: houses market, guild · other atoms exports, ruling body
+pool T1 relation NG.sub+merchant: houses market · other atoms population: large
+pool T1 relation NG.sub: houses none · other atoms none
+pool T1 relation NG.dep: houses court sits · other atoms population: large
+pool T1 opening "The oldest heads of the community decide things …": houses court sits, legal house · other atoms population: small, exports
+pool T1 opening "The oldest heads of the community still decide t…": houses none · other atoms population: small
+pool T1 opening "Settlement governed by heads of household; decis…": houses none · other atoms population: small
+pool T1 opening "A headman settles disputes and speaks for the co…": houses none · other atoms population: small
+pool T1 opening "The elders of the hamlet decide things together,…": houses none · other atoms none
+pool T1 opening "One of the peasantry, elected by the rest, manag…": houses none · other atoms none
+pool T1 opening "The village priest is the most educated person f…": houses church · other atoms population: small, prosperity: ≤ poor
+pool T1 opening "Magical practitioners are consulted but not form…": houses none · other atoms ruling body, population: large, prosperity: ≥ comfortable
+pool T1 opening "Clergy are present but operate at the margins of…": houses church, institution: monastery, court sits · other atoms ruling body, population: large
+pool T1 opening "The trades regulate their own production and app…": houses guild, market · other atoms none
+pool T1 opening "Craft guilds regulating production and apprentic…": houses market · other atoms none
+pool T1 opening "Church institutions are well-embedded in civic l…": houses church · other atoms ruling body, population: middling
+pool T1 opening "Town watch; it enforces ordinances, manages diso…": houses watch, walls, court sits, paid watch, market · other atoms ruling body, population: middling
+pool T1 opening "City watch; it answers for keeping order and is …": houses watch, walls, court sits, garrison · other atoms population: large
+pool T1 opening "City watch; law enforcement and external defence…": houses watch, walls, garrison, court sits · other atoms population: large
+pool T1 opening "A second armed company that wants a share of kee…": houses none · other atoms population: large
+pool T1 opening "A mayor runs the town's day-to-day business.…": houses market, court sits · other atoms none
+pool T1 opening "An elected or appointed council governs; merchan…": houses guild · other atoms none
+pool T1 opening "The guilds govern together; the richer the guild…": houses market · other atoms none
+pool T1 opening "A full council governs the city: aldermen, guild…": houses court sits, walls, market · other atoms none
+pool T1 opening "A grand council of senior officials, guild maste…": houses none · other atoms none
+pool T1 opening "A formal consortium of the metropolis's most pow…": houses guild · other atoms none
+pool T1 opening "Minor landed families with limited political rea…": houses none · other atoms population: large
+pool T1 opening "Established merchant community; fund civic works…": houses market · other atoms exports
+pool T1 opening "Established merchant community; fund civic works…": houses market · other atoms exports
+pool T1 opening "A consortium of guild masters holds power; polic…": houses none · other atoms none
+pool T1 coda atTable: houses none · other atoms ruling body
+pool T1 coda bodiesMinds: houses none · other atoms none
+pool T1 coda arcaneInShadow: houses church · other atoms none
+pool T1 coda clergyAhead: houses church · other atoms none
+pool T1 coda outvoted: houses market · other atoms none
+pool T1 coda outpaced: houses market · other atoms none
+pool T1 coda worthBuying: houses none · other atoms none
+pool T1 coda inShadow: houses none · other atoms none
+pool T1 coda narrowGap: houses none · other atoms none
+pool T1 coda closingGap: houses none · other atoms none
+pool T2 opening "Merchants with local reach; a consistent civic p…": houses market · other atoms population: large, exports, imports
+pool T2 opening "Landed families increasingly outpaced by merchan…": houses market · other atoms exports, population: large
+pool T2 opening "Noble families with hereditary land rights and t…": houses market · other atoms population: large
+pool T2 opening "The richest merchant houses of the metropolis si…": houses market, court sits, docks · other atoms exports
+pool T2 coda arcaneInShadow: houses church, institution: monastery · other atoms population: large
+pool T2 coda bodiesMinds: houses walls, court sits, church, market · other atoms population: large
+pool T2 coda noblesAhead: houses market · other atoms exports, prosperity: ≥ comfortable
+pool T2 coda atTable: houses market · other atoms population: large
+pool T2 coda clergyAhead: houses church · other atoms population: large
+pool T2 coda outpaced: houses market, guild · other atoms exports, population: large
+sample thorp: hideable houses on the rosters 16 in 15/150 places
+sample hamlet: hideable houses on the rosters 22 in 22/150 places
+sample village: hideable houses on the rosters 10 in 10/150 places
+sample town: hideable houses on the rosters 100 in 64/150 places
+sample city: hideable houses on the rosters 517 in 143/150 places
+sample metropolis: hideable houses on the rosters 891 in 150/150 places
+house atom church: holds in 600 places · holds only with a hideable house 0
+house atom hospital: holds in 240 places · holds only with a hideable house 0
+house atom market: holds in 505 places · holds only with a hideable house 0
+house atom institution: monastery: holds in 255 places · holds only with a hideable house 0
+house atom court sits: holds in 420 places · holds only with a hideable house 0
+house atom docks: holds in 157 places · holds only with a hideable house 0
+house atom institution: bank: holds in 263 places · holds only with a hideable house 0
+house atom soldiers: holds in 338 places · holds only with a hideable house 0
+house atom garrison: holds in 328 places · holds only with a hideable house 0
+house atom walls: holds in 499 places · holds only with a hideable house 0
+house atom militia: holds in 97 places · holds only with a hideable house 0
+house atom paid watch: holds in 450 places · holds only with a hideable house 0
+house atom guild: holds in 491 places · holds only with a hideable house 0
+house atom legal house: holds in 380 places · holds only with a hideable house 0
+house atom watch: holds in 455 places · holds only with a hideable house 0
