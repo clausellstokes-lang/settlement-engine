@@ -449,29 +449,34 @@ function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
   const said = Object.fromEntries(Object.entries(slots).map(([k, v]) => [k, PROSE_SLOTS.has(k) && typeof v === 'string' && v ? powerNameWithArticle(v) : v]));
   const people = personCardsOf(slots, ctx);
   const poolId = `goalFamilies:${family}.${kind}.${vantage}`;
-  /** @param {unknown[]} lines @param {boolean} counted whether a held refusal counts on the receipt (the cell's; the reserve's do not) @returns {Candidate[]} */
-  const build = (lines, counted) => {
+  /**
+   * GOALS-3 builder 8: the lines are the cell's (`counted`: a held refusal counts on the receipt) or the reserve's (it does
+   * not), read off the two tables above, never handed in; every text below is taken off the door's own kept line (`drawn`).
+   * @param {boolean} counted @returns {Candidate[]}
+   */
+  const build = (counted) => {
     /** @type {Candidate[]} */
     const out = [];
-    for (const line of lines) {
+    for (const line of counted ? cell : reserve) {
       const { result: kept, notes } = quiet(() => filterDeclared([line], { facts: ctx.facts, poolId, surface: 'npcs' }));
       if (!kept.length) continue;
+      const drawn = kept[0];
       // NAMES-3 (CV7): a line's agreement forms (`{power|it|them}`) take their power's own number, from the record's name
-      const filled = fillLine(fillAgreement(templateOf(line), slots), said);
+      const filled = fillLine(fillAgreement(templateOf(drawn), slots), said);
       if (!filled) continue;
       // NAMES-1 (CN2): a person's later mention in the line is a pronoun, a surname, a role or a given name
       const text = secondMentions(filled[0].toUpperCase() + filled.slice(1), people);
       if (held.has(text)) { if (counted) ctx.refusals.n += 1; continue; }
-      const used = Object.fromEntries(slotsIn(templateOf(line)).map((k) => [k, slots[k]]));
-      const fewMembers = typeof extra.members === 'number' && (GOAL_LINE_MIN_MEMBERS[templateOf(line)] ?? 0) > extra.members; // BAR8 K-PEOPLE (14h)
+      const used = Object.fromEntries(slotsIn(templateOf(drawn)).map((k) => [k, slots[k]]));
+      const fewMembers = typeof extra.members === 'number' && (GOAL_LINE_MIN_MEMBERS[templateOf(drawn)] ?? 0) > extra.members; // BAR8 K-PEOPLE (14h)
       // GOALS-1 (the chair's check of 10:48 UTC): a gentle line on a harsh tie is refused, marked (never dropped), draw-free
-      const harshTie = !!extra.tie && arr(rec(/** @type {Rec} */ (GOAL_LINE_NOT_ON_TIES)[templateOf(line)])[extra.tie.type]).includes(extra.tie.strength);
-      out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes, ...(fewMembers || harshTie ? { refused: true } : {}), wording: wordingOf(line, slots), call });
+      const harshTie = !!extra.tie && arr(rec(/** @type {Rec} */ (GOAL_LINE_NOT_ON_TIES)[templateOf(drawn)])[extra.tie.type]).includes(extra.tie.strength);
+      out.push({ family, kind, text, target: extra.target ?? null, slots: used, refs: extra.refs ?? [], notes, ...(fewMembers || harshTie ? { refused: true } : {}), wording: wordingOf(drawn, slots), call });
     }
     return out;
   };
-  const out = build(cell, true);
-  if (reserve.length) { const kept = build(reserve, false); if (kept.length) ctx.reserve.set(call, kept); }
+  const out = build(true);
+  if (reserve.length) { const kept = build(false); if (kept.length) ctx.reserve.set(call, kept); }
   return out;
 }
 

@@ -29073,11 +29073,6 @@
    "not-a-draw"
   ],
   [
-   "src/generators/people/goals.js",
-   "cell",
-   "not-a-draw"
-  ],
-  [
    "src/generators/people/personHooks.js",
    "npc.plotHooks",
    "not-a-draw"
