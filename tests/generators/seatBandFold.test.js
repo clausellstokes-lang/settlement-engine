@@ -17,6 +17,8 @@
  *       call of `generateNPCPowerLevel` holds (every card's id and name pair across the two births);
  *   (3) the old law byte-identical: births with the law absent, 1 and the string '2' (and every pool role's
  *       band read with no law) equal the digests the base fb937f369 produced, RECORDED before any edit;
+ *   (4) UK (b), in its own commit and droppable: the stem 'wealthiest merchant' beside 'wealthy_merchant', under
+ *       the same law: Wealthiest Merchant reads moderate under the law only (its card, the luxury merchant, in a city);
  *   (5) `castPowers.js :: raiseToOfficeBand`'s base-office-role read (SEAT-5-HANDBACK item 39) unharmed:
  *       every tier's seat role reads the same band with and without the law, and the raise is the base's.
  */
@@ -101,7 +103,7 @@ describe('(2) the place-size case: a town born under the law prints the correcte
       expect(law.npcs.map((c) => `${c.id}=${c.name}`)).toEqual(dark.npcs.map((c) => `${c.id}=${c.name}`));
       const moved = law.npcs.filter((c, i) => c.influence !== dark.npcs[i].influence).map((c) => ROLE_OF_TITLE.get(c.title));
       expect(moved.length, 'some card moved').toBeGreaterThan(0);
-      for (const role of moved) expect(['Guild Master', 'Thieves Guild Master', 'Council Member']).toContain(role);
+      for (const role of moved) expect(['Guild Master', 'Thieves Guild Master', 'Council Member', 'Wealthiest Merchant' /* UK (b), arm 4 */]).toContain(role);
     }
   });
 });
@@ -134,6 +136,22 @@ describe('(3) the old law is byte-identical to the base', () => {
         expect(sha(born(size, seed, law)), `${seed}:${label}`).toBe(RECORDED[`${seed}:${label}`]);
       }
     }
+  });
+});
+
+describe('(4) UK (b), its own arm: the stem \'wealthiest merchant\' reads moderate under the law only', () => {
+  test('Wealthiest Merchant reads moderate under the law, and low without it (absent, 1, "2", 3, no config)', () => {
+    expect(powerBandOfRole('Wealthiest Merchant', LAW)).toBe('moderate');
+    expect(powerBandOfRole('Wealthiest Merchant', { config: LAW }), 'a settlement carrying the law in its config').toBe('moderate');
+    for (const [label, config] of OLD_LAWS) expect(powerBandOfRole('Wealthiest Merchant', config), label).toBe('low');
+    expect(powerBandOfRole('wealthy_merchant'), 'the old keyword still reads moderate under the old law').toBe('moderate');
+  });
+  test('uk-city-5 under the law: the luxury merchant (the Wealthiest Merchant\'s card) reads moderate or above; dark, low', () => {
+    const law = born('city', 'uk-city-5', LAW); const dark = born('city', 'uk-city-5');
+    const lit = cardsOf(law, 'Wealthiest Merchant'); const off = cardsOf(dark, 'Wealthiest Merchant');
+    expect(lit.length, 'the city holds a Wealthiest Merchant card').toBeGreaterThan(0);
+    for (const c of lit) expect(['moderate', 'high'], `${c.id} ${c.title}`).toContain(c.influence);
+    for (const c of off) expect(c.influence, `${c.id} ${c.title}`).toBe('low');
   });
 });
 
