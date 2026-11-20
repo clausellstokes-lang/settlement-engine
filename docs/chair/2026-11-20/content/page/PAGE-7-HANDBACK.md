@@ -1,4 +1,4 @@
-# PAGE-7's hand-back: THE TROUBLE (kept current at every push; last written 2026-11-20 15:37 UTC by `date -u`)
+# PAGE-7's hand-back: THE TROUBLE (kept current at every push; last written 2026-11-20 18:32 UTC by `date -u`)
 
 Read this, then `PAGE-5-HANDBACK.md` (§2 S6 row, §5 the ruled tables, §6 the crime/guild builder's notes),
 `briefs/BUILDER-RULES.md`, `briefs/CAUSES-DATA.md` (with its two addenda). PAGE-7 integrates; builders build.
@@ -13,7 +13,9 @@ Read this, then `PAGE-5-HANDBACK.md` (§2 S6 row, §5 the ruled tables, §6 the 
 | 1 sides table | MERGED by PAGE-5 (c5da1cfb3) | c5da1cfb3 | at the join: parity test with `sideArchetypes.js` |
 | 2 S6 | MERGED by PAGE-5 (464fc1b98) | 464fc1b98 | none |
 | 3 causes: lines | ALL EIGHT KINDS RULED by the chair: A+B (14:58, 14 reworded) at f8ee0ed50; crime/guild (15:18, 6 reworded) at 19e7f7932 | f8ee0ed50, 19e7f7932 | none |
-| 3 causes: data | BUILDING: one builder, branch `lane/page-7-2026-11-20-causes` (worktree /home/user/wt-causes) cut at 9e4ba24b6, brief CAUSES-DATA + addenda (fb7568fb6) | | read diff once, re-run red/green, censuses, merge onto the S6 tree, ONE line to the chair; then the projection through the built function (re-take the "before" at the merged tip) |
+| 3 causes: data | MERGED 01c2bbb99 (builder 558a7476e, 27b349d0e, 3bcd71ec6, c5541aa6f, d35204879; branch -wip on origin); red re-run 4/4 files failed, green 42/42, tests/lint 219/220 (ledgerCitationIntegrity, red at base); wiring re-stamped 57c964ef3; lighting 3709->3713 files 3411c9c83 | 3411c9c83 | the chair may veto the presumptionClasses CLASS_DIMS edit and the 13 merchants sentences (merged before shown) |
+| 4 hooks | BUILDING: brief HOOKS-BUILD (32161f93f), branch `lane/page-7-2026-11-20-hooks` (/home/user/wt-hooks) from 3411c9c83 | | read once, red/green, censuses, merge, "HOOKS <commit>" |
+| 5 lasting effects | AFTER the hooks: PDF only; drafted effects in TROUBLE-LINES-1; strike every effect needing a hideable fact; lines to the chair first | | |
 
 ## 3. Named survivors (not cured before the deploy, by the chair's ruling)
 - THE GUILDLESS GUILD QUARREL (the chair, 15:35): 1 of 215 guild_conflict troubles on 900 towns stands where
