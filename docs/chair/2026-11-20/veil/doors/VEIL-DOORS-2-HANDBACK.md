@@ -252,3 +252,18 @@ AT THE BASE already (section 3). No new top-level named numeric constant in `src
 EXECUTED vs PLAUSIBLE: every red, green, cost row and measure above is executed here, with its output file. PLAUSIBLE only:
 production's default privileges (not read: no hosted database); whether other writers than the walker's scan put other
 types in a chronicle (any such type is unclassed, so withheld).
+
+## 13. After the hand-back (2026-11-20 04:18 UTC): the chair's rulings received, one fact executed, one correction
+- EXECUTED: the snapshot the share editor builds with its default sections (a born world, all five on) fails
+  `_gallery_world_snapshot_is_safe` on my tip's chain (001..212) AND on master db832c892 (001..203): false for it and for
+  `{"schemaVersion":1,"chronicle":[]}`, true with `chronicle` removed; a direct owner save raises "World snapshot contains a
+  forbidden private key and cannot be stored". publish_map itself was not called (it runs the same guard, 089). So sharing a
+  campaign map's world with the editor's defaults fails on master's code today.
+- CORRECTION to section 8: the 31 crime-worded headlines are in the SERIALIZED snapshot, but none CAN BE STORED, so none was
+  served; I had not tested storage.
+- RULINGS RECEIVED AFTER THE HAND-BACK, NOT BUILT, FOR THE NEXT SEAT: VR40 (the editor drops the `chronicle` section, shown
+  as not shareable yet, with a born publish test; both map reads drop a stored `chronicle`, red first with a planted
+  snapshot; the guard is not loosened; and measure a public channel's `goods[].label`); VR41 (a) taken; (a-ii) a narrowing
+  for removal types that carry a non-hideable catalogue identity or category, built only if born towns with a lived log show
+  the proof, with counts both ways; (b) snapshot mode approved as built; name, without freezing, what still follows the live
+  row: description, tags, image, counts.
