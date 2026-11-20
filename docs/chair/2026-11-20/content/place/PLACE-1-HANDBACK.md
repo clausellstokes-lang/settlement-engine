@@ -1,6 +1,6 @@
 # PLACE-1 — hand-back (kept current at every push)
 
-Last written: 2026-11-20T16:39Z Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
+Last written: 2026-11-20T17:07Z Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
 
 ## How a successor resumes
 1. Read the prompt, then this file, then the briefs in this directory (`BRIEF-*.md`); nothing else is needed.
@@ -28,8 +28,8 @@ eS.activeChains[].entrepotNote               thorp - | hamle 8/12 | villa 13/22 
 | economicDragDesc | c33953282 | stopped unfinished (no commit) | — | — | DROPPED by the chair 16:30 (SAME-1: printed in 0–7 places a size) |
 | economicViability.dependencies[] + warnings[] + summary | c33953282 | 50384de85 (merged 6571cf474): NOTHING REPEATED PRINTS (Outlook tab and PDF drop severity `dependency`; the one warning hidden by its title; the pages print their own verdict, not `summary`) | DROPPED, reported | — | — | — |
 | tradeDependencies[].impact | c33953282 | — | — | — | DROPPED by the chair 16:30 (printed in 0–4 places a size) |
-| activeChains[].entrepotNote | c33953282 | running (place-1/entrepotNote-measure) | — | — | the chair's SECOND unit |
-| economicViability.plotHooks[].hook | f18e3c59c | — | — | — | added by the chair 16:38, after entrepotNote |
+| activeChains[].entrepotNote | c33953282 | 5ef59564a (merged 0899d93e6): PRINTS on Economics › Economic Flows cards (entrepot && !dependency) and the PDF; held top 3/8/13/31/81/76 → 1/3/4/7/12/13 WITH the carrier atom (metro 24 without) | sent as 0899d93e6 with ATOM carrier: own\|transit and six calls; WAITING | the chair's SECOND unit |
+| economicViability.plotHooks[].hook | f18e3c59c | first try stopped unfinished (seat limit) 16:4x; re-dispatched 17:0x (place-1/viabilityHooks-measure-2) | — | — | added by the chair 16:38, after entrepotNote |
 | safetyProfile.plotHooks[] | f18e3c59c | — | — | — | added by the chair 16:38, after entrepotNote |
 
 ## Laws I hold (from the prompt; short)
