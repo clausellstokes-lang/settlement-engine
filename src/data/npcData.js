@@ -1438,7 +1438,7 @@ export const NPC_FACTION_LOYALTY = {
     'Two people they owe a kindness to want the same small thing from them, and only one of them can have it.',
     "Someone they used to see in the same place every morning has not been there for some time, and nobody else seems to know the person's name.",
     'The branch over their roof has cracked, and the neighbour who owns the tree has said, again, that it will hold.',
-    'A friend who once gave them a present they could not match has just announced a celebration, and everyone is expected to bring a gift.',
+    { text: 'A friend who once gave them a present they could not match has just announced a celebration, and everyone is expected to bring a gift.', excludes: ['crisis: threat', 'crisis: hunger'] }, // DEPTH-2 (2026-11-20, DEPTH-2's ruling; the presumption walker's `ease`): a celebration is announced only where no threat or hunger stands
     'They left home angry many years ago and never went back, and a letter has come asking whether they will.',
     'They speak a language nobody here knows they speak, and have just overheard two visitors talking in it.',
   ],

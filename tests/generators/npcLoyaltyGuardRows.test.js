@@ -57,6 +57,9 @@ const DECLARED = {
   // (government#23), and the traveller's parcel and the buried 'traveller' are crisis-scoped lines that say `any` (other#31,
   // small_settlement#7). Measured against ee2bcd375: no other row moved.
   'government#23': ['appointed post'], 'other#31': ['crisis: any'], 'small_settlement#7': ['crisis: any'],
+  // DEPTH-2 hooks tranche 2 (2026-11-20, DEPTH-2's ruling; the presumption walker's `ease`): the second tranche's other 28 (the
+  // pool's row 97, appended) announces a celebration, so it closes both families the class reads (threat and hunger).
+  'other#97': ['no crisis: threat', 'no crisis: hunger'],
 };
 
 describe('NPC_FACTION_LOYALTY declarations (CENSUS-3e)', () => {
