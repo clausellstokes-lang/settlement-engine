@@ -42,6 +42,7 @@ import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
 // @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget).
 import { rollsRegisterVii } from './density/densityLaw.js';
 import { resolveSibling } from './facts/drawDeclared.js';
+import { alternateFormOf, preferredFormOf } from './seat/seatTable.js';
 
 const A = FACTION_ARCHETYPES;
 
@@ -135,57 +136,10 @@ export function nameOf(faction) {
 
 // ── Government-type preferences ────────────────────────────────────────────
 // Each authoritative power reshapes the governing body to its preferred
-// government type. Labels reuse the power generator's existing vocabulary
-// wherever one exists (Town Council / Military Council / Theocratic Council /
-// Merchant oligarchy / Royal Authority / ...), tier-banded the same way the
-// generator bands its councils (Town... / City... / Grand...).
-
-const SMALL_TIERS = new Set(['thorp', 'hamlet', 'village']);
-const LARGE_TIERS = new Set(['city', 'metropolis']);
-
-/**
- * @param {string | null | undefined} tier
- * @returns {'small' | 'town' | 'large'}
- */
-function tierBand(tier) {
-  const t = String(tier || '').toLowerCase();
-  if (SMALL_TIERS.has(t)) return 'small';
-  if (LARGE_TIERS.has(t)) return 'large';
-  return 'town';
-}
-
-/** @type {Readonly<Record<string, {small: string, town: string, large: string}>>} */
-export const GOVERNMENT_PREFERENCES = Object.freeze({
-  [A.MILITARY]:   { small: 'Militia Command',        town: 'Military Council',       large: 'Grand Military Council' },
-  [A.RELIGIOUS]:  { small: 'Church Council',         town: 'Theocratic Council',     large: 'High Theocratic Council' },
-  [A.MERCHANT]:   { small: 'Merchant Council',       town: 'Merchant City Council',  large: 'Grand Merchant Senate' },
-  [A.NOBLE]:      { small: 'Feudal Stewardship',     town: 'Ducal Governorship',     large: 'Royal Authority' },
-  [A.ARCANE]:     { small: 'Circle of Adepts',       town: 'Arcane Council',         large: 'Grand Arcane Council' },
-  [A.CRAFT]:      { small: "Guildmasters' Moot",     town: 'Guildhall Council',      large: 'Grand Guild Assembly' },
-  [A.LABOR]:      { small: 'Commons Assembly',       town: "Workers' Assembly",      large: 'Grand Commons Assembly' },
-  [A.CIVIC]:      { small: 'Elder Council',          town: 'Town Council',           large: 'City Council' },
-  [A.GOVERNMENT]: { small: 'Elder Council',          town: 'Town Council',           large: 'City Council' },
-  [A.OUTSIDER]:   { small: 'Foreign Stewardship',    town: 'Foreign Administration', large: 'Foreign Administration' },
-  [A.OCCUPATION]: { small: 'Occupation Authority',   town: 'Occupation Authority',   large: 'Occupation Authority' },
-  // Criminal rule is never reached by the coup path (excluded from the
-  // field), but the DM can install it via CHANGE_RULING_POWER — the labels
-  // come from the generator's corrupt-government vocabulary.
-  [A.CRIMINAL]:   { small: 'Corrupt Council',        town: 'Corrupt City Council',   large: 'Shadow Senate' },
-  [A.OTHER]:      { small: 'Elder Council',          town: 'Town Council',           large: 'City Council' },
-});
-
-// Fallbacks when the preferred label collides with an existing faction name.
-/** @type {Readonly<Record<string, string>>} */
-const ALT_GOVERNMENT_LABELS = Object.freeze({
-  [A.MERCHANT]: 'Merchant oligarchy',
-  [A.NOBLE]:    'Noble Regency',
-  [A.MILITARY]: 'Garrison Command',
-  [A.RELIGIOUS]: 'Ecclesiastical Council',
-  // The conquest occupier's own NAME ('<power> occupation authority') CONTAINS the
-  // preferred label — the containment check below falls here so the crowned seat
-  // never reads like a duplicate of the power behind it.
-  [A.OCCUPATION]: 'Martial Administration',
-});
+// government type. The forms, their size bands and the alternates live in THE ONE
+// TABLE (`seat/seatTable.js :: SEAT_TABLE`, SEAT-1 train 1 U2): the first form of each
+// kind and band there is the label this module's own table held, byte for byte, and
+// this module reads it from there and from nowhere else.
 
 /** @type {Readonly<Record<string, string>>} */
 const GOVERNMENT_DESCS = Object.freeze({
@@ -213,8 +167,7 @@ const GOVERNMENT_DESCS = Object.freeze({
  * @returns {string}
  */
 export function governmentLabelFor(archetype, tier) {
-  const prefs = GOVERNMENT_PREFERENCES[archetype] || GOVERNMENT_PREFERENCES[A.OTHER];
-  return prefs[tierBand(tier)];
+  return preferredFormOf(archetype, tier);
 }
 
 /**
@@ -454,7 +407,7 @@ function resolveGovernmentLabel(archetype, tier, factions, governing, incumbentS
   const takenBy = (/** @type {string} */ label) => outgoing === label.toLowerCase()
     || names.some(n => n === label.toLowerCase() || n.includes(label.toLowerCase()));
   if (!takenBy(preferred)) return preferred;
-  const alt = ALT_GOVERNMENT_LABELS[archetype];
+  const alt = alternateFormOf(archetype);
   if (alt && !takenBy(alt)) return alt;
   return `${preferred} Ascendant`;
 }
