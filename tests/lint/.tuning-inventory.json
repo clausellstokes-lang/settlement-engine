@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "acf2c218047d29c8373b6542eda593d18e6f0105",
-  "measuredBy": "FORTUNE-1 U1",
+  "measuredAtSha": "99ff3c9cce37bf6a5370c975520c2684553ad743",
+  "measuredBy": "FORTUNE-2 U3 builder",
   "date": "2026-11-20",
-  "note": "the fortune law table, DRAFT (FS1, FS2)",
+  "note": "FORTUNE-1 U3 (FS2): src/generators/factionDynamics.js :: computePublicLegitimacy reads FORTUNE_LAW_TUNING.standing under the fortune law (version 2, dark), so the DRAFT table gains a dependent; no value moved, no bare decimal added",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1498,9 +1498,13 @@
         "standing.defenceBound": 10
       },
       "dependents": [
-        "src/domain/density/densityCreateBoundary.js"
+        "src/domain/density/densityCreateBoundary.js",
+        "src/generators/factionDynamics.js",
+        "src/generators/power/rulingStructure.js"
       ],
-      "namedDependents": []
+      "namedDependents": [
+        "src/generators/factionDynamics.js"
+      ]
     },
     "src/domain/npc/livedExperienceFunnel.js#FUNNEL_TUNING": {
       "exported": true,
@@ -9331,6 +9335,6 @@
     "unregisteredNamed": 541,
     "bareDecimals": 6877,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 188
+    "zeroNamedDependentTables": 187
   }
 }

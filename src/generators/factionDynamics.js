@@ -173,7 +173,7 @@ export function computePublicLegitimacy(economicState, defenseLabel, tier, fortu
 
 // ── FORTUNE-1 U3 (FS2): standing judged against the place's own size — THE FORTUNE LAW ONLY ──
 // Placed BELOW computePublicLegitimacy, and its import riding line 18, so no line the holder
-// census cites above moves (`src/domain/prose/holderTable.js` keys this file by line).
+// census cites above moves (the census keys this file by line).
 
 /**
  * Was this standing born under the fortune law (version 2)? `computePublicLegitimacy`'s fourth
