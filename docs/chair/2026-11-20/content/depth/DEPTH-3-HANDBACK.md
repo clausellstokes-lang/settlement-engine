@@ -33,6 +33,10 @@ Branch `lane/depth-3-2026-11-20` (lane given at 461272505, 19:33 UTC; merged as 
    npcData.js should merge by text: tell the chair if it does not). The line's tip, figures and known reds: origin/lane/chair-2026-11-08
    `docs/chair/2026-11-20/seventh/ci/LINE-NOW.md` beside RED-AT-LINE.tsv. DEPTH-4: READ `docs/chair/2026-11-20/seventh/prompts/COMMON-RULES.txt`
    there (it postdates your prompt; rule 2, A LITERAL HAS ONE HOME: an existing line is never copied into a pool file as its index 0).
+12. FINISH BEFORE STARTING (20:52; amended 20:56): the account's weekly limit warns (resets 2026-11-24 15:00 UTC). Finish: themes,
+   the line's merge, the two runs, "DEPTH <commit>". THEN THE TIES (not held: the sameness census SAME-CENSUS fb284e198 finds a tie's wording
+   twice in one list of one place in 43/150 towns, 141 cities, all 150 metropolises, an owner stop condition; built on the goals lane's cure
+   when the chair names it). HOOKS TRANCHE 3 IS HELD until the chair's word. Fewer, shorter messages.
 10. Hand-over (20:21): under 400,000 read/merge; past it push `-wip`, relay a line, hand over by 420,000.
 
 ## Units (state at the hand-over)
