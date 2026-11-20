@@ -504,9 +504,9 @@ export const FACT_DIMENSIONS = Object.freeze({
   imports: dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.length > 0 : undefined) }),
   // DAILY-2 B1b (the chair's ruling 12 (2) of 2026-11-20 18:56, "an atom is granted in advance" where its home is an existing
   // getter; vetoable by the owner, on the veto list as new vocabulary): `grain imported` = an import of the stored list names
-  // grain. A daily-life line about grain brought in needs it.
+  // grain, string imports only (`canonImports` returns the stored strings). A daily-life line about grain brought in needs it.
   'grain imported': dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports)
-    ? f.imports.some((g) => /\bgrain\b/i.test(typeof g === 'string' ? g : String(/** @type {{ name?: unknown, good?: unknown }} */ (g)?.name ?? /** @type {{ good?: unknown }} */ (g)?.good ?? '')))
+    ? f.imports.some((g) => typeof g === 'string' && /\bgrain\b/i.test(g))
     : undefined) }),
   // BAR8-DESKS-ECO (J's 11c.needed, 11c.venture, 11c.idle; BRIEF-BAR8 DESKS-ECO item 2, the chair's BR17 (3); vetoable by the
   // owner, on the veto list as new vocabulary), beneath `imports`: `critical import brought in` = the good DS-ECO-12's critical

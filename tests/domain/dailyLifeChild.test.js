@@ -24,6 +24,7 @@ import { isLiveInstitution } from '../../src/domain/institutions/institutionRost
 import { ACCESS_ONLY } from '../../src/domain/facts/liveInstitutionNames.js';
 import { isHideableHouse } from '../../src/domain/people/cardVeil.js';
 import { institutionSentenceNoun } from '../../src/domain/display/institutionSentenceNoun.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 /** @type {Array<{ seed: string, size: string, rec: any }>} */
@@ -60,7 +61,10 @@ describe('the red: the falsest child warnings M1 found', () => {
   it('hxd-thorp-0 is not warned about a trade quarter and stalls it lacks', () => {
     const { rec } = at('hxd-thorp-0');
     expect(marketOf(rec)).toBe(false);
-    expect(slotOf(rec).text).not.toMatch(/trade quarter|empty stalls/);
+    const text = slotOf(rec).text;
+    expect(partsOf(text), `"${text}"`).toBeTruthy();
+    // anchored: the same text is pinned live on the line above (a whole `none` sentence or "Children are warned about …")
+    expect(text).not.toMatch(/trade quarter|empty stalls/);
   });
   it('a calm place (hxd-hamlet-0, unrest from the defence rating alone) is not given the unrest warnings', () => {
     const { rec } = at('hxd-hamlet-0');
@@ -69,17 +73,22 @@ describe('the red: the falsest child warnings M1 found', () => {
     expect(unrest.every((t) => t.originSurface === 'defenseProfile')).toBe(true);
     expect(Array.isArray(rec.conflicts) ? rec.conflicts.length : 0).toBe(0);
     const text = slotOf(rec).text;
+    expect(partsOf(text), `"${text}"`).toBeTruthy();
+    expect(CHILD_WARNINGS.unrest.length).toBeGreaterThan(0);
+    // anchored: the text is pinned live and the unrest pool non-empty on the two lines above, so each exclusion is a real one
     for (const l of CHILD_WARNINGS.unrest) expect(text, l.id).not.toMatch(new RegExp(patternOf(l.text).source.slice(1, -1)));
   });
 });
 
 describe('the route on born places (ruling 11): eligible by declared atoms, then the keyed pick', () => {
   it('every place prints one none sentence or at most two kinds joined "A, and about B", each eligible, its houses said with "the"', () => {
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births.map((b) => b.seed), (seed) => {
+      const { rec } = at(seed);
       const s = slotOf(rec);
-      expect(s.text, seed).not.toMatch(/; /);
       const parts = partsOf(s.text);
       expect(parts, `${seed}: "${s.text}"`).toBeTruthy();
+      // anchored: the same text is pinned live on the line above (a whole `none` sentence or "Children are warned about …")
+      expect(s.text, seed).not.toMatch(/; /);
       const own = /** @type {Array<{ part: string, whole: boolean }>} */ (parts).map(({ part, whole }) => ownLine(part, whole));
       expect(own.length, seed).toBeLessThanOrEqual(2);
       const kinds = own.map((o) => o?.kind);
@@ -94,13 +103,17 @@ describe('the route on born places (ruling 11): eligible by declared atoms, then
         expect(row && isLiveInstitution(row) && !isHideableHouse(row) && !ACCESS_ONLY.test(String(row.name)), `${seed}: ${ref.label}`).toBe(true);
         expect(s.text, `${seed}: ${ref.label}`).toContain(`the ${institutionSentenceNoun(ref.label)}`);
       }
+      // anchored: the same text is pinned live above (its parts each a line of its kind's pool, `own` checked truthy)
       expect(s.text, seed).not.toMatch(/[()]|\btowns?\b/i);
-    }
+    });
+    expectNoSeedFailures(failures, 'every born place prints one none sentence or at most two eligible kinds, its houses said with "the"');
   });
   it('a calm thorp holds at least seven eligible `none` lines (ruling 8)', () => {
-    for (const { seed, size, rec } of births) {
+    const failures = collectSeedFailures(births.map((b) => b.seed), (seed) => {
+      const { size, rec } = at(seed);
       if (size === 'thorp') expect(filterDeclared(CHILD_WARNINGS.none, { facts: factsOf(rec) }).length, seed).toBeGreaterThanOrEqual(7);
-    }
+    });
+    expectNoSeedFailures(failures, 'every born thorp holds at least seven eligible `none` lines');
   });
   it('a calm place takes the `none` pool by pickVariantMixed on `<name>::dailyLife.child_warnings::none`; a nameless record takes index 0', () => {
     const calm = { name: 'Ashby', tier: 'thorp', institutions: [{ name: 'Water source' }, { name: 'Dwellings (1-8)' }, { name: 'Subsistence farming' }], config: { monsterThreat: 'safe' } };

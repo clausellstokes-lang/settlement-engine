@@ -26,6 +26,7 @@ import { isLiveInstitution } from '../../src/domain/institutions/institutionRost
 import { ACCESS_ONLY } from '../../src/domain/facts/liveInstitutionNames.js';
 import { isHideableHouse } from '../../src/domain/people/cardVeil.js';
 import { institutionSentenceNoun } from '../../src/domain/display/institutionSentenceNoun.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SIZES = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 /** @type {Array<{ seed: string, size: string, rec: any }>} */
@@ -56,21 +57,28 @@ describe('the red: the falsest dawn lines M1 found', () => {
   it('hxd-thorp-0 prints no walls and no watch it lacks', () => {
     const { rec } = at('hxd-thorp-0');
     const text = slotOf(rec).text;
+    expect(ownLine(text), `"${text}"`).toBeTruthy();
+    // anchored: the same text is pinned live on the line above (a line of its branch's pool)
     if (!defenceOf(rec).walls) expect(text).not.toMatch(/\bwalls\b/i);
+    // anchored: the same text is pinned live at this test's head (a line of its branch's pool)
     if (!factsOf(rec).guardPresence) expect(text).not.toMatch(/\bthe watch\b/i);
   });
   it('a hamlet with no bakery (hxd-hamlet-7) is not told the bakers light their ovens', () => {
     const { rec } = at('hxd-hamlet-7');
     expect(hasInstitution(rec, 'bakery')).toBe(false);
-    expect(slotOf(rec).text).not.toMatch(/\bbakers?\b/i);
+    const text = slotOf(rec).text;
+    expect(ownLine(text), `"${text}"`).toBeTruthy();
+    // anchored: the same text is pinned live on the line above (a line of its branch's pool)
+    expect(text).not.toMatch(/\bbakers?\b/i);
   });
 });
 
 describe('the route on born places (ruling 11): eligible by declared atoms, then the keyed pick', () => {
   it('every place prints a line of its branch\'s pool whose atoms it holds, its houses live, nameable and said with "the"', () => {
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births.map((b) => b.seed), (seed) => {
+      const { rec } = at(seed);
       const s = slotOf(rec);
-      if (!s.text) continue;
+      if (!s.text) return;
       const own = ownLine(s.text);
       expect(own, `${seed}: "${s.text}"`).toBeTruthy();
       const { branch, line } = /** @type {{ branch: string, line: any }} */ (own);
@@ -80,20 +88,26 @@ describe('the route on born places (ruling 11): eligible by declared atoms, then
         expect(row && isLiveInstitution(row) && !isHideableHouse(row) && !ACCESS_ONLY.test(String(row.name)), `${seed}: ${ref.label}`).toBe(true);
         expect(s.text, `${seed}: ${ref.label}`).toContain(`the ${institutionSentenceNoun(ref.label)}`);
       }
+      // anchored: the same text is pinned live above (`own`, a line of its branch's pool, checked truthy and eligible)
       expect(s.text, seed).not.toMatch(/[()]|\btowns?\b/i);
-    }
+    });
+    expectNoSeedFailures(failures, 'every born place prints an eligible line of its branch\'s pool, its houses live and said with "the"');
   });
   it('the defence pool is taken only under a real outside threat at medium or above (ruling 8)', () => {
-    for (const { seed, rec } of births) {
+    const failures = collectSeedFailures(births.map((b) => b.seed), (seed) => {
+      const { rec } = at(seed);
       const own = ownLine(slotOf(rec).text);
       if (own?.branch === 'defence') expect(outsideThreat(rec), seed).toBe(true);
-    }
+    });
+    expectNoSeedFailures(failures, 'a born place takes the defence pool only under a real outside threat at medium or above');
   });
   it('a calm thorp or hamlet holds at least seven eligible default lines (ruling 8)', () => {
-    for (const { seed, size, rec } of births) {
-      if (size !== 'thorp' && size !== 'hamlet') continue;
+    const failures = collectSeedFailures(births.map((b) => b.seed), (seed) => {
+      const { size, rec } = at(seed);
+      if (size !== 'thorp' && size !== 'hamlet') return;
       expect(filterDeclared(DAWN_WORK.default, { facts: factsOf(rec) }).length, seed).toBeGreaterThanOrEqual(7);
-    }
+    });
+    expectNoSeedFailures(failures, 'every born thorp and hamlet holds at least seven eligible default lines');
   });
   it('the pick is pickVariantMixed over the eligible lines on `<name>::dailyLife.dawn_work::<branch>`; a nameless record takes index 0', () => {
     const calm = { name: 'Ashby', tier: 'thorp', institutions: [{ name: 'Water source' }, { name: 'Dwellings (1-8)' }, { name: 'Subsistence farming' }] };
