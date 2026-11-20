@@ -38,3 +38,36 @@ benefit from cheap newcomer labour" 5 of 11 lack a market; "Price regulators" 5 
    Overview PDF (`src/pdf/sections/Overview.jsx`), the Foundry journal if it prints sides (`src/foundry/journalPages.js`).
 5. THE GUARD: a test (source scan or render walk) that no surface prints a tension's side except through the reader.
 6. The report: "the reader reads only the document in hand and holds no second source", with the test's receipt.
+
+## AMENDED BY PAGE-4, 2026-11-20 16:12 UTC (`date -u`), on the chair's rulings of 13:22 (amended 13:50), 14:23 and 15:10. THIS SECTION GOVERNS WHERE IT DIFFERS FROM THE ABOVE.
+
+THE DATA (replaces point 1): `src/data/tensionSideMeanings.js` and `tests/data/tensionSideMeanings.test.js`, taken BYTE FOR
+BYTE from `c5da1cfb3` (`git show c5da1cfb3:<path> > <path>`; that commit is on `origin/lane/page-5-2026-11-20`), never
+edited; a wrong row is reported to PAGE-4, not mended. Its HEADER'S RULES 0 TO 4 ARE THE READER'S RULES; read them whole.
+THE CENSUS OF SIDE READERS (replaces the "known so far" list of point 4):
+`git show 837394d8f:docs/chair/2026-11-20/content/page/SIDE-READERS.md`. Every surface in it that is in THIS LANE'S FILES
+(`src/components/`, `src/domain/display/`, `src/pdf/`, `src/foundry/`) calls the reader; a surface in another seat's
+files (`src/domain/summary/`, `src/domain/crisis/`, `src/domain/tension/`, the session sheet) is LISTED in your report,
+never edited (the session sheet's three side labels call the reader at the join: not yours).
+
+THE READER'S RULES, the chair's (replace point 2):
+1. A power's name ONLY through a row's `named` wording, `{power}` filled through
+   `governanceAccount.js :: powerNameInProse` (a verb after a name through `src/data/people/powerSentenceName.js ::
+   powerVerb`, if any sentence needs one). A row without `named` is never named, whatever its `means`.
+2. And ONLY where the document in hand holds EXACTLY ONE power of the kind meant (the ruler: its governing power). Two or
+   none: the row's own words (under the header's rule 1).
+3. NEVER THE SAME POWER ON TWO SIDES OF ONE TENSION: where it would be, the later side keeps its own words.
+4. `presumes` IS CHECKED FIRST: a town lacking the house shows `without`; `without` null DROPS the side.
+5. A side the generator wrote over follows the header's rules 2 to 4, rule 3 reading the SLOT row's `without` first.
+6. EVERY SIDE AS SHOWN BEGINS WITH A CAPITAL LETTER.
+7. The reader reads ONLY the document it is given; a served document lacking a withheld power IS, to the reader, a town
+   without that power, and prints exactly what such a town prints. The guard of point 5 stands.
+
+ONE MODULE FOR A TROUBLE'S SIDES AND ITS SENTENCE (the chair, 14:23 and 15:10): a trouble's sentence will come from
+PAGE-7's `src/domain/display/tensionCause.js :: tensionCauseSentenceOf(record, tension)` (null: the stored text). It is
+NOT part of this unit and you build no pick or predicate; but put the side reader in ONE display module whose shape lets
+the same surfaces later take the sentence from the same place (e.g. `tensionShown.js` exporting `tensionSidesShown`),
+and say in your report where the sentence's call would sit on each surface.
+
+TESTS, red first, on a MADE-UP roster (never a quoted pool sentence): rules 1, 2 and 3 each; rule 4's drop; rule 6; the
+served-document case of rule 7; and the guard.
