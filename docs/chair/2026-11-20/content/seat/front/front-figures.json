@@ -1,0 +1,1663 @@
+{
+ "default": {
+  "towns": 900,
+  "allegiances": {
+   "townsWithOne": 303,
+   "cards": 925,
+   "via": {
+    "retainer": 240,
+    "office": 217,
+    "front": 468
+   },
+   "vector": {
+    "fear": 219,
+    "greed": 425,
+    "forbidden_patron": 215,
+    "hunger_for_status": 66
+   },
+   "handler": 925,
+   "noHandler": 0,
+   "frontHead": 468,
+   "frontHeadRank1": 16,
+   "frontHeadWilling": 242
+  },
+  "record": {
+   "crimPower": 26,
+   "independent": 26,
+   "rulerCriminal": 0,
+   "bm": {
+    "min": 1,
+    "p50": 3,
+    "p90": 11,
+    "p99": 31,
+    "max": 33,
+    "over10": 90,
+    "over20": 28,
+    "over30": 9
+   },
+   "frontHeadsAll": 12691,
+   "frontHeadsCrim": 0,
+   "frontHeadsOffice": 0
+  },
+  "criteria": {
+   "power": {
+    "townsOnRecord": 26,
+    "headsGate": 283,
+    "headsWilling": 137,
+    "poolWillingNotAgent": 99,
+    "townsWithPool": 25,
+    "seatGate": 3,
+    "seatPool": 1,
+    "seatAgentWilling": 0,
+    "hatFacePool": 1,
+    "seatIsHatFace": 20,
+    "1in50": {
+     "rate": 0.3118,
+     "expectHolding": 18,
+     "expectSeatBorn": 0.3118,
+     "drawHolding": 18,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0499,
+     "expectHolding": 4.5,
+     "expectSeatBorn": 0.0499,
+     "drawHolding": 3,
+     "drawSeatBorn": 0
+    }
+   },
+   "independentPower": {
+    "townsOnRecord": 26,
+    "headsGate": 283,
+    "headsWilling": 137,
+    "poolWillingNotAgent": 99,
+    "townsWithPool": 25,
+    "seatGate": 3,
+    "seatPool": 1,
+    "seatAgentWilling": 0,
+    "hatFacePool": 1,
+    "seatIsHatFace": 20,
+    "1in50": {
+     "rate": 0.3118,
+     "expectHolding": 18,
+     "expectSeatBorn": 0.3118,
+     "drawHolding": 18,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0499,
+     "expectHolding": 4.5,
+     "expectSeatBorn": 0.0499,
+     "drawHolding": 3,
+     "drawSeatBorn": 0
+    }
+   },
+   "bm10": {
+    "townsOnRecord": 90,
+    "headsGate": 838,
+    "headsWilling": 427,
+    "poolWillingNotAgent": 344,
+    "townsWithPool": 85,
+    "seatGate": 15,
+    "seatPool": 8,
+    "seatAgentWilling": 0,
+    "hatFacePool": 8,
+    "seatIsHatFace": 72,
+    "1in50": {
+     "rate": 0.059,
+     "expectHolding": 18,
+     "expectSeatBorn": 0.4721,
+     "drawHolding": 13,
+     "drawSeatBorn": 0
+    },
+    "1in200": {
+     "rate": 0.0135,
+     "expectHolding": 4.5,
+     "expectSeatBorn": 0.1076,
+     "drawHolding": 4,
+     "drawSeatBorn": 0
+    }
+   },
+   "bm20": {
+    "townsOnRecord": 28,
+    "headsGate": 300,
+    "headsWilling": 156,
+    "poolWillingNotAgent": 120,
+    "townsWithPool": 27,
+    "seatGate": 1,
+    "seatPool": 1,
+    "seatAgentWilling": 0,
+    "hatFacePool": 1,
+    "seatIsHatFace": 22,
+    "1in50": {
+     "rate": 0.2434,
+     "expectHolding": 18,
+     "expectSeatBorn": 0.2434,
+     "drawHolding": 20,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.041,
+     "expectHolding": 4.5,
+     "expectSeatBorn": 0.041,
+     "drawHolding": 4,
+     "drawSeatBorn": 0
+    }
+   },
+   "bm30": {
+    "townsOnRecord": 9,
+    "headsGate": 100,
+    "headsWilling": 50,
+    "poolWillingNotAgent": 35,
+    "townsWithPool": 9,
+    "seatGate": 0,
+    "seatPool": 0,
+    "seatAgentWilling": 0,
+    "hatFacePool": 0,
+    "seatIsHatFace": 7,
+    "1in50": {
+     "rate": null,
+     "note": "unreachable even at 1"
+    },
+    "1in200": {
+     "rate": 0.1684,
+     "expectHolding": 4.5,
+     "expectSeatBorn": 0,
+     "drawHolding": 3,
+     "drawSeatBorn": 0
+    }
+   },
+   "power|bm10": {
+    "townsOnRecord": 91,
+    "headsGate": 848,
+    "headsWilling": 432,
+    "poolWillingNotAgent": 348,
+    "townsWithPool": 86,
+    "seatGate": 15,
+    "seatPool": 8,
+    "seatAgentWilling": 0,
+    "hatFacePool": 8,
+    "seatIsHatFace": 73,
+    "1in50": {
+     "rate": 0.0582,
+     "expectHolding": 18,
+     "expectSeatBorn": 0.4658,
+     "drawHolding": 13,
+     "drawSeatBorn": 0
+    },
+    "1in200": {
+     "rate": 0.0133,
+     "expectHolding": 4.5,
+     "expectSeatBorn": 0.1063,
+     "drawHolding": 4,
+     "drawSeatBorn": 0
+    }
+   },
+   "power|bm20": {
+    "townsOnRecord": 39,
+    "headsGate": 424,
+    "headsWilling": 210,
+    "poolWillingNotAgent": 160,
+    "townsWithPool": 38,
+    "seatGate": 3,
+    "seatPool": 1,
+    "seatAgentWilling": 0,
+    "hatFacePool": 1,
+    "seatIsHatFace": 30,
+    "1in50": {
+     "rate": 0.1512,
+     "expectHolding": 18,
+     "expectSeatBorn": 0.1512,
+     "drawHolding": 19,
+     "drawSeatBorn": 0
+    },
+    "1in200": {
+     "rate": 0.0299,
+     "expectHolding": 4.5,
+     "expectSeatBorn": 0.0299,
+     "drawHolding": 4,
+     "drawSeatBorn": 0
+    }
+   },
+   "power|bm30": {
+    "townsOnRecord": 29,
+    "headsGate": 314,
+    "headsWilling": 152,
+    "poolWillingNotAgent": 108,
+    "townsWithPool": 28,
+    "seatGate": 3,
+    "seatPool": 1,
+    "seatAgentWilling": 0,
+    "hatFacePool": 1,
+    "seatIsHatFace": 23,
+    "1in50": {
+     "rate": 0.2579,
+     "expectHolding": 18,
+     "expectSeatBorn": 0.2579,
+     "drawHolding": 20,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0452,
+     "expectHolding": 4.5,
+     "expectSeatBorn": 0.0452,
+     "drawHolding": 2,
+     "drawSeatBorn": 0
+    }
+   }
+  },
+  "captureProbe": {
+   "none -> corrupted (agentRung corrupted, underworld no)": 40,
+   "equilibrium -> corrupted (agentRung corrupted, underworld yes)": 1,
+   "corrupted -> corrupted (agentRung corrupted, underworld no)": 1
+  },
+  "probeExample": "Corrupted: The head of Merchant oligarchy answers to Thieves' Guild.",
+  "fixed": {
+   "power": [
+    {
+     "r": 0.01,
+     "expectHolding": 0.9715,
+     "drawHolding": 1,
+     "expectSeatBorn": 0.01,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 1.907,
+     "drawHolding": 1,
+     "expectSeatBorn": 0.02,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 2.8076,
+     "drawHolding": 1,
+     "expectSeatBorn": 0.03,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 4.5095,
+     "drawHolding": 3,
+     "expectSeatBorn": 0.05,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 8.2373,
+     "drawHolding": 5,
+     "expectSeatBorn": 0.1,
+     "drawSeatBorn": 0
+    }
+   ],
+   "independentPower": [
+    {
+     "r": 0.01,
+     "expectHolding": 0.9715,
+     "drawHolding": 1,
+     "expectSeatBorn": 0.01,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 1.907,
+     "drawHolding": 1,
+     "expectSeatBorn": 0.02,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 2.8076,
+     "drawHolding": 1,
+     "expectSeatBorn": 0.03,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 4.5095,
+     "drawHolding": 3,
+     "expectSeatBorn": 0.05,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 8.2373,
+     "drawHolding": 5,
+     "expectSeatBorn": 0.1,
+     "drawSeatBorn": 0
+    }
+   ],
+   "bm10": [
+    {
+     "r": 0.01,
+     "expectHolding": 3.3693,
+     "drawHolding": 4,
+     "expectSeatBorn": 0.08,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 6.6011,
+     "drawHolding": 5,
+     "expectSeatBorn": 0.16,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 9.7012,
+     "drawHolding": 7,
+     "expectSeatBorn": 0.24,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 15.5276,
+     "drawHolding": 11,
+     "expectSeatBorn": 0.4,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 28.1449,
+     "drawHolding": 29,
+     "expectSeatBorn": 0.8,
+     "drawSeatBorn": 0
+    }
+   ],
+   "bm20": [
+    {
+     "r": 0.01,
+     "expectHolding": 1.1742,
+     "drawHolding": 1,
+     "expectSeatBorn": 0.01,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 2.2982,
+     "drawHolding": 2,
+     "expectSeatBorn": 0.02,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 3.3742,
+     "drawHolding": 3,
+     "expectSeatBorn": 0.03,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 5.3902,
+     "drawHolding": 4,
+     "expectSeatBorn": 0.05,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 9.7236,
+     "drawHolding": 9,
+     "expectSeatBorn": 0.1,
+     "drawSeatBorn": 0
+    }
+   ],
+   "bm30": [
+    {
+     "r": 0.01,
+     "expectHolding": 0.3444,
+     "drawHolding": 0,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 0.6776,
+     "drawHolding": 0,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 1.0001,
+     "drawHolding": 1,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 1.6137,
+     "drawHolding": 1,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 2.9784,
+     "drawHolding": 2,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    }
+   ],
+   "power|bm10": [
+    {
+     "r": 0.01,
+     "expectHolding": 3.4087,
+     "drawHolding": 4,
+     "expectSeatBorn": 0.08,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 6.6788,
+     "drawHolding": 5,
+     "expectSeatBorn": 0.16,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 9.8159,
+     "drawHolding": 7,
+     "expectSeatBorn": 0.24,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 15.7131,
+     "drawHolding": 11,
+     "expectSeatBorn": 0.4,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 28.4888,
+     "drawHolding": 29,
+     "expectSeatBorn": 0.8,
+     "drawSeatBorn": 0
+    }
+   ],
+   "power|bm20": [
+    {
+     "r": 0.01,
+     "expectHolding": 1.5675,
+     "drawHolding": 2,
+     "expectSeatBorn": 0.01,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 3.0719,
+     "drawHolding": 3,
+     "expectSeatBorn": 0.02,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 4.5155,
+     "drawHolding": 4,
+     "expectSeatBorn": 0.03,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 7.2304,
+     "drawHolding": 7,
+     "expectSeatBorn": 0.05,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 13.1134,
+     "drawHolding": 12,
+     "expectSeatBorn": 0.1,
+     "drawSeatBorn": 0
+    }
+   ],
+   "power|bm30": [
+    {
+     "r": 0.01,
+     "expectHolding": 1.0606,
+     "drawHolding": 1,
+     "expectSeatBorn": 0.01,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 2.0834,
+     "drawHolding": 1,
+     "expectSeatBorn": 0.02,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 3.0696,
+     "drawHolding": 2,
+     "expectSeatBorn": 0.03,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 4.9374,
+     "drawHolding": 4,
+     "expectSeatBorn": 0.05,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 9.0503,
+     "drawHolding": 6,
+     "expectSeatBorn": 0.1,
+     "drawSeatBorn": 0
+    }
+   ]
+  }
+ },
+ "presets": {
+  "towns": 960,
+  "allegiances": {
+   "townsWithOne": 230,
+   "cards": 807,
+   "via": {
+    "retainer": 227,
+    "front": 413,
+    "office": 167
+   },
+   "vector": {
+    "forbidden_patron": 193,
+    "greed": 378,
+    "fear": 177,
+    "hunger_for_status": 59
+   },
+   "handler": 807,
+   "noHandler": 0,
+   "frontHead": 413,
+   "frontHeadRank1": 32,
+   "frontHeadWilling": 219
+  },
+  "record": {
+   "crimPower": 90,
+   "independent": 84,
+   "rulerCriminal": 22,
+   "bm": {
+    "min": 0,
+    "p50": 1,
+    "p90": 18,
+    "p99": 32,
+    "max": 45,
+    "over10": 176,
+    "over20": 57,
+    "over30": 13
+   },
+   "frontHeadsAll": 13232,
+   "frontHeadsCrim": 0,
+   "frontHeadsOffice": 0
+  },
+  "criteria": {
+   "power": {
+    "townsOnRecord": 90,
+    "headsGate": 819,
+    "headsWilling": 445,
+    "poolWillingNotAgent": 308,
+    "townsWithPool": 82,
+    "seatGate": 11,
+    "seatPool": 5,
+    "seatAgentWilling": 2,
+    "hatFacePool": 5,
+    "seatIsHatFace": 51,
+    "1in50": {
+     "rate": 0.0711,
+     "expectHolding": 19.2,
+     "expectSeatBorn": 0.3553,
+     "drawHolding": 24,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0161,
+     "expectHolding": 4.8,
+     "expectSeatBorn": 0.0803,
+     "drawHolding": 9,
+     "drawSeatBorn": 0
+    }
+   },
+   "independentPower": {
+    "townsOnRecord": 84,
+    "headsGate": 798,
+    "headsWilling": 435,
+    "poolWillingNotAgent": 300,
+    "townsWithPool": 78,
+    "seatGate": 11,
+    "seatPool": 5,
+    "seatAgentWilling": 2,
+    "hatFacePool": 5,
+    "seatIsHatFace": 51,
+    "1in50": {
+     "rate": 0.0735,
+     "expectHolding": 19.2,
+     "expectSeatBorn": 0.3673,
+     "drawHolding": 24,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0165,
+     "expectHolding": 4.8,
+     "expectSeatBorn": 0.0826,
+     "drawHolding": 9,
+     "drawSeatBorn": 0
+    }
+   },
+   "bm10": {
+    "townsOnRecord": 176,
+    "headsGate": 1239,
+    "headsWilling": 680,
+    "poolWillingNotAgent": 520,
+    "townsWithPool": 132,
+    "seatGate": 18,
+    "seatPool": 8,
+    "seatAgentWilling": 2,
+    "hatFacePool": 8,
+    "seatIsHatFace": 131,
+    "1in50": {
+     "rate": 0.0401,
+     "expectHolding": 19.2,
+     "expectSeatBorn": 0.3209,
+     "drawHolding": 18,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0094,
+     "expectHolding": 4.8,
+     "expectSeatBorn": 0.0753,
+     "drawHolding": 8,
+     "drawSeatBorn": 0
+    }
+   },
+   "bm20": {
+    "townsOnRecord": 57,
+    "headsGate": 471,
+    "headsWilling": 241,
+    "poolWillingNotAgent": 157,
+    "townsWithPool": 47,
+    "seatGate": 5,
+    "seatPool": 3,
+    "seatAgentWilling": 0,
+    "hatFacePool": 3,
+    "seatIsHatFace": 36,
+    "1in50": {
+     "rate": 0.156,
+     "expectHolding": 19.2,
+     "expectSeatBorn": 0.4679,
+     "drawHolding": 23,
+     "drawSeatBorn": 0
+    },
+    "1in200": {
+     "rate": 0.0322,
+     "expectHolding": 4.8,
+     "expectSeatBorn": 0.0966,
+     "drawHolding": 10,
+     "drawSeatBorn": 0
+    }
+   },
+   "bm30": {
+    "townsOnRecord": 13,
+    "headsGate": 116,
+    "headsWilling": 59,
+    "poolWillingNotAgent": 36,
+    "townsWithPool": 10,
+    "seatGate": 1,
+    "seatPool": 0,
+    "seatAgentWilling": 0,
+    "hatFacePool": 0,
+    "seatIsHatFace": 7,
+    "1in50": {
+     "rate": null,
+     "note": "unreachable even at 1"
+    },
+    "1in200": {
+     "rate": 0.1736,
+     "expectHolding": 4.8,
+     "expectSeatBorn": 0,
+     "drawHolding": 6,
+     "drawSeatBorn": 0
+    }
+   },
+   "power|bm10": {
+    "townsOnRecord": 181,
+    "headsGate": 1259,
+    "headsWilling": 691,
+    "poolWillingNotAgent": 531,
+    "townsWithPool": 136,
+    "seatGate": 18,
+    "seatPool": 8,
+    "seatAgentWilling": 2,
+    "hatFacePool": 8,
+    "seatIsHatFace": 132,
+    "1in50": {
+     "rate": 0.0392,
+     "expectHolding": 19.2,
+     "expectSeatBorn": 0.3134,
+     "drawHolding": 18,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0092,
+     "expectHolding": 4.8,
+     "expectSeatBorn": 0.0737,
+     "drawHolding": 8,
+     "drawSeatBorn": 0
+    }
+   },
+   "power|bm20": {
+    "townsOnRecord": 100,
+    "headsGate": 878,
+    "headsWilling": 471,
+    "poolWillingNotAgent": 332,
+    "townsWithPool": 87,
+    "seatGate": 12,
+    "seatPool": 6,
+    "seatAgentWilling": 2,
+    "hatFacePool": 6,
+    "seatIsHatFace": 61,
+    "1in50": {
+     "rate": 0.0654,
+     "expectHolding": 19.2,
+     "expectSeatBorn": 0.3921,
+     "drawHolding": 25,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0149,
+     "expectHolding": 4.8,
+     "expectSeatBorn": 0.0892,
+     "drawHolding": 9,
+     "drawSeatBorn": 0
+    }
+   },
+   "power|bm30": {
+    "townsOnRecord": 90,
+    "headsGate": 819,
+    "headsWilling": 445,
+    "poolWillingNotAgent": 308,
+    "townsWithPool": 82,
+    "seatGate": 11,
+    "seatPool": 5,
+    "seatAgentWilling": 2,
+    "hatFacePool": 5,
+    "seatIsHatFace": 51,
+    "1in50": {
+     "rate": 0.0711,
+     "expectHolding": 19.2,
+     "expectSeatBorn": 0.3553,
+     "drawHolding": 24,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0161,
+     "expectHolding": 4.8,
+     "expectSeatBorn": 0.0803,
+     "drawHolding": 9,
+     "drawSeatBorn": 0
+    }
+   }
+  },
+  "captureProbe": {
+   "none -> corrupted (agentRung corrupted, underworld no)": 27,
+   "equilibrium -> corrupted (agentRung corrupted, underworld yes)": 2,
+   "corrupted -> corrupted (agentRung corrupted, underworld yes)": 2,
+   "adversarial -> corrupted (agentRung corrupted, underworld yes)": 2,
+   "equilibrium -> capture (agentRung capture, underworld yes)": 1
+  },
+  "probeExample": "Corrupted: The head of Guild Council answers to Thieves' Guild.",
+  "fixed": {
+   "power": [
+    {
+     "r": 0.01,
+     "expectHolding": 3.0225,
+     "drawHolding": 8,
+     "expectSeatBorn": 0.05,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 5.9331,
+     "drawHolding": 10,
+     "expectSeatBorn": 0.1,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 8.736,
+     "drawHolding": 11,
+     "expectSeatBorn": 0.15,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 14.0347,
+     "drawHolding": 17,
+     "expectSeatBorn": 0.25,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 25.664,
+     "drawHolding": 29,
+     "expectSeatBorn": 0.5,
+     "drawSeatBorn": 1
+    }
+   ],
+   "independentPower": [
+    {
+     "r": 0.01,
+     "expectHolding": 2.943,
+     "drawHolding": 8,
+     "expectSeatBorn": 0.05,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 5.7751,
+     "drawHolding": 10,
+     "expectSeatBorn": 0.1,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 8.5004,
+     "drawHolding": 11,
+     "expectSeatBorn": 0.15,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 13.6471,
+     "drawHolding": 17,
+     "expectSeatBorn": 0.25,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 24.913,
+     "drawHolding": 28,
+     "expectSeatBorn": 0.5,
+     "drawSeatBorn": 1
+    }
+   ],
+   "bm10": [
+    {
+     "r": 0.01,
+     "expectHolding": 5.0924,
+     "drawHolding": 9,
+     "expectSeatBorn": 0.08,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 9.976,
+     "drawHolding": 11,
+     "expectSeatBorn": 0.16,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 14.6599,
+     "drawHolding": 14,
+     "expectSeatBorn": 0.24,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 23.4631,
+     "drawHolding": 23,
+     "expectSeatBorn": 0.4,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 42.5419,
+     "drawHolding": 45,
+     "expectSeatBorn": 0.8,
+     "drawSeatBorn": 1
+    }
+   ],
+   "bm20": [
+    {
+     "r": 0.01,
+     "expectHolding": 1.5448,
+     "drawHolding": 7,
+     "expectSeatBorn": 0.03,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 3.0401,
+     "drawHolding": 9,
+     "expectSeatBorn": 0.06,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 4.4876,
+     "drawHolding": 10,
+     "expectSeatBorn": 0.09,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 7.245,
+     "drawHolding": 14,
+     "expectSeatBorn": 0.15,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 13.4008,
+     "drawHolding": 17,
+     "expectSeatBorn": 0.3,
+     "drawSeatBorn": 0
+    }
+   ],
+   "bm30": [
+    {
+     "r": 0.01,
+     "expectHolding": 0.3544,
+     "drawHolding": 2,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 0.698,
+     "drawHolding": 2,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 1.0309,
+     "drawHolding": 2,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 1.6661,
+     "drawHolding": 3,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 3.0874,
+     "drawHolding": 3,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    }
+   ],
+   "power|bm10": [
+    {
+     "r": 0.01,
+     "expectHolding": 5.201,
+     "drawHolding": 9,
+     "expectSeatBorn": 0.08,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 10.1905,
+     "drawHolding": 11,
+     "expectSeatBorn": 0.16,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 14.9776,
+     "drawHolding": 14,
+     "expectSeatBorn": 0.24,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 23.9795,
+     "drawHolding": 23,
+     "expectSeatBorn": 0.4,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 43.5124,
+     "drawHolding": 46,
+     "expectSeatBorn": 0.8,
+     "drawSeatBorn": 1
+    }
+   ],
+   "power|bm20": [
+    {
+     "r": 0.01,
+     "expectHolding": 3.2573,
+     "drawHolding": 8,
+     "expectSeatBorn": 0.06,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 6.3925,
+     "drawHolding": 10,
+     "expectSeatBorn": 0.12,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 9.4101,
+     "drawHolding": 12,
+     "expectSeatBorn": 0.18,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 15.1105,
+     "drawHolding": 19,
+     "expectSeatBorn": 0.3,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 27.5976,
+     "drawHolding": 32,
+     "expectSeatBorn": 0.6,
+     "drawSeatBorn": 1
+    }
+   ],
+   "power|bm30": [
+    {
+     "r": 0.01,
+     "expectHolding": 3.0225,
+     "drawHolding": 8,
+     "expectSeatBorn": 0.05,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 5.9331,
+     "drawHolding": 10,
+     "expectSeatBorn": 0.1,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 8.736,
+     "drawHolding": 11,
+     "expectSeatBorn": 0.15,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 14.0347,
+     "drawHolding": 17,
+     "expectSeatBorn": 0.25,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 25.664,
+     "drawHolding": 29,
+     "expectSeatBorn": 0.5,
+     "drawSeatBorn": 1
+    }
+   ]
+  }
+ },
+ "both": {
+  "towns": 1860,
+  "allegiances": {
+   "townsWithOne": 533,
+   "cards": 1732,
+   "via": {
+    "retainer": 467,
+    "office": 384,
+    "front": 881
+   },
+   "vector": {
+    "fear": 396,
+    "greed": 803,
+    "forbidden_patron": 408,
+    "hunger_for_status": 125
+   },
+   "handler": 1732,
+   "noHandler": 0,
+   "frontHead": 881,
+   "frontHeadRank1": 48,
+   "frontHeadWilling": 461
+  },
+  "record": {
+   "crimPower": 116,
+   "independent": 110,
+   "rulerCriminal": 22,
+   "bm": {
+    "min": 0,
+    "p50": 2,
+    "p90": 14,
+    "p99": 31,
+    "max": 45,
+    "over10": 266,
+    "over20": 85,
+    "over30": 22
+   },
+   "frontHeadsAll": 25923,
+   "frontHeadsCrim": 0,
+   "frontHeadsOffice": 0
+  },
+  "criteria": {
+   "power": {
+    "townsOnRecord": 116,
+    "headsGate": 1102,
+    "headsWilling": 582,
+    "poolWillingNotAgent": 407,
+    "townsWithPool": 107,
+    "seatGate": 14,
+    "seatPool": 6,
+    "seatAgentWilling": 2,
+    "hatFacePool": 6,
+    "seatIsHatFace": 71,
+    "1in50": {
+     "rate": 0.1121,
+     "expectHolding": 37.2,
+     "expectSeatBorn": 0.6725,
+     "drawHolding": 40,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0239,
+     "expectHolding": 9.3,
+     "expectSeatBorn": 0.1434,
+     "drawHolding": 12,
+     "drawSeatBorn": 1
+    }
+   },
+   "independentPower": {
+    "townsOnRecord": 110,
+    "headsGate": 1081,
+    "headsWilling": 572,
+    "poolWillingNotAgent": 399,
+    "townsWithPool": 103,
+    "seatGate": 14,
+    "seatPool": 6,
+    "seatAgentWilling": 2,
+    "hatFacePool": 6,
+    "seatIsHatFace": 71,
+    "1in50": {
+     "rate": 0.1153,
+     "expectHolding": 37.2,
+     "expectSeatBorn": 0.6919,
+     "drawHolding": 39,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0244,
+     "expectHolding": 9.3,
+     "expectSeatBorn": 0.1465,
+     "drawHolding": 12,
+     "drawSeatBorn": 1
+    }
+   },
+   "bm10": {
+    "townsOnRecord": 266,
+    "headsGate": 2077,
+    "headsWilling": 1107,
+    "poolWillingNotAgent": 864,
+    "townsWithPool": 217,
+    "seatGate": 33,
+    "seatPool": 16,
+    "seatAgentWilling": 2,
+    "hatFacePool": 16,
+    "seatIsHatFace": 203,
+    "1in50": {
+     "rate": 0.0475,
+     "expectHolding": 37.2,
+     "expectSeatBorn": 0.7594,
+     "drawHolding": 31,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.011,
+     "expectHolding": 9.3,
+     "expectSeatBorn": 0.1762,
+     "drawHolding": 14,
+     "drawSeatBorn": 0
+    }
+   },
+   "bm20": {
+    "townsOnRecord": 85,
+    "headsGate": 771,
+    "headsWilling": 397,
+    "poolWillingNotAgent": 277,
+    "townsWithPool": 74,
+    "seatGate": 6,
+    "seatPool": 4,
+    "seatAgentWilling": 0,
+    "hatFacePool": 4,
+    "seatIsHatFace": 58,
+    "1in50": {
+     "rate": 0.1861,
+     "expectHolding": 37.2,
+     "expectSeatBorn": 0.7443,
+     "drawHolding": 44,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0359,
+     "expectHolding": 9.3,
+     "expectSeatBorn": 0.1435,
+     "drawHolding": 14,
+     "drawSeatBorn": 0
+    }
+   },
+   "bm30": {
+    "townsOnRecord": 22,
+    "headsGate": 216,
+    "headsWilling": 109,
+    "poolWillingNotAgent": 71,
+    "townsWithPool": 19,
+    "seatGate": 1,
+    "seatPool": 0,
+    "seatAgentWilling": 0,
+    "hatFacePool": 0,
+    "seatIsHatFace": 14,
+    "1in50": {
+     "rate": null,
+     "note": "unreachable even at 1"
+    },
+    "1in200": {
+     "rate": 0.1711,
+     "expectHolding": 9.3,
+     "expectSeatBorn": 0,
+     "drawHolding": 9,
+     "drawSeatBorn": 0
+    }
+   },
+   "power|bm10": {
+    "townsOnRecord": 272,
+    "headsGate": 2107,
+    "headsWilling": 1123,
+    "poolWillingNotAgent": 879,
+    "townsWithPool": 222,
+    "seatGate": 33,
+    "seatPool": 16,
+    "seatAgentWilling": 2,
+    "hatFacePool": 16,
+    "seatIsHatFace": 205,
+    "1in50": {
+     "rate": 0.0465,
+     "expectHolding": 37.2,
+     "expectSeatBorn": 0.7446,
+     "drawHolding": 30,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0108,
+     "expectHolding": 9.3,
+     "expectSeatBorn": 0.1731,
+     "drawHolding": 14,
+     "drawSeatBorn": 0
+    }
+   },
+   "power|bm20": {
+    "townsOnRecord": 139,
+    "headsGate": 1302,
+    "headsWilling": 681,
+    "poolWillingNotAgent": 492,
+    "townsWithPool": 125,
+    "seatGate": 15,
+    "seatPool": 7,
+    "seatAgentWilling": 2,
+    "hatFacePool": 7,
+    "seatIsHatFace": 91,
+    "1in50": {
+     "rate": 0.0897,
+     "expectHolding": 37.2,
+     "expectSeatBorn": 0.6276,
+     "drawHolding": 39,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0196,
+     "expectHolding": 9.3,
+     "expectSeatBorn": 0.1375,
+     "drawHolding": 13,
+     "drawSeatBorn": 0
+    }
+   },
+   "power|bm30": {
+    "townsOnRecord": 119,
+    "headsGate": 1133,
+    "headsWilling": 597,
+    "poolWillingNotAgent": 416,
+    "townsWithPool": 110,
+    "seatGate": 14,
+    "seatPool": 6,
+    "seatAgentWilling": 2,
+    "hatFacePool": 6,
+    "seatIsHatFace": 74,
+    "1in50": {
+     "rate": 0.1088,
+     "expectHolding": 37.2,
+     "expectSeatBorn": 0.6529,
+     "drawHolding": 37,
+     "drawSeatBorn": 1
+    },
+    "1in200": {
+     "rate": 0.0233,
+     "expectHolding": 9.3,
+     "expectSeatBorn": 0.1401,
+     "drawHolding": 11,
+     "drawSeatBorn": 0
+    }
+   }
+  },
+  "captureProbe": {
+   "none -> corrupted (agentRung corrupted, underworld no)": 67,
+   "equilibrium -> corrupted (agentRung corrupted, underworld yes)": 3,
+   "corrupted -> corrupted (agentRung corrupted, underworld no)": 1,
+   "corrupted -> corrupted (agentRung corrupted, underworld yes)": 2,
+   "adversarial -> corrupted (agentRung corrupted, underworld yes)": 2,
+   "equilibrium -> capture (agentRung capture, underworld yes)": 1
+  },
+  "probeExample": "Corrupted: The head of Merchant oligarchy answers to Thieves' Guild.",
+  "fixed": {
+   "power": [
+    {
+     "r": 0.01,
+     "expectHolding": 3.9941,
+     "drawHolding": 9,
+     "expectSeatBorn": 0.06,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 7.8401,
+     "drawHolding": 11,
+     "expectSeatBorn": 0.12,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 11.5436,
+     "drawHolding": 12,
+     "expectSeatBorn": 0.18,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 18.5442,
+     "drawHolding": 20,
+     "expectSeatBorn": 0.3,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 33.9012,
+     "drawHolding": 34,
+     "expectSeatBorn": 0.6,
+     "drawSeatBorn": 1
+    }
+   ],
+   "independentPower": [
+    {
+     "r": 0.01,
+     "expectHolding": 3.9146,
+     "drawHolding": 9,
+     "expectSeatBorn": 0.06,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 7.6821,
+     "drawHolding": 11,
+     "expectSeatBorn": 0.12,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 11.3081,
+     "drawHolding": 12,
+     "expectSeatBorn": 0.18,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 18.1566,
+     "drawHolding": 20,
+     "expectSeatBorn": 0.3,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 33.1502,
+     "drawHolding": 33,
+     "expectSeatBorn": 0.6,
+     "drawSeatBorn": 1
+    }
+   ],
+   "bm10": [
+    {
+     "r": 0.01,
+     "expectHolding": 8.4617,
+     "drawHolding": 13,
+     "expectSeatBorn": 0.16,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 16.5771,
+     "drawHolding": 16,
+     "expectSeatBorn": 0.32,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 24.361,
+     "drawHolding": 21,
+     "expectSeatBorn": 0.48,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 38.9907,
+     "drawHolding": 34,
+     "expectSeatBorn": 0.8,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 70.6868,
+     "drawHolding": 74,
+     "expectSeatBorn": 1.6,
+     "drawSeatBorn": 1
+    }
+   ],
+   "bm20": [
+    {
+     "r": 0.01,
+     "expectHolding": 2.7189,
+     "drawHolding": 8,
+     "expectSeatBorn": 0.04,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 5.3383,
+     "drawHolding": 11,
+     "expectSeatBorn": 0.08,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 7.8618,
+     "drawHolding": 13,
+     "expectSeatBorn": 0.12,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 12.6352,
+     "drawHolding": 18,
+     "expectSeatBorn": 0.2,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 23.1244,
+     "drawHolding": 26,
+     "expectSeatBorn": 0.4,
+     "drawSeatBorn": 0
+    }
+   ],
+   "bm30": [
+    {
+     "r": 0.01,
+     "expectHolding": 0.6988,
+     "drawHolding": 2,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 1.3756,
+     "drawHolding": 2,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 2.031,
+     "drawHolding": 3,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 3.2798,
+     "drawHolding": 4,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 6.0658,
+     "drawHolding": 5,
+     "expectSeatBorn": 0,
+     "drawSeatBorn": 0
+    }
+   ],
+   "power|bm10": [
+    {
+     "r": 0.01,
+     "expectHolding": 8.6097,
+     "drawHolding": 13,
+     "expectSeatBorn": 0.16,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 16.8692,
+     "drawHolding": 16,
+     "expectSeatBorn": 0.32,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 24.7934,
+     "drawHolding": 21,
+     "expectSeatBorn": 0.48,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 39.6925,
+     "drawHolding": 34,
+     "expectSeatBorn": 0.8,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 72.0012,
+     "drawHolding": 75,
+     "expectSeatBorn": 1.6,
+     "drawSeatBorn": 1
+    }
+   ],
+   "power|bm20": [
+    {
+     "r": 0.01,
+     "expectHolding": 4.8249,
+     "drawHolding": 10,
+     "expectSeatBorn": 0.07,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 9.4643,
+     "drawHolding": 13,
+     "expectSeatBorn": 0.14,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 13.9256,
+     "drawHolding": 16,
+     "expectSeatBorn": 0.21,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 22.3408,
+     "drawHolding": 26,
+     "expectSeatBorn": 0.35,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 40.711,
+     "drawHolding": 44,
+     "expectSeatBorn": 0.7,
+     "drawSeatBorn": 1
+    }
+   ],
+   "power|bm30": [
+    {
+     "r": 0.01,
+     "expectHolding": 4.0832,
+     "drawHolding": 9,
+     "expectSeatBorn": 0.06,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.02,
+     "expectHolding": 8.0165,
+     "drawHolding": 11,
+     "expectSeatBorn": 0.12,
+     "drawSeatBorn": 0
+    },
+    {
+     "r": 0.03,
+     "expectHolding": 11.8056,
+     "drawHolding": 13,
+     "expectSeatBorn": 0.18,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.05,
+     "expectHolding": 18.9721,
+     "drawHolding": 21,
+     "expectSeatBorn": 0.3,
+     "drawSeatBorn": 1
+    },
+    {
+     "r": 0.1,
+     "expectHolding": 34.7142,
+     "drawHolding": 35,
+     "expectSeatBorn": 0.6,
+     "drawSeatBorn": 1
+    }
+   ]
+  }
+ }
+}
