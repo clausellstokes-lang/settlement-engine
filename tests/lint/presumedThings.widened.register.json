@@ -29007,8 +29007,9 @@
   ],
   [
    "src/generators/people/goals.js",
-   "cell",
-   "not-a-draw"
+   "arr(rec(rec(rec(table).PERSONALITY)[cluster])[vantage])",
+   "not-a-draw",
+   "goals.js :: floorLinesOf: the floor is draw-free: a rotation, no roll; the chair's ruling of 16:04 UTC (2026-11-20, GOALS-3 R3)"
   ],
   [
    "src/generators/people/personHooks.js",

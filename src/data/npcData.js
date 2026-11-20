@@ -1731,7 +1731,7 @@ export const NPC_PRESENTATION_MODES = {
 // same line under new names. With no index (a legacy edge, a seedless caller) the closure falls
 // back to the pure fnv hash of the DIRECTED pair key, salted per field. ZERO rng draws either
 // way, and the archetype OBJECTS are unchanged (consumers compare them with === and
-// Object.entries().find: identity is load-bearing). `size` hands the pool length to the draw.
+// Object.entries().find: identity is load-bearing). `size` hands the pool length to the draw. GOALS-1 (GR3 for ties, the chair's ruling of 2026-11-20 10:28 UTC: the head frozen, new pairs reached only past it): an optional fifth argument, the RESERVE (default empty), follows the variants in `lines`; `size` counts both and `head` the variants alone, so a stored index reads `lines[i % lines.length]` and one below `head` reads what it read before; the tie draw reaches a reserve index only past the head (`relationshipArchetypes.js :: createTieProseDraw`). An archetype's desc and tension take reserves of ONE length (one index picks both); the no-index fallback hashes over the variants alone. Every reserve is empty today.
 // Index 0 of every pool is the pre-existing canonical closure, verbatim.
 // CENSUS-4c (R-C, the table-consumer rule): a variant that presumes a record fact is declared IN
 // PLACE as `{ line: closure, needs?, excludes?, crisis? }` (the ledger's 30 rows,
@@ -1779,15 +1779,15 @@ const voteUnheld = (row, a, b) => {
 const closureFor = (row, a, b) => (row && typeof row === 'object' && typeof row.twin === 'function'
   && ((row.sharedTrade && pairTradeKnown(a, b) && !pairSharesTrade(a, b)) || (row.votes && voteUnheld(row, a, b))
     || (row.sharedPlace && pairSharesPlaceOf(null, [a, b]) !== true)) ? row.twin : closureOf(row)); // PD1: no place to pass, the twin
-const pairProse = (salt, variants, order = null, debt = false) => Object.assign((r, s, variant, force) => {
+const pairProse = (salt, variants, order = null, debt = false, reserve = []) => ((lines) => Object.assign((r, s, variant, force) => {
   const [a, b] = isReversedTie(variant) ? [s, r] : [r, s]; // TAIL-TIES-2 (T6): the pair's direction, read off the stored variant
   const drawn = order ? endsOf(a, b, order[0], order[1]) : [a, b], ends = debt && secretOwes(drawn[1], drawn[0]) && !secretOwes(drawn[0], drawn[1]) ? [drawn[1], drawn[0]] : drawn; // BAR3-PEOPLE-2 (C35097): the pair's one debt (secretOwes, at the file's end)
   // NAMES-1 (the seventh chair's ruling CN2 of 2026-11-20): a card's later mention in one sentence is a pronoun, its
   // surname, its role or its given name, never its full name twice (data/people/personMention.js :: secondMentions)
-  const said = closureFor(isTieIndex(variant) ? variants[tieIndexOf(variant) % variants.length]
+  const said = closureFor(isTieIndex(variant) ? lines[tieIndexOf(variant) % lines.length]
     : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`), ends[0], ends[1])(...ends, force || TIE_FORCE_WORDS);
   return secondMentions(said, ends);
-}, { size: variants.length, lines: Object.freeze([...variants]) }); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
+}, { size: lines.length, head: variants.length, lines }))(Object.freeze([...variants, ...reserve])); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
 const TIE_FORCE_WORDS = Object.freeze({ body: 'garrison', members: 'soldiers', member: 'soldier' });
 /** A drawn tie index is a non-negative integer; anything else takes the pair-hash fallback. */
 const isTieIndex = variant => Number.isInteger(variant) && variant >= 0;
@@ -2205,6 +2205,11 @@ export const STRESS_ECONOMIC_EFFECTS = {
         twin: (r, s) => `Every friend ${r.name} wins is one ${s.name} lost, and the reverse. The two keep a polite distance and an exact tally.` },
       { line: (r, s) =>
         `${r.name} and ${s.name} are rivals for the same patron's favour. Each has spent the year trying to be first through the patron's door.`, colour: true },
+    ], null, false, [ // GOALS-1 (GR3 for ties): the reserve, reached only past the head
+      { line: (r, s) =>
+        `${r.name} and ${s.name} have made each other better by the contest, and each would admit it, though never to the other.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} were friends before they were rivals, and still are on the days the contest rests.`, colour: true },
     ]),
     tension: pairProse('t', [
       { line: (r, s) => `A decision coming next season will favour ${r.name} or ${s.name} heavily, and both of them know it.`, colour: true },
@@ -2217,6 +2222,11 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name} and ${s.name} will both present proposals at the next council session. Only one will be accepted.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) => `${r.name} lost the last contract to ${s.name} by a single vote, and has learned who cast it.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
+    ], null, false, [ // GOALS-1 (GR3 for ties): the reserve, reached only past the head
+      { line: (r, s) =>
+        `${s.name} has come out ahead three times running. ${r.name} has said nothing and started earlier each morning.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} needs ${s.name}'s help with something outside the contest, and has not yet found a way to ask.`, colour: true },
     ]),
     type: 'rival',
   },
@@ -2241,6 +2251,11 @@ export const STRESS_ECONOMIC_EFFECTS = {
         // BAR4-CLOSE-SWEEP (the chair's PD1, 2026-11-16): ITS TWIN where the pair shares no place (as desc 3, 4, 6 carry theirs), so the
         // pool keeps its eight lines for every pair; the twin names no successor (`successor` is the line's, never the twin's)
         twin: (r, s) => `${r.name} once told a full room that ${s.name} was the best pupil they had taught. ${r.name} has not said it since.` },
+    ], null, false, [ // GOALS-1 (GR3 for ties): the reserve, reached only past the head
+      { line: (r, s) =>
+        `${r.name} still gives ${s.name} advice now and then, unasked, and ${s.name} still hears out every word of it.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} taught ${s.name} patience, which ${r.name} never managed to learn.`, colour: true },
     ]),
     tension: pairProse('t', [
       { line: (r, s) =>
@@ -2254,6 +2269,11 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name} has asked ${s.name} for a loan. It is the first time a debt between teacher and student has run that way.`, colour: true },
       { line: (r, s) => `${s.name} has begun teaching ${r.name}'s methods as ${s.name}'s own.`, colour: true },
+    ], null, false, [ // GOALS-1 (GR3 for ties): the reserve, reached only past the head
+      { line: (r, s) =>
+        `${s.name} has stopped answering ${r.name}'s advice, though ${s.name} still follows most of it.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} means to take a pupil this year and has not yet asked ${r.name}'s blessing.`, colour: true },
     ]),
     type: 'mentor_student',
   },
@@ -2278,6 +2298,17 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${r.name} and ${s.name} sit on opposite sides of most questions and vote together on the few that touch their shared interests.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"], votes: 'both', // BAR3-PEOPLE (P5, C27108): a vote is cast only from a seat; its twin where the roster gives none
         twin: (r, s) => `${r.name} and ${s.name} take opposite sides of most questions and stand together on the few that touch their shared interests.` },
+    ], null, false, [ // GOALS-1 (GR3 for ties): the reserve, reached only past the head
+      { line: (r, s) =>
+        `${r.name} cannot finish what they have started without ${s.name}'s help, and ${s.name} cannot finish theirs without ${r.name}'s. Neither lets the other forget it.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} needs ${s.name}'s goodwill this year, and ${s.name} will need ${r.name}'s the next. Both of them have counted the years.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} hears of trouble early and ${s.name} hears of opportunity early, and each passes the word to the other a day before anyone else.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} know exactly what each would refuse the other, and so neither ever asks for it.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} can open doors for ${s.name} that ${s.name} could never open alone, and ${s.name} does the same for ${r.name} in other places. Each uses the other sparingly.`, colour: true },
     ]),
     tension: pairProse('t', [
       { line: (r, s) => `The balance between ${r.name} and ${s.name} has recently shifted. ${s.name} has noticed; ${r.name} has not, yet.`, colour: true },
@@ -2296,6 +2327,17 @@ export const STRESS_ECONOMIC_EFFECTS = {
       // opposite sides of most questions …", true everywhere), and the pair closure has no town facts to write a twin by: measured,
       // it silenced the description in 49 towns of the fresh 300 and moved the tie. The copy's keeper is no office.
       { line: (r, s) => `${s.name} has written down what ${r.name} owes and left a sealed copy with a third party.`, colour: true },
+    ], null, false, [ // GOALS-1 (GR3 for ties): the reserve, reached only past the head
+      { line: (r, s) =>
+        `${r.name} wants the arrangement with ${s.name} written down and witnessed. ${s.name} would rather keep it a matter of word.`, colour: true },
+      { line: (r, s) =>
+        `${r.name}'s year of need has come early, and ${s.name} has not yet decided how generous to be.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} learned of something last week and told ${s.name} a day late. ${s.name} has noticed the day.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} needs something this season that lies just past what ${r.name} has always refused.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} has asked ${s.name} for an introduction ${s.name} would rather keep to themselves.`, colour: true },
     ]),
     type: 'political',
   },
@@ -2317,6 +2359,11 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} signed a pact after their last quarrel cost them both. They keep to its terms exactly.`, colour: true },
       { line: (r, s) =>
         `${r.name} and ${s.name} are allies with separate interests. They meet to coordinate and leave by different doors.`, colour: true },
+    ], null, false, [ // GOALS-1 (GR3 for ties): the reserve, reached only past the head
+      { line: (r, s) =>
+        `${r.name} and ${s.name} want the same thing for the settlement, for different reasons, and keep their reasons to themselves.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} are allies on one matter only, agreed in plain terms, and never stretch it to anything else.`, colour: true },
     ]),
     tension: pairProse('t', [
       { line: (r, s) => `Someone else is working to pull ${r.name} and ${s.name} apart.`, colour: true },
@@ -2332,6 +2379,11 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} both want the same office, and the alliance cannot survive one of them winning it.`, colour: true },
       { line: (r, s) =>
         `${s.name} has asked ${r.name} to back a candidate ${r.name} distrusts. Refusing would cost the alliance its majority.`, needs: ["ruling body"], excludes: ["ruler: lord","ruler: occupier"] },
+    ], null, false, [ // GOALS-1 (GR3 for ties): the reserve, reached only past the head
+      { line: (r, s) =>
+        `${s.name} has asked ${r.name} for those reasons at last, and ${r.name} has not decided how much to say.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} has asked ${r.name} to stretch the alliance to a second matter. ${r.name} has not said yes or no.`, colour: true },
     ]),
     type: 'ally',
   },
@@ -2387,7 +2439,12 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) =>
         `${s.name} nursed ${r.name} through a winter fever when no one else would come. ${r.name} still owes the debt and still knows it.`, colour: true },
       { line: (r, s) => `${r.name} borrowed ${s.name}'s good name to win a post. ${s.name} has never asked for it back.`, colour: true },
-    ], null, true), // BAR3-PEOPLE-2 (C35097): debtor first; the pair's one debt
+    ], null, true, [ // BAR3-PEOPLE-2 (C35097): debtor first; the pair's one debt; GOALS-1 (GR3): the reserve, reached only past the head
+      { line: (r, s) =>
+        `${s.name} once spoke up for ${r.name} when it cost ${s.name} something to do it. ${r.name} has never been asked for anything in return.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} stood surety for ${r.name} once, and ${r.name} has kept every term since so that ${s.name} would never have to pay.`, colour: true },
+    ]),
     tension: pairProse('t', [
       { line: (r, s) => `${s.name} is about to call it in.`, colour: true },
       { line: (r, s) => `${r.name} has begun to act like someone who considers the debt paid. ${s.name} does not.`, colour: true },
@@ -2402,7 +2459,12 @@ export const STRESS_ECONOMIC_EFFECTS = {
       { line: (r, s) => `${r.name} has refused ${s.name} a small favour for the first time in years.`, colour: true },
       // BAR3-PEOPLE (P1, C31676 C44190): the creditor may hold the seat (a monarch, a governor): no ruin is claimed
       { line: (r, s) => `${s.name} has begun to count the debt ${r.name} owes among ${s.name}'s assets, and has had it written down before witnesses.`, colour: true },
-    ], null, true), // BAR3-PEOPLE-2 (C35097): debtor first; the pair's one debt
+    ], null, true, [ // BAR3-PEOPLE-2 (C35097): debtor first; the pair's one debt; GOALS-1 (GR3): the reserve, reached only past the head
+      { line: (r, s) =>
+        `${s.name} has asked ${r.name} to speak up for someone else, as ${s.name} once spoke up for ${r.name}.`, colour: true },
+      { line: (r, s) =>
+        `${s.name}'s surety for ${r.name} still stands, and ${s.name} would like to be released from it.`, colour: true },
+    ]),
     type: 'debtor_creditor',
   },
   family_complication: {
@@ -2712,6 +2774,41 @@ export function temperamentYieldsToSecret(card) {
  * @type {ReadonlySet<string | { text: string }>}
  */
 export const ECONOMY_HOOKS_TRUE_OF_ANY_HOLDER = Object.freeze(new Set(NPC_FACTION_LOYALTY.economy.filter((l) => /^One of their most reliable suppliers has gone dark\.|^Someone is buying up their debts\.|^A contract they signed in difficult times |^A supplier is providing goods of uncertain provenance\.|^They have quietly stopped paying a supplier |^A crate came to them by mistake,/.test(typeof l === 'string' ? l : l.text))));
+
+/**
+ * S9 (PAGE-6, 2026-11-20; docs/chair/2026-11-20/content/page/briefs/S9-POST.md, the tag table of the refused first cut
+ * f2957d5be re-read whole; vetoable by the owner, every tag listed with its reason in
+ * docs/chair/2026-11-20/content/page/S2-TAGS.md): THE ROLE-FREE ROWS THAT PRESUME AN OFFICE, A DUTY OR A TRADE THE HOLDER
+ * MAY NOT HAVE, tagged with the holder classes they fit (`domain/roles/roleClass.js :: ROLE_CLASS` values), keyed by the
+ * row's secret text beside the table, never on the row, which is copied onto the card (as
+ * `people/titleSecretsPresentations.js :: TITLE_LINE_DECLARATIONS` is). A row that fits every holder is untagged. `other`
+ * is in every tag: roleClass.js leaves a role it cannot class unjudged, and most trades and keepers are `other`. Read
+ * AFTER every card of the town is dealt (`npc/factionLeaderSecret.js :: settleMisfitSecrets`): the draw is unchanged.
+ * At the file's end so no cited line moves (the tag table only).
+ * @type {Readonly<Record<string, readonly string[]>>}
+ */
+export const CRIMINAL_SECRET_HOLDER_TAGS = Object.freeze({
+  // the holder is supposed to serve merchants: an office of the market, or the watch that keeps it
+  "Runs a protection scheme targeting the very merchants they're supposed to serve": Object.freeze(['office', 'military', 'other']),
+  // the holder inspects: an office
+  'Has been falsifying inspection records for a fee': Object.freeze(['office', 'other']),
+  // the holder keeps a business
+  'Their legitimate business is a front for moving contraband': Object.freeze(['trade', 'merchant', 'criminal', 'other']),
+  // the holder holds an appointment
+  'Their appointment was secured through forged credentials': Object.freeze(['office', 'clergy', 'military', 'other']),
+  // the holder holds an authority of the town to hand over
+  'Has agreed to hand over authority to an external power in exchange for personal safety': Object.freeze(['office', 'noble', 'military', 'clergy', 'other']),
+  // the holder talks neighbours into ventures: a dealer in ventures
+  'Has been quietly betting against the ventures they talk their neighbours into, and profiting when they fail': Object.freeze(['merchant', 'trade', 'noble', 'other']),
+  // the holder sells goods
+  'The goods they sell as locally produced are sourced from somewhere with exploitative labour practices': Object.freeze(['trade', 'merchant', 'other']),
+  // the holder makes or sells a product
+  'Has been paying a health official to suppress a finding about their product': Object.freeze(['trade', 'merchant', 'other']),
+  // the holder has a competitor in a trade or a racket
+  'Has information about a competitor that would ruin them, obtained through clearly illegal means': Object.freeze(['trade', 'merchant', 'criminal', 'other']),
+  // the holder has a business partner
+  "Their business partner died of natural causes that weren't entirely natural": Object.freeze(['trade', 'merchant', 'criminal', 'other']),
+});
 
 /**
  * THE THEME OF EACH `NPC_FACTION_LOYALTY` LINE, IN ITS ONE HOME (BUILD-THEMES, DEPTH-3, 2026-11-20; the chair's order

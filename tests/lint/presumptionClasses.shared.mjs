@@ -410,6 +410,7 @@ export const NOT_PAGE = Object.freeze([
   ['src/components/HomeHero.jsx', 'the home screen'],
   ['src/components/HowToUse.jsx', 'the how-to screen'],
   ['src/components/ConfigurationPanel.jsx', 'the generation form: configuration chrome'],
+  ['src/data/people/goalSecretRefusals.js', "the goals lane's closed list of venal secrets: a matcher, never printed (its texts copy live pool lines, which this walker reads where they stand); admitted as presumedThings' ARM1_INSTRUMENTS, parity arm '(i) PARITY' of tests/data/goalSecretRefusals.test.js; the chair's ruling of 2026-11-20 16:04 UTC (GOALS-3, R2)"],
 ]);
 export const notPage = (rel) => NOT_PAGE.some(([p]) => (p.endsWith('/') ? rel.startsWith(p) : rel === p));
 export const ANNEX_DESKS = Object.freeze({ defense: 'DOSSIER_STATE_PROSE_DEFENSE', economy: 'DOSSIER_STATE_PROSE_ECONOMY', general: 'DOSSIER_STATE_PROSE_GENERAL', power: 'DOSSIER_STATE_PROSE_POWER', stressors: 'DOSSIER_STATE_PROSE_STRESSORS', warFaith: 'DOSSIER_STATE_PROSE_WAR_FAITH' });
