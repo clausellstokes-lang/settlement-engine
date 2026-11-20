@@ -49,6 +49,33 @@ no shared page draws it, every reference following (`simulationTrace[].ts` holes
 towns, both engines. V10-5 MED WITH B: a criminal house born without `catalogId`, renamed by name alone and hidden whole,
 leaves its birth name in its own chain and `situationDesc`; the cure by POSITIVE ACCOUNT (kept only where a served house
 accounts; a hideable catalogue name no served house bears withheld), measured on born towns before it is built.
+01:08 UTC (the chair's correction of its 00:11 rule): the harness always sets harmless `GIT_` variables; THE CHECK is
+`env | grep -E '^GIT_(DIR|WORK_TREE|INDEX_FILE|COMMON_DIR|OBJECT_DIRECTORY|PREFIX|NAMESPACE)='` printing nothing (this
+seat's builders strip all eleven harness variables besides, which is stricter). The rest of the rule stands.
+01:15 UTC (the seventh chair): RULING VR25, THE IMPORT: the seat's recommendation ACCEPTED: the import withholds all 80
+withhold-always paths as the page does; the importer's SAVE re-derives the ten that mis-draw from the SERVED document with
+the engine's own derivers (as publicProse is recomposed); R2 first proves, red first, a deriver reading served fields only
+for each of the ten; a field with none reads as an ordinary "not known" on the importer's page (no fallback number, no
+": Name ·" row, no default 50) or comes back to the chair field by field; sending any on import stays refused. "R1
+8943ce807": merge origin/lane/veil-r1-2026-11-20 at 8943ce807 with `--no-ff` (three commits; 147 rows; arm F; its
+hand-back `docs/chair/2026-11-20/veil/r1/VEIL-R1-HANDBACK.md`, read section 9 first: it supersedes 2 to 4); accepted as
+the registry's FIRST STATE with RULING VR26, THE INVERSION TEST (binds R3 and R6): every row sent as stored ("diffuse") is
+tested on born towns under each veil: it either CANNOT be re-derived from the served document (the row names the
+missing input) or EQUALS its re-derivation; a difference re-classes the row under VR19; an arm of R6's born test with the
+engine's own derivers; expected to move `economy.prosperity` and its tile, `history.founding.overcoming`,
+`defence.scores.internal`: do not build on those rows as settled. RULING VR27: no internal helper executable by a
+non-owner role: 212 revokes each from anon and authenticated by name, a walker reads the catalogue; helpers inside the
+data veil are this seat's. VR17's seat withdrew its page-model key; it builds on evidence in the data (a grouping's
+derived block draws only where the page model still holds the arrays its remover deletes: `safetyProfile.criminalInstitutions`,
+`crimeTypes`), touching `galleryVeil.js` and `DefenseTab.jsx` only; R2 to R5 withholding those arrays on other grounds
+is intended.
+VR27 EXECUTED (01:20 UTC, x212 of bedd5a392, `out/v19/vr27-privs-x212-at-bedd5a392.txt`): no `_gallery_veil*` or
+name-search helper is executable by anon or authenticated; nine `_gallery_*` helpers are, by the local scaffold's default
+grant (production's grants unread): `_gallery_public_tile_rows()` (security definer), `_gallery_chronicle_entry`,
+`_gallery_chronicle_json`, `_gallery_map_backdrop`, `_gallery_apply_member_overrides` (DOORS's by SV7) and four pure
+functions on the data path, `_gallery_npc_key`, `_gallery_dm_full_json`, `_gallery_sanitize_public_json`,
+`_gallery_world_snapshot_is_safe`, which this seat takes (212 revokes each by name), placed with R2 unless the chair
+places them with DOORS.
 
 ## 1. The bytes (kept current)
 
@@ -86,7 +113,7 @@ THE RECEIPTS (the chair, 00:26 UTC: every figure this file quotes has its output
 | 2. B, C, D (`briefs/SUB-BRIEF-BCD.md`) | IN HAND |
 | 2b. VR20 | LEFT THIS LIST (the chair's SV7, 00:53 UTC): the doors beside `data` go to the seat VEIL-DOORS (`lane/veil-doors-2026-11-20`); this seat's partial measure (stopped at the chair's word) is `out/v19/VR20-MEASURE-PARTIAL.md`, sent to the chair in one line. THE SPLIT OF 212: this seat owns everything inside the data veil (every `_gallery_veil*` helper, the name search, the read functions' bodies); DOORS owns `_gallery_public_tile_rows` and its lists, the chronicle's helpers and veil, `get_gallery_map`'s member expression, and in `get_gallery_dossier` ONLY the `chronicle` expression and the tile columns (its helpers in one new section at the END of 212); merged here on "DOORS <commit>" |
 | 2c. V10-6 (VR21, order and gaps) and V10-5 (no-catalogId birth names), JOINED B (00:53 UTC) | relayed to the B/C/D builder at 00:55 UTC |
-| 3. R2 under VR16 (after R1 is merged) | waiting on "R1 <commit>". VR16 (2), THE IMPORT, MEASURED (a read-only seat, `out/v19/R2-IMPORT-MEASURE.md`, the probe in `measure/r2imp/`; 24 born towns, all 80 withhold-always paths one at a time through the tree's own import and save, owner page rendered on 8 + 6 towns): nothing throws, no NaN, no "undefined" text; but 10 fields are outcome (c), a wrong value or sentence or kernel input on the importer's own record (severity band, readiness score, the compound figures, `compound.raw`+`militaryEffective`, `safetyProfile.compound`, `safetyRatio`, `foodSecurity.storageMonths`, legitimacy breakdown, `spatialLayout.quarters`, the crisis cast's role/reason); TAKEN TO THE CHAIR before any build (VR16 (2)) |
+| 3. R2 under VR16 (after R1 is merged) | "R1 8943ce807" RECEIVED 01:15 UTC, NOT YET MERGED (held: the seat's mark; B/C/D first, it exists only in this container). VR25 binds the import (section 0). VR16 (2), THE IMPORT, MEASURED (a read-only seat, `out/v19/R2-IMPORT-MEASURE.md`, the probe in `measure/r2imp/`; 24 born towns, all 80 withhold-always paths one at a time through the tree's own import and save, owner page rendered on 8 + 6 towns): nothing throws, no NaN, no "undefined" text; but 10 fields are outcome (c), a wrong value or sentence or kernel input on the importer's own record (severity band, readiness score, the compound figures, `compound.raw`+`militaryEffective`, `safetyProfile.compound`, `safetyRatio`, `foodSecurity.storageMonths`, legitimacy breakdown, `spatialLayout.quarters`, the crisis cast's role/reason); TAKEN TO THE CHAIR before any build (VR16 (2)) |
 | 4. R3, R4, R5, R6 | not started |
 | 5. R7 (VR15 (b)) | not started |
 | 6. VR17 merged | waiting on "VR17 <commit>" |
