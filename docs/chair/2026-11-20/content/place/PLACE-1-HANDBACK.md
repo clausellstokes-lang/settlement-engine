@@ -1,6 +1,6 @@
 # PLACE-1 — hand-back (kept current at every push)
 
-Last written: 2026-11-20T20:10Z (PLACE-1 HANDS OVER to PLACE-2 at this commit) Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
+Last written: 2026-11-20T20:14Z (PLACE-1 HANDS OVER to PLACE-2 at this commit) Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
 
 ## How a successor resumes
 1. Read the prompt, then this file, then the briefs in this directory (`BRIEF-*.md`); nothing else is needed.
@@ -55,6 +55,8 @@ Builders build, I integrate: one builder a field, red first; I read its diff onc
 - 18:3x UTC: "PLACE-LINES safetyDesc-village 4ce037536" sent (on the -wip branch; `safetyDesc-VILLAGE-LINES.md`: none +3, opening +3, TINY +6, CORNERS +5; on 150 every size ≤ 22, town 22 and metro 21 at the edge on the watch/garrison pools; the classes walker: Travelers row `excludes: ['crisis: threat']`, the three openings declare threat). WAITING on the chair's read; then the same builder (its worktree `.claude/worktrees/agent-af66479d4fcd3f55e`, branch place-1/safetyDesc-build) cures, and PLACE-1 merges.
 - 18:36 UTC: the 17 village-lines rows APPROVED with MIXED_OPENING 8 "It is safer here by day than by night." and 10 "Most trouble here keeps to the edges and the late hours."; the walker's two declarations accepted; TWO more rows each for MIXED_FORCE.watch and .garrison, built without waiting (read at "PLACE safetyDesc"; a veto cured on top). The builder is curing now.
 - 19:59 UTC: EVERY LANE, before each "PLACE <field> <commit>": ONE `npm run build` at the tip, then `VERIFY_DIST=1` on `tests/build/vendorPdfLazy.test.js` and `tests/build/generationWorkerLazy.test.js` through the mutex; first paint's three figures and the worker's in the message beside the line's (1,177,668 raw, 374,676 gzip, 314,472 Brotli; worker 2,617,934 at 8196e5712); a rise is cured on the lane: an eager file declares an atom BY NAME; the code that answers it is imported only on the lazy side.
+
+- 20:13 UTC: EVERY LANE, BEFORE EACH LANDING REQUEST: ONE `npm run test:ratchet` at the tip with the line's tip merged in (exclusive mutex; to a log, never through a pipe), its verdict's rows read BY NAME against `docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv` on `origin/lane/chair-2026-11-08`: a row not on the list is a stored figure or golden the lane's own wording moved (named with its cause) or a real red, cured on the lane before the request. PLACE-2's, before the place lane asks to land.
 
 ## FOR PLACE-2 (what is open, in order)
 1. entrepotNote: a FRESH builder from `BRIEF-CURE-entrepotNote.md` (the build is `lane/place-1-entrepotnote-2026-11-20-wip` at 17bc8d656); then the merge recipe above; the {resource} fills list goes to the chair BEFORE the merge.
