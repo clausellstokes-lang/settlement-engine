@@ -284,4 +284,64 @@ function main() {
   console.log(out.slice(0, 4).join('\n'));
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();
+/**
+ * TRAD-5 unit 13 (2026-11-20): TWO RITES OF ONE PLACE THAT HONOUR THE SAME THING. Over the set each audience is shown
+ * (shownFor), the places where two or more rites share a coreMotif ELEMENT, and of those the places where two of them print
+ * the SAME gloss (the S1 sentence-part, read from the leaf's own gloss slot: describeWithSlots); the same where two share
+ * element AND act. `moved`: the rites a per-place gloss rotation would re-word (a later rite of a held element whose
+ * printed gloss an earlier rite of that element in the set already printed); `exhausted`: of those, the ones whose
+ * element's gloss pool holds no wording the earlier rites have not printed; `later`: every rite of the set after the first of
+ * its element (what a "too" gloss for a held element would re-word, whatever its gloss).
+ */
+export function sameSubject(towns, audience) {
+  const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+  const by = new Map(TIERS.map((k) => [k, { n: 0, two: 0, el: 0, elGloss: 0, ea: 0, eaGloss: 0, moved: 0, exhausted: 0, later: 0, rites: 0 }]));
+  const els = new Map(); const samples = [];
+  for (const t of towns) {
+    const o = by.get(t.tier) || by.set(t.tier, { n: 0, two: 0, el: 0, elGloss: 0, ea: 0, eaGloss: 0, moved: 0, exhausted: 0, later: 0, rites: 0 }).get(t.tier);
+    o.n++;
+    const rites = [];
+    for (const { rec } of shownFor(t, audience)) {
+      if (!rec) continue;
+      const r = describeWithSlots(rec, t, audience);
+      const g = r ? r.slots.find((s) => s.kind === 'gloss') : null;
+      rites.push({ name: String(rec.name ?? ''), el: String(rec.coreMotif?.element ?? ''), act: String(rec.coreMotif?.act ?? ''), gloss: g ? g.printed : null });
+    }
+    o.rites += rites.length; if (rites.length >= 2) o.two++;
+    const group = (key) => { const m = new Map(); for (const x of rites) { const k = key(x); m.set(k, [...(m.get(k) || []), x]); } return [...m.values()].filter((v) => v.length >= 2); };
+    const sameGloss = (gs) => gs.some((v) => { const p = v.map((x) => x.gloss).filter(Boolean); return new Set(p).size < p.length; });
+    const eg = group((x) => x.el); const ag = group((x) => `${x.el}|${x.act}`);
+    if (eg.length) { o.el++; for (const v of eg) els.set(v[0].el, (els.get(v[0].el) || 0) + 1); }
+    if (eg.length && sameGloss(eg)) { o.elGloss++; if (samples.length < 8) { const v = eg.find((w) => sameGloss([w])); samples.push(`  ${t.name} (${t.tier}) [${v[0].el}]: ${v.map((x) => `${x.name} "${x.gloss}"`).join(' | ')}`); } }
+    if (ag.length) o.ea++;
+    if (ag.length && sameGloss(ag)) o.eaGloss++;
+    // the cure's reach: in set order, a later rite of a held element whose gloss is already printed there
+    const seen = new Map();
+    for (const x of rites) {
+      const s = seen.get(x.el) || new Set(); if (seen.has(x.el)) o.later++;
+      if (x.gloss && s.has(x.gloss)) { o.moved++; const pool = (ELEMENT_GLOSS[x.el] || []).filter((l) => !isTwin(l)).map((l) => String(lineText(l) ?? '')); if (pool.every((l) => s.has(l))) o.exhausted++; }
+      if (x.gloss) s.add(x.gloss); seen.set(x.el, s);
+    }
+  }
+  const pc = (a, n) => `${String(a).padStart(3)}/${n} (${n ? (100 * a / n).toFixed(1) : '0.0'}%)`;
+  const out = [`## audience=${audience} — places=${towns.length}; set: shownFor (descriptionSetOf ${audience === 'owner' ? "owner: shownTraditionsOf" : 'reader: the drawn set, rows matched to rites'})`,
+    'size        rites  2+rites  SAME ELEMENT       +same gloss        SAME ELEMENT+ACT   +same gloss        cure moves (exhausted)  later rites of a held element'];
+  const all = { n: 0, two: 0, el: 0, elGloss: 0, ea: 0, eaGloss: 0, moved: 0, exhausted: 0, later: 0, rites: 0 };
+  for (const [k, o] of by) {
+    if (!o.n) continue; for (const f of Object.keys(all)) all[f] += o[f];
+    out.push(`${k.padEnd(11)} ${String(o.rites).padStart(5)}  ${String(o.two).padStart(7)}  ${pc(o.el, o.n)}  ${pc(o.elGloss, o.n)}  ${pc(o.ea, o.n)}  ${pc(o.eaGloss, o.n)}  ${o.moved} (${o.exhausted})  ${o.later}`);
+  }
+  const o = all; out.push(`${'ALL'.padEnd(11)} ${String(o.rites).padStart(5)}  ${String(o.two).padStart(7)}  ${pc(o.el, o.n)}  ${pc(o.elGloss, o.n)}  ${pc(o.ea, o.n)}  ${pc(o.eaGloss, o.n)}  ${o.moved} (${o.exhausted})  ${o.later}  of ${o.rites} rites`);
+  out.push(`elements repeated (place-element pairs): ${[...els].sort((a, b) => b[1] - a[1]).map(([e, n]) => `${e} ${n}`).join(', ') || 'none'}`);
+  out.push('same gloss, first samples:', ...samples);
+  return out;
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  // TRAD-5 unit 13: `node measure2.mjs <pool.ndjson> <out.txt> same` writes the same-subject count, owner and reader
+  if (process.argv[4] === 'same') {
+    const towns = readFileSync(process.argv[2], 'utf8').trim().split('\n').map(JSON.parse);
+    writeFileSync(process.argv[3], `${[...sameSubject(towns, 'owner'), '', ...sameSubject(towns, 'reader')].join('\n')}\n`);
+    console.log(`same-subject: towns=${towns.length} -> ${process.argv[3]}`);
+  } else main();
+}
