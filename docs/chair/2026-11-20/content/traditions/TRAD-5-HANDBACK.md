@@ -62,6 +62,11 @@ chair's word "THE LANE IS YOURS at a7473f47c" (18:44 UTC). A successor needs THI
 19. PUSH: only `refs/heads/lane/*` (this branch and its builders' `-wip`); plain pushes with the hooks; never
     `--no-verify`, a force push, master, or A PULL REQUEST; `git ls-remote` and the commits' author read before every push;
     never a push with nothing to send; no hosted database, credential, `supabase` or deploy.
+21. FIRST PAINT (the chair, 19:59 UTC, every lane): with "TRAD <commit>", ONE `npm run build` at the tip, then
+    `VERIFY_DIST=1` on `tests/build/vendorPdfLazy.test.js` and `tests/build/generationWorkerLazy.test.js` through the mutex,
+    and first paint's raw, gzip and Brotli figures and the worker's, at the lane's BASE by the same build too (the difference
+    is the lane's). A rise is cured on the lane: an eager file declares an atom BY NAME; the code that answers it is imported
+    only on the lazy side; THE TRADITIONS' WORDINGS ARE NEVER IMPORTED BY AN EAGER MODULE.
 20. NOT THIS LANE'S FILES: `genesis.js`, `traditionCorpus.js`, `publicSafe.js`, `galleryVeil.js`, `cardVeil.js`,
     `supabase/`, `tests/security/` beyond the traditions' own born test, `drawDeclared.js`, `factVocabulary.js` (read only).
 
@@ -95,6 +100,21 @@ EXECUTED by TRAD-5: the confinement (`born.mjs`, base `441ec3b32` archive, sha `
 equal to `a7473f47c`) and at `37b3f9dcd` (code equal to the final tip): 1,245 documents cmp-identical each time. The gates
 in §2. Unit 11's and 12's measures are the BUILDERS' (executed by them, receipts in their commits), not re-run by TRAD-5.
 
+### First paint (ruling 21), EXECUTED by TRAD-5 at `a89c29f74` and at the base `441ec3b32` (an archive), one build each,
+read as `vendorPdfLazy.test.js :: entryStaticClosure` reads it (scratch tool `fp.mjs`, a copy of that reading)
+| tree | raw | gzip -9 | Brotli q11 | worker |
+|---|---|---|---|---|
+| base `441ec3b32` | 1,176,468 | 374,374 | 314,336 | 2,584,113 |
+| tip `a89c29f74` | 1,177,013 | 374,578 | 314,444 | 2,584,113 |
+| the lane | +545 | +204 | +108 | 0 |
+`VERIFY_DIST=1` on the two files: 5 failed / 61 passed at the tip AND the same 5 at the base (the closure's raw, gzip and
+Brotli budgets, the worker ceiling, "the engine chunk ... remains large"): the base's own size reds (TRAD-3's ruling 12,
+"five size ceilings"), not this lane's. WHERE THE +545 IS: of the 8 source files the lane changed since the base, ONE is in
+vite's eager set (`vite.config.js :: EAGER_FIRST_PAINT_MODULES`): `src/kernel/proseHash.js`, the cherry-picked
+`pickVariantMixed` (`e32c9b27e` = the line's `bd42d63c7`): the kernel chunk +231 (two more `Math.imul`); engine-core +269 and
+index +45 read as minified-name ripples (PLAUSIBLE, not proven). The traditions' wordings are in NO first-paint chunk (probes
+"shared among", "honours the tide": 0). Nothing cured here: the kernel's bytes are the line's already.
+
 ## 5. HOUSES THE POOLS NEED (for the security reader at the join)
 `out-trad5/HOUSES.txt` (by `tools/houses.mjs`, `isHideableHouse` CALLED): 57 houses, 0 hideable (catalogue at every tier,
 and 0 of 4,000 born in the calm pool). Atoms that read a house: `institution: smith`, `market`; atoms reading no house:
@@ -105,3 +125,5 @@ criminal income only to leave them out of the reader's text.
 - 2026-11-20 19:48 UTC — the lane taken at `a7473f47c`; unit 10's gates re-run and the census by its door (`24a01c130`); unit 11 merged
   (`37b3f9dcd`); unit 12 merged (`96d4c7b22`); the census by its door again (`624e5a9ba`). NEXT: `tests/lint` whole at the
   final commit, then "TRAD <commit>".
+- 2026-11-20 20:10 UTC — final gates at `a89c29f74`: `tests/lint` WHOLE 221/221, 3307/3307; module files 262/262; typechecks 0; eslint 0.
+  First paint measured (§4). Ruling 21 recorded.
