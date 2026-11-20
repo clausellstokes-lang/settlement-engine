@@ -493,6 +493,29 @@ parts of the whole check (at the close).
   not features. ALSO SAID (09:27): A SIZE RISE IS THE OWNER'S TO ACCEPT (rule 33): at the close a buy-back pass first,
   then the remaining rise, tallied by landing, inside the one sign-off.
 
+- **09:36 UTC, 2026-11-20, THE OWNER (verbatim):** "What are your solutions for the following? Fortune follows size:
+  no poor city, no respected village. • In every city about 10 of 60 people share a goal sentence with someone else.
+  • A thorp has one named person. • At untouched settings, three towns in four are run by a council or mayor."
+  ANSWERED THE SAME TURN (09:41), EACH FROM ITS CAUSE READ IN THE CODE (the causes and one new count are in
+  `measures/holistic/README.md`): (1) FORTUNE AND STANDING JUDGED AGAINST THE PLACE'S OWN SIZE: fortune is a sum in
+  which size itself adds points and which saturates at the cap for large places; standing takes that label at face
+  value although the same function already scales defence and food by tier ("NORMAL, not governance failure"):
+  fortune becomes "how this place does for a place like it", from its road, threats, trades, food and troubles;
+  standing follows; a NEW BIRTH RULE, DARK, with before and after counts, for the owner's signature. (2) NO
+  REPEATED WORDING INSIDE ONE TOWN, AND ABOUT 20 TO 30 NEW WORDINGS: counted: of 57 kinds of goal only 3 are too thin
+  for their busiest town (RANK/enter, TIES/rival_enemy, TIES/ally); a draw without replacement removes about nine
+  repeats in ten; the ties' lines the same way. (3) A THORP ALWAYS HOLDS AT LEAST TWO NAMED PEOPLE AND ONE TIE (a
+  pair is the smallest story), its other households one-line presences from the places it already holds, no cards,
+  no secrets; hamlets 3 to 5: THE BAND IS THE OWNER'S OWN HISTORICAL SCALE (1 to 2; a draft under signature): the
+  owner's yes. (4) THE MAIN FIX IS ALREADY ORDERED AND BEING BUILT (the second train of who-rules: the leading house
+  by weight and circumstance): it reports this figure before and after; ONE ADDITION: a town's CULTURE as one of
+  the registered circumstances (each culture's card already says how it is governed; the choice never reads it).
+  THE CHAIR'S RECOMMENDATION AS SAID: (2) before the deploy if the share veil is still running when the
+  verb-agreement seat hands back (the same files: after it, never beside it); (1), (3) and the culture addition as
+  measured proposals right after the deploy. THE CHAIR ENDED WITH A QUESTION ("Want me to proceed that way?"):
+  UNDER THE OWNER'S STANDING DEFERRAL THE CHAIR PROCEEDS ON ITS RECOMMENDATION UNLESS VETOED: the goals seat's
+  prompt is written now and seated at NAMES-3's hand-back.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
