@@ -1,4 +1,4 @@
-# FORTUNE-4 hand-back (kept current at every push; last written 2026-11-20 20:19:13 UTC by `date -u`)
+# FORTUNE-4 hand-back (kept current at every push; last written 2026-11-20 21:14:31 UTC by `date -u`)
 
 For a successor: this file, `FORTUNE-3-HANDBACK.md` section 0 (the chair's rulings to 20:03, verbatim), `LIGHTING-WORKLIST.md`
 and the open briefs (`briefs/COMMON.md`, `U5-BUILD.md`, `SAVED-TOWN.md`, `U6-FIRSTPAINT.md`). The chair is
@@ -20,9 +20,9 @@ session_019yED1SUxGVHyjQnoqoFvQ8 (send_message, Claude Code Remote MCP server). 
 
 | unit | state | commits |
 |---|---|---|
-| SAVED-TOWN (fortune U7) | BRIEFED (`briefs/SAVED-TOWN.md`, the twin of SAVED-SEAT); builder seated | — |
-| U6 first paint (probe C) | BRIEFED (`briefs/U6-FIRSTPAINT.md`; measure `measures/firstpaint/FIRSTPAINT-CHAIN.md`); builder seated | — |
-| U5a the merits | BUILDER OUT (FORTUNE-3's) | 6b00d35a2 (measure) |
+| SAVED-TOWN (fortune U7) | MERGED: 9/9 green on the merged tree; arm 1's plant re-run by me (reds '1. NO MIGRATION' and '4a'); no FINDING (the legacy edge reads 1; the regen writes identical bytes with and without the form's marker); `regenSection` has no power/economy branch (pinned as no-ops; the re-derive is the step that re-runs them); the campaign re-bind NOT driven | 3af3b51cb, merge c47abf382 |
+| U6 first paint (probe C) | MERGED: red re-run by me on the base build 4 failed / 20 passed (the four U6 arms); figures = probe C to the byte (raw 1,179,219 -> 1,177,726, gzip -532, Brotli -228, worker unchanged); cure: layout only. ITS vite.config.js LINES FOR THE JOIN: the last row of `ENGINE_SHARED_DOMAIN_EXCISIONS` (`'/src/domain/fortune/fortuneLaw.js'`, after `powerSentenceName.js`, with its comment) and `if (id.includes('/src/domain/fortune/fortuneLaw.js')) return 'fortune-law';` after the `custom-charset` rule, before `isEngineSharedDomain` | 5d9306e28 + 00dcfd3d7, merge 1abbd5ae0; lighting 823360aed |
+| U5a the merits | RETURNED UNREAD at d70401690 (FORTUNE-3's builder: ONE merit left, the weathered catastrophe; edited U5s's `fortuneLawSafety.test.js` outside its manifest; 2 `observedShapeReaders` reds needing a row in `check-observed-shape-readers.mjs`, outside its manifest). HELD by the chair's 20:49 order for the BANDS measure (`measures/bands/BANDS.md`, EXECUTED, visitor 150 a size): Endorsed is not empty at any size lit, merits or none (B 2 to 13%; C 2.7 to 14.7%); my recommendation sent 21:1x: merge under the rulings; LASTING (age >= the size's p90; `history.age` survives `toPublicSafe`) a separate ruling. AWAITING THE CHAIR'S WORD before the diff is read | 6b00d35a2, 5b73b07ca, 71ec21019, d70401690 |
 | U5b render reason | after U5a and the sentences | — |
 
 ## 2. Confinement (the chair, 19:19 and 20:17 UTC)
