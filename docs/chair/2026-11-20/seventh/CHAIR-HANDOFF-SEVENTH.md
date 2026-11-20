@@ -1039,3 +1039,20 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   hook measured directly and given its own budget, and (3) the cap, land now as point 76 ("GIT-DOOR-3"); (2b) the
   class from a six-shard measuring run in a worktree of its own (about 100 minutes) follows as point 77
   ("GIT-DOOR-4"), or one line that the class is empty.
+- 03:09 UTC · **REVIEW-VEIL-11: A PUBLIC MAP'S WORLD COLUMNS (the census's rows 18 and 21), measured at cca49cb8d (its
+  message of 03:08 UTC; `worldcol.probe.jsx`): NO VEIL LEAK FOUND; ONE FUNCTIONAL FAULT OUTSIDE THE VEIL.** The only
+  free text a world snapshot copies from the pulse is the chronicle's headline and summary, and the brokerage
+  producer writes a house's name there with no filter on an illegal house (91 born towns: a binding in 34, an
+  illegal one in 13); BUT it cannot be stored: the serializer's section key is `chronicle` and migration 089's guard
+  (unchanged through 210) refuses any key matching `.*chronicle.*` (executed: the guard false; the store raises
+  "forbidden private key"). The storable sections carry settlement ids, names and deities, no house or power field.
+  NOT MEASURED: a public channel's `goods[].label`. **THE FAULT (plausible: the reader's reading and that execution;
+  the chair read `src/components/gallery/MapShareEditor.jsx` line 283 on master and on the line: it sends
+  `chronicle: enabledSections.has('chronicle')`):** the share editor turns all five sections on by default, so
+  sharing a campaign map WITH ITS WORLD would fail at `publish_map` ("World snapshot contains a forbidden private
+  key"). The guard protects the veil here by accident. TO VEIL-DOORS-2 as its item 7: an arm that pins the refusal;
+  the goods' labels measured; the fault CONFIRMED BY EXECUTION through the client's own path. **RULING VR40, IF IT
+  IS CONFIRMED (vetoable):** for the deploy the editor does not send a section the server refuses (`chronicle`
+  leaves the defaults, its control shown as not shareable yet); a born test holds "publishing with the editor's
+  defaults succeeds"; the guard is not loosened: a shared world chronicle must first pass the veil, after the
+  deploy. If master's code fails the same way it is failing on production today: the owner is told at once.
