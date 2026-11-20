@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "28d85cbd5c29454e89720994348f56b2d32e1f09",
-  "measuredBy": "B4 (SEAT-1 train 1 U4, lane/seat-2026-11-20-u4)",
+  "measuredAtSha": "4603d8c80faf30d07a8b825f226d3bb9ebdc8a0e",
+  "measuredBy": "SEAT-6",
   "date": "2026-11-20",
-  "note": "U4 THE CONTEST (28d85cbd5): the new DRAFT table src/domain/seat/seatCircumstances.js#SEAT_CIRCUMSTANCE_TUNING (CS5, every factor 1, the dial dark) enters the inventory; no other table, leaf, digest or dependent moved, measured by the walker before this refreeze",
+  "note": "U5-CURE (cd14df0dd): SEAT_CIRCUMSTANCE_TUNING gains the dependent applyWorldPulseFactionRoster.js (the roster government_change hands in the seat circumstances); no value moves",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1871,6 +1871,7 @@
       },
       "dependents": [
         "src/domain/rulingPowerCoup.js",
+        "src/domain/worldPulse/applyWorldPulseFactionRoster.js",
         "src/domain/worldPulse/stressorDynamics.js"
       ],
       "namedDependents": [
