@@ -358,3 +358,7 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   member and the column walker; it owns those functions in 212 and a new section at its end, VEIL-19 owns the data
   veil; it proposes its mechanisms to the chair before building; VEIL-19 merges "DOORS <commit>". This replaces the
   placement of VR20 on VEIL-19's own list.
+- 00:55 UTC · **VEIL-DOORS SEATED** (created 00:55:47 UTC): session_019yED1QUpmwFVcKztbP2Riv, `lane/veil-doors-2026-11-20` from
+  bedd5a392 (ruling SV7). SEVEN SEATS RUN: VEIL-19, VEIL-R1, VEIL-VR17, VEIL-DOORS, REVIEW-VEIL-10, CI-FIT, GIT-DOOR.
+  The rulings VR21 to VR24 went to the reader; V10-6 and V10-5 to VEIL-19 with item B, and the doors taken off its
+  list; V10-2 to VEIL-VR17 as its next unit (the switch's two files are its own for that unit).
