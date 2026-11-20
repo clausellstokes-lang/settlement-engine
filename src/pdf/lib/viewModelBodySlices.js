@@ -39,6 +39,7 @@ export const exploitName = (c) =>
 // leaf every print site of a chain's name reads; the import sits beside its one reader.
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
 import { pageSaysEntrepot } from '../../domain/display/entrepotShown.js';
+import { safetyShownOf } from '../../domain/display/safetyShown.js'; // PAGE-1 SAFETY: the label's one reader
 import { complexityLabelShown } from '../../domain/display/labelBands.js'; // SEAM-PDF item 3: the tab's label (the chapter and the journal read it)
 
 export function economicsSlice(active) {
@@ -197,7 +198,7 @@ export function defenseSlice(active) {
     guardAssessment:       deriveGuardAssessment(s),
     institutions:          dp.institutions || {},
     armedForces,
-    safetyLabel:           sp.safetyLabel || null,
+    safetyLabel:           safetyShownOf(s).label,
     safetyRatio:           sp.safetyRatio,
     criminalInstitutions:  sp.criminalInstitutions || [],
     crimeTypes:            sp.crimeTypes || [],

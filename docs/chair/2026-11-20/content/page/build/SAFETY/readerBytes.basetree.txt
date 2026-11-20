@@ -1,0 +1,13 @@
+[gate-tail] start:  11:50:17 up 55 min,  0 user,  load average: 13.02, 12.45, 8.88 · cores: 4
+
+ RUN  v4.1.8 /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/basetree
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  11:50:18
+   Duration  275.23s (transform 13.88s, setup 186ms, import 19.64s, tests 254.07s, environment 1.10s)
+
+[gate-tail] end:  11:54:54 up  1:00,  0 user,  load average: 15.58, 14.43, 10.66
+[gate-tail] full log: /tmp/gate-tail.18350.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

@@ -1,0 +1,42 @@
+
+[brandDerivatives] ARM C compared DIMENSIONS, not bytes: running linux/x64 sharp 0.35.3 vips 8.18.3 against a record minted on darwin/arm64 sharp 0.35.3 vips 8.18.3 (differs on platform, arch). 4/10 derivatives were byte-identical anyway; all 10 were decoded and compared by pixel size. Arms A and B bound every shipped byte and every input on this platform.
+ ❯ tests/generators/coherenceAgreeCures.test.js (45 tests | 1 failed) 90061ms
+     × the old name lists and the home agree on every roster 26458ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/defenseStateProseDesk.test.js > DS-DEF-9 — magic dependency, and the slot filled from the right ROLE > REACHABILITY, MEASURED OVER GENERATED WORLDS rather than assumed
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/domain/defenseStateProseDesk.test.js:1910:5
+    1908|   });
+    1909|
+    1910|   it('REACHABILITY, MEASURED OVER GENERATED WORLDS rather than assumed…
+       |     ^
+    1911|     // The false pool is what every default world reads, and the desk …
+    1912|     // finding rather than as a silence.
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/generators/coherenceAgreeCures.test.js > F9: the market readers follow the market home, and no answer moves > the old name lists and the home agree on every roster
+Error: Test timed out in 20000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/generators/coherenceAgreeCures.test.js:127:7
+    125| describe('F9: the market readers follow the market home, and no answer…
+    126|   beforeAll(async () => { await loadGenerationLawPayloads(); });
+    127|   test('the old name lists and the home agree on every roster', async …
+       |       ^
+    128|     const { hasMarketInstitution } = await import('../../src/domain/fa…
+    129|     const { nativeSemanticNames } = await import('../../src/domain/con…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 155 passed (157)
+      Tests  2 failed | 2117 passed | 28 skipped (2147)
+   Start at  12:16:26
+   Duration  2942.96s (transform 67.31s, setup 12.52s, import 560.79s, tests 5111.82s, environment 131.96s)
+
+[gate-tail] end:  13:05:31 up  2:11,  0 user,  load average: 12.36, 12.45, 14.11
+[gate-tail] full log: /tmp/gate-tail.26400.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)

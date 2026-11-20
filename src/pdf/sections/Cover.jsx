@@ -17,6 +17,7 @@ import { HOUSE_MOTTO } from '../../design/organic/logo.js';
 import { BRAND_SEAL_PNG } from '../assets/brandSeal.js';
 import { humanize, num, stripZwnj, cap, label as toLabel } from '../lib/format.js';
 import { formatCount } from '../../domain/formatNumber.js';
+import { safetyQualifierLed } from '../../domain/display/safetyShown.js'; // PAGE-1 SAFETY: the owner's line, led by its word
 import { prosperityInCrisisLed } from '../../domain/display/prosperityInCrisis.js'; // COHERENCE-UPKEEP-6 (ruling D(iii)): the sentence led by the word it explains
 
 const TONE_COLOR = (key, fallback = palette.muted) => palette[key] || fallback;
@@ -279,6 +280,13 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
         {prosperity && overview.prosperityInCrisis && (
           <Text style={{ fontFamily: 'Lora', fontSize: pt['10'], color: palette.second, fontStyle: 'italic', marginTop: 6 }}>
             {prosperityInCrisisLed(overview.prosperityInCrisis)}
+          </Text>
+        )}
+        {/* The Safety cell's label, where the law stands two or more steps away or the record holds what the label could
+            not see, carries the owner's line (PAGE-1 SAFETY): present only in the DM's own document (vm.safetyQualifier). */}
+        {safety && vm?.safetyQualifier && (
+          <Text style={{ fontFamily: 'Lora', fontSize: pt['10'], color: palette.second, fontStyle: 'italic', marginTop: 6 }}>
+            {safetyQualifierLed(vm.safetyQualifier)}
           </Text>
         )}
 

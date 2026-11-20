@@ -4,6 +4,7 @@ import { serif, Section } from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
 import {buildThreatAssessment, disasterReadinessScore} from '../../../domain/display/threatAssessment.js';
+import { safetyShownOf, safetyAudienceOf } from '../../../domain/display/safetyShown.js'; // PAGE-1 SAFETY (F3a): the label, and the owner's line beside it
 import {NarrativeNote} from '../NarrativeNote';
 import { arcaneDefenseOf, blockListsCrime, criminalOpNote, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, deriveSafetyLine, criminalOpMark, DEFENSE_STRESS_STATUS, FOOD_STORES_DOOR, foodEnduranceLine } from '../../../domain/display/defenseDisplay.js';
 import EntityLink from '../../primitives/EntityLink.jsx';
@@ -309,7 +310,12 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // times in typed form (the orderStatus headline, the orderBadge band word and
   // the safetyLabel beneath), so the digit added a formula and no meaning.
   // safetyRatio stays a live derivation — only this display of it is retired.
-  const safetyLabel = sp.safetyLabel || '';
+  // PAGE-1 SAFETY (F3a; the chair's ruling of 11:24): the born label through its one reader, and on the OWNER'S page the
+  // line beside it where the law stands two or more steps away or the record holds what the label could not see (the
+  // Threat row's "Internal security" names the same label on this tab, so this banner's line answers for the tab, and the
+  // section opens on the owner's page wherever there is a line; the qualifier is null for every reader, so theirs is as was).
+  const safetyShown = safetyShownOf(r, safetyAudienceOf({ publicDossier, playerView }));
+  const safetyLabel = safetyShown.label || '';
   const _bmc         = sp.blackMarketCapture || 0;
 
   // DS-DEF-4, the criminal architecture. Same public gate as every other mount on this tab;
@@ -470,7 +476,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
       {/* ── CRIMINAL ARCHITECTURE & PUBLIC ORDER ─────────────────────────── */}
       <Section title="Criminal Architecture & Public Order" collapsible
-        defaultOpen={orderElevated||crimStructure==='organized'}>
+        defaultOpen={orderElevated||crimStructure==='organized'||!!safetyShown.qualifier}>
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
 
           {/* Public order: the safety reading, the DM's own safetyDesc and the DS-DEF-3 line
@@ -482,6 +488,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
                 seam draws. `safetyProfile.js` declares 'Very Safe' and composes
                 '<strain> — <Condition>'; rung 3 is sentence case on both halves. */}
             {safetyLabel&&!safetyLabel.includes('Moderate')&&<div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:orderColor,marginBottom:4}}>{statusCase(safetyLabel)}</div>}
+            {safetyShown.qualifier&&<p data-testid="defense-safety-beside-law" style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px',fontStyle:'italic'}}>{safetyShown.qualifier}</p>}
             {/* THE DM'S FIELD, rendered exactly as before and BY IDENTITY. The corpus line sits
                 BESIDE it and never in its place. */}
             {sp.safetyDesc&&<p style={{fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{safetyLine}</p>}
