@@ -1,0 +1,72 @@
+base views 600 · traditions-tree views 600 · cache base 9110b9861 n 100
+VALIDATION: foundedBy equal base=traditions tree 600/600; overcoming equal 600/600; base render = M3 cache (both fields) 600/600
+
+1. PRINTED, BY CONTAINMENT (places of the size whose rendered surface contains the stored text)
+foundedBy · BASE tree: History tab [100/100/100/100/100/100] = 600 · Traditions card [0/0/0/0/0/0] = 0 · other web views [0/0/0/0/0/0] = 0 · PDF [100/100/100/100/100/100] = 600 · Foundry journal [100/100/100/100/100/100] = 600
+  other web views holding it: none
+foundedBy · TRADITIONS tree (lane/trad-4): History tab [100/100/100/100/100/100] = 600 · Traditions card [78/84/85/100/100/100] = 547 · other web views [0/0/0/0/0/0] = 0 · PDF [100/100/100/100/100/100] = 600 · Foundry journal [100/100/100/100/100/100] = 600
+  other web views holding it: none
+overcoming · BASE tree: History tab [100/100/100/100/100/100] = 600 · Traditions card [0/0/0/0/0/0] = 0 · other web views [0/0/0/0/0/0] = 0 · PDF [100/100/100/100/100/100] = 600 · Foundry journal [100/100/100/100/100/100] = 600
+  other web views holding it: none
+overcoming · TRADITIONS tree (lane/trad-4): History tab [100/100/100/100/100/100] = 600 · Traditions card [0/0/0/0/0/0] = 0 · other web views [0/0/0/0/0/0] = 0 · PDF [100/100/100/100/100/100] = 600 · Foundry journal [100/100/100/100/100/100] = 600
+  other web views holding it: none
+(order of each bracket: thorp/hamlet/village/town/city/metropolis, of 100 places each)
+RITES (TRADITIONS tree: shownTraditionsOf, each composed by describeTradition for the owner and for a reader):
+  thorp: rites shown 113 · founding core shown 78 · owner rites quoting foundedBy 78 (rendered on the card 78) on 78 places · reader rites quoting it 0
+  hamlet: rites shown 120 · founding core shown 84 · owner rites quoting foundedBy 84 (rendered on the card 84) on 84 places · reader rites quoting it 0
+  village: rites shown 150 · founding core shown 85 · owner rites quoting foundedBy 85 (rendered on the card 85) on 85 places · reader rites quoting it 0
+  town: rites shown 286 · founding core shown 100 · owner rites quoting foundedBy 100 (rendered on the card 100) on 100 places · reader rites quoting it 0
+  city: rites shown 442 · founding core shown 100 · owner rites quoting foundedBy 100 (rendered on the card 100) on 100 places · reader rites quoting it 0
+  metropolis: rites shown 581 · founding core shown 100 · owner rites quoting foundedBy 100 (rendered on the card 100) on 100 places · reader rites quoting it 0
+  ALL: rites shown 1692 · owner rites quoting foundedBy 547 (547/1692 32%; rendered 547) on 547 of 600 places · reader rites quoting it 0
+
+2./3. TOP SHARE BY SIZE, TODAY -> PROJECTED (M3's 108 wordings, its selection as written)
+=== thorp
+TOP foundedBy today 38/100 38% distinct 4 :: a discharged soldier who liked the view and had nowhere better to be
+TOP foundedBy projected 13/100 13% distinct 40 :: a discharged soldier who liked the view and had nowhere better to be
+TOP rite sentence today 14/78 18% distinct 12 :: It has been kept since # was founded by a discharged soldier who liked the view and had nowhere better to be, 0 years ago.
+TOP rite sentence projected 6/78 8% distinct 57 :: It has been kept since # was founded by a discharged soldier who liked the view and had nowhere better to be, 0 years ago.
+TOP overcoming today 24/100 24% distinct 8 :: with help from external allies at a critical moment
+TOP overcoming projected 10/100 10% distinct 28 :: by striking a bargain with the other side that both could live with
+=== hamlet
+TOP foundedBy today 41/100 41% distinct 4 :: three or four families who agreed to try wintering together and never stopped
+TOP foundedBy projected 11/100 11% distinct 36 :: a household that settled first and found others following it in
+TOP rite sentence today 14/84 17% distinct 11 :: # has kept it since its founding by three or four families who agreed to try wintering together and never stopped, 0 years ago.
+TOP rite sentence projected 4/84 5% distinct 58 :: # has kept it since its founding by a household that settled first and found others following it in, 0 years ago.
+TOP overcoming today 22/100 22% distinct 6 :: with help from external allies at a critical moment
+TOP overcoming projected 8/100 8% distinct 26 :: with help from external allies at a critical moment
+=== village
+TOP foundedBy today 26/100 26% distinct 5 :: a noble granted lands by the crown and obligated to populate them
+TOP foundedBy projected 13/100 13% distinct 34 :: refugees fleeing war or persecution who found the location defensible
+TOP rite sentence today 10/85 12% distinct 15 :: It has been kept since # was founded by a noble granted lands by the crown and obligated to populate them, 0 years ago.
+TOP rite sentence projected 4/85 5% distinct 47 :: It goes back to the founding of # by a noble granted lands in the forest by the crown and obligated to populate them, 0 years ago, and has been kept since.
+TOP overcoming today 22/100 22% distinct 7 :: through determination and cooperation
+TOP overcoming projected 10/100 10% distinct 27 :: though the founding was harder than anyone admitted at the time
+=== town
+TOP foundedBy today 26/100 26% distinct 5 :: a merchant consortium that needed a waypoint and decided to own it
+TOP foundedBy projected 10/100 10% distinct 34 :: a merchant consortium that needed a waypoint and decided to own it
+TOP rite sentence today 14/100 14% distinct 15 :: It goes back to the founding of # by a merchant consortium that needed a waypoint and decided to own it, 0 years ago, and has been kept since.
+TOP rite sentence projected 7/100 7% distinct 57 :: It goes back to the founding of # by a merchant consortium that needed a waypoint and decided to own it, 0 years ago, and has been kept since.
+TOP overcoming today 27/100 27% distinct 9 :: with help from external allies at a critical moment
+TOP overcoming projected 11/100 11% distinct 30 :: by striking a bargain with the other side that both could live with
+=== city
+TOP foundedBy today 29/100 29% distinct 4 :: royal decree and a century of forced investment
+TOP foundedBy projected 11/100 11% distinct 33 :: a powerful noble house that needed a commercial base independent of rivals
+TOP rite sentence today 16/100 16% distinct 12 :: # has kept it since its founding by royal decree and a century of forced investment, 0 years ago.
+TOP rite sentence projected 6/100 6% distinct 59 :: # has kept it since its founding by royal decree, and a century of forced investment in its walls and markets, 0 years ago.
+TOP overcoming today 35/100 35% distinct 7 :: through good fortune and good decisions in roughly equal measure
+TOP overcoming projected 13/100 13% distinct 26 :: by attracting the right people at the right time
+=== metropolis
+TOP foundedBy today 37/100 37% distinct 5 :: the slow accretion of three smaller settlements that eventually merged under a single administration
+TOP foundedBy projected 11/100 11% distinct 27 :: the slow accretion of three smaller settlements around a shared market, eventually merged under a single administration
+TOP rite sentence today 16/100 16% distinct 12 :: # has kept it since its founding by the slow accretion of three smaller settlements that eventually merged under a single administration, 0 years ago.
+TOP rite sentence projected 8/100 8% distinct 51 :: # has kept it since its founding by a great trade house whose banking outgrew every other settlement in the region, 0 years ago.
+TOP overcoming today 27/100 27% distinct 6 :: through good fortune and good decisions in roughly equal measure
+TOP overcoming projected 10/100 10% distinct 25 :: through good fortune and good decisions in roughly equal measure
+
+SUMMARY (top share by size, today -> projected)
+foundedBy: thorp 38/100 38% -> 13/100 13% · hamlet 41/100 41% -> 11/100 11% · village 26/100 26% -> 13/100 13% · town 26/100 26% -> 10/100 10% · city 29/100 29% -> 11/100 11% · metropolis 37/100 37% -> 11/100 11%
+rite sentence: thorp 14/78 18% -> 6/78 8% · hamlet 14/84 17% -> 4/84 5% · village 10/85 12% -> 4/85 5% · town 14/100 14% -> 7/100 7% · city 16/100 16% -> 6/100 6% · metropolis 16/100 16% -> 8/100 8%
+overcoming: thorp 24/100 24% -> 10/100 10% · hamlet 22/100 22% -> 8/100 8% · village 22/100 22% -> 10/100 10% · town 27/100 27% -> 11/100 11% · city 35/100 35% -> 13/100 13% · metropolis 27/100 27% -> 10/100 10%
+
+4. FILL READ: 260 distinct projected rite sentences with a new founder wording (369 places), written whole to the fills file; 324 frame-read lines after them
