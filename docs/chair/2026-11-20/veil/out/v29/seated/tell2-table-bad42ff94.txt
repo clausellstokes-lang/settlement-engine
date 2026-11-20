@@ -1,0 +1,233 @@
+R3-TELL-2: THE TELL'S TWO GATES (ruling 58). Pool /var/tmp/v18/t2/pool-t2sig-2; towns /var/tmp/v18/out/v29/tell2-tip
+
+THE POOL: part A (nothing hidden, every setting) and part B (houses held, the settings that hide none)
+size | A births | B births (tried) | U distinct full signatures off / dm | B CPU min | A re-read CPU min
+village | 300 | 152 (2336) | 1577 / 2124 | 6.3 | 4.5
+town | 300 | 152 (424) | 2254 / 2753 | 4.6 | 7.9
+city | 300 | 152 (164) | 1787 / 2238 | 7.4 | 13.9
+metropolis | 300 | 152 (154) | 1546 / 1753 | 9.6 | 23.8
+part A server sample (own, off; both reads): 112 births, signature differs from the twin's in 0
+part A wall clock: 13.1 minutes (2026-11-20T20:29:52Z to 2026-11-20T20:42:56Z, four shards)
+part B wall clock: 7.3 minutes (2026-11-20T20:42:56Z to 2026-11-20T20:50:15Z, four shards)
+
+GATE-1 (full fineness, R4's parts dropped): gated reads failing, hidden-house towns (of 92) twin / server; controls (of 48) twin
+setting | hidden, Reveal off | hidden, Reveal DM | controls off | controls DM
+own | 88 / 88 | 88 / 88 | 0 | 0
+g:110 | 88 / 88 | 88 / 88 | 0 | 0
+g:101 | 88 / 88 | 88 / 88 | 0 | 0
+g:011 | 88 / 88 | 88 / 88 | 0 | 0
+g:100 | 88 / 88 | 88 / 88 | 0 | 0
+g:010 | 88 / 88 | 88 / 88 | 0 | 0
+g:001 | 88 / 88 | 88 / 88 | 0 | 0
+g:000 | 88 / 88 | 88 / 88 | 0 | 0
+off | 88 / 88 | 88 / 88 | 0 | 0
+allOpen (exempt) | 88 / 88 | 88 / 88 | 0 | 0
+
+GATE-1, THE CONTROLS' FAILING PARTS (NAMED, never dropped; every gated setting): controls | read|part=value
+  none
+
+GATE-1, THE HIDDEN-HOUSE TOWNS' FAILING PARTS (every gated setting, twin): towns | read|part=value
+  86 | off|f.economicState.safetyProfile.economicDragDesc="a" (e.g. r3m-town-infiltrated-0-12, r3m-town-indebted-0-16)
+  86 | off|x.dragMarket="a:1" (e.g. r3m-town-infiltrated-0-12, r3m-town-indebted-0-16)
+  86 | dm|f.economicState.safetyProfile.economicDragDesc="a" (e.g. r3m-town-infiltrated-0-12, r3m-town-indebted-0-16)
+  86 | dm|x.dragMarket="a:1" (e.g. r3m-town-infiltrated-0-12, r3m-town-indebted-0-16)
+  7 | off|x.powerNoHouse="1" (e.g. r3m-city-insurgency-1-104, r3m-city-under_siege-1-108)
+  7 | dm|x.powerNoHouse="1" (e.g. r3m-city-insurgency-1-104, r3m-city-under_siege-1-108)
+  2 | off|k.powers.modifier="p" (e.g. r3m-city-insurgency-1-104, r3m-metropolis-indebted-1-136)
+  2 | off|f.economicState.safetyProfile.safetyDesc="a" (e.g. r3m-city-none-1-113, r3m-metropolis-infiltrated-0-62)
+  2 | dm|k.powers.modifier="p" (e.g. r3m-city-insurgency-1-104, r3m-metropolis-indebted-1-136)
+  2 | dm|f.economicState.safetyProfile.safetyDesc="a" (e.g. r3m-city-none-1-113, r3m-metropolis-infiltrated-0-62)
+  1 | off|r.imports.criminal="n" (e.g. r3m-town-insurgency-0-14)
+  1 | off|f.history.currentTensions="e" (e.g. r3m-town-none-0-23)
+  1 | dm|r.imports.criminal="n" (e.g. r3m-town-insurgency-0-14)
+  1 | dm|f.history.currentTensions="e" (e.g. r3m-town-none-0-23)
+
+R4'S PARTS, LISTED RED AS R4'S (dropped from both gates; ruling 58 3 (b)): hidden-house towns whose gated reads hold an R4 part value fewer than two births of U show (twin / server), by setting
+  own: Reveal off 1 / 1, Reveal DM 0 / 0
+  off: Reveal off 1 / 1, Reveal DM 0 / 0
+  mixed (any g:<bits>): Reveal off 1, Reveal DM 0 (twin)
+  1 | off|r.people.roles="1" (e.g. r3m-city-under_siege-1-108)
+
+GATE-2 (the joint family-level signature, R4's families dropped), CALIBRATION BY THE CONTROLS: per level, the worst gated setting's controls failing (of 48), Reveal off / DM
+  L1 (counts none/one/several + the five bits): 5 / 5 too fine
+  L2 (counts none/some + the five bits): 2 / 2 too fine
+  L3 (counts none/some alone): 1 / 1 too fine
+GATE-2 LEVEL: NONE CALIBRATED (every level too fine: the chair is told)
+THE CONTROLS GATE-2 FAILS, NAMED, per level: control, gated reads failing, its non-zero families and bits (own, Reveal off)
+  L1 r3m-town-infiltrated-1-92: 18 reads (off|own off|g:110 off|g:101 off|g:011 ...); r.conditions.criminal=1 r.income.criminal=1 r.sp.crimeTypes=1 r.sp.ops=1 r.svc.criminal=n r.svc.otherCriminal=n x.dragMarket=low:1 x.svcNoHouse=1 x.typesNoHouse=1
+  L1 r3m-town-indebted-1-96: 4 reads (off|own off|g:110 dm|own dm|g:110); r.sp.crimeTypes=1 r.svc.criminal=n r.svc.otherCriminal=1 x.dragMarket=n:1 x.svcNoHouse=1 x.typesNoHouse=1
+  L1 r3m-town-politically_fractured-1-100: 8 reads (off|own off|g:110 off|g:011 off|g:010 ...); r.income.criminal=1 r.sp.crimeTypes=1 r.svc.criminal=n r.svc.otherCriminal=n x.dragMarket=stalls:1 x.svcNoHouse=1 x.typesNoHouse=1
+  L1 r3m-town-wartime-1-89: 8 reads (off|own off|g:110 off|g:011 off|g:010 ...); r.sp.crimeTypes=n r.sp.ops=1 r.svc.otherCriminal=1 x.dragMarket=low:1 x.typesNoHouse=1
+  L1 r3m-town-infiltrated-1-82: 18 reads (off|own off|g:110 off|g:101 off|g:011 ...); r.conditions.criminal=1 r.powers.conflicts=n r.powers.criminal=1 r.powers.relations=n r.svc.criminal=n r.svc.otherCriminal=1 x.dragMarket=n:1 x.powerNoHouse=1 x.svcNoHouse=1
+  L2 r3m-town-infiltrated-1-92: 18 reads (off|own off|g:110 off|g:101 off|g:011 ...); r.conditions.criminal=1 r.income.criminal=1 r.sp.crimeTypes=1 r.sp.ops=1 r.svc.criminal=n r.svc.otherCriminal=n x.dragMarket=low:1 x.svcNoHouse=1 x.typesNoHouse=1
+  L2 r3m-town-infiltrated-1-82: 18 reads (off|own off|g:110 off|g:101 off|g:011 ...); r.conditions.criminal=1 r.powers.conflicts=n r.powers.criminal=1 r.powers.relations=n r.svc.criminal=n r.svc.otherCriminal=1 x.dragMarket=n:1 x.powerNoHouse=1 x.svcNoHouse=1
+  L3 r3m-town-infiltrated-1-92: 8 reads (off|own off|g:110 off|g:011 off|g:010 ...); r.conditions.criminal=1 r.income.criminal=1 r.sp.crimeTypes=1 r.sp.ops=1 r.svc.criminal=n r.svc.otherCriminal=n x.dragMarket=low:1 x.svcNoHouse=1 x.typesNoHouse=1
+THE DRAG'S EMPTY FORM (ruling 58 3 (a)): x.dragMarket values in U by size (births, Reveal off), and of the towns whose gated pages lack the key, how many would pass the bit with each empty form
+  village: n:0 173, low:1 60, low:0 108, n:1 72, backrooms:0 18, siege:0 10, stalls:1 7, siege:1 4
+  town: n:1 156, low:1 185, stalls:1 85, siege:1 26
+  city: low:1 122, n:1 190, stalls:1 94, siege:1 46
+  metropolis: low:1 125, n:1 187, stalls:1 87, siege:1 53
+  served as null: 86 of 86 pass both the field and the bit (Reveal off, own)
+  served as '': 0 of 86 pass both the field and the bit (Reveal off, own)
+
+GATE-2 at L1 (reported): gated reads failing, hidden-house towns twin / server; controls twin
+setting | hidden, Reveal off | hidden, Reveal DM | controls off | controls DM
+own | 88 / 88 | 88 / 88 | 5 | 5
+g:110 | 88 / 88 | 88 / 88 | 5 | 5
+g:101 | 88 / 88 | 88 / 88 | 2 | 2
+g:011 | 88 / 88 | 88 / 88 | 4 | 4
+g:100 | 88 / 88 | 88 / 88 | 2 | 2
+g:010 | 88 / 88 | 88 / 88 | 4 | 4
+g:001 | 88 / 88 | 88 / 88 | 2 | 2
+g:000 | 88 / 88 | 88 / 88 | 2 | 2
+off | 88 / 88 | 88 / 88 | 2 | 2
+allOpen (exempt) | 88 / 88 | 88 / 88 | 5 | 5
+
+GATE-2 at L2 (reported): gated reads failing, hidden-house towns twin / server; controls twin
+setting | hidden, Reveal off | hidden, Reveal DM | controls off | controls DM
+own | 88 / 88 | 88 / 88 | 2 | 2
+g:110 | 88 / 88 | 88 / 88 | 2 | 2
+g:101 | 88 / 88 | 88 / 88 | 2 | 2
+g:011 | 88 / 88 | 88 / 88 | 2 | 2
+g:100 | 88 / 88 | 88 / 88 | 2 | 2
+g:010 | 88 / 88 | 88 / 88 | 2 | 2
+g:001 | 88 / 88 | 88 / 88 | 2 | 2
+g:000 | 88 / 88 | 88 / 88 | 2 | 2
+off | 88 / 88 | 88 / 88 | 2 | 2
+allOpen (exempt) | 88 / 88 | 88 / 88 | 2 | 2
+
+GATE-2 at L3 (reported): gated reads failing, hidden-house towns twin / server; controls twin
+setting | hidden, Reveal off | hidden, Reveal DM | controls off | controls DM
+own | 36 / 36 | 46 / 46 | 1 | 1
+g:110 | 36 / 36 | 36 / 36 | 1 | 1
+g:101 | 9 / 9 | 25 / 25 | 0 | 0
+g:011 | 10 / 10 | 26 / 26 | 1 | 1
+g:100 | 9 / 9 | 9 / 9 | 0 | 0
+g:010 | 10 / 10 | 10 / 10 | 1 | 1
+g:001 | 9 / 9 | 25 / 25 | 0 | 0
+g:000 | 9 / 9 | 9 / 9 | 0 | 0
+off | 9 / 9 | 9 / 9 | 0 | 0
+allOpen (exempt) | 36 / 36 | 74 / 74 | 1 | 1
+
+REPORTED (never gated): THE FULL FINE SIGNATURE (every part, R4's included), jointly: non-members, hidden-house towns (twin) against controls, Fisher's exact p (one-sided)
+setting | Reveal off: hidden / controls / p | Reveal DM: hidden / controls / p
+own | 92/92 / 16/48 / 5.84e-20 | 92/92 / 26/48 / 1.07e-12
+g:110 | 92/92 / 12/48 / 1.98e-23 | 92/92 / 16/48 / 5.84e-20
+g:101 | 90/92 / 13/48 / 8.24e-20 | 91/92 / 21/48 / 9.26e-15
+g:011 | 92/92 / 16/48 / 5.84e-20 | 92/92 / 24/48 / 5.04e-14
+g:100 | 90/92 / 6/48 / 1.01e-26 | 90/92 / 11/48 / 1.36e-21
+g:010 | 92/92 / 11/48 / 2.29e-24 | 92/92 / 16/48 / 5.84e-20
+g:001 | 89/92 / 13/48 / 9.16e-19 | 90/92 / 18/48 / 8.02e-16
+g:000 | 89/92 / 6/48 / 1.42e-25 | 89/92 / 9/48 / 2.09e-22
+off | 89/92 / 6/48 / 1.42e-25 | 89/92 / 9/48 / 2.09e-22
+FISHER: p < 0.05 at some gated setting: STOP (the separating parts are GATE-1's hidden-house list above, R4's list included)
+
+RULING 58 3 (c): THE CRIMINAL POWERS' ROWS the rule would withhold (served where the read serves no criminal house). Hidden-house towns, gated reads (twin; server): towns / rows / of them GOVERNING (VR42 keeps a governing row today)
+  own, Reveal off: 11 / 11 / 11 ; server 11 / 11 / 11
+  own, Reveal dm: 11 / 11 / 11 ; server 11 / 11 / 11
+  off, Reveal off: 11 / 11 / 11 ; server 11 / 11 / 11
+  off, Reveal dm: 11 / 11 / 11 ; server 11 / 11 / 11
+  any gated setting: towns 11 (town 4, city 6, metropolis 1)
+PART A (nothing hidden: no read serves a criminal house, so EVERY criminal power row would be withheld): births with a criminal power row on some page / rows (the most a page serves, summed) / governing, by size
+  village: 4 of 300 births; 4 rows; 0 governing
+  town: 29 of 300 births; 31 rows; 23 governing
+  city: 0 of 300 births; 0 rows; 0 governing
+  metropolis: 0 of 300 births; 0 rows; 0 governing
+the gate's 48 controls likewise: r3m-town-infiltrated-1-82 1/1
+
+PER TOWN: per gated setting [own g:110 g:101 g:011 g:100 g:010 g:001 g:000 off], twin, Reveal off | DM: "." passes, "1" fails GATE-1, "2" fails GATE-2 at its level, "b" both
+  r3m-city-indebted-0-46 (city) | 111111111 | 111111111
+  r3m-city-indebted-1-106 (city) | 111111111 | 111111111
+  r3m-city-indebted-1-116 (city) | 111111111 | 111111111
+  r3m-city-infiltrated-0-32 (city) | 111111111 | 111111111
+  r3m-city-infiltrated-0-42 (city) | 111111111 | 111111111
+  r3m-city-infiltrated-1-102 (city) | 111111111 | 111111111
+  r3m-city-infiltrated-1-112 (city) | 111111111 | 111111111
+  r3m-city-insurgency-0-34 (city) | 111111111 | 111111111
+  r3m-city-insurgency-0-44 (city) | 111111111 | 111111111
+  r3m-city-insurgency-1-104 (city) | 111111111 | 111111111
+  r3m-city-insurgency-1-114 (city) | 111111111 | 111111111
+  r3m-city-none-0-31 (city) | 111111111 | 111111111
+  r3m-city-none-0-33 (city) | 111111111 | 111111111
+  r3m-city-none-0-37 (city) | 111111111 | 111111111
+  r3m-city-none-0-41 (city) | ......... | .........
+  r3m-city-none-0-43 (city) | 111111111 | 111111111
+  r3m-city-none-0-47 (city) | 111111111 | 111111111
+  r3m-city-none-1-101 (city) | 111111111 | 111111111
+  r3m-city-none-1-103 (city) | 111111111 | 111111111
+  r3m-city-none-1-107 (city) | 111111111 | 111111111
+  r3m-city-none-1-111 (city) | 111111111 | 111111111
+  r3m-city-none-1-113 (city) | 111111111 | 111111111
+  r3m-city-none-1-117 (city) | 111111111 | 111111111
+  r3m-city-occupied-0-45 (city) | 111111111 | 111111111
+  r3m-city-occupied-1-105 (city) | 111111111 | 111111111
+  r3m-city-occupied-1-115 (city) | 111111111 | 111111111
+  r3m-city-politically_fractured-0-40 (city) | 111111111 | 111111111
+  r3m-city-politically_fractured-1-110 (city) | 111111111 | 111111111
+  r3m-city-politically_fractured-1-120 (city) | 111111111 | 111111111
+  r3m-city-under_siege-0-48 (city) | 111111111 | 111111111
+  r3m-city-under_siege-1-108 (city) | 111111111 | 111111111
+  r3m-city-under_siege-1-118 (city) | 111111111 | 111111111
+  r3m-city-wartime-0-39 (city) | 111111111 | 111111111
+  r3m-city-wartime-0-49 (city) | 111111111 | 111111111
+  r3m-city-wartime-1-109 (city) | 111111111 | 111111111
+  r3m-city-wartime-1-119 (city) | 111111111 | 111111111
+  r3m-metropolis-indebted-0-56 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-indebted-0-66 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-indebted-1-126 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-indebted-1-136 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-infiltrated-0-52 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-infiltrated-0-62 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-infiltrated-1-122 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-infiltrated-1-132 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-insurgency-1-124 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-insurgency-1-134 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-none-0-51 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-none-0-53 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-none-0-57 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-none-0-61 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-none-0-63 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-none-0-67 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-none-1-121 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-none-1-123 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-none-1-127 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-none-1-131 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-none-1-133 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-none-1-137 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-occupied-0-55 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-occupied-0-65 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-occupied-1-125 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-occupied-1-135 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-politically_fractured-0-60 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-politically_fractured-0-70 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-politically_fractured-1-130 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-politically_fractured-1-140 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-under_siege-0-58 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-under_siege-0-68 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-under_siege-1-128 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-under_siege-1-138 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-wartime-0-59 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-wartime-0-69 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-wartime-1-129 (metropolis) | 111111111 | 111111111
+  r3m-metropolis-wartime-1-139 (metropolis) | 111111111 | 111111111
+  r3m-town-indebted-0-16 (town) | 111111111 | 111111111
+  r3m-town-infiltrated-0-12 (town) | 111111111 | 111111111
+  r3m-town-infiltrated-0-22 (town) | 111111111 | 111111111
+  r3m-town-insurgency-0-14 (town) | 111111111 | 111111111
+  r3m-town-insurgency-1-94 (town) | ......... | .........
+  r3m-town-none-0-17 (town) | 111111111 | 111111111
+  r3m-town-none-0-21 (town) | 111111111 | 111111111
+  r3m-town-none-0-23 (town) | 111111111 | 111111111
+  r3m-town-none-1-91 (town) | 111111111 | 111111111
+  r3m-town-occupied-1-85 (town) | 111111111 | 111111111
+  r3m-town-politically_fractured-0-30 (town) | 111111111 | 111111111
+  r3m-town-under_siege-0-18 (town) | 111111111 | 111111111
+  r3m-town-under_siege-0-28 (town) | 111111111 | 111111111
+  r3m-town-under_siege-1-88 (town) | ......... | .........
+  r3m-town-under_siege-1-98 (town) | 111111111 | 111111111
+  r3m-town-wartime-0-19 (town) | 111111111 | 111111111
+  r3m-town-wartime-0-29 (town) | 111111111 | 111111111
+  r3m-village-politically_fractured-0-10 (village) | ......... | .........
+
+TODAY: GATE-1 own (off 88, dm 88); off (off 88, dm 88); mixed (off 88, dm 88)
+GATE: 92 of 92 hidden-house towns fail a gated read (GATE-1 or GATE-2, uncalibrated, twin or server) -> RED (exit 1)
