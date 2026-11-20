@@ -2137,3 +2137,27 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   the shared-page part is green in `tests/lint` whole; the measures; thirty samples and twelve from towns in crisis.
   **(2) VEIL-23 is session_019yED1SPikQqQKF16wCQQfC** (seated 07:13 UTC on VEIL-22's tip 9894c75d8; reads only);
   VEIL-22 is told the hand-over's rule (a clean boundary, or 380,000 tokens).
+- 07:20 UTC · **THE SAFETY NET FIRED (07:15): EVERY SEAT RUNNING OR WAITING AS ORDERED; THREE REPORTS RULED.**
+  **(1) FRAME-2: WEIGHT MERGED GREEN** (9d68605d3, fdb4faac4): 93 of 330 calm towns held a trouble of weight (by tier
+  0, 9, 15, 9, 29, 31), 237 keeping the line's sheet byte for byte (a born test pins 24 calm and 6 crisis sheets and
+  2 journal pages, red first on the old tip; the legitimacy edges cited from `LEGITIMACY_CUTS`). A CRIME WAVE OPENED
+  37 OF THE 93 (39.8 per cent), each on a high conflict between the guard and the criminal power, often over an
+  unrelated issue. **RULED: W2 NEEDS BOTH OF THE ROW'S POWERS TO BE SIDES OF THE TENSION** (the definition read as
+  written): 58 OF 330 FRAMED, the crime wave about a fifth. A CORRECTION SAID TO THE OWNER BY NAME: the chair had
+  said "about 86"; it is 58, and 272 of 330 calm towns stay as they are. ALSO: `crisisHooks.js`'s 124 bare labels
+  through the one helper, no stored string changed (8594e509d); the 598 cast strings that speak of their holder as
+  "it" or a role are NOT a breach of the names rule (the row carries its holder's name in its own field and the
+  security lane withholds a cast entry whole); THE 18 THAT CALL A PERSON "IT" ARE FIXED NOW as their own stored cause;
+  the phone chrome floor census (+1 floored on three routes, from FRAME-1's renderer lines) is this lane's: by its
+  own door, re-recorded with its cause or the line cured.
+  **(2) VEIL-23, SECOND EYES ON R4 AND THE DOORS (read in the diffs), FOUR CURES FORWARDED TO VEIL-22:** VR10's test
+  checked a stored id by exact equality on values only: VR46's tooth (ii) sharpened to a SUBSTRING search over every
+  served string and every key, with two plants; the re-key touched only STRING ids (a card with a number id was
+  served with its stored id): any non-null id is re-keyed, with a plant; a withheld holder's NAME was removed only at
+  the named paths: a born arm searches every served string for it; in the doors' two hunks inside
+  `import_gallery_dossier` a frozen share's name and tier come from the RAW copy, not the served body: a born arm
+  with a planted town named after a hidden house, else both are read from the body. Its fifth read: VR45's canon in
+  R6 is sound.
+  **(3) TRAD-2 is session_019yED1Na8i5w3Xgw1qqgSB3** (seated 07:18 UTC; reads until the hand-over). TITLES-2 has about
+  thirty sourced words verified and is writing its hand-back. NAMES-2 has committed and is running its lint and
+  drafting its hand-back. The next net is armed for 08:30 UTC.
