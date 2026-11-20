@@ -1,4 +1,4 @@
-# FORTUNE-4 hand-back (kept current at every push; last written 2026-11-20 21:14:31 UTC by `date -u`)
+# FORTUNE-4 hand-back (kept current at every push; last written 2026-11-20 21:31:58 UTC by `date -u`)
 
 For a successor: this file, `FORTUNE-3-HANDBACK.md` section 0 (the chair's rulings to 20:03, verbatim), `LIGHTING-WORKLIST.md`
 and the open briefs (`briefs/COMMON.md`, `U5-BUILD.md`, `SAVED-TOWN.md`, `U6-FIRSTPAINT.md`). The chair is
@@ -20,10 +20,21 @@ session_019yED1SUxGVHyjQnoqoFvQ8 (send_message, Claude Code Remote MCP server). 
 
 | unit | state | commits |
 |---|---|---|
-| SAVED-TOWN (fortune U7) | MERGED: 9/9 green on the merged tree; arm 1's plant re-run by me (reds '1. NO MIGRATION' and '4a'); no FINDING (the legacy edge reads 1; the regen writes identical bytes with and without the form's marker); `regenSection` has no power/economy branch (pinned as no-ops; the re-derive is the step that re-runs them); the campaign re-bind NOT driven | 3af3b51cb, merge c47abf382 |
-| U6 first paint (probe C) | MERGED: red re-run by me on the base build 4 failed / 20 passed (the four U6 arms); figures = probe C to the byte (raw 1,179,219 -> 1,177,726, gzip -532, Brotli -228, worker unchanged); cure: layout only. ITS vite.config.js LINES FOR THE JOIN: the last row of `ENGINE_SHARED_DOMAIN_EXCISIONS` (`'/src/domain/fortune/fortuneLaw.js'`, after `powerSentenceName.js`, with its comment) and `if (id.includes('/src/domain/fortune/fortuneLaw.js')) return 'fortune-law';` after the `custom-charset` rule, before `isEngineSharedDomain` | 5d9306e28 + 00dcfd3d7, merge 1abbd5ae0; lighting 823360aed |
-| U5a the merits | RETURNED UNREAD at d70401690 (FORTUNE-3's builder: ONE merit left, the weathered catastrophe; edited U5s's `fortuneLawSafety.test.js` outside its manifest; 2 `observedShapeReaders` reds needing a row in `check-observed-shape-readers.mjs`, outside its manifest). HELD by the chair's 20:49 order for the BANDS measure (`measures/bands/BANDS.md`, EXECUTED, visitor 150 a size): Endorsed is not empty at any size lit, merits or none (B 2 to 13%; C 2.7 to 14.7%); my recommendation sent 21:1x: merge under the rulings; LASTING (age >= the size's p90; `history.age` survives `toPublicSafe`) a separate ruling. AWAITING THE CHAIR'S WORD before the diff is read | 6b00d35a2, 5b73b07ca, 71ec21019, d70401690 |
-| U5b render reason | after U5a and the sentences | — |
+| SAVED-TOWN (fortune U7) | MERGED: 9/9 on the merged tree; arm 1's plant re-run by me reds '1. NO MIGRATION' and '4a'; NO FINDING (the legacy no-config edge reads 1, identical bytes with and without the form's marker); `regenSection` has no power/economy branch (pinned as no-ops; the edit re-derive is the step that re-runs them); the campaign re-bind NOT driven | 3af3b51cb, merge c47abf382 |
+| U6 first paint (probe C) | MERGED: my red on the base build 4 failed / 20 passed (its four arms); MY GREEN on a fresh build of 1abbd5ae0: 5 failed / 441 passed (25 files incl. tests/architecture), the 5 the BASE's known reds only (first-paint raw/gzip/Brotli budgets, 'the engine chunk ... remains large', the worker ceiling); figures = probe C to the byte (raw 1,179,219 -> 1,177,726, gzip -532, Brotli -228, worker unchanged). ITS vite.config.js LINES FOR THE JOIN: the last row of `ENGINE_SHARED_DOMAIN_EXCISIONS` (`'/src/domain/fortune/fortuneLaw.js'`, after `powerSentenceName.js`, with its comment) and `if (id.includes('/src/domain/fortune/fortuneLaw.js')) return 'fortune-law';` after the `custom-charset` rule, before `isEngineSharedDomain` | 5d9306e28 + 00dcfd3d7, merge 1abbd5ae0; lighting 823360aed |
+| U5a the merits | MERGED (the chair's 21:13 word, after the bands measure): ONE served merit (a catastrophe weathered within 40 years); law 1 untouched before any read; no rung, no ruler identity; a held powerStructure never re-merited; its tests (a) dark incl. trace and rail, (f), (g) W1-W5 and the twice-run arm, (5) every rung the same score, (S) the widest veil recomputes the merits. Accepted outside its manifest: `fortuneLawSafety.test.js` (the sum less merits), `heldKeyWriterCensus.walker.test.js` (its roster row). Registers re-taken by their doors: inventory (c4273ac74; verify 76/76), wiring (producerIndexFiles 1436 -> 1437), lighting (007dcab81: 3717 files) | d70401690, merge 4044990a4 |
+| U5a-CURE | BUILDER OUT on 007dcab81 (`briefs/U5a-CURE.md`; pushes `lane/fortune-4-2026-11-20-u5acure-wip`): the packed lines (the assembly step's return -> a named tail helper at the END; two END import/export lines split; the tests) and the two `observedShapeReaders` reds (`scripts/check-observed-shape-readers.mjs` granted). NO behaviour change: after its merge, re-run the confinement (base 43ab0f5eb) and the merits' tests | — |
+| U5b render reason | NOT STARTED. First: the merit's sentence (ONE merit now: three wordings, plain words, the event by its stored name, the ruler by office, an OUTCOME never probity) to the chair ON SIX WHOLE PAGES, one a captured hall (hxd-metropolis-73 is born `corrupted` with the merit); then U5b in `powerStateProse.js` | — |
+| BANDS measure | DONE (`measures/bands/BANDS.md`): visitor and chair600, states A/B/C (+D LASTING on the visitor). chair600 lit without merits: NO Endorsed at any size; with U5a 0-3%; visitor 2-15%. Safety separates Endorsed from Approved. LASTING NOT BUILT for this deploy (the chair, 21:13); told to the owner 21:27 | 5ed7d6699 |
+
+STILL TO DO, IN ORDER (the chair, 20:17, 21:13, 21:21, 21:27): U5a-CURE's merge (read once; confinement 43ab0f5eb -> tip
+EQUAL; the merits' tests); the merit's sentence on six whole pages to the chair; U5b; the lit re-measure (headline: the LIT
+world on a VISITOR'S pool, dark the control; recipe `docs/chair/2026-11-20/content/seat/u4/measure-lit.sh` on the seat lane)
+against `FOR-THE-OWNER.md` (a moved figure to the chair FIRST) and the joint table with the merits on; THE LANDING CHECK
+(rule 8 re-ruled 21:27, below); this file; "FORTUNE <commit>". At 400,000 by the chair's read: push, send
+"FORTUNE-PART <commit>, HANDED OVER" with what is still out.
+`tests/lint` whole at 007dcab81: running at the hand-back's writing (scratch log); the last whole green was 220/220 (3271)
+at a49838e67 (FORTUNE-3).
 
 ## 2. Confinement (the chair, 19:19 and 20:17 UTC)
 
@@ -47,9 +58,14 @@ session_019yED1SUxGVHyjQnoqoFvQ8 (send_message, Claude Code Remote MCP server). 
 
 ## 4. Rules since my prompt (the chair, 20:17 UTC)
 
-- BEFORE THE LANE ASKS TO LAND: one `npm run test:ratchet` at the tip with the line's tip merged in, UNFLIPPED, its verdict read
-  BY NAME against `docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv` on the chair's branch (a row not on the list is a stored
-  figure a unit moved, named with its cause, or a real red cured first).
+- THE LANDING CHECK (rule 8 RE-RULED 21:27 UTC; COMMON-RULES.txt on the chair's branch): NO whole `npm run test:ratchet` on a
+  seat's box. Before the landing request: (a) the build and the two build tests; (b) ONE run of the test directories of what
+  the lane touched (`git diff --name-only <the line's tip>...HEAD -- src`): `tests/generators` and `tests/data` whole for
+  `src/generators/**` / `src/data/**`; `tests/components`, `tests/pdf` for theirs; `tests/domain/<dir>/` per `src/domain/<dir>/`;
+  `tests/store`, `tests/lib` for theirs; ALWAYS `tests/lint` and `tests/build`; through the mutex, one heavy run at a time;
+  failing rows BY NAME against `docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv` (53 rows, read at 062504aa8). The line is
+  now `lane/join-2026-11-14` = 062504aa8 (point 85; touches no fortune file); `ci/LINE-NOW.md` holds its tip and reds.
+- U6's green and the base's five build reds: the base's overage is not the lane's (section 3).
 - A tuning table the lane ADDS is registered as a DRAFT row (unsigned: the owner's at the close) and listed for the signing.
 - "Dependents moved" with no value moved is re-frozen by its door with the reason.
 - No statement packed onto a shared line to save a line (F31 counts them in `src/generators/power/`).
