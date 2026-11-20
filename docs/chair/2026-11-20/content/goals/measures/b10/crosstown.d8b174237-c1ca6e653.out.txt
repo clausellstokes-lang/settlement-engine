@@ -1,0 +1,73 @@
+# the chair's owner-q3 measures.mjs (lane/chair-2026-11-08 4454f14d3, copied to a scratch dir), section (A) only, at both trees
+## base d8b174237
+===== (A) CROSS-TOWN REPEATS (names masked as batch.mjs; secrets ALSO masked here, batch.mjs left them raw) =====
+Per size: 600 random ordered pairs (A,B) of distinct towns (50*49=2450 > 600), and 600 random ordered triples (A,B,C).
+count = lines of B (C) whose masked text stands among A's (A's or B's) lines of that field; share = count / B's (C's) lines; mean share over pairs where B (C) has >=1 line. B's lines counted with multiplicity.
+size        field             B lines(mean)  PAIR count  PAIR share | TRIPLE count  TRIPLE share
+thorp       short goal             1.2         0.09       8.4%  |      0.18      16.8%
+thorp       long goal              1.2         0.01       0.8%  |      0.06       5.3%
+thorp       secret                 1.2         0.11       9.7%  |      0.16      14.1%
+thorp       own hook               1.2         0.02       2.3%  |      0.06       5.0%
+thorp       tie description        0.3         0.00       0.0%  |      0.01       1.7%
+hamlet      short goal             3.2         0.07       2.5%  |      0.18       5.5%
+hamlet      long goal              3.2         0.08       2.5%  |      0.16       5.6%
+hamlet      secret                 3.2         0.16       4.4%  |      0.33       9.4%
+hamlet      own hook               3.2         0.16       5.3%  |      0.32      10.2%
+hamlet      tie description        3.0         0.19       6.3%  |      0.30       9.4%
+village     short goal             7.7         0.48       7.1%  |      0.86      11.6%
+village     long goal              7.7         0.41       5.7%  |      0.83      11.3%
+village     secret                 7.7         1.15      15.4%  |      1.86      24.8%
+village     own hook               7.7         0.73       9.2%  |      1.41      17.8%
+village     tie description        7.7         1.13      14.7%  |      1.97      26.0%
+town        short goal            23.0         4.50      19.3%  |      7.91      32.9%
+town        long goal             23.0         4.33      18.7%  |      7.60      32.0%
+town        secret                23.0         4.56      20.8%  |      6.58      28.5%
+town        own hook              23.0         5.86      25.3%  |      9.63      40.3%
+town        tie description       23.0         7.93      34.9%  |     12.61      53.6%
+city        short goal            60.3        22.07      37.0%  |     31.02      51.3%
+city        long goal             60.3        21.83      36.2%  |     31.21      51.5%
+city        secret                60.3        14.63      24.7%  |     22.87      38.0%
+city        own hook              60.3        27.99      46.5%  |     40.15      66.2%
+city        tie description       60.3        35.12      58.7%  |     44.76      73.9%
+metropolis  short goal            84.0        39.82      47.4%  |     51.62      61.6%
+metropolis  long goal             84.0        39.86      47.5%  |     52.39      62.6%
+metropolis  secret                84.0        24.50      29.2%  |     38.83      46.4%
+metropolis  own hook              84.0        53.23      63.5%  |     65.78      78.6%
+metropolis  tie description       84.0        58.20      69.3%  |     67.86      81.0%
+
+## build c1ca6e653 (the goal code of every later commit of the branch)
+===== (A) CROSS-TOWN REPEATS (names masked as batch.mjs; secrets ALSO masked here, batch.mjs left them raw) =====
+Per size: 600 random ordered pairs (A,B) of distinct towns (50*49=2450 > 600), and 600 random ordered triples (A,B,C).
+count = lines of B (C) whose masked text stands among A's (A's or B's) lines of that field; share = count / B's (C's) lines; mean share over pairs where B (C) has >=1 line. B's lines counted with multiplicity.
+size        field             B lines(mean)  PAIR count  PAIR share | TRIPLE count  TRIPLE share
+thorp       short goal             1.2         0.07       7.0%  |      0.14      12.9%
+thorp       long goal              1.2         0.01       0.4%  |      0.04       3.4%
+thorp       secret                 1.2         0.11       9.7%  |      0.16      14.1%
+thorp       own hook               1.2         0.02       2.3%  |      0.06       5.0%
+thorp       tie description        0.3         0.00       0.0%  |      0.01       1.7%
+hamlet      short goal             3.2         0.04       1.2%  |      0.07       2.1%
+hamlet      long goal              3.2         0.04       1.3%  |      0.10       3.6%
+hamlet      secret                 3.2         0.16       4.4%  |      0.33       9.4%
+hamlet      own hook               3.2         0.16       5.3%  |      0.32      10.2%
+hamlet      tie description        3.0         0.19       6.3%  |      0.30       9.4%
+village     short goal             7.7         0.16       2.5%  |      0.32       4.4%
+village     long goal              7.7         0.16       2.4%  |      0.32       4.4%
+village     secret                 7.7         1.15      15.4%  |      1.86      24.8%
+village     own hook               7.7         0.73       9.2%  |      1.41      17.8%
+village     tie description        7.7         1.13      14.7%  |      1.97      26.0%
+town        short goal            23.0         1.27       5.6%  |      2.47      10.5%
+town        long goal             23.0         1.26       5.4%  |      2.49      10.5%
+town        secret                23.0         4.56      20.8%  |      6.58      28.5%
+town        own hook              23.0         5.86      25.3%  |      9.63      40.3%
+town        tie description       23.0         7.93      34.9%  |     12.61      53.6%
+city        short goal            60.3         7.20      12.0%  |     13.30      22.0%
+city        long goal             60.3         7.22      11.9%  |     13.37      22.0%
+city        secret                60.3        14.63      24.7%  |     22.87      38.0%
+city        own hook              60.3        27.99      46.5%  |     40.15      66.2%
+city        tie description       60.3        35.12      58.7%  |     44.76      73.9%
+metropolis  short goal            84.0        14.70      17.5%  |     26.15      31.2%
+metropolis  long goal             84.0        14.80      17.6%  |     26.17      31.2%
+metropolis  secret                84.0        24.50      29.2%  |     38.83      46.4%
+metropolis  own hook              84.0        53.23      63.5%  |     65.78      78.6%
+metropolis  tie description       84.0        58.20      69.3%  |     67.86      81.0%
+

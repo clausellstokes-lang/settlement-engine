@@ -1,0 +1,19 @@
+towns 300, rosters differing 0; goals (card x vantage holding text) 17992
+goals changing text base -> build: 13746 (by size {"thorp":66,"hamlet":222,"village":629,"town":1842,"city":4579,"metropolis":6408})
+  in an appended cell (at base or build): 13730; in cells with no new line at both trees (the held-text knock-on): 16
+  family.kind the same 13180, changed 566; cards whose intent JSON moved 486
+no-new-line movers by cell (base -> build):
+  3  TIES.family.short -> TIES.family.short
+  2  SUPPLY.impaired.long -> SUPPLY.impaired.long
+  1  TIES.family.long -> TIES.family.long
+  1  TIES.creditor.long -> PERSONALITY.mastery.long
+  1  ALLEGIANCE.front_out.short -> PERSONALITY.fear.short
+  1  SUPPLY.dependency.long -> SUPPLY.dependency.long
+  1  PERSONALITY.duty.long -> PERSONALITY.duty.long
+  1  PERSONALITY.kindness.long -> PERSONALITY.kindness.long
+  1  SUPPLY.impaired.long -> INSTITUTION.rebuilding.long
+  1  INSTITUTION.rebuilding.long -> SUPPLY.dependency.long
+  1  ALLEGIANCE.front_out.short -> PERSONALITY.forbidden_patron.short
+  1  PERSONALITY.conviction.short -> TIES.family.short
+  1  TIES.creditor.long -> PERSONALITY.duty.long
+goal texts with a brace at the build: 0

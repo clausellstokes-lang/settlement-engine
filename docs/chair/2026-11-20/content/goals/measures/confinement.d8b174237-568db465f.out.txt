@@ -1,0 +1,81 @@
+trees.mjs: births at d8b174237
+names3 born: exit codes 0,0
+trees.mjs: births at 568db465f
+names3 born: exit codes 0,0
+trees.mjs: d8b174237 -> 568db465f
+## golden: documents 525 · identical 0 · with a non-string difference 46 · differing strings 22926 · of them passing the word check (none) 22926 · other 0
+| npcs[].goal.long | 11530 | 513 |
+| npcs[].goal.short | 10547 | 525 |
+| npcs[].goal.intent.long.family | 160 | 75 |
+| npcs[].goal.intent.long.kind | 160 | 75 |
+| npcs[].goal.intent.long.key | 160 | 75 |
+| npcs[].goal.intent.long.target.id | 123 | 64 |
+| npcs[].goal.intent.long.target.kind | 94 | 51 |
+| npcs[].goal.intent.short.target.id | 56 | 56 |
+| npcs[].goal.intent.short.family | 32 | 24 |
+| npcs[].goal.intent.short.kind | 32 | 24 |
+| npcs[].goal.intent.short.key | 32 | 24 |
+NON-STRING city|germanic|riverside|river|civilized|golden-master-v3 npcs[49].goal.intent.long.target: {"kind":"chain","id":"food_processing"} -> null
+NON-STRING city|germanic|riverside|river|civilized|golden-master-v3 npcs[52].goal.intent.long.target: null -> {"kind":"house","id":"Woodcarver"}
+NON-STRING metropolis|germanic|plains|road|civilized|golden-master-v3 npcs[72].goal.intent.long.target: null -> {"kind":"house","id":"Woodcarver"}
+NON-STRING metropolis|germanic|hills|road|civilized|golden-master-v3 npcs[74].goal.intent.long.target: null -> {"kind":"house","id":"Woodcarver"}
+NON-STRING metropolis|germanic|riverside|river|civilized|golden-master-v3 npcs[73].goal.intent.long.target: null -> {"kind":"house","id":"Woodcarver"}
+NON-STRING metropolis|germanic|coastal|port|civilized|golden-master-v3 npcs[74].goal.intent.long.target: {"kind":"npc","id":"npc_brewery"} -> null
+NON-STRING metropolis|germanic|coastal|port|civilized|golden-master-v3 npcs[75].goal.intent.short.target: null -> {"kind":"npc","id":"npc_chroniclers_exchange"}
+NON-STRING metropolis|latin|plains|road|civilized|golden-master-v3 npcs[72].goal.intent.long.target: null -> {"kind":"house","id":"Woodcarver"}
+NON-STRING metropolis|latin|hills|road|civilized|golden-master-v3 npcs[74].goal.intent.long.target: null -> {"kind":"house","id":"Woodcarver"}
+NON-STRING metropolis|latin|riverside|river|civilized|golden-master-v3 npcs[71].goal.intent.long.target: null -> {"kind":"house","id":"Woodcarver"}
+NON-STRING metropolis|latin|coastal|port|civilized|golden-master-v3 npcs[75].goal.intent.long.target: {"kind":"npc","id":"npc_tanner_established"} -> null
+NON-STRING metropolis|latin|coastal|port|civilized|golden-master-v3 npcs[76].goal.intent.short.target: null -> {"kind":"npc","id":"npc_chandler"}
+NON-STRING metropolis|celtic|plains|road|civilized|golden-master-v3 npcs[72].goal.intent.long.target: null -> {"kind":"house","id":"Woodcarver"}
+NON-STRING metropolis|celtic|hills|road|civilized|golden-master-v3 npcs[74].goal.intent.long.target: null -> {"kind":"house","id":"Woodcarver"}
+NON-STRING metropolis|celtic|coastal|port|civilized|golden-master-v3 npcs[72].goal.intent.long.target: {"kind":"npc","id":"npc_brewery"} -> null
+NON-STRING metropolis|celtic|coastal|port|civilized|golden-master-v3 npcs[73].goal.intent.short.target: null -> {"kind":"npc","id":"npc_veiled_318ece846a681419"}
+NON-STRING metropolis|arabic|plains|road|civilized|golden-master-v3 npcs[72].goal.intent.long.target: null -> {"kind":"house","id":"Woodcarver"}
+NON-STRING metropolis|arabic|hills|road|civilized|golden-master-v3 npcs[74].goal.intent.long.target: null -> {"kind":"house","id":"Woodcarver"}
+NON-STRING metropolis|arabic|riverside|river|civilized|golden-master-v3 npcs[72].goal.intent.long.target: null -> {"kind":"house","id":"Woodcarver"}
+NON-STRING metropolis|arabic|coastal|port|civilized|golden-master-v3 npcs[75].goal.intent.long.target: {"kind":"npc","id":"npc_tanner_established"} -> null
+## census: documents 720 · identical 44 · with a non-string difference 127 · differing strings 38447 · of them passing the word check (none) 38447 · other 0
+| npcs[].goal.long | 16175 | 644 |
+| npcs[].goal.short | 15296 | 649 |
+| npcs[].goal.intent.long.kind | 1011 | 189 |
+| npcs[].goal.intent.long.key | 993 | 187 |
+| npcs[].goal.intent.long.family | 982 | 187 |
+| npcs[].goal.intent.long.target.id | 776 | 186 |
+| npcs[].goal.intent.long.target.kind | 622 | 168 |
+| npcs[].goal.intent.short.kind | 556 | 137 |
+| npcs[].goal.intent.short.key | 554 | 137 |
+| npcs[].goal.intent.short.family | 553 | 137 |
+| npcs[].goal.intent.short.target.id | 528 | 146 |
+| npcs[].goal.intent.short.target.kind | 401 | 121 |
+NON-STRING r2r-city-0 npcs[27].goal.intent.long.target: null -> {"kind":"house","id":"Cobbler's guild"}
+NON-STRING r2r-city-0 npcs[33].goal.intent.long.target: null -> {"kind":"house","id":"Theaters"}
+NON-STRING r2r-city-0 npcs[51].goal.intent.long.target: null -> {"kind":"npc","id":"npc_enchanter_s_shop"}
+NON-STRING r2r-city-3 npcs[52].goal.intent.short.target: null -> {"kind":"npc","id":"npc_major_hospital"}
+NON-STRING r2r-city-3 npcs[53].goal.intent.short.target: null -> {"kind":"npc","id":"npc_veiled_309fa207f10fe2d3"}
+NON-STRING r2r-city-6 npcs[36].goal.intent.long.target: {"kind":"power","id":"Military City Council"} -> null
+NON-STRING r2r-city-6 npcs[38].goal.intent.long.target: null -> {"kind":"house","id":"Butchers (3-8)"}
+NON-STRING r2r-city-6 npcs[42].goal.intent.long.target: null -> {"kind":"house","id":"Dungeon delving supply district"}
+NON-STRING r2r-city-15 npcs[38].goal.intent.long.target: null -> {"kind":"npc","id":"npc_workhouse"}
+NON-STRING r2r-city-18 npcs[41].goal.intent.long.target: null -> {"kind":"npc","id":"npc_weavers_textile_workers"}
+NON-STRING r2r-city-18 npcs[60].goal.intent.long.target: null -> {"kind":"house","id":"Apothecary district"}
+NON-STRING r2r-city-18 npcs[64].goal.intent.long.target: {"kind":"npc","id":"npc_charcoal_burner"} -> null
+NON-STRING r2r-city-25 npcs[25].goal.intent.long.target: null -> {"kind":"house","id":"Tanner (established)"}
+NON-STRING r2r-city-25 npcs[28].goal.intent.long.target: null -> {"kind":"npc","id":"npc_warehouse_district"}
+NON-STRING r2r-city-26 npcs[51].goal.intent.long.target: {"kind":"npc","id":"npc_tailor_s_guild"} -> null
+NON-STRING r2r-city-28 npcs[45].goal.intent.long.target: null -> {"kind":"npc","id":"npc_stable_district"}
+NON-STRING r2r-city-29 npcs[44].goal.intent.long.target: null -> {"kind":"house","id":"Fish market"}
+NON-STRING r2r-city-32 npcs[52].goal.intent.short.target: null -> {"kind":"npc","id":"npc_apothecary_district"}
+NON-STRING r2r-city-33 npcs[29].goal.intent.long.target: null -> {"kind":"npc","id":"npc_customs_house"}
+NON-STRING r2r-city-33 npcs[43].goal.intent.long.target: null -> {"kind":"power","id":"Merchant oligarchy"}
+
+# every non-string difference (confinement-nonstring.mjs over the same births; confine.mjs prints 3 a document, 20 a corpus)
+## golden: docs with a non-string difference 46; non-string differences 59; OUTSIDE npcs[].goal: 0; string differences outside npcs[].goal: 0
+  34  npcs[].goal.intent.long.target (null->object)
+  13  npcs[].goal.intent.long.target (object->null)
+  12  npcs[].goal.intent.short.target (null->object)
+## census: docs with a non-string difference 127; non-string differences 348; OUTSIDE npcs[].goal: 0; string differences outside npcs[].goal: 0
+  141  npcs[].goal.intent.long.target (null->object)
+  129  npcs[].goal.intent.long.target (object->null)
+  50  npcs[].goal.intent.short.target (null->object)
+  28  npcs[].goal.intent.short.target (object->null)
