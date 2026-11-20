@@ -2129,8 +2129,11 @@ revoke execute on function public._gallery_public_tile_rows() from public, anon,
 --     a god, the tier, a plague); the name search alone;
 --   'covert': the act is the underworld's or exists only because of crime (IMPOSE_CORRUPTION: a house turned in the
 --     shadows; EXPOSE_CORRUPTION: it tells that a house was corrupt): withheld wherever a criminal grouping is shut;
---   'stressor': a crisis; withheld wherever a criminal grouping is shut when its key is a crime's (criminal_corridor,
---     infiltration, infiltrated: "Criminal corridor grips the settlement.");
+--   'stressor': a crisis; withheld wherever a criminal grouping is shut when its key or its label is a crime's
+--     (criminal_corridor "Criminal corridor", infiltration "Infiltration network", infiltrated "Infiltrated": "Criminal
+--     corridor grips the settlement."; VEIL-DOORS-3 read the whole catalogue, src/domain/worldPulse/stressorsCore.js ::
+--     STRESSOR_CATALOG, and the generation vocabulary, src/data/stressTypes.js :: STRESS_TYPE_MAP: no other key or
+--     label is crime-worded), asked by containment in its key, label, targets and summary;
 --   'withheld': the DM's free text at the table (TABLE_INCIDENT: the session ledger's flavor, which no rule can read):
 --     never on a marked share.
 -- A type no class knows is withheld (tests/security/galleryDoors.walker.test.js reds on a type the app writes and this
@@ -2292,11 +2295,15 @@ begin
                where public._gallery_doors_chronicle_classes() ? ty.t
                  and not (public._gallery_doors_chronicle_classes() ->> ty.t = 'covert' and shut)
                  and public._gallery_doors_chronicle_classes() ->> ty.t <> 'withheld'
+                 -- (VEIL-DOORS-3, item 3) a crime's stressor by its key OR its label, wherever the entry carries either (a
+                 -- free-text "Infiltration network", the catalogue's own label, reached the page): its key, its label,
+                 -- its targets and its summary, each asked by containment in the squeezed fold
                  and not (public._gallery_doors_chronicle_classes() ->> ty.t = 'stressor' and shut
-                          and public._gallery_doors_squeeze(coalesce(nullif(public._gallery_veil_str(x.e #> '{event,payload,stressorType}'), ''),
-                                                                     nullif(public._gallery_veil_str(x.e #> '{event,targetId}'), ''),
-                                                                     public._gallery_veil_str(x.e -> 'targetId')))
-                              in ('criminalcorridor', 'infiltration', 'infiltrated'))
+                          and exists (select 1
+                                        from unnest(array[x.e #> '{event,payload,stressorType}', x.e #> '{event,payload,label}', x.e #> '{event,targetId}',
+                                                          x.e -> 'targetId', x.e -> 'narrativeSummary', x.e #> '{payload,stressorType}', x.e #> '{payload,label}']) w(v),
+                                             unnest(array['criminalcorridor', 'infiltration', 'infiltrated']) c(k)
+                                       where position(c.k in coalesce(public._gallery_doors_squeeze(public._gallery_veil_str(w.v)), '')) > 0))
                  and not (hits <> '{}' and public._gallery_veil_named(doc -> (x.n::int - 1), hits, srch -> 'blank', srch -> 'raw'))
                  and (frozen is null
                       or public._gallery_doors_time(case when public._gallery_veil_truthy(x.e -> 'timestamp') then public._gallery_veil_str(x.e -> 'timestamp')

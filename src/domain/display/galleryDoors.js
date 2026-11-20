@@ -118,7 +118,12 @@ const CLASS_OF = Object.freeze({
 });
 /** @type {Readonly<Record<string, string>>} */
 export const CHRONICLE_CLASSES = Object.freeze(Object.fromEntries(Object.entries(CLASS_OF).flatMap(([c, types]) => types.map(t => [t, c]))));
-/** A stressor whose key is a crime's (squeezed fold): withheld under a shut criminal grouping. */
+/**
+ * A stressor whose key or label is a crime's (squeezed fold, asked by containment): withheld under a shut criminal
+ * grouping. The whole catalogue (stressorsCore.js :: STRESSOR_CATALOG) and the generation vocabulary (stressTypes.js ::
+ * STRESS_TYPE_MAP) read by VEIL-DOORS-3: criminal_corridor "Criminal corridor", infiltration "Infiltration network",
+ * infiltrated "Infiltrated"; no other key or label is crime-worded.
+ */
 const CRIME_STRESSORS = Object.freeze(['criminalcorridor', 'infiltration', 'infiltrated']);
 /** The registry's label of a target (src/domain/events/registry.js :: labelOf, its case aside: every compare is folded). */
 const targetLabel = (/** @type {unknown} */ t) => str(t).replace(/^.*[.]/, '').replace(/_/g, ' ');
@@ -205,8 +210,12 @@ export function veilChronicle(log, { proj, body, groupings = [], src = null, sha
     if (!cls) continue;
     if (cls === 'covert' && shut) continue;
     if (cls === 'withheld') continue;
-    if (cls === 'stressor' && shut
-      && CRIME_STRESSORS.includes(squeezedFold(str(ev && isRec(ev.payload) ? ev.payload.stressorType : '') || (ev && str(ev.targetId)) || str(e.targetId)))) continue;
+    if (cls === 'stressor' && shut) {
+      // (VEIL-DOORS-3, item 3) its key, its label, its targets and its summary, each by containment
+      const evp = ev && isRec(ev.payload) ? ev.payload : {}; const top = isRec(e.payload) ? e.payload : {};
+      const said = [evp.stressorType, evp.label, ev && ev.targetId, e.targetId, e.narrativeSummary, top.stressorType, top.label].map((x) => squeezedFold(str(x)));
+      if (said.some((t) => CRIME_STRESSORS.some((k) => t.includes(k)))) continue;
+    }
     if (search && search.holds([e.narrativeSummary ?? null, e.targetId ?? null, ev ? ev.targetId ?? null : null, ev ? ev.payload ?? null : null, e.payload ?? null])) continue;
     const when = truthy(e.timestamp) ? e.timestamp : e.appliedAt;
     if (frozen != null) {

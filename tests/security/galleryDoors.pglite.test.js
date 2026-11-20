@@ -346,6 +346,34 @@ describe('VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4
     expect(((await dossier(unmarked.slug)).chronicle || []).length).toBe(LOG5.length);
   }, ARM_TIMEOUT_MS);
 
+  it('THE STRESSOR CATALOGUE (VEIL-DOORS-3, item 3): on a marked share a crime\'s stressor is withheld by its LABEL as well as its key (a free-text "Infiltration network", the catalogue\'s own label, a target that names it); every other catalogue and generation stressor is served; server equals twin', async () => {
+    const at = (m) => ({ at: `2026-11-01T11:${String(m).padStart(2, '0')}:00.000Z` });
+    const LOG3 = [
+      entry('APPLY_STRESSOR', 'Infiltration network grips the settlement.', { targetId: 'Infiltration network', payload: { stressorType: 'Infiltration network', label: 'Infiltration network' }, ...at(1) }),
+      entry('APPLY_STRESSOR', 'Infiltration network grips the settlement.', { targetId: 'world_stressor.infiltration_network', payload: { label: 'Infiltration network' }, ...at(2) }),
+      entry('RESOLVE_STRESSOR', 'The infiltration network no longer grips the settlement.', { targetId: 'The infiltration network', ...at(3) }),
+      entry('APPLY_STRESSOR', 'Criminal corridor grips the settlement.', { targetId: 'Criminal Corridor', payload: { label: 'Criminal Corridor' }, ...at(4) }),
+      entry('APPLY_STRESSOR', 'Infiltrated grips the settlement.', { targetId: 'Infiltrated', ...at(5) }),
+      entry('APPLY_STRESSOR', 'Betrayal shock grips the settlement.', { targetId: 'betrayal', payload: { stressorType: 'betrayal', label: 'Betrayal shock' }, ...at(6) }),
+      entry('APPLY_STRESSOR', 'Monster or raider pressure grips the settlement.', { targetId: 'monster_raider_pressure', payload: { stressorType: 'monster_raider_pressure', label: 'Monster or raider pressure' }, ...at(7) }),
+      entry('APPLY_STRESSOR', 'Insurgency grips the settlement.', { targetId: 'insurgency', payload: { stressorType: 'insurgency', label: 'Insurgency' }, ...at(8) }),
+      entry('RESOLVE_STRESSOR', 'Famine pressure no longer grips the settlement.', { targetId: 'famine', payload: { stressorType: 'famine', label: 'Famine pressure' }, ...at(9) }),
+    ];
+    const SERVED = ['Betrayal shock grips the settlement.', 'Monster or raider pressure grips the settlement.', 'Insurgency grips the settlement.', 'Famine pressure no longer grips the settlement.'];
+    const row = await store(town(), { overrides: VEIL(), log: LOG3 });
+    const g = await dossier(row.slug);
+    expect((g.chronicle || []).map((e) => e.narrativeSummary), 'what a visitor reads').toEqual(SERVED);
+    const veil = await import('../../src/domain/display/galleryVeil.js');
+    const doors = await import('../../src/domain/display/galleryDoors.js');
+    const proj = veil.galleryPayloadFor(JSON.parse(JSON.stringify(town())), { shareDm: false, memberOverrides: VEIL() });
+    const twin = doors.veilChronicle(LOG3, { proj, body: g.data, groupings: g.gallery_member_overrides?.$veil?.groupings || [], src: town(), shareDm: false });
+    expect(canon(twin), 'server equals twin').toBe(canon(g.chronicle));
+    // the groupings open (a hand veil showing the underworld): every stressor is served
+    const open = await store(town(), { overrides: VEIL([{ address: 'block:power.criminalUnderside', hidden: false }, { address: 'block:services.criminal', hidden: false },
+      { address: 'block:defense.criminalStructure', hidden: false }, { address: 'card:institution:' + veil.CARD_KINDS.institution.idOf(BLACK), hidden: false }]), log: LOG3 });
+    expect(((await dossier(open.slug)).chronicle || []).length, 'the groupings open').toBe(LOG3.length);
+  }, ARM_TIMEOUT_MS);
+
   it('SNAPSHOT MODE (VEIL-DOORS-2, item 6): after a freeze the DM adds a criminal house and events, renames the town, shifts its tier and saves; the frozen share\'s chronicle, name, tier and time (dossier, list, map member, import) tell none of it; the twin agrees', async () => {
     const FROZEN_AT = '2026-11-05T00:00:00.000Z';
     const copy = town();

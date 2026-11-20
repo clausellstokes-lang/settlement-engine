@@ -1,0 +1,41 @@
+
+ RUN  v4.1.8 <scratch tree of 447809df0>
+
+ ❯ tests/security/galleryDoors.pglite.test.js (13 tests | 1 failed | 12 skipped) 3344ms
+     × THE STRESSOR CATALOGUE (VEIL-DOORS-3, item 3): on a marked share a crime's stressor is withheld by its LABEL as well as its key (a free-text "Infiltration network", the catalogue's own label, a target that names it); every other catalogue and generation stressor is served; server equals twin 138ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE STRESSOR CATALOGUE (VEIL-DOORS-3, item 3): on a marked share a crime's stressor is withheld by its LABEL as well as its key (a free-text "Infiltration network", the catalogue's own label, a target that names it); every other catalogue and generation stressor is served; server equals twin
+AssertionError: what a visitor reads: expected [ …(7) ] to deeply equal [ …(4) ]
+
+- Expected
++ Received
+
+  [
++   "Infiltration network grips the settlement.",
++   "Infiltration network grips the settlement.",
++   "The infiltration network no longer grips the settlement.",
+    "Betrayal shock grips the settlement.",
+    "Monster or raider pressure grips the settlement.",
+    "Insurgency grips the settlement.",
+    "Famine pressure no longer grips the settlement.",
+  ]
+
+ ❯ tests/security/galleryDoors.pglite.test.js:365:88
+    363|     const row = await store(town(), { overrides: VEIL(), log: LOG3 });
+    364|     const g = await dossier(row.slug);
+    365|     expect((g.chronicle || []).map((e) => e.narrativeSummary), 'what a…
+       |                                                                                        ^
+    366|     const veil = await import('../../src/domain/display/galleryVeil.js…
+    367|     const doors = await import('../../src/domain/display/galleryDoors.…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 12 skipped (13)
+   Start at  05:29:43
+   Duration  3.62s (transform 103ms, setup 34ms, import 122ms, tests 3.34s, environment 0ms)
+
+exit 1
