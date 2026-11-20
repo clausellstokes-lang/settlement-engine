@@ -8,7 +8,7 @@
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
  * `BASELINE_SCHEMA` is **46**: schema 45's tagged numeric heuristic-leaf envelope and tag law UNCHANGED, re-governed to
- * THE FORTUNE MERITS WRITER'S ADMISSION (the chair's ruling of 2026-11-20 22:18 UTC, FORTUNE U5a-CURE item 2, route B):
+ * THE FORTUNE MERITS WRITER'S ADMISSION (the chair's ruling of 22:18 UTC 2026-11-20 on the fortune lane; FORTUNE U5a-CURE item 2, route B):
  * ONE declaration of the conditional-generator-branch class, `merits on breakdown` (writer fortune/fortuneMerits.js,
  * which writes the key only under the fortune law, `_fortuneLawVersion: 2`, which the corpus's CONFIGS never carry);
  * the roster 16 -> 17, the bank 78/52 -> 79/53, and its one row (src/domain/fortune/fortuneMerits.js x1) admitted

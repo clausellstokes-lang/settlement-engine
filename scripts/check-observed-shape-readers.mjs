@@ -316,7 +316,7 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     and C identities of CL20's table and FAULTS-PEOPLE's `name on factions`); nothing declared, nothing gone; the
  *     bank 78/52 (RETIRED).
  * 46 = schema 45's topology, tag law and corpus definition, re-governed to THE FORTUNE MERITS WRITER'S
- *     ADMISSION (the chair's ruling of 2026-11-20 22:18 UTC (FORTUNE U5a-CURE item 2, route B)): ONE declaration
+ *     ADMISSION (the chair's ruling of 22:18 UTC 2026-11-20 on the fortune lane; FORTUNE U5a-CURE item 2, route B): ONE declaration
  *     of the conditional-generator-branch class, `merits on breakdown` (writer fortune/fortuneMerits.js, which
  *     writes the key only under the fortune law, `_fortuneLawVersion: 2`, which the corpus's CONFIGS never
  *     carry); the roster 16 -> 17, the bank 78/52 -> 79/53, and the one new row
@@ -1595,22 +1595,23 @@ export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
       + ' only in campaign time, so the birth corpus never observes the write. Read once by'
       + ' src/domain/display/newsBody.js :: itemSettlementIds (item.outcome?.affectedSettlementIds).',
   }),
-  // ⭐⭐ THE SCHEMA-46 RUNG'S ONE DECLARATION — the fortune merits (FORTUNE U5a-CURE item 2, route B), under the
-  // chair's ruling of 2026-11-20 22:18 UTC. The FIFTH class (`conditional-generator-branch`, the `isCriminal` and
+  // ⭐⭐ THE SCHEMA-46 RUNG'S ONE DECLARATION — the fortune merits (FORTUNE U5a-CURE item 2, route B), under
+  // the chair's ruling of 22:18 UTC 2026-11-20 on the fortune lane (route B confirmed at 22:21 UTC). The FIFTH class (`conditional-generator-branch`, the `isCriminal` and
   // `migrationDirection` precedent): the corpus RUNS the assembly step whose tail calls settleMeritsOfRule, and still
   // never sees the key, because fortuneMerits.js :: meritedLegitimacy writes `breakdown.merits` only under the fortune
   // law (`_fortuneLawVersion: 2`), and the corpus builder's Producer 1 births CONFIGS that carry no marker, so law 1,
   // which writes no byte (FS5). The read is fortuneMerits.js's own `breakdown?.merits` (baseScoreOf). Route (A), a
   // corpus writer, is impossible while the law is dark. Gate 0 reads the write as the object-literal key
-  // `merits: added`.
+  // `merits: added`. ⭐ THE ROW IS TEMPORARY BY RULING: once the laws are lit by default, the corpus should observe
+  // lit births (one governed migration adding lit configs to the corpus's matrix) and this row is retired.
   Object.freeze({
     identity: 'merits on breakdown',
     mechanism: 'conditional-generator-branch',
     writer: 'src/domain/fortune/fortuneMerits.js',
-    ruling: 'FORTUNE U5a-CURE item 2, route B — the chair\'s ruling of 2026-11-20 22:18 UTC',
-    why: 'Written only under the fortune law (_fortuneLawVersion: 2), by meritedLegitimacy at the assembly'
-      + ' step\'s tail (settleMeritsOfRule); the corpus\'s CONFIGS never carry that marker, so every corpus'
-      + ' world reads law 1, which writes no byte, and the read has no observed writer by construction.',
+    ruling: 'the chair\'s ruling of 22:18 UTC 2026-11-20 on the fortune lane',
+    why: 'Every corpus birth is law 1 (CONFIGS carry no _fortuneLawVersion), so the law-2 write never runs.'
+      + ' Once the laws are lit by default, the corpus should observe lit births (one governed migration adding lit'
+      + ' configs) and this row is retired.',
   }),
 ]);
 
@@ -3303,7 +3304,8 @@ export function baselineOf({
       'the rounds\' eleven new reads since the last freeze (e56e112e2) are admitted by cause with class and landing; nothing',
       'declared, nothing gone. Every moved row, with its cause, is recorded in the rung\'s review (docs/chair/2026-11-18/lastclose/) (RETIRED).',
       'SCHEMA 46 = schema 45\'s topology, tag law and corpus definition, re-governed to THE FORTUNE MERITS WRITER\'S',
-      'ADMISSION (the chair\'s ruling of 2026-11-20 22:18 UTC, FORTUNE U5a-CURE item 2, route B): fortuneMerits.js',
+      'ADMISSION (the chair\'s ruling of 22:18 UTC 2026-11-20 on the fortune lane; FORTUNE U5a-CURE item 2, route B):',
+      'fortuneMerits.js',
       'writes `breakdown.merits` only under the fortune law (`_fortuneLawVersion: 2`), which the corpus\'s CONFIGS never',
       'carry, and its one guarded read has no observed writer by construction. The conditional-generator-branch class',
       'explains it: ONE declaration, `merits on breakdown`, the roster 16 -> 17; the one new row is admitted TAGGED and',

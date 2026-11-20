@@ -197,8 +197,8 @@
  *     roster 10 -> 13, the bank 69/45 -> 76/50), and ADMITS the window's other rows with
  *     attribution. Its full rationale lives beside `WINDOW_RUNG1_TARGET_SCHEMA` (RETIRED).
  *
- *   schema 45 -> 46 (LIVE)   THE FORTUNE MERITS WRITER'S ADMISSION (the chair's ruling of 2026-11-20 22:18 UTC (FORTUNE
- *     U5a-CURE item 2, route B)): one rung, ONE declaration of the conditional-generator-branch class, `merits on
+ *   schema 45 -> 46 (LIVE)   THE FORTUNE MERITS WRITER'S ADMISSION (the chair's ruling of 22:18 UTC 2026-11-20 on the fortune lane; FORTUNE
+ *     U5a-CURE item 2, route B): one rung, ONE declaration of the conditional-generator-branch class, `merits on
  *     breakdown` (writer fortune/fortuneMerits.js, which writes the key only under the fortune law, which the corpus's
  *     CONFIGS never carry); the roster 16 -> 17, the bank 78/52 -> 79/53, and the one new row admitted TAGGED;
  *     topology and tag law unchanged, nothing else moves. Its full rationale lives beside
@@ -1892,8 +1892,8 @@ export const FINAL_PASS_TARGET_SCHEMA = 44;
  *  walker-red, and its re-freeze lands next. */
 export const LAST_CLOSE_TARGET_SCHEMA = 45;
 
-/* ⭐⭐ THE SCHEMA 45 → 46 RUNG — THE FORTUNE MERITS WRITER'S ADMISSION (the chair's ruling of 2026-11-20 22:18 UTC
- *  (FORTUNE U5a-CURE item 2, route B): "ONE schema rung for ONE explained-writer row, made by the instrument's own
+/* ⭐⭐ THE SCHEMA 45 → 46 RUNG — THE FORTUNE MERITS WRITER'S ADMISSION (the chair's ruling of 22:18 UTC 2026-11-20 on the fortune lane
+ *  (FORTUNE U5a-CURE item 2, route B; confirmed 22:21 UTC): "ONE schema rung for ONE explained-writer row, made by the instrument's own
  *  migration door"; the bank's other declarations and the tag law unchanged). The schema-29 one-declaration rung's
  *  form (`MIGRATION_DIRECTION_TARGET_SCHEMA`), the same fifth class.
  *
