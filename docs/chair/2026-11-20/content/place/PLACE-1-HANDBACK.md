@@ -1,6 +1,6 @@
 # PLACE-1 — hand-back (kept current at every push)
 
-Last written: 2026-11-20T17:19Z Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
+Last written: 2026-11-20T17:33Z Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
 
 ## How a successor resumes
 1. Read the prompt, then this file, then the briefs in this directory (`BRIEF-*.md`); nothing else is needed.
@@ -28,8 +28,8 @@ eS.activeChains[].entrepotNote               thorp - | hamle 8/12 | villa 13/22 
 | economicDragDesc | c33953282 | stopped unfinished (no commit) | — | — | DROPPED by the chair 16:30 (SAME-1: printed in 0–7 places a size) |
 | economicViability.dependencies[] + warnings[] + summary | c33953282 | 50384de85 (merged 6571cf474): NOTHING REPEATED PRINTS (Outlook tab and PDF drop severity `dependency`; the one warning hidden by its title; the pages print their own verdict, not `summary`) | DROPPED, reported | — | — | — |
 | tradeDependencies[].impact | c33953282 | — | — | — | DROPPED by the chair 16:30 (printed in 0–4 places a size) |
-| activeChains[].entrepotNote | c33953282 | 5ef59564a (merged 0899d93e6): PRINTS on Economics › Economic Flows cards (entrepot && !dependency) and the PDF; held top 3/8/13/31/81/76 → 1/3/4/7/12/13 WITH the carrier atom (metro 24 without) | APPROVED 17:18 (atom granted; 8 rewordings; 3 conditions) | brief `BRIEF-BUILD-entrepotNote.md`; builder cut when a seat frees | the chair's SECOND unit |
-| economicViability.plotHooks[].hook | f18e3c59c | first try stopped unfinished (seat limit) 16:4x; re-dispatched 17:0x (place-1/viabilityHooks-measure-2) | — | — | added by the chair 16:38, after entrepotNote |
+| activeChains[].entrepotNote | c33953282 | 5ef59564a (merged 0899d93e6): PRINTS on Economics › Economic Flows cards (entrepot && !dependency) and the PDF; held top 3/8/13/31/81/76 → 1/3/4/7/12/13 WITH the carrier atom (metro 24 without) | APPROVED 17:18 (atom granted; 8 rewordings; 3 conditions) | building: place-1/entrepotNote-build from 0b41e9fd4 | the chair's SECOND unit |
+| economicViability.plotHooks[].hook | f18e3c59c | 903ab1d5d (merged bc5ed1792): PRINTS on Summary › Plot Hooks (DM, player), PDF via `collectPlotHooks`; all-places top 11/10/12/19/15/16 → 5/3/3/8/11/12 (two pools: merchant food line, iron hooks) | sent as bc5ed1792; WAITING (twists? iron pool in scope? today's text drawable?) | — | added by the chair 16:38, after entrepotNote |
 | safetyProfile.plotHooks[] | f18e3c59c | — | — | — | added by the chair 16:38, after entrepotNote |
 
 ## Laws I hold (from the prompt; short)
@@ -53,5 +53,6 @@ Builders build, I integrate: one builder a field, red first; I read its diff onc
 (filled per unit at its merge)
 
 ## Named survivors (found, not mine to build)
+- The economy's merchant hook ("grows less food than it eats…") is graded "Survival Crisis / critical" in 56 of its 78 places: the grade reads the raw food band while the page shows Pressured (`viabilityHooks-MEASURE.md`). Sent to the chair 17:3x.
 - `resourceDynamicsKernel.js` overwrites a stored `entrepotNote` with the chain's stock note when a resource changes (an edit lifecycle): after the cure, an edited town's note reverts to the stock one. The chair, 17:18: a named survivor.
 - The economy's output never reaches 70 in 600 default births, so every busy-trade branch of `prosperity.js :: situationDescOf` (and the label bonus at 70) is dead (`situationDesc-MEASURE.md` §A). The chair: a named survivor, not the fortune lane's to build now.
