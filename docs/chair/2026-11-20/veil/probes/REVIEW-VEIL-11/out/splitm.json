@@ -1,0 +1,1198 @@
+{
+ "tally": {
+  "band economy.prosperity": {
+   "n": 86,
+   "sane": 86,
+   "fails": 29,
+   "ex": [
+    "rv10-inv-village-none-0-8: served \"Struggling\" | from served \"Poor\"",
+    "rv10-inv-city-none-0-31: served \"Comfortable\" | from served \"Prosperous\"",
+    "rv10-inv-city-indebted-0-36: served \"Moderate\" | from served \"Prosperous\""
+   ]
+  },
+  "band safety.safetyLabel": {
+   "n": 86,
+   "sane": 86,
+   "fails": 29,
+   "ex": [
+    "rv10-inv-town-none-0-11: served \"Moderate\" | from served \"Safe\"",
+    "rv10-inv-town-politically_fractured-0-30: served \"Strained — Political Fracture\" | from served \"Tense — Political Fracture\"",
+    "rv10-inv-city-none-0-31: served \"Moderate\" | from served \"Unsafe\""
+   ]
+  },
+  "band defence.readiness.label": {
+   "n": 86,
+   "sane": 86,
+   "fails": 11,
+   "ex": [
+    "rv10-inv-city-politically_fractured-0-40: served \"Well-Defended\" | from served \"Fortress\"",
+    "rv10-inv-city-none-0-42: served \"Defensible\" | from served \"Well-Defended\"",
+    "rv10-inv-metropolis-wartime-0-57: served \"Well-Defended\" | from served \"Fortress\""
+   ]
+  },
+  "precise legitimacy.score (from served labels)": {
+   "n": 86,
+   "sane": 86,
+   "fails": 0,
+   "ex": []
+  },
+  "precise defence.scores.disaster": {
+   "n": 86,
+   "sane": 86,
+   "fails": 37,
+   "ex": [
+    "rv10-inv-town-none-0-11: served 69 | from served 71",
+    "rv10-inv-town-none-0-18: served 50 | from served 51",
+    "rv10-inv-town-occupied-0-19: served 47 | from served 48"
+   ]
+  },
+  "precise defence.scores.economic": {
+   "n": 86,
+   "sane": 86,
+   "fails": 52,
+   "ex": [
+    "rv10-inv-village-none-0-8: served 28 | from served 29",
+    "rv10-inv-town-none-0-11: served 62 | from served 65",
+    "rv10-inv-town-none-0-18: served 49 | from served 50"
+   ]
+  },
+  "precise defence.scores.internal": {
+   "n": 86,
+   "sane": 86,
+   "fails": 78,
+   "ex": [
+    "rv10-inv-village-none-0-8: served 0 | from served 17",
+    "rv10-inv-town-none-0-11: served 43 | from served 54",
+    "rv10-inv-town-none-0-18: served 23 | from served 30"
+   ]
+  },
+  "precise defence.scores.magical": {
+   "n": 86,
+   "sane": 86,
+   "fails": 33,
+   "ex": [
+    "rv10-inv-town-wartime-0-27: served 12 | from served 14",
+    "rv10-inv-city-none-0-31: served 72 | from served 86",
+    "rv10-inv-city-none-0-32: served 76 | from served 93"
+   ]
+  },
+  "precise defence.scores.military": {
+   "n": 86,
+   "sane": 86,
+   "fails": 31,
+   "ex": [
+    "rv10-inv-town-none-0-11: served 57 | from served 59",
+    "rv10-inv-town-wartime-0-27: served 58 | from served 62",
+    "rv10-inv-town-politically_fractured-0-30: served 98 | from served 99"
+   ]
+  },
+  "precise defence.scores.monster": {
+   "n": 86,
+   "sane": 86,
+   "fails": 28,
+   "ex": [
+    "rv10-inv-town-none-0-18: served 54 | from served 55",
+    "rv10-inv-town-wartime-0-27: served 50 | from served 51",
+    "rv10-inv-city-none-0-31: served 95 | from served 98"
+   ]
+  },
+  "precise defence.economicGates": {
+   "n": 86,
+   "sane": 86,
+   "fails": 38,
+   "ex": [
+    "rv10-inv-town-none-0-11: served {\"disaster\":0.91,\"economic\":0.89,\"internal\":0.93,\"military\":0.92,\"mons | from served {\"disaster\":0.94,\"economic\":0.92,\"internal\":0.95,\"military\":0.94,\"mons",
+    "rv10-inv-town-none-0-18: served {\"disaster\":0.66,\"economic\":0.58,\"internal\":0.73,\"military\":0.7,\"monst | from served {\"disaster\":0.67,\"economic\":0.59,\"internal\":0.74,\"military\":0.7,\"monst",
+    "rv10-inv-town-occupied-0-19: served {\"disaster\":0.71,\"economic\":0.65,\"internal\":0.78,\"military\":0.74,\"mons | from served {\"disaster\":0.73,\"economic\":0.67,\"internal\":0.79,\"military\":0.76,\"mons"
+   ]
+  },
+  "precise food.resilienceScore": {
+   "n": 86,
+   "sane": 83,
+   "fails": 0,
+   "ex": []
+  },
+  "precise food.storageMonths": {
+   "n": 86,
+   "sane": 86,
+   "fails": 0,
+   "ex": []
+  },
+  "served conditions.severity present": {
+   "n": 86,
+   "sane": 86,
+   "fails": 60,
+   "ex": []
+  },
+  "served safetyRatio present": {
+   "n": 86,
+   "sane": 86,
+   "fails": 86,
+   "ex": []
+  },
+  "served compound.criminalEffective present": {
+   "n": 86,
+   "sane": 86,
+   "fails": 86,
+   "ex": []
+  },
+  "derive threw": {
+   "n": 1,
+   "sane": 1,
+   "fails": 1,
+   "ex": [
+    "rv10-inv-city-none-1-102: [rngContext] a PRNG helper was called with no active seeded RNG. The result woul"
+   ]
+  }
+ },
+ "namesN": 0,
+ "names": [],
+ "comp": [
+  {
+   "seed": "rv10-inv-village-none-0-8",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 81,
+   "incGone": [
+    "Shadow Economy (untaxed):19"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3
+  },
+  {
+   "seed": "rv10-inv-town-none-0-11",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3
+  },
+  {
+   "seed": "rv10-inv-town-insurgency-0-15",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 74,
+   "incGone": [
+    "Smuggling Network Revenue:26"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3
+  },
+  {
+   "seed": "rv10-inv-town-wartime-0-17",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3
+  },
+  {
+   "seed": "rv10-inv-town-none-0-18",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5
+  },
+  {
+   "seed": "rv10-inv-town-occupied-0-19",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 87,
+   "incGone": [
+    "Smuggling Network Revenue:13"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4
+  },
+  {
+   "seed": "rv10-inv-town-none-0-21",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4
+  },
+  {
+   "seed": "rv10-inv-town-wartime-0-27",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 83,
+   "incGone": [
+    "Smuggling Network Revenue:17"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5
+  },
+  {
+   "seed": "rv10-inv-town-politically_fractured-0-30",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4
+  },
+  {
+   "seed": "rv10-inv-city-none-0-31",
+   "hidden": 4,
+   "incA": 100,
+   "incS": 89,
+   "incGone": [
+    "Smuggling Network Revenue:11"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-city-none-0-32",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 87,
+   "incGone": [
+    "Smuggling Network Revenue:13"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-city-none-0-33",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 92,
+   "incGone": [
+    "Criminal Syndicate Revenue:8"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-city-infiltrated-0-34",
+   "hidden": 4,
+   "incA": 100,
+   "incS": 94,
+   "incGone": [
+    "Smuggling Network Revenue:6"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-city-insurgency-0-35",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 89,
+   "incGone": [
+    "Smuggling Network Revenue:11"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-city-indebted-0-36",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 89,
+   "incGone": [
+    "Criminal Syndicate Revenue:11"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-city-wartime-0-37",
+   "hidden": 3,
+   "incA": 100,
+   "incS": 93,
+   "incGone": [
+    "Smuggling Network Revenue:7"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5
+  },
+  {
+   "seed": "rv10-inv-city-none-0-38",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-city-occupied-0-39",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 88,
+   "incGone": [
+    "Smuggling Network Revenue:12"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5
+  },
+  {
+   "seed": "rv10-inv-city-politically_fractured-0-40",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 91,
+   "incGone": [
+    "Smuggling Network Revenue:9"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-city-none-0-41",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5
+  },
+  {
+   "seed": "rv10-inv-city-none-0-42",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 88,
+   "incGone": [
+    "Smuggling Network Revenue:12"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-city-infiltrated-0-44",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5
+  },
+  {
+   "seed": "rv10-inv-city-indebted-0-46",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 90,
+   "incGone": [
+    "Smuggling Network Revenue:10"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-city-wartime-0-47",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 85,
+   "incGone": [
+    "Smuggling Network Revenue:15"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-city-occupied-0-49",
+   "hidden": 3,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5
+  },
+  {
+   "seed": "rv10-inv-city-politically_fractured-0-50",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 87,
+   "incGone": [
+    "Criminal Syndicate Revenue:13"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-52",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-53",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 94,
+   "incGone": [
+    "Criminal Syndicate Revenue:6"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-metropolis-infiltrated-0-54",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-metropolis-insurgency-0-55",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 81,
+   "incGone": [
+    "Criminal Syndicate Revenue:19"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-metropolis-indebted-0-56",
+   "hidden": 8,
+   "incA": 100,
+   "incS": 87,
+   "incGone": [
+    "Criminal Syndicate Revenue:13"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-metropolis-wartime-0-57",
+   "hidden": 8,
+   "incA": 100,
+   "incS": 82,
+   "incGone": [
+    "Criminal Syndicate Revenue:18"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 10,
+   "facS": 10
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-58",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-metropolis-occupied-0-59",
+   "hidden": 8,
+   "incA": 100,
+   "incS": 90,
+   "incGone": [
+    "Criminal Syndicate Revenue:10"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 10,
+   "facS": 10
+  },
+  {
+   "seed": "rv10-inv-metropolis-politically_fractured-0-60",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 94,
+   "incGone": [
+    "Criminal Syndicate Revenue:6"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 10,
+   "facS": 10
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-61",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-62",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-63",
+   "hidden": 3,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-metropolis-infiltrated-0-64",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 93,
+   "incGone": [
+    "Criminal Syndicate Revenue:7"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 9,
+   "facS": 9
+  },
+  {
+   "seed": "rv10-inv-metropolis-insurgency-0-65",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 77,
+   "incGone": [
+    "Smuggling Network Revenue:23"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-metropolis-indebted-0-66",
+   "hidden": 3,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-metropolis-wartime-0-67",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 89,
+   "incGone": [
+    "Criminal Syndicate Revenue:11"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 10,
+   "facS": 10
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-68",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 80,
+   "incGone": [
+    "Criminal Syndicate Revenue:20"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-metropolis-occupied-0-69",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 93,
+   "incGone": [
+    "Criminal Syndicate Revenue:7"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 9,
+   "facS": 9
+  },
+  {
+   "seed": "rv10-inv-metropolis-politically_fractured-0-70",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-town-wartime-1-87",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 80,
+   "incGone": [
+    "Smuggling Network Revenue:20"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5
+  },
+  {
+   "seed": "rv10-inv-town-occupied-1-89",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3
+  },
+  {
+   "seed": "rv10-inv-town-none-1-91",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 86,
+   "incGone": [
+    "Black Market Revenue:14"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3
+  },
+  {
+   "seed": "rv10-inv-town-none-1-92",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3
+  },
+  {
+   "seed": "rv10-inv-town-insurgency-1-95",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 83,
+   "incGone": [
+    "Smuggling Network Revenue:17"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4
+  },
+  {
+   "seed": "rv10-inv-town-indebted-1-96",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4
+  },
+  {
+   "seed": "rv10-inv-town-none-1-98",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5
+  },
+  {
+   "seed": "rv10-inv-town-occupied-1-99",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 84,
+   "incGone": [
+    "Smuggling Network Revenue:16"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3
+  },
+  {
+   "seed": "rv10-inv-town-politically_fractured-1-100",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4
+  },
+  {
+   "seed": "rv10-inv-city-none-1-101",
+   "hidden": 3,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-city-none-1-103",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-city-infiltrated-1-104",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 88,
+   "incGone": [
+    "Smuggling Network Revenue:12"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-city-insurgency-1-105",
+   "hidden": 3,
+   "incA": 100,
+   "incS": 91,
+   "incGone": [
+    "Smuggling Network Revenue:9"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-city-wartime-1-107",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 88,
+   "incGone": [
+    "Smuggling Network Revenue:12"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-city-none-1-108",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 90,
+   "incGone": [
+    "Smuggling Network Revenue:10"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-city-politically_fractured-1-110",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 91,
+   "incGone": [
+    "Smuggling Network Revenue:9"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5
+  },
+  {
+   "seed": "rv10-inv-city-none-1-111",
+   "hidden": 4,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-city-none-1-112",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 91,
+   "incGone": [
+    "Smuggling Network Revenue:9"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-city-none-1-113",
+   "hidden": 4,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-city-infiltrated-1-114",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-city-indebted-1-116",
+   "hidden": 4,
+   "incA": 100,
+   "incS": 90,
+   "incGone": [
+    "Smuggling Network Revenue:10"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-city-occupied-1-119",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-1-121",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 87,
+   "incGone": [
+    "Smuggling Network Revenue:13"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 9,
+   "facS": 9
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-1-122",
+   "hidden": 8,
+   "incA": 100,
+   "incS": 83,
+   "incGone": [
+    "Criminal Syndicate Revenue:17"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-1-123",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 88,
+   "incGone": [
+    "Criminal Syndicate Revenue:12"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-metropolis-infiltrated-1-124",
+   "hidden": 3,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-metropolis-insurgency-1-125",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 84,
+   "incGone": [
+    "Smuggling Network Revenue:16"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-metropolis-indebted-1-126",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-metropolis-wartime-1-127",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 92,
+   "incGone": [
+    "Thieves' Guild Revenue:8"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 9,
+   "facS": 9
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-1-128",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 94,
+   "incGone": [
+    "Smuggling Network Revenue:6"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-metropolis-occupied-1-129",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-metropolis-politically_fractured-1-130",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-1-131",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 9,
+   "facS": 9
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-1-132",
+   "hidden": 8,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-1-133",
+   "hidden": 3,
+   "incA": 100,
+   "incS": 96,
+   "incGone": [
+    "Thieves' Guild Revenue:4"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8
+  },
+  {
+   "seed": "rv10-inv-metropolis-infiltrated-1-134",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 85,
+   "incGone": [
+    "Criminal Syndicate Revenue:15"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 9,
+   "facS": 9
+  },
+  {
+   "seed": "rv10-inv-metropolis-insurgency-1-135",
+   "hidden": 8,
+   "incA": 100,
+   "incS": 81,
+   "incGone": [
+    "Criminal Syndicate Revenue:19"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6
+  },
+  {
+   "seed": "rv10-inv-metropolis-wartime-1-137",
+   "hidden": 3,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-1-138",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 85,
+   "incGone": [
+    "Criminal Syndicate Revenue:15"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  },
+  {
+   "seed": "rv10-inv-metropolis-occupied-1-139",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 100,
+   "incGone": [],
+   "powA": 100,
+   "powS": 100,
+   "facA": 9,
+   "facS": 9
+  },
+  {
+   "seed": "rv10-inv-metropolis-politically_fractured-1-140",
+   "hidden": 4,
+   "incA": 100,
+   "incS": 93,
+   "incGone": [
+    "Thieves' Guild Revenue:7"
+   ],
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7
+  }
+ ]
+}

@@ -1,0 +1,1446 @@
+{
+ "tally": {
+  "served safetyRatio present": {
+   "n": 45,
+   "sane": 45,
+   "fails": 45,
+   "ex": [
+    "rv10-inv-village-none-0-8: 0.3",
+    "rv10-inv-town-none-0-11: 1.2",
+    "rv10-inv-town-insurgency-0-15: 0.3"
+   ]
+  },
+  "served compound.criminalEffective present": {
+   "n": 45,
+   "sane": 45,
+   "fails": 45,
+   "ex": [
+    "rv10-inv-village-none-0-8: 82.83633874239351",
+    "rv10-inv-town-none-0-11: 52.543363083164294",
+    "rv10-inv-town-insurgency-0-15: 97.32205618238675"
+   ]
+  },
+  "served compound.militaryEffective present": {
+   "n": 45,
+   "sane": 45,
+   "fails": 45,
+   "ex": [
+    "rv10-inv-village-none-0-8: 26.111281402064193",
+    "rv10-inv-town-none-0-11: 62.74346889520514",
+    "rv10-inv-town-insurgency-0-15: 29.001210245476496"
+   ]
+  },
+  "served conditions.severity present": {
+   "n": 45,
+   "sane": 45,
+   "fails": 32,
+   "ex": [
+    "rv10-inv-village-none-0-8: 0.76",
+    "rv10-inv-town-insurgency-0-15: 0.71",
+    "rv10-inv-town-wartime-0-17: 0.54"
+   ]
+  },
+  "stored compound.criminalEffective present": {
+   "n": 45,
+   "sane": 45,
+   "fails": 45,
+   "ex": [
+    "rv10-inv-village-none-0-8: 82.83633874239351",
+    "rv10-inv-town-none-0-11: 52.543363083164294",
+    "rv10-inv-town-insurgency-0-15: 97.32205618238675"
+   ]
+  },
+  "band economy.prosperity": {
+   "n": 45,
+   "sane": 45,
+   "fails": 15,
+   "ex": [
+    "rv10-inv-village-none-0-8: served \"Struggling\" | from served \"Poor\"",
+    "rv10-inv-city-none-0-31: served \"Comfortable\" | from served \"Prosperous\"",
+    "rv10-inv-city-indebted-0-36: served \"Moderate\" | from served \"Prosperous\""
+   ]
+  },
+  "band economy.prosperityStanding": {
+   "n": 45,
+   "sane": 44,
+   "fails": 20,
+   "ex": [
+    "rv10-inv-village-none-0-8: served \"Poor\" | from served \"Comfortable\"",
+    "rv10-inv-town-wartime-0-27: served \"Prosperous\" | from served \"Comfortable\"",
+    "rv10-inv-city-none-0-31: served \"Comfortable\" | from served \"Prosperous\""
+   ]
+  },
+  "band safety.safetyLabel": {
+   "n": 45,
+   "sane": 45,
+   "fails": 13,
+   "ex": [
+    "rv10-inv-town-none-0-11: served \"Moderate\" | from served \"Safe\"",
+    "rv10-inv-town-politically_fractured-0-30: served \"Strained — Political Fracture\" | from served \"Tense — Political Fracture\"",
+    "rv10-inv-city-none-0-31: served \"Moderate\" | from served \"Unsafe\""
+   ]
+  },
+  "band defence.readiness.label": {
+   "n": 45,
+   "sane": 45,
+   "fails": 4,
+   "ex": [
+    "rv10-inv-village-none-0-8: served \"Undefended\" | from served \"Vulnerable\"",
+    "rv10-inv-metropolis-infiltrated-0-64: served \"Well-Defended\" | from served \"Fortress\"",
+    "rv10-inv-metropolis-insurgency-0-65: served \"Defensible\" | from served \"Well-Defended\""
+   ]
+  },
+  "band defence.readiness.colours": {
+   "n": 45,
+   "sane": 45,
+   "fails": 4,
+   "ex": [
+    "rv10-inv-village-none-0-8: served [\"#8b1a1a\",\"#fdf4f4\",\"#e8c0c0\"] | from served [\"#8a3010\",\"#fdf8ec\",\"#e8c080\"]",
+    "rv10-inv-metropolis-infiltrated-0-64: served [\"#1a3a6a\",\"#f0f4fa\",\"#a8c0d8\"] | from served [\"#1a4a2a\",\"#f0faf2\",\"#a8d8b0\"]",
+    "rv10-inv-metropolis-insurgency-0-65: served [\"#5a6a1a\",\"#f4f8ec\",\"#b8d0a8\"] | from served [\"#1a3a6a\",\"#f0f4fa\",\"#a8c0d8\"]"
+   ]
+  },
+  "band legitimacy.label+colours": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "precise legitimacy.score (from served labels)": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "precise defence.scores.disaster": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "precise defence.scores.economic": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "precise defence.scores.internal": {
+   "n": 45,
+   "sane": 45,
+   "fails": 41,
+   "ex": [
+    "rv10-inv-village-none-0-8: served 2 | from served 15",
+    "rv10-inv-town-none-0-11: served 47 | from served 56",
+    "rv10-inv-town-none-0-18: served 39 | from served 46"
+   ]
+  },
+  "precise defence.scores.magical": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "precise defence.scores.military": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "precise defence.scores.monster": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "precise defence.economicGates": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "precise food.record.storageMonths (served standing share)": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "precise food.record.storageMonths (visitor standing)": {
+   "n": 45,
+   "sane": 44,
+   "fails": 16,
+   "ex": [
+    "rv10-inv-village-none-0-8: served 1.8 | from served 2.1",
+    "rv10-inv-town-wartime-0-27: served 6.5 | from served 6.3",
+    "rv10-inv-city-none-0-31: served 8.5 | from served 8.8"
+   ]
+  },
+  "prose defense:state.publicOrder.beside <- safety": {
+   "n": 45,
+   "sane": 45,
+   "fails": 10,
+   "ex": [
+    "rv10-inv-town-none-0-11: served \"Order at Bhagabari could tip either way: a few fewer watchmen or one bolder gang would be | swapped \"The town's record of crimes at Bhagabari is still short, but it grows longer each season,",
+    "rv10-inv-city-none-0-31: served \"Khirbetpara has people who keep order, and order holds about as well as anyone here expec | swapped \"Crime at Khirbetpara is outrunning the watch. It is not chaos; it is that the people doin",
+    "rv10-inv-city-none-0-33: served \"Order at Caththwaite could tip either way: a few fewer watchmen or one bolder gang would  | swapped \"Visitors feel safe at Caththwaite, and it is plain that somebody keeps it that way.\""
+   ]
+  },
+  "prose defense:state.publicOrder.rung.sentence <- safety": {
+   "n": 45,
+   "sane": 45,
+   "fails": 10,
+   "ex": [
+    "rv10-inv-town-none-0-11: served \"Order at Bhagabari could tip either way: a few fewer watchmen or one bolder gang would be | swapped \"The town's record of crimes at Bhagabari is still short, but it grows longer each season,",
+    "rv10-inv-city-none-0-31: served \"Khirbetpara has people who keep order, and order holds about as well as anyone here expec | swapped \"Crime at Khirbetpara is outrunning the watch. It is not chaos; it is that the people doin",
+    "rv10-inv-city-none-0-33: served \"Order at Caththwaite could tip either way: a few fewer watchmen or one bolder gang would  | swapped \"Visitors feel safe at Caththwaite, and it is plain that somebody keeps it that way.\""
+   ]
+  },
+  "prose defense:threat.economic.sentence <- safety": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:wall.rationale.sentence <- safety": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose economy:economics.prosperityHeader.sentence <- safety": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose economy:economics.prosperityRung.sentence <- safety": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose stressors:overview.conditionSeverity.sentence <- safety": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:state.publicOrder.beside <- defence": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:state.publicOrder.rung.sentence <- defence": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:threat.economic.sentence <- defence": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:wall.rationale.sentence <- defence": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose economy:economics.prosperityHeader.sentence <- defence": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose economy:economics.prosperityRung.sentence <- defence": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose stressors:overview.conditionSeverity.sentence <- defence": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:state.publicOrder.beside <- prosperity": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:state.publicOrder.rung.sentence <- prosperity": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:threat.economic.sentence <- prosperity": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose defense:wall.rationale.sentence <- prosperity": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "prose economy:economics.prosperityHeader.sentence <- prosperity": {
+   "n": 45,
+   "sane": 45,
+   "fails": 4,
+   "ex": [
+    "rv10-inv-city-none-0-31: served \"Khirbetpara pays its way from year to year, and nobody here calls the city poor.\" | swapped \"Nobody here talks about the price of bread. The city is well off, and the talk is about w",
+    "rv10-inv-city-indebted-0-36: served \"With a little left over each year, Víkaker gets by on a broad base of trades, and every y | swapped \"Víkaker earns well, but much of what it earns goes to the outside power it owes.\"",
+    "rv10-inv-city-none-0-42: served \"Nothing about Nahrnala looks rich or poor: the road is busy enough, the market is open, a | swapped \"Nahrnala lives on a broad base of trades and ends each year with money to spare.\""
+   ]
+  },
+  "prose economy:economics.prosperityRung.sentence <- prosperity": {
+   "n": 45,
+   "sane": 45,
+   "fails": 15,
+   "ex": [
+    "rv10-inv-village-none-0-8: served \"Families in Deirfort mend what they have and put off buying anything new.\" | swapped \"Money is short in Deirfort, and most households spend what they earn as soon as it comes ",
+    "rv10-inv-city-none-0-31: served \"People here put things by, and can. That is the difference between this city and a poorer | swapped \"Khirbetpara is visibly well off. The halls, the walls and the roads are all better than a",
+    "rv10-inv-city-indebted-0-36: served \"Víkaker's treasury takes in a little more than it pays out each year. It is enough, and n | swapped \"Víkaker is visibly well off. The halls, the walls and the roads are all better than a cit"
+   ]
+  },
+  "prose stressors:overview.conditionSeverity.sentence <- prosperity": {
+   "n": 45,
+   "sane": 45,
+   "fails": 0,
+   "ex": []
+  },
+  "precise conditions.severity (vs re-promotion)": {
+   "n": 45,
+   "sane": 45,
+   "fails": 4,
+   "ex": [
+    "rv10-inv-city-indebted-0-36: stored [0.23] served [0.23] | under served inputs [0.2]",
+    "rv10-inv-metropolis-occupied-0-59: stored [0.73] served [0.73] | under served inputs [0.63]",
+    "rv10-inv-metropolis-insurgency-0-65: stored [0.83] served [0.83] | under served inputs [0.73]"
+   ]
+  }
+ },
+ "promo": {
+  "prosperity": [
+   {
+    "gap": 2,
+    "hidden": 1,
+    "kinds": [
+     "Criminal/criminal"
+    ],
+    "crimServed": 46,
+    "crimStored": 83
+   },
+   {
+    "gap": 1,
+    "hidden": 4,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal"
+    ],
+    "crimServed": 46,
+    "crimStored": 83
+   },
+   {
+    "gap": 2,
+    "hidden": 7,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/",
+     "Criminal/criminal+brokerage"
+    ],
+    "crimServed": 55,
+    "crimStored": 100
+   },
+   {
+    "gap": 1,
+    "hidden": 2,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal"
+    ],
+    "crimServed": 24,
+    "crimStored": 44
+   },
+   {
+    "gap": 1,
+    "hidden": 5,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage",
+     "Criminal/criminal"
+    ],
+    "crimServed": 40,
+    "crimStored": 73
+   },
+   {
+    "gap": 1,
+    "hidden": 3,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal"
+    ],
+    "crimServed": 46,
+    "crimStored": 83
+   },
+   {
+    "gap": 1,
+    "hidden": 6,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage",
+     "Criminal/criminal"
+    ],
+    "crimServed": 41,
+    "crimStored": 74
+   },
+   {
+    "gap": 1,
+    "hidden": 6,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage",
+     "Criminal/criminal"
+    ],
+    "crimServed": 58,
+    "crimStored": 100
+   },
+   {
+    "gap": 1,
+    "hidden": 6,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage",
+     "Criminal/criminal",
+     "Criminal/"
+    ],
+    "crimServed": 48,
+    "crimStored": 87
+   },
+   {
+    "gap": 1,
+    "hidden": 5,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage"
+    ],
+    "crimServed": 60,
+    "crimStored": 100
+   },
+   {
+    "gap": 1,
+    "hidden": 8,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage"
+    ],
+    "crimServed": 48,
+    "crimStored": 87
+   },
+   {
+    "gap": 1,
+    "hidden": 3,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal"
+    ],
+    "crimServed": 27,
+    "crimStored": 49
+   },
+   {
+    "gap": 2,
+    "hidden": 5,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/"
+    ],
+    "crimServed": 46,
+    "crimStored": 83
+   },
+   {
+    "gap": 1,
+    "hidden": 6,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage",
+     "Criminal/criminal"
+    ],
+    "crimServed": 37,
+    "crimStored": 68
+   },
+   {
+    "gap": 1,
+    "hidden": 7,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage",
+     "Criminal/criminal",
+     "Criminal/criminal"
+    ],
+    "crimServed": 62,
+    "crimStored": 100
+   }
+  ],
+  "safety": [
+   {
+    "served": "Moderate",
+    "fromServed": "Safe",
+    "hidden": 1,
+    "kinds": [
+     "Criminal/criminal"
+    ]
+   },
+   {
+    "served": "Strained — Political Fracture",
+    "fromServed": "Tense — Political Fracture",
+    "hidden": 2,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal"
+    ]
+   },
+   {
+    "served": "Moderate",
+    "fromServed": "Unsafe",
+    "hidden": 4,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal"
+    ]
+   },
+   {
+    "served": "Moderate",
+    "fromServed": "Safe",
+    "hidden": 7,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage",
+     "Criminal/criminal",
+     "Criminal/"
+    ]
+   },
+   {
+    "served": "Moderate",
+    "fromServed": "Safe",
+    "hidden": 2,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal"
+    ]
+   },
+   {
+    "served": "Moderate",
+    "fromServed": "Safe",
+    "hidden": 6,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage",
+     "Criminal/criminal"
+    ]
+   },
+   {
+    "served": "Moderate",
+    "fromServed": "Unsafe",
+    "hidden": 5,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage",
+     "Criminal/criminal",
+     "Criminal/criminal"
+    ]
+   },
+   {
+    "served": "Safe",
+    "fromServed": "Very Safe",
+    "hidden": 4,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal"
+    ]
+   },
+   {
+    "served": "Strained — Political Fracture",
+    "fromServed": "Tense — Political Fracture",
+    "hidden": 7,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage",
+     "Criminal/criminal"
+    ]
+   },
+   {
+    "served": "Safe",
+    "fromServed": "Very Safe",
+    "hidden": 5,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage",
+     "Criminal/criminal"
+    ]
+   },
+   {
+    "served": "Moderate",
+    "fromServed": "Safe",
+    "hidden": 7,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage",
+     "Criminal/criminal"
+    ]
+   },
+   {
+    "served": "Dangerous — Insurgency",
+    "fromServed": "Strained — Insurgency",
+    "hidden": 5,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/"
+    ]
+   },
+   {
+    "served": "Moderate",
+    "fromServed": "Dangerous",
+    "hidden": 7,
+    "kinds": [
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal",
+     "Criminal/criminal+brokerage",
+     "Criminal/criminal",
+     "Criminal/criminal"
+    ]
+   }
+  ],
+  "readiness": [
+   {
+    "served": "Undefended",
+    "fromServed": "Vulnerable",
+    "hidden": 1
+   },
+   {
+    "served": "Well-Defended",
+    "fromServed": "Fortress",
+    "hidden": 7
+   },
+   {
+    "served": "Defensible",
+    "fromServed": "Well-Defended",
+    "hidden": 5
+   },
+   {
+    "served": "Well-Defended",
+    "fromServed": "Fortress",
+    "hidden": 1
+   }
+  ],
+  "standing": [
+   {
+    "gap": 2,
+    "hidden": 1
+   },
+   {
+    "gap": -1,
+    "hidden": 5
+   },
+   {
+    "gap": 1,
+    "hidden": 4
+   },
+   {
+    "gap": 1,
+    "hidden": 6
+   },
+   {
+    "gap": 1,
+    "hidden": 7
+   },
+   {
+    "gap": 1,
+    "hidden": 2
+   },
+   {
+    "gap": 2,
+    "hidden": 2
+   },
+   {
+    "gap": 1,
+    "hidden": 5
+   },
+   {
+    "gap": 1,
+    "hidden": 3
+   },
+   {
+    "gap": 1,
+    "hidden": 6
+   },
+   {
+    "gap": 2,
+    "hidden": 6
+   },
+   {
+    "gap": 1,
+    "hidden": 6
+   },
+   {
+    "gap": 1,
+    "hidden": 5
+   },
+   {
+    "gap": 1,
+    "hidden": 8
+   },
+   {
+    "gap": 2,
+    "hidden": 8
+   },
+   {
+    "gap": 1,
+    "hidden": 3
+   },
+   {
+    "gap": 1,
+    "hidden": 5
+   },
+   {
+    "gap": 1,
+    "hidden": 3
+   },
+   {
+    "gap": 1,
+    "hidden": 7
+   },
+   {
+    "gap": 1,
+    "hidden": 7
+   }
+  ]
+ },
+ "vocab": {
+  "Tense — Wartime": 5,
+  "Moderate": 10,
+  "Dangerous — Insurgency": 3,
+  "Strained — Wartime": 2,
+  "Controlled — Occupation Curfew": 5,
+  "Very Safe": 3,
+  "Strained — Political Fracture": 2,
+  "Tense — Debt Crisis": 4,
+  "Unsafe": 2,
+  "Tense — Insurgency": 1,
+  "Volatile — Political Fracture": 2,
+  "Quarantined — Plague Conditions": 1,
+  "Safe": 2,
+  "Suspicious — Aftermath of Betrayal": 1,
+  "Strained — Debt Crisis": 1,
+  "Tense — Political Fracture": 1
+ },
+ "food": {
+  "calls": 45,
+  "sameBirth": 9,
+  "births": 9,
+  "direct": 0,
+  "ex": []
+ },
+ "names": [],
+ "namesN": 0,
+ "comp": [
+  {
+   "seed": "rv10-inv-village-none-0-8",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 78,
+   "incRowsA": 4,
+   "incRowsS": 3,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-town-none-0-11",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 8,
+   "incRowsS": 8,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-town-insurgency-0-15",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 63,
+   "incRowsA": 7,
+   "incRowsS": 6,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-town-wartime-0-17",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 8,
+   "incRowsS": 8,
+   "powA": 100,
+   "powS": 100,
+   "facA": 3,
+   "facS": 3,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-town-none-0-18",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 11,
+   "incRowsS": 11,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-town-occupied-0-19",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 87,
+   "incRowsA": 7,
+   "incRowsS": 6,
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-town-none-0-21",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 8,
+   "incRowsS": 8,
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-town-wartime-0-27",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 79,
+   "incRowsA": 7,
+   "incRowsS": 6,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-town-politically_fractured-0-30",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 8,
+   "incRowsS": 8,
+   "powA": 100,
+   "powS": 100,
+   "facA": 4,
+   "facS": 4,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-city-none-0-31",
+   "hidden": 4,
+   "incA": 100,
+   "incS": 81,
+   "incRowsA": 12,
+   "incRowsS": 11,
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8,
+   "conflictsA": 3,
+   "conflictsS": 3
+  },
+  {
+   "seed": "rv10-inv-city-none-0-32",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 75,
+   "incRowsA": 14,
+   "incRowsS": 13,
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-city-none-0-33",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 87,
+   "incRowsA": 12,
+   "incRowsS": 11,
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-city-infiltrated-0-34",
+   "hidden": 4,
+   "incA": 100,
+   "incS": 88,
+   "incRowsA": 13,
+   "incRowsS": 12,
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-city-insurgency-0-35",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 82,
+   "incRowsA": 11,
+   "incRowsS": 10,
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-city-indebted-0-36",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 75,
+   "incRowsA": 13,
+   "incRowsS": 12,
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-city-wartime-0-37",
+   "hidden": 3,
+   "incA": 100,
+   "incS": 88,
+   "incRowsA": 12,
+   "incRowsS": 11,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 0,
+   "conflictsS": 0
+  },
+  {
+   "seed": "rv10-inv-city-none-0-38",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 12,
+   "incRowsS": 12,
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-city-occupied-0-39",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 80,
+   "incRowsA": 10,
+   "incRowsS": 9,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-city-politically_fractured-0-40",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 84,
+   "incRowsA": 12,
+   "incRowsS": 11,
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6,
+   "conflictsA": 3,
+   "conflictsS": 3
+  },
+  {
+   "seed": "rv10-inv-city-none-0-41",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 12,
+   "incRowsS": 12,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 3,
+   "conflictsS": 3
+  },
+  {
+   "seed": "rv10-inv-city-none-0-42",
+   "hidden": 3,
+   "incA": 100,
+   "incS": 81,
+   "incRowsA": 11,
+   "incRowsS": 10,
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-city-infiltrated-0-44",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 15,
+   "incRowsS": 15,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-city-indebted-0-46",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 84,
+   "incRowsA": 11,
+   "incRowsS": 10,
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-city-wartime-0-47",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 67,
+   "incRowsA": 14,
+   "incRowsS": 13,
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-city-occupied-0-49",
+   "hidden": 3,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 10,
+   "incRowsS": 10,
+   "powA": 100,
+   "powS": 100,
+   "facA": 5,
+   "facS": 5,
+   "conflictsA": 3,
+   "conflictsS": 3
+  },
+  {
+   "seed": "rv10-inv-city-politically_fractured-0-50",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 79,
+   "incRowsA": 12,
+   "incRowsS": 11,
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8,
+   "conflictsA": 3,
+   "conflictsS": 3
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-52",
+   "hidden": 2,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 12,
+   "incRowsS": 12,
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-53",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 88,
+   "incRowsA": 13,
+   "incRowsS": 12,
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-metropolis-infiltrated-0-54",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 10,
+   "incRowsS": 10,
+   "powA": 100,
+   "powS": 92,
+   "facA": 7,
+   "facS": 6,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-metropolis-insurgency-0-55",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 57,
+   "incRowsA": 14,
+   "incRowsS": 13,
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7,
+   "conflictsA": 3,
+   "conflictsS": 3
+  },
+  {
+   "seed": "rv10-inv-metropolis-indebted-0-56",
+   "hidden": 8,
+   "incA": 100,
+   "incS": 75,
+   "incRowsA": 11,
+   "incRowsS": 10,
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6,
+   "conflictsA": 3,
+   "conflictsS": 3
+  },
+  {
+   "seed": "rv10-inv-metropolis-wartime-0-57",
+   "hidden": 8,
+   "incA": 100,
+   "incS": 71,
+   "incRowsA": 12,
+   "incRowsS": 11,
+   "powA": 100,
+   "powS": 100,
+   "facA": 10,
+   "facS": 10,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-58",
+   "hidden": 4,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 10,
+   "incRowsS": 10,
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-metropolis-occupied-0-59",
+   "hidden": 8,
+   "incA": 100,
+   "incS": 80,
+   "incRowsA": 11,
+   "incRowsS": 10,
+   "powA": 100,
+   "powS": 100,
+   "facA": 10,
+   "facS": 10,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-metropolis-politically_fractured-0-60",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 89,
+   "incRowsA": 13,
+   "incRowsS": 12,
+   "powA": 100,
+   "powS": 100,
+   "facA": 10,
+   "facS": 10,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-61",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 14,
+   "incRowsS": 14,
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-62",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 14,
+   "incRowsS": 14,
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7,
+   "conflictsA": 3,
+   "conflictsS": 3
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-63",
+   "hidden": 3,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 12,
+   "incRowsS": 12,
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-metropolis-infiltrated-0-64",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 87,
+   "incRowsA": 11,
+   "incRowsS": 10,
+   "powA": 100,
+   "powS": 89,
+   "facA": 9,
+   "facS": 7,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-metropolis-insurgency-0-65",
+   "hidden": 5,
+   "incA": 100,
+   "incS": 63,
+   "incRowsA": 9,
+   "incRowsS": 8,
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-metropolis-indebted-0-66",
+   "hidden": 3,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 10,
+   "incRowsS": 10,
+   "powA": 100,
+   "powS": 100,
+   "facA": 7,
+   "facS": 7,
+   "conflictsA": 2,
+   "conflictsS": 2
+  },
+  {
+   "seed": "rv10-inv-metropolis-wartime-0-67",
+   "hidden": 6,
+   "incA": 100,
+   "incS": 78,
+   "incRowsA": 13,
+   "incRowsS": 12,
+   "powA": 100,
+   "powS": 100,
+   "facA": 10,
+   "facS": 10,
+   "conflictsA": 1,
+   "conflictsS": 1
+  },
+  {
+   "seed": "rv10-inv-metropolis-none-0-68",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 75,
+   "incRowsA": 9,
+   "incRowsS": 8,
+   "powA": 100,
+   "powS": 100,
+   "facA": 6,
+   "facS": 6,
+   "conflictsA": 3,
+   "conflictsS": 3
+  },
+  {
+   "seed": "rv10-inv-metropolis-occupied-0-69",
+   "hidden": 7,
+   "incA": 100,
+   "incS": 83,
+   "incRowsA": 14,
+   "incRowsS": 13,
+   "powA": 100,
+   "powS": 100,
+   "facA": 9,
+   "facS": 9,
+   "conflictsA": 3,
+   "conflictsS": 3
+  },
+  {
+   "seed": "rv10-inv-metropolis-politically_fractured-0-70",
+   "hidden": 1,
+   "incA": 100,
+   "incS": 100,
+   "incRowsA": 10,
+   "incRowsS": 10,
+   "powA": 100,
+   "powS": 100,
+   "facA": 8,
+   "facS": 8,
+   "conflictsA": 2,
+   "conflictsS": 2
+  }
+ ]
+}

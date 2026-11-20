@@ -56,3 +56,30 @@ least 65 (27 of 29). Safety: one to three steps, unordered by count; no crime-wo
 (no "Dangerous — Criminal Governance"). No band is promoted on this evidence.
 
 CONFIRMED (executed above): every count in the table but the two marked PLAUSIBLE.
+
+## 2. Read (3), part 1: master's stored shape, and the raw measures on both shapes (executed 02:00–02:06 UTC)
+
+`splitm.probe.jsx`: the same pool born by origin/master (db832c892, a scratch worktree), re-derived with MASTER'S own
+exports (the engine that wrote production's towns), served on `xp212` (001..203 + 211 + 212). 86 with a hideable house,
+control 50.
+
+| Row | Master, with (of 86) | Master, control (of 50) | New shape, with (section 1) | Reading |
+|---|---|---|---|---|
+| defence.scores.internal | 78 | 0 | 75 | TIER 1 |
+| defence.scores.economic | 52 | 0 | 0 | **TIER 1 on master only** |
+| defence.scores.disaster | 37 | 0 | 0 | **TIER 1 on master only** |
+| defence.scores.magical | 33 | 0 | 0 | **TIER 1 on master only** (registry: "unsettled, master's shape") |
+| defence.scores.military | 31 | 0 | 0 | **TIER 1 on master only** |
+| defence.scores.monster | 28 | 0 | 0 | **TIER 1 on master only** |
+| defence.economicGates | 38 (keys compared canonically) | 0 | 0 | **TIER 1 on master only** |
+| economy.prosperity / safety.safetyLabel / readiness.label | 29 / 29 / 11 | 0 / 0 / 0 | 29 / 28 / 7 | tier 2 |
+| legitimacy.score; food resilience and months | 0 | 0 | 0 | as section 1 |
+| income percentages: served sum below 100 | 50 | 6 | 50 / 6 | TIER 1 until item D, control included |
+| withheld house's name anywhere in the row | 0 | 0 | 0 | pass |
+
+THE RAW MEASURES, BOTH SHAPES, AT THIS TIP (`splitp.probe.jsx` on the new shape, 45 towns; `splitm` on master): every
+gallery read serves `economicState.compound.criminalEffective` (e.g. 82.84), `compound.militaryEffective` and
+`safetyProfile.safetyRatio` (45 of 45 new; 86 of 86 and 50 of 50 master), and `activeConditions[].severity` (32 of 45;
+60 of 86, 33 of 50). Each is registered withhold-always (VR14 (i)) and none is built yet (R1: "no withhold row is
+built"); neither 211 nor 212 names any of them. Not new, but it is VR8's condition for every tier-2 band: FINAL blocks
+on any one of them served on either shape.
