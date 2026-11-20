@@ -359,7 +359,7 @@ P3a at the abolitionist's 1/3: the abolitionist instigates in 11/24, the revolt'
   - The seat-holder is the debtor in 13/24. Their creditors are: the miller 3, the stable keeper 2, the creditor's agent 1, the banker 1, **the house boss 1** (in that town the record already makes a criminal the seat's creditor), and others 1 each.
   - The creditor's agent is party to such a tie in 10/24.
 
-## The proposals, ranked: the owner's examples first, in his order
+## The proposals, ranked: the owner's examples first, in the order the owner gave them
 
 **One frozen table.** Every rate below is one entry of a single table I propose, `CRISIS_COUNTERPART_TUNING`, kept beside `CRISIS_CAST_TUNING` in `crisisCast.js`. Each rung is chosen by `castHash(seed, kind, "<role>:<rung>")` against its rate, so it takes **no draw** and moves no other stream.
 
