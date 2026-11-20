@@ -1,6 +1,6 @@
 # PLACE-1 — hand-back (kept current at every push)
 
-Last written: 2026-11-20T17:40Z Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
+Last written: 2026-11-20T17:59Z Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
 
 ## How a successor resumes
 1. Read the prompt, then this file, then the briefs in this directory (`BRIEF-*.md`); nothing else is needed.
@@ -53,7 +53,7 @@ Builders build, I integrate: one builder a field, red first; I read its diff onc
 - AT EACH MERGE (mine): read the diff once; re-run red and green; `node docs/chair/2026-11-20/content/tools/confinement/trees.mjs a331a4a19 <tip> <workdir>` (base births cached in the scratchpad `conf/`; 0 non-string differences, list the moved string fields); the lighting census (`LIGHTING_CENSUS_REFREEZE=... npx vitest run tests/lint/sovereigntyLightingContract.walker.test.js`), the wiring census (`node scripts/wiring-census.mjs` then `--check`), the page census (`node scripts/census/page-census.mjs`); the chair's census after (`census.mjs` 100, or 150 where ruled); then "PLACE <field> <commit>".
 
 ## Houses the pools need (for the security reader at the join)
-(filled per unit at its merge)
+- safetyDesc (builder's list, 232c8d3e4): TINY_MODERATE: Household levy, Citizen militia · MIXED_OPENING: market houses · MIXED_FORCE garrison: Barracks, Garrison, Multiple garrisons, the three watch houses, walls and gate houses, the three militia houses, market houses · watch: watches, walls and gates, force houses, market houses · militia: the two militia houses · none: market houses · MODERATE_WALLS: Palisade, Palisade or earthworks, Town walls, Gates (if walled), Citadel, City walls and gates, Massive walls and fortifications, force houses incl. Free company hall and Mercenary quarter, garrison · UNSAFE_GARRISON: garrison, watch · UNSAFE_ADVICE: market houses · UNSAFE_WALLS: walls, gates, force houses · MIXED_CORNERS, UNSAFE_OPENING: none. Facts read: `factsOf` defence, guardPresence, market, forceWalksByDay, route, tier. No hideable house or crime fact.
 
 ## Named survivors (found, not mine to build)
 - The economy's merchant hook ("grows less food than it eats…") is graded "Survival Crisis / critical" in 56 of its 78 places: the grade reads the raw food band while the page shows Pressured (`viabilityHooks-MEASURE.md`). Sent to the chair 17:3x.
