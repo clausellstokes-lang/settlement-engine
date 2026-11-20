@@ -1,4 +1,4 @@
-# FORTUNE-3 hand-back (kept current at every push; last written 2026-11-20 15:35:28 UTC by `date -u`)
+# FORTUNE-3 hand-back (kept current at every push; last written 2026-11-20 15:39:31 UTC by `date -u`)
 
 For a successor: this file and the briefs (`briefs/COMMON.md`, `U4.md`, `U5-BUILD.md`) are all you need.
 The chair is session_019yED1SUxGVHyjQnoqoFvQ8 (send_message, Claude Code Remote MCP server).
@@ -11,8 +11,8 @@ FORCED-ON ARM IN ONE COMMAND (the prototype today; the real law after U4): `sh d
   FORTUNE-2's tip 7d0a51f49 (fast-forwarded).
 - EXECUTED at afd8bc5fe (14:1x UTC): `run.sh` from a scratch copy: all seven outputs byte-identical to `measures/`;
   confinement 0c9069489 -> afd8bc5fe: golden 525/525 and census 720/720 identical (golden 663fe111..., census 882694dc...).
-- U5 RULED by the chair 15:31 UTC; its build is this lane's: `briefs/U5-BUILD.md` (the chair's seven conditions in
-  summary; condition 2 NOT YET RECEIVED; the safety hunk in `factionDynamics.js` waits on the chair's leave, since that
+- U5 RULED by the chair 15:31 UTC; its build is this lane's: `briefs/U5-BUILD.md` (the chair's seven conditions
+  VERBATIM, received 15:35 UTC; the safety hunk in `factionDynamics.js` waits on the chair's leave, since that
   file is released to the seat's lane after U3). No builder seated yet.
 - CONFIRMED (read): play-time `timeProgression.js :: applyLegitimacyDelta` re-stamps the score's tuple only (no power
   multiplier, no word): condition 3's shape exists.
@@ -22,3 +22,8 @@ FORCED-ON ARM IN ONE COMMAND (the prototype today; the real law after U4): `sh d
 The lane handed over -> merge `origin/lane/fortune-2-2026-11-20-u5-wip` (docs) -> the line 43ab0f5eb by `--no-ff`
 before U4 -> U4 -> U5a (after its census and the chair's go) -> U5b (after U4 and the sentences ruled) -> the measure
 re-taken forced on against `FOR-THE-OWNER.md` (a moved figure goes to the chair FIRST) -> this file -> "FORTUNE <commit>".
+
+## 3. For the security reader at the join (the chair's condition 7)
+
+The merits depend on the capture rung (a condition: none counts at `corrupted` or `capture`), so `publicLegitimacy.breakdown.merits`
+(stored only under the fortune law, only when non-zero) is a field a hidden house can move; `publicSafe.js :: toPublicSafe` carries the breakdown.
