@@ -600,6 +600,7 @@ const WORD_CORRECTIONS = Object.freeze([
   // LR6 (2): DS-DEF-3 Unsafe v6 (LAST-VARIETY's line) repeated the safety profile's travellers' advice and the guard line's
   // "There is no watch"; its words corrected in place
   { pool: 'DS-DEF-3 :: Unsafe', vid: 6, from: '2ab8fa180378f08d13e1fa047c7d8df733c1ea70fe18f996ed526428850200ed', to: '87c78172c08ce1e0a54bb926c8ea0cdd9cb1676156ab2783767d0de5ae258e3d', ruling: 'LR6' },
+  { pool: 'DS-POW-2 :: recentConflict present', vid: 1, from: 'b9c7576493170bf4b61ba47e4f30b6485372953aff2b0ed5441021b41f8c329f', to: '5f631039f93489f9a1b9bbddfe2a307bc26decd9f4097240d716e40035ea48b4', ruling: 'CHAIR-2026-11-20-17:38' },
 ]);
 
 async function readNumberingBaseline() {
