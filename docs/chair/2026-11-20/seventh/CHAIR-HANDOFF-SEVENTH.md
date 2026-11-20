@@ -4058,3 +4058,25 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   (fb2efbf50); `pool-dominance.mjs --tighten`, THE CHAIR'S DOOR, MAY BE RUN BY IT ONCE at L2's merge by the
   chair's word (the cause and every moved ceiling recorded; it stops if a ceiling would loosen); the chair's
   landing helper takes it again on the line. R3-CURE-5 relayed FINISHED by VEIL-25 at 14:22 (section 2).
+- 14:33 UTC · THREE MORE READ AND ANSWERED (14:31 TO 14:33): SEAT-4 "SEAT-PART 0ccbef108, HANDED OVER" (past 290,000): SEAT-5 TOLD "THE LANE
+  IS YOURS at 0ccbef108" (14:32). U4 (0fa999bf6) read and re-run by SEAT-4, NOT merged; its cure at
+  `lane/seat-2026-11-20-u4-cure-wip` fbf77bfa2, UNREAD: THE CHAIR'S "SPLIT" PREMISE WAS REFUTED BY MEASURE; instead
+  `holderOfSeat` reads the veil through `seatTable :: isVeiledRow` (pinned equal to `isVeiledPower`): the reach on
+  campaign-pdf back from 218 to 214 and world-book 233 to 229: 7 of 10 writer-reach identities cured. THE THREE
+  LEFT, RULED: `narrative on factionRelationships` (five surfaces; `transferTakerOf`): a cure by cause first (the
+  taker read from the edge's structured keys, never from its sentence: a fact parsed out of prose is refused),
+  and a test that on a non-owner audience it reads the served document alone and names no criminal and no hidden
+  power; `recentConflict on powerStructure` and `priorityMilitary on config`: the unit's own reads, RE-RECORDED BY
+  THE INTEGRATOR by the register's door with cause and symbol; all three on the security reader's list. TRAD-4
+  (224,559 at 14:15 by the chair's read; its own estimate 165,000): its push of a builder's branch named
+  `trad4-u5-wip` (OUTSIDE `refs/heads/lane/*`) sent the hook down the whole-check path: it died on the gate mutex
+  before any fixture test ran; nothing pushed; its repository read intact. A RULE FOR EVERY SEAT: A REF OUTSIDE
+  `lane/*` IS NEVER PUSHED; a builder's branch is named `lane/<lane>-<unit>-wip` before any push. Unit 7 (the hole)
+  is out by its own builder; unit 5 committed 4cee71146, unread. PAGE-5 (about 240,000 half an hour after its
+  seating: its measures on 900 towns were dear): ITS RE-PROJECTION UNDER THE FOUR RULINGS: three in a row 8.8%
+  (base 34.1%); three cities 18.2% (base 83.1%); three metropolises 24.3% (base 81.1%): INSIDE THE TARGETS, with
+  three wordings for a cause that speaks for more than a quarter of its kind: approved; "no kept force" joins
+  crime's rank 1; "the force unpaid or its pay short" only if a named field holds it. PAGE-5 TOLD to write the
+  ruled tables into its hand-back, dispatch one builder for the crime and guild lines, merge S6 only if green
+  before 285,000, and hand over; `prompts/PAGE-7.txt` WRITTEN (PAGE-5's file is its assignment; the causes as
+  ruled; the lines its main work), seated after this push.
