@@ -241,7 +241,7 @@ describe('two or more crises: the town is cast, not the crisis', () => {
     expect(hasContradiction(casts)).toBe(false);
   });
 
-  it('a person who would hold a contradictory pair is passed over and the reason says so', () => {
+  it('a person who would hold a contradictory pair is passed over, and the reason is the candidate\'s own (FRAME-5 · C1: never how it was dealt)', () => {
     // Under a legitimacy crisis the church gains while the seat struggles, so the siege's
     // profiteer is the high priest; the plague that follows would have her bear the brunt
     // (profiteer / bears the brunt is a contradictory pair), so it takes the next candidate.
@@ -253,7 +253,7 @@ describe('two or more crises: the town is cast, not the crisis', () => {
     const brunt = roleOf(casts.get('plague_onset'), 'brunt');
     expect(brunt.name).not.toBe('Ilse Brand'); // anchored: the next line pins who it is instead
     expect(brunt).toMatchObject({ kind: 'faction', name: 'Religious Authorities' });
-    expect(brunt.reason.endsWith(CAST_REASONS.nextInLine)).toBe(true);
+    expect(brunt.reason).toBe(CAST_REASONS.bruntBase.healing_capacity); // FRAME-5 · C1: the fact alone, no dealer's tail
     expect(hasContradiction(casts)).toBe(false);
   });
 

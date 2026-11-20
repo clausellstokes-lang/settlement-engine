@@ -32,7 +32,7 @@
  */
 
 import { hookTruthViolations, settlementHookFacts, speakHookTruthfully } from '../coherence/hookTruth.js';
-import { CAST_REASONS, STAND_IN_ROLE, STAND_IN_ROLE_FALLBACK, effectiveCastOf, requiredRolesOf } from './crisisCast.js';
+import { CAST_REASONS, STAND_IN_ROLE, STAND_IN_ROLE_FALLBACK, castReasonShown, effectiveCastOf, requiredRolesOf } from './crisisCast.js';
 import { resolveDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
 import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
@@ -197,7 +197,8 @@ const PREDICATE_REASONS = new Set(['leverRuns', 'instigatorRival', 'instigatorBa
  * @returns {string}
  */
 function castSentenceOf(noun, clauseOf, words, holder) {
-  const reason = str(holder.reason);
+  // FRAME-5 · C1: a row stored before C1 is read without the dealer's tail, so it prints none and keys its form by its fact
+  const reason = castReasonShown(str(holder.reason));
   if (CLAUSE_SAYS.has(reason) || !PREDICATE_REASONS.has(reason)) return castSentence(noun, clauseOf(words), reason);
   // TAIL-CRISIS-3 (batch 3's inheritors read): the rival's reason is its POWER's standing ("already carries more weight than
   // whoever holds the seat"), never the person's, so the clause is said of the person's power

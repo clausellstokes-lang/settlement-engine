@@ -19,7 +19,7 @@
 
 import { crisisHookFor } from './crisisHooks.js';
 import { crisisContainer } from '../facts/crisisKind.js';
-import { CRISIS_ROLE_LABEL, STAKE_REASONS, effectiveCastOf } from './crisisCast.js';
+import { CRISIS_ROLE_LABEL, STAKE_REASONS, castReasonShown, effectiveCastOf } from './crisisCast.js';
 import { composeTonightSheet } from '../summary/tonightSheet.js';
 import { entityIdFor } from '../dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
@@ -270,7 +270,7 @@ export function composeCrisisPage(settlement) {
         id: r.id,
         doorId: castDoorId(s, r.kind, r.id),
         name: r.name,
-        reason: speak(r.reason),
+        reason: speak(castReasonShown(r.reason)), // FRAME-5 · C1: a row stored before C1 prints without the dealer's tail
         temporary: !!r.temporary,
       })),
       absent: (cast?.absent || []).map((a) => ({ role: a.role, roleLabel: CRISIS_ROLE_LABEL[a.role] || a.role, reason: speak(a.reason) })),

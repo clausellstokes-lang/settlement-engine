@@ -212,6 +212,9 @@ export const CAST_REASONS = Object.freeze({
   collaboratorLinked: "the famine's exploiter, first to deal with the occupier",
   waverer: 'its power could go either way',
   face: 'leads the occupying power',
+  // FRAME-5 · C1 (the chair's ruling 22 of 2026-11-20, vetoable by the owner): the DEALER'S reason, how the cast was dealt,
+  // never a fact of the town. No row stores it and no surface prints it; its one reader is `castReasonShown`, which cuts
+  // it from a reason stored before C1.
   nextInLine: 'next in line, the first choice already holding a role that contradicts this one',
   dm: "the DM's word",
 });
@@ -1115,7 +1118,8 @@ export function deriveCrisisCast(settlement, entries, seed, options = {}) {
     const fits = (r) => !(held.get(keyOf(r)) || []).some((h) => contradicts(h.role, r.role));
 
     /**
-     * Take the first candidate that fits; say so when the first choice was passed over.
+     * Take the first candidate that fits. FRAME-5 · C1 (the chair's ruling 22): the row stores the candidate's own reason,
+     * the fact alone, whichever candidate it was; how the cast was dealt is never stored (`castReasonShown`).
      * @param {CrisisRole} role @param {Candidates} c @param {CastRow | null} [linked]
      * @param {Set<string>} [barred] rows this role may not take in this crisis (row keys), read as a contradiction
      * @returns {CastRow | null}
@@ -1125,7 +1129,7 @@ export function deriveCrisisCast(settlement, entries, seed, options = {}) {
       if (!list.length) { absent.push({ role, reason: c.absent }); return null; }
       const pick = list.find((r) => fits(r) && !barred.has(keyOf(r)));
       if (!pick) { absent.push({ role, reason: CAST_ABSENCES.noCandidate }); return null; }
-      const row = pick === list[0] ? { ...pick, role } : { ...pick, role, reason: `${pick.reason}; ${CAST_REASONS.nextInLine}` };
+      const row = { ...pick, role };
       roles.push(row);
       const k = keyOf(row);
       held.set(k, [...(held.get(k) || []), { role, crisis: kind }]);
@@ -1171,8 +1175,8 @@ export function deriveCrisisCast(settlement, entries, seed, options = {}) {
     for (const role of requiredRolesOf(kind)) {
       // R2-CODE-B-13, the reader's M4: THE ONE WHO HOLDS THE LEVER DOES NOT BEAR THE BRUNT. The brunt is cast before the
       // lever, so the person the lever will go to (its first fitting office-holder; the lever's own draw is unchanged)
-      // is barred from the brunt: the next of the house hit takes it ("next in line, the first choice already holding a
-      // role that contradicts this one"), else the role is absent by its reason (noCandidate). No draw. A member taken in
+      // is barred from the brunt: the next of the house hit takes it (its own reason; FRAME-5 · C1: the dealing is never
+      // said), else the role is absent by its reason (noCandidate). No draw. A member taken in
       // the lever-holder's place is "one of the house the crisis hits", never "the one with the least say": the house's
       // order puts its own people of the crisis first, so the one passed over may have had less say.
       // @enforced-by tests/domain/crisisLeverNotBrunt.test.js
@@ -1407,7 +1411,8 @@ function isHolderItsSentence(text) {
  * the person form (`personReason`). A reader that keys a row by the vocabulary's text ("its power gains from the crisis")
  * reads a person's row ("her power gains from the crisis") through this, never by a second copy of the rule. The person's
  * possessive goes back to "its" only where the sentence it makes is one of the closed form or its declared sibling; any
- * tail (`; next in line …`) is kept; every other reason, and every reason a power holds, is returned unchanged.
+ * tail after "; " is kept (a row stored before FRAME-5 · C1 may carry the dealer's, which a printer cuts by
+ * `castReasonShown`; this fold prints nothing); every other reason, and every reason a power holds, is returned unchanged.
  * @param {unknown} reason @returns {string}
  */
 export function castReasonSentence(reason) {
@@ -1416,6 +1421,20 @@ export function castReasonSentence(reason) {
   const head = cut >= 0 ? text.slice(0, cut) : text;
   const folded = head.replace(/\b(?:her|his|their)\b/, 'its');
   return folded !== head && isHolderItsSentence(folded) ? `${folded}${text.slice(head.length)}` : text;
+}
+
+/**
+ * THE DEALER'S REASON IS NEVER SAID (FRAME-5 · C1, the chair's ruling 22 of 2026-11-20, vetoable by the owner): a cast
+ * reason as a surface prints it. A row stored before C1 may end in the dealer's tail (`; ` and `CAST_REASONS.nextInLine`:
+ * how the cast was dealt, not a fact of the town); it is cut here, and every other reason is returned byte for byte.
+ * Every surface that prints a cast reason reads it through this, the one strip: the crisis page (`crisisPage.js ::
+ * composeCrisisPage`: the Crisis tab, the PDF chapter, the Foundry journal) and the crisis hooks (`crisisHooks.js ::
+ * crisisHooksOf`: the dossier's hooks and the Tonight sheet's).
+ * @param {string} reason @returns {string}
+ */
+export function castReasonShown(reason) {
+  const tail = `; ${CAST_REASONS.nextInLine}`;
+  return typeof reason === 'string' && reason.endsWith(tail) ? reason.slice(0, -tail.length) : reason;
 }
 
 /**
