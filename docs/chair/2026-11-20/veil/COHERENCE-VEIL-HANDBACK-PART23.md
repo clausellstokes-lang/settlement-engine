@@ -87,3 +87,33 @@ proposed host: R5 (the composed prose, beside `prose.incomeWeight.alias`).
 The master-only unregistered paths are the people (`npcs[]`, `factions[].members[]`, `prominentRelationship`,
 `pressureSentence`, the levers' holders: R4), `powerStructure.factionRelationships[].direction` (R3), the cast roles (R4),
 `economicState.incomeSources[].desc` and `compound.inst.hasMercenary` (registered, unbuilt).
+
+## 5. The chair's word of 06:29 and 06:38 UTC; R6's re-cut, unit by unit
+
+- **CTR9 (06:29, for knowledge):** a content seat (TRAD-1, `lane/trad-2026-11-20`) adds the traditions as TEXT under
+  `publicProse` (owner-side composers `display/publicProse.js`, `publicProseCompose.js`); on the joined tree the gate must
+  show that sub-path NOT differing (a difference is a finding against that seat, not a row here). If R5 edits either
+  composer, the chair is told which lines.
+- **06:38:** THE SIX ALIAS PATHS (section 4) CONFIRMED FOR R5: alias rows beside `prose.incomeWeight.alias`, each bound to
+  the rule of the block it aliases (served exactly when its target is; never outlives its target's withholding); red first
+  on the 30 reads; the registry's new row count in the "R5" line. GENERAL RULE: at E the gate's FOUR readings (gallery and
+  link, both stored shapes) show UNREGISTERED 0, any path left named with its reason. VS1 (b)'s commit names the R2
+  behaviour each pin holds.
+
+R6'S RE-CUT (test-only builder, `v22-r6`, pushed as `lane/veil-22-r6-2026-11-20`; hand-back `out/v22/r6/R6-HANDBACK.md`):
+- 060be8f46 (NOT MERGED): b47b7bbdb cherry-picked onto 49d3de5b2. INVERSION green: KNOWN_TIER1 {defence.scores.internal}
+  -> {} (R2 withholds the scores). RED green. MAIN red 66: `cast.stakes` (a stake naming a criminal power still served:
+  R3's `power.entry` cures), `cast.roles` wording (R3/R5), and 16 twin-versus-server lines that are jsonb KEY ORDER alone;
+  CONTROL red 8, the same key order (a diagnostic run sorting keys: CONTROL green, those 16 lines 0).
+- **THE SEAT'S RULING ON KEY ORDER (VEIL-22, vetoable by the chair):** jsonb stores an object's keys in a fixed order that
+  is a function of the key set alone, so it carries no document data; the twin-versus-server and CONTROL comparisons compare
+  objects modulo key order, ARRAY ORDER KEPT EXACTLY (VR21); a planted reorder and a planted value are still caught.
+  Applied by a second test-only builder (units: the ruling, `rosterChoiceInversion` aligned or retirement recommended, the
+  blackMarketCapture condition measured). R6 merges after R3.
+- e56a0d42f, TAKEN ONTO THE LANE as **b5cb22caf**: VS1 (b) aligned: the expected show copy is the unveiled projection less
+  every BUILT withhold-always row of the registry (54), read live; teeth: a planted served `blackMarketCapture` caught 24 of
+  24, a withheld `crimeTypes` caught 24 of 24. RED before **24** lines (the "21" of section 2 was read from a 42-line tail:
+  CORRECTED), every one "safety blackMarketCapture" (`out/v22/r6/vs1b-red.txt`). The seat's own re-run at b5cb22caf: 9 of 9
+  (`out/v22/seat-vs1b-green-at-b5cb22caf.txt`). VS1's reds after V10-2: ZERO.
+- A SLIP, recorded: the first builder once ran vitest from this checkout (it wrote only vitest's cache under
+  `node_modules/.vite`; no tracked file changed).
