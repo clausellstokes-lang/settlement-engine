@@ -1,5 +1,26 @@
 # WANT-LINES-4 · the wants' tranche, file 4 of 7: 60 new DRAWN lines
 
+> **REVISED by builder 9 before it goes on (17:03 UTC, THE CHAIR'S RULES for files 4–7: no line names "the town"; no line
+> presumes customers, goods sent out, prices, a past debt, an age, a fear, a hostile governor or a standing; every {power} line
+> reads true of a criminal power; every PERSONALITY line reads true of a holder already in charge), and against the
+> PERSONALITY reserve (`PERSONALITY-RESERVE-CHECK.md`).** 16 lines changed (section.line: old → new, why):
+> - 2.2: "Win the people of their own quarter a seat inside {power}." → "Bring people they trust into {power}, and see them do well there." (standing (a quarter's seat); untrue of a criminal power)
+> - 2.4: "See {power} stand by this place in its hardest year, and be part of it." → "See {power} through {power|its|their} hardest year, and be counted among those who did it." (untrue of a criminal power (standing by the place))
+> - 3.3: "Mend one small thing between {power} and {rival} this season that both sides have let slide." → "Mend one small thing between {power} and {rival} this season, before it grows." (presumed a thing let slide)
+> - 4.1: "Keep the count of every vote or tally at the next meeting of {power}, and get it right." → "Keep the tally at the next meeting of {power}, and get it right." (a vote, untrue of a criminal power)
+> - 4.3: "Carry the name of {power} well this season, in every dealing outside {power|it|them}." → "Do nothing this season, inside {power} or out, that could bring {power|it|them} trouble." (carrying the name abroad, untrue of a criminal power)
+> - 4.5: "Read up on one matter that troubles {power}, until they know it better than anyone." → "Learn all there is to know about one matter that troubles {power}, before the season is out." ("read up" presumed letters)
+> - 5.1: "Keep {other}'s good name safe, as if it were their own." → "Speak up for {other} whenever {other} is not there to speak." ("good name" presumed a standing)
+> - 6.1: "Sell the leavings of the work at {house} instead of throwing them away." → "Find one cost at {house} that can be shared with another house this season." ("leavings" presumed goods sent out)
+> - 6.2: "Look over every price charged at {house} this season, and fix the ones that lose money." → "Go over every outlay at {house} this season, and drop the ones that bring nothing back." (presumed prices)
+> - 7.1: "Bring up everyone who learns from them to see {other} for what they are." → "Make sure everyone close to them sees {other} for what they are." (presumed learners (a standing))
+> - 7.2: "Never let fear of {other} decide anything they do." → "Never let {other} decide anything they do, by threat or by favour." (presumed a fear)
+> - 8.3: "Make {other} pay full price for everything they want from them this season." → "Make {other} ask twice for anything they want from them this season." (presumed prices)
+> - 13.1: "Make sure no single customer could ruin {house} by leaving." → "Make sure no single loss could ruin {house}." (presumed customers)
+> - 15.1: "Sell something this season for twice what it cost them." → "Make one deal this season that doubles their money." (presumed goods and prices)
+> - 21.1: "Never forgive, and never let anyone see that they have not." → "Keep their anger hidden until the day it can be used." (near-restatement of the reserve's "Never let a single wrong done to them be forgotten.")
+> - 25.1: "Never pay full price for anything again." → "Be the richest person this place has ever known." (presumed prices)
+
 GOALS-3 · builder 9 · 2026-11-20. Docs only, for the chair's reading and the owner's veto. The cells and counts are lines
 181–240 of the build order in [`WANTS-PROPOSAL.md`](WANTS-PROPOSAL.md) (`wants-by-pool.out.txt`, "THE BUILD ORDER", file
 4). Each line is APPENDED to the END of its cell in `GOAL_FAMILY_LINES`, after files 1–3 (a drawn line, never the
@@ -10,17 +31,16 @@ a person, member or house the record may not hold. TIES/rival_enemy lines hold o
 leverage tie; TIES/mentor_student lines read true from either end; POWER/tense lines read true from either power of the
 pair, and none is another with {power} and {rival} swapped; no refused cluster (conviction, duty).
 
-**Measured with files 1 (as amended by the chair) to 4 written, appended in memory, the 300 measure towns:**
-- a second city repeats 15.1% of a first city's short wants and 15.6% of its long (36.4% / 36.0% now); a metropolis
-  22.1% and 21.9% (47.3% / 47.2%) (`wants-verify.lines4.out.txt`);
+**Measured AFTER the revisions above, with files 1–3 as the chair reworded them and file 4 (revised) written, appended in memory, the 300 measure towns:**
+- a second city repeats 15.1% of a first city's short wants and 15.5% of its long (36.4% / 36.0% now); a metropolis
+  22.1% and 21.7% (47.3% / 47.2%) (`wants-verify.lines4.out.txt`);
 - THE LANE'S GATES (`goals-final.mjs`, unchanged, run by `wants-mirrors.mjs`; `wants-mirrors.lines4.out.txt`):
   **identical 0** in a town, **refusal 0**; **mirror 83 → 24** (files 1–3: 31). All 24 are on EXISTING lines of
   POWER/competitive, a cell the tranche does not touch; POWER/tense now holds none (base 58); none on a new line;
 - the moves: 12,498 of 17,992 holdings change text (8,490 onto a new line, 3,957 within their cell, 51 the cascade), in
   287 towns;
-- the checker over cells + reserve + files 1–4: 0 violations (`want-lines-check.out.txt`; four lines of the first
-  draft put a verb after {power}, {rival} or {house}; the checker caught each, two of them twice, and each was rewritten
-  before this commit).
+- the checker over cells + reserve + files 1–4: this file's lines 0 violations; the one red in the run is file 2's 4.3 as the chair
+  reworded it ("{house} does", flagged in WANT-LINES-2.md with a lawful form) (`want-lines-check.out.txt`).
 
 ---
 
@@ -52,9 +72,9 @@ Existing (two of six, verbatim):
 
 New:
 1. Serve {power} in every kind of work {power|it has|they have}, one after another.
-2. Win the people of their own quarter a seat inside {power}.
+2. Bring people they trust into {power}, and see them do well there.
 3. Never let {power} forget the members who do the plain work.
-4. See {power} stand by this place in its hardest year, and be part of it.
+4. See {power} through {power|its|their} hardest year, and be counted among those who did it.
 5. End their days with no enemy inside {power}.
 6. Earn the right to speak at every gathering of {power} without being asked.
 
@@ -68,7 +88,7 @@ Existing (two of six, verbatim):
 New:
 1. Get one promise from {rival} this season, before witnesses, that {power} can hold them to.
 2. Make sure every member of {power} hears the same account of the trouble with {rival} this season.
-3. Mend one small thing between {power} and {rival} this season that both sides have let slide.
+3. Mend one small thing between {power} and {rival} this season, before it grows.
 4. Keep the business of {power} going this season, whatever comes from {rival}.
 5. Count the friends {power} could call on this season if the trouble with {rival} came to a head.
 6. Keep their own temper with {rival} this season, whatever is said.
@@ -81,11 +101,11 @@ Existing (two of six, verbatim):
 - Bring {power} a piece of news before anyone else does.
 
 New:
-1. Keep the count of every vote or tally at the next meeting of {power}, and get it right.
+1. Keep the tally at the next meeting of {power}, and get it right.
 2. Find one way {power} could save money or time, and put it to those who lead {power|it|them}.
-3. Carry the name of {power} well this season, in every dealing outside {power|it|them}.
+3. Do nothing this season, inside {power} or out, that could bring {power|it|them} trouble.
 4. Be there on the busiest day of the season for {power}, and stay till the work is done.
-5. Read up on one matter that troubles {power}, until they know it better than anyone.
+5. Learn all there is to know about one matter that troubles {power}, before the season is out.
 
 ### 5 · TIES/ally/long · +3 (cell 15 → 18)
 Holders: either end of an alliance, a respect or a working patron-and-client tie (customs collector, warehouse factor,
@@ -96,7 +116,7 @@ Existing (two of five, verbatim):
 - Protect {other} from anyone who would bring them down.
 
 New:
-1. Keep {other}'s good name safe, as if it were their own.
+1. Speak up for {other} whenever {other} is not there to speak.
 2. Learn {other}'s work well enough to stand in for them at need.
 3. Be honest with {other} even when it costs the friendship something.
 
@@ -109,8 +129,8 @@ Existing (two of six, verbatim):
 - Find {house} one more source of money.
 
 New:
-1. Sell the leavings of the work at {house} instead of throwing them away.
-2. Look over every price charged at {house} this season, and fix the ones that lose money.
+1. Find one cost at {house} that can be shared with another house this season.
+2. Go over every outlay at {house} this season, and drop the ones that bring nothing back.
 3. Work out, before the season is out, which parts of the work at {house} make money and which lose it.
 
 ### 7 · TIES/rival_enemy/long · +3 (cell 23 → 26)
@@ -122,8 +142,8 @@ Existing (two of five, verbatim):
 - Settle things with {other} for good, one way or another.
 
 New:
-1. Bring up everyone who learns from them to see {other} for what they are.
-2. Never let fear of {other} decide anything they do.
+1. Make sure everyone close to them sees {other} for what they are.
+2. Never let {other} decide anything they do, by threat or by favour.
 3. Be remembered as the one who stood up to {other} when no one else would.
 
 ### 8 · TIES/rival_enemy/short · +3 (cell 23 → 26)
@@ -136,7 +156,7 @@ Existing (two of five, verbatim):
 New:
 1. Get word to {other} this season that they will not back down.
 2. Count who stands with {other} this season, and who only pretends to.
-3. Make {other} pay full price for everything they want from them this season.
+3. Make {other} ask twice for anything they want from them this season.
 
 ### 9 · INSTITUTION/charter/short · +2 (cell 12 → 14)
 Holders: the head of a lawful house with rights from those who govern (dean, master of granaries, enchanter, chief
@@ -192,7 +212,7 @@ Existing (two of six, verbatim):
 - See {house} out of debt for good, with money set aside for bad years.
 
 New:
-1. Make sure no single customer could ruin {house} by leaving.
+1. Make sure no single loss could ruin {house}.
 2. Make every part of the work at {house} pay for itself, or end it.
 
 ### 14 · RANK/climb/short · +2 (cell 11 → 13)
@@ -216,7 +236,7 @@ Existing (two of four, verbatim):
 - Get the better side of every bargain struck this season.
 
 New:
-1. Sell something this season for twice what it cost them.
+1. Make one deal this season that doubles their money.
 
 ### 16 · TIES/mentor_student/short · +1 (cell 7 → 8)
 Holders: either end (dean, lord, company captain, sage, scroll scribe, mine captain, miller).
@@ -276,7 +296,7 @@ Existing (two of four, verbatim):
 - Settle every score before they die.
 
 New:
-1. Never forgive, and never let anyone see that they have not.
+1. Keep their anger hidden until the day it can be used.
 
 ### 22 · SUPPLY/expansion/short · +1 (cell 6 → 7)
 Holders: whoever runs a house whose work runs well (cartographer, customs collector, house boss, vintner, master
@@ -317,4 +337,4 @@ Existing (two of four, verbatim):
 - Gather enough wealth to pass on, and leave the family rich after them.
 
 New:
-1. Never pay full price for anything again.
+1. Be the richest person this place has ever known.

@@ -4,9 +4,9 @@ size        vantage  before   after   (new lines held a town, after)
 town        short     19.9%    7.1%   11.34
 town        long      18.8%    6.8%   11.44
 city        short     36.4%   15.1%   26.80
-city        long      36.0%   15.6%   28.56
+city        long      36.0%   15.5%   28.56
 metropolis  short     47.3%   22.1%   39.54
-metropolis  long      47.2%   21.9%   41.72
+metropolis  long      47.2%   21.7%   41.72
 
 THE MOVES over 300 towns: 12498 holdings changed text (287 towns touched): onto a new line 8490 · within an appended cell, to another of its lines 3957 · holdings of cells not appended (the cascade) 51
 by the holding's cell before (appended cells marked *): onto a new line · within cell · cascade

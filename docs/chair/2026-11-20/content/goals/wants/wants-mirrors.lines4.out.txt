@@ -1,4 +1,4 @@
-cards: 9012; elapsed 66.9s; tree /home/user/wt-b9; 50/size; reserve exported; closed list 119 rows from /home/user/wt-b9/src/data/people/goalSecretRefusals.js
+cards: 9012; elapsed 145.9s; tree /home/user/wt-b9; 50/size; reserve exported; closed list 119 rows from /home/user/wt-b9/src/data/people/goalSecretRefusals.js
 size         towns  cards identical mirror template>2 template=2 tieDesc tieTension tieIndex refusal  venal unmatched nocell
 thorp           50     65         0      0          0          0       0          0        0       0      7         0      1
 hamlet          50    170         0      0          0          0       0          0        0       0     15         0      2

@@ -1,0 +1,140 @@
+
+WANT-LINES-1.md PERSONALITY/sway/long #1: See their way of doing things become the way everyone here does them.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.00   Have a following who would go wherever they lead.
+  nearest drawn line (short) 0.60: Get people doing things their way this season without being asked twice.
+
+WANT-LINES-2.md PERSONALITY/grudge/long #1: Take back, one day, everything they believe was taken from them.
+  reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve =long  0.00   See the people who looked down on them come asking for their help.
+  reserve =long  0.00   Never let a single wrong done to them be forgotten.
+  nearest drawn line (short) 0.25: Pay someone back for a wrong done to them.
+
+WANT-LINES-2.md PERSONALITY/grudge/long #2: Live well enough that everyone who ever doubted them has to watch.
+  reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve =long  0.00   See the people who looked down on them come asking for their help.
+  reserve =long  0.00   Never let a single wrong done to them be forgotten.
+  nearest drawn line (long) 0.25: Outlast every person who ever crossed them.
+
+WANT-LINES-2.md PERSONALITY/sway/long #1: Have people here quote them for years after they are gone.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.20   Have a following who would go wherever they lead.
+  nearest drawn line (long) 0.20: Have the final say in everything that touches them.
+
+WANT-LINES-2.md PERSONALITY/sway/long #2: Bring the stubbornest people here round to their way, one by one.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.00   Have a following who would go wherever they lead.
+  nearest drawn line (short) 0.40: Get people doing things their way this season without being asked twice.
+
+WANT-LINES-2.md PERSONALITY/sway/short #1: Win over a crowd at the next gathering here, and be cheered for it.
+  reserve =short 0.00   Be proved right this season about something everyone else doubted.
+  reserve  long  0.00   Never once be seen to back down.
+  reserve  long  0.00   Have a following who would go wherever they lead.
+  nearest drawn line (short) 0.17: Have the last word in the next argument that matters.
+
+WANT-LINES-2.md PERSONALITY/grudge/short #1: Spread one true but unkind story about someone they envy this season.
+  reserve =short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve  long  0.00   See the people who looked down on them come asking for their help.
+  reserve  long  0.00   Never let a single wrong done to them be forgotten.
+  nearest drawn line (short) 0.33: Learn the secret of someone they envy.
+
+WANT-LINES-3.md PERSONALITY/sway/long #1: Be the one this place sends to speak for it before outsiders.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.00   Have a following who would go wherever they lead.
+  nearest drawn line (short) 0.25: Put someone who slighted them back in their place.
+
+WANT-LINES-3.md PERSONALITY/grudge/long #1: Make sure their name stands higher here than the name of anyone who ever spoke against them.
+  reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve =long  0.00   See the people who looked down on them come asking for their help.
+  reserve =long  0.00   Never let a single wrong done to them be forgotten.
+  nearest drawn line (long) 0.50: Make sure no one wrongs them twice.
+
+WANT-LINES-3.md PERSONALITY/greed/long #1: Hold a share in every good business in this place.
+  reserve  short 0.00   Spend nothing this season that someone else could be made to pay for.
+  reserve =long  0.00   Have half the people here owing them money.
+  nearest drawn line (short) 0.00: Put away more coin this season than last.
+
+WANT-LINES-3.md PERSONALITY/sway/short #1: Take charge of one new thing this season, however small, and run it their way.
+  reserve =short 0.00   Be proved right this season about something everyone else doubted.
+  reserve  long  0.00   Never once be seen to back down.
+  reserve  long  0.00   Have a following who would go wherever they lead.
+  nearest drawn line (short) 0.13: Get people doing things their way this season without being asked twice.
+
+WANT-LINES-3.md PERSONALITY/grudge/short #1: Beat someone they envy to something both of them want this season.
+  reserve =short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve  long  0.00   See the people who looked down on them come asking for their help.
+  reserve  long  0.00   Never let a single wrong done to them be forgotten.
+  nearest drawn line (short) 0.33: Learn the secret of someone they envy.
+
+WANT-LINES-4.md PERSONALITY/greed/short #1: Make one deal this season that doubles their money.
+  reserve =short 0.00   Spend nothing this season that someone else could be made to pay for.
+  reserve  long  0.25   Have half the people here owing them money.
+  nearest drawn line (short) 0.00: Put away more coin this season than last.
+
+WANT-LINES-4.md PERSONALITY/sway/long #1: Be the one whose word decides who is welcome here.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.00   Have a following who would go wherever they lead.
+  nearest drawn line (short) 0.25: Have the last word in the next argument that matters.
+
+WANT-LINES-4.md PERSONALITY/grudge/long #1: Keep their anger hidden until the day it can be used.
+  reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve =long  0.00   See the people who looked down on them come asking for their help.
+  reserve =long  0.00   Never let a single wrong done to them be forgotten.
+  nearest drawn line (short) 0.00: Pay someone back for a wrong done to them.
+
+WANT-LINES-4.md PERSONALITY/sway/short #1: Settle one dispute here this season by their word alone.
+  reserve =short 0.00   Be proved right this season about something everyone else doubted.
+  reserve  long  0.00   Never once be seen to back down.
+  reserve  long  0.00   Have a following who would go wherever they lead.
+  nearest drawn line (short) 0.25: Have the last word in the next argument that matters.
+
+WANT-LINES-4.md PERSONALITY/greed/long #1: Be the richest person this place has ever known.
+  reserve  short 0.00   Spend nothing this season that someone else could be made to pay for.
+  reserve =long  0.00   Have half the people here owing them money.
+  nearest drawn line (long) 0.17: Grow rich enough that no one can ever tell them no.
+
+WANT-LINES-5.md PERSONALITY/sway/long #1: Have their say heard in every choice that shapes this place.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.20   Have a following who would go wherever they lead.
+  nearest drawn line (long) 0.40: Have the final say in everything that touches them.
+
+WANT-LINES-5.md PERSONALITY/sway/long #2: Make every newcomer here learn quickly whose word counts.
+  reserve  short 0.00   Be proved right this season about something everyone else doubted.
+  reserve =long  0.00   Never once be seen to back down.
+  reserve =long  0.00   Have a following who would go wherever they lead.
+  nearest drawn line (short) 0.17: Have the last word in the next argument that matters.
+
+WANT-LINES-5.md PERSONALITY/grudge/short #1: Let someone they resent see them do well this season.
+  reserve =short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve  long  0.25   See the people who looked down on them come asking for their help.
+  reserve  long  0.25   Never let a single wrong done to them be forgotten.
+  nearest drawn line (short) 0.25: See someone who wronged them lose face in public this season.
+
+WANT-LINES-5.md PERSONALITY/greed/short #1: Put one coin to work this season for every coin they spend.
+  reserve =short 0.25   Spend nothing this season that someone else could be made to pay for.
+  reserve  long  0.00   Have half the people here owing them money.
+  nearest drawn line (short) 0.50: Put away more coin this season than last.
+
+WANT-LINES-5.md PERSONALITY/grudge/long #1: Win, in the end, every quarrel they ever started.
+  reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
+  reserve =long  0.00   See the people who looked down on them come asking for their help.
+  reserve =long  0.00   Never let a single wrong done to them be forgotten.
+  nearest drawn line (long) 0.25: Outlast every person who ever crossed them.
+
+WANT-LINES-5.md PERSONALITY/fear/long #1: Live among neighbours who would stand by them if trouble came.
+  reserve =long  0.00   Never again owe anything to someone who could use it against them.
+  nearest drawn line (long) 0.20: Live somewhere no one can reach them uninvited.
+
+WANT-LINES-5.md PERSONALITY/sway/short #1: Change one person's mind this season by argument alone.
+  reserve =short 0.00   Be proved right this season about something everyone else doubted.
+  reserve  long  0.00   Never once be seen to back down.
+  reserve  long  0.00   Have a following who would go wherever they lead.
+  nearest drawn line (short) 0.20: Have the last word in the next argument that matters.
+
+24 new PERSONALITY lines; pairs with a word share >= 0.50 against the reserve: 0
