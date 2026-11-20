@@ -1,0 +1,35 @@
+# FRAME-8 — hand-back (the session sheet's lane, the owner after FRAME-7)
+
+Last written 2026-11-20T21:54:05Z (`date -u`) by FRAME-8 on `lane/frame-8-2026-11-20`. The lane was taken at `a42e90d89` on the chair's word "THE LANE IS YOURS at a42e90d89" (21:52 UTC), fast-forwarded. A successor needs this file and the briefs it names.
+
+## RULINGS IN FORCE (one list; the source of each in brackets)
+
+1-51. As listed in `FRAME-6-HANDBACK.md` (35-51) and the hand-backs it names, all in force, except where a later ruling below supersedes.
+52-65. As listed in `FRAME-7-HANDBACK.md` at `a42e90d89`, all in force; ruling 61 (the whole ratchet) is SUPERSEDED by 64.
+66. **COMMON-RULES** (`docs/chair/2026-11-20/seventh/prompts/COMMON-RULES.txt` on the chair's branch) binds every seat word for word; its rule 8 is RE-RULED (the chair, 21:27 UTC, = ruling 64): before each landing request (a) `npm run build` + `VERIFY_DIST=1` on `tests/build/vendorPdfLazy.test.js` and `tests/build/generationWorkerLazy.test.js`; (b) ONE run of the test directories of what the lane touched, ALWAYS `tests/lint` and `tests/build`, through the mutex, failing rows BY NAME against `ci/RED-AT-LINE.tsv` (53 rows at `062504aa8`). No whole `npm run test:ratchet` on a seat's box. Fetch COMMON-RULES again before the first landing request.
+67. **THE ORDER FROM THE HAND-OVER** (the chair, 21:52 UTC): SR1 (builder still in FRAME-7's container; committed work `lane/frame-7-2026-11-20-sr1-wip` at `4eea702d8`, read by nobody): when its final branch comes, read its diff WHOLE ONCE, re-run its three proofs, see WHY `troubleWeight.test.js` and `scripts/census/pool-dominance.register.json` moved and say so, merge; then the three tuning rows re-frozen by the inventory's door (ruling 62). MEANWHILE one builder on FRAME-8's box: F3+F4 (path-disjoint from SR1, checked against `4eea702d8`'s list). P1 waits for SR1's tip. THE SIX SHEETS AGAIN FOR THE OWNER after SR1 and P1 are merged: tell the chair when ready for its eye.
+
+## FOR THE OWNER'S SIGNING
+
+As in `FRAME-7-HANDBACK.md` (`sideArchetypes.js#FRAME_TUNING`, unchanged). P1's `CRISIS_COUNTERPART_TUNING` joins when it comes.
+
+## FOR THE JOIN AND THE SECURITY READER
+
+As in FRAME-6's and FRAME-7's hand-backs. F3+F4 will add: the reader of a chain's cause word (`src/domain/display/`) for the join's fold of `EconomicsTab.jsx`, `SupplyChainsPanel.jsx`, `pdf/sections/SupplyChainFlow.jsx`, `pdf/sections/Services.jsx`; the export F4 reads for the "hall held" clauses; F4's capture line LISTED for the security reader (a fact about crime, owner-only by construction).
+
+## EACH UNIT: STATE, BRANCH, COMMIT
+
+| unit | state | commit | receipts |
+|---|---|---|---|
+| take-over | DONE | `a42e90d89` (fast-forward) | — |
+| SR1 | BUILDER OUT in FRAME-7's container; `-sr1-wip` at `4eea702d8` | brief `frame7/SR1-BUILD.md` | at `4eea702d8` it touches `stakeReasonLines.js` (new), `crisisCast.js`, `crisisPage.js`, `pool-dominance.register.json`, `stakeReasonLines.test.js` (new), pins in crisisCast.test, tailCrisisBatch3/4, crisisStakeFollowups, troubleWeight |
+| F3+F4 | BUILDER OUT (branch `frame8-f3f4` in an Agent worktree on FRAME-8's box, `.claude/worktrees/agent-a3749cd04aa10f49c`, from `accd953ef`); first deliverable `frame8/F3F4-LINES.txt` for the chair's eye, nothing under `src/` committed before | brief `frame8/F3F4-BUILD.md` (`accd953ef`) | path overlap with SR1 only on framed-owner pins in `troubleWeight.test.js` and the lighting census (FRAME-8 refreezes at each merge) |
+| P1, F6, P2, P3a, P3b, P4b, SR2 (+ the "# governs, with N other powers" line, ruling 64's second-batch item), the measures, build + verify:dist, the six sheets again | NOT STARTED | — | ruling 52's order; P1 on SR1's tip |
+
+## STORED FIGURES THIS LANE MOVED (named, signed by nobody)
+
+None yet under FRAME-8. FRAME-7's (C2b(b)): golden master 227 rows, FENCE 1 9bcbfbef -> 9dc8b4dd, generationForkCensus A1 control 26932f67 -> f1a55652.
+
+## RUNNING COST IN WORKER BYTES
+
+Worker 2,588,252 at `bcec56844` (the lane's base under ruling 59; the line 2,617,934); first paint 1,177,668 raw / 374,666 gzip / 314,465 Brotli.
