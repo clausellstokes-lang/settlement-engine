@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "4603d8c80faf30d07a8b825f226d3bb9ebdc8a0e",
-  "measuredBy": "SEAT-6",
+  "measuredAtSha": "ff07bb81526a7383071ca1035e345ee06bed53d0",
+  "measuredBy": "SEAT-7",
   "date": "2026-11-20",
-  "note": "U5-CURE (cd14df0dd): SEAT_CIRCUMSTANCE_TUNING gains the dependent applyWorldPulseFactionRoster.js (the roster government_change hands in the seat circumstances); no value moves",
+  "note": "U5-CURE2 (3909902fa): SEAT_CIRCUMSTANCE_TUNING dependents gain src/domain/worldPulse/applyWorldPulse.js (the coup path wired); no value moved",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1871,6 +1871,7 @@
       },
       "dependents": [
         "src/domain/rulingPowerCoup.js",
+        "src/domain/worldPulse/applyWorldPulse.js",
         "src/domain/worldPulse/applyWorldPulseFactionRoster.js",
         "src/domain/worldPulse/stressorDynamics.js"
       ],
