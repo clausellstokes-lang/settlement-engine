@@ -24,8 +24,9 @@ restated; this file adds what came after.
 | 1, 1c, 2, 4, 4b | see TRAD-3-HANDBACK §2 | landed before the hand-over; "TRAD-SHARE 1f3cdc135" with the security reader (REVIEW-VEIL-13) | `1f3cdc135` |
 | 7 | REVIEW-VEIL-13's hole: the reader's dead-cause by the chair's word rule (re-stated 15:10, ADDENDUM 1); no power archetype from a hideable field | READ WHOLE, reds re-run 16/90 at `ef605266f`, greens 90/90, MERGED; "TRAD-SHARE-2" sent | `edfeb052d`; merge `18414593c` |
 | 5 | CTR10 finished: every frame a declared line (70 bare → 0), floors by arms, gloss pools raised to 3 (+32 lines), crisis arms, the totality arm, census rows (Appendix B), the printed export | READ WHOLE, reds re-run 6/66 at `c38ba7886`, MERGED | `22be32bea`; merge `89311c175` |
-| 6 | the measures (CTR8 by element and by size; pool dominance per slot; the most repeated shape masked) and the owner's 30 + 12 samples | brief `briefs/TRAD-4-U6-MEASURES.md` (DRAFT: stamp the base at dispatch) | — |
-| 8 | the reader's import path and the save/serve round trip on more than 4 towns (REVIEW-VEIL-13 §3 "NOT DONE"; the chair 16:08) | not briefed | — |
+| 6 | the measures and the owner's 30 + 12 samples, the plain-words file | MERGED (docs and tools only) | `a39c93689`; merge `5f49c7779` |
+| 8 | the import path and the round trip > 4 towns (brief `briefs/TRAD-4-U8-IMPORT-ROUNDTRIP.md`) | STOPPED AT A RED (the import path applies no share veil: a hidden hideable house named on the importer's page, 34 names in 31 of 140 towns); WIP held for the chair's ruling, NOT read line by line yet | `14f16760b` on `lane/trad-4-2026-11-20-u8-wip` |
+| 9 | no first sentence says "kept" twice (brief `briefs/TRAD-4-U9-KEPT-TWICE.md`) | builder out, worktree scratchpad/u9 | — |
 | — | CTR11's "other direction" line for the owner (where a DM SHOWS the criminal income, the reader still ranks without it), with its born count | open | — |
 
 ## 3. FOR THE OWNER (plain text beside this file)
@@ -84,3 +85,9 @@ and reader reproduce TRAD-3-HANDBACK §5 exactly (1,232 rites; SHORT 8.7%; top s
   typecheck:domain:strict 0, eslint 0; confinement 1,245 cmp-identical. Registers by their doors: writer-reach
   (shrink-only `--write`) cohort 1385 → 1368 (`a commit before this`); the lighting census titles 31334 → 31352,
   suiteTitles 8675 → 8683 (plain 34/34). NEXT: unit 8 (import path, round trip > 4 towns), unit 6 (the owner's samples).
+- 2026-11-20 16:55 UTC — UNIT 6 MERGED (`5f49c7779`): the owner's files `TRAD-4-SAMPLES-30.txt`, `TRAD-4-SAMPLES-CRISIS-12.txt`,
+  `TRAD-4-MEASURES.txt` beside this file; `out-trad4/RUN.txt` re-makes every figure. Headlines: shares unchanged; top repeat
+  3x; distinct 1,213; most dominated slot gloss.hunt 51% of 49; CTR11 other direction 17 of 1,232 rites (45 towns with a
+  criminal income); 146 of the 432 "calm" towns hold a pressure of their own. Findings sent to the chair: "kept" twice
+  (unit 9), and `kernel/proseHash.js :: pickVariant`'s `% 4` lean (not ours). UNIT 8 stopped at a red on the import path
+  (above): the chair rules which document is "served" to an importer and the cure (not this lane's files).
