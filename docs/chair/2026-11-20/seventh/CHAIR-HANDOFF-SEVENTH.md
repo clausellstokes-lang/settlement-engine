@@ -1217,6 +1217,35 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   reaches `cohesionWeave.js`; a re-record only if that is shown impossible, and then it goes to the security
   reader. The birth callers that pass no config are the birth unit's (CS21, CS22).
 
+- **THE MEASURE FOR THE OWNER'S TWO QUESTIONS, AND WHAT IT RULED (2026-11-20, 13:55 UTC; a helper on the 300 untouched towns
+  at the line 43ab0f5eb; `measures/owner-q3/measures.mjs` and `measures.out.txt`; every figure executed by it):**
+  (A) A SECOND PLACE'S LINES ALREADY SEEN IN A FIRST, names masked (short want / own hook / tie line / secret):
+  village 7% / 9% / 15% / 15%; town 18% / 25% / 35% / 21%; CITY 35% / 47% / 63% / 25%; METROPOLIS 44% / 64% / 73%
+  / 29% (with two earlier places a city reads 49% / 66% / 78% / 38%). THE CHAIR'S ARITHMETIC TO THE OWNER ("a few
+  again in the next city") WAS WRONG: lines are drawn from small groups by kind, not from one pool of 900:
+  CORRECTED TO HIM THE SAME TURN; by the chair's own stated crux (above one line in five) THIS IS NOT ONLY AN
+  AFTER-DEPLOY MATTER from town size up: THE BILL IS BEING MEASURED (which groups cause the repeats; how many new
+  lines bring a second city under 30% and under 20%; whether culture already separates towns) and the owner gets
+  priced options. (B) THE TROUBLE'S SENTENCE, three in a row: 33.0% mixed (32.6% masked); thorp 9, hamlet 11,
+  village 16, town 41, CITY 81, METROPOLIS 80; 86 distinct texts; crime rising in 25.7% of towns, guild against
+  outside traders 18.7%, outside debt 6.0%, approaching danger 6.0%, corruption 5.7%. RULED: L1 IS RE-CUT AS
+  CAUSES (to PAGE-3, 13:56): measure what the generator reads per kind and which facts stand in that kind's towns;
+  a closed table of causes per kind (pure predicates over the document in hand, none above about a third of its
+  kind's towns, a plain wording when none holds); two wordings a cause and three plain a kind, read by the chair;
+  DATA ONLY in `src/data/tensionCauses.js`; the display seat builds the reader; THE TARGETS on built towns with
+  names masked: mixed under 10%, three cities in a row under 25%. (C) THE MERITS among calm towns: no earlier
+  government: EVERY born town (`powerStructure.previousGovernments` is absent in all 300): dropped; faith with the
+  seat: no such relation in the record: dropped; no trouble of today about the ruler and no capture: 47% to 78%:
+  A CONDITION, not a merit; a principled person in the seat (rank 1 of the governing power; `personality.dominant`
+  in the "straight" family; 34% to 59% of calm leaders carry no temperament at all): 3% to 20%: KEPT; a remembered
+  hardship graded major or worse with none of its kind today: 22% at a thorp to 69% at a metropolis: kept ONLY
+  judged against the size's usual. ALSO READ FROM THE BREAKDOWN: the safety term's mean is about minus four at
+  every size. RULED: U5 "MERITS OF RULE" on the fortune lane (to FORTUNE-2, 13:56): MEASURE AND PROPOSE FIRST;
+  safety judged against the size's usual; two to four merits, each a pure read, counted only upward, each between
+  about 5% and 30% and not growing with size; "no trouble about the ruler" a condition of Endorsed; THE TARGET two
+  to five Endorsed in a hundred calm places at untouched settings at every size, never without two reasons; the
+  reason PRINTED, composed at render from the document in hand; DARK; the numbers the owner's to sign.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
