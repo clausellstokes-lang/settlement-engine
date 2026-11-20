@@ -5,7 +5,7 @@
  * second person of that gender is in play, else the role, else the surname, else the given name; a pronoun or a role is
  * never the ONLY reference to a person or a power in a stored string").
  *
- * Over a born pool of 120 towns (10 calm and 10 in crisis a tier, thorp to metropolis; the calm by `{ settType }` alone,
+ * Over a born pool of 144 towns (12 calm and 12 in crisis a tier, thorp to metropolis; the calm by `{ settType }` alone,
  * seeds `b5-names-calm-<tier>-<i>`, a birth with a crisis set aside; the crisis towns by `{ settType, stressTypes }`, one or
  * two kinds cycling the catalogue, seeds `b5-names-crisis-<tier>-<i>`), every sentence the four files compose is read for
  * the rule's four breaches:
@@ -28,11 +28,15 @@ import { powerNameAfterArticle } from '../../src/domain/display/powerSentenceNam
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const KINDS = Object.keys(STRESS_TYPE_MAP);
-const PER = 10;
+// FRAME-4 · N1 (the chair's ruling (a), 2026-11-20): the pool widened by its own fair rule, PER 10 -> 12 (120 -> 144
+// towns). The troubleCast floor (300) counts the trouble-cast SENTENCES read (a side's words, a face's reason, a cast
+// person's reason on the sheet) over calm AND crisis towns, not framed towns: 307 at 167d532b5, 272 with B9 (2a112e863,
+// W2 needs both powers: fewer frames), 336 at PER 12. Every one of the 15 crisis kinds is read at both widths.
+const PER = 12;
 /** @param {any} s */
 const entriesOf = (s) => (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : []).filter(Boolean);
 
-/** The born pool: per tier, ten calm towns and ten in crisis. */
+/** The born pool: per tier, twelve calm towns and twelve in crisis. */
 function bornPool() {
   const out = [];
   for (const tier of TIERS) {
@@ -159,11 +163,15 @@ const of = (file, kind) => by[file].filter((b) => b.kind === kind);
 /** @param {Array<{ seed: string, where: string, why: string, text: string }>} list */
 const shown = (list) => list.slice(0, 5).map((b) => `${b.seed} · ${b.where} · ${b.why}: ${b.text}`).join('\n');
 
-describe('the names rule in FRAME-2\'s own files, over 120 born towns', () => {
+describe('the names rule in FRAME-2\'s own files, over 144 born towns', () => {
   it('reads every file\'s output (the pool is not empty)', () => {
     // FRAME-2 · B5c: measured 97 at 8df635b61 (247 at 79db75eb2). The sheet is composed as the owner throughout; the fall
     // is B2's weight (CF11): only a calm town with a trouble of weight is framed now, 10 of this pool's 60 calm towns
     // (3 villages, 2 cities, 5 metropolises; all 60 before), so the sides' sentences fell from 180 to 30.
+    // FRAME-4 · N1, measured: at 2a112e863 (PER 10) tonightSheet 91, crisisHooks 226, troubleCast 272, crisisCast 836;
+    // 8 of 60 calm towns framed (3 villages, 2 cities, 3 metropolises), 24 sides' sentences. At PER 12: tonightSheet 112,
+    // crisisHooks 273, troubleCast 336, crisisCast 987; 11 of 72 calm towns framed (5 villages, 3 cities, 3
+    // metropolises), 33 sides' sentences. No floor lowered.
     expect(read.tonightSheet).toBeGreaterThan(90);
     expect(read.crisisHooks).toBeGreaterThan(100);
     expect(read.troubleCast).toBeGreaterThan(300);
@@ -185,7 +193,9 @@ describe('the names rule in FRAME-2\'s own files, over 120 born towns', () => {
   // record of every crisis town, so B5 stopped at the census. This assertion is the rule's zero; it fails today, and
   // `it.fails` says so until the seat's ruling lands, when it must be flipped to `it`. The reader is generous: at
   // 79db75eb2 it reads 762 strings, 598 of them by hand a true (C); the other 164 say "it" of the crisis, the seat or the
-  // role ("gains and loses by it at once"), and must be told apart when the flip lands (B5-NAMES-RESULTS.md).
+  // role ("gains and loses by it at once"), and must be told apart when the flip lands (B5-NAMES-RESULTS.md). FRAME-4 ·
+  // N1, measured: the reader flags 762 of 836 stored strings at 2a112e863 (PER 10), 899 of 987 at PER 12 (the hand split
+  // above is 79db75eb2's, at PER 10, not redone). The (A), (B), (D) breach lists are 0 at both widths.
   it.fails('crisisCast: no breach of kind (C) in what the cast stores', () => {
     expect(of('crisisCast', 'C').length).toBe(0);
   });
