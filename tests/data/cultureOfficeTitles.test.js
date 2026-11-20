@@ -277,3 +277,53 @@ describe('TITLES-2 · the cells filled by research (each word\'s gloss and sourc
     expect(officeWordInfo('Podestà')).toBeNull();
   });
 });
+
+describe('TITLES-3 · the small places\' elders and headman (each word\'s gloss and source: TITLES-3-HANDBACK.md)', () => {
+  /** culture, family, the six sizes smallest first (null: the fallback), each a literal; a pair is read as its male form */
+  const PINNED = [
+    ['germanic', 'headman', ['Bauermeister', 'Bauermeister', 'Schultheiss', 'Burgomaster', 'Burgomaster', 'Burgomaster']],
+    ['greek', 'headman', ['Komarch', 'Komarch', 'Demarch', 'Demarch', 'Demarch', 'Demarch']],
+    ['celtic', 'headman', ['Pencenedl', 'Pencenedl', 'Chieftain', 'Chieftain', null, null]],
+    ['mesoamerican', 'headman', ['Calpullec', 'Calpullec', 'Calpullec', 'Calpullec', null, null]],
+    ['mesoamerican', 'elders', ['Huehue', 'Huehue', 'Huehue', 'Huehue', null, null]],
+  ];
+  /** the target cells left on the fallback on purpose (TITLES-3-HANDBACK.md §3 says what would settle each) */
+  const LEFT = [
+    ...['germanic', 'latin', 'celtic', 'norse', 'greek'].flatMap((culture) =>
+      ['thorp', 'hamlet', 'village', 'town'].map((tier) => [culture, 'elders', tier])),
+    ['norse', 'headman', 'thorp'], ['norse', 'headman', 'hamlet'],
+    ['latin', 'headman', 'thorp'], ['latin', 'headman', 'hamlet'], ['latin', 'headman', 'village'],
+    ['mesoamerican', 'council', 'town'],
+  ];
+
+  it('each filled row reads its words at its sizes; each target cell left open reads today\'s title', () => {
+    expect(PINNED).toHaveLength(5);
+    for (const [culture, family, rungs] of PINNED) {
+      OFFICE_TIERS.forEach((tier, i) => {
+        const got = officeTitleOf({ family, tier, culture, sex: 'male' });
+        if (rungs[i] !== null) expect(got, `${culture}.${family}.${tier}`).toBe(rungs[i]);
+        else expect(got, `${culture}.${family}.${tier}`).toBeNull();
+      });
+    }
+    expect(LEFT).toHaveLength(26);
+    for (const [culture, family, tier] of LEFT) expect(officeTitleOf({ family, tier, culture }), `${culture}.${family}.${tier}`).toBeNull();
+    expect(officeTitleIn({ family: 'elders', tier: 'hamlet', culture: 'norse', government: 'Elder Council' })).toBe('Elder');
+    expect(officeTitleIn({ family: 'headman', tier: 'thorp', culture: 'norse', government: "Headman's Authority" })).toBe('Headman');
+    expect(officeTitleIn({ family: 'headman', tier: 'hamlet', culture: 'greek', government: 'Elected Reeve' })).toBe('Komarch');
+    expect(officeTitleIn({ family: 'elders', tier: 'thorp', culture: 'mesoamerican', government: 'Household Council' })).toBe('Huehue');
+  });
+
+  it('the forms by sex, and the reverse read of the new words for SEAT-1', () => {
+    expect(officeTitleOf({ family: 'elders', tier: 'village', culture: 'mesoamerican', sex: 'female' })).toBe('Ilama');
+    expect(officeTitleOf({ family: 'elders', tier: 'village', culture: 'mesoamerican' })).toBe('Huehue');
+    expect(officeTitleOf({ family: 'headman', tier: 'hamlet', culture: 'germanic', sex: 'female' })).toBe('Bauermeister');
+    expect(officeTitleOf({ family: 'headman', tier: 'hamlet', culture: 'greek', sovereign: true })).toBe('Chieftain');
+    expect(officeWordInfo('Huehue')).toEqual({ families: ['elders'], sovereign: false, crown: false, sex: 'male' });
+    expect(officeWordInfo('Ilama')).toEqual({ families: ['elders'], sovereign: false, crown: false, sex: 'female' });
+    expect(officeWordInfo('Calpullec')).toEqual({ families: ['headman'], sovereign: false, crown: false, sex: null });
+    expect(officeWordInfo('komarch')).toEqual({ families: ['headman'], sovereign: false, crown: false, sex: null });
+    expect(officeWordInfo('Bauermeister')).toEqual({ families: ['headman'], sovereign: false, crown: false, sex: null });
+    expect(officeWordInfo('Pencenedl')).toEqual({ families: ['headman'], sovereign: false, crown: false, sex: null });
+    expect(officeWordInfo('Geron')).toBeNull();
+  });
+});

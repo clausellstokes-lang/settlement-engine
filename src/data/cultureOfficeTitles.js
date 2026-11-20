@@ -21,6 +21,8 @@
  *   • The criminal side varies by SIZE and not by culture until the owner rules (the chair, 2026-11-20).
  * TITLES-2 (the same day, the second pass) filled the commonest fallback cells with words read in a named source; every
  * word's gloss and source: docs/chair/2026-11-20/content/titles/TITLES-2-HANDBACK.md. A cell marked "TITLES-2" is its.
+ * TITLES-3 (the same day, the third pass) filled the small places' elders and headman where a culture has a sourced
+ * small word; every word's gloss, say-it hint and source: docs/chair/2026-11-20/content/titles/TITLES-3-HANDBACK.md.
  * Pure data and its resolvers; no draw.
  */
 
@@ -132,7 +134,7 @@ export const CULTURE_OFFICE_TITLES = Object.freeze({
   germanic: Object.freeze({
     sovereign: ladder(null, null, null, pair('Graf', 'Gräfin'), pair('König', 'Königin'), pair('Kaiser', 'Kaiserin')),
     appointed: ladder('Vogt', 'Vogt', 'Vogt', 'Vogt', 'Landvogt', 'Statthalter'),
-    headman: ladder(null, null, 'Schultheiss', 'Burgomaster', 'Burgomaster', 'Burgomaster'),
+    headman: ladder('Bauermeister', 'Bauermeister', 'Schultheiss', 'Burgomaster', 'Burgomaster', 'Burgomaster'), // TITLES-3 at thorp and hamlet: the village's head
     council: ladder(null, null, null, 'Burgomaster', 'Burgomaster', 'Burgomaster'),
     guild: ladder(null, null, null, 'Zunftmeister', 'Zunftmeister', 'Zunftmeister'), // TITLES-2: the guild's master
     military: ladder(null, null, null, null, 'Marschall', 'Marschall'), // TITLES-2: the army's marshal
@@ -149,7 +151,7 @@ export const CULTURE_OFFICE_TITLES = Object.freeze({
   celtic: Object.freeze({
     sovereign: ladder(null, null, null, 'Chieftain', pair('King', 'Queen'), pair('High King', 'High Queen')),
     appointed: ladder('Maer', 'Maer', 'Maer', 'Maer', null, null), // TITLES-2: the king's reeve
-    headman: ladder(null, null, 'Chieftain', 'Chieftain', null, null),
+    headman: ladder('Pencenedl', 'Pencenedl', 'Chieftain', 'Chieftain', null, null), // TITLES-3 at thorp and hamlet: head of the kindred
     council: ladder(null, null, null, 'Vergobret', 'Vergobret', 'Vergobret'),
     military: ladder(null, null, 'Penteulu', 'Penteulu', 'Penteulu', 'Penteulu'), // TITLES-2: captain of the warband
   }),
@@ -190,6 +192,8 @@ export const CULTURE_OFFICE_TITLES = Object.freeze({
   mesoamerican: Object.freeze({
     sovereign: ladder(null, null, null, 'Tlatoani', 'Tlatoani', 'Huey Tlatoani'),
     appointed: ladder(null, null, 'Calpixqui', 'Calpixqui', 'Calpixqui', 'Calpixqui'),
+    headman: ladder('Calpullec', 'Calpullec', 'Calpullec', 'Calpullec', null, null), // TITLES-3: the calpulli's own head
+    elders: ladder(pair('Huehue', 'Ilama'), pair('Huehue', 'Ilama'), pair('Huehue', 'Ilama'), pair('Huehue', 'Ilama'), null, null), // TITLES-3: the old man, the old woman
     military: ladder(null, null, null, 'Tlacateccatl', 'Tlacateccatl', 'Tlacateccatl'), // TITLES-2: the army's general
   }),
   south_asian: Object.freeze({
@@ -214,7 +218,7 @@ export const CULTURE_OFFICE_TITLES = Object.freeze({
   greek: Object.freeze({
     sovereign: ladder(null, null, null, pair('Basileus', 'Basilissa'), pair('Basileus', 'Basilissa'), null),
     appointed: ladder(null, null, null, 'Harmost', 'Harmost', 'Harmost'),
-    headman: ladder(null, null, 'Demarch', 'Demarch', 'Demarch', 'Demarch'),
+    headman: ladder('Komarch', 'Komarch', 'Demarch', 'Demarch', 'Demarch', 'Demarch'), // TITLES-3 at thorp and hamlet: the village's chief
     council: ladder(null, null, null, 'Archon', 'Archon', 'Archon'),
     assembly: ladder(null, null, null, 'Epistates', 'Epistates', 'Epistates'),
     military: ladder(null, null, null, 'Polemarch', 'Polemarch', 'Polemarch'),
