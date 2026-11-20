@@ -285,6 +285,13 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     <commit>", IN THE SAME MESSAGE: the THIRTEEN LOWER towns BY NAME, each with the rule it is assigned to, the seven resting
     on `income.criminalRow` marked (the reader's tell question starts from that list). THE SEAT'S COUNT: the chair reads this
     seat's record (168,853 at 12:38); use the chair's figure plus the spend since.
+46. THE CHAIR, 13:45 (the 13:05 anomaly's cause, ESTABLISHED by the chair): a commit made while a push is in flight goes out
+    with it; the next push then has NO REF to send, and `.husky/pre-push` with no ref runs `npm run check` inside git's hook
+    environment, where two fixture tests write commits by "Fixture <fixture@example.test>" and `core.bare = true` into the
+    real repository. RULES, for the seat and its builders: NEVER COMMIT ON A BRANCH WHILE ITS PUSH IS IN FLIGHT; BEFORE EVERY
+    PUSH `git ls-remote` AND PUSH ONLY IF THE REMOTE DIFFERS; a push log showing `npm run check` is killed at once. THIS
+    REPOSITORY READ CLEAN at 13:47 (core.bare false; no local user.email; the lane's authors all Claude; no fixture commit
+    outside old origin history).
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
