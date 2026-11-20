@@ -53,6 +53,8 @@ New:
 
 ## 4. DS-DEF-4 :: FIXTURE: black market
 
+*PROSE-1, by the chair's ruling of 17:25 UTC: every NEW line of this pool says a crime the owner can hide, so every new line carries `dm-only`; the public side of the pool stays as it is (its existing lines are on the chair's list to the veil lane; no existing line's marks change).*
+
 State: a black market on the roster, said as a second sentence beside the structure line; never alone, never restating the structure. Pool braced `{colour}`, not `dm-only` (the fixture is on the roster and its two lines are public, so the new ones stay public); slot `{settlement}` only. jsonl: eligible {1,2} at all 69 places (city 43, metropolis 26).
 
 Existing:
@@ -60,10 +62,10 @@ Existing:
 2. `[street]` Anyone at {settlement} who knows whom to ask can buy contraband or stolen goods at the black market.
 
 New:
-3. `[visitor]` Nothing marks {settlement}'s black market to a stranger, yet the goods sold there are the kind no lawful stall would show.
-4. `[counterforce]` Whatever the town's law forbids to be sold, {settlement}'s black market has not stopped selling.
-5. `[unfolding]` Contraband and stolen goods keep changing hands at {settlement}'s black market, out of sight of the town's lawful trade.
-6. `[threshold]` The black market at {settlement} sits just out of the law's sight: a known thing in the town, and not quite an open one.
+3. `[visitor · dm-only]` Nothing marks {settlement}'s black market to a stranger, yet the goods sold there are the kind no lawful stall would show.
+4. `[counterforce · dm-only]` Whatever the town's law forbids to be sold, {settlement}'s black market has not stopped selling.
+5. `[unfolding · dm-only]` Contraband and stolen goods keep changing hands at {settlement}'s black market, out of sight of the town's lawful trade.
+6. `[threshold · dm-only]` The black market at {settlement} sits just out of the law's sight: a known thing in the town, and not quite an open one.
 
 ## 5. DS-DEF-2 :: Internal Security: no legal infrastructure
 
@@ -253,6 +255,8 @@ New:
 
 ## 17. DS-POW-6 :: operation role duty evasion
 
+*PROSE-1, by the chair's ruling of 17:25 UTC: every NEW line of this pool says a crime the owner can hide, so every new line carries `dm-only`; the public side of the pool stays as it is (its existing lines are on the chair's list to the veil lane; no existing line's marks change).*
+
 State: a criminal operation whose role is duty evasion. Public pool (no line `dm-only`), so the new lines stay public. The commonest eligible lines are vids 1 and 3 (`no crisis: under_siege`), eligible at every non-siege place; vid 2 adds `gate` and fails at 4 draws. New lines take `no crisis: under_siege`, slot `{settlement}`, and name no runner of the operation. jsonl: town 8 ({1,2,3} 5, {1,3} 3), city 26, metropolis 47 ({1,2,3} 46, none 1).
 
 Existing:
@@ -261,10 +265,10 @@ Existing:
 3. `[counterforce · no crisis: under_siege]` Some of the goods that reach {settlement} pay none of the dues owed on them.
 
 New:
-4. `[visitor · no crisis: under_siege]` An honest trader at {settlement} pays dues that some of the goods on the next cart never paid.
-5. `[unfolding · no crisis: under_siege]` Each cargo that comes into {settlement} under a false list leaves the town's dues a little shorter, and the shortfall runs on.
-6. `[threshold · no crisis: under_siege]` Untaxed goods at {settlement} travel in among the taxed, and the line between the two is wherever a cargo list says it is.
-7. `[street · no crisis: under_siege]` People at {settlement} know some goods come in cheaper than their dues would allow, and do not ask why.
+4. `[visitor · dm-only · no crisis: under_siege]` An honest trader at {settlement} pays dues that some of the goods on the next cart never paid.
+5. `[unfolding · dm-only · no crisis: under_siege]` Each cargo that comes into {settlement} under a false list leaves the town's dues a little shorter, and the shortfall runs on.
+6. `[threshold · dm-only · no crisis: under_siege]` Untaxed goods at {settlement} travel in among the taxed, and the line between the two is wherever a cargo list says it is.
+7. `[street · dm-only · no crisis: under_siege]` People at {settlement} know some goods come in cheaper than their dues would allow, and do not ask why.
 
 ## 18. DS-DEF-5 :: garrison PRESENT
 

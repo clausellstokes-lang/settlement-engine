@@ -111,6 +111,8 @@ SPARE:
 
 ## 7. DS-ECO-6 :: TIER: minor shadow activity (≥3)
 
+*PROSE-1, by the chair's ruling of 17:25 UTC: every NEW line of this pool says a crime the owner can hide, so every new line carries `dm-only`; the public side of the pool stays as it is (its existing lines are on the chair's list to the veil lane; no existing line's marks change).*
+
 State: off-book capture in the lowest rendered tier. The jsonl shows a different single eligible line by place. `[0]` (no organised crime) holds at 28 places: thorp 6, hamlet 6, village 9, town 7. `[5]` (organised crime) holds at 61 and `[4,5]` at 50, across hamlet 2, town 19, city 42 and metropolis 48. #1–#3 are excluded everywhere (`dm-only`). The common state is therefore ORGANISED (111 of 139 places). Lines 6–11 take #5's mark `organised crime`. Two SPARE lines are offered for the minority state with #0's marks (`no organised crime · no crisis: famine · no crisis: under_siege`). Slots: `{settlement}`. Not `dm-only`, matching the eligible #0, #4 and #5; see the unsure list.
 
 Existing:
@@ -122,16 +124,16 @@ Existing:
 5. `[street · organised crime]` The shadow trade at {settlement} is small, but it is not casual: somebody organises it.
 
 New (the common, organised state):
-6. `[visitor · organised crime]` A stranger would hardly notice {settlement}'s quiet trade, which is small and kept out of sight by the people who run it.
-7. `[threshold · organised crime]` {settlement}'s off-book trade sits at the small end of what any town carries, and it is organised rather than loose.
-8. `[counterforce · organised crime]` {settlement}'s shadow trade has not spread far, but neither is it scattered: what there is of it answers to someone.
-9. `[unfolding · organised crime]` A little of {settlement}'s trade slips past the books week in and week out, and it slips past in an orderly way.
-10. `[street · organised crime]` People at {settlement} who want something without a duty on it know whom to ask, and the asking always goes to the same door.
-11. `[ledger · organised crime]` On {settlement}'s books the gap is small: a little trade that never reaches them, and none of it missed by chance.
+6. `[visitor · dm-only · organised crime]` A stranger would hardly notice {settlement}'s quiet trade, which is small and kept out of sight by the people who run it.
+7. `[threshold · dm-only · organised crime]` {settlement}'s off-book trade sits at the small end of what any town carries, and it is organised rather than loose.
+8. `[counterforce · dm-only · organised crime]` {settlement}'s shadow trade has not spread far, but neither is it scattered: what there is of it answers to someone.
+9. `[unfolding · dm-only · organised crime]` A little of {settlement}'s trade slips past the books week in and week out, and it slips past in an orderly way.
+10. `[street · dm-only · organised crime]` People at {settlement} who want something without a duty on it know whom to ask, and the asking always goes to the same door.
+11. `[ledger · dm-only · organised crime]` On {settlement}'s books the gap is small: a little trade that never reaches them, and none of it missed by chance.
 
 SPARE (the minority, unorganised state):
-- `[visitor · no organised crime · no crisis: famine · no crisis: under_siege]` What a stranger meets of {settlement}'s shadow trade is a pocket picked or a sale made without a licence, and nothing behind either.
-- `[ledger · no organised crime · no crisis: famine · no crisis: under_siege]` Little of {settlement}'s trade escapes the books, and what does escape them does so one seller at a time.
+- `[visitor · dm-only · no organised crime · no crisis: famine · no crisis: under_siege]` What a stranger meets of {settlement}'s shadow trade is a pocket picked or a sale made without a licence, and nothing behind either.
+- `[ledger · dm-only · no organised crime · no crisis: famine · no crisis: under_siege]` Little of {settlement}'s trade escapes the books, and what does escape them does so one seller at a time.
 
 ## 8. DS-POW-2 :: recentConflict present
 
