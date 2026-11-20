@@ -51,9 +51,9 @@ const cut = (page) => page.map((x) => ({ ...x, absent: x.absent.map((a) => ({ ..
 
 /** B7's drafted towns, re-born at this tree: the owner's line, as measured (P1B-RESULTS.md, measure 3). */
 const REACHED = [
-  ['b7-infiltrated-hamlet-1', 'an outside hand, unnamed; Chae Yang keeps the alehouse where its people come and go'],
-  ['b7-infiltrated-town-0', 'an outside hand, unnamed; Peppo Schubert keeps the taverns where its people come and go'],
-  ['b7-infiltrated-town-1', 'an outside hand, unnamed; Pitao Ucan keeps the inn where its people come and go'],
+  ['b7-infiltrated-hamlet-1', 'an outside hand, unnamed; Chae Yang keeps the alehouse, where strangers lodge, and would know of them'],
+  ['b7-infiltrated-town-0', 'an outside hand, unnamed; Peppo Schubert keeps the taverns, where strangers lodge, and would know of them'],
+  ['b7-infiltrated-town-1', 'an outside hand, unnamed; Pitao Ucan keeps the inn, where strangers lodge, and would know of them'],
 ];
 /** Infiltrated towns with the hand absent and NO free lodging keeper. */
 const UNREACHED = ['b7-infiltrated-thorp-0'];
@@ -61,7 +61,7 @@ const UNREACHED = ['b7-infiltrated-thorp-0'];
 describe('P1B: the infiltration\'s outside hand, reached on the owner\'s page', () => {
   test('the closed set: one fixed sentence, frozen, naming no one but the record\'s keeper and house', () => {
     expect(Object.isFrozen(CRISIS_ABSENCE_REACH)).toBe(true);
-    expect(CRISIS_ABSENCE_REACH).toEqual({ outsideHand: '{keeper} keeps the {house} where its people come and go' });
+    expect(CRISIS_ABSENCE_REACH).toEqual({ outsideHand: '{keeper} keeps the {house}, where strangers lodge, and would know of them' });
   });
 
   test(`the owner's page gains the words on B7's drafted towns (${REACHED.length}); the stored absence stays`, () => {

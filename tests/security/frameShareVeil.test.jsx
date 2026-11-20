@@ -400,8 +400,8 @@ describe('CF3: the frame reaches no shared page', () => {
 // is not the owner, of the shared record and of the owner's own record, composes today's crisis page, without them.
 describe('P1B: the outside hand\'s keeper is drawn for the owner only', () => {
   const P1B_TOWNS = [
-    ['b7-infiltrated-hamlet-1', 'hamlet', 'Chae Yang keeps the alehouse where its people come and go'],
-    ['b7-infiltrated-town-0', 'town', 'Peppo Schubert keeps the taverns where its people come and go'],
+    ['b7-infiltrated-hamlet-1', 'hamlet', 'Chae Yang keeps the alehouse, where strangers lodge, and would know of them'],
+    ['b7-infiltrated-town-0', 'town', 'Peppo Schubert keeps the taverns, where strangers lodge, and would know of them'],
   ];
   const STRANGER_OPTIONS = [undefined, null, {}, { audience: undefined }, { audience: TONIGHT_AUDIENCES.player }, { audience: TONIGHT_AUDIENCES.gallery }, { audience: 'Owner' }];
   const handLine = (page) => page.find((x) => x.type === 'infiltrated')?.absent.find((a) => a.role === 'instigator')?.reason ?? null;
