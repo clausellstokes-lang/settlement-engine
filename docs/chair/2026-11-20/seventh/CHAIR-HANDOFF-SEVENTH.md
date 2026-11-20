@@ -4894,3 +4894,19 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   fifth: messages stamped 16:43 and 16:45 after clock reads of 16:42 and 16:44, and one stamped 16:47 with no read
   before it (the clock read 16:48 after): each a minute off; from 16:51 every batch of messages follows its own read.
   NET 15 (due 16:47) is being done now, late.
+- 16:56 UTC · NET 15, DONE AT 16:53 (due 16:47). EVERY WORKING SEAT'S RECORD, by the chair's read: SEAT-5 365,204 (the lane is
+  SEAT-6's; it keeps MEASURE-LIT and the relay of builder B5); TRAD-4 347,109 (unit 8's red arm committed; no
+  successor planned: re-read at the next net, and one is seated if it passes 400,000 with units open); PAGE-4
+  331,547; GOALS-3 323,576; FRAME-6 322,275; PAGE-6 311,649; VEIL-27 303,476; DEPTH-2 299,661; FORTUNE-3 285,724;
+  PEOPLE-1 281,693; PAGE-7 280,165; PLACE-1 258,692; SAME-1 258,145. THE THREE SAMENESS SEATS SPENT ABOUT 270,000 IN
+  THEIR FIRST HOUR (seated 15:56): their successors' prompts tell them to keep a measure's tables in files and read
+  only summary lines. PROMPTS WRITTEN, NOT SEATED: `PAGE-9.txt` (the display lane after PAGE-4; source
+  `lane/page-4-2026-11-20`, outcome `lane/page-9-2026-11-20`); `PEOPLE-2.txt` (source `lane/people-1-2026-11-20`,
+  outcome `lane/people-2-2026-11-20`); `PLACE-2.txt` (source `lane/place-1-2026-11-20`, outcome
+  `lane/place-2-2026-11-20`); `SAME-2.txt` (source `lane/same-1-2026-11-20`, outcome `lane/same-2-2026-11-20`);
+  with `FRAME-7.txt` (now carrying the stakes' reason), `DEPTH-3.txt`, `PAGE-8.txt` from before. SEAT EACH WHEN ITS
+  PREDECESSOR PASSES 360,000. GOALS: when GOALS-3 passes 360,000 the idle GOALS-4 (session_019yED1PeMjUXXn4rS5rbzvj,
+  stood down at 363cea0ab after seven minutes of reading) is woken with an addendum instead of a new seat. VEIL-28's
+  prompt is written when VEIL-27 passes 330,000. THE OWNER WAS TOLD AT 16:54: the card's constraint and the stakes'
+  reason print after all; the veil's twin sent more than the server on 10 of 92 towns and is cured first; the
+  veil's test re-stated as membership.
