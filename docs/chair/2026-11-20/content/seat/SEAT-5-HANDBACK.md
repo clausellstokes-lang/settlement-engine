@@ -1,4 +1,4 @@
-# SEAT-5 — HAND-BACK (kept current at every push; last written 2026-11-20T14:36:54Z, read from `date -u`)
+# SEAT-5 — HAND-BACK (kept current at every push; last written 2026-11-20T14:43:46Z, read from `date -u`)
 
 **For the next owner of this lane: this file, `SEAT-1-PROPOSAL.md` and `briefs/` are all you need.** Every ruling in force is §1 (SEAT-4's list carried whole, items 43 on SEAT-5's); the state of every unit §2; every instrument in one command §3. Earlier records: `SEAT-4-HANDBACK.md` … `SEAT-1-HANDBACK.md`.
 
@@ -8,7 +8,8 @@ Branch `lane/seat-5-2026-11-20` (origin), cut from `0ccbef108`: the chair said "
 
 - **Reproduced at the seating (14:27Z, at `4b1586779`):** `measure-holder.mjs --arm default` `.md` byte-identical, `.json` identical but `seconds`; `confine-two.sh 1cf452ac2 4b1586779` EQUAL, both `36ee5bb0…ce89` over 1,245.
 - **U4 + U4-CURE MERGED, NOT YET GREEN:** `d1d79142f` merge of U4 (`0fa999bf6`, read by SEAT-4), `d0331e586` merge of the cure (`fbf77bfa2`, diff read once by SEAT-5). SEAT-5 re-ran: RED at `0fa999bf6` with the cure's test: 2 failed / 44 passed (arm (9) and `factLayers.walker`); GREEN at `d0331e586`: `holderOfSeat` + `seatContest` + `factLayers.walker` 71/71.
-- **OUT: builder B4d, U4-CURE2** (`briefs/U4-CURE2.md`, the chair's 14:32Z ruling (i), item 43): branch `lane/seat-2026-11-20-u4-cure2` from `fbf77bfa2`, worktree `/home/user/wt-u4cure2` in SEAT-5's container. Step 0 measures whether a structured-only R1 read (`pair` + `type: 'symbiotic'` + `direction: 'stable'`) falsely answers at birth; if so it STOPS and the chair rules.
+- **U4-CURE2 STOPPED at Step 0 (B4d, `lane/seat-2026-11-20-u4-cure2-wip` at `4780d9e6c`, pushed; `briefs/U4-CURE2-REPORT.md`):** a structured-only R1 names the military at birth in 163/900 default, 111/960 presets towns (`factionDynamics.js :: computeFactionRelationships`'s symbiotic/stable seat edge); after coups two takers in 82/29 towns per step, resolved only by `transferSays`. SEAT-5 told the chair (2026-11-20T14:43Z), recommending (i) re-recorded with cause like (ii)/(iii): THE CHAIR'S RULING OWED.
+- **OUT: builder B4e** (the brief's addendum): the CS11 arm (10) alone, red first (a plant if green at base), on `lane/seat-2026-11-20-u4-cure2` from `4780d9e6c`, worktree `/home/user/wt-u4cure2`; no `src/` change.
 - **NEXT at the merge (U4 complete):** merge B4d `--no-ff`; ONE register commit by the doors (lighting census, wiring census, `arcaneClassifierCensus` `stressorDynamics.js:53 -> :55`, `node scripts/check-writer-reach.mjs --write` for the two RULED identities only, each with its cause and reading symbol in the body); `tests/lint` whole; `confine-two.sh 1cf452ac2 <tip>` EQUAL; push (`git ls-remote` first); ONE line "U4 <commit>" to the chair (a helper of its own reads the two dark laws together). Then U5 (`briefs/U5-TRANSFER.md`), then UK as measure and propose (item 42).
 - **U6:** not briefed; ask the chair "factionDynamics.js for U6?" first (items 30, 41).
 
