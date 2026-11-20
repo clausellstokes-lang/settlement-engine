@@ -4,20 +4,24 @@
  * src/foundry/journalPages.js), so the two cannot drift. Display only: the composer
  * (domain/crisis/crisisPage.js) and the record are untouched.
  */
+import { stakeOpening } from '../../domain/crisis/crisisPage.js';
+
 /**
  * ⛔ THE STAKES ROWS, ONE ROW PER HOUSE (veto 3; STYLE-0 §3, approved STYLE-RULINGS §1(c)
  * 2026-11-07, applied by STYLE-RULINGS-2 B4 2026-11-09): every house the crisis has not touched printed
  * its own row with the same words ("{house}: split. not touched yet; it could side with either camp."),
  * four to six times on a town or city page. B4 named the untouched ones together in one sentence; the
  * owner vetoed that connective line (veto 3) and every house keeps its own row. tests/pdf/restoredSubsections.test.js
+ * FRAME-6 · C2: each row carries its opening, the crisis page's one composition (`crisisPage.js :: stakeOpening`): the
+ * power with its article and the verb in its number ("The Religious Authorities gain"). tests/components/crisisStakeAgreement.test.jsx
  * @param {Array<{ factionId: string, stake: string, reason: string }>} stakes
- * @returns {{ rows: Array<{ factionId: string, stake: string, reason: string }>, untouched: string | null }}
+ * @returns {{ rows: Array<{ factionId: string, stake: string, reason: string, subject: string, verb: string }>, untouched: string | null }}
  */
 export function stakeLines(stakes) {
   // THE OWNER'S VETO 3 (2026-11-09, "No." to the connective lines; the chair's ruling of 08:1x, applied by
   // STYLE-2-MERGE at SW-B4's point): the joined sentence for the untouched houses is struck and the prior
   // state returns — every house keeps its own row. The shape { rows, untouched } stays for both exports.
-  return { rows: stakes, untouched: null };
+  return { rows: stakes.map((k) => ({ ...k, ...stakeOpening(/** @type {Parameters<typeof stakeOpening>[0]} */ (k)) })), untouched: null };
 }
 
 /**

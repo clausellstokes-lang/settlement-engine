@@ -18,7 +18,7 @@ import { cleanup, render } from '@testing-library/react';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
-import { composeCrisisPage, CRISIS_PAGE_COPY } from '../../src/domain/crisis/crisisPage.js';
+import { composeCrisisPage, CRISIS_PAGE_COPY, stakeOpening } from '../../src/domain/crisis/crisisPage.js';
 import { stakeLines } from '../../src/pdf/lib/crisisPrint.js';
 import { PROSE_FORMS, powerSentenceName } from '../../src/domain/display/powerSentenceName.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
@@ -96,17 +96,24 @@ describe('K26: a stake row names its power by the one leaf, on the tab, the PDF 
       expect(reformed, `${seed}: the town holds the stake row the table names`).toBeDefined();
       const word = CRISIS_PAGE_COPY.stake[reformed.stake];
       const said = powerSentenceName(reformed.factionId);
+      // FRAME-6 · C2 (the pin moves): the tab and the PDF open the row on the page's one composition, the leaf's form with
+      // its article and the verb in its number ("The Guard split", "The Monster Hunters lose"); the journal is unchanged
+      const opens = stakeOpening(reformed);
+      expect(opens.subject.endsWith(said.replace(/^The /, ''))).toBe(true);
       // the tab: "<name> <word> · <reason>"
-      expectAbsentWithAnchor(tab, `${reformed.factionId} ${word} · ${reformed.reason}`, `${said} ${word} · ${reformed.reason}`, `${seed} tab`);
+      expectAbsentWithAnchor(tab, `${reformed.factionId} ${word} · ${reformed.reason}`, `${opens.subject} ${opens.verb} · ${reformed.reason}`, `${seed} tab`);
       // the PDF: one Line per row, "<name> <word> · <reason>"
       const pdf = strings(CrisisSections({ settlement: s }));
-      expectAbsentWithAnchor(pdf, `${reformed.factionId} ${word} · ${reformed.reason}`, `${said} ${word} · ${reformed.reason}`, `${seed} pdf`);
+      expectAbsentWithAnchor(pdf, `${reformed.factionId} ${word} · ${reformed.reason}`, `${opens.subject} ${opens.verb} · ${reformed.reason}`, `${seed} pdf`);
       // the journal: "- **<name>** <word>: <reason>."
       const journal = journalLines(s);
       expectAbsentWithAnchor(journal, `- **${reformed.factionId}** ${word}: ${reformed.reason}.`, `- **${said}** ${word}: ${reformed.reason}.`, `${seed} journal`);
       // KEEP: where the same town prints a power already named, it prints under its own name on all three
       if (plain) {
-        const keep = `${plain.factionId} ${CRISIS_PAGE_COPY.stake[plain.stake]} · ${plain.reason}`;
+        // FRAME-6 · C2 (the pin moves): on the tab and the PDF the name stands with its article ("The Elder Council loses")
+        const kept = stakeOpening(plain);
+        expect(kept.subject).toBe(`The ${plain.factionId.replace(/^The /, '')}`);
+        const keep = `${kept.subject} ${kept.verb} · ${plain.reason}`;
         expect(tab, `${seed} tab keeps ${plain.factionId}`).toContain(keep);
         expect(pdf, `${seed} pdf keeps ${plain.factionId}`).toContain(keep);
         expect(journal, `${seed} journal keeps ${plain.factionId}`).toContain(`- **${plain.factionId}** ${CRISIS_PAGE_COPY.stake[plain.stake]}: ${plain.reason}.`);

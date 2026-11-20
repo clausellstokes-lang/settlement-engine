@@ -30,8 +30,8 @@ import { speakTierNoun } from '../display/stateProse/tierVoice.js';
 import { tierNounFor } from '../display/stateProse/weaveBlock.js';
 import { migrationDirectionOf } from './migrationDirection.js';
 import { governingFactionOf } from '../rulingPower.js';
-import { pluralPowerName } from '../display/governanceAccount.js';
-import { powerSentenceName } from '../display/powerSentenceName.js';
+import { pluralPowerName, powerNameInProse } from '../display/governanceAccount.js';
+import { powerSentenceName, powerVerb } from '../display/powerSentenceName.js';
 
 /** The page's one copy constant, on every surface that prints it. */
 export const CRISIS_PAGE_COPY = Object.freeze({
@@ -65,8 +65,11 @@ export const CRISIS_PAGE_COPY = Object.freeze({
   // own text names the council's choice): the label has its verb, agreeing with the name (`pluralPowerName`); a power the
   // record's quarrels name is said to be at odds already, and the governing power, which the crisis's choice falls on, to
   // answer for it (`stakeShown`). The record's stakes are untouched: the page reads them.
+  // FRAME-6 · C2 (the chair's ruling 23 of 2026-11-20, vetoable by the owner): the record's own three stakes take the
+  // power's number too ("The Religious Authorities gain"); `gainsMany` and `losesMany` are their plural forms (`stakeOpening`).
   stake: Object.freeze({
     gains: 'gains', loses: 'loses', split: 'split',
+    gainsMany: 'gain', losesMany: 'lose',
     untouched: 'has no stake yet', untouchedMany: 'have no stake yet',
     atOdds: 'is already at odds', atOddsMany: 'are already at odds',
     answers: 'must answer for it',
@@ -226,6 +229,29 @@ function stakeShown(s, govName, k) {
   const others = quarrelsOf(s, k.factionId);
   if (others.length) return { stake: many ? 'atOddsMany' : 'atOdds', reason: `in ${many ? 'their' : 'its'} own quarrel with ${andList(others)}` };
   return many ? { stake: 'untouchedMany', reason: k.reason.replace(/^it\b/, 'they') } : { stake: 'untouched', reason: k.reason };
+}
+
+/** The record's own stakes whose verb takes the power's number: the plural form's key in `CRISIS_PAGE_COPY.stake`. */
+const STAKE_MANY = Object.freeze({ gains: 'gainsMany', loses: 'losesMany', split: 'split' });
+
+/**
+ * A STAKES ROW IS A SENTENCE (FRAME-6 · C2; FRAME-5's brief C2-STAKES-PROSE, the chair's ruling 23 of 2026-11-20, vetoable
+ * by the owner): the row's opening, composed once for every renderer that prints it (the Crisis tab; the PDF through
+ * `pdf/lib/crisisPrint.js :: stakeLines`). The power stands with its article at the head of the sentence
+ * (`powerNameInProse(name, true)`: "The Religious Authorities", "The Guard"), and the verb of the record's own stakes takes
+ * its number (`powerVerb`: "gain"/"gains", "lose"/"loses", "split"). The shown stakes `stakeShown` writes already agree
+ * ("are already at odds", "must answer for it") and print their own word. Before C2 the row opened on the bare roster
+ * leaf with a singular verb: "Religious Authorities gains". Display only: no record moves, no draw.
+ * @param {{ factionId: string, stake: StakeShown }} k a composed stake row
+ * @returns {{ subject: string, verb: string }} the row's subject (the power, with its article) and its verb
+ */
+export function stakeOpening(k) {
+  const word = CRISIS_PAGE_COPY.stake;
+  const many = Object.hasOwn(STAKE_MANY, k.stake) ? STAKE_MANY[/** @type {keyof typeof STAKE_MANY} */ (k.stake)] : null;
+  return {
+    subject: powerNameInProse(k.factionId, true),
+    verb: many ? powerVerb(k.factionId, word[k.stake], word[many]) : word[k.stake],
+  };
 }
 
 /**
