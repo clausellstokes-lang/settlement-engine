@@ -178,3 +178,43 @@ the three receipts. Bare eslint is clean.
   when grain is dear" (GOAL_SECRET_REFUSAL_ROWS, the granary reeve). Read against 1c9673e84, the line the hand bank
   stands on, the list would be empty.
 - **No form and no watch:** "black market" has neither. It had no hit (see the table above).
+
+## PHASE 3c (SAME-2 brief H3; the chair's rulings of 19:58)
+
+Builder H2, on the same branch. Each unit was red first (a plant, then restored), then green on the three receipts
+(53 tests). Bare eslint is clean.
+
+| Commit | Unit | What it does |
+|---|---|---|
+| 31ec8b7df | 1 | The granary reeve is banked by its declared key, with its reason; ceiling 247 -> 248 |
+| 25e44fcbe | 2 | smuggl reds; the forms are derived from the catalogue; bribe and extort are added to the hand forms; ceiling -> 252 |
+| 1a472b66d | 3 | The watch reads outside both form sets (its message corrects unit 2's count: 17 forms, not 15) |
+
+- **The reeve.** `HAND_CRIME_KEYS` declares `GOAL_SECRET_REFUSAL_ROWS::title:the granary reeve[1]` with its reason and two
+  cited lines, each checked in its file: `titleSecretsPresentations.js :: TITLE_SECRETS` and
+  `publicSafe.js :: PRIVATE_KEY_RE`. Its line reds `crime key, declared`.
+- **The catalogue.** `src/data/institutionalCatalog.js :: institutionalCatalog`. A house is `{ category: shelf, name, ...row }`,
+  as `assembleInstitutions` seats it. `isHideableHouse` takes 22 names.
+- **The derivation** (`derivedCrimeForms`, exported, fed the catalogue or a fixture). A word of a hideable name is
+  distinctive when all three hold:
+  - its stem is in no public house's name, description or tags;
+  - another hideable house's text repeats it;
+  - no hand form governs it (gang keeps "dropped before of").
+
+  A word always followed by the same word in the names is read as that pair. A name with no distinctive word is read
+  whole. That gives **17 forms**:
+  - the words smuggl- and fence-;
+  - the pairs "thieves guild" and "black market";
+  - 13 whole names.
+- **The hand stems** (only for names with no distinctive word): assassin, kidnap, traffick and outlaw. Each is the act the
+  house is named for; the catalogue holds it in that one house only, so nothing can corroborate it. Bandit is ordinary,
+  because the public houses' text names bandits.
+- **Newly banked: 5.**
+  - The reeve, by its declared key.
+  - "settle a bribe" (NPC_FACTION_LOYALTY other), by the bribe hand form.
+  - "moving a fence" (the same table), by the derived fence. A false hit (a garden fence), banked with that reason.
+  - The town Slave market's two "trafficked" lines, by the traffick hand stem.
+- **The bank:** 96 rows + 156 hand rows = 252 = `EXISTING_CEILING`. The hand rows split 147 by key (1 declared), 6 by word,
+  3 by house and 0 by atom.
+- **The watch on the tree:** 0 lines.
+- **Daily Life's owner-only smuggler lines** wait for DAILY's arm (not now).
