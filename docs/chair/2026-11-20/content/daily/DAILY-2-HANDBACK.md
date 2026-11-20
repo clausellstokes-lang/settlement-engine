@@ -4,7 +4,7 @@ Lane `lane/daily-2-2026-11-20`; seat DAILY-2 (session_019yED1NEpr7XE73nDAxNLv2);
 Assignment: `origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/DAILY-2.txt` (it binds DAILY-1.txt's
 cure pattern, points 1 to 8). Predecessor's record: `DAILY-1-HANDBACK.md` (history; this file governs).
 
-## 1. State (written 19:59 UTC)
+## 1. State (written 20:22 UTC)
 - THE LANE WAS GIVEN at 0eadcb032 (chair, 19:03). Branch cut there.
 - Merged: B1 C1 (the dead profile call + parity arm) at 8e2534945; B1b C2 (2d7fa8399: the 13 kinds in both homes,
   four granted atoms, the hideable-and-crime arm `tests/domain/dailyLifeAtoms.test.js`) at b4083d31f, red re-run
@@ -15,7 +15,13 @@ cure pattern, points 1 to 8). Predecessor's record: `DAILY-1-HANDBACK.md` (histo
   fresh 0 stale 0 (one stale row shrunk by the door: a `cultureProfiles.js` bathhouse line now answered); eslint 0;
   typecheck:ratchet 167/167; domain:strict 1113/1113; wiring exit 0; lighting refrozen 648cc7397 (files 3710), 34
   passed. Re-measure `measures/B1/b1.out.txt`: top 11/7/12/8/8/9%, distinct 17/34/25/26/32/24, EMPTY 0, false 0.
-- NEXT: B2 (`briefs/B2-DAWN-AND-CHILD.md`), worktree `/home/user/wt-daily2-b2`, branch `lane/daily-2-2026-11-20-b2`.
+- B2 (worktree `/home/user/wt-daily2-b2`, branch `lane/daily-2-2026-11-20-b2`): D1 `dawn_work` committed 7dd41dc59
+  (not merged; red 6 of 7 on the old deriver); RESUMED (20:22) on DAILY-2's decided cures (W0/B0 declare `watch`; B26, S0
+  `crisis: under_siege` excluded; child U7/P9 `tier: ≥ village`), the any-cast cure, and D2 wiring. HELD FOR THE
+  CHAIR'S LEAVE (asked 20:22): `registeredWords.js :: HOUSE_FAMILY_KINDS` += baker→bakery, warehouse→warehouse (B0, B1,
+  M0, M2); `presumptionClasses.shared.mjs` class table: `route open` under `outside` (M0). Not built (no atom): W12,
+  E0, rival N0/N1. D2's dry-run pools: B2's scratch `d2/childWarnings.js`, to be wired into `src/data/dailyLife/`.
+- SUCCESSION: DAILY-2's mark (+half) ≈ 350k at 20:2x; hand-over after B2's merge unless the chair says otherwise.
 - Lines: ALL READ AND RULED (LINES-1, 1b, 2, 2b). Nothing more goes to the chair's eye unless a builder must change a
   wording to pass a gate (then one line each).
 
@@ -164,4 +170,8 @@ market, trade route, smuggling. Final per-slot list written at each build's merg
 None yet.
 
 ## 7. Lane faults, said
-None yet on DAILY-2's watch (DAILY-1's: `DAILY-1-HANDBACK.md` § 8).
+- C3 (merged 9567ea7a2) left `src/domain/dailyLife.js` at 3 `any` casts against `domainAnyCastBaseline`'s 1 (two casts in
+  `nameableRows` / `deriveGatheringPlaces`); the merge's green set did not include that walker. Said to the chair (20:22);
+  cure: B2's own commit removes the casts (never the baseline raised). From now every merge runs
+  `tests/lint/domainAnyCastBaseline*`.
+DAILY-1's: `DAILY-1-HANDBACK.md` § 8.
