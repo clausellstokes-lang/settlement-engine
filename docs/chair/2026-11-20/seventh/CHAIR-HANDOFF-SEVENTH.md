@@ -448,6 +448,32 @@ parts of the whole check (at the close).
   NOTHING WAS ASKED OF THE OWNER AND NOTHING WAS RULED BY IT. For after the deploy it names three things: the rates
   of rare things, the depth of the pools, the printed-copy rule for shared pages.
 
+- **07:45 UTC, 2026-11-20, THE OWNER (verbatim):** "But tell me about your expectation of generated settlements
+  holistically". ANSWERED FROM THE TOWNS, NOT FROM MEMORY (07:52 UTC): the chair born 450 fresh towns on its copy of
+  the line (300 at untouched settings, 50 a size; 150 with every dial random) and read one town's whole page
+  (`docs/chair/2026-11-20/content/NAMES-2-PAGE-AFTER.txt`); the scripts and outputs are
+  `docs/chair/2026-11-20/seventh/measures/holistic/`. SAID: a town one can run tonight that does not contradict
+  itself, best between about 1,000 and 10,000 people, thin below, impressive but repetitive above. THE FIGURES SAID
+  (untouched settings): named people by size 1, 3, 8, 24, 60, 84; powers 1, 1, 2, 4, 7, 8; past events 2, 2, 4, 4, 8,
+  10. FORTUNE FOLLOWS SIZE TOO CLOSELY: born under no crisis, a village's ruler reads Contested in 72%, a
+  metropolis's Endorsed in 92%, every city's Approved or Endorsed; villages Poor 48%; cities Prosperous 78% and all
+  well defended; metropolises Prosperous 84%, Fortress 94% (the legitimacy score's own terms: prosperity and defence
+  below zero for small places, above for large; its government multiplier 0.79 against 1.22). THE CHAIR CORRECTED ITS
+  OWN FIRST LINE OF THE SAME TURN ("more alike in their wording than in their facts"): within one size fortune is
+  nearly fixed too. FOR THE SEAT'S TRAIN (INFERRED, SAID AS SUCH): small places hold a weak seat and nobody to
+  contest it, large places many powers and a safe seat: the contest will be felt mostly at town size and in places
+  born in crisis. WORDING REPEATS: in every city about 10 of 60 people share a goal sentence with another of the
+  same city, names swapped (a metropolis: 19 of 84; ties 11 and 22); about 9,000 people draw personal hooks from 292
+  lines and ties from 211; one town in ten opens with the same first sentence. UNTOUCHED SETTINGS ARE POLITICALLY
+  NARROW: three in four run by a council or mayor, none of 300 by a temple, an army, mages or criminals (one in five
+  with every dial random); thorps "Elder Council" 82%. TWO SEAMS: in 82 of 300 towns a trouble of today is of the
+  same kind as one of the town's own past and the page does not say whether it is the same quarrel; a few lines do
+  not fit their holder (a dean whose secret is about "their product": a floor of about 1 in 130 by a crude test).
+  DECIDED AND TOLD (under the owner's deferral; vetoable): NOTHING NEW BEFORE THE DEPLOY. AFTER IT, IN THIS ORDER:
+  (1) judge each place against its own size (fortune and standing); (2) no repeated sentence inside one town, then
+  deeper pools for ties, goals and hooks; (3) one sentence that ties a past trouble to today's; (4) the rates of
+  rare things. WHAT WOULD CHANGE IT: the owner or real DMs reading twenty whole towns.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -2257,3 +2283,27 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   A LESSON FOR THE NEXT CHAIR: where `context_usage.used_tokens` reads 0, the true size is the newest assistant
   event's `usage.cache_read_input_tokens`: read it with `list_events`, kinds ["assistant"], A LIMIT OF 3. NEVER A
   LARGE PAGE: each event carries its whole tool input (a page of 30 cost this chair about 25,000 tokens).
+- 07:57 UTC · **THE NAMES AND THE FIRST TITLES TABLE ARE ON THE LINE: POINTS 77 AND 78, PUSHED AT e356c94f (07:56 UTC).** Point
+  77: the merge 60075eaf5b47 of `lane/names-2-2026-11-20` at 37b90e66b (a true merge: the seat's own check had
+  refused it the line). Point 78: the merge b5ae4e1a3197 of `lane/titles-2026-11-20` at 0fb18a574 (the table and its
+  resolver; called by nobody yet). The lighting census re-taken by its door at the merged tree (7f18b9ed: files
+  3,705). The rows are in `docs/chair/2026-11-17/sixth/LANDINGS-SIXTH.md` (e356c94f). AT THE MERGED TREE, HERE: the
+  30 changed test files outside `tests/lint`: 29 of 30, 260 of 261 (the one red `generationForkCensus` A1, the
+  control row 71ea4d5f… to adbd469a…: exactly the names seat's named figure); `tests/data`: 83 of 83, 592 of 592;
+  `tests/lint` WHOLE: 220 of 220, 3,271 of 3,271 (895 s on this container's four cores). The push's hooks green
+  (lint: 0 errors). WHAT CLEARED THE NAMES: the seat's executed confinement proof (525 golden configurations and 720
+  census towns diffed key by key between the two trees: 0 non-string differences; 46,738 changed strings, every one
+  an article, a pronoun, a role or a name's own words; 19,614 rendered lines; no pick moved): THE CHAIR DID NOT READ
+  THE COMPOSERS' DIFF LINE BY LINE AND THE ROW SAYS SO. THIS PULL REQUEST'S CI NOW READS RED BY DESIGN on the named
+  stored figures (the golden master 521 of 525; `generationForkCensus` A1; the golden-corpus arms of
+  `pipelinePinnedChoosers`, `rosterFinalUnderHeldRoster`, `powerEconomyFreshness`; `worldFactRederive` A7;
+  `espionageDormancyFence` FENCE 1) until the owner's one signing at the close. A CONSEQUENCE FOR EVERY LATER
+  LANDING: the golden is red already, so a later lane's own movement of it is MASKED: each later lane proves its
+  confinement between its base and its tip, as the names seat did, and the chair reads CI by the failing tests'
+  NAMES, never by the colour of the run. CI is read about 40 minutes after 07:57. NEXT: "BUILD-ON at e356c94f" to
+  SEAT-2; the line's move told to FRAME-2, FRAME-3, TRAD-2 and TITLES-2; NAMES-3 seated from the line.
+  ALSO: the owner asked for the chair's expectation of generated towns as a whole; answered from 450 fresh towns
+  (section 1, 07:45; `measures/holistic/`). The finding that matters for the program: FORTUNE AND STANDING FOLLOW SIZE
+  ALMOST WHOLLY (a calm village's ruler Contested in 72%, a calm metropolis's Endorsed in 92%), so W1 of the session
+  sheet's weight is nearly always "on" in a village and nearly never in a city: FRAME-3's count by tier (0, 8, 15, 5,
+  12, 18) already holds that effect; it is a tuning matter for after the deploy, with the owner's signature.
