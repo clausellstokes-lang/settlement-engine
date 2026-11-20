@@ -1,6 +1,6 @@
 # FRAME-5 — hand-back (the session sheet's lane, third owner after FRAME-3 and FRAME-4)
 
-Last written 2026-11-20T11:49:19Z (`date -u`) by FRAME-5 on `lane/frame-5-2026-11-20`. The lane was taken at `9e23a094d` on the chair's word "THE LANE IS YOURS at 9e23a094d" (11:12 UTC). A successor needs this file and the briefs it names. Read it with `FRAME-4-HANDBACK.md`, whose rulings 18 to 25 stay in force, and `FRAME-3-HANDBACK.md`, whose rulings 1 to 17 stay in force.
+Last written 2026-11-20T12:28:12Z (`date -u`) by FRAME-5 on `lane/frame-5-2026-11-20`. The lane was taken at `9e23a094d` on the chair's word "THE LANE IS YOURS at 9e23a094d" (11:12 UTC). A successor needs this file and the briefs it names. Read it with `FRAME-4-HANDBACK.md`, whose rulings 18 to 25 stay in force, and `FRAME-3-HANDBACK.md`, whose rulings 1 to 17 stay in force.
 
 ## THE COUNT THE OWNER READS FIRST
 
@@ -25,6 +25,19 @@ Cast and weight disagree on 0 towns. The opening trouble is unchanged from FRAME
     - Measured by FRAME-5 at `9e23a094d` (`count/cf12.mjs pool.json <src/>`): 6 calm towns (town 2, city 3, metropolis 1). In each, the corrupted hall is the ruling power. Five keep today's sheet. frame-calm-city-14 is already framed, by that same crime_wave (W2).
     - Readable without the security lane: `powerStructure.factions[].captureState` is a record field, and the veil deletes it on shared paths (a second lock behind the audience gate).
 
+28. **The chair's two rulings on U0's notes** (11:25 UTC).
+    - (1) The PDF and Foundry exports pass `'owner'` only because they are the DM's own files. U0's report names their builders: SettlementCard, SettlementDetail, ExportDraftButton and SingleDossierSuccessPage, with Foundry built only from SettlementDetail. No gallery or party-link surface builds either, and `PDF_VARIANTS` holds the DM's four.
+    - (2) Every reader of the Tonight sheet's facts states its audience. This is FOLDED INTO CF12: `journalPages.js`'s crisis-page `printedFacts` and `coherence/crisisFactFindings.js`, with a walker, red first.
+29. **S8 (another seat's side-naming unit) is held on FRAME-5's answer** (12:0x UTC; probe `count/s8probe.mjs pool.json <src/>`). The probe renamed authority sides to the governing power and guild sides to the roster guild: 147 sides in 128 towns.
+    - The framed set stays 58 to 58, but 27 faces move and 21 sides LOSE their archetype and face, because `templateLabelOf` falls back only to `GENERATOR_REPLACED_SIDES`' fixed slots.
+    - The condition put to the chair: every slot S8 renames must join `GENERATOR_REPLACED_SIDES`.
+    - A side's words are printed only as a label, never inside a sentence.
+30. **What reads a CARD's `power`** (the chair's notice: a keyword fix raises guild masters', thieves' guild masters', council members' and the wealthiest merchant's stored power in NEW towns). These are the pins and proofs the join must re-run:
+    - `troubleCast.js`'s `strongest` (it orders the trade, tie and hook rungs by `npc.power`), and with it every framed face: troubleWeight's WITH_WEIGHT; the veil test's `DIGESTS`; frame2NamesRule's reads; the CF7 face tables; the 58 towns' sheets.
+    - `tonightSheet.js` reads `npc.power` (the people to voice), and with it troubleWeight's calm digests and its journal page digests.
+    - `crisisCast.js` exploiter and collaborator ties, through `barred`, and with them troubleWeight's IN_CRISIS digests, C1's five-town arm, B7-pool byte-identity, and the golden's cast rows.
+    - The COUNT (58) reads no card's power: W1 reads legitimacy and the coup's contenders, W2 conflict rows, W3 food, the creditor and chains. The criminal rung reads a POWER's `power` (`FRAME_TUNING.criminalMinPower`), not a card's.
+
 ## EACH UNIT: STATE, BRANCH, COMMIT
 
 | unit | state | commit | receipts |
@@ -35,10 +48,14 @@ Cast and weight disagree on 0 towns. The opening trouble is unchanged from FRAME
 | re-pins (ruling 12 as amended) | DONE | `8a75a9a8c` | 71 files (every importer of tonightSheet, troubleCast, crisisCast, crisisPage, crisisHooks and sideArchetypes, plus tension and the veil test): 2 red. tuningRegister is known. troubleWeight's crisis pin `frame-calm-metropolis-0` moved 2d8e97beae5ef6d0 -> e3bb76cf91977d0f, and its cause is **B11, not the line**: line + B5's diff gives the old pin, line + B5 + B11's crisisCast diff equals the merged tree on all six, and the lane tip 9e23a094d already read the new one (red since 9c2be7882, unnamed). The calm digests and the veil DIGESTS are green, so not re-pinned |
 | registers at the line merge | DONE | `8b45003ef` | lighting by its door: files 3706 -> 3712, parked 472 -> 473, credited 3234 -> 3239, titles 31219 -> 31258, suiteTitles 8644 -> 8657 (from the line's side), plain 34/34; wiring `--dry` delta 0 |
 | `tests/lint` whole at `8b45003ef` (also serves 9c2be7882's owed run) | DONE | — | 220 files, 3270 passed, 1 failed: `tuningRegister`, exactly ruling 14's two rows (FRAME_TUNING measured, not in the inventory; CRISIS_CAST_TUNING's dependents moved) |
-| brief CF12 | committed | `abeadbf23` | `frame5/CF12-CAPTURED-HALL.md` |
-| **C1** | BUILDER OUT (branch `frame5-c1`, worktree scratchpad `wt-c1`, from `8b45003ef`) | — | results land in `frame5/C1-DEALER-REASON-RESULTS.md` on that branch |
-| U0 | builder `frame4-u0` reports through FRAME-4 and the chair | — | — |
-| P1b, P4a, CF12, C2, P1, P2, P3a, P3b, P4b, measures, six sheets, build + verify:dist | NOT STARTED | — | order: C1 -> U0 merge -> P1b, P4a, CF12 -> C2 -> P1 -> P2 -> P3a -> P3b -> P4b -> measures -> sheets -> build + `verify:dist` |
+| brief CF12 | committed | `abeadbf23` | `frame5/CF12-CAPTURED-HALL.md` (+ the chair's two additions, in its builder's prompt: city-14's ruling; ruling 28(2)) |
+| **U0** | MERGED | `1ca50da42` (cb3797e2b) | diff read; re-run by FRAME-5: byte-identity 1500/1500 pages at the merged tip; red 3 failed on the base, green 10/10; 82 importers + crisis/tension/veil 102 files 1477 passed. Moves the `tuningRegister` row `tonightSheet.js#WANT_MAX_WORDS: dependents moved` (CrisisSections.jsx now imports tonightSheet; attributed by archive: absent at 48b84cb01, present at 1ca50da42): named, unsigned |
+| **C1** | MERGED | `b632fe3bc` (e5f53a3c1) | diff read; conflict = crisisPage.js import lines (union). Red re-run 5 failed/1 passed; merged 50 files 431 passed + U0's 82 files 1320 passed. Builder: stored tail 22 of B7's 690 rows (all brunt) -> 0; B7 338/360 identical, the 22 exactly the tail towns; calm 330/330; golden 525/525. Pins moved (unsigned): crisisCast.test.js "…passed over…", crisisCastReaderRows.test.js "GUARD: a brunt of a house that loses…" |
+| registers at U0 + C1 | DONE | `8991b83b2` | lighting: files 3714, credited 3241, titles 31268, suiteTitles 8661, plain 34/34; wiring delta 0 |
+| `tests/lint` whole at `8991b83b2` | 2 red | — | `tuningRegister` (ruling 14's two rows + U0's WANT_MAX_WORDS row); **`seedLoopTotality`: C1's `crisisDealerReason.test.js` line 112, a bare seed loop: CURE OUT to C1's builder (a new commit on `frame5-c1`)** |
+| **P1b** | BUILDER OUT (`frame5-p1b`, worktree scratchpad `wt-p1b`, from `8991b83b2`) | — | results `frame5/P1B-RESULTS.md` |
+| **CF12** | BUILDER OUT (`frame5-cf12`, worktree scratchpad `wt-cf12`, from `8991b83b2`) | — | results `frame5/CF12-CAPTURED-HALL-RESULTS.md` |
+| P4a, C2, P1, P2, P3a, P3b, P4b, measures, six sheets, build + verify:dist | NOT STARTED | — | order: P4a after P1b (both crisisPage.js) -> C2 -> P1 -> P2 -> P3a -> P3b -> P4b -> measures -> sheets -> build + `verify:dist` |
 
 ## EXECUTED OR PLAUSIBLE
 
