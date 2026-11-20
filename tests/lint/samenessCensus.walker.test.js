@@ -23,8 +23,8 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 
 import {
-  CORPUS, MIN_PLACES, NOISE_SE, REGISTER_PATH, attributionOf, ceil2, confirmRises, emptyRegister, judge, measureSlots,
-  readRegister, shareError, slotKey, storedHeads, tighten, writeRows,
+  CORPUS, LAW1_MEASURE, MIN_PLACES, NOISE_SE, REGISTER_PATH, attributionOf, ceil2, confirmRises, emptyRegister, judge,
+  law1RedPlaces, law1WatchPlaces, measureSlots, readRegister, shareError, slotKey, storedHeads, tighten, writeRows,
 } from '../../scripts/sameness-census.mjs';
 
 const S = 'web:Summary/Overview';
@@ -40,13 +40,41 @@ const SLOT = slotKey(S, ['', '', '', POS]);
 /** A register holding SLOT at thorp with a ceiling. */
 const registerAt = (ceiling, places = 50) => ({ ...emptyRegister(), rows: { [SLOT]: { class: 'STATE', reason: 'a planted row', sentence: sentenceA, paths: {}, sizes: { thorp: { places, of: places, distinct: 2, shareAll: ceiling, shareIn: ceiling, seen: 0, by: 'top', meet: ceiling, ceiling } } } } });
 
-describe('law 1: a printed slot with no row reds', () => {
-  test('a slot printed in MIN_PLACES places with no row is unregistered (red); fewer is a note', () => {
-    const f = judge(reading(MIN_PLACES, 2), emptyRegister());
+describe('law 1, tied to the bar (the chair, 18:52 UTC): an unregistered slot reds by its TOP sentence\'s places', () => {
+  test('an unregistered slot whose top sentence prints at 15 of 150 places REDS', () => {
+    const f = judge(reading(150, 15), emptyRegister());
     expect(f.unregistered.map((x) => x.slot)).toEqual([SLOT]);
-    const g = judge(reading(MIN_PLACES - 1, 2), emptyRegister());
-    expect(g.unregistered).toEqual([]);
-    expect(g.rare.map((x) => x.slot)).toEqual([SLOT]);
+    expect(f.watch).toEqual([]);
+  });
+  test('at 14 of 150 it is WATCH, not red', () => {
+    const f = judge(reading(150, 14), emptyRegister());
+    expect(f.unregistered).toEqual([]);
+    expect(f.watch.map((x) => x.slot)).toEqual([SLOT]);
+  });
+  test('at 7 of 150 it is neither red nor watch (a note)', () => {
+    const f = judge(reading(150, 7), emptyRegister());
+    expect(f.unregistered).toEqual([]);
+    expect(f.watch).toEqual([]);
+    expect(f.rare.map((x) => x.slot)).toEqual([SLOT]);
+  });
+  test('a slot printed in 150 of 150 places with 150 distinct sentences is neither (the top sentence, not the slot, is counted)', () => {
+    const r = reading(150, 0);
+    expect([...r.thorp.values()][0]).toMatchObject({ places: 150, distinct: 150 });
+    const f = judge(r, emptyRegister());
+    expect(f.unregistered).toEqual([]);
+    expect(f.watch).toEqual([]);
+    expect(f.rare.map((x) => x.slot)).toEqual([SLOT]);
+  });
+  test('the two lines are the ruling\'s: 15 and 8 of 150, cited', () => {
+    expect([law1RedPlaces(150), law1WatchPlaces(150)]).toEqual([15, 8]);
+    expect(LAW1_MEASURE).toMatch(/18:52 UTC/);
+  });
+  test('--write still registers a slot printed in MIN_PLACES places, though law 1 no longer reds it', () => {
+    const at = (/** @type {number} */ k) => ({ thorp: measureSlots(places(150, (i) => (i < k ? sentenceA : ''))) });
+    expect(judge(at(MIN_PLACES), emptyRegister()).unregistered).toEqual([]);
+    const classify = () => ({ cls: 'STATE', reason: 'planted' });
+    expect(Object.keys(writeRows(at(MIN_PLACES), at(MIN_PLACES), emptyRegister(), { classify }).next.rows)).toEqual([SLOT]);
+    expect(writeRows(at(MIN_PLACES - 1), at(MIN_PLACES - 1), emptyRegister(), { classify }).next.rows).toEqual({});
   });
   test('a row whose slot is no longer printed is a stale note, never dropped silently', () => {
     const f = judge({ thorp: new Map() }, registerAt(0.4));
@@ -143,6 +171,7 @@ describe('the register', () => {
   test('its law, its corpus and its identity rule', () => {
     expect(REGISTER_PATH).toMatch(/scripts\/census\/sameness-census\.register\.json$/);
     expect(register._law).toMatch(/A CEILING ONLY TIGHTENS/);
+    expect(register._law).toMatch(/TIED TO THE BAR/);
     expect(register.corpus).toEqual({ ...CORPUS, sizes: [...CORPUS.sizes] });
     expect(typeof register.identity._rule).toBe('string');
     expect(Object.keys(register.rows).length).toBeGreaterThan(100);

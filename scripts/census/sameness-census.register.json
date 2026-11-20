@@ -1,5 +1,5 @@
 {
- "_law": "TWO LAWS (SAME-1 brief 2, the sameness door). A PRINTED SLOT WITH NO ROW REDS: every slot (surface | printed position | field) the page prints in MIN_PLACES or more places of a size, over the corpus `corpus` names, has an entry for that size. A CEILING ONLY TIGHTENS: an entry's ceiling bounds `meet` (TOP share where the slot prints at most 1.5 sentences a place, SEEN otherwise; `by` names which); --write adds entries and retires stale ones by name into `retired` and never raises a ceiling; --tighten (the chair's door) lowers a ceiling loose on both readings and never raises one. Nothing edits this file by hand. Held by tests/lint/samenessCensus.walker.test.js and `node scripts/sameness-census.mjs --check`.",
+ "_law": "TWO LAWS (SAME-1 brief 2, the sameness door). A PRINTED SLOT WITH NO ROW REDS, TIED TO THE BAR (the chair, 2026-11-20 18:52 UTC): a slot (surface | printed position) with no entry for a size reds where ONE sentence of it prints in 15 or more of the size's 150 places (two thirds of the 15% bar; ceil(n x 0.10)); where its commonest sentence prints in 8 to 14 of 150 it is listed as watch, not red; below that it is neither. --write registers every slot printed in MIN_PLACES or more places of a size over the corpus `corpus` names. A CEILING ONLY TIGHTENS: an entry's ceiling bounds `meet` (TOP share where the slot prints at most 1.5 sentences a place, SEEN otherwise; `by` names which); --write adds entries and retires stale ones by name into `retired` and never raises a ceiling; --tighten (the chair's door) lowers a ceiling loose on both readings and never raises one. Nothing edits this file by hand. Held by tests/lint/samenessCensus.walker.test.js and `node scripts/sameness-census.mjs --check`.",
  "corpus": {
   "prefix": "hxd",
   "confirm": "hxu",
@@ -3046,7 +3046,7 @@
      "shareIn": 0.02,
      "seen": 0.0003,
      "by": "seen",
-     "meet": 0.0003,
+     "meet": 0.0004,
      "ceiling": 0.01
     },
     "village": {
@@ -3063,7 +3063,7 @@
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 451,
+     "distinct": 452,
      "shareAll": 0.0133,
      "shareIn": 0.0133,
      "seen": 0.0003,
@@ -3074,7 +3074,7 @@
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 540,
+     "distinct": 543,
      "shareAll": 0.0133,
      "shareIn": 0.0133,
      "seen": 0.0003,
@@ -3085,7 +3085,7 @@
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 761,
+     "distinct": 762,
      "shareAll": 0.0133,
      "shareIn": 0.0133,
      "seen": 0.0004,
@@ -3441,35 +3441,35 @@
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 528,
+     "distinct": 566,
      "shareAll": 0.6467,
      "shareIn": 0.6467,
-     "seen": 0.3619,
+     "seen": 0.3564,
      "by": "seen",
-     "meet": 0.3731,
-     "ceiling": 0.38
+     "meet": 0.3679,
+     "ceiling": 0.37
     },
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 983,
+     "distinct": 1113,
      "shareAll": 0.9333,
      "shareIn": 0.9333,
-     "seen": 0.5978,
+     "seen": 0.5767,
      "by": "seen",
-     "meet": 0.5978,
-     "ceiling": 0.6
+     "meet": 0.5767,
+     "ceiling": 0.58
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 1356,
+     "distinct": 1559,
      "shareAll": 1,
      "shareIn": 1,
-     "seen": 0.6611,
+     "seen": 0.6524,
      "by": "seen",
-     "meet": 0.6611,
-     "ceiling": 0.67
+     "meet": 0.6524,
+     "ceiling": 0.66
     }
    }
   },
@@ -3509,7 +3509,7 @@
     "village": {
      "places": 150,
      "of": 150,
-     "distinct": 220,
+     "distinct": 221,
      "shareAll": 0.3067,
      "shareIn": 0.3067,
      "seen": 0.1598,
@@ -3520,34 +3520,34 @@
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 437,
+     "distinct": 470,
      "shareAll": 0.6333,
      "shareIn": 0.6333,
-     "seen": 0.3687,
+     "seen": 0.3629,
      "by": "seen",
-     "meet": 0.3748,
-     "ceiling": 0.38
+     "meet": 0.3692,
+     "ceiling": 0.37
     },
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 811,
+     "distinct": 922,
      "shareAll": 0.9333,
      "shareIn": 0.9333,
-     "seen": 0.5926,
+     "seen": 0.5753,
      "by": "seen",
-     "meet": 0.5926,
-     "ceiling": 0.6
+     "meet": 0.5753,
+     "ceiling": 0.58
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 1033,
+     "distinct": 1240,
      "shareAll": 1,
      "shareIn": 1,
-     "seen": 0.656,
+     "seen": 0.6557,
      "by": "seen",
-     "meet": 0.656,
+     "meet": 0.6557,
      "ceiling": 0.66
     }
    }
@@ -3714,23 +3714,23 @@
     "city": {
      "places": 23,
      "of": 150,
-     "distinct": 36,
+     "distinct": 37,
      "shareAll": 0.0333,
      "shareIn": 0.2174,
-     "seen": 0.0616,
+     "seen": 0.0606,
      "by": "seen",
-     "meet": 0.0646,
+     "meet": 0.0606,
      "ceiling": 0.07
     },
     "metropolis": {
      "places": 18,
      "of": 150,
-     "distinct": 28,
+     "distinct": 31,
      "shareAll": 0.0267,
      "shareIn": 0.2222,
-     "seen": 0.0643,
+     "seen": 0.0507,
      "by": "seen",
-     "meet": 0.0669,
+     "meet": 0.0675,
      "ceiling": 0.07
     }
    }
@@ -5997,10 +5997,10 @@
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 107,
+     "distinct": 108,
      "shareAll": 0.2,
      "shareIn": 0.2,
-     "seen": 0.0485,
+     "seen": 0.0483,
      "by": "seen",
      "meet": 0.0754,
      "ceiling": 0.08
@@ -6008,23 +6008,23 @@
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 106,
+     "distinct": 110,
      "shareAll": 0.2533,
      "shareIn": 0.2533,
-     "seen": 0.0726,
+     "seen": 0.0721,
      "by": "seen",
-     "meet": 0.0818,
+     "meet": 0.0812,
      "ceiling": 0.09
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 112,
+     "distinct": 111,
      "shareAll": 0.22,
      "shareIn": 0.22,
-     "seen": 0.0569,
+     "seen": 0.0568,
      "by": "seen",
-     "meet": 0.0569,
+     "meet": 0.0568,
      "ceiling": 0.06
     }
    }
@@ -6108,7 +6108,7 @@
    "reason": "hand: npcData.js: a secret drawn from a pool",
    "sentence": "Wants to get the shepherd collective through the season without borrowing.",
    "paths": {
-    "npcs[].secret.what": 35,
+    "npcs[].secret.what": 36,
     "economicState.compound.inst.names[]": 17,
     "economicState.safetyProfile.compound.inst.names[]": 17
    },
@@ -6138,45 +6138,45 @@
     "village": {
      "places": 150,
      "of": 150,
-     "distinct": 166,
+     "distinct": 169,
      "shareAll": 0.0867,
      "shareIn": 0.0867,
-     "seen": 0.0217,
+     "seen": 0.0213,
      "by": "seen",
-     "meet": 0.0217,
+     "meet": 0.0213,
      "ceiling": 0.03
     },
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 182,
+     "distinct": 183,
      "shareAll": 0.0533,
      "shareIn": 0.0533,
-     "seen": 0.0143,
+     "seen": 0.0144,
      "by": "seen",
-     "meet": 0.0161,
+     "meet": 0.0163,
      "ceiling": 0.02
     },
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 174,
-     "shareAll": 0.0867,
-     "shareIn": 0.0867,
-     "seen": 0.0178,
+     "distinct": 177,
+     "shareAll": 0.08,
+     "shareIn": 0.08,
+     "seen": 0.0174,
      "by": "seen",
-     "meet": 0.018,
+     "meet": 0.0177,
      "ceiling": 0.02
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 178,
+     "distinct": 181,
      "shareAll": 0.0733,
      "shareIn": 0.0733,
-     "seen": 0.0174,
+     "seen": 0.0179,
      "by": "seen",
-     "meet": 0.0174,
+     "meet": 0.0179,
      "ceiling": 0.02
     }
    }
@@ -13011,7 +13011,7 @@
      "shareIn": 0.02,
      "seen": 0.0003,
      "by": "seen",
-     "meet": 0.0003,
+     "meet": 0.0004,
      "ceiling": 0.01
     },
     "village": {
@@ -13028,7 +13028,7 @@
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 451,
+     "distinct": 452,
      "shareAll": 0.0133,
      "shareIn": 0.0133,
      "seen": 0.0003,
@@ -13039,7 +13039,7 @@
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 540,
+     "distinct": 543,
      "shareAll": 0.0133,
      "shareIn": 0.0133,
      "seen": 0.0003,
@@ -13050,7 +13050,7 @@
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 761,
+     "distinct": 762,
      "shareAll": 0.0133,
      "shareIn": 0.0133,
      "seen": 0.0004,
@@ -13406,35 +13406,35 @@
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 528,
+     "distinct": 566,
      "shareAll": 0.6467,
      "shareIn": 0.6467,
-     "seen": 0.3619,
+     "seen": 0.3564,
      "by": "seen",
-     "meet": 0.3731,
-     "ceiling": 0.38
+     "meet": 0.3679,
+     "ceiling": 0.37
     },
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 983,
+     "distinct": 1113,
      "shareAll": 0.9333,
      "shareIn": 0.9333,
-     "seen": 0.5978,
+     "seen": 0.5767,
      "by": "seen",
-     "meet": 0.5978,
-     "ceiling": 0.6
+     "meet": 0.5767,
+     "ceiling": 0.58
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 1356,
+     "distinct": 1559,
      "shareAll": 1,
      "shareIn": 1,
-     "seen": 0.6611,
+     "seen": 0.6524,
      "by": "seen",
-     "meet": 0.6611,
-     "ceiling": 0.67
+     "meet": 0.6524,
+     "ceiling": 0.66
     }
    }
   },
@@ -13474,7 +13474,7 @@
     "village": {
      "places": 150,
      "of": 150,
-     "distinct": 220,
+     "distinct": 221,
      "shareAll": 0.3067,
      "shareIn": 0.3067,
      "seen": 0.1598,
@@ -13485,34 +13485,34 @@
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 437,
+     "distinct": 470,
      "shareAll": 0.6333,
      "shareIn": 0.6333,
-     "seen": 0.3687,
+     "seen": 0.3629,
      "by": "seen",
-     "meet": 0.3748,
-     "ceiling": 0.38
+     "meet": 0.3692,
+     "ceiling": 0.37
     },
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 811,
+     "distinct": 922,
      "shareAll": 0.9333,
      "shareIn": 0.9333,
-     "seen": 0.5926,
+     "seen": 0.5753,
      "by": "seen",
-     "meet": 0.5926,
-     "ceiling": 0.6
+     "meet": 0.5753,
+     "ceiling": 0.58
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 1033,
+     "distinct": 1240,
      "shareAll": 1,
      "shareIn": 1,
-     "seen": 0.656,
+     "seen": 0.6557,
      "by": "seen",
-     "meet": 0.656,
+     "meet": 0.6557,
      "ceiling": 0.66
     }
    }
@@ -13679,23 +13679,23 @@
     "city": {
      "places": 23,
      "of": 150,
-     "distinct": 36,
+     "distinct": 37,
      "shareAll": 0.0333,
      "shareIn": 0.2174,
-     "seen": 0.0616,
+     "seen": 0.0606,
      "by": "seen",
-     "meet": 0.0646,
+     "meet": 0.0606,
      "ceiling": 0.07
     },
     "metropolis": {
      "places": 18,
      "of": 150,
-     "distinct": 28,
+     "distinct": 31,
      "shareAll": 0.0267,
      "shareIn": 0.2222,
-     "seen": 0.0643,
+     "seen": 0.0507,
      "by": "seen",
-     "meet": 0.0669,
+     "meet": 0.0675,
      "ceiling": 0.07
     }
    }
@@ -15888,10 +15888,10 @@
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 107,
+     "distinct": 108,
      "shareAll": 0.2,
      "shareIn": 0.2,
-     "seen": 0.0485,
+     "seen": 0.0483,
      "by": "seen",
      "meet": 0.0754,
      "ceiling": 0.08
@@ -15899,23 +15899,23 @@
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 106,
+     "distinct": 110,
      "shareAll": 0.2533,
      "shareIn": 0.2533,
-     "seen": 0.0726,
+     "seen": 0.0721,
      "by": "seen",
-     "meet": 0.0818,
+     "meet": 0.0812,
      "ceiling": 0.09
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 112,
+     "distinct": 111,
      "shareAll": 0.22,
      "shareIn": 0.22,
-     "seen": 0.0569,
+     "seen": 0.0568,
      "by": "seen",
-     "meet": 0.0569,
+     "meet": 0.0568,
      "ceiling": 0.06
     }
    }
@@ -15999,7 +15999,7 @@
    "reason": "hand: npcData.js: a secret drawn from a pool",
    "sentence": "Wants to get the shepherd collective through the season without borrowing.",
    "paths": {
-    "npcs[].secret.what": 35,
+    "npcs[].secret.what": 36,
     "economicState.compound.inst.names[]": 17,
     "economicState.safetyProfile.compound.inst.names[]": 17
    },
@@ -16029,45 +16029,45 @@
     "village": {
      "places": 150,
      "of": 150,
-     "distinct": 166,
+     "distinct": 169,
      "shareAll": 0.0867,
      "shareIn": 0.0867,
-     "seen": 0.0217,
+     "seen": 0.0213,
      "by": "seen",
-     "meet": 0.0217,
+     "meet": 0.0213,
      "ceiling": 0.03
     },
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 182,
+     "distinct": 183,
      "shareAll": 0.0533,
      "shareIn": 0.0533,
-     "seen": 0.0143,
+     "seen": 0.0144,
      "by": "seen",
-     "meet": 0.0161,
+     "meet": 0.0163,
      "ceiling": 0.02
     },
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 174,
-     "shareAll": 0.0867,
-     "shareIn": 0.0867,
-     "seen": 0.0178,
+     "distinct": 177,
+     "shareAll": 0.08,
+     "shareIn": 0.08,
+     "seen": 0.0174,
      "by": "seen",
-     "meet": 0.018,
+     "meet": 0.0177,
      "ceiling": 0.02
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 178,
+     "distinct": 181,
      "shareAll": 0.0733,
      "shareIn": 0.0733,
-     "seen": 0.0174,
+     "seen": 0.0179,
      "by": "seen",
-     "meet": 0.0174,
+     "meet": 0.0179,
      "ceiling": 0.02
     }
    }
@@ -20829,10 +20829,10 @@
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 107,
+     "distinct": 108,
      "shareAll": 0.2,
      "shareIn": 0.2,
-     "seen": 0.0485,
+     "seen": 0.0483,
      "by": "seen",
      "meet": 0.0754,
      "ceiling": 0.08
@@ -20840,23 +20840,23 @@
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 106,
+     "distinct": 110,
      "shareAll": 0.2533,
      "shareIn": 0.2533,
-     "seen": 0.0726,
+     "seen": 0.0721,
      "by": "seen",
-     "meet": 0.0818,
+     "meet": 0.0812,
      "ceiling": 0.09
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 112,
+     "distinct": 111,
      "shareAll": 0.22,
      "shareIn": 0.22,
-     "seen": 0.0569,
+     "seen": 0.0568,
      "by": "seen",
-     "meet": 0.0569,
+     "meet": 0.0568,
      "ceiling": 0.06
     }
    }
@@ -20896,45 +20896,45 @@
     "village": {
      "places": 150,
      "of": 150,
-     "distinct": 164,
+     "distinct": 167,
      "shareAll": 0.0867,
      "shareIn": 0.0867,
-     "seen": 0.0218,
+     "seen": 0.0214,
      "by": "seen",
-     "meet": 0.0218,
+     "meet": 0.0214,
      "ceiling": 0.03
     },
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 181,
+     "distinct": 182,
      "shareAll": 0.0533,
      "shareIn": 0.0533,
-     "seen": 0.0144,
+     "seen": 0.0145,
      "by": "seen",
-     "meet": 0.0162,
+     "meet": 0.0164,
      "ceiling": 0.02
     },
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 173,
-     "shareAll": 0.0867,
-     "shareIn": 0.0867,
-     "seen": 0.0179,
+     "distinct": 176,
+     "shareAll": 0.08,
+     "shareIn": 0.08,
+     "seen": 0.0175,
      "by": "seen",
-     "meet": 0.018,
+     "meet": 0.0177,
      "ceiling": 0.02
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 174,
+     "distinct": 177,
      "shareAll": 0.0733,
      "shareIn": 0.0733,
-     "seen": 0.0177,
+     "seen": 0.0181,
      "by": "seen",
-     "meet": 0.0177,
+     "meet": 0.0181,
      "ceiling": 0.02
     }
    }
@@ -23474,10 +23474,10 @@
     "town": {
      "places": 105,
      "of": 150,
-     "distinct": 70,
+     "distinct": 71,
      "shareAll": 0.2,
      "shareIn": 0.2857,
-     "seen": 0.0894,
+     "seen": 0.0889,
      "by": "seen",
      "meet": 0.1715,
      "ceiling": 0.18
@@ -23485,23 +23485,23 @@
     "city": {
      "places": 108,
      "of": 150,
-     "distinct": 74,
+     "distinct": 78,
      "shareAll": 0.2533,
      "shareIn": 0.3519,
-     "seen": 0.1334,
+     "seen": 0.1325,
      "by": "seen",
-     "meet": 0.148,
+     "meet": 0.1468,
      "ceiling": 0.15
     },
     "metropolis": {
      "places": 102,
      "of": 150,
-     "distinct": 78,
+     "distinct": 77,
      "shareAll": 0.22,
      "shareIn": 0.3235,
-     "seen": 0.1115,
+     "seen": 0.1112,
      "by": "seen",
-     "meet": 0.1115,
+     "meet": 0.1112,
      "ceiling": 0.12
     }
    }
@@ -23553,34 +23553,34 @@
     "town": {
      "places": 90,
      "of": 150,
-     "distinct": 79,
+     "distinct": 80,
      "shareAll": 0.0467,
      "shareIn": 0.0778,
-     "seen": 0.0185,
+     "seen": 0.0178,
      "by": "seen",
-     "meet": 0.0185,
+     "meet": 0.0178,
      "ceiling": 0.02
     },
     "city": {
      "places": 100,
      "of": 150,
-     "distinct": 86,
-     "shareAll": 0.04,
-     "shareIn": 0.06,
-     "seen": 0.0193,
+     "distinct": 95,
+     "shareAll": 0.0333,
+     "shareIn": 0.05,
+     "seen": 0.0152,
      "by": "seen",
-     "meet": 0.0193,
+     "meet": 0.0152,
      "ceiling": 0.02
     },
     "metropolis": {
      "places": 89,
      "of": 150,
-     "distinct": 86,
-     "shareAll": 0.04,
-     "shareIn": 0.0674,
-     "seen": 0.0148,
+     "distinct": 96,
+     "shareAll": 0.0267,
+     "shareIn": 0.0449,
+     "seen": 0.0091,
      "by": "seen",
-     "meet": 0.0155,
+     "meet": 0.0119,
      "ceiling": 0.02
     }
    }
@@ -34057,57 +34057,57 @@
     "hamlet": {
      "places": 150,
      "of": 150,
-     "distinct": 235,
+     "distinct": 232,
      "shareAll": 0.1067,
      "shareIn": 0.1067,
-     "seen": 0.0218,
+     "seen": 0.0222,
      "by": "seen",
-     "meet": 0.0223,
+     "meet": 0.0224,
      "ceiling": 0.03
     },
     "village": {
      "places": 150,
      "of": 150,
-     "distinct": 410,
+     "distinct": 419,
      "shareAll": 0.1933,
      "shareIn": 0.1933,
-     "seen": 0.051,
+     "seen": 0.0521,
      "by": "seen",
-     "meet": 0.051,
+     "meet": 0.0521,
      "ceiling": 0.06
     },
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 876,
-     "shareAll": 0.4267,
-     "shareIn": 0.4267,
-     "seen": 0.1373,
+     "distinct": 896,
+     "shareAll": 0.4933,
+     "shareIn": 0.4933,
+     "seen": 0.1579,
      "by": "seen",
-     "meet": 0.1373,
-     "ceiling": 0.14
+     "meet": 0.1579,
+     "ceiling": 0.16
     },
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 1785,
-     "shareAll": 0.8533,
-     "shareIn": 0.8533,
-     "seen": 0.2236,
+     "distinct": 1879,
+     "shareAll": 0.8867,
+     "shareIn": 0.8867,
+     "seen": 0.264,
      "by": "seen",
-     "meet": 0.2236,
-     "ceiling": 0.23
+     "meet": 0.2672,
+     "ceiling": 0.27
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 2151,
-     "shareAll": 0.9733,
-     "shareIn": 0.9733,
-     "seen": 0.2771,
+     "distinct": 2273,
+     "shareAll": 0.98,
+     "shareIn": 0.98,
+     "seen": 0.3461,
      "by": "seen",
-     "meet": 0.2771,
-     "ceiling": 0.28
+     "meet": 0.3461,
+     "ceiling": 0.35
     }
    }
   },
@@ -34460,35 +34460,35 @@
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 528,
+     "distinct": 566,
      "shareAll": 0.6467,
      "shareIn": 0.6467,
-     "seen": 0.3619,
+     "seen": 0.3564,
      "by": "seen",
-     "meet": 0.3731,
-     "ceiling": 0.38
+     "meet": 0.3679,
+     "ceiling": 0.37
     },
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 983,
+     "distinct": 1113,
      "shareAll": 0.9333,
      "shareIn": 0.9333,
-     "seen": 0.5978,
+     "seen": 0.5767,
      "by": "seen",
-     "meet": 0.5978,
-     "ceiling": 0.6
+     "meet": 0.5767,
+     "ceiling": 0.58
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 1356,
+     "distinct": 1559,
      "shareAll": 1,
      "shareIn": 1,
-     "seen": 0.6611,
+     "seen": 0.6524,
      "by": "seen",
-     "meet": 0.6611,
-     "ceiling": 0.67
+     "meet": 0.6524,
+     "ceiling": 0.66
     }
    }
   },
@@ -34528,7 +34528,7 @@
     "village": {
      "places": 150,
      "of": 150,
-     "distinct": 220,
+     "distinct": 221,
      "shareAll": 0.3067,
      "shareIn": 0.3067,
      "seen": 0.1598,
@@ -34539,34 +34539,34 @@
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 437,
+     "distinct": 470,
      "shareAll": 0.6333,
      "shareIn": 0.6333,
-     "seen": 0.3687,
+     "seen": 0.3629,
      "by": "seen",
-     "meet": 0.3748,
-     "ceiling": 0.38
+     "meet": 0.3692,
+     "ceiling": 0.37
     },
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 811,
+     "distinct": 922,
      "shareAll": 0.9333,
      "shareIn": 0.9333,
-     "seen": 0.5926,
+     "seen": 0.5753,
      "by": "seen",
-     "meet": 0.5926,
-     "ceiling": 0.6
+     "meet": 0.5753,
+     "ceiling": 0.58
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 1033,
+     "distinct": 1240,
      "shareAll": 1,
      "shareIn": 1,
-     "seen": 0.656,
+     "seen": 0.6557,
      "by": "seen",
-     "meet": 0.656,
+     "meet": 0.6557,
      "ceiling": 0.66
     }
    }
@@ -35465,23 +35465,23 @@
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 296,
+     "distinct": 294,
      "shareAll": 0.0133,
      "shareIn": 0.0133,
-     "seen": 0.0002,
+     "seen": 0.0003,
      "by": "seen",
-     "meet": 0.0002,
+     "meet": 0.0003,
      "ceiling": 0.01
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 289,
+     "distinct": 293,
      "shareAll": 0.02,
      "shareIn": 0.02,
-     "seen": 0.0005,
+     "seen": 0.0004,
      "by": "seen",
-     "meet": 0.0005,
+     "meet": 0.0004,
      "ceiling": 0.01
     }
    }
@@ -35519,10 +35519,10 @@
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 299,
+     "distinct": 297,
      "shareAll": 0.0133,
      "shareIn": 0.0133,
-     "seen": 0,
+     "seen": 0.0001,
      "by": "seen",
      "meet": 0.0001,
      "ceiling": 0.01
@@ -35530,10 +35530,10 @@
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 298,
-     "shareAll": 0.0133,
-     "shareIn": 0.0133,
-     "seen": 0.0001,
+     "distinct": 300,
+     "shareAll": 0.0067,
+     "shareIn": 0.0067,
+     "seen": 0,
      "by": "seen",
      "meet": 0.0001,
      "ceiling": 0.01
@@ -35541,10 +35541,10 @@
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 298,
+     "distinct": 296,
      "shareAll": 0.0133,
      "shareIn": 0.0133,
-     "seen": 0.0001,
+     "seen": 0.0002,
      "by": "seen",
      "meet": 0.0002,
      "ceiling": 0.01
@@ -36622,23 +36622,23 @@
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 296,
+     "distinct": 294,
      "shareAll": 0.0133,
      "shareIn": 0.0133,
-     "seen": 0.0002,
+     "seen": 0.0003,
      "by": "seen",
-     "meet": 0.0002,
+     "meet": 0.0003,
      "ceiling": 0.01
     },
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 289,
+     "distinct": 293,
      "shareAll": 0.02,
      "shareIn": 0.02,
-     "seen": 0.0005,
+     "seen": 0.0004,
      "by": "seen",
-     "meet": 0.0005,
+     "meet": 0.0004,
      "ceiling": 0.01
     }
    }
@@ -36676,10 +36676,10 @@
     "town": {
      "places": 150,
      "of": 150,
-     "distinct": 299,
+     "distinct": 297,
      "shareAll": 0.0133,
      "shareIn": 0.0133,
-     "seen": 0,
+     "seen": 0.0001,
      "by": "seen",
      "meet": 0.0001,
      "ceiling": 0.01
@@ -36687,10 +36687,10 @@
     "city": {
      "places": 150,
      "of": 150,
-     "distinct": 298,
-     "shareAll": 0.0133,
-     "shareIn": 0.0133,
-     "seen": 0.0001,
+     "distinct": 300,
+     "shareAll": 0.0067,
+     "shareIn": 0.0067,
+     "seen": 0,
      "by": "seen",
      "meet": 0.0001,
      "ceiling": 0.01
@@ -36698,10 +36698,10 @@
     "metropolis": {
      "places": 150,
      "of": 150,
-     "distinct": 298,
+     "distinct": 296,
      "shareAll": 0.0133,
      "shareIn": 0.0133,
-     "seen": 0.0001,
+     "seen": 0.0002,
      "by": "seen",
      "meet": 0.0002,
      "ceiling": 0.01
@@ -42907,5 +42907,10 @@
    }
   }
  },
- "retired": {}
+ "retired": {},
+ "taken": {
+  "commit": "7e93c087b",
+  "srcClean": true,
+  "at": "rendered by this write"
+ }
 }

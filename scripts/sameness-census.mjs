@@ -27,6 +27,12 @@
  *        HIGHER of hxd and hxu rounded up to 0.01, retires stale entries by name; refuses (exit 1) on a confirmed rise.
  *   node scripts/sameness-census.mjs --tighten THE CHAIR'S DOOR: lowers each ceiling loose on both readings, never raises.
  * TWO LAWS: A PRINTED SLOT WITH NO ROW REDS; A CEILING ONLY TIGHTENS.
+ * LAW 1 IS TIED TO THE BAR, BY SIZE, WITH NO SECOND SAMPLE (the chair's ruling, 2026-11-20 18:52 UTC): an unregistered
+ * slot REDS only where its COMMONEST SENTENCE prints in at least ceil(n x LAW1_RED_SHARE) places of a size (15 of 150: two
+ * thirds of the 15% bar); one whose commonest sentence prints in at least ceil(n x LAW1_WATCH_SHARE) (8 of 150) is listed
+ * as WATCH by --check, not red; below that it is neither (counted in one NOTE line). The commonest sentence's places, not
+ * the slot's: a slot printed everywhere with every sentence distinct is neither. No confirmation corpus is read for law 1.
+ * MIN_PLACES and NOISE_SE stay for the registered rows' law of rises (and --write still registers every slot at MIN_PLACES).
  * THE SLOT is `<surface> | <position>`: where the page prints the line, whatever it says (positionOf). Every wording a
  * position prints is one slot (a pool's lines are one slot); the stored paths are its attribution, found word for word or
  * as the longest stored sentence a printed one contains (a label-prefixed line: "Constraint: <stored sentence>").
@@ -34,7 +40,7 @@
  * printing at most 1.5 sentences a place; SEEN for a slot printing more; shareIn (over the holders) is printed beside.
  * MIN_PLACES and NOISE_SE are measured; their measures are written beside them (MIN_PLACES_MEASURE, NOISE_SE_MEASURE).
  */
-import { spawn } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join, relative } from 'node:path';
@@ -209,10 +215,20 @@ export const REGISTER_PATH = join(ROOT, 'scripts/census/sameness-census.register
 export const CORPUS = Object.freeze({ prefix: 'hxd', confirm: 'hxu', n: 150, sizes: SIZES });
 /** A slot printing at most this many sentences a place is met again by its TOP share; else by its SEEN. */
 export const ONE_A_PLACE = 1.5;
-/** RED, unregistered, from this many places of one size. */
+/** --write registers every slot printed in this many places of a size (law 1 no longer reds by it: LAW1_RED_SHARE). */
 export const MIN_PLACES = 5;
 /** Why MIN_PLACES is 5 (the smallest value at which hxd and hxu agree on the slot set). */
 export const MIN_PLACES_MEASURE = 'hxd vs hxu at 23893d8d4, 150 a size: 55 slots printed in two or more places of a size in one corpus and in none of the other, by holders 2+: 55, 3+: 24, 4+: 6, 5+: 0; so from 5 places the two corpora agree on every slot (at 50 a size the same count needs 6: 2+: 66, 5+: 7, 6+: 0).';
+/** LAW 1, RED: an unregistered slot whose commonest sentence prints in at least ceil(n x this) places of a size. */
+export const LAW1_RED_SHARE = 0.1;
+/** LAW 1, WATCH: an unregistered slot whose commonest sentence prints in at least ceil(n x this) places (below red). */
+export const LAW1_WATCH_SHARE = 8 / 150;
+/** Why law 1 reds and watches where it does. */
+export const LAW1_MEASURE = 'the chair\'s ruling, 2026-11-20 18:52 UTC: "LAW 1 IS TIED TO THE BAR, BY SIZE, WITH NO SECOND SAMPLE": RED at 15 of 150 places of some size for ONE sentence of the slot (two thirds of the 15% bar), WATCH at 8 to 14 of 150 (8 of 150 the watch line), else neither. Why: at MIN_PLACES 5 law 1 false-reddened a fresh sample (hxw: 83 unregistered slots at 5 to 10 places, 0 rises).';
+/** The places of a size of n at which an unregistered slot's commonest sentence reds (15 at 150). @param {number} n */
+export const law1RedPlaces = (n) => Math.ceil(n * LAW1_RED_SHARE - 1e-9);
+/** The places of a size of n at which it is listed as watch (8 at 150). @param {number} n */
+export const law1WatchPlaces = (n) => Math.ceil(n * LAW1_WATCH_SHARE - 1e-9);
 /** A rise reds beyond this many standard errors of a share at the ceiling, on both readings. */
 export const NOISE_SE = 4;
 /** Why NOISE_SE is 4. */
@@ -271,7 +287,7 @@ export function measureSlots(rows) {
       for (const p of paths) { let ps = sl.paths.get(p); if (!ps) { ps = new Set(); sl.paths.set(p, ps); } ps.add(i); }
     }
   });
-  /** @type {Map<string, { places: number, of: number, distinct: number, perPlace: number, shareAll: number, shareIn: number, seen: number, sentence: string, paths: Record<string, number>, contained: boolean }>} */ const out = new Map();
+  /** @type {Map<string, { places: number, of: number, distinct: number, perPlace: number, topPlaces: number, shareAll: number, shareIn: number, seen: number, sentence: string, paths: Record<string, number>, contained: boolean }>} */ const out = new Map();
   for (const [key, sl] of slots) {
     /** @type {Map<number, { c: number, sh: number }>} */ const per = new Map(); let top = ''; let topN = 0;
     for (const [s, st] of sl.bySentence) {
@@ -280,7 +296,7 @@ export function measureSlots(rows) {
     }
     const H = per.size; let seen = 0; for (const o of per.values()) seen += o.sh / o.c / Math.max(1, H - 1); seen /= H;
     const perPlace = [...per.values()].reduce((a, o) => a + o.c, 0) / H;
-    out.set(key, { places: H, of: rows.length, distinct: sl.bySentence.size, perPlace: +perPlace.toFixed(2), shareAll: +(topN / rows.length).toFixed(4), shareIn: +(topN / H).toFixed(4), seen: +seen.toFixed(4), sentence: top,
+    out.set(key, { places: H, of: rows.length, distinct: sl.bySentence.size, perPlace: +perPlace.toFixed(2), topPlaces: topN, shareAll: +(topN / rows.length).toFixed(4), shareIn: +(topN / H).toFixed(4), seen: +seen.toFixed(4), sentence: top,
       paths: Object.fromEntries([...sl.paths].map(([p, st]) => [p, st.size]).sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))), contained: !sl.exactOnly });
   }
   return out;
@@ -307,21 +323,27 @@ export function shareError(ceiling, places) {
 export function readRegister(path = REGISTER_PATH) { return JSON.parse(readFileSync(path, 'utf8')); }
 
 /**
- * THE JUDGE: one reading (per size, a measureSlots table) against the register. RED: `unregistered` (a slot printed in
- * >= MIN_PLACES places of a size with no entry for that size) and `over` (an entry's meet above its ceiling beyond
- * NOISE_SE errors; it stays red only if the confirmation repeats it: confirmRises). NOTE: `rare` (a slot below
- * MIN_PLACES with no entry), `stale` (an entry whose slot this reading does not print), `loose` (a ceiling above its meet
+ * THE JUDGE: one reading (per size, a measureSlots table) against the register. RED: `unregistered` (a slot with no entry
+ * for a size whose COMMONEST SENTENCE prints in >= law1RedPlaces(n) of the size's n places: 15 of 150, the chair's ruling
+ * of 18:52 UTC) and `over` (an entry's meet above its ceiling beyond NOISE_SE errors; it stays red only if the
+ * confirmation repeats it: confirmRises). WATCH: `watch` (no entry, its commonest sentence in law1WatchPlaces(n) places
+ * or more, below red: listed, not red). NOTE: `rare` (no entry, below the watch line), `stale` (an entry whose slot this reading does not print), `loose` (a ceiling above its meet
  * beyond the noise; repeated on both readings it prompts --tighten). Every finding names its key.
- * @param {Record<string, Map<string, any>>} table @param {any} register @param {{ minPlaces?: number, noiseSe?: number }} [opts]
+ * @param {Record<string, Map<string, any>>} table @param {any} register @param {{ noiseSe?: number }} [opts]
  */
 export function judge(table, register, opts = {}) {
-  const minPlaces = opts.minPlaces ?? MIN_PLACES; const noise = opts.noiseSe ?? NOISE_SE;
+  const noise = opts.noiseSe ?? NOISE_SE;
   const rows = register.rows || {};
-  /** @type {{ unregistered: any[], over: any[], rare: any[], stale: any[], loose: any[] }} */
-  const f = { unregistered: [], over: [], rare: [], stale: [], loose: [] };
+  /** @type {{ unregistered: any[], watch: any[], over: any[], rare: any[], stale: any[], loose: any[] }} */
+  const f = { unregistered: [], watch: [], over: [], rare: [], stale: [], loose: [] };
   for (const size of Object.keys(table)) for (const [slot, m] of table[size]) {
     const e = rows[slot]?.sizes?.[size];
-    if (!e) { (m.places >= minPlaces ? f.unregistered : f.rare).push({ slot, size, m, text: `${size} ${slot}: printed in ${m.places} places, no row` }); continue; }
+    if (!e) {
+      const top = m.topPlaces ?? Math.round(m.shareAll * m.of);
+      const list = top >= law1RedPlaces(m.of) ? f.unregistered : top >= law1WatchPlaces(m.of) ? f.watch : f.rare;
+      list.push({ slot, size, m, top, text: `${size} ${slot}: top sentence in ${top}/${m.of} places (slot in ${m.places}), no row` });
+      continue;
+    }
     const meet = meetOf(m, e.by); const se = shareError(e.ceiling, overOf(m, e.by));
     if (meet > e.ceiling + noise * se + 1e-9) f.over.push({ slot, size, meet, text: `${size} ${slot}: ${e.by === 'top' ? 'shareAll' : 'seen'} ${meet.toFixed(2)} > ceiling ${e.ceiling} (${((meet - e.ceiling) / se).toFixed(1)} SE over ${overOf(m, e.by)} places)` });
     else if (e.ceiling - meet > noise * se + 1e-9) f.loose.push({ slot, size, meet, text: `${size} ${slot}: ceiling ${e.ceiling} above meet ${meet.toFixed(2)} (${((e.ceiling - meet) / se).toFixed(1)} SE)` });
@@ -490,7 +512,7 @@ export default { root: '${ROOT}', plugins: [react()], test: { environment: 'node
   return wall;
 }
 
-const REGISTER_LAW = 'TWO LAWS (SAME-1 brief 2, the sameness door). A PRINTED SLOT WITH NO ROW REDS: every slot (surface | printed position | field) the page prints in MIN_PLACES or more places of a size, over the corpus `corpus` names, has an entry for that size. A CEILING ONLY TIGHTENS: an entry\'s ceiling bounds `meet` (TOP share where the slot prints at most 1.5 sentences a place, SEEN otherwise; `by` names which); --write adds entries and retires stale ones by name into `retired` and never raises a ceiling; --tighten (the chair\'s door) lowers a ceiling loose on both readings and never raises one. Nothing edits this file by hand. Held by tests/lint/samenessCensus.walker.test.js and `node scripts/sameness-census.mjs --check`.';
+const REGISTER_LAW = 'TWO LAWS (SAME-1 brief 2, the sameness door). A PRINTED SLOT WITH NO ROW REDS, TIED TO THE BAR (the chair, 2026-11-20 18:52 UTC): a slot (surface | printed position) with no entry for a size reds where ONE sentence of it prints in 15 or more of the size\'s 150 places (two thirds of the 15% bar; ceil(n x 0.10)); where its commonest sentence prints in 8 to 14 of 150 it is listed as watch, not red; below that it is neither. --write registers every slot printed in MIN_PLACES or more places of a size over the corpus `corpus` names. A CEILING ONLY TIGHTENS: an entry\'s ceiling bounds `meet` (TOP share where the slot prints at most 1.5 sentences a place, SEEN otherwise; `by` names which); --write adds entries and retires stale ones by name into `retired` and never raises a ceiling; --tighten (the chair\'s door) lowers a ceiling loose on both readings and never raises one. Nothing edits this file by hand. Held by tests/lint/samenessCensus.walker.test.js and `node scripts/sameness-census.mjs --check`.';
 const IDENTITY_RULE = 'A slot is keyed `<surface> | <position>`: the surface, and where the page prints the line whatever it says (the renderer\'s position: named components and each element\'s place among its siblings, a keyed list item `*`; the session sheet\'s key path). Every wording printed at one position is one slot, whichever stored path holds it (the chair, 2026-11-20: a pool\'s lines are one slot). The stored paths are attribution (`paths`): those that hold the printed sentence word for word, else those of the longest stored sentence it contains.';
 /** An empty register on this corpus (the first --write fills it). */
 export const emptyRegister = () => ({ _law: REGISTER_LAW, corpus: { ...CORPUS, sizes: [...SIZES] }, identity: { _rule: IDENTITY_RULE }, rows: {}, retired: {} });
@@ -530,20 +552,24 @@ async function door(mode) {
     let confirmed = false;
     if (f.over.length) { const t = await second(); const c = confirmRises(f, judge(t, register)); notes = c.notes; looseNotes = c.looseNotes; f = c; confirmed = true; }
     for (const x of f.unregistered) say(`RED unregistered: ${x.text}`);
+    for (const x of f.watch) say(`WATCH unregistered: ${x.size} ${x.slot}: top ${x.top}/${x.m.of}: "${cut(x.m.sentence, 100)}"`);
     for (const x of f.over) say(`RED rise: ${x.text}`);
     for (const x of notes) say(`NOTE rise on one reading: ${x}`);
     for (const x of f.stale) say(`NOTE stale: ${x.text}`);
     for (const x of f.loose) say(`NOTE loose${confirmed ? ' (on both readings)' : ` (on ${prefix}; --tighten reads both)`}: ${x.text}`);
     for (const x of looseNotes) say(`NOTE loose on one reading: ${x}`);
-    say(`NOTE: ${f.rare.length} slot-sizes printed in fewer than ${MIN_PLACES} places with no row (under the threshold, not judged)`);
+    say(`NOTE: ${f.rare.length} slot-sizes with no row whose top sentence prints below the watch line (${law1WatchPlaces(n)} of ${n}; neither red nor watch)`);
     const rows = Object.keys(register.rows).length;
-    say(`sameness-census --check: ${f.unregistered.length} unregistered, ${f.over.length} rises (red); ${notes.length} one-reading rises, ${f.stale.length} stale, ${f.loose.length} loose (notes); ${rows} rows; render ${((t1 - t0) / 60000).toFixed(1)} min, wall ${((Date.now() - t0) / 60000).toFixed(1)} min${confirmed ? ` (confirmed on ${CORPUS.confirm})` : ' (no confirmation needed)'}`);
+    say(`sameness-census --check: ${f.unregistered.length} unregistered, ${f.over.length} rises (red); ${f.watch.length} watch; ${notes.length} one-reading rises, ${f.stale.length} stale, ${f.loose.length} loose (notes); ${rows} rows; render ${((t1 - t0) / 60000).toFixed(1)} min, wall ${((Date.now() - t0) / 60000).toFixed(1)} min${confirmed ? ` (confirmed on ${CORPUS.confirm})` : ' (no confirmation needed)'}`);
     process.exit(f.unregistered.length || f.over.length ? 1 : 0);
   }
   const t2 = await second();
   if (mode === 'write') {
     const r = writeRows(first, t2, register, { classify: (slot, m) => classifySlot(slot, m, idx) });
     if (r.refused.length) { for (const x of r.refused) say(x); say('sameness-census --write: NOTHING WRITTEN'); process.exit(1); }
+    // the tree the readings were rendered at (the renders read src/ as checked out; a dirty src/ is said so)
+    const git = (/** @type {string[]} */ a) => { try { return execFileSync('git', a, { cwd: ROOT, encoding: 'utf8' }).trim(); } catch { return '?'; } };
+    r.next.taken = { commit: git(['rev-parse', '--short=9', 'HEAD']), srcClean: git(['status', '--porcelain', '--', 'src']) === '', at: arg('from') ? 'from a rendered run' : 'rendered by this write' };
     writeFileSync(regPath, `${JSON.stringify(r.next, null, 1)}\n`);
     for (const x of r.changed) say(x);
     say(`sameness-census --write: ${r.changed.length} changes; ${Object.keys(r.next.rows).length} rows; wall ${((Date.now() - t0) / 60000).toFixed(1)} min`);
