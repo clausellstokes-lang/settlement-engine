@@ -2590,3 +2590,39 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   tool's commit: 220 files, 3,271. SO ROW 77's CLEARANCE IS NO LONGER "PLAUSIBLE": RE-EXECUTED (to be written into
   the row at the next landing). The tool's commit sent to SEAT-3 (for U8, the light: dark units keep the simple
   hash proof) and to FRAME-3 for FRAME-4 (P1 to P4b). Its verdict on the verb agreement (9157373d0) follows.
+- 08:56 UTC · **THE VERB AGREEMENT'S VERDICT (SOUND) AND ITS LANDING IN HAND; VR47 MERGED ON THE VEIL'S LANE WITH ITS COUNT; A
+  RULING WITHDRAWN ON A SEAT'S OBJECTION.** NAMES-3 (08:48): "NAMES-2-ITEM-5: SOUND", executed: the diff read line
+  by line; its tool between 37b90e66b and 6c38ecfaa: the golden's 525 identical, the census's 715 identical, 0
+  non-string, exactly 5 strings (3 `secret.what`, 2 `pressureSentence`), each a verb's number; rendered: 139 lines
+  changed, all number only (the two views whose line counts moved are the cold-start flake of the "Patron deity"
+  block: identical warm); its own reader: stored 10 to 5, rendered 150 to 11. SURVIVORS: the succession_void
+  narrative's "…, and the Religious Authorities is taking over the offices" (5 and 5); the generated pool (6; 62
+  templates name `{faction}` or `{counterpart}`, about 35 with a singular verb or "it" after the slot). ITS SHAPE
+  NOTE: `withPowerVerb` is a rewrite after the draw, one verb a call site: forced by the banked literals; the
+  general cure is the kernel's. THE CHAIR READ THE SIX SOURCE FILES' DIFF ITSELF, then: ON ITS COPY OF THE LINE:
+  point 79 = the merge 313e3a6e of `lane/names-2-2026-11-20` at 6c38ecfaa (the local cherry-pick of the re-pin
+  dropped: the merge carries the seat's own commit); point 80 = the merge df06b81e of `lane/titles-2-2026-11-20` at
+  da33bc58f (ONE conflict: the lighting census, taken as the line's and re-taken by its door: 6a773afd: files
+  3,706, credited 3,234, titles 31,217, suite titles 8,643). AT THE MERGED TREE: the three changed test files and
+  eight more found to pin a sentence the agreement touches: 11 of 11 files, 175 of 175; `tests/data`: 83 of 83, 594
+  of 594; `tests/lint` whole running. NAMES-3's item 3, from the line's next commit: the stored survivor; the
+  earlier seat's list (plural pronouns in five goal templates and four `dmPowerLines` lines); THE OTHER DIRECTION,
+  measured first (a singular power with a plural pronoun or verb); the warts among the 23 punctuation strings.
+  VEIL-23 (08:51): "VR47 e4cce485f" MERGED ON THE VEIL'S LANE (the builder's e971c8ff2; `honorificSeedOf(name,
+  title)`, one helper, two callers: cardDoor and seatKeeper; no id, no institution key; red at the brief's commit,
+  4 failed in the new guard; green 7 files, 61 of 61, render-twice included; no generator or stored byte moves; the
+  edge bundles rebuilt ON THAT LANE: at the join they are rebuilt again at the joined tree). FOR THE OWNER, SAID AT
+  08:56 WITH THE VETO: 58 OF 163 BORN-TOWN CARDS CHANGE FORM, AND THE OWNER'S OWN EXAMPLE OF 2026-11-07, "Pastor
+  Robert Thomas", NOW READS "Father". REPORTED AS "KNOWN, NOT A LEAK" AND NOT ACCEPTED AS SETTLED BY THE CHAIR: on
+  one card a born town the owner's page and the shared page differ in the GENDERED form because the default veil
+  withholds `gender` and the masculine prints (a lady as "Lord"). VEIL-24 was asked for a read-only measure before
+  any ruling (where it is withheld: 211, 212 or the twin; what on a shared page reads it; how many cards; stored
+  strings that already say "she" of a served card; what production does today; any recorded reason). ALSO NAMED BY
+  VEIL-23: four walkers red at the lane's tip and unchanged (`phoneChromeFloor.census`, `presumedThings`,
+  `presumptionClasses`, `writerReach`): the join meets them: VEIL-24 lists each with its cause and door in PART 25.
+  VEIL-23 says about 315,000: it takes the R3 cure's return, then hands over.
+  TITLES-3 (08:55): GERON WITHDRAWN ON ITS OBJECTION, THE CHAIR'S RULING REVERSED FOR THE EVIDENCE: the word names a
+  sex and no female form is attested for the office: the ground on which aqsaqal was refused: the greek elders
+  stay "Elder"; Huehue and Ilama stand as an attested pair; Pencenedl kept; ITS CLASSIFIER CENSUS: all 127 words of
+  the table through `roleToCategory`, `classOfRole` and `holdsOffice`: none misclassed (Magister and Archmagister
+  read magic and sit in the arcane row). Its table is committed at a2d985282; `tests/lint` whole running.
