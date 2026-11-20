@@ -577,8 +577,14 @@ function holderHouseLineOf(npc) {
 // prints index 0. The ledger notes the chosen wording only (the quiet gate of `people/goals.js`): index 0 is already noted
 // with its row.
 
-/** A list entry that is a service, a right or a trade, not a good that goes out or is bought in ("Transit trade", "Ship passage"). */
-const NOT_A_GOOD = /\b(?:trade|passage|rights?|services?|intelligence|maps|logistics|access|tolls?|labou?r|transport|hire)\b/i;
+/**
+ * A list entry that is a service, a right, a trade or a work, not a good that goes out or is bought in ("Transit trade", "Ship
+ * passage", "Ship construction", "Spellcasting (minor)"). Widened (PEOPLE-1 B1b, the integrator's 2026-11-20 unit) by the export
+ * and import names their data homes can hand over (`supplyChainData.js` chain outputs and dependencies, `resourceData.js`
+ * tradeGoods, `computeActiveChains.js`'s service export labels and import labels, `economicState.js`'s stage-5 labels): each
+ * that names a service or a work. A contraband or forged good is refused too (a crime fact, the chair's (e)).
+ */
+export const NOT_A_GOOD = /\b(?:trade|passage|rights?|services?|intelligence|maps|logistics|access|tolls?|labou?r|transport|hire|escort(?:ed)?|warding|assay|resupply|handling|disputes|minting|killing|trials|tourism|revenue|divination|scrying|servants|clearance|education|ferries|gambling|games|combat|storage|protection|hiring|hospitality|bypass|brokerage|lodging|messages|entertainment|identification|market|taxes|meals|care|training|treatment|relay|extraction|levy|exhibitions|music|song|news|information|performances|pilgrim(?:age)?|relief|proclamations|publishing|quarantine|keeping|research|safe houses|sanctuary|construction|spellcasting|stabling|control|surgery|teleportation|enchantments?|maintenance|contraband|forged|fencing|stolen)\b/i;
 /** @param {unknown} name @returns {string} the name filled as a `{resource}` (`people/goals.js :: resourceFill`), '' unless it names a good */
 const goodOf = (name) => (typeof name === 'string' && !NOT_A_GOOD.test(name) ? resourceFill(name) : '');
 /** The first good of the export list (a name, or a record's `name`). @param {unknown} list */

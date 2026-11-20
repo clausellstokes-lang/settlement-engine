@@ -104,7 +104,7 @@
     },
     {
       "id": "government__stable__dominant.position.7",
-      "text": "Holds the seat while {export} goes out and coin comes back; there is room to act.",
+      "text": "Holds the seat while the place sends out {export} and coin comes back; there is room to act.",
       "needs": [
         "export good"
       ],
@@ -638,7 +638,7 @@
     },
     {
       "id": "government__economic_stress__dominant.position.1",
-      "text": "Holds the seat while money is short, in a place that lives on what its {export} fetches.",
+      "text": "Holds the seat while money is short, in a place that lives on what it gets for its {export}.",
       "needs": [
         "export good"
       ],
