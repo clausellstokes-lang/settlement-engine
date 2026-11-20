@@ -25,6 +25,7 @@ PEOPLE-1 keeps B1 (structuralPosition, then activeConstraint: `npcStructure.js`,
 - 18:16 the chair APPROVED THE FOUNDING (its own unit after B3; M5's 20 cures; chair's rewordings; the `market` kind): brief `briefs/P2-B4-founding-BUILD.md` (5d34c083a), NOT YET CUT.
 - 18:46 the chair named the goals commit: the working line 8196e5712 MERGED into my lane at d28a9bb15 (clean; src/tests identical to the line). B3 CUT at d85b18ae3 on lane/people-2-b3-2026-11-20 (worktree scratchpad/wt-b3). B2 told to MERGE d28a9bb15 into its branch before its cure (the goals landing moved relationshipArchetypes.js, the pipeline, presumedThings, pool-dominance).
 - The chair's record read me at 232,996 tokens at 18:20, climbing ~100k/hour; PEOPLE-3 is written past 330,000.
+- 19:59 the chair, TWO RULINGS: (1) PEOPLE-1 COMPACTED; when "PEOPLE <commit>" (B1) comes, I RE-CHECK BY GREP against the merged data file before building on it: closingGap's seven lines; atTable and worthBuying never on the governing seat; the `level` flag; clergyAhead 2 struck; plural goods and services in the three re-cut fills. (2) FIRST PAINT, EVERY LANE: at B2's, B3's and B4's merges and before any "<unit> <commit>" line: ONE `npm run build` at the tip, then `VERIFY_DIST=1` on `tests/build/vendorPdfLazy.test.js` and `tests/build/generationWorkerLazy.test.js` through the mutex; first paint's three figures beside 8196e5712's (1,177,668 raw / 374,676 gzip / 314,472 Brotli) and the worker's (2,617,934) in the line. A rise is cured on the lane: an eager file declares an atom BY NAME; the code that answers it is imported only on the lazy side (DEPTH-3 put 2.1 MB into first paint via `factVocabulary.js` / `registeredWords.js` / `factLayers.js` through a new facts module; no lint sees it). Relayed to B2 and B3.
 
 ## Builders in flight
 - B2 (powers: openings, codas, relations, second tranche, factionStanding F2/F3): lane/people-2-b2-2026-11-20, worktree scratchpad/wt-b2. Owed before the merge, to the chair: the pipeline line, the factionDynamics line with its function, every factionStanding.js line touched, worthBuying's count on the seat.
@@ -32,10 +33,10 @@ PEOPLE-1 keeps B1 (structuralPosition, then activeConstraint: `npcStructure.js`,
 - B1/B1b stay PEOPLE-1's until it sends "PEOPLE-PART <commit>, HANDED OVER"; then their merges are mine.
 
 ## How a merge is taken (each unit)
-Push the builder's branch; read its diff ONCE line by line; send the chair the owed lines BEFORE merging; re-run its red (plant/restore) and its green list through `sh scripts/gate-mutex.sh --run --` read by `sh scripts/gate-tail.sh`; two trees (`docs/chair/2026-11-20/content/tools/confinement/trees.mjs`); lighting census by its door (`LIGHTING_CENSUS_REFREEZE`, tests/lint/sovereigntyLightingContract.walker.test.js) and wiring census (`scripts/wiring-census.mjs`); merge (a MERGE of the builder's branch into my lane); push; send "PEOPLE <field> <commit>".
+Push the builder's branch; read its diff ONCE line by line; send the chair the owed lines BEFORE merging; re-run its red (plant/restore) and its green list through `sh scripts/gate-mutex.sh --run --` read by `sh scripts/gate-tail.sh`; two trees (`docs/chair/2026-11-20/content/tools/confinement/trees.mjs`); lighting census by its door (`LIGHTING_CENSUS_REFREEZE`, tests/lint/sovereigntyLightingContract.walker.test.js) and wiring census (`scripts/wiring-census.mjs`); FIRST PAINT (the 19:59 ruling: `npm run build`, `VERIFY_DIST=1` on the two lazy tests, figures beside 8196e5712's); merge (a MERGE of the builder's branch into my lane); push; send "PEOPLE <field> <commit>".
 
 ## Next
 1. B2 returns: take its merge as above; then cut B4 (founding) on my lane's tip.
 2. B3 returns: take its merge as above.
-3. "PEOPLE-PART" from PEOPLE-1: take B1/B1b's merges.
+3. "PEOPLE-PART" from PEOPLE-1: take B1/B1b's merges; on "PEOPLE <commit>" re-check the 19:59 list by grep first.
 4. Owner's file at the end: every new sentence beside the one it replaces, measured before/after by size.
