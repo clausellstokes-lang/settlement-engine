@@ -85,6 +85,18 @@ parts of the whole check (at the close).
   notch toward yes: if a campaign runs, pair the software with a printed book of towns it generated, and settle the AI
   tag first. THE SLOT (the intake rule): a side-by-side of fresh generated towns against what a chatbot gives for one
   prompt rides THE EIGHTH READ after the deploy, sooner on the owner's word.
+- **2026-11-20, about 00:13 UTC, the owner (verbatim):** "regarding kickstarter, what about the towninator?" ANSWERED
+  the same turn: first that the chair did not know it and was looking it up; then, from search summaries of its
+  campaign page, Kicktraq and Geeknative (the pages themselves could not be opened from this session): The Towninator
+  (Andreas Barbesgaard, Hexgaard; "a character sheet for your town": a rules PDF and one-page sheets, not software)
+  raised about DKK 36,000 (about 5,000 dollars) from 364 backers against a DKK 2,800 goal, 2023-01-15 to 2023-01-30,
+  entry pledge DKK 50; its first attempt a year earlier was cancelled at about a quarter of its goal with 105
+  backers; a free version on Gumroad had gathered its reviews in between. A CORRECTION SAID TO THE OWNER BY NAME: the
+  live check's "no campaign for a settlement generator was found, funded or failed" was a miss (this is one of each;
+  the search was framed around software). WHAT IT CHANGES: it backs the order recommended (free first, real users and
+  reviews, then a campaign) and lowers the estimate of the money (a few hundred backers and single-digit thousands
+  for a digital-only campaign by one maker; the 100,000-dollar results came with print): a campaign as a launch
+  event with a low goal, yes; as a way to fund development, not alone.
 
 ## 2. Rulings of this chair (each vetoable by the owner)
 
@@ -108,6 +120,16 @@ parts of the whole check (at the close).
 - **SV4: NO TIER NAME IN A FILE THIS CHAIR WRITES.** Prompts and records say "the middle tier at high effort"; the
   session's settings carry the model. (The sub-briefs' Never list already says no model identifier anywhere but the
   trailer.)
+
+- **SV5 (00:14 UTC, 2026-11-20): DRAFT PULL REQUEST #74 IS CARRIED ONTO THE LINE AS A POINT, BEFORE THE DEPLOY.**
+  It is built, pending work (the git fixtures behind one door: a hook's GIT_DIR can no longer reach the real
+  repository; four commits on master's db832c892, never joined), the hazard it closes has written 2,651 "Fixture"
+  commits into master's history and three onto the line, and the owner's order is that everything but the next read
+  lands before the deploy. Seat GIT-DOOR (the middle tier at medium effort: the design is done, the work is to carry
+  it and prove it at the line, which holds about 760 more test files than master). It lands after point 75. Until
+  it lands every seat carries the standing mitigation (never a push with nothing to send; no test run with a
+  `GIT_*` variable in the environment; the author read before every push). The history is not rewritten; S141 (what
+  to do about the "Fixture" commits) is ruled with the other open entries.
 
 ## 3. The queue, in order
 
@@ -144,3 +166,12 @@ parts of the whole check (at the close).
   "00:20", "00:30" UTC) written before the clock was read; three ran ahead of it. All four were written between the
   clock's readings of 00:01 and 00:05 UTC; the labels are corrected in the commit that carries this line (the
   standard's rule 29: an hour is read from the clock in the command that writes it).
+- 00:14 UTC · THE STANDING MITIGATION SENT TO THE FOUR SEATS (00:12 UTC, one message each, delivered): never a push
+  with nothing to send, never one that is not a fast-forward, no test run with a `GIT_*` variable in the
+  environment, the author read before every push; CI-FIT also checks its config after a shard run. A MISS OF MINE:
+  the fifth chair's rule that every prompt carries that line was not in the four prompts; sent twelve minutes after
+  seating, before any seat had pushed.
+- 00:14 UTC · THE CHAIR'S DESK: a read-only helper sorts the 2026-11-15 close's open entries S112 to S147
+  (`docs/chair/2026-11-15/close/VETO-LIST.md` on the line, its short list's Part E) into settled since, a judgement
+  call with a recommendation, or the owner's hand alone; the chair rules from its table. Pull request #74 read (four
+  commits, ten files, test helpers and the push hook only): ruling SV5; the prompt `prompts/GIT-DOOR.txt`.
