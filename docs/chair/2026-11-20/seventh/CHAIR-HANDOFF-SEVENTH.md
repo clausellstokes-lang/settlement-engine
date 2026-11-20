@@ -1190,6 +1190,33 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   HOOK (the owner told): it clears git's hook environment before it runs anything, and a push with nothing to
   send runs nothing.
 
+- **A HOLE IN THE TRADITIONS' SHARED TEXT, FOUND BY THE SECURITY READER AND RULED (2026-11-20, 13:50 UTC; REVIEW-VEIL-13 on
+  "TRAD-SHARE 1f3cdc135", executed; its review's section 3 and `probes/REVIEW-VEIL-13/traddead.probe.jsx`):** the
+  reader's dead-clause skips events whose name holds a FULL held name; migration 212's sweep also withholds an
+  event by a hidden house's BARE form; on 212 the served traditions still recall "the great fire, 2 years ago" for
+  an event the veil removed (16 of 16 reads; the control served and recalled 16 of 16). TRAD-4's FIRST UNIT: the
+  leaf's `heldNamesOf` folds each held name with its bare form BY THE SECURITY LANE'S OWN FOLD (read, never
+  copied), red first by the reader's plant. LOWER, the same unit: a power with no mapped category takes its
+  archetype from its `description`, a field a DM can hide (a DM-made power moved the keeper in 25 of 140 towns;
+  born powers 0 of 140): in the reader's view such a power has no archetype from its description. Then
+  "TRAD-SHARE-2 <commit>" back to the reader. HELD BY THE READER ON 4 TOWNS ONLY: rows equal with every hideable
+  row removed; served rows byte-equal to the client's on the gallery and the link under three veils; a pre-change
+  save serves no rows. NOT DONE BY IT: the import path; the 140-town round trip.
+- **THE SIDES TABLE, THE NAMING RULE RE-STATED ON PAGE-3's STOP (13:50 UTC):** `substituteNames` writes a power's name
+  over only SEVEN template sides, so eight of the chair's eleven `named` rows have no stored name to fill. RULED:
+  {power} FILLS FROM THE ROSTER BY `means` (the ruler: the document's governing power; a power kind only where the
+  document holds EXACTLY ONE of that kind: the reader's test); THE READER NEVER PUTS A NAME WHERE THE STORED SIDE
+  IS THE TEMPLATE'S OWN WORDS unless the row carries `named`; a stored side that already is a power's name is shown
+  as stored under the table's rules 2 to 4, never un-named. The case arm: a fixed generator row may match the case
+  of its own words or of the side it stands for.
+- **S9 IS A POST-PASS (13:50 UTC):** its builder's work moved 40 OTHER cards through the secrets' held set: NOT accepted
+  as a class: the secrets are dealt exactly as today; then, draw-free, a misfit card takes its next admitted line
+  that no card of the town holds; a card that is not a misfit keeps its secret byte for byte.
+- **U4's TWO RED WALKERS (13:50 UTC, to SEAT-4):** the one-line declaration in `factLayers.js` is allowed as a follow-up;
+  `writerReach` IS NOT RE-RECORDED: the holder's read is split so campaign-pdf and world-book import nothing that
+  reaches `cohesionWeave.js`; a re-record only if that is shown impossible, and then it goes to the security
+  reader. The birth callers that pass no config are the birth unit's (CS21, CS22).
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -3821,3 +3848,26 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   `briefs/S7-FOLLOWUP.md`); the line merged into its lane (6cf1e8e89). REVIEW-VEIL-13 told to close TRAD-SHARE's
   read with what it has executed and to keep the rest of its record for R3. NET 12 set for 14:15
   (trig_01JUWeAuDnc3GuERQMTYXNj5, the same trigger, moved and rewritten).
+- 13:53 UTC · THE OWNER'S WORD ON USAGE AT ABOUT 13:46 ("We have a weekly reset so don't mind that": section 1): THE HOLDS ARE LIFTED
+  (PAGE-3 and FRAME-6 told at 13:48; TRAD-4 and SEAT-4 at 13:50); "nothing only in a container" and the two push
+  rules stay. A MEASURING HELPER IS OUT for his question (five merits' base rates among calm towns; a second
+  city's lines seen in a first; the trouble sentence's repeats with and without names): outputs under the
+  scratchpad's `owner-q3/`; THE CHAIR RULES "MERITS OF RULE" (the fortune lane, dark) AND "A TROUBLE SAYS WHY HERE"
+  (the content lane, in place of L1) WHEN IT RETURNS; PAGE-3 holds L1 until then. THIRTEEN MESSAGES READ AT 13:49:
+  GOALS-3: units 4 and 6 ARE CONFINED (its surprise withdrawn: every mover is a pass-one repeat or a refused
+  pairing; `goals/measures/out-of-scope-causes.md` at 76d61618c); builder 7's work pushed
+  (`lane/goals-3-2026-11-20-b7-wip` d3613f2bd; identical already 3, all exhausted floors, before the reserve
+  lines). VEIL-25's relay: R3-CURE-5 at `lane/veil-25-r3c5-wip-2026-11-20` 101fae14d, UNFINISHED (its guard runs
+  and the cost law still going). VEIL-26: its repository read CLEAN after the push hazard. TRAD-4: lane taken;
+  unit 5's brief (c38ba7886; the gloss floor raised to three a pool: not vetoed); the owner's paragraph on the
+  shared page written. FRAME-6: lane taken (ea627441f); THE LINE MERGED WITHOUT A REFUSAL (b1190e092; registers
+  re-taken by their doors; one veil pin proven the line's and re-pinned, unsigned); the owner's sheet still frames
+  63; P1b-F's builder out. FORTUNE-2: `readerShapeResolver`'s red was its own gate's long TMPDIR (the test encodes
+  the temp path into a token: a LATENT FRAGILITY OF THE LINE'S TEST, for the close); U2 and U3 pushed as `-wip`.
+  PAGE-1: S1 and S2 landed green on `lane/page-1-2026-11-20-card` (c03e48972), unmerged; ITS WORDS FILE
+  (`words/PAGE-1-WORDS.md`, f29d22ff9) IS NOT ON ORIGIN YET: THE CHAIR READS IT BEFORE ANY MERGE; it also asks a
+  ruling: the people tab's "N high influence" tally and its dots filter REMOVED (both printed the misread band).
+  PAGE-2's relays: S6 follow-up (`-t1` 532a74fa2), L2 (`-l2-wip` 609c52c5d: 76 lines; 22.9% to 14.2% by its
+  builder), L4 with S9 (`-s-wip` f2957d5be: six importer reds): all UNFINISHED, forwarded to PAGE-3. SEAT-3's
+  relay: U4 at `lane/seat-2026-11-20-u4-wip` (7506bd780; final tip 0fa999bf6 pushing): forwarded to SEAT-4 with
+  the two walkers ruled (section 2). REVIEW-VEIL-13: the TRAD-SHARE verdict pushed; stopped, waiting for R3.
