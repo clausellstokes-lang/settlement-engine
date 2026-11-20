@@ -1,6 +1,6 @@
 # PLACE-1 — hand-back (kept current at every push)
 
-Last written: 2026-11-20T16:31Z Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
+Last written: 2026-11-20T16:34Z Seat: PLACE-1 of the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Prompt: `docs/chair/2026-11-20/seventh/prompts/PLACE-1.txt` on `origin/lane/chair-2026-11-08` (read it whole: it is the assignment). Branch: `lane/place-1-2026-11-20`, cut at 43ab0f5eb (the working line `lane/join-2026-11-14`).
 
 ## How a successor resumes
 1. Read the prompt, then this file, then the briefs in this directory (`BRIEF-*.md`); nothing else is needed.
@@ -26,7 +26,7 @@ eS.activeChains[].entrepotNote               thorp - | hamle 8/12 | villa 13/22 
 | situationDesc | 948acb88e | 0bfd7e7b8 (merged da1579e8c): `situationDesc-MEASURE.md`; after 9/13/11/7/5/7 | sent as da1579e8c | NOT BUILT: the chair, 16:25 UTC: no page prints it (G1); the lines stay as a record | — | — | — |
 | safetyDesc | df3b1f1a8 | running (told 16:2x to prove it prints first, section 0) (builder branch place-1/safetyDesc-measure) | — | — | — |
 | economicDragDesc | — | — | — | — | — |
-| economicViability.dependencies[] + warnings[] | c33953282 | running (place-1/viability-measure; prove-it-prints first) | — | — | — |
+| economicViability.dependencies[] + warnings[] + summary | c33953282 | 50384de85 (merged 6571cf474): NOTHING REPEATED PRINTS (Outlook tab and PDF drop severity `dependency`; the one warning hidden by its title; the pages print their own verdict, not `summary`) | DROPPED, reported | — | — | — |
 | tradeDependencies[].impact | — | — | — | — | — |
 | activeChains[].entrepotNote | — | — | — | — | — |
 
