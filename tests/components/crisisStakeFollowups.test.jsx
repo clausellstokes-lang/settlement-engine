@@ -7,13 +7,20 @@
  *     PDF, inside its own frame: "- **The Religious Authorities** gain: the church gains while the seat struggles."
  *     Before C2B it composed its own opening on the bare leaf with a singular verb: "- **Religious Authorities** gains: …".
  *
- * THIS FILE REDS WHEN the journal prints a Stakes row whose opening is not `stakeOpening`'s.
+ * (b) STORED, AT BIRTH ONLY: the `loses` reason said of a plural power takes the plural possessive by the names lane's own
+ *     helper (`data/people/powerSentenceName.js :: fillAgreement`, the reason's agreement form `{power|its|their} own people…`): "The Merchant
+ *     Guilds lose · their own people feel the crisis first". A singular power keeps "its". A saved town keeps its own
+ *     string: the page reads the record, and there is no read-time rewrite.
+ *
+ * THIS FILE REDS WHEN the journal prints a Stakes row whose opening is not `stakeOpening`'s; when a plural power is born
+ * with "its own people feel the crisis first" or a singular one without it; or when the page rewrites a saved reason.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { STAKE_REASONS } from '../../src/domain/crisis/crisisCast.js';
 import { composeCrisisPage, CRISIS_PAGE_COPY, stakeOpening } from '../../src/domain/crisis/crisisPage.js';
+import { powerVerb } from '../../src/domain/display/powerSentenceName.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -49,5 +56,36 @@ describe('C2B (a): the Foundry journal opens a Stakes row on the page\'s one com
       const { subject, verb } = stakeOpening(k);
       expect(lines, `${k.factionId} ${k.stake}`).toContain(`- **${subject}** ${verb}: ${k.reason}.`);
     }
+  });
+});
+
+/** A born town of B7's pool whose stakes hold two plural powers and one singular power that lose (measured at the base). */
+const LOSES_SEED = 'b7-under_siege-town-1';
+/** The loses reason as a power's own number says it: "its" of one, "their" of many (the helper's choice, read here). @param {string} power */
+const losesSaid = (power) => STAKE_REASONS.loses.replace(/^its\b/, powerVerb(power, 'its', 'their'));
+
+describe('C2B (b): a plural power is born with the plural possessive in its loses reason', () => {
+  it(`${LOSES_SEED}: the Merchant Guilds and the Craft Guilds lose by "their own people"; the singular loser keeps "its"`, () => {
+    const s = generateSettlementPipeline({ settType: 'town', stressType: 'under_siege' }, null, { seed: LOSES_SEED, customContent: {} });
+    const stakes = (Array.isArray(s.stress) ? s.stress : [s.stress]).filter(Boolean).flatMap((/** @type {any} */ e) => e.cast?.stakes || []).filter((/** @type {any} */ k) => k.stake === 'loses');
+    const many = stakes.filter((/** @type {any} */ k) => ['Merchant Guilds', 'Craft Guilds'].includes(k.factionId));
+    const one = stakes.filter((/** @type {any} */ k) => !['Merchant Guilds', 'Craft Guilds'].includes(k.factionId) && k.reason !== STAKE_REASONS.losesSeat);
+    expect(many.map((/** @type {any} */ k) => k.factionId).sort()).toEqual(['Craft Guilds', 'Merchant Guilds']);
+    expect(one.length).toBeGreaterThan(0);
+    for (const k of many) {
+      expectAbsentWithAnchor([k.reason], STAKE_REASONS.loses, losesSaid(k.factionId), `${LOSES_SEED} ${k.factionId}`);
+      expect(k.reason.startsWith('their ')).toBe(true);
+    }
+    for (const k of one) expect(k.reason, k.factionId).toBe(STAKE_REASONS.loses);
+    // the page prints the stored reason after its plural verb: "The Merchant Guilds lose · their own people feel the crisis first"
+    const rows = composeCrisisPage(s, { audience: 'owner' }).flatMap((sec) => sec.stakes).filter((k) => k.factionId === 'Merchant Guilds');
+    expect(rows.map((k) => `${stakeOpening(k).subject} ${stakeOpening(k).verb} · ${k.reason}`)).toEqual([`The Merchant Guilds lose · ${losesSaid('Merchant Guilds')}`]);
+  });
+
+  it('a saved town keeps its own string: no read-time rewrite of a stored "its own people" after a plural power', () => {
+    const saved = { tier: 'town', name: 'Testholm', stress: [{ type: 'under_siege', label: 'Under Siege',
+      cast: { nature: 'military', roles: [], absent: [], levers: [], stakes: [{ factionId: 'Merchant Guilds', stake: 'loses', reason: STAKE_REASONS.loses }] } }] };
+    const rows = composeCrisisPage(/** @type {any} */ (saved), { audience: 'owner' }).flatMap((sec) => sec.stakes);
+    expect(rows.map((k) => k.reason)).toEqual([STAKE_REASONS.loses]);
   });
 });

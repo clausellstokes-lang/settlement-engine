@@ -13,6 +13,7 @@ import {
   STAKE_REASONS, GRASPING_TRAITS, CRISIS_NATURE, catalogFor, castHash, requiredRolesOf,
   deriveLevers, CRISIS_LEVERS, castReasonSentence,
 } from '../../src/domain/crisis/crisisCast.js';
+import { powerVerb } from '../../src/domain/display/powerSentenceName.js';
 import { isLiveInstitution } from '../../src/domain/institutions/institutionRoster.js';
 import { NPC_PERSONALITY_TRAITS } from '../../src/data/npcData.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
@@ -157,7 +158,9 @@ describe('the eleven rules, each over a hand-built town', () => {
     for (const kind of Object.keys(CRISIS_NATURE)) {
       const stakes = deriveStakes(s, kind);
       expect(stakes.map((k) => k.factionId).sort()).toEqual(s.powerStructure.factions.map((f) => f.faction).sort());
-      for (const k of stakes) expect(Object.values(STAKE_REASONS)).toContain(k.reason);
+      // FRAME-6 · C2B (b) (the pin moves): the `loses` reason takes the stake's own power's number at birth ("their own people
+      // feel the crisis first" of a plural power); every other reason is a STAKE_REASONS literal
+      for (const k of stakes) expect([...Object.values(STAKE_REASONS), STAKE_REASONS.loses.replace(/^its\b/, powerVerb(k.factionId, 'its', 'their'))]).toContain(k.reason);
     }
     const famine = deriveStakes(s, 'famine');
     expect(stakeOf(famine, 'Grain Holders')).toBe('gains');
