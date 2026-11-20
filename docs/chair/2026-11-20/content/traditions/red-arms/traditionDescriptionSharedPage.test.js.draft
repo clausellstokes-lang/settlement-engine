@@ -1,0 +1,117 @@
+/**
+ * traditionDescriptionSharedPage.test.js — TRAD-1's born proof for CTR5 (the seventh chair, 2026-11-20).
+ *
+ * THE LAW. A tradition's description composed for a reader who is not the owner names no house, no person and no
+ * power the SERVED document does not hold, and names nothing the veil hides; the owner's page still names its keeper.
+ * The served documents are composed by the security lane's own doors, read and never edited here:
+ *   - the PARTY LINK: `projectShareVeil(toPublicSafe(record), writeShareVeil(null, []))`, the default veil the link fails
+ *     closed to (`lib/gallery.js :: sanitizeDossier`, partyLink, R4 of VEIL-FIX);
+ *   - the GALLERY under the default veil (the same composition for a share the export marked).
+ *
+ * THE ARMS. (1) A born pool of every tier: every name in every reader description stands in the served document.
+ * (2) A born town with a PLANTED hideable house that would keep a rite (its weekly market stamped criminal, the class
+ * X-21e hides whole by default): the owner's page names it; the party link's served document drops the card and the
+ * reader's description names it nowhere — and the reader's description over the OWNER'S raw record (the owner's own page
+ * in player view) does not name it either: the leaf's second wall. (3) A LIT coup: the mirror's owner is a criminal
+ * seat, carried on a full-mode share (deepClone keeps `traditions`); the reader's description drops it.
+ * This file edits no file of the security lane.
+ */
+import { describe, it, expect } from 'vitest';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { deriveFoundingTraditions } from '../../src/domain/traditions/genesis.js';
+import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
+import { projectShareVeil, writeShareVeil } from '../../src/domain/display/galleryVeil.js';
+import { describeTradition } from '../../src/domain/traditions/traditionDescription.js';
+
+const partyLink = (record) => projectShareVeil(toPublicSafe(record), writeShareVeil(null, []));
+
+/** Does the served document hold this exact name as a string value somewhere? */
+const holds = (served, name) => JSON.stringify(served).includes(JSON.stringify(String(name)).slice(1, -1));
+
+const born = (settType, culture, seed) => generateSettlementPipeline(
+  { settType, culture, terrainOverride: 'auto', tradeRouteAccess: 'random_trade', monsterThreat: 'civilized' },
+  null, { seed, customContent: {} },
+);
+
+describe('the shared page names nothing the served document lacks (CTR5)', () => {
+  it('a born pool of every tier: every house, person, power and event a reader description names stands in the party link\'s served document', () => {
+    const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+    let names = 0;
+    const missing = [];
+    for (const [i, tier] of TIERS.entries()) {
+      for (const j of [0, 1, 2]) {
+        const t = born(tier, ['germanic', 'celtic', 'arabic', 'slavic', 'mesoamerican', 'steppe'][(i + j) % 6], `trad-shared-${tier}-${j}`);
+        const served = partyLink(t);
+        for (const rec of [...deriveFoundingTraditions(served), ...deriveFoundingTraditions(t)]) {
+          const d = describeTradition(rec, served, { audience: 'reader' });
+          if (!d) continue;
+          for (const n of [...d.named.houses, ...d.named.persons, ...d.named.powers, ...d.named.events]) {
+            names += 1;
+            if (!holds(served, n)) missing.push(`${t.name}: ${n}`);
+          }
+        }
+      }
+    }
+    expect(names).toBeGreaterThan(50); // the arm reads real names, not an empty pool
+    expect(missing).toEqual([]);
+  }, 60000);
+});
+
+describe('PROVEN BORN: a hideable house that would keep a rite', () => {
+  // A born town whose record holds a weekly market; the market is stamped criminal (the X-21e class the default
+  // veil hides whole). The rite is the town's own market fair, composed as genesis's shape.
+  const t = born('town', 'germanic', 'trad-shared-hideable');
+  const market = (t.institutions || []).find((i) => /^(weekly market|market square)$/i.test(String(i?.name)));
+  const planted = {
+    ...t,
+    institutions: t.institutions.map((i) => (i === market ? { ...i, category: 'Criminal', priorityCategory: 'criminal' } : i)),
+  };
+  const rec = { id: 'tradition.planted.2', coreMotif: { element: 'market', act: 'fair' }, name: 'The Market Fair', foundedYear: 30,
+    ownerKey: null, ownerKind: null, ownerLabel: null, deityRef: null, mutationLog: [] };
+
+  it('the born town holds a market house to plant on (the arm is not vacuous)', () => {
+    expect(market).toBeTruthy();
+  });
+
+  it("the OWNER's page names the house as the rite's keeper", () => {
+    const d = describeTradition(rec, planted, { audience: 'owner' });
+    expect(d.named.houses).toEqual([market.name]);
+  });
+
+  it('the party link\'s served document does not hold the house, and the reader\'s description names it nowhere', () => {
+    const served = partyLink(planted);
+    expect((served.institutions || []).some((i) => i?.name === market.name)).toBe(false);
+    const d = describeTradition(rec, served, { audience: 'reader' });
+    expect(d.named.houses).toEqual([]);
+    expect(d.text.toLowerCase()).not.toContain(String(market.name).toLowerCase());
+  });
+
+  it("the leaf's second wall: a reader composed over the owner's RAW record (the owner's page in player view) does not name it either", () => {
+    const d = describeTradition(rec, planted, { audience: 'reader' });
+    expect(d.named.houses).toEqual([]);
+  });
+});
+
+describe('PROVEN BORN: a lit coup — the mirror\'s owner is a criminal seat', () => {
+  const t = born('city', 'latin', 'trad-shared-coup');
+  const seatless = (t.powerStructure?.factions || []).map((f) => ({ ...f, isGoverning: false }));
+  const coup = {
+    ...t,
+    powerStructure: { ...t.powerStructure, factions: [{ faction: "Thieves' Guild", category: 'criminal', isGoverning: true, power: 40 }, ...seatless.filter((f) => f.category !== 'criminal')] },
+  };
+  const [core] = deriveFoundingTraditions(coup);
+  const lit = { ...core, ownerKey: 'faction:thieves_guild', ownerKind: 'seat', ownerLabel: "Thieves' Guild" };
+  const withMirror = { ...coup, traditions: [lit] };
+
+  it("the owner's page names the seat that keeps the founding rite now", () => {
+    expect(describeTradition(lit, withMirror, { audience: 'owner' }).named.powers).toEqual(["Thieves' Guild"]);
+  });
+
+  it('a full-mode share carries the mirror, and the reader\'s description still drops the criminal owner', () => {
+    const served = toPublicSafe(withMirror, { full: true });
+    expect(Array.isArray(served.traditions)).toBe(true); // the mirror does travel on a full share
+    const d = describeTradition(served.traditions[0], served, { audience: 'reader' });
+    expect(d.named.powers).toEqual([]);
+    expect(d.text).not.toMatch(/Thieves/);
+  });
+});

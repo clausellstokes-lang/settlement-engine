@@ -1,0 +1,278 @@
+/**
+ * domain/traditions/traditionDescription.js — TRAD-1 (the seventh chair, 2026-11-20): THE DESCRIPTION UNDER EACH
+ * TRADITION. `describeTradition(rec, settlement, { audience })` composes two or three plain sentences from THIS town's own
+ * record through the closed table of `data/traditionDescriptionTable.js`:
+ *   S1 WHAT IS DONE   the act's lead and the element's gloss (always).
+ *   S2 WHO KEEPS IT   in play the record's own owner; else a house of a fitting kind (and the person on that house card,
+ *                     under the title the card holds), else a power of the fitting archetype; else nothing.
+ *   S3 WHERE IT COMES FROM — a cause, on the two marked pairings only — else WHO PAYS: the town's income of a fitting
+ *                     kind, by the rank the record holds; else nothing.
+ * Where nothing fits, the description is shorter: S1 alone. Nothing is invented: a clause stands only on a fact the record
+ * holds, and a cause only where the table marks the pairing (CTR2).
+ *
+ * THE AUDIENCE (CTR5) is explicit and FAILS CLOSED to the reader. For a reader who is not the owner the leaf composes
+ * from the document it is handed (on a shared page, the served document) and, as a second wall, never names a house the
+ * gallery veil may hide whole, a criminal or hidden power, or a person whose card's veil bit is not `false`
+ * (people/cardVeil.js, read never re-derived). A hidden power is named for no one: the town does not know it is there.
+ *
+ * PURE, derived at render, nothing stored (CTR4): no draw (a frame is picked by kernel/proseHash.js :: pickVariant on the
+ * record's stable id), no clock, no write, no new key on the town. Genesis is not read here and not changed (CTR3): the
+ * record is the caller's, whichever set the surface already shows.
+ */
+import { pickVariant } from '../../kernel/proseHash.js';
+import { powerNameInProse } from '../display/governanceAccount.js';
+import { institutionHouseLabel } from '../display/institutionDisplayName.js';
+import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
+import { governingFactionOf, nameOf } from '../rulingPower.js';
+import { isHideableHouse, isVeiledPower } from '../people/cardVeil.js';
+import {
+  ELEMENT_GLOSS, ACT_FRAMES, KEEPER_HOUSES, HOUSE_FRAMES, POWER_FRAMES, OWNER_FRAMES, CAUSE_FRAMES, DEAD_EVENT_TYPES,
+  ECONOMY_FIT, INCOME_RANK_WORDS, ECONOMY_FRAMES, ECONOMY_ONLY_FRAMES,
+} from '../../data/traditionDescriptionTable.js';
+
+/** @typedef {import('./genesis.js').TraditionRec} TraditionRec */
+/** @typedef {import('../../data/traditionDescriptionTable.js').TraditionHouseRow} TraditionHouseRow */
+/** @typedef {'owner'|'reader'} TraditionAudience */
+/** @typedef {'seat'|'religious'|'merchantry'|'military'} TraditionPowerWant */
+/** @typedef {Record<string, unknown>} Rec */
+/**
+ * @typedef {Object} TraditionDescription
+ * @property {string} text  the description, two or three sentences, or one (the short form)
+ * @property {{ houses: string[], persons: string[], powers: string[], events: string[] }} named  what the text names, by
+ *   the record's own spelling (a house's raw catalogue name, a card's name, a power's name, an event's name)
+ * @property {{ keeper: 'owner'|'house'|'power'|null, origin: 'cause'|'economy'|null }} parts  which clauses stand
+ */
+
+/** The audiences the leaf composes for; anything else reads as the reader. */
+export const TRADITION_AUDIENCES = Object.freeze(['owner', 'reader']);
+
+const FOUNDING_ELEMENTS = new Set(['founding', 'first-landing', 'charter']);
+const DEVOTIONAL_ACTS = new Set(['offering', 'vigil']);
+const DEVOTIONAL_ELEMENTS = new Set(['the-dead', 'stars']);
+const DEAD_EVENTS = new Set(DEAD_EVENT_TYPES);
+
+/** @param {unknown} v @returns {Rec} */
+const recordOf = (v) => (v && typeof v === 'object' && !Array.isArray(v) ? /** @type {Rec} */ (v) : {});
+/** @param {unknown} v @returns {unknown[]} */
+const listOf = (v) => (Array.isArray(v) ? v : []);
+/** @param {unknown} v @returns {string} */
+const str = (v) => (typeof v === 'string' ? v : '');
+/** @param {string} s @returns {string} */
+const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
+/** @param {string} template @param {Record<string, string>} slots @returns {string} */
+const fill = (template, slots) => template.replace(/\{(\w+)\}/g, (_, k) => slots[k] ?? '');
+/** @param {ReadonlyArray<string>} pool @param {string} key @returns {string} */
+const pick = (pool, key) => pickVariant(/** @type {string[]} */ ([...pool]), key) ?? pool[0];
+
+/**
+ * The power archetype a rite wants: the engine's own owner table (politics.js :: desiredArchetype, design §6), less its
+ * fallback (the seat for everything else): a description names no seat it has no fit for.
+ * @param {Rec} rec @param {string} element @param {string} act @param {boolean} core @returns {TraditionPowerWant|null}
+ */
+function wantedPower(rec, element, act, core) {
+  if (core || FOUNDING_ELEMENTS.has(element)) return 'seat';
+  if (str(rec.deityRef) || DEVOTIONAL_ACTS.has(act) || DEVOTIONAL_ELEMENTS.has(element)) return 'religious';
+  if (act === 'fair' || element === 'market') return 'merchantry';
+  if (act === 'contest') return 'military';
+  return null;
+}
+
+/** A house in a sentence, with its article. @param {Rec} inst @param {string|null} prose @returns {string} */
+function houseInProse(inst, prose) {
+  if (prose) return prose;
+  const label = institutionHouseLabel(inst);
+  if (!label) return '';
+  const words = label.split(' ');
+  const proper = words.length > 1 && words.every((w) => /^[A-Z]/.test(w));
+  return `the ${proper ? label : label[0].toLowerCase() + label.slice(1)}`;
+}
+
+/**
+ * The first house the town holds of a fitting kind, in the rows' order.
+ * @param {ReadonlyArray<TraditionHouseRow>|undefined} rows @param {Rec} settlement @param {boolean} reader
+ * @returns {{ inst: Rec, name: string, row: TraditionHouseRow, prose: string }|null}
+ */
+function houseFor(rows, settlement, reader) {
+  const houses = listOf(settlement.institutions).map(recordOf).filter((i) => str(i.name) && !/^access to /i.test(str(i.name)));
+  for (const row of rows || []) {
+    const re = new RegExp(row.match, 'i');
+    const inst = houses.find((i) => re.test(str(i.name)) && !(reader && isHideableHouse(i)));
+    if (inst) {
+      const prose = houseInProse(inst, row.prose);
+      if (prose) return { inst, name: str(inst.name), row, prose };
+    }
+  }
+  return null;
+}
+
+/**
+ * The person who presides: the first card whose house is this one and which carries the house's title, as the card holds it.
+ * @param {string} houseName @param {Rec} settlement @param {boolean} reader @returns {{ name: string, title: string }|null}
+ */
+function presiderOf(houseName, settlement, reader) {
+  for (const card of listOf(settlement.npcs).map(recordOf)) {
+    const house = recordOf(card.institution);
+    if (str(house.key) !== houseName || !str(house.title) || !str(card.name)) continue;
+    if (reader && house.veiled !== false) continue; // the card's own veil bit (people/cardVeil.js): fail-closed
+    return { name: str(card.name), title: str(house.title) };
+  }
+  return null;
+}
+
+/**
+ * The power of the wanted archetype: the seat, or the strongest power of the kind. A hidden power is never named; a
+ * criminal one never for a reader. The contest takes the town's Guard or watch only, never a war party.
+ * @param {TraditionPowerWant} want @param {Rec} settlement @param {boolean} reader @returns {string|null}
+ */
+function powerFor(want, settlement, reader) {
+  /** @param {Rec} f @returns {boolean} */
+  const barred = (f) => (reader ? isVeiledPower(f) : f.hidden === true);
+  if (want === 'seat') {
+    const seat = recordOf(governingFactionOf(/** @type {Parameters<typeof governingFactionOf>[0]} */ (settlement)));
+    const name = str(nameOf(/** @type {Parameters<typeof nameOf>[0]} */ (seat)));
+    return name && !barred(seat) ? name : null;
+  }
+  /** @param {Rec} f @returns {boolean} */
+  const fits = (f) => {
+    const a = factionArchetype(f);
+    if (want === 'merchantry') return a === FACTION_ARCHETYPES.MERCHANT || a === FACTION_ARCHETYPES.CRAFT;
+    if (want === 'military') return a === FACTION_ARCHETYPES.MILITARY && /guard|watch/i.test(str(nameOf(/** @type {Parameters<typeof nameOf>[0]} */ (f))));
+    return a === FACTION_ARCHETYPES.RELIGIOUS;
+  };
+  const candidates = listOf(recordOf(settlement.powerStructure).factions).map(recordOf).filter((f) => !barred(f) && fits(f));
+  /** @param {Rec} f @returns {string} */
+  const n = (f) => str(nameOf(/** @type {Parameters<typeof nameOf>[0]} */ (f)));
+  const best = candidates.sort((x, y) => (Number(y.power) || 0) - (Number(x.power) || 0) || (n(x) < n(y) ? -1 : n(x) > n(y) ? 1 : 0))[0];
+  return best && n(best) ? n(best) : null;
+}
+
+/**
+ * The record's own owner, in play, as the document the leaf was handed holds it. A power must stand among the town's
+ * powers by that exact name (and, for a reader, not veiled; for anyone, not hidden); a house among its houses (and, for a
+ * reader, not hideable). Otherwise the owner is not named.
+ * @param {Rec} rec @param {Rec} settlement @param {boolean} reader @returns {{ prose: string, name: string, power: boolean }|null}
+ */
+function ownerFor(rec, settlement, reader) {
+  const label = str(rec.ownerLabel);
+  if (!label) return null;
+  const kind = str(rec.ownerKind);
+  if (kind === 'faction' || kind === 'seat') {
+    const power = listOf(recordOf(settlement.powerStructure).factions).map(recordOf)
+      .find((f) => str(nameOf(/** @type {Parameters<typeof nameOf>[0]} */ (f))) === label);
+    if (!power || power.hidden === true || (reader && isVeiledPower(power))) return null;
+    const prose = powerNameInProse(label);
+    return prose ? { prose, name: label, power: true } : null;
+  }
+  if (kind === 'institution') {
+    const inst = listOf(settlement.institutions).map(recordOf).find((i) => str(i.name) === label);
+    if (!inst || (reader && isHideableHouse(inst))) return null;
+    const prose = houseInProse(inst, null);
+    return prose ? { prose, name: label, power: false } : null;
+  }
+  return null;
+}
+
+/**
+ * Describe one tradition for one audience. Null for a DM's authored custom tradition (the DM's truth stands as authored),
+ * for a motif the table does not know, and for no record or no town.
+ * @param {TraditionRec|Rec|null|undefined} recIn
+ * @param {Rec|null|undefined} settlementIn
+ * @param {{ audience?: TraditionAudience|string }} [options]  the audience; anything but 'owner' reads as the reader
+ * @returns {TraditionDescription|null}
+ */
+export function describeTradition(recIn, settlementIn, options = {}) {
+  if (!recIn || typeof recIn !== 'object' || !settlementIn || typeof settlementIn !== 'object') return null;
+  const rec = recordOf(recIn);
+  const settlement = recordOf(settlementIn);
+  const id = str(rec.id) || str(rec.name);
+  if (id.startsWith('custom:')) return null;
+  const motif = recordOf(rec.coreMotif);
+  const element = str(motif.element);
+  const act = str(motif.act);
+  const gloss = /** @type {Record<string, ReadonlyArray<string>>} */ (ELEMENT_GLOSS)[element];
+  const leads = ACT_FRAMES[act];
+  if (!gloss || !leads) return null;
+
+  const reader = options.audience !== 'owner';
+  const core = /\.0$/.test(id) && rec.foundedYear === 1;
+  const town = str(settlement.name) || str(recordOf(settlement.identity).name);
+  /** @type {TraditionDescription['named']} */
+  const named = { houses: [], persons: [], powers: [], events: [] };
+  /** @type {TraditionDescription['parts']} */
+  const parts = { keeper: null, origin: null };
+
+  // S1 WHAT IS DONE
+  const lead = pickVariant(/** @type {import('../../data/traditionDescriptionTable.js').TraditionActFrame[]} */ ([...leads]), `${id}#done`) ?? leads[0];
+  const s1 = `${lead.lead} that ${gloss[lead.plural ? 1 : 0]}.`;
+
+  // S2 WHO KEEPS IT
+  let s2 = '';
+  const want = wantedPower(rec, element, act, core);
+  const owner = ownerFor(rec, settlement, reader);
+  if (owner) {
+    s2 = fill(pick(OWNER_FRAMES, `${id}#owner`), { owner: owner.prose });
+    parts.keeper = 'owner';
+    (owner.power ? named.powers : named.houses).push(owner.name);
+  } else if (!str(rec.ownerLabel)) {
+    const house = want === 'seat' ? null
+      : (houseFor(KEEPER_HOUSES.element[element], settlement, reader) || houseFor(KEEPER_HOUSES.act[act], settlement, reader));
+    if (house) {
+      const person = presiderOf(house.name, settlement, reader);
+      const power = !person && house.row.kind === 'place' && want ? powerFor(want, settlement, reader) : null;
+      const key = house.row.kind === 'body' ? (person ? 'bodyPerson' : 'body') : (person ? 'placePerson' : (power ? 'placePower' : 'place'));
+      s2 = fill(pick(HOUSE_FRAMES[key], `${id}#house`), {
+        house: house.prose, person: person ? person.name : '', title: person ? person.title : '', power: power ? powerNameInProse(power) : '',
+      });
+      parts.keeper = 'house';
+      named.houses.push(house.name);
+      if (person) named.persons.push(person.name);
+      if (power) named.powers.push(power);
+    } else if (want) {
+      const power = powerFor(want, settlement, reader);
+      if (power) {
+        s2 = fill(pick(POWER_FRAMES[want], `${id}#power`), { power: powerNameInProse(power) });
+        parts.keeper = 'power';
+        named.powers.push(power);
+      }
+    }
+  }
+
+  // S3 WHERE IT COMES FROM (a cause, on a marked pairing only); else WHO PAYS (the economy)
+  let s3 = '';
+  const history = recordOf(settlement.history);
+  const founding = recordOf(history.founding);
+  const age = Number(founding.age);
+  if (core && town && Number.isFinite(age) && age > 0) {
+    const by = str(founding.foundedBy);
+    s3 = fill(pick(by ? CAUSE_FRAMES.founding : CAUSE_FRAMES.foundingBare, `${id}#origin`), { town, Town: town, age: String(age), foundedBy: by });
+    parts.origin = 'cause';
+  } else if (element === 'the-dead') {
+    const event = listOf(history.historicalEvents).map(recordOf)
+      .filter((e) => DEAD_EVENTS.has(str(e.templateType)) && str(e.name) && Number.isFinite(Number(e.yearsAgo)) && Number(e.yearsAgo) >= 1)
+      .sort((a, b) => Number(a.yearsAgo) - Number(b.yearsAgo))[0];
+    if (event && town) {
+      const years = Number(event.yearsAgo);
+      s3 = fill(pick(CAUSE_FRAMES.dead, `${id}#origin`), {
+        event: str(event.name).replace(/^The /, 'the '), when: years === 1 ? 'a year ago' : `${years} years ago`, Town: town,
+      });
+      parts.origin = 'cause';
+      named.events.push(str(event.name));
+    }
+  }
+  if (!s3 && town) {
+    const incomes = listOf(recordOf(settlement.economicState).incomeSources).map(recordOf);
+    const fits = [...(ECONOMY_FIT[element] || []), ...(ECONOMY_FIT[act] || [])];
+    for (const fit of fits) {
+      const rank = incomes.findIndex((i) => str(i.source) === fit.source);
+      if (rank < 0 || rank >= INCOME_RANK_WORDS.length) continue;
+      const only = incomes.length === 1;
+      s3 = fill(pick(only ? ECONOMY_ONLY_FRAMES : ECONOMY_FRAMES, `${id}#economy`), {
+        Income: cap(fit.prose), is: fit.plural ? 'are' : 'is', town, rank: INCOME_RANK_WORDS[rank],
+      });
+      parts.origin = 'economy';
+      break;
+    }
+  }
+
+  return { text: [s1, s2, s3].filter(Boolean).join(' '), named, parts };
+}
