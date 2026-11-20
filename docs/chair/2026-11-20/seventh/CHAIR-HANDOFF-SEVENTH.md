@@ -1126,6 +1126,25 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   without that power. FOR THE JOIN: this table and the session sheet's `sideArchetypes.js` must agree (a parity
   test on the joined tree).
 
+- **THE WIND-DOWN ORDER UNDER THE USAGE WARNING (2026-11-20, 13:31 to 13:33 UTC; sent to every seat; THE OWNER'S ANSWER
+  REPLACES IT WHEN IT COMES):** nothing stays only in a container (every branch pushed, unfinished included, ending
+  `-wip`; hand-backs current at every push, written for a session on another account); no new measuring helpers;
+  one builder at a time; nearest-to-done first. FIRST: GOALS (the cure and the reserve lines, then "GOALS
+  <commit>", landed the hour it arrives). THEN, each lane's nearest piece: the veil's R3 and nothing else; the
+  session sheet's P1b-F, C2 and the six sheets; the sides table and S6 and K's TRIAL result; the display lane's S1
+  to S5; the traditions' unit 5 then unit 6's samples; fortune's U2 and U3; the seat's U4 read and merged. HELD
+  UNTIL THE CHAIR'S WORD: the content lane's L1, L2, L4 with S9 and K's build (their builders' work pushed as it
+  stands); the session sheet's P4a, P1, P2, P3a, P3b, P4b; the seat's units after U4 beyond a brief; any new seat
+  except a successor a lane cannot do without.
+- **THE GOALS RESERVE LINES READ (13:32 UTC; `GOALS-3-PERSONALITY-RESERVE-DRAFT.md` at e6ca13524; 24 PERSONALITY cells of 4
+  lines, 13 exhausted in their busiest town, three over by one: cause B's three):** 16 lines, each read beside two
+  of its cell: 15 APPROVED AS WRITTEN; line 7 REWORDED to "Keep company this season with someone who is grieving."
+  They are RESERVE ONLY (the draw's modulus unchanged; every born town's goals identical except the repeaters).
+- **TRAD-4 DOES NOT MERGE THE LINE (13:32 UTC; its own check refused `git merge` of 43ab0f5eb; nobody's permissions are
+  changed):** the lane stays on 1f3cdc135's base; THE CHAIR JOINS THE LINE AT ITS LANDING; unit 5 writes no pronoun
+  after a power's name, so it needs nothing of point 82; the totality of the dead's-cause kind phrases becomes a
+  COMMITTED arm in unit 5 (unit 4b proved it by a scratch test, deleted).
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -1162,6 +1181,12 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   with everything on (a thorp and a metropolis signed-in among them). THE THREE RESULTS THAT CHANGE THE CHAIR'S
   ANSWER, said to him: trouble sentences repeating above about 15% in three forges; rulers in trouble with no cause
   in the place's own record; a sentence still repeated inside one town.
+
+- ASKED OF THE OWNER AT 13:33 UTC ON 2026-11-20, UNANSWERED: the percentage of the weekly limit used (he can see it; the
+  chair cannot), and his choice: (1) LET THE WORK PAUSE CLEANLY AND RESUME ON 2026-11-24 15:00 UTC (the chair's
+  recommendation unless the four days matter to him: no allowance left this week finishes everything; the veil
+  alone has several stages and a final read left), or (2) EXTRA USAGE OR ANOTHER ACCOUNT, and every lane at full
+  pace. Until he answers the chair works toward (1).
 
 ## 5. Since this file was written (newest last; each hour read from the clock when written)
 
@@ -3737,3 +3762,17 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   RECORD: 882,085 of 1,000,000 (its context is summarised again at about 901,600: this file is its memory). THE
   WORKING LINE: `lane/join-2026-11-14` at 43ab0f5eb (point 82); a CI reading helper waits on its run. NET 11 is
   armed for 13:38 (trig_01JUWeAuDnc3GuERQMTYXNj5): its pass is this entry; re-arm 45 minutes on.
+- 13:33 UTC · THE USAGE RULE SENT TO THIRTEEN SESSIONS (13:31 to 13:33): the ten working seats and the three relays that hold a
+  builder's local work (PAGE-2: `s`, `l2`, S6's follow-up; SEAT-3: U4; VEIL-25: R3-CURE-5): each builder commits
+  where it stands and its branch is pushed, `-wip` where unfinished. THE OWNER TOLD AND ASKED (section 4). ANSWERS
+  SO FAR: VEIL-26: nothing only in its container (lane at c0f12935a); ITS FINDING: ON ONE PLAIN PUSH OF A LANE
+  BRANCH (2cfea785d, about 13:05) `.husky/pre-push` TOOK ITS NON-LANE PATH AND RAN `npm run check` (the whole
+  suite; killed at twenty minutes; the push itself landed; a dead mutex lock removed); WHY IT FELL THROUGH THE
+  `lane/*` TEST IS NOT ESTABLISHED: a thing for the close, and a reason no seat waits blind on a push. SEAT-4:
+  clean, holding for U4. GOALS-3: the line merged at d3937c3f8 (identical 7, mirror 80, a template more than twice
+  22, tie index 1,131, the pairing 0); builder 7 out on the cure (brief 45d9faefd), its work pushed as
+  `lane/goals-3-2026-11-20-b7-wip`; the sixteen reserve lines read (section 2). PAGE-3: the sides table read once,
+  red and green re-run, held unmerged for the chair's six changes (a builder on them, brief
+  `briefs/S7-FOLLOWUP.md`); the line merged into its lane (6cf1e8e89). REVIEW-VEIL-13 told to close TRAD-SHARE's
+  read with what it has executed and to keep the rest of its record for R3. NET 12 set for 14:15
+  (trig_01JUWeAuDnc3GuERQMTYXNj5, the same trigger, moved and rewritten).
