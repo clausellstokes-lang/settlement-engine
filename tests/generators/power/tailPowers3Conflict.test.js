@@ -38,16 +38,22 @@ describe("TAIL-POWERS-3 · batch 2: a conflict line about the seat's rival needs
   const CURED = /** @type {Record<string, [string, string]>} */ ({
     'r2r-city-18': ['The commander-prelate has declared a heresy investigation', 'A noble house has begun recruiting its own soldiers'],
     'r2r-metropolis-29': ['The commander-prelate has declared a heresy investigation', 'The merchant class is outbuying noble landholdings'],
-    'r2r-city-20': ['The church is demanding veto power over council appointments', 'Ecclesiastical Council has been debating market levies'],
+    // BUILD-CONFLICT (DEPTH-2), the mixed pick (the chair's rule of 17:18 UTC): r2r-city-20 -> r2r-city-199 (an Ecclesiastical Council's own seat, religion's
+    // influence 94: the church's demand is refused and the levies line, picked, prints)
+    'r2r-city-199': ['The church is demanding veto power over council appointments', 'Ecclesiastical Council has been debating market levies'],
     'r2r-hamlet-41': ['The church is demanding veto power over council appointments', 'The most devout households want a say over who may trade and when'],
     // BUILD-CONFLICT (DEPTH-2, 2026-11-20): the levies rung picks its quarrel by keyed hash; r2r-city-6 -> r2r-town-89 (a
     // Military Council's own seat, its strong military presence printed: the commanders' rung yields to the levies, picked)
-    'r2r-town-89': ['The military commanders are pushing for expanded authority over civilian courts', 'Military Council has been debating market levies'],
+    // under the mixed pick (the chair's rule of 17:18 UTC): -89 -> r2r-city-135 (a Military City Council's own seat, "Tense (militarised)", as -6's)
+    'r2r-city-135': ['The military commanders are pushing for expanded authority over civilian courts', 'Military City Council has been debating market levies'],
     'r2r-metropolis-53': ['The military commanders are pushing for expanded authority over civilian courts', 'The church is demanding veto power over council appointments'],
     // BUILD-CONFLICT (DEPTH-2): the military rung picks its quarrel by keyed hash (MILITARY_COURT, the chair's word of 16:22 UTC);
     // r2r-metropolis-3 -> r2r-metropolis-57 (the heresy flag on, an arcane house, a Democratic assembly's seat and no religious
     // power of weight: the hedge wizard's line is refused and the commanders' line, picked, prints)
-    'r2r-metropolis-57': ['A hedge wizard was dragged before the ecclesiastical court', 'The military commanders are pushing for expanded authority over civilian courts'],
+    // under the mixed pick (the chair's rule of 17:18 UTC): NOT RE-PICKED. 3 of 1,400 cities and metropolises searched (r2r-city-0..699, r2r-metropolis-0..699)
+    // hold the condition and reach the military rung, and none picks the commanders' line; so the ORIGINAL seed returns, the
+    // same refused line under the same condition, its anchor the line its military rung now prints (MILITARY_COURT ma2)
+    'r2r-metropolis-3': ['A hedge wizard was dragged before the ecclesiastical court', 'The garrison wants the say over who comes in at the gates'],
     'r2r-hamlet-55': ['The priest has summoned someone before the church court', 'The most devout households want a say over who may trade and when'],
   });
   for (const [seed, [was, now]] of Object.entries(CURED)) {
@@ -61,7 +67,7 @@ describe("TAIL-POWERS-3 · batch 2: a conflict line about the seat's rival needs
   /** KEEP: each line where its rival stands. seed -> the line that still prints */
   const KEEP = /** @type {Record<string, string>} */ ({
     'r2r-town-54': 'The church is demanding veto power over council appointments', // a church of its own; a Feudal Appointee holds the seat
-    'r2r-town-326': 'The military commanders are pushing for expanded authority over civilian courts', // a Guild Council holds the seat (BUILD-CONFLICT, DEPTH-2: was r2r-town-15, whose military rung now picks another line of its pool)
+    'r2r-town-77': 'The military commanders are pushing for expanded authority over civilian courts', // a Church Council holds the seat (BUILD-CONFLICT, DEPTH-2: was r2r-town-15's Guild Council, then -326; under the mixed pick (the chair's rule of 17:18 UTC) no town of r2r-town-0..399 with a Guild seat picks it)
     'r2r-metropolis-28': 'A hedge wizard was dragged before the ecclesiastical court', // a High Theocratic Council holds the seat
   });
   for (const [seed, keep] of Object.entries(KEEP)) {
