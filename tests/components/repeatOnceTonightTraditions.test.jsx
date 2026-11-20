@@ -45,9 +45,14 @@ describe('F2: a sentence printed once per tab', () => {
   // reads a real birth and plants the duplicate an edit can make: the second voiced person takes the first's goal. The
   // seed is the lowest whose sheet voices two non-cast wants at the integration tip AND at each of the nine wave-lane
   // tips (11, 27 at all ten). The assertions are unchanged.
+  // soak1k-11 KEPT, HELD BY IDENTITY (FRAME-4 · B6 at the lane tip 4cee64757; the chair's ruling: the pinned calm sheet
+  // is a town with NO trouble of weight, CF11). Measured: green as it stands; troubleOfWeight null (its one high conflict,
+  // Grand Merchant Senate and Craft Guilds, is no tension's two sides), so even the owner's sheet casts no frame and
+  // equals today's sheet. The one assertion added says so: if a later change frames this town, it reds there, by name.
   it('soak1k-11, one goal planted on two people: the Tonight sheet prints the shared want once, and the second person names the first', async () => {
     await ensureLaws();
     const born = normalizeSettlement(birth(11).settlement);
+    expect(composeTonightSheet(born, { audience: 'owner' }).frame, 'soak1k-11 holds no trouble of weight (CF11): the owner\'s sheet casts no frame').toBeUndefined();
     const voiced = composeTonightSheet(born).people.filter((p) => printsAsWant(p) && p.line && p.why !== 'cast');
     expect(voiced.length, 'two people voice a want of their own on the born sheet').toBeGreaterThanOrEqual(2);
     expect(voiced[0].line, 'a birth carries no goal twice (REVIEW-INTAKE-4)').not.toBe(voiced[1].line);
