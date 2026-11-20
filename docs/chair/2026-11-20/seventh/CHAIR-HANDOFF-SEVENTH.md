@@ -1090,3 +1090,24 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   `$veil.at` withheld (no usable time: withheld); `name` and `tier` read from the frozen copy on the dossier and
   the lists. FOR THE OWNER'S LIST: a shared town's chronicle loses its entries about things that are gone (unless
   the narrowing holds). The reader has it for FINAL.
+- 03:29 UTC · **VEIL-21's SIDE BUILDER (its message of 03:27 UTC; `lane/veil-21-side-2026-11-20`).** (1) The ruin-filter
+  walker: the seat's MEASURE corrects the chair's number: the pin counts the files that READ `.institutions`, so
+  the obsolete exempt row is deleted and the pin STAYS 117 (12 of 12; at 116 it reds 11 of 12). (2) The import
+  keeps the SERVED prosperity band (VR28): red 2 of 4, green 9 of 9; a document with no config keeps it too. (3) The
+  ruined-house import measure owed with VR25's exemption: 116 variants on 9 born towns, 0 mis-draws caused by the
+  ruin. (4) THE OBSERVED-SHAPE SCANNER: the corpus's door exists but the corpus is hash-bound to its schema-45
+  baseline; a served-config pass means a governed schema-46 rung (it would also move 14 frozen rows). **RULED: THE
+  EXPLAINED-WRITER ROWS NOW** (one per finding, naming the writer and the measure 36 of 36; the violations' count
+  back to 1); **THE GOVERNED RUNG IS DEBT for the first round after the deploy.** R2 is still building; the seat's
+  estimate about 175,000 tokens.
+  **SEC-GRANTS-2 (03:29 UTC): 213 AND ITS REGISTERS PUSHED (d0119f048); the composition with the veil lane
+  (d5323b8b8) proven: four histories identical, the flows identical, the registers 300 of 300; `tests/security`
+  whole in the composition running. A FINDING ON THE DEFAULT PRIVILEGES (a proposal; nothing built), EXECUTED:**
+  after `alter default privileges in schema public revoke execute on functions from public, anon, authenticated` a
+  NEW function is STILL executable by anon and authenticated: per-schema default privileges are added to the
+  global ones and cannot subtract from them, and PUBLIC's EXECUTE on functions is the global built-in; the global
+  form (`alter default privileges revoke execute on functions from public`, no schema) closes it. 41 of today's 92
+  visitor-callable functions hold their grant only through the default: a default-deny migration must grant those
+  explicitly. THE CHAIR'S PLAN FOR THE OWNER: 213's walker already reds on any new function left open and not on
+  its list, so the deploy does not need default-deny; default-deny is a second lock, proposed as its own migration
+  AFTER the deploy (the owner's decision: it changes how every later migration is written).
