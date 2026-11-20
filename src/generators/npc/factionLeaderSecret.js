@@ -13,7 +13,7 @@ import { classOfRole } from '../../domain/roles/roleClass.js';
 import { random as rng } from '../../kernel/rngContext.js';
 import { drawRefusingHeldThrough } from '../hookVariety.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
-import { institutionCategoryFlags } from '../roleCategory.js';
+import { institutionCategoryFlags } from '../roleCategory.js'; import { TITLE_LINE_DECLARATIONS, TITLE_SECRETS } from '../../data/people/titleSecretsPresentations.js'; // F5-NARROW (PAGE-8): a narrow card's title rows and their declarations, one line so no cited line moves
 
 const STRESS_SECRET_BOOSTS = Object.freeze({
   under_siege: { military: 3, political: 2, personal: 1.5, criminal: 0.5 },
@@ -221,11 +221,11 @@ const GUILD_REWRITTEN_WORDS = /thieves|guild/i;
  * None left: the card keeps its draw (counted). No draw: a card that is no misfit keeps its secret byte for byte, and no
  * other card's draw reads the result. Mutates the moved cards' `secret`; returns the receipt.
  * @param {Array<Record<string, any>> | null | undefined} cards the town's whole cast
- * @param {{ carry?: (text: string) => string }} [options]
+ * @param {{ carry?: (text: string) => string, narrow?: boolean }} [options] `narrow: true`: F5-NARROW's walk (`settleNarrowVenalSecrets`) instead
  * @returns {{ misfits: number, moved: number, kept: number }}
  */
 export function settleMisfitSecrets(cards, options = {}) {
-  const carry = typeof options.carry === 'function' ? options.carry : (/** @type {string} */ text) => text;
+  const carry = typeof options.carry === 'function' ? options.carry : (/** @type {string} */ text) => text; if (options.narrow === true) return settleNarrowVenalSecrets(cards, carry); // F5-NARROW (PAGE-8): the narrow walk, called after the last temperament writer
   const receipt = { misfits: 0, moved: 0, kept: 0 };
   if (!Array.isArray(cards)) return receipt;
   const held = new Set(cards.map((c) => c?.secret?.what).filter((w) => typeof w === 'string').map((w) => w.trim()));
@@ -263,3 +263,89 @@ export function settleMisfitSecrets(cards, options = {}) {
  * @template T @param {T} text @returns {T}
  */
 export const withoutMarketWords = (text) => /** @type {T} */ (/** @type {unknown} */ (typeof text !== 'string' ? text : text.replace("the very merchants they're supposed to serve", "the very households they're supposed to serve").replace('the merchants have been keeping records', 'the households have been keeping records')));
+
+/**
+ * F5'S VENAL LIST (PAGE-1's measure, origin `lane/page-1-2026-11-20-card`, `docs/chair/2026-11-20/content/page/measures/C/f5.mjs`
+ * `venalRe`, verbatim): crime for gain, money taken, goods moved, records sold or forged. Read by F5-NARROW's walk only.
+ */
+const F5_VENAL_WORDS = /embezzl|fencing|payroll|brib|protection scheme|for a fee|contraband|skim|selling|\bsells\b|betting against|exploitative labour|suppress a finding|been paid|paid to|is paid|for a share|pocket|keeping back|on the side|smuggl|overcharg|charges the families|cut of|kickback|monthly payment|for a purse|who pays? for it|families can pay|taking offerings|give generously|for money|for gold|for coin/i;
+/** The narrow four (the chair's ruling of 18:26): the temperaments that cannot be bought. */
+const NARROW_TEMPERAMENTS = new Set(['principled', 'honest', 'incorruptible', 'plain-dealing']);
+
+/**
+ * A row a narrow card may walk to (F5-NARROW): S9's admission (`admitsSecretRow`: the row's holder tag names the card's class;
+ * a principled card refuses the incorruptible words) AND no word of F5's venal list AND no word the card's own temperament
+ * denies (`npcData.js :: SECRETS_DENIED_BY_TEMPERAMENT`, read, not edited: so the temperament yield, which ran before the walk,
+ * would not fire on the new row) AND no guild word (S9's) AND, for a title row, no declaration (`TITLE_LINE_DECLARATIONS`: a
+ * row that holds in some towns only is never walked to). The printed (carried) text is read. Pure.
+ * @param {Readonly<{ secret: string, stakes: string }>} row @param {string | null} holderClass (null for a title row: no tag) @param {string} temperament
+ * @param {boolean} titleRow @param {(text: string) => string} carry
+ * @returns {boolean}
+ */
+function admitsNarrowRow(row, holderClass, temperament, titleRow, carry) {
+  const text = carry(row.secret);
+  if (!admitsSecretRow({ secret: text }, holderClass, temperament) || !admitsSecretRow(row, holderClass, temperament)) return false;
+  if (F5_VENAL_WORDS.test(text) || GUILD_REWRITTEN_WORDS.test(`${row.secret} ${row.stakes}`)) return false;
+  const denied = Object.hasOwn(SECRETS_DENIED_BY_TEMPERAMENT, temperament) ? /** @type {Record<string, RegExp>} */ (SECRETS_DENIED_BY_TEMPERAMENT)[temperament] : null;
+  if (denied && denied.test(text)) return false;
+  return !(titleRow && Object.hasOwn(TITLE_LINE_DECLARATIONS.secret, row.secret));
+}
+
+/**
+ * The narrow card's own pool: the pool its secret was dealt from (`secretSourceOf`, S9's note) where its printed secret is a
+ * row of it (or the row's carried form); else its title's own rows (`TITLE_SECRETS`, by its house's title, then its own) where
+ * the secret is one of them; else null (a frame naming another person, an overlay's or a crisis's text, a rare row).
+ * @param {Record<string, any>} card @param {string} what @param {(text: string) => string} carry
+ * @returns {{ rows: ReadonlyArray<Readonly<{ secret: string, stakes: string }>>, at: number, holderClass: string | null, titleRow: boolean } | null}
+ */
+function narrowPoolOf(card, what, carry) {
+  const source = secretSourceOf(card);
+  if (source) {
+    const at = source.rows.findIndex((r) => r.secret === what || carry(r.secret) === what);
+    if (at >= 0) return { rows: source.rows, at, holderClass: source.holderClass, titleRow: false };
+  }
+  for (const title of [card.institution?.title, card.title]) {
+    if (typeof title !== 'string' || !Object.hasOwn(TITLE_SECRETS, title)) continue;
+    const rows = /** @type {Record<string, ReadonlyArray<Readonly<{ secret: string, stakes: string }>>>} */ (TITLE_SECRETS)[title];
+    const at = rows.findIndex((r) => r.secret === what || carry(r.secret) === what);
+    if (at >= 0) return { rows, at, holderClass: null, titleRow: true };
+  }
+  return null;
+}
+
+/**
+ * F5-NARROW (PAGE-8, 2026-11-20; docs/chair/2026-11-20/content/page/briefs/F5-NARROW.md, the chair's ruling of 18:26): A PERSON
+ * WHO CANNOT BE BOUGHT KEEPS NO BOUGHT SECRET. Run ONCE per town AFTER the last writer of `personality.dominant`
+ * (`castPowers.js :: rankPowers`' temperament yield; `narrativeGenerator.js :: enrichNpcCoherence`, appended to its
+ * rankPowers line, through `settleMisfitSecrets(cards, { carry, narrow: true })`), so the temperament it reads is the one the
+ * record ends with. A card whose temperament is one of the narrow four and whose printed secret is on F5's venal list takes,
+ * draw-free, the next row of its own pool (`narrowPoolOf`) that it is admitted to (`admitsNarrowRow`) and that no card of the
+ * town holds: S9's walk (row order, wrapping; the town's carry; a card whose presentation was drawn from its secret's words
+ * keeps it). None left: it keeps its draw (counted). No draw; a card that is not narrow and venal keeps its secret byte for
+ * byte; no temperament is written. Mutates the moved cards' `secret`; returns the receipt (`misfits`: the narrow venal cards).
+ * @param {Array<Record<string, any>> | null | undefined} cards the town's whole cast @param {(text: string) => string} carry
+ * @returns {{ misfits: number, moved: number, kept: number }}
+ */
+export function settleNarrowVenalSecrets(cards, carry) {
+  const receipt = { misfits: 0, moved: 0, kept: 0 };
+  if (!Array.isArray(cards)) return receipt;
+  const held = new Set(cards.map((c) => c?.secret?.what).filter((w) => typeof w === 'string').map((w) => w.trim()));
+  for (const card of cards) {
+    const temperament = card?.personality?.dominant;
+    const what = card?.secret?.what;
+    if (typeof temperament !== 'string' || !NARROW_TEMPERAMENTS.has(temperament) || typeof what !== 'string' || !F5_VENAL_WORDS.test(what)) continue;
+    receipt.misfits += 1;
+    const pool = SECRET_BOUND_PRESENTATIONS.has(JSON.stringify(card.presentation ?? null)) ? null : narrowPoolOf(card, what, carry);
+    let next = null;
+    for (let k = 1; pool && k < pool.rows.length && !next; k += 1) {
+      const r = pool.rows[(pool.at + k) % pool.rows.length];
+      if (admitsNarrowRow(r, pool.holderClass, temperament, pool.titleRow, carry) && !held.has(carry(r.secret).trim())) next = r;
+    }
+    if (!next) { receipt.kept += 1; continue; }
+    held.delete(what.trim());
+    held.add(carry(next.secret).trim());
+    card.secret = { what: carry(next.secret), stakes: carry(next.stakes) };
+    receipt.moved += 1;
+  }
+  return receipt;
+}
