@@ -1,4 +1,4 @@
-# FORTUNE-3 hand-back (kept current at every push; last written 2026-11-20 19:38:47 UTC by `date -u`)
+# FORTUNE-3 hand-back (kept current at every push; last written 2026-11-20 19:48:32 UTC by `date -u`)
 
 For a successor: this file and the briefs (`briefs/COMMON.md`, `U4.md`, `U5-BUILD.md`) are all you need.
 The chair is session_019yED1SUxGVHyjQnoqoFvQ8 (send_message, Claude Code Remote MCP server).
@@ -90,11 +90,9 @@ The merits depend on the capture rung (a condition: none counts at `corrupted` o
 
 THE WORKLIST (owed by this lane before its last message; each item a file or a list in this folder):
 - (a) the veil key: below (the security reader's sentence); the chair has told the veil lane.
-- (b) the tests and registers pinning law 1 as the default: NOT YET LISTED (start: `grep -rlnE "DEFAULT_FORTUNE_LAW_VERSION|NEW_SETTLEMENT_FORTUNE_LAW_VERSION|_fortuneLawVersion" tests`).
-- (c) a saved town keeps its law: NOT YET ANSWERED (find the test that births under 1, saves/loads, and re-reads under the
-  default flipped; else say none).
-- (d) the surfaces the lit law adds to a public or shared read: NOT YET LISTED (the score and band by own size; the
-  merits' sentences (U5b); F2's twin line (enrol in the census)).
+- (b) LISTED in `LIGHTING-WORKLIST.md` (the dial mocked to 2, files run lit and dark): 74 tests in 24 files red at the flip (36 the law's own "no marker = law 1" arms, 38 in a sample of 20 born-pin files; ~429 more files call `birthConfig`, not run); 11 stay green but change meaning (the golden master never passes `birthConfig`: it keeps pinning law 1, nothing pins law 2); 7 registers to re-take.
+- (c) ANSWERED: at the READER a missing marker reads 1, never the dial (the wiring test's arm 5, dial lit). BUT NO TEST proves a saved town keeps its law through load, section regen and re-derive with the dial lit (template: `livingContentLawWiring.test.js`); and after the flip "Apply Saved Configuration & Regenerate" and the full reroll turn a saved law-1 town into law 2 (the surveyor's settlement commit saves an unminted preview: those stay law 1). OWED before the flip.
+- (d) LISTED: 7 public or shared surfaces; `toPublicSafe` strips nothing under `breakdown` (a `merits` key reaches every share and the PDF: safe only because the 19:33 ruling makes merits rung-independent); F2's twin line to enrol.
 - The final measure's HEADLINE: the lit world on a visitor's pool (the who-rules lane's recipe); dark the control.
 
 ## 5. BEFORE LIGHTING (the chair, 18:38 UTC; also for the security reader at the join)
