@@ -99,3 +99,16 @@ Accepted: the built projection, parity 0, the key on the place's name. NOW:
 5. Re-run parity and the projection THROUGH THE BUILT FUNCTION; give mixed, three cities, and merchants_rule's rate.
 6. GREEN: tests/lint green but for ledgerCitationIntegrity (red at base) and the two censuses (PAGE-7's refreezes).
 (The cap's five third wordings come later as lines; leave the arrays as they are.)
+
+## ADDENDUM 4, 17:33 UTC (the chair, 17:32): ROUND 3, THE LAST BEFORE THE MERGE
+1. LEAVE: append `house:thieves_guild` and `house:smuggling` to the house family's `atoms` in
+   `src/domain/facts/registeredWords.js`; nothing else in that file.
+2. ATOMS GRANTED: `house:caravans` (causeHouses.js; a catalogue house) and `entrepot` (NEW home `src/domain/facts/entrepot.js`
+   over `economicState.isEntrepot`, named in factsOf), each with its `factLayers.js` row and its registeredWords wiring as the
+   walkers require; presumedThings and presumptionClasses green BY DECLARATION.
+3. LAYER 1 for causeHouses stands if the layers walker is green. "Hideable" is not a layer: the criminal houses are hideable
+   by `src/domain/people/cardVeil.js :: isHideableHouse`; the cause data's `hideable` list carries it.
+4. MERCHANTS_RULE: `solePowerNameOf` takes the GOVERNING power for merchants_rule; the exactly-one test stays for every
+   other fill. Red first. Print the sentence on the 13 debt towns that trade governs, one line each (seed: sentence), to
+   `measures/page-7/merchants13.out.txt`.
+5. The cap is accepted as is (no sixth plain). tests/lint green but for ledgerCitationIntegrity and the two censuses.
