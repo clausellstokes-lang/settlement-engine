@@ -1,0 +1,114 @@
+tree: ab01d4cc5 + the cure (MagicTab.jsx:138 chromeFontSize -> proseFontSize), pins not yet re-taken
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 30041 after 31 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-a73c735c63d168c2c
+
+ ❯ tests/components/dossierPhoneFloorAllViews.test.jsx (2 tests | 2 failed) 22126ms
+     × every line in every tab clears its floor (prose 14px, chrome 12px) at phone width 14105ms
+     × desktop is untouched — the SAME walk, pinned to DESKTOP_BASELINE 7053ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/components/dossierPhoneFloorAllViews.test.jsx > THE PHONE FLOORS — every dossier view > every line in every tab clears its floor (prose 14px, chrome 12px) at phone width
+AssertionError: 
+MOBILE_BASELINE mismatch. Each row counts the lines this view gave a reader at 375px, split by the class each was judged as, with the two sub-floor counts that must stay zero.
+A number that FELL means a surface stopped rendering or a fold stopped opening — which "zero violations" cannot see. A number that ROSE means new lines; say so.
+Deliberate? Re-measure, re-record MOBILE_BASELINE in the same car, and name the cause in the commit message.
+: expected { 'Summary/Overview': { …(4) }, …(19) } to deeply equal { 'Summary/Overview': { …(4) }, …(19) }
+
+- Expected
++ Received
+
+@@ -41,11 +41,11 @@
+      "sub12": 0,
+      "sub14": 0,
+    },
+    "Systems/Magic": {
+      "chrome": 2,
+-     "prose": 1,
++     "prose": 2,
+      "sub12": 0,
+      "sub14": 1,
+    },
+    "Systems/Outlook": {
+      "chrome": 0,
+@@ -89,11 +89,11 @@
+      "sub12": 0,
+      "sub14": 2,
+    },
+    "World/NPCs": {
+      "chrome": 1,
+-     "prose": 283,
++     "prose": 292,
+      "sub12": 0,
+      "sub14": 0,
+    },
+    "World/Relationships": {
+      "chrome": 36,
+
+ ❯ tests/components/dossierPhoneFloorAllViews.test.jsx:959:7
+    957|       + 'Deliberate? Re-measure, re-record MOBILE_BASELINE in the same…
+    958|       + 'the commit message.\n',
+    959|     ).toEqual(MOBILE_BASELINE);
+       |       ^
+    960|   }, 240_000);
+    961|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/components/dossierPhoneFloorAllViews.test.jsx > THE PHONE FLOORS — every dossier view > desktop is untouched — the SAME walk, pinned to DESKTOP_BASELINE
+AssertionError: 
+DESKTOP_BASELINE mismatch. Each number counts lines rendered ABOVE the breakpoint, so a diff means an FS token, a fold or a surface moved on desktop — which proseFontSize/chromeFontSize (identity when mobile===false) must never do.
+Deliberate? Re-measure, re-record DESKTOP_BASELINE in the same car, and name the moved token in the commit message.
+: expected { 'Summary/Overview': { …(2) }, …(19) } to deeply equal { 'Summary/Overview': { …(2) }, …(19) }
+
+- Expected
++ Received
+
+@@ -26,12 +26,12 @@
+    "Systems/Institutions": {
+      "measured": 72,
+      "sub14": 72,
+    },
+    "Systems/Magic": {
+-     "measured": 3,
+-     "sub14": 3,
++     "measured": 4,
++     "sub14": 4,
+    },
+    "Systems/Outlook": {
+      "measured": 2,
+      "sub14": 2,
+    },
+@@ -58,12 +58,12 @@
+    "World/History": {
+      "measured": 18,
+      "sub14": 18,
+    },
+    "World/NPCs": {
+-     "measured": 284,
+-     "sub14": 284,
++     "measured": 293,
++     "sub14": 293,
+    },
+    "World/Relationships": {
+      "measured": 176,
+      "sub14": 174,
+    },
+
+ ❯ tests/components/dossierPhoneFloorAllViews.test.jsx:975:7
+    973|       + `Deliberate? Re-measure, re-record DESKTOP_BASELINE in the sam…
+    974|       + `moved token in the commit message.\n`,
+    975|     ).toEqual(DESKTOP_BASELINE);
+       |       ^
+    976|
+    977|     // The floors are a PHONE rule, so the desktop walk must still be …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  17:24:00
+   Duration  29.31s (transform 7.10s, setup 59ms, import 6.45s, tests 22.13s, environment 556ms)
+
