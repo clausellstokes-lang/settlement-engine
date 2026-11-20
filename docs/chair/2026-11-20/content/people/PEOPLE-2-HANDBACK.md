@@ -1,4 +1,4 @@
-# PEOPLE-2 hand-back (kept current at every push; last written 2026-11-20T18:04Z)
+# PEOPLE-2 hand-back (kept current at every push; last written 2026-11-20T18:54Z)
 
 Seat: PEOPLE-2 of the seventh chair (chair session_019yED1SUxGVHyjQnoqoFvQ8; this seat session_019yED1QfbBhtLaDuWfGxc42). Assignment: `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PEOPLE-2.txt` (it binds `PEOPLE-1.txt` with my names). Branch: `lane/people-2-2026-11-20`, started on c71e403f4, fast-forwarded to PEOPLE-1's docs tip 2783260be (src identical to the working line 43ab0f5eb). Builder branches: `lane/people-2-<unit>-2026-11-20`.
 
@@ -21,8 +21,21 @@ PEOPLE-1 keeps B1 (structuralPosition, then activeConstraint: `npcStructure.js`,
 - M5 returned: a8dd55a0f, picked as 72ddf15a4 (PROPOSAL-founding.md §0; the rite lives only on lane/trad-4 7955e5304; 20 founder lines reworded for grammar). Sent "PEOPLE-LINES founding 72ddf15a4" 17:58.
 - B2 CUT at a37dde2ce on lane/people-2-b2-2026-11-20 (worktree scratchpad/wt-b2), with five ruled wordings HELD OUT (closingGap 1-2, arcaneInShadow 2-3, clergyAhead 2) until the chair rules; relay the ruling to the builder by message.
 
+- 18:14 the chair APPROVED M6's 78 INTO B2 with changes (F1 closingGap: today's index 0 and ruled 1-2 never eligible, seven new; F2 the writer's cure in `power/factionStanding.js`: the governing seat at rank 2 prints neither atTable nor worthBuying; F3 the computed `level` as an eligibility flag; F4 clergyAhead 2 struck; noblesAhead etc. reworded). Verbatim in the B2 brief (806b60f21); relayed to the B2 builder.
+- 18:16 the chair APPROVED THE FOUNDING (its own unit after B3; M5's 20 cures; chair's rewordings; the `market` kind): brief `briefs/P2-B4-founding-BUILD.md` (5d34c083a), NOT YET CUT.
+- 18:46 the chair named the goals commit: the working line 8196e5712 MERGED into my lane at d28a9bb15 (clean; src/tests identical to the line). B3 CUT at d85b18ae3 on lane/people-2-b3-2026-11-20 (worktree scratchpad/wt-b3). B2 told to MERGE d28a9bb15 into its branch before its cure (the goals landing moved relationshipArchetypes.js, the pipeline, presumedThings, pool-dominance).
+- The chair's record read me at 232,996 tokens at 18:20, climbing ~100k/hour; PEOPLE-3 is written past 330,000.
+
+## Builders in flight
+- B2 (powers: openings, codas, relations, second tranche, factionStanding F2/F3): lane/people-2-b2-2026-11-20, worktree scratchpad/wt-b2. Owed before the merge, to the chair: the pipeline line, the factionDynamics line with its function, every factionStanding.js line touched, worthBuying's count on the seat.
+- B3 (settlementReason): lane/people-2-b3-2026-11-20, worktree scratchpad/wt-b3. Owed: the return line and the handed argument, each on its own line.
+- B1/B1b stay PEOPLE-1's until it sends "PEOPLE-PART <commit>, HANDED OVER"; then their merges are mine.
+
+## How a merge is taken (each unit)
+Push the builder's branch; read its diff ONCE line by line; send the chair the owed lines BEFORE merging; re-run its red (plant/restore) and its green list through `sh scripts/gate-mutex.sh --run --` read by `sh scripts/gate-tail.sh`; two trees (`docs/chair/2026-11-20/content/tools/confinement/trees.mjs`); lighting census by its door (`LIGHTING_CENSUS_REFREEZE`, tests/lint/sovereigntyLightingContract.walker.test.js) and wiring census (`scripts/wiring-census.mjs`); merge (a MERGE of the builder's branch into my lane); push; send "PEOPLE <field> <commit>".
+
 ## Next
-1. THE LANE IS YOURS: merge `lane/kernel-mix-2026-11-20` (bd42d63c7) into my lane; pick M6's scripts; cut B2 and B3 (two builders, path-disjoint; one heavy gate at a time).
-2. M5 returns: push its branch, pick its commit, read section 0, send "PEOPLE-LINES founding <commit>".
-3. M6 returns: push, pick, read, send "PEOPLE-LINES power-tranche2 <commit>".
-4. At each merge: read the diff once, re-run red and green, two trees, lighting and wiring censuses by their doors, then "PEOPLE <field> <commit>"; the pipeline line and the factionDynamics line to the chair BEFORE the merge.
+1. B2 returns: take its merge as above; then cut B4 (founding) on my lane's tip.
+2. B3 returns: take its merge as above.
+3. "PEOPLE-PART" from PEOPLE-1: take B1/B1b's merges.
+4. Owner's file at the end: every new sentence beside the one it replaces, measured before/after by size.
