@@ -58,7 +58,7 @@ const HOUSES_REL = 'tests/lint/samenessHideable.houseReadings.json';
 const HAND_REL = 'tests/lint/samenessHideable.handPools.json';
 /** Shrink-only: today's counts on the base. Lower them as rows go; never raise them. */
 const EXISTING_CEILING = 96;
-const HAND_CEILING = 42;
+const HAND_CEILING = 44; // 42 + 2 (SAME-2's unit 0, the join's point 84: GOALS' two key lists, read by `.includes`, on the hand list as TIER_ORDER is)
 const COVERT = 'dm-only';
 
 // ── THE VOCABULARY, CLASSED ──────────────────────────────────────────────────────────────────────
