@@ -73,6 +73,19 @@ The two conditional tests (`seatLawWiring` "4. GENERATION_LAWS.seat is a WIRED r
 
 (Titles as the log prints them, without the describe path.)
 
+## THE SHARDS (the 793-file census set; each through the mutex, shared tier, `--maxWorkers=2`, its own task and log)
+
+| shard | tree | files | tests | failed | skipped | wall |
+|---|---|---|---|---|---|---|
+| flip-p1-1-of-2 | flipped | 309 | 1,540 | 4 (3 files) | 4 | 18 min (22:01:43Z →) |
+
+Reds of flip-p1-1-of-2 (unsorted until the control):
+- `tests/generators/bar3People2Rows.test.js`: "r2s-famine-village-3: not "decisions taken by Military/Guard…"; what prints instead" (its liveness anchor 'decisions taken by The Guard' is gone from the born record) and "KEEP r2r-village-24: "decisions taken by Elder Council…" still prints".
+- `tests/domain/tonightOwnGoal.test.js`: "the three lines the reader read are gone, and the cards' own goals print in their place" (a born card's goal line reads undefined).
+- `tests/generators/people/seatKeeperContender.test.js`: "the contender keeps its people: the keeper of rvf-succession_void-town-4 stays a member of Landed Gentry and heads it no longer; a lord leads it" (the keeper heads a contender: expected 1 not to be 1).
+
+Per-file count lines of the shards: `census-shard-counts.txt`.
+
 ## The one command
 
 `sh docs/chair/2026-11-20/content/seat/flip/census.sh all <cut> <flipped dir> <unflipped dir> <out dir> [<N>]`. Its steps can also be run one at a time: `run`, `sets`, `shard`, `control`, `lists`.
