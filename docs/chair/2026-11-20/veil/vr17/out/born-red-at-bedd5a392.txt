@@ -1,0 +1,36 @@
+# the born test (tests/security/galleryVeilSignalCopies.pglite.test.js, as committed) at the base's bytes bedd5a392 (git archive), 2026-11-20T01:12Z
+     × server-veil-town-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it 95214ms
+     × server-veil-town-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it 78880ms
+     × server-veil-city-2 (current's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it 175562ms
+     × server-veil-city-2 (master's stored shape): every family grouping shut alone, every copying surface, no derived block; the control draws it 170542ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  1 failed (1)
+      Tests  4 failed | 1 passed (5)
+
+# the offences: the first message per failed test, then each test's list
+AssertionError: block:defense.criminalStructure SHUT, the gallery page, civility-masked draws: Systems/Defense :: Criminal structure: Organized syndicate
+AssertionError: block:defense.criminalStructure SHUT, the gallery page, civility-masked draws: Systems/Defense :: Criminal structure: Organized syndicate
++   "block:defense.criminalStructure SHUT, the gallery page, civility-masked draws: Systems/Defense :: Criminal structure: Organized syndicate",
++   "block:defense.criminalStructure SHUT, the gallery page, civility-masked draws: Systems/Defense :: Underworld: Corrupt Council",
++   "block:defense.criminalStructure SHUT, the party link, civility-masked draws: Systems/Defense :: Criminal structure: Organized syndicate",
++   "block:defense.criminalStructure SHUT, the party link, civility-masked draws: Systems/Defense :: Underworld: Corrupt Council",
++   "block:defense.criminalStructure SHUT, the campaign map member draws: Systems/Defense :: Criminal structure: Organized syndicate",
++   "block:defense.criminalStructure SHUT, the campaign map member draws: Systems/Defense :: Underworld: Corrupt Council",
++   "block:defense.criminalStructure SHUT, a structuredClone of the page model draws: Systems/Defense :: Criminal structure: Organized syndicate",
++   "block:defense.criminalStructure SHUT, a structuredClone of the page model draws: Systems/Defense :: Underworld: Corrupt Council",
++   "block:defense.criminalStructure SHUT, a JSON round trip of the page model draws: Systems/Defense :: Criminal structure: Organized syndicate",
++   "block:defense.criminalStructure SHUT, a JSON round trip of the page model draws: Systems/Defense :: Underworld: Corrupt Council",
++   "block:defense.criminalStructure SHUT, a spread of the page model draws: Systems/Defense :: Criminal structure: Organized syndicate",
++   "block:defense.criminalStructure SHUT, a spread of the page model draws: Systems/Defense :: Underworld: Corrupt Council",
++   "block:defense.criminalStructure SHUT, the gallery page, civility-masked draws: Systems/Defense :: Criminal structure: Organized syndicate",
++   "block:defense.criminalStructure SHUT, the gallery page, civility-masked draws: Systems/Defense :: One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts
++   "block:defense.criminalStructure SHUT, the party link, civility-masked draws: Systems/Defense :: Criminal structure: Organized syndicate",
++   "block:defense.criminalStructure SHUT, the party link, civility-masked draws: Systems/Defense :: One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts d
++   "block:defense.criminalStructure SHUT, the campaign map member draws: Systems/Defense :: Criminal structure: Organized syndicate",
++   "block:defense.criminalStructure SHUT, the campaign map member draws: Systems/Defense :: One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down rand
++   "block:defense.criminalStructure SHUT, a structuredClone of the page model draws: Systems/Defense :: Criminal structure: Organized syndicate",
++   "block:defense.criminalStructure SHUT, a structuredClone of the page model draws: Systems/Defense :: One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it pu
++   "block:defense.criminalStructure SHUT, a JSON round trip of the page model draws: Systems/Defense :: Criminal structure: Organized syndicate",
++   "block:defense.criminalStructure SHUT, a JSON round trip of the page model draws: Systems/Defense :: One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it pu
++   "block:defense.criminalStructure SHUT, a spread of the page model draws: Systems/Defense :: Criminal structure: Organized syndicate",
++   "block:defense.criminalStructure SHUT, a spread of the page model draws: Systems/Defense :: One criminal ring decides what crime is allowed here. Its rules are predictable and it can be bargained with; it puts down r

@@ -829,11 +829,44 @@ export function veilGroupingsOf(settlement) {
 }
 
 /**
- * Is a grouping veiled on this projected settlement? (For renderers of derived blocks.)
- * @param {unknown} settlement @param {string} address @returns {boolean}
+ * THE SHUT GROUPING'S SIGNAL SURVIVES A COPY (VEIL-VR17; the sixth chair's ruling VR17, 2026-11-19, vetoable by the
+ * owner). The list above lives beside the OBJECT, so a copy of the page model loses it: measured at bedd5a392, the
+ * gallery page and the party link whenever the civility mask rewrites one string (gallery.js :: sanitizeDossier ->
+ * publicSafe.js :: veilPublicPayload -> civility.js :: veilDeep rebuilds the object), the campaign map's member
+ * (get_gallery_map sends no list), and any clone. So a grouping whose block a renderer DERIVES from facts the veil
+ * keeps names, here, the evidence IN THE DATA that it is OPEN: the keys its remover deletes and the generator always
+ * writes. Present, the grouping was not shut; absent, it was, or the page cannot show it was not. The evidence is the
+ * served data itself (211's applier and GROUPING_REMOVERS delete the same keys, so the server's document and the
+ * twin's agree), so every copy keeps it BY CONSTRUCTION, no key is added to any payload or record, and a visitor reads
+ * nothing the response did not already hold. Read on a NON-OWNER page only (isVeiled's `publicDossier`): an owner's
+ * own record is drawn as before. A renderer of a derived block reads isVeiled with an address that has a row here
+ * (tests/lint/veilCopySites.walker.test.js).
+ * @type {Readonly<Record<string, (s: Rec) => boolean>>}
  */
-export function isVeiled(settlement, address) {
-  return veilGroupingsOf(settlement).includes(address);
+export const GROUPING_OPEN_EVIDENCE = Object.freeze({
+  // GROUPING_REMOVERS['block:defense.criminalStructure'] deletes these two keys (211 deletes the same pair);
+  // generators/safetyProfile.js returns both, arrays, on every town.
+  'block:defense.criminalStructure': (s) => {
+    const sp = recAt(recAt(s, 'economicState') || {}, 'safetyProfile');
+    return !!sp && Array.isArray(sp.criminalInstitutions) && Array.isArray(sp.crimeTypes);
+  },
+});
+
+/**
+ * Is a grouping veiled on this projected settlement? (For renderers of derived blocks.) On a non-owner page
+ * (`publicDossier`), a grouping with a GROUPING_OPEN_EVIDENCE row is also veiled wherever the page model does not
+ * prove it open, so a copy that lost the list above still withholds (VEIL-VR17). WHERE THE VEIL CANNOT BE SURE, IT
+ * WITHHOLDS.
+ * @param {unknown} settlement @param {string} address
+ * @param {{ publicDossier?: boolean }} [audience]  `publicDossier`: the page a visitor draws (a shared page, the party
+ *   link, the campaign map's member); omitted or false on the owner's own record
+ * @returns {boolean}
+ */
+export function isVeiled(settlement, address, { publicDossier = false } = {}) {
+  if (veilGroupingsOf(settlement).includes(address)) return true;
+  if (!publicDossier) return false;
+  const open = GROUPING_OPEN_EVIDENCE[address];
+  return !!open && !open(isRec(settlement) ? settlement : {});
 }
 
 // ── STORAGE (inside gallery_member_overrides) ───────────────────────────────────────
