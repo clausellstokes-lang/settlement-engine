@@ -1,6 +1,6 @@
 # PAGE-4's hand-back (the display lane after PAGE-1)
 
-Kept current at every push; last written 16:12 UTC 2026-11-20 (`date -u`). A successor needs THIS FILE and the briefs
+Kept current at every push; last written 16:42 UTC 2026-11-20 (`date -u`). A successor needs THIS FILE and the briefs
 under `docs/chair/2026-11-20/content/page/briefs/` only. The seat's prompt:
 `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PAGE-4.txt`. PAGE-1's hand-back
 (`PAGE-1-HANDBACK.md`, true at `a67e1b502`) holds the rulings 1-8 and the measures; this file adds what came after.
@@ -66,10 +66,26 @@ under `docs/chair/2026-11-20/content/page/briefs/` only. The seat's prompt:
 16. 15:16 SAFETY's words APPROVED as written ("<Label> day to day; <clause>.", five law clauses, two seat clauses, the wave
    clause, the led form "Safety: …"). OUTPUT: two changes before its merge (brief OUTPUT-FIX.md, the chair's words verbatim).
    The chair reads each unit's words on its branch: no words message is sent for SAFETY and OUTPUT.
+17. 15:42 THE THIN PAGES, FIRST HALF, ORDERED before the deploy (vetoable by the owner): brief `briefs/THIN.md` (PAGE-1's,
+   `94d111a44`), ONE builder, render only, AFTER OUTPUT and SAFETY: (a) Daily Life prints the FOUR of `deriveDailyLife`'s
+   eight slots the brief says can print as they are (the four needing mended pools wait); (b) Outlook stops dropping its
+   warnings and dependencies; (c) Magic prints each contributor's reason. CONDITIONS: (1) nothing new computed or stored
+   (two-tree tool 0 differences); (2) MEASURE FIRST on the 300 (`hxd-<size>-0..49`): per slot and line, distinct texts and
+   the largest share of one text BY SIZE; a line printing one sentence in more than about a quarter of a size's places is
+   NOT printed and goes to the chair with its count; (3) every audience fails closed: list what each slot and line READS;
+   a DM fact prints on the owner's page only; the list goes here for the security reader; (4) the page's added words to
+   the chair before the merge; censuses by their doors. The chair wants a token estimate with the measure.
+18. 15:58 SAFETY's audience FAILS OPEN at the mount (the tabs default `publicDossier`/`playerView` to false): A FAULT.
+   Cure ruled, red first: brief `briefs/SAFETY-MOUNT.md`. Only what the Safety line reads changes. The SAME-1 seat
+   measures every sentence the page prints: a unit that changes printed text has its commit forwarded there by the chair.
+19. 16:33 THE {power} FILL (exactly one power of the kind in the document gives its name as prose takes it; else null) is
+   PAGE-7's, a pure helper beside the sides table, built in its causes unit. THE SIDES READER CALLS IT and writes no fill
+   of its own. The chair forwards "CAUSES <commit>"; the sides and the causes' wiring both wait for it.
 
 ## The order
 
-CARD, CARD-SERVED, MAGIC, SAFETY, MAGIC-AUDIENCE (all merged) -> OUTPUT with OUTPUT-FIX (builder out) -> THE SIDES AS SHOWN
+CARD, CARD-SERVED, MAGIC, SAFETY, MAGIC-AUDIENCE (all merged) -> OUTPUT with OUTPUT-FIX (builder out) -> SAFETY-MOUNT
+-> THIN first half (ruling 17) -> THE SIDES AS SHOWN, on PAGE-7's fill (ruling 19)
 (`briefs/SIDES.md` + rulings 9 and 11; brief to be amended with them) -> the causes' wiring (ruling 15) -> "Heads of
 powers" if under thirty lines. At the last commit: the two-tree tool, the page census walker, the owner's before/after file.
 
@@ -88,7 +104,8 @@ powers" if under thirty lines. At the last commit: the two-tree tool, the page c
 - SAFETY: a NEW SURFACE THAT READS CAPTURE (`powerStructure.criminalCaptureState`), the owner's page only
   (`safetyShown.js :: safetyShownOf`, fails closed to 'reader' on any audience but 'owner'). NOTE: `OverviewTab` and
   `DefenseTab` default `publicDossier` and `playerView` to false, so a caller that omits BOTH props reads as the owner
-  (the gate the Crisis tab already uses). The PDF's line is only in the DM's own document (`vm.safetyQualifier` under
+  (the gate the Crisis tab already uses): A FAULT, ruling 18, cured by SAFETY-MOUNT. THE CRISIS TAB has the same
+  default; its page takes its own audience since the sheet lane's U0 (not PAGE-4's files). The PDF's line is only in the DM's own document (`vm.safetyQualifier` under
   `dmView`). Reader bytes: 300 towns x 11 reader surfaces, 0 moved by SAFETY (`tests/ui/safetyReaderBytes.test.jsx`).
 
 ## Merge receipts
