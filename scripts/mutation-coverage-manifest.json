@@ -4674,6 +4674,10 @@
     "tests/lint/namesInSentences.walker.test.js": {
       "kind": "rationale",
       "rationale": "Introduced by NAMES-1 (the seventh chair's rulings CN1-CN3 of 2026-11-20). It holds, over a born pool (every twentieth row of censusPlan('r2'), six tiers, calm and in crisis), that no stored prose sentence names a power by a bare label or a mid-sentence capital \"The\", that the prose form of every hideable power and house holds its name as the share veil folds it, that no full name stands twice in one sentence, and that no string speaks of a person by a gendered pronoun or half a name without naming them in full. Red first at the base 85fccf898 (852 bare labels, 109 mid-sentence capitals, 584 repeated names on the pool); its CONTROLS plant each defect and prove each detector reds; a sweep plant would re-plant the same reverts."
+    },
+    "tests/lint/samenessHideable.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "Introduced by SAME-1's brief 3 (the chair's rule of 17:13 and rulings of 17:25 and 17:32 UTC, 2026-11-20), on the base 43ab0f5eb. It holds over corpusPools that no line public on a shared read needs a crime fact or a hideable house or stands in a crime pool beyond the shrink-only bank of the base's 96, that rule 2's house readings equal their committed list, and that every pool-shaped src/data table a draw site reads is reached by corpusPools or on the shrink-only hand list. A sweep plant is redundant: the file carries its own planted reds on every run (a new public line in a crime pool reds and the same line marked dm-only passes; a wording needing a criminal house reds and passes once its pool is exempted by declaration; an unregistered drawn pool-shaped table reds and passes once listed; a stale join row reds), and at build time dropping one row from each of its three lists reddened three arms, restored byte-identical by sha256."
     }
   },
   "meta": {
