@@ -426,6 +426,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "Set what {settlement} raises against what it eats and the place comes out short.",
           "slots": [
             "settlement"
@@ -434,6 +437,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "colour"
+          ],
           "text": "The gap between what {settlement} raises and what it eats is there every day, and every day it has to be filled.",
           "slots": [
             "settlement"
@@ -6003,6 +6009,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement} does not live by plain work alone; it has strengths of its own, and the place leans on them.",
           "slots": [
             "settlement"
@@ -6011,6 +6020,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "colour"
+          ],
           "text": "Each of {settlement}'s strengths stands on something its own country or its approach supplies, and holds for as long as that does.",
           "slots": [
             "settlement"
@@ -6019,6 +6031,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement}'s strengths are in daily use, worked by the place's own hands and not kept as a boast.",
           "slots": [
             "settlement"

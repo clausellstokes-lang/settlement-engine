@@ -29,7 +29,7 @@
   ],
   "statePools": {
     "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach": 2,
-    "DS-ECO-2::FOOD: deficit": 3,
+    "DS-ECO-2::FOOD: deficit": 1,
     "DS-ECO-5::IMPAIRED (canonical scarce), with a named dependency": 3,
     "DS-ECO-5::VULNERABLE (canonical strained)": 3,
     "DS-ECO-5::RUNNING (canonical stable): draw only with the note fields empty (R-DST-F)": 3,
@@ -60,7 +60,7 @@
     "DS-ECO-11::TERRAIN: Swamp": 3,
     "DS-ECO-11::TERRAIN: Tundra": 3,
     "DS-ECO-11::TERRAIN: anything else (the default accent)": 3,
-    "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated": 6,
+    "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated": 3,
     "DS-ECO-11::ECONOMIC STRENGTHS: none recorded": 3,
     "DS-ECO-11::STRATEGIC VALUE: the generator's assessment, framed": 3,
     "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high": 4,

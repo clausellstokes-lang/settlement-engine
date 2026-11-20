@@ -869,8 +869,8 @@ wants a sentence.
 1. `[ledger]` {settlement} does not grow enough to eat. Food comes in from outside every week, and the town pays for it every week.
 2. `[street · grain]` Bread here is bought, not simply had. The fields do not cover the town and everyone knows which day the carts come.
 3. `[visitor · institution: granary · grain]` The granary at {settlement} is filled from carts, not from the town's own fields.
-4. `[ledger]` Set what {settlement} raises against what it eats and the place comes out short.
-5. `[unfolding]` The gap between what {settlement} raises and what it eats is there every day, and every day it has to be filled.
+4. `[ledger · colour]` Set what {settlement} raises against what it eats and the place comes out short.
+5. `[unfolding · colour]` The gap between what {settlement} raises and what it eats is there every day, and every day it has to be filled.
 
 **FOOD: surplus**
 1. `[ledger · no hunger]` {settlement} eats well below what it raises. The excess is counted, stored, and argued over rather than needed.
@@ -1726,9 +1726,9 @@ A composed page draws one of each grain, never two.
 1. `[ledger]` {settlement} has more than one thing it is good at, and the list is short enough that everybody here could recite it.
 2. `[street]` Ask what this town does well and you get two or three answers, all of them the same two or three answers.
 3. `[visitor]` What {settlement} is for is legible within a day, because the town does a small number of things and does them visibly.
-4. `[counterforce]` {settlement} does not live by plain work alone; it has strengths of its own, and the place leans on them.
-5. `[threshold]` Each of {settlement}'s strengths stands on something its own country or its approach supplies, and holds for as long as that does.
-6. `[unfolding]` {settlement}'s strengths are in daily use, worked by the place's own hands and not kept as a boast.
+4. `[counterforce · colour]` {settlement} does not live by plain work alone; it has strengths of its own, and the place leans on them.
+5. `[threshold · colour]` Each of {settlement}'s strengths stands on something its own country or its approach supplies, and holds for as long as that does.
+6. `[unfolding · colour]` {settlement}'s strengths are in daily use, worked by the place's own hands and not kept as a boast.
 
 **ECONOMIC STRENGTHS: none recorded**
 1. `[ledger]` Nothing about {settlement}'s ground or its trades stands out as a strength. The town works, and works at nothing in particular.
