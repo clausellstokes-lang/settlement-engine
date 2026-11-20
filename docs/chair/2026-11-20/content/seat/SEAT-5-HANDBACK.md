@@ -1,4 +1,4 @@
-# SEAT-5 — HAND-BACK (kept current at every push; last written 2026-11-20T16:19:35Z, read from `date -u`)
+# SEAT-5 — HAND-BACK (kept current at every push; last written 2026-11-20T16:23:47Z, read from `date -u`)
 
 **For the next owner of this lane: this file, `SEAT-1-PROPOSAL.md` and `briefs/` are all you need.** Every ruling in force is §1 (SEAT-4's list carried whole, items 43 on SEAT-5's); the state of every unit §2; every instrument in one command §3. Earlier records: `SEAT-4-HANDBACK.md` … `SEAT-1-HANDBACK.md`.
 
@@ -71,6 +71,8 @@ Branch `lane/seat-5-2026-11-20` (origin), cut from `0ccbef108`: the chair said "
 
 48. **(3)(c) FAIL CLOSED INSIDE THE LEAF (the chair, 15:17Z):** where no edge matches the current form but an edge on the current seat's pair matches a frozen wording for another form, R1 answers NOBODY for both audiences, no fall-through to R2/R3. (1) "Nobody" is an omission, never a statement: every surface prints the seat's form with no taker; none says empty, vacant or unheld; pinned on the owner's page and a reader's. (2) It fires in 0 born towns on both pools, measured before the merge; any other count goes to the chair with one town's record. (3) Red first: the rename-the-seat case red at `5b95aaaf5`, green with the rule.
 49. **NAMED SURVIVORS FOR AFTER THE DEPLOY (the owner's):** a stored marker for a change of hands, which retires R1's sentence read (item 47). The rename's lower-case miss: `factionRename.js :: applyFactionRenameToSettlement` does not rewrite the seat's form in lower case inside the transfer's sentences. Neither is touched by this lane.
+
+50. **U4 ACCEPTED (the chair, 16:23Z):** the re-keyed alias-draft row `system:public_legitimacy -> settlement.config` (`factionStanding.js :: annotateFactionStanding`) is a finding with its cause. THE FORTUNE LANE'S LATE STEP (its merits unit) RE-RUNS `annotateFactionStanding`: the two meet at the join, the union is the chair's. The early joint reading of the two dark laws is the chair's helper's (6e697f5db + fortune c167b5f11, 600 places, four arms); its findings reach the lane as rulings. SEAT-6 (session_019yED1R4mTVRuHKRPWJPt3f) is seated beside SEAT-5 since 16:20Z and writes nothing until the chair gives it the lane.
 
 ## 2. THE UNITS
 
