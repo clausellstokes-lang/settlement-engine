@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "379f63cb68650d548dbd66ccbf72f9a7f95c7586",
-  "measuredBy": "POINT-82",
+  "measuredAtSha": "8e253494530614efbdd32bcbcb4ec337792c348a",
+  "measuredBy": "DAILY-1",
   "date": "2026-11-20",
-  "note": "names-4 landed: the agreement work, its swap test and census cure",
-  "files": 3707,
-  "parked": 472,
+  "note": "daily-1 B1 C1: tests/domain/dailyLifeNoPeople.test.js (the dead npc call parity arm)",
+  "files": 3708,
+  "parked": 473,
   "credited": 3235,
-  "titles": 31237,
-  "suiteTitles": 8651
+  "titles": 31234,
+  "suiteTitles": 8650
 }
