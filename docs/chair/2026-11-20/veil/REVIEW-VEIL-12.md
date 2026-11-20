@@ -46,3 +46,13 @@ Thieves' Guild under the sway of The Guard…", and 6 memberships). Derived Defe
 against the control's 1/29 and 5/29. Faction shares below 100 where a power left (92, 93): VR31 not yet built for powers.
 ONE TOWN WHERE THE RULINGS MEET was found by the probe (a criminal-worded governing "Shadow Senate" beside a guild raised
 by hidden houses): the R3 read will widen that sample.
+
+**THE RANK-WORD CLASS (the chair, 08:37 UTC), baseline at the lane c1b772e55 (`rank.probe.jsx`, `out/rank-at-c1b772e55.txt`;
+21 towns with a hideable house, default veil, gallery read, Reveal DM off and on; sanity compose(A) = stored prose 21/21):**
+the counterfactual (the stored town with the SERVED houses, income rows, factions and safety profile put in place) composes
+the same sentence on 183 prose keys. It differs on four keys, every one an R5 row already registered and not yet built:
+`warFaith:faith.templeFraud` ("The church and the city's thieves share what…", absent in the counterfactual: 4 reads),
+`power:desk.structureFlag` ("the richest merchants and the criminal bosses are often the same people": 8),
+`economy:economics.shadowEconomy` ("small, but … somebody organises it" against "some petty theft": 10),
+`economy:economics.incomeWeight` (26). No rank word on an alias row differed at this tip. The probe runs again at R5 and
+at FINAL, with the groupings shut and opened (`RV12_OPEN=1`) and on a control pool.
