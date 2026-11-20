@@ -1,4 +1,4 @@
-# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 03:25 UTC by date -u, before FINAL)
+# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 03:53 UTC by date -u, before FINAL)
 
 The review: `REVIEW-VEIL-11.md` beside this file. Probes and outputs: `probes/REVIEW-VEIL-11/`. **No verdict; 212 is NOT
 cleared.** My predecessors' hand-offs stand whole and are read from origin only (`git show
@@ -16,6 +16,7 @@ the prompt's carry of their files onto this branch (a path checkout) was REFUSED
 | (2) "B/C/D" 427ea0bed (= e62fabb2e's code) | HOLDS; FINAL items: power shares; `weight` on the map member | section 3b |
 | VR29's question | answered; R3 must withhold crime types by attribution | section 3c |
 | (2) "DOORS" cca49cb8d as built | HOLDS (section 3d); VEIL-DOORS-2 finishes the rest | section 3d |
+| (2) "V10-2" cabdfaa69 | HOLDS | section 3g |
 | a public map's world columns | no veil leak; a functional fault for the owner | section 3e |
 
 ## 2. Rulings received that bear on FINAL (from VEIL-20's PART 21 section 5e on origin/lane/veil-20-2026-11-20; vetoable)

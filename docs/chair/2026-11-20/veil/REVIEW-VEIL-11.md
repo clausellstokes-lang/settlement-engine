@@ -186,6 +186,21 @@ tip (212 has no `_gallery_veil_roster_choices`, the twin no `applyRosterChoices`
 `criminalInstitutions` list (VR39, R3). FINAL ARM (added to step 15): with the groupings open and every hideable house hidden,
 no served criminal power is one a hidden house raised, and the derived label does not exceed the control's distribution.
 
+## 3g. Read (2): the cold read of "V10-2" cabdfaa69 (ruling VR34). HOLDS.
+
+THE DIFF (src only): `curateModelFor` groups every copy of a card by id (`cardsOf`) and reads a house's People by
+`npcHouseOf`; `offeredAddressesOf` collects every grouping, switch, whole-house and depth eye of the model; `criminalPartsOf`
+is the old family candidates intersected with the offered set; `setCriminalVeil` drops deltas on every family candidate and
+writes only offered parts; with no model the switch reads 'none' and writes nothing; `CurateMode` hands it the model.
+RED AND GREEN, RE-RUN BY ME: the three test files on a scratch tree at 81dd06d7e: 18 failed, 12 passed; at cabdfaa69: 30 of
+30. THE REWRITTEN SWITCH TEST is not weaker: (e) opens by hand, to a fixed point, every family eye the screen offers; (g) is
+new; (b) asserts the served income row is the projection's minus `weight`; (c) compares the shares apart. (e) and (g) take the
+screen's model as their reference, so MY ATTACK proves the claim they rest on (`v102a.probe.jsx`): born towns, both shapes,
+Reveal DM off and on, 96 copies per shape; every family candidate the screen does NOT offer (292 new shape, 389 master),
+flipped alone under Show-all and under Hide-all: the twin's `applyVeil` output changed for 0; every offered part is hidden
+after "Hide everything criminal" (1,296 of 1,296; 1,237 of 1,237). origin/master holds no `criminalVeilSwitch.js` and no
+`flipCriminalVeil` (read): no stored Show-all delta exists on production.
+
 ## 4. THE RAW MEASURES, BOTH SHAPES, AT THIS TIP (`splitp.probe.jsx` on the new shape, 45 towns; `splitm` on master): every
 gallery read serves `economicState.compound.criminalEffective` (e.g. 82.84), `compound.militaryEffective` and
 `safetyProfile.safetyRatio` (45 of 45 new; 86 of 86 and 50 of 50 master), and `activeConditions[].severity` (32 of 45;
