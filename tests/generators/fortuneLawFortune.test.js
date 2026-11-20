@@ -282,8 +282,8 @@ describe('(d) BORN, forced: twelve births under the law read what the functions 
   });
 
   test('the law moves the born labels of these twelve (the arm is not vacuous)', () => {
-    const moved = SEEDS.filter(([, seed]) => lits[seed].economicState.prosperity !== nones[seed].economicState.prosperity
-      || lits[seed].economicState.prosperityStanding !== nones[seed].economicState.prosperityStanding);
+    const moved = SEEDS.filter(([, seed]) => lits[seed].economicState.prosperity !== ones[seed].economicState.prosperity
+      || lits[seed].economicState.prosperityStanding !== ones[seed].economicState.prosperityStanding);
     expect(moved.length).toBeGreaterThan(0);
   });
 
