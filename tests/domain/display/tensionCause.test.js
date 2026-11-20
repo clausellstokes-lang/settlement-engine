@@ -174,12 +174,13 @@ describe('{power}: filled only by the sides table\'s own fill', () => {
     const record = { name: 'Ashford', institutions: [], powerStructure: { factions: [{ faction: 'Merchant League', category: 'economy', isGoverning: true, powerLabel: 'Dominant' }] } };
     expect(TENSION_CAUSE_HOLDS.governedByTrade(record, factsOf(record))).toBe(true);
     const w = pickVariant(mr.wordings, 'Ashford::cause::outside_debt').text;
-    expect(tensionCauseSentenceOf(record, { type: 'outside_debt' })).toBe(w.split(POWER_SLOT).join(/** @type {string} */ (solePowerNameOf(record, 'economy'))));
+    expect(tensionCauseSentenceOf(record, { type: 'outside_debt' })).toBe(w.split(POWER_SLOT).join(/** @type {string} */ (solePowerNameOf(record, 'ruler'))));
   });
-  it('two economy powers: merchants_rule does not hold (no one name), the plain line prints', () => {
+  it('two economy powers, one governing (addendum 4): merchants_rule holds and names the GOVERNING power', () => {
     const record = { name: 'Ashford', institutions: [], powerStructure: { factions: [{ faction: 'Merchant League', category: 'economy', isGoverning: true, powerLabel: 'Dominant' }, { faction: 'Weavers Guild', category: 'economy', powerLabel: 'Minor' }] } };
     expect(TENSION_CAUSE_HOLDS.governedByTrade(record, factsOf(record))).toBe(true);
-    expect(tensionCauseSentenceOf(record, { type: 'outside_debt' })).toBe(pickVariant(TENSION_CAUSES.outside_debt.plain, 'Ashford::cause::outside_debt')?.text);
+    const w = pickVariant(mr.wordings, 'Ashford::cause::outside_debt').text;
+    expect(tensionCauseSentenceOf(record, { type: 'outside_debt' })).toBe(w.split(POWER_SLOT).join(/** @type {string} */ (solePowerNameOf(record, 'ruler'))));
   });
   it('no sentence of any born town prints the slot', () => {
     const printed = births.flatMap(([, record]) => Object.keys(TENSION_CAUSES).map((kind) => String(tensionCauseSentenceOf(record, { type: kind }))));

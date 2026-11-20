@@ -21,6 +21,12 @@ describe('solePowerNameOf', () => {
     const d = doc([{ faction: 'Merchant League', category: 'economy', isGoverning: true }, { faction: 'Weavers Guild', category: 'economy' }]);
     expect(solePowerNameOf(d, 'economy')).toBeNull();
   });
+  it('the ruler (addendum 4: merchants_rule): the GOVERNING power, however many share its category', () => {
+    const d = doc([{ faction: 'Merchant League', category: 'economy', isGoverning: true }, { faction: 'Weavers Guild', category: 'economy' }]);
+    expect(solePowerNameOf(d, 'ruler')).toBe(powerNameWithArticle('Merchant League'));
+    expect(solePowerNameOf(d, 'ruler', true)).toBe(powerNameWithArticle('Merchant League', true));
+    expect(solePowerNameOf(doc([{ faction: 'Weavers Guild', category: 'economy' }]), 'ruler')).toBeNull();
+  });
   it('none of the kind, no roster, no document, a nameless power: no name', () => {
     expect(solePowerNameOf(doc([{ faction: 'Military/Guard', category: 'military' }]), 'economy')).toBeNull();
     expect(solePowerNameOf({ name: 'Ashford' }, 'economy')).toBeNull();

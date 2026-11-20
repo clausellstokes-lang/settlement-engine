@@ -23,10 +23,10 @@
  * door (`facts/drawDeclared.js :: drawDeclared`), the keyed hash as its `draw`: an admitted line is the hash's own pick,
  * byte for byte; a refused one resolves as the door resolves it, and a cause with no admitted line falls to plain.
  *
- * `{power}` (rule 6; addendum 3, item 4): a cause carrying `power` (a power category: outside_debt's `merchants_rule`,
- * `economy`) holds only where the document holds exactly one power of that category, and its slot is filled with that
- * power's name as a sentence takes it, by the ONE helper beside the sides table (`data/tensionSidePower.js ::
- * solePowerNameOf`); never a second fill. Two economy powers, or none: the cause does not hold.
+ * `{power}` (rule 6; addendum 3, item 4; addendum 4): a cause carrying `power` holds only where the ONE helper beside the
+ * sides table (`data/tensionSidePower.js :: solePowerNameOf`) names that power, and its slot takes the name as a sentence
+ * takes it; never a second fill. outside_debt's `merchants_rule` carries 'ruler': the governing power (the chair's 17:32);
+ * every other kind would keep the exactly-one test.
  *
  * Pure: no randomness, no clock, no write.
  * @enforced-by tests/domain/display/tensionCause.test.js

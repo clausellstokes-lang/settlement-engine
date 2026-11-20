@@ -63,7 +63,7 @@ crime_wave: [28, 'de7d5b90d47f4378'],
 });
 
 /** THE DECLARATIONS' PIN (addendum 3): the first 16 hex of the sha256 of every line's [needs, excludes, crisis], in order. */
-const DECLARED = '009707bbadca4462';
+const DECLARED = '47a99aefd046293b';
 const kinds = Object.keys(TENSION_CAUSES);
 const allCauses = kinds.flatMap((k) => TENSION_CAUSES[k].causes.map((c) => ({ kind: k, ...c })));
 /** @param {ReadonlyArray<{ text: string }>} lines */
@@ -119,7 +119,7 @@ describe('the wordings', () => {
       const carries = c.wordings.map((w) => w.text.includes('{power}'));
       expect(carries.every(Boolean) || carries.every((x) => !x), `${c.kind}:${c.id}`).toBe(true);
       expect(carries[0], `${c.kind}:${c.id}`).toBe(POWER_CAUSES.has(`${c.kind}:${c.id}`));
-      expect(c.power, `${c.kind}:${c.id}`).toBe(POWER_CAUSES.has(`${c.kind}:${c.id}`) ? 'economy' : undefined);
+      expect(c.power, `${c.kind}:${c.id}`).toBe(POWER_CAUSES.has(`${c.kind}:${c.id}`) ? 'ruler' : undefined);
     }
     for (const k of kinds) expect(TENSION_CAUSES[k].plain.some((w) => w.text.includes('{power}')), k).toBe(false);
     expect(allWordings.filter((w) => /\{(?!power\})[^}]*\}/.test(w))).toEqual([]);

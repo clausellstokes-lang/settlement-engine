@@ -9,7 +9,8 @@
  * signal's (`crimeSignal.js`); the governing power is `rulingPower.js :: governingFactionOf`'s; the docks are
  * `institutions.js :: hasInstitution(record, 'docks')`; every other house is `facts/causeHouses.js`'s, on the live roster
  * by catalogue identity (a DM's own house is never matched by its name). What has no home is read off the record as
- * sim.mjs read it: a past event of the timeline, the public legitimacy's band label, the entrepot mark.
+ * sim.mjs read it: a past event of the timeline, the public legitimacy's band label (the entrepot mark has its home since
+ * addendum 4, `facts/entrepot.js`).
  *
  * A predicate reads only the document it is handed: where a shared document has lost a hidden house or power, the cause
  * does not hold (one rule for every audience; `hideable` in the data file is a list, not a branch).
@@ -29,7 +30,6 @@ import { causeHouseStands } from '../facts/causeHouses.js';
  *   institutions?: unknown,
  *   powerStructure?: { factions?: unknown, publicLegitimacy?: { label?: unknown } | null } | null,
  *   history?: { historicalEvents?: unknown } | null,
- *   economicState?: { isEntrepot?: unknown } | null,
  * } | null | undefined} CauseRecord
  */
 /** @typedef {(record: CauseRecord, facts: Facts) => boolean} CauseHolds */
@@ -89,7 +89,7 @@ export const TENSION_CAUSE_HOLDS = Object.freeze({
   waterCoast: (record, facts) => facts.water.coast,
   waterRiver: (record, facts) => facts.water.river,
   monsterFrontier: (record, facts) => facts.monsterFrontier === true,
-  entrepot: (record) => record?.economicState?.isEntrepot === true,
+  entrepot: (record, facts) => facts.entrepot === true,
   // ── the crises, the war, the food, the purse, the people's assent ──
   crisisPlague: (record, facts) => crisisHolds(facts, 'plague_onset'),
   crisisMonsterPressure: (record, facts) => crisisHolds(facts, 'monster_pressure'),

@@ -24,8 +24,8 @@
  * EACH WORDING IS A DECLARED LINE (addendum 3, item 1: the chair's ruling of 16:30): `{ text, needs?, excludes?, crisis? }`,
  * the atoms (`facts/factVocabulary.js`) its cause's predicate implies wherever the cause holds; the guild quarrel's lines
  * need the guild, and its `withoutItsHouse` excludes it. The reader draws them through `facts/drawDeclared.js`.
- * `{power}` (outside_debt's `merchants_rule` only, `power: 'economy'`) is the one economy power's name, filled by
- * `data/tensionSidePower.js :: solePowerNameOf`; the cause does not hold where it cannot be filled.
+ * `{power}` (outside_debt's `merchants_rule` only, `power: 'ruler'`) is the GOVERNING power's name (addendum 4, the
+ * chair's 17:32), filled by `data/tensionSidePower.js :: solePowerNameOf`; the cause does not hold where it cannot be filled.
  *
  * THE READER (`tensionCause.js :: tensionCauseSentenceOf`): the rank-1 causes that hold, one picked by keyed hash; only if
  * none, the same among rank 2; else plain; then the wording by keyed hash.
@@ -49,7 +49,7 @@
  * @property {1 | 2} rank 1: the trouble's own engine; 2: a standing feature
  * @property {string} holds the key of its predicate in `TENSION_CAUSE_HOLDS`
  * @property {boolean} hideable the security reader's list (never a branch)
- * @property {string} [power] the power category whose one power fills `{power}` (`data/tensionSidePower.js`)
+ * @property {string} [power] 'ruler' (the governing power) or the category whose one power fills `{power}` (`data/tensionSidePower.js`)
  * @property {ReadonlyArray<Readonly<CauseLine>>} wordings the chair's wordings, in the lines file's order
  */
 /** @typedef {{ causes: ReadonlyArray<Readonly<TensionCause>>, plain: ReadonlyArray<Readonly<CauseLine>>, withoutItsHouse?: Readonly<CauseLine> }} TensionCauseTable */
@@ -131,8 +131,8 @@ export const TENSION_CAUSES = Object.freeze({
         Object.freeze({ text: 'Those who govern here are not the only power of standing, and guild and non-guild traders each look for a say in how the place is run.', needs: ['guild', 'rival power'] }),
       ]) }),
       Object.freeze({ id: 'caravans', rank: 2, holds: 'caravanHouse', hideable: false, wordings: Object.freeze([
-        Object.freeze({ text: 'Caravan trade comes through here, and the guild and those who would trade outside it are at odds over who may sell.', needs: ['guild'] }),
-        Object.freeze({ text: 'Goods come by caravan to this place, and who may sell them, guild or not, is in dispute.', needs: ['guild'] }),
+        Object.freeze({ text: 'Caravan trade comes through here, and the guild and those who would trade outside it are at odds over who may sell.', needs: ['guild', 'house: caravans'] }),
+        Object.freeze({ text: 'Goods come by caravan to this place, and who may sell them, guild or not, is in dispute.', needs: ['guild', 'house: caravans'] }),
       ]) }),
       Object.freeze({ id: 'ships', rank: 2, holds: 'docksHouse', hideable: false, wordings: Object.freeze([
         Object.freeze({ text: 'Vessels put in here, and the guild and those who would trade outside it are at odds over who may sell their cargo.', needs: ['guild', 'docks'] }),
@@ -283,7 +283,7 @@ export const TENSION_CAUSES = Object.freeze({
         Object.freeze({ text: 'Hard up as it is, the place owes a heavy debt to an outside power that is ready to collect.', needs: ['prosperity: ≥ struggling', 'prosperity: ≤ poor'] }),
         Object.freeze({ text: 'The place has little money to spare, and a power beyond its bounds that it owes is preparing to collect.', needs: ['prosperity: ≥ struggling', 'prosperity: ≤ poor'] }),
       ]) }),
-      Object.freeze({ id: 'merchants_rule', rank: 1, holds: 'governedByTrade', hideable: true, power: 'economy', wordings: Object.freeze([
+      Object.freeze({ id: 'merchants_rule', rank: 1, holds: 'governedByTrade', hideable: true, power: 'ruler', wordings: Object.freeze([
         Object.freeze({ text: 'With {power} governing, the place owes a heavy debt to an outside power that is preparing to collect.' }),
         Object.freeze({ text: 'The place, governed by {power}, has borrowed heavily from outside, and the lender is moving to collect.' }),
       ]) }),
@@ -292,8 +292,8 @@ export const TENSION_CAUSES = Object.freeze({
         Object.freeze({ text: 'Once more a heavy debt binds the place to a power from outside that means to collect.' }),
       ]) }),
       Object.freeze({ id: 'through_trade', rank: 2, holds: 'entrepot', hideable: false, wordings: Object.freeze([
-        Object.freeze({ text: 'Goods pass through here on their way elsewhere, and the place owes a heavy debt to an outside power that is preparing to collect.' }),
-        Object.freeze({ text: 'As a waypoint of passing trade, the place owes a great deal beyond its bounds, and the creditor is moving to collect.' }),
+        Object.freeze({ text: 'Goods pass through here on their way elsewhere, and the place owes a heavy debt to an outside power that is preparing to collect.', needs: ['entrepot'] }),
+        Object.freeze({ text: 'As a waypoint of passing trade, the place owes a great deal beyond its bounds, and the creditor is moving to collect.', needs: ['entrepot'] }),
       ]) }),
     ]),
     plain: Object.freeze([
