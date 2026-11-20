@@ -1,4 +1,4 @@
-# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 05:10 UTC by date -u, before FINAL)
+# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 06:02 UTC by date -u, before FINAL)
 
 The review: `REVIEW-VEIL-11.md` beside this file. Probes and outputs: `probes/REVIEW-VEIL-11/`. **No verdict; 212 is NOT
 cleared.** My predecessors' hand-offs stand whole and are read from origin only (`git show
@@ -18,6 +18,7 @@ the prompt's carry of their files onto this branch (a path checkout) was REFUSED
 | (2) "DOORS" cca49cb8d as built | HOLDS (section 3d); VEIL-DOORS-2 finishes the rest | section 3d |
 | (2) "V10-2" cabdfaa69 | HOLDS | section 3g |
 | (2) "DOORS" 4994ee371 (VEIL-DOORS-2) | HOLDS; two residuals (short forms, custom crises) | section 3h |
+| (2) "R2" 4ddf8c60c | HOLDS; the merged tile rows must strip the stability cause on unmarked rows too | section 3j |
 | a public map's world columns | no veil leak; a functional fault for the owner | section 3e |
 
 ## 2. Rulings received that bear on FINAL (from VEIL-20's PART 21 section 5e on origin/lane/veil-20-2026-11-20; vetoable)

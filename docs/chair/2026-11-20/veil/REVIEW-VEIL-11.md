@@ -236,6 +236,27 @@ served in 6 of the 11, registered, not built: a FINAL arm. (2) A HAND VEIL hidin
 (Village reeve, Merchant oligarchy, Town hall, …): the server removed the house in 0; a whole-house hide reaches only the
 hideable class (X-21e), so the question cannot arise.
 
+## 3j. Read (2): the cold read of "R2" 4ddf8c60c (212 `05b915ab…`). R2 HOLDS; one integration finding for the merge.
+
+THE DIFF: `_gallery_veil_withhold_always`, a fixed-path pass naming its registry row per rule, run last on every body and,
+new, on an UNMARKED projection too (returned as `body`); `_gallery_veil_cast` per entry; `pageRederive.js` (the scores, the
+gates, the readiness score only inside its label's band, `economyOutput`, a condition's severity from its band, the black
+market's capture only where the page knows the share is unveiled); `restampServedMemberships` on the server's own `data`;
+four helpers revoked by name.
+MY ATTACK (`r2a.probe.jsx`; chains rebuilt from 302850b0b and 4ddf8c60c; 24 born towns per shape, unmarked and the default
+veil, Reveal DM off and on; each tree's own `fetchPublicDossier` answered by its own chain): THE RE-STAMP: the memberships the
+page draws are equal before and after R2 in 96 of 96 reads per shape, and on Reveal DM off no membership stored with
+`veiled` other than false is drawn ("Corrupt Council", `veiled: true`, dropped): it reconstructs exactly. THE CAPTURE: absent
+on every marked read (48 of 48 per shape); on unmarked reads equal to the owner's (48 of 48): it tells marked from unmarked,
+already public. THE RAW MEASURES: `criminalEffective`, `militaryEffective`, `safetyRatio`, `blackMarketCapture`, the scores,
+the gates, the readiness score and the conditions' severity are absent from every served row on both shapes; the body's
+stability is the band word alone.
+THE INTEGRATION FINDING (HIGH for the merge; the chair's ruling asked): R2 strips the stability CAUSE from the body on EVERY
+read, unmarked included; VEIL-DOORS's tile rows (4994ee371, executed on `xd2`) keep 147's raw stability for an UNMARKED row
+("Unstable (pervasive organized crime)" in `get_gallery_dossier`'s column and `list_gallery_dossiers`, beside a marked row's
+"Unstable"). Merged, an unmarked row's tile sends the cause beside a body that says "Unstable". VR19 (b) withholds it on every
+non-owner read: the merged tile rows must take the band word for every row.
+
 ## 4. THE RAW MEASURES, BOTH SHAPES, AT THIS TIP (`splitp.probe.jsx` on the new shape, 45 towns; `splitm` on master): every
 gallery read serves `economicState.compound.criminalEffective` (e.g. 82.84), `compound.militaryEffective` and
 `safetyProfile.safetyRatio` (45 of 45 new; 86 of 86 and 50 of 50 master), and `activeConditions[].severity` (32 of 45;
