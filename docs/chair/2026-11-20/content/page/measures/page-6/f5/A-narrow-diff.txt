@@ -1,0 +1,60 @@
+NARROW F5 base 139; arm 20
+F5 base 1019/5452; arm 894/5452
+cards moved 130: base-F5 119, others 11; towns with any change 91
+FIELD PATHS (normalized; leaves; towns):
+  130	91	npcs[].secret.what
+  130	91	npcs[].secret.stakes
+  5	5	npcs[].personality.dominant
+  1	1	npcs[].goal.long
+  1	1	npcs[].goal.intent.long.kind
+CARD FIELD SETS:
+  125	secret
+  4	personality+secret
+  1	goal+personality+secret
+OTHERS (not narrow-F5 at base; moved):
+  hxd-hamlet-45 anyF5=true Bahija al-Amin (the master of the hunt) fields personality.dominant,secret.stakes,secret.what temp warm-hearted->incorruptible secret Guides people through the woods who do not want to -> Lost a hunter to a beast last season and said the 
+  hxd-town-29 anyF5=true Uta Richter (the wharfinger) fields secret.stakes,secret.what temp warm-hearted->warm-hearted secret Lets cargo come ashore at night without the tally, -> Assigns the best berths to ships that pay a little
+  hxd-city-26 anyF5=true Deirbhile Doherty (the garrison commander) fields secret.stakes,secret.what temp warm-hearted->warm-hearted secret Has been embezzling from the organisation they ove -> Has been falsifying inspection records for a fee
+  hxd-city-26 anyF5=true Erin O'Leary (the customs collector) fields secret.stakes,secret.what temp warm-hearted->warm-hearted secret Waves through certain carts without inspection in  -> Has been recording lower duties than were paid and
+  hxd-city-42 anyF5=true Murugan Nayak (the mint master) fields goal.intent.long.kind,goal.long,personality.dominant,secret.stakes,secret.what temp warm-hearted->incorruptible secret Has been letting a worker carry out silver dust in -> Has struck coins from dies that were meant to have
+  hxd-metropolis-19 anyF5=true Anton Bykov (the network's head) fields personality.dominant,secret.stakes,secret.what temp warm-hearted->incorruptible secret Has been embezzling from the organisation they ove -> Ordered what was officially ruled an accident, and
+  hxd-metropolis-24 anyF5=false Naoise Doyle (the house boss) fields personality.dominant,secret.stakes,secret.what temp level-headed->incorruptible secret Skims from the house's takings before the money re -> Holds the debts of half a dozen respected people a
+  hxd-metropolis-30 anyF5=false Zorana Alexeyev (the postmaster) fields secret.stakes,secret.what temp principled->principled secret Charges for fast riders and sends the letters with -> Opens letters for people who pay to know what is i
+  hxd-metropolis-31 anyF5=false Sofia Kiselev (the postmaster) fields secret.stakes,secret.what temp principled->principled secret Charges for fast riders and sends the letters with -> Opens letters for people who pay to know what is i
+  hxd-metropolis-39 anyF5=false Wendelin Walter (the postmaster) fields secret.stakes,secret.what temp principled->principled secret Charges for fast riders and sends the letters with -> Opens letters for people who pay to know what is i
+  hxd-metropolis-41 anyF5=true Bé Bhinn MacNamara (the toll-keeper) fields personality.dominant,secret.stakes,secret.what temp warm-hearted->incorruptible secret Has let the crossing fall into disrepair and pocke -> Charges travellers more than the posted toll and k
+base-F5 cards moved that are still F5: 0; non-F5 that became F5: 0
+NARROW SURVIVORS by title:
+  7	the prison warden
+  4	the black marketeer
+  2	the luxury merchant
+  1	the priest
+  1	the bowyer
+  1	the lord
+  1	the chandler
+  1	the dean
+  1	the customs collector
+  1	the brickmaker
+ALL-F5 SURVIVORS by title (top 10):
+  30	the prison warden
+  29	the miller
+  27	the master weaver
+  26	the black marketeer
+  22	the potter
+  21	the house boss
+  21	the hospital's master
+  20	the bowyer
+  19	the glassmaker
+  18	the dyer
+  distinct titles 106
+SURVIVOR texts (top 10):
+  22	Has been embezzling from the organisation they oversee for three years
+  19	Sets the mill's toll by who is asking, and charges the families who owe money far more than the rest
+  19	Has been selling bows and arrows to people who have no right to hunt and every reason to want them quietly
+  18	Has been feeding strategic intelligence to outsiders who pay for it
+  17	Reads the letters guests leave in their rooms, and sells what is in them to whoever asks the right way
+  16	Sells a few drops of something stronger to anyone who asks quietly and pays in silver
+  15	Sells yesterday's fish as this morning's, washed and packed in fresh ice, and has made people sick more than o
+  15	Secretly directs a fencing operation through a trusted intermediary
+  14	Copied a survey that was meant to stay secret and has been selling copies to anyone with the coin
+  14	Their legitimate business is a front for moving contraband

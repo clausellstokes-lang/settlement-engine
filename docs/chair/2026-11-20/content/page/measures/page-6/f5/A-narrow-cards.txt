@@ -1,0 +1,81 @@
+NARROW F5 cards at c727a4d17: 139; secret moved 119; kept their draw 20
+
+[hxd-hamlet-41] Isamu Wang — MOVED
+  BEFORE Temperament: principled | Title: the innkeeper
+      Secret: Reads the letters guests leave in their rooms, and sells what is in them to whoever asks the right way
+      Stakes: No traveller would sleep under that roof again, and some of the people named in those letters would come looking
+  AFTER  Temperament: principled | Title: the innkeeper
+      Secret: Waters the ale and charges for it full strength, and keeps two sets of accounts so the difference never shows
+      Stakes: The regulars would leave for the next tap-room, and the second set of accounts would be enough to bring a fine
+
+[hxd-town-35] Servilia Nero — MOVED
+  BEFORE Temperament: principled | Title: the cobbler
+      Secret: Ran up gambling debts and has been quietly selling the tools of the shop one by one to pay them
+      Stakes: The shop cannot fill its orders much longer, and the people owed the shoes have already paid
+  AFTER  Temperament: principled | Title: the cobbler
+      Secret: Uses cheap leather for the soles and good leather where it shows, and charges for good leather throughout
+      Stakes: The shoes fall apart in a season, and every customer would want new ones
+
+[hxd-city-15] Dayaram Sahu — MOVED
+  BEFORE Temperament: plain-dealing | Title: the miller
+      Secret: Sets the mill's toll by who is asking, and charges the families who owe money far more than the rest
+      Stakes: The families who were overcharged would talk, and the mill's good name would go first
+  AFTER  Temperament: plain-dealing | Title: the miller
+      Secret: Mixes ground chalk and bean meal into the flour in the lean months to make it go further
+      Stakes: The bakers would turn on the miller at once, and the people who ate the bread would not forgive it
+
+[hxd-city-40] Kukulcan Koh — MOVED
+  BEFORE Temperament: incorruptible | Title: the printer
+      Secret: Prints pamphlets at night against powerful people, and sells them without a name on them
+      Stakes: The people named in those pamphlets would want to know who printed them, and the type can be matched
+  AFTER  Temperament: incorruptible | Title: the printer
+      Secret: Has been printing false notes of credit for a buyer who spends them in other markets
+      Stakes: When the notes are traced, the printer's type will give the shop away
+
+[hxd-metropolis-8] Murdoch O'Neill — MOVED
+  BEFORE Temperament: honest | Title: the beast master
+      Secret: Sells trained animals to buyers who use them for fighting, and the training is cruel
+      Stakes: The animals' scars would tell the story, and the buyers would turn on the trainer to save themselves
+  AFTER  Temperament: honest | Title: the beast master
+      Secret: A dangerous animal got loose last year and killed a child, and the beast master said it was a wild one
+      Stakes: Someone saw the collar marks on the beast before it was killed, and has not forgotten
+
+[hxd-metropolis-19] Olga Fedorov — MOVED
+  BEFORE Temperament: honest | Title: the apothecary
+      Secret: Sells a few drops of something stronger to anyone who asks quietly and pays in silver
+      Stakes: One customer died last season of what was sold; if that came out, so would the list of who else buys it
+  AFTER  Temperament: honest | Title: the apothecary
+      Secret: Has been stretching the costly remedies with cheap fillers and charging full price
+      Stakes: The sick who did not get better would have a reason, and their families would have someone to blame
+
+[hxd-metropolis-37] Orm Thorsson — MOVED
+  BEFORE Temperament: incorruptible | Title: the potter
+      Secret: Has been selling pots bought in from another workshop as their own throwing, at their own prices
+      Stakes: The buyers who paid for local work would want their money back, and the workshop's name would go with it
+  AFTER  Temperament: incorruptible | Title: the potter
+      Secret: Sold a set of plates as old work worth far more than they were, and the buyer has started to ask questions
+      Stakes: A forger's name follows a potter for life, and the buyer is someone with friends
+
+[hxd-village-4] Stoycho Dmitriev — KEPT (survivor)
+  BEFORE Temperament: plain-dealing | Title: the priest
+      Secret: Has been quietly betting against the ventures they talk their neighbours into, and profiting when they fail
+      Stakes: Civil fraud liability and the permanent destruction of a reputation built over decades
+  AFTER  Temperament: plain-dealing | Title: the priest
+      Secret: Has been quietly betting against the ventures they talk their neighbours into, and profiting when they fail
+      Stakes: Civil fraud liability and the permanent destruction of a reputation built over decades
+
+[hxd-city-27] Yamuna Subramanian — KEPT (survivor)
+  BEFORE Temperament: principled | Title: the prison warden
+      Secret: Let a prisoner walk out one night for a purse of gold and reported an escape the next morning
+      Stakes: The escaped man has been seen nearby, and the guard on duty that night drinks too much and talks
+  AFTER  Temperament: principled | Title: the prison warden
+      Secret: Let a prisoner walk out one night for a purse of gold and reported an escape the next morning
+      Stakes: The escaped man has been seen nearby, and the guard on duty that night drinks too much and talks
+
+[hxd-metropolis-16] Áine O'Riordan — KEPT (survivor)
+  BEFORE Temperament: plain-dealing | Title: the chandler
+      Secret: Sells candles made with cheap tallow as fine wax ones, and the smoke gives them away to anyone who knows
+      Stakes: The households that paid for wax would want their money back, and the shop's best customers are among them
+  AFTER  Temperament: plain-dealing | Title: the chandler
+      Secret: Sells candles made with cheap tallow as fine wax ones, and the smoke gives them away to anyone who knows
+      Stakes: The households that paid for wax would want their money back, and the shop's best customers are among them

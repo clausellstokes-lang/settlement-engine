@@ -1,0 +1,70 @@
+F5 base 1019/5452; arm 0/5452
+cards moved 1069: base-F5 1019, others 50; towns with any change 176
+FIELD PATHS (normalized; leaves; towns):
+  1031	176	npcs[].personality.dominant
+  97	57	npcs[].goal.long
+  73	55	npcs[].goal.intent.long.kind
+  51	34	npcs[].goal.short
+  41	34	npcs[].goal.intent.short.kind
+  11	5	npcs[].goal.intent.long.family
+  11	5	npcs[].goal.intent.long.key
+  11	5	npcs[].goal.intent.long.target.id
+  7	3	npcs[].goal.intent.long.target.kind
+  5	5	npcs[].secret.what
+  5	5	npcs[].secret.stakes
+  3	2	npcs[].goal.intent.short.family
+  3	2	npcs[].goal.intent.short.key
+  3	2	npcs[].goal.intent.short.target.id
+  2	2	npcs[].goal.intent.short.target.kind
+  1	1	npcs[].goal.intent.long.target
+CARD FIELD SETS:
+  921	personality
+  105	goal+personality
+  38	goal
+  4	personality+secret
+  1	goal+personality+secret
+OTHERS (non-F5 cards moved):
+  hxd-village-4 Inna Dmitriev (the dyer) fields personality.dominant temp plain-dealing->wise secret =
+  hxd-village-11 Gunter Werner (the ferryman) fields personality.dominant temp dependable->astute secret =
+  hxd-town-12 Iðunn Hrafnsson (the apothecary) fields personality.dominant,secret.stakes,secret.what temp protective->diplomatic secret Called a curse down on a neighbour, and it worked -> Fakes letters of introduction, and more than one n
+  hxd-town-15 Malachy Ryan (the warehouse factor) fields personality.dominant temp good-humoured->unflappable secret =
+  hxd-town-15 Donal Carey (the gang boss) fields goal.long temp generous->generous secret =
+  hxd-town-34 Ernst Bauer (the hospitaller) (the hospitaller) fields personality.dominant,secret.stakes,secret.what temp candid->discerning secret Clips and re-casts coin in a back room, a little a -> Writes a letter every week to someone who died yea
+  hxd-city-4 Kyriake Hexamilites (the fuller) fields goal.short temp intuitive->intuitive secret =
+  hxd-city-7 Cordus Moderatus (the house boss) fields personality.dominant temp warm-hearted->level-headed secret =
+  hxd-city-7 Trebonianus Tubertus (the whisper broker) fields personality.dominant,secret.stakes,secret.what temp incorruptible->level-headed secret Has not aged a day in forty years, and moves on be -> Talks every evening to a spouse who died, and sets
+  hxd-city-14 Ügedei Taichiud (the smelt master) fields goal.short temp wise->wise secret =
+  hxd-city-18 Yagul Chi (the network's spider) fields personality.dominant temp tenacious->methodical secret =
+  hxd-city-20 Yagul Chel (the ropemaker) fields goal.short temp -> secret =
+  hxd-city-20 Tao Hau (the quarry master) fields goal.short temp gracious->gracious secret =
+  hxd-city-21 Dorbei Qipchaq (the glassmaker) fields goal.long temp methodical->methodical secret =
+  hxd-city-24 Jiro Li (the front man) fields goal.long temp -> secret =
+  hxd-city-26 Clothra Carey (the watch commander) fields goal.intent.short.kind,goal.short,personality.dominant,secret.stakes,secret.what temp protective->diplomatic secret Pulled three children from a flood years ago and l -> Is bleeding Bronwyn Roche for coin over a thing do
+  hxd-city-31 Jiri Alexeyev (the fuller) fields goal.long temp discerning->discerning secret =
+  hxd-city-36 Ciara MacCarthy (the house boss) fields goal.long temp -> secret =
+  hxd-city-36 Niamh Gallagher (the brewer) fields goal.long temp -> secret =
+  hxd-city-36 Aifric Clifford (the cartographer) fields goal.long temp -> secret =
+  hxd-city-37 Vipsanius Tubertus (the bath-keeper) fields goal.long temp optimistic->optimistic secret =
+  hxd-city-37 Vita Sabinus (the stable master) fields goal.long temp generous->generous secret =
+  hxd-city-37 Terentius Piso (the printer) fields goal.intent.long.family,goal.intent.long.key,goal.intent.long.kind,goal.intent.long.target.id,goal.intent.long.target.kind,goal.long temp -> secret =
+  hxd-city-37 Felicia Silanus (the master smith) fields goal.intent.long.family,goal.intent.long.key,goal.intent.long.kind,goal.intent.long.target.id,goal.intent.long.target.kind,goal.long temp -> secret =
+  hxd-city-37 Fabius Volso (the master tanner) fields goal.long temp honest->honest secret =
+  hxd-city-37 Xenia Bassus (the potter) fields goal.long temp -> secret =
+  hxd-city-37 Celer Publicola (the chandler) fields goal.intent.long.family,goal.intent.long.key,goal.intent.long.kind,goal.intent.long.target.id,goal.intent.long.target.kind,goal.long temp charismatic->charismatic secret =
+  hxd-city-37 Quartica Pulvillus (the glassmaker) fields goal.intent.long.family,goal.intent.long.key,goal.intent.long.kind,goal.intent.long.target.id,goal.intent.long.target.kind,goal.long temp pious->pious secret =
+  hxd-city-37 Hostus Aquila (the ropemaker) fields goal.intent.long.family,goal.intent.long.key,goal.intent.long.kind,goal.intent.long.target.id,goal.long temp tenacious->tenacious secret =
+  hxd-city-40 Metztli Acalan (the banker) fields goal.short temp -> secret =
+  hxd-city-40 Chan Xoc (the front man) fields goal.long temp candid->candid secret =
+  hxd-city-40 Cuauhtli Holpop (the enchanter) fields goal.intent.long.target.id,goal.intent.short.family,goal.intent.short.key,goal.intent.short.kind,goal.intent.short.target.id,goal.intent.short.target.kind,goal.long,goal.short temp -> secret =
+  hxd-city-44 Tailtiu O'Mahony (the sawyer) fields goal.intent.long.family,goal.intent.long.key,goal.intent.long.kind,goal.intent.long.target,goal.long temp -> secret =
+  hxd-city-45 Tao Tang (the master weaver) fields goal.short temp resourceful->resourceful secret =
+  hxd-metropolis-2 Wendelin Weber (the fortune teller) fields goal.long temp generous->generous secret =
+  hxd-metropolis-4 Eirenaion Argyros (the chancellor) fields personality.dominant,secret.stakes,secret.what temp incorruptible->level-headed secret Has a body buried under their own floor -> Has been quietly paying off someone else's debts f
+  hxd-metropolis-10 Abu Said Uighur (the fortune teller) fields goal.short temp stalwart->stalwart secret =
+  hxd-metropolis-11 Noriko Huang (the woodcarver) fields goal.long,goal.short temp patient->patient secret =
+  hxd-metropolis-14 Zhiwei Zhou (the master butcher) fields goal.intent.long.family,goal.intent.long.key,goal.intent.long.kind,goal.intent.long.target.id,goal.intent.long.target.kind,goal.long temp diligent->diligent secret =
+  hxd-metropolis-14 Koharu Kimura (the master baker) fields goal.long temp humble->humble secret =
+base-F5 cards moved that are still F5: 0; non-F5 that became F5: 0
+SURVIVORS by title (top 10):
+  distinct titles 0
+SURVIVOR texts (top 10):
