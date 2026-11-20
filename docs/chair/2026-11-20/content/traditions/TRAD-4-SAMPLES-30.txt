@@ -1,0 +1,137 @@
+Drawn by rule, not by hand: for each of the six sizes, every printed rite of the pool (1232 rites, in the 403 towns that print one) ordered by the hash fnv1a32(seed|rite id), the first 5; 30 in all, in size order.
+
+1. Baimen (thorp, east_asian, coastal) — The Great Offering
+   An offering that honours the tide. It is in the keeping of the fishing community, with Xia Chen, the boat-headman, presiding. Baimen takes in a good part of its living from fish and maritime produce.
+   drew on: keeper: house Fishing community; presides: Xia Chen; payer: income "Fish & Maritime Produce", rank 2 of 2  [seed trad-e-thorp-east_asian, tradition.trad_e_thorp_east_asian.1]
+   (the town holds a crisis of its own: recently_betrayed)
+
+2. Xingang (thorp, east_asian, hills) — The Feast of the Charter
+   A feast kept as of old that honours the charter. It is overseen by the Elder Council. It goes back to the founding of Xingang by a discharged soldier who liked the view and had nowhere better to be, 129 years ago, and has been kept since.
+   drew on: keeper: power Elder Council; cause: the founding (age 129, by "a discharged soldier who liked the view and had nowhere better to be")  [seed trad-f-thorp-east_asian, tradition.trad_f_thorp_east_asian.0]
+   (the town holds a crisis of its own: politically_fractured)
+
+3. Eleftpolis (thorp, greek, forest) — The Harvest Feast
+   A feast day kept by custom that is kept for what the fields give. All that Eleftpolis takes in comes from the harvest.
+   drew on: payer: income "Harvest", the only one  [seed trad-e-thorp-greek, tradition.trad_e_thorp_greek.1]
+   (the town holds a crisis of its own: indebted)
+
+4. Eleftpolis (thorp, greek, forest) — The Common Vigil
+   A vigil that honours the founding. The Elder Council oversees it. It goes back to the founding of Eleftpolis by a discharged soldier who liked the view and had nowhere better to be, 50 years ago, and has been kept since.
+   drew on: keeper: power Elder Council; cause: the founding (age 50, by "a discharged soldier who liked the view and had nowhere better to be")  [seed trad-e-thorp-greek, tradition.trad_e_thorp_greek.0]
+   (the town holds a crisis of its own: indebted)
+
+5. Stredka (thorp, slavic, hills) — The Vigil of the Charter
+   A vigil that honours the charter. It falls to the Elder Council. Stredka has kept it since its founding by a single extended family who came and never left, 215 years ago.
+   drew on: keeper: power Elder Council; cause: the founding (age 215, by "a single extended family who came and never left")  [seed trad-c-thorp-slavic, tradition.trad_c_thorp_slavic.0]
+   (the town holds a crisis of its own: famine)
+
+6. Collefundus (hamlet, latin, hills) — The Procession of the Charter
+   A procession on foot that remembers the charter. The Headman's Authority oversees it. Collefundus has kept it since its founding by a household that settled first and found others following it in, 100 years ago.
+   drew on: keeper: power Headman's Authority; cause: the founding (age 100, by "a household that settled first and found others following it in")  [seed trad-b-hamlet-latin, tradition.trad_b_hamlet_latin.0]
+
+7. Yekebaliq (hamlet, steppe, riverside) — The Great Charter Feast
+   A feast day that marks the granting of the charter. It is overseen by the Free Elder Council. Yekebaliq has kept it since its founding by a household that settled first and found others following it in, 62 years ago.
+   drew on: keeper: power Free Elder Council; cause: the founding (age 62, by "a household that settled first and found others following it in")  [seed trad-e-hamlet-steppe, tradition.trad_e_hamlet_steppe.0]
+   (the town holds a crisis of its own: politically_fractured)
+
+8. Ripaporta (hamlet, latin, desert) — The Elder Feast
+   A feast shared among neighbours that blesses the fields. All that Ripaporta takes in comes from the harvest.
+   drew on: payer: income "Harvest", the only one  [seed trad-a-hamlet-mediterranean, tradition.trad_a_hamlet_mediterranean.1]
+
+9. Ripaporta (hamlet, latin, desert) — The Great Founding Procession
+   A procession on foot that marks the founding. It falls to the Elder Council. It has been kept since Ripaporta was founded by a household that settled first and found others following it in, 88 years ago.
+   drew on: keeper: power Elder Council; cause: the founding (age 88, by "a household that settled first and found others following it in")  [seed trad-a-hamlet-mediterranean, tradition.trad_a_hamlet_mediterranean.0]
+
+10. Shivahalli (hamlet, south_asian, desert) — The Monsoon Contest
+   A day of contests that honours the founding. It is overseen by the Elder Council. Shivahalli has kept it since its founding by a small religious community whose members drifted into secular life over two generations, 102 years ago.
+   drew on: keeper: power Elder Council; cause: the founding (age 102, by "a small religious community whose members drifted into secular life over two generations")  [seed trad-e-hamlet-south_asian, tradition.trad_e_hamlet_south_asian.0]
+
+11. Shattmela (village, arabic, plains) — The Silk Feast
+   A feast day that marks the founding. It falls to the Elder Council. Shattmela has kept it since its founding by escaped serfs seeking a place beyond the reach of their former masters, 64 years ago.
+   drew on: keeper: power Elder Council; cause: the founding (age 64, by "escaped serfs seeking a place beyond the reach of their former masters")  [seed trad-b-village-arabic, tradition.trad_b_village_arabic.0]
+   (the town holds a crisis of its own: monster_pressure)
+
+12. Neudorf (village, germanic, plains) — The Old Hunt Feast
+   A feast shared among neighbours that honours the hunt. It is kept by the hunter's lodge, and Radbot Köhler, the master of the hunt, presides.
+   drew on: keeper: house Hunter's lodge; presides: Radbot Köhler  [seed trad-e-village-germanic, tradition.trad_e_village_germanic.1]
+
+13. Neudorf (village, germanic, plains) — The Feast of the Founding
+   A feast at long tables that remembers the founding days. The Elected Reeve oversees it. It has been kept since Neudorf was founded by a group of settlers seeking new opportunities, 40 years ago.
+   drew on: keeper: power Elected Reeve; cause: the founding (age 40, by "a group of settlers seeking new opportunities")  [seed trad-e-village-germanic, tradition.trad_e_village_germanic.0]
+
+14. Izamco (village, mesoamerican, plains) — The Fair of the Dead
+   A fair of stalls and trading that remembers those who came before. It is in the keeping of the house of worship, with Yaotl Kanil, the priest, presiding.
+   drew on: keeper: house Parish church; presides: Yaotl Kanil  [seed trad-d-village-mesoamerican, tradition.trad_d_village_mesoamerican.1]
+
+15. Glenford (village, celtic, coastal) — The Contest of the First Landing
+   A day of games and contests that marks the first landing. It is overseen by the Elder Council. It has been kept since Glenford was founded by a noble granted lands by the crown and obligated to populate them, 35 years ago.
+   drew on: keeper: power Elder Council; cause: the founding (age 35, by "a noble granted lands by the crown and obligated to populate them")  [seed trad-a-village-celtic, tradition.trad_a_village_celtic.0]
+
+16. Ormsund (town, norse, coastal) — The Iron Offering
+   An offering made in common that honours the first boats to come ashore. The Guild Council oversees it. Port duties bring Ormsund more than anything else.
+   drew on: keeper: power Guild Council; payer: income "Port Duties", rank 1 of 5  [seed trad-c-town-norse, tradition.trad_c_town_norse.2]
+
+17. Bergbrekka (town, norse, forest) — The Common Forge Contest
+   A day of games and contests that honours the smith's craft. It is kept by the blacksmiths, and Bodvar Finsson, the master smith, presides.
+   drew on: keeper: house Blacksmiths (3-10); presides: Bodvar Finsson  [seed trad-a-town-norse, tradition.trad_a_town_norse.2]
+
+18. Ormsund (town, norse, coastal) — The Bright Harvest Fair
+   A fair of stalls and trading that gives thanks for what the fields have given. It is kept at the town granary, where Ranveig Hrafnsson, the granary reeve, presides. A good share of what Ormsund takes in comes from market taxes.
+   drew on: keeper: house Town granary; presides: Ranveig Hrafnsson; payer: income "Market Taxes", rank 2 of 5  [seed trad-c-town-norse, tradition.trad_c_town_norse.1]
+
+19. Bergbrekka (town, norse, forest) — The Great Fair
+   A fair of stalls and trading that blesses the forge. It is kept by the blacksmiths, and Bodvar Finsson, the master smith, presides. Nothing brings Bergbrekka more than market taxes.
+   drew on: keeper: house Blacksmiths (3-10); presides: Bodvar Finsson; payer: income "Market Taxes", rank 1 of 5  [seed trad-a-town-norse, tradition.trad_a_town_norse.1]
+
+20. Ormsund (town, norse, coastal) — The Founding Feast
+   A common feast that remembers the founding days. It is overseen by the Guild Council. Ormsund has kept it since its founding by a merchant consortium that needed a waypoint and decided to own it, 283 years ago.
+   drew on: keeper: power Guild Council; cause: the founding (age 283, by "a merchant consortium that needed a waypoint and decided to own it")  [seed trad-c-town-norse, tradition.trad_c_town_norse.0]
+
+21. Víkgarde (city, norse, mountain) — The Offering of the Stars
+   An offering made in common that marks the courses of the stars. It is kept by the monasteries, and Gorm Illugason, the senior abbot, presides.
+   drew on: keeper: house Multiple monasteries; presides: Gorm Illugason  [seed trad-d-city-norse, tradition.trad_d_city_norse.2]
+   (the town holds a crisis of its own: plague_onset)
+
+22. Saraihiid (city, steppe, riverside) — The Old Founding Fair
+   A fair that marks the founding. The Noble Governorship oversees it. Saraihiid has kept it since its founding by a merchant coalition that grew too large for the town they started in, 204 years ago.
+   drew on: keeper: power Noble Governorship; cause: the founding (age 204, by "a merchant coalition that grew too large for the town they started in")  [seed trad-d-city-steppe, tradition.trad_d_city_steppe.0]
+   (the town holds a crisis of its own: succession_void, infiltrated)
+
+23. Ringthwaite (city, celtic, hills) — The Green Feast
+   A feast day kept as of old that blesses the market and its trade. It takes place at the market squares; it falls to the Merchant Guild Council. Market taxes bring Ringthwaite more than anything else.
+   drew on: keeper: house Multiple market squares; power: Merchant Guild Council; payer: income "Market Taxes", rank 1 of 14  [seed trad-e-city-celtic, tradition.trad_e_city_celtic.3]
+   (the town holds a crisis of its own: plague_onset)
+
+24. Víkgarde (city, norse, mountain) — The Vigil of the Forge
+   A night's vigil that honours the forge. Its keeping falls to the blacksmiths; Inga Egilsson, the master smith, presides.
+   drew on: keeper: house Blacksmiths (3-10); presides: Inga Egilsson  [seed trad-d-city-norse, tradition.trad_d_city_norse.1]
+   (the town holds a crisis of its own: plague_onset)
+
+25. Ringthwaite (city, celtic, hills) — The Hallowed Procession
+   A procession on foot that celebrates the market. It is held at the market squares, in the keeping of the Merchant Guild Council. Market taxes bring Ringthwaite more than anything else.
+   drew on: keeper: house Multiple market squares; power: Merchant Guild Council; payer: income "Market Taxes", rank 1 of 14  [seed trad-e-city-celtic, tradition.trad_e_city_celtic.2]
+   (the town holds a crisis of its own: plague_onset)
+
+26. Bergstrand (metropolis, norse, riverside) — The Common Offering
+   A day of small offerings that remembers those who came before. It is kept by the great cathedral, and Þorbjörg Andersson, the bishop, presides. It is kept in memory of the Siege, 258 years ago.
+   drew on: keeper: house Great cathedral; presides: Þorbjörg Andersson; cause: history event "The Siege", 258 years ago  [seed trad-c-metropolis-norse, tradition.trad_c_metropolis_norse.3]
+
+27. Rajipeth (metropolis, south_asian, plains) — The Vigil of the Harvest
+   A vigil that is kept for what the fields give. It is held at the state granary complex, where Kailash Sinha, the master of granaries, presides.
+   drew on: keeper: house State granary complex; presides: Kailash Sinha  [seed trad-f-metropolis-south_asian, tradition.trad_f_metropolis_south_asian.4]
+   (the town holds a crisis of its own: insurgency)
+
+28. Bergstrand (metropolis, norse, riverside) — The Iron Feast  [SHORT FORM]
+   A feast at long tables that marks midsummer.
+   drew on: (the motif alone: long-sun · feast)  [seed trad-c-metropolis-norse, tradition.trad_c_metropolis_norse.2]
+
+29. Kashipuram (metropolis, south_asian, hills) — The Hunt Offering
+   An offering made in common that honours the hunt. It is kept at the furrier's district, where Suresh Hazra, the master furrier, presides.
+   drew on: keeper: house Furrier's district; presides: Suresh Hazra  [seed trad-c-metropolis-south_asian, tradition.trad_c_metropolis_south_asian.4]
+
+30. Rajipeth (metropolis, south_asian, plains) — The Saffron Procession  [SHORT FORM]
+   A slow procession that keeps faith with the standing stones.
+   drew on: (the motif alone: stone · procession)  [seed trad-f-metropolis-south_asian, tradition.trad_f_metropolis_south_asian.3]
+   (the town holds a crisis of its own: insurgency)
+
+cultures: 11 (east_asian, greek, slavic, latin, steppe, south_asian, arabic, germanic, mesoamerican, celtic, norse); short forms: 2 of 30; towns holding a crisis of their own: 14 of 30

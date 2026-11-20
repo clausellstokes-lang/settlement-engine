@@ -1,0 +1,81 @@
+Drawn by rule, not by hand: every printed rite of every crisis town (the same 432 seeds as the calm pool, each born with one crisis forced: famine, under_siege, occupied, wartime, plague_onset) ordered by the hash fnv1a32(crisis|seed|rite id); a rite is taken only where the same seed's calm town prints the same rite; first the first two such of each crisis, then the next in hash order, at most three a crisis, until twelve. Printed in hash order. Each is the owner's reading.
+Skipped on the way (the calm town of that seed does not print the same rite): 0 of the 28 rites the walk passed, in hash order, to its twelfth pick. Over all crisis rites: 0 of 6160 have no calm counterpart (0.0%).
+
+1. WARTIME — Palaioakra (metropolis, greek) — The Offering of the Hunt
+   IN CRISIS: An offering made in common that marks the hunting season. It is kept at the furrier's district, where Tyche Argyros, the master furrier, presides.
+   CALM:      An offering made in common that marks the hunting season. It is kept at the furrier's district, where Tyche Argyros, the master furrier, presides.
+   the same reading.
+
+2. PLAGUE_ONSET — Kaltenmoor (city, germanic) — The Ninth Fair
+   IN CRISIS: A fair kept by custom that honours the stars. It is kept by the monasteries, and Volker Moser, the senior abbot, presides. Nothing brings Kaltenmoor more than market taxes.
+   CALM:      A fair of stalls and trading that honours the stars. It is kept by the houses of worship, and Ingelbert Engel, the dean, presides. Nothing brings Kaltenmoor more than market taxes.
+   refused under the crisis: lead.fair: "A fair of stalls and trading" refused → twin "A fair kept by custom"
+   the record differs — in crisis it drew on: keeper: house Multiple monasteries; presides: Volker Moser; payer: income "Market Taxes", rank 1 of 12
+                       calm, it drew on: keeper: house Parish churches (10-30); presides: Ingelbert Engel; payer: income "Market Taxes", rank 1 of 10
+   slots that read differently: lead
+
+3. PLAGUE_ONSET — Hufeng (town, east_asian) — The Moon Feast
+   IN CRISIS: A feast day that honours the first boats to come ashore. It is overseen by the Town Mayor. Hufeng has kept it since its founding by a noble granted lands by the crown with the resources to develop them, 57 years ago.
+   CALM:      A common feast that honours the first boats to come ashore. It is overseen by the Town Mayor. Hufeng has kept it since its founding by a noble granted lands by the crown with the resources to develop them, 57 years ago.
+   refused under the crisis: lead.feast: "A common feast" refused → twin "A feast day"
+   slots that read differently: lead
+
+4. WARTIME — Fontelitus (city, latin) — The Procession of the Standing Stones
+   IN CRISIS: A procession on foot that honours the standing stones.
+   CALM:      A procession on foot that honours the standing stones.
+   the same reading.
+
+5. PLAGUE_ONSET — Hugou (city, east_asian) — The Contest of the Harvest
+   IN CRISIS: A contest that marks the gathering of the harvest. It takes place at the city granaries, with Wanru Sato, the master of granaries, presiding.
+   CALM:      A contest that marks the gathering of the harvest. It takes place at the city granaries, with Wanru Sato, the master of granaries, presiding.
+   the same reading.
+
+6. FAMINE — Sanctaurbs (metropolis, latin) — The Forge Vigil
+   IN CRISIS: A quiet vigil that blesses the forge. It is kept by the blacksmiths, and Piso Plancus, the master smith, presides.
+   CALM:      A quiet vigil that blesses the forge. It is kept by the blacksmiths, and Piso Plancus, the master smith, presides.
+   (the calm reading's town is not quite calm: it holds recently_betrayed)
+   the same reading.
+
+7. WARTIME — Padmapuram (city, south_asian) — The Old Harvest Contest
+   IN CRISIS: A day of contests that is kept for the harvest. It is kept at the city granaries, where Karan Kumar, the master of granaries, presides.
+   CALM:      A day of contests that gives thanks for the harvest. It is kept at the city granaries, where Karan Kumar, the master of granaries, presides.
+   refused under the crisis: gloss.harvest: "gives thanks for the harvest" refused → twin "is kept for the harvest"
+   slots that read differently: gloss
+
+8. FAMINE — Gangamandal (metropolis, south_asian) — The Dead Offering
+   IN CRISIS: An offering made in common that remembers those who came before. Its keeping falls to the great cathedral; Naresh Subramanian, the bishop, presides. Gangamandal keeps it in memory of the Siege, 353 years ago.
+   CALM:      An offering made in common that remembers those who came before. Its keeping falls to the great cathedral; Naresh Subramanian, the bishop, presides. Gangamandal keeps it in memory of the Flood, 334 years ago.
+   refused under the crisis: nothing
+   the record differs — in crisis it drew on: keeper: house Great cathedral; presides: Naresh Subramanian; cause: history event "The Siege", 353 years ago
+                       calm, it drew on: keeper: house Great cathedral; presides: Naresh Subramanian; cause: history event "The Flood", 334 years ago
+   slots that read differently: none (the same lines, filled differently)
+
+9. UNDER_SIEGE — Magnaurbs (town, latin) — The Golden Fair
+   IN CRISIS: A fair day that blesses the furrows. It is kept at the weekly market and falls to the Merchant Guilds. Magnaurbs takes in more from market taxes than from anything else.
+   CALM:      A fair day that blesses the furrows. It is kept at the weekly market and falls to the Merchant Guilds. Magnaurbs takes in more from market taxes than from anything else.
+   the same reading.
+
+10. UNDER_SIEGE — Tulumucan (city, mesoamerican) — The River Procession
+   IN CRISIS: A procession on foot that blesses the river. River tolls are one of the mainstays of Tulumucan.
+   CALM:      A procession on foot that blesses the river. River tolls are one of the mainstays of Tulumucan.
+   (the calm reading's town is not quite calm: it holds mass_migration)
+   the same reading.
+
+11. OCCUPIED — Tikalac (town, mesoamerican) — The Greening Feast
+   IN CRISIS: A feast kept as of old that marks the coming of spring.
+   CALM:      A feast at long tables that marks the coming of spring.
+   refused under the crisis: lead.feast: "A feast at long tables" refused → twin "A feast kept as of old"
+   slots that read differently: lead
+
+12. OCCUPIED — Anoskala (town, greek) — The Greening Procession
+   IN CRISIS: A walking procession that welcomes the year's new growth.
+   CALM:      A walking procession that welcomes the year's new growth.
+   (the calm reading's town is not quite calm: it holds politically_fractured)
+   the same reading.
+
+ALL CRISIS RITES AGAINST THEIR CALM READINGS (each crisis: rites printed; with a calm counterpart; reading differently; why, a rite counted under each cause it has)
+  famine: 1232 printed; 1232 with a calm counterpart; 531 read differently (a line refused only: 229; the record only: 200; both: 102) — the record it drew on differs 302; lead.feast refused → twin 218; lead.fair refused → twin 91; gloss.harvest refused → twin 31
+  under_siege: 1232 printed; 1232 with a calm counterpart; 541 read differently (a line refused only: 215; the record only: 210; both: 116) — the record it drew on differs 326; lead.feast refused → twin 218; lead.fair refused → twin 91; gloss.harvest refused → twin 31
+  occupied: 1232 printed; 1232 with a calm counterpart; 401 read differently (a line refused only: 248; the record only: 70; both: 83) — lead.feast refused → twin 218; the record it drew on differs 153; lead.fair refused → twin 91; gloss.harvest refused → twin 31
+  wartime: 1232 printed; 1232 with a calm counterpart; 434 read differently (a line refused only: 229; the record only: 103; both: 102) — lead.feast refused → twin 218; the record it drew on differs 205; lead.fair refused → twin 91; gloss.harvest refused → twin 31
+  plague_onset: 1232 printed; 1232 with a calm counterpart; 496 read differently (a line refused only: 230; the record only: 165; both: 101) — the record it drew on differs 266; lead.feast refused → twin 218; lead.fair refused → twin 91; gloss.harvest refused → twin 31
