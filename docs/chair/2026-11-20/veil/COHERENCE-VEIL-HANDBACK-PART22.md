@@ -156,3 +156,11 @@ R3's inputs). R6 (tests only) PREPARED NOW beside the R2 cure. Briefs: `briefs/R
 THE HAND-OVER (the chair, 04:40 UTC): the successor VEIL-22 is seated beside this seat and writes nothing until the
 chair gives it the lane. This seat stays the one writer until R2 is merged green and pushed, then ONE message "R2
 <commit>" and hands over; it does NOT launch R3 and R4 (VEIL-22 does).
+
+THE CHAIR (04:50 UTC): VEIL-22 read R2 at 12a371c0b and found it sound (the restated `_gallery_veil` differs from 211's by
+exactly the two cure hunks). RELAYED TO THE CURE: (1) VR37 SHARPENED: where the re-derived readiness score falls outside the
+served label's band, the page draws the label alone (count the disagreements; a born arm); (2) the session sheet (Table View,
+"Open Tonight") draws on the shared page and the party link: the render-twice harness must walk it. FOR R4 (VEIL-22 carries
+it): a cast role of kind 'npc' is matched by id: R4 re-keys `cast.roles[].id` BEFORE R2's step.
+THE GATE BEFORE R2 (gallery, new shape, N=2, committed export): registered 0 | diffuse 0 | rng-only 13 | UNREGISTERED 137
+(`out/v21/gate/gate-gallery-pre-r2-at-0d28ccf19.txt`).
