@@ -1,0 +1,17 @@
+differ 298 gender 119
+{
+  'institution absent on the served card (stored veiled=true, kind=house)': 176,
+  'institution absent on the served card (stored veiled=true, kind=power)': 3
+}
+ ex: v24-gender-village-none-1 gallery dm=false default: "Godi Nanna Ingvarsson" | with stored gender "Gydja" (female)
+ ex: v24-gender-village-infiltrated-2 gallery dm=false default: "Brewster Panteleimonissa Doukas" | with stored gender "Alewife" (female)
+ ex: v24-gender-village-insurgency-4 gallery dm=false default: "Goodman Natsuki He" | with stored gender "Goodwife" (female)
+ ex: v24-gender-village-insurgency-4 gallery dm=false default: "Father Jun Song" | with stored gender "Mother" (female)
+ ex: v24-gender-village-occupied-5 gallery dm=false default: "Dairyman Nalayani Goswami" | with stored gender "Dairy Farmer" (female)
+ ex: v24-gender-village-indebted-6 gallery dm=false default: "Landlord Antonia Fronto" | with stored gender "Landlady" (female)
+ ex: institution absent on the served card (stored veiled=true, kind=house) | v24-gender-village-under_siege-8: owner "Smuggler" shared "" title="the smuggler" Alaa ibn Rashid
+ ex: v24-gender-village-wartime-9 gallery dm=false default: "Godi Menja Olafsson" | with stored gender "Gydja" (female)
+ ex: v24-gender-town-none-11 gallery dm=false default: "Landlord Chiyo Inoue" | with stored gender "Landlady" (female)
+ ex: v24-gender-town-none-11 gallery dm=false default: "Goodman Ai Xie" | with stored gender "Goodwife" (female)
+ ex: institution absent on the served card (stored veiled=true, kind=power) | v24-gender-town-infiltrated-12: owner "Speaker" shared "" title="the bloc's speaker" Alaqai Fergana
+ ex: v24-gender-town-infiltrated-12 gallery dm=false default: "Landlord Urangua Qatagin" | with stored gender "Landlady" (female)

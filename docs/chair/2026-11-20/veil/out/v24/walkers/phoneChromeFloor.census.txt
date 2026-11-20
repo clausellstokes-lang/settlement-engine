@@ -1,0 +1,42 @@
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/components/phoneChromeFloor.census.test.js > THE PHONE CHROME FLOOR — a census of the source, on every route the router declares > each surface matches its registry row, and an owned surface may only shrink
+AssertionError: 
+ROUTE_BASELINE mismatch. Each row is what this census measured on that surface.
+A `floored` number that FELL means a surface stopped being floored or stopped existing — which "zero violations" cannot see. One that ROSE means new floored lines; say so.
+A `bare` number that rose on an OWNED surface means new sub-floor sizes shipped behind the name of the lane that is curing the old ones; cure them instead of raising the row.
+Deliberate? Re-measure, re-record the row in the same car, and name the cause in the commit message.
+  /create  floored 621 -> 623
+  /settlements  floored 864 -> 866
+  /gallery  floored 666 -> 668
+: expected [ …(3) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "  /create  floored 621 -> 623",
++   "  /settlements  floored 864 -> 866",
++   "  /gallery  floored 666 -> 668",
++ ]
+
+ ❯ tests/components/phoneChromeFloor.census.test.js:635:7
+    633|       + 'message.\n'
+    634|       + `${drift.join('\n')}\n`,
+    635|     ).toEqual([]);
+       |       ^
+    636|   });
+    637|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 8 passed (9)
+   Start at  08:56:36
+   Duration  6.24s (transform 121ms, setup 49ms, import 5.81s, tests 227ms, environment 0ms)
+
+[gate-tail] end:  08:56:42 up 4 min,  0 user,  load average: 0.86, 0.33, 0.13
+[gate-tail] full log: /tmp/gate-tail.9140.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
