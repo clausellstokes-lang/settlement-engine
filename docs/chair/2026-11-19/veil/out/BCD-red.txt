@@ -28,3 +28,11 @@ C  "C EVERY FLAG BY getInstFlags": RED at the base, 880 sends or losses (no tabl
    hasGangInfra true beside a hidden street gang (VR4 side finding 3); a ruined prison; a flag the engine does not write).
    The acceptance row d06 at the base: veil/gallery `economicState.compound.inst.hasGuild` and `.hasChurch` true (16 hits in 8
    responses).
+
+D  "D THE INCOME ROW BY ITS HOUSE": RED at the base, 383 sends or losses (a criminal row whose words name no house, "Shadow
+   Economy (untaxed)", sent where its criminal house is hidden whole and both groupings are open; the remaining shares summing
+   to 100 less the criminal share; `weight` sent on every read, the unmarked share's too; the income prose rungs and their @
+   copies sent where the row is withheld). Born (measure/bcd-born.probe.jsx, base chain and twin): on the 8 towns of 48 that
+   carry a criminal row, every read that withholds it (128 of 768 per veil: 8 towns x 2 shapes x Reveal DM off and on x 4
+   reads, both veils) serves shares summing to 75, 82, 83, 84, 86 or 89, the gap equal to the criminal share in 128 of 128
+   (both engines); `weight` is sent on 768 of 768 reads per veil.

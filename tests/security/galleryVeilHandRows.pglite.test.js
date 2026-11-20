@@ -1954,4 +1954,74 @@ describe('COHERENCE-VEIL-10: the veil\'s design on rows written by hand (REVIEW-
     expect(bad.slice(0, 60), `${bad.length} sends or losses`).toEqual([]);
     expect(paths).toEqual([]);
   }, ARM_TIMEOUT_MS);
+
+  it('D THE INCOME ROW BY ITS HOUSE, AND THE SHARES RE-DERIVED: the criminal income row is withheld where either grouping is shut OR a criminal house is hidden whole, and a hand reveal of the house and both groupings restores the true row and shares; wherever an income row is withheld, the remaining shares are re-derived to sum to exactly 100 by largest remainder from weight (ties by the rows\' order; legacy rows from their stored percentages; nothing left: []), and the income prose rungs (incomeMix, criminalLine and their @ copies) go with it; weight is withheld on every read whatever the veil; the PDF\'s normalizeIncomeSources reads the re-derived shares unchanged; every read, Reveal DM off and on, the unmarked share too, server against twin 0 paths', async () => {
+    const bad = []; const paths = [];
+    const { normalizeIncomeSources } = await import('../../src/pdf/lib/viewModelBodySlices.js');
+    const GROUPINGS_OPEN = [{ address: 'block:defense.criminalStructure', hidden: false }, { address: 'block:power.criminalUnderside', hidden: false }];
+    // a criminal row whose words name no house (the name search cannot take it): only its house's eye or a grouping withholds it
+    const CRIME = { source: 'Shadow Economy (untaxed)', isCriminal: true, percentage: 19, weight: 19, desc: 'gcrim1 an estimated 19% flows through unofficial channels' };
+    const LAWFUL = [
+      { source: 'Market Taxes', percentage: 40, weight: 46, desc: 'Stall fees and tolls.' },
+      { source: 'Fishing', percentage: 25, weight: 28.75, desc: 'The catch.' },
+      { source: 'Crafts', percentage: 16, weight: 18.4, desc: 'Workshops.' },
+    ];
+    const PROSE = { v: 'pp-1', blocks: {
+      'general:overview': { incomeMix: { text: 'gmix1 the town depends on one source of income' }, kother: { text: 'kother an overview rung' } },
+      'economy:economics': { incomeMix: { '@': 'general:overview' }, criminalLine: { text: 'gcl1 the guild takes its cut' }, tradeProfile: { text: 'ktrade a trade rung' } },
+      'economy:print': { criminalLine: { '@': 'economy:economics' } } } };
+    /** largest remainder, the brief's rule, written here on its own */
+    const lr = (basis) => {
+      let tot = 0; for (const b of basis) tot += b;
+      const parts = tot > 0 ? basis : basis.map(() => 1); const t = tot > 0 ? tot : parts.length;
+      const q = parts.map(b => (b / t) * 100); const f = q.map(v => Math.floor(v)); let give = 100 - f.reduce((a, v) => a + v, 0);
+      for (const i of q.map((_v, i) => i).sort((a, b) => ((q[b] - f[b]) - (q[a] - f[a])) || (a - b))) { if (give <= 0) break; f[i] += 1; give -= 1; }
+      return f;
+    };
+    const house = hiddenHouse('inst-tg', "Thieves' guild (powerful)");
+    const town = (income, prose = PROSE) => ({ name: 'Guildless', tier: 'town', institutions: [house, { id: 'inst-fish', name: 'Fish market', category: 'Economy', desc: 'Fish.' }],
+      economicState: { incomeSources: income, situationDesc: 'Honest trade gets by.' }, publicProse: prose });
+    const strip = (rows) => rows.map(({ weight: _w, ...r }) => r);
+    const ROWS = [
+      ['the house hidden whole, both groupings open: withheld by its house', town([...LAWFUL, CRIME]), [...hide(house), ...GROUPINGS_OPEN],
+        strip(LAWFUL).map((r, i) => ({ ...r, percentage: lr(LAWFUL.map(x => x.weight))[i] })), true],
+      ['the house revealed by hand, the groupings shut: withheld by the groupings', town([...LAWFUL, CRIME]), [{ address: cardAddress(house), hidden: false }],
+        strip(LAWFUL).map((r, i) => ({ ...r, percentage: lr(LAWFUL.map(x => x.weight))[i] })), true],
+      ['KEEP: the house and both groupings revealed by hand: the true row and shares', town([...LAWFUL, CRIME]), [{ address: cardAddress(house), hidden: false }, ...GROUPINGS_OPEN],
+        strip([...LAWFUL, CRIME]), false],
+      ['legacy rows with no weight: the stored percentages, scaled', town(strip([...LAWFUL, CRIME])), [...hide(house), ...GROUPINGS_OPEN],
+        strip(LAWFUL).map((r, i) => ({ ...r, percentage: lr(LAWFUL.map(x => x.percentage))[i] })), true],
+      ['one row without a weight: every row from its stored percentage', town([LAWFUL[0], { ...LAWFUL[1], weight: 'heavy' }, LAWFUL[2], CRIME]), [...hide(house), ...GROUPINGS_OPEN],
+        strip([LAWFUL[0], { ...LAWFUL[1], weight: 'heavy' }, LAWFUL[2]]).map((r, i) => ({ ...r, percentage: lr(LAWFUL.map(x => x.percentage))[i] })), true],
+      ['ties broken by the rows\' order', town([{ source: 'A', percentage: 27, weight: 10 }, { source: 'B', percentage: 27, weight: 10 }, { source: 'C', percentage: 27, weight: 10 }, CRIME]), [...hide(house), ...GROUPINGS_OPEN],
+        [{ source: 'A', percentage: 34 }, { source: 'B', percentage: 33 }, { source: 'C', percentage: 33 }], true],
+      ['nothing left: []', town([CRIME]), [...hide(house), ...GROUPINGS_OPEN], [], true],
+    ];
+    for (const [what, t, deltas, want, proseGoes] of ROWS) {
+      const r = await sharesOf(t, deltas);
+      paths.push(...enginePaths(what, r), ...differ(r.base.gallery, r.base.client).map(d => `${what}: base/gallery: ${d}`));
+      for (const { tag, doc } of [...everyRead(r), ...each(r, ['base'])]) {
+        if (!isRec(doc)) { bad.push(`${what}, ${tag}: no document`); continue; }
+        const rows = doc.economicState?.incomeSources;
+        if (!Array.isArray(rows)) { bad.push(`${what}, ${tag}: no income rows`); continue; }
+        if (rows.some(x => 'weight' in x)) bad.push(`${what}, ${tag}: weight is sent`);
+        if (tag.startsWith('base/')) continue; // the unmarked share (the link: the default veil): weight alone is asked of it here
+        for (const n of ['gcrim1', 'Shadow Economy']) if (proseGoes) bad.push(...arrivals(doc, n).map(a => `${what}, ${tag}: ${a}`));
+        if (differ(rows, want).length) bad.push(`${what}, ${tag}: the rows are ${JSON.stringify(rows).slice(0, 300)}`);
+        const sum = rows.reduce((a, x) => a + x.percentage, 0);
+        if (rows.length && sum !== 100) bad.push(`${what}, ${tag}: the shares sum to ${sum}`);
+        const pdf = normalizeIncomeSources(rows);
+        if (JSON.stringify(pdf.map(x => x.percentage)) !== JSON.stringify(rows.filter(x => x.percentage > 0).map(x => x.percentage))) bad.push(`${what}, ${tag}: the PDF reads ${JSON.stringify(pdf.map(x => x.percentage))}`);
+        const blocks = doc.publicProse?.blocks || {};
+        const rungs = Object.values(blocks).flatMap(b => Object.keys(b || {}));
+        if (proseGoes) {
+          for (const n of ['gmix1', 'gcl1']) bad.push(...arrivals(doc, n).map(a => `${what}, ${tag}: ${a}`));
+          if (rungs.includes('incomeMix') || rungs.includes('criminalLine')) bad.push(`${what}, ${tag}: an income prose rung is sent: ${JSON.stringify(blocks).slice(0, 200)}`);
+        } else if (!(blocks['general:overview']?.incomeMix?.text === 'gmix1 the town depends on one source of income' && blocks['economy:economics']?.criminalLine?.text === 'gcl1 the guild takes its cut')) bad.push(`${what}, ${tag}: the income prose is ${JSON.stringify(blocks).slice(0, 200)}`);
+        if (!rungs.includes('kother') || !rungs.includes('tradeProfile')) bad.push(`${what}, ${tag}: another rung went: ${JSON.stringify(blocks).slice(0, 200)}`);
+      }
+    }
+    expect(bad.slice(0, 60), `${bad.length} sends or losses`).toEqual([]);
+    expect(paths).toEqual([]);
+  }, ARM_TIMEOUT_MS);
 });

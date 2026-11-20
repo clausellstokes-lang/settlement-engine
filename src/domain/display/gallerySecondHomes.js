@@ -1221,11 +1221,75 @@ const CRIMINAL_INCOME_SOURCES = Object.freeze(['block:defense.criminalStructure'
  * The chair's ruling (c), COHERENCE-VEIL-8: the criminal income row (economicState.incomeSources[] with
  * `isCriminal`) is built from what two groupings hide: its label from safetyProfile.criminalInstitutions, its
  * sentence from safetyProfile.blackMarketCapture. Where either grouping is shut it is withheld whole (in place, on
- * applyVeil's own clone). SQL twin: migration 212 :: _gallery_veil_apply.
- * @param {Rec} s @param {ReadonlyArray<string>} groupings
+ * applyVeil's own clone). VEIL-19 (item D): AND BY ITS HOUSE: where any criminal house (cardVeil.js ::
+ * isCriminalInstitution) is hidden whole, whatever the groupings; a hand reveal of the house and both groupings restores
+ * it. SQL twin: migration 212 :: _gallery_veil_apply.
+ * @param {Rec} s @param {ReadonlyArray<string>} groupings @param {boolean} [criminalGone] a criminal house is hidden whole
  */
-export function withholdCriminalIncome(s, groupings) {
+export function withholdCriminalIncome(s, groupings, criminalGone = false) {
   const econ = recAt(s, 'economicState');
-  if (!econ || !Array.isArray(econ.incomeSources) || !groupings.some(g => CRIMINAL_INCOME_SOURCES.includes(g))) return;
+  if (!econ || !Array.isArray(econ.incomeSources) || !(criminalGone || groupings.some(g => CRIMINAL_INCOME_SOURCES.includes(g)))) return;
   econ.incomeSources = econ.incomeSources.filter(r => !(isRec(r) && r.isCriminal === true));
+}
+
+/** The income prose rungs that carry the criminal income (economyStateProse.js: the economy desk's incomeMix and criminalLine). */
+const INCOME_PROSE_RUNGS = Object.freeze(['incomeMix', 'criminalLine']);
+
+/** A share the re-derivation reads (a JSON number a double holds, from 0 to 10^12), or null. @param {unknown} v @returns {number|null} */
+const shareBasis = (v) => (typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1e12 ? v : null);
+
+/**
+ * VEIL-19 (item D; ruling VR6, THE OWNER'S OWN DESIGN; ruling VR19): THE SHARES RE-DERIVED, FOR DISPLAY ONLY (in place, on
+ * applyVeil's own clone). Wherever the veil has withheld any income row (`before`: the rows the projection held before it),
+ * the remaining rows' `percentage` is re-derived to sum to exactly 100 by LARGEST REMAINDER from `weight` (weight / the
+ * remaining weights' sum x 100; the floors; then one more to each of the largest remainders, ties by the rows' order); where
+ * any remaining row carries no usable weight (a JSON number from 0 to 10^12), from the stored percentages so (legacy, scaled);
+ * a sum of 0 shares equally; nothing left: []. The income prose rungs that carry the criminal income (incomeMix,
+ * criminalLine, at every site of publicProse.blocks, their `@` copies among them) go with it. AND ON EVERY READ THE VEIL RUNS,
+ * whatever it withheld: each row's `weight` is withheld (no shared page draws it; ruling VR19: a share is re-derived or
+ * withheld, never sent raw), so its absence tells nothing. The arithmetic is IEEE doubles in both engines, in the rows'
+ * order. SQL twin: migration 212 :: _gallery_veil_apply (and the reads' unmarked path: withholdIncomeWeights).
+ * @param {Rec} s @param {number|null} before
+ */
+export function rederiveIncomeShares(s, before) {
+  const econ = recAt(s, 'economicState');
+  if (!econ || !Array.isArray(econ.incomeSources)) return;
+  const rows = /** @type {unknown[]} */ (econ.incomeSources);
+  if (before !== null && rows.length < before) {
+    const objs = rows.filter(isRec);
+    const byWeight = objs.length > 0 && objs.every(r => shareBasis(r.weight) !== null);
+    let basis = objs.map(r => (byWeight ? /** @type {number} */ (shareBasis(r.weight)) : (shareBasis(r.percentage) ?? 0)));
+    let total = 0;
+    for (const b of basis) total += b;
+    if (!(total > 0)) { basis = basis.map(() => 1); total = basis.length; }
+    const q = basis.map(b => (b / total) * 100);
+    const shares = q.map(v => Math.floor(v));
+    let give = 100 - shares.reduce((a, v) => a + v, 0);
+    const order = q.map((_v, i) => i).sort((a, b) => ((q[b] - shares[b]) - (q[a] - shares[a])) || (a - b));
+    for (const i of order) { if (give <= 0) break; shares[i] += 1; give -= 1; }
+    let k = 0;
+    econ.incomeSources = rows.map(r => (isRec(r) ? { ...r, percentage: shares[k++] } : r));
+    const blocks = recAt(recAt(s, 'publicProse') || {}, 'blocks');
+    if (blocks) for (const site of Object.keys(blocks)) { const b = recAt(blocks, site); if (b) for (const key of INCOME_PROSE_RUNGS) delete b[key]; }
+  }
+  econ.incomeSources = /** @type {unknown[]} */ (econ.incomeSources).map(r => (isRec(r) && 'weight' in r ? withoutKey(r, 'weight') : r));
+}
+
+/** @param {Rec} r @param {string} key @returns {Rec} */
+function withoutKey(r, key) {
+  const next = { ...r };
+  delete next[key];
+  return next;
+}
+
+/**
+ * VEIL-19 (item D (4)): the unmarked share's read (served as before, no veil): each income row's `weight` withheld all the
+ * same (every non-owner read; no shared page draws it). Returns the projection itself where nothing is withheld, else a
+ * copy. SQL twin: get_gallery_dossier and import_gallery_dossier, the unmarked path.
+ * @param {Rec} pub @returns {Rec}
+ */
+export function withholdIncomeWeights(pub) {
+  const econ = recAt(pub, 'economicState');
+  if (!econ || !Array.isArray(econ.incomeSources)) return pub;
+  return { ...pub, economicState: { ...econ, incomeSources: econ.incomeSources.map(r => (isRec(r) && 'weight' in r ? withoutKey(r, 'weight') : r)) } };
 }

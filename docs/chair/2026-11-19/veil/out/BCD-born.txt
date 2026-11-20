@@ -55,3 +55,14 @@ C (every flag by getInstFlags, R3, VR4 side finding 3):
            So on born towns C moves nothing beyond what 212 (15) already lowered: the born hidden houses (smuggling network,
            underground network, black market, thieves' guild, street gang, ...) raise only the five criminal flags there.
   r5-born (B2 | C): 1152 rows, 0 differ; (base | C): 102 differ, B's.
+
+D (the income row by its house; the shares re-derived, VR6; `weight` withheld, VR19):
+  bcd-born (base | D's tree), each veil (the default veil; every eye shut: the same answer): reads that withhold an income row
+           128 (the 8 towns with a criminal row; on born towns the default groupings already withheld it, so the house's eye
+           adds no born read); their sums base {75: 16, 82: 16, 83: 32, 84: 32, 86: 16, 89: 16} | D {100: 128}; reads sending
+           `weight` 768 | 0; reads that lose an income prose rung 64 (the new shape's 8 towns x 2 x 4 reads: incomeMix and
+           criminalLine at economy:economics and their @ copies at economy:services, economy:resources, economy:daily_life,
+           counted OUTSIDE by the probe's fingerprint, which strips economy:economics alone: D's own, checked path by path
+           on village/calm/0); rows sent that the base withheld 0; server-twin 0 | 0; 0 raise.
+  r5-born (C | D): 1152 rows, 1152 differ: every read loses `weight` (unconditional, whatever the veil); 0 raise; server against
+           twin 0. v106-born at D: 0 holes in the served ts, server against twin 0.

@@ -197,6 +197,20 @@
 --       by execution): a substring of the name, the engine's word-bounded patterns, its live roster, the market by the
 --       house's own tags or the catalogue's market names; the name in the one fold (_gallery_veil_case_fold). A flag the
 --       table does not hold reads false. Never true where it was false. No signature changes.
+--   (33) THE INCOME ROW BY ITS HOUSE, AND THE SHARES RE-DERIVED (VEIL-19, item D; ruling VR6, THE OWNER'S OWN DESIGN; ruling
+--       VR19): (15) withheld the criminal income row only by the two groupings, and the remaining shares then summed to
+--       100 less the criminal share (the gap told it exactly, and `weight` a second way). Now (1) the row is withheld where
+--       either grouping is shut OR any criminal house (category or priorityCategory 'criminal', cardVeil.js ::
+--       isCriminalInstitution) is removed whole; a hand reveal of the house and both groupings restores the true row and
+--       shares. (2) Wherever the veil withholds any income row, the remaining rows' `percentage` is re-derived, for display
+--       only, to sum to exactly 100 by largest remainder from `weight` (doubles, in the rows' order; ties by order; legacy
+--       rows with no usable weight from their stored percentages; nothing left: []); the row's `desc` goes with it. (3) The
+--       income prose rungs incomeMix and criminalLine (at every site of publicProse.blocks, their `@` copies among them) go
+--       with it. (4) `weight` is drawn by no shared page (EconomicsTab.jsx, the PDF's normalizeIncomeSources and the
+--       journal read `percentage`): it is withheld on EVERY non-owner read whatever the veil (the veil's apply; the
+--       unmarked share's gallery read and import, restated here for that alone; the link always runs the veil). Never a
+--       stored change (_gallery_veil_apply, get_gallery_dossier, import_gallery_dossier; gallerySecondHomes.js ::
+--       withholdCriminalIncome, rederiveIncomeShares, withholdIncomeWeights). No signature changes.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -1686,6 +1700,19 @@ declare
   kind text;
   g text;
   src jsonb;
+  -- VEIL-19 (item D): the income rows before the veil, a criminal house removed whole, and the re-derivation's working values
+  n0 int := case when jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,incomeSources}') = 'array'
+                 then jsonb_array_length(s #> '{economicState,incomeSources}') end;
+  crim_gone boolean := false;
+  inc jsonb;
+  use_w boolean;
+  bas float8[];
+  tot float8;
+  bv float8;
+  q float8[];
+  sh int[];
+  give int;
+  ix int;
 begin
   -- X-21e: a card-hidden house goes whole only when the data puts it in the class.
   -- (set-based, the review's F5: one pass, never a growing object rebuilt per house)
@@ -1703,12 +1730,16 @@ begin
            -- COHERENCE-VEIL-10 (V7-9): the label of each house removed whole that has no name
            coalesce((select jsonb_agg(distinct card ->> 'label') from h
                       where house and public._gallery_veil_str(card -> 'name') = '' and public._gallery_veil_str(card -> 'label') <> ''), '[]'),
+           -- VEIL-19 (item D): a CRIMINAL house removed whole (cardVeil.js :: isCriminalInstitution: its category or
+           -- priorityCategory is 'criminal'; A-Z lowered, the same answer as toLowerCase for that word)
+           coalesce((select bool_or(translate(public._gallery_veil_str(card -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'
+                                    or translate(public._gallery_veil_str(card -> 'priorityCategory'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal') from h where house), false),
            fields || jsonb_build_object('institution', coalesce(fields -> 'institution', '{}') || coalesce((
              select jsonb_object_agg(q.id, (select jsonb_agg(distinct f) from (
                  select jsonb_array_elements_text(coalesce(fields #> array['institution', q.id], '[]')) f
                  union select unnest(array['description', 'function', 'services', 'people'])) u))
                from (select distinct id from h where not house) q), '{}'))
-      into gone_ids, gone_houses, gone_births, gone_labels, fields;
+      into gone_ids, gone_houses, gone_births, gone_labels, crim_gone, fields;
     if fields -> 'institution' = '{}' then fields := fields - 'institution'; end if;
   end if;
 
@@ -1775,12 +1806,58 @@ begin
   -- COHERENCE-VEIL-8, the chair's ruling (c): the criminal income row is built from what those groupings hide (its
   -- label from the criminal houses' list, safetyProfile.criminalInstitutions; its sentence carries the capture
   -- figure, safetyProfile.blackMarketCapture): where either grouping is shut it is withheld whole
-  -- (gallerySecondHomes.js :: withholdCriminalIncome)
-  if groupings && array['block:defense.criminalStructure', 'block:power.criminalUnderside']
+  -- (gallerySecondHomes.js :: withholdCriminalIncome). VEIL-19 (item D, THE INCOME ROW BY ITS HOUSE): and where any
+  -- criminal house is removed whole, whatever the groupings (a hand reveal of the house and both groupings restores it)
+  if (groupings && array['block:defense.criminalStructure', 'block:power.criminalUnderside'] or crim_gone)
      and jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,incomeSources}') = 'array' then
     s := jsonb_set(s, '{economicState,incomeSources}', coalesce((select jsonb_agg(e order by o)
       from jsonb_array_elements(s #> '{economicState,incomeSources}') with ordinality x(e, o)
      where not (jsonb_typeof(e) = 'object' and coalesce(e -> 'isCriminal' = 'true'::jsonb, false))), '[]'));
+  end if;
+  -- VEIL-19 (item D; ruling VR6, THE OWNER'S OWN DESIGN; ruling VR19): THE SHARES RE-DERIVED, FOR DISPLAY ONLY. Wherever the
+  -- veil has withheld any income row (fewer than `n0`), the remaining rows' `percentage` is re-derived to sum to exactly 100
+  -- by LARGEST REMAINDER from `weight` (weight / the remaining weights' sum x 100; the floors; then one more to each of the
+  -- largest remainders, ties by the rows' order); where any remaining row carries no usable weight (a JSON number from 0 to
+  -- 10^12), from the stored percentages so (legacy, scaled); a sum of 0 shares equally; nothing left: []. Doubles, in the
+  -- rows' order, as JavaScript computes them. The income prose rungs that carry the criminal income (incomeMix,
+  -- criminalLine, at every site of publicProse.blocks, their `@` copies among them) go with it. AND ON EVERY READ THE VEIL
+  -- RUNS: each row's `weight` is withheld (no shared page draws it; VR19: a share is re-derived or withheld, never sent raw).
+  -- gallerySecondHomes.js :: rederiveIncomeShares, rule for rule
+  if n0 is not null and jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,incomeSources}') = 'array' then
+    inc := s #> '{economicState,incomeSources}';
+    if jsonb_array_length(inc) < n0 then
+      select coalesce(bool_and(case when jsonb_typeof(e -> 'weight') = 'number' then (e ->> 'weight')::numeric between 0 and 1e12 else false end), false)
+        into use_w from jsonb_array_elements(inc) e where jsonb_typeof(e) = 'object';
+      bas := array(select case when jsonb_typeof(v) = 'number' and (v #>> '{}')::numeric between 0 and 1e12
+                               then case when public._gallery_veil_num_zero((v #>> '{}')::numeric) then 0::float8 else (v #>> '{}')::float8 end
+                               else 0::float8 end
+                     from jsonb_array_elements(inc) with ordinality x(e, o),
+                          lateral (select case when use_w then e -> 'weight' else e -> 'percentage' end as v) w
+                    where jsonb_typeof(e) = 'object' order by o);
+      tot := 0;
+      foreach bv in array bas loop tot := tot + bv; end loop;
+      if not tot > 0 then bas := array_fill(1::float8, array[cardinality(bas)]); tot := cardinality(bas); end if;
+      q := array(select (b / tot) * 100 from unnest(bas) with ordinality u(b, k) order by k);
+      sh := array(select floor(v)::int from unnest(q) with ordinality u(v, k) order by k);
+      give := 100 - coalesce((select sum(x) from unnest(sh) x), 0);
+      for ix in select k from unnest(q) with ordinality u(v, k) order by v - floor(v) desc, k loop
+        exit when give <= 0;
+        sh[ix] := sh[ix] + 1;
+        give := give - 1;
+      end loop;
+      s := jsonb_set(s, '{economicState,incomeSources}', coalesce((
+        select jsonb_agg(case when jsonb_typeof(e) = 'object' then e || jsonb_build_object('percentage', sh[r::int]) else e end order by o)
+          from (select e, o, count(*) filter (where jsonb_typeof(e) = 'object') over (order by o) as r
+                  from jsonb_array_elements(inc) with ordinality x(e, o)) z), '[]'));
+      if jsonb_typeof(s -> 'publicProse') = 'object' and jsonb_typeof(s #> '{publicProse,blocks}') = 'object' then
+        s := jsonb_set(s, '{publicProse,blocks}', (select coalesce(jsonb_object_agg(k, case when jsonb_typeof(v) = 'object' then v - 'incomeMix' - 'criminalLine' else v end), '{}')
+                                                     from jsonb_each(s #> '{publicProse,blocks}') b(k, v)));
+      end if;
+    end if;
+  end if;
+  if jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,incomeSources}') = 'array' then
+    s := jsonb_set(s, '{economicState,incomeSources}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' then e - 'weight' else e end order by o), '[]')
+                                                          from jsonb_array_elements(s #> '{economicState,incomeSources}') with ordinality x(e, o)));
   end if;
   -- VEIL-19 (REVIEW-VEIL-10's V10-6, the chair's ruling VR21, with item B): NO COUNTER TAKEN BEFORE A REMOVAL. The trace's
   -- `ts` is the engine's own sequence (trace.js :: recordTrace's clock from 0; tracePartition.js re-indexes it 0..n-1),
@@ -2031,7 +2108,11 @@ as $$
     r.public_slug,
     r.name,
     r.tier,
-    coalesce(vl.v -> 'body', proj.d) as data,
+    -- VEIL-19 (item D (4)): an unmarked share is served as before, but for each income row's `weight` (every non-owner read)
+    coalesce(vl.v -> 'body', case when jsonb_typeof(proj.d -> 'economicState') = 'object' and jsonb_typeof(proj.d #> '{economicState,incomeSources}') = 'array'
+              then jsonb_set(proj.d, '{economicState,incomeSources}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' then e - 'weight' else e end order by o), '[]')
+                                                                         from jsonb_array_elements(proj.d #> '{economicState,incomeSources}') with ordinality x(e, o)))
+              else proj.d end) as data,
     r.published_at,
     r.updated_at,
     r.view_count,
@@ -2179,7 +2260,11 @@ as $$
     s.id,
     s.name,
     s.tier,
-    coalesce(vl.v -> 'body', proj.d) as data
+    -- VEIL-19 (item D (4)): an unmarked share is served as before, but for each income row's `weight` (every non-owner read)
+    coalesce(vl.v -> 'body', case when jsonb_typeof(proj.d -> 'economicState') = 'object' and jsonb_typeof(proj.d #> '{economicState,incomeSources}') = 'array'
+              then jsonb_set(proj.d, '{economicState,incomeSources}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' then e - 'weight' else e end order by o), '[]')
+                                                                         from jsonb_array_elements(proj.d #> '{economicState,incomeSources}') with ordinality x(e, o)))
+              else proj.d end) as data
   from public.settlements s
   cross join lateral (
     select case
