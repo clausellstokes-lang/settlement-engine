@@ -242,3 +242,30 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   points a new account's session to this lane's handoffs (master's copy stops at 2026-11-06: this chair lost its first
   minutes to it, as every successor will until the pull request merges); (b) SD8's script; (c) pull request #74 placed
   once GIT-DOOR's point is on the line.
+- 00:32 UTC · **A CORRECTION OF MINE, FROM CI-FIT'S FIRST MEASURE (its message of 00:10 UTC, read 00:30).** Section 0 and
+  CI-FIT's prompt say mergeLadderHeldKeys A7 ran 338 s "against the default 20 s", seventeen times its budget. WRONG:
+  the test carries `SLOW` (300,000 ms); it ran 1.13 times its budget. The ratchet's budget reader
+  (`scripts/check-test-ratchet.mjs`, the text scan beside `globalTestTimeoutOf`) sees only numeric literals and named
+  the config default as the test's budget; the chair took that line as fact. ALL FOUR EXPIRIES ARE 1.09 TO 1.27 TIMES
+  THEIR OWN BUDGETS: one shape, shard load or the runner's speed, not a runaway test. ASSIGNED TO CI-FIT as a last
+  small unit: the reader resolves a budget held in a same-file constant and says "budget not read" where it cannot;
+  the message only, no verdict path.
+- 00:32 UTC · **VEIL-VR17'S FIRST ACT FOUND TWO LIVE SURFACES (its message of 00:18 UTC), AND RULING VR18.** Executed at
+  bedd5a392 on a pglite chain 001..212, born town Uxmalek: with `block:defense.criminalStructure` shut, the shut
+  grouping's derived lines are drawn to a visitor with no copy made by the visitor (1) on the gallery page and the
+  party link whenever the civility mask changes any string of the payload (`src/lib/gallery.js :: sanitizeDossier`
+  → `veilPublicPayload` → `lib/civility.js :: veilDeep` rebuilds every changed object, so the WeakMap's mark is on
+  an object nobody draws): one flagged word in the town's name is enough; (2) on the public campaign map's member
+  dossier (`CampaignWorldView` over `get_gallery_map`: the server veils the body and sends no groupings; the client
+  never marks it). The blocks are derived from data the bytes already carry: a failure of the DM's curation on a live
+  page, not a withheld house reaching a read. The list already ships (`gallery_member_overrides.$veil.groupings`).
+  **VR18 (the seventh chair; vetoable):** the seat's mechanism APPROVED (the list carried as data on the CLIENT's page
+  model, key `$veilGroupings`; nothing new in the server's bytes; never on a saved record), on four conditions:
+  (1) ABSENCE IS SHUT: on a non-owner surface a model with no signal at all reads every family grouping as shut;
+  only a present list, empty included, opens anything, so a later transform that drops the key fails closed;
+  (2) proved through the real pipeline, an opened grouping still drawn after the civility mask's rebuild; (3) the key
+  never saved or sent (a test at each writer); (4) the map member stays fail-closed: the server's list on the map
+  read is not built (`get_gallery_map` is VEIL-19's file and the map's fidelity is deferred with the map by the
+  owner's word); for the pack: "a grouping the DM opened is not drawn on the campaign map's member dossier". The seat
+  also measures whether any OTHER mark keyed by the page model's identity is lost by the same rebuild. THE CLASS SENT
+  TO REVIEW-VEIL-10 for its own pass: any transform on a non-owner path that rebuilds the page model after the veil.
