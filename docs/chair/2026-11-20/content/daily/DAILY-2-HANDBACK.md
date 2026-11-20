@@ -17,8 +17,8 @@ cure pattern, points 1 to 8). Predecessor's record: `DAILY-1-HANDBACK.md` (histo
   passed. Re-measure `measures/B1/b1.out.txt`: top 11/7/12/8/8/9%, distinct 17/34/25/26/32/24, EMPTY 0, false 0.
 - B2 (worktree `/home/user/wt-daily2-b2`, branch `lane/daily-2-2026-11-20-b2`): D1 `dawn_work` committed 7dd41dc59
   (not merged; red 6 of 7 on the old deriver); RESUMED (20:22) on DAILY-2's decided cures (W0/B0 declare `watch`; B26, S0
-  `crisis: under_siege` excluded; child U7/P9 `tier: ≥ village`), the any-cast cure, and D2 wiring. HELD FOR THE
-  CHAIR'S LEAVE (asked 20:22): `registeredWords.js :: HOUSE_FAMILY_KINDS` += baker→bakery, warehouse→warehouse (B0, B1,
+  `crisis: under_siege` excluded; child U7/P9 `tier: ≥ village`), the any-cast cure, and D2 wiring. LEAVE GRANTED 20:31
+  (ruling 23), relayed to B2 (asked 20:22): `registeredWords.js :: HOUSE_FAMILY_KINDS` += baker→bakery, warehouse→warehouse (B0, B1,
   M0, M2); `presumptionClasses.shared.mjs` class table: `route open` under `outside` (M0). Not built (no atom): W12,
   E0, rival N0/N1. D2's dry-run pools: B2's scratch `d2/childWarnings.js`, to be wired into `src/data/dailyLife/`.
 - SUCCESSION: DAILY-2's mark (+half) ≈ 350k at 20:2x; hand-over after B2's merge unless the chair says otherwise.
@@ -123,6 +123,13 @@ baseline file's _doc on a clean tree).
    fingerprint or golden this lane's wording moved (named with its cause; re-recorded only by its own door, or left
    for the close where the door is the owner's) or a real red, CURED ON THE LANE before the request. With rule 21's
    figures, that is the whole landing request.
+23. (20:31) DAILY-2's stricter needs stand (W0/B0 `watch`; B26/S0 `crisis: under_siege`; U7/P9 `tier: ≥ village`). LEAVE
+   GRANTED: `registeredWords.js :: HOUSE_FAMILY_KINDS` += baker→bakery, warehouse→warehouse; `tests/lint/
+   presumptionClasses.shared.mjs`: `route open` under `outside` (the trouble lane added `house`, `entrepot` there; the
+   depth lane edits it too: listed for the join). W12, E0, rival N0/N1 stay unbuilt. The any-cast cure: casts removed,
+   baseline never raised, `domainAnyCastBaseline` in every merge's green set. SUCCESSION: DAILY-3 seated at 360,000 by
+   the chair's read (DAILY-2 at 286,558 by the chair at 20:25); hand over after B2's merge, or at 400,000 by DAILY-2's
+   own estimate if first (then B2's branch up as `-wip`, one line through the chair).
 19. THE LANE DOES NOT PRINT: nothing under `src/components/`, `src/pdf/`, `supabase/`, `tests/security/`; no file under
    `src/generators/` without one line to the chair first.
 
@@ -157,7 +164,9 @@ market, trade route, smuggling. Final per-slot list written at each build's merg
 - Class files edited: `src/domain/facts/registeredWords.js :: HOUSE_FAMILY_KINDS` (3 rows: bathhouse, theater, root
   cellar → `institution:` kinds); `src/domain/facts/factVocabulary.js` (13 `INSTITUTION_WORDS`, 4 atoms: sick house,
   route open, government named, grain imported); `src/domain/facts/institutions.js :: INSTITUTION_KIND_PATTERNS` (13
-  rows); `tests/lint/defenceFactReaders.shared.mjs :: ATOM_WORDS` (2 rows); `tests/lint/presumedThings.widened.register.json`
+  rows); `registeredWords.js :: HOUSE_FAMILY_KINDS` += baker→bakery, warehouse→warehouse (B2, ruling 23);
+  `tests/lint/presumptionClasses.shared.mjs`: `route open` under `outside` (B2, ruling 23);
+  `tests/lint/defenceFactReaders.shared.mjs :: ATOM_WORDS` (2 rows); `tests/lint/presumedThings.widened.register.json`
   (one row shrunk by its door).
 - FIRST PAINT (measured 20:06 UTC; `npm run build` + VERIFY_DIST=1 `tests/build/vendorPdfLazy.test.js`,
   `generationWorkerLazy.test.js`): base 0eadcb032 = the line's 1,177,668 raw / 374,683 gzip / 314,537 Br, worker
