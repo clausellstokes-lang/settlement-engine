@@ -1,0 +1,97 @@
+1. Baimen (thorp, east_asian, coastal) — The Great Offering
+   A day of offerings that honours the tide. Its keeping falls to the fishing community; Xia Chen, the boat-headman, presides. Fish and maritime produce is Baimen's second income.
+   drew on: house: Fishing community (body); person: Xia Chen (the boat-headman); economicState.incomeSources[1]: Fish & Maritime Produce (11%)  [seed trad-e-thorp-east_asian, tradition.trad_e_thorp_east_asian.1]
+
+2. Xingang (thorp, east_asian, hills) — The Feast of the Charter
+   A feast eaten in common that honours the charter. It is overseen by the Elder Council. Xingang has kept it since its founding by a discharged soldier who liked the view and had nowhere better to be, 129 years ago.
+   drew on: founding core (record index 0, foundedYear 1); power (seat): Elder Council; history.founding: age 129, foundedBy "a discharged soldier who liked the view and had nowhere better to be"  [seed trad-f-thorp-east_asian, tradition.trad_f_thorp_east_asian.0]
+
+3. Eleftpolis (thorp, greek, forest) — The Harvest Feast
+   A feast eaten in common that gives thanks for the harvest. The harvest is Eleftpolis's only income.
+   drew on: economicState.incomeSources[0]: Harvest (100%)  [seed trad-e-thorp-greek, tradition.trad_e_thorp_greek.1]
+
+4. Eleftpolis (thorp, greek, forest) — The Common Vigil
+   A vigil that marks the founding. It falls to the Elder Council. It has been kept since Eleftpolis was founded by a discharged soldier who liked the view and had nowhere better to be, 50 years ago.
+   drew on: founding core (record index 0, foundedYear 1); power (seat): Elder Council; history.founding: age 50, foundedBy "a discharged soldier who liked the view and had nowhere better to be"  [seed trad-e-thorp-greek, tradition.trad_e_thorp_greek.0]
+
+5. Collefundus (hamlet, latin, hills) — The Procession of the Charter
+   A walking procession that honours the charter. It is overseen by the Headman's Authority. Collefundus has kept it since its founding by a household that settled first and found others following it in, 100 years ago.
+   drew on: founding core (record index 0, foundedYear 1); power (seat): Headman's Authority; history.founding: age 100, foundedBy "a household that settled first and found others following it in"  [seed trad-b-hamlet-latin, tradition.trad_b_hamlet_latin.0]
+
+6. Yekebaliq (hamlet, steppe, riverside) — The Great Charter Feast
+   A feast eaten in common that honours the charter. It is overseen by the Free Elder Council. Yekebaliq has kept it since its founding by a household that settled first and found others following it in, 62 years ago.
+   drew on: founding core (record index 0, foundedYear 1); power (seat): Free Elder Council; history.founding: age 62, foundedBy "a household that settled first and found others following it in"  [seed trad-e-hamlet-steppe, tradition.trad_e_hamlet_steppe.0]
+
+7. Ripaporta (hamlet, latin, desert) — The Elder Feast
+   A common feast that blesses the fields. The harvest is Ripaporta's only income.
+   drew on: economicState.incomeSources[0]: Harvest (100%)  [seed trad-a-hamlet-mediterranean, tradition.trad_a_hamlet_mediterranean.1]
+
+8. Ripaporta (hamlet, latin, desert) — The Great Founding Procession
+   A walking procession that marks the founding. It is overseen by the Elder Council. Ripaporta has kept it since its founding by a household that settled first and found others following it in, 88 years ago.
+   drew on: founding core (record index 0, foundedYear 1); power (seat): Elder Council; history.founding: age 88, foundedBy "a household that settled first and found others following it in"  [seed trad-a-hamlet-mediterranean, tradition.trad_a_hamlet_mediterranean.0]
+
+9. Shattmela (village, arabic, plains) — The Silk Feast
+   A common feast that marks the founding. It falls to the Elder Council. It has been kept since Shattmela was founded by escaped serfs seeking a place beyond the reach of their former masters, 64 years ago.
+   drew on: founding core (record index 0, foundedYear 1); power (seat): Elder Council; history.founding: age 64, foundedBy "escaped serfs seeking a place beyond the reach of their former masters"  [seed trad-b-village-arabic, tradition.trad_b_village_arabic.0]
+
+10. Neudorf (village, germanic, plains) — The Old Hunt Feast
+   A common feast that honours the hunt. It is kept by the hunter's lodge, and Radbot Köhler, the master of the hunt, presides.
+   drew on: house: Hunter's lodge (body); person: Radbot Köhler (the master of the hunt)  [seed trad-e-village-germanic, tradition.trad_e_village_germanic.1]
+
+11. Neudorf (village, germanic, plains) — The Feast of the Founding
+   A feast eaten in common that marks the founding. It is overseen by the Elected Reeve. Neudorf has kept it since its founding by a group of settlers seeking new opportunities, 40 years ago.
+   drew on: founding core (record index 0, foundedYear 1); power (seat): Elected Reeve; history.founding: age 40, foundedBy "a group of settlers seeking new opportunities"  [seed trad-e-village-germanic, tradition.trad_e_village_germanic.0]
+
+12. Izamco (village, mesoamerican, plains) — The Fair of the Dead
+   A fair of stalls and trading that remembers the dead. Its keeping falls to the house of worship; Yaotl Kanil, the priest, presides.
+   drew on: house: Parish church (body); person: Yaotl Kanil (the priest)  [seed trad-d-village-mesoamerican, tradition.trad_d_village_mesoamerican.1]
+
+13. Ormsund (town, norse, coastal) — The Iron Offering
+   Offerings that mark the first landing. It falls to the Guild Council. Port duties are the chief of Ormsund's incomes.
+   drew on: power (seat): Guild Council; economicState.incomeSources[0]: Port Duties (37%)  [seed trad-c-town-norse, tradition.trad_c_town_norse.2]
+
+14. Bergbrekka (town, norse, forest) — The Common Forge Contest
+   A day of contests that honours the forge. It is kept by the blacksmiths, and Bodvar Finsson, the master smith, presides.
+   drew on: house: Blacksmiths (3-10) (body); person: Bodvar Finsson (the master smith)  [seed trad-a-town-norse, tradition.trad_a_town_norse.2]
+
+15. Ormsund (town, norse, coastal) — The Bright Harvest Fair
+   A fair of stalls and trading that gives thanks for the harvest. It is kept at the town granary, where Ranveig Hrafnsson, the granary reeve, presides. Market taxes are Ormsund's second income.
+   drew on: house: Town granary (place); person: Ranveig Hrafnsson (the granary reeve); economicState.incomeSources[1]: Market Taxes (24%)  [seed trad-c-town-norse, tradition.trad_c_town_norse.1]
+
+16. Bergbrekka (town, norse, forest) — The Great Fair
+   A fair of stalls and trading that honours the forge. Its keeping falls to the blacksmiths; Bodvar Finsson, the master smith, presides. Market taxes are Bergbrekka's chief income.
+   drew on: house: Blacksmiths (3-10) (body); person: Bodvar Finsson (the master smith); economicState.incomeSources[0]: Market Taxes (36%)  [seed trad-a-town-norse, tradition.trad_a_town_norse.1]
+
+17. Víkgarde (city, norse, mountain) — The Offering of the Stars
+   Offerings that are made under the stars. It is kept by the monasteries, and Gorm Illugason, the senior abbot, presides.
+   drew on: house: Multiple monasteries (body); person: Gorm Illugason (the senior abbot)  [seed trad-d-city-norse, tradition.trad_d_city_norse.2]
+
+18. Saraihiid (city, steppe, riverside) — The Old Founding Fair
+   A fair that marks the founding. It falls to the Noble Governorship. It has been kept since Saraihiid was founded by a merchant coalition that grew too large for the town they started in, 204 years ago.
+   drew on: founding core (record index 0, foundedYear 1); power (seat): Noble Governorship; history.founding: age 204, foundedBy "a merchant coalition that grew too large for the town they started in"  [seed trad-d-city-steppe, tradition.trad_d_city_steppe.0]
+
+19. Ringthwaite (city, celtic, hills) — The Green Feast
+   A feast eaten in common that celebrates the market. It is kept at the market squares and falls to the Merchant Guild Council. Market taxes are Ringthwaite's chief income.
+   drew on: house: Multiple market squares (place); power (merchantry): Merchant Guild Council; economicState.incomeSources[0]: Market Taxes (22%)  [seed trad-e-city-celtic, tradition.trad_e_city_celtic.3]
+
+20. Víkgarde (city, norse, mountain) — The Vigil of the Forge
+   A night's vigil that honours the forge. Its keeping falls to the blacksmiths; Inga Egilsson, the master smith, presides.
+   drew on: house: Blacksmiths (3-10) (body); person: Inga Egilsson (the master smith)  [seed trad-d-city-norse, tradition.trad_d_city_norse.1]
+
+21. Bergstrand (metropolis, norse, riverside) — The Common Offering
+   A day of offerings that remembers the dead. Its keeping falls to the great cathedral; Þorbjörg Andersson, the bishop, presides. Bergstrand keeps it in memory of the Siege, 258 years ago.
+   drew on: house: Great cathedral (body); person: Þorbjörg Andersson (the bishop); history event: The Siege (external_threat, 258 years ago)  [seed trad-c-metropolis-norse, tradition.trad_c_metropolis_norse.3]
+
+22. Rajipeth (metropolis, south_asian, plains) — The Vigil of the Harvest
+   A vigil that gives thanks for the harvest. It is held at the state granary complex, where Kailash Sinha, the master of granaries, presides.
+   drew on: house: State granary complex (place); person: Kailash Sinha (the master of granaries)  [seed trad-f-metropolis-south_asian, tradition.trad_f_metropolis_south_asian.4]
+
+23. Bergstrand (metropolis, norse, riverside) — The Iron Feast  [SHORT FORM]
+   A common feast that marks the long days of high summer.
+   drew on: (the motif alone: long-sun · feast)  [seed trad-c-metropolis-norse, tradition.trad_c_metropolis_norse.2]
+
+24. Kashipuram (metropolis, south_asian, hills) — The Hunt Offering
+   A day of offerings that honours the hunt. It is kept at the furrier's district, where Suresh Hazra, the master furrier, presides.
+   drew on: house: Furrier's district (place); person: Suresh Hazra (the master furrier)  [seed trad-c-metropolis-south_asian, tradition.trad_c_metropolis_south_asian.4]
+
+cultures: 10 (east_asian, greek, latin, steppe, arabic, germanic, mesoamerican, norse, celtic, south_asian); short forms: 1 of 24
