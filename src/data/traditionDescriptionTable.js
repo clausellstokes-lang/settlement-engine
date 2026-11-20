@@ -150,21 +150,25 @@ export const KEEPER_HOUSES = Object.freeze({
   }),
 });
 
-/** S2, WHO KEEPS IT, a house: by kind, with a presiding person (the house card's own title) or a power for a place. */
+/**
+ * S2, WHO KEEPS IT, a house: by kind, with a presiding person (the house card's own title) or a power for a place.
+ * NO FRAME MAKES THE HOUSE THE SUBJECT OF A VERB: a house's prose form may be plural ("the market squares", "the
+ * blacksmiths") and no house rule says which, so every frame reads alike for one house or many (the same for an owner).
+ */
 export const HOUSE_FRAMES = Object.freeze({
-  body: Object.freeze(['It is kept by {house}.', 'Its keeping falls to {house}.', '{House} keeps it.']),
+  body: Object.freeze(['It is kept by {house}.', 'Its keeping falls to {house}.', 'It is in the keeping of {house}.']),
   bodyPerson: Object.freeze([
     'It is kept by {house}, and {person}, {title}, presides.', 'Its keeping falls to {house}; {person}, {title}, presides.',
-    '{House} keeps it, with {person}, {title}, presiding.',
+    'It is in the keeping of {house}, with {person}, {title}, presiding.',
   ]),
-  place: Object.freeze(['It is held at {house}.', 'It is kept at {house}.', '{House} is where it is kept.']),
+  place: Object.freeze(['It is held at {house}.', 'It is kept at {house}.', 'It takes place at {house}.']),
   placePerson: Object.freeze([
     'It is held at {house}, where {person}, {title}, presides.', 'It is kept at {house}, where {person}, {title}, presides.',
-    '{House} is where it is kept, with {person}, {title}, presiding.',
+    'It takes place at {house}, with {person}, {title}, presiding.',
   ]),
   placePower: Object.freeze([
     'It is held at {house}, in the keeping of {power}.', 'It is kept at {house} and falls to {power}.',
-    '{House} is where it is kept; it falls to {power}.',
+    'It takes place at {house}; it falls to {power}.',
   ]),
 });
 
@@ -175,8 +179,9 @@ export const POWER_FRAMES = Object.freeze({
   merchantry: Object.freeze(['Its cost is met by {power}.', 'It is paid for by {power}.', '{Power} meets its cost.']),
 });
 
-/** S2, WHO KEEPS IT, in play: the record's own owner (ownerKind, ownerLabel), and nothing beside it. */
-export const OWNER_FRAMES = Object.freeze(['It is kept now by {owner}.', 'Its keeping falls now to {owner}.', '{Owner} keeps it now.']);
+/** S2, WHO KEEPS IT, in play: the record's own owner (ownerKind, ownerLabel), and nothing beside it; never the subject
+ *  of a verb (a house or a power may be plural: HOUSE_FRAMES). */
+export const OWNER_FRAMES = Object.freeze(['It is kept now by {owner}.', 'Its keeping falls now to {owner}.', 'It is in the keeping of {owner} now.']);
 
 /** S3, WHERE IT COMES FROM: the only frames that assert a cause (CTR2). */
 export const CAUSE_FRAMES = Object.freeze({

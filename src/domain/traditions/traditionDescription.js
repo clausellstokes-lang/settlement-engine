@@ -16,13 +16,41 @@
  * card's tie to its house is a field a DM may hide card by card). So no byte of a reader's description depends on what a
  * DM has hidden. A hidden power is named for no one: the town does not know it is there.
  *
- * PURE, derived at render, nothing stored (CTR4): no draw (a frame is picked by kernel/proseHash.js :: pickVariant on the
- * record's stable id), no clock, no write, no new key on the town. Genesis is not read here and not changed (CTR3): the
- * record is the caller's, whichever set the surface already shows.
+ * CTR11 (the chair, 2026-11-20; vetoable by the owner): THE READER'S TEXT IS A FUNCTION ONLY OF FACTS NO ACT OF THE DM
+ * CAN HIDE: not only what it names, every word it CHOOSES. The reader's text is composed over `readerView` (below): the
+ * record less every row of a class the gallery veil withholds whole or the reader's wall never names (by the class, never
+ * by name, never by today's settings). THE CENSUS of the clauses that rank, count, choose or exclude, and their rows:
+ *   S1 lead and gloss   CHOOSE a line: `pickVariant` on the key (identity, not a row), then `drawDeclared`'s admission over
+ *                       `factsOf(view)`. The table's needs read `market` and `institution: smith` (the view's live roster: no
+ *                       hideable house), `navigable`/`river`/`coast` (geography) and the crisis families (the
+ *                       stress record); none is a row the veil withholds once the view is taken.
+ *   S2 owner            CHOOSES nothing: the record's own owner, named only where the view holds it by that exact name (a
+ *                       veiled power or hideable house is out of the view); absent, the keeper slot stays empty (no other
+ *                       keeper stands in), so the text is the same whether the withheld owner's row is there or not.
+ *   S2 house (houseFor) CHOOSES the first live house of a fitting kind in the table's order, over the view's roster (no
+ *                       hideable house: people/cardVeil.js :: isHideableHouse), so none can stand earlier in the order.
+ *   S2 power (powerFor) CHOOSES the seat (rulingPower.js :: governingFactionOf over the view's powers, so a veiled power
+ *                       flagged governing cannot stand ahead of the served seat) or the STRONGEST power of an archetype
+ *                       (by `power`, over the view's powers: no isVeiledPower row can outrank the one named).
+ *   S2 presider         none for a reader (a card's tie is a field the DM may hide card by card).
+ *   S3 founding         CHOOSES between the two founding pools by whether the record holds `foundedBy`, and states the
+ *                       founding's `age`: history.founding, which the veil does not withhold.
+ *   S3 the dead         CHOOSES the most recent graded event by `yearsAgo` over history.historicalEvents: the veil hides an
+ *                       event's fields, never its row, and the fields read (name, templateType, severity, yearsAgo) are on
+ *                       the event card's floor (galleryVeil.js :: CARD_KINDS.event).
+ *   S3 economy          RANKS the fitting income (chief / lesser) and COUNTS the incomes ('only') over the view's
+ *                       incomeSources: the criminal income row (`isCriminal: true`), the one row the veil withholds whole
+ *                       (gallerySecondHomes.js :: withholdCriminalIncome, on the veil lane), is out of the view.
+ *   The owner's audience reads the record whole: nothing here changes the owner's page.
+ *
+ * PURE, derived at render, nothing stored (CTR4): no draw (a frame is picked by kernel/proseHash.js :: pickVariant on a
+ * key of the settlement's identity and the record's stable id), no clock, no write, no new key on the town. Genesis is
+ * not read here and not changed (CTR3): the record is the caller's, whichever set the surface already shows.
  */
 import { pickVariant } from '../../kernel/proseHash.js';
 import { powerNameInProse } from '../display/governanceAccount.js';
 import { institutionHouseLabel } from '../display/institutionDisplayName.js';
+import { houseSentenceName } from '../../data/houseSentenceName.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { isHideableHouse, isVeiledPower } from '../people/cardVeil.js';
@@ -76,16 +104,48 @@ const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 /** @param {string} template @param {Record<string, string>} slots @returns {string} */
 const fill = (template, slots) => template.replace(/\{(\w+)\}/g, (_, k) => slots[k] ?? '');
 /**
- * THE ONE DRAW (CTR10): the composer's selector (`pickVariant` on the record's stable id) over the FULL pool, the drawn line
- * resolved through `drawDeclared` against the facts of the record the leaf was handed (a refused line moves to its twin,
- * else the admitted argmax, else nothing). Fail-closed as the house's draw is.
+ * THE READER'S VIEW (CTR11): the record less every row of a withheld class, so no rank, count or choice the reader's text
+ * makes can be shifted by a row a DM may hide: hideable houses (people/cardVeil.js :: isHideableHouse, the class the
+ * gallery veil removes whole), veiled powers (cardVeil.js :: isVeiledPower, the reader's wall) and the criminal income row
+ * (`isCriminal: true`, gallerySecondHomes.js :: withholdCriminalIncome's class). Everything else is the record's own.
+ * A shallow copy: the record is never written.
+ * @param {Rec} settlement @returns {Rec}
+ */
+function readerView(settlement) {
+  const ps = recordOf(settlement.powerStructure);
+  const economy = recordOf(settlement.economicState);
+  return {
+    ...settlement,
+    // the live roster (institutions/institutionRoster.js): every reader of the roster here reads it live already
+    institutions: liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement)).filter((i) => !isHideableHouse(recordOf(i))),
+    powerStructure: { ...ps, factions: listOf(ps.factions).filter((f) => !isVeiledPower(f)) },
+    economicState: { ...economy, incomeSources: listOf(economy.incomeSources).filter((r) => recordOf(r).isCriminal !== true) },
+  };
+}
+
+/**
+ * The settlement's identity a draw is keyed on: the desks' own display convention (`String(s._seed ?? s.id)`,
+ * domain/display/publicProse.js's law; components/new/powerDeskRead.js and its siblings read the same). The seed stands
+ * first, so a record keeps its key when a save stamps its id, and the composer at save (shownTraditions.js ::
+ * sharedTraditionRowsOf) runs on this same owner's record: the owner's page and the reader's drawn row share one key.
+ * @param {Rec} settlement @returns {string}
+ */
+const settlementSeedOf = (settlement) => String(settlement._seed ?? settlement.id ?? '');
+
+/**
+ * THE ONE DRAW (CTR10): the composer's selector (`pickVariant` on `seed::slot`, the settlement's identity then the
+ * record's stable id and the slot) over the FULL pool, the drawn line resolved through `drawDeclared` against the facts of
+ * the record the leaf was handed (a refused line moves to its twin, else the admitted argmax under the same key, else
+ * nothing). Fail-closed as the house's draw is.
  * @template L
- * @param {ReadonlyArray<L>} pool @param {string} key @param {string} poolId @param {() => object|null} facts
+ * @param {ReadonlyArray<L>} pool @param {string} seed the settlement's identity (settlementSeedOf)
+ * @param {string} slot the record's id and the slot @param {string} poolId @param {() => object|null} facts
  * @param {boolean} [crisisScoped] @returns {string}
  */
-function draw(pool, key, poolId, facts, crisisScoped = false) {
+function draw(pool, seed, slot, poolId, facts, crisisScoped = false) {
   const drawn = drawDeclared(pool, {
-    draw: (p) => pickVariant(p, key), facts, key, poolId: `traditionDescription:${poolId}`, surface: 'traditions', drawKind: 'H', crisisScoped,
+    draw: (p) => pickVariant(p, `${seed}::${slot}`), facts, key: `${seed}::${slot}`,
+    poolId: `traditionDescription:${poolId}`, surface: 'traditions', drawKind: 'H', crisisScoped,
   });
   const text = drawn.line == null ? null : lineText(drawn.line);
   return typeof text === 'string' ? text : '';
@@ -106,12 +166,17 @@ function wantedPower(rec, element, act, core) {
 }
 
 /**
- * A house in a sentence, with its article: the house's display label (institutionHouseLabel), less a leading count word
- * ("Multiple", "Major"), a trailing qualifier in brackets and an alternative after a slash.
+ * A house in a sentence, with its article: the house's prose form (data/houseSentenceName.js :: houseSentenceName over
+ * its display label, institutionDisplayName.js :: institutionHouseLabel), so "Colosseum/arena" reads "the arena". The
+ * helper covers the slash labels; two strips it does not cover stay, each for its own reason:
+ *   - a leading count word ("Multiple market squares", "Major monasteries (5-10)" → "Major monasteries"):
+ *     institutionHouseLabel keeps it as the roster's label, and the frame's article reads "the multiple market squares";
+ *   - a trailing qualifier in brackets that is not catalogue machinery ("Priest (resident)", "Resident smith
+ *     (part-time)"): institutionHouseLabel strips only machinery brackets, and a bracket inside a sentence is a gloss.
  * @param {Rec} inst @returns {string}
  */
 function houseInProse(inst) {
-  const label = institutionHouseLabel(inst).replace(/^(multiple|major)\s+/i, '').replace(/\s*\([^)]*\)\s*$/, '').replace(/\/.*$/, '').trim();
+  const label = houseSentenceName(institutionHouseLabel(inst)).replace(/^(multiple|major)\s+/i, '').replace(/\s*\([^)]*\)\s*$/, '').trim();
   if (!label) return '';
   const words = label.split(' ');
   const proper = words.length > 1 && words.every((w) => /^[A-Z]/.test(w));
@@ -218,7 +283,11 @@ function ownerFor(rec, settlement, reader) {
 export function describeTradition(recIn, settlementIn, options = {}) {
   if (!recIn || typeof recIn !== 'object' || !settlementIn || typeof settlementIn !== 'object') return null;
   const rec = recordOf(recIn);
-  const settlement = recordOf(settlementIn);
+  const reader = options.audience !== 'owner';
+  // CTR11: the reader's text is composed over the reader's view; the key (`seed`) is the whole record's identity, the
+  // same on both pages.
+  const whole = recordOf(settlementIn);
+  const settlement = reader ? readerView(whole) : whole;
   const id = str(rec.id) || str(rec.name);
   if (id.startsWith('custom:')) return null;
   const motif = recordOf(rec.coreMotif);
@@ -228,9 +297,9 @@ export function describeTradition(recIn, settlementIn, options = {}) {
   const leadPool = /** @type {Record<string, ReadonlyArray<import('../../data/traditionDescriptionTable.js').TraditionLine>>} */ (ACT_LEADS)[act];
   if (!glossPool || !leadPool) return null;
 
-  const reader = options.audience !== 'owner';
   const core = /\.0$/.test(id) && rec.foundedYear === 1;
   const town = str(settlement.name);
+  const seed = settlementSeedOf(whole);
   /** @type {object|null|undefined} */
   let factsMemo;
   const facts = () => {
@@ -244,8 +313,8 @@ export function describeTradition(recIn, settlementIn, options = {}) {
 
   // S1 WHAT IS DONE: a lead (by act) and a gloss (by element), each a declared pool; a refused gloss and no twin: no S1
   // gloss, and the lead stands with what the name already says ("A procession.").
-  const lead = draw(leadPool, `${id}#done`, `lead.${act}`, facts, CRISIS_SCOPED_ACTS.includes(act));
-  const glossText = draw(glossPool, `${id}#gloss`, `gloss.${element}`, facts, CRISIS_SCOPED_ELEMENTS.includes(element));
+  const lead = draw(leadPool, seed, `${id}#done`, `lead.${act}`, facts, CRISIS_SCOPED_ACTS.includes(act));
+  const glossText = draw(glossPool, seed, `${id}#gloss`, `gloss.${element}`, facts, CRISIS_SCOPED_ELEMENTS.includes(element));
   if (!lead) return null;
   const s1 = glossText ? `${lead} that ${glossText}.` : `${lead}.`;
 
@@ -254,7 +323,7 @@ export function describeTradition(recIn, settlementIn, options = {}) {
   const want = wantedPower(rec, element, act, core);
   const owner = ownerFor(rec, settlement, reader);
   if (owner) {
-    s2 = fill(draw(OWNER_FRAMES, `${id}#owner`, 'owner', facts), { owner: owner.prose, Owner: cap(owner.prose) });
+    s2 = fill(draw(OWNER_FRAMES, seed, `${id}#owner`, 'owner', facts), { owner: owner.prose, Owner: cap(owner.prose) });
     parts.keeper = 'owner';
     (owner.power ? named.powers : named.houses).push(owner.name);
   } else if (!str(rec.ownerLabel)) {
@@ -264,7 +333,7 @@ export function describeTradition(recIn, settlementIn, options = {}) {
       const person = presiderOf(house.name, settlement, reader);
       const power = !person && house.row.kind === 'place' && want ? powerFor(want, settlement, reader) : null;
       const key = house.row.kind === 'body' ? (person ? 'bodyPerson' : 'body') : (person ? 'placePerson' : (power ? 'placePower' : 'place'));
-      s2 = fill(draw(HOUSE_FRAMES[key], `${id}#house`, `house.${key}`, facts), {
+      s2 = fill(draw(HOUSE_FRAMES[key], seed, `${id}#house`, `house.${key}`, facts), {
         house: house.prose, House: cap(house.prose), person: person ? person.name : '', title: person ? person.title : '',
         power: power ? powerNameInProse(power) : '',
       });
@@ -275,7 +344,7 @@ export function describeTradition(recIn, settlementIn, options = {}) {
     } else if (want) {
       const power = powerFor(want, settlement, reader);
       if (power) {
-        s2 = fill(draw(POWER_FRAMES[want], `${id}#power`, `power.${want}`, facts), { power: powerNameInProse(power), Power: powerNameInProse(power, true) });
+        s2 = fill(draw(POWER_FRAMES[want], seed, `${id}#power`, `power.${want}`, facts), { power: powerNameInProse(power), Power: powerNameInProse(power, true) });
         parts.keeper = 'power';
         named.powers.push(power);
       }
@@ -289,7 +358,12 @@ export function describeTradition(recIn, settlementIn, options = {}) {
   const age = Number(founding.age);
   if (core && town && Number.isFinite(age) && age > 0) {
     const by = str(founding.foundedBy);
-    s3 = fill(draw(by ? CAUSE_FRAMES.founding : CAUSE_FRAMES.foundingBare, `${id}#origin`, by ? 'cause.founding' : 'cause.foundingBare', facts),
+    // The founding frames are chosen by their table key, as every other slot's pool is. A literal `CAUSE_FRAMES.founding`
+    // read named the corpus's single-home shape `founding` (history.founding) to the observed-shape scanner
+    // (scripts/lib/legacy-reader-shape-scan.mjs :: makeResolver, the ungrounded single-home rule), which carried it through
+    // `draw`'s pool into drawDeclared and read every declared line there as a `founding` record.
+    const cause = by ? 'founding' : 'foundingBare';
+    s3 = fill(draw(CAUSE_FRAMES[cause], seed, `${id}#origin`, `cause.${cause}`, facts),
       { town, Town: town, age: String(age), foundedBy: by });
     parts.origin = 'cause';
   } else if (element === 'the-dead') {
@@ -300,7 +374,7 @@ export function describeTradition(recIn, settlementIn, options = {}) {
       .sort((a, b) => Number(a.yearsAgo) - Number(b.yearsAgo))[0];
     if (event && town) {
       const years = Number(event.yearsAgo);
-      s3 = fill(draw(CAUSE_FRAMES.dead, `${id}#origin`, 'cause.dead', facts), {
+      s3 = fill(draw(CAUSE_FRAMES.dead, seed, `${id}#origin`, 'cause.dead', facts), {
         event: str(event.name).replace(/^The /, 'the '), when: years === 1 ? 'a year ago' : `${years} years ago`, Town: town,
       });
       parts.origin = 'cause';
@@ -308,13 +382,14 @@ export function describeTradition(recIn, settlementIn, options = {}) {
     }
   }
   if (!s3 && town) {
+    // the rank and the 'only' count: for a reader, over the view (no criminal income row; CTR11, the census above)
     const incomes = listOf(recordOf(settlement.economicState).incomeSources).map(recordOf);
     const fits = [...(INCOMES_BY_KEY[element] || []), ...(INCOMES_BY_KEY[act] || [])];
     for (const fit of fits) {
       const rank = incomes.findIndex((i) => str(i.source) === fit.source);
       if (rank < 0 || rank >= ECONOMY_RANKS.length) continue;
       const band = incomes.length === 1 ? 'only' : ECONOMY_RANKS[rank];
-      s3 = fill(draw(ECONOMY_BY_BAND[band] || [], `${id}#economy`, `economy.${band}`, facts), {
+      s3 = fill(draw(ECONOMY_BY_BAND[band] || [], seed, `${id}#economy`, `economy.${band}`, facts), {
         income: fit.prose, Income: cap(fit.prose), is: fit.plural ? 'are' : 'is', brings: fit.plural ? 'bring' : 'brings', town, Town: town,
       });
       parts.origin = 'economy';

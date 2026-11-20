@@ -176,8 +176,9 @@ describe('describeTradition — a cause only on the two marked pairings (CTR2)',
 describe('describeTradition — who keeps it, who presides, who pays (CTR1, CTR7)', () => {
   it('a house of a fitting kind keeps it, and the person on that house card presides under the title the card holds', () => {
     const d = describeTradition(rite(1, 'forge', 'feast'), town(), { audience: 'owner' });
-    expect(d.text).toMatch(/the blacksmiths/);
-    expect(d.text).toMatch(/Ulf Brenner, the master smith, presides/);
+    // any of the body-and-person frames (the pick is keyed on the settlement's identity): the house, then its presider
+    expect(d.text).toMatch(/\b[Tt]he blacksmiths\b/);
+    expect(d.text).toMatch(/Ulf Brenner, the master smith, presid(?:es|ing)\./);
     expect(d.named.houses).toEqual(['Blacksmiths (3-10)']);
     expect(d.named.persons).toEqual(['Ulf Brenner']);
   });
@@ -204,6 +205,62 @@ describe('describeTradition — who keeps it, who presides, who pays (CTR1, CTR7
     ] } });
     // anchored: this arm asserts the same rite in the default town names market taxes; only the incomes moved
     expect(describeTradition(rite(2, 'market', 'fair'), low, { audience: 'owner' }).text).not.toMatch(/Market taxes/i);
+  });
+
+  it('a house is named in its prose form (data/houseSentenceName.js :: houseSentenceName): the catalogue\'s "Colosseum/arena" keeps a contest as "the arena"', () => {
+    const t = town({ institutions: [{ name: 'Colosseum/arena', category: 'Entertainment' }], npcs: [] });
+    for (const audience of ['owner', 'reader']) {
+      const d = describeTradition(rite(2, 'hearth', 'contest'), t, { audience });
+      expect(d.named.houses, audience).toEqual(['Colosseum/arena']);
+      expect(d.text, audience).toMatch(/\b[Tt]he arena\b/);
+      // anchored: this arm asserts the same text names the house as the arena; the private rule's spelling is what is absent
+      expect(d.text, audience).not.toMatch(/Colosseum/i);
+    }
+  });
+
+  it('a PLURAL house never meets a singular frame verb ("The market squares is where it is kept", "The blacksmiths keeps it"), in any frame', () => {
+    const squares = { name: 'Multiple market squares', category: 'Economy' };
+    const smiths = { name: 'Blacksmiths (3-10)', category: 'Crafts' };
+    const ulf = { id: 'n-smith', name: 'Ulf Brenner', institution: { kind: 'house', key: 'Blacksmiths (3-10)', title: 'the master smith', veiled: false } };
+    const guilds = { powerStructure: { factions: [{ faction: 'Merchant Guilds', category: 'economy', power: 18 }] } };
+    const cases = [
+      [town({ institutions: [squares], npcs: [], powerStructure: { factions: [] } }), 'market', 'fair', {}], // place
+      [town({ institutions: [squares], npcs: [], ...guilds }), 'market', 'fair', {}], // place and power
+      [town({ institutions: [smiths], npcs: [] }), 'forge', 'feast', {}], // body
+      [town({ institutions: [smiths], npcs: [ulf] }), 'forge', 'feast', {}], // body and person
+      [town({ institutions: [squares], npcs: [] }), 'harvest', 'feast', { ownerKey: 'k', ownerKind: 'institution', ownerLabel: 'Multiple market squares' }], // in play
+    ];
+    const SINGULAR = /\b[Tt]he (?:market squares|blacksmiths) (?:is|keeps|has|meets|oversees)\b/;
+    let named = 0;
+    const singular = [];
+    for (const [t, el, act, extra] of cases) {
+      for (let i = 1; i <= 12; i += 1) {
+        for (const s of [{}, { _seed: `plural-${i}` }]) {
+          const d = describeTradition(rite(i, el, act, extra), { ...t, ...s }, { audience: 'owner' });
+          if (/\b[Tt]he (?:market squares|blacksmiths)\b/.test(d.text)) named += 1;
+          if (SINGULAR.test(d.text)) singular.push(`${el}/${act}#${i}${s._seed ? ` ${s._seed}` : ''}: ${d.text}`);
+        }
+      }
+    }
+    expect(named).toBe(cases.length * 24);
+    // anchored: `named` counts the same texts naming the plural house; the singular verb after it is what is absent
+    expect(singular).toEqual([]);
+  });
+
+  it('THE ECONOMY BAND FOR A READER is ranked over the incomes a reader can be served: a criminal income row (isCriminal, withheld whole by the gallery veil) neither outranks the market taxes nor counts beside them', () => {
+    const crime = { source: 'Smuggling & Black Markets', percentage: 35, isCriminal: true };
+    const taxes = { source: 'Market Taxes', percentage: 30 };
+    const harvest = { source: 'Harvest', percentage: 20 };
+    const CHIEF = /Nothing brings Ashford more than market taxes|Market taxes bring Ashford more than anything else|Ashford takes in more from market taxes than from anything else/;
+    const LESSER = /A good share of what Ashford takes in comes from market taxes|Market taxes are one of the mainstays of Ashford|Ashford takes in a good part of its living from market taxes/;
+    const ONLY = /All that Ashford takes in comes from market taxes|Ashford lives by market taxes alone|Market taxes are all Ashford lives by/;
+    const said = (incomeSources, audience) => describeTradition(rite(2, 'market', 'fair'), town({ economicState: { incomeSources } }), { audience }).text;
+    expect(said([crime, taxes, harvest], 'reader')).toMatch(CHIEF);
+    expect(said([crime, taxes, harvest], 'reader')).toBe(said([taxes, harvest], 'reader')); // the row present or withheld
+    expect(said([crime, taxes], 'reader')).toMatch(ONLY);
+    expect(said([crime, taxes], 'reader')).toBe(said([taxes], 'reader'));
+    // the owner reads the record whole: the criminal row ranks first, the market taxes second
+    expect(said([crime, taxes, harvest], 'owner')).toMatch(LESSER);
   });
 
   it('in play, the record\'s own owner keeps it, and no house is drawn beside it', () => {
@@ -268,6 +325,42 @@ describe('describeTradition — the audience (CTR5), fail-closed to the reader',
     expect(reader.text).not.toMatch(/weekly market/i);
   });
 
+  it('THE GUARD (CTR11): every clause that ranks, counts or chooses reads only rows a reader can be served — a planted hideable row that would outrank the served one leaves the reader\'s text byte-identical with it or without it', () => {
+    const base = town();
+    const ps = base.powerStructure;
+    const crimeHouse = (name) => ({ name, category: 'Criminal', priorityCategory: 'criminal' });
+    const cases = [
+      // the economy's rank and its 'only' count (the criminal income row, withheld whole by the gallery veil)
+      ['economy.rank', rite(2, 'market', 'fair'), { economicState: { incomeSources: [{ source: 'Smuggling', percentage: 40, isCriminal: true }, ...base.economicState.incomeSources] } }],
+      ['economy.only', rite(2, 'market', 'fair'), { economicState: { incomeSources: [{ source: 'Smuggling', percentage: 60, isCriminal: true }, { source: 'Market Taxes', percentage: 40 }] } }],
+      // the keeper house: a hideable house earlier in the table's order than the served one
+      ['house.order', rite(2, 'market', 'fair'), { institutions: [crimeHouse('Weekly market'), { name: 'Market square', category: 'Economy' }] }],
+      // the keeper power: a veiled power of the archetype, stronger than the served one
+      ['power.strongest', rite(2, 'hunt', 'fair'), { institutions: [], powerStructure: { factions: [{ faction: 'The Quiet Exchange', category: 'economy', hidden: true, power: 99 }, ...ps.factions] } }],
+      // the seat: a veiled power marked governing ahead of the served seat
+      ['power.seat', rite(0, 'founding', 'feast'), { powerStructure: { factions: [{ faction: 'The Hand Unseen', category: 'other', hidden: true, isGoverning: true, power: 40 }, ...ps.factions] } }],
+      // the line's admission (facts/drawDeclared.js): the only market is a hideable house
+      ['facts.market', rite(2, 'market', 'fair'), { institutions: [crimeHouse('Weekly market')] }],
+      // the owner in play: a veiled owner and no owner at all
+      ['owner.veiled', rite(1, 'harvest', 'feast', { ownerKey: 'k', ownerKind: 'faction', ownerLabel: "Thieves' Guild" }), {}],
+    ];
+    /** the same town with every row of the withheld classes removed (criminal income, hideable house, veiled power) */
+    const served = (t) => ({
+      ...t,
+      institutions: t.institutions.filter((i) => i.category !== 'Criminal'),
+      powerStructure: { ...t.powerStructure, factions: t.powerStructure.factions.filter((f) => !f.hidden && f.category !== 'criminal') },
+      economicState: { ...t.economicState, incomeSources: t.economicState.incomeSources.filter((r) => !r.isCriminal) },
+    });
+    const moved = [];
+    for (const [name, rec, over] of cases) {
+      const withRow = town({ ...over, npcs: [] });
+      const a = describeTradition(rec, withRow, { audience: 'reader' }).text;
+      const b = describeTradition(rec, served(withRow), { audience: 'reader' }).text;
+      if (a !== b) moved.push(`${name}: ${a} | ${b}`);
+    }
+    expect(moved).toEqual([]);
+  });
+
   it('a person is named for the owner, whatever the veil bit, and never for a reader (a card\'s tie to its house is a field the DM may hide)', () => {
     for (const veiled of [false, true, undefined]) {
       const t = town({ npcs: [{ id: 'n', name: 'Edda Vogt', institution: { kind: 'house', key: 'Parish church', title: 'the priest', veiled } }] });
@@ -289,6 +382,26 @@ describe('describeTradition — derived at render: pure, deterministic, writes n
     const b = recs.map((r) => describeTradition(r, t, { audience: 'owner' }));
     expect(a).toEqual(b);
     expect(JSON.stringify({ t, recs })).toBe(before);
+  });
+
+  it('THE DRAW KEY carries the settlement\'s identity (String(_seed ?? id), the desks\' convention): the same rite id in two towns may read differently, and one town reads the same before a save, after it and after a reload', () => {
+    const rec = rite(1, 'the-dead', 'vigil');
+    const texts = new Set();
+    for (let i = 0; i < 12; i += 1) texts.add(describeTradition(rec, town({ _seed: `ashford-${i}` }), { audience: 'owner' }).text);
+    // a constant key (the record's id alone) gives every town the same frames: one text for twelve seeds
+    expect(texts.size).toBeGreaterThan(1);
+    const unsaved = town({ _seed: 'ashford-7' });
+    const saved = { ...unsaved, id: 'b1f0c2d4-save-row' }; // a save stamps an id; the seed stands first, so nothing moves
+    const reloaded = JSON.parse(JSON.stringify(saved));
+    for (const audience of ['owner', 'reader']) {
+      const before = describeTradition(rec, unsaved, { audience }).text;
+      expect(describeTradition(rec, saved, { audience }).text, audience).toBe(before);
+      expect(describeTradition(rec, reloaded, { audience }).text, audience).toBe(before);
+    }
+    // a record with no seed keys on its id (the same fallback every desk reads)
+    const byId = new Set();
+    for (let i = 0; i < 12; i += 1) byId.add(describeTradition(rec, town({ id: `row-${i}` }), { audience: 'owner' }).text);
+    expect(byId.size).toBeGreaterThan(1);
   });
 
   it('total on garbage: no record, no town, an unknown motif', () => {
