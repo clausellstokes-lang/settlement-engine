@@ -61,7 +61,9 @@ const AGREEING_VERBS = ['is', 'has', 'was', 'does', 'needs', 'wants', 'makes', '
   'owes', 'spends', 'takes', 'turns', 'decides', 'raises', 'gives', 'runs', 'holds', 'earns', 'asks'];
 
 const textOf = (entry) => (typeof entry === 'string' ? entry : entry?.line);
-const slotsOf = (text) => [...String(text).matchAll(/\{([^}]*)\}/g)].map((m) => m[1]);
+const slotsOf = (text) => [...String(text).matchAll(/\{([^}]*)\}/g)].map((m) => m[1].split('|')[0]); // NAMES-3: an agreement form `{power|it|them}` names its power slot
+/** NAMES-3 (CV7): the power slots a word may agree with, through the agreement form `{slot|one|many}`. */
+const AGREEING_SLOTS = new Set(['power', 'rival', 'guild']);
 
 /** Every violation of the shape law in a table, as strings naming the line; [] when lawful. */
 function shapeViolations(table) {
@@ -93,6 +95,11 @@ function shapeViolations(table) {
             if (struck.includes(slot)) out.push(`slot: {${slot}} is struck in ${family} — ${where}`);
             else if (!famSlots.includes(slot)) out.push(`slot: {${slot}} is not in GOAL_SLOTS.${family} — ${where}`);
             else if (subSlots && !subSlots.includes(slot)) out.push(`slot: {${slot}} is not in GOAL_SUBKIND_SLOTS.${family}.${sub} — ${where}`);
+          }
+          // NAMES-3 (CV7): an agreement form agrees with a power slot the line itself prints, in two non-empty numbers
+          for (const m of text.matchAll(/\{([^}|]*)\|([^}]*)\}/g)) {
+            const [one, many, ...rest] = m[2].split('|');
+            if (!AGREEING_SLOTS.has(m[1]) || !text.includes(`{${m[1]}}`) || !one || !many || rest.length) out.push(`agreement: "{${m[1]}|${m[2]}}" — ${where}`);
           }
           const lower = text.toLowerCase();
           for (const tic of STRUCK_TICS) if (lower.includes(tic)) out.push(`tic: "${tic}" — ${where}`);
@@ -191,6 +198,10 @@ describe('goal families — the shape law', () => {
     expect(shapeViolations(plant('INSTITUTION', 'solvency', 'short', 'Keep the {house} out of debt this season.')).some((x) => x.startsWith('contract: an article'))).toBe(true);
     expect(shapeViolations(plant('POWER', 'tense', 'short', "Undo {rival}'s last gain this season.")).some((x) => x.startsWith('contract: "{rival}\'s"'))).toBe(true);
     expect(shapeViolations(plant('POWER', 'tense', 'long', 'See that {rival} needs {power} more than ever.')).some((x) => x.startsWith('contract: "{rival} needs"'))).toBe(true);
+    // NAMES-3 (CV7): an agreement form agrees with a power slot its line prints, in both numbers
+    expect(shapeViolations(plant('POWER', 'tense', 'long', 'See {power} last until {rival|it is|they are} gone.')).some((x) => x.startsWith('agreement:'))).toBe(true);
+    expect(shapeViolations(plant('RANK', 'climb', 'long', 'Lead {power} until {above|she|they} steps down.')).some((x) => x.startsWith('agreement:'))).toBe(true);
+    expect(shapeViolations(plant('RANK', 'enter', 'long', 'Serve {power} until {power|it is} strong.')).some((x) => x.startsWith('agreement:'))).toBe(true);
     expect(shapeViolations(plant('TIES', 'ally', 'long', { line: 'Stand with {other} at the market.', needs: ['bazaar'] })).some((x) => x.startsWith("needs: 'bazaar'"))).toBe(true);
     // POWERS-9: the excludes side is checked as the needs side is
     expect(shapeViolations(plant('SUPPLY', 'impaired', 'short', { line: 'Waste nothing at {house}.', needs: [], excludes: ['crisis: bazaar'] })).some((x) => x.startsWith("needs: 'crisis: bazaar'"))).toBe(true);

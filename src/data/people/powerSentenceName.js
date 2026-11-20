@@ -100,6 +100,18 @@ export function powerVerb(name, one, many) {
 }
 
 /**
+ * A template's AGREEMENT FORM, `{slot|one|many}` (NAMES-3, the seventh chair's rulings CV1/CV2 and CV7 of 2026-11-20, vetoable
+ * by the owner): the verb whose subject is the power in `{slot}`, or the "it"/"its" said of it, is written in both numbers
+ * and filled by that power's own (`powerVerb`): "the people who lead {power|it|them}", "{faction} {faction|is|are} about".
+ * `names` maps a slot to the power's name (bare or in its article form: the head word is the same); a slot it does not hold
+ * takes `one`. Every plain `{slot}` is left as written, for the template's own filler. Draw-free.
+ * @param {unknown} template @param {Readonly<Record<string, unknown>>} names @returns {string}
+ */
+export function fillAgreement(template, names) {
+  return String(template ?? '').replace(/\{(\w+)\|([^|{}]*)\|([^|{}]*)\}/g, (_m, slot, one, many) => powerVerb(Object.hasOwn(names, slot) ? names[slot] : '', one, many));
+}
+
+/**
  * The same, for a composed sentence whose template text is held byte-identical (a banked or held-keyed literal): the verb
  * that directly follows this power's article form ("the Merchant Guilds controls") takes the power's number. Only that
  * power, only that verb, only where it follows the name; a singular power's text is returned as it is.
