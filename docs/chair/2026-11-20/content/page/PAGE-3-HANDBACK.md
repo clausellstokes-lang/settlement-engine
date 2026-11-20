@@ -1,4 +1,4 @@
-# PAGE-3's hand-back (kept current at every push; last written 2026-11-20 13:51 UTC by `date -u`)
+# PAGE-3's hand-back (kept current at every push; last written 2026-11-20 13:54 UTC by `date -u`)
 
 Read this, then `PAGE-2-HANDBACK.md` (its section 1, the rulings in force, still governs where this file is silent),
 then `briefs/BUILDER-RULES.md` and the brief of the unit you take. PAGE-3 integrates; builders (the Agent tool) build.
@@ -47,10 +47,26 @@ the chair says. Every branch pushed (`-wip` when unfinished) after every return;
   `src/domain/tension/sideArchetypes.js` (origin/lane/frame-5-2026-11-20) must agree on what a side means.
 - The working line 43ab0f5eb (point 82) is merged into the lane at 6cf1e8e89 (no conflict).
 
+## 4a. THE CHAIR'S RULINGS OF 13:50
+
+- SIDES: {power} fills from the ROSTER by `means` (ruler = governing power; a power kind only where the document holds
+  EXACTLY ONE of that kind: the reader's test); the reader never names a side stored as the template's own words unless
+  its row carries `named`; a side already stored as a power's name is shown as stored (Legitimate heir, Corrupt officials,
+  Official guards, Power behind throne: no `named`). The case arm may match the fixed row's words OR the side it stands
+  for. The follow-up builder (page3/s7-fix) resumed on this at 13:5x.
+- PAGE-2'S BUILDERS ALL STOPPED; each branch UNFINISHED, to be finished by builders of PAGE-3's line cut from these tips:
+  S6 `lane/page-2-2026-11-20-t1` 532a74fa2 (its gates never ran; merge doors owed); L2 `-l2-wip` 609c52c5d (76 lines,
+  22.9%→14.2%; four register reds owed at the doors; THE 76 LINES TO THE CHAIR AS A FILE BEFORE MERGE); L4+S9 `-s-wip`
+  f2957d5be (the seven reworked lines in: SEND THEM TO THE CHAIR; 6 importer reds: three golden, three tests anchored on
+  secrets L4 cured, re-key by cause; the guard not started).
+- S9 REDESIGNED: its 40 OTHER cards NOT accepted. S9 becomes a POST-PASS like the goals' refusal: secrets dealt exactly
+  as today; THEN draw-free a misfit card takes its next admitted line no card of the town holds; a card that is not a
+  misfit keeps its secret BYTE FOR BYTE; if a later draw of the same card makes that impossible, the builder says which
+  and stops.
+
 ## 5. Open questions to the chair (asked, unanswered at this writing)
 
-- 13:4x: the sides follow-up's change 1 (does {power} fill from the stored side or the roster; what of the four rows
-  that already store a name).
+- (answered 13:50: see 4a.)
 - 14:2x: K's OTHER (353/44 golden, 686/89 census): a sixth class, or K stops.
 
 ## 6. Container facts (this container only; a successor re-makes them)
