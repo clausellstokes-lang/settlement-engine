@@ -668,6 +668,17 @@ parts of the whole check (at the close).
   TOWNS: pool depth: lines true to a person's trade, the commonest trades first, AFTER the deploy, unless the
   measure shows more than about one line in five of a second city already seen in the first.
 
+- **About 15:40 UTC, 2026-11-20, THE OWNER (verbatim), asked again:** "So what are your comprehensive holistic
+  expectations of generated settlements now as designed? In terms of expectation?" ANSWERED THE SAME TURN, as the
+  picture stands after today's rulings, each point marked measured, projected or unknown: pages that agree, a trouble
+  explained by what the place holds, people each worth meeting; strongest from town size up, plain at thorp and
+  hamlet. SAID AS STILL WEAK: sameness across places (a second city: wants 35% untouched before the deploy; ties 63%
+  to 37% and hooks 47% to 32% projected; the recent-conflict sentence shared by half of every size, a proposal
+  pending); the smallest places; Safety a floor; the shared page not cleared. SAID AS UNKNOWN: nobody has read one
+  settlement with everything on; only titles and names are on the working line; the joint measure and a dozen
+  settlements on the page are still owed before he signs. DECIDED IN THE ANSWER (he had been asked three times and
+  had deferred): the thin pages' first half goes in before the deploy.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -1533,6 +1544,15 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   survivor); the page never prints a guild the record lacks: in `tensionCauseSentenceOf` the kind's
   `withoutItsHouse` wording is read before the ranks: "Traders here are fighting over who may sell what, and over a
   say in how the place is run."; red first on that record.
+
+- **THE THIN PAGES, FIRST HALF, BEFORE THE DEPLOY (15:42 UTC).** The owner was told three times they wait on his
+  word and has deferred every decision to the chair: DECIDED. PAGE-4 builds, render only, by PAGE-1's brief
+  (`briefs/THIN.md` at 94d111a44): Daily Life prints the four of its eight computed slots that can print as they
+  are; Outlook stops dropping its warnings and dependencies (144 and 167 of 300 towns); Magic prints each
+  contributor's reason. CONDITIONS: nothing new computed or stored; MEASURE FIRST: a line that would print one
+  sentence in more than about a quarter of a size's places is not printed and comes to the chair; every audience
+  fails closed, each slot's reads listed for the security reader; the page's added words to the chair before the
+  merge. THE SECOND HALF (the four slots whose pools need mending) and Safety's floors stay after the deploy.
 
 ## 3. The queue, in order
 
