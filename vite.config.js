@@ -488,6 +488,22 @@ export const FIRSTPAINT2_LAZY_DOMAIN = [
   '/src/domain/facts/timberAtHand.js',
   '/src/domain/facts/tradeAtWork.js',
   '/src/domain/facts/sceneSupply.js',
+  // FIRSTPAINT-5 (CURE-FIRSTPAINT, DEPTH-3, 2026-11-20; the chair's rulings R1-R4 of 19:54 UTC). THE SAME PREMISE, ONE
+  // MEMBER, AND AN UNPINNED HOP. BUILD-CONFLICT's facts/rosterGrounds.js (the three roster grounds; its ONE importer is
+  // facts/factsOf.js, pinned here but generator-reached, so the derivation walks through it before the .delete()) rode
+  // EAGER engine-core, and its one import is facts/liveInstitutionNames.js: an UNPINNED excision (above) whose other pinned
+  // reachers (facts/institutions.js, display/threatAssessment.js) ride this chunk and none of whose reachers is in the
+  // entry's static graph, so Rollup's manual-chunk absorption put it HERE, and engine-core -> liveInstitutionNames was an
+  // engine-core -> coherence-lazy edge: at 2582075ed coherence-lazy, data-lazy and narrative-mutations rode first paint
+  // (3,309,715 B raw; DEPTH-3's build). The vocabulary's eager files (factVocabulary.js, registeredWords.js, factLayers.js)
+  // name it in comments only; no module of the true first-paint graph reaches it. Pinned here beside factsOf.js, the one
+  // door its three atoms are answered through; liveInstitutionNames.js stays where it is (excised, unpinned, absorbed into
+  // this chunk as before). No source line moves. MEASURED by executing this file's manualChunks over every src module
+  // (before/after): ONE route moves, rosterGrounds.js engine-core -> coherence-lazy, and EAGER_FIRST_PAINT_MODULES loses
+  // exactly rosterGrounds.js and liveInstitutionNames.js; the byte figures are DEPTH-3's build proof.
+  // @guarded-by tests/architecture/engineCoreLazyEdge.test.js (FIRSTPAINT-5: the unpinned hop, followed; red at
+  //   2582075ed, green with this pin).
+  '/src/domain/facts/rosterGrounds.js',
 ];
 for (const frag of ENGINE_SHARED_DOMAIN_EXCISIONS) ENGINE_SHARED_DOMAIN.delete(frag);
 for (const frag of FIRSTPAINT2_LAZY_DOMAIN) ENGINE_SHARED_DOMAIN.delete(frag);
