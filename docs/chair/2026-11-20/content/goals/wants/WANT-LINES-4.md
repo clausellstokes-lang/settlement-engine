@@ -115,12 +115,10 @@ Existing (two of six, verbatim):
 
 New:
 1. Find a buyer this season for something {house} now lets go to waste.
-2. Look over everything {house} is paid for this season, and fix what loses money.
+2. Look over everything paid to {house} this season, and fix what loses money.
 
-> **For the chair (builder 9): 6.2 as reworded fails the shape law the test enforces.** `tests/data/goalFamilies.test.js ::
-> shapeViolations` reds `"{house} is" must agree in number` ({house} may be plural, "the mills is"). Kept word for word; a
-> lawful form of the same want, for the chair's choice: "Look over everything paid to {house} this season, and fix what
-> loses money." The build cannot land 6.2 as worded without that test going red.
+> **17:37 UTC:** the chair accepted the shape cure: 6.2 now reads as above. 21.1 replaced by the chair's ruling on the
+> PERSONALITY reserve check.
 3. Work out, before the season is out, which parts of the work at {house} make money and which lose it.
 
 ### 7 · TIES/rival_enemy/long · +3 (cell 23 → 26)
@@ -286,7 +284,7 @@ Existing (two of four, verbatim):
 - Settle every score before they die.
 
 New:
-1. Never forgive, and never let anyone see that they have not.
+1. Keep their anger hidden until the day it can be used.
 
 ### 22 · SUPPLY/expansion/short · +1 (cell 6 → 7)
 Holders: whoever runs a house whose work runs well (cartographer, customs collector, house boss, vintner, master

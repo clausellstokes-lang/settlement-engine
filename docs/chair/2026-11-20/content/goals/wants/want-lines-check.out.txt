@@ -1,8 +1,6 @@
-tree /home/user/wt-b9; files WANT-LINES-1.md, WANT-LINES-2.md, WANT-LINES-3.md, WANT-LINES-4.md, WANT-LINES-5.md, WANT-LINES-6.md, WANT-LINES-7.md; new lines 380 in 35 cells
+tree ../../../../../..; files WANT-LINES-1.md, WANT-LINES-2.md, WANT-LINES-3.md, WANT-LINES-4.md, WANT-LINES-5.md, WANT-LINES-6.md, WANT-LINES-7.md; new lines 380 in 35 cells
 lifted checker: tests/data/goalFamilies.test.js, 71 lines (const STRUCK_TICS … function shapeViolations)
-shapeViolations over cells + reserve + new lines: 2
-  contract: "{house} does" must agree in number — INSTITUTION.solvency.short: Get paid at once, this season, for everything {house} does or sells.
-  contract: "{house} is" must agree in number — INSTITUTION.solvency.short: Look over everything {house} is paid for this season, and fix what loses money.
+shapeViolations over cells + reserve + new lines: 0
   RANK/enter/short: 6 → 53 (+47)
   RANK/enter/long: 6 → 54 (+48)
   TIES/rival_enemy/short: 5 → 34 (+29)

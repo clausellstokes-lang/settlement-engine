@@ -11,11 +11,11 @@ WANT-LINES-2.md PERSONALITY/grudge/long #1: Take back, one day, everything they 
   reserve =long  0.00   Never let a single wrong done to them be forgotten.
   nearest drawn line (short) 0.25: Pay someone back for a wrong done to them.
 
-WANT-LINES-2.md PERSONALITY/grudge/long #2: Live well enough that everyone who ever doubted them has to watch.
+WANT-LINES-2.md PERSONALITY/grudge/long #2: Outdo, in every way they can, the person they have envied longest.
   reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
   reserve =long  0.00   See the people who looked down on them come asking for their help.
   reserve =long  0.00   Never let a single wrong done to them be forgotten.
-  nearest drawn line (long) 0.25: Outlast every person who ever crossed them.
+  nearest drawn line (long) 1.00: Have what others have, and more of it.
 
 WANT-LINES-2.md PERSONALITY/sway/long #1: Have people here quote them for years after they are gone.
   reserve  short 0.00   Be proved right this season about something everyone else doubted.
@@ -81,11 +81,11 @@ WANT-LINES-4.md PERSONALITY/sway/long #1: Be the one whose word decides who is w
   reserve =long  0.00   Have a following who would go wherever they lead.
   nearest drawn line (short) 0.25: Have the last word in the next argument that matters.
 
-WANT-LINES-4.md PERSONALITY/grudge/long #1: Never forgive, and never let anyone see that they have not.
+WANT-LINES-4.md PERSONALITY/grudge/long #1: Keep their anger hidden until the day it can be used.
   reserve  short 0.00   Spoil one good thing this season for someone who once slighted them.
-  reserve =long  0.25   See the people who looked down on them come asking for their help.
-  reserve =long  0.25   Never let a single wrong done to them be forgotten.
-  nearest drawn line (long) 1.00: Have what others have, and more of it.
+  reserve =long  0.00   See the people who looked down on them come asking for their help.
+  reserve =long  0.00   Never let a single wrong done to them be forgotten.
+  nearest drawn line (short) 0.00: Pay someone back for a wrong done to them.
 
 WANT-LINES-4.md PERSONALITY/sway/short #1: Settle one dispute here this season by their word alone.
   reserve =short 0.00   Be proved right this season about something everyone else doubted.
@@ -104,11 +104,11 @@ WANT-LINES-5.md PERSONALITY/sway/long #1: Have a hand in choosing whoever leads 
   reserve =long  0.40   Have a following who would go wherever they lead.
   nearest drawn line (short) 0.33: Have the last word in the next argument that matters.
 
-WANT-LINES-5.md PERSONALITY/sway/long #2: Never apologise to anyone, for anything.
+WANT-LINES-5.md PERSONALITY/sway/long #2: Make every newcomer here learn quickly whose word counts.
   reserve  short 0.00   Be proved right this season about something everyone else doubted.
   reserve =long  0.00   Never once be seen to back down.
   reserve =long  0.00   Have a following who would go wherever they lead.
-  nearest drawn line (short) 0.00: Have the last word in the next argument that matters.
+  nearest drawn line (short) 0.17: Have the last word in the next argument that matters.
 
 WANT-LINES-5.md PERSONALITY/grudge/short #1: Let someone they resent see them do well this season.
   reserve =short 0.00   Spoil one good thing this season for someone who once slighted them.
@@ -127,9 +127,9 @@ WANT-LINES-5.md PERSONALITY/grudge/long #1: Win, in the end, every quarrel they 
   reserve =long  0.00   Never let a single wrong done to them be forgotten.
   nearest drawn line (long) 0.25: Outlast every person who ever crossed them.
 
-WANT-LINES-5.md PERSONALITY/fear/long #1: Never let anyone know enough about them to hurt them.
+WANT-LINES-5.md PERSONALITY/fear/long #1: Live among neighbours who would stand by them if trouble came.
   reserve =long  0.00   Never again owe anything to someone who could use it against them.
-  nearest drawn line (short) 0.20: Find out who has been asking about them, and why.
+  nearest drawn line (long) 0.20: Live somewhere no one can reach them uninvited.
 
 WANT-LINES-5.md PERSONALITY/sway/short #1: Change one person's mind this season by argument alone.
   reserve =short 0.00   Be proved right this season about something everyone else doubted.

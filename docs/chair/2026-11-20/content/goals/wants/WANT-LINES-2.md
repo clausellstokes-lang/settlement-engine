@@ -90,13 +90,10 @@ Existing (two of six, verbatim):
 New:
 1. See that every coin taken at {house} this season is written down the same day.
 2. Bring more money into {house} this season without losing anyone who pays now.
-3. Get paid at once, this season, for everything {house} does or sells.
+3. Get paid at once, this season, for all the work done or sold at {house}.
 
-> **For the chair (builder 9): 4.3 as reworded fails the shape law the test enforces.** `tests/data/goalFamilies.test.js ::
-> shapeViolations` reds `"{house} does" must agree in number` ({house} may be plural, "the mills does"; the slot contract in
-> `goalFamilies.js`'s header: a house slot is never the subject of a verb that must agree). The chair's wording is kept here word
-> for word; a lawful form of the same want, for the chair's choice: "Get paid at once, this season, for all the work done or
-> sold at {house}." The build cannot land 4.3 as worded without that test going red.
+> **17:37 UTC:** the chair accepted the shape cure: 4.3 now reads as above. 11.2 replaced by the chair's ruling on the
+> PERSONALITY reserve check.
 4. Count everything held at {house} this season, and find out whether anything has gone missing.
 5. Turn away one piece of work this season that would cost {house} more than it pays.
 
@@ -188,7 +185,7 @@ Existing (two of four, verbatim):
 
 New:
 1. Take back, one day, everything they believe was taken from them.
-2. Live well enough that everyone who ever doubted them has to watch.
+2. Outdo, in every way they can, the person they have envied longest.
 
 ### 12 · PERSONALITY/sway/long · +2 (cell 5 → 7)
 Holders: a card that wants to be followed or deferred to (apothecary, ropemaker, fortune teller, mint master, master of

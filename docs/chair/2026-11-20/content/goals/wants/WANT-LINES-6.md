@@ -1,5 +1,8 @@
 # WANT-LINES-6 · the wants' tranche, file 6 of 7: 60 new DRAWN lines, POWER/competitive first
 
+> **READ BY THE CHAIR 17:37 UTC:** all 60 read; 58 approved, 2 reworded by the chair, word for word, as they now stand (8.2,
+> 20.1; numbered section.line).
+
 GOALS-3 · builder 9 · 2026-11-20. Docs only, for the chair's reading and the owner's veto.
 
 **POWER/competitive FIRST (the chair's order of 17:00 UTC: meet the 24 mirrors left, all on its existing lines).
@@ -149,7 +152,7 @@ Existing (two of six, verbatim):
 
 New:
 1. See {power} and {rival} deal with each other as equals one day.
-2. Make {power} strong enough to forgive {rival}, and still be safe.
+2. Make {power} strong enough to deal gently with {rival}, and still be safe.
 
 ### 9 · TIES/rival_enemy/long · +3 (cell 30 → 33)
 Holders: either end of a rivalry, an enmity or a tie of mutual leverage (master fishmonger, chief magistrate, customs
@@ -280,7 +283,7 @@ Existing (two of five, verbatim):
 - Keep {other} from calling in what is owed this season.
 
 New:
-1. Tell {other} plainly this season when the rest will be paid.
+1. Tell {other} plainly this season when what is owed will be paid.
 
 ### 21 · INSTITUTION/charter/short · +1 (cell 17 → 18)
 Holders: the head of a lawful house (dean, master of granaries, enchanter, chief magistrate, hospital's master, crier).

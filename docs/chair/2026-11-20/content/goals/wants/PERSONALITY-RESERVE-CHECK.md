@@ -43,3 +43,9 @@ contest or feast here this season." (reserve: proved right; never backing down; 
 
 ## The tranche: 32 new PERSONALITY drawn lines read; 0 duplicates; 4 near-restatements and 1 borderline, all in files the
 chair had already read, all left as approved and offered above for its ruling.
+
+## The chair's ruling (17:37 UTC)
+
+Replaced, word for word: 2:11.2 → "Outdo, in every way they can, the person they have envied longest." · 4:21.1 → "Keep their
+anger hidden until the day it can be used." · 5:12.2 → "Make every newcomer here learn quickly whose word counts." · 5:26.1 →
+"Live among neighbours who would stand by them if trouble came." · 3:20.1 STAYS.

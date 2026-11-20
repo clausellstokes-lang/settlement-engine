@@ -1,5 +1,8 @@
 # WANT-LINES-7 · the wants' tranche, file 7 of 7: 20 new DRAWN lines, the tranche complete at 380
 
+> **READ BY THE CHAIR 17:37 UTC:** all 20 read; 18 approved, 2 reworded by the chair, word for word, as they now stand (11.1,
+> 16.1; numbered section.line).
+
 GOALS-3 · builder 9 · 2026-11-20. Docs only, for the chair's reading and the owner's veto. The cells and counts are the
 build order's lines 345–364 (the order recut when POWER/competitive went first in file 6; `WANTS-PROPOSAL.md`'s addendum).
 Each line is APPENDED to the END of its cell in `GOAL_FAMILY_LINES`, after files 1–6. The rules as file 6 states them: the
@@ -183,7 +186,7 @@ Existing (two of five, verbatim):
 - Make {other} admit, in public, that they were wrong.
 
 New:
-1. Be the one who decides, in the end, how the quarrel with {other} is remembered.
+1. Be the one who decides, in the end, how their dealings with {other} are remembered.
 
 ### 12 · INSTITUTION/charter/long · +1 (cell 19 → 20)
 Holders: the head of a lawful house with rights from those who govern (garrison commander, master of granaries, chief
@@ -234,7 +237,7 @@ Existing (two of six, verbatim):
 - Answer the next move by {rival} against {power}, quickly and in public.
 
 New:
-1. Learn whether any of those who govern lean toward {rival}, this season.
+1. Learn who outside {power} leans toward {rival}, this season.
 
 ### 17 · RANK/climb/short · +1 (cell 16 → 17)
 Holders: the second or third of a power (hospital's master, mint master, sage, college master, chief magistrate, miller).

@@ -4,6 +4,7 @@
 > now stand (2.5, 5.3, 7.3, 8.1, 12.1, 13.1, 13.2, 14.2, 19.1; numbered section.line). Builder 9's own revision of this file
 > (2b412c37a) is UNDONE on the chair's word; only the chair's rewordings stand. The "Measured" block below is the file as first
 > written; the tranche measured with every file as it now stands is in WANT-LINES-7.md. 22.1 (TIES/debtor) stands.
+> **17:37 UTC:** 12.2 and 26.1 replaced by the chair's ruling on the PERSONALITY reserve check.
 
 GOALS-3 · builder 9 · 2026-11-20. Docs only, for the chair's reading and the owner's veto. The cells and counts are lines
 241–300 of the build order in [`WANTS-PROPOSAL.md`](WANTS-PROPOSAL.md) (`wants-by-pool.out.txt`, "THE BUILD ORDER", file
@@ -181,7 +182,7 @@ Existing (two of four, verbatim):
 
 New:
 1. Have a hand in choosing whoever leads this place next.
-2. Never apologise to anyone, for anything.
+2. Make every newcomer here learn quickly whose word counts.
 
 ### 13 · INSTITUTION/solvency/short · +2 (cell 19 → 21)
 Holders: as the long cell (whisper broker, midwife, outfitter, senior craft-guild master, banker, warehouse factor).
@@ -327,7 +328,7 @@ Existing (two of four, verbatim):
 - Grow old without ever having to look over their shoulder.
 
 New:
-1. Never let anyone know enough about them to hurt them.
+1. Live among neighbours who would stand by them if trouble came.
 
 ### 27 · PERSONALITY/sway/short · +1 (cell 7 → 8)
 Holders: a card that wants to be followed or deferred to (ropemaker, sawyer, senior charter master, fortune teller).
