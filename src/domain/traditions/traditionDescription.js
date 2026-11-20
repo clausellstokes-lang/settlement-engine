@@ -54,6 +54,9 @@
  * PURE, derived at render, nothing stored (CTR4): no draw (a frame is picked by kernel/proseHash.js :: pickVariant on a
  * key of the settlement's identity and the record's stable id), no clock, no write, no new key on the town. Genesis is
  * not read here and not changed (CTR3): the record is the caller's, whichever set the surface already shows.
+ * The record's `lastOutcome` and `lastHeldYear` are never read: the text never says what became of the rite this year
+ * (TRAD-4 unit 5; tests/domain/traditionDescription.test.js holds it). Every pool the leaf draws, frames included, is a
+ * table of declared lines (CTR10), drawn through the one `draw` below.
  */
 import { pickVariant } from '../../kernel/proseHash.js';
 import { powerNameInProse } from '../display/governanceAccount.js';
@@ -86,7 +89,7 @@ const HOUSES_BY_ELEMENT = KEEPER_HOUSES.element;
 const HOUSES_BY_ACT = KEEPER_HOUSES.act;
 /** @type {Readonly<Record<string, ReadonlyArray<TraditionIncomeRow>>>} */
 const INCOMES_BY_KEY = ECONOMY_FIT;
-/** @type {Readonly<Record<string, ReadonlyArray<string>>>} */
+/** @type {Readonly<Record<string, ReadonlyArray<import('../../data/traditionDescriptionTable.js').TraditionLine>>>} */
 const ECONOMY_BY_BAND = ECONOMY_FRAMES;
 /**
  * @typedef {Object} TraditionDescription

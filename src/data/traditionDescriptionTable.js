@@ -10,14 +10,21 @@
  * EVERY SLOT IS A POOL, AND EVERY LINE IS A DECLARED LINE (CTR10) drawn through the one draw (`facts/drawDeclared.js ::
  * drawDeclared`): the composer's selector (`kernel/proseHash.js :: pickVariant` on the record's stable id) runs over the
  * FULL pool; a line the record does not admit resolves to its declared TWIN (`twinOf`), else to the admitted argmax.
- * A line that presumes a thing DECLARES it (`needs` / `excludes` over the closed vocabulary, `facts/factVocabulary.js`).
+ * A line that presumes a thing DECLARES it (`needs` / `excludes` over the closed vocabulary, `facts/factVocabulary.js`);
+ * a line that presumes nothing beyond what its slot's own choice guarantees (the house the leaf found, the power, the
+ * owner, the founding, the event, the income's rank) says so with the house's colour mark (`colour: true`, R-AO: "read;
+ * presumes nothing"), so no line of this table is silent (TRAD-4 unit 5; tests/lint/traditionDescriptionFrames.walker).
  * THE CRISIS DIMENSION: the leads of a feast and of a fair, and the harvest's gloss, can clash with a town's present
  * crisis, so their pools OPT IN as crisis-scoped (silence then reads as calm): a line safe under any crisis says so
  * (`crisis: ['any']`); a line that contradicts a crisis family EXCLUDES it and has a TWIN that says only what is kept.
- *   hunger (famine, a food deficit): "a common feast", "a feast eaten in common", "gives thanks for the harvest".
- *   threat (siege, occupation, war, raiders): "a fair of stalls and trading", "a fair with traders from outside".
+ * The families are the vocabulary's own (factVocabulary.js :: CRISIS_FAMILY_KINDS):
+ *   hunger (famine, a siege; and any crisis while the food record reads a deficit): every feast lead but its twins
+ *     ("a common feast", "a feast eaten in common", …) and the harvest glosses that give thanks.
+ *   threat (a siege, an occupation, the beasts at the door): "a fair of stalls and trading", "a fair with traders from
+ *     outside". War is the unrest family's, not the threat's: no line here excludes it.
  *   succession and unrest: no line here contradicts them (no line says the seat is settled or the streets are quiet).
- * A line never says what became of the rite this year: that is the simulation's own record (`lastOutcome`).
+ * A line never says what became of the rite this year: that is the simulation's own record (`lastOutcome`), which the
+ * composer does not read.
  *
  * THE CAUSE LAW (CTR2). Only CAUSE_FRAMES assert a cause, reached on exactly two pairings: the founding core (genesis's
  * index 0, foundedYear 1) with the founding the record holds; a rite of the dead with the most recent siege, fire,
@@ -36,6 +43,7 @@
  * @property {ReadonlyArray<string>} [excludes]
  * @property {ReadonlyArray<string>} [crisis]
  * @property {string} [twinOf]  a TWIN: reached only when the line it names is refused
+ * @property {true} [colour]  the line presumes nothing beyond its slot (R-AO); a colour line declares nothing else
  */
 /** @typedef {'body'|'place'} TraditionHouseKind  a BODY keeps a rite; a PLACE holds it */
 /** @typedef {{ ids: ReadonlyArray<string>, kind: TraditionHouseKind }} TraditionHouseRow  catalogue ids (institutionalCatalog.js :: catalogIdForName) */
@@ -46,6 +54,8 @@ const line = (line) => Object.freeze(line);
 const ANY = Object.freeze(['any']);
 const NOT_HUNGRY = Object.freeze(['crisis: hunger']);
 const NOT_THREATENED = Object.freeze(['crisis: threat']);
+/** A line that presumes nothing beyond what its slot's own choice guarantees (the house's colour mark, R-AO). @param {string} text */
+const plain = (text) => line({ text, colour: true });
 
 /** S1, WHAT IS DONE: the act's lead, a pool of at least four an act. Every lead is a singular noun phrase. */
 export const ACT_LEADS = Object.freeze({
@@ -60,16 +70,16 @@ export const ACT_LEADS = Object.freeze({
     line({ text: 'A feast day kept as of old', twinOf: 'A feast shared among neighbours', crisis: ANY }),
   ]),
   procession: Object.freeze([
-    line({ text: 'A procession' }), line({ text: 'A walking procession' }),
-    line({ text: 'A procession on foot' }), line({ text: 'A slow procession' }),
+    plain('A procession'), plain('A walking procession'),
+    plain('A procession on foot'), plain('A slow procession'),
   ]),
   vigil: Object.freeze([
-    line({ text: 'A vigil' }), line({ text: "A night's vigil" }),
-    line({ text: 'A quiet vigil' }), line({ text: 'A vigil kept through the night' }),
+    plain('A vigil'), plain("A night's vigil"),
+    plain('A quiet vigil'), plain('A vigil kept through the night'),
   ]),
   contest: Object.freeze([
-    line({ text: 'A day of contests' }), line({ text: 'A contest' }),
-    line({ text: 'A day of games and contests' }), line({ text: 'A friendly contest' }),
+    plain('A day of contests'), plain('A contest'),
+    plain('A day of games and contests'), plain('A friendly contest'),
   ]),
   fair: Object.freeze([
     line({ text: 'A fair', crisis: ANY }),
@@ -80,34 +90,59 @@ export const ACT_LEADS = Object.freeze({
     line({ text: 'A fair kept as of old', twinOf: 'A fair with traders from outside', crisis: ANY }),
   ]),
   offering: Object.freeze([
-    line({ text: 'A day of offerings' }), line({ text: 'An offering' }),
-    line({ text: 'An offering made in common' }), line({ text: 'A day of small offerings' }),
+    plain('A day of offerings'), plain('An offering'),
+    plain('An offering made in common'), plain('A day of small offerings'),
   ]),
 });
 /** The act pools that opted into the crisis dimension (silence reads as calm). */
 export const CRISIS_SCOPED_ACTS = Object.freeze(['feast', 'fair']);
 
-/** S1, WHAT IS DONE: the element's gloss after "that", true by the element's own meaning; a thing it presumes, declared. */
+/**
+ * S1, WHAT IS DONE: the element's gloss after "that", true by the element's own meaning, a pool of at least three a
+ * kind (TRAD-4 unit 5: each a plain statement of what the rite marks). A thing a line presumes is the element's own
+ * (genesis gives a water-keyed element only with water, a forge only with a smith, a market only with a market:
+ * traditionCorpus.js :: TRADITION_ELEMENTS `needs`), declared on every line of its pool alike, and written on the line
+ * itself (tests/lint/presumedThings.walker.test.js reads a declaration where the line stands); a line that gives thanks
+ * EXCLUDES hunger and has its twin (harvest's pattern).
+ */
 export const ELEMENT_GLOSS = Object.freeze({
-  founding: Object.freeze([line({ text: 'marks the founding' })]),
-  'first-landing': Object.freeze([line({ text: 'marks the first landing', needs: Object.freeze(['navigable']) })]),
-  charter: Object.freeze([line({ text: 'honours the charter' })]),
-  hearth: Object.freeze([line({ text: 'honours hearth and household' })]),
+  founding: Object.freeze([plain('marks the founding'), plain('honours the founding'), plain('remembers the founding days')]),
+  'first-landing': Object.freeze([
+    line({ text: 'marks the first landing', needs: Object.freeze(['navigable']) }), line({ text: 'remembers the first landing', needs: Object.freeze(['navigable']) }),
+    line({ text: 'honours the first boats to come ashore', needs: Object.freeze(['navigable']) }),
+  ]),
+  charter: Object.freeze([plain('honours the charter'), plain('marks the granting of the charter'), plain('remembers the charter')]),
+  hearth: Object.freeze([plain('honours hearth and household'), plain('blesses hearth and home'), plain('honours home and family')]),
   harvest: Object.freeze([
     line({ text: 'gives thanks for the harvest', excludes: NOT_HUNGRY }),
     line({ text: 'is kept for the harvest', twinOf: 'gives thanks for the harvest', crisis: ANY }),
+    line({ text: 'marks the gathering of the harvest', crisis: ANY }),
+    line({ text: 'gives thanks for what the fields have given', excludes: NOT_HUNGRY }),
+    line({ text: 'is kept for what the fields give', twinOf: 'gives thanks for what the fields have given', crisis: ANY }),
   ]),
-  river: Object.freeze([line({ text: 'honours the river', needs: Object.freeze(['river']) })]),
-  stone: Object.freeze([line({ text: 'honours the standing stones' })]),
-  'the-dead': Object.freeze([line({ text: 'remembers the dead' })]),
-  field: Object.freeze([line({ text: 'blesses the fields' })]),
-  forge: Object.freeze([line({ text: 'honours the forge', needs: Object.freeze(['institution: smith']) })]),
-  market: Object.freeze([line({ text: 'celebrates the market', needs: Object.freeze(['market']) })]),
-  hunt: Object.freeze([line({ text: 'honours the hunt' })]),
-  'long-sun': Object.freeze([line({ text: 'marks the long days of high summer' })]),
-  tide: Object.freeze([line({ text: 'honours the tide', needs: Object.freeze(['coast']) })]),
-  greening: Object.freeze([line({ text: "welcomes the year's new growth" })]),
-  stars: Object.freeze([line({ text: 'is kept under the stars' })]),
+  river: Object.freeze([
+    line({ text: 'honours the river', needs: Object.freeze(['river']) }), line({ text: 'blesses the river', needs: Object.freeze(['river']) }),
+    line({ text: 'honours the river and its waters', needs: Object.freeze(['river']) }),
+  ]),
+  stone: Object.freeze([plain('honours the standing stones'), plain('honours the old standing stones'), plain('keeps faith with the standing stones')]),
+  'the-dead': Object.freeze([plain('remembers the dead'), plain('honours the dead'), plain('remembers those who came before')]),
+  field: Object.freeze([plain('blesses the fields'), plain('honours the fields'), plain('blesses the furrows')]),
+  forge: Object.freeze([
+    line({ text: 'honours the forge', needs: Object.freeze(['institution: smith']) }), line({ text: 'blesses the forge', needs: Object.freeze(['institution: smith']) }),
+    line({ text: "honours the smith's craft", needs: Object.freeze(['institution: smith']) }),
+  ]),
+  market: Object.freeze([
+    line({ text: 'celebrates the market', needs: Object.freeze(['market']) }), line({ text: 'honours the market', needs: Object.freeze(['market']) }),
+    line({ text: 'blesses the market and its trade', needs: Object.freeze(['market']) }),
+  ]),
+  hunt: Object.freeze([plain('honours the hunt'), plain('blesses the hunt'), plain('marks the hunting season')]),
+  'long-sun': Object.freeze([plain('marks the long days of high summer'), plain('marks midsummer'), plain('honours the long summer sun')]),
+  tide: Object.freeze([
+    line({ text: 'honours the tide', needs: Object.freeze(['coast']) }), line({ text: 'blesses the tide', needs: Object.freeze(['coast']) }),
+    line({ text: 'honours the sea and its tides', needs: Object.freeze(['coast']) }),
+  ]),
+  greening: Object.freeze([plain("welcomes the year's new growth"), plain('marks the coming of spring'), plain('honours the first green of the year')]),
+  stars: Object.freeze([plain('is kept under the stars'), plain('honours the stars'), plain('marks the courses of the stars')]),
 });
 /** The gloss pools that opted into the crisis dimension. */
 export const CRISIS_SCOPED_ELEMENTS = Object.freeze(['harvest']);
@@ -157,19 +192,19 @@ export const KEEPER_HOUSES = Object.freeze({
  * blacksmiths") and no house rule says which, so every frame reads alike for one house or many (the same for an owner).
  */
 export const HOUSE_FRAMES = Object.freeze({
-  body: Object.freeze(['It is kept by {house}.', 'Its keeping falls to {house}.', 'It is in the keeping of {house}.']),
+  body: Object.freeze([plain('It is kept by {house}.'), plain('Its keeping falls to {house}.'), plain('It is in the keeping of {house}.')]),
   bodyPerson: Object.freeze([
-    'It is kept by {house}, and {person}, {title}, presides.', 'Its keeping falls to {house}; {person}, {title}, presides.',
-    'It is in the keeping of {house}, with {person}, {title}, presiding.',
+    plain('It is kept by {house}, and {person}, {title}, presides.'), plain('Its keeping falls to {house}; {person}, {title}, presides.'),
+    plain('It is in the keeping of {house}, with {person}, {title}, presiding.'),
   ]),
-  place: Object.freeze(['It is held at {house}.', 'It is kept at {house}.', 'It takes place at {house}.']),
+  place: Object.freeze([plain('It is held at {house}.'), plain('It is kept at {house}.'), plain('It takes place at {house}.')]),
   placePerson: Object.freeze([
-    'It is held at {house}, where {person}, {title}, presides.', 'It is kept at {house}, where {person}, {title}, presides.',
-    'It takes place at {house}, with {person}, {title}, presiding.',
+    plain('It is held at {house}, where {person}, {title}, presides.'), plain('It is kept at {house}, where {person}, {title}, presides.'),
+    plain('It takes place at {house}, with {person}, {title}, presiding.'),
   ]),
   placePower: Object.freeze([
-    'It is held at {house}, in the keeping of {power}.', 'It is kept at {house} and falls to {power}.',
-    'It takes place at {house}; it falls to {power}.',
+    plain('It is held at {house}, in the keeping of {power}.'), plain('It is kept at {house} and falls to {power}.'),
+    plain('It takes place at {house}; it falls to {power}.'),
   ]),
 });
 
@@ -180,9 +215,9 @@ export const HOUSE_FRAMES = Object.freeze({
  * Merchant Guilds oversee it".
  */
 export const POWER_FRAMES = Object.freeze({
-  seat: Object.freeze(['It is overseen by {power}.', 'It falls to {power}.', '{Power} {oversees} it.']),
-  religious: Object.freeze(['It falls to {power}.', 'It is in the keeping of {power}.', '{Power} {keeps} it.']),
-  merchantry: Object.freeze(['Its cost is met by {power}.', 'It is paid for by {power}.', '{Power} {meets} its cost.']),
+  seat: Object.freeze([plain('It is overseen by {power}.'), plain('It falls to {power}.'), plain('{Power} {oversees} it.')]),
+  religious: Object.freeze([plain('It falls to {power}.'), plain('It is in the keeping of {power}.'), plain('{Power} {keeps} it.')]),
+  merchantry: Object.freeze([plain('Its cost is met by {power}.'), plain('It is paid for by {power}.'), plain('{Power} {meets} its cost.')]),
 });
 /** A power's verb slot in POWER_FRAMES: its singular form, then its plural (powerVerb's `one`, `many`). */
 export const POWER_FRAME_VERBS = Object.freeze({
@@ -193,24 +228,24 @@ export const POWER_FRAME_VERBS = Object.freeze({
 
 /** S2, WHO KEEPS IT, in play: the record's own owner (ownerKind, ownerLabel), and nothing beside it; never the subject
  *  of a verb (a house or a power may be plural: HOUSE_FRAMES). */
-export const OWNER_FRAMES = Object.freeze(['It is kept now by {owner}.', 'Its keeping falls now to {owner}.', 'It is in the keeping of {owner} now.']);
+export const OWNER_FRAMES = Object.freeze([plain('It is kept now by {owner}.'), plain('Its keeping falls now to {owner}.'), plain('It is in the keeping of {owner} now.')]);
 
 /** S3, WHERE IT COMES FROM: the only frames that assert a cause (CTR2). */
 export const CAUSE_FRAMES = Object.freeze({
   founding: Object.freeze([
-    'It has been kept since {town} was founded by {foundedBy}, {age} years ago.',
-    '{Town} has kept it since its founding by {foundedBy}, {age} years ago.',
-    'It goes back to the founding of {town} by {foundedBy}, {age} years ago, and has been kept since.',
+    plain('It has been kept since {town} was founded by {foundedBy}, {age} years ago.'),
+    plain('{Town} has kept it since its founding by {foundedBy}, {age} years ago.'),
+    plain('It goes back to the founding of {town} by {foundedBy}, {age} years ago, and has been kept since.'),
   ]),
   foundingBare: Object.freeze([
-    'It has been kept since {town} was founded, {age} years ago.',
-    '{Town} has kept it since its founding, {age} years ago.',
-    'It goes back to the founding of {town}, {age} years ago, and has been kept since.',
+    plain('It has been kept since {town} was founded, {age} years ago.'),
+    plain('{Town} has kept it since its founding, {age} years ago.'),
+    plain('It goes back to the founding of {town}, {age} years ago, and has been kept since.'),
   ]),
   dead: Object.freeze([
-    'It is kept in memory of {event}, {when}.',
-    '{Town} keeps it in memory of {event}, {when}.',
-    'It has been kept in memory of {event} since then, {when}.',
+    plain('It is kept in memory of {event}, {when}.'),
+    plain('{Town} keeps it in memory of {event}, {when}.'),
+    plain('It has been kept in memory of {event} since then, {when}.'),
   ]),
 });
 
@@ -255,19 +290,19 @@ export const ECONOMY_FIT = Object.freeze({
  */
 export const ECONOMY_FRAMES = Object.freeze({
   chief: Object.freeze([
-    'Nothing brings {town} more than {income}.',
-    '{Income} {brings} {town} more than anything else.',
-    '{Town} takes in more from {income} than from anything else.',
+    plain('Nothing brings {town} more than {income}.'),
+    plain('{Income} {brings} {town} more than anything else.'),
+    plain('{Town} takes in more from {income} than from anything else.'),
   ]),
   lesser: Object.freeze([
-    'A good share of what {town} takes in comes from {income}.',
-    '{Income} {is} one of the mainstays of {town}.',
-    '{Town} takes in a good part of its living from {income}.',
+    plain('A good share of what {town} takes in comes from {income}.'),
+    plain('{Income} {is} one of the mainstays of {town}.'),
+    plain('{Town} takes in a good part of its living from {income}.'),
   ]),
   only: Object.freeze([
-    'All that {town} takes in comes from {income}.',
-    '{Town} lives by {income} alone.',
-    '{Income} {is} all {town} lives by.',
+    plain('All that {town} takes in comes from {income}.'),
+    plain('{Town} lives by {income} alone.'),
+    plain('{Income} {is} all {town} lives by.'),
   ]),
 });
 /** How many of the town's largest incomes the economy sentence may name (chief, then two lesser). */
