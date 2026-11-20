@@ -437,6 +437,15 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     another spelling (plant: '(street gang)' beside the hidden "Street gang") with that key swept: a husk (ruling 42 (1)'s
     class), confirmed on the plant in 10 families + a custom one (25 of 25 reads), not measured on born towns (every synthetic
     '(…)' provider is criminal). The seat's recommendation: such a row leaves WHOLE, both engines, red first, in the tell's cure.
+61. THE CHAIR, 19:21: the chair's ruling of 19:21 on the tell's three stops is with VEIL-28 and opens PART 29. So that
+    nothing is lost if a message is: (1) GATE-1 is the hard gate (88 of 92 red today, 0 of 48 controls); (2) the empty form is
+    what nothing-hidden pages show: `null` for the drag sentence; (3) a read is gated where it hides at least one house,
+    whatever the setting is called; (4) GATE-2 at its coarsest level is a comparison with the controls (one-sided Fisher at or
+    above 0.05) with every failing page listed, not a zero; (5) the power's row: only on a hiding read; a non-governing
+    criminal power's row is withheld unless no hidden house raised it and a criminal house is still served; the governing row
+    follows VR42 and the 11 are LOWER BY RULE, listed. (R3-TELL-2's instrument: `lane/veil-27-tell2-wip-2026-11-20` at
+    f95ce89a5, hand-back `out/v27/tell2/TELL2-HANDBACK.md` Parts I-II, brief `briefs/R3-TELL-2-BRIEF.md`; its builder's
+    context is spent: VEIL-28 seats a fresh one for the cure.)
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
