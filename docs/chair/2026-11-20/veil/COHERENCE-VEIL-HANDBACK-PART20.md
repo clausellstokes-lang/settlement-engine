@@ -74,8 +74,18 @@ name-search helper is executable by anon or authenticated; nine `_gallery_*` hel
 grant (production's grants unread): `_gallery_public_tile_rows()` (security definer), `_gallery_chronicle_entry`,
 `_gallery_chronicle_json`, `_gallery_map_backdrop`, `_gallery_apply_member_overrides` (DOORS's by SV7) and four pure
 functions on the data path, `_gallery_npc_key`, `_gallery_dm_full_json`, `_gallery_sanitize_public_json`,
-`_gallery_world_snapshot_is_safe`, which this seat takes (212 revokes each by name), placed with R2 unless the chair
-places them with DOORS.
+`_gallery_world_snapshot_is_safe` (pure functions of their input).
+01:20 UTC (the seventh chair): (1) THE MARK agreed: B, C, D first and only, then hand back with "B/C/D <commit>"; R1
+and VR25 are the successor's. (2) THE SUCCESSOR VEIL-20 is seated beside this seat: `lane/veil-20-2026-11-20` from
+72e8a855d; it merges R1 and prepares what touches no file this seat holds (VR25's derivers; R2's render-twice harness);
+it opens 212 only after merging this seat's final tip. (3) VR27: ALL NINE revokes go to VEIL-DOORS (the catalogue walker,
+a section at 212's end); the four pure helpers are NOT this seat's. (4) `get_gallery_map` and `import_gallery_map` are
+restated by VEIL-DOORS only: whatever a read function must do for the data veil (VR10's per-read salt, for one) is done
+INSIDE the helpers the reads call. (5) A RULING ON A ROW: `economicState.prosperity` is NOT diffuse (VEIL-DOORS measured
+its inputs ship, so a visitor recomputes it; it moved with the hidden houses in 34 towns of 89 against 7 with ordinary
+ones): it fails VR26; VR19 applies: withheld on every non-owner read, the page re-derives it where the deriver ships with
+the page, else does not draw it; its tile NULL on a marked row; `history.founding.overcoming`, chosen by the prosperity
+label, follows it.
 
 ## 1. The bytes (kept current)
 
