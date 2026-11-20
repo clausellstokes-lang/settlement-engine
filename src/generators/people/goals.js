@@ -37,7 +37,8 @@ import { GOAL_FAMILY_LINES, GOAL_LINE_MIN_MEMBERS, PERSONALITY_CLUSTER_OF, TIE_T
 import { familyOfInstitution, isLawEnforcementInstitution, isNoPowerInstitution } from '../../data/institutionalCatalog.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { chainPrintName } from '../../domain/display/chainPrintName.js';
-import { powerSentenceName } from '../../domain/display/powerSentenceName.js';
+import { powerNameWithArticle } from '../../domain/display/powerSentenceName.js';
+import { secondMentions } from '../../data/people/personMention.js';
 import { filterDeclared, lineText, resolveSibling } from '../../domain/facts/drawDeclared.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
 import { notePresumption, withPresumptionLedger } from '../../domain/facts/presumptionLedger.js';
@@ -354,6 +355,25 @@ function pursuitChances(card, ctx) {
 
 /** The slots that name a power (`{guild}` names one where the allegiance is to a power, else a house as a house). */
 const PROSE_SLOTS = new Set(['power', 'rival', 'guild']);
+/** The slots that name a person (the slot contract: "a person, by name; a person may take 's"). */
+const PERSON_SLOTS = Object.freeze(['above', 'below', 'other', 'handler', 'agent', 'target']);
+
+/**
+ * The cards a line's person slots name, for its second mentions (NAMES-1, CN2): each slot's printed name with the one card
+ * of the town that prints it (its gender, its role); a name two cards print is handed twice, so the line is left as written.
+ * @param {Rec} slots @param {GoalContext} ctx @returns {Array<{ name: string, gender?: unknown, role?: unknown }>}
+ */
+function personCardsOf(slots, ctx) {
+  /** @type {Array<{ name: string, gender?: unknown, role?: unknown }>} */ const out = [];
+  for (const k of PERSON_SLOTS) {
+    const name = slots[k];
+    if (typeof name !== 'string' || !name || out.some((c) => c.name === name)) continue;
+    const cards = [...ctx.byId.values()].filter((c) => personName(c) === name);
+    if (cards.length === 1) out.push({ name, gender: rec(cards[0]).gender, role: rec(cards[0]).role });
+    else out.push({ name }, { name });
+  }
+  return out;
+}
 
 /**
  * Every line of a cell the record fills and admits, unheld: the candidates of one sub-kind.
@@ -365,17 +385,22 @@ function cellCandidates(family, kind, vantage, slots, ctx, held, extra = {}) {
   const cell = arr(rec(rec(/** @type {Rec} */ (GOAL_FAMILY_LINES)[family])[kind])[vantage]);
   if (!cell.length) return [];
   // POWERS-16 (the chair's ruling (r2): a faction named in a sentence takes its prose form, from one leaf): the line
-  // prints a power slot through display/powerSentenceName.js ("Military/Guard" -> "The Guard"); the slots kept on the
+  // prints a power slot through display/powerSentenceName.js ("Military/Guard" -> "the Guard"); the slots kept on the
   // card (the keyed intent) keep the record's names, so every reader that matches a power by name still finds it.
-  const said = Object.fromEntries(Object.entries(slots).map(([k, v]) => [k, PROSE_SLOTS.has(k) && typeof v === 'string' && v ? powerSentenceName(v) : v]));
+  // NAMES-1 (the seventh chair's ruling CN1 of 2026-11-20): WITH ITS ARTICLE ("the Elder Council", "the Guard"), "The" where
+  // the slot opens the line (the line's first letter is raised below); the slot contract never writes "the {power}".
+  const said = Object.fromEntries(Object.entries(slots).map(([k, v]) => [k, PROSE_SLOTS.has(k) && typeof v === 'string' && v ? powerNameWithArticle(v) : v]));
+  const people = personCardsOf(slots, ctx);
   const poolId = `goalFamilies:${family}.${kind}.${vantage}`;
   /** @type {Candidate[]} */
   const out = [];
   for (const line of cell) {
     const { result: kept, notes } = quiet(() => filterDeclared([line], { facts: ctx.facts, poolId, surface: 'npcs' }));
     if (!kept.length) continue;
-    const text = fillLine(templateOf(line), said);
-    if (!text) continue;
+    const filled = fillLine(templateOf(line), said);
+    if (!filled) continue;
+    // NAMES-1 (CN2): a person's later mention in the line is a pronoun, a surname, a role or a given name
+    const text = secondMentions(filled[0].toUpperCase() + filled.slice(1), people);
     if (held.has(text)) { ctx.refusals.n += 1; continue; }
     const used = Object.fromEntries(slotsIn(templateOf(line)).map((k) => [k, slots[k]]));
     const fewMembers = typeof extra.members === 'number' && (GOAL_LINE_MIN_MEMBERS[templateOf(line)] ?? 0) > extra.members; // BAR8 K-PEOPLE (14h)

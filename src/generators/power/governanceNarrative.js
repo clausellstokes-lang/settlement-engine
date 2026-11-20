@@ -12,7 +12,7 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
-import { FAILED_SOURCE_WORDS } from '../economy/foodBalance.js'; import { defenceOf } from '../../domain/facts/defence.js'; import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; import { buildInsurgencyNarrative, buildMigrationNarrative, buildReligiousConversionNarrative, buildWartimeNarrative } from './governingStressVignettes.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves — LANDING-R2 (ODQ §934.105): the four governing-faction stress vignettes moved verbatim to power/governingStressVignettes.js, imported on this line, so no cited line moves — W3 POW (WAVE-RULINGS item 8): the label reads the entry's direction through F13's reader, imported on this line // BAR3-POWERS (C36418): the failed source's words, first on this line
+import { FAILED_SOURCE_WORDS } from '../economy/foodBalance.js'; import { defenceOf } from '../../domain/facts/defence.js'; import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; import { buildInsurgencyNarrative, buildMigrationNarrative, buildReligiousConversionNarrative, buildWartimeNarrative } from './governingStressVignettes.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../../domain/display/powerSentenceName.js'; // NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): a power in a sentence takes its article // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves — LANDING-R2 (ODQ §934.105): the four governing-faction stress vignettes moved verbatim to power/governingStressVignettes.js, imported on this line, so no cited line moves — W3 POW (WAVE-RULINGS item 8): the label reads the entry's direction through F13's reader, imported on this line // BAR3-POWERS (C36418): the failed source's words, first on this line
 
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
@@ -92,7 +92,7 @@ const deriveGuardLabel = (institutionNames, isSmallSettlement) => {
 };
 
 const deriveCouncilLabel = (tier, governingBodyOverride) => {
-  if (governingBodyOverride) return governingBodyOverride;
+  if (governingBodyOverride) return powerNameWithArticle(governingBodyOverride); // NAMES-1 (CN1): the governing power with its article ("the Military Council has been debating"); `preserveSentenceCase` capitalises it where the sentence opens
   if (SMALL_SETTLEMENT_TIERS.has(tier)) {
     return tier === 'thorp' ? 'the household heads' : 'the village elders';
   }
@@ -196,7 +196,7 @@ const rewriteFactionPhrasing = (
       /\bcouncil meetings\b/gi,
       match => preserveSentenceCase(
         match,
-        `${councilLabel.replace(/^the /, '')} meetings`,
+        governingBodyOverride ? `the ${powerPossessive(powerNameAfterArticle(governingBodyOverride))} meetings` : `${councilLabel.replace(/^the /, '')} meetings`, // NAMES-1 (CN1): "the Elder Council's meetings", never "Elder Council meetings"
       ),
     )
     .replace(/\binside the council\b/gi, `inside ${councilLabel}`)
@@ -557,7 +557,7 @@ const buildBetrayalNarrative = ({
   const location = isFormalAuthority ? 'within the office of the ' : 'inside ';
   const authority = isFormalAuthority
     ? governingFactionName.toLowerCase()
-    : governingFactionName;
+    : (powerNameWithArticle(governingFactionName) || governingFactionName); // NAMES-1 (CN1): "inside the Ducal Governorship" (no name: the legacy rendering, as before)
   return (
     'The investigation into the betrayal has been obstructed twice. ' +
     `The obstruction came from ${location}${authority}. No one will say who.`
@@ -602,7 +602,7 @@ const buildStressNarratives = ({ failedFoodSource = null, // BAR3-POWERS (C36418
         ? 'Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.'
         : `${['fish', 'livestock', 'game'].includes(String(failedFoodSource)) ? `The ${FAILED_SOURCE_WORDS[/** @type {'fish'|'livestock'|'game'} */ (failedFoodSource)]} failed badly this year.` : 'The last harvest failed badly.'} What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.`, // BAR3-POWERS (C36418): the failed source's own word where it is not the harvest
     occupied:
-      `An occupying officer arrested a local elder for "seditious speech". ${governingFactionName}` +
+      `An occupying officer arrested a local elder for "seditious speech". ${/* NAMES-1 (CN1): The Elder Council, with its article; no name gives the legacy rendering. NAMES-2: nothing after the closing backtick moves (the presumption walkers bank the text from there) */ powerNameWithArticle(governingFactionName, true) || governingFactionName}` +
       ' filed a formal protest. The protest was returned unread.',
     // OWNER-WORDS-DOSSIER item 3b (2026-11-09): the word "faction" is retired from the page; "power".
     politically_fractured:

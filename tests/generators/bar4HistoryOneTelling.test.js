@@ -93,7 +93,7 @@ describe('BAR4-HISTORY T1: one past event, one telling', () => {
 
   it('(d) C26840: the adversarial rung says the ruler is ahead, as its relation row does', () => {
     const f = { ruler: 'Grand Guild Consortium', underworld: "The Thieves' Guild", agents: [] };
-    expect(CAPTURE_LINES.adversarial[0](/** @type {any} */ (f))).toMatch(/^The Thieves' Guild works against Grand Guild Consortium, and Grand Guild Consortium is ahead\. Nobody at its head answers to the criminals\.$/);
+    expect(CAPTURE_LINES.adversarial[0](/** @type {any} */ (f))).toMatch(/^The Thieves' Guild works against the Grand Guild Consortium, and the Grand Guild Consortium is ahead\. Nobody at its head answers to the criminals\.$/); // NAMES-1 (CN1): the article
   });
 
   /** The census's towns that printed "widely questioned" beside an approved or endorsed seat at the base (8 of the 720). */

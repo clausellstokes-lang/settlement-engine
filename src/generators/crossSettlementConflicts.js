@@ -14,6 +14,7 @@
  */
 
 import { createPRNG } from '../kernel/prng.js';
+import { powerNameAfterArticle, powerNameWithArticle, powerPossessive, powerSentenceName } from '../domain/display/powerSentenceName.js';
 
 // Which NPC categories create friction per relationship type
 const CONFLICT_CATS = {
@@ -196,37 +197,45 @@ function buildConflictDesc(npcA, npcB, settA, settB, relType, nature, rng) {
   return rng.pick(pool);
 }
 
-// Faction engagement description
+// Faction engagement description. NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): A POWER IN A
+// SENTENCE TAKES ITS ARTICLE ("The Elder Council of Ashford and the Merchant Guilds of Brindle"), from the one helper; after a
+// place's possessive ("Brindle's Merchant Guilds") it takes none, so never "Brindle's the Guard".
 function buildFactionDesc(facA, facB, settA, settB, relType, rng) {
+  /** @param {{ name: string }} f @param {boolean} [start] the name opens its sentence */
+  const the = (f, start = false) => powerNameWithArticle(f.name, start);
+  /** @param {{ name: string }} f the name after a place's possessive */
+  const own = (f) => powerNameAfterArticle(f.name);
+  /** @param {{ name: string }} f the article form's possessive, by the one possessive rule ("the Merchant Guilds'") */
+  const of = (f) => `${the(f)}${powerPossessive(f.name).slice(powerSentenceName(f.name).length)}`;
   const templates = {
     rival: [
-      `The ${facA.name} of ${settA.name} and the ${facB.name} of ${settB.name} are competing for the same trade, and neither will back down.`,
-      `${facA.name} has been systematically undercutting ${facB.name}'s influence in ${settB.name}. Retaliation is expected.`,
+      `${the(facA, true)} of ${settA.name} and ${the(facB)} of ${settB.name} are competing for the same trade, and neither will back down.`,
+      `${the(facA, true)} has been systematically undercutting ${of(facB)} influence in ${settB.name}. Retaliation is expected.`,
     ],
     cold_war: [
-      `${facA.name} and ${settB.name}'s ${facB.name} are spying on each other, and each knows the other knows.`,
-      `The ${facA.name} has agents inside ${facB.name} of ${settB.name}, and it has agents of theirs inside it in turn.`,
+      `${the(facA, true)} and ${settB.name}'s ${own(facB)} are spying on each other, and each knows the other knows.`,
+      `${the(facA, true)} has agents inside ${the(facB)} of ${settB.name}, and it has agents of theirs inside it in turn.`,
     ],
     hostile: [
-      `${facA.name} and ${settB.name}'s ${facB.name} are in open conflict. People have died on both sides.`,
+      `${the(facA, true)} and ${settB.name}'s ${own(facB)} are in open conflict. People have died on both sides.`,
     ],
     allied: [
-      `${facA.name} and ${settB.name}'s ${facB.name} have a formal agreement to work together, though each keeps putting its own interests first.`,
+      `${the(facA, true)} and ${settB.name}'s ${own(facB)} have a formal agreement to work together, though each keeps putting its own interests first.`,
     ],
     patron: [
-      `${facB.name} of ${settB.name} keeps a close watch on everything ${facA.name} does, through the patronage between the two places.`,
+      `${the(facB, true)} of ${settB.name} keeps a close watch on everything ${the(facA)} does, through the patronage between the two places.`,
     ],
     trade_partner: [
-      `${facA.name} and ${settB.name}'s ${facB.name} share a market agreement, but competition still flares at the edges.`,
+      `${the(facA, true)} and ${settB.name}'s ${own(facB)} share a market agreement, but competition still flares at the edges.`,
     ],
     vassal: [
-      `${facB.name} of ${settB.name} presses feudal claims on ${facA.name}, which complies in public and resists in private.`,
+      `${the(facB, true)} of ${settB.name} presses feudal claims on ${the(facA)}, which complies in public and resists in private.`,
     ],
     criminal_network: [
-      `${facA.name} and ${settB.name}'s ${facB.name} share routes and fences. The partnership is profitable, and neither side trusts it.`,
+      `${the(facA, true)} and ${settB.name}'s ${own(facB)} share routes and fences. The partnership is profitable, and neither side trusts it.`,
     ],
     neutral: [
-      `${facA.name} and ${settB.name}'s ${facB.name} maintain careful distance, neither allied nor opposed.`,
+      `${the(facA, true)} and ${settB.name}'s ${own(facB)} maintain careful distance, neither allied nor opposed.`,
     ],
   };
   const pool = templates[relType] || templates.neutral;

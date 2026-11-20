@@ -1,0 +1,53 @@
+THE NAMES IN PROSE: TEN SENTENCES, BEFORE AND AFTER
+Written 2026-11-20 06:16 UTC by NAMES-2. Each shows one kind of change once. Taken from three born towns of the census (r2r-town-0,
+r2s-occupied-city-1, r2r-village-8), stored before the names work (85fccf898) and at NAMES-2's tree.
+
+1. A power opening a sentence takes "The" (r2s-occupied-city-1, the recent conflict)
+   before: An occupying officer arrested a local elder for "seditious speech". Merchant oligarchy filed a formal protest. The protest was returned unread.
+   after:  An occupying officer arrested a local elder for "seditious speech". The Merchant oligarchy filed a formal protest. The protest was returned unread.
+
+2. Two powers inside a sentence take "the" (r2s-occupied-city-1, a person's goal)
+   before: Stop Craft Guilds from taking anything more from Merchant Guilds this season.
+   after:  Stop the Craft Guilds from taking anything more from the Merchant Guilds this season.
+
+3. A capital "The" in mid-sentence becomes "the", the possessive with it (r2r-village-8, the Power tab's relation)
+   before: The Guard is now about as strong as Elder Council. The hall asks for The Guard's agreement instead of giving orders, and less and less is decided without it.
+   after:  The Guard is now about as strong as the Elder Council. The hall asks for the Guard's agreement instead of giving orders, and less and less is decided without it.
+
+4. A power in the DM's note (r2r-town-0)
+   before: Ask: which specific officials have arrangements with Thieves' Guild? The answer drives dozens of plot hooks.
+   after:  Ask: which specific officials have arrangements with the Thieves' Guild? The answer drives dozens of plot hooks.
+
+5. The town's pressure sentence, on the Overview (r2r-town-0)
+   before: Farosaltus's ruler is old and the succession is disputed; Corrupt Council already has its candidate ready.
+   after:  Farosaltus's ruler is old and the succession is disputed; the Corrupt Council already has its candidate ready.
+
+6. A power after a colon, in a power's description (r2s-occupied-city-1)
+   before: It does not bargain for its way: Merchant oligarchy carries out what it decides, whatever its numbers.
+   after:  It does not bargain for its way: the Merchant oligarchy carries out what it decides, whatever its numbers.
+
+7. A person's second mention becomes a possessive pronoun (r2r-town-0, a tie's tension)
+   before: Drusilla Cato has begun teaching Laevinus Scipio's methods as Drusilla Cato's own.
+   after:  Drusilla Cato has begun teaching Laevinus Scipio's methods as her own.
+
+8. A person's second mention becomes a subject pronoun (r2r-village-8, a tie)
+   before: Years ago Otgontuya Suldus did Arslankhan Jalayir a favour too large to repay, and Arslankhan Jalayir has been paying it back in small ways ever since.
+   after:  Years ago Otgontuya Suldus did Arslankhan Jalayir a favour too large to repay, and he has been paying it back in small ways ever since.
+
+9. Where a pronoun would be ambiguous (two men in the sentence), the role (r2r-town-0, a tie)
+   before: Plinius Moderatus made Laevinus Scipio's career, and Laevinus Scipio rarely says so.
+   after:  Plinius Moderatus made Laevinus Scipio's career, and the mayor rarely says so.
+
+10. A line composed on the page, the Power tab's hall (r2r-town-0)
+   before: Partly in criminal hands. Corrupt Council is itself run as a criminal concern, so the people who make the laws here are the ones who profit from breaking them.
+   after:  Partly in criminal hands. The Corrupt Council is itself run as a criminal concern, so the people who make the laws here are the ones who profit from breaking them.
+
+One kind more, added 2026-11-20 08:19 UTC (NAMES-2 item 5, built on the chair's word): a plural power's verb takes its
+number (r2r-town-9, the Power tab: the line a ruling head who holds a share in a guild prints)
+   before: ... and also holds a full share in the Merchant Guilds, so what the Merchant Guilds wants from the Guild Council goes straight to the top.
+   after:  ... and also holds a full share in the Merchant Guilds, so what the Merchant Guilds want from the Guild Council goes straight to the top.
+
+Left as it was, and worth the owner's ear (not changed by this work):
+  - a pronoun for a plural power: "Build the Craft Guilds up until it is beyond the reach of the Merchant Guilds"
+    (measured and listed in NAMES-2-HANDBACK.md, item 5; not built);
+  - a label that is a description takes the capital of its label: "The Merchant oligarchy".
