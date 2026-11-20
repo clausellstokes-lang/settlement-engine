@@ -85,7 +85,7 @@ parts of the whole check (at the close).
   notch toward yes: if a campaign runs, pair the software with a printed book of towns it generated, and settle the AI
   tag first. THE SLOT (the intake rule): a side-by-side of fresh generated towns against what a chatbot gives for one
   prompt rides THE EIGHTH READ after the deploy, sooner on the owner's word.
-- **2026-11-20, about 00:13 UTC, the owner (verbatim):** "regarding kickstarter, what about the towninator?" ANSWERED
+- **2026-11-20, between the clock's readings of 00:10 and 00:14 UTC, the owner (verbatim):** "regarding kickstarter, what about the towninator?" ANSWERED
   the same turn: first that the chair did not know it and was looking it up; then, from search summaries of its
   campaign page, Kicktraq and Geeknative (the pages themselves could not be opened from this session): The Towninator
   (Andreas Barbesgaard, Hexgaard; "a character sheet for your town": a rules PDF and one-page sheets, not software)
@@ -166,11 +166,11 @@ parts of the whole check (at the close).
   "00:20", "00:30" UTC) written before the clock was read; three ran ahead of it. All four were written between the
   clock's readings of 00:01 and 00:05 UTC; the labels are corrected in the commit that carries this line (the
   standard's rule 29: an hour is read from the clock in the command that writes it).
-- 00:14 UTC · THE STANDING MITIGATION SENT TO THE FOUR SEATS (00:12 UTC, one message each, delivered): never a push
+- 00:14 UTC · THE STANDING MITIGATION SENT TO THE FOUR SEATS (after the clock's reading of 00:10 UTC, one message each, delivered): never a push
   with nothing to send, never one that is not a fast-forward, no test run with a `GIT_*` variable in the
   environment, the author read before every push; CI-FIT also checks its config after a shard run. A MISS OF MINE:
-  the fifth chair's rule that every prompt carries that line was not in the four prompts; sent twelve minutes after
-  seating, before any seat had pushed.
+  the fifth chair's rule that every prompt carries that line was not in the four prompts; sent within minutes of
+  seating (the seats were created at 00:08), before any seat had pushed.
 - 00:14 UTC · THE CHAIR'S DESK: a read-only helper sorts the 2026-11-15 close's open entries S112 to S147
   (`docs/chair/2026-11-15/close/VETO-LIST.md` on the line, its short list's Part E) into settled since, a judgement
   call with a recommendation, or the owner's hand alone; the chair rules from its table. Pull request #74 read (four
