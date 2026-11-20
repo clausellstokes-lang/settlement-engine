@@ -402,6 +402,21 @@ parts of the whole check (at the close).
   TIMING SAID: treated as before the deploy, on its own seat, in parallel, off the longest job; "say after if you
   would rather it wait".
 
+- **2026-11-20, about 06:26 UTC, THE OWNER (verbatim, the whole message):** "Again I defer all decisions to you". SAID
+  IN ANSWER TO the chair's four open questions (how rare the front is; culture words on the criminal titles; a
+  DM-only mark on a front's own card; the traditions' descriptions before or after the deploy). DECIDED BY THE CHAIR
+  UNDER THAT WORD AND TOLD TO THE OWNER THE SAME TURN: the front about 1 town in 50; the criminal titles by size only;
+  the DM-only mark YES (players and shared pages never see it); the traditions' descriptions before the deploy.
+  HOW THE CHAIR READS THE WORD, SAID TO THE OWNER: from here the chair decides and tells; samples are still shown
+  (titles, traditions, the new session sheet) because the owner may want to strike a word; THE ONLY THINGS BROUGHT
+  BACK FOR A YES ARE THE ACTS THE PROJECT'S OWN RULES MAKE THE OWNER'S: the final sign-off that switches the new rules
+  and numbers on (the tuning signatures, the lighting of a birth law, the golden and reference signing), the merge
+  and the deploy. THE WORD IS NOT READ AS A GRANT OF THOSE ACTS: a recorded approval is history, never a grant.
+  NOT DECISIONS, STILL UNKNOWN, NOT ASKED AGAIN: whether the app worked normally after the emergency script (no
+  breakage has been reported, and the script was proven to break nothing on a copy); whether the two lines for
+  `list_ticket_thread` were run (213 closes it at the deploy either way; until then a signed-out caller who names a
+  ticket's id can read its user-visible thread: said once to the owner, 2026-11-20).
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -1929,3 +1944,11 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   THE DEPLOY NOW WAITS ON: the share veil (stages 3 to 7 and FINAL); the names; the session sheet's frame; who rules
   (two trains, the second card, the front, titles by size and culture); the traditions' descriptions; then the close
   (213, the joined tree, the owner's signatures and yes).
+- 06:23 UTC · **THE OWNER DEFERRED THE FOUR OPEN QUESTIONS; DECIDED AND SENT** (section 1): the principal front's rate 0.0897 per
+  eligible head (about 1 town in 50), a draft row, dark; THE DM-ONLY MARK YES: CS20 amended (on the owner's own pages
+  only, the front's house card and its head's person card carry the words "A front" and the fixed line "Also a
+  criminal house, by its owner's own choice. No one stands over it."; nothing on any other read, proven born); the
+  criminal titles by size only, final; the traditions' descriptions before the deploy. Sent to SEAT-1 (ADDENDUM 5 in
+  its prompt file), SEAT-2 and TITLES-1. TRAD-1 is session_019yED1RRHjF81TqPh6Hu42b (seated 06:22 UTC).
+  FROM HERE THE CHAIR DECIDES AND TELLS; the owner's own acts (the signatures and the light, the merge, the deploy)
+  are asked once, at the close.
