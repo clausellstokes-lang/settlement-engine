@@ -1,6 +1,6 @@
 # GOALS-1 · builder 2 · the new lines, DRAFT for review (T1)
 
-Written 2026-11-20 by GOALS-1 builder 2, to `GOALS-1-BUILDER-2-BRIEF.md`. Text only: no source file is changed. Every line is FOR THE OWNER'S VETO.
+Written 2026-11-20 by GOALS-1 builder 2, to `GOALS-1-BUILDER-2-BRIEF.md`. Text only: no source file is changed. Every line is FOR THE OWNER'S VETO. The chair read both batches at 10:48 UTC: 21 goal lines and 12 tie pairs approved as written; the five it sent back stand here in their reworded form.
 
 Read against: `src/data/people/goalFamilies.js` (the slot contract; the cells below and their neighbours), `src/domain/facts/factVocabulary.js` (atom names), `src/data/npcData.js` (the five archetypes), `src/data/people/personMention.js` (a later mention of a person in one sentence is shortened by the leaf, so a tie line may name `{A}` or `{B}` twice).
 
@@ -35,8 +35,8 @@ Existing, for comparison:
 
 1. `Make {house} known to every supplier as a house that pays on the day.` (a name for paying promptly)
 2. `Let {house} grow only as fast as the money comes in, and no faster.` (growth held to what the house earns)
-3. `Leave the books of {house} so plain that anyone could take them up after them.` (books another could take over; GOALS-1's rewrite: the draft's line had an unclear "they")
-4. `Keep the prices at {house} fair in good years and bad, and be trusted for it.` (fair dealing; GOALS-1's rewrite: the draft's "the hands at {house}" presumed staff a one-person house lacks)
+3. `Leave the books of {house} so plain that whoever comes next could take them up.` (books another could take over; GOALS-1's rewrite: the draft's line had an unclear "they")
+4. `Deal fairly with everyone {house} deals with, in good years and bad, and be trusted for it.` (fair dealing; GOALS-1's rewrite: the draft's "the hands at {house}" presumed staff a one-person house lacks; the chair's 10:48: "prices" presumed a house that sells)
 
 ### INSTITUTION / solvency / short (2)
 Existing, for comparison:
@@ -68,8 +68,8 @@ Existing, for comparison:
 - "Be counted one day among those who lead {power}."
 - "Become someone {power} cannot do without."
 
-1. `Serve {power} well all their life, whether or not a rank ever comes.` (service for its own sake; a calm want)
-2. `Bring someone younger into {power}, and see that newcomer rise further than they ever did.` (to raise up someone else)
+1. `Be given a rank in {power} one day for years of faithful service, and ask for nothing sooner.` (a place earned by long service alone; the chair's 10:48 rewording ask)
+2. `Be trusted by every side inside {power}, so that a quarrel there is brought to them to settle.` (to be the power's peacemaker; replaces the draft's mentor's want, the chair's 10:48)
 3. `Change one thing about the way things are done in {power}, from the inside.` (one reform from below)
 
 ### POWER / tense / long (3)
@@ -155,7 +155,7 @@ Existing, for comparison:
 - D: "{A} made {B}'s career, and {B} rarely says so."
 - T: "{B} corrected {A} in public last month, and was right."
 
-1. D: `{A} still sends {B} advice now and then, unasked, and {B} still reads every line of it.`
+1. D: `{A} still gives {B} advice now and then, unasked, and {B} still hears out every word of it.`
    T: `{B} has stopped answering {A}'s advice, though {B} still follows most of it.`
    (counsel that never stopped; the tension: the student has stopped replying)
 2. D: `{A} taught {B} patience, which {A} never managed to learn.`
