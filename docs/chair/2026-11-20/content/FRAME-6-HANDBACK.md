@@ -1,6 +1,6 @@
 # FRAME-6 — hand-back (the session sheet's lane, the owner after FRAME-5)
 
-Last written 2026-11-20T13:35:12Z (`date -u`) by FRAME-6 on `lane/frame-6-2026-11-20`. The lane was taken at `5b7d57c70` on the chair's word "THE LANE IS YOURS at 5b7d57c70" (13:17 UTC). A successor needs this file and the briefs it names. Read it with `FRAME-5-HANDBACK.md` (rulings 26 to 34), `FRAME-4-HANDBACK.md` (18 to 25) and `FRAME-3-HANDBACK.md` (1 to 17), all in force.
+Last written 2026-11-20T14:35:33Z (`date -u`) by FRAME-6 on `lane/frame-6-2026-11-20`. The lane was taken at `5b7d57c70` on the chair's word "THE LANE IS YOURS at 5b7d57c70" (13:17 UTC). A successor needs this file and the briefs it names. Read it with `FRAME-5-HANDBACK.md` (rulings 26 to 34), `FRAME-4-HANDBACK.md` (18 to 25) and `FRAME-3-HANDBACK.md` (1 to 17), all in force.
 
 ## THE COUNT THE OWNER READS FIRST
 
@@ -16,23 +16,26 @@ Last written 2026-11-20T13:35:12Z (`date -u`) by FRAME-6 on `lane/frame-6-2026-1
 36. **THE READERS THAT BREAK TIES BY A CARD'S `power`, FOR THE JOIN** (the chair, 13:17; ruling 30 extended): `troubleCast.js :: strongest`, the sheet's people to voice (`tonightSheet.js`), `crisisCast.js`'s exploiter and collaborator, and `crisisPage.js :: lodgingKeeperOf`. Another lane corrects the band of four pool roles at birth; the chair re-measures on the joined tree.
 37. **THE LINE AT 43ab0f5eb (point 82) MERGED** before P4a's builder is cut (the chair, 13:17): `git merge --no-ff`, NOT refused by FRAME-6's permission check.
 
+38. **THE ORDER AND THE USAGE LAW** (the chair, 13:31 and 13:48 UTC; the owner: "We have a weekly reset so don't mind that"): C2 (the Stakes rows through the names helpers: the owner ordered it by name), then the six sheets for the owner, then FRAME-5's order (P4a, P1, P2, P3a, P3b, P4b, the measures, the build with `verify:dist`), builders side by side where path-disjoint. Nothing stays only in a container: every builder's branch is pushed (`lane/frame-6-2026-11-20-<unit>`, `-wip` while unfinished); the hand-back current at every push; the successor point 300,000.
+
 ## EACH UNIT: STATE, BRANCH, COMMIT
 
 | unit | state | commit | receipts |
 |---|---|---|---|
 | take-over | DONE | `5b7d57c70` (fast-forward) | count reproduced before it: 58 by size at `48b84cb01` |
 | brief P1B-F | committed | `0f34be803` | `frame6/P1BF-WORDING-PARITY.md` |
-| **P1B-F** | BUILDER OUT (branch `frame6-p1bf`, worktree scratchpad `wt-p1bf`, from `0f34be803`) | — | results land in `frame6/P1BF-RESULTS.md` on that branch |
+| **P1B-F** | MERGED | `62490b28b` (e4a5de61f, 4f80af1e8; pushed as `lane/frame-6-2026-11-20-p1bf`); registers `1a70c503e` | Diff read whole. Wording: `CRISIS_ABSENCE_REACH.outsideHand` = "{keeper} keeps the {house}, where strangers lodge, and would know of them". Parity: `troubleCast.js :: lodgingKeepersOf(s, free)` (the outsider rung, exported; the frame now calls it, the same filter and order) and `crisisPage.js :: lodgingKeeperOf` (exported for the test); `tests/domain/crisis/crisisKeeperBothDoors.test.js`: the page's keeper is the rung's FIRST. Builder's measure: calm 218 keeper / 112 none, crisis 223 / 137, golden 309 / 216, 0 disagree; free sets equal on 1,215. FINDING (by design, neither rule changed): the frame CHOOSES among the rung's keepers by its hash after its other sides take their people, so its outsider face can be a later keeper than the page's (frame-calm-town-80: Xenia on the frame, Junia on the page's rule). Builder's byte-identity: stored 1245/1245, non-owner pages 11205/11205, owner pages moved exactly the 126, the clause alone. Re-run by FRAME-6: red 6 failed on the pre-merge tree (3 files); merged 72 governing files 573 passed, 1 expected fail. Pins moved (unsigned): crisisOutsideHand.test.js "the closed set…" and "the owner's page gains the words…"; frameShareVeil P1B "the owner's Crisis tab reaches the hand…". Lighting: files 3718, credited 3245, titles 31307, suiteTitles 8674; wiring delta 0 |
 | the line merge 43ab0f5eb | DONE | `b1190e092` | conflicts on two registers only: the manifest a union (0 and 0 entries dropped, 1251); lighting the line's side then its door. Every other path equals its side's blob (0 differ) |
 | registers at the line merge | DONE | `4971555c3` | lighting by its door: files 3717, parked 473, credited 3244, titles 31303, suiteTitles 8673 (34/34); wiring `--dry` delta 0 |
 | the lane's 71 governing files at the merged tip | DONE: 1 red, re-pinned by proof | `eac12b73e` | 70 of 71 files green (569 passed, 1 expected fail). The red: frameShareVeil CF3 "8 born towns…" (5 of 8). The veil probe: pre-merge lane = the old pins (8/8); line archive = merged tip (8/8). Rows moved, unsigned: village-0, city-8, metropolis-8 (galleryDmFull, imported); metropolis-1, metropolis-5 (all five). After: 9 passed |
-| P4a, C2, P1, P2, P3a, P3b, P4b, measures, six sheets, build + verify:dist | NOT STARTED | — | order: P4a (after P1B-F merges: both edit `crisisPage.js` and the veil test) -> C2 -> P1 -> P2 -> P3a -> P3b -> P4b -> measures -> sheets -> build + `verify:dist`. Each stored unit adds CF12's five W4 towns to proof (a) |
+| C2, six sheets, P4a, P1, P2, P3a, P3b, P4b, measures, build + verify:dist | NOT STARTED | — | order (the chair, 13:31 and 13:48): C2 -> the six sheets -> P4a -> P1 -> P2 -> P3a -> P3b -> P4b -> measures -> sheets -> build + `verify:dist`. Each stored unit adds CF12's five W4 towns to proof (a) |
 
 ## WHAT A SUCCESSOR MUST KNOW
 
 - Builder worktrees live in the FRAME-6 scratchpad; their branches (`frame6-*`) are local and ride the lane by merge.
 - `node_modules` is in `.git/info/exclude`: archives and worktrees symlink it.
-- `tests/lint` whole has NOT yet been run by FRAME-6; the lane's last whole run is FRAME-5's at `eb555d407` (`tuningRegister` on three named rows).
+- `tests/lint` whole at `ea627441f` (after the line's merge): 220 files, 3270 passed, 1 failed: `tuningRegister` on exactly the three named rows (FRAME_TUNING measured; CRISIS_CAST_TUNING and WANT_MAX_WORDS dependents moved), unsigned, the owner's at the close. Owed again after P1B-F (re-run at the next merge).
+- NEVER COMMIT ON A BRANCH WHILE ITS PUSH IS IN FLIGHT; before every push `git ls-remote` and push only if the remote differs (the chair, 13:48: an empty push runs `npm run check` in the hook environment and fixture tests write into the real repository).
 
 ## EXECUTED OR PLAUSIBLE
 
