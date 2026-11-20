@@ -417,6 +417,17 @@ parts of the whole check (at the close).
   `list_ticket_thread` were run (213 closes it at the deploy either way; until then a signed-out caller who names a
   ticket's id can read its user-visible thread: said once to the owner, 2026-11-20).
 
+- **2026-11-20, about 06:50 UTC, THE OWNER (verbatim, the whole message), having read a fair dozen of the traditions
+  samples:** "I like it make sure that it has appropriate pool and prose conditions". TAKEN AS: the samples approved;
+  and the house's own two laws for a sentence, by their own names, made the owner's emphasis for this work: a POOL
+  (every sentence slot drawn from a registered pool of variants, measured for dominance) and PROSE CONDITIONS (every
+  line a declared line that states what it needs of the record and what rules it out, in the closed vocabulary of
+  `src/domain/facts/factVocabulary.js`, drawn through `drawDeclared`). ANSWERED THE SAME TURN, READ IN THE CODE FIRST:
+  yes to both; the prototype held two wordings a slot and no declarations; WHAT THE CONDITIONS ADD THAT THE SAMPLES
+  LACKED IS THE CRISIS: "gives thanks for the harvest" must not stand in a town in famine nor "a fair of stalls and
+  trading" under siege: those lines take conditions and a neutral twin; the text never says what became of the rite
+  this year. A SECOND SAMPLE SET, FROM TOWNS IN CRISIS, IS PROMISED TO THE OWNER. RULED AS CTR10.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -2035,3 +2046,11 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   (the gallery and the link, both stored shapes) show UNREGISTERED 0, any path left named with its reason. V10-2's
   guards 176 of 177 (VS1 (b), 21 lines pinning behaviour from before R2, being aligned by a test-only builder).
   Running there: R3, R4, the R6 re-cut. VEIL-22 at about 200,000 tokens.
+- 06:49 UTC · **THE OWNER APPROVED THE TRADITIONS SAMPLES AND ASKED FOR POOLS AND PROSE CONDITIONS: CTR10 RULED AND SENT** (section 1;
+  `prompts/TRAD-1.txt` ADDENDUM 1 holds CTR9, the rulings on the proposal and CTR10 in full): a floor of lines a slot
+  (four for each act's first sentence; three for each keeper frame, each cause and the economy sentence), registered
+  as the house registers pools, with the pool-dominance figure and the sameness measure re-taken; every line a
+  declared line in the closed vocabulary, drawn through `drawDeclared` (the display pick the selector over the full
+  pool; a refused line to its twin, else the admitted argmax, else nothing; an atom with no reader listed, its line
+  kept out); the pools crisis-scoped where their words can clash with a present crisis, a twin saying only what is
+  kept, never what became of the rite this year; twelve samples from towns in crisis for the owner.
