@@ -327,21 +327,21 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       `organized crime has ${footholdWord(hasCriminalOrg || flags.inst.hasCriminalInst || institutions.some((i) => /gambl/i.test(String(i?.name ?? ''))))}.${courtNote}${wallNote}`; // TAIL-DISPLAY-CIVIC-4 (V10): safetyLineTruth.js
   } else if (effectiveSafety >= 1.2) {
     safetyLabel = 'Moderate';
-    const lawRef  = inst.hasGarrison ? 'The garrison patrols' : inst.hasWatch ? 'The watch covers'
-                  : inst.hasMilitia  ? 'Militia volunteers patrol' : 'Locals watch over';
-    const wallNote = inst.hasWalls ? ' The walls keep the trouble inside, off the roads beyond.' : '';
-    safetyDesc = tiny ? `${TINY_MODERATE_LINE}${wallNote}` : `A mix of safer and more exposed areas. ${lawRef} the main paths; quieter spots after dark carry genuine risk. ` + // UPKEEP-14 (f): no areas, paths or corners in a thorp or hamlet
-      `Residents know which corners to avoid.${wallNote}`;
+    const force = inst.hasGarrison ? 'garrison' : inst.hasWatch ? 'watch' : inst.hasMilitia ? 'militia' : 'none'; // PLACE-1 (2026-11-20): each sentence slot is drawn
+    const slot = (/** @type {string} */ id, /** @type {ReadonlyArray<{ text: string }>} */ pool) => safetyDescSlot(id, pool, institutions, tier, config); // from its declared pool (src/data/safetyDescLines.js)
+    const wallNote = inst.hasWalls ? slot('walls', MODERATE_WALLS) : '';
+    safetyDesc = tiny ? `${slot('tiny', TINY_MODERATE)}${wallNote}` : `${slot('opening', MIXED_OPENING)} ${slot(`force.${force}`, MIXED_FORCE[force])} ` + // UPKEEP-14 (f): no areas, paths or corners in a thorp or hamlet
+      `${slot('corners', MIXED_CORNERS)}${wallNote}`;
   } else if (effectiveSafety >= 0.6) {
-    safetyLabel = 'Unsafe';
+    safetyLabel = 'Unsafe'; const composed = inst.hasGarrison && !hasStress('under_siege'), slot = (/** @type {string} */ id, /** @type {ReadonlyArray<{ text: string }>} */ pool) => (composed ? safetyDescSlot(`unsafe.${id}`, pool, institutions, tier, config) : String(lineText(pool[0]))); // PLACE-1: with a garrison, each slot from its pool
     const lawRef =
-      inst.hasGarrison  ? 'The garrison is overwhelmed or corrupt.'   :
+      inst.hasGarrison  ? slot('garrison', UNSAFE_GARRISON) :
       inst.hasWatch      ? 'The watch is stretched far beyond its capacity.' :
       inst.hasMilitia    ? 'The militia cannot maintain consistent coverage. They have other jobs to do.' :
       inst.hasMercenary  ? 'The mercenary company focuses on protecting those who pay them, not the general population.' :
                            'There is no meaningful guard presence.';
-    const wallNote = inst.hasWalls ? " Walls slow entry but don't solve what happens inside them." : '';
-    safetyDesc = `Crime is a persistent and visible problem. ${lawRef} ${hasStress('under_siege') ? lineText({ text: 'Inside the siege lines, people are advised to move in groups and keep valuables hidden.', needs: ['crisis: siege'] }) : lineText({ text: 'Travelers are advised to move in groups and keep valuables hidden.', excludes: ['crisis: siege'] })}${wallNote}`; // BAR5-SAFETY (LAW 5): no travellers come in under a siege
+    const wallNote = inst.hasWalls ? slot('walls', UNSAFE_WALLS) : '';
+    safetyDesc = `${slot('opening', UNSAFE_OPENING)} ${lawRef} ${hasStress('under_siege') ? lineText({ text: 'Inside the siege lines, people are advised to move in groups and keep valuables hidden.', needs: ['crisis: siege'] }) : slot('advice', UNSAFE_ADVICE)}${wallNote}`; // BAR5-SAFETY (LAW 5): no travellers come in under a siege
   } else {
     safetyLabel = 'Dangerous';
     const lawRef =
@@ -1125,10 +1125,21 @@ import { footholdWord, gatesSmugglersLine, GANG_HOUSES_OF, smugglingHookUnderSie
 /** The enforcement sentence the desperation-theft lines end on (UPKEEP-14, ruling (h)): dropped where no enforcer stands. */
 const ENFORCEMENT_STRUGGLES = ' Enforcement struggles to distinguish survival crime from organised theft.';
 
-/** UPKEEP-14 (the chair's ruling (f), the bar's #166 #218): a thorp's or a hamlet's Moderate line. Areas, main paths and
- *  corners belong to a village or larger; a small place is Moderate by its community order (`communityOrderBonus`), and
- *  this line says that, naming no force. */
-const TINY_MODERATE_LINE = 'The neighbours keep an eye on one another, and what trouble there is, everyone soon hears of.';
+// ─── PLACE-1 (2026-11-20): the safety line's sentence slots, each from its declared pool (at the end, so no line above moves) ───
+// UPKEEP-14 (the chair's ruling (f), the bar's #166 #218) stands in the pools: a thorp's or a hamlet's Moderate line names no
+// areas, main paths or corners (`TINY_MODERATE`, index 0 its line of then); the village-and-up slots are the others.
+import { pickVariantMixed } from '../kernel/proseHash.js'; import { MIXED_CORNERS, MIXED_FORCE, MIXED_OPENING, MODERATE_WALLS, TINY_MODERATE, UNSAFE_ADVICE, UNSAFE_GARRISON, UNSAFE_OPENING, UNSAFE_WALLS } from '../data/safetyDescLines.js'; // one line: the file's line ceiling (max-lines)
+
+/**
+ * ONE SENTENCE SLOT OF THE SAFETY LINE (PLACE-1, the owner's order of 2026-11-20 on the sameness fault;
+ * `docs/chair/2026-11-20/content/place/safetyDesc-MEASURE.md` §D–§F). The pool is drawn whole by keyed hash
+ * (`kernel/proseHash.js :: pickVariantMixed`, the chair's order of 17:18 UTC; no roll), keyed on the active stream's step-qualified seed as `voiceOf` keys
+ * (`config._seed` is absent here); a refused winner resolves to the admitted argmax (`drawDeclared`). The facts are the
+ * writer's own: the roster, the tier and the config (which answers the route). A falsy seed prints index 0, today's sentence.
+ * @param {string} id the slot @param {ReadonlyArray<{ text: string }>} pool @param {Array<object>} institutions
+ * @param {string} tier @param {object} config @returns {string}
+ */
+function safetyDescSlot(id, pool, institutions, tier, config) { const seed = getActiveRng()?.seed; return String(drawDeclared(pool, { draw: (p) => pickVariantMixed(p, seed ? `${seed}::safetyProfile:safetyDesc:${id}` : null), facts: () => factsOf({ institutions, tier, config }), key: `${seed ?? ''}::safetyProfile:safetyDesc:${id}`, poolId: `safetyProfile:safetyDesc:${id}`, surface: 'defense', drawKind: 'H' }).text ?? pool[0].text); } // one line: the file's line ceiling
 
 // ─── BAR3-DEFECON (2026-11-15): the safety lines against the page's own state (at the end, so no line above moves) ───
 import { hasInstitution } from '../domain/facts/institutions.js';

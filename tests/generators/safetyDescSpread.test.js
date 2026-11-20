@@ -13,10 +13,11 @@
  *       composes (Moderate small place with and without walls; Moderate village-and-up under each force; Unsafe with a
  *       garrison);
  *   (d) the planted control: the same lines with every pool collapsed to one row (what a one-row pool prints) red (a);
- *   (e) the chair's condition of 16:51 UTC (the line prints on player and public pages): no row's declaration reads a
- *       HIDEABLE fact, so a shared page never reveals a hidden house by which sentence it got. Held by its effect: every
- *       row's verdict is the same on the record and on the record with every hideable house (`cardVeil.js ::
- *       isHideableHouse`) and veiled power (`isVeiledPower`) struck; a planted row needing organised crime is caught.
+ *   (e) the chair's condition of 16:51 UTC, corrected at 17:13 UTC (the line prints on player and public pages): no row
+ *       needs or excludes a house of a hideable kind (`cardVeil.js :: isHideableHouse`: criminal or clandestine) nor any
+ *       fact about crime or a clandestine thing, so a shared page never reveals a hidden house by which sentence it got.
+ *       Each atom a row declares is mapped to the catalogue houses its home reads; planted controls: a row needing
+ *       organised crime, and a market read by name (which takes in the black market), are caught.
  */
 import { describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -25,8 +26,11 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { generateSafetyProfile } from '../../src/generators/safetyProfile.js';
 import { defenceOf } from '../../src/domain/facts/defence.js';
 import { factsOf } from '../../src/domain/facts/factsOf.js';
-import { declarationAdmits, declarationOf } from '../../src/domain/facts/factVocabulary.js';
-import { isHideableHouse, isVeiledPower } from '../../src/domain/people/cardVeil.js';
+import { atomsOf, declarationAdmits, declarationOf, parseAtom } from '../../src/domain/facts/factVocabulary.js';
+import { isHideableHouse } from '../../src/domain/people/cardVeil.js';
+import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
+import { DEFENSE_BUCKET_KEYWORDS } from '../../src/domain/institutions/defenseInstitutionBuckets.js';
+import { isMarketInstitution } from '../../src/domain/facts/market.js';
 
 const SIZES = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const N = 100;
@@ -169,52 +173,78 @@ describe('(c) canonical at zero: a seedless call prints today\'s line in every c
 });
 
 /**
- * The record with every hideable thing struck: each house a shared page may hide whole (`cardVeil.js :: isHideableHouse`:
- * criminal, clandestine, an illegal brokerage) off the roster, and each veiled power (`isVeiledPower`: hidden, or criminal)
- * off the power roster. @param {any} rec
+ * THE HOUSES EACH ATOM READS (the chair's condition, corrected 17:13 UTC). Each dimension a row may declare is mapped to
+ * the catalogue houses its home counts (`defenseInstitutionBuckets.js :: DEFENSE_BUCKET_KEYWORDS` for the defence atoms,
+ * `defenseFacts.js`'s timber and gate words for `palisade` and `gate`, `orderForce.js`'s houses for the force's hours,
+ * `market.js :: isMarketInstitution` for the market). The tier, the route and a crisis read no house (the tier, the config,
+ * the stresses). A dimension not mapped here is red, so a new atom is mapped before a row may declare it.
  */
-function struck(rec) {
-  const ps = rec.powerStructure;
-  return {
-    ...rec,
-    institutions: (rec.institutions || []).filter((i) => !isHideableHouse(i)),
-    ...(ps ? { powerStructure: { ...ps, factions: (ps.factions || []).filter((f) => !isVeiledPower(f)) } } : {}),
-  };
-}
-/**
- * The rows whose verdict a hideable thing decides: on some birth the row is admitted on the record and refused on it
- * struck, or the reverse, on the final record or the writer's (`{ institutions, tier, config }`).
- * @param {Array<[string, ReadonlyArray<object>]>} pools @param {Array<{ seed: string, t: any }>} births
- */
-function hiddenDecides(pools, births) {
-  const out = new Set();
-  const verdict = (row, rec) => { try { return declarationAdmits(declarationOf(row), factsOf(rec)).admitted; } catch (e) { return `throws: ${e.message}`; } };
-  for (const b of births) {
-    const writer = { institutions: b.t.institutions, tier: b.t.tier, config: b.t.config };
-    for (const rec of [b.t, writer]) {
-      const bare = struck(rec);
-      for (const [name, rows] of pools) rows.forEach((row, i) => {
-        if (verdict(row, rec) !== verdict(row, bare)) out.add(`${name}[${i}]`);
-      });
-    }
+const CATALOGUE = (() => {
+  const byName = new Map();
+  for (const shelves of Object.values(institutionalCatalog)) for (const [category, rows] of Object.entries(shelves || {})) {
+    for (const [name, row] of Object.entries(rows || {})) if (!byName.has(name)) byName.set(name, { name, category, ...row });
   }
-  return [...out].sort();
+  return [...byName.values()];
+})();
+const named = (bucket) => (h) => DEFENSE_BUCKET_KEYWORDS[bucket].some((kw) => h.name.toLowerCase().includes(kw));
+const TIMBER = /palisade|earthwork/i; // defenseFacts.js :: TIMBER_ENCLOSURE_RE
+const GATE = /\bgates?\b/i; // defenseFacts.js :: GATE_RE
+/** @type {Record<string, (h: any) => boolean>} */
+const ATOM_HOUSES = Object.freeze({
+  walls: named('walls'),
+  palisade: (h) => named('walls')(h) && TIMBER.test(h.name),
+  gate: (h) => (named('walls')(h) && !TIMBER.test(h.name)) || GATE.test(h.name),
+  watch: named('watch'), garrison: named('garrison'), militia: named('militia'),
+  guardPresence: (h) => ['watch', 'garrison', 'militia', 'mercenary'].some((b) => named(b)(h)) || /\bfree company\b/i.test(h.name),
+  'force walks by day': (h) => ['watch', 'garrison', 'militia'].some((b) => named(b)(h)),
+  market: (h) => isMarketInstitution(h),
+});
+const NO_HOUSE = new Set(['tier', 'route', 'crisis']);
+/** A fact about crime or a clandestine thing, by its dimension's name. */
+const CRIME_OR_CLANDESTINE = /crim|clandest|smuggl|thie|black|gang|fence|underground|veil|hidden|covert|guild|capture|bribe|corrupt/i;
+
+/**
+ * Every row's atoms against the houses they read: `{ violations, houses }`, `houses` the catalogue houses each pool's
+ * declarations read (by pool name). @param {Array<[string, ReadonlyArray<object>]>} poolRows @param {Record<string, (h: any) => boolean>} map
+ */
+function hideableReads(poolRows, map = ATOM_HOUSES) {
+  const violations = []; /** @type {Record<string, Set<string>>} */ const houses = {};
+  for (const [name, rows] of poolRows) {
+    houses[name] = new Set();
+    rows.forEach((row, i) => {
+      for (const atom of atomsOf(declarationOf(row))) {
+        const parsed = parseAtom(String(atom).replace(/^no\s+/, ''));
+        const d = parsed?.dimension ?? String(atom);
+        const at = `${name}[${i}] ${atom}`;
+        if (CRIME_OR_CLANDESTINE.test(d)) { violations.push(`${at}: a fact about crime or a clandestine thing`); continue; }
+        if (NO_HOUSE.has(d)) continue;
+        const reads = map[d];
+        if (!reads) { violations.push(`${at}: the houses it reads are not mapped`); continue; }
+        const hs = CATALOGUE.filter(reads);
+        if (!hs.length) violations.push(`${at}: reads no catalogue house`);
+        for (const h of hs) { if (isHideableHouse(h)) violations.push(`${at}: reads a hideable house (${h.name})`); else houses[name].add(h.name); }
+      }
+    });
+  }
+  return { violations, houses };
 }
 
-describe('(e) the chair\'s condition (16:51 UTC): no row of the line declares a hideable fact', () => {
-  it('every pool row reads the same with every hideable house and veiled power struck from the record', async () => {
+describe('(e) the chair\'s condition (16:51 UTC, corrected 17:13 UTC): no row needs a hideable house or a fact about crime', () => {
+  it('every atom of every pool row reads only houses `isHideableHouse` does not hide, and no crime or clandestine fact', async () => {
     const mod = await pools();
     expect(mod, 'src/data/safetyDescLines.js: the pools of the safety line').not.toBeNull();
-    const births = [];
-    for (const size of SIZES) births.push(...await bornOf(size));
-    expect(hiddenDecides(poolList(mod), births)).toEqual([]);
-  }, SLOW);
-  it('the planted control: a row that needs a hideable fact (organised crime) is caught', async () => {
-    const births = [];
-    for (const size of SIZES) births.push(...await bornOf(size));
+    const { violations, houses } = hideableReads(poolList(mod));
+    expect(violations).toEqual([]);
+    expect(Object.values(houses).some((s) => s.size > 0), 'the rows read some house').toBe(true);
+  });
+  it('the planted controls: a row needing organised crime is caught; an atom whose houses include a hideable one is caught', () => {
     const planted = [['PLANTED', [Object.freeze({ text: 'Organised crime has the run of the place.', needs: Object.freeze(['crime: organized']) })]]];
-    expect(hiddenDecides(/** @type {any} */ (planted), births)).toEqual(['PLANTED[0]']);
-  }, SLOW);
+    expect(hideableReads(/** @type {any} */ (planted)).violations).toEqual(['PLANTED[0] crime: organized: a fact about crime or a clandestine thing']);
+    const market = [['PLANTED', [Object.freeze({ text: 'The market is busy.', needs: Object.freeze(['market']) })]]];
+    const wide = { ...ATOM_HOUSES, market: (h) => /market/i.test(h.name) }; // a market read by its name takes in the black market
+    expect(hideableReads(/** @type {any} */ (market), wide).violations.some((v) => /hideable house \(Black market\)/.test(v))).toBe(true);
+    expect(hideableReads(/** @type {any} */ (market)).violations).toEqual([]);
+  });
 });
 
 describe('(d) the planted control: a one-row pool reds the bar', () => {
