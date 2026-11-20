@@ -90,3 +90,10 @@ string holding a hidden name: `foundedBy`, an event's `name`, a house's tags, ca
 stress `type`s); the draw key (`String(_seed ?? id)`); the public search (unit 2).
 
 ## Updated (append at each later commit, with `date -u`)
+- 2026-11-20 11:28 UTC — at the merge `a0929a153` (unit 2): `tests/lint` whole 219/221 files, 3273/3274 tests; reds: the lighting
+  census (by count: unit 2's +1 file) and `ledgerCitationIntegrity` (the fresh clone lacked
+  `refs/heads/review-fixes-2026-07-08`; fetched, 10/10 alone). The lighting census re-taken BY ITS DOOR at the clean tip
+  `58df63a71`: files 3710 → 3711, credited 3238 → 3239, titles 31277 → 31292, suiteTitles 8661 → 8664; the plain run
+  34/34. typecheck:ratchet 0, typecheck:domain:strict 0, eslint 0. The chair ruled the four plants at 11:12 UTC
+  (foundedBy; tags; the event by its KIND, chosen among events naming nothing the record holds; the SET by (B): the
+  owner's set unchanged, the drawn rows admit by the floor always): all four in unit 4.

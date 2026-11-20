@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "f43ccccac31d64b8af0c0a4e3d611c3415bea665",
-  "measuredBy": "TRAD-2",
+  "measuredAtSha": "58df63a7121677ec1cde5e9da47fde933e226d33",
+  "measuredBy": "TRAD-3",
   "date": "2026-11-20",
-  "note": "TRAD-2 unit 1c: three test titles (the plural power verb arm, the walker guard and slot set)",
-  "files": 3710,
+  "note": "unit 2 merged at a0929a153: tests/domain/dossierSearchTraditions.test.js (+1 file)",
+  "files": 3711,
   "parked": 472,
-  "credited": 3238,
-  "titles": 31277,
-  "suiteTitles": 8661
+  "credited": 3239,
+  "titles": 31292,
+  "suiteTitles": 8664
 }
