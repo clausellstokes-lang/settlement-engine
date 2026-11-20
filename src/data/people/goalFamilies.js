@@ -9,7 +9,9 @@
  * exactly (RANK 36 · POWER 48 · INSTITUTION 48 · SUPPLY 48 · TIES 60 · PERSONALITY 96 ·
  * ALLEGIANCE 128 = 464), plus UNCANNY 60 (the owner's word of 2026-11-08: rare fantasy goals, magic on
  * as the gate) = 524. No goal is keyed by title (J-16). CRISIS keeps today's lines and has no
- * cell here. Every line is written to the owner's style law (WIRING-RULINGS §5–§8, STYLE-RULINGS §2,
+ * cell here. APART from the cells, and outside every total above, `GOAL_RESERVE_LINES` holds 25 reserve lines (GOALS-1,
+ * GR1; the chair's approval of 2026-11-20 10:48 UTC): TIES 6 · INSTITUTION 7 · RANK 7 · POWER 5, never drawn, only
+ * taken by a repeat's rotation. Every line is written to the owner's style law (WIRING-RULINGS §5–§8, STYLE-RULINGS §2,
  * WAVE-RULINGS item 16) and is listed here FOR THE OWNER'S VETO.
  *
  * ── THE VANTAGES ──
@@ -201,6 +203,18 @@ const cell = (lines) => Object.freeze(lines.map((l) => (typeof l === 'string' ? 
  */
 export const GOAL_LINE_MIN_MEMBERS = Object.freeze({
   'Win two more people in {power} over to their side before {above} notices.': 4,
+});
+
+/**
+ * GOALS-1 (the chair's check of 2026-11-20 10:48 UTC): A GENTLE LINE IS NEVER HELD ON A HARSH TIE. Beside its line, the
+ * tie types and strengths (`generators/people/ties.js :: RELATIONSHIP_STRENGTHS`) a TIES line is refused on: template →
+ * `{ type: [strengths] }`. Read by `people/goals.js :: cellCandidates` from the tie its TIES call reads: a line refused
+ * there is marked refused (never dropped), so the list and every draw stay as they are, and a rotation passes over it.
+ * @type {Readonly<Record<string, Readonly<Record<string, readonly string[]>>>>}
+ */
+export const GOAL_LINE_NOT_ON_TIES = Object.freeze({
+  "Earn {other}'s respect, if never their friendship.": Object.freeze({ enemy: Object.freeze(['serious', 'mortal']), rival: Object.freeze(['bitter']) }),
+  'Keep the rivalry with {other} a fair one, fought in the open, for as long as it lasts.': Object.freeze({ enemy: Object.freeze(['serious', 'mortal']), rival: Object.freeze(['bitter']) }),
 });
 
 /**
@@ -1122,6 +1136,69 @@ export const GOAL_FAMILY_LINES = Object.freeze({
  * THE RESERVE LINES (GR1, GOALS-1, the chair's rule: no goal wording twice in one town). The same shape as
  * `GOAL_FAMILY_LINES` (`[family][subKind][vantage]` → `cell([...])`), kept APART from the cells: a line here is never
  * drawn, only TAKEN by a repeat's rotation (`generators/people/goals.js :: dealGoals`, pass two), so appending one moves
- * no draw (appending to a cell would change its pick's modulus and move every draw of that kind). Empty at birth.
+ * no draw (appending to a cell would change its pick's modulus and move every draw of that kind). Empty at birth; the
+ * 25 lines below are the chair's approval of 2026-11-20 10:48 UTC (GOALS-1, builder 4), outside the cells' totals.
  */
-export const GOAL_RESERVE_LINES = Object.freeze({});
+export const GOAL_RESERVE_LINES = Object.freeze({
+  RANK: Object.freeze({
+    enter: Object.freeze({
+      short: cell([
+        'Learn how decisions are really made in {power}, and whose word settles them.',
+        'Have their name put forward for the next place that opens in {power}.',
+        'Keep every promise they make inside {power} this season, however small.',
+        'Speak up for {power} once this season when it costs them something to do so.',
+      ]),
+      long: cell([
+        'Be given a rank in {power} one day for years of faithful service, and ask for nothing sooner.',
+        'Be trusted by every side inside {power}, so that a quarrel there is brought to them to settle.',
+        'Change one thing about the way things are done in {power}, from the inside.',
+      ]),
+    }),
+  }),
+  POWER: Object.freeze({
+    tense: Object.freeze({
+      short: cell([
+        'Find one matter this season on which {power} and {rival} want the same thing.',
+        'Give {rival} no fair cause for complaint against {power} this season.',
+      ]),
+      long: cell([
+        'Be the one person in {power} that {rival} will always agree to hear.',
+        'Keep {power} out of every quarrel with {rival} that is not truly {power|its|their} own.',
+        'Free {power} of any need for what only {rival} can give.',
+      ]),
+    }),
+  }),
+  INSTITUTION: Object.freeze({
+    solvency: Object.freeze({
+      short: cell([
+        'Put a little by at {house} every week this season, however small the sum.',
+        { line: 'Win better terms from one of those who supply {house}, before the season is out.', excludes: ['crisis: siege'] },
+      ]),
+      long: cell([
+        'Make {house} known to every supplier as a house that pays on the day.',
+        'Let {house} grow only as fast as the money comes in, and no faster.',
+        'Leave the books of {house} so plain that whoever comes next could take them up.',
+        'Deal fairly with everyone {house} deals with, in good years and bad, and be trusted for it.',
+      ]),
+    }),
+    charter: Object.freeze({
+      long: cell([
+        'Win rights for every house that does the same work as {house}, not for {house} alone.',
+      ]),
+    }),
+  }),
+  TIES: Object.freeze({
+    rival_enemy: Object.freeze({
+      short: cell([
+        "Keep out of {other}'s way this season, and get on with their own work in peace.",
+        "Quietly learn one thing this season from watching {other} at work.",
+      ]),
+      long: cell([
+        "Earn {other}'s respect, if never their friendship.",
+        "Leave a name that will be remembered longer than {other}'s.",
+        'Come through the rivalry with {other} no meaner than they went into it.',
+        'Keep the rivalry with {other} a fair one, fought in the open, for as long as it lasts.',
+      ]),
+    }),
+  }),
+});
