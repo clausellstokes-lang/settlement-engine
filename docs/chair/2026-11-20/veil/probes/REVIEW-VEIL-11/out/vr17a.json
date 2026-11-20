@@ -1,0 +1,69 @@
+{
+ "tally": {
+  "gallery SHUT dm=false live": {
+   "n": 20,
+   "bad": 0
+  },
+  "link SHUT dm=false live": {
+   "n": 20,
+   "bad": 0
+  },
+  "gallery SHUT dm=false snapshot": {
+   "n": 20,
+   "bad": 0
+  },
+  "link SHUT dm=false snapshot": {
+   "n": 20,
+   "bad": 0
+  },
+  "gallery SHUT dm=true live": {
+   "n": 20,
+   "bad": 0
+  },
+  "link SHUT dm=true live": {
+   "n": 20,
+   "bad": 0
+  },
+  "gallery SHUT dm=true snapshot": {
+   "n": 20,
+   "bad": 0
+  },
+  "link SHUT dm=true snapshot": {
+   "n": 20,
+   "bad": 0
+  },
+  "gallery open dm=false live": {
+   "n": 20,
+   "bad": 0
+  },
+  "link open dm=false live": {
+   "n": 20,
+   "bad": 0
+  },
+  "gallery open dm=false snapshot": {
+   "n": 20,
+   "bad": 0
+  },
+  "link open dm=false snapshot": {
+   "n": 20,
+   "bad": 0
+  },
+  "gallery open dm=true live": {
+   "n": 20,
+   "bad": 0
+  },
+  "link open dm=true live": {
+   "n": 20,
+   "bad": 0
+  },
+  "gallery open dm=true snapshot": {
+   "n": 20,
+   "bad": 0
+  },
+  "link open dm=true snapshot": {
+   "n": 20,
+   "bad": 0
+  }
+ },
+ "ex": []
+}

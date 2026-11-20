@@ -77,7 +77,25 @@ control 50.
 | income percentages: served sum below 100 | 50 | 6 | 50 / 6 | TIER 1 until item D, control included |
 | withheld house's name anywhere in the row | 0 | 0 | 0 | pass |
 
-THE RAW MEASURES, BOTH SHAPES, AT THIS TIP (`splitp.probe.jsx` on the new shape, 45 towns; `splitm` on master): every
+## 3. Read (2): the cold read of "VR17", efca35fd6 (executed 02:12–02:35 UTC). HOLDS.
+
+THE DIFF: `galleryVeil.js :: GROUPING_OPEN_EVIDENCE` (one row: Defense's criminal-architecture grouping reads OPEN on a
+visitor's page only where `safetyProfile.criminalInstitutions` and `crimeTypes` are both arrays, the pair 211 and the
+remover delete) and `isVeiled(settlement, address, { publicDossier })`; `DefenseTab.jsx:208` passes its
+`publicDossier` (the only product reader of `isVeiled`); a walker over copy sites and readers; the pglite test. Master's
+generator writes both keys (`safetyProfile.js:718`), so an open town of production's shape is not read shut by absence.
+
+RED AND GREEN, RE-RUN BY ME: the cure's test on a scratch tree at its base bedd5a392: 4 failed, 1 passed, for the right
+reason ("SHUT, the gallery page, civility-masked draws: Systems/Defense :: Criminal structure: Organized syndicate");
+at efca35fd6: the test and the walker 11 of 11 green.
+
+MY ATTACK (`vr17a.probe.jsx`; the cure's test covers Reveal-DM off and live mode only): 20 born towns per shape, the
+grouping SHUT and OPEN, Reveal-DM off and on, live and snapshot (the copy written as the share panel writes it), read
+as anon by `get_gallery_dossier` and the party link (`get_unlisted_dossier`), passed through the tree's own
+`sanitizeDossier`, then `isVeiled(…, { publicDossier: true })`: the new shape 320 reads, master's shape (xp212) 320
+reads: 0 shut read open, 0 open read shut.
+
+## 4. THE RAW MEASURES, BOTH SHAPES, AT THIS TIP (`splitp.probe.jsx` on the new shape, 45 towns; `splitm` on master): every
 gallery read serves `economicState.compound.criminalEffective` (e.g. 82.84), `compound.militaryEffective` and
 `safetyProfile.safetyRatio` (45 of 45 new; 86 of 86 and 50 of 50 master), and `activeConditions[].severity` (32 of 45;
 60 of 86, 33 of 50). Each is registered withhold-always (VR14 (i)) and none is built yet (R1: "no withhold row is
