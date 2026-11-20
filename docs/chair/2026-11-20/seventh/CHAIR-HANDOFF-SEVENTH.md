@@ -3709,3 +3709,31 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   green at 15567e597); pushed 7eea3895e; waiting for "R3". THE OWNER'S QUESTION OF ABOUT 12:57 ANSWERED (section
   1); the joint measure and the dozen settlements promised (section 4); an early joint reading of the two dark
   laws queued (section 3).
+- 13:30 UTC · **THE ACCOUNT'S WEEKLY USAGE WARNING IS ON (read at 13:30 in every seat's record and the chair's own:
+  `rate_limit_info`: seven_day, status "allowed_warning", `isUsingOverage` false; THE WINDOW RESETS AT 2026-11-24
+  15:00 UTC, 97 hours away). At 13:05 one idle seat still read "allowed": the warning was crossed between 13:05 and
+  13:18. THE CHAIR CANNOT SEE THE PERCENTAGE: the owner can (the app's usage page). TWO EARLIER CHAIRS' ACCOUNTS
+  RAN OUT MID-WORK. THE RULE FROM NOW: (1) NOTHING STAYS ONLY IN A CONTAINER: every seat pushes every branch it or
+  its builders hold, unfinished work included, named as unfinished, and keeps its hand-back current at every
+  push; (2) no new measuring helpers, one builder at a time unless a second is path-disjoint and already running;
+  (3) finish what is nearest to done before starting what is far; (4) the chair's own record is kept so that a
+  successor on another account needs this file and the seats' hand-backs only.** THE STATE AT 13:30, EVERY
+  WORKING SEAT READ BY `get_session` (one call each): VEIL-26 session_019yED1PibyFgjeRN2dcF6qn 232,448 (owner of
+  the veil lane from 15567e597; branch `lane/veil-26-2026-11-20` c0f12935a; R3-CURE-5 out in VEIL-25's container;
+  its push ran the whole suite and was killed at twenty minutes: to ask); SEAT-4 session_019yED1RNL8TjjpR5HCcJ3yW
+  216,660 (owner from 1cf452ac2; `lane/seat-4-2026-11-20` 1edf9ef64; U4 out in SEAT-3's container
+  session_019yED1Sc68y5MpiArTSxJ24); TRAD-4 session_019yED1RnYfDi9cdY4Djoc5Y 145,684 (owner from 1f3cdc135; ITS
+  OWN CHECK REFUSED THE MERGE OF THE LINE: the chair makes a base branch); FRAME-6
+  session_019yED1SrGRksHHo91AQFZ25 147,421 (owner from 5b7d57c70; merged the line at b1190e092); FORTUNE-2
+  session_019yED1NNf9XQihkNdEoboJC 236,065 (owner; `lane/fortune-2-2026-11-20` 72402e3cc; U2 and U3 out, LOCAL;
+  `prompts/FORTUNE-3.txt` written, not seated); GOALS-3 session_019yED1RVC8z87Yb1RHx576d 158,538 (owner from
+  010a1150b; merged the line at d3937c3f8; measuring the reserve's shortfall); PAGE-1
+  session_019yED1SBsrfrBKHe1u4vKmw 217,498 (owner of the display lane; hand-back 05bc9ca8f; four builders out,
+  LOCAL; PAGE-4 session_019yED1QJPUHGjH6C4jUJNMW beside, about 75,000); PAGE-3 session_019yED1QsR5CgzseTy7AeDqZ
+  184,719 (owner of the content lane from 6b82c8e4a; `lane/page-3-2026-11-20` 2ccb1c2c1; merging the sides table;
+  PAGE-2 session_019yED1P9yBtSHbbyFk3pH93 relays its builders: `-t1` 12dc0f96c, `-s7` a89859e6f on origin; `s`
+  and `l2` LOCAL, uncommitted); REVIEW-VEIL-13 session_019yED1RimCUL1Q4txbQxDX9 275,298 ALREADY (seated 12:52;
+  reading TRAD-SHARE 1f3cdc135 cold; its mark 400,000: A SUCCESSOR OR A NARROWER BRIEF BEFORE R3). THE CHAIR'S OWN
+  RECORD: 882,085 of 1,000,000 (its context is summarised again at about 901,600: this file is its memory). THE
+  WORKING LINE: `lane/join-2026-11-14` at 43ab0f5eb (point 82); a CI reading helper waits on its run. NET 11 is
+  armed for 13:38 (trig_01JUWeAuDnc3GuERQMTYXNj5): its pass is this entry; re-arm 45 minutes on.
