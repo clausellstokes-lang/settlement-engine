@@ -1179,7 +1179,7 @@ export const GOAL_RESERVE_LINES = Object.freeze({
       long: cell([
         'Make {house} known to every supplier as a house that pays on the day.',
         'Let {house} grow only as fast as the money comes in, and no faster.',
-        'Leave the books of {house} so plain that whoever comes next could take them up.',
+        'Leave the accounts of {house} so plain that whoever comes next could take them up.',
         'Deal fairly with everyone {house} deals with, in good years and bad, and be trusted for it.',
       ]),
     }),
