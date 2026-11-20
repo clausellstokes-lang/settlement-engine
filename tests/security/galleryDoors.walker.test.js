@@ -29,6 +29,15 @@
  *     pendingEditIntents) is classed by the SQL `_gallery_doors_chronicle_classes()` and by the JS CHRONICLE_CLASSES
  *     (src/domain/display/galleryDoors.js); the two tables are equal; every class is 'target' or 'covert'.
  *   6 THE BAND TABLE IS ONE: labelBands' STABILITY_BANDS equals the array inside the SQL `_gallery_doors_band(text)`.
+ *   7 VR27 AS AMENDED, THE CATALOGUE (VEIL-DOORS-2): every underscore function of the share's family (named `_gallery_*`
+ *     or `_saved_maps_*`, or whose body names a town or a map) is executable by neither visitor role, OR stands on
+ *     VISITOR_LIST with the visitor context that needs it or the catalogue's class that leaves it to SEC-GRANTS's 213
+ *     (the eight older INVOKER helpers: they run with the caller's own rights and grant nothing). Red on an unlisted one
+ *     and on a stale row. And 212 revokes none of the eight by name (VR27 as amended: not 212's to revoke).
+ *   8 EVERY DOOR ANSWERS A VISITOR AFTER 212, AND A SIGNED-IN USER SAVES A MAP: on a chain holding a shared town and a
+ *     shared map, every door is called as anon and as authenticated (an import as authenticated) and answers with the
+ *     row; a signed-in user inserts and updates a map carrying a world snapshot, the saved_maps trigger's path, which runs
+ *     _gallery_world_snapshot_is_safe as that user. (The scaffold grants tables to the visitor roles as Supabase does.)
  */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -68,6 +77,9 @@ const SCAFFOLD = `
       if not exists (select from pg_roles where rolname = 'service_role') then create role service_role; end if;
     end $do$;
     alter default privileges in schema public grant execute on functions to anon, authenticated, service_role;
+    alter default privileges in schema public grant all on tables to anon, authenticated, service_role;
+    alter default privileges in schema public grant all on sequences to anon, authenticated, service_role;
+    grant usage on schema public to anon, authenticated, service_role;
     create schema if not exists extensions;
     create schema if not exists cron;
     create table if not exists cron.job (jobid bigserial primary key, jobname text, schedule text, command text);
@@ -279,6 +291,25 @@ const REGISTRY = {
 };
 const KINDS = new Set(['door', 'owner', 'admin', 'social', 'system']);
 
+// VR27 AS AMENDED (the seventh chair, 2026-11-20): an underscore function of the share's family a visitor may execute is
+// on this list with the context that needs it, or with SEC-GRANTS's catalogue class that leaves it to 213
+// (docs/chair/2026-11-20/security/CATALOGUE.md on origin/lane/sec-grants-2026-11-20). Every other one is revoked.
+const FOR_213 = "an INVOKER helper: runs with the caller's own rights and grants nothing; not 212's to revoke (VR27 as amended): SEC-GRANTS's 213, with its catalogue's proof";
+const VISITOR_LIST = {
+  _gallery_world_snapshot_is_safe: { needs: 'a signed-in user saving a map: the saved_maps trigger (_saved_maps_world_snapshot_guard, an INVOKER trigger) runs it as that user (arm 8)' },
+  _saved_maps_world_snapshot_guard: { needs: 'the saved_maps BEFORE INSERT OR UPDATE trigger function itself (catalogue: TRIGGER, left alone; no EXECUTE is checked when a trigger fires)' },
+  _gallery_chronicle_entry: { for213: `${FOR_213} (catalogue: VISITOR-NEEDED, called by the invoker _gallery_chronicle_json)` },
+  _gallery_npc_key: { for213: `${FOR_213} (catalogue: VISITOR-NEEDED, called by the invoker _gallery_apply_member_overrides)` },
+  _gallery_sanitize_public_json: { for213: `${FOR_213} (catalogue: VISITOR-NEEDED, called by the invoker _gallery_apply_member_overrides)` },
+  _gallery_chronicle_json: { for213: `${FOR_213} (catalogue: INTERNAL, invoker helper, for 213)` },
+  _gallery_apply_member_overrides: { for213: `${FOR_213} (catalogue: INTERNAL, invoker helper, for 213)` },
+  _gallery_dm_full_json: { for213: `${FOR_213} (catalogue: INTERNAL, invoker helper, for 213)` },
+  _gallery_map_backdrop: { for213: `${FOR_213} (catalogue: INTERNAL, invoker helper, for 213)` },
+};
+/** The eight older helpers VR27 as amended leaves to 213 (no `revoke` in 212 may name one). */
+const OLDER_EIGHT = ['_gallery_chronicle_entry', '_gallery_chronicle_json', '_gallery_map_backdrop', '_gallery_apply_member_overrides',
+  '_gallery_npc_key', '_gallery_dm_full_json', '_gallery_sanitize_public_json', '_gallery_world_snapshot_is_safe'];
+
 // ── THE PARSERS ─────────────────────────────────────────────────────────────────────────────────────────────────
 /** Split at the top-level commas of an argument text (quote- and paren-aware). */
 function splitTop(text) {
@@ -446,5 +477,67 @@ describe('VR20 (C): every door beside data is registered (the walker)', () => {
     expect(arr, '_gallery_doors_band has no unnest(array[...]) to read').toBeTruthy();
     const sqlBands = [...arr[1].matchAll(/'((?:[^']|'')*)'/g)].map((m) => m[1].replace(/''/g, "'"));
     expect(sqlBands).toEqual([...STABILITY_BANDS]);
+  }, ARM_TIMEOUT_MS);
+
+  it('7 VR27 AS AMENDED, THE CATALOGUE: every underscore function of the share\'s family a visitor may execute stands on VISITOR_LIST with its context; no row is stale; 212 revokes none of the eight older helpers', async () => {
+    const family = (await db.query(`select p.proname, bool_or(p.prosecdef) as definer from pg_proc p join pg_namespace n on n.oid = p.pronamespace
+       where n.nspname = 'public' and p.proname like '\\_%'
+         and (p.proname like '\\_gallery\\_%' or p.proname like '\\_saved\\_maps\\_%' or p.prosrc ~ $1)
+         and (has_function_privilege('anon', p.oid, 'execute') or has_function_privilege('authenticated', p.oid, 'execute'))
+       group by p.proname order by p.proname`, [CENSUS_BODY])).rows;
+    expect(family.filter((f) => !(f.proname in VISITOR_LIST)).map((f) => `${f.proname}${f.definer ? ' (SECURITY DEFINER)' : ''}`),
+      'a visitor may execute an underscore function of the share\'s family that no written context needs: revoke it by name').toEqual([]);
+    expect(family.filter((f) => f.definer).map((f) => f.proname), 'a listed helper is a definer: a definer helper is never left to a visitor').toEqual([]);
+    expect(Object.keys(VISITOR_LIST).filter((n) => !family.some((f) => f.proname === n)), 'STALE VISITOR_LIST rows (no longer executable by a visitor)').toEqual([]);
+    expect(Object.entries(VISITOR_LIST).filter(([, r]) => !(r.needs || r.for213)).map(([n]) => n), 'a row with no context').toEqual([]);
+    const sql = stripComments(readFileSync(join(MIGRATIONS, '212_share_veil_later_cures.sql'), 'utf-8'));
+    const revokes = [...sql.matchAll(/\brevoke\b[^;]*;/gi)].map((m) => m[0]);
+    expect(OLDER_EIGHT.filter((n) => revokes.some((r) => r.includes(n))), '212 revokes an older helper by name (VR27 as amended: SEC-GRANTS\'s 213)').toEqual([]);
+  }, ARM_TIMEOUT_MS);
+
+  it('8 EVERY DOOR ANSWERS A VISITOR AFTER 212, AND A SIGNED-IN USER SAVES A MAP (the saved_maps trigger runs _gallery_world_snapshot_is_safe as that user)', async () => {
+    const TOWN = { name: 'Rookford', population: 1800, institutions: [{ id: 'inst_mill', name: 'Mill', category: 'Economy' }, { id: 'inst_black', name: 'Black market', category: 'Criminal' }],
+      powerStructure: { stability: 'Stable', factions: [] }, config: { terrainType: 'riverlands' } };
+    const SID = 'e0000000-0000-0000-0000-000000000001';
+    await db.query(`insert into public.settlements (id,user_id,name,tier,data,is_public,public_slug,published_at,unlisted_slug,visibility,gallery_importable,gallery_member_overrides,access_state)
+      values ($1,$2,'Rookford','town',$3::jsonb,true,'v27-town',now(),'v27-link','unlisted',true,$4::jsonb,'active')`,
+    [SID, OWNER, JSON.stringify(TOWN), JSON.stringify({ $veil: { v: 1, mode: 'live', at: '2026-11-01T00:00:00.000Z', deltas: [] } })]);
+    await db.query(`insert into public.saved_maps (id,user_id,name,map_data,is_public,public_slug,share_kind,gallery_share_campaign,gallery_importable,unlisted_slug,visibility,access_state)
+      values (gen_random_uuid(),$1,'Realm',$2::jsonb,true,'v27-realm','map_with_campaign',true,true,'v27-maplink','unlisted','active')`, [OWNER, JSON.stringify({ campaign: { settlementIds: [SID] } })]);
+    const CALLS = [
+      ['get_gallery_dossier', `select * from public.get_gallery_dossier('v27-town')`, (r) => r.rows[0]?.id === SID],
+      ['get_unlisted_dossier', `select public.get_unlisted_dossier('v27-link') as o`, (r) => r.rows[0]?.o?.id === SID],
+      ['list_gallery_dossiers', `select * from public.list_gallery_dossiers(0, 24, 'newest', '', '{}'::jsonb, false)`, (r) => r.rows.some((x) => x.id === SID)],
+      ['list_gallery_more_by_creator', `select * from public.list_gallery_more_by_creator('v27-town', 6)`, (r) => Array.isArray(r.rows)],
+      ['list_featured_dossiers', `select * from public.list_featured_dossiers()`, (r) => Array.isArray(r.rows)],
+      ['list_curated_dossiers', `select * from public.list_curated_dossiers()`, (r) => Array.isArray(r.rows)],
+      ['get_gallery_map', `select public.get_gallery_map('v27-realm') as o`, (r) => r.rows[0]?.o?.members?.length === 1],
+      ['get_unlisted_map', `select public.get_unlisted_map('v27-maplink') as o`, (r) => r.rows[0]?.o != null],
+      ['list_gallery_maps', `select * from public.list_gallery_maps(0, 24, 'newest', '', '{}'::jsonb)`, (r) => r.rows.length >= 1],
+      ['list_featured_maps', `select * from public.list_featured_maps()`, (r) => Array.isArray(r.rows)],
+    ];
+    const IMPORTS = [
+      ['import_gallery_dossier', `select * from public.import_gallery_dossier('v27-town')`, (r) => r.rows[0]?.id === SID],
+      ['import_gallery_map', `select public.import_gallery_map('v27-realm') as o`, (r) => r.rows[0]?.o != null],
+    ];
+    const problems = [];
+    const call = async (role, [name, sql, ok]) => {
+      try {
+        await db.exec(`set role ${role}; set test.uid = '${role === 'anon' ? '' : READER}';`);
+        const r = await db.query(sql);
+        if (!ok(r)) problems.push(`${name} as ${role}: answered without the row`);
+      } catch (e) { problems.push(`${name} as ${role}: ${String(e?.message || e).slice(0, 120)}`); } finally { await db.exec('reset role; reset test.uid;'); }
+    };
+    for (const role of ['anon', 'authenticated']) for (const c of CALLS) await call(role, c);
+    for (const c of IMPORTS) await call('authenticated', c);
+    // the map save: a signed-in user's own map with a world snapshot and sections, inserted then updated as that user
+    const SNAP = JSON.stringify({ schemaVersion: 1, headline: 'A quiet season in the realm.' });
+    try {
+      await db.exec(`set role authenticated; set test.uid = '${READER}';`);
+      const ins = await db.query(`insert into public.saved_maps (user_id, name, map_data, gallery_world_snapshot, gallery_world_sections)
+        values ($1, 'My realm', '{}'::jsonb, $2::jsonb, '[]'::jsonb) returning id`, [READER, SNAP]);
+      await db.query(`update public.saved_maps set gallery_world_snapshot = $2::jsonb, name = 'My realm, renamed' where id = $1`, [ins.rows[0].id, SNAP]);
+    } catch (e) { problems.push(`a signed-in user's map save: ${String(e?.message || e).slice(0, 160)}`); } finally { await db.exec('reset role; reset test.uid;'); }
+    expect(problems).toEqual([]);
   }, ARM_TIMEOUT_MS);
 });

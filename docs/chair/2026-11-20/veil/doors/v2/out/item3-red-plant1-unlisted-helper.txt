@@ -1,0 +1,45 @@
+[run] start 2026-11-20T03:21:50Z at 297996d6a 3 dirty paths
+[run] cmd: npx vitest run --reporter=verbose tests/security/galleryDoors.walker.test.js
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 1 THE CENSUS: every function a visitor may execute that touches a shared town or map is registered with its kind; no registered row is stale 3ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 2 THE COLUMNS OF EACH DOOR: every column of a TABLE door and every built key of a jsonb door is registered with its rule 2ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 3 FILTERS AND SORTS: every filter key and sort key the two gallery lists read is registered with its rule 0ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 4 THE TILE ROWS ARE NO DOOR: _gallery_public_tile_rows() is executable by neither anon nor authenticated 1ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 5 THE CHRONICLE'S CLASSES: every event type the app writes to a chronicle is classed by the SQL table and the JS table, which are equal; every class is target or covert 1359ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 6 THE BAND TABLE IS ONE: STABILITY_BANDS equals the array inside _gallery_doors_band(text) 3ms
+ × tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 7 VR27 AS AMENDED, THE CATALOGUE: every underscore function of the share's family a visitor may execute stands on VISITOR_LIST with its context; no row is stale; 212 revokes none of the eight older helpers 22ms
+   → a visitor may execute an underscore function of the share's family that no written context needs: revoke it by name: expected [ '_gallery_plant_vr27' ] to deeply equal []
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 8 EVERY DOOR ANSWERS A VISITOR AFTER 212, AND A SIGNED-IN USER SAVES A MAP (the saved_maps trigger runs _gallery_world_snapshot_is_safe as that user) 323ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 7 VR27 AS AMENDED, THE CATALOGUE: every underscore function of the share's family a visitor may execute stands on VISITOR_LIST with its context; no row is stale; 212 revokes none of the eight older helpers
+AssertionError: a visitor may execute an underscore function of the share's family that no written context needs: revoke it by name: expected [ '_gallery_plant_vr27' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "_gallery_plant_vr27",
++ ]
+
+ ❯ tests/security/galleryDoors.walker.test.js:489:127
+    487|        group by p.proname order by p.proname`, [CENSUS_BODY])).rows;
+    488|     expect(family.filter((f) => !(f.proname in VISITOR_LIST)).map((f) …
+    489|       'a visitor may execute an underscore function of the share\'s fa…
+       |                                                                                                                               ^
+    490|     expect(family.filter((f) => f.definer).map((f) => f.proname), 'a l…
+    491|     expect(Object.keys(VISITOR_LIST).filter((n) => !family.some((f) =>…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 7 passed (8)
+   Start at  03:21:51
+   Duration  5.31s (transform 1.12s, setup 35ms, import 148ms, tests 5.01s, environment 0ms)
+
+[run] end 2026-11-20T03:21:56Z exit 1

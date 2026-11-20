@@ -67,3 +67,32 @@ Each figure with its output file beside it (`docs/chair/2026-11-20/veil/doors/v2
   took the pg_temp pin), so its rows in the shrink-only baseline `tests/lint/.migration-searchpath-baseline.json` and in
   the test's POST_CONVENTION_BARE ledger are stale. The cure is to delete those two rows (the test's own instruction); it is
   a stored register, so it is the lane owner's at the merged tree.
+
+## 4. Item 3 — VR27 as amended (written 2026-11-20 03:22 UTC)
+- **212 holds no revoke of the eight older helpers**: its three revoke statements name `_gallery_public_tile_rows()`, the
+  `_gallery_veil%` loop and the `_gallery_doors_%` loop; none of the eight matches either pattern. 212 is UNCHANGED by
+  this item. Now pinned (walker arm 7: no `revoke` in 212 names one of the eight).
+- **The walker's catalogue arm, amended form** (`galleryDoors.walker.test.js` arm 7): every underscore function of the
+  share's family (named `_gallery_*` or `_saved_maps_*`, or whose body names a town or a map) that anon or
+  authenticated may execute stands on VISITOR_LIST: `_gallery_world_snapshot_is_safe` (needed: a signed-in user's map
+  save, run as that user by the invoker trigger) and `_saved_maps_world_snapshot_guard` (the trigger function itself) by
+  their visitor context; the other seven older helpers by SEC-GRANTS's catalogue class (an invoker that grants nothing,
+  "VISITOR-NEEDED" or "INTERNAL, for 213"), left to 213. No listed row may be a definer; red on an unlisted one and on a
+  stale row. **My reading, for the chair to veto:** the ruling's "a written list that names the visitor context that needs
+  it" would red on the seven invokers no visitor needs; VR27 as amended also says they are not 212's to revoke. So the list
+  names, for each, either the context that needs it or the catalogue's class that leaves it to 213; the arm's scope is the
+  share's family, not the whole catalogue (the whole catalogue's 26 visitor-executable underscore functions on this chain
+  include 11 definers outside the veil, e.g. `_surveyor_byok_secret()`, `_audit_action(...)`: SEC-GRANTS's catalogue already
+  classes them "INTERNAL, revoked now"; a whole-catalogue arm here would red until 213 lands).
+- **Every door as anon and as authenticated after 212, and a map saved by a signed-in user** (arm 8): ten visitor doors
+  called as both roles on a chain holding a shared town (default veil, listed and unlisted) and a shared campaign map,
+  each answering with the row; the two imports as authenticated; a signed-in user INSERTS and UPDATES their own map with a
+  world snapshot and sections (the saved_maps trigger's path). The walker's scaffold now also grants tables and sequences
+  to the visitor roles, as Supabase's default privileges do (needed for the RLS write; the census reads functions only).
+- **Red first, by plant and removal** (212 restored byte-equal after each, sha256 read back): (i) a visitor-executable
+  `_gallery_plant_vr27()` reds arm 7 naming it (`out/item3-red-plant1-unlisted-helper.txt`: 1 failed | 7 passed); (ii) THE
+  CHAIR'S WITHDRAWN FIRST WORDING (`revoke ... _gallery_world_snapshot_is_safe(jsonb) from public, anon, authenticated`)
+  reds arms 7 and 8 (`out/item3-red-plant2-revoke-snapshot-guard.txt`: 2 failed | 6 passed): "a signed-in user's map save:
+  permission denied for function _gallery_world_snapshot_is_safe". The amendment's reason, executed. Green: walker 8 of 8,
+  mutationCoverageManifest 10 of 10 (`out/item3-green.txt`); eslint 0. The manifest's row for the walker is extended with
+  arms 7 and 8 and their plants.

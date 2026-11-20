@@ -1,0 +1,67 @@
+[run] start 2026-11-20T03:21:56Z at 297996d6a 4 dirty paths
+[run] cmd: npx vitest run --reporter=verbose tests/security/galleryDoors.walker.test.js
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 1 THE CENSUS: every function a visitor may execute that touches a shared town or map is registered with its kind; no registered row is stale 3ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 2 THE COLUMNS OF EACH DOOR: every column of a TABLE door and every built key of a jsonb door is registered with its rule 2ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 3 FILTERS AND SORTS: every filter key and sort key the two gallery lists read is registered with its rule 1ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 4 THE TILE ROWS ARE NO DOOR: _gallery_public_tile_rows() is executable by neither anon nor authenticated 1ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 5 THE CHRONICLE'S CLASSES: every event type the app writes to a chronicle is classed by the SQL table and the JS table, which are equal; every class is target or covert 1278ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 6 THE BAND TABLE IS ONE: STABILITY_BANDS equals the array inside _gallery_doors_band(text) 2ms
+ × tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 7 VR27 AS AMENDED, THE CATALOGUE: every underscore function of the share's family a visitor may execute stands on VISITOR_LIST with its context; no row is stale; 212 revokes none of the eight older helpers 23ms
+   → STALE VISITOR_LIST rows (no longer executable by a visitor): expected [ '_gallery_world_snapshot_is_safe' ] to deeply equal []
+ × tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 8 EVERY DOOR ANSWERS A VISITOR AFTER 212, AND A SIGNED-IN USER SAVES A MAP (the saved_maps trigger runs _gallery_world_snapshot_is_safe as that user) 333ms
+   → expected [ Array(1) ] to deeply equal []
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 7 VR27 AS AMENDED, THE CATALOGUE: every underscore function of the share's family a visitor may execute stands on VISITOR_LIST with its context; no row is stale; 212 revokes none of the eight older helpers
+AssertionError: STALE VISITOR_LIST rows (no longer executable by a visitor): expected [ '_gallery_world_snapshot_is_safe' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "_gallery_world_snapshot_is_safe",
++ ]
+
+ ❯ tests/security/galleryDoors.walker.test.js:491:154
+    489|       'a visitor may execute an underscore function of the share\'s fa…
+    490|     expect(family.filter((f) => f.definer).map((f) => f.proname), 'a l…
+    491|     expect(Object.keys(VISITOR_LIST).filter((n) => !family.some((f) =>…
+       |                                                                                                                                                          ^
+    492|     expect(Object.entries(VISITOR_LIST).filter(([, r]) => !(r.needs ||…
+    493|     const sql = stripComments(readFileSync(join(MIGRATIONS, '212_share…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 8 EVERY DOOR ANSWERS A VISITOR AFTER 212, AND A SIGNED-IN USER SAVES A MAP (the saved_maps trigger runs _gallery_world_snapshot_is_safe as that user)
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "a signed-in user's map save: permission denied for function _gallery_world_snapshot_is_safe",
++ ]
+
+ ❯ tests/security/galleryDoors.walker.test.js:541:22
+    539|       await db.query(`update public.saved_maps set gallery_world_snaps…
+    540|     } catch (e) { problems.push(`a signed-in user's map save: ${String…
+    541|     expect(problems).toEqual([]);
+       |                      ^
+    542|   }, ARM_TIMEOUT_MS);
+    543| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 6 passed (8)
+   Start at  03:21:57
+   Duration  5.15s (transform 1.06s, setup 38ms, import 163ms, tests 4.82s, environment 0ms)
+
+[run] end 2026-11-20T03:22:02Z exit 1

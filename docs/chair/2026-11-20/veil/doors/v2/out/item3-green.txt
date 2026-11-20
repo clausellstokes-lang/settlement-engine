@@ -1,0 +1,30 @@
+[run] start 2026-11-20T03:22:25Z at 297996d6a 5 dirty paths
+[run] cmd: npx vitest run --reporter=verbose tests/security/galleryDoors.walker.test.js tests/lint/mutationCoverageManifest.test.js
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ✓ tests/lint/mutationCoverageManifest.test.js > mutation-coverage manifest — the totality contract (E-A) > guard-the-guard: enumeration and label parsing are not vacuous 2ms
+ ✓ tests/lint/mutationCoverageManifest.test.js > mutation-coverage manifest — the totality contract (E-A) > TOTALITY: every enumerated invariant file has a manifest entry 2ms
+ ✓ tests/lint/mutationCoverageManifest.test.js > mutation-coverage manifest — the totality contract (E-A) > no stale entries: every manifest invariant key is an enumerated, existing file 6ms
+ ✓ tests/lint/mutationCoverageManifest.test.js > mutation-coverage manifest — the totality contract (E-A) > every entry is well-formed (kind, label, rationale resolution) 1ms
+ ✓ tests/lint/mutationCoverageManifest.test.js > mutation-coverage manifest — the totality contract (E-A) > LABEL JOIN: manifest mutation claims and sweep labels match one-to-one 1ms
+ ✓ tests/lint/mutationCoverageManifest.test.js > mutation-coverage manifest — the totality contract (E-A) > DIRTY-GUARD TOTALITY: the refusal guard names exactly the files the sweep mutates 1ms
+ ✓ tests/lint/mutationCoverageManifest.test.js > mutation-coverage manifest — the totality contract (E-A) > guard-the-guard: every guarded path exists (a typo guards nothing, silently) 2ms
+ ✓ tests/lint/mutationCoverageManifest.test.js > mutation-coverage manifest — the totality contract (E-A) > THE ADMITTED-TREE CLAIM: every member still scans or executes its subject and asserts 6ms
+ ✓ tests/lint/mutationCoverageManifest.test.js > mutation-coverage manifest — the totality contract (E-A) > THE PLANTED CONTROL: the coupling predicate refuses a member that reaches nothing 1ms
+ ✓ tests/lint/mutationCoverageManifest.test.js > mutation-coverage manifest — the totality contract (E-A) > SHRINK-ONLY: uncovered count equals uncoveredBaseline exactly 1ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 1 THE CENSUS: every function a visitor may execute that touches a shared town or map is registered with its kind; no registered row is stale 3ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 2 THE COLUMNS OF EACH DOOR: every column of a TABLE door and every built key of a jsonb door is registered with its rule 2ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 3 FILTERS AND SORTS: every filter key and sort key the two gallery lists read is registered with its rule 0ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 4 THE TILE ROWS ARE NO DOOR: _gallery_public_tile_rows() is executable by neither anon nor authenticated 1ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 5 THE CHRONICLE'S CLASSES: every event type the app writes to a chronicle is classed by the SQL table and the JS table, which are equal; every class is target or covert 1342ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 6 THE BAND TABLE IS ONE: STABILITY_BANDS equals the array inside _gallery_doors_band(text) 2ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 7 VR27 AS AMENDED, THE CATALOGUE: every underscore function of the share's family a visitor may execute stands on VISITOR_LIST with its context; no row is stale; 212 revokes none of the eight older helpers 6ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 8 EVERY DOOR ANSWERS A VISITOR AFTER 212, AND A SIGNED-IN USER SAVES A MAP (the saved_maps trigger runs _gallery_world_snapshot_is_safe as that user) 313ms
+
+ Test Files  2 passed (2)
+      Tests  18 passed (18)
+   Start at  03:22:26
+   Duration  5.28s (transform 1.23s, setup 70ms, import 335ms, tests 4.98s, environment 0ms)
+
+[run] end 2026-11-20T03:22:31Z exit 0
