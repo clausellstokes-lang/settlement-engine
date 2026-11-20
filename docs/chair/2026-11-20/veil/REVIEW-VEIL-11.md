@@ -222,6 +222,20 @@ a custom crisis "Gang war grips the settlement." under a shut grouping: the stre
 stored. The control "A new Bakery was established." (a house not shown) is withheld in 22 of 22: the loss the narrowing
 under measure is for.
 
+## 3i. The governing body's name (the chair's question of 04:55 UTC), measured at 4994ee371 (`xd2`)
+
+`gov.probe.jsx`: 144 born towns with random priorities, the gallery read and the party link as anon. (1) THE DEFAULT VEIL: 11
+towns have a criminal-worded body (Corrupt Council 6, Shadow Senate 4, Corrupt City Council 1); all 11 serve the name on
+every path (government, governingName, the power's own entry with category criminal, conflicts, the crisis cast's stakes, the
+prose, the tile). The capture description ("Criminal networks have captured governance…", "…masks a criminal oligarchy") is
+served in none and is not on the stored record. MY CALL: TIER 2, the town's own public nature: the body is not a house the
+veil hides nor a power a hidden house raised (it is minted from the criminal priority above 65); a closed vocabulary of four
+names telling one bit. For VEIL-22: `power.entry` (VR11) must not remove the governing power while the government's name
+stays. Seen beside: `safetyProfile.economicDragDesc` ("Goods change hands here in back rooms… the duty on them goes unpaid")
+served in 6 of the 11, registered, not built: a FINAL arm. (2) A HAND VEIL hiding the governing house whole: 118 towns tried
+(Village reeve, Merchant oligarchy, Town hall, …): the server removed the house in 0; a whole-house hide reaches only the
+hideable class (X-21e), so the question cannot arise.
+
 ## 4. THE RAW MEASURES, BOTH SHAPES, AT THIS TIP (`splitp.probe.jsx` on the new shape, 45 towns; `splitm` on master): every
 gallery read serves `economicState.compound.criminalEffective` (e.g. 82.84), `compound.militaryEffective` and
 `safetyProfile.safetyRatio` (45 of 45 new; 86 of 86 and 50 of 50 master), and `activeConditions[].severity` (32 of 45;

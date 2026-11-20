@@ -1,0 +1,203 @@
+{
+ "towns": 144,
+ "crimGov": 11,
+ "crimServedName": 11,
+ "crimServedSentence": 11,
+ "tiles": {
+  "Shadow Senate": 4,
+  "Corrupt Council": 6,
+  "Corrupt City Council": 1
+ },
+ "paths": {
+  "gallery.data.stress.cast.stakes[].factionId": 11,
+  "gallery.data.conflicts[].desc": 11,
+  "gallery.data.conflicts[].parties[]": 11,
+  "gallery.data.stressors.cast.stakes[].factionId": 11,
+  "gallery.data.publicProse.blocks.power": 70,
+  "gallery.data.publicProse.blocks.overview": 11,
+  "gallery.data.powerStructure.factions[].faction": 11,
+  "gallery.data.powerStructure.conflicts[].desc": 11,
+  "gallery.data.powerStructure.conflicts[].parties[]": 11,
+  "gallery.data.powerStructure.government": 11,
+  "gallery.data.powerStructure.governingName": 11,
+  "gallery.data.powerStructure.factionRelationships[].pair[]": 19,
+  "gallery.data.powerStructure.factionRelationships[].narrative": 17,
+  "gallery.government_type": 11,
+  "link.dossier.stress.cast.stakes[].factionId": 11,
+  "link.dossier.conflicts[].desc": 11,
+  "link.dossier.conflicts[].parties[]": 11,
+  "link.dossier.stressors.cast.stakes[].factionId": 11,
+  "link.dossier.publicProse.blocks.power": 70,
+  "link.dossier.publicProse.blocks.overview": 11,
+  "link.dossier.powerStructure.factions[].faction": 11,
+  "link.dossier.powerStructure.conflicts[].desc": 11,
+  "link.dossier.powerStructure.conflicts[].parties[]": 11,
+  "link.dossier.powerStructure.government": 11,
+  "link.dossier.powerStructure.governingName": 11,
+  "link.dossier.powerStructure.factionRelationships[].pair[]": 19,
+  "link.dossier.powerStructure.factionRelationships[].narrative": 17,
+  "gallery.data.npcs[].category": 47,
+  "gallery.data.institutions[].desc": 6,
+  "gallery.data.economicState.activeChains[].outputs[]": 11,
+  "gallery.data.spatialLayout.quarters[].desc": 5,
+  "gallery.data.powerStructure.factions[].category": 18,
+  "gallery.data.availableServices.legal[].name": 6,
+  "gallery.data.availableServices.legal[].desc": 4,
+  "gallery.gallery_member_overrides.$veil.groupings[]": 33,
+  "link.dossier.npcs[].category": 47,
+  "link.dossier.institutions[].desc": 6,
+  "link.dossier.economicState.activeChains[].outputs[]": 11,
+  "link.dossier.spatialLayout.quarters[].desc": 5,
+  "link.dossier.powerStructure.factions[].category": 18,
+  "link.dossier.availableServices.legal[].name": 6,
+  "link.dossier.availableServices.legal[].desc": 4,
+  "link.gallery_member_overrides.$veil.groupings[]": 33,
+  "gallery.data.powerStructure.factions[].desc": 8,
+  "gallery.data.powerStructure.recentConflict": 4,
+  "gallery.data.pressureSentence": 5,
+  "link.dossier.powerStructure.factions[].desc": 8,
+  "link.dossier.powerStructure.recentConflict": 4,
+  "link.dossier.pressureSentence": 5,
+  "gallery.data.activeConditions[].id": 2,
+  "gallery.data.activeConditions[].label": 2,
+  "gallery.data.activeConditions[].archetype": 2,
+  "gallery.data.activeConditions[].description": 2,
+  "gallery.data.activeConditions[].triggeredAt.sourceEventTargetId": 2,
+  "gallery.data.activeConditions[].affectedSystems[]": 2,
+  "link.dossier.activeConditions[].id": 2,
+  "link.dossier.activeConditions[].label": 2,
+  "link.dossier.activeConditions[].archetype": 2,
+  "link.dossier.activeConditions[].description": 2,
+  "link.dossier.activeConditions[].triggeredAt.sourceEventTargetId": 2,
+  "link.dossier.activeConditions[].affectedSystems[]": 2,
+  "gallery.data.stress.cast.roles[].id": 1,
+  "gallery.data.stress.cast.roles[].name": 1,
+  "gallery.data.history.currentTensions[].factions[]": 1,
+  "gallery.data.stressors.cast.roles[].id": 1,
+  "gallery.data.stressors.cast.roles[].name": 1,
+  "link.dossier.stress.cast.roles[].id": 1,
+  "link.dossier.stress.cast.roles[].name": 1,
+  "link.dossier.history.currentTensions[].factions[]": 1,
+  "link.dossier.stressors.cast.roles[].id": 1,
+  "link.dossier.stressors.cast.roles[].name": 1
+ },
+ "ex": [
+  {
+   "seed": "rv11-gov-metropolis-indebted-0-23",
+   "gov": "Shadow Senate",
+   "name": [
+    "gallery.data.stress.cast.stakes[0].factionId: Shadow Senate",
+    "gallery.data.conflicts[0].desc: Shadow Senate and Thieves' Guild are in high conflict over ownership of a disputed buildin",
+    "gallery.data.conflicts[0].parties[0]: Shadow Senate",
+    "gallery.data.stressors.cast.stakes[0].factionId: Shadow Senate",
+    "gallery.data.publicProse.blocks.power:desk.governingTitle.sentence: Call the Shadow Senate at Xochiha by any other title and you will be corrected, politely a",
+    "gallery.data.publicProse.blocks.power:desk.legitimacyLens.sentence: People at Xochiha do not feel safe after dark, and they blame the Shadow Senate for it."
+   ],
+   "sentence": [
+    "gallery.data.npcs[3].category: criminal",
+    "gallery.data.npcs[12].category: criminal",
+    "gallery.data.npcs[13].category: criminal",
+    "gallery.data.npcs[51].category: criminal"
+   ]
+  },
+  {
+   "seed": "rv11-gov-metropolis-occupied-0-24",
+   "gov": "Shadow Senate",
+   "name": [
+    "gallery.data.stress.cast.stakes[0].factionId: Shadow Senate",
+    "gallery.data.conflicts[0].desc: Shadow Senate and Merchant Guilds are in high conflict over stolen goods sold openly. The ",
+    "gallery.data.conflicts[0].parties[0]: Shadow Senate",
+    "gallery.data.conflicts[1].desc: Shadow Senate and Craft Guilds are in high conflict over blame for a costly failure last s",
+    "gallery.data.conflicts[1].parties[0]: Shadow Senate",
+    "gallery.data.stressors.cast.stakes[0].factionId: Shadow Senate"
+   ],
+   "sentence": [
+    "gallery.data.npcs[7].category: criminal",
+    "gallery.data.npcs[8].category: criminal",
+    "gallery.data.npcs[22].category: criminal",
+    "gallery.data.npcs[23].category: criminal"
+   ]
+  },
+  {
+   "seed": "rv11-gov-town-indebted-1-35",
+   "gov": "Corrupt Council",
+   "name": [
+    "gallery.data.stress.cast.stakes[1].factionId: Corrupt Council",
+    "gallery.data.stressors.cast.stakes[1].factionId: Corrupt Council",
+    "gallery.data.publicProse.blocks.power:governance.text: Áshavn is governed by the Corrupt Council. Járnsaxa Eriksson, the council's fixer, holds i",
+    "gallery.data.publicProse.blocks.overview:identity.governs: Corrupt Council · Strained — the creditors have a say in every decision",
+    "gallery.data.powerStructure.factions[1].faction: Corrupt Council",
+    "gallery.data.powerStructure.factions[2].desc: The trades regulate their own production and apprenticeships; a reliable secondary presenc"
+   ],
+   "sentence": [
+    "gallery.data.publicProse.blocks.power:desk.rulingStructure.glance: criminal",
+    "gallery.data.economicState.activeChains[7].outputs[1]: Criminal trials",
+    "gallery.data.powerStructure.factions[1].category: criminal",
+    "gallery.gallery_member_overrides.$veil.groupings[0]: block:defense.criminalStructure"
+   ]
+  },
+  {
+   "seed": "rv11-gov-metropolis-infiltrated-1-45",
+   "gov": "Shadow Senate",
+   "name": [
+    "gallery.data.stress.cast.stakes[0].factionId: Shadow Senate",
+    "gallery.data.conflicts[0].desc: Shadow Senate and Merchant Guilds are in high conflict over who speaks for the place to ou",
+    "gallery.data.conflicts[0].parties[0]: Shadow Senate",
+    "gallery.data.stressors.cast.stakes[0].factionId: Shadow Senate",
+    "gallery.data.publicProse.blocks.power:desk.governingTitle.sentence: Call the Shadow Senate at Qasrfort by any other title and you will be corrected, politely ",
+    "gallery.data.publicProse.blocks.power:desk.legitimacyLens.sentence: Qasrfort is doing well and gives the Shadow Senate the credit. While the money keeps comin"
+   ],
+   "sentence": [
+    "gallery.data.npcs[3].category: criminal",
+    "gallery.data.npcs[11].category: criminal",
+    "gallery.data.npcs[12].category: criminal",
+    "gallery.data.npcs[16].category: criminal"
+   ]
+  }
+ ],
+ "hand": {
+  "tried": 118,
+  "houseRemoved": 0,
+  "nameStill": 0,
+  "ex": [
+   "rv11-gov-village-indebted-0-5: hand hide of \"Village reeve\" (Government) did not remove it",
+   "rv11-gov-town-none-0-7: hand hide of \"Merchant oligarchy\" (Government) did not remove it",
+   "rv11-gov-town-none-0-8: hand hide of \"Town hall\" (Infrastructure) did not remove it",
+   "rv11-gov-town-infiltrated-0-9: hand hide of \"Town hall\" (Infrastructure) did not remove it"
+  ]
+ },
+ "govNames": {
+  "Household Council": 6,
+  "Elder Council": 18,
+  "Elected Reeve": 6,
+  "Merchant oligarchy": 10,
+  "Church Council": 3,
+  "Guild Council": 4,
+  "Merchant Council": 6,
+  "Ecclesiastical Council": 4,
+  "Merchant City Council": 2,
+  "City Council": 3,
+  "Merchant Guild Council": 5,
+  "City-State Council": 5,
+  "Ducal Governorship": 5,
+  "Grand Merchant Oligarchy": 3,
+  "Shadow Senate": 4,
+  "Priestly Guidance": 5,
+  "Military Council": 5,
+  "Town Council": 5,
+  "Corrupt Council": 6,
+  "Noble Governorship": 10,
+  "Grand Guild Consortium": 6,
+  "Grand Council": 3,
+  "Royal Authority": 4,
+  "Corrupt City Council": 1,
+  "Arcane Council": 4,
+  "Democratic assembly": 3,
+  "Feudal Appointee": 2,
+  "Arcane Senate": 2,
+  "Headman's Authority": 1,
+  "Town Mayor": 1,
+  "Grand Military Council": 1,
+  "High Theocratic Council": 1
+ }
+}

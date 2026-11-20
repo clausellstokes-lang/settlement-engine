@@ -1,0 +1,159 @@
+{
+ "towns": 144,
+ "crimGov": 11,
+ "crimServedName": 11,
+ "crimServedSentence": 7,
+ "tiles": {
+  "Shadow Senate": 4,
+  "Corrupt Council": 6,
+  "Corrupt City Council": 1
+ },
+ "paths": {
+  "gallery.data.stress.cast.stakes[].factionId": 11,
+  "gallery.data.conflicts[].desc": 11,
+  "gallery.data.conflicts[].parties[]": 11,
+  "gallery.data.stressors.cast.stakes[].factionId": 11,
+  "gallery.data.publicProse.blocks.power": 59,
+  "gallery.data.publicProse.blocks.overview": 11,
+  "gallery.data.powerStructure.factions[].faction": 11,
+  "gallery.data.powerStructure.conflicts[].desc": 11,
+  "gallery.data.powerStructure.conflicts[].parties[]": 11,
+  "gallery.data.powerStructure.government": 11,
+  "gallery.data.powerStructure.governingName": 11,
+  "gallery.data.powerStructure.factionRelationships[].pair[]": 19,
+  "gallery.data.powerStructure.factionRelationships[].narrative": 17,
+  "gallery.government_type": 11,
+  "link.dossier.stress.cast.stakes[].factionId": 11,
+  "link.dossier.conflicts[].desc": 11,
+  "link.dossier.conflicts[].parties[]": 11,
+  "link.dossier.stressors.cast.stakes[].factionId": 11,
+  "link.dossier.publicProse.blocks.power": 59,
+  "link.dossier.publicProse.blocks.overview": 11,
+  "link.dossier.powerStructure.factions[].faction": 11,
+  "link.dossier.powerStructure.conflicts[].desc": 11,
+  "link.dossier.powerStructure.conflicts[].parties[]": 11,
+  "link.dossier.powerStructure.government": 11,
+  "link.dossier.powerStructure.governingName": 11,
+  "link.dossier.powerStructure.factionRelationships[].pair[]": 19,
+  "link.dossier.powerStructure.factionRelationships[].narrative": 17,
+  "gallery.data.economicState.incomeSources[].desc": 5,
+  "gallery.data.economicState.safetyProfile.economicDragDesc": 6,
+  "link.dossier.economicState.incomeSources[].desc": 5,
+  "link.dossier.economicState.safetyProfile.economicDragDesc": 6,
+  "gallery.data.powerStructure.factions[].desc": 5,
+  "gallery.data.powerStructure.recentConflict": 4,
+  "gallery.data.pressureSentence": 5,
+  "link.dossier.powerStructure.factions[].desc": 5,
+  "link.dossier.powerStructure.recentConflict": 4,
+  "link.dossier.pressureSentence": 5,
+  "gallery.data.stress.cast.roles[].id": 1,
+  "gallery.data.stress.cast.roles[].name": 1,
+  "gallery.data.history.currentTensions[].factions[]": 1,
+  "gallery.data.stressors.cast.roles[].id": 1,
+  "gallery.data.stressors.cast.roles[].name": 1,
+  "link.dossier.stress.cast.roles[].id": 1,
+  "link.dossier.stress.cast.roles[].name": 1,
+  "link.dossier.history.currentTensions[].factions[]": 1,
+  "link.dossier.stressors.cast.roles[].id": 1,
+  "link.dossier.stressors.cast.roles[].name": 1
+ },
+ "ex": [
+  {
+   "seed": "rv11-gov-metropolis-indebted-0-23",
+   "gov": "Shadow Senate",
+   "sentence": [
+    "gallery.data.economicState.incomeSources[9].desc: Grain purchased from farming regions and resold or processed locally; margin depends on st",
+    "gallery.data.economicState.safetyProfile.economicDragDesc: Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and th",
+    "link.dossier.economicState.incomeSources[9].desc: Grain purchased from farming regions and resold or processed locally; margin depends on st",
+    "link.dossier.economicState.safetyProfile.economicDragDesc: Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and th"
+   ],
+   "storedDesc": "c\":\"Nominal governance masks a criminal oligarchy; the real decisions happen in back rooms.\",\"isGoverning\":true,\"category\":\"crimin"
+  },
+  {
+   "seed": "rv11-gov-metropolis-occupied-0-24",
+   "gov": "Shadow Senate",
+   "sentence": [
+    "gallery.data.economicState.incomeSources[10].desc: Grain purchased from farming regions and resold or processed locally; margin depends on st",
+    "gallery.data.economicState.safetyProfile.economicDragDesc: Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and th",
+    "link.dossier.economicState.incomeSources[10].desc: Grain purchased from farming regions and resold or processed locally; margin depends on st",
+    "link.dossier.economicState.safetyProfile.economicDragDesc: Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and th"
+   ]
+  },
+  {
+   "seed": "rv11-gov-town-indebted-1-35",
+   "gov": "Corrupt Council",
+   "sentence": []
+  },
+  {
+   "seed": "rv11-gov-metropolis-infiltrated-1-45",
+   "gov": "Shadow Senate",
+   "sentence": [
+    "gallery.data.economicState.incomeSources[6].desc: Grain purchased from farming regions and resold or processed locally; margin depends on st",
+    "gallery.data.economicState.safetyProfile.economicDragDesc: Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and th",
+    "link.dossier.economicState.incomeSources[6].desc: Grain purchased from farming regions and resold or processed locally; margin depends on st",
+    "link.dossier.economicState.safetyProfile.economicDragDesc: Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and th"
+   ],
+   "storedDesc": "c\":\"Nominal governance masks a criminal oligarchy; the real decisions happen in back rooms.\",\"isGoverning\":true,\"category\":\"crimin"
+  },
+  {
+   "seed": "rv11-gov-town-indebted-2-59",
+   "gov": "Corrupt Council",
+   "sentence": []
+  },
+  {
+   "seed": "rv11-gov-town-occupied-2-60",
+   "gov": "Corrupt Council",
+   "sentence": [
+    "gallery.data.economicState.incomeSources[7].desc: Grain purchased from farming regions and resold or processed locally; margin depends on st",
+    "gallery.data.economicState.safetyProfile.economicDragDesc: Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and th",
+    "link.dossier.economicState.incomeSources[7].desc: Grain purchased from farming regions and resold or processed locally; margin depends on st",
+    "link.dossier.economicState.safetyProfile.economicDragDesc: Goods change hands here in back rooms and after dark, the duty on them goes unpaid, and th"
+   ]
+  }
+ ],
+ "hand": {
+  "tried": 118,
+  "houseRemoved": 0,
+  "nameStill": 0,
+  "ex": [
+   "rv11-gov-village-indebted-0-5: hand hide of \"Village reeve\" (Government) did not remove it",
+   "rv11-gov-town-none-0-7: hand hide of \"Merchant oligarchy\" (Government) did not remove it",
+   "rv11-gov-town-none-0-8: hand hide of \"Town hall\" (Infrastructure) did not remove it",
+   "rv11-gov-town-infiltrated-0-9: hand hide of \"Town hall\" (Infrastructure) did not remove it"
+  ]
+ },
+ "govNames": {
+  "Household Council": 6,
+  "Elder Council": 18,
+  "Elected Reeve": 6,
+  "Merchant oligarchy": 10,
+  "Church Council": 3,
+  "Guild Council": 4,
+  "Merchant Council": 6,
+  "Ecclesiastical Council": 4,
+  "Merchant City Council": 2,
+  "City Council": 3,
+  "Merchant Guild Council": 5,
+  "City-State Council": 5,
+  "Ducal Governorship": 5,
+  "Grand Merchant Oligarchy": 3,
+  "Shadow Senate": 4,
+  "Priestly Guidance": 5,
+  "Military Council": 5,
+  "Town Council": 5,
+  "Corrupt Council": 6,
+  "Noble Governorship": 10,
+  "Grand Guild Consortium": 6,
+  "Grand Council": 3,
+  "Royal Authority": 4,
+  "Corrupt City Council": 1,
+  "Arcane Council": 4,
+  "Democratic assembly": 3,
+  "Feudal Appointee": 2,
+  "Arcane Senate": 2,
+  "Headman's Authority": 1,
+  "Town Mayor": 1,
+  "Grand Military Council": 1,
+  "High Theocratic Council": 1
+ }
+}
