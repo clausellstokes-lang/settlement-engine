@@ -536,7 +536,8 @@ export function castTroubleFrame(settlement) {
     // office only by that power's head; a criminal side stands for the criminal power wherever one is strong enough (on a
     // side that IS a power, that power itself: FRAME-6 · F1).
     if (side.archetype === 'criminal') {
-      const c = candidatesOf('criminal', side.archetype).find((x) => !side.named || (!!x.power && powerName(x.power) === powerName(side.named)));
+      const criminalCandidates = candidatesOf('criminal', side.archetype);
+      const c = criminalCandidates.find((x) => !side.named || (!!x.power && powerName(x.power) === powerName(side.named)));
       if (c) face = take(c, 'criminal');
     }
     /** @param {FaceKind} kind @returns {Candidate[]} */
