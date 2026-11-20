@@ -10,8 +10,9 @@
  * get_gallery_dossier, under the default veil with Reveal DM off and on. THE VISITOR'S RE-DERIVATION (`revisit`): the
  * served document with prosperity and the standing label re-derived (src/domain/veil/importRederive.js ::
  * servedProsperityOutcomes; a Subsistence base, which took a birth draw, is not re-derivable and its town is counted
- * aside), then the defence profile (generateDefenseProfile), the safety band (generateSafetyProfile), the legitimacy
- * reading (computePublicLegitimacy) and the prose (composePublicProse) over it.
+ * aside), the defence profile (generateDefenseProfile), the safety band (generateSafetyProfile), the legitimacy
+ * reading (computePublicLegitimacy) and the prose (composePublicProse), each over the SERVED values AS SERVED (VR32;
+ * aligned 2026-11-20: before, each fed the next its re-derivation).
  * THE ARMS:
  *   TOTAL      every diffuse row is classed here: re-derived, or what is not served.
  *   FIDELITY   on the full STORED town, the re-derivation equals the stored value (the deriver is the engine's rule);
@@ -55,9 +56,13 @@ const NOT_SERVED = Object.freeze({
  * not reproduce the stored town. Shrink-only. */
 const KNOWN_UNFAITHFUL = Object.freeze(new Set([]));
 /** Measured at this tip: rows whose re-derivation differs from the served value ONLY in towns with a hidden house: a
- * visitor recovers the stored value's hidden term. Each is re-classed under VR19 by R3/R6 (shrink-only). */
-const KNOWN_INVERTING = Object.freeze(new Set(['economy.prosperity', 'economy.prosperityStanding',
-  'legitimacy.colours', 'legitimacy.label', 'legitimacy.score', 'safety.safetyLabel']));
+ * visitor recovers the stored value's hidden term. Each is re-classed under VR19 by R3/R6 (shrink-only).
+ * SHRUNK under VR32 (VEIL-22's R6 builder, 2026-11-20, at 6978a8fc2; `revisit` aligned to VR32 above): the three
+ * legitimacy rows left (`legitimacy.colours`, `legitimacy.label`, `legitimacy.score`: they inverted only through the
+ * re-derived readiness label the old chain fed them). What remains is tier 2 under VR28 (bands sent as stored, RECORDED):
+ * `economy.prosperity` and `economy.prosperityStanding` (metropolis-insurgency-5), `safety.safetyLabel` (metropolis-calm-2,
+ * city-calm-3); none is tier 1. KNOWN_NOT_REDERIVABLE and KNOWN_UNFAITHFUL measured unchanged. */
+const KNOWN_INVERTING = Object.freeze(new Set(['economy.prosperity', 'economy.prosperityStanding', 'safety.safetyLabel']));
 /** Measured at this tip: composed rows whose re-composition over the served document differs EVEN WHERE NOTHING IS
  * HIDDEN: the composer reads what the projection does not serve, so a visitor cannot re-derive them (VR26's first
  * branch), and the harness cannot judge them by re-composition. R5 (VR12) classes each by its inputs. Shrink-only. */
@@ -103,30 +108,33 @@ describe('VR26: a value sent as stored either cannot be re-derived from the serv
     await loadGenerationLawPayloads();
     rows = REGISTRY_ROWS.filter((r) => r.rule === 'diffuse');
 
-    /** The visitor's re-derivation of a served document: null where its prosperity took a birth draw. */
+    /** The visitor's re-derivation of a served document: null where its prosperity took a birth draw. VR32 (the seventh
+     * chair; aligned by VEIL-22's R6 builder, 2026-11-20, as PART 22 reads it): each diffuse value is re-derived from the
+     * SERVED values AS SERVED, bands included, one deriver at a time, none fed another's re-derivation (before: the
+     * re-derived prosperity fed the defence profile, and the re-derived readiness label the legitimacy reading). */
     revisit = (doc) => {
-      const r = clone(doc);
-      const cfg = r.config; const inst = r.institutions || []; const e = r.economicState;
+      const s = clone(doc); const r = clone(doc);
+      const cfg = s.config; const inst = s.institutions || []; const e = s.economicState;
       if (!isRec(cfg) || !isRec(e)) return null;
-      const outcomes = servedProsperityOutcomes(r, cfg);
+      const outcomes = servedProsperityOutcomes(s, cfg);
       if (outcomes.length !== 1) return null;
       const names = inst.map((i) => i?.name);
-      const base = computeBaseProsperity(r.tier, cfg.tradeRouteAccess, inst, cfg, names, e.incomeSources || [], e.foodSecurity || null).label;
-      const standing = standingBaseProsperity(r.tier, cfg.tradeRouteAccess, inst, cfg, names, e.incomeSources || []);
-      e.prosperity = outcomes[0];
-      e.prosperityStanding = deriveProsperityLabels(base, standing, cfg, inst).prosperityStanding;
+      const base = computeBaseProsperity(s.tier, cfg.tradeRouteAccess, inst, cfg, names, e.incomeSources || [], e.foodSecurity || null).label;
+      const standing = standingBaseProsperity(s.tier, cfg.tradeRouteAccess, inst, cfg, names, e.incomeSources || []);
+      r.economicState.prosperity = outcomes[0];
+      r.economicState.prosperityStanding = deriveProsperityLabels(base, standing, cfg, inst).prosperityStanding;
       // R2 (VEIL-21): the stores' months are withheld on every read; the visitor reads them from the food record the share
-      // serves, as the page and the import's save do (pageRederive.js, importRederive.js step 3)
+      // serves, as the page and the import's save do (pageRederive.js, importRederive.js step 3): a served value as served
       const months = e.foodSecurity?.foodRecord?.storageMonths;
       if (isRec(e.foodSecurity) && Number.isFinite(months)) e.foodSecurity.storageMonths = months;
-      const dp = generateDefenseProfile(r, keepOfRecord(e));
+      const dp = generateDefenseProfile(clone(s), keepOfRecord(clone(e)));
       r.defenseProfile = { ...(r.defenseProfile || {}), scores: dp.scores, readiness: dp.readiness, economicGates: dp.economicGates };
-      if (isRec(e.safetyProfile)) e.safetyProfile.safetyLabel = generateSafetyProfile(cfg, r.tier, inst).safetyLabel;
+      if (isRec(r.economicState.safetyProfile)) r.economicState.safetyProfile.safetyLabel = generateSafetyProfile(cfg, s.tier, inst).safetyLabel;
       if (isRec(r.powerStructure?.publicLegitimacy)) {
-        const pl = computePublicLegitimacy(e, dp.readiness.label, r.tier);
+        const pl = computePublicLegitimacy(clone(e), s.defenseProfile?.readiness?.label, s.tier);
         Object.assign(r.powerStructure.publicLegitimacy, { score: pl.score, label: pl.label, color: pl.color, bg: pl.bg });
       }
-      r.publicProse = composePublicProse(r);
+      r.publicProse = composePublicProse(clone(s));
       return r;
     };
 

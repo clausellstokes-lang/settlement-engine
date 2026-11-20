@@ -1,0 +1,16 @@
+[gate-tail] start:  07:01:40 up  1:08,  0 user,  load average: 4.67, 7.84, 8.11 · cores: 4
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 7442 after 0 poll(s); 2 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /home/user/wt/r6
+
+ ✓ tests/security/rosterChoiceInversion.pglite.test.js > VR26: a value sent as stored either cannot be re-derived from the served document or equals its re-derivation (through the server) > TOTAL: every diffuse row is re-derived here or names what is not served 1ms
+ ✓ tests/security/rosterChoiceInversion.pglite.test.js > VR26: a value sent as stored either cannot be re-derived from the served document or equals its re-derivation (through the server) > FIDELITY: on the stored town the re-derivation equals the stored value (else named, shrink-only) 2185ms
+ ✓ tests/security/rosterChoiceInversion.pglite.test.js > VR26: a value sent as stored either cannot be re-derived from the served document or equals its re-derivation (through the server) > RED: a served value moved by hand is caught 129ms
+ ✓ tests/security/rosterChoiceInversion.pglite.test.js > VR26: a value sent as stored either cannot be re-derived from the served document or equals its re-derivation (through the server) > MAIN: the rows a visitor re-derives otherwise are exactly the known ones (shrink-only; R3/R6 empty it) 1941ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  07:01:41
+   Duration  20.30s (transform 3.12s, setup 25ms, import 57ms, tests 20.13s, environment 0ms)
+
+[gate-tail] end:  07:02:01 up  1:09,  0 user,  load average: 4.34, 7.56, 8.01

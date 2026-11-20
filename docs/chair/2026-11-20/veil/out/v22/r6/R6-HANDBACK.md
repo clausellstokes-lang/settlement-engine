@@ -81,3 +81,47 @@ Run (`counterfactual-keyorder-ruled.txt`; reports `counterfactual.json`, `invers
      stake is kept because its power is still served. CURE: R3 (`power.entry`: the criminal power withheld, its stake with it).
   2. `cast.roles` @ city-insurgency-3, 20 lines: reason `"holds the seat, and the right to it is already in dispute"`
      against `"holds the seat"`: the wording carries the hidden house. CURE: R3/R5 (re-class `cast.roles.reason`).
+
+## Unit 2, `rosterChoiceInversion.pglite.test.js` under VR32 — CONFIRMED, executed
+- At the tip, unchanged (`inversion-at-tip.txt`): **4 of 4 green**; inverting exactly the frozen six (`economy.prosperity`,
+  `economy.prosperityStanding`, `legitimacy.colours|label|score`, `safety.safetyLabel`). Its `revisit` was CHAINED (the
+  re-derived prosperity fed the defence profile, the re-derived readiness label the legitimacy reading): not VR32.
+- `revisit` aligned to VR32 (each deriver over the served values as served, none fed another's; the stores' months still
+  read from the served food record), run (`inversion-vr32-measure-red.txt`, where-map `inversion-vr32-where.json`): TOTAL,
+  FIDELITY, RED green; MAIN red ONLY by SHRINKING: inverting `{economy.prosperity, economy.prosperityStanding,
+  safety.safetyLabel}` (the three legitimacy rows left); not-re-derivable the same six prose rows; unfaithful `[]`.
+- Shrunk `KNOWN_INVERTING` to those three (all tier 2 under VR28): **4 of 4 green** (`inversion-vr32-shrunk.txt`).
+- NOTE against PART 22: `economy.prosperityStanding` STILL inverts here (with `economy.prosperity`, on this file's own
+  birth metropolis-insurgency-5, which the counterfactual's births do not include). Tier 2: recorded, not blocking.
+
+RECOMMENDATION: **ALIGN (done), do NOT retire yet.** What it holds, and which living arm holds it:
+| it holds | held by a living arm? |
+|---|---|
+| RED: a served `legitimacy.score` moved by 7 is caught | YES: counterfactual RED (its inversion judge picks the first diffuse served number: `legitimacy.score`, +7) |
+| MAIN, tier 1: no tier-1 row inverts | YES, stronger: counterfactual INVERSION (same town veiled vs its own open read; `KNOWN_TIER1` = {} asserted) |
+| MAIN, tier 2: the inverting band set EXACTLY (shrink-only pin) | NO: counterfactual INVERSION only RECORDS tier 2 (2 rows), asserts nothing; and misses `prosperityStanding` (birth not in its set) |
+| MAIN: KNOWN_NOT_REDERIVABLE exactly (6 prose rows) | NO: counterfactual records the same 6 (`notRederivable`), unasserted |
+| TOTAL: every diffuse row re-derived or named with what is not served (11 named) | NO: counterfactual reports `notJudged` 11 as a count, no reasons, unasserted |
+| FIDELITY: on the stored town each deriver reproduces the stored value (`KNOWN_UNFAITHFUL` {}) | NO arm anywhere |
+| its 8 births (seeds `vr26-*`) | NO: different seeds |
+Retire it only after the counterfactual's INVERSION arm pins the tier-2 set, the not-re-derivable set, TOTAL and FIDELITY
+(and the births that show `prosperityStanding`): the seat's call.
+
+## Unit 3, the chair's condition on `safety.blackMarketCapture` — CONFIRMED, executed (GREEN at first run)
+NEW `tests/security/blackMarketCaptureSignal.pglite.test.js` (manifest row `pglite-executed` added beside its siblings):
+12 born towns (7 with a criminal house, 5 without) on a pglite chain of every migration; each stored marked (default veil)
+and unmarked, Reveal DM off and on; read through `get_gallery_dossier` and `get_unlisted_dossier`, then through
+`fetchPublicDossier` (rpc stubbed with the server's row as returned) = `sanitizeDossier`'s own path. 3 of 3 green
+(`blackmarket-capture-condition.txt`, `.json`).
+- Server: no read carries the figure (96 reads). Every stored town holds a finite figure.
+| arm | criminal towns drawn | non-criminal drawn | equal to owner's | served signal |
+|---|---|---|---|---|
+| gallery marked, DM off / on | 0/7 / 0/7 | 0/5 / 0/5 | - | served, marked |
+| gallery UNMARKED, DM off / on | 7/7 / 7/7 | 5/5 / 5/5 | 12/12 / 12/12 | not served, unmarked |
+| link marked, DM off / on | 0/7 / 0/7 | 0/5 / 0/5 | - | served, marked |
+| link unmarked, DM off / on | 0/7 / 0/7 | 0/5 / 0/5 | - | served, marked (212 gives the link the default veil) |
+- (i) drawn exactly where sanitizeDossier's expression over the SERVED overrides says, every read; one signal per arm.
+  Swap arm: a body read with the other read's served overrides follows the overrides: 48 swaps, 0 against the signal.
+
+## Guards (second builder)
+`mutationCoverageManifest` + `pgliteHookTimeoutRatchet` 28 of 28 (`guards-2.txt`); eslint clean on the three test files.

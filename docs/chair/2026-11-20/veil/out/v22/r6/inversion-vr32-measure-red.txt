@@ -1,0 +1,45 @@
+[gate-tail] start:  06:59:40 up  1:06,  0 user,  load average: 7.23, 9.13, 8.48 · cores: 4
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 6672 after 0 poll(s); 3 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /home/user/wt/r6
+
+ ✓ tests/security/rosterChoiceInversion.pglite.test.js > VR26: a value sent as stored either cannot be re-derived from the served document or equals its re-derivation (through the server) > TOTAL: every diffuse row is re-derived here or names what is not served 2ms
+ ✓ tests/security/rosterChoiceInversion.pglite.test.js > VR26: a value sent as stored either cannot be re-derived from the served document or equals its re-derivation (through the server) > FIDELITY: on the stored town the re-derivation equals the stored value (else named, shrink-only) 2685ms
+ ✓ tests/security/rosterChoiceInversion.pglite.test.js > VR26: a value sent as stored either cannot be re-derived from the served document or equals its re-derivation (through the server) > RED: a served value moved by hand is caught 247ms
+ × tests/security/rosterChoiceInversion.pglite.test.js > VR26: a value sent as stored either cannot be re-derived from the served document or equals its re-derivation (through the server) > MAIN: the rows a visitor re-derives otherwise are exactly the known ones (shrink-only; R3/R6 empty it) 2681ms
+   → expected [ 'economy.prosperity', …(2) ] to deeply equal [ 'economy.prosperity', …(5) ]
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/rosterChoiceInversion.pglite.test.js > VR26: a value sent as stored either cannot be re-derived from the served document or equals its re-derivation (through the server) > MAIN: the rows a visitor re-derives otherwise are exactly the known ones (shrink-only; R3/R6 empty it)
+AssertionError: expected [ 'economy.prosperity', …(2) ] to deeply equal [ 'economy.prosperity', …(5) ]
+
+- Expected
++ Received
+
+  [
+    "economy.prosperity",
+    "economy.prosperityStanding",
+-   "legitimacy.colours",
+-   "legitimacy.label",
+-   "legitimacy.score",
+    "safety.safetyLabel",
+  ]
+
+ ❯ tests/security/rosterChoiceInversion.pglite.test.js:194:23
+    192|     const inverting = [...where].filter(([, w]) => w.hidden.length && …
+    193|     const notRederivable = [...where].filter(([, w]) => w.open.length)…
+    194|     expect(inverting).toEqual([...KNOWN_INVERTING].sort());
+       |                       ^
+    195|     expect(notRederivable).toEqual([...KNOWN_NOT_REDERIVABLE].sort());
+    196|   }, ARM_TIMEOUT_MS);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (4)
+   Start at  06:59:41
+   Duration  27.14s (transform 4.05s, setup 36ms, import 59ms, tests 26.87s, environment 0ms)
+
+[gate-tail] end:  07:00:08 up  1:07,  0 user,  load average: 7.16, 8.96, 8.44
