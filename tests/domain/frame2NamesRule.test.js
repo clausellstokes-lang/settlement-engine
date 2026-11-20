@@ -97,13 +97,34 @@ function breachesC(text, named) {
   const r = text.match(ROLE_FOR_POWER);
   return r ? [`role only: "${r[0]}"`] : [];
 }
+/**
+ * FRAME-3 · B11, from FRAME-2 · B10's lead (the chair's ruling of 2026-11-20: "a person takes the pronoun of their own
+ * `gender`, else 'they'; a power holding the row keeps 'it'"): a reason the cast STORES on a row held by a PERSON never says
+ * "it" or "its" of that person; the person's own pronoun is from `gender` (she/her, he/his, else they/their). The "it" that
+ * names something the sentence itself names first is not the holder's, and is masked before the read: the seat ("holds the
+ * seat, and the right to it"), the house ("the blame falls on the house, and its good name"), the occupation ("the
+ * occupation's resistance turns on its local face").
+ * @param {string} text @param {unknown} gender
+ */
+function personItBreaches(text, gender) {
+  const masked = text
+    .replace(/\bthe right to it\b/g, '#')
+    .replace(/\bthe house, and its\b/g, '#')
+    .replace(/\bthe occupation's resistance turns on its\b/g, '#');
+  const hits = [];
+  const it = masked.match(/\b(it|its)\b/i);
+  if (it) hits.push(`"${it[0]}" said of a person`);
+  const own = gender === 'female' ? 'her' : gender === 'male' ? 'his' : 'their';
+  for (const p of ['her', 'his']) if (p !== own && new RegExp(`\\b${p}\\b`, 'i').test(masked)) hits.push(`"${p}" for a ${String(gender || 'ungendered')} person`);
+  return hits;
+}
 /** The role wants (`CAST_WANTS`) as patterns: a cast person's line the sheet composes, not the person's own goal. */
 const WANT_LINES = Object.values(CAST_WANTS).flat().map((l) => new RegExp(`^${esc(l).replace(/\\\{\w+\\\}/g, '.+?')}$`));
 
 /** Every breach, by file and kind, over the pool. */
 function readPool() {
   /** @type {Record<string, Array<{ seed: string, kind: string, where: string, why: string, text: string }>>} */
-  const by = { tonightSheet: [], crisisHooks: [], troubleCast: [], crisisCast: [] };
+  const by = { tonightSheet: [], crisisHooks: [], troubleCast: [], crisisCast: [], personIt: [] };
   const read = { tonightSheet: 0, crisisHooks: 0, troubleCast: 0, crisisCast: 0 };
   for (const { seed, s } of bornPool()) {
     const powers = (s.powerStructure?.factions || []).map((/** @type {any} */ f) => f.faction || f.name).filter(Boolean);
@@ -146,6 +167,11 @@ function readPool() {
         ...c.absent.map((/** @type {any} */ r) => ({ t: r.reason, w: `cast.absent.${r.role}.reason` })),
         ...c.stakes.map((/** @type {any} */ r) => ({ t: r.reason, w: `cast.stakes.${r.stake}.reason` })),
       ];
+      for (const r of c.roles) {
+        if (r.kind !== 'npc') continue;
+        const person = byId.get(r.id) || byName.get(r.name);
+        for (const why of personItBreaches(r.reason, person?.gender)) by.personIt.push({ seed, kind: 'IT', where: `${entry.type} · cast.roles.${r.role}.reason`, why, text: r.reason });
+      }
       for (const { t, w } of stored) {
         read.crisisCast += 1;
         for (const why of breachesA(t, powers)) by.crisisCast.push({ seed, kind: 'A', where: w, why, text: t });
@@ -186,6 +212,13 @@ describe('the names rule in FRAME-2\'s own files, over 144 born towns', () => {
       });
     }
   }
+
+  // FRAME-3 · B11: no reason the cast stores on a person's row calls that person "it" (red at 4421fbf6c:
+  // docs/chair/2026-11-20/content/frame3/B11-PERSON-NOT-IT-RESULTS.md).
+  it('crisisCast: no stored reason on a person\'s row calls that person "it"; the pronoun is the person\'s own', () => {
+    const list = by.personIt;
+    expect(list.length, shown(list)).toBe(0);
+  });
 
   // ⛔ OPEN, THE SEAT RULES (B5's census, step 4): the crisis cast's stored reasons and stakes are a closed vocabulary
   // that names nobody (factionRename.js's law: no rename reaches it), so nearly every one refers to its person or power

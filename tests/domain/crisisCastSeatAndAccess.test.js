@@ -11,7 +11,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
-import { CAST_REASONS, STAKE_REASONS, deriveStakes } from '../../src/domain/crisis/crisisCast.js';
+import { CAST_REASONS, STAKE_REASONS, castReasonSentence, deriveStakes } from '../../src/domain/crisis/crisisCast.js';
 import { crisisHooksOf, houseInProse } from '../../src/domain/crisis/crisisHooks.js';
 import { isSeatVacant } from '../../src/domain/people/seatKeeper.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -49,7 +49,12 @@ describe('ROUND THREE · the crisis cast reads the empty seat, the roster and th
       expect(isSeatVacant(s), seed).toBe(true);
       const e = entries(s).find((x) => x.type === 'succession_void');
       const instigator = e.cast.roles.find((r) => r.role === 'instigator');
-      expect(instigator?.reason, seed).toBe(CAST_REASONS.instigatorGains);
+      // re-pinned to the person form (FRAME-3 · B11, the chair's ruling of 2026-11-20: a person is never "it"): in both towns
+      // the instigator is a man, so the vocabulary's power form "its power gains from the crisis" is stored as his. The
+      // guard is unchanged and still asserted below: under an empty seat the rival is named by what it gains, and no
+      // role, stake or hook says it outweighs whoever holds the seat.
+      expect(instigator?.reason, seed).toBe('his power gains from the crisis');
+      expect(castReasonSentence(instigator?.reason), seed).toBe(CAST_REASONS.instigatorGains);
       const said = [...e.cast.roles.map((r) => r.reason), ...e.cast.stakes.map((k) => k.reason), ...crisisHooksOf(s, e).map((h) => h.text)];
       expect(said.filter((x) => /whoever holds the seat/.test(x)), seed).toEqual([]);
       expect(e.cast.stakes.some((k) => k.reason === STAKE_REASONS.gainsClaim), seed).toBe(true);

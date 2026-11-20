@@ -17,7 +17,7 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
 import { goldenCorpus, keyOf } from '../../helpers/goldenMasterCorpus.js';
 import { birth, ensureLaws } from '../../../scripts/audit/soak-review/corpus.mjs';
-import { CAST_REASONS } from '../../../src/domain/crisis/crisisCast.js';
+import { CAST_REASONS, castReasonSentence } from '../../../src/domain/crisis/crisisCast.js';
 import { crisisCastFindings } from '../../../src/domain/coherence/crisisCastFindings.js';
 import { seatCandidatesOf, seatHouseFaceOf } from '../../../src/domain/dossier/seatHolder.js';
 import { rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
@@ -46,7 +46,9 @@ const startsWithAny = (reason, list) => list.some((r) => reason === r || reason.
  * power (its name, its record, its stake in the crisis), or null for a row not drawn from a power.
  */
 function relationFor(row) {
-  const r = row.reason;
+  // FRAME-3 · B11: a person's row says its holder's own possessive ("her power gains from the crisis"); the row is keyed
+  // by the vocabulary sentence it was drawn from, read through the one fold back (crisisCast.js :: castReasonSentence).
+  const r = castReasonSentence(row.reason);
   const stake = (want) => (p, f, k) => want.includes(k);
   // re-keyed by identity (R2-CODE-B round 3, ruling (c)): the brunt's member rows read "the only one in …" in a house of
   // one and "one of …" beside the lever; the same rows, drawn from the same house.

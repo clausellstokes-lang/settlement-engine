@@ -11,7 +11,7 @@ import {
   treaterCandidates, collaboratorCandidates, wavererCandidates, faceCandidates,
   CRISIS_CAST_TUNING, CRISIS_LINKS, CONTRADICTORY_ROLE_PAIRS, CAST_REASONS, CAST_ABSENCES,
   STAKE_REASONS, GRASPING_TRAITS, CRISIS_NATURE, catalogFor, castHash, requiredRolesOf,
-  deriveLevers, CRISIS_LEVERS,
+  deriveLevers, CRISIS_LEVERS, castReasonSentence,
 } from '../../src/domain/crisis/crisisCast.js';
 import { isLiveInstitution } from '../../src/domain/institutions/institutionRoster.js';
 import { NPC_PERSONALITY_TRAITS } from '../../src/data/npcData.js';
@@ -67,7 +67,11 @@ describe('the eleven rules, each over a hand-built town', () => {
     // declares `crisis: hunger`, so a record with no hunger on reads its twin)
     const s = { ...town(), stress: [{ type: 'famine' }] };
     const c = bruntCandidates(s, 'famine', deriveStakes(s, 'famine'));
-    expect(c.candidates[0]).toMatchObject({ role: 'brunt', kind: 'npc', name: 'Ren Hale', reason: CAST_REASONS.bruntBase.food_security });
+    // re-pinned to the person form (FRAME-3 · B11, the chair's ruling of 2026-11-20: a person is never "it"; Ren Hale is
+    // given no `gender`, so "their"). The fact guarded is unchanged: the least powerful whose role touches the base bears
+    // the brunt by the base's own sentence, which the one fold back reads as that sentence.
+    expect(c.candidates[0]).toMatchObject({ role: 'brunt', kind: 'npc', name: 'Ren Hale', reason: 'the hunger falls first on their people' });
+    expect(castReasonSentence(c.candidates[0].reason)).toBe(CAST_REASONS.bruntBase.food_security);
   });
 
   it('rule 2: the lever is held by the lever house\'s face, else the house itself, and no one is invented', () => {
