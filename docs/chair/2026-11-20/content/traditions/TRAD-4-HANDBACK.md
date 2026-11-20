@@ -25,7 +25,7 @@ restated; this file adds what came after.
 | 7 | REVIEW-VEIL-13's hole: the reader's dead-cause by the chair's word rule (re-stated 15:10, ADDENDUM 1); no power archetype from a hideable field | READ WHOLE, reds re-run 16/90 at `ef605266f`, greens 90/90, MERGED; "TRAD-SHARE-2" sent | `edfeb052d`; merge `18414593c` |
 | 5 | CTR10 finished: every frame a declared line (70 bare → 0), floors by arms, gloss pools raised to 3 (+32 lines), crisis arms, the totality arm, census rows (Appendix B), the printed export | READ WHOLE, reds re-run 6/66 at `c38ba7886`, MERGED | `22be32bea`; merge `89311c175` |
 | 6 | the measures and the owner's 30 + 12 samples, the plain-words file | MERGED (docs and tools only) | `a39c93689`; merge `5f49c7779` |
-| 8 | the import path and the round trip > 4 towns (brief `briefs/TRAD-4-U8-IMPORT-ROUNDTRIP.md`) | CLOSED (the chair, 17:00): round trip green on 140; the import door handed to the veil lane (VEIL RULING 55, VEIL-27). See §7 | `14f16760b` on `lane/trad-4-2026-11-20-u8-wip` (not merged) |
+| 8 | the import path and the round trip > 4 towns (brief `briefs/TRAD-4-U8-IMPORT-ROUNDTRIP.md`) | CLOSED: round trip green on 140; the import door is NOT a leak (the chair, 17:25: an unmarked share is served exactly to an importer, by design). See §7 | `14f16760b` on `lane/trad-4-2026-11-20-u8-wip` (not merged) |
 | 9 | no first sentence says "kept" twice (brief `briefs/TRAD-4-U9-KEPT-TWICE.md`) | READ WHOLE, red re-run 1/29 at `d003f7be8`, MERGED | `992df7da9`; merge `7955e5304` |
 | 10 | no town prints the same sentence in two of its rites (the chair 17:04; brief `briefs/TRAD-4-U10-ONE-TOWN-ROTATION.md`: measure first, then the rotation; bar 0 of 432) | builder out, worktree scratchpad/u10, branch `trad4-u10` from `833a20e13` | — |
 | — | ONE call line: take the kernel's mixed pick (`pickVariant`'s finalizer) when the chair names its commit; unit 6's count re-taken | waits on the chair | — |
@@ -70,23 +70,21 @@ and reader reproduce TRAD-3-HANDBACK §5 exactly (1,232 rites; SHORT 8.7%; top s
 - THEN: "TRAD-SHARE-2 <commit>" to the chair once unit 7 is merged and green; then unit 5; then unit 6 (brief DRAFT
   `briefs/TRAD-4-U6-MEASURES.md`: stamp its base at dispatch).
 
-## 7. THE IMPORT DOOR (unit 8's finding; handed to the veil lane by the chair, 17:00 UTC, VEIL RULING 55)
-VEIL RULING 55: what an importer may receive is the document the share serves to that reader under the veil, and nothing
-else; the clone is built from the served document, never the stored row; if the veil cannot be applied the import fails
-closed. The cure is the veil lane's (VEIL-27, seeded with `14f16760b`); THIS LANE TOUCHES NOTHING MORE OF THE IMPORT PATH.
-- THE FINDING (unit 8's builder, executed): `import_gallery_dossier` (latest definition, migration 131) runs the sanitizer
-  and the member splice only; `src/lib/gallery.js :: fetchDossierForImport` adds the confidential strip and
-  `veilPublicPayload` (a civility mask). A planted hideable (Criminal) house the DM hid reaches the clone and the
-  importer's own page names it as a keeper: 34 names in 31 of 140 towns. Not chased: the import path never reads the DM's
-  `$veil` deltas, so a clone carries every hidden house on every tab.
-- GREEN beside it: the save/serve round trip on 140 towns (client and the real sanitizer in pglite: byte-equal, nothing
-  hidden, dense ids); the clone's drawn rows equal the served rows, 140 of 140.
+## 7. THE IMPORT DOOR — NOT A LEAK (corrected by the chair, 17:25 UTC, on the veil lane's own measure)
+Unit 8's red at `14f16760b` compared an IMPORT with the party LINK. The veil lane measured the door on its own tip: with
+migration 212, `import_gallery_dossier` veils as the gallery read does, and its `data` is byte-equal to the gallery read on
+every share, both chains, Reveal off and on; on a MARKED share the hidden house reaches nothing. The builder's share was
+UNMARKED, and an unmarked share is served exactly, to the gallery page and to an importer alike (211's decided design,
+which stands); only the party link takes the default veil. So there is NO LEAK on the import door. (The earlier wording
+here, "the import path applies no share veil", was wrong; the chair has corrected it to the owner.)
+- `14f16760b` (on `lane/trad-4-2026-11-20-u8-wip`) is NOT merged. Offered to the veil lane through the chair as a pin of
+  the design (on the veil's tree, an import equals the gallery read); else it is dropped.
+- GREEN and kept: the save/serve round trip on 140 towns (client and the real sanitizer: byte-equal, nothing hidden,
+  dense ids); the clone's drawn rows equal the served rows, 140 of 140 (both in the WIP commit, not merged).
 - A NAMED SURVIVOR FOR THE OWNER (stays): 0 of 140 clones show the importer the set the gallery served (the seed is
-  scrubbed; the sanitizer drops `traditions`, so a clone re-draws); after the veil's cure a clone re-draws only from
-  houses the share served.
-- REPRO: `git fetch origin lane/trad-4-2026-11-20-u8-wip && git worktree add --detach <dir> 14f16760b`, link
-  `node_modules`, then in `<dir>`: `sh scripts/gate-tail.sh npx vitest run tests/security/traditionDescriptionSharedPage.test.js`
-  (≈131 s; the unit-8 block: 7 passed, 1 failed, the importer's-owner-page arm).
+  scrubbed; the sanitizer drops `traditions`, so a clone re-draws).
+- What the exercise found that is the veil lane's: four other doors with no veil (two map snapshots, the tile values,
+  perhaps the player export): a stage of theirs.
 
 ## Updated (append at each later commit, with `date -u`)
 - 2026-11-20 13:33 UTC — the lane taken at `1f3cdc135`; pushed; unit 5's brief written.
@@ -119,3 +117,4 @@ closed. The cure is the veil lane's (VEIL-27, seeded with `14f16760b`); THIS LAN
   8684 (plain 34/34). Not checked (builder): a harvest rite at a granary may now read "held" in two sentences in a row.
   The chair (17:04): the owner's four files are with the owner. UNIT 10 out. The kernel's mixed pick: the chair asked the
   key shape; sent (`${seed}::${id}#done`, one `draw` call site for every slot).
+- 2026-11-20 17:27 UTC — §7 CORRECTED (the import door is not a leak). The kernel's mixed pick: `lane/kernel-mix-2026-11-20` (bd42d63c7) sits on the working line 43ab0f5eb; its merge was started, met the census baseline conflict, and was ABORTED (the line would enter against ruling 13): asked of the chair, (A) merge with the line, or (B) the commit re-cut onto this lane's base.
