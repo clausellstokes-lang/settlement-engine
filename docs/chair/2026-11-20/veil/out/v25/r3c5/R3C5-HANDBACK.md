@@ -123,7 +123,20 @@ hidden house raised (the counterfactual still holds it), Reveal off and on alike
 criminal power whose row VR42 keeps (FIRST LINES 4). (c) LOWER by rule, of 92: above.
 
 ## GREEN AT dbff7eeb3 (the last commit adds documents only)
-(WIP at this commit: the guards s1, s2, harn, twin, known and the cost law are still running.)
+- The six veil guards: `guards-security-1` (gallerySecondHomes, galleryVeilCures) EXIT 0; `guards-security-2` (gallerySanitizer,
+  galleryMapMemberCount, VR17's galleryVeilSignalCopies, R2's galleryWithholdAlways) EXIT 0.
+- The two harnesses and V10-2's third (shareRenderTwice, rosterChoiceInversion, criminalSwitchHandReach): `guards-harnesses` EXIT 0.
+- `guards-twin` (16 files: the walkers veilCopySites, rosterChoiceRegistry, rosterChoicePools, mutationCoverageManifest,
+  observedShapeReaders; criminalVeilSwitch whole; curateModeCriminalSwitch; publicPayloadVeilTotality; publicSafe; publicSafeVeil;
+  the two publicProse veil tests; gallery, partyLinkClient, the two galleryImport tests): EXIT 1, 15 of 16 files green; the one
+  red is the KNOWN `observedShapeReaders.walker` ({reads 2222, identities 1556} against its frozen {2214, 1552}; R3-CURE-4 read
+  2222 with the same cure; +8 against the frozen: PLAUSIBLY the cure's new reads, `pub.npcs`, `q.memberships`; not attributed).
+- KNOWN REDS, unchanged and untouched: `known-reds` EXIT 1, exactly the four named (phoneChromeFloor.census, presumedThings,
+  presumptionClasses, writerReach), 4 failed of 120.
+- THE COST LAW (`cost-big-town.txt`, `measure/big-cost.mjs`, x211 against x212 as the acceptance run built it at this 212, box
+  quiet, load 0.9): the Reveal-DM gallery read of the largest born town 589.3 ms against twice 211's Reveal-OFF read
+  (2 x 446.8 = 893.6): WITHIN. Gallery off 745.1 vs 446.8 (1.67x); link 559.7 vs 310.6 (1.80x). The v8245 rows (`cost.sh`, chains
+  r3c2_*): NOT RUN (the chains are not built here).
 - R3's born test whole, the husk arm included: `born-green.txt` (+ `born-green-measures.txt`) EXIT 0, 22 of 22.
 - galleryServerVeil whole (leak check and tooth) + galleryVeilHandRows: `green-serverveil-handrows.txt` EXIT 0.
 - THE ACCEPTANCE RUN: `acceptance-run.txt` EXIT 0 (40 PASS, 0 FAIL; bytes 212 70c6eb45..., 211 eface6d0... at dbff7eeb3).
@@ -141,4 +154,4 @@ the renamed-house and reach counts (twin). PLAUSIBLE: the server's equality on t
 
 Last line: commits dbff7eeb3 (units 1-2 cure: galleryRosterChoices.js, 212, its rollback, galleryRosterChoices.pglite.test.js,
 run outputs), c4e2b1ab2 (units 2-5 measures: out/v25/r3c5/measure/*, unit2-*, unit3-*, unit45-counts.txt, vr27-revokes.txt), and
-the hand-back commit(s) carrying this file and the GREEN outputs; 212 sha256 70c6eb4582b4a9282d7ec1221c4214ae4143e514ad208f3e838eaa301220a124.
+101fae14d (WIP: this file and the first GREEN outputs) and the final hand-back commit (this file, the guard and cost outputs); 212 sha256 70c6eb4582b4a9282d7ec1221c4214ae4143e514ad208f3e838eaa301220a124.

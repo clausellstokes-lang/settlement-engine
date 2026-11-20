@@ -1,0 +1,9 @@
+     × SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished 70ms
+     × A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live 55ms
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+AssertionError: the live heuristic inventory must exactly match the frozen one. A lawful shrink is `node scripts/check-observed-shape-readers.mjs --write` on a clean tree — it re-derives inventory, total and identities together and refuses anything that is not a shrink. NEVER hand-edit a row: that throws "observed-shape baseline totals are inconsistent" out of validateLeafBaseline (scripts/lib/observed-shape-baseline.mjs).: expected { violations: 5, stale: +0 } to deeply equal { violations: +0, stale: +0 }
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+AssertionError: expected { reads: 2222, identities: 1556, …(3) } to deeply equal { reads: 2214, identities: 1552, …(3) }
+ Test Files  1 failed | 15 passed (16)
+      Tests  2 failed | 261 passed (263)
