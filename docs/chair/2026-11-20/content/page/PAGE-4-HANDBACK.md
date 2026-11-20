@@ -1,6 +1,6 @@
 # PAGE-4's hand-back (the display lane after PAGE-1)
 
-Kept current at every push; last written 14:32 UTC 2026-11-20 (`date -u`). A successor needs THIS FILE and the briefs
+Kept current at every push; last written 14:55 UTC 2026-11-20 (`date -u`). A successor needs THIS FILE and the briefs
 under `docs/chair/2026-11-20/content/page/briefs/` only. The seat's prompt:
 `git show origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/PAGE-4.txt`. PAGE-1's hand-back
 (`PAGE-1-HANDBACK.md`, true at `a67e1b502`) holds the rulings 1-8 and the measures; this file adds what came after.
@@ -9,7 +9,7 @@ under `docs/chair/2026-11-20/content/page/briefs/` only. The seat's prompt:
 
 - BRANCH `lane/page-4-2026-11-20`, cut at PAGE-1's final tip `a67e1b502` ("THE LANE IS YOURS", the chair 14:29 UTC).
 - MERGED: CARD (S1, S2) from `lane/page-1-2026-11-20-card` `c03e48972` (merge `fe1ff5410`). Red 7 of 7 at base re-run by
-  PAGE-4; green and the merge's gates: see the table.
+  PAGE-4; green and the merge's gates green: see the table.
 - OUT: CARD-SERVED (brief `briefs/CARD-SERVED.md`), the chair's condition (1) on CARD. One builder at a time.
 
 ## The rulings that came after PAGE-1's list (the chair's; each vetoable by the owner)
@@ -59,4 +59,4 @@ CARD (merged) -> CARD-SERVED -> MAGIC (`lane/page-1-2026-11-20-magic` `dcb3b2744
 
 | Unit | Merge | Red at base | Green | Gates |
 |---|---|---|---|---|
-| CARD | `fe1ff5410` | 2 files failed, 7 of 7 tests (PAGE-4's re-run) | (running) | (running) |
+| CARD | `fe1ff5410` | 2 files failed, 7 of 7 tests (PAGE-4's re-run) | 8 files, 65 of 65 (the 8 test files the unit touched) | lighting 34/34; wiring `--check` exit 0; tests/lint 220 files, 3271/3271; typecheck:ratchet 0; domain:strict 0; lint 0 |
