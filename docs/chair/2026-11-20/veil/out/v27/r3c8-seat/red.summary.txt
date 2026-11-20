@@ -1,0 +1,14 @@
+     × R3-CURE-8 THE TEN TOWNS of R3-TELL's STOP 1, metropolis-politically_fractured-0-60: the twin serves EXACTLY the `availableServices` 212 serves (VR45), rows with no `institution` key included; every setting, gallery, link, import and
+     × R3-CURE-8 THE TEN TOWNS of R3-TELL's STOP 1, metropolis-insurgency-1-124: the twin serves EXACTLY the `availableServices` 212 serves (VR45), rows with no `institution` key included; every setting, gallery, link, import and map, Reve
+     × R3-CURE-8 THE TEN TOWNS of R3-TELL's STOP 1, city-infiltrated-0-42: the twin serves EXACTLY the `availableServices` 212 serves (VR45), rows with no `institution` key included; every setting, gallery, link, import and map, Reveal DM 
+     × R3-CURE-8 THE TEN TOWNS of R3-TELL's STOP 1, metropolis-politically_fractured-0-70: the twin serves EXACTLY the `availableServices` 212 serves (VR45), rows with no `institution` key included; every setting, gallery, link, import and
+     × R3-CURE-8 THE TEN TOWNS of R3-TELL's STOP 1, metropolis-wartime-1-139: the twin serves EXACTLY the `availableServices` 212 serves (VR45), rows with no `institution` key included; every setting, gallery, link, import and map, Reveal 
+     × R3-CURE-8 THE TEN TOWNS of R3-TELL's STOP 1, town-none-0-21: the twin serves EXACTLY the `availableServices` 212 serves (VR45), rows with no `institution` key included; every setting, gallery, link, import and map, Reveal DM off and
+     × R3-CURE-8 THE TEN TOWNS of R3-TELL's STOP 1, town-insurgency-0-14: the twin serves EXACTLY the `availableServices` 212 serves (VR45), rows with no `institution` key included; every setting, gallery, link, import and map, Reveal DM o
+     × R3-CURE-8 THE TEN TOWNS of R3-TELL's STOP 1, town-under_siege-0-18: the twin serves EXACTLY the `availableServices` 212 serves (VR45), rows with no `institution` key included; every setting, gallery, link, import and map, Reveal DM 
+     × R3-CURE-8 THE TEN TOWNS of R3-TELL's STOP 1, town-infiltrated-0-22: the twin serves EXACTLY the `availableServices` 212 serves (VR45), rows with no `institution` key included; every setting, gallery, link, import and map, Reveal DM 
+     × R3-CURE-8 THE TEN TOWNS of R3-TELL's STOP 1, town-under_siege-1-98: the twin serves EXACTLY the `availableServices` 212 serves (VR45), rows with no `institution` key included; every setting, gallery, link, import and map, Reveal DM 
+     × R3-CURE-8 THE HAND PLANT PER FAMILY (every family the generator writes, and a custom one): a row born with no `institution` key and a row the hidden-house sweep leaves with none are treated ALIKE by the twin and 212, every setting, 
+⎯⎯⎯⎯⎯⎯ Failed Tests 11 ⎯⎯⎯⎯⎯⎯⎯
+ Test Files  1 failed (1)
+      Tests  11 failed | 25 skipped (36)

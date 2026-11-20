@@ -453,6 +453,7 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 | 212 / rollback on the lane (after R2; VR47 touched neither) | `05b915ab119e2f9766a3cea47fdd9ec023fc2155f588f1b4127ea5b347118f10` / `1454f8f3fa53943130a22d412152e0eddcf3e05684b3cf01f62e77c069e2a66e` (`out/v24/seated/dry-sha.txt`) |
 | 212 / rollback on the lane AFTER THE R3 MERGE (aa4e3079e) | `70c6eb4582b4a9282d7ec1221c4214ae4143e514ad208f3e838eaa301220a124` / `8cbd7d1c7a6d60f609b7473b14b7fe2b2ca8a3b6f3081151c2ae49d82cded5b0`; 211 unchanged (`out/v26/r3merge/sha256.txt`) |
 | 212 / rollback on the lane AFTER R3-CURE-6's MERGE (99416745f) | `6260803d1c4dddc13831f0e72c7e3ee0c88e4853e74c56e1c384b4251efb0218` / `8cbd7d1c…ded5b0` (unchanged); 211 unchanged |
+| 212 / rollback on the lane AFTER R3-CURE-8's MERGE (b9dc6c4e5) | `1c15e3acf2d45ab71d59ffa31290de9faf4ce115b20a34c8b4b3250fd8a2ebc7` / `8cbd7d1c…ded5b0` (unchanged); 211 unchanged (`out/v27/r3c8-seat/sha256.txt`) |
 | 212 on the R3 cure's branch (4db8e4208) | `de3efccbbf9905443e0444dc7976fd5200c82c2661536f5150999aea5b68eb9f`, rollback `653ae8b2…b2f4` |
 
 ## 3. The stages
@@ -460,7 +461,7 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
 |---|---|---|
 | R1 registry, R2 withhold-always, V10-2 | merged (4ddf8c60c, d136940c3, b5cb22caf) | read cold: they hold |
 | VR47 the honorific | merged df6809f9c, bundles e4cce485f (VEIL-23) | done; the owner's count in section 5 |
-| R3 roster choices | MERGED (VEIL-26: aa4e3079e through 4661a1353) + R3-CURE-6 (99416745f) + R3-CURE-7 (2c6cb8efa, test-only) by VEIL-27; 212 `6260803d…0218` | GREEN TOWARD WITHHOLDING at the tip (gate 0/79/13; section 6). NOT SENT TO THE READER: R3-CURE-8 (ruling 55) and R3-TELL-2 (ruling 54) RUNNING (section 8); then "R3 <commit>" with the thirteen towns and ruling 53. |
+| R3 roster choices | MERGED (VEIL-26: aa4e3079e through 4661a1353) + R3-CURE-6 (99416745f) + R3-CURE-7 (2c6cb8efa) + R3-CURE-8 (b9dc6c4e5) by VEIL-27; 212 `1c15e3ac…ebc7` | GREEN TOWARD WITHHOLDING. NOT SENT TO THE READER: the tell's cure under rulings 58 and 61 (VEIL-28; PART 29); then "R3 <commit>" with the thirteen towns, ruling 53 named, the 11 governing rows LOWER BY RULE (ruling 61 (5)). |
 | CURATE notice (rulings 38 (c), 39, 40) | MERGED 7ddf4876f (`--no-ff` of `lane/veil-25-curate-2026-11-20` at 58f2fdf16: 1bd894613 + 58f2fdf16) | DONE: red 3/16 at 1bd894613's source, green 25/25 (`/var/tmp/v18/out/v25/curate/`); display only, 212 unchanged. Recorded, not cured: the notice reads `category` only (R3 also takes a /thie/ name: it can stay silent there) and does not exempt the governing power (VR42: it can over-warn there). RE-CHECK its condition if R3-CURE-4 narrows power.entry's reach. |
 | R6 tests | `lane/veil-22-r6-2026-11-20` 7d9ebd078 | COMPLETE, NOT MERGED; merge after R3 and re-run its MAIN arm (red 50 at R6's base: `cast.stakes` by R3's power, `cast.roles` wording by R3 or R5) |
 | R4 the people | `lane/veil-22-r4-2026-11-20` a4b89bf9d (R4 dfa031f3e + first cure) | NOT GREEN. AFTER "R3 <commit>", IMPORT-DOOR and R6: R4-CURE-2 (`briefs/R4-CURE-2-BRIEF.md`; STOP 1, STOP 3, the one salt, the catalogue red; VR48 its own commit; RULING 53's FOLD: one id-as-text helper per engine, the six 212 sites repointed, the walker retired; R3-CURE-5's join hazard: the re-key runs AFTER the copy pass). |
@@ -604,6 +605,7 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
 - 16:57 RE-RUNS AT THE MERGED TIP 72913fc86 (`/var/tmp/v18/out/v27/`): green list (born 23/23 and serverVeil+handrows at 8d5768ebc; s1, s2, harnesses at the tip all EXIT 0; twin 15/16, the known observedShapeReaders red only; known-reds the four); acceptance EXIT 0, 40 PASS; THE GATE HIGHER 0, EQUAL 79, LOWER 13, the same thirteen. R3-TELL unit 1 returned (a43bca3d1, merged fbc41ad1e): rulings 54-55. RULING 47's CONDITION MET AND RULING 50's READING PROVED (helper, `out/v27/kl/`): the server's key-level table equals the twin's, 0 parity findings over 464 pages a shape, both shapes, Reveal off and on; the Defense key recomputed from SERVED fields alone equals the served key in 928 of 928 page-reads (the page's own path: `DefenseTab.jsx` -> `criminalStructureOf`). NAMED FOR THE READER, PLAUSIBLE, NOT MEASURED: the shared page's Defense SENTENCE `publicProse['defense:criminal']` is composed at save time from the owner's record (R5's class, ruling 32).
 - 17:12 THE COST LAW AT THE TIP (212 6260803d; quiet box, load 1.0; `out/v27/cost/`): the largest born town's Reveal-DM gallery read 587.3 ms against twice 211's Reveal-OFF read (2 x 398.6 = 797.2): WITHIN; gallery off 621.9 (1.56x), link 552.1 (1.78x). The v8245 rows (3 rounds, x211 | base 05b915ab | after): 10,000 hit rows 6,828 | 8,313 | 8,043 ms; 500+500 rows 126 | 243 | 248 (1.97x, the base already 1.93x: the TIGHTEST row, not R3's); deep 200 houses 471 | 493 | 523; deep 600 houses 1,580 | 1,687 | 1,683. RULING 52's 'owed before E' MET at this tip (to be re-taken at E). R3-CURE-8 and R3-TELL-2 (unit 1) launched at 5f45144ae.
 - 18:31 RULING 57 (g) ANSWERED BY EXECUTION (helper, at 43d4c309b; `out/v27/r5q/RESULT.txt`; twin 960 born towns, server 20 + 6 plants, equal on every path): NONE of the fourteen is re-composed. DS-DEF-4 (8: semi-organized v3-v7, diffuse v2, v4, capture-none v2) WITHHELD (the whole `defense:criminal` site leaves where a house is hidden whole, both engines). DS-ECO-6 v4, v5 (`economy:economics.shadowEconomy.sentence`, 25 and 97 towns) and DS-DEF-3 Safe v3, v8, Unsafe v5, curfew v2 (`defense:state.publicOrder`) SERVED AS STORED: the registry's `prose.shadowEconomy` row says withhold and the publicOrder rows say recompose, NEITHER ENGINE APPLIES THEM YET (R5's stage, ruling 14 and 32: not built). Six variants were planted (no born town chose them); capture-none v2 never chosen (the composer reads the stripped record). FOR R5's BRIEF: these six blocks first after the factions' desc; and a walker that a registry row's rule IS applied by both engines (today a row can say withhold while both serve).
+- 19:40 R3-CURE-8 returned (60131acc9), read once, red 11/11 and green 37/37 + 43/43 re-run; merged b9dc6c4e5; 212 1c15e3ac. R3-TELL-2's instrument returned on ruling 58 (f95ce89a5, pushed -wip); the chair ruled its stops to VEIL-28 (ruling 61). HANDED OVER (section 8).
 
 ## 7. THE JOIN (the chair's word in VEIL-25's prompt): what the join must re-prove on the joined document
 The working line (origin/lane/join-2026-11-14, at 0c906948 when this was written) and four content lanes ADD SERVED TEXT at
@@ -619,25 +621,20 @@ readings at UNREGISTERED 0 (ruling 25); and the render-twice and inversion harne
 `tests/lint/namesInSentences.walker.test.js` holds a COPY of the fold in `src/domain/display/gallerySecondHomes.js`: at the
 join it must import and call the lane's own function (`buildNameSearch` / the bare fold), never its copy.
 
-## 8. STATE (VEIL-27; kept current). PART 27's section 8 (VEIL-26 to VEIL-27) is history in PART 27.
-THE LANE: `lane/veil-27-2026-11-20`, tip = the commit carrying this section (read it back from origin). 212 `6260803d…0218`,
-rollback `8cbd7d1c…ded5b0`, 211 unchanged since the cut. MERGED BY VEIL-27 (each read once, line by line, its red and green
-re-run by the seat): R3-CURE-6 (99416745f), R3-TELL unit 1 (fbc41ad1e, measures only), R3-CURE-7 (2c6cb8efa, test-only).
-GREEN AT THE MERGED TIP (section 6's log): the gate HIGHER 0 / EQUAL 79 / LOWER 13 (the same thirteen), acceptance 40 PASS, the
-guards, the harnesses, the known reds only, the cost law (ruling 52 MET), ruling 47's server table (0 findings), ruling 50's
-proof (928/928).
-RUNNING, STARTED BY VEIL-27 (subagents: they return to VEIL-27, which relays one line each to the chair, UNREAD by the
-successor): (1) R3-CURE-8 (`briefs/R3-CURE-8-BRIEF.md`; worktree `/home/user/wt/r3c8`, branch `v27-r3c8`, from 5f45144ae;
-databases `c8_*`): the twin's parity on `availableServices` rows with no `institution` key (ruling 55). (2) R3-TELL-2 UNIT 1
-ONLY (`briefs/R3-TELL-2-BRIEF.md`; `/home/user/wt/r3tell2`, `v27-r3tell2`, from 5f45144ae; `t2_*`; cache `/var/tmp/v18/t2/`):
-the signature instrument and the widened pool (ruling 54); it STOPS before the cure; units 2-5 are resumed by message after
-R3-CURE-8 is merged, naming the base to merge in. (3) the R5 question's helper (ruling 57 (g); `/var/tmp/v18/m27/r5q/`).
-NEXT, IN ORDER (the chair's, 16:45 and 17:25): R3-CURE-8 read once, re-run, merged, its branch pushed as it returns
-(`lane/veil-27-r3c8-2026-11-20`); R3-TELL-2 units 2-5 (the cure under ruling 54, power.entry narrowed, the gated tell column
-0 non-members, the Curate notice's condition re-checked); "R3 <commit>" to the chair WITH the thirteen LOWER towns by name and
-rule (section 6), ruling 53 named (the fold owed in R4-CURE-2), the reader's named questions (ruling 50's Defense sentence
-`publicProse['defense:criminal']`); then IMPORT-DOOR (`briefs/IMPORT-DOOR-BRIEF.md`, ruling 57); then R6, R4-CURE-2 (+ ruling
-53's fold), R5 (+ ruling 57 (g)), R7, L, the doors (+ ruling 57 (d)'s test), the stored figures, E.
-THE INSTRUMENTS IN THIS CONTAINER: section 4's, plus `/var/tmp/v18/g27.sh <worktree> <tag> <batches>` (the guards),
-`run-all-v27.sh` (the acceptance run on private chains v27x211/v27x212), `/var/tmp/v18/m27/cost-tip.sh` (the cost law),
-`out/v25/r3c5/measure/gate.sh` (the gate; template `createdb -T v27x211 <tpl>` + the tree's 212). Copies under `out/v27/seated/`.
+## 8. HANDED OVER (VEIL-27 to VEIL-28, at the chair's word of 19:10; written 19:40 UTC)
+THE LANE: `lane/veil-27-2026-11-20`, tip = the commit carrying this section (read it back from origin). 212 `1c15e3ac…ebc7`,
+rollback `8cbd7d1c…ded5b0`; 211 unchanged since the cut 99a159f59 (`git diff 99a159f59 -- supabase/migrations/211*
+supabase/rollback/211*` empty). MERGED BY VEIL-27, each read once line by line, its red and green re-run by the seat:
+R3-CURE-6 (99416745f), R3-TELL unit 1 (fbc41ad1e, measures), R3-CURE-7 (2c6cb8efa, test-only), R3-CURE-8 (b9dc6c4e5).
+GREEN AT 72913fc86 (section 6): the gate 0/79/13, acceptance 40 PASS, the guards and harnesses, the known reds only, the cost
+law (ruling 52 MET), ruling 47's server table (0 findings), ruling 50's proof (928/928). AT b9dc6c4e5: R3's born test 37/37,
+serverVeil + hand rows 43/43 (seat); the gate, acceptance, harnesses, walkers by R3-CURE-8's builder's count.
+NOTHING RUNNING: every builder of this seat has returned. Branches on origin: `lane/veil-27-r3c7-2026-11-20` (merged),
+`lane/veil-27-tell-2026-11-20` (merged), `lane/veil-27-r3c8-2026-11-20` (merged), `lane/veil-27-tell2-wip-2026-11-20` at
+f95ce89a5 (R3-TELL-2's INSTRUMENT, NOT MERGED, read by the chair, not by this seat line by line; brief
+`briefs/R3-TELL-2-BRIEF.md`; hand-back `out/v27/tell2/TELL2-HANDBACK.md`; its pool caches `/var/tmp/v18/t2/` are in THIS
+container only and are rebuilt by its `tell2.sh` (about 2.5 CPU-hours)).
+VEIL-28's ORDER (the chair's, 19:10 and 19:21): the tell's cure under rulings 58 and 61 (PART 29 opens with the chair's
+19:21 ruling), with ruling 60's non-criminal husk if the chair rules it; "R3 <commit>" (section 3's R3 row); IMPORT-DOOR
+(`briefs/IMPORT-DOOR-BRIEF.md`, rulings 56, 57); CHAINS-ROW (ruling 60); then R6, R4-CURE-2 (+ ruling 53's fold), R5 (ruling
+59's walker first), R7, L, the doors (+ ruling 57 (d)'s test), the stored figures, E (ruling 58 §4: both gates on every door).
