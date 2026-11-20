@@ -1,0 +1,179 @@
+[
+ {
+  "seed": "r3m-town-indebted-0-16",
+  "hidden": [
+   "Front businesses [front_businesses]",
+   "Street gang [undefined]"
+  ],
+  "stored": [
+   {
+    "name": "Vasileios Bryennios",
+    "role": "the gang boss",
+    "institution": {
+     "kind": "house",
+     "key": "Street gang",
+     "family": "Multiple criminal factions",
+     "title": "the gang boss",
+     "veiled": true
+    },
+    "memberships": [],
+    "category": "criminal"
+   }
+  ],
+  "twin": {
+   "people": [
+    {
+     "keys": "category,gender,goal,id,importance,influence,memberships,name,personality,physical,power,presentation,role,structuralRank,title",
+     "name": "Vasileios Bryennios",
+     "role": "the gang boss",
+     "title": "the gang boss",
+     "category": "criminal",
+     "memberships": []
+    }
+   ],
+   "houseNameHits": []
+  },
+  "server": {
+   "people": [
+    {
+     "keys": "category,gender,goal,id,importance,influence,memberships,name,personality,physical,power,presentation,role,structuralRank,title",
+     "name": "Vasileios Bryennios",
+     "role": "the gang boss",
+     "title": "the gang boss",
+     "category": "criminal",
+     "memberships": []
+    }
+   ],
+   "houseNameHits": []
+  }
+ },
+ {
+  "seed": "r3m-city-infiltrated-0-32",
+  "hidden": [
+   "Smuggling network [smuggling_network]",
+   "Black market [black_market]"
+  ],
+  "stored": [
+   {
+    "name": "Donnchadh O'Brien",
+    "role": "the black marketeer",
+    "institution": {
+     "kind": "house",
+     "key": "Black market",
+     "family": "Black market",
+     "title": "the black marketeer",
+     "veiled": true
+    },
+    "memberships": [
+     {
+      "power": "Merchant Guilds",
+      "rank": null,
+      "share": 1,
+      "veiled": false
+     }
+    ],
+    "category": "criminal"
+   }
+  ],
+  "twin": {
+   "people": [
+    {
+     "keys": "category,gender,goal,id,importance,influence,memberships,name,personality,physical,power,presentation,role,structuralRank,title",
+     "name": "Donnchadh O'Brien",
+     "role": "the black marketeer",
+     "title": "the black marketeer",
+     "category": "criminal",
+     "memberships": [
+      {
+       "power": "Merchant Guilds",
+       "rank": null,
+       "share": 1
+      }
+     ]
+    }
+   ],
+   "houseNameHits": [
+    "npcs[41].role=\"the black marketeer\"",
+    "npcs[41].title=\"the black marketeer\"",
+    "relationships[41].npc1Role=\"the black marketeer\"",
+    "relationships[60].npc2Role=\"the black marketeer\"",
+    "relationships[61].npc2Role=\"the black marketeer\""
+   ]
+  },
+  "server": {
+   "people": [
+    {
+     "keys": "category,gender,goal,id,importance,influence,memberships,name,personality,physical,power,presentation,role,structuralRank,title",
+     "name": "Donnchadh O'Brien",
+     "role": "the black marketeer",
+     "title": "the black marketeer",
+     "category": "criminal",
+     "memberships": [
+      {
+       "rank": null,
+       "power": "Merchant Guilds",
+       "share": 1
+      }
+     ]
+    }
+   ],
+   "houseNameHits": [
+    "npcs[41].role=\"the black marketeer\"",
+    "npcs[41].title=\"the black marketeer\"",
+    "relationships[41].npc1Role=\"the black marketeer\"",
+    "relationships[60].npc2Role=\"the black marketeer\"",
+    "relationships[61].npc2Role=\"the black marketeer\""
+   ]
+  }
+ },
+ {
+  "seed": "r3m-metropolis-infiltrated-0-52",
+  "hidden": [
+   "Thieves' guild (powerful) [thieves_guild_powerful]",
+   "Whisper market [whisper_market]",
+   "Assassins' guild [assassins_guild]",
+   "Front businesses [undefined]"
+  ],
+  "stored": [
+   {
+    "name": "Egilbert Ihle",
+    "role": "the guildmaster of thieves",
+    "institution": {
+     "kind": "house",
+     "key": "Thieves' guild (powerful)",
+     "family": "Thieves' guild chapter",
+     "title": "the guildmaster of thieves",
+     "veiled": true
+    },
+    "memberships": [],
+    "category": "criminal"
+   }
+  ],
+  "twin": {
+   "people": [
+    {
+     "keys": "category,gender,goal,id,importance,influence,memberships,name,personality,physical,power,presentation,role,structuralRank,title",
+     "name": "Egilbert Ihle",
+     "role": "the guildmaster of thieves",
+     "title": "the guildmaster of thieves",
+     "category": "criminal",
+     "memberships": []
+    }
+   ],
+   "houseNameHits": []
+  },
+  "server": {
+   "people": [
+    {
+     "keys": "category,gender,goal,id,importance,influence,memberships,name,personality,physical,power,presentation,role,structuralRank,title",
+     "name": "Egilbert Ihle",
+     "role": "the guildmaster of thieves",
+     "title": "the guildmaster of thieves",
+     "category": "criminal",
+     "memberships": []
+    }
+   ],
+   "houseNameHits": []
+  }
+ }
+]
