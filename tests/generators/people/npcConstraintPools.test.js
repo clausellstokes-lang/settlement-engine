@@ -15,6 +15,7 @@
  */
 import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../../helpers/anchoredNegatives.js';
 import { CONSTRAINT_VARIANTS, POSITION_VARIANTS, POSITION_POOL_OF } from '../../../src/data/npcStructureVariants.js';
 import { enrichNPCsWithStructure, NOT_A_GOOD } from '../../../src/generators/npcStructure.js';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
@@ -77,7 +78,7 @@ describe('PEOPLE-1 B1b · the constraint pools, canonical at zero', () => {
     for (const [key, pool] of Object.entries(CONSTRAINT_VARIANTS)) {
       expect(T_CONSTRAINT[key], `${key} is a T row`).toBeDefined();
       expect(composedOf(key)[0].text, key).toBe(T_CONSTRAINT[key]);
-      expect(pool.map((r) => r.text), `${key}: the data pool holds no copy of its T line`).not.toContain(T_CONSTRAINT[key]);
+      expectAbsentWithAnchor(pool.map((r) => r.text), T_CONSTRAINT[key], pool[0]?.text, `${key}: the data pool holds no copy of its T line (its first sibling present)`);
       expect(composedOf(key).length, `${key} is a pool`).toBeGreaterThan(1);
     }
     for (const [alias, key] of Object.entries(POSITION_POOL_OF)) expect(T_CONSTRAINT[alias], alias).toBe(T_CONSTRAINT[key]);
