@@ -58,3 +58,9 @@
 - **Your integrator is SEAT-6** (session_019yED1R4mTVRuHKRPWJPt3f). Your commit trailers: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` and `Claude-Session: https://claude.ai/code/session_019yED1R4mTVRuHKRPWJPt3f`. Do NOT push; SEAT-6 reads your diff line by line once, re-runs your red and green, merges and pushes. Your hand-back goes to SEAT-6.
 - **The whole of SEAT-5's hand-back §1 (items 1 to 52) binds you**, the 15:17Z fail-closed rule (item 48) and the frozen list (item 47) above all: a wording you write or change is ADDED to `TRANSFER_WORDINGS` in its own sentence class, never replaces one.
 - **Not yours:** `src/generators/factionDynamics.js` (until the chair names its release), `power/rulingStructure.js` and `power/claimStanding.js` (PEOPLE-1's re-wording; say in one line if your unit would touch either), `factionRename.js` (a named survivor), every file of the security lane.
+
+## SEAT-7's lane (from 2026-11-20T19:54:46Z; "THE LANE IS YOURS at ce9462b55", the chair 19:54Z; these lines govern where an earlier line above disagrees)
+
+- **Your integrator is SEAT-7** (session_019yED1P7Zp441ctXNjL8Kqf). Your commit trailers: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` and `Claude-Session: https://claude.ai/code/session_019yED1P7Zp441ctXNjL8Kqf`. Do NOT push; SEAT-7 reads your diff once, re-runs your red and green, merges and pushes. Your hand-back goes to SEAT-7.
+- **Every ruling in force is SEAT-5-HANDBACK §1 (items 1 to 52) plus SEAT-6-HANDBACK items 53 to 68.** Item 67 above all: THE TRAIN SHIPS LIT. You still build with the law OFF BY DEFAULT, proved byte-identical dark; no seat flips a default; the headline of every measure is the LIT world (seat law on, contest at today's figures) on the VISITOR pool, dark the control.
+- **No unit raises the first-paint closure** (the chair, 19:28Z) unless the chair has ruled a surface needs it; `vite.config.js` is shared: append only, and list your lines.
