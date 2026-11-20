@@ -42,7 +42,7 @@ describe('history prose never leaks the literal "undefined"', () => {
           { factions: [] },
         );
         for (const t of h.currentTensions || []) {
-          if (t.type === 'resource_scarcity' || /economic backbone/.test(t.description || '')) {
+          if (t.type === 'resource_scarcity' || /runs mostly on the [^.]* trade, and that trade is under strain/.test(t.description || '')) {
             sawResourceScarcity = true;
           }
           const text = `${t.description || ''} ${t.specificIssue || ''}`;

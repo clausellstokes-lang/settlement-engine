@@ -101,9 +101,9 @@ export function applyLibraryFilters(saves, { query = '', sort = 'recent', filter
         ...(Array.isArray(s.settlement?.npcs)
           ? s.settlement.npcs.map(n => n.name).slice(0, 50)
           : []),
-        // Faction names
-        ...(Array.isArray(s.settlement?.factions)
-          ? s.settlement.factions.map(f => f.faction || f.name).slice(0, 20)
+        // Faction names — the powers (PEOPLE-5A: the NPC grouping is not read)
+        ...(Array.isArray(s.settlement?.powerStructure?.factions)
+          ? s.settlement.powerStructure.factions.map(f => f.faction || f.name).slice(0, 20)
           : []),
       ];
       return fields.some(f => typeof f === 'string' && f.toLowerCase().includes(q));
@@ -265,7 +265,7 @@ export default function LibraryToolbar({
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            aria-label="Search settlements, NPCs, and factions"
+            aria-label="Search settlements, NPCs, and powers"
             placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'}…`}
             style={{ flex: 1, minWidth: 0, border: 'none', outline: 'none', background: 'transparent', fontFamily: sans, fontSize: FS.sm, color: INK }}
           />
@@ -307,7 +307,7 @@ export default function LibraryToolbar({
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            aria-label="Search settlements, NPCs, and factions"
+            aria-label="Search settlements, NPCs, and powers"
             placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'}…`}
             style={{ flex: 1, minWidth: 0, border: 'none', outline: 'none', background: 'transparent', fontFamily: sans, fontSize: FS.sm, color: INK }}
           />
@@ -414,8 +414,8 @@ export default function LibraryToolbar({
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          aria-label="Search settlements, NPCs, and factions"
-          placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'} + NPCs + factions…`}
+          aria-label="Search settlements, NPCs, and powers"
+          placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'} + NPCs + powers…`}
           style={{
             flex: 1, border: 'none', outline: 'none',
             background: 'transparent', fontFamily: sans,

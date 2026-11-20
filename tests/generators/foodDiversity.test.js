@@ -30,8 +30,9 @@ function pairingsOf(s) {
   const has = (...k) => res.some((r) => k.some((x) => r.includes(x)));
   const mill = names.some((n) => n.includes('mill') && !n.includes('sawmill') && !n.includes('access to external mill'));
   return {
-    grain: (inst('subsistence', 'common field', 'household farm', 'farming community') || inst('farmland', 'grain field', 'managed farmland')) && has('grain_fields', 'fertile_floodplain'),
-    livestock: inst('pastoral', 'grazing', 'livestock', 'shepherd', 'common graz') && has('grazing_land'),
+    // COHERENCE-AGREE (the chair's food-sources ruling, 2026-11-11): worked land is a source by its own name.
+    grain: has('grain_fields', 'fertile_floodplain'),
+    livestock: has('grazing_land'),
     fish: (inst('fish', 'fishing') || has('fishing_grounds', 'river_fish')) && has('fishing_grounds', 'river_fish'),
     mill: mill && has('river_mills'),
     game: has('hunting_grounds') && (inst('hunting', 'managed forest', 'woodcutter') || ['thorp', 'hamlet', 'village'].includes(s.tier)),
@@ -50,7 +51,7 @@ describe('FOOD-3 — food diversity', () => {
       if (!Array.isArray(listed) || [...listed].sort().join() !== fired.sort().join()) wrong.push(`${s.tier} ${s.name}: ${JSON.stringify(listed)} vs ${fired}`);
     }
     expect(wrong).toEqual([]);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the ratchet's instruction; 2026-11-18): 19.4 s here under load; 21.2 s on CI's ratchet runner (run 44282875950)
 
   it('a famine fails the largest source, as deep as its share: one source loses 65%, three lose a third', () => {
     const three = { ...BARE, nearbyResources: ['grain_fields', 'grazing_land', 'fishing_grounds'] };
@@ -75,7 +76,7 @@ describe('FOOD-3 — food diversity', () => {
       const record = s.economicState.foodSecurity.foodRecord;
       const notes = (s.economicViability?.issues || []).map((x) => x.description || '').join(' ');
       const word = { grain: 'grain', livestock: 'herds', fish: 'fishing', mill: 'mill', game: 'hunt' }[record.failedSource];
-      if (record.foodSources.length && (!word || !new RegExp(`Famine: the [^.]*${word}`).test(notes))) missing.push(`${tier}-${i}: ${record.failedSource} / ${notes.slice(0, 80)}`);
+      if (record.foodSources.length && (!word || !new RegExp(`The [^.]*${word}[^.]* failed this year`).test(notes))) missing.push(`${tier}-${i}: ${record.failedSource} / ${notes.slice(0, 80)}`);
       if (record.foodSources.length) named += 1;
       if (record.foodSources.length <= 1 && !/^Deficit/.test(s.economicState.foodSecurity.label)) missing.push(`${tier}-${i}: ${s.economicState.foodSecurity.label}`);
     }
@@ -98,7 +99,7 @@ describe('FOOD-3 — food diversity', () => {
       wrong.push(...foodWordsFindings(s, line).map((f) => `${s.name}: ${f.code} ${f.sentence}`));
     }
     expect(wrong).toEqual([]);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the ratchet's instruction; 2026-11-18): 16.5 s here under load
 
   it('a named food source on the table that the record does not hold is a finding', () => {
     const record = deriveFoodRecord({ dailyNeed: 100, dailyProduction: 110, importCoverage: 0, magicOffset: 0, deficitPct: 0, surplusPct: 10, stressFamine: false, storageMonths: 2, hasGranary: false, foodSources: ['grain'] });

@@ -179,16 +179,110 @@ const EXPECTED_ROOTS = new Map([
 // THE SHAPE HOLDS: 59 identities, none added and none removed; 42 rows move a count. Families: pulseHistory 46/952/5051 ->
 // 46/957/5042, regionalLog 2/4/157 -> 2/4/189; chronicle and timeline hold. Totals 59/971/5227 -> 59/976/5250; bytes
 // 7665 -> 7669; digest c24ac7a8 -> 7c53b1cd. The regional root reach 0..11 holds.
+// ── RE-RECORDED 2026-11-07 BY LANDING-R2 (helper seat D2, the chair's ruling of 02:36 UTC, §934.105: a pin re-taken AT THE TIP
+// with its movement ATTRIBUTED BY STEP and the residual named as interaction with rung 1), THROUGH THE SAME DOOR AS THE NEWS-VOICE
+// AND NEWS-HEADLINE CONTRACTS (the 3d50676bb / 4e010ec54 door: ONE corpus build per tree, this library's own functions, the
+// corpus-shape throws turned into readings in a scratch copy only). Four trees: rung 1 final 1bff51c6d reproduces every frozen
+// figure below EXACTLY; the census base f28689600 reads 25554/252/1528/252, 75/74, pulseHistory 46/952/5051, bytes 7665, c24ac7a8.
+// THE RUNG-2 LINE (f28689600..f5dc50c6b, all 19 first-parent src steps measured) moves at ONE step, the census-1b merge
+// 0856c09d3 (e36e4916f), and census-1b's own first-parent line (3bc72bc0c..e36e4916f, bisected) attributes it by step:
+//   d35532850 census-1c unit 6b (water-keyed tradition elements weigh 0 inland)   scalarRows -90, wizardNews -3 (accumulated -6)
+//   950b75014 the census-4 merge (4b/4c's goal tags)          -170, -2 (-15); pulseHistory distinct -2 (consequence headline -1)
+//   2b31f33f3 the census-2 merge (census-2e's {colour} rulings) pulseHistory distinct +3; nothing else
+//   597866207 census-1i unit 3 (R-AX: both criminal-secret rolls read the holder's role)  -164, -2 (-13); pulseHistory -4/-14
+//             (mechanical headline -1/-1, consequence -0/-1); queued|npc_suppress leaves the news
+// so f5dc50c6b reads 25130/245/1494/245, 75/74, pulseHistory 46/949/5037, bytes 7665, 04a90a12. (7369c35dd, census-1 wave 0
+// fact 4, is already inside the census base.) AT THE TIP 3d03dc723: 26471/262/1580/262, 86/86; pulseHistory 46/958/5052.
+// Rung 2's steps sum to scalarRows -424, wizardNews -7 (accumulated -34), pulseHistory -3/-14; the INTERACTION WITH RUNG 1 is
+// scalarRows +4, wizardNews -1 (accumulated -1), pulseHistory +4/+24 (the tip less rung 1 final less rung 2's steps).
+// THE SHAPE HOLDS: 59 identities, none in or out; 10 rows move a count; regionalLog 2/4/189, chronicle and timeline hold.
+// Totals 59/976/5250 -> 59/977/5260; bytes 7669 -> 7669 (digit widths again); digest 7c53b1cd -> 9f28cc22. Reach 0..11 holds.
+// ── RE-RECORDED 2026-11-07 BY MERGE-R2 (2026-11-07, the integration merge of the rung-2 landing into lane/integration-2026-11-07;
+// re-keyed by identity with its cause), THROUGH THE SAME DOOR AS THE NEWS-VOICE AND NEWS-HEADLINE CONTRACTS (ONE corpus build at the
+// merged tip 6c3e25661 = the merge 10b8f09b4 of fc4cb0b9f into a8daff92c, this library's own functions). The parents pinned
+// 26891/270/1615/270 (a8daff92c, the integration line) and 26471/262/1580/262 (fc4cb0b9f, rung 2); the merged tip reads
+// 26701/266/1598/266, regional 86/86 — the census steps above composed with the integration side's WIRING-W0 / REVIEW-INTAKE lines.
+// Against the rung-2 pin: scalarRows +230, wizardNews +4 (accumulated +18), pulseHistory -1/-1. ATTRIBUTION PLAUSIBLE, NOT
+// BISECTED (the residual is interaction between the two merged lines). THE SHAPE HOLDS: 59 identities, none in or out; 10 rows
+// move a count, all pulseHistory (consequenceOutcomes[].proposalPayload.kind 2/3 -> 3/3, .proposalPayload.reason 2/2 -> 1/1,
+// .reasons[] 69/395 -> 68/396; impactDigest[].impactKind 26/158 -> 27/158, .reasons[] 78/350 -> 78/351, .tags[] 34/631 -> 35/631;
+// rollExplanations[].proposalPayload.kind 3/22 -> 3/21, .proposalPayload.reason 3/7 -> 2/6; selectedOutcomes[].proposalPayload.reason
+// 3/4 -> 2/3, .reasons[] 78/374 -> 78/375); pulseHistory 46/958/5052 -> 46/957/5051; regionalLog, chronicle and timeline hold.
+// Totals 59/977/5260 -> 59/976/5259; bytes 7669 -> 7669 (digit widths again); digest 9f28cc22 -> 4c5a458d. Reach 0..11 holds.
+// ── RE-RECORDED 2026-11-07 AT THE PEOPLE CAR'S LANDING (PEOPLE-LAND second seat, §934.105), IN THE SAME ACT AS THE NEWS-VOICE
+// AND NEWS-HEADLINE CONTRACTS (the 4e010ec54 door; ONE corpus build per tree measured with this library's own functions,
+// which reproduces every frozen figure below EXACTLY at the integration base 262e8b255). ONE CAUSE: THE PEOPLE CAR (one face
+// per institution) re-dealing the AO-0 year. By first-parent point (scalarRows; wizardNews final/accumulated/unique; regional
+// events; identities/distinct/occurrences; bytes; digest):
+//   dc655f712 lane 1 PEOPLE-1 CAST   26891 -> 36009; 378/2394/379; 86/86 -> 80/80; 59/976/5250 -> 58/1040/5495; 7669 -> 7523;
+//                                    48bcb128. ONE IDENTITY LEAVES: pulseHistory[].consequenceOutcomes[].proposalPayload.reason.
+//   3aa160a70 lane 2                 37487; 399/2518/400; 81/81; 58/1048/5526; 7523; 7e783477
+//   0f930ce95 lane 3 HOOKS · c7d552370 lane 4 TIES · 053283dfd lane 5A DISPLAY   no movement
+//   a725df7e4 lane 5B EDIT           37469; 58/1046/5508; 7523; afddb136
+//   2981f23f6 (the landing's step 1, the shim out) and the landing tip   as now
+// Families: pulseHistory 46/957/5042 -> 45/1027/5331, regionalLog 2/4/189 -> 2/4/158; chronicle and timeline hold. Totals
+// 59/976/5250 -> 58/1046/5508 (one identity out, none in; 39 surviving rows move a count); bytes 7669 -> 7523; digest
+// 7c53b1cd -> afddb136. The regional root reach 0..11 holds.
+// ── RE-RECORDED 2026-11-08 AT MERGE-CAR (the people car merged into the integration branch, 8dff691f3; re-keyed by identity with
+// its cause), IN THE SAME ACT AS THE NEWS-VOICE AND NEWS-HEADLINE CONTRACTS (the 3d50676bb / 4e010ec54 door; ONE corpus build per
+// tree, this library's own functions). The car parent 373a2947b reproduces every frozen figure below EXACTLY (37469; 399/2518/400;
+// 81/81; 58/1046/5508; 7523; afddb136) and the integration parent 7b3ffb6ee its own MERGE-R2 pins (26701; 266/1598/266; 86/86;
+// 59/976/5259; 7669; 4c5a458d). The merge 8dff691f3 and the working tree (75a9da9bc) read, byte-equal: scalarRows 37469 → 37359,
+// wizardNews final/accumulated/unique 399/2518/400 → 395/2511/396, regional 81/81 HOLDS. THE SHAPE HOLDS: 58 identities, none in or
+// out; ONE row moves a count: pulseHistory[].timeTicks[].summary[] 38/804 → 41/804 (the integration parent's own 41/804).
+// pulseHistory 45/1027/5331 → 45/1030/5331; regionalLog, chronicle and timeline hold. Totals 58/1046/5508 → 58/1049/5508; bytes
+// 7523 → 7523 (digit widths); digest afddb136 → 2bb92026. Reach 0..11 holds. ATTRIBUTION: the car's re-dealt cast × the rung-2
+// landing's pool census (−4 applied|tradition introductions and three more time-tick spellings, each at the integration side's
+// measured value), PLAUSIBLE, not bisected.
+// ── RE-RECORDED 2026-11-08 AT MERGE-WAVE's FIX-PUBLIC-VEIL MERGE POINT (7e65c7bec; the brief §0.6: the news family re-recorded in
+// ONE act, PEOPLE-1's precedent), the cause the veil lane's own: a veiled face's opaque id re-deals its keyed forks, which moves
+// the corpus's AO-0 year (the lane left these walkers red for this act). ONE corpus build at the merged tip, each library's own
+// functions (the voice throw disabled in an untracked scratch copy only). scalarRows 37359 → 37103; wizardNews 395/2511/396 →
+// 390/2486/391 (equal to the observed-shape walker's rung-35 pin); regional 81 → 82. Two identities ARRIVE (58 → 60).
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR1 MERGE POINT (e5f88930b, car 1 = lane/allegiance-car1-2026-11-08 at
+// 7395b5dab; the news family re-recorded in ONE act, MERGE-WAVE's 460b1b0d9 form), the cause car 1's own generator moves re-dealing
+// the corpus's AO-0 year: the hidden allegiance (5902f1a4a, dealt at the seam on its own keyed forks) and chiefly J-19 (d131ab158:
+// ensureNpcStates reads the hidden allegiance, so the lit pulse's knowledge desk changes; herald 443 → 450 on its lane). ONE corpus
+// build at the merged tip, each library's own functions (the voice throw disabled in an untracked scratch copy only). scalarRows
+// 37103 → 37664; wizardNews 390/2486/391 → 396/2525/396 and regional 82/82 → 80/80 (equal to the observed-shape walker's rung-36
+// pin). Identities HOLD at 60, two in and two out: pulseHistory[].consequenceOutcomes[].proposalPayload.reason 1/1 and
+// pulseHistory[].warAuthorityVerdicts[].kind 1/3 ARRIVE; pulseHistory[].selectedOutcomes[].metadata.resourceTaxonomy.{kind,type} 1/1
+// each LEAVE (the resource_depletion home's). pulseHistory 47/1050/5341 → 47/1040/5336 (20 surviving rows move a count; the
+// headline lanes selected 96/164 → 97/164, mechanical 26/50 → 25/50, consequence 79/188 → 78/187; corruptionEvents[].kind 1/22 →
+// 2/31); regionalLog 2/8/169 → 2/4/153 (changes[].kind 7/87 → 3/73, sourceEvent.type 1/82 → 1/80); chronicle and timeline hold.
+// Totals 60/1073/5529 → 60/1059/5508; bytes 7823 → 7798; digest f207dcfb → 8a4abd46. Reach 0..11 holds.
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR2 MERGE POINT (f51058995, car 2 = lane/allegiance-car2-2026-11-08 at
+// 46715e751; record 2, rung 37; the news family re-recorded in ONE act, 460b1b0d9's form), the cause car 2's own: the guild's push
+// (bbb1a4abc, GUILD_PUSH_TUNING / guildPushOf, the one draw line in rankPowers) re-deals the corpus's AO-0 year, with A6 the hall
+// (ce90cf16e) and the capture rows read from the one state (aca93cbc5) beside it (docs/allegiance/ALLEGIANCE_CAR2_2026-11-08.md §4).
+// ONE corpus build at the merged tip (562582982), each library's own functions (the voice throw disabled in an untracked scratch copy only).
+// scalarRows 37664 → 37801; wizardNews 396/2525/396 → 396/2535/396 and regional 80/80 → 81/81 (equal to the observed-shape walker's
+// rung-37 pin). Two identities ARRIVE (60 → 62), none leave: pulseHistory[].selectedOutcomes[].metadata.resourceTaxonomy.{kind,type}
+// 1/1 each (the resource_depletion home's return). pulseHistory 47/1040/5336 → 49/1056/5362 (13 surviving rows move a count; the
+// headline lanes selected 97/164 holds, mechanical 25/50 → 26/52, consequence 78/187 → 79/189); regionalLog 2/4/153 → 2/8/164
+// (changes[].kind 3/73 → 7/83, sourceEvent.type 1/80 → 1/81); chronicle and timeline hold. Totals 60/1059/5508 → 62/1079/5545;
+// bytes 7798 → 8098; digest 8a4abd46 → 141be9b3. Reach 0..11 holds.
+// ── RE-RECORDED 2026-11-09 AT MERGE-TRAIN's ALLEGIANCE-CAR3 MERGE POINT (c6ded8e3a, car 3 = lane/allegiance-car3-2026-11-08 at
+// 6ea8fb318; record 3, rung 38; the news family re-recorded in ONE act, 460b1b0d9's form), the cause car 3's own: e9070d614
+// ALLEGIANCE_TUNING.organizedCrime 0.10 → 0.05 re-deals the corpus's AO-0 year (bisected by the OSR seat as the one generator cause;
+// 8567f490d and 2f89aaeef are fence-only; docs/allegiance/ALLEGIANCE_CAR3_2026-11-08.md §8). ONE corpus build at the merged tip
+// (5f8f76238), each library's own functions (the voice throw disabled in an untracked scratch copy only).
+// scalarRows 37801 → 37645; wizardNews 396/2535/396 → 394/2525/395, regional 81/81 HOLDS (equal to the observed-shape walker's
+// rung-38 pin). Identities 62 → 64, four in and two out: {consequenceOutcomes,selectedOutcomes}[].metadata.warRulingRead.{kind,reason}
+// 1/1 each ARRIVE; selectedOutcomes[].metadata.resourceTaxonomy.{kind,type} 1/1 each LEAVE. pulseHistory 49/1056/5362 → 51/1063/5356
+// (35 surviving rows move a count; the headline lanes selected 97/164 → 97/165, mechanical 26/52 → 25/50, consequence 79/189 →
+// 81/188); regionalLog 2/8/164 → 2/4/158 (changes[].kind 7/83 → 3/77, sourceEvent.type 1/81 holds); chronicle and timeline hold.
+// Totals 62/1079/5545 → 64/1082/5533; bytes 8098 → 8401; digest 141be9b3 → 9bd27a79. Reach 0..11 holds.
 const EXPECTED_CORPUS = Object.freeze({
-  scalarRows: 26891, canonEventLogEntries: 1, wizardNewsFinalEntries: 270,
-  wizardNewsAccumulatedEntries: 1615, wizardNewsUnique: 270, pulseHistory: 12,
-  regionalEventLog: 86, regionalEventLogUnique: 86, aiChronicle: 1,
+  scalarRows: 38197, canonEventLogEntries: 1, wizardNewsFinalEntries: 417,
+  wizardNewsAccumulatedEntries: 2627, wizardNewsUnique: 419, pulseHistory: 12,
+  regionalEventLog: 71, regionalEventLogUnique: 71, aiChronicle: 1,
 });
 const EXPECTED_REGIONAL_ROOTS = Object.freeze([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
 const EXPECTED_FAMILY_TOTALS = Object.freeze([
   { family: 'chronicle', identities: 7, distinctValues: 7, occurrences: 7 },
-  { family: 'pulseHistory', identities: 46, distinctValues: 957, occurrences: 5042 },
-  { family: 'regionalLog', identities: 2, distinctValues: 4, occurrences: 189 },
+  { family: 'pulseHistory', identities: 51, distinctValues: 1507, occurrences: 5176 },
+  { family: 'regionalLog', identities: 2, distinctValues: 3, occurrences: 113 },
   { family: 'timeline', identities: 4, distinctValues: 8, occurrences: 12 },
 ]);
 // 2026-10-02 (THE VOICE PROGRAM wave 1, the owner: "Updates like these need to reflect actions not to potential"):
@@ -197,9 +291,55 @@ const EXPECTED_FAMILY_TOTALS = Object.freeze([
 // (+6, +7, +9: both towns named, a deed per kind) and the three SUMMARY rows shrink (−1, −3, −1: the NPC line now states
 // the aim alone, its move having gone to the headline). EXPECTED_ROWS_BYTES holds at 8000 by digit-width coincidence again;
 // the digest below is the pin that convicts.
-const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 59, distinctValues: 976, occurrences: 5250 });
-const EXPECTED_ROWS_BYTES = 7669;
-const EXPECTED_ROWS_SHA256 = '7c53b1cd8f181b7080021bb9c89074bea84a6205cab29ed0b6e491bb8c332832';
+// 2026-11-09 (STYLE-2-PULSE-FOLLOWUP, ruling C2; RE-RECORDED at 4edce0c76 through this library's own functions, one corpus
+// build per tree in an untracked scratch test): the clean worktree at bd07005b9 reproduces every frozen figure EXACTLY
+// (37645; 394/2525/395; 81/81; 64/1082/5533; 8401; 9bd27a79). At the lane's tip the corpus, the 64 identities and every
+// occurrence HOLD; FIVE rows move a distinct count only, all npcAgency's candidate reasons, which now carry four tellings
+// seeded on npc id + move (930b611cd, the refusal line: a single telling held its frame at the old rate):
+// pulseHistory[].consequenceOutcomes[].reasons[] 69 → 128, impactDigest[].reasons[] 77 → 146, mechanicalOutcomes[].reasons[]
+// 17 → 46, mechanicalRumorSeeds[].reasons[] 16 → 36, selectedOutcomes[].reasons[] 77 → 146. pulseHistory 51/1063/5356 →
+// 51/1309/5356; totals 64/1082/5533 → 64/1328/5533; bytes 8401 → 8404 (digit widths); digest 9bd27a79 → bc2f448a.
+// 2026-11-11 (STYLE-2-MERGE-7, closing act 4: re-keyed ONCE at the style wave's final tip by measurement, this library's own
+// functions over each tree's corpus at 3ce63ccc6 / 8acfc52f1 / 90774f2fa / 2cbe72ca1; the library reads every tree identically):
+// the frozen value is PULSE-FOLLOWUP's (point 20's four tellings already in it). STYLE-2-MERGE point 18 (SW-12 PULSE-LINES,
+// 8acfc52f1): scalarRows 37645 → 37029; nine pulseHistory rows — the consequence, impactDigest and selected headline and
+// summary rows gain spellings (+6/+6/+6/+8/+6/+8) and the three candidate-reason rows lose occurrences (441 → 398, 367 → 317,
+// 376 → 326): distinct +33, occurrences −143. Point 36 (the simulation batch: GREEN-TIP's seating by membership, PULSE-SITES):
+// scalarRows 37029 → 37067; twelve rows, one more consequence and one more mechanical outcome (188 → 189, 50 → 51), the
+// impactKind and tags rows +1 spelling: distinct +1, occurrences +12. Nothing else, at any tree. Totals 64/1328/5533 →
+// 64/1362/5402; pulseHistory 51/1309/5356 → 51/1343/5225; bytes 8404 → 8408; digest bc2f448a → 3198eb2f.
+// 2026-11-15 (THE CLOSE OF THE TAIL ROUND, TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat;
+// record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json; RE-RECORDED at the golden's tree 8c11f73ea through this
+// library's own functions, one corpus build, an untracked scratch script, IN THE SAME ACT AS the baseline): the round's declared
+// generation moves (a face for every seat of power and the casts after it; the data, upkeep and economy lanes' fields) re-deal the
+// observed corpus's towns and with them the simulated year: scalarRows 37067 → 38121; the news layer 394/2525/395 → 415/2622/417;
+// the regional log 81/81 → 71/71; FOUR identities leave (pulseHistory[].consequenceOutcomes[] and selectedOutcomes[]
+// .metadata.warRulingRead.kind/.reason, 1/1 each: no war ruling is read in this corpus's year), 45 rows move a count, none arrives.
+// Totals 64/1362/5402 → 60/1509/5302; pulseHistory 51/1343/5225 → 47/1491/5170; regionalLog 2/4/158 → 2/3/113;
+// bytes 8408 → 7806; digest 3198eb2f → ed98c528.
+// 2026-11-15 (THE CLOSE OF THE ROUND BAR3, BAR3-CLOSE-DOORS-1; the chair's ruling OC1, vetoable by the owner; RE-RECORDED at the
+// doors' tree c5d49d609 (the joined line 98363cb84 + the sweep-a repair, merged) through this library's own functions, one corpus
+// build, an untracked scratch script, IN THE SAME ACT AS the baseline and the news-headline baseline): THE TAIL CLOSE'S MOVE,
+// REVERSED. No commit of the two rounds BAR2, BAR3 touches the walker's union of the pulse, the events, the region, the news voice,
+// the chronicle, the contract libraries or their baselines (`git log 74ded1800..` over its 23 paths: empty); the rounds' declared
+// generation moves re-deal the observed corpus's towns, and the war ruling is read again (the writers' reach's ruling WR2): the
+// FOUR identities the tail close saw leave ARRIVE (pulseHistory[].consequenceOutcomes[] and selectedOutcomes[]
+// .metadata.warRulingRead.kind/.reason, 1/1 each); no other identity arrives or leaves; 10 rows move a count (consequence
+// proposalPayload.reason 1/2 → 2/2, reasons[] 135 → 137, summary 130 → 131; impactDigest reasons[] 161 → 163, summary 110 → 111;
+// rollExplanations proposalPayload.kind 2/21 → 2/22, .reason 4/10 → 5/11; selected proposalPayload.reason 4 → 5, reasons[] 162 →
+// 164, summary 117 → 118). scalarRows 38121 → 38127; the news layer 415/2622/417 and the regional log 71/71 hold.
+// Totals 60/1509/5302 → 64/1525/5308; pulseHistory 47/1491/5170 → 51/1507/5176; bytes 7806 → 8408; digest ed98c528 → 85f41b79.
+// 2026-11-18 (THE CLOSE OF 2026-11-18, CLOSE-DOORS-1B; as BAR3-CLOSE-DOORS-1's ruling OC1, vetoable by the owner; RE-RECORDED at the
+// frozen tree 70e557d5b through this library's own functions, one corpus build, an untracked scratch script, run on the working tree,
+// which differs from 70e557d5b only in register and test files outside src/ and one register-only table no src module imports; IN THE
+// SAME ACT AS the baseline and both news baselines): `git log --first-parent 600b7683a..70e557d5b` over the walker's 23 EXPECTED_UNION
+// paths is EMPTY; the span's declared generation moves re-deal the observed corpus's year (not bisected). EXPECTED_CORPUS only:
+// scalarRows 38127 → 38197; the news layer 415/2622/417 → 417/2627/419 (two introductions, applied|boom and applied|urban_fabric; at
+// news-voice-contract.mjs's RE-RECORDED block); canonEventLogEntries 1, pulseHistory 12, the regional log 71/71 and aiChronicle 1
+// hold. NO IDENTITY ARRIVES OR LEAVES AND NO ROW MOVES: totals 64/1525/5308, the family totals, bytes 8408 and digest 85f41b79 hold.
+const EXPECTED_TOTALS = Object.freeze({ families: 4, identities: 64, distinctValues: 1525, occurrences: 5308 });
+const EXPECTED_ROWS_BYTES = 8408; // the close of the round BAR3 (2026-11-15, ruling OC1): 7806 → 8408, the four identities arrive again; the close of the tail round (2026-11-15): 8408 → 7806, four identities leave; STYLE-2-MERGE-7 closing act 4: 8404 → 8408 (the final tip's re-key); MERGE-WAVE (FIX-PUBLIC-VEIL merge): 7523 → 7823, two identities arrive; MERGE-TRAIN (ALLEGIANCE-CAR1 merge): 7823 → 7798, two in and two out; (ALLEGIANCE-CAR2 merge): 7798 → 8098, two in; (ALLEGIANCE-CAR3 merge): 8098 → 8401, four in and two out; STYLE-2-PULSE-FOLLOWUP: 8401 → 8404, distinct counts only
+const EXPECTED_ROWS_SHA256 = '85f41b79e75e9ccf66f6b52bdde748e8e9498daf23361d35c5fd38c71fab0a9f';
 const codepoint = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const identityOf = (row) => `${row.family}\0${row.path}\0${row.field}`;

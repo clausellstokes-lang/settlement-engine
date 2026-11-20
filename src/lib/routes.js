@@ -24,6 +24,7 @@
 import {
   ABOUT_WHAT_VIEW, destinationForLegacyTab, destinationForLegacySearch,
 } from './aboutMapping.js';
+import { COMPENDIUM_SECTION_SLUGS } from './compendiumSections.js';
 
 const SITE_NAME = 'SettlementForge';
 const DEFAULT_VIEW = 'generate';
@@ -181,6 +182,10 @@ const PARAM_ROUTES = Object.freeze([
   // 289 named entries into their own indexable path routes. The sitemap +
   // prerender enumerate the ids from the committed compendium index, so this ONE
   // pattern carries the whole tail without a 289-line eager route table.
+  // The Compendium SECTION pages (the owner, 2026-11-10: each landing box opens its
+  // own page). Their slugs are RESERVED (lib/compendiumSections.js) and matched
+  // BEFORE the per-entry pattern below, which would otherwise swallow them.
+  { view: 'compendium', re: new RegExp(`^/compendium/(${COMPENDIUM_SECTION_SLUGS.join('|')})$`), build: m => ({ section: m[1] }) },
   { view: 'compendium', re: /^\/compendium\/([a-z0-9][a-z0-9-]*)$/, build: m => ({ entry: m[1] }) },
   { view: 'gallery', re: /^\/gallery\/(terrain|tier)\/([a-z0-9_-]+)$/, build: m => ({ hub: { facet: m[1], value: m[2] } }) },
   { view: 'gallery', re: /^\/gallery\/(at-war|most-alive)$/, build: m => ({ hub: { facet: m[1] } }) },
@@ -322,6 +327,10 @@ export function viewToPath(view, params) {
   // THE SEED POST (V-13): /world/<share-code>.
   if (params && params.code && view === 'world') {
     return `/world/${encodeURIComponent(params.code)}`;
+  }
+  // A Compendium section page (/compendium/<section-slug>).
+  if (params && params.section && view === 'compendium') {
+    return `/compendium/${encodeURIComponent(params.section)}`;
   }
   // Per-entry Compendium path (V-19 long tail).
   if (params && params.entry && view === 'compendium') {

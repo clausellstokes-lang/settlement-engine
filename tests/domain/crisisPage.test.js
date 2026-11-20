@@ -4,11 +4,13 @@
  * tab"): one section per active crisis, worst first, each with exactly the design's sections, every
  * cast door resolving through the dossier's entity index, and the crisis itself indexed for the tab.
  */
-import { describe, it, expect } from 'vitest';
+import { beforeAll, describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { composeCrisisPage, hasActiveCrisis, CRISIS_PAGE_COPY } from '../../src/domain/crisis/crisisPage.js';
 import { buildDossierEntityIndex, TYPE_TO_TAB } from '../../src/domain/dossier/entityLinks.js';
 import { _resolveEntity } from '../../src/store/settlementSliceHelpers.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 
 const gen = (seed, settType, stressTypes) => generateSettlementPipeline({ settType, stressTypes }, null, { seed, customContent: {} });
 const entriesOf = (s) => (Array.isArray(s.stress) ? s.stress : [s.stress]).filter(Boolean);
@@ -23,10 +25,14 @@ describe('the Crisis page, one section per active crisis', () => {
     for (const section of page) {
       const entry = entries.find((e) => e.type === section.type);
       expect(section.line.startsWith(entry.label)).toBe(true);
-      expect(section.line).toContain(CRISIS_PAGE_COPY.nature[entry.cast.nature]);
+      expect(section.line).toBe(`${entry.label}.`); // W4 second seat, row 21: the kind is the heading, no classification
       expect(section.cast.map((r) => r.name)).toEqual(entry.cast.roles.map((r) => r.name));
       for (const r of section.cast) expect(r.reason.length).toBeGreaterThan(0);
-      expect(section.stakes.length).toBe(entry.cast.stakes.length);
+      // re-keyed by identity (TAIL-CRISIS-6, K25 (c)): every stake the record holds prints its row, but an untouched power's
+      // (the record's split with "it could side with either camp", where the page finds no quarrel and no seat) prints none
+      const shown = section.stakes.map((k) => k.factionId);
+      for (const k of entry.cast.stakes) if (k.reason !== 'it could side with either camp') expect(shown).toContain(k.factionId);
+      for (const id of shown) expect(entry.cast.stakes.map((k) => k.factionId)).toContain(id);
       expect(section.levers.map((l) => l.institution)).toEqual(entry.cast.levers.map((l) => l.institution));
       expect(section.seeFirst.map((f) => f.id)).toEqual(['food', 'defence'].filter((id) => section.seeFirst.some((f) => f.id === id)));
       expect(section.seeFirst.some((f) => f.id === 'defence')).toBe(true);
@@ -69,5 +75,55 @@ describe('the Crisis page, one section per active crisis', () => {
   it('a crisis the DM\'s own event began says so; a generated one prints no onset', () => {
     const page = composeCrisisPage({ stress: [{ type: 'famine', label: 'Famine', addedByEventId: 'e1' }, { type: 'wartime', label: 'Wartime' }] });
     expect(page.map((x) => x.line)).toEqual([`Famine, ${CRISIS_PAGE_COPY.begunByYou}.`, 'Wartime.']);
+  });
+});
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3; STYLE-2-SURFACES A·C4): "Noble Families: split. not touched yet; it
+// could side with either camp." contradicted itself on every untouched row (soak1k-4, -5, -9, -10). The page prints
+// an untouched power as having no stake yet; the record keeps its split for the waverer's rule.
+describe('the Crisis page: an untouched power is never "split"', () => {
+  it('an untouched stake prints no row (re-keyed by identity, TAIL-CRISIS-6 K25 (c): it printed "no stake yet"), and no row says both split and untouched', () => {
+    const s = gen('crisis-page-pair', 'town', ['famine', 'under_siege']);
+    for (const section of composeCrisisPage(s)) {
+      for (const k of section.stakes) {
+        const printed = `${k.factionId}: ${CRISIS_PAGE_COPY.stake[k.stake]}. ${k.reason}.`;
+        // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
+        expect(printed).not.toMatch(/split\. not touched/);
+        // TAIL-CRISIS batch 4 (K12, re-keyed by identity): the label has its verb, agreeing with the name
+        if (/either camp/.test(k.reason)) expect(['has no stake yet', 'have no stake yet']).toContain(CRISIS_PAGE_COPY.stake[k.stake]);
+      }
+    }
+    expect(composeCrisisPage(s).some((x) => x.stakes.some((k) => k.stake === 'untouched' || k.stake === 'untouchedMany'))).toBe(false);
+    // what prints instead: the record's stakes that are not untouched keep their rows
+    expect(composeCrisisPage(s).some((x) => x.stakes.length > 0)).toBe(true);
+  });
+});
+
+// R3-CODE-C-3 (ROUND-3-CUT-INCREMENT #ww-702, #ww-1263): the page's two claims of zero say only what the record holds.
+// THE GUARD TOWNS are the readers' own, born in the app's shape.
+describe('R3-CODE-C-3: an empty cast and an empty lever list claim no zero the record does not hold', () => {
+  beforeAll(async () => { await loadGenerationLawPayloads(); });
+  const appShape = (seed) => {
+    const m = seed.match(/^rww-(\w+)-([a-z_]+)-(\d+)$/);
+    return generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: m[1], selectedStressesRandom: false, selectedStresses: m[2] === 'calm' ? [] : [m[2]], _randomizePriorities: true }), null, { seed, customContent: {} });
+  };
+  it('the copy: no institution lever is not nobody holding the lever; an empty cast is not a crisis that touches nobody', () => {
+    expect(typeof CRISIS_PAGE_COPY.noLevers === 'string' && CRISIS_PAGE_COPY.noLevers.trim().length > 0).toBe(true);
+    // anchored: the copy is asserted a non-empty string on the line above, so a renamed or emptied key reds there
+    expect(CRISIS_PAGE_COPY.noLevers).not.toMatch(/^nobody/i);
+    expect(CRISIS_PAGE_COPY.nobody).not.toBe('nobody');
+  });
+  it('rww-thorp-monster_pressure-1: the acting warden holds the lever role, and the lever line says no house holds it', () => {
+    const [section] = composeCrisisPage(appShape('rww-thorp-monster_pressure-1'));
+    expect(section.cast.some((r) => r.role === 'lever' && r.temporary)).toBe(true);
+    expect(section.levers).toEqual([]);
+    expect(CRISIS_PAGE_COPY.noLevers).toBe('No house here holds what this crisis turns on.');
+  });
+  it('rww-metropolis-infiltrated-1: the cast is empty (the infiltrator is the roster\'s secret), and the page does not say nobody', () => {
+    const s = appShape('rww-metropolis-infiltrated-1');
+    const [section] = composeCrisisPage(s);
+    expect(section.cast).toEqual([]);
+    expect((s.npcs || []).some((n) => /infiltrat/i.test(String(n?.secret?.what ?? '')))).toBe(true);
+    expect(CRISIS_PAGE_COPY.nobody).toBe('no one yet named');
   });
 });

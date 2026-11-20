@@ -258,40 +258,49 @@ export const MOUNT_RUNGS = Object.freeze({
  */
 export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
-    mount: 'economics.prosperityHeader', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-1', rung: 'sentence',
+    mount: 'economics.prosperityHeader', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-1', rung: 'sentence', dimensions: ['crisis', 'hunger'],
   }),
   Object.freeze({
-    mount: 'economics.economyTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-8', rung: 'glance', dimensions: ['walls'],
+    mount: 'economics.economyTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-8', rung: 'glance', dimensions: ['crisis', 'hunger', 'walls'],
   }),
   Object.freeze({
-    mount: 'economics.foodTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance',
+    mount: 'economics.foodTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance', dimensions: ['hunger'],
   }),
   Object.freeze({
-    mount: 'economics.seasonTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance',
+    mount: 'economics.seasonTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance', dimensions: ['hunger'],
   }),
   Object.freeze({
-    mount: 'economics.foodSecurity', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-9', rung: 'sentence', dimensions: ['walls'],
+    mount: 'economics.foodSecurity', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-9', rung: 'sentence', dimensions: ['crisis', 'hunger', 'walls'], // BAR4-CORPUS-ECO 7354471e5: SECURE v2 `no crisis` (E2)
   }),
   Object.freeze({
-    mount: 'economics.commercialProfile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-12', rung: 'sentence', dimensions: ['walls'],
+    mount: 'economics.commercialProfile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-12', rung: 'sentence', dimensions: ['hunger', 'walls'],
   }),
   Object.freeze({
     mount: 'economics.shadowEconomy', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-6', rung: 'sentence',
+  }),
+  // W1 ECO (2026-11-07, WAVE-RULINGS item 10): DS-SUP-2 MOUNTED in the same commit that
+  // authors in it — the upstream-weak lens (construction C9) under the Economic Flows cards.
+  Object.freeze({
+    mount: 'economics.upstreamSupply', tab: 'economics', desk: 'economy', blockId: 'DS-SUP-2', rung: 'sentence',
   }),
   Object.freeze({
     mount: 'economics.tradeFlow', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-3', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
-    mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', blockId: 'DS-POW-1', rung: 'sentence',
+    // ⛔ GLANCES since the owner's word of 2026-11-09 (OWNER-WORDS-DOSSIER item 3): the Power tab's governance
+    // block is ONE paragraph read off the record (governanceAccount.js); the desk and the corpus are untouched.
+    mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', blockId: 'DS-POW-1', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'power.stabilityHeader', tab: 'power', desk: 'power', blockId: 'DS-POW-2', rung: 'sentence', dimensions: ['walls'],
+    // ⛔ GLANCES since the owner's word of 2026-11-09 (OWNER-WORDS-DOSSIER item 3): the Power tab's governance
+    // block is ONE paragraph read off the record (governanceAccount.js); the desk and the corpus are untouched.
+    mount: 'power.stabilityHeader', tab: 'power', desk: 'power', blockId: 'DS-POW-2', rung: 'glance', dimensions: ['walls'],
   }),
   Object.freeze({
     mount: 'power.criminalUnderside', tab: 'power', desk: 'power', blockId: 'DS-POW-6', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
-    mount: 'power.succession', tab: 'power', desk: 'power', blockId: 'DS-POW-4', rung: 'sentence',
+    mount: 'power.succession', tab: 'power', desk: 'power', blockId: 'DS-POW-4', rung: 'sentence', dimensions: ['succession', 'unrest'],
   }),
   Object.freeze({
     mount: 'power.factionLadder', tab: 'power', desk: 'power', blockId: 'DS-POW-3', rung: 'sentence',
@@ -306,7 +315,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'overview.crisisBanners', tab: 'overview', desk: 'stressors', blockId: 'DS-STR-1', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
-    mount: 'overview.activeConditions', tab: 'overview', desk: 'stressors', blockId: 'DS-CND-1', rung: 'sentence', dimensions: ['walls'],
+    mount: 'overview.activeConditions', tab: 'overview', desk: 'stressors', blockId: 'DS-CND-1', rung: 'sentence', dimensions: ['walls', 'crisis'], // census-2b item 5 (70d05b25b): FAMILY: recovery v4 carries the kernel `crisis` mark
   }),
   Object.freeze({
     mount: 'overview.stressorLifecycle', tab: 'overview', desk: 'stressors', blockId: 'DS-STR-2', rung: 'sentence', dimensions: ['walls'],
@@ -324,7 +333,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
       + 'calm town should open that fold is a LAYOUT ruling for the chair, not a lane\'s.',
   }),
   Object.freeze({
-    mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-2', rung: 'sentence',
+    mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-2', rung: 'sentence', dimensions: ['threat', 'crisis'],
   }),
   // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T1 T1-6/T1-9/T1-10, the owner's delegation;
   // rubric R2). Each of these three positions printed a sentence beside rows that already
@@ -365,29 +374,35 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'overview.warnings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-7', rung: 'glance',
   }),
+  // ⛔ THE GROUND GLANCES (the owner, 2026-11-09, OWNER-WORDS-DOSSIER item 2: "In 'the place' the second
+  // paragraph seems redundant. The first was amazing."). DS-GEN-12's lenses ("In {settlement} the water
+  // comes first…", "{settlement} sits where the ground let it stand…") opened the woven block by
+  // re-introducing the place the arrival scene above it had just drawn. Struck here, at the door: the
+  // screen and the print both read this row, the desk and the corpus are untouched, the block stays
+  // MOUNTED (never parked dark), and restoring it is this one word.
   Object.freeze({
-    mount: 'overview.ground', tab: 'overview', desk: 'general', blockId: 'DS-GEN-12', rung: 'sentence',
+    mount: 'overview.ground', tab: 'overview', desk: 'general', blockId: 'DS-GEN-12', rung: 'glance',
   }),
   Object.freeze({
     mount: 'overview.market', tab: 'overview', desk: 'general', blockId: 'DS-GEN-13', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'overview.institutions', tab: 'overview', desk: 'general', blockId: 'DS-GEN-17', rung: 'sentence',
+    mount: 'overview.institutions', tab: 'overview', desk: 'general', blockId: 'DS-GEN-17', rung: 'sentence', dimensions: ['walls'], // census-2b item 2 (db3ed88c1): GARRISONED v2 declares walls ("not only in stone")
   }),
   Object.freeze({
     mount: 'defense.armedForces', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-5', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'defense.postureHeader', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-1', rung: 'sentence',
+    mount: 'defense.postureHeader', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-1', rung: 'sentence', dimensions: ['threat', 'walls'], // CENSUS-5b unit 1: WEAK v2 declares walls (R-O)
   }),
   Object.freeze({
     mount: 'defense.militaryStatus', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-8', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'defense.wallRationale', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-11', rung: 'sentence',
+    mount: 'defense.wallRationale', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-11', rung: 'sentence', dimensions: ['threat', 'unrest'], // BAR4-CORPUS-DEF 6f8081add: WALLED-QUIET v2, v3 `no unrest`, twin v7 `unrest` (D3)
   }),
   Object.freeze({
-    mount: 'defense.criminalStructure', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-4', rung: 'sentence',
+    mount: 'defense.criminalStructure', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-4', rung: 'sentence', dimensions: ['unrest'],
     visibility: 'closed-section',
     visibilityReason: 'The same DefenseTab fold as defense.publicOrder above, and the same '
       + 'argument: the criminal-structure CARD the desk was handed the key of (csd.label and '
@@ -434,7 +449,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'war.dormantNote', tab: 'war', desk: 'warFaith', blockId: 'DS-WAR-3', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'faith.patronSeat', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-1', rung: 'sentence', dimensions: ['walls'],
+    mount: 'faith.patronSeat', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-1', rung: 'sentence', dimensions: ['walls', 'crisis'],
   }),
   Object.freeze({
     mount: 'faith.teaser', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-2', rung: 'sentence',
@@ -445,14 +460,26 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'faith.nicheRow', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-3', rung: 'glance',
   }),
+  // DS-FTH-4 MOUNTED (W4 PEOPLE, 2026-11-07; WAVE-RULINGS item 10): its generation lens reads
+  // the birth-time stress flags (`safetyProfile.flags`), which every settlement carries, so the
+  // block speaks on the deity-free town too. The four religion-state pools stay undrawable
+  // until the religion state and `templeWealth` reach the record (the desk keys none of them).
   Object.freeze({
-    mount: 'defense.supportingCapabilities', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-6', rung: 'sentence', dimensions: ['walls'],
+    mount: 'faith.templeGround', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-4', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'defense.supportingCapabilities', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-6', rung: 'sentence', dimensions: ['threat', 'walls'],
   }),
   Object.freeze({
     mount: 'viability.magicDependency', tab: 'viability', desk: 'defense', blockId: 'DS-DEF-9', rung: 'sentence',
   }),
+  // DS-DEF-12 (W2 DEF construction C3–C5, 2026-11-07): the isolation-support finding, said on
+  // the Viability tab where the finding applies (no dependable road, river or port); silent elsewhere.
   Object.freeze({
-    mount: 'economics.exportPosture', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-10', rung: 'sentence',
+    mount: 'viability.isolationSupport', tab: 'viability', desk: 'defense', blockId: 'DS-DEF-12', rung: 'sentence',
+  }),
+  Object.freeze({
+    mount: 'economics.exportPosture', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-10', rung: 'sentence', dimensions: ['hunger'],
   }),
   Object.freeze({
     mount: 'resources.groundAndWorkings', tab: 'resources', desk: 'economy', blockId: 'DS-ECO-11', rung: 'sentence',
@@ -461,7 +488,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'services.catalogStanding', tab: 'services', desk: 'economy', blockId: 'DS-SUP-3', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'daily_life.standingOfLiving', tab: 'daily_life', desk: 'economy', blockId: 'DS-ECO-8', rung: 'sentence', dimensions: ['walls'],
+    mount: 'daily_life.standingOfLiving', tab: 'daily_life', desk: 'economy', blockId: 'DS-ECO-8', rung: 'sentence', dimensions: ['crisis', 'hunger', 'walls'],
   }),
   // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T3 H4; rubric R2/R4): "What the years have
   // made of it" was two-template boilerplate, and its marker event disagreed with the
@@ -478,6 +505,13 @@ export const DOSSIER_MOUNTS = Object.freeze([
   // sentence the history page keeps, inside Founding. DS-GEN-16 has no speaking position.
   Object.freeze({
     mount: 'history.record', tab: 'history', desk: 'general', blockId: 'DS-GEN-16', rung: 'glance',
+  }),
+  // W5 construction 2026-11-07 (WIRING-RULINGS R-W1; WAVE-RULINGS item 10, "a line that prints
+  // nowhere is not construction"): DS-GEN-16's ONE speaking position, beneath the events list —
+  // the record's past-to-present link (`legacyAnnotations[]`) and the recent blow still in
+  // living memory (`siegeNarrative`). The record line above stays a glance (H3).
+  Object.freeze({
+    mount: 'history.legacy', tab: 'history', desk: 'general', blockId: 'DS-GEN-16', rung: 'sentence',
   }),
   Object.freeze({
     mount: 'viability.verdict', tab: 'viability', desk: 'general', blockId: 'DS-GEN-11', rung: 'sentence',
@@ -526,7 +560,6 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   'DS-DEF-10',
   'DS-ECO-4',
   'DS-ECO-5', 'DS-SUP-1', 'DS-ECO-7',
-  'DS-SUP-2',
   'DS-POP-1', 'DS-POP-2', 'DS-GEN-1',
   'DS-GEN-10', 'DS-GEN-15',
   // ── warFaith, after DESK CAR 4 ─────────────────────────────────────────────────────
@@ -542,15 +575,10 @@ export const UNMOUNTED_BLOCKS = Object.freeze([
   //     aftermath, blockade and treaty-burden pools need activeConditions/spatialLedgers
   //     reads the war tab does not perform. Lit by a token-returning resistance ladder and
   //     an aftermath reader on the tab.
-  //   DS-FTH-4 — ⛔ `templeWealth` HAS NO WRITER IN THE ENGINE (a WF-7 design-doc future;
-  //     the estate's own DESIGN_FP_ARCH_WF.md V27 row records `grep templeWealth in
-  //     src/domain: 0` as VERIFIED), and `tenure` is not among the seven fields
-  //     `projectReligionStateOntoSettlement` puts on `config.faithProfile.deities[]`. Its
-  //     one remaining pool (CONTESTED) is the fact DS-FTH-1 already speaks on that tab.
-  //     Lit by the banded temple stock plus `tenure` in the projection.
+  //   (DS-FTH-4 left this list on 2026-11-07, W4 PEOPLE: mounted at `faith.templeGround` on its
+  //     generation lens; its religion-state pools stay undrawn, see the mount row.)
   'DS-WAR-4',
   'DS-WAR-5',
-  'DS-FTH-4',
 ]);
 
 /**

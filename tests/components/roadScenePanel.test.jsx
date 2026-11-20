@@ -62,6 +62,9 @@ describe('RoadScenePanel — pick → compose → render (§14)', () => {
     STORE = buildStore({ authed: true, selectedSettlementId: 'a' }); // origin defaults to the map selection
     const { container, getByLabelText } = render(<RoadScenePanel campaign={campaign} />);
     expect(container.querySelector('[data-testid="road-scene-panel"]')).toBeTruthy();
+    // STYLE-2 SW-12 (ledger D·94): the panel's note names no "truth" and no "writes".
+    expect(container.querySelector('[data-testid="road-scene-panel"]').textContent)
+      .toMatch(/The road\s+shows the world as it really is, and staging it changes nothing\./);
     // origin pre-filled from selectedSettlementId; pick a destination.
     fireEvent.change(getByLabelText('To'), { target: { value: 'b' } });
     // THE ROAD section renders with the leg heading.

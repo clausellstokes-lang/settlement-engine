@@ -27,18 +27,35 @@ function routed(sections) {
 describe('the crisis page names a thorp a thorp', () => {
   beforeAll(async () => { await ensureLaws(); });
 
-  it('soak1k-48 (a thorp): the event line reads "a crisis of the thorp itself"', () => {
+  // W4 PEOPLE second seat (STYLE-AUDIT row 21): the event line no longer prints the classification
+  // ("a crisis of the town itself"), so it carries no place noun at all; the pin is re-keyed to the
+  // line the thorp now prints, the kind as its heading.
+  it('soak1k-48 (a thorp): the event line is the kind, with no classification', () => {
     const { settlement } = birth(48);
     expect(settlement.tier).toBe('thorp');
     const page = composeCrisisPage(settlement);
     expect(page.length).toBeGreaterThan(0);
     expect(routed(page)).not.toMatch(/\bthe town\b/i); // anchored: page.length > 0 above, and the next line pins the thorp's own event line in this page
-    expect(page.map((s) => s.line).join(' ')).toMatch(/a crisis of the thorp itself/);
+    expect(page.map((s) => s.line)).toEqual(page.map((s) => `${s.label}.`));
   });
 
-  it('soak1k-85 (a hamlet): the defender reason reads "the hamlet\'s defence"', () => {
-    const { settlement } = birth(85);
-    expect(settlement.tier).toBe('hamlet');
+  // 2026-11-07 PEOPLE-1 CAST: re-keyed from soak1k-85 to a crafted hamlet record. The house-fallback reason ("the
+  // town's defence, with no one on the roster leading it") is stored on a record only where NO roster person leads
+  // the defence; the cast faces every garrison and militia house (R-P2), so on the 1,000 at the lane's tip no record
+  // of any tier stores it (probed: zero of 1,000). The routing claim is kept on the stored sentence itself.
+  it('a hamlet record storing the defender house-fallback reason reads "the hamlet\'s defence"', () => {
+    const settlement = {
+      tier: 'hamlet',
+      name: 'Testholm',
+      stress: [{
+        type: 'under_siege', label: 'Under Siege',
+        cast: {
+          nature: 'external',
+          roles: [{ role: 'defender', kind: 'institution', id: 'Palisade or earthworks', name: 'Palisade or earthworks', reason: "the town's defence, with no one on the roster leading it", temporary: false }],
+          absent: [], stakes: [], levers: [],
+        },
+      }],
+    };
     const text = routed(composeCrisisPage(settlement));
     expect(text).not.toMatch(/\bthe town\b/i); // anchored: the next line pins the hamlet's own defender reason in this same text
     expect(text).toMatch(/the hamlet's defence/);
@@ -50,6 +67,6 @@ describe('the crisis page names a thorp a thorp', () => {
       name: 'Testholm',
       stress: [{ type: 'succession_void', label: 'Succession Void', cast: { nature: 'social', roles: [], absent: [], stakes: [], levers: [] } }],
     });
-    expect(page[0].line).toBe('Succession Void, a crisis of the town itself.');
+    expect(page[0].line).toBe('Succession Void.');
   });
 });

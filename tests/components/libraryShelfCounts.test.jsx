@@ -127,7 +127,6 @@ function baseStore(user = { id: 'owner-A' }) {
     applyQueuedRegionalImpact: vi.fn(),
     ignoreQueuedRegionalImpact: vi.fn(),
     resolveRegionalImpact: vi.fn(),
-    advanceCampaignRegionalImpacts: vi.fn(),
     applyAllQueuedRegionalImpacts: vi.fn(),
     ignoreAllQueuedRegionalImpacts: vi.fn(),
     getCampaignMembershipBlock: vi.fn(() => null),
@@ -221,7 +220,7 @@ const phantomRow = (seed, name, n) => {
 
 /** The search box, whose placeholder is the minimal face's ONLY statement of the count. */
 const searchBox = () => /** @type {HTMLInputElement} */ (
-  screen.getByLabelText('Search settlements, NPCs, and factions'));
+  screen.getByLabelText('Search settlements, NPCs, and powers'));
 
 /**
  * The full face's count sentence, found by its SHAPE rather than its value — the toolbar

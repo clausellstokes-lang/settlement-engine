@@ -17,6 +17,28 @@ import { numberWord } from '../display/numberWords.js';
 const WEAKNESS_MEMORY_COOLDOWN = 3;
 
 /**
+ * THE PEOPLE IN A RULE'S REASON (STYLE-RULINGS-2 C1, SW-11): a reason a reader sees names the
+ * towns it is about, read from the snapshot the rule already holds (the headline's own read,
+ * relationshipRuleHelpers :: relationshipDeedHeadlines). A town the snapshot cannot name takes
+ * the world's stand-in, never its id.
+ * @param {{ snapshot?: unknown }} ctx @param {unknown} id @returns {string}
+ */
+export function townName(ctx, id) {
+  return itemFor(ctx.snapshot, id)?.name || 'a neighbouring town';
+}
+
+/**
+ * The pair in SAVE-ID order, as the headline orders it: authoring A->B or B->A must print the
+ * same words (relationshipOrientationInvariance.test.js).
+ * @param {{ snapshot?: unknown, edge?: unknown }} ctx @returns {[string, string]}
+ */
+export function pairNames(ctx) {
+  const { from, to } = getRelationshipSettlements(ctx.edge);
+  const [a, b] = [String(from), String(to)].sort();
+  return [townName(ctx, a), townName(ctx, b)];
+}
+
+/**
  * Recurring tribute keeps moving the vassalage reducers every time it wins its
  * roll, but the Chronicle only needs the onset or a semantic transition. The
  * stable condition id carries the overlord role; looking it up on the current
@@ -99,7 +121,7 @@ function neutralRules(ctx) {
         targetSaveId: pairStableId(ctx.edge),
         severity: 0.18 + combinedConflict * 0.34,
         probability: 0.12 + combinedConflict * 0.2,
-        reasons: ["Local pressure creates a minor incident between neutral settlements."],
+        reasons: [`There has been trouble on the border between ${pairNames(ctx)[0]} and ${pairNames(ctx)[1]}, and bad blood between them is growing.`],
         relationshipPatch: {
           resentment: clamp01(relState.resentment + 0.04),
           fear: clamp01(relState.fear + 0.02),
@@ -194,7 +216,7 @@ function tradePartnerRules(ctx) {
         targetSaveId: pairStableId(ctx.edge),
         severity: 0.24 + tradeStress * 0.45,
         probability: 0.14 + tradeStress * 0.22,
-        reasons: ["Trade pressure disrupts routes and introduces resentment or leverage."],
+        reasons: [`Trade on the road between ${pairNames(ctx)[0]} and ${pairNames(ctx)[1]} is being disrupted, and bad feeling is growing on both sides.`],
         relationshipPatch: {
           trust: clamp01(relState.trust - 0.03),
           resentment: clamp01(relState.resentment + 0.04),
@@ -295,7 +317,7 @@ function alliedRules(ctx) {
         targetSaveId: obligatedId,
         severity: 0.28 + Math.max(fromThreat, toThreat) * 0.48,
         probability: 0.1 + relState.pactStrength * 0.22 + relState.trust * 0.12,
-        reasons: ["An ally faces a gated obligation to mirror the hostility or cold-war pressure bearing on its partner."],
+        reasons: [`${townName(ctx, obligatedId)} is bound by its alliance to stand with ${townName(ctx, pressuredId)}, which is under threat, and must decide how far to go.`],
         relationshipPatch: {
           militaryBurden: clamp01(relState.militaryBurden + 0.08),
           obligationFatigue: clamp01(relState.obligationFatigue + 0.06),
@@ -333,9 +355,8 @@ function alliedRules(ctx) {
         probability: clamp01((0.08 + relState.trust * 0.14 + relState.pactStrength * 0.16) * hesitation),
         reasons: [
           hesitation < 1
-            ? "The ally supports cold-war pressure through sanctions or intelligence, but hesitates because the target is also tied to them."
-            : "The ally supports cold-war pressure with sanctions, intelligence, or proxy aid.",
-          `Cold-war third party: ${supportedColdWar.thirdPartyId}.`,
+            ? `${townName(ctx, supportingAllyId)} is backing its ally ${townName(ctx, supportedAllyId)} against ${townName(ctx, supportedColdWar.thirdPartyId)}, but warily, because it has ties to ${townName(ctx, supportedColdWar.thirdPartyId)} itself.`
+            : `${townName(ctx, supportingAllyId)} is backing its ally ${townName(ctx, supportedAllyId)} in its cold war with ${townName(ctx, supportedColdWar.thirdPartyId)}.`,
         ],
         relationshipPatch: {
           militaryBurden: clamp01(relState.militaryBurden + 0.04 * hesitation),
@@ -536,7 +557,7 @@ function clientRules(ctx) {
         ruleId: "client_autonomy_bid",
         severity: 0.42 + autonomyPressure * 0.34,
         probability: 0.08 + autonomyPressure * 0.2,
-        reasons: ["A pressured client can produce autonomy movements or resistance factions."],
+        reasons: ["A pressured client can produce autonomy movements or resistance among its powers."],
         relationshipPatch: {
           resentment: clamp01(relState.resentment + 0.07),
           trust: clamp01(relState.trust - 0.04),
@@ -599,12 +620,12 @@ function vassalRules(ctx) {
   const tributeCondition = {
     archetype: "vassal_extraction",
     label: "Vassal extraction",
-    description: "Tribute, levies, or legal concessions are draining local capacity.",
+    description: "The tribute and levies owed to the overlord are taking food, coin and labour the town needs.",
     severity: clamp01(0.28 + relState.leverage * 0.32 + relState.dependency * 0.18),
     status: "stable",
     triggeredAt: { tick, sourceEventType: "WORLD_PULSE_VASSALAGE", sourceEventTargetId: overlordId },
     affectedSystems: ["trade_connectivity", "public_legitimacy", "faction_power", "defense_readiness"],
-    causes: [{ source: relationshipKeyFromEdge(edge), effect: "vassal_extraction", reason: "A vassal relationship transfers value upward." }],
+    causes: [{ source: relationshipKeyFromEdge(edge), effect: "vassal_extraction", reason: "What the vassal makes goes up to its overlord." }],
   };
   const tributeRecordMode = vassalTributeRecordMode(
     ctx.snapshot,
@@ -651,8 +672,7 @@ function vassalRules(ctx) {
         severity: clamp01(0.26 + relState.dependency * 0.22 + overlordColdWar.relState.resentment * 0.2),
         probability: clamp01(0.08 + relState.leverage * 0.16 + relState.pactStrength * 0.12),
         reasons: [
-          "A vassal is expected to aid the overlord's cold war with sanctions, scouts, supplies, or legal pressure.",
-          `Cold-war third party: ${overlordColdWar.thirdPartyId}.`,
+          `${townName(ctx, vassalId)} is expected to help ${townName(ctx, overlordId)} in its cold war with ${townName(ctx, overlordColdWar.thirdPartyId)}.`,
         ],
         relationshipPatch: {
           obligationFatigue: clamp01(relState.obligationFatigue + 0.06),
@@ -704,7 +724,7 @@ function vassalRules(ctx) {
           overlordWeaknessActive
             ? "The overlord's weak legitimacy, economy, military, or defenses are becoming a remembered vassalage risk."
             : "The overlord is recovering, so vassal independence pressure cools gradually.",
-          `Weakness memory re-notes at most once per ${WEAKNESS_MEMORY_COOLDOWN} ticks; streak now ${nextStreak}.`,
+          `${townName(ctx, vassalId)} has watched ${townName(ctx, overlordId)} look weak for ${numberWord(nextStreak)} season${nextStreak === 1 ? '' : 's'} now.`,
         ],
         relationshipPatch: {
           overlordWeaknessStreak: nextStreak,
@@ -788,8 +808,8 @@ function vassalRules(ctx) {
         weaknessStreak > 0
           ? `The pull toward independence is ${relationLevelWordFor(independencePressure)}, and the overlord has looked weak ${numberWord(weaknessStreak)} turn${weaknessStreak === 1 ? '' : 's'} running.`
           : `The pull toward independence is ${relationLevelWordFor(independencePressure)}.`,
-        `The strain of vassalage is ${relationLevelWordFor(vassalStrain)}; the resentment under it, ${relationLevelWordFor(relState.resentment)}.`,
-        "A rebellion can end vassalage if it succeeds, but it does not erase prior structural changes.",
+        `${itemFor(ctx.snapshot, vassalId)?.name || 'The vassal'} pays tribute to ${townName(ctx, overlordId)}, and the anger over it is ${relationLevelWordFor(relState.resentment)}.`,
+        `If ${itemFor(ctx.snapshot, vassalId)?.name || 'the vassal'} wins, it is free of ${townName(ctx, overlordId)}, but what the tribute years took from it stays taken.`,
       ],
       stressor: {
         id: `world_stressor.rebellion.${stablePart(vassalId)}.${tick}`,
@@ -816,8 +836,8 @@ function vassalRules(ctx) {
           severity: clamp01(0.46 + successPressure * 0.36),
           probability: clamp01(0.06 + successPressure * 0.24),
           reasons: [
-            "The rebellion has a plausible path to break vassalage.",
-            "Prior economic, factional, and power changes remain as scars rather than reverting.",
+            `The rebellion in ${townName(ctx, vassalId)} has a real chance of breaking free of ${townName(ctx, overlordId)}.`,
+            `Winning will not undo what ${townName(ctx, overlordId)}'s rule changed in ${townName(ctx, vassalId)}'s markets and among its powers.`,
           ],
           relationshipPatch: {
             resentment: clamp01(relState.resentment + 0.05),

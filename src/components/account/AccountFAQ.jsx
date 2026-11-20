@@ -20,10 +20,15 @@
 // BODY/MUTED/sans are the canonical parchment-theme values; SP spaces the stack.
 import { BODY, MUTED, sans, FS, SP } from '../theme.js';
 import { t } from '../../copy/index.js';
+import { FOUNDER_SEATS } from '../../config/tierFacts.js';
 import Disclosure from '../primitives/Disclosure.jsx';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize } from '../../design/proseScale.js';
+
+// THE ANSWERS' SLOTS (ABOUT-CURRENT A4, the chair's ruling S8, 2026-11-10): a count an
+// answer states renders from its constant, so the FAQ cannot drift from the Founders' Hall.
+const ANSWER_VARS = Object.freeze({ seats: FOUNDER_SEATS });
 
 // Question keys — t() will resolve `${key}.q` and `${key}.a` from the
 // copy module. Keeping the keys here so the iteration order is
@@ -50,7 +55,7 @@ export default function AccountFAQ({ linkAccount = false, onNavigate } = {}) {
     }}>
       {Q_KEYS.map((key) => {
         const question = t(`accountFaq.${key}.q`);
-        const answer   = t(`accountFaq.${key}.a`);
+        const answer   = t(`accountFaq.${key}.a`, ANSWER_VARS);
         if (!question || !answer) return null;
         // Route each Q through the canonical Disclosure primitive: it owns its
         // own per-item open state (independent toggles), a real native button

@@ -228,6 +228,18 @@ export const PIPELINE_REACHERS = Object.freeze({
       + 'would otherwise throw out of the pipeline rather than reproduce that world.',
     payloadAwaitedBy: Object.freeze(['src/store/settlementRederiveAction.js']),
   }),
+  'src/engine/serviceEntry.js': Object.freeze({
+    class: 'BIRTH',
+    why: 'the engine service\'s one entry re-exports the pipeline and the mint, unwrapped, for the '
+      + 'bundle the engine-generate edge function imports; that function\'s generate op treats a '
+      + 'request as the app\'s Generate does, a brand-new town born under birthConfig, so naming the '
+      + 'mint here is the service minting it. Its derive op (the re-derivation and the surveyor '
+      + 'preview, ENGINE-4) runs the pipeline WITHOUT the mint, exactly as those client callers do, '
+      + 'so no existing world is re-born. Nothing in the client imports this module.',
+    // The module is a re-export list and awaits nothing itself; the edge function that runs the
+    // bundle awaits the payload inside its handler, before the generation call.
+    payloadAwaitedBy: Object.freeze(['supabase/functions/engine-generate/index.ts']),
+  }),
 });
 
 /**

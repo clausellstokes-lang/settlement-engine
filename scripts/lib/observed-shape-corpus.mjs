@@ -838,6 +838,36 @@ export async function buildObservedCorpus({
     });
   }
 
+  // ── Producer 1b′: the stress topology pass's INFILTRATED arm (schema 32). TOPOLOGY ONLY. ──
+  //
+  // ⭐ THE SAME LAW AS 1b: these settlements enter `roots` and NOT `generated`, so producer 2's
+  // pulse, its saves, its steadings, the scalar stream and all four execution keys are
+  // byte-for-byte untouched; and 1b's own four settlements are byte-identical (the arm is a
+  // pass of its own rather than a third type in 1b's list, so the insurgency + famine worlds
+  // 1b has always observed do not re-deal).
+  //
+  // WHY IT EXISTS (FIX-PUBLIC-VEIL, the chair's ruling of 2026-11-07, option (1)). The stress
+  // the generator calls `infiltrated` (generators/power/stressFactions.js) pushes a power with
+  // `hidden: true` — "Its presence is not known to the settlement" — and no corpus world ever
+  // drew it, so every read of what that branch writes was invisible to this instrument since
+  // the branch's birth: the veil predicate's `hidden on factions` (domain/people/cardVeil.js ::
+  // isVeiledPower, which tells the hidden infiltrator's minted face from an open power's)
+  // reported "a key no writer produces" although the generator writes it. The cure is the
+  // corpus's REACH, not an exemption: one config × the four seeds with `infiltrated`, the
+  // gap's own size. Widen it only with the same before/after row reconciliation, and never
+  // through `generated`.
+  const INFILTRATED_TOPOLOGY_TYPES = Object.freeze(['infiltrated']);
+  for (const seed of SEEDS) {
+    roots.push({
+      name: 'settlement',
+      value: generateSettlementPipeline(
+        { ...CONFIGS[0], stressTypes: [...INFILTRATED_TOPOLOGY_TYPES] },
+        null,
+        { seed, customContent: {} },
+      ),
+    });
+  }
+
   // ── Producer 1c: the FED-WORLD famine topology pass (schema 26). TOPOLOGY ONLY. ──
   //
   // ⭐ THE SAME LAW AS 1b, ONE STEP WIDER: these settlements enter `roots` and NOT
@@ -1017,12 +1047,18 @@ export async function buildObservedCorpus({
   // (osr-tier-25 under config 0 never does, under config 3 at 12); villages over the town cut
   // (configs 2: 368-397) never do within twelve. osr-tier-14 under CONFIGS[0] is taken.
   //
+  // RE-SEARCHED AT STYLE-2-MERGE point 47 (COHERENCE-AGREE): the lane's generation moved
+  // osr-tier-14's CONFIGS[0] town out of the town/city overlap, so it minted no tier candidate
+  // in twelve intervals. Re-searched over `osr-tier-0..39` by this header's rule: under CONFIGS[0]
+  // the minters are now osr-tier-19 (pop 2477, interval 5), -25 (pop 2394) and -28 (pop 2282);
+  // the lowest-numbered, osr-tier-19, is taken (its pop 2477 matches the original search's reading).
+  //
   // ⛔ WHY A BOUNDED VIEW AND NOT THE WHOLE PULSE RESULT. The pulse is the blast radius (1b's
   // law): a second campaign's full results would add rows to every pulse shape. Only the tier
   // candidates enter, under their real relative path (the F4 bounded-view precedent below), so
   // the shapes they touch are the ones the erosion took. Widen this pass only with the same
   // before/after row reconciliation, and never through `generated`.
-  const TIER_COVERAGE_SEED = 'osr-tier-14';
+  const TIER_COVERAGE_SEED = 'osr-tier-19';
   {
     const tierSettlement = generateSettlementPipeline(CONFIGS[0], null, { seed: TIER_COVERAGE_SEED, customContent: {} });
     const tierId = 'osr-tier';

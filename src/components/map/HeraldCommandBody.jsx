@@ -45,6 +45,7 @@ import { specialistSectionForStoryTopic } from './heraldCommandSourceParity.js';
 import { edged } from '../../design/edgedBox.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize } from '../../design/proseScale.js';
+import { humanizeToken } from '../../domain/display/humanizeEngineTokens.js';
 
 /**
  * Bound the initial archive DOM independently of campaign history depth. The
@@ -264,7 +265,7 @@ function BriefingCard({ item, onSection, lead = false }) {
       ? 'Review plan'
       : 'Read story';
   const headline = text(item?.headline) || headlineItemOf(item).headline;
-  const reason = text(attention.reason) || 'No promotion reason was recorded.';
+  const reason = text(attention.reason) || 'No reason was given for raising it.';
 
   return (
     <article
@@ -372,7 +373,7 @@ function BriefingView({ items, onSection }) {
       </div>
       {promoted.length === 0 ? (
         <EmptyEdition>
-          The realm asks nothing of you just now. No recorded condition has been promoted above the routine record.
+          The realm asks nothing of you just now. Nothing needs your attention ahead of the ordinary news.
         </EmptyEdition>
       ) : (
         <div style={{ display: 'grid', gap: SP.sm }}>
@@ -390,13 +391,21 @@ function BriefingView({ items, onSection }) {
   );
 }
 
+// The RealmItem envelope's two closed token sets (realmItemReadModel.js ::
+// TemporalPhase, ResolutionState) in the reader's words; an unknown token falls
+// back to humanizeToken, never the raw id (STYLE-2 SW-12, ledger D·41).
+const PHASE_WORDS = { historical: 'past', current: 'now', emerging: 'rising', planned: 'planned' };
+const RESOLUTION_WORDS = { unresolved: 'open', resolved: 'settled', dismissed: 'set aside', superseded: 'overtaken' };
+
 function StoryCard({ item, campaign, nameById }) {
   const mobile = useIsMobile();
   const topic = item?.topic?.primary;
+  const phase = text(item?.temporal?.phase);
+  const state = text(item?.resolution?.state);
   const tags = [
     TOPIC_LABELS[topic] || 'Realm',
-    item?.temporal?.phase,
-    item?.resolution?.state,
+    phase && (PHASE_WORDS[phase] || humanizeToken(phase)),
+    state && (RESOLUTION_WORDS[state] || humanizeToken(state)),
   ].map(text).filter(Boolean);
   const missingSubjects = unrouteableLabelsOf(item);
   return (
@@ -420,7 +429,7 @@ function StoryCard({ item, campaign, nameById }) {
             fontWeight: 750,
           }}
         >
-          {label}. The original route is no longer available.
+          {label} can no longer be opened from here.
         </div>
       ))}
       {!causeRootOf(item) && (
@@ -433,7 +442,7 @@ function StoryCard({ item, campaign, nameById }) {
             fontWeight: 750,
           }}
         >
-          {text(item?.cause?.reason) || 'Deeper provenance is unavailable for this recorded source.'}
+          {text(item?.cause?.reason) || 'The causes behind this story were not kept.'}
         </div>
       )}
     </article>

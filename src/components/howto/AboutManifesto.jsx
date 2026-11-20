@@ -177,12 +177,7 @@ export default function AboutManifesto() {
           world that always has exactly what players need isn&rsquo;t a world; it is a service.
         </p>
         <p style={{ ...PROSE, margin: '0 0 14px' }}>
-          And no settlement here is an island. Each one is a node in your world, tied to everything
-          around it by trade, politics, and old grievances. Its exports point outward to whoever buys
-          them; its imports point inward to wherever the need is met; its factions reach to the
-          regional powers you already run. The town becomes real when it has relationships with the
-          rest of your world, and the engine hands you those threads to pull rather than a finished
-          picture to drop in.
+          And no settlement here is an island. Each one is a node in your world, tied to everything around it by trade, politics, and old grievances. Its exports point outward to whoever buys them; its imports point inward to wherever the need is met; its powers reach out to the regional powers you already run. The town becomes real when it has relationships with the rest of your world, and the engine hands you those threads to pull rather than a finished picture to drop in.
         </p>
         <p style={{ ...PROSE, margin: '0 0 14px' }}>
           Sometimes what comes out is not what you pictured. You imagined a cathedral town; the
@@ -190,6 +185,42 @@ export default function AboutManifesto() {
           It is a variation worth sitting with. Why didn&rsquo;t the church reach this far, and what
           fills the space where it didn&rsquo;t? In worldbuilding the unexpected result usually deepens
           the setting more than the expected one would have, precisely because you had to earn it.
+        </p>
+      </Band>
+
+      {/* ── BAND 2b · FOR EVERYONE AT THE TABLE ────────────────────────────────
+          THE OWNER (2026-11-10, verbatim): "Treat Settlementforge as both canvas
+          and world to explore for everyone at the table." The section's words are
+          the chair's (version 2, every claim cut to what the census holds), landed exactly,
+          pending the owner's veto (ABOUT-CURRENT A1;
+          its sentence-by-sentence census is in docs/chair/2026-11-10/
+          ABOUT-CURRENT-2026-11-10.md). */}
+      <Band id={anchorFor('table')} eyebrow="For everyone at the table" title="A canvas to build on. A world to explore.">
+        <p style={{ ...PROSE, margin: '0 0 14px' }}>
+          Homebrew rarely dies for want of ideas. It dies of bookkeeping. A world of thirty places
+          needs thirty economies, thirty casts of people with reasons and thirty histories, all of it
+          remembered a year later when the party doubles back. Here that work is done and kept true.
+          You set the frame: the land, the trade, the trouble, what the place cares about. A whole
+          town stands inside it in seconds, and from then on it is yours. Name it. Reroll the draft if
+          it does not fit. Keep your own notes beside it. With Cartographer, rename anyone in it, add
+          your own institutions and gods, and link your towns as neighbours.
+        </p>
+        <p style={{ ...PROSE, margin: '0 0 14px' }}>
+          It is also somewhere to go. A city here is quarter after quarter of working houses, the
+          mill, the forge, the church, the watch, and each has a named person in it who wants
+          something. Ask where the smith&rsquo;s iron comes from and there is an answer. Ask who holds
+          power and who stands against them and there is an answer to that too. Whichever way your
+          players push, there is already something there, so you can say yes without checking your
+          notes for a contradiction.
+        </p>
+        <p style={{ ...PROSE, margin: '0 0 14px' }}>
+          Hand them the town itself. A private link opens the players&rsquo; own page: the town as a
+          visitor would know it, its trade, its services, who governs, the faces worth knowing. Your
+          secrets are left out, and so is anything you choose to hide. They read it between sessions
+          and arrive with plans. The link stays the same for the life of the town.
+        </p>
+        <p style={{ ...PROSE, margin: '0 0 14px' }}>
+          One town, two ways in. You build on it. They explore it. It stays true for both.
         </p>
       </Band>
 
@@ -222,7 +253,7 @@ export default function AboutManifesto() {
         />
         <Covenant
           claim="The engine can never resolve a named character&rsquo;s fate."
-          mechanism="The simulation moves world-level state: economies, institutions, factions, power. It deliberately stops at the threshold of a named person&rsquo;s story, which is yours to tell. State, never fate."
+          mechanism="The simulation moves world-level state: economies, institutions, the powers and who holds them. It deliberately stops at the threshold of a named person’s story, which is yours to tell. State, never fate."
           receipt="Even when a settlement dies, the engine records that its last residents disperse with their fates unresolved. It kills no named character, ever, a rule enforced in the lifecycle kernel, not a stylistic choice."
         />
         <Covenant
@@ -279,7 +310,7 @@ export default function AboutManifesto() {
         </Mechanism>
         <Mechanism title="Stresses compound into new conditions">
           Two stresses together make a third, named thing. Famine in a politically fractured town
-          isn&rsquo;t only scarcity. It is food distribution contested by factions, which changes who
+          isn&rsquo;t only scarcity. It is food distribution contested by powers, which changes who
           is hoarding, which bloc controls the grain, and where the danger sits. The dossier names the
           compound condition, not just its parts, so you always know what you are actually running.
         </Mechanism>
@@ -290,10 +321,7 @@ export default function AboutManifesto() {
           become two different economies depending on who sits next door.
         </Mechanism>
         <Mechanism title="Legitimacy bends the power structure">
-          Raw faction power comes from institutions and priorities, but effective power bends to how
-          legitimate the governing authority is. When governance falters, the ruling faction weakens
-          and criminal power grows to fill the gap. So every economic and military swing quietly
-          reshapes who really holds the town: through legitimacy, never by decree.
+          A power’s raw strength comes from its institutions and priorities, but effective power bends to how legitimate the governing authority is. When governance falters, the ruling power weakens and criminal strength grows to fill the gap. So every economic and military swing quietly reshapes who really holds the town: through legitimacy, never by decree.
         </Mechanism>
         <Mechanism title="Beneath it all: the causal substrate">
           Once a campaign advances, {CD.causal.variableCount} live causal variables sit under every

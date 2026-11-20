@@ -1,0 +1,191 @@
+diff --git a/src/data/people/goalFamilies.js b/src/data/people/goalFamilies.js
+index 64601a237..967d35420 100644
+--- a/src/data/people/goalFamilies.js
++++ b/src/data/people/goalFamilies.js
+@@ -94,7 +94,7 @@ export const GOAL_SUBKIND_SLOTS = Object.freeze({
+   RANK: Object.freeze({ climb: ['power', 'above'], defend: ['power', 'below'], enter: ['power'] }),
+   POWER: Object.freeze({ tense: ['power', 'rival'], competitive: ['power', 'rival'], corrupted: ['power', 'rival'], conflict: ['power', 'rival', 'issue'] }),
+   INSTITUTION: Object.freeze({ solvency: ['house'], rebuilding: ['house'], charter: ['house'], takeover: ['house', 'otherHouse'] }),
+-  SUPPLY: Object.freeze({ impaired: ['house'], dependency: ['resource', 'house'], isolation: ['import'], expansion: ['house'] }),
++  SUPPLY: Object.freeze({ impaired: ['house'], dependency: ['resource', 'house'], isolation: ['import'], expansion: ['house'], want: ['resource', 'house'] }),
+   TIES: Object.freeze({ rival_enemy: ['other'], debtor: ['other'], creditor: ['other'], ally: ['other'], family: ['other'], mentor_student: ['other'] }),
+   PERSONALITY: Object.freeze(Object.fromEntries(['greed', 'hunger_for_status', 'fear', 'forbidden_patron', 'duty', 'kindness', 'mastery', 'caution', 'conviction', 'sway', 'grudge', 'impulse']
+     .map((k) => [k, Object.freeze(['flaw', 'dominant', 'modifier'])]))),
+@@ -496,6 +496,20 @@ export const GOAL_FAMILY_LINES = Object.freeze({
+         'Double the work at {house}, and find the hands to do it.',
+       ]),
+     }),
++    // LAST-VARIETY (item 2; BRIEF-LAST, 2026-11-18; vetoable by the owner, on the veto list): the card's house has a trade
++    // dependency on {resource} that the page's need list says is needed and not brought in (`goals.js` deals this cell only
++    // there, beside the dependency cell it refuses). Each line presumes the good lacking, never a supply of it; none buys
++    // from outside, so none is refused under a siege.
++    want: Object.freeze({
++      short: cell([
++        'Find something the work at {house} can use in place of {resource}.',
++        'Gather what {resource} can be found close to home for the work at {house}.',
++      ]),
++      long: cell([
++        'Open a lasting way to bring {resource} in for the work at {house}.',
++        'Win those who govern here over to bringing {resource} in for the work at {house}.',
++      ]),
++    }),
+   }),
+ 
+   // ── TIES: 6 sub-kinds × 2 vantages × 5 = 60 ──
+diff --git a/src/generators/people/goals.js b/src/generators/people/goals.js
+index 292c406fa..930f2e643 100644
+--- a/src/generators/people/goals.js
++++ b/src/generators/people/goals.js
+@@ -460,6 +460,8 @@ export function familyCandidates(card, cards, ctx, vantage, held, opts = {}) {
+         if (!rf) continue;
+         const unmet = ctx.needUnmet(d.resource);
+         push(cellCandidates('SUPPLY', 'dependency', vantage, { resource: rf, house: hf }, ctx, held, { target }).map((c) => (unmet ? { ...c, refused: true } : c)));
++        // LAST-VARIETY (item 2): where the good is needed and not brought in, the lines of a house that LACKS it (`want`)
++        if (unmet) push(cellCandidates('SUPPLY', 'want', vantage, { resource: rf, house: hf }, ctx, held, { target }));
+       }
+       if (TRADING_SHELVES.includes(shelf)) for (const ch of own.filter((x) => RUNNING_STATUSES.includes(str(x.status)))) push(cellCandidates('SUPPLY', 'expansion', vantage, { chain: str(chainPrintName(ch, ctx.view).label), house: hf }, ctx, held, { target: { kind: 'chain', id: str(ch.chainId || ch.label) } }));
+     }
+diff --git a/tests/data/goalFamilies.test.js b/tests/data/goalFamilies.test.js
+index 431c25ec3..7bc60b375 100644
+--- a/tests/data/goalFamilies.test.js
++++ b/tests/data/goalFamilies.test.js
+@@ -34,7 +34,8 @@ const EXPECTED_CELLS = {
+   RANK: { climb: SIX, defend: SIX, enter: SIX },
+   POWER: { tense: SIX, competitive: SIX, corrupted: SIX, conflict: SIX },
+   INSTITUTION: { solvency: SIX, rebuilding: SIX, charter: SIX, takeover: SIX },
+-  SUPPLY: { impaired: SIX, dependency: SIX, isolation: SIX, expansion: SIX },
++  // LAST-VARIETY (item 2, 2026-11-18): `want`, two a vantage, dealt only where a dependency's good is needed and not brought in
++  SUPPLY: { impaired: SIX, dependency: SIX, isolation: SIX, expansion: SIX, want: { short: 2, long: 2 } },
+   TIES: { rival_enemy: FIVE, debtor: FIVE, creditor: FIVE, ally: FIVE, family: FIVE, mentor_student: FIVE },
+   PERSONALITY: Object.fromEntries(PERSONALITY_CLUSTERS.map((k) => [k, FOUR])),
+   ALLEGIANCE: {
+@@ -45,7 +46,7 @@ const EXPECTED_CELLS = {
+   },
+   UNCANNY: { haunting: SIX, components: SIX, commission: SIX, omen: SIX, bargain: SIX },
+ };
+-const EXPECTED_TOTALS = { RANK: 36, POWER: 48, INSTITUTION: 48, SUPPLY: 48, TIES: 60, PERSONALITY: 96, ALLEGIANCE: 128, UNCANNY: 60 };
++const EXPECTED_TOTALS = { RANK: 36, POWER: 48, INSTITUTION: 48, SUPPLY: 52, TIES: 60, PERSONALITY: 96, ALLEGIANCE: 128, UNCANNY: 60 };
+ 
+ /** STYLE-RULINGS-2026-11-07 §2 law 3, verbatim, plus WIRING-RULINGS §7's named tic. */
+ const STRUCK_TICS = [
+@@ -131,10 +132,10 @@ describe('goal families — the cells of design §6.6', () => {
+     expect(actual).toEqual(EXPECTED_CELLS);
+   });
+ 
+-  test('the family totals are §6.6\'s 464 plus UNCANNY\'s 60, 524 in all', () => {
++  test('the family totals are §6.6\'s 464 plus UNCANNY\'s 60 plus LAST-VARIETY\'s 4, 528 in all', () => {
+     const totals = Object.fromEntries(Object.entries(GOAL_FAMILY_LINES).map(([f, subs]) => [f, count(subs)]));
+     expect(totals).toEqual(EXPECTED_TOTALS);
+-    expect(Object.values(totals).reduce((a, b) => a + b, 0)).toBe(524);
++    expect(Object.values(totals).reduce((a, b) => a + b, 0)).toBe(528);
+   });
+ 
+   test('the table is frozen to its lines', () => {
+diff --git a/tests/domain/lastVariety.test.js b/tests/domain/lastVariety.test.js
+index 3296cf1a5..eb0408092 100644
+--- a/tests/domain/lastVariety.test.js
++++ b/tests/domain/lastVariety.test.js
+@@ -10,6 +10,12 @@
+  *      pool's one-line towns) now admit three or more, on the record, its public projection and the share veil; each new
+  *      line prints in a town of the 900 on all three forms; and each declaration refuses its line where its premise is
+  *      false (a negative beside each positive). Red at the base: the eight are not in the leaf.
++ *   2  THE SUPPLY GOAL FAMILY. Where a card's house depends on a good the page's need list says is needed and not brought in,
++ *      every dependency line is refused (FAULTS-NEED's 11e.wantBuy), and a card whose SUPPLY family held nothing else had NO
++ *      admitted SUPPLY line (93 cards in 85 towns of the 900 at the base). A sub-kind `want` (a house that LACKS the good: two
++ *      lines a vantage, none presuming a supply, none refused under a siege) is dealt ONLY there. Held here: the cell and its
++ *      slots; five such cards (two under a siege) now hold two admitted SUPPLY lines in each vantage; a want line is dealt on a
++ *      card of the 900; and a card whose dependency is met is dealt no want line (the negative). Red at the base: no cell.
+  */
+ import { beforeAll, describe, expect, it } from 'vitest';
+ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+@@ -24,6 +30,8 @@ import { projectShareVeil } from '../../src/domain/display/galleryVeil.js';
+ import { defenseStateProse } from '../../src/domain/display/stateProse/defenseStateProse.js';
+ import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
+ import { censusPlan, configOf } from '../components/pageCensusWalk.shared.mjs';
++import { GOAL_FAMILY_LINES, GOAL_SUBKIND_SLOTS } from '../../src/data/people/goalFamilies.js';
++import { familyCandidates, goalContextOf } from '../../src/generators/people/goals.js';
+ 
+ const BLOCK = DOSSIER_STATE_PROSE_DEFENSE['DS-DEF-3'];
+ 
+@@ -72,10 +80,24 @@ const PRINTS = [
+   { pool: 'Unsafe', vid: 6, seed: 'bar0-hamlet-calm-rand-27' },
+ ];
+ 
++/** item 2: cards whose SUPPLY family held only refused dependency lines at the base (measured over the 900), two under a siege */
++const WANT_CARDS = [
++  { seed: 'bar0-city-wartime-rand-45', id: 'npc_citadel' },
++  { seed: 'bar0-hamlet-under_siege-rand-27', id: 'npc_resident_smith_part_time' },
++  { seed: 'bar0-city-wartime-rand-31', id: 'npc_banking_houses' },
++  { seed: 'r2r-hamlet-17', id: 'npc_citizen_militia' },
++  { seed: 'r2s-under_siege-city-3', id: 'npc_banking_houses' },
++];
++/** item 2: a card of the 900 the deal gives a want line (measured at the tip), and the vantage */
++const WANT_DEALT = [
++  { seed: 'bar0-city-wartime-rand-45', id: 'npc_citadel', vantage: 'short' },
++  { seed: 'r2r-village-8', id: 'npc_citizen_militia', vantage: 'long' },
++];
++
+ /** @type {Map<string, any>} */ const towns = new Map();
+ beforeAll(async () => {
+   await loadGenerationLawPayloads();
+-  for (const seed of new Set([...Object.values(SHORT).flat(), ...PRINTS.map((p) => p.seed)])) towns.set(seed, generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} }));
++  for (const seed of new Set([...Object.values(SHORT).flat(), ...PRINTS.map((p) => p.seed), ...WANT_CARDS.map((c) => c.seed), ...WANT_DEALT.map((c) => c.seed)])) towns.set(seed, generateSettlementPipeline(cfgFor(seed), null, { seed, customContent: {} }));
+ }, 300_000);
+ 
+ const forms = (/** @type {any} */ s) => /** @type {Array<[string, any]>} */ ([['record', s], ['public', toPublicSafe(structuredClone(s))], ['the share veil', projectShareVeil(toPublicSafe(structuredClone(s)), null)]]);
+@@ -139,3 +161,55 @@ describe('LAST-VARIETY item 1: two lines at the end of each DS-DEF-3 safety pool
+   });
+ });
+ 
++describe('LAST-VARIETY item 2: the SUPPLY family keeps two admitted lines where a dependency\'s good is not brought in', () => {
++  /** @param {string} seed @param {string} id @param {'short'|'long'} vantage */
++  const supplyOf = (seed, id, vantage) => {
++    const s = towns.get(seed);
++    const cards = s.npcs || [];
++    const card = cards.find((/** @type {any} */ c) => c.id === id);
++    expect(card, `${seed} · ${id}`).toBeTruthy();
++    return familyCandidates(card, cards, goalContextOf({ ...s }, cards, s.relationships || []), vantage, new Set()).SUPPLY || [];
++  };
++
++  it('the cell `want` stands with two lines a vantage, on the resource and the house only', () => {
++    const want = /** @type {any} */ (GOAL_FAMILY_LINES.SUPPLY).want;
++    expect(want.short).toHaveLength(2);
++    expect(want.long).toHaveLength(2);
++    expect(/** @type {any} */ (GOAL_SUBKIND_SLOTS.SUPPLY).want).toEqual(['resource', 'house']);
++  });
++
++  it('each card that held only refused dependency lines now holds two admitted SUPPLY lines in each vantage', () => {
++    const failures = collectSeedFailures(WANT_CARDS.flatMap((c) => /** @type {const} */ (['short', 'long']).map((vantage) => ({ ...c, vantage }))), ({ seed, id, vantage }) => {
++      const sup = supplyOf(seed, id, vantage);
++      expect(sup.some((c) => c.kind === 'dependency' && c.refused === true), `${seed} · ${id} · ${vantage}: the dependency refused`).toBe(true);
++      expect(sup.filter((c) => !c.refused).length, `${seed} · ${id} · ${vantage}`).toBeGreaterThanOrEqual(2);
++      expect(sup.filter((c) => !c.refused).every((c) => c.kind === 'want'), `${seed} · ${id} · ${vantage}: what is admitted is want`).toBe(true);
++    });
++    expectNoSeedFailures(failures, 'two admitted SUPPLY lines on every such card');
++  });
++
++  it('a want line is dealt on a card of the 900, filled with its house and its good', () => {
++    const failures = collectSeedFailures(WANT_DEALT, ({ seed, id, vantage }) => {
++      const card = (towns.get(seed).npcs || []).find((/** @type {any} */ c) => c.id === id);
++      expect(card?.goal?.intent?.[vantage]?.family, `${seed} · ${id}`).toBe('SUPPLY');
++      const texts = supplyOf(seed, id, vantage).filter((c) => c.kind === 'want').map((c) => c.text);
++      expect(texts, `${seed} · ${id} · ${vantage}`).toContain(card.goal[vantage]);
++    });
++    expectNoSeedFailures(failures, 'the want lines are dealt');
++  });
++
++  it('NEGATIVE: a card whose dependency is met is dealt no want line (the cell reads the need list, nothing else)', () => {
++    let seen = 0;
++    const failures = collectSeedFailures([...towns.keys()], (seed) => {
++      const s = towns.get(seed);
++      for (const card of s.npcs || []) {
++        const sup = supplyOf(seed, card.id, 'short');
++        if (!sup.some((c) => c.kind === 'dependency' && c.refused !== true)) continue;
++        seen += 1;
++        expect(sup.filter((c) => c.kind === 'want'), `${seed} · ${card.id}`).toEqual([]);
++      }
++    });
++    expectNoSeedFailures(failures, 'no want line beside a met dependency');
++    expect(seen, 'cards with a met dependency were read').toBeGreaterThan(0);
++  });
++});

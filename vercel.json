@@ -1,7 +1,8 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "NODE_OPTIONS=--max-old-space-size=4096 npm run build",
   "outputDirectory": "dist",
   "ignoreCommand": "node scripts/vercel-ignore-build.mjs",
+  "git": { "deploymentEnabled": { "lane/*": false, "lane/**": false } },
   "redirects": [
     {
       "source": "/map/:path*",

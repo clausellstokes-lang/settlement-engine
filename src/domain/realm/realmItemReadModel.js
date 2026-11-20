@@ -372,7 +372,7 @@ function causeReceiptOf(semantic, sourceClass, sourceId, causeIndex) {
     available: false,
     rootRecordId: null,
     receiptId: null,
-    reason: 'No recorded cause receipt is available for this source.',
+    reason: 'The causes behind this story were not kept.',
   };
 }
 

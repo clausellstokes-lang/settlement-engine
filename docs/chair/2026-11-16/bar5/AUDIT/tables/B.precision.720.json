@@ -1,0 +1,1041 @@
+{
+ "seed": "20261116 (draws 1 and 2), 20261117 (draw 3)",
+ "population": "the 720 (PAGE-COPY seeds.txt) at 9867b4b17",
+ "history": [
+  {
+   "draw": 1,
+   "law": "L2",
+   "stands": 12,
+   "of": 20,
+   "failures": "4 NPC names read as pilgrims (\"Pilgrim Fuchs\"); 1 a \"Normally yields\" chain line; 3 horse hire against \"the army has the carts and the road\" only (C7834 calls that degree). Narrowed: people's names stripped; \"Normally yields\" counts as a mark; the war-animals reach needs the receipts or old-and-lame line."
+  },
+  {
+   "draw": 1,
+   "law": "L3",
+   "stands": null,
+   "of": 20,
+   "failures": "not judged row by row: on reading, 13 of the 20 were L3.halfway rows resting on the generic \"semi-finished\" line, which names no material, so the rule was narrowed before judging. Narrowed: the page must name the material (Partial \u00b7 <material>, or \"Work on the <material> here stops half-way\")."
+  },
+  {
+   "draw": 2,
+   "law": "L2",
+   "stands": 14,
+   "of": 20,
+   "failures": "2 grain rows on the Trade Profile (WEAK; LAW 3's lists); 2 \"Divine healing supplements mundane medicine\" (EXPLAINED); 1 history \"drew more pilgrims\" 38 years ago (EXPLAINED); 1 income remedies row (WEAK). Narrowed: History skipped; the medicine words plural; the trade lists left to LAW 3."
+  },
+  {
+   "draw": 2,
+   "law": "L3",
+   "stands": 19,
+   "of": 20,
+   "failures": "1 a common pasture under \"Needed: livestock\" (WEAK). Narrowed after: L3.needed reads Crafts houses only (it only removes rows)."
+  },
+  {
+   "draw": 3,
+   "law": "L2",
+   "stands": 18,
+   "of": 20,
+   "failures": "1 income remedies row (WEAK); 1 a toll-keeper's manner (WEAK)."
+  },
+  {
+   "draw": "after the 300",
+   "law": "L2",
+   "stands": null,
+   "failures": "not a draw: the fresh 300 showed three kinds the draws had judged not standing, now in many towns. A person's manner (\"How they deal \u2026 the travellers\", WEAK at draw 3; 8 towns of the 300). \"Alchemical remedies supplement treatment\", the kind of \"Divine healing supplements mundane medicine\" (EXPLAINED at draw 2). A conditional \"could bring pilgrims\". Narrowed out; this only removes rows. The counts in section 2 are after it, and every STANDS control on the sixty is still found."
+  }
+ ],
+ "L2_draw3": [
+  {
+   "law": "L2",
+   "rule": "L2.war.animals",
+   "town": "r2s-wartime-metropolis-0",
+   "tab": "Systems/Institutions",
+   "i": 305,
+   "line": "Services \u00b7 Horse hire \u00b7 Livery and boarding",
+   "against": {
+    "tab": "Summary/Overview",
+    "i": 6,
+    "line": "The horses in Qasrchowk's paddocks are old, or lame, or foals."
+   },
+   "why": "the page says the army holds every sound working animal and the carts; this unmarked line hires them out (chips: Horse hire; card Stable district)",
+   "ctx": [
+    "   Stable district \u00b7 Economy",
+    "   Stabling, horse-dealing, and farriery gathered in one quarter, serving merchants, soldiers, and travellers in want of a fresh mount.",
+    "   Connection: Stablemaster Nasir al-Wahabi",
+    "   Backs \u00b7 Merchant Guilds",
+    ">> Services \u00b7 Horse hire \u00b7 Livery and boarding",
+    "   State granary complex \u00b7 Economy \u00b7 Vulnerable",
+    "   A network of granaries run by the state, holding reserves against emergency."
+   ],
+   "judge": "STANDS",
+   "note": "unmarked horse hire while the page says the paddocks hold only the old, the lame and foals (as C8475)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.siege.cutgood",
+   "town": "r2r-metropolis-14",
+   "tab": "Systems/Economics",
+   "i": 39,
+   "line": "Apothecary & Alchemy Remedies and simple preparations, made and sold here: a modest trade.",
+   "against": {
+    "tab": "Systems/Economics",
+    "i": 199,
+    "line": "Healing, surgical care and quarantine here depend on medicinal herbs from outside, which the siege has cut off."
+   },
+   "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+   "ctx": [
+    "   Grain Sales",
+    "   2%",
+    "   Spellcasting Services",
+    "   1%",
+    ">> Apothecary & Alchemy Remedies and simple preparations, made and sold here: a modest trade.",
+    "   No one trade earns half of what Prabhapeta makes, so a bad year in any one of them would hurt without ruining it. Honest traders in Prabhapeta are up against its biggest business, and nobody has told them what it is. The",
+    "   Trade Profile\u25b2"
+   ],
+   "judge": "WEAK",
+   "note": "an income row: remedies \"made and sold here\" while the page says the herbs come from outside and are cut off; made-here may draw on herbs inside the walls (degree)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.law.collapsed",
+   "town": "r2s-wartime-village-3",
+   "tab": "Systems/Defense",
+   "i": 3,
+   "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+   "against": {
+    "tab": "Summary/Foundations",
+    "i": 5,
+    "line": "Law & order \u00b7 Collapsed"
+   },
+   "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+   "ctx": [
+    "   Defensive posture",
+    "   Undefended",
+    "   Guard assessment",
+    ">> There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+    "   Zelenonick is all but undefended. Nothing in the village would stop a serious attack for long.",
+    "   Military status"
+   ],
+   "judge": "STANDS",
+   "note": "the page says law and order has collapsed; the unmarked line says a thief is shunned until they make it right (as C42116)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.siege.abroad",
+   "town": "r2r-metropolis-14",
+   "tab": "Systems/Institutions",
+   "i": 18,
+   "line": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+   "against": {
+    "tab": "Summary/Crisis",
+    "i": 1,
+    "line": "Enemies are camped around Prabhapeta, and nothing comes in by road."
+   },
+   "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+   "ctx": [
+    "   Connection: Sage Lalita Kapur",
+    "   Backs \u00b7 Arcane Orders \u00b7 Religious Authorities",
+    "   Services \u00b7 Monster lore",
+    "   Apothecary district \u00b7 Crafts",
+    ">> A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad. Herbalism kits, medicinal herbs, surgical supplies, a",
+    "   Connection: Apothecary Jai Hazra",
+    "   Backs \u00b7 Craft Guilds"
+   ],
+   "judge": "STANDS",
+   "note": "an unmarked line offering what comes from outside (caravans, travellers, medicines from abroad) while the page says nothing comes in by road (as C0350, C0333)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.law.collapsed",
+   "town": "r2r-village-37",
+   "tab": "Systems/Defense",
+   "i": 3,
+   "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+   "against": {
+    "tab": "Summary/Foundations",
+    "i": 4,
+    "line": "Law & order \u00b7 Collapsed"
+   },
+   "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+   "ctx": [
+    "   Defensive posture",
+    "   Undefended",
+    "   Guard assessment",
+    ">> There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+    "   People at Dobroets know it could not survive a serious attack, so they take care not to provoke anyone who could mount one.",
+    "   Military status"
+   ],
+   "judge": "STANDS",
+   "note": "the page says law and order has collapsed; the unmarked line says a thief is shunned until they make it right (as C42116)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.law.collapsed",
+   "town": "r2r-village-29",
+   "tab": "Systems/Defense",
+   "i": 3,
+   "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+   "against": {
+    "tab": "Summary/Foundations",
+    "i": 5,
+    "line": "Law & order \u00b7 Collapsed"
+   },
+   "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+   "ctx": [
+    "   Defensive posture",
+    "   Vulnerable",
+    "   Guard assessment",
+    ">> There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+    "   Ormtun could deal with a brawl or a thief, but the village could not hold off a raid.",
+    "   Military status"
+   ],
+   "judge": "STANDS",
+   "note": "the page says law and order has collapsed; the unmarked line says a thief is shunned until they make it right (as C42116)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.siege.cutgood",
+   "town": "r2s-under_siege-metropolis-0",
+   "tab": "Systems/Services",
+   "i": 269,
+   "line": "Rare medications and treatments available through district-wide sourcing.",
+   "against": {
+    "tab": "Systems/Economics",
+    "i": 65,
+    "line": "Healing, surgical care and quarantine here depend on medicinal herbs from outside, which the siege has cut off."
+   },
+   "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+   "ctx": [
+    "   Herbal remedies",
+    "   Wholesale and retail herbs, tinctures, and prepared medicines.",
+    "   Apothecary district",
+    "   Specialist compounds",
+    ">> Rare medications and treatments available through district-wide sourcing.",
+    "   Apothecary district",
+    "   Information \u00b7 (17) \u00b7 6 impaired\u25b2"
+   ],
+   "judge": "STANDS",
+   "note": "an unmarked medicine row while the page says the herbs come from outside and the siege has cut them off (as C0927)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.siege.cutgood",
+   "town": "r2s-under_siege-metropolis-0",
+   "tab": "Systems/Institutions",
+   "i": 23,
+   "line": "One leans to chirurgery, another to herbal preparations, a third to imported medicines.",
+   "against": {
+    "tab": "Systems/Economics",
+    "i": 65,
+    "line": "Healing, surgical care and quarantine here depend on medicinal herbs from outside, which the siege has cut off."
+   },
+   "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+   "ctx": [
+    "   Connection: Alchemist Wigbert Berger",
+    "   Backs \u00b7 Arcane Orders",
+    "   Services \u00b7 Alchemical components",
+    "   Apothecary district \u00b7 Crafts",
+    ">> Apothecary shops crowded into one quarter, where competition forces each to specialise. One leans to chirurgery, another to herbal preparations, a third to imported medicines. Between them they carry herbalism kits, medi",
+    "   Connection: Apothecary Zita Jung",
+    "   Backs \u00b7 Craft Guilds"
+   ],
+   "judge": "STANDS",
+   "note": "an unmarked medicine row while the page says the herbs come from outside and the siege has cut them off (as C0927)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.law.collapsed",
+   "town": "r2r-village-26",
+   "tab": "Systems/Defense",
+   "i": 3,
+   "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+   "against": {
+    "tab": "Summary/Foundations",
+    "i": 5,
+    "line": "Law & order \u00b7 Collapsed"
+   },
+   "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+   "ctx": [
+    "   Defensive posture",
+    "   Undefended",
+    "   Guard assessment",
+    ">> There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+    "   Terracolonia is all but undefended. Nothing in the village would stop a serious attack for long.",
+    "   Military status"
+   ],
+   "judge": "STANDS",
+   "note": "the page says law and order has collapsed; the unmarked line says a thief is shunned until they make it right (as C42116)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.siege.abroad",
+   "town": "r2s-under_siege-metropolis-0",
+   "tab": "Systems/Institutions",
+   "i": 38,
+   "line": "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+   "against": {
+    "tab": "Summary/Crisis",
+    "i": 1,
+    "line": "Enemies are camped around Gr\u00fcnmoor, and nothing comes in by road."
+   },
+   "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+   "ctx": [
+    "   Connection: Smith-master Berchta Held",
+    "   Backs \u00b7 Craft Guilds",
+    "   Services \u00b7 Repairs \u00b7 Tool manufacture \u00b7 Weapon smithing",
+    "   Bowyers & fletchers (guild) \u00b7 Crafts",
+    ">> Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+    "   Connection: Bowyer Adela Brauer",
+    "   Backs \u00b7 Craft Guilds \u00b7 The Guard"
+   ],
+   "judge": "STANDS",
+   "note": "an unmarked line offering what comes from outside (caravans, travellers, medicines from abroad) while the page says nothing comes in by road (as C0350, C0333)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.law.collapsed",
+   "town": "r2s-succession_void-thorp-0",
+   "tab": "Systems/Defense",
+   "i": 3,
+   "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+   "against": {
+    "tab": "Summary/Foundations",
+    "i": 6,
+    "line": "Law & order \u00b7 Collapsed"
+   },
+   "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+   "ctx": [
+    "   Defensive posture",
+    "   Vulnerable",
+    "   Guard assessment",
+    ">> There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+    "   People at Qingmen know it could not survive a serious attack, so they take care not to provoke anyone who could mount one.",
+    "   Military status"
+   ],
+   "judge": "STANDS",
+   "note": "the page says law and order has collapsed; the unmarked line says a thief is shunned until they make it right (as C42116)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.siege.cutgood",
+   "town": "r2r-metropolis-14",
+   "tab": "Systems/Services",
+   "i": 284,
+   "line": "Herbal remedies",
+   "against": {
+    "tab": "Systems/Economics",
+    "i": 199,
+    "line": "Healing, surgical care and quarantine here depend on medicinal herbs from outside, which the siege has cut off."
+   },
+   "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+   "ctx": [
+    "   Cemetery network",
+    "   Citywide religious infrastructure",
+    "   Comprehensive religious network across the entire city.",
+    "   Houses of worship",
+    ">> Herbal remedies",
+    "   Wholesale and retail herbs, tinctures, and prepared medicines.",
+    "   Apothecary district"
+   ],
+   "judge": "STANDS",
+   "note": "an unmarked medicine row while the page says the herbs come from outside and the siege has cut them off (as C0927)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.siege.cutgood",
+   "town": "r2r-metropolis-14",
+   "tab": "Systems/Institutions",
+   "i": 18,
+   "line": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad.",
+   "against": {
+    "tab": "Systems/Economics",
+    "i": 199,
+    "line": "Healing, surgical care and quarantine here depend on medicinal herbs from outside, which the siege has cut off."
+   },
+   "why": "the page says this good comes from outside and the siege has cut it off; this unmarked row offers it",
+   "ctx": [
+    "   Connection: Sage Lalita Kapur",
+    "   Backs \u00b7 Arcane Orders \u00b7 Religious Authorities",
+    "   Services \u00b7 Monster lore",
+    "   Apothecary district \u00b7 Crafts",
+    ">> A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad. Herbalism kits, medicinal herbs, surgical supplies, a",
+    "   Connection: Apothecary Jai Hazra",
+    "   Backs \u00b7 Craft Guilds"
+   ],
+   "judge": "STANDS",
+   "note": "an unmarked medicine row while the page says the herbs come from outside and the siege has cut them off (as C0927)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.law.collapsed",
+   "town": "r2r-village-21",
+   "tab": "Systems/Defense",
+   "i": 3,
+   "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+   "against": {
+    "tab": "Summary/Foundations",
+    "i": 4,
+    "line": "Law & order \u00b7 Collapsed"
+   },
+   "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+   "ctx": [
+    "   Defensive posture",
+    "   Undefended",
+    "   Guard assessment",
+    ">> There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+    "   Rotbr\u00fccke is all but undefended. Nothing in the village would stop a serious attack for long.",
+    "   Military status"
+   ],
+   "judge": "STANDS",
+   "note": "the page says law and order has collapsed; the unmarked line says a thief is shunned until they make it right (as C42116)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.law.collapsed",
+   "town": "r2s-slave_revolt-hamlet-3",
+   "tab": "Systems/Defense",
+   "i": 3,
+   "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+   "against": {
+    "tab": "Summary/Foundations",
+    "i": 5,
+    "line": "Law & order \u00b7 Collapsed"
+   },
+   "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+   "ctx": [
+    "   Defensive posture",
+    "   Vulnerable",
+    "   Guard assessment",
+    ">> There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+    "   Breitenwiese could deal with a brawl or a thief, but the hamlet could not hold off a raid.",
+    "   Military status"
+   ],
+   "judge": "STANDS",
+   "note": "the page says law and order has collapsed; the unmarked line says a thief is shunned until they make it right (as C42116)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.siege.abroad",
+   "town": "r2s-under_siege-town-2",
+   "tab": "Systems/Institutions",
+   "i": 84,
+   "line": "Serves merchants, military, and travelers needing fresh mounts.",
+   "against": {
+    "tab": "Summary/Crisis",
+    "i": 1,
+    "line": "Enemies are camped around Yekehiid, and nothing comes in by road."
+   },
+   "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+   "ctx": [
+    "   Connection: Banker Namsrai Tayichi'ud",
+    "   Backs \u00b7 Feudal Appointee",
+    "   Services \u00b7 Coin appraisal \u00b7 Currency exchange",
+    "   Stable district \u00b7 Economy",
+    ">> Concentrated stabling, horse trading, and farriery. Serves merchants, military, and travelers needing fresh mounts.",
+    "   Connection: Stablemaster Luvsandorj Yorqin",
+    "   Backs \u00b7 Feudal Appointee"
+   ],
+   "judge": "STANDS",
+   "note": "an unmarked line offering what comes from outside (caravans, travellers, medicines from abroad) while the page says nothing comes in by road (as C0350, C0333)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.siege.abroad",
+   "town": "r2r-metropolis-14",
+   "tab": "Systems/Institutions",
+   "i": 33,
+   "line": "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+   "against": {
+    "tab": "Summary/Crisis",
+    "i": 1,
+    "line": "Enemies are camped around Prabhapeta, and nothing comes in by road."
+   },
+   "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+   "ctx": [
+    "   Connection: Smith-master Mamata Wali",
+    "   Backs \u00b7 Craft Guilds",
+    "   Services \u00b7 Horseshoeing \u00b7 Repairs \u00b7 Tool manufacture \u00b7 Weapon smithing",
+    "   Bowyers & fletchers (guild) \u00b7 Crafts",
+    ">> Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite bows to order, supplying the watch, the garrison, and the caravans.",
+    "   Connection: Bowyer Jai Devdas",
+    "   Backs \u00b7 Craft Guilds \u00b7 The Guard"
+   ],
+   "judge": "STANDS",
+   "note": "an unmarked line offering what comes from outside (caravans, travellers, medicines from abroad) while the page says nothing comes in by road (as C0350, C0333)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.siege.abroad",
+   "town": "r2s-under_siege-city-3",
+   "tab": "Systems/Institutions",
+   "i": 33,
+   "line": "Supplies the watch, the garrison, and the caravans.",
+   "against": {
+    "tab": "Summary/Crisis",
+    "i": 1,
+    "line": "Enemies are camped around Weichhof, and nothing comes in by road."
+   },
+   "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+   "ctx": [
+    "   Connection: Smith-master Adelheid Wagner",
+    "   Backs \u00b7 Arcane Council",
+    "   Services \u00b7 Horseshoeing \u00b7 Repairs \u00b7 Tool manufacture",
+    "   Bowyers & fletchers (guild) \u00b7 Crafts",
+    ">> Guild bowyers and fletchers: standard arrows by the sheaf, specialty broadheads, composite bows to commission. Supplies the watch, the garrison, and the caravans.",
+    "   Connection: Bowyer Sophia Forster",
+    "   Backs \u00b7 Arcane Council \u00b7 War Council"
+   ],
+   "judge": "STANDS",
+   "note": "an unmarked line offering what comes from outside (caravans, travellers, medicines from abroad) while the page says nothing comes in by road (as C0350, C0333)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.law.collapsed",
+   "town": "r2s-famine-village-2",
+   "tab": "Systems/Defense",
+   "i": 3,
+   "line": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+   "against": {
+    "tab": "Summary/Foundations",
+    "i": 5,
+    "line": "Law & order \u00b7 Collapsed"
+   },
+   "why": "the page says law and order has collapsed; this unmarked line says theft is answered",
+   "ctx": [
+    "   Defensive posture",
+    "   Undefended",
+    "   Guard assessment",
+    ">> There is no watch here. A thief is known by name within a day, and everyone shuns them until they make it right.",
+    "   People at Spitzhafen know it could not survive a serious attack, so they take care not to provoke anyone who could mount one.",
+    "   Military status"
+   ],
+   "judge": "STANDS",
+   "note": "the page says law and order has collapsed; the unmarked line says a thief is shunned until they make it right (as C42116)"
+  },
+  {
+   "law": "L2",
+   "rule": "L2.siege.abroad",
+   "town": "r2s-under_siege-metropolis-3",
+   "tab": "World/NPCs",
+   "i": 596,
+   "line": "How they deal Talks about the road and the travellers; knows who has passed and when.",
+   "against": {
+    "tab": "Summary/Crisis",
+    "i": 1,
+    "line": "Enemies are camped around Andronrion, and nothing comes in by road."
+   },
+   "why": "the siege stops everything coming in by road, gate or water; this unmarked line offers what comes from outside",
+   "ctx": [
+    "   Toll-Keeper",
+    "   Unresolved History \u00b7 Petros Alexios",
+    "   Wants Keep Petros Alexios from getting the thing they want most this season.",
+    "   Standing marginal",
+    ">> How they deal Talks about the road and the travellers; knows who has passed and when.",
+    "   Secret: Charges travellers more than the posted toll and keeps the difference",
+    "   Drosida Kataphloron\u25cf"
+   ],
+   "judge": "WEAK",
+   "note": "a person's manner (\"talks about the road and the travellers\"), not an offer of what the siege stops"
+  }
+ ],
+ "L3_draw2": [
+  {
+   "law": "L3",
+   "rule": "L3.needed",
+   "town": "r2s-succession_void-town-2",
+   "tab": "Systems/Institutions",
+   "i": 51,
+   "line": "Vintner \u00b7 Crafts / A cellar of presses and casks for wine, from grapes grown near or must brought in, whenever either can be had. Such wine as it holds goes by the barrel, and by the bottle to the rich.",
+   "against": {
+    "tab": "Systems/Economics",
+    "i": 31,
+    "line": "Needed, and not brought in: timber and building wood, quality textiles and cloth, grapes, copper ore. | No one trade earns half of what Kulubpeten makes, so a bad year in any one of them would hurt without ruining it. The religious houses at Kulubpeten are heard in its dealings, and a quarrel with them is one the town's traders feel. A good part of the grapes Kulubpeten's work uses must come from elsewhere; when none comes, that work stands idle."
+   },
+   "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
+   "ctx": [
+    "   Multiple vats, trained hands from the guild. A proper tannery whose leather is good enough for footwear, armour, and saddlery.",
+    "   Connection: Tanner Akna Ucan",
+    "   Backs \u00b7 Church Council",
+    "   Services \u00b7 Leather production",
+    ">> Vintner \u00b7 Crafts",
+    "   A cellar of presses and casks for wine, from grapes grown near or must brought in, whenever either can be had. Such wine as it holds goes by the barrel, and by the bottle to the rich.",
+    "   Connection: Master Vintner Quetzalxochitl Tut"
+   ],
+   "judge": "STANDS",
+   "note": "\"Needed, and not brought in\" with \"that work stands idle\", and the craft printed unmarked with its services (as C31652)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.failedFood",
+   "town": "r2s-famine-hamlet-0",
+   "tab": "Systems/Resources",
+   "i": 15,
+   "line": "Deep Natural Harbour \u00b7 maritime access \u00b7 Coastal Timber \u00b7 timber \u00b7 Magical Ley Line Node \u00b7 medicinal herbs \u00b7 Fishing Grounds \u00b7 fish \u00b7 salt",
+   "against": {
+    "tab": "Systems/Resources",
+    "i": 9,
+    "line": "\u2717 Failed this year \u00b7 Fish"
+   },
+   "why": "the page says fish failed this year; the commodities available list it unmarked",
+   "ctx": [
+    "   Nearby Resources\u25b2",
+    "   Abundant",
+    "   Deep Natural Harbour \u00b7 Fishing Grounds \u00b7 Magical Ley Line Node \u00b7 Coastal Timber",
+    "   Commodities available",
+    ">> Deep Natural Harbour \u00b7 maritime access \u00b7 Coastal Timber \u00b7 timber \u00b7 Magical Ley Line Node \u00b7 medicinal herbs \u00b7 Fishing Grounds \u00b7 fish \u00b7 salt",
+    "   Gaps & Opportunities\u25b2",
+    "   No one here works the timber near Montemare."
+   ],
+   "judge": "STANDS",
+   "note": "the failed source listed among the commodities available (as C42011, C42947)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.foodModel",
+   "town": "r2r-village-23",
+   "tab": "Systems/Economics",
+   "i": 26,
+   "line": "What it puts on the table itself is the hunters' game. Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
+   "against": {
+    "tab": "Systems/Institutions",
+    "i": 49,
+    "line": "Farmland \u00b7 Economy / Services \u00b7 Grain at harvest"
+   },
+   "why": "the food line names another food as the table's own, beside a farmland house that sells its own grain",
+   "ctx": [
+    "   Food Security\u25b2",
+    "   Production: 477 lbs/day+ 29 imported+ 14 by divine provision \u00b7 Need: 542 lbs/day \u00b7 Short: 22 lbs/day",
+    "   Padmatala grows about nine parts in ten of what it needs, and carts bring in about two parts in five of the rest. Divine provision makes up less than a fifth of what it needs. Between them, nearly every household is fed,",
+    "   No granary; about two months in household stores.",
+    ">> What it puts on the table itself is the hunters' game. Irrigation, tanks, street kitchens, preservation, and ritual food rules shape supply and consumption.",
+    "   Padmatala is fed, but what it keeps put by would not outlast a run of poor harvests.",
+    "   A visitor may not see it, but some of the food on Padmatala's tables was never grown or bought: it came by spell or by prayer. Its own food comes first of all from its hunting, so one bad year for the hunting is felt acr"
+   ],
+   "judge": "STANDS",
+   "note": "the table's own food named as game or fish beside a Farmland house selling its grain and a harvest (as C39597)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.halfway",
+   "town": "r2s-monster_pressure-city-0",
+   "tab": "Systems/Economics",
+   "i": 137,
+   "line": "Leather goods \u00b7 Guild-manufactured goods",
+   "against": {
+    "tab": "Systems/Resources",
+    "i": 5,
+    "line": "Partial \u00b7 Animal hides \u00b7 high value | Partial processing - worked only to semi-finished goods"
+   },
+   "why": "the page says work on animal hides stops half-way (no Leatherworkers' guild); chain Leather & Hides prints finished goods of the missing house",
+   "ctx": [
+    "   Hunting grounds",
+    "   Via",
+    "   Cobbler's guild",
+    "   Outputs",
+    ">> Leather goods \u00b7 Guild-manufactured goods",
+    "   Food Processing \u00b7 Manufacturing & crafts\u2713 Running",
+    "   From"
+   ],
+   "judge": "STANDS",
+   "note": "the page says this material is worked only to semi-finished goods (Partial \u00b7 <material>), yet a chain prints the finished goods: X and not-X on two tabs (as C37887, C39608)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.halfway",
+   "town": "r2s-famine-city-3",
+   "tab": "Systems/Economics",
+   "i": 164,
+   "line": "Finished clothing \u00b7 Dyed cloth \u00b7 Tailored garments",
+   "against": {
+    "tab": "Systems/Resources",
+    "i": 8,
+    "line": "Partial \u00b7 Wool \u00b7 high value | Partial processing - worked only to semi-finished goods"
+   },
+   "why": "the page says work on wool stops half-way (no Fulling mill); chain Cloth Finishing & Clothing prints finished goods of the missing house",
+   "ctx": [
+    "   Grazing land",
+    "   Via",
+    "   Tailor's guild \u00b7 Dyer",
+    "   Outputs",
+    ">> Finished clothing \u00b7 Dyed cloth \u00b7 Tailored garments",
+    "   Leatherworking & Cordwaining \u00b7 Manufacturing & crafts \u00b7 Vulnerable",
+    "   From"
+   ],
+   "judge": "STANDS",
+   "note": "the page says this material is worked only to semi-finished goods (Partial \u00b7 <material>), yet a chain prints the finished goods: X and not-X on two tabs (as C37887, C39608)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.halfway",
+   "town": "r2r-town-32",
+   "tab": "Systems/Economics",
+   "i": 95,
+   "line": "Processed textiles \u00b7 Guild-manufactured goods \u00b7 Dyed cloth",
+   "against": {
+    "tab": "Systems/Resources",
+    "i": 5,
+    "line": "Partial \u00b7 Wool \u00b7 high value | Partial processing - worked only to semi-finished goods"
+   },
+   "why": "the page says work on wool stops half-way (no Dyers' guild, Fulling mill); chain Textiles & Cloth prints finished goods of the missing house",
+   "ctx": [
+    "   Grazing land",
+    "   Via",
+    "   Weavers/Textile workers",
+    "   Outputs",
+    ">> Processed textiles \u00b7 Guild-manufactured goods \u00b7 Dyed cloth",
+    "   Food Processing \u00b7 Manufacturing & crafts\u2713 Running",
+    "   From"
+   ],
+   "judge": "STANDS",
+   "note": "the page says this material is worked only to semi-finished goods (Partial \u00b7 <material>), yet a chain prints the finished goods: X and not-X on two tabs (as C37887, C39608)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.needed",
+   "town": "r2r-town-34",
+   "tab": "Systems/Institutions",
+   "i": 97,
+   "line": "Vintner \u00b7 Crafts / A cellar of presses and casks for wine, from grapes grown near or must brought in, whenever either can be had. Such wine as it holds goes by the barrel, and by the bottle to the rich.",
+   "against": {
+    "tab": "Systems/Economics",
+    "i": 38,
+    "line": "Needed, and not brought in: timber, grapes, copper ore. | Rundholz is not known for any one trade; it lives on many small ones. The religious houses at Rundholz are heard in its dealings, and a quarrel with them is one the town's traders feel. A good part of the grapes Rundholz's work uses must come from elsewhere; when none comes, that work stands idle."
+   },
+   "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
+   "ctx": [
+    "   Leather production. Foul-smelling; sited by water and toward the settlement edge where the ground allows.",
+    "   Connection: Master Tanner Sigebert Schwarz",
+    "   Backs \u00b7 Craft Guilds",
+    "   Services \u00b7 Hide processing",
+    ">> Vintner \u00b7 Crafts",
+    "   A cellar of presses and casks for wine, from grapes grown near or must brought in, whenever either can be had. Such wine as it holds goes by the barrel, and by the bottle to the rich.",
+    "   Connection: Master Vintner Notker Richter"
+   ],
+   "judge": "STANDS",
+   "note": "\"Needed, and not brought in\" with \"that work stands idle\", and the craft printed unmarked with its services (as C31652)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.failedFood",
+   "town": "r2s-famine-hamlet-3",
+   "tab": "Systems/Resources",
+   "i": 17,
+   "line": "Wild Foraging Areas \u00b7 honey \u00b7 medicinal herbs \u00b7 Ancient Grove \u00b7 Precious Metal Veins \u00b7 luxury \u00b7 Open Grazing Land \u00b7 livestock \u00b7 wool \u00b7 dairy \u00b7 animal hides",
+   "against": {
+    "tab": "Systems/Resources",
+    "i": 11,
+    "line": "\u2717 Failed this year \u00b7 Livestock"
+   },
+   "why": "the page says livestock failed this year; the commodities available list it unmarked",
+   "ctx": [
+    "   Nearby Resources\u25b2",
+    "   Abundant",
+    "   Ancient Grove \u00b7 Wild Foraging Areas \u00b7 Open Grazing Land \u00b7 Precious Metal Veins",
+    "   Commodities available",
+    ">> Wild Foraging Areas \u00b7 honey \u00b7 medicinal herbs \u00b7 Ancient Grove \u00b7 Precious Metal Veins \u00b7 luxury \u00b7 Open Grazing Land \u00b7 livestock \u00b7 wool \u00b7 dairy \u00b7 animal hides"
+   ],
+   "judge": "STANDS",
+   "note": "the failed source listed among the commodities available (as C42011, C42947)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.halfway",
+   "town": "r2s-wartime-town-0",
+   "tab": "Systems/Economics",
+   "i": 97,
+   "line": "Finished clothing \u00b7 Dyed cloth",
+   "against": {
+    "tab": "Systems/Resources",
+    "i": 8,
+    "line": "Partial \u00b7 Wool \u00b7 high value | Partial processing - worked only to semi-finished goods"
+   },
+   "why": "the page says work on wool stops half-way (no Fulling mill); chain Cloth Finishing & Clothing prints finished goods of the missing house",
+   "ctx": [
+    "   Grazing land",
+    "   Via",
+    "   Dyer",
+    "   Outputs",
+    ">> Finished clothing \u00b7 Dyed cloth",
+    "   Leatherworking & Cordwaining \u00b7 Manufacturing & crafts \u00b7 Vulnerable",
+    "   From"
+   ],
+   "judge": "STANDS",
+   "note": "the page says this material is worked only to semi-finished goods (Partial \u00b7 <material>), yet a chain prints the finished goods: X and not-X on two tabs (as C37887, C39608)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.halfway",
+   "town": "r2r-metropolis-14",
+   "tab": "Systems/Economics",
+   "i": 245,
+   "line": "Leather goods \u00b7 Guild-manufactured goods",
+   "against": {
+    "tab": "Systems/Resources",
+    "i": 5,
+    "line": "Partial \u00b7 Animal hides \u00b7 high value | Partial processing - worked only to semi-finished goods"
+   },
+   "why": "the page says work on animal hides stops half-way (no Leatherworkers' guild); chain Leather & Hides prints finished goods of the missing house",
+   "ctx": [
+    "   Hunting grounds",
+    "   Via",
+    "   Cobbler's guild \u00b7 Furrier's district",
+    "   Outputs",
+    ">> Leather goods \u00b7 Guild-manufactured goods",
+    "   Furs & Pelts \u00b7 Trade & entrep\u00f4t \u00b7 Vulnerable",
+    "   From"
+   ],
+   "judge": "STANDS",
+   "note": "the page says this material is worked only to semi-finished goods (Partial \u00b7 <material>), yet a chain prints the finished goods: X and not-X on two tabs (as C37887, C39608)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.needed",
+   "town": "r2r-metropolis-20",
+   "tab": "Systems/Institutions",
+   "i": 152,
+   "line": "Vintner \u00b7 Crafts / Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients.",
+   "against": {
+    "tab": "Systems/Economics",
+    "i": 41,
+    "line": "Needed, and not brought in: grapes, copper ore, clay. | No one trade earns half of what Anba makes, so a bad year in any one of them would hurt without ruining it. Faith carries real weight at Anba: what the religious houses say is heard in the metropolis's dealings, whatever their own share of its money. A good part of the grapes Anba's work uses must come from elsewhere; when none comes, that work stands idle."
+   },
+   "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
+   "ctx": [
+    "   Multiple vats, trained hands from the guild. A proper tannery whose leather is good enough for footwear, armour, and saddlery.",
+    "   Connection: Tanner Miho Yamaguchi",
+    "   Backs \u00b7 High Theocratic Council",
+    "   Services \u00b7 Leather goods \u00b7 Leather production",
+    ">> Vintner \u00b7 Crafts",
+    "   Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients.",
+    "   Connection: Master Vintner Kenji Inoue"
+   ],
+   "judge": "STANDS",
+   "note": "\"Needed, and not brought in\" with \"that work stands idle\", and the craft printed unmarked with its services (as C31652)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.halfway",
+   "town": "r2s-occupied-city-1",
+   "tab": "Systems/Economics",
+   "i": 158,
+   "line": "Processed textiles \u00b7 Guild-manufactured goods \u00b7 Dyed cloth",
+   "against": {
+    "tab": "Systems/Resources",
+    "i": 8,
+    "line": "Partial \u00b7 Wool \u00b7 high value | Partial processing - worked only to semi-finished goods"
+   },
+   "why": "the page says work on wool stops half-way (no Fulling mill); chain Textiles & Cloth prints finished goods of the missing house",
+   "ctx": [
+    "   Grazing land",
+    "   Via",
+    "   Tailor's guild \u00b7 Weavers/Textile workers \u00b7 Fuller \u00b7 Dyer",
+    "   Outputs",
+    ">> Processed textiles \u00b7 Guild-manufactured goods \u00b7 Dyed cloth",
+    "   Cloth Finishing & Clothing \u00b7 Manufacturing & crafts\u2713 Running",
+    "   From"
+   ],
+   "judge": "STANDS",
+   "note": "the page says this material is worked only to semi-finished goods (Partial \u00b7 <material>), yet a chain prints the finished goods: X and not-X on two tabs (as C37887, C39608)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.halfway",
+   "town": "r2r-metropolis-3",
+   "tab": "Systems/Economics",
+   "i": 176,
+   "line": "Leather goods \u00b7 Guild-manufactured goods",
+   "against": {
+    "tab": "Systems/Resources",
+    "i": 5,
+    "line": "Partial \u00b7 Animal hides \u00b7 high value | Partial processing - worked only to semi-finished goods"
+   },
+   "why": "the page says work on animal hides stops half-way (no Leatherworkers' guild); chain Leather & Hides prints finished goods of the missing house",
+   "ctx": [
+    "   Hunting grounds",
+    "   Via",
+    "   Cobbler's guild \u00b7 Furrier's district",
+    "   Outputs",
+    ">> Leather goods \u00b7 Guild-manufactured goods",
+    "   Food Processing \u00b7 Manufacturing & crafts\u2713 Running",
+    "   From"
+   ],
+   "judge": "STANDS",
+   "note": "the page says this material is worked only to semi-finished goods (Partial \u00b7 <material>), yet a chain prints the finished goods: X and not-X on two tabs (as C37887, C39608)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.halfway",
+   "town": "r2s-mass_migration-town-0",
+   "tab": "Systems/Economics",
+   "i": 78,
+   "line": "Finished clothing \u00b7 Dyed cloth \u00b7 Tailored garments",
+   "against": {
+    "tab": "Systems/Resources",
+    "i": 8,
+    "line": "Partial \u00b7 Wool \u00b7 high value | Partial processing - worked only to semi-finished goods"
+   },
+   "why": "the page says work on wool stops half-way (no Dyers' guild, Fulling mill); chain Cloth Finishing & Clothing prints finished goods of the missing house",
+   "ctx": [
+    "   Grazing land",
+    "   Via",
+    "   Tailor's guild \u00b7 Fuller",
+    "   Outputs",
+    ">> Finished clothing \u00b7 Dyed cloth \u00b7 Tailored garments",
+    "   Leatherworking & Cordwaining \u00b7 Manufacturing & crafts \u00b7 Vulnerable",
+    "   From"
+   ],
+   "judge": "STANDS",
+   "note": "the page says this material is worked only to semi-finished goods (Partial \u00b7 <material>), yet a chain prints the finished goods: X and not-X on two tabs (as C37887, C39608)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.halfway",
+   "town": "r2s-occupied-city-1",
+   "tab": "Systems/Economics",
+   "i": 165,
+   "line": "Finished clothing \u00b7 Dyed cloth \u00b7 Tailored garments",
+   "against": {
+    "tab": "Systems/Resources",
+    "i": 8,
+    "line": "Partial \u00b7 Wool \u00b7 high value | Partial processing - worked only to semi-finished goods"
+   },
+   "why": "the page says work on wool stops half-way (no Fulling mill); chain Cloth Finishing & Clothing prints finished goods of the missing house",
+   "ctx": [
+    "   Grazing land",
+    "   Via",
+    "   Tailor's guild \u00b7 Fuller \u00b7 Dyer",
+    "   Outputs",
+    ">> Finished clothing \u00b7 Dyed cloth \u00b7 Tailored garments",
+    "   Leatherworking & Cordwaining \u00b7 Manufacturing & crafts \u00b7 Vulnerable",
+    "   From"
+   ],
+   "judge": "STANDS",
+   "note": "the page says this material is worked only to semi-finished goods (Partial \u00b7 <material>), yet a chain prints the finished goods: X and not-X on two tabs (as C37887, C39608)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.halfway",
+   "town": "r2r-city-32",
+   "tab": "Systems/Economics",
+   "i": 149,
+   "line": "Finished clothing \u00b7 Dyed cloth \u00b7 Tailored garments",
+   "against": {
+    "tab": "Systems/Resources",
+    "i": 8,
+    "line": "Partial \u00b7 Wool \u00b7 high value | Partial processing - worked only to semi-finished goods"
+   },
+   "why": "the page says work on wool stops half-way (no Fulling mill); chain Cloth Finishing & Clothing prints finished goods of the missing house",
+   "ctx": [
+    "   Grazing land",
+    "   Via",
+    "   Tailor's guild \u00b7 Dyer",
+    "   Outputs",
+    ">> Finished clothing \u00b7 Dyed cloth \u00b7 Tailored garments",
+    "   Leatherworking & Cordwaining \u00b7 Manufacturing & crafts\u2713 Running",
+    "   From"
+   ],
+   "judge": "STANDS",
+   "note": "the page says this material is worked only to semi-finished goods (Partial \u00b7 <material>), yet a chain prints the finished goods: X and not-X on two tabs (as C37887, C39608)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.needed",
+   "town": "r2r-metropolis-40",
+   "tab": "Systems/Institutions",
+   "i": 157,
+   "line": "Vintner \u00b7 Crafts / Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients.",
+   "against": {
+    "tab": "Systems/Economics",
+    "i": 33,
+    "line": "Needed, and not brought in: timber, grapes, copper ore, mountain timber. | No one trade earns half of what Hongtian makes, so a bad year in any one of them would hurt without ruining it. The religious houses at Hongtian are heard in its dealings, and a quarrel with them is one the metropolis's traders feel. A good part of the grapes Hongtian's work uses must come from elsewhere; when none comes, that work stands idle."
+   },
+   "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
+   "ctx": [
+    "   Leather production. Foul-smelling; sited by water and toward the settlement edge where the ground allows.",
+    "   Connection: Master Tanner Myung Yamamoto",
+    "   Backs \u00b7 High Theocratic Council",
+    "   Services \u00b7 Hide processing",
+    ">> Vintner \u00b7 Crafts",
+    "   Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients.",
+    "   Connection: Master Vintner Uto Xiao"
+   ],
+   "judge": "STANDS",
+   "note": "\"Needed, and not brought in\" with \"that work stands idle\", and the craft printed unmarked with its services (as C31652)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.needed",
+   "town": "r2r-village-53",
+   "tab": "Systems/Institutions",
+   "i": 27,
+   "line": "Common grazing land \u00b7 Economy / Shared pasture for village livestock, held in common alongside the open fields.",
+   "against": {
+    "tab": "Systems/Economics",
+    "i": 22,
+    "line": "Needed, and not brought in: timber (for large vessels), livestock, clay. | More than half of what Dongan earns comes from a single source, and most households depend on it one way or another. Some of Dongan's money is made by people who keep it off the tax lists, so the village collects nothing on it and honest traders carry the tax alone. A good part of the livestock Dongan's work uses must come from elsewhere; when none comes, that work stands idle."
+   },
+   "why": "the page says livestock is needed and not brought in, and that the work stands idle; this house works livestock with no mark",
+   "ctx": [
+    "   Home-based. Ale brewed in the house and sold from it.",
+    "   Connection: Brewster Dewei Xu",
+    "   Backs \u00b7 Merchant Guilds",
+    "   Services \u00b7 Drink service",
+    ">> Common grazing land \u00b7 Economy",
+    "   Shared pasture for village livestock, held in common alongside the open fields.",
+    "   Backs \u00b7 Elder Council"
+   ],
+   "judge": "WEAK",
+   "note": "a common pasture \"for village livestock\" is no work standing idle; the rule is narrowed to Crafts since (removes this row)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.chainOverStopped",
+   "town": "r2s-under_siege-hamlet-0",
+   "tab": "Systems/Economics",
+   "i": 57,
+   "line": "Faith & Worship \u00b7 Religion & civic\u2713 Running",
+   "against": {
+    "tab": "Systems/Institutions",
+    "i": 36,
+    "line": "Access to a house of worship \u00b7 Religious / Stopped by the siege. None of its own; the village's lies usually a few miles away."
+   },
+   "why": "chain Faith & Worship is printed \u2713 Running over houses (Access to a house of worship, Wayside shrine) whose every service the page marks stopped",
+   "ctx": [
+    "   Via",
+    "   Fisher's landing",
+    "   Normally yields",
+    "   River fish \u00b7 Freshwater catch \u00b7 Salted fish",
+    ">> Faith & Worship \u00b7 Religion & civic\u2713 Running",
+    "   Via",
+    "   Access to a house of worship \u00b7 Wayside shrine"
+   ],
+   "judge": "STANDS",
+   "note": "a chain Running over houses whose every service is stopped (as C17893)"
+  },
+  {
+   "law": "L3",
+   "rule": "L3.needed",
+   "town": "r2s-monster_pressure-city-2",
+   "tab": "Systems/Institutions",
+   "i": 91,
+   "line": "Vintner \u00b7 Crafts / Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients.",
+   "against": {
+    "tab": "Systems/Economics",
+    "i": 40,
+    "line": "Needed, and not brought in: grapes. | Aryapura's biggest trade earns a real portion of its living, but none of its trades could carry the place alone. Faith carries real weight at Aryapura: what the religious houses say is heard in the city's dealings, whatever their own share of its money. A good part of the grapes Aryapura's work uses must come from elsewhere; when none comes, that work stands idle."
+   },
+   "why": "the page says grapes is needed and not brought in, and that the work stands idle; this house works grapes with no mark",
+   "ctx": [
+    "   Master clothiers producing garments from finished cloth. Produces everything from working clothes to livery.",
+    "   Connection: Tailor Vikram Trivedi",
+    "   Backs \u00b7 Craft Guilds",
+    "   Services \u00b7 Fine garments \u00b7 Livery and uniforms \u00b7 Working clothes (bulk)",
+    ">> Vintner \u00b7 Crafts",
+    "   Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients.",
+    "   Connection: Master Vintner Ekalavya Chaudhary"
+   ],
+   "judge": "STANDS",
+   "note": "\"Needed, and not brought in\" with \"that work stands idle\", and the craft printed unmarked with its services (as C31652)"
+  }
+ ]
+}

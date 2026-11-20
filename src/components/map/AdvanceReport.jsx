@@ -264,7 +264,7 @@ function DeputyDiary({ diary }) {
               </Chip>
             </div>
             {v.reversibilityInferred && (
-              <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), marginTop: 2 }}>standing read from the record, not decreed</div>
+              <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), marginTop: 2 }}>worked out from what followed; you did not rule on it</div>
             )}
           </div>
         ))}
@@ -294,7 +294,7 @@ function DecreeCard({ decree, within }) {
         <div style={{ color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontStyle: 'italic' }}>{decree.finding}</div>
       ) : (
         <div style={{ color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile) }}>
-          {decree.coneSize} downstream {decree.coneSize === 1 ? 'effect' : 'effects'} <span style={{ color: MUTED }}>({decree.coneInferred === false ? 'recorded' : 'inferred'} cone)</span>
+          {decree.coneSize} {decree.coneSize === 1 ? 'thing' : 'things'} followed from it <span style={{ color: MUTED }}>({decree.coneInferred === false ? 'traced' : 'likely'})</span>
           {decree.breakingReason ? <> · <span style={{ color: RED }}>{decree.breakingReason}</span></> : null}
         </div>
       )}
@@ -433,7 +433,7 @@ function DecreeCauseSection({ causes, resolveName, chronicleHref }) {
     <div data-testid="chronicle-decree-causes" style={{
       border: `1px solid ${GOLD}`, background: CARD_ALT, padding: '9px 11px', display: 'grid', gap: 7,
     }}>
-      <SectionTitle icon={Landmark}>Orders carried out this tick</SectionTitle>
+      <SectionTitle icon={Landmark}>Orders carried out this advance</SectionTitle>
       <div style={{ display: 'grid', gap: 5 }}>
         {causes.map((cause) => (
           <DecreeCauseRow key={cause.decreeId} cause={cause} resolveName={resolveName} chronicleHref={chronicleHref} />
@@ -512,7 +512,7 @@ export default function AdvanceReport({ campaign, nameFor, chronicleHref = null 
         color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 750, lineHeight: 1.5,
       }}>
         No advance to report yet. Advance the realm, and this page will set down what
-        unfolded in the span: the headline, its chapters and threads, the receipts
+        happened in that time: the headline, its chapters and threads, the events
         beneath them, and how your decrees fared.
       </div>
     );
@@ -608,10 +608,10 @@ export default function AdvanceReport({ campaign, nameFor, chronicleHref = null 
 
       {/* ── Self-explaining footer (the whisper via an existing organ) ───── */}
       <div style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.micro, mobile), lineHeight: 1.5, borderTop: `1px solid ${BORDER2}`, paddingTop: 6 }}>
-        This report compresses, never truncates, what unfolded, scaled to the span.
+        This report shortens a long span but leaves nothing out.
         {hasRecordedEdges
-          ? ' Causal links are recorded from the engine’s provenance ledger where marked, inferred from shared entities otherwise; click any receipt to find it on the map.'
-          : ' Causal links between events are inferred from what they touched; click any receipt to find it on the map.'}
+          ? ' Where a link is marked, the realm saw one event cause another; the other links are guesses from the places and people the events share. Click any event to find it on the map.'
+          : ' Links between events are guesses from the places and people they share. Click any event to find it on the map.'}
       </div>
     </div>
   );

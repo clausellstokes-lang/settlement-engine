@@ -1,0 +1,22 @@
+{
+  "_doc": "RECORD 2 OF THE WAVE (MERGE-WAVE), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-MERGE-WAVE §1 step 2): the integration branch's first-parent line is the golden chain; a lane's own records are components. THE CAUSE, ONE: THE W2 DEF MERGE OVER THE INTEGRATION BRANCH — lane/w2-def-2026-11-07 at 091b23bb3 merged at 82a4e2856 (MERGE-WAVE step 1), the conflicts composed; its lane records the components (none signed on the lane (its goldens and manifest untouched on the lane; its movers named in its lane record)): what the merge moved beyond record 1's post-state (the stage of ea0e269a9). THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against record 1's post-state (the stage of ea0e269a9): the generator golden master 422 of 525 rows (thorp 84, hamlet 84, village 84, town 2, city 84, metropolis 84) -> 8e80cd6a..; the espionage fence's driven corpus 326 of 360 rows -> e072863b..; 360/360 distinct; the herald 0; the PDF snapshot 0 and the witness 0. The prose manifest's movement at this point is NOT written here: it is signed ONCE at step 3 (the composed-prose manifest), this point named in its cause list. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the wave MERGE-WAVE, 2026-11-08)",
+  "cause": "THE W2 DEF MERGE OVER THE INTEGRATION BRANCH — lane/w2-def-2026-11-07 at 091b23bb3 merged at 82a4e2856 (MERGE-WAVE step 1), the conflicts composed; its lane records the components (none signed on the lane (its goldens and manifest untouched on the lane; its movers named in its lane record)): what the merge moved beyond record 1's post-state (the stage of ea0e269a9)",
+  "seat": "MERGE-WAVE (Opus 5.5) under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at 82a4e2856",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

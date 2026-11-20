@@ -1,0 +1,450 @@
+{
+ "base": "/tmp/claude-0/-home-user-settlement-engine/e9e30391-0e2b-5326-8cea-85ed7a9ad32b/scratchpad/base",
+ "tip": "/tmp/claude-0/-home-user-settlement-engine/e9e30391-0e2b-5326-8cea-85ed7a9ad32b/scratchpad/proto",
+ "rule": "R5",
+ "pops": {
+  "150": {
+   "towns": 150,
+   "marksBase": 381,
+   "marksTip": 381,
+   "townsMarkedTip": 103,
+   "bornCalmTip": 115,
+   "bornCalmTownsTip": 38,
+   "bornCalmTownsBase": 38,
+   "spentCalmTip": 25,
+   "townsLinesMoved": 0,
+   "newLines": {},
+   "goneLines": {},
+   "leftCalm": {
+    "Vintner · grapes": {
+     "towns": 12,
+     "three": [
+      "bar0-town-calm-rand-37",
+      "bar0-metropolis-calm-rand-27",
+      "bar0-metropolis-calm-rand-30"
+     ]
+    },
+    "Potter · clay": {
+     "towns": 11,
+     "three": [
+      "bar0-village-calm-rand-39",
+      "bar0-town-calm-rand-27",
+      "bar0-town-calm-rand-30"
+     ]
+    },
+    "Brickmaker · clay": {
+     "towns": 9,
+     "three": [
+      "bar0-village-calm-rand-31",
+      "bar0-village-calm-rand-39",
+      "bar0-town-calm-rand-27"
+     ]
+    },
+    "Cooper · timber": {
+     "towns": 8,
+     "three": [
+      "bar0-village-calm-rand-30",
+      "bar0-village-calm-rand-33",
+      "bar0-town-calm-rand-35"
+     ]
+    },
+    "Fuller · wool": {
+     "towns": 8,
+     "three": [
+      "bar0-village-calm-rand-37",
+      "bar0-metropolis-calm-rand-27",
+      "bar0-metropolis-calm-rand-28"
+     ]
+    },
+    "Tanner (established) · hides": {
+     "towns": 8,
+     "three": [
+      "bar0-town-calm-rand-28",
+      "bar0-town-calm-rand-38",
+      "bar0-town-calm-rand-39"
+     ]
+    },
+    "Weavers/Textile workers · wool": {
+     "towns": 8,
+     "three": [
+      "bar0-town-calm-rand-39",
+      "bar0-metropolis-calm-rand-27",
+      "bar0-metropolis-calm-rand-28"
+     ]
+    },
+    "Carpenters (5-15) · timber": {
+     "towns": 7,
+     "three": [
+      "bar0-town-calm-rand-27",
+      "bar0-town-calm-rand-30",
+      "bar0-metropolis-calm-rand-28"
+     ]
+    },
+    "Cobbler's guild · hides": {
+     "towns": 7,
+     "three": [
+      "bar0-town-calm-rand-39",
+      "bar0-town-calm-rand-40",
+      "bar0-metropolis-calm-rand-27"
+     ]
+    },
+    "Dairy farmer · livestock": {
+     "towns": 5,
+     "three": [
+      "bar0-hamlet-calm-rand-27",
+      "bar0-hamlet-calm-rand-28",
+      "bar0-hamlet-calm-rand-29"
+     ]
+    },
+    "Sawmill (commercial) · timber": {
+     "towns": 5,
+     "three": [
+      "bar0-metropolis-calm-rand-28",
+      "bar0-metropolis-calm-rand-30",
+      "bar0-metropolis-calm-rand-34"
+     ]
+    },
+    "Woodcarver · timber": {
+     "towns": 5,
+     "three": [
+      "bar0-metropolis-calm-rand-28",
+      "bar0-metropolis-calm-rand-30",
+      "bar0-metropolis-calm-rand-34"
+     ]
+    },
+    "Charcoal burner · timber": {
+     "towns": 4,
+     "three": [
+      "bar0-hamlet-calm-rand-27",
+      "bar0-hamlet-calm-rand-29",
+      "bar0-village-calm-rand-31"
+     ]
+    },
+    "Sawmill · timber": {
+     "towns": 3,
+     "three": [
+      "bar0-village-calm-rand-30",
+      "bar0-village-calm-rand-31",
+      "bar0-village-calm-rand-40"
+     ]
+    },
+    "Tanners · hides": {
+     "towns": 3,
+     "three": [
+      "bar0-town-calm-rand-27",
+      "bar0-metropolis-calm-rand-30",
+      "bar0-metropolis-calm-rand-32"
+     ]
+    },
+    "Carpenter (part-time) · timber": {
+     "towns": 2,
+     "three": [
+      "bar0-hamlet-calm-rand-27",
+      "bar0-hamlet-calm-rand-29"
+     ]
+    },
+    "Resident smith (part-time) · iron": {
+     "towns": 2,
+     "three": [
+      "bar0-hamlet-calm-rand-29",
+      "bar0-hamlet-calm-rand-37"
+     ]
+    },
+    "Tannery · livestock or hides": {
+     "towns": 2,
+     "three": [
+      "bar0-village-calm-rand-31",
+      "bar0-village-calm-rand-32"
+     ]
+    },
+    "Blacksmith · iron": {
+     "towns": 2,
+     "three": [
+      "bar0-village-calm-rand-32",
+      "bar0-village-calm-rand-33"
+     ]
+    },
+    "Carpenter · timber": {
+     "towns": 1,
+     "three": [
+      "bar0-village-calm-rand-31"
+     ]
+    },
+    "Cobbler · hides": {
+     "towns": 1,
+     "three": [
+      "bar0-village-calm-rand-32"
+     ]
+    },
+    "Salt works · salt": {
+     "towns": 1,
+     "three": [
+      "bar0-metropolis-calm-rand-27"
+     ]
+    },
+    "Luxury goods quarter · luxury goods": {
+     "towns": 1,
+     "three": [
+      "bar0-metropolis-calm-rand-34"
+     ]
+    }
+   }
+  },
+  "720": {
+   "towns": 720,
+   "marksBase": 2066,
+   "marksTip": 2062,
+   "townsMarkedTip": 464,
+   "bornCalmTip": 563,
+   "bornCalmTownsTip": 144,
+   "bornCalmTownsBase": 144,
+   "spentCalmTip": 124,
+   "townsLinesMoved": 6,
+   "newLines": {},
+   "goneLines": {
+    "GAP No salt reaches the salt works.": {
+     "towns": 6,
+     "three": [
+      "r2r-village-36",
+      "r2r-village-53",
+      "r2r-town-3"
+     ]
+    },
+    "MARK Salt works: Short of salt.": {
+     "towns": 4,
+     "three": [
+      "r2r-village-36",
+      "r2r-village-53",
+      "r2r-town-3"
+     ]
+    }
+   },
+   "leftCalm": {
+    "Potter · clay": {
+     "towns": 62,
+     "three": [
+      "r2r-village-4",
+      "r2r-village-16",
+      "r2r-village-27"
+     ]
+    },
+    "Vintner · grapes": {
+     "towns": 58,
+     "three": [
+      "r2r-town-18",
+      "r2r-town-22",
+      "r2r-town-33"
+     ]
+    },
+    "Weavers/Textile workers · wool": {
+     "towns": 57,
+     "three": [
+      "r2r-town-14",
+      "r2r-town-17",
+      "r2r-town-28"
+     ]
+    },
+    "Brickmaker · clay": {
+     "towns": 49,
+     "three": [
+      "r2r-village-6",
+      "r2r-town-10",
+      "r2r-town-16"
+     ]
+    },
+    "Fuller · wool": {
+     "towns": 47,
+     "three": [
+      "r2r-village-14",
+      "r2r-town-28",
+      "r2r-town-34"
+     ]
+    },
+    "Cobbler's guild · hides": {
+     "towns": 47,
+     "three": [
+      "r2r-town-6",
+      "r2r-town-14",
+      "r2r-town-15"
+     ]
+    },
+    "Tanner (established) · hides": {
+     "towns": 36,
+     "three": [
+      "r2r-town-6",
+      "r2r-town-14",
+      "r2r-town-16"
+     ]
+    },
+    "Carpenters (5-15) · timber": {
+     "towns": 29,
+     "three": [
+      "r2r-town-22",
+      "r2r-town-31",
+      "r2r-town-34"
+     ]
+    },
+    "Cooper · timber": {
+     "towns": 27,
+     "three": [
+      "r2r-village-15",
+      "r2r-town-16",
+      "r2r-town-31"
+     ]
+    },
+    "Sawmill (commercial) · timber": {
+     "towns": 26,
+     "three": [
+      "r2r-town-2",
+      "r2r-town-29",
+      "r2r-town-34"
+     ]
+    },
+    "Woodcarver · timber": {
+     "towns": 20,
+     "three": [
+      "r2r-village-4",
+      "r2r-town-32",
+      "r2r-town-49"
+     ]
+    },
+    "Tanners · hides": {
+     "towns": 20,
+     "three": [
+      "r2r-town-2",
+      "r2r-town-15",
+      "r2r-town-20"
+     ]
+    },
+    "Dairy farmer · livestock": {
+     "towns": 14,
+     "three": [
+      "r2r-hamlet-12",
+      "r2r-hamlet-14",
+      "r2r-hamlet-19"
+     ]
+    },
+    "Charcoal burner · timber": {
+     "towns": 14,
+     "three": [
+      "r2r-hamlet-26",
+      "r2r-hamlet-48",
+      "r2r-hamlet-52"
+     ]
+    },
+    "Salt works · salt": {
+     "towns": 8,
+     "three": [
+      "r2r-hamlet-18",
+      "r2r-town-15",
+      "r2r-town-29"
+     ]
+    },
+    "Blacksmiths (3-10) · iron": {
+     "towns": 7,
+     "three": [
+      "r2r-city-5",
+      "r2r-city-17",
+      "r2r-city-32"
+     ]
+    },
+    "Specialized metalworkers · iron": {
+     "towns": 6,
+     "three": [
+      "r2r-city-5",
+      "r2r-city-17",
+      "r2r-city-32"
+     ]
+    },
+    "Resident smith (part-time) · iron": {
+     "towns": 5,
+     "three": [
+      "r2r-hamlet-19",
+      "r2r-hamlet-26",
+      "r2r-hamlet-30"
+     ]
+    },
+    "Carpenter (part-time) · timber": {
+     "towns": 4,
+     "three": [
+      "r2r-hamlet-3",
+      "r2r-hamlet-17",
+      "r2r-hamlet-52"
+     ]
+    },
+    "Sawmill · timber": {
+     "towns": 4,
+     "three": [
+      "r2r-village-4",
+      "r2r-village-6",
+      "r2r-village-14"
+     ]
+    },
+    "Blacksmith · iron": {
+     "towns": 4,
+     "three": [
+      "r2r-village-4",
+      "r2r-village-16",
+      "r2r-village-22"
+     ]
+    },
+    "Carpenter · timber": {
+     "towns": 4,
+     "three": [
+      "r2r-village-13",
+      "r2r-village-15",
+      "r2r-village-22"
+     ]
+    },
+    "Glassblower · glass sand": {
+     "towns": 4,
+     "three": [
+      "r2r-town-40",
+      "r2r-town-41",
+      "r2r-town-51"
+     ]
+    },
+    "Luxury goods quarter · luxury goods": {
+     "towns": 4,
+     "three": [
+      "r2r-city-21",
+      "r2r-city-23",
+      "r2r-metropolis-17"
+     ]
+    },
+    "Smelter · iron ore or copper ore or gold or silver ore": {
+     "towns": 3,
+     "three": [
+      "r2r-city-5",
+      "r2r-city-17",
+      "r2r-city-36"
+     ]
+    },
+    "Tannery · livestock or hides": {
+     "towns": 1,
+     "three": [
+      "r2r-village-14"
+     ]
+    },
+    "Cobbler · hides": {
+     "towns": 1,
+     "three": [
+      "r2r-village-27"
+     ]
+    },
+    "Fishmonger · fish": {
+     "towns": 1,
+     "three": [
+      "r2r-village-49"
+     ]
+    },
+    "Alchemist shop · medicinal herbs or water from the hot springs": {
+     "towns": 1,
+     "three": [
+      "r2r-town-51"
+     ]
+    }
+   }
+  }
+ }
+}

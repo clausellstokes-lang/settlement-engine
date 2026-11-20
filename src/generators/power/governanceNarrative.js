@@ -12,7 +12,7 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F10: one line, so no cited line moves
+import { FAILED_SOURCE_WORDS } from '../economy/foodBalance.js'; import { defenceOf } from '../../domain/facts/defence.js'; import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOfConfig } from '../../domain/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; import { buildInsurgencyNarrative, buildMigrationNarrative, buildReligiousConversionNarrative, buildWartimeNarrative } from './governingStressVignettes.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../../domain/display/powerSentenceName.js'; // NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): a power in a sentence takes its article // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves — LANDING-R2 (ODQ §934.105): the four governing-faction stress vignettes moved verbatim to power/governingStressVignettes.js, imported on this line, so no cited line moves — W3 POW (WAVE-RULINGS item 8): the label reads the entry's direction through F13's reader, imported on this line // BAR3-POWERS (C36418): the failed source's words, first on this line
 
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
@@ -92,7 +92,7 @@ const deriveGuardLabel = (institutionNames, isSmallSettlement) => {
 };
 
 const deriveCouncilLabel = (tier, governingBodyOverride) => {
-  if (governingBodyOverride) return governingBodyOverride;
+  if (governingBodyOverride) return powerNameWithArticle(governingBodyOverride); // NAMES-1 (CN1): the governing power with its article ("the Military Council has been debating"); `preserveSentenceCase` capitalises it where the sentence opens
   if (SMALL_SETTLEMENT_TIERS.has(tier)) {
     return tier === 'thorp' ? 'the household heads' : 'the village elders';
   }
@@ -196,7 +196,7 @@ const rewriteFactionPhrasing = (
       /\bcouncil meetings\b/gi,
       match => preserveSentenceCase(
         match,
-        `${councilLabel.replace(/^the /, '')} meetings`,
+        governingBodyOverride ? `the ${powerPossessive(powerNameAfterArticle(governingBodyOverride))} meetings` : `${councilLabel.replace(/^the /, '')} meetings`, // NAMES-1 (CN1): "the Elder Council's meetings", never "Elder Council meetings"
       ),
     )
     .replace(/\binside the council\b/gi, `inside ${councilLabel}`)
@@ -230,6 +230,10 @@ const rewriteFactionPhrasing = (
     );
 };
 
+/** The readiness labels (defenseProfile.readiness.label) the Defense verdict prints as defended, and as exposed. */
+const DEFENDED_READINESS_LABELS = new Set(['Defensible', 'Well-Defended', 'Fortress']);
+const EXPOSED_READINESS_LABELS = new Set(['Undefended', 'Lightly Defended', 'Vulnerable']);
+
 /**
  * Synthesis flags are authored conclusions and therefore outrank numerical
  * indicators. Only when no synthesis applies do the ordinary institutional
@@ -239,11 +243,22 @@ const deriveBaselineStability = ({
   stressFlags,
   institutionFlags,
   neighbourRelationship,
+  defenseLabel = null, militaryGate = null, // PP11 (BAR2-PEOPLE-3): the record's funding gate (defenseProfile.economicGates.military), on the replay
+  theocraticSeat = true, // TAIL-POWERS-3 P16 (G3): a religious seat or a religious power of weight stands
+  garrisonStands = true, // TAIL-POWERS-3 P16 (G5): a garrison stands (defenseFacts.js :: hasGarrison)
 }) => {
+  // POWERS-14 (the chair's ruling of 2026-11-14, ONE LADDER FOR ONE WORD; the page census's NEW1): the defence word
+  // reads the record's own readiness label (defenseProfile.readiness.label, the Defense verdict the Overview prints),
+  // handed in by the power step's replay after the defence profile (rulingStructure.js `projection.defenseLabel`).
+  // "underdefended" never stands over a Defensible, Well-Defended or Fortress label; "strong military presence" never
+  // over an Undefended, Lightly Defended or Vulnerable one. Absent (the first pass, which the replay overwrites), the
+  // label refuses neither word.
+  const defended = DEFENDED_READINESS_LABELS.has(String(defenseLabel));
+  const exposed = EXPOSED_READINESS_LABELS.has(String(defenseLabel));
   if (stressFlags.stateCrime) return 'Enforced Order (authoritarian)';
   if (stressFlags.crimeIsGovt) return 'Unstable — criminal governance';
-  if (stressFlags.crusaderSynthesis) return 'Rigid (militant theocracy)';
-  if (stressFlags.merchantArmy) return 'Fragile (private security, no public law)';
+  if (stressFlags.crusaderSynthesis && theocraticSeat) return 'Rigid (militant theocracy)'; // TAIL-POWERS-3 P16 (G3)
+  if (stressFlags.merchantArmy) return institutionFlags.inst?.hasCourtSystem ? 'Fragile (private security above the public law)' : 'Fragile (private security, no public law)'; // COHERENCE-PRESUME (the chair's ruling of 2026-11-12): never deny the law a hall or court keeps
 
   if (
     institutionFlags.criminalEffective > 75 &&
@@ -255,19 +270,20 @@ const deriveBaselineStability = ({
     institutionFlags.militaryEffective > 70 &&
     institutionFlags.economyOutput < 32
   ) {
-    return 'Tense (militarised, chronically underfunded)';
+    return Number(militaryGate) >= 1 ? 'Tense (militarised)' : 'Tense (militarised, chronically underfunded)'; // PP11: funded in full, the forces are not underfunded; absent or under 1, as before
   }
-  if (stressFlags.theocraticEconomy) return 'Stable (theocratic governance)';
+  if (stressFlags.theocraticEconomy && theocraticSeat) return 'Stable (theocratic governance)'; // TAIL-POWERS-3 P16 (G3)
   if (ADVERSARIAL_RELATIONSHIP_TYPES.has(neighbourRelationship?.relationshipType)) {
     return 'Tense (external threat)';
   }
   if (
     institutionFlags.economyOutput > 68 &&
-    institutionFlags.militaryEffective < 30
+    institutionFlags.militaryEffective < 30 &&
+    !defended
   ) {
     return 'Vulnerable (prosperous but underdefended)';
   }
-  if (institutionFlags.militaryEffective > 68) {
+  if (institutionFlags.militaryEffective > 68 && !exposed && garrisonStands) { // TAIL-POWERS-3 P16 (G5)
     return 'Ordered (strong military presence)';
   }
   return 'Stable';
@@ -278,9 +294,9 @@ const deriveBaselineStability = ({
  * arms at the tail included. NO STRESSOR FALLS THROUGH TO THE BARE BASELINE: all fifteen draw
  * an ACTIVE CRISIS card, so a fall-through read `Stable` beside a crisis.
  */
-const applyStressStability = (baselineStability, hasStress) => {
+const applyStressStability = (baselineStability, hasStress, migrationDirection = 'arrivals') => {
   if (hasStress('under_siege')) {
-    return 'Critical (active siege — survival priority)';
+    return 'Critical (under siege)';
   }
   if (hasStress('occupied')) {
     return 'Suppressed (under occupation: resistance simmers)';
@@ -289,13 +305,13 @@ const applyStressStability = (baselineStability, hasStress) => {
     return 'Fractured — no stable governing authority';
   }
   if (hasStress('recently_betrayed')) {
-    return 'Shaken — institutional trust collapsed';
+    return 'Shaken — nobody trusts those in charge';
   }
   if (hasStress('famine')) {
     return 'Desperate — hunger is eroding order';
   }
   if (hasStress('plague_onset')) {
-    return 'Anxious — disease is overriding normal authority';
+    return 'Anxious — people fear the sickness more than they heed orders';
   }
   if (hasStress('succession_void')) {
     return 'Volatile — power is available to whoever moves first';
@@ -303,7 +319,7 @@ const applyStressStability = (baselineStability, hasStress) => {
   if (hasStress('indebted')) {
     return baselineStability.includes('Unstable')
       ? baselineStability
-      : 'Strained — debt obligations constrain every decision';
+      : 'Strained — the creditors have a say in every decision';
   }
   if (
     hasStress('monster_pressure') &&
@@ -313,7 +329,7 @@ const applyStressStability = (baselineStability, hasStress) => {
   }
   // ⛔ THE SIX NO-FALL-THROUGH ARMS (owner order 2026-09-17, "fix the remaining contradictions"; the argument, the measurement and the JUDGMENT on these words are in docs/FIRST_CONTACT_BACKLOG.md under DOSSIER AND REALM POLISH, part 3 (C) and part 4). Before them a town under one of these six read the baseline `Stable` beside its own ACTIVE CRISIS banner. Band words are the producer's own vocabulary; the order is PRIMARY_STRESS_PRECEDENCE's, so `infiltrated` is LAST and every public crisis beside it still names itself.
   if (hasStress('insurgency')) return 'Unstable (insurgency contests authority)';
-  if (hasStress('mass_migration')) return 'Strained (people arriving or leaving)';
+  if (hasStress('mass_migration')) return migrationDirection === 'departures' ? 'Strained (people leaving)' : 'Strained (people arriving)';
   if (hasStress('wartime')) return 'Tense (requisition and conscription)';
   if (hasStress('religious_conversion')) return 'Tense (the creed is contested)';
   if (hasStress('slave_revolt')) return 'Unstable (revolt not contained)';
@@ -330,13 +346,22 @@ const annotateMonsterThreat = (stability, monsterThreat) => {
   if (monsterThreat !== 'plagued') return stability;
   const alreadyExpressesPressure = MONSTER_THREAT_ANNOTATION_MARKERS.test(stability);
   return alreadyExpressesPressure
-    ? `${stability}; monster threat active`
+    ? `${stability}; monsters on the roads`
     : 'Tense — regional monster threat';
 };
 
 // ⛔ THE ARCANE SIGNAL ASKS THE WORLD LAW FIRST (GS-4, ODQ §934.101): a mundane 'Alchemist shop' (licence `none`)
 // raised the hedge-wizard line in 11 of 250 no-magic towns, each convicted by the coherence receipt and shipped.
-const deriveInstitutionSignals = (institutionNames, magicWorks) => ({
+// POWERS-13 (the bar's HIGH row #291): a line that names a market or a court READS THE ROSTER. `hasLiveMarket` is the
+// vocabulary's one market fact (`factsOf(...).market`, the reader the sibling door below uses), never the loose
+// `hasMarketInstitution` ('guild', 'trading' and a black market all match it); `hasCourt` is the record's own court
+// system (`instFlags.inst.hasCourtSystem`, the reader `deriveBaselineStability` uses). TAIL-CLOSE-SRC-2 (the
+// defence walker's court member): `hasCourt` is read from the home (`facts/defence.js :: defenceOf(...).court`) over the
+// same roster names, the answer the flag bag carried (`priorityHelpers.js :: hasCourtSystem: home.hasCourt`); measured
+// equal at every call over the 720, the births byte-identical.
+const deriveInstitutionSignals = (institutionNames, magicWorks, estate = { institutions: (institutionNames || []).map((name) => ({ name })) }, home = defenceOf(estate)) => ({
+  hasLiveMarket: Boolean(factsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }).market),
+  hasCourt: home.court,
   hasMilitaryInstitution: includesAnyInstitution(
     institutionNames,
     ['garrison', 'barracks', 'militia', 'watch', 'guard', 'mercenary'],
@@ -361,6 +386,7 @@ const deriveInstitutionSignals = (institutionNames, magicWorks) => ({
     institutionNames,
     ['church', 'cathedral', 'monastery', 'temple', 'parish', 'shrine'],
   ),
+  hasOwnChurch: factsOf(estate).faith.hasChurch, // TAIL-CLOSE-SRC-3: the vocabulary's `church` atom (a wayside shrine or an access row is not one)
 });
 
 /**
@@ -377,6 +403,9 @@ const deriveBaselineConflict = ({
   monsterThreat,
   hasRoyalAuthority,
   hasNoblePower,
+  theocraticSeat = true, // TAIL-POWERS-3 batch 2: the G3 atom (a religious seat or a religious power of weight)
+  seatIsReligious = false, // TAIL-POWERS-3 batch 2: the governing seat is the church's own
+  seatIsMilitary = false, // TAIL-POWERS-3 batch 2: the governing seat is the commanders' own
 }) => {
   const {
     hasMilitaryInstitution,
@@ -385,6 +414,9 @@ const deriveBaselineConflict = ({
     hasCivicInstitution,
     hasMarketInstitution,
     hasReligiousInstitution,
+    hasLiveMarket,
+    hasCourt,
+    hasOwnChurch,
   } = institutionSignals;
 
   if (stressFlags.stateCrime) {
@@ -397,7 +429,7 @@ const deriveBaselineConflict = ({
       ? 'The guild and the district council both claim authority over the new market. Violence has settled some of the disputes; more is expected.'
       : 'Two of the stronger families have been resolving disputes between themselves rather than involving the elders. The rest of the community is watching nervously.';
   }
-  if (stressFlags.crusaderSynthesis) {
+  if (stressFlags.crusaderSynthesis && theocraticSeat) { // TAIL-POWERS-3 batch 2: no commander-prelate where no church rules
     return hasMilitaryInstitution
       ? 'The commander-prelate has declared a heresy investigation into a rival settlement. The garrison is mobilizing.'
       : 'The local priest has declared a neighbouring settlement heretical. Relations between the two communities have broken down entirely.';
@@ -407,7 +439,7 @@ const deriveBaselineConflict = ({
       ? "A guild's private soldiers arrested a rival's factor. The public watch is refusing to intervene in what they call a 'merchant matter'."
       : "One household's hired hands roughed up a rival's farmhand over a grazing dispute. Neither side will involve the elders.";
   }
-  if (stressFlags.heresySuppression) {
+  if (stressFlags.heresySuppression && theocraticSeat) { // TAIL-POWERS-3 batch 2: no church court tries anyone where no church holds weight
     if (hasArcaneInstitution) {
       return "A hedge wizard was dragged before the ecclesiastical court. The mages' quarter is very quiet at the moment.";
     }
@@ -421,10 +453,11 @@ const deriveBaselineConflict = ({
       ? "Two guild masters are having each other's warehouses robbed. Both deny it publicly. Both are losing patience."
       : "Two households have been undercutting each other on market day for months. Last week someone's cart was damaged. No one saw anything.";
   }
-  if (neighbourRelationship) return `Ongoing tensions with ${neighbourRelationship.neighborName}`;
+  if (neighbourRelationship) return `Relations with ${neighbourRelationship.neighborName} have soured, and everyone here knows it.`;
   if (institutionFlags.criminalEffective > 65) {
-    return hasMilitaryInstitution || hasCivicInstitution
-      ? 'Crime rates are rising; several merchants have been found murdered, and the guard is being accused of inaction.'
+    // POWERS-13: the merchants and the guard it names stand (a market; a force), else the communal stores
+    return hasMilitaryInstitution && hasLiveMarket
+      ? 'Several merchants have been found murdered this season, and people say the guard is doing nothing about it.'
       : 'Someone has been stealing from the communal stores. Everyone suspects someone. No one is saying anything.';
   }
   if (hasRoyalAuthority && hasNoblePower && priorities.military > 55) {
@@ -434,24 +467,24 @@ const deriveBaselineConflict = ({
     if (priorities.military > 70) {
       return 'A noble house has begun recruiting its own soldiers beyond its traditional levy obligation. The crown has noticed and has not yet decided what to say about it.';
     }
-    return "The crown's relationship with the noble houses is transactional and increasingly strained. The last royal directive was delayed six weeks while passing through noble intermediaries.";
+    return "The crown's last order took six weeks to get through the noble houses that were meant to pass it on. The crown and the nobles bargain over everything now, and each bargain comes harder.";
   }
-  if (hasNoblePower && institutionFlags.economyOutput > 55) {
+  if (hasNoblePower && institutionFlags.economyOutput > 55 && hasLiveMarket) { // POWERS-13: both lines name the merchants and their market
     return priorities.economy > 65
       ? 'The merchant class is outbuying noble landholdings. Three estates have changed hands in the last decade. The families that lost them have not forgotten.'
       : "A noble family is contesting a merchant's right to operate in their traditional market territory. The council is hearing the case and wishes it were not.";
   }
-  if (institutionFlags.militaryEffective > 68) {
-    if (hasMilitaryInstitution) {
+  if (institutionFlags.militaryEffective > 68 && !seatIsMilitary) { // TAIL-POWERS-3 batch 2: the commanders' own seat loses no ground to them
+    if (hasMilitaryInstitution && hasCourt) { // POWERS-13: the civilian courts it names stand
       return 'The military commanders are pushing for expanded authority over civilian courts, and the council is losing ground.';
     }
-    if (hasCivicInstitution) {
+    if (hasCivicInstitution && !hasMilitaryInstitution) {
       return 'The village militia captain is pushing for authority over disputes that the reeve used to handle.';
     }
     return "The strongest armed household has started making decisions on everyone's behalf without asking.";
   }
-  if (institutionFlags.religionInfluence > 68) {
-    if (hasCivicInstitution) {
+  if (institutionFlags.religionInfluence > 68 && !seatIsReligious) { // TAIL-POWERS-3 batch 2: the church demands nothing of its own seat
+    if (hasCivicInstitution && hasOwnChurch) { // TAIL-POWERS-3 batch 2: a church of its own, not the access to another's
       return 'The church is demanding veto power over council appointments. The council has not yet refused publicly.';
     }
     if (hasReligiousInstitution) {
@@ -470,20 +503,20 @@ const deriveBaselineConflict = ({
   }
   if (monsterThreat === 'plagued') {
     if (hasMilitaryInstitution) {
-      return 'A monster incursion last season destroyed outlying farms. The garrison is stretched thin and the council cannot agree on whether to raise a levy or hire mercenaries.';
+      return 'Monsters prowl near the outlying farms, and no one here can agree whether to raise a levy or pay others to drive them off.'; // TAIL-POWERS-4 (B02757): no raid the record lacks, no force "stretched thin" beside a Safe order
     }
     if (hasCivicInstitution) {
       return 'Monster attacks on the outlying farms have not stopped. The village is debating whether to build proper defences or petition the nearest lord for help.';
     }
     return 'Farms nearby have been abandoned after attacks. The community cannot agree on whether to shelter in place, build defences, or leave.';
   }
-  if (hasCivicInstitution || hasUrbanCommerceInstitution) {
+  if ((hasCivicInstitution || hasUrbanCommerceInstitution) && hasLiveMarket) { // POWERS-13 (#291): the market it levies, and its merchants, stand
     return 'The council has been debating market levies for three months. The merchants have stopped attending the sessions. Both sides are now acting as if the other has already lost.';
   }
   if (hasMarketInstitution) {
     return 'A dispute over field rotation and grazing rights has divided the village for most of this season.';
   }
-  return 'A dispute over grazing rights and water access has been running for two seasons. It has stopped being about grazing rights and water access.';
+  return institutionFlags?.noGrazingQuarrel || 'A dispute over grazing rights and water access has run for two seasons, and the families on each side no longer speak to one another.'; // BAR8-K-POWERS (15b, C31732): no grazing quarrel where nothing grazes (the power step reads the place: data/powerSiblings.js :: noGrazingQuarrelOf)
 };
 
 const selectPrimaryStress = (stressTypes, fallbackStressType) => {
@@ -524,96 +557,27 @@ const buildBetrayalNarrative = ({
   const location = isFormalAuthority ? 'within the office of the ' : 'inside ';
   const authority = isFormalAuthority
     ? governingFactionName.toLowerCase()
-    : governingFactionName;
+    : (powerNameWithArticle(governingFactionName) || governingFactionName); // NAMES-1 (CN1): "inside the Ducal Governorship" (no name: the legacy rendering, as before)
   return (
     'The investigation into the betrayal has been obstructed twice. ' +
     `The obstruction came from ${location}${authority}. No one will say who.`
   );
 };
 
-const buildInsurgencyNarrative = (
-  institutionFlags,
-  governingFactionName,
-) => {
-  const insurgencyOutmusclesAuthority =
-    (institutionFlags.criminalEffective || 0) >
-      (institutionFlags.militaryEffective || 0) &&
-    (institutionFlags.economyOutput || 50) < 48;
-
-  if (insurgencyOutmusclesAuthority) {
-    return "The commons no longer accept the authority's account of events. Inflammatory pamphlets are being distributed. Two guild masters refused to attend the last civic assembly. The governing faction has intelligence about cells meeting at night, but hasn't moved, because moving publicly would confirm what it officially denies.";
-  }
-  return (
-    'The challenge to the governing faction is institutional, not popular. ' +
-    'Key officials are slow-walking orders. Revenue is being collected but held rather than forwarded. ' +
-    `${governingFactionName} is conducting meetings with people who should not be meeting privately. ` +
-    'The governing faction has noticed and is considering whether to act before the coalition is complete.'
-  );
-};
-
-const buildWartimeNarrative = (institutionFlags, governingFactionName) => {
-  const isWellSupplied =
-    (institutionFlags.militaryEffective || 50) >= 55 &&
-    (institutionFlags.economyOutput || 50) >= 45;
-
-  if (isWellSupplied) {
-    return (
-      'The war is present here as money and absence. The garrison has doubled in size and is well-supplied. The crown is paying for this one. ' +
-      'Contracts for grain, leather, and ironwork are flowing to anyone with the capacity to fill them. ' +
-      'The men who left to fight have not returned, which is a grief that runs beneath the commerce. ' +
-      `${governingFactionName} is navigating the difference between what it can extract for the war effort and what the settlement can actually spare.`
-    );
-  }
-  return 'The war is present here as scarcity and fear. Conscription has taken workers, not soldiers. The farms and workshops feel their absence. Supply caravans pass through on crown requisition and local needs come second. Prices have risen and will rise further. A crown officer arrived last week and left with a list of what will be requisitioned next month. The governing faction signed the order. There was no alternative that anyone could see.';
-};
-
-const buildReligiousConversionNarrative = (governingFactionName) => {
-  // The governing label has historically selected the stable prose variant.
-  // Keep that deterministic selector until a seeded narrative selector owns it.
-  const variant = governingFactionName ? governingFactionName.length % 3 : 0;
-  if (variant === 0) {
-    return 'The new faith does not yet have a building. It has kitchens, meeting rooms in private homes, and a preacher who travels a circuit. The old institution has the building, the records, the accumulated donations, and a congregation that is quietly redistributing itself. Neither party is ready to force a confrontation. Both are watching the numbers.';
-  }
-  if (variant === 1) {
-    return (
-      'The schism is now formal. Two priests, two congregations, two sets of records (births, deaths, marriages) that may or may not be recognised depending on which authority the other party acknowledges. ' +
-      `${governingFactionName || 'The governing authority'} has not declared which succession is legitimate, ` +
-      'which means every legal document dependent on religious sanction is in a grey zone.'
-    );
-  }
-  return (
-    `The conversion order came from ${governingFactionName || 'outside authority'} ` +
-    'and was formally acknowledged within the week. The speed of the formal compliance was remarkable. ' +
-    'The depth of the actual compliance is a different question. The old faith does not hold services openly. ' +
-    'It is not clear it has stopped holding them.'
-  );
-};
-
-const buildMigrationNarrative = (institutionFlags, governingFactionName) => {
-  if ((institutionFlags.economyOutput || 50) >= 50) {
-    return (
-      'The settlement is receiving more people than its infrastructure was built for. ' +
-      'New arrivals come faster than housing, food, and employment can absorb them. ' +
-      'The old residents and the new ones are not yet the same community. ' +
-      `${governingFactionName} is being asked to do something about it and cannot agree what that something is.`
-    );
-  }
-  return 'Three families left this week. Two more last week. The departure is quiet and orderly, which makes it worse. The people leaving have thought it through. What remains is those who cannot leave, those who choose to stay, and institutions running on fewer people than they were designed for.';
-};
-
 const buildSlaveRevoltNarrative = (institutionNames) => {
   const revoltOrigin = includesInstitution(institutionNames, 'slave market')
-    ? 'the slave market'
-    : "the settlement's labour system";
+    ? 'at the slave market'
+    : 'among the bonded labourers';
   return (
-    `The revolt began at ${revoltOrigin} and has not been contained. ` +
-    'The security response has been slow, partly because no one in authority wanted to admit publicly how organised the resistance was. ' +
-    "Buildings controlled by the revolt's leadership are marked. Movement in and out of certain districts is contested. " +
-    "The governing faction's official position is that this is being handled. Its private position involves considerably more urgency."
+    `The revolt began ${revoltOrigin} and has not been put down. ` +
+    'Those in charge were slow to act, because nobody wanted to admit how organised the rebels were. ' +
+    "The rebels' buildings are marked, and parts of the settlement are contested. " + // TAIL-POWERS-4 (21621): a thorp has no streets
+    'In public, those in charge say it is being handled; in private, they are scrambling.'
   );
 };
 
-const buildStressNarratives = ({
+const buildStressNarratives = ({ failedFoodSource = null, // BAR3-POWERS (C36418): foodBalance.js :: failedSource, the famine's failed source
+  migrationEntry = null,
   baselineConflict,
   institutionFlags,
   institutionNames,
@@ -632,24 +596,25 @@ const buildStressNarratives = ({
 
   return {
     under_siege:
-      'The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about policy. It is about survival.',
+      'The settlement is under siege. Its stores and every able pair of hands now go to the defence, and nothing else is discussed.',
     famine:
       hasMilitaryInstitution || hasCivicInstitution || hasMarketInstitution
-        ? 'Food shortages have sharpened every tension in the settlement. Those with stocks are not advertising the fact. Those without are watching those with.'
-        : 'The last harvest failed badly. What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.',
+        ? 'Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.'
+        : `${['fish', 'livestock', 'game'].includes(String(failedFoodSource)) ? `The ${FAILED_SOURCE_WORDS[/** @type {'fish'|'livestock'|'game'} */ (failedFoodSource)]} failed badly this year.` : 'The last harvest failed badly.'} What remains is being rationed by whoever holds the stores. Neighbours who shared meals last winter are watching each other carefully.`, // BAR3-POWERS (C36418): the failed source's own word where it is not the harvest
     occupied:
-      `An occupying officer arrested a local elder for "seditious speech". ${governingFactionName}` +
+      `An occupying officer arrested a local elder for "seditious speech". ${/* NAMES-1 (CN1): The Elder Council, with its article; no name gives the legacy rendering. NAMES-2: nothing after the closing backtick moves (the presumption walkers bank the text from there) */ powerNameWithArticle(governingFactionName, true) || governingFactionName}` +
       ' filed a formal protest. The protest was returned unread.',
+    // OWNER-WORDS-DOSSIER item 3b (2026-11-09): the word "faction" is retired from the page; "power".
     politically_fractured:
       hasCivicInstitution ||
       hasMilitaryInstitution ||
       hasUrbanCommerceInstitution
-        ? 'Two of the three factions are no longer attending joint council meetings. Decisions are being made unilaterally and contradicted by rivals within days.'
+        ? 'Two powers have stopped coming to council meetings. Each makes its own decisions now, and the others overturn them within days.'
         : 'The community is split. Two households are not speaking to each other or to anyone who sides with the other. Everything requiring collective decision has stopped.',
     indebted:
       hasRoyalAuthority && hasNoblePower
-        ? "The crown's debt to the noble houses has become structural. Three major policy decisions this year were reversed after private meetings with creditor lords. No one publicly acknowledges the connection."
-        : "The creditor's representative blocked the infrastructure repair budget. Publicly they cited fiscal responsibility. Privately they cited a clause in the debt agreement.",
+        ? "The crown owes the noble houses more than it can repay. Three of its decisions this year were reversed after private meetings with the lords it owes, and nobody admits the connection."
+        : "The creditor's agent has blocked the money for repairs. In public they talk of prudence; in private they point to a clause in the loan.",
     recently_betrayed: buildBetrayalNarrative({
       hasRoyalAuthority,
       hasNoblePower,
@@ -658,11 +623,11 @@ const buildStressNarratives = ({
     }),
     infiltrated: baselineConflict,
     plague_onset:
-      'The quarantine has been imposed on the affected district. Compliance is partial. Two people who attempted to enforce it were assaulted.',
+      'The sick have been shut away under quarantine. Many ignore it, and two people who tried to enforce it were beaten.',
     succession_void: hasRoyalAuthority
       ? hasNoblePower
         ? 'Two noble houses are contesting the succession. Both have legal arguments. Both have soldiers. The settlement is watching which house the other noble families back, because that is what will decide it.'
-        : 'The throne is vacant and the council of succession has deadlocked. Every faction that benefits from the current stalemate is quietly prolonging it.'
+        : 'The throne is vacant and the council of succession has deadlocked. Every power that benefits from the current stalemate is quietly prolonging it.'
       : hasCivicInstitution
         ? 'Two candidates for the vacant position each held separate public assemblies on the same day. Both claimed the other was illegal.'
         : 'The elder who kept the peace is gone. No one has stepped forward to take that role. Small disputes that would have been settled quickly are now sitting open.',
@@ -677,12 +642,14 @@ const buildStressNarratives = ({
     wartime: buildWartimeNarrative(
       institutionFlags,
       governingFactionName,
+      institutionNames, // COHERENCE-POWERS-7: the roster's names, for the independent polity's crown
     ),
     religious_conversion:
       buildReligiousConversionNarrative(governingFactionName),
     mass_migration: buildMigrationNarrative(
       institutionFlags,
       governingFactionName,
+      migrationEntry,
     ),
     slave_revolt: buildSlaveRevoltNarrative(institutionNames),
   };
@@ -708,21 +675,35 @@ export const buildGovernanceLabels = ({
   governingFaction: configuredGoverningFaction,
   hasNobleInstitution,
   stressTypes,
+  stressEntries = [],
   fallbackStressType,
   worldLaw = null, // absent, it resolves from config exactly as generatePowerStructure builds its own
+  failedFoodSource = null, defenseLabel = null, militaryGate = null, // BAR3-POWERS (C36418): the food record's failed source; POWERS-14: the record's readiness label, on the power step's replay after the defence profile
 }) => {
   const magicWorks = resolveGenerationWorldLaw(worldLaw, config).magicFunctions();
   const hasStress = stressType => stressTypes.includes(stressType);
   const monsterThreat = config?.monsterThreat || 'frontier';
+  const migrationEntry = (stressEntries || []).find((e) => e?.type === 'mass_migration') ?? { type: 'mass_migration', direction: migrationDirectionOfConfig(config) || 'arrivals' }; const migrationDirection = migrationDirectionOf(migrationEntry) === 'exodus' ? 'departures' : 'arrivals'; // WAVE-RULINGS item 8 (W3 POW): the stability label reads stress[].direction — the entry's own, else its config projection — the one field the vignette reads; both sets, arrivals and departures
 
+  // TAIL-POWERS-3 P16 (G3, RECORD-MEASURE-2): a theocracy's word only under a religious seat or beside a religious power
+  // of weight (25 and over); measured: 8 towns said it with neither (a royal, guild or city-state seat, no church power).
+  const RELIGIOUS = /theocra|relig|church|temple|clerg|eccles|priest|faith|holy/i;
+  const theocraticSeat = RELIGIOUS.test(String(configuredGoverningFaction || ''))
+    || RELIGIOUS.test(String(factions.find((f) => f?.isGoverning)?.faction || ''))
+    || factions.some((f) => (RELIGIOUS.test(String(f?.faction || '')) || f?.category === 'religious') && (f?.power || 0) >= 25);
   const baselineStability = deriveBaselineStability({
     stressFlags,
     institutionFlags,
     neighbourRelationship,
+    defenseLabel, militaryGate, // PP11: the funding gate beside the readiness label
+    theocraticSeat,
+    // TAIL-POWERS-3 P16 (G5): "strong military presence" only where a garrison stands; the power step carries the defence
+    // facts' garrison on its institution flags (rulingStructure.js; absent, as before: true); measured 3 towns without one
+    garrisonStands: institutionFlags?.garrisonStands !== false,
   });
   const stressStability = applyStressStability(
     baselineStability,
-    hasStress,
+    hasStress, migrationDirection,
   );
   const stability = annotateMonsterThreat(stressStability, monsterThreat);
 
@@ -743,7 +724,7 @@ export const buildGovernanceLabels = ({
   const governingFactionName =
     factions.find(faction => faction.isGoverning)?.faction || null;
 
-  let recentConflict = defenceTwinLine(deriveBaselineConflict({ // F10: a soldiers line its twin where no garrison or hired company stands (data/defenceTwinLines.js)
+  const baselineConflict = deriveBaselineConflict({
     stressFlags,
     institutionFlags,
     institutionSignals,
@@ -752,7 +733,12 @@ export const buildGovernanceLabels = ({
     monsterThreat: config?.monsterThreat,
     hasRoyalAuthority,
     hasNoblePower,
-  }), defenseFactsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }));
+    theocraticSeat,
+    seatIsReligious: RELIGIOUS.test(String(governingFactionName || '')),
+    // TAIL-CLOSE-SRC-2 (the defence walker's first member): the seat is the commanders' own by the governing power's KIND
+    // (its record's `category`, factionCategories.js), not its name sniffed for "garrison"; measured equal over the 720
+    seatIsMilitary: factions.find((faction) => faction.isGoverning)?.category === 'military',
+  });
 
   const primaryStress = selectPrimaryStress(
     stressTypes,
@@ -762,8 +748,11 @@ export const buildGovernanceLabels = ({
     institutionNames,
     tier,
   );
-  const stressNarratives = buildStressNarratives({
-    baselineConflict: recentConflict,
+  const stressNarratives = buildStressNarratives({ failedFoodSource, // BAR3-POWERS (C36418)
+    // MERGE-R2 (the chair's ruling 1): the vignette reads W0's one field — the entry's own, else its
+    // config projection (stressConfirmPass) — through F13's reader; no second derivation.
+    migrationEntry,
+    baselineConflict: null, // set below, once resolved where it prints
     institutionFlags,
     institutionNames,
     institutionSignals,
@@ -772,6 +761,19 @@ export const buildGovernanceLabels = ({
     hasRoyalAuthority,
     hasNoblePower,
   });
+
+  // F10, CENSUS-1c: a soldiers line its declared sibling where no garrison or hired company stands
+  // (BASELINE_CONFLICT_SIBLINGS, data/powerSiblings.js). R-D1 unit 2 (R-AU at the site): the set is
+  // resolved ONLY where the baseline prints — no primary-stress narrative, or the `infiltrated` one
+  // that carries it. A narrative that overrides it draws nothing from the set and writes no note
+  // (rung 2E soak1k-5589: three notes of a line the siege narrative overwrote). No roll either way.
+  const baselineOverridden = Boolean(
+    primaryStress && primaryStress !== 'infiltrated' && stressNarratives[primaryStress],
+  );
+  let recentConflict = baselineOverridden
+    ? baselineConflict
+    : resolveSibling(baselineConflict, BASELINE_CONFLICT_SIBLINGS, { facts: () => factsOf({ institutions: (institutionNames || []).map((name) => ({ name })), tier }), poolId: 'governanceNarrative:BASELINE_CONFLICT_SIBLINGS', surface: 'power', drawKind: 'T' });
+  stressNarratives.infiltrated = recentConflict;
 
   if (recentConflict) {
     recentConflict = rewriteFactionPhrasing(

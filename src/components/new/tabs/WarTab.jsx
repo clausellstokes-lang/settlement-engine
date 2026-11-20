@@ -122,7 +122,7 @@ function WarLaunchTeaser({ name }) {
     <div data-testid="war-teaser" style={{ background: CARD, border: `1px solid ${BORDER}`, padding: '14px 16px', ...FLUSH }}>
       <AvailableAtLaunchPill />
       <p style={{ margin: '8px 0 0', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.sm, mobile), lineHeight: 1.6 }}>
-        {`From here, this dossier becomes the control center for ${name}'s troops and units out in the world: raise them, deploy them, recall them, and read what came home, as the simulator runs.`}
+        {`From here you raise ${name}'s troops, send them out, call them home, and read what they report back.`}
       </p>
     </div>
   );
@@ -184,7 +184,7 @@ function WarBlock({ war, nameFor, unitAbroad = false }) {
       {exhaustionRaw > 0 && (
         <Line strong="War-weary.">
           {exhaustionBand}
-          {exhaustionBand === 'near peace' && <span style={{ color: MUTED }}>. The scar is healing; this realm leans toward peace.</span>}
+          {exhaustionBand === 'near peace' && <span style={{ color: MUTED }}>. The worst of the fighting is over; this realm leans toward peace.</span>}
           {exhaustionBand === 'exhausted' && <span style={{ color: MUTED }}>. Sustained fighting is pushing it to sue for peace.</span>}
         </Line>
       )}
@@ -584,11 +584,9 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
 
   const campaigns = useStore(s => s.campaigns);
   const savedSettlements = useStore(s => s.savedSettlements);
-  const tier = useStore(s => s.auth?.tier);
-  const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
-  // The DM truth reveal (the includeGroundTruth convention, RumorsTab verbatim):
-  // never on the player view, never on a public/shared dossier.
-  const includeGroundTruth = (tier === 'premium' || elevated) && !playerView && !publicDossier;
+  // The DM truth reveal (the includeGroundTruth convention, RumorsTab verbatim): the VIEW
+  // and the DATA, never the tier — never on the player view, never on a public/shared dossier.
+  const includeGroundTruth = !playerView && !publicDossier;
 
   const nameFor = useMemo(() => {
     const byId = new Map();

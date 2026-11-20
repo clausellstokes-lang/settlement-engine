@@ -1,0 +1,13 @@
+[gate-tail] start:  15:26:50 up 56 min,  0 user,  load average: 3.08, 3.76, 3.76 · cores: 4
+
+ RUN  v4.1.8 /home/user/settlement-engine/.claude/worktrees/agent-ae39baf5753ae0b54
+
+
+ Test Files  8 passed (8)
+      Tests  30 passed (30)
+   Start at  15:26:51
+   Duration  68.33s (transform 9.99s, setup 424ms, import 21.05s, tests 98.48s, environment 5.69s)
+
+[gate-tail] end:  15:28:00 up 58 min,  0 user,  load average: 3.49, 3.83, 3.79
+[gate-tail] full log: /tmp/gate-tail.21337.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

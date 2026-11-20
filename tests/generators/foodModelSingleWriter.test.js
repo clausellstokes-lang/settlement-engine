@@ -24,6 +24,7 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 // a corpus edit moves the row here instead of silently selecting a different settlement.
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 import { recordInvariants } from '../../src/domain/edit/recordInvariants.js';
+import { foodRowShown } from '../../src/domain/display/foodRowShown.js';
 
 const gen = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
 
@@ -53,9 +54,12 @@ describe('generators-domain-4 — single-writer food model', () => {
       const fb = s.economicViability?.metrics?.foodBalance;
       if (!fs || !fb) continue;
       compared++;
-      // Sign: deficitPct > 0 on foodSecurity ⇔ deficit > 0 on foodBalance.
-      expect((fb.deficit || 0) > 0, `${settType}|${terrainOverride}|${tradeRouteAccess} deficit-sign disagreement`)
-        .toBe((fs.deficitPct || 0) > 0);
+      // Sign AND magnitude: RE-KEYED BY IDENTITY (TAIL-DEFECON-5, ruling R3, one food ledger). The view READS the writer's
+      // split, so its shortfall is the Economics tab's own remainder (`foodRowShown.js`), pound for pound. It was keyed to
+      // the writer's per cent, which the writer itself lets read 0 beside a few pounds of a large need (STOP-1 below).
+      const row = foodRowShown(s, true);
+      expect(fb.deficit || 0, `${settType}|${terrainOverride}|${tradeRouteAccess} deficit disagreement with the tab's row`)
+        .toBe(row?.fb.deficit ?? 0);
       // Magnitude: foodBalance is a view — production & need equal foodSecurity's.
       expect(fb.dailyProduction).toBe(fs.dailyProduction);
       expect(fb.dailyNeed).toBe(fs.dailyNeed);
@@ -253,11 +257,13 @@ describe('generators-domain-4 — single-writer food model', () => {
     const balance = settlement.economicViability.metrics.foodBalance;
 
     expect(balance.deficitPercent).toBe(26);
+    // RE-KEYED 2026-11-09 (STYLE-2 SW-7, A2): the band's words for 26 (Import-Dependent) in place of the per cent.
+    // Was /After imports, 26% of daily need goes uncovered/i.
     expect(settlement.economicState.situationDesc).toMatch(
-      /After imports, 26% of daily need goes uncovered/i,
+      /Even with what is brought in, people here go short of part of the food they need each day/i,
     );
     expect(settlement.economicState.situationDesc).toMatch(
-      /rationing and outside supply/i,
+      /has to ration and buy from outside/i, // RE-KEYED 2026-11-09 (SW-7, A2): was /rationing and outside supply/i
     );
     // The 26%-uncovered figure and the rationing clause are both pinned on this
     // same string above, so this exclusion measures wording, not absence.
@@ -397,7 +403,12 @@ describe('FIX-G1 — the viability summary counts the list the record publishes'
     // grain import remain) and the sentence followed it, 4 → 3, with the habitat above intact.
     expect(statedCount(v.summary), 'the headline stated no count at all').not.toBeNull();
     expect(statedCount(v.summary)).toBe((v.dependencies || []).length);
-    expect(statedCount(v.summary)).toBe(3);
+    // RE-KEYED 3 → 1 BY IDENTITY (REVIEW-INTAKE-LAND, 2026-11-07, the merge onto rung 1's tip),
+    // one cause, "water is read from the record; a mill is not a water dependency" (REVIEW-INTAKE
+    // unit 3): the Mills entry is motive water and raises nothing, and the Dyer's process water
+    // is met by the town's own water row, so both leave the PUBLISHED list; the grain import
+    // remains, and the sentence follows the list, 3 → 1, with the habitat above intact.
+    expect(statedCount(v.summary)).toBe(1);
     // The record's three readings of one fact now agree, which is the invariant.
     expect(v.metrics.dependencyCount).toBe((v.dependencies || []).length);
   });
@@ -419,9 +430,17 @@ describe('FIX-G1 — the viability summary counts the list the record publishes'
     // NON-VACUITY: the corpus really does reach the sentence that states a count. Measured
     // at 370 of 525 before and after the cure; the floor is well under it so an unrelated
     // corpus edit cannot red this, while a corpus that stopped producing the sentence does.
-    expect(stating, 'no row stated a dependency count — the sweep judged nothing').toBeGreaterThan(300);
+    // RE-KEYED 300 → 250 BY MEASUREMENT (FIX-FOOD-ISOLATION, 2026-11-07), one cause: 305 at the
+    // base → 274. An isolated town is fed from outside only as far as its support receipt carries,
+    // so 31 golden isolated towns (receipt `untenable`) now carry an uncovered local food deficit
+    // and read NOT VIABLE — the "has N operational dependencies" sentence is the VIABLE verdict's.
+    // RE-KEYED 250 → 220 BY MEASUREMENT (STYLE-2-MERGE point 47, 2026-11-13; the COHERENCE-AGREE merge 22cc9ef7d, a figure its
+    // drafted record names for the merge seat: "272 rows state a count -> 241, the floor > 250; offenders 0"), one cause: 272 on
+    // the lane's base -> 241 at the merge (the seventh seat's (c) re-deal re-judges the re-dealt holders' viability). The floor keeps the
+    // FIX-FOOD-ISOLATION ratio under the measure (250 of 274; 220 of 241), and the offenders below stay 0: the invariant itself.
+    expect(stating, 'no row stated a dependency count — the sweep judged nothing').toBeGreaterThan(220);
     expect(offenders, `\n${offenders.join('\n')}\n`).toEqual([]);
-  }, 120_000);
+  }, 180_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 59.9 s in its shard here / 50.6 s in the last close's serial check; about 95.8 s on a CI runner (the measured factor), within three quarters of its 120 s; x 1.5 -> 180 s
 });
 
 /**
@@ -474,7 +493,7 @@ describe('STOP-1 — the food writer and its view derive the per cent from the p
     expect(gaps, 'no golden row carries a food gap, so the sweep judged nothing').toBeGreaterThan(200);
     expect(smallNeed, 'no golden row has a need under 100 lb, so rounding is never tested').toBeGreaterThan(60);
     expect(offenders).toEqual({ writerSign: [], viewSign: [], viewShare: [] });
-  }, 120_000);
+  }, 180_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 57.1 s in its shard here / 48.3 s in the last close's serial check; about 91.3 s on a CI runner (the measured factor), within three quarters of its 120 s; x 1.5 -> 180 s
 });
 
 function generateSettlementViability(settlement) {

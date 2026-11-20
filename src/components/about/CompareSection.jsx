@@ -75,9 +75,9 @@ export default function CompareSection() {
       <Insight heading="vs ChatGPT and AI prose generators. Simulated, not prompted">
         ChatGPT and the prose generators built on it write fluent text on demand, and they are
         good at it. They also improvise each answer: ask twice and the guard captain&rsquo;s name, the
-        dominant faction, or the town&rsquo;s economy can quietly drift, and nothing is kept between
+        dominant power, or the town&rsquo;s economy can quietly drift, and nothing is kept between
         asks. SettlementForge <strong>simulates</strong> the settlement from interlocking
-        constraints, so every institution, NPC secret, and faction tension is mutually consistent,
+        constraints, so every institution, NPC secret, and power tension is mutually consistent,
         reproducible from its seed, and saved. Best of both: generate the coherent brief here, then
         hand its Narrative AI Prompt to an AI assistant for table-ready prose that stays on-model.
       </Insight>

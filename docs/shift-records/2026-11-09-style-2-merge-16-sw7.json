@@ -1,0 +1,28 @@
+{
+  "_doc": "RECORD 16 OF THE STYLE WAVE'S MERGE (STYLE-2-MERGE), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-STYLE-2-WAVE §3): the integration branch's first-parent line is the golden chain; a lane's unsigned cause commits are components signed at its merge point. THE CAUSE, ONE: THE SW-7 POWER-SIDE MERGE OVER THE INTEGRATION BRANCH — lane/style-2-power-side-2026-11-09 at be1f2d6b3 merged at a3062d919 (STYLE-2-MERGE point 16), the militia row's law-enforcement flag kept under SW-7's words, the annex and the wiring census re-derived through their doors, the corpus pins re-keyed by measurement and the dated roster composed; its lane signed nothing, its causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-POWER-SIDE-2026-11-09.md §5 and §7.5): df6a9bb9c (the Web's merchant-craft ratio narrative) gm 212, fence 186; 3728083ef (the power cards' standing sentences) gm 429, fence 314; d41435ecd (how they deal) gm 525, fence 360; 4c5614d27 (two secrets) gm 280, fence 196; fb712a8d7 (no secret frame twice) gm 272, fence 211; 640378639 (the tie tension lines) gm 450, fence 293; effda57d6 (npcData's last five 'rather than') gm 333, fence 230; 4bf93741b (the catalogue law's minimal swaps) gm 218, fence 192, witness 2 of 8 (settlementUpdatesSha256); 6f340466f (the economic situation line) gm 74, fence 122; 936d4ec06 and cbba52029 (the legacy annotations) gm 525, fence 337; 7e1009be5 fence 1; e76cb0ab7 and 7c96f27aa (the DS-POW annex rows) the prose manifest's rows wording-only, signed once at the final tip; every other commit 0. Composed on the line: gm 525 of 525 (19 fields: the legacy annotations, the npc presentations, speech and secrets, the relationship tensions and descriptions, the faction descriptions and web narratives, the institution descriptions, the economic situation, the coherence receipt's evidence, one pressure sentence), fence 360 of 360, witness 2 of 8. THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against the post-state of record 12 and the zero-move points 13 to 15 after it (the stage of ff552d87c, SW-9 ODD-ROWS): the generator golden master 525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) 3f587a09.. -> 25824515..; the espionage fence's driven corpus 360 of 360 rows (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60) 214dbbb1.. -> 22134e2a..; 360/360 distinct; the preset lighting witness 2 of 8 presets (dramatic_campaign, full_simulation: settlementUpdatesSha256, the catalogue law's swaps); herald 0, PDF 0; the prose manifest's movement at this point (1050 of 1,050 rows) is signed ONCE at the final tip. Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
+  "cause": "THE SW-7 POWER-SIDE MERGE OVER THE INTEGRATION BRANCH — lane/style-2-power-side-2026-11-09 at be1f2d6b3 merged at a3062d919 (STYLE-2-MERGE point 16), the militia row's law-enforcement flag kept under SW-7's words, the annex and the wiring census re-derived through their doors, the corpus pins re-keyed by measurement and the dated roster composed; its lane signed nothing, its causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-POWER-SIDE-2026-11-09.md §5 and §7.5): df6a9bb9c (the Web's merchant-craft ratio narrative) gm 212, fence 186; 3728083ef (the power cards' standing sentences) gm 429, fence 314; d41435ecd (how they deal) gm 525, fence 360; 4c5614d27 (two secrets) gm 280, fence 196; fb712a8d7 (no secret frame twice) gm 272, fence 211; 640378639 (the tie tension lines) gm 450, fence 293; effda57d6 (npcData's last five 'rather than') gm 333, fence 230; 4bf93741b (the catalogue law's minimal swaps) gm 218, fence 192, witness 2 of 8 (settlementUpdatesSha256); 6f340466f (the economic situation line) gm 74, fence 122; 936d4ec06 and cbba52029 (the legacy annotations) gm 525, fence 337; 7e1009be5 fence 1; e76cb0ab7 and 7c96f27aa (the DS-POW annex rows) the prose manifest's rows wording-only, signed once at the final tip; every other commit 0. Composed on the line: gm 525 of 525 (19 fields: the legacy annotations, the npc presentations, speech and secrets, the relationship tensions and descriptions, the faction descriptions and web narratives, the institution descriptions, the economic situation, the coherence receipt's evidence, one pressure sentence), fence 360 of 360, witness 2 of 8",
+  "seat": "STYLE-2-MERGE (Opus 5.5) under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at a3062d919",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

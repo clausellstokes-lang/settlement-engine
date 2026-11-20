@@ -77,7 +77,7 @@ const NOTORIETY_LINE = Object.freeze({
   unknown: 'No word of them has travelled ahead.',
   whispered: 'Their name is spoken quietly, and not often.',
   known: 'Their name is known on the roads.',
-  notorious: 'Their name carries badly wherever it is spoken.',
+  notorious: 'Their name is known, and not kindly.',
   infamous: 'There is nowhere in the realm their name is not known.',
 });
 
@@ -88,7 +88,7 @@ const CAUSE_LINE = Object.freeze({
   banished: 'They were put out by an edict.',
   turncoat: 'They went over to another power.',
   criminal_founding: 'They threw in with the underworld.',
-  destruction_dispersal: 'Their home was destroyed and scattered its people.',
+  destruction_dispersal: 'Their home was destroyed and its people scattered.',
 });
 
 /** How the world reads their capability, when it has formed a read at all.
@@ -106,11 +106,11 @@ const COMPETENCE_LINE = Object.freeze({
 /** The nature of the story that follows them, when there is one. */
 const SCANDAL_LINE = Object.freeze({
   none: '',
-  venality: 'What is spoken of them is a matter of bought loyalty.',
-  betrayal: 'What is spoken of them is a matter of betrayal.',
-  brutality: 'What is spoken of them is a matter of cruelty.',
-  conspiracy: 'What is spoken of them is a matter of conspiracy.',
-  heresy: 'What is spoken of them is a matter of heresy.',
+  venality: 'People say their loyalty can be bought.',
+  betrayal: 'People say they betrayed those who trusted them.',
+  brutality: 'They are known for cruelty.',
+  conspiracy: 'People say they plot against those they serve.',
+  heresy: 'They are called a heretic.',
 });
 
 /**
@@ -127,17 +127,17 @@ function wanderingLabel(elapsedTicks) {
   if (elapsed === 1) return 'On the road since last turning.';
   if (elapsed <= 4) return 'On the road a few turnings now.';
   if (elapsed <= 13) return 'On the road some turnings now.';
-  return 'On the road longer than most care to count.';
+  return 'On the road a long while now.';
 }
 
 /** The same span, said for somebody who is NOT roaming (jailed, or settled again). */
 function restingLabel(elapsedTicks) {
   const elapsed = Number.isFinite(elapsedTicks) ? Number(elapsedTicks) : 0;
-  if (elapsed <= 0) return 'Their standing changed this turning.';
-  if (elapsed === 1) return 'Their standing changed last turning.';
-  if (elapsed <= 4) return 'Their standing has held a few turnings.';
-  if (elapsed <= 13) return 'Their standing has held some turnings.';
-  return 'Their standing has held longer than most care to count.';
+  if (elapsed <= 0) return 'They came to rest this turning.';
+  if (elapsed === 1) return 'They came to rest last turning.';
+  if (elapsed <= 4) return 'They have stayed put a few turnings.';
+  if (elapsed <= 13) return 'They have stayed put some turnings.';
+  return 'They have stayed put a long while.';
 }
 
 /**
@@ -239,11 +239,11 @@ function rowOf(person, nameFor, roaming) {
   ].filter(Boolean);
   return {
     key: String(person.wnpcId || ''),
-    name: String(person.name || '') || 'A stranger',
+    name: String(person.name || '') || 'An unnamed traveller',
     title: formerTitle(String(person.role || '')),
     roaming,
     whyLine: heldAbroad
-      ? 'They are held abroad while carrying the realm\'s business.'
+      ? 'They were stopped while carrying the realm\'s business.'
       : CAUSE_LINE[String(person.verdictCause || 'none')] || CAUSE_LINE.none,
     notorietyLine: NOTORIETY_LINE[String(person.notorietyBand || 'unknown')] || NOTORIETY_LINE.unknown,
     standingLines: Object.freeze(standing),
@@ -256,7 +256,7 @@ function rowOf(person, nameFor, roaming) {
     whereaboutsLine: heldAbroad
       ? (heldVenueName
           ? `They are held abroad at ${heldVenueName}.`
-          : 'They are held abroad at a place the register cannot name.')
+          : 'They are held abroad at an unnamed place.')
       : person.whereaboutsUnknown === true
         ? 'Their present whereabouts are unknown.'
         : '',

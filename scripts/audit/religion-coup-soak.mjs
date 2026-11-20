@@ -1,3 +1,6 @@
+// FIX-PUBLIC-VEIL step 3 (2026-11-07): the fixtures' NPCs name their power by `memberships` (the people car's
+// card, M-7) -- the clergy plane reads it through factionRefs.js :: entityLinksFaction; the retired
+// `linkedFactionIds` linked these NPCs to nothing since PEOPLE-5B.
 /**
  * religion-coup-soak.mjs — the END-TO-END PAYOFF soak. Proves the divine-mandate
  * coupling: for a THEOCRACY, a CONTESTED/discredited patron erodes publicLegitimacy
@@ -59,8 +62,8 @@ function cohortSave(cohort, seed) {
     : { governingName: 'The High Temple', government, publicLegitimacy: { score: START_LEGIT, label: 'Wavering' },
         factions: [{ id: 'f.temple', name: 'The High Temple', archetype: 'religious', power: 46, isGoverning: true }, watch] };
   const npcs = rotten
-    ? [{ id: 'n.k', name: 'Hierarch', importance: 'pillar', linkedFactionIds: ['f.see'], personality: { dominant: 'ruthless', flaw: 'corrupt' }, flaw: 'corrupt' }]
-    : [{ id: 'n.s', name: 'Hierophant', importance: 'pillar', linkedFactionIds: ['f.temple'], personality: { dominant: 'principled' } }];
+    ? [{ id: 'n.k', name: 'Hierarch', importance: 'pillar', memberships: [{ power: 'f.see', rank: 1, share: 1 }], personality: { dominant: 'ruthless', flaw: 'corrupt' }, flaw: 'corrupt' }]
+    : [{ id: 'n.s', name: 'Hierophant', importance: 'pillar', memberships: [{ power: 'f.temple', rank: 1, share: 1 }], personality: { dominant: 'principled' } }];
   const institutions = [{ id: 'i.cathedral', name: 'Cathedral', category: 'religious', tags: ['religious', 'church'], priorityCategory: 'religion', status: 'active' }];
   if (rotten) institutions.push({ id: 'i.thieves', name: 'Thieves Guild', category: 'criminal', tags: ['criminal'], status: 'active' });
   return {

@@ -156,3 +156,14 @@ describe('RelationshipsTab — the consolidated page', () => {
     expect(text).toContain('Active Conflicts (1)');
   });
 });
+
+describe('the empty state on a generated settlement with no ties (SW-9, STYLE-RULINGS-2 B10(b))', () => {
+  test('says what the record holds, never "Generate a settlement…"', () => {
+    const thorp = { name: 'Hobb', tier: 'thorp', population: 40, npcs: [], relationships: [], neighbourNetwork: [], conflicts: [] };
+    const { getByTestId, container } = render(React.createElement(RelationshipsTab, { settlement: thorp }));
+    expect(getByTestId('relationships-empty').textContent.trim())
+      .toBe('No neighbours, ties between people or conflicts are recorded for this settlement.');
+    expectAbsentWithAnchor(container.textContent || '', 'Generate a settlement', 'No neighbours, ties between people', 'the old instruction left');
+  });
+});
+

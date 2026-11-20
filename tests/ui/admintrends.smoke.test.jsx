@@ -107,7 +107,11 @@ describe('AdminAnalyticsPanel — dashboard switch and refusal (T7 survey)', () 
     routeTrends();
     const Panel = (await import('../../src/components/admin/AdminAnalyticsPanel.jsx')).default;
     await act(async () => { render(<Panel />); });
-    expect(trendCalls()[0]).toEqual({ action: 'get_analytics_dashboard', dashboard: 'funnel' });
+    // The engine line (ENGINE-5 unit 4) reads its own dashboard on mount too; the first
+    // TABLE read is still the funnel.
+    expect(trendCalls()).toContainEqual({ action: 'get_analytics_dashboard', dashboard: 'engine_generations' });
+    expect(trendCalls().filter((c) => c.dashboard !== 'engine_generations')[0])
+      .toEqual({ action: 'get_analytics_dashboard', dashboard: 'funnel' });
     await act(async () => { fireEvent.click(screen.getByRole('button', { name: /retention/i })); });
     expect(trendCalls().at(-1)).toEqual({ action: 'get_analytics_dashboard', dashboard: 'retention' });
   });

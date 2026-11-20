@@ -4,8 +4,10 @@ import { cleanup, render, screen } from '@testing-library/react';
 
 import { OutcomeCard } from '../../src/components/map/WorldPulsePrimitives.jsx';
 import {
+  digestDetails,
   outcomeDetails,
   proposalDetails,
+  stressorDetails,
 } from '../../src/components/map/WorldPulseData.js';
 
 afterEach(cleanup);
@@ -62,6 +64,27 @@ describe('World Pulse presentation translation', () => {
     expect(change({ preserveInstitutions: true })).toEqual(['merchant charter', 'contested', 'preserve institutions']);
     // anchored: the same payload with the fact set yields the line on the line above, so its absence here is the payload's.
     expect(change({})).not.toContain('preserve institutions');
+  });
+
+  test('STYLE-2 SW-12 (ledger D·29–31): standing, goals, digest chips and a trouble read in plain words', () => {
+    // D·29: a rank change is a standing that rises or falls, never a dot count.
+    const npc = (before, after) => proposalDetails({
+      proposalPayload: { kind: 'npc_action', actionFamily: 'seize_office', dotRankBefore: before, dotRankAfter: after },
+    });
+    expect(npc(2, 3)).toEqual(['seize office', 'standing rises']);
+    expect(npc(3, 2)).toEqual(['seize office', 'standing falls']);
+    // D·30: goals carry a plain lead; the digest drops the lifecycle word.
+    expect(outcomeDetails({ npcPatch: { shortGoal: 'secure_food', longGoal: 'consolidate_power' } }))
+      .toEqual(['wants now: secure food', 'wants in time: consolidate power']);
+    expect(digestDetails({ kind: 'queued', scope: 'regional', impactKind: 'import_shortage', channelType: 'trade_dependency' }))
+      .toEqual(['regional', 'import shortage', 'trade dependency']);
+    // D·31: how the place copes; a blocked trouble is held by another, unnamed (the synergy records no blocker).
+    expect(stressorDetails({
+      lifecycleStage: 'peaking',
+      durationPolicy: 'episodic',
+      counterforce: { score: 0.31, floorsMet: false },
+      synergy: { companions: ['siege', 'disease_outbreak'], blocksResolution: true },
+    })).toEqual(['peaking', 'not recovering', 'missing something it needs to recover', 'entangled with siege, disease outbreak', 'held in place by another trouble']);
   });
 
   test('outcome tier changes use the same size vocabulary', () => {

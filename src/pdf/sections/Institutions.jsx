@@ -19,10 +19,14 @@ import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space, factionColors, pt } from '../theme.js';
 import { cap, label, humanize, hookText, plural } from '../lib/format.js';
 import { anchorTarget } from '../primitives/EntityRef.jsx';
-import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { institutionDisplayName, institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
 import { institutionBackers } from '../../domain/dossier/powerSupport.js';
 import { edged } from '../../design/edgedBox.js';
-import { PROXY_SERVICE_HOSTS } from '../../data/servicesData.js';
+// TAIL-EXPORTS-PDF-2 (rulings E3/E17): under a crisis a house or a service row that lives on what it stops is marked by
+// the tabs' one leaf (domain/display/crisisStoppedRow.js), and the chapter says once that its descriptions are of
+// ordinary times. The words are the leaf's.
+import { markedOnPage, ordinaryTimesOnPage } from '../lib/crisisMarksOnPage.js';
+import { entityIdFor } from '../../domain/dossier/entityLinks.js';
 
 const CATEGORY_ORDER = [
   'government', 'military', 'religious', 'economy', 'magic',
@@ -50,6 +54,13 @@ export function Institutions({ settlement, narrativeMode, vm }) {
   // X-40/X-45 (the owner, 2026-11-02): the powers each house backs, keyed by the display name
   // like the service rows above, so the card's one raw read stays the one it has.
   const backsByHouse = new Map([...institutionBackers(settlement || {})].map(([raw, list]) => [institutionDisplayName(raw), list]));
+  // E17: the record's own house behind each card (the slice's anchor id is built from it), for the crisis leaf.
+  const rawHouses = Array.isArray(settlement?.institutions) ? settlement.institutions.filter((x) => x && typeof x === 'object') : [];
+  const rawById = new Map(rawHouses.map((inst) => [inst.id || entityIdFor('institution', inst), inst]));
+  const ordinaryLine = ordinaryTimesOnPage(settlement, [
+    ...detailed.map((inst) => /** @type {const} */ (['house', rawById.get(inst.id)])),
+    ...[...servicesByHouse.values()].flat().map((svc) => /** @type {const} */ (['service', svc])),
+  ]);
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -63,6 +74,9 @@ export function Institutions({ settlement, narrativeMode, vm }) {
       <ChapterHeadline tone="gold">
         {servicesHeadline(s)}
       </ChapterHeadline>
+      {ordinaryLine && (
+        <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], marginBottom: space.xs }}>{ordinaryLine}</Text>
+      )}
 
       {/* ── Health header ────────────────────────────────────── */}
       <StatStrip
@@ -101,7 +115,7 @@ export function Institutions({ settlement, narrativeMode, vm }) {
         return (
           <View key={`cat-${cat}`} style={{ marginBottom: space.sm }}>
             <CategoryHeader cat={cat} count={list.length} stats={catStats} />
-            <CategoryGrid items={list} catKey={cat} entityIndex={index} servicesByHouse={servicesByHouse} backsByHouse={backsByHouse} />
+            <CategoryGrid items={list} catKey={cat} entityIndex={index} servicesByHouse={servicesByHouse} backsByHouse={backsByHouse} town={settlement} rawById={rawById} />
           </View>
         );
       })}
@@ -149,7 +163,7 @@ function CategoryHeader({ cat, count, stats }) {
  * category sections stack tighter and the chapter fits on one page in
  * the common case.
  */
-function CategoryGrid({ items, catKey, entityIndex, servicesByHouse, backsByHouse }) {
+function CategoryGrid({ items, catKey, entityIndex, servicesByHouse, backsByHouse, town, rawById }) {
   const rows = [];
   for (let i = 0; i < items.length; i += 2) {
     rows.push([items[i], items[i + 1] || null]);
@@ -159,10 +173,10 @@ function CategoryGrid({ items, catKey, entityIndex, servicesByHouse, backsByHous
       {rows.map((pair, ri) => (
         <View key={`r-${catKey}-${ri}`} style={{ flexDirection: 'row', marginBottom: 3 }}>
           <View style={{ flex: 1, marginRight: 4 }}>
-            {pair[0] && <InstitutionCard inst={pair[0]} idx={`${catKey}-${ri}-a`} entityIndex={entityIndex} services={servicesByHouse?.get(pair[0].name)} backs={backsByHouse?.get(institutionDisplayName(pair[0]))} />}
+            {pair[0] && <InstitutionCard inst={pair[0]} idx={`${catKey}-${ri}-a`} entityIndex={entityIndex} services={servicesByHouse?.get(pair[0].name)} backs={backsByHouse?.get(institutionDisplayName(pair[0]))} town={town} raw={rawById?.get(pair[0].id)} />}
           </View>
           <View style={{ flex: 1 }}>
-            {pair[1] && <InstitutionCard inst={pair[1]} idx={`${catKey}-${ri}-b`} entityIndex={entityIndex} services={servicesByHouse?.get(pair[1].name)} backs={backsByHouse?.get(institutionDisplayName(pair[1]))} />}
+            {pair[1] && <InstitutionCard inst={pair[1]} idx={`${catKey}-${ri}-b`} entityIndex={entityIndex} services={servicesByHouse?.get(pair[1].name)} backs={backsByHouse?.get(institutionDisplayName(pair[1]))} town={town} raw={rawById?.get(pair[1].id)} />}
           </View>
         </View>
       ))}
@@ -170,7 +184,7 @@ function CategoryGrid({ items, catKey, entityIndex, servicesByHouse, backsByHous
   );
 }
 
-function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [] }) {
+function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [], town = null, raw = null }) {
   const status = (inst.status || 'healthy').toLowerCase();
   // Phase-D: this card is the anchor TARGET for any institution id reference.
   const anchor = anchorTarget(entityIndex, inst.id);
@@ -178,6 +192,8 @@ function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [] }) 
   // §14 — custom institutions added by the user. Print equivalent of the web's
   // shimmering gold row: a gold tint (goldBg) + gold outline + a ✦ marker.
   const isCustom = String(inst.source || '').toLowerCase() === 'custom';
+  // E17: the leaf's mark leads the description of ordinary times, as the Institutions tab's card prints it.
+  const description = markedOnPage(town, 'house', raw, inst.description);
   const meta = [
     inst.subCategory ? { label: 'Type', value: humanize(inst.subCategory) } : null,
     inst.leader ? {
@@ -192,7 +208,11 @@ function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [] }) 
     inst.capacity ? { label: 'Capacity', value: inst.capacity } : null,
     inst.prominence ? { label: 'Scale', value: humanize(inst.prominence) } : null,
     inst.chainDepth != null ? { label: 'Chain', value: `depth ${inst.chainDepth}` } : null,
-    inst.source ? { label: 'Source', value: humanize(inst.source) } : null,
+    // SW-8 RENAME-POWERS (the owner's map, B2): the source key `faction_boost` stays; its words leave the page.
+    // ROUND THREE, ruling (b): the other sources ("Required", "Generated", "Cascade", "Coherence Repair")
+    // are the generator's provenance, the PDF twin of the roster's "REQ": they leave the card. A house a
+    // power raised says so in words; a custom house keeps its own mark.
+    inst.source === 'faction_boost' ? { label: 'Source', value: 'Raised by a power' } : null,
     inst.founded ? {
       label: 'Established',
       value: typeof inst.founded === 'number' ? `${inst.founded}` : inst.founded,
@@ -215,7 +235,8 @@ function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [] }) 
       <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 2 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
           <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'] }}>
-            {institutionDisplayName(inst)}
+            {/* ROUND THREE, ruling (a): the card's title is the house's label, the one display leaf. */}
+            {institutionHouseLabel(inst)}
           </Text>
           {isCustom && (
             <Text style={{ color: palette.gold, fontSize: pt['9'], marginLeft: 3 }}>*</Text>
@@ -235,9 +256,9 @@ function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [] }) 
 
       {meta.length > 0 && <KeyValRow pairs={meta} />}
 
-      {inst.description && (
+      {description && (
         <Text style={{ ...type.body, fontSize: pt['8.5'], color: palette.second, marginTop: 2, lineHeight: 1.35 }}>
-          {inst.description}
+          {description}
         </Text>
       )}
 
@@ -270,8 +291,8 @@ function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [] }) 
           <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted }}>Services</Text>
           {services.map((svc, i) => (
             <Text key={`sv-${idx}-${i}`} style={{ ...type.caption, fontSize: pt['7.5'], color: palette.second }}>
-              <Text style={{ color: palette.ink }}>{institutionDisplayName(svc.name)}</Text>
-              {svc.desc ? `: ${svc.desc}` : ''}
+              <Text style={{ color: palette.ink }}>{institutionHouseLabel(svc.name)}</Text>
+              {((d) => (d ? `: ${d}` : ''))(markedOnPage(town, 'service', svc, svc.desc))}
             </Text>
           ))}
         </View>
@@ -359,9 +380,6 @@ function servicesByDisplayName(availableServices) {
   for (const list of lists) {
     for (const svc of Array.isArray(list) ? list : []) {
       if (!svc || typeof svc !== 'object' || !svc.institution) continue;
-      // VERIFIER F14 (RS-19): a menu a PROXY host only surfaces prints in the Services chapter,
-      // never under the proxy house (the screen's InstitutionsTab twin).
-      if (PROXY_SERVICE_HOSTS[String(svc.institution).toLowerCase()]) continue;
       const key = institutionDisplayName(svc.institution);
       if (!map.has(key)) map.set(key, []);
       map.get(key).push(svc);

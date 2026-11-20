@@ -1,0 +1,122 @@
+{
+  "poolId": "DS-GEN-14",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "foundedPoolKey(history) → readStateProse → eligibleVariants → drawVariant",
+  "pools": [
+    {
+      "pool": "FOUNDED-YOUNG",
+      "keyGuarantees": [
+        "history.founding present and age within a generation band (not older_than_bearers)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} is young enough that its first reason is still its working reason; the town has not yet had time to become anything else.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Everything in {settlement} was built by people who could still say why, and the whole town has that directness.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} does what it was made to do; the founders' argument has not yet been improved on.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "FOUNDED-OLD",
+      "keyGuarantees": [
+        "history.founding present and age older_than_bearers (or age not numeric)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} was made on purpose, and the purpose is {timeband_age}; what stands now is every year's amendment to it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "The town's first reason is on record and its present shape is the record of everything since; {settlement} is the argument and all its revisions at once.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} reads as a place built to a plan that life has been editing for generations, and the editing is most of what a stranger sees.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "GROWN-UNRECORDED",
+      "keyGuarantees": [
+        "no history.founding on the record"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "Nobody wrote down the beginning of {settlement}; the town simply proved convenient, and convenience compounded.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} was never founded so much as agreed to, one household at a time.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

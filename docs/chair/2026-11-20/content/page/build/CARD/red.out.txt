@@ -1,0 +1,193 @@
+
+ RUN  v4.1.8 /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/base
+
+ ❯ tests/domain/cardStandingRead.test.js (0 test)
+ ❯ tests/components/npcCardStanding.test.jsx (7 tests | 7 failed) 4341ms
+     × the header prints no dot, whatever the stored influence 264ms
+     × first of a power: "Standing first of <power>, <its weight here>" 136ms
+     × first of none, or in no power: no Standing row, and no standing word anywhere 46ms
+     × a tie another holds toward the card reads in plain words; the card's own tie keeps its kind as its head 35ms
+     × 3. THE NPCs TAB prints no influence tally and no influence filter 191ms
+     × 1. THE CARD: no dot, the oracle's fact under Standing or no Standing row, no band word 309ms
+     × 4-5. THE PDF and THE FOUNDRY JOURNAL: the same fact, never "Influence" 220ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/cardStandingRead.test.js [ tests/domain/cardStandingRead.test.js ]
+Error: Cannot find module '../../src/domain/display/cardStandingRead.js' imported from /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/base/tests/domain/cardStandingRead.test.js
+ ❯ tests/domain/cardStandingRead.test.js:12:1
+     10|  */
+     11| import { describe, expect, it } from 'vitest';
+     12| import { cardStandingLine, cardFirstOfWeights, powerWeightHere } from …
+       | ^
+     13|
+     14| /** @param {Array<[string, number]>} rows */
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/8]⎯
+
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/components/npcCardStanding.test.jsx > 1-2. THE CARD (fixtures): no dots, the fact under Standing, plain words for a tie held toward the card > the header prints no dot, whatever the stored influence
+AssertionError: Ada Reeve: expected 'Ada Reevethe reeve●●●▼' not to match /●/
+
+- Expected:
+/●/
+
++ Received:
+"Ada Reevethe reeve●●●▼"
+
+ ❯ tests/components/npcCardStanding.test.jsx:102:88
+    100|
+    101|   it('the header prints no dot, whatever the stored influence', () => {
+    102|     for (const n of [ada, bran, cole, dara]) expect(openCard(n, t).hea…
+       |                                                                                        ^
+    103|   });
+    104|   it('first of a power: "Standing first of <power>, <its weight here>"…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/8]⎯
+
+ FAIL  tests/components/npcCardStanding.test.jsx > 1-2. THE CARD (fixtures): no dots, the fact under Standing, plain words for a tie held toward the card > first of a power: "Standing first of <power>, <its weight here>"
+AssertionError: expected 'Standing commanding' to be 'Standing first of Council, the strong…' // Object.is equality
+
+Expected: "Standing first of Council, the strongest power here"
+Received: "Standing commanding"
+
+ ❯ tests/components/npcCardStanding.test.jsx:105:42
+    103|   });
+    104|   it('first of a power: "Standing first of <power>, <its weight here>"…
+    105|     expect(openCard(ada, t).standingRow).toBe('Standing first of Counc…
+       |                                          ^
+    106|     expect(openCard(bran, t).standingRow).toBe('Standing first of Guil…
+    107|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/8]⎯
+
+ FAIL  tests/components/npcCardStanding.test.jsx > 1-2. THE CARD (fixtures): no dots, the fact under Standing, plain words for a tie held toward the card > first of none, or in no power: no Standing row, and no standing word anywhere
+AssertionError: Cole Ward: expected 'Standing established' to be null
+
+- Expected:
+null
+
++ Received:
+"Standing established"
+
+ ❯ tests/components/npcCardStanding.test.jsx:111:35
+    109|     for (const n of [cole, dara]) {
+    110|       const { standingRow, text } = openCard(n, t);
+    111|       expect(standingRow, n.name).toBeNull();
+       |                                   ^
+    112|       for (const w of STANDING_WORDS) expectAbsentWithAnchor(text, w, …
+    113|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/8]⎯
+
+ FAIL  tests/components/npcCardStanding.test.jsx > 1-2. THE CARD (fixtures): no dots, the fact under Standing, plain words for a tie held toward the card > a tie another holds toward the card reads in plain words; the card's own tie keeps its kind as its head
+AssertionError: expected [ { dir: 'calledBy', …(1) } ] to deeply equal [ { dir: 'calledBy', …(1) } ]
+
+- Expected
++ Received
+
+  [
+    {
+      "dir": "calledBy",
+-     "text": "Bran Smith holds a tie to them: Outstanding Debt",
++     "text": "Called byBran Smith · Outstanding Debt",
+    },
+  ]
+
+ ❯ tests/components/npcCardStanding.test.jsx:117:19
+    115|   it('a tie another holds toward the card reads in plain words; the ca…
+    116|     const onAda = openCard(ada, t).tieRows;
+    117|     expect(onAda).toEqual([{ dir: 'calledBy', text: 'Bran Smith holds …
+       |                   ^
+    118|     const onBran = openCard(bran, t).tieRows;
+    119|     expect(onBran.map((r) => r.dir)).toEqual(['own']);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/8]⎯
+
+ FAIL  tests/components/npcCardStanding.test.jsx > 1-2. THE CARD (fixtures): no dots, the fact under Standing, plain words for a tie held toward the card > 3. THE NPCs TAB prints no influence tally and no influence filter
+AssertionError: EXCLUSION [the influence tally]: the member is present in a collection that is supposed to exclude it (the anchor sibling proves the collection is live).: expected '4 Key Figures?The people worth knowin…' not to contain 'high influence'
+
+Expected: "high influence"
+Received: "4 Key Figures?The people worth knowing and what each one holds.1 high influence · 1 moderateAll●●● High●● Moderate● LowCouncil (2)▲Ada Reevethe reeve●●●▼the reeve · first of CouncilCole Wardthe warden●●▼the warden · second of CouncilGuilds (1)▲Bran Smiththe smith●▼the smith · first of Guilds · second of CouncilIn no power (1)▲Dara Mossthe herbalist●▼the herbalist"
+
+ ❯ Module.expectAbsentWithAnchor tests/helpers/anchoredNegatives.js:132:9
+    130|     `EXCLUSION${where}: the member is present in a collection that is …
+    131|     + ` it (the anchor sibling proves the collection is live).`,
+    132|   ).not.toContain(member);
+       |         ^
+    133| }
+    134|
+ ❯ tests/components/npcCardStanding.test.jsx:130:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/8]⎯
+
+ FAIL  tests/components/npcCardStanding.test.jsx > births: every surface prints the fact, never the band > 1. THE CARD: no dot, the oracle's fact under Standing or no Standing row, no band word
+AssertionError: every card prints the fact, never the band — 5 of 5 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[0] r2r-thorp-0 — r2r-thorp-0 Cosij Chan: no dot in the header: expected 'Cosij Chan●▼' not to match /●/
+[1] r2r-hamlet-3 — r2r-hamlet-3 Friedrich Koch: no dot in the header: expected 'Friedrich Koch●●●▼' not to match /●/
+[2] r2r-village-31 — r2r-village-31 Nikoleta Kiselev: no dot in the header: expected 'Nikoleta Kiselev●●●▼' not to match /●/
+[3] r2r-town-2 — r2r-town-2 Demetrios Gregoraios: no dot in the header: expected 'Demetrios Gregoraios●●●▼' not to match /●/
+[4] r2r-city-0 — r2r-city-0 Anna Loginov: no dot in the header: expected 'Anna Loginov●▼' not to match /●/: expected [ …(5) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "[0] r2r-thorp-0 — r2r-thorp-0 Cosij Chan: no dot in the header: expected 'Cosij Chan●▼' not to match /●/",
++   "[1] r2r-hamlet-3 — r2r-hamlet-3 Friedrich Koch: no dot in the header: expected 'Friedrich Koch●●●▼' not to match /●/",
++   "[2] r2r-village-31 — r2r-village-31 Nikoleta Kiselev: no dot in the header: expected 'Nikoleta Kiselev●●●▼' not to match /●/",
++   "[3] r2r-town-2 — r2r-town-2 Demetrios Gregoraios: no dot in the header: expected 'Demetrios Gregoraios●●●▼' not to match /●/",
++   "[4] r2r-city-0 — r2r-city-0 Anna Loginov: no dot in the header: expected 'Anna Loginov●▼' not to match /●/",
++ ]
+
+ ❯ Module.expectNoSeedFailures tests/helpers/seedFailures.js:147:26
+    145|   const header = `${label} — ${scale} case(s) failed. This is the TRUE…
+    146|     + ` A bare seed loop would have reported 1 and stopped at the firs…
+    147|   expect(roster, header).toEqual([]);
+       |                          ^
+    148| }
+    149|
+ ❯ tests/components/npcCardStanding.test.jsx:153:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/8]⎯
+
+ FAIL  tests/components/npcCardStanding.test.jsx > births: every surface prints the fact, never the band > 4-5. THE PDF and THE FOUNDRY JOURNAL: the same fact, never "Influence"
+AssertionError: the PDF and the journal print the fact, never the band — 5 of 5 case(s) failed. This is the TRUE count: every case ran. A bare seed loop would have reported 1 and stopped at the first one.
+[0] r2r-thorp-0 — r2r-thorp-0: the PDF prints no "Influence": expected true to be false // Object.is equality
+[1] r2r-hamlet-3 — r2r-hamlet-3: the PDF prints no "Influence": expected true to be false // Object.is equality
+[2] r2r-village-31 — r2r-village-31: the PDF prints no "Influence": expected true to be false // Object.is equality
+[3] r2r-town-2 — r2r-town-2: the PDF prints no "Influence": expected true to be false // Object.is equality
+[4] r2r-city-0 — r2r-city-0: the PDF prints no "Influence": expected true to be false // Object.is equality: expected [ …(5) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "[0] r2r-thorp-0 — r2r-thorp-0: the PDF prints no \"Influence\": expected true to be false // Object.is equality",
++   "[1] r2r-hamlet-3 — r2r-hamlet-3: the PDF prints no \"Influence\": expected true to be false // Object.is equality",
++   "[2] r2r-village-31 — r2r-village-31: the PDF prints no \"Influence\": expected true to be false // Object.is equality",
++   "[3] r2r-town-2 — r2r-town-2: the PDF prints no \"Influence\": expected true to be false // Object.is equality",
++   "[4] r2r-city-0 — r2r-city-0: the PDF prints no \"Influence\": expected true to be false // Object.is equality",
++ ]
+
+ ❯ Module.expectNoSeedFailures tests/helpers/seedFailures.js:147:26
+    145|   const header = `${label} — ${scale} case(s) failed. This is the TRUE…
+    146|     + ` A bare seed loop would have reported 1 and stopped at the firs…
+    147|   expect(roster, header).toEqual([]);
+       |                          ^
+    148| }
+    149|
+ ❯ tests/components/npcCardStanding.test.jsx:175:5
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/8]⎯
+
+
+ Test Files  2 failed (2)
+      Tests  7 failed (7)
+   Start at  11:57:10
+   Duration  18.72s (transform 9.14s, setup 302ms, import 12.65s, tests 4.34s, environment 1.29s)
+

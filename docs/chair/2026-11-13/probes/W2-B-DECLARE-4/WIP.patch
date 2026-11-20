@@ -1,0 +1,111 @@
+diff --git a/src/domain/coherence/vocabularyPageFindings.js b/src/domain/coherence/vocabularyPageFindings.js
+index 4b9311607..b5cdabdce 100644
+--- a/src/domain/coherence/vocabularyPageFindings.js
++++ b/src/domain/coherence/vocabularyPageFindings.js
+@@ -24,7 +24,7 @@
+ import { factsOf } from '../facts/factsOf.js';
+ import { liveInstitutionNames } from '../facts/institutions.js';
+ import {
+-  NEW_WORDS, THINGS, newWordsDeniedIn, newWordsNamedIn, presentForDenial, sentencesOf, thingsDeniedIn, thingsNamedIn,
++  onPageList, NEW_WORDS, THINGS, newWordsDeniedIn, newWordsNamedIn, presentForDenial, sentencesOf, thingsDeniedIn, thingsNamedIn,
+ } from '../facts/registeredWords.js';
+ 
+ /**
+@@ -67,11 +67,12 @@ export function vocabularyPageFindings(settlement, views) {
+         // The walker's own floor (presumedThings.shared.mjs, the printed-record arm: `text.length < 15`):
+         // a heading or a chip names no claim. Not a tuning value: the measure reads what the walker reads.
+         if (sentence.length < 15) continue;
+-        // the hand-written things left the page list at the precision read (`THINGS[id].pageWithdrawn`); arm 2 of the walker reads them
+-        for (const id of thingsNamedIn(sentence)) if (!THINGS[id].pageWithdrawn && thingAbsent(id)) push(view, id, 'names', sentence, `the town lacks: ${id}`);
++        // the hand-written things left the page list at the precision read (`THINGS[id].pageWithdrawn`), but for a kept narrow phrase (F7: `onPageList`); arm 2 of the walker reads them
++        for (const id of thingsNamedIn(sentence)) if (onPageList(THINGS[id], sentence) && thingAbsent(id)) push(view, id, 'names', sentence, `the town lacks: ${id}`);
+         for (const id of thingsDeniedIn(sentence)) if (!THINGS[id].pageWithdrawn && presentForDenial(id, facts, names)) push(view, id, 'denies', sentence, `the town has: ${id}`);
+         for (const id of newWordsNamedIn(sentence)) {
+-          if (NEW_WORDS[id].pageWithdrawn) continue; // the precision read withdrew its family from the page list (its reason is on the word)
++          // the precision read withdrew its family from the page list (its reason is on the word), but for a kept narrow phrase (F7)
++          if (!onPageList(NEW_WORDS[id], sentence)) continue;
+           if (NEW_WORDS[id].absent(facts, names, record, sentence)) push(view, id, 'names', sentence, `false here: ${id} (${NEW_WORDS[id].leaf})`);
+         }
+         for (const id of newWordsDeniedIn(sentence)) {
+diff --git a/src/domain/facts/registeredWords.js b/src/domain/facts/registeredWords.js
+index 136e02330..8257fdeed 100644
+--- a/src/domain/facts/registeredWords.js
++++ b/src/domain/facts/registeredWords.js
+@@ -68,6 +68,8 @@ import { CRISIS_FAMILY_KINDS, CRISIS_KIND_ALIASES, CRISIS_KIND_WORDS, FACT_DIMEN
+  * @property {RegExp} [context] the word names only in a sentence of this context (a famine to come: a sentence of food)
+  * @property {string} [pageWithdrawn] WITHDRAWN FROM THE PAGE LIST, with its reason (the third seat's precision read: a
+  *   family wrong more than one time in ten that no word or leaf narrows surely); the walker's source arm still reads it
++ * @property {RegExp} [pageKept] a NARROW phrase family of a withdrawn word that stays on the page list (F7 of REVIEW-W2B's
++ *   second read: each read nine or more in ten); a naming sentence of the word that matches it is a finding again
+  */
+ 
+ /**
+@@ -610,6 +612,26 @@ const STATE_FAMILIES = {
+ 
+ /** The generated families, joined to the new words (the walker's source arm and the page check read them all). */
+ Object.assign(NEW_WORDS_OPEN, HOUSE_FAMILIES, RESOURCE_FAMILIES, ROLE_FAMILIES, STATE_FAMILIES);
++
++/**
++ * THE NARROW FAMILIES KEPT ON THE PAGE LIST (F7 of REVIEW-W2B's second read: "the withdrawal took four HIGH cold lines
++ * that narrower families keep at ten in ten"). Each is a phrase of a withdrawn word, read with that word's own leaf (one
++ * home): the market phrase by `market` (factsOf(record).market), the alchemist phrase by `house: alchemist` (the live
++ * roster). The reviewer read each ten in ten on the census's 720; this lane's fourth seat read ten more of each on its own
++ * draw (the hand-back, part four). The bare words stay withdrawn: of ten bare alchemist hits about five are true.
++ */
++const PAGE_KEPT = Object.freeze({
++  market: /\bmarket (?:levies|dues|day|wardens|tolls)\b|\bcome to market\b|\bthe market (?:still )?opens\b|\bat (?:the|its) market\b/i,
++  'house: alchemist': /\b(?:the local|its|from its|comes from its|the town's) alchemists?\b/i,
++});
++/** @type {RegisteredWord} */ (THINGS.market).pageKept = PAGE_KEPT.market;
++NEW_WORDS_OPEN['house: alchemist'].pageKept = PAGE_KEPT['house: alchemist'];
++
++/**
++ * Is a NAMING sentence of the word on the page list: the word is not withdrawn, or the sentence is one of its kept narrow
++ * families? @param {RegisteredWord} w @param {string} sentence
++ */
++export const onPageList = (w, sentence) => !w.pageWithdrawn || (!!w.pageKept && w.pageKept.test(sentence));
+ Object.freeze(NEW_WORDS_OPEN);
+ 
+ export const NEW_WORD_IDS = Object.freeze(Object.keys(NEW_WORDS));
+diff --git a/tests/domain/coherence/vocabularyPageFindings.test.js b/tests/domain/coherence/vocabularyPageFindings.test.js
+index 302dfe9b7..4798caa0e 100644
+--- a/tests/domain/coherence/vocabularyPageFindings.test.js
++++ b/tests/domain/coherence/vocabularyPageFindings.test.js
+@@ -103,7 +103,9 @@ describe('F1 — the generated vocabulary', () => {
+ 
+   test('planted: each family is a finding where the town makes it false, and none where it is true', () => {
+     // the house and resource families left the page list at the third seat's precision read (item 1; the walker still reads them)
+-    expect(words(hamlet)).toEqual(['armedForce', 'clergy', 'openTrade', 'smith', 'streets']);
++    // F7 of the second read: DS-DEF-5's "comes from its alchemists" is the kept alchemist phrase, false in a hamlet with
++    // no alchemist (the cold list's c26 and c30 lines)
++    expect(words(hamlet)).toEqual(['armedForce', 'clergy', 'house: alchemist', 'openTrade', 'smith', 'streets']);
+     expect(words(town)).toEqual([]);
+   });
+ 
+@@ -318,3 +320,26 @@ describe('F8 (second read) — "the church\'s name" names no church here', () =>
+     expect(thingsNamedIn('The church\'s bell rings over the square at noon.')).toEqual(['temple']);
+   });
+ });
++
++/**
++ * F7 of the second read (REVIEW-W2B-1fb15980d: "the withdrawal took four HIGH cold lines that narrower families keep at
++ * ten in ten"). Two NARROW phrase families of withdrawn words return to the page list, each read ten in ten by the
++ * reviewer and nine or more in ten by this seat: the market phrase (market levies / dues / day / wardens / tolls, come to
++ * market, the market opens, at its market) where the town has no market, and the alchemist phrase (the local / its /
++ * the town's alchemist) where no alchemist house stands. The bare words stay withdrawn. Red at f1a48b12f.
++ */
++describe('F7 (second read) — the market phrase and the alchemist phrase are on the page list', () => {
++  const place = (institutions) => ({ tier: 'village', population: 300, config: {}, stress: [], institutions, powerStructure: { factions: [{ faction: 'Elder Council' }] } });
++  const words = (record, line) => vocabularyPageFindings(record, { 'Systems/Power': [line] }).map((f) => f.word);
++  test('the market phrase where the town has no market; the bare word stays withdrawn', () => {
++    expect(words(place([]), 'The Elder Council has been debating market levies for three months.')).toEqual(['market']);
++    expect(words(place([]), 'Fewer people come to market than did ten years ago.')).toEqual(['market']);
++    expect(words(place([{ name: 'Market square' }]), 'The Elder Council has been debating market levies for three months.')).toEqual([]);
++    expect(words(place([]), 'Grain goes to the market in the next valley each autumn.')).toEqual([]);
++  });
++  test('the alchemist phrase where no alchemist stands; the bare word stays withdrawn', () => {
++    expect(words(place([{ name: 'Herbalist' }]), 'The local alchemist supplements conventional trade.')).toEqual(['house: alchemist']);
++    expect(words(place([{ name: 'Alchemist shop' }]), 'The local alchemist supplements conventional trade.')).toEqual([]);
++    expect(words(place([{ name: 'Herbalist' }]), 'Not to be confused with the alchemist.')).toEqual([]);
++  });
++});

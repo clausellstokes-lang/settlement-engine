@@ -23,25 +23,36 @@
  *  - historySiegeNarrative     — the stored-form siege sentence
  */
 
-import { defenseWordsFindings } from '../domain/coherence/defenseWordsFindings.js';
+import { textOf } from '../domain/facts/textOf.js';
+import { defenseWordsFindings } from '../domain/coherence/defenseWordsFindings.js'; import { factsOf } from '../domain/facts/factsOf.js'; import { declarationAdmits, declarationOf } from '../domain/facts/factVocabulary.js'; // F11, CENSUS-1c, R2-CODE-A P1: one line
 import {
   clearActiveRng,
   getActiveRng,
   random as _rng,
   setActiveRng,
 } from '../kernel/rngContext.js';
-import { disperseNamedRoster } from './density/applyDensityLaw.js';
+import { landMemberships, rankPowers } from './people/castPowers.js';
+import { assignHandlers, dealAllegiances, leaveAllegianceReceipts } from '../domain/people/allegiance.js';
+import { hallCaptureOf, writeHallCapture } from '../domain/people/hallCapture.js';
+import { captureClimateOf } from './power/rulingStructure.js';
+import { withCaptureRelations } from './factionDynamics.js';
+import { cardInstitutionVeilOf } from '../domain/people/cardPowers.js';
+import { drawTies } from './people/ties.js';
+import { dealGoals, refuseWantsBesideSecrets } from './people/goals.js'; // GOALS-2: the want refused beside the secret, a post-pass (twice)
+import { dealRareSecrets } from './people/rareSecrets.js'; // SECRETS-1: the very rare secrets, beside the goals
 import { pickVariant } from '../kernel/proseHash.js';
-import { selectOriginBody } from './narrative/settlementOriginProse.js';
-import { resolvePrimaryStress } from './stressPriority.js';
-import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
+import { selectOriginBody, supportChannelsOf } from './narrative/settlementOriginProse.js'; import { FOUNDER_ADMITS, FOUNDING_REASON_ADMITS, NAMES_A_FOUNDER, admittedRow, foundingStateOf, founderForOrigin, oneFounderRow } from './narrative/foundingRowAdmits.js'; // R2-CODE-A-5: one line, so no cited line moves
+import { resolvePrimaryStress } from './stressPriority.js'; import { wartimeGoesWell } from './stressNarrative.js'; // BAR2-PLACES (PL6)
+import { migrationDirectionOfStress, migrationDirectionOfConfig } from '../domain/migrationDirection.js';
+import { pick, pickRandom, pickRandom2, random01 } from './helpers.js'; import { powerNameWithArticle, withPowerVerb } from '../domain/display/powerSentenceName.js'; // NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): a coherence note names a power with its article; one line, so no cited line moves
 import { resolveTerrain } from '../domain/resolveTerrain.js';
-import { deriveTradeCommodity } from './tradeCommodity.js';
+import { deriveTradeCommodity } from './tradeCommodity.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; // R2-CODE-A-7: the roster's courthouses (record 422), read from the defence home (R2-CODE-A-10)
 
 import {
   TERRAIN_NARRATIVE_HOOKS,
   STRESS_DESCS,
   STRESS_NOTES,
+  MASS_MIGRATION_DEPARTURE_NOTES,
 } from '../data/narrativeData.js';
 // The runner's ONE pin primitive (EM-B2a2's landed export). This module consults a pin
 // through it and nowhere else: no local clone (EM-R1 clones the bag on entry at the runner)
@@ -59,7 +70,7 @@ import { composeArrivalScene, ROUTE_TO_SCENE } from './narrative/arrivalScene.js
 import { genRelNarrative, genSuccessionNarr } from './powerGenerator.js';
 import { mergeNPCLists } from './npcGenerator.js';
 import { enrichNPCsWithStructure } from './npcStructure.js';
-import { generateCrimeLevel, getStressHistory } from './npcGenerator.js';
+import { generateCrimeLevel, getStressHistory } from './npcGenerator.js'; import { heldByOthers } from './hookVariety.js'; import { settleMisfitSecrets, withoutMarketWords } from './npc/factionLeaderSecret.js'; import { hasMarketInstitution } from '../domain/facts/market.js'; /* S9 (PAGE-6) */ // REVIEW-INTAKE-4, one line so no cited line moves
 import { generateSiegeCapability } from './narrative/siegeCapability.js';
 // The history half of the coherence tail. Extracted so the history REROLL runs
 // the same derivations assembly runs instead of shipping generateHistory's raw
@@ -68,7 +79,7 @@ import { generateSiegeCapability } from './narrative/siegeCapability.js';
 // second copy.
 import { buildStressProfile, historySiegeNarrative } from './narrative/historyCoherence.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
-import { deriveHistoryChallengeRoute } from './history/historyRouteContext.js';
+import { deriveHistoryChallengeRoute } from './history/historyRouteContext.js'; // CENSUS-4 (factsOf: imported on line 26 by CENSUS-1c)
 
 // Keep the established public import path while the implementation lives with
 // the other extracted narrative policies.
@@ -133,7 +144,7 @@ const genSettSummary = settlement => {
             : tier === 'metropolis'
               ? 'the grand council'
               : 'the council');
-  const topFaction = factions[0]?.faction || 'the dominant faction';
+  const topFaction = factions[0]?.faction || 'the dominant power';
 
   const crimFaction =
     factions.find(
@@ -172,6 +183,8 @@ const genSettSummary = settlement => {
     commodity,
     // F3 FOOD-WORDS: the food record, so a stress secret's food claim reads the one home.
     foodRecord: economicState?.foodSecurity?.foodRecord ?? null,
+    // WIRING-W0 (R-W7 e): the migration direction the record declares, so a crisis secret reads it.
+    migrationDirection: migrationDirectionOfStress(stress),
     prosperity: economicState.prosperity || 'Moderate',
     stability: powerStructure.stability || 'Stable',
     govFaction,
@@ -306,7 +319,8 @@ export const genArrivalDetail = (
     ],
     hamlet: [
       'three or four families who agreed to try wintering together and never stopped',
-      'a miller who built a mill and found customers before they found customers',
+      // R2-CODE-A-3 (the increment's ww-53): it read "a miller who built a mill and found customers before they found customers", garbled, in hamlets that hold no mill; the founder is picked with no roster in reach, so the line names no house
+      'a household that settled first and found others following it in',
       'a retired tradesperson whose skills attracted dependents',
       'a small religious community whose members drifted into secular life over two generations',
     ],
@@ -405,17 +419,24 @@ export const genArrivalDetail = (
   // canonical index-0 note, byte-identical to the old behaviour.
   // STRESS_NOTES (now variant pools, canonical-at-zero) lives in src/data/narrativeData.js.
 
-  return {
+  const foundingState = foundingStateOf(config, economicContext, worldLaw), founders = FOUNDERS_BY_TIER[tier] || FOUNDERS_BY_TIER.village, drawnReason = pick(reasonPool), admittedReason = admittedRow(reasonPool, drawnReason, FOUNDING_REASON_ADMITS, foundingState, NAMES_A_FOUNDER), foundedBy = founderForOrigin(founders, admittedRow(founders, pick(founders), FOUNDER_ADMITS, foundingState), admittedReason, foundingState); return { // FB (ruling N17): the founder resolves draw-free to one the Origin row agrees with, before FA moves the row // R2-CODE-A-5 (#488 #594 #845, #571/#916): a refused row resolves draw-free to the next admitted one; R2-CODE-A-13: the two picks in their order
     age: null, // filled in by historyGenerator
-    reason: pick(reasonPool),
-    foundedBy: pick(FOUNDERS_BY_TIER[tier] || FOUNDERS_BY_TIER.village),
+    reason: oneFounderRow(reasonPool, admittedReason, foundedBy, FOUNDING_REASON_ADMITS, foundingState), // R2-CODE-A-9: a refused row resolves onto no second founder; R2-CODE-A-13 (ruling (4)): a founder row stands only beside its own founder
+    foundedBy,
     initialChallenge: pick(
       CHALLENGES_BY_ROUTE[challengeRoute] || CHALLENGES_BY_ROUTE.road,
     ),
     overcoming: pick(OVERCOMING_BY_PROSPERITY[prosperity] || OVERCOMING_BY_PROSPERITY.Moderate),
     stressNote: primaryStress
       ? pickVariant(
-        licensedNotes(STRESS_NOTES[primaryStress], economicContext?._institutions), // F1: walls only where they stand
+        licensedNotes(
+          // R-W7 (e), W5 HIS 2026-11-07: the migration note reads the declared direction; a
+          // departures town draws the departures set, never the arrivals one.
+          primaryStress === 'mass_migration' && migrationDirectionOfConfig(config) === 'departures'
+            ? MASS_MIGRATION_DEPARTURE_NOTES
+            : STRESS_NOTES[primaryStress],
+          economicContext?._institutions,
+        ), // F1: walls only where they stand
         config?._seed ? `${config._seed}::stressNote::${primaryStress}` : null,
       ) ?? null
       : null,
@@ -447,9 +468,9 @@ const genPressureDetail = settlement => {
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
   const primaryStress = resolvePrimaryStress(stresses);
 
-  // Unified scan (tradeCommodity.js); the pressure templates carry their own
-  // per-sentence defaults, so a plausible first word beats null here.
-  const commodity = deriveTradeCommodity(economicState, { firstWordFallback: true });
+  // Unified scan (tradeCommodity.js); the pressure templates carry their own per-sentence defaults ("trade", "harvest", "export", the town's food).
+  // R2-CODE-A-3 (round three HIGH #601): no first-word fallback: an export the scan does not name gave its first word, no commodity ("what the recovered can bring in", "levies of men, of milled").
+  const commodity = deriveTradeCommodity(economicState);
 
   const factions = powerStructure?.factions || [];
   const govFaction =
@@ -495,6 +516,9 @@ const genPressureDetail = settlement => {
             ? 'the local herbalist'
             : 'the healers';
 
+  // FIX-PUBLIC-VEIL (the second seat): is the top card a veiled face (its house record veiled)?
+  const topCardVeiled = cardInstitutionVeilOf(npcs?.[0]) === 'veiled';
+  const defense = defenseFactsOf({ institutions }); // the court building, from the one home (defenceFactReaders' court member)
   return {
     name,
     tier,
@@ -502,20 +526,30 @@ const genPressureDetail = settlement => {
     milForce,
     healersRef: healerRef,
     stresses: stresses.map(type => ({ type })),
-    commodity,
+    // WIRING-W0 (R-W7 e): the migration direction the record declares; the mass_migration pressure
+    // lines read it (narrativeText.js), never a score of their own.
+    migrationDirection: migrationDirectionOfStress(stress),
+    commodity, foodRecord: economicState?.foodSecurity?.foodRecord ?? null, powerCount: factions.length, hasBakery: hasInst('baker'), hasWorkshop: (institutions || []).some(i => i?.category === 'Crafts' && !/^access to\b/i.test(String(i?.name || ''))), hasCourt: defense.hasCourthouse, hasWarehouse: (institutions || []).some((i) => ['warehouse_district', 'merchant_warehouses'].includes(i?.catalogId)), hasCivicHall: defense.hasCourthouse || (institutions || []).some((i) => ['town_hall', 'city_hall'].includes(i?.catalogId)), hasForce: factsOf(settlement).guardPresence === true, millExports: (economicState?.primaryExports || []).some((x) => /\bflour\b|\bmeal\b|\bmilled\b/i.test(String(x))), /* TAIL-NARRATIVE (READ-ALL 20366, 01333, 11487, 00708): the warehouse and the civic hall (by catalog id: the label-join freeze; TAIL-CLOSE-SRC-2: a court building is the defence home's `hasCourthouse`, the live roster's answer, and the hall ids that are no court stay), a force to send (factsOf's guardPresence), a mill whose goods are sold */ // R2-CODE-A-7 (record 422): a courthouse on the roster, by catalog id (the label-join freeze), for the line that names the courts // R2-CODE-A-6: a house of craft on the roster (an "Access to" row is not one: record 375) // R2-CODE-A-3: the powers the record holds (#48); the bakers the roster holds (the increment's ww-28) // R2-CODE-A P1: the food record, for the lines that mean food (narrativeText.js :: PRESSURE_SENTENCES, through foodBalance.js :: foodStoreWord)
     // compound: the economic/military/criminal effectiveness triplet the
     // wartime/mass_migration/insurgency PRESSURE_SENTENCES closures branch on
     // (r.compound?.economyOutput / militaryEffective / criminalEffective). Without
     // this the closures always hit their '|| default' fallback (dead compound branch).
     compound: economicState?.compound || undefined,
+    // BAR2-PLACES (PL6): how the war goes for the town is the crisis summary's (stressNarrative.js :: wartimeGoesWell)
+    warGoesWell: wartimeGoesWell(stress),
     prosperity: economicState?.prosperity || 'Moderate',
     govFaction,
     topFaction: topFaction || govFaction,
     stability: powerStructure?.stability || 'Stable',
     recentConflict: powerStructure?.recentConflict || null,
     topNPC: npcs?.[0] || null,
-    topNPCRole: npcs?.[0]?.role || null,
-    topNPCName: npcs?.[0]?.name || null,
+    // M-1b (PEOPLE-1 CAST): a card's role is its TITLE and carries its article ('the master fishmonger'); the pressure
+    // lines prefix ", the " themselves, so the noun is handed over without it (never "the the").
+    // FIX-PUBLIC-VEIL (the second seat): a VEILED top card's title would name its hidden house in the public
+    // pressure sentence ("Qian Deng, the smuggler, knows more…"), so neither is handed over and each template
+    // takes its own anonymous fallback ("the most senior official"); an open card's lines are unchanged.
+    topNPCRole: topCardVeiled ? null : (String(npcs?.[0]?.role || '').replace(/^the\s+/i, '') || null),
+    topNPCName: topCardVeiled ? null : (npcs?.[0]?.name || null),
     viabilityIssues: economicViability?.issues || [],
     isViable: economicViability?.viable !== false,
     topTension: (history?.currentTensions || [])[0]?.type || null,
@@ -559,7 +593,7 @@ const genCoherence = settlement => {
       type: 'power_economic',
       severity: 'notable',
       tab: 'economics',
-      note: `${crimeFaction.faction} holds ${crimeFaction.power}% of power in this transit hub. A portion of import/export flow is likely controlled outside official channels. Stated trade figures may not reflect actual volumes.`,
+      note: `${powerNameWithArticle(crimeFaction.faction, true)} holds ${crimeFaction.power}% of power in this transit hub. A portion of import/export flow is likely controlled outside official channels. Stated trade figures may not reflect actual volumes.`,
     });
   }
 
@@ -591,8 +625,10 @@ const genCoherence = settlement => {
     });
   }
 
-  // Church controls economy but formal governance is secular
-  const churchControlsEcon = economicState.situationDesc?.toLowerCase().includes('church controls');
+  // Church controls economy but formal governance is secular. W2-B-DECLARE item 5 (the layer map's measure 9:
+  // no line reads wording): the generator's own flag, stored on the record (`safetyProfile.flags`), not the
+  // situation sentence it once wrote — that sentence is suppressed for an isolated place, the flag is not.
+  const churchControlsEcon = economicState.safetyProfile?.flags?.theocraticEconomy === true;
   const govIsSecular =
     govFaction &&
     !govFaction.faction.toLowerCase().includes('church') &&
@@ -604,7 +640,7 @@ const genCoherence = settlement => {
       type: 'power_economic',
       severity: 'notable',
       tab: 'power',
-      note: `Economic activity flows through religious institutions, but formal governance rests with ${govFaction.faction}. Whoever controls trade and tithes holds more practical power than whoever holds the official seat.`,
+      note: `Economic activity flows through religious institutions, but formal governance rests with ${powerNameWithArticle(govFaction.faction)}. Whoever controls trade and tithes has a say the official seat must reckon with.`, // BAR3-PLACES (C18651, 2026-11-15): no power over the seat claimed (a Strong governorship beside a Minor clergy printed it)
     });
   }
 
@@ -618,7 +654,7 @@ const genCoherence = settlement => {
       type: 'power_economic',
       severity: 'notable',
       tab: 'overview',
-      note: `${crimeFaction.faction} controls ${crimeFaction.power}% of power here. Stated prosperity reflects gross output. A meaningful share flows outside official taxation.`,
+      note: `${powerNameWithArticle(crimeFaction.faction, true)} controls ${crimeFaction.power}% of power here. Stated prosperity reflects gross output. A meaningful share flows outside official taxation.`,
     });
   }
 
@@ -692,8 +728,8 @@ const _getSettReason = (safetyLabel, monsterThreat, hasStress) => {
  * Enrich an NPC object with faction affiliation, secret motivation overlay,
  * and stress-specific goal modifications.
  */
-const buildPoliticalNarrative = (npc, index, summary, allNpcs) => {
-  const crimeLevel = generateCrimeLevel(npc, index, summary, allNpcs);
+const buildPoliticalNarrative = (npc, index, summary, allNpcs, held = null) => { // held: the secrets the rest of the roster carries (REVIEW-INTAKE-4)
+  const crimeLevel = generateCrimeLevel(npc, index, summary, allNpcs, held);
   const secret = crimeLevel || npc.secret;
   let presentation = npc.presentation;
 
@@ -707,6 +743,19 @@ const buildPoliticalNarrative = (npc, index, summary, allNpcs) => {
   if (crimeLevel) enriched.secret = crimeLevel;
   return enriched;
 };
+
+/**
+ * The small-place tier line, five vantages (local, traveller, official, trade, newcomer). Five, not
+ * four: a power-of-two pool aliases under the FNV pick (the origin pools' own pin). Index 0 is the
+ * seedless line.
+ */
+export const SMALL_PLACE_TIER_LINES = Object.freeze([
+  'Every household here has its work, and there is little to spare.',
+  'A handful of houses; you could greet everyone in it before noon.',
+  'Everyone here knows every household by name, and none has much put by.',
+  'What little the place grows or makes is mostly used at home; there is not much left to sell.',
+  'A newcomer is noticed by the second day here, and asked what work they mean to do.',
+]);
 
 // ─── generateSettlementReason ─────────────────────────────────────────────────
 /**
@@ -722,9 +771,11 @@ const buildPoliticalNarrative = (npc, index, summary, allNpcs) => {
  *                                 When it records a meaningful deficit, the isolated
  *                                 wording acknowledges the gap instead of seeding the
  *                                 AI pass with a self-sufficiency claim.
+ * @param {{ hasDocks?: boolean, hasTravellerHouse?: boolean }} [roster] - #10: the roster's docks/wharf flag; an explicit false
+ *                                 takes the terrain's arm, absent keeps the port arm.
  * @returns {string[]} Array of reason strings (shown as bullet list)
  */
-export const generateSettlementReason = (tier, route, neighbor, _config = {}, foodBalance = null) => {
+export const generateSettlementReason = (tier, route, neighbor, _config = {}, foodBalance = null, roster = {}) => {
   const lines = [];
 
   // Meaningful food deficit? rawDeficit is the pre-import gap (need − production);
@@ -741,34 +792,40 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
   // DRAW-FREE from the settlement's founding state (see narrative/settlementOriginProse.js).
   // A caller that passes no `_seed` gets the pool's index 0, which is the exact
   // pre-widening sentence: canonical-at-zero, so no seedless caller moved.
-  const supportChannels = (
-    _config.magicExists !== false
-    && Number(_config.priorityMagic ?? 50) > 0
-  )
-    ? 'magical transport, sanctioned caravans, seasonal access, or patronage'
-    : 'sanctioned caravans, seasonal access, patronage, or emergency rationing';
+  // STYLE-2 FIRST-IMPRESSIONS (A·O16): the support list in plain words, not the channel names.
+  // R2-CODE-A-4 (round three #7; the increment's ww-3, ww-29): the list is read from the record's own
+  // isolation receipt (config._isolationSupport, set by the coherence pass before this step), one phrase
+  // a path that carries food in from outside, never a fixed list: no magic, caravan or patron the
+  // receipt lacks is named (settlementOriginProse.js :: supportChannelsOf).
+  // The receipt is the record's `isolationSupport` (the same object, measured on 764 births).
+  const supportChannels = supportChannelsOf(_config._isolationSupport) ?? undefined; const siegeInForce = Array.isArray(_config.stressTypes) && _config.stressTypes.includes('under_siege'); // #215: the siege, read once
   lines.push(selectOriginBody({
     route,
     terrainType: _config.terrainType ?? null,
     hasFoodDeficit,
+    // #10: the port reason reads the roster's docks/wharf flag (undefined from a caller that does not say).
+    // A parameter of its own, never a config key: the config is the DM's saved input, the roster is not.
+    hasDocks: roster?.hasDocks,
     supportChannels,
     specialResources: _config.specialResources ?? null,
-    seed: _config._seed ?? null,
+    seed: _config._seed ?? null, siege: siegeInForce, tier, hasTravellerHouse: roster?.hasTravellerHouse, hasFoodImport: foodBalance ? Number(foodBalance.importCoverage) > 0 : undefined, isolationSupport: _config._isolationSupport ?? null, // R2-CODE-A-4 (#154, #ww-1227, #7): the rows a siege, the size or the roster refuses; what a shortfall with nothing brought in holds; one line so no cited line moves
   }));
 
-  // Tier-specific context
-  if (tier === 'metropolis') {
-    lines.push(
-      'At this scale, the settlement no longer serves a single economic function. It IS the economic function for its region.',
-    );
+  // Tier-specific context. THE OWNER'S STYLE LAW (W5 HIS 2026-11-07, STYLE-AUDIT §2a #11 and §2b-5):
+  // plain statement, no mechanism. The small-place line was the second most-repeated frame on the
+  // 1,000 (334 towns), so it is a pool of five vantages chosen DRAW-FREE by the settlement's seed
+  // (the same town keeps its line; a sibling prints another); a seedless caller gets index 0.
+  if (tier === 'metropolis') { // #215 (R2-CODE-A-4): under a siege no trade is named as open; the line says it of ordinary times
+    lines.push(siegeInForce ? 'In ordinary times everything in the region is bought, sold or decided here.' : 'Everything in the region is bought, sold or decided here.');
   } else if (tier === 'city') {
     lines.push(
       hasFoodDeficit
         ? 'Large enough that its appetites outrun its fields. What the city consumes, it cannot fully produce.'
-        : 'Large enough to produce what it consumes and consume what it produces. External trade amplifies rather than sustains.',
+        : (siegeInForce ? 'Large enough to feed itself; in ordinary times its trade brings extras, not the essentials.' : 'Large enough to feed itself; its trade brings extras, not the essentials.'),
     );
   } else if (['thorp', 'hamlet'].includes(tier)) {
-    lines.push('Small enough that every household knows its purpose. Surplus, if any, is modest.');
+    const seed = typeof _config._seed === 'string' ? _config._seed.trim() : '';
+    lines.push(pickVariant(SMALL_PLACE_TIER_LINES, seed ? `${seed}::settlement-tier-line::${tier}` : null));
   }
 
   return lines;
@@ -792,9 +849,16 @@ export const generatePressureSentence = settlement => {
     const templates = typeof raw === 'function' ? raw(detail) : raw;
     if (Array.isArray(templates) && templates.length) {
       // F1: a line that names walls, a garrison or soldiers the record lacks is not drawn.
-      const licensed = templates.filter((t) => typeof t !== 'string' || defenseWordsFindings(settlement, t).length === 0);
-      const template = pickRandom2(licensed.length ? licensed : templates);
-      return typeof template === 'function' ? template(detail) : template;
+      // R-C (CENSUS-2d): a declared row gives back its text; the pick is over the same arrays.
+      // TAIL-CONTENT-CLOSE-1 (2026-11-15): a TWIN row (`twinOf: <its original's text>`) is never drawn: it stands beside its
+      // original and is reached only where nothing in the pool is admitted (in place of keeping the refused original), so no
+      // roll moves and no town that printed a true row moves.
+      const isTwinRow = (/** @type {unknown} */ t) => !!t && typeof t === 'object' && typeof (/** @type {{twinOf?: unknown}} */ (t)).twinOf === 'string';
+      const twins = templates.filter(isTwinRow), drawable = twins.length ? templates.filter((t) => !isTwinRow(t)) : templates;
+      const licensed = drawable.filter((t) => typeof textOf(t) !== 'string' || defenseWordsFindings(settlement, textOf(t)).length === 0), pool = licensed.length ? licensed : drawable, drawn = pickRandom2(pool), facts = factsOf(settlement), admitted = (/** @type {unknown} */ t) => declarationAdmits(declarationOf(t), /** @type {any} */ (facts)).admitted, at = pool.indexOf(drawn);
+      const twinOfDrawn = twins.find((t) => /** @type {{twinOf: string}} */ (t).twinOf === textOf(drawn) && admitted(t));
+      const template = textOf(admitted(drawn) ? drawn : ([...pool.slice(at + 1), ...pool.slice(0, at)].find(admitted) ?? twinOfDrawn ?? drawn)); // R2-CODE-A P1 (the chair's ruling (a)): a row's own `needs` are honoured after the one pick; a refused row resolves draw-free to the next admitted one
+      const said = typeof template === 'function' ? template(detail) : template; return typeof said === 'string' ? withPowerVerb(said, detail.topFaction, 'controls', 'control') : said; // NAMES-2 (item 5): the leading power's verb takes its number ("the Merchant Guilds control one district"), after the draw
     }
   }
 
@@ -820,12 +884,12 @@ export const generatePressureSentence = settlement => {
       'A dispute over grazing rights and water access has been running for two seasons without resolution.',
       'The harvest was thin this year. Everyone knows it. Nobody is saying it directly.',
       'A family moved away last spring. The reason is not discussed, but it affected the dynamics here.',
-      "The question of who tends the shared fields when the miller's household falls ill has never been properly settled.",
+      { text: "The question of who tends the shared fields when the miller's household falls ill has never been properly settled.", needs: ['institution: mill'] },
       'Two families have been in a quiet feud over a boundary marker for longer than anyone can clearly remember.',
       'The last frost came late and damaged the seedstock. Recovery is possible but the margin is narrow.',
       'A stranger passed through a month ago and asked questions nobody found comfortable.',
     ];
-    return thorpPressures[Math.floor(_rng() * thorpPressures.length)];
+    return textOf(thorpPressures[Math.floor(_rng() * thorpPressures.length)]); // R-C (CENSUS-2d): a declared row gives back its text; CENSUS-1e enforces
   }
 
   return null;
@@ -855,6 +919,21 @@ export const generateArrivalScene = settlement => composeArrivalScene(settlement
  *  - Current tensions string
  */
 /**
+ * A6 (ALLEGIANCE-CAR2, the design §3.4, J-13): the settlement's power structure with the hall-capture state derived
+ * from `npcs` (their ranks and hidden allegiances) and the classifier's climate rung over the current roster — written
+ * by its ONE writer, domain/people/hallCapture.js :: writeHallCapture. Draw-free. EXPORTED for the NPC section
+ * regeneration (FIX-SECTION-REGEN, 2026-11-09): generators/generateSettlementPipeline.js :: regenNPCsPipeline
+ * re-derives the BORN record's hall over its final cast through this same seam (`opts.rederive`), never a private copy.
+ * @param {*} settlement @param {Array<Record<string, any>>} npcs @param {{ rederive?: boolean }} [opts]
+ * @returns {*} the new power structure
+ */
+export const withHallCapture = (settlement, npcs, opts = {}) => {
+  const hall = hallCaptureOf(settlement, { npcs, climate: captureClimateOf(settlement) });
+  // the capture rows of the relation matrix READ the one state (the chair's ruling on car 2's STOP 3)
+  return withCaptureRelations(writeHallCapture(settlement.powerStructure, hall, opts), hall.state);
+};
+
+/**
  * The NPC coherence-enrichment sub-pass: faction/secret overlays
  * (buildPoliticalNarrative) → faction-structure merge (mergeNPCLists) →
  * structural positions/goals/constraints (enrichNPCsWithStructure). Extracted so
@@ -868,8 +947,8 @@ export const generateArrivalScene = settlement => composeArrivalScene(settlement
  */
 export const enrichNpcCoherence = (settlement) => {
   const npcs = settlement.npcs || [];
-  const summary = genSettSummary(settlement);
-  const enrichedNpcs = npcs.map((npc, idx) => buildPoliticalNarrative(npc, idx, summary, npcs));
+  const summary = { ...genSettSummary(settlement), facts: () => factsOf(settlement) }; // CENSUS-4: the declared NPC pools answer the record's facts
+  const secretsNow = npcs.map((n) => n?.secret?.what); const enrichedNpcs = npcs.map((npc, idx) => { const e = buildPoliticalNarrative(npc, idx, summary, npcs, heldByOthers(secretsNow, idx)); secretsNow[idx] = e?.secret?.what; return e; }); // REVIEW-INTAKE-4: the overlay refuses a secret another figure holds (MERGE-R2: inside the census's declared draw)
   const rawMergedNpcs = mergeNPCLists(
     enrichedNpcs,
     settlement.powerStructure?.factions || [],
@@ -877,62 +956,32 @@ export const enrichNpcCoherence = (settlement) => {
     settlement.tier,
     settlement.config || {},
   );
-  // ── ODQ §810 SEAM 2 (coherence): under the Register VII density law the
-  // two-stage roll's DISPERSAL supersedes mergeNPCLists' power-proportional
-  // cascade, and every figure is stamped with its rolled rung band.
-  //
-  // ⭐ THIS SEAM, NOT THE POPULATION STEP, IS WHERE THE DISPERSAL LIVES — because
-  // this function is the tail BOTH full assembly and NPC section-regen run
-  // ("a rerolled roster must carry the same factionAffiliation … as a freshly
-  // generated one"). Wiring the law here is what makes a regen reproduce the
-  // same political shape instead of a differently-dispersed one.
-  //
-  // Version-gated and draw-free under the dormant default: `disperseNamedRoster`
-  // returns the same array by reference for a world whose config carries no
-  // density-law marker, and `getActiveRng()` is a read, not a draw.
-  const densityRng = getActiveRng();
-  const dispersed = densityRng
-    ? disperseNamedRoster({
-      tier: settlement.tier,
-      // X-46 car 4: the population tilt. This seam runs in re-derivation mode, so the tilt
-      // reaches only results it overrides; passed so all three seams roll one plan.
-      population: settlement.population,
-      config: settlement.config || {},
-      stress: settlement.stress,
-      powerStructure: settlement.powerStructure,
-      economicState: settlement.economicState,
-      npcs: rawMergedNpcs,
-      rng: densityRng,
-    }).npcs
-    : rawMergedNpcs;
-  return enrichNPCsWithStructure(dispersed, settlement);
-};
-
-/**
- * Re-link faction member records to the ENRICHED roster by id.
- * [experience-faction-member-staleness] factionGrouping.buildFactions captures direct
- * references to the PRE-enrichment npc objects; the coherence tail then mints NEW enriched
- * npc objects for settlement.npcs (stress-woven goals + the secrets overlay + structural
- * position), leaving every faction's embedded members pointing at the discarded generic
- * copies — the ONE-SOURCE-PER-FACT violation. This remaps each member to the enriched npc
- * of the same id (identity fallback to the original when no id match), so the canonical
- * roster and the faction rosters carry the SAME npc records.
- *
- * Minimum honest repair only — NO id-reference / settlementMigration / normalizeSettlement
- * persistence-shape rewrite (owner-gated). Same-seed generator output shifts (members now
- * serialize the enriched shape): a DECLARED one-time move confined to the ALREADY-PARKED
- * generatorGoldenMaster family (re-mints at THE ONE REGEN).
- * @param {Array<{members?: Array<{id?: any}>}>|undefined} factions
- * @param {Array<{id?: any}>} enrichedNpcs
- * @returns {Array|undefined} the factions with members re-linked (input passed through when not an array)
- */
-export const relinkFactionMembers = (factions, enrichedNpcs) => {
-  if (!Array.isArray(factions)) return factions;
-  const byId = new Map((Array.isArray(enrichedNpcs) ? enrichedNpcs : []).map((n) => [n?.id, n]));
-  return factions.map((f) => {
-    if (!f || !Array.isArray(f.members)) return f;
-    return { ...f, members: f.members.map((m) => (m && byId.has(m.id) ? byId.get(m.id) : m)) };
-  });
+  // ── THE PEOPLE CAR (PEOPLE-1 CAST, 2026-11-07). The density law's DISPERSAL and its rung
+  // stamps (`applyDensityLaw.js :: disperseNamedRoster`, the §810 seam 2 that used to sit here)
+  // are RETIRED FROM BIRTH: a card's standing in the powers is its `memberships`, written here
+  // from the backing catalogue with the `other` powers' minted faces and each power's first,
+  // second and third (people/castPowers.js, R-P3–R-P5; the mints and the ranks draw on keyed
+  // forks of this seam's stream, `people-powers::…`, so nothing after them moves). PEOPLE-LAND
+  // (M-2): the shim that derived the two old fields from the ranks is deleted; the structural
+  // pass reads the memberships (npcStructure.js) and no card carries the old fields. This tail is still
+  // the one BOTH full assembly and NPC section-regen run, so a regenerated cast carries the
+  // same powers as a born one.
+  // ── THE ALLEGIANCE TRAIN, car 1 (ALLEGIANCE-CAR1, 2026-11-08; the design §2): one forward pass,
+  // A1 the memberships landed (rank null) → A2 the hidden allegiances dealt, each card on its own keyed
+  // fork `people-allegiance::<card id>` of this seam's stream (domain/people/allegiance.js; the retired
+  // corruptionPass step's roll, moved here so a regenerated cast deals its allegiances too) → A3 the
+  // rank deal → A4 the handlers, draw-free, after the ranks they read. The receipts are left for the
+  // assembly step's trace (steps/assembleSettlement.js); a regeneration's are dropped, as before.
+  const rng = getActiveRng();
+  const landed = landMemberships(settlement, rawMergedNpcs, rng, settlement?._seed ?? null); settleMisfitSecrets(landed.all, { carry: hasMarketInstitution(settlement.institutions || []) ? undefined : withoutMarketWords }); // S9 (PAGE-6, S9-POST.md): every card dealt (the births, the overlay, the mints), the misfit secrets settled draw-free before the temperament yield and the ranks read them; a town with no market carries a row as mergeNPCLists does; one line, so no cited line moves
+  const dealt = dealAllegiances(settlement, landed.all, rng);
+  // (ALLEGIANCE-CAR4: the retired pass's compromised short goal is gone — the agent's goal is the ALLEGIANCE
+  // family's, dealt at A9 with every other card's, people/goals.js :: dealGoals.)
+  const withPowers = rankPowers(settlement, landed);
+  assignHandlers(withPowers, settlement);
+  leaveAllegianceReceipts(settlement, dealt);
+  settlement.powerStructure = withHallCapture(settlement, withPowers); // A6 (car 2, J-13): the hall-capture state DERIVED, its ONE writer — after the ranks and handlers it reads, before the structural pass that reads it
+  return enrichNPCsWithStructure(withPowers, settlement);
 };
 
 /**
@@ -956,7 +1005,7 @@ function inCoherenceSubstream(rng, label, operation) {
   }
 }
 
-export const generateCoherence = (settlement, coherenceRng = null, pins = null) => {
+export const generateCoherence = (settlement, coherenceRng = null, pins = null, seed = null) => {
   if (!settlement) return settlement;
 
   // Each output owns a stable draw budget. Conditional work in NPC enrichment
@@ -980,8 +1029,44 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
   const mergedNpcs = chooseOrPin(pins, 'npcs', () => inCoherenceSubstream(
     coherenceRng,
     'npc-enrichment',
-    () => enrichNpcCoherence(settlement),
+    // FIX-PUBLIC-VEIL (the second seat): the record's seed salts a veiled mint's opaque id at the cast seam. It is
+    // LENT to the settlement for this call only (assembly attaches `_seed` after the seam; nothing on this path
+    // read it before), so the enrichment's signature, pinned by packet EM-R2, is unchanged.
+    () => {
+      const lend = seed != null && settlement._seed == null;
+      if (lend) settlement._seed = seed;
+      try {
+        return enrichNpcCoherence(settlement);
+      } finally {
+        if (lend) delete settlement._seed;
+      }
+    },
   ));
+
+  // A6 on a HELD roster (car 2): the enrichment above did not run, so the state is derived from the held cast here
+  if (pins && Object.prototype.hasOwnProperty.call(pins, 'npcs')) settlement.powerStructure = withHallCapture(settlement, mergedNpcs);
+
+  // ── THE PEOPLE CAR (PEOPLE-4 TIES, 2026-11-07; R-P7): ONE OUTGOING TIE PER CARD, drawn HERE over
+  // the final cast — after the memberships the target rule reads ("× 3 when the two share a
+  // power") and the `other` mints — on the seam's own keyed family (`people-ties::<card id>`,
+  // people/ties.js). The population step's pair-saturation writer is retired. A held
+  // `relationships` key is the DM's and is not redrawn.
+  const relationships = chooseOrPin(pins, 'relationships', () => drawTies(
+    mergedNpcs,
+    { config: settlement.config || {}, institutions: settlement.institutions || [], tier: settlement.tier, government: settlement.powerStructure?.government ?? null },
+    coherenceRng?.fork ? coherenceRng : getActiveRng(),
+  ));
+  // ── A9, THE GOALS (the allegiance train, car 4; the design §2 and §6): every card's SHORT and LONG goal, drawn at the
+  // END of the seam — after the ranks, the agents, the handlers and the ties the families bind — on the seam's own keyed
+  // family (`people-goals::<card id>`, people/goals.js), from the families each card's record supports. A held `npcs`
+  // key is the DM's cast: its goals are not redrawn.
+  const npcsHeld = !!pins && Object.prototype.hasOwnProperty.call(pins, 'npcs');
+  // SECRETS-1 (2026-11-17, the owner's word; ruling RS1): the very rare secrets, dealt beside the goals by the seed's keyed hash, no draw taken
+  // GOALS-2 (the chair's rulings of 12:05 and 12:37 UTC): the deal, the rare deal, then ONE post-pass by each card's final
+  // secret (the want refused beside the card's own secret, no other card touched; people/goals.js)
+  const dealtGoals = npcsHeld ? mergedNpcs : dealGoals(settlement, mergedNpcs, relationships, coherenceRng?.fork ? coherenceRng : getActiveRng());
+  const goaledNpcs = npcsHeld ? mergedNpcs : refuseWantsBesideSecrets(settlement, dealRareSecrets(settlement, dealtGoals, relationships, { seed: seed ?? settlement._seed }), relationships, { receiptsOf: dealtGoals });
+  const withTies = { ...settlement, npcs: goaledNpcs, relationships };
 
   const history = settlement.history || {};
 
@@ -992,7 +1077,7 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
     () => buildStressProfile(
       history.historicalEvents || [],
       settlement.tier,
-      settlement.config,
+      settlement.config, factsOf(settlement), // F11, CENSUS-1c: the reserve line's declared wall-free sibling; one line, so no cited line moves
     ),
   );
 
@@ -1000,7 +1085,7 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
   const prominentRelationship = inCoherenceSubstream(
     coherenceRng,
     'prominent-relationship',
-    () => genRelNarrative(settlement),
+    () => genRelNarrative(withTies),
   );
 
   // Coherence contradiction notes
@@ -1022,12 +1107,8 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
 
   return {
     ...settlement,
-    npcs: mergedNpcs,
-    // Re-link faction rosters to the enriched npcs so members are not stale pre-enrichment
-    // copies (only when the settlement already carries faction groups). [faction-member-staleness]
-    ...(Array.isArray(settlement.factions)
-      ? { factions: relinkFactionMembers(settlement.factions, mergedNpcs) }
-      : {}),
+    npcs: goaledNpcs,
+    relationships,
     prominentRelationship,
     coherenceNotes,
     history: {

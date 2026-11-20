@@ -143,21 +143,27 @@ describe('SettlementCard — AUDIT-2.2 frozen-card read-only export', () => {
   });
 });
 
-describe('SettlementCard — Advance Time CTA (no longer a dead-end)', () => {
-  it('standalone card routes Advance Time to the move-to-campaign popover', () => {
+// RE-KEYED (LIBRARY-SIMPLE). This block pinned the card menu's "Advance Time" item.
+// The owner removed the Library's advance (2026-11-10, verbatim): "I now want to
+// simplify the library page. No longer does it advance time. That will only be
+// accessible in isolated (not in campaign settlements) or the realm page." The same
+// two cards — standalone and in a campaign — now pin that the menu offers NO advance,
+// while the membership rows it keeps (add / remove) are pinned present. (The old
+// standalone arm clicked a DISABLED item and passed on the Add row beneath it.)
+describe('SettlementCard — the menu offers no Advance Time (owner, 2026-11-10)', () => {
+  it('standalone card: the menu keeps Add-to-campaign and offers no advance', () => {
     render(<SettlementCard s={peacefulSave} {...baseProps} currentCampaignId={null} campaigns={[{ id: 'c1', name: 'Camp One' }]} />);
     fireEvent.click(screen.getByLabelText('More actions'));
-    fireEvent.click(screen.getByText('Advance Time'));
-    // The move popover opened (the campaign target is now offered).
     expect(screen.getByText('Add to Camp One')).toBeTruthy();
+    expect(screen.queryByText('Advance Time')).toBeNull();
+    expect(screen.queryByText(/advance its world/i)).toBeNull();
   });
 
-  it('campaign card deep-links Advance Time via onAdvanceTime', () => {
-    const onAdvanceTime = vi.fn();
-    render(<SettlementCard s={peacefulSave} {...baseProps} currentCampaignId="camp-1" onAdvanceTime={onAdvanceTime} />);
+  it('campaign card: the menu keeps Remove-from-campaign and offers no advance', () => {
+    render(<SettlementCard s={peacefulSave} {...baseProps} currentCampaignId="camp-1" />);
     fireEvent.click(screen.getByLabelText('More actions'));
-    fireEvent.click(screen.getByText('Advance Time'));
-    expect(onAdvanceTime).toHaveBeenCalledWith('camp-1');
+    expect(screen.getByText('Remove from campaign')).toBeTruthy();
+    expect(screen.queryByText('Advance Time')).toBeNull();
   });
 });
 

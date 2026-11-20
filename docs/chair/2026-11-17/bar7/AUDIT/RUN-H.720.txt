@@ -1,0 +1,39 @@
+  8i.chainStopped  towns    1 · instances     2 · distinct lines    2 · things    1 · held by the seam 0 · by cause crisis 2/1t
+  8i.resource      towns    1 · instances     1 · distinct lines    1 · things    1 · held by the seam 0 · by cause crisis 1/1t
+  8i.surplus       towns    4 · instances     4 · distinct lines    3 · things    4 · held by the seam 0 · by cause crisis 3/3t · calm-other 1/1t
+  8j.exports       towns   10 · instances    10 · distinct lines   10 · things   10 · held by the seam 0 · by cause born-calm 9/9t · short-in-crisis 1/1t
+  8j.outputs       towns   21 · instances    21 · distinct lines    3 · things   21 · held by the seam 21 (SEAM-ECON 8) · by cause born-calm 17/17t · short-in-crisis 4/4t
+  8k.trade         towns   20 · instances    21 · distinct lines    8 · things   20 · held by the seam 16 (SEAM-SCENES 9, SEAM-SCENES 3) · by cause born-calm 17/17t · short-in-crisis 4/3t
+  8k.trade.mild    towns    5 · instances     6 · distinct lines    4 · things    5 · held by the seam 3 (SEAM-SCENES 3) · by cause crisis 6/5t
+PERSON LINES OF A MARKED HOUSE (8h census): kind · cause · mark in front / no mark (of them, a line of the person's own trade)
+  deal    short   lines  1781 · mark in front  480 (trade 478) · no mark 1301 (trade 1250) · towns 453
+  deal    crisis  lines   358 · mark in front   70 (trade 70) · no mark  288 (trade 257) · towns 74
+  wants   short   lines  1781 · mark in front    0 (trade 0) · no mark 1781 (trade 68) · towns 453
+  wants   crisis  lines   358 · mark in front    0 (trade 0) · no mark  358 (trade 25) · towns 74
+  secret  short   lines  1781 · mark in front    0 (trade 0) · no mark 1781 (trade 1450) · towns 453
+  secret  crisis  lines   358 · mark in front    0 (trade 0) · no mark  358 (trade 213) · towns 74
+  hook    short   lines     9 · mark in front    0 (trade 0) · no mark    9 (trade 9) · towns 8
+  hook    crisis  lines    12 · mark in front    0 (trade 0) · no mark   12 (trade 12) · towns 12
+CONTROLS (stands must be FOUND; explained must be clear of every rule of the seat)
+  8f stands    C8021   n/a                              town not in this render
+  8f stands    C40674  n/a                              town not in this render
+  8f stands    C41826  n/a                              town not in this render
+  8f stands    C41825  n/a                              town not in this render
+  8f stands    C33921  n/a                              town not in this render
+  8f stands    C4828   n/a                              town not in this render
+  8g stands    C39519  n/a                              town not in this render
+  8h stands    C2524   n/a                              town not in this render
+  8h stands    C8842   n/a                              town not in this render
+  8h stands    C43844  n/a                              town not in this render
+  8h explained C37251  n/a                              town not in this render
+  8i stands    C7539   n/a                              town not in this render
+  8i stands    C20104  n/a                              town not in this render
+  8i stands    C20287  n/a                              town not in this render
+  8i explained C19589  n/a                              town not in this render
+  8i explained C4179   n/a                              town not in this render
+  8j stands    C44447  n/a                              town not in this render
+  8k stands    C12508  n/a                              town not in this render
+  8k stands    C45015  n/a                              town not in this render
+  8k explained C37728  n/a                              town not in this render
+  8k explained C9756   n/a                              town not in this render
+controls off: 0

@@ -82,6 +82,22 @@ describe('the landing prose quotes the fixture it is about', () => {
     expect(body, `the ${route} is no longer what reaches it`).toContain(route);
   });
 
+  it('the brief body names no arrival-scene detail the fixture prose does not carry', () => {
+    // FOUNDING-WORLDS (2026-11-10, the chair's ruling N2): the body said "a bakehouse
+    // already on its second bake when you arrive" across re-emits after the fixture's
+    // arrival prose stopped carrying any bakehouse — the arm above binds the
+    // figure and the dials, and nothing bound the scene. A scene word the brief says
+    // must be in town.prose (the arrival scene the card prints).
+    const SCENE_WORDS = ['bakehouse', 'bake', 'oven', 'inn', 'tavern', 'market', 'smithy', 'forge', 'mill', 'well',
+      'shrine', 'temple', 'chapel', 'carter', 'merchant', 'enclosures', 'foundations', 'halls'];
+    const body = landing.brief.body.toLowerCase();
+    const prose = String(fixture.town.prose).toLowerCase();
+    // Anchored: the prose is the arrival scene and carries scene words of its own.
+    expect(SCENE_WORDS.filter((w) => new RegExp(`\\b${w}`).test(prose)).length).toBeGreaterThan(0);
+    const unheld = SCENE_WORDS.filter((w) => new RegExp(`\\b${w}\\b`).test(body) && !new RegExp(`\\b${w}`).test(prose));
+    expect(unheld, 'the brief body names an arrival detail the fixture prose no longer carries').toEqual([]);
+  });
+
   it('the closer states the run the fixture actually performed', () => {
     expect(
       landing.closer.sub,
@@ -115,7 +131,15 @@ describe('the landing prose quotes the fixture it is about', () => {
     // 2026-11-04 (LANDING-2, the rung-1 landing): [8, 10] -> [8, 9]. The rung-1 window's town (population 82)
     // derives a new timeline at lf-033 (the reforms at week 8, the Elder Council's capture at week 9); body2 was
     // re-grounded.
-    for (const spoken of [8, 9]) {
+    // 2026-11-07 (PEOPLE-LAND second seat, the people car's landing): [8, 9] -> [5, 9]. The cast derives a new timeline
+    // at lf-033 (the war footing at week 5, the Elder Council's capture at week 9); body2 was re-grounded (an owner veto point).
+    // 2026-11-09 (MERGE-TRAIN, the allegiance train's final tip): [5, 9] -> [2, 10]. The train's composed generator moves
+    // derive a new timeline at lf-033 (the war footing at week 2, crime taking hold at week 10); body2 was re-grounded (an
+    // owner veto point).
+    // 2026-11-11 (FOUNDING-WORLDS at the final tip 7ab12183f): [2, 10] -> [9, 12]. The simulation cure re-times the
+    // advance at lf-033 (the Elder Council's capture at week 9, the reforms and the crime at week 12); body2 was
+    // re-grounded (an owner veto point).
+    for (const spoken of [9, 12]) {
       expect(
         weeks,
         `the prose calls out week ${spoken}, which the fixture's advance timeline no longer contains`
@@ -135,12 +159,23 @@ describe('the landing prose quotes the fixture it is about', () => {
     // 2026-10-02, the Voice Program (ODQ §934.88): the engine now writes each beat as a deed ("goes onto a war footing",
     // "Crime takes hold", "trade routes break down"), so the pairs bind the deed words on both sides.
     // 2026-11-04 (LANDING-2): re-grounded with body2 on the rung-1 window's timeline; the pairs follow the beats.
+    // 2026-11-07 (PEOPLE-LAND second seat, the people car's landing): re-grounded with body2 on the cast's timeline at
+    // lf-033; one pair per beat, six beats (was five).
     for (const [inProse, inFixture] of [
-      ['open challenge', 'open challenge'],
-      ['raider pressure', 'raider pressure'],
-      ['reforms', 'reforms'],
-      ['captured an institution', 'captures an institution'],
-      ['trade routes', 'trade routes'],
+      // 2026-11-09 (MERGE-TRAIN): re-grounded with body2 on the train's timeline at lf-033; six beats, the conversion to Vael
+      // and crime taking hold in, the rallied supporters and the Elder Council's capture out.
+      // 2026-11-11 (FOUNDING-WORLDS at the final tip 7ab12183f): re-grounded with body2 on the simulation cure's timeline
+      // at lf-033; six beats, the conversion to Vael and the broken trade routes out, the Elder Council's capture of the
+      // water and the reforms in.
+      // 2026-11-15 (TAIL-CLOSE-SWEEP-D item 1, at the doors' tip 73090ee9e): re-grounded with body2 on the close's
+      // re-emitted timeline at lf-033; six beats, the priest's "restore order" and the reforms out (the round re-drew
+      // the cast), Uathach O'Neill shielding their people and the broken trade routes in.
+      ['the split between the faiths', 'the split between the faiths'],
+      ['war footing', 'war footing'],
+      ['control of the village’s water was passing to the elder council', 'water sources is passing to elder council'],
+      ['uathach o\'neill set out to shield their people', 'uathach o\'neill shields their people'],
+      ['crime took hold', 'crime takes hold'],
+      ['its trade routes had broken down', 'trade routes break down'],
     ]) {
       expect(
         headlines,
@@ -168,22 +203,24 @@ describe('the landing prose quotes the fixture it is about', () => {
     expect(receipts.institution, 'the fixture institution is no longer the blacksmith').toContain('blacksmith');
   });
 
-  it('the 02 body names the four receipts the card shows', () => {
+  it('the 02 body names the three receipts the card shows', () => {
     const body = landing.voice.body.toLowerCase();
     expect(body).toContain(fixture.town.name.toLowerCase());
-    // The conflict receipt is bound by BOTH its parties, the other three by their nouns.
-    for (const word of ['elder council', 'religious authorities', 'road', 'timber', 'blacksmith']) {
+    // 2026-11-07 (PEOPLE-LAND second seat): the conflict receipt left with the faction grouping (the people car), so the
+    // card prints three receipts, each bound by its noun; the re-emitted fixture at lf-033 derives no conflict.
+    for (const word of ['road', 'timber', 'blacksmith']) {
       expect(body, `the voice body stopped naming the "${word}" receipt`).toContain(word);
     }
     const receipts = fixture.voice.receipts.map((r) => r.text.toLowerCase()).join(' | ');
-    for (const word of ['elder council', 'religious authorities', 'road', 'timber', 'blacksmith']) {
+    for (const word of ['road', 'timber', 'blacksmith']) {
       expect(receipts, `the fixture no longer carries a "${word}" receipt for the voice card`).toContain(word);
     }
     // The card prints FOUR receipt lines and the sentence says so. It printed three from the
     // urban band's re-emitted fixture (2026-09-30), which derived no conflict for lf-033, until
     // the one-faction-set fixture (GS-2, ODQ §934.101; re-emitted 2026-10-31) derived one again.
-    expect(fixture.voice.receipts).toHaveLength(4);
-    expect(body, 'the voice body counts a number of facts the card does not print').toContain('four facts');
+    // 2026-11-07 (PEOPLE-LAND second seat): four -> three, the conflict receipt gone with the grouping.
+    expect(fixture.voice.receipts).toHaveLength(3);
+    expect(body, 'the voice body counts a number of facts the card does not print').toContain('three facts');
   });
 
   it('the commons body offers a town the curated trio actually carries', () => {

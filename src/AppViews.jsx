@@ -178,7 +178,7 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
         ? <RealmPhoneNotice />
         : <IconsContext.Provider value={true}><WorldMap onNavigate={setView} /></IconsContext.Provider>
       )}
-      {view === 'compendium'  && <CompendiumPanel standalone routeEntry={params.entry} />}
+      {view === 'compendium'  && <CompendiumPanel standalone routeEntry={params.entry} routeSection={params.section} />}
       {/* THE ABOUT FAMILY. `howto`, `about` and the compare* views are retired
           redirect surfaces (App's redirect effect bounces them here with the
           right anchor), so they render nothing — one frame of blank beats one

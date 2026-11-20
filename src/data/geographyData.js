@@ -123,7 +123,7 @@ export const TERRAIN_DATA = {
       "Salt production",
       "Shipbuilding"
     ],
-    strategicValue: "High - controls sea routes and naval access"
+    strategicValue: "High - a coastal position, within reach of the sea routes and naval access"
   },
   riverside: {
     name: "Riverside",
@@ -717,7 +717,7 @@ export const TERRAIN_DATA = {
       "Salt trade",
       "Exotic goods"
     ],
-    strategicValue: "Medium - controls caravan routes, water sources are strategic"
+    strategicValue: "Medium - water sources are strategic, and command any caravan route that comes this way"
   }
 };
 

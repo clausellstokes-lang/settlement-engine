@@ -11,6 +11,8 @@ import { Tag, Row, Card, BandLadder } from './primitives.jsx';
 import Button from '../primitives/Button.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { institutionAnchor } from './institutionSearchEntries.js';
+import { institutionFacts } from '../../domain/compendium/institutionFacts.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
@@ -49,8 +51,8 @@ const TIER_META = {
   hamlet:     { color:'#a05010', desc:'2-3 institutions. Local subsistence. Minimal trade.' },
   village:    { color:ECON_TXT, desc:'4-6 institutions. Surplus production begins. Weekly market.' },
   town:       { color:'#1a5a28', desc:'7-10 institutions. Specialization appears. Guilds form.' },
-  city:       { color:'#1a3a7a', desc:'11-14 institutions. Full institutional diversity. Factional politics.' },
-  metropolis: { color:'#4a1a6a', desc:'15+ institutions. All systems active. Complex faction dynamics.' },
+  city:       { color:'#1a3a7a', desc:'11-14 institutions. Full institutional diversity. Politics between the powers.' },
+  metropolis: { color:'#4a1a6a', desc:'15+ institutions. All systems active. Complex power dynamics.' },
 };
 
 export function TiersTab({ _search='' }) {
@@ -126,7 +128,7 @@ export function PowerTab_({ search='' }) {
   const effectiveCat = search ? 'All' : cat;
   const filtered = CD.archetypes.entries.filter(a => (effectiveCat==='All'||a.cat===effectiveCat) && (!search||a.name.toLowerCase().includes(search)||a.desc.toLowerCase().includes(search)));
   return <>
-    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Archetypes are never picked: no single slider names one, and an archetype appears only once several world inputs have settled far enough into the shape it needs. A faction's power starts from the institutions it holds, then rises or falls with how the public sees the ruling seat.</p>
+    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Archetypes are never picked: no single slider names one, and an archetype appears only once several world inputs have settled far enough into the shape it needs. A power's strength starts from the institutions it holds, then rises or falls with how the public sees the ruling seat.</p>
     <div style={{ display:'flex', gap:5, flexWrap:'wrap', marginBottom:12 }}>
       {cats.map(c => <Button key={c} onClick={() => setCat(c)} variant={effectiveCat===c?'primary':'ghost'} size="sm" aria-pressed={effectiveCat===c}>{c}</Button>)}
     </div>
@@ -154,8 +156,8 @@ export function PowerTab_({ search='' }) {
       {laddersFor('power').map((l) => (
         <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={CAT_COLORS.Criminal} />))}
     </div>
-    <SectionHeading id="factions" accent={INK}>Faction archetypes</SectionHeading>
-    <p style={{ fontSize:proseFontSize(FS.xs, mobile), color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>A faction's category, not its name, decides its archetype. These drive coup logic, faction profiles, NPC roles, and event responses.</p>
+    <SectionHeading id="factions" accent={INK}>Kinds of power</SectionHeading>
+    <p style={{ fontSize:proseFontSize(FS.xs, mobile), color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>A power's category, not its name, decides its kind. These drive coup logic, power profiles, NPC roles, and event responses.</p>
     {CD.factionArchetypes.map((f)=>(<Row key={f.id} label={f.label} lw={110}>{f.reading}</Row>))}
     <SectionHeading accent={INK}>Governance stability</SectionHeading>
     {CD.governance.labels.map((g)=>(<Row key={g.label} label={g.label} lw={130}>{g.reading}</Row>))}
@@ -210,12 +212,12 @@ export function StressTab({ search='' }) {
     { label:'Famine', description:'Food supply failure. Grain exports collapse. Safety degrades.' },
     { label:'Plague', description:'Disease active. Population loss. Social trust collapsed.' },
     { label:'Siege', description:'Military encirclement. Imports cut. All resources redirected to defense.' },
-    { label:'Political Fracture', description:'Governance contested. Multiple factions claim legitimacy.' },
+    { label:'Political Fracture', description:'Governance contested. Multiple powers claim legitimacy.' },
   ];
   return <>
     <div id="stress" style={{ padding:'10px 12px', background:`${GOLD}10`, border:`1px solid ${GOLD}40`, borderLeft:`3px solid ${GOLD}`, marginBottom:12 }}>
       <div style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:800, color:GOLD_TXT, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:4 }}>Stresses Compound</div>
-      <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:0 }}>Multiple stresses compound. Famine + Political Fracture means food distribution is contested by factions.</p>
+      <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:0 }}>Multiple stresses compound. Famine + Political Fracture means food distribution is contested by powers.</p>
     </div>
     {list.filter(s=>!search||(s.label||'').toLowerCase().includes(search)||(s.viabilityNote||s.description||s.desc||'').toLowerCase().includes(search)||(s.crisisHook||'').toLowerCase().includes(search)).map(s => (
       <div key={s.label||s.id} style={{ padding:'8px 0', borderBottom:`1px solid ${BOR}` }}>
@@ -236,14 +238,42 @@ export function StressTab({ search='' }) {
 export function NeighbourTab({ search='' }) {
   const mobile = useIsMobile();
   return <>
-    <p id="neighbours" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Relationship types modify the economic engine, faction weights, and institution probabilities before generation.</p>
+    <p id="neighbours" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Relationship types modify the economic engine, power weights, and institution probabilities before generation.</p>
     {CD.relationships.entries.filter(r=>!search||r.label.toLowerCase().includes(search)||r.effect.toLowerCase().includes(search)).map(r => (
       <div key={r.id} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
         <span style={{ fontSize:chromeFontSize(FS.xs, mobile), fontWeight:700, color:r.color, minWidth:105, flexShrink:0, background:`${r.color}14`, padding:'2px 7px', textAlign:'center' }}>{r.label}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{r.effect}</span>
       </div>))}
     <SectionHeading accent={INK}>Cross-Settlement Systems</SectionHeading>
-    {[['NPC Contacts','Named NPCs from both settlements paired by category and relationship type.'],['Cross-Settlement Conflicts','Mechanically-derived disputes: market contests, border incursions, intelligence operations.'],['Bidirectional Cascade','Renaming an NPC or faction propagates to all linked partner records.'],['Delink Cleanup','Removing a link removes all cross-settlement contacts and conflicts from both settlements.']].map(([label,desc])=><Row key={label} label={label} lw={160}>{desc}</Row>)}
+    {[['NPC Contacts','Named NPCs from both settlements paired by category and relationship type.'],['Cross-Settlement Conflicts','Mechanically-derived disputes: market contests, border incursions, intelligence operations.'],['Bidirectional Cascade','Renaming an NPC or power propagates to all linked partner records.'],['Delink Cleanup','Removing a link removes all cross-settlement contacts and conflicts from both settlements.']].map(([label,desc])=><Row key={label} label={label} lw={160}>{desc}</Row>)}
+  </>;
+}
+
+// H7 — what each institution card adds, every line READ from a registry
+// (domain/compendium/institutionFacts.js). A field a registry does not hold prints no line.
+// The owner's own nouns label the three: "Backing", "Services", "Flows into"; "Size" is the
+// configuration panel's word, and "Priority slider" is the page's own lead ("the matching
+// priority slider band").
+const tierLabel = (id) => (CD.tiers.find((t) => t.id === id) || {}).label || null;
+const cap = (w) => String(w || '').charAt(0).toUpperCase() + String(w || '').slice(1);
+function FactLine({ label, children }) {
+  return (
+    <div data-inst-fact={label} style={{ fontSize:FS.sm, color:SEC, lineHeight:1.4, marginTop:4 }}>
+      <span style={{ fontWeight:700, color:BODY }}>{label}:</span> {children}
+    </div>
+  );
+}
+function InstitutionFactLines({ inst }) {
+  const f = institutionFacts(inst);
+  const size = tierLabel(f.size);
+  return <>
+    {size && <FactLine label="Size">{size}</FactLine>}
+    {f.priority && <FactLine label="Priority slider">{cap(f.priority)}</FactLine>}
+    {/* The powers named, largest share first — no figures (the owner, X-45: "just simply
+        saying which ones they back in that row is plenty enough"). */}
+    {f.backing && <FactLine label="Backing">{f.backing.map((b) => cap(b.archetype)).join(', ')}</FactLine>}
+    {f.services && <FactLine label="Services">{f.services.join(', ')}</FactLine>}
+    {f.flowsInto && <FactLine label="Flows into">{f.flowsInto.join(', ')}</FactLine>}
   </>;
 }
 
@@ -270,12 +300,14 @@ export function InstitutionsTab({ _config, search }) {
   // which renders as label TEXT, so #a0762a (AA fail as text) can't be used here.
   const catColors = { Economy:ECON_TXT, Military:'#8b1a1a', Magic:'#3a1a7a', Religion:'#1a4a2a', Criminal:'#4a1a4a', 'Government/Admin':'#1a3a7a' };
   const filtered = useMemo(() => {
-    if (!search) return all.slice(0, 48);
+    // H7 (the owner, 2026-11-10: "the institution page should show ALL institutions"):
+    // no first-48 cut and no cap on a search.
+    if (!search) return all;
     const q = search.toLowerCase();
     // §934.13 — the DISPLAYED label is searchable too, or a reader who types the words
     // printed on the card in front of them gets no results. The raw key stays searchable
     // so a DM who knows the engine's spelling still finds the entry.
-    return all.filter(i => (i.name||'').toLowerCase().includes(q) || institutionDisplayName(i).toLowerCase().includes(q) || (i.desc||'').toLowerCase().includes(q) || (i.category||'').toLowerCase().includes(q) || (i.tags||[]).some(t=>(t||'').toLowerCase().includes(q))).slice(0,80);
+    return all.filter(i => (i.name||'').toLowerCase().includes(q) || institutionDisplayName(i).toLowerCase().includes(q) || (i.desc||'').toLowerCase().includes(q) || (i.category||'').toLowerCase().includes(q) || (i.tags||[]).some(t=>(t||'').toLowerCase().includes(q)));
   }, [all, search]);
   // A catalog-load failure (no data AND nothing was searched) is a real error,
   // not an empty result — surface it as such with a reload affordance (P10).
@@ -299,7 +331,7 @@ export function InstitutionsTab({ _config, search }) {
     <p style={{ fontSize:FS.sm, color:BODY, lineHeight:1.5, margin:'0 0 10px' }}>
       {search
         ? <><strong>{filtered.length}</strong> results</>
-        : <>Showing first <strong>48</strong> of <strong>{all.length}</strong> institutions. Use search to filter.</>}
+        : <><strong>{all.length}</strong> institutions</>}
     </p>
     <p style={{ fontSize:proseFontSize(FS.xs, mobile), color:MUT, fontStyle:'italic', margin:'-4px 0 10px' }}>
       Each entry rolls a base chance shifted by the matching priority slider band; a Core entry always generates.
@@ -311,13 +343,17 @@ export function InstitutionsTab({ _config, search }) {
     ) : (
     <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(200px,1fr))', gap:6 }}>
       {filtered.map(inst => (
-        <div key={inst.name} style={{ border:`1px solid ${BOR}`, padding:'8px 10px' }}>
+        // id: the global search's landing anchor for this institution (H6).
+        // contentVisibility: with all 282 cards on one page (H7), the browser skips layout and
+        // paint for the cards off screen (measured on the phone profile; see the record).
+        <div key={inst.name} id={institutionAnchor(inst.name)} data-filter-entry="" style={{ border:`1px solid ${BOR}`, padding:'8px 10px', scrollMarginTop:ANCHOR_OFFSET, contentVisibility:'auto', containIntrinsicSize:'auto 260px' }}>
           <div style={{ display:'flex', alignItems:'flex-start', gap:5, marginBottom:3 }}>
             <span style={{ fontFamily:serif_, fontSize: FS['12.5'], fontWeight:700, color:INK, flex:1, lineHeight:1.3 }}>{institutionDisplayName(inst)}</span>
             {inst.required && <Tag label="Core" color='#1a3a7a' title="Always present at this tier. Generated every time, never rolled by chance."/>}
           </div>
           {inst.category && <Tag label={inst.category} color={catColors[inst.category]||GOLD}/>}
-          {inst.desc && <div style={{ fontSize:proseFontSize(FS.xs, mobile), color:SEC, lineHeight:1.4, marginTop:4 }}>{inst.desc}</div>}
+          {inst.desc && <div style={{ fontSize:proseFontSize(FS.sm, mobile), color:SEC, lineHeight:1.4, marginTop:4 }}>{inst.desc}</div>}
+          <InstitutionFactLines inst={inst} />
         </div>))}
     </div>
     )}

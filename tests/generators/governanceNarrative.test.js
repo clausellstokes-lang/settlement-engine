@@ -60,10 +60,10 @@ describe('governance narrative precedence', () => {
     });
 
     expect(result.stability).toBe(
-      'Critical (active siege — survival priority); monster threat active',
+      'Critical (under siege); monsters on the roads', // W3 POW (the owner's style law of 2026-11-07): re-keyed with the producer's words
     );
     expect(result.recentConflict).toBe(
-      'The settlement is under active siege. Every resource decision is a military decision. The debate is no longer about policy. It is about survival.',
+      'The settlement is under siege. Its stores and every able pair of hands now go to the defence, and nothing else is discussed.',
     );
   });
 
@@ -75,7 +75,7 @@ describe('governance narrative precedence', () => {
 
     expect(result.stability).toBe('Desperate — hunger is eroding order');
     expect(result.recentConflict).toBe(
-      'Food shortages have sharpened every tension in the settlement. Those with stocks are not advertising the fact. Those without are watching those with.',
+      'Food is short, and every quarrel in the settlement has grown sharper for it. Those with stocks are not advertising the fact. Those without are watching those with.',
     );
   });
 
@@ -101,7 +101,7 @@ describe('governance narrative precedence', () => {
 
     expect(result.stability).toBe('Stable');
     expect(result.recentConflict).toBe(
-      'An occupying officer arrested a local elder for "seditious speech". Elected Reeve filed a formal protest. The protest was returned unread.',
+      'An occupying officer arrested a local elder for "seditious speech". The Elected Reeve filed a formal protest. The protest was returned unread.', // NAMES-1 (CN1): the article
     );
   });
 });
@@ -128,7 +128,7 @@ describe('governance narrative institutional phrasing', () => {
     });
 
     expect(result.recentConflict).toBe(
-      'Two rival guilds are contesting control of the main trade route. Neither side will back down and Household Council is avoiding the question.',
+      'Two rival guilds are contesting control of the main trade route. Neither side will back down and the Household Council is avoiding the question.', // NAMES-1 (CN1): the article
     );
   });
 
@@ -153,7 +153,7 @@ describe('governance narrative institutional phrasing', () => {
 
     expect(result).toEqual({
       stability: 'Tense (external threat)',
-      recentConflict: 'Ongoing tensions with Grimhold',
+      recentConflict: 'Relations with Grimhold have soured, and everyone here knows it.',
     });
   });
 });
@@ -176,7 +176,10 @@ describe('governance narrative institutional phrasing', () => {
  */
 const PUBLIC_UNREST = Object.freeze({
   insurgency: 'Unstable (insurgency contests authority)',
-  mass_migration: 'Strained (people arriving or leaving)',
+  // WIRING-W0 (2026-11-07, R-W7 e): re-keyed with its cause — the label names the ONE direction the
+  // record declares (arrivals at birth; 'Strained (people leaving)' on a departures record, pinned in
+  // tests/generators/migrationDirection.test.js), no longer the hedge 'people arriving or leaving'.
+  mass_migration: 'Strained (people arriving)',
   wartime: 'Tense (requisition and conscription)',
   religious_conversion: 'Tense (the creed is contested)',
   slave_revolt: 'Unstable (revolt not contained)',
@@ -205,7 +208,7 @@ describe('an active crisis never reads as Stable (owner order 2026-09-17)', () =
 
   test('infiltration beside a PUBLIC crisis no longer masks that crisis', () => {
     expect(deriveGovernance({ stressTypes: ['infiltrated', 'indebted'] }).stability)
-      .toBe('Strained — debt obligations constrain every decision');
+      .toBe('Strained — the creditors have a say in every decision');
     expect(deriveGovernance({ stressTypes: ['infiltrated', 'monster_pressure'] }).stability)
       .toBe('Tense (monster pressure from surrounding region)');
     for (const [stressType, label] of Object.entries(PUBLIC_UNREST)) {
@@ -221,7 +224,7 @@ describe('an active crisis never reads as Stable (owner order 2026-09-17)', () =
   test('a plagued town keeps the crisis label and annotates it, never replacing it', () => {
     for (const [stressType, label] of Object.entries(PUBLIC_UNREST)) {
       expect(deriveGovernance({ config: { monsterThreat: 'plagued' }, stressTypes: [stressType] }).stability, stressType)
-        .toBe(`${label}; monster threat active`);
+        .toBe(`${label}; monsters on the roads`);
     }
   });
 
@@ -267,9 +270,12 @@ describe('an active crisis never reads as Stable (owner order 2026-09-17)', () =
 // The arcane branch now asks the GENERATION WORLD LAW first; the arm falls to its own
 // priest lines, which are belief and stand in any world.
 describe("no arcane governance line in a no-magic world (GS-4)", () => {
+  // TAIL-POWERS-3 batch 2 (re-keyed by identity): the heresy rung's church courts need a religious seat or a religious
+  // power of weight (P16's G3 atom), so the heresy town keeps one: the world-law question this pin asks is unchanged.
   const HERESY_TOWN = {
     stressFlags: { heresySuppression: true },
     instNames: ['alchemist shop', 'parish church', 'council hall'],
+    factions: [{ faction: 'Elected Reeve', isGoverning: true }, { faction: 'Religious Authorities', category: 'religious', power: 30 }],
   };
   const PRIEST_COURT = 'The priest has summoned someone before the church court. The village is divided on whether they deserved it.';
 

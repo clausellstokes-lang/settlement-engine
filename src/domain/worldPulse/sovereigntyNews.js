@@ -242,6 +242,11 @@ function readerText(value) {
   return valueText;
 }
 
+/** An id as a whole token (never inside a longer id or word). @param {string} id @returns {RegExp} */
+function idToken(id) {
+  return new RegExp(`(^|[^\\w-])${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?=$|[^\\w-])`, 'g');
+}
+
 /** @param {unknown} value @returns {number|null} */
 function wholeTick(value) {
   return typeof value === 'number' && Number.isFinite(value) && value >= 0
@@ -436,8 +441,16 @@ export function sovereigntyNewsEntry({ evidence = null, snapshot = null, now = n
 
   const settlementIds = [assetId, sellerId, buyerId].filter(Boolean);
   const settlementNames = [asset, seller, buyer].filter(Boolean);
+  // A writer's reason may be composed from the parties' IDS (the asset reader's receipt
+  // is): each id is read to its resolved name BEFORE the reader filter, so the line prints
+  // with names rather than being dropped for an id's underscore or digit.
+  const namedIds = [[assetId, asset], [sellerId, seller], [buyerId, buyer]]
+    .filter(([id, name]) => id && name && id !== name)
+    .sort((a, b) => b[0].length - a[0].length);
+  /** @param {unknown} entry @returns {string} */
+  const withNames = (entry) => namedIds.reduce((line, [id, name]) => line.replace(idToken(id), (_whole, lead) => `${lead}${name}`), text(entry));
   const suppliedReasons = (Array.isArray(row.reasons) ? row.reasons : [])
-    .map((entry) => readerText(entry))
+    .map((entry) => readerText(withNames(entry)))
     .filter(Boolean);
   const weight = presentationWeight(receipt.significance);
   return {

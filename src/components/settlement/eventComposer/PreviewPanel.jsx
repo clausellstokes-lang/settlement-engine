@@ -81,7 +81,7 @@ export function PreviewPanel({ preview, stale = false, queued = false }) {
             fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, fontWeight: 800, fontFamily: sans,
             letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 4,
           }}>
-            Faction responses
+            How the powers respond
           </div>
           {factionResponses.map((r, i) => (
             <div key={i} style={{

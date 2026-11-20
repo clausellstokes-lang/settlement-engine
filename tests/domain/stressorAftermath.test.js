@@ -96,7 +96,8 @@ describe('withCampaignHistoryEvent()', () => {
 describe('news entries', () => {
   test('resolution news names the residuals and the echo', () => {
     const [entry] = aftermathNewsEntries([echo({ status: 'resolved' })], 9, NOW);
-    expect(entry.headline).toBe('Famine pressure has passed');
+    // Re-keyed by identity (STYLE-2 C2, SW-12 third seat, A1·105): the crisis in its reader noun, seeded by the id.
+    expect(entry.headline).toBe('The famine is over');
     expect(entry.impactKind).toBe('stressor_aftermath');
     expect(entry.summary).toMatch(/food debt/);
     expect(entry.significance).toBe('major'); // peak 0.7
@@ -104,8 +105,19 @@ describe('news entries', () => {
 
   test('graduation news marks the passage into history', () => {
     const [entry] = graduationNewsEntries([echo({ status: 'dormant' })], 21, NOW);
-    expect(entry.headline).toBe('Famine pressure passes into history');
+    // Re-keyed by identity (A1·109): the reader noun, not the engine label.
+    expect(entry.headline).toBe('The famine passes into history');
     expect(entry.impactKind).toBe('stressor_graduated');
+  });
+
+  test('a rebellion\'s aftermath is told in reader words, never its catalog tokens (SW-12 third seat, A1·49)', () => {
+    const [entry] = aftermathNewsEntries([{
+      id: 'world_stressor.rebellion.a', type: 'rebellion', label: 'Rebellion pressure', status: 'resolved',
+      peakSeverity: 0.5, affectedSettlementIds: ['a'],
+      residualEffects: ['reprisal_memory', 'autonomy_cells', 'broken_tax_obligations'],
+    }], 9, NOW);
+    expect(entry.summary).toContain('old reprisals remembered, rebel cells still meeting, taxes no one pays');
+    expect(entry.headline).not.toMatch(/pressure/i); // anchored: the toContain above proves the entry printed
   });
 
   test('recordGraduationsIntoHistory writes every affected local settlement', () => {

@@ -73,7 +73,6 @@ function baseStore(user = null) {
     applyQueuedRegionalImpact: vi.fn(),
     ignoreQueuedRegionalImpact: vi.fn(),
     resolveRegionalImpact: vi.fn(),
-    advanceCampaignRegionalImpacts: vi.fn(),
     applyAllQueuedRegionalImpacts: vi.fn(),
     ignoreAllQueuedRegionalImpacts: vi.fn(),
     getCampaignMembershipBlock: vi.fn(() => null),

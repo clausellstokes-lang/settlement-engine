@@ -82,17 +82,19 @@ describe('F32 — processingInstitutions display names resolve (no phantom label
 
   it('the specific phantoms the finding named are gone', () => {
     const all = chains.flatMap((c) => c.processingInstitutions || []);
-    // 'Town granary' is the anchor — 'granar' was the typo FOR it, so the corrected
-    // name travels the exact path the phantom used to. A flattened list that came
-    // back empty (the field renamed, the table re-shaped) reds here.
+    // 'Bakers (5-15)' is the anchor — 'Baker' was the label FOR it, so the corrected name
+    // travels the path the phantoms used to. ('Town granary', the typo 'granar''s correction,
+    // was the anchor until the chair's R4 of 2026-11-06 struck it: a granary stores grain and
+    // does not process it — tests/joins/chainNamesOnlyProcessors.test.js.) A flattened list
+    // that came back empty (the field renamed, the table re-shaped) reds here.
     for (const gone of ['granar', 'Salt merchant', 'Cheesemaker']) {
       expectAbsentWithAnchor(
-        all, gone, 'Town granary', `"${gone}" must be corrected to a real catalog name`,
+        all, gone, 'Bakers (5-15)', `"${gone}" must be corrected to a real catalog name`,
       );
     }
     // and their real replacements are present
     const grain = RESOURCE_CHAINS.grain.processingInstitutions;
-    expect(grain).toContain('Town granary');
+    expect(grain).toContain('Bakers (5-15)');
     expect(RESOURCE_CHAINS.desertSalt.processingInstitutions).toContain('Salt works');
     expect(RESOURCE_CHAINS.livestock.processingInstitutions).toContain('Dairy farmer');
   });

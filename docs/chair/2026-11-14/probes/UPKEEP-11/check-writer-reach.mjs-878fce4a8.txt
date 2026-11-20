@@ -1,0 +1,36 @@
+WRWALKER HOLD — judged 12368 · LIT 675 · LIT-NAME 10279 · DARK 1414 (reviewable 393) · pending-surface debt: none
+  ✗ DARK and unregistered: criminalPreStress on compound — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: deployedQuality on osr006 — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: endsTick on osr007 — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: logisticsBurden on osr006 — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: ransoms on roads — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: recallTargetId on autoApplied — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: recallTargetId on metadata — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: recallTargetId on selected — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: reinforcementFlow on osr006 — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: returnCondition on osr006 — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: rivalTriumphBand on metadata — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: rivalTriumphBand on pulseHistory — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: rivalTriumphBand on warTerminationReads — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: sizingBias on osr006 — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: survivors on autoApplied — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: survivors on metadata — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: survivors on selected — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ DARK and unregistered: warReturnedSettlementIds on pulseHistory — the engine writes it on every world and no counting surface reads it. Ceiling 0: light it, add a row naming its door, or bank it through the governed door.
+  ✗ STALE bank member: authoritySignature on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: authoritySignature on warRulingRead is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: booksDirection on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: booksDirection on warRulingRead is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: booksReason on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: booksReason on warRulingRead is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: causeState on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: causeState on warRulingRead is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: lastTargetedBy on osr000:npc_barracks is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: lastTargetedTick on osr000:npc_barracks is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: momentumBroken on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: momentumBroken on warRulingRead is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: rulerLawfulnessBand on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: rulerLawfulnessBand on warRulingRead is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: rulerMoralityBand on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: rulerMoralityBand on warRulingRead is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.
+  ✗ STALE bank member: warRulingRead on selected is now NO LONGER WRITTEN. Fold it out with --write; a banked identity that quietly stopped being dark is a ceiling nobody spent.

@@ -25,15 +25,26 @@ import { flag } from '../../lib/flags.js';
 import { plotHookText } from '../../lib/proseSeams.js';
 import { collectPlotHooks } from '../../domain/dossier/plotHooks.js';
 import { crisisNoteFor } from '../../domain/dossier/powerStrata.js';
-import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
+import { deriveFoodBalance, deriveProsperityPosture, deriveViability } from '../../domain/display/dossierViewModel.js';
 import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
+// SEAM-PDF item 3 (2026-11-17; BAR6-ECON's C88465): the complexity label as the Economics tab prints it (no "Subsistence" beside a
+// purse past survival), the one reading (`labelBands.js :: complexityLabelShown`), at every print of it below.
+import { complexityLabelShown } from '../../domain/display/labelBands.js';
+import { criticalIssuesOf, stressEffectsOf, viabilityIssueText } from '../../domain/display/validationOnPage.js';
+// BAR7-CARDS (2026-11-17): the Outlook's impaired list and a person's house mark, read by the tabs' own leaves.
+import { stressEffectsShown } from '../../domain/display/impairedListShown.js';
+import { rowMarkText } from '../../domain/display/crisisStoppedRow.js';
 import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
 import { humanize } from './format.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
 import { directionalRelationshipLabel } from '../../domain/relationships/canonicalRelationship.js';
+import { cardTieLines } from '../../domain/relationships/cardTies.js';
 import { relationshipEngagementCards } from '../../domain/display/stateProse/relationshipsDeskRead.js';
 import { buildDossierEntityIndex, entityIdFor, slugifyEntity } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
+import { cardHouseOf, cardPowerLine, firstPowerOf, governingNameOf, powerOrderOf } from '../../domain/people/cardPowers.js';
+import { seatKeeperOf } from '../../domain/people/seatKeeper.js';
+import { cardStandingLine, cardFirstOfWeights } from '../../domain/display/cardStandingRead.js';
 import { ownerGenerationContracts } from './generationContracts.js';
 // The four settlement-body chapters and the shared small readers moved out under
 // THE DECOMPOSITION WAVE (lane D); buildViewModel below still calls them in the
@@ -41,6 +52,8 @@ import { ownerGenerationContracts } from './generationContracts.js';
 import { economicsSlice, defenseSlice, servicesSlice, resourcesSlice } from './viewModelBodySlices.js';
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { crisisHookFor } from '../../domain/crisis/crisisHooks.js';
+import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
+import { dmPowerViewOf } from '../../domain/people/patronage.js'; import { safetyShownOf } from '../../domain/display/safetyShown.js'; // PAGE-1 SAFETY (F3a): the label's one reader, and the owner's line
 
 // Human labels for the publicLegitimacy breakdown factors
 // (factionDynamics.computePublicLegitimacy emits { prosperity, safety, defense,
@@ -126,7 +139,12 @@ export function buildViewModel({
   // anon export is byte-identical (the Faith & War chapter renders nothing, and
   // SettlementPDF additionally gates it on the faith premium seam).
   campaign = null,
-} = /** @type {{ settlement?: any, aiSettlement?: any, aiDailyLife?: any, narrativeMode?: boolean, systemState?: any, eventLog?: any[], phase?: string, campaign?: any }} */ ({})) {
+  // THE DM LAYER (the allegiance train, car 3, design §9): "who really runs this town" — hidden
+  // allegiances, handlers, covert ties, a hidden power's boost. Built ONLY when the caller asks
+  // (SettlementPDF, the DM's own dossier); the Foundry journal and every other caller leave it off,
+  // and the view model then carries no `dm` key at all (byte-identical).
+  dmView = false,
+} = /** @type {{ settlement?: any, aiSettlement?: any, aiDailyLife?: any, narrativeMode?: boolean, systemState?: any, eventLog?: any[], phase?: string, campaign?: any, dmView?: boolean }} */ ({})) {
   const raw = settlement || {};
   const ai = aiSettlement || null;
   const useAi = !!(narrativeMode && ai);
@@ -171,6 +189,9 @@ export function buildViewModel({
     hooks:         hooksSlice(active),
     relationships: relationshipsSlice(active),
     aiAppendix:    useAi ? appendixSlice(ai) : null,
+    // read from the canonical save (`raw`): the allegiance and the ranks are owner facts
+    ...(dmView ? { dm: dmPowerViewOf(raw) } : {}),
+    ...(dmView ? { safetyQualifier: safetyShownOf(active, 'owner').qualifier } : {}), // PAGE-1 SAFETY (F3a): the owner's line beside the Safety label, ONLY in the DM's own document (the Foundry journal and every other caller leave dmView off: no such key); one line, so the line-keyed rows below keep their address
   };
 }
 
@@ -183,7 +204,7 @@ function _fmtNum(n, dec = 0) {
 }
 
 function getGoverningFaction(active) {
-  const factions = active?.powerStructure?.factions || active?.factions || [];
+  const factions = active?.powerStructure?.factions || [];
   return factions.find(f => f?.isGoverning) || null;
 }
 
@@ -198,7 +219,7 @@ function getGoverningFaction(active) {
 function summarySlice(active, ai, useAi, aiDailyLife) {
   const s = active || {};
   const governing = getGoverningFaction(active);
-  const factions = s?.powerStructure?.factions || s?.factions || [];
+  const factions = s?.powerStructure?.factions || [];
   const npcs = (s?.npcs || []).slice().sort((a, b) => (b?.power || 0) - (a?.power || 0));
   const top4 = npcs.slice(0, 4);
   const dp = s?.defenseProfile || {};
@@ -217,7 +238,8 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
     crisis: stress.length > 0 ? {
       active: true,
       chips: stress.map(x => ({
-        icon: x?.icon, label: x?.label, summary: x?.summary, hook: crisisHookFor(s, x),
+        // #29 (STYLE-RULINGS §1(c)): the cover prints the traveller's vantage; the crisis page keeps the full text.
+        icon: x?.icon, label: x?.label, summary: crisisSummaryForSurface(x, s?.name, 'cover'), hook: crisisHookFor(s, x),
       })),
     } : { active: false, chips: [] },
     arrivalScene: useAi ? (ai?.arrivalScene || ai?.aiNarrative?.arrivalScene || null) : null,
@@ -228,7 +250,7 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
         governingName: governing?.faction || governing?.name || null,
       },
       economy: {
-        complexity: ec?.economicComplexity || null,
+        complexity: complexityLabelShown(ec) || null,
         topExport: labelOfThing(ec?.primaryExports?.[0]),
       },
       defense: {
@@ -246,7 +268,7 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
       name: npc.name,
       title: npc.title,
       race: npc.race,
-      faction: labelOfFactionRef(npc.factionAffiliation),
+      faction: labelOfFactionRef(firstPowerOf(npc, powerOrderOf(s))),
       power: npc.power || 0,
       sentence: characterSentence(npc),
     })),
@@ -259,7 +281,6 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
 function identitySlice(s, canonical = s) {
   const ec = s?.economicState || {};
   const dp = s?.defenseProfile || {};
-  const sp = ec?.safetyProfile || {};
   // A+ P1.8: source food via the shared deriveFoodBalance (clamped, screen-parity),
   // not the raw unclamped metrics.foodBalance — the anchor mirrors DailyLifeTab, so
   // it must show the same number the screen + the PDF overview do (one source per fact).
@@ -288,8 +309,8 @@ function identitySlice(s, canonical = s) {
     anchor: {
       governingName:  governing?.faction || governing?.name || null,
       prosperity:     ec?.prosperity || null,
-      complexity:     ec?.economicComplexity || null,
-      safety:         sp?.safetyLabel || null,
+      complexity:     complexityLabelShown(ec) || null,
+      safety:         safetyShownOf(s).label,
       // ⚠ AN UNCOMPUTED ECONOMY IS NOT A BALANCED ONE. deriveFoodBalance returns
       // `available:false` with 0/0 for a settlement whose economy was never
       // computed, and the raw `?? null` let those zeros through — so a threadbare
@@ -320,7 +341,8 @@ function overviewSlice(active, ai, useAi) {
   const stress = stressArray(s).map(x => ({
     icon:    x?.icon,
     label:   x?.label,
-    summary: x?.summary,
+    // #29 (STYLE-RULINGS §1(c)): the Overview prints the local's vantage; the crisis page keeps the full text.
+    summary: crisisSummaryForSurface(x, s?.name, 'overview'),
     hook:    crisisHookFor(s, x),
   }));
   const tensions = (s?.history?.currentTensions || []).map(t => ({
@@ -362,13 +384,13 @@ function overviewSlice(active, ai, useAi) {
     .sort((a, b) => b.count - a.count);
 
   const prosperity = ec?.prosperity || null;
-  const safety = sp?.safetyLabel || null;
+  const safety = safetyShownOf(s).label;
   return {
     thesis:             useAi ? (ai?.thesis || null) : null,
     arrivalScene:       useAi ? (ai?.arrivalScene || ai?.aiNarrative?.arrivalScene || null) : null,
     pressureSentence:   useAi ? (ai?.pressureSentence || ai?.aiNarrative?.pressureSentence || null) : null,
     character:          s?.history?.historicalCharacter || null,
-    prosperity,
+    prosperity,         prosperityInCrisis: deriveProsperityPosture(s).inCrisis, // ruling 1(a): the label's ordinary-years sentence, or null (one line: the line-keyed FPZ rows below stay put)
     prosperityTone:     PROSPERITY_TONE[(prosperity || '').toLowerCase()] || 'muted',
     safety,
     safetyTone:         SAFETY_TONE[(safety || '').toLowerCase()] || 'muted',
@@ -384,7 +406,7 @@ function overviewSlice(active, ai, useAi) {
       summary:    s?.economicViability?.foodSecurity?.summary || s?.economicViability?.metrics?.foodBalance?.summary || null,
     },
     economyOutput:      ec?.compound?.economyOutput ?? null,
-    economicComplexity: ec?.economicComplexity || null,
+    economicComplexity: complexityLabelShown(ec) || null,
     defenseScores:      dp?.scores || {},
     defenseScoreAvg:    avgScore(dp?.scores),
     defenseReadiness:   dp?.readiness || null,
@@ -394,7 +416,7 @@ function overviewSlice(active, ai, useAi) {
     primaryImports:     ec?.primaryImports || [],
     institutionsCount:  institutions.length,
     npcsCount:         (s?.npcs || []).length,
-    factionsCount:     (s?.powerStructure?.factions || s?.factions || []).length,
+    factionsCount:     (s?.powerStructure?.factions || []).length,
     institutions,
     categoryDistribution,
     quarters:          (s?.spatialLayout?.quarters || []).map(q => ({
@@ -423,7 +445,9 @@ function overviewSlice(active, ai, useAi) {
     // coherenceNotes/structuralSuggestions live at the settlement root, not on
     // economicViability — the old v?.* reads were always empty in the PDF.
     coherenceNotes:    s?.coherenceNotes || v?.coherenceNotes || [],
-    structuralSuggestions: s?.structuralSuggestions || v?.structuralSuggestions || [],
+    // READER-R1 ruling 1: the structural validator's suggestions are generator advice, not
+    // facts about the place; the DM document prints none (the web's staff panel keeps them).
+    structuralSuggestions: [],
     warnings:          s?.warnings || [],
   };
 }
@@ -451,7 +475,7 @@ function dailySlice(active, aiDailyLife) {
 
 function powerSlice(active) {
   const s = active || {};
-  const factionList = s?.powerStructure?.factions || s?.factions || [];
+  const factionList = s?.powerStructure?.factions || [];
   const factions = factionList.map(f => ({
     // Phase-D anchor identity — the canonical faction id (snake) the index keys
     // factions by and an NPC's `factionLink` resolves to. The faction card uses
@@ -554,6 +578,16 @@ function isArcaneChain(ch) {
   return ARCANE_CHAIN_IDS.some(a => id.includes(a)) || /arcane|magic|spell/.test(label);
 }
 
+/**
+ * BAR7-CARDS item 2: the mark the leaf gives the card's house, read from the record's roster row of that name.
+ * @param {any} s the settlement record @param {string | null} houseName @returns {string | null}
+ */
+function houseMarkOf(s, houseName) {
+  if (!houseName) return null;
+  const row = (Array.isArray(s?.institutions) ? s.institutions : []).find((r) => r && r.name === houseName);
+  return row ? rowMarkText(s, 'house', row) : null;
+}
+
 function viabilitySlice(active) {
   const s = active || {};
   const v = s?.economicViability || {};
@@ -564,7 +598,11 @@ function viabilitySlice(active) {
   // activeMagicChains directly — derive them the same way the web ViabilityTab
   // does, and exclude the special-typed issues from the main list so they don't
   // render twice (they get their own PDF sections).
-  const stressConsequences = [...(v.issues || []), ...(v.warnings || [])].filter(i => i?.type === 'stress_consequence');
+  // READER-R1 ruling 2: a CRITICAL stress consequence is one of the critical issues (the
+  // summary and `metrics.criticalIssueCount` count it); only the others are stress effects.
+  // BAR7-CARDS item 3 (2026-11-17; the seam's PDF seat's LEFT item 2): the list "N institutions critically impaired by
+  // siege" prints the houses the Outlook tab prints, by the one leaf both read (`impairedListShown.js`), not the record's.
+  const stressConsequences = stressEffectsShown(stressEffectsOf(v), s);
   // pdf-3: by_design items are pushed to the settlement-root structuralViolations
   // (structuralValidator), NOT economicViability.issues — so the old issues-only
   // filter was permanently empty and those authored plot seeds printed as garbled
@@ -600,24 +638,30 @@ function viabilitySlice(active) {
     // opportunity/food items live in Economics & Resources, not Viability, and
     // must not double-print here. Shared predicate with ViabilityTab.
     issues:                (v.issues || [])
-      .filter(iss => iss?.severity !== 'by_design' && iss?.type !== 'stress_consequence' && isViabilityItem(iss))
+      // READER-R1 ruling 2: every critical issue the summary counts is listed (a critical stress
+      // consequence included, and listed once: `stressConsequences` holds only the others).
+      .filter(iss => (iss?.severity || '').toLowerCase() === 'critical'
+        || (iss?.severity !== 'by_design' && iss?.type !== 'stress_consequence' && isViabilityItem(iss)))
       .map(iss => ({
         severity: iss?.severity,
         title: iss?.title,
-        description: iss?.description,
+        description: viabilityIssueText(iss, s),
         institution: iss?.institution,
-        priorityNote: iss?.priorityNote,
+        priorityNote: iss?.priorityNote,  // a repeated note is dropped below (X-50)
         suggestedFixes: iss?.suggestedFixes || [],
-      })),
-    criticalIssues:        v?.criticalIssues || (v?.issues || []).filter(i => (i?.severity || '').toLowerCase() === 'critical' && i?.type !== 'stress_consequence'),
+      }))
+      .map((iss, i, all) => (iss.priorityNote && all.findIndex(o => o.priorityNote === iss.priorityNote) < i ? { ...iss, priorityNote: undefined } : iss)),
+    // ONE COUNT, ONE HOME (READER-R1 ruling 2): the list the summary sentence counts.
+    criticalIssues:        criticalIssuesOf(v).map(i => ({ ...i, description: viabilityIssueText(i, s) })),
     // pdf-6 (golden): warnings honour the Viability filter — dependency/food/
     // resource-chain items belong to Economics, not here.
     warnings:              [...(v?.warnings || []), ...(s?.warnings || [])].filter(isViabilityItem),
     // pdf-3 (main): by_design tensions are surfaced as plot seeds (byDesignContradictions),
     // so exclude them here — they must not double-print as apparent defects.
-    structuralViolations:  (s?.structuralViolations || []).filter(x => x?.severity !== 'by_design'),
+    // READER-R1 ruling 1: the structural validator's rule text never prints on a DM surface.
+    structuralViolations:  [],
     stress:                stress.map(x => ({ label: x?.label || x?.icon, summary: x?.summary, hook: crisisHookFor(s, x) })),
-    stressConsequences:    v?.stressConsequences?.length ? v.stressConsequences : stressConsequences,
+    stressConsequences:    stressConsequences,
     magicDependency:       !!dp?.magicDependency,
     activeMagicChains:     v?.activeMagicChains?.length ? v.activeMagicChains : activeMagicChains,
     byDesignContradictions: v?.byDesignContradictions?.length ? v.byDesignContradictions : byDesignContradictions,
@@ -673,6 +717,9 @@ function historySlice(active) {
 function npcsSlice(active) {
   const s = active || {};
   const culture = s?.config?.dominantCulture || s?.dominantCulture || s?.culture || null;
+  const powerOrder = powerOrderOf(s);
+  const governingName = governingNameOf(s);
+  const keeper = seatKeeperOf(s); // COHERENCE-POWERS-3 (F7)
   const npcs = (s?.npcs || []).map(n => {
     // Engine's `personality` is an object { dominant, flaw, modifier, tell, speech }.
     // X-48 (the owner, 2026-11-03): NO LOOK, VOICE OR TELL ANYWHERE. The temperament and
@@ -707,21 +754,23 @@ function npcsSlice(active) {
       }
       return false;
     });
-    // Influence might be string label, object, or numeric
-    const inf = n?.influence;
-    let influenceLabel = null, influenceDescription = null;
-    if (typeof inf === 'string') influenceLabel = inf;
-    else if (inf && typeof inf === 'object') {
-      influenceLabel = inf.label || inf.level || null;
-      influenceDescription = inf.description || null;
-    }
+    // ⛔ NO INFLUENCE LABEL (PAGE-1 CARD, F4, 2026-11-20): the PDF's "Influence: low" and the journal's printed the stored
+    // `influence` band, a keyword misread at birth (88.6% of the chair's 300 towns' cards "low"). Both print the record's
+    // fact instead, from the people card's one reader: the powers the person stands first of and each one's weight here.
+    const standingLine = cardStandingLine(n, s);
+    // PAGE-4 CARD-SERVED: a power the document holds with no figure prints its name alone (no weight)
+    const firstOfLine = cardFirstOfWeights(n, s).map((p) => (p.weightHere ? `${p.power}, ${p.weightHere}` : p.power)).join('; ') || null;
     // Engine plotHooks is array of strings; titles aren't present as a separate field for some npcs
     const npcRace = n?.race || n?.culture || culture;
     // Phase-D anchor identity. `id` keys this NPC's card anchor (matches the
     // index entry built off the SAME raw npc); `factionLink` is the canonical
     // faction id (== a faction card's id) the NPC's stated affiliation resolves
     // to, so the affiliation chip can link to that faction with no name match.
-    const factionRefName = labelOfFactionRef(n?.factionAffiliation || n?.faction || n?.category);
+    // PEOPLE-5A (M-1b): the affiliation is the card's FIRST-RANK power, read from its memberships.
+    const firstPower = firstPowerOf(n, powerOrder);
+    // NEVER A CATEGORY KEY (COHERENCE-UPKEEP-7, the chair's ruling F2; the fourth read's C-L3): a person in no power
+    // has no label here, so the journal prints no "Member of" row and an empty table cell, never "magic" or "other".
+    const factionRefName = labelOfFactionRef(firstPower || n?.faction);
     return {
       id: n?.id || entityIdFor('npc', n),
       factionLink: factionRefName ? factionIdFromName(factionRefName) : null,
@@ -730,24 +779,47 @@ function npcsSlice(active) {
       race: npcRace,
       gender: n?.gender || null,
       age: n?.age || (n?.physical?.age) || null,
-      factionAffiliation: n?.factionAffiliation || n?.faction || n?.category || null,
-      factionLabel: labelOfFactionRef(n?.factionAffiliation || n?.faction || n?.category),
+      factionAffiliation: firstPower || n?.faction || n?.category || null,
+      factionLabel: factionRefName,
+      // THE PEOPLE CAR (PEOPLE-1 CAST, 2026-11-07): the card's house and its ranked powers, the
+      // facts the representative generator writes (`institution`, `memberships`), carried on the
+      // view row so the dossier's NPC section can print "first of X · second of Y" and the house
+      // (PEOPLE-5A wires the print: `house` is the house's name, `powerLine` the ranked line).
+      // A pre-car record carries neither.
+      house: cardHouseOf(n),
+      // BAR7-CARDS item 2 (the chair's ruling CM1, 2026-11-17; vetoable by the owner): THE HOUSE'S MARK, ONE LINE OF ITS
+      // OWN under the card's house line, as the NPC tab's card prints it: the house's `rowMarkText`
+      // (`crisisStoppedRow.js`, the leaf the Institutions and Services tabs read), said once; null for a house it marks
+      // not, a minted face, a DM's person. The person's own sentences (`dealing`, the secrets) print as written.
+      houseMark: houseMarkOf(s, cardHouseOf(n)),
+      powers: Array.isArray(n?.memberships)
+        ? n.memberships.map((m) => ({ power: m?.power || null, rank: m?.rank ?? null }))
+        : [],
+      powerLine: cardPowerLine(n, powerOrder, governingName, !!keeper && keeper.id === n.id) || null, // COHERENCE-POWERS: the leader's office (screen parity; F7: an empty seat's keeper)
       power: n?.power || 0,
-      influence: inf,
-      influenceLabel,
-      influenceDescription,
+      standingLine,
+      firstOfLine,
       blurb: n?.blurb || n?.description || null,
       personality: personalityStr,
       motivation: motivationStr,
+      // WIRING W3 C9 (R-W6): how the face deals with strangers, the birth-drawn `presentation.behaviour`.
+      dealing: typeof n?.presentation?.behaviour === 'string' ? n.presentation.behaviour.trim() || null : null,
       secrets: cleanSecrets,
       plotHooks: cleanHooks(n?.plotHooks),
-      relationships: cleanRelationships(n?.relationships),
+      // THE PEOPLE CAR (PEOPLE-4 TIES, R-P7): the card's OWN directed tie first, then the ties
+      // naming it ("called by"), each from the settlement's one tie list. The card's own
+      // `relationships` field this row used to read is written by no producer (a dead arm, cut).
+      relationships: cleanRelationships(cardTieLines(s?.relationships, n?.id).map((t) => ({
+        with: t.withName,
+        type: t.direction === 'own' ? t.kind : `called by${t.kind ? ` · ${t.kind}` : ''}`,
+        description: t.direction === 'own' ? t.description : '',
+      }))),
     };
   });
   return {
     all:      npcs,
     sorted:   [...npcs].sort((a, b) => (b?.power || 0) - (a?.power || 0)),
-    factions: s?.powerStructure?.factions || s?.factions || [],
+    factions: s?.powerStructure?.factions || [],
     npcRelationships: s?.npcRelationships || [],
   };
 }
@@ -762,7 +834,6 @@ const HOOK_CATEGORY_TO_SOURCE = Object.freeze({
   economics: 'crisis',
   safety: 'crime',
   history: 'history',
-  relationship: 'relationship',
 });
 
 // collectPlotHooks priority is a 0–9 NUMBER; the PDF section keys its priority
@@ -837,7 +908,7 @@ function relationshipsSlice(active) {
     neighborSingle:  s?.neighborRelationship || null,
     npcs:            s?.npcs || [],
     npcRelationships: s?.npcRelationships || [],
-    factions:        s?.powerStructure?.factions || s?.factions || [],
+    factions:        s?.powerStructure?.factions || [],
     emergentConditions: s?.emergentConditions || s?.relationships?.emergentConditions || [],
     prominentRelationship: s?.prominentRelationship || null,
   };
@@ -886,7 +957,11 @@ function labelOfHook(h) {
  * The engine sometimes emits severity as an array (`['minor', 'major']`),
  * a min/max object (`{ min: 'minor', max: 'major' }`), or just a string.
  * Without normalization, an array renders as "minormajor" because react-pdf
- * joins array children with no separator. Pick the strongest readable form.
+ * joins array children with no separator.
+ * ⛔ A RANGE IS NOT A RATING (the chair's ruling, R3-TABS second seat): a tension's
+ * record holds the template's list of severities, unresolved, so more than one
+ * severity is a range and NO word is returned (it was joined "minor / major");
+ * nothing is chosen for the reader. One severity returns that word.
  */
 function normSeverity(s) {
   if (s == null) return null;
@@ -894,14 +969,12 @@ function normSeverity(s) {
   if (Array.isArray(s)) {
     const parts = s.map(x => (typeof x === 'string' ? x : (x?.label || x?.value || ''))).filter(Boolean);
     if (parts.length === 0) return null;
-    if (parts.length === 1) return parts[0];
-    // "minor / major" reads correctly; the worst element is usually last
-    return parts.join(' / ');
+    return new Set(parts).size === 1 ? parts[0] : null;
   }
   if (typeof s === 'object') {
     if (s.label) return s.label;
     if (s.value) return String(s.value);
-    if (s.max && s.min && s.max !== s.min) return `${s.min} / ${s.max}`;
+    if (s.max && s.min && s.max !== s.min) return null;
     if (s.max) return s.max;
     if (s.min) return s.min;
     if (s.level) return s.level;

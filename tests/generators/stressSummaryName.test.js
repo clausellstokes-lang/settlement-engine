@@ -102,7 +102,7 @@ describe('F8 — stress summaries render with the real settlement name', () => {
       expect(so.map((e) => e.summary), `stress/stressors parity (seed ${seed})`).toEqual(st.map((e) => e.summary));
     });
     expectNoSeedFailures(failures, 'no persisted stress entry carries a summaryRoll token');
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the ratchet's instruction; 2026-11-18): 19.0 s here under load; 20.3 s and 23.1 s on CI's ratchet runner (runs 44295605654, 44282875950)
 
   it('is deterministic — same config+seed reproduces identical summaries', () => {
     for (const type of ['under_siege', 'wartime', 'religious_conversion', 'plague_onset']) {
@@ -117,7 +117,7 @@ describe('F8 — stress summaries render with the real settlement name', () => {
     for (let i = 0; i < 20; i++) {
       const e = entriesOf(mk({ stressType: 'wartime' }, `war-${i}`))[0];
       branches.add(
-        e.summary.includes('positioned to profit') ? 'profit'
+        e.summary.includes('doing well out of it') ? 'profit' // W4 PEOPLE second seat 2026-11-07: re-keyed to the summary's plain wording (the owner's style law; rows 43-48, 254-260)
         : e.summary.includes('may not win') ? 'loss'
         : 'other'
       );

@@ -188,7 +188,7 @@ export default function WizardCloseout() {
       }}>
         {/* Keyword-first eyebrow demoted; the readiness verb is chrome, not the
             scannable content. */}
-        <span style={{ fontSize: FS.xs, color: MUTED, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+        <span style={{ fontSize: FS.sm, color: BODY, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
           Ready to generate
         </span>
       </div>

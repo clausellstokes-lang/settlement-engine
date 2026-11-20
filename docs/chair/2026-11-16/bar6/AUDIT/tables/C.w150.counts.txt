@@ -1,0 +1,75 @@
+towns 150 · instances 124 · towns with one 86
+L6: towns 71 · instances 95 · distinct lines 70
+L7: towns 28 · instances 29 · distinct lines 22
+  6a-size       towns   13 · instances   14 · distinct lines   14 · found by an earlier law 0
+  6a-w          towns   25 · instances   27 · distinct lines   21 · found by an earlier law 1
+  6b-denied     towns    2 · instances    2 · distinct lines    2 · found by an earlier law 0
+  6b-nomaker    towns    6 · instances    6 · distinct lines    3 · found by an earlier law 0
+  6b-out        towns    3 · instances    3 · distinct lines    2 · found by an earlier law 0
+  6c-arms       towns    3 · instances    9 · distinct lines    7 · found by an earlier law 2
+  6c-halfway    towns    8 · instances    8 · distinct lines    4 · found by an earlier law 0
+  6c-rec        towns    2 · instances    2 · distinct lines    1 · found by an earlier law 0
+  6c-unsold     towns    2 · instances    2 · distinct lines    2 · found by an earlier law 0
+  6c-unworked   towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+  6d-blurb      towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+  6d-court      towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+  6d-fields     towns    8 · instances    8 · distinct lines    1 · found by an earlier law 0
+  6d-force      towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+  6d-members    towns    9 · instances    9 · distinct lines    9 · found by an earlier law 0
+  6d-paid       towns    1 · instances    1 · distinct lines    1 · found by an earlier law 0
+  7a-nothreat   towns   12 · instances   12 · distinct lines   12 · found by an earlier law 0
+  7b-defence    towns    3 · instances    3 · distinct lines    3 · found by an earlier law 0
+  7c-plenty     towns    4 · instances    4 · distinct lines    4 · found by an earlier law 0
+  7d-traffic    towns    2 · instances    2 · distinct lines    2 · found by an earlier law 0
+  7w-tone       towns    8 · instances    8 · distinct lines    3 · found by an earlier law 0
+7    stands    C3247   FOUND 7b-defence     · To anyone arriving, Teotiha looks defended in the ordinary way: enough for the usual troub
+7    stands    C94460  FOUND 7d-traffic     · A work party heads out together, singing, with tools on their shoulders.
+7    stands    C150831 FOUND 7d-traffic     · Porters bent under loaded frames file past, and someone counts them in.
+7    stands    C85036  FOUND 7a-nothreat    · Mingpo has no wall, and nothing threatens it now that a wall would keep out.
+7    stands    C205552 FOUND 7a-nothreat    · Beiyuan has no wall, and nothing threatens it now that a wall would keep out.
+7    stands    C146255 FOUND 7a-nothreat    · Nothing presses Neaeia at present: its defences would make any attack costly, so raiders a
+7    stands    C157891 FOUND 7c-plenty      · Nobody here talks about the price of bread.
+7    stands    C26390  FOUND 7b-defence     · Fresh repairs show on Lagoorum's city walls and gates; the city keeps its defences in work
+7    stands    C217292 FOUND 7c-plenty      · Kleinberg's market handles more than the village could ever use.
+7    stands    C184150 FOUND 7c-plenty      · Its food comes from more than one source, the herds most of all, so a poor year in one doe
+7    stands    C40276  n/a                  · town not in this render
+7    weak      C0013   unfnd                · A poet holds a small crowd by the well, and nobody hurries the telling along.
+7    weak      C4592   unfnd                · A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud.
+7    weak      C61115  found 7w-tone        · Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's bles
+7    weak      C79603  found 7w-tone        · Pilgrims crowd the road in, and every second stall sells candles, tokens or someone's bles
+7    weak      C218186 found 7w-tone        · A work party heads out together, singing, with tools on their shoulders.
+7    weak      C218926 found 7w-tone        · A work party heads out together, singing, with tools on their shoulders.
+7    explained C0343   clear                · Standing markets in more than one quarter, open every day.
+7    explained C182276 clear                · Food is being handed out to anyone who asks, and the line is patient.
+7    stands_by_L2 C43575  n/a                  · town not in this render
+7    stands_by_L2 C0350   n/a                  · town not in this render
+7    stands_by_L2 C3223   n/a                  · town not in this render
+7    stands_by_L2 C5452   n/a                  · town not in this render
+6a   stands    C154042 FOUND 6a-size        · Nobody at Loughshaw warns visitors about particular streets, because the warning would cov
+6a   stands    C209939 FOUND 6a-size        · Causeways and managed water divide the settlement into organized neighborhoods.
+6a   weak      C206170 found 6a-w           · Visitors to Qaryahdarya are told which few streets to avoid, and the advice turns out to b
+6b   stands    C39804  FOUND 6b-out         · Bolts of cloth and bales of wool fill the carts waiting on the road out.
+6b   stands    C84094  FOUND 6b-denied      · The chink of chisels on stone carries on the wind.
+6b   stands    C115374 FOUND 6b-out         · Crates of pots and glassware, packed in straw, wait for the carts on the road out.
+6b   stands    C219863 FOUND 6b-nomaker     · Someone is churning butter in a doorway, and the rhythm of it carries.
+6b   stands    C15780  FOUND 6b-nomaker 7c-plenty · Spice and drying herbs scent every lane, and the stalls are piled with them.
+6b   stands    C15951  n/a                  · town not in this render
+6c   stands    C86447  FOUND 6c-arms        · Grain surplus · Sacred wood · Ritual components · Quality tools and weapons · Advanced wea
+6c   stands    C86484  FOUND 6c-arms        · Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons
+6c   stands    C88481  FOUND 6c-unsold      · Raw sand · Date harvest · Desert grain · Medicinal herbs · Wild honey · Coal · Palm sugar
+6c   stands    C204663 FOUND 6c-unsold      · There is glass sand in Polaki's country worth real money elsewhere, and none of it leaves 
+6c   stands    C171330 FOUND 6c-halfway     · Work on the timber here stops half-way: no charcoal burner finishes it.
+6c   stands    C158113 FOUND 6c-unworked    · No one here works the stone near Gantulgakhurel.
+6c   stands    C39608  n/a                  · town not in this render
+6c   stands    C37887  n/a                  · town not in this render
+6d   stands    C161931 FOUND 6d-court       · The town is visibly governed: a hall of justice, a gaol.
+6d   stands    C203044 FOUND 6d-paid        · Fortification and forces are present and paid, but the pressure on them never lets up.
+6d   stands    C91256  FOUND 6d-members     · The Headman's Authority at Drumwood has left obvious decisions untaken because its members
+6d   stands    C128237 FOUND 6d-blurb       · A small group of traders who come on market days; they speak up in small disputes but carr
+6d   stands    C113231 FOUND 6d-fields      · Intensive plots, terraces, raised fields, and tribute redistribution support dense populat
+6d   stands    C43925  n/a                  · town not in this render
+6d   stands    C39734  n/a                  · town not in this render
+6e   stands    C42840  n/a                  · town not in this render
+6e   explained C48148  clear                · Crown supply carts take what they need first, and local needs come second.
+6e   explained C48270  clear                · Crown authority over the war flows through military channels now.
+6e   explained C48442  clear                · Wants Satisfy the crown requisition order without stripping the settlement to the bone

@@ -1,0 +1,16 @@
+{
+ "rows": 525,
+ "born": 525,
+ "errors": 0,
+ "counts": {
+  "10e-temper": {
+   "configurations": 1,
+   "field": "npcs[].secret or npcs[].personality (the later draw: the secret overlay)"
+  }
+ },
+ "keys": {
+  "10e-temper": [
+   "town|germanic|plains|road|civilized|gm-seed-a"
+  ]
+ }
+}

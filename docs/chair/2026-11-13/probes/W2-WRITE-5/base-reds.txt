@@ -1,0 +1,7 @@
+ FAIL  tests/lint/factLayers.walker.test.js > nothing reads at or above its own layer (shrink-only) > READERS: every file reads exactly its banked count, and no file reads outside the register
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ no stale row: a cured line leaves the register in its own commit
+ FAIL  tests/lint/proseComposed.walker.test.js > A13 — the PROVENANCE move, EXECUTABLE since the holder census landed (SEAM car 5b) > ⭐⭐ THE FAIL LIMB IS REACHABLE ON REAL INPUT: a citing variant whose holder this town has captured
+ FAIL  tests/lint/proseWaveGate.walker.test.js > (d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T.4, C‴) > composes the captured town and the clean control, and names their standings
+ FAIL  tests/lint/proseWaveGate.walker.test.js > (d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T.4, C‴) > ⛔ THE CONTROL HAS NO PEN LINE AT ALL, which is what makes the pair a pair
+ FAIL  tests/lint/proseWaveGate.walker.test.js > (d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T.4, C‴) > ⭐ THE TWO RENDERINGS DIFFER IN EXACTLY ONE WAY, which is what the sitting is being shown

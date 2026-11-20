@@ -20,6 +20,7 @@ import { ensureNpcStates } from '../../src/domain/worldPulse/npcAgency.js';
 import { ensureFactionStates, seatNpcsIntoFactions } from '../../src/domain/worldPulse/factionCompetition.js';
 import { stablePart } from '../../src/domain/worldPulse/worldState.js';
 import { createPRNG } from '../../src/kernel/prng.js';
+import { membershipsOf } from '../../src/domain/people/membership.js';
 
 const SEED = 'faction-seating-2026-06';
 
@@ -41,7 +42,10 @@ describe('seatNpcsIntoFactions — affiliated NPCs seat into their NAMED faction
 
     // Sanity: this fixture actually has affiliated NPCs to seat, else the
     // invariant below would pass vacuously.
-    const affiliated = (settlement.npcs || []).filter(n => n.factionAffiliation);
+    // GREEN-TIP (2026-11-10, re-keyed by cause 15207301f, the v2 record): a card's faction is its MEMBERSHIP
+    // (people/membership.js :: membershipsOf), which factionIdFor now reads; the retired `factionAffiliation` is on
+    // no current card, so the old guard read zero.
+    const affiliated = (settlement.npcs || []).filter(n => membershipsOf(n).length > 0);
     expect(affiliated.length).toBeGreaterThan(0);
 
     const states = Object.values(ws.factionStates);

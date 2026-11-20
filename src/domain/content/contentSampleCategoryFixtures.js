@@ -265,7 +265,6 @@ function factionNamed(settlement, name) {
   const powerStructure = plainRecord(root.powerStructure);
   const factions = [
     ...(Array.isArray(powerStructure.factions) ? powerStructure.factions : []),
-    ...(Array.isArray(root.factions) ? root.factions : []),
   ];
   return factions
     .map(plainRecord)

@@ -488,7 +488,11 @@ describe('the three mounts browser pass 3 met, each pinned to the band it must r
       ...s,
       economicState: {
         ...s.economicState,
-        foodSecurity: { ...(s.economicState?.foodSecurity || {}), label: 'Import-Dependent', color: '#8a3010', resilienceScore: 42 },
+        // RE-KEYED BY IDENTITY (SURFACES-2 item 1, the chair's ruling (r2) of 2026-11-14): the row prints the food
+        // band's one home (domain/display/foodWordShown.js), so the fixture's band is the declared 'Import-Dependent'
+        // (a band whose record brings food in by trade), not the stored label alone.
+        foodSecurity: { ...(s.economicState?.foodSecurity || {}), label: 'Import-Dependent', color: '#8a3010', resilienceScore: 42,
+          foodRecord: { ...(s.economicState?.foodSecurity?.foodRecord || {}), band: 'importDependent', normalImportPct: 20 } },
       },
     };
     const { container } = render(<OverviewTab settlement={fixture} />);
@@ -532,6 +536,9 @@ describe('the three mounts browser pass 3 met, each pinned to the band it must r
     const fixture = {
       ...s,
       institutions: [{ id: 'inst-smug', name: 'Smuggling ring', category: 'Criminal', status: 'healthy' }],
+      // re-keyed (W2-A-LEAVES 5b, 2026-11-12): a criminal POWER now outranks the name ladder (a gang is a gang),
+      // so the forged city's criminal faction leaves the roster too, and the one branch this arm names still answers
+      powerStructure: { ...s.powerStructure, factions: (s.powerStructure?.factions || []).filter((f) => f.category !== 'criminal') },
     };
     const { container } = render(<DefenseTab settlement={fixture} />);
     expandAll(container);

@@ -1,0 +1,79 @@
+[gate-tail] start:  19:38:59 up 48 min,  0 user,  load average: 2.62, 1.95, 2.03 · cores: 4
+LAW 8 over 30 towns: towns 13 · instances 70 · distinct lines 40 · things 31 · on a LAW 2/3 line 11
+LAW 2/3 rules of this shape (held by the round in flight), for the union: towns 12 · instances 34 · of them on a LAW 8 line 10
+    L2.famine.meat         towns    1 · instances     2
+    L2.famine.work         towns    1 · instances     1
+    L2.siege.abroad        towns    3 · instances     7
+    L2.siege.cutgood       towns    1 · instances     5
+    L2.war.animals         towns    1 · instances     2
+    L2.war.iron            towns    2 · instances     8
+    L3.chainOverStopped    towns    1 · instances     1
+    L3.failedFood          towns    2 · instances     2
+    L3.foodLineStopped     towns    1 · instances     1
+    L3.needed              towns    2 · instances     2
+    L3.outputs             towns    2 · instances     3
+  8a.input     towns    8 · instances    48 · distinct lines   26 · things   17 · on a LAW 2/3 line 11
+  8a.mild      towns    2 · instances     6 · distinct lines    3 · things    2 · on a LAW 2/3 line 0
+  8b.person    towns    8 · instances     8 · distinct lines    5 · things    8 · on a LAW 2/3 line 0
+  8c.harvest   towns    1 · instances     2 · distinct lines    2 · things    1 · on a LAW 2/3 line 0
+  8d.export    towns    1 · instances     4 · distinct lines    4 · things    4 · on a LAW 2/3 line 0
+  8e.svcOutput towns    2 · instances     2 · distinct lines    1 · things    2 · on a LAW 2/3 line 0
+CONTROLS (stands/bar/expect must be FOUND; explained must be clear; weak reported apart)
+  8a stands    C2044    n/a                          town not in this render
+  8a stands    C25035   n/a                          town not in this render
+  8a stands    C25141   n/a                          town not in this render
+  8a stands    C73413   n/a                          town not in this render
+  8a stands    C127752  n/a                          town not in this render
+  8a stands    C145096  n/a                          town not in this render
+  8a stands    C124324  n/a                          town not in this render
+  8a stands    C16139   n/a                          town not in this render
+  8a stands    C16118   n/a                          town not in this render
+  8a stands    C217422  n/a                          town not in this render
+  8a expect    C191251  n/a                          town not in this render
+  8a bar       C8174    FOUND 8a.input               Services · Repairs · Tool manufacture · Weapon smithing
+  8a bar       C11307   FOUND 8a.input               War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to
+  8a bar       C0333    FOUND 8a.input               A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to 
+  8a bar       C0927    FOUND 8a.input               Rare medications and treatments available through district-wide sourcing.
+  8a bar       C5441    FOUND HELD:L2.siege.abroad   A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to 
+  8a bar       C31652   FOUND 8a.input 8b.person     Needed, and not brought in: grapes, clay.
+  8a bar       C3231    FOUND HELD:L2.famine.meat    Services · Fresh meat · Offal and by-products
+  8b stands    C93275   n/a                          town not in this render
+  8b stands    C93688   n/a                          town not in this render
+  8b stands    C88140   n/a                          town not in this render
+  8b weak      C84503   n/a                          town not in this render
+  8b weak      C20632   n/a                          town not in this render
+  8c stands    C211281  n/a                          town not in this render
+  8c stands    C213905  n/a                          town not in this render
+  8c stands    C217521  n/a                          town not in this render
+  8c stands    C210715  n/a                          town not in this render
+  8c bar       C42947   FOUND HELD:L3.failedFood     Ancient Grove · medicinal herbs · honey · Precious Metal Veins · luxury · Open Grazing Land · livest
+  8c bar       C42011   FOUND HELD:L3.failedFood     River Fisheries · fish · Extensive Grain Fields · grain · flour · Hot Springs / Healing Waters
+  8d stands    C5702    n/a                          town not in this render
+  8d stands    C26071   n/a                          town not in this render
+  8d stands    C26077   n/a                          town not in this render
+  8d stands    C33585   n/a                          town not in this render
+  8d stands    C25863   n/a                          town not in this render
+  8d stands    C96793   n/a                          town not in this render
+  8d bar       C8475    FOUND HELD:L2.war.animals    Services · Horse hire
+  8e stands    C8633    n/a                          town not in this render
+  8e stands    C25827   n/a                          town not in this render
+  8e bar       C3874    FOUND 8e.svcOutput           Armed escort · Mercenary hire · Training services
+  8e bar       C3911    FOUND 8e.svcOutput           Armed escort & mercenary hire
+  8e bar       C17893   FOUND HELD:L3.chainOverStopped Faith & Worship · Religion & civic✓ Running
+  neg explained C91105   n/a                          town not in this render
+  neg explained C91625   n/a                          town not in this render
+  neg explained C92201   n/a                          town not in this render
+  neg explained C94583   n/a                          town not in this render
+  neg explained C95095   n/a                          town not in this render
+  neg explained C95709   n/a                          town not in this render
+  neg explained C19306   n/a                          town not in this render
+  neg explained C37273   n/a                          town not in this render
+  neg explained C89452   n/a                          town not in this render
+  neg explained C93420   n/a                          town not in this render
+  neg explained C10978   n/a                          town not in this render
+  neg explained C86893   n/a                          town not in this render
+  neg explained C0343    n/a                          town not in this render
+controls off: 0
+[gate-tail] end:  19:39:00 up 48 min,  0 user,  load average: 2.62, 1.95, 2.03
+[gate-tail] full log: <log>
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

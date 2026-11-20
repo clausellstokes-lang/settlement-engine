@@ -297,7 +297,7 @@ export function deriveFactionProfile(faction, settlement) {
 
   const name = typeof faction === 'string'
     ? faction
-    : (faction.faction || faction.name || 'Unnamed Faction');
+    : (faction.faction || faction.name || 'Unnamed power');
   const archetype = deriveFactionArchetype(faction);
   const template = templateForArchetype(archetype);
 
@@ -346,9 +346,9 @@ export function deriveFactionProfile(faction, settlement) {
  */
 export function deriveAllFactionProfiles(settlement) {
   if (!settlement) return [];
+  // The powers only (PEOPLE-5A): the NPC grouping's fallback is deleted.
   const factions = settlement.powerStructure?.factions
                 || settlement.power?.factions
-                || settlement.factions
                 || [];
   /** @type {FactionProfile[]} */
   const out = [];

@@ -47,7 +47,7 @@ export const CUSTOM_CONTENT_MANIFEST = deepFreeze({
     {
       "key": "living",
       "label": "Living World Content",
-      "blurb": "Deities, traditions, and factions. Deities gain mechanics after assignment; factions enter through authored events; traditions currently shape founding and dossier presentation.",
+      "blurb": "Deities, traditions, and powers. Deities gain mechanics after assignment; powers enter through authored events; traditions currently shape founding and dossier presentation.",
       "buckets": [
         "deities",
         "traditions",
@@ -1806,8 +1806,8 @@ export const CUSTOM_CONTENT_MANIFEST = deepFreeze({
     },
     {
       "key": "factions",
-      "label": "Factions",
-      "singular": "Faction",
+      "label": "Powers",
+      "singular": "Power",
       "lane": "living",
       "authorable": true,
       "fields": [
@@ -1983,7 +1983,7 @@ export const CUSTOM_CONTENT_MANIFEST = deepFreeze({
           "placement": "dependency",
           "label": "Controls institutions",
           "category": "institutions",
-          "hint": "Institutions this faction is associated with controlling. Current simulation does not apply control automatically.",
+          "hint": "Institutions this power is associated with controlling. Current simulation does not apply control automatically.",
           "effect": "presentation",
           "activation": "always",
           "consumers": [
@@ -2000,7 +2000,7 @@ export const CUSTOM_CONTENT_MANIFEST = deepFreeze({
           "placement": "dependency",
           "label": "Rivals (conflicts with)",
           "category": "factions",
-          "hint": "Factions associated as rivals. Current simulation does not create conflict automatically.",
+          "hint": "Powers associated as rivals. Current simulation does not create conflict automatically.",
           "effect": "presentation",
           "activation": "always",
           "consumers": [

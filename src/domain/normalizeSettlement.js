@@ -100,7 +100,7 @@ function structuralFingerprint(s) {
   return [
     len(holder?.npcs),
     len(holder?.institutions),
-    len(holder?.powerStructure?.factions ?? holder?.factions),
+    len(holder?.powerStructure?.factions),
     len(holder?.neighbourNetwork),
     len(holder?.history?.historicalEvents),
     len(holder?.config?.nearbyResources),

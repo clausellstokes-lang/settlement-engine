@@ -660,8 +660,10 @@ describe('World Pulse expansion systems', () => {
     expect(rebranch).toBeTruthy();
     expect(rebranch.npcPatch.shortGoal).toBe('join_guild');
     expect(rebranch.npcPatch.longGoal).toBe('expand_trade_house');
-    expect(rebranch.reasons.join(' ')).toContain('ideal prosperity');
-    expect(rebranch.reasons.join(' ')).toContain('flaw greed');
+    // The personality anchors still ride the reason, said in words since STYLE-2-PULSE-FOLLOWUP B·10
+    // (0e8c9308c; re-keyed by cause from the sheet's field names "ideal prosperity" / "flaw greed").
+    expect(rebranch.reasons.join(' ')).toContain('prosperity');
+    expect(rebranch.reasons.join(' ')).toContain('greed');
 
     const applied = applyNpcPatch({ tick: 5, npcStates: { [npcState.npcId]: npcState } }, rebranch);
     expect(applied.npcStates[npcState.npcId].goalHistory.at(-1)).toMatchObject({

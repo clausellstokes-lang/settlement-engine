@@ -79,6 +79,9 @@ export async function bootHarness() {
     vm: 'src/pdf/lib/viewModel.js',
     pdf: 'src/pdf/SettlementPDF.jsx',
     foundry: 'src/foundry/moduleBuilder.js',
+    // CENSUS-1c unit 4: the render runs in THIS module graph, so its draws are noted in THIS
+    // graph's ledger instance (not the worker's): opened here, around each surface, below.
+    ledger: 'src/domain/facts/presumptionLedger.js',
   }).map(async ([k, p]) => [k, await load(p)])));
   return { server, load, React: React.default ?? React, RDS, m };
 }
@@ -148,26 +151,31 @@ export function renderSurfaces(h, settlement) {
     dm_compass: { settlement: s },
     substrate: { settlement: s },
   };
+  /** @type {any[]} */ const ledger = [];
+  // CENSUS-1c unit 4: each surface renders inside the SSR graph's own presumption ledger; every
+  // entry is re-labelled `<surface>:<the noter's surface>` so declared-share counts PDF, Foundry
+  // and Tonight draws apart from the record's.
+  const ledgered = (surface, fn) => { const out = m.ledger.withPresumptionLedger(fn); for (const e of out.ledger) ledger.push({ ...e, surface: `${surface}:${e.surface}` }); return out.result; };
   const tabs = {}; const prose = {};
   for (const id of TAB_IDS) {
-    try { const html = RDS.renderToStaticMarkup(el(m[id], props[id])); tabs[id] = htmlToText(html); prose[id] = proseOfHtml(html); } catch (e) { errors[`tab:${id}`] = String(e?.message ?? e).slice(0, 300); tabs[id] = ''; prose[id] = []; }
+    try { const html = ledgered('tab', () => RDS.renderToStaticMarkup(el(m[id], props[id]))); tabs[id] = htmlToText(html); prose[id] = proseOfHtml(html); } catch (e) { errors[`tab:${id}`] = String(e?.message ?? e).slice(0, 300); tabs[id] = ''; prose[id] = []; }
   }
   let tonight = ''; let tonightSheet = null;
   try {
-    tonightSheet = m.tonightModel.composeTonightSheet(s);
-    const html = RDS.renderToStaticMarkup(React.createElement(m.tonight.default, { sheet: tonightSheet, palette: {} }));
+    tonightSheet = ledgered('tonight', () => m.tonightModel.composeTonightSheet(s));
+    const html = ledgered('tonight', () => RDS.renderToStaticMarkup(React.createElement(m.tonight.default, { sheet: tonightSheet, palette: {} })));
     tonight = htmlToText(html); prose.tonight = proseOfHtml(html);
   } catch (e) { errors.tonight = String(e?.message ?? e).slice(0, 300); }
   let pdf = ''; let vm = null;
   try {
-    vm = m.vm.buildViewModel({ settlement: s, phase: 'canon' });
+    vm = ledgered('pdf', () => m.vm.buildViewModel({ settlement: s, phase: 'canon' }));
     const tree = React.createElement(m.pdf.SettlementPDF, { settlement: s, phase: 'canon', variant: 'canon_dossier', faithUnlocked: true, isFounder: true, isAnonymous: true });
-    pdf = pdfLeaves(tree, []).join('').replace(/[ \t]+/g, ' ').replace(/ *\n[\n ]*/g, '\n').trim();
+    pdf = ledgered('pdf', () => pdfLeaves(tree, [])).join('').replace(/[ \t]+/g, ' ').replace(/ *\n[\n ]*/g, '\n').trim();
   } catch (e) { errors.pdf = String(e?.message ?? e).slice(0, 300); }
   let foundry = '';
   try {
-    const { pages } = m.foundry.buildFoundryModuleFiles({ settlement: s, vm: vm ?? m.vm.buildViewModel({ settlement: s }), variant: 'canon_dossier', faithUnlocked: true });
+    const { pages } = ledgered('foundry', () => m.foundry.buildFoundryModuleFiles({ settlement: s, vm: vm ?? m.vm.buildViewModel({ settlement: s }), variant: 'canon_dossier', faithUnlocked: true }));
     foundry = pages.map((p) => `# ${p.name}\n${String(p.markdown ?? p.text?.markdown ?? p.text?.content ?? '').trim()}`).join('\n');
   } catch (e) { errors.foundry = String(e?.message ?? e).slice(0, 300); }
-  return { tabs, prose, tonight, tonightSheet, pdf, foundry, errors };
+  return { tabs, prose, tonight, tonightSheet, pdf, foundry, errors, ledger };
 }

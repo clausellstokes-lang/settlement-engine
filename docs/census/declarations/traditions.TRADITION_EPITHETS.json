@@ -1,0 +1,64 @@
+{
+ "id": "traditions.TRADITION_EPITHETS",
+ "source": "src/data/traditionCorpus.js :: TRADITION_EPITHETS",
+ "drawKind": "R",
+ "pool": {
+  "declares": [],
+  "crisisScoped": false,
+  "colour": false,
+  "notes": "fork(epithet).pick (fork-isolated, 1 roll)",
+  "needs": [],
+  "excludes": []
+ },
+ "rows": [
+  {
+   "id": "traditions.TRADITION_EPITHETS::0",
+   "text": "a custom older than the walls",
+   "needs": [
+    "walls"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"older than the walls\": the perimeter (ruling 3)"
+  },
+  {
+   "id": "traditions.TRADITION_EPITHETS::1",
+   "text": "the day the whole quarter shutters its doors",
+   "needs": [
+    "tier: >= town"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"the whole quarter\""
+  },
+  {
+   "id": "traditions.TRADITION_EPITHETS::2",
+   "text": "kept since the first stone was laid",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_EPITHETS::3",
+   "text": "older than any charter the town can show",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "\"any charter the town can show\": tier noun is spoken by the caller; no atom"
+  },
+  {
+   "id": "traditions.TRADITION_EPITHETS::4",
+   "text": "the one day the roads all lead home",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_EPITHETS::5",
+   "text": "remembered when little else is",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  }
+ ]
+}

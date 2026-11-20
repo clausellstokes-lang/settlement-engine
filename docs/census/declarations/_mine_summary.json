@@ -1,0 +1,98 @@
+{
+ "tables": 12,
+ "rows": 397,
+ "rowsDeclaring": 68,
+ "colourTables": [
+  "traditions.TRADITION_ACTS",
+  "traditions.TRADITION_NAMING",
+  "traditions.TRADITION_PROSE",
+  "hooks.ECHO_PREFIXES"
+ ],
+ "crisisScoped": [],
+ "perTable": [
+  {
+   "id": "traditions.TRADITION_ELEMENTS",
+   "rows": 16,
+   "declaring": 3,
+   "colour": false,
+   "crisisScoped": false
+  },
+  {
+   "id": "traditions.TRADITION_ACTS",
+   "rows": 6,
+   "declaring": 0,
+   "colour": true,
+   "crisisScoped": false
+  },
+  {
+   "id": "traditions.TRADITION_TRAPPINGS",
+   "rows": 24,
+   "declaring": 8,
+   "colour": false,
+   "crisisScoped": false
+  },
+  {
+   "id": "traditions.TRADITION_EPITHETS",
+   "rows": 6,
+   "declaring": 2,
+   "colour": false,
+   "crisisScoped": false
+  },
+  {
+   "id": "traditions.TRADITION_NAMING",
+   "rows": 71,
+   "declaring": 0,
+   "colour": true,
+   "crisisScoped": false
+  },
+  {
+   "id": "traditions.TRADITION_PROSE",
+   "rows": 43,
+   "declaring": 3,
+   "colour": true,
+   "crisisScoped": false
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS",
+   "rows": 42,
+   "declaring": 1,
+   "colour": false,
+   "crisisScoped": false
+  },
+  {
+   "id": "hooks.ECHO_PREFIXES",
+   "rows": 5,
+   "declaring": 0,
+   "colour": true,
+   "crisisScoped": false
+  },
+  {
+   "id": "hooks.OUTLOOK_foodBalance",
+   "rows": 9,
+   "declaring": 7,
+   "colour": false,
+   "crisisScoped": false
+  },
+  {
+   "id": "hooks.SAFETY_safetyProfile",
+   "rows": 8,
+   "declaring": 6,
+   "colour": false,
+   "crisisScoped": false
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS",
+   "rows": 87,
+   "declaring": 24,
+   "colour": false,
+   "crisisScoped": false
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY",
+   "rows": 80,
+   "declaring": 14,
+   "colour": false,
+   "crisisScoped": false
+  }
+ ]
+}

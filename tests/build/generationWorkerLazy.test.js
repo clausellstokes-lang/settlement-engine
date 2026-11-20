@@ -351,7 +351,172 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //   18fd6b442 +42 (each a merge of several commits; the bytes are attributed to the step, not inside it) · lanes B, C, G3, F2-4, A, E 0.
 //   The sum closes exactly: 1,573,556 + 492 + 790 = 1,574,838, the tip's generation.worker-MaAIxfqL.js.
 // The ceiling is recorded AT the measured figure. MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1574838;
+// 1,574,838 -> 1,576,641 (2026-11-07, WIRING-W0-CLOSE, "the chair's ruling: trim then re-record at the measured figure"):
+// A RISE OF 1,803 B, VETOABLE BY THE OWNER. TRIMMED FIRST (no output byte moved), then MEASURED by a fresh `vite build` of a
+// git archive at every src-moving first-parent step of lane/wiring-w0-2026-11-07 from its base 76febf9b0 (1,574,838, this
+// ceiling exactly), the worker bytes being the file's size:
+//   343bd4eec (the migration direction declared once) +1,944 · adae99a10 0 · c99531cf9 (one import share) +135 ·
+//   3d1df12d7 (one food-source count) -223 · b893dcda1 (annotations dated) +139 · 02b8da4b3 0 · b79dfa98b (the asOf field
+//   withdrawn) -29 · f26949e69 0 · 848dd7dc1 (the projection re-spelled for the observed-shape gate 0) +17 ·
+//   THE TRIMS: eb4c508e1 (viability halves cut from one note, `directionOf`, the spine) -156 · 97209d8fc (the viability
+//   note's one fallback) -24. The sum closes exactly: 1,574,838 + 1,803 = 1,576,641. Recorded AT the measured figure.
+// MONOTONE-DOWN from here.
+// 1,574,838 -> 1,690,414 (2026-11-07, THE RUNG-2 LANDING, LANDING-R2 under the chair's ruling of 10:1x UTC, ODQ §934.105:
+// "RE-RECORD the generation-worker ceiling at the measured 1,690,414 with your attribution in minified figures"): A RISE OF
+// 115,576 B, VETOABLE BY THE OWNER. MEASURED by a fresh `vite build` of a git archive of each tree, the worker bytes being the
+// file's size: rung 1's final tree 1bff51c6d 1,574,838 (this ceiling, reproduced); the pool census's base f28689600 1,578,876;
+// the rung-2 line's tip before rung 1 f5dc50c6b 1,688,885; this landing's tip 1,690,414. So:
+//   THE RUNG-2 LINE (the census lanes 1b-5, the reader lanes, the compose, phases A-E) +110,009 — by module, minified estimates
+//   (Rollup's rendered lengths scaled ~0.30, so they do not close to the byte): the fact homes src/domain/facts/* ~30.7 KB
+//   (factVocabulary, drawDeclared, crisisKind, factsOf the largest) · the faction-rename cascade ~20.7 KB (factionRename.js
+//   ~17.1 + userEdits ~2.7 + userEditLines ~0.9, pulled in by generators/power/factionLabelClose.js, census-1i R-AW ba7887862 —
+//   tree-shaken already to applyFactionRenameToSettlement and what it reaches; a NAMED BUY-BACK of ~20 KB, the relabel at birth
+//   without the cascade, a census design change left for the register consolidation after the deploy) · the generators
+//   ~24 KB · the data tables ~21 KB (npcData, institutionDescVariants, powerSiblings) · domain/display ~7 KB · roles/roleClass ~4 KB;
+//   THE MERGE WITH RUNG 1 AND THIS LANDING'S CURES +5,567 (the two lineages' interaction, the module splits, the chunk cure).
+//   The sum closes exactly on the measured figures: 1,574,838 + 110,009 + 5,567 = 1,690,414.
+// 1,690,414 -> 1,695,569 (2026-11-07, MERGE-R2, the integration merge of the rung-2 landing; the chair's standing ruling
+// "trim where no output byte moves, then re-record at the measured figure", under the owner's delegation of 2026-11-06):
+// A RISE OF 5,155 B, VETOABLE BY THE OWNER. No trim that moves no output byte was found in this seat. MEASURED by a fresh
+// `vite build` of a git archive of each tree, the worker bytes being the file's size. The merge 10b8f09b4 has two parents:
+//   FIRST PARENT a8daff92c (the integration branch) 1,579,636: from the shared base 76febf9b0 (1,574,838) its W0 lane
+//     +1,803 (recorded above) and the review-intake / engine-merge lines after W0-CLOSE +2,995 = +4,798 (its own ceiling
+//     1,576,641 was deferred, docs/chair/2026-11-07/BUILD-CHECK-2026-11-07.md §2);
+//   SECOND PARENT fc4cb0b9f (the rung-2 landing) 1,690,414, reproduced to the byte (+115,576, attributed above);
+//   THE MERGE ITSELF (both lines composed: the migration direction, the held refusal inside drawDeclared, the water and
+//     market detectors) +357 of interaction. Every commit after the merge moves no src byte.
+//   The sum closes exactly: 1,574,838 + 4,798 + 115,576 + 357 = 1,695,569. Recorded AT the measured figure; monotone-down.
+// 1,574,838 -> 1,603,564 (2026-11-07, THE PEOPLE CAR'S LANDING, PEOPLE-LAND second seat under the chair's brief step 5,
+// "re-recorded at the measured figures with every byte attributed by first-parent step"; ODQ §934.105, VETOABLE BY THE
+// OWNER): A RISE OF 28,726 B. MEASURED by a fresh `vite build` at every first-parent point of the car's stack, each with
+// the landing's two build cures applied (6c8369071, the backing relation's leaf; f7bb28ef6, powerSupport pinned to
+// coherence-lazy -- without them lane 1 also drags the goods chains and the prose corpus into the worker and first paint),
+// the worker bytes being the file's size:
+//   the integration base 262e8b255: 1,579,660 (+4,822 over the ceiling before the car: the integration merges of
+//   2026-11-07, the review-intake lane and W0 among them; not split further here) ·
+//   lane 1 PEOPLE-1 CAST dc655f712 +17,607 (the cast: castPowers, representatives, the mints) · lane 2 3aa160a70 +420 ·
+//   lane 3 0f930ce95 +3,214 (one hook per card) · lane 4 c7d552370 +327 · 5A 053283dfd -568 · 5B a725df7e4 +4,645
+//   (the v1 -> v2 save migration) · the landing's step 1 2981f23f6 -1,738 (the shim and the grouping out) · L0, the links
+//   lane 147fa6c3f 0 · the landing's cures and records to the tip -3 (6851c4c89, an em dash). The sum closes exactly:
+//   1,574,838 + 4,822 + 17,607 + 420 + 3,214 + 327 - 568 + 4,645 - 1,738 - 3 = 1,603,564, the tip's worker bundle.
+// The ceiling is recorded AT the measured figure. MONOTONE-DOWN from here.
+// 1,603,564 (the car's) / 1,695,569 (MERGE-R2's) -> 1,735,881 (2026-11-08, MERGE-CAR, the integration landing; the chair's standing ruling "trim where no output byte moves,
+// then re-record at the measured figure", under the owner's delegation of 2026-11-06; VETOABLE BY THE OWNER). No trim
+// that moves no output byte was attempted in this seat. MEASURED by a fresh `vite build` of a git archive of each tree,
+// the five figures read exactly as this file's arms read them (the tip at the merged checkout):
+//   the shared base 262e8b255 1,579,660 · the integration parent 7b3ffb6ee 1,695,569 (+115,909: the rung-2 landing, W0, the
+//   review intake — MERGE-R2's attribution above) · the car 373a2947b 1,603,564 (+23,904: PEOPLE-LAND's attribution above) ·
+//   the merge 8dff691f3 1,735,669 (+16,196 of interaction: the two lines composed — the census's declared draws inside the
+//   car's hook and tie writers, the ported R3 rule, the reader's membership port) · 4c39885fc 0 · the composition cure
+//   b19740ab3 + the display fix 9fd906c23 +212. The sum closes exactly: 1,579,660 + 115,909 + 23,904 + 16,196 + 212 =
+//   1,735,881, the tip's worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 1,735,881 -> 1,746,551 (2026-11-09, MERGE-WAVE step 4, the ten lanes merged; the chair's standing ruling "trim where no
+// output byte moves, then re-record at the measured figure", under the owner's delegation of 2026-11-06; VETOABLE BY THE
+// OWNER): A RISE OF 10,670 B. No trim that moves no output byte was attempted in this seat. MEASURED by a fresh
+// `npm run build` of a git archive of every first-parent point that touches a build input, read by this file's own arm;
+// the checkout at the final tip reads the same 1,746,551:
+//   the wave's base 7b86cd07a 1,735,881 (equal to the ceiling) · W1 ECO ea0e269a9 +50 · W2 DEF 82a4e2856 -1,495 ·
+//   W3 POW 1a160d599 -2,376 · W4 PEOPLE 66c23bfea -3,500 · W5 HIS e510409b1 -860 · W1-A0b 9c2724ecb 0 ·
+//   W7 HOOKS 501c97412 +13,069 (the hook pools, the receipt, npcData and the title pools) · FIX-FOOD-ISOLATION c6e8a4ad6
+//   +1,151 · EXPORT-KEYS c6c733d23 0 · FIX-PUBLIC-VEIL 7e65c7bec +4,626 (the veil bit stamped at birth, the veiled re-deal)
+//   · 140b8f333, GREEN-BASE ee663bd9f, 59d723a37, FIX-ARROW-SECTIONS 2c76c6177, 5c14aac4a, 642f1796c 0 each ·
+//   the docks read bcf3e7f8a +5. The sum closes exactly: 1,735,881 + 50 - 1,495 - 2,376 - 3,500 - 860 + 13,069 + 1,151
+//   + 4,626 + 5 = 1,746,551, the tip's worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 1,746,551 -> 1,976,655 (2026-11-09, MERGE-TRAIN, the allegiance train's nine merge points; the W0-CLOSE idiom, the chair's
+// ruling of 2026-11-08 20:4x and of 2026-11-09 09:2x — the ceiling re-recorded ONCE at the final tip at the measured figure,
+// every byte attributed by car, NO buy-back and NO lazy seam (car 4 measured its two tables as synchronous reads); VETOABLE BY
+// THE OWNER): A RISE OF 230,104 B. MEASURED by a fresh `npm run build` of a git archive of every merge point's tip, read by
+// this file's own arm; the train's base 2053a809c reads 1,746,551 (the ceiling, exactly):
+//   ALLEGIANCE-CAR1 e5f88930b +21,787 (the tie lines +12,830, allegiance.js +6,390, the v3 migration +1,939, the catalog +903,
+//   the renames +490, archetypes +338, corruptionPass retired -1,835 — car 1's record §8) · CAR2 f51058995 +7,124 (hallCapture.js,
+//   the guild's push, the capture rows) · CAR3 c6ded8e3a +74 · WRITE-TITLES-14 0 · OWNER-WORDS-DOSSIER -4 · FIX-HOOK-OBJECT +40 ·
+//   FIX-BUY-BUTTON 0 · FIX-ARROW-PLAQUE 0 · CAR4 824a8ce2f +201,083 — THE OWNER'S CONTENT: the two writers' tables
+//   (src/data/people/goalFamilies.js, WRITE-GOALS 82796628e, and src/data/people/titleSecretsPresentations.js, WRITE-PEOPLE-3
+//   5ee39a56c; ~60 KB of the car's gzip rise) and people/goals.js's dealer · the boundary cure, the landing fixture, the floor
+//   and type fixes 0. The sum closes exactly: 1,746,551 + 21,787 + 7,124 + 74 - 4 + 40 + 201,083 = 1,976,655, the final tip's
+//   worker bundle. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 1,976,655 -> 2,008,268 (2026-11-11, STYLE-2-MERGE-7, THE STYLE WAVE'S CLOSING ACT 7; the W0-CLOSE idiom, the chair's ruling (B3) —
+// the ceiling re-recorded ONCE at the final tip at the measured figure, every byte attributed by merge point, NO buy-back;
+// VETOABLE BY THE OWNER): A RISE OF 31,613 B. MEASURED by a fresh production build of every first-parent merge point's tree; the
+// base bd07005b9 reads 1,976,655 (the ceiling, exactly). By point (every point not named: 0):
+//   SW-1 CAUSE-CONJUNCTION (2) -1 · SW-2 INSTITUTIONS (3) -321 · SW-3 REALM-PROSE (4) +12 · SW-4 HOOKS-CONNECTIVE (5)
+//            +11 · SW-5 CRISIS-VANTAGES (6) +36 · SW-B2 FIRST-IMPRESSIONS (7) +557 · SW-B5 FRAMES (9) +2,298 · SW-B6
+//            ECO-DEF-BLOCKS (10) +760 · SW-9 ODD-ROWS (15) +23 · SW-7 POWER-SIDE (16) +4,823 · SW-B1 CONTRADICTIONS
+//            (17) +826 · SW-10 HOOKS (19) +25,794 · FIX-SECTION-REGEN (21) +127 · SW-6 CRISIS-SURFACES (22) -5,697 ·
+//            SW-8 RENAME-POWERS (24) +32 · URBAN-FIX (25) +1,440 · SW-9b-B (27) +306 · GREEN-TIP (36) +69 · GEN-SPEED
+//            (39) +518
+//   The sum closes exactly at the final tip's worker bundle. The largest: SW-10 HOOKS +25,794 (the hook pools), SW-7 POWER-SIDE
+//   +4,823, SW-B5 FRAMES +2,298, URBAN-FIX +1,440; SW-6 CRISIS-SURFACES -5,697. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 2,008,268 -> 2,303,278 (2026-11-15, TAIL-CLOSE-WORKER-1, THE CLOSE OF THE TAIL ROUND; the W0-CLOSE idiom, the chair's ruling WB1
+// under the owner's delegation, ODQ §934.105 — the ceiling re-recorded ONCE at the close's tree at the measured figure, the bytes
+// attributed BY MERGE STAGE (not by every point), NO buy-back tonight (a later tidy may buy bytes back); VETOABLE BY THE OWNER):
+// A RISE OF 295,010 B. MEASURED by a fresh `npm run build` of each stage's tree in a scratch worktree, read by this file's own arm;
+// the base 7dc7757fa (the last re-record) reads 2,008,268 (the ceiling, exactly). By stage (the first-parent commit closing each
+// merge seat of lane/join-2026-11-14):
+//   STYLE-2-MERGE points 42-49 976db5b19 +70,863 (COHERENCE-QUARREL/-PRESUME/-POWERS/-AGREE, VISIBLE-BUGS, POOL-GUARD,
+//   W2-A-LEAVES, W2-B-DECLARE, the instrument lane) · JOIN-1 216eeb41f +135,871 (r2-code-a/-b, r3-code-c, r3-tabs, w2-write,
+//   w2-c-leaves, w2-fix-data, powers-follow-up, coherence-upkeep, agree-follow-up) · JOIN-2 7d12b40cb -11 · JOIN-3 b6a5f97ab 0 ·
+//   JOIN-4 e5b421802 +11,682 · JOIN-5 48fedbe98 +4,209 · JOIN-6 eb054d53f +17,402 (the tail wave's first points) · JOIN-7
+//   72c37436d +52,053 · JOIN-8 1b5db4a77 +20,957 · JOIN-9 ae50369d4 -16,679 · JOIN-10 dc4bae117 +30 · JOIN-11 ffdd541a0 -2,210 ·
+//   JOIN-12 f8042b61a +641 · the doors' close 73090ee9e +202 (the repeated secret's cure). The sum closes exactly: 2,008,268
+//   + 70,863 + 135,871 - 11 + 0 + 11,682 + 4,209 + 17,402 + 52,053 + 20,957 - 16,679 + 30 - 2,210 + 641 + 202 = 2,303,278, the
+//   close's worker bundle. The largest stages' candidates BY THE DIFF'S SOURCE SIZE, NOT BY A BUILD: JOIN-1 (institutionDescVariants,
+//   tradeListDisplay, dossierStateProse defense/general, historyData); STYLE-2-MERGE 42-49 (facts/registeredWords, pageCensusFindings,
+//   power/conflictIssues, generationCoherence, facts/factLayers); JOIN-7 (historyData, computeActiveChains, crisisStoppedRow,
+//   crisisDependence, defenseDisplay). The table: docs/chair/2026-11-15/close/TAIL-CLOSE-WORKER-1-HANDBACK.md. Recorded AT the
+//   measured figure; MONOTONE-DOWN from here.
+// 2,303,278 -> 2,312,179 (2026-11-15, BAR2-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR2; the chair's ruling B3 under the owner's
+// word of 2026-11-15 07:50 UTC, which deferred the size budgets to the chair, and the chair's decision A; VETOABLE BY THE OWNER):
+// A RISE OF 8,901 B. MEASURED by one fresh `npm run build` of each tree in a scratch clone, read by this file's own arm: the
+// line's closed tip 74ded1800 reads 2,303,278 (the ceiling, exactly); the round's joined tree (59185b62a + the sweep-a repair
+// 87bbb6c87) reads 2,312,179. The cause: the src/ cures of the round's five branches AS A WHOLE (lane/bar2-corpus, -services,
+// -places, -people, -labels: 39 first-parent commits 74ded1800..59185b62a); the worker carries the whole engine, so the shared-
+// domain excisions (labels' vite.config.js line: display/magicProvisionShown.js, facts/magicSource.js; sweep-a: facts/ironAtHand.js)
+// move no byte of it (customContentPreview.worker moves by the same +8,901). The app build's largest chunk moves over the same
+// span, for orientation: engine +5,463, data-lazy +3,803, crisisStoppedRow +1,688 (services SV6), engine-core +1,314. Recorded
+// AT the measured figure; MONOTONE-DOWN from here.
+// 2,312,179 -> 2,322,103 (2026-11-15, BAR3-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR3 (the joined line 98363cb84 + the sweep-a repair through 03abf16cd, merged 1ac74a4c0; the edge bundles re-derived 9d7c7fbc5 and holding after the last merge); the chair's
+// ruling B3 under the owner's word of 2026-11-15 07:50 UTC, which deferred the size budgets to the chair; VETOABLE BY THE OWNER):
+// A RISE OF 9,924 B. MEASURED by one fresh `npm run build` of each tree in a scratch clone, read by this file's own arm
+// (VERIFY_DIST=1): the line's closed tip 83fc14ad6 reads 2,312,179 (the ceiling, exactly); this tree reads 2,322,103. The cause:
+// the src/ cures of the round's seven branches AS A WHOLE (lane/bar3-corpus, -services, -places, -labels, -defecon, -people,
+// -powers: 8 first-parent commits 83fc14ad6..98363cb84) and the sweep seat's display leaf; the sweep seat's chunking cure
+// (vite.config.js: facts/sharedPower.js stays in engine-core) moves no byte of the worker (measured 2,322,103 before it and
+// after). customContentPreview.worker moves by the same +9,924. The app build over the same span, for orientation: engine
+// +5,447, engine-core +520 (of it +509 the chunking cure), data +120. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 2,322,103 -> 2,356,121 (2026-11-16, BAR4-CLOSE-DOORS-1, THE CLOSE OF THE ROUND BAR4: the joined line 2d80aa740 + THE ONE MERGE of
+// 600b7683a (the repair seat BAR4-CLOSE-SWEEP and the first-paint seat BAR4-FIRSTPAINT), merged abf643259, the edge bundles re-derived
+// e8852a5b5; re-recorded ONCE under the chair's ruling B3, the owner's word of 2026-11-15 07:50 UTC deferring the size budgets to the
+// chair; VETOABLE BY THE OWNER): A RISE OF 34,018 B. MEASURED by one fresh `npm run build` of each tree in a scratch clone, read by this
+// file's own arm (VERIFY_DIST=1): the line's closed tip c4ac1ef84a reads 2,322,080 (23 under the old ceiling); this tree reads
+// 2,356,121. The cause: the src/ cures of the round's nine branches AS A WHOLE (the worker carries the whole engine); the largest by
+// their hand-backs' own measures: BAR4-SCENES-2 +13,714 at its tip over the joined f19c3b28b (2,342,187 -> 2,355,901: HW1's one fact for
+// "this house is short", `trade at work` and the namesake's one home), BAR4-HOUSES +4,657 (the atom, the reader, the late sets, the leaf),
+// BAR4-PEOPLE +3,898 (the pair readings); then BAR4-RECORD +3,229, BAR4-SAFETY +2,746, BAR4-HISTORY +2,669, BAR4-CORPUS-ECO +1,724,
+// BAR4-CORPUS-DEF +1,023, each on its own base; BAR4-FIRSTPAINT's seam moves no byte of the worker and the repair seat's last cures
+// +220. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 2,356,121 -> 2,525,028 (2026-11-18, CLOSE-DOORS-1B, THE CLOSE OF 2026-11-18: the working line 70e557d5b + the close's three merges,
+// merged 7a7204c00, the edge bundles re-derived 22e072a49; re-recorded ONCE under the chair's ruling CL12, ON THE OWNER'S WORD: on
+// 2026-11-18 at 03:42:43 UTC the owner wrote in the chair's chat, the whole of it, "I defer these to you:" then, after an empty line,
+// "the Vercel limit; "accept the worker size")", answering the chair's question of 03:24 UTC, and THE CHAIR ACCEPTED IT; it stays on
+// the owner's veto list by name): A RISE OF 168,907 B, OVER THE 60,000 STOP, accepted. MEASURED by one fresh `npm run build` of each
+// tree, read by this file's own arm (VERIFY_DIST=1): the last close's tip 6483322cc and the line before the rounds 600b7683a read
+// 2,356,121; this tree reads 2,525,028 (70e557d5b the same: the close's merges move no byte of the worker). THE CAUSE, MEASURED BY
+// ROUND (one build of each boundary of the line's first parent): the round BAR5 (JOIN-16 points 1 to 9, to db62ab299) +54,698;
+// SECRETS-1 and DEBT-1 (JOIN-17 points 30 to 32, 47666fd8f -> 580cc26c6) +50,887 (the rare secrets' tables); the round BAR6
+// (points 1 to 11, to 570e3c351) +25,413; then BIRTH-3 (point 33) +14,690, the sixth chair's points 36 to 53 +12,678, BAR7 (20 to
+// 29) +7,995, the seam (12 to 19) +2,546. Recorded AT the measured figure; MONOTONE-DOWN from here.
+// 2,525,028 -> 2,579,708 (2026-11-19, LASTCLOSE-SIGN, THE LAST CLOSE BEFORE THE DEPLOY: the landings' tip cc11c9504 (points 54 to
+// 70) + LASTCLOSE-DOORS (point 71, 8ecd28085), the edge bundles re-derived 319d75ac1; re-recorded ONCE as the brief lets the seat
+// (a rise under 60,000 B in one ceiling; the chair's message of 2026-11-19 names the figure); VETOABLE BY THE OWNER): A RISE OF
+// 54,680 B. MEASURED by one fresh `npm run build` of each tree, read by this file's own arm (VERIFY_DIST=1; at each step a scratch
+// copy of this file with the ceiling at 0, removed): the first close's tip 0dee69e17 reads 2,525,028; this tree 2,579,708. THE
+// CAUSE, BY LANDING STEP (one build at each first-parent landing commit over 0dee69e17): FAULTS-WATCH (point 66) +26,098; FAULTS-NEED
+// (61) +4,751; FAULTS-ROWS (65) +4,722; K-WATCH, K-POWERS, K-WATCH-2 (48, 49, 57) +4,333; LAST-DECLARE (69) +3,694; the desks
+// (51, 52, 59) +3,102; K-PEOPLE, PEOPLE-2 (50, 58) +2,997; FAULTS-PEOPLE (62) +1,705; FAULTS-BIRTH (63) +1,539; MARKS-2 (56) +891;
+// LAST-VARIETY (70) +561; FAULTS-BIRTH's follow-ups (68) +400; FAULTS-DESKS (64) +141; FR25 (67) +74; J-INCOME-2 (54) -328;
+// PDF-2b (55), FAULTS-TOOLS (60) and point 71 +0. Recorded AT the measured figure; MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 2579708;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
@@ -474,10 +639,17 @@ describe('generation worker — source boundary', () => {
   });
 
   it('the client constructs the worker from its URL and never statically imports the core (the wire-lean law)', () => {
+    // ENGINE-3 unit 1 (the protection step): the worker's `new Worker(new URL(...))` moved
+    // into the local engine's one seam, the module a VITE_ENGINE_REMOTE build leaves out,
+    // because Vite emits a worker bundle for that pattern at transform time. The client
+    // reaches it through the seam's `createGenerationWorker`, still synchronously.
     const client = source('src/lib/generationClient.js');
-    expect(client).toMatch(/new Worker\(new URL\(['"]\.\.\/workers\/generation\.worker\.js['"], import\.meta\.url\)/);
-    expect(staticImports(client)).toEqual(['./generationProtocol.js']);
-    // anchored: staticImports(client) is asserted to be exactly one entry on the line above, so this file's import list is proven non-empty and readable before the absence below is read.
+    const seam = source('src/lib/localEngine.js');
+    expect(seam).toMatch(/new Worker\(new URL\(['"]\.\.\/workers\/generation\.worker\.js['"], import\.meta\.url\), \{ type: 'module' \}\)/);
+    expect(client).toMatch(/return createGenerationWorker\(\);/);
+    expect(staticImports(client)).toEqual(['./generationProtocol.js', './localEngine.js']);
+    expect(staticImports(seam)).toEqual([]);
+    // anchored: staticImports(client) is asserted to be exactly two entries above, so this file's import list is proven non-empty and readable before the absence below is read.
     expect(client).not.toMatch(/generationRequest/);
   });
 
@@ -633,12 +805,13 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
   });
 
   it('the client builds this worker with { type: \'module\' }, which is what lets the declared lazy edge run', () => {
-    const client = source('src/lib/generationClient.js');
+    // ENGINE-3 unit 1: the construction lives in the local engine's seam, which the client calls.
+    const client = source('src/lib/localEngine.js');
     // Anchored both ways: the pattern must match the shipped construction, and
     // must NOT match a classic worker, or "module" would be true of every string.
     expect(
       MODULE_WORKER_CONSTRUCTION.test(client),
-      'generationClient.js no longer constructs generation.worker.js with { type: \'module\' }. '
+      'localEngine.js no longer constructs generation.worker.js with { type: \'module\' }. '
       + 'A classic worker cannot execute the import( the bundle now carries, so every generation '
       + 'would die on the seam load rather than on anything the user did.',
     ).toBe(true);
@@ -669,7 +842,7 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
     expect(
       bytes,
       `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is `
-      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling, 2026-11-04, ODQ §934.104). `
+      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling B3, 2026-11-15, the close of the round BAR3, as at the close of BAR2; before it WB1, ODQ §934.105). `
       + 'A RISE IS NEVER A LANE\'S EDIT: buy the bytes back, or take the ruling.',
     ).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
   });

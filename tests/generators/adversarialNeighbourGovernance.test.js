@@ -4,7 +4,7 @@
  * generatePower's gate now checks the REAL relationship vocabulary
  * (hostile/rival/cold_war via isAdversarialRelationship) instead of the dead
  * 'hostile_rival'/'tense' Set, so an adversarial neighbour finally militarizes
- * governance narrative — the "Ongoing tensions with {neighbour}" recentConflict.
+ * governance narrative — the "Relations with {neighbour} have soured" recentConflict.
  * A neutral neighbour must NOT surface that line (tradeRouteArg stays null).
  */
 
@@ -23,7 +23,7 @@ function tensionHits(relType) {
   let hits = 0;
   for (let i = 0; i < 12; i++) {
     const rc = gen(relType, `p3-${i}`).powerStructure?.recentConflict;
-    if (rc && rc.includes('Ongoing tensions with Grimhold')) hits++;
+    if (rc && rc.includes('Relations with Grimhold have soured')) hits++;
   }
   return hits;
 }

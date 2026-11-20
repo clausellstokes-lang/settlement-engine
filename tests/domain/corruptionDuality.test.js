@@ -15,12 +15,12 @@
 
 import { describe, expect, test } from 'vitest';
 import {
-  compromisedSecurityInstitutions,
-  patronageSecurityDrag,
   PATRONAGE_TUNING,
   onsetHazard,
   exposureChance,
 } from '../../src/domain/corruption.js';
+// ALLEGIANCE-CAR3 (2026-11-08): the bought watch's two readers moved to the lazy leaf beside the allegiance reader
+import { compromisedSecurityInstitutions, patronageSecurityDrag } from '../../src/domain/corruptionLeash.js';
 import { advanceNpcCorruption } from '../../src/domain/worldPulse/npcAgency.js';
 import { applyCorruptionImpairments } from '../../src/domain/worldPulse/corruptionImpair.js';
 
@@ -37,11 +37,25 @@ function settlementWith({ npcs = [], institutions = [], safetyRatio = 2.5, prosp
 const WATCH = { id: 'inst.watch', name: 'City Watch' };
 const GUILD = { id: 'inst.guild', name: "Thieves' Guild", category: 'criminal' };
 
+/**
+ * THE BOUGHT WATCH ON THE LOCAL AXIS (ALLEGIANCE-CAR3, 2026-11-08; the chair's late row 1, the ES design's §3.3
+ * bracket): the stooge is the FACE of a security house holding a local hidden allegiance, read through allegianceOf
+ * and its own `institution.key`. These pins were written for the retired shape (`corrupt: true` homed by
+ * `institutionId`), which no card has carried since the people car; they are RE-KEYED BY IDENTITY — the same claims,
+ * the record's shape — and the retired shape is pinned as no longer read.
+ * @param {string} name @param {string} house @param {Record<string, unknown>} [extra]
+ */
+const agentFace = (name, house, extra = {}) => ({
+  name, institution: { kind: 'house', key: house },
+  allegiance: { power: null, house: "Thieves' Guild", vector: 'greed', via: 'office', handler: null, share: 0.15, veiled: true, covert: true },
+  ...extra,
+});
+
 describe('compromisedSecurityInstitutions()', () => {
-  test('an unexposed corrupt NPC homed in the watch makes it covert-compromised', () => {
+  test('an unexposed agent FACE of the watch (a local hidden allegiance) makes it covert-compromised', () => {
     const s = settlementWith({
       institutions: [WATCH, GUILD],
-      npcs: [{ name: 'Captain Vex', corrupt: true, institutionId: 'City Watch' }],
+      npcs: [agentFace('Captain Vex', 'City Watch')],
     });
     const { covert, revealed } = compromisedSecurityInstitutions(s);
     expect(covert).toContain('City Watch');
@@ -86,22 +100,40 @@ describe('compromisedSecurityInstitutions()', () => {
     expect(covert).toHaveLength(0);
   });
 
-  test('an ousted NPC no longer compromises anything covertly', () => {
+  test('an ousted agent no longer compromises anything covertly', () => {
     const s = settlementWith({
       institutions: [WATCH],
-      npcs: [{ name: 'Captain Vex', corrupt: false, ousted: true, institutionId: 'City Watch' }],
+      npcs: [agentFace('Captain Vex', 'City Watch', { corrupt: false, ousted: true })],
     });
+    expect(compromisedSecurityInstitutions(s).covert).toHaveLength(0);
+  });
+
+  test('an EXPOSED agent (the simulation\'s own write-back `corrupt: false`) no longer compromises the watch', () => {
+    const s = settlementWith({ institutions: [WATCH, GUILD], npcs: [agentFace('Captain Vex', 'City Watch', { corrupt: false })] });
+    expect(compromisedSecurityInstitutions(s).covert).toHaveLength(0);
+  });
+
+  test('never the foreign leash: a watch face leashed to another court, with no local house, buys nothing here', () => {
+    const leashed = { name: 'Captain Vex', institution: { kind: 'house', key: 'City Watch' },
+      allegiance: { vector: 'forbidden_patron', leash: { kind: 'foreign_settlement', settlementId: 'rival' }, veiled: true, covert: true } };
+    const s = settlementWith({ institutions: [WATCH, GUILD], npcs: [leashed] });
+    expect(compromisedSecurityInstitutions(s).covert).toHaveLength(0);
+  });
+
+  test('the retired shape is no longer read: `corrupt: true` homed by `institutionId` compromises nothing', () => {
+    const s = settlementWith({ institutions: [WATCH, GUILD], npcs: [{ name: 'Captain Vex', corrupt: true, institutionId: 'City Watch' }] });
+    expect(compromisedSecurityInstitutions(s).covert).toHaveLength(0);
+  });
+
+  test('an agent who is not the watch\'s face (a craft house) buys no watch', () => {
+    const s = settlementWith({ institutions: [WATCH, GUILD, { id: 'i4', name: 'Tanner' }], npcs: [agentFace('Ilsa', 'Tanner')] });
     expect(compromisedSecurityInstitutions(s).covert).toHaveLength(0);
   });
 
   test('drag is capped at maxDrag', () => {
     const s = settlementWith({
       institutions: [WATCH, { id: 'i2', name: 'Garrison' }, { id: 'i3', name: 'Magistrate Court' }],
-      npcs: [
-        { name: 'A', corrupt: true, institutionId: 'City Watch' },
-        { name: 'B', corrupt: true, institutionId: 'Garrison' },
-        { name: 'C', corrupt: true, institutionId: 'Magistrate Court' },
-      ],
+      npcs: [agentFace('A', 'City Watch'), agentFace('B', 'Garrison'), agentFace('C', 'Magistrate Court')],
     });
     expect(patronageSecurityDrag(s).drag).toBe(PATRONAGE_TUNING.maxDrag);
   });
@@ -143,7 +175,7 @@ describe('duality through advanceNpcCorruption()', () => {
     // High security (ratio 2.5 -> 1.0) almost floors onset; the compromised
     // watch drags onset security to 0.85, lifting the hazard above the roll.
     const npcRecruit = { name: 'Aldous', flaw: 'greedy' };
-    const stooge = { name: 'Captain Vex', corrupt: true, institutionId: 'City Watch' };
+    const stooge = agentFace('Captain Vex', 'City Watch');
     const roll = (onsetHazard({ crime: 0.6, security: 1.0, prosperity: 0.4, priorExposures: 0 })
       + onsetHazard({ crime: 0.6, security: 0.85, prosperity: 0.4, priorExposures: 0 })) / 2;
 
@@ -198,7 +230,7 @@ describe('duality through advanceNpcCorruption()', () => {
   test('exposure reads RAW security: a strong dragged-down watch still catches its corrupt captain', () => {
     // Guild strength 0.9 would have dragged effective security to 0.55 under
     // the old wiring (exposure ~0.03); raw security 1.0 puts it ~0.12.
-    const stooge = { name: 'Captain Vex', corrupt: true, institutionId: 'City Watch' };
+    const stooge = agentFace('Captain Vex', 'City Watch');
     const s = settlementWith({ institutions: [WATCH, GUILD], npcs: [stooge] });
     const result = advanceNpcCorruption(
       { npcStates: { 'a:captain_vex': corruptState('a:captain_vex', 'Captain Vex') } },

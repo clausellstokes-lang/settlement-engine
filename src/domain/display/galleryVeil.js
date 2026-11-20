@@ -35,9 +35,11 @@
  * through facetOf), or which the catalog marks an illegal brokerage. For that class only,
  * `card:institution:<id>` is admitted (`isHideable(address, settlement)` checks the data;
  * `applyVeil` re-checks it), and it is hidden BY DEFAULT. Hiding it removes the card, its
- * service rows in every category, and every NPC's membership reference to it
- * (`institution`, `secondaryAffiliation`, `factionAffiliation`, `linkedInstitutionIds`
- * naming it): the floor yields for those references and nowhere else. A card delta on any
+ * service rows in every category, and every NPC's reference to it (the card's house,
+ * `institution` — the people car's `{ kind: 'house', key }` or a legacy string — and
+ * `linkedInstitutionIds` naming it; PEOPLE-5A: the two affiliation fields name powers, never a
+ * house, since corruptionPass stopped writing a criminal house into `secondaryAffiliation`):
+ * the floor yields for those references and nowhere else. A card delta on any
  * other house (and on every other kind) still reads as its depth, never the card.
  *
  * ── THE VEIL ONLY REMOVES (X-21 (d)) ────────────────────────────────────────────────
@@ -63,10 +65,11 @@
 import { galleryMemberKey, toPublicSafe } from './publicSafe.js';
 import { deriveDefenseVulnerabilities } from './defenseDisplay.js';
 import { entityIdFor, eventIdFor, slugifyEntity } from '../dossier/entityLinks.js';
-import { facetOf } from '../spatial/cohesionWeave.js';
 import { deepClone } from '../clone.js';
 import { factionIdFromName } from '../../lib/entities.js';
+import { cardHouseOf } from '../people/cardPowers.js';
 import { brokerageLegalityOf } from '../../data/informationBrokerageTuning.js';
+import { isCriminalInstitution, isClandestineInstitution, isHideableHouse } from '../people/cardVeil.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {{ address: string, hidden: boolean }} VeilDelta */
@@ -111,6 +114,11 @@ function str(v) {
   return typeof v === 'string' ? v : '';
 }
 
+/** The card's house: the people car's `institution: { kind: 'house', key }`, else a legacy string. */
+function npcHouseOf(/** @type {Record<string, unknown>} */ npc) {
+  return cardHouseOf(npc) || str(npc.institution);
+}
+
 /**
  * Read a dotted path to an array of records.
  * @param {Rec} root @param {ReadonlyArray<string>} path @returns {Rec[]}
@@ -147,18 +155,22 @@ export const CARD_KINDS = Object.freeze({
     lists: [['npcs'], ['powerStructure', 'factions', '*', 'members'], ['factions', '*', 'members']],
     // The gallery member-override key, so a card delta and a revealDm override agree.
     idOf: (card) => galleryMemberKey(card),
+    // PEOPLE-5A (M-1b, M-2): the card's standing in the powers (`memberships`, ranked) is on the
+    // floor where its two derived names were; the card's house (`institution`) stays a tie.
     floor: ['id', 'name', 'role', 'title', 'category', 'gender', 'presentation',
-      'factionAffiliation', 'secondaryAffiliation', 'influence'],
+      'memberships', 'influence'],
     fields: {
       personality: ['personality'],
       physical: ['physical'],
-      goals: ['goal', 'goals', 'factionGoal'],
+      goals: ['goal', 'goals'],
       constraint: ['activeConstraint'],
       whereabouts: ['whereabouts', 'location', 'currentLocation'],
       secret: ['secret'],
-      ties: ['relationships', 'institution', 'linkedInstitutionIds', 'linkedFactionIds'],
+      ties: ['relationships', 'institution', 'linkedInstitutionIds'],
       hooks: ['plotHooks'],
-      corruption: ['corrupt', 'corruptionVector', 'corruptTies'],
+      // ALLEGIANCE-CAR1 (2026-11-08, design §8): + `allegiance`, the hidden allegiance; the retired mark's three keys
+      // stay listed so a save the v2 -> v3 migration could not map (it keeps them, reported) is still veiled.
+      corruption: ['allegiance', 'corrupt', 'corruptionVector', 'corruptTies'],
     },
   },
   institution: {
@@ -218,8 +230,9 @@ export const CARD_KINDS = Object.freeze({
   },
   relationship: {
     lists: [['relationships']],
-    idOf: (card) => ownIdOr(card, 'relationship', card.npc1Id || card.npc1Name, card.npc2Id || card.npc2Name, card.type),
-    floor: ['id', 'type', 'typeName', 'strength', 'npc1Id', 'npc2Id', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
+    // PEOPLE-4 TIES (R-P7): the tie's ends are `from`/`to` (directed); the names keep their fields.
+    idOf: (card) => ownIdOr(card, 'relationship', card.from || card.npc1Name, card.to || card.npc2Name, card.type),
+    floor: ['id', 'type', 'typeName', 'strength', 'from', 'to', 'npc1Name', 'npc2Name', 'npc1Role', 'npc2Role'],
     fields: {
       tension: ['tension'],
       description: ['description'],
@@ -336,32 +349,9 @@ export const GROUPING_REMOVERS = Object.freeze({
 
 // ── THE HOUSE CLASSES (the defaults read them; X-21e admits their cards) ──────────
 
-/** @param {Rec} inst @returns {boolean} */
-function isCriminalInstitution(inst) {
-  return str(inst.category).toLowerCase() === 'criminal' || str(inst.priorityCategory).toLowerCase() === 'criminal';
-}
-
-/**
- * The declared clandestine/hidden flags the data carries, read through the ONE facet
- * chokepoint (cohesionWeave.js facetOf): the catalog's `clandestine` kind, the custom
- * `institutionFunction: 'clandestine'` spelling, and the `subterranean` kind (the
- * catalog's underground network, catacomb sanctuary and black-market bazaar rows).
- * @param {Rec} inst @returns {boolean}
- */
-function isClandestineInstitution(inst) {
-  return facetOf(inst, 'clandestine') === 'clandestine'
-    || facetOf(inst, 'institutionFunction') === 'clandestine'
-    || facetOf(inst, 'subterranean') === 'subterranean';
-}
-
-/**
- * X-21e: the one class of card that may be hidden whole. Criminal by the classifier
- * category, clandestine by a declared facet, or an illegal brokerage by the catalog.
- * @param {Rec} inst @returns {boolean}
- */
-function isHideableHouse(inst) {
-  return isCriminalInstitution(inst) || isClandestineInstitution(inst) || brokerageLegalityOf(inst) === 'illegal';
-}
+// FIX-PUBLIC-VEIL (2026-11-07, the chair's ruling, shape (a): one source for the fact): the three house
+// predicates — isCriminalInstitution, isClandestineInstitution, isHideableHouse — moved byte for byte to
+// src/domain/people/cardVeil.js, the module every writer of a card's `institution` stamps its veil bit from.
 
 // ── ADDRESSES ─────────────────────────────────────────────────────────────────────
 
@@ -512,7 +502,7 @@ export const DEFAULT_VEIL_RULES = Object.freeze([
   {
     cls: 'npc-corruption',
     reason: 'X-21c: NPC corruption and compromise flags',
-    select: (s) => (recs(s.npcs).some(n => n.corrupt != null || n.corruptionVector != null || n.corruptTies != null)
+    select: (s) => (recs(s.npcs).some(n => n.allegiance != null || n.corrupt != null || n.corruptionVector != null || n.corruptTies != null)
       ? ['class:npc:corruption'] : []),
   },
   {
@@ -717,7 +707,7 @@ export function applyVeil(publicSettlement, veil) {
   // An institution's people: the NPCs' links to it (the NPC cards themselves stay).
   if (peopleOf.size) {
     for (const npc of cardsOf(s, 'npc')) {
-      if (peopleOf.has(str(npc.institution))) delete npc.institution;
+      if (peopleOf.has(npcHouseOf(npc))) delete npc.institution;
     }
   }
   // X-21e: a house removed whole takes its card and every membership reference to it.
@@ -726,8 +716,12 @@ export function applyVeil(publicSettlement, veil) {
       s.institutions = s.institutions.filter(i => !(isRec(i) && goneIds.has(instKind.idOf(i)) && isHideableHouse(i)));
     }
     for (const npc of cardsOf(s, 'npc')) {
-      for (const key of ['institution', 'secondaryAffiliation', 'factionAffiliation']) {
-        if (goneHouses.has(str(npc[key]))) delete npc[key];
+      if (goneHouses.has(npcHouseOf(npc))) delete npc.institution;
+      // A pre-car save names a criminal house in a string field of the card (the corruption tie the
+      // old corruptionPass wrote): every string field naming a gone house goes with it, whatever its
+      // key — the veil hides what it hid (PEOPLE-5A), the identity's id and name aside.
+      for (const key of Object.keys(npc)) {
+        if (key !== 'id' && key !== 'name' && typeof npc[key] === 'string' && goneHouses.has(npc[key])) delete npc[key];
       }
       if (Array.isArray(npc.linkedInstitutionIds)) {
         npc.linkedInstitutionIds = npc.linkedInstitutionIds.filter(v => !(goneIds.has(str(v)) || goneHouses.has(str(v))));
@@ -737,9 +731,48 @@ export function applyVeil(publicSettlement, veil) {
 
   // Groupings last (a tab remover sees the cards already trimmed).
   for (const g of groupings) GROUPING_REMOVERS[g](s);
+  // THE VEIL ON STRINGS (STYLE-RULINGS-2 B10(a), SW-B7b item 2): a block hidden here drops the
+  // rungs the owner's save shipped for it as TEXT, so the owner's later toggle needs no re-save.
+  dropVeiledPublicProse(s, groupings);
 
   markVeiled(s, [...groupings].sort());
   return s;
+}
+
+/**
+ * Each hideable BLOCK whose display the public prose projection (`data.publicProse`, see
+ * `publicProse.js`) also ships as text, mapped to the site and the rung keys it covers; `null`
+ * keys drop the whole site. The block address IS the mount position the rungs draw at
+ * (`defense.criminalStructure` is DefenseTab's CRIMINAL_MOUNT, `power.criminalUnderside` is
+ * PowerTab's UNDERSIDE_MOUNT). The other hideable blocks ship no rung: the criminal services
+ * category, the vulnerabilities and the housekeeping rows are data, and the rumor and war truths
+ * are campaign-only reads that never reach the save's projection.
+ * @type {Readonly<Record<string, Readonly<Record<string, readonly string[]|null>>>>}
+ */
+export const VEILED_PUBLIC_PROSE = Object.freeze({
+  'block:defense.criminalStructure': Object.freeze({ 'defense:criminal': null }),
+  'block:power.criminalUnderside': Object.freeze({
+    'power:desk': Object.freeze(['legitimacyReading', 'captureReading', 'operationReading', 'gmAdvisory']),
+  }),
+});
+
+/**
+ * Drop the shipped rungs of every hidden block (in place, on applyVeil's own clone). A rung
+ * another site aliased (`{'@': site}`) resolves to null once its target is gone, which is the
+ * same text hidden; an alias held BY a hidden rung is dropped with it.
+ * @param {Rec} s @param {readonly string[]} groupings
+ */
+function dropVeiledPublicProse(s, groupings) {
+  const blocks = recAt(recAt(s, 'publicProse') || {}, 'blocks');
+  if (!blocks) return;
+  for (const g of groupings) {
+    for (const [site, keys] of Object.entries(VEILED_PUBLIC_PROSE[g] || {})) {
+      if (!(site in blocks)) continue;
+      if (keys === null) { delete blocks[site]; continue; }
+      const rungs = recAt(blocks, site);
+      if (rungs) for (const key of keys) delete rungs[key];
+    }
+  }
 }
 
 /**
@@ -944,7 +977,7 @@ export const CURATE_SECTIONS = Object.freeze([
     groupings: [['block:services.criminal', 'Criminal services']] },
   { id: 'power', label: 'Power', kinds: ['faction', 'conflict'],
     groupings: [['block:power.criminalUnderside', 'The capture reading']],
-    switches: [['class:faction:goals', 'Faction goals'], ['class:faction:conflicts', 'Faction conflicts'], ['class:faction:members', 'Faction members'],
+    switches: [['class:faction:goals', 'Powers\' goals'], ['class:faction:conflicts', 'Powers\' quarrels'], ['class:faction:members', 'Powers\' members'],
       ['class:conflict:stakes', 'Conflict stakes']] },
   { id: 'defense', label: 'Defense', kinds: [], switches: [],
     groupings: [['block:defense.criminalStructure', 'Criminal architecture'], ['block:defense.vulnerabilities', 'Vulnerabilities and watch gaps']] },

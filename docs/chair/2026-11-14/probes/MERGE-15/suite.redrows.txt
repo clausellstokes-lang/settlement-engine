@@ -1,0 +1,14 @@
+tests/lint/siteCoherenceRatchet.test.js > site-coherence contradiction ratchet (Wave 0 — inventory freezing, never correctness) > C1 — the live row set equals the frozen baseline in both directions
+tests/build/landingFixtureFreshness.test.js > the landing fixture is the engine at the committed seed > a fresh derivation reproduces the committed module BYTE FOR BYTE
+tests/build/landingFixtureFreshness.test.js > the landing fixture is the engine at the committed seed > the script's own --check arm agrees, and is wired to say how to fix it
+tests/lint/newsHeadlineContract.walker.test.js > [FILE FAILED TO LOAD] 
+tests/lint/newsVoiceContract.walker.test.js > [FILE FAILED TO LOAD] 
+tests/data/foundingWorldBones.test.js > every Founding World keeps every promise on its card > every promise holds in at least 19 of 20 forks at the card's dials
+tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A1 reconstructs the exact four-family AO-0 corpus twice from one build
+tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A2 rejects malformed selector axes while retaining nulls and projected nested gaps
+tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A3 freezes all 58 identities counts bytes digest and movement polarities
+tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A5 closes twelve pulse-history records and pins overlapping headline aliases
+tests/lint/proseFamilyContract.walker.test.js > four durable prose-family exact-totality contract > A6 reaches the regional audit log while proving its selected prose zero
+tests/property/dossierProseManifest.test.js > the composed-prose manifest — the DRIFT corpus, both audiences > ⭐⭐ THE DRIFT CORPUS CARRIES FOUR SEEDS, and the tally is derived rather than described
+tests/property/dossierProseManifest.test.js > the composed-prose manifest — the DRIFT corpus, both audiences > ⭐ THE DRIFT ARM: no row added, no row removed, no row moved
+tests/property/dossierProseManifest.test.js > the two controls no one-audience manifest can see > ⭐ THE MIXED-POOL AUDIENCE ARM: the two faces differ only where a pool is mixed

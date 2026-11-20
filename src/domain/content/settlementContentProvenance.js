@@ -213,7 +213,6 @@ function materializedCandidates(settlement) {
   add('stressors', 'stressors', stressorsOf(value));
   add('traditions', 'traditions', value.traditions);
   add('factions', 'factions', [
-    ...array(value.factions),
     ...array(record(value.powerStructure).factions),
   ]);
   add('deities', 'config.primaryDeitySnapshot', [

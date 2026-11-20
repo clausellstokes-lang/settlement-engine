@@ -1283,3 +1283,25 @@ describe('custom-content presentation-only claim neutrality', () => {
     expect(native).toContain('Milled flour');
   });
 });
+
+// BAR3-CLOSE-SWEEP-B (2026-11-16, letter a): THE TENSIONS THE MECHANICS READ ARE NAME-BLIND. `history` is a stripped
+// presentation surface, but since BAR3-DEFECON-2 (decd2a1f8) the safety profile's lines settle at assembly on the live
+// tensions' TYPES (`safetyLineTruth.js :: settleCrimeWaveLines`: a crime wave), so the tension types are mechanics.
+// History's resource-anchored rolls matched resource LABELS by substring, and a custom resource named "grain_fields …"
+// took an extra roll, shifted the stream and dropped the crime wave (the digest above caught it only where the line
+// changed). The types are compared here directly, in every cell and every presentation case; the descriptions may name.
+const tensionTypes = settlement => (settlement.history?.currentTensions || []).map(tension => tension?.type);
+describe('the live tension types are name-blind (the safety lines read them)', () => {
+  it.each(NAME_AUTHORITY_MATRIX)('adversarial custom names leave the tension types unmoved at $label', ({ config, seed }) => {
+    const { control, adversarial } = adversarialNameMatrixPacks();
+    const types = tensionTypes(generated(control, seed, config));
+    expect(types.length, 'the town draws no tension, so this cell proves nothing').toBeGreaterThan(0);
+    expect(tensionTypes(generated(adversarial, seed, config))).toEqual(types);
+  });
+  it.each(PRESENTATION_CASES)('$key leaves the tension types unmoved', presentationCase => {
+    const seed = `presentation-neutrality:${presentationCase.key}`;
+    const types = tensionTypes(generated(customContentReferencePack(), seed));
+    expect(types.length, 'the town draws no tension, so this case proves nothing').toBeGreaterThan(0);
+    expect(tensionTypes(generated(variantFor(presentationCase), seed))).toEqual(types);
+  });
+});

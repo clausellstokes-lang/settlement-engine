@@ -91,15 +91,25 @@
  *   door   — surface (imports the index) | direct (imports the physical module)
  *            | member (reaches only a no-surface namespace member).
  *
+ * R | E | identity        | surface | src/domain/display/chainPrintName.js
  * R | E | identity        | surface | src/domain/events/mutateWorld.js
+ * R | E | none            | member  | src/domain/facts/fishBoughtIn.js
  * R | E | chains          | direct  | src/domain/region/tradeLinks.js
  * R | E | identity        | surface | src/domain/resourceTerrainCompatibility.js
  * R | l | chains          | surface | src/components/new/SupplyChainsPanel.jsx
  * R | l | chains          | direct  | src/components/ServicesTogglePanel.jsx
  * R | l | identity+chains | surface | src/components/settlement/EventComposer.jsx
  * R | l | chains          | direct  | src/components/TradeDynamicsPanel.jsx
+ * R | l | chains          | direct  | src/domain/compendium/institutionFacts.js
+ * R | l | none            | member  | src/domain/display/chainHouses.js
+ * R | l | none            | member  | src/domain/display/crisisStoppedRow.js
  * R | l | chains          | surface | src/domain/display/institutionProfile.js
+ * R | l | identity        | surface | src/domain/display/tradeListDisplay.js
+ * R | l | identity+chains | surface | src/domain/display/validationOnPage.js
  * R | l | identity        | direct  | src/domain/edit/pools.js
+ * R | l | identity        | surface | src/domain/facts/chainWorking.js
+ * R | l | identity        | surface | src/domain/facts/houseInputAtHand.js
+ * R | l | identity        | direct  | src/domain/facts/registeredWords.js
  * R | l | identity        | surface | src/domain/resourceSites.js
  * R | l | none            | member  | src/domain/undercity/monotoneComponents.js
  * R | l | identity+chains | surface | src/domain/worldPulse/institutionLifecycle.js
@@ -111,17 +121,21 @@
  * R | l | chains          | surface | src/generators/cascadeGenerator.js
  * R | l | identity+chains | surface | src/generators/computeActiveChains.js
  * R | l | chains          | surface | src/generators/economy/economicState.js
+ * R | l | none            | member  | src/generators/economy/exportsImportedShort.js
  * R | l | chains          | surface | src/generators/economy/finishedGoodsDemand.js
  * R | l | none            | member  | src/generators/economy/foodBalance.js
  * R | l | none            | member  | src/generators/economy/nativeEconomicInputs.js
  * R | l | identity+chains | surface | src/generators/economy/tradeGoods.js
  * R | l | chains          | surface | src/generators/economy/viability.js
- * R | l | none            | member  | src/generators/foodGenerator.js
- * R | l | none            | member  | src/generators/generationCoherence.js
+ * R | l | none            | member  | src/generators/foodLand.js
+ * R | l | identity        | direct  | src/generators/generationCoherence.js
  * R | l | none            | member  | src/generators/historyGenerator.js
  * R | l | chains          | surface | src/generators/institutionProbability.js
  * R | l | none            | member  | src/generators/narrativeGenerator.js
  * R | l | none            | member  | src/generators/npcGenerator.js
+ * R | l | none            | member  | src/generators/people/castPowers.js
+ * R | l | none            | member  | src/generators/people/goals.js
+ * R | l | none            | member  | src/generators/people/representatives.js
  * R | l | identity+chains | surface | src/generators/resourceGenerator.js
  * R | l | chains          | direct  | src/generators/services/institutionServices.js
  * R | l | identity        | surface | src/generators/steps/assembleInstitutions.js

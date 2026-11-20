@@ -1,0 +1,79 @@
+{
+  "poolId": "ECHO_PREFIXES_DOSSIER",
+  "source": "src/domain/dossier/plotHooks.js :143 ECHO_PREFIXES (lower-cased MATCH copy) — the rendered copy is src/generators/historyGenerator.js :268",
+  "drawKind": "A",
+  "drawSite": "plotHooks.js:166 hookFamilyId strips the first matching prefix for the dedupe family key (a match list, never printed). The PRINTED draw is R: historyGenerator.js:279 ECHO_PREFIXES[Math.floor(_rng() * 5)], prepended to a present-tense history hook when 30 < yearsAgo <= 80.",
+  "pools": [
+    {
+      "pool": "ECHO_PREFIXES",
+      "keyGuarantees": [
+        "the hook belongs to a history event 31-80 years ago and reads present-tense (contains is/are/has/have/exists/being) — historyGenerator.js:259-281",
+        "the prefix is joined to the hook with its first letter lowered"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Renders under crisis (history hooks print on every page) but frames a past discovery and asserts no calm: stays out. Not a colour pool: three prefixes presume a written record or its keeper (no reader). The plotHooks.js copy must stay byte-for-byte the lower-cased historyGenerator copy, or the dedupe family key stops folding the variant — any Phase B twin must land in BOTH lists. W5 HIS (2026-11-07, the owner's style law): the five prefixes reworded as tellings ('An old story from that time: ' ...), so the present-tense hook reads as the story told rather than as a document's machinery; [3] names the records of the time, not an archivist.",
+      "lines": [
+        {
+          "lineId": "ECHO_PREFIXES[0]",
+          "text": "An old story from that time: ",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "stop": [
+            "records / an archive"
+          ]
+        },
+        {
+          "lineId": "ECHO_PREFIXES[1]",
+          "text": "A letter found this year tells it this way: ",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "stop": [
+            "records (a document)"
+          ]
+        },
+        {
+          "lineId": "ECHO_PREFIXES[2]",
+          "text": "Families who lived through it tell it this way: ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ECHO_PREFIXES[3]",
+          "text": "The records of that time say: ",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "stop": [
+            "a record of the time (a written record, no reader)"
+          ]
+        },
+        {
+          "lineId": "ECHO_PREFIXES[4]",
+          "text": "What survives from that time says: ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "stop": []
+        }
+      ],
+      "twins": [
+        {
+          "text": "Family accounts passed down from that time tell it this way: ",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "twinOf": "Families who lived through it tell it this way: ",
+          "why": "COHERENCE-PRESUME (the chair's ruling B, 2026-11-11): past sixty years (TIME_BANDS: older than its bearers) no family lived through it; 40 hooks in 38 of the 360 corpus towns. Chosen by the event's age after the same roll."
+        }
+      ]
+    }
+  ]
+}

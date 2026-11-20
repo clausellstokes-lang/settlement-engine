@@ -86,7 +86,7 @@ function impairByName(settlement, name, impairment) {
 
 /**
  * @param {object} settlement
- * @param {Array<{npcId:string,name:string,kind:string,criminalInstitution?:string,homeInstitution?:string}>} exposures
+ * @param {Array<{npcId:string,name:string,kind:string,criminalInstitution?:string,homeInstitution?:string|null}>} exposures
  * @param {{now?:string}} opts
  */
 export function applyCorruptionImpairments(settlement, exposures, { now } = {}) {

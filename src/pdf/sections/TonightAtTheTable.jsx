@@ -16,7 +16,7 @@ import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, GoldRule, HairRule } from '../primitives/Dense.jsx';
 import { NotesField } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
-import { composeTonightSheet, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
+import { composeTonightSheet, printsAsWant, secretLeadOf, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
 import { CrisisSections } from './CrisisSections.jsx';
 
 /** @param {{ children: string, color: string }} props */
@@ -65,7 +65,7 @@ export function TonightAtTheTable({ settlement, narrativeMode }) {
               </Text>
               {p.line ? (
                 <Text style={{ ...type.body, color: palette.second, fontSize: pt['9'], lineHeight: 1.3 }}>
-                  {p.why === 'secret' ? p.line : p.sameAs ? `${TONIGHT_COPY.wantsSame} ${p.sameAs}.` : `${TONIGHT_COPY.wants} ${p.line}`}
+                  {!printsAsWant(p) ? [secretLeadOf(p), p.line].filter(Boolean).join(' ') : p.sameAs ? `${TONIGHT_COPY.wantsSame} ${p.sameAs}.` : `${TONIGHT_COPY.wants} ${p.line}`}
                 </Text>
               ) : null}
             </View>
@@ -94,6 +94,8 @@ export function TonightAtTheTable({ settlement, narrativeMode }) {
       {sheet.hooks.length > 0 ? (
         <View style={{ marginBottom: space.sm }}>
           <Eyebrow color={palette.gold}>{TONIGHT_COPY.hooks}</Eyebrow>
+          {/* THE OWNER'S VETO 3 (2026-11-09, "No." to the connective lines): the pointer into Plot Hooks is struck;
+              each hook prints its own text here, the prior state. */}
           {sheet.hooks.map((h) => (
             <View key={h.text} style={{ marginBottom: 4, paddingLeft: 8, borderLeft: `2pt solid ${palette.gold}` }} wrap={false}>
               {h.source ? <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>{h.source}</Text> : null}
@@ -104,7 +106,8 @@ export function TonightAtTheTable({ settlement, narrativeMode }) {
       ) : null}
 
       {/* THE CRISIS PAGE IN PRINT (docs/DESIGN_CRISIS_TAB.md): the Crisis tab's sections, one per crisis. */}
-      <CrisisSections settlement={settlement} />
+      {/* The two facts print once, on this sheet: the crisis page drops its copy (B4). */}
+      <CrisisSections settlement={settlement} printedFacts={sheet.facts} />
 
       <GoldRule />
 

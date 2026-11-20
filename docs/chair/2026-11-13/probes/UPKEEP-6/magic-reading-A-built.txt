@@ -1,0 +1,14 @@
+# COHERENCE-UPKEEP-6, ruling 4 READING A, BUILT as a declared move (the chair's ruling E of 2026-11-13 15:04).
+# births6.mjs, corpus all (the fifth seat's 3,036 + this seat's 720 fresh6), at c72917251 (base) and with E (tip).
+# No weight changed: the eight houses leave the magic presence's roster (defenseInstitutionBuckets.js ::
+# magicPresenceRosterOf); each keeps its named part.
+births 3,756; readiness moved 899 (the measure at 89641364f: 895), all DOWN: mean -2.43 over the movers
+  (-1.40 over the 1,559 holders, as measured), min -6, max -1.
+band changes 104, all down (measured 103): Fortress -> Well-Defended 63; Well-Defended -> Defensible 37;
+  Defensible -> Lightly Defended 3; Lightly Defended -> Vulnerable 1.
+fresh6 (unseen): 154 moved, 15 down a band.
+the score rows moved: magical 1,068; economic 88 (UP; by the ruling-4 measure's own rows, through the
+  SUSTAINS hold and the per-score full lines; INFERRED, not traced birth by birth); military 13; monster 9.
+reader text: the only other field that moved is the PDF money line (Economic Survival band), in 8 births, each
+  one rung UP with its row's score (cold-town-0, -22, -169, -175, fresh5-town-44, fresh6-town-15,
+  fresh6-famine-village-12, cold-wartime-town-73). No new string.

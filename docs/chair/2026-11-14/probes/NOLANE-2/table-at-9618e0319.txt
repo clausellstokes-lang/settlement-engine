@@ -1,0 +1,63 @@
+LV-MAGICNOTES:forest-on-reed   prints  29/720 false   9  | named-90 prints 0 false 0  e.g. r2r-city-5 r2r-metropolis-2 r2r-metropolis-53
+LV-MAGICNOTES:conjured-fish    prints   6/720 false   6  | named-90 prints 0 false 0  e.g. r2r-town-6 r2r-city-35 r2r-metropolis-21
+LV-MAGICNOTES:farmland-on-salt prints  35/720 false   5  | named-90 prints 0 false 0  e.g. r2r-metropolis-42 r2r-metropolis-45 r2r-metropolis-49
+LV-MAGICNOTES:quickening-on-salt prints  16/720 false   4  | named-90 prints 0 false 0  e.g. r2r-town-51 r2r-city-2 r2s-politically_fractured-town-1
+LV-MAGICNOTES:druidic-under-siege prints  55/720 false   4  | named-90 prints 0 false 0  e.g. r2s-under_siege-city-0 r2s-under_siege-metropolis-1 r2s-under_siege-metropolis-2
+LV-DIVINENOTE:divine           prints  91/720 false  43  | named-90 prints 0 false 0  e.g. r2r-village-11 r2r-village-15 r2r-village-20
+LV-DIVINENOTE:alchemy          prints  21/720 false   0  | named-90 prints 0 false 0  e.g. 
+LV-ARCANENONE                  prints 488/720 false   9  | named-90 prints 0 false 0  e.g. r2r-metropolis-10 r2r-metropolis-13 r2r-metropolis-15
+LV-ARCANENONE:governing-or-mage prints 488/720 false   0  | named-90 prints 0 false 0  e.g. 
+LV-PALISADEQUARRY              prints 122/720 false  57  | named-90 prints 0 false 0  e.g. r2r-hamlet-51 r2r-village-3 r2r-village-56
+LV-CAPITAL                     prints   0/720 false   0  | named-90 prints 0 false 0  e.g. 
+LV-CATHEDRAL                   prints 100/720 false 100  | named-90 prints 0 false 0  e.g. r2r-city-5 r2r-city-6 r2r-city-15
+LV-MAGICSUPPLY                 prints   0/720 false   0  | named-90 prints 0 false 0  e.g. 
+LV-PROCHOUSES                  prints  10/720 false   5  | named-90 prints 0 false 0  e.g. r2r-town-49 r2s-occupied-village-1 r2s-occupied-city-0
+LV-OTHERNEED                   prints   5/720 false   5  | named-90 prints 0 false 0  e.g. r2r-metropolis-36 r2r-metropolis-43 r2r-metropolis-56
+LV-CANNOTPRODUCE               prints  33/720 false  33  | named-90 prints 0 false 0  e.g. r2r-thorp-41 r2r-hamlet-16 r2r-hamlet-28
+LV-GAMBLING                    prints 168/720 false   0  | named-90 prints 0 false 0  e.g. 
+LV-CHARCOALPILLS               prints   7/720 false   1  | named-90 prints 0 false 0  e.g. r2s-under_siege-village-0
+R2A-UNDERWORLD:informant       prints  31/720 false   0  | named-90 prints 0 false 0  e.g. 
+R2A-UNDERWORLD:protection      prints  78/720 false   2  | named-90 prints 0 false 0  e.g. r2s-occupied-hamlet-3 r2s-slave_revolt-hamlet-2
+R2A-CUSTOMS:customs            prints   7/720 false   1  | named-90 prints 0 false 0  e.g. r2r-city-3
+R2A-CUSTOMS:magistrate         prints  18/720 false   1  | named-90 prints 0 false 0  e.g. r2s-plague_onset-town-0
+R2A-LEFT-GAME                  prints   9/720 false   4  | named-90 prints 0 false 0  e.g. r2s-politically_fractured-hamlet-0 r2s-plague_onset-hamlet-0 r2s-succession_void-hamlet-0
+R2A-LEFT-FLAVOR:quiet          prints  11/720 false   4  | named-90 prints 0 false 0  e.g. r2r-thorp-9 r2r-hamlet-12 r2r-hamlet-13
+R2A-LEFT-FLAVOR:magic          prints   1/720 false   0  | named-90 prints 0 false 0  e.g. 
+R2A-LEFT-GOVECON               prints 205/720 false   0  | named-90 prints 0 false 0 unjudged 205  e.g. 
+R2A-LEFT-LANISTA               prints  13/720 false   0  | named-90 prints 0 false 0  e.g. 
+R2A-LEFT-PLAINS                prints  19/720 false   0  | named-90 prints 0 false 0  e.g. 
+R2A-L02                        prints   3/720 false   0  | named-90 prints 0 false 0  e.g. 
+R2A-LEFT-COHESION              prints   5/720 false   0  | named-90 prints 0 false 0  e.g. 
+R2A-LEFT-CRISISSECRET:count    prints  17/720 false  14  | named-90 prints 0 false 0  e.g. r2r-village-50 r2r-town-37 r2r-city-19
+R2A-LEFT-CRISISSECRET:sortie   prints  13/720 false  12  | named-90 prints 0 false 0  e.g. r2r-metropolis-14 r2s-under_siege-town-0 r2s-under_siege-town-1
+R2A-LEFT-MILWEAVER             prints   0/720 false   0  | named-90 prints 0 false 0  e.g. 
+R2A-LEFT-RATION                prints   1/720 false   0  | named-90 prints 0 false 0  e.g. 
+R2A-LEFT-TORN                  prints   3/720 false   1  | named-90 prints 0 false 0  e.g. r2s-occupied-hamlet-3
+R2B-693                        prints 148/720 false   0  | named-90 prints 0 false 0 unjudged 148  e.g. 
+R2B-979                        prints 461/720 false 461  | named-90 prints 0 false 0  e.g. r2r-hamlet-19 r2r-hamlet-27 r2r-village-0
+R3C-REVOLTNOTE                 prints  24/720 false  11  | named-90 prints 0 false 0  e.g. r2s-slave_revolt-thorp-0 r2s-slave_revolt-thorp-1 r2s-slave_revolt-thorp-2
+BAR-124                        prints 187/720 false   0  | named-90 prints 0 false 0  e.g. 
+BAR-182                        prints 112/720 false  48  | named-90 prints 0 false 0  e.g. r2r-thorp-1 r2r-thorp-5 r2r-thorp-24
+BAR-198                        prints  28/720 false  28  | named-90 prints 0 false 0  e.g. r2r-thorp-1 r2r-thorp-24 r2r-thorp-27
+BAR-274                        prints  75/720 false  19  | named-90 prints 0 false 0  e.g. r2r-village-6 r2r-village-9 r2r-village-15
+BAR-83                         prints   0/720 false   0  | named-90 prints 0 false 0  e.g. 
+BAR-169/170                    prints 278/720 false  65  | named-90 prints 0 false 0  e.g. r2r-thorp-6 r2r-thorp-13 r2r-thorp-18
+BAR-293                        prints  28/720 false  28  | named-90 prints 0 false 0  e.g. r2r-thorp-3 r2r-thorp-13 r2r-thorp-14
+BAR-294                        prints 720/720 false   0  | named-90 prints 0 false 0  e.g. 
+PWR-SYMB                       prints  80/720 false  16  | named-90 prints 0 false 0  e.g. r2r-village-45 r2r-city-28 r2r-city-52
+PWR-1432                       prints 263/720 false  24  | named-90 prints 0 false 0  e.g. r2r-hamlet-15 r2r-hamlet-20 r2r-hamlet-47
+CRP-IMPORTREASON               prints   0/720 false   0  | named-90 prints 0 false 0  e.g. 
+CRP-SLOTLABELS:gold/silver ore prints  92/720 false  92  | named-90 prints 0 false 0  e.g. r2r-thorp-4 r2r-thorp-38 r2r-hamlet-24
+CRP-SLOTLABELS:palisade or earthworks prints   6/720 false   6  | named-90 prints 0 false 0  e.g. r2r-hamlet-10 r2r-hamlet-11 r2r-village-6
+CRP-SLOTLABELS:Military/Guard in prose prints 200/720 false 200  | named-90 prints 0 false 0  e.g. r2r-hamlet-3 r2r-hamlet-10 r2r-hamlet-18
+CRP-SLOTLABELS:bought its capital prints   0/720 false   0  | named-90 prints 0 false 0  e.g. 
+CRP-ONESOURCE                  prints 205/720 false   0  | named-90 prints 0 false 0  e.g. 
+UPK-RANGE-CHAIN                prints   0/720 false   0  | named-90 prints 0 false 0  e.g. 
+UPK-W5                         prints   3/720 false   3  | named-90 prints 0 false 0  e.g. r2s-under_siege-metropolis-3 r2s-famine-town-1 r2s-famine-metropolis-2
+UPK-FISHCOMM                   prints   0/720 false   0  | named-90 prints 0 false 0  e.g. 
+DATA-PARISH                    prints   0/720 false   0  | named-90 prints 0 false 0  e.g. 
+DATA-ROW7:ww-798               prints  66/720 false  66  | named-90 prints 0 false 0  e.g. r2r-city-0 r2r-city-1 r2r-city-3
+DATA-ROW7:pf-702               prints   6/720 false   6  | named-90 prints 0 false 0  e.g. r2r-hamlet-19 r2r-village-10 r2r-town-22
+R3T-F9                         prints 155/720 false   9  | named-90 prints 0 false 0  e.g. r2r-town-3 r2r-city-14 r2r-city-44
+R3T-F10                        prints  14/720 false   6  | named-90 prints 0 false 0  e.g. r2s-under_siege-hamlet-2 r2s-under_siege-village-1 r2s-under_siege-city-0
+towns: 720 (720 census)

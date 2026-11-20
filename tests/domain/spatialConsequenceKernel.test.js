@@ -82,6 +82,23 @@ describe('DOOR 1 consumer (a) — calamity toll WHERE-not-HOW-MUCH', () => {
     // Bucket-neutral: the prose names a DISTRICT category, never the disaster kind.
     expect(KIND_WORDS.test(beat.headline + ' ' + beat.summary)).toBe(false);
     expect(beat.summary).toMatch(/quarter/);
+    // FIX-PULSE-DEFECTS (audit C1c·55): with a spared quarter the summary closes on it.
+    expect(beat.summary).toMatch(/lots; the \w+ quarter was spared the worst of it\.$/);
+  });
+
+  // FIX-PULSE-DEFECTS (audit C1c·55): with NO spared district the summary ended on a bare
+  // ";" ("…timber-close lots;"). A one-district substrate has nobody to spare.
+  it('a calamity with no spared quarter closes its summary on a full stop, never a bare ";"', () => {
+    const s = walledCity();
+    s.calamityHistory = [{ type: 'fire', name: 'The Calamity', year: 5, tick: TICK, deaths: 200, exodus: 120, k: 1, targets: ['Tannery'] }];
+    const ws = worldWith(s, { lit: true });
+    const sub = ws.spatialLedgers.spatialSubstrate.s1;
+    const full = advanceSpatialConsequence({ snapshot: snapshotOf(s), worldState: ws, tick: TICK, now: null }).newsEntries[0];
+    const worstCat = /hardest on Ashford's (\w+) quarter/.exec(full.headline)?.[1];
+    sub.d = sub.d.filter((/** @type {{cat: string}} */ dd) => dd.cat === worstCat).slice(0, 1);
+    const r = advanceSpatialConsequence({ snapshot: snapshotOf(s), worldState: ws, tick: TICK, now: null });
+    expect(r.newsEntries.length).toBe(1);
+    expect(r.newsEntries[0].summary).toMatch(/timber-close lots\.$/);
   });
 
   it('a STALE calamity (tick ≠ now) ⇒ no beat', () => {

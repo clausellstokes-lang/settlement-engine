@@ -1,0 +1,29 @@
+{
+ "before": {
+  "findings": 2012,
+  "pairs": 1965,
+  "towns": 588
+ },
+ "after": {
+  "findings": 2001,
+  "pairs": 1954,
+  "towns": 588
+ },
+ "changedWords": {
+  "powersCount": [
+   38,
+   27
+  ]
+ },
+ "left": {
+  "n": 11,
+  "byWord": {
+   "powersCount": 11
+  }
+ },
+ "entered": {
+  "n": 0,
+  "byWord": {}
+ },
+ "_doc": "finding 4: the page list on the 720 after R1 (before) and with the hedge read by its lower count (after); the 11 lines that left, read against their records, in f4-read.ndjson"
+}

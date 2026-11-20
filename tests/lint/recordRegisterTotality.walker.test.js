@@ -226,6 +226,49 @@ const sumOf = (array, field) => Math.round(
 
 const sorted = (values) => [...values].sort();
 
+/** The two REJECTED cross-entry candidates A7's paired negative re-measures. */
+const REJECTED_CANDIDATES = Object.freeze(['defenseProfile.institutions.magicDef', 'defenseProfile.institutions.walls']);
+/**
+ * ⚠ THE UNTESTED REJECTED CANDIDATES — NAMED, EXACT, SHRINK-ONLY, PINNED AT ONE (the chair's ruling on UPKEEP-CAPACITY's
+ * stop at C6, 2026-11-13: a change to this walker authorised for this one purpose, made on the capacity branch).
+ * A candidate the corpus shows with fewer than two DISTINCT MEMBER SETS cannot show two distinct sums, so it is
+ * UNTESTED, not a total, and is named here rather than passed in silence. Its row leaves the list the day the corpus
+ * shows a second member set (A7 reds a named row that has its evidence again).
+ * @type {Readonly<Record<string, string>>}
+ */
+// THE ONE ROW LEFT (TAIL-CLOSE-SRC-2, by this list's own door): `defenseProfile.institutions.magicDef`, named here at
+// UPKEEP-CAPACITY C6 (83883baaa, the chair's G5: the alchemist is not arcane defence, so every multi-entry list of the
+// corpus was one pair), has its evidence again: UPKEEP-13 (a88b5b343, the chair's ruling of 2026-11-14 10:40: the Scroll
+// scribe and the Enchanter's shop practise wards) put both in the bucket, and the corpus shows 9 member sets with 7
+// distinct baseChance sums (0.7 to 1.85): a rejected candidate that is not a total, re-measured every run.
+const REJECTED_UNTESTED = Object.freeze({});
+
+/**
+ * The paired negative, over DISTINCT MEMBER SETS: for each candidate, the multi-entry lists grouped by their members'
+ * names; fewer than two sets is UNTESTED (and must be named, exactly), two or more with one distinct baseChance sum
+ * looks like a total. @param {Record<string, any[][]>} samplesByPath @param {Record<string, string>} untested
+ */
+function rejectedCandidateFaults(samplesByPath, untested) {
+  const faults = [];
+  for (const [path, samples] of Object.entries(samplesByPath)) {
+    const sumBySet = new Map();
+    for (const array of samples.filter((a) => a.length > 1)) {
+      sumBySet.set(array.map((entry) => String(entry?.name)).sort().join(' | '), sumOf(array, 'baseChance'));
+    }
+    const named = Object.hasOwn(untested, path);
+    if (sumBySet.size < 2) {
+      if (!named) faults.push(`${path}: ${sumBySet.size} member set(s) in the corpus, so the candidate is UNTESTED, and the untested list does not name it`);
+      continue;
+    }
+    if (named) faults.push(`${path}: named untested, but the corpus shows ${sumBySet.size} member sets: it leaves the untested list`);
+    if (new Set(sumBySet.values()).size < 2) faults.push(`${path}: baseChance carries 1 distinct sum over ${sumBySet.size} member sets — it now looks like a total, and the register does not name it`);
+  }
+  for (const path of Object.keys(untested)) {
+    if (!Object.hasOwn(samplesByPath, path)) faults.push(`${path}: named untested, but it is not a rejected candidate`);
+  }
+  return faults;
+}
+
 describe('the record class register — totality over a generated record, in both directions', () => {
   it('A1 — every record key is classed, and GENERATED_KEYS equals the observed set exactly', () => {
     // THE DENOMINATOR IS REFUSED FIRST: every set equality below is vacuous on an empty walk.
@@ -281,31 +324,17 @@ describe('the record class register — totality over a generated record, in bot
       .filter((path) => !CENSUS.observedPaths.has(path));
     expect(deadExceptions, `a declared CLASS_EXCEPTIONS path no record carries:\n${deadExceptions.join('\n')}`).toEqual([]);
 
-    const mirrorFaults = [];
-    let chips = 0;
-    let fieldsCompared = 0;
-    for (const row of ROWS) {
-      const npcById = new Map((row.record.npcs || []).map((npc) => [npc.id, npc]));
-      for (const faction of row.record.factions || []) {
-        for (const chip of faction.members || []) {
-          chips += 1;
-          const npc = npcById.get(chip.id);
-          if (npc === undefined) {
-            mirrorFaults.push(`${row.label} :: factions[].members[] id ${chip.id} resolves to no npcs[] entry`);
-          } else {
-            for (const field of Object.keys(npc)) {
-              fieldsCompared += 1;
-              if (JSON.stringify(chip[field]) !== JSON.stringify(npc[field])) {
-                mirrorFaults.push(`${row.label} :: factions[].members[${chip.id}].${field} differs from its npcs[] field`);
-              }
-            }
-          }
-        }
-      }
-    }
-    expect(chips, 'member chips observed (the MIRROR arm is not vacuous)').toBeGreaterThan(0);
-    expect(fieldsCompared, 'NPC fields compared chip-for-chip').toBeGreaterThan(chips);
-    expect(mirrorFaults, `a member chip is not a MIRROR of the NPC its id names:\n${mirrorFaults.join('\n')}`).toEqual([]);
+    // PEOPLE-5B (2026-11-07, M-7): the member-chip MIRROR measurement LEFT with the grouping — the
+    // register's `factions[].members[]` row was the ONLY MIRROR on an entity path. What stands in its
+    // place is the law it leaves behind: no MIRROR sits under a HELD root (an entity's facts are held
+    // once, at one home), and the one MIRROR left is the receipt's restated prose counts.
+    const mirrorsOnHeld = Object.entries(CLASS_EXCEPTIONS)
+      .filter(([path, className]) => className === 'MIRROR'
+        && RECORD_CLASSES[path.split('.')[0].replace('[]', '')] === 'HELD')
+      .map(([path]) => path);
+    expect(mirrorsOnHeld, 'a MIRROR declared under a HELD root (an entity stored at a second home)').toEqual([]);
+    expect(Object.entries(CLASS_EXCEPTIONS).filter(([, className]) => className === 'MIRROR').map(([path]) => path),
+      'the MIRROR rows, enumerated').toEqual(['generationCoherenceReceipt.judgments[].evidence']);
 
     const repairRows = ROWS.filter((row) => (row.record.generationCoherenceReceipt?.repairs || []).length > 0);
     expect(repairRows.length, 'corpus rows that carry a generation repair (HISTORY reaches the receipt here)')
@@ -487,13 +516,32 @@ describe('the record class register — totality over a generated record, in bot
     // THE PAIRED NEGATIVE, so the arm that ADMITS a total also REFUSES a near-miss. A loose
     // absolute tolerance once raised these two; a relative reading refuted them as independent
     // per-institution probabilities, and the refutation is re-measured rather than remembered.
-    const rejectedFaults = [];
-    for (const path of ['defenseProfile.institutions.magicDef', 'defenseProfile.institutions.walls']) {
-      const stats = CENSUS.collections.get(path);
-      const sums = new Set(stats.samples.filter((array) => array.length > 1)
-        .map((array) => sumOf(array, 'baseChance')));
-      if (sums.size < 2) rejectedFaults.push(`${path}: baseChance carries ${sums.size} distinct sum(s) — it now looks like a total, and the register does not name it`);
-    }
+    // The sums are counted over DISTINCT MEMBER SETS, and an untested candidate is named (the chair's ruling, above).
+    const samplesByPath = Object.fromEntries(REJECTED_CANDIDATES.map((path) => [path, CENSUS.collections.get(path).samples]));
+    const rejectedFaults = rejectedCandidateFaults(samplesByPath, REJECTED_UNTESTED);
     expect(rejectedFaults, `a REJECTED cross-entry candidate has become a total:\n${rejectedFaults.join('\n')}`).toEqual([]);
+    expect(Object.keys(REJECTED_UNTESTED), 'the untested list is shrink-only, now empty: an untested candidate reds').toEqual([]);
+  });
+
+  it('A7 plants: the paired negative over member sets, and the untested list, each red where it must be', () => {
+    const house = (/** @type {string} */ name, /** @type {number} */ baseChance) => ({ name, baseChance });
+    const PATH = 'plant.candidate';
+    // Two member sets with EQUAL sums still red "has become a total".
+    const equal = rejectedCandidateFaults({ [PATH]: [[house('A', 0.5), house('B', 0.4)], [house('C', 0.6), house('D', 0.3)]] }, {});
+    expect(equal.join('\n')).toMatch(/now looks like a total/);
+    // Two member sets with DISTINCT sums pass.
+    expect(rejectedCandidateFaults({ [PATH]: [[house('A', 0.5), house('B', 0.4)], [house('C', 0.6), house('D', 0.1)]] }, {})).toEqual([]);
+    // One member set, named untested, passes; the same set unnamed reds as UNTESTED.
+    const one = [[house('A', 0.5), house('B', 0.4)], [house('B', 0.4), house('A', 0.5)]];
+    expect(rejectedCandidateFaults({ [PATH]: one }, { [PATH]: 'plant' })).toEqual([]);
+    expect(rejectedCandidateFaults({ [PATH]: one }, {}).join('\n')).toMatch(/UNTESTED, and the untested list does not name it/);
+    // A second name added to the untested list reds: the real walls, which carry their evidence, and a stranger.
+    const real = Object.fromEntries(REJECTED_CANDIDATES.map((path) => [path, CENSUS.collections.get(path).samples]));
+    const second = rejectedCandidateFaults(real, { ...REJECTED_UNTESTED, 'defenseProfile.institutions.walls': 'plant' });
+    expect(second.join('\n')).toMatch(/defenseProfile\.institutions\.walls: named untested, but the corpus shows/);
+    expect(rejectedCandidateFaults(real, { ...REJECTED_UNTESTED, [PATH]: 'plant' }).join('\n')).toMatch(/not a rejected candidate/);
+    // The row that left (a88b5b343 returned its evidence) reds if it is named again.
+    expect(rejectedCandidateFaults(real, { 'defenseProfile.institutions.magicDef': 'plant' }).join('\n'))
+      .toMatch(/defenseProfile\.institutions\.magicDef: named untested, but the corpus shows \d+ member sets: it leaves the untested list/);
   });
 });

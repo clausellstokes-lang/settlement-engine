@@ -7,6 +7,11 @@
  *
  * Generic table render so all five dashboards (funnel / preferences / edit_heatmap
  * / ai_usage / retention) work from one component — columns come from the rows.
+ *
+ * Above them, ONE LINE for the engine service's cost log (ENGINE-5 unit 4,
+ * EngineGenerationsLine): generations today and this month, by op and outcome, from
+ * the same action's `engine_generations` dashboard (report_engine_generations,
+ * migration 204).
  */
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../lib/supabase.js';
@@ -22,6 +27,52 @@ const DASHBOARDS = [
   { id: 'ai_usage', label: 'AI usage' },
   { id: 'retention', label: 'Retention' },
 ];
+
+/**
+ * @typedef {{ op: string, outcome: string, generations_today: number|string, generations_month: number|string }} EngineGenerationRow
+ */
+
+/**
+ * The engine line's default reader: admin-actions' `engine_generations` dashboard.
+ * @returns {Promise<EngineGenerationRow[]>}
+ */
+async function readEngineGenerations() {
+  const { data, error: err } = await supabase.functions.invoke('admin-actions', {
+    body: { action: 'get_analytics_dashboard', dashboard: 'engine_generations' },
+  });
+  if (err) throw err;
+  if (data?.error) throw new Error(data.error);
+  return Array.isArray(data?.rows) ? data.rows : [];
+}
+
+/**
+ * ONE LINE: the engine service's generations today and this month, by op and outcome.
+ * @param {{ read?: () => Promise<EngineGenerationRow[]> }} [props] `read` is a seam for tests
+ */
+export function EngineGenerationsLine({ read = readEngineGenerations } = {}) {
+  const mobile = useIsMobile();
+  const [state, setState] = useState(/** @type {{ rows: EngineGenerationRow[]|null, error: string|null }} */ ({ rows: null, error: null }));
+  useEffect(() => {
+    let live = true;
+    read().then(
+      (rows) => { if (live) setState({ rows, error: null }); },
+      (e) => { if (live) setState({ rows: null, error: e?.message || 'Failed to load' }); },
+    );
+    return () => { live = false; };
+  }, [read]);
+  const style = { margin: `0 0 ${SP.sm}px`, fontSize: chromeFontSize(FS.xs, mobile), color: SECOND, fontFamily: sans };
+  if (state.error) return <p data-testid="engine-generations-line" style={style}>Engine generations: couldn’t load ({state.error}). (Needs migration 204 deployed.)</p>;
+  if (!state.rows) return <p data-testid="engine-generations-line" style={style}>Engine generations: loading…</p>;
+  const n = (/** @type {number|string} */ v) => Number(v) || 0;
+  const today = state.rows.reduce((sum, r) => sum + n(r.generations_today), 0);
+  const month = state.rows.reduce((sum, r) => sum + n(r.generations_month), 0);
+  const parts = state.rows.map((r) => `${r.op} ${r.outcome} ${n(r.generations_today)} / ${n(r.generations_month)}`);
+  return (
+    <p data-testid="engine-generations-line" style={style}>
+      Engine generations (today / this month): {today} / {month}{parts.length ? `; ${parts.join(' · ')}` : ''}
+    </p>
+  );
+}
 
 export default function AdminAnalyticsPanel() {
   const mobile = useIsMobile();
@@ -64,6 +115,8 @@ export default function AdminAnalyticsPanel() {
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'flex-end', flexWrap: 'wrap', gap: SP.sm }}>
         {refreshedAt && <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>refreshed {new Date(refreshedAt).toLocaleString('en-US')}</span>}
       </div>
+
+      <EngineGenerationsLine />
 
       <div style={{ margin: `${SP.sm}px 0` }}>
         <Segmented

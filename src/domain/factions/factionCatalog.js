@@ -54,7 +54,7 @@ function norm(x) {
  * @returns {Set<string>} lowercased names already present
  */
 export function presentFactionNames(settlement) {
-  const list = settlement?.powerStructure?.factions || settlement?.factions || [];
+  const list = settlement?.powerStructure?.factions || [];
   const set = new Set();
   for (const f of list) {
     const n = norm(f?.faction || f?.name);

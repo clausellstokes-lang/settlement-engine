@@ -1,0 +1,18 @@
+== C3 (tree 3979d394a) vs C2: births 3756; records differ 399
+READINESS moved 388 (up 388, down 0); mean all +0.31; min 0 max 10; bands 95 {('Undefended', 'Vulnerable'): 37, ('Vulnerable', 'Lightly Defended'): 50, ('Lightly Defended', 'Defensible'): 8}
+  fresh6: moved 86, band 18
+  thorp      moved  143 mean +1.66 min +0 max +10 bands 74
+  hamlet     moved  118 mean +0.24 min +0 max +2 bands 12
+  village    moved  127 mean +0.23 min +0 max +2 bands 9
+  town       moved    0 mean +0.00 min +0 max +0 bands 0
+  city       moved    0 mean +0.00 min +0 max +0 bands 0
+  metropolis moved    0 mean +0.00 min +0 max +0 bands 0
+  military  moved  396 (up 396, down 0) mean +0.85 min +0 max +33; bands 136 {('ADEQUATE', 'STRONG'): 31, ('CRITICAL', 'ADEQUATE'): 8, ('WEAK', 'ADEQUATE'): 75, ('CRITICAL', 'WEAK'): 19, ('WEAK', 'STRONG'): 3}
+  monster   moved  384 (up 384, down 0) mean +0.43 min +0 max +10; bands 63 {('CRITICAL', 'WEAK'): 59, ('WEAK', 'ADEQUATE'): 4}
+  internal  moved  347 (up 347, down 0) mean +0.29 min +0 max +9; bands 40 {('WEAK', 'ADEQUATE'): 5, ('CRITICAL', 'WEAK'): 35}
+  economic  moved    9 (up 9, down 0) mean +0.01 min +0 max +13; bands 0 {}
+  magical   moved    3 (up 3, down 0) mean +0.00 min +0 max +4; bands 0 {}
+  disaster  moved    0 (up 0, down 0) mean +0.00 min +0 max +0; bands 0 {}
+  MAGIC AGAINST THE PAGE: made 0 [], cured 0
+  AI THREATS: births changed 0 {}
+  COUPLING: power structure changed 55 (of which band changed 55), a power appears or vanishes 0, legitimacy label changed 0

@@ -16,18 +16,31 @@
 import { criminalOpEcon } from '../../domain/criminalOpRole.js';
 import { criminalOpNote, deriveCriminalStructure, deriveSupportingCapabilities,
   deriveDefenseReadiness, deriveArmedForces, deriveGuardAssessment,
-  deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../domain/display/defenseDisplay.js';
+  deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS, criminalOpMark } from '../../domain/display/defenseDisplay.js';
 import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
 import { entityIdFor } from '../../domain/dossier/entityLinks.js';
 import { customSupplyChainViewModel } from './customSupplyChains.js';
 import { stressArray, foodCore, avgScore } from './viewModelPrimitives.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { resourceGapLines, exploitationGroupsShown, housesStillNeeded } from '../../domain/display/validationOnPage.js';
+import { crisisSummaryForSurface } from '../../domain/crisis/crisisSummaryVantage.js';
+import { deriveProsperityPosture } from '../../domain/display/dossierViewModel.js'; import { outputInWords } from '../../domain/display/outputInWords.js';
+import { foodBlockShown } from '../../domain/display/foodCarrier.js'; // TAIL-EXPORTS-PDF batch 1
+import { tradeListsAsPrinted } from '../../domain/display/tradeListDisplay.js'; // TAIL-EXPORTS-PDF batch 1
+import { impliedGroundsOnPage } from '../../domain/facts/houseInputAtHand.js'; // LEFT-PDF L19: the grounds the Resources tab reads
 
 // Pull the human resource name off an exploitation chain entry (engine stores
 // it as `rawResource`; tolerate a few legacy shapes + bare strings).
 export const exploitName = (c) =>
   typeof c === 'string' ? c : (c?.rawResource || c?.resource || c?.chainKey || c?.name || '');
+
+// UPKEEP-14 (the bar's carried HIGH, the chair's ruling (j)): a chain prints under the name its record holds, through the
+// leaf every print site of a chain's name reads; the import sits beside its one reader.
+import { chainPrintName } from '../../domain/display/chainPrintName.js';
+import { pageSaysEntrepot } from '../../domain/display/entrepotShown.js';
+import { safetyShownOf } from '../../domain/display/safetyShown.js'; // PAGE-1 SAFETY: the label's one reader
+import { complexityLabelShown } from '../../domain/display/labelBands.js'; // SEAM-PDF item 3: the tab's label (the chapter and the journal read it)
 
 export function economicsSlice(active) {
   const s = active || {};
@@ -37,8 +50,10 @@ export function economicsSlice(active) {
   const sp = ec?.safetyProfile || {};
 
   // Economic flows / chains
-  const chains = (ec?.activeChains || []).map(c => ({
-    name: c?.name || c?.chainName || 'Chain',
+  // UPKEEP-14 (j): the name is the record's label as the page prints it (`chainPrintName`), never a stand-in; a chain
+  // with no name is not printed (the Foundry journal prints each row's name: "- **Chain**" named none of them).
+  const chains = (ec?.activeChains || []).filter((c) => chainPrintName(c, s).label).map(c => ({
+    name: String(chainPrintName(c, s).label),
     status: c?.status || 'productive',
     processingInstitutions: c?.processingInstitutions || c?.processing || [],
     outputs: c?.outputs || [],
@@ -58,8 +73,9 @@ export function economicsSlice(active) {
 
   return {
     prosperity:         ec.prosperity || null,
-    economicComplexity: ec.economicComplexity || null,
-    economyOutput:      ec.compound?.economyOutput ?? null,
+    prosperityInCrisis: deriveProsperityPosture(s).inCrisis, // ruling 1(a): the label's ordinary-years sentence, or null
+    economicComplexity: complexityLabelShown(ec) || null,
+    outputInWords:      outputInWords(s), // PAGE-1 OUTPUT (F3b): no grade out of 100; what the town's work yields, in words (the tab's one reader)
     tradeAccess:        ec.tradeAccess || s?.config?.tradeRouteAccess || null,
     incomeSources:      normalizeIncomeSources(ec.incomeSources || []),
     primaryExports:     ec.primaryExports || [], primaryImports: ec.primaryImports || [],
@@ -71,7 +87,7 @@ export function economicsSlice(active) {
     localProduction:    ec.localProduction || [],
     tradeDependencies:  ec.tradeDependencies || [],
     necessityImports:   !!ec.necessityImports,
-    isEntrepot:         !!ec.isEntrepot,
+    isEntrepot:         pageSaysEntrepot(ec.activeChains), // TAIL-EXPORTS-PDF-3 (ruling E21): the tag where a chain on the page is an entrepôt, as the Economics tab's flows say it
     safetyHooks:        sp?.plotHooks || [],
     // pdf-6: the COMPLEMENT of the Viability filter — only the dependency/
     // resource-chain/opportunity/food issues belong on the Economics chapter, so
@@ -85,12 +101,23 @@ export function economicsSlice(active) {
       suggestedFixes: iss?.suggestedFixes || [],
     })),
     viabilityHooks:     v?.plotHooks || [],
-    foodBalance: {
-      ...foodCore(v),
-      agricultureModifier: v?.metrics?.foodBalance?.agricultureModifier ?? null,
-      stressModifier: v?.metrics?.foodBalance?.stressModifier ?? null,
-      summary: v?.foodSecurity?.summary || v?.metrics?.foodBalance?.summary || null,
-    },
+    // TAIL-EXPORTS-PDF batch 1 (ruling E1): the tab's food row (foodCarrier.js :: foodBlockShown) for every reader of the
+    // slice (the chapter's headline, the journal's lede), not the viability view's: "imports make up some of the gap"
+    // under a siege whose tab row brings nothing in.
+    // (the residual's share keeps the canon's 0 where no gap is left: parityContract.js SHARED_FIELDS, food.deficitPct)
+    foodBalance: (() => {
+      const shown = foodBlockShown(s, {
+        ...foodCore(v),
+        agricultureModifier: v?.metrics?.foodBalance?.agricultureModifier ?? null,
+        stressModifier: v?.metrics?.foodBalance?.stressModifier ?? null,
+        summary: v?.foodSecurity?.summary || v?.metrics?.foodBalance?.summary || null,
+      });
+      return shown ? { ...shown, deficitPct: shown.deficitPct ?? 0 } : shown;
+    })(),
+    // TAIL-EXPORTS-PDF batch 1 (ruling E1): the exports as the tab prints them, and whether a siege stops trade
+    // (tradeListDisplay.js :: tradeListsAsPrinted), for the headline that names what the place sells.
+    exportsShown:       tradeListsAsPrinted(s).exports,
+    tradeStopped:       tradeListsAsPrinted(s).tradeStopped,
     criticalImports:    ra?.imports?.critical || [],
     chains,
     customChains,
@@ -140,7 +167,10 @@ export function defenseSlice(active) {
   // Active military status override (from stress). Match on the stressor TYPE the
   // engine emits, via the SHARED DEFENSE_STRESS_STATUS set the web DefenseTab uses,
   // so print and screen can never drift (pdf-4).
-  const militaryStress = stress.find(x => DEFENSE_STRESS_STATUS[x?.type]);
+  // #29 (STYLE-RULINGS §1(c)): Defence prints the watch's vantage of the crisis summary; the crisis
+  // page keeps the full text.
+  const militaryEntry = stress.find(x => DEFENSE_STRESS_STATUS[x?.type]);
+  const militaryStress = militaryEntry ? { ...militaryEntry, summary: crisisSummaryForSurface(militaryEntry, s?.name, 'defence') } : militaryEntry;
 
   // Criminal architecture. Operations come from the safety profile's criminal
   // institutions (the source the web Defense tab uses), each carrying an
@@ -148,12 +178,15 @@ export function defenseSlice(active) {
   const criminalCapture = s?.powerStructure?.criminalCaptureState || sp?.criminalCapture || null;
   // X-50 (BOILERPLATE ONCE): two operations that fall to the same note (the catch-all, or two
   // names one rule matches) carry it on the first only, as the screen Defense tab prints it.
+  // SEAM-PDF item 1 (2026-11-17; BAR6-CRIME's LAW 8 8e.crime, C8633): each operation carries the mark its own house's card
+  // prints ("Stopped by the siege."), read through the Defense tab's one reader (`defenseDisplay.js :: criminalOpMark`).
   const criminalOps = (sp?.criminalInstitutions || []).map((name, i, all) => ({
     name,
+    mark: criminalOpMark(s, name),
     note: all.slice(0, i).some((prev) => criminalOpNote(prev) === criminalOpNote(name)) ? null : criminalOpNote(name),
   }));
   const criminalStructure = deriveCriminalStructure(s);
-  const criminalFaction = (s?.powerStructure?.factions || s?.factions || []).find(f => (f?.category || '').toLowerCase() === 'criminal') || null;
+  const criminalFaction = (s?.powerStructure?.factions || []).find(f => (f?.category || '').toLowerCase() === 'criminal') || null;
   const orderHooks = sp?.plotHooks || [];
 
   return {
@@ -165,7 +198,7 @@ export function defenseSlice(active) {
     guardAssessment:       deriveGuardAssessment(s),
     institutions:          dp.institutions || {},
     armedForces,
-    safetyLabel:           sp.safetyLabel || null,
+    safetyLabel:           safetyShownOf(s).label,
     safetyRatio:           sp.safetyRatio,
     criminalInstitutions:  sp.criminalInstitutions || [],
     crimeTypes:            sp.crimeTypes || [],
@@ -268,10 +301,13 @@ export function servicesSlice(active) {
   };
 }
 
+/** EXPORTS-B3: the houses an unexploited chain still needs, under the Resources tab's own word (ResourceChainCard's
+ * "Needs:" line); none, no line. @param {string[]} names */
+const needsLine = (names) => (names.length ? `Needs: ${names.join(', ')}` : null);
+
 export function resourcesSlice(active) {
   const s = active || {};
   const ra = s?.resourceAnalysis || {};
-  const v = s?.economicViability || {};
   const cfg = s?.config || {};
 
   // Convert exploitation lists into chain-flow rows. Engine keys are
@@ -282,13 +318,27 @@ export function resourcesSlice(active) {
   const exp = ra?.exploitation || {};
   const EXP_KEYS = { full: 'fullyExploited', partial: 'partiallyExploited', unexploited: 'unexploited' };
   const chainRows = [];
+  // P1 (W2-C-LEAVES-3; SHARED LINES of this file, the grade's own): the grade a row prints is the Resources tab's,
+  // read through ONE reader (validationOnPage.js :: exploitationCardShown): a card filed Unexploited that a chain
+  // works here is printed Partial, with no processing or output: the filed ones are the chain table's promise, not
+  // the record. The Foundry journal reads these rows too.
+  const shownOf = new Map();
+  for (const group of Object.values(exploitationGroupsShown(s))) for (const x of group) shownOf.set(x.card, x);
   for (const [which, engineKey] of Object.entries(EXP_KEYS)) {
     for (const item of (exp?.[engineKey] || exp?.[which] || [])) {
+      const shown = item && typeof item === 'object' ? shownOf.get(item) : null;
       if (typeof item === 'string') {
         if (item) chainRows.push({ resource: item, status: which, processing: null, output: null });
       } else if (item) {
         const resource = item?.rawResource || item?.resource || item?.chainKey || item?.name || '';
         if (!resource) continue;
+        // W2-C-LEAVES-8 (the observed-shape readers after the line's merge): each legacy key of the persisted entry is
+        // read once, for both rows below.
+        const quality = item?.quality || null, accessibility = item?.accessibility || null, houses = item?.processingInstitutions || [];
+        if (shown && shown.stage !== which) {
+          chainRows.push({ resource, status: shown.stage, processing: null, output: null, chainStatus: null, quality, accessibility });
+          continue;
+        }
         chainRows.push({
           resource,
           status: which,
@@ -297,13 +347,23 @@ export function resourcesSlice(active) {
           // the join happens in this line and the renderer can no longer tell one name from
           // the next. Same rule as `servicesSlice` above: a print goes through the seam, and
           // an unmapped name passes through as itself.
-          processing: institutionDisplayName(item?.processing) || institutionDisplayName(item?.institution) ||
-                      (item?.processingInstitutions || []).map((n) => institutionDisplayName(n) || n).join(', ') || null,
-          output: item?.output || item?.product ||
-                  (item?.finalProducts || item?.outputs || []).join(', ') || null,
+          // W2-C-LEAVES-SIDE (the twin of #452; the processing column only): an Unexploited row names only the houses the
+          // live roster does not hold, by the reader the tab's "Needs:" line reads (validationOnPage.js :: housesStillNeeded).
+          // EXPORTS-B3 (EXPORTS-MEASURE-1 B3, the chair's ruling: candidate A with the tab's word): the row prints what
+          // the tab's card (ResourcesTab.jsx :: ResourceChainCard) prints and no more. A worked chain names no houses and
+          // no goods: the Full card prints neither, the Partial card no house and no finished good (its intermediate goods
+          // are not carried: a surface with no room prints less). An unexploited one names the houses it still needs
+          // under the tab's own word "Needs:" (the PDF and the journal both print this string), and the first two goods
+          // the tab's card shows. Guard: tests/pdf/resourceChainsLikeTheTab.test.jsx.
+          processing: which === 'unexploited'
+            ? (needsLine(housesStillNeeded(s, houses).map((n) => institutionDisplayName(n) || n)))
+            : null,
+          output: which === 'unexploited'
+            ? ((item?.finalProducts || item?.outputs || []).slice(0, 2).join(', ') || null)
+            : null,
           chainStatus: item?.chainStatus || null,
-          quality: item?.quality || null,
-          accessibility: item?.accessibility || null,
+          quality,
+          accessibility,
         });
       }
     }
@@ -311,9 +371,17 @@ export function resourcesSlice(active) {
 
   // Split nearby resources into depleted vs abundant
   const allNearby = ra.nearbyResources || cfg.nearbyResources || [];
-  const depletedSet = new Set(cfg.nearbyResourcesDepleted || []);
-  const depleted  = allNearby.filter(k => depletedSet.has(k));
+  // LEFT-PDF L19 (BRIEF-LEFT, the sixth chair, 2026-11-17; BIRTH-3's P6 item 1; vetoable by the owner): THE LAND LIST
+  // READS WHAT THE RESOURCES TAB READS. The tab reads the grounds the houses prove off the stored record
+  // (`houseInputAtHand.js :: impliedGroundsOnPage`, BIRTH-2's BR4 (b) and BR5): a ground used up joins "Depleted" (and
+  // leaves the grounds of plenty), a ground a house proves there that the record's list does not hold is printed under the
+  // list's own title, never as "Abundant" (`nearbyProven`). The PDF printed the stored lists alone (172 towns of the
+  // census's 720 at e0242a12a). The stored record is untouched.
+  const implied = impliedGroundsOnPage(s);
+  const depletedSet = new Set([...(cfg.nearbyResourcesDepleted || []), ...implied.used]);
+  const depleted  = [...allNearby.filter(k => depletedSet.has(k)), ...[...depletedSet].filter(k => !allNearby.includes(k)).sort()];
   const abundant  = allNearby.filter(k => !depletedSet.has(k));
+  const proven    = [...new Set(implied.there)].filter(k => !allNearby.includes(k)).sort();
 
   return {
     terrain:            ra.terrain || null,
@@ -325,13 +393,17 @@ export function resourcesSlice(active) {
     nearbyResources:    allNearby,
     nearbyDepleted:     depleted,
     nearbyAbundant:     abundant,
+    nearbyProven:       proven,   // LEFT-PDF L19: the grounds the houses prove, printed under no word of plenty
     nearbyCustom:       cfg.nearbyResourcesCustom || [],   // §14 — gold-tint these
     availableCommodities: ra?.availableResources || s?.availableResources || [],
     // resourceAnalysis emits exports/gaps/priorityNotes (resourceGenerator); the
     // old exportPotential/structuralGaps/v.priorityNotes reads never resolved.
     exportPotential:    ra?.exports || ra?.exportPotential || s?.exportPotential || [],
-    priorityNotes:      ra?.priorityNotes || v?.priorityNotes || [],
-    structuralGaps:     ra?.gaps || ra?.structuralGaps || s?.structuralGaps || [],
+    // READER-R1 (the chair's rulings 1 and 3): the DM document prints the record-read gap
+    // lines, in the house voice, and neither the generator's raw gap rows nor its priority
+    // notes (the sliders' text); the web tab reads the same helper.
+    priorityNotes:      [],
+    structuralGaps:     resourceGapLines(s),
     terrainEffects:     ra?.terrainEffects || s?.terrainEffects || ra?.featureEffects || [],
     terrainCriticals:   ra?.terrainCriticals || [],
     terrainAdvantages:  ra?.terrainAdvantages || [],

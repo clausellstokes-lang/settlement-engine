@@ -32,10 +32,25 @@ const SCOPE_MEANING = {
 };
 
 // ── THE OPERATION REGISTRY (public) ──────────────────────────────────────────
+// H9 — KEYS BEHIND A TOGGLE (the chair's ruling on the owner's "apply your suggestions"):
+// the internal identifiers (the camelCase operation names, the snake_case variable and
+// pressure keys, the system flags, the receipt and scope chips) are hidden by default
+// behind ONE toggle per page, labelled "Show keys"; the plain names and descriptions stay.
+function ShowKeysToggle({ on, onChange }) {
+  return (
+    <div style={{ margin: '0 0 12px' }}>
+      <Button variant={on ? 'primary' : 'ghost'} size="sm" aria-pressed={on} onClick={() => onChange(!on)}>
+        Show keys
+      </Button>
+    </div>
+  );
+}
+
 export function OperationsHub() {
   const mobile = useIsMobile();
   const ops = CD.operations;
   const [klass, setKlass] = useState('all');
+  const [showKeys, setShowKeys] = useState(false);
   const filters = ['all', 'canon', 'macro', 'mechanical'];
   const shown = useMemo(
     () => ops.entries.filter((o) => klass === 'all' || o.klass === klass),
@@ -89,6 +104,7 @@ export function OperationsHub() {
           scope: save = {SCOPE_MEANING.save} · campaign = {SCOPE_MEANING.campaign} · global = {SCOPE_MEANING.global}.
         </div>
       </div>
+      <ShowKeysToggle on={showKeys} onChange={setShowKeys} />
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: 6 }}>
         {shown.map((o) => (
           <div key={o.opType} id={`op-${slug(o.opType)}`}
@@ -101,14 +117,14 @@ export function OperationsHub() {
               <span style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK, flex: 1 }}>{o.label}</span>
               <Tag label={o.klass} color={KLASS_COLOR[o.klass] || GOLD} />
             </div>
-            <code style={{ display: 'block', fontFamily: 'monospace', fontSize: chromeFontSize(FS.xxs, mobile), color: MUT, marginBottom: 4 }}>{o.opType}</code>
+            {showKeys && <code data-key="" style={{ display: 'block', fontFamily: 'monospace', fontSize: chromeFontSize(FS.xxs, mobile), color: MUT, marginBottom: 4 }}>{o.opType}</code>}
             <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: SEC, lineHeight: 1.5, marginBottom: 6, fontFamily: sans }}>{o.description}</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, fontSize: chromeFontSize(FS.xxs, mobile), color: SEC, fontFamily: sans }}>
-              <span style={{ background: `${GOLD}14`, padding: '1px 6px' }}>scope: {o.targetScope}</span>
-              <span style={{ background: o.receiptRef ? '#1a5a2814' : swatch['#E8E2D6'],
+              {showKeys && <span data-key="" style={{ background: `${GOLD}14`, padding: '1px 6px' }}>scope: {o.targetScope}</span>}
+              {showKeys && <span data-key="" style={{ background: o.receiptRef ? '#1a5a2814' : swatch['#E8E2D6'],
                 color: o.receiptRef ? '#1a5a28' : MUT, padding: '1px 6px' }}>
                 {o.receiptRef ? `receipt: ${o.receiptRef}` : 'no receipt'}
-              </span>
+              </span>}
               <span style={{ background: o.undoToken ? '#1a3a7a14' : (swatch['#E8E2D6']),
                 color: o.undoToken ? '#1a3a7a' : MUT, padding: '1px 6px' }}>
                 {o.undoToken ? 'reversible' : 'one-way'}
@@ -125,6 +141,7 @@ export function OperationsHub() {
 export function SystemsHub() {
   const mobile = useIsMobile();
   const { causal, pressures, systems, presets } = CD;
+  const [showKeys, setShowKeys] = useState(false);
   return (
     <div id="living-world" style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
       <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: '0 0 14px', fontFamily: sans, maxWidth: '40em' }}>
@@ -132,6 +149,7 @@ export function SystemsHub() {
         These systems wake once a campaign advances. Each is opt-in and off by default. A
         non-campaign save stays byte-identical.
       </p>
+      <ShowKeysToggle on={showKeys} onChange={setShowKeys} />
 
       <Card title={`The causal substrate: ${causal.variableCount} variables`} accent="#1a3a7a" lead>
         Beneath every settlement sit {causal.variableCount} live causal variables, each with a score, a
@@ -144,7 +162,7 @@ export function SystemsHub() {
         {causal.variableEntries.map((v) => (
           <div key={v.id} style={{ border: `1px solid ${BOR}`, borderLeft: '3px solid #1a3a7a', padding: '8px 10px' }}>
             <div style={{ fontFamily: serif_, fontSize: FS['12.5'], fontWeight: 700, color: INK, marginBottom: 2 }}>{v.label}</div>
-            <code style={{ display: 'block', fontFamily: 'monospace', fontSize: chromeFontSize(FS.xxs, mobile), color: MUT, marginBottom: 4 }}>{v.id}</code>
+            {showKeys && <code data-key="" style={{ display: 'block', fontFamily: 'monospace', fontSize: chromeFontSize(FS.xxs, mobile), color: MUT, marginBottom: 4 }}>{v.id}</code>}
             <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: SEC, lineHeight: 1.5, fontFamily: sans }}>{v.description}</div>
           </div>
         ))}
@@ -159,7 +177,7 @@ export function SystemsHub() {
           {pressures.entries.map((p) => (
             <div key={p.id} style={{ border: `1px solid ${BOR}`, borderLeft: '3px solid #a0762a', padding: '8px 10px' }}>
               <div style={{ fontFamily: serif_, fontSize: FS['12.5'], fontWeight: 700, color: INK, marginBottom: 2 }}>{p.label}</div>
-              <code style={{ display: 'block', fontFamily: 'monospace', fontSize: chromeFontSize(FS.xxs, mobile), color: MUT, marginBottom: 4 }}>{p.id}</code>
+              {showKeys && <code data-key="" style={{ display: 'block', fontFamily: 'monospace', fontSize: chromeFontSize(FS.xxs, mobile), color: MUT, marginBottom: 4 }}>{p.id}</code>}
               <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: SEC, lineHeight: 1.5, fontFamily: sans }}>{p.description}</div>
             </div>
           ))}
@@ -179,7 +197,7 @@ export function SystemsHub() {
             style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN, border: `1px solid ${BOR}`,
               borderLeft: `3px solid ${s.dormant ? MUT : GOLD}`, padding: '8px 10px' }}>
             <div style={{ fontFamily: serif_, fontSize: FS['12.5'], fontWeight: 700, color: INK, marginBottom: 3 }}>{s.label}</div>
-            <code style={{ fontFamily: 'monospace', fontSize: chromeFontSize(FS.xxs, mobile), color: SEC }}>{s.flag}</code>
+            {showKeys && <code data-key="" style={{ fontFamily: 'monospace', fontSize: chromeFontSize(FS.xxs, mobile), color: SEC }}>{s.flag}</code>}
             <div style={{ marginTop: 5, fontSize: proseFontSize(FS.xxs, mobile), color: SEC, lineHeight: 1.5, fontFamily: sans }}>{s.blurb}</div>
             <div style={{ marginTop: 5, fontSize: chromeFontSize(FS.xxs, mobile), color: SEC, fontFamily: sans }}>
               {s.dormant

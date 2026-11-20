@@ -43,12 +43,28 @@ describe('FOOD-2 — the food base numbers', () => {
     expect(plains.dailyProduction, 'plains feed a bare hamlet').toBeGreaterThanOrEqual(plains.dailyNeed);
   });
 
+  // RE-KEYED 'isolated' → 'road' BY IDENTITY (FIX-FOOD-ISOLATION, 2026-11-07), one cause: an isolated
+  // route's outside supply is bounded by its isolation-support receipt, so the FOOD-2 law (the hinterland
+  // is ordinary supply) is pinned where the carts run — a connected route. The isolated arm is below.
   it('towns and larger draw their hinterland as ordinary supply, so the gap is not flat across sizes', () => {
-    const gap = (tier) => generateFoodSecurity(tier, [], { _population: POPULATION_RANGES[tier].min * 2, tradeRouteAccess: 'isolated', terrainType: 'desert', magicExists: false }).deficitPct;
+    const gap = (tier) => generateFoodSecurity(tier, [], { _population: POPULATION_RANGES[tier].min * 2, tradeRouteAccess: 'road', terrainType: 'desert', magicExists: false }).deficitPct;
     expect(gap('metropolis'), 'a desert metropolis is better fed than a desert hamlet: its hinterland carries half its need').toBeLessThan(gap('hamlet'));
     expect(gap('city')).toBeLessThan(gap('hamlet'));
-    const town = generateFoodSecurity('town', [], { _population: 2000, tradeRouteAccess: 'isolated', terrainType: 'forest', magicExists: false });
+    const town = generateFoodSecurity('town', [], { _population: 2000, tradeRouteAccess: 'road', terrainType: 'forest', magicExists: false });
     expect(town.foodRecord.normalImportPct, 'the hinterland arrives as normal imports').toBeGreaterThanOrEqual(19);
+  });
+
+  // FIX-FOOD-ISOLATION (the chair's ruling, 2026-11-07): the isolation-support receipt is THE supply fact
+  // for an isolated route. A bare isolated town's receipt carries only local tracks (seasonal access 4 of
+  // the 52 a town needs), so 8% of its need arrives from outside — not the 20% hinterland share — and the
+  // band follows the arithmetic. Anchored: the same town on a road draws its full hinterland.
+  it('an isolated place is fed from outside only as far as its support receipt carries', () => {
+    const at = (route) => generateFoodSecurity('town', [], { _population: 2000, tradeRouteAccess: route, terrainType: 'forest', magicExists: false });
+    const isolated = at('isolated');
+    expect(isolated.importPct, 'seasonal access 4/52 of need').toBe(8);
+    expect(isolated.foodRecord.normalImportPct).toBe(8);
+    expect(isolated.foodRecord.band, 'the band follows the gap, not a hinterland the receipt does not hold').toBe('pressured');
+    expect(at('road').importPct, 'anchored: the same town on a road draws its hinterland').toBe(20);
   });
 
   // T2 (soak 1000 dry run §4, adopted by the chair 2026-11-04): a village with no granary stored 1.0

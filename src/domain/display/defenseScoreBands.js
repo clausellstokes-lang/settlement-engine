@@ -46,9 +46,11 @@
  * either: that suffix is the register's P1 trigger, and these are not tuning values the owner
  * signs — they are the band ladder's own definition, the thing the four frozen words MEAN.
  *
+ * The object itself is written in the zero-import leaf `domain/facts/scoreBandCuts.js` (the chair's ruling EG1), which the eager fact homes can read; this module re-exports that same frozen object.
  * @type {Readonly<{ strong: number, adequate: number, weak: number }>}
  */
-export const SCORE_BAND_CUTS = Object.freeze({ strong: 65, adequate: 40, weak: 20 });
+import { SCORE_BAND_CUTS } from '../facts/scoreBandCuts.js';
+export { SCORE_BAND_CUTS };
 
 /**
  * Band colour for a 0-100 defence-system score.
@@ -67,6 +69,21 @@ export const scoreBand = (n) =>
   n >= SCORE_BAND_CUTS.strong ? 'STRONG'
     : n >= SCORE_BAND_CUTS.adequate ? 'ADEQUATE'
       : n >= SCORE_BAND_CUTS.weak ? 'WEAK' : 'CRITICAL';
+
+/**
+ * WHAT THE TOWN CAN PAY IN A CRISIS: THE ONE HOME (COHERENCE-UPKEEP-6, the chair's ruling A on the third read):
+ * the Economic Survival row's band, the band its bar, its badge and the Defense tab's line read. The row's
+ * score is itself paid at the standing label (`keep.js :: keepOfRecord`, the score's pay), so one label speaks
+ * for pay through it. Every sentence that says what the town can pay reads this: the PDF's money line
+ * (`threatAssessment.js`) and the guard assessment's purse clauses (`safetyProfile.js :: keptGuardLine`,
+ * written after the defence profile). Null where the record has no defence profile.
+ * @param {{ defenseProfile?: { scores?: { economic?: unknown } | null } | null } | null | undefined} record
+ * @returns {string | null} 'STRONG' | 'ADEQUATE' | 'WEAK' | 'CRITICAL', or null
+ */
+export function economicSurvivalBandOf(record) {
+  const n = record?.defenseProfile?.scores?.economic;
+  return typeof n === 'number' && Number.isFinite(n) ? scoreBand(n) : null;
+}
 
 /**
  * THE OVERALL DEFENCE SCORE — the rounded mean of the numeric score values, and the ONE

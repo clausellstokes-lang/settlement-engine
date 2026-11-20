@@ -255,7 +255,7 @@ function unknownRead(partyId, counterpartId, why) {
     beingConqueredRisk01: null,
     threatBand: 'unknown',
     behaviouralWeight01: null,
-    receipt: `${partyId || 'the court'} cannot judge a conquest of ${counterpartId || 'its rival'}: ${why}.`,
+    receipt: `${partyId || 'The court'} cannot judge a conquest of ${counterpartId || 'its rival'}: ${why}.`,
   };
 }
 
@@ -424,7 +424,7 @@ export function conquestTermsRange(read) {
       takeByForce01: null,
       mustGiveToSurvive01: null,
       known: false,
-      receipt: `${partyId || 'the court'} has no bargaining range: it cannot judge the war.`,
+      receipt: `${partyId || 'The court'} has no bargaining range: it cannot judge the war.`,
     };
   }
   const takeByForce01 = round4(row.conquestReach01);
@@ -474,7 +474,7 @@ export function termsRangesOverlap(left, right) {
   const bGive = Number(b.mustGiveToSurvive01);
   const bTake = Number(b.takeByForce01);
   const overlaps = aTake <= bGive && bTake <= aGive;
-  const names = `${text(a.partyId) || 'one side'} and ${text(b.partyId) || 'the other'}`;
+  const names = `${text(a.partyId) || 'One side'} and ${text(b.partyId) || 'the other'}`;
   return {
     overlaps,
     known: true,
@@ -589,7 +589,7 @@ export function collapseSeatBooksUnderThreat(books, read) {
 export function mistakenFeasibilityReceipt(read, observed) {
   const row = recordOf(read);
   const outcome = recordOf(observed);
-  const partyId = text(row.partyId) || 'the court';
+  const partyId = text(row.partyId) || 'The court';
   const counterpartId = text(row.counterpartId) || 'its rival';
   if (row.known !== true) {
     return {

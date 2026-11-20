@@ -88,9 +88,10 @@
 import { causalBand, deriveSystemVariable } from '../../causalState.js';
 import {
   guildEffectiveSecurity,
-  patronageSecurityDrag,
   readCorruptionClimate,
 } from '../../corruption.js';
+// the bought watch on the LOCAL axis (ALLEGIANCE-CAR3): moved beside the allegiance reader, a lazy leaf
+import { patronageSecurityDrag } from '../../corruptionLeash.js';
 import { hash01 } from '../../region/contestMath.js';
 import { ROADS_TUNING } from '../../roads/state.js';
 import { relationshipTypeBetween } from '../../roads/embassyHazard.js';

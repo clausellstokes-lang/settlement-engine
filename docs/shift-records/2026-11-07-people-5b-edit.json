@@ -1,0 +1,28 @@
+{
+  "_doc": "RECORD 5b OF THE PEOPLE CAR'S LANDING (PEOPLE-LAND, second seat), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; PEOPLE-RULINGS M-1: one record per lane-cause, signed once at the landing from the stage at the lane's first-parent point; M-3). THE CAUSE, ONE: lane 5B, PEOPLE-5B EDIT (docs/PEOPLE_5B_EDIT_2026-11-07.md): the edit layer, the schema (SCHEMA_VERSION 1 -> 2) and the first real save migration (M-7), merged onto lane 5A at a725df7e4 (MERGE-5AB, the two divergences by the chair's ruling). Measured on four moved rows: the differing paths are npcs[].factionAffiliation / secondaryAffiliation / linkedFactionIds (the v2 boundary strips the per-NPC faction fields), settlement.factions and schemaVersion. THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure at the stage of 3c66d320e (record 5a's post-state) and at the stage of a725df7e4: the generator golden master 525 of 525 (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) rows, 47e48e47.. -> 8dc527fd..; the espionage fence's driven corpus 360 of 360 (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60), 080243fb.. -> 973c37d9..; the herald desk 478 -> 470 keys (+10 -18, 2 moved); the dossier prose manifest 0 of 1,050 (); the PDF view-model snapshot 0; the preset lighting witness 0. The six MERGE-5AB register and record commits after the merge (f06de9b25..bc4b64230) and the landing's step-0 and step-0b commits (17651d2f9..1adf403e4) move no golden byte (the stage of 1adf403e4 equals this one on all six surfaces).",
+  "ownerWords": "for every appropriate institution, we generate one NPC … I think just one person per institution. They act as the face. We are not building all the citizens of a settlement. That's too granular and the DM can do that work themselves. We are simply making representatives.",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's people-model charter of 2026-11-07, PEOPLE-RULINGS §0; the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the people car's landing)",
+  "cause": "lane 5B, PEOPLE-5B EDIT (lane/people-5b-edit-2026-11-07, f24623a9f, merged at a725df7e4): the edit layer, the schema, the first real save migration and the contract",
+  "seat": "PEOPLE-LAND second seat (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at a725df7e4",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 470,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

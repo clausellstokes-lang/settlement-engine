@@ -277,3 +277,42 @@ describe('F32 — analysis is deterministic (pure function of inputs)', () => {
     expect(resolveNearbyCommodities(config, TERRAIN)).toEqual(resolveNearbyCommodities(config, TERRAIN));
   });
 });
+
+// R3-CODE-C-2, ROUND-3-CUT #457 and #1163 (the chair's ruling of 2026-11-13): a complete export row
+// reads the resource analysis's OWN data. The two readers' towns, born as their render births them
+// (REVIEW-R2-STAGES render.rr2s.jsx :: cfgFor: the app's shape, the stress panel's Random off).
+describe('a complete export row says only what the analysis holds', () => {
+  const born = async (size, stresses) => {
+    const { birthConfig, loadGenerationLawPayloads } = await import('../../src/domain/density/densityCreateBoundary.js');
+    const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
+    await loadGenerationLawPayloads();
+    const seed = `rr2s-${size}-${stresses.length ? stresses.join('+') : 'calm'}-rand-1`;
+    const config = birthConfig({ ...DEFAULT_CONFIG, settType: size, selectedStressesRandom: false, selectedStresses: stresses, _randomizePriorities: true });
+    return generateSettlementPipeline(config, null, { seed, customContent: {} }).resourceAnalysis;
+  };
+
+  it('#457 rr2s-town-under_siege-rand-1: no leather goods while the analysis lists the Tannery missing; #1163 (a MADE RECORD): no claim beside a depleted herb ground', async () => {
+    const town = await born('town', ['under_siege']);
+    expect(town.gaps.some((g) => (g.missing || []).includes('Tannery'))).toBe(true);
+    // R3-CODE-C-8 (the reader's L05, the chair's ruling (b)): re-keyed by identity. The claim needs every house the chain
+    // names standing; with the Tannery missing the livestock row is not listed at all (no "leather goods", no claim).
+    expect(town.exports.filter((e) => e.chain === 'livestock')).toEqual([]);
+
+    // #1163 RUNS ON A MADE RECORD (TAIL-CLOSE-DISPLAY-2, red 5; the chair's ruling V16 (a), vetoable by the owner):
+    // rr2s-metropolis-calm-rand-1's herbs were its hot springs', which yield none since TAIL-DEFECON-C's DECLARED D34 (a)
+    // (680d16b54), and no birth of the shape is left (a scan of 270 towns: rr2s city/metropolis/town calm-rand-1..130,
+    // r2r thorp..city 0..129). Built with this file's own reader: a forest town with an ancient grove and herb gathering
+    // grounds, the herbs chain's two houses standing (Apothecary, Alchemist shop); the grounds depleted, the grove live.
+    // KEEP: the same record with the grounds live claims the complete chain, so the empty reason is the depletion's.
+    const madeHerbs = (/** @type {string[]} */ depleted) => {
+      const config = { nearbyResources: ['foraging_areas', 'ancient_grove'], nearbyResourcesDepleted: depleted };
+      const ra = generateResourceAnalysis('forest', resolveNearbyCommodities(config, 'forest'), [], [{ name: 'Apothecary' }, { name: 'Alchemist shop' }], config);
+      return { ra, herbs: ra.exports.find((/** @type {any} */ e) => e.chain === 'medicinal herbs') };
+    };
+    const live = madeHerbs([]);
+    expect(live.herbs, 'KEEP: the grounds live, the row claims the chain').toEqual({ product: 'healing potions, antidotes', chain: 'medicinal herbs', value: 'very high', reason: 'Complete production chain in place' });
+    const spent = madeHerbs(['foraging_areas']);
+    expect(spent.ra.resourceConditions.some((/** @type {any} */ r) => r.condition === 'depleted' && r.key === 'foraging_areas')).toBe(true);
+    expect(spent.herbs).toEqual({ product: 'healing potions, antidotes', chain: 'medicinal herbs', value: 'very high', reason: '' });
+  }, 60000);
+});

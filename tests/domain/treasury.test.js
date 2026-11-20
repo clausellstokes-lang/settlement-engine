@@ -715,9 +715,13 @@ describe('the label → form mapping is TOTAL over what the generator can emit',
   // but two of the literals it pushes are BUILT in `tradeGoods.js` and handed over as
   // `incomeBonuses`. A one-file scan would have declared totality over a set missing two
   // rows it could never see, which is precisely the shape of a denominator break.
+  // UPKEEP-16 (the chair's ruling (o) re-ruled, candidate D): a kept resource row with no house of its trade is retitled by
+  // the good it sells, and those titles are BUILT in `incomeLineSiblings.js` (RESOURCE_ROW_TRADES, `source:` literals), so
+  // the denominator spans that file too: a third writer of the emitted labels, added, never a row narrowed.
   const GENERATOR_FILES = [
     'src/generators/economy/economicState.js',
     'src/generators/economy/tradeGoods.js',
+    'src/generators/economy/incomeLineSiblings.js',
   ];
   const emittedLiterals = () => {
     const found = new Set();

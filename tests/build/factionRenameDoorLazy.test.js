@@ -44,7 +44,12 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 
 // A unique reader-facing string minted in exactly one source module each. String
 // literals survive minification, so each is a stable fingerprint of its module.
-const DOOR = 'Rename this faction';
+// Re-keyed BY IDENTITY (BOOT-TIP, 2026-11-10): the door's words became "Rename this
+// power" at SW-8 C6 (1e15a3c10, the owner's map Part B5: the retired word leaves the
+// rename doors), which re-keyed the door's component pins but not this dist pin — it
+// went red at the first verify:dist after. Same module, same strength; the literal is
+// still minted in exactly one source module (components/dossier/WorkbenchFactionRename.jsx).
+const DOOR = 'Rename this power';
 // The Workbench body's own fingerprint. NOT 'Change Dock': the door's success
 // note says "Commit it from the Change Dock.", so that literal is in BOTH
 // modules and the separation assertion below would red on its own copy. Picking

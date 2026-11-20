@@ -24,9 +24,11 @@
  */
 
 import { cleanNum } from './placeholders.js';
+import { pickVariant } from '../../kernel/proseHash.js';
 import { avgScore } from './defenseScoreBands.js';
 import { deriveMagicProfile } from '../magicProfile.js';
-import { deriveMagicReliance, magicDialAbsent, magicWorksAt } from '../magicReliance.js';
+import { deriveMagicReliance, magicDialAbsent, magicWorksAt, MAGIC_RELIANCE_WORD } from '../magicReliance.js';
+import { magicDependentsShown, magicHeadlineWord, relianceReadingShown } from './magicProvisionShown.js'; // BAR2-LABELS LB1: the magic words read what the page shows magic doing
 import { formatCount } from '../formatNumber.js';
 // The export-posture derivation lives in its own dependency-free leaf so the
 // EAGER deriveSystemState.js can reach it without dragging this whole display
@@ -80,7 +82,7 @@ const VIABILITY_LABEL = Object.freeze({
 /**
  * Structural view of the economicState fields the display model reads.
  * @typedef {Object} EconStateView
- * @property {unknown} [primaryExports]
+ * @property {unknown} [primaryExports] @property {unknown} [primaryImports]
  * @property {unknown} [exports]
  * @property {unknown} [isEntrepot]
  * @property {unknown} [prosperity]
@@ -90,6 +92,9 @@ const VIABILITY_LABEL = Object.freeze({
 /**
  * Structural view of the settlement fields the display model reads.
  * @typedef {Object} DossierSettlementView
+ * @property {string} [name] the town's own name (W2 DEF #36: the viability verdict says it)
+ * @property {unknown} [_seed] the generation seed (the viability draw's key)
+ * @property {unknown} [id] the saved settlement's id (the key's fallback)
  * @property {{ metrics?: { foodBalance?: FoodBalanceRecord | null, tradeAccess?: string } | null, summary?: string | null, viable?: boolean | null, dependencies?: unknown[] } | null} [economicViability]
  * @property {EconStateView | null} [economicState]
  * @property {{ tradeRouteAccess?: string } | null} [config]
@@ -211,11 +216,20 @@ export function deriveViability(settlement) {
   /** @type {NonNullable<DossierSettlementView['economicViability']>} */
   const v = settlement?.economicViability || {};
   const rawSummary = v.summary || null;
+  // #36 (STYLE-RULINGS §1; W2 DEF, 2026-11-07): each verdict says its finding in the town's own
+  // name, from a few variants the seed chooses (the same town always reads the same line).
+  const name = viabilityName(settlement);
+  const pick = (/** @type {readonly string[]} */ pool) => pickVariant(pool, viabilitySeed(settlement));
 
   if (v.viable === false) {
     return {
       viable: false, verdict: 'not_viable', label: VIABILITY_LABEL.not_viable,
-      summary: rawSummary || 'Not viable: critical issues prevent the settlement from surviving.',
+      summary: name
+        ? `✗ NOT VIABLE: ${pick([
+          `${name} cannot last as things stand.`,
+          `As things stand, ${name} will not survive.`,
+        ])}`
+        : (rawSummary || 'Not viable: critical issues prevent the settlement from surviving.'),
       rawSummary,
     };
   }
@@ -225,6 +239,7 @@ export function deriveViability(settlement) {
 
   const food = deriveFoodBalance(settlement);
   const dependencyCount = Array.isArray(v.dependencies) ? v.dependencies.length : 0;
+  const town = name || 'The settlement'; const seen = outlookFactsOf(settlement); // UPKEEP-8 (#228 #253 #326 #379): the Outlook says only what the town's own pages say
 
   if (food.deficit > 0) {
     // "Depends on imports" must match what the import channel actually is:
@@ -234,48 +249,122 @@ export function deriveViability(settlement) {
                 || settlement?.config?.tradeRouteAccess
                 || 'unknown';
     const covered = (food.importCoverage || 0) > 0;
-    let foodClause = 'depends on imports for food security';
+    const route = importRoutePhrase(food.importChannel);
+    // "Magical provision" is only honest when magic actually closes part
+    // of the gap (magicFoodOffset > 0) — a mundane caravan trickle in a
+    // magicExists:false world must not read as magically fed.
+    const magicFed = (food.magicFoodOffset || 0) > 0 && recordHoldsMagicFood(settlement); // UPKEEP-12 (#216): and the record holds it
+    let line;
     if (access === 'isolated') {
-      const channel = food.importChannel === 'teleportation circle'
-        ? 'the teleportation circle'
-        : food.importChannel;
-      // "Magical provision" is only honest when magic actually closes part
-      // of the gap (magicFoodOffset > 0) — a mundane caravan trickle in a
-      // magicExists:false world must not read as magically fed.
-      const magicFed = (food.magicFoodOffset || 0) > 0;
-      if (covered) {
-        // Legacy saves carry importCoverage without importChannel — the
-        // imports are real (Economics shows the coverage), the route just
-        // wasn't recorded. Channel-agnostic wording, never the
-        // "no meaningful import channel" clause.
-        const through = channel || 'trade imports';
-        foodClause = magicFed
-          ? `feeds itself through ${through}, magical provision, and stored reserves`
-          : `feeds itself through ${through} and stored reserves`;
-      } else {
-        foodClause = magicFed
-          ? 'survives on local production, magical provision, and stored reserves: no meaningful import channel reaches it'
-          : 'survives on local production and stored reserves: no meaningful import channel reaches it';
-      }
+      // Legacy saves carry importCoverage without importChannel — the imports are real (Economics
+      // shows the coverage), the route just was not recorded: the phrase falls back to "from outside".
+      line = covered
+        ? pick([
+          `${town} lies off the trade roads, yet it gets by: some of its food comes in ${route}${magicFed ? ', magic supplies a share,' : ''} and it draws on its stores.`,
+          `${town} grows less than it eats and has no dependable road to make up the rest; what it lacks comes in ${route}${magicFed ? ' and by magic' : ''}, and from its stores.`,
+        ])
+        : pick([
+          `${town} grows less than it eats, and nothing from outside makes up the difference; it lives on its own land${magicFed ? ', on magic,' : ''} and on what is in store.`,
+          `Nothing reliable reaches ${town} from outside, and its own land does not grow enough; the rest comes from its stores${magicFed ? ' and from magic' : ''}.`,
+        ]);
+    } else if (covered) {
+      line = pickTrue(pick, [
+        `${town} cannot feed itself: part of its food comes in ${route}.`,
+        `${town} grows less than it eats, and part of the difference arrives ${route}.`, // TAIL-DEFECON-D: a residual deficit stands
+        `${town} keeps order and pays its way, but it has to buy food to get through the year, and the food comes in ${route}.`,
+        `Some of what ${town} eats is brought in ${route}; its own land does not produce enough.`, // TAIL-DEFECON-D: 'much' overclaimed
+      ], [true, true, seen.keepsOrder && seen.paysItsWay, true], '');
+    } else {
+      line = pick([
+        `${town} grows less than it eats, and its trade brings in little food to make up the difference.`,
+        `${town}'s own land does not grow enough, and little food reaches it from outside.`,
+      ]);
     }
     return {
       viable: true, verdict: 'strained', label: VIABILITY_LABEL.strained,
-      summary: `VIABLE BUT STRAINED: historically plausible and institutionally functional, but ${foodClause}.`,
+      summary: `VIABLE BUT STRAINED: ${line}`,
       rawSummary,
     };
   }
   if (dependencyCount > 0) {
+    // BIRTH-3 (BR3 (c), P5 (ii)): under a siege the printed import list prints nothing (`tradeListDisplay.js`: the trade is cut
+    // off), so no good of it is named as arriving: the birth's words of ordinary times stand on the stored list, cut off
+    const stresses = /** @type {{ stressTypes?: unknown } | undefined} */ (settlement?.config)?.stressTypes;
+    const printedImports = Array.isArray(stresses) && stresses.includes('under_siege') ? [] : settlement?.economicState?.primaryImports;
+    const goods = dependencyGoods(v.dependencies, printedImports), many = goods !== null && (/ and /.test(goods) || /s$/.test(goods)); // UPKEEP-8 (#253): a good the import list holds, and its number
     return {
       viable: true, verdict: 'dependent', label: VIABILITY_LABEL.dependent,
-      summary: `VIABLE WITH CRITICAL DEPENDENCIES: the settlement can function, but its survival depends on ${dependencyCount} stable trade ${dependencyCount > 1 ? 'dependencies' : 'dependency'} and protected routes.`,
+      summary: `VIABLE WITH CRITICAL DEPENDENCIES: ${pick(goods
+        ? [
+          `${town} can stand, but only while ${goods} ${many ? 'keep' : 'keeps'} arriving and the routes that bring ${many ? 'them' : 'it'} stay open.`,
+          `${town}'s trades run on ${goods} brought in from elsewhere; if that supply stopped, they would stop with it.`,
+          `${town} works well enough, as long as nobody cuts it off from the ${goods} it buys in.`,
+        ]
+        : [
+          `${town} can stand, but only while the goods it buys in keep arriving and the routes that bring them stay open.`,
+          `${town}'s trades run on goods brought in from elsewhere; if that supply stopped, they would stop with it.`,
+        ])}`,
       rawSummary,
     };
   }
   return {
     viable: true, verdict: 'self_sufficient', label: VIABILITY_LABEL.self_sufficient,
-    summary: 'VIABLE: economically self-sufficient and historically plausible.',
+    summary: `VIABLE: ${pickTrue(pick, [
+      `${town} feeds itself and pays its own way.`,
+      `${town} grows what it eats and makes what it needs, and owes no one for either.`,
+      `Nothing ${town} needs to get through the year has to come from outside.`,
+    ], [!seen.buysFood && seen.paysItsWay, !seen.buysFood && !seen.needsImports, !seen.buysFood && !seen.needsImports], seen.buysIn ? `${town} gets through the year, buying in what its own land and trades do not provide.` : `${town} gets through the year on its own land and trades, and goes without what they do not provide.`)}`, // TAIL-DEFECON-D (#00585): it buys in only where something arrives
     rawSummary,
   };
+}
+
+/**
+ * How the imported food reaches a town, in a player's words, from the food balance's recorded
+ * channel (`foodBalance.js`: '<route> trade', 'minor routes and sanctioned caravans', a magical
+ * channel). An unrecorded or unknown channel reads "from outside" — never a guessed route.
+ * @type {Readonly<Record<string, string>>}
+ */
+const IMPORT_ROUTE_PHRASE = Object.freeze({
+  'port trade': 'by sea',
+  'river trade': 'by river',
+  'road trade': 'by road',
+  'crossroads trade': 'along the roads that meet there',
+  'mountain pass trade': 'over the pass',
+  'minor routes and sanctioned caravans': 'by caravan',
+  'teleportation circle': 'through the teleportation circle',
+  'airship traffic': 'by airship',
+});
+
+/** @param {unknown} channel @returns {string} */
+function importRoutePhrase(channel) {
+  return (typeof channel === 'string' && IMPORT_ROUTE_PHRASE[channel]) || 'from outside';
+}
+
+/**
+ * The goods a dependent town buys in, from its own dependency rows ("Imports grain"), the first
+ * two by name; null where no row names a good (the variants then speak of "the goods it buys in"); UPKEEP-8: only a good the list holds.
+ * @param {unknown} dependencies @param {unknown} [imports] the town's printed import list @returns {string|null}
+ */
+function dependencyGoods(dependencies, imports = null) {
+  if (!Array.isArray(dependencies)) return null; const listed = Array.isArray(imports) ? imports.map((x) => String(x).toLowerCase()) : null;
+  const goods = /** @type {string[]} */ ([...new Set(dependencies
+    .map((d) => /^Imports (.+)$/.exec(String(d?.title || ''))?.[1]?.replace(/\s*\(.*\)\s*$/, '').trim().toLowerCase())
+    .filter((g) => g && !/[0-9]/.test(g) && (!listed || listed.some((x) => x.includes(g)))))]);
+  if (goods.length === 0) return null;
+  return goods.length === 1 ? goods[0] : `${goods[0]} and ${goods[1]}`;
+}
+
+/** @param {DossierSettlementView | null | undefined} settlement @returns {string} */
+function viabilityName(settlement) {
+  const name = typeof settlement?.name === 'string' ? settlement.name.trim() : '';
+  return name;
+}
+
+/** @param {DossierSettlementView | null | undefined} settlement @returns {string} */
+function viabilitySeed(settlement) {
+  const s = settlement;
+  const seed = s?._seed ?? s?.id ?? s?.name ?? '';
+  return seed ? `${seed}|viability` : '';
 }
 
 /**
@@ -482,7 +571,8 @@ export function deriveMagicPosture(settlement) {
     // world keeps its sentence, because there the line IS the page.
     display: m.magicExists === false
       ? 'Magic does not function in this world'
-      : String(m.availability || '').charAt(0).toUpperCase() + String(m.availability || '').slice(1),
+      // BAR2-LABELS LB1: the headline is the record's own level (the availability prints in the envelope below it)
+      : magicHeadlineWord(settlement, m.availability),
     roleLines: Object.entries(m.roles).map(([role, band]) => `${MAGIC_ROLE_LABEL[role] || role} role: ${band}`),
   };
 }
@@ -506,20 +596,20 @@ export function deriveHeadcounts(settlement) {
   return {
     institutions: (s.institutions || []).length,
     npcs: (s.npcs || []).length,
-    // PowerStructure.factions is the canonical faction roster (legacy .factions fallback).
-    factions: (s.powerStructure?.factions || s.factions || []).length,
+    // The powers are the only faction roster (PEOPLE-5A: the NPC grouping's fallback deleted).
+    factions: (s.powerStructure?.factions || []).length,
   };
 }
 
 /**
- * Prosperity label (§overview/economics) — the prosperity enum BOTH the screen and
- * the PDF render. The COLOR/tone is intentionally per-surface (the web uses an RGB
- * scale, the PDF a print palette), so only the label is a shared scalar.
+ * Prosperity label (§overview/economics) — the prosperity enum BOTH surfaces render; tone is per-surface
+ * (web RGB scale, PDF print palette), so only the label is a shared scalar. `inCrisis`: beside a label a
+ * crisis in force lowered, the one sentence of what the place is in ordinary years (ruling 1(a), REVIEW-UPKEEP-2).
  * @param {any} settlement
- * @returns {{ label: string | null }}
+ * @returns {{ label: string | null, inCrisis: string | null }}
  */
 export function deriveProsperityPosture(settlement) {
-  return { label: settlement?.economicState?.prosperity || null };
+  return { label: settlement?.economicState?.prosperity || null, inCrisis: prosperityInCrisisLine(settlement) };
 }
 
 /**
@@ -529,7 +619,7 @@ export function deriveProsperityPosture(settlement) {
  * @returns {{ label: string | null }}
  */
 export function deriveSafetyPosture(settlement) {
-  return { label: settlement?.economicState?.safetyProfile?.safetyLabel || null };
+  return { label: safetyShownOf(settlement).label }; // PAGE-1 SAFETY: the label's one reader (a reader's read: the label alone)
 }
 
 /**
@@ -638,14 +728,49 @@ export function magicRowsGated(settlement, rows, keyOf = (row) => /** @type {{ k
  */
 export function deriveMagicRelianceView(settlement) {
   const r = deriveMagicReliance(/** @type {import('../magicReliance.js').MagicRelianceSource} */ (/** @type {unknown} */ (settlement)));
+  // BAR2-LABELS LB1 (the chair's ruling of 2026-11-15): the reading the page prints is never above what the page shows
+  // magic doing here (`magicProvisionShown.js :: relianceReadingShown`; a chain note the card does not print is not a
+  // dependent). The record's reading is not touched.
+  const reading = relianceReadingShown(settlement, r);
   return {
-    reading: r.reading,
-    word: r.word,
+    reading,
+    word: MAGIC_RELIANCE_WORD[reading] ?? r.word,
     shown: magicRowsGated(settlement, [{ key: 'magicReliance' }]).length > 0,
     practitioners: r.practitioners,
-    dependents: r.dependents,
-    reliesOnMagic: r.reading === 'relied-upon' || r.reading === 'integral',
+    dependents: reading === r.reading ? r.dependents : magicDependentsShown(settlement),
+    reliesOnMagic: reading === 'relied-upon' || reading === 'integral',
   };
+}
+
+/**
+ * WHERE THE MAGIC COMES FROM, as the Magic tab's reliance line prints it (W2-A-LEAVES, 2026-11-12; census row 3,
+ * the chair's ruling: "the Magic tab names where the magic it says the town relies on comes from, read from the
+ * leaf; where nothing supplies it, the reliance line does not print"). Read from `facts/magicSource.js`: every
+ * house by name (those that practise, then those that supply a dependent chain), then the people who practise,
+ * one by name and more than one counted ("Mages' guild and 3 practitioners").
+ *   - `supply`: that phrase, where the place relies on magic and something supplies it; null otherwise.
+ *   - `statable`: false only where the place relies on magic and nothing on the record supplies it; the line
+ *     is then not printed.
+ * @param {DossierSettlementView | null | undefined} settlement
+ * @returns {{ supply: string|null, statable: boolean }}
+ */
+export function deriveMagicSupplyView(settlement) {
+  const reliance = deriveMagicRelianceView(settlement);
+  if (!reliance.reliesOnMagic) return { supply: null, statable: true };
+  const { houses: supplying, people } = magicSourceOf(settlement);
+  // BAR8 MARKS-2 item 6 (K's 12f; the sixth chair's BRIEF-BAR8, 2026-11-17; vetoable by the owner): A HOUSE THE PAGE MARKS
+  // STOPPED SUPPLIES NOTHING NOW. "supplied by Access to a house of worship" printed beside that house's own "Stopped by the
+  // siege." (C19407): the supplier's mark is read (`crisisStoppedRow.js :: rowMarkText`, the mark its card prints), and a
+  // house it marks stopped is not named. Where every house is so marked the reliance (the food ledger's) still prints, with
+  // no supplier named: the record holds one, the crisis has stopped it.
+  const houses = supplying.filter((name) => !stoppedOnPage(settlement, name));
+  if (supplying.length && !houses.length && !people.length) return { supply: null, statable: true };
+  const parts = houses.map(proseHouseName).filter((n, i, all) => n && all.findIndex((p) => p.toLowerCase() === n.toLowerCase()) === i);
+  if (people.length === 1) parts.push(people[0]);
+  else if (people.length > 1) parts.push(`${people.length} practitioners`);
+  if (parts.length === 0) return { supply: null, statable: false };
+  const supply = parts.length === 1 ? parts[0] : `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}`;
+  return { supply, statable: true };
 }
 
 /**
@@ -667,3 +792,123 @@ export function magicRelianceDeskSettlement(settlement) {
     defenseProfile: { ...defenseProfile, magicDependency: reliance.reliesOnMagic },
   }));
 }
+// The prosperity sentence's one writer (ruling 1(a)); imported here, not at the head, so the line-keyed
+// holder census's citations into this file stay put.
+import { prosperityInCrisisLine } from './prosperityInCrisis.js';
+import { safetyShownOf } from './safetyShown.js';
+
+// ── UPKEEP-8 (2026-11-13): the Outlook says only what the town's own pages say ──────────────────────────────
+// The round-three cut's #228 #253 #326 #379 and the increment's #ww-567 #ww-717 #ww-1541 (the chair's ruling: not
+// "keeps order" where law and order reads critical; not "pays its way" where the town is poor and earns less than it
+// spends; not "grows what it eats" or "feeds itself" where it buys its food or lists critical imports).
+
+/**
+ * The seed's variant where it is true; else the next true one in the pool's order; else the twin ('' keeps the pool's
+ * own pick, for a pool whose every variant is true of its branch).
+ * @param {(pool: readonly string[]) => string | undefined} pick @param {readonly string[]} pool @param {readonly boolean[]} ok
+ * @param {string} twin @returns {string}
+ */
+function pickTrue(pick, pool, ok, twin) {
+  const at = Math.max(0, pool.indexOf(String(pick(pool))));
+  for (let k = 0; k < pool.length; k++) { const j = (at + k) % pool.length; if (ok[j]) return pool[j]; }
+  return twin || pool[at];
+}
+
+/**
+ * The fields the Outlook's facts read.
+ * @typedef {{ economicState?: { prosperity?: unknown, primaryImports?: unknown, primaryExports?: unknown, necessityImports?: unknown,
+ *   foodSecurity?: { foodRecord?: { normalImportPct?: unknown } | null } | null } | null,
+ *   resourceAnalysis?: { imports?: { critical?: unknown } | unknown[] } | null }} OutlookSettlement
+ */
+
+/**
+ * What the town's own pages say, for the Outlook: its Law & order band (the Foundations' causal reading), its
+ * printed prosperity rung (the low rungs are the Economics header's "earns less than it spends"), the food it buys
+ * (the food record's import share), and the imports its printed trade list marks as a necessity or as what the terrain
+ * cannot produce (the Economics tab's own list and marks: `EconomicsTab.jsx :: shownImports`).
+ * @param {DossierSettlementView | null | undefined} settlement
+ * @returns {{ keepsOrder: boolean, paysItsWay: boolean, buysFood: boolean, buysIn: boolean, needsImports: boolean }}
+ */
+function outlookFactsOf(settlement) {
+  const town = /** @type {OutlookSettlement | null | undefined} */ (/** @type {unknown} */ (settlement));
+  const eco = town?.economicState || {};
+  // BAR5-BAND: the band the Foundations print (domain/display/foundationBandShown.js: one reading of the row on every tab)
+  const law = foundationBandShown(settlement, 'law_order', String(bandForVariable(/** @type {Parameters<typeof bandForVariable>[0]} */ (/** @type {unknown} */ (settlement)), 'law_order'))); const rawStress = /** @type {{ stress?: unknown }} */ (/** @type {unknown} */ (settlement))?.stress, stressTypes = (Array.isArray(rawStress) ? rawStress : rawStress ? [rawStress] : []).map((e) => String(/** @type {{ type?: unknown } | null} */ (e)?.type ?? ''));
+  const record = eco.foodSecurity?.foodRecord;
+  /** @param {unknown} list @returns {string[]} */
+  const lower = (list) => (Array.isArray(list) ? list : []).map((x) => String(x).toLowerCase());
+  const necessity = lower(eco.necessityImports);
+  const imp = town?.resourceAnalysis?.imports;
+  const terrain = imp && !Array.isArray(imp) ? lower(imp.critical) : [];
+  // the import list AS THE ECONOMICS TAB PRINTS IT: the record's imports and the terrain's criticals, through the list's one filter
+  /** @type {string[]} */
+  const recorded = Array.isArray(eco.primaryImports) ? eco.primaryImports.map(String) : [];
+  const imports = lower(displayTradeList([...recorded, ...terrain.filter((t) => !recorded.some((imp) => imp.toLowerCase().includes(t)))],
+    settlement, { side: 'imports', exports: Array.isArray(eco.primaryExports) ? [...eco.primaryExports] : [] })); // a copy read (tradeListWriters)
+  return {
+    keepsOrder: law !== 'critical' && law !== 'collapsed' && !OPEN_REVOLT.some((t) => stressTypes.includes(t)), // TAIL-DEFECON-D (#01134): not under open revolt
+    paysItsWay: !['Subsistence', ...PROSPERITY_LABELS.slice(0, PROSPERITY_LABELS.indexOf('Poor') + 1)].includes(String(eco.prosperity ?? '')),
+    buysFood: Number(record?.normalImportPct) > 0, buysIn: Number(record?.normalImportPct) > 0 || tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (/** @type {unknown} */ (settlement))).imports.length > 0, // TAIL-DEFECON-D: food bought, or an import the Economics tab prints as arriving
+    needsImports: imports.some((imp) => necessity.some((n) => imp.includes(n)) || terrain.some((t) => imp.includes(t) || t.includes(imp))),
+  };
+}
+
+/**
+ * #608 (UPKEEP-8, the chair's ruling of 2026-11-13): does the Economics glance's Output chip print beside the prosperity
+ * word? The figure (the economy's output, 0-100) and the word (the printed prosperity label) have no common home, so
+ * where they stand two bands apart (the chip red, under 35, beside Prosperous or Wealthy; green, 60 or more, beside
+ * Poor or lower) the word prints alone. Elsewhere the chip prints once, as the T2-1 ruling keeps it.
+ * @param {number} score the chip's figure @param {unknown} label the printed prosperity word @returns {boolean}
+ */
+export function outputChipBesideWord(score, label) {
+  if (!(score > 0)) return false;
+  const rung = ['Subsistence', ...PROSPERITY_LABELS].map(String).indexOf(String(label ?? ''));
+  if (rung < 0) return true;
+  const high = rung >= 1 + PROSPERITY_LABELS.indexOf('Prosperous'), low = rung <= 1 + PROSPERITY_LABELS.indexOf('Poor');
+  return !((score < 35 && high) || (score >= 60 && low));
+}
+import { bandForVariable } from '../causalState.js'; import { foundationBandShown } from './foundationBandShown.js'; import { PROSPERITY_LABELS } from '../prosperityRank.js'; import { displayTradeList, tradeListsAsPrinted } from './tradeListDisplay.js'; // at the END: no line above moves
+// W2-A-LEAVES (row 3): the leaf the Magic tab's reliance line names its source from (an import at the foot, so the
+// lines the prose wiring census cites above keep their numbers).
+import { magicSourceOf } from '../facts/magicSource.js';
+import { institutionDisplayName } from './institutionDisplayName.js';
+import { rowMarkText } from './crisisStoppedRow.js'; // BAR8 MARKS-2 item 6: the supplier's mark (at the foot: no cited line moves)
+
+/**
+ * BAR8 MARKS-2 item 6: does the page mark this roster house stopped ("Stopped by the siege.")?
+ * @param {DossierSettlementView | null | undefined} settlement @param {string} name a roster house's name
+ * @returns {boolean}
+ */
+function stoppedOnPage(settlement, name) {
+  // the house by its roster name, as a bare row is read (the leaf finds its catalogue id by the name; `magicSourceOf` names
+  // only live roster houses)
+  const mark = rowMarkText(settlement, 'house', { name });
+  return typeof mark === 'string' && /^Stopped by /.test(mark);
+}
+
+/**
+ * A house as running prose names it (W2-A-LEAVES-2, 2026-11-13; REVIEW-W2A F2: 73 of 289 reliance lines printed a
+ * catalogue count range or condition — "Cathedral (10,000+ only)", "Dream parlors (high magic)"). Its display
+ * label (`institutionDisplayName`, the one seam for a house's label), with any bracketed count or note struck: in
+ * a sentence a house is named, never counted or qualified.
+ * @param {string} house a roster house's name
+ * @returns {string}
+ */
+function proseHouseName(house) {
+  return institutionDisplayName(house).replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * UPKEEP-12 (#216, the chair's step 3): the Outlook names magic only where the RECORD's food home holds a magic supply
+ * (the food generator's `magicOffset`, or the food record's share): the viability balance can carry a divine provision
+ * the food record never counted, and the page then says "Reliance on magic: None" beside "…and from magic". At the END
+ * of the file so no cited line moves.
+ * @param {DossierSettlementView | null | undefined} settlement @returns {boolean}
+ */
+function recordHoldsMagicFood(settlement) {
+  const supply = /** @type {{ magicOffset?: number, foodRecord?: { magicPct?: number } } | undefined} */ (
+    /** @type {unknown} */ (settlement?.economicState?.foodSecurity));
+  return (supply?.magicOffset || 0) > 0 || (supply?.foodRecord?.magicPct || 0) > 0;
+}
+/** TAIL-DEFECON-D (#01134): the crises whose own lines say order has broken (a slave revolt, an insurgency): the Outlook's "keeps order" is not said under them. */
+const OPEN_REVOLT = Object.freeze(['slave_revolt', 'insurgency']);

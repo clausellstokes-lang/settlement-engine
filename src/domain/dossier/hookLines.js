@@ -37,6 +37,9 @@
  */
 
 import { fnv1a32 } from '../../kernel/proseHash.js';
+import { drawDeclared, lineText } from '../facts/drawDeclared.js';
+import { pluralPowerName } from '../display/governanceAccount.js';
+import { powerNameWithArticle, powerSentenceName } from '../../data/people/powerSentenceName.js';
 
 /**
  * The issue families, in the order they are tested. A family is matched on the issue text
@@ -57,11 +60,46 @@ const ISSUE_FAMILIES = Object.freeze([
 ]);
 
 /**
+ * A PARTY IS A NAME AND A NUMBER (SW-10 HOOKS, 2026-11-09; FIX-HOOK-OBJECT's intake, SW-9's hand-back):
+ * the record names a power "Religious Authorities" or "Merchant Guilds" as often as "Elder Council",
+ * and a template that wrote `${a} has … its own …` printed "Religious Authorities has begun issuing its
+ * own papers" and "never Religious Authorities's to hold" (measured on the soak's 1,000 at bd07005b9:
+ * 268 conflict hooks in 616 towns with a plural power). Every line now takes each party as
+ * `{ name, plural }` and speaks its verbs, possessives and pronouns through the helpers below, so the
+ * sentence agrees with the name it slots. Plurality is read by the head word, as the governance
+ * account reads it (`domain/display/governanceAccount.js :: pluralPowerName`) — one reader for one fact.
+ * BAR6-POWERS (LAW 10h, the audit's C1980 and C76763): the NAME a line prints is the power's prose form (`powerSentenceName`,
+ * the one reader: "The Guard", never the roster label "Military/Guard" beside a verb), as `conflicts.js` and the Institutions
+ * tab print it; the KEY is the record's own spelling, so the draw keys on what it always keyed on and no hook is re-drawn.
+ * @typedef {{ name: string, plural: boolean, key: string }} HookParty
+ */
+
+/**
  * A line takes the two parties and the issue as the record spells them, and returns one
  * sentence. The issue arrives lower-cased at the call site (the record stores it
  * Title-Case, as a label), so a line may drop it mid-sentence without re-casing it.
- * @typedef {(a: string, b: string, issue: string) => string} HookLine
+ * @typedef {((a: HookParty, b: HookParty, issue: string) => string) | { text: (a: HookParty, b: HookParty, issue: string) => string, needs?: string[], excludes?: string[] }} HookLine a template, or the declared form around one (CENSUS-2c)
  */
+
+/**
+ * The party as the record names it.
+ * @param {unknown} name @param {string} fallback
+ * @returns {HookParty}
+ */
+export function hookPartyOf(name, fallback) {
+  const key = typeof name === 'string' && name !== '' ? name : fallback;
+  const spelled = key === fallback ? key : powerSentenceName(key);
+  return Object.freeze({ name: key === fallback ? key : powerNameWithArticle(key), plural: pluralPowerName(spelled), key }); // NAMES-1 (CN1): `openOnCapital`
+}
+
+// ── THE AGREEMENT, ONE HELPER PER WORD (the singular spelling is the line's old text, byte for byte) ──
+/** @param {HookParty} p */ const has = (p) => (p.plural ? 'have' : 'has');
+/** @param {HookParty} p */ const is = (p) => (p.plural ? 'are' : 'is');
+/** @param {HookParty} p */ const its = (p) => (p.plural ? 'their' : 'its');
+/** @param {HookParty} p */ const it = (p) => (p.plural ? 'they' : 'it');
+/** @param {HookParty} p @param {string} one @param {string} many */ const verb = (p, one, many) => (p.plural ? many : one);
+/** "Elder Council's", "Merchant Guilds'". @param {HookParty} p */
+const of = (p) => (p.plural && /s$/i.test(p.name) ? `${p.name}'` : `${p.name}'s`);
 
 /**
  * The libraries. Plain, specific, nothing meta — the house voice: a sentence states what
@@ -78,66 +116,66 @@ const ISSUE_FAMILIES = Object.freeze([
  */
 /** @type {ReadonlyArray<HookLine>} */
 const LICENCE_LINES = Object.freeze([
-  (a, b, issue) => `${a} has begun issuing its own papers over ${issue}, and ${b} is refusing to honour them.`,
-  (a, b, issue) => `A clerk who holds the only complete record of ${issue} has stopped coming to work, and both ${a} and ${b} have sent someone to find them.`,
-  (a, b, issue) => `${b} has offered to drop its claim on ${issue} in exchange for something it will not put in writing, and ${a} is tempted.`,
-  (a, b, issue) => `Two sets of papers covering ${issue} are in circulation, one sealed by ${a} and one by ${b}, and nobody outside either camp can tell which is binding.`,
-  (a, b, issue) => `${a} has quietly stopped enforcing ${issue} against anyone who pays ${b} instead, and the arrangement is about to become public.`,
+  (a, b, issue) => `${a.name} ${has(a)} begun issuing ${its(a)} own papers over ${issue}, and ${b.name} ${is(b)} refusing to honour them.`,
+  (a, b, issue) => `A clerk who holds the only complete record of ${issue} has stopped coming to work, and both ${a.name} and ${b.name} have sent someone to find them.`,
+  (a, b, issue) => `${b.name} ${has(b)} offered to drop ${its(b)} claim on ${issue} in exchange for something ${it(b)} will not put in writing, and ${a.name} ${is(a)} tempted.`,
+  (a, b, issue) => `Two sets of papers covering ${issue} are in circulation, one sealed by ${a.name} and one by ${b.name}, and nobody outside either camp can tell which is binding.`,
+  (a, b, issue) => `${a.name} ${has(a)} quietly stopped enforcing ${issue} against anyone who pays ${b.name} instead, and the arrangement is about to become public.`,
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
 const JURISDICTION_LINES = Object.freeze([
-  (a, b, issue) => `${a} has taken someone into custody over ${issue}, and ${b} has sent people to take them back.`,
-  (a, b, issue) => `A ruling on ${issue} went ${a}'s way, and ${b} has simply carried on as though it did not.`,
-  (a, b, issue) => `${b} has started keeping its own account of ${issue}, and it no longer agrees with ${a}'s about what happened.`,
-  (a, b, issue) => `Somebody acting for ${a} overstepped badly over ${issue}, and ${b} is holding the proof back for a better moment.`,
-  (a, b, issue) => `${a} and ${b} have both claimed the right to settle ${issue}, and the people who must live with the answer are being asked to choose.`,
+  (a, b, issue) => `${a.name} ${has(a)} taken someone into custody over ${issue}, and ${b.name} ${has(b)} sent people to take them back.`,
+  (a, b, issue) => `A ruling on ${issue} went ${of(a)} way, and ${b.name} ${has(b)} simply carried on as though it did not.`,
+  (a, b, issue) => `${b.name} ${has(b)} started keeping ${its(b)} own account of ${issue}, and ${it(b)} no longer ${verb(b, 'agrees', 'agree')} with ${of(a)} about what happened.`,
+  (a, b, issue) => `Somebody acting for ${a.name} overstepped badly over ${issue}, and ${b.name} ${is(b)} holding the proof back for a better moment.`,
+  (a, b, issue) => `${a.name} and ${b.name} have both claimed the right to settle ${issue}, and the people who must live with the answer are being asked to choose.`,
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
 const PROPERTY_LINES = Object.freeze([
-  (a, b, issue) => `${a} has posted guards on what it says is its own, and ${b} says ${issue} was never ${a}'s to hold.`,
-  (a, b, issue) => `An inventory of ${issue} came up short, and ${a} and ${b} each say the other took the difference.`,
-  (a, b, issue) => `${b} has produced an old deed bearing on ${issue}; it is good enough for ${a} to take seriously and old enough for ${a} to doubt.`,
-  (a, b, issue) => `Someone has been moving what ${issue} covers out of the building at night, and both ${a} and ${b} assume the other arranged it.`,
-  (a, b, issue) => `${a} has offered to split ${issue} rather than argue it, and the offer has split ${b} instead.`,
+  { text: (a, b, issue) => `${a.name} ${has(a)} posted guards on what ${it(a)} ${verb(a, 'says', 'say')} is ${its(a)} own, and ${b.name} ${verb(b, 'says', 'say')} ${issue} was never ${of(a)} to hold.`, needs: ['guardPresence'] }, // CENSUS-2c: the rulings §3's composite
+  (a, b, issue) => `An inventory of ${issue} came up short, and ${a.name} and ${b.name} each say the other took the difference.`,
+  (a, b, issue) => `${b.name} ${has(b)} produced an old deed bearing on ${issue}; it is good enough for ${a.name} to take seriously and old enough for ${a.name} to doubt.`,
+  (a, b, issue) => `Someone has been moving what ${issue} covers out of the building at night, and both ${a.name} and ${b.name} assume the other arranged it.`,
+  (a, b, issue) => `${a.name} ${has(a)} offered to split ${issue} down the middle, and ${b.name} ${has(b)} not yet said whether ${it(b)} will take it.`, // BAR6-POWERS (LAW 6 › 6d-members' class, LAW 5W office): no members presumed of a power that may be one person
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
 const REVENUE_LINES = Object.freeze([
-  (a, b, issue) => `${a} has stopped paying what ${b} says it owes on ${issue}, and the stoppage is costing a third party money.`,
-  (a, b, issue) => `A clerk's ledger covering ${issue} is missing a season, and ${a} benefits from its absence more than ${b} does.`,
-  (a, b, issue) => `${b} has undercut ${a} on ${issue} at a price that cannot be honest, and nobody has worked out yet where the difference comes from.`,
-  (a, b, issue) => `${a} has begun turning away anyone who deals with ${b} over ${issue}, and the refusals are starting to bite the wrong people.`,
-  (a, b, issue) => `Both ${a} and ${b} have promised the same share of ${issue} to the same outsider, who has now arrived to collect.`,
+  (a, b, issue) => `${a.name} ${has(a)} stopped paying what ${b.name} ${verb(b, 'says', 'say')} ${it(a)} ${verb(a, 'owes', 'owe')} on ${issue}, and the stoppage is costing a third party money.`,
+  (a, b, issue) => `A clerk's ledger covering ${issue} is missing a season, and ${a.name} ${verb(a, 'benefits', 'benefit')} from its absence more than ${b.name} ${verb(b, 'does', 'do')}.`,
+  (a, b, issue) => `${b.name} ${has(b)} undercut ${a.name} on ${issue} at a price that cannot be honest, and nobody has worked out yet where the difference comes from.`,
+  (a, b, issue) => `${a.name} ${has(a)} begun turning away anyone who deals with ${b.name} over ${issue}, and the refusals are starting to bite the wrong people.`,
+  (a, b, issue) => `Both ${a.name} and ${b.name} have promised the same share of ${issue} to the same outsider, who has now arrived to collect.`,
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
 const PEOPLE_LINES = Object.freeze([
-  (a, b, issue) => `${a} has drawn up names under ${issue}, and ${b} has been quietly telling people how to keep off the list.`,
-  (a, b, issue) => `A family caught between ${a} and ${b} over ${issue} has asked for someone from outside to speak for them.`,
-  (a, b, issue) => `${b} has taken on people ${a} had already claimed under ${issue}, and neither will release them.`,
-  (a, b, issue) => `Someone has been paid to swear to a version of ${issue} that suits ${a}, and ${b} knows who paid and not yet who swore.`,
-  (a, b, issue) => `${a} and ${b} have each offered protection over ${issue} to the same households, on terms that cannot both be kept.`,
+  (a, b, issue) => `${a.name} ${has(a)} drawn up names under ${issue}, and ${b.name} ${has(b)} been quietly telling people how to keep off the list.`,
+  (a, b, issue) => `A family caught between ${a.name} and ${b.name} over ${issue} has asked for someone from outside to speak for them.`,
+  (a, b, issue) => `${b.name} ${has(b)} taken on people ${a.name} had already claimed under ${issue}, and neither will release them.`,
+  (a, b, issue) => `Someone has been paid to swear to a version of ${issue} that suits ${a.name}, and ${b.name} ${verb(b, 'knows', 'know')} who paid and not yet who swore.`,
+  (a, b, issue) => `${a.name} and ${b.name} have each offered protection over ${issue} to the same households, on terms that cannot both be kept.`,
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
 const SEAT_LINES = Object.freeze([
-  (a, b, issue) => `${a} has a candidate for ${issue} and ${b} has a reason the candidate cannot stand, and the reason is true.`,
-  (a, b, issue) => `A vote on ${issue} has been postponed three times, each time by whichever of ${a} or ${b} would have lost it.`,
-  (a, b, issue) => `${b} has let it be known it will accept ${a}'s answer to ${issue} if one of its own people is kept on, and the condition is the real dispute.`,
-  (a, b, issue) => `Two people are already acting as though ${issue} is settled in their favour, one backed by ${a} and one by ${b}.`,
-  (a, b, issue) => `Someone with no part in ${a} or ${b} has been promised ${issue} by both of them, and has told neither about the other.`,
+  (a, b, issue) => `${a.name} ${has(a)} a candidate for ${issue} and ${b.name} ${has(b)} a reason the candidate cannot stand, and the reason is true.`,
+  (a, b, issue) => `A vote on ${issue} has been postponed three times, each time by whichever of ${a.name} or ${b.name} would have lost it.`,
+  (a, b, issue) => `${b.name} ${has(b)} let it be known ${it(b)} will accept ${of(a)} answer to ${issue} if one of ${its(b)} own people is kept on, and the condition is the real dispute.`,
+  (a, b, issue) => `Two people are already acting as though ${issue} is settled in their favour, one backed by ${a.name} and one by ${b.name}.`,
+  (a, b, issue) => `Someone with no part in ${a.name} or ${b.name} has been promised ${issue} by both of them, and has told neither about the other.`,
 ]);
 
 /** @type {ReadonlyArray<HookLine>} */
 const STANDING_LINES = Object.freeze([
-  (a, b, issue) => `${a} has stopped speaking to ${b} about ${issue} and started speaking about it to everybody else.`,
-  (a, b, issue) => `A go-between who carried messages on ${issue} between ${a} and ${b} has been caught keeping copies.`,
-  (a, b, issue) => `${b} is waiting for ${a} to overreach on ${issue}, and has arranged for it to be witnessed when it happens.`,
-  (a, b, issue) => `An old debt between ${a} and ${b} has been called in over ${issue}, years after both sides had stopped mentioning it.`,
-  (a, b, issue) => `Someone has been feeding ${a} and ${b} the same warning about each other over ${issue}, and neither has asked who.`,
-  (a, b, issue) => `${a} has offered ${b} terms on ${issue} that are better than ${b} expected, which is why ${b} has not accepted them.`,
+  (a, b, issue) => `${a.name} ${has(a)} stopped speaking to ${b.name} about ${issue} and started speaking about it to everybody else.`,
+  (a, b, issue) => `A go-between who carried messages on ${issue} between ${a.name} and ${b.name} has been caught keeping copies.`,
+  (a, b, issue) => `${b.name} ${is(b)} waiting for ${a.name} to overreach on ${issue}, and ${has(b)} arranged for it to be witnessed when it happens.`,
+  (a, b, issue) => `An old debt between ${a.name} and ${b.name} has been called in over ${issue}, years after both sides had stopped mentioning it.`,
+  (a, b, issue) => `Someone has been feeding ${a.name} and ${b.name} the same warning about each other over ${issue}, and neither has asked who.`,
+  (a, b, issue) => `${a.name} ${has(a)} offered ${b.name} better terms on ${issue} than ${b.name} expected, and ${b.name} ${is(b)} looking for the catch before ${it(b)} ${verb(b, 'answers', 'answer')}.`,
 ]);
 
 /** @type {Readonly<Record<string, ReadonlyArray<HookLine>>>} */
@@ -158,14 +196,14 @@ const CONFLICT_LINES = Object.freeze({
  * them claims a famine, so the same truth gate that refused the starving sentence passes
  * these. The settlement's name is never interpolated: the collector's dedupe folds on text,
  * and a named line would survive it on every page.
- * @type {ReadonlyArray<string>}
+ * @type {ReadonlyArray<string | { text: string, needs?: string[], excludes?: string[] }>} a line, or the declared form around one (CENSUS-2c)
  */
 const FOOD_GAP_LINES = Object.freeze([
-  'Grain is coming in, and the people bringing it have worked out exactly how much that is worth. The price has moved twice this month.',
-  'Enough food arrives to keep the place fed, which means whoever controls the carts controls rather more than the carts.',
+  { text: 'Grain is coming in, and the people bringing it have worked out exactly how much that is worth. The price has moved twice this month.', excludes: ['crisis: under_siege'] },
+  { text: 'Enough food arrives to keep the place fed, and whoever runs the carts has started asking favours in return.', excludes: ['starving', 'famine', 'crisis: famine', 'crisis: under_siege'] },
   'A supplier who has carried the shortfall for years wants the arrangement put on paper now, and the terms have changed.',
-  'The last two consignments were short by the same amount, and the measure is being blamed rather than the measurer.',
-  'Somebody has begun buying grain forward at prices nobody local can match, and will not say who it is for.',
+  { text: 'The last two deliveries were short by the same amount; the supplier blames the scales, and nobody has checked the supplier.', excludes: ['crisis: under_siege'] },
+  { text: 'Somebody has begun buying grain forward at prices nobody local can match, and will not say who it is for.', needs: ['market'] },
   'A merchant has offered to cover the whole gap from one source, which would solve this season and hand them next season.',
 ]);
 
@@ -181,19 +219,39 @@ export function conflictIssueFamily(issue) {
 }
 
 /**
+ * A drawn hook line as text: a template takes the parties and the issue; a declared line is
+ * `{ text, needs?, excludes?, crisis? }` around either form.
+ * @param {unknown} line @param {HookParty} a @param {HookParty} b @param {string} issue
+ * @returns {string}
+ */
+function spoken(line, a, b, issue) {
+  const v = lineText(line);
+  return typeof v === 'function' ? openOnCapital(v(a, b, issue)) : String(v);
+}
+
+/**
  * ONE DRAW PER DOSSIER, WITHOUT REPLACEMENT PER FAMILY.
  *
+ * ⭐ CENSUS-1d unit 2 (Appendix B row 90, kind H): the walking modulus is drawn over the FULL
+ * family pool as before and the drawn line resolved through `drawDeclared` (a refused line
+ * moves to its twin or the hash argmax; `used` advances exactly as before), noted in the
+ * presumption ledger as `HOOK_LINE_POOLS.conflict.<family>`.
+ *
+ * @param {object|null|(() => object|null)} [facts] `factsOf(settlement)` (or a thunk), which
+ *   answers a declared line; none = a declared line is refused (fail-closed)
  * @returns {(conflict: { parties?: unknown, issue?: unknown }) => string[]} the lines for
  *   one conflict, in the order they should be read. One line per conflict: the chair's
  *   ruling 3 ("one hook per conflict, chosen").
  */
-export function createConflictHookDraw() {
+export function createConflictHookDraw(facts = null) {
   /** @type {Map<string, { base: number, used: number }>} */
   const draws = new Map();
   return (conflict) => {
     const parties = Array.isArray(conflict?.parties) ? conflict.parties : [];
-    const a = typeof parties[0] === 'string' && parties[0] !== '' ? parties[0] : 'One faction';
-    const b = typeof parties[1] === 'string' && parties[1] !== '' ? parties[1] : 'another';
+    const pa = hookPartyOf(parties[0], 'One power');
+    const pb = hookPartyOf(parties[1], 'another');
+    const a = pa.key; // the draw's key: the record's spelling (BAR6-POWERS 10h: the printed name is `pa.name`)
+    const b = pb.key;
     const rawIssue = typeof conflict?.issue === 'string' ? conflict.issue : '';
     // THE ISSUE RIDES MID-SENTENCE, so it is spoken the way the sentence needs it. The
     // record stores it as a Title-Case label ("Control of the dock taxation authority");
@@ -208,22 +266,44 @@ export function createConflictHookDraw() {
       draw = { base: fnv1a32(`${a}>${b}::${rawIssue}::${family}`), used: 0 };
       draws.set(family, draw);
     }
-    const index = (draw.base + draw.used) % pool.length;
+    const offset = draw.base + draw.used;
     draw.used += 1;
-    return [pool[index](a, b, issue)];
+    const drawn = drawDeclared(pool, {
+      draw: (p) => p[offset % p.length], facts, key: `${a}>${b}::${rawIssue}::${family}`,
+      poolId: `HOOK_LINE_POOLS.conflict.${family}`, surface: 'plot_hooks', drawKind: 'H',
+    });
+    return drawn.line == null ? [] : [spoken(drawn.line, pa, pb, issue)];
   };
 }
 
 /**
  * The food-gap line for one settlement: a draw-free fnv offset on the place's own name and
- * band, so two settlements with the same shortfall do not read the same sentence.
+ * band, so two settlements with the same shortfall do not read the same sentence. Drawn over
+ * the full pool and resolved through `drawDeclared` (CENSUS-1d unit 2, row 90, kind H).
  * @param {{ name?: unknown, band?: unknown }} place
+ * @param {object|null|(() => object|null)} [facts] `factsOf(settlement)` (or a thunk)
  * @returns {string}
  */
-export function foodGapHookLine(place) {
+export function foodGapHookLine(place, facts = null) {
   const name = typeof place?.name === 'string' ? place.name : '';
   const band = typeof place?.band === 'string' ? place.band : '';
-  return FOOD_GAP_LINES[fnv1a32(`${name}::${band}::food-gap`) % FOOD_GAP_LINES.length];
+  const seed = `${name}::${band}::food-gap`;
+  const drawn = drawDeclared(FOOD_GAP_LINES, {
+    draw: (p) => p[fnv1a32(seed) % p.length], facts, key: seed,
+    poolId: 'HOOK_LINE_POOLS.foodGap', surface: 'plot_hooks', drawKind: 'H',
+  });
+  return drawn.line == null ? '' : String(lineText(drawn.line));
+}
+
+/**
+ * A POWER IN A SENTENCE TAKES ITS ARTICLE (NAMES-1, the seventh chair's ruling CN1 of 2026-11-20, vetoable by the owner): a
+ * party's printed name is `powerNameWithArticle` ("the Elder Council", "the Guard"; `hookPartyOf`), its number still read off
+ * the prose form; a line that opens on a party opens on the article's capital ("The Elder Council has …"), here (`spoken`).
+ * Kept below the draw so the draw's call site keeps its line (tests/lint/drawDeclaredKeys.walker.test.js lists it by line).
+ * @param {string} said @returns {string}
+ */
+function openOnCapital(said) {
+  return said.charAt(0).toUpperCase() + said.slice(1);
 }
 
 /** The pools, for the tests that measure their size and read their voice. */

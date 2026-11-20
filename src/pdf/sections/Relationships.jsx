@@ -84,9 +84,12 @@ export function Relationships({ settlement, narrativeMode, vm, stateProse }) {
           kicker="PROMINENT RELATIONSHIP"
           title={`${prominentPair(r.prominentRelationship) || 'Notable pair'} · ${prominentType(r.prominentRelationship) || 'Linked'}`}
         >
+          {/* ⛔ THE KEEP-ON RULE (STYLE-0 §3; STYLE-RULINGS-2 B4, 2026-11-09): the tie's line prints once
+              in this chapter, on its own row under Internal relationships; the banner keeps the pair
+              and the tie's label, and its note field opens empty. tests/pdf/restoredSubsections.test.js (B4) */}
           <EditableProse
             name="relationships.prominent.note"
-            defaultValue={prominentProse(r.prominentRelationship)}
+            defaultValue={prominentLineElsewhere(r) ? '' : prominentProse(r.prominentRelationship)}
             lines={2}
             style={{ ...type.body, fontSize: pt['9.5'] }}
           />
@@ -271,6 +274,12 @@ export function Relationships({ settlement, narrativeMode, vm, stateProse }) {
 }
 
 // ── Sub-components ─────────────────────────────────────────────
+
+/** True when the prominent tie's line is printed on an Internal relationships row of this chapter. */
+function prominentLineElsewhere(r) {
+  const line = prominentProse(r?.prominentRelationship);
+  return !!line && (r?.internal || []).some((rel) => tieTensionLine(rel) === line || (rel?.description || '').trim() === line);
+}
 
 /** A tie's tension: the generator's sentence about what strains it (prose, never a scalar). */
 function tieTensionLine(rel) {

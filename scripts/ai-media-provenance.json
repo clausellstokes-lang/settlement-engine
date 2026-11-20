@@ -22,10 +22,10 @@
   },
   "_indemnity_standing_risk": "NOBODY INDEMNIFIES THE ESTATE. Higgsfield offers IP indemnification on the Enterprise plan only and the account was a paid consumer subscription; BytePlus's indemnity runs one way, toward BytePlus, and its section 7.5(c) voids protection where output was 'modified, transformed, or combined with products or services not provided by BytePlus' - which describes every file listed here. Not curable by any change in this repository; recorded so it is not re-found as a bug.",
   "_counts": {
-    "present": 56,
+    "present": 68,
     "absent": 0,
     "n/a": 23,
-    "total": 79
+    "total": 91
   },
   "_derived_marks": {
     "what": "The brand derivatives the estate ships at the root of public/ are COMPOSITIONS: an estate-authored parchment ground, ink band, gold rule and Lora type, with a painted crop of the arrow header laid into them. The painted crops themselves are rows in `assets` above and carry the credit; these compositions embed those crops and are named here so no shipped pixel of the master's art is unrecorded, even where the walker's roots (directories of shipped art) do not reach.",
@@ -1279,6 +1279,270 @@
         "urn:c2pa",
         "trainedAlgorithmicMedia"
       ]
+    },
+    "public/backgrounds/compendium/tiers.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "master": "references/site-plates/world-map-crossroads.png",
+      "job": "3bb95b45-491a-478c-a3d6-ebb6b860474d",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "3bb95b45-491a-478c-a3d6-ebb6b860474d"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "derived_from": "public/backgrounds/world-map.jpg",
+      "derived_by": "COMPENDIUM-HUB 2026-11-10: a crop for the compendium landing tile, 800 x 320 webp q60, sharp .keepMetadata()"
+    },
+    "public/backgrounds/compendium/economy.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "master": "references/site-plates/city-regraded.png",
+      "job": "6e5ad398-c47f-40fa-8af1-0ee1b8258215",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "6e5ad398-c47f-40fa-8af1-0ee1b8258215"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "derived_from": "public/backgrounds/city.jpg",
+      "derived_by": "COMPENDIUM-HUB 2026-11-10: a crop for the compendium landing tile, 800 x 320 webp q60, sharp .keepMetadata()"
+    },
+    "public/backgrounds/compendium/powers.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "master": "references/site-plates/founders-charter.png",
+      "job": "9d74fc5a-2777-4d38-be28-d0a6d7e43b33",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "9d74fc5a-2777-4d38-be28-d0a6d7e43b33"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "derived_from": "public/backgrounds/founders-charter.jpg",
+      "derived_by": "COMPENDIUM-HUB 2026-11-10: a crop for the compendium landing tile, 800 x 320 webp q60, sharp .keepMetadata()"
+    },
+    "public/backgrounds/compendium/institutions.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "master": "references/site-plates/gallery-crier-alive.png",
+      "job": "01fe11c3-486c-41c2-9532-c6a3a188fa6e",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "01fe11c3-486c-41c2-9532-c6a3a188fa6e"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "derived_from": "public/backgrounds/gallery.jpg",
+      "derived_by": "COMPENDIUM-HUB 2026-11-10: a crop for the compendium landing tile, 800 x 320 webp q60, sharp .keepMetadata()"
+    },
+    "public/backgrounds/compendium/magic-and-religion.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "master": "references/site-plates/dim-desk.png",
+      "job": "8c18ae5d-2072-40be-acd7-800bc412c8b2",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "8c18ae5d-2072-40be-acd7-800bc412c8b2"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "derived_from": "public/backgrounds/dim-desk.jpg",
+      "derived_by": "COMPENDIUM-HUB 2026-11-10: a crop for the compendium landing tile, 800 x 320 webp q60, sharp .keepMetadata()"
+    },
+    "public/backgrounds/compendium/stress.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "master": "references/site-plates/evolution-1-thorp.png",
+      "job": "3d5ad072-5970-4b75-a589-6b4bd87d2c2b",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "3d5ad072-5970-4b75-a589-6b4bd87d2c2b"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "derived_from": "public/backgrounds/evolution-1-thorp.jpg",
+      "derived_by": "COMPENDIUM-HUB 2026-11-10: a crop for the compendium landing tile, 800 x 320 webp q60, sharp .keepMetadata()"
+    },
+    "public/backgrounds/compendium/calamity.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "master": "references/site-plates/about-fireside.png",
+      "job": "e5b66e6f-8f65-41ea-b7c9-429850df18be",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "e5b66e6f-8f65-41ea-b7c9-429850df18be"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "derived_from": "public/backgrounds/about.jpg",
+      "derived_by": "COMPENDIUM-HUB 2026-11-10: a crop for the compendium landing tile, 800 x 320 webp q60, sharp .keepMetadata()"
+    },
+    "public/backgrounds/compendium/neighbours.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "master": "references/site-plates/settlements-mappa.png",
+      "job": "9a56f06f-7304-456f-a7a5-84a1e4b48fad",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "9a56f06f-7304-456f-a7a5-84a1e4b48fad"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "derived_from": "public/backgrounds/settlements.jpg",
+      "derived_by": "COMPENDIUM-HUB 2026-11-10: a crop for the compendium landing tile, 800 x 320 webp q60, sharp .keepMetadata()"
+    },
+    "public/backgrounds/compendium/operations.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "master": "references/site-plates/realm-table.png",
+      "job": "e07cddd5-2880-4ebb-9b36-e05a4fc0daaf",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "e07cddd5-2880-4ebb-9b36-e05a4fc0daaf"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "derived_from": "public/backgrounds/realm-table.jpg",
+      "derived_by": "COMPENDIUM-HUB 2026-11-10: a crop for the compendium landing tile, 800 x 320 webp q60, sharp .keepMetadata()"
+    },
+    "public/backgrounds/compendium/living-world.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "master": "references/site-plates/evolution-5-city.png",
+      "job": "a61706a3-1dc3-4415-92c2-8843eff2f4ee",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "a61706a3-1dc3-4415-92c2-8843eff2f4ee"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "derived_from": "public/backgrounds/evolution-5-city.jpg",
+      "derived_by": "COMPENDIUM-HUB 2026-11-10: a crop for the compendium landing tile, 800 x 320 webp q60, sharp .keepMetadata()"
+    },
+    "public/backgrounds/compendium/a-z.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "master": "references/site-plates/compendium-scriptorium-alive.png",
+      "job": "367ba1d2-82a6-43f6-b783-4f9f1c94848a",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "367ba1d2-82a6-43f6-b783-4f9f1c94848a"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "derived_from": "public/backgrounds/compendium.jpg",
+      "derived_by": "COMPENDIUM-HUB 2026-11-10: a crop for the compendium landing tile, 800 x 320 webp q60, sharp .keepMetadata()"
+    },
+    "public/backgrounds/compendium/custom.webp": {
+      "origin": "higgsfield:google-image@2026-07-18",
+      "markers": "present",
+      "master": "references/site-plates/evolution-2-hamlet.png",
+      "job": "5415be9d-4843-4870-9ca6-5250720a67db",
+      "model": "Google (model not named by the master)",
+      "agent": "Higgsfield",
+      "generated": "2026-07-18",
+      "credit": "Made with Google AI",
+      "require": [
+        "<x:xmpmeta",
+        "trainedAlgorithmicMedia",
+        "NOT a C2PA manifest",
+        "Made with Google AI",
+        "5415be9d-4843-4870-9ca6-5250720a67db"
+      ],
+      "forbid": [
+        "urn:c2pa"
+      ],
+      "derived_from": "public/backgrounds/evolution-2-hamlet.jpg",
+      "derived_by": "COMPENDIUM-HUB 2026-11-10: a crop for the compendium landing tile, 800 x 320 webp q60, sharp .keepMetadata()"
     }
   },
   "_originals": {

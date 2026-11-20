@@ -180,7 +180,7 @@ describe('THE PROMISE under the living-content law, by bytes', () => {
     // roster; it does not give it one.
     expect(v1RosterCount).toBe(0);
     expect(v2RosterCount).toBe(0);
-  }, 240_000);
+  }, 300_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 120.4 s in its shard here / 107.1 s in the last close's serial check; about 198.2 s on a CI runner (the measured factor), within three quarters of its 240 s; x 1.5 -> 300 s
 
   // ── THE RATE 768 ───────────────────────────────────────────────────────────
   it('⭐⭐ the RATE 768 towns are byte-identical under law 1 and law 2', () => {
@@ -219,7 +219,7 @@ describe('THE PROMISE under the living-content law, by bytes', () => {
     // these runs pass `customContent: {}` so law 2 has nothing to record either.
     expect(v1RosterCount).toBe(0);
     expect(v2RosterCount).toBe(0);
-  }, 240_000);
+  }, 480_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 304.1 s on CI's ratchet shard 6 (run 44494042373, past its 240 s), 183.3 s alone here; 304.1 s x 1.5 -> 480 s
 
   // ── THE LIFECYCLE, LIT ─────────────────────────────────────────────────────
   // ⛔ THE PATHS A WRITE SURVIVES ONE OF AND GHOSTS ANOTHER. A settlement is

@@ -1,0 +1,171 @@
+{
+ "_": "BAR7-AUDIT-I controls: id -> [rule, verdict] from review-bar-6/SECOND-CHECK.final51.json. STANDS = the rule must find it; EXPLAINED = no counted instance of this seat may hold its text; WEAK = reported apart. The group 'wide' is the wide read's rows (review-wide-6/SECOND-CHECK.final221.json) in this seat's families, for the 150; BOTH = the same line ruled both ways by two reads (reported, never a failure).",
+ "positive": {
+  "C18905": [
+   "9g.subsistence",
+   "STANDS"
+  ],
+  "C41011": [
+   "9g.food",
+   "STANDS"
+  ],
+  "C15153": [
+   "9g.margin",
+   "STANDS"
+  ],
+  "C41850": [
+   "9g.source",
+   "STANDS"
+  ],
+  "C20830": [
+   "9h.no-exports",
+   "STANDS"
+  ],
+  "C32912": [
+   "9h.entrepot",
+   "STANDS"
+  ],
+  "C23038": [
+   "9i.crews",
+   "STANDS"
+  ],
+  "C39691": [
+   "9i.crews",
+   "STANDS"
+  ],
+  "C5430": [
+   "9a.order",
+   "STANDS"
+  ],
+  "C40850": [
+   "7x.occupied-seat",
+   "STANDS"
+  ],
+  "C19351": [
+   "10i.pair",
+   "STANDS"
+  ],
+  "C16768": [
+   "6e.no-higher",
+   "STANDS"
+  ],
+  "C25601": [
+   "5x.slash",
+   "STANDS"
+  ]
+ },
+ "negative": {
+  "C0350": [
+   "design.outside",
+   "EXPLAINED"
+  ],
+  "C0351": [
+   "design.outside",
+   "EXPLAINED"
+  ],
+  "C7307": [
+   "design.outside",
+   "EXPLAINED"
+  ],
+  "C7309": [
+   "design.outside",
+   "EXPLAINED"
+  ],
+  "C33342": [
+   "design.outside",
+   "EXPLAINED"
+  ],
+  "C45848": [
+   "design.outside",
+   "EXPLAINED"
+  ],
+  "C18116": [
+   "-",
+   "EXPLAINED"
+  ],
+  "C18655": [
+   "-",
+   "EXPLAINED"
+  ],
+  "C19016": [
+   "10i.pair",
+   "EXPLAINED"
+  ],
+  "C35191": [
+   "-",
+   "EXPLAINED"
+  ],
+  "C46532": [
+   "-",
+   "EXPLAINED"
+  ],
+  "C24744": [
+   "-",
+   "EXPLAINED"
+  ],
+  "C31302": [
+   "10i.pair",
+   "EXPLAINED"
+  ],
+  "C9756": [
+   "-",
+   "EXPLAINED"
+  ],
+  "C12371": [
+   "9g.margin",
+   "EXPLAINED"
+  ],
+  "C27960": [
+   "9g.margin",
+   "EXPLAINED"
+  ]
+ },
+ "weak": {
+  "C36932": [
+   "-",
+   "WEAK"
+  ],
+  "C11472": [
+   "-",
+   "WEAK"
+  ]
+ },
+ "wide": {
+  "C211337": [
+   "9h.no-exports-record",
+   "STANDS"
+  ],
+  "C217617": [
+   "9h.no-exports-record",
+   "STANDS"
+  ],
+  "C93420": [
+   "9h.no-exports",
+   "BOTH"
+  ],
+  "C61967": [
+   "9g.margin",
+   "EXPLAINED"
+  ],
+  "C58141": [
+   "9g.margin",
+   "EXPLAINED"
+  ],
+  "C48148": [
+   "6e.crown",
+   "EXPLAINED"
+  ],
+  "C48270": [
+   "6e.crown",
+   "EXPLAINED"
+  ],
+  "C48442": [
+   "6e.crown",
+   "EXPLAINED"
+  ],
+  "C24588": [
+   "low.generation",
+   "EXPLAINED"
+  ]
+ }
+}

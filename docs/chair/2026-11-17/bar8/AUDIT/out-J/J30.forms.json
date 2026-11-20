@@ -1,0 +1,290 @@
+[
+ {
+  "rule": "11b",
+  "towns": 4,
+  "n": 4,
+  "tabs": "Systems/Services",
+  "kinds": "service",
+  "form": "Fresh fish retail"
+ },
+ {
+  "rule": "11b",
+  "towns": 4,
+  "n": 4,
+  "tabs": "Systems/Services",
+  "kinds": "service",
+  "form": "Fish sold daily from the morning catch."
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 4,
+  "n": 4,
+  "tabs": "Systems/Resources",
+  "kinds": "stone quarry",
+  "form": "No stone reaches the stone quarry."
+ },
+ {
+  "rule": "11b",
+  "towns": 3,
+  "n": 3,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Services · Fresh fish retail"
+ },
+ {
+  "rule": "11b",
+  "towns": 3,
+  "n": 3,
+  "tabs": "World/NPCs",
+  "kinds": "person.how",
+  "form": "How they deal Talks about the boats, the catch and who has been in today; a good ear for market news."
+ },
+ {
+  "rule": "11c.noImport",
+  "towns": 3,
+  "n": 3,
+  "tabs": "Systems/Institutions",
+  "kinds": "card",
+  "form": "Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot."
+ },
+ {
+  "rule": "11b",
+  "towns": 2,
+  "n": 2,
+  "tabs": "Systems/Economics",
+  "kinds": "income",
+  "form": "Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here."
+ },
+ {
+  "rule": "11e.siegeBought",
+  "towns": 2,
+  "n": 2,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Services · Livery and uniforms"
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 2,
+  "n": 2,
+  "tabs": "Systems/Resources",
+  "kinds": "mine",
+  "form": "No iron ore reaches the mine."
+ },
+ {
+  "rule": "11a.atWork",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "-",
+  "form": "Needed, and not brought in: quality textiles and cloth, livestock for meat and draft, clay, mineral hot springs."
+ },
+ {
+  "rule": "11a.imported",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "-",
+  "form": "Needed, and not brought in: iron ore, copper ore, gold and silver ore."
+ },
+ {
+  "rule": "11a.imported",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "-",
+  "form": "Needed, and not brought in: livestock."
+ },
+ {
+  "rule": "11b",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "tick",
+  "form": "✓Agriculture"
+ },
+ {
+  "rule": "11b",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Summary/Overview",
+  "kinds": "scene",
+  "form": "Half of <name> seems to be gutting, salting or selling fish."
+ },
+ {
+  "rule": "11b",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Institutions",
+  "kinds": "card",
+  "form": "The industrial step from what the mine yields to what the smith uses."
+ },
+ {
+  "rule": "11b",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Summary/Overview",
+  "kinds": "scene",
+  "form": "Racks of drying fish line the way in, and the smell of salt and catch is everywhere."
+ },
+ {
+  "rule": "11b",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Institutions",
+  "kinds": "card",
+  "form": "Where the day's catch is sold, from an open stall or a small covered market."
+ },
+ {
+  "rule": "11b",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "income",
+  "form": "Fish & Maritime Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here."
+ },
+ {
+  "rule": "11c.needed",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "economics",
+  "form": "<name>'s biggest trade earns a real portion of its living, but none of its trades could carry the place alone. Nobody at <name> names its biggest trade aloud, because naming it would get someone hurt. Faith carries real weight at <name>: what the religious houses say is heard in the city's dealings, whatever their own share of its money. A good part of the copper ore <name>'s work uses must come from elsewhere; when none comes, that work stands idle."
+ },
+ {
+  "rule": "11c.venture",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "economics",
+  "form": "Ask what <name> lives on and you will hear more than one trade named. A good part of the clay <name>'s work uses must come from elsewhere; when none comes, that work stands idle."
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Summary/Overview",
+  "kinds": "scene",
+  "form": "Strangers in foreign colours stand about in the middle of <name>, and the locals walk around them as if they were furniture nobody wanted. The forges of <name> are quiet more often than not, for want of iron. Guests are greeted with a cup before a word of business is spoken."
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Summary/Plot Hooks",
+  "kinds": "hook",
+  "form": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain."
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Services",
+  "kinds": "service",
+  "form": "Short of iron. Essential service for any settlement with working horses. Routine maintenance."
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Services",
+  "kinds": "service",
+  "form": "Short of iron. Reforge broken tools, re-edge blades, mend ironwork. Often more valuable than new."
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Services",
+  "kinds": "service",
+  "form": "Short of iron. Axes, ploughs, hinges, nails. The foundation of agricultural and construction work."
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "income",
+  "form": "Iron & Metalwork Short of iron. Little metal is worked here while the metal trade is short of what it needs."
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 1,
+  "n": 1,
+  "tabs": "World/NPCs",
+  "kinds": "person",
+  "form": "Short of iron."
+ },
+ {
+  "rule": "11e.offer",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Institutions",
+  "kinds": "card",
+  "form": "Luxury goods available."
+ },
+ {
+  "rule": "11e.offer",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Livestock auction"
+ },
+ {
+  "rule": "11e.siegeBought",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Services · Coin production"
+ },
+ {
+  "rule": "11e.siegeBought",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Services · Dyed cloth"
+ },
+ {
+  "rule": "11e.stalls",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Summary/Overview",
+  "kinds": "scene",
+  "form": "Stalls sell reagents in stoppered jars, and the buyers know exactly what they want."
+ },
+ {
+  "rule": "11e.wantBuy",
+  "towns": 1,
+  "n": 1,
+  "tabs": "World/NPCs",
+  "kinds": "person.wants",
+  "form": "Wants Buy stone and iron and grain at the market in bulk this season, while the price is still fair."
+ },
+ {
+  "rule": "11e.wantBuy",
+  "towns": 1,
+  "n": 1,
+  "tabs": "World/NPCs",
+  "kinds": "person.wants",
+  "form": "Wants Lay in a season of livestock and game at the butchers while it can still be had."
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "potter",
+  "form": "No clay reaches the potter."
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "fisher's landing",
+  "form": "No fish reaches the fisher's landing."
+ }
+]

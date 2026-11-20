@@ -847,7 +847,7 @@ function interpretOriginContext(/** @type {any} */ type, /** @type {any} */ sett
     return {
       ...base,
       variant: 'popular_revolt',
-      reason: 'The streets rose on their own. No faction owns this yet.',
+      reason: 'The streets rose on their own. No power owns this yet.',
     };
   }
 

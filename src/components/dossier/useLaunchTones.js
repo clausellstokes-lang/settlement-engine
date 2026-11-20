@@ -16,18 +16,18 @@ import { useStore } from '../../store/index.js';
 import { faithTabHasContent, rumorsTabHasContent, warTeaserSync } from '../../domain/dossier/launchTeasers.js';
 
 /**
- * @param {{ settlement: any, deityEmbed?: unknown, saveId?: string|number|null, viewerIsPremium?: boolean, playerView?: boolean, publicDossier?: boolean }} args
+ * @param {{ settlement: any, deityEmbed?: unknown, saveId?: string|number|null, playerView?: boolean, publicDossier?: boolean }} args
  *   `deityEmbed` is the settlement's `config.primaryDeitySnapshot` as the container already
  *   reads it (the observed-shape instrument banks that read there and nowhere new).
  * @returns {{ war: boolean, rumors: boolean, faith: boolean }} true = the tab is a teaser
  */
-export default function useLaunchTones({ settlement, deityEmbed = null, saveId = null, viewerIsPremium = false, playerView = false, publicDossier = false }) {
+export default function useLaunchTones({ settlement, deityEmbed = null, saveId = null, playerView = false, publicDossier = false }) {
   const campaigns = useStore(s => s.campaigns);
   const warQuick = warTeaserSync(settlement, { saveId, campaigns });
   const [warResolved, setWarResolved] = useState(null);
-  // The DM truth band (the includeGroundTruth convention, WarTab verbatim): never on the
-  // player view, never on a public dossier.
-  const includeGroundTruth = viewerIsPremium && !playerView && !publicDossier;
+  // The DM truth band (the includeGroundTruth convention, WarTab verbatim): the view and the
+  // data, never the tier — never on the player view, never on a public dossier.
+  const includeGroundTruth = !playerView && !publicDossier;
   useEffect(() => {
     if (warQuick !== null) return undefined;
     let alive = true;

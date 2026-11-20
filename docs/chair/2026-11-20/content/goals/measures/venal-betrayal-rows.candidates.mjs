@@ -1,0 +1,10 @@
+const L = process.cwd();
+const { NPC_CRIMINAL_SECRETS_BY_HOLDER } = await import(`${L}/src/data/npcData.js`);
+const { TITLE_SECRETS } = await import(`${L}/src/data/people/titleSecretsPresentations.js`);
+const { STRESS_INSTITUTION_EFFECTS } = await import(`${L}/src/data/stressInstitutionEffects.js`);
+const RE = /embezzl|fencing|payroll|brib|protection scheme|for a fee|contraband|skim|selling|\bsells\b|betting against|exploitative labour|suppress a finding|been paid|paid to|is paid|for a share|pocket|keeping back|keeps back|on the side|smuggl|overcharg|charges the families|cut of|takes coin|takes money|for coin|for money|kickback|in exchange|sold|falsif|accepts|lets families who give/i;
+const out = [];
+for (const [key, types] of Object.entries(NPC_CRIMINAL_SECRETS_BY_HOLDER)) for (const [type, rows] of Object.entries(types)) rows.forEach((r, i) => { if (RE.test(r.secret)) out.push(`criminal.${key}.${type}[${i}]\t${r.secret}`); });
+for (const [title, rows] of Object.entries(TITLE_SECRETS)) rows.forEach((r, i) => { if (RE.test(r.secret)) out.push(`title:${title}[${i}]\t${r.secret}`); });
+for (const [stress, rows] of Object.entries(STRESS_INSTITUTION_EFFECTS)) (Array.isArray(rows) ? rows : []).forEach((r, i) => { if (r?.secret && RE.test(r.secret)) out.push(`stress:${stress}[${i}]\t${r.secret}`); });
+console.log(out.join('\n')); console.error(`rows: ${out.length}`);

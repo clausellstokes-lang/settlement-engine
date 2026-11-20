@@ -95,7 +95,7 @@ export const RESOURCE_DATA = {
   river_fish: {
     label: "River Fisheries",
     desc: "Salmon runs, freshwater fish, and fishing weirs in the river",
-    commodities: ["fish", "salt"],
+    commodities: ["fish"], // D34 (the chair, 2026-11-15): a river fishery gives no salt
     instBoosts: { fishm: 1.6, dock: 1.2 },
     tradeGoods: ["River fish", "Freshwater catch"],
     forbidden: ["isolated", "port"],
@@ -172,6 +172,10 @@ export const RESOURCE_DATA = {
     instBoosts: { inn: 1.6, market: 1.8, guild: 1.3, warehouse: 1.5, stable: 1.6 },
     tradeGoods: ["Transit trade", "Toll revenue"],
     forbidden: ["isolated", "port", "river"],
+    // COHERENCE-AGREE-3 (the chair's ruling of 2026-11-12): the rule the warning states, as data. Read by the
+    // roll (resolveResources.js: a rolled position off a crossroads is dropped, the pool unchanged), the wizard
+    // (getCompatibleResources' `offered`) and the structural validator (a forced one warns, as on a port).
+    requires: ["crossroads"],
     warning: "A crossroads position requires crossroads trade access.",
     category: "special",
   },
@@ -198,7 +202,7 @@ export const RESOURCE_DATA = {
   precious_metals: {
     label: "Precious Metal Veins",
     desc: "Silver, gold, or copper deposits; attracts merchants and banking infrastructure",
-    commodities: ["luxury", "gems"],
+    commodities: ["luxury"], // D34: a precious-metal vein gives no gems (a gem deposit is its own resource)
     instBoosts: { jewel: 2, mint: 2.5, bank: 1.5, guild: 1.3, merchant: 1.4 },
     tradeGoods: ["Precious metals", "Coin minting", "Jewellery"],
     forbidden: ["port", "river", "crossroads"],
@@ -241,7 +245,7 @@ export const RESOURCE_DATA = {
   hot_springs: {
     label: "Hot Springs / Healing Waters",
     desc: "Natural thermal springs with reputed healing properties; attracts pilgrims and the infirm",
-    commodities: ["medicinal_herbs"],
+    commodities: [], // D34: hot springs give no medicinal herbs (a herb ground or a grove does)
     instBoosts: { healer: 2.0, church: 1.4, inn: 1.8 },
     tradeGoods: ["Healing waters (bottled)", "Pilgrim hospitality"],
     forbidden: ["port", "crossroads", "road"],
@@ -265,6 +269,10 @@ export const RESOURCE_DATA = {
     instBoosts: { garrison: 1.6, inn: 1.5, stable: 1.4, merchant: 1.3 },
     tradeGoods: ["Toll revenue", "Pass transit trade"],
     forbidden: ["port", "river", "crossroads"],
+    // COHERENCE-AGREE-6 (REVIEW-AGREE-2 F5, the chair's ruling of 2026-11-12): the terrain a pass needs, as data. The
+    // roll's pool does not read it (the pool is unchanged); the roll's drop-and-refill door, the wizard's offer and the
+    // structural validator do, as they read `requires` for the crossroads. Agrees with TERRAIN_DATA's lists.
+    requiresTerrain: ["mountain"],
     warning: null,
     category: "special",
   },
@@ -359,7 +367,7 @@ export const RESOURCE_DATA = {
     terrain: "mountain",
     label: "Mineral Hot Springs",
     desc: "Medicinal thermal waters drawing pilgrims and wealthy travelers. Alum and sulfur deposits nearby.",
-    commodities: ["medicinal_herbs"],
+    commodities: [], // D34: as the hot springs above
     instBoosts: { alchemist: 1.8, apoth: 1.8, inn: 1.5 },
     tradeGoods: ["Mineral salts", "Alum", "Sulfur"],
     forbidden: ["port"],

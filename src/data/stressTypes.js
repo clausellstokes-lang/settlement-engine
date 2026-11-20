@@ -7,6 +7,19 @@
 // the src/data purity lint (eslint.config.js) + tests/domain/dataPurity.test.js.
 // De-minified from original minified identifiers.
 
+// WIRING-W0 (2026-11-07, R-W7 e): the mass migration's ONE catalogue note, written once; its two
+// halves (arrivals, departures) are cut from it below rather than restated (WIRING-W0-CLOSE trim).
+// W4 PEOPLE second seat (2026-11-07, #30, the owner's style law): the two halves in plain words, each the
+// consequence its own direction carries; the catalogue note names both, labelled, and the halves are
+// cut from it after their labels, so each string still exists once.
+const MIGRATION_ARRIVE = "If people arrive: ";
+const MIGRATION_LEAVE = " If people leave: ";
+const MIGRATION_VIABILITY_NOTE =
+  "If people arrive: food will run short, there will not be work for everyone, and some newcomers will take what they cannot earn. If people leave: taxes will fall short, offices will stand empty, and the fields will lack the hands to work them.";
+const MIGRATION_NOTE_CUT = MIGRATION_VIABILITY_NOTE.indexOf(MIGRATION_LEAVE);
+/** @param {string} half @returns {string} the half with its first letter raised */
+const sentenceOf = (half) => half.charAt(0).toUpperCase() + half.slice(1);
+
 export const STRESS_TYPE_MAP = {
   under_siege: {
     label: "Under Siege",
@@ -15,8 +28,10 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "The settlement is surrounded. Someone in the leadership is considering terms. Someone else is considering a desperate sortie. The players arrive as this decision is being forced.",
+    // BAR3-PLACES-3 (the chair, 2026-11-15): "Field work and trade have stopped" in every siege town, where the food record still grows
+    // 14 to 43 in a hundred of the food (SIEGE_PRODUCTION_KEPT) in all 31 of the 720: trade by road, gate and water stops; a part is still produced (VETOABLE wording)
     viabilityNote:
-      "Land-based economic activity is suspended. Port access (if present) provides a partial lifeline. The only metric that matters is how long food, water, and ammunition hold out.",
+      "Trade by road, gate and water has stopped, only part of the usual food is still produced here, and everything now turns on how long the food and water last.",
     historyColour: "military",
   },
   famine: {
@@ -24,9 +39,12 @@ export const STRESS_TYPE_MAP = {
     colour: "#8b5a1a",
     probability: 0.027,
     requiresTier: null,
+    // BAR3-PLACES-2 (C4510, 2026-11-15): the slot's holder is the famine's lever (the master fishmonger in 11 of the census's
+    // 21 mill towns, the miller, an elder, a reeve), and where the fishery is the source that failed, "has food" was read
+    // as the failed good itself: the hook names no good, only a store laid in before the shortage (true of every holder).
     crisisHook:
-      "A grain merchant has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
-    viabilityNote: "Short-term economic viability is critically compromised. Normal income projections do not apply.",
+      "A grain merchant has stores laid in before the shortage, enough to matter. They will sell, but their price is not money. The players can intervene in how this plays out.",
+    viabilityNote: "No one can earn a normal living while the famine lasts, and every coin goes on food.",
     historyColour: "economic",
   },
   occupied: {
@@ -36,7 +54,7 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "A resistance cell needs outside help: people who aren't known faces. The occupation's local collaborators include someone the players will recognise.",
-    viabilityNote: "Revenue flows to the occupying authority. Local institutions continue under oversight.",
+    viabilityNote: "The occupiers take the revenue, and local offices work only under their eye.",
     historyColour: "political",
   },
   politically_fractured: {
@@ -45,9 +63,9 @@ export const STRESS_TYPE_MAP = {
     probability: 0.034,
     requiresTier: null,
     crisisHook:
-      "Something important (a resource, a prisoner, a decision) falls into the contested space between factions. The players can't avoid taking a side.",
+      "Something important (a resource, a prisoner, a decision) falls into the contested space between the powers. The players can't avoid taking a side.",
     viabilityNote:
-      "Decision-making is paralysed. Infrastructure maintenance is being neglected. Crisis is deferred, not resolved.",
+      "Nothing gets decided, repairs are put off, and every problem is left for later.",
     historyColour: "political",
   },
   indebted: {
@@ -56,9 +74,9 @@ export const STRESS_TYPE_MAP = {
     probability: 0.036,
     requiresTier: null,
     crisisHook:
-      "The creditor has sent a representative to collect (not money, but something specific). Locals are divided between compliance and resistance, and neither option is clean.",
+      "The creditor has sent someone to collect, not money but something particular, and the locals are split between handing it over and refusing.",
     viabilityNote:
-      "A significant portion of revenue is being extracted by the creditor. Capital investment has stopped.",
+      "Much of what is earned here goes straight to the creditor, and nothing is left to build with.",
     historyColour: "economic",
   },
   recently_betrayed: {
@@ -68,7 +86,7 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "The betrayal had consequences that are still unfolding. The betrayer may still be here. The players know something that could help identify them, or they are the only people who don't have a motive.",
-    viabilityNote: "Trust in institutions is low. Some key systems are not operating at full capacity as a result.",
+    viabilityNote: "People no longer trust those in charge, and some of the work that depends on that trust has stopped.",
     historyColour: "political",
   },
   infiltrated: {
@@ -78,7 +96,7 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "Something is slightly wrong: a decision that doesn't make sense, a face seen in too many places, a piece of information that reached the wrong hands. The players can notice if they pay attention.",
-    viabilityNote: "No economic impact yet. The infiltration is strategic, not extractive (so far).",
+    viabilityNote: "Nothing is being taken yet; whoever has got inside wants influence, not money, for now.",
     historyColour: "political",
   },
   plague_onset: {
@@ -88,7 +106,7 @@ export const STRESS_TYPE_MAP = {
     requiresTier: null,
     crisisHook:
       "The healer who identified the outbreak first has gone quiet. Their last message suggested the disease is not natural. Accessing them means navigating a quarantine that is not being enforced consistently.",
-    viabilityNote: "Market activity is reduced. Travel is being discouraged. Some supply chains are disrupted.",
+    viabilityNote: "Fewer people come to market, travel is discouraged, and some goods stop arriving.",
     historyColour: "disaster",
   },
   succession_void: {
@@ -97,8 +115,11 @@ export const STRESS_TYPE_MAP = {
     probability: 0.03,
     requiresTier: null,
     crisisHook:
-      "Three different factions have approached the players for support, each believing they represent the legitimate or best claim. All three are partly right.",
-    viabilityNote: "Major decisions are deferred. Some institutions are operating autonomously, for better or worse.",
+      // TAIL-HISTORY batch 1 (the chair's Y2; READ-ALL 00169 HIGH, 04385): "three different powers" and "each office"
+      // printed in a thorp of one power and no office; the words now claim no plurality of powers and no office (no
+      // atom counts the powers or the offices: a reword, no draw). VETOABLE wording (the owner's).
+      "The would-be successors have each approached the players for support, each believing theirs is the legitimate or best claim. Each of them is partly right.",
+    viabilityNote: "Big decisions wait for a new leader, and in the meantime the place gets by on old habit.",
     historyColour: "political",
   },
   monster_pressure: {
@@ -109,7 +130,7 @@ export const STRESS_TYPE_MAP = {
     crisisHook:
       "The attacks are following a pattern that suggests coordination, not desperation. Someone is directing this (whether a rival lord, a beast of unusual cunning, or something stranger). The evidence is there for anyone who looks carefully.",
     viabilityNote:
-      "Trade disruption is reducing income. Defensive expenditure is increasing. Population anxiety is rising.",
+      "Trade suffers as carts stop coming, more is spent on defence, and people grow afraid.",
     historyColour: "military",
   },
   insurgency: {
@@ -118,9 +139,11 @@ export const STRESS_TYPE_MAP = {
     probability: 0.029,
     requiresTier: null,
     crisisHook:
-      "The governing faction knows what is happening but cannot admit it publicly without legitimising the insurgency. They need something done that cannot be official.",
+      "The governing power knows what is happening but cannot admit it publicly without legitimising the insurgency. They need something done that cannot be official.",
+    // TAIL-HISTORY batch 1 (the chair's Y2; READ-ALL 18890): "some offices" printed in a hamlet of one headman; the
+    // households pay or refuse in every place. VETOABLE wording (the owner's).
     viabilityNote:
-      "Tax collection is contested. Several institutions have stopped forwarding revenue to the central authority. Normal governance is functioning on momentum.",
+      "Taxes are disputed, some households no longer pay at all, and the government runs on habit.",
     historyColour: "political",
   },
   religious_conversion: {
@@ -131,7 +154,7 @@ export const STRESS_TYPE_MAP = {
     crisisHook:
       "The contested religious authority has left a gap in the institutions that depended on it: records, oaths, property, sanctuary. Someone is about to exploit that gap.",
     viabilityNote:
-      "Tithing income splits or redirects. Religious market days and fairs are contested or duplicated. Properties of the old institution are in legal ambiguity. Cross-faith trade is complicated.",
+      "The tithe is split, feast days and fairs are held twice over, the old house's property has no clear owner, and trade across the faiths is harder.",
     historyColour: "religious",
   },
   slave_revolt: {
@@ -140,9 +163,14 @@ export const STRESS_TYPE_MAP = {
     probability: 0.012,
     requiresTier: "town",
     crisisHook:
-      "The revolt's leadership has demands. Some of them are negotiable. The governing faction has not admitted this publicly, and one of them is attempting to open a back channel.",
+      "The revolt's leadership has demands. Some of them are negotiable. The governing power has not admitted this publicly, and one of them is attempting to open a back channel.",
+    // R-U (CENSUS-2d; the chair's answer 2 to CENSUS-2c): presumes only the enslaved and their revolt.
+    // "The slave market's commercial operations are suspended." presumed a slave market, which has
+    // no fact home (`institution: slave market` is listed under "needs a home"). W2-FIX-DATA-13 (the chair's 13:01, R3C-REVOLTNOTE):
+    // "everyone who keeps order is busy containing the revolt" named keepers of order in 11 of 24 revolt towns with no
+    // force; the note now names none (its twin, stressTypesMeta.js, the same words). VETOABLE wording.
     viabilityNote:
-      "The slave market's commercial operations are suspended. Labour-dependent production is disrupted. The security apparatus is entirely focused on containment.",
+      "Owners keep their gangs only on work they can watch, and less gets made while the revolt lasts.",
     historyColour: "political",
   },
   wartime: {
@@ -150,10 +178,11 @@ export const STRESS_TYPE_MAP = {
     colour: "#5a2a0a",
     probability: 0.026,
     requiresTier: null,
+    // BAR3-PLACES (H2, 2026-11-15): no crown, no kingdom: a city-state at war answers to no higher lord, so the line names the war's own officers (true wherever it prints).
     crisisHook:
-      "A crown officer has arrived with requisition orders that will strip the settlement of something it cannot spare. The governing faction must decide whether to comply, negotiate, or find a third option.",
+      "An army requisition officer has arrived with orders that will strip the settlement of something it cannot spare. The governing power must decide whether to comply, negotiate, or find a third option.",
     viabilityNote:
-      "Military expenditure dominates the economy. Trade disruption is significant but offset by war contracts for some. Labour shortage from conscription affects agricultural and craft output.",
+      "The war takes most of the money: trade suffers, a few grow rich on army contracts, and the fields are short of the men called up.",
     historyColour: "military",
   },
   mass_migration: {
@@ -162,9 +191,60 @@ export const STRESS_TYPE_MAP = {
     probability: 0.025,
     requiresTier: null,
     crisisHook:
-      "The question is not whether things will change, but who will shape the change and what they will want in return.",
-    viabilityNote:
-      "Immigration: food balance stressed, labour market disrupted, criminal opportunity elevated. Emigration: tax base shrinking, institutions hollowing, labour shortage emerging.",
+      "Whoever takes charge of the migration will decide who may stay and who must go, and will want something in return.",
+    viabilityNote: MIGRATION_VIABILITY_NOTE,
+    // WIRING-W0 (2026-11-07, R-W7 e): the catalogue's note above describes the TYPE both ways (the
+    // compendium reads it); a settlement's entry carries the ONE half its own `direction` names
+    // (stressGenerator.js :: buildStressEntry; domain/migrationDirection.js). The halves are the
+    // note's own two parts, cut at " Emigration:", so the strings exist once.
+    viabilityNoteByDirection: {
+      arrivals: sentenceOf(MIGRATION_VIABILITY_NOTE.slice(MIGRATION_ARRIVE.length, MIGRATION_NOTE_CUT)),
+      departures: sentenceOf(MIGRATION_VIABILITY_NOTE.slice(MIGRATION_NOTE_CUT + MIGRATION_LEAVE.length)),
+    },
     historyColour: "demographic",
+    // ONE DIRECTION (lane RUNG2-F13, on the chair's ruling 2 of 2026-10-30, ODQ §934.101): the
+    // kind's direction, copied once onto the crisis entry (stressGenerator.js :: buildStressEntry)
+    // and read by every migration line through domain/crisis/migrationDirection.js.
+    direction: "influx",
   },
 };
+
+/**
+ * THE DECLARED CELLS OF STRESS_TYPE_MAP (CENSUS-2d unit 3; Phase A's ledger
+ * `docs/census/declarations/STRESS_TYPE_MAP.json`; the dissolved-twin shape CENSUS-1c keyed by
+ * the original's text, accepted by the chair's R-P 3). A crisisHook / viabilityNote that presumes a
+ * fact its stressor alone does not guarantee is a sibling set keyed by its own text: the original
+ * with its atoms, and its twin (`twinOf`, the complementary atom) where Phase A drafted one. The
+ * table's cells stay strings, so its ~20 readers are untouched; the T-branch wiring (CENSUS-1e)
+ * resolves a printed cell through `resolveSibling`. A crisis-keyed cell does not re-declare its key
+ * (R-B1). Each twin is the chair's ruling (R-G), recorded in docs/CENSUS_2_LANE_2026-11-04.md
+ * "CENSUS-2d": a T cell, so a twin moves only the births whose original is refused, once wired.
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs?: string[], excludes?: string[], twinOf?: string }>>>>}
+ */
+export const STRESS_TYPE_SIBLINGS = Object.freeze({
+  // W2-FIX-DATA-7 (2026-11-13; CENSUS-2 kind a, the famine's grain merchant in 25 census towns, every one a thorp or a
+  // hamlet): the hook's "A grain merchant" is the slot `crisisHooks.js :: CRISIS_HOOK_SLOTS` fills with the lever's holder,
+  // and the lever is a person only where a mill stands (the miller, or a market's trader); where none stands it is the
+  // external mill, the slot stays empty and the line names a merchant the place lacks. Measured at bfadaa767 over 1,440
+  // births: the slot is empty in exactly the famine towns with no mill (25 census, 28 fresh) and filled in every one
+  // with a mill. VETOABLE wording (the owner's).
+  [STRESS_TYPE_MAP.famine.crisisHook]: Object.freeze([
+    Object.freeze({ text: STRESS_TYPE_MAP.famine.crisisHook, needs: ['institution: mill'] }),
+    Object.freeze({ text: 'Someone here still has food put by, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.', twinOf: STRESS_TYPE_MAP.famine.crisisHook, excludes: ['institution: mill'] }),
+  ]),
+  [STRESS_TYPE_MAP.plague_onset.crisisHook]: Object.freeze([
+    Object.freeze({ text: STRESS_TYPE_MAP.plague_onset.crisisHook, needs: ['healer'] }),
+    Object.freeze({ text: 'The first person to name the outbreak has gone quiet. Their last message suggested the disease is not natural. Reaching them means crossing a quarantine that is not being enforced consistently.', twinOf: STRESS_TYPE_MAP.plague_onset.crisisHook, excludes: ['healer'] }),
+  ]),
+  [STRESS_TYPE_MAP.plague_onset.viabilityNote]: Object.freeze([
+    Object.freeze({ text: STRESS_TYPE_MAP.plague_onset.viabilityNote, needs: ['market'] }),
+    Object.freeze({ text: 'Travel is discouraged, and some goods stop arriving.', twinOf: STRESS_TYPE_MAP.plague_onset.viabilityNote, excludes: ['market'] }),
+  ]),
+  [STRESS_TYPE_MAP.religious_conversion.crisisHook]: Object.freeze([
+    Object.freeze({ text: STRESS_TYPE_MAP.religious_conversion.crisisHook, needs: ['institution: temple'] }),
+  ]),
+  [STRESS_TYPE_MAP.religious_conversion.viabilityNote]: Object.freeze([
+    Object.freeze({ text: STRESS_TYPE_MAP.religious_conversion.viabilityNote, needs: ['institution: temple', 'market'] }),
+    Object.freeze({ text: 'The tithe is split, and the old house\'s property has no clear owner.', twinOf: STRESS_TYPE_MAP.religious_conversion.viabilityNote, needs: ['institution: temple'], excludes: ['market'] }),
+  ]),
+});

@@ -1,0 +1,28 @@
+# base 995293e81
+{"lines":1490,"weeksForDays":101,"tenseWrong":1217,"fullNotTheStores":913,"halfNotTwiceTheStores":1123,"economicsWeeksForDays":101}
+## tenseWrong
+   rv2-calm-thorp-0: no siege | No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for about three months at full rations, more than a y
+   rv2-calm-thorp-1: no siege | No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for about two months at full rations, more than a yea
+   rv2-calm-thorp-2: no siege | No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for about two months at full rations, about eight mon
+## fullNotTheStores
+   rv2-calm-thorp-0: 1.90 mo | "about three months"
+   rv2-calm-thorp-2: 1.30 mo | "about two months"
+   rv2-calm-thorp-6: 1.40 mo | "about two months"
+## halfNotTwiceTheStores
+   rv2-calm-thorp-0: 1.90 mo | "more than a year"
+   rv2-calm-thorp-1: 1.50 mo | "more than a year"
+   rv2-calm-thorp-2: 1.30 mo | "about eight months"
+## economicsWeeksForDays
+   rv2-calm-thorp-9: 0.10 mo | No granary; a few weeks in the larder.
+   rv2-calm-thorp-23: 0.10 mo | No granary; a few weeks in the larder.
+   rv2-calm-hamlet-2: 0.10 mo | No granary; a few weeks in the larder.
+## weeksForDays
+   rv2-calm-thorp-9: 0.10 mo | No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for a few weeks at full rations, 
+   rv2-calm-thorp-23: 0.10 mo | No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the thorp for a few weeks at full rations, 
+   rv2-calm-hamlet-2: 0.10 mo | No granary: under siege the outlying fields are lost; with what is still harvested, household stores carry the hamlet for a few weeks at full rations,
+# tip
+{"lines":1490,"weeksForDays":0,"tenseWrong":0,"fullNotTheStores":0,"halfNotTwiceTheStores":0,"economicsWeeksForDays":101}
+## economicsWeeksForDays
+   rv2-calm-thorp-9: 0.10 mo | No granary; a few weeks in the larder.
+   rv2-calm-thorp-23: 0.10 mo | No granary; a few weeks in the larder.
+   rv2-calm-hamlet-2: 0.10 mo | No granary; a few weeks in the larder.

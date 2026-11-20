@@ -47,3 +47,37 @@ export const DOSSIER_CONNECTIVES = /* #__PURE__ */ Object.freeze({
     ]
   }
 });
+
+// THE POSITION-KEYED DECLARATIONS (CENSUS-1h unit 7, the chair's R-AQ): parallel to each list
+// above, [i] = the atoms joint i declares (null = silence). Never a draw key.
+/** @type {Readonly<Record<string, Readonly<Record<string, ReadonlyArray<ReadonlyArray<string>|null>>>>>} */
+export const DOSSIER_CONNECTIVE_DECLARATIONS = /* #__PURE__ */ Object.freeze({
+  "consequence": {
+    "clause": [
+      null,
+      null,
+      null
+    ]
+  },
+  "tension": {
+    "sentence": [
+      null,
+      null,
+      null
+    ]
+  },
+  "contrast": {
+    "sentence": [
+      null,
+      null,
+      null
+    ]
+  },
+  "addition": {
+    "sentence": [
+      null,
+      null,
+      null
+    ]
+  }
+});

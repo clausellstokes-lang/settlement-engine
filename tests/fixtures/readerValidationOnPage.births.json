@@ -1,0 +1,589 @@
+{
+ "soak1k-0": {
+  "name": "Albamunicipium",
+  "tier": "thorp",
+  "population": 24,
+  "config": {
+   "terrainType": "mountain",
+   "tradeRouteAccess": "port",
+   "nearbyResources": [
+    "alpine_pasture",
+    "hot_springs_mineral"
+   ],
+   "nearbyResourcesDepleted": [],
+   "stressTypes": [
+    "mass_migration"
+   ]
+  },
+  "institutions": [
+   {
+    "name": "Access to external mill",
+    "category": "Crafts",
+    "tags": [
+     "essential",
+     "agriculture"
+    ]
+   }
+  ],
+  "resourceAnalysis": {
+   "terrain": "Mountain",
+   "gaps": [
+    {
+     "chain": "alpine_pasture",
+     "missing": [
+      "Weavers' guild",
+      "Fulling mill",
+      "Dyers' guild"
+     ],
+     "impact": "Raw resource available but not being processed",
+     "severity": "low"
+    },
+    {
+     "chain": "hot_springs_mineral",
+     "missing": [
+      "Alchemist shop",
+      "Apothecary",
+      "Public bathhouse"
+     ],
+     "impact": "Raw resource available but not being processed",
+     "severity": "low"
+    },
+    {
+     "chain": "grain",
+     "institution": "Access to external mill",
+     "impact": "Access to external mill exists but lacks access to grain",
+     "severity": "high"
+    }
+   ],
+   "priorityNotes": []
+  },
+  "economicState": {
+   "localProduction": [
+    "wool",
+    "livestock",
+    "dairy",
+    "animal hides",
+    "medicinal herbs"
+   ],
+   "primaryImports": [],
+   "primaryExports": [
+    "Raw wool",
+    "Live sheep",
+    "Mineral salts",
+    "Alum",
+    "Sulfur"
+   ],
+   "tradeAccess": "port",
+   "foodSecurity": {
+    "foodRecord": {
+     "grownPct": 76,
+     "normalImportPct": 17,
+     "band": "pressured",
+     "foodSources": []
+    }
+   }
+  },
+  "structuralViolations": [
+   {
+    "type": "resource_access_violation",
+    "institution": "Alpine Pastures",
+    "reason": "Alpine Pastures is not compatible with port access.",
+    "severity": "warning"
+   },
+   {
+    "type": "resource_access_violation",
+    "institution": "Mineral Hot Springs",
+    "reason": "Mineral Hot Springs is not compatible with port access.",
+    "severity": "warning"
+   }
+  ],
+  "structuralSuggestions": [
+   {
+    "type": "suggestion",
+    "reason": "A port settlement without dock facilities cannot service the ships its location implies.",
+    "suggested": [
+     "Docks/port facilities"
+    ]
+   }
+  ],
+  "economicViability": {
+   "viable": true,
+   "summary": "△ VIABLE WITH PROVISIONING STRAIN: 7% of daily food need remains uncovered.",
+   "metrics": {
+    "criticalIssueCount": 0,
+    "tradeAccess": "port"
+   },
+   "issues": [
+    {
+     "severity": "implausible",
+     "type": "stress_consequence",
+     "category": "Food Supply",
+     "title": "Stress: Food Production Degraded",
+     "description": "Mass migration: an influx of newcomers stresses the food balance beyond normal needs."
+    }
+   ],
+   "warnings": []
+  }
+ },
+ "soak1k-8": {
+  "name": "Achileia",
+  "tier": "village",
+  "population": 369,
+  "config": {
+   "terrainType": "coastal",
+   "tradeRouteAccess": "mountain_pass",
+   "nearbyResources": [
+    "fishing_grounds",
+    "grain_fields",
+    "crossroads_position",
+    "coal_deposits",
+    "gemstone_deposits"
+   ],
+   "nearbyResourcesDepleted": [],
+   "stressTypes": [
+    "succession_void"
+   ]
+  },
+  "institutions": [
+   {
+    "name": "Mill",
+    "category": "Crafts",
+    "tags": [
+     "essential",
+     "food"
+    ]
+   },
+   {
+    "name": "Sawmill",
+    "category": "Crafts",
+    "tags": [
+     "trade"
+    ]
+   },
+   {
+    "name": "Potter",
+    "category": "Crafts",
+    "tags": [
+     "trade"
+    ]
+   }
+  ],
+  "resourceAnalysis": {
+   "terrain": "Coastal",
+   "gaps": [
+    {
+     "chain": "grain",
+     "institution": "Mill",
+     "impact": "Mill exists but lacks access to grain",
+     "severity": "high"
+    },
+    {
+     "chain": "timber",
+     "institution": "Sawmill",
+     "impact": "Sawmill exists but lacks access to timber",
+     "severity": "high"
+    },
+    {
+     "chain": "mountain_timber",
+     "institution": "Sawmill",
+     "impact": "Sawmill exists but lacks access to mountain_timber",
+     "severity": "high"
+    },
+    {
+     "chain": "clay",
+     "institution": "Potter",
+     "impact": "Potter exists but lacks access to clay",
+     "severity": "high"
+    }
+   ],
+   "priorityNotes": [
+    "Military focus highlights gap: timber processing is incomplete, strategic vulnerability."
+   ]
+  },
+  "economicState": {
+   "localProduction": [
+    "fish",
+    "salt",
+    "grain",
+    "flour",
+    "trade access",
+    "coal",
+    "luxury",
+    "Baked goods",
+    "Salted fish",
+    "Smoked seafood",
+    "Ale (barrel)",
+    "Beer (barrel)"
+   ],
+   "primaryImports": [
+    "Replacement arms and basic equipment",
+    "Incense and votive candles",
+    "Fine pottery for libations"
+   ],
+   "primaryExports": [
+    "Salted fish",
+    "Smoked seafood",
+    "Fish oil",
+    "Grain surplus",
+    "Milled flour",
+    "Transit trade",
+    "Toll revenue",
+    "Coal",
+    "Baked goods",
+    "Ale (barrel)"
+   ],
+   "tradeAccess": "mountain_pass",
+   "foodSecurity": {
+    "foodRecord": {
+     "grownPct": 102,
+     "normalImportPct": 0,
+     "band": "secure",
+     "foodSources": [
+      "grain",
+      "fish"
+     ]
+    }
+   }
+  },
+  "structuralViolations": [],
+  "structuralSuggestions": [],
+  "economicViability": {
+   "viable": true,
+   "summary": "✓ VIABLE: Settlement can survive but has 2 operational dependencies that require active management. 1 plot hooks available.",
+   "metrics": {
+    "criticalIssueCount": 0,
+    "tradeAccess": "mountain_pass"
+   },
+   "issues": [],
+   "warnings": []
+  }
+ },
+ "soak1k-22": {
+  "name": "Frostås",
+  "tier": "city",
+  "population": 8313,
+  "config": {
+   "terrainType": "coastal",
+   "tradeRouteAccess": "river",
+   "nearbyResources": [
+    "fishing_grounds",
+    "grazing_land",
+    "hot_springs",
+    "coal_deposits",
+    "iron_deposits",
+    "ancient_grove"
+   ],
+   "nearbyResourcesDepleted": [
+    "grazing_land",
+    "iron_deposits",
+    "ancient_grove"
+   ],
+   "stressTypes": [
+    "indebted"
+   ]
+  },
+  "institutions": [
+   {
+    "name": "Charcoal burner",
+    "category": "Economy",
+    "tags": [
+     "trade"
+    ]
+   },
+   {
+    "name": "Public bathhouse",
+    "category": "Economy",
+    "tags": [
+     "trade",
+     "sanitation"
+    ]
+   },
+   {
+    "name": "Potter",
+    "category": "Crafts",
+    "tags": [
+     "trade"
+    ]
+   },
+   {
+    "name": "Brickmaker",
+    "category": "Crafts",
+    "tags": [
+     "trade"
+    ]
+   },
+   {
+    "name": "Bakers (5-15)",
+    "category": "Crafts",
+    "tags": [
+     "food"
+    ]
+   },
+   {
+    "name": "Smelter",
+    "category": "Crafts",
+    "tags": [
+     "trade"
+    ]
+   },
+   {
+    "name": "Salt works",
+    "category": "Economy",
+    "tags": [
+     "trade"
+    ]
+   },
+   {
+    "name": "Vintner",
+    "category": "Crafts",
+    "tags": [
+     "food",
+     "trade"
+    ]
+   }
+  ],
+  "resourceAnalysis": {
+   "terrain": "Coastal",
+   "gaps": [
+    {
+     "chain": "mountain_timber",
+     "institution": "Charcoal burner",
+     "impact": "Charcoal burner exists but lacks access to mountain_timber",
+     "severity": "high"
+    },
+    {
+     "chain": "hot_springs_mineral",
+     "institution": "Public bathhouse",
+     "impact": "Public bathhouse exists but lacks access to hot_springs_mineral",
+     "severity": "high"
+    },
+    {
+     "chain": "clay",
+     "institution": "Potter",
+     "impact": "Potter exists but lacks access to clay",
+     "severity": "high"
+    },
+    {
+     "chain": "clay",
+     "institution": "Brickmaker",
+     "impact": "Brickmaker exists but lacks access to clay",
+     "severity": "high"
+    },
+    {
+     "chain": "grain",
+     "institution": "Bakers (5-15)",
+     "impact": "Bakers exists but lacks access to grain",
+     "severity": "high"
+    },
+    {
+     "chain": "iron ore",
+     "institution": "Smelter",
+     "impact": "Smelter exists but lacks access to iron ore",
+     "severity": "high"
+    },
+    {
+     "chain": "copper ore",
+     "institution": "Smelter",
+     "impact": "Smelter exists but lacks access to copper ore",
+     "severity": "high"
+    },
+    {
+     "chain": "gold/silver ore",
+     "institution": "Smelter",
+     "impact": "Smelter exists but lacks access to gold/silver ore",
+     "severity": "high"
+    },
+    {
+     "chain": "desert_salt",
+     "institution": "Salt works",
+     "impact": "Salt works exists but lacks access to desert_salt",
+     "severity": "high"
+    },
+    {
+     "chain": "grapes",
+     "institution": "Vintner",
+     "impact": "Vintner exists but lacks access to grapes",
+     "severity": "high"
+    }
+   ],
+   "priorityNotes": [
+    "Military focus highlights gap: mountain_timber processing is incomplete, strategic vulnerability."
+   ]
+  },
+  "economicState": {
+   "localProduction": [
+    "fish",
+    "salt",
+    "medicinal herbs",
+    "coal",
+    "Salted fish",
+    "Smoked seafood",
+    "Religious services",
+    "Education (basic)",
+    "Hospitality for travellers"
+   ],
+   "primaryImports": [
+    "Wool",
+    "Iron ore (local mines exhausted)",
+    "Grain",
+    "Luxury materials",
+    "Precious metals",
+    "Capital",
+    "Preserved provisions",
+    "Luxury textiles and exotic goods",
+    "Livestock and dairy (local pastures depleted)",
+    "Ritual wood and herbs (ancient grove damaged)"
+   ],
+   "primaryExports": [
+    "Salted fish",
+    "Smoked seafood",
+    "Fish oil",
+    "Healing waters (bottled)",
+    "Pilgrim hospitality",
+    "Coal",
+    "Luxury manufactured goods",
+    "Fine metalwork and jewelry",
+    "Rare spices and exotic dyes",
+    "Fine textiles",
+    "Caravan trade goods",
+    "Financial services (letters of credit)",
+    "Legal services (contracts, notarial)",
+    "Military contract services",
+    "Waterborne freight services (cargo, pilotage)"
+   ],
+   "tradeAccess": "river",
+   "foodSecurity": {
+    "foodRecord": {
+     "grownPct": 62,
+     "normalImportPct": 37,
+     "band": "secure",
+     "foodSources": [
+      "fish"
+     ]
+    }
+   }
+  },
+  "structuralViolations": [],
+  "structuralSuggestions": [],
+  "economicViability": {
+   "viable": true,
+   "summary": "✓ VIABLE: Settlement can survive but has 3 operational dependencies that require active management. 3 plot hooks available.",
+   "metrics": {
+    "criticalIssueCount": 0,
+    "tradeAccess": "river"
+   },
+   "issues": [],
+   "warnings": []
+  }
+ },
+ "soak1k-24": {
+  "name": "Grüngrund",
+  "tier": "thorp",
+  "population": 22,
+  "config": {
+   "terrainType": "coastal",
+   "tradeRouteAccess": "crossroads",
+   "nearbyResources": [
+    "fishing_grounds",
+    "foraging_areas",
+    "crossroads_position",
+    "iron_deposits"
+   ],
+   "nearbyResourcesDepleted": [],
+   "stressTypes": [
+    "under_siege"
+   ]
+  },
+  "institutions": [
+   {
+    "name": "Access to external mill",
+    "category": "Crafts",
+    "tags": [
+     "essential",
+     "agriculture"
+    ]
+   }
+  ],
+  "resourceAnalysis": {
+   "terrain": "Coastal",
+   "gaps": [
+    {
+     "chain": "grain",
+     "institution": "Access to external mill",
+     "impact": "Access to external mill exists but lacks access to grain",
+     "severity": "high"
+    }
+   ],
+   "priorityNotes": []
+  },
+  "economicState": {
+   "localProduction": [
+    "fish",
+    "salt",
+    "honey",
+    "medicinal herbs",
+    "trade access",
+    "iron",
+    "metalwork",
+    "Honey and beeswax",
+    "Foraged goods"
+   ],
+   "primaryImports": [
+    "Grain",
+    "Salt",
+    "Iron (weapons)"
+   ],
+   "primaryExports": [
+    "Salted fish (naval route only)",
+    "Smoked seafood (naval route only)",
+    "Fish oil (naval route only)"
+   ],
+   "tradeAccess": "crossroads",
+   "foodSecurity": {
+    "foodRecord": {
+     "grownPct": 32,
+     "normalImportPct": 0,
+     "band": "deficit",
+     "foodSources": [
+      "fish"
+     ]
+    }
+   }
+  },
+  "structuralViolations": [],
+  "structuralSuggestions": [
+   {
+    "type": "suggestion",
+    "reason": "Frontier region: even small settlements benefit from a palisade or earthwork against monster incursions.",
+    "suggested": [
+     "Palisade or earthworks",
+     "Citizen militia"
+    ]
+   }
+  ],
+  "economicViability": {
+   "viable": false,
+   "summary": "✗ NOT VIABLE: 2 critical issues prevent settlement survival.",
+   "metrics": {
+    "criticalIssueCount": 2,
+    "tradeAccess": "crossroads"
+   },
+   "issues": [
+    {
+     "severity": "critical",
+     "category": "Food Production",
+     "title": "Uncovered Local Food Deficit",
+     "description": "Settlement cannot cover ~29 lbs of food per day (67% of needs) and has no dependable trade route."
+    },
+    {
+     "severity": "critical",
+     "type": "stress_consequence",
+     "category": "Food Supply",
+     "title": "Stress: Food Production Degraded",
+     "description": "Siege: external supply lines severed and outlying farmland abandoned or razed."
+    }
+   ],
+   "warnings": []
+  }
+ }
+}

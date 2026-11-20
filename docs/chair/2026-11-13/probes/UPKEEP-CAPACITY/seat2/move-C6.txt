@@ -1,0 +1,18 @@
+== C6 (G5) vs M2: births 3756; records differ 633
+READINESS moved 77 (up 0, down 77); mean all -0.19; min -24 max 0; bands 46 {('Well-Defended', 'Defensible'): 10, ('Fortress', 'Well-Defended'): 3, ('Lightly Defended', 'Vulnerable'): 9, ('Defensible', 'Lightly Defended'): 23, ('Vulnerable', 'Undefended'): 1}
+  fresh6: moved 13, band 7
+  thorp      moved    0 mean +0.00 min +0 max +0 bands 0
+  hamlet     moved    0 mean +0.00 min +0 max +0 bands 0
+  village    moved    0 mean +0.00 min +0 max +0 bands 0
+  town       moved   60 mean -0.87 min -24 max +0 bands 43
+  city       moved   17 mean -0.09 min -9 max +0 bands 3
+  metropolis moved    0 mean +0.00 min +0 max +0 bands 0
+  military  moved   64 (up 0, down 64) mean -0.27 min -28 max +0; bands 37 {('STRONG', 'ADEQUATE'): 21, ('ADEQUATE', 'WEAK'): 10, ('WEAK', 'CRITICAL'): 5, ('ADEQUATE', 'CRITICAL'): 1}
+  monster   moved   74 (up 0, down 74) mean -0.32 min -25 max +0; bands 32 {('STRONG', 'ADEQUATE'): 11, ('WEAK', 'CRITICAL'): 8, ('ADEQUATE', 'WEAK'): 13}
+  internal  moved   47 (up 0, down 47) mean -0.04 min -7 max +0; bands 5 {('WEAK', 'CRITICAL'): 3, ('ADEQUATE', 'WEAK'): 2}
+  economic  moved   47 (up 0, down 47) mean -0.21 min -31 max +0; bands 27 {('ADEQUATE', 'WEAK'): 13, ('STRONG', 'ADEQUATE'): 13, ('WEAK', 'CRITICAL'): 1}
+  magical   moved   44 (up 0, down 44) mean -0.12 min -25 max +0; bands 19 {('ADEQUATE', 'WEAK'): 9, ('WEAK', 'CRITICAL'): 9, ('STRONG', 'ADEQUATE'): 1}
+  disaster  moved    0 (up 0, down 0) mean +0.00 min +0 max +0; bands 0 {}
+  MAGIC AGAINST THE PAGE: made 3 ['cold-town-25', 'cold-wartime-town-53', 'fresh5-town-48'], cured 0
+  AI THREATS: births changed 19 {('gained', 'Economic fragility'): 13, ('gained', 'Magical instability'): 9}
+  COUPLING: power structure changed 46 (of which band changed 46), a power appears or vanishes 0, legitimacy label changed 6

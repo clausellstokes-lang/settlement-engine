@@ -136,7 +136,7 @@ export function relationshipsDeskLists(settlement) {
       neighbourName: liveName,
       neighbourTier: typeof liveNeighbour?.tier === 'string' ? liveNeighbour.tier : '',
       relationshipType: liveType,
-      description: `Generated with ${liveName} as neighbour (${liveType.replace(/_/g, ' ')}).`,
+      description: `${liveName} is a neighbour (${liveType.replace(/_/g, ' ')}).`,
       fromGeneration: true,
     })]
     : [];

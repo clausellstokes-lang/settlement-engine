@@ -1,0 +1,13 @@
+NEW1 on its 12 towns at the joined tree (the census's own render, plan of those 12 seeds, each tree's own instrument)
+seeds: r2r-city-32 r2r-city-41 r2r-city-9 r2r-hamlet-11 r2r-hamlet-18 r2r-hamlet-3 r2r-town-30 r2r-town-46 r2r-town-59 r2r-village-6 r2r-village-8 r2s-infiltrated-hamlet-0 
+join: 111111111111
+line: 110111110101
+r3-code-c: 110111110101
+r3-tabs: 110111110101
+r2-code-a: 110111110101
+powers: 110111110101
+data: 110111110101
+corpus: 110111110101
+leaves: 110111110101
+r2-code-b: 110111110101
+defence: 111111111111

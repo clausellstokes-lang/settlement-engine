@@ -308,12 +308,13 @@ function normalizeDemand(row, principalId) {
  *
  * @param {{principalId?: unknown, tick?: unknown, demands?: unknown,
  *   openOperations?: unknown, targeting?: unknown, frequency01?: unknown,
- *   castable?: unknown, cap?: unknown}} [args]
+ *   castable?: unknown, cap?: unknown, nameFor?: unknown}} [args] `nameFor` reads a court's
+ *   printed name from its id; without one the prose says "A court" / "a rival court", never an id.
  * @returns {{candidates: Array<Record<string, unknown>>,
  *   refusals: Array<{demandId: string, reason: string}>, cap: number, considered: number}}
  */
 export function dispatchMissionCandidates({
-  principalId, tick, demands, openOperations, targeting, frequency01, castable, cap,
+  principalId, tick, demands, openOperations, targeting, frequency01, castable, cap, nameFor,
 } = {}) {
   const principal = text(principalId);
   const capValue = Number.isInteger(cap) && Number(cap) >= 0
@@ -385,7 +386,7 @@ export function dispatchMissionCandidates({
       refusals.push({ demandId: demand.demandId, reason: 'over_cap' });
       continue;
     }
-    candidates.push(operationCandidate(demand, tick, ranked[i].roll, frequency01));
+    candidates.push(operationCandidate(demand, tick, ranked[i].roll, frequency01, nameFor));
   }
   return { candidates, refusals, cap: capValue, considered: demands.length };
 }
@@ -418,10 +419,15 @@ export function dispatchMissionCandidates({
  * @param {unknown} tick
  * @param {number} roll
  * @param {unknown} frequency01
+ * @param {unknown} [nameFor] the caller's id -> printed-name read (absent: a neutral noun, never the id)
  * @returns {Record<string, unknown>}
  */
-function operationCandidate(demand, tick, roll, frequency01) {
+function operationCandidate(demand, tick, roll, frequency01, nameFor) {
   const row = missionKindRow(demand.kind);
+  /** @param {string} id @param {string} fallback */
+  const named = (id, fallback) => (typeof nameFor === 'function' && text(nameFor(id))) || fallback;
+  const principalName = named(demand.principalId, 'A court');
+  const subjectName = named(demand.subjectId, 'a rival court');
   const tickNumber = Number(tick) || 0;
   const confidence = Number(demand.decidingConfidence01);
   const severity = Number.isFinite(confidence) ? unit(1 - confidence) : 1;
@@ -437,9 +443,9 @@ function operationCandidate(demand, tick, roll, frequency01) {
     applyMode: 'proposal',
     // ⛔ THE HERALD SPEAKS IN DEEDS (owner, 2026-10-02: "Updates like these need to reflect actions not to potential"): under way, then done; the
     // deliberation itself stays in `reasons`.
-    headline: `${demand.principalId} is sending to learn the truth about ${demand.subjectId}`,
-    appliedHeadline: `${demand.principalId} sends to learn the truth about ${demand.subjectId}`,
-    summary: `${demand.principalId} wants what is said of ${demand.subjectId} confirmed before acting on it.`,
+    headline: `${principalName} is sending to learn the truth about ${subjectName}`,
+    appliedHeadline: `${principalName} sends to learn the truth about ${subjectName}`,
+    summary: `${principalName} wants what is said of ${subjectName} confirmed before acting on it.`,
     reasons: [
       `Deliberation verdict dispatch_and_wait for demand ${demand.demandId}.`,
       `Receipt family ${row ? row.receiptFamily : 'unknown'} is verified against the live tree.`,
@@ -599,12 +605,12 @@ export function directedMissionDemands(directions, standingFor) {
  *
  * @param {{principalId?: unknown, tick?: unknown, directions?: unknown, standingFor?: unknown,
  *   openOperations?: unknown, targeting?: unknown, frequency01?: unknown,
- *   castable?: unknown, cap?: unknown}} [args]
+ *   castable?: unknown, cap?: unknown, nameFor?: unknown}} [args]
  * @returns {ReturnType<typeof dispatchMissionCandidates>}
  */
 export function dispatchDirectedMissions({
   principalId, tick, directions, standingFor, openOperations, targeting, frequency01, castable,
-  cap,
+  cap, nameFor,
 } = {}) {
   return dispatchMissionCandidates({
     principalId,
@@ -615,5 +621,6 @@ export function dispatchDirectedMissions({
     frequency01,
     castable,
     cap,
+    nameFor,
   });
 }

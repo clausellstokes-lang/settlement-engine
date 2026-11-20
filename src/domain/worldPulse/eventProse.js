@@ -99,23 +99,26 @@ export const NPC_GOAL_NEWS = Object.freeze({
       (x) => `${x.name} claims a long-sought prize`,
       (x) => `${x.name} brings a long ambition to its end`,
     ],
+    // B·2–4 (STYLE-2-PULSE-FOLLOWUP): the aim is said in words (`aim`, npcAgency's worded
+    // long goal, never the quoted token), the meter and the role token leave the page, and the
+    // role is said as the means the NPC worked through (`means`, NPC_ROLE_MEANS).
     summary: [
-      (x) => `${x.name} has worked toward "${x.goal}" for a long while, and now seizes it.`, // canonical
-      (x) => `After a long pursuit of "${x.goal}", ${x.name} has at last made it real.`,
-      (x) => `${x.name}'s patient work toward "${x.goal}" has paid off; the prize is now in hand.`,
-      (x) => `The long design to "${x.goal}" has borne fruit for ${x.name}.`,
+      (x) => `${x.name} has worked a long while to ${x.aim}, and now it is done.`, // canonical
+      (x) => `After long work, ${x.name} has managed to ${x.aim}.`,
+      (x) => `Those who watched ${x.name} work so long to ${x.aim} now see it done.`,
+      (x) => `${x.name} set out long ago to ${x.aim}, and the others who hold sway must now reckon with it.`,
     ],
     progressReason: [
-      (x) => `${x.name}'s long-term goal progress reached its culmination.`, // canonical
-      (x) => `${x.name}'s long design had ripened into action.`,
-      (x) => `The accumulated work toward "${x.goal}" could no longer be deferred.`,
-      (x) => `Patient effort finally carried ${x.name}'s ambition across the threshold.`,
+      (x) => `${x.name} had been working toward this for a long while.`, // canonical
+      (x) => `It came after a long stretch of patient work by ${x.name}.`,
+      (x) => `${x.name} kept at it, move after move, until it came.`,
+      (x) => `Many small moves by ${x.name} led here.`,
     ],
     roleReason: [
-      (x) => `Role: ${x.role}; goal: ${x.goal}.`, // canonical
-      (x) => `${x.name} pursued "${x.goal}" from the position of ${x.role}.`,
-      (x) => `The ${x.role} path gave ${x.name} the means to pursue "${x.goal}".`,
-      (x) => `For ${x.name}, "${x.goal}" had become the defining aim of the ${x.role} role.`,
+      (x) => `${x.name} got there ${x.means}.`, // canonical
+      (x) => `${x.name} did it ${x.means}.`,
+      (x) => `${x.name} reached it ${x.means}.`,
+      (x) => `${x.name} won it ${x.means}.`,
     ],
     conditionDescription: [
       (x) => `${x.name} has consolidated power, shifting the local balance.`, // canonical
@@ -137,11 +140,13 @@ export const NPC_GOAL_NEWS = Object.freeze({
       (x) => `${x.name} redirects a long design`,
       (x) => `${x.name}'s aims turn with the times`,
     ],
+    // B·8 (STYLE-2-PULSE-FOLLOWUP): the summary names the aim given up and the aim taken up,
+    // in words (`oldAim` / `aim`, npcAgency's worded goals — the one that actually changed).
     summary: [
-      (x) => `${x.name}'s goals shift because the settlement context changed.`, // canonical
-      (x) => `A changed settlement has forced ${x.name} to reconsider what comes next.`,
-      (x) => `${x.name} keeps the same character, but new circumstances now demand different aims.`,
-      (x) => `New conditions in the settlement have turned ${x.name}'s effort toward another end.`,
+      (x) => `${x.name} has given up trying to ${x.oldAim} and now means to ${x.aim}.`, // canonical
+      (x) => `${x.name} no longer works to ${x.oldAim}; now they mean to ${x.aim}.`,
+      (x) => `${x.name} has set the old aim aside, to ${x.oldAim}, and taken up a new one: to ${x.aim}.`,
+      (x) => `People who know ${x.name} say they have stopped trying to ${x.oldAim} and now mean to ${x.aim}.`,
     ],
     // CURE-P1 U3 (FPQ-23) — THE REGISTER LEAVES THE PAGE. `previous` / `next` are npcAgency's
     // goal-branch KEY (contextForNpc's `tier|relationship|conditions`: archetype ids SORTED and
@@ -151,17 +156,21 @@ export const NPC_GOAL_NEWS = Object.freeze({
     // famine passed that is still there. The Herald prints this line as the events desk's
     // "Origin:", so it now states the true cause in words; the two keys stay on the record
     // (metadata.previousContext / nextContext, npcPatch.contextSignature) for the instruments.
+    // B·9 (STYLE-2-PULSE-FOLLOWUP): plain words, and still no condition named — the context
+    // key's diff is lossy (CURE-P1 U3 above), so the line says the place changed, not how.
     contextReason: [
-      (x) => `The settlement's circumstances have changed since ${x.name}'s aims were set.`, // canonical
-      (x) => `The settlement around ${x.name} is no longer the one those aims were made for.`,
-      (x) => `${x.name}'s old aims answered circumstances the settlement has since left behind.`,
-      (x) => `A shift in the settlement's footing overtook the aims ${x.name} had set.`,
+      (x) => `${x.name}'s old aim was made for a place that has since changed.`, // canonical
+      (x) => `Things at home have changed since ${x.name} first chose that aim.`,
+      (x) => `${x.name} chose the old aim when times were different.`,
+      (x) => `What ${x.name} once wanted no longer fits the way things stand.`,
     ],
+    // B·10: the character-sheet field names ("ideal", "flaw") leave the page; the traits are
+    // said as what drives the person and what they are given to.
     personalityReason: [
-      (x) => `Personality remains anchored by ideal ${x.ideal} and flaw ${x.flaw}.`, // canonical
-      (x) => `${x.name}'s ${x.ideal} ideal and ${x.flaw} flaw remain unchanged beneath the new aims.`,
-      (x) => `The ambitions turn, but ${x.ideal} and ${x.flaw} still anchor ${x.name}.`,
-      (x) => `New goals do not rewrite ${x.name}: the ${x.ideal} ideal and ${x.flaw} flaw still hold.`,
+      (x) => `${x.name} is still the same person: still driven by ${x.ideal}, still given to ${x.flaw}.`, // canonical
+      (x) => `The aims are new, but ${x.name} still cares most for ${x.ideal} and is still given to ${x.flaw}.`,
+      (x) => `${x.name} has not changed at heart: ${x.ideal} still matters most, and ${x.flaw} still gets the better of them.`,
+      (x) => `Underneath, ${x.name} is unchanged, still holding to ${x.ideal} and still prone to ${x.flaw}.`,
     ],
   },
 });
@@ -179,6 +188,17 @@ export const NPC_GOAL_NEWS = Object.freeze({
 // below them: pressure reaches here only at ≥ 0.34 (dotRank ≥ 3) or ≥ 0.42, and ambition
 // only at ≥ 0.42. A ladder cut at, say, 0.25 would have a permanently dead rung.
 // ════════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * A character-sheet trait (ideal, flaw) as a plain word. A card corrupted at generation
+ * carries its traits as `corrupted_<trait>` — the corruption is the card's STATE (the
+ * `corruption` flag says whether it holds now), not a word for the page: printed, the
+ * prefix doubled the reason's own "corrupted" (A2·171, STYLE-2-PULSE-FOLLOWUP).
+ * @param {unknown} trait @returns {string}
+ */
+export function plainTrait(trait) {
+  return String(trait || '').replace(/^corrupted_/, '').replace(/_/g, ' ');
+}
 
 /** The pressure cut. Above it the gate was cleared comfortably; at or below, only just. */
 export const NPC_PRESSURE_BAND_CUT = 0.66;
@@ -199,6 +219,90 @@ export function npcPressureWord(pressure) {
  */
 export function npcAmbitionWord(ambition) {
   return Number(ambition) >= NPC_AMBITION_BAND_CUT ? 'hungry' : 'steady';
+}
+
+/**
+ * The role an NPC acts from, in plain words (STYLE-2-PULSE-FOLLOWUP, A2·169). The key is
+ * npcAgency's `roleArchetype`, read from the card's own title text, `civic` when nothing
+ * else matched — so `civic` says "a citizen", never an office the card may not hold.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const NPC_ROLE_NOUN = Object.freeze({
+  ruler: 'a ruler', heir: 'an heir',
+  military: 'a soldier', merchant: 'a merchant',
+  religious: 'a person of the faith', criminal: 'someone outside the law',
+  arcane: 'a person of learning', civic: 'a citizen',
+  healer: 'a healer', labor_resource: 'a working hand',
+  diplomat_outsider: 'someone with ties abroad', dissident: 'a dissenter',
+});
+
+/**
+ * How an NPC of each role gets what it works for, said as a means (B·4, STYLE-2-PULSE-
+ * FOLLOWUP): the role's own influence basis in plain words. `civic` is npcAgency's default
+ * when no other title matched, so it claims no office.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const NPC_ROLE_MEANS = Object.freeze({
+  ruler: 'through the authority they hold', heir: 'on the strength of their claim',
+  military: 'with armed followers behind them', merchant: 'with money and trade at their back',
+  religious: 'with the faith behind them', criminal: 'through crooked dealings',
+  arcane: 'on the strength of their learning', civic: 'through the people they deal with every day',
+  healer: 'through the trust their healing has earned', labor_resource: 'with the working hands who stand with them',
+  diplomat_outsider: 'through their ties abroad', dissident: 'with the crowd behind them',
+});
+
+/** @param {string} s @returns {string} */
+const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/**
+ * Why this kind of person makes this move — four tellings of the one fact (the role's
+ * preferred move), so no single sentence stands under every citizen's move in the realm.
+ * @type {readonly ((x: { name: string, role: string }) => string)[]}
+ */
+export const NPC_ROLE_REASON = Object.freeze([
+  (x) => `It is the kind of move ${x.role} makes.`,
+  (x) => `${capitalize(x.role)} reaches for this sooner than most.`,
+  (x) => `${x.name} acts as ${x.role} would.`,
+  (x) => `This is how ${x.role} answers trouble.`,
+]);
+
+/**
+ * What pushed them to it — four tellings, each with the FOUR fixed band spellings
+ * (pressure well clear / barely over; ambition hungry / steady), so the metronome
+ * de-duplicator still sees one string per band for one NPC and one move.
+ * @type {readonly ((x: { name: string, hard: boolean, hungry: boolean }) => string)[]}
+ */
+export const NPC_DRIVE_REASON = Object.freeze([
+  (x) => `${x.hard ? `Hard times pushed ${x.name} to it` : `Hard times only just pushed ${x.name} to it`}, ${x.hungry ? `${x.hard ? 'and' : 'but'} they are hungry to rise` : 'and their ambition is steady'}.`,
+  (x) => `${x.hard ? `The times pressed hard on ${x.name}` : `The times pressed only lightly on ${x.name}`}; ${x.hungry ? 'they want to rise' : 'their ambition holds steady'}.`,
+  (x) => `${x.hard ? `With times this hard, ${x.name} had little choice` : `${x.name} was only just driven to it`}, ${x.hungry ? 'and they are hungry for more' : 'and their ambition is steady'}.`,
+  (x) => `${x.hard ? `Trouble crowded ${x.name} toward it` : `Trouble only nudged ${x.name} toward it`}; ${x.hungry ? 'a hungry ambition did the rest' : 'a steady ambition did the rest'}.`,
+]);
+
+/**
+ * The three reasons under an NPC's move on the news card (A2·169–171, STYLE-2-PULSE-
+ * FOLLOWUP): what kind of person makes this move, what pushed them to it, and what they hold
+ * to. Plain words for the engine's own causes — the role's preferred move, the pressure and
+ * ambition bands, the ideal. The telling is seeded on the NPC and the move (never the tick),
+ * so one NPC's repeated move prints the same words and the metronome still fires. The ideal
+ * label stays a label; a corrupted card's ideal is said once, in words (A2·171).
+ * @param {{ npcId?: string, name?: string, roleArchetype?: string, ambition?: number, ideal?: unknown, corruption?: boolean }} state
+ * @param {number} pressure
+ * @param {string} [actionFamily]
+ * @returns {string[]}
+ */
+export function npcCandidateReasons(state, pressure, actionFamily = '') {
+  const name = String(state?.name || 'They');
+  const role = NPC_ROLE_NOUN[String(state?.roleArchetype || '')] || NPC_ROLE_NOUN.civic;
+  const hard = npcPressureWord(pressure) === 'well clear of';
+  const hungry = npcAmbitionWord(/** @type {number} */ (state?.ambition)) === 'hungry';
+  const ideal = plainTrait(state?.ideal);
+  const seed = `${state?.npcId || name}:${actionFamily}`;
+  return [
+    pickLine(NPC_ROLE_REASON, `${seed}:role`, { name, role }),
+    pickLine(NPC_DRIVE_REASON, `${seed}:drive`, { name, hard, hungry }),
+    state?.corruption ? `${name} believes in ${ideal}, but in a twisted form.` : `Ideal: ${ideal}.`,
+  ];
 }
 
 // ════════════════════════════════════════════════════════════════════════════════════

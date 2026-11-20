@@ -1,0 +1,18 @@
+{
+  "ownerWords": "for every appropriate institution, we generate one NPC … I think just one person per institution. They act as the face. We are not building all the citizens of a settlement. That's too granular and the DM can do that work themselves. We are simply making representatives.",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105",
+  "seat": "the owner, by the owner's charter words of 2026-11-07 on the roster's size, the record written by the people car's landing seat under the chair; vetoable by a word",
+  "version": 2,
+  "ids": [
+    "src/domain/density/densityBands.js#DENSITY_BANDS",
+    "src/domain/density/densityBands.js#RANK_CEILING_BY_TIER",
+    "src/domain/density/densityBands.js#VACANCY_WEIGHTS",
+    "src/domain/density/densityBands.js#PARTICULAR_TILTS",
+    "src/domain/density/densityBands.js#RIVAL_ROLL",
+    "src/domain/density/densityBands.js#CONCENTRATION",
+    "src/domain/density/densityBands.js#SUCCESSION_CLOCK_TICKS",
+    "src/domain/density/densityBands.js#SUCCESSION_WEIGHTS"
+  ],
+  "note": "Register VII v2 (PEOPLE-RULINGS M-5): the eight tables of src/domain/density/densityBands.js re-signed at version 2, the file byte-identical to v1. The `mass` band and the rung roles are unread by the generator since lane 1 (the house count is the roster's size: one face per face-bearing house); the `<tier>.factions` rows stay read. A record signs ids; it does not retire rows, so the mass rows stay in the table, unread."
+}

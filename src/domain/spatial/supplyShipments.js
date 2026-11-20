@@ -225,7 +225,7 @@ export function routeIntercepted(path, isHostileToDestination) {
  * @returns {string}
  */
 export function starvationReceipt({ institutionName, input, cause, weeksCut } = {}) {
-  const who = institutionName || 'the institution';
+  const who = institutionName || 'The institution';
   const road = input ? `the ${String(input)} road` : 'the supply road';
   const why = cause ? ` under ${cause}` : '';
   const weeks = Math.max(0, Math.floor(finiteNumber(weeksCut, 0)));

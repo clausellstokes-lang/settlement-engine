@@ -21,7 +21,6 @@
 
 import { useMemo, useState } from 'react';
 
-import { useStore } from '../../store/index.js';
 import { settlementWarStatus } from '../../domain/display/warStatus.js';
 import { liveWarNames } from '../../domain/display/warAndRoadNames.js';
 import { renderTreatiesForSettlement } from '../../domain/display/treatyDocument.js';
@@ -55,10 +54,10 @@ function Line({ kind, children }) {
  */
 export default function PerspectiveStandings({ campaign, nameById }) {
   const mobile = useIsMobile();
-  const tier = useStore(s => s.auth?.tier);
-  const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
-  // The believed half is DM knowledge (the includeGroundTruth convention).
-  const includeGroundTruth = tier === 'premium' || elevated;
+  // V1-map (the owner's tier law, 2026-11-09): the panel mounts only inside the world map's
+  // campaign Herald, whose outer gate carries law (6); the inner tier term mirrored it and is
+  // deleted. The data gate is the read's own (beliefs, ledgers) — no behaviour change.
+  const includeGroundTruth = true;
 
   const ids = useMemo(() => (campaign?.settlementIds || []).map(String), [campaign]);
   const nameFor = useMemo(() => (id) => nameById?.get(String(id)) || String(id), [nameById]);
@@ -133,7 +132,7 @@ export default function PerspectiveStandings({ campaign, nameById }) {
       </div>
       {rows.length === 0 ? (
         <div style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontStyle: 'italic', lineHeight: 1.5 }}>
-          {nameFor(observerId)} records no standing toward another settlement: no siege, no treaty{includeGroundTruth ? ', no modelled belief' : ''}.
+          {nameFor(observerId)} has no siege or treaty with another settlement yet{includeGroundTruth ? ', and holds no belief about its neighbours' : ''}.
         </div>
       ) : (
         <div style={{ display: 'grid', gap: 4 }}>

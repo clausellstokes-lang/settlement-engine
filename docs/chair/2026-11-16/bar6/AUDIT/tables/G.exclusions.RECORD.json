@@ -1,0 +1,317 @@
+[
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Advanced weapons and armor",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Coal or peat deposits",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Fine metalwork and jewelry",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Rare spices and dyes",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Raw wool and hides",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Gem Mining & Lapidary",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Alpine Wool and Dairy",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Cloth Finishing & Clothing",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Rare spices and exotic dyes",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Silk & Luxury Textiles",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Silk is not produced locally anywhere. Port cities control import; crossroads cities control inland distribution.",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Furs travel from the hunting grounds through trading posts, and the settlements along the route profit from the trade.",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Wine is produced in specific vineyard regions and consumed everywhere. Port and river settlements profit from redistribution.",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Caravan & Overland Trade",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "What keeps the population alive and attracts pilgrims and the infirm",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Pilgrimage & Holy Sites",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/supplyChainData.js",
+  "text": "Holy sites bring in money through what pilgrims spend: income that does not depend on trade.",
+  "reason": "a supply-chain row's own label, good or note: printed only on the chain card of a chain active in this town (computeActiveChains: its resource present and a house of the town processing it); it names its own good or route and presumes nothing beyond the row's own gate"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Quality cloth and clothing",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Slaves imported from war fronts, pirate suppliers, and distant slave-holding regions.",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Spices and exotic dyes",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Unprocessed wool from sheep",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Cattle, sheep, pigs for sale",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Kiln-fired fuel for smithing and heating",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Dried peat blocks for domestic fuel",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Cattle, sheep, pigs in regular supply",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Horseshoes, nails, simple tools",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Barrel ale from the village brewer",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Domestic pottery from local clay",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Milk, butter, soft cheese from cattle",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Cloth, leather goods, metalwork",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Woven cloth, finished fabrics",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Wooden casks for storage/transport",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Tanned hides, leather products",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Commercial ale in barrel from the town brewery",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Tallow and beeswax candles, lye soap",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Silk, velvet, high-quality woolens",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Colored fabrics, specialty dyes",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/data/tradeGoodsData.js",
+  "text": "Legendary quality arms and armor",
+  "reason": "a trade good's own catalogue description: printed only beside that good where the town's own lists hold it (exports, made list, imports), each list gated on the house that works it (GOOD_WORKING_HOUSES, the export gates); it presumes its own good only"
+ },
+ {
+  "file": "src/domain/display/validationOnPage.js",
+  "text": " and its trade route is cut.",
+  "reason": "printed only where the record's route is connected and a siege has cut it (viabilityIssueText's own gate)"
+ },
+ {
+  "file": "src/generators/computeActiveChains.js",
+  "text": "Grain is carried out of the settlement to be ground, and the toll taken there leaves no surplus flour to sell on.",
+  "reason": "a chain or export row's own label or note, written only under its row's own condition (an active chain, an imported need, the external-mill-only case) in the town's record; bound to its own row"
+ },
+ {
+  "file": "src/generators/computeActiveChains.js",
+  "text": "Needs imported …: no local source",
+  "reason": "a chain or export row's own label or note, written only under its row's own condition (an active chain, an imported need, the external-mill-only case) in the town's record; bound to its own row"
+ },
+ {
+  "file": "src/generators/computeActiveChains.js",
+  "text": "Raw hides and animal products",
+  "reason": "a chain or export row's own label or note, written only under its row's own condition (an active chain, an imported need, the external-mill-only case) in the town's record; bound to its own row"
+ },
+ {
+  "file": "src/generators/computeActiveChains.js",
+  "text": "Raw furs and pelts",
+  "reason": "a chain or export row's own label or note, written only under its row's own condition (an active chain, an imported need, the external-mill-only case) in the town's record; bound to its own row"
+ },
+ {
+  "file": "src/generators/computeActiveChains.js",
+  "text": "Cut stone and masonry",
+  "reason": "a chain or export row's own label or note, written only under its row's own condition (an active chain, an imported need, the external-mill-only case) in the town's record; bound to its own row"
+ },
+ {
+  "file": "src/generators/computeActiveChains.js",
+  "text": "Pilgrimage & religious tourism",
+  "reason": "a chain or export row's own label or note, written only under its row's own condition (an active chain, an imported need, the external-mill-only case) in the town's record; bound to its own row"
+ },
+ {
+  "file": "src/generators/economy/economicState.js",
+  "text": "District-level duties on specialized goods; a major civic revenue stream across the urban districts.",
+  "reason": "Market Taxes row: written only where a district or multiple market stands and the town is not truly isolated (its own gate, line 95): the urban districts it names are the district market's"
+ },
+ {
+  "file": "src/generators/economy/economicState.js",
+  "text": "Entry and exit tolls collected at the town gates from merchants and travellers.",
+  "reason": "Gate Tolls row: written only on a road route where the defence home holds a toll gate (line 201); the gates are the toll gate's"
+ },
+ {
+  "file": "src/generators/economy/economicState.js",
+  "text": "Forced contributions and confiscations collected by the garrison, not formally a tax.",
+  "reason": "Military Extraction row: written only where a garrison stands with military priority above 55 (line 208); the garrison is the row's own house"
+ },
+ {
+  "file": "src/generators/economy/economicState.js",
+  "text": "Emergency and standing levies on the population to fund garrison upkeep.",
+  "reason": "Military Levy row: the same gate as Military Extraction (a garrison, military priority above 55)"
+ },
+ {
+  "file": "src/generators/economy/economicState.js",
+  "text": "Offerings, hospitality fees, relic sales, and incidental commerce from visiting pilgrims.",
+  "reason": "Pilgrim Trade row: written only where religion's influence is above 68 on a road or crossroads and a house of pilgrimage stands (line 249)"
+ },
+ {
+  "file": "src/generators/economy/economicState.js",
+  "text": "Weapons, armour, and jewellery command a premium once enchanted. The local arcanists increase the margin on craft exports.",
+  "reason": "Enchanted Goods Premium row: written only where magic priority is 75 or more and an armourer, a weaponsmith or a jeweller stands (line 316)"
+ },
+ {
+  "file": "src/generators/economy/economicState.js",
+  "text": "Wool & Textile Trade",
+  "reason": "the wool income's source label: written only where the wool chain's houses stand (its row's gate)"
+ },
+ {
+  "file": "src/generators/economy/economicState.js",
+  "text": "Military services — standing army leasing, siege engineering, garrison contracts",
+  "reason": "a military-services export label: written only where the town's mercenary or garrison houses stand (its row's gate)"
+ },
+ {
+  "file": "src/generators/economy/economicState.js",
+  "text": "Military services — garrison contracts and armed escort",
+  "reason": "a military-services export label: the same gate as the line above"
+ },
+ {
+  "file": "src/generators/economy/economicState.js",
+  "text": "Slave trade: transit market for human trafficking; imported labour and exported captives",
+  "reason": "the slave-trade export label: written only where a slave market stands and the law allows it (its row's gate)"
+ },
+ {
+  "file": "src/generators/economy/economicState.js",
+  "text": "Slave labour: purchased workforce for agricultural estates, mines, and domestic service",
+  "reason": "the slave-labour export label: the same gate as the line above"
+ },
+ {
+  "file": "src/generators/economy/economicState.js",
+  "text": "Dependent on trade routes. Siege, road closure, or blockade would impair operations.",
+  "reason": "a trade dependency's impact on a connected route: a conditional ('would impair'), true of every connected route; a siege takes its own impact first"
+ },
+ {
+  "file": "src/generators/economy/viability.js",
+  "text": "Craft guilds operate on imported materials: sustained by strong … trade. Vulnerable to supply disruption.",
+  "reason": "a guild warning written only where craft guilds stand on a strong trade route (its own condition); conditional on disruption"
+ },
+ {
+  "file": "src/generators/economy/viability.js",
+  "text": "Add a physical trade route",
+  "reason": "a suggested fix for the DM (staff text: 'Add a physical trade route'), not a sentence about the town"
+ },
+ {
+  "file": "src/generators/economy/viability.js",
+  "text": "The … is set on arms, but it has no walls, garrison, or barracks.",
+  "reason": "written only where the military priority is high and no wall, garrison or barracks stands: it states the absence it presumes"
+ },
+ {
+  "file": "src/generators/economy/viability.js",
+  "text": "Add Town Walls or Garrison",
+  "reason": "a suggested fix for the DM (staff text), not a sentence about the town"
+ },
+ {
+  "file": "src/generators/economy/viability.js",
+  "text": "… institution… depend on imported materials (…). Standard for this trade route: vulnerability if supply is disrupted.",
+  "reason": "written only where three or more houses depend on imported materials on a connected route: conditional on disruption"
+ },
+ {
+  "file": "src/generators/resourceGenerator.js",
+  "text": "… runs on imported …",
+  "reason": "a gap of kind 'imported': written only where the town's record brings the input in (supplyOfInput)"
+ }
+]

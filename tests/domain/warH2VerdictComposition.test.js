@@ -5,6 +5,7 @@ import {
   appendObservedWizardNewsEntries,
   projectWizardNewsForAudience,
 } from '../../src/domain/region/wizardNews.js';
+import { holdsMembership } from '../../src/domain/people/membership.js';
 import { applyNpcVerdict } from '../../src/domain/worldPulse/npcVerdictApply.js';
 import { applyOrganicNpcVerdicts } from '../../src/domain/worldPulse/npcVerdictPulse.js';
 import { readWarTerminations } from '../../src/domain/worldPulse/warTermination.js';
@@ -31,7 +32,10 @@ function oldRuler() {
     power: 60,
     dots: 4,
     structuralRank: 'dominant',
-    factionAffiliation: 'Crown',
+    // RESIDUE (2026-11-10, re-keyed by cause 0c17ec8a3): a current card stands in its power by a MEMBERSHIP, as the
+    // cast writes it (people/membership.js: `{ power, rank }`); the retired `factionAffiliation` is no longer the
+    // seat, and the successor inherits the ousted card's memberships (worldPulse/successorNpc.js :: successorNpc).
+    memberships: [{ power: 'Crown', rank: 1 }],
     linkedFactionIds: ['fac.crown'],
     institutionId: 'inst.court',
     corrupt: true,
@@ -195,17 +199,25 @@ function composedFixture({ founding = ['corruption_exposed'] } = {}) {
   const afterSettlement = composition.settlement;
   expect(successor).toMatchObject({
     id: 'npc.successor_123456',
-    factionAffiliation: 'Crown',
+    memberships: [{ power: 'Crown', rank: 1 }],
     importance: 'pillar',
     power: 60,
     replacedNpc: old.name,
   });
+  // The successor fills the ousted's seat: it stands in the Crown, by its own copy of the membership.
+  expect(holdsMembership(successor, 'Crown')).toBe(true);
+  expect(successor.memberships[0]).not.toBe(old.memberships[0]);
+  // The ousted is stripped of what vacates its rung (importance below the ladder's floor, power 0); a current card carries
+  // no retired `factionAffiliation` for the strip to clear (npcVerdictApply.js :: RELINQUISHED_FIELDS writes only fields a
+  // record carries), so none may appear.
+  // This pin asserts NOTHING about the ousted's membership either way: the strip leaves it, a finding carried to the simulation's program beside REVIEW-GREEN-TIP F1 (docs/chair/2026-11-10/RESIDUE-2026-11-10.md §1).
   expect(afterSettlement.factions[0].members[0]).toMatchObject({
     id: 'old',
-    factionAffiliation: '',
     importance: 'minor',
     power: 0,
   });
+  // anchored: the same member object is asserted present just above (id 'old', importance 'minor', power 0)
+  expect(afterSettlement.factions[0].members[0]).not.toHaveProperty('factionAffiliation');
 
   const authorityVerdicts = warAuthorityVerdictsForPulse(RULES, [authorityVerdict]);
   const pulseHistory = [{

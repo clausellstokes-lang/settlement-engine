@@ -330,7 +330,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
           border: `1px solid ${BORDER2}`, background: CARD_ALT, padding: '8px 10px',
         }}>
           <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900, marginBottom: 5 }}>
-            Causal shift in this entry
+            How things stand now, against before
           </div>
           <ul style={{ margin: 0, padding: 0 }}>
             {causalDiff.slice(0, 8).map((d, i) => <DiffRow key={d.variable || i} diff={d} />)}

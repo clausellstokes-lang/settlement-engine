@@ -283,6 +283,14 @@ describe('THE REFUSAL, REMEMBERED — and what it deliberately does not do', () 
     const points = relation.turningPoints;
     expect(points).toHaveLength(1);
     expect(points[0].kind).toBe('pact_refused');
+    // FIX-PULSE-DEFECTS (audit C1b·112): the turning point printed the courts' raw ids
+    // ("B would not treat with A …"). An unnamed fixture reads neutral nouns; a named one
+    // reads the names.
+    expect(points[0].summary).toMatch(/^One court would not treat with another over /);
+    // anchored: the same summary is matched on the line above, so it is present and live.
+    expect(points[0].summary).not.toMatch(/\b[AB]\b/);
+    const named = openThenAnswer(bound, namedSnapshot()).second.worldState.relationshipStates[relKey('A', 'B')];
+    expect(named.turningPoints[0].summary).toMatch(/^Irontown would not treat with Ashford over /);
     // …the trust moved by exactly the banded delta…
     expect(relation.trust).toBeCloseTo(0.6 + F.REFUSAL_TRUST_DELTA, 10);
     // …and NOTHING else was touched. No grievance ledger, no casus, no incident.
@@ -605,10 +613,22 @@ describe('THE DRAFT LENS — the rung ladders, and what an occasion has earned',
     expect(new Set(draft('faith_communion', 0.45, true).terms.map(termIdOf)).size).toBe(4);
     // §6.7 THE DIRECTION, read off the EMITTED rows and never restated from the ruling:
     // the party a clause runs TO is owed it, and the OTHER party is the one promising.
-    for (const term of draft('faith_communion', 0.45, true).terms) {
+    // FIX-PULSE-DEFECTS (audit C1b·113): the receipt printed the courts' raw ids; re-keyed by
+    // identity — the direction is read off the receipt through the NAMES each id carries.
+    const NAMES = { A: 'Ashford', B: 'Irontown' };
+    for (const term of draftPactSheet({
+      trigger: 'faith_communion', fromId: 'A', toId: 'B', reciprocal: true, tick: 10, score01: 0.45,
+      fromName: NAMES.A, toName: NAMES.B,
+    }).terms) {
       const promiser = term.beneficiary === 'A' ? 'B' : 'A';
-      expect(String(term.receipt), String(term.type)).toContain(`${promiser} promises `);
-      expect(String(term.receipt), String(term.type)).toContain(` to ${term.beneficiary} for `);
+      expect(String(term.receipt), String(term.type)).toContain(`${NAMES[promiser]} promises `);
+      expect(String(term.receipt), String(term.type)).toContain(` to ${NAMES[term.beneficiary]} for `);
+    }
+    // A sheet drafted without names never prints an id.
+    for (const term of draft('faith_communion', 0.45, true).terms) {
+      expect(String(term.receipt)).toMatch(/^(one court|the other court) promises /);
+      // anchored: the same receipt is matched on the line above, so it is present and live.
+      expect(String(term.receipt)).not.toMatch(/\b[AB]\b/);
     }
     // NEITHER transfer term is ever emitted symmetric, which is what makes the ruling
     // total over everything these frozen ladders can emit: a mutual clause has no

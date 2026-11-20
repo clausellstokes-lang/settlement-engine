@@ -634,7 +634,10 @@ describe('evaluateTierResourceDynamics — pending tier proposal dedupe', () => 
     // THE HERALD SPEAKS IN DEEDS (the Voice Program wave 1, 2026-10-02): the summary names both halves
     // of the change in the world's terms, and the eligibility streak stays in the receipt.
     expect(candidate.summary).toContain('growing steadily, in people and in trade');
-    expect(candidate.reasons.join(' ')).toContain('Minimum streak');
+    // STYLE-2 C2 (SW-12): the streak stays in the receipt, in words (5 = the prior 4 + this pulse),
+    // and the eligibility line leads with the town, never the lower-cased tier token.
+    expect(candidate.reasons.join(' ')).toMatch(/\b5 pulses\b/);
+    expect(candidate.reasons[0]).toMatch(/^Ashford has nearly the people of a city/);
   });
 
   it('describes demotion in both halves too, people and trade, with the streak in the receipt', () => {
@@ -655,7 +658,8 @@ describe('evaluateTierResourceDynamics — pending tier proposal dedupe', () => 
 
     expect(candidate).toBeTruthy();
     expect(candidate.summary).toContain('losing people and trade steadily');
-    expect(candidate.reasons.join(' ')).toContain('Minimum streak');
+    expect(candidate.reasons.join(' ')).toMatch(/\b2 pulses\b/);
+    expect(candidate.reasons[0]).toMatch(/^Ashford no longer has the people, trade, walls or rule a town needs/);
   });
 
   it('skips re-emitting while a pending tier proposal already targets the settlement', () => {

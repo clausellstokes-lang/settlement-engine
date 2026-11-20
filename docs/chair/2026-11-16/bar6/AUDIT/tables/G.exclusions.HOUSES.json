@@ -1,0 +1,1192 @@
+[
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Common matters are settled by all the family heads together, each voice equal. It is unhurried, and the more egalitarian for that.",
+  "reason": "EASE · WORD SENSE: \"unhurried\" is the manner of the deciding, no claim of the town's ease"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A distant lord's officer, set here to watch the settlement and remit what it owes. The writ is legitimate; the welcome is not.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Placed by a lord who never visits, this officer holds official charge of the settlement. The paperwork backs the office. The neighbours do not.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A ring of sharpened stakes around the settlement. Little real defence, but enough to turn away an idle raider.",
+  "reason": "EASE · WORD SENSE: \"an idle raider\" is the raider's, no claim of the town's ease"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. Wool is what the flocks are chiefly kept for.",
+  "reason": "PLENTY · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: food: livestock, field work): a famine that fails the herds marks the shepherd; mutton is what the flock is, no feast"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A room over the stable and a shared meal for whoever the road brings through. It exists because the road does.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Lodging above the stable and a common table for passing travellers. Were there no road, there would be no inn.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A walled waystation offering merchants, their beasts, and their goods a safe night's rest. It is the hinge of the desert trade (water, fodder, and protection, all for a fee), and without it no caravan crosses the country around in safety.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Behind its walls, merchants shelter their animals and cargo overnight in security. Water, fodder, and guard are had here for payment, and it stands at the heart of the desert trade; lacking one, no caravan can safely make the surrounding passage.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Deals in mules, donkeys, and draft horses, buying and selling, and hires them out to travellers and merchants who need something to carry a load down the road.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, working animals): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Buys and sells mules, donkeys, and draft horses, and rents them to whoever on the road wants carrying power. Traveller or merchant alike.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, working animals): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A shared stable where travellers may leave their horses, the stableman offering rough farriery and fodder.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A common stable for travellers to lodge their mounts; the stableman sees to basic shoeing and feed.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A free hamlet, with no lord's man set over it; the elders, agreeing among themselves, settle what the community holds in common.",
+  "reason": "SOVEREIGN · NEGATED: the line denies a sovereign (\"no lord's man\", \"no higher lord\", \"no overlord\"); it is the free government's own house (G's arm 5, a negated mention) and presumes none"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "No lord's representative stands here. The hamlet is free, and its shared affairs are decided by the common consent of its elders.",
+  "reason": "SOVEREIGN · NEGATED: the line denies a sovereign (\"no lord's man\", \"no higher lord\", \"no overlord\"); it is the free government's own house (G's arm 5, a negated mention) and presumes none"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A lord's agent runs the hamlet's holdings, gathers the rents, and speaks for noble authority.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "The office acts for the lord: it administers the land, takes in rent, and imposes the noble's will.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: goods, food: fish): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: goods, food: fish): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A herd of cattle or goats, whenever livestock can be had, for milk, butter, and soft cheese. Any surplus is sold on.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: food: livestock): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "The village's one inn for the traders, pilgrims, and wayfarers who pass. Beds, a stable, and a shared table.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A lone inn catering to whoever the road brings: merchants, pilgrims, travellers. It offers a room, stabling, and the common meal.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A large walled compound built for desert traders: camel stabling, storage under lock, a well, and beds for fifty. Where caravans come, it is the desert settlement's economic heart.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A stout walled enclosure for the desert merchant, with stabling for camels, locked stores, a well, and sleeping room for fifty. Any desert settlement on a caravan route turns about it.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A fortified halt for the night, with stabling, a well, and plain provisions. It serves merchant caravans and travellers going far. Unlike the inn, it is made for beasts and loaded wagons, not for comfort.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A mapmaker's workshop, drawing and selling road maps of the region, property surveys, and rough sketches of the wilds pieced from travellers' tales. Uncommon enough that most villages lack one.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Here a craftsman renders and sells maps: regional roads, land surveys, and crude wilderness charts drawn from what travellers report. Few enough exist that the average village has none.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A steward in the lord's service, gathering the rents and pressing the manor's authority on a village that is bound to it.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Acting for the lord, the steward takes in the rents and holds the manor's writ over the bound village.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "The central plaza where the weekly market and the fairs are held.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at town (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "They change coin from abroad. Banking in its infancy.",
+  "reason": "OUTSIDE · TRUE UNDER EVERY CRISIS: the coin from abroad is the coin in the town's purses; changing it needs no road open"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A house made for travellers by coach: fresh horses stabled, departures timed, fixed mealtimes, and a passengers' waiting room. The teams are swapped out, not just given a rest.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Coordinates caravan assembly, departure times, and word of the roads. Merchants register cargo, take on guards, and pool ventures here.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Where regional caravans are mustered, scheduled, and briefed on their routes. Traders enrol their goods, hire escorts, and strike joint ventures.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Stabling, horse-dealing, and farriery gathered in one quarter, serving merchants, soldiers, and travellers in want of a fresh mount.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, working animals): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade · AND · SIZE · TIER-BOUND: drawn only under its house's own registry entry at town, city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new mount.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, working animals): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade · AND · SIZE · TIER-BOUND: drawn only under its house's own registry entry at town, city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.",
+  "reason": "SOVEREIGN · BESIDE THE TOWN'S OWN AUTHORITY (\"crown or town\", \"lord or municipality\"): the line names whoever holds the right, the town itself where no sovereign stands; true under every government (the page law's `SOV_SPARED`)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Warehouses where traders keep stock awaiting sale, shipment, or seasonal release. Indispensable to any town on a trade route.",
+  "reason": "OUTSIDE · HYPOTHETICAL: \"indispensable to any town on a trade route\" states what such a house is for, not that the road is open; stock awaiting shipment waits under a siege"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Wine pressed and matured from local fruit or imported must, when either comes to the cellar, and sold in bulk or direct to wealthy houses.",
+  "reason": "OUTSIDE · HEDGED IN ITS OWN WORDS: \"when either comes to the cellar\" (local fruit or imported must): it presumes no import; its input is the house's own short mark (`input`)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Several quarters, each with its house of worship.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at town (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Each congregation buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy plots together so their members lie among their trade.",
+  "reason": "LAW · WORD SENSE: inheritance disputes \"are settled from\" the sexton's roll: the record is the evidence; no claim of the law's state"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Senior druids who govern how their circle deals with the town. They may keep a grove hidden beneath the streets, hold the line between the town's spread and the wild, or advise its rulers on the land.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at town, city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A council of elder druids charged with their circle's standing in the town: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at town, city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "One of the lord's choosing governs, and noble authority overrides whatever the town was accustomed to.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Rule falls to the lord's appointee, whose noble warrant stands above local custom.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "The borough's court, where local justice is done.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at town (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A borough court for the settling of local matters.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at town (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Quarters for the guard or a small garrison.",
+  "reason": "SIZE · WORD SENSE: \"quarters\" is lodging (the barracks' rooms), no district of the town"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Tunnels and false cellars, dug and linked to move contraband beneath the streets.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at town (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Fur processors, traders, and retailers gathered into one quarter. It is high-value work, for good fur is a luxury good.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Those who dress, trade, and sell fur, all pressed into one district. The trade runs high, quality pelts being luxuries.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Standing markets in more than one quarter, open every day.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Several standing market squares, one to a district.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Merchants from abroad. Letters of credit are honoured.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods, gatherings): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Foreign traders attend, and credit by letter is taken.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods, gatherings): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Several inn districts, given over to merchants, travellers, and those who stay long.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade · AND · SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "More than one quarter of inns, serving the merchant, the traveller, and the lingering guest.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade · AND · SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Permanent offices where caravan masters, merchants, and armed escorts do business. It handles bonded freight, route intelligence, the assembly of armed convoys, and the settling of commercial disputes.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A city-scale exchange with standing offices, where caravan masters meet merchants and armed escorts to transact. Bonded freight, route intelligence, armed convoy assembly, and commercial dispute resolution are all conducted here.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Heated communal baths. Some cultures make them a social hub, others suspect them of vice; either way they are the district's best place for rumour and news.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A public bathhouse with hot water, a gathering place in some cultures and a suspected den of vice in others. Nowhere in the district hears more news.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A permanent district, licensed for commerce in persons, with auction halls, holding compounds, broker offices, and the attendant legal and financial infrastructure. The scale runs well beyond one market block.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "General forges, farriers, and toolsmiths in each quarter.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Every quarter has its forges: farriers, toolsmiths, and general smiths.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Apothecary shops crowded into one quarter, where competition forces each to specialise. One leans to chirurgery, another to herbal preparations, a third to imported medicines. Between them they carry herbalism kits, medicinal herbs, surgical supplies, and basic antidotes.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: imported input, BAR5-MARKS): a siege curtails it and marks it"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad. Herbalism kits, medicinal herbs, surgical supplies, and basic antidotes are all to be had.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: imported input, BAR5-MARKS): a siege curtails it and marks it"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Bakehouses throughout the wards, the loaf's weight and price fixed by guild rule.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A house of worship to every quarter.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "One for each neighbourhood.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A governor appointed by king or duke holds sway, and the city runs as a noble fief.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "The settlement rules itself and the land around it as a sovereign polity, answering to no higher lord and holding no external charter.",
+  "reason": "SOVEREIGN · NEGATED: the line denies a sovereign (\"no lord's man\", \"no higher lord\", \"no overlord\"); it is the free government's own house (G's arm 5, a negated mention) and presumes none"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "An independent state in its own right, governing both itself and its hinterland. No overlord above it, no charter granted from outside.",
+  "reason": "SOVEREIGN · NEGATED: the line denies a sovereign (\"no lord's man\", \"no higher lord\", \"no overlord\"); it is the free government's own house (G's arm 5, a negated mention) and presumes none"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "The crown governs the city from here, in person or through a royal governor. The standing is high, and so is the scrutiny.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "The crown governs here at first hand, whether the monarch sits in it or a viceroy does. Great prestige, and no less watchfulness.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Buildings of several storeys. Tenements house the poor.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Multi-storey construction, with tenements for the poor.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Excavated ways running under walls and wards alike; whole shipments pass below the city without touching a street.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A quarter given to prostitution, whether licensed or just tolerated.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Prostitution on a large and organised scale, held to one quarter.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Between five and ten standing market districts, each to its own trade: grain, livestock, cloth, metals, exotica.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Five to ten permanent quarters given over to markets, sorted by ware: grain, livestock, cloth, metals, and the exotic.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Every principal commodity and trade route has its guild, scores of them in all, sitting together as a chartered guild parliament.",
+  "reason": "OUTSIDE · NAMES A BODY, NO TRAFFIC: the guilds of the trade routes stand under every crisis; nothing in the line moves"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "The city's finance gathered into one district: international houses, letters of credit, and currency dealing on a grand scale.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Every quarter keeps its own parish, so that faith runs through every part of the city.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "One central roll now holds what the local grounds can no longer track. Wards are assigned to grounds, so a family that moves across the city may find itself divided by the assignment.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Hospitals and infirmaries across the districts, medical care organised for a city's numbers.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A spread of hospitals and infirmaries throughout the quarters, ordered medical care at population scale.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Several aqueducts feed cisterns and fountains spread across the districts, a water system built for a city's size.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "The region's greatest store of learning: thousands of volumes, archives of maps, and the historical record.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "No larger collection of knowledge exists in the region: thousands of books, a map archive, and the histories.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Garrisons spread through the quarters; no single barracks could secure a city this size.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "The magic-workers keep to one district. Its towers, workshops, libraries, and reagent merchants mark it out.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "A chartered school of the arcane, with a full course of study, laboratories, and scholars come from abroad.",
+  "reason": "OUTSIDE · THE PAST: scholars who came from abroad live here; the line presumes no road open now"
+ },
+ {
+  "file": "src/data/institutionDescVariants.js",
+  "text": "Levies charged on all trade in and out by road, collected by officials of crown or town.",
+  "reason": "SOVEREIGN · BESIDE THE TOWN'S OWN AUTHORITY (\"crown or town\", \"lord or municipality\"): the line names whoever holds the right, the town itself where no sovereign stands; true under every government (the page law's `SOV_SPARED`)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Receives travellers and speaks for the settlement",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Gossip, trade news, opportunities",
+  "reason": "EASE · WORD SENSE: gossip is the market's news service, no claim of the town's ease"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Grain, hay, hardtack, water. Caravan pricing.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Register to join an outgoing caravan.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Remove vagrants from the streets. Resident in exchange for work.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at town, city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Toll collected on goods sold. A share goes to the lord or municipality.",
+  "reason": "SOVEREIGN · BESIDE THE TOWN'S OWN AUTHORITY (\"crown or town\", \"lord or municipality\"): the line names whoever holds the right, the town itself where no sovereign stands; true under every government (the page law's `SOV_SPARED`)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Price reports from distant markets. Useful for timing purchases and sales.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Organize and insure shared merchant caravans for long-distance trade.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Stronger or flavored brews for feast days and premium trade.",
+  "reason": "PLENTY/EASE · WORD SENSE: a feast day is the faith's calendar, no plenty or ease of the town; the rites are kept in want too"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "District-scale potion output. Volume discounts for bulk orders.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Rare medications and treatments available through district-wide sourcing.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Know which caravans are carrying what and when. Sellable information.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Unusual animals sourced from distant regions. Status symbols and curiosities.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Assemble merchants with compatible routes into shared caravans for safety and economy.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Accurate maps of regions, trade routes, coastlines, and interiors.",
+  "reason": "OUTSIDE · WORD SENSE: maps of the trade routes, drawn here; no traffic presumed"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "The great rites, feast day observances, and the rites of the faith for a whole region.",
+  "reason": "PLENTY/EASE · WORD SENSE: a feast day is the faith's calendar, no plenty or ease of the town; the rites are kept in want too"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Attracts pilgrims from across the region. Economic and spiritual significance.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, gatherings): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Armed escort for valuable shipments, merchants, and travelers.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Convert winnings and losses across currencies. Ubiquitous in gambling districts.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "The most significant religious observances. Major feast days and state occasions.",
+  "reason": "PLENTY/EASE · WORD SENSE: a feast day is the faith's calendar, no plenty or ease of the town; the rites are kept in want too"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Accommodate and process pilgrims. Relics, blessings, and remissions bought outright.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, gatherings): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Small practical magic: light, mending, cleaning, minor wards. Day-to-day use.",
+  "reason": "SIZE · WORD SENSE: \"wards\" are spells, no district of the town"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Armed accompaniment for valuable shipments and vulnerable travelers.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Extended wards for patients requiring prolonged treatment.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Receive and hold messages and parcels for guests and travelers.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "All price points and quality levels represented across the district.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Travelers pass through constantly. News and rumors flow freely.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Goods sourced from distant regions unavailable elsewhere.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "The largest trading event of the year. Merchants from distant regions.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods, gatherings): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Long-term wards for patients recovering from illness or surgery.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Food and shelter for travelers and pilgrims. Often free or by donation.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Multiple gangs running protection in different districts.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Military presence distributed across multiple districts.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Each district has its own market square serving local needs.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Monastic schools provide literacy and basic education across districts.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Several congregations covering different districts or communities.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at town (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "The congregations coordinate on feast days and city-wide observances.",
+  "reason": "PLENTY/EASE · WORD SENSE: a feast day is the faith's calendar, no plenty or ease of the town; the rites are kept in want too"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Feed and shelter for traveler's horses during stays.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Know who goes where in their district. Sellable information.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at town (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Coordinate pickpocketing, burglary, and robbery within the district.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Beds for travelers. Range from dormitory to private room.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Hot meals suited to travelers. Hearty portions.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Receive, quarantine, and process incoming slave shipments from distant regions.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "A brief blessing for travelers on the road. Costs nothing; donations welcomed.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Food and a bed for pilgrims and travelers. Free or by donation.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, the monastery's Pilgrim shelter): a siege marks it stopped (the chair's ruling S1)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Distribution of food and aid to the poor on feast days.",
+  "reason": "PLENTY/EASE · WORD SENSE: a feast day is the faith's calendar, no plenty or ease of the town; the rites are kept in want too"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Access to venerated relics and shrines for pilgrims.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Levy on goods and travelers passing through the gates.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Check travelers and cargoes for contraband or wanted persons.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Access to district libraries and research facilities.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Ask whether a named traveller passed through, and in whose company.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "A bed by the hearth and a place at a shared table, for a traveller who asks.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionServices.js",
+  "text": "Grazing on the common for a traveller's beasts, for a small fee.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "An open-air stall or small covered market where the day's catch is sold. Prices drop fast. Fish doesn't wait.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: goods, food: fish): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A dairy for milk, butter, and soft cheese, from cattle or goats, whenever livestock can be had. Any surplus goes to neighbours.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: food: livestock): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Five to ten permanent specialized market districts: grain, livestock, cloth, metals, exotica.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Multiple permanent market squares serve different districts.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Central plaza for weekly markets and fairs.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at town (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Multiple inn districts catering to merchants, travelers, and long-term visitors.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade · AND · SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A room above a stable and a common meal for travelers passing through. Exists because the road does.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A single inn serving traders, pilgrims, and travelers passing through. Rooms, stabling, and a common meal.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Purpose-built for road travellers: stabling for relay horses, scheduled coach departures, meals served at fixed hours, and a passenger waiting room. Horses changed here, not just rested.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A substantial walled compound for desert merchants: stabling for camels, locked storage, a well, and sleeping quarters for fifty. The economic hub of any desert settlement that sees caravan traffic.",
+  "reason": "SIZE · WORD SENSE: \"sleeping quarters\" is lodging, no district of the town"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A walled waystation providing secure overnight lodging for merchants, animals, and goods. The centre of desert trade: water, fodder, and protection available for a fee. Without one, caravans cannot safely cross the surrounding terrain.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Permanent offices where caravan masters, merchants, and armed escorts transact. Bonded freight, route intelligence, armed convoy assembly, and commercial dispute resolution.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A fortified overnight stop with stabling, a well, and basic provisions. Serves merchant caravans and long-distance travellers. Distinct from the inn. Built for animals and loaded wagons, not comfort.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Coordinates regional caravan assembly, departure schedules, and route intelligence. Merchants register goods, hire guards, and arrange joint ventures here.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, goods): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "City haulage is bonded through the caravan masters.",
+  "reason": "NEVER PRINTED: a registry note (`ceiling.reason` of the institution registry), read by the registry walker, on no page"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Buys and sells mules, donkeys, and draft horses. Rents animals to travellers and merchants who need load-carrying capacity for the road.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, working animals): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Concentrated stabling, horse trading, and farriery. Serves merchants, military, and travelers needing fresh mounts.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers, working animals): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Communal stable where travelers can leave horses. Stableman provides basic farriery and fodder.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Warehouse facilities for merchants storing goods awaiting sale, transit, or seasonal distribution. Essential infrastructure for any trade route settlement.",
+  "reason": "OUTSIDE · HYPOTHETICAL: \"indispensable to any town on a trade route\" states what such a house is for, not that the road is open; stock awaiting shipment waits under a siege"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Communal bathing facility with heated water. In some cultures a social hub; in others suspect as a venue for vice. Either way, the best place in the district to hear rumour and news.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A permanent, licensed district for commerce in persons: auction halls, holding compounds, broker offices, and associated legal and financial infrastructure. Operates at a scale beyond a single market block.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A licensed house that pays for road news and keeps the register: who arrived, from where, and what they carried word of. Cheap to run and openly taxed, and found wherever the roads bring traffic.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Multiple apothecary shops clustered together. Competition drives specialization. Some focus on chirurgery, others on herbal preparations, others on imported medicines. Herbalism kits, medicinal herbs, surgical supplies, and basic antidotes all available.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: imported input, BAR5-MARKS): a siege curtails it and marks it"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Presses and ages wine from local grapes or imported must, in any year that either reaches the cellar. What it makes is sold in bulk, and by the bottle to wealthy clients.",
+  "reason": "OUTSIDE · HEDGED IN ITS OWN WORDS: \"when either comes to the cellar\" (local fruit or imported must): it presumes no import; its input is the house's own short mark (`input`)"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A craftsman who draws and sells maps: regional road maps, property surveys, and rough wilderness sketches from traveler accounts. Rare enough that most villages don't have one.",
+  "reason": "CRISIS CLASS · DECLARED BY ITS ROW'S DEPENDENCE (`crisisDependence.js`: travellers): under the crisis that denies it the row is MARKED, not rewritten (the chair's ruling S1; BRIEF-BAR5 L5 \"by its row's dependence\"); an occupation and a monster frontier close no road and stop no trade"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Burial has left the walls entirely: grounds beyond every gate, each with its own road, its own gatekeepers, and a trade in plots that the revenue office watches. The local registers are copied into a central roll because no single ground can any longer say where its own dead are. Wards are assigned to grounds, so a family that moves across the city can find itself divided by the assignment.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Multiple hospitals and infirmaries across districts. Organized medical care at population scale.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A council of senior druids who govern their circle's relationship with the settlement around it. They may maintain a hidden grove beneath the streets, mediate between the settlement's growth and wild places, or serve as ecological advisors to the ruling authority.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at town, city, metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A free hamlet with no lord's representative. Communal elder consensus governs shared affairs.",
+  "reason": "SOVEREIGN · NEGATED: the line denies a sovereign (\"no lord's man\", \"no higher lord\", \"no overlord\"); it is the free government's own house (G's arm 5, a negated mention) and presumes none"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A steward appointed by a distant lord to oversee the settlement. Authority is formal but often resented.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Larger holdings get a lord's steward.",
+  "reason": "NEVER PRINTED: a registry note (`ceiling.reason` of the institution registry), read by the registry walker, on no page"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A lord's agent manages the hamlet's lands, collects rents, and enforces noble authority.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A lord's steward collects rents and enforces manor authority over a bound village.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "A lord's appointed official governs; noble authority supersedes local custom.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "The settlement governs itself and its surrounding territory as an independent polity. No higher lord, no external charter.",
+  "reason": "SOVEREIGN · NEGATED: the line denies a sovereign (\"no lord's man\", \"no higher lord\", \"no overlord\"); it is the free government's own house (G's arm 5, a negated mention) and presumes none"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "The crown's own seat of government, held by the monarch or by a governor in the crown's name. High status, high scrutiny.",
+  "reason": "SOVEREIGN · ITS OWN HOUSE GIVES IT (ruling SV1): the line is its house's own (a lord's steward, reeve or appointee, a noble governor, a royal seat), and `facts/sovereign.js` reads the live house's name, so the atom holds wherever the line prints"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Multi-story buildings. Tenements for poor.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at city (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Dense multi-story blocks, tenement courts, and suburbs spilling past the walls.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Borough court for local justice.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at town (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Largest repository of knowledge in the region: thousands of volumes, map archives, historical records.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/data/institutionalCatalog.js",
+  "text": "Garrison forces distributed across quarters. No single barracks can secure a metropolis.",
+  "reason": "SIZE · TIER-BOUND: drawn only under its house's own registry entry at metropolis (the PAIRS or `at.<tier>` key the inventory cannot read as a tier gate); every tier it prints at is within the word's band (streets: a village or larger; quarters, districts, wards, neighbourhoods: a town or larger)"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Spices and rare aromatics",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Fine silk and brocade",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Silk and embroidered cloth",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Fine wine and amphorae",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Imported wine and spices",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Fine furs and pelts",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Fine furs and walrus ivory",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Imported wine and silk",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Fine wine from southern trade",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Rare dyes and pigments",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Fine furs from the north",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Silk from eastern routes",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Fine wine and olive oil",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Dyed cloth and quality textiles",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Dyed and printed cloth",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Parchment and wax tablets",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Quality iron tools and fittings",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Fine cloth and dye",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Tin from western mines",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Flax and linen cloth",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Felt and leather goods",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Cotton cloth in bulk",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Grain and salted pork",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Salted beef and grain",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Fine prayer rugs and cloth",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Incense and ritual paper",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Incense and ritual oil",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Fine linen for vestments",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Imported wine for ceremony",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Mead and ritual ale ingredients",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Mistletoe and sacred herbs",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Imported icons and sacred metals",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Incense from the east",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Ritual fermented mare milk",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Fine pottery for libations",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Medicinal herbs and fungi",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Rare herbs and roots",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Seiðr herbs and mushrooms",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Druidic herbs and oak bark",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Silver wire for wards",
+  "reason": "SIZE · WORD SENSE: \"wards\" are spells (a magic house's demand); a demand list besides"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Folklore herbs and mushrooms",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Shamanic herbs and bones",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Exotic feathers and furs",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Rare spices as reagents",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Undeclared wine and oil",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Stolen mail and weapons",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Undeclared furs and amber",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Stolen furs and amber",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Contraband silk and spice",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ },
+ {
+  "file": "src/generators/demandProfile.js",
+  "text": "Stolen gems and spices",
+  "reason": "A DEMAND LIST: an import label `computeDemandImports` appends to the record's own import list (G's arm 5, \"a demand list\"): the line IS the import, a record value, and presumes no good at hand; its outside reach is the import rows' own marks"
+ }
+]

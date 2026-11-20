@@ -260,6 +260,6 @@ describe('C6 — determinism and the DM privacy boundary', () => {
       MIRROR_BASIS_WORDS['posture:sealed'],
     ]);
     // A standing silence is part of the record, and the sentence says so.
-    expect(row.line).toContain('Nothing has left our hand since.');
+    expect(row.line).toContain('We have told them nothing since.');
   });
 });

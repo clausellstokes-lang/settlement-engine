@@ -42,8 +42,9 @@ describe('EXPOSE_CORRUPTION promotes a durable corruption_exposed condition', ()
   it('corrupt-NPC path', () => {
     const s = town({
       npcs: [{
-        id: 'npc1', name: 'Captain Vex', corrupt: true, corruptionVector: 'greed',
-        corruptTies: { criminalInstitution: "Thieves' Guild" }, factionAffiliation: 'City Watch', timesExposed: 0,
+        // ALLEGIANCE-CAR1 (2026-11-08): the retired `corrupt` mark is the card's hidden `allegiance` (allegianceOf)
+        id: 'npc1', name: 'Captain Vex', allegiance: { power: null, house: "Thieves' Guild", vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true },
+        factionAffiliation: 'City Watch', timesExposed: 0,
       }],
     });
     const next = apply(s, { type: 'EXPOSE_CORRUPTION', targetId: 'Captain Vex' });

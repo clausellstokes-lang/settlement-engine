@@ -50,7 +50,8 @@ describe('a village at slider 100 that raises a watch (f1u3-village-100-6)', () 
   it('holds the Village watch and a Guard Captain to lead it', () => {
     expect(s.institutions.map((/** @type {any} */ i) => i.name)).toContain('Village watch');
     expect(defenseFactsOf(s).hasWatch).toBe(true);
-    expect(s.npcs.map((/** @type {any} */ n) => n.role)).toContain('Guard Captain');
+    // 2026-11-07 PEOPLE-1 CAST (M-1b): the watch's face is its house's title — 'the militia captain' at a village
+    expect(s.npcs.map((/** @type {any} */ n) => n.role)).toContain('the militia captain');
   });
 });
 

@@ -15,13 +15,17 @@
  *   seat_stand_in                  the seated person, or a seat-titled member of the
  *                                  governing faction, is an unnamed office stand-in.
  *   seat_contested                 a second named member of the governing faction
- *                                  holds the seat-holder's own title.
+ *                                  holds the seat-holder's own title, or (the people
+ *                                  car, PEOPLE-2 CAST-DERIVED, 2026-11-07) a second
+ *                                  card holds rank 1 in the governing power beside the
+ *                                  seated rank-1 face.
  */
 
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { rulingChainOf, liveSeatCandidatesOf } from '../dossier/powerStrata.js';
 import { seatTitleRankOf, isOfficeStandIn } from '../dossier/seatHolder.js';
 import { npcInFaction, ladderFactionKey } from '../worldPulse/npcLadderFactionMembership.js';
+import { rankIn } from '../people/membership.js';
 
 /** @typedef {import('../dossier/seatHolder.js').SeatSettlement} SeatSettlement */
 /** @typedef {import('../dossier/seatHolder.js').SeatNpc} SeatNpc */
@@ -74,11 +78,18 @@ export function seatHolderFindings(settlement) {
     findings.push({ code: 'seat_stand_in', detail: `${seatName} is an office stand-in` });
   }
   const rank = seated ? seatTitleRankOf(seated.npc) : -1;
+  /** @type {SeatNpc[]} */
+  const contested = [];
   if (rank >= 0) {
-    const peers = liveSeatCandidatesOf(settlement).filter((n) => n !== seated?.npc && seatTitleRankOf(n) === rank);
-    for (const peer of peers) {
-      findings.push({ code: 'seat_contested', detail: `${String(peer.name || '')} holds the same office as ${seatName}` });
+    contested.push(...liveSeatCandidatesOf(settlement).filter((n) => n !== seated?.npc && seatTitleRankOf(n) === rank));
+  }
+  if (seated && rankIn(seated.npc, govName) === 1) {
+    for (const { npc } of rows) {
+      if (npc !== seated.npc && !contested.includes(npc) && rankIn(npc, govName) === 1 && !(/** @type {Record<string, unknown>} */ (npc)).ousted) contested.push(npc);
     }
+  }
+  for (const peer of contested) {
+    findings.push({ code: 'seat_contested', detail: `${String(peer.name || '')} holds the same office as ${seatName}` });
   }
   return findings;
 }

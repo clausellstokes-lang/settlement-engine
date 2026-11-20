@@ -102,7 +102,46 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 2 fewer items (436 → 434).
     // 434 → 435 at F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json): the step re-deals the realm's year and the year-one desk files
     // 1 more items (434 → 435).
-    expect(Object.keys(manifest)).toHaveLength(435);
+    // 435 → 479 at RECORD 1, PEOPLE-1 CAST (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-1-cast.json): the cast re-deals the wizard news over the year: one face per face-bearing house replaces the faction rungs' NPCs (222 items added, 178 removed, 2 moved)
+    // 44 more items (435 → 479).
+    // 479 → 478 at RECORD 2, PEOPLE-2 CAST-DERIVED (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-2-cast-derived.json): the crisis cast re-deals the wizard news over the year (9 items added, 10 removed, 2 moved)
+    // 1 fewer items (479 → 478).
+    // 478 → 470 at RECORD 5B, PEOPLE-5B EDIT (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-5b-edit.json): the v2 record re-deals the wizard news over the year (10 items added, 18 removed, 2 moved)
+    // 8 fewer items (478 → 470).
+    // 470 → 434 at MERGE-CAR RECORD A, THE RUNG-2 LANDING'S MERGE (ODQ §934.105, THE INTEGRATION LANDING, MERGE-CAR, 2026-11-08; record docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json): the pool census composed (the rung-2 landing's merge 10b8f09b4) re-deals the year's news over the car's cast; 470 -> 434 keys against the carried car bytes (435 -> 434 against record 0b's post-state)
+    // 36 fewer items (470 → 434).
+    // 434 → 470 at MERGE-CAR RECORD B, THE PEOPLE CAR'S MERGE (ODQ §934.105, THE INTEGRATION LANDING, MERGE-CAR, 2026-11-08; record docs/shift-records/2026-11-08-merge-car-b-people-car-composition.json): one face per institution re-casts the year's news over the pool census; 434 -> 470 keys against record A's post-state
+    // 36 more items (434 → 470).
+    // 470 → 475 at MERGE-WAVE RECORD 8, THE FIX-PUBLIC-VEIL MERGE (ODQ §934.105, THE WAVE, MERGE-WAVE, 2026-11-08; record docs/shift-records/2026-11-08-merge-wave-8-public-veil.json): a veiled face's opaque id re-deals its keyed forks, which re-deals the year's news; 470 -> 475 keys against record 7's post-state (39 items added, 34 removed, 2 moved)
+    // 5 more items (470 → 475).
+    // 475 → 450 at MERGE-TRAIN RECORD 1, THE ALLEGIANCE-CAR1 MERGE (ODQ §934.105, THE TRAIN, MERGE-TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-1-car1.json): the hidden allegiance re-writes the agents' goals and ties (5902f1a4a, 475 -> 443 on its lane) and J-19 lights the pulse's knowledge desk (d131ab158, 443 -> 450); 2 moved, +131/-156 keys against the wave's final post-state.
+    // 25 fewer items (475 → 450).
+    // 450 → 448 at MERGE-TRAIN RECORD 2, THE ALLEGIANCE-CAR2 MERGE OVER THE INTEGRATION BRANCH (ODQ §934.105, THE TRAIN, MERGE-TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-2-car2.json): the guild's push re-deals two agents' goals (bbb1a4abc, 450 -> 448 on its lane); 2 moved, +0/-2 keys against record 1's post-state.
+    // 2 fewer items (450 → 448).
+    // 448 → 441 at MERGE-TRAIN RECORD 3, THE ALLEGIANCE-CAR3 MERGE OVER THE INTEGRATION BRANCH (ODQ §934.105, THE TRAIN, MERGE-TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-3-car3.json): car 3's organizedCrime 0.05 re-deals the agents and the year's news (e9070d614, 450 -> 443 on its lane); 2 moved, +45/-52 keys against record 2's post-state.
+    // 7 fewer items (448 → 441).
+    // 441 → 442 at STYLE-2-MERGE RECORD 24b, THE SW-8 RENAME-POWERS MERGE'S HERALD ACT (ODQ §934.105, the chair's ruling of
+    // 2026-11-10 00:4x; record docs/shift-records/2026-11-10-style-2-merge-24b-sw8-herald.json): SW-8 C1's minted-name id
+    // cascade re-deals the fresh campaign — one item more on rr-fresh-full|1 (439 → 440), 5 section rows gone, 6 new.
+    // 442 → 446 at STYLE-2-MERGE RECORD 38, THE HERALD GOLDEN OF POINT 36 SIGNED AT THE RESIDUE MERGE (ODQ §934.105, the chair's ruling
+    // of 2026-11-10; record docs/shift-records/2026-11-11-style-2-merge-38-residue-herald.json): the pulse reads a person's powers by
+    // membership (GREEN-TIP ae6693ccb, PULSE-SITES 0db374102); four more items on rr-fresh-full|1 (440 → 444).
+    // 446 → 440 at STYLE-2-MERGE RECORD 46, THE COHERENCE-POWERS MERGE (ODQ §934.105; record
+    // docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json): the dual hat re-deals the fresh campaign's cast, so
+    // its simulated year's news is re-dealt — on rr-fresh-full|1 99 section rows leave and 93 arrive (itemCount moves with them).
+    // 440 → 446 at STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE (ODQ §934.105; record
+    // docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json): the fresh campaign's simulated year reads the moved
+    // defence, power and food figures, so its news is re-dealt — on rr-fresh-full|1 29 section rows leave and 35 arrive (itemCount 438 → 444).
+    // 446 → 475 at THE CLOSE OF THE TAIL ROUND (TAIL-CLOSE-DOORS-3; the owner's word of 2026-11-15 06:00 UTC, ODQ §934.105; record
+    // docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): the round's declared moves re-deal the fresh campaign's cast
+    // and figures, so its simulated year's news is re-dealt — on rr-fresh-full|1 65 section rows leave and 94 arrive (itemCount 444 → 473).
+    // 475 → 475 at THE CLOSE OF THE ROUNDS BAR5 TO BAR8 (CLOSE-DOORS-2; the owner's word of 2026-11-18 03:03:46 UTC, ODQ §934.105; record
+    // docs/shift-records/2026-11-18-the-close-of-the-rounds-bar5-to-bar8.json, the chair's ruling CL7, the cause named first): green at 6c117344f,
+    // first red at JOIN-17 point 21 (BIRTH-1, edb5cae92): the realm pulse's resource role reads the town's import list
+    // (tierResourceDynamics.resourceEconomicRole) and BIRTH-1's declared economicState.primaryImports makes soak-a import its hunting
+    // grounds' good, so one beat's reason reads "export and import" and the year re-deals one pulse beat (one section row out, one in;
+    // itemCount 473 unmoved). The content sha re-recorded through the door at the doors' branch over Part 1's final tip 0af60594a.
+    expect(Object.keys(manifest)).toHaveLength(475);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
@@ -153,9 +192,24 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       // the step re-deals the year; the year's misjudgment beats are now 3 (4, 42, 49), all on knowledge.
       // Re-dealt at F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json):
       // the step re-deals the year; the year's misjudgment beats are now 2 (4, 42), all on knowledge.
+      // Re-dealt at RECORD 1, PEOPLE-1 CAST (ODQ §934.105, THE PEOPLE CAR’S LANDING, 2026-11-07; record docs/shift-records/2026-11-07-people-1-cast.json):
+      // the cast re-deals the year; the year's misjudgment beats are now 1 (4), on knowledge.
+      // Re-dealt at MERGE-CAR RECORD A, THE RUNG-2 LANDING'S MERGE (ODQ §934.105, THE INTEGRATION LANDING, 2026-11-08; record docs/shift-records/2026-11-08-merge-car-a-rung2-composition.json):
+      // the pool census composed re-deals the year at the stage of 572c15018; the year's misjudgment beats are now 3 (4, 15, 42), all on knowledge.
+      // Re-dealt at MERGE-CAR RECORD B, THE PEOPLE CAR'S MERGE (ODQ §934.105, THE INTEGRATION LANDING, 2026-11-08; record docs/shift-records/2026-11-08-merge-car-b-people-car-composition.json):
+      // the car's cast re-deals the year over the pool census at the stage of 8dff691f3; the year's misjudgment beats are now 1 (4), on knowledge.
+      // Re-dealt at MERGE-TRAIN RECORD 1, THE ALLEGIANCE-CAR1 MERGE (ODQ §934.105, THE TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-1-car1.json):
+      // the hidden allegiance and J-19's lit pulse re-deal the year at the stage of e5f88930b; the year's misjudgment beats are now 2 (15, 4), all on knowledge.
+      // Re-dealt at MERGE-TRAIN RECORD 3, THE ALLEGIANCE-CAR3 MERGE (ODQ §934.105, THE TRAIN, 2026-11-09; record docs/shift-records/2026-11-09-merge-train-3-car3.json):
+      // organizedCrime 0.05 and the round-robin deal re-deal the year at the stage of c6ded8e3a; the year's misjudgment beats are now 3 (15, 19, 4), all on knowledge.
+      // Re-dealt at STYLE-2-MERGE RECORD 47, THE COHERENCE-AGREE MERGE (ODQ §934.105, THE STYLE WAVE'S MERGE, 2026-11-13; record docs/shift-records/2026-11-13-style-2-merge-47-coherence-agree.json):
+      // the year reads the moved defence, power and food figures at the stage of 9e2ae9035; the year's misjudgment beats are now 3 (15, 4, 45), all on knowledge.
+      // Re-dealt at THE CLOSE OF THE TAIL ROUND (ODQ §934.105, the owner's word of 2026-11-15 06:00 UTC; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json):
+      // the round's declared moves re-deal the year at the line's final tree (f76fe38fd); the year's misjudgment beats are now 3 (15, 19, 4), all on knowledge.
       expect(misjudged).toEqual([
+        'wizard_news.15.belief_misjudgment.soak-a.soak-c',
+        'wizard_news.19.belief_misjudgment.soak-a.soak-c',
         'wizard_news.4.belief_misjudgment.soak-a.soak-c',
-        'wizard_news.42.belief_misjudgment.soak-a.soak-c',
       ]);
       for (const id of misjudged) {
         expect(live.sections[id]).toBe('knowledge');

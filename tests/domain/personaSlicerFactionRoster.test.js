@@ -129,27 +129,20 @@ describe('the accessor serves all three shapes that reach this line', () => {
     expect(roster).not.toContain('Millers');
   });
 
-  it('SHAPE 2 — a real settlement top-level `.factions` is the NPC grouping list, keyed .name', () => {
-    // Guards the premise that these are genuinely a different record type, so nobody
-    // "consistency-fixes" this fallback onto `.faction` and empties it.
+  // PEOPLE-5A RE-KEYED (M-2): SHAPES 2 AND 3 LEAVE. The persona's roster reads the powers only;
+  // a settlement's NPC grouping and a neighbour summary's top-level `.factions` are no longer read
+  // (a neighbour summary now carries its partner's powers under `powerStructure.factions`).
+  it('SHAPE 2 (retired) — a top-level `.factions` alone yields no roster; the powers do', () => {
     const s = generateSettlementPipeline({ tier: 'city' });
-    expect(Array.isArray(s.factions)).toBe(true);
-    expect(s.factions.length).toBeGreaterThan(0);
-    for (const g of s.factions) {
-      expect(typeof g.name).toBe('string');
-      expect(g.faction).toBeUndefined();
-    }
-    // Reached only when powerStructure carries none — then the grouping names are the roster.
-    const roster = rosterFor({ id: 's2', powerStructure: {}, factions: s.factions });
-    expect(roster).toEqual(s.factions.slice(0, 8).map((g) => g.name));
-    expect(roster.length).toBeGreaterThan(0);
+    expect(s.powerStructure.factions.length).toBeGreaterThan(0); // anchor: the powers are live
+    expect(rosterFor({ id: 's2', powerStructure: {}, factions: [{ name: 'Millers' }] })).toEqual([]);
+    expect(rosterFor({ id: 's2b', powerStructure: s.powerStructure }))
+      .toEqual(s.powerStructure.factions.slice(0, 8).map((f) => f.faction));
   });
 
-  it('SHAPE 3 — a neighbour top-level `.factions` is powerStructure-SHAPED (`.faction`)', () => {
-    // neighbourGenerator.js:180 fills a neighbour's top-level `.factions` from powerStructure
-    // factions (see its :200 comment). Same key as shape 1 in the slot of shape 2 — the case a
-    // per-arm special case (`.faction` here, `.name` there) would silently drop.
-    expect(rosterFor({ id: 's3', factions: [{ faction: 'Harbour Watch', power: 30 }] }))
+  it('SHAPE 3 (retired) — a neighbour summary carries its powers where every place does', () => {
+    expect(rosterFor({ id: 's3', factions: [{ faction: 'Harbour Watch', power: 30 }] })).toEqual([]);
+    expect(rosterFor({ id: 's3b', powerStructure: { factions: [{ faction: 'Harbour Watch', power: 30 }] } }))
       .toEqual(['Harbour Watch']);
   });
 

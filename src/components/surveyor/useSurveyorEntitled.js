@@ -1,7 +1,7 @@
 /**
  * useSurveyorEntitled.js — the Surveyor AI gate for the DOOR, resolved LAZILY.
  *
- * Rides only the door's lazy chunk, so it adds ZERO eager bytes. Founders +
+ * Rides only the door's lazy chunk, so it adds ZERO eager bytes. Premium, Founders +
  * elevated roles are read synchronously from the eager auth store and
  * short-circuit the async fetch (they see the door immediately); an
  * entitlement-only user sees it once the has_surveyor_entitlement() RPC resolves.
@@ -38,6 +38,7 @@ async function fetchEntitled(userId) {
 /** @returns {boolean} whether the current user may reach the Surveyor AI surface. */
 export function useSurveyorEntitled() {
   const userId = useStore((s) => s.auth.user?.id || null);
+  const tier = useStore((s) => s.auth.tier);
   const isFounder = useStore((s) => s.auth.isFounder);
   const role = useStore((s) => s.auth.role);
   const [fetched, setFetched] = useState({ userId: null, entitled: false });
@@ -49,5 +50,5 @@ export function useSurveyorEntitled() {
   }, [userId]);
 
   const hasSurveyorEntitlement = fetched.userId === userId && fetched.entitled;
-  return isSurveyorTier({ hasSurveyorEntitlement, isFounder, role });
+  return isSurveyorTier({ tier, hasSurveyorEntitlement, isFounder, role });
 }

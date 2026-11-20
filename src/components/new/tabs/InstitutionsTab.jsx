@@ -18,7 +18,7 @@
  * description, THE BACKS LINE (X-40, X-45): the powers the house stands behind — every house at
  * least one, where the settlement has a ruler, and more than one where more than one reason
  * holds — each a door to the Power tab, read off the one per-house truth the Power tab's web is
- * built from (`powerSupport.js :: houseBacksOf`). THE DM EDITS IT (X-45): a viewer who may
+ * built from (`powerSupport.js :: houseBacksShownOf`). THE DM EDITS IT (X-45): a viewer who may
  * author, in edit mode, toggles the roster's powers on the line; the authored list wears the ✎
  * mark and replaces every derived reason, and "As the engine has it" lets it go. The edit rides
  * the house's own edit record (`applyUserEditAction('institution', index, 'backs', …)`), so it
@@ -49,15 +49,18 @@ import { computeChainSets } from '../tabHelpers';
 // The rows can shift with an economy event exactly as the Services tab's do, so the page carries
 // the same freshness note (economyReadModelCoverage: COVERED; chair ruling 5, 2026-10-30).
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
-import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
+import { institutionHouseLabel } from '../../../domain/display/institutionDisplayName.js';
 import { identityForInstitution } from '../../../domain/display/institutionVocabulary.js';
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
-import { PROXY_SERVICE_HOSTS } from '../../../data/servicesData.js';
 import { isFabricInstitution } from '../../../data/institutionalCatalog.js';
 import { entityAnchor, entityIdFor, serviceEntityOf } from '../../../domain/dossier/entityLinks.js';
-import { formatBacksValue, houseBacksOf } from '../../../domain/dossier/powerSupport.js';
+import { formatBacksValue, houseBacksShownOf } from '../../../domain/dossier/powerSupport.js';
+import { powerSentenceName } from '../../../domain/display/powerSentenceName.js';
 import { walkUserEdits } from '../../../domain/userEdits.js';
 import { factionIdFromName } from '../../../lib/entities.js';
+import { cardOfficeOf, facesByHouse } from '../../../domain/people/cardPowers.js';
+import { seatHouseFaceOf } from '../../../domain/dossier/seatHolder.js';
+import { connectionOf } from '../../../domain/people/seatKeeperDisplay.js';
 import { nameOf } from '../../../domain/rulingPower.js';
 import { useEntityFocus } from '../../dossier/useEntityFocus.js';
 import { MentionText } from '../../ProseParagraph.jsx';
@@ -65,6 +68,7 @@ import EntityLink from '../../primitives/EntityLink.jsx';
 import InfoPill from '../../primitives/InfoPill.jsx';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { FLUSH, FLUSH_PAGE, FLUSH_STACK } from '../../../design/flush.js';
+import { stoppingCrisesOf, rowStoppedBy, rowShortOf, rowMarkText, STOPPED_WORD, SHORT_WORD, markedDescription, ordinaryTimesLine, setsWithMarkedHousesWorse, isVentureMark } from '../../../domain/display/crisisStoppedRow.js'; // BIRTH-3: no door word beside a failed venture's mark
 
 // ── The institution provenance badge (R-5b item #10), moved from OverviewTab ──────────
 // The badge reads the ONE derived provenance record (domain/provenance/rosterProvenance.js),
@@ -72,7 +76,7 @@ import { FLUSH, FLUSH_PAGE, FLUSH_STACK } from '../../../design/flush.js';
 // *ByWorldPulseOutcomeId stamps into a single answer to "who put this here". Nothing is
 // persisted: the record is derived per render. 'forced' (the player force-added it at
 // generation) wears the same YOU mark as a DM event, and the legend says so once.
-const PROVENANCE_TONE = { you:'#2d7a44', world:'#2a6b6b', required:'#a0762a', auto:'#2a3a7a', none:'#6b5340' };
+const PROVENANCE_TONE = { you:'#2d7a44', world:'#2a6b6b', auto:'#2a3a7a', none:'#6b5340' };
 
 /** @param {object} inst */
 export function institutionBadge(inst) {
@@ -88,8 +92,20 @@ export function institutionBadge(inst) {
       title: created.reason ? `Grown by the living world. ${created.reason}` : 'Grown by the living world',
     };
   }
-  if (created.sourceTag === 'required') return { label:'REQ', color:PROVENANCE_TONE.required, title:'Historically required' };
-  if (created.sourceTag === 'forced') return { label:'YOU', color:PROVENANCE_TONE.you, title:'Added by you' };
+  // ROUND THREE, ruling (b) (the chair, 2026-11-13; ROUND-3-CUT §7 (b)): "REQ" was the generator's
+  // provenance (a row the tier's catalogue requires), run onto the house's name: machinery, not a fact
+  // of the place. It leaves the roster; the row is unbadged, like an unstamped generated row.
+  if (created.sourceTag === 'required') return { label:null, color:PROVENANCE_TONE.none, title:undefined };
+  // R2-CODE-B item 2 (the cold list REVIEW-W2A-3 #893 #894: "Hedge wizard YOU" with no house added by
+  // the user): `source: 'forced'` is written by every generator that forces a row — the user's toggle
+  // AND the isolation pass (isolationGenerator.js, `forcedByIsolation`). The record's own word for the
+  // user's hand is `forcedByToggle` (assembleInstitutions.js, every toggle path); only that wears YOU.
+  // A row the generator forced makes no claim of who added it, like an unstamped generated row.
+  if (created.sourceTag === 'forced') {
+    return inst?.forcedByToggle === true
+      ? { label:'YOU', color:PROVENANCE_TONE.you, title:'Added by you' }
+      : { label:null, color:PROVENANCE_TONE.none, title:undefined };
+  }
   if (created.sourceTag === 'auto-resolved') return { label:'→', color:PROVENANCE_TONE.auto, title:'Auto-resolved dependency' };
   // Unstamped legacy rows stay unbadged rather than being guessed at. Custom rows are
   // skinned gold by the caller's own ✦ branch.
@@ -117,7 +133,9 @@ function serviceRows(availableServices) {
  */
 export function institutionsWithServices(settlement) {
   const rows = serviceRows(settlement?.availableServices);
-  const backers = houseBacksOf(/** @type {any} */ (settlement) || {});
+  const backers = houseBacksShownOf(/** @type {any} */ (settlement) || {});
+  // PEOPLE-6 LINKS: each house's face, the card whose `institution.key` is the row's name.
+  const faces = facesByHouse(/** @type {any} */ (settlement)?.npcs);
   // X-45: the houses the DM spoke for, through the settlement-level walk of the edit records
   const spoken = new Set();
   for (const edit of walkUserEdits(settlement)) if (edit.kind === 'institution' && edit.path === 'backs') spoken.add(edit.entityIndex);
@@ -126,11 +144,8 @@ export function institutionsWithServices(settlement) {
   for (const svc of rows) {
     const key = String(svc.institution || '');
     if (!key) continue;
-    // VERIFIER F14 (RS-19): a PROXY host (a Sewage system, a Housing row, a Massive prison)
-    // only surfaces another house's menu. The Services tab names no institution for those rows,
-    // so this page lists none of them under the proxy; the house keeps its own card. The host's
-    // name alone answers it, as in serviceComponents.jsx :: viaProxy.
-    if (PROXY_SERVICE_HOSTS[key.toLowerCase()]) continue;
+    // RS-19 is now kept in the RECORD (lane REVIEW-INTAKE unit 2): no row credits a proxy
+    // host, because the twelve former proxies own their menus, so every row joins its house.
     if (!byInstitution.has(key)) byInstitution.set(key, []);
     byInstitution.get(key).push(svc);
   }
@@ -143,9 +158,18 @@ export function institutionsWithServices(settlement) {
       return {
         inst,
         category: String(inst.category || ''),
-        label: institutionDisplayName(inst),
+        // ROUND THREE, ruling (a) (ROUND-3-CUT §7 (a)): the card names the house by its label, the one
+        // display leaf every surface reads: no catalogue count range, household range, gate or
+        // condition ("Dwellings (1-8)" reads "Dwellings"; "Inn (multiple)" reads "Inns"), the in-world
+        // qualifiers kept. The raw name stays the join key (`key` above) and the React key.
+        label: institutionHouseLabel(inst),
         services: byInstitution.get(key) || [],
         backs: backers.get(key) || [],
+        // PEOPLE-6 LINKS: the house's representative (null for a house with no face)
+        // COHERENCE-POWERS (cure (i)): the seat's house where a house leads is faced by the leader
+        face: faces.get(key) || seatHouseFaceOf(/** @type {never} */ (settlement), key) || null,
+        // COHERENCE-POWERS: the face is the seat holder's, not this house's own (it names both hats)
+        seatFaced: !faces.get(key) && !!seatHouseFaceOf(/** @type {never} */ (settlement), key),
         // X-45: the DM spoke, even to say nobody (the mark outlives an emptied list)
         authored: spoken.has(i),
         // X-46 car 3: the place, not a house (its own group at the foot of the tab)
@@ -216,7 +240,7 @@ function BacksEditor({ label, powers, selected, authored, onDone, onRevert, onCl
       <Button variant="primary" size="sm" onClick={() => onDone(powers.filter((name) => chosen.has(name)))} aria-label={`Done editing who ${label} backs`}>Done</Button>
       {authored && <Button variant="ghost" size="sm" onClick={onRevert}>As the engine has it</Button>}
       <Button variant="ghost" size="sm" onClick={onClose} aria-label={`Stop editing who ${label} backs`}>Cancel</Button>
-      <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexBasis: '100%' }}>Who this house stands behind. Your choice replaces what the engine derived.</span>
+      <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexBasis: '100%' }}>Who this house stands behind. Your choice replaces the original.</span>
     </div>
   );
 }
@@ -225,17 +249,22 @@ function BacksEditor({ label, powers, selected, authored, onDone, onRevert, onCl
  * One institution: what it is, the powers it backs, then the doors to the services it renders
  * (X-35, X-40, X-45). Mounted by the tab and, through its own card, by the dossier search
  * (BUILD-W2-SEARCH U2). `sets` is the tab's chain-status reading (`computeChainSets`); `backs`
- * is the house's list from `houseBacksOf`; `canAuthor` and `index` arm the editor. `fabric` (X-46
+ * is the house's list from `houseBacksShownOf`; `canAuthor` and `index` arm the editor. `fabric` (X-46
  * car 3) marks the place rather than a house: no Backs line and no editor.
  */
-export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false }) {
+export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [], fabric = false, face = null, seatFaced: seatFacedRow = false, settlement = null, crisisMark = null, serviceStoppedBy = null, serviceShortBy = null }) {
   const mobile = useIsMobile();
+  // COHERENCE-POWERS: a face that is not this house's own (the seat's house, faced by the dual-hat leader)
+  const seatFaced = seatFacedRow && !!face && !!cardOfficeOf(face);
+  // COHERENCE-POWERS-3 (F7): the empty seat's keeper in the caretaker's form; a disambiguated name's title once
+  const connection = face && face.name ? connectionOf(face, settlement, seatFaced) : { name: '', tail: '' };
   const isCustom = inst.source === 'custom' || inst.isCustom === true;
   const badge = institutionBadge(inst);
   // X-20 (c): the card is always open; a link to the house scrolls it to the top.
   const { ref: focusRef } = useEntityFocus(entityIdFor('institution', inst));
   const selfId = entityIdFor('institution', inst);
-  const description = institutionDescription(inst);
+  // TAIL-SERVICES (ruling S1): under a crisis that stops what the house lives on, its mark leads the description of ordinary times.
+  const description = crisisMark ? markedDescription(crisisMark, institutionDescription(inst)) : institutionDescription(inst);
   const status = houseStatus(services, sets);
   // X-45: the editor is offered to a viewer who may author, in edit mode, on a house the
   // roster can address (the NPC card's own gate, `authorEditMode`).
@@ -264,6 +293,19 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
       {description && (
         <p data-testid="institution-desc" style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.4, margin: '2px 0 0' }}><MentionText text={description} selfId={selfId} /></p>
       )}
+      {/* THE FACE ROW (PEOPLE-6 LINKS, the owner's word of 2026-11-07): the house's representative
+          as "Pastor Robert Thomas" — the honorific of its title (src/data/faceHonorifics.js), then
+          the full name — a door to its NPC card (EntityLink, by the card's own id). A house with no
+          face shows no row. The row opens on the word "Connection:" (the owner, 2026-11-09,
+          OWNER-WORDS-DOSSIER item 1), outside the door, so the link's name stays the face's alone. */}
+      {face && face.name && (
+        <div data-testid="institution-face" style={{ marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3 }}>
+          <span data-testid="institution-face-label">Connection:</span>{' '}
+          {/* COHERENCE-POWERS: the seat's house faced by the dual-hat leader names both hats: "Reeve Egilbert Neumann, the miller" */}
+          <EntityLink id={entityIdFor('npc', face, String(face.name))} type="npc" fallback={connection.name} verbatim style={{ color: swatch.inkMag, fontWeight: 600 }} />
+          {connection.tail}
+        </div>
+      )}
       {/* THE BACKS LINE (X-40, X-45): who the house contributes to, each name a door to the Power
           tab; the ✎ mark when the DM named them; the pencil when the DM may. A wrapping row like
           the doors below (the name-list census reads it as no list). */}
@@ -271,7 +313,8 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
         <div data-testid="institution-backs" style={{ display: 'flex', alignItems: 'baseline', gap: '2px 8px', flexWrap: 'wrap', marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3 }}>
           <span>Backs</span>
           {backs.map((back) => (
-            <EntityLink key={back.faction} id={factionIdFromName(back.faction) || back.faction} type="faction" fallback={back.faction} style={{ color: swatch.inkMag, fontWeight: 600 }} />
+            // BAR2-SERVICES (SV4): the line names the power in its sentence form, the one leaf's ("Backs The Guard", never the roster's "Military/Guard"), as the Crisis tab's doors do
+            <EntityLink key={back.faction} id={factionIdFromName(back.faction) || back.faction} type="faction" fallback={powerSentenceName(back.faction)} verbatim={powerSentenceName(back.faction) !== back.faction} style={{ color: swatch.inkMag, fontWeight: 600 }} />
           ))}
           {backs.length === 0 && <span style={{ fontStyle: 'italic' }}>nobody</span>}
           {authored && <span data-testid="institution-backs-authored" title="Named by you" style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: PROVENANCE_TONE.you }}>✎ YOU</span>}
@@ -304,7 +347,8 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
             const entity = serviceEntityOf(svc);
             return (
               <span key={`${entity.id}-${j}`} data-testid="institution-service" style={{ fontSize: FS['12.5'] }}>
-                <EntityLink id={entityIdFor('service', entity)} type="service" fallback={institutionDisplayName(svc.name)} style={{ color: swatch.inkMag, fontWeight: 600 }} />
+                <EntityLink id={entityIdFor('service', entity)} type="service" fallback={institutionHouseLabel(svc.name)} style={{ color: swatch.inkMag, fontWeight: 600 }} />
+                {(serviceStoppedBy?.get(svc) || (serviceShortBy?.get(svc) && !isVentureMark(serviceShortBy.get(svc)))) && <span data-testid="institution-service-stopped" style={{ color: MUTED, fontStyle: 'italic' }}> ({[serviceStoppedBy?.get(svc) ? STOPPED_WORD[serviceStoppedBy.get(svc)] : null, serviceShortBy?.get(svc) && !isVentureMark(serviceShortBy.get(svc)) ? SHORT_WORD : null].filter(Boolean).join(', ')})</span>}
               </span>
             );
           })}
@@ -315,13 +359,31 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
 }
 
 export default function InstitutionsTab({ settlement, canAuthor = false }) {
+  const mobile = useIsMobile(); // bound above the early return: the ordinary-times line is prose, and keeps its phone floor
   const entries = useMemo(() => institutionsWithServices(settlement), [settlement]);
   const houses = useMemo(() => entries.filter((entry) => !entry.fabric), [entries]);
   const fabric = useMemo(() => entries.filter((entry) => entry.fabric), [entries]);
-  const sets = useMemo(() => computeChainSets(settlement || {}), [settlement]);
+  // BAR6-MARKS (8a.mild): the card's state word prints the leaf's worse state
+  const sets = useMemo(() => setsWithMarkedHousesWorse(settlement, computeChainSets(settlement || {})), [settlement]);
   // X-45: the editor's choices and each house's address in the roster (the edit action's index).
   const powers = useMemo(() => rosterPowerNames(settlement), [settlement]);
   const roster = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  // TAIL-SERVICES (the chair's ruling S1, 2026-11-14): a house that lives on what a siege, an outbreak or a famine stops
+  // is marked before its description; the page says once that the descriptions are of ordinary times (the one leaf,
+  // domain/display/crisisStoppedRow.js; a calm town marks nothing).
+  const stoppedBy = useMemo(() => {
+    const crises = stoppingCrisesOf(settlement);
+    return new Map(entries.map(({ inst }) => [inst, rowStoppedBy(settlement, 'house', inst, crises)]));
+  }, [entries, settlement]);
+  const serviceStoppedBy = useMemo(() => {
+    const crises = stoppingCrisesOf(settlement);
+    return new Map(entries.flatMap(({ services }) => services.map((svc) => [svc, rowStoppedBy(settlement, 'service', svc, crises)])));
+  }, [entries, settlement]);
+  // TAIL-SERVICES-2 (ruling S5): the leaf's second cause, a house (or a service door) short of the input the page says never reaches it.
+  const shortBy = useMemo(() => new Map(entries.map(({ inst }) => [inst, rowShortOf(settlement, 'house', inst)])), [entries, settlement]);
+  const serviceShortBy = useMemo(() => new Map(entries.flatMap(({ services }) => services.map((svc) => [svc, rowShortOf(settlement, 'service', svc)]))), [entries, settlement]);
+  const markOf = (inst) => (stoppedBy.get(inst) || shortBy.get(inst) ? rowMarkText(settlement, 'house', inst) : null);
+  const ordinaryLine = ordinaryTimesLine([...stoppedBy.values(), ...serviceStoppedBy.values()].filter(Boolean), [...shortBy.values(), ...serviceShortBy.values()]); // LEFT-MARKS M3: the leaf reads a venture's mark as no short mark
   if (!entries.length) return <Empty message="No institutions are recorded for this settlement." />;
 
   return (
@@ -331,11 +393,14 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
       <div data-testid="institutions-header" style={{ display: 'flex', justifyContent: 'flex-end', padding: '4px 12px' }}>
         <InfoPill text={SECTION_HELP.institutions} />
       </div>
+      {ordinaryLine && (
+        <div data-testid="institutions-ordinary-times" style={{ padding: '2px 12px 6px', fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, fontStyle: 'italic' }}>{ordinaryLine}</div>
+      )}
       {/* THE FLUSH RULE (X-44): the houses sit edge to edge, parted by their own hairlines. */}
       <div data-testid="institutions-stack" style={FLUSH_STACK}>
-        {houses.map(({ inst, category, label, services, backs, authored }, i) => (
+        {houses.map(({ inst, category, label, services, backs, authored, face, seatFaced }, i) => (
           <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} backs={backs} authored={authored} sets={sets}
-            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} />
+            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} face={face} seatFaced={seatFaced} settlement={settlement} crisisMark={markOf(inst)} serviceStoppedBy={serviceStoppedBy} serviceShortBy={serviceShortBy} />
         ))}
       </div>
       {/* THE FABRIC OF THE PLACE (X-46 car 3): the dwellings, the well, the church walk — the place
@@ -345,7 +410,7 @@ export default function InstitutionsTab({ settlement, canAuthor = false }) {
           <div data-testid="institutions-fabric-heading" style={{ ...literaryTitle(FS.sm), color: MUTED, padding: '10px 12px 4px' }}>The fabric of the place</div>
           <div style={FLUSH_STACK}>
             {fabric.map(({ inst, category, label, services }, i) => (
-              <InstitutionCard key={`fabric-${i}`} inst={inst} category={category} label={label} services={services} sets={sets} fabric />
+              <InstitutionCard key={`fabric-${i}`} inst={inst} category={category} label={label} services={services} sets={sets} fabric crisisMark={markOf(inst)} serviceStoppedBy={serviceStoppedBy} serviceShortBy={serviceShortBy} />
             ))}
           </div>
         </section>

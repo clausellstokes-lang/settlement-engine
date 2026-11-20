@@ -53,9 +53,11 @@ const STORED_LOCK_MAPS = Object.freeze([
   { npcs: true, history: true },
 ]);
 
+// PEOPLE-5A RE-KEYED (M-1b): the tab groups by the card's FIRST-RANK power, read from its
+// memberships (the shim's `factionAffiliation` is no longer read).
 const roster = () => [
-  { id: 'npc_0', name: 'Alda Reeve', role: 'reeve', influence: 'high', factionAffiliation: 'Council' },
-  { id: 'npc_1', name: 'Bran Smith', role: 'smith', influence: 'low', factionAffiliation: 'Council' },
+  { id: 'npc_0', name: 'Alda Reeve', role: 'reeve', influence: 'high', memberships: [{ power: 'Council', rank: 1 }] },
+  { id: 'npc_1', name: 'Bran Smith', role: 'smith', influence: 'low', memberships: [{ power: 'Council', rank: 2 }] },
 ];
 
 const townOf = (npcs) => ({
@@ -184,7 +186,7 @@ describe('GATED — a viewer who may not roll sees neither a Reroll nor a lock r
 /**
  * CONSOLIDATION (chair rulings N2/N4/N5/N7/N8, 2026-10-30). The roster's size is said once
  * (the header), the per-group high-influence tally is gone (the header tally and each card's
- * dots stay), a card inside its own faction's group no longer repeats that faction, and the
+ * dots went too: PAGE-1 CARD, F4, 2026-11-20, a band misread at birth), a card inside its own faction's group no longer repeats that faction, and the
  * "NPC Relationships" fold is cut: the Relationships page owns every tie.
  */
 describe('CONSOLIDATION — one count, one faction label, no tie fold', () => {
@@ -200,7 +202,7 @@ describe('CONSOLIDATION — one count, one faction label, no tie fold', () => {
     const text = container.textContent;
     const anchor = '2 Key Figures';
     expect(text).toContain(anchor);
-    expect(text).toContain('1 high influence');
+    expectAbsentWithAnchor(text, 'high influence', anchor, 'PAGE-1 CARD: the header\'s influence tally');
     expectAbsentWithAnchor(text, 'tap any card to expand', anchor, 'N7 footer');
     expectAbsentWithAnchor(text, '2 figures', anchor, 'N7 footer count');
     expectAbsentWithAnchor(text, '●●● ×', anchor, 'N4 per-group tally');
@@ -212,7 +214,9 @@ describe('CONSOLIDATION — one count, one faction label, no tie fold', () => {
 
   test('a card inside its own faction group drops the faction suffix; the role stays', () => {
     const { container } = mountNpcs();
-    const row = [...container.querySelectorAll('button')].find((b) => b.textContent.includes('Alda Reeve'));
+    // PEOPLE-6 LINKS (2026-11-07): the card's line (role, door back, power line) sits UNDER the
+    // toggle, not inside its <button> (the door is a link), so the card is the toggle's parent.
+    const row = [...container.querySelectorAll('button')].find((b) => b.textContent.includes('Alda Reeve')).parentElement;
     expect(row.textContent).toContain('reeve');
     expectAbsentWithAnchor(row.textContent, '· Council', 'reeve', 'N5 faction suffix inside its own group');
   });

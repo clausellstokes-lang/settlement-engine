@@ -161,24 +161,9 @@ describe('store-2 — mutators are gated by advanceInFlight', () => {
   // store-hooks-state-4 — resolveRegionalImpact + advanceCampaignRegionalImpacts
   // were the two regional mutators that MISSED the store-2 guard their siblings
   // received; applyQueuedRegionalImpact additionally lacked the parked-pause leg.
-  test('advanceCampaignRegionalImpacts no-ops (null) while advancing', () => {
-    const store = makeStore();
-    seedStore(store);
-    markInFlight(store);
-    const before = snap(store);
-    expect(store.getState().advanceCampaignRegionalImpacts('camp-1', 1)).toBe(null);
-    expect(snap(store)).toBe(before);
-  });
-
-  test('advanceCampaignRegionalImpacts no-ops (null) while PARKED (paused)', () => {
-    const store = makeStore();
-    seedStore(store);
-    markPaused(store);
-    const before = snap(store);
-    expect(store.getState().advanceCampaignRegionalImpacts('camp-1', 1)).toBe(null);
-    expect(snap(store)).toBe(before);
-  });
-
+  // (advanceCampaignRegionalImpacts was RETIRED by LIBRARY-SIMPLE, 2026-11-10, on the
+  // owner's words "anything associated that is an independent campaign advance time
+  // outside of the realm needs to be removed"; its two arms left with it.)
   test('resolveRegionalImpact no-ops (null) while advancing', async () => {
     const store = makeStore();
     seedStore(store);

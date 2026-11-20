@@ -189,7 +189,7 @@ describe('EM-C3 - the five guard rules judge a folded world and never refuse', (
     });
     expect(measured, 'a short roster names both sums and the rebalanced line; an exact and an all-zero one are silence')
       .toEqual([
-        ['The factions hold 97 points of power between them, not 100. Rebalanced they would read: Court 38, Guild 62.', true],
+        ["The powers' shares add up to 97, not 100. Rebalanced they would read: Court 38, Guild 62.", true],
         [null, true],
         [null, true],
       ]);

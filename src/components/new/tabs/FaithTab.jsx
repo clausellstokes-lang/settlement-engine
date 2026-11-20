@@ -22,14 +22,14 @@
 
 import { Suspense, lazy, useMemo } from 'react';
 import FaithSection from '../../settlement/FaithSection.jsx';
-import { FALL_SENTENCE, faithPanelModel, trimFaithDeskToPanel } from '../../settlement/faithPanelModel.js';
+import { faithPanelModel, trimFaithDeskToPanel } from '../../settlement/faithPanelModel.js';
 import { hasPantheon } from '../../map/PantheonPanel.jsx';
 // THE WAR & FAITH DESK, drawn through its one gated call site (WarFaithDesk.jsx). This tab
 // does NOT call the desk itself — `warFaith` is one corpus leaf spanning this tab and the
 // war tab, and the mount walker admits exactly one caller per desk so the public-dossier
 // gate lives in one place for both.
 import {
-  FaithCreedLines, FaithNicheGlance, FaithSeatLines, FaithTeaserLines, warFaithDeskRungs,
+  FaithCreedLines, FaithGroundLines, FaithNicheGlance, FaithSeatLines, faithDeskReadings, warFaithDeskRungs,
 } from './WarFaithDesk.jsx';
 import { useStore } from '../../../store/index.js';
 import { BORDER, CARD, FS, GREEN, INK, MUTED, RED, SECOND, BODY, sans } from '../../theme.js';
@@ -106,9 +106,9 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
     return campaign && hasPantheon(campaign) ? campaign : null;
   }, [dmRealmView, sid, campaigns]);
 
-  // Honest-absence note: FaithSection renders SOMETHING unless the viewer is
-  // premium/elevated AND the settlement carries no embed (its HIDDEN mode).
-  const faithWillRender = !!model.hasEmbed || !isPremium;
+  // (TIER-PARITY-FIX V2, 2026-11-09: the honest-absence branch that mirrored FaithSection's
+  // HIDDEN mode is gone with that mode — FaithSection now prints the faith line for every
+  // owner, so nothing here re-prints it for premium.)
 
   // THE DESK, read ONCE per render through its single gated call site and routed by the
   // mount registry below. The model is the ONLY reading handed over — this tab holds no
@@ -118,26 +118,12 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
     settlement,
     publicDossier,
     playerView,
-    readings: {
-      faith: model,
-      // The panel model's own answer for "does this town keep a named faith at all".
-      hasPatron: !!model.hasEmbed,
-      // The TYPED CAUSE of a seat that changed hands. The model exposes the finished
-      // SENTENCE and not the token, and a desk must key on the token — so the token is
-      // recovered by inverting the producer's OWN exported map, whose keys are exactly
-      // `PATRON_FALL_CAUSES` (faithPanelModel's acceptance battery asserts that equality,
-      // so a fifth cause reds there rather than going silently unmapped here).
-      //
-      // ⚠ WHY NOT READ `config.faithProfile.patronFall.cause` DIRECTLY, which is shorter:
-      // the reader-with-no-writer walker convicts that read as "a key no writer produces".
-      // The verdict is false about the code — `projectReligionStateOntoSettlement` writes
-      // it — and true about the walker's OBSERVATION CORPUS, which is deity-free, so no
-      // observed settlement carries the key. Inverting an exported map adds no observed
-      // read at all, and it keeps the token's vocabulary owned by the producer.
-      patronFallCause: model.patronFallSentence
-        ? Object.keys(FALL_SENTENCE).find((c) => FALL_SENTENCE[c] === model.patronFallSentence)
-        : undefined,
-    },
+    // THE PUBLIC BRANCH (SW-B7b): a shared page prints the desk the owner's player view drew here.
+    publicSite: 'warFaith:faith',
+    // The readings (WarFaithDesk.jsx :: faithDeskReadings): the panel model, the patron, the
+    // fall's typed cause and the birth-time stress flags — one derivation, shared with the
+    // public prose composer.
+    readings: faithDeskReadings(settlement, model),
   });
 
   // THE DESK SPEAKS ONLY WHERE THE PANEL IS SILENT (chair rulings F2 and F4, 2026-10-30).
@@ -154,7 +140,7 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
           is the page's answer), the glance row and the field rows first; the desk passages
           that couple them after. Every block moved verbatim. */}
       {/* The gated faith surface — the constitutional seam, unchanged. */}
-      <FaithSection settlement={settlement} publicDossier={publicDossier} />
+      <FaithSection settlement={settlement} publicDossier={publicDossier} playerView={playerView} />
       {/* ── faith.nicheRow (DS-FTH-3, GLANCE) — the leaf's one glance position. The creed
           rows themselves are FaithSection's one ranked list now (F3 + F6). ── */}
       {active && model.ranks.length > 0 && <FaithNicheGlance desk={deskProse} />}
@@ -166,6 +152,9 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
       {/* ── faith.creedStanding (DS-FTH-3) — standing, legitimacy and the niche contest;
           the fall lens is cut where the panel prints the fall sentence (F4) ── */}
       <FaithCreedLines desk={panelDesk} settlement={settlement} />
+      {/* ── faith.templeGround (DS-FTH-4) — the church beside the town's other powers, from the
+          birth-time stress flags; it speaks with or without a patron (W4 PEOPLE, 2026-11-07) ── */}
+      <FaithGroundLines desk={panelDesk} settlement={settlement} />
       {pantheonCampaign && (
         <div data-testid="faith-realm-pantheon" style={{ marginTop: 16 }}>
           {/* The wait is WITNESSED, not confessed (the witnessed-wait ratchet's
@@ -174,21 +163,6 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
           <Suspense fallback={<div role="status" style={{ padding: 12, color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile) }}>Opening the realm pantheon…</div>}>
             <PantheonPanel campaign={pantheonCampaign} />
           </Suspense>
-        </div>
-      )}
-      {!faithWillRender && (
-        <div style={{ padding: 24, textAlign: 'center', color: MUTED, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.6 }}>
-          {/* ── faith.teaser (DS-FTH-2) — THE FAITH LINE OPENS THE POSITION (lane FAITH,
-              2026-11-03): what the place's faith IS, read off the ONE FAITH READING the model
-              carries (domain/dossier/faithReading.js): the church beside a church, the walk to
-              the neighbour's church where there is only access, the quiet observances where
-              there is nothing; the god's and the church's names are the DM's, said once. It
-              replaced the old standing message, which denied the church that generation wrote
-              on every settlement (root-cause failure 2). The print desk puts the same line at
-              the same position. DS-FTH-2's PRIVATE DOSSIER lens reads the same reading (lane
-              FAITH-POOLS) and so restates a fact the line prints, so `trimFaithDeskToPanel`
-              stands it down here (F2/F4; X-50, every fact once). ── */}
-          <FaithTeaserLines desk={panelDesk} settlement={settlement} lead={[(model.line || []).join(' ')]} />
         </div>
       )}
     </div>

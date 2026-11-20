@@ -18,15 +18,33 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { toPublicSafe, PUBLIC_TOPLEVEL_KEYS } from '../../src/domain/display/publicSafe.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
-const MIGRATION = resolve(process.cwd(), 'supabase', 'migrations', '123_money_and_public_projection_hardening.sql');
+// RE-KEYED (FIX-EXPORT-KEYS, 2026-11-07; cause: migration 205 recreates the sanitizer
+// without the people car's three retired keys). The pin used to parse the FIXED file 123,
+// which every later recreate (128/130/142/189/205) overwrites at deploy time — so a key
+// dropped by a later migration could never reach it. It now parses the NET-CURRENT
+// definition: the LAST `create or replace function public._gallery_sanitize_public_json`
+// across all migrations in file order (anchored at line start, so header prose quoting the
+// statement never matches), and only that function's body, so header comments are not read.
+const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
+const SANITIZER_DEF = /^create\s+or\s+replace\s+function\s+public\._gallery_sanitize_public_json\b[\s\S]*?\$\$;/igm;
+function netCurrentSanitizer() {
+  if (!existsSync(MIGRATIONS_DIR)) return { file: null, sql: null };
+  let last = { file: null, sql: null };
+  for (const f of readdirSync(MIGRATIONS_DIR).filter((n) => /^\d.*\.sql$/.test(n)).sort()) {
+    const matches = readFileSync(resolve(MIGRATIONS_DIR, f), 'utf-8').match(SANITIZER_DEF);
+    if (matches && matches.length) last = { file: f, sql: matches[matches.length - 1] };
+  }
+  return last;
+}
+const NET_CURRENT = netCurrentSanitizer();
 
-// ── The MERGED (Wave-1) canonical top-level allowlist ────────────────────────
-// This is the fused 123 SQL allowlist and the source of truth the JS twin
+// ── The canonical top-level allowlist ────────────────────────────────────────
+// This is the net-current SQL allowlist (fused at 123) and the source of truth the JS twin
 // (src/domain/display/publicSafe.js PUBLIC_TOPLEVEL_KEYS) must be reconciled TO
 // by the src/domain merge wave. Wave-1 changed our pre-merge list by:
 //   • REMOVING '_seed' + '_config' (secret on every shared surface — 099/121).
@@ -34,36 +52,67 @@ const MIGRATION = resolve(process.cwd(), 'supabase', 'migrations', '123_money_an
 //     neighbourNetwork, populationHistory (top-level keys their post-088 public
 //     dossier serves AND renders in the anonymous playerView — reconciled per the
 //     Wave-0 audit's fusion spec B step 6).
+// Migration 205 (FIX-EXPORT-KEYS, 2026-11-07) REMOVES 'factions': the people car's retired
+// NPC grouping (ODQ §934.105, PEOPLE-RULINGS M-1b/M-2) — no generator writes it; the powers
+// are `powerStructure.factions`, public under `powerStructure`.
+// Migration 210 (SW-B7b PROJECTION, STYLE-RULINGS-2 B10(a), 2026-11-09) ADDS 'publicProse': the
+// owner's composed blocks drawn owner-side and carried as text; the seed never travels.
 const CANONICAL_ALLOWLIST = [
   'activeConditions', 'arrivalScene', 'availableServices', 'coherenceNotes', 'config',
   'conflicts', 'crossSettlementConflicts', 'dailyLife', 'defenseProfile', 'economicState',
-  'economicViability', 'factions', 'generatorVersion', 'history', 'id',
+  'economicViability', 'generatorVersion', 'history', 'id',
   'institutions', 'interSettlementRelationships', 'name', 'neighborRelationship', 'neighbourNetwork',
   'npcs', 'population', 'populationHistory', 'powerStructure', 'pressureSentence',
   'prominentRelationship', 'relationships', 'resourceAnalysis', 'schemaVersion', 'settlementReason',
   'simulationVersion', 'spatialLayout', 'stress', 'stressors', 'structuralSuggestions',
-  'structuralViolations', 'thesis', 'tier',
+  'structuralViolations', 'thesis', 'tier', 'publicProse',
 ];
 
 /** Parse the `public_toplevel constant text[] := array[ '…','…' ];` literal from
- *  the fused migration 123 into a JS array of the quoted keys. */
+ *  the net-current sanitizer into a JS array of the quoted keys. */
 function parseSqlAllowlist(sql) {
   const m = sql.match(/public_toplevel\s+constant\s+text\[\]\s*:=\s*array\[([\s\S]*?)\]/i);
-  if (!m) throw new Error('could not find public_toplevel allowlist in migration 123');
+  if (!m) throw new Error('could not find public_toplevel allowlist in the net-current sanitizer');
   return [...m[1].matchAll(/'([^']+)'/g)].map(x => x[1]);
 }
 
 /** Parse the `npc_allowed constant text[] := array[ '…','…' ];` NPC-field allowlist. */
 function parseSqlNpcAllowlist(sql) {
   const m = sql.match(/npc_allowed\s+constant\s+text\[\]\s*:=\s*array\[([\s\S]*?)\]/i);
-  if (!m) throw new Error('could not find npc_allowed allowlist in migration 123');
+  if (!m) throw new Error('could not find npc_allowed allowlist in the net-current sanitizer');
   return [...m[1].matchAll(/'([^']+)'/g)].map(x => x[1]);
 }
 
-const migExists = existsSync(MIGRATION);
+const migExists = !!NET_CURRENT.sql;
 
 describe.runIf(migExists)('public sanitizer allowlist — drift pin (SQL ⇄ JS)', () => {
-  const sql = readFileSync(MIGRATION, 'utf-8');
+  const sql = NET_CURRENT.sql;
+
+  it('reads the NET-CURRENT definition (the last recreate), not a superseded one', () => {
+    // Liveness anchor for every negative below: the pin is reading the definition that wins
+    // at deploy time, and that definition carries both allowlists.
+    expect(Number(String(NET_CURRENT.file).split('_')[0])).toBeGreaterThanOrEqual(205);
+    expect(sql).toMatch(/public_toplevel\s+constant/);
+    expect(sql).toMatch(/npc_allowed\s+constant/);
+  });
+
+  // THE PEOPLE CAR'S THREE RETIRED KEYS (migration 205; the owner's word of 2026-11-07: the
+  // export allowlist's dead keys go before the deploy). Anchored: the same lists still carry
+  // their live neighbours (powerStructure at the top, name at the NPC).
+  it('neither allowlist names the retired grouping or the two retired NPC faction fields (205)', () => {
+    const top = new Set(parseSqlAllowlist(sql));
+    const npc = new Set(parseSqlNpcAllowlist(sql));
+    expect(top.has('powerStructure'), 'anchor: the powers stay public').toBe(true);
+    expect(top.has('npcs'), 'anchor: the cards stay public').toBe(true);
+    expect(top.has('factions'), "the retired grouping 'factions' must not be public").toBe(false);
+    expect(npc.has('name'), 'anchor: the NPC allowlist is live').toBe(true);
+    for (const k of ['factionAffiliation', 'secondaryAffiliation']) {
+      expect(npc.has(k), `the retired NPC field '${k}' must not be public`).toBe(false);
+    }
+    expect(PUBLIC_TOPLEVEL_KEYS).toContain('powerStructure');
+    // anchored: the list is asserted to carry powerStructure on the line above
+    expect(PUBLIC_TOPLEVEL_KEYS).not.toContain('factions');
+  });
 
   it('the migration keeps a top-level allowlist gate (not a bare denylist)', () => {
     // The settlement ROOT gate is the allowlist; the deeper denylist stays.
@@ -71,7 +120,7 @@ describe.runIf(migExists)('public sanitizer allowlist — drift pin (SQL ⇄ JS)
     expect(sql).toMatch(/not\s+is_toplevel\s+and\s+key\s*~\*/); // denylist only deeper
   });
 
-  it('the SQL 123 allowlist equals the merged canonical set (no dupes)', () => {
+  it('the net-current SQL allowlist equals the canonical set (no dupes)', () => {
     const sqlKeys = parseSqlAllowlist(sql).sort();
     expect(sqlKeys).toEqual([...CANONICAL_ALLOWLIST].sort());
     expect(new Set(sqlKeys).size).toBe(sqlKeys.length);
@@ -115,6 +164,8 @@ describe.runIf(migExists)('public sanitizer allowlist — drift pin (SQL ⇄ JS)
   // delta guard that lived here (asserting the KNOWN {seed/config} vs {4 render
   // keys} lag) was DELETED at the same time — its whole purpose was to stay green
   // while the twin lagged; both arrays are now equal.
+  // The title keeps its historical "123" byte for byte: landed packet EM-B3a pins it in requiredSymbols
+  // (tests/scripts/implementationPackets.test.js). The SQL it reads is the NET-CURRENT definition (205 today).
   it('SQL 123 allowlist == JS PUBLIC_TOPLEVEL_KEYS', () => {
     expect(parseSqlAllowlist(sql).sort()).toEqual([...PUBLIC_TOPLEVEL_KEYS].sort());
   });
@@ -201,7 +252,7 @@ describe('public sanitizer allowlist — round trip against a REAL settlement', 
   });
 
   // THE ROADS §15 binding 1 (JS twin): an NPC's live whereabouts mirror is dropped by the
-  // fail-closed NPC allowlist (publicNpc copies only the 11 public fields) — the roads
+  // fail-closed NPC allowlist (publicNpc copies only the 9 public fields; 11 before migration 205) — the roads
   // secret-by-construction guarantee on the public projection.
   it('drops npc.whereabouts from the public projection (roads §15 binding 1)', () => {
     const npcs = Array.isArray(settlement.npcs) ? settlement.npcs : [];

@@ -188,7 +188,9 @@ const CHART_CENSUS = Object.freeze([
     id: 'overview-food-security-bar',
     path: 'src/components/new/tabs/OverviewTab.jsx', dim: 'width',
     drawn: '`${Math.min(100,Math.max(0,eco.foodSecurity.resilienceScore||0))}%`',
-    figure: 'eco.foodSecurity.label',
+    // RE-KEYED BY IDENTITY (SURFACES-2 item 1, the chair's ruling (r2) of 2026-11-14): the word beside the bar is
+    // the food band's one home (domain/display/foodWordShown.js), no longer the stored label; the pair is the same.
+    figure: 'foodWord.label',
     verdict: 'reported',
     why: 'THE BAR AND THE WORD ARE TWO DIFFERENT FACTS. The run is `resilienceScore`'
       + ' (foodGenerator.js: storage/12 × 35 + diversity × 30 + a low-dependency bonus + an'

@@ -16,6 +16,10 @@ import { decodeWorldCode } from '../lib/worldCode.js';
 import { viewToPath } from '../lib/routes.js';
 import { FS, PARCH, INK, BODY, MUTED, BORDER, GOLD, CARD, sans, serif_ } from './theme.js';
 import Button from './primitives/Button.jsx';
+import { AVAILABLE_AT_LAUNCH } from './primitives/AvailableAtLaunchPill.jsx';
+import { selectExportStaff } from './primitives/exportLaunchGate.js';
+import { useStore } from '../store/index.js';
+import { INSTANT_WORLD_ABSENT, engineServiceBuild } from '../lib/engineAbsentPaths.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { chromeFontSize } from '../design/proseScale.js';
 
@@ -29,6 +33,7 @@ export default function WorldPage({ code, onNavigate }) {
   const mobile = useIsMobile();
   const [state, setState] = useState({ status: 'decoding', world: null, decoded: null, error: null });
   const [copied, setCopied] = useState(false);
+  const staff = useStore(selectExportStaff);
 
   useEffect(() => {
     let cancelled = false;
@@ -36,6 +41,13 @@ export default function WorldPage({ code, onNavigate }) {
     if (!decoded) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setState({ status: 'invalid', world: null, decoded: null, error: null });
+      return undefined;
+    }
+    // The composer runs the whole pipeline once per member, synchronously, so a build that
+    // carries no engine cannot rebuild a shared world (ENGINE-5 unit 2, path b): it is said,
+    // and the composer is never loaded.
+    if (engineServiceBuild()) {
+      setState({ status: 'absent', world: null, decoded, error: null });
       return undefined;
     }
     setState({ status: 'generating', world: null, decoded, error: null });
@@ -109,6 +121,14 @@ export default function WorldPage({ code, onNavigate }) {
           <Panel>
             <h1 style={titleStyle}>The world couldn&apos;t be rebuilt.</h1>
             <p style={bodyStyle}>{state.error}</p>
+          </Panel>
+        ) : null}
+
+        {state.status === 'absent' ? (
+          <Panel>
+            {/* Non-staff meet the launch teaser's words; staff the plain failure heading. */}
+            <h1 style={titleStyle}>{staff ? "The world couldn't be rebuilt." : AVAILABLE_AT_LAUNCH}</h1>
+            <p style={bodyStyle}>{INSTANT_WORLD_ABSENT}</p>
           </Panel>
         ) : null}
 

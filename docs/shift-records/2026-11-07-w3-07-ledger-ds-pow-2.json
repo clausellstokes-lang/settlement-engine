@@ -1,0 +1,16 @@
+{
+  "_doc": "W3 POW STYLE, ONE SIGNED RE-RECORD OF THE SURFACE 'dossier-prose-manifest' OF THE CONSTRUCTION-AND-WIRING WAVE'S POWER LANE, ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature; WAVE-RULINGS item 16, the chair 16:3x UTC 2026-11-07, from the owner's own reading of a sister lane's line). THE CAUSE, ONE (commit 33b69650d, its DS-POW-2 half): the ledger vantage names the record and its cost — Desperate v2 (the written orders no longer match what happens, so nobody can plan on the hall) and recentConflict v2 (the side that lost still owes the {seat} its dues and pays them slowly). THE MOVE, MEASURED at the stage (c1868a134 + DS-POW-2's block from 33b69650d, built in a scratch checkout, leaves regenerated, the door run there on a clean tree) against c1868a134: 72 of the 1,050 rows move (hamlet 24, thorp 24, village 24), none added or removed; cells unmoved (68,904). No writer is changed.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I agree keep the machinery's out of the prose. · Yes exactly please apply that everywhere appropriate!",
+  "ownerDate": "2026-11-07",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the owner's style law of 2026-11-07, WIRING-RULINGS §5-§8; the owner's reading of 2026-11-07, WAVE-RULINGS item 16)",
+  "cause": "the owner's reading, 2026-11-07: the ledger vantage names the record and its cost — DS-POW-2 (commit 33b69650d)",
+  "seat": "W3 POW, second seat (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, at the stage named in _doc",
+  "surfaces": [
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

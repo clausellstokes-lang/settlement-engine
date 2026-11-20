@@ -13,7 +13,7 @@
   },
   {
     "path": "src/components/OutputContainer.jsx",
-    "line": 994,
+    "line": 991,
     "category": "floatInterpolation",
     "snippet": "{displayProgress || 'Regenerating\\u2026'}"
   },
@@ -175,7 +175,7 @@
   },
   {
     "path": "src/components/map/BeliefDivergenceBand.jsx",
-    "line": 78,
+    "line": 77,
     "category": "floatInterpolation",
     "snippet": "{CONFIDENCE_LABEL[belief.confidence] || belief.confidence}"
   },
@@ -259,265 +259,151 @@
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 499,
-    "category": "floatInterpolation",
-    "snippet": "`memory ${percent(stressor.memoryStrength ?? 0)}`"
-  },
-  {
-    "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 499,
-    "category": "floatInterpolation",
-    "snippet": "{[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}"
-  },
-  {
-    "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 499,
-    "category": "percentToken",
-    "snippet": "{[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}"
-  },
-  {
-    "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 538,
-    "category": "floatInterpolation",
-    "snippet": "`Resolution roll ${percent(stressor.resolutionRoll)} against ${percent(stressor.resolutionChance)} chance.`"
-  },
-  {
-    "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 604,
+    "line": 632,
     "category": "floatInterpolation",
     "snippet": "{percent(roll.roll)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 604,
+    "line": 632,
     "category": "percentToken",
     "snippet": "{percent(roll.roll)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 605,
+    "line": 633,
     "category": "floatInterpolation",
     "snippet": "{percent(roll.probability)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 605,
+    "line": 633,
     "category": "percentToken",
     "snippet": "{percent(roll.probability)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 606,
+    "line": 634,
     "category": "floatInterpolation",
     "snippet": "{percent(roll.severity)}"
   },
   {
     "path": "src/components/map/WorldPulsePanel.jsx",
-    "line": 606,
+    "line": 634,
     "category": "percentToken",
     "snippet": "{percent(roll.severity)}"
   },
   {
     "path": "src/components/new/SummaryTab.jsx",
-    "line": 75,
+    "line": 76,
     "category": "floatInterpolation",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/new/SummaryTab.jsx",
-    "line": 75,
+    "line": 76,
     "category": "percentToken",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/new/SummaryTab.jsx",
-    "line": 91,
+    "line": 94,
     "category": "floatInterpolation",
     "snippet": "{f.power}"
   },
   {
     "path": "src/components/new/SummaryTab.jsx",
-    "line": 91,
+    "line": 94,
     "category": "percentToken",
     "snippet": "{f.power}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 149,
+    "line": 165,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 155,
+    "line": 171,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },
   {
     "path": "src/components/new/tabs/DailyLifeTab.jsx",
-    "line": 235,
+    "line": 258,
     "category": "floatInterpolation",
     "snippet": "{storeAiProgress || 'Regenerating…'}"
   },
   {
-    "path": "src/components/new/tabs/EconomicsGlance.jsx",
-    "line": 128,
-    "category": "floatInterpolation",
-    "snippet": "{ecoScore}"
-  },
-  {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 229,
-    "category": "floatInterpolation",
-    "snippet": "{Math.round(chain.magicRecovery * 100)}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 229,
-    "category": "percentToken",
-    "snippet": "{Math.round(chain.magicRecovery * 100)}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 237,
+    "line": 246,
     "category": "floatInterpolation",
     "snippet": "{incomeEntry.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 237,
+    "line": 246,
     "category": "percentToken",
     "snippet": "{incomeEntry.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 423,
+    "line": 436,
     "category": "floatInterpolation",
     "snippet": "{src.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 423,
+    "line": 436,
     "category": "percentToken",
     "snippet": "{src.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 425,
+    "line": 438,
     "category": "floatInterpolation",
     "snippet": "{src.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 425,
+    "line": 438,
     "category": "percentToken",
     "snippet": "{src.percentage}"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 554,
-    "category": "floatInterpolation",
-    "snippet": "{Math.round((fb.agricultureModifier||1)*100)}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 554,
+    "line": 663,
     "category": "percentToken",
-    "snippet": "{Math.round((fb.agricultureModifier||1)*100)}"
+    "snippet": "`Shadow Economy: ${bmc}% of trade unrecorded`"
   },
   {
     "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 555,
-    "category": "multiplier",
-    "snippet": "{fb.stressModifier}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 556,
-    "category": "floatInterpolation",
-    "snippet": "{Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 556,
-    "category": "percentToken",
-    "snippet": "{Math.round(fb.importCoverage/(fb.rawDeficit||fb.importCoverage)*100)}"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 561,
-    "category": "floatInterpolation",
-    "snippet": "{foodDeficit ? fb.importCoverage>0 ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual sho..."
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 563,
-    "category": "floatInterpolation",
-    "snippet": "`Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%.${fb.ma..."
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 563,
-    "category": "percentToken",
-    "snippet": "`Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%.${fb.ma..."
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 564,
-    "category": "floatInterpolation",
-    "snippet": "` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 564,
-    "category": "percentToken",
-    "snippet": "` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 565,
-    "category": "floatInterpolation",
-    "snippet": "`Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 565,
-    "category": "percentToken",
-    "snippet": "`Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.`"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 639,
-    "category": "percentToken",
-    "snippet": "`Shadow Economy: ${bmc}% capture`"
-  },
-  {
-    "path": "src/components/new/tabs/EconomicsTab.jsx",
-    "line": 645,
+    "line": 669,
     "category": "percentToken",
     "snippet": "{bmc}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 310,
+    "line": 299,
     "category": "floatInterpolation",
     "snippet": "{leg.score}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 505,
+    "line": 491,
     "category": "floatInterpolation",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 505,
+    "line": 491,
     "category": "percentToken",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 543,
+    "line": 517,
     "category": "floatInterpolation",
     "snippet": "{Math.round(rung.standing*100)}"
   },
@@ -529,25 +415,25 @@
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 273,
+    "line": 277,
     "category": "floatInterpolation",
     "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 273,
+    "line": 277,
     "category": "percentToken",
     "snippet": "`${r.name}: ${pct} percent (power ${r.power})`"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 275,
+    "line": 279,
     "category": "floatInterpolation",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/new/tabs/power/PowerStrata.jsx",
-    "line": 323,
+    "line": 331,
     "category": "floatInterpolation",
     "snippet": "{r.power}"
   },
@@ -595,37 +481,37 @@
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 200,
+    "line": 177,
     "category": "floatInterpolation",
     "snippet": "{Math.round((channel.confidence || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 200,
+    "line": 177,
     "category": "floatInterpolation",
     "snippet": "{Math.round((channel.strength || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 200,
+    "line": 177,
     "category": "percentToken",
     "snippet": "{Math.round((channel.confidence || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 200,
+    "line": 177,
     "category": "percentToken",
     "snippet": "{Math.round((channel.strength || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 239,
+    "line": 216,
     "category": "floatInterpolation",
     "snippet": "{Math.round((impact.severity || 0) * 100)}"
   },
   {
     "path": "src/components/region/RegionalGraphSummary.jsx",
-    "line": 239,
+    "line": 216,
     "category": "percentToken",
     "snippet": "{Math.round((impact.severity || 0) * 100)}"
   },
@@ -655,49 +541,49 @@
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 54,
+    "line": 56,
     "category": "floatInterpolation",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 54,
+    "line": 56,
     "category": "percentToken",
     "snippet": "{pct}"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 58,
+    "line": 60,
     "category": "floatInterpolation",
     "snippet": "`${label}: ${pct} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 58,
+    "line": 60,
     "category": "percentToken",
     "snippet": "`${label}: ${pct} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 240,
+    "line": 242,
     "category": "floatInterpolation",
     "snippet": "{d.standing}"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 244,
+    "line": 246,
     "category": "floatInterpolation",
     "snippet": "`${d.name} adherent share ${d.share} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 244,
+    "line": 246,
     "category": "percentToken",
     "snippet": "`${d.name} adherent share ${d.share} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 254,
+    "line": 256,
     "category": "percentToken",
     "snippet": "{unaffiliated}"
   },
@@ -769,13 +655,13 @@
   },
   {
     "path": "src/domain/activeConditions.js",
-    "line": 983,
+    "line": 1025,
     "category": "floatInterpolation",
     "snippet": "`${c.label}: ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`"
   },
   {
     "path": "src/domain/activeConditions.js",
-    "line": 983,
+    "line": 1025,
     "category": "twoDecimalScore",
     "snippet": "`${c.label}: ${c.severityBand}, ${c.status} (elapsed ${c.duration.elapsedTicks.toFixed(2)} of ${c.duration.expiresAtTicks ?? '∞'})`"
   },
@@ -817,7 +703,7 @@
   },
   {
     "path": "src/domain/display/worldSnapshotPublic.js",
-    "line": 628,
+    "line": 615,
     "category": "floatInterpolation",
     "snippet": "Math.floor(finiteNum(options.maxHeadlinesPerTick, 12))"
   },
@@ -829,13 +715,13 @@
   },
   {
     "path": "src/domain/magicProfile.js",
-    "line": 156,
+    "line": 172,
     "category": "floatInterpolation",
     "snippet": "`${religious.name} (power ${religious.power}) restricts arcane practice.`"
   },
   {
     "path": "src/domain/magicProfile.js",
-    "line": 164,
+    "line": 180,
     "category": "floatInterpolation",
     "snippet": "`${arcane.name} (power ${arcane.power}) normalizes arcane practice.`"
   },
@@ -919,13 +805,13 @@
   },
   {
     "path": "src/domain/worldPulse/magicBufferApply.js",
-    "line": 377,
+    "line": 378,
     "category": "floatInterpolation",
     "snippet": "Math.round(resolved.mitigation01 * 10000)"
   },
   {
     "path": "src/domain/worldPulse/magicBufferApply.js",
-    "line": 378,
+    "line": 379,
     "category": "floatInterpolation",
     "snippet": "Math.round(resolved.relief.demand01 * 10000)"
   },
@@ -985,7 +871,7 @@
   },
   {
     "path": "src/generators/steps/generateEconomy.js",
-    "line": 405,
+    "line": 417,
     "category": "floatInterpolation",
     "snippet": "`Chain depends on ${state.dependency.institution} (${state.dependency.severity || 'unspecified'}).`"
   },
@@ -997,67 +883,67 @@
   },
   {
     "path": "src/generators/steps/resolveResources.js",
-    "line": 586,
+    "line": 631,
     "category": "floatInterpolation",
     "snippet": "`Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.`"
   },
   {
     "path": "src/generators/steps/resolveResources.js",
-    "line": 586,
+    "line": 631,
     "category": "percentToken",
     "snippet": "`Tier-weighted depletion (${Math.round((DEPLETION_PROB[tier] ?? 0.25) * 100)}%) marked this resource as depleted.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
-    "line": 126,
+    "line": 127,
     "category": "floatInterpolation",
     "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
-    "line": 126,
+    "line": 127,
     "category": "multiplier",
     "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
-    "line": 126,
+    "line": 127,
     "category": "twoDecimalScore",
     "snippet": "`${suppressors.join(', ')} reduce${suppressors.length === 1 ? 's' : ''} the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
-    "line": 127,
+    "line": 128,
     "category": "floatInterpolation",
     "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
-    "line": 127,
+    "line": 128,
     "category": "multiplier",
     "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/steps/stressConfirmPass.js",
-    "line": 127,
+    "line": 128,
     "category": "twoDecimalScore",
     "snippet": "`The settlement's institutions reduce the odds of \"${type}\" (×${ratio.toFixed(2)} vs the roster-blind roll): the re-weighted roll dropped it.`"
   },
   {
     "path": "src/generators/structuralValidator.js",
-    "line": 688,
+    "line": 693,
     "category": "floatInterpolation",
     "snippet": "`${tierLabel} closes its isolation-support gap through magical transit (${support.capacity}/${support.requiredCapacity} capacity). If magic fails, its mundane support paths are insufficient.`"
   },
   {
     "path": "src/generators/structuralValidator.js",
-    "line": 695,
+    "line": 700,
     "category": "floatInterpolation",
     "snippet": "`${tierLabel} is viable in isolation through ${support.paths.map(path => path.type.replace(/_/g, ' ')).join(', ')} (${support.capacity}/${support.requiredCapacity} support capacity).`"
   },
   {
     "path": "src/generators/structuralValidator.js",
-    "line": 703,
+    "line": 708,
     "category": "floatInterpolation",
     "snippet": "`${tierLabel} has only ${support.capacity}/${support.requiredCapacity} isolation-support capacity. Local food, reserves, seasonal access, patronage, and any functional magical transit do not cover the settlement's needs.`"
   },
@@ -1066,12 +952,6 @@
     "line": 83,
     "category": "floatInterpolation",
     "snippet": "Math.round(population)"
-  },
-  {
-    "path": "src/pdf/lib/headlines.js",
-    "line": 206,
-    "category": "floatInterpolation",
-    "snippet": "`${total} named figure${total === 1 ? '' : 's'}: ${top.name}${top.title ? `, ${top.title}` : ''}, the most powerful (power ${top.power}).`"
   },
   {
     "path": "src/pdf/primitives/Visuals.jsx",
@@ -1093,37 +973,37 @@
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 298,
+    "line": 329,
     "category": "floatInterpolation",
     "snippet": "{flow}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 367,
+    "line": 401,
     "category": "floatInterpolation",
     "snippet": "{iss.severity}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 466,
+    "line": 500,
     "category": "floatInterpolation",
     "snippet": "{fb.deficitPct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 466,
+    "line": 500,
     "category": "percentToken",
     "snippet": "{fb.deficitPct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 471,
+    "line": 505,
     "category": "floatInterpolation",
     "snippet": "{fb.coveragePct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 471,
+    "line": 505,
     "category": "percentToken",
     "snippet": "{fb.coveragePct}"
   },
@@ -1159,7 +1039,7 @@
   },
   {
     "path": "src/pdf/sections/HistoryFounding.jsx",
-    "line": 382,
+    "line": 388,
     "category": "floatInterpolation",
     "snippet": "{Math.round(min + span * p)}"
   },
@@ -1171,61 +1051,55 @@
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 183,
+    "line": 184,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 321,
+    "line": 332,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 374,
+    "line": 385,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 541,
+    "line": 548,
     "category": "floatInterpolation",
     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 541,
+    "line": 548,
     "category": "floatInterpolation",
     "snippet": "{fb.coveragePct != null ? ` · imports cover ${fb.coveragePct}% of gap` : ''}"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 541,
+    "line": 548,
     "category": "percentToken",
     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 99,
+    "line": 103,
     "category": "floatInterpolation",
     "snippet": "{p.criminalCapture.score}"
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 229,
+    "line": 237,
     "category": "floatInterpolation",
     "snippet": "{f.power}"
   },
   {
-    "path": "src/pdf/sections/Services.jsx",
-    "line": 240,
-    "category": "floatInterpolation",
-    "snippet": "{flow}"
-  },
-  {
     "path": "src/pdf/sections/SystemStateSnapshot.jsx",
-    "line": 150,
+    "line": 151,
     "category": "floatInterpolation",
     "snippet": "{row.score}"
   }

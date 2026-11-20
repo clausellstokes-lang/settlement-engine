@@ -104,11 +104,17 @@ describe('composeSettlementQuickGuide', () => {
         key: 'mesoamerican',
         label: 'Mesoamerican-inspired',
       },
+      // CENSUS-1h unit 6 (row 95): the clause declares `market` and is read against the record.
+      institutions: [{ name: 'Market square' }],
     });
 
+    // RE-KEYED (R2-CODE-B item 5, the chair's size ruling of 2026-11-13): a civic square (the civic-ritual
+    // plaza) is a size error in a hamlet, so the hamlet's phrase is said at its size; the identity this
+    // pin holds — the culture's design terms, never the filing word — is unchanged.
+    // RE-KEYED (R2-CODE-B-SIDE item 5, the chair's ruling: a frame that names an institution reads the roster):
+    // the roster holds a market and no waterworks, so the hamlet's phrase names the market alone.
     expect(guide.identitySentence).toBe(
-      'Edznaxochitl is a Mesoamerican-inspired hamlet of 130 people, built around '
-      + 'a civic-ritual plaza, tribute, and market-and-waterworks.',
+      'Edznaxochitl is a Mesoamerican-inspired hamlet of 130 people, built on tribute and market.',
     );
   });
 
@@ -127,6 +133,9 @@ describe('composeSettlementQuickGuide', () => {
         tier: 'village',
         population: 400,
         culturalIdentity: { key, label: profile.label },
+        // CENSUS-1h unit 6 (row 95): a declared clause is read against the record, so the fixture
+        // holds what the declared scopes presume (mesoamerican: a market; south-asian: + a temple).
+        institutions: [{ name: 'Market square' }, { name: 'Temple' }],
       });
       // The fallback is recognisable: it ends at the population with nothing after it.
       if (/ of 400 people\.$/.test(guide.identitySentence)) unphrased.push(key);
@@ -154,9 +163,10 @@ describe('composeSettlementQuickGuide', () => {
       'Testholm is a Norse-inspired village of 400 people, built around the hall and the '
       + 'water, on assembly and what the season allows.',
     );
+    // RE-KEYED (R2-CODE-B-SIDE item 5): a village is a small place by its tier, so its phrase carries no wards and no
+    // bureau (the chair's size ruling reaches every frame); the stack this pin holds still reads whole.
     expect(say('east_asian')).toBe(
-      'Testholm is an East-Asian-inspired village of 400 people, built in wards and '
-      + 'courtyards, ordered by bureau and lineage.',
+      'Testholm is an East-Asian-inspired village of 400 people, built around courtyards, ordered by lineage.',
     );
     expect(say('steppe')).toBe(
       'Testholm is a Steppe-inspired village of 400 people, built for a pastoral life '
@@ -184,7 +194,17 @@ describe('composeSettlementQuickGuide', () => {
     // ⚠ RE-RECORDING IS A CONTENT DECISION, NEVER A FORMALITY: read the changed scope
     // against its phrase in SCOPE_PHRASE, move the phrase if the terms moved, and only
     // then re-record, with the reason written down.
-    const SCOPE_TEXT_DIGEST = '912bcf91c35b';
+    // 912bcf91c35b -> 0268f53d29cd at W5 HIS's style pass (2026-11-07, the owner's style law, STYLE-AUDIT §2b-5
+    // row 30): every scope lost its "design grammar" filing word and reads as a plain sentence; each keeps its
+    // terms, so every SCOPE_PHRASE paraphrase was re-read and still holds (none moved).
+    // 0268f53d29cd -> 48db1bc0fdfc, same pass: the east-asian scope drops "Walled" (the soak's coh:defense-words read it
+    // on 35 wall-less towns); its paraphrase never named walls and still holds.
+    // 48db1bc0fdfc -> 05b9e6d78861 at COHERENCE-PRESUME (2026-11-12): the Greek scope's agora stands "at the
+    // centre", not "by the harbor" (it printed in 14 corpus towns with no water), and the Mesoamerican scope has
+    // "waterworks and gardens" round its plaza, not "markets" (2 marketless towns). Both paraphrases were re-read:
+    // each is declared on its own (the Greek harbour needs navigable, with its inland twin; the Mesoamerican
+    // market-and-waterworks needs market, with its twin), so neither presumes and neither moved.
+    const SCOPE_TEXT_DIGEST = '05b9e6d78861';
     const scopesInKeyOrder = Object.values(CULTURE_PROFILES).map((profile) => profile.scope);
     const digest = (parts) => createHash('sha256').update(parts.join('\n')).digest('hex').slice(0, 12);
 
@@ -418,9 +438,9 @@ describe('composeSettlementQuickGuide', () => {
     expect(governmentSeatName({})).toBeNull();
     expect(cultureScopeLine({ ...norse, institutions: [{ name: 'Town hall' }] }))
       .toBe('Norse-inspired, built around the Town hall and the water, on assembly and what the season allows.');
-    // no seat building: the authored phrase stands as written (anchored on the line above)
+    // no seat building: no hall stands, so the phrase names none (TAIL-CRISIS-2 batch 2, READ-ALL 15015; re-keyed by identity)
     expect(cultureScopeLine({ ...norse, institutions: [{ name: 'Town council' }] }))
-      .toBe('Norse-inspired, built around the hall and the water, on assembly and what the season allows.');
+      .toBe('Norse-inspired, built by the water, on assembly and what the season allows.');
     // the identity sentence names the seat the same way
     expect(composeSettlementQuickGuide({
       name: 'Testholm', tier: 'town', population: 1200, culturalIdentity: { key: 'norse', label: 'Norse-inspired' },
@@ -428,9 +448,31 @@ describe('composeSettlementQuickGuide', () => {
     }).identitySentence).toBe(
       'Testholm is a Norse-inspired town of 1,200 people, built around the Town hall and the water, on assembly and what the season allows.',
     );
-    // a culture whose phrase never says "the hall" is untouched by a seat
+    // a culture whose phrase never says "the hall" is untouched by a seat; STYLE-2 A·O2: a roster
+    // with no guild prints no guild (the record is read before the line speaks)
     expect(cultureScopeLine({ culturalIdentity: { key: 'germanic', label: 'Germanic-inspired' }, institutions: [{ name: 'Town hall' }] }))
-      .toBe('Germanic-inspired, built in timber and stone, and run by guild and estate.');
+      .toBe('Germanic-inspired, built in timber and stone, and run by its estates.');
+  });
+
+  it('STYLE-2 A·O2: the culture scope line reads tier, terrain and route before it speaks, and the seed picks its frame', () => {
+    // soak1k-11, Gankhuushari: a steppe metropolis of 93,360 printed "a pastoral life half-settled and half-moving"
+    const metropolis = cultureScopeLine({ tier: 'metropolis', culturalIdentity: { key: 'steppe', label: 'Steppe-inspired' }, config: { terrainType: 'mountain', tradeRouteAccess: 'mountain_pass' } });
+    expect(metropolis).toBe('Steppe-inspired, built on clan lines, held by clan and caravan.');
+    expect(cultureScopeLine({ tier: 'hamlet', culturalIdentity: { key: 'steppe', label: 'Steppe-inspired' } })).toMatch(/pastoral life/);
+    // soak1k-3, Al-karez: an Arabic river port read "the caravan road"
+    expect(cultureScopeLine({ tier: 'town', culturalIdentity: { key: 'arabic', label: 'Arabic-inspired' }, config: { terrainType: 'riverside', tradeRouteAccess: 'port' } }))
+      .toMatch(/on endowed institutions and the river trade\.$/);
+    // the seed chooses: frame 0 without one; the same seed the same frame forever; the facts never move
+    const greek = { culturalIdentity: { key: 'greek', label: 'Greek-inspired' }, config: { terrainType: 'riverside', tradeRouteAccess: 'road' } };
+    const lines = new Set();
+    for (let i = 0; i < 40; i++) {
+      const line = cultureScopeLine({ ...greek, _seed: `soak1k-${i}` });
+      expect(line).toBe(cultureScopeLine({ ...greek, _seed: `soak1k-${i}` }));
+      expect(line).toMatch(/^Greek-inspired\b.*agora, on riverside ground, and run by civic association\.$/i);
+      expect(line).not.toMatch(/harbou?r|hillside/); // anchored: the toMatch above proves `line` is the live scope sentence
+      lines.add(line);
+    }
+    expect(lines.size).toBe(5);
   });
 
   it('states how a settlement lives as a sentence, over every food-security label', () => {
@@ -473,6 +515,18 @@ describe('composeSettlementQuickGuide', () => {
       'The economy is moderate; the food supply is secure. Its leading export is wool.',
     );
     expect(withExport.sourcePath).toBe('economicState.prosperity|foodSecurity|primaryExports');
+  });
+
+  it('reads the food word from its one home, tonightSheet.js :: foodBandOf, as the Tonight sheet does (R2-CODE-B-6 row 1d)', () => {
+    const lives = (label, foodRecord) => composeSettlementQuickGuide({
+      economicState: { prosperity: 'Moderate', foodSecurity: { label, foodRecord } },
+    }).definingTruths[2].text;
+    // a Secure band whose record leaves a share of the need unmet (r2r-thorp-4, -10, -16: 160 towns of the 800)
+    expect(lives('Secure', { band: 'secure', gapPct: 12 })).toBe('The economy is moderate; the food supply is under pressure.');
+    // "Import-Dependent" where no food comes in by trade (r2s-under_siege-hamlet-2, -village-1, -metropolis-1)
+    expect(lives('Import-Dependent', { band: 'importDependent', normalImportPct: 0 })).toBe('The economy is moderate; food is in deficit.');
+    // the guard town: a Secure band with no gap keeps its word
+    expect(lives('Secure', { band: 'secure', gapPct: 0 })).toBe('The economy is moderate; the food supply is secure.');
   });
 
   it('recognizes the actual conflict prose keys when pressureSentence is absent', () => {

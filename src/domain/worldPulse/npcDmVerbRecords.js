@@ -61,6 +61,13 @@ export function placeWord(settlementId, settlementName) {
   return text(settlementName) || text(settlementId) || 'the realm';
 }
 
+/** The place word where its slot opens a sentence: the 'the realm' fallback is sentence-cased
+ *  (F11, rung 2B); a held name or id is printed exactly as given.
+ *  @param {string} where @returns {string} */
+function placeLead(where) {
+  return where === 'the realm' ? 'The realm' : where;
+}
+
 /**
  * The ASSIGN address-chain item. Design §7 fixes the headline words.
  * @param {Object} args
@@ -97,7 +104,7 @@ export function assignmentNewsItem({
           : `A ruling sends them toward a new place in ${where}.`)
       : (overrides.length > 0
           ? `They return by a ruling that sets aside the order shutting them out of ${where}.`
-          : `${where} opens its gate to them.`),
+          : `${placeLead(where)} opens its gate to them.`),
     reasons: Object.freeze([
       inTransit
         ? `${who} travels toward ${where} by the will of the realm.`
@@ -139,7 +146,7 @@ export function deathNewsItem({
     tick,
     headline: `${who} is dead.`,
     summary: locationKnown
-      ? `The realm strikes their name from the register of the living. ${where} was the last place that held them.`
+      ? `The realm strikes their name from the register of the living. ${placeLead(where)} was the last place that held them.`
       : 'The realm strikes their name from the register of the living. No public account names where they died.',
     reasons: Object.freeze([
       locationKnown

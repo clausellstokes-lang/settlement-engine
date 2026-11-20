@@ -30,6 +30,7 @@ import { chromeFontSize } from '../../design/proseScale.js';
 const WAR_SEGMENTS = Object.freeze([
   { clause: 'at peace', color: GREEN, word: 'at peace' },
   { clause: 'with its armies in the field', color: GOLD, word: 'afield' },
+  { clause: 'at war', color: SECOND, word: 'at war' }, // COHERENCE-UPKEEP-7, 2b: the town's own war, the map silent
   { clause: 'under siege', color: RED, word: 'under siege' },
 ]);
 const EXHAUSTION_BANDS = Object.freeze(['near peace', 'war-weary', 'exhausted']);
@@ -147,7 +148,7 @@ export default function RealmComparisons({ rows = [], worldState = null, nameFor
         </Question>
       )}
       <div style={{ color: BODY, fontFamily: sans, fontSize: chromeFontSize(FS.micro, mobile), fontStyle: 'italic', background: CARD_ALT, padding: '4px 8px' }}>
-        Each picture answers one question, from the register&apos;s own rows. A quiet ledger asks nothing.
+        Each picture answers one question from the register&apos;s rows. A picture with nothing to show is left out.
       </div>
     </div>
   );

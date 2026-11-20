@@ -47,7 +47,8 @@ export const ABOUT_GUIDE_VIEW = 'about-guide';
  *
  * @typedef {Object} AboutUnit
  * @property {string} id            stable unit id (this manifest's own key)
- * @property {'manifesto'|'handbook'} source  which old collapsible it came from
+ * @property {'manifesto'|'handbook'|'added'} source  which old collapsible it came from
+ *                                  ('added': a section born after the split)
  * @property {string} legacyTab     the old ?tab= value, or '' when it had none
  * @property {string} view          destination view id
  * @property {string} anchor        destination section id (the new `#anchor`)
@@ -59,6 +60,12 @@ export const ABOUT_UNITS = Object.freeze(/** @type {ReadonlyArray<AboutUnit>} */
     anchor: 'what-this-is', heading: 'What this is' },
   { id: 'premise', source: 'manifesto', legacyTab: '', view: ABOUT_WHAT_VIEW,
     anchor: 'the-premise', heading: 'What if the town remembered?' },
+  // ── ADDED AFTER THE SPLIT (ABOUT-CURRENT A1, 2026-11-10) — not a pre-split unit,
+  // so `source` names that and it has no legacy ?tab=. THE OWNER: "Treat
+  // Settlementforge as both canvas and world to explore for everyone at the table."
+  // The section sits after the premise and before the covenant.
+  { id: 'table', source: 'added', legacyTab: '', view: ABOUT_WHAT_VIEW,
+    anchor: 'for-everyone-at-the-table', heading: 'A canvas to build on. A world to explore.' },
   { id: 'covenant', source: 'manifesto', legacyTab: '', view: ABOUT_WHAT_VIEW,
     anchor: 'the-covenant', heading: 'The covenant' },
   { id: 'mechanism', source: 'manifesto', legacyTab: '', view: ABOUT_WHAT_VIEW,

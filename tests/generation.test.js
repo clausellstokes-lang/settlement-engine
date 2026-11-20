@@ -127,6 +127,11 @@ describe('snapshot shape', () => {
     // carrying e9945b632: a village seats no guild power without a market); institutions 16 -> 20 at
     // 37b1e746d (the rung-1 pins compose) and 20 -> 18 at 6ca454d2b (X-46 car 3's realised table, I7 re-key);
     // 18/7/4 from there to the branch tip.
+    // npcCount 7 -> 12: lane 1, PEOPLE-1 CAST (dc655f712) -- one face per face-bearing house replaces the rung roster
+    // (measured at every stage of the people car's stack: 7 at 262e8b255, 12 from dc655f712 to the tip). PEOPLE-LAND.
+    // npcCount 12 -> 11: COHERENCE-POWERS cure (i), 04334d6ef (the chair's ruling of 2026-11-11, "ONE PERSON, ONE FACE"):
+    // the boat-headman's house leads, so the seat's office face (the reeve) is no longer minted beside it. Measured at
+    // 04334d6ef^ (12) and 04334d6ef (11), and 11 at the lane's tip (COHERENCE-POWERS-4). A value in an existing shape.
     expect(structureFingerprint(s)).toMatchInlineSnapshot(`
       {
         "factionCount": 4,
@@ -137,7 +142,7 @@ describe('snapshot shape', () => {
         "hasSpatial": true,
         "hookCount": 0,
         "institutionCount": 18,
-        "npcCount": 7,
+        "npcCount": 11,
         "populationBucket": "100-1000",
         "stressCount": 0,
         "tier": "village",

@@ -1017,10 +1017,10 @@ function mintTreaty(args) {
       ? `${victorName} peels from the siege and makes a separate peace with ${loserName}`
       : `${victorName} dictates the peace with ${loserName}`,
     summary: `${separateExit && coalitionContext
-      ? `${coalitionContext.departingName} settles only its own edge with ${coalitionContext.enemyName}, leaving the allied fronts standing under`
-      : separateExit
+      ? `${coalitionContext.departingName} settles only its own edge with ${coalitionContext.enemyName} on terms of ${terms.map((term) => termLabel(term.type)).join(', ')}, leaving the allied fronts standing`
+      : `${separateExit
       ? `${victorName} makes a separate peace with ${loserName}, binding the defeated court to`
-      : `${victorName} binds ${loserName} to`} ${terms.map((term) => termLabel(term.type)).join(', ')}.${mediator ? ` ${mediator.name} brokered the settlement.` : ''}`,
+      : `${victorName} binds ${loserName} to`} ${terms.map((term) => termLabel(term.type)).join(', ')}`}.${mediator ? ` ${mediator.name} brokered the settlement.` : ''}`,
     reasons: [
       ...terms.map((term) => signingReason(term, victorName, loserName)),
       ...(mediationDisposition && mediationDisposition.factor !== 1
@@ -1157,8 +1157,8 @@ function mintTreatyFromCarriedSheet(args) {
       ? `${String(coalitionContext.departingName || victorName)} closes its own war edge with ${String(coalitionContext.enemyName || loserName)}`
       : `${victorName} carries the agreed peace home from ${loserName}`,
     summary: `${separateExit
-      ? `${String(coalitionContext.departingName || victorName)} settles only its own edge with ${String(coalitionContext.enemyName || loserName)}, leaving allied fronts standing under`
-      : `${victorName} binds ${loserName} to`} ${terms.map((term) => termLabel(term.type)).join(', ')}.`,
+      ? `${String(coalitionContext.departingName || victorName)} settles only its own edge with ${String(coalitionContext.enemyName || loserName)} on terms of ${terms.map((term) => termLabel(term.type)).join(', ')}, leaving allied fronts standing`
+      : `${victorName} binds ${loserName} to ${terms.map((term) => termLabel(term.type)).join(', ')}`}.`,
     reasons: terms.map((term) => signingReason(term, victorName, loserName)),
     settlementIds: [victorId, loserId],
     parties: [victorId, loserId],

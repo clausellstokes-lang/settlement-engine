@@ -1,0 +1,61 @@
+== 96 "An embattled region, and only a palisade and a citizen militia to hold it."
+   rv2-under_siege-thorp-2 [thorp, under_siege, plagued, walls+militia, CRITICAL 5]
+   rv2-calm-hamlet-12 [hamlet, famine, plagued, walls+militia, CRITICAL 7]
+   rv3-occupied-village-0 [village, occupied, plagued, walls+militia, CRITICAL 15]
+   rv2-calm-thorp-1 [thorp, calm, plagued, walls+militia, CRITICAL 5]
+   rv3-mass_migration-village-0 [village, mass_migration, plagued, walls+militia, CRITICAL 15]
+== 185 "Quiet country, and nothing organised is kept against it."
+   rv2-under_siege-thorp-4 [thorp, under_siege, heartland, , CRITICAL 0]
+   rv2-calm-thorp-9 [thorp, famine, heartland, , CRITICAL 0]
+   rv2-calm-thorp-3 [thorp, calm, heartland, , CRITICAL 0]
+   rv4-slave_revolt-village-0 [village, slave_revolt, heartland, , CRITICAL 0]
+== 96 "Quiet country, and little is kept against it."
+   rv2-under_siege-thorp-9 [thorp, under_siege, heartland, militia, CRITICAL 0]
+   rv2-famine-thorp-30 [thorp, famine, heartland, militia, CRITICAL 0]
+   rv4-occupied-town-0 [town, occupied, heartland, garrison+watch, WEAK 20]
+   rv2-calm-thorp-4 [thorp, calm, heartland, militia, CRITICAL 0]
+== 17 "Armed citizens who know their ground, and no walls: too few to turn back any force that comes in earnest."
+   rv2-under_siege-thorp-7 [thorp, under_siege, frontier, militia, CRITICAL 17]
+   rv2-famine-thorp-19 [thorp, famine, frontier, militia, CRITICAL 9]
+   rv2-calm-thorp-4 [thorp, calm, heartland, militia, CRITICAL 18]
+   rv4-recently_betrayed+religious_conversion-thorp-0 [thorp, recently_betrayed+religious_conversion, frontier, militia, CRITICAL 7]
+== 24 "Active frontier with a militia but no perimeter, and too little to meet what the country sends."
+   rv2-under_siege-thorp-7 [thorp, under_siege, frontier, militia, CRITICAL 4]
+   rv2-famine-thorp-19 [thorp, famine, frontier, militia, CRITICAL 4]
+   rv2-calm-thorp-7 [thorp, calm, frontier, militia, CRITICAL 4]
+   rv2-succession_void-village-27 [village, succession_void, frontier, militia, CRITICAL 14]
+== 21 "A palisade and nobody organised to man it: enough to turn away a raid, not a determined attack."
+   rv2-under_siege-thorp-11 [thorp, under_siege, frontier, walls, ADEQUATE 45]
+   rv2-famine-village-5 [village, famine, frontier, walls, ADEQUATE 41]
+   rv2-calm-thorp-17 [thorp, calm, frontier, walls, ADEQUATE 53]
+   rv3-politically_fractured-village-2 [village, politically_fractured, frontier, walls, ADEQUATE 55]
+== 28 "A palisade and armed townsfolk who know how to hold it."
+   rv2-under_siege-hamlet-5 [hamlet, under_siege, plagued, walls+militia+charter, STRONG 67]
+   rv2-calm-hamlet-12 [hamlet, famine, plagued, walls+militia, STRONG 66]
+   rv2-calm-hamlet-1 [hamlet, calm, plagued, walls+militia, STRONG 65]
+   rv3-wartime-village-1 [village, wartime, plagued, walls+militia+charter, STRONG 67]
+== 22 "No walls or garrison, but enough here to turn away raiders; nothing that could hold off an army."
+   rv2-under_siege-hamlet-6 [hamlet, under_siege, frontier, charter, ADEQUATE 42]
+   rv2-famine-village-23 [village, famine, frontier, charter, ADEQUATE 40]
+   rv2-calm-hamlet-14 [hamlet, calm, frontier, charter, ADEQUATE 40]
+   rv3-mass_migration-town-1 [town, mass_migration, heartland, watch, ADEQUATE 47]
+== 7 "A palisade, and a watch to keep it."
+   rv2-under_siege-village-30 [village, under_siege, plagued, walls+watch, STRONG 66]
+   rv3-famine-village-1 [village, famine, plagued, walls+watch+charter, ADEQUATE 56]
+   rv2-calm-village-11 [village, calm, plagued, walls+watch+charter, ADEQUATE 63]
+== 145 "Walls, and a watch to keep them."
+   rv2-under_siege-town-3 [town, under_siege, frontier, walls+watch, STRONG 67]
+   rv2-famine-town-0 [town, famine, plagued, walls+watch, ADEQUATE 51]
+   rv3-occupied-town-0 [town, occupied, plagued, walls+watch, ADEQUATE 40]
+   rv2-calm-town-0 [town, calm, heartland, walls+watch, ADEQUATE 51]
+   rv4-insurgency-town-0 [town, insurgency, frontier, walls+watch, ADEQUATE 47]
+== 102 "Active frontier, with walls and a watch to meet what comes."
+   rv2-under_siege-town-3 [town, under_siege, frontier, walls+watch, ADEQUATE 56]
+   rv2-famine-town-2 [town, famine, frontier, walls+watch, WEAK 28]
+   rv3-occupied-town-2 [town, occupied, frontier, walls+watch+charter, ADEQUATE 59]
+   rv2-calm-town-1 [town, calm, frontier, walls+watch+charter, STRONG 77]
+   rv4-insurgency-town-0 [town, insurgency, frontier, walls+watch, ADEQUATE 40]
+== 1 "Active frontier with a garrison but no perimeter, and too little to meet what the country sends."
+   rv2-famine-town-12 [town, famine, frontier, garrison+watch, CRITICAL 16]
+== 1 "Active frontier, with a palisade and a watch to meet what comes."
+   rv2-wartime-village-6 [village, wartime, frontier, walls+watch, CRITICAL 16]

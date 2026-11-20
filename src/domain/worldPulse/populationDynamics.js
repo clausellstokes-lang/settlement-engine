@@ -3,6 +3,10 @@ import { detPow } from '../../kernel/detPow.js';
 import { canonicalRelationshipLabel } from '../region/graph.js';
 import { hash01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
+// STYLE-2 C2 (SW-12): the population lines' vantages, chosen by the house idiom — the
+// zero-import selection kernel keyed on the candidate's own stable id (no rng draw).
+import { pickLine } from './proseSelection.js';
+/** The slots a prose line fills (STYLE-2 SW-12). @typedef {Record<string, string|number|boolean>} PopulationLineSlots */
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
 import { integerize } from './demographicsRates.js';
 import { residentNamedNpcCount } from './npcReplacement.js';
@@ -229,6 +233,54 @@ function relationshipWeight(snapshot, sourceId, destId) {
   // into a city they are at war with just because a trade edge also exists.
   const worst = Math.min(...weights);
   return worst < 1 ? worst : Math.max(...weights);
+}
+
+// STYLE-2 C2 (SW-12) — the population lines in plain words. The summary pools carry four
+// vantages on the same fact (about n people gained or lost; the onward clause only where the
+// migrants were credited to other places); the strain receipt names only the pressures that
+// bite, by the same quarter bands as POPULATION_PRESSURE_WORDS, hardest band first.
+const POPULATION_LOSS_SUMMARY = Object.freeze([
+  (/** @type {PopulationLineSlots} */ x) => `${x.name} has lost about ${x.n} people${x.onward}.`,
+  (/** @type {PopulationLineSlots} */ x) => `About ${x.n} people are gone from ${x.name}${x.onward}.`,
+  (/** @type {PopulationLineSlots} */ x) => `${x.name}'s rulers count about ${x.n} fewer people than before${x.onward}.`,
+  (/** @type {PopulationLineSlots} */ x) => `Fewer people live in ${x.name} now, about ${x.n} fewer${x.onward}.`,
+]);
+const POPULATION_GROWTH_SUMMARY = Object.freeze([
+  (/** @type {PopulationLineSlots} */ x) => `${x.name} has about ${x.n} more people than it had.`,
+  (/** @type {PopulationLineSlots} */ x) => `About ${x.n} more people live in ${x.name} now.`,
+  (/** @type {PopulationLineSlots} */ x) => `${x.name}'s rulers count about ${x.n} more people than before.`,
+  (/** @type {PopulationLineSlots} */ x) => `${x.name} is growing: about ${x.n} more people than it had.`,
+]);
+/** @type {Readonly<Record<string, ReadonlyArray<string>>>} */
+const MIGRATION_MODE_REASON = Object.freeze({
+  concentrated: Object.freeze(['They have all gone to the same place.', 'The ones who left have made for a single place.', 'Every one of them has settled in one place nearby.']),
+  distributed: Object.freeze(['They have scattered to the places around.', 'They have gone their separate ways to places nearby.', 'They have spread out among the neighbouring places.']),
+});
+// One plain clause per pressure per band (band 0, "no strain", says nothing).
+const STRAIN_CLAUSES = Object.freeze([
+  Object.freeze(['', 'food is a little short', 'food is short', 'there is not enough food']),
+  Object.freeze(['', 'people feel a little less safe', 'people fear for their safety', 'people fear for their lives']),
+  Object.freeze(['', 'trade is a little slow', 'trade is poor', 'trade has all but stopped']),
+]);
+/**
+ * The strain receipt: the pressures that bite, hardest first, or null when none does.
+ * @param {string} name @param {string[]} words the granary, walls and roads words @param {string} seed
+ * @returns {string|null}
+ */
+function strainReason(name, words, seed) {
+  const bands = words.map(w => Math.max(0, POPULATION_PRESSURE_WORDS.indexOf(w)));
+  const clauses = [0, 1, 2]
+    .filter(i => bands[i] > 0)
+    .sort((a, b) => bands[b] - bands[a] || a - b)
+    .map(i => STRAIN_CLAUSES[i][bands[i]]);
+  if (!clauses.length) return null;
+  const list = clauses.length === 1 ? clauses[0]
+    : `${clauses.slice(0, -1).join(', ')} and ${clauses[clauses.length - 1]}`;
+  return pickLine([
+    `${list[0].toUpperCase()}${list.slice(1)}.`,
+    `In ${name}, ${list}.`,
+    `In ${name} these days, ${list}.`,
+  ], `candidate.population.strain.${seed}`);
 }
 
 /**
@@ -505,14 +557,23 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
     // summaries — and any golden over advance output — would drift by the runner's
     // locale. formatCount is the locale-independent grouped formatter the engine
     // pins everywhere (F13/localeFormatGuard); no host-ICU dependence at all.
-    summary: delta > 0
-      ? `${item.name || sourceId} gains about ${formatCount(abs)} people from favorable conditions.`
-      : `${item.name || sourceId} loses about ${formatCount(abs)} people from cumulative pressure${migrants ? `; about ${formatCount(migrants)} may migrate onward` : ''}.`,
-    reasons: [
-      `Grain, safety and trade each pull on this: ${granaryWord} on the granary, ${wallsWord} on the walls, ${roadsWord} on the roads.`,
-      `Interval ${interval.replace(/_/g, ' ')} with ${rules.intensity} intensity.`,
-      transferMode ? `Migration mode resolved as ${transferMode.replace(/_/g, ' ')}.` : null,
-    ].filter(Boolean),
+    // STYLE-2 C2 (SW-12): the change said as people gained or lost, four vantages; the
+    // onward clause only where migrants were credited to destinations (never "void").
+    summary: pickLine(delta > 0 ? POPULATION_GROWTH_SUMMARY : POPULATION_LOSS_SUMMARY, `candidate.population.${kind}.${stablePart(sourceId)}.${tick}`, {
+      name: item.name || sourceId,
+      n: formatCount(abs),
+      onward: migrants && (transferMode === 'concentrated' || transferMode === 'distributed') ? `; about ${formatCount(migrants)} of them have moved on` : '',
+    }),
+    reasons: /** @type {string[]} */ ([
+      // A drift outcome (one population delta, no transfer) is seeded by the town alone, never
+      // the tick: its reasons are the feed's metronome key (worldPulseFeedCuration.js ::
+      // isDriftOnlyOutcome / isMetronomeRepeat), so they must not vary from pulse to pulse.
+      strainReason(item.name || sourceId, [granaryWord, wallsWord, roadsWord],
+        populationDeltas.length > 1 ? `${stablePart(sourceId)}.${tick}` : stablePart(sourceId)),
+      transferMode === 'concentrated' || transferMode === 'distributed'
+        ? pickLine(MIGRATION_MODE_REASON[transferMode], `candidate.population.${kind}.${stablePart(sourceId)}.${tick}:mode`)
+        : null,
+    ].filter(Boolean)),
     populationDeltas,
     generatedAtTick: tick,
     // spatialEmigration (M4): the shed-pool marker the migrationKernel reads POST-APPLY

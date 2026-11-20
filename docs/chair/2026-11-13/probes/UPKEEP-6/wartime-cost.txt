@@ -1,0 +1,104 @@
+# COHERENCE-UPKEEP-6, C: war drains, its cost measured (births6.mjs; the B build da09e1221 against the C build; 3,036 + 720 fresh6). Band list columns: corpus, size, birth, score before, after, band before, after
+unchanged (corpus, at war) {('u5', False): 2613, ('fresh6', False): 592, ('u5', True): 1}
+moved (corpus, at war) {('u5', True): 422, ('fresh6', True): 128}
+score change ('fresh6', 'city') n 21 mean -1.81 min -3 max 0
+score change ('fresh6', 'hamlet') n 20 mean -2.85 min -3 max 0
+score change ('fresh6', 'metropolis') n 21 mean -0.29 min -2 max 0
+score change ('fresh6', 'thorp') n 22 mean -2.68 min -3 max 0
+score change ('fresh6', 'town') n 22 mean -2.32 min -3 max 0
+score change ('fresh6', 'village') n 22 mean -2.73 min -3 max 0
+score change ('u5', 'city') n 91 mean -2.32 min -3 max 0
+score change ('u5', 'hamlet') n 48 mean -2.83 min -3 max 0
+score change ('u5', 'metropolis') n 86 mean -0.52 min -3 max 0
+score change ('u5', 'thorp') n 51 mean -2.88 min -3 max 0
+score change ('u5', 'town') n 91 mean -1.71 min -3 max 0
+score change ('u5', 'village') n 55 mean -2.73 min -3 max 0
+parts wartime took from {'stores': 550, 'purse': 542, 'alchemists': 200, 'market': 359, 'hospital': 206, 'foodWorking': 62}
+band changes 87 Counter({('u5', 'thorp', 'Lightly Defended', 'Vulnerable'): 13, ('u5', 'village', 'Lightly Defended', 'Vulnerable'): 10, ('u5', 'hamlet', 'Lightly Defended', 'Vulnerable'): 8, ('u5', 'village', 'Vulnerable', 'Undefended'): 7, ('u5', 'hamlet', 'Vulnerable', 'Undefended'): 5, ('u5', 'city', 'Fortress', 'Well-Defended'): 5, ('fresh6', 'thorp', 'Lightly Defended', 'Vulnerable'): 5, ('fresh6', 'village', 'Lightly Defended', 'Vulnerable'): 4, ('u5', 'thorp', 'Vulnerable', 'Undefended'): 3, ('u5', 'town', 'Defensible', 'Lightly Defended'): 3, ('fresh6', 'village', 'Vulnerable', 'Undefended'): 3, ('u5', 'thorp', 'Defensible', 'Lightly Defended'): 2, ('u5', 'town', 'Lightly Defended', 'Vulnerable'): 2, ('u5', 'town', 'Fortress', 'Well-Defended'): 2, ('u5', 'city', 'Well-Defended', 'Defensible'): 2, ('fresh6', 'city', 'Well-Defended', 'Defensible'): 2, ('u5', 'town', 'Well-Defended', 'Defensible'): 2, ('fresh6', 'hamlet', 'Lightly Defended', 'Vulnerable'): 2, ('fresh6', 'hamlet', 'Vulnerable', 'Undefended'): 2, ('fresh6', 'town', 'Well-Defended', 'Defensible'): 2, ('fresh6', 'town', 'Fortress', 'Well-Defended'): 1, ('fresh6', 'city', 'Defensible', 'Lightly Defended'): 1, ('u5', 'village', 'Defensible', 'Lightly Defended'): 1})
+   fresh6 city fresh6-wartime-city-0 56 53 Well-Defended Defensible
+   fresh6 city fresh6-wartime-city-2 56 53 Well-Defended Defensible
+   fresh6 city fresh6-wartime-city-8 38 35 Defensible Lightly Defended
+   fresh6 hamlet fresh6-wartime-hamlet-1 25 22 Lightly Defended Vulnerable
+   fresh6 hamlet fresh6-wartime-hamlet-15 26 23 Lightly Defended Vulnerable
+   fresh6 hamlet fresh6-wartime-hamlet-5 13 10 Vulnerable Undefended
+   fresh6 hamlet fresh6-wartime-hamlet-7 14 11 Vulnerable Undefended
+   fresh6 thorp fresh6-thorp-46 26 23 Lightly Defended Vulnerable
+   fresh6 thorp fresh6-wartime-thorp-14 25 22 Lightly Defended Vulnerable
+   fresh6 thorp fresh6-wartime-thorp-15 25 22 Lightly Defended Vulnerable
+   fresh6 thorp fresh6-wartime-thorp-19 24 21 Lightly Defended Vulnerable
+   fresh6 thorp fresh6-wartime-thorp-4 26 23 Lightly Defended Vulnerable
+   fresh6 town fresh6-wartime-town-0 76 73 Fortress Well-Defended
+   fresh6 town fresh6-wartime-town-13 55 53 Well-Defended Defensible
+   fresh6 town fresh6-wartime-town-7 57 54 Well-Defended Defensible
+   fresh6 village fresh6-village-21 25 22 Lightly Defended Vulnerable
+   fresh6 village fresh6-village-37 12 9 Vulnerable Undefended
+   fresh6 village fresh6-wartime-village-10 25 22 Lightly Defended Vulnerable
+   fresh6 village fresh6-wartime-village-13 26 23 Lightly Defended Vulnerable
+   fresh6 village fresh6-wartime-village-16 13 10 Vulnerable Undefended
+   fresh6 village fresh6-wartime-village-19 26 23 Lightly Defended Vulnerable
+   fresh6 village fresh6-wartime-village-6 13 10 Vulnerable Undefended
+   u5 city cold-city-43 78 75 Fortress Well-Defended
+   u5 city cold-wartime-city-29 76 73 Fortress Well-Defended
+   u5 city cold-wartime-city-31 55 53 Well-Defended Defensible
+   u5 city cold-wartime-city-34 56 53 Well-Defended Defensible
+   u5 city cold-wartime-city-50 76 74 Fortress Well-Defended
+   u5 city cold-wartime-city-68 77 74 Fortress Well-Defended
+   u5 city cold-wartime-city-80 77 74 Fortress Well-Defended
+   u5 hamlet cold-hamlet-48 24 21 Lightly Defended Vulnerable
+   u5 hamlet cold-hamlet-82 12 9 Vulnerable Undefended
+   u5 hamlet cold-wartime-hamlet-15 13 10 Vulnerable Undefended
+   u5 hamlet cold-wartime-hamlet-19 26 23 Lightly Defended Vulnerable
+   u5 hamlet cold-wartime-hamlet-25 25 22 Lightly Defended Vulnerable
+   u5 hamlet cold-wartime-hamlet-30 26 23 Lightly Defended Vulnerable
+   u5 hamlet cold-wartime-hamlet-32 13 10 Vulnerable Undefended
+   u5 hamlet cold-wartime-hamlet-33 13 10 Vulnerable Undefended
+   u5 hamlet cold-wartime-hamlet-39 26 23 Lightly Defended Vulnerable
+   u5 hamlet cold-wartime-hamlet-7 13 10 Vulnerable Undefended
+   u5 hamlet cold-wartime-hamlet-8 26 23 Lightly Defended Vulnerable
+   u5 hamlet cold-wartime-hamlet-9 26 23 Lightly Defended Vulnerable
+   u5 hamlet fresh5-hamlet-22 24 21 Lightly Defended Vulnerable
+   u5 thorp cold-thorp-134 39 36 Defensible Lightly Defended
+   u5 thorp cold-thorp-237 26 23 Lightly Defended Vulnerable
+   u5 thorp cold-thorp-69 24 21 Lightly Defended Vulnerable
+   u5 thorp cold-thorp-96 25 22 Lightly Defended Vulnerable
+   u5 thorp cold-wartime-thorp-11 25 22 Lightly Defended Vulnerable
+   u5 thorp cold-wartime-thorp-15 26 23 Lightly Defended Vulnerable
+   u5 thorp cold-wartime-thorp-17 40 37 Defensible Lightly Defended
+   u5 thorp cold-wartime-thorp-20 24 21 Lightly Defended Vulnerable
+   u5 thorp cold-wartime-thorp-24 25 22 Lightly Defended Vulnerable
+   u5 thorp cold-wartime-thorp-26 13 10 Vulnerable Undefended
+   u5 thorp cold-wartime-thorp-28 24 21 Lightly Defended Vulnerable
+   u5 thorp cold-wartime-thorp-29 25 22 Lightly Defended Vulnerable
+   u5 thorp cold-wartime-thorp-31 26 23 Lightly Defended Vulnerable
+   u5 thorp cold-wartime-thorp-32 24 21 Lightly Defended Vulnerable
+   u5 thorp cold-wartime-thorp-39 13 10 Vulnerable Undefended
+   u5 thorp cold-wartime-thorp-8 26 23 Lightly Defended Vulnerable
+   u5 thorp cold-wartime-thorp-9 13 10 Vulnerable Undefended
+   u5 thorp fresh5-thorp-45 24 21 Lightly Defended Vulnerable
+   u5 town cold-wartime-town-13 55 52 Well-Defended Defensible
+   u5 town cold-wartime-town-14 77 74 Fortress Well-Defended
+   u5 town cold-wartime-town-17 38 35 Defensible Lightly Defended
+   u5 town cold-wartime-town-19 57 54 Well-Defended Defensible
+   u5 town cold-wartime-town-29 76 73 Fortress Well-Defended
+   u5 town cold-wartime-town-50 25 23 Lightly Defended Vulnerable
+   u5 town cold-wartime-town-51 39 36 Defensible Lightly Defended
+   u5 town cold-wartime-town-6 24 21 Lightly Defended Vulnerable
+   u5 town cold-wartime-town-78 39 37 Defensible Lightly Defended
+   u5 village cold-village-105 14 11 Vulnerable Undefended
+   u5 village cold-village-187 40 37 Defensible Lightly Defended
+   u5 village cold-village-204 26 23 Lightly Defended Vulnerable
+   u5 village cold-wartime-village-11 12 9 Vulnerable Undefended
+   u5 village cold-wartime-village-13 24 21 Lightly Defended Vulnerable
+   u5 village cold-wartime-village-14 14 11 Vulnerable Undefended
+   u5 village cold-wartime-village-15 25 22 Lightly Defended Vulnerable
+   u5 village cold-wartime-village-19 25 22 Lightly Defended Vulnerable
+   u5 village cold-wartime-village-2 26 23 Lightly Defended Vulnerable
+   u5 village cold-wartime-village-23 25 22 Lightly Defended Vulnerable
+   u5 village cold-wartime-village-24 13 10 Vulnerable Undefended
+   u5 village cold-wartime-village-27 24 21 Lightly Defended Vulnerable
+   u5 village cold-wartime-village-29 14 11 Vulnerable Undefended
+   u5 village cold-wartime-village-39 25 22 Lightly Defended Vulnerable
+   u5 village cold-wartime-village-6 14 11 Vulnerable Undefended
+   u5 village cold-wartime-village-7 14 11 Vulnerable Undefended
+   u5 village fresh5-village-34 24 21 Lightly Defended Vulnerable
+   u5 village fresh5-village-47 24 21 Lightly Defended Vulnerable

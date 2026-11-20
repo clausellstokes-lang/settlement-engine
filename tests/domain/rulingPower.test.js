@@ -346,6 +346,9 @@ describe('coupVerdictOutcomes', () => {
     expect(out.condition.archetype).toBe('government_overthrown');
     expect(out.metadata.verdict.holds).toBe(false);
     expect(out.reasons).toContain('The contest broke against the ruling seat.');
+    // FIX-PULSE-DEFECTS (audit C1·28): the summary lower-cased the fallen ruler's NAME behind a
+    // "The " of its own ("The town council fell."); a held name prints as written.
+    expect(out.summary).toBe('Town Council fell. The Garrison now commands the government, and the settlement holds its breath.');
     // anchored: the exact contest result above proves the outcome reasons are live.
     expect(out.reasons.join(' ')).not.toMatch(/\b\d+(?:\.\d+)?\b|×|\b(?:weight|multiplier|score|roll|chance)\b/i);
   });

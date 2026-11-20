@@ -52,7 +52,7 @@
 
 import { matchFactionArchetype } from '../factionRoles.js';
 import { seatKey } from '../../domain/density/seatKey.js';
-import { FACTION_DESCRIPTORS } from '../../data/powerData.js';
+import { FACTION_DESCRIPTORS, FACTION_NAME_SIBLINGS } from '../../data/powerData.js'; import { noteDeclared } from '../../domain/facts/drawDeclared.js'; import { REEVE_ANSWERS_TO_ELECTORS } from '../../data/powerSiblings.js'; // CENSUS-1f: one line; BAR8-K-POWERS (14d): the reeve's twin
 import {
   DOUBLED_NICHE_SHARE, FLOOR_LIFT_CHANCE, bandsForTier, tierKey,
 } from '../../domain/density/densityBands.js';
@@ -66,6 +66,8 @@ import { rollDensityPlan } from './densityRoll.js';
 import { clamp01 } from '../../kernel/math.js';
 import { prosperityRank01 } from '../../domain/prosperityRank.js';
 import { renormalizeFactionPower } from '../power/rulingStructure.js';
+import { settleHouselessPowers } from '../power/rulerKin.js';
+import { stressPowerRowOf } from '../../domain/people/stressPowerFaces.js';
 
 /** The stressor family that may lift the seat floor (§810.3 R13 / §810.5). ONE
  *  closed vocabulary serves birth and play; `succession_void` already exists in
@@ -194,6 +196,9 @@ function planFor(input, mode = {}) {
       : null,
     seatAll: mode.seatAll,
     massOverride: mode.massOverride ?? null,
+    // COHERENCE-POWERS-3 (the chair's rulings (1), (2)): the powers a crisis seats (data/stressPowerFaces.js's `seated`)
+    crisisSeatKeys: (input.powerStructure?.factions || [])
+      .filter((seat) => stressPowerRowOf({ stress: input.stress }, seat)?.seated === true).map(seatKey),
   });
 }
 
@@ -234,6 +239,7 @@ export function rollNamedMass(input) {
  *   powerStructure?: {factions?: Array<Record<string, unknown>>}|null,
  *   economicState?: Record<string, unknown>|null,
  *   massOverride?: number|null,
+ *   institutions?: unknown,
  *   rng: {random: () => number, fork: (l: string) => any},
  * }} input
  */
@@ -243,11 +249,30 @@ export function resizePoliticalRoster(input) {
   }
   const plan = planFor(input, { massOverride: input.massOverride ?? null });
   return {
-    powerStructure: resizeSeats(
+    powerStructure: reeveToRoster(foldKin(resizeSeats(
       input.powerStructure, plan, input.rng.fork('density-law').fork('niche-mint'),
-    ),
+    ), input.institutions), input.institutions),
     plan,
   };
+}
+
+/**
+ * COHERENCE-POWERS 2B, THE FOLD (A-plus) and THE POWER WITH NO ONE ON THE PAGE, at the roster's last build: a
+ * power that no face-bearing house stands behind after the doubled-niche deal is not a power. The ruler's own
+ * kind folds its figure into the ruler; any other kinded power is not built (power/rulerKin.js ::
+ * settleHouselessPowers), and a relationship naming either goes with it (pruneToRoster). The
+ * houses here are final, the faction boost's included. No draw. A roster with nothing to fold is returned by
+ * reference; otherwise its seats are copied, so no seat object another holder shares is written.
+ * @param {{factions?: Array<Record<string, unknown>>, factionRelationships?: unknown}|null|undefined} powerStructure
+ * @param {unknown} institutions the settlement's final roster of houses
+ */
+function foldKin(powerStructure, institutions) {
+  if (!powerStructure || !Array.isArray(powerStructure.factions) || !Array.isArray(institutions)) return powerStructure;
+  const factions = powerStructure.factions.map(seat => ({ ...seat }));
+  const { folded, dropped } = settleHouselessPowers(factions, institutions);
+  if (!folded.length && !dropped.length) return powerStructure;
+  const settled = { ...powerStructure, factions };
+  return pruneToRoster(settled, new Set([...folded, ...dropped]));
 }
 
 /**
@@ -278,6 +303,7 @@ function resizeSeats(powerStructure, plan, rng) {
       .filter(n => !taken.has(String(n).toLowerCase()));
     if (!pool.length) continue;
     const name = pool[Math.floor(rng.random() * pool.length)] || pool[0];
+    noteDeclared(name, FACTION_NAME_SIBLINGS, { poolId: `powerData:FACTION_DESCRIPTORS.${String(host.category || 'other')}`, surface: 'power', drawKind: 'R' }); // CENSUS-1f: declared, carried, never pre-filtered (the self-check judges it)
     taken.add(String(name).toLowerCase());
     minted.push({
       ...host,
@@ -287,7 +313,7 @@ function resizeSeats(powerStructure, plan, rng) {
       // The contested niche is DECLARED on the record, so the contest layer can
       // find the pair without re-deriving it from names. §810 R4 reuses the
       // pantheon niche-contest pattern; this is the tie it reads.
-      contestsNiche: key,
+      contestsNiche: key, ...rivalDescOf(host.desc), // BAR8-K-POWERS (14a): a one-body description is not the rival's (rivalDescOf, at the file's end)
       // A second claimant on one niche splits the niche's standing rather than
       // inventing new power — the shares idiom, not a new power source. The share
       // itself is a signed value and lives in `densityBands.DOUBLED_NICHE_SHARE`.
@@ -535,3 +561,62 @@ function assignRoster(npcs, plan) {
 export function massBandForTier(tier) {
   return bandsForTier(tier).mass;
 }
+
+// BAR8-K-POWERS (rule 14a, the audit's C14226; BRIEF-BAR8 K-POWERS 2; THE TWINS, vetoable by the owner): A MINTED RIVAL IS
+// NOT ITS HOST. The doubled niche's mint copies its host (`{ ...host }`), its description too. Where that description names
+// ONE body ("Crown-appointed emergency body ...", "Emergency committee with authority over rationing ...", "Organised criminal
+// network controls the black market ...", "External administrative body ...", "City watch; ...", "Standing army ..."), the rival printed with it
+// is a second copy of a body there is one of. The rival takes, whole, the line that is true of a second claimant on the
+// niche (what `contestsNiche` declares: it wants the same ground and contests it); the lines the host's description carries
+// after its opening are the host's own (its crisis notes: "Wartime has turned this power ...", "Locally hated ..."; its
+// standing sentence) and are not the rival's. A description general to its kind ("Clergy are present but operate at the
+// margins", "Minor landed families") is true of the rival as of the host and is copied as before. No draw.
+const A_SECOND_WATCH = 'A second armed company that wants a share of keeping order here, and of the say that goes with it.';
+/** @type {ReadonlyArray<readonly [RegExp, string]>} the host's opening line (recognised, never printed here), and the minted rival's */
+const RIVAL_DESC_OF_HOST = Object.freeze([
+  [/^(City|Town) watch; |^Standing army with genuine political weight;/, A_SECOND_WATCH],
+  [/^Emergency committee with authority over rationing, conscription, and defence spending;/,
+    "A rival bloc that wants a say over rationing, conscription and defence spending, and disputes the emergency committee's hold on them."],
+  [/^(Crown-appointed emergency|Emergency) body coordinating supply, conscription, and military contracting\./,
+    "A rival bloc that wants a say over supply, conscription and the army's contracts, and disputes the emergency body's hold on them."],
+  [/^(Crown-appointed emergency|Emergency) body with powers over requisition, conscription, and price controls\./,
+    "A rival bloc that wants a say over requisition, conscription and prices, and disputes the emergency body's powers over them."],
+  [/^Organised criminal network controls the black market and several informal revenue streams;/,
+    'A rival criminal network that wants a share of the black market and its takings, and contests them with the established one.'],
+  [/^External administrative body; all significant decisions require approval or reversal\./,
+    "A rival bloc that wants a say over the decisions made here, and disputes the outside administration's hold on them."],
+  [/^External or crown-appointed body with authority to verify compliance with the conversion order\./,
+    'A rival body that wants a say in enforcing the conversion order, and disputes who should decide who complies.'],
+].map((row) => Object.freeze(/** @type {readonly [RegExp, string]} */ (/** @type {unknown} */ (row)))));
+
+/**
+ * The minted rival's description (14a): where its host's opens with a one-body line, the rival's own, whole (the host's
+ * appended lines are the host's: its crisis notes, its standing); else nothing, and the copy stands.
+ * @param {unknown} desc the host's description @returns {{ desc?: string }} the rival's (empty where the host's is copied as it is)
+ */
+function rivalDescOf(desc) {
+  const d = typeof desc === 'string' ? desc : '';
+  const row = RIVAL_DESC_OF_HOST.find(([host]) => host.test(d));
+  return row ? { desc: row[1] } : {};
+}
+
+/**
+ * BAR8-K-POWERS (rule 14d, the audit's C44634): THE REEVE'S NOBLE IS ON THE ROSTER THE PAGE PRINTS. The power step gives the
+ * Elected Reeve "... under noble oversight" where it seats a noble power (its twin: data/powerSiblings.js); the
+ * trim above may not keep that power. Where no noble power is left and no noble house stands (the power step's own words,
+ * `rulingStructure.js :: hasNobleInst`), the reeve's opening line takes its twin and the rest of its description is kept.
+ * No draw. A roster with nothing to settle is returned by reference.
+ * @param {{factions?: Array<Record<string, unknown>>}|null|undefined} powerStructure @param {unknown} institutions
+ */
+function reeveToRoster(powerStructure, institutions) {
+  const factions = Array.isArray(powerStructure?.factions) ? powerStructure.factions : null;
+  const at = factions ? factions.findIndex((f) => UNDER_NOBLE.test(String(f?.desc || ''))) : -1;
+  if (!factions || at < 0) return powerStructure;
+  const noblePower = factions.some((f) => f?.category === 'noble' || /\b(manor|gentry|noble|lord|baron)/i.test(String(f?.faction || '')));
+  const nobleHouse = (Array.isArray(institutions) ? institutions : []).some((i) => /lord|noble|manor|royal seat|feudal/i.test(String(/** @type {any} */ (i)?.name || '')));
+  if (noblePower || nobleHouse) return powerStructure;
+  const desc = String(factions[at].desc);
+  return { ...powerStructure, factions: factions.map((f, k) => (k === at ? { ...f, desc: desc.replace(UNDER_NOBLE, REEVE_ANSWERS_TO_ELECTORS) } : f)) };
+}
+/** The Elected Reeve's opening line where it names a noble (`rulingStructure.js`'s own line, recognised). */
+const UNDER_NOBLE = /^A reeve elected from the peasantry manages labour and mediates disputes under noble oversight\./;

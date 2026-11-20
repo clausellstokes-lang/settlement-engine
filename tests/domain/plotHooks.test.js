@@ -102,7 +102,9 @@ describe('the source page of a hook (chair ruling X-2: Plot Hooks groups its car
     const page = (hook) => plotHookSourcePage(hook).id;
     expect(page({ category: 'npc' })).toBe('npcs');
     expect(page({ category: 'faction' })).toBe('relationships');
-    expect(page({ category: 'relationship' })).toBe('relationships');
+    // RE-KEYED (PEOPLE-3 HOOKS, 2026-11-07): the `relationship` category, unemitted since X-2, is
+    // deleted from the vocabulary; a stored hook still carrying the token falls to the default page.
+    expect(page({ category: 'relationship' })).toBe('history');
     expect(page({ category: 'tension' })).toBe('history');
     expect(page({ category: 'tension', source: 'Traditions' })).toBe('traditions');
     expect(page({ category: 'history' })).toBe('history');
@@ -132,9 +134,10 @@ describe('collectPlotHooks: a crisis\'s cast hooks come first', () => {
     absent: [], stakes: [{ factionId: 'Town Council', stake: 'loses', reason: 'the crisis hits its base' }],
     levers: [{ institution: 'Town granary', holderId: 'n1', holderName: 'Mara Vell' }],
   };
+  // RE-KEYED (PEOPLE-2 CAST-DERIVED, 3aa160a70): a person's house is read from its first-rank membership; the retired `factionAffiliation` became `memberships`.
   const npcs = [
-    { id: 'n1', name: 'Mara Vell', role: 'Miller', power: 10, influence: 'high', factionAffiliation: 'Millers', plotHooks: ['Mara keeps a second ledger.'] },
-    { id: 'n2', name: 'Oswin Hale', role: 'Mayor', power: 4, factionAffiliation: 'Town Council', plotHooks: ['Oswin owes a debt he cannot name.'] },
+    { id: 'n1', name: 'Mara Vell', role: 'Miller', power: 10, influence: 'high', memberships: [{ power: 'Millers', rank: 1 }], plotHooks: ['Mara keeps a second ledger.'] },
+    { id: 'n2', name: 'Oswin Hale', role: 'Mayor', power: 4, memberships: [{ power: 'Town Council', rank: 1 }], plotHooks: ['Oswin owes a debt he cannot name.'] },
   ];
   const crisisTown = () => ({ name: 'Vellbrook', tier: 'town', npcs, stress: [{ type: 'famine', label: 'Famine', cast }] });
   const OWN = ['Mara keeps a second ledger.', 'Oswin owes a debt he cannot name.'];
@@ -142,12 +145,12 @@ describe('collectPlotHooks: a crisis\'s cast hooks come first', () => {
   test('a hand-built town with one crisis and a cast: the hook list leads with the hook naming the holder', () => {
     const hooks = collectPlotHooks(crisisTown());
     expect(hooks[0]).toMatchObject({
-      text: 'In the famine, the brunt falls on Mara Vell of Millers: the hunger falls first on its people.',
+      text: 'In the famine, Mara Vell of Millers takes the worst of it: the hunger falls first on its people.',
       source: 'Famine', category: 'tension', priority: 10, crisis: 'famine',
       links: [{ kind: 'npc', id: 'n1', label: 'Mara Vell' }],
     });
     expect(hooks[1]).toMatchObject({
-      text: 'In the famine, the players can push on the Town granary, run by Mara Vell; Town Council loses most if it gives, because the crisis hits its base.',
+      text: 'The famine turns on the town granary, run by Mara Vell: if it gives way, Town Council loses most, because the crisis hits its base.',
       crisis: 'famine', links: [{ kind: 'faction', id: 'Town Council', label: 'Town Council' }],
     });
     // the place's own hooks follow, in the order they always had: the count above them is a floor
@@ -165,7 +168,7 @@ describe('collectPlotHooks: a crisis\'s cast hooks come first', () => {
   test('the DM\'s cast is the one named: an edited line role moves the hook to the DM\'s person', () => {
     const town = crisisTown();
     town.stress[0] = { ...town.stress[0], _userEdits: { castRoles: { value: 'brunt=npc:n2' } } };
-    expect(collectPlotHooks(town)[0].text).toBe("In the famine, the brunt falls on Oswin Hale of Town Council: the DM's word.");
+    expect(collectPlotHooks(town)[0].text).toBe("In the famine, Oswin Hale of Town Council takes the worst of it: the DM's word.");
   });
 
   test('the record check reads the crisis hooks, and a cast sentence the record contradicts is never spoken on either', () => {
@@ -179,5 +182,27 @@ describe('collectPlotHooks: a crisis\'s cast hooks come first', () => {
     };
     expect(hookTruthFindings(armed)).toEqual([]);
     expect(collectPlotHooks(armed).map((h) => h.text)).toEqual(OWN);
+  });
+});
+
+// SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 B3, 2026-11-09): a tension type the label map does not
+// hold printed its raw engine key as the hook's title ("corruption_scandal" on Tonight and Plot
+// Hooks, soak1k-6). A title is never a snake_case key.
+describe('collectPlotHooks tension titles', () => {
+  test('a tension type missing from the label map is titled in words, never as its raw key', () => {
+    const hooks = collectPlotHooks({
+      history: {
+        currentTensions: [{
+          type: 'corruption_scandal',
+          description: 'The tax ledgers were found altered.',
+          plotHooks: ['Someone paid the clerk to alter the ledgers.'],
+        }],
+      },
+    });
+    const sources = hooks.map((hook) => hook.source);
+    expect(sources).toHaveLength(1);
+    // anchored: the subject is the exact text or constant asserted positively beside it (SW-6), so it cannot have drifted away
+    expect(sources[0]).not.toMatch(/_/);
+    expect(sources[0]).toBe('Corruption Scandal');
   });
 });

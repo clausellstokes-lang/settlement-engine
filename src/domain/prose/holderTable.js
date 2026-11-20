@@ -13,7 +13,7 @@
  * this town. This module carries the two hops the ruling names, and nothing else:
  *
  *   (1) FIELD -> HOLDER KIND. A frozen table keyed on the producing field's own token, each
- *       row citing the PRODUCER that writes it (file:line) and carrying a `read` flag the gate
+ *       row citing the PRODUCER that writes it (file:line or file :: symbol), with a `read` flag the gate
  *       can catch lying about. A field no row names is SOURCE-UNRESOLVED, never guessed.
  *   (2) HOLDER KIND -> THIS TOWN'S INSTITUTION, through the institution table's own reader:
  *       an institution whose INSTANTIATED service rows carry one of the kind's record-keeping
@@ -96,7 +96,7 @@ export const INTERESTED = 'INTERESTED';
  * ⛔ THE GROUND, AND WHY IT IS FOUR AND NOT TWELVE. Car 5b reported capture "structurally
  * absent at birth" and measured INTERESTED at 0 on all 768 RATE towns. The figure was right
  * and the ground was false: every generated town carries `powerStructure.criminalCaptureState`
- * (`src/generators/power/rulingStructure.js:797` — the very line this table maps to the WATCH),
+ * (`src/domain/people/hallCapture.js :: writeHallCapture` since ALLEGIANCE-CAR2, the power step before it — the write this table maps to the WATCH),
  * on the same five-rung ladder `standingOf` already consumes, reading none 495 · adversarial
  * 194 · equilibrium 64 · corrupted 15 over the corpus, with 79 towns carrying a non-`none`
  * `captureState` on a faction entry. The car reported the fact ABSENT rather than asking
@@ -145,8 +145,11 @@ export function capturedRulingStructure(settlement) {
 /**
  * ⭐ THE MAPPING TABLE — one row per producing FIELD TOKEN, each cited to the writer that
  * produces it. The `cite` is a `file:line` inside the producer index's own two trees
- * (`src/generators/**` and `src/domain/**`), and the walker re-derives every one of them from
- * a LIVE `astTokens` pass: a citation that has gone stale, or that never existed, reds by name.
+ * (`src/generators/**` and `src/domain/**`), or the SYMBOL form `file :: declaration`
+ * (OPERATING_STANDARD rule 32: a citation that drifts is re-addressed to the top-level
+ * declaration that holds the write, never to a new line), and the walker re-derives every one
+ * of them from a LIVE `astTokens` pass: a citation that has gone stale, or that never existed,
+ * reds by name.
  *
  * ⛔ THE TABLE IS SHORT ON PURPOSE AND THE SILENCES ARE THE FINDING. A token whose producers
  * are scattered over dozens of unrelated files (`label`, `key`, `status`, `severity`, `name`,
@@ -163,26 +166,31 @@ export function capturedRulingStructure(settlement) {
  */
 export const HOLDER_SOURCES = Object.freeze({
   // ── the treasury: the town's coin, its revenue and the arithmetic that closes or does not ──
-  incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js:828', read: true }),
-  viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:544', read: true }),
-  criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js:564', read: true }),
-  economicViability: Object.freeze({ kind: 'treasury', cite: 'src/generators/steps/assembleSettlement.js:113', read: true }),
+  // ⭐ CITED BY SYMBOL (rule 32; COHERENCE-AGREE-3, F14b): the economicState.js and safetyProfile.js rows drifted
+  // with the lane's cures and were re-cited to new LINES (economicState.js :: generateEconomicState moved); a drifted cite is
+  // re-addressed to the symbol that writes the token, permanently.
+  incomeSources: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/economicState.js :: generateEconomicState', read: true }),
+  // ⭐ CITED BY SYMBOL (rule 32; REVIEW-INTAKE-3 R8): these two drifted from :588/:608 to :586/:606.
+  viable: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js :: generateEconomicViability', read: true }),
+  criticalIssueCount: Object.freeze({ kind: 'treasury', cite: 'src/generators/economy/viability.js :: generateEconomicViability', read: true }),
+  economicViability: Object.freeze({ kind: 'treasury', cite: 'src/generators/steps/assembleSettlement.js:120', read: true }),
 
   // ── the market: what the town makes, sends and takes in ──
-  primaryExports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:766', read: true }),
-  primaryImports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:766', read: true }),
-  localProduction: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:776', read: true }),
-  isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:833', read: true }),
-  activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js:775', read: true }),
-  exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js:570', read: true }),
-  economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:500', read: true }),
-  strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:501', read: true }),
-  exploitation: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js:418', read: true }),
+  primaryExports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js :: generateEconomicState', read: true }),
+  primaryImports: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js :: generateEconomicState', read: true }),
+  localProduction: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js :: generateEconomicState', read: true }),
+  isEntrepot: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js :: generateEconomicState', read: true }),
+  activeChains: Object.freeze({ kind: 'market', cite: 'src/generators/economy/economicState.js :: generateEconomicState', read: true }),
+  exportPosture: Object.freeze({ kind: 'market', cite: 'src/domain/display/dossierViewModel.js :: deriveDossierViewModel', read: true }), // CITED BY SYMBOL (rule 32; BAR2-LABELS-4, 2026-11-15): LB1 (96c47e43f) moved :654 to :656
+  // ⭐ CITED BY SYMBOL (rule 32): REVIEW-INTAKE-3 R9 moved :500/:501/:418 down the file.
+  economicStrengths: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js :: generateResourceAnalysis', read: true }),
+  strategicValue: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js :: generateResourceAnalysis', read: true }),
+  exploitation: Object.freeze({ kind: 'market', cite: 'src/generators/resourceGenerator.js :: generateResourceAnalysis', read: true }),
 
   // ── the toll bar: the route, and what may and may not pass along it ──
   tradeRouteAccess: Object.freeze({ kind: 'toll-bar', cite: 'src/generators/steps/resolveConfig.js:201', read: true }),
-  blockaded: Object.freeze({ kind: 'toll-bar', cite: 'src/domain/worldPulse/foodStockpile.js:417', read: true }),
-  blockadeBypass: Object.freeze({ kind: 'toll-bar', cite: 'src/domain/worldPulse/foodStockpile.js:418', read: true }),
+  blockaded: Object.freeze({ kind: 'toll-bar', cite: 'src/domain/worldPulse/foodStockpile.js:422', read: true }),
+  blockadeBypass: Object.freeze({ kind: 'toll-bar', cite: 'src/domain/worldPulse/foodStockpile.js:423', read: true }),
 
   // ── the muster roll: the walls, the men under arms and what the war does to them ──
   walls: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:84', read: true }),
@@ -191,8 +199,10 @@ export const HOLDER_SOURCES = Object.freeze({
   mercenary: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:99', read: true }),
   charter: Object.freeze({ kind: 'muster', cite: 'src/domain/institutions/defenseInstitutionBuckets.js:102', read: true }),
   force: Object.freeze({ kind: 'muster', cite: 'src/generators/threatDefensePolicy.js:13', read: true }),
-  magicDependency: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:467', read: true }),
-  economicGates: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js:476', read: true }),
+  // ⭐ CITED BY SYMBOL (rule 32; COHERENCE-UPKEEP, 2026-11-12): the lane's edits to defenseGenerator.js moved these
+  // two writes from :467/:476 to :497/:506; a drifted cite is re-addressed to the symbol that writes the token.
+  magicDependency: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js :: generateDefenseProfile', read: true }),
+  economicGates: Object.freeze({ kind: 'muster', cite: 'src/generators/defenseGenerator.js :: generateDefenseProfile', read: true }),
   besiegedBy: Object.freeze({ kind: 'muster', cite: 'src/domain/display/warStatus.js:297', read: true }),
   besiegingTargets: Object.freeze({ kind: 'muster', cite: 'src/domain/display/warStatus.js:297', read: true }),
   ticksToDeploy: Object.freeze({ kind: 'muster', cite: 'src/domain/display/mobilizationStatus.js:94', read: true }),
@@ -207,17 +217,19 @@ export const HOLDER_SOURCES = Object.freeze({
       + ' the token is mapped to the WATCH rather than to the muster on the ruling\'s own'
       + ' grain: the muster roll counts men under arms, and the watch keeps its own count.',
   }),
-  blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js:721', read: true }),
-  criminalCaptureState: Object.freeze({ kind: 'watch', cite: 'src/generators/power/rulingStructure.js:797', read: true }),
-  safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js:839', read: true }),
+  blackMarketCapture: Object.freeze({ kind: 'watch', cite: 'src/generators/safetyProfile.js :: generateSafetyProfile', read: true }),
+  criminalCaptureState: Object.freeze({ kind: 'watch', cite: 'src/domain/people/hallCapture.js :: writeHallCapture', read: true }), // ALLEGIANCE-CAR2 (J-13): re-cited to the state's ONE writer, the derivation at the coherence seam
+  safetyProfile: Object.freeze({ kind: 'watch', cite: 'src/generators/economy/economicState.js :: generateEconomicState', read: true }),
 
   // ── the court: the seat, its legitimacy, the blocs under it and the treaties it signs ──
   govMultiplier: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:109', read: true }),
   governanceFractured: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:115', read: true }),
   breakdown: Object.freeze({ kind: 'court', cite: 'src/generators/factionDynamics.js:161', read: true }),
-  blocs: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/settlementPolitics.js:992', read: true }),
-  stability: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:702', read: true }),
-  recentConflict: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js:702', read: true }),
+  blocs: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/settlementPolitics.js:993', read: true }),
+  // LANDING-R2 (ODQ §934.105): these three rows cited rulingStructure.js BY LINE (718, 718, 814); the module's split
+  // moves those lines, so they are re-addressed to the SYMBOL that holds the writes (rule 32), and stay true.
+  stability: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js :: generatePowerStructure', read: true }),
+  recentConflict: Object.freeze({ kind: 'court', cite: 'src/generators/power/rulingStructure.js :: generatePowerStructure', read: true }),
   termLines: Object.freeze({ kind: 'court', cite: 'src/domain/display/treatyDocument.js:376', read: true }),
   fraying: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/peaceTermsDocument.js:237', read: true }),
   yearsRemaining: Object.freeze({ kind: 'court', cite: 'src/domain/worldPulse/peaceTermsDocument.js:234', read: true }),
@@ -227,16 +239,16 @@ export const HOLDER_SOURCES = Object.freeze({
   unaffiliated: Object.freeze({ kind: 'parish', cite: 'src/domain/worldPulse/religionState.js:644', read: true }),
 
   // ── the elders: how long ago a thing happened ──
-  yearsAgo: Object.freeze({ kind: 'elders', cite: 'src/generators/historyGenerator.js:289', read: true }),
+  yearsAgo: Object.freeze({ kind: 'elders', cite: 'src/generators/historyGenerator.js:333', read: true }), // BAR3-CLOSE-DOORS-2 (2026-11-16): :328 -> :333 by identity (the line byte-identical, sha256 a4bc6f0c…), moved by the five lines BAR3-CLOSE-SWEEP-B letter a (5bb670f5a) added above it
 
   // ── the road: the look of the country, which anyone travelling it can see ──
   terrainType: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:209', read: true }),
   monsterThreat: Object.freeze({ kind: 'road', cite: 'src/generators/steps/resolveConfig.js:204', read: true }),
 
   // ── the office itself: the record's own audit of the record ──
-  structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:132', read: true }),
-  structuralSuggestions: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:133', read: true }),
-  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js:1031', read: true }),
+  structuralViolations: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:139', read: true }),
+  structuralSuggestions: Object.freeze({ kind: 'office', cite: 'src/generators/steps/assembleSettlement.js:140', read: true }),
+  prominentRelationship: Object.freeze({ kind: 'office', cite: 'src/generators/narrativeGenerator.js :: generateCoherence', read: true }), // MERGE-TRAIN at the ALLEGIANCE-CAR2 merge: car 2's symbol citation taken (rule 32); the write site cited by the integration at :1076
 });
 
 /**

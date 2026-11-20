@@ -15,7 +15,7 @@
 
 import { useStore } from '../../store/index.js';
 import Button from '../primitives/Button.jsx';
-import { MUTED, FS, SP } from '../theme.js';
+import { BODY, FS, SP } from '../theme.js';
 
 export default function ResetConstraintsButton() {
   const resetAllToggles = useStore(s => s.resetAllToggles);
@@ -30,7 +30,8 @@ export default function ResetConstraintsButton() {
 
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, marginLeft: 'auto' }}>
-      <span style={{ fontSize: FS.xs, color: MUTED }}>
+      {/* The passing ink at FS.sm (2026-11-10): MUTED read 3.3:1 on the band. */}
+      <span style={{ fontSize: FS.sm, color: BODY }}>
         {setCount === 0 ? 'nothing forced or forbidden yet' : `${setCount} set across the three`}
       </span>
       {/* No native title= tooltip (shrink-only census, guidanceRegistry

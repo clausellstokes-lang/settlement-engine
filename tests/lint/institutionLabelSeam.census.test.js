@@ -178,7 +178,11 @@ describe('the institution label seam — the roster holds', () => {
       // and leave the line. Counted OUTSIDE the import, and deliberately NOT as `name(` —
       // EconomicsTab and DailyLifeTab pass the seam BY REFERENCE to `.map()`, which is a
       // perfectly good installation that a paren-shaped check would have called missing.
-      const uses = lines.filter((l) => !/^import\b/.test(l.trim()) && l.includes(SEAM_MODULE));
+      // RE-KEYED (R2-CODE-B round 3, ruling (a), the chair 2026-11-13): `institutionHouseLabel` is the
+      // seam's own leaf for a printed house (the display label, less the catalogue's count range,
+      // gate or condition), defined in the seam module and reading `institutionDisplayName` first, so
+      // a call to it is an installation of the seam.
+      const uses = lines.filter((l) => !/^import\b/.test(l.trim()) && (l.includes(SEAM_MODULE) || l.includes('institutionHouseLabel')));
       expect(uses.length, `${file} uses the seam`).toBeGreaterThan(0);
     });
   }
@@ -225,6 +229,10 @@ describe('the institution label seam — the habitat is exactly the frozen one',
       expect(row.count, file).toBeGreaterThan(0);
     }
     // 3 -> 4 (2026-10-30, T1-14): the Institutions tab's join key and React key.
+    // 4 -> 5 (2026-11-10, COMPENDIUM-INSTITUTIONS H7): the Compendium's facts module's registry
+    // lookup key (the owner's word on the Institutions page; its row above carries the reason).
+    // 5 -> 4 (2026-11-10, COMPENDIUM-INSTITUTIONS-2 b): that module moved to
+    // src/domain/compendium/institutionFacts.js, outside this census's trees; a shrink.
     expect(Object.keys(ALLOWED_RAW_READS)).toHaveLength(4);
   });
 });
@@ -288,6 +296,10 @@ export function countRawChainInstitutionPrints(source) {
     if (isComment(line)) continue;
     if (!/processingInstitutions/.test(line)) continue;
     if (line.includes(SEAM_MODULE)) continue;
+    // RE-KEYED (R2-CODE-B item 1b, the chair's ruling R1, 2026-11-13): domain/display/chainHouses.js ::
+    // chainHousesOf is the seam's own reader for a chain's houses (it names each through
+    // institutionDisplayName.js :: institutionHouseLabel), so a list read through it is not raw.
+    if (line.includes('chainHousesOf(')) continue;
     if (!/\.(?:join|map)\s*\(/.test(line)) continue;
     n += 1;
   }

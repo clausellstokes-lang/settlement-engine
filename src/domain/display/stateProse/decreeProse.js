@@ -92,7 +92,7 @@ import {
   DECREE_EVENT_POOLS, DECREE_FOLLOWS_FROM_POOL, DECREE_FORM_POOLS, DECREE_HAND_POOLS,
   DECREE_LINE_CAUSES, DECREE_OVERRIDE_POOLS, DECREE_PARTY_DEED_POOLS, DECREE_STANDING_POOLS,
 } from './decreeProsePools.js';
-import { drawVariant, eligibleVariants, fillSlots, speakTierNoun, stableVid } from './stateProseKernel.js';
+import { drawVariant, eligibleVariants, fillSlots, noteDrawnVariant, speakTierNoun, stableVid } from './stateProseKernel.js';
 
 /** @typedef {import('./decreeProsePools.js').DecreeProseVariant} DecreeProseVariant */
 /** @typedef {import('./decreeProsePools.js').DecreeProseBlock} DecreeProseBlock */
@@ -189,6 +189,8 @@ const isPlainObject = (value) => typeof value === 'object' && value !== null && 
  * @typedef {object} DecreeLineOptions
  * @property {string} [seed] the settlement seed; absent means canonical-at-zero
  * @property {string} [audience] the kernel's audience; an unknown one reads as the player's
+ * @property {object|null} [facts] `factsOf` of the advanced settlement (CENSUS-1h unit 7, R-AQ):
+ *   a pool whose variants declare reads it, fail-closed without it
  * @property {string} [cause] a member of `DECREE_LINE_CAUSES`; absent reads as the table's
  * @property {number} [tick] the tick this line is recorded at, which wins over `when.tick`
  * @property {string} [counterpart] the off-stage party's display name
@@ -225,17 +227,22 @@ export function decreeForm(op) {
  * @param {string} part @param {string} blockId @param {string} poolKey
  * @param {string} cause @param {string} seed @param {string|undefined} audience
  * @param {Record<string, unknown>} slots
+ * @param {object|null} [facts] `factsOf(settlement)`, the one reader (R-AQ)
  * @returns {DecreeLinePart|null}
  */
-function drawPart(pool, part, blockId, poolKey, cause, seed, audience, slots) {
+function drawPart(pool, part, blockId, poolKey, cause, seed, audience, slots, facts = null) {
   if (!Array.isArray(pool)) return null;
   // The cause is this corpus's own arm, filtered here rather than in the kernel for the
   // reason `causalDossierProse` filters its arms here: it is a family-local channel, and
   // the kernel's `marks` bag is already carrying three semantics that a fourth would hide.
   const spoken = pool.filter((variant) => variant.causes.includes(cause));
-  const eligible = eligibleVariants(spoken, { slots, audience });
+  // CENSUS-1h unit 7 (R-AQ, R-Z): the family carries vids (the argmax draw), so its kernel marks
+  // ARE its declaration channel — a refused vid is removed and only the births it would have won
+  // move. What it lacked was the record: `facts` is `factsOf` of the advanced settlement.
+  const eligible = eligibleVariants(spoken, { slots, audience, facts });
   const variant = drawVariant(eligible, blockId, poolKey, seed);
   if (!variant) return null;
+  noteDrawnVariant(variant, { blockId, poolKey, surface: 'decree' }); // CENSUS-1c: the kernel family notes every draw
   const text = fillSlots(variant.text, slots);
   if (text === null) return null;
   return Object.freeze({
@@ -341,6 +348,7 @@ export function decreeLineParts(entry, world, options = {}) {
   // not read as the same sentence copied twice. Seedless stays canonical-at-zero.
   const seed = isText(options.seed) ? `${options.seed}::${id}` : '';
   const audience = isText(options.audience) ? options.audience : undefined;
+  const facts = options.facts && typeof options.facts === 'object' ? options.facts : null;
 
   const name = isPlainObject(world) ? world.name : undefined;
   /** @type {Record<string, unknown>} */
@@ -350,15 +358,15 @@ export function decreeLineParts(entry, world, options = {}) {
 
   const status = isText(entry.status) ? entry.status : '';
   const addedBy = isText(entry.addedBy) ? entry.addedBy : '';
-  const hand = drawPart(DECREE_HAND_POOLS[addedBy], PART_HAND, BLOCK_HAND, addedBy, cause, seed, audience, slots);
-  const standing = drawPart(DECREE_STANDING_POOLS[status], PART_STANDING, BLOCK_STANDING, status, cause, seed, audience, slots);
+  const hand = drawPart(DECREE_HAND_POOLS[addedBy], PART_HAND, BLOCK_HAND, addedBy, cause, seed, audience, slots, facts);
+  const standing = drawPart(DECREE_STANDING_POOLS[status], PART_STANDING, BLOCK_STANDING, status, cause, seed, audience, slots, facts);
   // BOTH OR NEITHER. Who moved and how it stands are the two facts a decree line exists to
   // carry; a line missing one of them would read as a complete sentence about a decree
   // nobody can place, which is the failure silence is preferable to.
   if (!hand || !standing) return Object.freeze([]);
 
   const formKey = decreeForm(op);
-  const form = drawPart(DECREE_FORM_POOLS[formKey], PART_FORM, BLOCK_FORM, formKey, cause, seed, audience, slots);
+  const form = drawPart(DECREE_FORM_POOLS[formKey], PART_FORM, BLOCK_FORM, formKey, cause, seed, audience, slots, facts);
   /** @type {DecreeLinePart[]} */
   const parts = [hand];
   if (form) parts.push(form);
@@ -372,7 +380,7 @@ export function decreeLineParts(entry, world, options = {}) {
   }
 
   for (const kind of overriddenKinds(entry.overrode, options.overrodeGuards)) {
-    const clause = drawPart(DECREE_OVERRIDE_POOLS[kind], PART_OVERRIDE, BLOCK_OVERRIDE, kind, cause, seed, audience, slots);
+    const clause = drawPart(DECREE_OVERRIDE_POOLS[kind], PART_OVERRIDE, BLOCK_OVERRIDE, kind, cause, seed, audience, slots, facts);
     if (clause) parts.push(clause);
   }
 
@@ -380,7 +388,7 @@ export function decreeLineParts(entry, world, options = {}) {
   if (refs.length > 0) {
     const clause = drawPart(
       DECREE_FOLLOWS_FROM_POOL, PART_FOLLOWS, BLOCK_FOLLOWS, SOLE, cause, seed, audience,
-      { ...slots, prerequisite: refs.join(', ') },
+      { ...slots, prerequisite: refs.join(', ') }, facts,
     );
     if (clause) parts.push(clause);
   }

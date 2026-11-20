@@ -114,8 +114,9 @@ describe('undo reverts the NPC / corruption family (snapshot subtree)', () => {
     const { after, undone } = applyThenUndo(before, event);
 
     // The event turned the NPC corrupt (durable, no provenance trail)…
-    expect(after.npcs[0].corrupt).toBe(true);
-    expect(after.npcs[0].corruptTies?.criminalInstitution).toBe('The Black Hand');
+    // ALLEGIANCE-CAR1 (2026-11-08): IMPOSE_CORRUPTION writes the card's hidden allegiance, its house the org
+    expect(after.npcs[0].allegiance?.house).toBe('The Black Hand');
+    expect(after.npcs[0].allegiance?.covert).toBe(true);
     // …and undo restored the exact pre-event roster (corrupt flags gone).
     expect(undone.npcs).toEqual(before.npcs);
   });
@@ -180,8 +181,8 @@ describe('undo reverts the NPC / corruption family (snapshot subtree)', () => {
       institutions: [{ id: 'institution.blackhand', name: 'The Black Hand', category: 'criminal', status: 'active' }],
       npcs: [{
         id: 'npc.sly', name: 'Sly', status: 'active',
-        corrupt: true, corruptionVector: 'greed',
-        corruptTies: { criminalInstitution: 'The Black Hand' },
+        // ALLEGIANCE-CAR1 (2026-11-08): the retired mark is the card's hidden allegiance
+        allegiance: { power: null, house: 'The Black Hand', vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true },
       }],
       powerStructure: { factions: [] },
       activeConditions: [],
@@ -192,7 +193,8 @@ describe('undo reverts the NPC / corruption family (snapshot subtree)', () => {
     // The institution closed and severed the NPC's corruption tie (the exact
     // defect the audit reproduced: undo used to leave the NPC permanently clean).
     expect(after.institutions[0].removedByEventId).toBe('e-remove');
-    expect(after.npcs[0].corrupt).toBe(false);
+    expect(after.npcs[0].allegiance).toBeUndefined(); // ALLEGIANCE-CAR1: severed with its house
+    expect(after.npcs[0].ousted).toBe(true);
     // …and undo restored both subtrees exactly — the NPC is corrupt again.
     expect(undone.institutions).toEqual(before.institutions);
     expect(undone.npcs).toEqual(before.npcs);

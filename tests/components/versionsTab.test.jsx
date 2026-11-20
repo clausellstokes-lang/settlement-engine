@@ -10,6 +10,11 @@
  *     timeline.
  *   • Paid tier + flag on → the timeline renders, not the locked pitch.
  *   • Flag off → the dev "flip the flag" notice.
+ *
+ * RE-KEYED BY CAUSE (lane TIER-PARITY-FIX V3, 2026-11-09, the owner's tier law; the chair's
+ * ruling V3): version history is at parity, revert included — the locked pitch is struck and
+ * the free owner gets the timeline and every lever. The two "free → locked pitch" arms are
+ * re-keyed to the cause: the free owner reads the same timeline, snapshot, compare and revert.
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
@@ -56,12 +61,11 @@ describe('VersionsTab — X-7 locked-destination fold-in', () => {
   });
   afterEach(() => cleanup());
 
-  it('renders the LockedDestination pitch (not the timeline) for free users', () => {
+  it('renders the timeline (never a locked pitch) for a free owner — version history is at parity', () => {
     render(<VersionsTab save={{ name: 'Hollowmere', savedAt: Date.now() }} />);
-    expect(screen.getByText('Cartographer · Version history')).toBeTruthy();
-    expect(screen.getByText('Every change, on a timeline you can roll back.')).toBeTruthy();
-    expect(screen.getByRole('button', { name: 'See Cartographer' })).toBeTruthy();
-    expect(screen.queryByText('Timeline')).toBeNull();
+    expect(screen.getByText('Timeline')).toBeTruthy();
+    expect(screen.queryByText('Cartographer · Version history')).toBeNull(); // anchored: the timeline heading above
+    expect(screen.queryByRole('button', { name: 'See Cartographer' })).toBeNull();
   });
 
   it('renders the timeline (not the pitch) for paid users', () => {
@@ -210,12 +214,13 @@ describe('VersionsTab — manual snapshot on demand (queue #18)', () => {
     expect(screen.getByText(/Save this settlement to start taking snapshots/i)).toBeTruthy();
   });
 
-  it('free tier gets neither lever, only the locked pitch', () => {
-    useStore.__set({ auth: { tier: 'wanderer' }, setPurchaseModalOpen: vi.fn() });
+  it('the free owner gets every lever: snapshot, compare and revert (V3, at parity)', () => {
+    useStore.__set({ ...paidStore(), auth: { tier: 'free' } });
     render(<VersionsTab save={savedWith([SNAP_EARLY, SNAP_LATE])} />);
-    expect(screen.getByText('Cartographer · Version history')).toBeTruthy();
-    expect(screen.queryByRole('button', { name: 'Take a snapshot' })).toBeNull();
-    expect(screen.queryByRole('button', { name: 'Compare' })).toBeNull();
+    expect(screen.queryByText('Cartographer · Version history')).toBeNull();
+    expect(screen.getByRole('button', { name: 'Take a snapshot' })).toBeTruthy();
+    expect(screen.getAllByRole('button', { name: 'Compare' })).toHaveLength(2);
+    expect(screen.getAllByRole('button', { name: /Revert to this snapshot/i })).toHaveLength(2);
   });
 });
 

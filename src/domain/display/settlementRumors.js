@@ -42,6 +42,7 @@ import { routeAwareHopDelayTicks } from '../worldPulse/distancePricedNews.js';
 import { embattlementLevel } from '../spatial/embattlement.js';
 import { FALLBACK_CANONICALS, FALLBACK_PHRASE_POOLS } from './rumorFallbackPhrasePools.js';
 import { WHAT_PHRASE_POOLS } from './rumorPhrasePools.js';
+import { drawDeclared, lineText } from '../facts/drawDeclared.js';
 
 /** @typedef {import('../spatial/rumorNetwork.js').RumorArrivalRecord} RumorArrivalRecord */
 
@@ -311,10 +312,10 @@ export const WHAT_PHRASES = Object.freeze({
   // power / faction / coup
   coup_succeeded: 'a seizure of power',
   coup_suppressed: 'an uprising put down',
-  faction_exhaustion: 'a faction spent and failing',
+  faction_exhaustion: 'a power spent and failing',
   faction_government_challenge: 'a challenge to those in power',
   faction_rival_power_contest: 'a contest between rival powers',
-  faction_capture: 'a faction seizing control',
+  faction_capture: 'a power seizing control',
   // TE-DENSITY-1 (§810.4 R18/R19): a house whose last named figure left the roster, and
   // the ONE house that may not end that way — the ruling seat, which stands empty instead.
   faction_dissolved: 'a house of power come to an end',
@@ -403,7 +404,7 @@ export const WHAT_PHRASES = Object.freeze({
   urban_fabric: 'the changing face of a settlement',
   spatial_consequence: 'where in a settlement the blow fell',
   // THE LADDER — a shift in a faction's rank order (owner commission, engine lift #3)
-  npc_ladder: 'a change in who holds rank within a faction',
+  npc_ladder: 'a change in who holds rank within a power',
   // THE CONTESTED GOALS CLASS — two named NPCs reach for the same prize (Deep Couplings D-4)
   npc_contest: 'a rivalry over the same ambition',
   npc_support: 'a cause bound to a patron\'s',
@@ -631,7 +632,15 @@ export function whatPhrase(value, seed = '') {
 function widenedPhrase(key, canonical, variants, seed) {
   if (!seed || !variants || variants.length === 0) return canonical;
   const pool = [canonical, ...variants];
-  return pool[avalanche32(fnv1a32(`${seed}::what::${key}`)) % pool.length];
+  // CENSUS-1d unit 2 (Appendix B rows 97–99, kind H): the avalanche modulus over the FULL pool,
+  // resolved through `drawDeclared` and noted in the ledger. A rumour is world news with no
+  // settlement record behind it (the world-pulse wave, ruling 7), so no facts are handed: a
+  // declared line would be refused fail-closed, and none declares.
+  const drawn = drawDeclared(pool, {
+    draw: (p) => p[avalanche32(fnv1a32(`${seed}::what::${key}`)) % p.length],
+    key: `${seed}::what::${key}`, poolId: `WHAT_PHRASE_POOLS.${key}`, surface: 'rumors', drawKind: 'H',
+  });
+  return drawn.line == null ? canonical : String(lineText(drawn.line));
 }
 
 // ── The in-world vocabulary (fiction-not-internals) ─────────────────────────
@@ -745,7 +754,12 @@ export const HEADLINE_FRAMES = Object.freeze({
  */
 function frameHeadline(band, seed, { what, where }) {
   const pool = HEADLINE_FRAMES[band];
-  const frame = seed ? pool[fnv1a32(`${seed}::${band}`) % pool.length] : pool[0];
+  // CENSUS-1d unit 2 (Appendix B row 100, kind H): the same modulus (index 0 seedless) over the
+  // FULL pool, resolved through `drawDeclared`; no facts (world news), none declares.
+  const frame = String(lineText(drawDeclared(pool, {
+    draw: (p) => (seed ? p[fnv1a32(`${seed}::${band}`) % p.length] : p[0]),
+    key: `${seed}::${band}`, poolId: `HEADLINE_FRAMES.${band}`, surface: 'rumors', drawKind: 'H',
+  }).line) ?? pool[0]);
   return frame
     .replace('{What}', capitalize(what))
     .replace('{what}', what)

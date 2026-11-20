@@ -53,9 +53,20 @@ describe('HeraldForecast — the weather page', () => {
   });
 
   test('the outcome it builds toward is the recorded label, byte-verbatim', () => {
-    renderForecast(emerging);
+    // GREEN-TIP (2026-11-10, re-keyed by cause a9bf31e9b, the regional news card, A1 rows): a recorded driver is
+    // printed in the fiction register through newsBody.js :: newsReasonPhrases, and a BARE ENGINE TOKEN with no
+    // reader phrase prints NO pill (A1·13: a de-underscored slug is the engine's word, not the world's). The
+    // fixture's `failed_harvest` is such a token, so the driver this arm reads is one the vocabulary phrases: the
+    // famine's own `food_pressure`. The pin is unchanged: the recorded driver is shown, in the reader's words.
+    renderForecast({ ...emerging, reasons: ['food_pressure'] });
     expect(screen.getByText('Famine takes hold')).toBeTruthy();
-    expect(screen.getByText('failed harvest')).toBeTruthy(); // recorded driver, humanized
+    expect(screen.getByText('Drivers')).toBeTruthy();
+    expect(screen.getByText('food stores under strain')).toBeTruthy(); // recorded driver, in the reader's words
+    cleanup();
+    // and the bare token prints no pill: no Drivers slot, no humanized slug
+    const { container } = renderForecast(emerging);
+    expect(screen.getByText('Famine takes hold')).toBeTruthy(); // anchored: the card rendered
+    expect(container.textContent).not.toMatch(/Drivers|failed harvest/i);
   });
 
   test('is visually tagged as a forecast (its own testid) and holds no em-dash/exclamation', () => {

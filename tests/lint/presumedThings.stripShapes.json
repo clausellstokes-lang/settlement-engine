@@ -1,0 +1,103 @@
+{
+ "_doc": "THE STRIP BAN'S LIMIT, SAID AND TRACKED (REVIEW-W2B's third read, finding 2; the chair's ruling: before the release the ban is NOT rebuilt as a data-flow read). The reader's fifteen unwrap shapes (docs/chair/2026-11-13/probes/REVIEW-W2B-3/stripshapes.mjs on lane/review-w2b-2026-11-13 at cc0dd4ed2), copied verbatim, each with TODAY'S TRUTH through tests/lint/presumedThings.shared.mjs :: stripSites: 'caught' (the strip site and its receiver) or 'known-gap' (no site: the ban does not see this shape). The ban catches the shapes it names and no others. A seat that widens the ban moves a named row here from 'known-gap' to 'caught' in the same commit; the walker's test (presumedThings.walker.test.js, 'the strip ban's known gaps') asserts every row exactly. Measured at c3913f999: 3 caught, 12 known gaps (agrees with the reader).",
+ "source": "lane/review-w2b-2026-11-13 @ cc0dd4ed2 :: docs/chair/2026-11-13/probes/REVIEW-W2B-3/stripshapes.mjs",
+ "file": "src/domain/plant.js",
+ "rows": [
+  {
+   "shape": "destructure in a block body",
+   "source": "export const a = POOL.map((l) => { const { text } = l; return text; });",
+   "today": "known-gap",
+   "receivers": []
+  },
+  {
+   "shape": "destructure, renamed, in a block body",
+   "source": "export const a = POOL.map(function (l) { const { text: said } = l; return said; });",
+   "today": "known-gap",
+   "receivers": []
+  },
+  {
+   "shape": "Reflect.get",
+   "source": "export const a = POOL.map((l) => Reflect.get(l, 'text'));",
+   "today": "known-gap",
+   "receivers": []
+  },
+  {
+   "shape": "the third callback argument",
+   "source": "export const a = POOL.map((l, i, arr) => arr[i].text);",
+   "today": "known-gap",
+   "receivers": []
+  },
+  {
+   "shape": "for-in over the pool",
+   "source": "const out = []; for (const i in POOL) out.push(POOL[i].text); export default out;",
+   "today": "known-gap",
+   "receivers": []
+  },
+  {
+   "shape": "while loop, index",
+   "source": "const out = []; let i = 0; while (i < POOL.length) { out.push(POOL[i].text); i += 1; } export default out;",
+   "today": "known-gap",
+   "receivers": []
+  },
+  {
+   "shape": "concat in a for-of",
+   "source": "let out = []; for (const l of POOL) out = out.concat(l.text); export default out;",
+   "today": "known-gap",
+   "receivers": []
+  },
+  {
+   "shape": "index assignment in a for-of",
+   "source": "const out = []; for (const l of POOL) out[out.length] = l.text; export default out;",
+   "today": "known-gap",
+   "receivers": []
+  },
+  {
+   "shape": "destructure off a pick",
+   "source": "const { text } = pick(POOL); export default text;",
+   "today": "known-gap",
+   "receivers": []
+  },
+  {
+   "shape": "array destructure, then .text",
+   "source": "const [first] = POOL; export default first.text;",
+   "today": "known-gap",
+   "receivers": []
+  },
+  {
+   "shape": "a property helper (pluck)",
+   "source": "const prop = (k) => (o) => o[k]; export const a = POOL.map(prop('text'));",
+   "today": "known-gap",
+   "receivers": []
+  },
+  {
+   "shape": "Object.assign target",
+   "source": "const out = []; POOL.forEach((l) => Object.assign(out, { [out.length]: l.text })); export default out;",
+   "today": "known-gap",
+   "receivers": []
+  },
+  {
+   "shape": "spread into a Set",
+   "source": "export const a = new Set(POOL.map((l) => l)).forEach ? [...POOL].map((l) => `${l.text}`) : [];",
+   "today": "caught",
+   "receivers": [
+    "[...POOL]"
+   ]
+  },
+  {
+   "shape": "reduce into a string",
+   "source": "export const a = POOL.reduce((acc, l) => acc + ' ' + l.text, '');",
+   "today": "caught",
+   "receivers": [
+    "POOL"
+   ]
+  },
+  {
+   "shape": "join after map of a getter",
+   "source": "const get = function (l) { return l.text; }; export const a = POOL.map(get).join(' ');",
+   "today": "caught",
+   "receivers": [
+    "POOL"
+   ]
+  }
+ ]
+}

@@ -21,6 +21,8 @@ import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { pricesMoved } from '../../src/components/new/tabs/MarketPricesSection.jsx';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { drawnMembers } from '../helpers/drawnProse.js';
+import { crisisDimensionsOf } from '../../src/domain/crisis/crisisFacts.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { useStore } from '../../src/store/index.js';
 
@@ -180,7 +182,15 @@ const ECO_SLOTS = Object.freeze({ settlement: 'Forge Town', access: 'road' });
 const { HEADER_SENTENCE, FOOD_SENTENCE } = drawnMembers({
   HEADER_SENTENCE: { blockId: 'DS-ECO-1', poolKey: 'COMBINATION C3: the middle rungs' },
   FOOD_SENTENCE: { blockId: 'DS-ECO-9', poolKey: 'DEFICIT' },
-}, { leaf: 'economy', seed: SPEAKING._seed, slots: ECO_SLOTS });
+  // F12 CRISIS-BLIND (2026-11-04): DS-ECO-1 partitions by the crisis dimensions, which the desk
+  // answers at its entry from the stress record; this town carries none, so the spec answers the same.
+  // CENSUS-3c unit 4 (e3295d168): DS-ECO-1's pools now declare fact atoms (and C3 is crisis-scoped),
+  // which the kernel reads against `facts` fail-closed — so the spec hands in `factsOf(SPEAKING)`,
+  // exactly what the desk hands in at its entry (`economyStateProse.js` → `factsAnswered`).
+}, {
+  leaf: 'economy', seed: SPEAKING._seed, slots: ECO_SLOTS,
+  dimensions: crisisDimensionsOf(SPEAKING), facts: factsOf(SPEAKING),
+});
 
 describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier', () => {
   test('a PUBLIC dossier draws ZERO state-prose sentences, and the SAME town drawn non-public draws BOTH', () => {
@@ -201,18 +211,23 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     expectPresentThenAbsent(privText, pubText, FOOD_SENTENCE, 'public dossier gate: the DS-ECO-9 food-security sentence');
   });
 
-  test('the gate removes ONLY the corpus sentences — the header prose and every datum tile survive', () => {
+  test('the gate removes ONLY the corpus sentences — every datum tile survives, and the legacy lead has LEFT', () => {
     useStore.setState({ campaigns: [] });
     const { container } = render(e(EconomicsTab, { settlement: SPEAKING, saveId: null, publicDossier: true }));
-    // The generator's own header prose is a DATUM, not corpus state prose: it stays.
-    expect(container.textContent).toContain('The market square keeps its hours.');
+    // RE-KEYED BY CAUSE (SW-B7b, STYLE-RULINGS-2 B10(a)): the generator's `situationDesc` was the
+    // public lead only because the desk was silent there. The shared page now prints the owner's
+    // shipped DS-ECO-1 draw, and an UNSTAMPED record (this one) prints silence, never the legacy
+    // line (no owner view reached it: 0 of 300 towns). The tiles below anchor the render.
+    expectAbsentWithAnchor(container.textContent, 'The market square keeps its hours.', 'lbs/day', 'the legacy situationDesc lead');
     // The glance tiles and their sub-lines are untouched.
     expect(container.textContent).toContain('Comfortable');
     expect(container.textContent).toContain('a market town');
     expect(container.textContent).toContain('Food');
     expect(container.textContent).toContain('lbs/day');
     // And the tab's OWN arithmetic readout below the balance bar is untouched.
-    expect(container.textContent).toContain('Production deficit of');
+    // re-keyed by identity at SW-B6 (2026-11-09, STYLE-RULINGS-2 B6): the narrative is in words, its residual figure
+    // moved to the stat line's "Short:" label (ODQ §934.15/§934.20's sum still closes there).
+    expect(container.textContent).toMatch(/Short: [\d,]+ lbs\/day/);
   });
 
   /**
@@ -247,7 +262,8 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     // tile was cut and this section is the food fact's one home). It used to be
     // `defaultOpen={!!fb.deficit}`, which hid this very narrative from every fed town
     // until the reader opened it; the sentence is now on first paint with no click.
-    expect(container.textContent).toContain('Daily needs are met, with no surplus');
+    // re-keyed with the line's rewrite (W1 ECO second seat, the owner's style law of 2026-11-07); the claim kept: met, nothing spare.
+    expect(container.textContent).toContain("What is grown here and brought in covers each day's food, with nothing to spare against a bad year.");
     // The sentence above is read out of this very render, so the exclusion below
     // measures the wording rather than an empty tree. // anchored: positive toContain on this same textContent
     expect(container.textContent).not.toContain('Agricultural surplus of');
@@ -262,14 +278,17 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     const fb = { dailyProduction: 600, dailyNeed: 1000, deficit: 120, deficitPercent: 12, surplus: 0, importCoverage: 200, magicFoodOffset: 80, rawDeficit: 400, agricultureModifier: 1 };
     const { container } = render(e(EconomicsTab, { settlement: withFood(fb), saveId: null, publicDossier: true }));
     const text = container.textContent;
-    expect(text).toContain(`Production covers ${Math.round((fb.dailyProduction / fb.dailyNeed) * 100)}% of food needs`);
-    expect(text).toContain(`Trade imports cover an estimated ${Math.round((fb.importCoverage / fb.rawDeficit) * 100)}% of the gap`);
-    expect(text).toContain(`Residual shortfall is ${fb.deficitPercent}%`);
-    // ODQ §934.20 — the clause now carries the FIGURE, not just the fact. bc32a5a97 could
-    // only say "closes the remainder": a reader could not add up production, imports and the
-    // residual and land on the printed number without it. The fixture names no channel, so
-    // the neutral word stands rather than a guessed adjective.
-    expect(text).toContain(`A further ${fb.magicFoodOffset} lbs/day comes by magical provision.`);
+    // re-keyed by identity at SW-B6 (2026-11-09, STYLE-RULINGS-2 B6): the sentence says it in WORDS (60% grown,
+    // half the gap by trade, 12% short), and every FIGURE sits in the stat line, the label row above it.
+    expect(text).toContain('Forge Town grows about three parts in five of what it needs, and carts bring in about half the rest.'); // re-keyed by identity at W2-C-LEAVES-5 (item 3's bands: 600 of 1,000 is about three parts in five, not two in three)
+    expect(text).toContain('Some households still go short, and a bad season would leave more of them hungry.');
+    // ODQ §934.20 — the magic clause still speaks; its figure is the stat line's, beside the residual, so a
+    // reader adds production, imports, provision and the shortfall in one row and lands on the need. The
+    // fixture names no channel, so the neutral word stands rather than a guessed adjective.
+    expect(text).toContain('Magical provision makes up less than a fifth of what it needs.'); // re-keyed by identity at W2-C-LEAVES-5 (item 3: the provision states its own share, 80 of 1,000)
+    expect(text).toContain(`+ ${fb.magicFoodOffset} by magical provision`);
+    expect(text).toContain(`Short: ${fb.deficit} lbs/day`);
+    expect(text).not.toContain('of the food people need'); // anchored: the words sentence is pinned PRESENT above
     // The arithmetic the three clauses plus the magic clause now describe.
     expect((fb.dailyNeed - fb.dailyProduction - fb.importCoverage - fb.magicFoodOffset) / fb.dailyNeed * 100)
       .toBe(fb.deficitPercent);
@@ -282,18 +301,20 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
       settlement: withFood({ dailyProduction: 600, dailyNeed: 1000, deficit: 200, deficitPercent: 20, surplus: 0, importCoverage: 200, rawDeficit: 400, agricultureModifier: 1 }),
       saveId: null, publicDossier: true,
     })).container.textContent;
-    expect(mundane).toContain('Residual shortfall is 20%');
+    expect(mundane).toContain('Many households go short, and a bad season would bring real hunger.'); // re-keyed by identity at SW-B6 (2026-11-09): the 20% in words; the figure is the stat line's
+    expect(mundane).toContain('Short: 200 lbs/day');
     // anchored: the deficit sentence is pinned PRESENT on this same `mundane` payload one line above
     expect(mundane).not.toContain('comes by');
     cleanup();
-    // A severed route takes the OTHER branch — "Production deficit of X%" — where the
+    // A severed route takes the OTHER branch — "No trade brings food in here, and X% …" — where the
     // same silence understated the gap: 40% of need is missing and magic closes half.
     const severed = render(e(EconomicsTab, {
       settlement: withFood({ dailyProduction: 600, dailyNeed: 1000, deficit: 200, deficitPercent: 20, surplus: 0, rawDeficit: 400, magicFoodOffset: 200, agricultureModifier: 1 }),
       saveId: null, publicDossier: true,
     })).container.textContent;
-    expect(severed).toContain('Production deficit of 20%');
-    expect(severed).toContain('A further 200 lbs/day comes by magical provision.');
+    expect(severed).toContain('No food comes into Forge Town by trade. Magical provision makes up about a fifth of what it needs. Many households go short'); // re-keyed by identity at SW-B6 (2026-11-09): words in the sentence, figures in the stat line; again at W2-C-LEAVES-5 (item 3: the provision states its own share, 200 of 1,000)
+    expect(severed).toContain('+ 200 by magical provision');
+    expect(severed).toContain('Short: 200 lbs/day');
   });
 
   /**
@@ -319,7 +340,7 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     expect(production.style.width).toBe('60%'); // 600 / 1000 — the ratio, spelled out
     // The readout's own percentage is the residual share of NEED, and it is the
     // one the dossier model publishes rather than a second derivation.
-    expect(container.textContent).toContain(`Production deficit of ${Math.round((fb.deficit / fb.dailyNeed) * 100)}%`);
+    expect(container.textContent).toContain(`Short: ${fb.deficit} lbs/day`); // re-keyed by identity at SW-B6 (2026-11-09): the residual is the stat line's label now, the sentence says it in words
   });
 
   /**
@@ -368,13 +389,12 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
     // The label under the bar names the channel in the "+ 169 imported" idiom...
     expect(text).toContain(`+ ${fb.importCoverage} imported`);
     expect(text).toContain(`+ ${fb.magicFoodOffset} by divine provision`);
-    // ...and the sentence states every figure the reader needs to close the arithmetic:
-    // 76% of 1,014 is the production, 70% of the 241 gap is the import, 31 lb is the
-    // provision, and 241 − 169 − 31 = 41 lb is the 4% residual it prints.
-    expect(text).toContain('Production covers 76% of food needs');
-    expect(text).toContain(`Trade imports cover an estimated ${Math.round((fb.importCoverage / fb.rawDeficit) * 100)}% of the gap`);
-    expect(text).toContain(`Residual shortfall is ${fb.deficitPercent}%`);
-    expect(text).toContain(`A further ${fb.magicFoodOffset} lbs/day comes by divine provision.`);
+    // ...and the label row states every figure the reader needs to close the arithmetic:
+    // 773 grown, + 169 imported, + 31 by provision, need 1,014, short 41 — 241 − 169 − 31 = 41.
+    // re-keyed by identity at SW-B6 (2026-11-09, STYLE-RULINGS-2 B6): the sentence says the same in words.
+    expect(text).toContain(`Short: ${fb.deficit} lbs/day`);
+    expect(text).toContain('Forge Town grows about three parts in four of what it needs, and carts bring in about three parts in four of the rest.'); // re-keyed by identity at W2-C-LEAVES-5 (item 3's bands: 169 of the 241 gap is not "most")
+    expect(text).toContain('Divine provision makes up less than a fifth of what it needs. A few households still go short'); // re-keyed by identity at W2-C-LEAVES-5 (item 3: 31 of 1,014)
     expect(fb.rawDeficit - fb.importCoverage - fb.magicFoodOffset).toBe(fb.deficit);
   });
 
@@ -528,12 +548,16 @@ const GROUND = {
     strategicValue: 'Medium - agricultural heartland, but exposed to raids',
     economicStrengths: ['Grain production', 'Livestock'],
     exploitation: {
+      // RE-KEYED BY IDENTITY (W2-C-LEAVES-3, P1-b and P1-c): the unexploited card was the timber, beside an export of
+      // 'Timber': a resource whose own raw good the town sells is worked (P1-b), so the cards print it Partial and the
+      // desk's "nothing in the town takes it out of the ground" no longer speaks of it. The lens's case is a resource the
+      // town does not sell: the iron ore, which no house here smelts.
       unexploited: [{
-        rawResource: 'timber',
+        rawResource: 'iron ore',
         exportValue: 'very high',
-        processingInstitutions: ['Sawmill'],
-        intermediateGoods: ['sawn planks'],
-        finalProducts: ['furniture'],
+        processingInstitutions: ['Smelter'],
+        intermediateGoods: ['pig iron'],
+        finalProducts: ['tools'],
       }],
       partiallyExploited: [],
       fullyExploited: [],
@@ -566,12 +590,19 @@ const GROUND_LINES = Object.freeze(drawnMembers({
   workings: {
     blockId: 'DS-ECO-11',
     poolKey: 'EXPLOITATION: unexploited, exportValue: high',
-    slots: { ...GROUND_SLOTS, resource: 'timber', institution: 'Sawmill' },
+    slots: { ...GROUND_SLOTS, resource: 'iron ore', institution: 'Smelter' },
   },
   catalog: { blockId: 'DS-SUP-3', poolKey: 'THE HEALING GAP' },
   posture: { blockId: 'DS-ECO-10', poolKey: 'POSTURE: established' },
   standing: { blockId: 'DS-ECO-8', poolKey: 'COMFORTABLE' },
-}, { leaf: 'economy', seed: '', slots: GROUND_SLOTS }));
+  // CENSUS-3c unit 4 (e3295d168): the economy pools now declare fact atoms and crisis marks (DS-ECO-10's
+  // `no hunger`), which the kernel reads fail-closed — so the spec answers both exactly as the desk
+  // does at its entry (`economyStateProse.js` → `factsAnswered(crisisAnswered(...))`): the crisis
+  // dimensions from the stress record (this town carries none) and `factsOf(GROUND)`.
+}, {
+  leaf: 'economy', seed: '', slots: GROUND_SLOTS,
+  dimensions: crisisDimensionsOf(GROUND), facts: factsOf(GROUND),
+}));
 
 /**
  * ⭐ THE ANCHOR AS THE PAGE PRINTS IT (the block weave, 2026-09-18). Every `DeskLines` position
@@ -647,13 +678,15 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
       expect(privText, `the cut ${lens} lens is on the page`).not.toContain(line); // anchored: the worth/workings lenses were asserted present on this render above
       expect(privText, `the cut ${lens} lens is on the page, stood down`).not.toContain(line.slice(GROUND.name.length)); // anchored: same render as above
     }
-    // The DATUM is untouched by the gate — the terrain word, the strengths chips and the
-    // generator's own strategic-value line are the page's and are not corpus prose.
+    // The DATUM is untouched by the gate — the terrain word and the strengths chips are the
+    // page's and are not corpus prose.
     expect(pubText).toContain('Plains');
     expect(pubText).toContain('Grain production');
-    expect(pubText).toContain('agricultural heartland');
-    // ONE strategic-value sentence: where DS-ECO-11 speaks it, the generator's line yields.
-    expect(privText).not.toContain('agricultural heartland'); // anchored: toContain on pubText above, the same fixture
+    // ONE strategic-value sentence, DS-ECO-11's: the generator's rated line LEFT (SW-B7b; no owner
+    // view reached it, 0 of 300 towns), so it is on neither page; the record still carries it.
+    expect(GROUND.resourceAnalysis.strategicValue).toContain('agricultural heartland');
+    expectAbsentWithAnchor(pubText, 'agricultural heartland', 'Plains', 'the rated line, public');
+    expectAbsentWithAnchor(privText, 'agricultural heartland', GROUND_LINES.worth.slice(-24), 'the rated line, private');
   });
 
   test('services.catalogStanding: the gap sentence renders, and a public dossier renders none', () => {
@@ -682,7 +715,10 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     cleanup();
     const pub = render(e(EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: true }));
     const pubText = pub.container.textContent;
-    expectPresentThenAbsent(privText, pubText, GROUND_LINES.posture, 'economics.exportPosture');
+    // RE-KEYED BY IDENTITY (W2-WRITE-11, the lane's red of HANDBACK-9): the corpus writes "the town" of any size and the
+    // desk speaks it in the record's own noun; GROUND is a village, so the page prints "beyond the village" (right for the
+    // size). The anchor is spoken in the record's noun as onPage() speaks every other anchor here; the line is unchanged.
+    expectPresentThenAbsent(privText, pubText, speakTierNoun(GROUND_LINES.posture, tierNounFor(GROUND.tier)), 'economics.exportPosture');
     // The Trade Profile section itself is the surface and survives the gate.
     expect(pubText).toContain('Timber');
     expect(pubText).toContain('Exports');
@@ -925,7 +961,10 @@ describe('DeskLines — the name props reach the real call sites, non-vacuously'
     const daily = readFileSync(join(HERE, '../../src/components/new/tabs/DailyLifeTab.jsx'), 'utf8');
     const services = readFileSync(join(HERE, '../../src/components/new/tabs/ServicesTab.jsx'), 'utf8');
     expect(econ).toContain('mount="economics.exportPosture" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.exportPosture]}');
-    expect(daily).toContain('mount="daily_life.standingOfLiving" settlementName={r?.name} tier={r?.tier} rungs={[deskProse.prosperityRung]}');
+    // W1 ECO (2026-11-07): the standing-of-living site spells its mount as a const too (a second
+    // single-rung draw, food's grip on prosperity, shares the position), so the arm reads the rung lists.
+    expect(daily).toContain('mount={STANDING_MOUNT} settlementName={r?.name} tier={r?.tier} rungs={[deskProse.prosperityRung]}');
+    expect(daily).toContain('rungs={[deskProse.foodOnProsperity]}');
     // ⚠ THE SERVICES SITE SPELLS ITS MOUNT AS A CONST, and the reason is the mount registry's
     // own reachability arm: that id may appear ONCE as a whole string literal under
     // src/components, and this tab now draws the position at two places. So the assertion is
@@ -971,11 +1010,17 @@ describe('DAILY LIFE — the four anchors, one offer line, no marketing', () => 
     useStore.setState({ campaigns: [] });
     const { container, getByTestId } = render(e(DailyLifeTab, { settlement: STRESSED(), publicDossier: false }));
     const text = container.textContent;
-    const offer = getByTestId('daily-life-offer').textContent;
+    // #37 (W4 PEOPLE 2026-11-07): where the button stands the offer line is its CAPTION (the
+    // `data-caption` the button carries, and the lead of its title), never a body paragraph;
+    // where no button stands it is the paragraph that says how to get one.
+    const node = getByTestId('daily-life-offer');
+    const offer = node.tagName === 'P' ? node.textContent : node.getAttribute('data-caption');
     expect(offer).toMatch(/^Ordinary life here in prose|^Save this settlement/);
+    if (node.tagName !== 'P') expectAbsentWithAnchor(text, offer, node.textContent, 'the caption as body text (#37)');
     expect(container.querySelectorAll('[data-testid="daily-life-offer"]')).toHaveLength(1);
+    // The anchor is what the reader meets in the body: the paragraph, or the button's own label.
     for (const gone of ['Opus-grade', 'evocative', 'five paragraphs', 'Five paragraphs', 'What is daily life like here?', 'Anchor facts above remain available']) {
-      expectAbsentWithAnchor(text, gone, offer, 'the D3/D6 marketing');
+      expectAbsentWithAnchor(text, gone, node.textContent, 'the D3/D6 marketing');
     }
   });
 });
@@ -988,20 +1033,23 @@ describe('DAILY LIFE — the four anchors, one offer line, no marketing', () => 
 describe('UX consolidation — the Economics page says each fact once', () => {
   const line = (blockId, text) => legibilityRung('', { blockId, poolKey: 'hand-built', angle: 'plain', text }, []);
 
-  test('T2-1: ONE prosperity home and the Output score ONCE — the Economy and Food tiles are gone', () => {
+  test('T2-1: ONE prosperity home, and no Output score (PAGE-1 OUTPUT, F3b) — the Economy and Food tiles are gone', () => {
     useStore.setState({ campaigns: [] });
-    const town = { ...SPEAKING, economicState: { ...SPEAKING.economicState, compound: { economyOutput: 55 } } };
+    // PAGE-1 OUTPUT (2026-11-20): the chip's "n/100" left every surface; the figure and its dial print as words
+    // (domain/display/outputInWords.js), once, under the prosperity word.
+    const town = { ...SPEAKING, economicState: { ...SPEAKING.economicState, compound: { economyOutput: 55, raw: { economy: 55 } } } };
     const { container } = render(e(EconomicsTab, { settlement: town, saveId: null, publicDossier: true }));
     const text = container.textContent;
-    expect(text, 'the header prints the Output chip').toContain('55/100');
-    expect(text.split('55/100').length - 1, 'the Output score is printed once').toBe(1);
-    expect(text, 'the tile sub-line is gone').not.toContain('Output score'); // anchored: toContain('55/100') above, same render
+    expect(text, 'the header says the output in words').toContain('It gets all its work could yield.');
+    expect(text.split('It gets all its work could yield.').length - 1, 'the words are printed once').toBe(1);
+    expect(text, 'no grade out of 100').not.toContain('55/100'); // anchored: the words above, same render
+    expect(text, 'the tile sub-line is gone').not.toContain('Output score'); // anchored: the words above, same render
     const exact = (word) => [...container.querySelectorAll('div,span,p')].filter((n) => n.children.length === 0 && n.textContent === word).length;
     expect(exact('Comfortable'), 'the prosperity word is printed once').toBe(1);
     expect(exact('Economy'), 'no Economy tile label').toBe(0);
     expect(exact('Food'), 'no Food tile label').toBe(0);
     // The Food Security section is the food home and opens on first paint.
-    expect(text).toContain('Production deficit of');
+    expect(text).toMatch(/Short: [\d,]+ lbs\/day/); // re-keyed by identity at SW-B6 (2026-11-09): the residual figure is the stat line's label
   });
 
   test('T2-2: the Trade chip stays, because tradeAccess follows the route', () => {
@@ -1012,13 +1060,14 @@ describe('UX consolidation — the Economics page says each fact once', () => {
     expect(container.textContent).toContain('mountain pass');
   });
 
-  test('T2-3: ONE header paragraph — DS-ECO-1 replaces situationDesc where the desk speaks; situationDesc stands on public', () => {
+  test('T2-3: ONE header paragraph — DS-ECO-1, and the legacy situationDesc lead on no view (SW-B7b)', () => {
     useStore.setState({ campaigns: [] });
     const priv = render(e(EconomicsTab, { settlement: SPEAKING, saveId: 'forge_town', publicDossier: false })).container.textContent;
     cleanup();
     const pub = render(e(EconomicsTab, { settlement: SPEAKING, saveId: null, publicDossier: true })).container.textContent;
     expect(priv, 'the DM header speaks DS-ECO-1').toContain(HEADER_SENTENCE);
-    expectPresentThenAbsent(pub, priv, 'The market square keeps its hours.', 'situationDesc stands on public and yields to DS-ECO-1 on the DM view');
+    expectAbsentWithAnchor(priv, 'The market square keeps its hours.', HEADER_SENTENCE, 'situationDesc yields to DS-ECO-1 on the DM view');
+    expectAbsentWithAnchor(pub, 'The market square keeps its hours.', 'lbs/day', 'situationDesc no longer stands on an unstamped public page');
   });
 
   test('T2-4: the commercial profile draws no trade-profile lens, and the food narrative drops its generic trade-dependence sentence', () => {
@@ -1035,8 +1084,8 @@ describe('UX consolidation — the Economics page says each fact once', () => {
     const text = render(e(EconomicsTab, { settlement: fed, saveId: 'forge_town', publicDossier: false })).container.textContent;
     expect(text, 'the income-mix lens still draws').toContain('The tolls carry the town.');
     expect(text, 'the trade-profile lens is not drawn').not.toContain('The same carts go out and come back.'); // anchored: toContain income-mix on this render
-    expect(text).toContain('Residual shortfall is');
-    expect(text).not.toContain('trade-dependent for food security'); // anchored: toContain('Residual shortfall is') on this render
+    expect(text).toContain('Forge Town grows about three parts in four of what it needs, and carts bring in about two parts in three of the rest.'); // re-keyed by identity at SW-B6 (2026-11-09): the food narrative in words (700 of 1,000 grown; 200 of the 300 gap by trade); again at W2-C-LEAVES-5 (item 3's bands)
+    expect(text).not.toContain('trade-dependent for food security'); // anchored: the words sentence is pinned PRESENT on this render
   });
 
   test('T2-5: Market Prices renders only when a quote moved or the crier has a highlight', () => {
@@ -1071,10 +1120,15 @@ describe('UX consolidation — the Economics page says each fact once', () => {
     const text = container.textContent;
     expect(text).toContain('Economic Flows');
     expect(text, 'the resource node, depleted').toContain('Iron ore (depleted)');
-    expect(text, 'the upstream import, by label').toContain('Import: Grain & Bread');
-    expect(text, 'the missing house is marked').toContain('Foundry (missing)');
-    expect(text, 'a present house is not').not.toContain('Smelter (missing)'); // anchored: toContain('Foundry (missing)') on this render
-    expect(text, 'the upstream note').toContain('Charcoal arrives by cart.');
+    // R2-CODE-B-SIDE item 2: a chain's label is not a good; the From line names no "Import: <a chain's label>".
+    expect(text, 'no upstream import by a chain\'s label').not.toContain('Import: Grain & Bread'); // anchored: toContain('Iron ore (depleted)') on this render
+    // R2-CODE-B-SIDE item 3: the card names the roster's houses that do the work; a template name the town lacks
+    // ("Foundry") is not named, and no house is marked missing.
+    expect(text, 'the house the roster holds is named').toContain('ViaSmelter');
+    expect(text, 'a template house the roster lacks is not').not.toContain('Foundry'); // anchored: toContain('ViaSmelter') on this render
+    expect(text, 'a present house is not').not.toContain('Smelter (missing)'); // anchored: toContain('ViaSmelter') on this render
+    // R2-CODE-B-SIDE item 1: the generator's upstream note leaves the card (no read the card holds makes it true).
+    expect(text, 'the upstream note leaves the card').not.toContain('Charcoal arrives by cart.'); // anchored: toContain('Iron ore (depleted)') on this render
     expect(text, 'the duplicate section is gone').not.toContain('Supply Chains'); // anchored: toContain('Economic Flows') on this render
   });
 
@@ -1087,10 +1141,10 @@ describe('UX consolidation — the Economics page says each fact once', () => {
       resourceAnalysis: { exploitation: { fullyExploited: [{ rawResource: 'timber' }], partiallyExploited: [], unexploited: [] } },
     };
     const text = render(e(EconomicsTab, { settlement: town, saveId: null, publicDossier: true })).container.textContent;
-    expect(text, 'the shadow economy section stays').toContain('Shadow Economy: 20% capture');
+    expect(text, 'the shadow economy section stays').toContain('Shadow Economy: 20% of trade unrecorded');
     expect(text, 'its operations list moved to Defense, the capture stays').toContain('Off-book');
     for (const gone of ['Economic Plot Hooks', 'The bridge toll is skimmed.', 'Resource Exploitation', 'Fully Exploited', '→ Defense tab', 'Economic operations', 'Smugglers\' Den']) {
-      expect(text, `${gone} is still on the page`).not.toContain(gone); // anchored: toContain('Shadow Economy: 20% capture') on this render
+      expect(text, `${gone} is still on the page`).not.toContain(gone); // anchored: toContain('Shadow Economy: 20% of trade unrecorded') on this render
     }
   });
 });

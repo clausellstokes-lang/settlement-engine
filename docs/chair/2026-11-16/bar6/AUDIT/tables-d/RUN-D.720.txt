@@ -1,0 +1,5 @@
+  neg explained C0343    n/a                          town not in this render
+controls off: 0
+[gate-tail] end:  19:40:21 up 50 min,  0 user,  load average: 2.93, 2.20, 2.11
+[gate-tail] full log: <log>
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

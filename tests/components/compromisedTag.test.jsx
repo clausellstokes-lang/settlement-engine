@@ -34,18 +34,22 @@ describe('NPCInlineCard — Compromised tag', () => {
     return name;
   };
 
-  it('a corrupt NPC reads an explicit "Compromised" tag', () => {
-    renderGroup({ id: 'n1', name: 'Captain Vex', corrupt: true, corruptTies: { criminalInstitution: "Thieves' Guild" } });
+  // ALLEGIANCE-CAR1 (2026-11-08): the retired `corrupt` mark is the card's hidden `allegiance`; the tag reads
+  // 'Hidden allegiance' (the owner: "instead of saying compromised") and the line names the guild it answers to.
+  it('an agent reads an explicit "Hidden allegiance" tag and the guild it answers to', () => {
+    renderGroup({ id: 'n1', name: 'Captain Vex', allegiance: { power: null, house: "Thieves' Guild", vector: 'greed', via: 'office', handler: null, share: 0.15, veiled: true, covert: true } });
     expandCard('Captain Vex');
-    expect(screen.getByText('Compromised')).toBeTruthy();
-    expect(screen.getByText(/tied to Thieves' Guild/)).toBeTruthy();
+    expect(screen.getByText('Hidden allegiance')).toBeTruthy();
+    expect(screen.queryByText('Compromised')).toBeNull();
+    expect(screen.getByText((_, el) => el?.tagName === 'SPAN' && /^answers to Thieves' Guild$/.test(el.textContent || ''))).toBeTruthy();
   });
 
   it('an ousted NPC reads "Exposed", not "Compromised"', () => {
-    renderGroup({ id: 'n2', name: 'Former Vex', corrupt: false, ousted: true });
+    renderGroup({ id: 'n2', name: 'Former Vex', ousted: true });
     expandCard('Former Vex');
     expect(screen.getByText('Exposed')).toBeTruthy();
     expect(screen.queryByText('Compromised')).toBeNull();
+    expect(screen.queryByText('Hidden allegiance')).toBeNull();
   });
 });
 

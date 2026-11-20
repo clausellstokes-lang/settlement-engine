@@ -1,0 +1,173 @@
+{
+  "id": "DS-POP-3",
+  "source": "src/data/dossierStateProse/general.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-POP-3::RISING-OPEN",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: trend rising × open approach; key guarantees route ∈ {road, river, port, crossroads} (open approach)",
+      "lines": [
+        {
+          "id": "DS-POP-3::RISING-OPEN::v1",
+          "text": "{settlement} is getting larger and can be reached without much deciding; the roll and the ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-3::RISING-OPEN::v2",
+          "text": "Arriving at {settlement} is easy, and there are more people here than the older rolls desc",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-3::RISING-OPEN::v3",
+          "text": "{settlement} stands open to its approaches and is plainly carrying more than it used to, w",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-3::RISING-NARROW",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: trend rising × narrow approach; key guarantees route ∈ {isolated, mountain_pass} (narrow approach)",
+      "lines": [
+        {
+          "id": "DS-POP-3::RISING-NARROW::v1",
+          "text": "{settlement} is growing at the end of a hard approach; whatever the town has been gaining,",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-3::RISING-NARROW::v2",
+          "text": "For a place this troublesome to reach, {settlement} is remarkably full, and the difficulty",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-3::RISING-NARROW::v3",
+          "text": "{settlement} has every structural excuse to be shrinking and is not: the ways in are poor,",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-3::LEVEL",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: trend level, either approach",
+      "lines": [
+        {
+          "id": "DS-POP-3::LEVEL::v1",
+          "text": "{settlement}'s roll holds where it is, and the approaches neither fill the town nor drain ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-3::LEVEL::v2",
+          "text": "{settlement} is the size it has been, and the ways in and out have not moved it in either ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-3::FALLING-OPEN",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: trend falling × open approach; key guarantees route ∈ {road, river, port, crossroads} (open approach)",
+      "lines": [
+        {
+          "id": "DS-POP-3::FALLING-OPEN::v1",
+          "text": "{settlement} is getting smaller, and it is not for want of a way in; the approaches are op",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-3::FALLING-OPEN::v2",
+          "text": "Reaching {settlement} is easy and remaining is evidently the harder part, since the roads ",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"the roads\" — presumes an overland road approach (route: road|crossroads; disjunction, not declared) — reads oddly on a river/port approach"
+        },
+        {
+          "id": "DS-POP-3::FALLING-OPEN::v3",
+          "text": "{settlement} is well approached and thinner than it was, and the two facts sit uncomfortab",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-POP-3::FALLING-NARROW",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: trend falling × narrow approach; key guarantees route ∈ {isolated, mountain_pass} (narrow approach)",
+      "lines": [
+        {
+          "id": "DS-POP-3::FALLING-NARROW::v1",
+          "text": "{settlement} is losing what it had and is hard to reach, and a town in that position gets ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-POP-3::FALLING-NARROW::v2",
+          "text": "The ways into {settlement} were always poor and the town was always small enough to carry ",
+          "needs": [
+            "population: small"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"the town was always small enough\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

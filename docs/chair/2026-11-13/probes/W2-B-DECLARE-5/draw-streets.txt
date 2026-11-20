@@ -1,0 +1,41 @@
+word streets: 329 findings, 329 distinct (town, sentence), 176 towns; salt "w2b5-f2-streets-2026-11-13"
+
+1. r2s-indebted-hamlet-3 · Systems/Power · names
+   "Criminal money is reaching the officials of Morkstrand one at a time, because the hamlet is poor and its streets are badly watched, and a bribe goes a long way here."
+   {"tier":"hamlet","pop":65,"crisis":"indebted","market":false,"roster":"","rosterSize":11,"magic":true}
+
+2. r2s-slave_revolt-hamlet-2 · Systems/Power · names
+   "The rebels' buildings are marked, and some streets are contested."
+   {"tier":"hamlet","pop":98,"crisis":"slave_revolt","market":false,"roster":"","rosterSize":11,"magic":true}
+
+3. r2r-hamlet-47 · Summary/Overview · names
+   "Latin-inspired, built in masonry around a civic square, and run by patronage and law."
+   {"tier":"hamlet","pop":90,"crisis":"calm","market":true,"roster":"Periodic market","rosterSize":13,"magic":true}
+
+4. r2s-famine-hamlet-1 · Summary/Overview · names
+   "South-Asian-inspired, built around the tank, in quarters by trade and kin."
+   {"tier":"hamlet","pop":41,"crisis":"famine","market":false,"roster":"","rosterSize":8,"magic":true}
+
+5. r2s-politically_fractured-thorp-3 · Summary/Overview · names
+   "Ask about the place and you are told it is built around the tank, in quarters by trade and kin."
+   {"tier":"thorp","pop":15,"crisis":"politically_fractured","market":false,"roster":"","rosterSize":8,"magic":true}
+
+6. r2s-slave_revolt-hamlet-0 · Systems/Power · names
+   "Criminal money is reaching the officials of Velikoichi one at a time, because the hamlet is poor and its streets are badly watched, and a bribe goes a long way here."
+   {"tier":"hamlet","pop":89,"crisis":"slave_revolt","market":false,"roster":"","rosterSize":11,"magic":true}
+
+7. r2r-thorp-35 · Systems/Economics · names
+   "Public ovens, neighborhood vendors, and shared dining customs make food distribution visibly civic."
+   {"tier":"thorp","pop":20,"crisis":"calm","market":false,"roster":"","rosterSize":8,"magic":true}
+
+8. r2s-mass_migration-hamlet-3 · World/History · names
+   "Its streets and wells were never meant for this many people."
+   {"tier":"hamlet","pop":82,"crisis":"mass_migration","market":false,"roster":"","rosterSize":10,"magic":true}
+
+9. r2s-slave_revolt-hamlet-0 · Summary/Overview · names
+   "There are bodies being carried through Velikoichi's streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work."
+   {"tier":"hamlet","pop":89,"crisis":"slave_revolt","market":false,"roster":"","rosterSize":11,"magic":true}
+
+10. r2s-slave_revolt-thorp-0 · Systems/Defense · names
+   "People keep off those streets, and nobody walks them after dark."
+   {"tier":"thorp","pop":28,"crisis":"slave_revolt","market":false,"roster":"","rosterSize":8,"magic":true}

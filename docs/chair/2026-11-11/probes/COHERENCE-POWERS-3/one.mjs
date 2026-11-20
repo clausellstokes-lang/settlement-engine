@@ -1,0 +1,11 @@
+import path from 'node:path'; import { DIALS } from './corpus.mjs';
+const tree = path.resolve(process.argv[2]); const imp = (p) => import(path.join(tree, p));
+const { generateSettlementPipeline } = await imp('src/generators/generateSettlementPipeline.js');
+const { birthConfig, loadGenerationLawPayloads } = await imp('src/domain/density/densityCreateBoundary.js');
+await loadGenerationLawPayloads();
+const seed = process.argv[3]; const m = seed.match(/^(?:rvf|l2)-(.+)-(thorp|hamlet|village|town|city|metropolis)-\d+$/);
+const cfg = m ? { ...DIALS, settType: m[2], selectedStresses: [m[1]], selectedStressesRandom: false } : { ...DIALS, settType: seed.split('-')[1] };
+const s = generateSettlementPipeline(birthConfig(cfg), null, { seed, customContent: {} });
+const re = new RegExp(process.argv[4] || '.', 'i');
+for (const c of s.npcs || []) if (re.test(c.institution?.key || '') || (c.memberships || []).some((x) => re.test(x.power))) console.log(c.id, '|', c.institution?.key, '|', JSON.stringify(c.memberships));
+console.log('roster', s.powerStructure.factions.map((f) => `${f.faction}:${f.power}`).join(', '));

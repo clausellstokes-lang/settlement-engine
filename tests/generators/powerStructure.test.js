@@ -43,7 +43,7 @@ const PUBLIC_EXPORTS = [
   'genRelNarrative',
   'genSuccessionNarr',
   'generateConflicts',
-  'generateFactions',
+  // 'generateFactions' left the surface (PEOPLE-LAND, M-2: the NPC grouping and its builder deleted).
   'generatePowerStructure',
 ].sort();
 
@@ -93,6 +93,22 @@ describe('F31: powerGenerator split structure', () => {
       .filter(([, n]) => n > MODULE_LINE_CEILING)
       .map(([f, n]) => `${f}: ${n} lines`);
     expect(oversized).toEqual([]);
+  });
+
+  // COHERENCE-POWERS-3 (F12; the ceiling law: a module's ceiling is cured by a split, never raised, never packed). A
+  // statement packed after another on one line, or a closure's first statement on the line that opens it, hides lines
+  // from the ceiling above. The count per power/ module only shrinks; a module not listed holds none.
+  const PACKED_LINES_CEILING = Object.freeze({ 'governanceNarrative.js': 2, 'rulingStructure.js': 2, 'stressFactions.js': 2 });
+  it('no power/ module packs more statements onto shared lines than its ceiling (shrink-only)', () => {
+    const packed = /;\s+(import|export|const|let|var|return)\b|=>\s*\{\s*(let|const|var|return)\b/;
+    const over = fs
+      .readdirSync(POWER_DIR)
+      .filter((f) => f.endsWith('.js'))
+      .sort()
+      .map((f) => [f, fs.readFileSync(path.join(POWER_DIR, f), 'utf8').split('\n').filter((line) => packed.test(line)).length])
+      .filter(([f, n]) => n > (PACKED_LINES_CEILING[f] ?? 0))
+      .map(([f, n]) => `${f}: ${n} packed lines`);
+    expect(over).toEqual([]);
   });
 
   it('the public export surface equals the checked-in list', () => {

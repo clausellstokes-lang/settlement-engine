@@ -1,0 +1,56 @@
+patched copy at /tmp/claude-0/-home-user-settlement-engine/e39601df-bea0-5bb7-a071-cd1164f3a939/scratchpad/patched: npcGenerator.js powerBandOfRole reads '_' as ' ' (the one change)
+
+towns forged: 300 each side; towns with any stored difference: 151
+cards whose influence moved: 273; whose power (1-10) moved: 273; of the moved, first of a power: 117
+moves by printed role: the senior craft-guild master low->high 146 · the senior guild master low->high 75 · the guildmaster of thieves low->high 34 · the bloc's speaker low->moderate 14 · the neutrals' broker low->moderate 2 · the commoners' tribune low->moderate 1 · the alliance's convenor low->moderate 1
+
+EVERY STORED PATH THAT DIFFERS (array indices folded to []), with the number of towns where it differs:
+   151  .npcs.[].influence
+   151  .npcs.[].power
+   148  .relationships.[].archetypeKey
+   148  .relationships.[].description
+   148  .relationships.[].proseVariant
+   148  .relationships.[].strength
+   148  .relationships.[].tension
+   148  .relationships.[].type
+   148  .relationships.[].typeName
+    97  .npcs.[].goal.long
+    95  .npcs.[].goal.short
+    89  .npcs.[].goal.intent.long.kind
+    85  .npcs.[].goal.intent.short.kind
+    76  .npcs.[].goal.intent.long.key
+    64  .npcs.[].goal.intent.short.key
+    40  .npcs.[].goal.intent.long.target.id
+    38  .prominentRelationship.full
+    38  .prominentRelationship.phrasing
+    38  .prominentRelationship.tension
+    31  .pressureSentence
+    28  .npcs.[].goal.intent.short.target.id
+    26  .npcs.[].structuralPosition
+    17  .npcs.[].goal.intent.long.family
+    14  .npcs.[].goal.intent.long.target.kind
+    12  .conflicts.[].desc
+    12  .powerStructure.conflicts.[].desc
+    10  .prominentRelationship.type
+     9  .conflicts.[].parties.[]
+     9  .powerStructure.conflicts.[].parties.[]
+     8  .conflicts.[].plotHooks.[]
+     8  .powerStructure.conflicts.[].plotHooks.[]
+     7  .conflicts.[].issue
+     7  .conflicts.[].stakes
+     7  .powerStructure.conflicts.[].issue
+     7  .powerStructure.conflicts.[].stakes
+     7  .powerStructure.factionRelationships.[].narrative
+     6  .conflicts.[].intensity
+     6  .powerStructure.conflicts.[].intensity
+     6  .powerStructure.factionRelationships.[].direction
+     5  .npcs.[].goal.intent.long.target
+     4  .conflicts.[]
+     4  .generationCoherenceReceipt.judgments.[].evidence.[]
+     4  .powerStructure.conflicts.[]
+     3  .prominentRelationship.npc1
+     3  .prominentRelationship.npc2
+     1  .npcs.[].secret.stakes
+     1  .npcs.[].secret.what
+     1  .stress.cast.roles.[].reason
+     1  .stressors.cast.roles.[].reason

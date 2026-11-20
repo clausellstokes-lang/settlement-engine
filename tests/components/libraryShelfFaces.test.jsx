@@ -103,7 +103,6 @@ function baseStore(user = { id: 'owner-A' }) {
     applyQueuedRegionalImpact: vi.fn(),
     ignoreQueuedRegionalImpact: vi.fn(),
     resolveRegionalImpact: vi.fn(),
-    advanceCampaignRegionalImpacts: vi.fn(),
     applyAllQueuedRegionalImpacts: vi.fn(),
     ignoreAllQueuedRegionalImpacts: vi.fn(),
     getCampaignMembershipBlock: vi.fn(() => null),
@@ -186,7 +185,7 @@ const FIVE = () => [
 
 /** The search box, whose placeholder states BOTH the count and which face is rendered. */
 const searchBox = () => /** @type {HTMLInputElement} */ (
-  screen.getByLabelText('Search settlements, NPCs, and factions'));
+  screen.getByLabelText('Search settlements, NPCs, and powers'));
 
 /** The Select toggle — the full face's independent second witness; null on the minimal one. */
 const selectToggle = () => screen.queryByRole('button', { name: 'Select' });
@@ -241,7 +240,7 @@ describe('U50 — the panel\'s render reads the shelf\'s count', () => {
     // the quota, where a phantom is the estate's row and not the user's.
     expect(screen.getByText('Start from a sample. Or roll your own'),
       'the empty library greets the keeper instead of accusing their filters').toBeTruthy();
-    expect(screen.queryByLabelText('Search settlements, NPCs, and factions'),
+    expect(screen.queryByLabelText('Search settlements, NPCs, and powers'),
       'and no toolbar offers to search a shelf with nothing on it').toBe(null);
   });
 
@@ -306,7 +305,7 @@ describe('U50 — the panel\'s render reads the shelf\'s count', () => {
     // THE THRESHOLD VALUE IS THE OWNER'S. Five saves is the full face, as it has been
     // since the legibility wave — this unit moved the COUNT that is compared, never the 5.
     expect(searchBox().placeholder, 'five saves still draws the full face')
-      .toBe('Search 5 settlements + NPCs + factions…');
+      .toBe('Search 5 settlements + NPCs + powers…');
     expect(selectToggle(), 'with its Select toggle').toBeTruthy();
 
     fireEvent.change(searchBox(), { target: { value: 'zzzz' } });

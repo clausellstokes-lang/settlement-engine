@@ -24,7 +24,7 @@ on:
   # branch, not this file's.
   #
   # CAUTION, second: this is the TRIGGER only. The "Fetch the ledger branch" step in
-  # check-tests and coverage-floors still fetches that ref from origin, because two
+  # check-tests-shard and coverage-floors still fetches that ref from origin, because two
   # suites read the ledger by ref, and it is deliberately untouched here.
   #
   # 2026-11-04 (CI-TRIGGERS, the rung-1 landing, LANDING-1 item 12): the push trigger is NARROWED to
@@ -99,34 +99,58 @@ jobs:
       - run: npm ci
       - run: npm run lint
 
-  check-tests:  # deploy-gate: optional — required transitively by the `check` aggregate
-    name: Gate / test ratchet
+  # ── THE TEST RATCHET, SHARDED (CI-SHARD, 2026-11-19) ─────────────────────────────────────────
+  # The ratchet runs the real full source suite, and its serial job outgrew its cap. The cap was
+  # 135 by the house rule (the longest CONCLUDED run × 1.5, rounded UP to the next 15; a cut run is
+  # never the input — a timeout measures the cap, not the suite): 82m08s × 1.5 → 135, measured at
+  # f76ddf0ab on 2026-09-20, when this runner ran 3.5× to 4.6× the local box. By 2026-11-19 the
+  # serial step took 113m45s and 132m33s where it concluded and was CUT at 134m28s twice (PR #75,
+  # runs 44228294454 and 44461277714). The old comment said the next move was sharding, not another
+  # cap. This is that move. A timeout is not a test verdict, and a cap that cuts a passing run
+  # blocks the production deploy (the `e2e` job below says the same; keep the two consistent).
+  #
+  # THE SHAPE. Two jobs, and the verdict is taken ONCE, as before:
+  #   1. `check-tests-shard` runs the ratchet's OWN source-phase runner command with
+  #      `--shard=<i>/6` appended (scripts/test-ratchet-shard.mjs imports `runnerCommandOf` and
+  #      `runnerEnvOf` from scripts/check-test-ratchet.mjs, never a hand copy), six shards in
+  #      parallel. vitest's own sequencer splits the file set by a hash of each path, so the six
+  #      are a PARTITION of the serial run's files (measured at 8f3b8bf4b: 3,632 files =
+  #      606 + 606 + 605 + 605 + 605 + 605, none in two shards, none missing). A shard's exit is
+  #      NOT a verdict — vitest exits non-zero on the census's banked reds — so the shard step does
+  #      not go red on test failures; it uploads its report and its runner exit.
+  #   2. `check-tests` (this id and name, so the `check` aggregate and any required check stay as
+  #      they are) downloads the six, MERGES them (scripts/merge-vitest-shard-reports.mjs: fails
+  #      CLOSED on a missing or unparseable report, a wrong report count, a file in two shards, an
+  #      empty shard, a missing exit file, and a non-zero exit under a report that says success)
+  #      and runs the ratchet's existing read-only verdict on the merged report:
+  #      `npm run test:ratchet -- --from-log`. The census, its magnitudes, the skip ceiling and the
+  #      scope sentinel (the frozen test and file counts) judge the union exactly as they judged
+  #      the serial report. `success` in the merged report is true only if every shard's report
+  #      says success AND every runner exited 0, because --from-log reads the runner's exit there.
+  #      It runs even when a shard failed (`!cancelled()`), so it fails closed with a reason and
+  #      never skips.
+  # Six is the house's shard count: the chair's local whole check (docs/chair/2026-11-17/tools/
+  # whole.sh on lane/chair-2026-11-08) splits the suite the same way, so a shard there and here
+  # hold the same files.
+  #
+  # THE SHARD CAP BY THE HOUSE RULE (point 76, 2026-11-20): the longest CONCLUDED shard here is shard 6,
+  # 36m04s in run 44659169256 at 85fccf898 (36m01s on the run before it; shards 1, 3 and 4 took 13m50s,
+  # 19m34s and 26m25s in the same run); × 1.5 = 54m06s → 60, rounded up to the next 15. The estimate it
+  # replaces stays below as history, because it was 45 and shard 6 concluded at 80% of it.
+  # THE ESTIMATE (CI-SHARD, before any shard had concluded here). The arithmetic: the local six shards ran 985 to 1,481 s
+  # (docs/chair/2026-11-17/checks/candidate-e0242a12a/summary.tsv on lane/chair-2026-11-08), 7,748 s
+  # in all, so the largest is 19.1% of the suite. The longest concluded serial step here is 132m33s
+  # (run 44282875950); 19.1% of it is 25m20s, plus about 1 minute of the job's own set-up
+  # (services, checkout, the ledger fetch, npm ci: 51 s in run 44295605654) = 26m20s;
+  # × 1.5 = 39m30s → 45.
+  check-tests-shard:  # deploy-gate: optional — required transitively: the `check-tests` verdict needs it and judges its reports
+    name: Gate / test ratchet · shard ${{ matrix.shard }} of 6
     runs-on: ubuntu-latest
-    # The ratchet executes the real full suite, and this cap follows that suite. The previous
-    # cap, 90, was set on 2026-09-20 when NO run had concluded in this era — both of PR #53's
-    # first runs were cut at 45 (push 35534822592 and pull_request 35534903945, 45m17s each,
-    # "The operation was canceled"), so 90 was twice the longest run that had concluded back on
-    # 2026-09-17 plus five hundred commits of growth, and its own comment promised to TIGHTEN it
-    # to measured-plus-headroom the moment a real figure arrived.
-    # THE REAL FIGURES ARRIVED. Both runs at f76ddf0ab CONCLUDED GREEN and are measured here:
-    #   push         35541172706  22:16:42Z → 23:19:19Z  62m37s  success
-    #   pull_request 35541276693  22:18:49Z → 23:40:57Z  82m08s  success
-    # The SAME commit, a TWENTY-MINUTE spread between two runners, and 82m08s is 91% of the
-    # 90-minute cap — so 90 was not loose at all, it was one slow runner away from cutting a
-    # passing run. THE RULE THIS CAP NOW FOLLOWS: the longest CONCLUDED run × 1.5, rounded UP
-    # to the next 15. 82m08s × 1.5 = 123m12s → 135. A cut run is never the input — a timeout
-    # measures the cap, not the suite.
-    # A timeout is not a test verdict, and a cap that cuts a passing run blocks the production
-    # deploy (the `e2e` job below says the same thing one job over; keep the two comments
-    # consistent). For reference the same ratchet takes 17m41s locally over 33,770 tests, which
-    # puts this runner at 3.5× to 4.6× the local box. The runner size a PRIVATE repository is
-    # given has not been measured here, so no core count is assumed.
-    # ⛔ THE NEXT MOVE IS NOT ANOTHER CAP: an 82-minute serial job is close to the point where
-    # headroom stops being the answer and sharding is, and the spread says runner variance
-    # alone can swing this job by 20 minutes. Sharding must keep the ratchet's known-failures
-    # baseline and its scope sentinel exact, so it is a deliberate change of the gate's shape,
-    # not a cap repair.
-    timeout-minutes: 135
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6]
     env:
       CUSTOM_CONTENT_CONCURRENCY_DATABASE_URL: >-
         postgresql://postgres:postgres@127.0.0.1:5432/postgres
@@ -165,7 +189,7 @@ jobs:
       # single-branch clone, so on the runner the ref never existed and both suites failed at
       # collection; the ratchet's scope sentinel then refused the run (never green in this era,
       # measured 2026-09-16). Fetch that branch with its history (about 200 MB of objects),
-      # unless it IS the branch under test.
+      # unless it IS the branch under test. Every shard fetches it: the two suites can land in any.
       - name: Fetch the ledger branch (two suites read it by ref)
         shell: bash
         run: |
@@ -178,6 +202,54 @@ jobs:
           node-version-file: '.nvmrc'
           cache: npm
       - run: npm ci
+      # Under the gate mutex, as `npm run test:ratchet` runs the serial suite. Exits 0 whenever the
+      # runner wrote a report (its exit is recorded beside it for the verdict), 1 when it wrote none.
+      - name: Run this shard of the ratchet's source phase (records the exit; not a verdict)
+        shell: bash
+        run: |
+          sh scripts/gate-mutex.sh --run -- node scripts/test-ratchet-shard.mjs \
+            "${{ matrix.shard }}" 6 "$RUNNER_TEMP/test-ratchet-shards/shard-${{ matrix.shard }}-of-6.json"
+      - name: Upload this shard's report, exit and runner output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-ratchet-shard-${{ matrix.shard }}-of-6
+          path: ${{ runner.temp }}/test-ratchet-shards/
+          if-no-files-found: warn
+          retention-days: 14
+          # A re-run of one shard replaces that shard's earlier upload instead of colliding with it.
+          overwrite: true
+
+  check-tests:  # deploy-gate: optional — required transitively by the `check` aggregate
+    name: Gate / test ratchet
+    runs-on: ubuntu-latest
+    needs: [check-tests-shard]
+    if: ${{ !cancelled() }}
+    # The verdict reads reports; it runs no test. Its steps are a download, a merge and the
+    # ratchet's --from-log arithmetic, so it gets the cap of the house's other short gate jobs, 10,
+    # until a concluded figure arrives (then the house rule).
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      # No npm ci: the merge and the ratchet import only node built-ins and each other.
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      # A shard that wrote nothing uploads nothing. The download must not decide what is missing:
+      # the merge below names every missing report and exit file, shard by shard.
+      - name: Download every shard's report and exit
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          pattern: test-ratchet-shard-*-of-6
+          path: ${{ runner.temp }}/test-ratchet-shards
+          merge-multiple: true
+      - name: Merge the six shard reports (fails closed)
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/merge-vitest-shard-reports.mjs --count 6 \
+            --dir "$RUNNER_TEMP/test-ratchet-shards" --out "$RUNNER_TEMP/test-ratchet-merged.json" 2>&1 | tee test-ratchet-merge.log
       # The ratchet's red (which rows regressed, which failure class, the census verdict) is
       # otherwise visible only to a signed-in viewer of the raw log; the estate reads its own CI
       # anonymously and by receipt. Tee the run; on failure hand the verdict and every failed test
@@ -186,31 +258,48 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          npm run test:ratchet 2>&1 | tee test-ratchet.log
+          npm run test:ratchet -- --from-log "$RUNNER_TEMP/test-ratchet-merged.json" 2>&1 | tee test-ratchet.log
+      # The merge already refuses a missing shard; this names a shard JOB that did not conclude
+      # green (a crashed runner, a cut shard) even when the merge was never reached.
+      - name: Require every shard job to have concluded
+        if: always()
+        env:
+          SHARDS_RESULT: ${{ needs.check-tests-shard.result }}
+        run: |
+          if [ "$SHARDS_RESULT" != success ]; then
+            echo "::error title=test-ratchet shards::the shard job concluded '$SHARDS_RESULT', not success — a shard did not measure its files"
+            exit 1
+          fi
       - name: Failure receipt (test ratchet)
         if: failure()
         shell: bash
         run: |
           {
+            echo '## test ratchet — the merge, verbatim (last 60 lines)'
+            echo '```'
+            tail -n 60 test-ratchet-merge.log 2>/dev/null || echo '(no merge log)'
+            echo '```'
             echo '## test ratchet — the verdict, verbatim (last 200 lines)'
             echo '```'
-            tail -n 200 test-ratchet.log
+            tail -n 200 test-ratchet.log 2>/dev/null || echo '(no verdict log: the merge refused, so no verdict was taken)'
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
           node - <<'EOF'
           const fs = require('node:fs');
-          const os = require('node:os');
           const path = require('node:path');
           const enc = (s) => String(s).replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
-          const log = fs.existsSync('test-ratchet.log') ? fs.readFileSync('test-ratchet.log', 'utf8') : '(no test-ratchet.log)';
-          console.log(`::error title=test-ratchet verdict (last 60 KB)::${enc(log.slice(-60000))}`);
-          // The ratchet copies the runner's JSON report of the LAST red to a stable path outside the tree.
-          const stable = path.join(os.tmpdir(), 'test-ratchet-last-red.json');
-          if (!fs.existsSync(stable)) {
-            console.log(`::warning title=test-ratchet report::no ${stable}; the red came before the runner report, or the run was cut by the job timeout`);
+          for (const [title, file] of [['test-ratchet merge', 'test-ratchet-merge.log'], ['test-ratchet verdict (last 60 KB)', 'test-ratchet.log']]) {
+            const log = fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : `(no ${file})`;
+            console.log(`::error title=${title}::${enc(log.slice(-60000))}`);
+          }
+          // The verdict judged the MERGED report of the six shards; under --from-log the ratchet
+          // takes no stable copy, so the failed tests are read from the merged report itself.
+          const merged = path.join(process.env.RUNNER_TEMP || '', 'test-ratchet-merged.json');
+          if (!fs.existsSync(merged)) {
+            console.log(`::warning title=test-ratchet report::no ${merged}; the merge refused (its reasons are above) or never ran`);
             process.exit(0);
           }
-          const report = JSON.parse(fs.readFileSync(stable, 'utf8'));
+          const report = JSON.parse(fs.readFileSync(merged, 'utf8'));
           const rows = [];
           for (const file of report.testResults || []) {
             for (const t of file.assertionResults || []) {
@@ -220,9 +309,9 @@ jobs:
               rows.push(`${path.relative(process.cwd(), file.name || '')} :: ${t.fullName || t.title}  [${t.duration ?? '?'} ms]\n    ${msg}`);
             }
           }
-          const totals = { tests: report.numTotalTests, failed: report.numFailedTests, passed: report.numPassedTests, pending: report.numPendingTests, files: report.numTotalTestSuites, failedFiles: report.numFailedTestSuites };
-          const body = [`${rows.length} failed test(s); runner totals ${JSON.stringify(totals)}`, ...rows].join('\n');
-          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## failed tests from the runner report\n\n```\n' + body + '\n```\n');
+          const totals = { tests: report.numTotalTests, failed: report.numFailedTests, passed: report.numPassedTests, pending: report.numPendingTests, files: (report.testResults || []).length, failedFiles: report.numFailedTestSuites };
+          const body = [`${rows.length} failed test(s); merged runner totals ${JSON.stringify(totals)}`, ...rows].join('\n');
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, '## failed tests from the merged runner report\n\n```\n' + body + '\n```\n');
           console.log(`::error title=test-ratchet failed tests::${enc(body.slice(0, 60000))}`);
           EOF
 
@@ -285,7 +374,14 @@ jobs:
 
   e2e:
     name: Chromium end-to-end
-    runs-on: ubuntu-latest
+    # PINNED to ubuntu-24.04, NOT ubuntu-latest (CI-FIT, 2026-11-10). GitHub moved `ubuntu-latest` to Ubuntu 26.04,
+    # and the pinned Playwright 1.60.0 cannot install a browser there: master's scheduled run 42635256465
+    # (2026-11-09 14:30 UTC, commit db832c892, the same commit green on 2026-11-07) failed this job in under a
+    # second at `npx playwright install --with-deps chromium webkit` with "Cannot install dependencies for
+    # ubuntu26.04-x64 with Playwright 1.60.0! / Error: ERROR: Playwright does not support chromium on
+    # ubuntu26.04-x64". The chair ruled a runner pin, NOT a Playwright bump: the seats' containers carry a
+    # pre-installed browser matched to 1.60.0. Lift the pin with the Playwright bump that supports 26.04.
+    runs-on: ubuntu-24.04
     # This job's suite MORE THAN DOUBLED on this branch and its cap was never revisited:
     # 8 -> 14 chromium spec files and 39 -> 81 `test(` declarations (measured at this tip
     # against master b9c494afe, excluding e2e/performance/** which playwright.config.js
@@ -298,7 +394,33 @@ jobs:
     # 45-minute cap, which skipped both deploy jobs and has left production un-deployed
     # since 2026-09-16 (raised to 60 in 743779742); a cap that cuts a passing run blocks
     # the production deploy, and this is that failure mode one job over.
-    timeout-minutes: 25
+    # RE-TAKEN 2026-11-19 (CI-SHARD) BY THE HOUSE RULE (the longest CONCLUDED run × 1.5, rounded UP
+    # to the next 15; the test ratchet's comment above states it) over a job that CARRIES A SLOW
+    # BROWSER INSTALL. At 8f3b8bf4b (run 44461277714, job 135348378575) "Install Playwright browsers"
+    # took 13m57s against 1m10s on the runs before, and the E2E step was CUT at the cap of 25 after
+    # 10m29s. The time went to APT, not to the browsers: "Fetched 126 MB in 13min 5s (161 kB/s)" from
+    # the Ubuntu mirror, then the four browser downloads in about 10 s, so a cache of the browser
+    # directory would not have saved it and none is added. It recurs (2 of the last 8 installs, the
+    # other in the performance job below). The longest CONCLUDED job is 14m22s (run 44282875950,
+    # job 134727896661, with a 1m10s install); carrying the 13m57s install instead it is
+    # 14m22s - 1m10s + 13m57s = 27m09s; x 1.5 = 40m44s -> 45.
+    # THE SLOW INSTALL, CURED STRUCTURALLY (CI-FIT point 75, 2026-11-20; the sixth chair's ruling:
+    # one more occurrence, then a cure). It recurred at 29ec255fe (run 44494042373, job
+    # 135456581358): "Install Playwright browsers" took 43m38s and the run was cut 52 s into the
+    # tests. Again APT, not the browsers: "Fetched 123 MB in 42min 30s (48.2 kB/s)" for 181 packages
+    # from us-east-2.ec2.archive.ubuntu.com; the four browser downloads took 11 s. So the job no
+    # longer installs system packages on the runner: it runs IN Playwright's own image at the
+    # lockfile's exact version, which carries the browsers and every library they need. The tag is
+    # pinned to package-lock.json by tests/build/ciCheckParity.test.js (they cannot drift apart),
+    # and the `performance` job below uses the SAME image. The install step is now a LAUNCH probe
+    # (scripts/ensure-playwright-browsers.mjs): if a browser the image serves does not launch, it
+    # falls back to the old `npx playwright install --with-deps`, so a broken image costs time,
+    # never a vacuous run. `--ipc=host`: Chromium's shared memory, as Playwright's Docker guide
+    # advises. The cap of 45 stands until a run concludes in the image (then the house rule).
+    container:
+      image: mcr.microsoft.com/playwright:v1.60.0-noble
+      options: --ipc=host
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
 
@@ -318,8 +440,10 @@ jobs:
       # ("Executable doesn't exist … webkit"); the anti-vacuity guards below now
       # also make an all-skipped mobile run a hard failure instead of green-on-
       # nothing, so the missing engine can no longer hide.
+      # In the image both are already installed with their libraries: this LAUNCHES each, and only
+      # installs (with the system packages) if one does not launch. See the job's comment.
       - name: Install Playwright browsers (chromium + webkit)
-        run: npx playwright install --with-deps chromium webkit
+        run: node scripts/ensure-playwright-browsers.mjs chromium webkit
 
       # Static anti-vacuity guard: prove the project actually enumerates specs
       # BEFORE running (a renamed/typo'd project would list zero tests and exit 0).
@@ -374,8 +498,28 @@ jobs:
 
   performance:
     name: Production-build browser performance
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # PINNED to ubuntu-24.04 for the same cause as the e2e job above (CI-FIT, 2026-11-10): on Ubuntu 26.04
+    # (`ubuntu-latest` since the image moved) Playwright 1.60.0's `npx playwright install --with-deps chromium`
+    # fails ("Playwright does not support chromium on ubuntu26.04-x64"), measured on master's scheduled run
+    # 42635256465 (2026-11-09, commit db832c892). Lift it with the Playwright bump that supports 26.04.
+    runs-on: ubuntu-24.04
+    # THE CAP FOLLOWS THE HOUSE RULE (CI-SHARD, 2026-11-19; the longest CONCLUDED run × 1.5, rounded
+    # UP to the next 15 — the test ratchet's comment above; the e2e job's comment says the same):
+    # a timeout is not a test verdict, and this job gates the deploy. Its longest CONCLUDED run is
+    # 12m13s (run 44282875950, job 134727897228), and it CARRIED a slow install: "Install Playwright
+    # Chromium" took 10m29s against 26 s to 1m44s elsewhere, 81% of the old cap of 15. The time
+    # went to APT ("Fetched 32.1 MB in 9min 27s (56.5 kB/s)" from the Ubuntu mirror; the browser
+    # downloads took about 9 s), so no browser cache is added. 12m13s x 1.5 = 18m20s -> 30. At the
+    # e2e job's worse install (13m57s) this job would take about 15m41s, which 30 still clears.
+    # THE INSTALL, CURED WITH THE E2E JOB'S (CI-FIT point 75, 2026-11-20): at 29ec255fe (job
+    # 135456581132) "Install Playwright Chromium" took 9m45s, again APT ("Fetched 32.1 MB in 8min
+    # 38s (61.9 kB/s)"). This job runs in the SAME image as `e2e` (one tag, pinned to the lockfile
+    # by tests/build/ciCheckParity.test.js) and its install step is the same launch probe with the
+    # same fallback. The cap of 30 stands until a run concludes in the image (then the house rule).
+    container:
+      image: mcr.microsoft.com/playwright:v1.60.0-noble
+      options: --ipc=host
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -387,8 +531,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # In the image it is already installed with its libraries: this LAUNCHES it, and only installs
+      # (with the system packages) if it does not launch. See the e2e job's comment.
       - name: Install Playwright Chromium
-        run: npx playwright install --with-deps chromium
+        run: node scripts/ensure-playwright-browsers.mjs chromium
 
       - name: Build the local-data production artifact
         run: npm run build -- --mode e2e
@@ -489,7 +635,12 @@ jobs:
     # (scripts/vercel-ignore-build.mjs) requires this job green, so a cap that cuts a
     # passing run blocks the production deploy — which is why production has not
     # deployed since 09-16.
-    timeout-minutes: 45
+    # RE-TAKEN 2026-11-18 (the last close, LASTCLOSE-DOORS) BY THE RULE THE RATCHET'S
+    # CAP FOLLOWS (the longest CONCLUDED run × 1.5, rounded UP to the next 15): this job
+    # concluded in 30m38s at 19b67557d (run 44295605654, pull_request, measured by the
+    # chair), 66% of the cap of 45 on a job whose scoped suite still grows; 30m38s × 1.5
+    # = 45m57s → 60.
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       # Two suites read the LEDGER BRANCH by its local ref (scripts/audit/ledger-citations.mjs and
@@ -819,7 +970,7 @@ jobs:
     runs-on: ubuntu-latest
     # MEASURED on this lane's box, 2026-09-23, each walker alone through the gate
     # mutex: the lighting walker 5-7s (34 tests), the wiring walker 10s (78 tests) —
-    # about 17s for the pair. The `check-tests` job's own comment puts this runner at
+    # about 17s for the pair. The test ratchet's comment (above `check-tests-shard`) puts this runner at
     # 3.5x to 4.6x the local box, so the step is well under two minutes and npm ci
     # dominates the job. 20 is what the three sibling weekly jobs carry, and a cap is
     # raised with a fresh measurement, never lowered to match a run that was cut.

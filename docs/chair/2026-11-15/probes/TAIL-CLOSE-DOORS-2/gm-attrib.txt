@@ -1,0 +1,202 @@
+F activeConditions[].severity: 33b12cbef
+F activeConditions[].severityBand: 33b12cbef
+F arrivalScene: 8f222ff87 b61143029
+F availableServices.equipment: b75b08c35
+F availableServices.healing: b75b08c35
+F availableServices.legal: 679e52b01
+F conflicts[].desc: bea2a1298 474c5f966
+F conflicts[].issue: bea2a1298
+F conflicts[].parties: bea2a1298
+F conflicts[].plotHooks: bea2a1298
+F conflicts[].stakes: bea2a1298
+F culturalIdentity.architecturalDetail: 8f222ff87
+F culturalIdentity.foodways: 8f222ff87
+F defenseProfile.economicGates: 33b12cbef b61143029
+F defenseProfile.institutions: 8f222ff87 33b12cbef 65dc92af9 f1537a8e4
+F defenseProfile.readiness: 33b12cbef 65dc92af9 b61143029
+F defenseProfile.scores: 33b12cbef 65dc92af9 b61143029
+F economicState.activeChains: 8f222ff87 e9601b6b3
+F economicState.compound: 33b12cbef
+F economicState.economicComplexity: 1b672cbe8
+F economicState.foodSecurity: 8f222ff87 33b12cbef b61143029
+F economicState.incomeSources: 33b12cbef b61143029 ec1a14f27
+F economicState.institutionalServices: becdc010c
+F economicState.localProduction: f5c5d636e 390168d6b bc7ce511a 3e482b329
+F economicState.primaryExports: becdc010c 390168d6b
+F economicState.prosperity: b61143029
+F economicState.prosperityStanding: 33b12cbef b61143029
+F economicState.safetyProfile: 33b12cbef 0537f92f3 d5c419393 679e52b01
+F economicState.tradeDependencies: 8f222ff87 e9601b6b3
+F economicViability.metrics: 26c3dc456
+F economicViability.plotHooks: 420e8fd09
+F generationCoherenceReceipt.judgments: bea2a1298 8f222ff87
+F history.currentTensions: 8f222ff87 3f3d9c880 2824cad0a
+F history.eventsTimeline: 8f222ff87
+F history.founding: 866041da5 bd57eb02c 9d3d177a0
+F history.historicalEvents: 77e480ac3 8f222ff87 7c12769c5 2824cad0a
+F history.legacyAnnotations: 8f222ff87 2824cad0a
+F institutions[].desc: 8f222ff87 e7e1c2e8c 3b873a03a 96b4015f4 f1537a8e4 794a00cc5 d5ec9c7f3 329f324a0
+F institutions[].tags: e7e1c2e8c
+F npcs#len: bea2a1298
+F npcs[].activeConstraint: bea2a1298 33b12cbef 718985525
+F npcs[].category: bea2a1298
+F npcs[].gender: bea2a1298
+F npcs[].goal: bea2a1298 474c5f966
+F npcs[].id: bea2a1298
+F npcs[].importance: bea2a1298
+F npcs[].influence: bea2a1298
+F npcs[].institution: bea2a1298
+F npcs[].memberships: bea2a1298
+F npcs[].name: bea2a1298
+F npcs[].personality: bea2a1298
+F npcs[].physical: bea2a1298
+F npcs[].plotHooks: e20a60e0d bea2a1298 e7de70116
+F npcs[].power: bea2a1298
+F npcs[].presentation: bea2a1298 d700bda44
+F npcs[].role: bea2a1298 5d1e3096b
+F npcs[].secret: bea2a1298 00e8ba474
+F npcs[].settlementCondition: bea2a1298 33b12cbef
+F npcs[].structuralPosition: bea2a1298 33b12cbef 718985525
+F npcs[].structuralRank: bea2a1298
+F npcs[].title: bea2a1298 5d1e3096b
+F powerStructure.conflicts: bea2a1298 474c5f966
+F powerStructure.economyInputFingerprint: b61143029
+F powerStructure.factionRelationships: 33b12cbef c2c12792e fd5e0da52 470ff0a7a
+F powerStructure.factions: bea2a1298 33b12cbef 00e8ba474 fd5e0da52 6ad86c138 470ff0a7a
+F powerStructure.publicLegitimacy: 33b12cbef b61143029
+F powerStructure.recentConflict: 475506bf7
+F prominentRelationship.full: bea2a1298 cf3a0352b 718985525
+F prominentRelationship.npc1: bea2a1298
+F prominentRelationship.npc2: bea2a1298
+F prominentRelationship.phrasing: bea2a1298 cf3a0352b 718985525
+F prominentRelationship.tension: bea2a1298 cf3a0352b 718985525
+F prominentRelationship.type: bea2a1298
+F relationships#len: bea2a1298
+F relationships[].archetypeKey: bea2a1298
+F relationships[].description: bea2a1298 cf3a0352b 718985525 9ba7d6940
+F relationships[].flagDriven: bea2a1298
+F relationships[].from: bea2a1298
+F relationships[].id: bea2a1298
+F relationships[].npc1Name: bea2a1298
+F relationships[].npc1Role: bea2a1298 5d1e3096b
+F relationships[].npc2Name: bea2a1298
+F relationships[].npc2Role: bea2a1298 5d1e3096b
+F relationships[].proseVariant: bea2a1298 cf3a0352b 718985525
+F relationships[].strength: bea2a1298
+F relationships[].tension: bea2a1298 cf3a0352b e7de70116 718985525 9ba7d6940
+F relationships[].to: bea2a1298
+F relationships[].type: bea2a1298
+F relationships[].typeName: bea2a1298
+F resourceAnalysis.availableResources: 3e482b329
+F resourceAnalysis.exploitation: e7e1c2e8c
+F resourceAnalysis.exports: 77e480ac3 c2c12792e e7e1c2e8c 131dfdbb6
+F resourceAnalysis.gaps: c2c12792e e7e1c2e8c f5ffbb650 4b19b7446
+F settlementReason[]: e20a60e0d e6a888e1f
+F simulationTrace[].causes: 33b12cbef b61143029
+F stress.cast: 33b12cbef 70d80f3e9
+F stressors.cast: 33b12cbef 70d80f3e9
+== BY COMMIT
+C 77e480ac3 [2] join(JOIN-1 · 1): merge lane/r3-code-c-2026-11-13 at 5eba19f9b
+    history.historicalEvents, resourceAnalysis.exports
+C e20a60e0d [2] join(JOIN-1 · 3): merge lane/r2-code-a-2026-11-13 at c77bd5d57
+    npcs[].plotHooks, settlementReason[]
+C bea2a1298 [52] join(JOIN-1 · 4): merge lane/powers-follow-up-2026-11-13 at 3909655c3
+    conflicts[].desc, conflicts[].issue, conflicts[].parties, conflicts[].plotHooks, conflicts[].stakes, generationCoherenceReceipt.judgments, npcs#len, npcs[].activeConstraint, npcs[].category, npcs[].gender, npcs[].goal, npcs[].id, npcs[].importance, npcs[].influence, npcs[].institution, npcs[].memberships, npcs[].name, npcs[].personality, npcs[].physical, npcs[].plotHooks, npcs[].power, npcs[].presentation, npcs[].role, npcs[].secret, npcs[].settlementCondition, npcs[].structuralPosition, npcs[].structuralRank, npcs[].title, powerStructure.conflicts, powerStructure.factions, prominentRelationship.full, prominentRelationship.npc1, prominentRelationship.npc2, prominentRelationship.phrasing, prominentRelationship.tension, prominentRelationship.type, relationships#len, relationships[].archetypeKey, relationships[].description, relationships[].flagDriven, relationships[].from, relationships[].
+C 8f222ff87 [13] join(JOIN-1 · 5): merge lane/w2-fix-data-2026-11-13 at 166d8b789
+    arrivalScene, culturalIdentity.architecturalDetail, culturalIdentity.foodways, defenseProfile.institutions, economicState.activeChains, economicState.foodSecurity, economicState.tradeDependencies, generationCoherenceReceipt.judgments, history.currentTensions, history.eventsTimeline, history.historicalEvents, history.legacyAnnotations, institutions[].desc
+C 33b12cbef [20] join(JOIN-1 · 9): merge lane/coherence-upkeep-2026-11-12 at c56fd565e — the defence lane, last
+    activeConditions[].severity, activeConditions[].severityBand, defenseProfile.economicGates, defenseProfile.institutions, defenseProfile.readiness, defenseProfile.scores, economicState.compound, economicState.foodSecurity, economicState.incomeSources, economicState.prosperityStanding, economicState.safetyProfile, npcs[].activeConstraint, npcs[].settlementCondition, npcs[].structuralPosition, powerStructure.factionRelationships, powerStructure.factions, powerStructure.publicLegitimacy, simulationTrace[].causes, stress.cast, stressors.cast
+C c2c12792e [3] join(JOIN-4 · 1): merge lane/r3-code-c-2026-11-13 at da0f201e6 — the second landing
+    powerStructure.factionRelationships, resourceAnalysis.exports, resourceAnalysis.gaps
+C e7e1c2e8c [5] join(JOIN-4 · 5): merge lane/w2-fix-data-2026-11-13 at 8e814883c — the second landing
+    institutions[].desc, institutions[].tags, resourceAnalysis.exploitation, resourceAnalysis.exports, resourceAnalysis.gaps
+C 0537f92f3 [1] join(JOIN-4 · 9): merge lane/coherence-upkeep-2026-11-12 at 660cb0893 — the second landing, the defence lane last
+    economicState.safetyProfile
+C 65dc92af9 [3] join(JOIN-4 · point 2): merge lane/upkeep-monotone-2026-11-14 at 0ca0bbe94 — the defence rating's rebuild
+    defenseProfile.institutions, defenseProfile.readiness, defenseProfile.scores
+C b61143029 [11] join(JOIN-4 · point 3): merge lane/coherence-upkeep-2026-11-12 at 2d8aadb19 — the income rows' cure
+    arrivalScene, defenseProfile.economicGates, defenseProfile.readiness, defenseProfile.scores, economicState.foodSecurity, economicState.incomeSources, economicState.prosperity, economicState.prosperityStanding, powerStructure.economyInputFingerprint, powerStructure.publicLegitimacy, simulationTrace[].causes
+C 474c5f966 [3] join(JOIN-4 · point 5): merge lane/powers-follow-up-2026-11-13 at d2ffdbb07 — a leaf for a power's name in a sentence
+    conflicts[].desc, npcs[].goal, powerStructure.conflicts
+C e9601b6b3 [2] join(JOIN-5 · 2): merge lane/w2-fix-data-2026-11-13 at e6e1893f4 — the third landing
+    economicState.activeChains, economicState.tradeDependencies
+C 3b873a03a [1] join(JOIN-5 · P1): merge lane/w2-fix-data-2026-11-13 at 78dd629bd — the chair's second point, final
+    institutions[].desc
+C cf3a0352b [6] join(JOIN-5 · P5): merge lane/r2-code-a-2026-11-13 at 9ac157cc9 — the chair's last second point, final
+    prominentRelationship.full, prominentRelationship.phrasing, prominentRelationship.tension, relationships[].description, relationships[].proseVariant, relationships[].tension
+C 96b4015f4 [1] join(JOIN-6 · 5): merge lane/tail-houses-2026-11-14 at a2550c0ef
+    institutions[].desc
+C e7de70116 [2] join(JOIN-6 · 6): merge lane/tail-ties-2026-11-14 at b8991a936
+    npcs[].plotHooks, relationships[].tension
+C 866041da5 [1] join(JOIN-6 · 7): merge lane/tail-narrative-2026-11-14 at 9bd853fd0
+    history.founding
+C 00e8ba474 [2] join(JOIN-6 · 8): merge lane/tail-powers-2026-11-14 at d68805134
+    npcs[].secret, powerStructure.factions
+C d5c419393 [1] join(JOIN-6 · 9): merge lane/tail-defecon-2026-11-14 at 345f13157
+    economicState.safetyProfile
+C f5c5d636e [1] join(JOIN-6 · 10): merge lane/tail-defecon-c-2026-11-14 at 358d6afea
+    economicState.localProduction
+C 7c12769c5 [1] join(JOIN-7 · 2): merge lane/tail-history-2026-11-14 at 3da34c70b
+    history.historicalEvents
+C f1537a8e4 [2] join(JOIN-7 · 5): merge lane/tail-houses-2026-11-14 at 2c10ddefe
+    defenseProfile.institutions, institutions[].desc
+C fd5e0da52 [2] join(JOIN-7 · 6): merge lane/tail-powers-b-2026-11-14 at f89c0d7c1
+    powerStructure.factionRelationships, powerStructure.factions
+C ec1a14f27 [1] join(JOIN-7 · 7): merge lane/tail-defecon-2026-11-14 at 5f67f382d
+    economicState.incomeSources
+C becdc010c [2] join(JOIN-7 · 8): merge lane/tail-defecon-c-2026-11-14 at fb341090c
+    economicState.institutionalServices, economicState.primaryExports
+C f5ffbb650 [1] join(JOIN-7 · 10): merge lane/tail-defecon-r-2026-11-14 at 5a446d29b
+    resourceAnalysis.gaps
+C b75b08c35 [2] join(JOIN-7 · 15): merge lane/tail-services-2026-11-14 at e35851db1
+    availableServices.equipment, availableServices.healing
+C 3f3d9c880 [1] join(JOIN-7 · 16): merge lane/tail-history-2026-11-14 at 5ed2900cd
+    history.currentTensions
+C 420e8fd09 [1] join(JOIN-7 · 19): merge lane/tail-crisis-2026-11-14 at 572cd48e0
+    economicViability.plotHooks
+C 794a00cc5 [1] join(JOIN-7 · 20): merge lane/tail-houses-2026-11-14 at 9525e011b
+    institutions[].desc
+C 718985525 [8] join(JOIN-7 · 21): merge lane/tail-ties-2026-11-14 at fdebbe346
+    npcs[].activeConstraint, npcs[].structuralPosition, prominentRelationship.full, prominentRelationship.phrasing, prominentRelationship.tension, relationships[].description, relationships[].proseVariant, relationships[].tension
+C e6a888e1f [1] join(JOIN-7 · 22): merge lane/tail-narrative-2026-11-14 at ca827fc0f
+    settlementReason[]
+C 6ad86c138 [1] join(JOIN-7 · 24): merge lane/tail-powers-b-2026-11-14 at f4eab4088
+    powerStructure.factions
+C 1b672cbe8 [1] join(JOIN-7 · 25): merge lane/tail-defecon-2026-11-14 at 21e578caa
+    economicState.economicComplexity
+C 390168d6b [2] join(JOIN-7 · 26): merge lane/tail-defecon-c-2026-11-14 at ea788e17c
+    economicState.localProduction, economicState.primaryExports
+C 4b19b7446 [1] join(JOIN-7 · 27): merge lane/tail-defecon-r-2026-11-14 at a515e1b54
+    resourceAnalysis.gaps
+C 5d1e3096b [4] join(JOIN-7 · 31): merge lane/tail-titles-2026-11-15 at b30c1b7aa
+    npcs[].role, npcs[].title, relationships[].npc1Role, relationships[].npc2Role
+C 131dfdbb6 [1] join(JOIN-8 · 4): merge lane/tail-defecon-2026-11-14 at 81100e11e
+    resourceAnalysis.exports
+C bc7ce511a [1] join(JOIN-8 · 9): merge lane/tail-defecon-c-2026-11-14 at 4d6d95761
+    economicState.localProduction
+C 2824cad0a [3] join(JOIN-8 · 11): merge lane/tail-history-2026-11-14 at d7921a40c
+    history.currentTensions, history.historicalEvents, history.legacyAnnotations
+C d5ec9c7f3 [1] join(JOIN-8 · 12): merge lane/tail-houses-2026-11-14 at b39f5c78c
+    institutions[].desc
+C 9ba7d6940 [2] join(JOIN-8 · 14): merge lane/tail-ties-2026-11-14 at 7622238f6
+    relationships[].description, relationships[].tension
+C d700bda44 [1] join(JOIN-8 · 16): merge lane/tail-powers-b-2026-11-14 at 4ff449a7b
+    npcs[].presentation
+C 3e482b329 [2] join(JOIN-8 · 19): merge lane/tail-defecon-c-2026-11-14 at 849bd8679
+    economicState.localProduction, resourceAnalysis.availableResources
+C bd57eb02c [1] join(JOIN-8 · 21): merge lane/tail-narrative-2026-11-14 at 091ef25e5
+    history.founding
+C 475506bf7 [1] join(JOIN-8 · 25): merge lane/tail-powers-2026-11-14 at 01ddaba28
+    powerStructure.recentConflict
+C 679e52b01 [2] join(JOIN-8 · 26): merge lane/tail-display-civic-2026-11-14 at c2f053333
+    availableServices.legal, economicState.safetyProfile
+C 9d3d177a0 [1] join(JOIN-8 · 28): merge lane/tail-narrative-2026-11-14 at 002085ed5
+    history.founding
+C 70d80f3e9 [2] join(JOIN-9 · 2): merge lane/tail-crisis-2026-11-14 at 0f506cd93
+    stress.cast, stressors.cast
+C 329f324a0 [1] join(JOIN-9 · 10): merge lane/tail-houses-2026-11-14 at 0907dccf2
+    institutions[].desc
+C 26c3dc456 [1] join(JOIN-9 · 14): merge lane/tail-defecon-2026-11-14 at ad5720386
+    economicViability.metrics
+C 470ff0a7a [2] join(JOIN-9 · 15): merge lane/tail-powers-b-2026-11-14 at 9c337fc97
+    powerStructure.factionRelationships, powerStructure.factions

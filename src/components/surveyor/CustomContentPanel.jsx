@@ -34,6 +34,9 @@ import { reviewContentDraft } from '../../domain/content/contentReview.js';
 import { fingerprintContent } from '../../domain/content/contentFingerprint.js';
 import { BORDER, MUTED, GREEN, FS, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import LaunchGatedExport from '../primitives/LaunchGatedExport.jsx';
+import { selectExportStaff } from '../primitives/exportLaunchGate.js';
+import { CONTENT_PREVIEW_ABSENT, engineServiceBuild } from '../../lib/engineAbsentPaths.js';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import {
   MoneyLine,
@@ -73,6 +76,12 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
     [previewBaseContent],
   );
   const applyCustomContentCommand = useStore((state) => state.applyCustomContentCommand);
+  // The sample worker forges with reviewed homebrew, which the engine service does not take, so
+  // a build that carries no engine cannot forge it (ENGINE-5 unit 2, path c): a non-staff viewer
+  // meets the launch teaser on the forge control, staff the path's plain sentence.
+  const staff = useStore(selectExportStaff);
+  const engineAbsent = engineServiceBuild();
+  const sampleGated = engineAbsent && !staff;
 
   const [session, dispatch] = useReducer(
     reduceContentDraftSession,
@@ -160,6 +169,11 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
     ) {
       return;
     }
+    if (engineAbsent) {
+      dispatch({ type: 'sample.started' });
+      dispatch({ type: 'sample.failed', error: CONTENT_PREVIEW_ABSENT });
+      return;
+    }
     const controller = new AbortController();
     previewAbortRef.current?.abort();
     previewAbortRef.current = controller;
@@ -185,6 +199,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
     }
   }, [
     draft,
+    engineAbsent,
     interpretation,
     previewBaseContent,
     review,
@@ -388,6 +403,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
             >
               Inspect effect map
             </Button>
+            <LaunchGatedExport gated={sampleGated} sentence={CONTENT_PREVIEW_ABSENT}>
             <Button
               variant="secondary"
               size="sm"
@@ -409,6 +425,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
             >
               Forge unsaved sample
             </Button>
+            </LaunchGatedExport>
           </div>
 
           {session.error && session.stage === CONTENT_STUDIO_STAGE.SAMPLE && (

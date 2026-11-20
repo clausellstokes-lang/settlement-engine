@@ -397,7 +397,7 @@ describe('site-coherence contradiction ratchet (Wave 0 — inventory freezing, n
     // The three corpus axes are the ones the arithmetic 210 + 252 = 462 is built from.
     expect(SETT_TYPES.length * TERRAINS.length * ARM_A_SEEDS.length
       + SETT_TYPES.length * TERRAINS.length * ROUTES.length, 'the frozen axes no longer multiply to 462').toBe(CORPUS_SIZE);
-  }, CORPUS_BUDGET_MS);
+  }, 240_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 71.3 s in the last close's serial check; about 132.0 s on a CI runner (the measured factor), within three quarters of its 120 s; x 1.5 -> 240 s
 
   it('C1 — the live row set equals the frozen baseline in both directions', () => {
     const scan = corpus();
@@ -469,7 +469,7 @@ describe('site-coherence contradiction ratchet (Wave 0 — inventory freezing, n
     expect(second.rows, 'the corpus is not deterministic — two scans in one run disagree on rows').toEqual(first.rows);
     expect(second.totals, 'the corpus is not deterministic — the totals disagree').toEqual(first.totals);
     expect(second.vocabulary, 'the corpus is not deterministic — the export vocabulary disagrees').toEqual(first.vocabulary);
-  }, CORPUS_BUDGET_MS);
+  }, 240_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 67.4 s in the last close's serial check; about 124.6 s on a CI runner (the measured factor), within three quarters of its 120 s; x 1.5 -> 240 s
 
   it('C6 — the only-shrinks contract reds on a new, a grown, a shrunk and a vanished key', () => {
     // Driven against HAND-BUILT variants, never by editing the committed baseline.

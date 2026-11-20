@@ -36,9 +36,13 @@ import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import SteadingsSection from '../../src/components/new/tabs/SteadingsSection.jsx';
 import { RelationshipsTab } from '../../src/components/new/tabs/RelationshipsTab.jsx';
 import { useStore } from '../../src/store/index.js';
+import { withPublicProse } from '../../src/domain/display/publicProse.js';
+import { composePublicProse } from '../../src/components/new/publicProseCompose.js';
 import { generalDeskLines, siteClause } from '../../src/components/new/generalDeskRead.js';
 import { relationshipsDeskLists } from '../../src/domain/display/stateProse/relationshipsDeskRead.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { crisisDimensionsOf } from '../../src/domain/crisis/crisisFacts.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { drawnMember, drawnMembers, poolMemberTexts } from '../helpers/drawnProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -140,7 +144,11 @@ const SPEAKING = Object.freeze({
   },
   relationships: [{ flagDriven: false }, { flagDriven: false }],
   config: { terrainType: 'mountain', tradeRouteAccess: 'road' },
-  institutions: [{ name: 'The Stone Market', category: 'economy' }],
+  // A CATALOGUE market row (the producer's own name), since census-1b unit A (d) (427f7b112) homed
+  // DS-GEN-13's key on the market fact (`facts/market.js`: the catalogue's `market` tag on the live
+  // roster) and db3ed88c1 put `declares: ["market"]` on MARKET-OPEN's brace: the old invented
+  // 'The Stone Market' carries no tag, so the desk keyed NO-MARKET and the kernel refused MARKET-OPEN.
+  institutions: [{ name: 'Weekly market', category: 'economy' }],
   economicState: {
     prosperity: 'Comfortable',
     foodSecurity: { label: 'Deficit' },
@@ -204,7 +212,13 @@ const {
     slots: { ...SPEAKING_SLOTS, govFaction: 'The Council' },
   },
   CONNECTION: { blockId: 'DS-REL-2', poolKey: 'prominentRelationship present' },
-}, { leaf: 'general', seed: SPEAKING._seed, slots: SPEAKING_SLOTS });
+  // CENSUS-2b item 2 (db3ed88c1): MARKET-OPEN's brace group declares `market`, which the kernel
+  // reads against `facts` fail-closed — so the spec hands in `factsOf(SPEAKING)`, exactly what the
+  // desk hands in at its entry (`generalStateProse.js` → `factsAnswered`).
+}, { leaf: 'general', seed: SPEAKING._seed, slots: SPEAKING_SLOTS, facts: factsOf(SPEAKING) });
+
+/** The desk's own Overview lines for the speaking fixture. */
+const desk0 = () => generalDeskLines(SPEAKING, { publicDossier: false, stresses: [] }).overview;
 
 /** @param {boolean} publicDossier */
 const renderTab = (publicDossier) => render(e(OverviewTab, {
@@ -229,9 +243,11 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     // the seven behind them were invisible. Every position now runs and the roster travels
     // with the true count (tests/helpers/seedFailures.js).
     expectNoSeedFailures(collectSeedFailures([
-      [onPage(siteClause(GROUND), desk.siteLines, SPEAKING), 'DS-GEN-12 the ground (overview.ground)'],
       [onPage(siteClause(MARKET), desk.siteLines, SPEAKING), 'DS-GEN-13 the market (overview.market)'],
       [onPage(siteClause(INSTITUTIONS), desk.siteLines, SPEAKING), 'DS-GEN-17 the roster (overview.institutions)'],
+      // DS-GEN-12 (overview.ground) left this list at the owner's word of 2026-11-09 (OWNER-WORDS-DOSSIER
+      // item 2: "In 'the place' the second paragraph seems redundant"): the ground lens re-introduced the
+      // place the arrival scene had just drawn, and its row glances; the arm below pins its silence.
       // DS-GEN-3 (overview.systemsHealth) is NOT in this list since owner order 2026-09-17,
       // and DS-GEN-2, DS-GEN-7 and DS-REL-2 left it at the chair's ruling of 2026-10-30
       // (T1-6, T1-9, T1-10): those positions glance; the arm below pins their silence.
@@ -240,16 +256,26 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     )), 'every Overview position draws privately and is silent on a public dossier');
   });
 
+  test('DS-GEN-12, the ground, prints NO sentence, even privately (OWNER-WORDS-DOSSIER item 2, 2026-11-09)', () => {
+    const priv = renderTab(false);
+    expect(desk0().siteLines.length, 'the other site lines still draw').toBeGreaterThan(0);
+    expectAbsentWithAnchor(priv, siteClause(GROUND), onPage(siteClause(MARKET), desk0().siteLines, SPEAKING),
+      'the ground lens re-introduces the place again');
+  });
+
   test('DS-GEN-2, DS-GEN-7 and DS-REL-2 print NO sentence beside their rows, even privately (T1-6/T1-9/T1-10)', () => {
     const priv = renderTab(false);
     // Each anchor is the datum the cut sentence used to restate, on the same render.
     expectAbsentWithAnchor(priv, CONFLICT, 'Labor control', 'DS-GEN-2 prints under its conflict row again');
-    expectAbsentWithAnchor(priv, WARNING, 'Structural Issues', 'DS-GEN-7 prints beside the warning rows again');
+    expectAbsentWithAnchor(priv, WARNING, 'Labor control', 'DS-GEN-7 prints beside the warning rows again');
     expectAbsentWithAnchor(priv, CONNECTION, 'Mugain and Felix are connected by something neither discusses openly.',
       'a DS-REL-2 lens prints above the phrasing again');
-    // X-8: the warning headers carry no "First Survey" suffix; one page-level label says it.
-    expectAbsentWithAnchor(priv, 'Structural Issues · First Survey', 'Structural Issues', 'a header suffix is back');
-    expectAbsentWithAnchor(priv, 'Suggestions · First Survey', 'Suggestions', 'a header suffix is back');
+    // READER-R1 ruling 1 (2026-11-05): the structural validator's rows and suggestions left the
+    // DM page for the Viability tab's staff panel, so neither header nor row prints here (the
+    // X-8 suffix pin went with its headers).
+    expectAbsentWithAnchor(priv, 'Structural Issues', 'Labor control', 'the validator block is back on the DM page');
+    expectAbsentWithAnchor(priv, 'a violation', 'Labor control', 'a validator row is back on the DM page');
+    expectAbsentWithAnchor(priv, 'a suggestion', 'Labor control', 'a validator suggestion is back on the DM page');
   });
 
   test('THE PLACE is one passage: the arrival scene first, then the site lines trimmed to their first clause (T1-2)', () => {
@@ -264,11 +290,11 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     // The arrival scene prints ONCE, verbatim, and before the site lines.
     expect(text.split(ARRIVAL).length - 1, 'the arrival scene prints once').toBe(1);
     const desk = generalDeskLines(town, { publicDossier: false, stresses: [] }).overview;
-    const firstSite = onPage(siteClause(GROUND), desk.siteLines, town);
+    const firstSite = onPage(siteClause(MARKET), desk.siteLines, town);
     expect(text.indexOf(ARRIVAL)).toBeLessThan(text.indexOf(firstSite));
     expect(text.indexOf('The place')).toBeLessThan(text.indexOf(ARRIVAL));
     // Each site line is its first clause only: the aphorism after `;` or a joined clause is cut.
-    expect(desk.siteLines.length, 'the site lines drew').toBe(3);
+    expect(desk.siteLines.length, 'the site lines drew').toBe(2);
     for (const line of desk.siteLines) expect(siteClause(line), 'a site line keeps a second clause').toBe(line);
     cleanup();
     // On a public dossier the desk lines go dark and the arrival scene (the datum) stays.
@@ -279,6 +305,48 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     expectAbsentWithAnchor(pub, firstSite, ARRIVAL, 'a desk site line reached a public dossier');
   });
 
+  test('THE PLACE ends on the arrival scene; the woven block moves below Systems Health (OWNER-WORDS-DOSSIER item 2b)', () => {
+    // The owner, 2026-11-09: "In 'the place' the second paragraph seems redundant. The first was
+    // amazing." The block is NOT deleted (its sentences have no other home on the page): it stands
+    // after the Systems Health section with no heading of its own (the heading vetoed, SW-9).
+    const ARRIVAL = 'Arrival scene fixture: a bell rings twice, then stops.';
+    const town = { ...SPEAKING, arrivalScene: ARRIVAL };
+    const { container, getByTestId } = render(e(OverviewTab, {
+      settlement: town, narrativeNote: null, onNavigateTab: () => {},
+      publicDossier: false, playerView: false, worldState: null,
+    }));
+    const place = getByTestId('overview-place');
+    expect(place.textContent, 'The place is its title and the arrival scene alone').toBe(`The place${ARRIVAL}`);
+    const desk = generalDeskLines(town, { publicDossier: false, stresses: [] }).overview;
+    const firstSite = onPage(siteClause(MARKET), desk.siteLines, town);
+    const block = getByTestId('overview-site-lines');
+    // The owner vetoed the proposed heading (2026-11-09 03:5x, "No."; SW-9): the block carries none.
+    expect(block.textContent.startsWith(firstSite), 'the moved block opens on its first site line, no heading').toBe(true);
+    const text = container.textContent || '';
+    expect(text, 'the vetoed heading is gone').not.toContain('Trade and the houses'); // anchored: the block is asserted to open on its first site line above
+    expect(text, 'its struck alternative never lands').not.toContain('Trade and institutions'); // anchored: the block is asserted to open on its first site line above
+    expect(text.indexOf('Systems Health'), 'the block follows the Systems Health section').toBeLessThan(text.indexOf(firstSite));
+    expect(text.split(firstSite).length - 1, 'the site lines print once').toBe(1);
+  });
+
+  test('a scene opening on a one-letter word takes the --lone drop-cap; "The road…" does not (SW-9, the "Amerchant" cure)', () => {
+    const lone = render(e(OverviewTab, {
+      settlement: { ...SPEAKING, arrivalScene: 'A merchant argues with a carter at the gate.' },
+      narrativeNote: null, onNavigateTab: () => {}, publicDossier: false, playerView: false, worldState: null,
+    }));
+    const p1 = lone.getByTestId('overview-place-arrival');
+    expect(p1.textContent).toBe('A merchant argues with a carter at the gate.');
+    expect(p1.className.split(' ')).toEqual(['oc-dropcap-prose', 'oc-dropcap-prose--lone']);
+    lone.unmount();
+    const plain = render(e(OverviewTab, {
+      settlement: { ...SPEAKING, arrivalScene: 'The road narrows at the gate.' },
+      narrativeNote: null, onNavigateTab: () => {}, publicDossier: false, playerView: false, worldState: null,
+    }));
+    const p2 = plain.getByTestId('overview-place-arrival');
+    expect(p2.textContent).toBe('The road narrows at the gate.');
+    expect(p2.className, 'a many-letter first word keeps the plain drop-cap').toBe('oc-dropcap-prose');
+  });
+
   test('the identity strip carries the culture scope phrase and who governs (X-5 / T1-1)', () => {
     const town = {
       ...SPEAKING,
@@ -286,12 +354,17 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
       powerStructure: { governingName: 'The Burgher Council', stability: 'Stable', factions: [] },
       history: { historicalCharacter: 'Character fixture line.' },
     };
+    // RE-KEYED BY CAUSE (SW-B7b fourth seat, B10(a)): a shared page prints the identity line the
+    // owner's save composed (`overview:identity`), so the fixture is stamped as its save stamps it.
+    const stamp = (t) => withPublicProse(t, composePublicProse(t));
     const { container } = render(e(OverviewTab, {
-      settlement: town, narrativeNote: null, onNavigateTab: () => {},
+      settlement: stamp(town), narrativeNote: null, onNavigateTab: () => {},
       publicDossier: true, playerView: false, worldState: null,
     }));
     const line = container.querySelector('[data-testid="overview-identity-line"]')?.textContent || '';
-    expect(line).toContain('Germanic-inspired, built in timber and stone, and run by guild and estate.');
+    // STYLE-2 FIRST-IMPRESSIONS (A·O2, 2026-11-09): the fixture's seed picks the official frame, and
+    // its roster holds no guild, so the line says what the record holds
+    expect(line).toContain('Germanic-inspired: built in timber and stone, and run by its estates.');
     expect(line).toContain('The Burgher Council · Stable');
     // The governing name is generated text: it wraps like the sentence it closes, never held on
     // one line by a nowrap that would push a long council name past a phone's edge (ODQ §934.23).
@@ -302,7 +375,7 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     // A culture with no authored phrase takes no fallback: the character line stays the strip's quote only.
     const mixed = { ...town, culturalIdentity: { key: 'mixed', label: 'Germanic-inspired + Latin-inspired' } };
     const text = render(e(OverviewTab, {
-      settlement: mixed, narrativeNote: null, onNavigateTab: () => {},
+      settlement: stamp(mixed), narrativeNote: null, onNavigateTab: () => {},
       publicDossier: true, playerView: false, worldState: null,
     })).container.textContent || '';
     expect(text.split('Character fixture line.').length - 1, 'the character line prints once').toBe(1);
@@ -461,7 +534,7 @@ describe('THE ONE CALLER — the reader, not the tabs, holds the desk and the ga
     const drawn = generalDeskLines(SPEAKING, { publicDossier: false, stresses: [] }).overview;
     // Every SPEAKING position the desk owns speaks on this town, so the silence below is a
     // gate rather than a town with nothing to say.
-    expect(drawn.siteLines.length, 'ground + market + institutions').toBe(3);
+    expect(drawn.siteLines.length, 'market + institutions (the ground glances, OWNER-WORDS-DOSSIER item 2)').toBe(2);
     // DS-GEN-3 GLANCES since owner order 2026-09-17: the reader draws no sentence there even
     // privately, and the six positions around it prove the reader is live.
     expect(drawn.healthLines, 'overview.systemsHealth glances, so no DS-GEN-3 line is drawn').toEqual([]);
@@ -477,7 +550,7 @@ describe('THE ONE CALLER — the reader, not the tabs, holds the desk and the ga
     expect(drawn.connectionLines, 'overview.notableConnection glances').toEqual([]);
     const level = { ...SPEAKING, prominentRelationship: null, relationships: undefined };
     expect(generalDeskLines(level, { stresses: [] }).overview.siteLines.length,
-      'the rest of the desk went dark with it').toBe(3);
+      'the rest of the desk went dark with it').toBe(2);
 
     const silent = generalDeskLines(SPEAKING, { publicDossier: true, stresses: [] }).overview;
     expect(silent.siteLines).toEqual([]);
@@ -497,7 +570,7 @@ describe('THE ONE CALLER — the reader, not the tabs, holds the desk and the ga
     for (const town of [SPEAKING, unmeasured]) {
       const overview = generalDeskLines(town, { stresses: [] }).overview;
       expect(overview.originLines).toEqual([]);
-      expect(overview.siteLines.length).toBe(3);
+      expect(overview.siteLines.length).toBe(2); // the ground glances (OWNER-WORDS-DOSSIER item 2)
     }
   });
 });
@@ -615,7 +688,7 @@ const {
   },
   FOUNDED: { blockId: 'DS-GEN-14', poolKey: 'FOUNDED-OLD' },
   RECORD: { blockId: 'DS-GEN-16', poolKey: 'ANCHORED-RECENT', slots: RECORD_SLOTS },
-}, { leaf: 'general', seed: CHRONICLED._seed, slots: CHRONICLED_SLOTS });
+}, { leaf: 'general', seed: CHRONICLED._seed, slots: CHRONICLED_SLOTS, facts: factsOf(CHRONICLED) }); // BAR6-CULTURE (2026-11-16): DS-GEN-9's founding lens declares a size (`tier: >= village`, its oldest streets), so the read hands the fixture's facts, as the desk does (drawnProse.js cause 5)
 
 /** @param {boolean} publicDossier */
 const renderHistory = (publicDossier) => render(e(HistoryTab, {
@@ -802,7 +875,7 @@ describe('THE PLOT HOOKS PAGE IS THE CARDS, GROUPED BY SOURCE PAGE (chair ruling
 
   test('F16 (R1): the empty state says what is absent and does not coach where hooks come from', () => {
     const { container } = render(e(PlotHooksTab, { settlement: { id: 'bare', name: 'Bare', history: {} }, publicDossier: false }));
-    expectAbsentWithAnchor(container.textContent || '', 'They are drawn from', 'No structural plot hooks surfaced yet.', 'the coaching sentence is back');
+    expectAbsentWithAnchor(container.textContent || '', 'They are drawn from', 'This settlement has no plot hooks yet.', 'the coaching sentence is back');
   });
 
   test('the ROUTER threads publicDossier to the plot-hooks tab', () => {
@@ -846,6 +919,11 @@ const FORGE = Object.freeze({
 const CRAFT = drawnMember({
   leaf: 'general', blockId: 'DS-GEN-18', poolKey: 'STALLED', seed: FORGE._seed,
   slots: { settlement: 'Forge Town', institution: 'Smelter' },
+  // RE-KEYED BY IDENTITY (W2-WRITE-11, the lane's red of HANDBACK-9: "NOTHING DRAWS ... no facts"): STALLED v2 and v3
+  // declare `no crisis: under_siege`, which the kernel reads fail-closed, and v1 names `{resource}` (not in the bag), so a
+  // spec that answers no crisis dimension found none eligible. The spec now hands in the desk's whole bag, FORGE's own
+  // crisis dimensions and facts, exactly as economicsTabFlow's GROUND spec does; the pool and its lines are unchanged.
+  dimensions: crisisDimensionsOf(FORGE), facts: factsOf(FORGE),
 });
 
 describe('DS-GEN-18 DRAWS ON THE ECONOMICS TAB — and is silent for a free viewer', () => {
@@ -1147,13 +1225,14 @@ describe('DS-POP-3 DRAWS ON THE OVERVIEW TAB — and is silent for a free viewer
     // SPEAKING carries no `populationHistory`, which is every freshly generated town. Keyed
     // on the band's sign alone, LEVEL would fire here and print "the roll holds where it is".
     const out = renderPop(SPEAKING, false);
-    expect(out, 'an unread ring drew a direction').not.toContain(DIRECTION); // anchored: the toContain(GROUND) below proves the rest of the desk drew on this very render
+    expect(out, 'an unread ring drew a direction').not.toContain(DIRECTION); // anchored: the toContain(MARKET) below proves the rest of the desk drew on this very render
     // ⛔ EVERY LEVEL WORDING, not one of them (car 8a-13): the block's whole default pool is
     // refused, so an appended wording is covered the day it lands.
     expectNoSeedFailures(collectSeedFailures(LEVEL_LINES, (line) => {
-      expect(out, 'the LEVEL default reached the page').not.toContain(line); // anchored: same render, same GROUND anchor below
+      expect(out, 'the LEVEL default reached the page').not.toContain(line); // anchored: same render, same MARKET anchor below
     }), `no wording of DS-POP-3 :: LEVEL reaches an unread ring (${LEVEL_LINES.length} of 2)`);
     // NON-VACUITY: the rest of the desk drew on this very render.
-    expect(out).toContain(siteClause(GROUND));
+    // The MARKET line, not the ground: the ground glances since OWNER-WORDS-DOSSIER item 2.
+    expect(out).toContain(onPage(siteClause(MARKET), generalDeskLines(SPEAKING, { stresses: [] }).overview.siteLines, SPEAKING));
   });
 });

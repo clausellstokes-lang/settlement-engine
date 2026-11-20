@@ -28,7 +28,8 @@
  *
  * Anti-vacuity (the tests/build convention, mirrored from vendorPdfLazy/engineChunkLazy):
  * the dist stages silently no-op pre-build; under VERIFY_DIST=1 a missing dist/ is a HARD
- * failure, and `npm run check` runs `verify:dist` with that flag set.
+ * failure, and `npm run check` runs `verify:dist` with that flag set. The FLAGGED bundle
+ * (the production artifact) has its own arm below, under VERIFY_ENGINE_REMOTE_DIST=1.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -75,6 +76,45 @@ describe.runIf(distExists)('the built bundle boots', () => {
         + '"Cannot access X before initialization" before React ever renders. Read the\n'
         + 'stage report below — stage 1 names the cycle, stage 2 the throwing chunk and\n'
         + `line, stage 3 whether the shell mounted at all.\n\n${output}`,
+        { cause: error },
+      );
+    }
+    expect(report).toContain('PASS — the built bundle boots.');
+  }, 320_000);
+});
+
+// ── THE FLAGGED BUNDLE — the production artifact (DIST-FLAGGED, 2026-11-10) ───
+// Vercel builds with VITE_ENGINE_REMOTE=true (docs/DEPLOY.md), and a flagged build resolves
+// the local engine's seam to src/lib/localEngine.absent.js (vite.config.js ::
+// engineAbsentWhenRemote): a DIFFERENT chunk graph from ./dist. Until this arm no gate ever
+// booted it. `verify:dist` builds it at the default path below before its strict phase
+// (scripts/check-test-ratchet.mjs :: remoteDistBuildCommandOf) and sets
+// VERIFY_ENGINE_REMOTE_DIST=1, so a missing flagged dist is a hard red, never a skip.
+// ENGINE_REMOTE_DIST points it elsewhere (the same override engineAbsentWhenRemote.test.js
+// reads) — which is also how this arm's RED path is proved, against a preserved broken build.
+const remoteDistDir = resolve(ROOT, process.env.ENGINE_REMOTE_DIST || 'node_modules/.cache/engine-remote-dist');
+const remoteDistExists = existsSync(join(remoteDistDir, 'index.html')) && existsSync(join(remoteDistDir, 'assets'));
+const requireRemoteDist = process.env.VERIFY_ENGINE_REMOTE_DIST === '1';
+
+describe.runIf(requireRemoteDist)('the flagged boot smoke is not vacuously skipped', () => {
+  it('the flagged dist exists when VERIFY_ENGINE_REMOTE_DIST=1', () => {
+    expect(remoteDistExists, `VERIFY_ENGINE_REMOTE_DIST=1 but ${remoteDistDir} holds no build`).toBe(true);
+  });
+});
+
+describe.runIf(remoteDistExists)('the FLAGGED bundle (VITE_ENGINE_REMOTE=true, the production artifact) boots', () => {
+  it('scripts/boot-smoke.mjs passes against the flagged dist (acyclic chunk graph · every chunk initialises · the shell mounts)', () => {
+    let report;
+    try {
+      report = execFileSync(
+        process.execPath,
+        ['--max-old-space-size=6144', join(ROOT, 'scripts', 'boot-smoke.mjs'), '--dist', remoteDistDir],
+        { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], timeout: 300_000 },
+      );
+    } catch (error) {
+      const output = `${error.stdout || ''}${error.stderr || ''}`;
+      throw new Error(
+        `THE PRODUCTION (FLAGGED) BUNDLE DOES NOT BOOT (${remoteDistDir}). Read the stage report:\n\n${output}`,
         { cause: error },
       );
     }

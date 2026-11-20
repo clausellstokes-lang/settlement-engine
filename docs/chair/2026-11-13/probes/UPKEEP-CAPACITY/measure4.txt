@@ -1,0 +1,142 @@
+births 3756 (base 3756)
+
+======== G1 (the house: Professional city watch; births holding it 1304; by tier thor 0 haml 0 vill 0 town 0 city 752 metr 552) ========
+READINESS: moved 0 (up 0, down 0); mean all +0.000; over holders +0.00; min 0 max 0; bands 0 {}
+  magic against the page (reliance relied-upon/integral beside Magical WEAK/CRITICAL): made 0, cured 0
+  AI prompt threats: births changed 0 {}
+  COUPLING: power structure changed 0, a power appears or vanishes 0, legitimacy label changed 0; rest of record changed 0; of band movers, power changed 0
+  TEN THAT NAME THE HOUSE (readiness band; military beasts order supply magic):
+    cold-city-0                         82 Fortress         100/84/84/100/79   ->  82 Fortress         100/84/84/100/79
+    cold-city-1                         74 Well-Defended    100/80/53/100/38   ->  74 Well-Defended    100/80/53/100/38
+    cold-city-10                        83 Fortress         100/100/96/100/92  ->  83 Fortress         100/100/96/100/92
+    cold-city-100                       78 Fortress         100/100/66/100/59  ->  78 Fortress         100/100/66/100/59
+    cold-city-101                       69 Well-Defended    100/84/68/100/29   ->  69 Well-Defended    100/84/68/100/29
+    cold-city-102                       58 Well-Defended    87/76/36/94/33     ->  58 Well-Defended    87/76/36/94/33
+    cold-famine-city-30                 71 Well-Defended    100/90/30/78/59    ->  71 Well-Defended    100/90/30/78/59
+    cold-under_siege-city-77            61 Well-Defended    84/80/38/80/23     ->  61 Well-Defended    84/80/38/80/23
+    cold-wartime-metropolis-83          73 Well-Defended    100/79/66/100/56   ->  73 Well-Defended    100/79/66/100/56
+    fresh5-succession_void-metropolis-7  75 Well-Defended    94/100/57/100/57   ->  75 Well-Defended    94/100/57/100/57
+
+======== G2 (the house: Household levy; births holding it 143; by tier thor 143 haml 0 vill 0 town 0 city 0 metr 0) ========
+READINESS: moved 143 (up 143, down 0); mean all +0.292; over holders +7.67; min 0 max 13; bands 98 {('Undefended', 'Vulnerable'): 30, ('Lightly Defended', 'Defensible'): 12, ('Vulnerable', 'Lightly Defended'): 56}
+  thorp      moved  143 mean +2.03 min +0 max +13 bands 98
+  military  moved  143 (up 143, down 0) mean over movers +22.18 min +0 max +40; band changes 125 {('CRITICAL', 'ADEQUATE'): 15, ('WEAK', 'ADEQUATE'): 59, ('ADEQUATE', 'STRONG'): 22, ('WEAK', 'STRONG'): 17, ('CRITICAL', 'WEAK'): 12}
+  monster   moved  141 (up 141, down 0) mean over movers +9.56 min +0 max +12; band changes 34 {('CRITICAL', 'WEAK'): 28, ('WEAK', 'ADEQUATE'): 6}
+  internal  moved  127 (up 127, down 0) mean over movers +7.07 min +0 max +11; band changes 37 {('CRITICAL', 'WEAK'): 31, ('WEAK', 'ADEQUATE'): 6}
+  economic  moved    3 (up 3, down 0) mean over movers +6.67 min +0 max +16; band changes 1 {('CRITICAL', 'WEAK'): 1}
+  magic against the page (reliance relied-upon/integral beside Magical WEAK/CRITICAL): made 0, cured 0
+  AI prompt threats: births changed 0 {}
+  COUPLING: power structure changed 42, a power appears or vanishes 0, legitimacy label changed 0; rest of record changed 50; of band movers, power changed 42
+  TEN THAT NAME THE HOUSE (readiness band; military beasts order supply magic):
+    cold-thorp-191                      22 Vulnerable       47/23/25/33/0      ->  35 Lightly Defended 84/35/36/33/0
+    cold-under_siege-thorp-0             7 Undefended       37/5/3/7/0         ->  19 Vulnerable       72/17/13/7/0
+    cold-wartime-thorp-8                23 Vulnerable       32/16/15/28/0      ->  35 Lightly Defended 68/28/26/28/0
+    fresh6-thorp-52                     32 Lightly Defended 24/18/28/32/0      ->  44 Defensible       64/30/36/32/0
+    cold-thorp-108                      21 Vulnerable       19/4/23/36/0       ->  32 Lightly Defended 56/15/30/36/0
+    cold-thorp-121                      22 Vulnerable       23/4/31/28/0       ->  33 Lightly Defended 58/15/38/28/0
+    fresh6-under_siege-thorp-1          15 Vulnerable       16/22/1/11/0       ->  25 Lightly Defended 48/33/8/11/0
+    fresh6-thorp-50                     21 Vulnerable       54/15/27/23/0      ->  30 Lightly Defended 82/25/35/23/0
+    cold-under_siege-thorp-12            9 Undefended       40/5/16/0/0        ->  16 Vulnerable       55/15/23/0/0
+    fresh6-thorp-12                     11 Undefended       35/5/0/29/0        ->  17 Vulnerable       49/16/4/29/0
+
+======== G3 (the house: Access to parish church; births holding it 938; by tier thor 398 haml 540 vill 0 town 0 city 0 metr 0) ========
+READINESS: moved 346 (up 0, down 346); mean all -0.394; over holders -1.58; min -9 max 0; bands 100 {('Vulnerable', 'Undefended'): 42, ('Lightly Defended', 'Vulnerable'): 57, ('Defensible', 'Lightly Defended'): 1}
+  thorp      moved  163 mean -1.30 min -9 max +0 bands 38
+  hamlet     moved  183 mean -1.44 min -9 max +0 bands 62
+  military  moved   58 (up 0, down 58) mean over movers -4.10 min -10 max +0; band changes 3 {('ADEQUATE', 'WEAK'): 1, ('STRONG', 'ADEQUATE'): 1, ('WEAK', 'CRITICAL'): 1}
+  monster   moved  346 (up 0, down 346) mean over movers -16.81 min -30 max +0; band changes 221 {('WEAK', 'CRITICAL'): 202, ('ADEQUATE', 'WEAK'): 16, ('STRONG', 'ADEQUATE'): 2, ('ADEQUATE', 'CRITICAL'): 1}
+  internal  moved  232 (up 0, down 232) mean over movers -4.56 min -9 max +0; band changes 37 {('WEAK', 'CRITICAL'): 36, ('ADEQUATE', 'WEAK'): 1}
+  economic  moved   45 (up 0, down 45) mean over movers -7.49 min -22 max +0; band changes 17 {('WEAK', 'CRITICAL'): 14, ('ADEQUATE', 'WEAK'): 3}
+  magic against the page (reliance relied-upon/integral beside Magical WEAK/CRITICAL): made 0, cured 0
+  AI prompt threats: births changed 3 {('gained', 'Economic fragility'): 3}
+  COUPLING: power structure changed 79, a power appears or vanishes 0, legitimacy label changed 1; rest of record changed 82; of band movers, power changed 79
+  TEN THAT NAME THE HOUSE (readiness band; military beasts order supply magic):
+    cold-hamlet-123                     24 Lightly Defended 12/18/16/34/0      ->  15 Vulnerable       2/0/7/27/0
+    fresh6-thorp-19                     28 Lightly Defended 2/18/17/44/0       ->  19 Vulnerable       2/0/10/22/0
+    cold-thorp-224                      14 Vulnerable       23/23/5/36/0       ->   6 Undefended       23/5/1/18/0
+    fresh5-hamlet-4                     31 Lightly Defended 38/46/26/40/0      ->  23 Vulnerable       38/16/19/40/0
+    fresh6-thorp-9                      27 Lightly Defended 7/18/7/43/0        ->  19 Vulnerable       7/0/0/29/0
+    cold-famine-hamlet-27               14 Vulnerable       60/25/8/10/0       ->   7 Undefended       52/7/3/10/0
+    cold-thorp-60                       22 Vulnerable       38/23/27/35/0      ->  18 Vulnerable       38/5/26/35/0
+    cold-famine-thorp-14                 8 Undefended       48/5/0/1/0         ->   8 Undefended       48/5/0/1/0
+    cold-thorp-135                      24 Lightly Defended 12/0/12/35/0       ->  24 Lightly Defended 12/0/12/35/0
+    fresh5-hamlet-3                     15 Vulnerable       22/4/20/25/0       ->  15 Vulnerable       22/4/20/25/0
+
+======== G3p (the house: Access to parish church; births holding it 938; by tier thor 398 haml 540 vill 0 town 0 city 0 metr 0) ========
+READINESS: moved 735 (up 0, down 735); mean all -0.784; over holders -3.14; min -12 max 0; bands 223 {('Vulnerable', 'Undefended'): 108, ('Lightly Defended', 'Vulnerable'): 114, ('Defensible', 'Lightly Defended'): 1}
+  thorp      moved  304 mean -2.46 min -12 max +0 bands 96
+  hamlet     moved  431 mean -2.99 min -10 max +0 bands 127
+  military  moved  727 (up 0, down 727) mean over movers -3.46 min -12 max +0; band changes 115 {('ADEQUATE', 'WEAK'): 19, ('WEAK', 'CRITICAL'): 89, ('STRONG', 'ADEQUATE'): 7}
+  monster   moved  346 (up 0, down 346) mean over movers -16.81 min -30 max +0; band changes 221 {('WEAK', 'CRITICAL'): 202, ('ADEQUATE', 'WEAK'): 16, ('STRONG', 'ADEQUATE'): 2, ('ADEQUATE', 'CRITICAL'): 1}
+  internal  moved  572 (up 0, down 572) mean over movers -8.85 min -17 max +0; band changes 202 {('WEAK', 'CRITICAL'): 201, ('ADEQUATE', 'WEAK'): 1}
+  economic  moved  201 (up 0, down 201) mean over movers -6.95 min -30 max +0; band changes 62 {('WEAK', 'CRITICAL'): 33, ('ADEQUATE', 'WEAK'): 27, ('ADEQUATE', 'CRITICAL'): 2}
+  magic against the page (reliance relied-upon/integral beside Magical WEAK/CRITICAL): made 0, cured 0
+  AI prompt threats: births changed 29 {('gained', 'Economic fragility'): 29}
+  COUPLING: power structure changed 162, a power appears or vanishes 0, legitimacy label changed 1; rest of record changed 169; of band movers, power changed 162
+  TEN THAT NAME THE HOUSE (readiness band; military beasts order supply magic):
+    fresh6-thorp-19                     28 Lightly Defended 2/18/17/44/0       ->  16 Vulnerable       2/0/2/14/0
+    fresh6-thorp-9                      27 Lightly Defended 7/18/7/43/0        ->  16 Vulnerable       4/0/0/18/0
+    cold-hamlet-123                     24 Lightly Defended 12/18/16/34/0      ->  14 Vulnerable       2/0/0/27/0
+    cold-hamlet-59                      24 Lightly Defended 20/22/31/43/0      ->  14 Vulnerable       17/4/15/30/0
+    cold-hamlet-67                      28 Lightly Defended 15/18/17/52/0      ->  18 Vulnerable       12/0/5/34/0
+    cold-thorp-18                       18 Vulnerable       11/22/14/19/0      ->   8 Undefended       10/4/0/2/0
+    cold-thorp-17                       20 Vulnerable       19/10/9/1/0        ->  14 Vulnerable       11/0/0/1/0
+    cold-hamlet-71                      20 Vulnerable       19/0/14/25/0       ->  17 Vulnerable       15/0/6/25/0
+    cold-wartime-thorp-32               21 Vulnerable       16/0/20/10/0       ->  19 Vulnerable       13/0/12/10/0
+    cold-famine-thorp-6                  7 Undefended       43/5/4/1/0         ->   7 Undefended       43/5/4/1/0
+
+======== G4 (the house: Druid Circle, Elder Grove Council; births holding it 624; by tier thor 0 haml 0 vill 24 town 52 city 223 metr 325) ========
+READINESS: moved 46 (up 35, down 11); mean all +0.006; over holders +0.04; min -1 max 1; bands 2 {('Lightly Defended', 'Vulnerable'): 1, ('Vulnerable', 'Undefended'): 1}
+  village    moved   11 mean -0.02 min -1 max +0 bands 2
+  town       moved   27 mean +0.04 min +0 max +1 bands 0
+  city       moved    4 mean +0.01 min +0 max +1 bands 0
+  metropolis moved    4 mean +0.01 min +0 max +1 bands 0
+  military  moved    1 (up 0, down 1) mean over movers -1.00 min -1 max +0; band changes 0 {}
+  monster   moved   80 (up 62, down 18) mean over movers +1.12 min -2 max +3; band changes 1 {('ADEQUATE', 'STRONG'): 1}
+  economic  moved   22 (up 18, down 4) mean over movers +0.91 min -2 max +2; band changes 2 {('WEAK', 'ADEQUATE'): 1, ('WEAK', 'CRITICAL'): 1}
+  magical   moved   23 (up 18, down 5) mean over movers +0.57 min -2 max +2; band changes 1 {('ADEQUATE', 'STRONG'): 1}
+  magic against the page (reliance relied-upon/integral beside Magical WEAK/CRITICAL): made 0, cured 0
+  AI prompt threats: births changed 1 {('lost', 'Economic fragility'): 1}
+  COUPLING: power structure changed 2, a power appears or vanishes 0, legitimacy label changed 0; rest of record changed 2; of band movers, power changed 2
+  TEN THAT NAME THE HOUSE (readiness band; military beasts order supply magic):
+    cold-city-232                       59 Well-Defended    74/52/25/89/56     ->  60 Well-Defended    74/54/25/89/56
+    cold-famine-town-24                 40 Defensible       47/31/25/61/27     ->  41 Defensible       47/34/25/61/27
+    cold-famine-town-38                 30 Lightly Defended 55/28/0/30/26      ->  31 Lightly Defended 55/30/0/31/27
+    cold-famine-town-42                 30 Lightly Defended 17/26/15/46/38     ->  31 Lightly Defended 17/28/15/47/39
+    cold-famine-town-56                 36 Lightly Defended 62/65/23/59/38     ->  37 Lightly Defended 62/68/23/59/38
+    cold-famine-town-58                 18 Vulnerable       8/28/0/32/12       ->  19 Vulnerable       8/31/0/33/13
+    cold-famine-city-59                 74 Well-Defended    100/100/55/94/95   ->  74 Well-Defended    100/100/55/94/95
+    cold-under_siege-metropolis-27      71 Well-Defended    100/84/58/93/54    ->  71 Well-Defended    100/84/58/93/54
+    cold-wartime-metropolis-82          99 Fortress         100/100/98/100/95  ->  99 Fortress         100/100/98/100/95
+    fresh5-plague_onset-town-8          31 Lightly Defended 41/29/58/38/16     ->  31 Lightly Defended 41/29/58/38/16
+
+======== G5 (the house: Alchemist shop, Alchemist quarter; births holding it 633; by tier thor 0 haml 0 vill 0 town 108 city 413 metr 112) ========
+READINESS: moved 79 (up 0, down 79); mean all -0.187; over holders -1.11; min -23 max 0; bands 40 {('Well-Defended', 'Defensible'): 13, ('Lightly Defended', 'Vulnerable'): 6, ('Defensible', 'Lightly Defended'): 18, ('Defensible', 'Vulnerable'): 2, ('Fortress', 'Well-Defended'): 1}
+  town       moved   59 mean -0.82 min -23 max +0 bands 38
+  city       moved   20 mean -0.11 min -9 max +0 bands 2
+  military  moved   63 (up 0, down 63) mean over movers -16.08 min -28 max +0; band changes 36 {('STRONG', 'ADEQUATE'): 20, ('ADEQUATE', 'WEAK'): 10, ('WEAK', 'CRITICAL'): 5, ('ADEQUATE', 'CRITICAL'): 1}
+  monster   moved   79 (up 0, down 79) mean over movers -15.80 min -25 max +0; band changes 34 {('STRONG', 'ADEQUATE'): 13, ('WEAK', 'CRITICAL'): 8, ('ADEQUATE', 'WEAK'): 13}
+  internal  moved   46 (up 0, down 46) mean over movers -3.09 min -7 max +0; band changes 7 {('ADEQUATE', 'WEAK'): 4, ('WEAK', 'CRITICAL'): 1, ('STRONG', 'ADEQUATE'): 2}
+  economic  moved   42 (up 0, down 42) mean over movers -16.71 min -32 max +0; band changes 28 {('STRONG', 'ADEQUATE'): 17, ('ADEQUATE', 'WEAK'): 9, ('STRONG', 'WEAK'): 1, ('ADEQUATE', 'CRITICAL'): 1}
+  magical   moved   39 (up 0, down 39) mean over movers -10.15 min -25 max +0; band changes 20 {('ADEQUATE', 'WEAK'): 10, ('WEAK', 'CRITICAL'): 9, ('STRONG', 'ADEQUATE'): 1}
+  magic against the page (reliance relied-upon/integral beside Magical WEAK/CRITICAL): made 3, cured 0
+  AI prompt threats: births changed 19 {('gained', 'Economic fragility'): 11, ('gained', 'Magical instability'): 10, ('gained', 'Civic stability at risk'): 1}
+  COUPLING: power structure changed 40, a power appears or vanishes 0, legitimacy label changed 6; rest of record changed 41; of band movers, power changed 40
+  TEN THAT NAME THE HOUSE (readiness band; military beasts order supply magic):
+    cold-wartime-town-75                53 Defensible       82/49/44/65/51     ->  30 Lightly Defended 54/24/38/33/26
+    cold-town-25                        48 Defensible       43/25/29/83/50     ->  26 Lightly Defended 19/0/23/52/29
+    cold-famine-town-2                  45 Defensible       50/31/19/69/47     ->  26 Lightly Defended 24/12/13/44/27
+    cold-under_siege-town-17            49 Defensible       79/59/28/50/54     ->  30 Lightly Defended 51/42/23/29/32
+    cold-town-67                        38 Defensible       29/21/36/60/35     ->  20 Vulnerable       8/0/33/32/19
+    fresh5-town-48                      55 Well-Defended    79/59/36/77/48     ->  38 Defensible       56/42/32/52/33
+    cold-city-181                       62 Well-Defended    100/73/54/91/27    ->  62 Well-Defended    100/73/54/91/27
+    cold-famine-metropolis-30           73 Well-Defended    100/90/62/85/28    ->  73 Well-Defended    100/90/62/85/28
+    cold-wartime-city-2                 77 Fortress         100/100/70/90/62   ->  77 Fortress         100/100/70/90/62
+    fresh5-occupied-city-7              74 Well-Defended    69/92/51/100/60    ->  74 Well-Defended    69/92/51/100/60
+
+======== G1, THE EDITED TOWN: cities and metropolises with their garrison houses removed (the watch alone), G1 off -> on: n 1304; moved 1304; mean -9.43; min -31 max -2; bands 583 {('Defensible', 'Lightly Defended'): 39, ('Fortress', 'Well-Defended'): 307, ('Well-Defended', 'Defensible'): 211, ('Well-Defended', 'Lightly Defended'): 19, ('Defensible', 'Vulnerable'): 4, ('Lightly Defended', 'Vulnerable'): 3}
+  military  mean -11.47 min -42; band changes 173
+  monster   mean -14.46 min -23; band changes 308
+  internal  mean -14.81 min -28; band changes 781
+  economic  mean -3.38 min -49; band changes 51
+  magical   mean -2.97 min -33; band changes 123

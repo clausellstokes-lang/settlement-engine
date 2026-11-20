@@ -19,6 +19,16 @@ describe('I5 — kind 7 in the record battery', () => {
     expect(j.status).toBe('needs_review');
     expect(j.findings.map((f) => f.path)).toEqual(['battery.unnamed']);
   });
+  it('SW-8 RENAME-POWERS: the renamed stand-in "Unnamed power" is still a placeholder and does not pass', () => {
+    // The owner's map (2026-11-09) renamed the stand-ins "Unnamed Faction" / "Unknown faction" /
+    // "Faction 3" to "Unnamed power"; the battery must keep catching a power that never got a name.
+    for (const stand of ['Unnamed power', 'Unnamed power 3']) {
+      const s = { ...base, powerStructure: { factions: [{ faction: 'Village Elders', power: 60 }, { faction: stand, power: 40 }] } };
+      const j = recordBatteryJudgment(s);
+      expect(j.status).toBe('needs_review');
+      expect(j.findings.map((f) => f.path)).toEqual(['battery.unnamed']);
+    }
+  });
   it('a role-only person does not pass', () => {
     const s = { ...base, npcs: [...base.npcs, { name: 'The Guildmaster', role: 'Guildmaster' }] };
     expect(recordBatteryJudgment(s).findings.map((f) => f.path)).toEqual(['battery.unnamed']);

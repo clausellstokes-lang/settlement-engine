@@ -95,7 +95,7 @@ describe('tier scaling — population grows with tier', () => {
     const cities = generateMany({ settType: 'city',  culture: 'germanic' });
     expect(averageOf(cities, s => s.population))
       .toBeGreaterThan(averageOf(towns, s => s.population));
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the last close's whole check, 2026-11-19): 11.0 s here under load
 
   it('city institutions are not fewer than village institutions', () => {
     // Even with the dedup collapse, a city should still carry more
@@ -105,7 +105,7 @@ describe('tier scaling — population grows with tier', () => {
     const cities   = generateMany({ settType: 'city',    culture: 'germanic' });
     expect(averageOf(cities, s => s.institutions.length))
       .toBeGreaterThan(averageOf(villages, s => s.institutions.length));
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 9.3 s in the last close's serial check; about 17.1 s on a CI runner (the measured factor), within three quarters of the default 20 s; the house's corpus-walk form
 });
 
 // ── Enforcement frequency ─────────────────────────────────────────────────
@@ -292,7 +292,7 @@ describe('supply-chain prevalence and status distribution', () => {
     const villageAvg = averageOf(villages, s => deriveAllSupplyChainStates(s).length);
     const cityAvg    = averageOf(cities,   s => deriveAllSupplyChainStates(s).length);
     expect(cityAvg).toBeGreaterThan(villageAvg);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 8.5 s in the last close's serial check; about 15.7 s on a CI runner (the measured factor), within three quarters of the default 20 s; the house's corpus-walk form
 
   it('on healthy generation, at least half of chains are stable', () => {
     // Status remap: legacy 'operational' / 'running' / 'entrepot' all
@@ -515,18 +515,21 @@ describe('NPC profile prevalence and structural integrity', () => {
     expect(totalLines / cities.length).toBeGreaterThanOrEqual(3);
   });
 
-  it('every NPC with a factionAffiliation carries a factionLink', () => {
+  // PEOPLE-5A RE-KEYED (M-1b, M-2): the link is derived from the card's FIRST-RANK membership, not
+  // the shim's `factionAffiliation`; a pre-law structural placeholder (factionRoles.js, PEOPLE-1's
+  // retired path) carries the old field and no membership, so it links nowhere.
+  it('every NPC holding a membership carries a factionLink', () => {
     const cities = generateMany({ settType: 'city', culture: 'germanic' });
+    let linked = 0;
     for (const s of cities) {
       for (const p of deriveAllNpcProfiles(s)) {
-        // factionAffiliation is the legacy source; factionLink is the
-        // canonical id. The derivation guarantees: when the legacy
-        // field is present and non-empty, the link is non-null.
         const npc = s.npcs.find(n => n.id === p.id);
-        if (typeof npc?.factionAffiliation === 'string' && npc.factionAffiliation) {
+        if (Array.isArray(npc?.memberships) && npc.memberships.some(m => m && m.power)) {
           expect(p.factionLink, `${p.name} missing factionLink`).toBeTruthy();
+          linked += 1;
         }
       }
     }
+    expect(linked, 'liveness: some card holds a membership').toBeGreaterThan(0);
   });
 });

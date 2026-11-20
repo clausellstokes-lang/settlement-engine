@@ -47,7 +47,7 @@ import { isRefusalReason } from '../../lib/refusalReasons.js';
  * resolves to real words rather than to a dotted key path.
  *
  * @param {string} reason
- * @param {Record<string, string|number>|null} [vars]
+ * @param {Record<string, string|number|string[]>|null} [vars]
  * @returns {{ rubric: string, body: string }|null}
  */
 export function refusalCopy(reason, vars = null) {
@@ -66,7 +66,14 @@ export function refusalCopy(reason, vars = null) {
   // wins here; the default keeps the sentence resolving — a missing var renders the
   // literal `{holder}` at a reader — and it is deliberately the words those sentences
   // already carried, so an unmeasured raiser claims nothing new.
-  const withDefaults = { sizes: signInUnlocksSizes(), holder: accountHolderPhrase(), ...(vars ?? {}) };
+  // ⭐ A VAR GIVEN AS A LIST OF COPY KEYS IS RESOLVED HERE AND JOINED WITH THE REASON'S OWN
+  // `join` (remote-path FU-3): the raiser picks WHICH phrases apply, the words stay in the copy
+  // dictionary. A key that does not resolve is dropped rather than printed as a dotted path.
+  const resolved = Object.fromEntries(Object.entries(vars ?? {}).map(([name, value]) => [name,
+    Array.isArray(value)
+      ? value.map((key) => tOptional(String(key))).filter(Boolean).join(tOptional(`refusals.${reason}.join`) ?? ' ')
+      : value]));
+  const withDefaults = { sizes: signInUnlocksSizes(), holder: accountHolderPhrase(), ...resolved };
   const body = ref ? tOptional(ref, withDefaults) : tOptional(`refusals.${reason}.body`, withDefaults);
   if (!rubric || !body) return null;
   return { rubric, body };
@@ -74,7 +81,7 @@ export function refusalCopy(reason, vars = null) {
 
 /**
  * @param {object} props
- * @param {{ reason: string, vars?: Record<string, string|number>|null }|null|undefined} props.refusal
+ * @param {{ reason: string, vars?: Record<string, string|number|string[]>|null }|null|undefined} props.refusal
  *   the store's `lastRefusal`, or null
  * @param {object} [props.style]   layout overrides only
  * @param {import('react').ReactNode} [props.actions]  an optional instrument row (a door the reader can take)

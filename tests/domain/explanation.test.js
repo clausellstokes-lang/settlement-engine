@@ -117,7 +117,9 @@ function fixtureSettlement() {
         name: 'Captain Rusk',
         category: 'enforcement',
         rank: 'dominant',
-        factionAffiliation: 'Town Council',
+        // Re-keyed factionAffiliation -> memberships (PEOPLE-LAND cure, 2026-11-07): lane 5A (053283dfd) reads the
+        // NPC's faction link from its first-rank membership (npcProfile.js :: deriveNpcProfile, cardPowers.firstPowerOf).
+        memberships: [{ power: 'Town Council', rank: 1 }],
       },
     ],
     activeConditions: [

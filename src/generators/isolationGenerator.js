@@ -23,9 +23,9 @@ import {
 import { TIER_ORDER } from '../data/constants.js';
 
 const MAINTAINER_DESC = {
-  town:       'A hedge wizard maintains the settlement\'s load-bearing magical transit. Local production and irregular tracks carry part of the burden, but the support plan falls short without their work.',
-  city:       'A resident wizard maintains the settlement\'s load-bearing magical transit. Their role is civic, not merely commercial, because the city falls below its support requirement without it.',
-  metropolis: 'A tower of wizards maintains the settlement\'s load-bearing magical transit. Local systems carry much of the burden, but they cannot support the whole metropolis alone.',
+  town:       'A hedge wizard keeps the settlement\'s magical transit working. What the settlement makes for itself and what comes over the rough tracks cover part of its needs, but not enough without the wizard.',
+  city:       'A resident wizard keeps the settlement\'s magical transit working. The work is a civic duty as well as a trade: without it the city cannot bring in what it needs.',
+  metropolis: 'A tower of wizards keeps the settlement\'s magical transit working. The city\'s own works and roads bring in much of what it needs, but not enough for the whole metropolis.',
 };
 
 // ─── 1. Evaluate support; add magical substitution only for a real gap ────────
@@ -79,14 +79,14 @@ export function applyTeleportationInfrastructure(
       const [infraName, infraDef] = infraEntry;
       institutions.push({
         name: infraName, category: 'Magic',
-        desc: infraDef.desc || `${infraName} provides load-bearing capacity where physical access is unreliable.`,
+        desc: infraDef.desc || `${infraName} carries goods and people where the roads cannot be trusted.`,
         tags: infraDef.tags || ['arcane', 'planar'],
         forcedByIsolation: true, source: 'forced',
       });
     } else {
       institutions.push({
         name: 'Teleportation circle', category: 'Magic',
-        desc: 'A permanent teleportation circle provides load-bearing capacity where physical access is unreliable. Local production and irregular routes still contribute, but cannot carry the settlement alone.',
+        desc: 'A permanent teleportation circle carries goods and people where the roads cannot be trusted. What the settlement makes and what comes over the rough routes still help, but cannot keep it alone.',
         tags: ['arcane', 'planar'], forcedByIsolation: true, source: 'forced',
       });
     }

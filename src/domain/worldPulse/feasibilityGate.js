@@ -24,6 +24,8 @@
  * Strict-clean (typecheck:domain:strict). No React/Zustand imports.
  */
 import { pairMagicFunctions } from './warMagicGate.js';
+// STYLE-2 C2 (SW-12): the matchup receipts' variants, chosen by the house selection kernel.
+import { pickLine } from './proseSelection.js';
 
 /**
  * The feasibility verdicts. RNG runs ONLY for `plausible`; every other verdict
@@ -159,13 +161,15 @@ export function siegeMatchupWordFor(ratio) {
  * against `FEASIBILITY_VERDICTS` so a seventh verdict cannot land unspoken.
  * @type {Readonly<Record<string, string>>}
  */
+// STYLE-2 C2 (SW-12): the clauses say what the besiegers could do and why, in plain words — no
+// "gate", no "matchup", no "not by weight of arms" balance.
 const VERDICT_CLAUSES = Object.freeze({
-  plausible: 'the matchup alone made a storm worth trying',
-  auto_fail: 'the gate judged a storm impossible',
-  harassment: 'the gate allowed no more than a raid on the approaches',
-  require_coalition: 'the gate would not open a storm to one attacker alone',
-  require_betrayal: 'the storm was opened by the rot inside the defender, not by weight of arms',
-  require_magic: 'the storm was opened by a decisive war-magic edge, not by weight of arms',
+  plausible: 'strong enough to try a storm',
+  auto_fail: 'far too weak for any storm to succeed',
+  harassment: 'able to do no more than raid the roads around the walls',
+  require_coalition: 'too weak to storm the walls alone',
+  require_betrayal: 'the defenders were divided among themselves, and the gates opened from within',
+  require_magic: 'their war-magic broke what their numbers could not',
 });
 
 /** The closed verdict vocabulary, so a consumer proves coverage against source.
@@ -255,11 +259,18 @@ export function classifyFeasibility({
   defenderFacets = {},
 }) {
   const ratio = feasibilityRatio(attackerCurrent, defenderCurrent);
-  const reasons = [`Weighed against the walls, the attacker is ${siegeMatchupWordFor(ratio)}: the defender's home ground counted.`];
+  // The gate holds no stable id, so the variant is keyed on the matchup itself (deterministic).
+  const say = String(Math.round(ratio * 1e6));
+  const word = siegeMatchupWordFor(ratio);
+  const reasons = [pickLine([
+    `Against these walls the attacker is ${word}; defenders fight hardest at home.`,
+    `Fighting on their own ground, the defenders make the attacker ${word}.`,
+    `The attacker is ${word} against walls whose defenders are fighting for their homes.`,
+  ], say)];
 
   // The plausible band: a real contest. Hand it to RNG (open-topped above the floor).
   if (ratio >= PLAUSIBLE_FLOOR) {
-    reasons.push('Within the plausible band: the contest is decided by the siege roll.');
+    reasons.push('It could go either way.');
     return { verdict: 'plausible', ratio, reasons };
   }
 
@@ -272,11 +283,11 @@ export function classifyFeasibility({
   const magic = magicEdge(attackerFacets, defenderFacets) >= MAGIC_EDGE_POINTS;
 
   if (collapse) {
-    reasons.push('Defender is internally fractured (coup / rebellion / legitimacy crisis); the gates may open from within.');
+    reasons.push('The defenders are divided among themselves; the gates may open from within.');
     return { verdict: 'require_betrayal', ratio, reasons };
   }
   if (magic) {
-    reasons.push('Attacker holds a decisive war-magic advantage; arcane force could tip an otherwise-hopeless siege.');
+    reasons.push('The attacker has war-magic enough to break walls its numbers could not.');
     return { verdict: 'require_magic', ratio, reasons };
   }
 
@@ -286,11 +297,15 @@ export function classifyFeasibility({
   // coalition sum clears the floor the matchup is already `plausible` above.
   if (ratio >= HARASSMENT_FLOOR) {
     if (coalitionSize <= 1) {
-      reasons.push('Too weak to break the town alone, but a coalition could, so the solo siege is blocked.');
+      reasons.push(pickLine([
+        'Alone it cannot break these walls; with allies it could, so it will not try alone.',
+        'With allies it might take these walls; alone it will not try.',
+        'These walls are too strong for it alone, though not for it and its allies together.',
+      ], say));
       return { verdict: 'require_coalition', ratio, reasons };
     }
     // A multi-besieger coalition that still falls short here drops to harassment.
-    reasons.push('Even the coalition falls short of a plausible storm; it can only harass.');
+    reasons.push('Even together the attackers fall short of a storm; they can only raid.');
     return { verdict: 'harassment', ratio, reasons };
   }
 
@@ -301,7 +316,7 @@ export function classifyFeasibility({
     return { verdict: 'harassment', ratio, reasons };
   }
   if (ratio >= HOPELESS_CEILING) {
-    reasons.push('Hopelessly outmatched; a siege deterministically fails, though it may still harass.');
+    reasons.push('Hopelessly outmatched, it cannot take the walls, though it can still raid the roads.');
     return { verdict: 'harassment', ratio, reasons };
   }
   reasons.push('Utterly outmatched, a thorpe against a fortified city; the siege cannot succeed.');

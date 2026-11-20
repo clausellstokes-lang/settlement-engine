@@ -176,13 +176,24 @@ describe('IdentityDailyLife — the food balance reads as a tri-state, not a bin
 
   test('a DEFICIT still reads as a deficit (control, unchanged)', () => {
     const text = chapterText(DEFICIT);
-    expect(text).toContain('−200 units');
-    expect(text).toContain('depends on imports for daily survival');
+    // re-keyed (STYLE-RULINGS-2 B4, 2026-11-09): the anchor row prints the state in a word, not the
+    // engine's daily units; the Economics chapter carries the figures.
+    // RE-KEYED (SURFACES-2 item 1, the chair's ruling (r2) of 2026-11-14): the anchor's Food row prints the food
+    // band's one home (domain/display/foodWordShown.js) or nothing; its own Deficit / Surplus / Balanced is gone. This
+    // save holds no food record, so no Food row; the Daily Life callout keeps the figures' verdict.
+    expect(text).toContain('falls short of what people eat each day');
+    expect(text).not.toContain('Food  Deficit'); // anchored: the callout is asserted present one line above
+    expect(text).not.toContain('200 units'); // anchored: same
   });
 
   test('a SURPLUS still reads as a surplus (control, unchanged)', () => {
     const text = chapterText(SURPLUS);
-    expect(text).toContain('+200 units');
+    // re-keyed (STYLE-RULINGS-2 B4, 2026-11-09): the state in a word, and the callout's surplus in
+    // words, not the engine's units.
+    // RE-KEYED (SURFACES-2 item 1, (r2)): no second vocabulary on the anchor row; the callout keeps its words.
+    expect(text).toContain('More is grown and brought in than people eat each day');
+    expect(text).not.toContain('Food  Surplus'); // anchored: the callout is asserted present one line above
+    expect(text).not.toContain('200 units'); // anchored: same
     expect(text).toContain('The local food supply is reliable');
   });
 
@@ -192,9 +203,21 @@ describe('IdentityDailyLife — the food balance reads as a tri-state, not a bin
     expect(text).not.toContain('+0 units'); // anchored: 'Balanced' + 'in balance' are asserted PRESENT below — the chapter rendered and chose the third word
     expect(text).not.toContain('Surplus of 0 units'); // anchored: same — the callout rendered ('in balance' below)
     expect(text).not.toContain('The local food supply is reliable'); // anchored: same — the verdict sentence rendered as 'in balance' below
-    // ...and both say the estate's own third word instead.
-    expect(text).toContain('Balanced');
+    // ...and the callout says the estate's own third state instead. RE-KEYED (SURFACES-2 item 1, (r2)): the anchor
+    // row no longer prints "Balanced", a word of its own: it prints the food band or nothing.
     expect(text).toContain('in balance');
+    expect(text).not.toContain('Food  Balanced'); // anchored: 'in balance' asserted present one line above
+  });
+
+  test('the anchor\'s Food row prints the food band\'s word, the one the Tonight page prints (SURFACES-2 item 1)', () => {
+    const settlement = {
+      name: 'Balanceford', tier: 'town', population: 900,
+      economicViability: { metrics: { foodBalance: SURPLUS } },
+      economicState: { foodSecurity: { label: 'Secure', foodRecord: { band: 'secure', gapPct: 3, normalImportPct: 10 } } },
+    };
+    const text = collectText(IdentityDailyLife({ settlement, vm: buildViewModel({ settlement }) })).join(' ');
+    expect(text).toContain('Food  Pressured');
+    expect(text).not.toContain('Food  Surplus'); // anchored: the row is asserted present one line above
   });
 
   test('a settlement whose food was never calculated asserts nothing about food', () => {
@@ -464,7 +487,9 @@ describe('institution label — screen↔print parity', () => {
         }],
       },
     };
-    const text = collectText(Services({ settlement: villageSettlement, narrativeMode: false, vm })).join(' ');
+    // R2-CODE-B-SIDE item 3: the flow names the roster's own houses, so the roster holds the two this arm reads.
+    const roster = { ...villageSettlement, institutions: [...(villageSettlement.institutions || []), { name: 'Parish church' }, { name: 'Blacksmith' }] };
+    const text = collectText(Services({ settlement: roster, narrativeMode: false, vm })).join(' ');
     expect(text, 'the chapter rendered no chain flow at all').toContain('House of worship');
     // anchored: the line above proves the flow rendered, so this absence is about the label.
     expect(text).not.toMatch(/parish/i);
@@ -472,27 +497,31 @@ describe('institution label — screen↔print parity', () => {
     expect(text, 'the second processing institution must survive the seam').toContain('Blacksmith');
   });
 
+  // EXPORTS-B3 (2026-11-14, re-keyed by identity): a worked row now names no house (the tab's Full card names none: the
+  // chair's ruling on EXPORTS-MEASURE-1 B3), so the join this arm guards is the one the slice still makes: an Unexploited
+  // row's houses still needed, under the tab's word "Needs:", on a roster holding neither house.
   test('the resources slice joins DISPLAY names, because the chapter can no longer unjoin them', () => {
     const fixture = {
       ...villageSettlement,
+      institutions: [],
       resourceAnalysis: {
         ...(villageSettlement.resourceAnalysis || {}),
         exploitation: {
-          fullyExploited: [{
+          fullyExploited: [],
+          partiallyExploited: [],
+          unexploited: [{
             rawResource: 'wool',
             processingInstitutions: ['Parish church', 'Blacksmith'],
             finalProducts: ['broadcloth'],
           }],
-          partiallyExploited: [],
-          unexploited: [],
         },
       },
     };
     const rows = resourcesSlice(fixture).chainRows;
     expect(rows, 'the slice built no chain row to judge').toHaveLength(1);
-    expect(rows[0].processing).toBe('House of worship, Blacksmith');
+    expect(rows[0].processing).toBe('Needs: House of worship, Blacksmith');
     // ⭐ AND THE MODEL UNDER IT IS UNMOVED — the seam reads, it never migrates.
-    expect(fixture.resourceAnalysis.exploitation.fullyExploited[0].processingInstitutions[0])
+    expect(fixture.resourceAnalysis.exploitation.unexploited[0].processingInstitutions[0])
       .toBe('Parish church');
   });
 });

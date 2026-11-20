@@ -1,0 +1,67 @@
+sentences: before 35818 after 36006 · gone 53 · new 241 · in fewer towns 188 · in more towns 0 · moved 0
+ GONE (widest):
+      2 ->    0  <N>, the alewife and Elder, holds its seat.
+      2 ->    0  | <N> | the ferryman | Ecclesiastical Council | # |
+      2 ->    0  | <N> | the lord | Crown Creditors (Noble Coalition) | # |
+      2 ->    0  | <N> | the ferryman | Grand Council | # |
+      2 ->    0  | <N> | the district madam | Grain Holders | # |
+      2 ->    0  <N> (the foundling-mother
+      2 ->    0  | <N> | the camp foreman | <N> | # |
+      1 ->    0  # people worth knowing; <N>, the alewife, second of Headman's Authority, carries the most weight.
+      1 ->    0  <N>, the boat-headman (Fisher's landing)
+      1 ->    0  # people worth knowing; <N>, the alewife, second of Free Elder Council, carries the most weight.
+      1 ->    0  <N>, the alewife and Elder, holds the seat of the Free Elder Council.
+      1 ->    0  # person worth knowing: <N>, the headman, first of Headman's Authority.
+ IN FEWER TOWNS (largest loss):
+    189 ->   93  the front man
+    183 ->   89  · the front man
+    168 ->   81  the senior abbot
+    132 ->   52  the district madam
+    130 ->   50  · the district madam
+    146 ->   69  · the senior abbot
+    119 ->   58  the ferryman
+    110 ->   54  the boat-headman
+    103 ->   49  <N>, the boat-headman
+    103 ->   49  | <N> | the front man | Merchant Guilds | # |
+    110 ->   56  | <N> | the senior abbot | Religious Authorities | # |
+    107 ->   55  the madam
+ NEW (widest):
+      0 ->   96  the nominal owner
+      0 ->   94  · the nominal owner
+      0 ->   87  the senior abbess
+      0 ->   80  the keeper of the houses
+      0 ->   80  · the keeper of the houses
+      0 ->   77  · the senior abbess
+      0 ->   70  the lady
+      0 ->   61  the ferry keeper
+      0 ->   56  the boat-master
+      0 ->   54  <N>, the boat-master
+      0 ->   54  | <N> | the nominal owner | Merchant Guilds | # |
+      0 ->   54  | <N> | the senior abbess | Religious Authorities | # |
+ IN MORE TOWNS (largest gain):
+ THE INHERITORS (print now, and did not, in a town that lost a sentence): 241 sentences
+   + 96 towns (e.g. r2r-city-0)  the nominal owner
+   + 94 towns (e.g. r2r-city-0)  · the nominal owner
+   + 87 towns (e.g. r2r-city-10)  the senior abbess
+   + 80 towns (e.g. r2r-city-10)  the keeper of the houses
+   + 80 towns (e.g. r2r-city-10)  · the keeper of the houses
+   + 77 towns (e.g. r2r-city-10)  · the senior abbess
+   + 70 towns (e.g. r2r-city-10)  the lady
+   + 61 towns (e.g. r2r-city-13)  the ferry keeper
+   + 56 towns (e.g. r2r-hamlet-10)  the boat-master
+   + 54 towns (e.g. r2r-hamlet-10)  <N>, the boat-master
+   + 54 towns (e.g. r2r-city-0)  | <N> | the nominal owner | Merchant Guilds | # |
+   + 54 towns (e.g. r2r-city-10)  | <N> | the senior abbess | Religious Authorities | # |
+   + 52 towns (e.g. r2r-city-1)  the keeper of the house
+   + 50 towns (e.g. r2r-hamlet-11)  Role: the boat-master
+   + 50 towns (e.g. r2r-city-1)  · the keeper of the house
+   + 47 towns (e.g. r2r-city-13)  · the ferry keeper
+   + 44 towns (e.g. r2r-city-0)  handled by <N>, the nominal owner (Front businesses)
+   + 31 towns (e.g. r2r-hamlet-1)  the brewster
+   + 27 towns (e.g. r2r-metropolis-0)  | <N> | the lady | Noble Houses | # |
+   + 22 towns (e.g. r2r-city-19)  | <N> | the nominal owner | Thieves' Guild | # |
+   + 21 towns (e.g. r2r-city-17)  | <N> | the lady | Noble Families | # |
+   + 20 towns (e.g. r2r-hamlet-16)  | <N> | the boat-master | Elder Council | # |
+   + 18 towns (e.g. r2r-hamlet-1)  <N>, the brewster
+   + 18 towns (e.g. r2r-hamlet-1)  Role: the brewster
+   + 18 towns (e.g. r2r-city-3)  the foundling-keeper

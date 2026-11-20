@@ -40,7 +40,7 @@ describe('generators-domain-6 — timeline variety + budget', () => {
       }
     }
     expect(economicTitles.size).toBeGreaterThan(3);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the ratchet's instruction; 2026-11-18): 15.8 s here under load
 
   it('budget — a metropolis timeline can exceed the old ~8 category cap', () => {
     let max = 0;

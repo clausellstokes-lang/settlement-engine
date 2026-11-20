@@ -74,7 +74,7 @@
 import { drawnAtMount } from './dossierMounts.js';
 import { tierNounFor, weaveBlock } from './weaveBlock.js';
 import {
-  defenseCriminalProse, defenseForcesProse, defenseMagicDependencyProse,
+  defenseCriminalProse, defenseForcesProse, defenseIsolationSupportProse, defenseMagicDependencyProse,
   defenseMilitaryStatusProse, defensePostureProse, defenseStateProse,
   defenseSupportingProse, defenseThreatProse, defenseWallRationaleProse,
 } from './defenseStateProse.js';
@@ -83,13 +83,13 @@ import { powerStateProse } from './powerStateProse.js';
 import { stressorsStateProse } from './stressorsStateProse.js';
 import { warFaithStateProse } from './warFaithStateProse.js';
 import { deriveAllActiveConditions } from '../../activeConditions.js';
-import { deriveCriminalStructure } from '../defenseDisplay.js';
+import { blockListsCrime, deriveCriminalStructure } from '../defenseDisplay.js';
 import { magicWorksAt } from '../../worldPulse/magicWorksAt.js';
 import { deriveFoodBalance, deriveGranaryOutlook } from '../dossierViewModel.js';
 import { populationTrendBand } from '../trendLens.js';
 import { normalizeStressor } from '../../worldPulse/stressorsCore.js';
 import { coupContenders, coupRiskLabel } from '../../rulingPowerCoup.js';
-import { structuralLensOf } from '../../spatial/cohesionWeave.js';
+import { seatLensOf } from '../../spatial/cohesionWeave.js'; // SW-7 (STYLE-2 B7): DS-POW-5 reads the seat
 import { collectPlotHooks } from '../../dossier/plotHooks.js';
 import { deriveEscalationClocks } from '../../hookEscalation.js';
 // The two desk readers the screen uses, imported rather than re-derived. See the docblock.
@@ -405,7 +405,7 @@ export function buildPrintProse(settlement, ctx = {}) {
   const contenders = coupContenders(r);
   const power = powerStateProse(r, {
     ...(contenders ? { contenders, riskLabel: coupRiskLabel(contenders) } : {}),
-    structuralLens: structuralLensOf(r),
+    structuralLens: seatLensOf(r),
   }, opts);
 
   // ── THE DEFENSE DESK — mirrors DefenseTab.jsx:119-215 and ViabilityTab.jsx:47-52 ────
@@ -420,7 +420,13 @@ export function buildPrintProse(settlement, ctx = {}) {
   const supporting = defenseSupportingProse(r, opts);
   // T2-24: silent where magic does not function, exactly as ViabilityTab gates it.
   const magic = magicWorksAt({ settlement: r }) === false ? { arcaneReliance: null } : defenseMagicDependencyProse(r, opts);
-  const criminal = defenseCriminalProse(r, deriveCriminalStructure(r)?.key || null, opts);
+  // DS-DEF-12, as ViabilityTab: the isolation-support finding, silent where it does not apply.
+  const isolation = defenseIsolationSupportProse(r, opts);
+  const criminalKey = deriveCriminalStructure(r)?.key || null;
+  const criminal = defenseCriminalProse(r, criminalKey, opts);
+  // R-D2 (RUNG-2 LANDING phase D; F9's law extended), as DefenseTab: the `structure null` reading
+  // is a denial and is never printed beside the block's own crime patterns or operations.
+  const criminalDenialListed = !criminalKey && blockListsCrime(r);
 
   // ── THE FAITH HALF OF THE WAR & FAITH DESK — mirrors FaithTab.jsx:113-141 ───────────
   // The war half is print-deferred (see PRINT_DEFERRED_MOUNTS), so the war readings are
@@ -433,6 +439,7 @@ export function buildPrintProse(settlement, ctx = {}) {
     faith: faithModel,
     hasPatron: !!faithModel.hasEmbed,
     patronFallCause: patronFallCauseOf(faithModel.patronFallSentence),
+    faithFlags: /** @type {{economicState?: {safetyProfile?: {flags?: Record<string, unknown>|null}|null}|null}} */ (r)?.economicState?.safetyProfile?.flags || null,
   }, opts), faithModel);
 
   // ── THE POSITIONS, IN PAGE ORDER ────────────────────────────────────────────────────
@@ -458,7 +465,9 @@ export function buildPrintProse(settlement, ctx = {}) {
   // here — the reader consumed it. Only ONE general-desk cell is deferred (DS-REL-2's
   // emergent banner) and it is resolved at its own position below; the other two deferred
   // general positions are whole mounts and are simply never put.
-  put('overview', 'overview.ground', g.siteLines);
+  // Keyed on `overview.market`, the woven block's first SPEAKING mount, since the ground row glances
+  // (OWNER-WORDS-DOSSIER item 2, 2026-11-09): a printed key is a sentence-rung position.
+  put('overview', 'overview.market', g.siteLines);
   put('overview', 'overview.crisisBanners', [printed('overview.crisisBanners', stressor.crisisArity)]);
   put('overview', 'overview.stressorLifecycle', [
     printed('overview.stressorLifecycle', stressor.worldStressorLifecycle),
@@ -511,9 +520,11 @@ export function buildPrintProse(settlement, ctx = {}) {
     printed('power.criminalUnderside', power.legitimacyReading),
     printed('power.criminalUnderside', power.captureReading),
     printed('power.criminalUnderside', power.operationReading),
+    printed('power.criminalUnderside', power.gmAdvisory),
   ]);
   put('power', 'power.rulingStructure', [
     printed('power.rulingStructure', power.rulingStructure),
+    printed('power.rulingStructure', power.structureFlag),
   ]);
   put('power', 'power.succession', [
     printed('power.succession', power.successionRisk),
@@ -557,7 +568,7 @@ export function buildPrintProse(settlement, ctx = {}) {
   ]);
   put('defense', 'defense.wallRationale', [printed('defense.wallRationale', wall.rationale)]);
   put('defense', 'defense.criminalStructure', [
-    printed('defense.criminalStructure', criminal.structure),
+    criminalDenialListed ? null : printed('defense.criminalStructure', criminal.structure),
   ]);
   put('defense', 'defense.supportingCapabilities', [
     printed('defense.supportingCapabilities', supporting.logistics),
@@ -568,20 +579,32 @@ export function buildPrintProse(settlement, ctx = {}) {
   put('viability', 'viability.magicDependency', [
     printed('viability.magicDependency', magic.arcaneReliance),
   ]);
+  put('viability', 'viability.isolationSupport', [
+    printed('viability.isolationSupport', isolation.isolationSupply),
+  ]);
 
   put('economics', 'economics.prosperityHeader', [
     printed('economics.prosperityHeader', economy.prosperityHeader),
   ]);
   put('economics', 'economics.foodSecurity', [
     printed('economics.foodSecurity', economy.foodSecurityRung),
+    printed('economics.foodSecurity', economy.famineSource),
+    printed('economics.foodSecurity', economy.foodMeans),
+    printed('economics.foodSecurity', economy.foodSources),
   ]);
   put('economics', 'economics.commercialProfile', [
     printed('economics.commercialProfile', economy.incomeMix),
     printed('economics.commercialProfile', economy.criminalLine),
+    printed('economics.commercialProfile', economy.incomeWeight),
+    printed('economics.commercialProfile', economy.criticalImport),
   ]);
   put('economics', 'economics.shadowEconomy', [
     printed('economics.shadowEconomy', economy.shadowEconomy),
+    printed('economics.shadowEconomy', economy.arcaneMarket),
+    printed('economics.shadowEconomy', economy.theocraticEconomy),
+    printed('economics.shadowEconomy', economy.hiddenHouse),
   ]);
+  put('economics', 'economics.upstreamSupply', [printed('economics.upstreamSupply', economy.upstreamWeak)]);
   put('economics', 'economics.tradeFlow', [printed('economics.tradeFlow', economy.tradeFlow)]);
   put('economics', 'economics.exportPosture', [
     printed('economics.exportPosture', economy.exportPosture),
@@ -593,6 +616,7 @@ export function buildPrintProse(settlement, ctx = {}) {
   // replaces it on the screen is not printed beside it; the exploitation lens frames the chains.
   put('resources', 'resources.groundAndWorkings', [
     printed('resources.groundAndWorkings', economy.exploitation),
+    printed('resources.groundAndWorkings', economy.resourceCondition),
   ]);
 
   put('services', 'services.catalogStanding', [
@@ -602,15 +626,17 @@ export function buildPrintProse(settlement, ctx = {}) {
 
   put('daily_life', 'daily_life.standingOfLiving', [
     printed('daily_life.standingOfLiving', economy.prosperityRung),
+    printed('daily_life.standingOfLiving', economy.foodOnProsperity),
   ]);
 
   // DESTRUCTURED RATHER THAN CHAINED — `generalDeskRead.js:260-268` records this exact false
   // positive and this exact cure: `history` has a single home in the corpus, so the scan
   // grounds `general.history` to the settlement's history container and reads these three as
   // keys no writer produces there. They are this reader's own frozen return value.
-  const { identityLines, foundedLine, recordLine } = general.history;
+  const { identityLines, foundedLine, recordLine, legacyLines } = general.history;
   put('history', 'history.identity', identityLines);
   put('history', 'history.founded', [foundedLine, recordLine]);
+  put('history', 'history.legacy', legacyLines);
 
   put('plot_hooks', 'plot_hooks.framing', general.hooks.framingLines.slice(0, HOOK_FRAMING.cap));
 
@@ -651,16 +677,34 @@ export function buildPrintProse(settlement, ctx = {}) {
     ...(faithModel.hasEmbed ? [] : [(faithModel.line || []).join(' ')]),
     printed('faith.teaser', faith.faithTeaser),
   ]);
+  // SW-6 CRISIS-SURFACES (STYLE-RULINGS-2 A1 R5; the chair's ruling of 14:4x): the DM's hint (the god and the
+  // church's name are theirs to set) prints UNDER the teaser as its own kicker-less position, never woven in.
+  if (!faithModel.hasEmbed && faithModel.hint) put('faith', 'faith.hint', [faithModel.hint]);
   if (faithSeam) put('faith', 'faith.creedStanding', [
     printed('faith.creedStanding', faith.creedStanding),
     printed('faith.creedStanding', faith.creedLegitimacy),
     printed('faith.creedStanding', faith.creedNiche),
     printed('faith.creedStanding', faith.creedFall),
   ]);
+  // DS-FTH-4's generation lens (W4 PEOPLE, 2026-11-07): names no creed, so it is not behind
+  // the premium seam; every settlement carries the flags it reads.
+  put('faith', 'faith.templeGround', [
+    printed('faith.templeGround', faith.templeCrusader),
+    printed('faith.templeGround', faith.templeHeresy),
+    printed('faith.templeGround', faith.templeFraud),
+    printed('faith.templeGround', faith.templeMageTheocracy),
+  ]);
 
   return Object.freeze(Object.fromEntries(
     Object.entries(out).map(([tab, rows]) => [tab, Object.freeze(rows)]),
   ));
 }
+
+/**
+ * The print-native positions (SW-6, R5): a note the page prints under a desk position, not a desk
+ * block, so the mount registry routes none of them. `faith.hint` is the only one.
+ * @type {ReadonlyArray<string>}
+ */
+export const PRINT_NATIVE_POSITIONS = Object.freeze(['faith.hint']);
 
 export default buildPrintProse;

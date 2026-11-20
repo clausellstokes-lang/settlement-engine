@@ -249,6 +249,102 @@ function newLocalSaveId(existing) {
   return candidate;
 }
 
+// ── The public prose stamp (STYLE-RULINGS-2 B10(a); lane SW-B7b) ─────────────
+
+let _publicProseComposePromise = null;
+
+/**
+ * The composer reaches every desk's corpus leaf, so this module (in the eager first-paint
+ * chain) reaches it by a dynamic import alone, exactly as `loadNeighbourBackLink` does.
+ */
+function loadPublicProseCompose() {
+  if (!_publicProseComposePromise) {
+    // R7 (VEIL-FIX, 2026-11-10): a failed import (a chunk gone after a deploy) is NOT cached for
+    // the tab's life; the next save tries again.
+    _publicProseComposePromise = import('../components/new/publicProseCompose.js')
+      .catch((error) => { _publicProseComposePromise = null; throw error; });
+  }
+  return _publicProseComposePromise;
+}
+
+const isRecord = (value) => !!value && typeof value === 'object' && !Array.isArray(value);
+
+/**
+ * THE STAMP FOR ONE CLOUD ROW: `data.publicProse` and `ai_data.aiSettlement.publicProse`,
+ * composed owner-side from the record being written (the seed is read here and never
+ * shipped; `domain/display/publicProse.js` is the law). Null when the row carries neither
+ * record. When the composer cannot load or throws, `{data: null, ai: null}`: a save never fails
+ * on the projection, the row is written WITHOUT a stamp (R7, VEIL-FIX 2026-11-10: never the
+ * stamp the record carried from an earlier save, which would print sentences about a town state
+ * that no longer exists), and an absent stamp prints SILENT on the shared page, never a re-draw.
+ * @param {any} entry a save entry or partial (`settlement`, `aiData`)
+ * @returns {Promise<{data: any, ai: any}|null>}
+ */
+async function publicProseForRow(entry) {
+  const settlement = entry?.settlement;
+  const aiSettlement = entry?.aiData?.aiSettlement;
+  if (!isRecord(settlement) && !isRecord(aiSettlement)) return null;
+  try {
+    const { composePublicProse } = await loadPublicProseCompose();
+    return {
+      data: isRecord(settlement) ? composePublicProse(settlement) : null,
+      ai: isRecord(aiSettlement) ? composePublicProse(aiSettlement) : null,
+    };
+  } catch {
+    return { data: null, ai: null };
+  }
+}
+
+/**
+ * The record with its projection written. A null projection writes the record WITHOUT a stamp
+ * (R7): a stamp the record carried from an earlier save is dropped, never written again.
+ */
+function withPublicProse(record, projection) {
+  if (!isRecord(record)) return record;
+  if (projection) return { ...record, publicProse: projection };
+  if (!Object.hasOwn(record, 'publicProse')) return record;
+  const { publicProse: _stale, ...rest } = record;
+  return rest;
+}
+
+/** `ai_data` with the narrated record's projection written into `aiSettlement` (none: unstamped). */
+function aiDataWithPublicProse(aiData, projection) {
+  if (!isRecord(aiData) || !isRecord(aiData.aiSettlement)) return aiData;
+  const aiSettlement = withPublicProse(aiData.aiSettlement, projection);
+  return aiSettlement === aiData.aiSettlement ? aiData : { ...aiData, aiSettlement };
+}
+
+/** @type {Set<(ack: {id: string, settlement: any, aiSettlement: any, publicProse: {data: any, ai: any}}) => void>} */
+const _publicProseAckListeners = new Set();
+
+/**
+ * ⛔ THE ACK. The canon commands compare-and-swap on `data` and `ai_data` (183/193:
+ * `v_locked_data is distinct from p_expected_data`) against the store's cached record, so
+ * the store must hold what this module stamped or every command after a save is refused as
+ * stale. Every cloud write below tells the listeners (the store's one adopter) what it
+ * stamped onto which record, AFTER the server confirmed the row; the listener adopts the
+ * stamp only into a record byte-equal to the one written.
+ * @param {(ack: {id: string, settlement: any, aiSettlement: any, publicProse: {data: any, ai: any}}) => void} listener
+ * @returns {() => void} unsubscribe
+ */
+function onPublicProseAck(listener) {
+  _publicProseAckListeners.add(listener);
+  return () => { _publicProseAckListeners.delete(listener); };
+}
+
+function ackPublicProse(id, entry, publicProse) {
+  if (!publicProse || id == null) return;
+  const ack = {
+    id: String(id),
+    settlement: entry?.settlement,
+    aiSettlement: entry?.aiData?.aiSettlement,
+    publicProse,
+  };
+  for (const listener of _publicProseAckListeners) {
+    try { listener(ack); } catch { /* an adopter never fails the write it heard */ }
+  }
+}
+
 // ── Toggle helpers ─────────────────────────────────────────────────────────
 
 function bundleToggles(entry) {
@@ -272,18 +368,22 @@ function spreadToggles(toggles) {
   };
 }
 
-function mutationRow(entry, includeId = true) {
+/**
+ * THE ONE ROW BUILDER. Sync: the caller awaits `publicProseForRow(entry)` first and hands
+ * the stamp in, so every persisting path writes the projection with the record.
+ */
+function mutationRow(entry, includeId = true, publicProse = null) {
   const row = {};
   if (includeId) row.id = entry.id;
   if (entry.name !== undefined) row.name = entry.name;
   if (entry.tier !== undefined) row.tier = entry.tier;
   if (entry.settlement !== undefined) {
-    row.data = entry.settlement;
+    row.data = withPublicProse(entry.settlement, publicProse?.data);
     row.neighbour_links = entry.settlement?.neighbourNetwork || null;
   }
   if (entry.config !== undefined) row.config = entry.config;
   if (entry.seed !== undefined) row.seed = entry.seed;
-  if (entry.aiData !== undefined) row.ai_data = entry.aiData;
+  if (entry.aiData !== undefined) row.ai_data = aiDataWithPublicProse(entry.aiData, publicProse?.ai);
   if (entry.campaignState !== undefined) row.campaign_state = entry.campaignState;
   if (entry.versionHistory !== undefined) {
     row.version_history = Array.isArray(entry.versionHistory) ? entry.versionHistory : null;
@@ -587,16 +687,18 @@ async function supabaseSave(
     }
   }
 
+  const aiData = v2.aiData || {};
+  const publicProse = await publicProseForRow({ settlement, aiData });
   const row = {
     user_id:         ownerId,
     name:            v2.name,
     tier:            v2.tier,
-    data:            settlement,
+    data:            withPublicProse(settlement, publicProse?.data),
     config:          v2.config || null,
     toggles:         bundleToggles(v2),
     seed:            v2.seed || null,
     neighbour_links: settlement?.neighbourNetwork || null,
-    ai_data:         v2.aiData || {},
+    ai_data:         aiDataWithPublicProse(aiData, publicProse?.ai),
     campaign_state:  v2.campaignState || null,
     version_history: Array.isArray(v2.versionHistory) ? v2.versionHistory : null,
   };
@@ -608,6 +710,7 @@ async function supabaseSave(
     .select('id')
     .single();
   if (error) throw error;
+  ackPublicProse(data.id, { settlement, aiData }, publicProse);
   return data.id;
 }
 
@@ -627,8 +730,9 @@ async function supabaseUpsert(
   const v2 = migrateSaveToV2(entry);
   if (!v2?.id) throw new Error('Explicit-id save upsert requires an id.');
   const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
+  const publicProse = await publicProseForRow({ ...v2, settlement });
   const row = {
-    ...mutationRow({ ...v2, settlement }),
+    ...mutationRow({ ...v2, settlement }, true, publicProse),
     user_id: ownerId,
   };
   assertSaveSessionCurrent(ownerId, isSessionCurrent, ownerId);
@@ -644,6 +748,7 @@ async function supabaseUpsert(
       { code: 'settlement_upsert_unconfirmed' },
     );
   }
+  ackPublicProse(data.id, { ...v2, settlement }, publicProse);
   return data.id;
 }
 
@@ -656,16 +761,17 @@ async function supabaseUpdate(
     expectedOwnerId,
     isSessionCurrent,
   );
+  const publicProse = await publicProseForRow(partial);
   const updates = {};
   if (partial.name       !== undefined) updates.name = partial.name;
   if (partial.tier       !== undefined) updates.tier = partial.tier;
   if (partial.settlement !== undefined) {
-    updates.data = partial.settlement;
+    updates.data = withPublicProse(partial.settlement, publicProse?.data);
     updates.neighbour_links = partial.settlement.neighbourNetwork || null;
   }
   if (partial.config !== undefined) updates.config = partial.config;
   if (partial.seed   !== undefined) updates.seed = partial.seed;
-  if (partial.aiData !== undefined) updates.ai_data = partial.aiData;
+  if (partial.aiData !== undefined) updates.ai_data = aiDataWithPublicProse(partial.aiData, publicProse?.ai);
   if (partial.campaignState !== undefined) updates.campaign_state = partial.campaignState;
   if (partial.versionHistory !== undefined) updates.version_history = Array.isArray(partial.versionHistory) ? partial.versionHistory : null;
 
@@ -683,7 +789,10 @@ async function supabaseUpdate(
   if (error) throw error;
   const updated = (Array.isArray(data) ? data : data ? [data] : [])
     .some(row => String(row?.id) === String(id));
-  if (updated) return id;
+  if (updated) {
+    ackPublicProse(id, partial, publicProse);
+    return id;
+  }
 
   // PostgREST may report a clean zero-row update when auth rotated and RLS
   // filtered the expected owner's row. Recheck the owner, then distinguish an
@@ -801,11 +910,17 @@ async function supabaseMutateBatch(
   { expectedOwnerId = null, isSessionCurrent = null } = {},
 ) {
   const ownerId = await assertExpectedSupabaseOwner(expectedOwnerId, isSessionCurrent);
+  const createEntries = creates.map(entry => migrateSaveToV2(entry));
+  const [updateStamps, createStamps] = await Promise.all([
+    Promise.all(updates.map(publicProseForRow)),
+    Promise.all(createEntries.map(publicProseForRow)),
+  ]);
+  assertSaveSessionCurrent(ownerId, isSessionCurrent, ownerId);
   const { data, error } = await supabase.rpc('mutate_settlement_batch', {
     p_expected_user: ownerId,
-    updates: updates.map(entry => mutationRow(entry)),
+    updates: updates.map((entry, index) => mutationRow(entry, true, updateStamps[index])),
     delete_ids: deletes,
-    creates: creates.map(entry => mutationRow(migrateSaveToV2(entry))),
+    creates: createEntries.map((entry, index) => mutationRow(entry, true, createStamps[index])),
   });
   if (error) throw error;
   if (deletes.length > 0) {
@@ -821,6 +936,8 @@ async function supabaseMutateBatch(
       );
     }
   }
+  updates.forEach((entry, index) => ackPublicProse(entry?.id, entry, updateStamps[index]));
+  createEntries.forEach((entry, index) => ackPublicProse(entry?.id, entry, createStamps[index]));
   return data;
 }
 
@@ -1095,6 +1212,8 @@ export const saves = {
   mutateBatch: isConfigured ? supabaseMutateBatch : localMutateBatch,
   /** Write entire saves array — only available in local mode. */
   writeAll: isConfigured ? null             : localWriteAll,
+  /** SW-B7b: the store's adopter hears what each cloud write stamped (see ackPublicProse). */
+  onPublicProseAck,
   /** Last owner-visible boundary accounting; contains no persisted payloads. */
   getAdmissionDiagnostics: () => lastSaveAdmissionDiagnostics,
   isConfigured,

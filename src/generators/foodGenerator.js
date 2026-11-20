@@ -16,25 +16,23 @@
  *   - Economics tab UI
  */
 
+import { filterDeclared, lineText } from '../domain/facts/drawDeclared.js';
+import { factsOf } from '../domain/facts/factsOf.js';
 import { getActiveRng } from '../kernel/rngContext.js';
+import { migrationDirectionOfConfig } from '../domain/migrationDirection.js';
 import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../data/foodImportRates.js';
 import { FOOD_SECURITY_CUTS, foodSecurityBandOf, foodSecurityFlagsOf } from '../data/bandLadders.js';
-import { deriveFoodRecord, grownShareOf, hasImportProcessor, hinterlandShareOf } from './economy/foodBalance.js';
-import { TERRAIN_DATA } from '../data/geographyData.js';
+import { deriveFoodRecord, grownShareOf, hinterlandShareOf } from './economy/foodBalance.js';
+import { deriveIsolationSupport, isolationFoodImportShareOf } from './isolationSupport.js';
 import { CULTURE_PROFILES } from '../data/cultureProfiles.js';
 import { composeFoodwaysLine } from '../domain/foodways.js';
 import { POPULATION_RANGES } from '../data/constants.js';
-import { customDeps } from '../lib/dependencyEngine.js';
-import {
-  nativeSemanticNames,
-} from '../domain/content/customContentSemanticAuthority.js';
-import { availableNativeResourceKeys } from '../domain/resourceSemantics.js';
 import {
   hasTradeRouteConnection,
   isTradeRouteDisconnected,
   SEASONAL_ROUTE_FOOD_IMPORT_RATE,
-  waterAccessKind,
 } from '../domain/tradeRouteSemantics.js';
+import { NO_FOOD_CHAINS_LINE, OWN_PLOTS_LINE, foodLandOf } from './foodLand.js';
 
 // ── THE BASE NUMBERS (FOOD-2, chair ruling 2, 2026-11-03; fix shape E) ──────────────
 // Per capita and per tier, so the arithmetic holds under any headcount scale. Every place
@@ -46,70 +44,52 @@ import {
 // The shares themselves live beside the record: foodBalance.js :: grownShareOf, hinterlandShareOf.
 const PER_CAPITA_NEED   = 2;   // lbs/day per person
 
-// Registered custom food effects are deliberately small and bounded. These
-// constants live beside the canonical food writer so generation, prosperity,
-// viability, and world-pulse stockpiles can never apply different versions of
-// the author's declaration.
-const CUSTOM_PRODUCER_CAPACITY_PER_ITEM = 0.15;
-const CUSTOM_PRODUCER_CAPACITY_CAP = 0.6;
-const CUSTOM_CONSUMER_NEED_PER_ITEM = 0.1;
-const CUSTOM_CONSUMER_NEED_CAP = 0.5;
+// The famine's months of drawing on the stores ("its second failed harvest season": a year since
+// the first failure) and the world pulse's own drawdown rule it is drawn by, month by month
+// (domain/worldPulse/foodStockpile.js :: STOCKPILE_TUNING: rationFloorPct, maxReleaseFraction,
+// reserveTitheDeficitCap, reserveTitheFloorMonths — each pinned equal by
+// tests/domain/crisisFactFindings.test.js; kept here so the generation bundle loads no pulse graph).
+// Lane RUNG2-F13; see THE STORES A FAMINE LEAVES below.
+export const FAMINE_MONTHS_RUN = 12;
+/** The smallest value the one-decimal rounding prints (a drawn granary prints 0.1 months, never zero; ODQ §934.105). */
+const SMALLEST_ONE_DECIMAL_MONTHS = 0.1;
+export const FAMINE_DRAWDOWN = Object.freeze({
+  rationFloorPct: 5,
+  maxReleaseFraction: 0.5,
+  reserveTitheDeficitCap: 25,
+  reserveTitheFloorMonths: 1,
+});
 
-export function generateFoodSecurity(tier, institutions, config) {
+/**
+ * The stores a famine leaves after `months` of the pulse's monthly drawdown: each month releases
+ * the gap above the ration floor, at most half of what may be released (a mild gap spares the
+ * one-month reserve), so a granary is drawn down and never emptied at a stroke.
+ * @param {number} stored months in store before the famine @param {number} gapPct the famine's gap, %
+ * @param {number} months @returns {number}
+ */
+export function famineStoresLeft(stored, gapPct, months) {
+  const D = FAMINE_DRAWDOWN;
+  let st = Math.max(0, stored);
+  if (!(gapPct > D.rationFloorPct)) return st;
+  for (let m = 0; m < months; m += 1) {
+    const releasable = gapPct < D.reserveTitheDeficitCap ? Math.max(0, st - D.reserveTitheFloorMonths) : st;
+    st -= Math.min((gapPct - D.rationFloorPct) / 100, releasable * D.maxReleaseFraction);
+  }
+  return st;
+}
+
+// `foodLandOf` and the four custom-content food constants live in the leaf `./foodLand.js` (GREEN-TIP,
+// 2026-11-10): isolationSupport.js reads the same figure, and importing it from this file closed the
+// foodGenerator <-> isolationSupport import cycle (46459cb16). Re-exported so every caller keeps its import.
+export { foodLandOf } from './foodLand.js';
+
+export function generateFoodSecurity(tier, institutions, config, storesShare = 1) {
   // Native catalog names remain a compatibility vocabulary for old saves.
   // Current custom names are presentation-only and must not impersonate a
   // granary, mill, market, magical transit node, or religious food anchor.
   // Their registered `foodImpact` declarations enter once through the tally
-  // below instead.
-  const instNames = nativeSemanticNames(institutions)
-    .map(name => name.toLowerCase());
-  // Depleted resources stop feeding the food math (a depleted fishing ground no
-  // longer counts as fishing). Reads BOTH depletion formats the DEPLETE_RESOURCE
-  // event maintains; inert (identical output) when nothing is depleted.
-  const flatDepletedResources = new Set([
-    ...(config.nearbyResourcesDepleted || []),
-    ...Object.entries(config.nearbyResourcesState || {})
-      .filter(([, v]) => v === 'depleted')
-      .map(([k]) => k),
-  ]);
-  const resources = (config.nearbyResources || []).filter(
-    resource => !flatDepletedResources.has(resource),
-  );
-  const customResourceNames = new Set(
-    (config.nearbyResourcesCustom || []).map(name => String(name).toLowerCase()),
-  );
-  const presentCustomResources = resources.filter(
-    name => customResourceNames.has(String(name).toLowerCase()),
-  );
-  const exactCustomResources = Array.isArray(
-    config.nearbyResourceDefinitions,
-  )
-    ? config.nearbyResourceDefinitions
-    : null;
-  const depletedCustomResourceIds = new Set(
-    (Array.isArray(config.nearbyResourceDefinitionsDepleted)
-      ? config.nearbyResourceDefinitionsDepleted
-      : [])
-      .map(definition => (
-        definition?.customDefinitionId
-        || definition?.localUid
-        || ''
-      ))
-      .filter(Boolean),
-  );
-  const materializedCustomResources = exactCustomResources
-    ? exactCustomResources.filter(definition => (
-        !depletedCustomResourceIds.has(
-          definition?.customDefinitionId || definition?.localUid,
-        )
-      ))
-    : presentCustomResources;
-  // Source sidecars permit a native resource and custom definition to share a
-  // display label. Project native membership explicitly instead of subtracting
-  // custom labels and accidentally erasing the native resource.
-  const nativeResources = availableNativeResourceKeys(config);
+  // in foodLandOf instead.
   const route         = config.tradeRouteAccess || 'road';
-  const hasPhysicalTradeRoute = hasTradeRouteConnection(route);
   const terrain       = config.terrainType || 'plains';
   const _threat        = config.monsterThreat || 'heartland';
   const stresses      = config.stressTypes || (config.stressType ? [config.stressType] : []);
@@ -117,48 +97,15 @@ export function generateFoodSecurity(tier, institutions, config) {
   const magicExists   = config.magicExists !== false;
   const population    = config._population || tierDefaultPop(tier);
 
-  const hasInst  = (...keys) => instNames.some(n => keys.some(k => n.includes(k)));
-  const hasRes = (...keys) => nativeResources.some(
-    resource => keys.some(key => String(resource).includes(key)),
-  );
-
-  // ── Institution flags ─────────────────────────────────────────────────────
-  const hasSubsistence    = hasInst('subsistence', 'common field', 'household farm', 'farming community');
-  const hasFarmland       = hasInst('farmland', 'grain field', 'managed farmland');
-  // A stand-in ("Access to external mill") is not a mill: it extends no stores (FOOD-2).
-  // (the grain-processor read the import check already uses: sawmills and stand-ins excluded)
-  const hasMill           = hasImportProcessor(institutions || [], 'grain', {});
-  const hasGranary        = hasInst('town granary', 'village granary', 'granary');
-  const hasCityGranary    = hasInst('city granari');
-  const hasStateGranary   = hasInst('state granary');
-  const hasFishing        = hasInst('fish', 'fishing') || hasRes('fishing_grounds', 'river_fish');
-  // F3 FOOD-WORDS unit 3 (the chair's ruling, 2026-11-04): a fishing row on water IS the catch —
-  // a Fisher's landing, a fishery or a fish market where the water fact is not 'none' feeds the
-  // place even when the terrain rolled no fishing-grounds resource. A Fishmonger is a trader.
-  const fishRowOnWater    = hasInst('fisher', 'fishery', 'fishing', 'fish market') && waterAccessKind(terrain, route) !== 'none';
-  const fishSource        = hasFishing && (hasRes('fishing_grounds', 'river_fish') || fishRowOnWater);
-  const hasPastoral       = hasInst('pastoral', 'grazing', 'livestock', 'shepherd', 'common graz');
-  const hasHunting        = hasInst('hunting', 'managed forest', 'woodcutter');
-  const hasOrchard        = hasInst('orchard', 'kitchen garden', 'herb garden');
-  const hasMarket         = hasInst('market', 'marketplace', 'daily market', 'district market');
-  const _hasBakery         = hasInst('baker', 'bakery');
-  const hasDruid          = hasInst('druid', 'grove', 'elder grove', 'sacred grove'); // J33: Warden's Lodge is defence, not druid (the owner, 2026-10-01)
-  const hasDivine         = hasInst('cathedral', 'monastery', 'great cathedral', 'parish church');
-  const hasArcane         = hasInst('mage', 'wizard', 'arcane', 'spellcasting');
-
-  // ── THE FOOD SOURCES (FOOD-3) — the five resource+institution pairings the balance reads,
-  // LARGEST CONTRIBUTION FIRST (the order of their bonuses below: grain .25, livestock .10, fish
-  // .09, mill .08; game, the small-place hunt, last). A place whose pairings all miss lists none.
-  const foodSources = /** @type {Array<'grain'|'livestock'|'fish'|'mill'|'game'>} */ ([
-    ['grain', (hasSubsistence || hasFarmland) && hasRes('grain_fields', 'fertile_floodplain')],
-    ['livestock', hasPastoral && hasRes('grazing_land')],
-    ['fish', fishSource],
-    ['mill', hasMill && hasRes('river_mills')],
-    ['game', hasRes('hunting_grounds') && (hasHunting || ['thorp', 'hamlet', 'village'].includes(tier))],
-  ].filter(([, fired]) => fired).map(([name]) => name));
-  // Preserved fish, meat and game count beside grain in the stores: a quarter month for each
-  // such source, three quarters at most (FOOD-3, the one diversity term in the stores).
-  const preservedSources = foodSources.filter(source => source === 'livestock' || source === 'fish' || source === 'game').length;
+  // HOW MUCH THE LAND GROWS: one source — the flags, the food sources and the land's capacity are read by
+  // foodLandOf above, which the isolation-support receipt reads too (FIX-FOOD-ISOLATION second seat).
+  const {
+    instNames, hasInst,
+    hasMill, hasGranary, hasCityGranary, hasStateGranary,
+    hasMarket, hasDruid, hasDivine, hasArcane,
+    foodSources, preservedSources, worksOwnLand,
+    effectiveAgri, customFoodImpact, customProducerCapacityBonus, customConsumerNeedBonus,
+  } = foodLandOf(tier, institutions, config, route);
 
   // ── Magical transport check (used in chains AND importCoverageRate) ────────
   // Circles and airships are NOT interchangeable: a teleportation circle is
@@ -172,12 +119,18 @@ export function generateFoodSecurity(tier, institutions, config) {
 
   // ── Source chain diversity ────────────────────────────────────────────────
   // Each independent chain is a fallback when others fail.
+  // ⛔ ONE FOOD-SOURCE COUNT (WIRING-W0 cause 4b, the chair's R-W7 (c), 2026-11-07). The chains are the food
+  // sources' own TYPES (FOOD-3's `foodSources` is the one truth): grain and the mill are one type, grain; herds,
+  // fish and game are one each. They were judged by looser tests of their own (any granary, bakery or brewery
+  // made a grain chain; a butcher or a tannery a herd chain; an orchard a hunting chain) and counted "Trade &
+  // imports" as a source, so the count disagreed with the record's sources on every one of the golden 525. Trade
+  // is the import share (`importPct`), never a source of the place's own; its key stays, false, so the shape holds.
   const chains = {
-    'Grain & agriculture': hasSubsistence || hasFarmland || hasRes('grain_fields', 'fertile_floodplain') || hasInst('granary', 'grain', 'mill', 'bakery', 'brewery', 'distillery'),
-    'Pastoral & livestock': hasPastoral || hasRes('grazing_land') || hasInst('butcher', 'livestock', 'slaughter', 'dairy', 'cheese', 'tanner', 'tannery'),
-    'Fishing & water':      hasFishing,
-    'Hunting & foraging':   hasHunting || hasOrchard || hasRes('hunting_grounds', 'foraging_areas'),
-    'Trade & imports':      (hasPhysicalTradeRoute || hasTeleport) && hasMarket,
+    'Grain & agriculture': foodSources.includes('grain') || foodSources.includes('mill'),
+    'Pastoral & livestock': foodSources.includes('livestock'),
+    'Fishing & water':      foodSources.includes('fish'),
+    'Hunting & foraging':   foodSources.includes('game'),
+    'Trade & imports':      false,
   };
   const activeChains      = Object.entries(chains).filter(([,v])=>v).map(([k])=>k);
   const activeChainsCount = activeChains.length;
@@ -193,7 +146,12 @@ export function generateFoodSecurity(tier, institutions, config) {
                     // thorp/hamlet value.
                     : (['thorp','hamlet','village'].includes(tier) ? 1.5 : 1.0);
   // Mill extends storage — flour lasts longer than grain
-  const storageMonths = Math.round(((hasMill ? baseStorage * 1.25 : baseStorage) + Math.min(3, preservedSources) / 4) * 10) / 10;
+  // What the granary holds in a good year; an ACTIVE famine has been drawing on it (below).
+  // COHERENCE-UPKEEP (the chair's ruling 6 of 2026-11-12): what is laid by is bought, so the full
+  // granary keeps `storesShare` of its months — `boughtShare('stores', keepOf(prosperity))`,
+  // handed in by the economy's second call AFTER prosperity (economicState.js); 1 when absent. The
+  // first call (the one prosperity reads) lays by in full, and prosperity reads no months.
+  const storageMonthsFull = Math.round(((hasMill ? baseStorage * 1.25 : baseStorage) + Math.min(3, preservedSources) / 4) * (Number.isFinite(storesShare) ? storesShare : 1) * 10) / 10;
 
   // ── Import dependency ─────────────────────────────────────────────────────
   // How much of caloric needs can the settlement import, and does it need to?
@@ -218,8 +176,9 @@ export function generateFoodSecurity(tier, institutions, config) {
     port: 0.58,
   }[route] ?? 0;
   const tierImportNeed = hinterlandShareOf(tier); // the hinterland share, one table (FOOD-2)
+  // The advance loop's import dial (foodLedger.importDependency: what the trade channel can carry when the
+  // world pulse runs), never a share a sentence prints: the ONE import share is `importPct` below (WIRING-W0).
   const importDependency = Math.min(importCapacity, tierImportNeed + (hasMarket ? 0.04 : 0));
-  const importPct        = Math.round(importDependency * 100);
 
   // ── Magic food supplement ─────────────────────────────────────────────────
   // Tier-scaled: negligible at thorp/hamlet, meaningful at town+, significant at metro
@@ -230,40 +189,6 @@ export function generateFoodSecurity(tier, institutions, config) {
     ? Math.min(0.35, Math.max(0, (priorityMagic - 25) / 75) * magicTierScale * magicInstMult)
     : 0;
   // magicSupplement: 0 → 0.35 fraction of food pressure relieved by magic
-
-  // ── Physics-based caloric calculation ────────────────────────────────────
-  // Use the same constants as buildFactionList for consistency
-  // ONE terrain table: geographyData's (FOOD-2). The private copy this file kept read plains
-  // 1.0 where geography reads 1.5, riverside 0.9 where it reads 1.3.
-  const terrainAgri    = TERRAIN_DATA[/** @type {keyof typeof TERRAIN_DATA} */ (terrain)]?.agricultureCapacity ?? 1;
-  let agriMod = 0;
-  if ((hasSubsistence || hasFarmland) && hasRes('grain_fields','fertile_floodplain')) agriMod += 0.25;
-  if (hasFarmland && hasRes('fertile_floodplain'))  agriMod += 0.10;
-  if (hasPastoral  && hasRes('grazing_land'))        agriMod += 0.10;
-  if (fishSource)                                    agriMod += 0.09;
-  if (hasMill      && hasRes('river_mills'))         agriMod += 0.08;
-  agriMod = Math.min(agriMod, 0.5);
-
-  // Custom content enters food physics exactly once, here, in the writer of
-  // economicState.foodSecurity. The viability model is only a view of this
-  // record, and the world-pulse stockpile advances its persisted deficit and
-  // surplus. Applying the tally in either downstream consumer would double
-  // count or create a second food truth.
-  const customFoodImpact = customDeps.foodImpactTally(
-    institutions || [],
-    materializedCustomResources,
-    tier,
-  );
-  const customProducerCapacityBonus = Math.min(
-    customFoodImpact.producers * CUSTOM_PRODUCER_CAPACITY_PER_ITEM,
-    CUSTOM_PRODUCER_CAPACITY_CAP,
-  );
-  const customConsumerNeedBonus = Math.min(
-    customFoodImpact.consumers * CUSTOM_CONSUMER_NEED_PER_ITEM,
-    CUSTOM_CONSUMER_NEED_CAP,
-  );
-  agriMod += customProducerCapacityBonus;
-  const effectiveAgri = Math.min(terrainAgri + agriMod, 2.0);
 
   // Stress modifiers
   const stressFamine  = stresses.includes('famine');
@@ -290,7 +215,8 @@ export function generateFoodSecurity(tier, institutions, config) {
   // would double-count). Golden-shifting (G2).
   if (stresses.includes('wartime'))        { productionMult  *= 0.85; }
   if (stresses.includes('slave_revolt'))   { productionMult  *= 0.80; }
-  if (stresses.includes('mass_migration')) { consumptionMult *= 1.15; }
+  // WIRING-W0 (R-W7 e): more mouths only where the record declares ARRIVALS (domain/migrationDirection.js).
+  if (stresses.includes('mass_migration') && migrationDirectionOfConfig(config) !== 'departures') { consumptionMult *= 1.15; }
 
   const baseDailyNeed = population * PER_CAPITA_NEED;
   const dailyNeed = (
@@ -363,7 +289,19 @@ export function generateFoodSecurity(tier, institutions, config) {
   // Ordinary supply: the hinterland first, then the trade channel carries its share of what
   // remains. Both are imports to the dossier ("+ N imported"); the record keeps them apart.
   const channelGap      = rawDeficit - hinterlandSupply;
-  const importCoverage  = hinterlandSupply + (channelGap > 0 ? channelGap * importCoverageRate : 0);
+  // ⛔ AN ISOLATED PLACE IS FED FROM OUTSIDE ONLY AS FAR AS ITS SUPPORT RECEIPT CARRIES (FIX-FOOD-ISOLATION,
+  // the chair's ruling, 2026-11-07). The isolation-support receipt is THE supply-capacity fact for an isolated
+  // route: the carts and channel above are bounded by the share of need its import-bearing paths carry
+  // (isolationSupport.js :: isolationFoodImportShareOf), the receipt derived from the same roster, route and
+  // resources, zero draws. Unbounded, they read 20–50% "imported" on towns the receipt calls untenable (the
+  // hinterland's carts the receipt does not credit), and the band read Secure.
+  const isolationImportShare = isolationFoodImportShareOf(
+    deriveIsolationSupport({ tier, tradeRoute: route, institutions, config }),
+  );
+  const ordinarySupply  = hinterlandSupply + (channelGap > 0 ? channelGap * importCoverageRate : 0);
+  const importCoverage  = isolationImportShare === null
+    ? ordinarySupply
+    : Math.min(ordinarySupply, dailyNeed * isolationImportShare);
 
   // Magic food offset
   let magicOffset = 0;
@@ -383,6 +321,17 @@ export function generateFoodSecurity(tier, institutions, config) {
   // prosperity modifier and the food record all read this one figure. No floor.
   const deficitPct    = Math.round(dailyNeed) > 0 ? Math.round(deficit) / Math.round(dailyNeed) * 100 : 0;
   const surplusPct    = dailyNeed > 0 ? Math.max(0, rawSurplus / dailyNeed * 100) : 0;
+
+  // ── THE STORES A FAMINE LEAVES (lane RUNG2-F13, 2026-11-04; the chair's ruling on rung 2 §3c,
+  // soak1k-3605: "Food Deficit — Active Famine. Stores: a granary, 15 months of grain.") ──────
+  // A famine reads the stores. The famine's own record says how long it has run: "its second
+  // failed harvest season" (stressNarrative.js :: famine), so the stores have been drawn on since
+  // the first failure, FAMINE_MONTHS_RUN months, by the world pulse's own monthly drawdown
+  // (famineStoresLeft). What is printed is what is in hand. Zero draws; outside a famine the full
+  // granary (storageMonthsFull) is untouched.
+  const storageMonths = stressFamine
+    ? Math.max(SMALLEST_ONE_DECIMAL_MONTHS, Math.round(famineStoresLeft(storageMonthsFull, deficitPct, FAMINE_MONTHS_RUN) * 10) / 10)
+    : storageMonthsFull;
 
   // Normalized food ratio — 1.0 = exactly adequate
   const localRatio    = dailyProduction / Math.max(1, dailyNeed);
@@ -412,7 +361,7 @@ export function generateFoodSecurity(tier, institutions, config) {
                       : activeChainsCount === 3 ? 'three food source types'
                       : activeChainsCount === 2 ? 'two food source types'
                       : activeChainsCount === 1 ? 'single food source'
-                      : 'no established food chains';
+                      : worksOwnLand ? OWN_PLOTS_LINE : NO_FOOD_CHAINS_LINE; // COHERENCE-AGREE-3 (Part B (i)): its own plots
 
   const storageNote = storageMonths >= 8 ? `${storageMonths} months strategic reserve`
                     : storageMonths >= 4 ? `${storageMonths} months buffer`
@@ -424,23 +373,34 @@ export function generateFoodSecurity(tier, institutions, config) {
                   : magicSupplement > 0 ? 'Trace magical food contribution'
                   : null;
 
+  // ⛔ ONE IMPORT SHARE (WIRING-W0 cause 4a, the chair's R-W7 (c), 2026-11-07). `importPct` is the writer: the
+  // share of the PUBLISHED need that the PUBLISHED ordinary supply carries (the hinterland's carts and the trade
+  // channel, `importCoverage`), the same pounds the food record's grown and magic shares are of; the record's
+  // `normalImportPct` reads it. It was `importDependency` x 100, a route-capacity figure that disagreed with the
+  // record's share on 415 of the golden 525 (a thorp at 0% beside its record's 7%; a town 20% "imported" while
+  // growing a surplus).
+  const importPct = Math.round(dailyNeed) > 0 ? Math.round(Math.max(0, importCoverage) / Math.round(dailyNeed) * 100) : 0;
   const importNote = importPct >= 40 ? `${importPct}% import-dependent: trade disruption = immediate crisis`
                    : importPct >= 20 ? `${importPct}% imported: meaningful external dependency`
                    : importPct >= 5  ? `${importPct}% supplemented by imports`
                    : null;
 
   // ── THE FOOD RECORD (FOOD-1): derived once, here, from the numbers just published ──
+  // THE MAGIC SHARE IS THE SHARE OF THE POUNDS PUBLISHED (RECORD-MEASURE-3 row 4, the chair's ruling R4, candidate c4a),
+  // as the gap's is (deficitPct above): the record is handed the rounded `magicOffset` this writer publishes, so 0.4 lb
+  // of a 32 lb need, published as 0 lb, is no longer a 1 % share "provided by spell or by prayer" beside a reliance of none.
   const foodRecord = deriveFoodRecord({
     dailyNeed: Math.round(dailyNeed), dailyProduction: Math.round(dailyProduction),
-    importCoverage, magicOffset, deficitPct, surplusPct, stressFamine, storageMonths,
+    importCoverage, normalImportPct: importPct, magicOffset: Math.round(magicOffset), deficitPct, surplusPct, stressFamine, storageMonths,
     hasGranary: hasAnyGranary,
     foodSources,
     failedSource,
     famineCutPct: stressFamine ? Math.round((1 - famineKeeps) * 100) : 0,
     foodwaysLine: composeFoodwaysLine({
-      sources: foodSources,
-      cultureLines: CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (config.cultureProfileKey)]?.foodways || null,
+      sources: sourcesAFamineLeaves(foodSources, failedSource), // UPKEEP-16 (n): the table does not rest on the source the famine failed
+      cultureLines: cultureFoodwaysOf(config.cultureProfileKey, { tier, population, institutions, config }), // UPKEEP-9: a declared row is kept only where it holds
       identity: `${tier}|${population}|${terrain}|${route}|${config.cultureProfileKey || ''}`,
+      market: hasMarket, // COHERENCE-AGREE-3 (F6): the market home (facts/market.js), read by foodLandOf
     }),
   });
 
@@ -563,8 +523,39 @@ export function foodProsperityModOf(f) {
   return null;
 }
 
+/**
+ * THE CULTURE'S FOODWAYS LINES, READ WHERE THE LINE IS CHOSEN (UPKEEP-9, step 2(a)): a declared row (`{ text, needs }`,
+ * cultureProfiles.js) is kept only where the place makes its declaration true (`filterDeclared`, the one reading of a
+ * declaration), then gives back its text; the composer picks among what is left, as it did. It used to hand every row's
+ * bare text on (`textOf`), so "… support dense populations." (`population: ≥ middling`) printed in thorps, hamlets
+ * and villages. Pure: no draw.
+ * @param {unknown} key the culture profile's key @param {object} record the fields the facts read (tier, population,
+ *   roster, config) @returns {string[] | null}
+ */
+function cultureFoodwaysOf(key, record) {
+  const rows = CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (key)]?.foodways;
+  if (!rows) return null;
+  return filterDeclared([...rows], { facts: () => factsOf(record), poolId: `cultureProfiles:${String(key)}.foodways`, surface: 'economy', drawKind: 'A' })
+    .map((row) => String(lineText(row)));
+}
+
 /** The middle of the tier's band in the one population table (constants.js :: POPULATION_RANGES). */
 function tierDefaultPop(tier) {
   const range = POPULATION_RANGES[/** @type {keyof typeof POPULATION_RANGES} */ (tier)];
   return range ? Math.round((range.min + range.max) / 2) : POPULATION_RANGES.village.min;
+}
+
+/**
+ * THE SOURCES A FAMINE LEAVES THE TABLE (UPKEEP-16; the chair's ruling (n) of 2026-11-14): the stored foodways line is
+ * composed from the place's own sources, and under a famine it was handed the very source the famine failed, so a
+ * famine town's table "rested on" the harvest that had failed (66 of the capacity reader's 972). The composer is
+ * handed the sources less the failed one; grain and the mill fail together (the mill grinds the grain). A famine that
+ * fails a place's only source leaves none, and the composer's own no-source sentence speaks. Pure; no draw.
+ * @param {ReadonlyArray<string>} sources the food record's sources @param {string | null} failed its `failedSource`
+ * @returns {string[]}
+ */
+function sourcesAFamineLeaves(sources, failed) {
+  if (!failed) return [...sources];
+  const lost = failed === 'grain' || failed === 'mill' ? ['grain', 'mill'] : [failed];
+  return sources.filter((s) => !lost.includes(s));
 }

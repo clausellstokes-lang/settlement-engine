@@ -79,6 +79,9 @@ export const SHARED_FIELDS = Object.freeze([
   // is per-surface (web RGB scale vs PDF palette) and exempt; only the label is shared.
   { fact: 'prosperity.label', canonPath: 'prosperity.label', vmPaths: ['overview.prosperity'] },
   { fact: 'safety.label',     canonPath: 'safety.label',     vmPaths: ['overview.safety'] },
+  // The prosperity label's ordinary-years sentence (the chair's ruling 1(a) on REVIEW-UPKEEP-2,
+  // 2026-11-13): written once (prosperityInCrisis.js), read beside the label by both surfaces.
+  { fact: 'prosperity.inCrisis', canonPath: 'prosperity.inCrisis', vmPaths: ['overview.prosperityInCrisis', 'economics.prosperityInCrisis'] },
   // Defense readiness + average defense score, and the top export (pdf.4).
   { fact: 'defense.readinessLabel', canonPath: 'defense.readinessLabel', vmPaths: ['summary.situation.defense.readiness'] },
   { fact: 'defense.scoreAvg',       canonPath: 'defense.scoreAvg',       vmPaths: ['summary.situation.defense.scoreAvg', 'defense.scoreAvg'] },

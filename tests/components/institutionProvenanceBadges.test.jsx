@@ -112,7 +112,9 @@ describe('InstitutionsTab cards — the provenance badge', () => {
       ...base,
       institutions: [
         ...(base.institutions || []),
-        { id: 'institution.hedge_chapel', name: 'Hedge Chapel', category: 'religious', status: 'active', source: 'forced', tags: [] },
+        // RE-KEYED (R2-CODE-B item 2): a row the USER forced is stored as the deployed client stores every
+        // toggle (assembleInstitutions.js): `source: 'forced'` with `forcedByToggle: true`; the YOU mark reads that.
+        { id: 'institution.hedge_chapel', name: 'Hedge Chapel', category: 'religious', status: 'active', source: 'forced', forcedByToggle: true, tags: [] },
       ],
     };
     const container = renderInstitutions(forced);
@@ -133,14 +135,18 @@ describe('InstitutionsTab cards — the provenance badge', () => {
     // the key is the pill's second sentence, on the page header
     const pillText = container.querySelector('[data-testid="institutions-header"] [data-testid="info-pill-text"]');
     expect(pillText, 'the page\'s ? pill must render').toBeTruthy();
-    expect(pillText.textContent).toContain('history, you, the living world, or a dependency');
+    // RE-KEYED (R2-CODE-B round 3, ruling (b)): "REQ" (history) left the roster, so the key no longer
+    // promises it; the required row is unbadged (pinned below), and the key's other marks stand.
+    expect(pillText.textContent).toContain('you, the living world, or a dependency');
+    expect(pillText.textContent).not.toContain('history'); // anchored: the pill's text is read above
     // every mark the key promises is a glyph the badge really draws, each with its title
     const marks = [
-      institutionBadge({ name: 'A', source: 'required' }),
-      institutionBadge({ name: 'B', source: 'forced' }),
+      institutionBadge({ name: 'B', source: 'forced', forcedByToggle: true }), // RE-KEYED (R2-CODE-B item 2): the user's toggle
       institutionBadge({ name: 'C', source: 'auto-resolved' }),
     ];
-    expect(marks.map(m => m.label)).toEqual(['REQ', 'YOU', '→']);
+    expect(marks.map(m => m.label)).toEqual(['YOU', '→']);
+    // the generator's provenance prints no mark: a required row is unbadged, as an unstamped row is
+    expect(institutionBadge({ name: 'A', source: 'required' })).toEqual(institutionBadge({ name: 'A' }));
     for (const m of marks) {
       expect(String(m.label).trim(), 'a mark promised with no glyph is the defect this pins').not.toBe('');
       expect(typeof m.title).toBe('string');
@@ -160,30 +166,25 @@ describe('InstitutionsTab cards — the provenance badge', () => {
 });
 
 /**
- * VERIFIER F14 (RS-19 regressed through T1-14): a PROXY host (servicesData.js ::
- * PROXY_SERVICE_HOSTS: Dwellings, Housing, Water source, Sewage system, Farmland, Massive
- * prison ...) surfaces another house's menu; the Services tab names no institution for those
- * rows, and the Institutions page must not list them under the proxy either. The house itself
- * stays on the roster with its own description.
+ * VERIFIER F14 / RS-19, now kept in the RECORD (lane REVIEW-INTAKE unit 2, 2026-11-06): the
+ * twelve former PROXY hosts (Dwellings, Housing, Water source, Sewage system, Farmland, Massive
+ * prison ...) no longer surface another house's menu. Each owns its entry, so every row naming
+ * one is that house's own service, and the Institutions page lists it under the house.
  */
-describe('F14 / RS-19 — no proxy-surfaced menu under a proxy house', () => {
-  test('the proxy house keeps its card and lists none of the menu it only surfaces', async () => {
+const FORMER_PROXY_HOSTS = new Set(['dwellings (1-8)', 'dwellings (5-25)', 'dwellings (15-100)', 'housing (75-650 households)', 'housing (500-4000 households)', 'water source', 'multiple water sources', 'sewage system', 'farmland', 'common grazing land', 'access to external mill', 'massive prison']);
+describe('F14 / RS-19 — a former proxy house lists only its own menu', () => {
+  test('rows naming a former proxy are its own services and join its card', async () => {
     const { institutionsWithServices } = await import('../../src/components/new/tabs/InstitutionsTab.jsx');
-    const { PROXY_SERVICE_HOSTS } = await import('../../src/data/servicesData.js');
+    const { INSTITUTION_SERVICES } = await import('../../src/data/institutionServices.js');
     const rows = Object.values(base.availableServices || {}).flat();
-    const proxied = rows.filter((r) => r && PROXY_SERVICE_HOSTS[String(r.institution || '').toLowerCase()]);
-    expect(proxied.length, 'fixture premise: the town surfaces a menu through a proxy host').toBeGreaterThan(0);
+    const hosted = rows.filter((r) => r && FORMER_PROXY_HOSTS.has(String(r.institution || '').toLowerCase()));
+    expect(hosted.length, 'fixture premise: the town has a row naming a former proxy house').toBeGreaterThan(0);
+    for (const r of hosted) expect(Object.keys(INSTITUTION_SERVICES[r.institution] || {}), `${r.institution} credited with ${r.name}`).toContain(r.name);
     const houses = institutionsWithServices(base);
-    const proxyHouses = houses.filter((h) => PROXY_SERVICE_HOSTS[String(h.inst.name || '').toLowerCase()]);
-    expect(proxyHouses.length, 'the proxy houses stay on the roster').toBeGreaterThan(0);
-    for (const h of proxyHouses) expect(h.services, `${h.inst.name} lists a proxied menu`).toEqual([]);
-    expect(houses.some((h) => h.services.length > 0), 'real houses keep their menus').toBe(true);
-    const container = renderInstitutions(base);
-    for (const r of proxied) {
-      const card = [...container.querySelectorAll('[data-testid="institution-card"]')]
-        .find((el) => el.firstElementChild?.firstElementChild?.textContent === proxyHouses.find((h) => h.inst.name === r.institution)?.label);
-      expect(card, `${r.institution} card`).toBeTruthy();
-      expect(card.querySelectorAll('[data-testid="institution-service"]').length).toBe(0); // anchored: the card itself is asserted present
+    for (const r of hosted) {
+      const house = houses.find((h) => h.inst.name === r.institution);
+      expect(house, `${r.institution} stays on the roster`).toBeTruthy();
+      expect(house.services.map((s) => s.name)).toContain(r.name); // anchored: the house is asserted present above
     }
   });
 });

@@ -17,7 +17,7 @@
 
 import InfoPill from '../../primitives/InfoPill.jsx';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
-import { tokenCase } from '../labelLadder.js';
+import { statusCase, tokenCase } from '../labelLadder.js';
 import { useMemo } from 'react';
 import { causalBandWord, deriveCausalState, variablePolarity } from '../../../domain/causalState.js';
 import { activeConditionWords, conditionsSentence } from '../../../domain/display/conditionWords.js';
@@ -25,7 +25,10 @@ import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display/dossierViewModel.js';
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import { foundationBandShown } from '../../../domain/display/foundationBandShown.js';
 import { offersFoodSurplus } from '../../../domain/foodSurplus.js';
+import { foodWordShown } from '../../../domain/display/foodWordShown.js';
+import { rulingAuthorityBandShown } from '../../../domain/display/rulingAuthorityShown.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
@@ -36,7 +39,7 @@ const VAR_LABEL = {
   labor_capacity: 'Labor capacity',
   public_legitimacy: 'Public legitimacy',
   ruling_authority: 'Ruling authority',
-  faction_power: 'Faction power',
+  faction_power: 'Strength of the powers',
   trade_connectivity: 'Trade connectivity',
   healing_capacity: 'Healing capacity',
   defense_readiness: 'Defense readiness',
@@ -78,17 +81,67 @@ function healthOrientedScore(row) {
  * print "COLLAPSED" beside it, which reads as "the crime is gone". causalBandWord
  * is the function that already existed to fix precisely this, and had no caller.
  */
-function BandPill({ variable, band }) {
+function BandPill({ variable, band, word: recordWord = null, tone: recordTone = null }) {
   const mobile = useIsMobile();
-  const tone = BAND_TONE[band] || MUTED;
-  const word = causalBandWord(variable, band);
+  const tone = recordTone || BAND_TONE[band] || MUTED;
+  const word = recordWord || tokenCase(causalBandWord(variable, band));
   return (
     <span data-band={band} style={{
       display: 'inline-block', minWidth: 66, textAlign: 'center', padding: '1px 7px',
       fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 800,
       color: swatch.white, background: tone,
-    }}>{tokenCase(word)}</span>
+    }}>{word}</span>
   );
+}
+
+/**
+ * ⭐ THE FOOD ROW READS THE FOOD RECORD'S OWN WORD (R3-TABS, round three's cut #494 and #1317; the
+ * chair's ruling (c): a line that disagrees with another home on the same page reads the home the record
+ * bears out). The Food row banded the causal score on the causal ladder and printed "Strained" beside the
+ * Overview's "Food Security · Deficit" (a siege, a 68% deficit) and "Adequate" beside "Pressured". The
+ * food word has ONE home on every surface (SURFACES-2 item 1, the chair's ruling (r2) of 2026-11-14): the
+ * food band the Tonight sheet, Daily Life, the Overview and the PDF print (domain/display/foodWordShown.js),
+ * cased as the Overview cases it, in the band's colour; no longer the record's stored label. The causal band
+ * stays on `data-band` and orders the rows; a record with no food word keeps the band word.
+ * @param {any} settlement
+ * @returns {{ word: string, tone: string | null } | null}
+ */
+function foodRecordWord(settlement) {
+  const shown = foodWordShown(settlement);
+  return shown ? { word: statusCase(shown.label), tone: shown.color } : null;
+}
+
+/**
+ * ⭐ THE PUBLIC'S LEGITIMACY HAS ONE HOME (NOLANE-2, the chair's ruling 4, BAR-182; TAIL-DISPLAY-CIVIC, the chair's ruling
+ * X2 of 2026-11-14: "Public legitimacyAdequate" in 149 of the census's 720 towns where the Power tab prints "Tolerated").
+ * Two homes read one fact on two ladders: the causal score banded on the causal ladder, and the record's own stored label
+ * (`powerStructure.publicLegitimacy.label`, the band `rulingPower.js` writes and the Power tab prints). The row prints the
+ * record's label, in its colour, as the Food row prints the food word's one home. The causal band stays on `data-band`
+ * and orders the rows; a record without a label keeps the band word.
+ * @param {any} settlement
+ * @returns {{ word: string, tone: string | null } | null}
+ */
+function legitimacyRecordWord(settlement) {
+  const leg = settlement?.powerStructure?.publicLegitimacy;
+  const label = typeof leg?.label === 'string' ? leg.label.trim() : '';
+  if (!label) return null;
+  return { word: statusCase(label), tone: typeof leg.color === 'string' && leg.color ? leg.color : null };
+}
+
+/**
+ * ⭐ UNDER A SIEGE THE TRADE ROW SAYS SO (R3-TABS, round two's #329 and #858; the chair's ruling of
+ * 2026-11-13: the tab does not print a connectivity word the town's own crisis contradicts). The reading
+ * (`causalState.js :: deriveTradeConnectivity`) folds a siege in as wartime pressure, so the row read
+ * "Adequate" in 29 of 82 siege births at aac79b808 (Surplus in 1) while every one of those crises' own
+ * summary says nothing comes in by road. Under a siege in force the row prints the crisis's own label.
+ * @param {any} settlement
+ * @returns {{ word: string, tone: string } | null}
+ */
+function siegeCrisisWord(settlement) {
+  const stresses = Array.isArray(settlement?.stress) ? settlement.stress : settlement?.stress ? [settlement.stress] : [];
+  const siege = stresses.find((x) => x?.type === 'under_siege');
+  const label = typeof siege?.label === 'string' ? siege.label.trim() : '';
+  return label ? { word: statusCase(label), tone: RED } : null;
 }
 
 /**
@@ -114,7 +167,13 @@ export default function SubstrateTab({ settlement }) {
         // reads "Food · Surplus", a claim on the food record. Food is graded Surplus only where
         // the record holds one (domain/foodSurplus.js :: offersFoodSurplus); otherwise Adequate.
         band: key === 'food_security' && v.band === 'surplus'
-          && !offersFoodSurplus(settlement?.economicState?.foodSecurity?.foodRecord) ? 'adequate' : v.band,
+          && !offersFoodSurplus(settlement?.economicState?.foodSecurity?.foodRecord) ? 'adequate'
+          // THE RULING AUTHORITY ROW IS NOT PRINTED ABOVE WHAT THE RECORD SAYS OF THE SAME GOVERNMENT (the chair's
+          // ruling X8, 2026-11-14): the cap is the one leaf's (domain/display/rulingAuthorityShown.js).
+          : key === 'ruling_authority' ? rulingAuthorityBandShown(settlement, v.band)
+            // BAR3-LABELS L2: healing, law, criminal opportunity and labour are not printed above what the page says of them
+            // (domain/display/foundationBandShown.js: no healer kept, a crime wave, conscription)
+            : foundationBandShown(settlement, key, v.band),
         score: typeof v.score === 'number' ? v.score : (model.scores?.[key] ?? null),
       }))
       // Pressures first: worst band, then worst polarity-oriented score, then
@@ -172,15 +231,20 @@ export default function SubstrateTab({ settlement }) {
             Each row keeps its flex box, so the band word still sits at the right edge
             of its column exactly as it sat at the right edge of the page. */}
         <NameColumns count={rows.length} style={{ padding: `0 ${SP.md}px` }}>
-          {rows.map(row => (
+          {rows.map(row => {
+            const recordRead = row.key === 'food_security' ? foodRecordWord(settlement)
+              : row.key === 'public_legitimacy' ? legitimacyRecordWord(settlement)
+              : row.key === 'trade_connectivity' ? siegeCrisisWord(settlement) : null;
+            return (
             <div key={row.key} data-substrate-row style={{
               display: 'flex', alignItems: 'center', gap: SP.sm,
               padding: `${SP.sm}px 0`, borderBottom: `1px solid ${BORDER}`,
             }}>
               <span style={{ flex: 1, fontSize: FS.sm, fontWeight: 600, color: INK }}>{row.label}</span>
-              <BandPill variable={row.key} band={row.band} />
+              <BandPill variable={row.key} band={row.band} word={recordRead?.word} tone={recordRead?.tone} />
             </div>
-          ))}
+            );
+          })}
         </NameColumns>
       </div>
       {magicReliance.shown && (

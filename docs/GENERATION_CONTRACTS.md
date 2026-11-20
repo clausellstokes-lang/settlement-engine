@@ -49,6 +49,7 @@ raw config
 | Isolation support | `generators/isolationSupport.js` | `isolationSupport` | structural validation, coherence audit, owner explanation |
 | Power freshness | `generators/power/economyReconciliation.js` plus `steps/powerEconomyReconcilePass.js` | `powerStructure.powerProjectionVersion` and `powerStructure.economyInputFingerprint` | faction power, legitimacy, relationships, capture state, final assembly |
 | Coherence receipt | `generators/generationCoherence.js` plus direct final-graph judgments in `generators/generationReceiptJudgments.js` | `generationCoherenceReceipt` | corpus gates, owner-facing diagnostics, future certification |
+| The NPC card and the powers | `generators/people/` (the cast), `domain/settlementMigrations.js` (schema 2), `domain/edit/recordRegister.js` (the edit layer) | `npcs[].institution`, `npcs[].memberships`, `powerStructure.factions`; `migrationReports` on a migrated save | the edit layer, the rename cascades, the seat ops, every NPC surface |
 
 ## 1. World law is transient policy
 
@@ -215,6 +216,76 @@ receipt reports the final state and never mutates it. New settlements stamp
 `worldLawVersion: 1`; older or externally-authored receipts may still omit that
 metadata.
 
+## 8. The NPC card and the powers
+
+*(PEOPLE-5B, 2026-11-07, the people car's chair rulings M-1b, M-2, M-6 and M-7,
+`docs/chair/2026-11-07/PEOPLE-RULINGS-2026-11-07.md`; schema 2.)*
+
+**The powers are the ONLY faction roster.** `powerStructure.factions` (named,
+ranked, `isGoverning`, the backing catalogue's shares landed on them) is every
+faction a v2 record has. The NPC grouping `settlement.factions` is gone from a
+v2 record.
+
+**The card.** An NPC is a representative, the face of one institution. Its card
+carries:
+
+- `institution`: `{ kind: 'house', key, family, title }` for the face of a house
+  on the roster (the house's roster name is `key`), `{ kind: 'power', key, ... }`
+  for a face minted from a power (the seat of R-P2, an `other` power's of R-P4),
+  or `null` for the DM's card (authored, event-born or locked).
+- `memberships`: `[{ power, rank, share }]`, one entry per power the card stands
+  in, ranked first, second or third where its house backs that power
+  (`rank: null` where a DM, an event or the migration placed it). **Every
+  membership names a power on `powerStructure.factions`.** The coherence
+  receipt's "broken NPC/faction references" now means a membership that names no
+  power, and the edit layer's reassign writer refuses one
+  (`npc_membership_power_unknown`).
+- No faction role. A card's role is its institution's title (M-1b).
+
+`factionAffiliation`, `secondaryAffiliation`, `linkedFactionIds`,
+`factionGoal` and `densityRungRole` are gone from a v2 record (`structuralRank`
+is carried, a derived field of the memberships). Until the landing the
+generator still writes the two shim fields inside the pipeline
+(`people/legacyShim.js`, `@shim people-car`) and the grouping
+(`power/factionGrouping.js`); `normalizeSettlement` takes every record through
+the migration chain, so neither survives into a returned record. The only
+readers of the grouping or the six fields left in `src/` are the simulation's
+(FPZ's, M-6: `src/domain/worldPulse/`, `src/domain/events/`, the store's
+advance loop), listed by file in PEOPLE-5-PREP's FPZ table
+(`docs/chair/2026-11-07/people-5-prep/fpz-list.json`, 35 files) and in
+`docs/PEOPLE_5B_EDIT_2026-11-07.md` §5; the walker that holds every other file to
+that list (`people-5-prep/noLegacyFactionReaders.*`) is promoted when the last
+non-FPZ reader is re-pointed.
+
+**The edit layer** (`src/domain/edit/recordRegister.js`):
+
+- `npcs` is HELD, keyed `id`. The card's `institution` and its `memberships`
+  (keyed `power`) merge INSIDE the held card; `memberships` and `importance` are
+  one consistency group per card (`card-standing`: both come from one rank draw).
+- `relationships` is HELD, keyed `from,to,type` (one outgoing tie per card,
+  R-P7; directed).
+- No MIRROR sits on an entity path. The grouping's member copy
+  (`factions[].members[]`) was the only one; it left with the grouping, and
+  `mergeConsequence.js :: recomputeMirrors` with it. Each card has one home.
+- The rename cascades: a POWER rename rewrites `npcs[].memberships[].power` (and
+  a minted face's `institution.key`); an INSTITUTION rename rewrites a house
+  face's `institution.key`, which is its title source.
+- The seat fields (`npc/npcOps.js :: SEAT_HELD_FIELDS`, mirrored by
+  `pendingEditIntents.js` and `store/settlementPendingEditWriters.js`) are
+  `memberships` and `institution`; `reassign-npc` moves a card between powers
+  or houses.
+
+**Saves.** A v1 save is migrated ONCE by `settlementMigrations.js ::
+migrateV1toV2` (schema 1 -> 2): the affiliation fields become memberships where
+they resolve to a power; a string `institution` naming a roster house becomes
+`{ kind: 'house', key }`; the grouping is dropped; ties `npc1Id,npc2Id` become
+`from,to` (a card's out-degree above one is kept: DM content is never dropped).
+A DM card keeps every field it had and becomes a face of no house
+(`institution: null`); the save envelope's locks are outside the settlement and
+untouched. What the step cannot map (an affiliation naming no power, a grouping
+entry naming no power) is written to the record's `migrationReports` (HISTORY)
+and never silently dropped.
+
 ## Evolution rules
 
 - Add a new eligibility rule to world law before teaching multiple producers to
@@ -224,6 +295,11 @@ metadata.
 - Version persisted receipts when their field meaning changes; add optional
   fields for compatible extensions.
 - Keep old saves readable: absent receipts mean “not recorded,” never “passed.”
+- A removed or restructured persisted field bumps `SCHEMA_VERSION`
+  (`settlement.schema.js`) with a registered migration in
+  `settlementMigrations.js` and a proof over the committed saves
+  (`tests/domain/settlementMigrations.test.js`); the save museum's exhibits move
+  with it.
 - Owner surfaces may summarize receipt facts. Player-safe exports must omit
   internal findings unless a separate projection explicitly classifies them.
 - The integration contract tests must fail when a transient world law is

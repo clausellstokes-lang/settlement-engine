@@ -32,6 +32,7 @@ import { magicLedger } from './magicLedger.js';
 import { ARCANE_IDENTITY } from './arcaneIdentity.js';
 import { stripNegatedMagic } from './magicAssertionText.js';
 import { institutionCatalogArcaneTag } from './arcaneInstitutionIdentity.js';
+import { firstRankMembershipOf } from './people/membership.js';
 
 // ── Catalogs ─────────────────────────────────────────────────────────────
 
@@ -61,7 +62,8 @@ export const INSTITUTION_CATEGORIES = Object.freeze([
  * @property {string} [type]
  * @property {string} [controlledBy]
  * @property {string} [controller]
- * @property {string} [factionAffiliation]
+ * @property {string} [factionAffiliation]  a library NPC authored before the people car (the DM's own words; read, never written)
+ * @property {Array<{ power?: string, rank?: number|null }>} [memberships]  PEOPLE-5B (M-7): the card's powers
  * @property {string} [threatType]
  * @property {string} [category]
  * @property {string[]} [risks]
@@ -361,8 +363,8 @@ export function classifyCustomInstitution(rawEntity, settlement) {
 
 /** @param {RawCustomEntity} rawEntity */
 function classifyCustomFaction(rawEntity) {
-  const name = String(rawEntity.name || rawEntity.label || 'Unnamed faction');
-  const contributors = [{ source: 'category_inference', effect: 'faction', reason: `"${name}" classified as faction.` }];
+  const name = String(rawEntity.name || rawEntity.label || 'Unnamed power');
+  const contributors = [{ source: 'category_inference', effect: 'faction', reason: `"${name}" classified as power.` }];
   return {
     type: 'faction',
     rawName: name,
@@ -384,8 +386,11 @@ function classifyCustomNpc(rawEntity) {
     rawName: name,
     inferredCategory: null,
     provides:     ['individual_authority'],
-    requires:     ['standing in a faction or institution'],
-    controlledBy: rawEntity.factionAffiliation || 'unattributed',
+    requires:     ['standing in a power or institution'],
+    // PEOPLE-5B (M-7): the power the NPC ranks first in; a library entity the DM authored before the
+    // car keeps its own `factionAffiliation` words (custom content is outside the settlement migration).
+    // LEGACY (PULSE-SITES 2026-11-10): the custom-content library's own entity, outside the settlement migration.
+    controlledBy: firstRankMembershipOf(rawEntity)?.power || rawEntity.factionAffiliation || 'unattributed',
     risks:        [],
     effects:      { substrate: {}, capacities: {} },
     contributors: [{ source: 'category_inference', effect: 'npc', reason: `"${name}" classified as NPC.` }],

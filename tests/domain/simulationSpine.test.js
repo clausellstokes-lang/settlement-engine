@@ -798,7 +798,7 @@ describe('over REAL generated settlements', () => {
     // this test vacuously and prove nothing about the joiner.
     expect(examined, 'no generated settlement carried a coordinating export name')
       .toBeGreaterThan(0);
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the ratchet's instruction; 2026-11-18): 17.2 s here under load
 
   it('every rendered row is grammatical on every generated settlement', () => {
     for (const settlement of [...generated, ...besieged]) {

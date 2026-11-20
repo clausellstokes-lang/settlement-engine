@@ -10,6 +10,8 @@
 
 import { validateNpcFacet } from '../domain/npc/npcFacetContract.js';
 import { recordCanonFlavorEntryImpl } from './settlementRenameHelpers.js';
+import { nameOf } from '../domain/rulingPower.js';
+import { stampMembershipsVeil, stampVeil } from '../domain/people/cardVeil.js';
 
 const TABLE_SOURCE = 'table';
 // The CLOSED set of engine events a table record may reach. Closedness is the
@@ -32,14 +34,15 @@ const STASIS_REASONS = new Set([
   'missing',
   'sequestered',
 ]);
+// PEOPLE-5B (M-7): the mirror of npc/npcOps.js :: SEAT_HELD_FIELDS (the three move together).
 const SEAT_FIELDS = new Set([
   'institutionId',
   'factionLink',
-  'factionAffiliation',
   'settlementId',
   'role',
   'linkedInstitutionIds',
-  'linkedFactionIds',
+  'memberships',
+  'institution',
 ]);
 
 /**
@@ -112,14 +115,29 @@ export function applyNpcOp(get, set, edit) {
         reason = 'npc_assignment_field_invalid';
         return;
       }
-      const hasChange = Object.entries(target).some(
+      // PEOPLE-5B (M-7, GENERATION_CONTRACTS "The NPC card and the powers"): every membership names a
+      // power the record carries; a reassignment into a power the settlement does not have is refused.
+      if (Array.isArray(target.memberships)) {
+        const powers = new Set((Array.isArray(state.settlement?.powerStructure?.factions) ? state.settlement.powerStructure.factions : [])
+          .map((faction) => nameOf(faction)).filter(Boolean));
+        if (target.memberships.some((m) => !powers.has(m?.power))) {
+          reason = 'npc_membership_power_unknown';
+          return;
+        }
+      }
+      // FIX-PUBLIC-VEIL: the reassigned house and each membership carry their veil bits, stamped against this
+      // record (people/cardVeil.js).
+      const stamped = { ...target };
+      if ('institution' in target) stamped.institution = stampVeil(target.institution, state.settlement);
+      if ('memberships' in target) stamped.memberships = stampMembershipsVeil(target.memberships, state.settlement);
+      const hasChange = Object.entries(stamped).some(
         ([field, value]) => JSON.stringify(npc[field]) !== JSON.stringify(value),
       );
       if (!hasChange) {
         reason = 'no_effect';
         return;
       }
-      Object.assign(npc, target);
+      Object.assign(npc, stamped);
     } else if (kind === 'stasis-npc') {
       if (!STASIS_REASONS.has(payload.reason)) {
         reason = 'stasis_reason_invalid';

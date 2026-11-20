@@ -4,21 +4,23 @@ import { relationshipRoles } from './relationshipEvolution.js';
 import {
   readCorruptionClimate, npcCorruptibleFlaw, corruptibility, corruptionVectorForFlaw, spawnCorruptionChance,
   onsetHazard, exposureChance, demoteDotRank, CORRUPTION_TUNING, guildEffectiveSecurity,
-  patronageSecurityDrag, npcHomeInstitution, PATRONAGE_TUNING,
+  npcHomeInstitution, PATRONAGE_TUNING,
   hasCorruptingDeity, npcDeityDisfavor } from '../corruption.js';
 // THE RESOLVER CHOKEPOINT (§1) rides a LAZY leaf, NOT eager corruption.js — see
 // corruptionLeash.js's first-paint note. npcAgency is the lazy engine chunk, so
 // this import adds nothing to first paint.
-import { resolveLeash, isWilledLeash } from '../corruptionLeash.js';
+import { resolveLeash, isWilledLeash, corruptMarkOf, patronageSecurityDrag } from '../corruptionLeash.js';
+import { allegianceOf } from '../people/allegiance.js';
+import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 // Phase 4 W-F3 site #7 — the corruption-plane amplifier over the onset (flaw-expression)
 // pressure channel. Reads the settlement's TICK-START faithProfile.piety + patron plane
 // position; 1.0 (byte-identical) for a deity-free / legacy 3-axis / non-devout settlement.
 import { corruptionPlaneMultOf, skimPressureMultFor } from './piety.js';
 // H17: per-advance indices replacing evaluateNpcRules' O(states × (settlements + edges)) rescan.
 import { settlementByIdIndex, edgeAdjacencyIndex } from './tickIndices.js';
-import { NPC_GOAL_NEWS, npcAmbitionWord, npcPressureWord, pickLine } from './eventProse.js';
+import { NPC_GOAL_NEWS, NPC_ROLE_MEANS, npcCandidateReasons, pickLine, plainTrait } from './eventProse.js';
 import { branchedGoalsFor } from './npcGoalBranches.js';
-import { NPC_AIMS, TARGETED_NPC_DEEDS, UNTARGETED_NPC_DEEDS } from './heraldDeeds.js';
+import { NPC_AIMS, NPC_AIM_FRAMES, TARGETED_NPC_DEEDS, UNTARGETED_NPC_DEEDS } from './heraldDeeds.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
   ruler: {
@@ -293,12 +295,17 @@ export function inferRoleArchetype(npc = {}) {
  * @param {number} [index]
  */
 function factionIdFor(npc = {}, item, index) {
-  // factionAffiliation is the generator's canonical faction handle (npcGenerator
-  // writes assignedFaction.faction onto it); read it FIRST so an affiliated NPC
-  // seats into its named faction instead of the positional-index fallback below.
-  // stablePart(factionAffiliation) lines up with seatNpcsIntoFactions' stablePart
-  // (faction.name) because both derive from the power faction's `faction` field.
-  const direct = npc.factionId || npc.faction || npc.affiliation || npc.factionAffiliation || npc.organizationId || npc.organization;
+  // The card's FIRST-RANK MEMBERSHIP is the generator's canonical faction handle (the people car writes
+  // `memberships: [{ power, rank }]`; people/membership.js :: firstRankMembershipOf, tie-broken by the powers'
+  // order, the seat first); read it so an NPC seats into its named power instead of the positional-index
+  // fallback below. stablePart(power) lines up with seatNpcsIntoFactions' stablePart(faction.name) because both
+  // derive from the power's `faction` field.
+  // ⛔ RE-POINTED (GREEN-TIP, 2026-11-10): this slot read `factionAffiliation`, which the people car retired from
+  // every card (15207301f), so on a current record every NPC fell through to 'unaffiliated' and
+  // seatNpcsIntoFactions seated nobody (60/60 soak births). The retired read kept beside it while the pulse's own
+  // writers still wrote that field LEFT with them (the chair's ruling 4): no writer writes it now.
+  const membershipPower = firstRankMembershipOf(npc, powerOrderOf(item?.settlement))?.power;
+  const direct = npc.factionId || npc.faction || npc.affiliation || membershipPower || npc.organizationId || npc.organization;
   if (direct) return stablePart(direct);
   const factions = item.settlement?.factions || item.settlement?.powerFactions || item.settlement?.politics?.factions || [];
   const faction = factions[(/** @type {any} */ (index)) % Math.max(1, factions.length)];
@@ -446,13 +453,14 @@ export function ensureNpcStates(worldState, snapshot, rng) {
         // (authoritative between ticks): EXPOSE_CORRUPTION and
         // criminal-institution removal clear npc.corrupt + bump timesExposed, so
         // they must stick here instead of being re-mirrored from stale npcState.
-        if (typeof npc.corrupt === 'boolean'
-            && (npc.corrupt !== st.corruption || (npc.timesExposed || 0) !== (st.timesExposed || 0))) {
+        const mark = corruptMarkOf(npc, item.settlement);
+        if (typeof mark === 'boolean'
+            && (mark !== st.corruption || (npc.timesExposed || 0) !== (st.timesExposed || 0))) {
           st = {
             ...st,
-            corruption: npc.corrupt,
-            corruptionProfile: npc.corrupt ? st.corruptionProfile : { corrupted: false, vector: null },
-            corruptionHeat: npc.corrupt ? st.corruptionHeat : 0,
+            corruption: mark,
+            corruptionProfile: mark ? st.corruptionProfile : { corrupted: false, vector: null },
+            corruptionHeat: mark ? st.corruptionHeat : 0,
             timesExposed: Math.max(npc.timesExposed || 0, st.timesExposed || 0),
             ousted: npc.ousted || st.ousted || false,
           };
@@ -499,13 +507,15 @@ export function ensureNpcStates(worldState, snapshot, rng) {
       // vector); the world-pulse mirrors it. One rng draw is kept here so a legacy
       // save's downstream NPC-trait draws keep their positions. No criminal
       // institution → no corruption (the rule), regardless of personality.
+      // J-19: drawn for every card so no stream shifts; a v3 card ignores it (corruptMarkOf decides).
       const corruptRoll = local.random();
       const genFlaw = npcCorruptibleFlaw(npc);
       let corrupt;
       let corruptVector;
-      if (typeof npc.corrupt === 'boolean') {
-        corrupt = npc.corrupt;
-        corruptVector = corrupt ? (npc.corruptionVector || corruptionVectorForFlaw(genFlaw)) : null;
+      const mark = corruptMarkOf(npc, item.settlement);
+      if (typeof mark === 'boolean') {
+        corrupt = mark;
+        corruptVector = corrupt ? (npc.corruptionVector || allegianceOf(npc)?.vector || corruptionVectorForFlaw(genFlaw)) : null;
       } else if (climate.hasCriminalInst && genFlaw) {
         corrupt = corruptRoll < spawnCorruptionChance(climate);
         corruptVector = corrupt ? corruptionVectorForFlaw(genFlaw) : null;
@@ -818,7 +828,9 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
       const exposeP = exposureChance({ security: exposureSecurity, prosperity: climate.prosperity, guildStrength: guildStr, visibility, priorExposures, deityDisfavor: disfavor.exposure });
       if (local.random() >= exposeP) return;
 
-      const homeInstitution = npc.factionAffiliation || npc.factionLink || npc.institutionId || null;
+      // GREEN-TIP (2026-11-10): the exposure path's one home reader (corruption.js :: npcHomeInstitution, imported
+      // above; PULSE-SITES' site) in place of the same three handles read inline, the first of them retired.
+      const homeInstitution = npcHomeInstitution(npc);
       // Attribution is DELIBERATE through the resolver (§4). A LOCAL/cutout leash
       // keeps today's read — the tied org, falling back to the climate's first
       // criminal org — BYTE-IDENTICAL. A FOREIGN leash blames NO local org (the
@@ -876,14 +888,14 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
   const action = (/** @type {any} */ (NPC_ACTION_FAMILIES))[actionFamily];
   // A move-against-a-named-rival action with a resolved subject. Drives both the
   // subject in the headline/summary and the setback applied to that subject.
-  const targetPhrasing = /** @type {{ underway: (n: string) => string, done: (n: string) => string } | undefined} */ (
+  const targetPhrasing = /** @type {{ underway: (n: string) => string, done: (n: string) => string, noun: (n: string) => string } | undefined} */ (
     TARGETED_NPC_DEEDS[actionFamily]
   );
   const subject = (targetPhrasing && rivalTarget?.name) ? rivalTarget : null;
   const plainDeed = UNTARGETED_NPC_DEEDS[actionFamily]
-    || { underway: `is moving to ${actionFamily.replace(/_/g, ' ')}`, done: `moves to ${actionFamily.replace(/_/g, ' ')}` };
+    || { underway: `is moving to ${actionFamily.replace(/_/g, ' ')}`, done: `moves to ${actionFamily.replace(/_/g, ' ')}`, noun: `moving to ${actionFamily.replace(/_/g, ' ')}` };
   const deed = (subject && targetPhrasing)
-    ? { underway: targetPhrasing.underway(subject.name), done: targetPhrasing.done(subject.name) }
+    ? { underway: targetPhrasing.underway(subject.name), done: targetPhrasing.done(subject.name), noun: targetPhrasing.noun(subject.name) }
     : plainDeed;
   const aim = NPC_AIMS[state.shortGoal] || String(state.shortGoal || '').replace(/_/g, ' ');
   const severity = clamp01(
@@ -912,12 +924,8 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
     applyMode: proposal ? 'proposal' : 'auto', ...(!proposal && !subject && state.lastAction === actionFamily ? { recordMode: 'state_only' } : {}),
     headline: `${state.name} ${deed.underway}`,
     appliedHeadline: `${state.name} ${deed.done}`,
-    summary: `${state.name} is out to ${aim}.`,
-    reasons: [
-      `${state.roleArchetype.replace(/_/g, ' ')} role favors ${actionFamily.replace(/_/g, ' ')}.`,
-      `Pressure sat ${npcPressureWord(pressure)} the gate, and the ambition behind it is ${npcAmbitionWord(state.ambition)}.`,
-      state.corruption ? `Rare corrupted ${state.ideal.replace(/_/g, ' ')} ideal modifies behavior.` : `Ideal: ${state.ideal.replace(/_/g, ' ')}.`,
-    ],
+    summary: pickLine(NPC_AIM_FRAMES, `aim-frame|${state.npcId}|${tick}`, { name: state.name, aim, deed: deed.noun }),
+    reasons: npcCandidateReasons(state, pressure, actionFamily),
     npcPatch: {
       momentum: clamp01((state.momentum || 0) + (action.patch.momentum || 0)),
       loyalty: clamp01((state.loyalty ?? 0.5) + (action.patch.loyalty || 0)),
@@ -1017,6 +1025,7 @@ const GOAL_CULMINATION_THRESHOLD = 0.8;
 function npcGoalCulmination(state, tick) {
   const nextRank = Math.min(3, (state.dotRank || 1) + 1);
   const goal = String(state.longGoal || 'expand_influence').replace(/_/g, ' ');
+  const aim = NPC_AIMS[state.longGoal || 'expand_influence'] || goal;
   return {
     id: `candidate.npc.goal_culmination.${stablePart(state.npcId)}.${tick}`,
     type: 'npc',
@@ -1029,11 +1038,11 @@ function npcGoalCulmination(state, tick) {
     severity: 0.85,
     probability: 0.9,
     applyMode: 'auto',
-    headline: pickLine(NPC_GOAL_NEWS.culmination.headline, `${state.npcId}:${tick}:culmination:headline`, { name: state.name, goal }),
-    summary: pickLine(NPC_GOAL_NEWS.culmination.summary, `${state.npcId}:${tick}:culmination:summary`, { name: state.name, goal }),
+    headline: pickLine(NPC_GOAL_NEWS.culmination.headline, `${state.npcId}:${tick}:culmination:headline`, { name: state.name, goal, aim }),
+    summary: pickLine(NPC_GOAL_NEWS.culmination.summary, `${state.npcId}:${tick}:culmination:summary`, { name: state.name, goal, aim }),
     reasons: [
-      pickLine(NPC_GOAL_NEWS.culmination.progressReason, `${state.npcId}:${tick}:culmination:progress`, { name: state.name, goal }),
-      pickLine(NPC_GOAL_NEWS.culmination.roleReason, `${state.npcId}:${tick}:culmination:role`, { name: state.name, goal, role: state.roleArchetype.replace(/_/g, ' ') }),
+      pickLine(NPC_GOAL_NEWS.culmination.progressReason, `${state.npcId}:${tick}:culmination:progress`, { name: state.name, goal, aim }),
+      pickLine(NPC_GOAL_NEWS.culmination.roleReason, `${state.npcId}:${tick}:culmination:role`, { name: state.name, goal, aim, means: NPC_ROLE_MEANS[state.roleArchetype] || NPC_ROLE_MEANS.civic }),
     ],
     npcPatch: {
       goalProgress: { short: 0, long: 0 },
@@ -1066,6 +1075,8 @@ function npcGoalCulmination(state, tick) {
 function npcGoalRebranch(state, context, tick) {
   const goals = branchedGoals(state, context);
   if (!goals) return null;
+  const turned = goals.longGoal !== state.longGoal ? 'longGoal' : 'shortGoal';
+  const aimOf = (/** @type {unknown} */ g) => NPC_AIMS[/** @type {keyof typeof NPC_AIMS} */ (String(g))] || String(g || '').replace(/_/g, ' ');
   return {
     id: `candidate.npc.goal_rebranch.${stablePart(state.npcId)}.${tick}`,
     type: 'npc',
@@ -1081,10 +1092,10 @@ function npcGoalRebranch(state, context, tick) {
     // A context signature/reset is still applied and audited, but only an actual
     // change of short/long intent earns a Chronicle beat.
     headline: pickLine(NPC_GOAL_NEWS.rebranch.headline, `${state.npcId}:${tick}:rebranch:headline`, { name: state.name }),
-    summary: pickLine(NPC_GOAL_NEWS.rebranch.summary, `${state.npcId}:${tick}:rebranch:summary`, { name: state.name }),
+    summary: pickLine(NPC_GOAL_NEWS.rebranch.summary, `${state.npcId}:${tick}:rebranch:summary`, { name: state.name, aim: aimOf(goals[turned]), oldAim: aimOf(state[turned]) }),
     reasons: [
       pickLine(NPC_GOAL_NEWS.rebranch.contextReason, `${state.npcId}:${tick}:rebranch:context`, { name: state.name, previous: state.contextSignature || 'unknown', next: context.signature }),
-      pickLine(NPC_GOAL_NEWS.rebranch.personalityReason, `${state.npcId}:${tick}:rebranch:personality`, { name: state.name, ideal: String(state.ideal || 'unknown').replace(/_/g, ' '), flaw: String(state.flaw || 'unknown').replace(/_/g, ' ') }),
+      pickLine(NPC_GOAL_NEWS.rebranch.personalityReason, `${state.npcId}:${tick}:rebranch:personality`, { name: state.name, ideal: plainTrait(state.ideal), flaw: plainTrait(state.flaw) }),
     ],
     npcPatch: {
       ...goals,

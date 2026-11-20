@@ -537,7 +537,9 @@ describe('THE STRICT NO-OP — a seedless call is byte-identical to before the w
     // impersonation pair, so both halves are named here.
     expect(whatPhrase('coup_detat')).toBe('a seizure of the seat');
     expect(whatPhrase('institution_capture')).toBe('a captured hall');
-    expect(whatPhrase('faction_institution_capture')).toBe("a faction's capture of a hall");
+    // Re-keyed by identity 2026-11-09 (SW-8 RENAME-POWERS, C5 e1a550158): the owner's
+    // map swapped the retired word in the authored canonical; the kind is the same.
+    expect(whatPhrase('faction_institution_capture')).toBe("a power's capture of a hall");
   });
 });
 

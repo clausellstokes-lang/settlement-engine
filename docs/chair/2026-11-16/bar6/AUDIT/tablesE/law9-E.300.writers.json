@@ -1,0 +1,1637 @@
+[
+ {
+  "rule": "9a.band-quiet",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "n": 39,
+  "towns": 39,
+  "form": "Law & order · Critical",
+  "writer": {
+   "file": "(untraced)"
+  },
+  "againstLine": "Moderate",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-hamlet-calm-rand-102"
+ },
+ {
+  "rule": "9a.band-quiet",
+  "held": "BAR5-BAND",
+  "status": "count",
+  "n": 4,
+  "towns": 4,
+  "form": "Law & order · Collapsed",
+  "writer": {
+   "file": "(untraced)"
+  },
+  "againstLine": "Moderate",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-village-calm-rand-102"
+ },
+ {
+  "rule": "9a.collapsed",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "n": 12,
+  "towns": 12,
+  "form": "The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among themselves, nobody keeps it.",
+  "writer": {
+   "file": "src/generators/safetyProfile.js",
+   "line": 1014,
+   "fn": "NO_WATCH_SMALL",
+   "run": "and anyone who breaks it answers to all the neighbo",
+   "also": [
+    "src/generators/safetyProfile.js"
+   ]
+  },
+  "againstLine": "Law & order · Collapsed",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-hamlet-under_siege-rand-101"
+ },
+ {
+  "rule": "9a.collapsed",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "n": 12,
+  "towns": 12,
+  "form": "A thief is known by name within a day, and everyone shuns them until they make it right.",
+  "writer": {
+   "file": "src/generators/safetyProfile.js",
+   "line": 1018,
+   "fn": "NO_WATCH_SMALL",
+   "run": "and everyone shuns them until they make it right",
+   "also": [
+    "src/generators/safetyProfile.js"
+   ]
+  },
+  "againstLine": "Law & order · Collapsed",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-hamlet-under_siege-rand-102"
+ },
+ {
+  "rule": "9a.collapsed",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "n": 2,
+  "towns": 2,
+  "form": "Thieves here know that the court sits and the cells are real.",
+  "writer": {
+   "file": "src/generators/safetyProfile.js",
+   "line": 987,
+   "fn": "COURT_AND_PRISON",
+   "run": "Thieves here know that the court sits and the cells are real",
+   "also": [
+    "src/generators/safetyProfile.js"
+   ]
+  },
+  "againstLine": "Law & order · Collapsed",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-city-under_siege+famine-rand-103"
+ },
+ {
+  "rule": "9a.collapsed",
+  "held": "BAR5-SAFETY",
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "A functioning court and prison mean crimes carry real consequences.",
+  "writer": {
+   "file": "src/generators/safetyProfile.js",
+   "line": 984,
+   "fn": "COURT_AND_PRISON",
+   "run": "A functioning court and prison mean crimes carry real consequences",
+   "also": [
+    "src/generators/safetyProfile.js"
+   ]
+  },
+  "againstLine": "Law & order · Collapsed",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-city-under_siege+famine-rand-112"
+ },
+ {
+  "rule": "9a.contested",
+  "held": null,
+  "status": "apart",
+  "n": 8,
+  "towns": 8,
+  "form": "Thieves, fences and bandits each work for themselves; there is no boss to threaten or to bribe, which makes them harder to stamp out.",
+  "writer": {
+   "file": "src/domain/display/defenseDisplay.js",
+   "line": 183,
+   "fn": "CRIM_STRUCTURE_DATA",
+   "run": "fences and bandits each work for themselves; there is no boss to threaten or to bribe",
+   "also": [
+    "src/domain/display/defenseDisplay.js"
+   ]
+  },
+  "againstLine": "The crime wave is coordinated.",
+  "againstWriter": {
+   "file": "src/data/historyData.js",
+   "line": 1242,
+   "fn": "HISTORICAL_EVENTS_DATA",
+   "run": "The crime wave is coordinated",
+   "also": [
+    "src/data/historyData.js"
+   ]
+  },
+  "eg": "bar0-hamlet-under_siege-rand-112"
+ },
+ {
+  "rule": "9a.contested",
+  "held": null,
+  "status": "apart",
+  "n": 4,
+  "towns": 4,
+  "form": "Crime at X is opportunistic and unorganized: fences, bandits and small operators working for themselves, with nothing to threaten and nobody to buy.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 3917,
+   "fn": "DS-DEF-4 › structure diffuse · v1",
+   "run": "bandits and small operators working for themselves",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "The crime wave is coordinated.",
+  "againstWriter": {
+   "file": "src/data/historyData.js",
+   "line": 1242,
+   "fn": "HISTORICAL_EVENTS_DATA",
+   "run": "The crime wave is coordinated",
+   "also": [
+    "src/data/historyData.js"
+   ]
+  },
+  "eg": "bar0-hamlet-under_siege-rand-121"
+ },
+ {
+  "rule": "9a.contested",
+  "held": null,
+  "status": "apart",
+  "n": 2,
+  "towns": 2,
+  "form": "Things go missing at X, taken by whoever saw the chance; with no gang behind it, it is less dangerous and harder to stop.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 3925,
+   "fn": "DS-DEF-4 › structure diffuse · v2",
+   "run": "taken by whoever saw the chance; with no gang behind it",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "The crime wave is coordinated.",
+  "againstWriter": {
+   "file": "src/data/historyData.js",
+   "line": 1242,
+   "fn": "HISTORICAL_EVENTS_DATA",
+   "run": "The crime wave is coordinated",
+   "also": [
+    "src/data/historyData.js"
+   ]
+  },
+  "eg": "bar0-hamlet-under_siege-rand-112"
+ },
+ {
+  "rule": "9a.contested",
+  "held": null,
+  "status": "apart",
+  "n": 2,
+  "towns": 2,
+  "form": "The danger at X comes from lone thieves, not a gang: a cut purse or a knife in an alley, but nobody running the streets.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 3933,
+   "fn": "DS-DEF-4 › structure diffuse · v3",
+   "run": "a cut purse or a knife in an alley",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "The crime wave is coordinated.",
+  "againstWriter": {
+   "file": "src/data/historyData.js",
+   "line": 1242,
+   "fn": "HISTORICAL_EVENTS_DATA",
+   "run": "The crime wave is coordinated",
+   "also": [
+    "src/data/historyData.js"
+   ]
+  },
+  "eg": "bar0-thorp-calm-rand-103"
+ },
+ {
+  "rule": "9a.curfew",
+  "held": null,
+  "status": "count",
+  "n": 2,
+  "towns": 2,
+  "form": "There is a curfew at X now, and checkpoints; ordinary theft has dropped, and people fear informers more than thieves.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 2881,
+   "fn": "DS-DEF-3 › COMPOUND: occupation curfew · v1",
+   "run": "and checkpoints; ordinary theft has dropped",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Theft is rising even under the curfew, and the greater danger is informers and occupation officials; the resistance works out of sight.",
+  "againstWriter": {
+   "file": "src/generators/safetyLineTruth.js",
+   "line": 348,
+   "fn": "CRIME_WAVE_TWINS",
+   "run": "and the greater danger is informers and occupation officials; the resistance works out of sight",
+   "also": [
+    "src/generators/safetyLineTruth.js"
+   ]
+  },
+  "eg": "bar0-town-occupied-rand-115"
+ },
+ {
+  "rule": "9a.hands",
+  "held": null,
+  "status": "count",
+  "n": 2,
+  "towns": 2,
+  "form": "Little of X's trade goes unrecorded, but what does goes through the same organised hands each time.",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 2175,
+   "fn": "DS-ECO-6 › TIER: minor shadow activity (≥3) · v4",
+   "run": "but what does goes through the same organised hands each time",
+   "also": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ]
+  },
+  "againstLine": "Several gangs may be competing.",
+  "againstWriter": {
+   "file": "src/domain/display/defenseDisplay.js",
+   "line": 179,
+   "fn": "CRIM_STRUCTURE_DATA",
+   "run": "Several gangs may be competing",
+   "also": [
+    "src/domain/display/defenseDisplay.js",
+    "src/domain/facts/criminalStructureKey.js"
+   ]
+  },
+  "eg": "bar0-city-wartime-rand-120"
+ },
+ {
+  "rule": "9a.lawless",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "The law here is slow and easily outbid.",
+  "writer": {
+   "file": "src/generators/servicesGenerator.js",
+   "line": 27,
+   "fn": "THERE_IS_NO_OFFICIAL_RECOURSE_HERE_DISPUTES_END_WITH_WHOEVER_CAN_APPLY_MORE_VIOLENCE_OR_PAY_MORE_FOR_PROTECTION",
+   "run": "The law here is slow and easily outbid",
+   "also": [
+    "src/generators/servicesGenerator.js"
+   ]
+  },
+  "againstLine": "The town keeps its own court and its own gaol.",
+  "againstWriter": {
+   "file": "src/data/dossierStateProse/general.generated.js",
+   "line": 11195,
+   "fn": "DS-GEN-17 › ADMINISTERED · v1",
+   "run": "keeps its own court and its own gaol",
+   "also": [
+    "src/data/dossierStateProse/general.generated.js"
+   ]
+  },
+  "eg": "bar0-town-calm-rand-110"
+ },
+ {
+  "rule": "9a.militia",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "The militia is present and responsive.",
+  "writer": {
+   "file": "src/generators/safetyProfile.js",
+   "line": 320,
+   "fn": "generateSafetyProfile",
+   "run": "The militia is present and responsive",
+   "also": [
+    "src/generators/safetyProfile.js"
+   ]
+  },
+  "againstLine": "The citizen militia musters when needed but cannot maintain consistent patrol.",
+  "againstWriter": {
+   "file": "src/generators/safetyProfile.js",
+   "line": 401,
+   "fn": "generateSafetyProfile",
+   "run": "The citizen militia musters when needed but cannot maintain consistent patrol",
+   "also": [
+    "src/generators/safetyProfile.js"
+   ]
+  },
+  "eg": "bar0-hamlet-calm-rand-114"
+ },
+ {
+  "rule": "9a.structure",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "Petty theft is the primary risk; organized crime has a limited foothold.",
+  "writer": {
+   "file": "src/generators/safetyLineTruth.js",
+   "line": 260,
+   "fn": "BENEATH_THE_WALLS",
+   "run": "Petty theft is the primary risk; organized crime",
+   "also": [
+    "src/generators/safetyLineTruth.js"
+   ]
+  },
+  "againstLine": "Criminal structure: Organized syndicate",
+  "againstWriter": {
+   "file": "src/domain/display/defenseDisplay.js",
+   "line": 174,
+   "fn": "CRIM_STRUCTURE_DATA",
+   "run": "Organized syndicate",
+   "also": [
+    "src/domain/display/defenseDisplay.js",
+    "src/domain/people/patronage.js"
+   ]
+  },
+  "eg": "bar0-metropolis-calm-rand-101"
+ },
+ {
+  "rule": "9a.watch-weak",
+  "held": null,
+  "status": "apart",
+  "n": 8,
+  "towns": 8,
+  "form": "The <tier> watch exists on paper.",
+  "writer": {
+   "file": "(untraced)"
+  },
+  "againstLine": "Men and women serving part-time, walking the night rounds.",
+  "againstWriter": {
+   "file": "src/data/institutionDescVariants.js",
+   "line": 1945,
+   "fn": "DESC_VARIANT_SIBLINGS",
+   "run": "Men and women serving part-time",
+   "also": [
+    "src/data/institutionDescVariants.js"
+   ]
+  },
+  "eg": "bar0-town-occupied-rand-103"
+ },
+ {
+  "rule": "9a.wave",
+  "held": null,
+  "status": "count",
+  "n": 2,
+  "towns": 2,
+  "form": "It keeps the streets quiet because trouble brings the law, lives on protection money and on whatever official it can pay, and anyone who needs something from it can bargain.",
+  "writer": {
+   "file": "src/domain/display/defenseDisplay.js",
+   "line": 650,
+   "fn": "ORGANIZED_RING_NOTES",
+   "run": "lives on protection money and on whatever official it can pay",
+   "also": [
+    "src/domain/display/defenseDisplay.js"
+   ]
+  },
+  "againstLine": "Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands",
+  "againstWriter": {
+   "file": "src/data/historyData.js",
+   "line": 1247,
+   "fn": "HISTORICAL_EVENTS_DATA",
+   "run": "Crime is rising faster than those in charge can answer it",
+   "also": [
+    "src/data/historyData.js",
+    "src/domain/display/foundationBandShown.js"
+   ]
+  },
+  "eg": "bar0-metropolis-calm-rand-112"
+ },
+ {
+  "rule": "9a.wave",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "The <tier>'s record of crimes at X stays short: there is crime, but enforcement keeps it down and keeps it from growing.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 2662,
+   "fn": "DS-DEF-3 › Safe · v2",
+   "run": "but enforcement keeps it down and keeps it from growing",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Crime is rising faster than those in charge can answer it, and some talk of taking the law into their own hands",
+  "againstWriter": {
+   "file": "src/data/historyData.js",
+   "line": 1247,
+   "fn": "HISTORICAL_EVENTS_DATA",
+   "run": "Crime is rising faster than those in charge can answer it",
+   "also": [
+    "src/data/historyData.js",
+    "src/domain/display/foundationBandShown.js"
+   ]
+  },
+  "eg": "bar0-metropolis-calm-rand-107"
+ },
+ {
+  "rule": "9b.purse",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "X lives on a broad base of trades and ends each year with money to spare.",
+  "writer": {
+   "file": "(untraced)"
+  },
+  "againstLine": "Vaclav Sidorov's treasury borrowed from Gordanka Marković to cover a bad harvest and has borrowed every year since.",
+  "againstWriter": {
+   "file": "src/data/npcData.js",
+   "line": 2013,
+   "fn": "STRESS_ECONOMIC_EFFECTS",
+   "run": "to cover a bad harvest and has borrowed every year since",
+   "also": [
+    "src/data/npcData.js"
+   ]
+  },
+  "eg": "bar0-city-wartime-rand-112"
+ },
+ {
+  "rule": "9b.purse-house",
+  "held": null,
+  "status": "apart",
+  "n": 2,
+  "towns": 2,
+  "form": "X lives on a market trade and ends each year with money to spare.",
+  "writer": {
+   "file": "(untraced)"
+  },
+  "againstLine": "Varg Randversson's treasury borrowed from Yngvar Haraldsson to cover a bad harvest and has borrowed every year since.",
+  "againstWriter": {
+   "file": "src/data/npcData.js",
+   "line": 2013,
+   "fn": "STRESS_ECONOMIC_EFFECTS",
+   "run": "to cover a bad harvest and has borrowed every year since",
+   "also": [
+    "src/data/npcData.js"
+   ]
+  },
+  "eg": "bar0-town-calm-rand-117"
+ },
+ {
+  "rule": "9b.purse-house",
+  "held": null,
+  "status": "apart",
+  "n": 1,
+  "towns": 1,
+  "form": "X lives on a broad base of trades and ends each year with money to spare.",
+  "writer": {
+   "file": "(untraced)"
+  },
+  "againstLine": "Nakul Ox's treasury borrowed from Yaxal Paxbolon to cover a bad harvest and has borrowed every year since.",
+  "againstWriter": {
+   "file": "src/data/npcData.js",
+   "line": 2013,
+   "fn": "STRESS_ECONOMIC_EFFECTS",
+   "run": "to cover a bad harvest and has borrowed every year since",
+   "also": [
+    "src/data/npcData.js"
+   ]
+  },
+  "eg": "bar0-metropolis-calm-rand-111"
+ },
+ {
+  "rule": "9b.shadow",
+  "held": null,
+  "status": "apart",
+  "n": 5,
+  "towns": 5,
+  "form": "A little changes hands here quietly, between neighbours, and no one reckons it up.",
+  "writer": {
+   "file": "src/generators/safetyProfile.js",
+   "line": 710,
+   "fn": "generateSafetyProfile",
+   "run": "A little changes hands here quietly",
+   "also": [
+    "src/generators/safetyProfile.js"
+   ]
+  },
+  "againstLine": "Shadow Economy: 11% of trade unrecorded▲",
+  "againstWriter": {
+   "file": "src/components/new/tabs/EconomicsTab.jsx",
+   "line": 663,
+   "fn": "EconomicsTab",
+   "run": "of trade unrecorded",
+   "also": [
+    "src/components/new/tabs/EconomicsTab.jsx",
+    "src/domain/display/shadowEconomyShown.js"
+   ]
+  },
+  "eg": "bar0-hamlet-under_siege-rand-104"
+ },
+ {
+  "rule": "9b.shadow",
+  "held": null,
+  "status": "apart",
+  "n": 5,
+  "towns": 5,
+  "form": "What passes for a shadow economy here has never grown into one.",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 2166,
+   "fn": "DS-ECO-6 › TIER: minor shadow activity (≥3) · v3",
+   "run": "What passes for a shadow economy here has never grown into one",
+   "also": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ]
+  },
+  "againstLine": "Shadow Economy: 14% of trade unrecorded▲",
+  "againstWriter": {
+   "file": "src/components/new/tabs/EconomicsTab.jsx",
+   "line": 663,
+   "fn": "EconomicsTab",
+   "run": "of trade unrecorded",
+   "also": [
+    "src/components/new/tabs/EconomicsTab.jsx",
+    "src/domain/display/shadowEconomyShown.js"
+   ]
+  },
+  "eg": "bar0-hamlet-under_siege-rand-118"
+ },
+ {
+  "rule": "9b.subsistence",
+  "held": null,
+  "status": "count",
+  "n": 4,
+  "towns": 4,
+  "form": "Subsistence — survival economy",
+  "writer": {
+   "file": "src/domain/display/labelBands.js",
+   "line": 135,
+   "fn": "COMPLEXITY_LABEL",
+   "run": "Subsistence — survival economy",
+   "also": [
+    "src/domain/display/labelBands.js",
+    "src/generators/economy/prosperity.js"
+   ]
+  },
+  "againstLine": "Comfortable",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-hamlet-calm-rand-105"
+ },
+ {
+  "rule": "9c.carts",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "X grows about half of what it needs, and carts bring in about four parts in five of the rest.",
+  "writer": {
+   "file": "src/components/new/tabs/EconomicsTab.jsx",
+   "line": 808,
+   "fn": "foodSentence",
+   "run": "and carts bring in",
+   "also": [
+    "src/components/new/tabs/EconomicsTab.jsx"
+   ]
+  },
+  "againstLine": "Construction, furniture and barrel making here depend on timber brought in by magic: no trade road reaches Divovich.",
+  "againstWriter": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8196,
+   "fn": "DS-DEF-9 › magicDependency false · v4",
+   "run": "no trade road reaches",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js",
+    "src/domain/display/chainNeedShown.js"
+   ]
+  },
+  "eg": "bar0-city-wartime-rand-116"
+ },
+ {
+  "rule": "9c.carts",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "X grows about three parts in four of what it needs, and carts bring in about three parts in four of the rest.",
+  "writer": {
+   "file": "src/components/new/tabs/EconomicsTab.jsx",
+   "line": 808,
+   "fn": "foodSentence",
+   "run": "and carts bring in",
+   "also": [
+    "src/components/new/tabs/EconomicsTab.jsx"
+   ]
+  },
+  "againstLine": "Meals, ale and lodging here depend on grain brought in by magic: no trade road reaches Eldoy.",
+  "againstWriter": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8196,
+   "fn": "DS-DEF-9 › magicDependency false · v4",
+   "run": "no trade road reaches",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js",
+    "src/domain/display/chainNeedShown.js"
+   ]
+  },
+  "eg": "bar0-town-occupied-rand-126"
+ },
+ {
+  "rule": "9c.fish-stopped",
+  "held": "BAR5-FOOD",
+  "status": "count",
+  "n": 2,
+  "towns": 2,
+  "form": "Each holding grows for its own table, and beyond that its food is the day's catch.",
+  "writer": {
+   "file": "src/domain/foodways.js",
+   "line": 44,
+   "fn": "FRAMES",
+   "run": "and beyond that its f",
+   "also": [
+    "src/domain/foodways.js"
+   ]
+  },
+  "againstLine": "Fisher's landing · Economy (marked)",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-hamlet-under_siege-rand-110"
+ },
+ {
+  "rule": "9c.game",
+  "held": "BAR5-FOOD",
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "What it puts on the table itself is fish from the local waters. Fermentation, careful use of water, and intensive garden plots shape the food supply.",
+  "writer": {
+   "file": "src/domain/foodways.js",
+   "line": 39,
+   "fn": "FRAMES",
+   "run": "What it puts on the table itse",
+   "also": [
+    "src/domain/foodways.js"
+   ]
+  },
+  "againstLine": "Farmland · Economy / Services · Grain at harvest",
+  "againstWriter": {
+   "file": "src/data/crisisDependence.js",
+   "line": 443,
+   "fn": "SERVICE_DEPENDENCE",
+   "run": "Grain at harvest",
+   "also": [
+    "src/data/crisisDependence.js",
+    "src/data/institutionServices.js",
+    "src/generators/services/serviceCategoryTables.js"
+   ]
+  },
+  "eg": "bar0-village-calm-rand-125"
+ },
+ {
+  "rule": "9c.game",
+  "held": "BAR5-FOOD",
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "What it puts on the table itself is the day's catch.",
+  "writer": {
+   "file": "src/domain/foodways.js",
+   "line": 39,
+   "fn": "FRAMES",
+   "run": "What it puts on the table itself is",
+   "also": [
+    "src/domain/foodways.js"
+   ]
+  },
+  "againstLine": "Farmland · Economy / Services · Grain at harvest",
+  "againstWriter": {
+   "file": "src/data/crisisDependence.js",
+   "line": 443,
+   "fn": "SERVICE_DEPENDENCE",
+   "run": "Grain at harvest",
+   "also": [
+    "src/data/crisisDependence.js",
+    "src/data/institutionServices.js",
+    "src/generators/services/serviceCategoryTables.js"
+   ]
+  },
+  "eg": "bar0-village-calm-rand-126"
+ },
+ {
+  "rule": "9c.no-imports",
+  "held": null,
+  "status": "count",
+  "n": 4,
+  "towns": 4,
+  "form": "No recorded imports.",
+  "writer": {
+   "file": "src/components/new/tabs/EconomicsTab.jsx",
+   "line": 516,
+   "fn": "EconomicsTab",
+   "run": "No recorded imports",
+   "also": [
+    "src/components/new/tabs/EconomicsTab.jsx"
+   ]
+  },
+  "againstLine": "Production: 402 lbs/day+ 25 imported · Need: 464 lbs/day · Short: 37 lbs/day",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-village-calm-rand-115"
+ },
+ {
+  "rule": "9c.nothing-over",
+  "held": null,
+  "status": "count",
+  "n": 3,
+  "towns": 3,
+  "form": "What X raises leaves nothing over in an ordinary year, and a bad harvest is felt before spring.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 9484,
+   "fn": "DS-DEF-12 › CAPACITY: enough · v2",
+   "run": "raises leaves nothing over in an ordinary year",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Agiospyrgos grows a little more than it eats, with some to put by against a bad year.",
+  "againstWriter": {
+   "file": "src/components/new/tabs/EconomicsTab.jsx",
+   "line": 787,
+   "fn": "foodSentence",
+   "run": "with some to put by against a bad year",
+   "also": [
+    "src/components/new/tabs/EconomicsTab.jsx"
+   ]
+  },
+  "eg": "bar0-hamlet-calm-rand-119"
+ },
+ {
+  "rule": "9c.reassure",
+  "held": null,
+  "status": "count",
+  "n": 2,
+  "towns": 2,
+  "form": "With more than its grain harvest to rely on, X can take a bad season in one source without going hungry.",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 3882,
+   "fn": "DS-ECO-9 › FOOD SOURCES: several, the largest named · v3",
+   "run": "can take a bad season in one source without going hungry",
+   "also": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ]
+  },
+  "againstLine": "Food · Pressured",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-city-wartime-rand-125"
+ },
+ {
+  "rule": "9c.reassure",
+  "held": null,
+  "status": "count",
+  "n": 2,
+  "towns": 2,
+  "form": "Its food comes from more than one source, the grain harvest most of all, so a poor year in one does not empty the <tier>'s tables.",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 3854,
+   "fn": "DS-ECO-9 › FOOD SOURCES: several, the largest named · v1",
+   "run": "so a poor year in one does not empty the",
+   "also": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ]
+  },
+  "againstLine": "Food · Pressured",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-town-occupied-rand-109"
+ },
+ {
+  "rule": "9c.reassure",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "Its food comes from more than one source, the herds most of all, so a poor year in one does not empty the <tier>'s tables.",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 3854,
+   "fn": "DS-ECO-9 › FOOD SOURCES: several, the largest named · v1",
+   "run": "so a poor year in one does not empty the",
+   "also": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ]
+  },
+  "againstLine": "Food · Pressured",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-city-wartime-rand-102"
+ },
+ {
+  "rule": "9c.reassure",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "X's food comes from more than one source, the grain harvest most of all, so a poor year in one does not empty the <tier>'s tables.",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 3854,
+   "fn": "DS-ECO-9 › FOOD SOURCES: several, the largest named · v1",
+   "run": "so a poor year in one does not empty the",
+   "also": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ]
+  },
+  "againstLine": "Food · Pressured",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-town-occupied-rand-106"
+ },
+ {
+  "rule": "9d.isolated",
+  "held": null,
+  "status": "count",
+  "n": 4,
+  "towns": 4,
+  "form": "No trade access: running on existing stockpiles only.",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 32,
+   "fn": "",
+   "run": "running on existing stockpiles only",
+   "also": [
+    "src/data/crisisDependence.js",
+    "src/components/new/tabs/ServicesTab.jsx",
+    "src/domain/display/chainNeedShown.js",
+    "src/generators/economy/economicState.js"
+   ]
+  },
+  "againstLine": "Production: 492 lbs/day+ 98 imported+ 18 by divine provision · Need: 634 lbs/day · Short: 26 lbs/day",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 113,
+   "fn": "MagicTab",
+   "run": "by divine provision",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx"
+   ]
+  },
+  "eg": "bar0-town-calm-rand-124"
+ },
+ {
+  "rule": "9d.isolated",
+  "held": null,
+  "status": "count",
+  "n": 2,
+  "towns": 2,
+  "form": "7 institutions operating on stockpiles only (isolated trade): Weekly market, Market square, Taverns (5-20), Town granary, Mills, Town watch, Town walls.",
+  "writer": {
+   "file": "(untraced)"
+  },
+  "againstLine": "Production: 492 lbs/day+ 98 imported+ 18 by divine provision · Need: 634 lbs/day · Short: 26 lbs/day",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 113,
+   "fn": "MagicTab",
+   "run": "by divine provision",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx"
+   ]
+  },
+  "eg": "bar0-town-calm-rand-124"
+ },
+ {
+  "rule": "9d.isolated",
+  "held": null,
+  "status": "count",
+  "n": 2,
+  "towns": 2,
+  "form": "7 institutions operating on stockpiles only (isolated trade): Weekly market, Market square, Taverns (5-20), Town granary, Mills, Blacksmiths, Town watch.",
+  "writer": {
+   "file": "(untraced)"
+  },
+  "againstLine": "Production: 1,859 lbs/day+ 520 imported+ 36 by divine provision · Need: 2,470 lbs/day · Short: 55 lbs/day",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 113,
+   "fn": "MagicTab",
+   "run": "by divine provision",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx"
+   ]
+  },
+  "eg": "bar0-town-calm-rand-129"
+ },
+ {
+  "rule": "9d.isolated",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "Law enforcement, patrol and gate control here run on stored iron: no trade road reaches X.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8196,
+   "fn": "DS-DEF-9 › magicDependency false · v4",
+   "run": "no trade road reaches",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js",
+    "src/domain/display/chainNeedShown.js"
+   ]
+  },
+  "againstLine": "Production: 492 lbs/day+ 98 imported+ 18 by divine provision · Need: 634 lbs/day · Short: 26 lbs/day",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 113,
+   "fn": "MagicTab",
+   "run": "by divine provision",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx"
+   ]
+  },
+  "eg": "bar0-town-calm-rand-124"
+ },
+ {
+  "rule": "9d.isolated",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "7 institutions operating on stockpiles only (isolated trade): Weekly market, Market square, Taverns, Town granary, Mills, Town watch, Town walls.",
+  "writer": {
+   "file": "(untraced)"
+  },
+  "againstLine": "Production: 492 lbs/day+ 98 imported+ 18 by divine provision · Need: 634 lbs/day · Short: 26 lbs/day",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 113,
+   "fn": "MagicTab",
+   "run": "by divine provision",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx"
+   ]
+  },
+  "eg": "bar0-town-calm-rand-124"
+ },
+ {
+  "rule": "9d.isolated",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "Law enforcement and patrol here run on stored iron: no trade road reaches X.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8196,
+   "fn": "DS-DEF-9 › magicDependency false · v4",
+   "run": "no trade road reaches",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js",
+    "src/domain/display/chainNeedShown.js"
+   ]
+  },
+  "againstLine": "Production: 1,859 lbs/day+ 520 imported+ 36 by divine provision · Need: 2,470 lbs/day · Short: 55 lbs/day",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 113,
+   "fn": "MagicTab",
+   "run": "by divine provision",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx"
+   ]
+  },
+  "eg": "bar0-town-calm-rand-129"
+ },
+ {
+  "rule": "9d.isolated",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "7 institutions operating on stockpiles only (isolated trade): Weekly market, Market square, Taverns, Town granary, Mills, Blacksmiths, Town watch.",
+  "writer": {
+   "file": "(untraced)"
+  },
+  "againstLine": "Production: 1,859 lbs/day+ 520 imported+ 36 by divine provision · Need: 2,470 lbs/day · Short: 55 lbs/day",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 113,
+   "fn": "MagicTab",
+   "run": "by divine provision",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx"
+   ]
+  },
+  "eg": "bar0-town-calm-rand-129"
+ },
+ {
+  "rule": "9d.isolated",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "1 institution operating on stockpiles only (isolated trade): Healer.",
+  "writer": {
+   "file": "(untraced)"
+  },
+  "againstLine": "Production: 402 lbs/day+ 25 imported · Need: 464 lbs/day · Short: 37 lbs/day",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-village-calm-rand-115"
+ },
+ {
+  "rule": "9d.isolated",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "1 institution operating on stockpiles only (isolated trade): Citizen militia.",
+  "writer": {
+   "file": "(untraced)"
+  },
+  "againstLine": "Production: 179 lbs/day+ 30 imported · Need: 590 lbs/day · Short: 381 lbs/day",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-village-famine-rand-118"
+ },
+ {
+  "rule": "9d.no-exports",
+  "held": null,
+  "status": "count",
+  "n": 2,
+  "towns": 2,
+  "form": "No significant exports.",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 6405,
+   "fn": "DS-ECO-11 › DS-ECO-12 · v1",
+   "run": "No significant exports",
+   "also": [
+    "src/data/dossierStateProse/economy.generated.js",
+    "src/data/proseNorms.generated.js",
+    "src/components/new/tabs/EconomicsTab.jsx",
+    "src/domain/display/stateProse/economyStateProse.js"
+   ]
+  },
+  "againstLine": "The village works part of the line that wool could support: the raw material moves, and it moves before it has been made into anything worth more.",
+  "againstWriter": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 5719,
+   "fn": "DS-ECO-11 › EXPLOITATION: partiallyExploited · v1",
+   "run": "and it moves before it has been made into anything worth more",
+   "also": [
+    "src/data/dossierStateProse/economy.generated.js"
+   ]
+  },
+  "eg": "bar0-village-famine-rand-115"
+ },
+ {
+  "rule": "9e.if-help",
+  "held": null,
+  "status": "apart",
+  "n": 2,
+  "towns": 2,
+  "form": "If the help beyond ordinary work failed at X, the trade that makes its salted fish would yield less than it does now.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8133,
+   "fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1",
+   "run": "the trade that makes it",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Reliance on magic: Relied upon · for Spellcasting Services and Magical Items & Enchanting · supplied by Wizard's tower, Enchanter's shop, Scroll scribe, Houses of worship, Cathedral and Selmeg Dörbete",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 172,
+   "fn": "MagicTab",
+   "run": "Reliance on magic",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx",
+    "src/components/new/tabs/OverviewTab.jsx",
+    "src/components/new/tabs/SubstrateTab.jsx",
+    "src/domain/coherence/magicWordsFindings.js",
+    "src/domain/coherence/pageCensusFindings.js"
+   ]
+  },
+  "eg": "bar0-city-under_siege+famine-rand-106"
+ },
+ {
+  "rule": "9e.if-help",
+  "held": null,
+  "status": "apart",
+  "n": 2,
+  "towns": 2,
+  "form": "If the help beyond ordinary work failed at X, the trade that makes its preserved foods would yield less than it does now.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8133,
+   "fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1",
+   "run": "the trade that makes it",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Reliance on magic: Integral · for Herbalism & Remedies, Iron & Metalwork, Fuel & Heating, Smelting & Refining, Divine & Magical Healing, Spellcasting Services, Magical Items & Enchanting and Planar Trade · supplied by Mages' district, Academy of magic, Enchanter's shop, Scroll scribe, Teleportation circle, Planar embassy, Planar traders, Golem workforce, Undead labor, Dream parlors, Airship docking, Message network, Elder Grove Council, Houses of worship, Great cathedral, Major monasteries and 3 practitioners",
+  "againstWriter": {
+   "file": "src/data/supplyChainData.js",
+   "line": 1179,
+   "fn": "SUPPLY_CHAIN_NEEDS",
+   "run": "Magical Items & Encha",
+   "also": [
+    "src/data/supplyChainData.js"
+   ]
+  },
+  "eg": "bar0-metropolis-calm-rand-108"
+ },
+ {
+  "rule": "9e.if-help",
+  "held": null,
+  "status": "apart",
+  "n": 1,
+  "towns": 1,
+  "form": "If the help beyond ordinary work failed at X, the trade that makes its game meat would yield less than it does now.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8133,
+   "fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1",
+   "run": "the trade that makes i",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Reliance on magic: Integral · for Reed & Marsh Harvest and Spellcasting Services · supplied by Mages' district, Academy of magic, Enchanter's shop, Houses of worship and Great cathedral",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 172,
+   "fn": "MagicTab",
+   "run": "Reliance on magic",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx",
+    "src/components/new/tabs/OverviewTab.jsx",
+    "src/components/new/tabs/SubstrateTab.jsx",
+    "src/domain/coherence/magicWordsFindings.js",
+    "src/domain/coherence/pageCensusFindings.js"
+   ]
+  },
+  "eg": "bar0-metropolis-calm-rand-112"
+ },
+ {
+  "rule": "9e.if-help",
+  "held": null,
+  "status": "apart",
+  "n": 1,
+  "towns": 1,
+  "form": "If the help beyond ordinary work failed at X, the trade that makes its honey and beeswax would yield less than it does now.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8142,
+   "fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v2",
+   "run": "the trade that makes its",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Reliance on magic: Integral · for Divine & Magical Healing · supplied by Teleportation circle, Elder Grove Council and Houses of worship",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 172,
+   "fn": "MagicTab",
+   "run": "Reliance on magic",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx",
+    "src/components/new/tabs/OverviewTab.jsx",
+    "src/components/new/tabs/SubstrateTab.jsx",
+    "src/domain/coherence/magicWordsFindings.js",
+    "src/domain/coherence/pageCensusFindings.js"
+   ]
+  },
+  "eg": "bar0-town-occupied-rand-101"
+ },
+ {
+  "rule": "9e.leans",
+  "held": null,
+  "status": "count",
+  "n": 4,
+  "towns": 4,
+  "form": "At X the usual work no longer yields enough baked goods, and the trade that makes it now leans on help beyond ordinary work.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8133,
+   "fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1",
+   "run": "and the trade that makes it now leans on help beyond ordinary work",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Reliance on magic: Integral · for Stone & Construction, Spellcasting Services, Magical Items & Enchanting and Planar Trade · supplied by Mages' district, Academy of magic, Enchanter's shop, Scroll scribe, Teleportation circle, Planar embassy, Planar traders, Golem workforce, Undead labor, Dream parlors, Airship docking, Message network, Elder Grove Council and 3 practitioners",
+  "againstWriter": {
+   "file": "src/data/supplyChainData.js",
+   "line": 1179,
+   "fn": "SUPPLY_CHAIN_NEEDS",
+   "run": "Magical Items & Encha",
+   "also": [
+    "src/data/supplyChainData.js"
+   ]
+  },
+  "eg": "bar0-metropolis-calm-rand-109"
+ },
+ {
+  "rule": "9e.leans",
+  "held": null,
+  "status": "count",
+  "n": 2,
+  "towns": 2,
+  "form": "At X the usual work no longer yields enough salted fish, and the trade that makes it now leans on help beyond ordinary work.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8133,
+   "fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1",
+   "run": "and the trade that makes it now leans on help beyond ordinary work",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Reliance on magic: Relied upon · for Spellcasting Services and Magical Items & Enchanting · supplied by Scroll scribe, Wizard's tower, Houses of worship, Cathedral and Ergene Naiman",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 172,
+   "fn": "MagicTab",
+   "run": "Reliance on magic",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx",
+    "src/components/new/tabs/OverviewTab.jsx",
+    "src/components/new/tabs/SubstrateTab.jsx",
+    "src/domain/coherence/magicWordsFindings.js",
+    "src/domain/coherence/pageCensusFindings.js"
+   ]
+  },
+  "eg": "bar0-city-wartime-rand-119"
+ },
+ {
+  "rule": "9e.military",
+  "held": null,
+  "status": "count",
+  "n": 3,
+  "towns": 3,
+  "form": "The soldiers at X command its magic: the arcane houses answer to them, and their work goes first to the <tier>'s defence.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8250,
+   "fn": "DS-DEF-9 › FLAG: magicMilitarized · v1",
+   "run": "the arcane houses answer to them",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Backs · Merchant oligarchy (every arcane house)",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-city-under_siege+famine-rand-104"
+ },
+ {
+  "rule": "9e.military",
+  "held": null,
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "Arcane work at X answers to its military, and the practitioners' own books show it: defence work first, paying work after.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8258,
+   "fn": "DS-DEF-9 › FLAG: magicMilitarized · v2",
+   "run": "and the practitioners' own books show it",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Backs · Church Council; Backs · Church Council (every arcane house)",
+  "againstWriter": {
+   "file": "(untraced)"
+  },
+  "eg": "bar0-town-occupied-rand-119"
+ },
+ {
+  "rule": "9e.none",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "n": 2,
+  "towns": 2,
+  "form": "People at X know that part of the <tier>'s work now holds up only with help beyond ordinary labour.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8151,
+   "fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v3",
+   "run": "'s work now holds up only with help beyond ordinary labour",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Reliance on magic: None",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 172,
+   "fn": "MagicTab",
+   "run": "Reliance on magic",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx",
+    "src/components/new/tabs/OverviewTab.jsx",
+    "src/components/new/tabs/SubstrateTab.jsx",
+    "src/domain/coherence/magicWordsFindings.js",
+    "src/domain/coherence/pageCensusFindings.js"
+   ]
+  },
+  "eg": "bar0-city-wartime-rand-113"
+ },
+ {
+  "rule": "9e.none",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "n": 2,
+  "towns": 2,
+  "form": "\"A settlement with an unusual relationship to magic: the Arcane Incident made it both more dependent on arcane resources and more wary of them simultaneously\"",
+  "writer": {
+   "file": "src/generators/narrativeText.js",
+   "line": 506,
+   "fn": "POLITICAL_FLAVOR",
+   "run": "A settlement with an unusual relationship to magic",
+   "also": [
+    "src/generators/narrativeText.js"
+   ]
+  },
+  "againstLine": "Reliance on magic: None",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 172,
+   "fn": "MagicTab",
+   "run": "Reliance on magic",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx",
+    "src/components/new/tabs/OverviewTab.jsx",
+    "src/components/new/tabs/SubstrateTab.jsx",
+    "src/domain/coherence/magicWordsFindings.js",
+    "src/domain/coherence/pageCensusFindings.js"
+   ]
+  },
+  "eg": "bar0-thorp-calm-rand-116"
+ },
+ {
+  "rule": "9e.none",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "At X the usual work no longer yields enough game meat, and the trade that makes it now leans on help beyond ordinary work.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8133,
+   "fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1",
+   "run": "and the trade that makes it now leans on help beyond ordinary work",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Reliance on magic: None",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 172,
+   "fn": "MagicTab",
+   "run": "Reliance on magic",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx",
+    "src/components/new/tabs/OverviewTab.jsx",
+    "src/components/new/tabs/SubstrateTab.jsx",
+    "src/domain/coherence/magicWordsFindings.js",
+    "src/domain/coherence/pageCensusFindings.js"
+   ]
+  },
+  "eg": "bar0-city-wartime-rand-110"
+ },
+ {
+  "rule": "9e.none",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "At X the usual work no longer yields enough herbal remedies, and the trade that makes it now leans on help beyond ordinary work.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8133,
+   "fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1",
+   "run": "and the trade that makes it now leans on help beyond ordinary work",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Reliance on magic: None",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 172,
+   "fn": "MagicTab",
+   "run": "Reliance on magic",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx",
+    "src/components/new/tabs/OverviewTab.jsx",
+    "src/components/new/tabs/SubstrateTab.jsx",
+    "src/domain/coherence/magicWordsFindings.js",
+    "src/domain/coherence/pageCensusFindings.js"
+   ]
+  },
+  "eg": "bar0-metropolis-calm-rand-102"
+ },
+ {
+  "rule": "9e.none",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "If the help beyond ordinary work failed at X, the trade that makes its preserved foods would yield less than it does now.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8133,
+   "fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1",
+   "run": "the trade that makes it",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Reliance on magic: None",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 172,
+   "fn": "MagicTab",
+   "run": "Reliance on magic",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx",
+    "src/components/new/tabs/OverviewTab.jsx",
+    "src/components/new/tabs/SubstrateTab.jsx",
+    "src/domain/coherence/magicWordsFindings.js",
+    "src/domain/coherence/pageCensusFindings.js"
+   ]
+  },
+  "eg": "bar0-village-calm-rand-101"
+ },
+ {
+  "rule": "9e.none",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "At X the usual work no longer yields enough preserved foods, and the trade that makes it now leans on help beyond ordinary work.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8133,
+   "fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1",
+   "run": "and the trade that makes it now leans on help beyond ordinary work",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Reliance on magic: None",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 172,
+   "fn": "MagicTab",
+   "run": "Reliance on magic",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx",
+    "src/components/new/tabs/OverviewTab.jsx",
+    "src/components/new/tabs/SubstrateTab.jsx",
+    "src/domain/coherence/magicWordsFindings.js",
+    "src/domain/coherence/pageCensusFindings.js"
+   ]
+  },
+  "eg": "bar0-village-calm-rand-121"
+ },
+ {
+  "rule": "9e.none",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "At X the usual work no longer yields enough salted fish, and the trade that makes it now leans on help beyond ordinary work.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8133,
+   "fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1",
+   "run": "and the trade that makes it now leans on help beyond ordinary work",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Reliance on magic: None",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 172,
+   "fn": "MagicTab",
+   "run": "Reliance on magic",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx",
+    "src/components/new/tabs/OverviewTab.jsx",
+    "src/components/new/tabs/SubstrateTab.jsx",
+    "src/domain/coherence/magicWordsFindings.js",
+    "src/domain/coherence/pageCensusFindings.js"
+   ]
+  },
+  "eg": "bar0-village-calm-rand-130"
+ },
+ {
+  "rule": "9e.none",
+  "held": "BAR5-MAGIC",
+  "status": "count",
+  "n": 1,
+  "towns": 1,
+  "form": "If the help beyond ordinary work failed at X, the trade that makes its river fish would yield less than it does now.",
+  "writer": {
+   "file": "src/data/dossierStateProse/defense.generated.js",
+   "line": 8133,
+   "fn": "DS-DEF-9 › magicDependency true, with a NAMED dependent chain · v1",
+   "run": "the trade that makes i",
+   "also": [
+    "src/data/dossierStateProse/defense.generated.js"
+   ]
+  },
+  "againstLine": "Reliance on magic: None",
+  "againstWriter": {
+   "file": "src/components/new/tabs/MagicTab.jsx",
+   "line": 172,
+   "fn": "MagicTab",
+   "run": "Reliance on magic",
+   "also": [
+    "src/components/new/tabs/MagicTab.jsx",
+    "src/components/new/tabs/OverviewTab.jsx",
+    "src/components/new/tabs/SubstrateTab.jsx",
+    "src/domain/coherence/magicWordsFindings.js",
+    "src/domain/coherence/pageCensusFindings.js"
+   ]
+  },
+  "eg": "bar0-village-famine-rand-105"
+ },
+ {
+  "rule": "9f.loyal",
+  "held": null,
+  "status": "count",
+  "n": 2,
+  "towns": 2,
+  "form": "The settlement is loyal.",
+  "writer": {
+   "file": "src/generators/narrativeText.js",
+   "line": 257,
+   "fn": "PRESSURE_SENTENCES",
+   "run": "The settlement is loyal",
+   "also": [
+    "src/generators/narrativeText.js"
+   ]
+  },
+  "againstLine": "Public legitimacy · Legitimacy crisis",
+  "againstWriter": {
+   "file": "src/data/dossierStateProse/power.generated.js",
+   "line": 8,
+   "fn": "DS-POW-1 ›  · v",
+   "run": "Public legitimacy",
+   "also": [
+    "src/data/dossierStateProse/power.generated.js",
+    "src/data/bandLadders.js",
+    "src/components/HowToUse.jsx",
+    "src/components/home/landingFixture.js",
+    "src/components/howto/AboutManifesto.jsx"
+   ]
+  },
+  "eg": "bar0-city-wartime-rand-128"
+ }
+]

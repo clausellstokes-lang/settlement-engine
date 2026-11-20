@@ -31,7 +31,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { DOSSIER_STATE_PROSE_WAR_FAITH as WAR_FAITH } from '../../src/data/dossierStateProse/warFaith.generated.js';
-import { poolDimensions } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { poolDimensions, STATE_MARK_DIMENSIONS } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { drawnMember, poolMemberTexts } from '../helpers/drawnProse.js';
 import {
   DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, drawnAtMount, sentenceMountForBlock,
@@ -43,6 +43,7 @@ import {
   patronRankPoolKey, pietyArcPoolKey, sinkPoolKey, standingsPoolKey, faithTeaserPoolKey,
   treatyDocumentPoolKey, treatyFrayingPoolKey, treatyTermPoolKey, warExhaustionPoolKey,
   warFaithStateProse, warStatusPoolKey,
+  crusaderPoolKey, heresyPoolKey, religiousFraudPoolKey, mageTheocracyPoolKey,
 } from '../../src/domain/display/stateProse/warFaithStateProse.js';
 
 // THE REAL PRODUCERS — the whole point of this file's fixtures.
@@ -51,11 +52,12 @@ import { faithPanelModel, trimFaithDeskToPanel } from '../../src/components/sett
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../src/domain/display/warStatus.js';
 import { settlementMobilization } from '../../src/domain/display/mobilizationStatus.js';
 import { settlementOccupation, occupierHoldings } from '../../src/domain/display/occupationStatus.js';
+import { COLOUR_MARK, assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
 
 const BLOCK = (id) => WAR_FAITH[id];
 const POOLS = (id) => Object.keys(BLOCK(id).pools);
 /** The six blocks DESK CAR 4 mounts. */
-const MOUNTED = Object.freeze(['DS-WAR-1', 'DS-WAR-2', 'DS-WAR-3', 'DS-FTH-1', 'DS-FTH-2', 'DS-FTH-3']);
+const MOUNTED = Object.freeze(['DS-WAR-1', 'DS-WAR-2', 'DS-WAR-3', 'DS-FTH-1', 'DS-FTH-2', 'DS-FTH-3', 'DS-FTH-4']);
 
 // ── THE FIXTURES, MINTED BY PRODUCERS ────────────────────────────────────────────────
 
@@ -159,8 +161,11 @@ describe('the warFaith corpus join is populated, or every claim below is free', 
       'DS-FTH-1', 'DS-FTH-2', 'DS-FTH-3', 'DS-FTH-4',
     ]);
     const pools = ids.flatMap((id) => Object.values(BLOCK(id).pools));
-    expect(pools).toHaveLength(138);
-    expect(pools.reduce((n, pool) => n + pool.length, 0)).toBe(430);
+    expect(pools).toHaveLength(143); // W4 PEOPLE 2026-11-07: +5, DS-FTH-4's FLAG pools (C1-C4)
+    // 430 -> 433 at census-5b unit 3 (c00b30eb6, R-L): DS-WAR-1 warExhaustion rested and DS-FTH-3's
+    // two uncontested/secure pools each gain one crisis-safe twin (measured 430 at its parent).
+    // 433 -> 443 at W4 PEOPLE (2026-11-07): DS-FTH-4's five FLAG pools, two variants each.
+    expect(pools.reduce((n, pool) => n + pool.length, 0)).toBe(449); // W2-WRITE FTH-4 heresy without a church (2026-11-13): 443 -> 449
   });
 
   test('the producer-minted fixtures really carry the producer shapes', () => {
@@ -192,18 +197,48 @@ describe('ONE STATE DIMENSION in the leaf: walls (F10 WALLS-WORD, 2026-11-04)', 
         if (dims.length > 0) partitioned[`${id} :: ${key}`] = dims;
       }
     }
-    expect(Object.values(partitioned).every((dims) => dims.join() === 'walls')).toBe(true);
+    // ONE pool partitions by `crisis`, not walls: census(compose) unit 8 (b8d2c3569, R-I) gave
+    // DS-FTH-1 SINK arc rising v1 the bare `crisis` need ("Crisis has a way of ending
+    // indifference"), a kernel mark word; measured [walls] only at its parent.
+    const CRISIS_POOL = 'DS-FTH-1 :: SINK: unaffiliated present, arc rising';
+    expect(partitioned[CRISIS_POOL]).toEqual(['crisis']);
+    expect(Object.entries(partitioned).filter(([k]) => k !== CRISIS_POOL)
+      .every(([, dims]) => dims.join() === 'walls')).toBe(true);
+    // ['DS-FTH-1', 'DS-WAR-1', 'DS-WAR-2'] -> + 'DS-WAR-5' at census-5d unit 2a (c24d7118e, R-AO):
+    // three DS-WAR-5 pools (the genuine siege, the phantom front, siege_lifted) mark walls.
+    // DS-WAR-5 is dark (UNMOUNTED_BLOCKS), so no mount row owes it.
     expect([...new Set(Object.keys(partitioned).map((k) => k.split(' :: ')[0]))].sort())
-      .toEqual(['DS-FTH-1', 'DS-WAR-1', 'DS-WAR-2']);
+      .toEqual(['DS-FTH-1', 'DS-WAR-1', 'DS-WAR-2', 'DS-WAR-5']);
+    expect(UNMOUNTED_BLOCKS).toContain('DS-WAR-5');
     // Beside the AUDIENCE mark (law 2, not a dimension) the leaf spells only the walls pair.
     const marks = new Set(Object.keys(WAR_FAITH).flatMap((id) => Object.values(BLOCK(id).pools)
       .flat().flatMap((v) => v.marks || [])));
-    expect([...marks].sort()).toEqual(['dm-only', 'no walls', 'walls']);
-    const owing = new Set(Object.keys(partitioned).map((k) => k.split(' :: ')[0]));
-    for (const row of DOSSIER_MOUNTS.filter((r) => r.desk === 'warFaith')) {
-      expect(row.dimensions, `${row.mount} declares a dimension its block does not carry`)
-        .toEqual(owing.has(row.blockId) ? ['walls'] : undefined);
+    // CENSUS-5 (2026-11-05): the tag slot also carries the census channel's declarable fact
+    // atoms (`gate`, `temple`, `war: peace`, `no crisis: …`), which partition no kernel dimension:
+    // the kernel's own words stay the walls pair, and every other mark is a declarable atom.
+    const KERNEL_WORDS = new Set(Object.values(STATE_MARK_DIMENSIONS).flat());
+    // + 'crisis' at b8d2c3569 (the SINK line's bare need, above).
+    expect([...marks].filter((m) => m === 'dm-only' || KERNEL_WORDS.has(m)).sort()).toEqual(['crisis', 'dm-only', 'no walls', 'walls']);
+    // The per-line `colour` mark (R-AO) is the vocabulary's no-atom declaration ("read; presumes
+    // nothing", factVocabulary.js :: COLOUR_MARK), neither a kernel word nor an atom: 0 -> 60 lines
+    // at census-5d unit 2a (c24d7118e), 69 since cd3b6b0e6 (compose unit 2 item 5).
+    expect(marks.has(COLOUR_MARK), 'the leaf carries no per-line colour mark').toBe(true);
+    for (const m of [...marks].filter((x) => x !== 'dm-only' && x !== COLOUR_MARK && !KERNEL_WORDS.has(x))) {
+      expect(() => assertDeclarable(m.replace(/^no\s+/i, '')), m).not.toThrow();
     }
+    /** @type {Map<string, Set<string>>} */
+    const owing = new Map();
+    for (const [k, dims] of Object.entries(partitioned)) {
+      const id = k.split(' :: ')[0];
+      if (!owing.has(id)) owing.set(id, new Set());
+      for (const d of dims) owing.get(id).add(d);
+    }
+    for (const row of DOSSIER_MOUNTS.filter((r) => r.desk === 'warFaith')) {
+      expect(row.dimensions ? [...row.dimensions].sort() : undefined, `${row.mount} declares a dimension its block does not carry`)
+        .toEqual(owing.has(row.blockId) ? [...owing.get(row.blockId)].sort() : undefined);
+    }
+    // faith.patronSeat lists crisis beside walls since b8d2c3569 (the shipped row, unit 8's own act).
+    expect(DOSSIER_MOUNTS.find((r) => r.mount === 'faith.patronSeat')?.dimensions).toEqual(['walls', 'crisis']);
   });
 });
 
@@ -216,6 +251,7 @@ describe('the mount rows this car lands', () => {
       'war.standing:sentence', 'war.treaties:sentence', 'war.dormantNote:sentence',
       'faith.patronSeat:sentence', 'faith.teaser:sentence',
       'faith.creedStanding:sentence', 'faith.nicheRow:glance',
+      'faith.templeGround:sentence', // W4 PEOPLE 2026-11-07: DS-FTH-4 mounted (WAVE-RULINGS item 10)
     ]);
     expect([...new Set(rows.map((r) => r.tab))].sort()).toEqual(['faith', 'war']);
     // C3 ACROSS THE PAGE-SET: every mounted block speaks at exactly ONE position, and
@@ -227,10 +263,10 @@ describe('the mount rows this car lands', () => {
 
   test('the three dark blocks stay dark, and the dark half SHRANK by six', () => {
     expect(UNMOUNTED_BLOCKS.filter((id) => id.startsWith('DS-WAR-') || id.startsWith('DS-FTH-')))
-      .toEqual(['DS-WAR-4', 'DS-WAR-5', 'DS-FTH-4']);
-    // The accounting identity for this leaf: 6 mounted + 3 dark = the 9 the corpus holds.
+      .toEqual(['DS-WAR-4', 'DS-WAR-5']); // W4 PEOPLE 2026-11-07: DS-FTH-4 mounted
+    // The accounting identity for this leaf: 7 mounted + 2 dark = the 9 the corpus holds.
     expect(new Set(DOSSIER_MOUNTS.filter((r) => r.desk === 'warFaith').map((r) => r.blockId)).size
-      + 3).toBe(9);
+      + 2).toBe(9);
   });
 });
 
@@ -304,6 +340,13 @@ function reachableKeys() {
   for (const cause of ['displaced', 'discredited', 'imposed', 'suppressed']) add('DS-FTH-3', patronFallPoolKey(cause));
   add('DS-FTH-3', nicheContestPoolKey([{ niche: 'a', isPatron: true }, { niche: 'a' }]));
   add('DS-FTH-3', nicheContestPoolKey([{ niche: 'a', isPatron: true }, { niche: 'b' }]));
+
+  // DS-FTH-4 — the generation lens (W4 PEOPLE, 2026-11-07): the birth-time stress flags.
+  add('DS-FTH-4', crusaderPoolKey({ crusaderSynthesis: true }));
+  add('DS-FTH-4', heresyPoolKey({ heresySuppression: true, heresyIntensity: 0.8 }));
+  add('DS-FTH-4', heresyPoolKey({ heresySuppression: true, heresyIntensity: 0.2 }));
+  add('DS-FTH-4', religiousFraudPoolKey({ religiousFraud: true }));
+  add('DS-FTH-4', mageTheocracyPoolKey({ mageTheocracy: true }));
   return out;
 }
 
@@ -355,6 +398,13 @@ const DECLARED_UNREACHABLE = Object.freeze({
     // No pilgrimage reading exists on either host tab.
     'PILGRIM SEASON: heavy', 'PILGRIM SEASON: thin', 'PILGRIM SEASON: suppressed by road danger',
   ]),
+  'DS-FTH-4': Object.freeze([
+    // W4 PEOPLE (2026-11-07) mounted the block on its generation lens (the FLAG pools). These
+    // four read the religion state (`share`, `tenure`, `legitimacy`, the niche) and
+    // `templeWealth`: `tenure` is not projected onto config.faithProfile.deities[] and
+    // `templeWealth` has no writer (WF-7). Lit by the projection of tenure plus the temple stock.
+    'CONTESTED', 'ROOTED', 'ENDOWED', 'THIN',
+  ]),
 });
 
 describe('THE MAP, total in both directions', () => {
@@ -396,9 +446,10 @@ describe('THE MAP, total in both directions', () => {
     // by hand first (76 / 22), and both were wrong — the identity above still held because
     // one pool was counted on BOTH sides. Count both sides; never take a total on trust.
     expect(total + declared).toBe(MOUNTED.reduce((n, id) => n + POOLS(id).length, 0));
-    expect(MOUNTED.reduce((n, id) => n + POOLS(id).length, 0)).toBe(98);
-    expect(declared).toBe(19);
-    expect(total).toBe(79);
+    // W4 PEOPLE 2026-11-07: DS-FTH-4 mounted, +9 pools: 5 REACHED (the FLAG lens), 4 DECLARED.
+    expect(MOUNTED.reduce((n, id) => n + POOLS(id).length, 0)).toBe(107);
+    expect(declared).toBe(23);
+    expect(total).toBe(84);
   });
 });
 

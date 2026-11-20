@@ -32,6 +32,7 @@ import {
   labelFromTarget, slugify,
   vetoMutation, sev01,
 } from './mutateHelpers.js';
+import { withStoresMonths } from '../facts/storesMonths.js';
 
 /** @typedef {import('../types.js').Event} Event */
 // Schemaless open objects at this layer (see mutateEntities.js). Aliases document
@@ -1150,7 +1151,7 @@ function withGrainSent(/** @type {MutEntity} */ s, /** @type {MutEntity} */ even
   const fs = s.economicState.foodSecurity;
   const next = {
     ...s,
-    economicState: { ...s.economicState, foodSecurity: { ...fs, storageMonths: leg.nextMonths } },
+    economicState: { ...s.economicState, foodSecurity: withStoresMonths(fs, leg.nextMonths) },
   };
   const config = next.config || {};
   const entries = Array.isArray(config[ledgerKey]) ? [...config[ledgerKey]] : [];

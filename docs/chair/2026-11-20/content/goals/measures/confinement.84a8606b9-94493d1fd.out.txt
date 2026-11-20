@@ -1,0 +1,16 @@
+trees.mjs: births at 94493d1fd
+names3 born: exit codes 0,0
+trees.mjs: 84a8606b9 -> 94493d1fd
+## golden: documents 525 · identical 446 · with a non-string difference 79 · differing strings 525 · of them passing the word check (number) 0 · other 525
+| relationships[].description | 252 | 79 |
+| relationships[].tension | 252 | 79 |
+| prominentRelationship.phrasing | 7 | 7 |
+| prominentRelationship.full | 7 | 7 |
+| prominentRelationship.tension | 7 | 7 |
+## census: documents 720 · identical 546 · with a non-string difference 174 · differing strings 2183 · of them passing the word check (number) 0 · other 2183
+| relationships[].description | 1075 | 174 |
+| relationships[].tension | 1075 | 174 |
+| prominentRelationship.phrasing | 11 | 11 |
+| prominentRelationship.full | 11 | 11 |
+| prominentRelationship.tension | 11 | 11 |
+exit 0

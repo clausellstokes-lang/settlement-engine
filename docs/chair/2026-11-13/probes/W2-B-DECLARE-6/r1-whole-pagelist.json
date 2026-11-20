@@ -1,0 +1,1285 @@
+{
+ "before": {
+  "findings": 1998,
+  "pairs": 1953,
+  "towns": 588
+ },
+ "after": {
+  "findings": 1790,
+  "pairs": 1759,
+  "towns": 580
+ },
+ "changedWords": {
+  "clergy": [
+   102,
+   0
+  ],
+  "armedForce": [
+   106,
+   0
+  ]
+ },
+ "left": {
+  "n": 208,
+  "byWord": {
+   "clergy": 102,
+   "armedForce": 106
+  }
+ },
+ "entered": {
+  "n": 0,
+  "byWord": {}
+ },
+ "leftLines": [
+  {
+   "seed": "r2r-thorp-0",
+   "word": "clergy",
+   "view": "Summary/Overview",
+   "quote": "\"Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests."
+  },
+  {
+   "seed": "r2r-thorp-0",
+   "word": "clergy",
+   "view": "World/History",
+   "quote": "\"Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests."
+  },
+  {
+   "seed": "r2r-thorp-2",
+   "word": "clergy",
+   "view": "Summary/Overview",
+   "quote": "\"Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests."
+  },
+  {
+   "seed": "r2r-thorp-2",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-thorp-2",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The priest guides the community, and disputes are brought to the priest to settle."
+  },
+  {
+   "seed": "r2r-thorp-2",
+   "word": "clergy",
+   "view": "World/History",
+   "quote": "\"Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests."
+  },
+  {
+   "seed": "r2r-thorp-5",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-thorp-9",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-thorp-10",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Tihogorod's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-thorp-11",
+   "word": "clergy",
+   "view": "Summary/Overview",
+   "quote": "\"The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere\""
+  },
+  {
+   "seed": "r2r-thorp-11",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Muulcoba's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-thorp-11",
+   "word": "clergy",
+   "view": "World/History",
+   "quote": "\"The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere\""
+  },
+  {
+   "seed": "r2r-thorp-12",
+   "word": "clergy",
+   "view": "Summary/Overview",
+   "quote": "\"Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests."
+  },
+  {
+   "seed": "r2r-thorp-12",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The priest guides the community, and disputes are brought to the priest to settle."
+  },
+  {
+   "seed": "r2r-thorp-12",
+   "word": "clergy",
+   "view": "World/History",
+   "quote": "\"Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests."
+  },
+  {
+   "seed": "r2r-thorp-19",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-thorp-20",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-thorp-24",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The occupiers' troops at Sanctaminus protect it from everyone except the people who sent them."
+  },
+  {
+   "seed": "r2r-thorp-27",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-thorp-29",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-thorp-30",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-thorp-32",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-thorp-34",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-thorp-34",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The priest guides the community, and disputes are brought to the priest to settle."
+  },
+  {
+   "seed": "r2r-thorp-38",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The longer the hunger lasts at Khanabad, the less its defenders can do, and nothing is filling the stores again yet."
+  },
+  {
+   "seed": "r2r-thorp-41",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
+  },
+  {
+   "seed": "r2r-thorp-41",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The priest guides the community, and disputes are brought to the priest to settle."
+  },
+  {
+   "seed": "r2r-thorp-42",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Qaratala's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-thorp-43",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Burjpatan's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-thorp-46",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The longer the hunger lasts at Erdenserai, the less its defenders can do, and nothing is filling the stores again yet."
+  },
+  {
+   "seed": "r2r-thorp-47",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The priest guides the community, and disputes are brought to the priest to settle."
+  },
+  {
+   "seed": "r2r-thorp-50",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Tlalatl's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-thorp-53",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Grünfurt's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2r-thorp-54",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-thorp-54",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The longer the hunger lasts at Forteripa, the less its defenders can do, and nothing is filling the stores again yet."
+  },
+  {
+   "seed": "r2r-thorp-56",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-thorp-57",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-thorp-58",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The military command has taken charge of the streets, and more harshly as the food runs down."
+  },
+  {
+   "seed": "r2r-hamlet-0",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The military command has taken charge of the streets, and more harshly as the food runs down."
+  },
+  {
+   "seed": "r2r-hamlet-1",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "Its priests look after their flocks and have no say in the hall."
+  },
+  {
+   "seed": "r2r-hamlet-1",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "Clergy operate here but the church holds little civic authority;"
+  },
+  {
+   "seed": "r2r-hamlet-2",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-hamlet-2",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
+  },
+  {
+   "seed": "r2r-hamlet-4",
+   "word": "clergy",
+   "view": "Summary/Overview",
+   "quote": "\"The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere\""
+  },
+  {
+   "seed": "r2r-hamlet-4",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-hamlet-4",
+   "word": "clergy",
+   "view": "World/History",
+   "quote": "\"The Religious Conflict is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere\""
+  },
+  {
+   "seed": "r2r-hamlet-5",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-hamlet-5",
+   "word": "armedForce",
+   "view": "Systems/Power",
+   "quote": "Probably correct on the military decisions."
+  },
+  {
+   "seed": "r2r-hamlet-6",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-hamlet-9",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Rotsteig's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-hamlet-13",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-hamlet-14",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-hamlet-14",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Yaxchich's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-hamlet-15",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Sübeteiordu's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2r-hamlet-18",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-hamlet-20",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-hamlet-21",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
+  },
+  {
+   "seed": "r2r-hamlet-24",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The longer the hunger lasts at Jayakota, the less its defenders can do, and nothing is filling the stores again yet."
+  },
+  {
+   "seed": "r2r-hamlet-25",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-hamlet-25",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Rotbrücke's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-hamlet-25",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Rotbrücke's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2r-hamlet-26",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "Its priests look after their flocks and have no say in the hall."
+  },
+  {
+   "seed": "r2r-hamlet-26",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The local clergy serve a real pastoral role;"
+  },
+  {
+   "seed": "r2r-hamlet-28",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The longer the hunger lasts at Ravenoy, the less its defenders can do, and nothing is filling the stores again yet."
+  },
+  {
+   "seed": "r2r-hamlet-29",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
+  },
+  {
+   "seed": "r2r-hamlet-30",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-hamlet-31",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-hamlet-35",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Sundoy's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-hamlet-36",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-hamlet-39",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
+  },
+  {
+   "seed": "r2r-hamlet-40",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2r-hamlet-46",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Celogorod's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-hamlet-52",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Ormdal's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-hamlet-53",
+   "word": "armedForce",
+   "view": "Summary/Crisis",
+   "quote": "defends: Bilal al-Din · holds the office of the guard"
+  },
+  {
+   "seed": "r2r-hamlet-53",
+   "word": "armedForce",
+   "view": "Summary/Plot Hooks",
+   "quote": "In the war, Bilal al-Din of Priestly Guidance leads the defence: holds the office of the guard."
+  },
+  {
+   "seed": "r2r-hamlet-54",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Grímstad's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2r-hamlet-55",
+   "word": "clergy",
+   "view": "Summary/Overview",
+   "quote": "\"Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests."
+  },
+  {
+   "seed": "r2r-hamlet-55",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The priest has summoned someone before the church court."
+  },
+  {
+   "seed": "r2r-hamlet-55",
+   "word": "clergy",
+   "view": "World/History",
+   "quote": "\"Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests."
+  },
+  {
+   "seed": "r2r-hamlet-57",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Ulanköl's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2r-hamlet-58",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Vatanbulag's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-village-5",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Until the quarrel over faith is settled at Karakabad, its defenders will not act as one."
+  },
+  {
+   "seed": "r2r-village-10",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Skáldal's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-village-10",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Skáldal's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2r-village-13",
+   "word": "armedForce",
+   "view": "Systems/Power",
+   "quote": "The guard deals with bodies and the clergy with minds, and each wishes the other would keep quieter."
+  },
+  {
+   "seed": "r2r-village-15",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Ulfborg's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-village-16",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Flachbrücke's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2r-village-18",
+   "word": "armedForce",
+   "view": "Systems/Power",
+   "quote": "The Military Party takes its orders no longer."
+  },
+  {
+   "seed": "r2r-village-20",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Naglsund's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-village-21",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The military command has taken charge of the streets, and more harshly as the food runs down."
+  },
+  {
+   "seed": "r2r-village-21",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Rotbrücke's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2r-village-22",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Jómsland's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2r-village-28",
+   "word": "armedForce",
+   "view": "Summary/Crisis",
+   "quote": "Military Party gains · the military gains in a vacuum of governance"
+  },
+  {
+   "seed": "r2r-village-28",
+   "word": "armedForce",
+   "view": "Systems/Power",
+   "quote": "The Military Party and the Religious Authorities are at odds with it."
+  },
+  {
+   "seed": "r2r-village-32",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Jómsland's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-village-32",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Jómsland's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2r-village-34",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Lagoorum's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2r-village-38",
+   "word": "armedForce",
+   "view": "Summary/Crisis",
+   "quote": "Military Party gains · the military gains in a vacuum of governance"
+  },
+  {
+   "seed": "r2r-village-43",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The military command has taken charge of the streets, and more harshly as the food runs down."
+  },
+  {
+   "seed": "r2r-village-47",
+   "word": "armedForce",
+   "view": "Summary/Crisis",
+   "quote": "Military Party gains · the military gains in a vacuum of governance"
+  },
+  {
+   "seed": "r2r-village-47",
+   "word": "armedForce",
+   "view": "Systems/Power",
+   "quote": "The hall is at odds with the Military Party."
+  },
+  {
+   "seed": "r2r-village-48",
+   "word": "armedForce",
+   "view": "Systems/Institutions",
+   "quote": "Where retired soldiers and sellswords do their drinking."
+  },
+  {
+   "seed": "r2r-village-52",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Niederbrücke's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2r-village-53",
+   "word": "armedForce",
+   "view": "Systems/Power",
+   "quote": "They are roughly even with the military: the guard can arrest their people, and the guild can make every investigation costly."
+  },
+  {
+   "seed": "r2r-village-54",
+   "word": "armedForce",
+   "view": "Systems/Power",
+   "quote": "The guard deals with bodies and the clergy with minds, and each wishes the other would keep quieter."
+  },
+  {
+   "seed": "r2r-village-55",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The military command has taken charge of the streets, and more harshly as the food runs down."
+  },
+  {
+   "seed": "r2s-under_siege-thorp-0",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-under_siege-thorp-1",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-under_siege-hamlet-0",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The military command has taken charge of the streets, and more harshly as the food runs down."
+  },
+  {
+   "seed": "r2s-under_siege-hamlet-1",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The military command has taken charge of the streets, and more harshly as the food runs down."
+  },
+  {
+   "seed": "r2s-under_siege-hamlet-2",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
+  },
+  {
+   "seed": "r2s-under_siege-hamlet-2",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The military command has taken charge of the streets, and more harshly as the food runs down."
+  },
+  {
+   "seed": "r2s-under_siege-hamlet-3",
+   "word": "armedForce",
+   "view": "Summary/Crisis",
+   "quote": "defends: Gebhard Wolf · leads the military"
+  },
+  {
+   "seed": "r2s-under_siege-hamlet-3",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-under_siege-hamlet-3",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The military command has taken charge of the streets, and more harshly as the food runs down."
+  },
+  {
+   "seed": "r2s-under_siege-village-0",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The military command has taken charge of the streets, and more harshly as the food runs down."
+  },
+  {
+   "seed": "r2s-under_siege-village-1",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The military command has taken charge of the streets, and more harshly as the food runs down."
+  },
+  {
+   "seed": "r2s-under_siege-village-2",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The military command has taken charge of the streets, and more harshly as the food runs down."
+  },
+  {
+   "seed": "r2s-famine-thorp-0",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The longer the hunger lasts at Makronea, the less its defenders can do, and nothing is filling the stores again yet."
+  },
+  {
+   "seed": "r2s-famine-thorp-1",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The longer the hunger lasts at Purinagar, the less its defenders can do, and nothing is filling the stores again yet."
+  },
+  {
+   "seed": "r2s-famine-hamlet-0",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The longer the hunger lasts at Montemare, the less its defenders can do, and nothing is filling the stores again yet."
+  },
+  {
+   "seed": "r2s-famine-hamlet-2",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
+  },
+  {
+   "seed": "r2s-famine-hamlet-3",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-famine-hamlet-3",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The longer the hunger lasts at Malosk, the less its defenders can do, and nothing is filling the stores again yet."
+  },
+  {
+   "seed": "r2s-famine-village-2",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The longer the hunger lasts at Spitzhafen, the less its defenders can do, and nothing is filling the stores again yet."
+  },
+  {
+   "seed": "r2s-occupied-thorp-1",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-occupied-thorp-2",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The priest guides the community, and disputes are brought to the priest to settle."
+  },
+  {
+   "seed": "r2s-occupied-thorp-3",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The occupiers' troops at Víkberg protect it from everyone except the people who sent them."
+  },
+  {
+   "seed": "r2s-occupied-thorp-3",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Víkberg's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2s-occupied-village-1",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The occupiers' troops at Celoichi protect it from everyone except the people who sent them."
+  },
+  {
+   "seed": "r2s-occupied-village-1",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Celoichi's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2s-occupied-village-3",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "The occupiers' troops at Grudka protect it from everyone except the people who sent them."
+  },
+  {
+   "seed": "r2s-politically_fractured-thorp-0",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-politically_fractured-thorp-1",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Mayanek's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2s-politically_fractured-thorp-3",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-politically_fractured-thorp-3",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The priest guides the community, and disputes are brought to the priest to settle."
+  },
+  {
+   "seed": "r2s-politically_fractured-hamlet-0",
+   "word": "clergy",
+   "view": "Summary/Overview",
+   "quote": "\"Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests."
+  },
+  {
+   "seed": "r2s-politically_fractured-hamlet-0",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-politically_fractured-hamlet-0",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
+  },
+  {
+   "seed": "r2s-politically_fractured-hamlet-0",
+   "word": "clergy",
+   "view": "World/History",
+   "quote": "\"Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests."
+  },
+  {
+   "seed": "r2s-politically_fractured-hamlet-2",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Viknes's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2s-indebted-thorp-1",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Ravenås's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2s-indebted-thorp-2",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-indebted-hamlet-1",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The village priest is the most educated person for miles;"
+  },
+  {
+   "seed": "r2s-indebted-hamlet-3",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-recently_betrayed-thorp-1",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Grímberg's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2s-recently_betrayed-thorp-2",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-recently_betrayed-thorp-2",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Oxtemul's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2s-recently_betrayed-thorp-3",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Castelstagnum's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2s-recently_betrayed-hamlet-0",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-recently_betrayed-hamlet-0",
+   "word": "armedForce",
+   "view": "Systems/Power",
+   "quote": "The Military Party no longer takes its orders."
+  },
+  {
+   "seed": "r2s-recently_betrayed-hamlet-0",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The guard deals with bodies and the clergy with minds, and each wishes the other would keep quieter."
+  },
+  {
+   "seed": "r2s-recently_betrayed-hamlet-0",
+   "word": "armedForce",
+   "view": "Systems/Power",
+   "quote": "The guard deals with bodies and the clergy with minds, and each wishes the other would keep quieter."
+  },
+  {
+   "seed": "r2s-recently_betrayed-hamlet-2",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-infiltrated-hamlet-1",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
+  },
+  {
+   "seed": "r2s-infiltrated-village-0",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Khirbetserai's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2s-infiltrated-village-2",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Bayarserai's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2s-plague_onset-hamlet-2",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-plague_onset-hamlet-3",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
+  },
+  {
+   "seed": "r2s-succession_void-thorp-2",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Tulummal's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2s-succession_void-thorp-3",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
+  },
+  {
+   "seed": "r2s-succession_void-hamlet-1",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-succession_void-hamlet-3",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Pianomonte's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2s-monster_pressure-hamlet-0",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Hákonli's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2s-monster_pressure-hamlet-2",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The village priest is the most educated person for miles;"
+  },
+  {
+   "seed": "r2s-monster_pressure-hamlet-2",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Ögedeibulag's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2s-insurgency-thorp-0",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-insurgency-thorp-0",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
+  },
+  {
+   "seed": "r2s-insurgency-thorp-1",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Ulfset's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2s-insurgency-hamlet-2",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-insurgency-village-3",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Terraforum's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2s-religious_conversion-thorp-0",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Until the quarrel over faith is settled at Palenqcalco, its defenders will not act as one."
+  },
+  {
+   "seed": "r2s-religious_conversion-thorp-0",
+   "word": "clergy",
+   "view": "Systems/Defense",
+   "quote": "Priests accepting payment to record conversions that did not occur."
+  },
+  {
+   "seed": "r2s-religious_conversion-thorp-1",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The split is now open: two priests, two congregations, two registers of births, deaths and marriages."
+  },
+  {
+   "seed": "r2s-religious_conversion-thorp-1",
+   "word": "clergy",
+   "view": "Systems/Defense",
+   "quote": "Priests accepting payment to record conversions that did not occur."
+  },
+  {
+   "seed": "r2s-religious_conversion-thorp-2",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The split is now open: two priests, two congregations, two registers of births, deaths and marriages."
+  },
+  {
+   "seed": "r2s-religious_conversion-thorp-2",
+   "word": "clergy",
+   "view": "Systems/Defense",
+   "quote": "Priests accepting payment to record conversions that did not occur."
+  },
+  {
+   "seed": "r2s-religious_conversion-thorp-3",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Until the quarrel over faith is settled at Lidocolonia, its defenders will not act as one."
+  },
+  {
+   "seed": "r2s-religious_conversion-thorp-3",
+   "word": "clergy",
+   "view": "Systems/Defense",
+   "quote": "Priests accepting payment to record conversions that did not occur."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-0",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The split is now open: two priests, two congregations, two registers of births, deaths and marriages."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-0",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Until the quarrel over faith is settled at Capovetum, its defenders will not act as one."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-0",
+   "word": "clergy",
+   "view": "Systems/Defense",
+   "quote": "Priests accepting payment to record conversions that did not occur."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-1",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-1",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Until the quarrel over faith is settled at Hagiolathra, its defenders will not act as one."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-1",
+   "word": "clergy",
+   "view": "Systems/Defense",
+   "quote": "Priests accepting payment to record conversions that did not occur."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-2",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Until the quarrel over faith is settled at Raasziyarat, its defenders will not act as one."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-2",
+   "word": "clergy",
+   "view": "Systems/Defense",
+   "quote": "Priests accepting payment to record conversions that did not occur."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-3",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The split is now open: two priests, two congregations, two registers of births, deaths and marriages."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-3",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Yurtüüd's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-3",
+   "word": "clergy",
+   "view": "Systems/Defense",
+   "quote": "Priests accepting payment to record conversions that did not occur."
+  },
+  {
+   "seed": "r2s-religious_conversion-hamlet-3",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Yurtüüd's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2s-religious_conversion-village-1",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Until the quarrel over faith is settled at Anwan, its defenders will not act as one."
+  },
+  {
+   "seed": "r2s-religious_conversion-village-2",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Until the quarrel over faith is settled at Loughburn, its defenders will not act as one."
+  },
+  {
+   "seed": "r2s-slave_revolt-thorp-0",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Mönkhkher's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2s-slave_revolt-thorp-0",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Mönkhkher's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2s-slave_revolt-thorp-1",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-slave_revolt-hamlet-0",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
+  },
+  {
+   "seed": "r2s-slave_revolt-village-0",
+   "word": "armedForce",
+   "view": "Systems/Power",
+   "quote": "They are roughly even with the military: the guard can arrest their people, and the guild can make every investigation costly."
+  },
+  {
+   "seed": "r2s-slave_revolt-village-2",
+   "word": "armedForce",
+   "view": "World/War",
+   "quote": "From here you raise Mönkhkotan's troops, send them out, call them home, and read what they report back."
+  },
+  {
+   "seed": "r2s-wartime-thorp-3",
+   "word": "clergy",
+   "view": "Systems/Power",
+   "quote": "The priest guides the community, and disputes are brought to the priest to settle."
+  },
+  {
+   "seed": "r2s-wartime-hamlet-0",
+   "word": "armedForce",
+   "view": "Summary/Crisis",
+   "quote": "defends: Wu Gao · holds the office of the guard"
+  },
+  {
+   "seed": "r2s-wartime-hamlet-0",
+   "word": "armedForce",
+   "view": "Summary/Plot Hooks",
+   "quote": "In the war, Wu Gao of Free Elder Council leads the defence: holds the office of the guard."
+  },
+  {
+   "seed": "r2s-wartime-hamlet-0",
+   "word": "armedForce",
+   "view": "Systems/Power",
+   "quote": "Probably correct on the military decisions."
+  },
+  {
+   "seed": "r2s-wartime-hamlet-0",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Nishiyuan's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  },
+  {
+   "seed": "r2s-wartime-hamlet-1",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-wartime-hamlet-2",
+   "word": "clergy",
+   "view": "Systems/Services",
+   "quote": "The priest manages the graveyard."
+  },
+  {
+   "seed": "r2s-wartime-village-3",
+   "word": "armedForce",
+   "view": "Systems/Institutions",
+   "quote": "A drinking hall for old soldiers and mercenaries put out to pasture."
+  },
+  {
+   "seed": "r2s-mass_migration-village-0",
+   "word": "armedForce",
+   "view": "Systems/Defense",
+   "quote": "Jayakund's pay book is always behind: its defenders are paid late or not at all, and people owed wages are slow to turn out when trouble comes."
+  }
+ ],
+ "enteredLines": [],
+ "_doc": "The chair ruling on the third read: the role family withdrawn WHOLE. The page list on the census 720 (dumps of c3913f999, unchanged at every tip of the lane) with the instrument at 5657a229c (before; the same findings as e5f0173e0) and with the whole family withdrawn (after). Left: every clergy and armedForce line; entered: none."
+}

@@ -1,0 +1,772 @@
+{
+  "poolId": "DS-GEN-9",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "foundedPoolKey-free history desk: eventTypePoolKey / recencyFramingPoolKey (+ founding, historicalCharacter) → composeStateProse → readStateProse → eligibleVariants → drawVariant",
+  "pools": [
+    {
+      "pool": "founding",
+      "keyGuarantees": [
+        "history.founding is present (reason, founder, challenge)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} was founded {timeband_since} for {reason}, and the reason is still legible in how the town is laid out.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{founder} put {settlement} here, and the first trial the place met was {challenge}; that it was met is why there is a town to describe.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} tells its own beginning as a difficulty overcome, and the telling is accurate enough that the clerks do not correct it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The oldest part of {settlement} still shows what the town was for when it started, which is not always what it is for now.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:5",
+          "text": "{settlement} was founded for {reason} and has never been anything else; whatever else has been tried here did not take.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "historicalCharacter",
+      "keyGuarantees": [
+        "history.historicalCharacter is present"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} is {timeband_age}, and the shape of what it has been through is still the shape it holds.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} has a character it would recognise a description of, and it did not choose it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "What {settlement} is like takes a stranger a day to notice and a season to believe.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "event type: disaster",
+      "keyGuarantees": [
+        "the selected event is of type disaster; anchor is a kernel mark"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} lost {band} to {event} {timeband_since}, and the town has never rebuilt the quarter it happened in.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{event} is {timeband_age} and still on {settlement}'s books: what it destroyed is recorded as a lack rather than as a loss.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} remembers {event} the way a town remembers a hard season: as a date, and not as a grievance.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "not anchored"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement} came through {event} {timeband_since} and does not show it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "not anchored"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "event type: political",
+      "keyGuarantees": [
+        "the selected event is of type political; anchor is a kernel mark"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "What was decided at {settlement} {timeband_since} in {event} is still the rule here, and the people it was decided against are still living under it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{event} settled a question at {settlement} {timeband_since}, and the settlement of it is the arrangement the town runs on.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{event} is a thing that happened to {settlement}'s hall {timeband_since} and does not come up.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "not anchored"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{event} was supposed to end an argument at {settlement} and has instead given it a form; the argument is still being had in the terms {event} set.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "event type: economic",
+      "keyGuarantees": [
+        "the selected event is of type economic; anchor is a kernel mark"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: speaks of the past; line 3 presumes a market.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{event} changed what {settlement} lives on {timeband_since}, and the town has been living on the new thing ever since.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} still divides its year the way {event} taught it to, {timeband_since} on.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} had its fortunes turned {timeband_since} by {event}, and a stranger would not guess it from the market.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "not anchored"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{event} should have remade {settlement} and did not; the town absorbed it and went on doing what it had been doing.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "not anchored"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "event type: religious",
+      "keyGuarantees": [
+        "the selected event is of type religious; anchor is a kernel mark"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: speaks of the past; line 4 presumes altars (a temple) and lines 1-2 presume observance beyond the temple atom.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{event} changed what {settlement} keeps, {timeband_since}, and there are households here still keeping the older way quietly.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "priest / faith presence"
+          ],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "The observances {settlement} records and the observances {settlement} maintains have differed since {event}, {timeband_since}.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "priest / faith presence"
+          ],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{event} is remembered at {settlement} as a disturbance rather than a change, which is how the town settled it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "not anchored"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement}'s altars carry a history a stranger will not read without asking.",
+          "needs": [
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "not anchored"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "event type: magical",
+      "keyGuarantees": [
+        "the selected event is of type magical; anchor is a kernel mark"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{event} left something at {settlement} that {timeband_since} has not dispersed, and the town has arranged itself around it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} still keeps rules written after {event}, and the rules are specific in a way that suggests they were written by people who were there.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{event} happened at {settlement} {timeband_since} and is now a story told to children with the frightening part left in.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "not anchored"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{event} could have marked {settlement} permanently and did not; what it touched has grown back.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "not anchored"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "event type: demographic",
+      "keyGuarantees": [
+        "the selected event is of type demographic; anchor is a kernel mark"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement}'s rolls changed by {band} at {event}, {timeband_since}, and the town has been the new size ever since.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "The people who came to {settlement} at {event} are the people {settlement} is now made of, and the older families still know which is which.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} was a different size {timeband_since}, and almost nobody here thinks about that.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "not anchored"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement} has quarters that do not match each other, and the mismatch dates from {event}.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "event type: exile_return",
+      "keyGuarantees": [
+        "the selected event is of type exile_return; anchor is a kernel mark"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "People {settlement} sent away came back {timeband_since}, and the town has never fully resolved what it owes them or what they owe it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}'s rolls carry names that were struck and restored, and the restoring is {timeband_age}.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} exiled and readmitted and has agreed not to discuss either half.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "not anchored"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The returned in {settlement} have claims the town has not settled, and the claims are being pressed rather than dropped.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "event type: occupation_infiltration",
+      "keyGuarantees": [
+        "the selected event is of type occupation_infiltration; anchor is a kernel mark"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} was held {timeband_since} and the arrangements made then are the arrangements the town still runs on.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Who holds what in {settlement} was decided by an authority that is no longer here, and nothing has been rewritten.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "anchored"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} was taken and released {timeband_since}, and the town treats it as a season rather than as a wound.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "not anchored"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement} was occupied and gave nothing up that mattered; what the occupier took, the town had already moved.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "not anchored"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "recency framing: Recent",
+      "keyGuarantees": [
+        "the selected event is <= 10 years ago"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "It is recent enough at {settlement} that the people it happened to are the people running the town.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} has not finished with it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "recency framing: Living memory",
+      "keyGuarantees": [
+        "the selected event is 11-30 years ago"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "There are people in {settlement} who were there, and their account is not quite the town's account.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} remembers it first-hand and has begun to remember it selectively.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "recency framing: Last century",
+      "keyGuarantees": [
+        "the selected event is 31-80 years ago"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "It is out of living memory at {settlement} and inside the memory of the buildings.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}'s records carry it plainly and nobody now working here can add to them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "recency framing: Ancient",
+      "keyGuarantees": [
+        "the selected event is 81-200 years ago"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} inherited the consequence and not the event; what happened is a fact here rather than a memory.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "The reason {settlement} is shaped this way is older than anything a stranger will be told about it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "recency framing: Deep history",
+      "keyGuarantees": [
+        "the selected event is over 200 years ago"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "It is older than {settlement}'s own account of itself, and the town's explanation of it is a reconstruction.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} records it and cannot source it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

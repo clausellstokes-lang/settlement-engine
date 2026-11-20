@@ -62,7 +62,7 @@ export function Card({ title, sub, children, accent=GOLD, lead=false }) {
 export function BandLadder({ concept, blurb, levels = [], accent=GOLD }) {
   const mobile = useIsMobile();
   return (
-    <div style={{ borderLeft:`3px solid ${accent}`, padding:'10px 12px', marginBottom:8 }}>
+    <div data-filter-entry="" style={{ borderLeft:`3px solid ${accent}`, padding:'10px 12px', marginBottom:8 }}>
       <div style={{ fontFamily:serif_, fontSize: FS['14'], fontWeight:700, color:INK, marginBottom:blurb?2:6 }}>{concept}</div>
       {blurb && <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, maxWidth:PROSE_MEASURE, marginBottom:8 }}>{blurb}</div>}
       {levels.map((l) => (

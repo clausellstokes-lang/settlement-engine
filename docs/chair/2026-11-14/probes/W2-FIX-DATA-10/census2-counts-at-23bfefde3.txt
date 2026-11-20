@@ -1,0 +1,507 @@
+PATTERN a: towns 707 · distinct lines 490 (NEW 278) · writers 86 (NEW 40) · untraced lines 38
+PATTERN b: towns 70 · distinct lines 96 (NEW 56) · writers 34 (NEW 15) · untraced lines 16
+PATTERN c: towns 273 · distinct lines 225 (NEW 120) · writers 29 (NEW 15) · untraced lines 6
+PATTERN d: towns 387 · distinct lines 40 (NEW 20) · writers 11 (NEW 5) · untraced lines 15
+PATTERN e: towns 60 · distinct lines 20 (NEW 14) · writers 5 (NEW 3) · untraced lines 3
+PATTERN f: towns 720 · distinct lines 344 (NEW 191) · writers 14 (NEW 7) · untraced lines 124
+PATTERN g: towns 720 · distinct lines 14 (NEW 0) · writers 3 (NEW 0) · untraced lines 8
+PATTERN h: towns 20 · distinct lines 63 (NEW 60) · writers 15 (NEW 13) · untraced lines 26
+FILE src/data/institutionDescVariants.js [fd]: a 153 towns/12 lines/2 fns · b 7 towns/3 lines/2 fns
+FILE src/data/institutionServices.js [fd]: a 95 towns/6 lines/6 fns · b 11 towns/2 lines/2 fns
+FILE src/data/institutionDescColour.js [fd]: a 41 towns/9 lines/1 fns · c 2 towns/1 lines/1 fns · b 9 towns/7 lines/1 fns
+FILE src/data/institutionalCatalog.js [fd]: a 34 towns/5 lines/3 fns · b 3 towns/1 lines/1 fns · c 1 towns/1 lines/1 fns
+FILE src/data/historyData.js [fd]: a 24 towns/8 lines/3 fns
+FILE src/data/cultureProfiles.js [fd]: c 21 towns/14 lines/1 fns
+FILE src/data/finishedGoodsCategory.js [none]: a 9 towns/9 lines/1 fns · d 1 towns/1 lines/1 fns · b 4 towns/4 lines/1 fns
+FILE src/data/arrivalProse.js [fd]: a 5 towns/5 lines/2 fns
+FILE src/data/geographyData.js [none]: b 1 towns/1 lines/1 fns
+FILE src/data/economicData.js [none]: d 1 towns/1 lines/1 fns
+FILE src/data/supplyChainData.js [none]: b 1 towns/1 lines/1 fns
+  HIT a/clergy r2r-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT c/dense r2r-thorp-0 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/clergy r2r-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2r-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/church r2r-thorp-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-4 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2r-thorp-5 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/church r2r-thorp-5 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-5 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-6 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2r-thorp-7 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-8 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2r-thorp-9 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/church r2r-thorp-9 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-9 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-10 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2r-thorp-11 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT c/dense r2r-thorp-11 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/clergy r2r-thorp-12 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2r-thorp-13 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2r-thorp-14 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-15 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-16 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2r-thorp-17 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT c/dense r2r-thorp-17 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/workshops r2r-thorp-18 Summary/Overview [ARRIVAL_PEOPLE.germanic] cut#202: A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud.
+  HIT a/clergy r2r-thorp-18 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-19 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/church r2r-thorp-19 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-19 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-20 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/church r2r-thorp-20 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-20 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-21 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2r-thorp-22 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT c/dense r2r-thorp-22 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/clergy r2r-thorp-23 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2r-thorp-24 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2r-thorp-25 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT c/dense r2r-thorp-25 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/clergy r2r-thorp-26 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2r-thorp-27 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/church r2r-thorp-27 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-27 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-28 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2r-thorp-29 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/church r2r-thorp-29 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-29 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-30 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/church r2r-thorp-30 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-30 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-31 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-32 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/church r2r-thorp-32 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-32 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-33 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2r-thorp-34 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/church r2r-thorp-34 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-34 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-35 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-36 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-37 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2r-thorp-38 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-39 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-40 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-41 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/workshops r2r-thorp-42 Summary/Overview [ARRIVAL_SENSES.lines] NEW: The rasp of a saw and the smell of fresh-cut wood come from a workshop yard.
+  HIT a/clergy r2r-thorp-42 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2r-thorp-43 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-44 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT c/dense r2r-thorp-44 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/clergy r2r-thorp-45 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT b/siege:market-day r2r-thorp-45 Systems/Services [INSTITUTION_SERVICES.Fresh fish retail] ww#124: Fish sold daily from the morning catch.
+  HIT a/clergy r2r-thorp-46 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-47 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-48 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2r-thorp-49 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-50 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/inn r2r-thorp-50 Systems/Services [INSTITUTION_SERVICES.Wholesale trade] NEW: Bulk purchase by taverns, institutions, and inland traders.
+  HIT c/dense r2r-thorp-50 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/clergy r2r-thorp-51 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-52 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/workshops r2r-thorp-53 Summary/Overview [ARRIVAL_PEOPLE.germanic] cut#202: A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud.
+  HIT a/clergy r2r-thorp-53 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2r-thorp-54 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/church r2r-thorp-54 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-54 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-55 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2r-thorp-56 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/church r2r-thorp-56 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-56 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-57 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/church r2r-thorp-57 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-57 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-thorp-58 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT b/siege:brought-in r2r-thorp-58 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT b/siege:market-day r2r-thorp-58 Systems/Services [INSTITUTION_SERVICES.Fresh fish retail] ww#124: Fish sold daily from the morning catch.
+  HIT b/siege:trade-list r2r-thorp-58 Systems/Economics [TERRAIN_DATA.mustImport] NEW: GrainIron (weapons)SaltStone (for major construction)
+  HIT a/clergy r2r-thorp-59 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/church r2r-hamlet-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-hamlet-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT c/dense r2r-hamlet-2 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/church r2r-hamlet-4 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-hamlet-4 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/church r2r-hamlet-5 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-hamlet-5 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/church r2r-hamlet-6 Summary/Overview [HISTORICAL_EVENTS_DATA.factions] NEW: Temple beneficiariesOverwhelmed old residentsSceptics who doubt the miracle
+  HIT a/church r2r-hamlet-6 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-hamlet-6 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/church r2r-hamlet-6 World/History [HISTORICAL_EVENTS_DATA.factions] NEW: Temple beneficiariesOverwhelmed old residentsSceptics who doubt the miracle
+  HIT a/church r2r-hamlet-13 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-hamlet-13 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/church r2r-hamlet-14 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-hamlet-14 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT c/dense r2r-hamlet-14 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT c/dense r2r-hamlet-16 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/church r2r-hamlet-18 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-hamlet-18 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/church r2r-hamlet-25 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-hamlet-25 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/church r2r-hamlet-29 Systems/Services [INSTITUTION_SERVICES.Tithe and dues] NEW: Collects the lord's dues and the temple tithe
+  HIT a/church r2r-hamlet-30 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-hamlet-30 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/church r2r-hamlet-31 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-hamlet-31 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/church r2r-hamlet-36 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-hamlet-36 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/church r2r-hamlet-37 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-hamlet-37 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/church r2r-hamlet-40 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2r-hamlet-40 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT c/dense r2r-hamlet-40 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT c/dense r2r-hamlet-50 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/reeve r2r-village-6 Systems/Institutions [PAIRS] NEW: Less official than a reeve, more stable than nothing.
+  HIT a/reeve r2r-village-18 Systems/Institutions [PAIRS] NEW: Less official than a reeve, more stable than nothing.
+  HIT a/reeve r2r-village-19 Systems/Institutions [PAIRS] NEW: Less official than a reeve, but better than no one at all.
+  HIT a/merchants r2r-village-20 Systems/Institutions [INSTITUTION_FAMILIES.village] NEW: Serves merchant caravans and long-distance travellers.
+  HIT a/merchants r2r-village-23 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A lone inn catering to whoever the road brings: merchants, pilgrims, travellers.
+  HIT a/merchants r2r-village-23 Systems/Institutions [INSTITUTION_FAMILIES.village] NEW: Serves merchant caravans and long-distance travellers.
+  HIT a/quarry r2r-village-26 World/History [HISTORY_DESC_SIBLINGS] NEW: A period of ambitious stone building transformed the settlement's character, its larger houses raised from local quarry stone.
+  HIT a/fishing r2r-village-27 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/reeve r2r-village-29 Systems/Institutions [PAIRS] NEW: Less official than a reeve, but better than no one at all.
+  HIT a/merchants r2r-village-30 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A lone inn catering to whoever the road brings: merchants, pilgrims, travellers.
+  HIT a/quarry r2r-village-31 World/History [HISTORY_DESC_SIBLINGS] NEW: A period of ambitious stone building transformed the settlement's character, its larger houses raised from local quarry stone.
+  HIT a/reeve r2r-village-37 Systems/Institutions [PAIRS] NEW: Less official than a reeve, but better than no one at all.
+  HIT a/merchants r2r-village-40 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A lone inn catering to whoever the road brings: merchants, pilgrims, travellers.
+  HIT a/merchants r2r-village-44 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A lone inn catering to whoever the road brings: merchants, pilgrims, travellers.
+  HIT a/reeve r2r-village-44 Systems/Institutions [PAIRS] NEW: Less official than a reeve, but better than no one at all.
+  HIT c/urban r2r-village-44 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A few keep city gardens or concealed urban groves.
+  HIT a/quarry r2r-village-44 World/History [HISTORY_DESC_SIBLINGS] NEW: A period of ambitious stone building transformed the settlement's character, its larger houses raised from local quarry stone.
+  HIT a/force r2r-village-48 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: Where retired soldiers and sellswords do their drinking.
+  HIT a/quarry r2r-village-50 World/History [HISTORY_DESC_SIBLINGS] NEW: A period of ambitious stone building transformed the settlement's character, its larger houses raised from local quarry stone.
+  HIT a/reeve r2r-village-54 Systems/Institutions [PAIRS] NEW: Less official than a reeve, more stable than nothing.
+  HIT a/guild r2r-village-55 World/History [HISTORICAL_EVENTS_DATA.severity] NEW: Rival guilds fought over who may sell what, and over a say in how the place is run
+  HIT a/quarry r2r-village-56 World/History [HISTORY_DESC_SIBLINGS] NEW: A period of ambitious stone building transformed the settlement's character, its walls and its larger houses raised from local quarry stone.
+  HIT a/textile r2r-town-1 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/cathedral r2r-town-3 World/History [HISTORY_DESC_SIBLINGS] NEW: Walls, civic buildings, or a cathedral raised from local quarry stone.
+  HIT a/quarry r2r-town-3 World/History [HISTORY_DESC_SIBLINGS] NEW: Walls, civic buildings, or a cathedral raised from local quarry stone.
+  HIT a/textile r2r-town-4 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409: Several mills, some for grain, some for fulling cloth.
+  HIT a/tannery r2r-town-4 Systems/Services [INSTITUTION_SERVICES.Offal and by-products] NEW: By-products sold to chandlers and tanners.
+  HIT a/textile r2r-town-5 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/alchemical r2r-town-5 Systems/Economics [INSTITUTION_FINISHED_GOODS_DEMAND.importLabels] NEW: Alchemical reagents and scribal suppliesFine porcelain and lacquerwareGemstones (local gem deposits exhausted)GrainIncense, ritual oil, and vestment materialsPreserved provisionsQuality paper and inkR
+  HIT a/textile r2r-town-6 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409~: A handful of mills, grinding grain and fulling cloth.
+  HIT a/court r2r-town-6 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT d/engine-word r2r-town-9 Systems/Services [IRON_GRAIN_FUEL] NEW: Needs Iron + grain + fuelNo trade access: running on existing stockpiles only.· covers Iron + grain + fuel, Wool / flax, Timber, Trade access + grain, Grain, Grain + water power, Trade access, Stone, 
+  HIT a/court r2r-town-10 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/textile r2r-town-11 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/textile r2r-town-13 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409~: A handful of mills, grinding grain and fulling cloth.
+  HIT a/smithy r2r-town-14 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new mount.
+  HIT a/textile r2r-town-15 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/court r2r-town-16 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/textile r2r-town-18 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/textile r2r-town-20 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/ships r2r-town-20 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Essential for ships, construction, and agriculture.
+  HIT a/court r2r-town-21 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/textile r2r-town-22 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/fishing r2r-town-22 Systems/Institutions [PAIRS] NEW: Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/textile r2r-town-23 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409: Several mills, some for grain, some for fulling cloth.
+  HIT a/smithy r2r-town-23 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new mount.
+  HIT a/textile r2r-town-25 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/smithy r2r-town-25 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new mount.
+  HIT a/fishing r2r-town-26 Systems/Institutions [PAIRS] NEW: Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/textile r2r-town-27 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/court r2r-town-27 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/court r2r-town-29 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/textile r2r-town-30 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409~: A handful of mills, grinding grain and fulling cloth.
+  HIT a/garrison r2r-town-30 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates.
+  HIT a/garrison r2r-town-30 Systems/Services [INSTITUTION_SERVICES.Mercenary hire] NEW: Hire trained soldiers for military campaigns, garrison duty, and escorts.
+  HIT a/court r2r-town-30 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/fishing r2r-town-33 Systems/Institutions [PAIRS] NEW: Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/garrison r2r-town-34 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: They hire out by the day for escort, garrison duty, and brief campaigns: less costly than keeping an army, more dependable than a rabble.
+  HIT a/garrison r2r-town-34 Systems/Services [INSTITUTION_SERVICES.Mercenary hire] NEW: Hire trained soldiers for military campaigns, garrison duty, and escorts.
+  HIT a/cathedral r2r-town-34 World/History [HISTORY_DESC_SIBLINGS] NEW: Walls, civic buildings, or a cathedral raised from local quarry stone.
+  HIT a/smithy r2r-town-35 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new mount.
+  HIT a/cathedral r2r-town-35 World/History [HISTORY_DESC_SIBLINGS] NEW: Walls, civic buildings, or a cathedral raised from local quarry stone.
+  HIT a/textile r2r-town-36 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409~: A handful of mills, grinding grain and fulling cloth.
+  HIT a/textile r2r-town-37 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409~: A handful of mills, grinding grain and fulling cloth.
+  HIT a/textile r2r-town-38 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/court r2r-town-38 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/tannery r2r-town-40 Systems/Services [INSTITUTION_SERVICES.Offal and by-products] NEW: By-products sold to chandlers and tanners.
+  HIT a/alchemical r2r-town-41 Systems/Economics [INSTITUTION_FINISHED_GOODS_DEMAND.importLabels] NEW: Alchemical reagents and scribal suppliesCacao in bulkGemstones (local gem deposits exhausted)GrainIncense, ritual oil, and vestment materialsIronQuetzal feathers and jadeSaltFine glass sandFine glass 
+  HIT a/textile r2r-town-43 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/fishing r2r-town-43 Systems/Institutions [PAIRS] NEW: Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/court r2r-town-46 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/tannery r2r-town-47 Systems/Services [INSTITUTION_SERVICES.Offal and by-products] NEW: By-products sold to chandlers and tanners.
+  HIT a/garrison r2r-town-50 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates.
+  HIT a/garrison r2r-town-50 Systems/Services [INSTITUTION_SERVICES.Mercenary hire] NEW: Hire trained soldiers for military campaigns, garrison duty, and escorts.
+  HIT a/court r2r-town-51 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/tannery r2r-town-53 Systems/Services [INSTITUTION_SERVICES.Offal and by-products] NEW: By-products sold to chandlers and tanners.
+  HIT a/tannery r2r-town-54 Systems/Services [INSTITUTION_SERVICES.Offal and by-products] NEW: By-products sold to chandlers and tanners.
+  HIT a/court r2r-town-54 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/textile r2r-town-55 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/court r2r-town-55 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/alchemical r2r-town-55 Systems/Economics [INSTITUTION_FINISHED_GOODS_DEMAND.importLabels] NEW: Alchemical reagents and scribal suppliesHerbs and forage (local gathering areas exhausted)Incense and votive candlesIron ore (local iron mines exhausted)Replacement arms and basic equipmentSaltShield-
+  HIT a/textile r2r-town-56 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409: Several mills, some for grain, some for fulling cloth.
+  HIT a/textile r2r-town-57 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409~: A handful of mills, grinding grain and fulling cloth.
+  HIT a/textile r2r-town-59 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/alchemical r2r-city-0 Systems/Economics [INSTITUTION_FINISHED_GOODS_DEMAND.importLabels] NEW: Alchemical reagents and scribal suppliesAmber and beeswaxCapitalClay and raw materialsFlax and linen clothGemstones (local gem deposits exhausted)Incense and votive candlesLuxury textiles and exotic g
+  HIT d/doubled-word r2r-city-4 Systems/Economics [INSTITUTION_FINISHED_GOODS_DEMAND.importLabels] NEW: Alchemical reagents and scribal suppliesCoal and fuel (local seams exhausted)Game and hides (local hunting grounds exhausted)GrainIncense, ritual oil, and vestment materialsLuxury materialsLuxury text
+  HIT a/cathedral r2r-city-7 World/History [HISTORY_DESC_SIBLINGS] NEW: Walls, civic buildings, or a cathedral raised from local quarry stone.
+  HIT a/alchemical r2r-city-20 Systems/Economics [INSTITUTION_FINISHED_GOODS_DEMAND.importLabels] NEW: Alchemical reagents and scribal suppliesBulk grain and flourCopal resin incenseGrainIncense, ritual oil, and vestment materialsIronJade and turquoise for ritualLuxury textiles and exotic goodsMedicina
+  HIT a/fishing r2r-city-31 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/textile r2r-city-34 Systems/Institutions [PAIRS] NEW: Mills for grain, fulling, and sawing line every usable stream, many licensed by guild or city.
+  HIT a/textile r2r-city-44 Systems/Institutions [PAIRS] NEW: Every workable watercourse turns a grain, fulling, or saw mill, most under a guild's or the city's licence.
+  HIT a/tannery r2r-city-44 Systems/Services [INSTITUTION_SERVICES.Offal and by-products] NEW: By-products sold to chandlers and tanners.
+  HIT a/cathedral r2r-city-44 World/History [HISTORY_DESC_SIBLINGS] NEW: Walls, civic buildings, or a cathedral raised from local quarry stone.
+  HIT a/quarry r2r-city-44 World/History [HISTORY_DESC_SIBLINGS] NEW: Walls, civic buildings, or a cathedral raised from local quarry stone.
+  HIT a/textile r2r-city-46 Systems/Institutions [PAIRS] NEW: Every workable watercourse turns a grain, fulling, or saw mill, most under a guild's or the city's licence.
+  HIT a/alchemical r2r-city-46 Systems/Economics [INSTITUTION_FINISHED_GOODS_DEMAND.importLabels] NEW: Alchemical reagents and scribal suppliesBulk grain and flourCoal and fuel (local seams exhausted)Composite bow materialsFelt and leather goodsGrainIncense, ritual oil, and vestment materialsIronLuxury
+  HIT a/tannery r2r-city-49 Systems/Services [INSTITUTION_SERVICES.Offal and by-products] NEW: By-products sold to chandlers and tanners.
+  HIT a/tannery r2r-city-50 Systems/Services [INSTITUTION_SERVICES.Offal and by-products] NEW: By-products sold to chandlers and tanners.
+  HIT a/tannery r2r-city-51 Systems/Services [INSTITUTION_SERVICES.Offal and by-products] NEW: By-products sold to chandlers and tanners.
+  HIT a/ships r2r-city-55 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Essential for ships, construction, and agriculture.
+  HIT a/ships r2r-metropolis-6 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Essential for ships, construction, and agriculture.
+  HIT a/ships r2r-metropolis-11 Systems/Institutions [PAIRS] NEW: Commercial brewing of ale and beer supplies the taverns and ships across the region, employing many and consuming grain in bulk.
+  HIT a/ships r2r-metropolis-11 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Essential for ships, construction, and agriculture.
+  HIT b/siege:brought-in r2r-metropolis-14 Systems/Institutions [PAIRS] NEW: Makes and ages wine, whether from grapes grown near or must brought in.
+  HIT b/siege:road-open r2r-metropolis-14 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#412: Purpose-built for road travellers: stabling for relay horses, scheduled coach departures, meals served at fixed hours, and a passenger waiting room.
+  HIT b/siege:road-open r2r-metropolis-14 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: Keeps relay horses at the coaching inn for fast message riders.
+  HIT a/clergy r2s-under_siege-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT b/siege:brought-in r2s-under_siege-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT b/siege:market-day r2s-under_siege-thorp-0 Systems/Services [INSTITUTION_SERVICES.Fresh fish retail] ww#124: Fish sold daily from the morning catch.
+  HIT a/church r2s-under_siege-thorp-0 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-under_siege-thorp-0 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-under_siege-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/church r2s-under_siege-thorp-1 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-under_siege-thorp-1 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-under_siege-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2s-under_siege-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT b/siege:market-day r2s-under_siege-thorp-3 Systems/Services [INSTITUTION_SERVICES.Fresh fish retail] ww#124: Fish sold daily from the morning catch.
+  HIT b/siege:arrivals r2s-under_siege-hamlet-3 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A common stable for travellers to lodge their mounts; the stableman sees to basic shoeing and feed.
+  HIT a/church r2s-under_siege-hamlet-3 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-under_siege-hamlet-3 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT b/siege:arrivals r2s-under_siege-village-0 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: The village's one inn for the traders, pilgrims, and wayfarers who pass.
+  HIT b/siege:trade-list r2s-under_siege-village-1 Systems/Economics [INSTITUTION_FINISHED_GOODS_DEMAND.importLabels] NEW: Cordage, canvas, and vessel-maintenance suppliesGold and silver torcsGrainIncense and votive candlesIron (weapons)SaltLuxury goods
+  HIT a/quarry r2s-under_siege-village-1 World/History [HISTORY_DESC_SIBLINGS] NEW: A period of ambitious stone building transformed the settlement's character, its larger houses raised from local quarry stone.
+  HIT b/siege:trade-list r2s-under_siege-village-3 Systems/Economics [INSTITUTION_FINISHED_GOODS_DEMAND.importLabels] NEW: Cordage, canvas, and vessel-maintenance suppliesGrainIncense and votive candlesIron (weapons)Quetzal feathers and jadeReplacement arms and basic equipmentSaltSalt pansLuxury goodsMetalsStoneTimber
+  HIT b/siege:market-day r2s-under_siege-town-0 Systems/Services [INSTITUTION_SERVICES.Weekly market] NEW: Regular market days with produce, goods, and livestock.
+  HIT b/siege:market-day r2s-under_siege-town-0 Systems/Services [INSTITUTION_SERVICES.Fresh fish retail] ww#124: Fish sold daily from the morning catch.
+  HIT a/court r2s-under_siege-town-0 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT b/siege:trade-list r2s-under_siege-town-0 Systems/Economics [QUALITY_TOOLS_AND_WEAPONS] NEW: Quality tools and weaponsPilgrimage & religious tourism
+  HIT b/siege:trade-list r2s-under_siege-town-0 Systems/Economics [INSTITUTION_FINISHED_GOODS_DEMAND.importLabels] NEW: Coal and fuel (local seams exhausted)Game and hides (local hunting grounds exhausted)GrainIncense, ritual oil, sacred texts, and vestment cloth (bulk)Iron (weapons)Mead and ritual ale ingredientsPrese
+  HIT b/siege:arrivals r2s-under_siege-town-1 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: Adventurers, merchants, and army scouts all stop here.
+  HIT b/siege:arrivals r2s-under_siege-town-1 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: Where caravans come, it is the desert settlement's economic heart.
+  HIT b/siege:road-open r2s-under_siege-town-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#412: Purpose-built for road travellers: stabling for relay horses, scheduled coach departures, meals served at fixed hours, and a passenger waiting room.
+  HIT b/siege:market-day r2s-under_siege-town-1 Systems/Services [INSTITUTION_SERVICES.Weekly market] NEW: Regular market days with produce, goods, and livestock.
+  HIT a/textile r2s-under_siege-town-2 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT b/siege:market-day r2s-under_siege-town-2 Systems/Services [INSTITUTION_SERVICES.Weekly market] NEW: Regular market days with produce, goods, and livestock.
+  HIT b/siege:market-day r2s-under_siege-town-3 Systems/Services [INSTITUTION_SERVICES.Weekly market] NEW: Regular market days with produce, goods, and livestock.
+  HIT b/siege:brought-in r2s-under_siege-city-0 Systems/Institutions [PAIRS] NEW: Makes and ages wine, whether from grapes grown near or must brought in.
+  HIT b/siege:market-day r2s-under_siege-city-0 Systems/Services [INSTITUTION_SERVICES.Fresh fish retail] ww#124: Fish sold daily from the morning catch.
+  HIT b/siege:trade-list r2s-under_siege-city-1 Systems/Economics [INSTITUTION_FINISHED_GOODS_DEMAND.importLabels] NEW: Advanced weapons and armour (bulk contract)Coal and fuel (local seams exhausted)GrainIncense, ritual oil, and vestment materialsIronLorica segmentata fittingsLuxury textiles and exotic goodsRaw furs a
+  HIT b/siege:brought-in r2s-under_siege-city-2 Systems/Institutions [PAIRS] NEW: Makes and ages wine, whether from grapes grown near or must brought in.
+  HIT b/siege:brought-in r2s-under_siege-city-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: Covered stalls under the wardens' eye, selling salt fish and dried fish carted in by the barrel, each checked for rot.
+  HIT b/siege:arrivals r2s-under_siege-city-3 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: Several inn districts, given over to merchants, travellers, and those who stay long.
+  HIT b/siege:road-open r2s-under_siege-metropolis-0 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: Keeps relay horses at the coaching inn for fast message riders.
+  HIT b/siege:brought-in r2s-under_siege-metropolis-1 Systems/Institutions [PAIRS] NEW: Makes and ages wine, whether from grapes grown near or must brought in.
+  HIT b/siege:trade-flows r2s-under_siege-metropolis-1 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: The trade runs high, quality pelts being luxuries.
+  HIT b/siege:market-day r2s-under_siege-metropolis-1 Systems/Services [INSTITUTION_SERVICES.Fresh fish retail] ww#124: Fish sold daily from the morning catch.
+  HIT b/siege:arrivals r2s-under_siege-metropolis-2 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: Several inn districts, given over to merchants, travellers, and those who stay long.
+  HIT b/siege:brought-in r2s-under_siege-metropolis-3 Systems/Institutions [PAIRS] NEW: Makes and ages wine, whether from grapes grown near or must brought in.
+  HIT b/siege:road-open r2s-under_siege-metropolis-3 Systems/Institutions [INSTITUTION_FAMILIES.shared] cut#412: Purpose-built for road travellers: stabling for relay horses, scheduled coach departures, meals served at fixed hours, and a passenger waiting room.
+  HIT b/siege:trade-flows r2s-under_siege-metropolis-3 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: The trade runs high, quality pelts being luxuries.
+  HIT b/siege:arrivals r2s-under_siege-metropolis-3 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: Several inn districts, given over to merchants, travellers, and those who stay long.
+  HIT b/siege:market-day r2s-under_siege-metropolis-3 Systems/Services [INSTITUTION_SERVICES.Fresh fish retail] ww#124: Fish sold daily from the morning catch.
+  HIT a/clergy r2s-famine-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2s-famine-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2s-famine-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2s-famine-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/church r2s-famine-hamlet-3 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-famine-hamlet-3 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/merchants r2s-famine-village-3 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A lone inn catering to whoever the road brings: merchants, pilgrims, travellers.
+  HIT a/textile r2s-famine-town-2 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409: Several mills, some for grain, some for fulling cloth.
+  HIT a/fishing r2s-famine-town-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats.
+  HIT a/textile r2s-famine-city-0 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Grain, fulling, and saw mills along every usable watercourse, many under guild or civic licence.
+  HIT a/clergy r2s-occupied-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2s-occupied-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/church r2s-occupied-thorp-1 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-occupied-thorp-1 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-occupied-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2s-occupied-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/church r2s-occupied-hamlet-1 Systems/Services [INSTITUTION_SERVICES.Tithe and dues] NEW: Collects the lord's dues and the temple tithe
+  HIT a/workshops r2s-occupied-hamlet-3 Summary/Overview [ARRIVAL_PEOPLE.germanic] cut#202: A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud.
+  HIT a/court r2s-occupied-town-1 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/court r2s-occupied-town-2 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/textile r2s-occupied-town-3 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409: Several mills, some for grain, some for fulling cloth.
+  HIT a/fishing r2s-occupied-town-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/cathedral r2s-occupied-town-3 World/History [HISTORY_DESC_SIBLINGS] NEW: Walls, civic buildings, or a cathedral raised from local quarry stone.
+  HIT a/quarry r2s-occupied-town-3 World/History [HISTORY_DESC_SIBLINGS] NEW: Walls, civic buildings, or a cathedral raised from local quarry stone.
+  HIT a/clergy r2s-politically_fractured-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/church r2s-politically_fractured-thorp-0 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-politically_fractured-thorp-0 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-politically_fractured-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT c/dense r2s-politically_fractured-thorp-1 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/clergy r2s-politically_fractured-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2s-politically_fractured-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/church r2s-politically_fractured-thorp-3 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-politically_fractured-thorp-3 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/church r2s-politically_fractured-hamlet-0 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-politically_fractured-hamlet-0 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/court r2s-politically_fractured-town-0 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/textile r2s-politically_fractured-town-3 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409: Several mills, some for grain, some for fulling cloth.
+  HIT a/court r2s-politically_fractured-town-3 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/ships r2s-politically_fractured-city-3 Systems/Institutions [PAIRS] NEW: Commercial brewing of ale and beer supplies the taverns and ships across the region, employing many and consuming grain in bulk.
+  HIT a/cathedral r2s-politically_fractured-metropolis-0 World/History [HISTORY_DESC_SIBLINGS] NEW: Walls, civic buildings, or a cathedral raised from local quarry stone.
+  HIT a/clergy r2s-indebted-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2s-indebted-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2s-indebted-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/church r2s-indebted-thorp-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-indebted-thorp-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-indebted-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/garrison r2s-indebted-town-0 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: Caravan escort, garrison work, and short-term hire go at day-wages here.
+  HIT a/garrison r2s-indebted-town-0 Systems/Services [INSTITUTION_SERVICES.Mercenary hire] NEW: Hire trained soldiers for military campaigns, garrison duty, and escorts.
+  HIT a/textile r2s-indebted-town-2 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/court r2s-indebted-town-2 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/smithy r2s-indebted-city-1 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new mount.
+  HIT a/clergy r2s-recently_betrayed-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2s-recently_betrayed-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2s-recently_betrayed-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/church r2s-recently_betrayed-thorp-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-recently_betrayed-thorp-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT c/dense r2s-recently_betrayed-thorp-2 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/clergy r2s-recently_betrayed-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/church r2s-recently_betrayed-hamlet-0 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-recently_betrayed-hamlet-0 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/church r2s-recently_betrayed-hamlet-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-recently_betrayed-hamlet-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/reeve r2s-recently_betrayed-village-2 Systems/Institutions [PAIRS] NEW: Less official than a reeve, more stable than nothing.
+  HIT a/sawmill r2s-recently_betrayed-town-3 Summary/Overview [HISTORICAL_EVENTS_DATA.severity] NEW: An uncontrolled surge of magic left its mark on the lumber yards and sawmill district and on the people who were there, and the effects have never fully faded
+  HIT a/textile r2s-recently_betrayed-town-3 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/sawmill r2s-recently_betrayed-town-3 World/History [HISTORICAL_EVENTS_DATA.severity] NEW: An uncontrolled surge of magic left its mark on the lumber yards and sawmill district and on the people who were there, and the effects have never fully faded
+  HIT a/textile r2s-recently_betrayed-city-0 Systems/Institutions [PAIRS] NEW: Mills for grain, fulling, and sawing line every usable stream, many licensed by guild or city.
+  HIT a/alchemical r2s-recently_betrayed-city-0 Systems/Economics [INSTITUTION_FINISHED_GOODS_DEMAND.importLabels] NEW: Alchemical reagents and scribal suppliesBulk grain and flourCarved bone and antlerCharcoal and fuelGrainIncense, ritual oil, and vestment materialsIronLuxury textiles and exotic goodsMead and ritual a
+  HIT a/clergy r2s-infiltrated-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2s-infiltrated-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2s-infiltrated-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2s-infiltrated-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/reeve r2s-infiltrated-village-2 Systems/Institutions [PAIRS] NEW: Less official than a reeve, more stable than nothing.
+  HIT a/court r2s-infiltrated-town-0 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/court r2s-infiltrated-town-1 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/textile r2s-infiltrated-town-2 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/textile r2s-infiltrated-town-3 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409: Several mills, some for grain, some for fulling cloth.
+  HIT a/smithy r2s-infiltrated-town-3 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new mount.
+  HIT a/court r2s-infiltrated-town-3 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/docks r2s-infiltrated-metropolis-3 Summary/Overview [HISTORICAL_EVENTS_DATA.severity] NEW: An uncontrolled surge of magic left its mark on the riverside wharves and on the people who were there, and the effects have never fully faded
+  HIT a/docks r2s-infiltrated-metropolis-3 World/History [HISTORICAL_EVENTS_DATA.severity] NEW: An uncontrolled surge of magic left its mark on the riverside wharves and on the people who were there, and the effects have never fully faded
+  HIT a/clergy r2s-plague_onset-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2s-plague_onset-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2s-plague_onset-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2s-plague_onset-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/church r2s-plague_onset-hamlet-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-plague_onset-hamlet-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT c/dense r2s-plague_onset-hamlet-3 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/textile r2s-plague_onset-town-0 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409~: A handful of mills, grinding grain and fulling cloth.
+  HIT a/garrison r2s-plague_onset-town-0 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates.
+  HIT a/garrison r2s-plague_onset-town-0 Systems/Services [INSTITUTION_SERVICES.Mercenary hire] NEW: Hire trained soldiers for military campaigns, garrison duty, and escorts.
+  HIT a/textile r2s-plague_onset-town-1 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/sawmill r2s-plague_onset-town-2 Summary/Overview [HISTORICAL_EVENTS_DATA.severity] NEW: An uncontrolled surge of magic left its mark on the lumber yards and sawmill district and on the people who were there, and the effects have never fully faded
+  HIT a/textile r2s-plague_onset-town-2 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409: Several mills, some for grain, some for fulling cloth.
+  HIT a/garrison r2s-plague_onset-town-2 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: Caravan escort, garrison work, and short-term hire go at day-wages here.
+  HIT a/garrison r2s-plague_onset-town-2 Systems/Services [INSTITUTION_SERVICES.Mercenary hire] NEW: Hire trained soldiers for military campaigns, garrison duty, and escorts.
+  HIT a/sawmill r2s-plague_onset-town-2 World/History [HISTORICAL_EVENTS_DATA.severity] NEW: An uncontrolled surge of magic left its mark on the lumber yards and sawmill district and on the people who were there, and the effects have never fully faded
+  HIT a/textile r2s-plague_onset-town-3 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409~: A handful of mills, grinding grain and fulling cloth.
+  HIT a/quarry r2s-plague_onset-city-1 World/History [HISTORY_DESC_SIBLINGS] NEW: Walls, civic buildings, or a cathedral raised from local quarry stone.
+  HIT a/smithy r2s-plague_onset-city-2 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new mount.
+  HIT a/alchemical r2s-plague_onset-city-3 Systems/Economics [INSTITUTION_FINISHED_GOODS_DEMAND.importLabels] NEW: Alchemical reagents and scribal suppliesCharcoal and fuelCopal resin incenseIncense, ritual oil, sacred texts, and vestment cloth (bulk)Iron ore (local iron mines exhausted)Luxury textiles and exotic 
+  HIT a/clergy r2s-succession_void-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2s-succession_void-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2s-succession_void-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT c/dense r2s-succession_void-thorp-2 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/clergy r2s-succession_void-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/church r2s-succession_void-hamlet-1 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-succession_void-hamlet-1 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/workshops r2s-succession_void-hamlet-2 Summary/Overview [ARRIVAL_PEOPLE.germanic] cut#202: A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud.
+  HIT a/merchants r2s-succession_void-village-1 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A lone inn catering to whoever the road brings: merchants, pilgrims, travellers.
+  HIT a/textile r2s-succession_void-town-0 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/textile r2s-succession_void-town-2 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409~: A handful of mills, grinding grain and fulling cloth.
+  HIT a/textile r2s-succession_void-town-3 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/clergy r2s-monster_pressure-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2s-monster_pressure-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2s-monster_pressure-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2s-monster_pressure-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT c/dense r2s-monster_pressure-thorp-3 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT c/urban r2s-monster_pressure-village-2 Systems/Institutions [INSTITUTION_FAMILIES.village] NEW: Some circles tend city gardens or hidden urban groves.
+  HIT a/quarry r2s-monster_pressure-village-3 World/History [HISTORY_DESC_SIBLINGS] NEW: A period of ambitious stone building transformed the settlement's character, its larger houses raised from local quarry stone.
+  HIT a/court r2s-monster_pressure-town-1 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/textile r2s-monster_pressure-town-2 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/garrison r2s-monster_pressure-town-2 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates.
+  HIT a/garrison r2s-monster_pressure-town-2 Systems/Services [INSTITUTION_SERVICES.Mercenary hire] NEW: Hire trained soldiers for military campaigns, garrison duty, and escorts.
+  HIT a/garrison r2s-monster_pressure-town-3 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: They hire out by the day for escort, garrison duty, and brief campaigns: less costly than keeping an army, more dependable than a rabble.
+  HIT a/garrison r2s-monster_pressure-town-3 Systems/Services [INSTITUTION_SERVICES.Mercenary hire] NEW: Hire trained soldiers for military campaigns, garrison duty, and escorts.
+  HIT a/tannery r2s-monster_pressure-city-2 Systems/Services [INSTITUTION_SERVICES.Offal and by-products] NEW: By-products sold to chandlers and tanners.
+  HIT a/clergy r2s-insurgency-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/church r2s-insurgency-thorp-0 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-insurgency-thorp-0 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-insurgency-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2s-insurgency-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT c/dense r2s-insurgency-thorp-2 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/clergy r2s-insurgency-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/church r2s-insurgency-hamlet-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-insurgency-hamlet-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/reeve r2s-insurgency-village-3 Systems/Institutions [PAIRS] NEW: Less official than a reeve, but better than no one at all.
+  HIT a/court r2s-insurgency-town-0 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/textile r2s-insurgency-town-1 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409~: A handful of mills, grinding grain and fulling cloth.
+  HIT a/textile r2s-insurgency-town-3 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409~: A handful of mills, grinding grain and fulling cloth.
+  HIT a/textile r2s-insurgency-city-2 Systems/Institutions [PAIRS] NEW: Mills for grain, fulling, and sawing line every usable stream, many licensed by guild or city.
+  HIT a/tannery r2s-insurgency-city-3 Systems/Services [INSTITUTION_SERVICES.Offal and by-products] NEW: By-products sold to chandlers and tanners.
+  HIT a/clergy r2s-religious_conversion-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT c/dense r2s-religious_conversion-thorp-0 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/clergy r2s-religious_conversion-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2s-religious_conversion-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2s-religious_conversion-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/church r2s-religious_conversion-hamlet-1 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-religious_conversion-hamlet-1 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/fishing r2s-religious_conversion-town-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: Builds and repairs flat-bottomed craft for shallow water: punts, ferries, fishing boats.
+  HIT a/textile r2s-religious_conversion-town-1 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409~: A handful of mills, grinding grain and fulling cloth.
+  HIT a/fishing r2s-religious_conversion-town-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/court r2s-religious_conversion-town-1 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/textile r2s-religious_conversion-town-2 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/garrison r2s-religious_conversion-town-2 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: They hire out by the day for escort, garrison duty, and brief campaigns: less costly than keeping an army, more dependable than a rabble.
+  HIT a/garrison r2s-religious_conversion-town-2 Systems/Services [INSTITUTION_SERVICES.Mercenary hire] NEW: Hire trained soldiers for military campaigns, garrison duty, and escorts.
+  HIT a/textile r2s-religious_conversion-town-3 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/textile r2s-religious_conversion-city-1 Systems/Institutions [PAIRS] NEW: Mills for grain, fulling, and sawing line every usable stream, many licensed by guild or city.
+  HIT a/cathedral r2s-religious_conversion-metropolis-1 World/History [HISTORY_DESC_SIBLINGS] NEW: Walls, civic buildings, or a cathedral raised from local quarry stone.
+  HIT a/clergy r2s-slave_revolt-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2s-slave_revolt-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/church r2s-slave_revolt-thorp-1 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-slave_revolt-thorp-1 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-slave_revolt-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2s-slave_revolt-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/walls r2s-slave_revolt-hamlet-1 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#160~: Behind its walls, merchants shelter their animals and cargo overnight in security.
+  HIT a/guild r2s-slave_revolt-hamlet-1 World/History [HISTORY_DESC_SIBLINGS] NEW: After years of disputed grain prices, the major farming families and the guilds negotiated a formal compact regulating grain sale and storage.
+  HIT a/customs r2s-slave_revolt-hamlet-2 Systems/Institutions [PAIRS] NEW: Contraband moves through here, skirting the tolls and the customs checks.
+  HIT c/urban r2s-slave_revolt-village-0 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A few keep city gardens or concealed urban groves.
+  HIT a/quarry r2s-slave_revolt-village-1 World/History [HISTORY_DESC_SIBLINGS] NEW: A period of ambitious stone building transformed the settlement's character, its larger houses raised from local quarry stone.
+  HIT a/garrison r2s-slave_revolt-town-0 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: They hire out by the day for escort, garrison duty, and brief campaigns: less costly than keeping an army, more dependable than a rabble.
+  HIT a/garrison r2s-slave_revolt-town-0 Systems/Services [INSTITUTION_SERVICES.Mercenary hire] NEW: Hire trained soldiers for military campaigns, garrison duty, and escorts.
+  HIT a/textile r2s-slave_revolt-town-1 Systems/Institutions [INSTITUTION_FAMILIES.town] NEW: Multiple mills for grain, fulling cloth.
+  HIT a/fishing r2s-slave_revolt-town-1 Systems/Institutions [PAIRS] NEW: Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/smithy r2s-slave_revolt-town-2 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: A district given to stables, horse-trade, and the farrier's craft, for any merchant, soldier, or traveller needing a new mount.
+  HIT a/fishing r2s-slave_revolt-city-1 Systems/Institutions [PAIRS] NEW: Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/clergy r2s-wartime-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/church r2s-wartime-thorp-0 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-wartime-thorp-0 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-wartime-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2s-wartime-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: The rites wait for a priest when one can be fetched in time, and the neighbours say them when not; the weathered markers are kept clear regardless.
+  HIT a/clergy r2s-wartime-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/church r2s-wartime-hamlet-1 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-wartime-hamlet-1 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/church r2s-wartime-hamlet-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT a/clergy r2s-wartime-hamlet-2 Systems/Services [INSTITUTION_SERVICES.Last rites] NEW: Funeral rites, said by the parish priest, who comes or is sent for.
+  HIT c/dense r2s-wartime-hamlet-2 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/textile r2s-wartime-town-1 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] cut#409: Several mills, some for grain, some for fulling cloth.
+  HIT a/court r2s-wartime-town-2 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.
+  HIT a/fishing r2s-wartime-town-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/textile r2s-wartime-city-1 Systems/Institutions [INSTITUTION_FAMILIES.shared] NEW: Grain, fulling, and saw mills along every usable watercourse, many under guild or civic licence.
+  HIT a/alchemical r2s-wartime-city-1 Systems/Economics [INSTITUTION_FINISHED_GOODS_DEMAND.importLabels] NEW: Advanced weapons and armour (bulk contract)Alchemical reagents and scribal suppliesCordage, tar, timber fittings, and bulk vessel suppliesFelt and leather goodsGrainIncense, ritual oil, and vestment m
+  HIT a/fishing r2s-wartime-city-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: Builds and repairs flat-bottomed river craft: barges, punts, ferries, fishing boats.
+  HIT a/cathedral r2s-wartime-city-3 World/History [HISTORY_DESC_SIBLINGS] NEW: Walls, civic buildings, or a cathedral raised from local quarry stone.
+  HIT a/clergy r2s-mass_migration-thorp-0 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2s-mass_migration-thorp-1 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT a/clergy r2s-mass_migration-thorp-2 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest speaks when one can be fetched in time; otherwise the words fall to whoever knew the dead best.
+  HIT a/clergy r2s-mass_migration-thorp-3 Systems/Institutions [DESC_VARIANT_SIBLINGS] NEW: A priest says the words when one can be brought in time; when one cannot, whoever knew the dead best says them.
+  HIT c/dense r2s-mass_migration-hamlet-3 Systems/Economics [CULTURE_PROFILES.foodways] cut#173: Intensive plots, terraces, raised fields, and tribute redistribution support dense populations.
+  HIT a/healer r2s-mass_migration-town-0 Systems/Institutions [DESC_VARIANT_COLOUR_DECLARATIONS] NEW: Sometimes runs a hospital or school.
+  HIT a/court r2s-mass_migration-town-3 Systems/Services [INSTITUTION_SERVICES.Dispute arbitration] NEW: Bring commercial and civil disputes before a magistrate.

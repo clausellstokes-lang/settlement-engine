@@ -21,6 +21,7 @@
 
 import { liveSieges, liveTradeWars } from './warStatus.js';
 import { deityNameFromSnapshots } from './deityNames.js';
+import { ascendancyArc, twilightArc, siegeArc, tradeWarArc } from './realmArcSentences.js';
 
 /** @param {any} a @param {any} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
@@ -101,10 +102,10 @@ export function realmArcLines({ worldState, regionalGraph, settlements = [] } = 
   // Sort the ascendant majors by seats (most-followed first), codepoint tie-break.
   majors.sort((a, b) => (b.seats - a.seats) || codepoint(a.deityId, b.deityId));
   for (const major of majors) {
-    lines.push(`The Ascendancy of ${deityName(items, major.deityId)} (${major.seats} settlement${major.seats === 1 ? ' holds' : 's hold'} the faith).`);
+    lines.push(ascendancyArc(deityName(items, major.deityId), major.seats));
   }
   for (const cult of cults) {
-    lines.push(`The Twilight of ${deityName(items, cult.deityId)} (its altars stand abandoned).`);
+    lines.push(twilightArc(deityName(items, cult.deityId)));
   }
 
   // ── War arcs: a named war for each live siege coalition. ───────────────────
@@ -114,15 +115,7 @@ export function realmArcLines({ worldState, regionalGraph, settlements = [] } = 
   const sieges = liveSieges({ worldState, regionalGraph });
   for (const siege of sieges) {
     if (siege.visibility && siege.visibility !== 'public') continue;
-    const targetName = nameFor(nameById, siege.targetId);
-    if (siege.coalition.length >= 2) {
-      const attackers = siege.coalition.map(id => nameFor(nameById, id));
-      const named = attackers.length > 2 ? `${attackers.slice(0, 2).join(', ')} +${attackers.length - 2}` : attackers.join(' and ');
-      lines.push(`The War of ${targetName}, where a coalition of ${named} besiege the walls.`);
-    } else {
-      const attacker = nameFor(nameById, siege.coalition[0] || '');
-      lines.push(`The War of ${targetName}, where ${attacker} lays siege.`);
-    }
+    lines.push(siegeArc(nameFor(nameById, siege.targetId), siege.coalition.map(id => nameFor(nameById, id))));
   }
 
   // ── Trade-war arcs: a named contest for each flipped commodity prize. ──────
@@ -130,7 +123,7 @@ export function realmArcLines({ worldState, regionalGraph, settlements = [] } = 
   for (const war of tradeWars) {
     const buyerName = nameFor(nameById, war.buyerId);
     const winnerName = nameFor(nameById, war.winnerId);
-    lines.push(`The ${war.commodityLabel} Trade War, where ${winnerName} seizes ${buyerName}'s market.`);
+    lines.push(tradeWarArc(war.commodityLabel, winnerName, buyerName));
   }
 
   return lines.slice(0, MAX_ARCS);

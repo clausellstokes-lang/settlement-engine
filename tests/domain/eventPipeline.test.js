@@ -218,7 +218,8 @@ describe('EXPOSE_CORRUPTION authored effects match the mutation', () => {
       ],
       powerStructure: { factions: [{ id: 'f.watch', name: 'City Watch', controlsInstitutionIds: ['i.watch'] }] },
       npcs: [
-        { id: 'npc_vex', name: 'Captain Vex', corrupt: true, corruptionVector: 'greed', corruptTies: { criminalInstitution: "Thieves' Guild" }, factionAffiliation: 'City Watch' },
+        // ALLEGIANCE-CAR1 (2026-11-08): the retired `corrupt` mark is the card's hidden `allegiance` (allegianceOf)
+        { id: 'npc_vex', name: 'Captain Vex', allegiance: { power: null, house: "Thieves' Guild", vector: 'greed', via: 'retainer', handler: null, share: 0.15, veiled: true, covert: true }, factionAffiliation: 'City Watch' },
         { id: 'npc_mira', name: 'Honest Mira', corrupt: false },
       ],
       activeConditions: [],

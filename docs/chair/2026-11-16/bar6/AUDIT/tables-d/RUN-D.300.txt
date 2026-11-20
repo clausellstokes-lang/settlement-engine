@@ -1,0 +1,27 @@
+[gate-tail] start:  19:51:39 up  1:01,  0 user,  load average: 0.70, 1.36, 1.76 · cores: 4
+LAW 8 over 300 towns: towns 110 · instances 668 · distinct lines 99 · things 316 · on a LAW 2/3 line 29
+LAW 2/3 rules of this shape (held by the round in flight), for the union: towns 67 · instances 170 · of them on a LAW 8 line 26
+    L2.famine.meat         towns    4 · instances     8
+    L2.siege.abroad        towns   28 · instances    55
+    L2.siege.cutgood       towns    5 · instances    17
+    L2.war.animals         towns    1 · instances     2
+    L2.war.iron            towns   10 · instances    25
+    L3.chainOverStopped    towns    7 · instances     7
+    L3.failedFood          towns   22 · instances    24
+    L3.foodLineStopped     towns    1 · instances     1
+    L3.needed              towns   10 · instances    10
+    L3.outputs             towns   17 · instances    21
+  8a.input     towns   84 · instances   412 · distinct lines   55 · things  159 · on a LAW 2/3 line 22
+  8a.mild      towns   21 · instances    95 · distinct lines   27 · things   29 · on a LAW 2/3 line 7
+  8b.person    towns   48 · instances    57 · distinct lines    9 · things   57 · on a LAW 2/3 line 0
+  8c.failed    towns    1 · instances     1 · distinct lines    1 · things    1 · on a LAW 2/3 line 0
+  8c.harvest   towns    2 · instances     4 · distinct lines    2 · things    2 · on a LAW 2/3 line 0
+  8d.export    towns   26 · instances    67 · distinct lines    7 · things   67 · on a LAW 2/3 line 0
+  8d.income    towns    1 · instances     1 · distinct lines    1 · things    1 · on a LAW 2/3 line 0
+  8d.transport towns    1 · instances     2 · distinct lines    2 · things    1 · on a LAW 2/3 line 0
+  8e.crime     towns   18 · instances    18 · distinct lines    1 · things   18 · on a LAW 2/3 line 0
+  8e.outlook   towns    3 · instances     3 · distinct lines    1 · things    3 · on a LAW 2/3 line 0
+  8e.svcOutput towns    8 · instances     8 · distinct lines    1 · things    8 · on a LAW 2/3 line 0
+[gate-tail] end:  19:51:42 up  1:01,  0 user,  load average: 0.80, 1.37, 1.76
+[gate-tail] full log: <log>
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

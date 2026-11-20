@@ -44,7 +44,7 @@ const record = (/** @type {Record<string, unknown>} */ over = {}) => ({
   ...over,
 });
 
-const deadMagic = { name: 'Kelby', config: { magicExists: false, magicLevel: 'none' }, institutions: [], factions: [] };
+const deadMagic = { name: 'Kelby', config: { magicExists: false, magicLevel: 'none' }, institutions: [], powerStructure: { factions: [] } }; // re-keyed with magicRealm below (lane 5A: the powers only)
 // Lane MAGIC (chair ruling 2, 2026-11-03): 'integral' needs a practitioner AND a dependent on
 // the record, never the band alone, so the top-band fixture carries the magic chains its practitioners run.
 /** A living-magic realm whose ARCANE faction power decides the military role band. */
@@ -52,7 +52,9 @@ const magicRealm = (/** @type {number} */ arcanePower) => ({
   name: 'Kelby',
   config: { magicExists: true, magicLevel: 'high' },
   institutions: [{ name: "Wizard's tower" }, { name: 'Arcane academy' }],
-  factions: [{ name: "Mages' Guild", power: arcanePower }],
+  // Re-keyed settlement.factions -> powerStructure.factions (PEOPLE-LAND cure, 2026-11-07): lane 5A (053283dfd)
+  // deleted the NPC grouping's fallback from factionProfile.js :: deriveAllFactionProfiles; the powers decide the band.
+  powerStructure: { factions: [{ name: "Mages' Guild", power: arcanePower }] },
   economicState: { activeChains: [{ chainId: 'spellcasting', label: 'Spellcasting Services' }, { chainId: 'magical_goods', label: 'Magical Items & Enchanting' }] },
 });
 

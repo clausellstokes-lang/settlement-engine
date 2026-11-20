@@ -138,8 +138,8 @@ const RULED = Object.freeze({
     'card — a ForceCard; a chartered company carries its terms under its name.',
   'src/components/new/tabs/DefenseTab.jsx :: magicDef':
     'card — a ForceCard for an arcane defence, with the same inside as its siblings.',
-  'src/components/new/tabs/NPCsTab.jsx :: presentFactions':
-    'card — an NPCCategoryGroup is a whole faction\'s roster, not a row.',
+  'src/components/new/tabs/NPCsTab.jsx :: groups':
+    'card — an NPCCategoryGroup is a whole power\'s roster (its first-rank faces; PEOPLE-5A re-keyed the subject), not a row.',
   'src/components/new/tabs/RelationshipsTab.jsx :: neighbours':
     'card — a NeighbourLinkCard is a whole neighbour standing with its own fold (cause, status, '
     + 'tensions, connections); the desk line that rode beside it glances since 2026-10-30.',
@@ -177,6 +177,19 @@ const RULED = Object.freeze({
     'card — a ResourceChainCard, the partial variant of the same card.',
   'src/components/new/tabs/ResourcesTab.jsx :: fullExploited':
     'card — a ResourceChainCard, the fully-worked variant of the same card.',
+  'src/components/new/tabs/ResourcesTab.jsx :: famineFailed':
+    'card — a ResourceChainCard, the variant for the food a famine failed: the resource alone (TAIL-DISPLAY-CIVIC-3 V2).',
+  // THE DM VIEW (ALLEGIANCE-CAR3, 2026-11-08; the allegiance design §9), the Power tab's DM panel:
+  'src/components/new/tabs/WhoRunsThisTownPanel.jsx :: view.answers':
+    'card — a criminal power or house with its boss line and its handlers nested beneath.',
+  'src/components/new/tabs/WhoRunsThisTownPanel.jsx :: g.handlers':
+    'card — a handler with its agents nested beneath.',
+  'src/components/new/tabs/WhoRunsThisTownPanel.jsx :: h.agents':
+    'prose — the row carries the agent, its title, its house, what it brings and the tie in words.',
+  'src/components/new/tabs/WhoRunsThisTownPanel.jsx :: view.fronts':
+    'prose — the row carries the house, its face, the guild it fronts for and its handler.',
+  'src/components/new/tabs/power/PowerStrata.jsx :: ranked':
+    'inline-run — a power\'s first, second and third run inline after its member count on one line (PEOPLE-5A).',
   'src/components/new/tabs/power/PowerStrata.jsx :: roster':
     'card — a FactionRow: the faction with its archetype and share, its member count beneath and a fold.',
   // THE CRISIS TAB (docs/DESIGN_CRISIS_TAB.md, the owner 2026-11-03) and X-46 car 3's fabric group,

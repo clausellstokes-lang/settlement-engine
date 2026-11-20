@@ -452,8 +452,8 @@ describe('vocabularyTotality — band-word recovery (DOCKET-2 item 3)', () => {
     expect(absent, 'stability band(s) no longer present in governanceNarrative.js').toEqual([]);
     // The producer uses ' — ', ' (…)' and '; …' — one vocabulary must cover all three.
     expect(bandOf('Fractured — no stable governing authority', STABILITY_BANDS)).toBe('Fractured');
-    expect(bandOf('Critical (active siege — survival priority)', STABILITY_BANDS)).toBe('Critical');
-    expect(bandOf('Stable; monster threat active', STABILITY_BANDS)).toBe('Stable');
+    expect(bandOf('Critical (under siege)', STABILITY_BANDS)).toBe('Critical');
+    expect(bandOf('Stable; monsters on the roads', STABILITY_BANDS)).toBe('Stable');
     // Longest-first: 'Unstable' must not resolve to 'Stable', nor 'Enforced Order' to 'Ordered'.
     expect(bandOf('Unstable — criminal governance', STABILITY_BANDS)).toBe('Unstable');
     expect(bandOf('Enforced Order (authoritarian)', STABILITY_BANDS)).toBe('Enforced Order');

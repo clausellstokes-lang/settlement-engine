@@ -1,0 +1,69 @@
+LAW 11 (seat J) over 720 towns: towns  217 · instances   416 · distinct lines   97
+  11a.atWork       towns   11 · instances    13 · distinct lines   11
+    by story calm 12 · siege 1
+    by material timber 9 · livestock 3 · herbs 1
+  11a.imported     towns    5 · instances     5 · distinct lines    4
+    by story siege 4 · bought 1
+    by material ironOre 4 · fish 1
+  11b              towns   50 · instances   138 · distinct lines   22
+    by story bought 132 · idle 6
+    by material fish 120 · grain 9 · ironOre 7 · wool 2
+    by line kind service 63 · income 23 · chip 21 · tick 9 · card 7 · scene 6 · person.how 6 · economics 2 · person.secret 1
+      11b.fish         towns   36 · instances    69 · distinct lines   13
+      11b.fishTitle    towns   31 · instances    51 · distinct lines    4
+      11b.ironOre      towns    7 · instances     7 · distinct lines    2
+      11b.landOffers   towns    9 · instances     9 · distinct lines    1
+      11b.wool         towns    1 · instances     2 · distinct lines    2
+  11c.idle         towns    1 · instances     1 · distinct lines    1
+    by story idle 1
+    by material livestock 1
+  11c.needed       towns    8 · instances     8 · distinct lines    7
+    by story needed 8
+    by material copper ore 4 · clay 3 · herbs 1
+  11c.noImport     towns   56 · instances    56 · distinct lines    1
+    by story none 56
+    by material fish 56
+  11d.warIron      towns    2 · instances    19 · distinct lines   13
+    by story warHook 19
+    by material ironOre 19
+  11e.offer        towns   22 · instances    23 · distinct lines   10
+    by story calm 23
+    by material spices 7 · livestock 6 · luxury 5 · fish 2 · charcoal 1 · desertSalt 1 · herbs 1
+  11e.siegeBought  towns    8 · instances    18 · distinct lines    7
+    by story siege 18
+    by material wool 14 · hides 3 · timber 1
+  11e.wantBuy      towns    6 · instances     6 · distinct lines    6
+    by story calm 6
+    by material livestock 2 · stone 2 · herbs 1 · timber 1
+  11g.gapLine      towns  118 · instances   129 · distinct lines   17
+    by story workedOut 119 · venture 10
+    by material stone 58 · iron ore 29 · fish 13 · livestock 10 · timber 4 · peat 4 · coal 3 · hides 2 · game 2 · salt 1 · reeds 1 · wool 1 · clay 1
+THE ROOTS (the record alone)
+  gapImportedNoImport    towns    8 · rows    8 · by material fish 3 · livestock 3 · hides 2
+  warIronOutsideWar      towns    5 · rows    5 · under a siege 3 · by crises under_siege 3 · occupied 2 · with an iron import 5
+DISTINCT LINES (top 25 by towns; all in J720.forms.json)
+  11g.gapLine   58t    58 Systems/Resources    No stone reaches the stone quarry.
+  11c.noImport   56t    56 Systems/Institutions Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.
+  11b      29t    29 Systems/Services     Fresh fish retail
+  11b      29t    29 Systems/Services     Fish sold daily from the morning catch.
+  11g.gapLine   29t    29 Systems/Resources    No iron ore reaches the mine.
+  11b      18t    18 Systems/Institutions Services · Fresh fish retail
+  11g.gapLine   12t    12 Systems/Resources    No fish reaches the fisher's landing.
+  11b      10t    10 Systems/Economics    Fish & Maritime Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.
+  11b       9t     9 Systems/Resources    ✓Agriculture
+  11e.offer    7t     7 Systems/Institutions The trade in silk, spice, and precious things.
+  11e.siegeBought    7t     7 Systems/Institutions Services · Dyed cloth
+  11g.gapLine    7t     7 Systems/Resources    No livestock reaches the dairy farmer.
+  11b       6t     6 Systems/Economics    Fish & Preserved Produce The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.
+  11b       6t     6 World/NPCs           How they deal Talks about the boats, the catch and who has been in today; a good ear for market news.
+  11b       6t     6 Systems/Institutions The industrial step from what the mine yields to what the smith uses.
+  11b       5t     5 Systems/Economics    The waters here are worked thin; rites keep the catch coming, and it is landed and sold here.
+  11e.offer    4t     4 Systems/Institutions Livestock auctions
+  11e.siegeBought    4t     4 Systems/Institutions Services · Livery and uniforms
+  11g.gapLine    4t     4 Systems/Resources    No peat reaches the peat cutter.
+  11b       3t     3 Summary/Overview     Half of <name> seems to be gutting, salting or selling fish.
+  11b       3t     3 Summary/Overview     Racks of drying fish line the way in, and the smell of salt and catch is everywhere.
+  11e.offer    3t     3 Systems/Institutions Merchants from across the region, and luxuries to be had.
+  11g.gapLine    3t     3 Systems/Resources    No coal reaches the mine.
+  11g.gapLine    3t     3 Systems/Resources    No timber reaches the charcoal burner.
+  11g.gapLine    3t     3 Systems/Resources    No livestock reaches the shepherd.

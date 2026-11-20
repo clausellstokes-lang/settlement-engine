@@ -234,7 +234,7 @@ function buildDecree(decreeNode, allNodes, entry, edges) {
     breakingReason: breaking ? breaking.reason : null,
     honestNull,
     // The honest-null finding text (never dropped) — surfaced as a finding.
-    finding: honestNull ? 'This decree produced no measurable downstream effect this span.' : null,
+    finding: honestNull ? 'Nothing that happened this time can be traced to this decree.' : null,
   };
 }
 

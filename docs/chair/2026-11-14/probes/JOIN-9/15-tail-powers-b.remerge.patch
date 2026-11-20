@@ -1,0 +1,36 @@
+commit 470ff0a7ae29eebf3d07e460bc365238d0098a22
+Merge: 083aa5da8 9c337fc97
+Author: Claude <noreply@anthropic.com>
+Date:   Sun Nov 15 06:24:41 2026 +0000
+
+    join(JOIN-9 · 15): merge lane/tail-powers-b-2026-11-14 at 9c337fc97
+    
+    Point 15 (JOIN-9), the tip read back at 06:23 UTC; merge base 034662313; 17 files outside docs/. A CODE CONFLICT IN ONE TEST FILE, a close seat's hunk against a builder's, resolved by the prompt's rule (plain): tests/domain/people/hallDecidesUnderOccupation.test.js, the hall's none rung: close-tests-a (4865cac17, on the line) added one anchor comment over the SELF_RULE negative; powers-b (a1351a7e6, TAIL-POWERS-B-5, re-keyed by identity) reads the crime structure and anchors by it (CLEARED where organized, FIRST otherwise). Composed: powers-b's block verbatim, then tests-a's comment, then the negative: both stand. Measured: 7/7 green (1 red at the line before the merge, 7/7 at the branch's tip). Declared-move commits: 5706c386b: the golden moves with it, carried, the owner's door.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYZ3iXADnu3zZoNowo9
+
+diff --git a/tests/domain/people/hallDecidesUnderOccupation.test.js b/tests/domain/people/hallDecidesUnderOccupation.test.js
+remerge CONFLICT (content): Merge conflict in tests/domain/people/hallDecidesUnderOccupation.test.js
+index b28eeb343..f5cc05f83 100644
+--- a/tests/domain/people/hallDecidesUnderOccupation.test.js
++++ b/tests/domain/people/hallDecidesUnderOccupation.test.js
+@@ -64,17 +64,12 @@ describe('the hall\'s none rung claims the criminals\' standing only, never that
+       else expect(String(s.powerStructure.stability), 'anchored: the head reads it').toContain(why);
+       const hall = dmPowerViewOf(s)?.hall;
+       expect(hall?.rung, 'anchored: the none rung').toBe('none');
+-<<<<<<< 083aa5da8 (docs(JOIN-9): the hand-back after point 14)
+-      expect(hall.line, 'anchored: the syndicate line that names the three').toMatch(/^None of the head, the second and the third of /);
+-      expect(hall.line).toMatch(CLEARED);
+-      // anchored: the CLEARED match directly above shows the hall line prints
+-=======
+       expect(factsOf(s).crime, 'anchored: the crime structure the hall line reads').toBe(crime);
+       if (crime === 'organized') {
+         expect(hall.line, 'anchored: the syndicate line that names the three').toMatch(/^None of the head, the second and the third of /);
+         expect(hall.line).toMatch(CLEARED);
+       } else expect(hall.line, 'anchored: the first line, no syndicate standing').toMatch(FIRST);
+->>>>>>> 9c337fc97 (docs(TAIL-POWERS-B-5): the hand-back, red 2 cured, red 3 named)
++      // anchored: the CLEARED match directly above shows the hall line prints
+       expect(hall.line).not.toMatch(SELF_RULE);
+     });
+   }

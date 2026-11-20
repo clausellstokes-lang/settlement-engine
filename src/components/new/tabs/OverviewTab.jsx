@@ -1,14 +1,17 @@
 import React, { useMemo } from 'react';
 import { crisisHookFor } from '../../../domain/crisis/crisisHooks.js';
-import { stressorsStateProse } from '../../../domain/display/stateProse/stressorsStateProse.js';
+// THE STRESSORS DESK IS REACHED THROUGH ITS ONE CALLER (ARM 2), shared with the public prose
+// composer (SW-B7b): the reader owns the public branch and the conditions read.
+import { stressorsDeskRead } from '../stressorsDeskRead.js';
 // THE GENERAL DESK IS REACHED THROUGH ITS ONE CALLER, never imported here: its blocks live
 // on seven tabs and the registry's ARM 2 admits exactly one call site per desk. The reader
 // owns the §885.3 public gate and the desk's own primary-stress read.
 import { generalDeskLines } from '../generalDeskRead.js';
+import { overviewStressesOf } from '../deskHostArgs.js';
+// The two glance facts the removed DM Summary tab alone carried (X-5 / T1-1), gated (SW-B7b).
+import { overviewIdentityOf } from '../overviewIdentity.js';
 import { populationTrendBand } from '../../../domain/display/trendLens.js'; // DS-POP-3 · the annex's own named reader
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
-import { deriveAllActiveConditions } from '../../../domain/activeConditions.js';
 // FREE: `stressorsCore.js` is already in the first-paint closure, so reaching its canonical
 // normalizer costs no additional bytes. Its sibling `stressorDynamics.js` is NOT — that one
 // drags 29 modules / 602 KB, which is why the synergy and counterforce lenses stay dark.
@@ -23,9 +26,12 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 // Wave-2 M2: safety severity delegated to the total chokepoint. deriveFoodBalance
 // is NOT re-imported — the walk-lane fold removed the Food Deficit line that used it.
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
-import { safetyBandOf } from '../../../domain/display/labelBands.js';
+import { safetyShownOf, safetyAudienceOf } from '../../../domain/display/safetyShown.js'; // PAGE-1 SAFETY (F3a): the label, and the owner's line beside it
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
 import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display/dossierViewModel.js';
+import { magicMeasuresApartLine } from '../../../domain/display/magicMeasuresApart.js';
+import { prosperityInCrisisLine } from '../../../domain/display/prosperityInCrisis.js';
+import { foodWordShown } from '../../../domain/display/foodWordShown.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import SteadingsSection from './SteadingsSection.jsx';
@@ -35,8 +41,6 @@ import Button from '../../primitives/Button.jsx';
 // stands the repeated opening name down to the tier noun. The DRAW is unchanged — the lines
 // handed over are the same strings `drawnAtMount` ruled on above.
 import ProseBlock from '../ProseBlock.jsx';
-// The two glance facts the removed DM Summary tab alone carried (X-5 / T1-1).
-import { cultureScopeLine, governsLine } from '../../../domain/summary/settlementQuickGuide.js';
 import { TONIGHT_COPY } from '../../../domain/summary/tonightSheet.js'; // the trigger opens the one Tonight sheet (TRIM-2 request 4)
 // The pointer's label, inline: the crisis page's composer (crisisPage.js :: CRISIS_PAGE_COPY.pointer) is the tab's chunk.
 const CRISIS_POINTER = 'Open the Crisis tab';
@@ -111,7 +115,7 @@ function ScoreRow({ label, score }) {
   );
 }
 
-function StatusTag({ label, value, _color, accent, testId }) {
+function StatusTag({ label, value, _color, accent, testId, note = null, noteTestId = 'overview-prosperity-in-crisis' }) {
   const mobile = useIsMobile();
   return (
     <div data-testid={testId} style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', ...edged(`1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, `3px solid ${accent || '#c8b89a'}`), padding: '7px 10px', minWidth: 0 }}>
@@ -123,6 +127,10 @@ function StatusTag({ label, value, _color, accent, testId }) {
         * register than capitals and neither walker could see it. Cased HERE rather than at
         * the four call sites, so the next StatusTag cannot repeat it. */}
       <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{statusCase(value) || EMPTY_VALUE}</div>
+      {/* The tag's own word, where a crisis in force lowered it, says what the place is in ordinary
+        * years: the one sentence (the chair's ruling 1(a), REVIEW-UPKEEP-2; prosperityInCrisis.js). The Safety tag's note is
+        * the owner's line beside the law (safetyShown.js), the reliance tag's MAGIC's (magicMeasuresApart.js), each under its own test id. */}
+      {note && <div data-testid={noteTestId} style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, fontStyle: 'italic', lineHeight: 1.4, marginTop: 3 }}>{note}</div>}
     </div>
   );
 }
@@ -154,7 +162,11 @@ function worldStressorFor(worldState, settlementId) {
   return mine ? normalizeStressor(mine) : null;
 }
 
-export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpenTableView, publicDossier = false, playerView = false, worldState = null}) {
+export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpenTableView, publicDossier: publicDossierPassed, playerView: playerViewPassed, worldState = null}) {
+  // PAGE-4 SAFETY-MOUNT (the chair's ruling of 15:58): the Safety line's audience is read from the two props AS PASSED, so an
+  // omitted prop is a reader; every other use of the two flags keeps its default of false, exactly as the signature gave it.
+  const publicDossier = publicDossierPassed === undefined ? false : publicDossierPassed;
+  const playerView = playerViewPassed === undefined ? false : playerViewPassed;
   const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
   // THE STRESS LIST AND THE GENERAL DESK, BOTH LIFTED ABOVE THE EARLY RETURN (rules-of-hooks,
   // the note on `mobile` above). ⭐ WHY THE DESK IS MEMOISED (ARCH §4.1, X-F9, SEAM car 3g):
@@ -162,7 +174,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   // `composeStateProse` rather than through a single kernel read. The browser-side cost of
   // that is unmeasured and the composed-prose manifest cannot measure it, so the memo is
   // insurance taken before the cost exists rather than after a page feels slow.
-  const stresses = (Array.isArray(r?.stress) ? r.stress : r?.stress ? [r.stress] : []).filter(Boolean);
+  const stresses = overviewStressesOf(r); // deskHostArgs.js: shared with the public prose composer (SW-B7b)
   // ⛔ `stresses` IS DELIBERATELY NOT A DEPENDENCY, AND DELIBERATELY NOT ITSELF A `useMemo`.
   // It is a pure function of `r`, so `r` already covers it and the memo can never be stale.
   // Memoising it instead was tried and MEASURED: `tests/lint/writerReach.walker.test.js`
@@ -171,7 +183,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   // inside a hook callback. Moving a frozen register is not this car's act, and the register
   // is right to notice: the plain const keeps the reach exactly where it was.
   const overviewDesk = useMemo(() => generalDeskLines(r, {
-    publicDossier, playerView, stresses, populationTrend: populationTrendBand(r?.populationHistory),
+    publicDossier, playerView, publicSite: 'general:overview', stresses, populationTrend: populationTrendBand(r?.populationHistory),
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }).overview, [r, publicDossier, playerView]);
   if (!r) return null;
@@ -183,42 +195,34 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   const dp = r.defenseProfile || {};
   const scores = dp.scores || {};
   const magicReliance = deriveMagicRelianceView(r);
+  const magicApart = magicMeasuresApartLine(r); // PAGE-1 MAGIC: what reliance and capability each count, where they sit apart
+  const foodWord = foodWordShown(r); // the food word's one home (SURFACES-2 item 1)
+  const prosperityInCrisis = prosperityInCrisisLine(r);
   const via = r.economicViability || {};
   const sp = eco.safetyProfile || {};
+  // PAGE-1 SAFETY (F3a; the chair's ruling of 11:24): the Safety label as born, and ON THE OWNER'S PAGE ONLY the one line
+  // beside it where Foundations' Law & order stands two or more steps away, or the record holds what the label could not
+  // see. A gallery, shared or player page is a reader: the born label alone, byte for byte (safetyShown.js fails closed).
+  const safetyShown = safetyShownOf(r, safetyAudienceOf({ publicDossier: publicDossierPassed, playerView: playerViewPassed }));
   const hist = r.history || {};
   const ra = r.resourceAnalysis || {};
-  const scopeLine = cultureScopeLine(r);
-  const governs = governsLine(r);
-  // THE STRESSOR DESK, read ONCE per render and routed by the mount registry. THE PUBLIC
-  // GATE (§885.3): a public gallery dossier is a PAID surface and the `overview` tab is not
-  // filtered off one, so the desk is NOT DRAWN there and every rung is null ⇒ drawnAtMount
-  // answers null at both mounts. The DATUM is untouched either way — the banner's label,
-  // summary and hook never read the desk. The audience follows kernel law 2's fail-closed
-  // default: an unstated audience reads as the player's, so it is stated.
-  const deskAudience = playerView ? 'player' : 'dm';
-  // The settlement's own noun, resolved once for both of this tab's desk reads: the corpus
-  // writes 'the town' about a settlement of any size, and the desk speaks it (§934.22).
-  const deskTierNoun = tierNounFor(r?.tier);
-  const deskSeed = String(r?._seed ?? r?.id ?? '');
-  const stressorProse = publicDossier
-    ? Object.freeze({
-      crisisArity: null, crisisFraming: null, conditionSeverity: null,
-      conditionDirection: null, conditionArchetype: null, conditionProvenance: null,
-      conditionDuration: null, worldStressorLifecycle: null, worldStressorOrigin: null,
-    })
-    : stressorsStateProse(
-      r,
-      {
-        banners: stresses,
-        conditions: deriveAllActiveConditions(r),
-        // DS-STR-2. The CALLER selects — a world stressor is keyed to the settlement by
-        // `affectedSettlementIds`, which is selection rather than classification — and
-        // normalizes through the kernel's own `normalizeStressor` so the desk sees the
-        // shape the simulation writes. Dark at birth: no generator writes worldState.
-        worldStressor: worldStressorFor(worldState, r?.id),
-      },
-      { seed: deskSeed, audience: deskAudience, tierNoun: deskTierNoun },
-    );
+  // THE IDENTITY LINE (SW-B7b): composed owner-side; a shared page prints the line shipped at
+  // the save (`overview:identity`), never one read from the fields its projection strips.
+  const { scope: scopeLine, governs } = overviewIdentityOf(r, { publicDossier });
+  // THE STRESSOR DESK, read ONCE per render through its one caller and routed by the mount
+  // registry. THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the rungs
+  // the owner's player view drew here, shipped at the owner's save (`stressors:overview`); an
+  // unstamped record is the SILENT desk. The DATUM is untouched either way — the banner's
+  // label and summary never read the desk, and print on the owner's player view too.
+  const stressorProse = stressorsDeskRead(r, {
+    publicDossier, playerView, publicSite: 'stressors:overview', stresses, tier: r?.tier,
+    // DS-STR-2. The CALLER selects — a world stressor is keyed to the settlement by
+    // `affectedSettlementIds`, which is selection rather than classification — and
+    // normalizes through the kernel's own `normalizeStressor` so the desk sees the
+    // shape the simulation writes. Dark at birth: no generator writes worldState.
+    // Campaign-only, so the shared page never prints it (owner-only, the chair's ruling).
+    worldStressor: worldStressorFor(worldState, r?.id),
+  });
   // ⛔ THE DESK'S `crisisFraming` RUNG IS NOT DRAWN HERE, and it must never be. It is the
   // annex's "ARITY — no banner" line ("There is no crisis on the books…"), which speaks only
   // when `stresses` is EMPTY, and this list renders only inside the ACTIVE CRISIS block below,
@@ -341,12 +345,17 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             2026-09-18). Under the block law it is the page's ANSWER, class (1), not
             coupling prose (chair ruling X-25a): it stays directly under the identity strip
             and the routing line, before the crisis card. */}
-      {(r.arrivalScene||siteLines.length>0)&&(
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',...FLUSH}}>
+      {/* THE PLACE ENDS ON THE ARRIVAL SCENE (the owner, 2026-11-09, OWNER-WORDS-DOSSIER item 2: "In
+          'the place' the second paragraph seems redundant. The first was amazing."). The woven site
+          lines moved below the Systems Health section, with no heading of their own (THE SITE LINES
+          below); the ground lens that re-introduced the place glances at its registry row. */}
+      {r.arrivalScene&&(
+        <div data-testid="overview-place" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',...FLUSH}}>
           <div style={{...literaryTitle(FS.lg),color:swatch.inkMag,marginBottom:5}}>The place</div>
-          {r.arrivalScene&&<p className="oc-dropcap-prose" data-testid="overview-place-arrival" style={{...serif,fontSize:proseFontSize(FS.lg,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:siteLines.length>0?'0 0 6px':0,fontStyle:'italic'}}>{r.arrivalScene}</p>}
-          <ProseBlock lines={siteLines} settlementName={r.name} tier={r.tier}
-            style={{fontSize:FS.lg,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
+          {/* A scene opening on a one-letter word ("A merchant…") loses the space after the raised
+              initial, so it printed "Amerchant" (SW-3's diagnosis, ruled to SW-9 2026-11-09 02:18): the
+              --lone modifier gives that initial a word-space (organic.css). The words are not touched. */}
+          <p className={/^[A-Za-z]\s/.test(r.arrivalScene)?'oc-dropcap-prose oc-dropcap-prose--lone':'oc-dropcap-prose'} data-testid="overview-place-arrival" style={{...serif,fontSize:proseFontSize(FS.lg,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.arrivalScene}</p>
         </div>
       )}
 
@@ -364,12 +373,14 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             {crisisDoor&&<Button variant="ghost" size="sm" onClick={()=>onNavigateTab('crisis')} style={{marginLeft:'auto',color:swatch['#C04040'],fontWeight:800}}>{CRISIS_POINTER}</Button>}
           </div>
         </div>
-        {!crisisDoor&&stresses.map((v,i)=>(
+        {/* "Hook:" prints only over a hook (STYLE-RULINGS-2 B10(a)): the public projection strips
+            the entry's crisisHook (a hook is DM content), and the label stood over an empty line. */}
+        {!crisisDoor&&stresses.map((v,i)=>{ const hook=crisisHookFor(r,v); return (
           <div key={i} style={{border:`2px solid ${v.colour}`,padding:'10px 14px',...FLUSH}}>
-            <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
-            <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{crisisHookFor(r,v)}</p>
+            <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag,lineHeight:1.5,margin:hook?'0 0 4px':0}}>{v.summary}</p>
+            {hook&&<p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{hook}</p>}
           </div>
-        ))}
+        );})}
         {(conditionCardLine||pressureLine)&&<div style={{padding:'0 14px 8px',...FLUSH}}>
           {conditionCardLine&&<p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0',fontStyle:'italic'}}>{conditionCardLine}</p>}
           {pressureLine&&<p data-testid="overview-crisis-pressure" style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0'}}>{pressureLine}</p>}
@@ -392,8 +403,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
 
         {/* Status tags row */}
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
-          <StatusTag label="Prosperity" value={eco.prosperity} accent={PROSPERITY_COLORS[eco.prosperity]}/>
-          <StatusTag label="Safety" value={safetyBandOf(sp.safetyLabel) ?? sp.safetyLabel} accent={safetySeverityOf(sp.safetyLabel).color}/>
+          <StatusTag label="Prosperity" value={eco.prosperity} accent={PROSPERITY_COLORS[eco.prosperity]} note={prosperityInCrisis}/>
+          <StatusTag label="Safety" value={safetyShown.band} accent={safetySeverityOf(sp.safetyLabel).color} note={safetyShown.qualifier} noteTestId="overview-safety-beside-law"/>
           <StatusTag label="Viability" value={via.viable===false?'Not Viable':via.viable===true?'Viable':EMPTY_VALUE} accent={via.viable===false?'#8b1a1a':via.viable===true?'#1a5a28':undefined}/>
           <StatusTag label="Defense" value={dp.readiness?.label} accent={dp.readiness?.color}/>
           {/* RELIANCE ON MAGIC — THE ONE READING (lane MAGIC, chair ruling 2, 2026-11-03). A
@@ -401,9 +412,11 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
               flag the defence generator sets only during a siege, famine or plague, so a city of
               mages read no reliance while its Magic tab read "integral". This tag prints the view
               model's one reading, in the word the Magic tab and Foundations print, and the shared
-              magic gate removes it where magic does not work. */}
+              magic gate removes it where magic does not work.
+              PAGE-1 MAGIC (F3c): where this word and the Magical Capability bar below sit on opposite
+              sides, the tag's note says what each counts (magicMeasuresApart.js; read only, both stay). */}
           {magicRowsGated(r, [{ key: 'magicReliance' }]).map(({ key }) => (
-            <StatusTag key={key} testId="overview-magic-reliance" label="Reliance on magic" value={magicReliance.word} accent={swatch.magic}/>
+            <StatusTag key={key} testId="overview-magic-reliance" label="Reliance on magic" value={magicReliance.word} accent={swatch.magic} note={magicApart} noteTestId="overview-magic-apart"/>
           ))}
         </div>
 
@@ -430,17 +443,21 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
               bar tracks the derived 0-100 resilienceScore; the VALUE shown is the
               band label, never a bare number (FINITE-SEMANTICS). safetyRatio stays
               a live derivation — it is only its display here that is retired. */}
-          {eco.foodSecurity?.label&&<div style={{marginBottom:8}}>
+          {/* THE FOOD WORD HAS ONE HOME (SURFACES-2 item 1, the chair's ruling (r2) of 2026-11-14): the row prints
+              the food band the Tonight sheet, Daily Life and the PDF print (domain/display/foodWordShown.js), in
+              the band's colour, never the record's stored label ("Secure" beside the band's "Pressured" in 159 of
+              772 births). The bar keeps the resilience score's magnitude. */}
+          {foodWord&&<div style={{marginBottom:8}}>
             <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:3}}>
               <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,fontWeight:600}}>Food Security</span>
               {/* RUNG 3 AGAIN, at the one status in this section that is NOT a StatusTag
                   (browser pass 3). `foodGenerator` declares 'Import-Dependent' and is right
                   to — the state-prose pools key on the declared spelling — so the case is
                   made here, beside the three tags above that already make it. */}
-              <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:eco.foodSecurity.color||swatch.inkMag2}}>{statusCase(eco.foodSecurity.label)}</span>
+              <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:foodWord.color||swatch.inkMag2}}>{statusCase(foodWord.label)}</span>
             </div>
             <div style={{height:6,background:swatch['#E8DCC8'],overflow:'hidden'}}>
-              <div style={{height:'100%',width:`${Math.min(100,Math.max(0,eco.foodSecurity.resilienceScore||0))}%`,background:eco.foodSecurity.color||swatch.inkMag2}}/>
+              <div style={{height:'100%',width:`${Math.min(100,Math.max(0,eco.foodSecurity.resilienceScore||0))}%`,background:foodWord.color||swatch.inkMag2}}/>
             </div>
           </div>}
         </div>
@@ -457,6 +474,21 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             re-homed later, one by one, through the mount registry. Pinned in the DOM by
             tests/ui/generalDeskTabFlow.test.js. */}
       </Section>
+
+      {/* ── THE SITE LINES (OWNER-WORDS-DOSSIER item 2, 2026-11-09) ──────────────
+            The woven block that followed the arrival scene in THE PLACE, moved here whole: DS-GEN-13
+            market, commerce and warehouses, then DS-GEN-17 roster, cathedral and monastery, each
+            trimmed to its first clause by the reader (generalDeskRead.js :: siteClause). Its sentences
+            have no other home on the page. It carries NO heading of its own: the proposed heading
+            ("Trade and the houses", and "Trade and institutions" with it) was vetoed by the owner
+            (2026-11-09 03:5x, "No."; SW-9). It is not put inside Systems Health above, which keeps
+            no sentence list (owner order 2026-09-17). Dark on a public dossier (§885.3), as before. */}
+      {siteLines.length>0&&(
+        <div data-testid="overview-site-lines" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',...FLUSH}}>
+          <ProseBlock lines={siteLines} settlementName={r.name} tier={r.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
+        </div>
+      )}
 
       {/* ── CURRENT TENSIONS & CONFLICTS ─────────────────────────────────── */}
       {(hist.currentTensions?.length>0||(r.conflicts||[]).length>0)&&<Section title="Tensions & Conflicts" collapsible defaultOpen accent="#b8860b" help={SECTION_HELP.tensions}>
@@ -522,11 +554,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
           the Resources tab owns the strengths and the strategic value. */}
 
       {/* ── WARNINGS & COHERENCE NOTES ────────────────────────────────────── */}
-      {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{...FLUSH}}>
-        {r.structuralViolations?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
-          <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues</div>
-          {r.structuralViolations.map((v,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
-        </div>}
+      {/* "Structural Issues" and "Suggestions" are CUT from the DM page (READER-R1, the
+          chair's ruling 1): they printed the structural validator's rule text ("X is not
+          compatible with port access", "Consider: …") as facts about the place. Both are on
+          the Viability tab's staff panel (domain/display/validationOnPage.js ::
+          staffValidationRows), elevated viewers only. */}
+      {(r.coherenceNotes?.length||0)>0&&<div style={{...FLUSH}}>
         {/* Coherence notes (G5): sole web render site of the generation-frozen
             coherenceNotes record. The survey vintage is said once per page (X-8), by the
             Systems Health label, so this header and its two siblings carry no suffix. */}
@@ -542,17 +575,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             <span style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
           </div>
         ))}
-        {/* DS-GEN-7's lines are CUT (T1-10, R2): the rows above and below are the record's own
-            words, and the row `overview.warnings` glances. */}
-        {r.structuralSuggestions?.length>0&&<div style={{background:swatch['#F4F6FD'],border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',padding:'10px 14px'}}>
-          <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions</div>
-          {/* The suggestion reads as two sentences: the reason (period-normalized —
-              producers are inconsistent about trailing stops), then the same
-              " Consider: …" form the PDF's format.js renders, so the two surfaces
-              can never disagree on this copy's shape. The joined-words defect
-              ("…incursions.. ConsiderPalisade") lived here — §767.3(b). */}
-          {r.structuralSuggestions.map((v,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#1A2A5A'],marginBottom:3}}>{String(v.reason||'').trim().replace(/\.+$/,'')}.{v.suggested?.length>0&&<span style={{color:swatch.inkMag3,fontStyle:'italic'}}>{' '}Consider: {v.suggested.join(', ')}.</span>}</div>)}
-        </div>}
+        {/* DS-GEN-7's lines are CUT (T1-10, R2): the rows above are the record's own words,
+            and the row `overview.warnings` glances. */}
       </div>}
 
       {/* THE SPATIAL LAYOUT SECTION IS CUT (the owner, 2026-11-01, X-37; see Row 2 above):

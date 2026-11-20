@@ -30,9 +30,9 @@ import { buildRecordedEdges, nodesFromRecord } from './chronicleGraph.js';
 import { UNRECEIPTED_HOP } from './receiptClauseFloor.js';
 
 /** The graceful line at a root cause AND at an absent ledger (the spec's phrasing). */
-export const NO_DEEPER_MEMORY = 'The ledger holds no deeper memory of this.';
+export const NO_DEEPER_MEMORY = 'Nothing earlier is known to have caused this.';
 /** The distinct honest line when the world recorded no causality ledger at all. */
-export const LEDGER_DARK_LINE = 'This world keeps no recorded ledger of causes.';
+export const LEDGER_DARK_LINE = 'This world does not keep track of what caused what.';
 /**
  * What a covert hop reads as to a viewer who does not see DM secrets. This one
  * stays HERE, beside the redaction that produces it, because a covert hop is
@@ -42,7 +42,7 @@ export const LEDGER_DARK_LINE = 'This world keeps no recorded ledger of causes.'
  * placeholder clauses, where the composer's guard can bind to it without reaching
  * through this read model.
  */
-export const REDACTED_HOP = 'a cause the ledger keeps hidden';
+export const REDACTED_HOP = 'a cause kept hidden';
 
 /**
  * Whether a raw receipt carries a covert marker. The durable receipt drops the

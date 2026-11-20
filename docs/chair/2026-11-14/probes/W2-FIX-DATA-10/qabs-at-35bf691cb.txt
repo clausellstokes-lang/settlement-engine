@@ -1,0 +1,50 @@
+dossierStateProse/defense.generated.js	granary	7a07521d8484e089	printed 0	ABSENT 0		no institution: granary
+historyData.js	quarters	0b20b35cf5d9f7e9	printed 75	ABSENT 0		the merchants' quarter
+historyData.js	quarters	d21c40d805c216b2	printed 35	ABSENT 1	r2s-succession_void-town-3	the residential district
+historyData.js	temple	3a3da5b46e268323	printed 44	ABSENT 0		the temple district
+historyData.js	quarters	3a3da5b46e268323	printed 44	ABSENT 0		the temple district
+historyData.js	quarters	7130762978fa8f82	printed 41	ABSENT 0		A fire out of {location} spread through {building_type} across entire 
+historyData.js	temple	cc27d2b3e3fca458	printed 26	ABSENT 0		A period of ambitious stone construction transformed the settlement's 
+historyData.js	temple	dc29bf0a6a243a34	printed 2	ABSENT 0		A period of ambitious stone construction transformed the settlement's 
+historyData.js	house: merchant guild	4db6189132ac7faf	printed 38	ABSENT 6	r2r-town-44,r2s-slave_revolt-hamlet-1,w2fd8r-town-1,w2fd8s-under_siege-village-2	After years of disputed grain prices, the major farming families and t
+historyData.js	quarters	4f6fa1145b7e6e27	printed 12	ABSENT 0		A catastrophic or transformative event tied to the local ley line conc
+historyData.js	quarters	83dece505758b019	printed 12	ABSENT 0		Affected district retains residual magical effects
+institutionDescVariants.js	house: fishing	67c1b4eb928e5da7	printed 24	ABSENT 0		The nets, the traps, the drying racks: what the water gives, the fishi
+institutionDescVariants.js	house: stone quarry	18425e5e902f9f93	printed 7	ABSENT 0		A stone quarry, its blocks cut and dressed by a gang of quarrymen with
+institutionDescVariants.js	resource: stone_quarry	18425e5e902f9f93	printed 7	ABSENT 4	r2s-indebted-hamlet-2,w2fd8r-hamlet-43,w2fd8s-plague_onset-hamlet-5,w2fd8s-wartime-hamlet-4	A stone quarry, its blocks cut and dressed by a gang of quarrymen with
+institutionDescVariants.js	house: stone quarry	159741114b9d0a37	printed 5	ABSENT 0		A building-stone quarry laid out in an ordered working. A village sitt
+institutionDescVariants.js	resource: stone_quarry	159741114b9d0a37	printed 5	ABSENT 2	r2r-village-45,r2s-insurgency-village-2	A building-stone quarry laid out in an ordered working. A village sitt
+institutionDescVariants.js	house: mine	25bb46e70236408f	printed 49	ABSENT 0		A mine of shafts and adits, with winding gear and ore carts at the hea
+institutionDescVariants.js	house: mine	7287909f4809b975	printed 71	ABSENT 0		A shaft driven into the deposits, with winding gear and ore carts at t
+institutionDescVariants.js	house: stone quarry	c54b81aeb422d8d7	printed 76	ABSENT 0		A stone quarry, with yards beside it for dressing the stone. Half the 
+institutionDescVariants.js	resource: stone_quarry	c54b81aeb422d8d7	printed 76	ABSENT 51	r2r-town-15,r2r-town-28,r2r-metropolis-6,r2r-metropolis-14	A stone quarry, with yards beside it for dressing the stone. Half the 
+institutionDescVariants.js	house: druid	d7a110e6054be4fc	printed 4	ABSENT 4	r2s-monster_pressure-town-2,w2fd8r-town-11,w2fd8r-town-44,w2fd8s-occupied-town-7	Senior druids who govern how their circle deals with the town. They ma
+institutionDescVariants.js	streets	d7a110e6054be4fc	printed 4	ABSENT 0		Senior druids who govern how their circle deals with the town. They ma
+institutionDescVariants.js	house: druid	48bd27e576abfdeb	printed 5	ABSENT 5	r2r-town-14,r2s-indebted-town-3,r2s-monster_pressure-town-0,w2fd8s-famine-town-0	A council of elder druids charged with their circle's standing in the 
+institutionDescVariants.js	streets	48bd27e576abfdeb	printed 5	ABSENT 0		A council of elder druids charged with their circle's standing in the 
+institutionDescVariants.js	house: alehouse	a9cf19bb34fbbd00	printed 5	ABSENT 3	w2fd8s-under_siege-village-4,w2fd8s-famine-village-2,w2fd8s-insurgency-village-5	Converts barley into malt for brewing. Small operation supplying local
+institutionDescVariants.js	house: alehouse	736ab5d9380421e2	printed 10	ABSENT 10	r2r-village-15,r2r-village-40,r2r-village-48,r2r-village-57	Converts malted grain to ale in quantity. The largest consumer of grai
+institutionDescVariants.js	house: baker	338d03205dca9ba8	printed 4	ABSENT 4	w2fd8s-occupied-village-2,w2fd8s-occupied-village-3,w2fd8s-wartime-village-8,w2fd8s-insurgency-village-2	Turns malted grain into ale by the barrel. After the bakers, no trade 
+institutionDescVariants.js	house: baker	d38b7cb1d9f5c028	printed 0	ABSENT 0		Kiln crews in the surrounding woodland supply charcoal to the smelters
+institutionDescVariants.js	house: smelter	d38b7cb1d9f5c028	printed 0	ABSENT 0		Kiln crews in the surrounding woodland supply charcoal to the smelters
+institutionDescVariants.js	smith	d38b7cb1d9f5c028	printed 0	ABSENT 0		Kiln crews in the surrounding woodland supply charcoal to the smelters
+institutionDescVariants.js	smith	20b99d586add834d	printed 103	ABSENT 19	r2r-hamlet-52,r2r-hamlet-59,r2r-town-54,r2s-recently_betrayed-village-1	Turf-covered kilns burn wood slowly down to charcoal, the fuel that fo
+institutionDescVariants.js	smith	ba0fe0508906c9bb	printed 105	ABSENT 21	r2r-hamlet-9,r2r-village-36,r2r-town-40,r2s-politically_fractured-hamlet-2	A collier's kilns, smoking under their turf, turning whatever wood can
+institutionDescVariants.js	smith	959ac324dde268f0	printed 0	ABSENT 0		Operates kilns in nearby woodland. Supplies fuel for smithing and baki
+institutionDescVariants.js	famine	b77abf521091f2db	printed 57	ABSENT 57	r2r-town-0,r2r-town-16,r2r-town-18,r2r-town-20	Communal grain storage. Buffers harvests, prevents famine.
+institutionDescVariants.js	house: hired blade	058f2527f0e3fc48	printed 47	ABSENT 24	r2r-city-52,r2r-city-55,r2r-city-56,r2r-city-57	Organised bands of hired blades, a few score to a few hundred strong.
+institutionDescVariants.js	house: fishing	20db476059d1b418	printed 61	ABSENT 61	r2r-village-13,r2r-village-14,r2r-village-27,r2r-village-39	Builds and repairs flat-bottomed river craft: barges, punts, ferries, 
+institutionDescVariants.js	house: fishing	e93309dab034221e	printed 19	ABSENT 19	r2r-village-2,r2r-village-11,r2r-village-41,r2r-village-46	Builds and repairs flat-bottomed craft for shallow water: punts, ferri
+institutionDescVariants.js	house: fishing	83d03ab88fd81eb6	printed 8	ABSENT 8	r2r-village-53,r2r-city-14,r2s-plague_onset-town-2,r2s-religious_conversion-village-1	Builds and mends flat-bottomed boats for shallow water: punts, ferries
+institutionDescVariants.js	house: fishing	58a543b49791411a	printed 9	ABSENT 9	r2r-village-36,r2r-village-45,r2r-village-51,r2r-town-3	Shallow-water boats, all flat-bottomed, made and repaired here: punts,
+institutionDescVariants.js	clergy	3479ae839c1d669b	printed 86	ABSENT 86	r2r-thorp-0,r2r-thorp-3,r2r-thorp-7,r2r-thorp-9	A corner of the holding left out of the plough, banked with turf and m
+institutionDescVariants.js	clergy	9a5d98d5f035bdb6	printed 58	ABSENT 58	r2r-thorp-2,r2r-thorp-6,r2r-thorp-24,r2r-thorp-27	A turf-banked corner of the holding, kept out of the plough and marked
+institutionDescVariants.js	clergy	d7dfdecbc2dbc7de	printed 96	ABSENT 96	r2r-thorp-1,r2r-thorp-4,r2r-thorp-5,r2r-thorp-8	Fieldstones on a low bank at the edge of the ploughland. The rites wai
+institutionServices.js	clergy	c0f3deced43ff3eb	printed 102	ABSENT 102	r2r-thorp-2,r2r-thorp-5,r2r-thorp-9,r2r-thorp-19	Funeral rites, said by the parish priest, who comes or is sent for.
+institutionalCatalog.js	house: mine	0373df797f2858ad	printed 62	ABSENT 0		A mine of shafts and adits, with its winding gear and ore carts. Where
+institutionalCatalog.js	house: stone quarry	fa508fe2a2e6ac65	printed 120	ABSENT 0		A stone quarry with yards for dressing the stone. Much of the region's
+institutionalCatalog.js	resource: stone_quarry	fa508fe2a2e6ac65	printed 120	ABSENT 89	r2r-town-33,r2r-town-57,r2r-city-21,r2r-city-27	A stone quarry with yards for dressing the stone. Much of the region's
+institutionalCatalog.js	house: stone quarry	3e644ef0dd5c3418	printed 9	ABSENT 0		A stone quarry, opened by quarrymen with picks and wedges. Slow work, 
+institutionalCatalog.js	resource: stone_quarry	3e644ef0dd5c3418	printed 9	ABSENT 3	r2r-hamlet-23,r2r-hamlet-48,w2fd8s-plague_onset-hamlet-7	A stone quarry, opened by quarrymen with picks and wedges. Slow work, 
+institutionalCatalog.js	house: druid	58ae82300e837074	printed 135	ABSENT 135	r2r-town-1,r2r-town-29,r2r-city-5,r2r-city-6	A council of senior druids who govern their circle's relationship with
+institutionalCatalog.js	streets	58ae82300e837074	printed 135	ABSENT 0		A council of senior druids who govern their circle's relationship with

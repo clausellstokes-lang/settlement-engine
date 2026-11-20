@@ -435,12 +435,19 @@ describe('EM-F2 — one path: the generation action, and no second writer', () =
     // that makes the mint and the shelf agree by construction — the same predicate, in one place
     // per act (hide / promote / found), never a fourth opinion about what a phantom is.
     const DOOR_REL = 'src/store/phantomMintAction.js';
+    // ⭐ SW-B7b ADDS THE FOURTH, BY ADDITION AND NEVER BY DELETION (the public prose writer; the
+    // chair's grant of 2026-11-09 13:5x): the save-time composer asks the SAME predicate once, so a
+    // phantom stub is never stamped with dossier text and persists as EM-F1's five keys. It reads
+    // the leaf's answer and holds no opinion of its own; it writes no row (asserted below).
+    const COMPOSER_REL = 'src/components/new/publicProseCompose.js';
+    expect(rowBlobWrites(readFileSync(join(ROOT, COMPOSER_REL), 'utf8')),
+      'the public prose composer writes no saved row\'s blob').toEqual([]);
     expect([...importers].sort(),
-      'the phantom discriminant is read in EXACTLY three places: the library shelf, which hides a'
-      + ' phantom row, the generation lane, which promotes one, and the editor\'s mint, which'
-      + ' founds one and rosters the rest. A fourth reader is a second opinion about what a'
+      'the phantom discriminant is read in EXACTLY four places: the library shelf, which hides a'
+      + ' phantom row, the generation lane, which promotes one, the editor\'s mint, which'
+      + ' founds one and rosters the rest, and the public prose composer, which stamps none. A fifth reader is a second opinion about what a'
       + ' phantom is; a missing one means a reader was lost')
-      .toEqual([SHELF_REL, LANE_REL, DOOR_REL].sort());
+      .toEqual([SHELF_REL, LANE_REL, DOOR_REL, COMPOSER_REL].sort());
 
     // ⛔ AND THE THIRD READER IS NOT A SECOND PROMOTION WRITER, which is the claim the two arms
     // below make about the shelf and the lane. It writes a save row of its OWN through the save

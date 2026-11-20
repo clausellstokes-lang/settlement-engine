@@ -60,7 +60,7 @@ export default function ExportUnlockDialog({ open, saveId, onClose }) {
     <ConfirmDialog
       open={open}
       tone="default"
-      title={t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
+      title={t('dossierExport.buySaved.dialogTitle', { price: SINGLE_DOSSIER.priceLabel })}
       body={t('dossierExport.buySaved.subline')}
       confirmLabel={purchasesAreOpen ? checkoutLabel : (
         // The label and pill wrap as one unit, so on a phone the pill drops below

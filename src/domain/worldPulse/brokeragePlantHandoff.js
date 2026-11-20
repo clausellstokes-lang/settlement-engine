@@ -268,9 +268,11 @@ export function plantTookEntry({ record, currentBand, tick, nameFor }) {
  * flags lit can produce.
  *
  * @param {Record<string, unknown>} record @param {(id: string) => string} nameFor
+ * @param {(id: string) => string} [patronNameFor] the patron is a POWER (a factionStates
+ *   key), not a settlement, so `nameFor` cannot name it; the caller reads the faction ledger.
  * @returns {string[]}
  */
-export function plantExposureReasons(record, nameFor) {
+export function plantExposureReasons(record, nameFor, patronNameFor) {
   const receipt = asObject(asObject(asObject(record).commission).receipt);
   const marketName = strictText(receipt.marketName);
   const patronId = strictText(receipt.patronId);
@@ -278,6 +280,6 @@ export function plantExposureReasons(record, nameFor) {
   if (!marketName || !hostId) return [];
   const name = typeof nameFor === 'function' ? nameFor : (/** @type {string} */ id) => String(id);
   const lines = [`The telling was not this court's own: ${marketName} of ${name(hostId)} was paid to place it, and it is the market's name the collapse burns.`];
-  if (patronId) lines.push(`The lineage holds all the way back to the counter: the order was bought by ${patronId}.`);
+  if (patronId) lines.push(`The lineage holds all the way back to the counter: the order was bought by ${(typeof patronNameFor === 'function' && strictText(patronNameFor(patronId))) || 'a power that paid in secret'}.`);
   return lines;
 }

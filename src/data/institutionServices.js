@@ -44,28 +44,28 @@ export const INSTITUTION_SERVICES = {
   "Village headman": {
     "Dispute mediation": { on: true, p: 1.0, desc: "Judges disputes over land, livestock, and debt" },
     "Communal labour": { on: true, p: 0.9, desc: "Organises shared work: harvest, repairs, the common fields" },
-    "Tithe and dues": { on: true, p: 0.8, desc: "Collects the lord's dues and the temple tithe" },
+    "Tithe and dues": { on: true, p: 0.8, desc: "Collects the dues owed and the tithe", needs: ["institution: temple"] }, // TAIL-SERVICES-3 (05233): the atom admits a parish church or a shrine; the line names no temple. BAR5-MARKS (C42840, LAW 4): no lord the record does not hold (a headman's village of escaped serfs owes no lord)
     "Record of custom": { on: true, p: 0.7, desc: "Holds the customary law of the village" }
   },
   "Village elder": {
-    "Dispute mediation": { on: true, p: 1.0, desc: "Arbitrates quarrels before they reach the lord's court" },
+    "Dispute mediation": { on: true, p: 1.0, desc: "Arbitrates quarrels before they come to judgment" }, // TAIL-SERVICES-3 (X9 08236): no village that prints it holds a lord or a court
     [COMMUNAL_DECISIONS]: { on: true, p: 0.9, desc: "Convenes the village moot on shared matters" },
     "Marriage and inheritance": { on: true, p: 0.7, desc: "Witnesses betrothals and settles inheritance by custom" },
     "Record of custom": { on: true, p: 0.8, desc: "Remembers precedent, boundaries, and communal rights" }
   },
   "Town council": {
     "Bylaws and ordinances": { on: true, p: 1.0, desc: "Enacts and enforces the town's own rules" },
-    "Dispute adjudication": { on: true, p: 1.0, desc: "Hears civil pleas in the town court" },
-    "Market charter and tolls": { on: true, p: 0.9, desc: "Grants stalls, sets tolls, licenses the market" },
-    "Public works": { on: true, p: 0.7, desc: "Walls, wells, roads, and the watch" },
+    "Dispute adjudication": { on: true, p: 1.0, desc: "Hears the town's civil pleas at the council bench" },
+    "Market charter and tolls": { on: true, p: 0.9, desc: "Grants stalls, sets tolls, licenses the market", needs: ["market"] },
+    "Public works": { on: true, p: 0.7, desc: "Walls, wells, roads, and the watch", needs: ["walls","watch"] },
     "Record of custom": { on: true, p: 0.8, desc: "Keeps the charter, rolls, and civic archive" }
   },
   "City administration": {
     [CIVIC_ADMINISTRATION]: { on: true, p: 1.0, desc: "Runs the offices, wards, and officers of the city" },
     "Taxation and tolls": { on: true, p: 1.0, desc: "Assesses and collects taxes, tolls, and customs" },
-    "Licensing and charters": { on: true, p: 0.9, desc: "Grants guild, market, and trade privileges" },
+    "Licensing and charters": { on: true, p: 0.9, desc: "Grants guild, market, and trade privileges", needs: ["guild","market"] },
     "Courts and adjudication": { on: true, p: 0.9, desc: "Maintains the civil and mercantile courts" },
-    "Public works": { on: true, p: 0.8, desc: "Walls, aqueducts, sanitation, and the watch" },
+    "Public works": { on: true, p: 0.8, desc: "Walls, aqueducts, sanitation, and the watch", needs: ["walls","watch"] },
     "Public records": { on: true, p: 0.8, desc: "Registers deeds, wills, births, and freemen" }
   },
 
@@ -106,8 +106,8 @@ export const INSTITUTION_SERVICES = {
 
   "Mill": {
     "Grain milling": { on: true, p: 1.0, desc: "Process grain to flour" },
-    "Fulling cloth": { on: false, p: 0.4, desc: "Textile processing (if water mill)" },
-    "Sawing timber": { on: false, p: 0.3, desc: "Lumber production (if saw mill)" }
+    "Fulling cloth": { on: false, p: 0.4, desc: "Textile processing", needs: ["institution: mill", "river"] }, // CENSUS-4b (the chair, item 2): "(if water mill)" became its declaration
+    "Sawing timber": { on: false, p: 0.3, desc: "Lumber production", needs: ["institution: mill"] } // CENSUS-4b (the chair, item 2): "(if saw mill)" became its declaration
   },
 
   "Courthouse": {
@@ -142,7 +142,7 @@ export const INSTITUTION_SERVICES = {
 
   "Blacksmith": {
     "Tool repair": { on: true, p: 1.0, desc: "Fix agricultural implements and household tools" },
-    "Horseshoeing": { on: true, p: 1.0, desc: "Essential for transport and cavalry" },
+    "Horseshoeing": { on: true, p: 1.0, desc: "Essential for carts, carriers, and working horses" }, // TAIL-SERVICES-3 (07253): no town that prints it holds cavalry
     "Weapon creation": { on: true, p: 0.7, desc: "Simple arms, hunting knives, farm tools" },
     "Armour repair": { on: true, p: 0.6, desc: "Patch chainmail, straighten plate" },
     "Metalworking training": { on: true, p: 0.5, desc: "Take on apprentices" }
@@ -179,7 +179,7 @@ export const INSTITUTION_SERVICES = {
 
   "Alchemist": {
     "Potions and elixirs": { on: true, p: 1.0, desc: "Healing potions, antidotes, stimulants" },
-    "Alchemical reagents": { on: true, p: 0.9, desc: "Components for spellcasting and crafting" },
+    "Alchemical reagents": { on: true, p: 0.9, desc: "Components for spellcasting and crafting", needs: ["magic"] },
     "Poisons (discreet)": { on: false, p: 0.4, desc: "Available to trusted customers" },
     "Smoke and flash powder": { on: true, p: 0.6, desc: "Signalling, distraction, mining use" }
   },
@@ -200,14 +200,14 @@ export const INSTITUTION_SERVICES = {
   },
 
   "Academy": {
-    "Advanced education": { on: true, p: 1.0, desc: "Degrees in arcane arts, natural philosophy, history" },
+    "Advanced education": { on: true, p: 1.0, desc: "Degrees in arcane arts, natural philosophy, history", needs: ["magic"] },
     "Research facilities": { on: true, p: 0.8, desc: "Laboratories, observatories, libraries" },
     "Scholarly community": { on: true, p: 0.9, desc: "Network of learned minds, consultation" },
-    "Magical training": { on: true, p: 0.7, desc: "Structured arcane education" }
+    "Magical training": { on: true, p: 0.7, desc: "Structured arcane education", needs: ["magic"] }
   },
 
   "Garrison": {
-    "Defence services": { on: true, p: 1.0, desc: "Patrol, wall-walking, gate duty" },
+    "Defence services": { on: true, p: 1.0, desc: "Patrol, wall-walking, gate duty", needs: ["walls","gate"] },
     "Mercenary hire": { on: true, p: 0.6, desc: "Off-duty soldiers available for escort" },
     "Weapons training": { on: false, p: 0.5, desc: "Drill yard access for coin" },
     [EQUIPMENT_PURCHASE]: { on: true, p: 0.7, desc: "Standard military equipment at cost" }
@@ -216,7 +216,7 @@ export const INSTITUTION_SERVICES = {
   
   
   "Major Port": {
-    "International shipping": { on: true, p: 1.0, desc: "Long-haul cargo routes across seas" },
+    "International shipping": { on: true, p: 1.0, desc: "Long-haul cargo routes across seas", needs: ["coast"] },
     "Passenger vessel": { on: true, p: 0.9, desc: "Passage to distant ports for coin" },
     "Warehousing (bonded)": { on: true, p: 0.8, desc: "Secure storage pending customs clearance" },
     "Ship chandlery": { on: true, p: 1.0, desc: "Provisions, rope, canvas, all nautical supplies" },
@@ -224,9 +224,9 @@ export const INSTITUTION_SERVICES = {
   },
 
   "Navy": {
-    "Convoy escort": { on: false, p: 0.6, desc: "Armed escort for merchant vessels" },
-    "Privateer licensing": { on: false, p: 0.4, desc: "Letters of marque for commerce raiding" },
-    "Shipyard access": { on: false, p: 0.5, desc: "Naval construction and repair" }
+    "Convoy escort": { on: false, p: 0.6, desc: "Armed escort for merchant vessels", needs: ["navigable"] },
+    "Privateer licensing": { on: false, p: 0.4, desc: "Letters of marque for commerce raiding", needs: ["navigable"] },
+    "Shipyard access": { on: false, p: 0.5, desc: "Naval construction and repair", needs: ["navigable"] }
   },
 
   
@@ -277,7 +277,7 @@ export const INSTITUTION_SERVICES = {
   
   "Message Network": {
     "Long-distance messages": { on: true, p: 1.0, desc: "Magical or fast-relay messaging across regions" },
-    [SECURE_COMMUNICATIONS]: { on: false, p: 0.6, desc: "Encoded, magically sealed messages" },
+    [SECURE_COMMUNICATIONS]: { on: false, p: 0.6, desc: "Encoded, magically sealed messages", needs: ["magic"] },
     "Intelligence services": { on: false, p: 0.5, desc: "Who has the network, knows everything" }
   },
 
@@ -311,14 +311,14 @@ export const INSTITUTION_SERVICES = {
 
   
   "Exotic Beast Trainers": {
-    "Exotic creatures for sale": { on: true, p: 0.8, desc: "Rare animals, magical beasts, pets for the wealthy" },
+    "Exotic creatures for sale": { on: true, p: 0.8, desc: "Rare animals, magical beasts, pets for the wealthy", needs: ["magic"] },
     "Animal training": { on: true, p: 0.9, desc: "Guard animals, messenger birds, war mounts" },
     "Monster handling": { on: false, p: 0.5, desc: "Tame or neutralise problematic creatures" }
   },
 
   "Monster Part Dealers": {
     "Monster components": { on: true, p: 1.0, desc: "Dragon scales, basilisk eyes, troll blood" },
-    "Alchemical ingredients": { on: true, p: 0.9, desc: "Magical reagents sourced from kills" },
+    "Alchemical ingredients": { on: true, p: 0.9, desc: "Magical reagents sourced from kills", needs: ["magic"] },
     "Taxidermy and trophies": { on: true, p: 0.6, desc: "Mounted heads, full mounts, hides" }
   },
 
@@ -327,7 +327,7 @@ export const INSTITUTION_SERVICES = {
     "Food and drink (all grades)": { on: true, p: 1.0, desc: "Street food to formal dining" },
     "Entertainment": { on: true, p: 0.9, desc: "Music, games, storytelling every night" },
     "Hiring hall": { on: true, p: 0.8, desc: "Workers, mercenaries, guides available" },
-    "Black market access": { on: false, p: 0.5, desc: "Someone in here knows someone" }
+    "Black market access": { on: false, p: 0.5, desc: "Someone in here knows someone", needs: ["organised crime"] }
   }
 
 ,
@@ -335,8 +335,8 @@ export const INSTITUTION_SERVICES = {
   
   "Veteran's Lodge": {
     "Armed escort": { on: true, p: 0.7, desc: "Small group of experienced fighters for hire. Cheaper than a full company, better than nothing." },
-    "Night watch hire": { on: true, p: 0.6, desc: "Retired soldiers supplementing the village watch. Reliable, cheap, and unwilling to be bribed." },
-    [COMBAT_INSTRUCTION]: { on: false, p: 0.4, desc: "Basic weapons training for village militia. They will not be knights, but they will not die in the first volley." }
+    "Night watch hire": { on: true, p: 0.6, desc: "Retired soldiers supplementing the village watch. Reliable, cheap, and unwilling to be bribed.", needs: ["watch","tier: ≤ village"] },
+    [COMBAT_INSTRUCTION]: { on: false, p: 0.4, desc: "Basic weapons training for village militia. They will not be knights, but they will not die in the first volley.", needs: ["militia","tier: ≤ village"] }
   },
 
   
@@ -398,7 +398,7 @@ export const INSTITUTION_SERVICES = {
   },
   "Brewer": {
     "Ale (jug)": { on: true, p: 1.0, desc: "Small batch ale sold by the jug." },
-    "Ale (barrel)": { on: true, p: 0.9, desc: "Bulk supply to alehouses. Priced by barrel." },
+    "Ale (barrel)": { on: true, p: 0.9, desc: "Bulk supply to alehouses. Priced by barrel.", needs: ["institution: tavern"] }, // W2-FIX-DATA-8 (ww-1416): its twin where no alehouse stands, SERVICE_DESC_SIBLINGS
     "Mead": { on: false, p: 0.4, desc: "Honey wine. Seasonal." }
   },
     "Beekeeper": {
@@ -424,7 +424,7 @@ export const INSTITUTION_SERVICES = {
   },
     "Woodcarver": {
     "Carved goods": { on: true, p: 1.0, desc: "Spoons, bowls, handles, toys. Functional items." },
-    "Religious carvings": { on: true, p: 0.8, desc: "Crucifixes, reliquaries, saints' images." },
+    "Religious carvings": { on: true, p: 0.8, desc: "Devotional figures, holy images, and reliquaries." }, // TAIL-SERVICES-3 (X9 22599): the faith of every culture the woodcarver stands in
     "Custom carving": { on: false, p: 0.5, desc: "Decorative commissions: furniture inlays, structural details." }
   },
       "Waystation": {
@@ -445,7 +445,7 @@ export const INSTITUTION_SERVICES = {
     "Shoe repair": { on: true, p: 0.9, desc: "Full guild workshop. Any repair." }
   },
   "Tailor's Guild": {
-    "Livery and uniforms": { on: true, p: 1.0, desc: "House colours, guild uniforms, city watch livery." },
+    "Livery and uniforms": { on: true, p: 1.0, desc: "House colours, guild uniforms, city watch livery.", needs: ["watch"] },
     "Fine garments": { on: true, p: 0.9, desc: "Quality cloth, expert cut." },
     "Working clothes (bulk)": { on: true, p: 0.8, desc: "Practical clothing for soldiers and servants." },
     "Tailoring (bespoke)": { on: false, p: 0.6, desc: "Full commission from cloth to delivery." }
@@ -507,10 +507,10 @@ export const INSTITUTION_SERVICES = {
     "Weather reading": { on: false, p: 0.6, desc: "Read signs for planting, harvest, and travel." }
   },
   "Druid Circle": {
-    "Nature magic services": { on: true, p: 1.0, desc: "Speaking with animals, poison sensed, food purified, passage that leaves no track." },
+    "Nature magic services": { on: true, p: 1.0, desc: "Speaking with animals, poison sensed, food purified, passage that leaves no track.", needs: ["magic"] },
     "Seasonal rituals": { on: true, p: 0.9, desc: "Solstice and equinox ceremonies." },
     "Wilderness guidance": { on: true, p: 0.8, desc: "Route guidance through dangerous wilderness." },
-    "Healing (nature)": { on: false, p: 0.6, desc: "Wounds closed and sickness lifted by magic. Slower than divine." },
+    "Healing (nature)": { on: false, p: 0.6, desc: "Wounds closed and sickness lifted by magic. Slower than divine.", needs: ["magic"] },
     "Weather forecasting": { on: false, p: 0.7, desc: "Accurate short-term weather prediction." }
   },
   "Warden's Lodge": {
@@ -521,8 +521,8 @@ export const INSTITUTION_SERVICES = {
   },
   "Elder Grove Council": {
     "Nature arbitration": { on: true, p: 1.0, desc: "Mediate disputes: logging rights, water access, beast encroachment." },
-    "Druidic consultation": { on: true, p: 0.9, desc: "Advise city authorities on ecological matters." },
-    "High-level nature magic": { on: false, p: 0.6, desc: "Commune with Nature, Control Weather, Awaken." },
+    "Druidic consultation": { on: true, p: 0.9, desc: "Advise city authorities on ecological matters.", needs: ["tier: ≥ city"] },
+    "High-level nature magic": { on: false, p: 0.6, desc: "Commune with Nature, Control Weather, Awaken.", needs: ["magic"] },
     "Urban grove access": { on: false, p: 0.5, desc: "Permission to use the hidden urban grove." }
   }
 
@@ -548,7 +548,7 @@ export const INSTITUTION_SERVICES = {
 
   "Weekly market": {
     "General trade": { on: true,  p: 1.0, desc: "Agricultural produce, household goods, livestock. The economic heartbeat of the week." },
-    "Tax collection": { on: true, p: 0.9, desc: "Toll collected on goods sold. A percentage to the lord or municipality." },
+    "Tax collection": { on: true, p: 0.9, desc: "Toll collected on goods sold. A share goes to the lord or municipality." },
     "Price reporting": { on: false, p: 0.6, desc: "Written record of prevailing prices sent to larger markets and guild registers." }
   },
 
@@ -566,8 +566,8 @@ export const INSTITUTION_SERVICES = {
   },
 
   "Coaching inn": {
-    "Lodging": { on: true,  p: 1.0, desc: "Beds, meals, and stabling for travelers on the road. Priced by quality." },
-    "Horse change": { on: true, p: 0.9, desc: "Fresh relay horses for coaches and dispatch riders. Reduces travel time significantly." },
+    "Lodging": { on: true,  p: 1.0, desc: "Beds, meals, and stabling for travelers on the road. Priced by quality.", excludes: ["crisis: under_siege"] }, // W2-FIX-DATA-6 (CENSUS-2 b): its twin under a siege, SERVICE_DESC_SIBLINGS
+    "Horse change": { on: true, p: 0.9, desc: "Fresh relay horses for coaches and dispatch riders. Reduces travel time significantly.", excludes: ["crisis: under_siege"] }, // W2-FIX-DATA-6 (CENSUS-2 b): its twin under a siege, SERVICE_DESC_SIBLINGS
     "Parcel forwarding": { on: false, p: 0.6, desc: "Accept and forward parcels and letters along the coaching route." },
     "Route information": { on: false, p: 0.5, desc: "Conditions of the road ahead, bandit reports, river crossings." }
   },
@@ -596,7 +596,7 @@ export const INSTITUTION_SERVICES = {
   },
 
   "Butchers (3-8)": {
-    "Fresh meat": { on: true,  p: 1.0, desc: "Beef, pork, mutton. Slaughtered and dressed on premises or nearby." },
+    "Fresh meat": { on: true,  p: 1.0, desc: "Beef, pork, mutton. Slaughtered and dressed on premises or nearby.", excludes: ["crisis: hunger"] }, // BAR6-HOUSES: its hunger twin (SERVICE_DESC_SIBLINGS)
     "Offal and by-products": { on: true, p: 0.8, desc: "Tripe, tallow, bone, hide. Nothing wasted. By-products sold to chandlers and tanners." },
     "Salting and preservation": { on: false, p: 0.6, desc: "Salt-cure meat for storage and travel. Essential before winter." },
     "Sausage and charcuterie": { on: false, p: 0.5, desc: "Processed meat products. Use lesser cuts and offal. Profitable margins." }
@@ -610,14 +610,14 @@ export const INSTITUTION_SERVICES = {
   },
 
   "Shipyard": {
-    "Ship construction": { on: true, p: 1.0, desc: "Build ocean-going vessels from keel up. Months of skilled labor and materials." },
+    "Ship construction": { on: true, p: 1.0, desc: "Build ocean-going vessels from keel up. Months of skilled labor and materials.", needs: ["coast"] },
     "Repair and refit": { on: true, p: 0.9, desc: "Hull repairs, caulking, mast replacement. Cheaper than new and often urgent." },
     "Dry dock": { on: false, p: 0.7, desc: "Haul vessels out of water for hull inspection and below-waterline repairs." }
   },
 
   "River boatyard": {
-    "Barge construction": { on: true, p: 1.0, desc: "Flat-bottomed cargo barges for river transport. Simpler than sea vessels." },
-    "Boat repair": { on: true, p: 0.9, desc: "Hull patching, oar replacement, caulking. River traffic takes constant punishment." },
+    "Barge construction": { on: true, p: 1.0, desc: "Flat-bottomed cargo barges for river transport. Simpler than sea vessels.", needs: ["river"] },
+    "Boat repair": { on: true, p: 0.9, desc: "Hull patching, oar replacement, caulking. River traffic takes constant punishment.", needs: ["river"] },
     "Ferry service": { on: false, p: 0.6, desc: "Regular crossing service for foot traffic and small goods." }
   },
 
@@ -647,13 +647,13 @@ export const INSTITUTION_SERVICES = {
   },
 
   "Mine (open cast)": {
-    "Raw extraction": { on: true,  p: 1.0, desc: "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate." },
+    "Raw extraction": { on: true,  p: 1.0, desc: "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.", excludes: ["tier: ≥ town"] },
     "Labor hire": { on: false, p: 0.6, desc: "Hire out mine workers to other operations during off-season." }
   },
 
   "Salt works": {
     "Salt production": { on: true,  p: 1.0, desc: "Evaporation, boiling, or mining to produce raw salt. Essential preservative." },
-    "Cured goods": { on: false, p: 0.5, desc: "Process fish and meat using produced salt. Vertical integration of the salt operation." }
+    "Cured goods": { on: false, p: 0.5, desc: "Process fish and meat using the salt produced here." }
   },
 
   "Stone quarry": {
@@ -716,7 +716,7 @@ export const INSTITUTION_SERVICES = {
     "Dice games": { on: false, p: 0.5, desc: "Informal gambling. Stakes are low, disputes are loud." }
   },
   "Annual fair": {
-    "Seasonal trading": { on: true,  p: 1.0, desc: "Once-a-year market drawing merchants from across the region." },
+    "Seasonal trading": { on: true,  p: 1.0, desc: "Once-a-year market drawing merchants from across the region.", excludes: ["crisis: under_siege"] }, // W2-FIX-DATA-5 (ww-494): its twin under a siege, SERVICE_DESC_SIBLINGS
     "Livestock auction": { on: true, p: 0.9, desc: "Major livestock sales. Breeding stock, draft animals, slaughter cattle." },
     "Entertainment": { on: true, p: 0.8, desc: "Performers, contests, games, and spectacle. The social event of the year." },
     "Exotic goods": { on: false, p: 0.6, desc: "Merchants bring unusual imports unavailable at regular markets." },
@@ -735,7 +735,7 @@ export const INSTITUTION_SERVICES = {
   },
   "Aqueduct or water system": {
     "Clean water distribution": { on: true,  p: 1.0, desc: "Reliable clean water delivered throughout the settlement via channels and pipes." },
-    "Mill power": { on: false, p: 0.5, desc: "Water flow diverted to power mills and workshops." }
+    "Mill power": { on: false, p: 0.5, desc: "Water flow diverted to power mills and workshops.", needs: ["institution: mill"] }
   },
   "Assassins' guild": {
     "Assassination contracts": { on: true,  p: 1.0, desc: "Discreet elimination of targets. Staged as accidents when possible." },
@@ -794,12 +794,12 @@ export const INSTITUTION_SERVICES = {
   },
   "Bowyer & fletcher": {
     "Bow crafting": { on: true,  p: 1.0, desc: "Short bows, longbows, and hunting bows to commission or stock." },
-    "Arrow and bolt production": { on: true, p: 0.9, desc: "Matched arrows with correct spine and fletching. Bulk orders for militia." },
+    "Arrow and bolt production": { on: true, p: 0.9, desc: "Matched arrows with correct spine and fletching. Bulk orders for militia.", needs: ["militia"] },
     "Bow maintenance": { on: true, p: 0.8, desc: "Re-string, limb repair, and re-finishing to keep bows functional." },
     "Custom orders": { on: false, p: 0.4, desc: "Bespoke work for hunters and military officers. Longer wait, higher cost." }
   },
   "Bowyers & fletchers (guild)": {
-    "Military supply": { on: true,  p: 1.0, desc: "Contract supply of bows and arrows to garrison and militia. Volume pricing." },
+    "Military supply": { on: true,  p: 1.0, desc: "Contract supply of bows and arrows to the local guard. Volume pricing.", needs: ["guardPresence"] }, // CENSUS-4d (R-W): whichever armed force stands; the old "garrison and militia" held in no birth
     "Quality bows": { on: true, p: 0.9, desc: "Guild-certified bows meeting standardized draw weights and lengths." },
     "Arrow production": { on: true, p: 0.9, desc: "Consistent, high-volume arrow production for military and hunting." },
     "Apprenticeship": { on: false, p: 0.5, desc: "Formal training in bow-making and fletching craft." }
@@ -826,7 +826,7 @@ export const INSTITUTION_SERVICES = {
     [CUSTOM_COMMISSIONS]: { on: false, p: 0.5, desc: "Decorative or specialist work for wealthier clients." }
   },
   "Carriers' guild": {
-    "Freight haulage": { on: true,  p: 1.0, desc: "Organised road transport for goods between towns. Reliable, guild-backed." },
+    "Freight haulage": { on: true,  p: 1.0, desc: "Organised road transport for goods between towns. Reliable, guild-backed.", excludes: ["crisis: under_siege"] },
     "Delivery contracts": { on: true, p: 0.9, desc: "Scheduled delivery runs on established routes." },
     "Porterage": { on: false, p: 0.6, desc: "Short-distance carrying within a town or at a port." },
     "Cargo storage": { on: false, p: 0.5, desc: "Temporary warehousing while goods await onward transport." }
@@ -855,7 +855,7 @@ export const INSTITUTION_SERVICES = {
   },
   "Charcoal burner": {
     "Charcoal supply": { on: true,  p: 1.0, desc: "Produce and sell charcoal for smithing, heating, and industrial use." },
-    "Wood management": { on: false, p: 0.5, desc: "Coppice and manage woodland for sustainable charcoal production." }
+    "Wood management": { on: false, p: 0.5, desc: "Coppice and manage woodland for sustainable charcoal production.", needs: ["terrain: forest"] }
   },
   "Citizen militia": {
     "Emergency defense": { on: true,  p: 1.0, desc: "Armed citizen response to external threats and raids." },
@@ -867,8 +867,8 @@ export const INSTITUTION_SERVICES = {
     "Grain loans": { on: false, p: 0.4, desc: "Advance grain to farmers against next harvest. Interest in kind." }
   },
   "City-state government": {
-    "Civic law enforcement": { on: true,  p: 1.0, desc: "Courts, magistrates, and watch maintaining order within city-state territory." },
-    "Trade licensing": { on: true, p: 0.9, desc: "Issue licences for merchants, markets, guilds, and regulated trades." },
+    "Civic law enforcement": { on: true,  p: 1.0, desc: "Courts, magistrates, and watch maintaining order within city-state territory.", needs: ["watch"] },
+    "Trade licensing": { on: true, p: 0.9, desc: "Issue licences for merchants, markets, guilds, and regulated trades.", needs: ["market","guild"] },
     [DIPLOMATIC_FUNCTIONS]: { on: false, p: 0.6, desc: "Receive foreign emissaries and negotiate inter-city treaties." },
     "Tax collection": { on: false, p: 0.8, desc: "Collect revenues from trade, property, and population to fund city functions." }
   },
@@ -902,7 +902,7 @@ export const INSTITUTION_SERVICES = {
     "Political power": { on: false, p: 0.6, desc: "Guilds at this scale wield significant civic and political influence." }
   },
   "Daily markets": {
-    "Fresh produce": { on: true,  p: 1.0, desc: "Fruit, vegetables, dairy, and eggs. Available every morning." },
+    "Fresh produce": { on: true,  p: 1.0, desc: "Fruit, vegetables, dairy, and eggs. Available every morning.", excludes: ["crisis: under_siege"] },
     "General trade": { on: true, p: 0.9, desc: "Household goods, small crafts, and everyday items." },
     "Street food": { on: true, p: 0.8, desc: "Hot food sold to working people. Pies, stews, roasted meats." },
     "Wholesale purchasing": { on: false, p: 0.5, desc: "Early morning bulk buying by tavern keepers and institutional buyers." }
@@ -920,7 +920,7 @@ export const INSTITUTION_SERVICES = {
     "Citizen registration": { on: false, p: 0.5, desc: "Register as a citizen entitled to vote and hold property." }
   },
   "Dragon resident": {
-    "Draconic consultation": { on: false, p: 0.4, desc: "If the dragon is cooperative, its knowledge of history and magic is unmatched." },
+    "Draconic consultation": { on: false, p: 0.4, desc: "If the dragon is cooperative, its knowledge of history and magic is unmatched.", needs: ["magic"] },
     "Treasure appraisal": { on: false, p: 0.3, desc: "Dragons know the value of everything. They will insist on telling you." },
     // A-04 (soak 1000 row 19): the dragon line is printed only where magic works. `magical`
     // is the world law's explicit magic metadata (generationContext.js ::
@@ -950,7 +950,7 @@ export const INSTITUTION_SERVICES = {
     // A-11 (soak 1000 row 7): a morning catch only where there is water; inland the row is
     // this pool's own "Preserved fish" (the salted barrels the Fish market's catalog text names).
     "Fresh fish retail": { on: true,  p: 1.0, inlandAlternative: "Preserved fish", desc: "Fish sold daily from the morning catch. Selection varies by season." },
-    "Wholesale trade": { on: true, p: 0.8, desc: "Bulk purchase by taverns, institutions, and inland traders." },
+    "Wholesale trade": { on: true, p: 0.8, desc: "Bulk purchase by taverns, institutions, and inland traders.", needs: ["institution: tavern"] }, // TAIL-SERVICES-3 (04603): its twin where no tavern stands, SERVICE_DESC_SIBLINGS
     "Preserved fish": { on: false, p: 0.6, desc: "Smoked, dried, and salt-preserved fish for storage and inland trade." }
   },
   "Foundling home": {
@@ -1025,7 +1025,7 @@ export const INSTITUTION_SERVICES = {
     "Hedge medicine": { on: false, p: 0.5, desc: "Combination of herbal knowledge and minor magic for common ailments." }
   },
   "Hired blades": {
-    "Bodyguard service": { on: true,  p: 1.0, desc: "Personal protection for merchants, officials, and travelers." },
+    "Bodyguard service": { on: true,  p: 1.0, desc: "Personal protection for merchants, officials, and travelers.", excludes: ["crisis: under_siege"] }, // BAR5-MARKS: its siege twin (SERVICE_DESC_SIBLINGS)
     "Escort": { on: true, p: 0.9, desc: "Armed accompaniment for valuable shipments and vulnerable travelers." },
     "Bounty hunting": { on: false, p: 0.5, desc: "Track and return fugitives. Payment on delivery." },
     "Muscle for hire": { on: false, p: 0.4, desc: "Intimidation, debt collection, and problem resolution. No questions." }
@@ -1058,18 +1058,23 @@ export const INSTITUTION_SERVICES = {
     "Ransom facilitation": { on: false, p: 0.7, desc: "Negotiate ransom payment and arrange safe release. Cut taken." },
     "Safe houses": { on: false, p: 0.5, desc: "Secure locations to hold victims or shelter fugitives." }
   },
+  // BAR6-HOUSES (the chair's ruling SV1, 2026-11-16; vetoable by the owner): a service that names the lord, the crown or the
+  // monarch declares the sovereign atom (`facts/sovereign.js`). Each of these is its own house's (a lord's appointee, steward or
+  // reeve, a noble governor, a royal seat), whose name gives the sovereign, so the roll admits it wherever it is drawn.
   "Lord's appointee": {
-    "Administrative orders": { on: true,  p: 1.0, desc: "Implement the lord's directives at local level." },
-    "Tax collection": { on: true, p: 0.9, desc: "Collect rents and taxes owed to the lord." },
-    "Legal representation": { on: false, p: 0.5, desc: "Represent the lord's interests in local disputes." }
+    "Administrative orders": { on: true,  p: 1.0, desc: "Implement the lord's directives at local level.", needs: ["sovereign"] },
+    "Tax collection": { on: true, p: 0.9, desc: "Collect rents and taxes owed to the lord.", needs: ["sovereign"] },
+    "Legal representation": { on: false, p: 0.5, desc: "Represent the lord's interests in local disputes.", needs: ["sovereign"] }
   },
   "Lord's steward": {
-    "Estate management": { on: true,  p: 1.0, desc: "Oversee the lord's properties, staff, and revenues." },
+    "Estate management": { on: true,  p: 1.0, desc: "Oversee the lord's properties, staff, and revenues.", needs: ["sovereign"] },
     "Record keeping": { on: true, p: 0.9, desc: "Maintain accounts, rental rolls, and estate documents." },
-    "Supplier contracts": { on: false, p: 0.5, desc: "Negotiate supply contracts for the lord's household." }
+    "Supplier contracts": { on: false, p: 0.5, desc: "Negotiate supply contracts for the lord's household.", needs: ["sovereign"] }
   },
   "Luxury goods quarter": {
-    "High-end retail": { on: true,  p: 1.0, desc: "Jewellery, fine clothing, rare spices, and luxury goods from across the world." },
+    // BAR2-SERVICES (the chair's ruling SV2, 2026-11-15): the row names no good the town may lack (it sold "rare spices" where the
+    // town's own need line says spices are wanted and not brought in: 21 of 97 printing dumps). VETOABLE wording (the owner's).
+    "High-end retail": { on: true,  p: 1.0, desc: "Jewellery, fine clothing, and luxury goods from across the world." },
     [CUSTOM_COMMISSIONS]: { on: true, p: 0.8, desc: "Bespoke luxury items made to the client's specification." },
     "Exotic imports": { on: false, p: 0.6, desc: "Goods sourced from distant regions unavailable elsewhere." },
     "Appraisal": { on: false, p: 0.5, desc: "Professional valuation of luxury goods, heirlooms, and estate items." }
@@ -1099,7 +1104,7 @@ export const INSTITUTION_SERVICES = {
   },
   "Mayor and council": {
     [CIVIC_ADMINISTRATION]: { on: true,  p: 1.0, desc: "Day-to-day governance of the settlement. Planning, budgeting, and dispute resolution." },
-    "Trade licensing": { on: true, p: 0.9, desc: "Issue permits for market stalls, new businesses, and regulated trades." },
+    "Trade licensing": { on: true, p: 0.9, desc: "Issue permits for market stalls, new businesses, and regulated trades.", needs: ["market"] },
     "Legal appeals": { on: false, p: 0.6, desc: "Hear appeals against magistrate decisions and resolve serious disputes." }
   },
   "Mercenary quarter": {
@@ -1113,7 +1118,7 @@ export const INSTITUTION_SERVICES = {
     "Political influence": { on: false, p: 0.4, desc: "The oligarchy shapes policy. Access to their network has value." }
   },
   "Message network (high magic)": {
-    "Instant messaging": { on: true,  p: 1.0, desc: "Near-instant magical message delivery to any node in the network." },
+    "Instant messaging": { on: true,  p: 1.0, desc: "Near-instant magical message delivery to any station on the network." },
     [SECURE_COMMUNICATIONS]: { on: true, p: 0.8, desc: "Encrypted or warded messages that cannot be intercepted." },
     "Magical courier": { on: false, p: 0.5, desc: "Physical items transported via magical means on the network." }
   },
@@ -1128,11 +1133,11 @@ export const INSTITUTION_SERVICES = {
     "Coin inspection": { on: false, p: 0.5, desc: "Verify coin quality and detect forgeries. Official certification available." }
   },
   "Monastery or friary": {
-    [RELIGIOUS_SERVICES]: { on: true,  p: 1.0, desc: "Rites, prayers, and observances. Open to locals and pilgrims." },
+    [RELIGIOUS_SERVICES]: { on: true,  p: 1.0, desc: "Rites, prayers, and observances. Open to locals and pilgrims.", excludes: ["crisis: under_siege"] }, // BAR5-MARKS: its siege twin (SERVICE_DESC_SIBLINGS)
     "Hospitality": { on: true, p: 0.8, desc: "Food and shelter for travelers and pilgrims. Often free or by donation." },
     "Copyist services": { on: true, p: 0.7, desc: "Copy manuscripts and documents. Primary source of book production." },
     "Herbalism and healing": { on: false, p: 0.5, desc: "Monastic herb gardens and healing knowledge serve the local population." },
-    "Education": { on: false, p: 0.4, desc: "Teach reading, writing, and arithmetic. Often the only education available." }
+    "Education": { on: false, p: 0.4, desc: "Teach reading, writing, and reckoning. Often the only education available." }
   },
   "Money changers": {
     "Currency exchange": { on: true,  p: 1.0, desc: "Convert between different currencies at posted rates. Margin taken on each transaction." },
@@ -1158,7 +1163,7 @@ export const INSTITUTION_SERVICES = {
   "Multiple garrisons": {
     "District security": { on: true,  p: 1.0, desc: "Military presence distributed across multiple districts." },
     "Rapid response": { on: true, p: 0.8, desc: "Multiple garrison points allow fast response to threats anywhere in the city." },
-    "Military training grounds": { on: false, p: 0.5, desc: "Garrison facilities used for ongoing training of soldiers and militia." }
+    "Military training grounds": { on: false, p: 0.5, desc: "Garrison facilities used for ongoing training of soldiers and militia.", needs: ["militia"] }
   },
   "Multiple market squares": {
     "District trading": { on: true,  p: 1.0, desc: "Each district has its own market square serving local needs." },
@@ -1175,7 +1180,7 @@ export const INSTITUTION_SERVICES = {
     "Venue hire": { on: false, p: 0.4, desc: "Hire a theater for private performances or special events." }
   },
   "Noble governor": {
-    "Noble administration": { on: true,  p: 1.0, desc: "Govern in the name of the crown or great noble house." },
+    "Noble administration": { on: true,  p: 1.0, desc: "Govern in the name of the crown or great noble house.", needs: ["sovereign"] },
     "Court access": { on: false, p: 0.5, desc: "Introduction to noble court circles. Useful for ambitious petitioners." },
     "Patronage": { on: false, p: 0.4, desc: "Noble patronage for artists, scholars, and loyal subjects." }
   },
@@ -1201,7 +1206,7 @@ export const INSTITUTION_SERVICES = {
     "Record keeping": { on: false, p: 0.6, desc: "Centralised or distributed congregation records for the whole settlement." }
   },
   "Parish churches (10-30)": {
-    "Full religious coverage": { on: true,  p: 1.0, desc: "Every district has a temple. Religious observance accessible to all." },
+    "Full religious coverage": { on: true,  p: 1.0, desc: "Every parish served. Religious observance accessible to all." }, // TAIL-SERVICES-3 (B06916): the house is the parish churches
     "Network coordination": { on: false, p: 0.5, desc: "The congregations coordinate on feast days and city-wide observances." }
   },
   "Parish churches (50-100+)": {
@@ -1212,7 +1217,7 @@ export const INSTITUTION_SERVICES = {
     "Peat fuel supply": { on: true,  p: 1.0, desc: "Cut and dried peat blocks for fuel. Important where wood is scarce." }
   },
   "Planar embassy": {
-    "Extraplanar relations": { on: true,  p: 1.0, desc: "Formal diplomatic relations with extraplanar entities and factions." },
+    "Extraplanar relations": { on: true,  p: 1.0, desc: "Formal diplomatic relations with extraplanar entities and powers." },
     "Portal access": { on: false, p: 0.5, desc: "Access to planar portals for travel and trade. Restricted and regulated." },
     "Planar trade brokerage": { on: false, p: 0.4, desc: "Broker trade deals for extraplanar goods and services." }
   },
@@ -1220,11 +1225,11 @@ export const INSTITUTION_SERVICES = {
     "Exotic extraplanar goods": { on: true,  p: 1.0, desc: "Goods from other planes unavailable by any other means." },
     "Rare materials": { on: true, p: 0.8, desc: "Planar components: stardust, shadow silk, elemental crystals." },
     "Dimensional storage": { on: false, p: 0.5, desc: "Bag of holding and portable hole services. Useful for merchants." },
-    "Planar information": { on: false, p: 0.4, desc: "Knowledge of other planes: geography, factions, and dangers." }
+    "Planar information": { on: false, p: 0.4, desc: "Knowledge of other planes: geography, powers, and dangers." }
   },
   "Priest (resident)": {
     [RELIGIOUS_SERVICES]: { on: true,  p: 1.0, desc: "Daily prayers, blessings, and religious counsel." },
-    "Healing": { on: true, p: 0.7, desc: "Divine healing magic for the sick and injured." },
+    "Healing": { on: true, p: 0.7, desc: "Divine healing magic for the sick and injured.", needs: ["magic"] },
     "Life ceremonies": { on: true, p: 1.0, desc: "Births, marriages, and funerals." },
     "Spiritual counsel": { on: false, p: 0.6, desc: "Guidance on moral and spiritual matters." }
   },
@@ -1256,13 +1261,13 @@ export const INSTITUTION_SERVICES = {
     "Horseshoeing": { on: true, p: 0.8, desc: "Essential service for working horses." }
   },
   "River ferry": {
-    "River crossing": { on: true,  p: 1.0, desc: "Transport foot travelers and small goods across the river." },
-    "Small cargo": { on: false, p: 0.6, desc: "Move small amounts of cargo across the river." }
+    "River crossing": { on: true,  p: 1.0, desc: "Transport foot travelers and small goods across the river.", needs: ["river"] },
+    "Small cargo": { on: false, p: 0.6, desc: "Move small amounts of cargo across the river.", needs: ["river"] }
   },
   "Royal seat": {
     "State governance": { on: true,  p: 1.0, desc: "Centre of royal administration and decision-making." },
     "Noble registration": { on: false, p: 0.5, desc: "Register noble titles, land grants, and hereditary claims." },
-    "Royal audience": { on: false, p: 0.2, desc: "Rare opportunity to petition the monarch directly." }
+    "Royal audience": { on: false, p: 0.2, desc: "Rare opportunity to petition the monarch directly.", needs: ["sovereign"] }
   },
   "Scroll scribe": {
     "Document writing": { on: true,  p: 1.0, desc: "Write contracts, letters, and official documents for illiterate clients." },
@@ -1293,7 +1298,7 @@ export const INSTITUTION_SERVICES = {
     "Precision metalwork": { on: true,  p: 1.0, desc: "Complex metal components for clocks, mechanisms, and specialist tools." },
     "Alloy production": { on: true, p: 0.8, desc: "Bronze, brass, steel, and specialist alloys to commission." },
     "Technical consulting": { on: false, p: 0.5, desc: "Engineering advice on structural metalwork and mechanical systems." },
-    "Specialty repairs": { on: false, p: 0.4, desc: "Repair precision instruments, magical devices, and complex mechanisms." }
+    "Specialty repairs": { on: false, p: 0.4, desc: "Repair precision instruments, magical devices, and complex mechanisms.", needs: ["magic"] }
   },
   "Stable master": {
     "Horse boarding": { on: true,  p: 1.0, desc: "Feed, water, and shelter privately-owned horses." },
@@ -1347,12 +1352,12 @@ export const INSTITUTION_SERVICES = {
     "Cargo inspection": { on: false, p: 0.3, desc: "Check loads for contraband or unpaid duties." }
   },
   "Town crier": {
-    "Official announcements": { on: true,  p: 1.0, desc: "Proclaim laws, royal decrees, and official notices to the public." },
+    "Official announcements": { on: true,  p: 1.0, desc: "Proclaim laws, decrees and official notices to the public." }, // BAR7-LINES (6e, the chair's SV2): a crier proclaims for whoever rules; no crown
     "Commercial announcements": { on: false, p: 0.6, desc: "Paid announcements for merchants, events, and wanted notices." }
   },
   "Town watch": {
     "Night patrol": { on: true,  p: 1.0, desc: "Patrol the streets after dark. Deter crime and respond to incidents." },
-    "Gate duty": { on: true, p: 0.8, desc: "Check travelers entering and leaving. Note unusual visitors." },
+    "Gate duty": { on: true, p: 0.8, desc: "Check travelers entering and leaving. Note unusual visitors.", needs: ["gate"] },
     "Crime response": { on: false, p: 0.7, desc: "Respond to reported crimes and pursue fleeing suspects." }
   },
   "Travelers' inn": {
@@ -1379,9 +1384,9 @@ export const INSTITUTION_SERVICES = {
     "Hue and cry": { on: false, p: 0.6, desc: "Turn the village out after a thief or a stray beast." }
   },
   "Village reeve": {
-    "Administrative oversight": { on: true,  p: 1.0, desc: "Manage village affairs on behalf of the lord. Allocate strips and common access." },
+    "Administrative oversight": { on: true,  p: 1.0, desc: "Manage the village's affairs day to day. Allocate strips and common access." },
     [DISPUTE_RESOLUTION]: { on: true, p: 0.8, desc: "Settle minor disputes before they require higher authority." },
-    "Tax collection": { on: false, p: 0.7, desc: "Collect dues owed to the lord and accounting for common resources." }
+    "Tax collection": { on: false, p: 0.7, desc: "Collect dues owed to the lord and accounting for common resources.", needs: ["sovereign"] }
   },
   "Village scribe": {
     "Letter writing": { on: true,  p: 1.0, desc: "Write letters for illiterate villagers." },
@@ -1406,7 +1411,7 @@ export const INSTITUTION_SERVICES = {
     "Skilled labor matching": { on: false, p: 0.6, desc: "Premium matching of skilled enslaved artisans, scribes, and tutors to buyers." }
   },
   "Human trafficking network": {
-    "Disappearances": { on: true,  p: 0.9, desc: "People go missing. Usually blamed on bandits or the river." },
+    "Disappearances": { on: true,  p: 0.9, desc: "People go missing. Usually blamed on bandits or the river.", needs: ["river"] },
     "Document forgery": { on: false, p: 0.7, desc: "False freedom papers, altered identities, forged ownership documents." },
     "Transport routes": { on: false, p: 0.6, desc: "Safe houses and handoff points moving persons without attracting attention." }
   },
@@ -1447,10 +1452,10 @@ export const INSTITUTION_SERVICES = {
     "Burial": { on: true,  p: 1.0, desc: "Interment in the congregation's ground, with the rite that congregation keeps." },
     "Register of the dead": { on: true, p: 0.8, desc: "The sexton records who lies where. Consulted in inheritance disputes as often as in mourning." },
     [MEMORIAL_INSCRIPTION]: { on: false, p: 0.5, desc: "Cut stones and lettered slabs, ordered from the masons who work the burial ground." },
-    "Guild plot": { on: false, p: 0.4, desc: "A block of ground held by a trade for its members and their households." }
+    "Guild plot": { on: false, p: 0.4, desc: "A block of ground held by a trade for its members and their households.", needs: ["guild"] }
   },
   "Burial grounds and charnel house": {
-    "Burial": { on: true,  p: 1.0, desc: "Interment outside the gates. The bearers and the cart are found by the ground." },
+    "Burial": { on: true,  p: 1.0, desc: "Interment outside the gates. The bearers and the cart are found by the ground.", needs: ["gate"] },
     "Lifting and ossuary": { on: true, p: 0.7, desc: "Bones lifted from filled ground once the term is up and stacked in the charnel house." },
     "Perpetual plot": { on: false, p: 0.4, desc: "Ground bought against lifting, held for as long as the endowment holds." },
     [MEMORIAL_INSCRIPTION]: { on: false, p: 0.5, desc: "Cut stones and lettered slabs, ordered from the masons who work the grounds." }
@@ -1459,7 +1464,7 @@ export const INSTITUTION_SERVICES = {
     "Burial": { on: true,  p: 1.0, desc: "Interment in the ground the ward is assigned to, reached by the burial roads." },
     "Central register": { on: true, p: 0.9, desc: "Congregation rolls copied into one office, because no congregation can any longer say where its own dead are." },
     "Plot brokerage": { on: false, p: 0.5, desc: "Ground bought, sold and resold. The revenue office watches the trade, and the trade knows it." },
-    "Funeral procession": { on: false, p: 0.4, desc: "Bearers, mutes and a hired route out through the gate, priced by how much of the city is meant to notice." }
+    "Funeral procession": { on: false, p: 0.4, desc: "Bearers, mutes and a hired route out through the gate, priced by how much of the city is meant to notice.", needs: ["gate"] }
   },
   "Town granary": {
     "Grain storage": { on: true,  p: 1.0, desc: "Municipal grain reserves. Buffers the settlement against poor harvests." },
@@ -1484,13 +1489,15 @@ export const INSTITUTION_SERVICES = {
     "Community mediation": { on: true,  p: 0.8, desc: "The elder hears disputes and suggests resolution. No enforcement, but social pressure is real." }
   },
   "Head-of-household consensus": {
-    "Family decisions": { on: true,  p: 0.7, desc: "Matters affecting multiple families go to a council of heads. Slow but broadly legitimate." }
+    // BAR2-SERVICES (the chair's ruling SV3, 2026-11-15): the row says how the families settle a matter, out of the government's
+    // legitimacy register (it printed "broadly legitimate" where the page's word is Contested). VETOABLE wording (the owner's).
+    "Family decisions": { on: true,  p: 0.7, desc: "Matters affecting multiple families go to a council of heads, who settle them slowly, by talk." }
   },
   "Subsistence farming": {
     "Surplus sale": { on: false, p: 0.4, desc: "In good years, small surpluses sold at market. Rare and seasonal." }
   },
   "Town walls": {
-    "Gate control": { on: true,  p: 1.0, desc: "Control who enters and exits. Levy tolls on goods." },
+    "Gate control": { on: true,  p: 1.0, desc: "Control who enters and exits. Levy tolls on goods.", needs: ["gate"] },
     "Refuge in crisis": { on: false, p: 0.5, desc: "The walls provide refuge for the rural population during raids." }
   },
   "City walls and gates": {
@@ -1498,8 +1505,8 @@ export const INSTITUTION_SERVICES = {
     "Patrol service": { on: false, p: 0.5, desc: "Manned towers and wall walks patrol for threats." }
   },
   "Citadel": {
-    "Last refuge": { on: true,  p: 1.0, desc: "The final defensible point in the city. Holds the essential population if the rest falls." },
-    "Military command": { on: false, p: 0.6, desc: "Command and coordination centre for the city's defense." }
+    "Last refuge": { on: true,  p: 1.0, desc: "The final defensible point in the city. Holds the essential population if the rest falls.", needs: ["tier: ≥ city"] },
+    "Military command": { on: false, p: 0.6, desc: "Command and coordination centre for the city's defense.", needs: ["tier: ≥ city"] }
   },
   "Massive walls and fortifications": {
     "Perimeter defense": { on: true,  p: 1.0, desc: "The city's primary military asset. Keeps out everything short of a major siege." }
@@ -1532,7 +1539,7 @@ export const INSTITUTION_SERVICES = {
     "Weekly rite": { on: true, p: 1.0, desc: "The weekly service. Attendance expected of all residents." },
     "Rite of entry": { on: true, p: 0.9, desc: "The rite that admits a person to the faith. Required for most civil recognition." },
     "Marriage ceremony": { on: true, p: 0.9, desc: "Marriage sanctioned by the faith, legally binding." },
-    "Last rites": { on: true, p: 0.9, desc: "Funeral rites and burial. The priest manages the graveyard." },
+    "Last rites": { on: true, p: 0.9, desc: "Funeral rites, said by the parish priest, who comes or is sent for." },
     "Confession": { on: false, p: 0.6, desc: "Private confession to the priest. The fault is heard and released." }
   },
   "Monastery": {
@@ -1545,11 +1552,11 @@ export const INSTITUTION_SERVICES = {
   "Major monasteries (5-10)": {
     "Advanced scribing": { on: true, p: 0.9, desc: "High-quality manuscript copying across multiple scriptoria." },
     "Rare texts": { on: false, p: 0.6, desc: "Access to unusual texts and scholarly works held by the monasteries." },
-    "Higher healing": { on: false, p: 0.5, desc: "More advanced divine healing from senior clerics." },
+    "Higher healing": { on: false, p: 0.5, desc: "More advanced divine healing from senior clerics.", needs: ["magic"] },
     "Reliquary access": { on: false, p: 0.4, desc: "Access to venerated relics and shrines for pilgrims." }
   },
   "Local fence": {
-    "Sell stolen goods": { on: true, p: 0.9, desc: "Buy stolen items at 20-40% of value. No questions asked." },
+    "Sell stolen goods": { on: true, p: 0.9, desc: "Buy stolen items for a fraction of their worth. No questions asked." },
     "Appraisal (unofficial)": { on: true, p: 0.7, desc: "Assess the black-market value of items. Discretion guaranteed." },
     "Buyer introductions": { on: false, p: 0.4, desc: "Connect sellers with specific buyers for higher-value items." }
   },
@@ -1575,7 +1582,7 @@ export const INSTITUTION_SERVICES = {
   },
   // [D6 THE UNDERWAYS] the underground network's service menu — joins the crime menus.
   "Underground network": {
-    "Discreet passage": { on: true, p: 1.0, desc: "Move people beneath the walls unseen." },
+    "Discreet passage": { on: true, p: 1.0, desc: "Move people beneath the walls unseen.", needs: ["walls"] },
     "Untaxed storage": { on: true, p: 0.8, desc: "Hold goods in dug caches off the rolls." },
     "No-questions transport": { on: false, p: 0.6, desc: "Carry cargo with no manifest or toll." },
     "Safe house": { on: false, p: 0.5, desc: "A dug chamber off the passage where someone can wait out a search." }
@@ -1586,8 +1593,8 @@ export const INSTITUTION_SERVICES = {
     "Criminal arbitration": { on: false, p: 0.5, desc: "Resolve disputes between criminal parties without involving authorities." }
   },
   "Palisade or earthworks": {
-    "Gated entry": { on: true, p: 1.0, desc: "Controlled access through the perimeter. Strangers must state business." },
-    "Night watch": { on: true, p: 0.8, desc: "Basic patrol of the perimeter after dark." },
+    "Gated entry": { on: true, p: 1.0, desc: "Controlled access through the perimeter. Anyone entering must state their business.", needs: ["gate"] },
+    "Night watch": { on: true, p: 0.8, desc: "Basic patrol of the perimeter after dark.", needs: ["watch"] },
     "Emergency shelter": { on: false, p: 0.5, desc: "Refuge for the rural population during raids or attacks." }
   },
   "Gates (if walled)": {
@@ -1655,7 +1662,7 @@ export const INSTITUTION_SERVICES = {
     "Companionship": { on: true, p: 1.0, desc: "Paid companionship services." },
     "Private rooms": { on: true, p: 0.8, desc: "Secure, discreet rooms for meetings requiring privacy." },
     "Rumour brokering": { on: false, p: 0.6, desc: "Information gathered from indiscreet clients. Valuable currency." },
-    "Neutral meeting space": { on: false, p: 0.4, desc: "A place where parties from rival factions can meet quietly." }
+    "Neutral meeting space": { on: false, p: 0.4, desc: "A place where parties from rival powers can meet quietly." }
   },
   "Opera house": {
     "Performance tickets": { on: true, p: 1.0, desc: "Purchase tickets for scheduled performances." },
@@ -1708,7 +1715,7 @@ export const INSTITUTION_SERVICES = {
   "Rookery": {
     "Bird message": { on: true, p: 1.0, desc: "Send word by loft, unsigned, ahead of any rider on the road." },
     "Unattributed answer": { on: true, p: 0.8, desc: "Ask a question that no one will remember you having asked." },
-    "Watch movements": { on: true, p: 0.7, desc: "Where the watch is walking this week, and where it is not." },
+    "Watch movements": { on: true, p: 0.7, desc: "Where the watch is walking this week, and where it is not.", needs: ["watch"] },
     "Name check": { on: false, p: 0.5, desc: "Find out who a newcomer answers to before you deal with them." }
   },
   "Whisper market": {
@@ -1717,6 +1724,163 @@ export const INSTITUTION_SERVICES = {
     "Broker introduction": { on: true, p: 0.7, desc: "Be put in front of the one broker who deals in your subject." },
     "Standing retainer": { on: false, p: 0.6, desc: "A patron's covert feed, renewed for as long as the payments hold." },
     "Manufactured claim": { on: false, p: 0.3, desc: "Have a story built, laundered through other mouths, and put into circulation." }
+  },
+
+  // ── A PROXY IS NOT A PROVIDER (lane REVIEW-INTAKE unit 2, 2026-11-06). APPENDED, as the
+  // note above requires. These twelve rows used to borrow an inn's, a courthouse's or a
+  // mill's menu through servicesData.js :: PROXY_SERVICE_HOSTS, so the record credited a
+  // Sewage system with "Food and drink". Each now owns what its house really offers. An
+  // EMPTY entry is a house with no menu: it resolves here by exact name (so no fuzzy match
+  // lends it one), rolls nothing and has no fallback (tests/joins/proxyIsNotProvider.test.js).
+  // A ONE-ROW MENU IS ROLLED AT p 1.0 (chair ruling R1, 2026-11-06): a lower p on a house's only
+  // row is a fake roll, since the generator's fallback grants it anyway, and it spends a draw.
+  "Dwellings (1-8)": {
+    "Hospitality": { on: true, p: 1.0, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
+  },
+  "Dwellings (5-25)": {
+    "Hospitality": { on: true, p: 1.0, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
+  },
+  "Dwellings (15-100)": {
+    "Hospitality": { on: true, p: 1.0, desc: "A bed by the hearth and a place at a shared table, for a traveller who asks." }
+  },
+  "Housing (75-650 households)": {
+    "Lodging (rooms to let)": { on: true, p: 1.0, desc: "A room let in a private house, by the night or the week." }
+  },
+  "Housing (500-4000 households)": {
+    "Lodging (rooms to let)": { on: true, p: 1.0, desc: "A room let in a private house, by the night or the week." }
+  },
+  // The largest housing row had no menu and no proxy; with the rows above it would now
+  // fuzzy-match the city's menu, so it is named here, with the same one service. RE-KEYED
+  // 2026-11-07 (REVIEW-INTAKE-LAND, the merge onto rung 1's tip): X-46 3c renamed the six
+  // Dwellings/Housing rows to the owner's household column (tests/data/dwellingsHouseholdNames
+  // .test.js), so these six entries carry the new names; the menus are unchanged.
+  "Housing (3500+ households)": {
+    "Lodging (rooms to let)": { on: true, p: 1.0, desc: "A room let in a private house, by the night or the week." }
+  },
+  "Water source": {},
+  "Multiple water sources": {},
+  "Sewage system": {},
+  "Massive prison": {
+    "Long-term incarceration": { on: true, p: 1.0, desc: "Hold convicted criminals for extended sentences." },
+    "Hard labour contracts": { on: false, p: 0.6, desc: "Assign prisoners to labour contracts for public works." },
+    "Visitor permits": { on: false, p: 0.4, desc: "Obtain a permit to visit an incarcerated person." }
+  },
+  "Farmland": {
+    "Grain at harvest": { on: true, p: 1.0, desc: "Grain sold by the sack to a household, straight from the field at harvest." }
+  },
+  "Common grazing land": {
+    "Pasturage": { on: true, p: 1.0, desc: "Grazing on the common for a traveller's beasts, for a small fee." }
+  },
+  "Access to external mill": {
+    "Grain milling (a day away)": { on: true, p: 1.0, desc: "Grain carted to a mill outside the settlement and brought back as flour.", excludes: ["crisis: under_siege"] }
   }
 
 };
+
+/**
+ * DECLARED SIBLINGS (CENSUS-1c unit 1; `docs/DESIGN_POOL_CENSUS.md` §3.1, the twin tables
+ * dissolved): the walls-free twins of two service descriptions (F10 unit 4). Each set is the original line, declaring what it presumes, and beside it its
+ * twin with the complementary atom (`twinOf` the original). The original stays where this table's
+ * string consumers read it; the draw site resolves a drawn key through
+ * `domain/facts/drawDeclared.js :: resolveSibling` (the original if the record admits it, else the
+ * twin). Retired from the text-keyed tables `defenceTwinLines.js` / `inlandHookLines.js` (F5, F10),
+ * every twin to the byte. VETOABLE wording, as before (the owner's).
+ */
+export const SERVICE_DESC_SIBLINGS = Object.freeze({
+  // the town council's public works; the underground network's passage.
+  'Walls, wells, roads, and the watch': Object.freeze([
+    Object.freeze({ text: 'Walls, wells, roads, and the watch', needs: Object.freeze(['walls']) }),
+    Object.freeze({ text: 'Wells, roads and the common ground', twinOf: 'Walls, wells, roads, and the watch', excludes: Object.freeze(['walls']) }),
+  ]),
+  'Move people beneath the walls unseen.': Object.freeze([
+    Object.freeze({ text: 'Move people beneath the walls unseen.', needs: Object.freeze(['walls']) }),
+    Object.freeze({ text: 'Move people in and out unseen.', twinOf: 'Move people beneath the walls unseen.', excludes: Object.freeze(['walls']) }),
+  ]),
+  // W2-FIX-DATA (2026-11-13; the REVIEW-W2B cold list): the roads a siege cuts. VETOABLE wording (the owner's).
+  "Grain carted to a mill outside the settlement and brought back as flour.": Object.freeze([
+    Object.freeze({ text: "Grain carted to a mill outside the settlement and brought back as flour.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "With the roads cut, grain is ground by hand at home until the carts can get through again.", twinOf: "Grain carted to a mill outside the settlement and brought back as flour.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  // W2-FIX-DATA (2026-11-13; the REVIEW-W2B cold list): the roads a siege cuts. VETOABLE wording (the owner's).
+  "Fruit, vegetables, dairy, and eggs. Available every morning.": Object.freeze([
+    Object.freeze({ text: "Fruit, vegetables, dairy, and eggs. Available every morning.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Whatever the kitchen gardens still give, sold early and gone by mid-morning.", twinOf: "Fruit, vegetables, dairy, and eggs. Available every morning.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  // W2-FIX-DATA (2026-11-13; the REVIEW-W2B cold list): the roads a siege cuts. VETOABLE wording (the owner's).
+  // W2-FIX-DATA-5 (2026-11-13; ROUND-3-CUT-INCREMENT ww-494 HIGH, REVIEW-W2A-3 #982): the fair's trading under a siege that cuts
+  // every road. VETOABLE wording (the owner's).
+  "Once-a-year market drawing merchants from across the region.": Object.freeze([
+    Object.freeze({ text: "Once-a-year market drawing merchants from across the region.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "The yearly fair that draws merchants from across the region. None can reach it while the roads are held.", twinOf: "Once-a-year market drawing merchants from across the region.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  "Organised road transport for goods between towns. Reliable, guild-backed.": Object.freeze([
+    Object.freeze({ text: "Organised road transport for goods between towns. Reliable, guild-backed.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Road transport for goods between towns, guild-backed. With the roads cut, the wagons stand idle in the yard.", twinOf: "Organised road transport for goods between towns. Reliable, guild-backed.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  // W2-FIX-DATA-3 (2026-11-13; REVIEW-W2-FIX-DATA F3): every Mine takes the open-cast menu, and at town size
+  // and above every text the Mine prints works a shaft or an adit. VETOABLE wording (the owner's).
+  "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.": Object.freeze([
+    Object.freeze({ text: "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.", excludes: Object.freeze(['tier: ≥ town']) }),
+    Object.freeze({ text: "Ore cut underground by the crews and brought out by cart for sorting.", twinOf: "Surface-level ore extraction. Lower yield than shaft mining but cheaper to operate.", needs: Object.freeze(['tier: ≥ town']) }),
+  ]),
+  // W2-FIX-DATA-4 (2026-11-13; REVIEW-W2A-3 #507, #508): the same houses' services that name the river. VETOABLE wording (the owner's).
+  "Flat-bottomed cargo barges for river transport. Simpler than sea vessels.": Object.freeze([
+    Object.freeze({ text: "Flat-bottomed cargo barges for river transport. Simpler than sea vessels.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "Flat-bottomed cargo boats for shallow water. Simpler than sea vessels.", twinOf: "Flat-bottomed cargo barges for river transport. Simpler than sea vessels.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "Hull patching, oar replacement, caulking. River traffic takes constant punishment.": Object.freeze([
+    Object.freeze({ text: "Hull patching, oar replacement, caulking. River traffic takes constant punishment.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "Hull patching, oar replacement, caulking. Small boats in the shallows take constant punishment.", twinOf: "Hull patching, oar replacement, caulking. River traffic takes constant punishment.", excludes: Object.freeze(["river"]) }),
+  ]),
+  // W2-FIX-DATA-8 (2026-11-14; ROUND-3-CUT-INCREMENT ww-1416, HANDBACK-6 section 8 row 3): the brewer's barrel trade names the
+  // alehouses it supplies; where none stands its twin sells to the households, and presumes no alehouse either way (the cascade
+  // can add one after the roll). VETOABLE wording (the owner's).
+  "Bulk supply to alehouses. Priced by barrel.": Object.freeze([
+    Object.freeze({ text: "Bulk supply to alehouses. Priced by barrel.", needs: Object.freeze(['institution: tavern']) }),
+    Object.freeze({ text: "Ale by the barrel, for households laying in a stock. Priced by barrel.", twinOf: "Bulk supply to alehouses. Priced by barrel." }),
+  ]),
+  // TAIL-SERVICES-3 (2026-11-15; READ-ALL 04603, X9 31188): the fish market's wholesale names the taverns that buy; where none
+  // stands its twin names the households, as the brewer's barrel trade above. VETOABLE wording (the owner's).
+  // BAR2-SERVICES (the chair's ruling SV2, 2026-11-15): the twin prints where no tavern stands, the smallest places, and claims no
+  // inland trader (it printed "inland traders" in a place with no trade at all). VETOABLE wording (the owner's).
+  "Bulk purchase by taverns, institutions, and inland traders.": Object.freeze([
+    Object.freeze({ text: "Bulk purchase by taverns, institutions, and inland traders.", needs: Object.freeze(['institution: tavern']) }),
+    Object.freeze({ text: "Bulk purchase by households and institutions.", twinOf: "Bulk purchase by taverns, institutions, and inland traders." }),
+  ]),
+  // W2-FIX-DATA-6 (2026-11-13; CENSUS-2 kind b, the coaching inn under a siege: r2r-metropolis-14, r2s-under_siege-*): no
+  // traveller comes down a road the siege holds, and no coach or rider goes out. VETOABLE wording (the owner's).
+  "Beds, meals, and stabling for travelers on the road. Priced by quality.": Object.freeze([
+    Object.freeze({ text: "Beds, meals, and stabling for travelers on the road. Priced by quality.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Beds, meals, and stabling, though with the roads held the rooms stand mostly empty.", twinOf: "Beds, meals, and stabling for travelers on the road. Priced by quality.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  "Fresh relay horses for coaches and dispatch riders. Reduces travel time significantly.": Object.freeze([
+    Object.freeze({ text: "Fresh relay horses for coaches and dispatch riders. Reduces travel time significantly.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Relay horses kept for coaches and dispatch riders; while the siege holds the roads, none go out.", twinOf: "Fresh relay horses for coaches and dispatch riders. Reduces travel time significantly.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  "Transport foot travelers and small goods across the river.": Object.freeze([
+    Object.freeze({ text: "Transport foot travelers and small goods across the river.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "Transport foot travelers and small goods across the water.", twinOf: "Transport foot travelers and small goods across the river.", excludes: Object.freeze(["river"]) }),
+  ]),
+  "Move small amounts of cargo across the river.": Object.freeze([
+    Object.freeze({ text: "Move small amounts of cargo across the river.", needs: Object.freeze(["river"]) }),
+    Object.freeze({ text: "Move small amounts of cargo across the water.", twinOf: "Move small amounts of cargo across the river.", excludes: Object.freeze(["river"]) }),
+  ]),
+  // BAR5-MARKS (LAW 5, 2026-11-16; vetoable by the owner): the monastery's pilgrims come by road.
+  "Rites, prayers, and observances. Open to locals and pilgrims.": Object.freeze([
+    Object.freeze({ text: "Rites, prayers, and observances. Open to locals and pilgrims.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Rites, prayers, and observances, open to all; no pilgrim reaches the house while the siege holds.", twinOf: "Rites, prayers, and observances. Open to locals and pilgrims.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  // BAR5-MARKS (LAW 2's `L2.siege.abroad`, 2026-11-16; vetoable by the owner): the bodyguards' merchants and travellers come
+  // by road; under a siege the officials and the town's own frightened are left. The row goes on, so it is twinned, not marked.
+  "Personal protection for merchants, officials, and travelers.": Object.freeze([
+    Object.freeze({ text: "Personal protection for merchants, officials, and travelers.", excludes: Object.freeze(['crisis: under_siege']) }),
+    Object.freeze({ text: "Personal protection for officials, and for anyone with reason to fear for their safety while the siege lasts.", twinOf: "Personal protection for merchants, officials, and travelers.", crisis: Object.freeze(['under_siege']) }),
+  ]),
+  // BAR6-HOUSES (LAW 5 WIDENED, 2026-11-16; vetoable by the owner): the butcher's three meats are plenty a siege or a famine (the
+  // hunger family) does not give: the siege prints the row unmarked, so the definition declares the family and its twin says
+  // what is sold while it lasts.
+  "Beef, pork, mutton. Slaughtered and dressed on premises or nearby.": Object.freeze([
+    Object.freeze({ text: "Beef, pork, mutton. Slaughtered and dressed on premises or nearby.", excludes: Object.freeze(['crisis: hunger']) }),
+    Object.freeze({ text: "Whatever meat can be had, slaughtered and dressed on premises or nearby.", twinOf: "Beef, pork, mutton. Slaughtered and dressed on premises or nearby.", crisis: Object.freeze(['hunger']) }),
+  ]),
+});

@@ -1,0 +1,6 @@
+[gate-tail] start:  19:33:59 up 43 min,  0 user,  load average: 1.73, 1.86, 1.85 · cores: 4
+525 reference: rows 525 · born 525 · errors 0
+  10e-temper                  1 of 525 · npcs[].secret or npcs[].personality (the later draw: the secret overlay)
+[gate-tail] end:  19:34:36 up 44 min,  0 user,  load average: 2.55, 2.05, 1.92
+[gate-tail] full log: /tmp/claude-0/-home-user-settlement-engine/1f4f4b63-3afd-5555-a806-42243edb7f49/scratchpad/tmp/gate-tail.9755.log
+[gate-tail] exit: 0 (the gate's own status, not a pipe's)

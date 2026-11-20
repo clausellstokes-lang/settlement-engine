@@ -1,0 +1,17 @@
+commit f7288399f519dff2b141547896882b22bcc47336
+Merge: afb056055 2d418c67f
+Author: Claude <noreply@anthropic.com>
+Date:   Sat Nov 14 16:07:17 2026 +0000
+
+    join(JOIN-5 · 6): merge lane/r2-code-b-2026-11-13 at 2d418c67f — the third landing
+    
+    Tip read back from origin at 16:07 UTC: 2d418c67fb84095055d2756ab6b6ec3a9e8d3aa0
+    (JOIN-4 landed a86646b84 at its point 1, an ancestor; merge base 600b9f743).
+    No conflict. The files both sides moved since the base were moved on the
+    joined side by the lane's own point 1; the merge stages 5 files, each the
+    lane's new work (M10 a48cf4126: the Foundry journal's force without the
+    provenance tag; M12 939b605c9: the faith contender's weight).
+    Verify: 19 files the lane moved; 5 staged, each equal to the lane's blob.
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYazSdYC8v2Fj1WVnzT

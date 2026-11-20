@@ -1,0 +1,20 @@
+commit 88bfa6885a73fc62e6637b3223f8a54906c06434
+Merge: 80ad0a603 9b08e5b69
+Author: Claude <noreply@anthropic.com>
+Date:   Sat Nov 14 15:56:00 2026 +0000
+
+    join(JOIN-5 · 3): merge lane/w2-write-2026-11-13 at 9b08e5b69 — the corpus
+    
+    Tip read back from origin at 15:55 UTC: 9b08e5b69ad33beac2e540d45763fed326b572a9
+    (JOIN-4 merged 525541b42 at its merge 6; the lane has since merged the
+    joined line at 600b9f743, the merge base).
+    No conflict; nothing moved by both sides.
+    Verify: 19 files changed, each equal to the lane's blob.
+    Moved by the lane alone, taken from the lane (for the close to measure by
+    its door): docs/content/wiring-census.json (its re-take e28e1305f),
+    tests/lint/presumedThings.widened.register.json (b159401a1),
+    src/data/dossierStateProse/defense.generated.js (generated; law (g) after
+    the side branch's merge).
+    
+    Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+    Claude-Session: https://claude.ai/code/session_01ACmDYazSdYC8v2Fj1WVnzT

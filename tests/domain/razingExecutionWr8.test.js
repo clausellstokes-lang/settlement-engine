@@ -912,6 +912,22 @@ describe('R2 THE CLOSED LOOP, WIRED — the ledger travels as a patch, and the c
     population: 1200, namedCastCount: 3, institutions: [{ id: 'temple' }], movableWealth: 900,
   });
 
+  // FIX-PULSE-DEFECTS (audit C1b·59, razingExecution.js :: razingDecisionFor): the verdict pill
+  // printed the razer and victim IDS ("Karrow took Thornwall…" only because this file's ids
+  // ARE names). With ids that are not names, the pill speaks the names the emission holds.
+  test('the razing verdict pill names the courts, never their ids', () => {
+    const { worldState, snapshot } = withMourner({ warExhaustion: { Karrow: 1 } });
+    const emission = razingSiegeEmission({
+      worldState, snapshot, razerId: 'Karrow', victimId: 'Thornwall',
+      razerName: 'the Karrow Marches', victimName: 'Thornwall Keep', tick: 40,
+      population: 1200, namedCastCount: 3, institutions: [{ id: 'temple' }], movableWealth: 900,
+    });
+    expect(emission?.plan.road).toBe('initiation');
+    expect(emission?.outcome.reasons[0]).toBe(
+      'the Karrow Marches took Thornwall Keep and means to burn it. Only the wicked burn first, and this is a court that will.',
+    );
+  });
+
   test('AN INITIATION RAZING MINTS the victim\'s friend a license, and the patch carries it', () => {
     const { worldState, snapshot } = withMourner({ warExhaustion: { Karrow: 1 } });
     const emission = EMISSION(worldState, snapshot);

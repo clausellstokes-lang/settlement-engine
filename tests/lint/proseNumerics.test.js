@@ -126,6 +126,12 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // byte-identical on every one, the census stays at 227 against a 227 ceiling, and no other
 // row in either file could have moved with them. The whole baseline diff is fourteen lines,
 // seven -/+ pairs.
+// WIRING W3 POW C9 (2026-11-08) — TWO PURE LINE MOVES: NotableNPCs.jsx gained the HOW THEY DEAL row above its two
+// banked `{npc.power}` rows (328 -> 329, 381 -> 382); path, category and snippet byte-identical.
+// WIRING W3 POW (2026-11-07, its second seat) — FOUR PURE LINE MOVES, NO DEBT MOTION. PowerTab.jsx gained the
+// structure-flag and GM-advisory rungs (C1-C6, 2bb81a867) above its banked rows, so `{leg.score}` 310 -> 317,
+// both `{Math.round(instab*100)}` rows 505 -> 512 and `{Math.round(rung.standing*100)}` 543 -> 550 (+7 each);
+// path, category and snippet byte-identical, no other row moved. The baseline diff is four -/+ pairs.
 // T11 · UI LANDING (§805/§807/§815, 2026-08-31) — SEVEN NEW LEAKS HUMANIZED, EIGHT PURE LINE
 // MOVES RE-ADDRESSED, NO CEILING CHANGE. The lane's own gate run was the first instrument to
 // see this file, and it caught both shapes at once. They are recorded separately because they
@@ -150,6 +156,18 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 //     six, TE-CH-4's one, TE-CAP's two and T7's seven: path, category and snippet are
 //     byte-identical on all eight, and the whole baseline diff is sixteen lines, eight -/+
 //     pairs, verified by grepping the diff for any changed line that is not a `"line"` value.
+// SW-9 (2026-11-09, ruling A11's one writer): worldSnapshotPublic.js's realm-arc sentences move
+// to realmArcSentences.js, shortening the file above its one row: worldSnapshotPublic 628 -> 615,
+// path, category and snippet byte-identical; the whole baseline diff is one -/+ pair. ADDRESS ROT.
+// COHERENCE-POWERS-4 (2026-11-12) — TWO PURE LINE MOVES: npcComponents.jsx gained the dual-hat and empty-seat
+// lines above its two banked relationship rows (the COHERENCE-POWERS lane, 04334d6ef and 859c11ff8), so
+// `{rel.strength}` 155 -> 157 and `{rel.tension}` 161 -> 163; path, category and snippet byte-identical; the whole
+// baseline diff is two -/+ pairs. ADDRESS ROT; no ceiling moved.
+// COHERENCE-POWERS-7 (2026-11-13) — FIVE PURE LINE MOVES: the legitimacy breakdown chips left the Power tab and the
+// PDF's Power chapter (the owner: ratings, never the machinery), above five banked rows: PowerTab.jsx
+// `{Math.round(instab*100)}` 510 -> 490 (twice) and `{Math.round(rung.standing*100)}` 536 -> 516; PowerStructure.jsx
+// `{p.criminalCapture.score}` 102 -> 101 and `{f.power}` 236 -> 235; path, category and snippet byte-identical; the
+// whole baseline diff is five -/+ pairs. ADDRESS ROT; no ceiling moved.
 // The census ends at 227 against a 227 ceiling — the seven additions net out against nothing,
 // because they were cured rather than counted. No ceiling moved in either direction.
 // TAIL-F · W-FAITH LANDING (the F5c->F6c->F7c consist) — ONE ROW THAT WAS NEVER DEBT, CURED
@@ -556,11 +574,45 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // re-address viability.js:121 -> viabilitySummary.js:64 and :123 -> :66. Category and snippet byte-identical on
 // all four; the regenerated census is 205 against 205 (138 / 50 / 8 / 9 / 0) and no other row moved. The two
 // sentences stay owed their humanization; a move is not a cure.
-const REVIEWED_TOTAL_CEILING = 205;
+// PEOPLE-4 TIES (2026-11-07, R-P7) — TWO PURE LINE MOVES, NO DEBT MOTION. npcComponents.jsx 149 -> 150 and 155 -> 156
+// (the card-ties import line above the tie card). Path, category and snippet byte-identical; 205 / 138 / 50 unmoved.
+// OWNER-WORDS-DOSSIER item 3 (2026-11-09) — FOUR PURE LINE MOVES IN PowerTab.jsx, NO DEBT MOTION. The governance
+// paragraph's import, its read and its block add lines ABOVE the four rows the tab owns: `{leg.score}` 317 -> 323,
+// the ladder's `{Math.round(instab*100)}` pair 512 -> 534, `{Math.round(rung.standing*100)}` 550 -> 572. Path,
+// category and snippet byte-identical; no ceiling or category count moves. The print chapter's mirror
+// (src/pdf/sections/PowerStructure.jsx: the composer's import and one doc line above, one net line in the
+// paragraph's block) moves `{p.criminalCapture.score}` 99 -> 101 and `{f.power}` 229 -> 232 the same way.
+// W7 HOOKS (2026-11-08) — THE DEBT FELL BY ONE AND THE CEILINGS FOLLOW IT DOWN. 205 -> 204, floatInterpolation
+// 138 -> 137: src/pdf/lib/headlines.js :: npcsHeadline's "(power ${top.power})" left the prose (the people by name,
+// title and first rank; the owner's style law of 2026-11-07), so its row leaves the baseline as a CURE.
+// SW-B6 ECO-DEF-BLOCKS (2026-11-09, STYLE-RULINGS-2 B6) — THE DEBT FELL BY SEVEN AND THE CEILINGS FOLLOW IT
+// DOWN. 204 -> 197, floatInterpolation 137 -> 133, percentToken 50 -> 47: the Economics tab's food sentence
+// (EconomicsTab.jsx :584/:586/:587/:588, "What is grown here covers N%…", "No trade brings food in here, and N%…",
+// "Agricultural surplus of N%…") is said in words by `EconomicsTab.jsx :: foodSentence`; the figures stay in the
+// stat line. Seven rows leave as a CURE, none added, no other row moved (regenerated by this file's own scanner).
+// STYLE-2 SW-12 fourth seat (2026-11-09) — THE DEBT FELL BY FOUR AND THE CEILINGS FOLLOW IT DOWN. 204 -> 200,
+// floatInterpolation 137 -> 134, percentToken 50 -> 49: src/components/map/WorldPulsePanel.jsx (ledger D·20, D·24)
+// — the echo's "memory {percent}" chip (three rows) and the lifted trouble's "Resolution roll {percent} against
+// {percent} chance." (one row) left the card face for banded words; the exact roll stays in Roll Explanations.
+// Every other moved row is a pure line move (path, category, snippet byte-identical).
+// STYLE-2-MERGE-2 at the SW-12 PULSE-LINES merge point (2026-11-09) — THE TWO CURES COMPOSE: 204 -> 193, the union
+// of SW-B6's seven rows and SW-12's four (no row in both, none added), floatInterpolation 137 -> 130, percentToken
+// 50 -> 46; the baseline regenerated by this file's own scanner at the merged tree, every live row present on both sides.
+// W2-C-LEAVES item 4(c) (2026-11-13): the Economics tab's machinery row left (EconomicsTab.jsx 572-574, five rows): 193 -> 188.
+// W2-C-LEAVES-5 item 5 (2026-11-14, #1153): the chain card's "N% recovery" chip left everywhere (EconomicsTab.jsx 238,
+// two rows: floatInterpolation 128 -> 127, percentToken 44 -> 43): 188 -> 186; the baseline regenerated by this file's
+// own scanner, every other row byte-identical.
+// TAIL-CLOSE-DOORS-1 door 6 (2026-11-15): the PDF Services chapter's raw `{flow}` left (44d3088b4, TAIL-EXPORTS-PDF-2
+// batch 2; floatInterpolation 127 -> 126): 186 -> 185; the baseline regenerated by this file's own scanner at the joined
+// line, the one removed row reviewed, 16 rows re-addressed (same path, category and snippet), none added.
+// PAGE-1 OUTPUT (2026-11-20, F3b): the Economics header's "{ecoScore}/100" Output chip left every surface (EconomicsGlance.jsx
+// 134; floatInterpolation 126 -> 125): 185 -> 184; the baseline regenerated by this file's own scanner
+// (docs/chair/2026-11-20/content/page/build/OUTPUT/proseNumerics.regen.mjs), the one removed row reviewed, no row moved.
+const REVIEWED_TOTAL_CEILING = 184;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 138,
-  percentToken: 50,
-  multiplier: 8,
+  floatInterpolation: 125,
+  percentToken: 43,
+  multiplier: 7,
   twoDecimalScore: 9,
   pushIndirection: 0,
 });
@@ -900,8 +952,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 206 exceeds reviewed ceiling 205',
-      'floatInterpolation 139 exceeds reviewed ceiling 138',
+      'total 185 exceeds reviewed ceiling 184',
+      'floatInterpolation 126 exceeds reviewed ceiling 125',
     ]);
   });
 

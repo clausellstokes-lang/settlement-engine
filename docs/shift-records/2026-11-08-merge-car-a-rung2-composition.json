@@ -1,0 +1,46 @@
+{
+  "_doc": "RECORD A OF THE INTEGRATION LANDING (MERGE-CAR), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0): the integration branch's first-parent line is the golden chain; a lane's own records are components. THE CAUSE, ONE: the rung-2 landing's merge over the integration branch — lane/rung2-landing-2026-11-06 (fc4cb0b9f) merged at 10b8f09b4 (MERGE-R2), carrying its five signed lane records (docs/shift-records/2026-11-06-rung2-01-census-composed-generator-master.json, -02-census-composed-espionage-fence.json, -03-census-composed-herald-desk.json, -04-census-composed-prose-manifest.json, -05-census-composed-lighting-witness.json), each written on the rung-2 landing's own branch; composed over the integration side's moves since record 0b, which move no golden byte (W0-CLOSE 3d664cc63 and the five-seat merges 7e6eafcdf, f3b0b9e6a, 9b2c5fcb6, 84eeb0f23 measured 0 on all six surfaces). THE STAGE COMMIT IS 572c15018, NOT 10b8f09b4: MERGE-R2's composition commit 572c15018 took the rung-2 side's freeze-register and fence-suite bytes without a signature (its src is byte-identical to 10b8f09b4's, proved by git diff --quiet), and this record is that signature. Built through the door-path guard's integration-merge arm (LANDING_STAGE_MERGE_SIDE=8dff691f3, the chair's ruling of 2026-11-08; tooling 6d674cb5a): the register and the fence suite were moved after the step only by the integration merge 8dff691f3, which took its second parent 373a2947b's side whole. THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against record 0b's post-state (the stage of 262e8b255 = fc834a6bd: the 525 6b0d226e.., the fence f1aa52d8.., the herald 3c879080.., the prose abe94c20.., the witness 5033cae6.., the PDF b1a92886..): the generator golden master 525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84) -> 6d651bde..; the espionage fence's driven corpus 360 of 360 rows (60 per tier), 360/360 distinct, -> 9eb258a4..; the herald knowledge desk 2 moved, 54 added, 55 removed (435 -> 434 keys) -> b8a8ed19..; the dossier prose manifest 1,050 of 1,050 rows -> 50fdc9a4..; the PDF view-model snapshot 1 line -> 1e32b1a8..; the preset lighting witness 4 of 8 -> ed83e218.., landing exactly on the bytes the branch already carries: the integration merge 8dff691f3 auto-merged the witness fixture to the integration side's (rung2-05's) ed83e218.. while its register row, taken from the car's side, still read record 0b's 5033cae6.. (measured by the freeze walker's arm 1 at the stage), so this record's witness act moves the register row to the bytes the branch carries and writes no new witness byte. The door writes FROM the carried bytes (the people car's final fixtures, taken at the merge commit 8dff691f3), so its from-shas are the car's; the next record (B, the car composition at 8dff691f3) carries these surfaces from this record's post-state to the merged tree's output.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair, session 01FE9mEvGxnFx6WTBkEC6ie9; the integration landing MERGE-CAR, 2026-11-08)",
+  "cause": "THE RUNG-2 LANDING'S MERGE OVER THE INTEGRATION BRANCH — lane/rung2-landing-2026-11-06 (fc4cb0b9f, its five signed records rung2-01..05) merged at 10b8f09b4 (MERGE-R2), staged at its composition commit 572c15018 (same src): what the merge moved beyond record 0b's post-state",
+  "seat": "MERGE-CAR (Opus 5.5) under the cloud chair (Fable 5.1), session 01FE9mEvGxnFx6WTBkEC6ie9, from the stage at 572c15018",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 434,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "pdf-golden-view-model-snapshot",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}

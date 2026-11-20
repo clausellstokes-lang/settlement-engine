@@ -354,7 +354,7 @@ function headCount(value) {
 export function readRelationshipExtremity(input) {
   const row = recordOf(input);
   const T = RAZING_TUNING;
-  const partyId = text(row.partyId) || 'the court';
+  const partyId = text(row.partyId) || 'The court';
   const counterpartId = text(row.counterpartId) || 'its neighbour';
   const edgeType = text(row.edgeType);
   const resentment = clamp01(row.resentment01);
@@ -463,7 +463,7 @@ export function razingInitiationPermitted(alignmentBand) {
  */
 export function razingGate(input) {
   const row = recordOf(input);
-  const actorId = text(row.actorId) || 'the victor';
+  const actorId = text(row.actorId) || 'The victor';
   const victimId = text(row.victimId) || 'the defeated';
   const extremity = recordOf(row.extremity);
   /** The deterrent's one expression: a permitted road, declined.
@@ -647,6 +647,7 @@ export function tierFallDescriptor(input) {
   const before = text(row.tierBefore);
   const after = text(row.tierAfter);
   const name = text(row.settlementName) || 'the settlement';
+  const nameLead = text(row.settlementName) || 'The settlement';
   const iBefore = order.indexOf(before);
   const iAfter = order.indexOf(after);
   if (iBefore < 0 || iAfter < 0) {
@@ -664,8 +665,8 @@ export function tierFallDescriptor(input) {
     rungsFallen,
     band,
     receipt: rungsFallen === 0
-      ? `${name} burned and is still a ${before}: the fire took its people and not its standing.`
-      : `${name} fell from ${before} to ${after}: ${rungsFallen === 1 ? 'one rung' : `${rungsFallen} rungs`}.`,
+      ? `${nameLead} burned and is still a ${before}: the fire took its people and not its standing.`
+      : `${nameLead} fell from ${before} to ${after}: ${rungsFallen === 1 ? 'one rung' : `${rungsFallen} rungs`}.`,
   };
 }
 

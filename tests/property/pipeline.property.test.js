@@ -74,7 +74,7 @@ describe('pipeline (property-based)', () => {
     fc.assert(fc.property(configArb, (config) => {
       expect(() => gen(config)).not.toThrow();
     }), { numRuns: 100 });
-  });
+  }, 120_000); // its own budget, carrying the measured figure (the last close's whole check, 2026-11-19): 10.6 s here under load
 
   test('output is structurally complete for any valid config', () => {
     fc.assert(fc.property(configArb, (config) => {
@@ -100,7 +100,7 @@ describe('pipeline (property-based)', () => {
       // EconomicState always present.
       expect(s.economicState).toBeDefined();
     }), { numRuns: 100 });
-  });
+  }, 120_000); // its own budget, carrying the measured figure (CI-FIT point 75, 2026-11-20): 9.6 s in the last close's serial check; about 17.8 s on a CI runner (the measured factor), within three quarters of the default 20 s; the house's corpus-walk form
 
   test('same seed produces structurally identical output (determinism)', () => {
     fc.assert(fc.property(configArb, (config) => {

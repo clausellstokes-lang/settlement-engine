@@ -15,8 +15,8 @@ in `src/lib/analyticsEvents.js`, and carries a class in the parallel `EVENT_CLAS
 Props are coarse by construction — enums, bands, counts, booleans, hashes; never names,
 prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamps).
 
-- **EVENTS_REV:** 13
-- **Events:** 132 total — 128 essential, 4 research
+- **EVENTS_REV:** 14
+- **Events:** 133 total — 129 essential, 4 research
 - **Research class** requires explicit opt-in (built + mirrored only under `research` consent, re-clamped server-side).
 - **Enriched props** below are the actual top-level keys the bound extractor emits (code-derived); events built inline at the call site show `—` and are documented in the taxonomy.
 
@@ -236,6 +236,12 @@ prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamp
 |---|---|---|---|
 | `REFERRAL_INTENT_RECORDED` | `referral_intent_recorded` | essential | — |
 | `REDEEM_CODE_CHECKED` | `redeem_code_checked` | essential | — |
+
+## ENGINE-5 unit 4: THE ENGINE SERVICE'S COST LOG
+
+| Constant | Event | Class | Enriched props (code-derived) |
+|---|---|---|---|
+| `ENGINE_GENERATE` | `engine_generate` | essential | — |
 
 ## Simulation class (simulation) — engine evidence, never user telemetry
 

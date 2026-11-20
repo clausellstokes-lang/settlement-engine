@@ -1,0 +1,10 @@
+line: dark=0 stale=0
+r3-code-c: dark=0 stale=0
+r3-tabs: dark=0 stale=0
+r2-code-a: dark=0 stale=0
+powers: dark=16 stale=8
+data: dark=0 stale=0
+corpus: dark=0 stale=0
+leaves: dark=0 stale=0
+r2-code-b: dark=0 stale=0
+defence: dark=18 stale=17

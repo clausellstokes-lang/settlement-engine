@@ -1,0 +1,538 @@
+[
+ {
+  "rule": "11c.noImport",
+  "towns": 10,
+  "n": 10,
+  "tabs": "Systems/Institutions",
+  "kinds": "card",
+  "form": "Salted, smoked and dried fish come in by cart whenever fish can be had, sold by weight and inspected for rot.",
+  "writer": {
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2037,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 7,
+  "n": 7,
+  "tabs": "Systems/Resources",
+  "kinds": "stone quarry",
+  "form": "No stone reaches the stone quarry.",
+  "writer": {
+   "file": "src/domain/display/validationOnPage.js",
+   "line": 541,
+   "alsoIn": 1
+  }
+ },
+ {
+  "rule": "11e.siegeBought",
+  "towns": 6,
+  "n": 6,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Services · Dyed cloth",
+  "writer": null
+ },
+ {
+  "rule": "11e.siegeBought",
+  "towns": 5,
+  "n": 5,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Services · Livery and uniforms",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 579,
+   "alsoIn": 6
+  }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 5,
+  "n": 5,
+  "tabs": "Systems/Resources",
+  "kinds": "mine",
+  "form": "No iron ore reaches the mine.",
+  "writer": null
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 3,
+  "n": 3,
+  "tabs": "Systems/Institutions",
+  "kinds": "card",
+  "form": "Short of iron. Charcoal furnaces for reducing raw ore to refined metal whenever ore can be had, cast in bars for whoever will buy them.",
+  "writer": {
+   "file": "src/data/institutionDescVariants.js",
+   "line": 2079,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 3,
+  "n": 3,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Services · Iron refining (short)",
+  "writer": null
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 3,
+  "n": 3,
+  "tabs": "Systems/Services",
+  "kinds": "service",
+  "form": "Short of iron. Smelt raw ore into pig iron and refined ingots ready for smithing.",
+  "writer": {
+   "file": "src/data/institutionServices.js",
+   "line": 644,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 3,
+  "n": 4,
+  "tabs": "World/NPCs",
+  "kinds": "person",
+  "form": "Short of iron.",
+  "writer": null
+ },
+ {
+  "rule": "11a.imported",
+  "towns": 2,
+  "n": 2,
+  "tabs": "Systems/Economics",
+  "kinds": "-",
+  "form": "Needed, and not brought in: livestock.",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 1590,
+   "alsoIn": 4
+  }
+ },
+ {
+  "rule": "11b",
+  "towns": 2,
+  "n": 2,
+  "tabs": "Systems/Services",
+  "kinds": "service",
+  "form": "Fresh fish retail",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 429,
+   "alsoIn": 2
+  }
+ },
+ {
+  "rule": "11b",
+  "towns": 2,
+  "n": 2,
+  "tabs": "Systems/Services",
+  "kinds": "service",
+  "form": "Fish sold daily from the morning catch.",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 1345,
+   "alsoIn": 1
+  }
+ },
+ {
+  "rule": "11b",
+  "towns": 2,
+  "n": 2,
+  "tabs": "Systems/Resources",
+  "kinds": "tick",
+  "form": "✓Agriculture",
+  "writer": null
+ },
+ {
+  "rule": "11b",
+  "towns": 2,
+  "n": 2,
+  "tabs": "Systems/Institutions",
+  "kinds": "card",
+  "form": "The industrial step from what the mine yields to what the smith uses.",
+  "writer": {
+   "file": "src/data/institutionDescVariants.js",
+   "line": 697,
+   "alsoIn": 3
+  }
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 2,
+  "n": 2,
+  "tabs": "Summary/Plot Hooks",
+  "kinds": "hook",
+  "form": "War has taken the iron: the metal suppliers sell to the armies first, and the iron for tools and repairs stops arriving. Work slows, and people are starting to complain.",
+  "writer": {
+   "file": "src/generators/economy/outlookHookSiblings.js",
+   "line": 64,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11e.offer",
+  "towns": 2,
+  "n": 2,
+  "tabs": "Systems/Institutions",
+  "kinds": "card",
+  "form": "The trade in silk, spice, and precious things.",
+  "writer": {
+   "file": "src/data/institutionDescColour.js",
+   "line": 370,
+   "alsoIn": 1
+  }
+ },
+ {
+  "rule": "11a.imported",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "-",
+  "form": "Needed, and not brought in: stone (for major construction), iron ore, copper ore.",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 1590,
+   "alsoIn": 4
+  }
+ },
+ {
+  "rule": "11a.imported",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "-",
+  "form": "Needed, and not brought in: preserved provisions for winter, iron ore, copper ore.",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 1590,
+   "alsoIn": 4
+  }
+ },
+ {
+  "rule": "11a.imported",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "-",
+  "form": "Needed, and not brought in: metals, iron ore, copper ore, gold and silver ore.",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 1590,
+   "alsoIn": 4
+  }
+ },
+ {
+  "rule": "11b",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Services · Fresh fish retail",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 429,
+   "alsoIn": 2
+  }
+ },
+ {
+  "rule": "11b",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Summary/Overview",
+  "kinds": "scene",
+  "form": "Half of <name> seems to be gutting, salting or selling fish.",
+  "writer": {
+   "file": "src/data/arrivalProse.js",
+   "line": 181,
+   "alsoIn": 2
+  }
+ },
+ {
+  "rule": "11b",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Services · Wool shearing · Livestock management",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 582,
+   "alsoIn": 2
+  }
+ },
+ {
+  "rule": "11b",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Services",
+  "kinds": "service",
+  "form": "Wool shearing",
+  "writer": null
+ },
+ {
+  "rule": "11c.idle",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "economics",
+  "form": "Almost everyone's living at <name> depends on one source of income, whether or not they earn from it directly. Faith carries real weight at <name>: what the religious houses say is heard in the village's dealings, whatever their own share of its money. A good part of the livestock <name>'s work uses must come from elsewhere; when none comes, that work stands idle.",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 6359,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11c.needed",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "economics",
+  "form": "Ask what <name> lives on and you will hear more than one trade named. Magic carries real weight at <name>: what it can do is reckoned with in the town's dealings, whatever its own share of the town's money. A good part of the grapes <name>'s work uses must come from elsewhere; when none comes, that work stands idle.",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 6787,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11c.needed",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "economics",
+  "form": "<name>'s biggest trade earns a real portion of its living, but none of its trades could carry the place alone. A good part of the copper ore <name>'s work uses must come from elsewhere; when none comes, that work stands idle.",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 6381,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11c.needed",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "economics",
+  "form": "Almost everyone's living at <name> depends on one source of income, whether or not they earn from it directly. Some of <name>'s money is made by people who keep it off the tax lists, so the village collects nothing on it and honest traders carry the tax alone. A good part of the animal hides <name>'s work uses must come from elsewhere; when none comes, that work stands idle.",
+  "writer": {
+   "file": "src/data/dossierStateProse/economy.generated.js",
+   "line": 6359,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Summary/Plot Hooks",
+  "kinds": "hook",
+  "form": "War has taken the iron: the metal suppliers sell to the armies first, and the smiths have nothing to mend tools with. Work slows, and people are starting to complain.",
+  "writer": {
+   "file": "src/generators/economy/foodBalance.js",
+   "line": 827,
+   "alsoIn": 1
+  }
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Services",
+  "kinds": "service",
+  "form": "Short of iron. Essential service for any settlement with working horses. Routine maintenance.",
+  "writer": {
+   "file": "src/data/institutionServices.js",
+   "line": 593,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Services",
+  "kinds": "service",
+  "form": "Short of iron. Reforge broken tools, re-edge blades, mend ironwork. Often more valuable than new.",
+  "writer": {
+   "file": "src/data/institutionServices.js",
+   "line": 594,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Services",
+  "kinds": "service",
+  "form": "Short of iron. Axes, ploughs, hinges, nails. The foundation of agricultural and construction work.",
+  "writer": {
+   "file": "src/data/institutionServices.js",
+   "line": 591,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "income",
+  "form": "Iron & Metalwork Short of iron. Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.",
+  "writer": {
+   "file": "src/generators/economy/incomeLineSiblings.js",
+   "line": 60,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11d.warIron",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Economics",
+  "kinds": "income",
+  "form": "Iron & Metalwork Short of iron. Local coal fires the forges, but the iron is bought in; this income stream leans on the trade route.",
+  "writer": {
+   "file": "src/generators/economy/incomeLineSiblings.js",
+   "line": 20,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11e.offer",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Metal purity testing",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 645,
+   "alsoIn": 2
+  }
+ },
+ {
+  "rule": "11e.offer",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Livestock auctions",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 581,
+   "alsoIn": 2
+  }
+ },
+ {
+  "rule": "11e.offer",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Livestock management",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 582,
+   "alsoIn": 2
+  }
+ },
+ {
+  "rule": "11e.siegeBought",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Services · Fine garments · Livery and uniforms",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 579,
+   "alsoIn": 6
+  }
+ },
+ {
+  "rule": "11e.siegeBought",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Services · Quality furs",
+  "writer": null
+ },
+ {
+  "rule": "11e.siegeBought",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Institutions",
+  "kinds": "chip",
+  "form": "Services · Livery and uniforms · Working clothes (bulk)",
+  "writer": {
+   "file": "src/data/crisisDependence.js",
+   "line": 987,
+   "alsoIn": 2
+  }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "hunter's lodge",
+  "form": "No game reaches the hunter's lodge.",
+  "writer": {
+   "file": "src/domain/worldPulse/magicForms.js",
+   "line": 159,
+   "alsoIn": 0
+  }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "mine",
+  "form": "No coal reaches the mine.",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "potter",
+  "form": "No clay reaches the potter.",
+  "writer": {
+   "file": "src/domain/display/tradeListDisplay.js",
+   "line": 148,
+   "alsoIn": 2
+  }
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "dairy farmer",
+  "form": "No livestock reaches the dairy farmer.",
+  "writer": null
+ },
+ {
+  "rule": "11g.gapLine",
+  "towns": 1,
+  "n": 1,
+  "tabs": "Systems/Resources",
+  "kinds": "sawmill",
+  "form": "No timber reaches the sawmill.",
+  "writer": {
+   "file": "src/domain/facts/houseInputAtHand.js",
+   "line": 478,
+   "alsoIn": 0
+  }
+ }
+]

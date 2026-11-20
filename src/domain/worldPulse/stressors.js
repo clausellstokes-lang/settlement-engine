@@ -1,4 +1,5 @@
 import { stablePart } from './worldState.js';
+import { pickLine } from './proseSelection.js';
 import { activeChannelsFrom, REGIONAL_CHANNEL_TYPES } from '../region/index.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { counterforceAssessment, synergyAssessment, interpretStressorOrigin } from './stressorDynamics.js';
@@ -73,6 +74,17 @@ const PRESSURE_REASON_SENTENCES = Object.freeze({
   'war-front regional channel exists': 'The war front reaches the settlement.',
 });
 
+// STYLE-2 C2 (SW-12, A2·63) — the birth summary says the first thing a visitor would notice,
+// keyed by the crisis TYPE alone (the one fact the writer holds besides the place). Types
+// without a sign of their own say only that it has begun.
+/** @type {Readonly<Record<string, (town: string) => string>>} */
+const BIRTH_SIGN = Object.freeze({
+  betrayal: (town) => `In ${town}, people have begun to watch what they say, and to whom.`,
+  criminal_corridor: (town) => `Goods are moving through ${town} that no one admits to buying.`,
+  religious_conversion_fracture: (town) => `In ${town}, neighbours who once prayed together now pray apart.`,
+  rebellion: (town) => `In ${town}, the people have stopped waiting for the rulers to listen.`,
+});
+
 // Origin analysis carries exact provenance and, for some variants, contender
 // weights or elapsed ticks. The receipt instead chooses from this closed
 // vocabulary; originContext itself remains on the stressor as machine evidence.
@@ -86,7 +98,7 @@ const ORIGIN_REASON_SENTENCES = Object.freeze({
   resistance: 'Occupation has turned unrest into organized resistance.',
   servile_uprising: 'Bound and broken labour rises against those who hold it.',
   tax_revolt: 'The levies of a drowning treasury have broken the commons.',
-  popular_revolt: 'The streets have risen on their own, before any faction can claim them.',
+  popular_revolt: 'The streets have risen on their own, before any power can claim them.',
   arcane_burnout: 'A wild surge burned itself out and left dead ground behind.',
   leyline_silence: 'The leylines have gone quiet, and no one yet knows why.',
   barracks_coup: 'The barracks have found a commander willing to gamble for the seat.',
@@ -99,24 +111,77 @@ const ORIGIN_REASON_SENTENCES = Object.freeze({
 
 const READER_MODEL_TOKEN = /(?:\d+(?:\.\d+)?\s*%|\b\d+\.\d+\b|×|\b(?:score|chance|roll|multiplier|weight|gate|causal state|regional channel|ticks?)\b|[_→])/i;
 
+// STYLE-2 C2 (SW-12 third seat): the pressure row's "active condition: a, b" names the
+// conditions pressureModel matched (humanized archetype ids). Each archetype is said in its
+// own words — the closed sets of pressureModel.js (FOOD … CRIME_ARCHETYPES) — and the list
+// is joined with its own grammar; an archetype outside the map prints its humanized label.
+/** @type {Readonly<Record<string, string>>} */
+const ACTIVE_CONDITION_WORDS = Object.freeze({
+  famine: 'the famine',
+  food_anchor_lost: 'the loss of its main food supply',
+  regional_import_shortage: 'a shortage of goods from outside',
+  regional_migration_pressure: 'the crowding of newcomers',
+  plague: 'the plague',
+  war_pressure: 'the strain of war',
+  regional_conflict_pressure: 'the fighting nearby',
+  regional_protection_gap: 'a defence stretched too thin',
+  trade_route_cut: 'a cut trade road',
+  regional_route_disruption: 'trouble on the roads',
+  regional_export_market_loss: 'the loss of a market for its goods',
+  regional_tax_revenue_disruption: 'the loss of tax money',
+  cold_war_sanctions: 'the weight of cold-war sanctions',
+  vassal_extraction: 'what its overlord takes from it',
+  vassal_trade_coercion: "its overlord's grip on its trade",
+  regional_authority_instability: "unrest among the region's rulers",
+  corruption_exposed: 'the corruption that has come to light',
+  dominant_npc_removed: 'the loss of its leading figure',
+  regional_information_shock: 'unsettling news from abroad',
+  regional_religious_pressure: 'religious strife in the region',
+  government_overthrown: 'the fall of its government',
+  rebellion: 'the rebellion',
+});
+
+/** Three orders of one fact; seeded by the place and the conditions, never the tick. */
+const ACTIVE_CONDITION_FRAMES = Object.freeze([
+  (/** @type {{ place: string, list: string, many: boolean }} */ x) => `${upperFirst(x.place)} is already living with ${x.list}.`,
+  (/** @type {{ place: string, list: string, many: boolean }} */ x) => `${upperFirst(x.list)} already ${x.many ? 'weigh' : 'weighs'} on ${x.place}.`,
+  (/** @type {{ place: string, list: string, many: boolean }} */ x) => `In ${x.place}, ${x.list} ${x.many ? 'are' : 'is'} already a burden.`,
+]);
+
+/** @param {string} humanList @param {unknown} placeName */
+function activeConditionSentence(humanList, placeName) {
+  const phrases = humanList.split(',').map((part) => part.trim()).filter(Boolean)
+    .map((label) => ACTIVE_CONDITION_WORDS[label.toLowerCase().replace(/\s+/g, '_')] || label.toLowerCase());
+  const list = phrases.length > 1 ? `${phrases.slice(0, -1).join(', ')} and ${phrases[phrases.length - 1]}` : phrases[0] || '';
+  const place = placeName ? String(placeName) : 'this place';
+  return pickLine(ACTIVE_CONDITION_FRAMES, `${place}:${humanList.toLowerCase()}`, { place, list, many: phrases.length > 1 });
+}
+
 /** @param {unknown} value */
 function upperFirst(value) {
   const text = String(value || '').trim();
   return text ? `${text[0].toUpperCase()}${text.slice(1)}` : '';
 }
 
-/** @param {{ reasons?: unknown[], label?: unknown }|null|undefined} pressure */
-function readerPressureReasons(pressure) {
+/**
+ * @param {{ reasons?: unknown[], label?: unknown, settlementName?: unknown }|null|undefined} pressure
+ * @param {{ fallback?: boolean }} [opts]  false ⇒ evidence sentences only (no fail-closed line)
+ */
+// STYLE-2 C2 (SW-12, A2·74): exported so the organic pressure condition (candidateEvents.js) reads
+// the same reader map the stressor births use — one reader for one fact.
+export function readerPressureReasons(pressure, { fallback = true } = {}) {
+  const placeName = pressure?.settlementName;
+  const placeWord = placeName ? String(placeName) + "'s" : 'the';
   return (Array.isArray(pressure?.reasons) ? pressure.reasons : []).map((/** @type {unknown} */ raw) => {
     const reason = String(raw || '').trim();
     const active = /^active condition:\s*(.+)$/i.exec(reason);
-    if (active) return `${upperFirst(active[1])} already burdens the settlement.`;
-    if (/ derived from causal state$/i.test(reason)) {
-      return `The settlement's present condition makes ${String(pressure?.label || 'the danger').toLowerCase()} plain to see.`;
-    }
+    if (active) return activeConditionSentence(active[1], placeName);
+    // STYLE-2 C2 (SW-12, A2·65): the fallback holds no fact beyond the pressure itself, so it
+    // says little — and names the place where the pressure row carries its name.
+    if (!PRESSURE_REASON_SENTENCES[reason] && !fallback) return '';
     return PRESSURE_REASON_SENTENCES[reason]
-      || `The settlement's present condition gives ${String(pressure?.label || 'the danger').toLowerCase()} room to grow.`;
-  }).filter(Boolean);
+      || `Nothing in ${placeWord} present state stands in its way.`;
+  }).filter((/** @type {string} */ line, /** @type {number} */ i, /** @type {string[]} */ all) => Boolean(line) && all.indexOf(line) === i);
 }
 
 /** @param {{ reasons?: unknown[] }|null|undefined} gate @param {string} label */
@@ -179,12 +244,17 @@ function resolutionContextFor(stressor, assessment, synergy) {
     .slice(0, 3)
     .map((/** @type {any} */ source) => ({ source: source.label, value: Math.round(source.value * 100) / 100 }));
   const companions = synergy?.companions || [];
+  // STYLE-2 C2 (SW-12, A2·59/60): the receipt names what ended the crisis in words; the
+  // strengths' values stay on `leadingSources` for the machine, never in the sentence.
+  /** @param {string[]} words */
+  const andList = (words) => (words.length > 1 ? `${words.slice(0, -1).join(', ')} and ${words[words.length - 1]}` : words[0] || '');
+  const leaders = andList(leadingSources.map((/** @type {{ source: unknown }} */ s) => String(s.source)));
   const narrative = [
     leadingSources.length
-      ? `Recovery led by ${leadingSources.map((/** @type {any} */ s) => `${s.source} (${s.value})`).join(', ')}.`
+      ? `${leaders[0].toUpperCase()}${leaders.slice(1)} did most to end it.`
       : 'The crisis ran its course.',
     companions.length
-      ? `It ended despite the drag of ${companions.join(', ').replace(/_/g, ' ')}.`
+      ? `It ended even while ${andList(companions.map((/** @type {unknown} */ c) => String(c).replace(/_/g, ' ')))} went on.`
       : null,
   ].filter(Boolean).join(' ');
   return {
@@ -516,10 +586,11 @@ function candidateForTypeAndPressure(type, pressure, tick, extras = {}) {
     // ⛔ THE HERALD SPEAKS IN DEEDS (owner, 2026-10-02: "Updates like these need to reflect actions not to potential"): under way, then done.
     headline: `${stressor.label} is taking hold in ${pressure.settlementName}`,
     appliedHeadline: `${stressor.label} grips ${pressure.settlementName}`,
-    summary: `${stressor.label} is beginning to take root in ${pressure.settlementName}.`,
+    summary: BIRTH_SIGN[type]
+      ? BIRTH_SIGN[type](pressure.settlementName)
+      : `${stressor.label} has begun in ${pressure.settlementName}.`,
     reasons: [
       ...readerPressureReasons(pressure),
-      `${defaults.label} has found enough ${pressure.label.toLowerCase()} to take root.`,
       ...readerGateReasons(gate, defaults.label),
       ...(echo ? [`The last ${stressor.label.toLowerCase()} remains in living memory, and the old wound opens more readily.`] : []),
       ...readerOriginReasons(originContext),
@@ -739,6 +810,14 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
     // never double-counts the pre-tick value. The blend is convergent (gated at < 0.92,
     // then clamp01), so decay and escalation share this field without diverging.
     if (strongestPressure > 0.62 && stressor.severity < 0.92) {
+      // STYLE-2 C2 (SW-12, A2·71/72): the place is named (a read of the snapshot's own row)
+      // and the reasons are the strongest pressure's own evidence, not a restated summary.
+      const originItem = snapshot?.byId?.get?.(String(escalationOriginId));
+      const originName = originItem?.name || originItem?.settlement?.name || null;
+      const strongestRow = (defaults.pressureKinds || [])
+        .map((/** @type {any} */ kind) => pressureIdx.get?.(escalationOriginId, kind))
+        .filter(Boolean)
+        .reduce((/** @type {{ score?: number, reasons?: unknown[], label?: unknown }|null} */ best, /** @type {{ score?: number, reasons?: unknown[], label?: unknown }} */ row) => (!best || (row.score || 0) > (best.score || 0) ? row : best), null);
       const severity = clamp01((stressor.severity + strongestPressure) / 2 + 0.08);
       candidates.push({
         id: `candidate.stressor.escalate.${stablePart(stressor.id)}.${tick}`,
@@ -752,11 +831,13 @@ export function evaluateStressorRules(snapshot, pressureIdx, context = {}) {
         applyMode: severity >= 0.78 ? 'proposal' : 'auto',
         headline: `${stressor.label} is deepening`,
         appliedHeadline: `${stressor.label} deepens`,
-        summary: `${stressor.label} has not broken, and the forces feeding it are still gathering.`,
-        reasons: [
-          `${stressor.label} still grips the settlement.`,
-          'The same forces that birthed the crisis continue to rise.',
-        ],
+        summary: originName
+          ? `${stressor.label} is getting worse in ${originName}, and what started it is still there.`
+          : `${stressor.label} is getting worse, and what started it is still there.`,
+        reasons: (() => {
+          const evidence = strongestRow ? readerPressureReasons(strongestRow, { fallback: false }).slice(0, 2) : [];
+          return evidence.length ? evidence : ['The pressure behind it has not let up.'];
+        })(),
         stressor: normalizeStressor({ ...stressor, severity }),
         metadata: {
           lifecycleStage: severity >= 0.72 ? 'peaking' : 'active',

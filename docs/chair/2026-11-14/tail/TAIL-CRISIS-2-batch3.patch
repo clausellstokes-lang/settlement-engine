@@ -1,0 +1,152 @@
+diff --git a/src/domain/crisis/crisisHooks.js b/src/domain/crisis/crisisHooks.js
+index d738835a5..d945299d5 100644
+--- a/src/domain/crisis/crisisHooks.js
++++ b/src/domain/crisis/crisisHooks.js
+@@ -38,6 +38,7 @@ import { factsOf } from '../facts/factsOf.js';
+ import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
+ import { institutionHouseLabel } from '../display/institutionDisplayName.js';
+ import { pluralPowerName } from '../display/governanceAccount.js';
++import { powerSentenceName } from '../display/powerSentenceName.js';
+ 
+ /** @typedef {import('./crisisCast.js').CrisisCast} CrisisCast */
+ /** @typedef {import('./crisisCast.js').CastRow} CastRow */
+@@ -121,7 +122,8 @@ function holderWords(s, row) {
+   if (row.kind === 'npc') {
+     const npc = (Array.isArray(s.npcs) ? s.npcs : []).find((n) => !!n && (str(n.id) || str(n.name)) === row.id);
+     const house = str(firstRankMembershipOf(npc, powerOrderOf(s))?.power);
+-    return house ? `${row.name} of ${house}` : row.name;
++    // TAIL-CRISIS-2 batch 3: a power named in a sentence takes its prose form from its leaf ("Military/Guard" → "The Guard")
++    return house ? `${row.name} of ${powerSentenceName(house)}` : row.name;
+   }
+   // ROUND THREE item 4 (the chair's ruling): a hook names a house through houseInProse, never raw.
+   return row.kind === 'institution' ? `the ${houseInProse(row.name)}` : row.name;
+@@ -174,6 +176,29 @@ export function leverAndLoserOf(cast) {
+  */
+ const castSentence = (noun, clause, reason) => (CLAUSE_SAYS.has(reason) ? `In the ${noun}, ${clause}.` : `In the ${noun}, ${clause}: ${reason}.`);
+ 
++/**
++ * THE REASONS THAT ARE A VERB'S PREDICATE (TAIL-CRISIS-2 batch 3; READ-ALL 11595 11549 11671 11569 11668 B11049 B11090:
++ * "In the debt crisis, Eir Ragnarsson of Household Council is the one who would come to terms: holds the seat." — the clause
++ * after the colon has no subject). These reasons say what the HOLDER does, so they are said of the holder, as a relative
++ * clause beside its name ("Eir Ragnarsson of Household Council, who holds the seat, is the one who would come to terms."),
++ * never after a colon. The other reasons are a noun or a whole clause, which a colon can hold. No draw; no new words.
++ * @type {ReadonlySet<string>}
++ */
++const PREDICATE_REASONS = new Set(['leverRuns', 'instigatorRival', 'instigatorBacked', 'targetSeat', 'targetSeatContested', 'scapegoatSeat',
++  'scapegoatLever', 'defenderMilitary', 'defenderOffice', 'treaterSeat', 'face'].map((k) => /** @type {Record<string, unknown>} */ (CAST_REASONS)[k]).filter((r) => typeof r === 'string'));
++
++/**
++ * The cast hook's sentence, its reason said of the holder where the reason is a predicate.
++ * @param {string} noun @param {(holder: string) => string} clauseOf @param {string} words the holder's words @param {CastRow} holder
++ * @returns {string}
++ */
++function castSentenceOf(noun, clauseOf, words, holder) {
++  const reason = str(holder.reason);
++  if (CLAUSE_SAYS.has(reason) || !PREDICATE_REASONS.has(reason)) return castSentence(noun, clauseOf(words), reason);
++  const who = holder.kind === 'npc' ? 'who' : 'which';
++  return `In the ${noun}, ${clauseOf(`${words}, ${who} ${reason},`)}.`.replace(/,\.$/, '.');
++}
++
+ /**
+  * The lever hook's sentence for a noun. PROPOSAL L1 (with a loser) and L2 (none loses).
+  * @param {string} noun @param {string} house @param {string} holder @param {import('./crisisCast.js').CastStake | null} loser
+@@ -196,9 +221,11 @@ function leverSentence(noun, house, holder, loser) {
+  * @param {import('./crisisCast.js').CastStake} loser @returns {string}
+  */
+ function loserClause(loser) {
+-  const plural = pluralPowerName(loser.factionId);
++  // TAIL-CRISIS-2 batch 3 (READ-ALL 20875: "Military/Guard loses most"): the power by its prose form (`powerSentenceName`)
++  const name = powerSentenceName(loser.factionId);
++  const plural = pluralPowerName(name);
+   const reason = plural ? loser.reason.replace(/\bits\b/g, 'their') : loser.reason;
+-  return `${loser.factionId} ${plural ? 'lose' : 'loses'} most, because ${reason}`;
++  return `${name} ${plural ? 'lose' : 'loses'} most, because ${reason}`;
+ }
+ 
+ /**
+@@ -243,7 +270,7 @@ export function crisisHooksOf(settlement, entry, facts = settlementHookFacts(set
+     }).line)
+     : null;
+   if (holder && clauseOf && str(holder.reason) && !pluralHouseHolder(holder)) {
+-    const text = speakTrue((n) => castSentence(n, clauseOf(holderWords(s, holder)), holder.reason), noun, facts);
++    const text = speakTrue((n) => castSentenceOf(n, clauseOf, holderWords(s, holder), holder), noun, facts);
+     if (text) out.push({ text, bound: 'cast', link: linkOf(holder) });
+   }
+ 
+diff --git a/tests/domain/tailCrisisBatch3.test.js b/tests/domain/tailCrisisBatch3.test.js
+new file mode 100644
+index 000000000..dfb26e022
+--- /dev/null
++++ b/tests/domain/tailCrisisBatch3.test.js
+@@ -0,0 +1,71 @@
++/**
++ * TAIL-CRISIS batch 3 (READ-ALL, 2026-11-14; the seat TAIL-CRISIS-2): THE CAST HOOK SAYS ITS REASON OF THE HOLDER, AND A POWER
++ * BY ITS PROSE FORM (`domain/crisis/crisisHooks.js :: castSentenceOf, holderWords, loserClause`). One collected test on
++ * births of the census's own seeds (CENSUS-3 seedcfg.mjs, the r2r-/r2s- arms, copied): each FALSE pair is a (seed, words)
++ * the town printed at 9c07f7461 and must not print now, with what prints in its place; each KEEP pair a true sibling.
++ */
++import { beforeAll, describe, expect, it } from 'vitest';
++import { crisisHooksOf } from '../../src/domain/crisis/crisisHooks.js';
++
++const SIZE = '(thorp|hamlet|village|town|city|metropolis)';
++const DIALS = { tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat', nearbyResourcesRandom: true, selectedStressesRandom: true, _randomizePriorities: true, magicExists: true, contentProfile: 'grounded' };
++
++/** @type {Map<string, any>} */
++const born = new Map();
++/** @type {(seed: string) => any} */
++let birth;
++
++beforeAll(async () => {
++  const { birthConfig, loadGenerationLawPayloads } = await import('../../src/domain/density/densityCreateBoundary.js');
++  const { DEFAULT_CONFIG } = await import('../../src/store/configSlice.js');
++  const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
++  await loadGenerationLawPayloads();
++  birth = (seed) => {
++    if (born.has(seed)) return born.get(seed);
++    let m = seed.match(new RegExp(`^r2r-${SIZE}-(\\d+)$`));
++    let cfg;
++    if (m) cfg = birthConfig({ ...DEFAULT_CONFIG, ...DIALS, settType: m[1] });
++    else {
++      m = seed.match(new RegExp(`^r2s-(\\w+)-${SIZE}-(\\d+)$`));
++      if (!m) throw new Error(`no configuration for ${seed}`);
++      cfg = birthConfig({ ...DEFAULT_CONFIG, ...DIALS, selectedStresses: [m[1]], selectedStressesRandom: false, settType: m[2] });
++    }
++    const s = generateSettlementPipeline(cfg, null, { seed, customContent: {} });
++    born.set(seed, s);
++    return s;
++  };
++}, 120000);
++
++/** @param {any} s */
++const hooks = (s) => [].concat(s.stress || []).filter(Boolean).flatMap((e) => crisisHooksOf(s, e).map((h) => h.text)).join(' ');
++
++/** [seed, words that must NOT print, what prints in their place] (READ-ALL row ids) */
++const FALSE = [
++  ['r2s-indebted-thorp-1', 'come to terms: holds the seat.', 'Eir Ragnarsson of Household Council, who holds the seat, is the one who would come to terms.'], // 11595
++  ['r2s-recently_betrayed-thorp-2', 'Household Council: holds the seat', 'of Household Council, who holds the seat, and the right to it is already in dispute.'], // 11549
++  ['r2s-slave_revolt-thorp-3', 'Household Council: holds the seat', 'of Household Council, who holds the seat, and the right to it is already in dispute.'], // 11671
++  ['r2s-religious_conversion-thorp-3', 'Household Council: holds the seat', 'of Household Council, who holds the seat, and the right to it is already in dispute.'], // 11569
++  ['r2s-slave_revolt-thorp-2', 'Elder Council: holds the seat', 'of Elder Council, who holds the seat, and the right to it is already in dispute.'], // 11668
++  ['r2s-indebted-city-2', 'come to terms: holds the seat.', 'of City Council, who holds the seat, is the one who would come to terms.'], // B11049
++  ['r2r-thorp-22', 'Elder Council: holds the seat', 'it is aimed at Akna Balam of Elder Council, who holds the seat, and the right to it is already in dispute.'], // B11090
++  ['r2s-insurgency-town-0', 'Military/Guard loses most', 'if it gives way, The Guard loses most, because its own people feel the crisis first.'], // 20875
++];
++
++/** [seed, a true sibling that must still print] */
++const KEEP = [
++  ['r2r-thorp-5', 'holds the key to it: nobody here could, so this one stepped in for the crisis.'], // a clause reason keeps its colon
++  ['r2r-thorp-1', "the occupier's orders come through Lepidus Brutus of Occupation Authority."], // a clause that says its reason
++];
++
++describe('TAIL-CRISIS batch 3: the cast hook says its reason of the holder', () => {
++  it('no FALSE words print, and the line the record bears prints in their place', () => {
++    for (const [seed, gone, instead] of FALSE) {
++      const text = hooks(birth(seed));
++      expect(text, seed).not.toContain(gone);
++      expect(text, seed).toContain(instead);
++    }
++  }, 300000);
++  it('every KEEP sibling still prints', () => {
++    for (const [seed, kept] of KEEP) expect(hooks(birth(seed)), seed).toContain(kept);
++  }, 300000);
++});

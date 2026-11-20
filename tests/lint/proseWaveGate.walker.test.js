@@ -120,7 +120,7 @@ describe('the CARTESIAN unit set is the attach set times the spines times the fa
     // their faces, and a spine's attach set is empty on all 708 by construction. Under the old
     // rule the gate composed NOTHING for the very pools the wave is about.
     const units = unitsOfPool('DS-DEF-11', 'WALLED-STRAINED');
-    expect(units.length, 'two variants, one face each').toBe(2);
+    expect(units.length, 'seven variants, one face each').toBe(7); // W2-WRITE round 1, the cold list's corpus variants (2026-11-13): 2 -> 4, the pool's two siege lines // W2-WRITE-3 the round's touched lines still false (2026-11-13): 4 -> 8, v2 declared guardPresence and four lines for the cases with no guard and with guards but no watch // W2-WRITE-7 B: DS-DEF-11 WALLED-STRAINED v8 struck (last row) (2026-11-14): 8 -> 7
     for (const unit of units) {
       expect(unit.pieces, 'a bare spine is ONE piece').toHaveLength(1);
       expect(unit.pieces[0].role).toBe('spine');
@@ -161,14 +161,21 @@ describe('the CARTESIAN unit set is the attach set times the spines times the fa
     expect(disagree.slice(0, 5), 'a pool the two builders read differently').toEqual([]);
     // NON-VACUITY on the only axis that could hide a fork: a comparison over zero units is two
     // implementations agreeing about nothing. The defense section composes 383 units today.
-    expect(total, 'the units actually compared').toBe(388);
+    // 388 -> 397, measured with the gate's own roster and builder on each commit's tree (127 pools
+    // throughout): F12 unit 2 (e19e3e4cf, the DS-DEF crisis twins) +8; census-5b unit 3
+    // (c00b30eb6, DS-DEF-1 strategic value LOW v4) +1.
+    // 397 -> 444 over the W2 DEF lane (2026-11-07), each new line one unit of the defense section: DS-DEF-9 FLAG pools +4
+    // (c66099791), DS-DEF-4 FIXTURE pools +8 (ec73f09f3), DS-DEF-5 FIXTURE pools +6 (e4cbe50db) and gates v3-v4 +2
+    // (4aaa0f230), DS-DEF-5 ARCANE pools +12 (15e146c53), DS-DEF-12 +15 (the third seat). This pin was not re-keyed by
+    // the lane's first two seats; the sum is measured, not inferred.
+    expect(total, 'the units actually compared').toBe(673); // LASTCLOSE-DOORS (2026-11-19, the last close): 658 -> 673, re-measured at the base cc11c9504 against 0dee69e17, the defense section's new lines, one unit each: DS-DEF-2 :: Disasters & Famine: granary AND parish care only +2, DS-DEF-4 :: structure semi-organized +1, DS-DEF-6 :: Legal Infrastructure: None +1 (DESKS-DEF/-2, points 52, 59); DS-DEF-3 :: Unsafe +1 (FAULTS-DESKS v4, point 64); DS-DEF-3 :: Very Safe +2, Safe +3, Moderate +2, Unsafe +3 (LAST-VARIETY, point 70) // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 634 -> 658, re-measured at the frozen tree (70e557d5b), the defense section's lines, one unit each: DS-DEF-1 :: readiness WEAK +1 (BAR5-SAFETY, JOIN-16 point 2); DS-DEF-2 :: Invasion & War: neither walls nor force +1 (BAR6-DEFDESK, JOIN-17 point 4; LEFT-LINES, the sixth chair's point 37); DS-DEF-2 :: Internal Security: full legal chain (court AND prison) +1 (BAR5-SAFETY, JOIN-16 point 2; BAR6-DEFDESK, JOIN-17 point 4); DS-DEF-2 :: CHAIN: food trades failing +1 (BAR6-DEFDESK, JOIN-17 point 4; SEAM-DESKS, point 18; DEBT-1, point 31); DS-DEF-2 :: Disasters & Famine: granary AND parish care only +1 (LEFT-LINES, the sixth chair's point 37); DS-DEF-3 :: Safe +1 (BAR6-DEFDESK, JOIN-17 point 4); DS-DEF-3 :: Moderate +1 (BAR6-DEFDESK, JOIN-17 point 4; LEFT-LINES, the sixth chair's point 37); DS-DEF-3 :: COMPOUND override (a crisis stress has rewritten the label) +1 (BAR6-DEFDESK, JOIN-17 point 4); DS-DEF-3 :: COMPOUND: occupation curfew +1 (BAR6-DEFDESK, JOIN-17 point 4); DS-DEF-4 :: structure semi-organized +3 (BAR6-DEFDESK, JOIN-17 point 4; BAR7-DESKS, point 27); DS-DEF-4 :: structure diffuse +3 (BAR6-DEFDESK, JOIN-17 point 4); DS-DEF-12 :: CAPACITY: ample +7 (BAR7-DESKS, point 27); DS-DEF-12 :: CAPACITY: enough +1 (BAR6-DEFDESK, JOIN-17 point 4; SEAM-DESKS, point 18); DS-DEF-11 :: UNWALLED-SMALL +1 (BAR6-DEFDESK, JOIN-17 point 4): 634 + 24 -> 658 // BAR4-CORPUS-DEF 6f8081add (2026-11-16, re-keyed by BAR4-CLOSE-SWEEP), its DECLARED lines, one unit each: DS-DEF-2 Economic Survival: WEAK +1, DS-DEF-9 magicDependency false +1, DS-DEF-11 WALLED-QUIET +2: 630 + 4 -> 634 // TAIL-CORPUS-DEF-4 U2 (2026-11-15): DS-DEF-2 Beasts settled, defenses beyond the need v6, the occupied twin (defensePerimeterCalm): 629 -> 630 // TAIL-CORPUS-DEF-4 batch 6 (2026-11-15): DS-DEF-3 Safe v4 and Very Safe v5, the twins of the lines declared `guardPresence`: 627 -> 629 // TAIL-CORPUS-DEF-2 batch 2 (2026-11-15): DS-DEF-12 CAPACITY: ample v4 and DS-POW-5 autocrat v5, the twins of the two declared pools: 626 -> 627 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 444 -> 458 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 458 -> 557 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 557 -> 558 // W2-WRITE DEF-3 districts in small places (2026-11-13): 558 -> 562 // W2-WRITE round 1, the cold list's corpus variants (2026-11-13): 562 -> 584 // W2-WRITE stage 3, three lines for every case (layer 2) (2026-11-13): 584 -> 604 // W2-WRITE W2-WRITE-3 DEF-2 STRONG debt (2026-11-13): 604 -> 607 // W2-WRITE W2-WRITE-3 stage 3 crisis cases (2026-11-13): 607 -> 615 // W2-WRITE W2-WRITE-3 M3 no line and no force beside a watch (2026-11-13): 615 -> 619 // W2-WRITE W2-WRITE-3 M1 strong posture under a siege or a war (2026-11-13): 619 -> 623 // W2-WRITE W2-WRITE-3 the round's three high lines (2026-11-13): 623 -> 626 // W2-WRITE W2-WRITE-3 the round's touched lines still false (2026-11-13): 626 -> 630 // W2-WRITE walls with NO force beside a hired company (2026-11-13): 630 -> 633 // W2-WRITE food trades working under a siege with famine (2026-11-13): 633 -> 635 // W2-WRITE Economic Survival STRONG speaks of the purse (2026-11-13): 635 -> 636 // W2-WRITE item 0 (the chair's ruling: walls with NO force v8-v10 struck) (2026-11-13): 636 -> 633 // W2-WRITE A H2 (the read's H2 and H5: DS-DEF-2 neither walls nor force's threat twins under an arrived threat) (2026-11-13): 633 -> 631 // W2-WRITE A H2 (the read's H2 and H5: DS-DEF-2 neither walls nor force's threat twins under an arrived threat) (2026-11-13): 631 -> 632 // W2-WRITE A H5 (the read's H5 and M2: DS-DEF-5 garrison PRESENT v4, a pay line under every crisis, struck) (2026-11-13): 632 -> 631 // W2-WRITE W2-WRITE-6 B: five last rows the read proposed for strike, struck (2026-11-13): 631 -> 626 // W2-WRITE W2-WRITE-7 B: DS-DEF-11 WALLED-STRAINED v8 struck (last row); v6, v7 said without the {defwork} slot and off an occupation (2026-11-14): 626 -> 625 // W2-WRITE W2-WRITE-12 BAR-0 #205: DS-DEF-2 Economic Survival STRONG v3 v9 v12 off an occupation, v9 off Struggling, v13 its twin (2026-11-13): 625 -> 626
     // AND THE FLAG IS A FLAG: without `bareSpine` the lib answers the SHAPE REPORT's question
     // (the units a corpus LICENSES), which on a spine pool is none. The two populations are
     // different on purpose, and this is the line that says so.
     expect(libUnitsOfPool(CORPUS_ALL, 'DS-DEF-11', 'WALLED-STRAINED'), 'a spine licenses no'
       + ' composed unit, which is the shape report\'s subject').toEqual([]);
     expect(libUnitsOfPool(CORPUS_ALL, 'DS-DEF-11', 'WALLED-STRAINED', { bareSpine: true }).length)
-      .toBe(2);
+      .toBe(7); // W2-WRITE round 1, the cold list's corpus variants (2026-11-13): 2 -> 4, the pool's two siege lines // W2-WRITE-3 the round's touched lines still false (2026-11-13): 4 -> 8, the same four lines // W2-WRITE-7 B: DS-DEF-11 WALLED-STRAINED v8 struck (last row) (2026-11-14): 8 -> 7
   });
 });
 
@@ -486,6 +493,8 @@ describe('⭐⭐ AN UNWRITTEN SET MUST NOT READ AS A CLEAN ONE, and the rule sta
  * arranges it (`spine + ' ' + modifier`, verbatim). A fixture whose shape drifted from the
  * shipped one would exercise nothing, which is the way an arm goes blind while reading green.
  */
+// The clause is the RETIRED wording of DS-DEF-11 WALLED-STRAINED v1 (rewritten at W2 DEF fourth seat, 2026-11-07,
+// under the owner's style law); kept here as synthetic fixture text, since the arms read its SHAPE, not the corpus.
 const SPINE_TEXT = 'The wall is kept up out of the town\'s own purse; stone keeps itself, and wages do not.';
 const FACE_TEXT = 'The watch is bought where the muster fell short.';
 const fixtureUnit = () => ({
@@ -898,10 +907,12 @@ describe('(d) THE FIXTURE SECTION — the interested fact BOTH WAYS (SITTING §T
     expect(fixture.towns.map((t) => t.label)).toEqual(['captured', 'clean']);
     const captured = fixture.towns[0];
     const clean = fixture.towns[1];
-    // rate-11-9 -> rate-93-0 (LANDING-7 A, R-A5): the X-46 compose 1264a8152 moved rate-11-9 out of
-    // capture; tests/fixtures/tasteTowns.js :: INTERESTED_TOWNS re-seats by identity, the scan named there.
-    expect(captured.standing, 'rate-93-0 is the captured town').toBe('INTERESTED');
-    expect(clean.standing, 'rate-3-0 is the control and it is NOT interested').toBe('LICENSED');
+    // Re-keyed by identity 2026-11-07 (REVIEW-INTAKE-LAND): the captured town is rate-69-0 and the
+    // control rate-9-2 at the merged tip of the review-intake lane and rung 1, the two 2026-11-06
+    // causes composed (tests/fixtures/tasteTowns.js names the scan).
+    // rate-69-0 -> rate-105-2 on 2026-11-08 (ALLEGIANCE-CAR2, the derived capture state; tests/fixtures/tasteTowns.js).
+    expect(captured.standing, 'rate-105-2 is the captured town').toBe('INTERESTED');
+    expect(clean.standing, 'rate-9-2 is the control and it is NOT interested').toBe('LICENSED');
     expect(captured.holder, 'and the holder is the census\'s own answer').toBeTruthy();
   });
 
@@ -951,7 +962,9 @@ describe('THE ROSTER — a desk section is a LEAF, and the partition is asserted
     // partition makes "impossible" a measurement.
     const cover = sectionsCoverEveryPool();
     expect(cover.sections).toBe(6);
-    expect(cover.pools, 'every shipped pool').toBe(709);
+    // 709 -> 729 over the W2 DEF lane (2026-11-07): +2 FLAG, +4 DS-DEF-4 FIXTURE, +3 DS-DEF-5 FIXTURE, +6 ARCANE, +5 DS-DEF-12.
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
+    expect(cover.pools, 'every shipped pool').toBe(861); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 859 -> 861, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece), DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED // BAR4-HISTORY 155c7e1af (2026-11-16, re-keyed by BAR4-CLOSE-SWEEP): DS-GEN-16's three `-MARKED` pools, DECLARED (856 + 3 -> 859) // STYLE-2-MERGE at the SW-B2 merge (2026-11-09): 857 -> 856, DS-GEN-11's zero pool leaves (3e9de356e) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge (2026-11-08): W1 ECO's +77 variants / +26 pools composed with W2 DEF's (measured at the merged tip) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
     expect(cover.unreached, 'a pool no section reaches').toEqual([]);
     expect(cover.twice, 'a pool two sections claim').toEqual([]);
   });
@@ -967,7 +980,8 @@ describe('THE ROSTER — a desk section is a LEAF, and the partition is asserted
           .toMatch(/^[a-z0-9-]+$/);
       }
     }
-    expect(total, 'and the six sum to the corpus').toBe(709);
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
+    expect(total, 'and the six sum to the corpus').toBe(861); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 859 -> 861, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece), DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED // BAR4-HISTORY 155c7e1af (2026-11-16, re-keyed by BAR4-CLOSE-SWEEP): DS-GEN-16's three `-MARKED` pools, DECLARED (856 + 3 -> 859) // STYLE-2-MERGE at the SW-B2 merge (2026-11-09): 857 -> 856, DS-GEN-11's zero pool leaves (3e9de356e) // 709 -> 729 over the W2 DEF lane (see the partition arm) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge (2026-11-08): W1 ECO's +77 variants / +26 pools composed with W2 DEF's (measured at the merged tip) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
     expect(poolRosterOf({ section: 'no-such-desk' }).rows).toEqual([]);
     expect(poolRosterOf({ section: 'no-such-desk' }).why).toContain('NOT-EXECUTABLE');
     expect(poolRosterOf({}).rows.length, 'and no flag at all is the taste\'s seven').toBe(7);

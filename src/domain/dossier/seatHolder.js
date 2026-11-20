@@ -22,15 +22,24 @@
  *     with no known tier falls straight to the title precedence.
  * Nobody qualifies: null, and the caller says the seat is empty, once.
  *
- * Pure and deterministic; reads name, role and the faction handle only. A play-time
+ * THE PEOPLE CAR (PEOPLE-2 CAST-DERIVED, 2026-11-07). The cast now records who holds the seat:
+ * the governing power's RANK-1 FACE (people/castPowers.js floor 1 — the seat house's face, or
+ * the seat minted from the governing power). That card seats FIRST, title or none (a headman,
+ * a steward, the eldest carry no head word); the title read above follows it, for a record with
+ * no memberships (a pre-car save, a DM-authored person) and as the line behind an ousting.
+ *
+ * Pure and deterministic; reads name, role, the memberships and the faction handle only. A play-time
  * ousting is the ruling chain's to skip (powerStrata.js :: liveSeatCandidatesOf), where
  * the chain has always read it.
  */
 
-import { governingFactionOf } from '../rulingPower.js';
+import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { npcInFaction, ladderFactionKey } from '../worldPulse/npcLadderFactionMembership.js';
+import { rankIn } from '../people/membership.js';
+import { seatHouseName } from './powerSupport.js';
 
 /** @typedef {import('../rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
+/** @typedef {import('./powerSupport.js').SupportInstitution} SupportInstitution */
 
 /**
  * The settlement as the seat reads it: the ruling-power contract plus the roster.
@@ -39,7 +48,7 @@ import { npcInFaction, ladderFactionKey } from '../worldPulse/npcLadderFactionMe
 
 /**
  * A roster row as the seat reads it.
- * @typedef {{ id?: unknown, name?: unknown, role?: unknown, title?: unknown, factionAffiliation?: unknown }} SeatNpc
+ * @typedef {{ id?: unknown, name?: unknown, role?: unknown, title?: unknown, factionAffiliation?: unknown, memberships?: unknown }} SeatNpc
  */
 
 /**
@@ -94,7 +103,8 @@ export function isOfficeStandIn(npc) {
 }
 
 /**
- * Every named member of the governing faction who carries a seat title, best first.
+ * Every named seat-holder of the governing power, best first: its rank-1 face (the people car),
+ * then every named member who carries a seat title.
  * @param {SeatSettlement | null | undefined} settlement
  * @returns {SeatNpc[]}
  */
@@ -106,11 +116,15 @@ export function seatCandidatesOf(settlement) {
   const roster = /** @type {unknown[]} */ (Array.isArray(settlement?.npcs) ? settlement.npcs : []);
   const tierHead = TIER_HEAD[text(settlement?.tier).toLowerCase()] || '';
   const tierRank = tierHead ? SEAT_TITLES.indexOf(tierHead) : -1;
+  const govName = text(nameOf(governing));
+  /** @type {SeatNpc | null} */
+  let first = null;
   /** @type {Array<{ npc: SeatNpc, own: number, rank: number, exact: number, at: number }>} */
   const found = [];
   roster.forEach((row, at) => {
     if (!row || typeof row !== 'object') return;
     const npc = /** @type {SeatNpc} */ (row);
+    if (!first && govName && rankIn(npc, govName) === 1 && !isOfficeStandIn(npc)) { first = npc; return; }
     const rank = seatTitleRankOf(npc);
     if (rank < 0 || isOfficeStandIn(npc)) return;
     if (!npcInFaction(/** @type {Record<string, unknown>} */ (row), governing, fkey, factions)) return;
@@ -118,6 +132,23 @@ export function seatCandidatesOf(settlement) {
     found.push({ npc, own: rank === tierRank ? 0 : 1, rank, exact, at });
   });
   found.sort((a, b) => (a.own - b.own) || (a.rank - b.rank) || (a.exact - b.exact) || (a.at - b.at));
-  return found.map((f) => f.npc);
+  const titled = found.map((f) => f.npc);
+  return first ? [first, ...titled] : titled;
 }
 
+
+/**
+ * THE SEAT'S HOUSE HAS NO FACE OF ITS OWN WHERE A HOUSE LEADS (COHERENCE-POWERS, the chair's ruling of
+ * 2026-11-11, cure (i), one person, one face): the seat's house (the heaviest Government-shelf house, else
+ * the hall — powerSupport.js :: seatHouseName) is faced by the seat holder, the dual-hat leader. A reader
+ * that finds a house's face by its key and finds none falls back here; a town saved before the cure still
+ * carries the office's own face and never reaches this. Null for any other house, or with no holder.
+ * @param {(SeatSettlement & { institutions?: SupportInstitution[] }) | null | undefined} settlement
+ * @param {string} house the roster row's name
+ * @returns {SeatNpc | null}
+ */
+export function seatHouseFaceOf(settlement, house) {
+  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  if (!house || seatHouseName(institutions) !== house) return null;
+  return seatCandidatesOf(settlement)[0] || null;
+}

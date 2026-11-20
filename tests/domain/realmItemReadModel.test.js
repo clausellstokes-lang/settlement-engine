@@ -301,7 +301,8 @@ describe('RealmItem independent dimensions and provenance', () => {
       available: false,
       rootRecordId: null,
       receiptId: null,
-      reason: 'No recorded cause receipt is available for this source.',
+      // SW-9b-A (PULSE-LINES §9ah): the reason the Herald prints when no cause was kept, in D·40's plain words.
+      reason: 'The causes behind this story were not kept.',
       inWorldTick: 12,
       provenance: {
         sourceClass: 'live_stressor',

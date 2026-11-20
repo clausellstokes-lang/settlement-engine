@@ -44,6 +44,7 @@ import {
   serif_,
 } from '../theme.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
+import { cardPowerNames, cardHouseOf } from '../../domain/people/cardPowers.js';
 
 const PAPER = swatch['#FFFBF5'];
 const MUTED = swatch.inkMag3;
@@ -76,7 +77,7 @@ function entitySummary(entry) {
   }
   if (entry?.type === 'faction') {
     return firstText(raw.description, raw.agenda, raw.goal)
-      || 'A faction participating in the settlement’s balance of power.';
+      || 'A power taking part in the town’s balance of power.';
   }
   if (entry?.type === 'institution') {
     return firstText(raw.description, raw.function, raw.type)
@@ -106,7 +107,9 @@ function recordedWhy(entry) {
 function connectionsFor(entry, index) {
   const raw = entry?.raw || {};
   const candidates = [
-    raw.factionAffiliation,
+    // A card's powers and house (PEOPLE-5A, M-1b), read from its memberships and institution.
+    ...cardPowerNames(raw),
+    cardHouseOf(raw),
     raw.faction,
     raw.institutionName,
     raw.institutionId,

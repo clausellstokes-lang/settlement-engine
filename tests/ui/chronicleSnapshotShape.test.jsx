@@ -104,7 +104,7 @@ describe('THE SNAPSHOT-SHAPE BUG: real generator records render their real field
 
   test('FACTIONS render their real name and desc — never "Unnamed", never a bare label', () => {
     const s = generateSettlementPipeline({ tier: 'city' });
-    const rows = rowsUnder(openModal(s), 'Factions');
+    const rows = rowsUnder(openModal(s), 'Powers');
     const factions = s.powerStructure.factions;
 
     expect(rows.length).toBe(factions.length);
@@ -223,7 +223,7 @@ describe('the accessors serve BOTH shapes — legacy .name/.description still re
 
     expect(rowsUnder(dialog, 'Institutions')).toEqual(['Old Mill: A mill.']);
     expect(rowsUnder(dialog, 'NPCs')).toEqual(['Ana (Smith): A smith.']);
-    expect(rowsUnder(dialog, 'Factions')).toEqual(['The Reeves: They reeve.']);
+    expect(rowsUnder(dialog, 'Powers')).toEqual(['The Reeves: They reeve.']);
     expect(rowsUnder(dialog, 'Conflicts')).toEqual(['A quarrel.']);
     expect(rowsUnder(dialog, 'Stressors')).toEqual(['Famine: No grain.']);
   });
@@ -236,7 +236,7 @@ describe('the accessors serve BOTH shapes — legacy .name/.description still re
       thesis: 'T',
       powerStructure: { factions: [{ faction: 'Alpha', name: 'Beta', desc: 'D' }] },
     });
-    expect(rowsUnder(dialog, 'Factions')).toEqual(['Alpha: D']);
+    expect(rowsUnder(dialog, 'Powers')).toEqual(['Alpha: D']);
   });
 
   test('.desc WINS over .description, .summary over .description, goal.short over secret.what', () => {
@@ -250,7 +250,7 @@ describe('the accessors serve BOTH shapes — legacy .name/.description still re
     expect(rowsUnder(dialog, 'Institutions')).toEqual(['I: real']);
     expect(rowsUnder(dialog, 'Stressors')).toEqual(['S: real']);
     expect(rowsUnder(dialog, 'NPCs')).toEqual(['N (R): wants']);
-    expect(rowsUnder(dialog, 'Factions')).toEqual(['F: real']);
+    expect(rowsUnder(dialog, 'Powers')).toEqual(['F: real']);
   });
 
   test('an NPC with only a secret falls back to it; one with neither renders bare', () => {

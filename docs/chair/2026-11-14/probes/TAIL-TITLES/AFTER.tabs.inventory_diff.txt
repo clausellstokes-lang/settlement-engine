@@ -1,0 +1,70 @@
+sentences: before 30045 after 30111 · gone 15 · new 81 · in fewer towns 69 · in more towns 3 · moved 0
+ GONE (widest):
+      2 ->    0  <N>, the alewife and Elder, holds its seat.
+      1 ->    0  <N>, the boat-headman (Fisher's landing)
+      1 ->    0  <N>, the alewife and Elder, holds the seat of the Free Elder Council.
+      1 ->    0  <N>, the camp foreman and Household Elder, holds the seat of the Household Council.
+      1 ->    0  <N>, the alewife and Headman, holds the seat of the Headman's Authority.
+      1 ->    0  Connection: Acting Household Elder <N>, the camp foreman
+      1 ->    0  Acting Household Elder <N>, the camp foreman, keeps the seat meanwhile.
+      1 ->    0  Connection: Acting Elder <N>, the camp foreman
+      1 ->    0  Acting Elder <N>, the camp foreman, keeps the seat meanwhile.
+      1 ->    0  <N>, the headman, knows where the hoarded food can be found and is not saying; someone close to them is among the hoarders.
+      1 ->    0  <N>, the headman, holds its seat.
+      1 ->    0  <N>, the camp foreman and Elder, holds the seat of the Free Elder Council.
+ IN FEWER TOWNS (largest loss):
+    189 ->   93  the front man
+    132 ->   52  the district madam
+    119 ->   58  the ferryman
+    103 ->   49  <N>, the boat-headman
+    107 ->   55  the madam
+     88 ->   43  Still the boat-headman as well.
+     81 ->   37  handled by <N>, the front man (Front businesses)
+     49 ->   24  the alewife
+     42 ->   19  Connection: Elder <N>, the boat-headman
+     42 ->   19  The seat<N>, the boat-headman and Elder
+     33 ->   10  Boat-headman
+     35 ->   17  <N>, the alewife
+ NEW (widest):
+      0 ->   96  the nominal owner
+      0 ->   80  the keeper of the houses
+      0 ->   61  the ferry keeper
+      0 ->   54  <N>, the boat-master
+      0 ->   52  the keeper of the house
+      0 ->   45  Still the boat-master as well.
+      0 ->   44  handled by <N>, the nominal owner (Front businesses)
+      0 ->   25  the brewster
+      0 ->   23  Connection: Elder <N>, the boat-master
+      0 ->   23  The seat<N>, the boat-master and Elder
+      0 ->   23  Boat-master
+      0 ->   18  <N>, the brewster
+ IN MORE TOWNS (largest gain):
+    714 ->  718  Patron deity
+    714 ->  718  Assign a patron god to awaken the settlement’s religion layer.
+    714 ->  718  Upgrade to premiumAvailable at launch to author and assign deities.
+ THE INHERITORS (print now, and did not, in a town that lost a sentence): 84 sentences
+   + 96 towns (e.g. r2r-city-0)  the nominal owner
+   + 80 towns (e.g. r2r-city-10)  the keeper of the houses
+   + 61 towns (e.g. r2r-city-13)  the ferry keeper
+   + 54 towns (e.g. r2r-hamlet-10)  <N>, the boat-master
+   + 52 towns (e.g. r2r-city-1)  the keeper of the house
+   + 45 towns (e.g. r2r-hamlet-11)  Still the boat-master as well.
+   + 44 towns (e.g. r2r-city-0)  handled by <N>, the nominal owner (Front businesses)
+   + 25 towns (e.g. r2r-hamlet-1)  the brewster
+   + 23 towns (e.g. r2r-hamlet-16)  Connection: Elder <N>, the boat-master
+   + 23 towns (e.g. r2r-hamlet-16)  The seat<N>, the boat-master and Elder
+   + 23 towns (e.g. r2r-thorp-22)  Boat-master
+   + 18 towns (e.g. r2r-hamlet-1)  <N>, the brewster
+   + 18 towns (e.g. r2r-city-3)  the foundling-keeper
+   + 15 towns (e.g. r2r-hamlet-11)  Connection: Household Elder <N>, the boat-master
+   + 15 towns (e.g. r2r-hamlet-11)  The seat<N>, the boat-master and Household Elder
+   + 14 towns (e.g. r2r-hamlet-12)  <N>, the camp overseer
+   + 13 towns (e.g. r2r-city-12)  handled by <N>, the keeper of the houses (Red light district)
+   + 11 towns (e.g. r2r-city-58)  <N>, the ferry keeper
+   + 10 towns (e.g. r2r-thorp-3)  <N>, the boat-master and Elder, holds the seat of the Elder Council.
+   + 10 towns (e.g. r2r-hamlet-10)  the boat-master
+   +  9 towns (e.g. r2r-hamlet-11)  Its seat is held by <N>, the boat-master and Household Elder.
+   +  9 towns (e.g. r2r-hamlet-12)  the camp overseer
+   +  7 towns (e.g. r2r-city-14)  handled by <N>, the keeper of the house (Brothel (red light district))
+   +  6 towns (e.g. r2r-hamlet-13)  Connection: Headman <N>, the boat-master
+   +  6 towns (e.g. r2r-hamlet-13)  The seat<N>, the boat-master and Headman

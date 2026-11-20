@@ -26,8 +26,16 @@ import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/ec
 import { DOSSIER_STATE_PROSE_STRESSORS } from '../../src/data/dossierStateProse/stressors.generated.js';
 import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../src/data/dossierStateProse/warFaith.generated.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
+import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
+import { powerNameWithArticle } from '../../src/domain/display/powerSentenceName.js';
 
-const SIEGE = 'Critical (active siege — survival priority)';
+/** CENSUS-5: the no-walls read hands facts too (a pool may declare fact atoms): calm, every presence fact held but the perimeter. */
+// W4 PEOPLE second seat 2026-11-07: + the migration's birth direction, so a walls pool that also declares its
+// direction (DS-STR-1 MASS MIGRATION, WAVE-RULINGS item 8) is read as a real record reads it, not muted by
+// an atom the calm double does not carry.
+const NO_WALLS_FACTS = Object.freeze({ ...CALM_FACTS_ADMIT_ALL, migration: Object.freeze({ active: true, direction: 'influx' }), defence: Object.freeze({ ...CALM_FACTS_ADMIT_ALL.defence, walls: false, wallKind: null, palisade: false, gate: false }) });
+
+const SIEGE = 'Critical (under siege)'; // W3 POW: the producer's words of 2026-11-07
 
 /** The three births, trimmed to what the stability header reads. */
 const BIRTHS = Object.freeze([
@@ -51,8 +59,8 @@ const DRAWN = Object.freeze({
 function member(b, vid) {
   const text = variantByVid({
     leaf: 'power', blockId: 'DS-POW-2', poolKey: 'siege matched', vid,
-    slots: { settlement: b.name, faction: b.governingName },
-  });
+    slots: { settlement: b.name, faction: powerNameWithArticle(b.governingName) },
+  }).replace(/(^|[.!?]\s+)the (?=\p{Lu})/gu, '$1The '); // NAMES-1 (CN1): the article, "The" where the fill opens a sentence
   return speakTierNoun(text, b.tier);
 }
 
@@ -154,7 +162,7 @@ describe('F10 · every mounted variant that names walls is gated', () => {
           }
           if (!pool.some((v) => (v.marks || []).includes('walls'))) continue;
           const slots = Object.fromEntries(pool.flatMap((v) => v.slots || []).map((slot) => [slot, 'X']));
-          const read = eligibleVariants(pool, { slots, audience: 'dm', dimensions: { walls: 'no walls' } });
+          const read = eligibleVariants(pool, { slots, audience: 'dm', dimensions: { walls: 'no walls' }, facts: NO_WALLS_FACTS });
           if (read.length === 0) mute.push(`${id} :: ${key}`);
           for (const v of read) if (WALL_TERM.test(v.text)) leaky.push(`${id} :: ${key} :: v${v.vid}`);
         }

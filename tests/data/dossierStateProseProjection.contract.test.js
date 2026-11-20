@@ -59,6 +59,8 @@ import {
   AUDIENCE_DM, AUDIENCE_PLAYER, STATE_MARK_DIMENSIONS,
   eligibleVariants, poolDimensions, readStateProse,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { COLOUR_MARK, assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
+import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 
@@ -251,7 +253,7 @@ describe('the dossier state-prose projection', () => {
     // 3 ADDED, 0 REMOVED, 0 CHANGED, and zero pre-existing (blockId, poolKey) pools
     // changed length — measured directly, which is the property drawVariant actually
     // reads. No same-seed movement, so no capsule.
-    expect(allStateBlocks.length).toBe(68);
+    expect(allStateBlocks.length).toBe(69); // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 68 -> 69 blocks
     expect(Object.keys(DOSSIER_CAUSAL_PROSE).length).toBe(78);
   });
 
@@ -767,7 +769,18 @@ const DIMENSIONED_POOLS = allStateBlocks.flatMap(([id, block]) => Object.entries
 /** Every (pool x dimension value) state those pools partition themselves into. */
 const DIMENSION_STATES = DIMENSIONED_POOLS.flatMap(({ id, key, pool, dims }) => dims
   .flatMap((dimension) => STATE_MARK_DIMENSIONS[dimension]
-    .map((value) => ({ id, key, pool, dimension, value }))));
+    .map((value) => ({ id, key, pool, dims, dimension, value }))));
+
+/**
+ * Every answer to a pool's OTHER dimensions, one combination each ([{}] for a pool that
+ * partitions by one). Rung 2D unit 2: DS-POW-4's `Stable (no challengers)` pool is the first to
+ * partition by two (`succession` and `unrest`); a desk answers all of them at once
+ * (`crisisAnswered`), so an arm that answers one dimension must answer the others too, or the
+ * fail-closed gate reads the pool as unanswered.
+ * @param {string[]} dims @param {string} dimension @returns {Array<Record<string, string>>}
+ */
+const otherAnswers = (dims, dimension) => dims.filter((d) => d !== dimension)
+  .reduce((combos, d) => combos.flatMap((c) => STATE_MARK_DIMENSIONS[d].map((v) => ({ ...c, [d]: v }))), [{}]);
 
 describe('the demoted state dimension — the channel the kernel enforces', () => {
   it('closes the mark vocabulary and keeps the three semantics disjoint', () => {
@@ -783,7 +796,15 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
       .flatMap((variant) => variant.marks || []));
     const vocabulary = Object.values(STATE_MARK_DIMENSIONS).flat();
 
-    const unclassified = [...stateMarks].filter((m) => m !== 'dm-only' && !vocabulary.includes(m));
+    // CENSUS-1b wave 1: the mark vocabulary is the fact vocabulary's mark half, and a fact ATOM
+    // the projector routes into `marks` (`X` / `no X`, `crisis: …`) is classified too — but only
+    // a DECLARABLE one (a home answers it): an unknown atom, or one with no reader yet, is
+    // unclassified exactly as an unknown mark word is.
+    const declarable = (m) => { try { assertDeclarable(m.replace(/^no\s+/, '')); return true; } catch { return false; } };
+    // R-AO (factVocabulary.js :: COLOUR_MARK): the per-line `colour` mark is the vocabulary's own
+    // no-atom declaration ("read; presumes nothing"), classified by name; it first reached the
+    // leaves at census-3g unit 3 (b1aab0f21) and census-5d unit 2a (c24d7118e), parallel lanes.
+    const unclassified = [...stateMarks].filter((m) => m !== 'dm-only' && m !== COLOUR_MARK && !vocabulary.includes(m) && !declarable(m));
     const inTwoDimensions = vocabulary.filter((word, i) => vocabulary.indexOf(word) !== i);
     // The causal register's arm names are family-local and OPEN (92 distinct today), so
     // they cannot be a closed vocabulary and stay outside STATE_MARK_DIMENSIONS. What must
@@ -799,7 +820,8 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     expect(stateMarks.size).toBeGreaterThanOrEqual(8);
     expect(causalMarks.size).toBeGreaterThanOrEqual(92);
     // F10 WALLS-WORD (2026-11-04): the `walls` fact dimension adds `walls` / `no walls`.
-    expect(vocabulary.length).toBe(9);
+    // F12 CRISIS-BLIND (2026-11-04): the five crisis fact dimensions add ten words.
+    expect(vocabulary.length).toBe(19);
   });
 
   it('reads NOTHING from a partitioned pool the caller did not answer', () => {
@@ -818,27 +840,67 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
       // fill: answering the dimension must bring the sentence back at every legal value.
       for (const dimension of dims) {
         for (const value of STATE_MARK_DIMENSIONS[dimension]) {
-          const answered = readStateProse({ [id]: { pools: { [key]: pool } } }, id, key,
-            { slots, seed: 's', audience: AUDIENCE_DM, dimensions: { [dimension]: value } });
-          if (answered === null) mute.push(`${id} :: ${key} :: ${dimension}=${value}`);
+          for (const others of otherAnswers(dims, dimension)) {
+            const answered = readStateProse({ [id]: { pools: { [key]: pool } } }, id, key,
+              { slots, seed: 's', audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL });
+            if (answered === null) mute.push(`${id} :: ${key} :: ${dimension}=${value}${Object.keys(others).length ? ` with ${JSON.stringify(others)}` : ''}`);
+          }
         }
       }
     }
-    expect({ spoke, mute }).toEqual({ spoke: [], mute: [] });
+    // ⚠ MUTE IS NOW THE FACTS GATE, NOT THE DIMENSION GATE, on exactly these seven states
+    // (census-2b item 2, db3ed88c1; measured on the leaves: 0 at its parent, these 7 at it, the
+    // same 7 at the tip). The calm admit-all double holds every presence and no population band,
+    // so a state whose every line EXCLUDES a presence (`no garrison`, `no ruler: occupier`) or
+    // needs `population: ≥ middling` is refused by the facts, not by the dimension. DS-GEN-1 is
+    // dark (UNMOUNTED_BLOCKS) and DS-GEN-3 glances, so none is a reader's sentence. Pinned
+    // exactly: any NEW mute still reds.
+    expect({ spoke, mute }).toEqual({
+      spoke: [],
+      mute: [
+        // W4 PEOPLE second seat 2026-11-07 (WAVE-RULINGS item 8): DS-STR-1's MASS MIGRATION lines now
+        // declare their direction (`migration: influx` x7, `migration: exodus` x4); the calm admit-all
+        // double answers no migration (a keyed presence holds one key, and the double names none), so the
+        // facts gate holds both walls states silent here, the same class as the seven below. A real
+        // record answers its own direction (the desk suite's banner arm proves every banner speaks).
+        // + DS-DEF-2 Beasts & Monsters: settled, nothing organized :: threat=threat at W2-WRITE-5 A H4 (2026-11-13): its three threat twins declare `no guardPresence` ("nothing organised" is false beside a watch, the read's H4), and the calm admit-all double holds every presence, so the state admits no line under the double; a declared cause.
+        'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized :: threat=threat',
+        // + DS-DEF-2 Invasion & War: neither walls nor force :: threat=threat at W2-WRITE-12 (2026-11-14, REVIEW-W2-WRITE-2 HIGH 1): its threat lines declare `no mercenary` ("all the town has" is false beside a hired company), and the admit-all double holds every presence: the facts gate, the Beasts row's class.
+        'DS-DEF-2 :: Invasion & War: neither walls nor force :: threat=threat',
+        'DS-STR-1 :: MASS MIGRATION :: walls=walls',
+        'DS-STR-1 :: MASS MIGRATION :: walls=no walls',
+        'DS-GEN-1 :: economic_disparity :: severity=minor with {"walls":"no walls"}',
+        'DS-GEN-1 :: economic_disparity :: walls=no walls with {"severity":"minor"}',
+        'DS-GEN-1 :: occupation_legacy :: severity=minor',
+        'DS-GEN-1 :: occupation_legacy :: severity=major',
+        'DS-GEN-1 :: occupation_legacy :: severity=catastrophic',
+        'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=walls',
+        // W2-WRITE the walls-word mute (2026-11-13): 'Undefended :: walls=no walls' CURED and gone — v6, a no-walls line naming neither walls nor a force, speaks there.
+      ],
+    });
 
     // The named case, spelled out because it is the one a reader can check by eye.
+    // db3ed88c1 made crime_wave crisis-scoped with fact-declaring lines, so the answered read
+    // carries facts, as every desk's does (the unanswered one stays null either way).
     expect(readStateProse(DOSSIER_STATE_PROSE_GENERAL, 'DS-GEN-1', 'crime_wave',
       { slots: { settlement: 'X' }, seed: 's' })).toBeNull();
     expect(readStateProse(DOSSIER_STATE_PROSE_GENERAL, 'DS-GEN-1', 'crime_wave',
-      { slots: { settlement: 'X' }, seed: 's', dimensions: { severity: 'minor' } })?.text)
+      { slots: { settlement: 'X' }, seed: 's', dimensions: { severity: 'minor' }, facts: CALM_FACTS_ADMIT_ALL })?.text)
       .toEqual(expect.any(String));
 
     // Non-vacuity, MEASURED: 24 pools across DS-GEN-1, DS-GEN-6 and DS-GEN-9.
     expect(DIMENSIONED_POOLS.length).toBeGreaterThanOrEqual(24);
     expect([...new Set(DIMENSIONED_POOLS.map((p) => p.id))].sort())
       // F10 WALLS-WORD (2026-11-04): sixteen more blocks partition by `walls`.
-      .toEqual(['DS-CND-1', 'DS-DEF-6', 'DS-ECO-12', 'DS-ECO-3', 'DS-ECO-8', 'DS-ECO-9', 'DS-FTH-1', 'DS-GEN-1', 'DS-GEN-3',
-        'DS-GEN-6', 'DS-GEN-9', 'DS-HK-1', 'DS-POW-2', 'DS-POW-6', 'DS-POW-7', 'DS-STR-1', 'DS-STR-2', 'DS-WAR-1', 'DS-WAR-2']);
+      // F12 CRISIS-BLIND (2026-11-04): six more partition by a crisis dimension (DS-DEF-1, -2, -4, -11, DS-ECO-1, DS-POW-4).
+      // CENSUS-3b unit 2 (2026-11-05): DS-ECO-10 (POSTURE established v1 carries `no hunger`).
+      // CENSUS-3c unit 4 (2026-11-05): DS-ECO-2 (the FOOD / GRANARY calm lines carry `no hunger`, R-K);
+      // DS-POP-1 (QUANTITY thousands v2 "retains its walls" declares `walls`, R-O's one word).
+      // census-2b item 2 (db3ed88c1): DS-GEN-10 and DS-GEN-17 (walls lines). census-5d unit 2a
+      // (c24d7118e): DS-WAR-5 (three siege pools mark walls). census-5d unit 2b (f260dbac6):
+      // DS-DEF-7 and DS-DEF-10. 28 -> 33, each measured on the leaves parent -> commit.
+      .toEqual(['DS-CND-1', 'DS-DEF-1', 'DS-DEF-10', 'DS-DEF-11', 'DS-DEF-2', 'DS-DEF-4', 'DS-DEF-6', 'DS-DEF-7', 'DS-ECO-1', 'DS-ECO-10', 'DS-ECO-12', 'DS-ECO-2', 'DS-ECO-3', 'DS-ECO-8', 'DS-ECO-9', 'DS-FTH-1', 'DS-GEN-1', 'DS-GEN-10', 'DS-GEN-17', 'DS-GEN-3',
+        'DS-GEN-6', 'DS-GEN-9', 'DS-HK-1', 'DS-POP-1', 'DS-POW-2', 'DS-POW-4', 'DS-POW-6', 'DS-POW-7', 'DS-STR-1', 'DS-STR-2', 'DS-WAR-1', 'DS-WAR-2', 'DS-WAR-5']);
   });
 
   it('never returns a variant that contradicts the state it was asked about', () => {
@@ -850,7 +912,9 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
       for (const { id, key, pool, dimension, value } of DIMENSION_STATES) {
         const slots = bagFor(pool);
-        for (const variant of eligibleVariants(pool, { slots, audience, dimensions: { [dimension]: value } })) {
+        // db3ed88c1 onward pools declare facts and opt into the crisis dimension; without facts
+        // such a pool is [] and the sweep would pass over it unread. The calm admit-all double.
+        for (const variant of eligibleVariants(pool, { slots, audience, dimensions: { [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL })) {
           const own = marksOf(variant, dimension);
           if (own.length > 0 && !own.includes(value)) {
             contradictions.push(`${audience} :: ${id} :: ${key} :: asked ${dimension}=${value} :: got [${own.join(', ')}]`);
@@ -866,8 +930,11 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     const crimeWave = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-1'].pools.crime_wave;
     const catastrophic = crimeWave.find((v) => (v.marks || []).includes('catastrophic'));
     expect(catastrophic.angle).toBe('unfolding');
+    // db3ed88c1: the minor lines declare `watch` (v1) and `population: ≥ middling` (v5), so the
+    // read is a calm middling town holding every presence; at its parent (no facts) the same two.
     const minorReachable = new Set(eligibleVariants(crimeWave,
-      { slots: { settlement: 'X' }, audience: AUDIENCE_DM, dimensions: { severity: 'minor' } })
+      { slots: { settlement: 'X' }, audience: AUDIENCE_DM, dimensions: { severity: 'minor' },
+        facts: { ...CALM_FACTS_ADMIT_ALL, populationBand: 'middling' } })
       .map((v) => v.text));
     expect(minorReachable.has(catastrophic.text)).toBe(false);
     expect(minorReachable.size).toBeGreaterThanOrEqual(2);
@@ -883,25 +950,62 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     // variety in the states where the corpus authored only one line for a value, and every
     // settlement in such a state prints the same sentence. That is a CORPUS bill, payable
     // by authoring, and hiding it would be the fail-open reading in a different coat.
+    // RE-KEYED BY IDENTITY (2026-11-18, BAR8-DESKS-2, ruling BR28 (3)): a pool KEYED BY A FOOD BAND (DS-GEN-3's
+    // `foodSecurity.label: <band>`) is read under THAT band, not the calm double's `secure`: the page draws the pool only
+    // where it prints the band. BAR8-DESKS-ECO declared the Import-Dependent lines `food: = importDependent`, so under the
+    // double's band only v4 (`food: ≥ secure`, never admitted under its own key) was left, and the pool's two walls states
+    // read thin (28 -> 30 DM, 29 -> 31 player); under the key's own band they hold five lines each, and the bill is back.
+    const FOOD_KEY_BAND = { Famine: 'famine', Deficit: 'deficit', 'Import-Dependent': 'importDependent', Pressured: 'pressured', Secure: 'secure', Surplus: 'surplus' };
+    const factsForKey = (/** @type {string} */ key) => {
+      const band = /** @type {Record<string, string>} */ (FOOD_KEY_BAND)[String(key).replace(/^foodSecurity\.label: /, '')];
+      return /^foodSecurity\.label: /.test(key) && band
+        ? { ...CALM_FACTS_ADMIT_ALL, famine: { ...CALM_FACTS_ADMIT_ALL.famine, band, shownBand: band } }
+        : CALM_FACTS_ADMIT_ALL;
+    };
     const thin = {};
     for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
-      thin[audience] = DIMENSION_STATES.filter(({ pool, dimension, value }) => eligibleVariants(
-        pool, { slots: bagFor(pool), audience, dimensions: { [dimension]: value } },
-      ).length <= 1).length;
+      thin[audience] = DIMENSION_STATES.filter(({ key, pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
+        pool, { slots: bagFor(pool), audience, dimensions: { ...others, [dimension]: value }, facts: factsForKey(key) },
+      ).length <= 1)).length;
     }
     // MEASURED at 2d5112851, and the two audiences DIFFER BY ONE. The design volume
     // recorded 13; that is the DM figure. On the player's page DS-GEN-1 :: infiltration_fear
     // at `severity: major` also collapses to one line, because the second `major` variant
     // there is the block's only `major + dm-only` line and the player cannot hear it. The
     // reader-facing number is 14. Both are pinned so neither audience can drift unseen.
-    expect(thin[AUDIENCE_DM]).toBeLessThanOrEqual(13);
-    expect(thin[AUDIENCE_PLAYER]).toBeLessThanOrEqual(14);
+    // 13 -> 26 (DM) and 14 -> 27 (player) at census-2b item 2 (db3ed88c1), measured on the
+    // leaves parent -> commit and unchanged to the tip: the DS-GEN ledger's presence and band
+    // declarations leave one admitted line in 13 more states under the calm admit-all double.
+    // The bill grew by a declared cause; the ceiling still only ratchets DOWN from here.
+    // 26 -> 28 (DM) and 27 -> 29 (player) at W4 PEOPLE second seat 2026-11-07: DS-STR-1's MASS MIGRATION
+    // pool declares its direction (WAVE-RULINGS item 8), so under the calm double (no migration answered)
+    // its two walls states admit no line; a declared cause, and the ceiling still only ratchets DOWN.
+    expect(thin[AUDIENCE_DM]).toBeLessThanOrEqual(28);
+    expect(thin[AUDIENCE_PLAYER]).toBeLessThanOrEqual(29);
     // No state may go SILENT: a value with zero eligible variants is a dead branch of the
     // corpus dressed as a town with nothing to say, and the ratchet above would not see it.
-    const silent = DIMENSION_STATES.filter(({ pool, dimension, value }) => eligibleVariants(
-      pool, { slots: bagFor(pool), audience: AUDIENCE_DM, dimensions: { [dimension]: value } },
-    ).length === 0);
-    expect(silent).toEqual([]);
+    const silent = DIMENSION_STATES.filter(({ pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
+      pool, { slots: bagFor(pool), audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL },
+    ).length === 0));
+    // The same seven states the T2 arm pins (census-2b item 2, db3ed88c1; 0 at its parent): under
+    // the calm admit-all double their every line excludes a presence or needs a population band,
+    // so the FACTS gate empties them, not the dimension. Named exactly, so a new silence reds.
+    // + DS-STR-1 MASS MIGRATION's two walls states at W4 PEOPLE second seat 2026-11-07 (the T2 arm's note above).
+    expect(silent.map(({ id, key, dimension, value }) => `${id} :: ${key} :: ${dimension}=${value}`)).toEqual([
+      // + DS-DEF-2 Beasts & Monsters: settled, nothing organized :: threat=threat at W2-WRITE-5 A H4 (2026-11-13): its three threat twins declare `no guardPresence` ("nothing organised" is false beside a watch, the read's H4), and the calm admit-all double holds every presence, so the state admits no line under the double; a declared cause.
+      'DS-DEF-2 :: Beasts & Monsters: settled, nothing organized :: threat=threat',
+      // + DS-DEF-2 Invasion & War: neither walls nor force :: threat=threat at W2-WRITE-12 (2026-11-14, REVIEW-W2-WRITE-2 HIGH 1): its threat lines declare `no mercenary`; the admit-all double holds every presence (the mute arm's own row, the same state).
+      'DS-DEF-2 :: Invasion & War: neither walls nor force :: threat=threat',
+      'DS-STR-1 :: MASS MIGRATION :: walls=walls',
+      'DS-STR-1 :: MASS MIGRATION :: walls=no walls',
+      'DS-GEN-1 :: economic_disparity :: severity=minor',
+      'DS-GEN-1 :: economic_disparity :: walls=no walls',
+      'DS-GEN-1 :: occupation_legacy :: severity=minor',
+      'DS-GEN-1 :: occupation_legacy :: severity=major',
+      'DS-GEN-1 :: occupation_legacy :: severity=catastrophic',
+      'DS-GEN-3 :: defenseProfile.readiness.label: Undefended :: walls=walls',
+      // W2-WRITE the walls-word mute (2026-11-13): 'Undefended :: walls=no walls' CURED and gone — v6, a no-walls line naming neither walls nor a force, speaks there.
+    ]);
   });
 
   it('states no duration its pool key does not license — the channel with NO kernel', () => {
@@ -1017,7 +1121,8 @@ describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edi
     }
     expect({ missing, orphan }).toEqual({ missing: [], orphan: [] });
     // Non-vacuity: the walk found the whole register, not an empty one.
-    expect(META_ROWS.length).toBe(709);
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
+    expect(META_ROWS.length).toBe(861); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 859 -> 861, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece): DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED // BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4): 856 -> 859, re-measured at the joined tree (2d80aa740): BAR4-HISTORY batch 2's three DS-GEN-16 -MARKED pools (155c7e1af) // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
     expect(META_ROWS.every((r) => r.meta)).toBe(true);
   });
 
@@ -1130,7 +1235,10 @@ describe('SEAM car 4 — poolMeta, the RENDER half, projected and never hand-edi
     }
     expect(wrong).toEqual([]);
     // MEASURED at this tip: exactly the RESOLVED / WIRING-UNRESOLVED split of the census.
-    expect({ present, absent }).toEqual({ present: 341, absent: 368 });
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6: present 341 -> 349.
+    // MEASURED at this tip: exactly the RESOLVED / WIRING-UNRESOLVED split of the census. 341 / 368 -> 345 / 369
+    // at W5 HIS construction (2026-11-07, ODQ §934.105): DS-GEN-16 gains LIVING-MEMORY and four LEGACY-* pools.
+    expect({ present, absent }).toEqual({ present: 492, absent: 369 }); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): absent 367 -> 369, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece): DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED, both read nothing the census lists // BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4): absent 364 -> 367, re-measured at the joined tree (2d80aa740): BAR4-HISTORY batch 2's three DS-GEN-16 -MARKED pools (155c7e1af): the census reads nothing for them, readsCount absent // R3-TABS L1 (2026-11-13): the posture lens reads the badge through a key table (POSTURE_POOL_OF_BADGE), which the census resolves: the four DS-DEF-1 readiness pools are read (488 -> 492; 368 -> 364). // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool, a read pool, leaves (489 -> 488). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 343 -> 347 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 356 -> 361 (the five DS-DEF-12 pools each read) // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 361 -> 365 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 365 -> 398 (the thirty-three new pools each read) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (341 -> 425; 368 -> 367) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (341 -> 433; 368 -> 367) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (341 -> 485; 368 -> 367) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (341 -> 489; 368 -> 368)
     expect(present).toBe(CENSUS.rows.filter((r) => r.reads.length > 0).length);
   });
 
@@ -1450,7 +1558,7 @@ describe('SEAM car 4 — the three leaves, at their floors', () => {
 
   it('NORMS: a bit per FIRED pool, frozen, and absent where the corpus never fired', () => {
     const keys = Object.keys(DOSSIER_PROSE_NORMS);
-    expect(keys.length).toBe(271);
+    expect(keys.length).toBe(270); // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool, a fired pool, leaves (271 -> 270)
     expect(Object.values(DOSSIER_PROSE_NORMS).filter((v) => v.departure === 1).length).toBe(72);
     const values = new Set(Object.values(DOSSIER_PROSE_NORMS).map((v) => v.departure));
     expect([...values].sort()).toEqual([0, 1]);
@@ -1473,10 +1581,13 @@ describe('SEAM car 4 — the three leaves, at their floors', () => {
     expect(META_ROWS.length - keys.length).toBe(unfired);
   });
 
-  it('⛔ RELATIONS: 165 rows with a direction, three ratified aliases, and a join of ZERO', () => {
-    expect(Object.keys(DOSSIER_RELATIONS).length).toBe(165);
+  // 165 → 169 at THE JOIN (JOIN-2, 2026-11-14): the defence lane's fundedGate and upkeep relations on the economicGates rows of
+  // src/generators/defenseGenerator.js (coherence-upkeep 94c5d408f..83883baaa), re-projected by the generator at the joined tree
+  // (that lane never regenerated the leaf); measured, re-keyed by identity.
+  it('⛔ RELATIONS: 169 rows with a direction, three ratified aliases, and a join of ZERO', () => {
+    expect(Object.keys(DOSSIER_RELATIONS).length).toBe(169);
     const rows = Object.values(DOSSIER_RELATIONS).flat();
-    expect(rows.length).toBe(165);
+    expect(rows.length).toBe(169);
     const directions = new Set(rows.map((r) => r.direction));
     expect([...directions]).toEqual(['a→b']);
     expect([...new Set(rows.map((r) => r.relation))]).toEqual(['consequence']);
@@ -1504,7 +1615,9 @@ describe('SEAM car 4 — the three leaves, at their floors', () => {
     // Non-vacuity: the resolver CAN resolve — ten rows join on exactly one endpoint.
     const half = Object.keys(DOSSIER_RELATIONS)
       .filter((key) => key.split('|').some((endpoint) => resolves(endpoint))).length;
-    expect(half).toBe(10);
+    // 10 → 11 at THE JOIN (JOIN-2, 2026-11-14): the defence lane's re-keyed relations put two keys on the aliased endpoint
+    // economicGates.military (fundedGate| and upkeep|) where the line had one (econOutput|); measured at the joined tree.
+    expect(half).toBe(11);
     expect(deskRoots.size).toBeGreaterThanOrEqual(60);
   });
 
@@ -1731,7 +1844,8 @@ describe('SEAM car 4 — §2.5\'s grammar, and every refusal it declares', () =>
     const marks = new Set(allStateBlocks.flatMap(([, b]) => Object.values(b.pools).flat())
       .flatMap((v) => v.marks || []));
     expect([...marks].filter((m) => m.startsWith('grammar'))).toEqual([]);
-    const src = readFileSync(resolve(ROOT, 'scripts/generate-dossier-state-prose.mjs'), 'utf8');
+    // CENSUS-1g unit 5: the annex parse (which routes the tag) moved verbatim to scripts/lib/dossier-annex-parse.mjs.
+    const src = readFileSync(resolve(ROOT, 'scripts/lib/dossier-annex-parse.mjs'), 'utf8');
     expect(src).toContain('GRAMMAR_TAG_RE');
     // No variant carries a grammar tag yet — Shift 1 authors them — so the claim the corpus
     // supports is the ABSENCE, pinned in both directions.
@@ -1874,9 +1988,9 @@ describe('SEAM car 4 — the 68 STATE-KEY lines, transcribed against the branch 
       if (buffer && raw.trim() === '') { blocks.get(at).stateKey = buffer.join(' '); buffer = null; continue; }
       if (buffer) buffer.push(raw);
     }
-    expect(blocks.size, 'the block reader found the wrong number of headers').toBe(68);
+    expect(blocks.size, 'the block reader found the wrong number of headers').toBe(69); // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 68 -> 69
     expect([...blocks.values()].filter((b) => b.stateKey).length,
-      'a block lost its STATE-KEY paragraph, or the reader has rotted').toBe(68);
+      'a block lost its STATE-KEY paragraph, or the reader has rotted').toBe(69); // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 68 -> 69
 
     /** The census's branch-grain reads per block, with every last segment beside them. */
     const readsByBlock = new Map();
@@ -1985,8 +2099,10 @@ describe('SEAM car 4d — the seat licence, computed where the census is visible
     }
     // The tally the projector prints, re-derived from the two committed files rather than
     // trusted: 708 pools, every one a sentence, and the reason is that none is a modifier yet.
-    expect(tally).toEqual({ 'sentence/not-a-modifier': 709 });
-    expect(META_ROWS).toHaveLength(709);
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6: 709 -> 717.
+    // 709 -> 717 at WIRING W3 (2026-11-07): the C1-C6 pools in DS-POW-5/-6.
+    expect(tally).toEqual({ 'sentence/not-a-modifier': 861 }); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 859 -> 861, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece): DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED // BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4): 856 -> 859, re-measured at the joined tree (2d80aa740): BAR4-HISTORY batch 2's three DS-GEN-16 -MARKED pools (155c7e1af) (BAR4-HISTORY-HANDBACK: not-a-modifier 856 -> 859) // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
+    expect(META_ROWS).toHaveLength(861); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 859 -> 861, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece): DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED // BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4): 856 -> 859, re-measured at the joined tree (2d80aa740): BAR4-HISTORY batch 2's three DS-GEN-16 -MARKED pools (155c7e1af) // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
     // ⛔ NO SHIPPED POOL IS A MODIFIER, which is why no clause can seat and why the `seat` key
     // is emitted nowhere: an ABSENT seat reads in the composer as the sentence.
     expect(modifiers, 'no shipped pool declares role modifier').toEqual([]);
@@ -2136,7 +2252,7 @@ describe('SEAM car 4d — the seat licence, computed where the census is visible
     const lands = (endpoint) => readPaths.some((p) => endpointReads(endpoint, p, ALIAS_OF));
     const joining = CENSUS.relations.rows.filter((r) => lands(r.a) && lands(r.b));
     const oneSide = CENSUS.relations.rows.filter((r) => lands(r.a) !== lands(r.b));
-    expect(CENSUS.relations.rows).toHaveLength(165);
+    expect(CENSUS.relations.rows).toHaveLength(169); // 165 → 169 at the join: the defence lane's relations (above)
     expect(joining, 'no row joins on both endpoints').toEqual([]);
     // THE NON-VACUITY CONTROL: the walk is not simply blind — rows DO land on one side.
     expect(oneSide.length, 'rows landing on exactly one endpoint').toBeGreaterThan(0);
@@ -2209,6 +2325,7 @@ describe('⭐⭐ REWRITE car 8a-4 — `kin`, the thread rule\'s typed half (SITT
     // than reasoned, and pinned a second time on the SHIFT REGISTER's comparator row.
     expect(META_ROWS.filter((r) => r.meta.kin !== undefined).map((r) => `${r.id} :: ${r.pool}`))
       .toEqual([]);
-    expect(META_ROWS.length, 'over the whole shipped corpus, not a slice').toBe(709);
+    // WIRING W3 (2026-11-07), C1-C6 said in DS-POW-5/-6 (+8 pools, +19 variants): 709 -> 717.
+    expect(META_ROWS.length, 'over the whole shipped corpus, not a slice').toBe(861); // CLOSE-DOORS-1A (2026-11-18, the close of 2026-11-18): 859 -> 861, re-measured at the frozen tree (70e557d5b): BAR6-ECON's two new pools (JOIN-17 point 7, 528c5dece): DS-ECO-11 EXPLOITATION: partiallyExploited, nothing exported and DS-SUP-3 A CATEGORY PRESENT BUT ITS HOUSE STOPPED // BAR4-CLOSE-DOORS-1 (2026-11-16, the close of the round BAR4): 856 -> 859, re-measured at the joined tree (2d80aa740): BAR4-HISTORY batch 2's three DS-GEN-16 -MARKED pools (155c7e1af) // STYLE-2 FIRST-IMPRESSIONS (B·#28, 2026-11-09): DS-GEN-11's zero pool leaves (857 -> 856). // W1 ECO construction (2026-11-07): 26 new pools (14 generation facts said; DS-SUP-2 mounted). // W2 DEF C7 (DS-DEF-4 FIXTURE pools, 2026-11-07): 711 -> 715 // W2 DEF C9 (DS-DEF-5 FIXTURE pools, 2026-11-07): 715 -> 718 // W2 DEF C8/C10 (DS-DEF-5 ARCANE pools, 2026-11-07): 718 -> 724 // W2 DEF C3–C5 (DS-DEF-12, 2026-11-07): 724 -> 729 // W2 DEF C6 (DS-DEF-2 CHAIN clauses, 2026-11-07): 729 -> 733 // W2 DEF stress-type keys (DS-DEF-3/-8, 2026-11-07): 733 -> 766 // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (709 -> 792) // MERGE-WAVE at the W3 POW merge: both lanes' deltas composed (709 -> 800) // W4 PEOPLE 2026-11-07: +7 pools/+18 variants, the faith and great-house construction; W4 PEOPLE second seat 2026-11-07: re-measured, DS-CND-1 the stress type in the pool key (+45 pools/+128 variants) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (709 -> 852) // MERGE-WAVE at the W5 HIS merge: both lanes' deltas composed (709 -> 857)
   });
 });

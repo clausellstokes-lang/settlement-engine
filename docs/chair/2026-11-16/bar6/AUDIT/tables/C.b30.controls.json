@@ -1,0 +1,432 @@
+[
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C3247",
+  "town": "bar0-city-under_siege+famine-rand-28",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C94460",
+  "town": "bar0-hamlet-under_siege-rand-36",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C150831",
+  "town": "bar0-thorp-calm-rand-27",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C85036",
+  "town": "bar0-hamlet-calm-rand-33",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C205552",
+  "town": "bar0-village-calm-rand-34",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C146255",
+  "town": "bar0-metropolis-calm-rand-40",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C157891",
+  "town": "bar0-town-calm-rand-27",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C26390",
+  "town": "bar0-city-under_siege+famine-rand-36",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C217292",
+  "town": "bar0-village-famine-rand-37",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C184150",
+  "town": "bar0-town-occupied-rand-31",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "stands",
+  "id": "C40276",
+  "town": "bar0-village-calm-rand-25",
+  "section": "Systems/Economics",
+  "found": true,
+  "rules": "7c-plenty",
+  "text": "With more than its herds to rely on, Aquaium can take a bad season in one source without g"
+ },
+ {
+  "rule": "7",
+  "kind": "weak",
+  "id": "C0013",
+  "town": "bar0-city-under_siege+famine-rand-27",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "weak",
+  "id": "C4592",
+  "town": "bar0-city-under_siege+famine-rand-29",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "weak",
+  "id": "C61115",
+  "town": "bar0-city-wartime-rand-35",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "weak",
+  "id": "C79603",
+  "town": "bar0-city-wartime-rand-41",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "weak",
+  "id": "C218186",
+  "town": "bar0-village-famine-rand-38",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "weak",
+  "id": "C218926",
+  "town": "bar0-village-famine-rand-39",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "explained",
+  "id": "C0343",
+  "town": "bar0-city-under_siege+famine-rand-27",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "explained",
+  "id": "C182276",
+  "town": "bar0-town-occupied-rand-30",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "7",
+  "kind": "stands_by_L2",
+  "id": "C43575",
+  "town": "bar0-village-famine-rand-26",
+  "section": "Systems/Institutions",
+  "found": true,
+  "rules": "L2.famine.work",
+  "text": "Since no one goes unshod, the work never dries up."
+ },
+ {
+  "rule": "7",
+  "kind": "stands_by_L2",
+  "id": "C0350",
+  "town": "bar0-city-under_siege+famine-rand-24",
+  "section": "Systems/Institutions",
+  "found": true,
+  "rules": "L2.siege.abroad",
+  "text": "The watch, the garrison, and the caravans buy here."
+ },
+ {
+  "rule": "7",
+  "kind": "stands_by_L2",
+  "id": "C3223",
+  "town": "bar0-city-under_siege+famine-rand-25",
+  "section": "Systems/Institutions",
+  "found": true,
+  "rules": "L2.siege.abroad",
+  "text": "The watch, the garrison, and the caravans buy here."
+ },
+ {
+  "rule": "7",
+  "kind": "stands_by_L2",
+  "id": "C5452",
+  "town": "bar0-city-under_siege+famine-rand-26",
+  "section": "Systems/Institutions",
+  "found": true,
+  "rules": "L2.siege.abroad",
+  "text": "Guild bowyers and fletchers selling arrows by the sheaf, special broadheads, and composite"
+ },
+ {
+  "rule": "6a",
+  "kind": "stands",
+  "id": "C154042",
+  "town": "bar0-thorp-calm-rand-34",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6a",
+  "kind": "stands",
+  "id": "C209939",
+  "town": "bar0-village-calm-rand-41",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6a",
+  "kind": "weak",
+  "id": "C206170",
+  "town": "bar0-village-calm-rand-35",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6b",
+  "kind": "stands",
+  "id": "C39804",
+  "town": "bar0-city-wartime-rand-27",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6b",
+  "kind": "stands",
+  "id": "C84094",
+  "town": "bar0-hamlet-calm-rand-32",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6b",
+  "kind": "stands",
+  "id": "C115374",
+  "town": "bar0-metropolis-calm-rand-32",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6b",
+  "kind": "stands",
+  "id": "C219863",
+  "town": "bar0-village-famine-rand-40",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6b",
+  "kind": "stands",
+  "id": "C15780",
+  "town": "bar0-city-under_siege+famine-rand-33",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6b",
+  "kind": "stands",
+  "id": "C15951",
+  "town": "bar0-hamlet-calm-rand-25",
+  "section": "Summary/Overview",
+  "found": true,
+  "rules": "6b-nomaker",
+  "text": "Kiln smoke hangs over Ioannochorion, and the dust of fired clay is on everything."
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C86447",
+  "town": "bar0-hamlet-calm-rand-36",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C86484",
+  "town": "bar0-hamlet-calm-rand-36",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C88481",
+  "town": "bar0-hamlet-calm-rand-40",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C204663",
+  "town": "bar0-village-calm-rand-33",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C171330",
+  "town": "bar0-town-calm-rand-37",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C158113",
+  "town": "bar0-town-calm-rand-27",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C39608",
+  "town": "bar0-village-calm-rand-24",
+  "section": "Systems/Economics",
+  "found": true,
+  "rules": "6c-arms",
+  "text": "Quality tools and weapons · Advanced weapons and armor · Master-crafted weapons"
+ },
+ {
+  "rule": "6c",
+  "kind": "stands",
+  "id": "C37887",
+  "town": "bar0-town-occupied-rand-25",
+  "section": "Systems/Resources",
+  "found": true,
+  "rules": "6c-halfway",
+  "text": "Work on the animal hides here stops half-way: no leatherworkers' guild finishes it."
+ },
+ {
+  "rule": "6d",
+  "kind": "stands",
+  "id": "C161931",
+  "town": "bar0-town-calm-rand-30",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6d",
+  "kind": "stands",
+  "id": "C203044",
+  "town": "bar0-village-calm-rand-31",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6d",
+  "kind": "stands",
+  "id": "C91256",
+  "town": "bar0-hamlet-under_siege-rand-30",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6d",
+  "kind": "stands",
+  "id": "C128237",
+  "town": "bar0-metropolis-calm-rand-35",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6d",
+  "kind": "stands",
+  "id": "C113231",
+  "town": "bar0-metropolis-calm-rand-31",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6d",
+  "kind": "stands",
+  "id": "C43925",
+  "town": "bar0-village-famine-rand-26",
+  "section": "Systems/Power",
+  "found": true,
+  "rules": "6d-force",
+  "text": "Significant military force for this scale; the commander's opinion on civic matters carrie"
+ },
+ {
+  "rule": "6d",
+  "kind": "stands",
+  "id": "C39734",
+  "town": "bar0-village-calm-rand-24",
+  "section": "Systems/Power",
+  "found": true,
+  "rules": "6d-force",
+  "text": "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes tur"
+ },
+ {
+  "rule": "6e",
+  "kind": "stands",
+  "id": "C42840",
+  "town": "bar0-village-famine-rand-25",
+  "section": "Systems/Services",
+  "found": true,
+  "rules": "6e-sovereign",
+  "text": "Collects the lord's dues and the tithe"
+ },
+ {
+  "rule": "6e",
+  "kind": "explained",
+  "id": "C48148",
+  "town": "bar0-city-wartime-rand-30",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6e",
+  "kind": "explained",
+  "id": "C48270",
+  "town": "bar0-city-wartime-rand-30",
+  "found": null,
+  "note": "town not in this render"
+ },
+ {
+  "rule": "6e",
+  "kind": "explained",
+  "id": "C48442",
+  "town": "bar0-city-wartime-rand-30",
+  "found": null,
+  "note": "town not in this render"
+ }
+]

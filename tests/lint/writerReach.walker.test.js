@@ -108,8 +108,10 @@ const FROZEN_DIAL_GATED = Object.freeze([
   'customDefinitionCategory on factions',
   'customDefinitionCategory on stressors',
   'customDefinitionCategory on traditions',
-  'densityRungRole on members',
-  'densityRungRole on npcs',
+  // 2026-11-07 PEOPLE-1 CAST (M-5): `densityRungRole on members` and `on npcs` LEFT the dial-gated set by measurement —
+  // the rung roles are no longer WRITTEN at birth under either law (the cast replaces the rung roster; the roles are
+  // unread, densityBands.js byte-identical), so the lit corpus carries them no more than the dark one. A shrink,
+  // 53 -> 51, taken as the walker measured it; no row rowed.
   'description on stressors',
   'disablesGoods on stressors',
   'disablesInstitutions on stressors',
@@ -123,6 +125,10 @@ const FROZEN_DIAL_GATED = Object.freeze([
   'methods on factions',
   'motifAct on traditions',
   'motifElement on traditions',
+  // 2026-11-07 PEOPLE-5B EDIT (M-7): `name on factions` JOINED by measurement — the grouping (`settlement.factions`,
+  // whose `name` was written on every world) left the v2 record at the normalize boundary, so the only `factions`
+  // shape left is the powers', whose legacy `name` alias is written under the custom-content dial alone.
+  'name on factions',
   'name on stressors',
   'scale on factions',
   'source on factions',
@@ -301,7 +307,37 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // density dial is lit everywhere since X-46 car 4's density law, so clause D-dial convicted it — and
     // `supersessionReason on proposals` retired by clause S, the corpus's 327 proposals carrying no such key (coverage
     // lost, not reach; the writer is unchanged). The register's own header carries both retirements.
-    expect(WRITER_DARK_REGISTER.length).toBe(10);
+    // TEN BECAME TWENTY-FIVE (2026-11-07, lane W6, the cloud chair's WIRING ruling R-W2, ODQ §934.105): the ECO
+    // section's fifteen GENERATION-origin INTERNAL identities with a reader, engine-internal, each with its consumer
+    // named by file and line (docs/WIRING_W6_2026-11-07.md).
+    // TWENTY-FIVE BECAME THIRTY-FOUR (2026-11-07, lane W6, WIRING R-W2, ODQ §934.105): the DEF section's nine engine-internal rows.
+    // THIRTY-FOUR BECAME THIRTY-SEVEN (2026-11-07, lane W6, WIRING R-W2, ODQ §934.105): the POW section's three engine-internal rows.
+    // THIRTY-SEVEN BECAME FORTY-FIVE (2026-11-07, lane W6, WIRING R-W2, ODQ §934.105): the META section's eight engine-internal rows.
+    // 45 -> 43 at MERGE-R2 (2026-11-07): two rows struck with cause — growsMoreThanEats on foodRecord (clause E,
+    // domain/foodSurplus.js inside the dossier-pdf closure since the rung-2 chunk cure) and randomDepletionEligible on
+    // resourceConditions (clause S, LIT-NAME at the merged tip); scripts/lib/writer-dark-register.mjs names both.
+    // FORTY-FIVE BECAME FORTY-FOUR (2026-11-07, PEOPLE-5B EDIT, M-7): `generatedAs on members` LEFT with the grouping's
+    // member copy — no shape carries the identity once the grouping leaves the record.
+    // MERGE-CAR (2026-11-07): both sides' strikes composed — MERGE-R2's two (growsMoreThanEats, randomDepletionEligible)
+    // and PEOPLE-5B's one (generatedAs on members): 45 -> 42.
+    // 2026-11-09 (ALLEGIANCE-CAR3): `archetypeKey on relationships` struck by clause S (the DM view prints the tie's kind): 42 -> 41.
+    // 43 -> 38 (2026-11-07, W2 DEF third seat, construction C3–C5): the three §12 WRW-2 pending-surface rows struck
+    // (DS-DEF-12 says the isolation-support finding on the Viability tab: LIT at web-display, clause P) and the two
+    // W6 engine-internal twins on _isolationSupport struck by clause S (LIT-NAME once the surface reads the same keys);
+    // scripts/lib/writer-dark-register.mjs names all five.
+    // W4 PEOPLE second seat (merging the car, 2026-11-08): and the lane's one strike, `isSurplus on foodSecurity` (its consumer conditionPromotion.js entered the dossier-pdf closure through the DS-CND-1 condition desk; clause E): 42 -> 41.
+    // 42 -> 41 at W7 HOOKS (composed over MERGE-CAR) (2026-11-07): `dependencyCount on metrics` struck with cause (clause S, LIT: the viability
+    // headline says the count in words); scripts/lib/writer-dark-register.mjs names it.
+    // 35 -> 34 (2026-11-13, R2-CODE-B item 2): `forcedByToggle on institutions` struck with cause (clause S, LIT: the
+    // Institutions tab's YOU badge reads it, InstitutionsTab.jsx :: institutionBadge); scripts/lib/writer-dark-register.mjs.
+    // 34 -> 33 (2026-11-14, R2-CODE-B-6): `gapPct on foodRecord` struck with cause (clause S, LIT: tonightSheet.js :: foodBandOf,
+    // the food label's one home since R2-CODE-B-3 item 2b, d94638185); scripts/lib/writer-dark-register.mjs.
+    // 33 -> 32 (2026-11-15, TAIL-CLOSE-REACH-1): `situationDesc on economicState` struck with cause (clause S, LIT, file-grained: the quick
+    // guide's file entered the dossier-pdf closure at EXPORTS-B24 · B2, 70047b61); scripts/lib/writer-dark-register.mjs.
+    // 32 -> 40 (2026-11-15, TAIL-CLOSE-REACH-1, the chair's ruling WR1): eight of the round's newly DARK identities that HAVE an
+    // engine reader the clauses verify join as engine-internal rows (criminalPreStress on compound, recallTargetId x3,
+    // rivalTriumphBand x3, warReturnedSettlementIds on pulseHistory); scripts/lib/writer-dark-register.mjs names each consumer.
+    expect(WRITER_DARK_REGISTER.length).toBe(40); // SW-B7b (2026-11-09): + `situationDesc on economicState`, engine-internal, the Economics fallback's read left with the economy desk's public branch (34 -> 35) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (43 -> 37) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (42 -> 36) // MERGE-WAVE at the W7 HOOKS merge: both lanes' deltas composed (42 -> 35) // MERGE-TRAIN at the ALLEGIANCE-CAR3 merge: car 3's one strike composed (35 -> 34)
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -327,7 +363,12 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     expect(Object.keys(frozen).length).toBe(live.verdicts.size);
     // The frozen map is the thing Car 2 hands CHARSET and READERREVIEW, so its SIZE
     // is a STOP of its own: never ship a multi-megabyte register.
-    expect(JSON.stringify(frozen).length, 'surfaceReach must stay under 1 MB').toBeLessThan(1_000_000);
+    // 2026-11-07 PEOPLE-1 CAST: 1 MB -> 1.3 MB, MEASURED (1,194,048 bytes at the lane's tip). The map holds one row per
+    // simulation ledger key per card id (`weakness on osr001:npc_coaching_inn`: 8,484 of its 12,569 rows), and the cast
+    // is ~3.6× the rung roster, so the per-id rows grew with it. A cost ceiling re-keyed at the measured figure, not a
+    // claim loosened; the per-id rows want ONE pattern row each (`weakness on osr#:npc_*`) — the register's shape, for
+    // the chair (docs/PEOPLE_1_CAST_2026-11-07.md §4).
+    expect(JSON.stringify(frozen).length, 'surfaceReach must stay under 1.3 MB').toBeLessThan(1_300_000);
   });
 
   test('CHARSET_SURFACES mirrors SURFACE_CLASSES minus news and minus web-transitive — the six RENDERING classes, pinned for the day CHARSET Car 1 lands', () => {
@@ -380,16 +421,22 @@ describe('writer-with-no-reader ratchet: the EXECUTED corpus and the closures', 
   });
 
   test('THE PREMISE HOLDS: a written key the probe measured DARK is written, and its shape carries a liveness anchor', () => {
-    const row = live.verdicts.get('isolationSupport on settlement');
+    // Re-keyed 2026-11-07 (W2 DEF third seat): the premise's identity was `isolationSupport on settlement`, which
+    // DS-DEF-12 now says (LIT). The premise is the same claim on that finding's effective-config TWIN, which no
+    // surface reads at all (no R, no N reader): a DARK key on a live shape, the customer twin LIT beside it.
+    const row = live.verdicts.get('_isolationSupport on config');
     expect(row.verdict).toBe('DARK');
     expect(row.readers.R).toEqual([]);
     expect(row.readers.N).toEqual([]);
-    const settlementKeys = live.corpus.shapes.settlement.keys;
+    const configKeys = live.corpus.shapes.config.keys;
     expectAbsentWithAnchor(
-      settlementKeys.filter((key) => live.verdicts.get(`${key} on settlement`).verdict !== 'DARK'),
-      'isolationSupport', 'name',
-      'the settlement shape is genuinely alive — `name` is LIT — so `isolationSupport` is dark by measurement, not by an empty scan',
+      configKeys.filter((key) => live.verdicts.get(`${key} on config`).verdict !== 'DARK'),
+      '_isolationSupport', 'culture',
+      'the config shape is genuinely alive — `culture` is LIT — so `_isolationSupport` is dark by measurement, not by an empty scan',
     );
+    expect(live.verdicts.get('culture on config').verdict).toBe('LIT');
+    // …and the identity this arm used to hold is LIT now, said by DS-DEF-12.
+    expect(live.verdicts.get('isolationSupport on settlement').verdict).toBe('LIT');
     expect(live.verdicts.get('name on settlement').verdict).toBe('LIT');
   });
 
@@ -488,7 +535,26 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // written on every world with a tie: ten became eleven.
     // 2026-11-05 (LANDING-5, the cloud chair's ruling 2 on LANDING-4's report, ODQ §934.105): `supersessionReason on proposals` (registered AND dark) retired by clause S — the
     // corpus no longer writes it — so eleven became ten. The retired density row was never in the cohort.
-    expect(registeredAndDark.length).toBe(10);
+    // 2026-11-07 (lane W6, WIRING R-W2, ODQ §934.105): the ECO section's fifteen engine-internal rows, every one
+    // written on every world and DARK: ten became twenty-five.
+    // 2026-11-07 (lane W6, WIRING R-W2): the DEF section's nine engine-internal rows, all DARK: twenty-five became thirty-four.
+    // 2026-11-07 (lane W6, WIRING R-W2): the POW section's three engine-internal rows, all DARK: thirty-four became thirty-seven.
+    // 2026-11-07 (lane W6, WIRING R-W2): the META section's eight engine-internal rows, all DARK: thirty-seven became forty-five.
+    // 45 -> 43 at MERGE-R2 (2026-11-07): two rows struck with cause — growsMoreThanEats on foodRecord (clause E,
+    // domain/foodSurplus.js inside the dossier-pdf closure since the rung-2 chunk cure) and randomDepletionEligible on
+    // resourceConditions (clause S, LIT-NAME at the merged tip); scripts/lib/writer-dark-register.mjs names both.
+    // 2026-11-07 (PEOPLE-5B EDIT, M-7): `generatedAs on members` left with the grouping: forty-five became forty-four.
+    // MERGE-CAR: 45 -> 42, both sides' strikes composed (MERGE-R2's two, PEOPLE-5B's one).
+    // 2026-11-09 (ALLEGIANCE-CAR3): `archetypeKey on relationships` struck by clause S — the DM view prints a handler
+    // tie's kind from its archetype key (scripts/lib/writer-dark-register.mjs names the strike): forty-two became forty-one.
+    // 43 -> 38 (2026-11-07, W2 DEF third seat): the five isolation-support rows struck with cause (the register names them).
+    // W4 PEOPLE second seat (merging the car, 2026-11-08): and the lane's one strike, `isSurplus on foodSecurity` (its consumer conditionPromotion.js entered the dossier-pdf closure through the DS-CND-1 condition desk; clause E): 42 -> 41.
+    // 42 -> 41 at W7 HOOKS (composed over MERGE-CAR) (2026-11-07): `dependencyCount on metrics` struck, LIT by the viability headline (clause S).
+    // 35 -> 34 (2026-11-13, R2-CODE-B item 2): `forcedByToggle on institutions` struck, LIT by the YOU badge (clause S).
+    // 34 -> 33 (2026-11-14, R2-CODE-B-6): `gapPct on foodRecord` struck, LIT by foodBandOf, the food label's one home (clause S).
+    // 33 -> 32 (2026-11-15, TAIL-CLOSE-REACH-1): `situationDesc on economicState` struck, LIT, file-grained, by the quick guide's read (clause S).
+    // 32 -> 40 (2026-11-15, TAIL-CLOSE-REACH-1, ruling WR1): the eight engine-internal rows of the close, each DARK and registered.
+    expect(registeredAndDark.length).toBe(40); // SW-B7b (2026-11-09): + `situationDesc on economicState` (34 -> 35) // MERGE-WAVE at the W2 DEF merge: both lanes' deltas composed (43 -> 37) // MERGE-WAVE at the W4 PEOPLE merge: both lanes' deltas composed (42 -> 36) // MERGE-WAVE at the W7 HOOKS merge: both lanes' deltas composed (42 -> 35) // MERGE-TRAIN at the ALLEGIANCE-CAR3 merge: car 3's one strike composed (35 -> 34)
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);
@@ -565,7 +631,10 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     expect(rows.length).toBeGreaterThan(5000);
     const byKey = new Map();
     for (const row of rows) byKey.set(row.key, (byKey.get(row.key) ?? 0) + 1);
-    expect([...byKey].sort((a, b) => b[1] - a[1])[0][0]).toBe('id');
+    // 2026-11-07 PEOPLE-1 CAST: 'id' -> 'name'. The cross-join's most frequent key was the id (`npc_<N>`, re-keyed by
+    // the simulation's ledgers per card); the cast's ids are the houses' slugs and the ledgers key by them once per
+    // card, while every card's NAME is read by the dossier, the PDF and the journal — the name leads the count now.
+    expect([...byKey].sort((a, b) => b[1] - a[1])[0][0]).toBe('name');
     expect(osrScansRun, 'the cross-join shares ONE OSR pass across both arms').toBe(1);
   }, 120_000);
 
@@ -591,7 +660,15 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
   });
 
   test('pendingSurfaceBacklog returns exactly the pending-surface rows, sorted by surface then identity', () => {
-    const backlog = pendingSurfaceBacklog();
+    // THE DEBT IS PAID (2026-11-07, W2 DEF third seat): the shipped register holds no pending-surface row, the
+    // ceiling shrank to 0, and the three identities the struck rows named are LIT — said by DS-DEF-12.
+    expect(pendingSurfaceBacklog()).toEqual([]);
+    expect(baseline.pendingSurfaceCeiling).toBe(0);
+    for (const row of STRUCK_PENDING_ROWS) expect(live.verdicts.get(row.identity).verdict).toBe('LIT');
+    expect(liveReport.pendingSurfaceBacklog).toEqual([]);
+    // The reader itself, driven on the three struck rows as a planted register (out of order on purpose): it
+    // returns exactly them, projected and sorted.
+    const backlog = pendingSurfaceBacklog([...WRITER_DARK_REGISTER, ...[...STRUCK_PENDING_ROWS].reverse()]);
     expect(backlog.map((row) => row.identity)).toEqual([
       'isolationSupport on settlement',
       'magicDependent on isolationSupport',
@@ -602,13 +679,10 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
       expect(COUNTING_CLASSES).toContain(row.surface);
       expect(row.car).toMatch(/§\d+/);
       expect(() => read(row.carArtifact)).not.toThrow();
-      expect(live.verdicts.get(row.identity).verdict).toBe('DARK');
     }
     const sorted = [...backlog].sort((a, b) => (a.surface === b.surface
       ? (a.identity < b.identity ? -1 : 1) : (a.surface < b.surface ? -1 : 1)));
     expect(backlog).toEqual(sorted);
-    expect(backlog.length).toBe(baseline.pendingSurfaceCeiling);
-    expect(liveReport.pendingSurfaceBacklog).toEqual(backlog);
   });
 
   test('the export allowlist arm reaches json-export at grade A for exactly the allowlisted keys, and json-export does not count toward LIT', () => {
@@ -621,19 +695,89 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // naming keys the engine does not produce is a finding for the review's backlog.
     const unwritten = [...live.allowlist].filter((identity) => !live.verdicts.has(identity)).sort();
     expect(graded.length).toBe(live.allowlist.size - unwritten.length);
+    // 2026-11-07 PEOPLE-5B EDIT (M-7): + three — the grouping and the shim's two fields left the v2 record at the
+    // normalize boundary; the export allowlist that still names them is lane 5a's display surface (publicSafe.js), the
+    // report this arm exists to make.
+    // 2026-11-07 FIX-EXPORT-KEYS: − those three — migration 205 and its client twin (publicSafe.js PUBLIC_TOPLEVEL_KEYS,
+    // NPC_PUBLIC_KEYS, publicNpc) dropped `factions`, `factionAffiliation` and `secondaryAffiliation` from the export
+    // allowlist (the owner's word: the dead keys go before the deploy). The five left are the pre-car report, unmoved.
+    // 2026-11-09 SW-B7b PROJECTION (migration 210, STYLE-RULINGS-2 B10(a)): + `publicProse` — the shape lands
+    // before its writer (the save path stamps it owner-side, never the generator), so it reads as unwritten here
+    // until the save-path writer's cause re-keys this row.
     expect(unwritten).toEqual([
       'crossSettlementConflicts on settlement',
       'dailyLife on settlement',
       'interSettlementRelationships on settlement',
       'neighbourNetwork on settlement',
+      'publicProse on settlement',
       'thesis on settlement',
     ]);
+    for (const retired of ['factions on settlement', 'factionAffiliation on npcs', 'secondaryAffiliation on npcs']) {
+      expect(live.allowlist.has(retired), `${retired} left the export allowlist (205)`).toBe(false);
+    }
     expect(REPORT_ONLY_CLASSES).toContain('json-export');
     const onlyExport = [...live.verdicts.values()]
       .filter((row) => row.verdict === 'LIT' && COUNTING_CLASSES.every((cls) => row.reach[cls] !== 'R'));
     expect(onlyExport, 'no identity may be LIT on the export arm alone').toEqual([]);
   });
 });
+
+/**
+ * THE THREE §12 WRW-2 PENDING-SURFACE ROWS, BYTE FOR BYTE AS THEY STOOD BEFORE W2 DEF STRUCK THEM (2026-11-07,
+ * construction C3–C5: DS-DEF-12 says the isolation-support finding). The register no longer holds a live
+ * pending-surface row, so the arms that drive the pending-surface door take these as a PLANTED control: the same
+ * shape the door was built against, never a row the shipped register carries.
+ */
+const STRUCK_PENDING_ROWS = Object.freeze([
+  Object.freeze({
+    identity: 'isolationSupport on settlement',
+    key: 'isolationSupport',
+    shape: 'settlement',
+    writer: 'src/generators/steps/assembleSettlement.js',
+    reason: 'pending-surface',
+    surface: 'web-display',
+    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
+    carArtifact: 'docs/GENERATION_CONTRACTS.md',
+    why: 'Every settlement carries a full isolation-support finding — whether the place can be supplied at all, by '
+      + 'which paths, at what tier, and what it would take to close the gap — and no component, display read model '
+      + 'or PDF reads the container. It is one of exactly three settlement-root facts that reach no customer '
+      + 'surface. This is not plumbing: it is a generated judgement about the settlement that a player would want, '
+      + 'and the owner rules whether it is shown and where. Until that ruling it is an owed car, not an exemption.',
+    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
+  }),
+  Object.freeze({
+    identity: 'magicDependent on isolationSupport',
+    key: 'magicDependent',
+    shape: 'isolationSupport',
+    writer: 'src/generators/isolationSupport.js',
+    reason: 'pending-surface',
+    surface: 'web-display',
+    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
+    carArtifact: 'docs/GENERATION_CONTRACTS.md',
+    why: 'Whether a settlement relies on magic to stay supplied is a striking fact about the place, and it is one '
+      + 'of only two keys on the isolation-support shape that no surface reads even at name level — its seven '
+      + 'siblings all read LIT-NAME. That asymmetry is the evidence it was overlooked rather than declined: a '
+      + 'surface that shows the status and the tier is already in front of this fact and does not print it. The '
+      + 'owner rules it with the container it belongs to.',
+    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
+  }),
+  Object.freeze({
+    identity: 'requiredCapacity on isolationSupport',
+    key: 'requiredCapacity',
+    shape: 'isolationSupport',
+    writer: 'src/generators/isolationSupport.js',
+    reason: 'pending-surface',
+    surface: 'web-display',
+    car: '§12 WRW-2, the owner row that rules whether the isolation-support finding is shown',
+    carArtifact: 'docs/GENERATION_CONTRACTS.md',
+    why: 'The capacity a settlement would REQUIRE to end its isolation is the actionable half of the finding — the '
+      + 'number that turns a status into something a player can plan against — and it reaches no surface, while the '
+      + 'deficit and capacity beside it read LIT-NAME. Showing a settlement it is isolated without showing what '
+      + 'would fix it is the half-told version of the fact, so this key rides with the container to the same owner '
+      + 'ruling rather than being banked as unreviewed.',
+    charter: '§7 WRWALKER, the drafted register row 6, measured DARK by Car 0 at C-prime',
+  }),
+]);
 
 describe('writer-with-no-reader ratchet: the register doors convict what they cannot verify', () => {
   const rowOf = (identity) => WRITER_DARK_REGISTER.find((row) => row.identity === identity);
@@ -736,7 +880,7 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
   });
 
   test('pending-surface: an uncited car convicts; a cited car on a surface the identity already reaches convicts; a car that resolves to no in-tree artifact convicts', async () => {
-    const row = rowOf('isolationSupport on settlement');
+    const row = STRUCK_PENDING_ROWS[0]; // the struck row's own shape, a planted control since the debt was paid
     expect(COUNTING_CLASSES).toContain(row.surface);
     const noArtifact = await convicts([{ ...row, carArtifact: 'docs/THIS_DOC_DOES_NOT_EXIST.md' }]);
     expect(noArtifact).toContain('clause P');
@@ -754,7 +898,7 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
   });
 
   test('pending-surface: a row beyond the genesis-banked population is refused — the cohort ceiling shrinks and only --rebank --charter grows it', async () => {
-    const row = rowOf('isolationSupport on settlement');
+    const row = STRUCK_PENDING_ROWS[0];
     // A FIFTH pending row, built so that ONLY the ceiling can fire: its writer is
     // injected (clause W passes), its car artifact is real and names its shape
     // (clause P passes), and `verdicts` is omitted so clause S does not run. If the
@@ -833,7 +977,7 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
     expect(message).toContain('no longer writes');
     expect(message).toContain('a row about nothing');
     // …and a pending-surface row is governed by the probe too.
-    const pending = WRITER_DARK_REGISTER.find((entry) => entry.identity === 'isolationSupport on settlement');
+    const pending = STRUCK_PENDING_ROWS[0];
     const pendingMessage = await convicts([pending], {
       readSource: (path) => (path === pending.writer
         ? 'ctx.settlement.isolationSupport = finding;\n' : read(path)),
@@ -1069,6 +1213,20 @@ describe('writer-with-no-reader ratchet: the MUTANTS', () => {
     expect(refused).toContain('nothing to ratchet against');
     expect(scansRun, 'a refusing door must not spend a scan').toBe(before);
   });
+
+  test('THE --report-to DOOR PUBLISHES: the report lands, whole, at a scratch path outside the repository', async () => {
+    // WIRING-W0 (2026-11-07, the chair's R-W7 (g)): the door handed publishJsonExclusive the PLAN ARRAY that
+    // planExternalArtifactOutputs returns (one plan per output), so every --report-to refused with "governed
+    // publication requires a plan returned by planExternalArtifactOutputs" and no report ever landed. One output,
+    // one plan: plan[0]. Driven here on the walker's own measurement, so it spends no scan.
+    const before = scansRun;
+    const target = join(mkdtempSync(join(tmpdir(), 'wrw-report-to-')), 'writer-reach-report.json');
+    const result = await run([`--report-to=${target}`], { root: ROOT, log: () => {}, measured: live });
+    const published = JSON.parse(readFileSync(target, 'utf8'));
+    expect(published).toEqual(JSON.parse(JSON.stringify(result.report)));
+    expect(published.population.judged).toBe(liveReport.population.judged);
+    expect(scansRun, 'the door drove the walker\'s own measurement').toBe(before);
+  });
 });
 
 describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
@@ -1103,11 +1261,14 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
     expect(live.verdicts.has('customContentRoster on settlement')).toBe(false);
   });
 
-  test('the density v2 roll is dial-gated: densityRungRole on npcs is present lit and absent dark', () => {
-    expect(litShapes.npcs.keys).toContain('densityRungRole'); // anchored: the dark side is asserted absent on the next line
+  test('the density v2 roll writes no rung role under either law (PEOPLE-1 CAST, M-5): densityRungRole is absent lit and dark', () => {
+    // 2026-11-07 PEOPLE-1 CAST: the rung roles are retired from birth with the roster they stamped (M-5: unread; the
+    // bands stay signed). The arm's claim inverts with its cause: the key is absent on BOTH sides and gated nowhere.
+    expect(litShapes.npcs.keys).toContain('importance'); // anchored: the lit corpus still carries the cast's rank band
+    expect(litShapes.npcs.keys.includes('densityRungRole')).toBe(false);
     expect(live.corpus.shapes.npcs.keys.includes('densityRungRole')).toBe(false);
-    expect(gated.has('densityRungRole on npcs')).toBe(true);
-    expect(gated.has('densityRungRole on members')).toBe(true);
+    expect(gated.has('densityRungRole on npcs')).toBe(false);
+    expect(gated.has('densityRungRole on members')).toBe(false);
     expect(live.verdicts.has('densityRungRole on npcs')).toBe(false);
   });
 
@@ -1115,9 +1276,9 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
     // §7.1 compares the lit corpus against the WALKER'S corpus, which moves two
     // variables at once and misses a third. Every reading is asserted TOGETHER so
     // the corrections are measured quantities rather than an argument.
-    expect(confounded.size, 'lit vs the walker corpus: the pack counted as a dial').toBe(53);
-    expect(packControlOnly.size, 'pack held constant, producer set still asymmetric').toBe(33); // GS-2: 34 -> 33 with importance on members
-    expect(gated.size, 'both controls applied').toBe(29);
+    expect(confounded.size, 'lit vs the walker corpus: the pack counted as a dial').toBe(52); // 53 -> 51, PEOPLE-1 CAST (M-5): the two rung-role rows; 51 -> 52, PEOPLE-5B (M-7): `name on factions`
+    expect(packControlOnly.size, 'pack held constant, producer set still asymmetric').toBe(32) /* 33 -> 31, PEOPLE-1 CAST (M-5): the two rung-role rows left the dial-gated set; 31 -> 32, PEOPLE-5B (M-7): `name on factions` */; // GS-2: 34 -> 33 with importance on members
+    expect(gated.size, 'both controls applied').toBe(28) /* 29 -> 27, PEOPLE-1 CAST (M-5): the two rung-role rows; 27 -> 28, PEOPLE-5B (M-7): `name on factions` */;
     expect(confounded.size - packControlOnly.size, '23 pack-attributable, less 3 the pack control also gains (was 24/21 before source on stressors turned ordinary at §900)')
       .toBe(20);
     // The four the DARK-corpus control removes are keys a shipped world does write,
@@ -1136,7 +1297,7 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
 
   test('every dial-gated identity is in the frozen roster and every frozen entry is still dial-gated — a new dial-gated key reds by name', () => {
     expect([...gated].sort()).toEqual([...FROZEN_DIAL_GATED]);
-    expect(FROZEN_DIAL_GATED.length).toBe(29);
+    expect(FROZEN_DIAL_GATED.length).toBe(28); // 29 -> 27, PEOPLE-1 CAST (M-5); 27 -> 28, PEOPLE-5B (M-7)
     expect(new Set(FROZEN_DIAL_GATED).size).toBe(FROZEN_DIAL_GATED.length);
     for (const identity of FROZEN_DIAL_GATED) {
       expect(identity).toMatch(/^\S+ on \S+$/);

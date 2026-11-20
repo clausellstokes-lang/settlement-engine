@@ -3,7 +3,7 @@
  * supporting capabilities.
  *
  *   - Active military status override banner (siege/occupied/civil war)
- *   - Readiness banner + score average
+ *   - Readiness banner (the rating's word; no average of the scores: COHERENCE-UPKEEP-7, W4)
  *   - Defense readiness rows (threat assessment reframed: label + bar + badge + prose)
  *   - Armed forces & fortifications, grouped (fortifications/standing/contracted/charter/arcane)
  *   - Criminal architecture: capture state, operations, criminal faction
@@ -20,10 +20,12 @@ import { Callout } from '../primitives/Callout.jsx';
 import { EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { statusCase, tokenCase } from '../../domain/display/labelCase.js';
+import { safetyQualifierLed } from '../../domain/display/safetyShown.js'; // PAGE-1 SAFETY: the owner's line, led by its word
 import { cap, smart, label } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { scoreBand } from '../../domain/display/defenseScoreBands.js';
 import { foodEnduranceLine } from '../../domain/display/defenseDisplay.js';
+import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 // ⛔ A SECOND `statusCase` import (from `components/new/labelLadder.js`) sat on THIS line: a duplicate of line 23, and `src/pdf` may not reach into `src/components`. Removed; the line is kept so the prose-numerics ratchet's frozen path:line identities below do not shift.
 
 // Armed-forces groups in render order, mirroring the web Defense tab.
@@ -80,12 +82,16 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
           // a page that prints 'Well-Defended' where the tab prints 'Well-defended' is the
           // two-spellings defect this file's parity suite exists to refuse.
           { label: 'Readiness', value: statusCase(d.readiness?.label) },
-          { label: 'Score avg', value: smart(d.scoreAvg), tone: scoreTone(d.scoreAvg) },
+          // ⛔ NO "Score avg" (COHERENCE-UPKEEP-7, the chair's ruling W4): the mean of the five scores says how the rating is worked out.
           { label: 'Safety', value: statusCase(d.safetyLabel) },
           { label: 'Watch to population', value: smart(d.safetyRatio) },
           { label: 'Food resilience', value: smart(d.foodResilience) },
         ]}
       />
+      {/* The Safety tile's owner's line (PAGE-1 SAFETY; only in the DM's own document, vm.safetyQualifier). */}
+      {d.safetyLabel && vm.safetyQualifier && (
+        <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], marginBottom: space.sm }}>{safetyQualifierLed(vm.safetyQualifier)}</Text>
+      )}
 
       {/* ── Guard assessment ─────────────────────────────────────── */}
       {d.guardAssessment && (
@@ -107,7 +113,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
         THREAT ASSESSMENT
       </Text>
       <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginBottom: 4 }}>
-        Bars show the settlement&apos;s defense readiness against each threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. Higher is better.
+        Each bar shows how ready the settlement is for that threat, as judged at the first survey; Disasters & Famine is re-judged as your campaign goes on. A longer bar is safer.
       </Text>
       {d.threatReadiness.map((row, i) => (
         <View
@@ -185,11 +191,11 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
                 >
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink, flex: 1, marginRight: 6 }}>
-                      {force.name}
+                      {/* UPKEEP-14 (the chair's row (1)): the label the roster prints ("Town gates"), never the catalogue key */}
+                      {institutionDisplayName(force.name) || force.name}
                     </Text>
-                    {force.source && force.source !== 'generated' && (
-                      <Tag tone="gold">{force.source === 'required' ? 'REQ' : 'FORCED'}</Tag>
-                    )}
+                    {/* ⛔ NO "REQ" / "FORCED" BADGE (COHERENCE-UPKEEP-7, item 3; the round-three cut's class (b)): the
+                        generator's provenance is not a fact of the town. */}
                   </View>
                   {force.desc && (
                     <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35, marginTop: 1 }}>
@@ -203,7 +209,8 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
         })}
         {!FORCE_GROUPS.some(g => (d.armedForces?.[g.key] || []).length) && (
           <Text style={{ ...type.body, fontSize: pt['9'], color: palette.muted, fontStyle: 'italic' }}>
-            No organized defensive force. Defense relies on armed citizens.
+            {/* TAIL-EXPORTS-PDF batch 1 (ruling E1): the Defense tab's own line (noForceLine.js) */}
+            {`${NO_FORCE_LEAD} ${NO_FORCE_REST}`}
           </Text>
         )}
       </View>
@@ -267,8 +274,17 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
                   }}
                 >
                   <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.bad, marginBottom: 1 }}>
-                    {label(op)}
+                    {/* TAIL-EXPORTS-PDF-2 (the chair's ruling E18): the house by its label, the one display leaf
+                        (institutionDisplayName.js :: institutionHouseLabel): no catalogue grade ("(Powerful)") beside
+                        a power the record calls Minor or Suppressed. */}
+                    {typeof op?.name === 'string' ? institutionHouseLabel(op.name) : label(op)}
                   </Text>
+                  {/* SEAM-PDF item 1: the house's own mark, said before its note, as the Defense tab says it */}
+                  {op?.mark && (
+                    <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.bad, lineHeight: 1.35, marginBottom: op?.note ? 1 : 0 }}>
+                      {op.mark}
+                    </Text>
+                  )}
                   {op?.note && (
                     <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, lineHeight: 1.35 }}>
                       {op.note}
@@ -283,7 +299,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
               {/* T2-20: name and band only; the faction's description prints on its Power
                   Structure card. */}
               <Text style={{ ...type.body_em, fontSize: pt['10'], color: palette.bad }}>
-                Criminal faction: {d.criminalFaction.faction || d.criminalFaction.name}
+                Underworld: {d.criminalFaction.faction || d.criminalFaction.name}
                 {d.criminalFaction.powerLabel ? ` · ${d.criminalFaction.powerLabel}` : ''}
               </Text>
             </View>
@@ -364,11 +380,6 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
   );
 }
 
-function scoreTone(v) {
-  if (v == null) return 'muted';
-  if (v >= 70) return 'good';
-  if (v >= 40) return 'warn';
-  return 'bad';
-}
-
 export default DefenseSecurity;
+import { NO_FORCE_LEAD, NO_FORCE_REST } from '../../domain/display/noForceLine.js'; // TAIL-EXPORTS-PDF batch 1 (ruling E1)
+import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js'; // TAIL-EXPORTS-PDF-2 (E18)

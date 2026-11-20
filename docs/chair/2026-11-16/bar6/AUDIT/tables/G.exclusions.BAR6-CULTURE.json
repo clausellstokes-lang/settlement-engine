@@ -1,0 +1,807 @@
+[
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "Thousands of people have left. What remains occupies a settlement built for something considerably larger.",
+  "reason": "size: the pool's key is a loss of thousands of people, which only a town or larger holds: the size is the key's"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "Families are leaving {settlement} by the cartload, and each week the line on the road out is longer.",
+  "reason": "outside, goods: the pool's key is the herald's migration flight: the families on the road out are what the key reads; the cartload is their household goods"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} has swelled fast in recent years, and its houses, wells and order have not kept up.",
+  "reason": "threat: 'have not kept up' says the town's order lags its growth; it presumes no safety"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "What may be done with the Art in {settlement} gets argued in the same tone as grazing rights: endlessly, and without anyone expecting it to finish.",
+  "reason": "resource: 'grazing rights' is a simile for an endless quarrel; no herd is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} owes money beyond its walls, and each quarter the payment goes out before anything else is decided.",
+  "reason": "size: 'each quarter' is a quarter of the year (the debt's payment), not a part of the town"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "What {settlement} sends away each quarter is more than the town would like to send, and anyone here can tell you roughly what it costs them without being shown a book.",
+  "reason": "size: 'each quarter' is a quarter of the year (the debt's payment), not a part of the town"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement}'s books show a town that pays for itself and does not accumulate.",
+  "reason": "goods: 'books' here are the town's own ledgers (account, tribute, market, muster or parish books): no good is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "The surplus at {settlement} is real and gets spent on the town rather than out of it.",
+  "reason": "plenty: the pool's key is the prosperity band Comfortable or Prosperous, which is the surplus the line names"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement}'s books carry more than the town needs, and what to do with the excess is a question in its own right here.",
+  "reason": "goods: 'books' here are the town's own ledgers (account, tribute, market, muster or parish books): no good is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "Nobody chose {settlement}'s site; the roads met here, and the town grew where travellers stopped.",
+  "reason": "outside: the founding's cause told of the past (the record's crossroads route): the roads met and travellers stopped when the town began"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} is small enough that every household knows its purpose, and surplus, where there is any, is modest.",
+  "reason": "plenty: 'surplus, where there is any, is modest' claims no plenty"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} handles more goods than its books show; some leakage is normal in a crossing town, but here it is large.",
+  "reason": "goods: 'books' here are the town's own ledgers (account, tribute, market, muster or parish books): no good is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} is visibly wealthy, yet its public accounts are modest; someone is keeping the difference off the books.",
+  "reason": "goods: 'books' here are the town's own ledgers (account, tribute, market, muster or parish books): no good is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} is orderly under foreign soldiers, and its people go about their business with their eyes down.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement}'s year, as the books have it.",
+  "reason": "goods: 'books' here are the town's own ledgers (account, tribute, market, muster or parish books): no good is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} has so little to spare that one missed delivery would change how the town lives.",
+  "reason": "plenty: 'so little to spare' claims want, not plenty"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement}'s larger dealings, from cargoes to building work, are paid for through its bank.",
+  "reason": "office: the pool's key is the house itself (a bank; a merchant guild): the office and its members are the key's"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement}'s merchant guild sets the terms of trade and its members carry the town's dealings outward.",
+  "reason": "office: the pool's key is the house itself (a bank; a merchant guild): the office and its members are the key's"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} sets its days by the cathedral bells: the feasts, the burials and the hours of work all follow them.",
+  "reason": "plenty: feast days are the faith's calendar, not plenty"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} keeps a cathedral, a bishop's church that the clergy of the whole district answer to.",
+  "reason": "size: 'district' is the region the faith or the see reaches, not a part of the town: no size is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/stressors.generated.js",
+  "text": "The books balance only because nothing is being built. The debt is served first and the town second.",
+  "reason": "goods: 'books' here are the town's own ledgers (account, tribute, market, muster or parish books): no good is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/stressors.generated.js",
+  "text": "There is no crisis on the books. Whatever strain the settlement carries, it carries at a weight it can hold.",
+  "reason": "goods: 'books' here are the town's own ledgers (account, tribute, market, muster or parish books): no good is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/stressors.generated.js",
+  "text": "The resistance is bleeding the garrison. Occupation and revolt feed each other here, and the arrangement costs the occupier more each season.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/stressors.generated.js",
+  "text": "This was paid for from abroad: it happens in {settlement}, but it was decided somewhere else.",
+  "reason": "outside: the pool's key is the stressor's own origin (foreign-sponsored; an internal conspiracy in the government; an arcane rising): what it names is the key's"
+ },
+ {
+  "file": "src/data/dossierStateProse/stressors.generated.js",
+  "text": "No outsider is behind this. The threat came from inside {settlement}, and the loyalty tests now going round the council show that its members know it.",
+  "reason": "office: the pool's key is the stressor's own origin (foreign-sponsored; an internal conspiracy in the government; an arcane rising): what it names is the key's"
+ },
+ {
+  "file": "src/data/dossierStateProse/stressors.generated.js",
+  "text": "The armed movement here answers a foreign garrison. Collaborators and patriots eat at the same tables, and everyone knows which is which.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/stressors.generated.js",
+  "text": "The casters are moving on the seat. Wards around the council hall have failed more than once this season, and the mages responsible shrug.",
+  "reason": "size: 'wards' are magical wards (the arcane pool's own key), not parts of the town"
+ },
+ {
+  "file": "src/data/dossierStateProse/stressors.generated.js",
+  "text": "What challenges the government in {settlement} needs neither a crowd nor a garrison; it needs a workroom, and it has several.",
+  "reason": "office: names a garrison only to deny the rising needs one"
+ },
+ {
+  "file": "src/data/dossierStateProse/stressors.generated.js",
+  "text": "The magic here is gone because it was spent. Where the surge burned hottest, candles gutter and wards lie cold.",
+  "reason": "size: 'wards' are magical wards (the arcane pool's own key), not parts of the town · goods: candles guttering is the image of the spent magic; no trade in candles is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/stressors.generated.js",
+  "text": "The town's account books show this trouble, but the streets hardly do; it is a small one.",
+  "reason": "goods: 'books' here are the town's own ledgers (account, tribute, market, muster or parish books): no good is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "You deal with {settlement}'s own people, and only slowly notice that {counterpart}'s troops stand where the town's would.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{settlement} no longer hides its preparations; its people want them seen.",
+  "reason": "goods: 'hides' is a verb (hides its preparations), not a good"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "Holding {settlement} is costing {counterpart} more than {settlement} yields; the garrison here is an expense the occupier has not yet found a way to end.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The troops holding {settlement} cost {counterpart} more than the town has ever produced, and the townsfolk know it.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{counterpart}'s tribute books now show {settlement} paying more than the troops holding it cost, and the occupation has become worth keeping.",
+  "reason": "goods: 'books' here are the town's own ledgers (account, tribute, market, muster or parish books): no good is presumed · office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "Goods leave {settlement} for {counterpart} on a regular schedule now, planned for at both ends, and the occupation is settling in for good.",
+  "reason": "goods: the pool's key is the war layer's occupation that pays its holder: the goods leaving are the tribute the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{counterpart} holds more than it can garrison properly, and {settlement} is one of the places where the thinness shows.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The garrison at {settlement} is smaller than it was and has not been reinforced, and the town has drawn the obvious conclusion about how {counterpart} is doing elsewhere.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{counterpart}'s victories elsewhere are feeding the troops it keeps at {settlement}, and the town's own count of them grows each season.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{settlement} is safe from {counterpart} alone but not from {counterpart} with allies, so the town's letters and treaties are spent on keeping those allies away.",
+  "reason": "threat: the pool's key is the war layer's feasibility (safe from the counterpart alone): the safety is the key's"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{counterpart}'s troops hold {settlement}; there is no trouble about it, and plenty of resentment.",
+  "reason": "plenty: 'plenty of resentment' is no plenty of goods or food · office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The townspeople of {settlement} have taken up arms against the occupiers' troops, now besieged inside the town they hold, and the treaty's terms here are torn up.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The town has turned on the soldiers holding it, and the soldiers are now holding a position rather than a place.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{settlement} keeps no muster lists and no parish books: it is fighting no one, and faith is a private matter here.",
+  "reason": "goods: 'books' here are the town's own ledgers (account, tribute, market, muster or parish books): no good is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{settlement}'s market books show the town buying for war: the change shows first in what it buys, and only later in who it calls up.",
+  "reason": "goods: 'books' here are the town's own ledgers (account, tribute, market, muster or parish books): no good is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{settlement} is ready to march and sitting idle, and keeping an army waiting drains the town fast.",
+  "reason": "ease: the pool's key is the war layer's posture (mobilized): the idle army is the key's"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{counterpart} holds {settlement} but has no grip on it: the occupiers' duty lists put every one of their troops to keeping the town down.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The soldiers are here and the town has not accepted that they are, and neither side has yet been able to change the other's mind.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{counterpart}'s troops at {settlement} spend their strength just holding the town, and that costs more each week the town refuses them.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The occupation at {settlement} sits at the point where a single incident decides it, and both the garrison and the town are behaving as though they know which incident.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{settlement} goes about its business under someone else's troops as if that were normal.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{settlement} is restive: sabotage and noncompliance harry the garrison steadily without ever amounting to a rising.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{settlement}'s market books record goods that never arrive, and the cause is {counterpart}'s blockade, not the roads.",
+  "reason": "goods: 'books' here are the town's own ledgers (account, tribute, market, muster or parish books): no good is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{counterpart}'s troops have left {settlement}, but the rules they wrote into the town's books remain, and the town must now run things it never chose.",
+  "reason": "goods: 'books' here are the town's own ledgers (account, tribute, market, muster or parish books): no good is presumed · office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The soldiers are gone from {settlement} and the questions the town avoided while they were here have all arrived at once.",
+  "reason": "office: the pool's key is the occupation (the war layer's occupation record or the occupied crisis): the occupier's troops and garrison are the state the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{creed} is the patron here, kept in a handful of settlements and nowhere near all of them; its reach ends not far past the district.",
+  "reason": "size: 'district' is the region the faith or the see reaches, not a part of the town: no size is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{settlement} keeps {creed}, a faith travellers from far off will not have heard of.",
+  "reason": "outside: a statement of the faith's own reach (a minor creed, little known abroad): it presumes no traffic and no trade"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The clergy's register shows {settlement} at the feast days and little else; the tithe book is paid up, and nothing more is given.",
+  "reason": "plenty: feast days are the faith's calendar, not plenty · office: 'the tithe book is paid up' is the faith's tithe, not a paid force"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The clergy name the ruler in their prayers and in their books, and that backing carries weight here.",
+  "reason": "goods: 'books' here are the town's own ledgers (account, tribute, market, muster or parish books): no good is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The patron here arrived with an authority rather than a following. The creed followed the garrison, and the calendar changed by order.",
+  "reason": "office: the pool's key is a creed imposed by an authority (the faith record's fall cause): the garrison is the imposing power's, told of the past"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The faith is entered in the temple rolls of a few towns across the realm, and known among the travellers between them.",
+  "reason": "outside: a statement of the faith's own reach (a minor creed, little known abroad): it presumes no traffic and no trade"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{creed} is a regional creed. A traveller from the next province will recognize the name and not the calendar.",
+  "reason": "outside: a statement of the faith's own reach (a minor creed, little known abroad): it presumes no traffic and no trade"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "It is a real faith with a real spread and no pretensions past its district.",
+  "reason": "size: 'district' is the region the faith or the see reaches, not a part of the town: no size is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The pilgrim road is busy. {settlement} takes in more travellers in {season} than it houses in any other part of the year, and the town's whole trade bends toward them.",
+  "reason": "outside: the pool's key is the pilgrim season the faith record holds (heavy, thin, suppressed): the pilgrims are what the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "This is the season the faithful come. Beds are scarce, prices are seasonal, and the town's opinion of pilgrims is seasonal too.",
+  "reason": "outside: the pool's key is the pilgrim season the faith record holds (heavy, thin, suppressed): the pilgrims are what the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The rite draws pilgrims from well outside the district, and for weeks each year they fill {settlement}'s beds.",
+  "reason": "outside: the pool's key is the pilgrim season the faith record holds (heavy, thin, suppressed): the pilgrims are what the key reads · size: 'district' is the region the faith or the see reaches, not a part of the town: no size is presumed"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "Few pilgrims come at this time of year; this is not their season.",
+  "reason": "outside: the pool's key is the pilgrim season the faith record holds (heavy, thin, suppressed): the pilgrims are what the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "Few travellers keep the rite here now. The calendar has moved past the occasion, and the town has gone back to itself.",
+  "reason": "outside: the pool's key is the pilgrim season the faith record holds (heavy, thin, suppressed): the pilgrims are what the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The pilgrim trade is at its low ebb. What remains is the local congregation, which is smaller than the town's provisioning suggests.",
+  "reason": "outside: the pool's key is the pilgrim season the faith record holds (heavy, thin, suppressed): the pilgrims are what the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "The pilgrims are not coming; the way here has become too dangerous to travel.",
+  "reason": "outside: the pool's key is the pilgrim season the faith record holds (heavy, thin, suppressed): the pilgrims are what the key reads"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{creed} has held {settlement} {timeband_age}; its feast days are the town's holidays.",
+  "reason": "plenty: feast days are the faith's calendar, not plenty"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "{institution}'s standing at {settlement} is old and entered everywhere: in the rolls, in the feast days, in who is buried where.",
+  "reason": "plenty: feast days are the faith's calendar, not plenty"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "In {settlement} the church has the garrison at its side: soldiers keep the feast days, priests stand at the musters, and an offence against the faith is answered by armed men who call themselves crusaders.",
+  "reason": "plenty: feast days are the faith's calendar, not plenty"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "Soldiers in {settlement} keep the faith's feast days like crusaders, and the priests' word carries the weight of the garrison behind it.",
+  "reason": "plenty: feast days are the faith's calendar, not plenty"
+ },
+ {
+  "file": "src/data/dossierStateProse/warFaith.generated.js",
+  "text": "In {settlement} the priests and the mages are hard to tell apart: the faith's rites use spellcraft, and the mages keep the feast days.",
+  "reason": "plenty: feast days are the faith's calendar, not plenty"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Farmsteads and craft yards form compact wards around a hall, church, or fortified manor.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "A lordly court shares practical administration with guild officers and sworn neighborhood representatives.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Grain, orchard produce, preserved meat, dairy, and ale anchor the local table.",
+  "reason": "goods, resource: a culture foodways row is kept by the foodways composer only where every source it names feeds the place (domain/foodways.js :: SOURCE_WORDS: grain, dairy and herds, fish, game); wine, oil and spice are the tradition's staple pattern, not the town's stock"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Stone towns built round civic squares, run by patrons and lawyers.",
+  "reason": "office: the profile's raw scope never prints (pdf/lib/cultureOnPage.js ruling (i): the scope line prints through settlementQuickGuide.js :: cultureScopeLine); it describes the inspiration family"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Masonry courtyard buildings and tiled roofs gather around public squares and processional streets.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Bread grains, pulses, garden produce, oil or rendered fats, wine, and preserved fish form the staple pattern.",
+  "reason": "goods: a culture foodways row is kept by the foodways composer only where every source it names feeds the place (domain/foodways.js :: SOURCE_WORDS: grain, dairy and herds, fish, game); wine, oil and spice are the tradition's staple pattern, not the town's stock"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Professional guards supplement levy forces organized by district and patron.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Kin districts and open assemblies, with pasture and earthworks around them.",
+  "reason": "size: the profile's raw scope never prints (pdf/lib/cultureOnPage.js ruling (i): the scope line prints through settlementQuickGuide.js :: cultureScopeLine); it describes the inspiration family"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Oats or barley, dairy, cattle products, woodland foods, fish, and seasonal preserves shape the table.",
+  "reason": "resource: a culture foodways row is kept by the foodways composer only where every source it names feeds the place (domain/foodways.js :: SOURCE_WORDS: grain, dairy and herds, fish, game); wine, oil and spice are the tradition's staple pattern, not the town's stock"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Herds and field grain set a strongly seasonal food calendar.",
+  "reason": "resource: a culture foodways row is kept by the foodways composer only where every source it names feeds the place (domain/foodways.js :: SOURCE_WORDS: grain, dairy and herds, fish, game); wine, oil and spice are the tradition's staple pattern, not the town's stock"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Kinship and neighborhood obligations carry legal force, while poets, judges, and mediators preserve public memory.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Courtyard houses, waterworks, endowed institutions and caravan trade.",
+  "reason": "outside: the profile's raw scope never prints (pdf/lib/cultureOnPage.js ruling (i): the scope line prints through settlementQuickGuide.js :: cultureScopeLine); it describes the inspiration family"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Dense masonry quarters open onto caravan yards, covered lanes, and planted courtyards.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Formal law and charitable endowment sit beside neighborhood mediation and courtly patronage.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Flatbreads, grains, pulses, dates or orchard fruits, dairy, spices, and irrigated garden produce anchor meals.",
+  "reason": "goods, resource: a culture foodways row is kept by the foodways composer only where every source it names feeds the place (domain/foodways.js :: SOURCE_WORDS: grain, dairy and herds, fish, game); wine, oil and spice are the tradition's staple pattern, not the town's stock"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Daily observance, schools, charitable endowments, pilgrimage traffic, and neighborhood shrines organize sacred life.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Neighborhood, household, legal, charitable, and commercial obligations intersect in streets and courtyards.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Barley, dairy, preserved fish or meat, hardy greens, and seasonal livestock products dominate.",
+  "reason": "resource: a culture foodways row is kept by the foodways composer only where every source it names feeds the place (domain/foodways.js :: SOURCE_WORDS: grain, dairy and herds, fish, game); wine, oil and spice are the tradition's staple pattern, not the town's stock"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Household rites, oath sites, burial memory, feast days, and formal sanctuaries overlap.",
+  "reason": "plenty: feast days are the faith's calendar, not plenty"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "A tight older core is surrounded by farm lanes, yards, sheds, and newer streets.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "A household levy is the common defense; a retinue stands beside it only where a lord can keep one.",
+  "reason": "sovereign: the row names it only as a condition ('where the state can pay for it', 'only where a lord can keep one'): it presumes neither"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Wards and courtyards, run by officials and old families.",
+  "reason": "size: the profile's raw scope never prints (pdf/lib/cultureOnPage.js ruling (i): the scope line prints through settlementQuickGuide.js :: cultureScopeLine); it describes the inspiration family"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Walled compounds, tiled roofs, axial streets, shop houses, and garden courts organize distinct wards.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "A planned civic axis runs straight to the administrative compound, with wards laid out on either side.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Administrative officers, lineage organizations, neighborhood heads, guilds, and landed patrons overlap.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Merchant associations connect specialist craft wards to agricultural hinterlands and long routes.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Ritual calendars connect family memorials, neighborhood festivals, pilgrimage, and civic legitimacy.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Where the state can pay for it, defense runs in depth: enclosed wards, controlled gates, stored grain, and drilled troops.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's · office: the row names it only as a condition ('where the state can pay for it', 'only where a lord can keep one'): it presumes neither"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Any armed service, levied or paid, is organized through districts and administrative chains.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Office, household seniority, lineage, guild membership, education, and neighborhood duty create intersecting hierarchies.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "A ritual plaza at the centre, tribute coming in, and waterworks and gardens around it.",
+  "reason": "size: the profile's raw scope never prints (pdf/lib/cultureOnPage.js ruling (i): the scope line prints through settlementQuickGuide.js :: cultureScopeLine); it describes the inspiration family"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Residential compounds and gardens radiate from a raised civic-ritual precinct and broad market plaza.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Causeways, terraces, canals or reservoirs connect dense neighborhoods to monumental public space.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Markets and neighborhood organizations operate inside a wider system of civic labor and tribute.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Temple tanks and bazaars, with a quarter for each trade and guilds to run them.",
+  "reason": "size: the profile's raw scope never prints (pdf/lib/cultureOnPage.js ruling (i): the scope line prints through settlementQuickGuide.js :: cultureScopeLine); it describes the inspiration family"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Dense bazaar streets, occupational quarters, courtyard homes, shrines, tanks, and shaded arcades interlock.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "A large central compound anchors neighborhoods organized around wells and workshops.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Court officers, councils, merchant and craft corporations, religious endowments, and neighborhood leaders overlap.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Rice, wheat or millet, pulses, vegetables, dairy, oils, spices, and regional fruits vary with climate and water.",
+  "reason": "goods, resource: a culture foodways row is kept by the foodways composer only where every source it names feeds the place (domain/foodways.js :: SOURCE_WORDS: grain, dairy and herds, fish, game); wine, oil and spice are the tradition's staple pattern, not the town's stock"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Professional retainers and district levies answer through layered patrons and offices.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Occupation, neighborhood, household, guild, patronage, and religious affiliation create multiple routes to belonging.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Herds and caravans, part settled and part on the move, held together by clans.",
+  "reason": "outside, resource: the profile's raw scope never prints (pdf/lib/cultureOnPage.js ruling (i): the scope line prints through settlementQuickGuide.js :: cultureScopeLine); it describes the inspiration family"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Meat, dairy, fermented drinks, traded grain, hardy vegetables, and preserved travel foods form the staple pattern.",
+  "reason": "resource: a culture foodways row is kept by the foodways composer only where every source it names feeds the place (domain/foodways.js :: SOURCE_WORDS: grain, dairy and herds, fish, game); wine, oil and spice are the tradition's staple pattern, not the town's stock"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Herd cycles and winter fodder matter as much as harvests to food security.",
+  "reason": "resource: a culture foodways row is kept by the foodways composer only where every source it names feeds the place (domain/foodways.js :: SOURCE_WORDS: grain, dairy and herds, fish, game); wine, oil and spice are the tradition's staple pattern, not the town's stock"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "broad lanes are sized for herds, carts, and mounted movement",
+  "reason": "resource: an architectural detail names built form (yards, lanes), not traffic or a herd at work"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Grain, pulses, olives or other oil crops, wine, vegetables, cheese, and fish vary with terrain and trade.",
+  "reason": "goods: a culture foodways row is kept by the foodways composer only where every source it names feeds the place (domain/foodways.js :: SOURCE_WORDS: grain, dairy and herds, fish, game); wine, oil and spice are the tradition's staple pattern, not the town's stock"
+ },
+ {
+  "file": "src/data/cultureProfiles.js",
+  "text": "Citizen or district levies provide defense; stone enclosures, towers, fortified heights, and naval assets where relevant follow as a place grows.",
+  "reason": "size: a raw culture row prints only in a town or larger (pdf/lib/cultureOnPage.js ruling (ii), @enforced-by tests/pdf/cultureBlockTwoSurfaces.test.jsx): its streets, wards, quarters, districts, plazas and neighbourhoods are a town's"
+ },
+ {
+  "file": "src/data/historyData.js",
+  "text": "A caravan master swears the collapse was arranged, and kept the correspondence to prove it",
+  "reason": "outside: a plot hook states its own fact and is drawn with its own event (BRIEF-BAR4's measure rule 2): the caravan master, the traveller, the pilgrims and the fever are the event's"
+ },
+ {
+  "file": "src/data/historyData.js",
+  "text": "A healer is accused of hiding a fever in a household, to spare it from being shut in",
+  "reason": "plenty: a plot hook states its own fact and is drawn with its own event (BRIEF-BAR4's measure rule 2): the caravan master, the traveller, the pilgrims and the fever are the event's"
+ },
+ {
+  "file": "src/data/historyData.js",
+  "text": "A family taken by fever swears it came in with a traveller off the road, and wants that traveller found",
+  "reason": "outside: a plot hook states its own fact and is drawn with its own event (BRIEF-BAR4's measure rule 2): the caravan master, the traveller, the pilgrims and the fever are the event's"
+ },
+ {
+  "file": "src/data/historyData.js",
+  "text": "A claimed miracle or relic drew pilgrims in numbers the settlement was never built to hold, and the flood of coin and strangers changed it for good",
+  "reason": "outside: a plot hook states its own fact and is drawn with its own event (BRIEF-BAR4's measure rule 2): the caravan master, the traveller, the pilgrims and the fever are the event's"
+ },
+ {
+  "file": "src/data/historyData.js",
+  "text": "The pilgrim trade made one family rich enough to buy the office that authenticates relics",
+  "reason": "outside: a plot hook states its own fact and is drawn with its own event (BRIEF-BAR4's measure rule 2): the caravan master, the traveller, the pilgrims and the fever are the event's"
+ },
+ {
+  "file": "src/data/historyData.js",
+  "text": "A claimed miracle is splitting the settlement: some would proclaim it and welcome the pilgrims it could bring, others call it a fraud that will bring nothing but strangers",
+  "reason": "outside: a plot hook states its own fact and is drawn with its own event (BRIEF-BAR4's measure rule 2): the caravan master, the traveller, the pilgrims and the fever are the event's"
+ },
+ {
+  "file": "src/data/historyData.js",
+  "text": "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.",
+  "reason": "resource: a resource event of the timeline, drawn only for a town whose nearby resources hold the deposit (historyGenerator.js :: generateRelationshipEvent: iron_deposits or iron_mine; stone_quarry), told of the past"
+ },
+ {
+  "file": "src/data/historyData.js",
+  "text": "A period of ambitious stone construction transformed the settlement's character. Its walls and civic buildings were raised from local quarry stone. The quarry workers became a political force.",
+  "reason": "resource: a resource event of the timeline, drawn only for a town whose nearby resources hold the deposit (historyGenerator.js :: generateRelationshipEvent: iron_deposits or iron_mine; stone_quarry), told of the past"
+ },
+ {
+  "file": "src/data/historyData.js",
+  "text": "A period of ambitious stone building transformed the settlement's character, its walls and its larger houses raised from local quarry stone. The quarry workers became a political force.",
+  "reason": "resource: a resource event of the timeline, drawn only for a town whose nearby resources hold the deposit (historyGenerator.js :: generateRelationshipEvent: iron_deposits or iron_mine; stone_quarry), told of the past"
+ },
+ {
+  "file": "src/data/historyData.js",
+  "text": "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force.",
+  "reason": "resource: a resource event of the timeline, drawn only for a town whose nearby resources hold the deposit (historyGenerator.js :: generateRelationshipEvent: iron_deposits or iron_mine; stone_quarry), told of the past"
+ },
+ {
+  "file": "src/data/historyData.js",
+  "text": "A period of ambitious stone construction transformed the settlement's character. Its civic buildings were raised from local quarry stone. The quarry workers became a political force.",
+  "reason": "resource: a resource event of the timeline, drawn only for a town whose nearby resources hold the deposit (historyGenerator.js :: generateRelationshipEvent: iron_deposits or iron_mine; stone_quarry), told of the past"
+ },
+ {
+  "file": "src/data/historyData.js",
+  "text": "A period of ambitious stone building transformed the settlement's character, its larger houses raised from local quarry stone. The quarry workers became a political force.",
+  "reason": "resource: a resource event of the timeline, drawn only for a town whose nearby resources hold the deposit (historyGenerator.js :: generateRelationshipEvent: iron_deposits or iron_mine; stone_quarry), told of the past"
+ },
+ {
+  "file": "src/data/historyData.js",
+  "text": "A rival family claims their ancestor was cheated out of the original mining contract",
+  "reason": "resource: a resource event of the timeline, drawn only for a town whose nearby resources hold the deposit (historyGenerator.js :: generateRelationshipEvent: iron_deposits or iron_mine; stone_quarry), told of the past"
+ },
+ {
+  "file": "src/data/historyData.js",
+  "text": "A rival family claims their ancestor was cheated out of the original rights to the deposits",
+  "reason": "resource: a resource event of the timeline, drawn only for a town whose nearby resources hold the deposit (historyGenerator.js :: generateRelationshipEvent: iron_deposits or iron_mine; stone_quarry), told of the past"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "The approach to … is lined with the overflow of its crafts: timber stacked to season, half-finished goods under eaves, the settlement's work spilling out past its walls for want of room inside.",
+  "reason": "plenty: 'the overflow of its crafts' is work spilling past the walls, not plenty"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "grew at the intersection of two major trade routes",
+  "reason": "outside: a founding hook tells the place's origin in the past tense ('grew from', 'was founded to', 'was established by'); it presumes nothing of the town now"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "developed from a rest stop for traveling caravans",
+  "reason": "outside: a founding hook tells the place's origin in the past tense ('grew from', 'was founded to', 'was established by'); it presumes nothing of the town now"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "was established by a family granted mill rights by a distant lord who never visited",
+  "reason": "sovereign: a founding hook tells the place's origin in the past tense ('grew from', 'was founded to', 'was established by'); it presumes nothing of the town now"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "grew along a major overland trade route",
+  "reason": "outside: a founding hook tells the place's origin in the past tense ('grew from', 'was founded to', 'was established by'); it presumes nothing of the town now"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "was established as a waystation for travelers",
+  "reason": "outside: a founding hook tells the place's origin in the past tense ('grew from', 'was founded to', 'was established by'); it presumes nothing of the town now"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "was founded to exploit rich mineral deposits",
+  "reason": "resource: a founding hook tells the place's origin in the past tense ('grew from', 'was founded to', 'was established by'); it presumes nothing of the town now"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "began as a mining camp that became permanent when families arrived",
+  "reason": "resource: a founding hook tells the place's origin in the past tense ('grew from', 'was founded to', 'was established by'); it presumes nothing of the town now"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "was built where two rival mining operations agreed to share infrastructure",
+  "reason": "resource: a founding hook tells the place's origin in the past tense ('grew from', 'was founded to', 'was established by'); it presumes nothing of the town now"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "grew from a logging camp",
+  "reason": "resource: a founding hook tells the place's origin in the past tense ('grew from', 'was founded to', 'was established by'); it presumes nothing of the town now"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "was established by charcoal-burners whose operation required permanent residence",
+  "reason": "resource: a founding hook tells the place's origin in the past tense ('grew from', 'was founded to', 'was established by'); it presumes nothing of the town now"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "{name} is orderly in the way that a settlement is orderly when order is being enforced. The streets are clear. The rationing markers are painted on the doors. A guard patrol passes and everyone steps aside.",
+  "reason": "size: the twin's pointer to its original (`twinOf`), never printed; the original declares `tier: ≥ village`"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "… looks normal from the approach. It is only at the gate that the nature of normal becomes apparent: the guard asks where you are from, writes it down, and asks how long you intend to stay. This is not the usual question.",
+  "reason": "ease: the line is drawn only under its own stress (STRESS_DESCS / STRESS_NOTES keyed by the stress), which is the state it describes"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "Two tax collectors work …'s market: different sashes, different ledgers, studiously ignoring one another. Traders pay one, or the other, or both, according to calculations a visitor is not equipped to make.",
+  "reason": "office: the line is drawn only under its own stress (STRESS_DESCS / STRESS_NOTES keyed by the stress), which is the state it describes"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "… gets by. The market is busy enough, the streets clean enough and the civic buildings kept up just enough, and nothing more is being spent.",
+  "reason": "threat: 'kept up just enough' says the civic buildings are barely maintained; it presumes no safety"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "The approach to … is interrupted by a checkpoint a quarter mile from the gates: a temporary structure, manned by people wearing cloth over their faces. They want to know where you came from and when.",
+  "reason": "size: 'a quarter' is a distance or a share ('a quarter mile'), not a part of the town · goods: the cloth is an image of the scene (faces covered; bodies under cloth), not a good on sale"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "Building has stopped mid-job across …; scaffolding stands empty on dressed stone. Work that fine waits on a patron, and the town is not currently sure who that is.",
+  "reason": "resource: the dressed stone is the halted building work the stress describes, not a quarry at work"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "The farms outside … are partially abandoned. You count three sets of buildings that have not been worked recently: the fields untended, the doors standing open. The settlement's wall is a quarter mile closer than it would have been three months ago.",
+  "reason": "size: 'a quarter' is a distance or a share ('a quarter mile'), not a part of the town"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "… buys arrows. The fletcher's is the busiest shop in the settlement, and the militia board outside the gate lists a standing bounty in terms that carefully avoid naming what it is for.",
+  "reason": "goods: the line is drawn only under its own stress (STRESS_DESCS / STRESS_NOTES keyed by the stress), which is the state it describes"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "The road into … is crowded: not with merchants but with families, carts piled with household goods, people who are clearly not from here and clearly not passing through. The gate guard has stopped checking papers. There are too many.",
+  "reason": "goods: the line is drawn only under its own stress (STRESS_DESCS / STRESS_NOTES keyed by the stress), which is the state it describes"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "There are bodies being carried through …'s streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.",
+  "reason": "goods: the cloth is an image of the scene (faces covered; bodies under cloth), not a good on sale"
+ },
+ {
+  "file": "src/data/narrativeData.js",
+  "text": "The country around the settlement looks the same as ever, but the food has come in short, and the winter ahead will be hard.",
+  "reason": "ease: the line is drawn only under its own stress (STRESS_DESCS / STRESS_NOTES keyed by the stress), which is the state it describes"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} sits where the roads meet and eats what the roads bring: the ground under the town was never the reason for the town.",
+  "reason": "outside: DS-GEN-6 is the settlement's ORIGIN (why it exists, read off the route and the tier): it says what the roads are for, not today's traffic; a declaration here mutes a partition of the deficit dimension read without facts (dossierStateProseProjection.contract.test.js, the authoring bill), so the reason stands in its place"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} grows and makes most of what it uses; the caravans bring what it wants, not what it needs.",
+  "reason": "outside: DS-GEN-6 is the settlement's ORIGIN (why it exists, read off the route and the tier): it says what the roads are for, not today's traffic; a declaration here mutes a partition of the deficit dimension read without facts (dossierStateProseProjection.contract.test.js, the authoring bill), so the reason stands in its place"
+ },
+ {
+  "file": "src/data/dossierStateProse/general.generated.js",
+  "text": "{settlement} has too few fields and plenty of river traffic; it buys its food with what the boats bring.",
+  "reason": "plenty, outside: DS-GEN-6 is the settlement's ORIGIN (why it exists: a river town buys its food with what the boats bring); it says what the river is for, not today's traffic; a declaration here thins a partition of the deficit dimension (dossierStateProseProjection.contract.test.js, the authoring bill), so the reason stands in its place"
+ }
+]

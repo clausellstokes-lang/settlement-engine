@@ -35,6 +35,8 @@ import { commitDeityEmbed } from '../deityCommitEmbed.js';
 import { applyTierOutcomeToSettlement } from '../worldPulse/tierOutcomeApply.js';
 import { TIER_ORDER, POPULATION_RANGES, TIER_STAMP_CUTS, popToTier } from '../../data/constants.js';
 import { successorNpc } from '../worldPulse/successorNpc.js';
+import { membershipInPower } from '../people/cardVeil.js';
+import { firstRankMembershipOf, powerOrderOf } from '../people/membership.js';
 import { createPRNG } from '../../kernel/prng.js';
 import { rollsRegisterVii } from '../density/densityLaw.js';
 import { importanceForRung } from '../density/densityRungs.js';
@@ -48,6 +50,7 @@ import {
   labelFromTarget, slugify,
   vetoMutation, sev01,
 } from './mutateHelpers.js';
+import { ALLEGIANCE_TUNING, allegianceOf, allegiancePowerFor, assignHandlers, viaOf } from '../people/allegiance.js'; // ALLEGIANCE-CAR1
 
 // A settlement / entity / event is a schemaless open object at this layer — every
 // handler spreads it (`{ ...s, ... }`) and reads a wide, evolving surface with no
@@ -323,7 +326,7 @@ function impairFaction(s, event) {
     type: event.payload?.dimension || 'public_support',
     severity: sev01(event.payload?.severity, 0.5),
     causeEventId: event.id,
-    description: event.description || `Faction setback: ${event.payload?.dimension || 'public_support'}`,
+    description: event.description || `Power setback: ${event.payload?.dimension || 'public_support'}`,
   });
   let next = replaceFaction(s, faction, withImpairment(faction, impairment));
   next = propagateImpairment({
@@ -473,19 +476,16 @@ function foundingMemberFor(s, event, name) {
     importance: /** @type {import('../entities/npcs.js').NpcImportance} */ (
       importanceForRung('head', s.tier)
     ),
-    factionAffiliation: name,
-    linkedFactionIds: [`faction.${slugify(name)}`],
+    // GREEN-TIP (2026-11-10, the chair's STOP-1/STOP-3 ruling): the founder belongs to the minted house by a
+    // MEMBERSHIP, written through the one constructor the v1 -> v2 migration writes a moved link with
+    // (people/cardVeil.js :: membershipInPower: unranked, no share, the power's own veil bit). It wrote the retired
+    // `factionAffiliation` / `linkedFactionIds`, which no reader reads on a current card, so the house it minted
+    // read EMPTY and R18 dissolved it on the next tick. The row is the minted power as this mutator writes it
+    // below (no category, no hidden mark).
+    memberships: [membershipInPower({ name, faction: name })],
     _idSeed: `${event.id}:founder`,
   });
   npc.createdByEventId = event.id;
-  // ⚠ THIS LINE IS LOAD-BEARING AND READS AS REDUNDANT — it is not. The literal
-  // above also sets `factionAffiliation`, but `createNpc` builds from a DECLARED
-  // field set and drops undeclared keys, so the founder would reach the world
-  // house-less without this write and R17's atomic mint would be unsatisfied the
-  // moment the faction exists. VERIFIED BY EXECUTION at D2b (createNpc returns
-  // `factionAffiliation: undefined` for an input that carries it), not assumed —
-  // deleting it as a duplicate is a silent bug, so the reason is recorded here.
-  npc.factionAffiliation = name;
   return npc;
 }
 
@@ -501,7 +501,9 @@ function addNpc(s, event) {
     role: event.payload?.role,
     importance: event.payload?.importance || 'notable',
     linkedInstitutionIds: event.payload?.linkedInstitutionIds || [],
-    linkedFactionIds:     event.payload?.linkedFactionIds || [],
+    // GREEN-TIP (2026-11-10): the payload's retired `linkedFactionIds` is no longer passed — createNpc drops an
+    // undeclared key, so the read reached nothing (DEAD), and no product emitter sends it (batch.js's staging
+    // validation reads it as a LEGACY payload key, PULSE-SITES' class).
     influence:            event.payload?.influence,
     legitimacyContribution: event.payload?.legitimacyContribution,
     // Authored descriptive traits — surfaced verbatim on the NPC read card.
@@ -688,7 +690,7 @@ function exposeCorruption(s, event) {
   // exposing a faction/institution directly still scandalises it (our in-place
   // behaviour — the dead corruption_exposed consumer tree needs a producer).
   const npc = findNpc(s, event.targetId);
-  if (npc && npc.corrupt) return exposeCorruptNpc(s, npc, event);
+  if (npc && allegianceOf(npc)) return exposeCorruptNpc(s, npc, event);
 
   const severity = sev01(event.payload?.severity, 0.7);
   const inst    = findInstitution(s, event.targetId);
@@ -746,8 +748,10 @@ function exposeCorruptNpc(s, npc, event) {
     npcId: npc.id || npc.name,
     name: npc.name,
     kind: 'ousted',
-    criminalInstitution: npc.corruptTies?.criminalInstitution || null,
-    homeInstitution: npc.factionAffiliation || npc.factionLink || null,
+    criminalInstitution: allegianceOf(npc)?.house || undefined,
+    // GREEN-TIP (2026-11-10): the exposure path's one home reader (corruption.js :: npcHomeInstitution), the read the
+    // scoped arm below already makes — it read the retired `factionAffiliation` first, which no current card carries.
+    homeInstitution: npcHomeInstitution(npc),
   };
   const next = applyCorruptionImpairments(s, [exposure], { now });
   const rng = createPRNG(`successor:${event.id}:${String(npc.name || '').toLowerCase()}`);
@@ -773,20 +777,21 @@ function severCorruptionTiesTo(s, institutionName) {
   if (!n) return s;
   let changed = false;
   const nextNpcs = (s.npcs || []).map((/** @type {MutEntity} */ npc) => {
-    if (npc.corrupt && String(npc.corruptTies?.criminalInstitution || '').toLowerCase() === n) {
+    if (String(allegianceOf(npc)?.house || '').toLowerCase() === n) {
       changed = true;
-      return { ...npc, corrupt: false, corruptionVector: null, ousted: true };
+      // ALLEGIANCE-CAR1: the allegiance is severed with its house (the card is clean, and ousted as before)
+      const { allegiance: _severed, ...clean } = npc;
+      return { ...clean, ousted: true };
     }
     return npc;
   });
   return changed ? { ...s, npcs: nextNpcs } : s;
 }
 
-// IMPOSE_CORRUPTION: a DM turns a clean NPC by linking them to a criminal
-// organization in the settlement. We write the EXACT shape the world-pulse corruption loop
-// seeds from — npc.corrupt + corruptionVector + corruptTies.criminalInstitution (npcAgency.js
-// reads these to evolve corruption, advance faction capture from the seat, and gate exposure) —
-// so the corruption is canon + visible + propagates, and EXPOSE_CORRUPTION can later target them.
+// IMPOSE_CORRUPTION: a DM turns a clean NPC by giving them a hidden allegiance to a criminal
+// organization in the settlement (ALLEGIANCE-CAR1, 2026-11-08: the card's `allegiance`, the one shape
+// birth writes — domain/people/allegiance.js — with its handler dealt by the same draw-free rule, §1.5),
+// so the corruption is canon + visible to the DM, and EXPOSE_CORRUPTION can later target them.
 // Covert by design: no public legitimacy impairment here (that is the exposure consequence).
 /**
  * @param {MutSettlement} s
@@ -796,7 +801,7 @@ function imposeCorruption(s, event) {
   const npc = findNpc(s, event.targetId);
   // need a real, not-already-corrupt NPC
   if (!npc) return vetoMutation('npc_not_found', labelFromTarget(event.targetId));
-  if (npc.corrupt) return vetoMutation('npc_already_corrupt', npc.name);
+  if (allegianceOf(npc)) return vetoMutation('npc_already_corrupt', npc.name);
 
   // W-DOCTRINE-3b §6 — THE BENEFICIARY. A composer beneficiary leash (payload.leash, already
   // normalized by buildEvent) names a FOREIGN patron court and REPLACES the local-org rule (the
@@ -808,20 +813,34 @@ function imposeCorruption(s, event) {
   if (leash && !leash.settlementId) return vetoMutation('no_beneficiary');
   const orgName = event.payload?.criminalInstitution || readCorruptionClimate(s).criminalInstitutions[0] || null;
   if (!leash && !orgName) return vetoMutation('no_criminal_org');
+  const house = leash ? '' : String(orgName);
   const corrupted = {
     ...npc,
-    corrupt: true,
-    corruptionVector: corruptionVectorForFlaw(npcCorruptibleFlaw(npc)),
-    corruptTies: { ...(npc.corruptTies || {}), ...(leash ? { leash } : { criminalInstitution: orgName }) },
+    allegiance: {
+      power: leash ? null : allegiancePowerFor(s.npcs || [], house, s),
+      house,
+      vector: corruptionVectorForFlaw(npcCorruptibleFlaw(npc)),
+      via: viaOf(npc, new Map((s.institutions || []).map((/** @type {MutEntity} */ i) => [String(i?.name || ''), i]))),
+      handler: null,
+      share: ALLEGIANCE_TUNING.share,
+      veiled: true,
+      covert: true,
+      ...(leash ? { leash } : {}),
+    },
   };
   let next = replaceNpc(s, npc, corrupted);
+  // the handler, by birth's draw-free rule (J-10), on the record as it now stands
+  // every allegiance on the roster is COPIED before the deal writes a handler, so the input record is never mutated
+  const dealt = (/** @type {MutEntity} */ (next).npcs || []).map((/** @type {MutEntity} */ n) => (n && n.allegiance && typeof n.allegiance === 'object' ? { ...n, allegiance: { ...n.allegiance } } : n));
+  assignHandlers(dealt, next);
+  next = { ...next, npcs: dealt };
 
   // Scope: 'individual_institution' captures the NPC's home institution too —
   // a COVERT 'corruption' impairment, not a public legitimacy hit (that is the
   // exposure consequence). It marks the institution as compromised in-chain:
-  // compromisedSecurityInstitutions reads a 'corruption'-typed impairment as
-  // 'revealed', so we keep this covert by stamping covert:true and letting the
-  // dossier surface it honestly. The NPC alone already homes the covert drag;
+  // compromisedSecurityInstitutions (corruptionLeash.js, the LOCAL axis since ALLEGIANCE-CAR3) reads a
+  // 'corruption'-typed impairment as 'revealed', so we keep this covert by stamping covert:true and letting
+  // the dossier surface it honestly. A security house's FACE holding the allegiance already homes the covert drag;
   // this extends a tangible institutional marker for the bigger scope.
   if (event.payload?.scope === 'individual_institution') {
     const homeName = npcHomeInstitution(corrupted);
@@ -876,8 +895,14 @@ function swapNpcStanding(s, event) {
   // Standing swaps stay inside ONE faction (the owner's design). If both
   // NPCs declare an affiliation and they differ, this is a mis-targeted
   // event — no-op rather than mis-stamp a foreign factionId onto the peer.
-  if (a.factionAffiliation && b.factionAffiliation
-    && String(a.factionAffiliation).toLowerCase() !== String(b.factionAffiliation).toLowerCase()) {
+  // GREEN-TIP (2026-11-10): each card's faction is its FIRST-RANK power (people/membership.js ::
+  // firstRankMembershipOf, the migration's mapping of the retired `factionAffiliation`) — the SAME reader the
+  // PROMOTE_NPC affordance's gate (affordanceManifest.js :: npcSwapPairsExist, PULSE-SITES' cure) counts pairs by, so
+  // the affordance and its handler agree. It read the retired field, so the cross-faction guard never fired.
+  const order = powerOrderOf(s);
+  const powerA = firstRankMembershipOf(a, order)?.power || '';
+  const powerB = firstRankMembershipOf(b, order)?.power || '';
+  if (powerA && powerB && powerA.toLowerCase() !== powerB.toLowerCase()) {
     return vetoMutation('swap_cross_faction', `${a.name} / ${b.name}`);
   }
 
@@ -899,7 +924,7 @@ function swapNpcStanding(s, event) {
 
   // The shared faction's stable id — prefer the real power-faction record's
   // id over the display name so the stamp survives renames.
-  const affiliation = a.factionAffiliation || b.factionAffiliation || null;
+  const affiliation = powerA || powerB || null;
   if (affiliation) {
     const faction = findFaction(s, affiliation);
     const stableId = faction ? factionIdOf(faction) : affiliation;

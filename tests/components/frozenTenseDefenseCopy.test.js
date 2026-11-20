@@ -58,13 +58,13 @@ describe('frozen-tense display honesty — DefenseTab (FROZEN_VS_LIVE snapshot f
     const src = read(DEFENSE_TAB);
     expect(src).toMatch(/as judged at the first survey/);
     // The one live bar keeps its currency in the same sentence.
-    expect(src).toMatch(/Disasters & Famine is re-judged as the campaign advances/);
+    expect(src).toMatch(/Disasters & Famine is re-judged as your campaign goes on/);
   });
 
   test('the PDF twin caption carries the same first-survey framing (screen↔PDF parity)', () => {
     const pdf = read(DEFENSE_PDF);
     expect(pdf).toMatch(/as judged at the first survey/);
-    expect(pdf).toMatch(/Disasters & Famine is re-judged as the campaign advances/);
+    expect(pdf).toMatch(/Disasters & Famine is re-judged as your campaign goes on/);
   });
 
   test('the bare present-tense caption cannot return on either surface', () => {

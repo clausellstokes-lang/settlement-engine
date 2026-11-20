@@ -2,7 +2,7 @@
  * domain/display/npcInteriorityRead.js — INTERIORITY-LITE (DESIGN_VISION_WAVE V-24c).
  *
  * A PURE derived "disposition & wants" projection per named NPC, composed ENTIRELY from state
- * that already exists — goals, traits, and standing (player-safe), plus, for the DM, bonds,
+ * that already exists — goals and traits (player-safe), plus, for the DM, bonds,
  * grudges, and credibility drawn from the engine sidecar. It is a READ-MODEL, never new state:
  * the DM sees who wants what and how they are disposed; the engine stores NOTHING new. (This is
  * the ratified honest form of the old "inner lives" seed — a full inner-life simulation would
@@ -39,9 +39,11 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { getSpatialLedger, hasSpatialLedger } from '../spatial/distanceRead.js';
 import { strongestBond, bondedPeersAbove } from '../worldPulse/npcLadderState.js';
 import { npcCredibilityScoreOf, hasNpcCredibilityLedger } from '../worldPulse/npcCredibility.js';
+import { allegianceOf } from '../people/allegiance.js'; // ALLEGIANCE-CAR1: the hidden allegiance's one reader (J-1)
 
-/** The display NPC's own coarse standing signal → a stance word. */
-const INFLUENCE_WORD = Object.freeze({ high: 'commanding', moderate: 'established', low: 'marginal' });
+// ⛔ NO STANDING WORD FROM `influence` (PAGE-1 CARD, F4, 2026-11-20). "commanding", "established" and "marginal" were
+// the stored `influence` band in words, and that band is a keyword misread at birth (npcGenerator.js:59-76; 88.6% of the
+// chair's 300 towns' cards "marginal"). A person's standing is the record's fact: domain/display/cardStandingRead.js.
 
 /** @param {unknown} v @returns {boolean} */
 function nonEmpty(v) { return typeof v === 'string' && v.trim().length > 0; }
@@ -277,10 +279,10 @@ export function npcInteriority({
     firstText(p.ideal, p.ideals, n.ideal, n.ideals),
   ]);
 
-  // DISPOSITION (player-safe): the NPC's visible stance — temperament, standing, loyalty, fear.
+  // DISPOSITION (player-safe): the NPC's visible stance — temperament, loyalty, fear. No standing word rides here or
+  // anywhere in this read-model (PAGE-1 CARD, F4): the card's Standing row is cardStandingRead.js's fact.
   const disposition = dedupe([
     firstText(p.dominant, n.temperament),
-    (/** @type {Record<string, string>} */ (INFLUENCE_WORD))[String(n.influence)] || null,
     firstText(n.loyalty, n.loyalties),
     firstText(n.fear, n.fears),
   ]);
@@ -291,7 +293,7 @@ export function npcInteriority({
   if (includeGroundTruth) {
     // COVERT / DM-only marks (never surfaced to a non-DM audience): the compromise stance + the
     // gm secret, plus the relational truth (bonds / grudges / credibility) from the sidecar.
-    const compromised = n.corrupt ? 'compromised' : (n.ousted ? 'exposed' : null);
+    const compromised = allegianceOf(n) ? 'compromised' : (n.ousted ? 'exposed' : null); // ALLEGIANCE-CAR1: the hidden allegiance (allegianceOf)
     const secretRaw = typeof n.secret === 'string' ? n.secret : firstText(/** @type {{ what?: unknown }} */ (n.secret || {}).what);
     const relational = relationalGroundTruth(worldState, String(nid || ''), tick, resolveNpcName);
     /** @type {Record<string, unknown>} */

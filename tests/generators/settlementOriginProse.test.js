@@ -42,6 +42,7 @@ import {
   originArmKey,
   originVariantKey,
   selectOriginBody,
+  holdingsOf,
 } from '../../src/generators/narrative/settlementOriginProse.js';
 import { generateSettlementReason } from '../../src/generators/narrativeGenerator.js';
 import { createGenerationWorldLaw } from '../../src/generators/generationContext.js';
@@ -53,13 +54,21 @@ afterEach(() => clearActiveRng());
  *  0ab5e03e. Independent of the module under test on purpose (law 1). */
 const PRE_RR_BODY = {
   road: 'Established along a road route. Trade flows in, goods flow out, people pass through.',
-  crossroads: 'Positioned at a major crossroads. Trade flows through here by geography, not by choice.',
+  // STYLE-2 FIRST-IMPRESSIONS (A·O16, 2026-11-09): the crossroads aphorism became the plain fact, one
+  // cause; the ground arm is new with that cause and opens on its own first sentence.
+  crossroads: 'Built at a major crossroads, and trade comes in on every road.',
+  // R2-CODE-A-4 (#237, the chair's ruling): the route is the home of "this is a port"; no row denies the docks.
+  ground: ORIGIN_POOLS.ground[0], // a new arm since STYLE-2: index 0 is its own (re-keyed by #237)
   river: 'Built along the river: water access shapes every economic decision.',
   'port.generic': 'A port settlement whose wharves and navigable water define its trade.',
   'port.riverside': 'A river port built around navigable inland water; barges, wharves, and seasonal river traffic shape its economy.',
   'port.coastal': 'A coastal seaport whose existence is inseparable from the sea.',
   'isolated.sustained': 'Isolated from major trade routes. Self-sufficiency is not an aspiration here; it is a constraint.',
   'isolated.deficit': `Isolated from major trade routes. The settlement cannot fully feed itself; what the land does not give arrives expensively — through ${CHANNELS_TOKEN} — or not at all.`,
+  // R2-CODE-A-4 (round three #7): a new arm, the shortfall the food record brings nothing in for; it opens on its own first sentence.
+  'isolated.unsupplied': ORIGIN_POOLS['isolated.unsupplied'][0], // no pre-RR sentence: index 0 is its own (proseDrawnAnchors: no literal state prose in a test)
+  // R2-CODE-A-4 (round two #215): a new arm, the shortfall under a siege in force; it opens on its own first sentence.
+  'isolated.besieged': ORIGIN_POOLS['isolated.besieged'][0], // likewise
 };
 
 /** A founding state that resolves to each arm. */
@@ -70,8 +79,11 @@ const STATE_FOR_ARM = {
   'port.generic': { route: 'port', terrainType: 'plains' },
   'port.riverside': { route: 'port', terrainType: 'riverside' },
   'port.coastal': { route: 'port', terrainType: 'coastal' },
+  ground: { route: 'port', terrainType: 'mountain', hasDocks: false },
   'isolated.sustained': { route: 'isolated', hasFoodDeficit: false },
   'isolated.deficit': { route: 'isolated', hasFoodDeficit: true },
+  'isolated.unsupplied': { route: 'isolated', hasFoodDeficit: true, hasFoodImport: false },
+  'isolated.besieged': { route: 'isolated', hasFoodDeficit: true, siege: true },
 };
 
 describe('RR law 1 — canonical-at-zero: no seedless caller moved', () => {
@@ -84,7 +96,7 @@ describe('RR law 1 — canonical-at-zero: no seedless caller moved', () => {
 
   test('pin:seedless — a state with no seed selects index 0 on every arm', () => {
     for (const arm of ORIGIN_ARMS) {
-      const expected = PRE_RR_BODY[arm].split(CHANNELS_TOKEN).join('CH');
+      const expected = PRE_RR_BODY[arm].split(CHANNELS_TOKEN).join('CH').split('{ground}').join('on the mountainside').split('{holds}').join(holdingsOf(null));
       expect(
         selectOriginBody({ ...STATE_FOR_ARM[arm], supportChannels: 'CH' }),
         `${arm} with no seed`,
@@ -157,8 +169,11 @@ describe('RR law 3 — every variant of every pool is reachable', () => {
     // floor. Adding a ninth arm or a sixth variant is a widening of authored
     // content that moves the golden, so it must arrive with a re-record and a
     // shift-record row — and reading this red is how an author learns that.
-    expect(ORIGIN_ARMS.length, 'the arm count left 8').toBe(8);
-    expect(Object.keys(ORIGIN_POOLS).length, 'ORIGIN_ARMS and ORIGIN_POOLS disagree').toBe(8);
+    // NINE since STYLE-2 FIRST-IMPRESSIONS (A·O16): the ground arm (#10's gate, finally).
+    // TEN since R2-CODE-A-4 (round three #7): the isolated shortfall the food record brings nothing in for;
+    // ELEVEN since its #215: the isolated shortfall under a siege.
+    expect(ORIGIN_ARMS.length, 'the arm count left 11').toBe(11);
+    expect(Object.keys(ORIGIN_POOLS).length, 'ORIGIN_ARMS and ORIGIN_POOLS disagree').toBe(11);
     const sizes = Object.fromEntries(ORIGIN_ARMS.map((arm) => [arm, ORIGIN_POOLS[arm].length]));
     const offSize = Object.entries(sizes).filter(([, n]) => n !== 5);
     expect(
@@ -168,10 +183,10 @@ describe('RR law 3 — every variant of every pool is reachable', () => {
     // …and the total is the product, stated so the ledger's arithmetic is
     // checkable at a glance rather than trusted.
     const bodies = Object.values(ORIGIN_POOLS).flat();
-    expect(bodies.length, '8 arms x 5 variants = 40 authored bodies').toBe(40);
+    expect(bodies.length, '11 arms x 5 variants = 55 authored bodies').toBe(55);
     // NON-INFLATION: 40 SLOTS is not 40 BODIES if two arms share a sentence.
     // The recorded corpus size is a claim about distinct authored prose.
-    expect(new Set(bodies).size, 'two arms ship the same authored body').toBe(40);
+    expect(new Set(bodies).size, 'two arms ship the same authored body').toBe(55);
   });
 
   test('pin:variant-reachability — the seed family reaches EVERY member of EVERY pool', () => {
@@ -180,7 +195,7 @@ describe('RR law 3 — every variant of every pool is reachable', () => {
       for (const seed of SEED_FAMILY) {
         seen.add(selectOriginBody({ ...STATE_FOR_ARM[arm], supportChannels: 'CH', seed }));
       }
-      const expected = ORIGIN_POOLS[arm].map((b) => b.split(CHANNELS_TOKEN).join('CH'));
+      const expected = ORIGIN_POOLS[arm].map((b) => b.split(CHANNELS_TOKEN).join('CH').split('{ground}').join('on the mountainside').split('{holds}').join(holdingsOf(null)));
       const missing = expected.filter((b) => !seen.has(b));
       expect(missing, `${arm}: ${missing.length} of ${expected.length} variants unreachable`).toEqual([]);
     }
@@ -293,8 +308,11 @@ describe('RR law 5 — every authored variant obeys the generation world law', (
     'port.generic': { tradeRouteAccess: 'port', terrainType: 'plains' },
     'port.riverside': { tradeRouteAccess: 'port', terrainType: 'riverside' },
     'port.coastal': { tradeRouteAccess: 'port', terrainType: 'coastal' },
+    ground: { tradeRouteAccess: 'port', terrainType: 'mountain' },
     'isolated.sustained': { tradeRouteAccess: 'isolated', terrainType: 'forest' },
     'isolated.deficit': { tradeRouteAccess: 'isolated', terrainType: 'forest' },
+    'isolated.unsupplied': { tradeRouteAccess: 'isolated', terrainType: 'forest' },
+    'isolated.besieged': { tradeRouteAccess: 'isolated', terrainType: 'forest' },
   };
 
   test('pin:world-law-maritime — no variant claims a capability its arm lacks', () => {
@@ -306,7 +324,7 @@ describe('RR law 5 — every authored variant obeys the generation world law', (
         terrainType: cfg.terrainType,
       });
       for (const raw of ORIGIN_POOLS[arm]) {
-        const body = raw.split(CHANNELS_TOKEN).join('sanctioned caravans, seasonal access');
+        const body = raw.split(CHANNELS_TOKEN).join('sanctioned caravans, seasonal access').split('{ground}').join('on the mountainside');
         if (!law.allowsMaritimeClaim(body)) offenders.push(`${arm}: ${body}`);
       }
     }
@@ -415,7 +433,9 @@ describe('RR — the REAL pipeline, not only the pool module', () => {
     let generated = 0;
     for (const [arm, cfg] of ARM_CONFIGS) {
       for (const tier of ['village', 'city']) {
-        for (let i = 0; i < 6; i += 1) {
+        // 6 -> 16 per arm and tier at #10 (W5 HIS 2026-11-07): a port route whose roster carries no docks
+        // now takes its terrain's reason, so the port arms need more births to keep the body floor honest.
+        for (let i = 0; i < 16; i += 1) {
           const s = gen({ settType: tier, culture: 'germanic', monsterThreat: 'civilized', ...cfg }, `rr-coh-${arm}-${tier}-${i}`);
           generated += 1;
           bodies.add(originOf(s));
@@ -432,7 +452,7 @@ describe('RR — the REAL pipeline, not only the pool module', () => {
     expect(findings, `settlementReason coherence findings:\n${findings.join('\n')}`).toEqual([]);
     // LIVENESS: a sweep that generated nothing, or that reached one body, would
     // satisfy the exclusion above while proving nothing at all.
-    expect(generated).toBe(ARM_CONFIGS.length * 2 * 6);
+    expect(generated).toBe(ARM_CONFIGS.length * 2 * 16);
     expect(bodies.size, 'distinct origin bodies reached by the sweep').toBeGreaterThanOrEqual(30);
   }, 120_000);
 });

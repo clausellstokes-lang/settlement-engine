@@ -141,9 +141,11 @@ const COHORT_A_COUNT = 23;
 /**
  * Every AI file the estate ships: the 6 that kept their marking + the 46 restored on
  * 2026-08-24 + the 2 arrow-header cuts credited on 2026-09-16 + the 2 brand derivatives
- * cut from the same painting and credited on 2026-09-19.
+ * cut from the same painting and credited on 2026-09-19 + the 12 compendium landing tiles
+ * cropped from twelve credited stock paintings on 2026-11-10 (COMPENDIUM-HUB H13, the owner:
+ * "imagery(chosen from our stock)"; sharp .keepMetadata(), each row names its source).
  */
-const PRESENT_COUNT = 56;
+const PRESENT_COUNT = 68;
 
 /**
  * The six that never lost their marking. They are called out separately because

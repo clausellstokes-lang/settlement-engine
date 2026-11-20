@@ -1,0 +1,37 @@
+births base 720 tip 720 missing 0; leaf diffs 772839; towns moved 720
+family institutions: 635 towns
+family simulationTrace: 610 towns
+family npcs: 600 towns
+family history: 599 towns
+family generationCoherenceReceipt: 592 towns
+family relationships: 564 towns
+family powerStructure: 430 towns
+family economicState: 402 towns
+family prominentRelationship: 324 towns
+family culturalIdentity: 324 towns
+family stress: 296 towns
+family stressors: 296 towns
+family availableServices: 249 towns
+family conflicts: 241 towns
+family resourceAnalysis: 239 towns
+family arrivalScene: 196 towns
+family config: 184 towns
+family pressureSentence: 171 towns
+family defenseProfile: 168 towns
+family economicViability: 71 towns
+family culturalNotes: 28 towns
+family spatialLayout: 18 towns
+family coherenceNotes: 7 towns
+family activeConditions: 2 towns
+  635	.institutions[].desc	 e.g. r2r-thorp-0
+  575	.npcs[].goal.short	 e.g. r2r-thorp-0
+  574	.npcs[].goal.long	 e.g. r2r-thorp-0
+  574	.simulationTrace[].causes[].effect	 e.g. r2r-thorp-0
+  571	.generationCoherenceReceipt.judgments[].evidence[].evidence	 e.g. r2r-thorp-0
+  567	.npcs[].goal.intent.long.kind	 e.g. r2r-thorp-0
+  566	.npcs[].role	 e.g. r2r-thorp-0
+  566	.npcs[].title	 e.g. r2r-thorp-0
+  566	.npcs[].presentation.impression	 e.g. r2r-thorp-0
+  566	.npcs[].institution.key	 e.g. r2r-thorp-0
+  566	.npcs[].institution.title	 e.g. r2r-thorp-0
+  565	.npcs[].presentation.behaviour	 e.g. r2r-thorp-0

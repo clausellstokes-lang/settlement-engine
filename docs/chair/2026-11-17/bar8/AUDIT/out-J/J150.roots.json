@@ -1,0 +1,105 @@
+[
+ {
+  "root": "warIronOutsideWar",
+  "siege": true,
+  "crises": "under_siege+famine",
+  "ironImports": "Iron (weapons)",
+  "town": "bar0-city-under_siege+famine-rand-27"
+ },
+ {
+  "root": "warIronOutsideWar",
+  "siege": true,
+  "crises": "under_siege+famine",
+  "ironImports": "Iron (weapons)",
+  "town": "bar0-city-under_siege+famine-rand-28"
+ },
+ {
+  "root": "warIronOutsideWar",
+  "siege": true,
+  "crises": "under_siege+famine",
+  "ironImports": "Iron (weapons)",
+  "town": "bar0-city-under_siege+famine-rand-35"
+ },
+ {
+  "root": "warIronOutsideWar",
+  "siege": true,
+  "crises": "under_siege+famine",
+  "ironImports": "Iron (weapons)",
+  "town": "bar0-city-under_siege+famine-rand-36"
+ },
+ {
+  "root": "warIronOutsideWar",
+  "siege": true,
+  "crises": "under_siege+famine",
+  "ironImports": "Iron (weapons) · Iron arrowheads and spearheads",
+  "town": "bar0-city-under_siege+famine-rand-40"
+ },
+ {
+  "root": "warIronOutsideWar",
+  "siege": true,
+  "crises": "under_siege",
+  "ironImports": "Iron (weapons)",
+  "town": "bar0-hamlet-under_siege-rand-27"
+ },
+ {
+  "root": "warIronOutsideWar",
+  "siege": false,
+  "crises": "occupied",
+  "ironImports": "Iron",
+  "town": "bar0-town-occupied-rand-27"
+ },
+ {
+  "root": "warIronOutsideWar",
+  "siege": false,
+  "crises": "occupied",
+  "ironImports": "Iron",
+  "town": "bar0-town-occupied-rand-31"
+ },
+ {
+  "root": "warIronOutsideWar",
+  "siege": false,
+  "crises": "occupied",
+  "ironImports": "Iron",
+  "town": "bar0-town-occupied-rand-35"
+ },
+ {
+  "root": "gapImportedNoImport",
+  "fam": "hides",
+  "house": "Tannery",
+  "gap": "Tannery runs on imported animal hides",
+  "imports": "Salt · Quality weapons and armour · Incense and votive candles · Silver and hack-silver · Livestock and dairy (local grazing land depleted) · Timber (local managed woodland cleared) · Clay and raw materials",
+  "town": "bar0-village-calm-rand-31"
+ },
+ {
+  "root": "gapImportedNoImport",
+  "fam": "livestock",
+  "house": "Tannery",
+  "gap": "Tannery runs on imported livestock",
+  "imports": "Incense and votive candles · Rope, oakum, and rigging supplies · Gold and silver torcs · Iron ore · Raw hides and animal products",
+  "town": "bar0-village-calm-rand-32"
+ },
+ {
+  "root": "gapImportedNoImport",
+  "fam": "livestock",
+  "house": "Tannery",
+  "gap": "Tannery runs on imported livestock",
+  "imports": "Salt · Grain · Incense and votive candles · Rope and sailcloth · Raw hides and animal products",
+  "town": "bar0-village-famine-rand-34"
+ },
+ {
+  "root": "gapImportedNoImport",
+  "fam": "livestock",
+  "house": "Tannery",
+  "gap": "Tannery runs on imported livestock",
+  "imports": "Grain · Salt · Replacement arms and basic equipment · Incense and votive candles · War elephants and fodder · Raw hides and animal products · Clay and raw materials",
+  "town": "bar0-village-famine-rand-35"
+ },
+ {
+  "root": "gapImportedNoImport",
+  "fam": "livestock",
+  "house": "Tannery",
+  "gap": "Tannery runs on imported livestock",
+  "imports": "Salt · Grain · Raw hides and animal products · Silver ornaments and coins · Timber",
+  "town": "bar0-village-famine-rand-39"
+ }
+]

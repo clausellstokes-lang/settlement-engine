@@ -1,0 +1,144 @@
+{
+  "pool": {
+    "id": "npcData.NPC_AGE_DATA",
+    "file": "src/data/npcData.js",
+    "drawKind": "R",
+    "drawSite": "npcGenerator.js:353 pickFromArray ×2",
+    "colour": true,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 16,
+    "declaring": 0,
+    "note": "Age bands; every line is colour."
+  },
+  "rows": [
+    {
+      "id": "young#0",
+      "text": "early twenties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "young#1",
+      "text": "mid-twenties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "young#2",
+      "text": "late twenties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "middle#0",
+      "text": "early thirties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "middle#1",
+      "text": "mid-thirties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "middle#2",
+      "text": "late thirties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "middle#3",
+      "text": "early forties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "middle#4",
+      "text": "mid-forties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mature#0",
+      "text": "late forties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mature#1",
+      "text": "early fifties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mature#2",
+      "text": "mid-fifties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mature#3",
+      "text": "late fifties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "elder#0",
+      "text": "early sixties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "elder#1",
+      "text": "mid-sixties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "elder#2",
+      "text": "late sixties",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "elder#3",
+      "text": "seventies",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    }
+  ]
+}

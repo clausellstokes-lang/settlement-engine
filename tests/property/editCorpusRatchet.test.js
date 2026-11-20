@@ -65,8 +65,13 @@ import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 /** The corpus IS the battery: MEASURED under the runner, the census arm 22.8 s, the value arm
  *  20.5 s and the ordered-pair census 305.6 s, the file 350.7 s end to end. RE-MEASURED 2026-10-01 after the
  *  pair census was cached by prefix: the census arm 20.5 s, the value arm 19.2 s, the ordered-pair census
- *  156.9 s (was 324.5 s at the same tip, and a 600 s TIMEOUT under full-suite load), the file 198.3 s. */
-const ARM_TIMEOUT = 600_000;
+ *  156.9 s (was 324.5 s at the same tip, and a 600 s TIMEOUT under full-suite load), the file 198.3 s.
+ *  RE-MEASURED 2026-11-17 (the chair's ruling BR22, LEFT-KEYS K8): THE ARM A5 HAS GROWN INTO ITS WATCHDOG. On a quiet
+ *  machine it runs 569 to 602 s, 657 s on a slower one; green in 602 s under a one-hour limit at 3b06c724b (the chair's
+ *  machine), and red BY THE CLOCK ALONE in about one whole check of two at 600 s. The limit is a watchdog, not a claim:
+ *  raised 600_000 -> 1_800_000. NO ASSERTION OF ANY ARM CHANGES. (A5 takes about 3.6 times its 156.9 s of 2026-10-01: the
+ *  owner hears it at the close.) */
+const ARM_TIMEOUT = 1_800_000;
 const ROOT = process.cwd();
 /** The injected handles, built the way `src/store/settlementRederiveAction.js` builds them. */
 const ENGINE = Object.freeze({ run: generateSettlementPipeline, getStepMeta });
@@ -370,8 +375,37 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // car 3 90dc22f18 -> 275 car 1b-2 fb0341b93 -> 276 PLACE-NOT-TIER 6129c300d -> 275 car 3 I7 6ca454d2b -> 277 F6
     // 6d84aa834; groups judged 130 -> 132 -> 130 (cars 1, 2) -> 132 PINS 37b1e746d -> 133 F6. mixedOutside and
     // settledLive stay empty at every stage.
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(277);
-    expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(133);
+    // 2026-11-07 (LANDING-R2 seat C2, the pool census composed; this census at each stage of a change-point search over
+    // census-1b's first parent, git-archive trees): not idle 277 -> 280 at census-1i unit 1 R-AW (ba7887862, the label
+    // resolved at the birth's close: three more rows take a leaf live); groups judged 133 unmoved. Rung 1's final tip and
+    // the merge base both read 277 / 133, the composed tip 280 / 133: no interaction. mixedOutside stays empty.
+    // 2026-11-07 (the people landing; re-keyed BY IDENTITY, this census probed at each lane's tree): not idle 277 -> 276
+    // PEOPLE-1 CAST dc655f712 -> 271 CAST-DERIVED 3aa160a70 -> 305 TIES c7d552370 -> 306 5B EDIT a725df7e4, unmoved to the
+    // tip; groups judged 133 at every stage. mixedOutside and settledLive stay empty at every stage.
+    // 2026-11-08, MERGE-CAR (the integration landing: records A and B, the rung-2 landing's merge and the people car's merge
+    // over the integration branch; re-keyed BY IDENTITY, this census probed on git-archive trees): not idle 306 -> 312. By
+    // stage: the merge base 262e8b255 reads 277; the car's tip 373a2947b 306 (+29, its pin above); the integration tip
+    // 7b3ffb6ee 283 (+6; LANDING-R2's 280 was taken on the rung-2 lane before it composed); the merged tip 2c7437030 312 =
+    // 277 + 29 + 6, additive, no interaction. Groups judged 133 at every stage; mixedOutside and settledLive stay empty.
+    // 2026-11-10, GREEN-TIP (re-keyed BY IDENTITY; this census probed at every first-parent stage of 2c7437030..bf14617ca that
+    // touches src/ or the corpus helper, 76 stages, on git-archive trees; MERGE-WAVE never ran this file, and the train and
+    // STYLE-2 records called these figures "the base's, unchanged" while the values moved): not idle 312 -> 313
+    // FIX-FOOD-ISOLATION's merge c6e8a4ad6 (E5 on the isolated forest town) -> 315 FIX-PUBLIC-VEIL 7e65c7bec (two rows join)
+    // -> 329 ALLEGIANCE-CAR1 e5f88930b (+15 E2 role rows, -1 E5), unmoved to the tip. Each lane's generator move is named
+    // and accepted in its own record; this figure was not. mixedOutside and settledLive stay empty.
+    // 2026-11-12, STYLE-2-MERGE point 43 (re-keyed BY IDENTITY, STYLE-2-MERGE-8): 329 -> 330 at the COHERENCE-PRESUME merge
+    // f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json; the re-titled watch role re-deals the
+    // E2 role rows); point 42 and the line before it read 329. The arm's other figures measured green after the re-key.
+    // 2026-11-13, STYLE-2-MERGE point 46 (re-keyed BY IDENTITY, STYLE-2-MERGE-9; a figure the COHERENCE-POWERS drafted record names for the merge seat, editCorpusRatchet A3/A5/A7): 330 -> 329 at the COHERENCE-POWERS merge 6aeaa4154 (docs/shift-records/2026-11-13-style-2-merge-46-coherence-powers.json;
+    // the dual hat re-deals the cast the E-rows edit); 3575cf061 reads 330. mixedOutside and settledLive measured empty after.
+    // 2026-11-13, STYLE-2-MERGE point 47 (re-keyed BY MEASUREMENT, STYLE-2-MERGE-11, the chair's ruling (3) on STOP 47d): COMPOSED at
+    // point 47 — the line f572d12b7 reads 329, the COHERENCE-AGREE lane's own tip 69b53decd 330 (green there), the merge 22cc9ef7d 332:
+    // the two re-deals of the cast and the resource roll the E-rows edit interact (not attributed; not in the lane's draft).
+    // mixedOutside and settledLive measured empty after.
+    // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 332 -> 327, measured
+    // by this arm's own census at the golden's tree 8c11f73ea: the round's re-drawn casts (a face for every seat of power) and economy fields.
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(327);
+    expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(139); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 133 -> 139, measured by this file's own census at the golden's tree 8c11f73ea
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.
     const control = mergeTree({ population: { total: 10, note: 'kept' } }, { population: { total: 5, note: 'kept' } }, { population: { total: 5, note: 'moved' } }).receipts;
@@ -380,7 +414,7 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     expect(parentOf(control.settled[0])).toBe(parentOf(control.taken[0]));
     expect(enclosingGroup('population')).toBe(null);
     expect(enclosingGroup('economicState.foodSecurity.deficit').id).toBe('food-security');
-    expect(CONSISTENCY_GROUPS.length).toBe(7);
+    expect(CONSISTENCY_GROUPS.length).toBe(8); // 7 -> 8 PEOPLE-5B EDIT (069c6c7bc): the per-card group `card-standing` (memberships + importance)
   }, ARM_TIMEOUT);
 
   it('A4 the town keeps its invariants, the layer channel escalates nothing, and the config channel is named', () => {
@@ -393,7 +427,8 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     expect(census().rows.flatMap((row) => row.gone)).toEqual([]);
     expect(census().rows.flatMap((row) => row.arrived)).toEqual([]);
     // the ONLY held motion left is the register's own declared RECEIPT, on the config channel
-    expect(HELD_EXCEPTIONS).toEqual(['powerStructure.economyInputFingerprint', 'factions[].members[]']);
+    // PEOPLE-5B (M-7): the grouping's MIRROR left the register (`factions[].members[]`).
+    expect(HELD_EXCEPTIONS).toEqual(['powerStructure.economyInputFingerprint']);
     // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair, measured against the pre-band base 5d699cc68, where this file is 8/8): declared-only {E7 42, E8 2} → {47, 7};
     // config escalation rows {31, 17} → {30, 10} and steps {136, 76} → {132, 40}, every one still EXHAUSTED; the live residue
     // 48 → 40 rows, V-DEFENSE-INST 31 → 35 and V-EVIDENCE-CONFLICT 22 → 8 (mergeLadderHeldKeys A2 reads the same re-deal).
@@ -405,7 +440,12 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // this census's E7 half at the parent ba4366c83 and after): {31, 6} -> {32, 6}. The one new row is
     // thorp|germanic|coastal|port|civilized|golden-master-v3, declared-only on powerStructure (its economy fingerprint
     // receipt), one of the 17 thorps whose food writer read 0 lb beside 1% and now derives its per cent from its pounds.
-    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 32, E8: 6 });
+    // 2026-11-10, GREEN-TIP (re-keyed BY IDENTITY; this census probed at every first-parent stage of 2c7437030..bf14617ca that
+    // touches src/ or the corpus helper, 76 stages, on git-archive trees; MERGE-WAVE never ran this file, and the train and
+    // STYLE-2 records called these figures "the base's, unchanged" while the values moved): {32, 6} -> {31, 6}
+    // at FIX-FOOD-ISOLATION's merge c6e8a4ad6 (501c97412 reads 32): town|germanic|forest|isolated leaves declared-only, one
+    // of the twelve forest-isolated towns that lane's record says moved. Unmoved to the tip.
+    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 32, E8: 10 }); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): {31, 9} -> {32, 10}, measured by this arm's own census at the golden's tree 8c11f73ea (the round's re-drawn casts and economy fields); STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat): E8 6 -> 9 (the draft: A4's E8 5 -> 9 on the lane's base)
     // anchored: the layer channel is clean on all three counts, and a widening reds here.
     expect(layerRows.filter((row) => row.escalations.length > 0)).toEqual([]);
     expect(layerRows.filter((row) => row.live.length > 0)).toEqual([]);
@@ -420,11 +460,11 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // car 1 -> {28, 8} car 2 -> {14, 2} car 3 90dc22f18 -> {15, 2} car 1b-2 -> {19, 4} PINS -> {22, 4} car 3 I7 -> {18, 3}
     // F6; steps {104, 36} -> {72, 12} at the same steps; every one still EXHAUSTED; the live residue 35 -> 21, all
     // V-DEFENSE-INST. The layer channel is clean at every stage.
-    expect(tally(configRows.filter((row) => row.escalations.length > 0).map((row) => row.label))).toEqual({ E7: 18, E8: 3 });
-    expect(tally(configRows.flatMap((row) => Array(row.escalations.length).fill(row.label)))).toEqual({ E7: 72, E8: 12 });
-    expect(tally(configRows.filter((row) => row.escalations.some((each) => each.step === 'EXHAUSTED')).map((row) => row.label))).toEqual({ E7: 18, E8: 3 });
-    expect(census().rows.filter((row) => row.live.length > 0).length, 'EM-B2b seam, asserted AT the figure').toBe(21);
-    expect(tally(census().rows.flatMap((row) => row.live))).toEqual({ 'V-DEFENSE-INST': 21 });
+    expect(tally(configRows.filter((row) => row.escalations.length > 0).map((row) => row.label))).toEqual({ E7: 22, E8: 5 }); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): {21, 3} -> {22, 5}, measured by this file's own census at the golden's tree 8c11f73ea, as mergeLadderHeldKeys A2; STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalation counts as mergeLadderHeldKeys A2: E7 18 -> 21
+    expect(tally(configRows.flatMap((row) => Array(row.escalations.length).fill(row.label)))).toEqual({ E7: 88, E8: 20 }); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): {84, 12} -> {88, 20}, the same escalations, four seats each; STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalations, four seats each: E7 72 -> 84
+    expect(tally(configRows.filter((row) => row.escalations.some((each) => each.step === 'EXHAUSTED')).map((row) => row.label))).toEqual({ E7: 22, E8: 5 }); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): every escalation still EXHAUSTS, {21, 3} -> {22, 5}; STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalation counts as mergeLadderHeldKeys A2: E7 18 -> 21
+    expect(census().rows.filter((row) => row.live.length > 0).length, 'EM-B2b seam, asserted AT the figure').toBe(27); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): the same escalations (E7 22 + E8 5): 24 -> 27; // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalations (E7 21 + E8 3), equal to the lane's own tip: 21 -> 24
+    expect(tally(census().rows.flatMap((row) => row.live))).toEqual({ 'V-DEFENSE-INST': 27 }); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): (E7 22 + E8 5): 24 -> 27; // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d): the same escalations (E7 21 + E8 3): 21 -> 24
   }, ARM_TIMEOUT);
 
   it('A5 a chain is deterministic, undo then re-edit reproduces the town, and the ordered pairs are counted', () => {
@@ -442,7 +482,15 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // first-parent stages by the chain census): the four non-commuting pairs (trace-only, E1|E5 E2|E5 E5|E1 E5|E2) hold
     // through 79c442330 and are GONE from X-46 car 3 90dc22f18 (the institution budget): every ordered pair now commutes.
     // Determinism, undo and the 252/126/1890 denominators hold at every probed stage.
-    expect(tally(chains().pairs)).toEqual({});
+    // 2026-11-07 (the people landing; re-keyed BY IDENTITY, probed at each lane's tree): FOUR towns' seat pairs stop
+    // commuting at PEOPLE-1 CAST dc655f712 and hold unchanged to the tip (the metropolis on plains, hills and mountain,
+    // the plains port town, golden-master-v3). TRACE-ONLY, diffed leaf by leaf: the ONLY differing leaf in either order is
+    // the population step's summary trace `simulationTrace[].causes[0].effect` ("78 npcs" | "79 npcs": the cast that
+    // step counted; why the order moves it is not traced); every world field, the roster included, is identical in both orders.
+    // 2026-11-13, STYLE-2-MERGE point 46 (re-keyed BY IDENTITY, STYLE-2-MERGE-9; a figure the COHERENCE-POWERS drafted record names for the merge seat, editCorpusRatchet A3/A5/A7): each ordered seat pair 4 -> 6 at the COHERENCE-POWERS merge 6aeaa4154 (two more towns' seat pairs stop commuting;
+    // 3575cf061 reads 4). NOT traced leaf by leaf here (PLAUSIBLE: the population step's trace, as at PEOPLE-1); CHARGED to the
+    // powers follow-up seat to diff the two new towns' orders leaf by leaf. Determinism and undo held in the same run.
+    expect(tally(chains().pairs)).toEqual({ 'E1|E6': 6, 'E2|E6': 6, 'E6|E1': 6, 'E6|E2': 6 });
     expect(() => mergeConsequence({}, {}, {}, { edit: [] })).toThrow(TypeError);
   }, ARM_TIMEOUT);
 
@@ -467,7 +515,7 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // stage of the landing with this count alone): 52 → 50 X-46 car 1 (1264a8152) → 39 X-46 car 3 (90dc22f18) → 41 PINS
     // (37b1e746d) → 44 X-46 car 3, I7 (6ca454d2b) → 46 PINS (11467ed57) → 40 F6 BUDGET-FLOOR (6d84aa834), unmoved since and by
     // record 28's cure (the same 40 rows).
-    expect(byChannel('config').filter((row) => row.orderMoved.length > 0).length, 'a counted diagnostic with a LIVE population, so the branch is not asserted on nothing').toBe(40); // 2026-10-01: 51 → 54, the same re-deal; 2026-11-04 (REGISTERS seat, traced in DOORS-4): 54 → 53 FOOD-2 → 52 SIZE-3
+    expect(byChannel('config').filter((row) => row.orderMoved.length > 0).length, 'a counted diagnostic with a LIVE population, so the branch is not asserted on nothing').toBe(44); // STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; a figure its drafted record names for the merge seat): 40 -> 44 (the draft: A6 40 -> 44); // 2026-10-01: 51 → 54, the same re-deal; 2026-11-04 (REGISTERS seat, traced in DOORS-4): 54 → 53 FOOD-2 → 52 SIZE-3
   }, ARM_TIMEOUT);
 
   it('A7 the honesty figures are re-measured and the ride-along has its first population in the chain', () => {
@@ -494,12 +542,83 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // → [699, 63, 1217] PLACE-NOT-TIER (6129c300d) → [699, 63, 1199] TRUTH (ff4448d2e) → [705, 73, 1638] PINS (37b1e746d)
     // → [705, 71, 1688] TRUTH (844acaccc) → [703, 65, 1847] car 3 I7 (6ca454d2b) → [717, 66, 1810] F6 (6d84aa834) →
     // [709, 66, 1810] F1 (5e9ffb220), unmoved to the tip. Uncured, E6 read 1814 from F6 on (the 18 towns' summaries).
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([709, 66, 1810]);
+    // 2026-11-07 (WIRING-W0, re-keyed BY IDENTITY with its cause; bisected by this arm over the lane's stages): [709, 66, 1810]
+    // held at 76febf9b0 and at cause 1 (343bd4eec) → [709, 66, 1821] at cause 4a, ONE IMPORT SHARE (c99531cf9, record 02:
+    // foodSecurity.importPct is now the share of the published pounds, so E6's re-dealt economy reaches 11 more readings
+    // through it), unmoved by 4b (3d1df12d7) and by cause 5.
+    // 2026-11-07 (LANDING-R2 seat C2, the same change-point search): [709, 66, 1810] -> [712, 66, 1806]. On census-1b's
+    // first parent from the merge base bf263a78d [709, 66, 1814] (record 28's cure is rung 1's): 1816 census-1b unit A (c)
+    // (f4f765b72) -> 1810 the census-4 merge (950b75014) -> 1806 census-1h R-AU (d035cf840) -> E1 712 census-1i R-AW
+    // (ba7887862). The census tip e36e4916f reads [712, 66, 1806], as does the composed tip; against rung 1's 1810 the
+    // census's E6 -8 lands as -4, an interaction of +4 with rung 1's own -4 (record 28's cure, the same summary leaves).
+    // 2026-11-08, MERGE-CAR (the integration landing: records A and B, the rung-2 landing's merge and the people car's merge
+    // over the integration branch; re-keyed BY IDENTITY, this census probed on git-archive trees): [712, 66, 1806] ->
+    // [656, 262, 2060]. By stage: the merge base 262e8b255 reads [709, 66, 1826]; the car's tip 373a2947b [642, 254, 2048]
+    // (the people car moved this arm, E5 +188 and E6 +222, and its pin [709, 66, 1821] stood red there); the integration tip 7b3ffb6ee [753, 66, 1815] (LANDING-R2's figure was taken on the
+    // rung-2 lane before it composed); the merged tip 2c7437030 [656, 262, 2060], against the additive [686, 254, 2037] an
+    // interaction of [-30, +8, +23] between the car's cast and the rung-2 census (not traced leaf by leaf).
+    // 2026-11-10, GREEN-TIP (re-keyed BY IDENTITY; this census probed at every first-parent stage of 2c7437030..bf14617ca that
+    // touches src/ or the corpus helper, 76 stages, on git-archive trees; MERGE-WAVE never ran this file, and the train and
+    // STYLE-2 records called these figures "the base's, unchanged" while the values moved): [656, 262, 2060] ->
+    // [650, 261, 2060] W3 POW 1a160d599 -> [650, 261, 2010] W4 PEOPLE 66c23bfea -> [654, 264, 2006] FIX-FOOD-ISOLATION
+    // c6e8a4ad6 -> [654, 273, 2023] FIX-PUBLIC-VEIL 7e65c7bec -> [668, 275, 2045] ALLEGIANCE-CAR1 e5f88930b -> [668, 268, 2046]
+    // CAR2 f51058995 -> [668, 275, 2019] CAR3 c6ded8e3a -> [670, 277, 2027] CAR4 824a8ce2f (its own record names this step)
+    // -> [670, 277, 2029] SW-B5 FRAMES 46e0121c2 -> [670, 281, 2031] SW-7 POWER-SIDE a3062d919 -> [670, 281, 2029] URBAN-FIX
+    // 17b814803 (its record's reason, "the gm fixture", is not this file's: the census generates every town live), unmoved
+    // to the tip. Each step is measured at the stage against its parent; the leaf-by-leaf cause inside each lane is not traced.
+    // 2026-11-10, RESIDUE (re-keyed BY IDENTITY at the simulation batch's merged tip, STYLE-2-MERGE point 36; this census
+    // probed — every other figure of A3, A4, A7 and A8 measured at once by an untracked expect.soft copy, and only this one
+    // moved): [670, 281, 2029] -> [670, 281, 2015]. bf14617ca reads 2029 (GREEN-TIP's figure); the first-parent stages
+    // point 27 SW-9b-B 8e532a663, 28, 29 and 33 and the line 90774f2fa read 2015; inside point 27, by merging each lane
+    // prefix onto its first parent, a74e32c0f reads 2029 and b23e4e91b (SW-9b-B row 2b, E-3: the small-name instigator says
+    // it speaks for the gaining power from a house it backs) reads 2015 — E6 reaches 14 fewer readings (the leaf-by-leaf
+    // cause inside the commit is not traced). The batch (GREEN-TIP + PULSE-SITES over the line) moves none: the line and the merged tip both read 2015.
+    // 2026-11-12, STYLE-2-MERGE point 42 (re-keyed BY IDENTITY, STYLE-2-MERGE-8): [670, 281, 2015] -> [670, 281, 2016]. The line's
+    // tip decc7bf15 reads 2015; the COHERENCE-QUARREL merge d4723749a (lane/coherence-quarrel-2026-11-11 at 1c7b5786c, record
+    // docs/shift-records/2026-11-12-style-2-merge-42-coherence-quarrel.json: the quarrels' issues and hooks, the safety plot
+    // hooks) reads 2016 — E6 reaches one more reading; every other figure of the arm unmoved (the arm's later expects run green).
+    // 2026-11-12, STYLE-2-MERGE point 43 (re-keyed BY IDENTITY, STYLE-2-MERGE-8): [670, 281, 2016] -> [682, 325, 2062] at the
+    // COHERENCE-PRESUME merge f922124d0 (docs/shift-records/2026-11-12-style-2-merge-43-coherence-presume.json: the culture lines,
+    // the re-titled watch role and the ties it re-deals, the history and institution texts reach more readings); point 42 reads
+    // [670, 281, 2016]. The leaf-by-leaf cause inside the merge is not traced (PLAUSIBLE per component, CONFIRMED per point).
+    // 2026-11-13, STYLE-2-MERGE point 46 (re-keyed BY IDENTITY, STYLE-2-MERGE-9; a figure the COHERENCE-POWERS drafted record names for the merge seat, editCorpusRatchet A3/A5/A7): [682, 325, 2062] -> [684, 257, 2168] at the COHERENCE-POWERS merge 6aeaa4154 (the dual hat re-deals the cast and
+    // the ties the E-edits reach); 3575cf061 reads [682, 325, 2062]. PLAUSIBLE per component, CONFIRMED per point.
+    // 2026-11-13, STYLE-2-MERGE point 47 (re-keyed BY MEASUREMENT, STYLE-2-MERGE-11, the chair's ruling (3) on STOP 47d): COMPOSED at
+    // point 47 — the line f572d12b7 reads [684, 257, 2168], the COHERENCE-AGREE lane's own tip 69b53decd [684, 325, 2077], the merge
+    // 22cc9ef7d [682, 269, 2181]: the two re-deals interact (PLAUSIBLE per component, CONFIRMED per point). The arm's later expects run green.
+    // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): [682, 269, 2181] -> [695, 275, 2173],
+    // measured by this arm's own census at the golden's tree 8c11f73ea: the round's re-drawn casts and ties the E-edits reach.
+    // 2026-11-18, the close of the rounds BAR5 to BAR8 (CLOSE-DOORS-2, BY MEASUREMENT; record docs/shift-records/2026-11-18-the-close-of-the-rounds-
+    // bar5-to-bar8.json, the owner's word 2026-11-18 03:03:46 UTC): [695, 275, 2173] -> [695, 275, 2176], this arm's received value at the frozen line
+    // 70e557d5b and at the doors' branch over Part 1's final tip 0af60594a; E1 and E5 unmoved. ACCUMULATED: 2179 at 6c117344f (the round BAR5's nine
+    // branches, JOIN-16 points 1 to 9, +6) and -3 over JOIN-17's points and the sixth chair's (the rounds' re-dealt readings E6 reaches); not bisected
+    // by point. The ride-along's chain population below stands at [129, 143] (measured with this figure in place).
+    // 2026-11-19, the last close before the deploy (LASTCLOSE-SIGN, BY MEASUREMENT; record docs/shift-records/2026-11-18-the-last-close-points-54-to-70.json,
+    // the owner's word 2026-11-18 about 19:07 UTC, "Yes to both"; the chair's line SIGN 2026-11-19 01:04 UTC): [695, 275, 2176] -> [695, 275, 2179], this arm's
+    // received value at the landings' tip cc11c9504 (points 54 to 70 over the first close's tip 0dee69e17, where 2176 holds); E1 and E5 unmoved. ACCUMULATED over
+    // points 54 to 70 (the re-dealt readings E6 reaches: the goals, ties, secrets and supply lists the points' declared cures move), not bisected by point.
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([695, 275, 2179]);
     // an npc ROLE reached ZERO readings over the whole corpus until CRISIS, recorded so the figure is not silence.
     // 2026-11-05 (LANDING-6, the same bisection): 0 → 48 CRISIS (d3e072368: the crisis record carries its derived cast,
     // and the cast is chosen by role) → 63 SELF-VOUCH (0be13b5cb) → 32 car 3 (90dc22f18) → 24 PINS (37b1e746d) → 28 F6
     // (6d84aa834), unmoved to the tip. The two dormant membership edits still reach none.
-    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([28, 0, 0]);
+    // 2026-11-07 (LANDING-R2 seat C2, measured by this arm on git-archive trees): 28 → 31 at census-1i unit 1 R-AW
+    // (ba7887862: the close-time relabel runs the rename cascade over the crisis cast; 28 at its parent 7e31beeb6, 31 at
+    // it). Merge base and rung 1's final tip read 28, the census tip and the composed tip 31: no interaction.
+    // 2026-11-08, MERGE-CAR (as above; masked behind the first figure until it was re-keyed): 31 -> 49. By stage: merge base
+    // 262e8b255 28, the car's tip 35 (+7), the integration tip 34 (+6), the merged tip 49 (additive 41: interaction +8). The
+    // two dormant membership edits still reach none.
+    // 2026-11-10, GREEN-TIP (re-keyed BY IDENTITY; this census probed at every first-parent stage of 2c7437030..bf14617ca that
+    // touches src/ or the corpus helper, 76 stages, on git-archive trees; MERGE-WAVE never ran this file, and the train and
+    // STYLE-2 records called these figures "the base's, unchanged" while the values moved); masked behind the first figure until it was re-keyed): 49 -> 43 W3 POW 1a160d599 -> 59
+    // ALLEGIANCE-CAR1 e5f88930b, unmoved to the tip. The two dormant membership edits still reach none.
+    // 2026-11-12, STYLE-2-MERGE point 43 (re-keyed BY IDENTITY, STYLE-2-MERGE-8; masked behind A7's first figures until they were
+    // re-keyed above): 59 -> 71 at the COHERENCE-PRESUME merge f922124d0 (the re-titled watch role reaches the crisis cast on
+    // twelve more readings); point 42 reads 59. The two dormant membership edits still reach none.
+    // 2026-11-13, STYLE-2-MERGE point 46 (re-keyed BY IDENTITY, STYLE-2-MERGE-9; masked behind A7's first figures until they were
+    // re-keyed above): 71 -> 49 at the COHERENCE-POWERS merge 6aeaa4154 (the dual hat re-deals the cast, so the role edit reaches
+    // the crisis cast on fewer readings); 3575cf061 reads 71. The two dormant membership edits still reach none.
+    expect([taken.E2, taken.E3, taken.E4], 'a role reaches the crisis cast; a dormant membership edit reaches none').toEqual([42, 0, 0]); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): 49 -> 42, measured by this file's own census at the golden's tree 8c11f73ea (the round's re-drawn casts); the two dormant membership edits still reach none
     // AND THE MACHINERY'S FIRST POPULATION, in the chain: the restatement at the first merge lets
     // the record settle away from R0 at a leaf, so the second merge's receipts carry a ride-along.
     // 2026-10-31 (chair ruling X-29, cure lane T13; measured at the GS-2 tree WITHOUT it, where this reads [12, 12]):
@@ -514,7 +633,23 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // → [31, 31] X-46 car 3 (90dc22f18, the institution budget) → [24, 24] PLACE-NOT-TIER (6129c300d) → [27, 27] PINS
     // (37b1e746d) → [21, 21] car 3 I7 (6ca454d2b), unmoved to the tip (F6, F1, F10, the residual tick bc2a64000, the
     // summary-hook cure c1cf38bbb). Chains and leaves stay equal: every ride-along chain carries exactly one leaf.
-    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([21, 21]);
+    // 2026-11-08, MERGE-CAR (the integration landing: records A and B, the rung-2 landing's merge and the people car's merge
+    // over the integration branch; re-keyed BY IDENTITY, masked behind A7's first figures until they were re-keyed): [21, 21]
+    // -> [70, 72], measured by this file's own chain census at the merged tip 2c7437030. Chains and leaves are no longer
+    // equal: two of the seventy ride-along chains carry two leaves. NOT attributed by stage (the chain census was not probed
+    // on the car's and the integration's trees; both tips read A7 red at their first figure, so neither side's pin was live).
+    // 2026-11-10, GREEN-TIP (re-keyed BY IDENTITY; masked behind A7's first figures until they were re-keyed above): [70, 72]
+    // -> [144, 154], measured by this file's own chain census at the green-tip lane over bf14617ca. NOT attributed by stage:
+    // the chain census (~5 minutes a tree) was not probed on the 76 stage trees the census figures above were measured on,
+    // and every stage between 2c7437030 and the tip read A7 red at its first figure, so this pin was never live there.
+    // PLAUSIBLE cause: the same eleven lane merges that moved [E1, E5, E6] above. Chains and leaves stay unequal.
+    // 2026-11-13, STYLE-2-MERGE point 46 (re-keyed BY IDENTITY, STYLE-2-MERGE-9; masked behind the role reach until it was re-keyed):
+    // [144, 154] -> [135, 151] at the COHERENCE-POWERS merge 6aeaa4154, this file's own chain census at the merged tree (the dual hat
+    // re-deals the cast the chains ride along). PLAUSIBLE cause, not traced by chain. Chains and leaves stay unequal.
+    // 2026-11-13, STYLE-2-MERGE point 47 (re-keyed BY MEASUREMENT, STYLE-2-MERGE-11, under the chair's ruling (3) on STOP 47d for this
+    // arm's readings, unmasked by A7's first re-key): COMPOSED at point 47 — the line f572d12b7 reads [135, 151], the COHERENCE-AGREE
+    // lane's own tip 69b53decd [145, 155], the merge 22cc9ef7d [129, 149]: the two re-deals of the casts the chains ride along interact.
+    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([129, 143]); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): [129, 149] -> [129, 143], measured by this file's own census at the golden's tree 8c11f73ea; chains and leaves stay unequal
   }, ARM_TIMEOUT);
 
   it('A8 the family declared instruments hold at this seam', () => {
@@ -548,17 +683,25 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 24/38 terrain-pools (ac09ea83b) → 24/37 T1/T2 (fe56bddd4) → 22/36 car 3 (90dc22f18; readiness now spans 7..83) →
     // 22/35 car 1b (fb0341b93; 7..81) → 22/37 PINS (37b1e746d; 7..83) → 23/37 car 3 I7 (6ca454d2b) → 21/36 F6 (6d84aa834),
     // unmoved to the tip; legitimacy's range never moved.
-    expect([witnessed.legitimacy.size, witnessed.readiness.size], 'the scores are WITNESSED, not assumed').toEqual([21, 36]);
+    // 2026-11-10, GREEN-TIP (re-keyed BY IDENTITY; this census probed at every first-parent stage of 2c7437030..bf14617ca that
+    // touches src/ or the corpus helper, 76 stages, on git-archive trees; MERGE-WAVE never ran this file, and the train and
+    // STYLE-2 records called these figures "the base's, unchanged" while the values moved): 21/36 -> 20/36 at
+    // FIX-FOOD-ISOLATION's merge c6e8a4ad6 (501c97412 reads 21/36): legitimacy scores {25, 62} gone, {42} new; readiness
+    // unmoved. Unmoved to the tip.
+    expect([witnessed.legitimacy.size, witnessed.readiness.size], 'the scores are WITNESSED, not assumed').toEqual([26, 32]); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): legitimacy 20 -> 26, readiness 32 held, measured by this arm's own census at the golden's tree 8c11f73ea (the round's re-drawn powers); STYLE-2-MERGE point 47 (2026-11-13, the COHERENCE-AGREE merge 22cc9ef7d; the draft names it for the merge seat): measured at the signed tree EQUAL to the lane's own tip 69b53decd: readiness 36 -> 32, legitimacy 20 held
     // (b) the witnessed score set of the ladders, RECORDED (charter addenda 71 and 73)
     expect([Math.min(...witnessed.legitimacy), Math.max(...witnessed.legitimacy)]).toEqual([0, 75]);
-    expect([Math.min(...witnessed.readiness), Math.max(...witnessed.readiness)]).toEqual([7, 83]);
+    expect([Math.min(...witnessed.readiness), Math.max(...witnessed.readiness)]).toEqual([7, 88]); // 2026-11-15, the close of the tail round (TAIL-CLOSE-DOORS-4; the owner's word, 2026-11-15 06:00 UTC, in the chair's chat; record docs/shift-records/2026-11-15-the-close-of-the-tail-round.json): the witnessed readiness ceiling 83 -> 88, measured by this file's own census at the golden's tree 8c11f73ea
     // (c) the duplicated-leaf sweep, RECORDED (charter addendum 38), over the table's own producer
     const leafReaders = {};
     for (const [id, meta] of Object.entries(CHECK_META)) for (const path of meta.paths || []) leafReaders[path] = [...(leafReaders[path] || []), id];
     expect([Object.keys(CHECK_META).length, CROSS_KEY_CHECKS.length]).toEqual([33, 7]);
-    expect(Object.entries(CHECK_META).filter(([, meta]) => (meta.paths || []).length === 2).length).toBe(19);
+    // 2026-11-15, THE CHAIR'S RULING ER1 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on the owner's list; each ledger imported at fce41f2b7 and at the tree, the rows diffed): 19 -> 18: V-BAND-READINESS
+    // reads a THIRD path, `defenseProfile.institutions` (its paths [readiness.label, readiness.score] -> [.., .., defenseProfile.institutions]),
+    // ffe0750d4 UPKEEP-12 H1 "the readiness label reads the roster" (lane/coherence-upkeep, landed at JOIN-4·9 0537f92f3): no path lost.
+    expect(Object.entries(CHECK_META).filter(([, meta]) => (meta.paths || []).length === 2).length).toBe(18);
     expect(Object.keys(leafReaders).length).toBe(66);
-    expect([Object.values(leafReaders).filter((ids) => ids.length > 1).length, Object.values(leafReaders).filter((ids) => ids.length === 2).length]).toEqual([13, 10]);
+    expect([Object.values(leafReaders).filter((ids) => ids.length > 1).length, Object.values(leafReaders).filter((ids) => ids.length === 2).length]).toEqual([14, 11]); // 2026-11-15, THE CHAIR'S RULING ER1 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on the owner's list; each ledger imported at fce41f2b7 and at the tree, the rows diffed): [13, 10] -> [14, 11]: the one new shared leaf is `defenseProfile.institutions`, read by V-BAND-READINESS and V-DEFENSE-INST (ffe0750d4, UPKEEP-12 H1, landed at JOIN-4·9 0537f92f3)
     // (d) THE TWO-SIDED `readable` LAW. EXIT 1, the DECLARED ledger: every row declares the field,
     // exactly one is true, and its ONE consumer RESOLVES that path rather than spelling it — the
     // import above is the proof, because institutionRemoval.js throws at import on any other count.
@@ -570,19 +713,35 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 2026-11-05 (LANDING-6, measured by import at each first-parent stage that touches the ledger): 25 → 26 PINS
     // (11467ed57) → 35 F7 RENAME-CASCADE (a373129ee: the duplicate NON_CASCADED rows and the criminal services' and crisis
     // cast's paths), every one declaring `readable`.
-    expect([INSTITUTION_NON_CASCADED.length, declaring(INSTITUTION_NON_CASCADED).length]).toEqual([35, 35]);
+    // 2026-11-07 (the people landing, measured by import at each lane's tree): 35 -> 41 PEOPLE-1 CAST dc655f712 (the card's
+    // `institution.family`, `memberships[].power` and `secondaryAffiliation` rows, each on npcs[] and the grouping's
+    // members) -> 32 PEOPLE-5B EDIT a725df7e4 (the grouping's and the shim's label rows leave), every one declaring `readable`.
+    // 2026-11-15, THE CHAIR'S RULING ER1 at the close of the tail round (TAIL-CLOSE-DOORS-4; vetoable, on the owner's list; each ledger imported at fce41f2b7 and at the tree, the rows diffed): [32, 32] -> [33, 33]: the one new
+    // row `defenseProfile.institutions.garrison[].catalogId` (kind catalogue, readable: false), f78522bf6 UPKEEP-9 step 7 "one path
+    // declared" (lane/coherence-upkeep, landed at JOIN-1·9 33b12cbef); it declares `readable`.
+    expect([INSTITUTION_NON_CASCADED.length, declaring(INSTITUTION_NON_CASCADED).length]).toEqual([33, 33]);
     expect(INSTITUTION_NON_CASCADED.filter((row) => row.kind === 'matched-pattern' && row.readable).map((row) => row.path)).toEqual(['economicState.activeChains[].processingInstitutions[]']);
     expect(typeof institutionRemovalChanges).toBe('function');
     // EXIT 2, the UNDECLARED ledger: EM-R6's LANDED ruling is that none of its rows has a reader,
     // and the prose rule is ENFORCED by the scan rather than trusted, at zero src/ bytes.
     // 2026-11-05 (LANDING-6, measured by import at each first-parent stage that touches the ledger): [16, 13] → [18, 14]
     // F7 RENAME-CASCADE (a373129ee) → [22, 14] F7 unit 5 (09295e420); none of the new rows declares `readable`.
-    expect([FACTION_NON_CASCADED.length, NPC_NON_CASCADED_SURFACES.length]).toEqual([22, 14]);
+    // 2026-11-07 (the people landing, by import at each lane's tree): [22, 14] -> [25, 14] PEOPLE-1 CAST dc655f712 ->
+    // [20, 12] PEOPLE-5B EDIT a725df7e4 (the grouping walks and the affiliation rows leave); none declares `readable`.
+    // ALLEGIANCE-CAR1 (2026-11-08, 4e55421ea, measured by import): [20, 12] -> [21, 12], the allegiance receipt's
+    // `simulationTrace[].downstreamEffects[].target` row (it names the criminal power); it declares no `readable`.
+    // ALLEGIANCE-CAR4 (2026-11-09, 03ff59084 THE GOALS REBUILT, measured by import): [21, 12] -> [21, 14], the card's
+    // `goal.short` and `goal.long` rows (npcs[].goal.*: the goal families name the people a goal binds; the durable join is
+    // goal.intent.*.target.id) declared non-cascaded for a PERSON rename, owner-gated prose; neither declares `readable`.
+    expect([FACTION_NON_CASCADED.length, NPC_NON_CASCADED_SURFACES.length]).toEqual([21, 14]);
     expect(declaring(FACTION_NON_CASCADED).length + declaring(NPC_NON_CASCADED_SURFACES).length).toBe(0);
     const importers = srcModules()
       .map((rel) => ({ rel, clause: /import\s*\{([^}]*)\}\s*from\s*'[^']*factionRename\.js'/s.exec(readFileSync(resolve(ROOT, 'src', rel), 'utf8')) }))
       .filter((each) => each.clause !== null);
-    expect(importers.length, 'the scan is not vacuous: factionRename.js HAS src/ importers').toBe(3);
+    // 2026-11-07 (LANDING-R2 seat C2, the pool census composed): 3 → 4, census-1i unit 1 R-AW (ba7887862) adds
+    // src/generators/power/factionLabelClose.js, which imports `applyFactionRenameToSettlement` (the rename cascade) and
+    // no NON_CASCADED surface; the file is created by that commit (git log --diff-filter=A).
+    expect(importers.length, 'the scan is not vacuous: factionRename.js HAS src/ importers').toBe(4);
     // THE POSITIVE CONTROL. `importers.length` proves the importer SCAN is live; nothing proved the
     // CLAUSE READER would fire on a real violation — a renamed ledger export, a dropped `NPC_`
     // alternation or a lost `\b` leaves a reader that matches NOTHING, and the empty filter below

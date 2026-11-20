@@ -234,7 +234,7 @@ function respondAsTemple(faction, event /* , settlement */) {
         return {
           factionId: id, factionName: name,
           stance: 'threat',
-          response: `${name} treats the loss as desecration. Members demand a guilty party: preferably a rival faction. Public mourning ritual is announced.`,
+          response: `${name} treats the loss as desecration. Members demand a guilty party: preferably a rival power. Public mourning ritual is announced.`,
           hookSeed: 'Clergy accuse a competing temple of arson with no evidence.',
         };
       }
@@ -308,7 +308,7 @@ function respondAsTemple(faction, event /* , settlement */) {
       return {
         factionId: id, factionName: name,
         stance: 'opportunity',
-        response: `${name} subtly maneuvers to absorb the weakened faction's followers and influence.`,
+        response: `${name} subtly maneuvers to absorb the weakened power's followers and influence.`,
       };
 
     default:
@@ -520,7 +520,7 @@ function respondAsThievesGuild(faction, event /* , settlement */) {
       return {
         factionId: id, factionName: name,
         stance: 'opportunity_and_threat',
-        response: `${name} watches who steps into the vacancy. If a rival faction maneuvers, the guild recruits its own candidate and quietly funds them. Internal succession also stirs.`,
+        response: `${name} watches who steps into the vacancy. If a rival power maneuvers, the guild recruits its own candidate and quietly funds them. Internal succession also stirs.`,
         hookSeed: 'A guild contact wants the party to make sure a specific candidate becomes the next watch captain.',
       };
 
@@ -562,7 +562,7 @@ function respondAsThievesGuild(faction, event /* , settlement */) {
       return {
         factionId: id, factionName: name,
         stance: 'opportunity',
-        response: `${name} moves to absorb the weakened faction's territory and contacts.`,
+        response: `${name} moves to absorb the weakened power's territory and contacts.`,
       };
 
     default:

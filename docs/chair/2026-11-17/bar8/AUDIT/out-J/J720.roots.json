@@ -1,0 +1,101 @@
+[
+ {
+  "root": "warIronOutsideWar",
+  "siege": true,
+  "crises": "under_siege",
+  "ironImports": "Iron ore (local iron mines exhausted)",
+  "town": "r2r-metropolis-14"
+ },
+ {
+  "root": "gapImportedNoImport",
+  "fam": "fish",
+  "house": "Fishmonger",
+  "gap": "Fishmonger runs on imported fish",
+  "imports": "Warehousing and logistics services · Incense and votive candles · Cordage, canvas, and vessel-maintenance supplies · Incense and ritual oil",
+  "town": "r2r-village-36"
+ },
+ {
+  "root": "gapImportedNoImport",
+  "fam": "livestock",
+  "house": "Tannery",
+  "gap": "Tannery runs on imported livestock",
+  "imports": "Salt · Incense and votive candles · Fine pottery for libations · Timber · Raw hides and animal products",
+  "town": "r2r-village-9"
+ },
+ {
+  "root": "gapImportedNoImport",
+  "fam": "fish",
+  "house": "Fishmonger",
+  "gap": "Fishmonger runs on imported fish",
+  "imports": "Warehousing and logistics services · Cordage, canvas, and vessel-maintenance supplies · Quality iron tools and fittings · Timber",
+  "town": "r2s-indebted-village-2"
+ },
+ {
+  "root": "gapImportedNoImport",
+  "fam": "hides",
+  "house": "Tannery",
+  "gap": "Tannery runs on imported animal hides",
+  "imports": "Salt · Incense and votive candles · Spices and rare aromatics · Livestock and dairy (local grazing land depleted) · Wool · Timber",
+  "town": "r2s-infiltrated-village-0"
+ },
+ {
+  "root": "gapImportedNoImport",
+  "fam": "hides",
+  "house": "Tannery",
+  "gap": "Tannery runs on imported animal hides",
+  "imports": "Incense and votive candles · Iron and steel tools · Livestock and dairy (local grazing land depleted) · Salted fish · Clay and raw materials",
+  "town": "r2s-monster_pressure-village-2"
+ },
+ {
+  "root": "warIronOutsideWar",
+  "siege": false,
+  "crises": "occupied",
+  "ironImports": "Iron",
+  "town": "r2s-occupied-city-1"
+ },
+ {
+  "root": "warIronOutsideWar",
+  "siege": false,
+  "crises": "occupied",
+  "ironImports": "Iron",
+  "town": "r2s-occupied-town-3"
+ },
+ {
+  "root": "gapImportedNoImport",
+  "fam": "fish",
+  "house": "Fishmonger",
+  "gap": "Fishmonger runs on imported fish",
+  "imports": "Route maps and intelligence · Incense and votive candles · Rope, oakum, and rigging supplies · Carved wood and amber · Salt",
+  "town": "r2s-religious_conversion-village-0"
+ },
+ {
+  "root": "gapImportedNoImport",
+  "fam": "livestock",
+  "house": "Tannery",
+  "gap": "Tannery runs on imported livestock",
+  "imports": "Route maps and intelligence · Replacement arms and basic equipment · Incense and votive candles · Rope, oakum, and rigging supplies · Bronze armour components · Salt · Raw hides and animal products",
+  "town": "r2s-religious_conversion-village-3"
+ },
+ {
+  "root": "warIronOutsideWar",
+  "siege": true,
+  "crises": "under_siege",
+  "ironImports": "Iron (weapons)",
+  "town": "r2s-under_siege-city-2"
+ },
+ {
+  "root": "warIronOutsideWar",
+  "siege": true,
+  "crises": "under_siege",
+  "ironImports": "Iron (weapons)",
+  "town": "r2s-under_siege-metropolis-3"
+ },
+ {
+  "root": "gapImportedNoImport",
+  "fam": "livestock",
+  "house": "Tannery",
+  "gap": "Tannery runs on imported livestock",
+  "imports": "Salt · Route maps and intelligence · Replacement arms and basic equipment · Incense and votive candles · Fine pottery for libations · Raw hides and animal products",
+  "town": "r2s-wartime-village-2"
+ }
+]

@@ -152,7 +152,9 @@ export default function AccountSubscriptionSection({
               <b style={{ color: AMBER }}>
                 {activeSaves >= maxSaves ? 'Saves full.' : 'One save left.'}
               </b>{' '}
-              Cartographer = unlimited + cloud sync. Phone, laptop, table.
+              {/* "cloud sync" struck (TIER-PARITY-FIX V6's rule, routed to SW-9): free saves are server
+                  rows too (migrations 014/024/033), so sync is no Cartographer difference. */}
+              Cartographer = unlimited saves.
             </div>
           )}
         </div>

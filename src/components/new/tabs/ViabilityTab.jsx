@@ -5,14 +5,25 @@ import { FS, swatch, MUTED } from '../../theme.js';
 import { Ti, sans, Section, Empty } from '../Primitives';
 import { flag } from '../../../lib/flags.js';
 import { normalizePlotHook } from '../../../lib/proseSeams.js';
-import { deriveViability } from '../../../domain/display/dossierViewModel.js';
 import { isViabilityItem, trimViabilitySummary } from '../../../domain/display/viabilityFilter.js';
+// READER-R1 (the chair's rulings 1, 2 and 4): one critical list, the stress effects that are
+// not in it, an issue's text read against the route, and the generator's checks for staff only.
+import { byDesignItemsOf, criticalIssuesOf, stressEffectsOf, viabilityIssueText, staffValidationRows } from '../../../domain/display/validationOnPage.js';
+import { houseLabelsInText } from '../../../domain/display/institutionDisplayName.js';
+// BAR7-CARDS item 3 (2026-11-17): the Outlook's impaired list is read by the one display leaf the PDF also reads
+// (`impairedListShown.js`, moved there unchanged from this file: BAR6-RECORD (d)'s reading, one reading on both surfaces).
+import { stressEffectsShown } from '../../../domain/display/impairedListShown.js';
+import { useStore } from '../../../store/index.js';
 
 
 import {NarrativeNote} from '../NarrativeNote';
 // THE GENERAL DESK THROUGH ITS ONE CALLER (the registry's ARM 2), which also owns the
 // §885.3 paid-surface gate — corpus prose never draws for a free gallery viewer.
 import { generalDeskLines } from '../generalDeskRead.js';
+// DS-DEF-12 (W2 DEF, 2026-11-07): the isolation-support finding, a defense-leaf block that speaks
+// here, read through its gated reader (shared with the public prose composer, SW-B7b).
+import { isolationDeskRead, viabilityVerdictRead } from '../viabilityDeskRead.js';
+import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18): the verdict's three lenses are one
 // paragraph rather than three, each of which opened on the town's name. The DRAW is unchanged.
 import ProseBlock from '../ProseBlock.jsx';
@@ -23,6 +34,9 @@ import { FLUSH } from '../../../design/flush.js';
 
 /** The page's one first-survey vintage label (owner-queue #28 at one site per page, X-8). */
 export const FIRST_SURVEY_LABEL = 'Judged at the first survey; not re-run since.';
+
+/** DS-DEF-12's one position on this page (W2 DEF construction C3–C5). */
+const ISOLATION_SUPPORT_MOUNT = 'viability.isolationSupport';
 
 // The summary trim lives in viabilityFilter.js, the module web and PDF already share, so the
 // paid document trims exactly what the tab trims.
@@ -42,6 +56,10 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // stable; the verdict headline, the category eyebrows and the metric pills
   // keep their own steps.
   const mobile = useIsMobile();
+  // THE STAFF SEAM (the WarTab / RumorsTab spelling): the generator's own checks render for an
+  // elevated viewer only, never on the player view or a public dossier (READER-R1 ruling 1).
+  const elevated = useStore(st => (typeof st.isElevated === 'function' ? st.isElevated() : false));
+  const showStaffChecks = elevated && !playerView && !publicDossier;
   // DS-GEN-11: the verdict, the contradiction count and the first-survey caveat, banded in
   // the town's own voice beside the three data the panel already prints.
   // ⭐ MEMOISED, AND ABOVE THE EARLY RETURN (rules-of-hooks; ARCH §4.1, X-F9, SEAM car 3g):
@@ -49,19 +67,27 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // rather than through a single kernel read, and that cost is unmeasured on the browser
   // side. The result is a pure function of the settlement and the two view flags.
   const {verdictLines} = useMemo(
-    () => generalDeskLines(s, {publicDossier, playerView, tier: s?.tier}).viability,
+    () => generalDeskLines(s, {publicDossier, playerView, publicSite: 'general:viability', tier: s?.tier}).viability,
     [s, publicDossier, playerView],
   );
   if (!s?.economicViability) return <Empty message="No coherence data available. Generate a settlement first."/>;
   const v = s.economicViability;
   const metrics = v.metrics || {};
+  // DS-DEF-12: whether a place with no dependable road, river or port can keep itself supplied.
+  // Silent on a connected town and on a free viewer's dossier (§885.3).
+  // THE PUBLIC BRANCH (STYLE-RULINGS-2 B10(a), SW-B7b): a shared page prints the lens the owner's
+  // player view drew, shipped at the save (`viability`); unstamped, SILENT (viabilityDeskRead.js).
+  const isolationProse = isolationDeskRead(s, { publicDossier, playerView });
+  const isolationLine = drawnAtMount(ISOLATION_SUPPORT_MOUNT, isolationProse.isolationSupply)?.sentence || null;
   // DS-DEF-9 and the frozen magicDependency record moved to the Magic tab as the Roles
   // section's framing (UX consolidation 2026-10-30, RULINGS-T2 T2-15); see MagicTab.jsx.
 
   // Strip the verdict prefix from the summary. Behind canonicalViewModel, use
   // the reconciled verdict from the display model (§1f) — its body only, since
   // this tab supplies its own coherence badge.
-  const vmViability = flag('canonicalViewModel') ? deriveViability(s) : null;
+  // The verdict's variant is SEEDED (viabilitySeed): a shared page prints the summary the owner's
+  // view drew, shipped at the save (`viewModel:viability`), and an unstamped record is silent.
+  const vmViability = flag('canonicalViewModel') ? viabilityVerdictRead(s, { publicDossier }) : null;
   const summaryClean = trimViabilitySummary(vmViability
     ? vmViability.summary.replace(/^[^:]+:\s*/, '').trim()
     : (v.summary||'').replace(/^[✗✓]\s*(NOT VIABLE:|VIABLE:)\s*/i, '').trim());
@@ -69,30 +95,27 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // Stress-consequence issues: expected effects of active stressors (siege, famine, etc.)
   // These are NOT structural problems — they belong in a separate "Active Conditions" section
   // so they don't pollute the structural plausibility assessment.
-  const stressConsequences = [...(v.issues||[]), ...(v.warnings||[])].filter(i =>
-    i.type === 'stress_consequence'
-  );
+  // A CRITICAL stress consequence is in the Critical Issues list (it is one of the issues the
+  // verdict counts); only the non-critical ones are listed here (READER-R1 ruling 2).
+  const stressConsequences = stressEffectsShown(stressEffectsOf(v), s); // BAR6-RECORD (d); BAR7-CARDS item 3: the leaf's reading
 
   // Severity colors
   const sevColor = sev => sev==='critical'?'#8b1a1a':sev==='high'?'#8a3010':sev==='dependency'||sev==='warning'?'#b8860b':'#6b5340';
   const sevBg    = sev => sev==='critical'?'#fdf4f4':sev==='high'?'#fdf0e8':sev==='dependency'||sev==='warning'?'#fdf8e8':'#f7f4f0';
 
-  // Structural violations from root
-  const structuralReceiptItems = s.structuralViolations || [];
-  const structViolations = structuralReceiptItems.filter(item => item?.severity !== 'by_design');
-  const structuralByDesign = structuralReceiptItems.filter(item => item?.severity === 'by_design');
-  // Critical issues vs lower-severity
-  const byDesignIssues = [
-    ...(v.issues||[]).filter(i => i.severity==='by_design'),
-    ...structuralByDesign,
-  ].filter((item, index, all) => (
-    all.findIndex(candidate => (
-      candidate?.type === item?.type
-      && candidate?.institution === item?.institution
-      && candidate?.reason === item?.reason
-    )) === index
-  )).sort((a,b)=>(a.institution||'').localeCompare(b.institution||''));
-  const criticalIssues = [...(v.issues||[]).filter(i => i.severity==='critical' && i.type !== 'stress_consequence')].sort((a,b)=>(a.title||'').localeCompare(b.title||''));
+  // Structural violations from root. The non-by-design rows are the validator's rule text and
+  // print only on the staff panel below (READER-R1 ruling 1); the by-design rows are authored
+  // plot seeds and stay in their collapsed section.
+  const staffRows = showStaffChecks ? staffValidationRows(s) : [];
+  // SW-B1 (B1(c)): the by-design rows from their ONE reader, the list the DS-GEN-11 desk also reads.
+  const byDesignIssues = byDesignItemsOf(v, s);
+  // ONE COUNT, ONE HOME: the record's critical issues, the list `metrics.criticalIssueCount` and
+  // the summary sentence count (a critical stress consequence included).
+  const criticalIssues = [...criticalIssuesOf(v)].sort((a,b)=>(a.title||'').localeCompare(b.title||''));
+  // Two critical stress rows can share one priority note (a famine beside a migration); the
+  // note prints once, under the first (X-50: boilerplate once).
+  const firstNoteAt = new Map();
+  criticalIssues.forEach((issue, i) => { if (issue.priorityNote && !firstNoteAt.has(issue.priorityNote)) firstNoteAt.set(issue.priorityNote, i); });
   // Strip dependency/resource chain issues — those are in Economics & Resources tabs
   // Viability only shows logic violations, structural conflicts, and by-design
   // contradictions. Route through the ONE shared adjudicator (isViabilityItem)
@@ -167,21 +190,19 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
         
       </div>
 
+      {/* ── SUPPLY IN ISOLATION (DS-DEF-12, viability.isolationSupport) ── */}
+      {isolationLine&&<div data-testid="viability-isolation-support" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'10px 14px',margin:'10px 0'}}>
+        <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Supply in isolation</div>
+        <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{isolationLine}</p>
+      </div>}
+
       {/* The generation receipt moved to the Versions tab (Notes group) in the UX
           consolidation (T2-14): it audits the generator, not the town, and stays
           reachable there. */}
 
-      {/* ── SURVIVAL CRISES (structural violations) ──────────────────────── */}
-      {structViolations.length>0&&<Section title={`Structural Crises (${structViolations.length})`} collapsible defaultOpen accent='#8b1a1a'>
-        {structViolations.map((v2,i)=>(
-          <div key={i} style={{background:swatch['#FDF0F0'],border:'1px solid #e0a0a0',borderLeft:'4px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
-            <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger,marginBottom:3}}>
-              {v2.institution||v2.group}
-            </div>
-            <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch['#5A1A1A'],lineHeight:1.5,margin:0}}>{v2.reason}</p>
-          </div>
-        ))}
-      </Section>}
+      {/* The "Structural Crises" block is CUT from the DM page (READER-R1 ruling 1): it printed
+          the structural validator's rule text ("X is not compatible with port access") as a
+          fact about the place. The rows are on the staff panel at the foot of this page. */}
 
       {/* ── CRITICAL ISSUES ──────────────────────────────────────────────── */}
       {criticalIssues.length>0&&<Section title={`Critical Issues (${criticalIssues.length})`} collapsible defaultOpen accent='#8b1a1a'>
@@ -191,8 +212,8 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
               {issue.category&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.danger}}>{tokenCase(issue.category)}</span>}
               {issue.title&&<span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
             </div>
-            <p style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
-            {issue.priorityNote&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#8B3A1A'],fontStyle:'italic',margin:'0 0 8px',lineHeight:1.4}}>{issue.priorityNote}</p>}
+            <p style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{houseLabelsInText(viabilityIssueText(issue, s), s?.institutions)}</p>
+            {issue.priorityNote&&firstNoteAt.get(issue.priorityNote)===i&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#8B3A1A'],fontStyle:'italic',margin:'0 0 8px',lineHeight:1.4}}>{issue.priorityNote}</p>}
             {issue.suggestedFixes?.length>0&&<div style={{borderTop:'1px solid #e8c0c0',paddingTop:8}}>
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Suggested fixes</div>
               {issue.suggestedFixes.map((fix,j)=>(
@@ -216,7 +237,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
               {issue.category&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:sc}}>{tokenCase(issue.category)}</span>}
               {issue.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
             </div>
-            <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{typeof issue.description==='object'?issue.description.short||issue.description.text||'':issue.description||issue.message}</p>
+            <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{houseLabelsInText(viabilityIssueText(issue, s), s?.institutions)}</p>
             {issue.suggestedFixes?.length>0&&<div style={{marginTop:6}}>
               {issue.suggestedFixes.map((fix,j)=>(
                 <div key={j} style={{display:'flex',gap:6,marginBottom:2}}>
@@ -234,7 +255,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
         {stressConsequences.map((item,i)=>(
           <div key={i} style={{background:swatch['#F9F3E8'],border:'1px solid #d4a96a',padding:'8px 10px',marginBottom:6}}>
             {item.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch['#6B4C2A'],display:'block',marginBottom:2}}>{item.title}</span>}
-            <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3E28'],lineHeight:1.5,margin:0}}>{typeof item.description==='object'?item.description.short||item.description.text||'':item.description||item.message||''}</p>
+            <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3E28'],lineHeight:1.5,margin:0}}>{houseLabelsInText(typeof item.description==='object'?item.description.short||item.description.text||'':item.description||item.message||'', s?.institutions)}</p>
           </div>
         ))}
       </Section>}
@@ -261,7 +282,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
               {wobj.category&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:sc}}>{tokenCase(wobj.category)}</span>}
               {wobj.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch.inkMag}}>{wobj.title}</span>}
             </div>
-            {wobj.description&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{wobj.description}</p>}
+            {wobj.description&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{houseLabelsInText(wobj.description, s?.institutions)}</p>}
             {wobj.impact&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#5A3A10'],fontStyle:'italic',margin:'0 0 6px',lineHeight:1.4}}>Impact: {wobj.impact}</p>}
             {wobj.suggestedFixes?.length>0&&<div>
               {wobj.suggestedFixes.map((fix,j)=>(
@@ -276,7 +297,20 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
       </Section>}
 
       {/* ── OPPORTUNITIES / SUGGESTIONS ──────────────────────────────────── */}
-      
+
+      {/* ── THE STAFF PANEL (READER-R1 ruling 1) ─────────────────────────────
+          The generator's own checks, verbatim: the structural validator's violations and
+          suggestions, the resource generator's raw gap rows and priority notes. An elevated
+          (developer / admin) viewer only; never the player view, never a public dossier. */}
+      {staffRows.length>0&&<Section title={`Generator checks (staff) (${staffRows.length})`} collapsible defaultOpen>
+        {staffRows.map((row,i)=>(
+          <div key={i} data-testid="viability-staff-check" style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag2,lineHeight:1.5,padding:'4px 0'}}>
+            <span style={{color:MUTED,marginRight:6}}>{row.source}</span>
+            {row.label&&<strong style={{marginRight:4}}>{row.label}:</strong>}
+            {row.text}
+          </div>
+        ))}
+      </Section>}
     </div>
   );
 }

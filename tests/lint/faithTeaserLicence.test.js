@@ -47,7 +47,9 @@ const CASE_BOUND = Object.freeze({
   faith: ['houses', 'cleric', 'faction'],
   church: ['houses'], churches: ['houses'],
   cleric: ['cleric'], senior: ['cleric'], rank: ['cleric'], clergy: ['cleric'],
-  factions: ['faction'], party: ['faction'], affairs: ['faction'],
+  // Re-keyed by identity 2026-11-09 (SW-8 RENAME-POWERS, C8 e63c6aae6, the owner's map Appendix G1):
+  // PRIVATE #3's "Among {settlement}'s factions" now reads "powers" — the same word for the same fact.
+  powers: ['faction'], party: ['faction'], affairs: ['faction'],
 });
 
 /**
@@ -63,7 +65,7 @@ const LICENSED = new Set([
   // the facts, as the faith line words them
   'faith', 'keeps', 'keep', 'kept', 'at', 'people', 'folk', 'observances', 'rites',
   'church', 'churches', 'cleric', 'senior', 'rank', 'clergy', 'holds',
-  'factions', 'speaks', 'party', 'affairs',
+  'powers', 'speaks', 'party', 'affairs',
 ]);
 
 const BLOCK = DOSSIER_STATE_PROSE_WAR_FAITH['DS-FTH-2'];

@@ -1,0 +1,1054 @@
+{
+ "cold-town-116": {
+  "tier": "town",
+  "name": "Sahlzamin",
+  "prosperity": "Comfortable",
+  "crises": [],
+  "houses": [
+   "Town granary",
+   "Apothecary (established)",
+   "Alchemist shop",
+   "Parish churches (2-5)",
+   "Monastery or friary",
+   "Courthouse",
+   "Town watch",
+   "Wizard's tower"
+  ],
+  "score": 63,
+  "band": "Well-Defended",
+  "scores": [
+   [
+    62,
+    "ADEQUATE"
+   ],
+   [
+    40,
+    "ADEQUATE"
+   ],
+   [
+    49,
+    "ADEQUATE"
+   ],
+   [
+    95,
+    "STRONG"
+   ],
+   [
+    60,
+    "ADEQUATE"
+   ]
+  ],
+  "traditions": {
+   "hasArcane": true,
+   "hasArcaneGuild": true,
+   "hasDivine": true,
+   "hasDruid": false,
+   "hasAlchemy": true
+  },
+  "hPow": "0033569dba9d",
+  "factions": [
+   "Arcane Council 58",
+   "Religious Authorities 30",
+   "Arcane Orders 12"
+  ],
+  "governing": null,
+  "legitimacy": {
+   "score": 64,
+   "label": "Approved",
+   "color": "#4a7a2a",
+   "bg": "#f4faf0",
+   "breakdown": {
+    "prosperity": 8,
+    "safety": 0,
+    "defense": 6,
+    "food": 0
+   },
+   "govMultiplier": 1.15,
+   "crimMultiplier": 0.9,
+   "isEndorsed": false,
+   "isApproved": true,
+   "isTolerated": false,
+   "isContested": false,
+   "isLegitimacyCrisis": false,
+   "governanceFractured": false
+  },
+  "self": {
+   "score": 63,
+   "band": "Well-Defended",
+   "scores": [
+    [
+     62,
+     "ADEQUATE"
+    ],
+    [
+     40,
+     "ADEQUATE"
+    ],
+    [
+     49,
+     "ADEQUATE"
+    ],
+    [
+     95,
+     "STRONG"
+    ],
+    [
+     60,
+     "ADEQUATE"
+    ]
+   ]
+  }
+ },
+ "cold-city-227": {
+  "tier": "city",
+  "name": "Dongguan",
+  "prosperity": "Moderate",
+  "crises": [
+   "monster_pressure"
+  ],
+  "houses": [
+   "City granaries",
+   "Apothecary district",
+   "Alchemist quarter",
+   "Parish churches (10-30)",
+   "Multiple courthouses",
+   "City walls and gates",
+   "Professional city watch",
+   "Garrison",
+   "Mercenary quarter",
+   "Mages' guild"
+  ],
+  "score": 70,
+  "band": "Well-Defended",
+  "scores": [
+   [
+    100,
+    "STRONG"
+   ],
+   [
+    98,
+    "STRONG"
+   ],
+   [
+    40,
+    "ADEQUATE"
+   ],
+   [
+    100,
+    "STRONG"
+   ],
+   [
+    89,
+    "STRONG"
+   ]
+  ],
+  "traditions": {
+   "hasArcane": true,
+   "hasArcaneGuild": true,
+   "hasDivine": true,
+   "hasDruid": false,
+   "hasAlchemy": true
+  },
+  "hPow": "c182345ec152",
+  "factions": [
+   "Merchant oligarchy 30",
+   "Merchant Guilds 25",
+   "Religious Authorities 16",
+   "Military/Guard 15",
+   "The Guild Alliance 14"
+  ],
+  "governing": null,
+  "legitimacy": {
+   "score": 37,
+   "label": "Contested",
+   "color": "#8a4010",
+   "bg": "#fdf6ec",
+   "breakdown": {
+    "prosperity": 0,
+    "safety": -20,
+    "defense": 7,
+    "food": 0
+   },
+   "govMultiplier": 0.8,
+   "crimMultiplier": 1.15,
+   "isEndorsed": false,
+   "isApproved": false,
+   "isTolerated": false,
+   "isContested": true,
+   "isLegitimacyCrisis": false,
+   "governanceFractured": false
+  },
+  "self": {
+   "score": 70,
+   "band": "Well-Defended",
+   "scores": [
+    [
+     100,
+     "STRONG"
+    ],
+    [
+     98,
+     "STRONG"
+    ],
+    [
+     40,
+     "ADEQUATE"
+    ],
+    [
+     100,
+     "STRONG"
+    ],
+    [
+     89,
+     "STRONG"
+    ]
+   ]
+  }
+ },
+ "cold-thorp-0": {
+  "tier": "thorp",
+  "name": "Fjordberg",
+  "prosperity": "Struggling",
+  "crises": [],
+  "houses": [
+   "Wayside shrine",
+   "Access to parish church"
+  ],
+  "score": 25,
+  "band": "Lightly Defended",
+  "scores": [
+   [
+    25,
+    "WEAK"
+   ],
+   [
+    22,
+    "WEAK"
+   ],
+   [
+    31,
+    "WEAK"
+   ],
+   [
+    21,
+    "WEAK"
+   ],
+   [
+    0,
+    "CRITICAL"
+   ]
+  ],
+  "traditions": {
+   "hasArcane": false,
+   "hasArcaneGuild": false,
+   "hasDivine": true,
+   "hasDruid": false,
+   "hasAlchemy": false
+  },
+  "hPow": "0d82ffeac365",
+  "factions": [
+   "Religious Authorities 59",
+   "Elder Council 41"
+  ],
+  "governing": null,
+  "legitimacy": {
+   "score": 29,
+   "label": "Legitimacy Crisis",
+   "color": "#8b1a1a",
+   "bg": "#fdf4f4",
+   "breakdown": {
+    "prosperity": -20,
+    "safety": 0,
+    "defense": -1,
+    "food": 0
+   },
+   "govMultiplier": 0.6,
+   "crimMultiplier": 1.3,
+   "isEndorsed": false,
+   "isApproved": false,
+   "isTolerated": false,
+   "isContested": false,
+   "isLegitimacyCrisis": true,
+   "governanceFractured": true
+  },
+  "self": {
+   "score": 25,
+   "band": "Lightly Defended",
+   "scores": [
+    [
+     25,
+     "WEAK"
+    ],
+    [
+     22,
+     "WEAK"
+    ],
+    [
+     31,
+     "WEAK"
+    ],
+    [
+     21,
+     "WEAK"
+    ],
+    [
+     0,
+     "CRITICAL"
+    ]
+   ]
+  }
+ },
+ "cold-village-65": {
+  "tier": "village",
+  "name": "Medinamela",
+  "prosperity": "Poor",
+  "crises": [
+   "insurgency"
+  ],
+  "houses": [
+   "Wayside shrine",
+   "Parish church",
+   "Adventurers' charter hall"
+  ],
+  "score": 18,
+  "band": "Vulnerable",
+  "scores": [
+   [
+    25,
+    "WEAK"
+   ],
+   [
+    36,
+    "WEAK"
+   ],
+   [
+    0,
+    "CRITICAL"
+   ],
+   [
+    46,
+    "ADEQUATE"
+   ],
+   [
+    0,
+    "CRITICAL"
+   ]
+  ],
+  "traditions": {
+   "hasArcane": false,
+   "hasArcaneGuild": false,
+   "hasDivine": false,
+   "hasDruid": false,
+   "hasAlchemy": false
+  },
+  "hPow": "417ca8beddb3",
+  "factions": [
+   "People's Council 53",
+   "Elder Council 47"
+  ],
+  "governing": null,
+  "legitimacy": {
+   "score": 17,
+   "label": "Legitimacy Crisis",
+   "color": "#8b1a1a",
+   "bg": "#fdf4f4",
+   "breakdown": {
+    "prosperity": -10,
+    "safety": -20,
+    "defense": -3,
+    "food": 0
+   },
+   "govMultiplier": 0.6,
+   "crimMultiplier": 1.3,
+   "isEndorsed": false,
+   "isApproved": false,
+   "isTolerated": false,
+   "isContested": false,
+   "isLegitimacyCrisis": true,
+   "governanceFractured": true
+  },
+  "self": {
+   "score": 18,
+   "band": "Vulnerable",
+   "scores": [
+    [
+     25,
+     "WEAK"
+    ],
+    [
+     36,
+     "WEAK"
+    ],
+    [
+     0,
+     "CRITICAL"
+    ],
+    [
+     46,
+     "ADEQUATE"
+    ],
+    [
+     0,
+     "CRITICAL"
+    ]
+   ]
+  },
+  "watchInStead": {
+   "score": 14,
+   "band": "Vulnerable",
+   "scores": [
+    [
+     25,
+     "WEAK"
+    ],
+    [
+     4,
+     "CRITICAL"
+    ],
+    [
+     9,
+     "CRITICAL"
+    ],
+    [
+     46,
+     "ADEQUATE"
+    ],
+    [
+     0,
+     "CRITICAL"
+    ]
+   ]
+  }
+ },
+ "fresh6-metropolis-30": {
+  "tier": "metropolis",
+  "name": "Gerasdion",
+  "prosperity": "Comfortable",
+  "crises": [
+   "recently_betrayed"
+  ],
+  "houses": [
+   "State granary complex",
+   "Apothecary district",
+   "Parish churches (50-100+)",
+   "Great cathedral",
+   "Hospital network",
+   "Elder Grove Council",
+   "Multiple court buildings",
+   "Massive prison",
+   "Massive walls and fortifications",
+   "Professional city watch",
+   "Multiple garrisons",
+   "Mages' district"
+  ],
+  "score": 93,
+  "band": "Fortress",
+  "scores": [
+   [
+    100,
+    "STRONG"
+   ],
+   [
+    100,
+    "STRONG"
+   ],
+   [
+    66,
+    "STRONG"
+   ],
+   [
+    100,
+    "STRONG"
+   ],
+   [
+    99,
+    "STRONG"
+   ]
+  ],
+  "traditions": {
+   "hasArcane": true,
+   "hasArcaneGuild": true,
+   "hasDivine": false,
+   "hasDruid": true,
+   "hasAlchemy": true
+  },
+  "hPow": "0dcc258c4d94",
+  "factions": [
+   "City-State Council 31",
+   "Arcane Orders 15",
+   "Merchant Guilds 13",
+   "Craft Guilds 9",
+   "Military/Guard 8",
+   "Religious Authorities 8",
+   "The Inquiry 8",
+   "The Tower Alliance 8"
+  ],
+  "governing": null,
+  "legitimacy": {
+   "score": 60,
+   "label": "Approved",
+   "color": "#4a7a2a",
+   "bg": "#f4faf0",
+   "breakdown": {
+    "prosperity": 8,
+    "safety": -8,
+    "defense": 10,
+    "food": 0
+   },
+   "govMultiplier": 1.15,
+   "crimMultiplier": 0.9,
+   "isEndorsed": false,
+   "isApproved": true,
+   "isTolerated": false,
+   "isContested": false,
+   "isLegitimacyCrisis": false,
+   "governanceFractured": false
+  },
+  "self": {
+   "score": 93,
+   "band": "Fortress",
+   "scores": [
+    [
+     100,
+     "STRONG"
+    ],
+    [
+     100,
+     "STRONG"
+    ],
+    [
+     66,
+     "STRONG"
+    ],
+    [
+     100,
+     "STRONG"
+    ],
+    [
+     99,
+     "STRONG"
+    ]
+   ]
+  }
+ },
+ "cold-under_siege-town-52": {
+  "tier": "town",
+  "name": "Niederholz",
+  "prosperity": "Struggling",
+  "crises": [
+   "under_siege"
+  ],
+  "houses": [
+   "Town granary",
+   "Parish churches (2-5)",
+   "Small hospital",
+   "Town watch",
+   "Town walls",
+   "Barracks"
+  ],
+  "score": 49,
+  "band": "Defensible",
+  "scores": [
+   [
+    100,
+    "STRONG"
+   ],
+   [
+    67,
+    "STRONG"
+   ],
+   [
+    16,
+    "CRITICAL"
+   ],
+   [
+    58,
+    "ADEQUATE"
+   ],
+   [
+    28,
+    "WEAK"
+   ]
+  ],
+  "traditions": {
+   "hasArcane": false,
+   "hasArcaneGuild": false,
+   "hasDivine": true,
+   "hasDruid": false,
+   "hasAlchemy": false
+  },
+  "hPow": "736d1b12d831",
+  "factions": [
+   "Corrupt Council 28",
+   "Military/Guard 28",
+   "Religious Authorities 19",
+   "War Council 15",
+   "Thieves' Guild 10"
+  ],
+  "governing": null,
+  "legitimacy": {
+   "score": 2,
+   "label": "Legitimacy Crisis",
+   "color": "#8b1a1a",
+   "bg": "#fdf4f4",
+   "breakdown": {
+    "prosperity": -20,
+    "safety": -20,
+    "defense": 0,
+    "food": -8
+   },
+   "govMultiplier": 0.6,
+   "crimMultiplier": 1.3,
+   "isEndorsed": false,
+   "isApproved": false,
+   "isTolerated": false,
+   "isContested": false,
+   "isLegitimacyCrisis": true,
+   "governanceFractured": true
+  },
+  "self": {
+   "score": 49,
+   "band": "Defensible",
+   "scores": [
+    [
+     100,
+     "STRONG"
+    ],
+    [
+     67,
+     "STRONG"
+    ],
+    [
+     16,
+     "CRITICAL"
+    ],
+    [
+     58,
+     "ADEQUATE"
+    ],
+    [
+     28,
+     "WEAK"
+    ]
+   ]
+  }
+ },
+ "cold-thorp-191": {
+  "tier": "thorp",
+  "name": "Hongshan",
+  "prosperity": "Comfortable",
+  "crises": [],
+  "houses": [
+   "Access to parish church",
+   "Palisade",
+   "Household levy"
+  ],
+  "score": 22,
+  "band": "Vulnerable",
+  "scores": [
+   [
+    47,
+    "ADEQUATE"
+   ],
+   [
+    23,
+    "WEAK"
+   ],
+   [
+    25,
+    "WEAK"
+   ],
+   [
+    33,
+    "WEAK"
+   ],
+   [
+    0,
+    "CRITICAL"
+   ]
+  ],
+  "traditions": {
+   "hasArcane": false,
+   "hasArcaneGuild": false,
+   "hasDivine": true,
+   "hasDruid": false,
+   "hasAlchemy": false
+  },
+  "hPow": "cf1f3656b4c8",
+  "factions": [
+   "Household Council 100"
+  ],
+  "governing": null,
+  "legitimacy": {
+   "score": 77,
+   "label": "Endorsed",
+   "color": "#1a5a28",
+   "bg": "#f0faf4",
+   "breakdown": {
+    "prosperity": 8,
+    "safety": 20,
+    "defense": -1,
+    "food": 0
+   },
+   "govMultiplier": 1.3,
+   "crimMultiplier": 0.75,
+   "isEndorsed": true,
+   "isApproved": true,
+   "isTolerated": false,
+   "isContested": false,
+   "isLegitimacyCrisis": false,
+   "governanceFractured": false
+  },
+  "self": {
+   "score": 22,
+   "band": "Vulnerable",
+   "scores": [
+    [
+     47,
+     "ADEQUATE"
+    ],
+    [
+     23,
+     "WEAK"
+    ],
+    [
+     25,
+     "WEAK"
+    ],
+    [
+     33,
+     "WEAK"
+    ],
+    [
+     0,
+     "CRITICAL"
+    ]
+   ]
+  }
+ },
+ "cold-hamlet-123": {
+  "tier": "hamlet",
+  "name": "Chalmal",
+  "prosperity": "Comfortable",
+  "crises": [
+   "plague_onset"
+  ],
+  "houses": [
+   "Access to parish church"
+  ],
+  "score": 24,
+  "band": "Lightly Defended",
+  "scores": [
+   [
+    12,
+    "CRITICAL"
+   ],
+   [
+    18,
+    "CRITICAL"
+   ],
+   [
+    16,
+    "CRITICAL"
+   ],
+   [
+    34,
+    "WEAK"
+   ],
+   [
+    0,
+    "CRITICAL"
+   ]
+  ],
+  "traditions": {
+   "hasArcane": false,
+   "hasArcaneGuild": false,
+   "hasDivine": true,
+   "hasDruid": false,
+   "hasAlchemy": false
+  },
+  "hPow": "32fa5173df50",
+  "factions": [
+   "Free Elder Council 73",
+   "Quarantine Council 27"
+  ],
+  "governing": null,
+  "legitimacy": {
+   "score": 37,
+   "label": "Contested",
+   "color": "#8a4010",
+   "bg": "#fdf6ec",
+   "breakdown": {
+    "prosperity": 8,
+    "safety": -20,
+    "defense": -1,
+    "food": 0
+   },
+   "govMultiplier": 0.8,
+   "crimMultiplier": 1.15,
+   "isEndorsed": false,
+   "isApproved": false,
+   "isTolerated": false,
+   "isContested": true,
+   "isLegitimacyCrisis": false,
+   "governanceFractured": false
+  },
+  "self": {
+   "score": 24,
+   "band": "Lightly Defended",
+   "scores": [
+    [
+     12,
+     "CRITICAL"
+    ],
+    [
+     18,
+     "CRITICAL"
+    ],
+    [
+     16,
+     "CRITICAL"
+    ],
+    [
+     34,
+     "WEAK"
+    ],
+    [
+     0,
+     "CRITICAL"
+    ]
+   ]
+  }
+ },
+ "cold-wartime-town-75": {
+  "tier": "town",
+  "name": "Ioannoakra",
+  "prosperity": "Poor",
+  "crises": [
+   "wartime"
+  ],
+  "houses": [
+   "Town granary",
+   "Alchemist shop",
+   "Parish churches (2-5)",
+   "Town watch",
+   "Town walls"
+  ],
+  "score": 53,
+  "band": "Defensible",
+  "scores": [
+   [
+    82,
+    "STRONG"
+   ],
+   [
+    49,
+    "ADEQUATE"
+   ],
+   [
+    44,
+    "ADEQUATE"
+   ],
+   [
+    65,
+    "STRONG"
+   ],
+   [
+    51,
+    "ADEQUATE"
+   ]
+  ],
+  "traditions": {
+   "hasArcane": true,
+   "hasArcaneGuild": false,
+   "hasDivine": false,
+   "hasDruid": false,
+   "hasAlchemy": true
+  },
+  "hPow": "0820a71a8763",
+  "factions": [
+   "Arcane Council 36",
+   "Religious Authorities 35",
+   "Merchant Guilds 29"
+  ],
+  "governing": null,
+  "legitimacy": {
+   "score": 25,
+   "label": "Legitimacy Crisis",
+   "color": "#8b1a1a",
+   "bg": "#fdf4f4",
+   "breakdown": {
+    "prosperity": -10,
+    "safety": -12,
+    "defense": 0,
+    "food": -3
+   },
+   "govMultiplier": 0.6,
+   "crimMultiplier": 1.3,
+   "isEndorsed": false,
+   "isApproved": false,
+   "isTolerated": false,
+   "isContested": false,
+   "isLegitimacyCrisis": true,
+   "governanceFractured": true
+  },
+  "self": {
+   "score": 53,
+   "band": "Defensible",
+   "scores": [
+    [
+     82,
+     "STRONG"
+    ],
+    [
+     49,
+     "ADEQUATE"
+    ],
+    [
+     44,
+     "ADEQUATE"
+    ],
+    [
+     65,
+     "STRONG"
+    ],
+    [
+     51,
+     "ADEQUATE"
+    ]
+   ]
+  },
+  "quarterInStead": {
+   "score": 53,
+   "band": "Defensible",
+   "scores": [
+    [
+     82,
+     "STRONG"
+    ],
+    [
+     49,
+     "ADEQUATE"
+    ],
+    [
+     44,
+     "ADEQUATE"
+    ],
+    [
+     64,
+     "ADEQUATE"
+    ],
+    [
+     53,
+     "ADEQUATE"
+    ]
+   ]
+  }
+ },
+ "cold-city-101": {
+  "tier": "city",
+  "name": "Berghavn",
+  "prosperity": "Wealthy",
+  "crises": [],
+  "houses": [
+   "City granaries",
+   "Apothecary district",
+   "Alchemist quarter",
+   "Parish churches (10-30)",
+   "Major hospital",
+   "Multiple courthouses",
+   "City walls and gates",
+   "Professional city watch",
+   "Garrison",
+   "Citadel",
+   "Mercenary quarter"
+  ],
+  "score": 69,
+  "band": "Well-Defended",
+  "scores": [
+   [
+    100,
+    "STRONG"
+   ],
+   [
+    84,
+    "STRONG"
+   ],
+   [
+    68,
+    "STRONG"
+   ],
+   [
+    100,
+    "STRONG"
+   ],
+   [
+    29,
+    "WEAK"
+   ]
+  ],
+  "traditions": {
+   "hasArcane": false,
+   "hasArcaneGuild": false,
+   "hasDivine": false,
+   "hasDruid": false,
+   "hasAlchemy": true
+  },
+  "hPow": "ffdf9eac38c2",
+  "factions": [
+   "City-State Council 38",
+   "Merchant Guilds 21",
+   "Military/Guard 14",
+   "Craft Guilds 12",
+   "The Merchant Bloc 7",
+   "The Order of the Watch 8"
+  ],
+  "governing": null,
+  "legitimacy": {
+   "score": 97,
+   "label": "Endorsed",
+   "color": "#1a5a28",
+   "bg": "#f0faf4",
+   "breakdown": {
+    "prosperity": 20,
+    "safety": 20,
+    "defense": 7,
+    "food": 0
+   },
+   "govMultiplier": 1.3,
+   "crimMultiplier": 0.75,
+   "isEndorsed": true,
+   "isApproved": true,
+   "isTolerated": false,
+   "isContested": false,
+   "isLegitimacyCrisis": false,
+   "governanceFractured": false
+  },
+  "self": {
+   "score": 69,
+   "band": "Well-Defended",
+   "scores": [
+    [
+     100,
+     "STRONG"
+    ],
+    [
+     84,
+     "STRONG"
+    ],
+    [
+     68,
+     "STRONG"
+    ],
+    [
+     100,
+     "STRONG"
+    ],
+    [
+     29,
+     "WEAK"
+    ]
+   ]
+  }
+ }
+}

@@ -101,7 +101,6 @@ const storeState = {
   applyQueuedRegionalImpact: vi.fn(),
   ignoreQueuedRegionalImpact: vi.fn(),
   resolveRegionalImpact: vi.fn(),
-  advanceCampaignRegionalImpacts: vi.fn(),
   applyAllQueuedRegionalImpacts: vi.fn(),
   ignoreAllQueuedRegionalImpacts: vi.fn(),
 };

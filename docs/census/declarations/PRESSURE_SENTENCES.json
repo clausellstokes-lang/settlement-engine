@@ -1,0 +1,1377 @@
+{
+  "poolId": "PRESSURE_SENTENCES",
+  "source": "src/generators/narrativeText.js :72 PRESSURE_SENTENCES",
+  "drawKind": "R",
+  "drawSite": "src/generators/narrativeGenerator.js:790-797 generatePressureSentence → filter(defenseWordsFindings) → pickRandom2",
+  "pools": [
+    {
+      "pool": "under_siege",
+      "keyGuarantees": [
+        "primary stress type = under_siege (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "under_siege"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.under_siege[0]",
+          "text": "${name} is surrounded. Supply lines are cut, morale is fracturing, and ${govFaction} is deciding whether to negotiate terms or hold out for relief that may not be coming.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.under_siege[1]",
+          "text": "The siege has entered its second week; ${govFaction} ${agree(govFaction, 'controls', 'control')} the rationing and the gates, which means they control everything else too, for now.",
+          "needs": [
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.under_siege[2]",
+          "text": "Every ${commodity} cache in ${name} has been inventoried and argued over; the next argument will be about what to give up and what to defend to the end.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.under_siege[3]",
+          "text": "The walls of ${name} have held so far, but the relief has not come, and every day it does not, more of the blame falls on ${govFaction}.",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.under_siege[4]",
+          "text": "${name} counts its mouths and its days of ${commodity} every morning, and the people on the walls watch each other as closely as they watch the enemy.",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.under_siege[5]",
+          "text": "Word came into ${name} three days ago that the relief column had turned back; ${topNPCName}, the ${topNPCRole}, has not made it public, and the effort of not making it public is beginning to show.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "famine",
+      "keyGuarantees": [
+        "primary stress type = famine (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "famine"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.famine[0]",
+          "text": "${name} is two bad weeks from genuine starvation; the remaining ${food} reserves are in few hands, and whoever holds them is not discussing it openly.",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "crisis": [
+            "famine"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.famine[1]",
+          "text": "Since ${failed}, whoever holds the food in ${name} holds the power, and its strongest powers are each watching who holds ${stores}.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "famine"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.famine[2]",
+          "text": "${topNPCName}, the ${topNPCRole}, knows where the hoarded ${commodity} can be found and is not saying; someone close to them is among the hoarders.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "famine"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.famine[3]",
+          "text": "${bakers ? 'The bakers of ${name} have started cutting the bread with things that are not flour' : 'What people eat in ${name} is being stretched with things that are not food'}; everyone can taste it, and the fact that nobody complains is the most alarming part.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "famine"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.famine[4]",
+          "text": "${govFaction} of ${name} promised a fair share of the ${food} reserves last week, and little of it has reached the poor.",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "crisis": [
+            "famine"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.famine[5]",
+          "text": "Hunger has made ${name} quiet. The market still opens, the queues still form, but the haggling has gone out of people. They take what they are given and calculate, silently, how long it will last.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": [
+            "famine"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "occupied",
+      "keyGuarantees": [
+        "primary stress type = occupied (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "occupied"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.occupied[0]",
+          "text": "${name} is occupied; ${govFaction} still meets, but nothing it decides stands until the occupiers agree.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.occupied[1]",
+          "text": "The occupation of ${name} has lasted long enough to split it: some families now work with the occupiers and some hide the people who fight them, often on the same street.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.occupied[2]",
+          "text": "${topNPCName}, the ${topNPCRole}, is simultaneously expected to enforce the occupiers' directives and protect the people those directives are aimed at: a position that is becoming untenable.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.occupied[3]",
+          "text": "The occupiers of ${name} are careful to leave the forms of local rule in place (${govFaction} still meets, still signs, still presides) which fools no one and is not meant to.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.occupied[4]",
+          "text": "Every household in ${name} has decided what it would do if the occupiers asked it for names, and every one of them hopes it is never asked.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.occupied[5]",
+          "text": "The curfew in ${name} is enforced unevenly, and the unevenness is the point: no one can be sure which night, or which street, or which face at the checkpoint will decide that the rules apply to them.",
+          "needs": [
+            "tier: ≥ village"
+          ],
+          "excludes": [],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "politically_fractured",
+      "keyGuarantees": [
+        "primary stress type = politically_fractured (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "politically_fractured"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.politically_fractured[0]",
+          "text": "${name} has no effective government; ${topFaction} controls one district and the institutions inside it, a rival controls another, and the contested space between them is where things go wrong.",
+          "needs": [
+            "tier: ≥ town"
+          ],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.politically_fractured[1]",
+          "text": "Three powers in ${name} are each waiting for one of the others to slip, and meanwhile nothing gets mended and no quarrel gets settled.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.politically_fractured[2]",
+          "text": "${topNPCName}, the ${topNPCRole}, is the only person all three powers will still speak to, which makes them either the key to resolution or the next target.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.politically_fractured[3]",
+          "text": "Nothing gets decided in ${name}, because any decision would hand one power a win the others will not allow, and every power prefers the deadlock to losing.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.politically_fractured[4]",
+          "text": "${name} has two of everything now, two watches and two courts of a kind, and people have learned which one to ask for which favour.",
+          "needs": [
+            "watch"
+          ],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.politically_fractured[5]",
+          "text": "The last thing ${topFaction} and ${agree(topFaction, 'its', 'their')} rivals agreed on in ${name} was that the disagreement should not be allowed to reach the streets; that agreement is the only thing holding, and it is fraying.",
+          "needs": [
+            "tier: ≥ village"
+          ],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "indebted",
+      "keyGuarantees": [
+        "primary stress type = indebted (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "indebted"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.indebted[0]",
+          "text": "${name} owes more than it can repay; the creditor's representative arrived last month, and every civic decision since has been made with one eye on what they might accept as partial satisfaction.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "indebted"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.indebted[1]",
+          "text": "${topFaction} took the loans and ${govFaction} is repaying them: a distinction that has not gone unnoticed and is not forgotten.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "indebted"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.indebted[2]",
+          "text": "The debt has a clause that ${topNPCName} has read and that would change the entire conversation if it became public.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "indebted"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.indebted[3]",
+          "text": "The creditor has begun taking payment from ${name} in things other than coin (a warehouse here, a toll right there), and each transfer is legal, documented, and slightly worse than the last.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "indebted"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.indebted[4]",
+          "text": "${name} still paints its civic buildings and still held its festival, all on borrowed money; everyone knows it, and nobody says it aloud.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "indebted"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.indebted[5]",
+          "text": "The interest on ${name}'s debt now outpaces what the ${commodity} can bring in; the numbers have been quietly rearranged twice to hide it, and there is no third arrangement that works.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "indebted"
+          ],
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "recently_betrayed",
+      "keyGuarantees": [
+        "primary stress type = recently_betrayed (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "recently_betrayed"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.recently_betrayed[0]",
+          "text": "Someone inside ${name} sold something important not long ago, and now everyone suspects everyone else; deals that took a handshake now take a witness.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "recently_betrayed"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.recently_betrayed[1]",
+          "text": "The betrayal's consequences are still unfolding; ${topNPCName}, the ${topNPCRole}, knows more than they've disclosed about what was sold and to whom.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "recently_betrayed"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.recently_betrayed[2]",
+          "text": "${govFaction} has been investigating the betrayal for three weeks with nothing to show for it, which either means they're incompetent or the answer leads somewhere they don't want to go.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "recently_betrayed"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.recently_betrayed[3]",
+          "text": "Since the betrayal, ${name} has become a place where people finish fewer sentences and lock more doors; the trust that made the settlement work is not gone, but it is being rationed.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "recently_betrayed"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.recently_betrayed[4]",
+          "text": "Everyone in ${name} has privately assembled their own list of who might have done it, and the lists do not agree, and the disagreement is doing almost as much damage as the original act.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "recently_betrayed"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.recently_betrayed[5]",
+          "text": "The betrayal cost ${name} something specific (a contract, a caravan, a name that vouched for the place), and the loss of it is only now working its way through the ledgers, arriving as bad news that seems, wrongly, unrelated.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "recently_betrayed"
+          ],
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "infiltrated",
+      "keyGuarantees": [
+        "primary stress type = infiltrated (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "infiltrated"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.infiltrated[0]",
+          "text": "${name} does not know it has been infiltrated; for months ${govFaction} has been deciding things one way, and only now can anyone see which way.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "infiltrated"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.infiltrated[1]",
+          "text": "Someone has lived in ${name} long enough to learn its weak points, its powers and whom it trusts, and is using all three.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "infiltrated"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.infiltrated[2]",
+          "text": "Three separate things have gone slightly wrong in ${name} recently, in ways that look like bad luck; they are not bad luck.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "infiltrated"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.infiltrated[3]",
+          "text": "The infiltration of ${name} shows only in negatives: the meeting that was rescheduled at exactly the wrong moment, the shipment that was delayed just long enough, the appointment that went to the second-best candidate for reasons no one can quite reconstruct.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "infiltrated"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.infiltrated[4]",
+          "text": "Whoever is working inside ${name} has asked for nothing yet; they are still earning trust, and ${govFaction} has not noticed.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "infiltrated"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.infiltrated[5]",
+          "text": "${topNPCName}, the ${topNPCRole}, has become, without anyone deciding it, the person through whom a surprising amount of ${name}'s sensitive business now passes, which is either coincidence or the whole design.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "infiltrated"
+          ],
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "plague_onset",
+      "keyGuarantees": [
+        "primary stress type = plague_onset (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "plague_onset"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.plague_onset[0]",
+          "text": "Something is spreading in ${name}; the quarantine is partial, the healers are overwhelmed, and the ${topNPCRole} who first identified it has gone quiet in a way that suggests either pressure or something worse.",
+          "needs": [
+            "healer"
+          ],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.plague_onset[1]",
+          "text": "The disease is not a plague yet, but every day the quarantine is ignored or bargained around brings it closer.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.plague_onset[2]",
+          "text": "${govFaction} is playing the outbreak down, and what people are told is no longer what is true.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.plague_onset[3]",
+          "text": "The sickness in ${name} has already sorted the population into those who can afford to leave, those who can afford to isolate, and those who can do neither, and the last group has noticed the sorting.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.plague_onset[4]",
+          "text": "The healers of ${name} have stopped arguing about what the illness is and started arguing about what to do with the bodies, which is the point at which denial stops being an option for anyone.",
+          "needs": [
+            "healer"
+          ],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.plague_onset[5]",
+          "text": "A cordon has gone up around one quarter of ${name}, and the people inside it and the people outside it are already telling different stories about why: stories that will outlast the sickness whichever way it goes.",
+          "needs": [
+            "population: > small"
+          ],
+          "excludes": [],
+          "crisis": [
+            "plague_onset"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "succession_void",
+      "keyGuarantees": [
+        "primary stress type = succession_void (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "succession_void"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.succession_void[0]",
+          "text": "${name}'s last strong leader died ${weeksAgo} weeks ago, and ${topFaction} is taking over the offices before anyone else can claim them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "succession_void"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.succession_void[1]",
+          "text": "Three different people in ${name} believe they should be in charge; two of them are wrong; none of them is certain; all of them are acting.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "succession_void"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.succession_void[2]",
+          "text": "Everyone can see the seat is empty, and every claimant is buying support with promises that will have to be paid.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "succession_void"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.succession_void[3]",
+          "text": "The old ruler of ${name} left no clear heir, and everyone who did well under the old order is gathering followers to back a claim.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "succession_void"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.succession_void[4]",
+          "text": "${name} is being run, for the moment, by whoever holds the keys, the seals, and the granary: three things that used to be held by one office and are now held by three people who do not trust one another.",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [],
+          "crisis": [
+            "succession_void"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.succession_void[5]",
+          "text": "The succession in ${name} will be settled by the ${commodity} more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate successor.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": [
+            "succession_void"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "monster_pressure",
+      "keyGuarantees": [
+        "primary stress type = monster_pressure (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "monster_pressure"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.monster_pressure[0]",
+          "text": "${name}'s outlying farms are being hit one after another, each one near the last; whatever is out there is choosing them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "monster_pressure"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.monster_pressure[1]",
+          "text": "The defences of ${name} were built for quieter years than these, as ${topNPC} warned at the last muster.",
+          "needs": [
+            "guardPresence"
+          ],
+          "excludes": [],
+          "crisis": [
+            "monster_pressure"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.monster_pressure[2]",
+          "text": "Three farmsteads have been abandoned in the last month; the families who abandoned them know something about what they saw that they haven't reported to the authorities.",
+          "needs": [
+            "tier: ≥ hamlet"
+          ],
+          "excludes": [],
+          "crisis": [
+            "monster_pressure"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.monster_pressure[3]",
+          "text": "${name} has drawn its edges inward (fields left unworked, a mill ${millExports}) giving up its outlying ground for a perimeter ${milForce} can actually hold.",
+          "needs": [
+            "institution: mill"
+          ],
+          "excludes": [],
+          "crisis": [
+            "monster_pressure"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.monster_pressure[4]",
+          "text": "The bounty ${govFaction} posted for the creature has attracted the wrong sort of help to ${name}: hunters who are more dangerous than useful, and who will expect payment whether or not the thing is dead.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "monster_pressure"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.monster_pressure[5]",
+          "text": "Whatever is preying on ${name} has learned the settlement's patterns (when the patrols pass, where the walls are thin) which is not something a beast does, and admitting that is the first hard conversation no one wants to open.",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": [
+            "monster_pressure"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "insurgency (street)",
+      "keyGuarantees": [
+        "primary stress type = insurgency (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks",
+        "branch: street (r.compound effectiveness triplet)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "insurgency"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.insurgency(street)[0]",
+          "text": "The commons of ${name} have stopped obeying. ${govFaction} still holds the buildings and the official seal, but its orders go unanswered, and the first power leader to offer something better will find people ready to follow.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "insurgency"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.insurgency(street)[1]",
+          "text": "The streets of ${name} have gone quiet, and everyone is waiting for something to break. ${govFaction} ${agree(govFaction, 'gives', 'give')} orders that are heard and not obeyed, and each one weakens ${agree(govFaction, 'it', 'them')} further.",
+          "needs": [
+            "population: ≥ middling"
+          ],
+          "excludes": [],
+          "crisis": [
+            "insurgency"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.insurgency(street)[2]",
+          "text": "In ${name} the rents go uncollected, the summons go unanswered, and the men ${govFaction} sends to enforce either turn back or turn coat. The revolt has not started because it has, in every way that matters, already happened.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "insurgency"
+          ],
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "insurgency (institutional)",
+      "keyGuarantees": [
+        "primary stress type = insurgency (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks",
+        "branch: institutional (r.compound effectiveness triplet)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "insurgency"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.insurgency(institutional)[0]",
+          "text": "The challenge to ${govFaction} in ${name} comes from its own officials: taxes held back, decisions left unsigned, a coalition forming. ${govFaction} knows it, and cannot move against it without making it stronger.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "insurgency"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.insurgency(institutional)[1]",
+          "text": "The insurgency in ${name} wears a clerk's coat. Permits stall in the right offices, funds arrive short and late, and the people doing it can each point to a rule that excuses them. ${govFaction} is being strangled by its own procedures, wielded by people who have read them more carefully than it has.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "insurgency"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.insurgency(institutional)[2]",
+          "text": "No one in ${name} is marching, and that is what makes it dangerous. The opposition to ${govFaction} is a patient, well-lawyered thing that means to inherit the settlement intact rather than take it by force, and it is close to being able to.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "insurgency"
+          ],
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "mass_migration (strong economy)",
+      "keyGuarantees": [
+        "primary stress type = mass_migration (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks",
+        "branch: strong economy (r.compound effectiveness triplet)"
+      ],
+      "poolNeeds": [
+        "migration: influx"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "mass_migration"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.mass_migration(strongeconomy)[0]",
+          "text": "${name} is taking in more people than it was built for. The newcomers and the old residents share the same streets, but not a language, customs or trust, and ${govFaction} cannot keep up with how fast they come.",
+          "needs": [
+            "tier: ≥ village"
+          ],
+          "excludes": [],
+          "crisis": [
+            "mass_migration"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.mass_migration(strongeconomy)[1]",
+          "text": "The ${commodity} that made ${name} worth coming to cannot keep pace with the number who came. Housing is short, rents have doubled, and the newcomers who were welcomed as labour a year ago are being spoken of as a problem this one, though they have done nothing but arrive.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "mass_migration"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.mass_migration(strongeconomy)[2]",
+          "text": "Newcomers have built a second, poorer town at the edges of ${name}, and ${govFaction} has not decided whether it governs it; until it does, the outer town keeps its own rules.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "mass_migration"
+          ],
+          "colour": false,
+          "stop": [
+            "tier"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "mass_migration (weak economy)",
+      "keyGuarantees": [
+        "primary stress type = mass_migration (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks",
+        "branch: weak economy (r.compound effectiveness triplet)"
+      ],
+      "poolNeeds": [
+        "migration: influx"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "mass_migration"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.mass_migration(weakeconomy)[0]",
+          "text": "${name} is taking in more people than it can feed. The newcomers came for work the town no longer has, and ${govFaction} ${agree(govFaction, 'is', 'are')} rationing what there is between families who have lived here for generations and families who arrived last month.",
+          "needs": [
+            "deficit"
+          ],
+          "excludes": [],
+          "crisis": [
+            "mass_migration"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.mass_migration(weakeconomy)[1]",
+          "text": "Every season brings more households to ${name} and no more work. The newcomers camp where they can, and ${govFaction} is counting heads it has no plan for.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "mass_migration"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.mass_migration(weakeconomy)[2]",
+          "text": "The road into ${name} is busier than the road out, and both are watched. By ${govFaction}, which can neither turn people away nor keep them fed, and by the old residents, who are keeping a private account of who arrived.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "mass_migration"
+          ],
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "wartime (winning)",
+      "keyGuarantees": [
+        "primary stress type = wartime (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks",
+        "branch: winning (r.compound effectiveness triplet)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "wartime"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.wartime(winning)[0]",
+          "text": "${name} is at war and, for now, on the right side of it: contracts are flowing, the garrison is reinforced, and the war chest is paying. The men who left to fight have not come back.",
+          "needs": [
+            "garrison"
+          ],
+          "excludes": [],
+          "crisis": [
+            "wartime"
+          ],
+          "colour": false,
+          "stop": [
+            "crown / realm"
+          ]
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.wartime(winning)[1]",
+          "text": "Being on the right side of it keeps the forges of ${name} running day and night on the army's contracts, and the place now needs the war to go on to pay for what the war has already cost it.",
+          "needs": [
+            "institution: smith",
+            "trade at work: ironwork in full"
+          ],
+          "excludes": [],
+          "crisis": [
+            "wartime"
+          ],
+          "colour": false,
+          "stop": [
+            "prosperity"
+          ]
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.wartime(winning)[2]",
+          "text": "${name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast, and all of it lost if the war turns.",
+          "needs": [
+            "garrison",
+            "prosperity: ≥ comfortable"
+          ],
+          "excludes": [],
+          "crisis": [
+            "wartime"
+          ],
+          "colour": false,
+          "stop": [
+            "prosperity"
+          ]
+        }
+      ],
+      "twins": [
+        {
+          "text": "${name} is at war and, for now, on the right side of it. Contracts are flowing and coin moves fast. The men who left to fight have not come back, and the question is whether the war ends before the accounts do.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "wartime"
+          ],
+          "why": "Every winning-branch line needs a garrison or a smith; a winning wartime place holding neither has no drawable line. Keeps the \"on the right side of it\" pin anchor."
+        }
+      ]
+    },
+    {
+      "pool": "wartime (losing)",
+      "keyGuarantees": [
+        "primary stress type = wartime (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks",
+        "branch: losing (r.compound effectiveness triplet)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "wartime"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.wartime(losing)[0]",
+          "text": "${name} is losing people and resources to a war it did not choose the terms of. Conscription has taken some of its skilled hands. ${govFaction} signed a requisition order last week that ${agree(govFaction, 'it', 'they')} cannot afford and could not refuse. The settlement is loyal. It is also running thin.",
+          "needs": [],
+          "excludes": [
+            "legitimacy crisis"
+          ],
+          "crisis": [
+            "wartime"
+          ],
+          "colour": false,
+          "stop": [
+            "soldiers / commander"
+          ]
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.wartime(losing)[1]",
+          "text": "The war reaches ${name} as a series of demands rather than battles: levies of men, of ${commodity}, of coin, each one framed as duty and none of them refusable. ${name} is losing people and resources it will not get back, and the front it is bleeding for is somewhere it will never see.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "wartime"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.wartime(losing)[2]",
+          "text": "Every capable pair of hands ${name} could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition (${workshop ? 'a workshop closed for want of a master' : 'a trade left without its master'}, a field unsown for want of a back) while ${govFaction} reports the settlement loyal and does not report the rest.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "wartime"
+          ],
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "religious_conversion",
+      "keyGuarantees": [
+        "primary stress type = religious_conversion (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "religious_conversion"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.religious_conversion[0]",
+          "text": "The new faith in ${name} has no building yet, only its congregation, and ${govFaction} cannot decide whether to treat it as a matter of faith or of politics; both sides read the delay as a sign.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.religious_conversion[1]",
+          "text": "${name}'s religious community has formally split. Both sides hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that ${court ? 'the courts are' : govFaction + ' is'} not equipped to resolve quickly.",
+          "needs": [
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "colour": false,
+          "stop": [
+            "priest / faith presence"
+          ]
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.religious_conversion[2]",
+          "text": "The conversion order in ${name} was accepted within the week, faster than anyone expected, and nobody in authority is asking whether the old rites still go on behind closed doors.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.religious_conversion[3]",
+          "text": "The new faith has taken the young of ${name} first, which the old faith has noticed and cannot answer. You cannot argue a congregation back, and every festival now draws two crowds of visibly different ages to two different squares.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "colour": false,
+          "stop": [
+            "priest / faith presence"
+          ]
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.religious_conversion[4]",
+          "text": "${govFaction} in ${name} backed the winning faith a little too early and a little too visibly, and now find that a matter of belief has become a matter of who owes whom: the worst kind of debt to have taken on.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.religious_conversion[5]",
+          "text": "The conversion in ${name} is being managed as a property question as much as a spiritual one: which endowments, which burial rights, which festival days transfer with the congregation. The theology was settled quickly. The estate is where the fighting is.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "religious_conversion"
+          ],
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "slave_revolt",
+      "keyGuarantees": [
+        "primary stress type = slave_revolt (resolvePrimaryStress)",
+        "interpolations ${name}/${govFaction}/${topFaction}/${topNPCName}/${topNPCRole}/${commodity}/${milForce} are read off the record with their own fallbacks"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "slave_revolt"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: opts in with its poolCrisis. Draw-time F1 filter (defenseWordsFindings) already drops wall/garrison/soldier lines the record lacks, falling back to the whole pool when none survive.",
+      "lines": [
+        {
+          "lineId": "PRESSURE_SENTENCES.slave_revolt[0]",
+          "text": "The revolt in ${name} is too big to put down by force alone: the enslaved hold whole districts and are organised, and the governing power has not committed what crushing them would take. The slave trade has stopped. What is left to settle is what ${name} becomes afterwards, and who decides.",
+          "needs": [
+            "population: ≥ middling"
+          ],
+          "excludes": [],
+          "crisis": [
+            "slave_revolt"
+          ],
+          "colour": false,
+          "stop": [
+            "slave market"
+          ]
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.slave_revolt[1]",
+          "text": "${name} has stopped functioning as the thing it was. The labour it was built on has withdrawn itself, by force, and every calculation the settlement made about its own wealth turns out to have rested on people who are no longer willing to be a line in the ledger.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "slave_revolt"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.slave_revolt[2]",
+          "text": "The rising in ${name} did not come from nowhere, though ${govFaction} is speaking of it as though it did. Everyone who is honest knows the grievances were real, old, and ignored, which makes the question of how to end it far harder than the question of how it began.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "slave_revolt"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "PRESSURE_SENTENCES.slave_revolt[3]",
+          "text": "In ${name} the two sides have discovered they cannot simply win: the enslaved cannot hold the whole settlement, and ${govFaction} cannot retake it without destroying the ${commodity} that made it worth holding. What comes next will be a bargain neither wanted, struck between people who no longer pretend to be anything but enemies.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "slave_revolt"
+          ],
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

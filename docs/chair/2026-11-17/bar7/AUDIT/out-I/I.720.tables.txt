@@ -1,0 +1,229 @@
+== BAR7-AUDIT-I tables 720 (out720.json)
+
+# 10i.pair: counted 29 in 27 towns · apart 0 in 0
+    1 Borgny Haraldsson · Professional Rivalry · Frodi Bodvarsson | Frodi Bodvarsson · Pragmatic Alliance · Borgny Haraldsson
+    1 Ollin Tzuc · Professional Rivalry · Itzpapalotl Tec | Itzpapalotl Tec · Pragmatic Alliance · Ollin Tzuc
+    1 Egnatius Cicero · Pragmatic Alliance · Zoilus Calvus | Zoilus Calvus · Unresolved History · Egnatius Cicero
+    1 Skadi Ragnarsson · Pragmatic Alliance · Kjara Eriksson | Kjara Eriksson · Professional Rivalry · Skadi Ragnarsson
+    1 Vangchug Jadaran · Pragmatic Alliance · Günji Barlas | Günji Barlas · Professional Rivalry · Vangchug Jadaran
+    1 Dionysios Chomatenos · Pragmatic Alliance · Panteleimon Akropolites | Panteleimon Akropolites · Professional Rivalry · Dionysios C
+    1 Menja Asgersson · Professional Rivalry · Lifolf Magnusson | Lifolf Magnusson · Pragmatic Alliance · Menja Asgersson
+    1 Lalita Sahni · Pragmatic Alliance · Rekha Parekh | Rekha Parekh · Professional Rivalry · Lalita Sahni
+
+# 10i.pair-family: counted 0 in 0 towns · apart 8 in 8
+    1 (apart) Zipna Caan · Professional Rivalry · Muyal Caan | Muyal Caan · Family Complication · Zipna Caan
+    1 (apart) Devota Bauer · Professional Rivalry · Petrissa Richter | Petrissa Richter · Family Complication · Devota Bauer
+    1 (apart) Karim ibn Tufayl · Unresolved History · Anwar al-Rashidi | Anwar al-Rashidi · Family Complication · Karim ibn Tufayl
+    1 (apart) Maxim Petrov · Professional Rivalry · Milena Davydov | Milena Davydov · Family Complication · Maxim Petrov
+    1 (apart) Waitling Fitzgerald · Professional Rivalry · Nechtan Shaughnessy | Nechtan Shaughnessy · Family Complication · Waitling Fitzgerald
+    1 (apart) Maria Drimys · Professional Rivalry · Dimitra Drimys | Dimitra Drimys · Family Complication · Maria Drimys
+    1 (apart) Solveig Bjarnarson · Unresolved History · Hild Thorsson | Hild Thorsson · Family Complication · Solveig Bjarnarson
+    1 (apart) Coatlicue Batab · Family Complication · Chimalli Chi | Chimalli Chi · Professional Rivalry · Coatlicue Batab
+
+# 10i.pair-respect: counted 0 in 0 towns · apart 7 in 7
+    1 (apart) Muirenn Burke · Professional Rivalry · Saoirse Larkin | Saoirse Larkin · Mentor and Successor · Muirenn Burke
+    1 (apart) Liutbirg Brauer · Professional Rivalry · Anselm Hartmann | Anselm Hartmann · Mentor and Successor · Liutbirg Brauer
+    1 (apart) Emad al-Rumi · Professional Rivalry · Thuraya al-Suri | Thuraya al-Suri · Genuine Respect · Emad al-Rumi
+    1 (apart) Ekaterina Kozlov · Mentor and Successor · Nikoleta Komarov | Nikoleta Komarov · Professional Rivalry · Ekaterina Kozlov
+    1 (apart) Saikhan Suldus · Genuine Respect · Noyans Tayichi'ud | Noyans Tayichi'ud · Professional Rivalry · Saikhan Suldus
+    1 (apart) Emilia Fedorov · Professional Rivalry · Tomislav Alexeyev | Tomislav Alexeyev · Genuine Respect · Emilia Fedorov
+    1 (apart) Fenghua Dong · Professional Rivalry · Zhen Lin | Zhen Lin · Mentor and Successor · Fenghua Dong
+
+# 5x.slash: counted 38 in 38 towns · apart 0 in 0
+   21 X's Weavers/Textile workers can offer less the longer its supplies stay short, and nobody is putting it right.
+   17 X's Weavers/Textile workers is open but short of supplies, and it can do less than it used to.
+
+# 5x.slash-list: counted 0 in 0 towns · apart 8 in 6
+    2 (apart) 11 institutions supplied only irregularly over a poor road (isolated trade): Weekly market, Market square, Taverns (5-20), Town gr
+    1 (apart) 8 institutions critically impaired by siege: Inns and taverns (district), Mills, Blacksmiths, Specialized metalworkers, Luxury goo
+    1 (apart) 11 institutions supplied only irregularly over a poor road (isolated trade): Weekly market, Market square, Taverns, Town granary, 
+    1 (apart) 5 institutions critically impaired by siege: Inns and taverns (district), Mills, Weavers/Textile workers, Butchers, Bakers.
+    1 (apart) 9 institutions critically impaired by siege: International trade center, Inns and taverns (district), Mills, Blacksmiths, Speciali
+    1 (apart) 12 institutions critically impaired by siege: Inns and taverns (district), Shipyard, Docks/port facilities, Harbour master's offic
+    1 (apart) 8 institutions critically impaired by siege: International trade center, Inns and taverns (district), Mills, Blacksmiths, Speciali
+
+# 6e.crown: counted 7 in 7 towns · apart 0 in 0
+    7 Proclaim laws, royal decrees, and official notices to the public.
+
+# 6e.founding: counted 0 in 0 towns · apart 2 in 2
+    2 (apart) Founded by: · royal decree and a century of forced investment
+
+# 6e.no-higher: counted 8 in 8 towns · apart 0 in 0
+    8 Proclaim laws, royal decrees, and official notices to the public.
+
+# 6e.realm-world: counted 0 in 0 towns · apart 258 in 258
+  258 (apart) What X has heard from the rest of the realm, true or not, as the news reaches it.
+
+# 6e.war-apart: counted 0 in 0 towns · apart 24 in 11
+   10 (apart) Crown supply carts take what they need first, and local needs come second.
+   10 (apart) A crown officer came last week and left with a list of what will be taken next month, and those in charge signed it because they s
+    4 (apart) Wants Satisfy the crown requisition order without stripping the settlement to the bone
+
+# 7x.occupied-seat: counted 3 in 3 towns · apart 0 in 0
+    1 At X one audience with the Military City Council gets a decision, good or bad, and it comes quickly.
+    1 At X the answer comes quickly, and asking again seldom gets a different one.
+    1 The Merchant oligarchy at X is run by the houses that keep the account books, and it decides things the way a business does: by wh
+
+# 9g.food-soft: counted 0 in 0 towns · apart 3 in 3
+    3 (apart) Even the outbuildings have new roofs, and nobody looks hungry.
+
+# 9g.margin: counted 2 in 1 towns · apart 0 in 0
+    1 X closes every year ahead.
+    1 The margin is not large and it is dependable, and there are reserves behind it.
+
+# 9g.margin-mild: counted 0 in 0 towns · apart 6 in 4
+    2 (apart) With a little left over each year, X gets by on a market trade, and every year people argue over how to spend it.
+    2 (apart) X's treasury takes in a little more than it pays out each year.
+    1 (apart) With a little left over each year, X gets by on a farm surplus, and every year people argue over how to spend it.
+    1 (apart) With a little left over each year, X gets by on a broad base of trades, and every year people argue over how to spend it.
+
+# 9g.margin-war: counted 0 in 0 towns · apart 18 in 10
+    4 (apart) With a little left over each year, X gets by on a broad base of trades, and every year people argue over how to spend it.
+    3 (apart) X closes every year ahead.
+    3 (apart) The margin is not large and it is dependable, and there are reserves behind it.
+    2 (apart) With a little left over each year, X gets by on a subsistence living, and every year people argue over how to spend it.
+    2 (apart) X's treasury takes in a little more than it pays out each year.
+    1 (apart) X lives on a spread of trades and ends each year with money to spare.
+    1 (apart) X lives on a broad base of trades and ends each year with money to spare.
+    1 (apart) With a little left over each year, X gets by on a market trade, and every year people argue over how to spend it.
+
+# 9g.source: counted 8 in 8 towns · apart 0 in 0
+    3 X's own food comes first of all from its fishing, so one bad year for the fishing is felt across the whole <tier>.
+    2 X's own food comes first of all from its herds, so one bad year for the herds is felt across the whole <tier>.
+    2 X's own food comes first of all from its hunting, so one bad year for the hunting is felt across the whole <tier>.
+    1 Its own food comes first of all from its fishing, so one bad year for the fishing is felt across the whole <tier>.
+
+# 9g.stores: counted 8 in 8 towns · apart 0 in 0
+    8 The buildings are finished rather than patched, and the stores are more than the season needs.
+
+# 9g.stores-near: counted 0 in 0 towns · apart 1 in 1
+    1 (apart) The buildings are finished rather than patched, and the stores are more than the season needs.
+
+# 9g.subsistence: counted 3 in 3 towns · apart 0 in 0
+    3 The <tier> is plainly past subsistence.
+
+# 9h.no-exports: counted 1 in 1 towns · apart 0 in 0
+    1 No significant exports.
+
+# 9h.no-exports-record: counted 3 in 3 towns · apart 0 in 0
+    3 No significant exports.
+
+# 9h.no-exports-transit: counted 0 in 0 towns · apart 3 in 3
+    3 (apart) No significant exports.
+
+# 9i.crews: counted 5 in 5 towns · apart 0 in 0
+    5 Rival crews at X are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.
+
+# 9i.crews-safe: counted 0 in 0 towns · apart 6 in 6
+    6 (apart) Rival crews at X are fighting over who runs the streets, and until one wins, people pay both the cut and the brawling.
+
+# design.outside: counted 0 in 0 towns · apart 116 in 86
+   70 (apart) One importer now brings in all the grain and has quadrupled the price; the locals are arguing over whether to pay, find another su
+   16 (apart) The settlement must decide what it can still afford to import, and whoever brings the food in is watching it decide.
+   12 (apart) The settlement must decide what it can still afford to import, and the merchants are watching it decide.
+    7 (apart) The crops failed here this year, and what food can still be bought from outside costs more every week.
+    5 (apart) The fishing failed here this year, and what food can still be bought from outside costs more every week.
+    3 (apart) The grain harvest failed here this year, and what food can still be bought from outside costs more every week.
+    3 (apart) The herds failed here this year, and what food can still be bought from outside costs more every week.
+
+# low.agree: counted 0 in 0 towns · apart 42 in 42
+   19 (apart) Weak defences is the reason.
+    8 (apart) Weak defences keeps X from more than tolerating the Elder Council.
+    5 (apart) Weak defences keeps X from more than tolerating the Household Council.
+    3 (apart) Weak defences keeps X from more than tolerating the Free Elder Council.
+    2 (apart) Weak defences keeps X from more than tolerating the Feudal Stewardship.
+    1 (apart) Weak defences keeps X from more than tolerating the Town Council.
+    1 (apart) Weak defences has left the Elder Council's right to rule contested in X.
+    1 (apart) Weak defences keeps X from more than tolerating the Priestly Guidance.
+
+# low.doubled: counted 0 in 0 towns · apart 751 in 463
+   42 (apart) honey · medicinal herbs · Honey and beeswax · Foraged goods
+   34 (apart) medicinal herbs · honey · Honey and beeswax · Foraged goods
+   14 (apart) honey · Honey and beeswax · Foraged goods
+    8 (apart) grain · medicinal herbs · honey · Honey and beeswax · Foraged goods
+    7 (apart) Needed, and not brought in: timber, grapes, copper ore, mountain timber.
+    5 (apart) fish · salt · Salted fish · Smoked seafood
+    5 (apart) peat · honey · medicinal herbs · Honey and beeswax · Foraged goods
+    4 (apart) fish · medicinal herbs · honey · iron · metalwork · flour · Honey and beeswax · Foraged goods · Salted fish · Smoked seafood · Rel
+
+# low.generation: counted 0 in 0 towns · apart 100 in 100
+   10 (apart) The succession crisis left a legacy of trouble in X that has never been fully put right, and that legacy is a generation old.
+    9 (apart) Nobody in X has finished putting right the legacy the succession crisis left, and that legacy is a generation old.
+    7 (apart) The siege left a legacy of trouble in X that has never been fully put right, and that legacy is a generation old.
+    4 (apart) X still keeps the shape the <tier> took after the trade collapse, and that shape is a generation old, though the times have moved 
+    4 (apart) Nobody in X has finished putting right the legacy the siege left, and that legacy is a generation old.
+    3 (apart) The great harvest compact left a legacy of trouble in X that has never been fully put right, and that legacy is a generation old.
+    3 (apart) Nobody in X has finished putting right the legacy the schism left, and that legacy is a generation old.
+    3 (apart) The religious conflict left a legacy of trouble in X that has never been fully put right, and that legacy is a generation old.
+
+# low.hook-party: counted 0 in 0 towns · apart 19 in 19
+    7 (apart) The old families once kept the peace; they have fallen out among themselves, and nobody keeps it now.
+    5 (apart) The old families keep the peace, and anyone who breaks it answers to all the neighbours at once; when the families fall out among 
+    3 (apart) An old story from that time: the corruption goes higher than anyone yet suspects; the reformers are being used
+    3 (apart) The corruption goes higher than anyone yet suspects; the reformers are being used
+    1 (apart) The records of that time say: the corruption goes higher than anyone yet suspects; the reformers are being used
+
+## low.generation by age
+    46 in  46 towns · 40-49 years
+    29 in  29 towns · 50-54 years
+    25 in  25 towns · 55-60 years
+
+## low.doubled by kind and list
+   439 in 380 towns · within-word · Produced locally
+   266 in 161 towns · within-word · Imports
+    26 in  26 towns · within-word · Needed
+    17 in  17 towns · exact · Needed
+     2 in   2 towns · within-phrase · Imports
+     1 in   1 towns · exact · Exports
+
+## design.outside by case
+   105 in  77 towns · no siege · grain imported
+     6 in   6 towns · no siege · food imported, no grain
+     5 in   3 towns · siege · imports by teleportation circle
+
+## 9i.crews by rings
+     2 in   2 towns · no rival rings: the key is a lone house's · other
+     2 in   2 towns · no rival rings: the key is a lone house's · crisis
+     1 in   1 towns · rival rings stand · crisis
+
+## 6e.crown by word
+     7 in   7 towns · royal decrees
+
+## 6e.no-higher by word
+     8 in   8 towns · royal decrees
+
+## 6e.war-apart by word
+    10 in  10 towns · crown supply
+    10 in  10 towns · a crown officer
+     4 in   4 towns · the crown
+
+## 10i.pair by kinds
+     3 in   3 towns · ally/weak + rival/personal
+     3 in   3 towns · ally/strong + rival/bitter
+     3 in   3 towns · ally/moderate + rival/personal
+     2 in   2 towns · ally/strong + rival/personal
+     2 in   2 towns · rival/personal + ally/strong
+     2 in   2 towns · enemy/mild + ally/strong
+     2 in   2 towns · ally/moderate + enemy/mortal
+     2 in   2 towns · ally/strong + rival/professional
+     1 in   1 towns · rival/professional + ally/strong
+     1 in   1 towns · rival/personal + ally/weak
+     1 in   1 towns · ally/moderate + enemy/serious
+     1 in   1 towns · ally/moderate + rival/professional
+     1 in   1 towns · ally/moderate + enemy/mild
+     1 in   1 towns · rival/bitter + ally/weak
+     1 in   1 towns · enemy/mortal + ally/moderate
+     1 in   1 towns · enemy/serious + ally/strong
+     1 in   1 towns · rival/professional + ally/weak
+     1 in   1 towns · rival/bitter + ally/moderate
+
+## 10i.pair-respect by kinds
+     2 in   2 towns · rival/bitter + mentor_student/devoted
+     1 in   1 towns · rival/professional + mentor_student/devoted
+     1 in   1 towns · rival/bitter + respect/deep
+     1 in   1 towns · mentor_student/devoted + rival/professional
+     1 in   1 towns · respect/deep + rival/personal
+     1 in   1 towns · rival/professional + respect/deep
+
+## 5x.slash by label
+    38 in  38 towns · Weavers/Textile workers

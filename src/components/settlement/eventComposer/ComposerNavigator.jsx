@@ -30,7 +30,7 @@ import { chromeFontSize } from '../../../design/proseScale.js';
 
 const KIND_LABELS = Object.freeze({
   settlement: 'The settlement', institutions: 'Institution', npcs: 'NPC',
-  factions: 'Faction', neighbours: 'Neighbour', resources: 'Resource',
+  factions: 'Power', neighbours: 'Neighbour', resources: 'Resource',
   stressors: 'Stressor', tradeGoods: 'Trade good',
 });
 

@@ -1,0 +1,241 @@
+{
+  "poolId": "SETT_REASON",
+  "source": "src/generators/narrativeGenerator.js :652 _getSettReason (inline pickRandom pools)",
+  "drawKind": "R",
+  "drawSite": "src/generators/narrativeGenerator.js:652-687 _getSettReason → pickRandom (no caller; null when hasStress)",
+  "pools": [
+    {
+      "pool": "authoritarian|enforced",
+      "keyGuarantees": [
+        "safety label contains authoritarian/enforced (no reader: safety label)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "UNREACHED: _getSettReason has no caller in src/ (grep 2026-11-04); it also returns null whenever its caller says a stress is active, so the pool never renders under a crisis and stays out of the opt-in.",
+      "lines": [
+        {
+          "lineId": "_getSettReason.authoritarian[0]",
+          "text": "The settlement is orderly in a way that requires maintenance.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "safety label"
+          ]
+        },
+        {
+          "lineId": "_getSettReason.authoritarian[1]",
+          "text": "The guard presence is higher than the threat level requires.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "safety label",
+            "soldiers / commander"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "criminal|corrupt",
+      "keyGuarantees": [
+        "safety label contains criminal/corrupt (no reader: safety label, crime structure)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "UNREACHED: _getSettReason has no caller in src/ (grep 2026-11-04); it also returns null whenever its caller says a stress is active, so the pool never renders under a crisis and stays out of the opt-in.",
+      "lines": [
+        {
+          "lineId": "_getSettReason.criminal[0]",
+          "text": "The market stalls near the gate are attended by people who seem more interested in watching the street than selling.",
+          "needs": [
+            "market",
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "crime structure"
+          ]
+        },
+        {
+          "lineId": "_getSettReason.criminal[1]",
+          "text": "Commerce is active. Some of it is the kind that doesn't invite close attention.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "crime structure"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "tense|unstable",
+      "keyGuarantees": [
+        "safety label contains tense/unstable (no reader)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "UNREACHED: _getSettReason has no caller in src/ (grep 2026-11-04); it also returns null whenever its caller says a stress is active, so the pool never renders under a crisis and stays out of the opt-in.",
+      "lines": [
+        {
+          "lineId": "_getSettReason.tense[0]",
+          "text": "Something is not quite right about the street, though it takes a moment to identify what.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "safety label"
+          ]
+        },
+        {
+          "lineId": "_getSettReason.tense[1]",
+          "text": "The settlement is going about its business, but with a particular awareness of itself.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "safety label"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "military|ordered",
+      "keyGuarantees": [
+        "safety label contains military/ordered (no reader)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "UNREACHED: _getSettReason has no caller in src/ (grep 2026-11-04); it also returns null whenever its caller says a stress is active, so the pool never renders under a crisis and stays out of the opt-in.",
+      "lines": [
+        {
+          "lineId": "_getSettReason.military[0]",
+          "text": "The settlement has a military discipline to it, not oppressive, but structured.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "safety label",
+            "soldiers / commander"
+          ]
+        },
+        {
+          "lineId": "_getSettReason.military[1]",
+          "text": "The guards are well-turned-out. Someone takes their job seriously.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "safety label",
+            "soldiers / commander"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "fallback: monsterThreat plagued",
+      "keyGuarantees": [
+        "no labelled arm matched; monsterThreat === plagued (no reader: monster threat)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "UNREACHED: _getSettReason has no caller in src/ (grep 2026-11-04); it also returns null whenever its caller says a stress is active, so the pool never renders under a crisis and stays out of the opt-in.",
+      "lines": [
+        {
+          "lineId": "_getSettReason.plagued[0]",
+          "text": "The settlement is armed in ways that a casual visitor might not notice immediately but can't stop noticing once they do.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "monster threat"
+          ]
+        },
+        {
+          "lineId": "_getSettReason.plagued[1]",
+          "text": "The torches at the gate burn in the middle of the day.",
+          "needs": [
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "monster threat"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "fallback: default",
+      "keyGuarantees": [
+        "no labelled arm matched; monsterThreat not plagued"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "UNREACHED: _getSettReason has no caller in src/ (grep 2026-11-04); it also returns null whenever its caller says a stress is active, so the pool never renders under a crisis and stays out of the opt-in.",
+      "lines": [
+        {
+          "lineId": "_getSettReason.default[0]",
+          "text": "It is, as far as you can tell, a normal day here.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "note": "asserts normality; would need crisis \"calm\" if this pool were ever wired to a caller that does not pass hasStress"
+        },
+        {
+          "lineId": "_getSettReason.default[1]",
+          "text": "The settlement is going about its business.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "_getSettReason.default[2]",
+          "text": null,
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "note": "null entry: the draw yields no sentence"
+        }
+      ]
+    }
+  ]
+}

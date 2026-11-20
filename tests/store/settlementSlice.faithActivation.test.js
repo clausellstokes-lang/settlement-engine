@@ -7,6 +7,12 @@
  * embeds — while FREE / ANON accounts load the save verbatim (faith latent +
  * private). Idempotent, tier-gated, and conservative (an explicit deity is never
  * clobbered; a deity-free save is untouched).
+ *
+ * RE-KEYED BY CAUSE (lane TIER-PARITY-FIX V5, 2026-11-09, the owner's tier law; the chair's
+ * ruling V5): premade gods are ENGINE content, not custom content, so the legacy latent
+ * pantheon activates for EVERY owner. The FREE and ANON arms that pinned "never activates"
+ * pinned a tier; they now pin the same activation the premium arm pins, with the latent
+ * record kept on the owner's own save.
  */
 
 import { describe, test, expect } from 'vitest';
@@ -60,21 +66,21 @@ describe('settlementSlice faith activation — the premium gate on save-open', (
     expect(store.getState().settlement.config.primaryDeitySnapshot).toEqual(LATENT.patron);
   });
 
-  test('FREE: opening the SAME save never activates — faith stays latent + private', () => {
+  test('FREE: opening the SAME save activates exactly as premium does (V5, engine content)', () => {
     const store = makeStore('free');
     store.getState().hydrateFromSave(saveWith({ latentPantheon: LATENT }));
     const cfg = store.getState().settlement.config;
-    expect('primaryDeitySnapshot' in cfg).toBe(false);
-    expect('cultDeitySnapshots' in cfg).toBe(false);
+    expect(cfg.primaryDeitySnapshot).toEqual(LATENT.patron);
+    expect(cfg.cultDeitySnapshots).toEqual(LATENT.cults);
     // The latent record is untouched (it is stripped from public projections, not
     // from the owner's own save).
     expect(cfg.latentPantheon).toEqual(LATENT);
   });
 
-  test('ANON: never activates', () => {
+  test('ANON: activates too — no tier read', () => {
     const store = makeStore('anon');
     store.getState().hydrateFromSave(saveWith({ latentPantheon: LATENT }));
-    expect('primaryDeitySnapshot' in store.getState().settlement.config).toBe(false);
+    expect(store.getState().settlement.config.primaryDeitySnapshot).toEqual(LATENT.patron);
   });
 
   test('CONSERVATIVE: an explicit live patron is never clobbered by the latent seed', () => {

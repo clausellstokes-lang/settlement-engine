@@ -29,6 +29,7 @@ import {
   foodTilePoolKey,
   granaryPoolKey,
   impairedServicePoolKey,
+  houseStoppedWhole,
   incomeMixPoolKey,
   leadingExploitation,
   leadingGoodNoun,
@@ -39,6 +40,9 @@ import {
   tradeFlowPoolKey,
   prosperityHeaderPoolKey,
   tradeProfilePoolKey,
+  arcaneMarketPoolKey, theocraticEconomyPoolKey, hiddenHouseRow, hiddenHousePoolKey, famineSourcePoolKey,
+  foodMeansPoolKey, foodSourcesPoolKey, foodProsperityPoolKey, depletedResourceRow, resourceConditionPoolKey,
+  criticalImportRow, criticalImportPoolKey, incomeWeightPoolKey, weakUpstreamNoun, upstreamWeakPoolKey,
 } from '../../src/domain/display/stateProse/economyStateProse.js';
 import { deriveExportPosture } from '../../src/domain/display/exportPosture.js';
 import { deriveNotableAbsences, EXPECTED_SERVICES_BY_TIER } from '../../src/domain/display/servicesDisplay.js';
@@ -525,8 +529,11 @@ describe('DS-ECO-12 — every pool is reached by a MEASURED value', () => {
         .filter(Boolean).map((r) => r.provenance.poolKey);
       expect(drew, `state "${expected}" did not draw its own pool`).toContain(expected);
     }
+    // W1 ECO (2026-11-07): the CRITICAL IMPORT and INCOME WEIGHT pools are construction lenses of
+    // their own, reached in the 'W1 ECO — the construction lenses' block below.
     expect([...lit.keys()].sort(), 'a pool of DS-ECO-12 is mounted and unreachable')
-      .toEqual(Object.keys(DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-12'].pools).sort());
+      .toEqual(Object.keys(DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-12'].pools)
+        .filter((k) => !/^(CRITICAL IMPORT|INCOME WEIGHT):/.test(k)).sort());
     // A drawn sentence is a FILLED sentence: an unsubstituted slot would render `{good}`
     // to a reader, and `fillSlots` is supposed to have refused the variant instead.
     // anchored: the equality above pins `lit` to all ten corpus pool keys, so this loop has a measured length of ten and cannot go vacuous by the map emptying
@@ -689,8 +696,11 @@ describe('DS-ECO-6 — the capture tiers, and the live string this block is a co
         if (rung?.sentence) reached.add(rung.provenance.poolKey);
       }
     }
+    // W1 ECO (2026-11-07): the FLAG and FACET pools are construction lenses of their own,
+    // reached in the 'W1 ECO — the construction lenses' block below.
     expect([...reached].sort(), 'a capture tier is mounted and unreachable')
-      .toEqual(Object.keys(DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-6'].pools).sort());
+      .toEqual(Object.keys(DOSSIER_STATE_PROSE_ECONOMY['DS-ECO-6'].pools)
+        .filter((k) => k.startsWith('TIER:')).sort());
   });
 
   it('transcribes the annex tiers faithfully across the whole 0..100 range', () => {
@@ -1016,7 +1026,9 @@ describe('DESK-7 — the {complexity} band, wired from the chair\'s eleven forms
     /** @param {string} tier @param {string} access @param {string} complexity */
     const drawnKeys = (tier, access, complexity) => new Set(seeds
       .map((seed) => economyStateProse(
-        town({ economicState: { prosperity: tier, tradeAccess: access, economicComplexity: complexity } }),
+        // CENSUS-3c: C3 v3 / C5 lines declare `market`; the measured town keeps one (a market square).
+        // TAIL-CORPUS-ECO-2 (2026-11-15): C5 v2 ("feeds it and no more") declares `food: ≥ secure`; the measured town is fed.
+        town({ economicState: { prosperity: tier, tradeAccess: access, economicComplexity: complexity, foodSecurity: { foodRecord: { band: 'secure' } } }, institutions: [{ name: 'Market square' }] }),
         {}, { seed, audience: AUDIENCE_DM },
       ).prosperityHeader?.sentence)
       .filter(Boolean));
@@ -1305,6 +1317,9 @@ describe('DESK-ECON2 — DS-SUP-3, the catalog and its absences', () => {
       if (expected.includes('healing')) reached.add(serviceCatalogPoolKey([gap('healing')], tier));
     }
     reached.add(impairedServicePoolKey('Tannery'));
+    // BAR6-ECON (8e.open, 2026-11-16): the stopped house's twin, reached where the siege stops every service the house keeps
+    const besieged = { stress: { type: 'under_siege' }, stressors: { type: 'under_siege' }, availableServices: { Commerce: [{ name: 'Caravan organization', desc: 'Assemble merchants with compatible routes into shared caravans.', institution: 'Caravan masters\' exchange' }] } };
+    reached.add(houseStoppedWhole(impairedServicePoolKey('Caravan masters\' exchange'), besieged, 'Caravan masters\' exchange'));
     const authored = Object.keys(DOSSIER_STATE_PROSE_ECONOMY['DS-SUP-3'].pools).sort();
     expect([...reached].filter(Boolean).sort(), 'a DS-SUP-3 pool is unreachable')
       .toEqual(authored);
@@ -1319,5 +1334,97 @@ describe('DESK-ECON2 — DS-SUP-3, the catalog and its absences', () => {
     expect(serviceCatalogPoolKey(absences, 'village')).toBe('THE HEALING GAP');
     expect(serviceCatalogPoolKey(deriveNotableAbsences('thorp', services), 'thorp'))
       .toBe('COMPLETE FOR ITS TIER');
+  });
+});
+
+// ── W1 ECO — THE CONSTRUCTION LENSES (2026-11-07) ───────────────────────────────────────
+// Fourteen generation facts said (WIRING-RULINGS R-W1, R-W9): each lens speaks ONLY when the
+// record holds its fact, every pool it owns is reached by a measured record value, and a
+// drawn sentence never carries an unfilled slot.
+
+describe('W1 ECO — the construction lenses', () => {
+  const base = (eco = {}, extra = {}) => ({
+    name: 'Thornwall', tier: 'town',
+    economicState: {
+      prosperity: 'Moderate', tradeAccess: 'road', economicComplexity: FIXTURE_COMPLEXITY,
+      foodSecurity: { label: 'Secure', stockpile: null }, ...eco,
+    },
+    ...extra,
+  });
+  /** @param {object} settlement @param {string} lens @param {string} tag */
+  const drawn = (settlement, lens, tag) => economyStateProse(settlement, {}, { seed: `w1-${tag}`, audience: AUDIENCE_DM })[lens];
+  const STATES = [
+    ['arcaneMarket', 'DS-ECO-6', 'FLAG: arcaneBlackMarket', base({ safetyProfile: { flags: { arcaneBlackMarket: true } } })],
+    ['theocraticEconomy', 'DS-ECO-6', 'FLAG: theocraticEconomy', base({ safetyProfile: { flags: { theocraticEconomy: true } } })],
+    ['hiddenHouse', 'DS-ECO-6', 'FACET: an underground house', base({}, { institutions: [{ name: 'Smithy' }, { name: 'Underground network', facets: { clandestine: 'clandestine', subterranean: 'subterranean' } }] })],
+    ['hiddenHouse', 'DS-ECO-6', 'FACET: a clandestine house', base({}, { institutions: [{ name: 'Fence ring', facets: { clandestine: 'clandestine' } }] })],
+    ['famineSource', 'DS-ECO-9', 'ACTIVE FAMINE: the failed source, most of the harvest', base({ foodSecurity: { label: 'Active Famine', foodRecord: { band: 'famine', failedSource: 'fish', famineCutPct: 65 } } })],
+    ['famineSource', 'DS-ECO-9', 'ACTIVE FAMINE: the failed source, part of the harvest', base({ foodSecurity: { label: 'Active Famine', foodRecord: { band: 'famine', failedSource: 'grain', famineCutPct: 30 } } })],
+    ['foodMeans', 'DS-ECO-9', 'HOW THE NEED IS MET: much of it brought in', base({ foodSecurity: { label: 'Pressured', foodRecord: { normalImportPct: 35, magicPct: 0 } } })],
+    ['foodMeans', 'DS-ECO-9', 'HOW THE NEED IS MET: part of it by magic', base({ foodSecurity: { label: 'Secure', foodRecord: { normalImportPct: 0, magicPct: 12 } } })],
+    ['foodSources', 'DS-ECO-9', 'FOOD SOURCES: one source', base({ foodSecurity: { label: 'Secure', activeChainsCount: 1, foodRecord: { foodSources: ['livestock'] } } })],
+    // BAR4-CORPUS-ECO (2026-11-16): the record's own band beside its label (v1 now declares `food: ≥ importDependent`, as v2 and v3
+    // declared `food: ≥ secure`): a record with no band answers no band, and the pool was reached here by v1 alone
+    ['foodSources', 'DS-ECO-9', 'FOOD SOURCES: several, the largest named', base({ foodSecurity: { label: 'Secure', activeChainsCount: 2, foodRecord: { band: 'secure', foodSources: ['fish', 'grain'] } } })],
+    ['foodSources', 'DS-ECO-9', 'FOOD SOURCES: four or more', base({ foodSecurity: { label: 'Secure', activeChainsCount: 4, foodRecord: { foodSources: ['grain', 'fish', 'livestock', 'game'] } } })],
+    ['foodOnProsperity', 'DS-ECO-8', 'FOOD AND PROSPERITY: hunger holds the town down', base({ foodSecurity: { label: 'Active Famine', prosperityMod: { type: 'cap' } } })],
+    ['foodOnProsperity', 'DS-ECO-8', 'FOOD AND PROSPERITY: the cost of food weighs on the town', base({ foodSecurity: { label: 'Pressured', prosperityMod: { type: 'penalty' } } })],
+    ['foodOnProsperity', 'DS-ECO-8', 'FOOD AND PROSPERITY: full stores lift the town', base({ foodSecurity: { label: 'Surplus', prosperityMod: { type: 'bonus' } } })],
+    ['resourceCondition', 'DS-ECO-11', 'RESOURCE CONDITION: worked out, recovers in time', base({}, { resourceAnalysis: { resourceConditions: [{ label: 'Open Grazing Land', condition: 'available', recoveryMode: 'natural' }, { label: 'Wild Foraging Areas', condition: 'depleted', recoveryMode: 'natural' }] } })],
+    ['resourceCondition', 'DS-ECO-11', 'RESOURCE CONDITION: worked out, recovers only with work', base({}, { resourceAnalysis: { resourceConditions: [{ label: 'Salt Flats', condition: 'depleted', recoveryMode: 'manual' }] } })],
+    ['criticalImport', 'DS-ECO-12', 'CRITICAL IMPORT: a house needs what the land lacks', base({}, { resourceAnalysis: { imports: { critical: ['metals', 'timber'], reasons: { metals: 'Plains terrain cannot produce this locally', timber: 'Required by Sawmill but not available in Plains terrain' } } } })],
+    ['criticalImport', 'DS-ECO-12', 'CRITICAL IMPORT: the land cannot give it', base({}, { resourceAnalysis: { imports: { critical: ['stone (for major construction)', 'metals'], reasons: { 'stone (for major construction)': 'Plains terrain cannot produce this locally', metals: 'Plains terrain cannot produce this locally' } } } })],
+    ['incomeWeight', 'DS-ECO-12', 'INCOME WEIGHT: the religious houses', base({ safetyProfile: { compound: { religionInfluence: 72, magicInfluence: 80 } } })],
+    ['incomeWeight', 'DS-ECO-12', 'INCOME WEIGHT: the practice of magic', base({ safetyProfile: { compound: { religionInfluence: 20, magicInfluence: 64 } } })],
+    ['upstreamWeak', 'DS-SUP-2', "UPSTREAM WEAK: a chain the town's work draws on is failing", base({ activeChains: [{ label: 'Weapons & Armor', upstreamWeak: ['smelting'] }] })],
+  ];
+
+  it('reaches every construction pool by a measured record value, each sentence filled', () => {
+    const reached = new Map();
+    for (const [lens, block, key, settlement] of STATES) {
+      const rung = drawn(settlement, lens, key);
+      expect(rung?.provenance?.poolKey, `${lens} did not draw ${key}`).toBe(key);
+      expect(rung.provenance.blockId).toBe(block);
+      reached.set(key, rung.sentence);
+    }
+    expect(reached.size, 'twenty-one construction pools, each reached once').toBe(21);
+    // anchored: the size above pins the map at twenty-one drawn sentences, so this loop is measured
+    for (const [key, sentence] of reached) expect(sentence, key).not.toMatch(/\{[a-z_]+\}/);
+  });
+
+  it('is SILENT where the record does not hold the fact (R-W1: said only when not the default)', () => {
+    // BAR5-FOOD (2026-11-16, the chair's FD1): the rung keys on the word the page prints (`foodWordShown`, the food record's
+    // band), so the case's record carries the import-dependent band its label states (it carried `band: 'pressured'`,
+    // which the page prints as Pressured); the assertion is unchanged.
+    const quiet = economyStateProse(base({
+      safetyProfile: { flags: { arcaneBlackMarket: false, theocraticEconomy: false }, compound: { religionInfluence: 40, magicInfluence: 30 } },
+      foodSecurity: { label: 'Import-Dependent', activeChainsCount: 0, prosperityMod: null, foodRecord: { band: 'importDependent', failedSource: null, normalImportPct: 45, magicPct: 0, foodSources: [] } },
+      activeChains: [{ label: 'Bread', upstreamWeak: [] }],
+    }, { institutions: [{ name: 'Smithy' }], resourceAnalysis: { resourceConditions: [{ label: 'Salt Flats', condition: 'available', recoveryMode: 'manual' }], imports: { critical: [], reasons: {} } } }),
+    {}, { seed: 'w1-quiet', audience: AUDIENCE_DM });
+    // The import-dependent rung already says the town buys its food: the brought-in lens stays silent beside it.
+    const lenses = ['arcaneMarket', 'theocraticEconomy', 'hiddenHouse', 'famineSource', 'foodMeans', 'foodSources',
+      'foodOnProsperity', 'resourceCondition', 'criticalImport', 'incomeWeight', 'upstreamWeak'];
+    // anchored: the first STATES arm above draws every one of these lenses over a record that holds its fact
+    expect(lenses.filter((k) => quiet[k] !== null), 'a lens spoke over a record that denies its fact').toEqual([]);
+  });
+
+  it('keeps the slot words in bare-common form and names the house from the record', () => {
+    expect(foodSourcesPoolKey(['venison'])).toBe(null);
+    expect(famineSourcePoolKey({ band: 'pressured', failedSource: 'fish', famineCutPct: 80 })).toBe(null);
+    expect(hiddenHousePoolKey(hiddenHouseRow([{ name: 'Black market bazaar', facets: { subterranean: 'subterranean' } }])))
+      .toBe('FACET: an underground house');
+    expect(criticalImportRow({ critical: ['Quality textiles'], reasons: { 'Quality textiles': 'Hills terrain cannot produce this locally' } }))
+      .toBe(null);
+    expect(depletedResourceRow([{ label: 'Iron Veins', condition: 'depleted', recoveryMode: 'requires_high_magic' }])).toBe(null);
+    expect(weakUpstreamNoun([{ upstreamWeak: ['timber_milling'] }])).toBe('timber milling');
+    expect(upstreamWeakPoolKey(undefined)).toBe(null);
+    expect(arcaneMarketPoolKey({ arcaneBlackMarket: 'yes' }), 'only a true flag speaks').toBe(null);
+    expect(theocraticEconomyPoolKey(null)).toBe(null);
+    expect(foodMeansPoolKey({ normalImportPct: 40, magicPct: 0 }, 'IMPORT-DEPENDENT')).toBe(null);
+    expect(foodProsperityPoolKey({ type: 'other' })).toBe(null);
+    expect(resourceConditionPoolKey({ condition: 'available', recoveryMode: 'natural' })).toBe(null);
+    expect(criticalImportPoolKey(null)).toBe(null);
+    expect(incomeWeightPoolKey({ religionInfluence: 59, magicInfluence: 59 })).toBe(null);
   });
 });

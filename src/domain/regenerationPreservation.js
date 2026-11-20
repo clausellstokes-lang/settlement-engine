@@ -15,7 +15,7 @@
  *
  * NPC ids are positional. generateNPCs stamps `npc_${idx + 1}` over the
  * finished roster, so a reroll re-issues npc_1..npc_N to entirely different
- * characters, and every edge in the settlement — relationships' npc1Id/npc2Id,
+ * characters, and every edge in the settlement — relationships' from/to,
  * factions' member object references — is keyed on those ids. Inserting a
  * preserved NPC alongside the fresh roster therefore drags a stale id into a
  * namespace that has already reissued it: two people answer to npc_3, and each

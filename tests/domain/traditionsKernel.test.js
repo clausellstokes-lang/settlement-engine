@@ -283,6 +283,27 @@ describe('content/voice — tradition beat reasons stay in house voice (content-
   });
 });
 
+describe('the owner line names an institution as a place, never a "who" (SW-9; SW-3\'s ownerBit defect)', () => {
+  const beatOf = (rec, prosperity = 'Comfortable') => {
+    const out = runTick({ settlement: town({ prosperity, legit: 55 }), recs: [rec], weeks: 9 });
+    expect(out.news.length, 'the observance resolves this tick').toBeGreaterThan(0);
+    return JSON.stringify(out.news[0]);
+  };
+  it('an institution-kept observance is "held at" it, and nothing answers for it', () => {
+    const rec = { ...makeRec({ ownerKind: 'institution' }), ownerLabel: 'Common grazing land' };
+    for (const prosperity of ['Comfortable', 'Subsistence']) {
+      const beat = beatOf(rec, prosperity);
+      expect(beat).toContain('Common grazing land');
+      expect(beat, 'an institution is no who').not.toMatch(/Common grazing land, who answer|Common grazing land keep it|kept by Common grazing land/); // anchored: beat is asserted to contain 'Common grazing land' on the line above
+    }
+    expect(beatOf(rec)).toContain('It is held at Common grazing land.');
+  });
+  it('a power-kept observance still names the people who answer for it (the control)', () => {
+    const rec = { ...makeRec({ ownerKind: 'faction' }), ownerLabel: 'the Merchant Guild' };
+    expect(beatOf(rec)).toContain('It is kept by the Merchant Guild, who answer for its fortune.');
+  });
+});
+
 describe('§16 (Wave C) — the fair trade-lane pulse', () => {
   const fairRec = (o = {}) => makeRec({ id: 'tradition.ashford.fair', coreMotif: { element: 'harvest', act: 'fair' }, name: 'The Harvest Fair', scaleBand: 4, ...o });
   const onRoute = (route) => ({ ...town({ prosperity: 'Comfortable', legit: 55 }), config: { tradeRouteAccess: route } });

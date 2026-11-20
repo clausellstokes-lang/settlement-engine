@@ -13,6 +13,7 @@ import {
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { availableNativeResourceKeys } from '../../domain/resourceSemantics.js';
+import { ENTREPOT_LINE } from './incomeLineSiblings.js';
 
 
 // deriveLocalCommodities
@@ -140,7 +141,7 @@ export const generateTradeIncomeStreams = (tier, institutions = [], route = 'roa
     bonuses.push({
       source: 'Entrepôt Trade',
       percentage: tier === 'metropolis' ? 25 : tier === 'city' ? 20 : 18,
-      desc: 'Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads position.',
+      desc: ENTREPOT_LINE, // its twin where no house of transit stands: incomeLineSiblings.js :: trueIncomeDesc
     });
   if (
     route === 'port'

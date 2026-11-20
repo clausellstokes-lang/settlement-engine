@@ -1,0 +1,4 @@
+[gate-tail] start:  10:01:29 up  1:36,  0 user,  load average: 3.59, 1.88, 1.56 · cores: 4
+page-census: rendering 12 dossiers (4 workers) into /tmp/page-census-9SLfIs
+page-census --grid: 0 fall(s)
+[gate-tail] end:  10:01:58 up  1:36,  0 user,  load average: 3.58, 2.05, 1.62

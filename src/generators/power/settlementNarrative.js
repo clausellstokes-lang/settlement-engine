@@ -5,7 +5,8 @@
  */
 import { random as _rng } from '../../kernel/rngContext.js';
 import { pickRandom2, random01 } from '../helpers.js';
-
+import { pairSharesTrade, pairTradeKnown } from '../../data/npcData.js'; // BAR2-PEOPLE-2 (PP3b)
+import { powerNameAfterArticle, powerNameWithArticle, powerPossessive } from '../../domain/display/powerSentenceName.js'; // NAMES-1 (CN1, the seventh chair's ruling of 2026-11-20, vetoable by the owner): a power in a sentence takes its article; on the blank line, so no cited line moves
 // STRESS_FLAVOR
 export const STRESS_FLAVOR = {
   under_siege: ['debtor_creditor', 'enemy', 'patron_client'],
@@ -26,16 +27,55 @@ export const STRESS_FLAVOR = {
 };
 
 // STRESS_RUMORS — each renders a rumour phrasing from a relationship object
+// {colour} (CENSUS-2e, R-R; ledger docs/census/declarations/STRESS_RUMORS.json): the fixed words presume
+// only the two NPCs the key supplies, and the `tension` slot is upstream relationship prose, declared there.
+// THE TIE IS DIRECTED (PEOPLE-4 TIES, R-P7; people/ties.js): `npc1Name` is the `from` end's name and leads every
+// phrasing, `npc2Name` the `to` end's — the existing templates, the direction choosing who leads (M-4).
+// W3 POW (the owner's style law of 2026-11-07; STYLE-AUDIT #58/#59/#190): rumours [0] and [1] print the tie's own
+// detail alone (the frames "connected by something neither discusses openly", "more complicated than their public
+// roles suggest" said nothing); [2] glosses the archetype LABEL (people/ties.js :: typeName, npcData's labels) in
+// plain words in place of the lower-cased label. An unknown label reads "are closely tied".
+const TIE_GLOSS = Object.freeze({
+  'Commercial Complicity': 'are partners in a trade neither would want looked at',
+  'Protection Arrangement': 'are bound by a protection deal',
+  'Corrupt Arrangement': 'are in a crooked arrangement together',
+  'Active Suppression': 'are at open odds, one working to shut the other down',
+  'Security Contract': 'are bound by a contract for protection',
+  'Sacred Commission': 'are bound by work done for the faith',
+  'Institutional Cover': 'are tied together, one giving the other cover',
+  'Arcane Supplier': 'are tied by a trade in magical goods',
+  'Financial Dependence': 'are tied by money, one depending on the other',
+  'Jurisdictional Tension': 'are at odds over who has the say',
+  'Professional Rivalry': 'are rivals in the same line of work',
+  'Mentor and Successor': 'are teacher and heir',
+  'Mutual Leverage': 'each hold something over the other',
+  'Pragmatic Alliance': 'are allies of convenience',
+  'Genuine Respect': 'respect each other, and it is real',
+  'Outstanding Debt': 'are tied by a debt not yet paid',
+  'Family Complication': 'are family, and it is not simple',
+  'Unresolved History': 'share a past neither has put behind them',
+});
+// BAR2-PEOPLE-2 (PP3b, the chair's ruling of 2026-11-15, vetoable by the owner): a gloss that claims a PRESENT SHARED
+// TRADE takes its twin where the tie's two cards share none (`npcData.js :: pairSharesTrade`: one house family, or one
+// category that is not `other`), read off the town's own cards; the rumour's draw is unchanged.
+const TIE_GLOSS_NO_SHARED_TRADE = Object.freeze({
+  'Professional Rivalry': 'are rivals, and neither gives the other ground',
+});
+/** @param {any} rel @param {Map<unknown, any> | undefined} cards @returns {string} */
+const tieGlossOf = (rel, cards) => {
+  const twin = TIE_GLOSS_NO_SHARED_TRADE[rel.typeName];
+  const a = cards?.get(rel.from), b = cards?.get(rel.to);
+  if (twin && pairTradeKnown(a, b) && !pairSharesTrade(a, b)) return twin;
+  return TIE_GLOSS[rel.typeName] || 'are closely tied';
+};
 const STRESS_RUMORS = [
   (rel) => {
     var detail;
-    return `${rel.npc1Name} and ${rel.npc2Name} are connected by something neither discusses openly: ${((detail = rel.description.split('—')[1]) == null ? void 0 : detail.trim()) || rel.tension}`;
+    return `${((detail = rel.description.split('—')[1]) == null ? void 0 : detail.trim()) || rel.tension}`;
   },
-  (rel) =>
-    `${rel.npc1Name}'s relationship with ${rel.npc2Name} is more complicated than their public roles suggest. ${rel.tension}`,
-  (rel) => {
-    var typeName;
-    return `The relationship between ${rel.npc1Name} and ${rel.npc2Name} is best understood as ${((typeName = rel.typeName) == null ? void 0 : typeName.toLowerCase()) || 'significant'}. ${rel.tension}`;
+  (rel) => `${rel.tension}`,
+  (rel, cards) => {
+    return `${rel.npc1Name} and ${rel.npc2Name} ${tieGlossOf(rel, cards)}. ${rel.tension}`;
   },
   (rel) => rel.tension,
 ];
@@ -64,27 +104,27 @@ const sentenceStart = value => {
 // genSuccessionNarr — build a list of narrative sentences from a settlement
 // context object `ctx`, each gated on a tension/state condition.
 export const genSuccessionNarr = (ctx) => {
-  var issueMessage, stabilityUnstable, stabilityFractured, stabilityVolatile;
+  var issueMessage, stabilityUnstable, stabilityFractured, stabilityVolatile; ctx = { ...ctx, topFaction: ctx.topFaction ? powerNameWithArticle(ctx.topFaction) : ctx.topFaction, govFaction: ctx.govFaction ? powerNameWithArticle(ctx.govFaction) : ctx.govFaction }; // NAMES-1 (CN1): the two powers with their article ("the Corrupt Council"), lower-case, `sentenceStart` capitalising one that opens a sentence; the tier's own wording ("the town council") reads as before; read once, so the pair's dedup below compares them alike
   const narratives = [];
   if (ctx.topTension === 'succession_crisis')
     narratives.push(
-      `${ctx.name}'s ruler is ageing and the succession is contested; ${ctx.topFaction || 'the dominant faction'} has already positioned for the transition.`
+      `${ctx.name}'s ruler is old and the succession is disputed; ${ctx.topFaction || 'the dominant power'} already has its candidate ready.`
     );
   if (ctx.topTension === 'corruption_scandal')
     narratives.push(
-      `Evidence of corruption in ${ctx.govFaction || 'the council'} has surfaced; ${ctx.topNPCName ? ctx.topNPCName + ', the ' + ctx.topNPCRole + ',' : 'the most senior official'} is part of the answer and part of the problem.`
+      `Proof of corruption in ${ctx.govFaction || 'the council'} has come out, and ${ctx.topNPCName ? ctx.topNPCName + ', the ' + ctx.topNPCRole + ',' : 'the most senior official'} is expected to deal with it while being part of it.`
     );
   if (ctx.topTension === 'outside_debt')
     narratives.push(
-      `${ctx.name}'s debt obligations are becoming visible in its decisions; the creditor hasn't moved yet, but the calculation of when to move is being made.`
+      `${ctx.name} owes money, and it shows in what its leaders decide. The creditor has not called the debt in yet, but is choosing the moment.`
     );
   if (ctx.topTension === 'infiltration_fear')
     narratives.push(
-      `Rumours of enemy agents in ${ctx.name} have made the settlement paranoid in ways that are being exploited by at least one of the factions paranoia is supposed to protect against.`
+      `Talk of enemy agents has ${ctx.name} suspicious of everyone, and at least one power is using the fear for its own ends.`
     );
   if (!ctx.isViable && ctx.viabilityIssues?.length > 0)
     narratives.push(
-      `${ctx.name} has a structural problem it hasn't solved (${((issueMessage = ctx.viabilityIssues[0].message) == null ? void 0 : issueMessage.toLowerCase()) || 'an economic vulnerability'}) that will eventually force a decision.`
+      `${ctx.name} has a problem it has not solved (${((issueMessage = ctx.viabilityIssues[0].message) == null ? void 0 : issueMessage.toLowerCase()) || 'an economic vulnerability'}), and sooner or later its leaders will have to face it.`
     );
   if (ctx.hasNeighborConflict && ctx.neighbor)
     narratives.push(
@@ -92,7 +132,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.prosperity === 'Wealthy' || ctx.prosperity === 'Thriving')
     narratives.push(
-      `${ctx.name} is prosperous enough that the real conflicts are about who controls the surplus. ${ctx.topFaction || 'the dominant faction'} has the most and wants more.`
+      `${ctx.name} is prosperous enough that the real conflicts are about who controls the surplus. ${sentenceStart(ctx.topFaction || 'The dominant power')} has the most and wants more.`
     );
   if (ctx.prosperity === 'Poor') {
     const [costGov, costTop] = resolvePartyPair(
@@ -100,13 +140,13 @@ export const genSuccessionNarr = (ctx) => {
     );
     narratives.push(
       costTop
-        ? `${ctx.name} is poor enough that every resource decision is a political one; ${costGov} and ${costTop} disagree about who bears the cost.`
-        : `${ctx.name} is poor enough that every resource decision is a political one; ${costGov} decides who bears the cost, and is resented for it.`
+        ? `${ctx.name} is poor, and ${costGov} and ${costTop} quarrel over who goes without.`
+        : `${ctx.name} is poor; ${costGov} decides who goes without, and is resented for it.`
     );
   }
   if (ctx.commodity && ctx.isCrossroads)
     narratives.push(
-      `${ctx.name} sits where trade roads cross; its ${ctx.commodity} trade moves through it in both directions, and whoever controls the tariff controls the settlement's revenue. A fact not lost on ${ctx.topFaction || 'the guilds'}.`
+      `${ctx.name} sits where trade roads cross, and its ${ctx.commodity} passes through in both directions. Whoever sets the toll controls the settlement's money, and ${ctx.topFaction || 'the guilds'} knows it.`
     );
   if (ctx.commodity && ctx.isPort)
     narratives.push(
@@ -119,12 +159,12 @@ export const genSuccessionNarr = (ctx) => {
   )
   {
     const [contestTop, contestGov] = resolvePartyPair(
-      ctx.topFaction, 'the dominant faction', ctx.govFaction, 'the council'
+      ctx.topFaction, 'the dominant power', ctx.govFaction, 'the council'
     );
     narratives.push(
       contestGov
-        ? `${ctx.name} looks stable from the outside; the relationship between ${contestTop} and ${contestGov} is more contested than it appears.`
-        : `${ctx.name} looks stable from the outside; ${contestTop}'s hold on that stability is more contested than it appears.`
+        ? `${sentenceStart(contestTop)} and ${contestGov} are at odds in ${ctx.name}, more than they let outsiders see.`
+        : `The ${powerPossessive(powerNameAfterArticle(contestTop))} hold on ${ctx.name} is weaker than it looks from outside.` // NAMES-1 (CN1): the possessive of the article form
     );
   }
   if (ctx.topTension === 'economic_disparity') {
@@ -133,13 +173,13 @@ export const genSuccessionNarr = (ctx) => {
     );
     narratives.push(
       surplusGov
-        ? `The wealth gap in ${ctx.name} has become a fact of daily life: ${surplusTop} controls the surplus and ${surplusGov} cannot or will not force redistribution. Resentment is structural now, not episodic.`
-        : `The wealth gap in ${ctx.name} has become a fact of daily life: ${surplusTop} controls the surplus and will not redistribute it. Resentment is structural now, not episodic.`
+        ? `The rich and the poor of ${ctx.name} live different lives now: ${surplusTop} holds the surplus, and ${surplusGov} cannot or will not make it share. The resentment does not ease between bad seasons.`
+        : `The rich and the poor of ${ctx.name} live different lives now: ${surplusTop} holds the surplus and will not share it, and the resentment does not ease between bad seasons.`
     );
   }
   if (ctx.topTension === 'religious_tension')
     narratives.push(
-      `Two versions of faith are competing in ${ctx.name}; both claim legitimacy and both have the ear of someone powerful. ${sentenceStart(ctx.govFaction || 'The council')} has avoided taking sides so far, which means both factions resent it equally.`
+      `Two versions of faith are competing in ${ctx.name}; both claim legitimacy and both have the ear of someone powerful. ${sentenceStart(ctx.govFaction || 'The council')} has avoided taking sides so far, which means both powers resent it equally.`
     );
   if (ctx.topTension === 'guild_conflict')
     narratives.push(
@@ -151,7 +191,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'external_threat' && !ctx.neighbor)
     narratives.push(
-      `The threat approaching ${ctx.name} is not yet visible to most residents. ${sentenceStart(ctx.topNPCName || 'The most senior figure')} knows the intelligence and has not shared it. The decision about when to share it (and how) is the real crisis.`
+      `Trouble is coming to ${ctx.name}, and most people do not know it yet. ${sentenceStart(ctx.topNPCName || 'The most senior figure')} knows, and has told nobody.`
     );
   if (ctx.topTension === 'resource_scarcity' && ctx.commodity) {
     const [numbersTop, numbersGov] = resolvePartyPair(
@@ -165,7 +205,7 @@ export const genSuccessionNarr = (ctx) => {
   }
   if (ctx.topTension === 'resource_scarcity' && !ctx.commodity)
     narratives.push(
-      `Something essential in ${ctx.name} is running short: food, water, or coin. The shortage is being managed through allocation decisions that are, functionally, political decisions. ${sentenceStart(ctx.govFaction || 'The council')} controls the allocation.`
+      `${ctx.name} is running short of something it needs, and ${ctx.govFaction || 'the council'} decides who gets what is left.`
     );
   if (ctx.topTension === 'crime_wave')
     narratives.push(
@@ -173,30 +213,30 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'magical_controversy')
     narratives.push(
-      `Magic in ${ctx.name} has done something recently that people cannot agree on how to interpret. ${sentenceStart(ctx.govFaction || 'The council')} is being pressured to regulate. By people who disagree about what regulation means.`
+      `A recent piece of magic has divided ${ctx.name}. ${sentenceStart(ctx.govFaction || 'The council')} is being pushed to ban or license it, by people who cannot agree which.`
     );
   if (ctx.topTension === 'generational_divide')
     narratives.push(
-      `In ${ctx.name} the older residents and the younger ones are not arguing about the same things. The older generation thinks the argument is about values; the younger thinks it is about access. Both are right.`
+      `In ${ctx.name} the old say the young have no respect, and the young say the old keep everything for themselves.`
     );
   if (ctx.topTension === 'occupation_legacy')
     narratives.push(
-      `${ctx.name} carries the memory of an occupation that officially ended. Collaborators and resisters still share the same streets, the same market, the same ${ctx.govFaction || 'council'}. The official position is that this is resolved.`
+      ((ctx) => `${ctx.name} carries the memory of an occupation that officially ended. Collaborators and resisters still share the same streets, the same market, the same ${ctx.govFaction || 'council'}. The official position is that this is resolved.`)({ ...ctx, govFaction: ctx.govFaction && `rule under ${ctx.govFaction}` }) // NAMES-2 (CN1): the value carries the power with its article ("the same rule under the Elder Council"; a tier's wording, "under the village elders"), so the banked line reads as it did
     );
   if (ctx.topTension === 'disputed_land')
     narratives.push(
-      `A land dispute in ${ctx.name} that was dormant is now active. Someone filed a claim, or found a document, or simply started pressing. ${sentenceStart(ctx.govFaction || 'The council')} has delayed ruling because there is no outcome that does not cost them something.`
+      `An old land dispute in ${ctx.name} has flared up again. ${sentenceStart(ctx.govFaction || 'The council')} keeps putting off a ruling, because whichever side loses will hold it against them.`
     );
   if (ctx.topTension === 'population_friction')
     narratives.push(
-      `${ctx.name} is absorbing people it did not plan for, or losing people it expected to keep. Either way, the settlement's social assumptions no longer match its actual composition, and ${ctx.govFaction || 'the council'} is governing for the settlement that used to exist.`
+      `${ctx.name} is not the place it was a few years ago, and ${ctx.govFaction || 'the council'} still governs as if it were.`
     );
   if (ctx.topTension === 'leadership_vacuum')
     narratives.push(
-      `${ctx.name} has not had a strong authority since ${ctx.topNPCName || 'the last leader'} left or died. The pretense of normal governance is maintained. Every decision of consequence is being deferred or made informally by ${ctx.topFaction || 'the faction with the most to gain'}.`
+      `Nobody has really led ${ctx.name} since the last strong leader went. Its leaders still meet, but anything that matters is put off or settled privately by ${ctx.topFaction || 'the power with the most to gain'}.`
     );
   narratives.push(
-    `The most important thing happening in ${ctx.name} right now is happening below the surface: ${ctx.topNPCName ? ctx.topNPCName + ', the ' + ctx.topNPCRole + ',' : 'the most senior figure'} knows it and isn't discussing it.`
+    `${ctx.topNPCName ? sentenceStart(ctx.topNPCName) + ', the ' + ctx.topNPCRole + ',' : 'The most senior figure'} knows something about ${ctx.name} that nobody else does, and is keeping it quiet.`
   );
   return narratives;
 };
@@ -224,7 +264,9 @@ export const genRelNarrative = (input) => {
   scored.sort((a, b) => b.score - a.score);
   const topRel = (topScored = scored[0]) == null ? void 0 : topScored.r;
   if (!topRel) return null;
-  const phrasing = pickRandom2(STRESS_RUMORS)(topRel);
+  const cards = new Map((Array.isArray(input.npcs) ? input.npcs : []).map((n) => [n?.id, n])); // BAR2-PEOPLE-2 (PP3b): the tie's two cards
+  const phrasing = pickRandom2(STRESS_RUMORS)(topRel, cards);
+  // the tie's `from` end leads (`npc1`), its `to` end follows (`npc2`)
   return {
     npc1: topRel.npc1Name,
     npc2: topRel.npc2Name,

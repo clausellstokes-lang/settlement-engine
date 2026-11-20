@@ -21,7 +21,7 @@ import { compareCodepoint } from '../../domain/deterministicSort.js';
 import { safe } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
-import { supplyChainNoteInWords } from '../../domain/display/engineKeysInText.js';
+import { chainHousesOf, chainSourceOf } from '../../domain/display/chainHouses.js';
 
 // chainId -> definition (for upstream import labels + fallback outputs).
 const CHAIN_DEFS = {};
@@ -38,9 +38,11 @@ const STATUS = {
   impaired:            { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Impaired' },
   broken:              { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Broken' },
 };
-const getStatus = (s) => STATUS[s] || STATUS.vulnerable;
+// SURFACES-1 item 1: a chain the tab's card gives no state (chainStateShown.js :: NO_STATE_SHOWN) takes the tab's neutral
+// colour (EconomicsTab.jsx :: FLOW_STATUS.operational's), never Vulnerable's.
+const NO_STATE = { color: swatch['#6B5340'], bg: swatch['#FAF8F4'], border: swatch['#E0D0B0'] }; // the design swatch's exact values (import at the file's end)
+const getStatus = (s) => (s === '' ? NO_STATE : STATUS[s] || STATUS.vulnerable);
 
-const IMPORT = { color: '#2a5a8a', bg: '#eef2fb', border: '#a0b0d8' };
 const MISSING = { color: '#9c8068', bg: '#f8f5f0', border: '#c8b898' };
 const EXPORT = { color: '#1a5a28', bg: '#f0faf2', border: '#88c880' };
 const OUTPUT = { color: '#6b5340', bg: '#faf8f4', border: '#d8c8a8' };
@@ -69,26 +71,32 @@ function Connector() {
   return <Text style={{ fontSize: pt['8'], color: palette.muted, marginRight: 2, marginBottom: 2 }}>&gt;</Text>;
 }
 
-function ChainRow({ chain, instNames, primaryExports }) {
+function ChainRow({ chain, instNames, primaryExports, town }) { const shown = chainPrintName(chain, town); // COHERENCE-AGREE-6 (F1): the source node prints under the town's access
   const st = getStatus(chain.status);
   const def = CHAIN_DEFS[chain.chainId] || {};
-  const missing = chain.upstreamMissing || [];
   const isExportable = chain.exportable && !chain.entrepot;
 
-  const insts = (chain.processingInstitutions || []).map((name) => ({
-    name,
-    present: instNames.some((n) => n.toLowerCase().includes(String(name).toLowerCase().split(/[\s(]/)[0])),
-  }));
+  // R2-CODE-B item 1b, the chair's ruling R1 (REVIEW-R2-STAGES finding 3): the houses by the seam's house
+  // label, each once (domain/display/chainHouses.js), the screen's chain card's own read — never a rank's
+  // count range the roster does not hold. `present` is the same first-word read this row always made.
+  // PDF-2 item 1 (BRIEF-BAR8, 2026-11-17; ruling BR10 (3), amended): handed the card (the chain the tab's card renders:
+  // `SupplyChainFlow` below) and its town, as the tab's card is, so a spent ground's row lists no source house the supply
+  // rule reads at work on another ground of its own (the seventeen mines).
+  const insts = chainHousesOf(chain.processingInstitutions, instNames, town ? { chain, town } : null);
 
   // Canonical good id first, substring fallback — the same predicate as the
   // web SupplyChainsPanel, or the PDF badge disagrees with the screen when
   // subsumption keeps a different alias spelling as the surviving export.
   const exportIds = new Set((primaryExports || []).map(exactGoodId).filter(Boolean));
-  const outputs = (chain.outputs || def.outputs || []).slice(0, 3).map((o) => {
+  const outputs = (town ? chainOutputsOnCard(chain, town) : (chain.outputs || def.outputs || [])).slice(0, 3).map((o) => { // SURFACES-1 item 2: the tab card's outputs; LEFT-PDF L2 (BRIEF-LEFT, 2026-11-17; vetoable by the owner): by the tab card's own reading (economicsCrisisMarks.js :: chainOutputsOnCard, ruling CY1), not chainOutputsShown beneath it
     const oid = exactGoodId(o);
     return {
       label: o,
-      isExport: isExportable && (
+      // TAIL-EXPORTS-PDF-2: with the town, the list is the tab's printed Exports and an output is on it by its own name
+      // (exportedAsPrinted, below). The first-word read badged "Milled lumber" off "Milled flour", and the good id is a
+      // family ("timber", "fuel", "clay", "leather"): it badged "Milled lumber" off "Shipbuilding timber" and "Peat fuel"
+      // off "Coal". Without the town, the record's list as before.
+      isExport: isExportable && (town ? exportedAsPrinted(o, exportsPrintedOf(town)) : (
         (oid != null && exportIds.has(oid)) ||
         (primaryExports || []).some((ex) => {
           // ex may be a bare string OR the {good/name/label} object shape —
@@ -97,11 +105,11 @@ function ChainRow({ chain, instNames, primaryExports }) {
           return e.includes(String(o).toLowerCase().split(' ')[0]) ||
             String(o).toLowerCase().includes(e.split(' ')[0]);
         })
-      ),
+      )),
     };
   });
 
-  const importedUpstream = missing.map((uid) => CHAIN_DEFS[uid]?.label || uid);
+  const refused = chainYieldRefused(chain);
 
   return (
     <View
@@ -117,21 +125,19 @@ function ChainRow({ chain, instNames, primaryExports }) {
       }}
     >
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
-        {chain.resource ? (
+        {/* R2-CODE-B round 3, ruling (d) (#804): no ground the record says is absent (chainHouses.js); with the town, a
+            toll renamed by its access names that access (COHERENCE-AGREE-6 F1), as the screen's card reads it (R2-CODE-B-7). */}
+        {chainSourceOf(chain, shown) ? (
           <>
             <Node color={st.color} bg={st.bg} border={st.border}>
-              {safe(chain.resource)}{chain.resourceDepleted ? ' (depleted)' : ''}
+              {safe(chainSourceOf(chain, shown))}{chain.resourceDepleted ? ' (depleted)' : ''}
             </Node>
             <Connector />
           </>
         ) : null}
 
-        {importedUpstream.map((imp, i) => (
-          <View key={`im-${i}`} style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Node {...IMPORT} dashed>{`Import: ${safe(imp)}`}</Node>
-            <Connector />
-          </View>
-        ))}
+        {/* R2-CODE-B-SIDE item 2: no "Import: <a chain's label>" (a category of work is not a good), as the
+            screen's card (SupplyChainsPanel.jsx :: chainFlowFacts.importedUpstream). */}
 
         {insts.map((inst, i) => (
           <View key={`in-${i}`} style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -148,7 +154,18 @@ function ChainRow({ chain, instNames, primaryExports }) {
           </View>
         ))}
 
-        {outputs.length > 0 ? (
+        {outputs.length > 0 && refused ? (
+          <>
+            <Connector />
+            {/* COHERENCE-AGREE-4 (item 3′): a chain the exporter refuses draws its table's outputs in the missing
+                style, as what it yields when whole; nothing is marked exported. */}
+            {outputs.map((o, i) => (
+              <Node key={`o-${i}`} {...MISSING} dashed italic>
+                {i === 0 ? `${NORMALLY_YIELDS}: ` : ''}{safe(o.label)}
+              </Node>
+            ))}
+          </>
+        ) : outputs.length > 0 ? (
           <>
             <Connector />
             {outputs.map((o, i) => (
@@ -160,11 +177,14 @@ function ChainRow({ chain, instNames, primaryExports }) {
         ) : null}
       </View>
 
-      {chain.upstreamNote ? (
-        <Text style={{ ...type.caption, fontSize: pt['7'], color: palette.muted, fontStyle: 'italic', marginTop: 2 }}>
-          · {safe(supplyChainNoteInWords(chain.upstreamNote, CHAIN_DEFS))}
-        </Text>
-      ) : null}
+      {/* TAIL-EXPORTS-PDF-2 (rulings E3/E17): a chain that lives on what a crisis stops takes the tabs' one leaf's mark
+          (domain/display/crisisStoppedRow.js); the words are the leaf's. */}
+      {((mark) => (mark ? (
+        <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.second, fontStyle: 'italic', marginTop: 2 }}>{mark}</Text>
+      ) : null))(town ? markOnPage(town, 'chain', chain) : null)}
+
+      {/* R2-CODE-B-SIDE item 1: the generator's upstream note leaves the row, as it leaves the screen's card
+          (SupplyChainsPanel.jsx :: chainFlowFacts): no read the row holds makes it true. */}
     </View>
   );
 }
@@ -182,14 +202,14 @@ function Legend() {
   return (
     <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginBottom: 4 }}>
       <Swatch color={STATUS.running.bg} border={STATUS.running.border} label="Running" />
-      <Swatch color={STATUS.vulnerable.bg} border={STATUS.vulnerable.border} label="Vulnerable / upstream imported" />
+      <Swatch color={STATUS.vulnerable.bg} border={STATUS.vulnerable.border} label="Vulnerable" />
       <Swatch color={STATUS.impaired.bg} border={STATUS.impaired.border} label="Impaired / institution missing" />
       <Swatch color={EXPORT.bg} border={EXPORT.border} label="EXPORT = exported for income" />
     </View>
   );
 }
 
-function CategoryGroup({ needLabel, needKey, chains, instNames, primaryExports }) {
+function CategoryGroup({ needLabel, needKey, chains, instNames, primaryExports, town }) {
   const impaired = chains.filter((c) => c.status === 'impaired' || c.status === 'broken').length;
   const vulnerable = chains.filter((c) => c.status === 'vulnerable').length;
   return (
@@ -221,14 +241,14 @@ function CategoryGroup({ needLabel, needKey, chains, instNames, primaryExports }
         </Text>
       </View>
       {chains.map((c, i) => (
-        <ChainRow key={c.chainId || i} chain={c} instNames={instNames} primaryExports={primaryExports} />
+        <ChainRow key={c.chainId || i} chain={c} instNames={instNames} primaryExports={primaryExports} town={town} />
       ))}
     </View>
   );
 }
 
-export function SupplyChainFlow({ chains, instNames = [], primaryExports = [], tier = 'village' }) {
-  const list = (chains || []).filter((c) => c && c.status !== 'unexploited');
+export function SupplyChainFlow({ chains, instNames = [], primaryExports = [], tier = 'village', town = null }) {
+  const list = (chains || []).filter((c) => c && c.status !== 'unexploited').map((c) => chainCardOnPage(c, town).chain); // SURFACES-1 item 1: the tab's shown state (colour, group count, order); PDF-2 items 5, 6 (BRIEF-BAR8, 2026-11-17; vetoable by the owner): the chain the tab's card renders (`chainCardUnderSiege` over `chainAsShown`), so its state, its outputs and its houses are the card's
   if (!list.length) return null;
 
   const isTownPlus = tier === 'town' || tier === 'city' || tier === 'metropolis';
@@ -254,7 +274,7 @@ export function SupplyChainFlow({ chains, instNames = [], primaryExports = [], t
       <View>
         <Legend />
         {sorted.map((g) => (
-          <CategoryGroup key={g.needKey} {...g} instNames={instNames} primaryExports={primaryExports} />
+          <CategoryGroup key={g.needKey} {...g} instNames={instNames} primaryExports={primaryExports} town={town} />
         ))}
       </View>
     );
@@ -264,10 +284,47 @@ export function SupplyChainFlow({ chains, instNames = [], primaryExports = [], t
     <View>
       <Legend />
       {list.map((c, i) => (
-        <ChainRow key={c.chainId || i} chain={c} instNames={instNames} primaryExports={primaryExports} />
+        <ChainRow key={c.chainId || i} chain={c} instNames={instNames} primaryExports={primaryExports} town={town} />
       ))}
     </View>
   );
 }
 
 export default SupplyChainFlow;
+
+// COHERENCE-AGREE-4 (item 3′): at the end of the file so no line-keyed register row above it moves.
+import { NORMALLY_YIELDS, chainYieldRefused } from '../../domain/chainYield.js';
+import { chainPrintName } from '../../domain/display/chainPrintName.js';
+import { tradeListsAsPrinted, tradeMarkOf } from '../../domain/display/tradeListDisplay.js';
+import { chainOutputsOnCard } from '../../domain/display/economicsCrisisMarks.js'; // LEFT-PDF L2: the tab card's outputs
+import { markOnPage, chainCardOnPage } from '../lib/crisisMarksOnPage.js';
+import { swatch } from '../../design/tokens.js'; // TAIL-CLOSE-SRC-1: NO_STATE's three colours, the same hex through the swatch
+
+/** The tab's printed Exports of a record, read once a record. @type {WeakMap<object, ReadonlyArray<string>>} */
+const PRINTED_EXPORTS = new WeakMap();
+
+/**
+ * TAIL-EXPORTS-PDF-2 (ruling E1): the goods the tab's Exports print (tradeListDisplay.js :: tradeListsAsPrinted), none
+ * where a siege stops trade.
+ * @param {object} town
+ * @returns {ReadonlyArray<string>}
+ */
+function exportsPrintedOf(town) {
+  let list = PRINTED_EXPORTS.get(town);
+  if (!list) {
+    const lists = tradeListsAsPrinted(/** @type {Parameters<typeof tradeListsAsPrinted>[0]} */ (town));
+    list = lists.tradeStopped ? [] : lists.exports;
+    PRINTED_EXPORTS.set(town, list);
+  }
+  return list;
+}
+
+/**
+ * Is this output on the printed Exports, by its own name (the list's item without its trade mark)?
+ * @param {unknown} output @param {ReadonlyArray<unknown>} printed
+ * @returns {boolean}
+ */
+function exportedAsPrinted(output, printed) {
+  const name = String(output ?? '').trim().toLowerCase();
+  return !!name && (printed || []).some((ex) => tradeMarkOf(goodText(ex)).label.trim().toLowerCase() === name);
+}

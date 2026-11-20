@@ -9,8 +9,8 @@
  * projectedPatronBindingsFor`), so a covert patron reads "not known" until the world turns it up.
  * This block is that projection's FIRST non-test consumer.
  *
- * ⛔ DM-ONLY, FAIL-CLOSED, on WatchPanel's composed seam (props the container holds; no second
- * premium comparison). Any other reader renders NOTHING and throws nothing, and a world where the
+ * ⛔ DM-ONLY, FAIL-CLOSED, on WatchPanel's composed seam (the render path alone: the view and the
+ * data, never the tier). Any other reader renders NOTHING and throws nothing, and a world where the
  * counter-game or the brokerages are dark renders nothing either. Not mounted by this wave: the
  * town page's mount is the page owner's.
  */
@@ -26,11 +26,11 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
 
 /**
  * @param {{ worldState?: any, settlement?: any, regionalGraph?: any,
- *   viewerIsPremium?: boolean, playerView?: boolean, publicDossier?: boolean }} props
+ *   playerView?: boolean, publicDossier?: boolean }} props
  */
-export default function HousesBlock({ worldState = null, settlement = null, regionalGraph = null, viewerIsPremium = false, playerView = false, publicDossier = false }) {
+export default function HousesBlock({ worldState = null, settlement = null, regionalGraph = null, playerView = false, publicDossier = false }) {
   const mobile = useIsMobile();
-  const includeGroundTruth = viewerIsPremium && !playerView && !publicDossier;
+  const includeGroundTruth = !playerView && !publicDossier;
   const id = settlement && settlement.id != null ? String(settlement.id) : '';
   const houses = useMemo(() => {
     if (!includeGroundTruth || !id || !counterIntelActive(worldState)) return [];

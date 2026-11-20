@@ -18,13 +18,15 @@
  * No store access, no async, no side effects — safe to import anywhere.
  */
 
-// ── Limits ───────────────────────────────────────────────────────────────────
+// ── Limit ────────────────────────────────────────────────────────────────────
 
-export const CHRONICLE_LIMITS = {
-  free:     5,
-  premium:  Infinity,
-  elevated: Infinity, // developer / admin
-};
+/**
+ * ONE limit for every tier, no tier read (the owner's tier law, 2026-11-09; the chair's
+ * ruling V4): the entries are the owner's own credit-paid narrations, so none is ever
+ * rotated to `summary` for want of a plan. If infrastructure ever needs a bound, it is one
+ * finite N for all tiers, the owner's to set — never a tier lever.
+ */
+export const CHRONICLE_LIMIT = Infinity;
 
 // ── UUID (tiny, self-contained — avoids pulling a dep just for ids) ──────────
 

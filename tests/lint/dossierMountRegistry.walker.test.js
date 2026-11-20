@@ -305,16 +305,20 @@ function routingLedger(mounts, unmounted) {
 /** The design's own worked example: one economy header, one fact speaking once. */
 const CLEAN = Object.freeze([
   Object.freeze({
-    mount: 'economics.prosperityHeader', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-1', rung: 'sentence',
+    // F12 CRISIS-BLIND (2026-11-04): DS-ECO-1 partitions by two crisis dimensions, as its shipped row declares.
+    mount: 'economics.prosperityHeader', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-1', rung: 'sentence', dimensions: ['crisis', 'hunger'],
+  }),
+  // census-2b item 2 (db3ed88c1): DS-GEN-1's economic_disparity v1 and outside_debt v1/v3 declare
+  // walls, so the block partitions by [severity,walls] (measured: [severity] at its parent) and
+  // the three worked-example rows declare both. ['severity'] -> ['severity', 'walls'] at db3ed88c1.
+  Object.freeze({
+    mount: 'history.tensions', tab: 'history', desk: 'general', blockId: 'DS-GEN-1', rung: 'sentence', dimensions: ['severity', 'walls'],
   }),
   Object.freeze({
-    mount: 'history.tensions', tab: 'history', desk: 'general', blockId: 'DS-GEN-1', rung: 'sentence', dimensions: ['severity'],
+    mount: 'power.tensions', tab: 'power', desk: 'general', blockId: 'DS-GEN-1', rung: 'glance', dimensions: ['severity', 'walls'],
   }),
   Object.freeze({
-    mount: 'power.tensions', tab: 'power', desk: 'general', blockId: 'DS-GEN-1', rung: 'glance', dimensions: ['severity'],
-  }),
-  Object.freeze({
-    mount: 'overview.tensions', tab: 'overview', desk: 'general', blockId: 'DS-GEN-1', rung: 'glance', dimensions: ['severity'],
+    mount: 'overview.tensions', tab: 'overview', desk: 'general', blockId: 'DS-GEN-1', rung: 'glance', dimensions: ['severity', 'walls'],
   }),
 ]);
 
@@ -380,11 +384,14 @@ describe('C2 mount registry — the guards can see the defects they guard', () =
     expect(TAB_VOCABULARY.has('economy'), 'the desk name is not a tab id').toBe(false);
     expect(DESK_VOCABULARY.has('economy'), 'the desk name is a desk').toBe(true);
     // The corpus join is populated, or every totality claim below is free.
-    expect(CORPUS_BLOCKS.length, 'the corpus join emptied').toBe(68);
-    expect(blockDimensions('DS-GEN-1')).toEqual(['severity']);
+    // 68 -> 69 (W2 DEF third seat, 2026-11-07): DS-DEF-12, the isolation-support block, mounted at
+    // `viability.isolationSupport`.
+    expect(CORPUS_BLOCKS.length, 'the corpus join emptied').toBe(69);
+    // ['severity'] -> ['severity', 'walls'] at census-2b item 2 (db3ed88c1): three DS-GEN-1 lines declare walls.
+    expect(blockDimensions('DS-GEN-1')).toEqual(['severity', 'walls']);
     expect(blockDimensions('DS-GEN-6')).toEqual(['deficit']);
     expect(blockDimensions('DS-GEN-9')).toEqual(['anchor']);
-    expect(blockDimensions('DS-ECO-1')).toEqual([]);
+    expect(blockDimensions('DS-ECO-1')).toEqual(['crisis', 'hunger']);
   });
 
   test('the clean worked example passes every rule', () => {
@@ -445,23 +452,25 @@ describe('C2 mount registry — the guards can see the defects they guard', () =
     // to say. Here it is a build-time red naming the block and the dimension.
     const silent = mutate(1, { dimensions: undefined });
     expect(dimensionDeclarationFaults(silent))
-      .toEqual(['history.tensions: DS-GEN-1 partitions by [severity] and the row declares []']);
+      .toEqual(['history.tensions: DS-GEN-1 partitions by [severity,walls] and the row declares []']);
     expect(rulesThatSpeak(silent)).toEqual(['dimensions']);
     // And the other way: a row claiming a dimension its block does not carry is a desk
     // that will assemble a reading nothing consumes.
     const invented = mutate(0, { dimensions: ['severity'] });
     expect(dimensionDeclarationFaults(invented))
-      .toEqual(['economics.prosperityHeader: DS-ECO-1 partitions by [] and the row declares [severity]']);
+      .toEqual(['economics.prosperityHeader: DS-ECO-1 partitions by [crisis,hunger] and the row declares [severity]']);
     expect(rulesThatSpeak(invented)).toEqual(['dimensions']);
     // A wrong dimension name is caught by the same equality, not by a separate list.
     expect(dimensionDeclarationFaults(mutate(1, { dimensions: ['anchor'] })))
-      .toEqual(['history.tensions: DS-GEN-1 partitions by [severity] and the row declares [anchor]']);
+      .toEqual(['history.tensions: DS-GEN-1 partitions by [severity,walls] and the row declares [anchor]']);
   });
 
   test('a mount with no JSX site, and one with two, both red the reachability arm', () => {
     // The synthetic probe the design names: a position declared and never built.
+    // CENSUS-3c: the probe borrows a block that partitions by nothing — DS-ECO-6 (DS-ECO-2 now
+    // partitions by `hunger`, R-K), so only the reachability arm can speak.
     const probe = [...CLEAN, {
-      mount: 'overview.__probe', tab: 'overview', desk: 'economy', blockId: 'DS-ECO-2', rung: MOUNT_RUNGS.GLANCE,
+      mount: 'overview.__probe', tab: 'overview', desk: 'economy', blockId: 'DS-ECO-6', rung: MOUNT_RUNGS.GLANCE,
     }];
     expect(unreachableMounts(probe, WIRED_TREE))
       .toEqual(['overview.__probe: 0 sites under src/components']);
@@ -1409,7 +1418,7 @@ describe('THE FIRST-PAINT LAW — a sentence behind a shut fold reaches no reade
    * THIS FILE GETTING IT WRONG. `Section` is a plain header UNLESS it is passed
    * `collapsible`; `Collapsible` IS the fold and takes no such prop. Keying on the
    * attribute alone graded every `<Collapsible defaultOpen={false}>` as OPEN — there are
-   * three in the tree today (`HistoryTab.jsx:230`/`:252`, `NPCsTab.jsx:162`) and the first
+   * three in the tree then (`HistoryTab.jsx:230`/`:252`, and the NPCs tab's tie fold, cut by N8) and the first
    * mount to land inside one would have passed this arm in silence.
    *
    * A fold is open only when `defaultOpen` is STATICALLY true — bare, `{true}`, or absent

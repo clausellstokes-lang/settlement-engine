@@ -1,0 +1,618 @@
+{
+ "id": "hooks.NPC_FACTION_LOYALTY",
+ "source": "src/data/npcData.js :: NPC_FACTION_LOYALTY (NPC plot-hook titles)",
+ "drawKind": "R",
+ "pool": {
+  "declares": [
+   "the NPC category (key)"
+  ],
+  "crisisScoped": false,
+  "colour": false,
+  "notes": "SHARED WITH CENSUS-4 (NPCs): declared here only because reader:hook-pools reads the Plot Hooks tab whole; CENSUS-4 owns the table and its application. drawLoyalty -> drawUnique (always 1 roll, safe for a gate); inlandHookLine F5 post-draw.",
+  "needs": [],
+  "excludes": []
+ },
+ "rows": [
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::government#0",
+   "text": "A sealed letter arrived for them three weeks ago. They haven't opened it. They won't say why.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::government#1",
+   "text": "They've been quietly buying up property in a district that hasn't been announced as a development site. Yet.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::government#2",
+   "text": "One of their staff has started asking questions about records from seven years ago. They've been reassigned...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::government#3",
+   "text": "A merchant they publicly opposed is now publicly supporting them. No explanation offered.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::government#4",
+   "text": "Their most trusted advisor hasn't been seen in four days. The official story changes each time it's told.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::government#5",
+   "text": "They know who committed a crime the guard is currently investigating. They're not telling the guard.",
+   "needs": [
+    "guardPresence"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"the guard is currently investigating\""
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::government#6",
+   "text": "Someone has been leaving anonymous notes in their office pointing to a colleague's corruption. The notes ar...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::government#7",
+   "text": "They've been meeting privately with someone from outside the settlement whose identity they won't disclose.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::government#8",
+   "text": "A routine appointment they made three weeks ago has been rescheduled four times. Each time they initiated t...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::government#9",
+   "text": "Someone who publicly supports them is being paid by someone who opposes them. They know this.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::government#10",
+   "text": "They received a deposition in a civil case that, if acted on, would be correct, and would ruin someone they...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::military#0",
+   "text": "Three guards have gone missing in the same district on night patrol. The report filed says they deserted.",
+   "needs": [
+    "guardPresence"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"Three guards ... on night patrol\" (soak1k-1, soak1k-14)"
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::military#1",
+   "text": "Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, some...",
+   "needs": [
+    "guardPresence"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"the armoury\""
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::military#2",
+   "text": "They received orders from above that contradict what they know to be right. They haven't acted on either yet.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::military#3",
+   "text": "A prisoner in their custody knows something valuable. So does someone with reason to ensure they never speak.",
+   "needs": [
+    "guardPresence"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"a prisoner in their custody\""
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::military#4",
+   "text": "They've noticed the same group of faces at multiple locations where incidents occurred. No one else has.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::military#5",
+   "text": "Someone is paying their soldiers more than their salary. The soldiers aren't saying who.",
+   "needs": [
+    "guardPresence"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"their soldiers\" (F10 defenceTwinLine already rewrites soldiers words post-draw)"
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::military#6",
+   "text": "A spy they turned is now being turned back, and feeding information in both directions.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::military#7",
+   "text": "The ambush that killed two of their best people wasn't random. Someone knew the patrol route.",
+   "needs": [
+    "guardPresence"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"the patrol route\""
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::military#8",
+   "text": "A recruit they turned away has since joined a different outfit. The different outfit is now paying them to ...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::military#9",
+   "text": "They are carrying out orders they believe are wrong. They have not yet decided at what point they stop carr...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::military#10",
+   "text": "A weapons cache they were responsible for is smaller than it should be. They haven't reported it yet.",
+   "needs": [
+    "guardPresence"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"a weapons cache they were responsible for\""
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::religious#0",
+   "text": "A parishioner confessed something to them three months ago. The information is dangerous. They cannot act o...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::religious#1",
+   "text": "The holy relic in their keeping is not what everyone believes it is. Only they know this.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::religious#2",
+   "text": "Someone has been leaving offerings at the shrine that shouldn't be possible. The site has been sealed.",
+   "needs": [
+    "institution: temple"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"the shrine\""
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::religious#3",
+   "text": "A novice has the gift. They know what that means for the novice. They're not sure what to do.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::religious#4",
+   "text": "They received a directive from the hierarchy that contradicts their own theology. Compliance is expected.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::religious#5",
+   "text": "A healing they performed was successful in a way they cannot explain. It's happened twice now.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::religious#6",
+   "text": "The previous holder of their position left a letter, sealed, to be opened after their death. It wasn't.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::religious#7",
+   "text": "A member of their congregation is systematically working against the faith. From inside it.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::religious#8",
+   "text": "They have been asked to perform a ceremony they have theological objections to. The person asking has lever...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::religious#9",
+   "text": "A donation was made to the institution under conditions the donor didn't disclose publicly. The conditions ...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::religious#10",
+   "text": "They know which of the current leadership will be the next to fall from grace. They are waiting.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::economy#0",
+   "text": "A shipment they weren't expecting arrived and is now in their warehouse. They don't know who sent it or wha...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::economy#1",
+   "text": "A business rival has offered them a partnership with terms so good it must be a trap. They can't find the t...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::economy#2",
+   "text": "One of their most reliable suppliers has gone dark. The goods are still arriving. Someone else is sending t...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::economy#3",
+   "text": "They have evidence of price-fixing across the whole market. Publishing it helps their competition as much a...",
+   "needs": [
+    "market"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"price-fixing across the whole market\""
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::economy#4",
+   "text": "A young trader has been undercutting them in ways that shouldn't be possible on their claimed capital.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::economy#5",
+   "text": "Someone is buying up their debts. Quietly. They don't know who, or why, or when they plan to call them in.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::economy#6",
+   "text": "A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "\"lost at sea\": the cargo may sail elsewhere; reader:hook-pools [sea] reads \"the sea\" — declared nothing (the merchant ships through others), open question"
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::economy#7",
+   "text": "Their master craftsman is talking to a rival. They haven't confronted them. They're not sure what they'd do.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::economy#8",
+   "text": "A contract they signed in difficult times has a clause they didn't fully read. Someone has read it.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::economy#9",
+   "text": "They have been slowly acquiring a controlling interest in a competitor through intermediaries. The competit...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::economy#10",
+   "text": "A supplier is providing goods of uncertain provenance. The price is too good to ask questions. People have ...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::criminal#0",
+   "text": "One of their people is talking to the guard. They don't know which one yet. They're watching.",
+   "needs": [
+    "guardPresence"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"talking to the guard\" (soak1k-13)"
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::criminal#1",
+   "text": "A valuable item came through their network recently. Three different parties have asked about it quietly.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::criminal#2",
+   "text": "Someone in the legitimate government is playing both sides. That's useful, until it isn't.",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "\"the legitimate government\": neutral"
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::criminal#3",
+   "text": "A job went wrong in a way that suggests information was leaked. They have three suspects.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::criminal#4",
+   "text": "They're protecting someone from something worse. The someone doesn't know and wouldn't thank them.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::criminal#5",
+   "text": "A new face has appeared in three separate incidents involving their operations. Coincidence or surveillance?",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::criminal#6",
+   "text": "The guard captain has a file. They know because someone who works for the guard captain also works for them.",
+   "needs": [
+    "guardPresence"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"The guard captain has a file\""
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::criminal#7",
+   "text": "Someone tried to rob one of their fronts. The attempt was professional. That's more worrying than amateur.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::magic#0",
+   "text": "An experiment failed in a way that shouldn't be possible. The results have been sealed. They're still think...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::magic#1",
+   "text": "A student asked a question three weeks ago that they haven't been able to answer. That's new.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::magic#2",
+   "text": "Something in the settlement is absorbing ambient magical energy. The readings are increasing.",
+   "needs": [
+    "magic"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::magic#3",
+   "text": "They've been approached by someone who knows things about their research that were never made public.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::magic#4",
+   "text": "An old colleague has sent a message asking for a meeting. The colleague was declared dead six years ago.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::magic#5",
+   "text": "The magical ward they placed on the vaults was bypassed. Not broken. Bypassed. That requires inside knowledge.",
+   "needs": [
+    "magic"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::magic#6",
+   "text": "They have two competing theories about what is happening to magic in this region. Both are alarming.",
+   "needs": [
+    "magic"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::magic#7",
+   "text": "Someone has been making inquiries about their past research. Not the published work, the unpublished work.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::other#0",
+   "text": "They overheard something they shouldn't have and don't know what to do with the information.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::other#1",
+   "text": "A regular customer has stopped coming. The reason they've been given doesn't make sense.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::other#2",
+   "text": "Someone left an item in their care and hasn't returned. The item is valuable. The absence is now suspicious.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::other#3",
+   "text": "Three different people have asked them the same unusual question. None of them knew each other.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::other#4",
+   "text": "They found something hidden in a place it shouldn't be. They put it back. They haven't told anyone.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::other#5",
+   "text": "A stranger passed through, asked specific questions, and left before they could follow up.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::other#6",
+   "text": "Something they were told was destroyed is apparently not destroyed.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::other#7",
+   "text": "They know something small that connects to something much larger. They haven't realised the connection. Yet.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::other#8",
+   "text": "Someone they trust completely has started behaving in ways that don't add up.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::other#9",
+   "text": "They've been offered money to not ask questions about something they hadn't even started asking about.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::other#10",
+   "text": "A document they were asked to witness contained a clause they noticed at the time and said nothing about.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::other#11",
+   "text": "Their predecessor left something behind (in a place where it shouldn't have been), and they haven't reporte...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::small_settlement#0",
+   "text": "Everyone in the settlement is behaving slightly differently toward a visitor from outside. Not unfriendly, ...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::small_settlement#1",
+   "text": "There is a building no one talks about, goes into, or mentions. It is clearly maintained. No one will say b...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::small_settlement#2",
+   "text": "The oldest resident refuses to speak about a specific year. Others confirm the year exists. No one remember...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::small_settlement#3",
+   "text": "Something is left at the crossroads each new moon. No one admits to leaving it. It is always gone by morning.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::small_settlement#4",
+   "text": "Two families who should be feuding are recently, unexpectedly civil. Neither will explain why.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::small_settlement#5",
+   "text": "A child has been asking questions about a person no one has heard of, insisting this person lived here rece...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::small_settlement#6",
+   "text": "The well gives good water. The spring above it dried up three years ago. No one mentions this.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.NPC_FACTION_LOYALTY::small_settlement#7",
+   "text": "They buried someone last season that they refer to only as 'the traveller'. They will not say more.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  }
+ ]
+}

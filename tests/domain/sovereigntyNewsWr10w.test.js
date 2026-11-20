@@ -97,6 +97,19 @@ describe('WR-10 sovereignty news — the address chain', () => {
     expect(noisy.reasons).toHaveLength(1);
   });
 
+  // FIX-PULSE-DEFECTS (audit C2·53): the asset reader's receipt rides the no-trade seed as a
+  // reason built from IDS ("asset_town is a steading of seller_seat, …"); the reader filter
+  // then dropped it for its underscores — every time, with real ids — and a digit-free id
+  // would have printed raw. The composer reads the parties' names into the line.
+  test('the no-trade reason built from the asset read prints with names, never dropped and never an id', () => {
+    const entry = project('sovereignty_no_trade', {
+      reasons: ['asset_town is a steading of seller_seat, and a steading is property that may change hands.'],
+    });
+    expect(entry.reasons).toContain('Ashford is a steading of Irontown, and a steading is property that may change hands.');
+    // anchored: the same reasons are asserted to carry the named line on the line above.
+    expect(entry.reasons.join(' ')).not.toMatch(/asset_town|seller_seat|buyer_seat/);
+  });
+
   test('a kind missing its required identities returns null rather than throwing', () => {
     for (const kind of SOVEREIGNTY_KINDS) {
       expect(() => sovereigntyNewsEntry({ evidence: { kind, tick: 1 }, snapshot: SNAPSHOT })).not.toThrow();

@@ -19,14 +19,24 @@ import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
 import { SystemStateSnapshot } from '../../src/pdf/sections/SystemStateSnapshot.jsx';
 import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
+import { governingModifierWordsOf } from '../../src/domain/display/governingModifierWords.js';
 import { ViabilityAssessment } from '../../src/pdf/sections/ViabilityAssessment.jsx';
 import { Relationships } from '../../src/pdf/sections/Relationships.jsx';
 import { Institutions } from '../../src/pdf/sections/Institutions.jsx';
 import { NotableNPCs } from '../../src/pdf/sections/NotableNPCs.jsx';
 import { Overview } from '../../src/pdf/sections/Overview.jsx';
-import { PROXY_SERVICE_HOSTS } from '../../src/data/servicesData.js';
+import { PlotHooks } from '../../src/pdf/sections/PlotHooks.jsx';
+import { HistoryFounding } from '../../src/pdf/sections/HistoryFounding.jsx';
+import { Cover } from '../../src/pdf/sections/Cover.jsx';
+import { TonightAtTheTable } from '../../src/pdf/sections/TonightAtTheTable.jsx';
+import { plotHookPlace } from '../../src/pdf/lib/plotHookIndex.js';
+import { stakeLines, unprintedFacts } from '../../src/pdf/lib/crisisPrint.js';
+import { STAKE_REASONS } from '../../src/domain/crisis/crisisCast.js';
+import { composeTonightSheet } from '../../src/domain/summary/tonightSheet.js';
+import { buildJournalPages } from '../../src/foundry/journalPages.js';
 import { institutionBackers } from '../../src/domain/dossier/powerSupport.js';
-import { institutionDisplayName } from '../../src/domain/display/institutionDisplayName.js';
+import { institutionHouseLabel } from '../../src/domain/display/institutionDisplayName.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // Recursively flatten an element tree to its text leaves. Function components are
 // executed (plain functions in src/pdf — no hooks); hosts walked via children.
@@ -196,11 +206,15 @@ describe('#18 PowerStructure — RULE & SUCCESSION subsection (regime lineage / 
     g.modifier = 'military-dominated';
     const on = joined(PowerStructure({ settlement: modded, vm: buildViewModel({ settlement: modded }) }));
     expect(on).toContain('GOVERNING');
-    expect(on, 'the modifier prints beside the governing name').toContain('military-dominated');
+    // RE-KEYED BY IDENTITY (POWERS-15, REVIEW-POWERS-5 A7; one reader for one fact on every surface): the modifier prints
+    // beside the governing name in the Power tab's own words (display/governingModifierWords.js), never the stored key
+    expect(governingModifierWordsOf(modded), 'anchored: the fixture bears the force family out').toBe('armed sway');
+    expect(on, 'the modifier prints beside the governing name').toContain('armed sway');
+    expectAbsentWithAnchor(on, 'military-dominated', 'armed sway', 'the stored key is never printed');
     delete g.modifier;
     const off = joined(PowerStructure({ settlement: modded, vm: buildViewModel({ settlement: modded }) }));
     expect(off).toContain('GOVERNING');
-    expect(off).not.toContain('military-dominated'); // anchored: the GOVERNING box is on this render
+    expect(off).not.toContain('armed sway'); // anchored: the GOVERNING box is on this render
   });
 
   it('self-gates to nothing with no lineage and no occupation (byte-identical off-state)', () => {
@@ -224,15 +238,16 @@ describe('F13 / X-2 — the PDF Relationships chapter prints each tie with its t
   });
 });
 
-describe('F14 / RS-19 — the PDF Institutions chapter lists no proxy-surfaced menu under a proxy house', () => {
-  it('a menu surfaced through a proxy host prints in the Services chapter only', () => {
+// RS-19, kept in the RECORD since lane REVIEW-INTAKE unit 2 (2026-11-06): the former proxy
+// houses own their menus, so a row naming one prints under that house like any other.
+const FORMER_PROXY_HOSTS = new Set(['dwellings (1-8)', 'dwellings (5-25)', 'dwellings (15-100)', 'housing (75-650 households)', 'housing (500-4000 households)', 'water source', 'multiple water sources', 'sewage system', 'farmland', 'common grazing land', 'access to external mill', 'massive prison']);
+describe('F14 / RS-19 — the PDF Institutions chapter prints a former proxy house\'s own menu', () => {
+  it('a row naming a former proxy house prints under it', () => {
     const rows = Object.values(settlement.availableServices || {}).flat();
-    const proxied = rows.filter((r) => r && PROXY_SERVICE_HOSTS[String(r.institution || '').toLowerCase()]);
-    const owned = rows.filter((r) => r && r.institution && !PROXY_SERVICE_HOSTS[String(r.institution).toLowerCase()] && r.desc);
-    expect(proxied.length, 'fixture premise: the city surfaces a menu through a proxy host').toBeGreaterThan(0);
+    const hosted = rows.filter((r) => r && r.desc && FORMER_PROXY_HOSTS.has(String(r.institution || '').toLowerCase()));
+    expect(hosted.length, 'fixture premise: the city has a row naming a former proxy house').toBeGreaterThan(0);
     const on = joined(Institutions({ settlement, vm }));
-    expect(on, 'a real house still lists its menu').toContain(owned[0].desc);
-    for (const r of proxied) if (r.desc && !owned.some((o) => o.desc === r.desc)) expect(on).not.toContain(r.desc); // anchored: a real menu row is asserted on this render
+    for (const r of hosted) expect(on, `${r.institution}: ${r.name}`).toContain(r.desc);
   });
 });
 
@@ -243,7 +258,9 @@ describe('X-40 / X-45 — the PDF Institutions chapter prints the Backs line und
     const on = joined(Institutions({ settlement, vm }));
     expect(on).toContain('Backs');
     for (const [raw, powers] of backers) {
-      expect(on, `${raw} prints`).toContain(institutionDisplayName(raw));
+      // RE-KEYED (R2-CODE-B round 3, ruling (a)): the chapter prints each house by its label, the one
+      // display leaf (the display name less the catalogue's count range, gate or condition).
+      expect(on, `${raw} prints`).toContain(institutionHouseLabel(raw));
       for (const p of powers) expect(on, `${raw} backs ${p}`).toContain(p);
     }
   });
@@ -266,7 +283,10 @@ describe('N6 / X-2 — the PDF Notable NPCs chapter prints no hook text (the Plo
       conflicts: [{ parties: ['The Wharf', 'The Hall'], issue: 'Tolls', intensity: 'high', hooks: ['Someone pays the toll-takers twice.'] }],
       stress: [{ label: 'Under siege', summary: 'The walls are ringed.', hook: 'The besiegers want the abbot.' }] } };
     const on = joined(Overview({ settlement, vm: vmHooked }));
-    expect(on).toContain('The guilds quarrel over the wharf.');
+    // The tension row prints by its label (STYLE-RULINGS-2 B4, 2026-11-09: its description's one home
+    // is History › Live tensions, so the Overview keeps the label and the parties).
+    expect(on).toContain('Guild Conflict');
+    expect(on).not.toContain('The guilds quarrel over the wharf.'); // anchored: the tension row is on this render, one line above
     expect(on).toContain('Tolls');
     expect(on, 'the crisis card owns its hook (X-3)').toContain('The besiegers want the abbot.');
     expect(on).not.toContain('A guild clerk wants the old charter burned.'); // anchored: the tension row is on this render
@@ -316,5 +336,125 @@ describe('#19 ViabilityAssessment — MAGIC LEGALITY subsection (liveWorld && ma
     } } };
     expect(joined(ViabilityAssessment({ settlement, vm: deadMagic })), 'dead magic ⇒ no MAGIC LEGALITY block')
       .not.toContain('MAGIC LEGALITY');
+  });
+});
+
+// ⛔ STYLE-RULINGS-2 B4 (2026-11-09): STYLE-0 §3's keep-on rules, applied. One surface keeps a
+// sentence's full text; every other prints the label, or the label and where to read it. Each case
+// asserts the home still prints the text (so the absence elsewhere is not vacuous).
+describe('B4 — one home per sentence inside one export (the keep-on rules)', () => {
+  // RE-KEYED BY IDENTITY at SW-B4's merge point (STYLE-2-MERGE, 2026-11-09): THE OWNER'S VETO 3 struck the pointer line
+  // ("In full in Plot Hooks (04):") and the prior state returned — the Tonight sheet prints each hook's own text.
+  it('Tonight prints each hook\'s own text (the owner\'s veto 3: no pointer into chapter 04); Plot Hooks prints it too', () => {
+    const sheet = composeTonightSheet(settlement);
+    const placed = sheet.hooks.filter((h) => h.source && plotHookPlace(vm.hooks.all, h.text));
+    expect(placed.length, 'fixture premise: the sheet carries a titled hook chapter 04 lists').toBeGreaterThan(0);
+    const tonight = joined(TonightAtTheTable({ settlement, vm }));
+    const hooks = joined(PlotHooks({ settlement, vm }));
+    for (const h of placed) {
+      expect(tonight).toContain(h.text.replace(/\.$/, ''));
+      expect(tonight).not.toContain('In full in Plot Hooks'); // anchored: the hook's own text is asserted on the line above
+      expect(hooks).toContain(h.text.replace(/\.$/, ''));
+    }
+  });
+
+  it('the Overview keeps a tension\'s label and parties, not its description; History keeps the description', () => {
+    const t = { label: 'guild_conflict', severity: 'high', description: 'The guilds quarrel over the wharf.', parties: ['The Wharf', 'The Hall'], hooks: [] };
+    const over = joined(Overview({ settlement, vm: { ...vm, overview: { ...vm.overview, tensions: [t], conflicts: [] } } }));
+    expect(over).toContain('Guild Conflict');
+    expect(over).toContain('The Wharf / The Hall');
+    expect(over).not.toContain('The guilds quarrel over the wharf.'); // anchored: the row's label and parties are asserted above
+    const plot = joined(PlotHooks({ settlement, vm: { ...vm, hooks: { ...vm.hooks, tensions: [t] } } }));
+    expect(plot).toContain('UNDERLYING TENSIONS');
+    expect(plot).not.toContain('The guilds quarrel over the wharf.'); // anchored: the list's heading is asserted one line above
+    const hist = joined(HistoryFounding({ settlement, vm: { ...vm, history: { ...vm.history, tensions: [t] } } }));
+    expect(hist).toContain('The guilds quarrel over the wharf.');
+  });
+
+  it('the Overview keeps the origin line, not the historical character; the notable connection prints its names and tie only', () => {
+    const over = joined(Overview({ settlement, vm: { ...vm, overview: { ...vm.overview,
+      character: 'The flood is the one event people here still date things by.',
+      settlementReason: 'A ford where the river runs shallow.',
+      prominentRelationship: { npc1: 'Anna Weber', npc2: 'Karl Brandt', type: 'mutual leverage', phrasing: 'Each holds a letter the other wants burned.' },
+    } } }));
+    expect(over).toContain('A ford where the river runs shallow.');
+    expect(over).toContain('Anna Weber & Karl Brandt');
+    expect(over).not.toContain('The flood is the one event'); // anchored: the origin line is asserted above
+    expect(over).not.toContain('Each holds a letter'); // anchored: the pair's names are asserted above
+  });
+
+  it('the Relationships banner opens empty when the tie\'s own row prints the line', () => {
+    const line = 'Each holds a letter the other wants burned.';
+    const rel = joined(Relationships({ settlement, vm: { ...vm, relationships: { ...vm.relationships,
+      prominentRelationship: { npc1: 'Anna Weber', npc2: 'Karl Brandt', type: 'mutual leverage', tension: line },
+      internal: [{ npc1Name: 'Anna Weber', npc2Name: 'Karl Brandt', typeName: 'Mutual Leverage', description: 'They work together.', tension: line }],
+    } } }));
+    expect(rel).toContain('PROMINENT RELATIONSHIP');
+    expect(rel.split(line).length - 1, 'the line prints once, on its row').toBe(1);
+  });
+
+  it('the untouched houses keep their own rows (the owner\'s veto 3); the two facts print once on the Tonight chapter', () => {
+    const u = STAKE_REASONS.untouched;
+    const out = stakeLines([
+      { factionId: 'The Abbey', stake: 'gains', reason: STAKE_REASONS.gainsChurch },
+      { factionId: 'Noble Families', stake: 'split', reason: u },
+      { factionId: 'The Garrison', stake: 'split', reason: u },
+      { factionId: 'Merchant Guild', stake: 'split', reason: u },
+    ]);
+    // RE-KEYED BY IDENTITY at SW-B4's merge point (STYLE-2-MERGE, 2026-11-09): THE OWNER'S VETO 3 struck the joined
+    // sentence for the untouched houses; the prior state returned — every house keeps its own row.
+    expect(out.rows.map((k) => k.factionId)).toEqual(['The Abbey', 'Noble Families', 'The Garrison', 'Merchant Guild']);
+    expect(out.untouched).toBeNull();
+    expect(stakeLines([{ factionId: 'Elder Council', stake: 'split', reason: u }]).rows.map((k) => k.factionId)).toEqual(['Elder Council']);
+    const facts = [{ id: 'food', label: 'Food', text: 'Pressured.' }, { id: 'defence', label: 'Defence', text: 'Palisade.' }];
+    expect(unprintedFacts(facts, [{ id: 'food', text: 'Pressured.' }]).map((f) => f.id)).toEqual(['defence']);
+  });
+
+  it('the machinery leaves the reader\'s page: the assessment\'s counts, the anchor\'s units and score, the coherence box', () => {
+    const via = joined(ViabilityAssessment({ settlement, vm: { ...vm, viability: { ...vm.viability,
+      metrics: { criticalIssueCount: 1, dependencyCount: 2, warningCount: 0, tradeAccess: 'mountain_pass' } } } }));
+    expect(via).toContain('KEY METRICS');
+    expect(via).toContain('Mountain Pass');
+    expect(via).not.toMatch(/issue count|dependency count|warning count/i); // anchored: the metrics block is asserted above
+    expect(via).not.toContain('mountain_pass'); // anchored: same block
+  });
+
+  // ONE HOME PER EXPORT (the chair's B4 ruling (2), 2026-11-09): the home is History where the variant
+  // prints it; a variant without History (campaign_state) carries the full text on the Overview.
+  it('each tension description and the historical character print exactly once per export, in every variant', () => {
+    const descs = (settlement.history?.currentTensions || []).map((t) => t?.description).filter(Boolean);
+    const character = settlement.history?.historicalCharacter;
+    expect(descs.length, 'fixture premise: the city carries live tensions with descriptions').toBeGreaterThan(0);
+    expect(character, 'fixture premise: the city carries a historical character').toBeTruthy();
+    const count = (text, needle) => text.split(needle).length - 1;
+    for (const variant of ['canon_dossier', 'draft_brief', 'campaign_state']) {
+      const text = joined(SettlementPDF({ settlement, variant, phase: 'canon' }));
+      for (const d of descs) expect(count(text, d), `${variant}: ${d}`).toBe(1);
+      expect(count(text, character), `${variant}: the historical character`).toBe(1);
+    }
+    const lean = joined(Overview({ settlement, vm, historyPrinted: false }));
+    for (const d of descs) expect(lean, 'campaign_state: the Overview is the home').toContain(d);
+    const full = joined(Overview({ settlement, vm, historyPrinted: true }));
+    expect(full).toContain('Each tension in full: History & Founding (17).');
+    for (const d of descs) expect(full).not.toContain(d); // anchored: the pointer to History is asserted one line above
+  });
+
+  it('the cover prints one tier word: the free preview\'s where the export is anonymous', () => {
+    const both = joined(Cover({ settlement, vm, isFounder: true, isAnonymous: true }));
+    expect(both).toContain('Free preview');
+    expect(both).not.toContain('FOUNDER EDITION'); // anchored: the preview's word is asserted one line above
+    expect(joined(Cover({ settlement, vm, isFounder: true, isAnonymous: false }))).toContain('FOUNDER EDITION');
+  });
+
+  it('the Foundry journal keeps the same homes: hooks on Plot Hooks, no coherence figures, no NPC hook text', () => {
+    const pages = buildJournalPages(vm, { settlement });
+    const page = (name) => pages.find((p) => p.name === name)?.markdown || '';
+    const all = pages.map((p) => p.markdown).join('\n');
+    expect(page('Plot Hooks').length).toBeGreaterThan(0);
+    expect(pages.some((x) => x.name.startsWith('NPC — ')), 'fixture premise: an NPC page prints').toBe(true);
+    // anchored: each NPC page is non-empty (its Role row), and the premise above proves one prints
+    for (const p of pages.filter((x) => x.name.startsWith('NPC — '))) expect(p.markdown).not.toContain('## Hooks');
+    expect(all).not.toContain('checks passed'); // anchored: the Plot Hooks page is asserted present above
+    expect(all).not.toMatch(/aggression ×/); // anchored: same journal
   });
 });

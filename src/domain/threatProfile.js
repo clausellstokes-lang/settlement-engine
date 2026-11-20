@@ -42,8 +42,9 @@
  */
 
 import { deriveAllActiveConditions } from './activeConditions.js';
-import { magicLedger } from './magicLedger.js';
 import { canonStressors } from './canonicalAccessors.js';
+import { resolveSibling, resolveDeclared } from './facts/drawDeclared.js';
+import { factsOf } from './facts/factsOf.js';
 
 // ── Canonical catalog ────────────────────────────────────────────────────
 
@@ -398,19 +399,12 @@ export function collectThreatSources(settlement) {
         originSurface: 'defenseProfile',
       });
     }
-    // Low magical DEFENSE only reads as wild-magic instability where magic is a
-    // real force: in a dead-magic world or a mundane low-magic village, scores.magical
-    // is legitimately ~0 and there is nothing arcane to destabilise. Without this gate
-    // every no-magic campaign and most small towns reported a CRITICAL wild-magic threat.
-    const magic = magicLedger(settlement);
-    const magicIsLive = magic.magicExists && (magic.magicLevel === 'medium' || magic.magicLevel === 'high');
-    if (magicIsLive && typeof scores.magical === 'number' && scores.magical > 0 && scores.magical < 40) {
-      out.push({
-        raw: { name: 'Magical instability', severity: clampInv(scores.magical) },
-        inferredType: 'arcane_instability',
-        originSurface: 'defenseProfile',
-      });
-    }
+    // R3-CODE-C (the chair's ruling of 2026-11-13, the defence lane's C-H1): a low MAGICAL DEFENCE score is a rating
+    // of the town's defence, not a fact about the world's magic, and is never read as "Magical instability" (it was:
+    // wherever magic ran medium or high and the score lay under 40). Unstable magic is a fact only where the record
+    // holds it: a magical crisis among the stressors (magical_instability, a dead zone, wild magic), which step 5
+    // below surfaces as an arcane_instability threat by its own name. The two siblings above stand: a low rating of
+    // order or supply IS that risk.
   }
 
   // 3. Explicit defenseProfile.threats[] (if the generator ever populates it)
@@ -554,7 +548,14 @@ export function deriveThreatProfile(source, _settlement) {
     : 0.4;
 
   const label = raw?.label || raw?.name || tmpl.label;
-  const description = raw?.description || tmpl.description;
+  // CENSUS-1e unit 2 (Appendix B row 118, T; the victims A): CENSUS-5b's THREAT_TEXT_SIBLINGS
+  // resolve where the template prints, against the settlement's facts. Unanswered (no settlement)
+  // keeps the template, resolveSibling's rule; a declared victim the record refuses leaves the list.
+  const facts = _settlement ? () => factsOf(_settlement) : null;
+  const where = { facts, poolId: 'threatProfile:THREAT_TEXT_SIBLINGS', surface: 'threats' };
+  const description = raw?.description || resolveSibling(tmpl.description, THREAT_TEXT_SIBLINGS, { ...where, drawKind: 'T' });
+  const spoken = (/** @type {string} */ v) => !facts || !Object.prototype.hasOwnProperty.call(THREAT_TEXT_SIBLINGS, v)
+    || resolveDeclared(THREAT_TEXT_SIBLINGS[v], { ...where, drawKind: 'A' }).line != null;
 
   return {
     id: typeof raw?.id === 'string' && raw.id.startsWith('threat.')
@@ -577,7 +578,7 @@ export function deriveThreatProfile(source, _settlement) {
     beneficiaries: Array.isArray(raw?.beneficiaries) && raw.beneficiaries.length
       ? [...raw.beneficiaries] : [...tmpl.beneficiaries],
     victims: Array.isArray(raw?.victims) && raw.victims.length
-      ? [...raw.victims] : [...tmpl.victims],
+      ? [...raw.victims] : tmpl.victims.filter(spoken),
     affectedSystems: Array.isArray(raw?.affectedSystems) && raw.affectedSystems.length
       ? [...raw.affectedSystems] : [...tmpl.affectedSystems],
 
@@ -693,3 +694,20 @@ export function threatSeverityBands() {
 export function threatStages() {
   return [...THREAT_STAGES];
 }
+
+/**
+ * DECLARED SIBLINGS, CARRIED (CENSUS-5b unit 2, 2026-11-05; the chair's ruling R-C): two
+ * template texts that presume a fact the threat type does not guarantee — a siege threat "pressing
+ * the walls" of a place with no perimeter (the chair's ruling 3: `walls` is the perimeter), and a
+ * civil unrest whose victims name "the watch". Keyed by the text; `deriveThreatProfile` resolves
+ * both where the template prints (CENSUS-1e unit 2). The siege twin
+ * is the chair's ruling (R-G); the victim is a list item (kind A: filtered, no twin).
+ * @type {Readonly<Record<string, ReadonlyArray<{ text: string, needs?: ReadonlyArray<string>, excludes?: ReadonlyArray<string>, twinOf?: string }>>>}
+ */
+export const THREAT_TEXT_SIBLINGS = Object.freeze({
+  'External military force pressing or potentially pressing the walls.': Object.freeze([
+    Object.freeze({ text: 'External military force pressing or potentially pressing the walls.', needs: Object.freeze(['walls']) }),
+    Object.freeze({ text: 'External military force pressing or potentially pressing the settlement.', twinOf: 'External military force pressing or potentially pressing the walls.', excludes: Object.freeze(['walls']) }),
+  ]),
+  'the watch': Object.freeze([Object.freeze({ text: 'the watch', needs: Object.freeze(['watch']) })]),
+});

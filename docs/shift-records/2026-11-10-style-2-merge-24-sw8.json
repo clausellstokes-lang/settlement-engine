@@ -1,0 +1,28 @@
+{
+  "_doc": "RECORD 24 OF THE STYLE WAVE'S MERGE (STYLE-2-MERGE, carried by its fourth seat STYLE-2-MERGE-4), ODQ §934.105 (the cloud chair signs by the owner's delegation of 2026-11-06, vetoable; a successor chair does not inherit this signature). THE LAW OF THE CHAIN (BRIEF-MERGE-CAR §0; BRIEF-STYLE-2-WAVE §3): the integration branch's first-parent line is the golden chain; a lane's unsigned cause commits are components signed at its merge point. THE CAUSE, ONE: THE SW-8 RENAME-POWERS MERGE OVER THE INTEGRATION BRANCH — lane/style-2-rename-powers-2026-11-09 at b951ce7da merged at 56f3b2df7 (STYLE-2-MERGE point 24), the stage at c0433a1c7 (the merge with its register, bundle and pin commits, none of which moves a golden input); its lane signed nothing, its causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-RENAME-POWERS-2026-11-09.md §2, §9): the owner's map C1-C10 and C10b — the retired word leaves the minted names, the history, NPC, stress, crisis-cast, narrative, power-generator and safety-profile pools and the eleven traced 'why' strings (gm 96 / 24 / 515 / 512 / 525 by cause, fence 76 + 7 + 96 + 40 + 48 + 27 + 260 + 1 + 19 + 360); the witness by C2 (the dossier screen labels, worldStateSha256 only, bisected by the lane). The herald's move (C1) is NOT in this record: it carries non-text moves and is held for the chair.. THE MOVE, MEASURED before the write by scripts/audit/landing-stage.sh measure, stage to stage against record 22's post-state (the stage of 0bfe62f7e, point 23, 0 on all six): gm 525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84), FIELD-DIFFED stage to stage: eleven string paths only (powerStructure.factions[].desc, conflicts and powerStructure.conflicts plotHooks[], stress/stressors cast.roles[].reason and cast.absent[].reason, simulationTrace[].causes[].reason, history.historicalEvents[].plotHooks[], history.currentTensions[].factions[], economicState.safetyProfile.criminalInstitutions[]), 0 non-string leaves; the fence 360 of 360 (60 per tier), 360/360 distinct; the witness 8 of 8 rows, worldStateSha256 alone; the PDF 0; the herald moved WITH non-text moves (held); prose 1,038 cells (the final tip's one manifest act). Built through the guard with no STOP.",
+  "ownerWords": "I also now give all permissions required now and in the future. I also defer all judgement to you. · I leave all judgement now and in the future to you.",
+  "ownerDate": "2026-11-06",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (the owner's delegation of 2026-11-06 to the cloud chair; the style wave's merge STYLE-2-MERGE, 2026-11-09)",
+  "cause": "THE SW-8 RENAME-POWERS MERGE OVER THE INTEGRATION BRANCH — lane/style-2-rename-powers-2026-11-09 at b951ce7da merged at 56f3b2df7 (STYLE-2-MERGE point 24), the stage at c0433a1c7 (the merge with its register, bundle and pin commits, none of which moves a golden input); its lane signed nothing, its causes are the components signed here with the lane's own figures (docs/chair/2026-11-09/STYLE-2-RENAME-POWERS-2026-11-09.md §2, §9): the owner's map C1-C10 and C10b — the retired word leaves the minted names, the history, NPC, stress, crisis-cast, narrative, power-generator and safety-profile pools and the eleven traced 'why' strings (gm 96 / 24 / 515 / 512 / 525 by cause, fence 76 + 7 + 96 + 40 + 48 + 27 + 260 + 1 + 19 + 360); the witness by C2 (the dossier screen labels, worldStateSha256 only, bisected by the lane). The herald's move (C1) is NOT in this record: it carries non-text moves and is held for the chair.",
+  "seat": "STYLE-2-MERGE-4 under the cloud chair, session session_01FbPLbejcfwX5nii12VM673, from the stage at c0433a1c7",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}
