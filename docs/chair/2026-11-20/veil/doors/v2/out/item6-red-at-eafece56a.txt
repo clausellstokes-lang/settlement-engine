@@ -1,0 +1,57 @@
+[run] start 2026-11-20T03:52:06Z at eafece56a 3 dirty paths
+[run] cmd: npx vitest run --reporter=verbose -t SNAPSHOT MODE tests/security/galleryDoors.pglite.test.js
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-1 THE CHRONICLE DOOR: on a marked share an entry naming a house hidden whole (summary, target or payload), a covert act with a criminal grouping shut and an unclassed type are withheld whole, on the gallery read and a map's member; open entries arrive; no entry carries an id; an unmarked listed page keeps its chronicle as 032 sends it
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-1 / VR21 THE NEWEST FIFTY OF THE SERVED: a log of 70 entries whose newest five name the hidden house serves fifty, none of them withheld ones
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-3 THE TILE DOOR: on a marked share the stability tile is the band word alone (dossier column and list tile); prosperity is its stored band (VR28 tier 2); a tile holding a hideable house's name is sent by none; an unmarked listed page is unchanged
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-3 THE CLOSED ANSWER SENDS NO TILE: a share past the name search's bound (600 houses hidden whole of 145 characters) serves the name alone and no tile beside it
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-4 THE MAP MEMBER: a member with no veil of its own takes the default veil; a marked member its own
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE ONE-ROW READ (the chair's condition (a), VEIL-DOORS-2): get_gallery_dossier takes its own row's tiles by the one tile rule, never every public row's; its row and tile columns equal the list's row for every share (unmarked, the default veil, a hand veil, Reveal DM, snapshot mode, votes and comments counted)
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > VR23 ON THE BROWSER'S IMPORT PATH (VEIL-DOORS-2, item 4): importing a shared campaign map runs importGalleryMapWithCampaignImpl -> fetchGalleryMap -> get_gallery_map; a member with no veil of its own arrives in the importer's record default-veiled (its criminal house absent, its open house present), a marked member by its own veil
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE EVENT-TYPE TABLE ON PURPOSE (VEIL-DOORS-2, item 5; the surprise of 03:24 UTC): on a marked share a covert act (imposed OR exposed corruption), a crime stressor, a table note and every entry naming a house, person or power the served body does not show (removed since, or never in the copy) are withheld whole; open entries arrive; server equals twin
+ × tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > SNAPSHOT MODE (VEIL-DOORS-2, item 6): after a freeze the DM adds a criminal house and events, renames the town, shifts its tier and saves; the frozen share's chronicle, name, tier and time (dossier, list, map member, import) tell none of it; the twin agrees 134ms
+   → the gallery read of a frozen share: expected { chronicle: [ …(3) ], …(3) } to deeply equal { …(4) }
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE TILE ROWS ARE NO DOOR OF THEIR OWN: _gallery_public_tile_rows() is executable by neither anon nor authenticated (Supabase's default privileges)
+ ↓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE TWIN: the server and src/domain/display/galleryDoors.js send the same chronicle and the same tiles (the default veil and a hand veil, Reveal DM off and on; the closed answer)
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > SNAPSHOT MODE (VEIL-DOORS-2, item 6): after a freeze the DM adds a criminal house and events, renames the town, shifts its tier and saves; the frozen share's chronicle, name, tier and time (dossier, list, map member, import) tell none of it; the twin agrees
+AssertionError: the gallery read of a frozen share: expected { chronicle: [ …(3) ], …(3) } to deeply equal { …(4) }
+
+- Expected
++ Received
+
+  {
+    "chronicle": [
+      "A new Mill was established.",
++     "Rookford is now known as Rookhold.",
++     "The settlement swells to a larger tier, its institutions rising to match the new scale.",
+    ],
+-   "name": "Rookford",
+-   "tier": "town",
+-   "updated": "2026-11-05T00:00:00.000Z",
++   "name": "Rookhold",
++   "tier": "city",
++   "updated": "2026-11-20T03:52:10.506Z",
+  }
+
+ ❯ tests/security/galleryDoors.pglite.test.js:362:45
+    360|     const l = (await listed()).find((r) => r.public_slug === row.slug);
+    361|     expect({ chronicle: (g.chronicle || []).map((e) => e.narrativeSumm…
+    362|       'the gallery read of a frozen share').toEqual({ chronicle: ['A n…
+       |                                             ^
+    363|     expect({ name: l.name, tier: l.tier, updated: new Date(l.updated_a…
+    364|     const m = await mapOf([row.id]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 10 skipped (11)
+   Start at  03:52:07
+   Duration  3.58s (transform 92ms, setup 35ms, import 109ms, tests 3.31s, environment 0ms)
+
+[run] end 2026-11-20T03:52:10Z exit 1

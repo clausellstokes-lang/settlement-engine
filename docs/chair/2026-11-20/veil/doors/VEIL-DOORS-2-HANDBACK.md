@@ -184,3 +184,23 @@ read 19 entries it must not, at least one of EVERY re-classed type (`out/item5-r
 open entries alone, server equal to twin; the unmarked page keeps all 23 (032). Walker arm 5 re-keyed by identity to the
 seven classes (each with its rule in the SQL comment). Green: the doors' two files 18 of 18 (`out/item5-green.txt`), eslint 0.
 tests/security WHOLE at this commit's tree (`out/item5-tests-security.txt`): Test Files 158 passed | 1 skipped (159); Tests 2008 passed | 1 skipped (2009); exit 0. Bytes: 212 `a99f3ad4b1e6af6604c4c7dd7af7c822f0d4a12a49a1d9be7c577fcc4d39a91e`; down `f443aff7eb6b5ccce4794689fb610ca45136905af85ad9552dc7cb5cb528d086` (unchanged by this item).
+
+## 7. Item 6 — snapshot mode (written 2026-11-20 04:08 UTC)
+MEASURED FIRST (native chain at ebe9387a2, read as anon; snapshot is the DEFAULT share mode, `galleryVeil.js :: VEIL_MODES`):
+a share frozen at T, then the live town changed (a criminal house and events added, the town renamed, its tier shifted, a
+save): the frozen share's `chronicle` showed every post-freeze entry (the new criminal house by name: the 03:24 surprise),
+its `name` and `tier` (dossier and list) followed the live row; `updated_at` followed the live save where the row was never
+re-published (`gallery_updated_at` null). The body and the tiles were already the copy's.
+BUILT (212 and the twin): (a) THE CHRONICLE of a read that serves the frozen copy keeps only entries whose time (as served:
+`timestamp` where truthy, else `appliedAt`) is at or before the freeze's `$veil.at`; an entry with no readable time, or a
+freeze with none, serves nothing; `_gallery_doors_time` parses without ever failing a read (twin: `timeOf`); the chronicle's
+helper takes the freeze marker as a sixth argument (the dossier and the map member pass it where they serve the copy).
+(b) NAME AND TIER of a frozen share are the copy's (the gallery title still first on the gallery read): the tile rows, the
+dossier's own row, a map's member, and the import's two columns (`import_gallery_dossier`: TWO ONE-LINE HUNKS in the lane
+owner's function, flagged here: its `name` and `tier` beside the data it already served from the copy). (c) TIME: a frozen
+row's `updated_at` is `gallery_updated_at`, else `published_at`, never the live save (list and dossier; the "recently
+updated" sort reads it). What a page loses: a frozen page's chronicle stops at its freeze, as its body does; nothing else.
+RED at eafece56a (`out/item6-red-at-eafece56a.txt`): the gallery read of a frozen share sent "Rookford is now known as
+Rookhold." and the tier shift, name "Rookhold", tier "city", and the live save time. GREEN: the doors' guards and the rollback
+arm, 4 files, 62 of 62; eslint 0.
+tests/security WHOLE at this commit's tree (`out/item6-tests-security.txt`): Test Files 158 passed | 1 skipped (159); Tests 2009 passed | 1 skipped (2010); exit 0. Bytes: 212 `35c91700e0c930e375a99c1ed7f0656b768fc7f2eb9a74b936018a4b98331ccc`; down `b5f15a7a25edf36ebb8298db42afcaef8e27b5775cd59cf5559273d2047a590c`.

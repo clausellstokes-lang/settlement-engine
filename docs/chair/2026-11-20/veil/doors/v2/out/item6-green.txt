@@ -1,0 +1,1210 @@
+[run] start 2026-11-20T03:52:25Z at eafece56a 6 dirty paths
+[run] cmd: npx vitest run --reporter=verbose tests/security/galleryDoors.pglite.test.js tests/security/galleryDoors.walker.test.js tests/security/galleryVeilCures.pglite.test.js tests/security/galleryMapMemberCount.pglite.test.js
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 1 THE CENSUS: every function a visitor may execute that touches a shared town or map is registered with its kind; no registered row is stale 3ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 2 THE COLUMNS OF EACH DOOR: every column of a TABLE door and every built key of a jsonb door is registered with its rule 3ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 3 FILTERS AND SORTS: every filter key and sort key the two gallery lists read is registered with its rule 1ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 4 THE TILE ROWS ARE NO DOOR: _gallery_public_tile_rows() is executable by neither anon nor authenticated 1ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-1 THE CHRONICLE DOOR: on a marked share an entry naming a house hidden whole (summary, target or payload), a covert act with a criminal grouping shut and an unclassed type are withheld whole, on the gallery read and a map's member; open entries arrive; no entry carries an id; an unmarked listed page keeps its chronicle as 032 sends it 314ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-1 / VR21 THE NEWEST FIFTY OF THE SERVED: a log of 70 entries whose newest five name the hidden house serves fifty, none of them withheld ones 63ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-3 THE TILE DOOR: on a marked share the stability tile is the band word alone (dossier column and list tile); prosperity is its stored band (VR28 tier 2); a tile holding a hideable house's name is sent by none; an unmarked listed page is unchanged 86ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-3 THE CLOSED ANSWER SENDS NO TILE: a share past the name search's bound (600 houses hidden whole of 145 characters) serves the name alone and no tile beside it 596ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 5 THE CHRONICLE'S CLASSES: every event type the app writes to a chronicle is classed by the SQL table and the JS table, which are equal; every class is target or covert 1617ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > V10-4 THE MAP MEMBER: a member with no veil of its own takes the default veil; a marked member its own 14ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE ONE-ROW READ (the chair's condition (a), VEIL-DOORS-2): get_gallery_dossier takes its own row's tiles by the one tile rule, never every public row's; its row and tile columns equal the list's row for every share (unmarked, the default veil, a hand veil, Reveal DM, snapshot mode, votes and comments counted) 573ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 6 THE BAND TABLE IS ONE: STABILITY_BANDS equals the array inside _gallery_doors_band(text) 2ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 7 VR27 AS AMENDED, THE CATALOGUE: every underscore function of the share's family a visitor may execute stands on VISITOR_LIST with its context; no row is stale; 212 revokes none of the eight older helpers 9ms
+ ✓ tests/security/galleryDoors.walker.test.js > VR20 (C): every door beside data is registered (the walker) > 8 EVERY DOOR ANSWERS A VISITOR AFTER 212, AND A SIGNED-IN USER SAVES A MAP (the saved_maps trigger runs _gallery_world_snapshot_is_safe as that user) 452ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > VR23 ON THE BROWSER'S IMPORT PATH (VEIL-DOORS-2, item 4): importing a shared campaign map runs importGalleryMapWithCampaignImpl -> fetchGalleryMap -> get_gallery_map; a member with no veil of its own arrives in the importer's record default-veiled (its criminal house absent, its open house present), a marked member by its own veil 913ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE EVENT-TYPE TABLE ON PURPOSE (VEIL-DOORS-2, item 5; the surprise of 03:24 UTC): on a marked share a covert act (imposed OR exposed corruption), a crime stressor, a table note and every entry naming a house, person or power the served body does not show (removed since, or never in the copy) are withheld whole; open entries arrive; server equals twin 63ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > SNAPSHOT MODE (VEIL-DOORS-2, item 6): after a freeze the DM adds a criminal house and events, renames the town, shifts its tier and saves; the frozen share's chronicle, name, tier and time (dossier, list, map member, import) tell none of it; the twin agrees 173ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE TILE ROWS ARE NO DOOR OF THEIR OWN: _gallery_public_tile_rows() is executable by neither anon nor authenticated (Supabase's default privileges) 1ms
+ ✓ tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > THE TWIN: the server and src/domain/display/galleryDoors.js send the same chronicle and the same tiles (the default veil and a hand veil, Reveal DM off and on; the closed answer) 1158ms
+ ✓ tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite) > locates the net-current function bodies across migrations 2ms
+ ✓ tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite) > a BLANK kind=map share of a campaign reports member_count = 0 (not the un-shared 2) 5ms
+ ✓ tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite) > a map_with_campaign with the opt-in OFF reports member_count = 0 2ms
+ ✓ tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite) > the fully shared campaign (kind + opt-in ON) reports the real member_count 2ms
+ ✓ tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite) > member_count is at PARITY with the members get_gallery_map projects 45ms
+ ✓ tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite) > the hasSettlements facet EXCLUDES the opt-out blank rows (member_count > 0 only) 3ms
+ ✓ tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite) > projects the importable flag and the facet narrows to opted-in maps (migration 072) 4ms
+ ✓ tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite) > get_gallery_map does NOT project a member settlement owned by another user (046 IDOR guard) 15ms
+ ✓ tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite) > get_gallery_map projects the world panel ONLY when gallery_share_world is true 36ms
+ ✓ tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite) > publish_map REJECTS a world snapshot containing a HARD-DENY key (server-side scan) 14ms
+ ✓ tests/security/galleryMapMemberCount.pglite.test.js > gallery maps member_count — net-current execution (pglite) > rows with an identical published_at return in a stable, documented order (090) 20ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F1 (the review row): the Force-all copy the client itself froze, Reveal DM on, is served FROZEN, never the live row
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F1 (the review row): the Force-all copy the client itself froze, Reveal DM on, is served FROZEN, never the live row
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > both chains apply whole 4ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F1 (the review row): the Force-all copy the client itself froze, Reveal DM on, is served FROZEN, never the live row 11618ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F1 (the bound, derived): every copy the client admits passes the server's; a copy past it is REFUSED, never the live row 897ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F3 (the review rows): an id beyond double range reads as JavaScript reads it; no read raises
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F3 (the review rows): an id beyond double range reads as JavaScript reads it; no read raises
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F3 (the review rows): an id beyond double range reads as JavaScript reads it; no read raises
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F3 (the review rows): an id beyond double range reads as JavaScript reads it; no read raises 95ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R3 (the review rows): a number at the top of the database's range makes no read raise that serves at 210 556ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R4 (the review rows): a document hundreds deep under Reveal DM makes no read raise that serves at 210 689ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R4 (the same class, found by searching every helper for recursion): String() of an id 1,000 and 5,000 arrays deep is JavaScript's, with no nested call 114ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R1 (the review row): the import of a snapshot share is its FROZEN copy: nothing written after the freeze reaches the importer
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R1 (the review row): the import of a snapshot share is its FROZEN copy: nothing written after the freeze reaches the importer
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R1 (the review row): the import of a snapshot share is its FROZEN copy: nothing written after the freeze reaches the importer
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R1 (the review row): the import of a snapshot share is its FROZEN copy: nothing written after the freeze reaches the importer
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R1 (the review row): the import of a snapshot share is its FROZEN copy: nothing written after the freeze reaches the importer 116ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R1 (the edges): a refused copy is refused on import too; a snapshot share with no copy imports what its gallery page shows 868ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R9/R11 (the review rows): a stored revealDm or allowImport that is not a boolean raises nothing and reveals nothing; only JSON true reveals 2733ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R5 (a, the review rows): a page that draws the LIVE town carries no freeze date; the frozen page keeps its own
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R5 (a, the review rows): a page that draws the LIVE town carries no freeze date; the frozen page keeps its own
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R5 (a, the review rows): a page that draws the LIVE town carries no freeze date; the frozen page keeps its own
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R5 (a, the review rows): a page that draws the LIVE town carries no freeze date; the frozen page keeps its own
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R5 (a, the review rows): a page that draws the LIVE town carries no freeze date; the frozen page keeps its own 117ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R5 (b): a copy the writer drops for size does not keep the word "snapshot": the stored mode is live 3ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > R3/R4 (the class): 400 fuzzed stored documents, copies and narrations to the edges of the range and hundreds deep, through all four reads at 211 and 210: PARITY 101132ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the review rows): a falsy label or a numeric part no longer loses the eye the DM shut 1732ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the class): the server card id equals the client's idOf on 10,500 generated cards of every kind 4305ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F2 (the class): the server spells 20,000 JSON numbers as JavaScript's String() does, past double range included 11288ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F4: a member key naming no person is worked on by no read; one naming a person still hides its depth
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F7: the map member shows its frozen copy and its narration, each under its own listing's veil
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F7: the map member shows its frozen copy and its narration, each under its own listing's veil
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F7: the map member shows its frozen copy and its narration, each under its own listing's veil
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F7: the map member shows its frozen copy and its narration, each under its own listing's veil
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F4: a member key naming no person is worked on by no read; one naming a person still hides its depth 42ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > F7: the map member shows its frozen copy and its narration, each under its own listing's veil 1613ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, the gallery read): an unmarked Reveal-DM listing sends no anonymous reader the editor's decrees or its DM layer
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, the gallery read): an unmarked Reveal-DM listing sends no anonymous reader the editor's decrees or its DM layer
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, the gallery read): an unmarked Reveal-DM listing sends no anonymous reader the editor's decrees or its DM layer 224ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, the import): the importer of a Reveal-DM share, unmarked or marked, frozen or narrated, receives no decree and no DM layer
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, the import): the importer of a Reveal-DM share, unmarked or marked, frozen or narrated, receives no decree and no DM layer
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, the import): the importer of a Reveal-DM share, unmarked or marked, frozen or narrated, receives no decree and no DM layer
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, the import): the importer of a Reveal-DM share, unmarked or marked, frozen or narrated, receives no decree and no DM layer
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, the import): the importer of a Reveal-DM share, unmarked or marked, frozen or narrated, receives no decree and no DM layer
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, the import): the importer of a Reveal-DM share, unmarked or marked, frozen or narrated, receives no decree and no DM layer
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, the import): the importer of a Reveal-DM share, unmarked or marked, frozen or narrated, receives no decree and no DM layer 303ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, Pending decrees opened): opening the grouping sends no reader the editor's state, whatever the source
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, Pending decrees opened): opening the grouping sends no reader the editor's state, whatever the source
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, Pending decrees opened): opening the grouping sends no reader the editor's state, whatever the source
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, Pending decrees opened): opening the grouping sends no reader the editor's state, whatever the source
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, Pending decrees opened): opening the grouping sends no reader the editor's state, whatever the source
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-1 (the review row, Pending decrees opened): opening the grouping sends no reader the editor's state, whatever the source 283ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-3 (the review rows): a Reveal-DM share sends no reader and no importer the custom-content records, marked or not, frozen or narrated, any grouping opened
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-3 (the review rows): a Reveal-DM share sends no reader and no importer the custom-content records, marked or not, frozen or narrated, any grouping opened
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-3 (the review rows): a Reveal-DM share sends no reader and no importer the custom-content records, marked or not, frozen or narrated, any grouping opened
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-3 (the review rows): a Reveal-DM share sends no reader and no importer the custom-content records, marked or not, frozen or narrated, any grouping opened
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-3 (the review rows): a Reveal-DM share sends no reader and no importer the custom-content records, marked or not, frozen or narrated, any grouping opened
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-3 (the review rows): a Reveal-DM share sends no reader and no importer the custom-content records, marked or not, frozen or narrated, any grouping opened
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-3 (the review rows): a Reveal-DM share sends no reader and no importer the custom-content records, marked or not, frozen or narrated, any grouping opened
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-3 (the review rows): a Reveal-DM share sends no reader and no importer the custom-content records, marked or not, frozen or narrated, any grouping opened 350ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-4 (the review rows): a person hidden by the per-person switch is sent by no read in a roster copy, unmarked or marked; the person shown is sent as before; nothing else an old share serves changes 632ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-2 (the review row): a person with no name and no role (the face veil took the role) is drawn on no page and sent by no served read
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-2 (the review row): a person with no name and no role (the face veil took the role) is drawn on no page and sent by no served read
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-2 (the review row): a person with no name and no role (the face veil took the role) is drawn on no page and sent by no served read
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-2 (the review row): a person with no name and no role (the face veil took the role) is drawn on no page and sent by no served read
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-2 (the review row): a person with no name and no role (the face veil took the role) is drawn on no page and sent by no served read
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-2 (the review row): a person with no name and no role (the face veil took the role) is drawn on no page and sent by no served read
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V3-2 (the review row): a person with no name and no role (the face veil took the role) is drawn on no page and sent by no served read 654ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4-1 (the review row): a relationship eye master's DM shut on a town stored in master's shape holds in every read
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4-1 (the review row): a relationship eye master's DM shut on a town stored in master's shape holds in every read
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4-1 (the review row): a relationship eye master's DM shut on a town stored in master's shape holds in every read
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4-1 (the review row): a relationship eye master's DM shut on a town stored in master's shape holds in every read
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4-1 (the review row): a relationship eye master's DM shut on a town stored in master's shape holds in every read 177ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4-1 (the client): both shapes are the same two ends — the client's id on a stored tie is master's, and its migrated twin's 1ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4-1 (the class): 3,000 fuzzed ties in master's shape: server id = client id = master's id = the migrated twin's id 1722ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4-2 (the count's fixture rows): a shut goals or ties eye withholds the retired names in every read; open eyes send them as before
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4-2 (the count's fixture rows): a shut goals or ties eye withholds the retired names in every read; open eyes send them as before
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4-2 (the count's fixture rows): a shut goals or ties eye withholds the retired names in every read; open eyes send them as before
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4-2 (the count's fixture rows): a shut goals or ties eye withholds the retired names in every read; open eyes send them as before
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4-2 (the count's fixture rows): a shut goals or ties eye withholds the retired names in every read; open eyes send them as before
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4-2 (the count's fixture rows): a shut goals or ties eye withholds the retired names in every read; open eyes send them as before
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4-2 (the count's fixture rows): a shut goals or ties eye withholds the retired names in every read; open eyes send them as before 682ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V4 (the class): 60 towns in master's shape, eyes shut by hand at random, Reveal DM on and off: what is hidden is never sent, what is not is sent as at 210 15298ms
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+stderr | tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page
+[gallery] bump_public_view failed: not served here: bump_public_view
+[gallery] more-by-creator failed: { message: 'not served here: list_gallery_more_by_creator' }
+
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5 (the composition): a row hidden by hand on a powers-lane leader or claimant stays hidden in both stored shapes, by every read and on the page 125414ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > the rollback: 001..212 then supabase/rollback/212_*.down.sql equals a chain stopped at 211, and 211_*.down.sql after it a chain stopped at 210, byte for byte 2914ms
+ ✓ tests/security/galleryVeilCures.pglite.test.js > COHERENCE-VEIL-2: the review rows on 211, executed > V5-7: every helper the early-deployed 211 created is created again here or dropped here by signature; the down file drops all of them 7ms
+
+ Test Files  4 passed (4)
+      Tests  62 passed (62)
+   Start at  03:52:26
+   Duration  301.92s (transform 4.68s, setup 118ms, import 1.74s, tests 319.69s, environment 0ms)
+
+[run] end 2026-11-20T03:57:29Z exit 0

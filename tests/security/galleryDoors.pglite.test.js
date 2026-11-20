@@ -22,6 +22,8 @@
  *         (src/store/galleryImportMap.js :: importGalleryMapWithCampaignImpl -> src/lib/gallery.js :: fetchGalleryMap ->
  *         get_gallery_map; import_gallery_map(text) has no caller in src/, api/, scripts/ or supabase/functions/) lands a
  *         member with no veil of its own DEFAULT-VEILED in the importer's own record.
+ *   SNAPSHOT MODE (VEIL-DOORS-2, item 6; red at eafece56a): a frozen share's chronicle keeps the entries up to the
+ *         freeze, and its name, tier and time are the copy's, on the gallery read, the list, a map's member and the import.
  *   THE ONE-ROW READ (VEIL-DOORS-2; the chair's condition (a), red at cca49cb8d): the dossier read takes its own row's
  *         tiles by the one tile rule (_gallery_doors_tiles), never the tile rows of every public row; every row and tile
  *         column it sends equals the list's row (the cost rows are in VEIL-DOORS-2-HANDBACK.md).
@@ -337,6 +339,41 @@ describe('VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4
     // an unmarked listed page: as 032 sends it (VR23: R4's sparing untouched)
     const unmarked = await store(t, { overrides: {}, log: LOG5 });
     expect(((await dossier(unmarked.slug)).chronicle || []).length).toBe(LOG5.length);
+  }, ARM_TIMEOUT_MS);
+
+  it('SNAPSHOT MODE (VEIL-DOORS-2, item 6): after a freeze the DM adds a criminal house and events, renames the town, shifts its tier and saves; the frozen share\'s chronicle, name, tier and time (dossier, list, map member, import) tell none of it; the twin agrees', async () => {
+    const FROZEN_AT = '2026-11-05T00:00:00.000Z';
+    const copy = town();
+    const before = [entry('ADD_INSTITUTION', 'A new Mill was established.', { targetId: 'institution.mill', at: '2026-11-01T10:00:00.000Z' })];
+    const after = [
+      entry('ADD_INSTITUTION', 'A new Granary was established.', { targetId: 'institution.granary', at: '2026-11-12T10:00:00.000Z' }),
+      { id: 'rename.x.1', type: 'RENAME_SETTLEMENT', targetId: 'Rookford', timestamp: '2026-11-13T10:00:00.000Z', narrativeSummary: 'Rookford is now known as Rookhold.', flavor: true },
+      entry('SHIFT_TIER', 'The settlement swells to a larger tier, its institutions rising to match the new scale.', { at: '2026-11-14T10:00:00.000Z' }),
+    ];
+    const overrides = { $veil: { ...VEIL().$veil, mode: 'snapshot', at: FROZEN_AT, snapshot: copy } };
+    const row = await store(copy, { overrides, log: before });
+    await db.query(`update public.settlements set gallery_updated_at = null, published_at = $2 where id = $1`, [row.id, FROZEN_AT]); // a row never re-published: its time is its publication's
+    const live = town({ name: 'Rookhold', institutions: [BLACK, MILL, { id: 'inst_gran', name: 'Granary', category: 'Economy', catalogId: 'granary' }] });
+    await db.query(`update public.settlements set name = 'Rookhold', tier = 'city', data = $2::jsonb, campaign_state = $3::jsonb, updated_at = '2026-11-15T00:00:00Z' where id = $1`,
+      [row.id, JSON.stringify(live), JSON.stringify({ eventLog: [...before, ...after] })]);
+    const g = await dossier(row.slug);
+    const l = (await listed()).find((r) => r.public_slug === row.slug);
+    expect({ chronicle: (g.chronicle || []).map((e) => e.narrativeSummary), name: g.name, tier: g.tier, updated: new Date(g.updated_at).toISOString() },
+      'the gallery read of a frozen share').toEqual({ chronicle: ['A new Mill was established.'], name: 'Rookford', tier: 'town', updated: FROZEN_AT });
+    expect({ name: l.name, tier: l.tier, updated: new Date(l.updated_at).toISOString() }, 'the list row').toEqual({ name: 'Rookford', tier: 'town', updated: FROZEN_AT });
+    const m = await mapOf([row.id]);
+    expect({ name: m.members[0].name, tier: m.members[0].tier, chronicle: (m.members[0].chronicle || []).map((e) => e.narrativeSummary) }, 'the map member')
+      .toEqual({ name: 'Rookford', tier: 'town', chronicle: ['A new Mill was established.'] });
+    await db.exec(`set test.uid = '${READER}';`);
+    const imp = (await db.query('select * from public.import_gallery_dossier($1)', [row.slug])).rows[0];
+    await db.exec('reset test.uid;');
+    expect({ name: imp.name, tier: imp.tier }, 'the importer\'s record').toEqual({ name: 'Rookford', tier: 'town' });
+    // the twin: the same chronicle from the frozen marker
+    const veil = await import('../../src/domain/display/galleryVeil.js');
+    const doors = await import('../../src/domain/display/galleryDoors.js');
+    const proj = veil.galleryPayloadFor(JSON.parse(JSON.stringify(copy)), { shareDm: false, memberOverrides: overrides });
+    const twin = doors.veilChronicle([...before, ...after], { proj, body: g.data, groupings: g.gallery_member_overrides?.$veil?.groupings || [], src: copy, frozen: overrides.$veil });
+    expect(canon(twin), 'server equals twin').toBe(canon(g.chronicle));
   }, ARM_TIMEOUT_MS);
 
   it('THE TILE ROWS ARE NO DOOR OF THEIR OWN: _gallery_public_tile_rows() is executable by neither anon nor authenticated (Supabase\'s default privileges)', async () => {

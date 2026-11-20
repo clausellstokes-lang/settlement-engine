@@ -121,6 +121,17 @@ const CRIME_STRESSORS = Object.freeze(['criminalcorridor', 'infiltration', 'infi
 const targetLabel = (/** @type {unknown} */ t) => str(t).replace(/^.*[.]/, '').replace(/_/g, ' ');
 const CRIMINAL_GROUPINGS = Object.freeze(['block:services.criminal', 'block:defense.criminalStructure', 'block:power.criminalUnderside']);
 
+/**
+ * A chronicle entry's time or a freeze's date, as milliseconds; null where it is none. SQL twin: _gallery_doors_time
+ * (a string opening with a date, then Date.parse).
+ * @param {unknown} t @returns {number|null}
+ */
+function timeOf(t) {
+  if (typeof t !== 'string' || !/^[0-9]{4}-[0-9]{2}-[0-9]{2}/.test(t)) return null;
+  const ms = Date.parse(t);
+  return Number.isNaN(ms) ? null : ms;
+}
+
 /** The cards of a kind, by the veil's own lists. */
 function cards(/** @type {unknown} */ s, /** @type {string} */ kind) {
   /** @type {Rec[]} */
@@ -137,11 +148,12 @@ function cards(/** @type {unknown} */ s, /** @type {string} */ kind) {
 /**
  * THE CHRONICLE BY ITS OWN VEIL. SQL twin: _gallery_doors_chronicle (its comment states each rule).
  * @param {unknown} log the raw campaign_state.eventLog
- * @param {{ proj: unknown, body: unknown, groupings?: string[]|null, src?: unknown, shareDm?: boolean, legacy?: (log: unknown) => unknown }} veil
- *   `body` undefined/null: an unmarked listed share (the caller's 032 projection, `legacy`, is served).
+ * @param {{ proj: unknown, body: unknown, groupings?: string[]|null, src?: unknown, shareDm?: boolean, frozen?: unknown, legacy?: (log: unknown) => unknown }} veil
+ *   `body` undefined/null: an unmarked listed share (the caller's 032 projection, `legacy`, is served). `frozen`: the share's
+ *   marker where the read serves its frozen copy (VEIL-DOORS-2, item 6: only entries at or before its `at` are served).
  * @returns {Rec[]|null|unknown}
  */
-export function veilChronicle(log, { proj, body, groupings = [], src = null, shareDm = false, legacy = (l) => l }) {
+export function veilChronicle(log, { proj, body, groupings = [], src = null, shareDm = false, frozen = null, legacy = (l) => l }) {
   if (body == null) return legacy(log);
   if (!Array.isArray(log)) return null;
   if (!isRec(body) || Object.keys(body).every(k => k === 'name')) return null;
@@ -193,9 +205,13 @@ export function veilChronicle(log, { proj, body, groupings = [], src = null, sha
     if (cls === 'stressor' && shut
       && CRIME_STRESSORS.includes(squeezedFold(str(ev && isRec(ev.payload) ? ev.payload.stressorType : '') || (ev && str(ev.targetId)) || str(e.targetId)))) continue;
     if (search && search.holds([e.narrativeSummary ?? null, e.targetId ?? null, ev ? ev.targetId ?? null : null, ev ? ev.payload ?? null : null, e.payload ?? null])) continue;
+    const when = truthy(e.timestamp) ? e.timestamp : e.appliedAt;
+    if (frozen != null) {
+      const at = timeOf(isRec(frozen) ? frozen.at : null); const t = timeOf(when);
+      if (at == null || t == null || t > at) continue;
+    }
     /** @type {Rec} */
     const m = {};
-    const when = truthy(e.timestamp) ? e.timestamp : e.appliedAt;
     if (when !== undefined && when !== null) m.appliedAt = when;
     if (e.narrativeSummary !== undefined && e.narrativeSummary !== null) m.narrativeSummary = e.narrativeSummary;
     if (truthy(e.partyCaused) || (ev && truthy(ev.partyCaused)) || e.cause === 'party_action' || (ev && ev.cause === 'party_action')) m.partyCaused = true;

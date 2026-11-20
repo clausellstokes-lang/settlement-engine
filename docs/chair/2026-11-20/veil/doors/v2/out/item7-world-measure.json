@@ -1,0 +1,100 @@
+{
+ "measured": "2026-11-20T03:49:12.267Z",
+ "method": "3 born campaign worlds x 6 member towns (browser wizard defaults), advanceCampaignWorld one_month x 12 (pinned now), serializeWorldSnapshotPublic with the share editor's five sections on, buildRealmArcSummary; needles = every hideable house (isHideableHouse) and hidden power of each member",
+ "worlds": [
+  {
+   "world": 0,
+   "ticks": 12,
+   "pulses": 12,
+   "sections": [
+    "schemaVersion",
+    "sourceWorldStateSchemaVersion",
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "chronicle",
+    "dashboard"
+   ],
+   "bytes": 17774,
+   "needles": 14,
+   "houseOrPowerHits": [],
+   "arcText": "",
+   "arcHits": [],
+   "crimeWordedLines": [
+    "Thieves and racketeers are working Vysokoino's streets in the open.",
+    "Thieves and racketeers are working Montecolonia's streets in the op",
+    "Thieves and racketeers are working Morkaker's streets in the open.",
+    "Thieves and racketeers are working Montecolonia's streets in the op",
+    "Thieves and racketeers are working Mintarqala's streets in the open",
+    "Thieves and racketeers are working Vysokoino's streets in the open."
+   ]
+  },
+  {
+   "world": 1,
+   "ticks": 12,
+   "pulses": 12,
+   "sections": [
+    "schemaVersion",
+    "sourceWorldStateSchemaVersion",
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "chronicle",
+    "dashboard"
+   ],
+   "bytes": 21777,
+   "needles": 14,
+   "houseOrPowerHits": [],
+   "arcText": "",
+   "arcHits": [],
+   "crimeWordedLines": [
+    "Thieves and racketeers are working Weiba's streets in the open.",
+    "Thieves and racketeers are working Aristoeia's streets in the open.",
+    "Thieves and racketeers are working Spitzdorf's streets in the open."
+   ]
+  },
+  {
+   "world": 2,
+   "ticks": 12,
+   "pulses": 12,
+   "sections": [
+    "schemaVersion",
+    "sourceWorldStateSchemaVersion",
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "chronicle",
+    "dashboard"
+   ],
+   "bytes": 19674,
+   "needles": 13,
+   "houseOrPowerHits": [],
+   "arcText": "",
+   "arcHits": [],
+   "crimeWordedLines": [
+    "Thieves and racketeers are working Beipo's streets in the open.",
+    "Criminal corridor has passed; protection rackets remains",
+    "Criminal corridor has run its course; what remains is protection rac",
+    "kets, smuggling habits and guard corruption.",
+    "Criminal corridor is taking hold in Khānkhel",
+    "Criminal corridor has ended, leaving protection rackets",
+    "A visitor can still see what criminal corridor left behind: protection rackets, smuggling habits ",
+    "and guard corruption.",
+    "Thieves and racketeers are working Erdenbulag's streets in the open",
+    "Thieves and racketeers are working Khānkhel's streets in the open.",
+    "Criminal corridor is taking hold in Khānkhel",
+    "Thieves and racketeers are working Beipo's streets in the open.",
+    "Thieves and racketeers are working Khānkhel's streets in the open.",
+    "Thieves and racketeers are working Beipo's streets in the open.",
+    "Criminal corridor is taking hold in Bayanbaliq",
+    "Thieves and racketeers are working Bayanbaliq's streets in the open",
+    "Thieves and racketeers are working Khānkhel's streets in the open.",
+    "Criminal corridor is over, but not forgotten",
+    "Criminal corridor is over, but people still live with protection rac",
+    "kets, smuggling habits and guard corruption.",
+    "Thieves and racketeers are working Bayanbaliq's streets in the open",
+    "Criminal corridor is taking hold in Bayanbaliq"
+   ]
+  }
+ ]
+}

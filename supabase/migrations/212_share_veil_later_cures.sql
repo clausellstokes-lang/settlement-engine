@@ -1960,7 +1960,10 @@ returns table (
   threat_level text,
   culture text,
   prosperity text,
-  primary_deity text
+  primary_deity text,
+  frozen boolean,
+  frozen_name text,
+  frozen_tier text
 )
 language sql
 stable
@@ -1978,9 +1981,15 @@ as $$
     case when t.marked then public._gallery_doors_tile(nullif(t.d #>> '{economicState,prosperity}', ''), t.names)
          else coalesce(nullif(p_prosperity, ''), nullif(t.d #>> '{economicState,prosperity}', '')) end,
     case when t.marked then public._gallery_doors_tile(nullif(t.d #>> '{config,primaryDeitySnapshot,name}', ''), t.names)
-         else coalesce(nullif(p_deity, ''), nullif(t.d #>> '{config,primaryDeitySnapshot,name}', '')) end
+         else coalesce(nullif(p_deity, ''), nullif(t.d #>> '{config,primaryDeitySnapshot,name}', '')) end,
+    -- (VEIL-DOORS-2, item 6) A FROZEN SHARE (a marked row served its frozen copy): its name and tier are the copy's, never
+    -- the live row's (a rename or a tier shift after the freeze is the DM's later act)
+    t.frozen,
+    case when t.frozen then nullif(btrim(public._gallery_veil_str(t.d -> 'name')), '') end,
+    case when t.frozen then nullif(btrim(public._gallery_veil_str(t.d -> 'tier')), '') end
   from (
     select mk.marked, d.d, x.names,
+      coalesce(mk.marked and p_overrides #>> '{$veil,mode}' = 'snapshot' and jsonb_typeof(p_overrides #> '{$veil,snapshot}') = 'object', false) as frozen,
       coalesce(nullif(d.d #>> '{config,terrainType}', ''), nullif(d.d #>> '{config,terrainOverride}', ''),
                nullif(d.d #>> '{geography,terrain}', ''), nullif(d.d ->> 'terrain', '')) as terrain,
       coalesce(nullif(d.d #>> '{powerStructure,government}', ''), nullif(d.d #>> '{powerStructure,governingName}', ''),
@@ -2049,10 +2058,13 @@ as $$
   select
     s.id,
     s.public_slug,
-    coalesce(nullif(btrim(s.gallery_title), ''), s.name) as name,
-    s.tier,
+    -- (VEIL-DOORS-2, item 6) a frozen share's name and tier are its copy's; its time is its publication's, never the
+    -- live row's last save
+    coalesce(nullif(btrim(s.gallery_title), ''), t.frozen_name, s.name) as name,
+    coalesce(t.frozen_tier, s.tier) as tier,
     s.published_at,
-    coalesce(s.gallery_updated_at, s.updated_at, s.published_at) as updated_at,
+    case when t.frozen then coalesce(s.gallery_updated_at, s.published_at)
+         else coalesce(s.gallery_updated_at, s.updated_at, s.published_at) end as updated_at,
     s.view_count,
     s.is_curated,
     s.gallery_description,
@@ -2139,6 +2151,18 @@ returns jsonb language sql immutable as $$
   }'::jsonb
 $$;
 
+-- [212: NEW, VEIL-DOORS-2] public._gallery_doors_time
+-- A chronicle entry's time or a freeze's date as a timestamp; NULL where the text is none (never an error: a read never
+-- fails on a stored string). galleryDoors.js :: timeOf is the twin (Date.parse).
+create or replace function public._gallery_doors_time(t text)
+returns timestamptz language plpgsql stable as $$
+begin
+  if t is null or btrim(t) = '' or t !~ '^[0-9]{4}-[0-9]{2}-[0-9]{2}' then return null; end if;
+  return t::timestamptz;
+exception when others then
+  return null;
+end $$;
+
 -- [212: NEW, VEIL-DOORS] public._gallery_doors_chronicle
 -- THE CHRONICLE BY ITS OWN VEIL (VR20 (B), VR21). `log`: the raw campaign_state.eventLog; `proj`: the projection the read
 -- veiled; `v`: _gallery_veil's answer for it; `src`: the read's source (the hidden powers' names, which the projection
@@ -2160,12 +2184,16 @@ $$;
 --       or id (a house removed since, or added after a freeze, is no longer in the projection: the search asked of it alone
 --       let its name through, executed at ebe9387a2);
 --       the open houses and the shown powers are its cut-outs, as the veil's own search has them.
+--   (VEIL-DOORS-2, item 6) A FROZEN SHARE (`frozen`: the share's marker, given where the read serves the frozen copy):
+--     an entry is served only where its time (as served) is at or before the freeze's date; an entry with no readable
+--     time, or a freeze with none, serves nothing (the log is the live town's: what the DM did after the freeze is not
+--     the copy's, and the copy keeps no log of its own).
 --   Then THE NEWEST FIFTY OF WHAT IS SERVED (VR21: the window is taken after the removal, never before), in the log's
 --   order, each entry as a shared page draws it and no more: its summary, its time (the row's timestamp where truthy,
 --   else appliedAt: the page's order), partyCaused (true where the entry or its event is party-caused or caused
 --   'party_action': the page's stamp), and its event's type (the page's title). No id: a flavor row's id holds the log's
 --   length when it was written (a counter taken before the removal), and the page needs none (it numbers what it gets).
-create or replace function public._gallery_doors_chronicle(log jsonb, proj jsonb, v jsonb, src jsonb, share_dm boolean)
+create or replace function public._gallery_doors_chronicle(log jsonb, proj jsonb, v jsonb, src jsonb, share_dm boolean, frozen jsonb)
 returns jsonb language plpgsql immutable as $$
 declare
   body jsonb := v -> 'body';
@@ -2266,6 +2294,10 @@ begin
                                                                      public._gallery_veil_str(x.e -> 'targetId')))
                               in ('criminalcorridor', 'infiltration', 'infiltrated'))
                  and not (hits <> '{}' and public._gallery_veil_named(doc -> (x.n::int - 1), hits, srch -> 'blank', srch -> 'raw'))
+                 and (frozen is null
+                      or public._gallery_doors_time(case when public._gallery_veil_truthy(x.e -> 'timestamp') then public._gallery_veil_str(x.e -> 'timestamp')
+                                                         else public._gallery_veil_str(x.e -> 'appliedAt') end)
+                         <= public._gallery_doors_time(public._gallery_veil_str(frozen -> 'at')))
             ) k order by k.o desc limit 50) w);
 end $$;
 
@@ -2302,13 +2334,15 @@ begin
     -- member to its public gallery dossier (null when that member isn't published).
     select jsonb_agg(jsonb_build_object(
       'old_id',      s.id::text,
-      'name',        s.name,
-      'tier',        s.tier,
+      -- VEIL-DOORS-2 (item 6): a frozen member's name and tier are its copy's
+      'name',        coalesce(case when src.copied then nullif(btrim(public._gallery_veil_str(src.j -> 'name')), '') end, s.name),
+      'tier',        coalesce(case when src.copied then nullif(btrim(public._gallery_veil_str(src.j -> 'tier')), '') end, s.tier),
       'public_slug', case when s.is_public then s.public_slug else null end,
       -- VEIL-DOORS (VR23): the member through its own veil, and a member with none takes the default veil (the link's
       -- `true`: a map's member was never published as a page of its own); its chronicle by its own veil (VR20 (B))
       'settlement',  vm.v -> 'body',
-      'chronicle',   public._gallery_doors_chronicle(s.campaign_state -> 'eventLog', pub.j, vm.v, src.j, false)
+      'chronicle',   public._gallery_doors_chronicle(s.campaign_state -> 'eventLog', pub.j, vm.v, src.j, false,
+                                                     case when src.copied then s.gallery_member_overrides -> '$veil' end)
     )) into v_members
     from public.settlements s
     -- 211: the member's own listing source (the review's F7): its narration when narrated, its frozen
@@ -2325,6 +2359,7 @@ begin
     ) base
     cross join lateral (
       select case when cp.copy is not null then cp.copy else base.j end as j,
+             cp.copy is not null as copied,
              coalesce(length(cp.copy::text) > public._gallery_veil_copy_bound(), false) as refused
         from (select case when mv.v ->> 'mode' = 'snapshot' and jsonb_typeof(mv.v -> 'snapshot') = 'object' then mv.v -> 'snapshot' end as copy
                 from (select s.gallery_member_overrides -> '$veil' as v offset 0) mv) cp
@@ -2453,7 +2488,8 @@ as $$
     case when public._gallery_doors_closed(vl.v) then null else r.threat_level end as threat_level,
     r.net_votes,
     r.comment_count,
-    public._gallery_doors_chronicle(s.campaign_state -> 'eventLog', proj.d, vl.v, src.j, s.gallery_share_dm) as chronicle,
+    public._gallery_doors_chronicle(s.campaign_state -> 'eventLog', proj.d, vl.v, src.j, s.gallery_share_dm,
+                                    case when src.copied then s.gallery_member_overrides -> '$veil' end) as chronicle,
     ap.external_name as author_name,
     r.aliveness
   from public.settlements s
@@ -2461,8 +2497,10 @@ as $$
   -- (_gallery_doors_tiles) for this row, and the row's own columns as the tile rows state them (galleryDoors.pglite pins
   -- every one equal to the list's row)
   cross join lateral (
-    select s.id, s.public_slug, coalesce(nullif(btrim(s.gallery_title), ''), s.name) as name, s.tier, s.published_at,
-           coalesce(s.gallery_updated_at, s.updated_at, s.published_at) as updated_at, s.view_count, s.is_curated,
+    select s.id, s.public_slug, coalesce(nullif(btrim(s.gallery_title), ''), t.frozen_name, s.name) as name,
+           coalesce(t.frozen_tier, s.tier) as tier, s.published_at,
+           case when t.frozen then coalesce(s.gallery_updated_at, s.published_at)
+                else coalesce(s.gallery_updated_at, s.updated_at, s.published_at) end as updated_at, s.view_count, s.is_curated,
            s.gallery_description, s.gallery_image_url, s.gallery_image_alt, s.gallery_tags,
            t.population, t.terrain, t.government_type, t.magic_level, t.stability, t.primary_resource, t.threat_level,
            (select count(*)::integer from public.gallery_votes gv where gv.settlement_id = s.id) as net_votes,
@@ -2591,8 +2629,9 @@ set search_path = public, pg_temp
 as $$
   select
     s.id,
-    s.name,
-    s.tier,
+    -- VEIL-DOORS-2 (item 6): a frozen share's name and tier are its copy's, never the live row's
+    coalesce(case when src.copied then nullif(btrim(public._gallery_veil_str(src.j -> 'name')), '') end, s.name),
+    coalesce(case when src.copied then nullif(btrim(public._gallery_veil_str(src.j -> 'tier')), '') end, s.tier),
     coalesce(vl.v -> 'body', proj.d) as data
   from public.settlements s
   cross join lateral (
