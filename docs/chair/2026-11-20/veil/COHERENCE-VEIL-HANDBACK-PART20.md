@@ -86,6 +86,15 @@ its inputs ship, so a visitor recomputes it; it moved with the hidden houses in 
 ones): it fails VR26; VR19 applies: withheld on every non-owner read, the page re-derives it where the deriver ships with
 the page, else does not draw it; its tile NULL on a marked row; `history.founding.overcoming`, chosen by the prosperity
 label, follows it.
+01:36 UTC (the seventh chair): RULING VR28, THE TIERS, AMENDS VR26 and TAKES BACK the 01:20 ruling on
+`economicState.prosperity`. The reader ran the inversion test: the safety band itself fails it (28 of 86 towns) as
+prosperity does (29 of 86), their inputs being the served config and houses; held strictly it would take every band off
+every shared page. TIER 1, BLOCKING: no name, person, tie, sentence, crime-worded label or cause, sequence gap, door
+beside `data`, and no PRECISE figure carrying a hidden house's term reaches a non-owner read; the inversion test blocks
+for these. TIER 2, RECORDED, NOT BLOCKING: a coarse band every town shows from a closed, ordered vocabulary (safety,
+prosperity, the stability word, a readiness label) is sent as stored, as VR8 ruled; the test still runs on each and its
+count is recorded as the known residual. So `economy.prosperity` and `history.founding.overcoming` are DIFFUSE again;
+`compound.economyOutput` stays withheld on every read.
 
 ## 1. The bytes (kept current)
 
