@@ -26,6 +26,8 @@ export const ATOM_WORDS = Object.freeze([
   ['hospital', 3, 'hospitals?'], ['hospital', 3, String.raw`infirmar\w*`], ['healer', 3, 'healers?'],
   // BAR2-PLACES (the chair's grant VW2, 2026-11-15): `patrol` is a watch or a garrison, read by the words of its two parts
   ['patrol', 1, 'watch'], ['patrol', 1, 'garrison'],
+  // DAILY-2 B1b (the chair's ruling 12 (2), 2026-11-20): `sick house` is a hospital or a healer, read by the words of its two parts
+  ['sick house', 3, 'hospitals?'], ['sick house', 3, 'healers?'],
 ].map((row) => Object.freeze(row)));
 /** @param {number} member */
 const wordsOf = (member) => ATOM_WORDS.filter(([, m]) => m === member).map(([, , word]) => word).join('|');
