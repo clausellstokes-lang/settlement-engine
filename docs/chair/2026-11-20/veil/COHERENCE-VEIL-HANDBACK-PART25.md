@@ -180,6 +180,23 @@ NPC_PUBLIC_KEYS`; 210's `npc_allowed`) projects each card (it is why `gender` is
     (c) The reader's last hit at 4db8e4208: "black marketeer", Reveal DM on, a holder of the hidden Black market: VR9's
     holder pass, in the R4 second cure (its unit 1 or a probe of its own).
 
+37. THE CHAIR ON R3-CURE-2 (10:21; relayed to the R3-CURE-3 builder at 10:24):
+    (a) THE TWO REVEAL-DM GOALS SERVED AGAIN ARE A LEAK UNTIL ATTRIBUTED; the stage fails toward withholding. The ONLY
+    exemption is a hit lying WHOLLY inside the name of a power or house the SAME document serves, the test naming that
+    containing name (a positive exemption, never "the boundary search did not fire"). THE SEARCH IS CASE-BLIND AND COUNTS
+    A POSSESSIVE AND A PLURAL ENDING AS A BOUNDARY ("the Thieves' Guild's", "thieves' guilds"): a plant for each, red
+    first; and a plant the other way (a goal naming a served power whose name contains a withheld one stays served).
+    (b) THE R3 GATE (the seat's recommendation, accepted with two conditions): per-town equality of EVERY derived label
+    against the town's REGENERATED counterfactual (houses cut at every step), every town of the pool, both engines,
+    Reveal DM off and on. (i) It must be shown able to fail (re-derivation off in a scratch copy reds the five towns that
+    read HIGHER before). (ii) The control is REPORTED, NOT GATED, but by a table inside each crime-dial stratum; a gap
+    that does not close inside the strata goes to the chair at once. The counterfactual's builder and the table go where
+    the security reader can re-run them. (Ruling 30's DIFFERS stands; whether the 13 LOWER towns block is asked.)
+    (c) THE THREE publicSafe PINS may be re-stated without a further word, each with its cause in the commit, the old
+    positive kept on a town with no house hidden (the criminal power's name, category and standing stay byte for byte),
+    and the new arm (a house hidden: the row leaves whole, by search). criminalVeilSwitch VR34 (b) pins the OWNER'S SWITCH:
+    NOT re-stated without the chair's word; one paragraph to the chair (its assertion; what happens with the switch on and
+    a house hidden elsewhere).
 ## 2. The bytes (kept current)
 | File | sha256 |
 |---|---|
@@ -251,3 +268,4 @@ run exit 0, 40 PASS (`out/v24/gender/accept.txt`).
   or 400,000 tokens, whichever comes first; then "HANDED OVER at <commit>", and this seat only relays builders. The
   R4-CURE-2 brief is written (`briefs/R4-CURE-2-BRIEF.md`, its base filled at launch); VEIL-25 staffs it, not this seat.
 - 10:20 PART 25 checked against the chair's list; ruling 30 restored to the chair's word (DIFFERS; the 13 LOWER towns put to it).
+- 10:21 the chair's rulings on R3-CURE-2 (ruling 37); relayed to R3-CURE-3 10:24. VEIL-25 seated (session_019yED1QCGsC1hjJ6rjiboyE).
