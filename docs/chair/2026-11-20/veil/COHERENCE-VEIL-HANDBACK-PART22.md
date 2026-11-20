@@ -119,3 +119,7 @@ THE CHAIR (03:47 UTC): NEITHER (A) NOR (B): (C) CURE THE CAUSE IN THE CODE: the 
 canonical door (DEFAULT_CONFIG by the house's own normalizer); red first the scanner (4 -> 1); fidelity holds; bounded: if
 it still reds, STOP and the governed rung becomes its own unit on the line. A fresh bounded builder (`briefs/OSR-C-BRIEF.md`).
 "V10-2 cabdfaa69" is in: the chair reads it; the seat merges on its word.
+
+THE CHAIR (03:48 UTC): "V10-2 cabdfaa69" (origin/lane/veil-v102-2026-11-20) read by the chair, gone to the reader; MERGE
+`--no-ff` AFTER R2 IS MERGED (no builder in flight on galleryVeil.js); its hunk in `curateModelFor` only; after it the
+eight reds of VS1 (b)/(c) are gone (say the count); its stored figures: lighting census +1 file, one manifest row.
