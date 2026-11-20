@@ -21,6 +21,14 @@ export const ARRIVAL_SCENES = {
       `The road into ${r} is thick with carts by mid-morning, all of them heading for the same square, and the traffic tells you where the settlement's heart is before you can see it.`, crisis: ['any'] },
     { text: (r) =>
       `You reach ${r} against a tide of people leaving it. The market has ended for the day, and the settlement is exhaling its visitors back onto the roads with their purchases and their news.`, crisis: ['any'] },
+    // L2 (PAGE-2's lines, 2026-11-20; docs/chair/2026-11-20/content/page/L2-LINES.md): APPENDED, so every line above keeps its index.
+    // The pool is crisis-scoped: a line true under any crisis writes `crisis: any`; the settled hum writes nothing and stays calm
+    { text: (r) =>
+      `Every path into ${r} seems to lead to the same place, and you follow the people carrying baskets until it does.`, crisis: ['any'] },
+    (r) =>
+      `Awnings of every colour cover the middle of ${r}, and the buying and selling under them has settled into a steady hum.`,
+    { text: (r) =>
+      `Someone on the road into ${r} asks whether you are buying or selling, and seems satisfied with either answer.`, crisis: ['any'] },
   ],
   river: [
     (r) =>
@@ -31,6 +39,15 @@ export const ARRIVAL_SCENES = {
       `The river carries the sounds of ${r} to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.`, needs: ['institution: mill', 'institution: docks'] }, // R2-CODE-A-4 (CENSUS-2 a/docks): a jetty only where the roster holds a landing (the docks atom)
     { text: (r) =>
       `${r} has its back to the land and its face to the river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door.`, needs: ['trade at work: fish'] }, // BAR6-CULTURE (B4): declares what it presumes
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; each says only the river and its bank, as the first two lines do
+    (r) =>
+      `The road into ${r} follows the river for the last mile, and the settlement grows along the bank before it grows away from it.`,
+    (r) =>
+      `You come into ${r} along the riverbank, where steps go down to the water and someone is filling a bucket at the bottom of them.`,
+    (r) =>
+      `Trees lean over the river on the way into ${r}, and the first houses stand just above the line where the bank turns to mud.`,
+    (r) =>
+      `The river bends around ${r}, so that you see the settlement twice on the way in: once across the water, and once on arriving.`,
   ],
   port: [
     // R2-CODE-A item 4 (the cold list REVIEW-W2A-3, HIGH #1): the four harbour scenes declare the docks; 44 of
@@ -47,6 +64,13 @@ export const ARRIVAL_SCENES = {
       `The road into ${r} comes down to the sea, and the salt reaches you a mile before the first roof does.`, needs: ['coast'] },
     { text: (r) =>
       `${r} sits with its back to the land and its face to the open water, and the wind off the sea carries salt and weed a long way inland.`, needs: ['coast'] },
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the shore's two declare the coast, the moorings the docks, as their siblings do
+    { text: (r) =>
+      `The last stretch of road into ${r} runs beside the sea, and the sound of the surf keeps you company the whole way.`, needs: ['coast'] },
+    { text: (r) =>
+      `Gulls ride the wind above ${r}, and the roofs nearest the water are crusted pale with salt.`, needs: ['coast'] },
+    { text: (r) =>
+      `Boats ride at their moorings in the harbour below ${r}, and the smell of tar and rope comes up the road to meet you.`, needs: ['docks'] },
   ],
   smoke: [
     { text: (r) =>
@@ -56,6 +80,10 @@ export const ARRIVAL_SCENES = {
       `You smell ${r} before anything else: woodsmoke and bread and livestock, the layered scent of a place where people have been living close together and cooking the same suppers for generations.`,
     (r) =>
       `The smoke above ${r} stands straight up in the still air, a dozen thin columns that mark the settlement's shape on the sky like a map drawn in grey.`,
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; smoke seen and smelt on the way in, and no count of fires (the cookfire line declares its own)
+    (r) => `Smoke on the skyline is all you see of ${r} for the last hour of the road, and then the roofs are suddenly there.`,
+    (r) => `The wind brings you the smoke of ${r} in gusts, now strong, now gone, as the road winds toward it.`,
+    (r) => `Woodsmoke hangs low over ${r} in the morning air, and the roofs show through it one at a time as you come closer.`,
   ],
   guild: [
     { text: (r) =>
@@ -81,6 +109,20 @@ export const ARRIVAL_SCENES = {
       `A merchant argues with a carter on the road into ${r} about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.`, crisis: ['any'], needs: ['market'] }, // R2-CODE-A-4 (CENSUS-2 a/merchants): a daily merchant only where the roster holds a market
     { text: (r) =>
       `The first person you meet on the road into ${r} wants to know your business, and the second already knows it.`, crisis: ['any'] },
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED. The pool is crisis-scoped (silence reads calm): a line true under any crisis
+    // writes `crisis: any`, as its siblings do; the two everyday scenes a crisis could belie write nothing and stay calm
+    { text: (r) =>
+      `The first building you pass on the way into ${r} is somebody's house, and so is the second, and so, it turns out, is most of the rest.`, crisis: ['any'] },
+    { text: (r) =>
+      `A dog trots out to look you over on the road into ${r}, decides you are of no interest, and trots back.`, crisis: ['any'] },
+    (r) =>
+      `Washing hangs in the yards along the road into ${r}, and someone calls a greeting from behind it without looking to see who you are.`,
+    (r) =>
+      `A cart has stopped half across the road into ${r} while its driver talks to someone over a fence, and nobody minds going round it.`,
+    { text: (r) =>
+      `${r} does not announce itself: the road simply gathers more doors, then a well, and then you are in it.`, crisis: ['any'] },
+    { text: (r) =>
+      `${r} has no one thing to look at as you come in, only a great many small ones: a mended fence, a painted door, a bench beside a house.`, crisis: ['any'] },
   ],
 };
 
