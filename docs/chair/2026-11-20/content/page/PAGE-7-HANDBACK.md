@@ -23,6 +23,10 @@ Read this, then `PAGE-5-HANDBACK.md` (§2 S6 row, §5 the ruled tables, §6 the 
   touched; the page prints `guild_conflict.withoutItsHouse` instead (CAUSES-DATA addendum 2); the trouble's sides stay.
 
 ## 4. Owed at the join (for the security reader and the display seat)
+- THERE IS NO HIDEABLE LAYER (the chair, 17:32): `factLayers.js` is the table of READ layers (a leaf is one above the
+  highest stratum it touches); `causeHouses` sits in layer 1. What makes the criminal houses hideable is
+  `src/domain/people/cardVeil.js :: isHideableHouse`; the cause data's `hideable` list carries it, and the join tests the
+  cause sentence held equal on a served and a possible-world document. Nobody should look for a hideable layer.
 - The hideable rows (a list, not a branch): crime's nine houses + law_thin, no_force, force_unpaid_or_cut, guilds_rule,
   rival_power; every other kind's rival_power, merchants_rule, outranked (the roster of powers). Final list from the data
   file once merged.
