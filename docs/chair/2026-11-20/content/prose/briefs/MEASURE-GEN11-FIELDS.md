@@ -1,0 +1,14 @@
+# MEASURE-GEN11-FIELDS — which stored field says the words the coherence battery calls contradictions (PROSE-2's helper brief; MEASURE ONLY)
+
+Written by PROSE-2, 2026-11-20, on the chair's order of 17:55 UTC. You change NO source and NO test. You work in your own worktree, cut from `lane/prose-2-2026-11-20` at the commit named in your prompt; run `npm ci` there first. You commit ONLY your report and your census files, under `docs/chair/2026-11-20/content/prose/map/gen11-fields/`, by explicit paths; you never push.
+
+## WHAT IS KNOWN (read whole: `git show 1b5918ce2:docs/chair/2026-11-20/content/prose/map/GEN11-108.md`)
+The Outlook verdict pool (`generalStateProse.js :: criticalIssuePoolKey`) draws at 108 of 300 places (`hxd-<size>-0..49`, six sizes). In 97 the record holds no critical issue: the pool draws because the receipt's `record_coherence_battery` judgment is `needs_review`. Its findings there are the PAGE'S OWN WORDS against the record: `battery.defense-words` "walls without walls, a palisade or earthworks" (64 places), "soldiers without a garrison or a hired company" (33), `battery.tier-noun` "<word> for a <tier>" (14), then "hospital" (7) and "garrison" (2). PROSE-1's census script lived in another container: rebuild it (its recipe is in that file's section Command; birth exactly as `docs/chair/2026-11-20/content/prose/map/map-birth.shared.mjs` does).
+
+## THE QUESTION
+For every battery finding at the 103 `needs_review` places: WHICH STORED FIELD (its path in the town record, array indices replaced by `[]`, e.g. `dailyLife.slots[].text`) holds the offending word. Find the battery's own checker first (search for `defense-words` and `tier-noun`): which fields it scans and how it matches a word; if a finding carries its source path, use it; if not, re-run the checker's own matcher field by field on that place's record. Say whether each field is PRINTED by a page (search the page code for the field's path by CONTAINMENT, name the component; "not found" is reported as such, never guessed).
+
+## THE OUTPUT
+`docs/chair/2026-11-20/content/prose/map/gen11-fields/GEN11-FIELDS.md`: one table, the rows: finding kind · offending word · field path · places · findings · printed by (component or "none found") · one example sentence (the place's own name masked as `#`). Then the totals (they must add to the 149 findings and 103 places of GEN11-108; say so or say why not). Then, for each field path, the module and symbol that WRITES it (`path :: symbol`), so the chair can route it to the lane that owns it. Then EXECUTED vs INFERRED. Commit the census script and its config beside the report (outside `tests/`); the jsonl rows stay local (list them in the report with their size).
+
+Final message at most 150 words: the commit, the three commonest field paths with their place counts, and whether the totals reconcile.
