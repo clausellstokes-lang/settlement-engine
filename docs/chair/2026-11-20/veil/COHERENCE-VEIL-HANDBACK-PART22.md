@@ -135,3 +135,15 @@ R2 builder (v21-r2, 12a371c0b, pushed as `lane/veil-21-r2-2026-11-20`): built, N
 `galleryServerVeil` 11, `galleryVeilHandRows` V7-2 1, `publicProseEquality` Defense 2 lines (soak towns 3, 9). Not
 merged. The chair asked (04:15 UTC) for a ruin exemption row for `src/domain/veil/pageRederive.js` (VR2's form). A fresh
 builder carries R2 onto the lane tip as ONE commit and cures the reds (`briefs/R2-CURE-BRIEF.md`).
+
+THE CHAIR (04:27 UTC, read 04:28): (1) `pageRederive.js`'s ruin exemption GRANTED (pin 117 -> 118) on one measure: a
+born town with a RUINED house, shared: the page's re-derived figures equal the owner's page, else not drawn (count to the
+chair); the Defense red cured BY IDENTITY, never by loosening the equality (relayed to the cure builder). (2) THE
+OBSERVED-SHAPE SCANNER, SETTLED: the governed rung is a UNIT OF THE CLOSE at the joined tree. KNOWN, ATTRIBUTED, FOR THE
+CLOSE: `observedShapeReaders.walker` violations 4 against frozen 1 (the switch's 1 + the three "magicExists on config"
+reads in prosperity.js, foodGenerator.js, priorityHelpers.js, through VR25's import call) and its register arm A1/A7
+{reads 2220, identities 1556, files 448} against frozen {2214, 1552, 444}. (3) FOR D'S RECORD: a campaign map's
+unmarked member also sent income `weight`; R2's step covers it. (4) Stages whose helpers are disjoint may be staffed at
+once from the R2-green tip; R6 (tests only) may be prepared now; at ~330,000 tokens PART 22 current and the chair told.
+LATER MERGES: "DOORS" from `lane/veil-doors-3-2026-11-20` (two one-line hunks INSIDE `import_gallery_dossier`: read them
+hardest). Migration 213 joins at the close (two veil tests pin 212 as newest: the close's).
