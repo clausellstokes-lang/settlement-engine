@@ -1,0 +1,57 @@
+INSTRUMENT: 600 of 600 births identical (every noted chain: note, gate, status, outputs) with and without capture
+
+BEFORE (100 places a size). top = places holding the commonest note; share of the size's 100 places and of its holders
+thorp      HELD   holders   3  distinct  1  top 3/100 (100% of holders)  notes/holder 1.0  "Smuggling is the entrepôt trade run in the dark. Goods that "
+           PRINTED holders   3  distinct  1  top 3/100 (100% of printers) notes/printer 1.0  "Smuggling is the entrepôt trade run in the dark. Goods that "
+hamlet     HELD   holders  12  distinct  3  top 8/100 (67% of holders)  notes/holder 1.1  "Furs travel from the hunting grounds through trading posts, "
+           PRINTED holders  12  distinct  3  top 8/100 (67% of printers) notes/printer 1.1  "Furs travel from the hunting grounds through trading posts, "
+village    HELD   holders  22  distinct  4  top 13/100 (59% of holders)  notes/holder 1.1  "Salt is among the most-traded commodities. Port and crossroa"
+           PRINTED holders  22  distinct  4  top 13/100 (59% of printers) notes/printer 1.1  "Salt is among the most-traded commodities. Port and crossroa"
+town       HELD   holders  47  distinct  8  top 31/100 (66% of holders)  notes/holder 1.9  "Produced in distant lands. Crossroads and port settlements c"
+           PRINTED holders  47  distinct  6  top 31/100 (66% of printers) notes/printer 1.8  "Produced in distant lands. Crossroads and port settlements c"
+city       HELD   holders  89  distinct 10  top 81/100 (91% of holders)  notes/holder 5.7  "Luxury goods are the primary cargo of long-distance trade. E"
+           PRINTED holders  87  distinct  9  top 54/100 (62% of printers) notes/printer 3.6  "Furs travel from the hunting grounds through trading posts, "
+metropolis HELD   holders  86  distinct 10  top 76/100 (88% of holders)  notes/holder 5.6  "Furs travel from the hunting grounds through trading posts, "
+           PRINTED holders  81  distinct  9  top 76/100 (94% of printers) notes/printer 3.0  "Furs travel from the hunting grounds through trading posts, "
+
+PER CHAIN: places of 100 that HOLD / PRINT the chain's note, by size (thorp hamlet village town city metropolis)
+furs_north               0/0     8/8     5/5    12/12   54/54   76/76 
+luxury_goods             0/0     0/0     0/0     0/0    81/38   69/17 
+magical_goods            0/0     0/0     0/0     3/0    46/25   50/2  
+salt                     0/0     3/3    13/13   17/17   30/30   22/22 
+silk_luxury_textiles     0/0     0/0     0/0     0/0    64/32   48/1  
+smuggling                3/3     2/2     1/1     4/4    39/39   44/44 
+spices_dyes              0/0     0/0     0/0    31/31   64/32   48/6  
+transit_finance          0/0     0/0     0/0     1/0    47/0    48/0  
+warehouse_logistics      0/0     0/0     0/0    11/11   36/15   27/27 
+wine_spirits             0/0     0/0     5/5    11/11   44/44   48/48 
+
+HELD BUT NOT PRINTED (chain: reason, notes of 600 births)
+  transit_finance: dependency  96
+  luxury_goods: dependency  95
+  silk_luxury_textiles: dependency  79
+  spices_dyes: dependency  74
+  magical_goods: dependency  72
+  warehouse_logistics: dependency  21
+
+ROUTE of the places that PRINT each chain's note (all sizes)
+  furs_north             river 52, road 46, port 29, crossroads 28
+  luxury_goods           road 27, crossroads 14, river 14
+  magical_goods          river 9, crossroads 8, port 8, road 2
+  salt                   port 43, river 39, crossroads 3
+  silk_luxury_textiles   crossroads 17, river 14, port 2
+  smuggling              river 47, port 25, crossroads 21
+  spices_dyes            river 31, crossroads 30, port 8
+  transit_finance        
+  warehouse_logistics    river 33, crossroads 18, port 2
+  wine_spirits           river 48, crossroads 33, port 27
+
+FACTS: printed notes 678; the chain's own ground worked here (resourceActive with a resource) 107; a chain output on the export list 140 of 678
+FACTS: places printing a note 252; economicState.transit non-empty in 81; a market in 226
+
+WRITER: computeActiveChains calls per birth: 1 call(s) 499, 2 call(s) 101
+WRITER: route handed to the writer (last call) = tradeRouteOf(final record): 600 of 600
+WRITER: noted chains (id + note) at the last call = final: 600 of 600; their outputs equal: 600 of 600; their gate (entrepot && !dependency) equal: 600 of 600
+STEPS: the noted chains (id, note, gate, outputs) after each step = final: generateEconomy 590, economyReconcilePass 600, generateNarratives 600, assembleSettlement 600 (of 600)
+SEED: ctx._seed a non-empty string after generateEconomy 600 of 600, after economyReconcilePass 600 of 600 (computeActiveChains is handed no config and no seed: 0 of 600)
+AT economyReconcilePass (record = { config: effectiveConfig, economicState, institutions, tier }) = final: route 600, market 600, tavern+bank 600, every noted chain's carrier 600 (of 600)
