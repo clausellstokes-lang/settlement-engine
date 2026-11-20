@@ -1,4 +1,4 @@
-# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 03:15 UTC by date -u, before FINAL)
+# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 03:25 UTC by date -u, before FINAL)
 
 The review: `REVIEW-VEIL-11.md` beside this file. Probes and outputs: `probes/REVIEW-VEIL-11/`. **No verdict; 212 is NOT
 cleared.** My predecessors' hand-offs stand whole and are read from origin only (`git show
@@ -63,3 +63,10 @@ Run any probe: `RV6_SRC=<tree> [RV10_GEN=<master tree>] RV10_TPL=<chain> RV10_N=
     "Religious fraud", "Criminal governance"), the groupings open and the house hidden whole (section 3c); `ct2.probe.jsx` with `RV11_OPEN=1` and its control: no served criminal power a hidden house raised (VR11 `power.entry`), the derived Defense label within the control's distribution (section 3f).
 16. The cures' own tests re-run red at their bases and green at FINAL: `galleryVeilSignalCopies.pglite.test.js` (VR17),
     `galleryVeilHandRows.pglite.test.js` (B/C/D), and DOORS's when it comes.
+17. VR41 (the chair, 03:25 UTC; found by VEIL-DOORS-2): the chronicle's name search knows only houses still in the
+    projection, so a live share under the default veil served "A new Smugglers den was established." for a criminal house
+    the town no longer has; in snapshot mode a house added after the freeze was named, post-freeze entries were shown, and
+    `name` and `tier` followed the live row. When "DOORS" comes: an entry acting on a town entity is served only where its
+    target resolves to a card the served body shows; after a freeze, entries later than `$veil.at` withheld and `name`/`tier`
+    from the frozen copy. Attack: a house added then removed (live), a house added after the freeze, a rename after the
+    freeze, the map member's chronicle in both modes.
