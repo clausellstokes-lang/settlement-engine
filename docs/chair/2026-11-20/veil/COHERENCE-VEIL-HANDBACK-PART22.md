@@ -40,6 +40,7 @@ VR25's two owed rows, R5's law) governs where PART 21 or a brief differs. The la
 | `supabase/rollback/211_server_side_share_veil.down.sql` (FROZEN) | `ce8474ffc251b4c4bd6005d5a409d4a15bd20fef6b507534ef6338d3bd49712f` (proved at the first commit) |
 | 212 at the base 408f8e508 | `dae0ae6c344daab243af4136a6932ebd7da8cfceabce6df3d95bddf75e19e247` |
 | 212 after B/C/D (d262df16d) and VR17 (cfd77fdef) | `fec111c205018b3fa970945faa0038f471fea0cea86801dfbb9447dd3d4acea3` |
+| 212 after R2 (4ddf8c60c) | `05b915ab119e2f9766a3cea47fdd9ec023fc2155f588f1b4127ea5b347118f10` / down `1454f8f3fa53943130a22d412152e0eddcf3e05684b3cf01f62e77c069e2a66e`; 211 and its rollback proved unchanged |
 
 ## 2. The base and the first act (02:2x to 02:49 UTC)
 
@@ -172,3 +173,33 @@ born town). Tier 1 inverting: `defence.scores.internal` (R2 withholds it); tier 
 covered: master's shape, the hand veil, the map, the import send. FOR THE SUCCESSOR: align or retire
 `rosterChoiceInversion.pglite.test.js` (its legitimacy rows and prosperityStanding no longer invert under VR32); merge R6 after
 R2 and re-run its MAIN arm (R2's rows are withhold-always, not (a)/(b): MAIN judges R3 onward).
+
+## 7. R2 MERGED GREEN (05:46 UTC): **4ddf8c60c** (one commit, cherry-picked from `v21-r2b` 81e9fbfd1: R2 12a371c0b + its cures + the session sheet's walk; src, supabase, tests and scripts byte-equal to the builder's)
+
+THE SEAT'S OWN RE-RUN (`out/v21/seat-r2/`): RED, R2's born test `galleryWithholdAlways.pglite.test.js` against the lane before
+R2: 7 failed of 9 (exit 1); GREEN at the R2 tree: the eight veil guard files (that test, the six guards, VR17's signal copies)
+141 of 141 (exit 0). THE READER'S GATE THROUGH THE SERVER (gallery read, new shape, N=2, committed export): BEFORE
+`registered 0 | diffuse 0 | rng-only 13 | UNREGISTERED 137` -> AFTER `registered 13 | diffuse 21 | rng-only 13 |
+UNREGISTERED 42` (`gate-gallery-post-r2-at-7591663b4.txt`; the link and master's shape NOT run by this seat).
+THE BUILDERS' RECEIPTS (`out/v21/r2/`, `out/v21/r2/cure/`): 57 rows built; `defence.scores.*` and `economicGates` withhold-always
+(page re-derives); red 2,470 sends -> 0; render-twice 4 of 4, KNOWN_DRAWN EMPTY, the walk now includes the SESSION SHEET (Table
+View) on the shared page and the party link, desktop and phone, nothing found drawn; inversion 4 of 4; acceptance EXIT 0 (40
+PASS); `--check` 0; typechecks; eslint; the tuning register refrozen at the clean tip (stamp and two dependents lists).
+VR37 TABLE: `conditions.severity` withheld, band served, chips from the band; `defence.readiness.score` withheld, the page
+re-derives it and DRAWS THE LABEL ALONE where the score falls outside the label's band (0 of 24 born pages disagree; a planted
+control live); `cast.stakes`/`cast.roles` (b) per entry; `power.relation.direction` (b) with its relation (R3): chosen by
+legitimacy flags withheld always, so not (a).
+THE THREE REDS: `galleryServerVeil` 11 = A REGRESSION, cured in code (212 withholds the memberships' `veiled` stamp; the
+unmarked page re-projected with toPublicSafe drew memberships EMPTY on 7 of 8 towns; `restampServedMemberships` on the server's
+own data, on a copy); `galleryVeilHandRows` V7-2 (3 arms) = tests pinning the old behaviour (legacy annotations and siege
+narrative now withheld always, VR16 rule 1): re-recorded, cause stated; `publicProseEquality` Defense = R2's own test edit
+(the owner record had lost the black-market capture): the owner record restored; the page re-derives the capture by
+`generateSafetyProfile` (40 of 40 soak towns equal) ONLY on a share it knows carries no veil: **THE REGISTRY ROW
+`safety.blackMarketCapture` MOVED `page: 'not drawn'` -> `'re-derive'`: FOR THE CHAIR TO CONFIRM.** Equality 428 of 428.
+THE RUINED-HOUSE MEASURE (the grant's condition): 8 ruined shares, every figure equal to the owner's or not drawn, 0 wrong; on
+the 2 that hide a house, the internal score, readiness and economyOutput differ from the owner's BY THE VEIL, as without the ruin.
+COST: the largest born town here is Langengrund (502,604 B): Reveal-DM gallery read 419.1 ms after, bound 529.6 ms (twice
+211's Reveal-OFF 264.8); the v8245 rows within twice 211 at 12a371c0b (212 unchanged by the cure: not re-run, PLAUSIBLE).
+REDS KNOWN AFTER R2: `criminalVeilSwitch.test.js` VS1 (b)/(c): 28 lines on 12 births (8 at the base; it now also lists
+`blackMarketCapture`); V10-2 rewrites that test (merge it next). `observedShapeReaders.walker`: violations 4 and the register
+arm (the close's). Owed to the reader for R2: the gate through the link and master's shape.
