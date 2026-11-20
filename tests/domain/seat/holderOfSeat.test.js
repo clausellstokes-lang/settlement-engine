@@ -581,7 +581,7 @@ describe('(11) Step 1′: the transfer\'s sentences are read through ONE matcher
     expect(TRANSFER_WORDINGS.filter((w) => w.sentence === 'edge').length).toBe(1);
     expect(TRANSFER_WORDINGS.filter((w) => w.sentence === 'conflict').length).toBe(5);
     // the chair's cure (1), 16:43Z: the retired edge's ONE fixed wording, a class of its own, never an 'edge' row
-    expect(TRANSFER_WORDINGS.filter((w) => w.sentence === 'retired').length).toBe(1);
+    expect(TRANSFER_WORDINGS.filter((w) => w.sentence === 'retiredEdge').length).toBe(1);
     expect(TRANSFER_WORDINGS.length).toBe(7);
   });
 

@@ -30,7 +30,14 @@
  *       the retired edge is never read as a transfer (R1's matcher and `unattributedTransferOn`'s read both refuse it);
  *   (9) CS22 (d), the GUARD (the chair's condition 1): on arm (3)'s transferred town no card carries a crown word
  *       (`cultureOfficeTitles.js :: officeWordInfo(word).crown`) together with a house it keeps (rank 1) other than the
- *       seat's own, and the person `holderOf` names keeps none; the predicate reds on a planted keeper-king.
+ *       seat's own, and the person `holderOf` names keeps none; the predicate reds on a planted keeper-king;
+ *  (10) the chair's cure (1), its class word disambiguated by U5-CURE (the chair 17:32Z): `'retiredEdge'`;
+ *  (11) U5-CURE (b): a Royal Authority city, trade wealth held, taken by Merchant Guilds through the WIRED caller's real
+ *       path (the roster's `government_change`) keeps the form; the two paths NOT wired fall closed, each pinned with its
+ *       stop: the DM's `CHANGE_RULING_POWER` (`mutateWorld.js :: changeRulingPower`: first paint) and the world pulse's
+ *       power-transfer outcome (`applyWorldPulse.js`: at its size ceiling);
+ *  (12) U5-CURE (b): the law dark, the three paths byte-identical at play time (digests RECORDED at 9a05215bc before any
+ *       caller was edited), with the negative control that the law-on digest differs.
  */
 import { createHash } from 'node:crypto';
 import { describe, test, expect } from 'vitest';
@@ -38,6 +45,8 @@ import { transferRulingPower, RULING_POWER_CAUSES, DEPOSED_MODIFIER } from '../.
 import { holderOf, isCrownedForm, TRANSFER_WORDINGS, transferSentenceSays, transferTakerOf } from '../../../src/domain/seat/holderOfSeat.js';
 import { seatCircumstancesOf } from '../../../src/domain/seat/seatCircumstances.js';
 import { officeWordInfo } from '../../../src/data/cultureOfficeTitles.js';
+import { applyWorldPulseOutcomes } from '../../../src/domain/worldPulse/applyWorldPulse.js';
+import { mutateSettlement } from '../../../src/domain/events/mutate.js';
 
 // ── fixtures ───────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -468,20 +477,20 @@ describe('(9) CS22 (d), the guard: no card carries a crown word with a house it 
 
 // ── (10) cure (1), the chair 16:43Z: the retired edge is a class of its own ────────────────────────────────
 
-describe('(10) the retired edge\'s narrative is ONE fixed wording of its own class (\'retired\'), never an \'edge\' wording', () => {
+describe('(10) the retired edge\'s narrative is ONE fixed wording of its own class (\'retiredEdge\'), never an \'edge\' wording', () => {
   /** A kept City Council (Noble Houses, then Merchant Guilds) and a renamed one (Military Council, two coups). */
   const keptTown = () => transfer(transfer(lawful(place({ tier: 'city' })), 'Noble Houses'), 'Merchant Guilds');
   const renamedTown = () => transfer(transfer(lawful(place({ tier: 'town', government: 'Military Council', category: 'military' })), 'Merchant Guilds'), 'Noble Houses');
 
-  test('the list holds the retired wording once, as \'retired\', and the real transfer writes it (kept and renamed)', () => {
-    expect(TRANSFER_WORDINGS.filter((w) => w.sentence === 'retired').length).toBe(1);
+  test('the list holds the retired wording once, as \'retiredEdge\', and the real transfer writes it (kept and renamed)', () => {
+    expect(TRANSFER_WORDINGS.filter((w) => w.sentence === 'retiredEdge').length).toBe(1);
     for (const [label, s, loser, taker, heldForm] of [
       ['kept', keptTown(), 'Noble Houses', 'Merchant Guilds', 'City Council'],
       ['renamed', renamedTown(), 'Merchant Guilds', 'Noble Houses', 'Merchant City Council'],
     ]) {
       const retired = seatEdge(s, loser);
       expect(retired.type, label).toBe('competitive');
-      expect(transferSentenceSays(retired.narrative, 'retired', taker, heldForm), label).toBe(true);
+      expect(transferSentenceSays(retired.narrative, 'retiredEdge', taker, heldForm), label).toBe(true);
       // the matcher reads the class: the retired wording is no 'edge' and no 'conflict' wording, for any form
       for (const who of [loser, taker]) {
         expect(transferSentenceSays(retired.narrative, 'edge', who, null), `${label}: ${who}`).toBe(false);
@@ -502,5 +511,147 @@ describe('(10) the retired edge\'s narrative is ONE fixed wording of its own cla
       const h = holderOf(bare, OWNER);
       expect(h.rule).not.toBe('R1'); // no taker read, and Addendum 3's "nobody" did not fire
     }
+  });
+});
+
+// ── U5-CURE (b): the callers hand in the seat's circumstances (the chair 17:32Z) ───────────────────────────
+
+/** A Royal Authority city, trade wealth held, its king the seat's card: the licensed pair a merchant king keeps. */
+const crownTown = (config = {}) => place({
+  tier: 'city', government: 'Royal Authority', category: 'noble', economicState: WEALTHY, config,
+  npcs: [card('npc_king', 'Aldric Vane', 'King', [{ power: 'Royal Authority', rank: 1 }, { power: 'Noble Houses', rank: 3 }])],
+});
+const NOW = '2026-11-20T00:00:00.000Z';
+
+/** The world pulse's apply pass over ONE outcome on ONE settlement (the real `applyWorldPulseOutcomes`). */
+const pulse = (settlement, outcome) => applyWorldPulseOutcomes({
+  snapshot: { regionalGraph: { edges: [], channels: [] }, settlements: [{ id: 's1', name: settlement.name, settlement }], campaign: {} },
+  worldState: { stressors: [], npcStates: {}, proposals: [] },
+  regionalGraph: { edges: [], channels: [] },
+  settlementMap: new Map([['s1', { saveId: 's1', save: { name: settlement.name }, settlement }]]),
+  outcomes: [outcome], tick: 4, now: NOW, advanceNewsTick: false, advanceRegionalImpacts: false,
+});
+const settledOf = (r) => r.settlementUpdates.find((e) => e.saveId === 's1').settlement;
+
+/** THE THREE PATHS, each by its real door, each with every cause it takes. */
+const PATHS = {
+  // (i) the world pulse's power-transfer outcome (`applyWorldPulse.js`, the shape `worldPulse/coup.js` writes)
+  pulseTransfer: {
+    causes: RULING_POWER_CAUSES,
+    run: (s, cause) => pulse(s, {
+      id: `coup.${cause}`, type: 'power_transfer', candidateType: 'coup_succeeded', applyMode: 'auto', targetSaveId: 's1', severity: 0.6,
+      headline: 'Merchant Guilds seizes power in Harrowgate', summary: 'The seat fell.', reasons: [],
+      powerTransfer: { toPowerName: 'Merchant Guilds', cause, tick: 4, losers: ['Noble Houses'] },
+    }),
+    settled: settledOf,
+  },
+  // (ii) the roster's `government_change` (`applyWorldPulseFactionRoster.js :: applyFactionPayloadEffect`), cause 'appointment'
+  rosterChange: {
+    causes: ['appointment'],
+    run: (s) => pulse(s, {
+      id: 'faction.gov', type: 'faction', candidateType: 'faction_government_change', applyMode: 'auto', targetSaveId: 's1', severity: 0.6,
+      headline: 'Merchant Guilds take the seat', summary: 'U5-CURE fixture: government_change.', reasons: [],
+      proposalPayload: { kind: 'government_change', settlementId: 's1', factionId: 's1:merchant_guilds' },
+      metadata: { factionName: 'Merchant Guilds' },
+    }),
+    settled: settledOf,
+  },
+  // (iii) the DM's CHANGE_RULING_POWER event (`mutateWorld.js :: changeRulingPower`, through `mutate.js`)
+  eventChange: {
+    causes: RULING_POWER_CAUSES,
+    run: (s, cause) => mutateSettlement({
+      settlement: s, now: NOW,
+      event: { id: `ev.${cause}`, type: 'CHANGE_RULING_POWER', targetId: 'Merchant Guilds', payload: { cause }, cause: 'player_action' },
+    }),
+    settled: (r) => r,
+  },
+};
+
+describe('(11) U5-CURE (b): under the law a merchant king keeps the Royal Authority through each WIRED caller\'s real path', () => {
+  test('the fixture holds trade wealth (the licence\'s circumstance), read live', () => {
+    expect(seatCircumstancesOf(crownTown(LAW))).toContain('trade_wealth');
+  });
+  for (const key of ['rosterChange']) {
+    test(`${key}: every cause it takes keeps the Royal Authority, and R1 names Merchant Guilds`, () => {
+      for (const cause of PATHS[key].causes) {
+        const s = PATHS[key].settled(PATHS[key].run(crownTown(LAW), cause));
+        expect(s.powerStructure.government, `${key}:${cause}`).toBe('Royal Authority');
+        expect(holderOf(s, OWNER), `${key}:${cause}`).toMatchObject({ rule: 'R1', holderName: 'Merchant Guilds' });
+      }
+    });
+  }
+  // THE TWO STOPS, pinned (U5-CURE's report): each path is NOT wired and falls closed to the merchants' own form.
+  //   eventChange: `mutateWorld.js` is FIRST PAINT (main.jsx -> store/index.js -> store/settlementSlice.js ->
+  //     events/mutate.js -> events/mutateWorld.js); the brief forbids its import of the lazy `seatCircumstances.js`.
+  //   pulseTransfer: `applyWorldPulse.js` stands AT its size ceiling (`scripts/.size-baseline.json`: 907, shrink-only,
+  //     raised only by a chair ruling); the wiring costs 3 counted lines (910). The lane's owner rules; then this pin moves.
+  for (const key of ['eventChange', 'pulseTransfer']) {
+    test(`the STOP, pinned: ${key} is NOT wired: under the law it falls closed to the merchants' own form`, () => {
+      for (const cause of PATHS[key].causes) {
+        const s = PATHS[key].settled(PATHS[key].run(crownTown(LAW), cause));
+        expect(s.powerStructure.government, `${key}:${cause}`).toBe('Grand Merchant Senate');
+      }
+    });
+  }
+  test('control, the old law: every path renames the seat to the merchants\' own form', () => {
+    for (const [key, path] of Object.entries(PATHS)) for (const cause of path.causes) {
+      expect(path.settled(path.run(crownTown(), cause)).powerStructure.government, `${key}:${cause}`).toBe('Grand Merchant Senate');
+    }
+  });
+});
+
+describe('(12) U5-CURE (b): THE LAW DARK, the three paths are byte-identical at play time (the chair\'s condition)', () => {
+  const digest = (r) => createHash('sha256').update(JSON.stringify(r)).digest('hex');
+  /** Both fixtures dark: the crown city (licensed) and a civic town (kept under the law). */
+  const FIXTURES = { crown: () => crownTown(), civic: () => place({ tier: 'town', government: 'Town Council' }) };
+
+  // RECORDED at 9a05215bc (the callers before U5-CURE), by this arm's own `digest`, before any caller was edited. The
+  // two rosterChange rows were re-recorded the same way (this file run in a `git archive` tree of 9a05215bc) when the
+  // fixture's summary left a state-prose wording (proseDrawnAnchors.walker); the other 20 rows read equal there.
+  const RECORDED = {
+    'civic:eventChange:appointment': '2a2319a200081990518ee5187f523d0b970280e658b9630a6ae7231cc7874a9e',
+    'civic:eventChange:conquest': 'a2c423eb8c3bb76fc02af3e7a52caee9e5be9e527ed82784fbdd672f6fa9a7cd',
+    'civic:eventChange:coup': '0824ce77a34014d03878d71ba563c81af76239db386d45786f72b4c5410c75d5',
+    'civic:eventChange:election': '370bd3a117ff568eeaae3a8366e95e732069dad97a034f4d81670cf4d59fa991',
+    'civic:eventChange:succession': 'b3c44df47fae89bc7df42a5a0577eea32310b5d784b896055ef562e685a7c8e9',
+    'civic:pulseTransfer:appointment': 'b0867ad8f261299307479cb44c35d1b302b004433c84a7077f43767a8125ae5b',
+    'civic:pulseTransfer:conquest': '2e445617e6a1c7b655f78180c8a03d1b93ddf11fc17f6dbe6919a20a719aa3c6',
+    'civic:pulseTransfer:coup': 'd63b15b884b2e7eea63f5f405339268d954cb55ffad5028e5da031a046278b7d',
+    'civic:pulseTransfer:election': '0459ffabb43a8ec0ae91572e71586e96d8ef62515606d1eac965253cdd322e1b',
+    'civic:pulseTransfer:succession': 'dca96502b76cbe76efcb751bdd00beef6ac9d988bbf7f2ee96cbae87c1525d10',
+    'civic:rosterChange:appointment': '61cd36cdaf56a24c2c76685032a8012255e29ef5abbc829c83171124a6acdde2',
+    'crown:eventChange:appointment': 'c506372f380686044559b50787b38472084d7bb0b53353da7691499444bf8188',
+    'crown:eventChange:conquest': '70a7aed68c0876aa038bb3c82fdd16b628fdf5104b4f445408698975fab2634f',
+    'crown:eventChange:coup': '98e3e1068d18c91cda7d859c8a066be149c995663f702a544b440639eda57801',
+    'crown:eventChange:election': 'e9cf5fc2ce337755a83f2bcff2a299c9c73df13860d90000e7e56c7cd7f4c0c2',
+    'crown:eventChange:succession': 'ee712da208196701c0ff3ce1900f4d56feca297f2fe1899bb74a3d1a987a7582',
+    'crown:pulseTransfer:appointment': '89f9a7962135cecfe858fef3211979e91ab11c6021d8b864e7403fc13ca09c28',
+    'crown:pulseTransfer:conquest': 'a9020767af0044afba2826a4decbdcbb32481f24429301cd877ee6977d25c78d',
+    'crown:pulseTransfer:coup': '256f7092c533c247994fefdb1dd86414422e5bbb19857184264edb5617a7e8c1',
+    'crown:pulseTransfer:election': '185326cc5cb66d2de70e92bfeafa333518c9e8b114910640534cdc1ca15bdeeb',
+    'crown:pulseTransfer:succession': 'babe5d415740772bd062b8735d68c2798e146d7d6fe7849852dc75f3a58621a7',
+    'crown:rosterChange:appointment': 'c184d3a992ab8b5aeb838d8b654603c0e2af7f5d32fb52908993dc4e0fe99829',
+  };
+
+  const runAll = (config) => {
+    const got = {};
+    for (const [fx, make] of Object.entries(FIXTURES)) for (const [key, path] of Object.entries(PATHS)) for (const cause of path.causes) {
+      const base = make();
+      got[`${fx}:${key}:${cause}`] = digest(path.run({ ...base, config: { ...base.config, ...config } }, cause));
+    }
+    return got;
+  };
+
+  test('no law key: every path, every cause, reads the recorded result (and is stable run to run)', () => {
+    const got = runAll({});
+    expect(runAll({})).toEqual(got);
+    expect(Object.keys(got).length).toBe(2 * (2 * RULING_POWER_CAUSES.length + 1));
+    expect(got).toEqual(RECORDED);
+  });
+
+  test('negative control: under the law every row\'s digest differs from the dark one', () => {
+    const dark = runAll({});
+    const lit = runAll(LAW);
+    expect(Object.keys(lit).filter((k) => lit[k] === dark[k])).toEqual([]);
   });
 });
