@@ -710,3 +710,35 @@ describe('TRAD-3 UNIT 4, THE DRAWN ROWS ARE NUMBERED DENSE (the chair\'s item 5)
     expect(shownTraditionsOf(t, []).recs.map((r) => r.id)).toEqual([first.id, market.id, harvest.id]);
   }, 120000);
 });
+
+describe('TRAD-3 UNIT 4b, THE FLOOR EXCLUDES THE HIDEABLE CLASS (the chair\'s ruling of 12:25 UTC)', () => {
+  // The rows drawn for the shared page admit by the floor over houses NOT of the hideable class (people/cardVeil.js ::
+  // isHideableHouse, read on the house whole, before the function-eye strip), whether a given house is hidden or shown.
+  // The plant: a DM-made CRIMINAL house named like a catalogue market (the catalogue knows the name and tags it market),
+  // the town's only market. Before the cure its name admitted the market rites into the drawn rows; a hide of the house
+  // (card:institution:<id>, X-21e: it goes whole) would then have told the reader the rites stood on it.
+  const HOUSE = { name: 'Weekly market', category: 'Criminal', priorityCategory: 'criminal' };
+  const b = born('town', 'latin', 'trad-plant2-town-latin-0');
+  const t = { ...b, institutions: [...b.institutions.filter((i) => !isMarketInstitution(i)), { ...HOUSE }] };
+  const hidden = applyVeil(t, new Set([`card:institution:${CARD_KINDS.institution.idOf(HOUSE)}`]));
+  // a rite that stands on a market: the market element, or the fair act (shownTraditions.js :: ACT_NEEDS), read off the row
+  const standsOnMarket = (r) => r.element === 'market' || /\bFair\b/.test(`${r.name} ${r.chip}`);
+
+  it('NOT VACUOUS: the house is of the hideable class, the catalogue knows its name, it is the only market, and the hide takes it whole', () => {
+    expect(isHideableHouse(HOUSE)).toBe(true);
+    expect(catalogIdForName(HOUSE.name)).toBeTruthy();
+    expect(t.institutions.filter((i) => isMarketInstitution(i)).map((i) => i.name)).toEqual([HOUSE.name]);
+    expect(hidden.institutions.some((i) => i.name === HOUSE.name)).toBe(false);
+  }, 120000);
+
+  it('CONTROL: the OWNER\'s set still admits the market rites on it', () => {
+    expect(shownTraditionsOf(t, []).recs.map((r) => `${r.coreMotif.element}/${r.coreMotif.act}`)).toEqual(['first-landing/feast', 'market/fair', 'tide/fair']);
+  }, 120000);
+
+  it('the drawn rows hold no rite that stands on the hideable house, and are byte-identical with it hidden and shown', () => {
+    const rows = sharedTraditionRowsOf(t);
+    expect(rows.map((r) => r.name)).toEqual(shownTraditionsOf(t, []).recs.filter((r) => r.coreMotif.element === 'first-landing').map((r) => r.name));
+    expect(rows.filter(standsOnMarket).map((r) => r.name)).toEqual([]);
+    expect(JSON.stringify(sharedTraditionRowsOf(hidden))).toBe(JSON.stringify(rows));
+  }, 120000);
+});

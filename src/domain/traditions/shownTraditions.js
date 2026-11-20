@@ -15,13 +15,15 @@
  * THE FLOOR (TRAD-3 unit 4, the chair's cure B, 2026-11-20): the rows drawn for the shared page admit their motifs over
  * the record with every house's `function`-eye fields stripped (traditionDescription.js :: withoutFunction: a house's
  * NAME against the catalogue's tags, hidden or shown), so no later shut of a house's function eye could have moved the
- * set; the owner's set (shownTraditionsOf) is unchanged and admits by the record it is handed.
+ * set; and over no house of the hideable class (people/cardVeil.js :: isHideableHouse, TRAD-3 unit 4b), so no later
+ * hide of a house whole could have. The owner's set (shownTraditionsOf) is unchanged and admits by the record it is handed.
  * Pure: no draw, no clock, no write.
  */
 import { deriveFoundingTraditions, describeTraditionWindow } from './genesis.js';
 import { mergeCustomFoundingTraditions } from './customFounding.js';
 import { describeTradition, withoutFunction } from './traditionDescription.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { isHideableHouse } from '../people/cardVeil.js';
 import { TRADITION_ELEMENTS } from '../../data/traditionCorpus.js';
 import { filterDeclared } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
@@ -138,10 +140,15 @@ export function calendarLineOf(rec, sameWindowAs) {
  * @param {AnyRec|null|undefined} settlement the owner's record @returns {SharedTraditionRow[]|null}
  */
 export function sharedTraditionRowsOf(settlement) {
-  // the drawn set admits by the floor (the chair's cure B): every live house less its function-eye fields (the facts the
-  // admission reads, market and the smith, read the live roster only: facts/market.js, facts/institutions.js)
+  // the drawn set admits by the floor (the chair's cure B): every live house NOT of the hideable class (cardVeil.js ::
+  // isHideableHouse, read on the house whole before the strip, as readerView reads it; TRAD-3 unit 4b), less its
+  // function-eye fields (the facts the admission reads, market and the smith, read the live roster only)
   const floor = settlement && typeof settlement === 'object'
-    ? { ...settlement, institutions: liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement)).map(withoutFunction) }
+    ? {
+      ...settlement,
+      institutions: liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
+        .filter((i) => !isHideableHouse(/** @type {Record<string, unknown>} */ (i))).map(withoutFunction),
+    }
     : settlement;
   const { recs } = shownOver(settlement, [], floor);
   if (!recs.length) return null;
