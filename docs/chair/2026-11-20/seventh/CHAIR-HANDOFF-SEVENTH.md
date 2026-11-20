@@ -286,6 +286,25 @@ parts of the whole check (at the close).
   `RULER_KINDS` lists craft and a "Guild Council" label exists, reached through a town's own governing house: not
   counted; the count settles it. SEAT-MEASURE's count and map were widened by a message into its running turn.
 
+- **2026-11-20, answered by 04:46 UTC, THE OWNER (verbatim, the whole message):** "Predeploy". TAKEN AS the answer to the
+  chair's twice-given recommendation on who rules and who contests ("count and design now, build right after the
+  deploy. If you want it before the deploy anyway, say so"): THE REDESIGN (every power able to hold or contest the
+  seat given the right circumstances; the ruling body not contested by its own kind; the FORM of government, the
+  POWER THAT HOLDS THE SEAT and the PERSON in it kept apart) IS BUILT BEFORE THE DEPLOY. THE DEPLOY NOW WAITS ON
+  THREE THINGS: the share veil, the content round (the session sheet's frame and the names), and this. SAID TO THE
+  OWNER ONCE, PLAINLY: the cost (the deploy moves out, by the chair's rough guess one to two days, not a measure;
+  the most risk of the three: the stored shape of a town's rule, every reference town, the powers pages the
+  security lane is finishing; with it wait the server-side veil, the map-sharing fix and migration 213, while the
+  emergency revokes already run on production stay in force); how it is kept safe (only NEW towns take the new
+  rule, by the law a town was born under, to be confirmed; a council held from behind by a criminal house shows its
+  public face on shared pages and its true holder on the DM's pages only, read by the security reader); and that
+  the owner sees ONE PAGE (today's counts; the proposed pairings of form and power; which circumstances lift which
+  power) before the bulk is built, to strike or change. NEEDED FROM THE OWNER: that look; at the end the yes to
+  re-sign the reference towns. NOT CLAIMED TO THE OWNER (not established tonight): what a visitor's browser
+  receives of a hidden house on the live site today; read on master: the Curate screen and `galleryVeil.js` exist
+  there, 211 does not, and the owner's own client builds the veiled copy at sharing
+  (`src/hooks/useGalleryShareControls.js`).
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
@@ -1410,3 +1429,13 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   launches them when the chair gives it the lane. TWENTY SEATS OPENED BY THIS CHAIR. WORKING (ten): VEIL-21,
   VEIL-22 (reading), VEIL-DOORS-3, REVIEW-VEIL-11 (waiting for R2), REVIEW-GRANTS-1, GIT-DOOR, FRAME-1, NAMES-1,
   SEAT-MEASURE; the rest done. THE SAFETY NET OF 05:15 UTC reads these ten.
+- 04:46 UTC · **THE SEAT'S REDESIGN IS A BUILD BEFORE THE DEPLOY (the owner's "Predeploy").** SEAT-MEASURE told into its
+  running turn: the COUNT first and alone ("COUNT <commit>"), then the map with three questions added: (a) THE
+  BIRTH-LAW GATE (can a new law of the seat be gated as the density law is, `src/domain/density/densityLaw.js ::
+  rollsRegisterVii`, so that every stored town stays byte-identical and only towns born after it take the new
+  rule); (b) WHERE THE TRUE HOLDER COULD LIVE (which containers the public projection already strips; which fields
+  of `powerStructure` reach a shared page today: "Corrupt Council" and "Shadow Senate" are served now); (c) THE
+  SMALLEST STORED CHANGE against what can be derived at render. THE CHAIR'S PLAN: on the count, the design (the
+  pairings of form and holder with weights and stated reasons; the circumstances that lift each kind; the stored
+  shape; the veil's rows) and ONE PAGE for the owner; then builders, each proposing before building; the security
+  reader reads what touches a shared page. THE CLOSE NOW HOLDS THREE LANES: the veil, the content round, the seat.
