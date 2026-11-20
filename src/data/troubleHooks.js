@@ -11,7 +11,9 @@
  * (lines 1-12 of crime_wave and guild_conflict, all 9 of the other six) and `TROUBLE-LINES-3.md` (lines 13-16 of the two;
  * guild_conflict 15 as the chair reworded it at 17:00). Each row's `needs` / `excludes` is the atom its table row names
  * (`!atom` there is `excludes` here), every one an atom `factVocabulary.js` already holds; `needs: []` needs nothing.
- * Lines 1-3 of each kind are today's three stored hooks (guild_conflict 3 in its "both sides" spelling). The timeline's
+ * Lines 1-3 of each kind are today's three stored hooks (guild_conflict 3 in its "both sides" spelling; external_threat 1-2
+ * reworded by the chair's rulings of 20:03 UTC, with crime_wave 7, guild_conflict 14, external_threat 6 and
+ * legitimacy_crisis 7). The timeline's
  * own events still draw their template's list (`historyData.js :: HISTORICAL_EVENTS_DATA[].plotHooks`); this table is the
  * current tension's only. legitimacy_crisis 2 is the form an approved seat swaps for its twin
  * (`historyData.js :: LEGITIMACY_HELD_TWINS`, applied after the pick, so the pick never reads the seat).
@@ -31,7 +33,7 @@ export const TROUBLE_HOOKS = Object.freeze({
     { text: 'A household woke to find its door forced and nothing taken, and wants to know what the thieves were looking for', needs: [] },
     { text: 'A boy who runs errands for half the place has started carrying more coin than any errand pays', needs: [] },
     { text: 'Those who talk of taking the law into their own hands meet tonight, and they want someone who can fight', needs: [] },
-    { text: 'A traveller robbed on the way in swears the robber knew which bag held the money', needs: [] },
+    { text: 'A household robbed in the night swears the robber knew which chest held the money', needs: [] },
     { text: 'A stallholder at the market has stopped reporting thefts, and will not say why', needs: ['market'] },
     { text: 'A watchman afraid of the night round is looking for someone to walk it with him, and will pay from his own purse', needs: ['watch'] },
     { text: 'A shopkeeper has been told to close by the end of the week, by people who did not give their names', needs: ['organised crime'] },
@@ -56,7 +58,7 @@ export const TROUBLE_HOOKS = Object.freeze({
     { text: "A boat's cargo sits unloaded at the water's edge while the two sides argue over who may sell it", needs: ['navigable'] },
     { text: 'A trader outside the guild has been offered protection by people outside the law, and is tempted', needs: ['organised crime'] },
     { text: "An apprentice has run from one side of the quarrel to the other, and taken a master's tools along", needs: [] },
-    { text: 'A cart of goods from outside has arrived for a trader who is not allowed to sell them, and the carter wants paying', needs: [] },
+    { text: 'A craftsman has made goods for a trader who is not allowed to sell them, and wants paying regardless', needs: [] },
     { text: 'A trader at the market has been selling under the agreed price, and a crowd is expected at the stall tomorrow', needs: ['market'] },
     { text: 'A guild master has quietly bought from a trader outside the guild, and someone saw it happen', needs: ['guild'] },
   ]),
@@ -72,12 +74,12 @@ export const TROUBLE_HOOKS = Object.freeze({
     { text: 'A boat has come in loaded with what is short, and its master is asking twice what anyone here can pay', needs: ['navigable'] },
   ]),
   external_threat: Object.freeze([
-    { text: 'The threat is being exaggerated by someone who profits from wartime contracts', needs: [], excludes: ['war: peace'] },
-    { text: 'A diplomatic channel exists that the war party is suppressing', needs: [], excludes: ['war: peace'] },
+    { text: 'The threat is being exaggerated by someone who profits from selling to the fearful', needs: [], excludes: ['war: peace'] },
+    { text: 'A way to come to terms exists, and those who want a fight are keeping it quiet', needs: [], excludes: ['war: peace'] },
     { text: 'The threat has an agent already inside the settlement', needs: [] },
     { text: 'A rider brings fresh news of the danger tonight, and it does not match what the last one said', needs: [] },
     { text: 'A family is packing to leave before dawn, and the neighbours are trying to stop them spreading panic', needs: [] },
-    { text: 'A stranger asking about the roads in and out has asked for a bed for the night', needs: [] },
+    { text: 'Someone nobody here knows has been asking about the paths in and out, and has asked for a bed for the night', needs: [] },
     { text: 'A stretch of the wall has been found crumbling, and mending it needs more hands than there are', needs: ['walls'] },
     { text: 'Those who keep order are calling for volunteers, and the first to come forward is the last one anyone expected', needs: ['guardPresence'] },
     { text: 'Tracks of the beasts that press on this place have been found beside a well-used path, closer than ever', needs: ['crisis: monster_pressure'] },
@@ -111,7 +113,7 @@ export const TROUBLE_HOOKS = Object.freeze({
     { text: "Someone has painted a challenge to the authority's right to rule where everyone will see it at dawn, and those in charge want the hand found", needs: [] },
     { text: 'A speaker who questions the right to rule is due at a gathering tonight, and those in charge mean to stop the gathering', needs: [] },
     { text: 'One of those who deny the mandate has been offered a post by those in charge, and has not yet answered', needs: [] },
-    { text: 'Those risen against the authority have taken a cart of supplies on the road, and the carter is missing', needs: ['crisis: insurgency'] },
+    { text: 'Those risen against the authority have seized a store of supplies, and the keeper of it is missing', needs: ['crisis: insurgency'] },
     { text: 'A preacher of the new faith is telling crowds that those in charge rule without blessing', needs: ['crisis: religious_conversion'] },
     { text: 'The power that stands above the governing one has sent an envoy to look into the question, and both sides are courting the envoy', needs: ['seat outranked'] },
   ]),
