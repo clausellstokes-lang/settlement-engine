@@ -918,3 +918,41 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   43m38s install); "Production-build browser performance" SUCCESS in 1m53s; build, lint, validation, the type
   ratchets, the edge tests and the hostile-locale golden master SUCCESS; shards 1 and 3 SUCCESS (13m50s and
   19m34s); shards 2, 4, 5, 6 and the coverage floors running. THE BROWSER CURE IS CONFIRMED ON CI.
+- 02:43 UTC · **SAFETY NET (2) FIRED AT 02:35 UTC AND IS ANSWERED BY THIS TURN'S ENTRIES:** "B/C/D", "CI-FIT", "VR17" and
+  "DOORS" (partial) are all in and acted on; "GIT-DOOR" is still owed (its seat runs at 204,290 tokens: "all six
+  shards finished under the hook; tallying"). ORIGIN, read at 02:42 UTC: no movement by another hand
+  (`lane/veil-18-2026-11-19` bedd5a392; `lane/join-2026-11-14` 85fccf898, this chair's point 75; master db832c892).
+  RE-ARMED: a read of point 75's CI at 02:57 UTC (trig_01Uko5PrftNzcjDqQekWumjw) and safety net (3) at 03:57 UTC
+  (trig_015PNAfxeX151wJjzdDjqFaF).
+  **SEATED: VEIL-21** (created 02:41:24 UTC): session_019yED1NSv8b2vpeuXnxXFLa, `lane/veil-21-2026-11-20`; its base
+  is 408f8e508 (VEIL-20 pushed once more after its hand-back: the ruin exemption's row applied, pin 117, walker 12
+  of 12; PART 21 section 5e): told. Two items from 5e joined its list: the import's re-derivation keeps the SERVED
+  prosperity band (VR28); the inversion harness is split by tier at R6. **SEC-GRANTS-2** (created 02:33:56 UTC):
+  session_019yED1RVtJUCyQ9a24ZdmFx, `lane/sec-grants-2-2026-11-20`; its base is 6d0ff09f6 (one docs commit above
+  the script's final 0024c8de0): told.
+  **REVIEW-VEIL-11: THE COLD READ OF B/C/D HOLDS** (its message of 02:37 UTC): 212's hunks line by line; the
+  hand-rows guard 4 failed | 21 passed at the old tip and 25 of 25 at 427ea0bed; ITS ATTACK ON D (can the re-derived
+  integers pin the withheld share through rounding): the served sum is 100 in 87 of 87 per shape (it was under 100
+  in 50 of 86), `weight` served 0, candidate sets of 9 to 31 values, nothing pinned. Two notes for FINAL, both
+  already placed: faction power still sums under 100 where a faction leaves (VR31, VEIL-21's); `weight` on a map's
+  member arrives with DOORS's default veil.
+- 02:43 UTC · **SEC-GRANTS-2, THREE THINGS (its messages of 02:36 to 02:40 UTC).** (1) **A DOOR THE EMERGENCY SCRIPT LEAVES
+  OPEN:** `list_ticket_thread(uuid)` (a definer, executable by anon): its guard `v_owner <> auth.uid()` is NULL for
+  anon, so nothing returns early: anon reads the thread of ANY support ticket whose id it names. EXECUTED on
+  001..210 with the script applied. Reach: it needs the ticket's uuid (random; no anon path lists them): a read,
+  not a write. The earlier sweep by execution had fed the doors a town, a map, a comment and a user, never a
+  ticket. TOLD TO THE OWNER THE SAME HOUR with two lines (the seat's revoke from PUBLIC and anon, proven on the
+  chain: anon denied, the owner of the ticket still reads, another user still nothing; and the chair's
+  `grant execute … to authenticated, service_role` after it, a safeguard that grants nothing new), said plainly as
+  not yet read by a second seat. In 213: both, and the guard NULL-safe. The seat is told to feed every door a real
+  row of EVERY table it reads. (2) THE NUMBERING: 213 alone on a branch holding 001..210 leaves a gap; its plan
+  APPROVED (213, its rollback and the walker on its branch, the contiguity test red there by construction and
+  named; 213's register rows in one separate commit written against the veil lane's register and proven on a local
+  composition); 213's STATEMENTS must not depend on 211 or 212 existing. (3) **RULING VR38, `account_is_active(uuid)`
+  IS LEFT AS IT IS (vetoable):** the seat's table: twelve row-security policies and twenty-four doors run through
+  it, every save among them; `founders_roll` (anon and signed-in) and the referral pass OTHER users' ids, so the
+  predecessor's guard would empty the founders' roll and break referrals; the cure needs a split and two restated
+  bodies. A guard on the function behind every save, days before a deploy, to close a yes/no on whether an account
+  id is active, is not a trade this chair makes. In 213 it stands on the allowlist as an accepted residual; the
+  split is the seat's PROPOSAL for after the deploy. FOR THE OWNER'S LIST: an outsider can ask whether an account
+  id is active and gets yes or no, nothing more.
