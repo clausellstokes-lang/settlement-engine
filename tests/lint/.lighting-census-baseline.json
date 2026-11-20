@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "379f63cb68650d548dbd66ccbf72f9a7f95c7586",
-  "measuredBy": "POINT-82",
+  "measuredAtSha": "a68e215c98fb1d037912f026e580a4a096866976",
+  "measuredBy": "PROSE-2 (MATCHER merge)",
   "date": "2026-11-20",
-  "note": "names-4 landed: the agreement work, its swap test and census cure",
+  "note": "MATCHER adds one suite and five live test titles to tests/domain/defenseWordsFindings.test.js (titles 31,237 -> 31,242; suite titles 8,651 -> 8,652)",
   "files": 3707,
   "parked": 472,
   "credited": 3235,
-  "titles": 31237,
-  "suiteTitles": 8651
+  "titles": 31242,
+  "suiteTitles": 8652
 }
