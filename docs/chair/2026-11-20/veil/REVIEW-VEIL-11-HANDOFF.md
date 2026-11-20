@@ -1,4 +1,4 @@
-# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 06:10 UTC by date -u, before FINAL)
+# REVIEW-VEIL-11 — HAND-OFF (kept current at every push; last written 2026-11-20 06:29 UTC by date -u, before FINAL)
 
 The review: `REVIEW-VEIL-11.md` beside this file. Probes and outputs: `probes/REVIEW-VEIL-11/`. **No verdict; 212 is NOT
 cleared.** My predecessors' hand-offs stand whole and are read from origin only (`git show
@@ -93,3 +93,12 @@ Run any probe: `RV6_SRC=<tree> [RV10_GEN=<master tree>] RV10_TPL=<chain> RV10_N=
     the black market's capture must be absent on every marked read and equal to the owner's on an unmarked one (arm B).
     Next cold reads in order of landing: "R3", "R4" (`lane/veil-22-2026-11-20`, from d136940c3), then "DOORS-IN" (VEIL-DOORS-3
     handed back partial at 3e1115c81: VR40, a shared map's world sends no chronicle).
+21. LATER COLD READS (the chair, 06:29 UTC), after R3, R4 and DOORS-IN, for the joined tree:
+    (a) "TRAD <commit>" (`lane/trad-2026-11-20`, ruling CTR9): the Traditions set drawn into `publicProse` as text at save.
+        Attack: its keys' round trip through the server's sanitizer; the inversion (every hideable house hidden against
+        none: the drawn text byte-identical); a description naming a keeper who is the FACE of a hideable house under an
+        honorific or a role only; a page saved before the change (the tab shows no set at all).
+    (b) THE CRISIS CAST's new holders (the frame's seat, by the owner's word): a criminal power as the CREDITOR, another
+        foreigner or the record-keeper as the occupier's face; listed in that seat's hand-back. Attack: each new kind of
+        stored cast role through `_gallery_veil_cast` (a stake or role naming a criminal power the share withholds must
+        go per entry) and through the session sheet ("Tonight") on the gallery page and the party link.
