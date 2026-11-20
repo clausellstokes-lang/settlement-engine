@@ -1,0 +1,7 @@
+births thorp: places 100 · cards carrying a structural field 98
+births hamlet: places 100 · cards carrying a structural field 122
+births village: places 100 · cards carrying a structural field 205
+births town: places 100 · cards carrying a structural field 399
+births city: places 100 · cards carrying a structural field 366
+births metropolis: places 100 · cards carrying a structural field 379
+written <cache.json> (a local cache, not committed; reproduce: M1_BASE=b53a665e7 node m1-births.mjs <checkout> 100 <cache.json>)
