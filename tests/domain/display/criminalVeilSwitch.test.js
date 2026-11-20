@@ -298,14 +298,31 @@ describe('VS1 acceptance on the projection, over twelve births', () => {
         if (criminalSwitchStateOf(defaults, hide, present, model) !== (parts.length ? 'hidden' : 'none')) failures.push(`${label} (a): state ${criminalSwitchStateOf(defaults, hide, present, model)}`);
         if (parts.length && criminalSwitchStateOf(defaults, show, present, model) !== 'shown') failures.push(`${label} (b): state ${criminalSwitchStateOf(defaults, show, present, model)}`);
 
-        // (b) everything of the family the unveiled projection carries reaches the visitor.
+        // (b) everything of the family the unveiled projection carries reaches the visitor. An income row is served as the
+        // projection's row WITHOUT its `weight`: the veil withholds `weight` on every non-owner read (VEIL-19 item D, ruling
+        // VR19: a share is re-derived or withheld, never raw), so the served row is asserted as exactly that.
         const shownContent = familyContent(S, defaults);
-        const missing = Object.keys(raw).filter(k => JSON.stringify(shownContent[k]) !== JSON.stringify(raw[k]));
+        const servedAs = (k, v) => (k.startsWith('income ') && isRec(v) ? Object.fromEntries(Object.entries(v).filter(([key]) => key !== 'weight')) : v);
+        const missing = Object.keys(raw).filter(k => JSON.stringify(shownContent[k]) !== JSON.stringify(servedAs(k, raw[k]))
+          || (k.startsWith('income ') && isRec(shownContent[k]) && 'weight' in shownContent[k]));
         if (missing.length) failures.push(`${label} (b): ${missing.slice(0, 5).join(', ')}`); else tally.b += 1;
 
-        // (c) every other part byte-equal to the copy before the click; the hand deltas survive.
+        // (c) every other part byte-equal to the copy before the click; the hand deltas survive. The test's own second veil
+        // (the family's parts) is applied to each served copy: on the hide copy and the copy before the click it withholds
+        // nothing more (the veil is idempotent there, measured at 4b33d1617 on 72 of 72 copies:
+        // docs/chair/2026-11-20/veil/v102/out/item0-idempotence.json); on the SHOW copy it withholds the criminal income row
+        // the click showed, so it re-derives the other rows' shares, and from the stored percentages, since the served copy
+        // already lost `weight` (VR19). So the income shares are compared apart: the show copy carries the projection's own
+        // shares, every row present; the rest of every copy is byte-equal.
         const mask = (copy) => JSON.stringify(applyVeil(copy, criminalPartsOf(defaults, hand, undefined, model)));
-        const okC = mask(H) === mask(before) && mask(S) === mask(before)
+        const noShares = (copy) => {
+          const c = JSON.parse(mask(copy));
+          if (Array.isArray(c.economicState?.incomeSources)) c.economicState.incomeSources = c.economicState.incomeSources.map(r => (isRec(r) ? { ...r, percentage: null } : r));
+          return JSON.stringify(c);
+        };
+        const sharesOf = (copy) => JSON.stringify(recs(copy.economicState?.incomeSources).map(r => r.percentage));
+        const okC = mask(H) === mask(before) && noShares(S) === noShares(before)
+          && sharesOf(S) === sharesOf(pub)
           && ['tab:plot_hooks', 'block:rumors.dmTruth'].every(a => [hide, show].every(list => list.some(d => d.address === a && d.hidden === false)));
         if (!okC) failures.push(`${label} (c)`); else tally.c += 1;
 

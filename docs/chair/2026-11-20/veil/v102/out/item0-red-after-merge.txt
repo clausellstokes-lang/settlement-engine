@@ -1,0 +1,43 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js (9 tests | 1 failed) 6713ms
+     × (a)-(e) hold on every birth, plain and DM-revealing 2640ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/domain/display/criminalVeilSwitch.test.js > VS1 acceptance on the projection, over twelve births > (a)-(e) hold on every birth, plain and DM-revealing
+AssertionError: expected [ 'vs-city-1 (b): income 1', …(7) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "vs-city-1 (b): income 1",
++   "vs-city-1 (c)",
++   "vs-city-1 dm (b): income 1",
++   "vs-city-1 dm (c)",
++   "vs-metropolis-1 (b): income 1",
++   "vs-metropolis-1 (c)",
++   "vs-metropolis-1 dm (b): income 1",
++   "vs-metropolis-1 dm (c)",
++ ]
+
+ ❯ tests/domain/display/criminalVeilSwitch.test.js:330:22
+    328|       }
+    329|     }
+    330|     expect(failures).toEqual([]);
+       |                      ^
+    331|     expect(tally.copies).toBe(24);
+    332|     expect(tally.criminal, 'at least half the births carry a criminal …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 8 passed (9)
+   Start at  02:53:15
+   Duration  8.08s (transform 2.40s, setup 34ms, import 1.22s, tests 6.71s, environment 0ms)
+
+exit 1

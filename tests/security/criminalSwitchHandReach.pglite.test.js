@@ -34,12 +34,19 @@
  *       governs nothing on the record);
  *   (E) a house's People eye, opened by hand with the house shown: the visitor's bytes hold, on each of its people, the
  *       house record the projection carried and nothing more; the same eye open with the house HIDDEN WHOLE: no person,
- *       on any list, names the house.
+ *       on any list, names the house;
+ *   (F) THE CHAIR'S CONDITION (02:41 UTC): an eye the screen newly offers starts at what the server serves TODAY for a
+ *       share nobody touched. On the untouched share (marked with no delta, and unmarked), the gallery read and the
+ *       link: every People eye and every Members eye the screen draws reads hidden exactly where the served bytes carry
+ *       nothing under it (its house's people; the power's roster on either list). The served bytes of each untouched
+ *       read are hashed (V102_TALLY) so the base's and the tip's can be compared: the screen learning an eye changes no
+ *       served byte.
  */
 import { describe, it, expect, beforeAll } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import { pgcrypto } from '@electric-sql/pglite/contrib/pgcrypto';
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { resolve, join } from 'node:path';
 
 const PGLITE_BOOT_TIMEOUT_MS = 900_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
@@ -129,7 +136,8 @@ function diffPaths(a, b, p = '', out = []) {
 describe('a switch sets only what a hand can see and undo on that record (VR34)', () => {
   /** @type {any} */ let LIVE;
   /** @type {any} */ let lib;
-  const tally = { cases: 0, groupingsOnly: 0, written: 0, served: 0, planted: 0, peopleOpen: 0, peopleWhole: 0, masterMembers: 0 };
+  const tally = { cases: 0, groupingsOnly: 0, written: 0, served: 0, planted: 0, peopleOpen: 0, peopleWhole: 0, masterMembers: 0,
+    untouchedEyes: 0, untouchedShown: 0, untouched: {} };
 
   beforeAll(async () => {
     LIVE = await buildDb();
@@ -215,7 +223,7 @@ describe('a switch sets only what a hand can see and undo on that record (VR34)'
   let nrow = 0;
   /** Store the record with a share veil and read it as an anonymous visitor through the server's door. */
   async function serve(record, dm, deltas, read) {
-    const ov = lib.veil.writeShareVeil({}, deltas, { mode: 'live', at: AT });
+    const ov = deltas === null ? {} : lib.veil.writeShareVeil({}, deltas, { mode: 'live', at: AT });
     nrow += 1;
     const id = `bbbb1020-0000-0000-0000-${String(nrow).padStart(12, '0')}`;
     await LIVE.db.query(`insert into public.settlements (id, user_id, name, tier, data, is_public, public_slug, published_at, unlisted_slug, visibility,
@@ -251,6 +259,28 @@ describe('a switch sets only what a hand can see and undo on that record (VR34)'
           const offered = offeredBy(model);
           const { pred: family, houses } = familyOf(defaults, present);
           tally.cases += 1;
+
+          // (F) the untouched share: what the server serves today, and the screen's state of each newly learnable eye
+          for (const [kind, deltas] of [['marked', []], ['unmarked', null]]) {
+            for (const read of ['gallery', 'link']) {
+              const doc = await serve(record, dm, deltas, read);
+              tally.untouched[`${seed} ${shape} dm=${dm} ${kind} ${read}`] = createHash('sha256').update(canon(doc)).digest('hex');
+              if (kind !== 'marked' || read !== 'gallery') continue;
+              for (const card of model.sections.flatMap((sec) => sec.cards)) {
+                for (const e of card.eyes) {
+                  if (!(card.kind === 'institution' && e.field === 'people') && !(card.kind === 'faction' && e.field === 'members')) continue;
+                  const shut = e.hidden || !!card.whole?.hidden;
+                  const house = card.kind === 'institution' ? str(recs(pub.institutions).find((h) => veil.CARD_KINDS.institution.idOf(h) === card.id)?.name) : '';
+                  const carried = card.kind === 'institution'
+                    ? peopleOf(doc).some((n) => houseOf(n) === house)
+                    : [...recs(doc?.powerStructure?.factions), ...recs(doc?.factions)].some((f) => veil.CARD_KINDS.faction.idOf(f) === card.id && recs(f.members).length > 0);
+                  tally.untouchedEyes += 1;
+                  if (!shut) tally.untouchedShown += 1;
+                  if (shut === carried) faults.push(`${at} (F): the screen reads ${e.address} ${shut ? 'hidden' : 'shown'}, the untouched share's bytes ${carried ? 'carry' : 'carry nothing under'} it`);
+                }
+              }
+            }
+          }
           if (shape === 'master' && dm) tally.masterMembers += [...offered].filter((a) => /^field:faction:.*:members$/.test(a)).length;
           const unreachable = (list) => list.filter((d) => !offered.has(d.address)).map((d) => d.address);
 
@@ -328,5 +358,8 @@ describe('a switch sets only what a hand can see and undo on that record (VR34)'
     expect(tally.peopleOpen, "(E) a house's people sent with its People eye open").toBeGreaterThan(0);
     expect(tally.peopleWhole, '(E) a house hidden whole with its People eye open').toBeGreaterThan(0);
     expect(tally.masterMembers, "master's shape: a power's Members eye drawn from the top-level roster").toBeGreaterThan(0);
+    expect(tally.untouchedEyes, '(F) People and Members eyes read against the untouched share').toBeGreaterThan(0);
+    expect(tally.untouchedShown, '(F) some of them open by default (a power\'s roster that is not criminal)').toBeGreaterThan(0);
+    expect(Object.keys(tally.untouched)).toHaveLength(TOWNS.length * 2 * 2 * 4);
   });
 });
