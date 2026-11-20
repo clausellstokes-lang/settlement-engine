@@ -1602,6 +1602,23 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   WHAT IT COSTS AND WHOSE IT IS: several hundred new lines, each read by the chair; three more lanes to join at the
   close; the app's download grows (the size rise and the golden's re-signing are the owner's, at the close).
 
+- **FOUR RULINGS AT 15:58 UTC.** (1) FORTUNE, THE SAFETY TERM GOES AT BIRTH, in `factionDynamics.js ::
+  computePublicLegitimacy` (a term of the sum, known when the standing is born; every birth reader sees the forgiven
+  score; the shape the proposal measured), NOT in the late step; AND ONE WRITER ON THAT FILE: the safety hunk is
+  FORTUNE-3's FIRST unit, alone, dark, red first (the leaf's DRAFT row `standing.safetyUsualRange`; FS4's arm;
+  confinement with the law off); THE FILE IS RELEASED TO THE WHO-RULES LANE AT THAT COMMIT, not at bb6b4257a: the
+  chair did not forward bb6b4257a and told SEAT-5 so. (2) DISPLAY, THE AUDIENCE FAILS CLOSED AT THE MOUNT: PAGE-4
+  found that OverviewTab and DefenseTab default `publicDossier` and `playerView` to false, so a caller that passes
+  neither got the owner's Safety line: the audience is read from the props AS PASSED, before any default; red first
+  (each tab mounted with no audience props prints no owner's line); a census of every mount; nothing else that
+  leans on the defaults changes; the Crisis tab's same default named for the security reader. (3) THE SHEET, "C2b"
+  after F1 to F5: the Foundry journal reads `crisisPage.js :: stakeOpening` (no third renderer); a stored reason
+  after a plural power takes the plural possessive by the names lane's own helper (150 rows); an at-odds reason
+  names the other power through `powerNameInProse`. (4) ARRIVAL, the sight-beat landmarks
+  (`structuralValidator.js :: checkInstCompat`; "The great cathedral's spire…" in 20 towns) are in scope of the
+  second arrival tranche: each said from the house that stands, wordings by keyed hash, a new data file and one
+  call line; no lane holds the file.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4473,3 +4490,19 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   "WANT-LINES <n>"; "GOALS-2ND"); PAGE-7 (a trouble's hooks and lasting effects as need-gated pools:
   "TROUBLE-LINES"); PAGE-6 (a second arrival tranche: "ARRIVAL-LINES-2"). EVERY UNIT'S COMMIT IS FORWARDED TO SAME-1.
   THE MARKS: 450,000 by the chair's read for each. NET 14 (16:00) reads the three new seats with the others.
+- 16:00 UTC · TEN MESSAGES READ AT 15:57, SIX ANSWERED AT 15:58 (rulings in section 2). FORTUNE: "U2/U3 GREEN bb6b4257a" (tests/lint
+  whole 220 of 220; confinement from 0c9069489: golden 525 of 525, census 720 of 720, 0 non-string, 0 strings; five
+  governing files red, the same five titles red at its base: the line's stored fingerprints); "FORTUNE-PART
+  c167b5f11, HANDED OVER"; FORTUNE-3 GIVEN THE LANE at 15:58 (its U5 brief 32dd358bf holds the seven conditions
+  verbatim; play-time `reBand` confirmed to re-stamp without a multiplier or a word); it owes "factionDynamics
+  released at <commit>" AFTER the safety hunk: FORWARD THAT COMMIT TO SEAT-5. TRADITIONS: "TRAD-SHARE-2 3ba5ee73f"
+  (unit 7 merged 18414593c; red on its base 16 of 90 failing, green 90 of 90; loss 3 of 432, all by "great"; owner
+  pages moved 0; tests/lint 220 of 221, the census re-taken by its door; confinement 1,245 identical): FORWARDED TO
+  REVIEW-VEIL-13 at 15:58 for its small re-read (still owed by TRAD-4: the import path and the round trip on more
+  than 4 towns); next unit 5's merge. SHEET: C2 MERGED 61c27c632 (lane 9f24bdbc6; 301 plural rows fixed; stored 360
+  of 360 identical); the F1 to F5 brief 038186160, its builder out; P4a's builder out beside it, not held. DISPLAY:
+  SAFETY MERGED 83b2fa0f1 (its reader pin re-taken by its own door on the tree without it: SAFETY moves no reader
+  byte); Output's fix brief written, dispatched when MAGIC-AUDIENCE returns; PAGE-4's own estimate about 230,000.
+  DEPTH: the hooks unit BUILT at 6a6b5f814 (`lane/depth-2-2026-11-20-hooks-wip`; 60 lines byte-exact, 60 tags), NINE
+  pins red in 6 files being sorted against its base; the second tranche's writer out (brief cb201e866); the
+  conflict's measuring helper still out. PAGE-6: L2's builder applying the 15:35 word; S9 out.
