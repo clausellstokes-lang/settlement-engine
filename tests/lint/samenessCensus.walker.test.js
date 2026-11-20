@@ -23,8 +23,8 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 
 import {
-  CORPUS, LAW1_MEASURE, MIN_PLACES, NOISE_SE, REGISTER_PATH, attributionOf, ceil2, confirmRises, emptyRegister, judge,
-  law1RedPlaces, law1WatchPlaces, measureSlots, readRegister, shareError, slotKey, storedHeads, tighten, writeRows,
+  CORPUS, LAW1_MEASURE, MIN_PLACES, NOISE_SE, REGISTER_PATH, SIZES, attributionOf, ceil2, confirmRises, emptyRegister,
+  incompleteRender, judge, law1RedPlaces, law1WatchPlaces, measureSlots, readRegister, shareError, slotKey, storedHeads, tighten, writeRows,
 } from '../../scripts/sameness-census.mjs';
 
 const S = 'web:Summary/Overview';
@@ -101,6 +101,24 @@ describe('law 2: a rise reds only beyond the noise and only on both readings', (
     const c = confirmRises(judge(over, reg), judge(calm, reg));
     expect(c.over).toEqual([]);
     expect(c.notes.join('\n')).toContain('does not repeat');
+  });
+});
+
+describe('an incomplete render gives no verdict (SAME-2, fault F)', () => {
+  const full = () => Object.fromEntries(SIZES.map((s) => [s, 150]));
+  test('a complete render passes', () => {
+    expect(incompleteRender(full(), 150, SIZES, [0, 0, 0, 0])).toEqual([]);
+  });
+  test('a size short by one row is the fault, named', () => {
+    const faults = incompleteRender({ ...full(), metropolis: 149 }, 150, SIZES);
+    expect(faults).toHaveLength(1);
+    expect(faults[0]).toContain('metropolis');
+  });
+  test('a size with no rows at all, or a fork that exited non-zero, is the fault', () => {
+    const { thorp, ...rest } = full();
+    expect(thorp).toBe(150);
+    expect(incompleteRender(rest, 150, SIZES)).toHaveLength(1);
+    expect(incompleteRender(full(), 150, SIZES, [0, 1, 0, 0])[0]).toContain('fork 1');
   });
 });
 

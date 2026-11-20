@@ -466,6 +466,26 @@ export function readSize(dir, size, limit = Infinity) {
   return (existsSync(rd) ? readdirSync(rd) : []).map((f) => [f, re.exec(f)]).filter(([, m]) => m && Number(m[1]) < limit)
     .sort((a, b) => Number(a[1][1]) - Number(b[1][1])).map(([f]) => JSON.parse(readFileSync(join(rd, f), 'utf8')));
 }
+/**
+ * AN INCOMPLETE RENDER GIVES NO VERDICT (SAME-2's fault F, 2026-11-20): a size holding fewer than n rows (a fork that
+ * died shrinks it, and law 1 would under-count over the smaller `of`), or a fork that exited non-zero, is a fault; the
+ * door then prints each and exits 2, judging and writing nothing. Pure: the size's row counts, n, the sizes, the forks'
+ * exit codes (when known). @param {Record<string, number>} counts @param {number} n @param {readonly string[]} sizes
+ * @param {Array<number | null>} [codes] @returns {string[]}
+ */
+export function incompleteRender(counts, n, sizes, codes = []) {
+  const faults = [];
+  for (const s of sizes) if ((counts[s] || 0) < n) faults.push(`${s}: ${counts[s] || 0} of ${n} rows`);
+  codes.forEach((c, w) => { if (c !== 0) faults.push(`fork ${w}: exited ${c}`); });
+  return faults;
+}
+/** A run's rows per size (places 0..n-1) and its forks' exit codes (forks.json, when the run wrote one). @param {string} dir @param {number} n */
+export function runCounts(dir, n) {
+  const rd = join(dir, 'rows'); /** @type {Record<string, number>} */ const counts = {};
+  for (const f of existsSync(rd) ? readdirSync(rd) : []) { const m = /^[a-z0-9]+-([a-z]+)-(\d+)\.json$/.exec(f); if (m && Number(m[2]) < n) counts[m[1]] = (counts[m[1]] || 0) + 1; }
+  const fp = join(dir, 'forks.json');
+  return { counts, codes: existsSync(fp) ? JSON.parse(readFileSync(fp, 'utf8')) : [] };
+}
 /** @param {string} name @param {string} [fallback] */
 const arg = (name, fallback) => { const hit = process.argv.find((a) => a.startsWith(`--${name}=`)); return hit ? hit.slice(name.length + 3) : fallback; };
 const cut = (/** @type {string} */ s, n = 120) => (s.length > n ? `${s.slice(0, n - 1)}…` : s);
@@ -494,7 +514,7 @@ export default { root: '${ROOT}', plugins: [react()], test: { environment: 'node
 `);
   const t0 = Date.now();
   console.log(`sameness-census: rendering ${plan.length} places (${workers} workers) into ${out}`);
-  await Promise.all(Array.from({ length: workers }, (_, w) => {
+  const codes = await Promise.all(Array.from({ length: workers }, (_, w) => {
     const part = join(out, `plan.${w}.json`);
     writeFileSync(part, JSON.stringify(plan.filter((_, i) => i % workers === w)));
     return new Promise((resolve) => {
@@ -506,6 +526,7 @@ export default { root: '${ROOT}', plugins: [react()], test: { environment: 'node
       child.on('close', (code) => { writeFileSync(join(out, `render.${w}.log`), Buffer.concat(log)); resolve(code); });
     });
   }));
+  writeFileSync(join(out, 'forks.json'), `${JSON.stringify(codes)}\n`);
   const wall = ((Date.now() - t0) / 60000).toFixed(1);
   writeFileSync(join(out, 'wall.txt'), `${wall} min, ${plan.length} places, ${workers} workers\n`);
   console.log(`sameness-census: rendered in ${wall} min`);
@@ -534,9 +555,15 @@ async function door(mode) {
   if (probe && mode !== 'check') { console.error(`sameness-census --${mode}: writes only on the register's corpus`); process.exit(2); }
   if (probe) console.log(`sameness-census --check: A PROBE (prefix ${prefix}, n ${n}), not the register's corpus`);
   const base = arg('out') || mkdtempSync(join(tmpdir(), 'same-door-'));
+  const whole = (/** @type {string} */ dir) => {
+    const { counts, codes } = runCounts(dir, n); const faults = incompleteRender(counts, n, SIZES, codes);
+    if (!faults.length) return dir;
+    for (const x of faults) console.error(`sameness-census --${mode}: incomplete render (${dir}): ${x}`);
+    console.error(`sameness-census --${mode}: incomplete render: no verdict, nothing written`); process.exit(2);
+  };
   const readOrRender = async (/** @type {string | undefined} */ dir, /** @type {string} */ pfx, /** @type {string} */ name) => {
-    if (dir) return dir;
-    await renderRun(pfx, n, workers, join(base, name)); return join(base, name);
+    if (dir) return whole(dir);
+    await renderRun(pfx, n, workers, join(base, name)); return whole(join(base, name));
   };
   const firstDir = await readOrRender(arg('from'), prefix, prefix);
   const t1 = Date.now();
