@@ -1796,3 +1796,38 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   ruling that took it off its list: answered (NOT RUN, with its reason; the lane's owner runs it at the merged tree).
   Its probes: the chronicle red 8 of 8 at bedd5a392, green at its tip; the tile's crime cause gone (the band word left:
   the tier 2 residual); the world columns refused at storage at both.
+- 06:00 UTC · **CF11 MADE FINAL FROM FRAME-2's COUNT; TITLES-1's PROPOSAL APPROVED AND ITS SAMPLE PAGE PUT TO THE OWNER.**
+  **(1) FRAME-2's COUNT** (343d2f72f, 06868af48; 330 calm towns, 55 a tier): under the definition as first written: W1 72
+  (legitimacy below 45 on 45 of 55 villages and on no town or larger: a scale, not a strain; the incumbent not gated
+  on 4), W2 241, W3 145, the union 263, the union with a matching tension 120 (36 per cent). ITS FINDINGS: food is
+  Secure on 329 and Surplus on 1 (W3a never fires on a calm town); the only creditor power is the one the indebted
+  crisis pushes (W3b never fires); a chain has no "broken" status, "impaired" is the worst (145 towns); NO RELATIONSHIP
+  ROW IS GRADED "rival": tense, competitive and corrupted are the template's standing order (218 towns);
+  `powerStructure.conflicts` rows are drawn only where a person's rival or enemy tie crosses two powers and carry an
+  `intensity` (moderate or high). A crime wave between the guard and the thieves' guild would open 47 of 109 framed
+  towns under its own recommendation. **CF11 FINAL (sent into its turn): W2 is the conflicts rows ONLY and ONLY of
+  intensity HIGH (a conflict the record itself grades moderate is not a trouble of weight); W1 takes a matter test (a
+  seat-type tension); the order by the strain's own grade (legitimacy below 30, below 45, a high conflict, an impaired
+  chain); W3's matter: trade_collapse, trade_dispute, resource_scarcity, outside_debt, market_crash; W3a and W3b stay
+  in the list.** Its figure for that: about 86 of 330 (re-taken under the whole definition for its hand-back). STRICTER
+  THAN ITS RECOMMENDATION (109), by the owner's word that calm is the default. One more measure asked, reported not
+  tuned: the opening trouble by type among framed towns.
+  **(2) TITLES-1's PROPOSAL** (fce5fe802): its corrections of the brief stand (58 government names, 39 in
+  `OFFICE_TITLES`; the sovereign family is assigned by FORM, SEAT-1's; `src/domain/veil/` exists only on the veil lane).
+  APPROVED: fourteen families (merchant split from guild); `src/data/cultureOfficeTitles.js ::
+  officeTitleIn({family, tier, culture, government, sex})`; the fallback (the culture's cell, today's title, the base
+  ladder). GO on the official side for the other eight cultures. RULED: a revived faith counts as living (no Goði,
+  Völva, Pontifex or Flamen for a seat); High King, Sultan and Sultana, Wali stay; "Shaykh of the craft" not
+  authored. THE CRIMINAL SIDE varies by size only for now (Ringleader, Underboss; Crime Boss; "Crime Bosses"): the
+  seat held culture words back (a real people's organised-crime word reads as a stereotype of that people); THE OWNER
+  ASKED FOR CULTURE THERE TOO, so it is put to the owner as a yes or no with the chair's recommendation (keep size
+  only; if wanted, from a culture's ordinary word for chief, never a real gang's rank). Its map of what new words
+  touch went to SEAT-1 (the caretaker's "Regent" list, the sex walker's exemption, the honorific row, `classOfRole`),
+  with ONE MEASURE ORDERED: how many towns of each size are ruled by one person who answers to no one; if none is
+  born at city and metropolis, king and emperor could never show, and the form table and train 2 must let that form
+  be born where the town's facts point there.
+  **THE SAMPLE PAGE WENT TO THE OWNER** (norse, latin, arabic, the base ladder, the criminal side), with three things
+  said (an unsure cell keeps today's title; "King" shows only where one person rules and answers to no one; no title
+  from a living religion for a ruler or a criminal, the priests' existing ones left alone) and the one question.
+  OPEN WITH THE OWNER NOW: culture on the criminal titles (yes or no); a DM-only mark on a front's own card (yes or no).
+  NAMES-2 is session_019yED1QtZ3FpHeLyMj7RFWD.
