@@ -1269,6 +1269,22 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   AND PLACE (L2's 76 lines; L4 with the seven reworked lines; S9 as a post-pass; the guard): path-disjoint, each
   seated on PAGE-3's final tip, prompts `PAGE-5.txt` and `PAGE-6.txt`.
 
+- **THE BILL FOR CROSS-TOWN REPEATS, AND THE CHAIR'S DECISION (2026-11-20, 14:10 UTC; the helper's second run on the 300
+  towns: `measures/owner-q3/bill.mjs` and `bill.out.txt`; a simulation, rough both ways):** AT CITY SIZE THE REPEATS
+  COME FROM A FEW SMALL GROUPS: wants: RANK/enter (13 short lines seen, 8.5 drawn in a city: 32% of repeats),
+  TIES/rival_enemy (8; 5.2; 15%), TIES/ally (5; 3.7; 10%); ties: wary_alliance (10; 8.4), peer_rivalry (16; 9.3),
+  old_debt (17; 9.0): 18% each; hooks: the catch-all group (66; 26.0): 58%, economy (39; 10.4): 18%. NEW LINES FOR
+  A SECOND CITY UNDER 30% / UNDER 20% (keeping today's uneven draw): ties +157 / +314; hooks +96 / +274; short
+  wants +180 / +468; long wants +200 / +507; secrets none / +113. CULTURE DOES NOT SEPARATE TOWNS TODAY (35.0%
+  against 33.9%). A TENSION THE CHAIR SAID TO THE OWNER: no repeat inside a town makes each town use more of every
+  small group, which RAISES the overlap between towns: only more lines, or lines that say something of the
+  person's own trade, lower it. DECIDED, vetoable by the owner (told to him at 14:10): BEFORE THE DEPLOY, THE TWO
+  WORST POOLS AT THE BEST PRICE: a FIRST TRANCHE of about 80 tie lines and about 60 hooks, placed by the measure,
+  then the measure again on built towns and the rest decided from the gain; every line read by the chair; a seat
+  of its own, DEPTH-1 (`prompts/DEPTH-1.txt`): measure and propose first; it edits the ties' file only after the
+  goals lane has landed. WANTS WAIT (about 380 lines for five points): lines true to a person's trade, designed
+  and measured AFTER the deploy. Under 20% everywhere is about 1,700 lines: not before the deploy.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
