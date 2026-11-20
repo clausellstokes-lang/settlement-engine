@@ -312,17 +312,26 @@ describe('MATCHER · a defence term is a finding only as a claim about this plac
     expect(wrong).toEqual([]);
   });
 
-  for (const [term, key, field, , sentence] of MEASURED) {
-    if (UNEXCUSED.has(sentence)) {
-      it(`(a) stays a finding [${term} · ${key} · ${field}]: ${sentence.slice(0, 70)}`, () => {
-        expect(defenseWordsFindings(stubOf(key), sentence).map((f) => f.term)).toEqual([term]);
-      });
-    } else {
-      it(`(a) quiet [${term} · ${key} · ${field}]: ${sentence.slice(0, 70)}`, () => {
-        expect(defenseWordsFindings(stubOf(key), sentence)).toEqual([]);
-      });
+  // One registered test per half (a loop of `it` would park this file in the sovereignty walker's census); each
+  // failing row is named in the list the assertion prints.
+  it('(a) every measured row the rule excuses is quiet (37 rows, 25 distinct sentences, 126 findings)', () => {
+    const excused = MEASURED.filter((row) => !UNEXCUSED.has(row[4]));
+    expect(excused).toHaveLength(37);
+    expect(new Set(excused.map((row) => row[4])).size).toBe(25);
+    expect(excused.reduce((n, row) => n + row[3], 0)).toBe(126);
+    const stillFound = excused
+      .filter(([, key, , , sentence]) => defenseWordsFindings(stubOf(key), sentence).length > 0)
+      .map(([term, key, field, , sentence]) => `[${term} · ${key} · ${field}] ${sentence}`);
+    expect(stillFound).toEqual([]);
+  });
+
+  it('(a) the measured row the rule cannot read stays a finding (the foundling home\'s "within its walls")', () => {
+    const unexcused = MEASURED.filter((row) => UNEXCUSED.has(row[4]));
+    expect(unexcused).toHaveLength(1);
+    for (const [term, key, , , sentence] of unexcused) {
+      expect(defenseWordsFindings(stubOf(key), sentence).map((f) => f.term)).toEqual([term]);
     }
-  }
+  });
 
   /**
    * The claiming sentences already in the battery's own tests that a bare roster must flag: this file's planted

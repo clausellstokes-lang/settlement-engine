@@ -89,19 +89,24 @@ const HIRE_IN_SENTENCE = /\bhire\b/i;
 /** A HOSPITAL A HOUSE MAY KEEP: the catalogue's hedge about one house, not a hospital standing. "May operate hospital/school.", "It may keep a hospital or a school." */
 const HOSPITAL_HEDGE_BEFORE = /\bmay\s+(?:operate|keep)\s+(?:a\s+)?$/i;
 
+/** The matched word itself: the adjective, the plural noun, the one soldier. */
+const WALLED_WORD = /^walled$/i;
+const WALLS_WORD = /^walls$/i;
+const ONE_SOLDIER_WORD = /^soldier$/i;
+
 /**
  * The named readings, by term: true when this use of the term claims nothing about the place's defence.
  * @type {Readonly<Record<string, (before: string, word: string, after: string, sentence: string) => boolean>>}
  */
 const NOT_A_CLAIM = Object.freeze({
   walls: (before, word, after) => (
-    /^walled$/i.test(word) && (WALLED_THING_AFTER.test(after) || WALLED_APART_AFTER.test(after))
-    || /^walls$/i.test(word) && LOW_BEFORE.test(before) && DIVIDE_AFTER.test(after)
-    || /^walls$/i.test(word) && ROOM_WALLS_AFTER.test(after)
+    WALLED_WORD.test(word) && (WALLED_THING_AFTER.test(after) || WALLED_APART_AFTER.test(after))
+    || WALLS_WORD.test(word) && LOW_BEFORE.test(before) && DIVIDE_AFTER.test(after)
+    || WALLS_WORD.test(word) && ROOM_WALLS_AFTER.test(after)
   ),
   soldiers: (before, word, after) => (
     SOLDIER_PAST_BEFORE.test(before)
-    || /^soldier$/i.test(word) && SOLDIER_DRESS_AFTER.test(after)
+    || ONE_SOLDIER_WORD.test(word) && SOLDIER_DRESS_AFTER.test(after)
     || GOODS_FOR_BEFORE.test(before)
     || CUSTOMER_BEFORE.test(before) && CUSTOMER_AFTER.test(after)
   ),
