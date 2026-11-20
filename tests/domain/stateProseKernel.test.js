@@ -937,7 +937,8 @@ describe('the state-prose reader — law 6, the index-stable draw', () => {
     expect(deepest, 'the deepest pooled departure from one third, in points').toBeLessThan(0.15);
     expect(maxZ, `the deepest per-pool deviation, at ${maxAt}`).toBeLessThan(4.5);
     // Non-vacuity on both axes: the sweep found the corpus, and it reached every slot.
-    expect(pools.length, 'three-variant pools swept').toBeGreaterThanOrEqual(500);
+    // BUILD-1-FINISH (2026-11-20, the chair's ruling of 18:46 UTC, measured at lane/prose-2-2026-11-20-build1 against the base 87f03395b): 500 -> 484, the corpus's own figure: 501 three-variant pools at the base, 484 at the tip; seventeen left the set as BUILD-1 appended lines to them (DS-DEF-2 no legal infrastructure, DS-DEF-3 First-Survey, DS-DEF-4 structure null, DS-DEF-5 garrison PRESENT and arcane defense ABSENT, DS-ECO-2 FOOD: deficit, DS-ECO-11 TERRAIN: Plains and ECONOMIC STRENGTHS, DS-ECO-12 INCOME MIX one source, TRADE PROFILE and CRITICAL IMPORT the land, DS-GEN-11 criticalIssueCount, DS-POW-2 recentConflict, DS-POW-4 Holding, DS-POW-5 governing body name, DS-POW-6 duty evasion, DS-STR-1 section framing)
+    expect(pools.length, 'three-variant pools swept').toBeGreaterThanOrEqual(484);
     expect(tally.filter((seen) => seen === 0), 'an unreachable slot').toEqual([]);
     // ⭐ AN EXPLICIT PER-TEST BUDGET CARRYING THE MEASURED FIGURE (LT28 car 2, 2026-09-15),
     // which is the cure `scripts/check-test-ratchet.mjs` names in its own words when a row
@@ -1019,7 +1020,8 @@ describe('the state-prose reader — law 6, the index-stable draw', () => {
     expect(modulusShare).toBeGreaterThan(70);
     expect(modulusShare).toBeLessThan(80);
     expect(modulusToNewShare).toBeLessThan(40);
-    expect(reads, 'the reads measured').toBeGreaterThanOrEqual(500 * APPEND_SEEDS.length);
+    // BUILD-1-FINISH (2026-11-20, the chair's ruling of 18:46 UTC, measured at lane/prose-2-2026-11-20-build1 against the base 87f03395b): 500 -> 484 three-variant pools, the same seventeen as the sweep above
+    expect(reads, 'the reads measured').toBeGreaterThanOrEqual(484 * APPEND_SEEDS.length);
     // An explicit per-test budget on the same ground as the row above, scaled to this row's
     // own measurement: 3,899 ms alone at load 3.14, so the 8.3x contention multiple measured
     // on this file puts its worst case near 32 s — already past the suite-wide 20,000 ms.
