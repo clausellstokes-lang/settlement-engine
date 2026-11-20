@@ -41,3 +41,21 @@ base and tip, red first, authored lines to the chair before merge, the gates to 
 3. MAGIC prints the contributors' reasons that are the town's own (not the world dial's line).
 4. A calm town stays calm: nothing is added that the record does not hold, and no sentence is invented: every
    line a DM reads is the record's own text or a heading. Headings are authored lines: to the chair first.
+
+## AMENDED BY PAGE-9, 2026-11-20 17:42 UTC (`date -u`), on the chair's ruling of 17:41 UTC. THIS SECTION GOVERNS WHERE IT DIFFERS FROM THE ABOVE.
+
+THE MEASURE (`measures/THIN/`, PAGE-9's `9faaba042`) refuted the table above: no slot or line can print as it stands
+(over a quarter of a size's towns, or machine words: `recent_changes` reads "...civic stability at risk has come to a
+head" in 154 of 300). NOTHING OF THIS UNIT IS BUILT until the chair forwards "DAILY <commit>" (the content seat DAILY-1
+makes the eight slots, the Outlook's warnings and dependencies and the Magic reasons true and varied). Then this unit
+prints them, re-measured on DAILY's tip by the same scripts.
+
+THE AUDIENCE, RULED (the chair, 17:41): `dailyLife.commoner_resentments` and `magicProfile.contributors[].reason` reach
+people's secrets and hooks (`npcs[].secret`, `.plotHooks`) through `deriveAllNpcProfiles`: they print on the OWNER'S
+PAGE ONLY (the audience fails closed: a missing audience is a reader) until a parity arm proves that the derivation on a
+shared read's document never reads them. Every other candidate re-derived on `toPublicSafe(record)` equals the owner's
+in 300 of 300 (EXECUTED), which is a measure on today's pools, not a proof: the builder re-runs it on DAILY's tip.
+
+THE OUTLOOK'S FILTERS (`viabilityFilter.js`, `git log -S`): TYPES/SEV `e608542bd` (2026-04-13, "in Economics &
+Resources tabs": those texts print there 0 of 81); CATEGORIES `ec69513e2` ("[pdf-6] filter parity"); TITLES
+`97d9e66a8` (T2-16, "defers to Resources"). A builder that un-drops one reads its commit first.
