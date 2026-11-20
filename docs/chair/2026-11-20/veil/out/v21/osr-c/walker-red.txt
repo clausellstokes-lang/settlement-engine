@@ -1,0 +1,63 @@
+     × A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live 50ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+AssertionError: the live heuristic inventory must exactly match the frozen one. A lawful shrink is `node scripts/check-observed-shape-readers.mjs --write` on a clean tree — it re-derives inventory, total and identities together and refuses anything that is not a shrink. NEVER hand-edit a row: that throws "observed-shape baseline totals are inconsistent" out of validateLeafBaseline (scripts/lib/observed-shape-baseline.mjs).: expected { violations: 4, stale: +0 } to deeply equal { violations: +0, stale: +0 }
+
+- Expected
++ Received
+
+  {
+    "stale": 0,
+-   "violations": 0,
++   "violations": 4,
+  }
+
+ ❯ tests/lint/observedShapeReaders.walker.test.js:841:7
+    839|       + ' NEVER hand-edit a row: that throws "observed-shape baseline …
+    840|       + ' out of validateLeafBaseline (scripts/lib/observed-shape-base…
+    841|     ).toEqual({ violations: 0, stale: 0 });
+       |       ^
+    842|     expect(violations).toEqual([]);
+    843|     expect(stale).toEqual([]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+AssertionError: expected { reads: 2220, identities: 1556, …(3) } to deeply equal { reads: 2214, identities: 1552, …(3) }
+
+- Expected
++ Received
+
+  {
+    "bankedReads": 78,
+-   "files": 444,
+-   "identities": 1552,
+-   "reads": 2214,
++   "files": 448,
++   "identities": 1556,
++   "reads": 2220,
+    "taggedRows": 52,
+  }
+
+ ❯ tests/lint/observedShapeReaders.walker.test.js:1652:8
+    1650|     // cure being written and being landed, and the register-read shap…
+    1651|     // next such move cost nothing. The two figures differ; the mechan…
+    1652|     }).toEqual(registerFigures());
+       |        ^
+    1653|     expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ ident…
+    1654|       const rows = taggedAddresses.filter((row) => row.identity === id…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 45 passed (47)
+   Start at  03:52:02
+   Duration  97.28s (transform 7.35s, setup 26ms, import 1.06s, tests 96.09s, environment 0ms)
+
+[gate-tail] end:  03:53:39 up  1:16,  0 user,  load average: 6.88, 4.62, 3.43
+[gate-tail] full log: /tmp/gate-tail.30135.log
+[gate-tail] exit: 1 (the gate's own status, not a pipe's)
+exit 1
