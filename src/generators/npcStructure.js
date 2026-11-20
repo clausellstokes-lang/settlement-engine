@@ -25,8 +25,10 @@ import { resolveDeclared, lineText, filterDeclared } from '../domain/facts/drawD
 import { factsOf } from '../domain/facts/factsOf.js';
 import { notePresumption, withPresumptionLedger } from '../domain/facts/presumptionLedger.js';
 import { pickVariantMixed } from '../kernel/proseHash.js';
-import { POSITION_VARIANTS, POSITION_POOL_OF } from '../data/npcStructureVariants.js';
+import { CONSTRAINT_VARIANTS, POSITION_VARIANTS, POSITION_POOL_OF } from '../data/npcStructureVariants.js';
 import { fillLine, houseFill, resourceFill } from './people/goals.js';
+import { liveInstitutions } from '../domain/institutions/institutionRoster.js';
+import { partitionDefenseInstitutions } from '../domain/institutions/defenseInstitutionBuckets.js';
 
 import { heldByOthers } from './hookVariety.js';
 import { powerOrderOf, structuralStandingOf, STANDING } from '../domain/people/membership.js';
@@ -596,40 +598,83 @@ const firstImportOf = (list) => {
   return '';
 };
 
+// PEOPLE-1 B1b (the chair's ruling of 16:51 UTC on PROPOSAL-activeConstraint.md, (c)): a `{house}` row names the kind of house
+// it fits, and the card's own house fills it only where the house's own home reads it of that kind, never by its words here:
+// 'people', a body of people under arms: the defence partition's force buckets (`institutions/defenseInstitutionBuckets.js`:
+// a garrison, a watch, a militia, a hired company; never the walls); 'building', a house that stands in repair: a house the
+// catalogue shelves as the faith's (`category`). A kind with no home ('family') fits no house.
+/** @type {Readonly<Record<string, ReadonlyArray<string>>>} */
+const FORCE_BUCKETS_OF = Object.freeze({ people: Object.freeze(['garrison', 'watch', 'militia', 'mercenary']), watch: Object.freeze(['watch']) });
+/** The card's own house, as the live roster holds it. @param {Record<string, any>} npc @param {Record<string, any>} settlement */
+const ownHouseRecordOf = (npc, settlement) => {
+  const inst = npc?.institution;
+  if (inst?.kind !== 'house' || typeof inst.key !== 'string') return null;
+  return (/** @type {Array<Record<string, any>>} */ (liveInstitutions(/** @type {any} */ (settlement)) || [])).find((r) => r?.name === inst.key) || null;
+};
+/** Is the house in one of the force buckets of `kind`? @param {Record<string, any> | null} rec @param {string} kind */
+const inForce = (rec, kind) => {
+  if (!rec) return false;
+  const b = /** @type {Record<string, Array<unknown>>} */ (/** @type {unknown} */ (partitionDefenseInstitutions(/** @type {never} */ ([rec]))));
+  return (FORCE_BUCKETS_OF[kind] || []).some((k) => (b[k] || []).length > 0);
+};
+/** @type {Readonly<Record<string, (rec: Record<string, any> | null) => boolean>>} */
+const HOUSE_KINDS_FIT = Object.freeze({
+  people: (rec) => inForce(rec, 'people'),
+  building: (rec) => !!rec && rec.category === 'Religious',
+  family: () => false,
+});
+
+/**
+ * PEOPLE-1 B1b (the chair's (b)): the constraint rows whose condition no atom states, each refused where the record says
+ * otherwise. `<pool key>#<index>` → true where the row may print.
+ * @type {Readonly<Record<string, (npc: Record<string, any>, settlement: Record<string, any>) => boolean>>}
+ */
+const CONSTRAINT_ROW_GATES = Object.freeze({
+  // the holder must deal with the guild: never where the trade's own power holds the seat (the governing power's own
+  // category is the trade's: a guild that governs is one)
+  'government__stable__dominant#2': (_npc, settlement) => !(settlement?.powerStructure?.factions || []).some((/** @type {any} */ f) => f?.isGoverning && (f?.category === 'economy' || f?.category === 'crafts')),
+  // the armed head shares the coin with the paid watch: never where its own house IS the watch (the defence partition's)
+  'military__stable__dominant#9': (npc, settlement) => !inForce(ownHouseRecordOf(npc, settlement), 'watch'),
+});
+
 /**
  * The card's line among its row's pooled wordings; `canonical` (the row's own line) where the row has no pool, the call no
  * seed or the card no id, or nothing else is admitted.
- * @param {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs: ReadonlyArray<string>, excludes: ReadonlyArray<string> }>>>>} pools
+ * @param {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs: ReadonlyArray<string>, excludes: ReadonlyArray<string>, house?: string }>>>>} pools
  * @param {string} field the record field (`structuralPosition`) @param {string} looked the `T` key @param {string} canonical
- * @param {Record<string, any>} npc @param {Record<string, any>} settlement @param {ReturnType<typeof factsOf>} facts @returns {string}
+ * @param {Record<string, any>} npc @param {Record<string, any>} settlement @param {ReturnType<typeof factsOf>} facts
+ * @param {Readonly<Record<string, (npc: Record<string, any>, settlement: Record<string, any>) => boolean>>} [gates] rows the record refuses
+ * @returns {string}
  */
-function pooledLineOf(pools, field, looked, canonical, npc, settlement, facts) {
-  const pool = pools[POSITION_POOL_OF[looked] || looked];
+function pooledLineOf(pools, field, looked, canonical, npc, settlement, facts, gates = {}) {
+  const poolKey = POSITION_POOL_OF[looked] || looked;
+  const pool = pools[poolKey];
   const seed = settlement?._seed;
   if (!pool || !seed || npc?.id == null || npc.id === '') return canonical;
   /** @type {Array<Record<string, any>>} */ const notes = [];
   const { result: admitted } = withPresumptionLedger(() => filterDeclared(pool, { facts, ctx: { npc }, poolId: `NPC_STRUCTURE.${looked}`, surface: 'npcs', drawKind: 'H' }), /** @type {any} */ (notes));
   const inst = npc?.institution;
   // a house of a hideable kind (criminal, clandestine: stamped `veiled` at birth) is never named (the chair's 17:13 UTC (e))
-  const slots = {
-    house: inst?.kind === 'house' && inst.veiled === false ? houseFill(inst.key) : '',
-    export: firstExportOf(facts.exports),
-    import: firstImportOf(facts.imports),
-  };
-  /** @type {Array<{ row: Readonly<{ text: string }>, at: number }>} */ const candidates = [{ row: pool[0], at: 0 }];
+  const house = inst?.kind === 'house' && inst.veiled === false ? houseFill(inst.key) : '';
+  const goods = { export: firstExportOf(facts.exports), import: firstImportOf(facts.imports) };
+  /** the slots a row fills: its own house only where the house is of the row's kind (B1b (c)) @param {{ house?: string }} row */
+  const rec = house ? ownHouseRecordOf(npc, settlement) : null;
+  const slotsOf = (row) => ({ ...goods, house: house && (!row.house || HOUSE_KINDS_FIT[row.house]?.(rec)) ? house : '' });
+  /** @type {Array<{ row: Readonly<{ text: string, house?: string }>, at: number }>} */ const candidates = [{ row: pool[0], at: 0 }];
   for (const row of admitted) {
     const at = pool.indexOf(row);
-    if (at > 0 && fillLine(row.text, slots) !== null) candidates.push({ row, at });
+    const gate = gates[`${poolKey}#${at}`];
+    if (at > 0 && (!gate || gate(npc, settlement)) && fillLine(row.text, slotsOf(row)) !== null) candidates.push({ row, at });
   }
   if (candidates.length < 2) return canonical;
-  const chosen = /** @type {{ row: Readonly<{ text: string }>, at: number }} */ (pickVariantMixed(candidates, `${seed}::npcStructure.${field}::${npc.id}`));
+  const chosen = /** @type {{ row: Readonly<{ text: string, house?: string }>, at: number }} */ (pickVariantMixed(candidates, `${seed}::npcStructure.${field}::${npc.id}`));
   if (chosen.at === 0) return canonical;
   for (const n of notes) if (n.lineId === chosen.at) notePresumption(/** @type {any} */ (n));
-  return /** @type {string} */ (fillLine(chosen.row.text, slots));
+  return /** @type {string} */ (fillLine(chosen.row.text, slotsOf(chosen.row)));
 }
 
 /** @param {Record<string, any>} npc */
-const isMintedLord =(npc) => npc?.institution?.kind === 'power' && (npc?.institution?.title ?? npc?.title) === CLAIMANT_FACE.title; // TAIL-TITLES K-C: the face, not the holder's form
+const isMintedLord = (npc) => npc?.institution?.kind === 'power' && (npc?.institution?.title ?? npc?.title) === CLAIMANT_FACE.title; // TAIL-TITLES K-C: the face, not the holder's form
 /** The enrichment cut over a cast of `n`. @param {number} n */
 const cutOf = (n) => Math.min(5, Math.max(2, Math.floor(n * 0.45)));
 
@@ -710,7 +755,9 @@ export function enrichNPCsWithStructure(npcs, settlement) {
       ...npc,
       goal:               updatedGoal,
       structuralPosition: isHolder && holderHouseLineOf(npc) ? `${position} ${holderHouseLineOf(npc)}` : positionForStanding(npc, position), // BAR5-POWERS (1c-npc): the low-standing twin maps index 0 alone
-      activeConstraint:   lineText(tmpl.constraint),
+      // PEOPLE-1 B1b: the row's constraint pool, keyed apart from the position; the old families' wordings only on a card whose
+      // category IS `other` (the chair's (d)): a card that falls to that row keeps index 0
+      activeConstraint:   looked === OTHER_STABLE_DOMINANT && cat !== 'other' ? lineText(tmpl.constraint) : pooledLineOf(CONSTRAINT_VARIANTS, 'activeConstraint', looked, lineText(tmpl.constraint), npc, settlement, /** @type {ReturnType<typeof factsOf>} */ (facts), CONSTRAINT_ROW_GATES),
       settlementCondition: condition,
       structuralRank:     standing.standing,
     };
