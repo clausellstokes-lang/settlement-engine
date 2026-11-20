@@ -135,7 +135,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
       <div style={{
         fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 4,
       }}>Magic</div>
-      {posture.magicExists && headlineScope && <div data-testid="magic-headline-scope" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, margin: '0 0 2px' }}>{headlineScope}</div>}
+      {posture.magicExists && headlineScope && <div data-testid="magic-headline-scope" style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED, margin: '0 0 2px' }}>{headlineScope}</div>}
       <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: '0 0 12px' }}>{posture.display}</p>
 
       {posture.magicExists ? (

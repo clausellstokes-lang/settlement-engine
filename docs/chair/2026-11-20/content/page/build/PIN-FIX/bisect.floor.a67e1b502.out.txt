@@ -1,0 +1,11 @@
+tree: a67e1b502 (archived read-only into a scratch dir)
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 4252 after 35 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+ RUN  v4.1.8 /tmp/claude-0/-home-user-settlement-engine/f95c3ed0-1aae-56b4-8ebb-9bccd9d92200/scratchpad/pinfix/t-a67e1b502
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  17:42:27
+   Duration  28.23s (transform 6.72s, setup 69ms, import 5.83s, tests 21.73s, environment 497ms)
+
