@@ -1169,3 +1169,19 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   exists by construction and the scanner sees the known writer; fidelity must hold. WHY NOT (A): a red walker
   cannot ship when the lane joins the line. If the scanner still reds, the governed rung becomes its own unit on
   the line before the close.
+- 03:52 UTC · **VEIL-DOORS-2, ITEM 7 MEASURED (its message of 03:49 UTC):** three born campaign worlds of six member towns,
+  the pulse advanced twelve months, the share editor's own serializer with all five sections on; needles: every
+  hideable house and hidden power of each member (41). NO house's or hidden power's NAME in the world columns. BUT
+  31 CRIME-WORDED HEADLINES NAMING MEMBER TOWNS in the serialized `snapshot.chronicle` ("Thieves and racketeers are
+  working Vysokoino's streets in the open."; "Criminal corridor is taking hold in Khankhel"): they tell organised
+  crime in a town whose share hides its criminal house by default. The guard reads keys, never values.
+  **RULING VR40, FINAL (vetoable):** THE CLASS: such a headline is a crime-worded sentence and cause of a hidden
+  house: TIER 1 (no band). THE CURE FOR THE DEPLOY: (1) the share editor does not send the world's chronicle
+  section (off, shown as not shareable yet), a born test holding "publishing with the editor's defaults succeeds
+  and the stored snapshot holds no chronicle"; (2) both map reads DROP a stored `chronicle` section from the world
+  snapshot whatever it holds; (3) the guard is not loosened. A shared world chronicle returns AFTER the deploy,
+  crime-class outcomes dropped at the source by the outcome's KIND (never by word), each headline passing its
+  member town's veil. FOR THE OWNER'S LIST: a shared map's world shows no chronicle yet. STILL OPEN, ONE FACT ASKED:
+  whether `publish_map` with the editor's defaults SUCCEEDS and stores the chronicle or RAISES (the reader executed
+  the guard as refusing any key matching `.*chronicle.*`); it decides what the owner is told about production
+  today. Item 5 (the event-type table, with the chronicle's cure inside) is at eafece56a.
