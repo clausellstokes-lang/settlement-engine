@@ -14,8 +14,6 @@ import { TONIGHT_AUDIENCES } from '../../domain/summary/tonightSheet.js';
 import { stakeLines, unprintedFacts } from '../lib/crisisPrint.js';
 // ROUND THREE, ruling (a): a house in the cast or the levers is printed by its label, as the page prints it.
 import { institutionHouseLabel } from '../../domain/display/institutionDisplayName.js';
-// TAIL-CRISIS-7 (K26): a stake row is a sentence; its power takes its name from the one leaf ("The Guard split").
-import { powerSentenceName } from '../../domain/display/powerSentenceName.js';
 
 /** @param {{ children: string }} props */
 function Label({ children }) {
@@ -40,7 +38,9 @@ export function CrisisSections({ settlement, printedFacts = [] }) {
           <Label>{CRISIS_PAGE_COPY.cast}</Label>
           {s.cast.length ? s.cast.map((r) => <Line key={`${r.role}-${r.id}`}>{`${r.roleLabel}: ${r.kind === 'institution' ? institutionHouseLabel(r.name) : r.name} · ${r.reason}`}</Line>) : <Line>{CRISIS_PAGE_COPY.nobody}</Line>}
           {s.stakes.length ? <Label>{CRISIS_PAGE_COPY.stakes}</Label> : null}
-          {stakes.rows.map((k) => <Line key={k.factionId}>{`${powerSentenceName(k.factionId)} ${CRISIS_PAGE_COPY.stake[k.stake]} · ${k.reason}`}</Line>)}
+          {/* TAIL-CRISIS-7 (K26): a stake row is a sentence. FRAME-6 · C2: its opening is the page's one composition, carried
+              by stakeLines (the power with its article, the verb in its number: "The Religious Authorities gain") */}
+          {stakes.rows.map((k) => <Line key={k.factionId}>{`${k.subject} ${k.verb} · ${k.reason}`}</Line>)}
           {stakes.untouched ? <Line>{stakes.untouched}</Line> : null}
           <Label>{CRISIS_PAGE_COPY.levers}</Label>
           {s.levers.length ? s.levers.map((l) => <Line key={l.institution}>{l.holderName ? `${institutionHouseLabel(l.institution)}, held by ${l.holderName}.` : `${institutionHouseLabel(l.institution)}.`}</Line>) : <Line>{CRISIS_PAGE_COPY.noLevers}</Line>}

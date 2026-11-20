@@ -32,10 +32,9 @@ import { FIELD_INK } from '../../../design/organic/ink.js';
 import { FLUSH, FLUSH_PAGE, FLUSH_STACK } from '../../../design/flush.js';
 import { useEntityFocus } from '../../dossier/useEntityFocus.js';
 import { entityAnchor } from '../../../domain/dossier/entityLinks.js';
-import { composeCrisisPage, CRISIS_PAGE_COPY } from '../../../domain/crisis/crisisPage.js';
+import { composeCrisisPage, CRISIS_PAGE_COPY, stakeOpening } from '../../../domain/crisis/crisisPage.js';
 import { CAST_EDIT_PATH, CRISIS_ROLES, CRISIS_ROLE_LABEL, formatCastRoles } from '../../../domain/crisis/crisisCast.js';
 import { TAB_CRISIS_MARK } from './tabPalette.js';
-import { powerSentenceName } from '../../../domain/display/powerSentenceName.js';
 
 const MARK = TAB_CRISIS_MARK;
 const BODY = FIELD_INK.body;
@@ -149,13 +148,13 @@ export function CrisisSection({ section, canAuthor = false, roster = [] }) {
       </div>
 
       {section.stakes.length > 0 && <Heading>{CRISIS_PAGE_COPY.stakes}</Heading>}
-      {/* TAIL-CRISIS-7 (K26): a stake row is a sentence, so a power whose roster label is no name a sentence holds
-          ("Military/Guard", "Third Bloc (Neutrals)") prints the one leaf's prose form ("The Guard split"), the door still
-          opening the power; every other power keeps the link's own live name. */}
-      {section.stakes.map((k) => (
+      {/* TAIL-CRISIS-7 (K26): a stake row is a sentence. FRAME-6 · C2: its opening is the page's one composition
+          (`stakeOpening`): the power with its article ("The Religious Authorities", "The Guard") and a verb in its number
+          ("gain", "gains"); the door still opens the power, and shows the sentence's words, not the roster label. */}
+      {section.stakes.map((k) => ({ k, said: stakeOpening(k) })).map(({ k, said }) => (
         <p key={k.factionId} data-testid="crisis-stake" style={prose}>
-          <EntityLink id={k.doorId} type="faction" fallback={powerSentenceName(k.factionId)} verbatim={powerSentenceName(k.factionId) !== k.factionId} style={door} />
-          <span style={{ fontWeight: 800, color: MARK.ink }}> {CRISIS_PAGE_COPY.stake[k.stake]}</span>
+          <EntityLink id={k.doorId} type="faction" fallback={said.subject} verbatim style={door} />
+          <span style={{ fontWeight: 800, color: MARK.ink }}> {said.verb}</span>
           <span style={{ color: FAINT }}> · {k.reason}</span>
         </p>
       ))}
