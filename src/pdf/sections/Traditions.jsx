@@ -19,7 +19,9 @@
  * one leaf): under each name, the description the dossier's Traditions tab prints on
  * the owner's page, composed by `traditionDescription.js :: describeTradition` for the
  * OWNER (the export is the owner's document). This file holds no wording of its own for
- * it; a row the leaf composes nothing for (a DM's custom tradition) prints no line.
+ * it; a row the leaf composes nothing for (a DM's custom tradition) prints no line. The rites are described over the
+ * owner's set (shownTraditions.js :: descriptionSetOf, TRAD-4 unit 10), as the tab describes them, so no sentence of the
+ * town is printed in two of its rites and the export reads as the owner's page does.
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
@@ -27,6 +29,7 @@ import { ChapterBand, ChapterHeadline } from '../primitives/Dense.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { describeTraditionWindow } from '../../domain/traditions/genesis.js';
 import { describeTradition } from '../../domain/traditions/traditionDescription.js';
+import { descriptionSetOf } from '../../domain/traditions/shownTraditions.js';
 
 const OUTCOME_LABEL = {
   triumph: 'a triumph', good: 'well kept', modest: 'modestly kept',
@@ -52,6 +55,7 @@ function provenanceLine(rec) {
 export function Traditions({ settlement, narrativeMode }) {
   const mirror = settlement && Array.isArray(settlement.traditions) ? settlement.traditions : null;
   if (!mirror || !mirror.length) return null; // dormant / draft ⇒ byte-identical off-state.
+  const descriptionSet = descriptionSetOf(settlement, 'owner', []);
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -79,7 +83,7 @@ export function Traditions({ settlement, narrativeMode }) {
         const actInName = !act || String((rec && rec.name) || '').toLowerCase().includes(act.toLowerCase());
         const motifChip = [humanizeMotif(motif.element), actInName ? '' : act].filter(Boolean).join(' · ');
         const prov = provenanceLine(rec || {});
-        const described = describeTradition(rec, settlement, { audience: 'owner' });
+        const described = describeTradition(rec, settlement, { audience: 'owner', set: descriptionSet });
         return (
           <View key={(rec && rec.id) || i} style={{ marginBottom: space.sm }} wrap={false}>
             <View style={{ flexDirection: 'row', alignItems: 'baseline', flexWrap: 'wrap', marginBottom: 1 }}>

@@ -44,7 +44,7 @@ import { toPublicSafe } from '../display/publicSafe.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { resourceDisplayName } from '../display/resourceDisplayName.js';
 import { relationshipsDeskLists } from '../display/stateProse/relationshipsDeskRead.js';
-import { shownTraditionsOf } from '../traditions/shownTraditions.js';
+import { shownTraditionsOf, descriptionSetOf } from '../traditions/shownTraditions.js';
 import { describeTradition } from '../traditions/traditionDescription.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { cardPowerNames, cardHouseOf } from '../people/cardPowers.js';
@@ -201,8 +201,7 @@ function serviceRows(availableServices) {
  * THE TRADITIONS A SEARCH FINDS, composed with the view's own audience (TRAD-2 unit 2; CTR9, CTR11): what the Traditions
  * tab prints for this view. A shared page (`publicDossier`) reads ONLY the rows the owner's save drew (`publicProse`, site
  * `traditions`: sharedTraditionsOf, below) and never derives a set from `id`; with none drawn, none. The owner's views read
- * the tab's one set rule (shownTraditions.js) over the OWNER's record (a player view's projection carries no seed), each
- * with its description composed for the view's audience: the player view as the reader, the owner's page as the owner.
+ * the tab's one set rule (shownTraditions.js) over the OWNER's record (a player view's projection carries no seed), each described for the view's audience over its set (descriptionSetOf, TRAD-4 unit 10), as the tab does.
  * @param {Record<string, unknown>} source  the owner's record @param {Record<string, unknown>} view  the enumerated view
  * @param {SearchViewer} viewer @param {unknown} customTraditions @returns {FoundTradition[]}
  */
@@ -210,8 +209,9 @@ function traditionsOf(source, view, viewer, customTraditions) {
   if (viewer.publicDossier === true) return sharedTraditionsOf(view);
   const { preview, recs } = shownTraditionsOf(/** @type {Parameters<typeof shownTraditionsOf>[0]} */ (source), customTraditions);
   const audience = viewer.playerView === true ? 'reader' : 'owner';
+  const set = descriptionSetOf(/** @type {Parameters<typeof descriptionSetOf>[0]} */ (source), audience, customTraditions);
   return recs.map((rec) => { // composed whole by the leaf, its pools drawn through drawDeclared inside it, as the tab does
-    const described = describeTradition(rec, source, { audience });
+    const described = describeTradition(rec, source, { audience, set });
     return { rec, preview, shared: false, description: described ? described.text : '', calendarLine: null }; });
 }
 

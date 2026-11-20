@@ -59,6 +59,16 @@
  *                       (gallerySecondHomes.js :: withholdCriminalIncome, on the veil lane), is out of the view.
  *   The owner's audience reads the record whole: nothing here changes the owner's page.
  *
+ * ONE TOWN PRINTS NO SENTENCE TWICE (TRAD-4 unit 10; the chair, reading the owner's thirty; vetoable by the owner): a
+ * caller that shows a SET of rites passes it (`options.set`, the set the surface shows, in its order), and inside it a
+ * frame slot's wording is taken BY ROTATION (drawTurn): the first rite takes its pick as alone; a later rite whose pick
+ * would print a sentence an earlier rite of the set printed takes the first wording, going on from its pick, that none
+ * printed; a KEEPER slot then goes on to its kind's two "too" wordings (KEEPER_FRAMES_TOO, never a pick; the chair,
+ * 17:55 UTC) and only beyond them is the keeper sentence left out; where every wording is taken the PAYER sentence is
+ * left out (a rite need not say twice what the town lives on); a cause keeps its pick. Keyed, no new draw, no clock, nothing stored; a rite alone, or with no set,
+ * reads exactly as before. THE READER'S SET (CTR11) is the drawn set (shownTraditions.js :: descriptionSetOf), never a
+ * row a DM can hide, and the reader's rotation reads only the reader's own compositions of its rites.
+ *
  * PURE, derived at render, nothing stored (CTR4): no draw (a frame is picked by kernel/proseHash.js :: pickVariant on a
  * key of the settlement's identity and the record's stable id), no clock, no write, no new key on the town. Genesis is
  * not read here and not changed (CTR3): the record is the caller's, whichever set the surface already shows.
@@ -79,10 +89,11 @@ import { catalogIdForName } from '../../data/institutionalCatalog.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { drawDeclared, lineText } from '../facts/drawDeclared.js';
 import { factsOf } from '../facts/factsOf.js';
+import { isColourLine } from '../facts/factVocabulary.js';
 import {
   ACT_LEADS, CRISIS_SCOPED_ACTS, ELEMENT_GLOSS, CRISIS_SCOPED_ELEMENTS, KEEPER_HOUSES, HOUSE_FRAMES, POWER_FRAMES,
   OWNER_FRAMES, CAUSE_FRAMES, DEAD_EVENT_TYPES, DEAD_EVENT_SEVERITIES, DEAD_EVENT_PHRASES, ECONOMY_FIT, ECONOMY_FRAMES,
-  ECONOMY_RANKS, POWER_FRAME_VERBS,
+  ECONOMY_RANKS, POWER_FRAME_VERBS, KEEPER_FRAMES_TOO,
 } from '../../data/traditionDescriptionTable.js';
 
 /** @typedef {import('./genesis.js').TraditionRec} TraditionRec */
@@ -254,19 +265,50 @@ const settlementSeedOf = (settlement) => String(settlement._seed ?? settlement.i
  * THE ONE DRAW (CTR10): the composer's selector (`pickVariant` on `seed::slot`, the settlement's identity then the
  * record's stable id and the slot) over the FULL pool, the drawn line resolved through `drawDeclared` against the facts of
  * the record the leaf was handed (a refused line moves to its twin, else the admitted argmax under the same key, else
- * nothing). Fail-closed as the house's draw is.
+ * nothing). Fail-closed as the house's draw is. `turned` (drawTurn's only): the line the rotation took in place of the pick.
  * @template L
  * @param {ReadonlyArray<L>} pool @param {string} seed the settlement's identity (settlementSeedOf)
  * @param {string} slot the record's id and the slot @param {string} poolId @param {() => object|null} facts
- * @param {boolean} [crisisScoped] @returns {string}
+ * @param {boolean} [crisisScoped] @param {L} [turned] @returns {string}
  */
-function draw(pool, seed, slot, poolId, facts, crisisScoped = false) {
+function draw(pool, seed, slot, poolId, facts, crisisScoped = false, turned = undefined) {
   const drawn = drawDeclared(pool, {
-    draw: (p) => pickVariant(p, `${seed}::${slot}`), facts, key: `${seed}::${slot}`,
+    draw: (p) => (turned === undefined ? pickVariant(p, `${seed}::${slot}`) : turned), facts, key: `${seed}::${slot}`,
     poolId: `traditionDescription:${poolId}`, surface: 'traditions', drawKind: 'H', crisisScoped,
   });
   const text = drawn.line == null ? null : lineText(drawn.line);
   return typeof text === 'string' ? text : '';
+}
+
+/**
+ * THE ROTATION (TRAD-4 unit 10): one frame slot's sentence, its wording taken by rotation inside the town's set. With no
+ * sentence taken (a rite alone, or the first of its set) this is `render(draw(…))`, byte for byte. Otherwise, over a pool
+ * of colour lines only (every frame table: a colour line is admitted everywhere, so the line taken is the line printed):
+ * the first wording, going on from the pick (`pickVariant` on the same key, the pool's own order, wrapping), then the
+ * `again` wordings in their order (a keeper's KEEPER_FRAMES_TOO: never in the pick's domain), whose sentence is not among
+ * `taken`, drawn through the one draw (over the pool and its `again` lines, so the ledger's line id indexes both). Every
+ * wording taken: null where `leaveOut` (the payer, and a keeper beyond its fifth: the sentence is left out), else the
+ * pick as alone. A pool with a declared line or a twin is drawn as alone.
+ * @template L
+ * @param {ReadonlyArray<L>} pool @param {string} seed @param {string} slot @param {string} poolId
+ * @param {() => object|null} facts @param {(text: string) => string} render the frame filled with its slots
+ * @param {Set<string>|null} taken the sentences the set's earlier rites printed @param {boolean} [leaveOut]
+ * @param {ReadonlyArray<L>} [again] the wordings after the pool's own (a keeper's "too" lines), reached only here
+ * @returns {string|null}
+ */
+function drawTurn(pool, seed, slot, poolId, facts, render, taken, leaveOut = false, again = []) {
+  const all = [...pool, ...again];
+  if (taken && taken.size > 0 && all.length > 1 && all.every((l) => isColourLine(l))) {
+    const start = pool.indexOf(/** @type {L} */ (pickVariant(pool, `${seed}::${slot}`)));
+    const free = [...pool.keys()].map((k) => pool[(start + k) % pool.length]).concat(again)
+      .find((l) => !taken.has(render(String(lineText(l)))));
+    if (free === undefined) {
+      if (leaveOut) return null;
+    } else if (free !== pool[start]) {
+      return render(draw(all, seed, slot, poolId, facts, false, free));
+    }
+  }
+  return render(draw(pool, seed, slot, poolId, facts));
 }
 
 /**
@@ -390,18 +432,51 @@ function ownerFor(rec, settlement, reader) {
   return null;
 }
 
+/** @typedef {{ audience?: TraditionAudience|string, set?: ReadonlyArray<unknown>|null }} TraditionDescribeOptions */
+
 /**
  * Describe one tradition for one audience. Null for a DM's authored custom tradition (the DM's truth stands as authored),
  * for a motif the table does not know, and for no record or no town.
+ * `set` (TRAD-4 unit 10): the rites the surface shows, in its order (shownTraditions.js :: descriptionSetOf for the
+ * audience); the record is found in it (the same object, else the same id) and its frame slots take their wording by
+ * rotation over the rites before it. Absent, or the record not in it: the rite is described alone.
  * @param {TraditionRec|Rec|null|undefined} recIn
  * @param {Rec|null|undefined} settlementIn
- * @param {{ audience?: TraditionAudience|string }} [options]  the audience; anything but 'owner' reads as the reader
+ * @param {TraditionDescribeOptions} [options]  the audience (anything but 'owner' reads as the reader), and the set
  * @returns {TraditionDescription|null}
  */
 export function describeTradition(recIn, settlementIn, options = {}) {
+  const set = Array.isArray(options.set) ? options.set : null;
+  /** @param {unknown} r @returns {string} */
+  const idOf = (r) => str(recordOf(r).id) || str(recordOf(r).name);
+  const own = set && recIn ? set.indexOf(recIn) : -1;
+  const at = own >= 0 || !set || !idOf(recIn) ? own : set.findIndex((r) => idOf(r) === idOf(recIn));
+  if (!set || at < 0) return compose(recIn, settlementIn, options.audience, null);
+  return describeTraditions(set.slice(0, at + 1), settlementIn, options)[at];
+}
+
+/**
+ * Describe a town's set of rites in its order, for one audience (TRAD-4 unit 10): each as describeTradition would alone,
+ * but a frame slot whose pick would print a sentence an earlier rite of the set printed takes its wording by rotation
+ * (drawTurn). The set is the surface's (shownTraditions.js :: descriptionSetOf); one entry per rite, null where none.
+ * @param {ReadonlyArray<unknown>|null|undefined} set @param {Rec|null|undefined} settlementIn
+ * @param {TraditionDescribeOptions} [options] @returns {Array<TraditionDescription|null>}
+ */
+export function describeTraditions(set, settlementIn, options = {}) {
+  /** @type {Set<string>} */
+  const taken = new Set();
+  return listOf(set).map((rec) => compose(/** @type {Rec|null|undefined} */ (rec), settlementIn, options.audience, taken));
+}
+
+/**
+ * One rite composed for one audience; `taken` (the set's rotation, or null alone) gathers the sentences it printed.
+ * @param {TraditionRec|Rec|null|undefined} recIn @param {Rec|null|undefined} settlementIn @param {unknown} audience
+ * @param {Set<string>|null} taken @returns {TraditionDescription|null}
+ */
+function compose(recIn, settlementIn, audience, taken) {
   if (!recIn || typeof recIn !== 'object' || !settlementIn || typeof settlementIn !== 'object') return null;
   const rec = recordOf(recIn);
-  const reader = options.audience !== 'owner';
+  const reader = audience !== 'owner';
   // CTR11: the reader's text is composed over the reader's view; the key (`seed`) is the whole record's identity, the
   // same on both pages.
   const whole = recordOf(settlementIn);
@@ -441,9 +516,13 @@ export function describeTradition(recIn, settlementIn, options = {}) {
   const want = wantedPower(rec, element, act, core);
   const owner = ownerFor(rec, settlement, reader);
   if (owner) {
-    s2 = fill(draw(OWNER_FRAMES, seed, `${id}#owner`, 'owner', facts), { owner: owner.prose, Owner: cap(owner.prose) });
-    parts.keeper = 'owner';
-    (owner.power ? named.powers : named.houses).push(owner.name);
+    // beyond the keeper's fifth wording in the set (TRAD-4 unit 10) the sentence is left out, and names nothing
+    s2 = drawTurn(OWNER_FRAMES, seed, `${id}#owner`, 'owner', facts, (x) => fill(x, { owner: owner.prose, Owner: cap(owner.prose) }),
+      taken, true, KEEPER_FRAMES_TOO.owner) ?? '';
+    if (s2) {
+      parts.keeper = 'owner';
+      (owner.power ? named.powers : named.houses).push(owner.name);
+    }
   } else if (!str(rec.ownerLabel)) {
     const house = want === 'seat' ? null
       : (houseFor(HOUSES_BY_ELEMENT[element], settlement, reader) || houseFor(HOUSES_BY_ACT[act], settlement, reader));
@@ -451,14 +530,17 @@ export function describeTradition(recIn, settlementIn, options = {}) {
       const person = presiderOf(house.name, settlement, reader);
       const power = !person && house.row.kind === 'place' && want ? powerFor(want, settlement, reader) : null;
       const key = house.row.kind === 'body' ? (person ? 'bodyPerson' : 'body') : (person ? 'placePerson' : (power ? 'placePower' : 'place'));
-      s2 = fill(draw(HOUSE_FRAMES[key], seed, `${id}#house`, `house.${key}`, facts), {
+      s2 = drawTurn(HOUSE_FRAMES[key], seed, `${id}#house`, `house.${key}`, facts, (x) => fill(x, {
         house: house.prose, House: cap(house.prose), person: person ? person.name : '', title: person ? person.title : '',
         power: power ? powerNameInProse(power) : '',
-      });
-      parts.keeper = 'house';
-      named.houses.push(house.name);
-      if (person) named.persons.push(person.name);
-      if (power) named.powers.push(power);
+      }), taken, true, KEEPER_FRAMES_TOO[key]) ?? '';
+      if (s2) {
+        parts.keeper = 'house';
+        named.houses.push(house.name);
+        // a "too" wording drops the presider's clause: the person is named only where the sentence names them
+        if (person && s2.includes(person.name)) named.persons.push(person.name);
+        if (power) named.powers.push(power);
+      }
     } else if (want) {
       const power = powerFor(want, settlement, reader);
       if (power) {
@@ -466,9 +548,12 @@ export function describeTradition(recIn, settlementIn, options = {}) {
         /** @type {Record<string, string>} */
         const verbs = {};
         for (const [slot, [one, many]] of Object.entries(POWER_FRAME_VERBS)) verbs[slot] = powerVerb(power, one, many);
-        s2 = fill(draw(POWER_FRAMES[want], seed, `${id}#power`, `power.${want}`, facts), { ...verbs, power: powerNameInProse(power), Power: powerNameInProse(power, true) });
-        parts.keeper = 'power';
-        named.powers.push(power);
+        s2 = drawTurn(POWER_FRAMES[want], seed, `${id}#power`, `power.${want}`, facts,
+          (x) => fill(x, { ...verbs, power: powerNameInProse(power), Power: powerNameInProse(power, true) }), taken, true, KEEPER_FRAMES_TOO[want]) ?? '';
+        if (s2) {
+          parts.keeper = 'power';
+          named.powers.push(power);
+        }
       }
     }
   }
@@ -487,8 +572,8 @@ export function describeTradition(recIn, settlementIn, options = {}) {
     // (scripts/lib/legacy-reader-shape-scan.mjs :: makeResolver, the ungrounded single-home rule), which carried it through
     // `draw`'s pool into drawDeclared and read every declared line there as a `founding` record.
     const cause = by ? 'founding' : 'foundingBare';
-    s3 = fill(draw(CAUSE_FRAMES[cause], seed, `${id}#origin`, `cause.${cause}`, facts),
-      { town, Town: town, age: String(age), foundedBy: by });
+    s3 = drawTurn(CAUSE_FRAMES[cause], seed, `${id}#origin`, `cause.${cause}`, facts,
+      (x) => fill(x, { town, Town: town, age: String(age), foundedBy: by }), taken) ?? '';
     parts.origin = 'cause';
   } else if (element === 'the-dead') {
     /** @param {Rec} e @returns {boolean} */
@@ -506,9 +591,9 @@ export function describeTradition(recIn, settlementIn, options = {}) {
     const eventProse = !event ? '' : reader ? str(kinds[str(event.templateType)]) : str(event.name).replace(/^The /, 'the ');
     if (event && eventProse && town) {
       const years = Number(event.yearsAgo);
-      s3 = fill(draw(CAUSE_FRAMES.dead, seed, `${id}#origin`, 'cause.dead', facts), {
+      s3 = drawTurn(CAUSE_FRAMES.dead, seed, `${id}#origin`, 'cause.dead', facts, (x) => fill(x, {
         event: eventProse, when: years === 1 ? 'a year ago' : `${years} years ago`, Town: town,
-      });
+      }), taken) ?? '';
       parts.origin = 'cause';
       // the reader's text names no event by its name: nothing is listed
       if (!reader) named.events.push(str(event.name));
@@ -522,13 +607,15 @@ export function describeTradition(recIn, settlementIn, options = {}) {
       const rank = incomes.findIndex((i) => str(i.source) === fit.source);
       if (rank < 0 || rank >= ECONOMY_RANKS.length) continue;
       const band = incomes.length === 1 ? 'only' : ECONOMY_RANKS[rank];
-      s3 = fill(draw(ECONOMY_BY_BAND[band] || [], seed, `${id}#economy`, `economy.${band}`, facts), {
+      // every payer wording taken by the set's earlier rites: the sentence is left out (TRAD-4 unit 10)
+      const paid = drawTurn(ECONOMY_BY_BAND[band] || [], seed, `${id}#economy`, `economy.${band}`, facts, (x) => fill(x, {
         income: fit.prose, Income: cap(fit.prose), is: fit.plural ? 'are' : 'is', brings: fit.plural ? 'bring' : 'brings', town, Town: town,
-      });
-      parts.origin = 'economy';
+      }), taken, true);
+      if (paid !== null) { s3 = paid; parts.origin = 'economy'; }
       break;
     }
   }
 
+  if (taken) for (const s of [s1, s2, s3]) if (s) taken.add(s);
   return { text: [s1, s2, s3].filter(Boolean).join(' '), named, parts };
 }
