@@ -1314,6 +1314,31 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   goal naming a withheld power contains it; two plants, red first. The people stage's first stop (the number id
   90001) and this cure share one helper for "an id as text".
 
+- **R3, THE TELL IS FOUND AND IT BLOCKS: THE POSSIBLE-WORLD RULE (2026-11-20, 14:24 UTC; R3-CURE-5 returned at 4661a1353 on
+  `lane/veil-25-r3c5-2026-11-20`, finished by its builder's count lines; its report `out/v25/r3c5/R3C5-HANDBACK.md`;
+  212 sha256 70c6eb45...220a124, rollback 8cbd7d1c...ded5b0):** THE GATE: HIGHER 0, EQUAL 79, LOWER 13 of 92, both
+  engines, red on the five towns with the re-derivation off. THE TELL COLUMN READS NO IN 26 OF 26 TOWN-READS of
+  the thirteen LOWER towns (three settings tried: the open read, the default veil, the criminal switch off):
+  against the house-free town's switch-off page the served page carries an EMPTY operations list
+  (`safetyProfile.criminalInstitutions: []`) where that page has NO such field, crisis crime types in 8 towns and
+  criminal services in 5 where it has none; against the open page the three `power.entry` towns lack the criminal
+  income row, the criminal power and the goals and memberships aimed at it: AN OPEN-SHAPED PAGE WITH ITS CRIMINAL
+  CORE GONE: a combination no nothing-hidden town shows. RULED: A TELL; IT BLOCKS "R3 <commit>". THE RULE: for
+  every town of the pool, both engines, Reveal DM off and on, THE SERVED PAGE'S WHOLE CRIMINAL SURFACE EQUALS,
+  FIELD FOR FIELD, THE PAGE OF THE SAME TOWN REGENERATED WITHOUT THE HIDDEN HOUSES UNDER THE OWNER'S OWN SWITCH
+  SETTING; where a fail-closed rule withholds something that page would show, UNDER THE NEAREST SETTING THAT SHOWS
+  NONE OF WHAT WAS WITHHELD, in the limit the switch-off page; an empty list and an absent field are different;
+  cured toward withholding; the tell column becomes a GATED arm (YES in every town-read; mixed settings tried;
+  shown able to fail); the cost of the collapse measured for the owner's paragraph. ALSO: THE CONTROL GAP DOES NOT
+  CLOSE inside the crime-dial strata (low: semi-organized 83% in the hidden-house pool against 25% in the control;
+  the pool tracks its own counterfactual): RECORDED, NOT BLOCKING, on the chair's reading that the served Defense
+  key is a function of what the served page itself shows (so the residue is the towns' own shown crime, not the
+  veil's): THAT READING IS TO BE PROVED by the lane and attacked by the reader by name. COUNTS CORRECTED: VR42 is
+  met by 12 of 140 towns; `income.criminalRow` covers 8 LOWER towns. OVER-WITHHOLDING for the owner's paragraph: a
+  renamed shown house loses its operations line on 74 of 76 plants. OWED BEFORE E: the cost rows on the largest
+  town. THE ORDER: VEIL-26 merges R3-CURE-5 and hands over; VEIL-27 (`prompts/VEIL-27.txt`) builds R3-CURE-6 (the
+  numeric-id and no-id husk) and R3-TELL; only then "R3 <commit>" and REVIEW-VEIL-14's seating.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
