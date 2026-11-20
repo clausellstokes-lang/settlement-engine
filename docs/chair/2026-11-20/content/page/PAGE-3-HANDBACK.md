@@ -1,4 +1,4 @@
-# PAGE-3's hand-back (kept current at every push; last written 2026-11-20 13:47 UTC by `date -u`)
+# PAGE-3's hand-back (kept current at every push; last written 2026-11-20 13:51 UTC by `date -u`)
 
 Read this, then `PAGE-2-HANDBACK.md` (its section 1, the rulings in force, still governs where this file is silent),
 then `briefs/BUILDER-RULES.md` and the brief of the unit you take. PAGE-3 integrates; builders (the Agent tool) build.
@@ -18,14 +18,24 @@ then `briefs/BUILDER-RULES.md` and the brief of the unit you take. PAGE-3 integr
 
 | unit | state | branch | commit | next |
 |---|---|---|---|---|
-| S6 | PAGE-2's builder; awaiting origin | lane/page-2-2026-11-20-t1 | (12dc0f96c local there) | read once, re-run red/green, censuses, confinement, merge FIRST |
+| S6 | PAGE-2's builder; origin `lane/page-2-2026-11-20-t1` now at 532a74fa2 (moved past 12dc0f96c: the follow-up? NOT yet relayed by the chair, UNREAD by PAGE-3) | lane/page-2-2026-11-20-t1 | 532a74fa2 | read once, re-run red/green, censuses, confinement, merge FIRST |
 | sides table | a89859e6f READ by PAGE-3, red/green re-run, merged with its manifest row (00ec2d54e) and the lighting census refrozen (3707→3708 files); tests/lint 220/220 there. The chair's six changes (13:22, `briefs/S7-FOLLOWUP.md`): the builder STOPPED at its first check: change 1 is wrong by the code (only 7 template sides are ever written over; 8 of 11 `named` rows never hold a name; 4 rows without `named` do). ASKED THE CHAIR 13:4x: does {power} fill from the stored side or the roster by `means`, and what of the four? Changes 2-6 hold; change 5 needs the case arm to accept the case of the side a fixed row stands for | origin `lane/page-3-2026-11-20-s7-wip` (merge + census + brief, 688682b22) | a89859e6f | on the ruling: build the follow-up (a builder, brief S7-FOLLOWUP.md + the ruling), read, re-run, re-take the census, merge into the lane, one line to the chair |
 | L2 | PAGE-2's builder; uncommitted | lane/page-2-2026-11-20-l2 | | lines to the chair; merge third |
 | L4/S9/S3 | PAGE-2's builder; uncommitted | lane/page-2-2026-11-20-s | | seven reworded lines to the chair; merge fourth |
 | L1 | NOT DISPATCHED (builds on S6's tip) | | | dispatch on T2.md once S6 is on origin |
 | K | PHASE 1 DONE, TRIAL FAILS CONFINEMENT: OTHER 353 leaves/44 towns (golden), 686/89 (census): the powers' conflicts (`powerStructure.conflicts`, parties swap, 34 towns lose their conflict), `factionRelationships[].narrative/direction`, `pressureSentence` (26), ~42 census goals outside classes 2/5, one tie between unmoved cards changing archetype. Bands move for exactly 3 roles (273 cards/151 towns). Also moves tests/lint `poolDominance` (old_debt 0.1389 > 0.1293) and `writerReach` (shapesDigest). Output: `measures/page-3/K-trial-f4a434660.out.txt` | origin `lane/page-3-2026-11-20-k-wip` | f4a434660 (code), b2f8fe25e (scripts) | the chair's ruling on OTHER; Phase 2 only on its word |
 
-## 3. THE CHAIR'S ORDER OF 13:32 (usage warning on)
+## 3. THE CHAIR'S ORDER OF 13:48 (supersedes 13:32's hold: the owner, "We have a weekly reset so don't mind that")
+
+The order of 12:52 again: S6, the sides table, L2 (origin `lane/page-2-2026-11-20-l2-wip` 609c52c5d), L4/S9 (origin
+`lane/page-2-2026-11-20-s-wip` f2957d5be), L1, K last; as many builders side by side as are path-disjoint (one at a time
+in `historyGenerator.js` / `historyData.js`). L1 is NOT dispatched until the chair's change to it arrives (a trouble's
+sentence says WHY IT IS HAPPENING HERE, from the record). NEW RULE: never commit on a branch while its push is in flight;
+before every push `git ls-remote` and push only if the remote differs (an empty push runs `npm run check` inside the
+hook and fixture tests damage the repository; a push log showing `npm run check` is killed and the chair told). Checked
+here 13:5x: core.bare false, no "Fixture" author.
+
+## 3a. The 13:32 order (history)
 
 PAGE-3 does THREE things only: (a) the sides table with the six changes, merged, its commit to the chair; (b) S6 when
 its follow-up lands; (c) K's trial result to the chair in one message. L1, L2, L4/S9 and K's build wait on origin until
@@ -36,3 +46,17 @@ the chair says. Every branch pushed (`-wip` when unfinished) after every return;
 - A PARITY TEST on the joined tree: this lane's `src/data/tensionSideMeanings.js` and the session sheet's
   `src/domain/tension/sideArchetypes.js` (origin/lane/frame-5-2026-11-20) must agree on what a side means.
 - The working line 43ab0f5eb (point 82) is merged into the lane at 6cf1e8e89 (no conflict).
+
+## 5. Open questions to the chair (asked, unanswered at this writing)
+
+- 13:4x: the sides follow-up's change 1 (does {power} fill from the stored side or the roster; what of the four rows
+  that already store a name).
+- 14:2x: K's OTHER (353/44 golden, 686/89 census): a sixth class, or K stops.
+
+## 6. Container facts (this container only; a successor re-makes them)
+
+- `npm ci` done in /home/user/settlement-engine; `/node_modules` added to `.git/info/exclude` (the lighting door refuses a
+  dirty tree, and the worktrees' node_modules symlink is untracked).
+- Worktrees: /home/user/wt-page3-k (K), /home/user/wt-page3-s7 (`page3/s7-merge`), /home/user/wt-page3-s7fix
+  (`page3/s7-fix` = origin `lane/page-3-2026-11-20-s7-wip`). The ledger ref review-fixes-2026-07-08 is fetched (tests/lint
+  `ledgerCitationIntegrity` reds without it).
