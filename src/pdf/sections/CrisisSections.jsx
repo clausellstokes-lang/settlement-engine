@@ -9,6 +9,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { type, palette, space, pt } from '../theme.js';
 import { composeCrisisPage, CRISIS_PAGE_COPY } from '../../domain/crisis/crisisPage.js';
+import { TONIGHT_AUDIENCES } from '../../domain/summary/tonightSheet.js';
 // One home per sentence on the crisis page (B4): shared with the Foundry journal's crisis page.
 import { stakeLines, unprintedFacts } from '../lib/crisisPrint.js';
 // ROUND THREE, ruling (a): a house in the cast or the levers is printed by its label, as the page prints it.
@@ -27,7 +28,8 @@ function Line({ children }) {
 }
 
 export function CrisisSections({ settlement, printedFacts = [] }) {
-  const sections = composeCrisisPage(settlement);
+  // THE OWNER'S PAGE (FRAME-4 · U0): the print chapter is the DM's own export, built from their own record (TonightAtTheTable)
+  const sections = composeCrisisPage(settlement, { audience: TONIGHT_AUDIENCES.owner });
   if (!sections.length) return null;
   return (
     <View style={{ marginBottom: space.sm }}>
