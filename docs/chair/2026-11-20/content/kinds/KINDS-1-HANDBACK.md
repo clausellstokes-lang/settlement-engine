@@ -31,7 +31,12 @@ started on the line's tip `062504aa8`. A successor needs this file and the brief
 8. THE CHAIR, 22:10 UTC: THE CRIME ROW IS B50 (0.05→0.50 over 20→90). The draft table: crime B50; guild 0.05→0.25 over
    1→4; small place 0.50→0.90 over 15→60. A DRAFT row FOR THE OWNER'S SIGNING with base/A/B/B50 kept beside it
    (`FOR-THE-OWNER.md`). Name first paint's +58 raw before K2 (a chunk name in the entry, or code: code comes out).
-9. First paint: the leaf is excised from engine-core and pinned to its own `trouble-law` chunk (the fortune lane's U6
+9. THE CHAIR, 22:23 UTC: +58 ACCEPTED (ruled exception class "a lazy chunk's reference in the entry"). K2's legacy edge:
+   SHAPE 1 CURED in this lane, one line, by the chair's word: `settlementRegenAction.js` regen config =
+   `settlement.config || settlement._config || config` (cite `factionRoles.js`; header/walker text in line; merge message
+   says it changes EVERY field for a `_config`-only legacy place). SHAPE 2 PINNED as the known legacy edge (never
+   `it.fails`); listed in FOR-THE-OWNER.md; the join's one saved-place test over GENERATION_LAWS (the chair's) rules it.
+10. First paint: the leaf is excised from engine-core and pinned to its own `trouble-law` chunk (the fortune lane's U6
    pattern); at the join the vite rows are a UNION with the fortune lane's.
 
 ## UNITS
@@ -39,7 +44,7 @@ started on the line's tip `062504aa8`. A successor needs this file and the brief
 |---|---|---|---|
 | K0 | `briefs/K0.md` | `lane/kinds-1-2026-11-20-k0` @ 99a4a462e | MERGED (2565118b9). Calibration held. |
 | K1 | `briefs/K1.md` | `lane/kinds-1-2026-11-20-k1` @ 6a5132049 | MERGED (4b6fada00). Dark: 525/720 identical, 0 differences. Lit A/B/B50 in `out/law2-compare.md`; sent to the chair ~22:4x. Moved `tensionByMemory` to `src/generators/history/`. The ONE born-with pin: `troubleLawWiring.test.js` "1. CREATE (dark)" (list it for the flip). |
-| K2 | `briefs/K2.md` | `lane/kinds-1-2026-11-20-k2` (worktree `../kinds-k2`, file UNCOMMITTED) | STOPPED ON A FINDING 22:1x: arm 5 (legacy edge: a place with no `settlement.config` re-rolls history under the FORM's law via `regenSectionAction`'s `settlement.config \|\| config`). Other arms green; fixture visitor-city-3. Ruling asked of the chair 22:22 (my rec: cure shape 1 with `settlement._config` before the form; pin shape 2). |
+| K2 | `briefs/K2.md` | `lane/kinds-1-2026-11-20-k2` (worktree `../kinds-k2`, file UNCOMMITTED) | STOPPED ON A FINDING 22:1x: arm 5 (legacy edge: a place with no `settlement.config` re-rolls history under the FORM's law via `regenSectionAction`'s `settlement.config \|\| config`). Other arms green; fixture visitor-city-3. RULED 22:23 (ruling 9); builder resumed to cure shape 1 and pin shape 2. |
 | K3 | `briefs/K3.md` | — | waits on K2 (reds it cures: tuningRegister x4, proseWiringCensus x2, lighting census) |
 
 ## K0 BASELINE (visitor pool, 150 a size; `out/baseline.md`)

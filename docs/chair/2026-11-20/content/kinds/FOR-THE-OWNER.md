@@ -105,3 +105,10 @@ Each lost one because a law-1 add overshot the number of troubles asked for and,
 - B (6): thorp 2 (2→1); village 95, 144; town 114 (calm); city 60.
 - B50, the chosen row (7): thorp 2 (2→1), 148 (3→2); village 95, 144 (2→1); town 114 (2→1, calm); city 60 (3→2).
 (Seeds are `visitor-<size>-<n>`.)
+
+## ONE KNOWN LEGACY EDGE (the chair's ruling, 22:23 UTC)
+A very old saved place that carries no stored configuration at all (neither `config` nor `_config`) has no record of the
+law it was born under, so when one of its sections is regenerated it follows whatever configuration the form holds, as
+every other setting of such a place already does. In the ordinary case the form carries no marker and the place reads
+today's law; only if a world born under the new law has been loaded into the form first would its troubles re-roll under
+the new law (a place that keeps its `_config` is now read from its own copy and is not affected).
