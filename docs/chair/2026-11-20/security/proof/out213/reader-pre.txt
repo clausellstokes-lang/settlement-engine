@@ -1,0 +1,4 @@
+anon _surveyor_byok_secret() = TEST-MASTER-SECRET-not-real
+anon surveyor_byok_get(2222) = {"key": "sk-FAKE-TEST-KEY-123", "probe_tier": null, "probe_model": null, "probe_profile": null, "probe_version": null}
+authenticated(1111) _surveyor_byok_secret() = TEST-MASTER-SECRET-not-real
+authenticated(1111) surveyor_byok_get(2222) = {"key": "sk-FAKE-TEST-KEY-123", "probe_tier": null, "probe_model": null, "probe_profile": null, "probe_version": null}

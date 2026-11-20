@@ -1,0 +1,10 @@
+anon set_curated -> 
+anon set_featured -> 
+anon set_featured_map -> 
+after anon: town curated=true featured=true
+after anon: map featured=true
+21: ERROR:  Only admins can change curation status
+CONTEXT:  PL/pgSQL function set_curated(uuid,boolean,integer) line 12 at RAISE
+developer set_curated -> 
+developer set_featured_map -> 
+after developer: town curated=true, map featured=true

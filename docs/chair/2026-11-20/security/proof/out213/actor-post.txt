@@ -1,0 +1,6 @@
+12: ERROR:  permission denied for function admin_soft_delete_settlement
+13: ERROR:  permission denied for function admin_set_content_banned
+14: ERROR:  permission denied for function set_account_disabled
+15: ERROR:  permission denied for function admin_billing_summary
+16: ERROR:  permission denied for function handle_premium_downgrade
+after anon calls: victim settlement admin_deleted_at set=false, profile 2222 tier=premium

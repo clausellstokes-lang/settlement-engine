@@ -1,0 +1,7 @@
+psql:<repo>/docs/chair/2026-11-20/security/proof/fill-rows.sql:51: NOTICE:  UNFILLED custom_content: invalid input syntax for type json
+psql:<repo>/docs/chair/2026-11-20/security/proof/fill-rows.sql:51: NOTICE:  UNFILLED redemptions: null value in column "code" of relation "redemptions" violates not-null constraint
+psql:<repo>/docs/chair/2026-11-20/security/proof/fill-rows.sql:51: NOTICE:  UNFILLED referrals: new row for relation "referrals" violates check constraint "referrals_no_self_referral"
+psql:<repo>/docs/chair/2026-11-20/security/proof/fill-rows.sql:51: NOTICE:  UNFILLED operator_messages: new row for relation "operator_messages" violates check constraint "operator_messages_shape"
+psql:<repo>/docs/chair/2026-11-20/security/proof/fill-rows.sql:51: NOTICE:  UNFILLED operator_message_delivery_jobs: null value in column "message_id" of relation "operator_message_delivery_jobs" violates not-null constraint
+psql:<repo>/docs/chair/2026-11-20/security/proof/fill-rows.sql:51: NOTICE:  UNFILLED consent_change_records: new row for relation "consent_change_records" violates check constraint "consent_change_records_check"
+psql:<repo>/docs/chair/2026-11-20/security/proof/fill-rows.sql:51: NOTICE:  UNFILLED custom_content_revisions: new row for relation "custom_content_revisions" violates check constraint "custom_content_revisions_content_hash_check"

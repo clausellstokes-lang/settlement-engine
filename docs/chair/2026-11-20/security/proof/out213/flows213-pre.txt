@@ -1,0 +1,33 @@
+SIGNUP profile=1
+SIGNUP account_number present=true external_name present=true
+SIGNUP welcome credit rows=1
+TICKET insert numbered=true
+TICKET list_my_tickets rows=1
+EDGE(user) current_user_is_privileged=false
+EDGE(user) has_surveyor_entitlement=true
+EDGE(user) surveyor_settings_get ok
+EDGE(user) my_transfer_case_status rows=0
+SELF credit balance own=1
+24: ERROR:  get_credit_balance: not authorized to read another user's credit balance
+CONTEXT:  PL/pgSQL function get_credit_balance(uuid) line 13 at RAISE
+SELF welcome_credit_available=true
+26: ERROR:  unknown security question id
+CONTEXT:  PL/pgSQL function set_my_security_answers(text,text,text,text) line 12 at RAISE
+SELF display name -> Probe Name
+SELF account_is_active(self)=true
+REFERRAL record_referral_intent -> true already_referred
+FOUNDERS anon roll rows=1
+FOUNDERS authenticated roll rows=1
+SERVICE account_is_active(2222)=true
+SERVICE get_credit_balance(2222)=1
+SERVICE civility_blocked=false
+SERVICE sanitize ok
+NOJWT account_is_active(2222)=true
+NOJWT get_credit_balance(2222)=1
+ANON account_is_active(2222)=true
+60: ERROR:  permission denied for table civility_allow
+CONTEXT:  SQL expression "exists (select 1 from public.civility_allow a where a.term = tok)"
+PL/pgSQL function civility_blocked(text) line 52 at IF
+ANON world snapshot check (map trigger helper) -> true
+AUTH(1111) account_is_active(2222)=true
+AUTH mask_email -> s***@example.test

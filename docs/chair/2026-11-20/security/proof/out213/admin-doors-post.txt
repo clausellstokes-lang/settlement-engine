@@ -1,0 +1,10 @@
+13: ERROR:  permission denied for function set_curated
+14: ERROR:  permission denied for function set_featured
+15: ERROR:  permission denied for function set_featured_map
+after anon: town curated=false featured=false
+after anon: map featured=false
+21: ERROR:  Only admins can change curation status
+CONTEXT:  PL/pgSQL function set_curated(uuid,boolean,integer) line 12 at RAISE
+developer set_curated -> 
+developer set_featured_map -> 
+after developer: town curated=true, map featured=true

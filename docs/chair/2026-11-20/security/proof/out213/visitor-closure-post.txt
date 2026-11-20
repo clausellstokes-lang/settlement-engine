@@ -1,0 +1,20 @@
+_content_pack_active_valid()|invoker|f|f|pg_trigger:content_pack_active_guard on content_packs
+_custom_content_head_valid()|invoker|f|f|pg_trigger:custom_content_definition_head_guard on custom_content_definitions
+_custom_content_reviewed_lifecycle_guard()|invoker|f|f|pg_trigger:custom_content_reviewed_lifecycle_guard on custom_content_definitions
+_deity_chart_axes_valid(jsonb)|invoker|t|t|pg_constraint:custom_content_deity_axes_check on custom_content
+_gallery_world_snapshot_is_safe(jsonb)|invoker|t|t|pg_trigger:trg_saved_maps_world_snapshot_guard on saved_maps -> _saved_maps_world_snapshot_guard
+_saved_maps_world_snapshot_guard()|invoker|t|t|pg_trigger:trg_saved_maps_world_snapshot_guard on saved_maps
+account_is_active(uuid)|DEFINER|t|t|pg_policy:Premium users delete active own maps on saved_maps || pg_policy:Premium users insert own maps on saved_maps || pg_policy:Premium users update active own maps on saved_maps || pg_policy:Users can comment on public settlements on gallery_comments || pg_policy:Users can react to public settlements on gallery_reactions || pg_policy:Users can report public gallery dossiers on gallery_reports || pg_policy:Users can soft delete their own gallery comments on gallery_comments || pg_policy:Users can upvote public settlements on gallery_votes || pg_policy:Users delete active own settlements on settlements || pg_policy:Users insert active own settlements on settlements || pg_policy:Users update active own settlements on settlements || pg_policy:Users update own profile (safe preferences only) on profiles
+current_user_has_premium_access()|DEFINER|t|t|pg_policy:Premium users insert own maps on saved_maps || pg_policy:Premium users update active own maps on saved_maps
+current_user_is_highest()|DEFINER|t|t|pg_policy:Elevated update deletion request on deletion_requests
+current_user_is_privileged()|DEFINER|t|t|pg_policy:Privileged users read admin actions on admin_actions || pg_policy:developers read all custom content on custom_content
+current_user_is_support_or_higher()|DEFINER|t|t|pg_policy:Elevated read audit log on audit_log || pg_policy:Elevated read internal notes on internal_notes || pg_policy:Elevated update support message status on support_messages || pg_policy:Read ticket events scoped on support_ticket_events || pg_policy:Users read own deletion request on deletion_requests || pg_policy:Users read own warnings on warnings
+enforce_moderation_ban()|invoker|t|t|pg_trigger:trg_enforce_moderation_ban on saved_maps || pg_trigger:trg_enforce_moderation_ban on settlements
+enforce_version_history_cap()|invoker|t|t|pg_trigger:trg_enforce_version_history_cap on settlements
+format_ticket_number(bigint)|invoker|t|t|pg_trigger:trg_support_ticket_number on support_messages -> support_ticket_assign_number
+guard_inactive_profile_billing()|invoker|t|t|pg_trigger:trg_guard_inactive_profile_billing on profiles
+operator_message_class_for_template(text)|invoker|f|f|pg_constraint:operator_messages_template_class_check on operator_messages
+support_ticket_assign_number()|invoker|t|t|pg_trigger:trg_support_ticket_number on support_messages
+support_ticket_touch()|invoker|t|t|pg_trigger:trg_support_ticket_touch on support_messages
+touch_custom_content_updated_at()|invoker|t|t|pg_trigger:custom_content_touch_updated_at on custom_content
+update_updated_at()|invoker|t|t|pg_trigger:set_updated_at_profiles on profiles || pg_trigger:set_updated_at_saved_maps on saved_maps || pg_trigger:set_updated_at_settlements on settlements

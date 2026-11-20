@@ -1,0 +1,6 @@
+anon admin_soft_delete_settlement(actor=admin) -> {"deleted": true}
+anon admin_set_content_banned(actor=admin) -> {"kind": "settlement", "banned": true}
+anon set_account_disabled(actor=admin, target=2222) -> {"disabled": true}
+anon admin_billing_summary(actor=admin, target=2222) -> {"tier": "premium", "credits": 1, "redacted": true, "is_founder": false, "custom
+anon handle_premium_downgrade(2222) -> {"ok": true, "inactive_count": 2, "retention_expires_at": "2027-02-20T02:55:07.512144+00:00", "inactive_campaign_count": 1}
+after anon calls: victim settlement admin_deleted_at set=true, profile 2222 tier=free

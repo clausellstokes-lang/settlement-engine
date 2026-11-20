@@ -1796,6 +1796,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/functionGrantsWalker.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/stripeWebhookLease.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
