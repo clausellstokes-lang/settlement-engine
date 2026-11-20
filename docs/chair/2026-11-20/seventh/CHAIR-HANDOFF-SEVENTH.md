@@ -2911,3 +2911,27 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   rows; `drawDeclared` keys; houses through the helper), the line merged at 0c9069489, the lighting census by its
   door; `tests/lint` whole 219 of 221 at the merge (the census, cured after; `composeStateProseFence`'s star test
   timing out at 20 s under two builders' load: alone 10/10): TRAD-3 SEATED BESIDE IT (session_019yED1SiYbAAwbQrFRB3nAD).
+- 10:17 UTC · CI AT THE LINE'S TIP 0c906948 (run 44711631810, pull_request; read by a helper through the job logs, never by the
+  chair's own listing): 41,722 tests, 20 FAILING: EXACTLY THE KNOWN LIST (3 of the server bundles' freshness, 17
+  stored fingerprints of generated towns), `bar3People2Rows` GREEN, NOTHING NEW in the test job. In `verify:dist`:
+  `engineBundleReplay` 3 tests, `engineServiceStoreParity` 4, AND `tests/build/engineServiceCore.test.js` 3 of 3
+  cases, WHICH THE CHAIR'S EARLIER INVENTORY DID NOT NAME (it said "the parity step"): the same stale-bundle family
+  BY INFERENCE (PLAUSIBLE until the bundles are rebuilt at the close by `npm run build:edge-shared`). The golden
+  master under the hostile locale: 1 of 45 (the same `generatorGoldenMaster`). THE FIVE SIZE CEILINGS, MEASURED:
+  worker 2,584,113 against 2,579,708 (+4,405); engine chunk 910,966 against 909,928 (+1,038); first paint raw
+  1,176,460 against 1,175,492 (+968); gzip 374,400 against 373,999 (+401); Brotli 314,270 against 313,994 (+276).
+  SINCE POINT 77's TALLY (+4,053; +913; +425; +105; +115) POINTS 79 TO 81 ADDED worker +352, chunk +125, first paint
+  raw +543, gzip +296, Brotli +161 (the titles table is called by nobody, so this is the verb agreement's BY
+  INFERENCE: attributed at the close's tally by landing step; a rise stays the owner's, rule 33).
+  THE COUNT PASS (10:14, the chair's read of each record): VEIL-24 335,815 (PAST THE LINE FOR A SUCCESSOR, 330,000;
+  waiting on R3's second-cure builder): `prompts/VEIL-25.txt` WRITTEN (lean: PART 25 twice and the open briefs; its
+  first message checks PART 25's list against the chair's rulings), seated after this push. SEAT-2 462,127: ORDERED
+  TO HAND OVER NOW (push what is green; the hand-back; "U2 <commit>, HANDED OVER at <tip>"; after that it only
+  relays its builders' returns as UNREAD). TRAD-2 326,342: told its last list (unit 1c; the hand-back; "TRAD-PART
+  <commit>, HANDED OVER"; unit 2, the proof of a withholding, relayed UNREAD to the fresh owner). FORTUNE-1's
+  record reads 0 (seated 09:50; "trace neutral on 600 towns; decomposing the fortune sum").
+  SEATED AT 10:16: NAMES-4 (session_019yED1SdJ5UUJBZYa9ssnQc) and GOALS-1 (session_019yED1QWcgHUBj8USXU4ZzN), both
+  on `lane/names-3-2026-11-20` at 835fabd2d.
+  A FAULT OF THE CHAIR'S, RULE 29: the hours it wrote on its messages of this pass were GUESSED, up to five minutes
+  ahead of the clock (it wrote 10:12, 10:13 and 10:18; the clock read about 10:10, 10:11 and 10:13). From here the
+  hour on a message is read from the clock by the command before it.
