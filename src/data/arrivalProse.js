@@ -78,6 +78,11 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: () => 'The racks outside the workshops stand mostly empty: the smiths are short of iron.', twinOf: 'Racks of new ironwork stand outside the workshops, waiting for the carts.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['trade at work: ironwork in full'] }, // BAR8-SCENES (item 2): its twin, where a smiths' house is marked too (the war's mark is the iron it took, `crisisStoppedRow.js` WM1; a siege's, the iron that no longer comes in) // SEAM-SCENES (item 3, 2026-11-17): its twin
       { text: (n) => `The clang of iron from the smithies carries down the lanes of ${n}.`, needs: ['institution: smith', 'tier: ≥ town', 'trade at work: ironwork'] }, // W2-FIX-DATA-12 item 3 (the reader's A04): no claim the place lives by them, and a smith stands
       { text: (n) => `The smithies of ${n} are quieter than they ought to be, for want of iron.`, twinOf: 'The clang of iron from the smithies carries down the lanes of {name}.', needs: ['institution: smith', 'tier: ≥ town'], excludes: ['trade at work: ironwork'] }, // SEAM-SCENES (item 3, 2026-11-17): its twin
+      // L2 (PAGE-2's lines, 2026-11-20; docs/chair/2026-11-20/content/page/L2-LINES.md): APPENDED. Each shows the forges' long
+      // presence, not today's work, so it is true whether or not the iron comes: the smiths and the town its siblings declare, no twin
+      { text: (n) => `Soot from the forges has darkened the house fronts of ${n} nearest the smithies.`, needs: ['institution: smith', 'tier: ≥ town'] },
+      { text: () => 'More than one person you pass has the burn-scarred hands of someone who works at a forge.', needs: ['institution: smith', 'tier: ≥ town'] },
+      { text: () => 'Old horseshoes and broken tools lie in a pile behind a smithy, waiting to go back into the fire.', needs: ['institution: smith', 'tier: ≥ town'] },
     ] },
   // ARMS speaks only where the settlement EXPORTS weapons or armour (no `lines`, so it is never a candidate on a
   // smithy alone): the owner's own example, "if a big part of their output is in making military weapons".
@@ -182,6 +187,16 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: (n) => `Half of ${n} has worked fish all its life, and there is almost no fish to work.`, twinOf: 'Half of {name} seems to be gutting, salting or selling fish.', needs: ['fish'] }, // TAIL-HISTORY-5 (Y17): its twin there
       { text: () => 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.', needs: ['trade at work: fish', 'navigable'], excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 04287): "stacked for the carts" printed under a siege, when no cart leaves; reworded to name no carts, so no condition and no new line in the pool (VETOABLE wording, the owner's); TAIL-HISTORY-5 (Y17): no stacked salt fish where the food failed or is cut off (5 of 18 towns)
       { text: () => 'Empty salt barrels stand stacked by the water, and even the gulls have given up on them.', twinOf: 'Barrels of salt fish stand stacked by the water, and the gulls have opinions about every one.', needs: ['navigable'] }, // TAIL-HISTORY-5 (Y17): its twin there
+      // L2 (PAGE-2's lines, 2026-11-20): APPENDED. The chair's cures (15:35): each declares the fish at work and refuses the
+      // hunger, as the barrels above; its twin (the chair's text, 17:13) answers on the same slot where the fish is short
+      { text: (n) => `Talk in ${n} turns to fish sooner or later, whatever it started on.`, needs: ['trade at work: fish'], excludes: ['crisis: hunger'] },
+      { text: () => 'A gutting knife hangs by more than one doorway, its blade worn thin with use.', needs: ['trade at work: fish'], excludes: ['crisis: hunger'] },
+      { text: () => 'Even the dogs here smell faintly of fish, and nobody but you seems to notice.', needs: ['trade at work: fish'], excludes: ['crisis: hunger'] },
+      // L2 (the chair's three fish twins, 2026-11-20 17:13): APPENDED, each the twin of an L2 line above (the fish-twin law,
+      // tailHistoryBatch6.test.js): its original's needs less the fish keys, so none
+      { text: (n) => `Talk in ${n} turns to fish sooner or later, and lately to how few there are.`, twinOf: 'Talk in {name} turns to fish sooner or later, whatever it started on.', needs: [] },
+      { text: () => 'A gutting knife hangs by more than one doorway, and few of them have seen much use of late.', twinOf: 'A gutting knife hangs by more than one doorway, its blade worn thin with use.', needs: [] },
+      { text: () => 'The dogs here still run to meet anyone coming up from the water, and get little for it these days.', twinOf: 'Even the dogs here smell faintly of fish, and nobody but you seems to notice.', needs: [] },
     ] },
   { key: 'cloth',
     institutions: ['weaver', 'weavers', 'textile', 'fuller', 'dyer', 'tailor', 'clothier', 'draper'],
@@ -215,6 +230,11 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: () => 'The smell of the byres reaches you on the breeze.', crisis: ['any'] },
       { text: () => 'Someone is churning butter in a doorway, and the rhythm of it carries.', needs: ['trade at work: dairy'], excludes: ['failed: livestock'], crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16) (REVIEW-WIDE-6 C219863): "Common grazing land" opened the pool with no dairy; butter wants milk animals kept or a dairy good made
       { text: () => 'Someone is mending a hurdle in a doorway, and the knock of the mallet carries.', twinOf: 'Someone is churning butter in a doorway, and the rhythm of it carries.', crisis: ['any'] }, // BAR6-SCENES (LAW 6 rule 6b, 2026-11-16): its twin
+      // L2 (PAGE-2's lines, 2026-11-20): APPENDED. Animals kept, as the byres' line says, no kind named and no herd on the
+      // road, so a siege or a failed herd leaves each true (`crisis: any`, as the byres')
+      { text: () => 'Hoofprints and dung mark the lane, and you learn quickly to watch where you step.', crisis: ['any'] },
+      { text: () => 'An animal bawls from a byre somewhere close, and another answers it.', crisis: ['any'] },
+      { text: () => 'Someone leads a single beast along the lane on a halter, talking to it the whole way.', colour: true },
     ],
     dominant: [
       { text: () => 'Drovers push their herds along the road, and the whole place smells of the pens.', excludes: ['crisis: under_siege', 'failed: livestock'], crisis: ['any'] }, // BAR4-SCENES (kind A1; REVIEW-BAR-4 C46725): no herds on the road where the famine failed them
@@ -375,6 +395,11 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: () => 'Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.', needs: ['trade at work: arcane'] },
       { text: () => 'The reagent stalls are half bare, and the few jars left are dear.', twinOf: 'Stalls sell reagents in stoppered jars, and the buyers know exactly what they want.', excludes: ['trade at work: arcane'] }, // BAR4-SCENES-2 (HW1): its twin; a twin keeps the slot and spends no redraw, so no other beat of the scene moves
       { text: (n) => `Magic is still a trade in ${n}: the signs still offer it by the hour, but the work is slow and dear for want of what it takes.`, twinOf: 'Magic is a trade in {name} like any other: signs offer enchanting and identification by the hour.', needs: ['enchanting'], excludes: ['trade at work: arcane'] }, // BAR8-SCENES (BR23 (3), 2026-11-17; a TWIN given by name, VETOABLE wording): enchanting is offered and the arcane trade is not at work (impaired under the siege, or short): its original and the twin above were both refused (bar0-city-under_siege+famine-rand-47, r2r-metropolis-14, r2r-metropolis-31) // BAR8-SCENES-3 (BR25 (2), 2026-11-18; REWORDED BY NAME, VETOABLE): was "Signs in {name} still offer enchanting by the hour, …", false where the page's only arcane service is "Arcane identification" (the atom `enchanting` reads enchant OR identif: bar0-city-under_siege+famine-rand-47, -33, r2s-under_siege-town-1); it now names no service; the declaration is unchanged
+      // L2 (PAGE-2's lines, 2026-11-20): APPENDED. Each says that magic is worked here at all (the key's own fact, where magic is
+      // real), not that its materials are at hand today: nothing to declare, no twin
+      { text: () => 'Sigils are scratched into door frames here and there, and not all of them are for show.', needs: ['trade at work: arcane'] },
+      { text: (n) => `People in ${n} step around a chalked circle on the ground without looking down, the way people elsewhere step around a puddle.`, needs: ['trade at work: arcane'] },
+      { text: (n) => `Snatches of talk in the lanes of ${n} are full of spellwork's own words, used as plainly as talk of the weather.`, needs: ['trade at work: arcane'] },
     ] },
 ]);
 
@@ -391,18 +416,30 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     () => 'Two neighbours argue over a boundary stone, each quoting what their grandfathers agreed.',
     () => 'A craftsman shows off a finished piece in his doorway, and passers-by judge it out loud.',
     { text: () => 'A notice of the next fair is nailed up beside a doorway, and someone is reading it aloud for the others.', needs: ['market'], excludes: ['crisis: under_siege'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 02866 HIGH): no fair is drawn under a siege
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the custom each shows, in its profile's words, is cited in L2-LINES.md
+    { text: () => 'A pedlar has opened his pack on a doorstep, and a household gathers round to look before anyone admits to wanting anything.', excludes: ['crisis: under_siege'] },
+    () => 'A neighbour turns up unasked to help with a roof, and the household makes a note of it, because the day will be owed back.',
+    { text: () => 'Loaves of dark rye are carried home under arms, still warm from somebody\'s oven.', excludes: ['crisis: hunger'] },
   ],
   latin: [
     { text: () => 'A patron moves through the crowd with clients at their heels, greeting people by name.', needs: ['tier: ≥ town'], crisis: ['any'] }, // W2-FIX-DATA: a crowd and a patron's clients (c09 at 33)
     { text: () => "A notary's clerk hurries past with a satchel of contracts.", needs: ['tier: ≥ town', 'legal house'], crisis: ['any'] }, // BAR5-THINGS (LAW 4): a notary where a house of written law stands // W2-FIX-DATA: a notary's trade (c03 at 9)
     { text: () => 'People argue politics in the open, loudly, and seem to enjoy it.', excludes: ['crisis: occupied', 'crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-5 (ww-473): not with the enemy at the walls
     { text: () => 'A benefactor\'s name is carved fresh above a mended well, and people make sure you notice it.', crisis: ['any'] },
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the custom each shows, in its profile's words, is cited in L2-LINES.md
+    { text: () => 'A small lamp burns in a niche beside a doorway, with an offering set before it.', crisis: ['any'] },
+    { text: () => 'Two men shake hands on a bargain and then, to be sure, have it written down.', crisis: ['any'] },
+    { text: () => "A family's name is painted on a new bench by the road, so that everyone who sits on it knows whom to thank.", crisis: ['any'] },
   ],
   celtic: [
     { text: () => 'A poet holds a small crowd by the well, and nobody hurries the telling along.', crisis: ['any'] },
     { text: () => 'A household feeds passing travellers at its door, and makes sure everyone sees it doing so.', excludes: ['crisis: hunger'], crisis: ['any'] },
     { text: () => 'Greetings are called across the lane, and every greeting comes with a question about family.', crisis: ['any'] },
     { text: () => 'An elder listens to two neighbours by a gate and says nothing until both are finished.', crisis: ['any'] }, // BAR6-SCENES (LAW 5 widened, the office class): no judge named where the roster holds no court (VETOABLE wording)
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the custom each shows, in its profile's words, is cited in L2-LINES.md
+    { text: () => "A boy is introduced to a neighbour as the household's foster-son, and is treated in every way as one of its own.", crisis: ['any'] },
+    { text: () => 'Two neighbours clasp hands on a promise at the roadside, and both make sure someone sees them do it.', crisis: ['any'] },
+    { text: () => "A covered dish is carried to a neighbour's door as a gift, and the neighbour is already looking for something to send back.", excludes: ['crisis: hunger'], crisis: ['any'] },
   ],
   arabic: [
     { text: () => 'A broker sits in the shade, matching buyers to goods from routes you have never travelled.', needs: ['market'], excludes: ['crisis: under_siege', 'route: isolated'] }, // BAR3-PLACES (H1, 2026-11-15): no broker of far goods where no market stands
@@ -411,6 +448,10 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'Travellers are offered water before anyone asks their business.', excludes: ['crisis: under_siege'] }, // W2-FIX-DATA: no traveller reaches a besieged gate (c12)
     () => 'Two partners go over their accounts in a courtyard with a mediator sitting between them.',
     { text: () => 'A merchant swears an oath on his scales, and the buyer watches the scales anyway.', needs: ['market'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind a): the same
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the custom each shows, in its profile's words, is cited in L2-LINES.md
+    { text: () => 'Bread is set out at a doorway for whoever needs it, and the household that set it there does not wait to be thanked.', excludes: ['crisis: hunger'] },
+    () => 'Neighbours gather in a courtyard to hear an older man talk two of them out of a disagreement.',
+    () => "A buyer short of coin leaves with his goods anyway, on a neighbour's word that he is good for it.",
   ],
   norse: [
     { text: () => 'People argue law in the open as freely as they trade.', excludes: ['crisis: occupied', 'crisis: under_siege'], crisis: ['any'] }, // W2-FIX-DATA-5 (ww-473's sibling): no trade moves under a siege
@@ -418,6 +459,10 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'Empty drying racks stand beside the houses, waiting for whatever can be laid in against the winter.', twinOf: 'Racks of drying fish and smoked meat stand beside the houses, laid in against the winter.', crisis: ['any'] }, // BAR6-SCENES (6b): its twin
     { text: () => 'A household leader hands out gifts in the open, and everyone watching keeps count.', crisis: ['any'] },
     { text: () => 'Neighbours work together to mend a roof, and nobody seems to be in charge of it.', crisis: ['any'] },
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the custom each shows, in its profile's words, is cited in L2-LINES.md
+    { text: () => 'A household counts its winter stores aloud at the door of its storehouse, and the neighbours listen to the count.', excludes: ['crisis: hunger'], crisis: ['any'] },
+    { text: () => 'An old man recites a point of law from memory, and nobody listening needs to ask where he learned it.', crisis: ['any'] },
+    { text: () => 'A silver ring is cut in two to settle a bargain, and each side weighs his piece in his palm.', crisis: ['any'] },
   ],
   slavic: [
     { text: () => 'Smoke rises from a household oven, and a neighbour stops in to share its warmth.', crisis: ['any'] }, // BAR2-PLACES (PL1's class): no shared oven claimed, and no bread (true under a famine too, so no condition is added and no draw moves); was "Smoke rises from a shared oven, and neighbours queue to bake together."
@@ -425,6 +470,10 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'Strings of dried mushrooms hang in the doorways beside barrels of pickled cabbage.', excludes: ['crisis: hunger'], crisis: ['any'] },
     { text: () => 'A work party heads out together, singing, with tools on their shoulders.', excludes: ['crisis: under_siege'], crisis: ['any'] }, // BAR6-SCENES (LAW 7 rule 7d; REVIEW-WIDE-6 C94460): nobody heads out under a siege
     { text: () => 'A work party gathers with tools on their shoulders, to shore up whatever needs it.', twinOf: 'A work party heads out together, singing, with tools on their shoulders.', needs: ['crisis: under_siege'], crisis: ['any'] }, // BAR6-SCENES (7d): its twin under the siege // BAR7-SCENES (item 4, LOW; REVIEW-BAR-6 C19996): reworded from "… gathers inside the defences …" (a besieged hamlet with no wall, garrison or watch printed it): no defence is named
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the custom each shows, in its profile's words, is cited in L2-LINES.md
+    { text: () => 'An elder of the household stands at the door and sends each of the younger ones off to their share of the day\'s work.', crisis: ['any'] },
+    { text: () => 'Neighbours sit together on a bench, shredding cabbage into one tub to be salted down for the winter.', excludes: ['crisis: hunger'], crisis: ['any'] },
+    { text: () => "A cup of water stands on a windowsill for the household's dead, and nobody touches it.", crisis: ['any'] },
   ],
   east_asian: [
     { text: () => 'A clerk records every cartload that passes in a careful ledger.', excludes: ['crisis: under_siege', 'route: isolated'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 02470): no cartload passes under a siege; TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): nor where no route reaches (1 of 20)
@@ -432,6 +481,10 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     () => 'An elder settles a quarrel in a quiet voice before it can grow loud enough to need anyone else.',
     { text: () => 'Tea is poured for a merchant before the bargaining begins, and the bargaining waits for it.', needs: ['market'] }, // W2-FIX-DATA-HISTORY item F (CENSUS-2 kind a): a merchant bargains where a market stands
     { text: () => 'Each lane seems to keep to its own trade, and each trade to its own lane.', needs: ['tier: ≥ town'] }, // W2-FIX-DATA-HISTORY item F (ww-541): lanes of trades are a town's (a hamlet of 31 has a handful of houses)
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the custom each shows, in its profile's words, is cited in L2-LINES.md
+    () => 'A boy recites his lessons on a doorstep while an older relative listens for mistakes.',
+    () => 'The younger members of a household stand aside at a doorway to let the eldest through first.',
+    () => "Inside an open door, tablets bearing the names of the household's dead stand on a shelf, with a small offering before them.",
   ],
   mesoamerican: [
     { text: () => 'Porters bent under loaded frames file past, and someone counts them in.', excludes: ['crisis: under_siege', 'route: isolated'] }, // BAR6-SCENES (LAW 7 rule 7d; REVIEW-WIDE-6 C150831): no laden file from the road where no route reaches
@@ -439,6 +492,10 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     () => 'The neighbours turn out together to sweep and mend their own street.',
     () => 'Festival banners hang above the doors, faded from one year and waiting for the next.',
     { text: () => 'Craftspeople sit in rows, each row a different trade, each worker deep in their own work.', needs: ['market'] }, // W2-FIX-DATA-3 (REVIEW-W2A-3 #2): rows to each trade are a market's (a thorp of twelve printed it)
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the custom each shows, in its profile's words, is cited in L2-LINES.md
+    { text: () => 'The scrape of a grinding stone comes from a doorway, where someone is making the day\'s maize dough.', excludes: ['crisis: hunger'] },
+    () => 'A household sets a small offering of flowers at its threshold and lights a pinch of resin beside it.',
+    () => "Neighbours are counted off by name for their turn of work on the common ground, and nobody's name is skipped.",
   ],
   south_asian: [
     { text: () => 'A moneylender sits at a low table with a queue of familiar faces waiting.', needs: ['tier: ≥ village'] }, // TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): a lender with a queue, where the place is large enough for one (12 of 23 towns were a thorp or a hamlet)
@@ -446,6 +503,10 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     () => 'People draw water in an order nobody needs to explain.',
     { text: () => 'Food is being handed out to anyone who asks, and the line is patient.', excludes: ['crisis: hunger'] }, // TAIL-HISTORY batch 1 (the chair's Y4; READ-ALL 09279 HIGH): no food offered where the food failed
     { text: () => 'Each lane of stalls has someone who speaks for it, and they are all speaking at once.', needs: ['market', 'tier: ≥ town'], excludes: ['crisis: under_siege'] }, // BAR3-PLACES (H1, 2026-11-15): lanes of stalls are a town's, and no trade speaks under a siege
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the custom each shows, in its profile's words, is cited in L2-LINES.md
+    () => 'A doorstep has been washed and marked with a pattern in white powder, and people step around it.',
+    () => 'Three generations of one family sit at the same work in one doorway, the youngest watching the oldest.',
+    () => 'Two neighbours disagree over whose turn it is at the water, and a third reminds them both of the order.',
   ],
   steppe: [
     { text: () => 'Herders show their animals at the edge of the settlement, where herders and townsfolk meet.', excludes: ['crisis: under_siege'], crisis: ['any'] }, // TAIL-HISTORY-3 (the chair's Y14, the arrival pool's measure): no horse trade where no horse is kept (13 of 21 towns)
@@ -453,6 +514,10 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'A caravan broker shouts terms to a line of laden animals and the people leading them.', needs: ['market'], excludes: ['crisis: under_siege', 'route: isolated'], crisis: ['any'] }, // TAIL-HISTORY-5 (the chair's Y17 (3), 2026-11-15; the bar's readers at 5d1e3096b): a broker shouts terms where a market stands and a road is open (6 of 16 towns had no market)
     { text: () => 'A pair of pack animals stands in a yard, unladen, while their keeper mends a strap.', twinOf: 'A caravan broker shouts terms to a line of laden animals and the people leading them.', crisis: ['any'] }, // TAIL-HISTORY-5 (Y17): its twin where the broker is refused; it claims no trade, so it is true in every state the original refuses
     { text: () => 'Guests are greeted with a cup before a word of business is spoken.', crisis: ['any'] },
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the custom each shows, in its profile's words, is cited in L2-LINES.md
+    { text: () => 'A rider comes in from the open country with news, and a knot of people gathers before he has dismounted.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+    { text: () => 'A family loads its belongings for the season\'s move, and the neighbours who are staying help tie the load.', excludes: ['crisis: under_siege'], crisis: ['any'] },
+    { text: () => 'An old woman flicks a few drops from her cup toward the sky before she drinks.', excludes: ['crisis: hunger'], crisis: ['any'] },
   ],
   greek: [
     { text: () => 'Two citizens argue a point of law loudly enough for the neighbours to stop and listen.', excludes: ['crisis: occupied'], crisis: ['any'] }, // BAR2-PLACES (PL1): no crowd (a hamlet of twenty-nine printed it)
@@ -461,12 +526,20 @@ export const ARRIVAL_PEOPLE = Object.freeze({
     { text: () => 'A money changer sits at his table with little to do, counting the same coins from many mints again.', twinOf: 'A money changer sits at his table with coins from many mints.', needs: ['institution: bank', 'crisis: under_siege'], crisis: ['any'] }, // TAIL-HISTORY-5 (Y17): its twin under a siege
     { text: () => 'A patron stands drinks for the whole room, and makes sure everyone knows who is paying.', // BAR3-PLACES (H1, 2026-11-15): no wine shop named (the houses hold taverns and inns)
        needs: ['institution: tavern', 'tier: ≥ village'], crisis: ['any'] }, // W2-FIX-DATA-12 (REVIEW-R2-CODE-A, the chair's 10:57): a wine shop stands on the roster, and a thorp or hamlet has none to stand drinks in
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the custom each shows, in its profile's words, is cited in L2-LINES.md
+    { text: () => 'A young man practises a speech under his breath as he walks, stopping now and then to try a line again.', crisis: ['any'] },
+    { text: () => 'Members of some association walk together, each wearing the same small badge, and greet one another by it.', crisis: ['any'] },
+    { text: () => 'A list of who paid for the last festival is painted on a wall, the largest givers first.', crisis: ['any'] },
   ],
   mixed: [
     { text: () => 'You hear three languages in as many steps, and nobody seems to find it strange.', crisis: ['any'] },
     { text: () => 'People here greet newcomers with open curiosity, and ask where you have come from before your name.', excludes: ['crisis: threat', 'crisis: plague_onset', 'crisis: recently_betrayed', 'crisis: infiltrated'], crisis: ['any'] },
     { text: () => 'A cook at a doorway mixes the spices of two different homelands into one pot.', crisis: ['any'] },
     { text: () => 'Neighbours bargain in a trade tongue that belongs to no one and works for everyone.', crisis: ['any'] },
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; the custom each shows, in its profile's words, is cited in L2-LINES.md
+    { text: () => 'Two doorways side by side hang the charms of two different traditions, and both households seem content with the arrangement.', crisis: ['any'] },
+    { text: () => 'A girl answers her mother in one tongue and her grandmother in another without missing a step.', crisis: ['any'] },
+    { text: () => 'Houses along the lane are built in two different manners, and a few have borrowed a little of each.', crisis: ['any'] },
   ],
 });
 
@@ -500,12 +573,24 @@ export const ARRIVAL_TENSIONS = Object.freeze({
     () => 'People mend what they have, and nobody seems to buy anything new.',
     () => 'Children in outgrown clothes run errands for a copper.',
     () => 'The goods on offer are mostly second-hand, and even those go slowly.',
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; money short, shown in what is mended and spent, as its siblings show it
+    () => 'Roofs sag in places, and the repairs that have been made were made with whatever came to hand.',
+    () => 'Shoes here are worn until they are mostly mending.',
+    () => 'Doors and shutters here have been mended more often than they have been painted.',
+    () => 'People count their coins carefully before parting with any of them.',
   ],
   prosperous: [
     { text: () => 'Fresh paint and well-kept roofs say the place is doing well.', excludes: ['starving', 'crisis: hunger'], crisis: ['any'] },
     { text: () => 'Well-fed children run errands from door to door.', excludes: ['starving', 'crisis: hunger'], crisis: ['any'] }, // BAR2-PLACES (PL1): no busy street (a thorp of twenty-one printed it)
     { text: () => 'Even the outbuildings have new roofs, and nobody looks hungry.', needs: ['food: ≥ secure'], excludes: ['starving', 'crisis: hunger'], crisis: ['any'] }, // BAR8-SCENES (item 7, I's 9g.food-soft, 2026-11-17): "nobody looks hungry" wants the food band the page prints secure or better (r2r-city-54, r2r-city-58, r2r-metropolis-19 of the 720)
     { text: () => 'A merchant shows off a new cloak, and several neighbours make a point of noticing.', crisis: ['any'] },
+    // L2 (PAGE-2's lines, 2026-11-20): APPENDED; money to spare, shown in houses and dress, and no word of food (the one
+    // that would speak of it does not), so none needs its siblings' hunger exclusions
+    { text: () => 'Doorsteps are swept, shutters are painted, and the brass on more than one door has been polished.', crisis: ['any'] },
+    { text: () => 'Here and there a house has been added to lately, the new timber still pale beside the old.', crisis: ['any'] },
+    { text: () => 'People here dress a little better than the work in front of them requires.', crisis: ['any'] },
+    { text: () => 'A new cart stands in a yard with its paint barely dry, and its owner keeps finding reasons to walk past it.', crisis: ['any'] },
+    { text: () => 'Window boxes of flowers hang below more than one sill.', crisis: ['any'] },
   ],
 });
 
