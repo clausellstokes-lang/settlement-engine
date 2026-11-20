@@ -266,3 +266,15 @@ for (const { s, tier } of towns) {
 }
 console.log(JSON.stringify(out, null, 1));
 ```
+
+## ADDENDUM 2026-11-20T05:27Z: the chair's two rulings reached this session AFTER the build
+
+The chair's messages of 04:15Z (the owner's correction: CF1 amended, CF9, CF10) and 04:50Z (the rulings on the proposal; (a) the explicit audience gate; (b) the count) were delivered to this session at 05:26Z, after `535511009` and the message "FRAME 535511009". **`535511009` does NOT meet them and should not land as it stands.** At the token mark; what is left, in order:
+
+1. **CF1 amended (the frame only where the record holds a trouble of weight; a town with none keeps today's sheet byte for byte, held by a born test).** Measured now: the record's `severity` cannot be the test of weight. It is the TEMPLATE's list, so 320 of 330 calm towns admit "major" or worse and 10 admit only "minor"; that would put the frame on 97% of calm towns, which is the opposite of the owner's word. Candidates in the record's own terms, NOT measured: a conflict between powers on the record (`conflicts[]`) whose issue names the trouble's matter; a person's own hook that speaks of it (the tie rung's `words`); the tension the generator wrote first because the town's own facts called it (crime signal, neighbour, stress), which the record does not mark today. The count the owner reads first is therefore OPEN.
+2. **CF9 (no drama).** The built headings "The trouble" / "Its three sides" and the reasons are level, but the opening still sits under the alarm accent, and no walker yet pins the frame's words to a closed level set.
+3. **CF10 (counterparts for every kind, crises proposed where their cast is thin).** The 13 archetypes cover every tension type; the crisis side is not proposed.
+4. **(a) the explicit audience gate:** `composeTonightSheet(settlement, { audience })`, today's sheet for any reader who is not the owner; the seed stays the second lock; the CF3 test to open the sheet ON the gallery page and the party link. Not built.
+5. **Ruling 2:** re-seat `repeatOnceTonightTraditions` soak1k-11 to a town with no trouble of weight that still shows two own wants. Waits on item 1's definition.
+6. **Ruling 3:** absent by archetype is in the measure above (the archetype table); accepted.
+7. **Ruling 1:** built as approved.
