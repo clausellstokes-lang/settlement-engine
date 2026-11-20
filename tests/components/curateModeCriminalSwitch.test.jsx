@@ -9,6 +9,11 @@
  * itself); it is disabled with its words on a town with no criminal part; and at phone width
  * its row wraps (jsdom does no layout, so the reflow is proven by the style contract, as
  * tableCompanion375 does).
+ *
+ * VR34 (the seventh chair, 2026-11-20, from the security reader's V10-2; vetoable by the owner): A SWITCH SETS ONLY
+ * WHAT A HAND CAN SEE AND UNDO ON THAT RECORD. Every address "Show all" and "Hide all" hand back is an eye the screen
+ * draws for that record; a criminal house's People eye is drawn by identity (the people car's `institution` record and
+ * master's string alike), so a hand can open and shut what the switch opens and shuts.
  */
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
@@ -17,7 +22,7 @@ const mobile = { value: false };
 vi.mock('../../src/hooks/useIsMobile.js', () => ({ default: () => mobile.value }));
 
 import CurateMode from '../../src/components/gallery/CurateMode.jsx';
-import { galleryPayloadFor } from '../../src/domain/display/galleryVeil.js';
+import { curateModelFor, galleryPayloadFor } from '../../src/domain/display/galleryVeil.js';
 import { CRIMINAL_SWITCH_WORDS as W } from '../../src/domain/display/criminalVeilSwitch.js';
 
 afterEach(() => { cleanup(); mobile.value = false; });
@@ -36,6 +41,10 @@ const plain = {
   institutions: [{ id: 'inst-mill', name: 'Mill', category: 'Economy', desc: 'Grain.' }],
   npcs: [{ id: 'n1', name: 'Ada', role: 'Miller' }],
 };
+
+/** Every address the screen draws an eye or a row for (curateModelFor's model, as the component draws it). */
+const drawnAddresses = (settlement, shareDm = false) => new Set(curateModelFor(galleryPayloadFor(settlement, { shareDm }), []).sections
+  .flatMap(sec => [...sec.groupings, ...sec.switches, ...sec.cards.flatMap(c => [...(c.whole ? [c.whole] : []), ...c.eyes])]).map(e => e.address));
 
 function mount(settlement, deltas = []) {
   const onDone = vi.fn();
@@ -100,5 +109,34 @@ describe('Curate for visitors: the criminal switch', () => {
     expect(words.style.flex).toMatch(/^1 1/);
     expect(button.style.flexShrink).toBe('0');
     expect(parseFloat(button.style.minHeight)).toBeGreaterThanOrEqual(44);
+  });
+
+  it("VR34: Show all hands back only eyes the screen draws; a house's People eye is drawn by identity and the hand can shut it", () => {
+    // Ada is the den's fence in the people car's shape; the share reveals DM content, so the visitor's copy carries her house.
+    const fence = { ...town, npcs: [{ id: 'n1', name: 'Ada', role: 'Fence', institution: { kind: 'house', key: "Thieves' den", title: 'the fence', veiled: true } }] };
+    const onDone = vi.fn();
+    render(<CurateMode payload={galleryPayloadFor(fence, { shareDm: true })} deltas={[]} onDone={onDone} onCancel={() => {}} />);
+    const button = screen.getByRole('switch', { name: W.label });
+    fireEvent.click(button);
+    fireEvent.click(screen.getByRole('button', { name: 'Done' }));
+    const shown = onDone.mock.calls.at(-1)[0];
+    const drawn = drawnAddresses(fence, true);
+    expect(shown.filter(d => !drawn.has(d.address)), 'Show all wrote an eye the screen does not draw').toEqual([]);
+    expect(shown).toContainEqual({ address: 'field:institution:inst-den:people', hidden: false });
+    // the hand finds that eye in the den's box and shuts it again
+    for (const b of screen.getAllByRole('button', { name: /^Open the \d+ boxes$/ })) fireEvent.click(b);
+    fireEvent.click(screen.getByRole('button', { name: 'Hide People' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Done' }));
+    expect(onDone.mock.calls.at(-1)[0]).not.toContainEqual({ address: 'field:institution:inst-den:people', hidden: false });
+  });
+
+  it('VR34: where nobody is the house\'s person, no People eye is drawn and Show all writes none', () => {
+    const { onDone, button } = mount(town);
+    fireEvent.click(button);
+    fireEvent.click(screen.getByRole('button', { name: 'Done' }));
+    const shown = onDone.mock.calls.at(-1)[0];
+    const drawn = drawnAddresses(town);
+    expect(drawn.has('field:institution:inst-den:people')).toBe(false);
+    expect(shown.filter(d => !drawn.has(d.address)), 'Show all wrote an eye the screen does not draw').toEqual([]);
   });
 });

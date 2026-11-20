@@ -1,0 +1,62 @@
+{
+ "psFactionKeys": [
+  "category",
+  "contestsNiche",
+  "desc",
+  "faction",
+  "isGoverning",
+  "modifier",
+  "name",
+  "power",
+  "powerLabel",
+  "rawPower"
+ ],
+ "topFactionKeys": [],
+ "topFactions": 0,
+ "psFactions": 6,
+ "topMembersType": [],
+ "psMembersType": [
+  "undefined",
+  "undefined",
+  "undefined",
+  "undefined",
+  "undefined",
+  "undefined"
+ ],
+ "topSample": [],
+ "npcInstitution": [
+  "{\"kind\":\"house\",\"key\":\"Merchant guilds (15-40)\",\"family\":\"Merchant guilds (3-8)\",\"title\":\"the senior guild master\",\"veiled\":false}",
+  "{\"kind\":\"house\",\"key\":\"Craft guilds (30-80)\",\"family\":\"Craft guilds (5-15)\",\"title\":\"the senior craft-guild master\",\"veiled\":false}",
+  "{\"kind\":\"house\",\"key\":\"Inns and taverns (district)\",\"family\":\"Inns and taverns (district)\",\"title\":\"the innkeeper\",\"veiled\":false}",
+  "{\"kind\":\"house\",\"key\":\"Parish churches (10-30)\",\"family\":\"Access to parish church\",\"title\":\"the dean\",\"veiled\":false}",
+  "{\"kind\":\"house\",\"key\":\"Smuggling network\",\"family\":\"Smuggling waypoint\",\"title\":\"the network's head\",\"veiled\":true}",
+  "{\"kind\":\"house\",\"key\":\"Multiple monasteries\",\"family\":\"Monastery or friary\",\"title\":\"the senior abbot\",\"veiled\":false}",
+  "{\"kind\":\"house\",\"key\":\"Warehouse district\",\"family\":\"Warehouse district\",\"title\":\"the warehouse factor\",\"veiled\":false}",
+  "{\"kind\":\"house\",\"key\":\"Multiple courthouses\",\"family\":\"Courthouse\",\"title\":\"the chief magistrate\",\"veiled\":false}"
+ ],
+ "relKeys": [
+  "archetypeKey",
+  "covert",
+  "description",
+  "flagDriven",
+  "from",
+  "handler",
+  "id",
+  "npc1Name",
+  "npc1Role",
+  "npc2Name",
+  "npc2Role",
+  "proseVariant",
+  "strength",
+  "tension",
+  "to",
+  "type",
+  "typeName"
+ ],
+ "criminalHouses": [
+  "Smuggling network",
+  "Multiple criminal factions",
+  "Front businesses",
+  "Black market"
+ ]
+}

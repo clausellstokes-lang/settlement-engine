@@ -1,0 +1,76 @@
+{
+ "gen": "/tmp/claude-0/-home-user-settlement-engine/9598a386-b714-55b7-930f-7c97c14ec75e/scratchpad/master",
+ "chain": {
+  "files": 212,
+  "last": "212_share_veil_later_cures.sql",
+  "failed": []
+ },
+ "towns": 36,
+ "withParts": 72,
+ "written": {
+  "block:services.criminal": 72,
+  "block:defense.criminalStructure": 72,
+  "block:power.criminalUnderside": 72,
+  "card:institution:<id>": 216,
+  "field:institution:<id>:description": 216,
+  "field:institution:<id>:function": 216,
+  "field:institution:<id>:services": 216,
+  "field:institution:<id>:people": 216,
+  "class:npc:corruption": 25,
+  "field:faction:<id>:members": 16,
+  "field:faction:<id>:goals": 16,
+  "field:faction:<id>:conflicts": 16,
+  "field:faction:<id>:description": 16
+ },
+ "unreachable": {
+  "field:institution:<id>:services": 50,
+  "field:institution:<id>:people": 216,
+  "field:faction:<id>:members": 16,
+  "field:faction:<id>:goals": 16,
+  "field:faction:<id>:conflicts": 16
+ },
+ "offeredOfWritten": {
+  "block:services.criminal": 72,
+  "block:defense.criminalStructure": 72,
+  "block:power.criminalUnderside": 72,
+  "card:institution:<id>": 216,
+  "field:institution:<id>:description": 216,
+  "field:institution:<id>:function": 216,
+  "class:npc:corruption": 25,
+  "field:institution:<id>:services": 166,
+  "field:faction:<id>:description": 16
+ },
+ "people": {
+  "houses": 216,
+  "applierReach": 0,
+  "screenTest": 0,
+  "housesWithPeopleByIdentity": 0,
+  "housesWithPeopleByString": 0,
+  "npcInstitutionTypes": {
+   "absent": 561,
+   "string": 31
+  }
+ },
+ "services": {
+  "written": 216,
+  "withRows": 166
+ },
+ "faction": {
+  "members data in powerStructure.factions/factions: -/-; offered false": 8,
+  "goals data in powerStructure.factions/factions: -/-; offered false": 16,
+  "conflicts data in powerStructure.factions/factions: -/-; offered false": 16,
+  "description data in powerStructure.factions/factions: ps/-; offered true": 16,
+  "members data in powerStructure.factions/factions: -/top; offered false": 8
+ },
+ "showVsHand": {
+  "gallery dm=true factions[].members": 8
+ },
+ "ex": {
+  "field:institution:<id>:services": "rv10-sw-village-indebted-5 dm=false field:institution:fence-word-of-mouth:services",
+  "field:institution:<id>:people": "rv10-sw-village-indebted-5 dm=false field:institution:fence-word-of-mouth:people",
+  "field:faction:<id>:members": "rv10-sw-city-none-18 dm=false field:faction:faction.thieves_guild:members",
+  "field:faction:<id>:goals": "rv10-sw-city-none-18 dm=false field:faction:faction.thieves_guild:goals",
+  "field:faction:<id>:conflicts": "rv10-sw-city-none-18 dm=false field:faction:faction.thieves_guild:conflicts",
+  "gallery dm=true factions[].members": "rv10-sw-city-none-18: SHOW=[{\"id\":\"npc_7\",\"goal\":{\"long\":\"Build insulation between themselves and consequences\",\"short\":\"Eliminate the threat before it becomes a bigger threat\"},\"name\":\"D | HAND=undefined"
+ }
+}

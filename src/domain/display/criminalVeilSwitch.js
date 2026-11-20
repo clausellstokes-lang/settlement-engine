@@ -24,6 +24,20 @@
  * The eyes are enumerated from the table, not only from the draft, so hide, show, hide writes
  * the same list twice: a part never drops out of the family because a show removed its delta.
  *
+ * A SWITCH SETS ONLY WHAT A HAND CAN SEE AND UNDO ON THAT RECORD (the seventh chair's ruling VR34,
+ * 2026-11-20, from the security reader's V10-2; vetoable by the owner). The family above is the
+ * CANDIDATE list; a part is a candidate the Curate screen DRAWS for that record: the list is
+ * intersected with the addresses of the very model the screen draws (galleryVeil.js ::
+ * curateModelFor, read here by offeredAddressesOf), so the switch and the screen cannot drift.
+ * The model draws an eye exactly where the applier would remove something under it, by identity
+ * in every stored shape (a house's People by the house each person belongs to; a power's depth on
+ * every copy of the power), so an address the screen does not draw governs nothing on that record:
+ * "Hide everything criminal" shuts nothing a hand cannot open again and "Show all" opens nothing a
+ * hand cannot shut again. A candidate the screen does not draw is never written; a delta already
+ * stored on one (an earlier Show-all's write before VR34) is dropped by the next click, either way.
+ * Without the model the switch covers nothing (it reads 'none' and writes nothing): it never writes
+ * an address it cannot show.
+ *
  * THE THREE GROUPINGS ARE STATIC DEFAULTS (galleryVeil.js: "never betrays that a town had a
  * thieves' guild"), so every town's default carries them. Read literally, no town would ever have
  * "no criminal parts". With the town's projection given (`present`, from
@@ -122,15 +136,43 @@ export function presentCriminalGroupings(payload) {
 }
 
 /**
- * Every criminal part of a town, in order: the family's defaults (defaultVeilFor's order), then
- * the eyes under each criminal house and faction, then each person's corruption delta (the
- * draft's order).
- * @param {ReadonlyArray<VeilDefault>|null|undefined} defaults  defaultVeilFor(settlement)
- * @param {ReadonlyArray<VeilDelta>|null|undefined} deltas  the curate draft
- * @param {ReadonlySet<string>} [present]  presentCriminalGroupings(payload); omitted, every family grouping counts
+ * @typedef {{ sections: ReadonlyArray<{
+ *   groupings: ReadonlyArray<{ address: string }>, switches: ReadonlyArray<{ address: string }>,
+ *   cards: ReadonlyArray<{ whole: { address: string } | null, eyes: ReadonlyArray<{ address: string }> }>,
+ * }> }} CurateModel  galleryVeil.js :: curateModelFor's output (the part this module reads)
+ */
+
+/**
+ * Every address the Curate screen draws an eye or a row for: each section's groupings, its master
+ * switches, and each box's whole-house eye and depth eyes (CurateMode.jsx draws exactly these).
+ * An eye under a house hidden whole is drawn once the house is opened, so it is counted: the
+ * model's addresses do not depend on the draft.
+ * @param {CurateModel|null|undefined} model  curateModelFor(payload, draft)
+ * @returns {Set<string>}
+ */
+export function offeredAddressesOf(model) {
+  /** @type {Set<string>} */
+  const out = new Set();
+  for (const sec of (model && Array.isArray(model.sections) ? model.sections : [])) {
+    for (const e of [...sec.groupings, ...sec.switches]) out.add(e.address);
+    for (const c of sec.cards) {
+      if (c.whole) out.add(c.whole.address);
+      for (const e of c.eyes) out.add(e.address);
+    }
+  }
+  return out;
+}
+
+/**
+ * The family's candidates, in order: the family's defaults (defaultVeilFor's order), then the
+ * eyes under each criminal house and faction, then each person's corruption delta (the draft's
+ * order). Not yet narrowed to what the screen draws.
+ * @param {ReadonlyArray<VeilDefault>|null|undefined} defaults
+ * @param {ReadonlyArray<VeilDelta>|null|undefined} deltas
+ * @param {ReadonlySet<string>} [present]
  * @returns {string[]}
  */
-export function criminalPartsOf(defaults, deltas, present) {
+function criminalCandidatesOf(defaults, deltas, present) {
   /** @type {Set<string>} */
   const parts = new Set();
   /** @type {Set<string>} institution ids whose card is a criminal part */
@@ -162,6 +204,20 @@ export function criminalPartsOf(defaults, deltas, present) {
 }
 
 /**
+ * Every criminal part of a town, in order (the candidates' order), each one an address the Curate
+ * screen draws for this record (VR34).
+ * @param {ReadonlyArray<VeilDefault>|null|undefined} defaults  defaultVeilFor(settlement)
+ * @param {ReadonlyArray<VeilDelta>|null|undefined} deltas  the curate draft
+ * @param {ReadonlySet<string>} [present]  presentCriminalGroupings(payload); omitted, every family grouping counts
+ * @param {CurateModel|null} [model]  curateModelFor(payload, draft), the model the screen draws; omitted, no part
+ * @returns {string[]}
+ */
+export function criminalPartsOf(defaults, deltas, present, model) {
+  const offered = offeredAddressesOf(model);
+  return criminalCandidatesOf(defaults, deltas, present).filter(a => offered.has(a));
+}
+
+/**
  * Is a criminal part hidden from visitors under a resolved set? Its own address (a field under
  * its class switch unless excepted, isAddressHidden), or, for an eye of a house, the house's
  * card: a house hidden whole takes every eye with it (applyVeil removes the card), so an eye
@@ -182,10 +238,11 @@ export function isPartHidden(now, address) {
  * @param {ReadonlyArray<VeilDefault>|null|undefined} defaults
  * @param {ReadonlyArray<VeilDelta>|null|undefined} deltas
  * @param {ReadonlySet<string>} [present]  presentCriminalGroupings(payload)
+ * @param {CurateModel|null} [model]  curateModelFor(payload, draft)
  * @returns {'none'|'hidden'|'shown'|'partly'}
  */
-export function criminalSwitchStateOf(defaults, deltas, present) {
-  const parts = criminalPartsOf(defaults, deltas, present);
+export function criminalSwitchStateOf(defaults, deltas, present, model) {
+  const parts = criminalPartsOf(defaults, deltas, present, model);
   if (!parts.length) return 'none';
   const now = resolveVeil(defaults, deltas);
   const hiddenCount = parts.filter(a => isPartHidden(now, a)).length;
@@ -195,20 +252,24 @@ export function criminalSwitchStateOf(defaults, deltas, present) {
 }
 
 /**
- * Set every criminal part to one state: drop each delta on a part, write a delta only where the
- * wanted state differs from what the rest gives, then drop any written delta made redundant by a
- * later one. Every other delta is kept, in its order.
+ * Set every criminal part to one state: drop each delta on a part (and on a family candidate the
+ * screen does not draw: a write no hand can see, VR34), write a delta only where the wanted state
+ * differs from what the rest gives, then drop any written delta made redundant by a later one.
+ * Every other delta is kept, in its order.
  * @param {ReadonlyArray<VeilDelta>|null|undefined} deltas
  * @param {ReadonlyArray<VeilDefault>} defaults
  * @param {boolean} hidden
  * @param {ReadonlySet<string>} [present]  presentCriminalGroupings(payload)
+ * @param {CurateModel|null} [model]  curateModelFor(payload, draft)
  * @returns {VeilDelta[]}
  */
-export function setCriminalVeil(deltas, defaults, hidden, present) {
+export function setCriminalVeil(deltas, defaults, hidden, present, model) {
   const all = clampVeilDeltas(deltas);
-  const parts = criminalPartsOf(defaults, all, present);
+  const parts = criminalPartsOf(defaults, all, present, model);
+  if (!parts.length) return all;
   const partSet = new Set(parts);
-  const out = all.filter(d => !partSet.has(d.address));
+  const family = new Set(criminalCandidatesOf(defaults, all, present));
+  const out = all.filter(d => !partSet.has(d.address) && !family.has(d.address));
   for (const address of parts) {
     if (isPartHidden(resolveVeil(defaults, out), address) !== hidden) out.push({ address, hidden });
   }
@@ -229,10 +290,11 @@ export function setCriminalVeil(deltas, defaults, hidden, present) {
  * @param {ReadonlyArray<VeilDelta>|null|undefined} deltas
  * @param {ReadonlyArray<VeilDefault>} defaults
  * @param {ReadonlySet<string>} [present]  presentCriminalGroupings(payload)
+ * @param {CurateModel|null} [model]  curateModelFor(payload, draft)
  * @returns {VeilDelta[]}
  */
-export function flipCriminalVeil(deltas, defaults, present) {
-  const state = criminalSwitchStateOf(defaults, deltas, present);
+export function flipCriminalVeil(deltas, defaults, present, model) {
+  const state = criminalSwitchStateOf(defaults, deltas, present, model);
   if (state === 'none') return clampVeilDeltas(deltas);
-  return setCriminalVeil(deltas, defaults, state !== 'hidden', present);
+  return setCriminalVeil(deltas, defaults, state !== 'hidden', present, model);
 }
