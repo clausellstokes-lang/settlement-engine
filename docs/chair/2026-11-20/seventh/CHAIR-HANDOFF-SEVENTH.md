@@ -1619,6 +1619,18 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   second arrival tranche: each said from the house that stands, wordings by keyed hash, a new data file and one
   call line; no lane holds the file.
 
+- **THE GOALS LANE'S FOUR (16:04 UTC; builder 8 at 13c69ec23 on `lane/goals-3-2026-11-20-b8`: tests/lint 13 red to 4,
+  nine cured by their doors; identical goals still 0).** R1 `poolDominance`: five of the lane's tie pools sit loose
+  above their measure; the door's trial moved 35 rows, 29 of them outside the lane: `--tighten` is run ONCE (the
+  goals lane's one allowed run), ONLY THE FIVE ROWS OF THE LANE'S POOLS ARE KEPT and the other 29 restored byte for
+  byte (pools other lanes are changing today); no row typed by hand; the 29 listed for the chair's one tighten at
+  the close. R2 `goalSecretRefusals.js` (a closed list that copies 119 secret texts, read by the walkers as
+  undeclared printed lines) is admitted as an INSTRUMENT on one condition: A PARITY ARM pins every text in it to a
+  live secret line at its source, so an edit of a secret cannot orphan a refusal unseen (another lane rewords seven
+  office secrets today: the arm will say so at the join). R3 the floor (`goals.js :: floorLinesOf`): a ruled
+  `not-a-draw` row with its cause. R4 one reserve line reworded as GOALS-3 wrote it: "Leave the accounts of {house}
+  so plain that whoever comes next could take them up." (was "the books of").
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4517,3 +4529,14 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   `lane/seat-6-2026-11-20`, `lane/frame-7-2026-11-20`). TRAD-5 is not written: TRAD-4's lane may end first (unit
   5's merge, unit 6's samples, the import path and the round trip for the reader); write it only if it passes
   330,000 with units left. Net 15 set 45 minutes on.
+- 16:06 UTC · THE SAMENESS PROGRAM'S FIRST WORDS BACK. SAME-1 (seated 15:57; started on 43ab0f5eb): census brief 669e2d72e
+  (`docs/chair/2026-11-20/content/same/SAME-1-CENSUS-BRIEF.md`), its builder out on `lane/same-1-census-2026-11-20`
+  (a renderer over the web dossier, the PDF's three forms and the session sheet); "SAME-CENSUS" due by 17:27; its
+  note: `pool-dominance.mjs` lives under `scripts/census/`. PLACE-1 (started on 43ab0f5eb): RE-RAN THE CHAIR'S
+  CENSUS AT 50 AND REPRODUCED IT (the ordinary-pace sentence 35 of 50 thorps, 45 towns, 44 cities); its own census
+  at 100 taken; first measuring brief 948acb88e (`BRIEF-MEASURE-situationDesc.md`), its builder out. PAGE-7: a
+  builder measuring and drafting the troubles' hooks and lasting effects beside the causes' build (brief
+  `briefs/TROUBLE-LINES.md` at 5593f2cb3: about eight hooks and eight lasting effects a kind for the eight
+  commonest kinds, each beside its need and its rate; at least three need-free lines a pool): approved. GOALS-3:
+  builder 9 out on the wants' tranche, docs only (brief eed0a95f2); four rulings sent (section 2). The net-14
+  trigger fired at 16:00; its pass was already done.
