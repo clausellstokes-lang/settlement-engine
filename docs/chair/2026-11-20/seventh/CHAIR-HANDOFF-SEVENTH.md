@@ -1690,3 +1690,43 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   or prophetic title, never a sacred title on a criminal, never a guessed word (an unsure cell is left to the fallback
   and listed). WHY A SEAT OF ITS OWN: authored words across eleven cultures are the long pole of this addition and
   touch no file SEAT-1 builds in.
+- 05:42 UTC · **FRAME-1 WITHDREW ITS OWN BUILD; ITS SUCCESSOR IS SEATED. VEIL-DOORS-3's TWO FACTS RULED.**
+  **(1) FRAME-1** sent "FRAME 535511009" (hand-back at 44fe13a19) and four minutes later WITHDREW IT: the chair's
+  messages of 04:15 (the owner's correction: CF1 amended, CF9, CF10) and 04:50 UTC (the rulings on its proposal)
+  reached it only at 05:26 UTC, after the build; what it built follows the first CF1 and puts a frame on EVERY calm
+  town, against the owner's word. At its mark; stopped; its addendum at 4203eb655. NOTHING OF IT LANDS AS IT STANDS.
+  SOUND AND KEPT (its measure, 330 calm towns, 990 sides): the 13-archetype table, the casting ladders, the three
+  renderers reading one side, the share-veil proof (the gallery read at both shares, the party link, the import and
+  the player export byte-identical base to tip and frame-free); the faces: the seat-holder 8.4 per cent, a power's
+  head 4.1, a force's commander 6.0, a person by a tie 27.4, a trade's master 13.8, an outsider reached 2.6, the
+  criminal power 4.7, absent 32.9; the owner's example (seat-holder, guild head, garrison commander) fills all three
+  sides in 0 of 330 towns. ITS FINDING THAT DECIDES THE NEXT RULING: THE TENSION'S `severity` IS THE TEMPLATE'S LIST
+  OF POSSIBLE GRADES, NOT THE TOWN'S GRADE (320 of 330 calm towns admit "major" or worse): it cannot be the test of
+  weight. **CF11 RULED (in `prompts/FRAME-2.txt`): WEIGHT IS THE TOWN'S OWN GRADED STATE**: a calm town holds a trouble
+  of weight only where (a) the record carries a strain of its own from a closed list (W1 the seat under real pressure
+  by the record's own contest or its legitimacy in the gates' doubted bands; W2 two powers in a recorded conflict; W3
+  a material strain short of a crisis: food below secure, an outside creditor standing, a broken chain) AND (b) one of
+  the town's tensions is about that strain; the sheet opens on that tension. NO QUOTA; calm is the default; the
+  successor counts W1, W2, W3, the union and the union with (b) BEFORE building and stops if the frame would stand
+  on more than half the calm pool. **FRAME-2** (the middle tier at high effort; AN INTEGRATOR WITH BUILDERS OF ITS OWN:
+  its predecessor built by hand and reached its mark with five things undone; `lane/frame-2-2026-11-20` from
+  4203eb655, the line merged in first): weight; the explicit audience gate with its born test ON the gallery page and
+  the party link; CF9's accent and walker; the names rule in its own three files; the re-seat of the pinned calm
+  sheet; CF10's proposal. THE DEPLOY'S CONTENT LANE MOVES OUT BY THIS: said to the owner.
+  **A LESSON FOR EVERY MESSAGE FROM THIS CHAIR: a message to a working seat is sent to JOIN ITS RUNNING TURN
+  (`priority: "next"`); one sent without it waits for the turn's end, and a builder's turn can last an hour.** Two
+  seats lost work to it today (GIT-DOOR held point 76 behind a measuring run; FRAME-1 built to a corrected rule).
+  **(2) VEIL-DOORS-3** (items 1 and 2 pushed: 4274504b8, 447809df0): VR41 (a-ii) MEASURED: 54 born towns, 1,393 lived
+  entries, the default veil, read as anon: the log's-own-names rule withholds 42 (3.0 per cent); NONE is a removal;
+  ALL 42 name something the SERVED body shows (31 event-born persons whose narrated label drops the `npc.` its id
+  keeps: a compare miss; 11 former governments the body names in `previousGovernments` or memberships). The chair's
+  proposed narrowing had no proof under it and was rightly not built. RULED: build the seat's own two (the compare
+  folds the raw target id too; a power target counts as shown where the SERVED body names it), against what is served
+  to that reader, every other class rule still applying, with a born arm (every hideable house hidden: no served
+  entry names a person or power the served body lacks). **VR43:** `get_gallery_map` bumps `view_count`, so migration
+  091's guard fires on the READ: a stored row holding a chronicle makes the gallery read raise today (it fails
+  closed); `get_unlisted_map` served it (red at base, cured). NO BUILD NOW, the guard stays; the hand-back says
+  whether such a row can exist and gives ONE read-only statement for the deploy note that counts them; the cure, if
+  the count is not zero, is ruled then. BECAUSE OF ITS MARK (about 300k of 350k): the reader's repros and the
+  acceptance run are TAKEN OFF its list and pass to the lane's owner at the merge.
+  **(3) TITLES-1 is session_019yED1PhdgLkBrJssKB9smM; SEAT-1 is session_019yED1PyQxQZi2zHJeLhhLu.**
