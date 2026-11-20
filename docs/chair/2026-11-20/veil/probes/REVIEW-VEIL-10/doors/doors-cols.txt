@@ -1,0 +1,74 @@
+add_gallery_comment|t|t|t|uuid|t|f|t|f|f
+admin_remove_gallery_item|t|t|t|jsonb|f|t|t|f|f
+admin_remove_gallery_map|t|t|t|jsonb|f|t|f|t|f
+admin_revoke_share_link|t|t|t|jsonb|f|t|t|f|f
+admin_set_content_banned|t|t|t|jsonb|f|t|t|t|f
+admin_soft_delete_map|t|t|t|jsonb|f|t|f|t|f
+admin_soft_delete_settlement|t|t|t|jsonb|f|t|t|f|f
+admin_user_summary|t|t|t|jsonb|f|t|t|f|f
+apply_create_route_command|f|t|t|jsonb|t|f|t|f|f
+apply_cut_trade_route_command|f|t|t|jsonb|t|f|t|f|f
+apply_import_reconciliation_command|f|t|t|jsonb|t|f|t|t|f
+bump_map_import|t|t|t|void|t|f|f|t|f
+bump_public_view|t|t|t|void|t|f|t|f|f
+claim_dossier_purchase_by_session|t|t|t|jsonb|f|f|t|f|f
+claim_founder_seat_buyback|t|t|t|jsonb|f|f|f|f|f
+compare_and_swap_campaign_content_binding|f|t|t|jsonb|t|f|f|t|f
+delete_gallery_comment|t|t|t|void|t|f|f|f|f
+enforce_save_limit|t|t|t|trigger|t|f|t|f|f
+get_gallery_dossier|t|t|t|TABLE(id uuid, public_slug text, name text, tier text, data jsonb, published_at timestamp with time zone, updated_at timestamp with time zone, view_count integer, is_curated boolean, gallery_description text, gallery_image_url text, gallery_image_alt text, gallery_tags text[], gallery_share_dm boolean, gallery_importable boolean, gallery_member_overrides jsonb, population integer, terrain text, government_type text, magic_level text, stability text, primary_resource text, threat_level text, net_votes integer, comment_count integer, chronicle jsonb, author_name text, aliveness integer)|f|f|t|f|t
+get_gallery_map|t|t|t|jsonb|f|f|t|t|t
+get_gallery_reaction_state|t|t|t|TABLE(reaction_key text, reaction_count integer, mine boolean)|t|f|t|f|f
+get_gallery_vote_state|t|t|t|TABLE(net_votes integer, voted boolean)|t|f|t|f|f
+get_unlisted_dossier|t|t|t|jsonb|t|f|t|f|t
+get_unlisted_map|t|t|t|jsonb|f|f|f|t|f
+grant_dossier_entitlement|t|t|t|jsonb|f|f|t|f|f
+handle_premium_downgrade|t|t|t|jsonb|f|f|t|t|f
+import_gallery_dossier|t|t|t|TABLE(id uuid, name text, tier text, data jsonb)|t|f|t|f|t
+import_gallery_map|t|t|t|jsonb|t|f|f|t|f
+list_curated_dossiers|t|t|t|TABLE(id uuid, public_slug text, name text, tier text, published_at timestamp with time zone, view_count integer, curated_order integer)|f|f|t|f|f
+list_featured_dossiers|t|t|t|TABLE(id uuid, public_slug text, name text, tier text, published_at timestamp with time zone, view_count integer, featured_order integer)|f|f|t|f|f
+list_featured_maps|t|t|t|TABLE(id uuid, public_slug text, name text, share_kind text, published_at timestamp with time zone, view_count integer, featured_order integer)|f|f|f|t|f
+list_founder_seats_public|t|t|t|TABLE(seat_id smallint, display_name text, gallery_slug text, held_since timestamp with time zone, prior_names text[])|f|f|f|f|f
+list_gallery_comments|t|t|t|TABLE(id uuid, body text, created_at timestamp with time zone, updated_at timestamp with time zone, can_delete boolean, author_label text, moderated boolean)|t|f|t|f|f
+list_gallery_dossiers|t|t|t|TABLE(id uuid, public_slug text, name text, tier text, published_at timestamp with time zone, updated_at timestamp with time zone, view_count integer, is_curated boolean, gallery_description text, gallery_image_url text, gallery_image_alt text, gallery_tags text[], population integer, terrain text, government_type text, magic_level text, stability text, primary_resource text, threat_level text, culture text, prosperity text, primary_deity text, at_war boolean, net_votes integer, comment_count integer, importable boolean, author_name text, aliveness integer, reactions jsonb, total_count bigint)|f|f|f|f|f
+list_gallery_maps|t|t|t|TABLE(slug text, name text, kind text, description text, tags text[], backdrop_kind text, thumb_url text, published_at timestamp with time zone, view_count integer, import_count integer, member_count integer, importable boolean, author_name text, image_url text, image_alt text, at_war boolean, world_age text, aliveness integer)|f|f|t|t|f
+list_gallery_more_by_creator|t|t|t|TABLE(id uuid, public_slug text, name text, tier text, published_at timestamp with time zone, updated_at timestamp with time zone, view_count integer, is_curated boolean, gallery_description text, gallery_image_url text, gallery_image_alt text, gallery_tags text[], population integer, terrain text, government_type text, magic_level text, stability text, primary_resource text, threat_level text, culture text, prosperity text, primary_deity text, at_war boolean, net_votes integer, comment_count integer, author_name text, aliveness integer, reactions jsonb)|f|f|t|f|f
+list_gallery_reports|t|t|t|TABLE(report_id uuid, settlement_id uuid, public_slug text, settlement_name text, tier text, gallery_image_url text, is_public boolean, report_reason text, report_body text, status text, report_created_at timestamp with time zone, report_updated_at timestamp with time zone, resolved_at timestamp with time zone, resolution_note text, reporter_label text, report_count integer)|f|t|t|f|f
+list_my_gallery_dossiers|t|t|t|TABLE(id uuid, public_slug text, name text, tier text, published_at timestamp with time zone, updated_at timestamp with time zone, view_count integer, is_curated boolean, gallery_description text, gallery_image_url text, gallery_image_alt text, gallery_tags text[], population integer, terrain text, government_type text, magic_level text, stability text, primary_resource text, threat_level text, culture text, prosperity text, primary_deity text, at_war boolean, net_votes integer, comment_count integer, author_name text, aliveness integer, reactions jsonb)|t|f|t|f|f
+list_my_unlisted_dossiers|t|t|t|TABLE(id uuid, unlisted_slug text, name text, tier text, published_at timestamp with time zone)|t|f|t|f|f
+list_my_unlisted_maps|t|t|t|TABLE(id uuid, unlisted_slug text, name text, share_kind text, published_at timestamp with time zone)|t|f|f|t|f
+list_open_report_targets|t|t|t|TABLE(kind text, target_id uuid, label text, is_public boolean, report_count integer, reasons text[], latest_at timestamp with time zone)|f|t|t|t|f
+merge_neighbour_backlink|t|t|t|void|t|f|t|f|f
+mutate_settlement_batch|f|t|t|integer|t|f|t|f|f
+persist_world_pulse_advance|t|t|t|jsonb|t|f|t|t|f
+publish_map|t|t|t|text|t|f|t|t|f
+publish_settlement|t|t|t|text|t|f|t|f|f
+purge_expired_plan_inactive_assets|t|t|t|jsonb|f|f|t|t|f
+purge_expired_plan_inactive_settlements|t|t|t|integer|f|f|t|f|f
+reactivate_free_settlement|t|t|t|jsonb|t|f|t|f|f
+release_founder_seat_on_clawback|t|t|t|jsonb|f|f|f|f|f
+report_gallery_comment|t|t|t|uuid|t|f|t|f|f
+report_gallery_dossier|t|t|t|uuid|t|f|t|f|f
+report_gallery_map|t|t|t|uuid|t|f|f|t|f
+report_trend|t|t|t|TABLE(bucket date, value numeric)|f|f|f|f|f
+resolve_gallery_report|t|t|t|void|t|t|f|f|f
+resolve_report_target|t|t|t|integer|t|t|f|f|f
+revoke_map_unlisted|t|t|t|void|t|f|f|t|f
+revoke_settlement_unlisted|t|t|t|void|t|f|t|f|f
+rotate_map_unlisted_slug|t|t|t|text|t|f|f|t|f
+rotate_settlement_unlisted_slug|t|t|t|text|t|f|t|f|f
+set_curated|t|t|t|void|t|f|t|f|f
+set_featured|t|t|t|void|t|f|t|f|f
+set_featured_map|t|t|t|void|t|f|f|t|f
+set_founder_display_optin|t|t|t|jsonb|t|f|f|f|f
+set_gallery_comment_hidden|t|t|t|void|f|f|f|f|f
+share_map_unlisted|t|t|t|text|t|f|f|t|f
+share_settlement_unlisted|t|t|t|text|t|f|t|f|f
+sweep_seat_abandonment|t|t|t|TABLE(action text, seat_id smallint, user_id uuid)|f|f|f|f|f
+toggle_gallery_reaction|t|t|t|TABLE(reaction_key text, reaction_count integer, mine boolean)|t|f|t|f|f
+toggle_gallery_vote|t|t|t|TABLE(net_votes integer, voted boolean)|t|f|t|f|f
+transfer_case_finalize|t|t|t|jsonb|f|f|f|f|f
+transfer_case_reverse|t|t|t|jsonb|f|f|f|f|f
+unpublish_map|t|t|t|void|t|f|f|t|f
+unpublish_settlement|t|t|t|void|t|f|t|f|f

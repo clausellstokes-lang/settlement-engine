@@ -1,0 +1,394 @@
+[
+ {
+  "seed": "rv10-chron-city-none",
+  "mode": "live",
+  "house": "Black market",
+  "npc": "Rohit Das",
+  "events": [
+   "IMPOSE_CORRUPTION: Npc merchant guilds 15 40 has been turned by the Black market. Corruption takes root in the shadows.",
+   "ADD_INSTITUTION: A new Black market was established."
+  ],
+  "galleryDataHasHouse": true,
+  "galleryDataInstitutionSent": false,
+  "galleryChronicle": [
+   {
+    "event": {
+     "id": "ev_1",
+     "type": "IMPOSE_CORRUPTION"
+    },
+    "appliedAt": "2026-11-01T00:00:00.000Z",
+    "narrativeSummary": "Npc merchant guilds 15 40 has been turned by the Black market. Corruption takes root in the shadows."
+   },
+   {
+    "event": {
+     "id": "ev_2",
+     "type": "ADD_INSTITUTION"
+    },
+    "appliedAt": "2026-11-02T00:00:00.000Z",
+    "narrativeSummary": "A new Black market was established."
+   }
+  ],
+  "galleryChronicleHasHouse": true,
+  "linkHasHouse": true,
+  "linkKeys": [
+   "id",
+   "name",
+   "slug",
+   "tier",
+   "dossier",
+   "is_owner",
+   "unlisted",
+   "author_name",
+   "gallery_share_dm",
+   "gallery_member_overrides"
+  ],
+  "mapMemberDataHasHouse": true,
+  "mapMemberChronicleHasHouse": true,
+  "mapMembers": 1,
+  "npcAllegianceSentGallery": null
+ },
+ {
+  "seed": "rv10-chron-city-none",
+  "mode": "snapshot",
+  "house": "Black market",
+  "npc": "Rohit Das",
+  "events": [
+   "IMPOSE_CORRUPTION: Npc merchant guilds 15 40 has been turned by the Black market. Corruption takes root in the shadows.",
+   "ADD_INSTITUTION: A new Black market was established."
+  ],
+  "galleryDataHasHouse": true,
+  "galleryDataInstitutionSent": false,
+  "galleryChronicle": [
+   {
+    "event": {
+     "id": "ev_1",
+     "type": "IMPOSE_CORRUPTION"
+    },
+    "appliedAt": "2026-11-01T00:00:00.000Z",
+    "narrativeSummary": "Npc merchant guilds 15 40 has been turned by the Black market. Corruption takes root in the shadows."
+   },
+   {
+    "event": {
+     "id": "ev_2",
+     "type": "ADD_INSTITUTION"
+    },
+    "appliedAt": "2026-11-02T00:00:00.000Z",
+    "narrativeSummary": "A new Black market was established."
+   }
+  ],
+  "galleryChronicleHasHouse": true,
+  "linkHasHouse": true,
+  "linkKeys": [
+   "id",
+   "name",
+   "slug",
+   "tier",
+   "dossier",
+   "is_owner",
+   "unlisted",
+   "author_name",
+   "gallery_share_dm",
+   "gallery_member_overrides"
+  ],
+  "mapMemberDataHasHouse": true,
+  "mapMemberChronicleHasHouse": true,
+  "mapMembers": 1,
+  "npcAllegianceSentGallery": null
+ },
+ {
+  "seed": "rv10-chron-town-infiltrated",
+  "crim": 0
+ },
+ {
+  "seed": "rv10-chron-metropolis-none",
+  "mode": "live",
+  "house": "Smuggling network",
+  "npc": "Faris al-Andalusi",
+  "events": [
+   "IMPOSE_CORRUPTION: Npc noble governor has been turned by the Smuggling network. Corruption takes root in the shadows.",
+   "ADD_INSTITUTION: A new Smuggling network was established."
+  ],
+  "galleryDataHasHouse": true,
+  "galleryDataInstitutionSent": false,
+  "galleryChronicle": [
+   {
+    "event": {
+     "id": "ev_1",
+     "type": "IMPOSE_CORRUPTION"
+    },
+    "appliedAt": "2026-11-01T00:00:00.000Z",
+    "narrativeSummary": "Npc noble governor has been turned by the Smuggling network. Corruption takes root in the shadows."
+   },
+   {
+    "event": {
+     "id": "ev_2",
+     "type": "ADD_INSTITUTION"
+    },
+    "appliedAt": "2026-11-02T00:00:00.000Z",
+    "narrativeSummary": "A new Smuggling network was established."
+   }
+  ],
+  "galleryChronicleHasHouse": true,
+  "linkHasHouse": true,
+  "linkKeys": [
+   "id",
+   "name",
+   "slug",
+   "tier",
+   "dossier",
+   "is_owner",
+   "unlisted",
+   "author_name",
+   "gallery_share_dm",
+   "gallery_member_overrides"
+  ],
+  "mapMemberDataHasHouse": true,
+  "mapMemberChronicleHasHouse": true,
+  "mapMembers": 1,
+  "npcAllegianceSentGallery": null
+ },
+ {
+  "seed": "rv10-chron-metropolis-none",
+  "mode": "snapshot",
+  "house": "Smuggling network",
+  "npc": "Faris al-Andalusi",
+  "events": [
+   "IMPOSE_CORRUPTION: Npc noble governor has been turned by the Smuggling network. Corruption takes root in the shadows.",
+   "ADD_INSTITUTION: A new Smuggling network was established."
+  ],
+  "galleryDataHasHouse": true,
+  "galleryDataInstitutionSent": false,
+  "galleryChronicle": [
+   {
+    "event": {
+     "id": "ev_1",
+     "type": "IMPOSE_CORRUPTION"
+    },
+    "appliedAt": "2026-11-01T00:00:00.000Z",
+    "narrativeSummary": "Npc noble governor has been turned by the Smuggling network. Corruption takes root in the shadows."
+   },
+   {
+    "event": {
+     "id": "ev_2",
+     "type": "ADD_INSTITUTION"
+    },
+    "appliedAt": "2026-11-02T00:00:00.000Z",
+    "narrativeSummary": "A new Smuggling network was established."
+   }
+  ],
+  "galleryChronicleHasHouse": true,
+  "linkHasHouse": true,
+  "linkKeys": [
+   "id",
+   "name",
+   "slug",
+   "tier",
+   "dossier",
+   "is_owner",
+   "unlisted",
+   "author_name",
+   "gallery_share_dm",
+   "gallery_member_overrides"
+  ],
+  "mapMemberDataHasHouse": true,
+  "mapMemberChronicleHasHouse": true,
+  "mapMembers": 1,
+  "npcAllegianceSentGallery": null
+ },
+ {
+  "seed": "rv10-chron-city-insurgency",
+  "mode": "live",
+  "house": "Smuggling network",
+  "npc": "Peiyun Dong",
+  "events": [
+   "IMPOSE_CORRUPTION: Npc mayor and council has been turned by the Smuggling network. Corruption takes root in the shadows.",
+   "ADD_INSTITUTION: A new Smuggling network was established."
+  ],
+  "galleryDataHasHouse": true,
+  "galleryDataInstitutionSent": false,
+  "galleryChronicle": [
+   {
+    "event": {
+     "id": "ev_1",
+     "type": "IMPOSE_CORRUPTION"
+    },
+    "appliedAt": "2026-11-01T00:00:00.000Z",
+    "narrativeSummary": "Npc mayor and council has been turned by the Smuggling network. Corruption takes root in the shadows."
+   },
+   {
+    "event": {
+     "id": "ev_2",
+     "type": "ADD_INSTITUTION"
+    },
+    "appliedAt": "2026-11-02T00:00:00.000Z",
+    "narrativeSummary": "A new Smuggling network was established."
+   }
+  ],
+  "galleryChronicleHasHouse": true,
+  "linkHasHouse": true,
+  "linkKeys": [
+   "id",
+   "name",
+   "slug",
+   "tier",
+   "dossier",
+   "is_owner",
+   "unlisted",
+   "author_name",
+   "gallery_share_dm",
+   "gallery_member_overrides"
+  ],
+  "mapMemberDataHasHouse": true,
+  "mapMemberChronicleHasHouse": true,
+  "mapMembers": 1,
+  "npcAllegianceSentGallery": null
+ },
+ {
+  "seed": "rv10-chron-city-insurgency",
+  "mode": "snapshot",
+  "house": "Smuggling network",
+  "npc": "Peiyun Dong",
+  "events": [
+   "IMPOSE_CORRUPTION: Npc mayor and council has been turned by the Smuggling network. Corruption takes root in the shadows.",
+   "ADD_INSTITUTION: A new Smuggling network was established."
+  ],
+  "galleryDataHasHouse": true,
+  "galleryDataInstitutionSent": false,
+  "galleryChronicle": [
+   {
+    "event": {
+     "id": "ev_1",
+     "type": "IMPOSE_CORRUPTION"
+    },
+    "appliedAt": "2026-11-01T00:00:00.000Z",
+    "narrativeSummary": "Npc mayor and council has been turned by the Smuggling network. Corruption takes root in the shadows."
+   },
+   {
+    "event": {
+     "id": "ev_2",
+     "type": "ADD_INSTITUTION"
+    },
+    "appliedAt": "2026-11-02T00:00:00.000Z",
+    "narrativeSummary": "A new Smuggling network was established."
+   }
+  ],
+  "galleryChronicleHasHouse": true,
+  "linkHasHouse": true,
+  "linkKeys": [
+   "id",
+   "name",
+   "slug",
+   "tier",
+   "dossier",
+   "is_owner",
+   "unlisted",
+   "author_name",
+   "gallery_share_dm",
+   "gallery_member_overrides"
+  ],
+  "mapMemberDataHasHouse": true,
+  "mapMemberChronicleHasHouse": true,
+  "mapMembers": 1,
+  "npcAllegianceSentGallery": null
+ },
+ {
+  "seed": "rv10-chron-town-none",
+  "crim": 0
+ },
+ {
+  "seed": "rv10-chron-metropolis-indebted",
+  "mode": "live",
+  "house": "Smuggling network",
+  "npc": "Rostislav Aleksandrov",
+  "events": [
+   "IMPOSE_CORRUPTION: Npc noble governor has been turned by the Smuggling network. Corruption takes root in the shadows.",
+   "ADD_INSTITUTION: A new Smuggling network was established."
+  ],
+  "galleryDataHasHouse": true,
+  "galleryDataInstitutionSent": false,
+  "galleryChronicle": [
+   {
+    "event": {
+     "id": "ev_1",
+     "type": "IMPOSE_CORRUPTION"
+    },
+    "appliedAt": "2026-11-01T00:00:00.000Z",
+    "narrativeSummary": "Npc noble governor has been turned by the Smuggling network. Corruption takes root in the shadows."
+   },
+   {
+    "event": {
+     "id": "ev_2",
+     "type": "ADD_INSTITUTION"
+    },
+    "appliedAt": "2026-11-02T00:00:00.000Z",
+    "narrativeSummary": "A new Smuggling network was established."
+   }
+  ],
+  "galleryChronicleHasHouse": true,
+  "linkHasHouse": true,
+  "linkKeys": [
+   "id",
+   "name",
+   "slug",
+   "tier",
+   "dossier",
+   "is_owner",
+   "unlisted",
+   "author_name",
+   "gallery_share_dm",
+   "gallery_member_overrides"
+  ],
+  "mapMemberDataHasHouse": true,
+  "mapMemberChronicleHasHouse": true,
+  "mapMembers": 1,
+  "npcAllegianceSentGallery": null
+ },
+ {
+  "seed": "rv10-chron-metropolis-indebted",
+  "mode": "snapshot",
+  "house": "Smuggling network",
+  "npc": "Rostislav Aleksandrov",
+  "events": [
+   "IMPOSE_CORRUPTION: Npc noble governor has been turned by the Smuggling network. Corruption takes root in the shadows.",
+   "ADD_INSTITUTION: A new Smuggling network was established."
+  ],
+  "galleryDataHasHouse": true,
+  "galleryDataInstitutionSent": false,
+  "galleryChronicle": [
+   {
+    "event": {
+     "id": "ev_1",
+     "type": "IMPOSE_CORRUPTION"
+    },
+    "appliedAt": "2026-11-01T00:00:00.000Z",
+    "narrativeSummary": "Npc noble governor has been turned by the Smuggling network. Corruption takes root in the shadows."
+   },
+   {
+    "event": {
+     "id": "ev_2",
+     "type": "ADD_INSTITUTION"
+    },
+    "appliedAt": "2026-11-02T00:00:00.000Z",
+    "narrativeSummary": "A new Smuggling network was established."
+   }
+  ],
+  "galleryChronicleHasHouse": true,
+  "linkHasHouse": true,
+  "linkKeys": [
+   "id",
+   "name",
+   "slug",
+   "tier",
+   "dossier",
+   "is_owner",
+   "unlisted",
+   "author_name",
+   "gallery_share_dm",
+   "gallery_member_overrides"
+  ],
+  "mapMemberDataHasHouse": true,
+  "mapMemberChronicleHasHouse": true,
+  "mapMembers": 1,
+  "npcAllegianceSentGallery": null
+ }
+]

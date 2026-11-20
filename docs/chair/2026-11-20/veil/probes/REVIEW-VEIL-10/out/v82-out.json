@@ -1,0 +1,446 @@
+[
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Smuggling network",
+  "dm": false,
+  "inStored": 14,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Smuggling network",
+  "dm": true,
+  "inStored": 14,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Multiple criminal factions",
+  "dm": false,
+  "inStored": 12,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Multiple criminal factions",
+  "dm": true,
+  "inStored": 12,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Front businesses",
+  "dm": false,
+  "inStored": 12,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Front businesses",
+  "dm": true,
+  "inStored": 12,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Black market",
+  "dm": false,
+  "inStored": 21,
+  "galleryBirth": [
+   "economicState.activeChains[25].label=Black market",
+   "economicState.activeChains[25].processingInstitutions[0]=Black market",
+   "economicState.situationDesc=Honest trade gets by, but a busy black market undercuts it."
+  ],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [
+   "economicState.activeChains[25].label=Black market",
+   "economicState.activeChains[25].processingInstitutions[0]=Black market",
+   "economicState.situationDesc=Honest trade gets by, but a busy black market undercuts it."
+  ],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Black market",
+  "dm": true,
+  "inStored": 21,
+  "galleryBirth": [
+   "npcs[17].goal.short=Catch Xoc Tut with something from the black market on them, in front of witnesses.",
+   "npcs[58].role=the black marketeer",
+   "npcs[58].title=the black marketeer",
+   "npcs[58].institution.key=Black market",
+   "npcs[58].institution.title=the black marketeer",
+   "npcs[58].institution.family=Black market"
+  ],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [
+   "economicState.activeChains[25].label=Black market",
+   "economicState.activeChains[25].processingInstitutions[0]=Black market",
+   "economicState.situationDesc=Honest trade gets by, but a busy black market undercuts it."
+  ],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-none-31",
+  "birth": "Smuggling network",
+  "dm": false,
+  "inStored": 10,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-none-31",
+  "birth": "Smuggling network",
+  "dm": true,
+  "inStored": 10,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-none-31",
+  "birth": "Multiple criminal factions",
+  "dm": false,
+  "inStored": 5,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-none-31",
+  "birth": "Multiple criminal factions",
+  "dm": true,
+  "inStored": 5,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-none-31",
+  "birth": "Front businesses",
+  "dm": false,
+  "inStored": 9,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-none-31",
+  "birth": "Front businesses",
+  "dm": true,
+  "inStored": 9,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-none-31",
+  "birth": "Underground city",
+  "dm": false,
+  "inStored": 7,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-none-31",
+  "birth": "Underground city",
+  "dm": true,
+  "inStored": 7,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-none-31",
+  "birth": "Whisper market",
+  "dm": false,
+  "inStored": 8,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-none-31",
+  "birth": "Whisper market",
+  "dm": true,
+  "inStored": 8,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-none-31",
+  "birth": "Black market bazaar",
+  "dm": false,
+  "inStored": 4,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-none-31",
+  "birth": "Black market bazaar",
+  "dm": true,
+  "inStored": 4,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-none-31",
+  "birth": "Assassins' guild",
+  "dm": false,
+  "inStored": 10,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-none-31",
+  "birth": "Assassins' guild",
+  "dm": true,
+  "inStored": 10,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Smuggling network",
+  "dm": false,
+  "inStored": 11,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Smuggling network",
+  "dm": true,
+  "inStored": 11,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Front businesses",
+  "dm": false,
+  "inStored": 12,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Front businesses",
+  "dm": true,
+  "inStored": 12,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Whisper market",
+  "dm": false,
+  "inStored": 17,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Whisper market",
+  "dm": true,
+  "inStored": 17,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Black market",
+  "dm": false,
+  "inStored": 22,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Black market",
+  "dm": true,
+  "inStored": 22,
+  "galleryBirth": [
+   "npcs[10].role=the black marketeer",
+   "npcs[10].title=the black marketeer",
+   "npcs[10].institution.title=the black marketeer",
+   "relationships[2].npc2Role=the black marketeer",
+   "relationships[10].npc1Role=the black marketeer",
+   "relationships[27].npc2Role=the black marketeer"
+  ],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-occupied-28",
+  "birth": "Thieves' guild (powerful)",
+  "dm": false,
+  "inStored": 15,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-occupied-28",
+  "birth": "Thieves' guild (powerful)",
+  "dm": true,
+  "inStored": 15,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-occupied-28",
+  "birth": "Front businesses",
+  "dm": false,
+  "inStored": 16,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-occupied-28",
+  "birth": "Front businesses",
+  "dm": true,
+  "inStored": 16,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-occupied-28",
+  "birth": "Underground network",
+  "dm": false,
+  "inStored": 4,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-occupied-28",
+  "birth": "Underground network",
+  "dm": true,
+  "inStored": 4,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-occupied-28",
+  "birth": "Whisper market",
+  "dm": false,
+  "inStored": 18,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-metropolis-occupied-28",
+  "birth": "Whisper market",
+  "dm": true,
+  "inStored": 18,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ }
+]

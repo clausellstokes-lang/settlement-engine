@@ -1,0 +1,319 @@
+FN|_gallery_apply_member_overrides|base jsonb, dm_full jsonb, overrides jsonb, settlement_share_dm boolean, settlement_importable boolean, for_import boolean|f|t|t|t
+FN|_gallery_chronicle_json|entries jsonb|f|t|t|t
+FN|_gallery_dm_full_json|j jsonb|f|t|t|t
+FN|_gallery_map_backdrop|p_map_data jsonb|f|t|t|t
+FN|_gallery_public_tile_rows||t|t|t|t
+FN|_gallery_sanitize_public_json|value jsonb, path text[]|f|t|t|t
+FN|_gallery_world_snapshot_is_safe|value jsonb|f|t|t|t
+FN|_saved_maps_world_snapshot_guard||f|t|t|t
+FN|add_gallery_comment|target_settlement_id uuid, comment_body text|t|t|t|t
+FN|admin_remove_gallery_item|p_actor uuid, p_id uuid, p_reason text|t|t|t|t
+FN|admin_remove_gallery_map|p_actor uuid, p_id uuid, p_reason text|t|t|t|t
+FN|admin_revoke_share_link|p_actor uuid, p_id uuid, p_reason text|t|t|t|t
+FN|admin_set_content_banned|p_actor uuid, p_kind text, p_id uuid, p_ban boolean, p_reason text|t|t|t|t
+FN|admin_soft_delete_map|p_actor uuid, p_id uuid, p_delete boolean, p_reason text|t|t|t|t
+FN|admin_soft_delete_settlement|p_actor uuid, p_id uuid, p_delete boolean, p_reason text|t|t|t|t
+FN|admin_user_summary|target_user uuid|t|t|t|t
+FN|apply_create_route_command|p_expected_owner uuid, p_command_id text, p_save_id uuid, p_partner_save_id uuid, p_expected_revision timestamp with time zone, p_event jsonb, p_expected_data jsonb, p_expected_campaign_state jsonb, p_expected_ai_data jsonb, p_partner_expected_data jsonb, p_next_data jsonb, p_next_campaign_state jsonb, p_partner_next_data jsonb, p_next_ai_data jsonb|t|f|t|t
+FN|apply_cut_trade_route_command|p_expected_owner uuid, p_command_id text, p_save_id uuid, p_expected_revision timestamp with time zone, p_event jsonb, p_expected_data jsonb, p_expected_campaign_state jsonb, p_expected_ai_data jsonb, p_next_data jsonb, p_next_campaign_state jsonb, p_next_ai_data jsonb|t|f|t|t
+FN|apply_import_reconciliation_command|p_expected_owner uuid, p_command_id text, p_kind text, p_campaign_id uuid, p_save_id uuid, p_source_checksum text, p_import_session_id text, p_expected_membership_campaign_ids jsonb, p_entry jsonb|t|f|t|t
+FN|bump_map_import|p_slug text|t|t|t|t
+FN|bump_public_view|slug text, viewer_token text|t|t|t|t
+FN|claim_dossier_purchase_by_session|p_session_id text, p_user uuid, p_save_id uuid|t|t|t|t
+FN|claim_founder_seat_buyback|p_user uuid, p_payout_form text|t|t|t|t
+FN|compare_and_swap_campaign_content_binding|p_expected_owner uuid, p_command_id text, p_fingerprint text, p_campaign_id uuid, p_expected_binding_hash text, p_target_binding jsonb, p_content_binding_history jsonb|t|f|t|t
+FN|delete_gallery_comment|target_comment_id uuid|t|t|t|t
+FN|enforce_moderation_ban||f|t|t|t
+FN|enforce_save_limit||t|t|t|t
+FN|export_custom_content_archive|p_expected_owner uuid|t|f|t|t
+FN|get_gallery_dossier|dossier_slug text|t|t|t|t
+FN|get_gallery_map|p_slug text|t|t|t|t
+FN|get_gallery_reaction_state|target_settlement_id uuid|t|t|t|t
+FN|get_gallery_vote_state|target_settlement_id uuid|t|t|t|t
+FN|get_unlisted_dossier|p_slug text|t|t|t|t
+FN|get_unlisted_map|p_slug text|t|t|t|t
+FN|grant_dossier_entitlement|p_user uuid, p_save_id uuid, p_session_id text, p_source text|t|t|t|t
+FN|handle_premium_downgrade|target_user uuid|t|t|t|t
+FN|import_custom_content_archive|p_expected_owner uuid, p_command_id text, p_fingerprint text, p_bundle jsonb|t|f|t|t
+FN|import_gallery_dossier|dossier_slug text|t|t|t|t
+FN|import_gallery_map|p_slug text|t|t|t|t
+FN|list_curated_dossiers||t|t|t|t
+FN|list_featured_dossiers||t|t|t|t
+FN|list_featured_maps||t|t|t|t
+FN|list_founder_seats_public||t|t|t|t
+FN|list_gallery_comments|target_settlement_id uuid|t|t|t|t
+FN|list_gallery_dossiers|page_number integer, page_size integer, sort_key text, search_query text, filters jsonb, exclude_curated boolean|t|t|t|t
+FN|list_gallery_maps|p_page integer, p_page_size integer, p_sort_key text, p_search_query text, p_filters jsonb|t|t|t|t
+FN|list_gallery_more_by_creator|source_slug text, limit_count integer|t|t|t|t
+FN|list_gallery_reports|report_status text, limit_count integer|t|t|t|t
+FN|list_my_gallery_dossiers||t|t|t|t
+FN|list_my_unlisted_dossiers||t|t|t|t
+FN|list_my_unlisted_maps||t|t|t|t
+FN|list_open_report_targets||t|t|t|t
+FN|load_sim_metrics|p_rows jsonb|t|t|t|t
+FN|merge_neighbour_backlink|p_partner_id uuid, p_link_id text, p_new_save_id uuid, p_network_entry jsonb, p_relationship_entries jsonb|t|t|t|t
+FN|mutate_settlement_batch|p_expected_user uuid, updates jsonb, delete_ids uuid[], creates jsonb|t|f|t|t
+FN|persist_world_pulse_advance|p_campaign_id uuid, p_campaign_snapshot jsonb, p_settlement_updates jsonb, p_expected_tick bigint|t|t|t|t
+FN|publish_map|target_id uuid, p_kind text, p_description text, p_tags text[], p_importable boolean, p_image_url text, p_image_alt text, p_share_world boolean, p_world_sections jsonb, p_world_snapshot jsonb, p_realm_arc_summary text, p_facets jsonb|t|t|t|t
+FN|publish_settlement|target_id uuid|t|t|t|t
+FN|purge_analytics_for_user|p_user_id uuid|t|t|t|t
+FN|purge_expired_plan_inactive_assets||t|t|t|t
+FN|purge_expired_plan_inactive_settlements||t|t|t|t
+FN|reactivate_free_settlement|target_settlement_id uuid|t|t|t|t
+FN|release_founder_seat_on_clawback|p_user uuid|t|t|t|t
+FN|report_edit_heatmap|p_from date, p_to date|t|t|t|t
+FN|report_gallery_comment|target_comment_id uuid, report_reason text, report_body text|t|t|t|t
+FN|report_gallery_dossier|target_settlement_id uuid, report_reason text, report_body text|t|t|t|t
+FN|report_gallery_map|target_map_id uuid, report_reason text, report_body text|t|t|t|t
+FN|report_market_preset_adoption|p_from date, p_to date|t|t|t|t
+FN|report_proposal_decisions|p_from date, p_to date|t|t|t|t
+FN|report_pulse_mutations|p_from date, p_to date|t|t|t|t
+FN|report_stressor_genesis|p_from date, p_to date|t|t|t|t
+FN|report_summary|p_from date, p_to date|t|t|t|t
+FN|report_trend|p_metric text, p_granularity text, p_from date, p_to date|t|t|t|t
+FN|reserve_redemption|p_code text, p_user uuid, p_mode text|t|t|t|t
+FN|resolve_gallery_report|target_report_id uuid, next_status text, resolution_note text|t|t|t|t
+FN|resolve_report_target|p_kind text, p_target_id uuid, p_status text, p_note text|t|t|t|t
+FN|revoke_map_unlisted|target_id uuid|t|t|t|t
+FN|revoke_settlement_unlisted|target_id uuid|t|t|t|t
+FN|rollup_analytics_v2_daily|p_day date|t|t|t|t
+FN|rollup_sim_metrics|p_run_id text|t|t|t|t
+FN|rotate_map_unlisted_slug|target_id uuid|t|t|t|t
+FN|rotate_settlement_unlisted_slug|target_id uuid|t|t|t|t
+FN|set_curated|target_id uuid, curated boolean, sort_order integer|t|t|t|t
+FN|set_featured|target_id uuid, featured boolean, sort_order integer|t|t|t|t
+FN|set_featured_map|target_id uuid, featured boolean, sort_order integer|t|t|t|t
+FN|set_founder_display_optin|p_display_name text, p_gallery_slug text|t|t|t|t
+FN|set_gallery_comment_hidden|target_comment_id uuid, hide boolean, hidden_reason_text text, moderator_id uuid|t|t|t|t
+FN|share_map_unlisted|target_id uuid|t|t|t|t
+FN|share_settlement_unlisted|target_id uuid|t|t|t|t
+FN|surveyor_stage_enabled|p_stage text|t|t|t|t
+FN|surveyor_usage_precheck|p_user uuid, p_provider text, p_feature text|t|t|t|t
+FN|sweep_seat_abandonment||t|t|t|t
+FN|toggle_gallery_reaction|target_settlement_id uuid, reaction text|t|t|t|t
+FN|toggle_gallery_vote|target_settlement_id uuid|t|t|t|t
+FN|transfer_case_finalize|p_case uuid|t|t|t|t
+FN|transfer_case_reverse|p_case uuid, p_reason text|t|t|t|t
+FN|unpublish_map|target_id uuid|t|t|t|t
+FN|unpublish_settlement|target_id uuid|t|t|t|t
+FN|_assert_service_admin_actor|actor_user uuid|t|t|t|f
+FN|_audit_action|p_actor_id uuid, p_target_id uuid, p_action text, p_before jsonb, p_after jsonb, p_reason text|t|t|t|f
+FN|_buyback_payout_hold_days||t|t|t|f
+FN|_civility_stem_hits|p_stem text|f|t|t|f
+FN|_civility_token_hits|p_token text|f|t|t|f
+FN|_consume_action_rate_limit|p_uid uuid, p_action text, p_window_seconds integer|t|t|t|f
+FN|_deity_chart_axes_valid|p_axes jsonb|f|t|t|f
+FN|_founder_transfer_dial|p_key text, p_default integer|t|t|t|f
+FN|_gallery_chronicle_entry|e jsonb|f|t|t|f
+FN|_gallery_npc_key|npc jsonb|f|t|t|f
+FN|_gc_dim_sql|p_field text|f|t|t|f
+FN|_log_founder_transfer_event|p_case uuid, p_actor text, p_event text, p_detail jsonb|t|t|t|f
+FN|_make_public_slug||f|t|t|f
+FN|_make_unlisted_slug||f|t|t|f
+FN|_seat_buyback_cents||t|t|t|f
+FN|_seat_holder_last_active|p_user uuid|t|t|t|f
+FN|_seat_stewardship_dial|p_key text, p_default integer|t|t|t|f
+FN|_surveyor_byok_secret||t|t|t|f
+FN|_trunc_unit|p_granularity text|f|t|t|f
+FN|account_is_active|p_uid uuid|t|t|t|f
+FN|add_internal_note|p_actor uuid, p_target uuid, p_note text|t|t|t|f
+FN|admin_billing_summary|p_actor uuid, p_target uuid|t|t|t|f
+FN|admin_diagnostic_bundle|p_actor uuid, p_target uuid, p_full boolean, p_reason text|t|t|t|f
+FN|admin_grant_credits|target_user uuid, amount integer, reason text|t|t|t|f
+FN|admin_list_internal_notes|p_target uuid|t|t|t|f
+FN|admin_list_warnings|p_target uuid|t|t|t|f
+FN|admin_set_role|target_user uuid, new_role text|t|t|t|f
+FN|admin_support_messages|p_status text, p_limit integer|t|t|t|f
+FN|admin_user_full|target_user uuid, p_reason text|t|t|t|f
+FN|aggregate_ai_usage_stats|p_window_days integer|t|t|t|f
+FN|analytics_monthly_prune||t|t|t|f
+FN|analytics_nightly_maintenance||t|t|t|f
+FN|append_retention_cohorts|p_day date|t|t|t|f
+FN|apply_custom_content_command|p_expected_owner uuid, p_command_id text, p_preview_fingerprint text, p_plan jsonb|t|f|t|f
+FN|apply_redemption|p_session_id text|t|t|t|f
+FN|apply_reviewed_supply_chain_command|p_expected_owner uuid, p_command_id text, p_preview_fingerprint text, p_plan jsonb|t|f|t|f
+FN|armor|bytea|f|t|t|f
+FN|armor|bytea, text[], text[]|f|t|t|f
+FN|assert_current_session||t|t|t|f
+FN|attach_ai_spend_to_claim|p_user uuid, p_key text, p_spend_id uuid|t|t|t|f
+FN|bind_redemption_session|p_redemption_id uuid, p_session_id text|t|t|t|f
+FN|cancel_stale_auto_reload_attempts||t|t|t|f
+FN|civility_blocked|p_text text|f|t|t|f
+FN|civility_normalize|p_text text|f|t|t|f
+FN|claim_ai_request|p_user uuid, p_key text, p_ttl_seconds integer|t|t|t|f
+FN|claim_auto_reload_payment_intent|p_attempt uuid, p_user uuid, p_payment_intent text, p_amount_cents integer, p_credits_delta integer|t|t|t|f
+FN|claim_current_session|p_device_label text|t|t|t|f
+FN|claim_due_buyback_payout||t|t|t|f
+FN|claim_due_transfer_payout||t|t|t|f
+FN|claim_free_narrative|p_user uuid|t|t|t|f
+FN|claim_next_founder_seat|p_user uuid|t|t|t|f
+FN|claim_ticket|p_actor uuid, p_id uuid|t|t|t|f
+FN|clawback_dossier_entitlement|p_session_id text|t|t|t|f
+FN|clawback_referral|p_invoice_id text|t|t|t|f
+FN|cleanup_ai_generate_rate_limits|p_retention_seconds integer|t|t|t|f
+FN|cleanup_ai_spend_reservations|p_retention_seconds integer|t|t|t|f
+FN|cleanup_dossier_verify_rate_limits|p_retention_seconds integer|t|t|t|f
+FN|cleanup_email_rate_limits|p_retention_seconds integer|t|t|t|f
+FN|cleanup_recovery_rate_limits|p_retention_seconds integer|t|t|t|f
+FN|cleanup_token_buckets|p_retention_seconds integer|t|t|t|f
+FN|cleanup_user_action_rate_limits|p_retention_seconds integer|t|t|t|f
+FN|consume_ai_generate_rate_limit|p_user uuid, p_window_seconds integer, p_user_limit integer|t|t|t|f
+FN|consume_dossier_verify_rate_limit|p_ip text, p_window_seconds integer, p_ip_limit integer|t|t|t|f
+FN|consume_email_rate_limit|p_ip text, p_recipient text, p_window_seconds integer, p_ip_limit integer, p_recipient_limit integer|t|t|t|f
+FN|consume_recovery_rate_limit|p_ip text, p_email text, p_window_seconds integer, p_ip_limit integer, p_email_limit integer|t|t|t|f
+FN|consume_token_bucket|p_key text, p_capacity double precision, p_refill_per_sec double precision, p_cost double precision|t|t|t|f
+FN|crypt|text, text|f|t|t|f
+FN|current_user_has_premium_access||f|t|t|f
+FN|current_user_has_role|p_roles text[]|t|t|t|f
+FN|current_user_is_highest||t|t|t|f
+FN|current_user_is_privileged||t|t|t|f
+FN|current_user_is_support_or_higher||t|t|t|f
+FN|dearmor|text|f|t|t|f
+FN|decrypt|bytea, bytea, text|f|t|t|f
+FN|decrypt_iv|bytea, bytea, bytea, text|f|t|t|f
+FN|digest|text, text|f|t|t|f
+FN|digest|bytea, text|f|t|t|f
+FN|dismiss_operator_message|p_message_id uuid|t|f|t|f
+FN|email_has_active_transfer_lock|p_email text|t|t|t|f
+FN|encrypt|bytea, bytea, text|f|t|t|f
+FN|encrypt_iv|bytea, bytea, bytea, text|f|t|t|f
+FN|enforce_allocation_within_grant||t|t|t|f
+FN|enforce_version_history_cap||f|t|t|f
+FN|expire_stale_transfer_cases||t|t|t|f
+FN|format_ticket_number|p_n bigint|f|t|t|f
+FN|founder_buyback_enabled||t|t|t|f
+FN|founder_seats_taken||t|t|t|f
+FN|founder_transfer_enabled||t|t|t|f
+FN|founders_roll||t|t|t|f
+FN|free_narrative_available|target_user uuid|t|f|t|f
+FN|gen_account_number||t|t|t|f
+FN|gen_external_name||t|t|t|f
+FN|gen_random_bytes|integer|f|t|t|f
+FN|gen_random_uuid||f|t|t|f
+FN|gen_salt|text|f|t|t|f
+FN|gen_salt|text, integer|f|t|t|f
+FN|get_ai_pricing||t|t|t|f
+FN|get_credit_balance|target_user uuid|t|f|t|f
+FN|get_my_email_preferences||t|f|t|f
+FN|get_my_operator_message|p_message_id uuid|t|f|t|f
+FN|get_my_operator_service_export||t|f|t|f
+FN|get_my_operator_unread_count||t|f|t|f
+FN|get_my_security_question_ids||t|t|t|f
+FN|grant_referral|p_referee uuid, p_invoice_id text, p_amount_paid_cents integer|t|t|t|f
+FN|grant_welcome_credit||t|t|t|f
+FN|guard_inactive_profile_billing||f|t|t|f
+FN|handle_new_user||t|t|t|f
+FN|has_active_transfer_lock|p_user uuid|t|t|t|f
+FN|has_dossier_entitlement|p_save_id uuid|t|t|t|f
+FN|has_role|p_uid uuid, p_roles text[]|t|t|t|f
+FN|has_surveyor_entitlement||t|t|t|f
+FN|hmac|bytea, bytea, text|f|t|t|f
+FN|hmac|text, text, text|f|t|t|f
+FN|ingest_check_rate|p_key text, p_max integer, p_window_seconds integer|t|t|t|f
+FN|is_allowed_email_category|p_category text|f|t|t|f
+FN|is_allowed_security_question_id|p_id text|f|t|t|f
+FN|is_current_session||t|t|t|f
+FN|issue_buyback_challenge|p_user uuid|t|t|t|f
+FN|issue_transfer_challenge|p_case uuid, p_party text, p_purpose text|t|t|t|f
+FN|link_ticket_faq|p_actor uuid, p_id uuid, p_faq text|t|t|t|f
+FN|list_my_operator_messages|p_limit integer, p_before_created_at timestamp with time zone, p_before_id uuid|t|f|t|f
+FN|list_my_tickets||t|t|t|f
+FN|list_ticket_pool|p_status text, p_limit integer|t|t|t|f
+FN|list_ticket_thread|p_id uuid|t|t|t|f
+FN|mark_low_balance_notified|p_user uuid, p_bucket text|t|t|t|f
+FN|mark_operator_message_read|p_message_id uuid|t|f|t|f
+FN|market_k_min_campaigns||f|t|t|f
+FN|market_k_min_users||f|t|t|f
+FN|mask_email|p_email text|f|t|t|f
+FN|my_transfer_case_status||t|t|t|f
+FN|normalize_external_name|p_name text|f|t|t|f
+FN|pgp_armor_headers|text, OUT key text, OUT value text|f|t|t|f
+FN|pgp_key_id|bytea|f|t|t|f
+FN|pgp_pub_decrypt|bytea, bytea|f|t|t|f
+FN|pgp_pub_decrypt|bytea, bytea, text|f|t|t|f
+FN|pgp_pub_decrypt|bytea, bytea, text, text|f|t|t|f
+FN|pgp_pub_decrypt_bytea|bytea, bytea|f|t|t|f
+FN|pgp_pub_decrypt_bytea|bytea, bytea, text|f|t|t|f
+FN|pgp_pub_decrypt_bytea|bytea, bytea, text, text|f|t|t|f
+FN|pgp_pub_encrypt|text, bytea|f|t|t|f
+FN|pgp_pub_encrypt|text, bytea, text|f|t|t|f
+FN|pgp_pub_encrypt_bytea|bytea, bytea, text|f|t|t|f
+FN|pgp_pub_encrypt_bytea|bytea, bytea|f|t|t|f
+FN|pgp_sym_decrypt|bytea, text, text|f|t|t|f
+FN|pgp_sym_decrypt|bytea, text|f|t|t|f
+FN|pgp_sym_decrypt_bytea|bytea, text, text|f|t|t|f
+FN|pgp_sym_decrypt_bytea|bytea, text|f|t|t|f
+FN|pgp_sym_encrypt|text, text|f|t|t|f
+FN|pgp_sym_encrypt|text, text, text|f|t|t|f
+FN|pgp_sym_encrypt_bytea|bytea, text|f|t|t|f
+FN|pgp_sym_encrypt_bytea|bytea, text, text|f|t|t|f
+FN|post_ticket_reply|p_actor uuid, p_id uuid, p_body text, p_visibility text|t|t|t|f
+FN|profile_has_premium_access|target_user uuid|t|t|t|f
+FN|purge_dossier_purchases|p_retention_seconds integer|t|t|t|f
+FN|record_referral_grant_detail|p_referral_id uuid, p_party text, p_reward text, p_coupon_id text|t|t|t|f
+FN|record_referral_intent|p_referrer_account_number text|t|t|t|f
+FN|reelect_transfer_payout|p_case uuid, p_from uuid|t|t|t|f
+FN|release_ai_spend_reservation|p_id uuid|t|t|t|f
+FN|release_free_narrative|p_user uuid|t|t|t|f
+FN|report_ai_usage|p_from date, p_to date|t|t|t|f
+FN|report_channel_funnel|p_from date, p_to date|t|t|t|f
+FN|report_client_error_alert||t|t|t|f
+FN|report_client_errors|p_from date, p_to date|t|t|t|f
+FN|report_config_variance|p_config_signature text, p_from date, p_to date|t|t|t|f
+FN|report_crosstab|p_row text, p_col text, p_from date, p_to date, p_limit integer|t|t|t|f
+FN|report_distribution|p_field text, p_from date, p_to date, p_granularity text, p_limit integer|t|t|t|f
+FN|report_funnel|p_from date, p_to date|t|t|t|f
+FN|report_market_archetype_popularity|p_from date, p_to date|t|t|t|f
+FN|report_npc_distribution|p_field text, p_from date, p_to date|t|t|t|f
+FN|report_preferences|p_from date, p_to date|t|t|t|f
+FN|report_referral_funnel|p_from date, p_to date|t|t|t|f
+FN|report_regional_arcs|p_from date, p_to date|t|t|t|f
+FN|report_regional_impacts|p_from date, p_to date|t|t|t|f
+FN|report_regional_propagation|p_from date, p_to date|t|t|t|f
+FN|report_retention||t|t|t|f
+FN|reserve_ai_spend|p_user uuid, p_estimate numeric|t|t|t|f
+FN|revert_redemption|p_session_id text|t|t|t|f
+FN|revoke_surveyor_entitlement|p_user uuid, p_reason text|t|t|t|f
+FN|revoke_surveyor_entitlement_by_subscription|p_subscription_id text|t|t|t|f
+FN|rollup_analytics_daily|p_day date|t|t|t|f
+FN|rollup_intent_atlas_daily|p_day date|t|t|t|f
+FN|service_adjust_credits|actor_user uuid, target_user uuid, delta integer, reason text|t|t|t|f
+FN|set_account_disabled|p_actor uuid, p_target uuid, p_disabled boolean, p_reason text|t|t|t|f
+FN|set_auto_reload_settings|p_enabled boolean, p_threshold integer, p_target integer, p_cap integer|t|t|t|f
+FN|set_founder_credit_listed|p_listed boolean|t|t|t|f
+FN|set_my_email_preference|p_expected_user uuid, p_category text, p_enabled boolean|t|f|t|f
+FN|set_my_security_answers|p_q1 text, p_a1 text, p_q2 text, p_a2 text|t|t|t|f
+FN|set_my_telemetry_consent|p_expected_user uuid, p_consent jsonb, p_source text|t|f|t|f
+FN|set_ticket_status|p_actor uuid, p_id uuid, p_status text, p_reason text|t|t|t|f
+FN|spend_credits|feature text, p_profile text, p_tier text|t|t|t|f
+FN|support_ticket_assign_number||f|t|t|f
+FN|support_ticket_touch||f|t|t|f
+FN|surveyor_byok_clear|p_provider text|t|t|t|f
+FN|surveyor_byok_get|p_user uuid, p_provider text|t|t|t|f
+FN|surveyor_byok_set|p_provider text, p_key text|t|t|t|f
+FN|surveyor_byok_set_health|p_user uuid, p_provider text, p_health text, p_error_class text, p_verified boolean|t|t|t|f
+FN|surveyor_byok_set_probe_tier|p_user uuid, p_provider text, p_tier text, p_model text, p_probe_version text, p_profile jsonb|t|t|t|f
+FN|surveyor_byok_status|p_provider text|t|t|t|f
+FN|surveyor_price_estimates||t|t|t|f
+FN|surveyor_settings_get||t|t|t|f
+FN|surveyor_settings_set|p_patch jsonb|t|t|t|f
+FN|sweep_seat_dormancy_nudges||t|t|t|f
+FN|sync_profile_email||t|t|t|f
+FN|system_clawback_credits|p_session_id text, p_reason text|t|t|t|f
+FN|touch_custom_content_updated_at||f|t|t|f
+FN|transfer_case_abort|p_case uuid, p_actor text, p_reason text|t|t|t|f
+FN|transfer_case_bind_nominee|p_case uuid, p_to_user uuid|t|t|t|f
+FN|transfer_case_mark_awaiting_payment|p_case uuid, p_session text|t|t|t|f
+FN|transfer_case_mark_paid|p_case uuid, p_session text, p_price_cents integer|t|t|t|f
+FN|transfer_case_open|p_seat smallint, p_from uuid, p_to_email text, p_payout_form text|t|t|t|f
+FN|transfer_case_regress_awaiting_payment|p_session text|t|t|t|f
+FN|update_display_name|new_name text|t|t|t|f
+FN|update_external_name|new_name text|t|t|t|f
+FN|update_profile_names|p_first text, p_last text, p_preferred text|t|t|t|f
+FN|update_updated_at||f|t|t|f
+FN|validate_redeem_code|p_code text|t|t|t|f
+FN|verify_buyback_challenge|p_user uuid, p_code text|t|t|t|f
+FN|verify_transfer_challenge|p_case uuid, p_party text, p_purpose text, p_code text|t|t|t|f
+FN|welcome_credit_available|target_user uuid|t|t|t|f
+FN|write_ai_operation_log|p_user uuid, p_feature text, p_audience text, p_prompt_hash text, p_answer_hash text, p_retrieval_slice_ids text[], p_retrieval_sources text[], p_model text, p_model_version text, p_provider text, p_byok boolean, p_citation_coverage numeric, p_claim_count integer, p_refused boolean, p_spend_id uuid, p_meta_probe boolean, p_canary text, p_refusal_class text|t|t|t|f
+FN|write_audit|p_action text, p_target_user_id uuid, p_target_type text, p_target_id text, p_reason text, p_before jsonb, p_after jsonb, p_was_destructive boolean, p_was_reversible boolean, p_user_notified boolean, p_actor_id uuid|t|t|t|f

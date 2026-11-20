@@ -1,0 +1,82 @@
+[
+ {
+  "seed": "rv10-gap-town-none-0",
+  "crim": [
+   "Smuggling operation",
+   "Underground network"
+  ],
+  "storedN": 61,
+  "servedN": 59,
+  "servedTs": "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,39,40,41,42,43,44,45,47,48,49,50,51,52,53,54,55,56,57,58,59,60",
+  "gone": [
+   "{\"causes\":[{\"source\":\"baseChance\",\"effect\":\"20% likelihood\",\"reason\":\"Base chance for this tier/category was 20%.\"},{\"source\":\"terrain.riverside\",\"effect\":\"context\",\"reason\":\"Selection occurred in a riverside setting.\"}],\"downstreamEffects\":[{\"target\":\"publicOrder\",\"effect\":\"eroded\"}],\"targetType\":\"",
+   "{\"causes\":[{\"source\":\"faction.thieves'_guild\",\"effect\":\"pulled in\",\"reason\":\"Thieves' Guild had enough power + the right archetype to demand \\\"Underground network\\\" as an institutional ally.\"}],\"downstreamEffects\":[],\"targetType\":\"institution\",\"targetId\":\"institution.underground_network\",\"step\":\"fac"
+  ],
+  "keysOfStep": [
+   "causes",
+   "downstreamEffects",
+   "targetType",
+   "targetId",
+   "step",
+   "result",
+   "ts"
+  ]
+ },
+ {
+  "seed": "rv10-gap-city-none-0",
+  "crim": [
+   "Multiple criminal factions",
+   "Front businesses",
+   "Whisper market"
+  ],
+  "storedN": 115,
+  "servedN": 112,
+  "servedTs": "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114",
+  "gone": [
+   "{\"causes\":[{\"source\":\"baseChance\",\"effect\":\"54% likelihood\",\"reason\":\"Base chance for this tier/category was 54%.\"},{\"source\":\"exclusiveGroup.criminalPower\",\"effect\":\"won the group seat\",\"reason\":\"One criminalPower seat: it fills whenever any candidate would have, and goes to one of them in proporti",
+   "{\"causes\":[{\"source\":\"baseChance\",\"effect\":\"75% likelihood\",\"reason\":\"Base chance for this tier/category was 75%.\"},{\"source\":\"terrain.mountain\",\"effect\":\"context\",\"reason\":\"Selection occurred in a mountain setting.\"}],\"downstreamEffects\":[{\"target\":\"publicOrder\",\"effect\":\"eroded\"}],\"targetType\":\"in",
+   "{\"causes\":[{\"source\":\"baseChance\",\"effect\":\"6% likelihood\",\"reason\":\"Base chance for this tier/category was 6%.\"},{\"source\":\"terrain.mountain\",\"effect\":\"context\",\"reason\":\"Selection occurred in a mountain setting.\"}],\"downstreamEffects\":[{\"target\":\"publicOrder\",\"effect\":\"eroded\"}],\"targetType\":\"inst"
+  ],
+  "keysOfStep": [
+   "causes",
+   "downstreamEffects",
+   "targetType",
+   "targetId",
+   "step",
+   "result",
+   "ts"
+  ]
+ },
+ {
+  "seed": "rv10-gap-metropolis-occupied-0",
+  "crim": [
+   "Smuggling network",
+   "Thieves' guild (powerful)",
+   "Front businesses",
+   "Underground network",
+   "Whisper market",
+   "Assassins' guild"
+  ],
+  "storedN": 171,
+  "servedN": 164,
+  "servedTs": "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,96,97,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170",
+  "gone": [
+   "{\"causes\":[{\"source\":\"baseChance\",\"effect\":\"100% likelihood\",\"reason\":\"Base chance for this tier/category was 100%.\"},{\"source\":\"terrain.hills\",\"effect\":\"context\",\"reason\":\"Selection occurred in a hills setting.\"}],\"downstreamEffects\":[{\"target\":\"publicOrder\",\"effect\":\"eroded\"}],\"targetType\":\"instit",
+   "{\"causes\":[{\"source\":\"baseChance\",\"effect\":\"100% final likelihood\",\"reason\":\"Base chance 100% lifted by ×1.75 from nearby resources + terrain.\"},{\"source\":\"exclusiveGroup.criminalPower\",\"effect\":\"won the group seat\",\"reason\":\"One criminalPower seat: it fills whenever any candidate would have, and go",
+   "{\"causes\":[{\"source\":\"baseChance\",\"effect\":\"100% likelihood\",\"reason\":\"Base chance for this tier/category was 100%.\"},{\"source\":\"terrain.hills\",\"effect\":\"context\",\"reason\":\"Selection occurred in a hills setting.\"}],\"downstreamEffects\":[{\"target\":\"publicOrder\",\"effect\":\"eroded\"}],\"targetType\":\"instit",
+   "{\"causes\":[{\"source\":\"baseChance\",\"effect\":\"83% final likelihood\",\"reason\":\"Base chance 64% lifted by ×1.30 from nearby resources + terrain.\"},{\"source\":\"nearbyResources\",\"effect\":\"×1.30\",\"reason\":\"Nearby resources (grazing_land, ancient_grove, precious_metals…) shifted the selection odds.\"},{\"sourc",
+   "{\"causes\":[{\"source\":\"baseChance\",\"effect\":\"96% final likelihood\",\"reason\":\"Base chance 50% lifted by ×1.93 from nearby resources + terrain.\"},{\"source\":\"nearbyResources\",\"effect\":\"×1.93\",\"reason\":\"Nearby resources (grazing_land, ancient_grove, precious_metals…) shifted the selection odds.\"},{\"sourc",
+   "{\"causes\":[{\"source\":\"baseChance\",\"effect\":\"94% final likelihood\",\"reason\":\"Base chance 54% lifted by ×1.75 from nearby resources + terrain.\"},{\"source\":\"nearbyResources\",\"effect\":\"×1.75\",\"reason\":\"Nearby resources (grazing_land, ancient_grove, precious_metals…) shifted the selection odds.\"},{\"sourc",
+   "{\"causes\":[{\"source\":\"tier.metropolis\",\"effect\":\"power 7\",\"reason\":\"Tier baseline plus tier-scaled archetype multiplier for criminal.\"},{\"source\":\"institutionMix\",\"effect\":\"archetype context\",\"reason\":\"Power derives in part from the institution mix (88 institutions across 10 categories).\"}],\"downstr"
+  ],
+  "keysOfStep": [
+   "causes",
+   "downstreamEffects",
+   "targetType",
+   "targetId",
+   "step",
+   "result",
+   "ts"
+  ]
+ }
+]

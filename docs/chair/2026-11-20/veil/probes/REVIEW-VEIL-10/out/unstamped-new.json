@@ -1,0 +1,12 @@
+{
+ "towns": 80,
+ "crimTotal": 182,
+ "townsWithUnstampedCriminal": 8,
+ "tally": {
+  "Street gang (source coherence_repair)": 2,
+  "Black market (source cascade)": 3,
+  "Underground network (source faction_boost)": 2,
+  "Whisper market (source faction_boost)": 1,
+  "Front businesses (source cascade)": 1
+ }
+}

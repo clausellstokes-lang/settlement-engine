@@ -1,0 +1,19 @@
+TBL|r|application_command_journal|f|t|t
+TBL|r|content_environment_activations|f|t|t
+TBL|r|content_environment_revisions|f|t|t
+TBL|r|content_environments|f|t|t
+TBL|r|content_pack_entry_definitions|f|t|t
+TBL|r|content_pack_version_entries|f|t|t
+TBL|r|content_pack_versions|f|t|t
+TBL|r|content_packs|f|t|t
+TBL|r|custom_content_archive_imports|f|t|t
+TBL|r|custom_content_definitions|f|t|t
+TBL|r|custom_content_revisions|f|t|t
+POL|gallery_comment_reports|Users can read their own gallery comment reports|{public}|SELECT|(auth.uid() = user_id)
+POL|gallery_comments|Comment authors can read their own gallery comments|{public}|SELECT|(auth.uid() = user_id)
+POL|gallery_map_reports|Users can read their own gallery map reports|{public}|SELECT|(auth.uid() = user_id)
+POL|gallery_reactions|Users can read their own gallery reactions|{public}|SELECT|(auth.uid() = user_id)
+POL|gallery_reports|Users can read their own gallery reports|{public}|SELECT|(auth.uid() = user_id)
+POL|gallery_votes|Users can read their own gallery votes|{public}|SELECT|(auth.uid() = user_id)
+POL|saved_maps|Users read own maps|{public}|SELECT|(auth.uid() = user_id)
+POL|settlements|Users read own settlements|{public}|SELECT|(auth.uid() = user_id)

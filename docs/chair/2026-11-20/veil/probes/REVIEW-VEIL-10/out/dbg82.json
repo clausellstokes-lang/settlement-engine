@@ -1,0 +1,74 @@
+{
+ "crim": [
+  {
+   "name": "Smuggling network",
+   "cid": "smuggling_network",
+   "cat": "Criminal",
+   "tags": [
+    "criminal",
+    "smuggling"
+   ]
+  },
+  {
+   "name": "Multiple criminal factions",
+   "cid": "multiple_criminal_factions",
+   "cat": "Criminal",
+   "tags": [
+    "criminal"
+   ]
+  },
+  {
+   "name": "Front businesses",
+   "cid": "front_businesses",
+   "cat": "Criminal",
+   "tags": [
+    "criminal"
+   ]
+  },
+  {
+   "name": "Black market",
+   "cat": "Criminal",
+   "tags": [
+    "criminal",
+    "underground"
+   ]
+  }
+ ],
+ "bm": [
+  {
+   "name": "Blacksmiths (3-10)",
+   "cat": "Crafts"
+  },
+  {
+   "name": "Black market",
+   "cat": "Criminal"
+  }
+ ],
+ "chains": [
+  {
+   "id": "weapons_armor",
+   "label": "Weapons & Armor",
+   "proc": [
+    "Specialized metalworkers",
+    "Blacksmiths (3-10)"
+   ]
+  },
+  {
+   "id": "iron",
+   "label": "Iron & Metalwork",
+   "proc": [
+    "Blacksmith",
+    "Blacksmiths (3-10)"
+   ]
+  },
+  {
+   "id": "black_market",
+   "label": "Black market",
+   "proc": [
+    "Front businesses",
+    "Black market"
+   ]
+  }
+ ],
+ "situ": "Honest trade gets by, but a busy black market undercuts it."
+}

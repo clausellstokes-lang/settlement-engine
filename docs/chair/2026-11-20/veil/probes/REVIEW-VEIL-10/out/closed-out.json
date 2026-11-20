@@ -1,0 +1,140 @@
+{
+ "under dm=false": {
+  "ms": 1839,
+  "leaves": 5798,
+  "hasName": false,
+  "linkLeaves": 5798,
+  "sampleLeaves": [
+   "id=\"s_778db84ee47e72c5\"",
+   "name=\"Cobamul\"",
+   "npcs[].id=\"npc_merchant_guilds_15_40\"",
+   "npcs[].name=\"Sky Woman Puc\"",
+   "npcs[].role=\"First Magnate\"",
+   "npcs[].title=\"the senior guild master\"",
+   "npcs[].category=\"economy\"",
+   "npcs[].physical.age=\"early sixties\"",
+   "npcs[].physical.build=\"lean and wiry\"",
+   "npcs[].physical.clothes=\"clothes that once cost a fortune and now show the miles\"",
+   "npcs[].physical.feature=\"a shaved head with old tattoos\"",
+   "npcs[].influence=\"high\"",
+   "npcs[].institution.key=\"Merchant guilds (15-40)\"",
+   "npcs[].institution.kind=\"house\"",
+   "npcs[].institution.title=\"the senior guild master\"",
+   "npcs[].institution.family=\"Merchant guilds (3-8)\"",
+   "npcs[].institution.veiled=false",
+   "npcs[].memberships[].rank=1",
+   "npcs[].memberships[].power=\"Merchant oligarchy\"",
+   "npcs[].memberships[].share=1",
+   "npcs[].memberships[].veiled=false",
+   "npcs[].personality.flaw=\"greedy\"",
+   "npcs[].personality.tell=\"hums under their breath when concentrating\"",
+   "npcs[].personality.speech=\"Uses long pauses as punctuation, sits comfortably in silenc",
+   "npcs[].personality.dominant=\"forthright\"",
+   "npcs[].personality.modifier=\"perfectionist\"",
+   "npcs[].presentation.behaviour=\"Says little until it is clear what you can offer.\"",
+   "npcs[].presentation.impression=\"Cautious with newcomers, because the work requires it; it i",
+   "npcs[].presentation.disposition=\"cautious\"",
+   "npcs[].id=\"npc_craft_guilds_30_80\"",
+   "npcs[].name=\"Cuauhtemoc May\"",
+   "npcs[].role=\"the senior craft-guild master\"",
+   "npcs[].title=\"the senior craft-guild master\"",
+   "npcs[].category=\"economy\"",
+   "npcs[].physical.age=\"early sixties\"",
+   "npcs[].physical.build=\"willowy\"",
+   "npcs[].physical.clothes=\"last season's fashion maintained with visible determination",
+   "npcs[].physical.feature=\"heavy-lidded eyes that suggest either wisdom or exhaustion\"",
+   "npcs[].influence=\"low\"",
+   "npcs[].institution.key=\"Craft guilds (30-80)\""
+  ],
+  "stability": "Unstable (pervasive organized crime)"
+ },
+ "under dm=true": {
+  "ms": 5413,
+  "leaves": 8390,
+  "hasName": false,
+  "linkLeaves": 5798,
+  "sampleLeaves": [
+   "id=\"s_778db84ee47e72c5\"",
+   "name=\"Cobamul\"",
+   "npcs[].id=\"npc_merchant_guilds_15_40\"",
+   "npcs[].goal.long=\"Make Merchant oligarchy the first name people think of, ahe",
+   "npcs[].goal.short=\"Make sure Imix Kakupacal keeps paying, even if late.\"",
+   "npcs[].goal.intent.long.key=\"expand_influence\"",
+   "npcs[].goal.intent.long.kind=\"competitive\"",
+   "npcs[].goal.intent.long.family=\"POWER\"",
+   "npcs[].goal.intent.long.target.id=\"Thieves' Guild\"",
+   "npcs[].goal.intent.long.target.kind=\"power\"",
+   "npcs[].goal.intent.short.key=\"collect_debt\"",
+   "npcs[].goal.intent.short.kind=\"creditor\"",
+   "npcs[].goal.intent.short.family=\"TIES\"",
+   "npcs[].goal.intent.short.target.id=\"npc_town_crier\"",
+   "npcs[].goal.intent.short.target.kind=\"npc\"",
+   "npcs[].name=\"Sky Woman Puc\"",
+   "npcs[].role=\"First Magnate\"",
+   "npcs[].power=10",
+   "npcs[].title=\"the senior guild master\"",
+   "npcs[].gender=\"female\"",
+   "npcs[].category=\"economy\"",
+   "npcs[].physical.age=\"early sixties\"",
+   "npcs[].physical.build=\"lean and wiry\"",
+   "npcs[].physical.clothes=\"clothes that once cost a fortune and now show the miles\"",
+   "npcs[].physical.feature=\"a shaved head with old tattoos\"",
+   "npcs[].influence=\"high\"",
+   "npcs[].importance=\"pillar\"",
+   "npcs[].institution.key=\"Merchant guilds (15-40)\"",
+   "npcs[].institution.kind=\"house\"",
+   "npcs[].institution.title=\"the senior guild master\"",
+   "npcs[].institution.family=\"Merchant guilds (3-8)\"",
+   "npcs[].institution.veiled=false",
+   "npcs[].memberships[].rank=1",
+   "npcs[].memberships[].power=\"Merchant oligarchy\"",
+   "npcs[].memberships[].share=1",
+   "npcs[].memberships[].veiled=false",
+   "npcs[].personality.flaw=\"greedy\"",
+   "npcs[].personality.tell=\"hums under their breath when concentrating\"",
+   "npcs[].personality.speech=\"Uses long pauses as punctuation, sits comfortably in silenc",
+   "npcs[].personality.dominant=\"forthright\""
+  ],
+  "stability": "Unstable (pervasive organized crime)"
+ },
+ "over dm=false": {
+  "ms": 1336,
+  "leaves": 1,
+  "hasName": false,
+  "linkLeaves": 1,
+  "sampleLeaves": [
+   "name=\"Cobamul\""
+  ],
+  "stability": "Unstable (pervasive organized crime)"
+ },
+ "over dm=true": {
+  "ms": 1238,
+  "leaves": 1,
+  "hasName": false,
+  "linkLeaves": 1,
+  "sampleLeaves": [
+   "name=\"Cobamul\""
+  ],
+  "stability": "Unstable (pervasive organized crime)"
+ },
+ "weight dm=false": {
+  "ms": 2553,
+  "leaves": 1,
+  "hasName": false,
+  "linkLeaves": 1,
+  "sampleLeaves": [
+   "name=\"Cobamul\""
+  ],
+  "stability": "Unstable (pervasive organized crime)"
+ },
+ "weight dm=true": {
+  "ms": 556,
+  "leaves": 1,
+  "hasName": false,
+  "linkLeaves": 1,
+  "sampleLeaves": [
+   "name=\"Cobamul\""
+  ],
+  "stability": "Unstable (pervasive organized crime)"
+ }
+}

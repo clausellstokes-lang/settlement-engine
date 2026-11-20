@@ -1,0 +1,192 @@
+[
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Smuggling network",
+  "dm": false,
+  "inStored": 15,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Smuggling network",
+  "dm": true,
+  "inStored": 15,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Multiple criminal factions",
+  "dm": false,
+  "inStored": 13,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Multiple criminal factions",
+  "dm": true,
+  "inStored": 13,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Front businesses",
+  "dm": false,
+  "inStored": 13,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Front businesses",
+  "dm": true,
+  "inStored": 13,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Black market",
+  "dm": false,
+  "inStored": 22,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-none-18",
+  "birth": "Black market",
+  "dm": true,
+  "inStored": 22,
+  "galleryBirth": [
+   "npcs[58].role=the black marketeer",
+   "npcs[58].title=the black marketeer",
+   "relationships[10].npc2Role=the black marketeer",
+   "relationships[33].npc2Role=the black marketeer",
+   "relationships[34].npc2Role=the black marketeer",
+   "relationships[58].npc1Role=the black marketeer"
+  ],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Smuggling network",
+  "dm": false,
+  "inStored": 12,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Smuggling network",
+  "dm": true,
+  "inStored": 12,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Front businesses",
+  "dm": false,
+  "inStored": 13,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Front businesses",
+  "dm": true,
+  "inStored": 13,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Whisper market",
+  "dm": false,
+  "inStored": 18,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Whisper market",
+  "dm": true,
+  "inStored": 18,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Black market",
+  "dm": false,
+  "inStored": 23,
+  "galleryBirth": [],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ },
+ {
+  "seed": "rv10-sw-city-insurgency-15",
+  "birth": "Black market",
+  "dm": true,
+  "inStored": 23,
+  "galleryBirth": [
+   "npcs[10].role=the black marketeer",
+   "npcs[10].title=the black marketeer",
+   "relationships[2].npc2Role=the black marketeer",
+   "relationships[10].npc1Role=the black marketeer",
+   "relationships[27].npc2Role=the black marketeer",
+   "relationships[30].npc2Role=the black marketeer"
+  ],
+  "galleryNew": [],
+  "galleryDesc": [],
+  "linkBirth": [],
+  "linkNew": []
+ }
+]
