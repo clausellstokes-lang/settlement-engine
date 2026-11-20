@@ -70,7 +70,7 @@ const EXISTING_REL = 'tests/lint/samenessHideable.existingReds.json';
 const HOUSES_REL = 'tests/lint/samenessHideable.houseReadings.json';
 const HAND_REL = 'tests/lint/samenessHideable.handPools.json';
 /** Shrink-only: today's counts on the base. Lower them as rows go; never raise them. */
-const EXISTING_CEILING = 250; // 96 + 154 (SAME-2 brief H unit 1: the hand pools' lines red BY KEY on 1c9673e84; the free-text reds wait for the chair's precise list, 19:12)
+const EXISTING_CEILING = 247; // 96 + 151 (SAME-2 brief H2: the hand rows 154 - 8 un-banked sentence-key lines (unit 2) + 5 free-text reds by word (unit 4); 146 by key, 5 by word, 0 by atom)
 const HAND_CEILING = 44; // 42 + 2 (SAME-2's unit 0, the join's point 84: GOALS' two key lists, read by `.includes`, on the hand list as TIER_ORDER is)
 const COVERT = 'dm-only';
 
@@ -280,11 +280,10 @@ const NOT_LINE_KEYS = new Set(['key', 'type', 'label', 'twinOf', 'needs', 'exclu
   'dominant', 'arcane', 'colour', 'marks']);
 const HOLE = '‹›';
 /**
- * THE FREE-TEXT READING (the chair, 19:12 and 19:29 UTC 2026-11-20): a bare line is read by `CRIME_TEXT_FORMS`. The
- * forms stand (SAME-2 brief H2 unit 1); the reading opens with the bank of its reds (unit 4). Until then a bare line
- * is read only where a caller asks (`words: true`), and the bank holds no free-text red.
+ * THE FREE-TEXT READING (the chair, 19:12 and 19:29 UTC 2026-11-20): every bare line is read by `CRIME_TEXT_FORMS`, and
+ * the bank holds its reds by word (SAME-2 brief H2 unit 4).
  */
-const FREE_TEXT_READ = false;
+const FREE_TEXT_READ = true;
 
 /**
  * A function line's text, read from its OWN SOURCE: its string literals and template quasis in source order, each
