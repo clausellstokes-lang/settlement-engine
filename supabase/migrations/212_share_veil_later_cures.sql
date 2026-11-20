@@ -169,6 +169,48 @@
 --       follow as a dropped tie's do (ruling (5)'s rule): prominentRelationship whole where it is that tie's copy,
 --       pressureSentence where it names that tie's two ends or holds its words, both where such a tie's ends carry no
 --       names (_gallery_veil_second_homes; gallerySecondHomes.js :: withholdTiesOfTheSwept). No signature changes.
+--   (31) THE TRACE BY POSITIVE ACCOUNT (VEIL-19; REVIEW-VEIL-212-FINAL's V7-5, the reader's a07; with VR4 ii-12): a house hidden
+--       whole and renamed keeps nothing of its birth name but the trace's `institution.<snake>` (the record keeps no
+--       alias), so the trace sent it on a Reveal-DM read. On a share that hides any house whole the trace now keeps, as the
+--       two derived lists do (17), only what a NATIVE house still listed accounts for: an `institution.<id>` string of an
+--       entry, a cause or an effect (and an entry's targetId where its targetType is 'institution') is accounted for where
+--       the fold of the id (_gallery_veil_fold) is a listed native house's catalogId or the fold of its name; an entry
+--       that holds one no house accounts for leaves whole (an 'institution' entry with no string id: unsure), a cause or an
+--       effect leaves its list. By identity, with it: an allegiance receipt (step 'people-allegiance') stays only where
+--       its house (the target of each effect 'gains a hidden ally') is accounted for by the same rule, so the handler
+--       line and "The allegiance runs to the town's criminal power" of a hidden house's agent leave with the receipt
+--       (unsure, no house named: it leaves). _gallery_veil_apply hands _gallery_veil_second_homes `whole` (any house
+--       removed whole); gallerySecondHomes.js :: withholdTraceByAccount. No signature changes.
+--   (31b) NO COUNTER TAKEN BEFORE A REMOVAL (VEIL-19; REVIEW-VEIL-10's V10-6, the chair's ruling VR21, with (31)): the trace's
+--       `ts` is the engine's sequence (0..n-1), so every entry the veil withheld left a hole that placed the hidden house's
+--       own selection steps on a Reveal-DM read. On every read the veil runs, each served trace entry that carries `ts`
+--       takes its place in the served list (dense, in served order); the trace holds no other counter
+--       (_gallery_veil_apply, last; gallerySecondHomes.js :: renumberTrace, applyVeil's last). No signature changes.
+--   (32) EVERY FLAG BY THE ENGINE'S RULE (VEIL-19; REVIEW-VEIL-212-FINAL's V7-8, the reader's d06; (15) made whole, and R3): (15)
+--       recomposed five criminal booleans by a keyword list over the open names lowered by lower() (the twin by
+--       toLowerCase(), R3), so a boolean outside the five that only a hidden house raised was sent (hasGuild by a thieves'
+--       guild, hasChurch by a clandestine shrine), and 212's hasGangInfra counted a front business the client's
+--       gangHousesOf does not. Now EVERY boolean of economicState.compound.inst and economicState.safetyProfile.compound.inst
+--       (the only copies a born town stores) that is true stays true only where a house still listed raises it by the
+--       engine's own rule (priorityHelpers.js :: getInstitutionNames: getInstFlags' 32 flags), from ONE table carried by
+--       both engines as one literal (the HOUSE_FLAGS markers; gallerySecondHomes.js :: HOUSE_FLAGS, held to getInstFlags
+--       by execution): a substring of the name, the engine's word-bounded patterns, its live roster, the market by the
+--       house's own tags or the catalogue's market names; the name in the one fold (_gallery_veil_case_fold). A flag the
+--       table does not hold reads false. Never true where it was false. No signature changes.
+--   (33) THE INCOME ROW BY ITS HOUSE, AND THE SHARES RE-DERIVED (VEIL-19, item D; ruling VR6, THE OWNER'S OWN DESIGN; ruling
+--       VR19): (15) withheld the criminal income row only by the two groupings, and the remaining shares then summed to
+--       100 less the criminal share (the gap told it exactly, and `weight` a second way). Now (1) the row is withheld where
+--       either grouping is shut OR any criminal house (category or priorityCategory 'criminal', cardVeil.js ::
+--       isCriminalInstitution) is removed whole; a hand reveal of the house and both groupings restores the true row and
+--       shares. (2) Wherever the veil withholds any income row, the remaining rows' `percentage` is re-derived, for display
+--       only, to sum to exactly 100 by largest remainder from `weight` (doubles, in the rows' order; ties by order; legacy
+--       rows with no usable weight from their stored percentages; nothing left: []); the row's `desc` goes with it. (3) The
+--       income prose rungs incomeMix and criminalLine (at every site of publicProse.blocks, their `@` copies among them) go
+--       with it. (4) `weight` is drawn by no shared page (EconomicsTab.jsx, the PDF's normalizeIncomeSources and the
+--       journal read `percentage`): it is withheld on EVERY non-owner read whatever the veil (the veil's apply; the
+--       unmarked share's gallery read and import, restated here for that alone; the link always runs the veil). Never a
+--       stored change (_gallery_veil_apply, get_gallery_dossier, import_gallery_dossier; gallerySecondHomes.js ::
+--       withholdCriminalIncome, rederiveIncomeShares, withholdIncomeWeights). No signature changes.
 --   (10) A PERSON HIDDEN BY THE PER-PERSON SWITCH IS NOT SENT IN A ROSTER COPY EITHER (COHERENCE-VEIL-6; the fifth
 --       review's V5-4, ruled by the chair): _gallery_apply_member_overrides now reduces each roster copy
 --       (factions[].members[], powerStructure.factions[].members[]) of a person the share does not reveal to the
@@ -1194,7 +1236,6 @@ declare
   ev_pieces text[];
   k text;
   v jsonb;
-  open_names text[];
   pth text[];
   nm text[];
   srch jsonb;
@@ -1202,7 +1243,8 @@ declare
   blank jsonb := '[]';
   raws jsonb := '[]';
   hot boolean := false;
-  listed text[];
+  rules jsonb;         -- VEIL-19 (C): the engine's flag table (HOUSE_FLAGS)
+  hf jsonb;            -- VEIL-19 (C): each house still listed, as the engine's flags read it {n, live, tags}
   fk text;
   kw jsonb;
   births text[] := array(select jsonb_array_elements_text(case when jsonb_typeof(src -> 'births') = 'array' then src -> 'births' else '[]' end));
@@ -1219,6 +1261,8 @@ declare
   cut jsonb;           -- and the ties that name one of them, which leave with them
   cut_unsure boolean;
   pr_cut boolean;
+  whole boolean := coalesce(src -> 'whole' = 'true'::jsonb, false);   -- VEIL-19 (B): this share hides some house whole
+  acc_ids text[];      -- VEIL-19 (B): the identities a listed native house accounts for (its catalogId, its name's fold)
 begin
   -- COHERENCE-VEIL-10 (V7-2): THE COMPOSED HOMES, BY IDENTITY (the section's header states each rule)
   if jsonb_array_length(ties) > 0 then
@@ -1334,10 +1378,7 @@ begin
          where not (jsonb_typeof(r) = 'object' and gone ? public._gallery_veil_str(r -> 'name'))), '[]'));
     end loop;
   end if;
-  if gone = '{}' and cardinality(births) = 0 and cardinality(labels) = 0 then return s; end if;
-  open_names := array(select public._gallery_veil_str(e -> 'name')
-                        from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
-                       where jsonb_typeof(e) = 'object');
+  if gone = '{}' and cardinality(births) = 0 and cardinality(labels) = 0 and not whole then return s; end if;
   -- COHERENCE-VEIL-9: each house still listed as the engine's processor match reads it (stamped: by its identity)
   opens := coalesce((select jsonb_agg(case when jsonb_typeof(e -> 'catalogId') = 'string' and (e ->> 'catalogId') <> ''
                                            then jsonb_build_object('cid', e ->> 'catalogId') else jsonb_build_object('name', public._gallery_veil_str(e -> 'name')) end order by o)
@@ -1395,26 +1436,137 @@ begin
       s := jsonb_set(s, pth, kept);
     end if;
   end loop;
-  -- COHERENCE-VEIL-8, the chair's ruling (b): the engine's five criminal-house booleans, raised at birth by a
-  -- substring of a house's lower-cased name (priorityHelpers.js :: getInstitutionNames, these very lists), read as
-  -- the houses this projection still lists would raise them: a flag only a house removed whole raised reads false
-  -- (never true where it was false)
-  listed := array(select lower(o) from unnest(open_names) o);
+  -- VEIL-19 (item C; REVIEW-VEIL-212-FINAL's V7-8, the reader's d06; the chair's ruling (b), COHERENCE-VEIL-8, made whole):
+  -- EVERY BOOLEAN OF THE ENGINE'S INSTITUTION FLAGS (economicState.compound.inst, economicState.safetyProfile.compound.inst;
+  -- priorityHelpers.js :: getInstitutionNames, stamped once at birth over the roster) reads as the houses this projection
+  -- still lists would raise it BY THE ENGINE'S OWN RULE: a flag that is true stays true only where a listed house raises
+  -- it (never true where it was false). ONE TABLE, the engine's, carried by both engines as the same literal (between the
+  -- two markers below; gallerySecondHomes.js :: HOUSE_FLAGS), held to getInstFlags by execution: for each flag, `kw` (a
+  -- substring of the house's name), `not` (a name it must not match: the timber walls hold no gate), `re` (the engine's
+  -- word-bounded patterns, \b spelled as the ASCII lookarounds both engines run alike), `live` (the engine's live roster:
+  -- a house not ruined, removed, destroyed or a remnant, not stopped by the world pulse), `names` (the market: the house's
+  -- own `tags` where it carries them, else the catalogue's market names). A house's name is its native name (a custom
+  -- house: none) in ONE FOLD, the name search's (_gallery_veil_case_fold; R3: never lower() against toLowerCase()). A flag
+  -- the table does not hold (the record keeps it from something else): withheld, false. gangHousesOf's two words are
+  -- hasGangInfra's (VR4 side finding 3: a front business is no gang house).
+  rules := (
+    -- HOUSE_FLAGS begin
+    '{
+        "hasMilitaryInst": {"kw": ["garrison", "barracks", "guard", "watch", "citadel", "walls", "militia", "mercenary", "navy", "charter hall"]},
+        "hasGarrison": {"kw": ["garrison", "barracks", "professional guard", "multiple garrison"]},
+        "hasMilitia": {"kw": ["citizen militia", "militia", "household levy"]},
+        "hasWatch": {"kw": ["town watch", "city watch", "professional city watch", "village watch"]},
+        "hasMercenary": {"live": true, "kw": ["mercenary company", "mercenary quarter", "hired muscle"], "re": "(?<![a-z0-9_])free company(?![a-z0-9_])"},
+        "hasFreeCompany": {"kw": ["free company hall"]},
+        "hasCharterHall": {"kw": ["adventurers'' charter hall", "adventurers'' guild hall", "multiple adventurers''", "adventurers'' guild", "hireling hall"]},
+        "hasWalls": {"kw": ["walls", "citadel", "gates (if walled)", "inner citadel", "massive walls", "palisade", "earthwork"]},
+        "hasGates": {"live": true, "kw": ["wall", "citadel", "palisade", "earthwork", "inner citadel", "massive walls"], "not": "palisade|earthwork", "re": "(?<![a-z0-9_])gates?(?![a-z0-9_])"},
+        "hasPrison": {"live": true, "re": "prison|stocks|(?<![a-z0-9_])gaol|(?<![a-z0-9_])jail"},
+        "hasCourtSystem": {"live": true, "re": "courthouse|court buildings|democratic assembly|city hall|town hall"},
+        "hasMarket": {"live": true, "names": ["annual fair", "auction house", "caravaneer''s post", "carriers'' guild", "cobbler''s guild", "daily markets", "district markets (5-10)", "fish market", "furrier''s district", "international trade center", "major annual fairs", "market square", "merchant guilds (15-40)", "merchant guilds (3-8)", "merchant guilds (50-100+)", "multiple market squares", "periodic market", "tailor''s guild", "weekly market"]},
+        "hasGuild": {"kw": ["guild", "guild consortium", "guild governance"]},
+        "hasMerchantGuild": {"kw": ["merchant guild", "merchant oligarchy"]},
+        "hasBank": {"kw": ["bank", "money changer", "counting", "stock exchange"]},
+        "hasWarehouse": {"kw": ["warehouse"]},
+        "hasPort": {"re": "(?<![a-z0-9_])(?:port|docks?|harbou?r|shipyard|navy)(?![a-z0-9_])"},
+        "hasNavy": {"kw": ["navy", "major port"]},
+        "hasGranary": {"kw": ["granar"]},
+        "hasHospital": {"live": true, "re": "(?<![a-z0-9_])hospital|(?<![a-z0-9_])healer(?![a-z0-9_])|(?<![a-z0-9_])infirmar|(?<![a-z0-9_])monaster|(?<![a-z0-9_])friary(?![a-z0-9_])"},
+        "hasChurch": {"kw": ["church", "cathedral", "temple", "monastery", "friary", "shrine", "priest", "abbey"]},
+        "hasCathedral": {"kw": ["cathedral", "great cathedral"]},
+        "hasMonastery": {"kw": ["monastery", "friary", "major monasteries"]},
+        "hasMagicInst": {"kw": ["wizard", "mage", "alchemist", "enchant", "arcane", "academy of magic", "scroll scribe", "spellcasting", "hedge wizard"]},
+        "hasMagesGuild": {"kw": ["mages'' guild", "mages district", "enchanting quarter"]},
+        "hasWizardTower": {"kw": ["wizard''s tower", "multiple wizard towers"]},
+        "hasAlchemist": {"kw": ["alchemist shop", "alchemist quarter"]},
+        "hasCriminalInst": {"kw": ["thieves'' guild", "black market", "smuggling", "assassins", "street gang", "front business", "gambling den", "underground city", "multiple criminal"]},
+        "hasThievesGuild": {"kw": ["thieves'' guild chapter", "thieves'' guild (powerful)"]},
+        "hasBlackMarket": {"kw": ["black market", "black market bazaar"]},
+        "hasSmuggling": {"kw": ["smuggling network", "smuggling operation"]},
+        "hasGangInfra": {"kw": ["multiple criminal", "street gang"]}
+      }'
+    -- HOUSE_FLAGS end
+    )::jsonb;
+  hf := coalesce((select jsonb_agg(jsonb_build_object(
+          'n', case when coalesce(e -> 'isCustom' = 'true'::jsonb, false) or coalesce(e -> 'custom' = 'true'::jsonb, false)
+                         or coalesce(e -> 'source' = '"custom"'::jsonb, false)
+                         or jsonb_typeof(e -> 'customDefinitionId') is not distinct from 'string'
+                         or jsonb_typeof(e -> 'customDefinitionCategory') is not distinct from 'string'
+                    then '' else public._gallery_veil_case_fold(public._gallery_veil_str(e -> 'name')) end,
+          'live', not (coalesce(e -> '_worldPulseInactive' = 'true'::jsonb, false)
+                       or (case when jsonb_typeof(e -> 'status') = 'string' and (e ->> 'status') <> ''
+                                then translate(e ->> 'status', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') else 'active' end)
+                          in ('ruined', 'removed', 'destroyed', 'remnant')),
+          'tags', case when jsonb_typeof(e -> 'tags') = 'array' then e -> 'tags' end))
+        from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e
+       where jsonb_typeof(e) = 'object'), '[]');
   for pth in select p from (values (array['economicState', 'compound', 'inst']), (array['economicState', 'safetyProfile', 'compound', 'inst'])) v(p) loop
     if jsonb_typeof(s #> pth) = 'object' then
-      for fk, kw in select * from jsonb_each('{
-          "hasCriminalInst": ["thieves'' guild", "black market", "smuggling", "assassins", "street gang", "front business", "gambling den", "underground city", "multiple criminal"],
-          "hasThievesGuild": ["thieves'' guild chapter", "thieves'' guild (powerful)"],
-          "hasBlackMarket": ["black market", "black market bazaar"],
-          "hasSmuggling": ["smuggling network", "smuggling operation"],
-          "hasGangInfra": ["street gang", "multiple criminal factions", "front business"]}'::jsonb) loop
-        if (s #> pth) -> fk = 'true'::jsonb
-           and not exists (select 1 from unnest(listed) l, jsonb_array_elements_text(kw) w where position(w in l) > 0) then
+      for fk in select z.k from jsonb_each(s #> pth) z(k, x) where z.x = 'true'::jsonb loop
+        kw := rules -> fk;
+        if kw is null or not exists (
+            select 1 from jsonb_array_elements(hf) h
+             where (not coalesce(kw -> 'live' = 'true'::jsonb, false) or (h -> 'live') = 'true'::jsonb)
+               and ((exists (select 1 from jsonb_array_elements_text(case when jsonb_typeof(kw -> 'kw') = 'array' then kw -> 'kw' else '[]' end) w
+                              where position(w in h ->> 'n') > 0)
+                     and not coalesce((h ->> 'n') ~ (kw ->> 'not'), false))
+                    or coalesce((h ->> 'n') ~ (kw ->> 're'), false)
+                    or (kw ? 'names' and case when jsonb_typeof(h -> 'tags') = 'array'
+                                             then (h -> 'tags') ? 'market' or ((h -> 'tags') ? 'guild' and (h -> 'tags') ? 'trade')
+                                             else exists (select 1 from jsonb_array_elements_text(kw -> 'names') m where m = h ->> 'n') end))) then
           s := jsonb_set(s, pth || fk, 'false'::jsonb);
         end if;
       end loop;
     end if;
   end loop;
+  -- VEIL-19 (item B; REVIEW-VEIL-212-FINAL's V7-5, the reader's a07): THE TRACE BY POSITIVE ACCOUNT. A renamed house hidden
+  -- whole keeps nothing of its birth name but the trace's `institution.<snake>` (its record keeps no alias), so the name
+  -- search cannot find it there. On a share that hides any house whole, the trace keeps what a NATIVE house still listed
+  -- accounts for, as the two lists do: an `institution.<id>` (any string of an entry, a cause or an effect that begins
+  -- so; an entry's targetId where its targetType is 'institution') is accounted for where the fold of the id
+  -- (_gallery_veil_fold, the engine's fold of a name into its identity) is a listed native house's catalogId or the fold
+  -- of its name. An entry that holds one no listed house accounts for leaves whole (and an 'institution' entry whose
+  -- targetId is not a string: unsure); a cause or an effect that holds one leaves its list. WITH IT (VR4 ii-12, by
+  -- identity): an allegiance receipt (step 'people-allegiance' or result 'allegiance': allegiance.js ::
+  -- leaveAllegianceReceipts) stays only where its house (each effect 'gains a hidden ally': its target, the house's name)
+  -- is accounted for by the same rule, so a hidden house's handler and the line "The allegiance runs to the town's
+  -- criminal power" leave with it; a receipt that names no house leaves (unsure). gallerySecondHomes.js ::
+  -- withholdTraceByAccount, rule for rule
+  if whole and jsonb_typeof(s -> 'simulationTrace') = 'array' then
+    acc_ids := array(select distinct x
+                       from jsonb_array_elements(case when jsonb_typeof(s -> 'institutions') = 'array' then s -> 'institutions' else '[]' end) e,
+                            unnest(array[case when jsonb_typeof(e -> 'catalogId') = 'string' then e ->> 'catalogId' end,
+                                         public._gallery_veil_fold(public._gallery_veil_str(e -> 'name'))]) x
+                      where jsonb_typeof(e) = 'object' and x is not null and x <> ''
+                        and not (coalesce(e -> 'isCustom' = 'true'::jsonb, false) or coalesce(e -> 'custom' = 'true'::jsonb, false)
+                                 or coalesce(e -> 'source' = '"custom"'::jsonb, false)
+                                 or jsonb_typeof(e -> 'customDefinitionId') is not distinct from 'string'
+                                 or jsonb_typeof(e -> 'customDefinitionCategory') is not distinct from 'string'));
+    s := jsonb_set(s, '{simulationTrace}', coalesce((
+      select jsonb_agg(case when jsonb_typeof(e) <> 'object' then e
+          else e || (select coalesce(jsonb_object_agg(kk, coalesce((
+                       select jsonb_agg(x order by xo) from jsonb_array_elements(e -> kk) with ordinality y(x, xo)
+                        where not exists (select 1 from (select x #>> '{}' as v where jsonb_typeof(x) = 'string'
+                                                         union all
+                                                         select z.value #>> '{}' from jsonb_each(case when jsonb_typeof(x) = 'object' then x else '{}' end) z
+                                                          where jsonb_typeof(z.value) = 'string') w
+                                           where left(w.v, 12) = 'institution.' and not (public._gallery_veil_fold(substr(w.v, 13)) = any(acc_ids)))), '[]')), '{}')
+                       from unnest(array['causes', 'downstreamEffects']) kk where jsonb_typeof(e -> kk) = 'array') end order by o)
+        from jsonb_array_elements(s -> 'simulationTrace') with ordinality x(e, o)
+       where not (jsonb_typeof(e) = 'object' and (
+               exists (select 1 from jsonb_each(e) z
+                        where z.key not in ('causes', 'downstreamEffects') and jsonb_typeof(z.value) = 'string'
+                          and (left(z.value #>> '{}', 12) = 'institution.' or (z.key = 'targetId' and coalesce(e -> 'targetType' = '"institution"'::jsonb, false)))
+                          and not (public._gallery_veil_fold(case when left(z.value #>> '{}', 12) = 'institution.' then substr(z.value #>> '{}', 13)
+                                                                  else z.value #>> '{}' end) = any(acc_ids)))
+               or (coalesce(e -> 'targetType' = '"institution"'::jsonb, false) and jsonb_typeof(e -> 'targetId') is distinct from 'string')
+               or ((coalesce(e -> 'step' = '"people-allegiance"'::jsonb, false) or coalesce(e -> 'result' = '"allegiance"'::jsonb, false))
+                   and not coalesce((select bool_and(jsonb_typeof(d -> 'target') = 'string'
+                                                     and public._gallery_veil_fold(case when left(d ->> 'target', 12) = 'institution.' then substr(d ->> 'target', 13)
+                                                                                        else d ->> 'target' end) = any(acc_ids))
+                                       from jsonb_array_elements(case when jsonb_typeof(e -> 'downstreamEffects') = 'array' then e -> 'downstreamEffects' else '[]' end) d
+                                      where jsonb_typeof(d) = 'object' and d -> 'effect' = '"gains a hidden ally"'::jsonb), false))))), '[]'));
+  end if;
   -- COHERENCE-VEIL-10 (V7-1, V7-6): THE WHOLE TEXT IS ASKED FIRST, once: the strings and keys of the projection that
   -- hold a hidden name (_gallery_veil_name_hits). None, and none of the three rules below nor the walk has anything to
   -- find (they only ever shorten the document), so none runs: a town that names no hidden house costs one search.
@@ -1548,6 +1700,19 @@ declare
   kind text;
   g text;
   src jsonb;
+  -- VEIL-19 (item D): the income rows before the veil, a criminal house removed whole, and the re-derivation's working values
+  n0 int := case when jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,incomeSources}') = 'array'
+                 then jsonb_array_length(s #> '{economicState,incomeSources}') end;
+  crim_gone boolean := false;
+  inc jsonb;
+  use_w boolean;
+  bas float8[];
+  tot float8;
+  bv float8;
+  q float8[];
+  sh int[];
+  give int;
+  ix int;
 begin
   -- X-21e: a card-hidden house goes whole only when the data puts it in the class.
   -- (set-based, the review's F5: one pass, never a growing object rebuilt per house)
@@ -1565,12 +1730,16 @@ begin
            -- COHERENCE-VEIL-10 (V7-9): the label of each house removed whole that has no name
            coalesce((select jsonb_agg(distinct card ->> 'label') from h
                       where house and public._gallery_veil_str(card -> 'name') = '' and public._gallery_veil_str(card -> 'label') <> ''), '[]'),
+           -- VEIL-19 (item D): a CRIMINAL house removed whole (cardVeil.js :: isCriminalInstitution: its category or
+           -- priorityCategory is 'criminal'; A-Z lowered, the same answer as toLowerCase for that word)
+           coalesce((select bool_or(translate(public._gallery_veil_str(card -> 'category'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal'
+                                    or translate(public._gallery_veil_str(card -> 'priorityCategory'), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = 'criminal') from h where house), false),
            fields || jsonb_build_object('institution', coalesce(fields -> 'institution', '{}') || coalesce((
              select jsonb_object_agg(q.id, (select jsonb_agg(distinct f) from (
                  select jsonb_array_elements_text(coalesce(fields #> array['institution', q.id], '[]')) f
                  union select unnest(array['description', 'function', 'services', 'people'])) u))
                from (select distinct id from h where not house) q), '{}'))
-      into gone_ids, gone_houses, gone_births, gone_labels, fields;
+      into gone_ids, gone_houses, gone_births, gone_labels, crim_gone, fields;
     if fields -> 'institution' = '{}' then fields := fields - 'institution'; end if;
   end if;
 
@@ -1628,7 +1797,7 @@ begin
   end if;
 
   -- V5-1: each second home goes with the eye that governs its source
-  s := public._gallery_veil_second_homes(s, src || jsonb_build_object('births', gone_births, 'labels', gone_labels), gone_houses);
+  s := public._gallery_veil_second_homes(s, src || jsonb_build_object('births', gone_births, 'labels', gone_labels, 'whole', gone_ids <> '{}'), gone_houses);
 
   -- groupings last
   foreach g in array groupings loop
@@ -1637,12 +1806,68 @@ begin
   -- COHERENCE-VEIL-8, the chair's ruling (c): the criminal income row is built from what those groupings hide (its
   -- label from the criminal houses' list, safetyProfile.criminalInstitutions; its sentence carries the capture
   -- figure, safetyProfile.blackMarketCapture): where either grouping is shut it is withheld whole
-  -- (gallerySecondHomes.js :: withholdCriminalIncome)
-  if groupings && array['block:defense.criminalStructure', 'block:power.criminalUnderside']
+  -- (gallerySecondHomes.js :: withholdCriminalIncome). VEIL-19 (item D, THE INCOME ROW BY ITS HOUSE): and where any
+  -- criminal house is removed whole, whatever the groupings (a hand reveal of the house and both groupings restores it)
+  if (groupings && array['block:defense.criminalStructure', 'block:power.criminalUnderside'] or crim_gone)
      and jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,incomeSources}') = 'array' then
     s := jsonb_set(s, '{economicState,incomeSources}', coalesce((select jsonb_agg(e order by o)
       from jsonb_array_elements(s #> '{economicState,incomeSources}') with ordinality x(e, o)
      where not (jsonb_typeof(e) = 'object' and coalesce(e -> 'isCriminal' = 'true'::jsonb, false))), '[]'));
+  end if;
+  -- VEIL-19 (item D; ruling VR6, THE OWNER'S OWN DESIGN; ruling VR19): THE SHARES RE-DERIVED, FOR DISPLAY ONLY. Wherever the
+  -- veil has withheld any income row (fewer than `n0`), the remaining rows' `percentage` is re-derived to sum to exactly 100
+  -- by LARGEST REMAINDER from `weight` (weight / the remaining weights' sum x 100; the floors; then one more to each of the
+  -- largest remainders, ties by the rows' order); where any remaining row carries no usable weight (a JSON number from 0 to
+  -- 10^12), from the stored percentages so (legacy, scaled); a sum of 0 shares equally; nothing left: []. Doubles, in the
+  -- rows' order, as JavaScript computes them. The income prose rungs that carry the criminal income (incomeMix,
+  -- criminalLine, at every site of publicProse.blocks, their `@` copies among them) go with it. AND ON EVERY READ THE VEIL
+  -- RUNS: each row's `weight` is withheld (no shared page draws it; VR19: a share is re-derived or withheld, never sent raw).
+  -- gallerySecondHomes.js :: rederiveIncomeShares, rule for rule
+  if n0 is not null and jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,incomeSources}') = 'array' then
+    inc := s #> '{economicState,incomeSources}';
+    if jsonb_array_length(inc) < n0 then
+      select coalesce(bool_and(case when jsonb_typeof(e -> 'weight') = 'number' then (e ->> 'weight')::numeric between 0 and 1e12 else false end), false)
+        into use_w from jsonb_array_elements(inc) e where jsonb_typeof(e) = 'object';
+      bas := array(select case when jsonb_typeof(v) = 'number' and (v #>> '{}')::numeric between 0 and 1e12
+                               then case when public._gallery_veil_num_zero((v #>> '{}')::numeric) then 0::float8 else (v #>> '{}')::float8 end
+                               else 0::float8 end
+                     from jsonb_array_elements(inc) with ordinality x(e, o),
+                          lateral (select case when use_w then e -> 'weight' else e -> 'percentage' end as v) w
+                    where jsonb_typeof(e) = 'object' order by o);
+      tot := 0;
+      foreach bv in array bas loop tot := tot + bv; end loop;
+      if not tot > 0 then bas := array_fill(1::float8, array[cardinality(bas)]); tot := cardinality(bas); end if;
+      q := array(select (b / tot) * 100 from unnest(bas) with ordinality u(b, k) order by k);
+      sh := array(select floor(v)::int from unnest(q) with ordinality u(v, k) order by k);
+      give := 100 - coalesce((select sum(x) from unnest(sh) x), 0);
+      for ix in select k from unnest(q) with ordinality u(v, k) order by v - floor(v) desc, k loop
+        exit when give <= 0;
+        sh[ix] := sh[ix] + 1;
+        give := give - 1;
+      end loop;
+      s := jsonb_set(s, '{economicState,incomeSources}', coalesce((
+        select jsonb_agg(case when jsonb_typeof(e) = 'object' then e || jsonb_build_object('percentage', sh[r::int]) else e end order by o)
+          from (select e, o, count(*) filter (where jsonb_typeof(e) = 'object') over (order by o) as r
+                  from jsonb_array_elements(inc) with ordinality x(e, o)) z), '[]'));
+      if jsonb_typeof(s -> 'publicProse') = 'object' and jsonb_typeof(s #> '{publicProse,blocks}') = 'object' then
+        s := jsonb_set(s, '{publicProse,blocks}', (select coalesce(jsonb_object_agg(k, case when jsonb_typeof(v) = 'object' then v - 'incomeMix' - 'criminalLine' else v end), '{}')
+                                                     from jsonb_each(s #> '{publicProse,blocks}') b(k, v)));
+      end if;
+    end if;
+  end if;
+  if jsonb_typeof(s -> 'economicState') = 'object' and jsonb_typeof(s #> '{economicState,incomeSources}') = 'array' then
+    s := jsonb_set(s, '{economicState,incomeSources}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' then e - 'weight' else e end order by o), '[]')
+                                                          from jsonb_array_elements(s #> '{economicState,incomeSources}') with ordinality x(e, o)));
+  end if;
+  -- VEIL-19 (REVIEW-VEIL-10's V10-6, the chair's ruling VR21, with item B): NO COUNTER TAKEN BEFORE A REMOVAL. The trace's
+  -- `ts` is the engine's own sequence (trace.js :: recordTrace's clock from 0; tracePartition.js re-indexes it 0..n-1),
+  -- and an entry the veil withholds left a hole in it that placed the hidden house's own steps. Re-derived over what is
+  -- served: each served entry that carries `ts` takes its place in the served list (0, 1, 2, ...), on every read the veil
+  -- runs, whatever was withheld (a trace that lost nothing reads as it was stored). The trace holds no other counter (its
+  -- entries' only number is `ts`; causes and effects hold none). gallerySecondHomes.js :: renumberTrace
+  if jsonb_typeof(s -> 'simulationTrace') = 'array' then
+    s := jsonb_set(s, '{simulationTrace}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' and e ? 'ts' then jsonb_set(e, '{ts}', to_jsonb(o - 1)) else e end order by o), '[]')
+                                              from jsonb_array_elements(s -> 'simulationTrace') with ordinality x(e, o)));
   end if;
   return s;
 end $$;
@@ -1883,7 +2108,11 @@ as $$
     r.public_slug,
     r.name,
     r.tier,
-    coalesce(vl.v -> 'body', proj.d) as data,
+    -- VEIL-19 (item D (4)): an unmarked share is served as before, but for each income row's `weight` (every non-owner read)
+    coalesce(vl.v -> 'body', case when jsonb_typeof(proj.d -> 'economicState') = 'object' and jsonb_typeof(proj.d #> '{economicState,incomeSources}') = 'array'
+              then jsonb_set(proj.d, '{economicState,incomeSources}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' then e - 'weight' else e end order by o), '[]')
+                                                                         from jsonb_array_elements(proj.d #> '{economicState,incomeSources}') with ordinality x(e, o)))
+              else proj.d end) as data,
     r.published_at,
     r.updated_at,
     r.view_count,
@@ -2031,7 +2260,11 @@ as $$
     s.id,
     s.name,
     s.tier,
-    coalesce(vl.v -> 'body', proj.d) as data
+    -- VEIL-19 (item D (4)): an unmarked share is served as before, but for each income row's `weight` (every non-owner read)
+    coalesce(vl.v -> 'body', case when jsonb_typeof(proj.d -> 'economicState') = 'object' and jsonb_typeof(proj.d #> '{economicState,incomeSources}') = 'array'
+              then jsonb_set(proj.d, '{economicState,incomeSources}', (select coalesce(jsonb_agg(case when jsonb_typeof(e) = 'object' then e - 'weight' else e end order by o), '[]')
+                                                                         from jsonb_array_elements(proj.d #> '{economicState,incomeSources}') with ordinality x(e, o)))
+              else proj.d end) as data
   from public.settlements s
   cross join lateral (
     select case

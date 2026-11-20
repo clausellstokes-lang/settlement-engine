@@ -70,7 +70,7 @@ import { factionIdFromName } from '../../lib/entities.js';
 import { cardHouseOf } from '../people/cardPowers.js';
 import { brokerageLegalityOf } from '../../data/informationBrokerageTuning.js';
 import { isCriminalInstitution, isClandestineInstitution, isHideableHouse } from '../people/cardVeil.js';
-import { secondHomeSources, withholdCovertCopies, withholdCriminalIncome, withholdImpression, withholdSecondHomes } from './gallerySecondHomes.js';
+import { rederiveIncomeShares, renumberTrace, secondHomeSources, withholdCovertCopies, withholdCriminalIncome, withholdImpression, withholdIncomeWeights, withholdSecondHomes } from './gallerySecondHomes.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {{ address: string, hidden: boolean }} VeilDelta */
@@ -616,6 +616,9 @@ function dropField(card, kind, field) {
  */
 export function applyVeil(publicSettlement, veil) {
   const s = /** @type {Rec} */ (deepClone(isRec(publicSettlement) ? publicSettlement : {}));
+  // VEIL-19 (item D): the income rows the projection holds before the veil (a row withheld re-derives the shares)
+  const econ0 = recAt(s, 'economicState');
+  const incomeBefore = econ0 && Array.isArray(econ0.incomeSources) ? econ0.incomeSources.length : null;
   const entries = [...(veil || [])];
   const hidden = entries.filter(a => isHideable(a));
   /** @type {Set<string>} field addresses a class switch must spare */
@@ -661,6 +664,8 @@ export function applyVeil(publicSettlement, veil) {
   const goneBirths = new Set();
   /** @type {Set<string>} the label of each house removed whole that has no name: its label is its name (COHERENCE-VEIL-10, V7-9) */
   const goneLabels = new Set();
+  /** VEIL-19 (item D): a criminal house (isCriminalInstitution) is removed whole */
+  let criminalGone = false;
   if (cardHides.size) {
     for (const inst of cardsOf(s, 'institution')) {
       const id = instKind.idOf(inst);
@@ -670,6 +675,7 @@ export function applyVeil(publicSettlement, veil) {
         if (str(inst.name)) goneHouses.add(str(inst.name));
         if (str(inst.catalogId)) goneBirths.add(str(inst.catalogId));
         if (!str(inst.name) && str(inst.label)) goneLabels.add(str(inst.label));
+        if (isCriminalInstitution(inst)) criminalGone = true;
         continue;
       }
       if (!fields.has('institution')) fields.set('institution', new Map());
@@ -754,11 +760,15 @@ export function applyVeil(publicSettlement, veil) {
   }
 
   // V5-1: each second home goes with the eye that governs its source.
-  withholdSecondHomes(s, sources, goneHouses, cardsOf(s, 'institution').map(i => str(i.name)), houseEyes, goneBirths, goneLabels);
+  withholdSecondHomes(s, sources, goneHouses, houseEyes, goneBirths, goneLabels, goneIds.size > 0);
 
   // Groupings last (a tab remover sees the cards already trimmed).
   for (const g of groupings) GROUPING_REMOVERS[g](s);
-  withholdCriminalIncome(s, groupings);
+  withholdCriminalIncome(s, groupings, criminalGone);
+  // VEIL-19 (item D; VR6, VR19): the shares re-derived where a row went; `weight` withheld on every read
+  rederiveIncomeShares(s, incomeBefore);
+  // VEIL-19 (V10-6, ruling VR21): no counter taken before a removal: the trace's `ts`, dense in served order
+  renumberTrace(s);
   // THE VEIL ON STRINGS (STYLE-RULINGS-2 B10(a), SW-B7b item 2): a block hidden here drops the
   // rungs the owner's save shipped for it as TEXT, so the owner's later toggle needs no re-save.
   dropVeiledPublicProse(s, groupings);
@@ -1246,7 +1256,8 @@ export function curateModelFor(publicSettlement, deltas) {
  */
 export function projectShareVeil(publicSettlement, memberOverrides) {
   const { marked, deltas } = readShareVeil(memberOverrides);
-  if (!marked) return publicSettlement;
+  // VEIL-19 (item D (4)): an unmarked share is served as before, but for each income row's `weight` (every non-owner read)
+  if (!marked) return withholdIncomeWeights(publicSettlement);
   return applyVeil(publicSettlement, resolveVeil(defaultVeilFor(publicSettlement), deltas));
 }
 

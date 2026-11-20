@@ -1,0 +1,38 @@
+B, C, D RED (VEIL-19's builder, briefs/SUB-BRIEF-BCD.md). Each item's new arm of tests/security/galleryVeilHandRows.pglite.test.js
+run on THE BASE'S BYTES (a copy of `git archive bedd5a392`, whose code is byte-equal to 2d92ddde5, with the arm's file put in;
+pglite chain of every migration on disk; gallery, party link, import and the client's twin; Reveal DM off and on). The reader's
+acceptance run (REVIEW-VEIL-7 run-all.sh) at the base: exit 1, a07 and d06 the only FAIL rows, 35 of 37, the library's 15 hand
+rows server against twin all equal (the library's hand rows only, not born towns: VR15).
+
+B  "B THE TRACE BY POSITIVE ACCOUNT": RED at the base, 114 sends or losses (the reader's renamed hidden house, born Smuggling
+   network, now The Velvet Hand, unstamped and stamped: its trace id as a target, a cause and an effect, a bare and an id-less
+   institution entry, and the hidden house's allegiance receipts with their handler and power lines, on the Reveal-DM gallery,
+   import and twin). The acceptance row a07 at the base: dm/gallery and dm/import `simulationTrace[0].targetId` =
+   "institution.smuggling_network", `causes[0].reason` "smuggling network absorbed rivals".
+   VR4 ii-12 MEASURED FIRST (born towns, measure/bcd-born.probe.jsx, 48 births, both shapes, Reveal DM on): IT SHIPS at the
+   base: on the 17 towns that hide a house whole, 35 allegiance receipts whose house is hidden whole reach every Reveal-DM read
+   (gallery, import, twin; default veil and every eye shut alike), each with its handler line (35) and 10 with "The allegiance
+   runs to the town's criminal power" (the house's own line and the gate's cause already went with the name search).
+
+B2 (the seventh chair's two additions to B, 00:53 UTC: V10-6 with RULING VR21, and V10-5), the NEXT commit after B:
+   V10-6 "B (V10-6, ruling VR21) NO COUNTER TAKEN BEFORE A REMOVAL": RED at the base's bytes, 3 holes (dm gallery, import, twin:
+   served ts [0, 2, 3, 4, 5, 6], the hidden house's own step 1 a hole). Born (measure/v106-born.probe.jsx, the 48 births and
+   the reader's repro seed rv10-gap-town-none-0, both shapes, the default veil and every eye shut, Reveal DM on; base chain and
+   twin): 216 of 216 reads that hide a house whole have a hole in the served `ts` (gallery 72, import 72, twin 72; 18 towns);
+   the reader's repro: 59 of 61 entries served, 21 holes in ts.
+   V10-5 MEASURED FIRST, NOT BUILT (out/V105-measure.txt): see BCD-born.txt.
+
+C  "C EVERY FLAG BY getInstFlags": RED at the base, 880 sends or losses (no table in 212 and none in the twin; the reader's town-d:
+   hasGuild and hasChurch sent true; every flag outside the five sent true where no listed house raises it; R3: the open
+   names were lowered by lower() on the server and toLowerCase() in the twin (an open THİEVES' GUILD CHAPTER); a front business kept
+   hasGangInfra true beside a hidden street gang (VR4 side finding 3); a ruined prison; a flag the engine does not write).
+   The acceptance row d06 at the base: veil/gallery `economicState.compound.inst.hasGuild` and `.hasChurch` true (16 hits in 8
+   responses).
+
+D  "D THE INCOME ROW BY ITS HOUSE": RED at the base, 383 sends or losses (a criminal row whose words name no house, "Shadow
+   Economy (untaxed)", sent where its criminal house is hidden whole and both groupings are open; the remaining shares summing
+   to 100 less the criminal share; `weight` sent on every read, the unmarked share's too; the income prose rungs and their @
+   copies sent where the row is withheld). Born (measure/bcd-born.probe.jsx, base chain and twin): on the 8 towns of 48 that
+   carry a criminal row, every read that withholds it (128 of 768 per veil: 8 towns x 2 shapes x Reveal DM off and on x 4
+   reads, both veils) serves shares summing to 75, 82, 83, 84, 86 or 89, the gap equal to the criminal share in 128 of 128
+   (both engines); `weight` is sent on 768 of 768 reads per veil.
