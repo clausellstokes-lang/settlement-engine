@@ -2,12 +2,13 @@
 
 Written by PLACE-1, `date -u` at writing: 2026-11-20T16:38Z. Read `BRIEF-BUILD-COMMON.md` beside this file FIRST and WHOLE (the how, the rules, the green), then `safetyDesc-MEASURE.md` WHOLE (your design: every row, every reader, every proof owed), then `src/generators/safetyProfile.js` and `src/generators/safetyLineTruth.js` WHOLE.
 
-## What the chair has ruled (16:30 UTC: "THIS IS YOUR FIRST UNIT"; the lines read by the chair: PENDING: amended here the moment the chair answers PLACE-LINES safetyDesc d4e30cfec)
+## What the chair has ruled (16:30 UTC: "THIS IS YOUR FIRST UNIT"; the lines READ AND APPROVED by the chair at 16:47 UTC: all 78 rows of §D, with the four calls below and one rewording)
 Build `safetyDesc-MEASURE.md` §D and §F exactly, with these amendments:
 1. **Drop the watch row 4** ("The watch walks the main streets by night; …", `excludes: ['force walks by day']`): a night claim from a negation is not a declared fact.
 2. **No new atom**: the `citadel` and `force walks by night` rows stay out; `src/domain/facts/factVocabulary.js` is untouched.
 3. **The city's Unsafe line is IN** (its four slots, §D 7).
-4. **The key**: the active stream's step-qualified seed, as `safetyProfile.js :: voiceOf` already keys in the same file (`config._seed` is absent at the writer): `` `${seed}::safetyProfile:safetyDesc:<slot>` ``; a falsy seed prints today's sentence in every slot (canonical at zero).
+4. **The rewording (the chair's)**: walls row 4 loses a material the record does not hold; it reads exactly "The walls keep the outside out; the trouble there is starts within." (its needs and excludes unchanged).
+5. **The key**: the active stream's step-qualified seed, as `safetyProfile.js :: voiceOf` already keys in the same file (`config._seed` is absent at the writer): `` `${seed}::safetyProfile:safetyDesc:<slot>` ``; a falsy seed prints today's sentence in every slot (canonical at zero).
 
 ## Files you own (and no other)
 - NEW `src/data/safetyDescLines.js`: the pools of §D as frozen declared rows, index 0 today's sentence; nothing else in it but the rows and their pool names.
