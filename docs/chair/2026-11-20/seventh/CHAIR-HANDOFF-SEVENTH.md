@@ -1632,3 +1632,14 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   follow. The chair's push of this record waits on that run, so that the hook's load does not move a budgeted test.
   (4) VEIL-22, one line: R3 builds `safety.economicDragDesc` (by attribution), R5 its composed prose copy; VR42's
   rule (the governing row never removed while its name stays) goes into R3's launch and born test.
+- 05:20 UTC · **MIGRATION 213 IS CLEAR AT ITS FINAL TEXT.** REVIEW-GRANTS-1, by the diff fac781e7e..a18bf94bc
+  (`lane/sec-grants-2-2026-11-20`): "213 CLEAR at 22f694366d65aa174f049a8f966321ae16aee3bec9ecd837be684d04240a740c": every
+  changed line of 213 is a comment (stripped, identical to the text cleared at c87283ac); `CHECK_213.sql`'s statement is
+  byte-identical (its header alone moved); the new `@rollback` text is true and states no head; the rows re-measured:
+  before 213 `21 · 0 · 0 · 1 · 0 · 0 · 21` (`21 · 0 · 0 · 0 · 0 · 0 · 21` where the two ticket lines were run by hand),
+  after `0 · 0 · 0 · 0 · 0 · 5 · 0`, as the note says. Its addendum at 6c089aed1 (`lane/review-grants-1-2026-11-20`).
+  FOR THE CLOSE: 213 at a18bf94bc with its walker, `CHECK_213.sql` and the deploy note; the reader's branch (its review
+  and `review/rollback-213.sql`); the patch for the veil's two head pins (`out213-veil/213-registers-on-veil21.patch`);
+  F3 and F4 after the deploy. ALSO READ: NAMES-1 is building (four builders, one per family of composers; locally,
+  on its 720 towns: full names repeated in one sentence 12,054 to 0; bare power labels in sentences 20,449 to 5,898, the
+  rest its builders' families; nothing pushed yet).
