@@ -1191,7 +1191,7 @@ export const GOAL_RESERVE_LINES = Object.freeze({
     rival_enemy: Object.freeze({
       short: cell([
         "Keep out of {other}'s way this season, and get on with their own work in peace.",
-        "Learn one thing from {other} this season, without letting {other} see it.",
+        "Quietly learn one thing this season from watching {other} at work.",
       ]),
       long: cell([
         "Earn {other}'s respect, if never their friendship.",
