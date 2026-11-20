@@ -37,6 +37,6 @@ Calling setState synchronously within an effect body causes cascading renders th
 ✖ 38 problems (0 errors, 38 warnings)
   0 errors and 1 warning potentially fixable with the `--fix` option.
 
-[gate-tail] end:  13:07:58 up  2:13,  0 user,  load average: 10.44, 11.41, 13.45
-[gate-tail] full log: /tmp/gate-tail.12164.log
+[gate-tail] end:  14:35:36 up  3:41,  0 user,  load average: 6.86, 7.78, 8.73
+[gate-tail] full log: /tmp/gate-tail.22446.log
 [gate-tail] exit: 0 (the gate's own status, not a pipe's)

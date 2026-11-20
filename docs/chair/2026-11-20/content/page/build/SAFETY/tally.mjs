@@ -33,7 +33,7 @@ for (const [pool, towns] of Object.entries(pools)) {
     return { size, apart, above: apart && s > law, seat, wave, owed: apart || seat || wave, owner: safetyShownOf(t, 'owner').qualifier, reader: safetyShownOf(t, 'reader').qualifier, rawEqual: safetyShownOf(t).label === (label || null) };
   });
   const n = (f) => rows.filter(f).length;
-  console.log(`${pool} (${rows.length}): apart ${n((r) => r.apart)} (streets above the law ${n((r) => r.above)}, below ${n((r) => r.apart && !r.above)}); seat in criminal hands under a calm word ${n((r) => r.seat)}; crime wave under a calm word ${n((r) => r.wave)}; OWED ${n((r) => r.owed)}; owner line printed ${n((r) => !!r.owner)}; owed but no line ${n((r) => r.owed && !r.owner)}; line but not owed ${n((r) => !r.owed && !!r.owner)}; reader lines ${n((r) => !!r.reader)}; reader label differs from the record ${n((r) => !r.rawEqual)}`);
+  console.log(`${pool} (${rows.length}): apart ${n((r) => r.apart)} (the label above the law ${n((r) => r.above)}, below ${n((r) => r.apart && !r.above)}); seat in criminal hands under a calm word ${n((r) => r.seat)}; crime wave under a calm word ${n((r) => r.wave)}; OWED ${n((r) => r.owed)}; owner line printed ${n((r) => !!r.owner)}; owed but no line ${n((r) => r.owed && !r.owner)}; line but not owed ${n((r) => !r.owed && !!r.owner)}; reader lines ${n((r) => !!r.reader)}; reader label differs from the record ${n((r) => !r.rawEqual)}`);
   console.log(`  by size, apart: ${SIZES.map((z) => `${z} ${rows.filter((r) => r.size === z && r.apart).length}/${rows.filter((r) => r.size === z).length}`).join(' · ')}`);
   for (const [line, c] of tally(rows.filter((r) => r.owner).map((r) => r.owner))) console.log(`  ${String(c).padStart(4)}  ${line}`);
 }
