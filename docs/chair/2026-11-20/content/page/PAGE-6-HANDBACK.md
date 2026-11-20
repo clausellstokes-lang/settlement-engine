@@ -1,9 +1,24 @@
-# PAGE-6's hand-back (PEOPLE AND PLACE). Last written 2026-11-20 17:51 UTC by `date -u`
+# PAGE-6's hand-back (PEOPLE AND PLACE). Last written 2026-11-20 19:05 UTC by `date -u`
 
 A successor (PAGE-8, seated 17:51 by the chair) needs this file and the briefs only: `briefs/BUILDER-RULES.md`,
 `briefs/L2-FINISH.md`, `briefs/L4-FINISH.md`, `briefs/S9-POST.md` (designs: `briefs/L2.md`, `briefs/S-v2.md`). PAGE-6
 integrates; builders (the Agent tool) build. PAGE-5 owns the trouble half: never edit `historyGenerator.js`,
 `historyData.js`, `tensionSideMeanings.js`, `tensionCauses.js`.
+
+## 00. DONE AT THE HAND-OVER ("PAGE-PART", PAGE-6's last)
+
+- L2 MERGED 299f1545d; its doors 5d1829f3f (lighting 3707->3708; wiring census rewritten; `--tighten` ONCE: 0 raised,
+  59 lowered, 0 rows added/dropped, every one in `measures/page-6/pool-dominance-tighten-L2.txt`).
+- S9 MERGED ba7a04c86 (with the no-market gap closed, 75828848a); its door de0d83b64 (lighting 3708->3709; wiring CURRENT).
+- AT de0d83b64: tests/lint 220/220 files, 3271/3271; the units' five test files 19/19. Red/green re-run by PAGE-6: L2 3 failed
+  (3) -> 8 passed (8); S9 5 failed (5) -> 11 passed (11). Base reds not ours (at the lane base too): generatorGoldenMaster,
+  espionageDormancyFence, nameHeldThroughAssembly, worldFactRederive A7, rosterFinalUnderHeldRoster A1 (builders' reads).
+- TWO-TREE CONFINEMENT d448de3a3 (src/tests = the lane base) -> de0d83b64, EXECUTED: golden 525: identical 6, NON-STRING 0,
+  strings 909 = arrivalScene 517 docs; npcs[].secret.what/.stakes 196 (167 docs). Census 720: identical 54, NON-STRING 0,
+  strings 1117 = arrivalScene 654; secret.what/.stakes 230 (171 docs); npcs[].personality.dominant 3 (3 docs: S9's
+  temperament no longer yielding to the new line, as measured). Nothing else moved. Log: scratch `confine-final.log`.
+- For the owner: `OWNER-ARRIVAL-LINES.md` (the 79 lines beside their pools, one paragraph of counts).
+- The builders' worktrees /home/user/wt-p6-l2 and /home/user/wt-p6-s9 are done (merged); the Agent ids in §2 are spent.
 
 ## 0. THE SPLIT (the chair, 17:51)
 
