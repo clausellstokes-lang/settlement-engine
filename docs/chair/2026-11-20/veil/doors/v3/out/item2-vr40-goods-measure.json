@@ -1,0 +1,618 @@
+{
+ "measured": "2026-11-20T04:32:42.929Z",
+ "crimeVocabThroughNormalizeGood": [
+  {
+   "text": "Defence services",
+   "id": "financial_services",
+   "label": "Financial services",
+   "custom": false
+  },
+  {
+   "text": "Criminal trials",
+   "id": "custom.criminal_trials",
+   "label": "Criminal trials",
+   "custom": true
+  },
+  {
+   "text": "Criminal Economy",
+   "id": "custom.criminal_economy",
+   "label": "Criminal Economy",
+   "custom": true
+  },
+  {
+   "text": "smuggling",
+   "id": "custom.smuggling",
+   "label": "smuggling",
+   "custom": true
+  },
+  {
+   "text": "Smuggling & Contraband",
+   "id": "custom.smuggling_contraband",
+   "label": "Smuggling Contraband",
+   "custom": true
+  },
+  {
+   "text": "Contraband goods",
+   "id": "iron",
+   "label": "Iron",
+   "custom": false
+  },
+  {
+   "text": "Smuggling waypoint",
+   "id": "custom.smuggling_waypoint",
+   "label": "Smuggling waypoint",
+   "custom": true
+  },
+  {
+   "text": "Smuggling network",
+   "id": "custom.smuggling_network",
+   "label": "Smuggling network",
+   "custom": true
+  },
+  {
+   "text": "Smuggling operation",
+   "id": "custom.smuggling_operation",
+   "label": "Smuggling operation",
+   "custom": true
+  },
+  {
+   "text": "Safe houses",
+   "id": "custom.safe_houses",
+   "label": "Safe houses",
+   "custom": true
+  },
+  {
+   "text": "Local fence",
+   "id": "custom.local_fence",
+   "label": "Local fence",
+   "custom": true
+  },
+  {
+   "text": "Outlaw shelter",
+   "id": "custom.outlaw_shelter",
+   "label": "Outlaw shelter",
+   "custom": true
+  },
+  {
+   "text": "criminal",
+   "id": "custom.criminal",
+   "label": "criminal",
+   "custom": true
+  },
+  {
+   "text": "black_market",
+   "id": "custom.black_market",
+   "label": "black_market",
+   "custom": true
+  },
+  {
+   "text": "Black market",
+   "id": "custom.black_market",
+   "label": "Black market",
+   "custom": true
+  },
+  {
+   "text": "Fence (word of mouth)",
+   "id": "custom.fence",
+   "label": "Fence",
+   "custom": true
+  },
+  {
+   "text": "Forged documents",
+   "id": "custom.forged_documents",
+   "label": "Forged documents",
+   "custom": true
+  },
+  {
+   "text": "Fencing stolen goods",
+   "id": "custom.fencing_stolen_goods",
+   "label": "Fencing stolen goods",
+   "custom": true
+  },
+  {
+   "text": "Illegal services",
+   "id": "financial_services",
+   "label": "Financial services",
+   "custom": false
+  },
+  {
+   "text": "guild_crime",
+   "id": "custom.guild_crime",
+   "label": "guild_crime",
+   "custom": true
+  },
+  {
+   "text": "Organised Crime",
+   "id": "custom.organised_crime",
+   "label": "Organised Crime",
+   "custom": true
+  },
+  {
+   "text": "Street gang",
+   "id": "custom.street_gang",
+   "label": "Street gang",
+   "custom": true
+  },
+  {
+   "text": "Comprehensive black market",
+   "id": "custom.comprehensive_black_market",
+   "label": "Comprehensive black market",
+   "custom": true
+  },
+  {
+   "text": "slave_trade",
+   "id": "custom.slave_trade",
+   "label": "slave_trade",
+   "custom": true
+  },
+  {
+   "text": "Slave market",
+   "id": "custom.slave_market",
+   "label": "Slave market",
+   "custom": true
+  },
+  {
+   "text": "Slave registration",
+   "id": "custom.slave_registration",
+   "label": "Slave registration",
+   "custom": true
+  }
+ ],
+ "towns": [
+  {
+   "k": 0,
+   "cfg": {
+    "settType": "hamlet"
+   },
+   "hidden": 1,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Ale",
+    "Beer"
+   ],
+   "exports": 5
+  },
+  {
+   "k": 1,
+   "cfg": {
+    "settType": "village",
+    "priorityCriminal": 90
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [],
+   "exports": 5
+  },
+  {
+   "k": 2,
+   "cfg": {
+    "settType": "town"
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Wild honey",
+    "Candles and wax"
+   ],
+   "exports": 11
+  },
+  {
+   "k": 3,
+   "cfg": {
+    "settType": "city",
+    "priorityCriminal": 90
+   },
+   "hidden": 5,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Coin minting",
+    "Wild honey",
+    "Candles and wax",
+    "Glassware",
+    "Books and manuscripts",
+    "Fine metalwork and jewelry",
+    "Quality tools and weapons"
+   ],
+   "exports": 19
+  },
+  {
+   "k": 4,
+   "cfg": {
+    "settType": "metropolis"
+   },
+   "hidden": 6,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Cultural tourism revenue"
+   ],
+   "exports": 5
+  },
+  {
+   "k": 5,
+   "cfg": {
+    "settType": "hamlet",
+    "priorityCriminal": 90
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Wild honey",
+    "Cavalry mounts",
+    "Draft horses"
+   ],
+   "exports": 8
+  },
+  {
+   "k": 6,
+   "cfg": {
+    "settType": "village"
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Wild honey"
+   ],
+   "exports": 5
+  },
+  {
+   "k": 7,
+   "cfg": {
+    "settType": "town",
+    "priorityCriminal": 90
+   },
+   "hidden": 3,
+   "exportsCrime": [],
+   "importsCrime": [
+    "Stolen horses",
+    "Contraband silk and spice"
+   ],
+   "customExports": [
+    "Wild honey",
+    "Candles and wax"
+   ],
+   "exports": 6
+  },
+  {
+   "k": 8,
+   "cfg": {
+    "settType": "city"
+   },
+   "hidden": 3,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Reeds and thatch",
+    "Waterfowl",
+    "Glassware",
+    "Books and manuscripts"
+   ],
+   "exports": 6
+  },
+  {
+   "k": 9,
+   "cfg": {
+    "settType": "metropolis",
+    "priorityCriminal": 90
+   },
+   "hidden": 7,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Wild honey",
+    "Candles and wax",
+    "News and information",
+    "Maps and charts",
+    "Cultural tourism revenue"
+   ],
+   "exports": 19
+  },
+  {
+   "k": 10,
+   "cfg": {
+    "settType": "hamlet"
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [],
+   "exports": 5
+  },
+  {
+   "k": 11,
+   "cfg": {
+    "settType": "village",
+    "priorityCriminal": 90
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [],
+   "exports": 0
+  },
+  {
+   "k": 12,
+   "cfg": {
+    "settType": "town"
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Cavalry mounts",
+    "Draft horses",
+    "Guild-manufactured goods",
+    "Quality tools and weapons"
+   ],
+   "exports": 11
+  },
+  {
+   "k": 13,
+   "cfg": {
+    "settType": "city",
+    "priorityCriminal": 90
+   },
+   "hidden": 7,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Wild honey",
+    "Herbal remedies",
+    "Cultural tourism revenue"
+   ],
+   "exports": 15
+  },
+  {
+   "k": 14,
+   "cfg": {
+    "settType": "metropolis"
+   },
+   "hidden": 8,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "News and information",
+    "Maps and charts",
+    "Cavalry mounts",
+    "Draft horses",
+    "Cultural tourism revenue"
+   ],
+   "exports": 19
+  },
+  {
+   "k": 15,
+   "cfg": {
+    "settType": "hamlet",
+    "priorityCriminal": 90
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [],
+   "exports": 4
+  },
+  {
+   "k": 16,
+   "cfg": {
+    "settType": "village"
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Reeds and thatch",
+    "Waterfowl",
+    "Quality tools and weapons"
+   ],
+   "exports": 9
+  },
+  {
+   "k": 17,
+   "cfg": {
+    "settType": "town",
+    "priorityCriminal": 90
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Wild honey",
+    "Candles and wax"
+   ],
+   "exports": 5
+  },
+  {
+   "k": 18,
+   "cfg": {
+    "settType": "city"
+   },
+   "hidden": 5,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Wild honey",
+    "Candles and wax",
+    "Bows and crossbows"
+   ],
+   "exports": 13
+  },
+  {
+   "k": 19,
+   "cfg": {
+    "settType": "metropolis",
+    "priorityCriminal": 90
+   },
+   "hidden": 6,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Wild honey",
+    "Candles and wax",
+    "Bows and crossbows",
+    "Arrows",
+    "Barrels and containers",
+    "Cultural tourism revenue"
+   ],
+   "exports": 19
+  },
+  {
+   "k": 20,
+   "cfg": {
+    "settType": "hamlet"
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Reeds and thatch",
+    "Waterfowl"
+   ],
+   "exports": 5
+  },
+  {
+   "k": 21,
+   "cfg": {
+    "settType": "village",
+    "priorityCriminal": 90
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Cavalry mounts",
+    "Draft horses"
+   ],
+   "exports": 7
+  },
+  {
+   "k": 22,
+   "cfg": {
+    "settType": "town"
+   },
+   "hidden": 1,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Wild honey",
+    "Candles and wax"
+   ],
+   "exports": 7
+  },
+  {
+   "k": 23,
+   "cfg": {
+    "settType": "city",
+    "priorityCriminal": 90
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Wild honey",
+    "Barrels and containers",
+    "Cultural tourism revenue"
+   ],
+   "exports": 13
+  },
+  {
+   "k": 24,
+   "cfg": {
+    "settType": "metropolis"
+   },
+   "hidden": 6,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Reeds and thatch",
+    "Waterfowl",
+    "Coin minting",
+    "Wild honey",
+    "Candles and wax",
+    "Cultural tourism revenue"
+   ],
+   "exports": 19
+  },
+  {
+   "k": 25,
+   "cfg": {
+    "settType": "hamlet",
+    "priorityCriminal": 90
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [],
+   "exports": 6
+  },
+  {
+   "k": 26,
+   "cfg": {
+    "settType": "village"
+   },
+   "hidden": 0,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Cavalry mounts",
+    "Draft horses"
+   ],
+   "exports": 7
+  },
+  {
+   "k": 27,
+   "cfg": {
+    "settType": "town",
+    "priorityCriminal": 90
+   },
+   "hidden": 3,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Reeds and thatch",
+    "Waterfowl",
+    "Wild honey",
+    "Candles and wax",
+    "Coin minting"
+   ],
+   "exports": 10
+  },
+  {
+   "k": 28,
+   "cfg": {
+    "settType": "city"
+   },
+   "hidden": 6,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Wild honey"
+   ],
+   "exports": 14
+  },
+  {
+   "k": 29,
+   "cfg": {
+    "settType": "metropolis",
+    "priorityCriminal": 90
+   },
+   "hidden": 7,
+   "exportsCrime": [],
+   "importsCrime": [],
+   "customExports": [
+    "Hunting trophies",
+    "Wild honey",
+    "Candles and wax",
+    "News and information",
+    "Maps and charts",
+    "Cultural tourism revenue"
+   ],
+   "exports": 19
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+
+ RUN  v4.1.8 <scratch tree of 97efb7fcf>
+
+ ❯ tests/security/galleryWorldShare.pglite.test.jsx (2 tests | 1 failed) 16107ms
+     × the editor's defaults publish a campaign map: the publish succeeds, the stored snapshot and its sections hold no chronicle, the other sections travel, the chronicle's control is off and not shareable yet, and the gallery read serves no chronicle 1320ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryWorldShare.pglite.test.jsx > VR40 (1): a shared map's world sends no chronicle, and sharing it works (VEIL-DOORS-3) > the editor's defaults publish a campaign map: the publish succeeds, the stored snapshot and its sections hold no chronicle, the other sections travel, the chronicle's control is off and not shareable yet, and the gallery read serves no chronicle
+AssertionError: the publish raised: expected 'World snapshot contains a forbidden p…' to be null // Object.is equality
+
+- Expected:
+null
+
++ Received:
+"World snapshot contains a forbidden private key and cannot be shared"
+
+ ❯ tests/security/galleryWorldShare.pglite.test.jsx:159:120
+    157|         expect(r.is_public || !!screen.queryByText(/World snapshot|can…
+    158|       }, { timeout: 60_000 });
+    159|       expect(screen.queryByText(/World snapshot|cannot be shared|faile…
+       |                                                                                                                        ^
+    160|       expect(control, 'the chronicle\'s control').toEqual({ checked: f…
+    161|     } finally { ROUTE.db = null; }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  04:38:04
+   Duration  17.08s (transform 6.88s, setup 34ms, import 175ms, tests 16.11s, environment 578ms)
+
+exit 1

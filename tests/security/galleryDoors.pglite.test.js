@@ -27,6 +27,11 @@
  *   THE ONE-ROW READ (VEIL-DOORS-2; the chair's condition (a), red at cca49cb8d): the dossier read takes its own row's
  *         tiles by the one tile rule (_gallery_doors_tiles), never the tile rows of every public row; every row and tile
  *         column it sends equals the list's row (the cost rows are in VEIL-DOORS-2-HANDBACK.md).
+ *   VR40 A SHARED MAP'S WORLD SENDS NO CHRONICLE (VEIL-DOORS-3, part (2); red at 4274504b8): a stored world snapshot that
+ *         holds a chronicle (planted past 091's guard, as a test may: what a row may already hold) is served by neither
+ *         get_gallery_map nor get_unlisted_map, its other sections are, its section list loses the key, a stored snapshot
+ *         that is not an object is served as none; the twin (publicWorld, publicWorldSections) agrees. Part (1), the
+ *         share editor and publish_map on a born world, is tests/security/galleryWorldShare.pglite.test.jsx.
  */
 import { describe, it, expect, beforeAll, vi } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -374,6 +379,50 @@ describe('VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4
     const proj = veil.galleryPayloadFor(JSON.parse(JSON.stringify(copy)), { shareDm: false, memberOverrides: overrides });
     const twin = doors.veilChronicle([...before, ...after], { proj, body: g.data, groupings: g.gallery_member_overrides?.$veil?.groupings || [], src: copy, frozen: overrides.$veil });
     expect(canon(twin), 'server equals twin').toBe(canon(g.chronicle));
+  }, ARM_TIMEOUT_MS);
+
+  it('VR40 A SHARED MAP\'S WORLD SENDS NO CHRONICLE (VEIL-DOORS-3): a stored world snapshot holding a chronicle, planted past the guard, is served by neither map read; its other sections are; its section list loses the key; a snapshot that is not an object is served as none; the twin agrees', async () => {
+    const HEADLINE = "Thieves and racketeers are working Rookford's streets in the open.";
+    const SNAP = { schemaVersion: 1, sourceWorldStateSchemaVersion: 1, worldClock: { tick: 3, season: 'spring' },
+      pantheon: [{ deityId: 'aster', name: 'Aster', tier: 'major', seats: 1 }],
+      chronicle: [{ tick: 2, headlines: [HEADLINE], affectedSettlementIds: ['m1'], affectedSettlementNames: ['Rookford'] }] };
+    const SECTIONS = ['worldClock', 'chronicle', 'pantheon'];
+    const NOT_OBJECT = [{ chronicle: [{ headlines: [HEADLINE] }] }];
+    const plant = async (snapshot, sections) => {
+      seq += 1;
+      const slug = `world${seq}`; const link = `worldlink${seq}`;
+      // past 091's trigger guard, which refuses the key today: what an older row (or any path round the guard) may hold
+      await db.exec('alter table public.saved_maps disable trigger trg_saved_maps_world_snapshot_guard;');
+      try {
+        await db.query(`insert into public.saved_maps (id,user_id,name,map_data,is_public,public_slug,share_kind,gallery_share_campaign,gallery_share_world,gallery_world_snapshot,gallery_world_sections,unlisted_slug,visibility)
+          values (gen_random_uuid(),$1,'Realm',$2::jsonb,true,$3,'map_with_campaign',true,true,$4::jsonb,$5::jsonb,$6,'unlisted')`,
+        [OWNER, JSON.stringify({ campaign: { settlementIds: [] } }), slug, JSON.stringify(snapshot), JSON.stringify(sections), link]);
+      } finally { await db.exec('alter table public.saved_maps enable trigger trg_saved_maps_world_snapshot_guard;'); }
+      const read = async (sql, arg) => {
+        await db.exec('set role anon;');
+        try { return (await db.query(sql, [arg])).rows[0].m; } finally { await db.exec('reset role;'); }
+      };
+      // the link read, the guard in place (it writes nothing, so nothing stands in front of it)
+      const u = await read('select public.get_unlisted_map($1) as m', link);
+      // the gallery read bumps the row's view count, so 091's BEFORE UPDATE guard fires on the read itself and a row
+      // holding a chronicle raises there today; held off for the read, as for a row the guard does not refuse
+      await db.exec('alter table public.saved_maps disable trigger trg_saved_maps_world_snapshot_guard;');
+      try { return { g: await read('select public.get_gallery_map($1) as m', slug), u }; } finally {
+        await db.exec('alter table public.saved_maps enable trigger trg_saved_maps_world_snapshot_guard;');
+      }
+    };
+    const { g, u } = await plant(SNAP, SECTIONS);
+    expect([...arrivals(g, 'racketeers'), ...arrivals(u, 'racketeers')], 'the headline reaches a visitor').toEqual([]);
+    const { chronicle: _gone, ...rest } = SNAP;
+    expect({ gallery: g.world?.snapshot, link: u.world_snapshot }, 'the stored world as served').toEqual({ gallery: rest, link: rest });
+    expect({ gallery: g.world?.sections, link: u.world_sections }, 'the section list as served').toEqual({ gallery: ['worldClock', 'pantheon'], link: ['worldClock', 'pantheon'] });
+    const odd = await plant(NOT_OBJECT, 'not a list');
+    expect([...arrivals(odd.g, 'racketeers'), ...arrivals(odd.u, 'racketeers')], 'a stored snapshot that is not an object').toEqual([]);
+    expect({ gallery: odd.g.world?.snapshot ?? null, link: odd.u.world_snapshot, sections: odd.u.world_sections }).toEqual({ gallery: null, link: null, sections: null });
+    // the twin
+    const doors = await import('../../src/domain/display/galleryDoors.js');
+    expect({ snap: doors.publicWorld(SNAP), sections: doors.publicWorldSections(SECTIONS), odd: doors.publicWorld(NOT_OBJECT), oddSections: doors.publicWorldSections('not a list') }, 'server equals twin')
+      .toEqual({ snap: g.world.snapshot, sections: g.world.sections, odd: odd.u.world_snapshot, oddSections: odd.u.world_sections });
   }, ARM_TIMEOUT_MS);
 
   it('THE TILE ROWS ARE NO DOOR OF THEIR OWN: _gallery_public_tile_rows() is executable by neither anon nor authenticated (Supabase\'s default privileges)', async () => {

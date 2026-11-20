@@ -1,0 +1,10 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  05:25:11
+   Duration  15.13s (transform 5.59s, setup 42ms, import 141ms, tests 14.23s, environment 603ms)
+
+exit 0

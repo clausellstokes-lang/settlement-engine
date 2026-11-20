@@ -1,0 +1,37 @@
+
+ RUN  v4.1.8 <scratch tree of 97efb7fcf>
+
+ ❯ tests/security/galleryDoors.pglite.test.js (12 tests | 1 failed | 11 skipped) 3195ms
+     × VR40 A SHARED MAP'S WORLD SENDS NO CHRONICLE (VEIL-DOORS-3): a stored world snapshot holding a chronicle, planted past the guard, is served by neither map read; its other sections are; its section list loses the key; a snapshot that is not an object is served as none; the twin agrees 25ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/security/galleryDoors.pglite.test.js > VEIL-DOORS: the doors beside data (REVIEW-VEIL-10, V10-1, V10-3, V10-4) > VR40 A SHARED MAP'S WORLD SENDS NO CHRONICLE (VEIL-DOORS-3): a stored world snapshot holding a chronicle, planted past the guard, is served by neither map read; its other sections are; its section list loses the key; a snapshot that is not an object is served as none; the twin agrees
+AssertionError: the headline reaches a visitor: expected [ …(2) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "$.world.snapshot.chronicle[0].headlines[0] = \"Thieves and racketeers are working Rookford's streets in the open.\"",
++   "$.world_snapshot.chronicle[0].headlines[0] = \"Thieves and racketeers are working Rookford's streets in the open.\"",
++ ]
+
+ ❯ tests/security/galleryDoors.pglite.test.js:415:108
+    413|     };
+    414|     const { g, u } = await plant(SNAP, SECTIONS);
+    415|     expect([...arrivals(g, 'racketeers'), ...arrivals(u, 'racketeers')…
+       |                                                                                                            ^
+    416|     const { chronicle: _gone, ...rest } = SNAP;
+    417|     expect({ gallery: g.world?.snapshot, link: u.world_snapshot }, 'th…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 11 skipped (12)
+   Start at  04:49:21
+   Duration  3.45s (transform 90ms, setup 34ms, import 106ms, tests 3.20s, environment 0ms)
+
+exit 1

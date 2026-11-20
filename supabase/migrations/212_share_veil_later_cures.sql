@@ -1863,6 +1863,10 @@ $$;
 --   (2) THE CHRONICLE (VR20 (B), VR21): _gallery_doors_chronicle, each entry by its own veil (section below).
 --   (3) THE MAP MEMBER (VR23): a member is read through its own veil, and a member with none takes the default veil, as
 --       the party link's unmarked share does (R4: "the readers are players"); its chronicle by (2).
+--   (4) A SHARED MAP'S WORLD SENDS NO CHRONICLE (VR40, VEIL-DOORS-3): both map reads (get_gallery_map, get_unlisted_map)
+--       serve the stored world snapshot without its `chronicle` section, whatever it holds, and its section list without
+--       the key (_gallery_doors_world, _gallery_doors_world_sections); the share editor no longer sends it; the guard that
+--       refuses a snapshot holding it (089, 091) is not loosened.
 -- COUPLED CLIENT TWIN: src/domain/display/galleryDoors.js (tilesUnderVeil, veilChronicle), rule for rule.
 -- NOT CHANGED: every _gallery_veil* helper (called, never edited), _gallery_chronicle_entry and _gallery_chronicle_json
 -- (032), every list's body (each reads the tile rows).
@@ -2309,12 +2313,34 @@ returns boolean language sql immutable as $$
   select coalesce(jsonb_typeof(v -> 'body') = 'object' and ((v -> 'body') - 'name') = '{}'::jsonb, false)
 $$;
 
+-- [212: NEW, VEIL-DOORS-3] public._gallery_doors_world
+-- A SHARED MAP'S WORLD SENDS NO CHRONICLE ((4) above; the seventh chair's VR40). Measured: the world's serialized chronicle
+-- holds crime-worded headlines naming member towns ("Thieves and racketeers are working Vysokoino's streets in the open."),
+-- a sentence and a cause of a house those towns' shares hide (VR28 tier 1). Both map reads serve the STORED world snapshot
+-- through this: its top-level `chronicle` is dropped whatever it holds, every other section as stored; a stored snapshot
+-- that is not an object is served as none (a failure falls toward withholding). 089's and 091's guard, which refuses a
+-- snapshot holding the key, is NOT loosened: this reaches what a row may already hold. galleryDoors.js :: publicWorld is
+-- the twin.
+create or replace function public._gallery_doors_world(snapshot jsonb)
+returns jsonb language sql immutable as $$
+  select case when jsonb_typeof(snapshot) = 'object' then snapshot - 'chronicle' end
+$$;
+
+-- [212: NEW, VEIL-DOORS-3] public._gallery_doors_world_sections
+-- The stored section list beside it, without the `chronicle` key (a page shows no section the snapshot lacks); a list
+-- that is not an array is served as none. galleryDoors.js :: publicWorldSections is the twin.
+create or replace function public._gallery_doors_world_sections(sections jsonb)
+returns jsonb language sql immutable as $$
+  select case when jsonb_typeof(sections) = 'array' then sections - 'chronicle' end
+$$;
+
 -- [212: RESTATED, VEIL-DOORS] public.get_gallery_map
 -- 211's statement (088's body plus the veil), and ONE change, the member's two expressions (V10-4, VR23; V10-1): each
 -- member is read through _gallery_veil with the link's `true`, so a member whose share carries no veil marker takes the
 -- default veil, as the party link's unmarked share does (R4, "the readers are players": a map's member was never
 -- published as a page of its own); a marked member is read through its own veil exactly as before. Its chronicle is
--- _gallery_doors_chronicle under that same veil. Nothing else of the map changes; its grant restated as 211 states it.
+-- _gallery_doors_chronicle under that same veil. VEIL-DOORS-3 (VR40): its stored world through _gallery_doors_world and
+-- _gallery_doors_world_sections. Nothing else of the map changes; its grant restated as 211 states it.
 create or replace function public.get_gallery_map(p_slug text)
 returns jsonb language plpgsql security definer set search_path = public, pg_temp as $$
 declare
@@ -2402,9 +2428,10 @@ begin
       -- artifact (gallery_world_snapshot / _sections) — projected ONLY on the
       -- owner's gallery_share_world opt-in, and NEVER a live read of
       -- v_camp->'worldState' / 'regionalGraph' (those stay un-projected, per 046).
+      -- VEIL-DOORS-3 (VR40): the stored world without its chronicle, whatever it holds
       'world', case when row.gallery_share_world then jsonb_strip_nulls(jsonb_build_object(
-        'snapshot', row.gallery_world_snapshot,
-        'sections', coalesce(row.gallery_world_sections, '[]'::jsonb)
+        'snapshot', public._gallery_doors_world(row.gallery_world_snapshot),
+        'sections', coalesce(public._gallery_doors_world_sections(row.gallery_world_sections), '[]'::jsonb)
       )) else null end,
       'members', coalesce(v_members, '[]'::jsonb)
     );
@@ -2422,6 +2449,32 @@ begin
 end $$;
 
 grant execute on function public.get_gallery_map(text) to anon, authenticated;
+
+-- [212: RESTATED, VEIL-DOORS-3] public.get_unlisted_map
+-- 168's statement, and ONE change ((4) above, VR40): the stored world snapshot and its section list through
+-- _gallery_doors_world and _gallery_doors_world_sections (no chronicle, whatever the row holds). Its grant as 168 states it.
+create or replace function public.get_unlisted_map(p_slug text)
+returns jsonb
+language sql stable security definer set search_path = public, pg_temp
+as $$
+  select jsonb_build_object(
+    'id', m.id,
+    'name', m.name,
+    'slug', m.unlisted_slug,
+    'unlisted', true,
+    'share_kind', m.share_kind,
+    'description', m.gallery_description,
+    'tags', m.gallery_tags,
+    'image_url', m.gallery_image_url,
+    'world_snapshot', case when m.gallery_share_world then public._gallery_doors_world(m.gallery_world_snapshot) else null end,
+    'world_sections', case when m.gallery_share_world then public._gallery_doors_world_sections(m.gallery_world_sections) else null end,
+    'realm_arc_summary', case when m.gallery_share_world then m.gallery_realm_arc_summary else null end
+  )
+  from public.saved_maps m
+  where m.unlisted_slug = p_slug and m.visibility = 'unlisted'
+  limit 1;
+$$;
+grant execute on function public.get_unlisted_map(text) to authenticated, anon;
 
 -- [212: RESTATED (211's statement, with the cure)] public.get_gallery_dossier
 -- get_gallery_dossier: 147's body plus the veil, and the pg_temp pin a recreated definer takes

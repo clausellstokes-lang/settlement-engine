@@ -430,12 +430,14 @@ drop function if exists public._gallery_veil_tie_pieces(jsonb);
 drop function if exists public._gallery_veil_tie_roles(jsonb, jsonb, jsonb, boolean, boolean, boolean);
 
 -- ── VEIL-DOORS (the seventh chair's seat, 2026-11-20): its block, last ────────────────────────────────────────────
--- 212's VEIL-DOORS section restated two functions and created nine helpers (VEIL-DOORS-2's: _gallery_doors_tiles, the
--- one-row tile rule, and _gallery_doors_time, a freeze's date read safely). Back: get_gallery_map at 211's statement
--- (verbatim, its grant as 211 states it) and _gallery_public_tile_rows at 147's (verbatim; get_gallery_dossier, which
+-- 212's VEIL-DOORS section restated three functions and created eleven helpers (VEIL-DOORS-2's: _gallery_doors_tiles, the
+-- one-row tile rule, and _gallery_doors_time, a freeze's date read safely; VEIL-DOORS-3's: _gallery_doors_world and
+-- _gallery_doors_world_sections, a shared map's world without its chronicle). Back: get_gallery_map at 211's statement
+-- (verbatim, its grant as 211 states it), get_unlisted_map at 168's (verbatim, its grant as 168 states it) and
+-- _gallery_public_tile_rows at 147's (verbatim; get_gallery_dossier, which
 -- calls the helpers, is already back at 211's above). The tile rows' revoke from anon and authenticated is NOT reversed:
 -- no client calls the helper, every read that does is a definer, and a down file never reopens a door (on a chain whose
--- scaffold grants nothing by default the catalogue is 211's exactly). Then the nine helpers, by signature.
+-- scaffold grants nothing by default the catalogue is 211's exactly). Then the eleven helpers, by signature.
 
 -- [212 down: VEIL-DOORS, back to 211] public.get_gallery_map
 create or replace function public.get_gallery_map(p_slug text)
@@ -539,6 +541,30 @@ begin
 end $$;
 
 grant execute on function public.get_gallery_map(text) to anon, authenticated;
+
+-- [212 down: VEIL-DOORS-3, back to 168] public.get_unlisted_map
+create or replace function public.get_unlisted_map(p_slug text)
+returns jsonb
+language sql stable security definer set search_path = public, pg_temp
+as $$
+  select jsonb_build_object(
+    'id', m.id,
+    'name', m.name,
+    'slug', m.unlisted_slug,
+    'unlisted', true,
+    'share_kind', m.share_kind,
+    'description', m.gallery_description,
+    'tags', m.gallery_tags,
+    'image_url', m.gallery_image_url,
+    'world_snapshot', case when m.gallery_share_world then m.gallery_world_snapshot else null end,
+    'world_sections', case when m.gallery_share_world then m.gallery_world_sections else null end,
+    'realm_arc_summary', case when m.gallery_share_world then m.gallery_realm_arc_summary else null end
+  )
+  from public.saved_maps m
+  where m.unlisted_slug = p_slug and m.visibility = 'unlisted'
+  limit 1;
+$$;
+grant execute on function public.get_unlisted_map(text) to authenticated, anon;
 
 -- [212 down: VEIL-DOORS, back to 147] public._gallery_public_tile_rows
 create or replace function public._gallery_public_tile_rows()
@@ -679,6 +705,8 @@ $$;
 
 revoke execute on function public._gallery_public_tile_rows() from public;
 
+drop function if exists public._gallery_doors_world(jsonb);
+drop function if exists public._gallery_doors_world_sections(jsonb);
 drop function if exists public._gallery_doors_chronicle(jsonb, jsonb, jsonb, jsonb, boolean, jsonb);
 drop function if exists public._gallery_doors_time(text);
 drop function if exists public._gallery_doors_chronicle_classes();

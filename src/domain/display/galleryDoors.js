@@ -8,9 +8,12 @@
  *     withheld where a name a share could hide lies inside it. A row with no marker: the row's own columns (VR23).
  *   THE CHRONICLE (VR20 (B), VR21): veilChronicle — each entry by its own veil, then the newest fifty of what is served,
  *     each as a shared page draws it.
+ *   A SHARED MAP'S WORLD (VR40, VEIL-DOORS-3): publicWorld, publicWorldSections — the stored world snapshot and its
+ *     section list without the chronicle, whatever the row holds.
  *
  * SQL twins: _gallery_doors_band, _gallery_doors_names, _gallery_doors_tile, _gallery_public_tile_rows (the marked
- * branch), _gallery_doors_chronicle_classes, _gallery_doors_chronicle, _gallery_doors_closed.
+ * branch), _gallery_doors_chronicle_classes, _gallery_doors_chronicle, _gallery_doors_closed, _gallery_doors_world,
+ * _gallery_doors_world_sections.
  */
 import { STABILITY_BANDS } from './labelBands.js';
 import { CARD_KINDS } from './galleryVeil.js';
@@ -219,4 +222,25 @@ export function veilChronicle(log, { proj, body, groupings = [], src = null, sha
     served.push(m);
   }
   return served.slice(-50); // the newest fifty (032's window), taken over what is served (VR21)
+}
+
+/**
+ * A SHARED MAP'S WORLD SENDS NO CHRONICLE (the seventh chair's VR40): the stored world snapshot as both map reads serve it,
+ * its top-level `chronicle` dropped whatever it holds; a snapshot that is not an object is none. SQL twin:
+ * _gallery_doors_world.
+ * @param {unknown} snapshot @returns {Rec|null}
+ */
+export function publicWorld(snapshot) {
+  if (!isRec(snapshot)) return null;
+  const { chronicle: _dropped, ...rest } = snapshot;
+  return rest;
+}
+
+/**
+ * The stored section list beside it, without the `chronicle` key; a list that is not an array is none. SQL twin:
+ * _gallery_doors_world_sections (jsonb `-` on an array drops each string element equal to the key).
+ * @param {unknown} sections @returns {unknown[]|null}
+ */
+export function publicWorldSections(sections) {
+  return Array.isArray(sections) ? sections.filter((k) => k !== 'chronicle') : null;
 }

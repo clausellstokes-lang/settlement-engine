@@ -26,7 +26,7 @@
 // choice so a sharer knows exactly what travels with the share.
 export const KIND_OPTIONS = Object.freeze([
   ['map', 'Map only', 'Bare terrain and geography. No settlements, no world state.'],
-  ['map_with_campaign', 'Map and campaign', 'The map populated with its settlements, plus the living world you choose to reveal: the in-world clock, the chronicle, the pantheon, its wars and settlement network, and the dashboard.'],
+  ['map_with_campaign', 'Map and campaign', 'The map populated with its settlements, plus the living world you choose to reveal: the in-world clock, the pantheon, its wars and settlement network, and the dashboard.'],
 ]);
 
 // The maps/campaigns sort catalog (MAP_SORT_OPTIONS) moved to the gallery-only

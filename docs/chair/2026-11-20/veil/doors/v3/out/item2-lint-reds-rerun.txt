@@ -1,0 +1,526 @@
+
+ RUN  v4.1.8 /home/user/settlement-engine
+
+ ❯ tests/lint/writerReach.walker.test.js (52 tests | 1 failed) 94063ms
+     × the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity 36ms
+ ❯ tests/lint/observedShapeReaders.walker.test.js (47 tests | 2 failed) 102981ms
+     × SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished 69ms
+     × A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live 58ms
+ ❯ tests/lint/proseWiringCensus.walker.test.js (79 tests | 2 failed) 10297ms
+     × ⭐ THE DRY READ: both modes, and the one that writes is not among them 99ms
+     × the committed census is byte-identical to a fresh build, and the stamp is live 31ms
+ ❯ tests/lint/noLegacyFactionReaders.walker.test.js (4 tests | 1 failed) 7783ms
+     × every read outside the FPZ list is red; zero at the landing 4232ms
+ ❯ tests/lint/ruinFilterRoster.walker.test.js (12 tests | 2 failed) 2448ms
+     × every `.institutions` reader is COMPLIANT or EXEMPT 18ms
+     × the scan reads CODE — a `.institutions` in a comment or a quoted string never enrols 1ms
+ ❯ tests/lint/domainAnyCastBaseline.test.js (19 tests | 4 failed) 72ms
+     × no file exceeds its baseline (new files get 0) — fix the types, do not widen 13ms
+     × baseline exactly matches the tree (airtight against any drift mode) 14ms
+     × ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path) 1ms
+     × ⛔ every LIVE declared row is refused against the LIVE register 10ms
+ ❯ tests/lint/presumedThings.walker.test.js (43 tests | 1 failed) 70820ms
+     × ⛔ every source literal that names a thing declares it, or has its row 32ms
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js (34 tests | 1 failed) 6963ms
+     × THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed 97ms
+ ❯ tests/lint/migrationSearchPathPin.test.js (5 tests | 2 failed) 14ms
+     × has no stale baseline entries (shrink-only — re-pinned functions must be removed) 8ms
+     × no definer authored AFTER the convention is bare, beyond the frozen ledger 1ms
+ ❯ tests/lint/negativeAssertionAnchor.walker.test.js (9 tests | 1 failed) 31ms
+     × no NEW un-anchored negative assertion anywhere in the test corpus 21ms
+ ❯ tests/lint/chainPrintSites.walker.test.js (6 tests | 1 failed) 37ms
+     × no file reads a chain's name or source outside the three lists 20ms
+ ❯ tests/lint/slugifyIdiomBaseline.test.js (2 tests | 1 failed) 13ms
+     × baseline exactly matches the files that still inline a slug builder 10ms
+fatal: Not a valid object name refs/heads/review-fixes-2026-07-08
+ ❯ tests/lint/ledgerCitationIntegrity.test.js (0 test)
+ ❯ tests/lint/styleLaw.walker.test.js (20 tests | 1 failed) 64ms
+     × ⛔ no file's count of any struck phrase RISES above its baseline 10ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/ledgerCitationIntegrity.test.js [ tests/lint/ledgerCitationIntegrity.test.js ]
+Error: Command failed: git -C /home/user/settlement-engine ls-tree -r --name-only -z refs/heads/review-fixes-2026-07-08 -- docs
+fatal: Not a valid object name refs/heads/review-fixes-2026-07-08
+
+ ❯ loadCorpusFromRef scripts/audit/ledger-citations.mjs:265:31
+    263|  */
+    264| export function loadCorpusFromRef(ref = DEFAULT_LEDGER_REF, repo = REP…
+    265|   const listing = execFileSync('git', ['-C', repo, 'ls-tree', '-r', '-…
+       |                               ^
+    266|     encoding: 'utf8',
+    267|     maxBuffer: 1024 * 1024 * 64,
+ ❯ resolveCorpus scripts/audit/ledger-citations.mjs:297:17
+ ❯ tests/lint/ledgerCitationIntegrity.test.js:150:42
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/21]⎯
+
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 20 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/lint/chainPrintSites.walker.test.js > F1: every file that makes words of an active chain's name or source asks the leaf > no file reads a chain's name or source outside the three lists
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/gallerySecondHomes.js",
++ ]
+
+ ❯ tests/lint/chainPrintSites.walker.test.js:197:116
+    195|   test('no file reads a chain\'s name or source outside the three list…
+    196|     expect(readers.size, 'anti-vacuity: the walker finds the classed r…
+    197|     expect([...readers.keys()].filter((f) => !(f in PRINT_SITES) && !(…
+       |                                                                                                                    ^
+    198|   });
+    199|   test('an exempt file reads no more lines than its row says (a new re…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/21]⎯
+
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > no file exceeds its baseline (new files get 0) — fix the types, do not widen
+AssertionError: any-cast debt grew — replace the any/* / ts-ignore with a real type. ⛔ Widening the baseline is not the cure and neither is adding a DECLARED_OVERRUN row: both ledger ceilings are MONOTONE-DOWN literals, so a new row (or a raised count on an existing one) only moves the red from this arm to the ceiling arm:
+  src/domain/display/galleryDoors.js: 1 any-holes (allowance 0): expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/galleryDoors.js: 1 any-holes (allowance 0)",
++ ]
+
+ ❯ tests/lint/domainAnyCastBaseline.test.js:393:7
+    391|       + ' ceilings are MONOTONE-DOWN literals, so a new row (or a rais…
+    392|       + ' one) only moves the red from this arm to the ceiling arm:\n …
+    393|     ).toEqual([]);
+       |       ^
+    394|   });
+    395|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/21]⎯
+
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — frozen baseline governance > baseline exactly matches the tree (airtight against any drift mode)
+AssertionError: expected { …(170) } to deeply equal { …(169) }
+
+- Expected
++ Received
+
+@@ -77,10 +77,14 @@
+    },
+    "src/domain/display/dossierViewModel.js": {
+      "any": 5,
+      "suppress": 1,
+    },
++   "src/domain/display/galleryDoors.js": {
++     "any": 1,
++     "suppress": 0,
++   },
+    "src/domain/display/institutionProfile.js": {
+      "any": 4,
+      "suppress": 0,
+    },
+    "src/domain/display/mobilizationStatus.js": {
+
+ ❯ tests/lint/domainAnyCastBaseline.test.js:435:27
+    433|     // src/domain under an exact-equality check — the declared three s…
+    434|     // different, attributed, capped expected value.
+    435|     expect(current.files).toEqual(expectedFiles());
+       |                           ^
+    436|     const declaredExcess = Object.entries(DECLARED_OVERRUNS).reduce((a…
+    437|     expect(current.total).toBe(baseline.total + declaredExcess);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/21]⎯
+
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — the declared-overrun ledger is honest > ⛔ no UNDECLARED file exceeds its baseline (the ledger is the only widening path)
+AssertionError: undeclared overruns:
+  src/domain/display/galleryDoors.js: 1 any / 0 suppress against baseline 0/0: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/galleryDoors.js: 1 any / 0 suppress against baseline 0/0",
++ ]
+
+ ❯ tests/lint/domainAnyCastBaseline.test.js:564:78
+    562|       }
+    563|     }
+    564|     expect(undeclared, `undeclared overruns:\n  ${undeclared.join('\n …
+       |                                                                              ^
+    565|   });
+    566|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/21]⎯
+
+ FAIL  tests/lint/domainAnyCastBaseline.test.js > domain any-cast ratchet — `--update` refuses to bank a declared overrun > ⛔ every LIVE declared row is refused against the LIVE register
+AssertionError: a clean-tip --update would still move the committed register: expected { …(168) } to deeply equal { …(167) }
+
+- Expected
++ Received
+
+@@ -77,10 +77,14 @@
+    },
+    "src/domain/display/dossierViewModel.js": {
+      "any": 5,
+      "suppress": 1,
+    },
++   "src/domain/display/galleryDoors.js": {
++     "any": 1,
++     "suppress": 0,
++   },
+    "src/domain/display/institutionProfile.js": {
+      "any": 4,
+      "suppress": 0,
+    },
+    "src/domain/display/mobilizationStatus.js": {
+
+ ❯ tests/lint/domainAnyCastBaseline.test.js:694:88
+    692|     // …and what it WOULD write is exactly the register that is commit…
+    693|     // `--update` on a clean tip today is a no-op rather than a 12-ins…
+    694|     expect(next.files, 'a clean-tip --update would still move the comm…
+       |                                                                                        ^
+    695|     expect(next.total).toBe(baseline.total);
+    696|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/21]⎯
+
+ FAIL  tests/lint/migrationSearchPathPin.test.js > SECURITY DEFINER search_path pin — structural ratchet (backend-3) > has no stale baseline entries (shrink-only — re-pinned functions must be removed)
+AssertionError: These baseline entries are no longer bare (re-pinned, renamed, or dropped). The baseline only shrinks — remove them from tests/lint/.migration-searchpath-baseline.json:
+  public._gallery_public_tile_rows: expected [ 'public._gallery_public_tile_rows' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "public._gallery_public_tile_rows",
++ ]
+
+ ❯ tests/lint/migrationSearchPathPin.test.js:188:7
+    186|           + stale.join('\n  ')
+    187|         : '',
+    188|     ).toEqual([]);
+       |       ^
+    189|   });
+    190|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/21]⎯
+
+ FAIL  tests/lint/migrationSearchPathPin.test.js > SECURITY DEFINER search_path pin — structural ratchet (backend-3) > no definer authored AFTER the convention is bare, beyond the frozen ledger
+AssertionError: These ledger rows are no longer bare (pinned, renamed or dropped). The ledger only shrinks — delete them from POST_CONVENTION_BARE:
+  public._gallery_public_tile_rows: expected [ 'public._gallery_public_tile_rows' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "public._gallery_public_tile_rows",
++ ]
+
+ ❯ tests/lint/migrationSearchPathPin.test.js:239:7
+    237|           + `shrinks — delete them from POST_CONVENTION_BARE:\n  ${ban…
+    238|         : '',
+    239|     ).toEqual([]);
+       |       ^
+    240|
+    241|     // Provenance too, not just membership: a row whose net-current MO…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/21]⎯
+
+ FAIL  tests/lint/negativeAssertionAnchor.walker.test.js > negative-assertion anchor walker (habitat removal) > no NEW un-anchored negative assertion anywhere in the test corpus
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "tests/security/galleryDoors.pglite.test.js: 1 un-anchored negative assertion(s) at line(s) 233 (frozen ceiling 0). A bare not.toContain/not.toMatch/not.toHaveProperty passes just as happily when the COLLECTION drifted away as when the member was correctly excluded — it outlives the regression it was written to catch. Pair it with a liveness anchor: expectPresentThenAbsent(before, after, member) for a removal, expectAbsentWithAnchor(collection, member, anchor) for a selection (tests/helpers/anchoredNegatives.js). If the anchor is genuinely structural, say why with an \"// anchored: <reason>\" marker — AND MIND THE RULE, which has cost a lane two attempts: the marker is read ONLY on the assertion's own line or the ONE line immediately above it. A marker WRAPPED across two comment lines does NOT count, because the line abutting the assertion is then the continuation rather than the marker. Keep it on one line, or put \"anchored:\" on the comment's LAST line.",
++ ]
+
+ ❯ tests/lint/negativeAssertionAnchor.walker.test.js:850:24
+    848|       }
+    849|     }
+    850|     expect(violations).toEqual([]);
+       |                        ^
+    851|   });
+    852|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/21]⎯
+
+ FAIL  tests/lint/noLegacyFactionReaders.walker.test.js > no legacy faction readers outside FPZ (PEOPLE-5, M-2; landed by PEOPLE-LAND) > every read outside the FPZ list is red; zero at the landing
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/gallerySecondHomes.js:589 factions",
++ ]
+
+ ❯ tests/lint/noLegacyFactionReaders.walker.test.js:49:68
+     47|     expect(scanned).toBeGreaterThan(2000); // liveness: the walk reach…
+     48|     expect(fpz).toBe(38); // PEOPLE-5-PREP's 35 + the landing's three …
+     49|     expect(violations.map((v) => `${v.file}:${v.line} ${v.name}`)).toE…
+       |                                                                    ^
+     50|   });
+     51| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/21]⎯
+
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > SHRINK-ONLY: no file exceeds its frozen ceiling, and no row has vanished
+AssertionError: the live heuristic inventory must exactly match the frozen one. A lawful shrink is `node scripts/check-observed-shape-readers.mjs --write` on a clean tree — it re-derives inventory, total and identities together and refuses anything that is not a shrink. NEVER hand-edit a row: that throws "observed-shape baseline totals are inconsistent" out of validateLeafBaseline (scripts/lib/observed-shape-baseline.mjs).: expected { violations: 2, stale: +0 } to deeply equal { violations: +0, stale: +0 }
+
+- Expected
++ Received
+
+  {
+    "stale": 0,
+-   "violations": 0,
++   "violations": 2,
+  }
+
+ ❯ tests/lint/observedShapeReaders.walker.test.js:841:7
+    839|       + ' NEVER hand-edit a row: that throws "observed-shape baseline …
+    840|       + ' out of validateLeafBaseline (scripts/lib/observed-shape-base…
+    841|     ).toEqual({ violations: 0, stale: 0 });
+       |       ^
+    842|     expect(violations).toEqual([]);
+    843|     expect(stale).toEqual([]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/21]⎯
+
+ FAIL  tests/lint/observedShapeReaders.walker.test.js > reader-with-no-writer ratchet: the live scan > A1/A7: schema-7 filters narrow ordinary noise while explained writers stay banked live
+AssertionError: expected { reads: 2218, identities: 1555, …(3) } to deeply equal { reads: 2214, identities: 1552, …(3) }
+
+- Expected
++ Received
+
+  {
+    "bankedReads": 78,
+-   "files": 444,
+-   "identities": 1552,
+-   "reads": 2214,
++   "files": 446,
++   "identities": 1555,
++   "reads": 2218,
+    "taggedRows": 52,
+  }
+
+ ❯ tests/lint/observedShapeReaders.walker.test.js:1652:8
+    1650|     // cure being written and being landed, and the register-read shap…
+    1651|     // next such move cost nothing. The two figures differ; the mechan…
+    1652|     }).toEqual(registerFigures());
+       |        ^
+    1653|     expect(Object.fromEntries(EXPLAINED_WRITER_EXEMPTIONS.map(({ ident…
+    1654|       const rows = taggedAddresses.filter((row) => row.identity === id…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/21]⎯
+
+ FAIL  tests/lint/presumedThings.walker.test.js > ARM 1 — the source > ⛔ every source literal that names a thing declares it, or has its row
+AssertionError: declare the thing on the line (needs or excludes, with its twin), never add a row: expected [ …(4) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/criminalVeilSwitch.js :: market :: \"Criminal houses and services, the criminal architecture, the capture reading and its black-market income, criminal power\"",
++   "src/domain/display/gallerySecondHomes.js :: house: thieves' guild :: \"thieves' guild chapter\"",
++   "src/domain/display/gallerySecondHomes.js :: house: thieves' guild :: \"thieves' guild (powerful)\"",
++   "src/domain/display/gallerySecondHomes.js :: house: criminal faction :: \"multiple criminal factions\"",
++ ]
+
+ ❯ tests/lint/presumedThings.walker.test.js:444:92
+    442|     const fresh = hits.filter((h) => !banked.has(key(h.file, h.thing, …
+    443|     expect(fresh.map((h) => `${h.file} :: ${h.thing} :: ${JSON.stringi…
+    444|       'declare the thing on the line (needs or excludes, with its twin…
+       |                                                                                            ^
+    445|   });
+    446|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/21]⎯
+
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) > ⭐ THE DRY READ: both modes, and the one that writes is not among them
+AssertionError: the committed register is current at this tip: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js:2324:73
+    2322|     const text = readFileSync(CENSUS_JSON, 'utf8');
+    2323|     const current = censusDry(text, committed);
+    2324|     expect(current.ok, 'the committed register is current at this tip'…
+       |                                                                         ^
+    2325|     expect(current.rowsMoved, 'and no row would move').toBe(0);
+    2326|     expect(current.sections, 'and no section would move').toEqual([]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/21]⎯
+
+ FAIL  tests/lint/proseWiringCensus.walker.test.js > car 0 — the committed JSON and its interlock > the committed census is byte-identical to a fresh build, and the stamp is live
+AssertionError: the committed file is current: expected 'stale-bytes' to be '' // Object.is equality
+
+- Expected
++ Received
+
++ stale-bytes
+
+ ❯ tests/lint/proseWiringCensus.walker.test.js:2404:61
+    2402|     const text = readFileSync(CENSUS_JSON, 'utf8');
+    2403|     const verdict = censusCheck(text, committed);
+    2404|     expect(verdict.reason, 'the committed file is current').toBe('');
+       |                                                             ^
+    2405|     expect(verdict.ok).toBe(true);
+    2406|     expect(text, 'and byte-identical to what the script would write').…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/21]⎯
+
+ FAIL  tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > every `.institutions` reader is COMPLIANT or EXEMPT
+AssertionError: expected [ Array(1) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "src/domain/display/galleryDoors.js: reads the raw .institutions roster but neither routes through the ruin filter nor is exempted.
++   If it aggregates institutions as LIVE providers, route it through liveInstitutions()/isLiveInstitution() (src/domain/institutions/institutionRoster.js).
++   If it is ruin-agnostic (display/mutation/name-lookup/existence/…), add it to RUIN_AGNOSTIC_EXEMPT in this file with a reason. Never delete the guard to pass.",
++ ]
+
+ ❯ tests/lint/ruinFilterRoster.walker.test.js:345:24
+    343|       );
+    344|     }
+    345|     expect(violations).toEqual([]);
+       |                        ^
+    346|   });
+    347|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/21]⎯
+
+ FAIL  tests/lint/ruinFilterRoster.walker.test.js > ruin-filter roster ratchet (structural-prevention Pattern 2) > the scan reads CODE — a `.institutions` in a comment or a quoted string never enrols
+AssertionError: expected 117 to be 116 // Object.is equality
+
+- Expected
++ Received
+
+- 116
++ 117
+
+ ❯ tests/lint/ruinFilterRoster.walker.test.js:549:28
+    547|     // failure message ("expected 116 to be 115") at the joined tree a…
+    548|     // the share veil's client twin's roster-name read (EXEMPT above, …
+    549|     expect(readers.length).toBe(116);
+       |                            ^
+    550|   });
+    551|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/21]⎯
+
+ FAIL  tests/lint/slugifyIdiomBaseline.test.js > slugify idiom baseline ratchet (code-quality-5) > baseline exactly matches the files that still inline a slug builder
+AssertionError: expected [ …(34) ] to deeply equal [ …(35) ]
+
+- Expected
++ Received
+
+@@ -2,11 +2,10 @@
+    "src/domain/activeConditions.js",
+    "src/domain/compendium/searchIndex.js",
+    "src/domain/contradictions.js",
+    "src/domain/counterfactual.js",
+    "src/domain/dailyLife.js",
+-   "src/domain/display/gallerySecondHomes.js",
+    "src/domain/display/publicSafe.js",
+    "src/domain/districtProfile.js",
+    "src/domain/explanation.js",
+    "src/domain/factionProfile.js",
+    "src/domain/factionRelationshipUpdate.js",
+
+ ❯ tests/lint/slugifyIdiomBaseline.test.js:70:22
+     68| describe('slugify idiom baseline ratchet (code-quality-5)', () => {
+     69|   test('baseline exactly matches the files that still inline a slug bu…
+     70|     expect(baseline).toEqual(currentIdiomFiles);
+       |                      ^
+     71|   });
+     72|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/21]⎯
+
+ FAIL  tests/lint/sovereigntyLightingContract.walker.test.js > the sovereignty lighting condition — a marker is EVIDENCE only in a live title > THE CENSUS IS AN ASSERTION, NOT A SENTENCE — every stated figure is executed
+AssertionError: the estate's file count moved — re-measure, do not re-word: expected 3710 to be 3705 // Object.is equality
+
+- Expected
++ Received
+
+- 3705
++ 3710
+
+ ❯ tests/lint/sovereigntyLightingContract.walker.test.js:7553:10
+    7551|     } else {
+    7552|       expect(TEST_FILES.length, 'the estate\'s file count moved — re-m…
+    7553|         .toBe(CENSUS.files);
+       |          ^
+    7554|       expect(parked.length, 'the parked-file count moved from SP-C\'s …
+    7555|         + ' a rule widened or narrowed, or a lane changed a file\'s sh…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/21]⎯
+
+ FAIL  tests/lint/styleLaw.walker.test.js > the style walker — the ratchet at the tree > ⛔ no file's count of any struck phrase RISES above its baseline
+AssertionError: the style law: a struck phrase rose (rewrite the line; the retired word's word is "power"):
+  src/domain/display/gallerySecondHomes.js :: faction 0 -> 1
+      src/domain/display/gallerySecondHomes.js:114 "multiple criminal factions": expected [ { …(4) } ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   {
++     "file": "src/domain/display/gallerySecondHomes.js",
++     "id": "faction",
++     "now": 1,
++     "was": 0,
++   },
++ ]
+
+ ❯ tests/lint/styleLaw.walker.test.js:52:7
+     50|       verdict.rises,
+     51|       `the style law: a struck phrase rose (rewrite the line; the reti…
+     52|     ).toEqual([]);
+       |       ^
+     53|   });
+     54|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/21]⎯
+
+ FAIL  tests/lint/writerReach.walker.test.js > writer-with-no-reader ratchet: the frozen register > the surfaceReach grammar round-trips: parse(format(reach)) equals reach for every LIT identity
+AssertionError: weight on contenders is missing from the frozen surfaceReach: expected 'campaign-pdf=N dossier-pdf=N foundry=…' to be 'campaign-pdf=N dossier-pdf=N foundry=…' // Object.is equality
+
+Expected: "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N"
+Received: "campaign-pdf=N dossier-pdf=N foundry=N news=N web-transitive=N world-book=N"
+
+ ❯ tests/lint/writerReach.walker.test.js:358:95
+    356|       if (row.verdict === 'THIN') continue;
+    357|       const formatted = formatReach(row.reach);
+    358|       expect(frozen[row.identity], `${row.identity} is missing from th…
+       |                                                                                               ^
+    359|       expect(formatReach(parseReach(formatted)), `${row.identity} does…
+    360|       if (row.verdict === 'LIT') checked += 1;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/21]⎯
+
+
+ Test Files  14 failed | 1 passed (15)
+      Tests  20 failed | 322 passed (342)
+   Start at  05:22:49
+   Duration  123.29s (transform 15.95s, setup 299ms, import 67.28s, tests 295.60s, environment 1ms)
+
+exit 1

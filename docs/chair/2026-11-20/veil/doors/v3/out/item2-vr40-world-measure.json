@@ -1,0 +1,584 @@
+{
+ "measured": "2026-11-20T05:25:58.156Z",
+ "method": "composeInstantWorld (the app's Instant World birth, vanilla), advanceCampaignWorld one_month x 12 (pinned now), serializeWorldSnapshotPublic with the share editor's five default sections, buildRealmArcSummary; needles: each member's hideable houses (isHideableHouse: name, label, catalogId) and hidden powers; CRIME regex over every string",
+ "catalogueLabels": [
+  "Grain",
+  "Milled flour",
+  "Fish",
+  "Livestock and dairy",
+  "Preserved provisions",
+  "Salt",
+  "Timber",
+  "Dressed stone",
+  "Clay and ceramics",
+  "Iron",
+  "Fuel and charcoal",
+  "Textiles",
+  "Leather goods",
+  "Weapons and armour",
+  "Luxury goods",
+  "Furs and pelts",
+  "Bulk raw materials",
+  "Arcane reagents",
+  "Alchemical goods",
+  "Financial services",
+  "Legal services",
+  "Religious services",
+  "Educational services",
+  "Medical services",
+  "Military contract services",
+  "Transport and logistics",
+  "Arcane services"
+ ],
+ "worlds": [
+  {
+   "world": 0,
+   "members": 9,
+   "ticks": 12,
+   "sections": [
+    "schemaVersion",
+    "sourceWorldStateSchemaVersion",
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "chronicle",
+    "dashboard"
+   ],
+   "bytes": 39701,
+   "needles": 14,
+   "chronicle": {
+    "headlines": 348,
+    "houseOrPowerHits": [],
+    "crimeWorded": [
+     "Patronage creates recurring extraction, protection demands, and law influence.",
+     "Crime is gaining ground in Linjiao",
+     "Thieves and racketeers are working Linjiao's streets in the open.",
+     "Crime is gaining ground in Achileia",
+     "Thieves and racketeers are working Achileia's streets in the open.",
+     "Patronage creates recurring extraction, protection demands, and law influence.",
+     "Vladislav Dmitriev is turning the moment to their advantage",
+     "Vladislav Dmitriev means to bind an outside patron to their cause, and turning the moment to their a",
+     "Patronage creates recurring extraction, protection demands, and law influence.",
+     "Crime is gaining ground in Mingpo",
+     "Thieves and racketeers are working Mingpo's streets in the open.",
+     "Patronage creates recurring extraction, protection demands, and law influence.",
+     "Patronage creates recurring extraction, protection demands, and law influence.",
+     "Crime is gaining ground in Wukou",
+     "Thieves and racketeers are working Wukou's streets in the open.",
+     "Crime is gaining ground in Linjiao",
+     "Thieves and racketeers are working Linjiao's streets in the open.",
+     "Crime is gaining ground in Bregets",
+     "Thieves and racketeers are working Bregets's streets in the open.",
+     "Crime is gaining ground in Wukou",
+     "Thieves and racketeers are working Wukou's streets in the open.",
+     "Crime is gaining ground in Ioannocastron",
+     "Thieves and racketeers are working Ioannocastron's streets in the open."
+    ]
+   },
+   "otherSections": {
+    "houseOrPowerHits": [],
+    "crimeWorded": [
+     "channel.military_protection.iw_vr40_world_0_1.iw_vr40_world_0_4.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_0_1.iw_vr40_world_0_6.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_0_2.iw_vr40_world_0_5.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_0_5.iw_vr40_world_0_2.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_0_6.iw_vr40_world_0_9.general",
+     "military_protection"
+    ]
+   },
+   "arc": {
+    "text": "",
+    "houseOrPowerHits": [],
+    "crimeWorded": false
+   },
+   "publicChannels": 82,
+   "publicGoodsLabels": [
+    "Grain",
+    "Preserved provisions",
+    "Iron",
+    "Medical services",
+    "Livestock and dairy",
+    "Salt",
+    "Textiles"
+   ],
+   "publicGoodsCrime": [],
+   "publicGoodsHits": [],
+   "publicGoodsNotCatalogue": [],
+   "graphGoods": [
+    "public|medical_services|Medical services",
+    "public|grain|Grain",
+    "public|provisions|Preserved provisions",
+    "public|iron|Iron",
+    "public|salt|Salt",
+    "public|livestock|Livestock and dairy",
+    "public|textiles|Textiles"
+   ],
+   "exportsRawCrime": []
+  },
+  {
+   "world": 1,
+   "members": 9,
+   "ticks": 12,
+   "sections": [
+    "schemaVersion",
+    "sourceWorldStateSchemaVersion",
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "chronicle",
+    "dashboard"
+   ],
+   "bytes": 52687,
+   "needles": 14,
+   "chronicle": {
+    "headlines": 358,
+    "houseOrPowerHits": [],
+    "crimeWorded": [
+     "Criminal corridor has passed; protection rackets remains",
+     "Criminal corridor has run its course; what remains is protection rackets, smuggling habits and guard",
+     "Criminal corridor is taking hold in Strathham",
+     "Crime is gaining ground in Ioannokastro",
+     "Thieves and racketeers are working Ioannokastro's streets in the open.",
+     "Crime is gaining ground in Padmabari",
+     "Thieves and racketeers are working Padmabari's streets in the open.",
+     "Patronage creates recurring extraction, protection demands, and law influence.",
+     "Crime is gaining ground in Baicheng",
+     "Thieves and racketeers are working Baicheng's streets in the open.",
+     "Criminal corridor is done, and protection rackets is what it left",
+     "Criminal corridor has ended; the rulers are left with protection rackets, smuggling habits and guard",
+     "Criminal corridor is deepening",
+     "Criminal corridor is getting worse in Strathham, and what started it is still there.",
+     "Criminal corridor is taking hold in Strathham"
+    ]
+   },
+   "otherSections": {
+    "houseOrPowerHits": [],
+    "crimeWorded": [
+     "channel.military_protection.iw_vr40_world_1_1.iw_vr40_world_1_5.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_1_1.iw_vr40_world_1_6.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_1_2.iw_vr40_world_1_4.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_1_4.iw_vr40_world_1_2.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_1_4.iw_vr40_world_1_8.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_1_5.iw_vr40_world_1_8.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_1_8.iw_vr40_world_1_4.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_1_8.iw_vr40_world_1_5.general",
+     "military_protection"
+    ]
+   },
+   "arc": {
+    "text": "",
+    "houseOrPowerHits": [],
+    "crimeWorded": false
+   },
+   "publicChannels": 129,
+   "publicGoodsLabels": [
+    "Iron",
+    "Textiles",
+    "Livestock and dairy",
+    "Weapons and armour",
+    "Recovered artefacts",
+    "Salt",
+    "Timber"
+   ],
+   "publicGoodsCrime": [],
+   "publicGoodsHits": [],
+   "publicGoodsNotCatalogue": [
+    "Recovered artefacts"
+   ],
+   "graphGoods": [
+    "public|arms|Weapons and armour",
+    "public|iron|Iron",
+    "public|textiles|Textiles",
+    "public|livestock|Livestock and dairy",
+    "public|salt|Salt",
+    "public|timber|Timber",
+    "public|custom.recovered_artefacts|Recovered artefacts"
+   ],
+   "exportsRawCrime": [
+    "Cultural tourism revenue"
+   ]
+  },
+  {
+   "world": 2,
+   "members": 9,
+   "ticks": 12,
+   "sections": [
+    "schemaVersion",
+    "sourceWorldStateSchemaVersion",
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "chronicle",
+    "dashboard"
+   ],
+   "bytes": 53788,
+   "needles": 7,
+   "chronicle": {
+    "headlines": 340,
+    "houseOrPowerHits": [],
+    "crimeWorded": [
+     "The overlord has incentive to protect the vassal, but protection deepens obligation and dependence.",
+     "The overlord has incentive to protect the vassal, but protection deepens obligation and dependence.",
+     "Patronage creates recurring extraction, protection demands, and law influence.",
+     "Criminal corridor has ended, leaving protection rackets",
+     "A visitor can still see what criminal corridor left behind: protection rackets, smuggling habits and",
+     "The overlord has incentive to protect the vassal, but protection deepens obligation and dependence.",
+     "Crime is gaining ground in Erdenabad",
+     "Thieves and racketeers are working Erdenabad's streets in the open.",
+     "Criminal corridor is taking hold in Erdenabad",
+     "Crime is gaining ground in Vedapeta",
+     "Thieves and racketeers are working Vedapeta's streets in the open.",
+     "Patronage creates recurring extraction, protection demands, and law influence."
+    ]
+   },
+   "otherSections": {
+    "houseOrPowerHits": [],
+    "crimeWorded": [
+     "channel.military_protection.iw_vr40_world_2_1.iw_vr40_world_2_4.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_2_1.iw_vr40_world_2_5.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_2_2.iw_vr40_world_2_4.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_2_2.iw_vr40_world_2_8.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_2_3.iw_vr40_world_2_6.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_2_3.iw_vr40_world_2_7.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_2_4.iw_vr40_world_2_2.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_2_5.iw_vr40_world_2_7.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_2_6.iw_vr40_world_2_3.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_2_6.iw_vr40_world_2_9.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_2_7.iw_vr40_world_2_5.general",
+     "military_protection"
+    ]
+   },
+   "arc": {
+    "text": "",
+    "houseOrPowerHits": [],
+    "crimeWorded": false
+   },
+   "publicChannels": 143,
+   "publicGoodsLabels": [
+    "Timber",
+    "Textiles",
+    "Grain",
+    "Fish",
+    "Iron",
+    "Livestock and dairy",
+    "Salt",
+    "Preserved provisions",
+    "Transport and logistics"
+   ],
+   "publicGoodsCrime": [],
+   "publicGoodsHits": [],
+   "publicGoodsNotCatalogue": [],
+   "graphGoods": [
+    "public|fish|Fish",
+    "public|iron|Iron",
+    "public|timber|Timber",
+    "public|textiles|Textiles",
+    "public|grain|Grain",
+    "public|transport_services|Transport and logistics",
+    "public|livestock|Livestock and dairy",
+    "public|salt|Salt",
+    "public|provisions|Preserved provisions"
+   ],
+   "exportsRawCrime": [
+    "Cultural tourism revenue"
+   ]
+  },
+  {
+   "world": 3,
+   "members": 9,
+   "ticks": 12,
+   "sections": [
+    "schemaVersion",
+    "sourceWorldStateSchemaVersion",
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "chronicle",
+    "dashboard"
+   ],
+   "bytes": 45515,
+   "needles": 17,
+   "chronicle": {
+    "headlines": 320,
+    "houseOrPowerHits": [],
+    "crimeWorded": [
+     "Crime is gaining ground in Lidoforum",
+     "Thieves and racketeers are working Lidoforum's streets in the open.",
+     "Crime is gaining ground in Neadbridge",
+     "Thieves and racketeers are working Neadbridge's streets in the open.",
+     "Crime is gaining ground in Stredko",
+     "Thieves and racketeers are working Stredko's streets in the open.",
+     "Crime is gaining ground in Lidoforum",
+     "Thieves and racketeers are working Lidoforum's streets in the open.",
+     "Patronage creates recurring extraction, protection demands, and law influence.",
+     "Crime is gaining ground in Ardthorpe",
+     "Thieves and racketeers are working Ardthorpe's streets in the open.",
+     "Patronage creates recurring extraction, protection demands, and law influence.",
+     "Crime is gaining ground in Cerroorum",
+     "Thieves and racketeers are working Cerroorum's streets in the open.",
+     "Crime is gaining ground in Neadbridge",
+     "Thieves and racketeers are working Neadbridge's streets in the open.",
+     "Patronage creates recurring extraction, protection demands, and law influence.",
+     "Patronage creates recurring extraction, protection demands, and law influence.",
+     "Crime is gaining ground in Anxian",
+     "Thieves and racketeers are working Anxian's streets in the open."
+    ]
+   },
+   "otherSections": {
+    "houseOrPowerHits": [],
+    "crimeWorded": [
+     "channel.military_protection.iw_vr40_world_3_1.iw_vr40_world_3_5.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_3_2.iw_vr40_world_3_8.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_3_5.iw_vr40_world_3_8.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_3_8.iw_vr40_world_3_5.general",
+     "military_protection"
+    ]
+   },
+   "arc": {
+    "text": "",
+    "houseOrPowerHits": [],
+    "crimeWorded": false
+   },
+   "publicChannels": 112,
+   "publicGoodsLabels": [
+    "Textiles",
+    "Livestock and dairy",
+    "Iron",
+    "Medical services",
+    "Salt",
+    "Fuel and charcoal",
+    "Preserved provisions",
+    "Arcane reagents"
+   ],
+   "publicGoodsCrime": [],
+   "publicGoodsHits": [],
+   "publicGoodsNotCatalogue": [],
+   "graphGoods": [
+    "public|fuel|Fuel and charcoal",
+    "public|textiles|Textiles",
+    "public|livestock|Livestock and dairy",
+    "public|iron|Iron",
+    "public|arcane_reagents|Arcane reagents",
+    "public|medical_services|Medical services",
+    "public|salt|Salt",
+    "public|provisions|Preserved provisions"
+   ],
+   "exportsRawCrime": [
+    "Cultural tourism revenue"
+   ]
+  },
+  {
+   "world": 4,
+   "members": 9,
+   "ticks": 12,
+   "sections": [
+    "schemaVersion",
+    "sourceWorldStateSchemaVersion",
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "chronicle",
+    "dashboard"
+   ],
+   "bytes": 39220,
+   "needles": 8,
+   "chronicle": {
+    "headlines": 346,
+    "houseOrPowerHits": [],
+    "crimeWorded": [
+     "The overlord has incentive to protect the vassal, but protection deepens obligation and dependence.",
+     "Criminal corridor is taking hold in Longcheng",
+     "Crime is gaining ground in Longcheng",
+     "Thieves and racketeers are working Longcheng's streets in the open.",
+     "Criminal corridor has ended, leaving protection rackets",
+     "A visitor can still see what criminal corridor left behind: protection rackets, smuggling habits and",
+     "Crime is gaining ground in Stormli",
+     "Thieves and racketeers are working Stormli's streets in the open.",
+     "Patronage creates recurring extraction, protection demands, and law influence.",
+     "Crime is gaining ground in Palaioambelos",
+     "Thieves and racketeers are working Palaioambelos's streets in the open.",
+     "Crime is gaining ground in Linba",
+     "Thieves and racketeers are working Linba's streets in the open.",
+     "Crime is gaining ground in Stormli",
+     "Thieves and racketeers are working Stormli's streets in the open.",
+     "The overlord has incentive to protect the vassal, but protection deepens obligation and dependence.",
+     "Criminal corridor is deepening",
+     "Criminal corridor is getting worse in Longcheng, and what started it is still there.",
+     "Patronage creates recurring extraction, protection demands, and law influence.",
+     "Crime is gaining ground in Tikalha",
+     "Thieves and racketeers are working Tikalha's streets in the open.",
+     "Patronage creates recurring extraction, protection demands, and law influence.",
+     "Criminal corridor is taking hold in Longcheng",
+     "Crime is gaining ground in Tikalha",
+     "Thieves and racketeers are working Tikalha's streets in the open.",
+     "Crime is gaining ground in Longcheng",
+     "Thieves and racketeers are working Longcheng's streets in the open.",
+     "Crime is gaining ground in Copanco",
+     "Thieves and racketeers are working Copanco's streets in the open."
+    ]
+   },
+   "otherSections": {
+    "houseOrPowerHits": [],
+    "crimeWorded": [
+     "channel.military_protection.iw_vr40_world_4_1.iw_vr40_world_4_3.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_4_1.iw_vr40_world_4_4.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_4_2.iw_vr40_world_4_7.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_4_2.iw_vr40_world_4_8.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_4_3.iw_vr40_world_4_1.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_4_5.iw_vr40_world_4_7.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_4_5.iw_vr40_world_4_9.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_4_7.iw_vr40_world_4_5.general",
+     "military_protection"
+    ]
+   },
+   "arc": {
+    "text": "",
+    "houseOrPowerHits": [],
+    "crimeWorded": false
+   },
+   "publicChannels": 78,
+   "publicGoodsLabels": [
+    "Dressed stone",
+    "Iron",
+    "Weapons and armour",
+    "Textiles",
+    "Livestock and dairy",
+    "Preserved provisions",
+    "Fuel and charcoal"
+   ],
+   "publicGoodsCrime": [],
+   "publicGoodsHits": [],
+   "publicGoodsNotCatalogue": [],
+   "graphGoods": [
+    "public|fuel|Fuel and charcoal",
+    "public|stone|Dressed stone",
+    "public|iron|Iron",
+    "public|arms|Weapons and armour",
+    "public|textiles|Textiles",
+    "public|livestock|Livestock and dairy",
+    "public|provisions|Preserved provisions"
+   ],
+   "exportsRawCrime": []
+  },
+  {
+   "world": 5,
+   "members": 9,
+   "ticks": 12,
+   "sections": [
+    "schemaVersion",
+    "sourceWorldStateSchemaVersion",
+    "worldClock",
+    "pantheon",
+    "warNetwork",
+    "chronicle",
+    "dashboard"
+   ],
+   "bytes": 48438,
+   "needles": 10,
+   "chronicle": {
+    "headlines": 314,
+    "houseOrPowerHits": [],
+    "crimeWorded": [
+     "Crime is gaining ground in Oberstadt",
+     "Thieves and racketeers are working Oberstadt's streets in the open.",
+     "Crime is gaining ground in Oberstadt",
+     "Thieves and racketeers are working Oberstadt's streets in the open.",
+     "Crime is gaining ground in Taidao",
+     "Thieves and racketeers are working Taidao's streets in the open.",
+     "Crime is gaining ground in Kamenpol",
+     "Thieves and racketeers are working Kamenpol's streets in the open.",
+     "Crime is gaining ground in Ioannopetra",
+     "Thieves and racketeers are working Ioannopetra's streets in the open."
+    ]
+   },
+   "otherSections": {
+    "houseOrPowerHits": [],
+    "crimeWorded": [
+     "channel.military_protection.iw_vr40_world_5_1.iw_vr40_world_5_2.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_5_1.iw_vr40_world_5_4.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_5_2.iw_vr40_world_5_1.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_5_2.iw_vr40_world_5_4.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_5_3.iw_vr40_world_5_7.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_5_4.iw_vr40_world_5_2.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_5_8.iw_vr40_world_5_9.general",
+     "military_protection",
+     "channel.military_protection.iw_vr40_world_5_9.iw_vr40_world_5_8.general",
+     "military_protection"
+    ]
+   },
+   "arc": {
+    "text": "",
+    "houseOrPowerHits": [],
+    "crimeWorded": false
+   },
+   "publicChannels": 124,
+   "publicGoodsLabels": [
+    "Textiles",
+    "Arcane reagents",
+    "Luxury goods",
+    "Dressed stone",
+    "Grain",
+    "Iron",
+    "Livestock and dairy",
+    "Salt",
+    "Timber",
+    "Transport and logistics",
+    "Preserved provisions"
+   ],
+   "publicGoodsCrime": [],
+   "publicGoodsHits": [],
+   "publicGoodsNotCatalogue": [],
+   "graphGoods": [
+    "public|salt|Salt",
+    "public|arcane_reagents|Arcane reagents",
+    "public|timber|Timber",
+    "public|transport_services|Transport and logistics",
+    "public|textiles|Textiles",
+    "public|luxury_goods|Luxury goods",
+    "public|stone|Dressed stone",
+    "public|grain|Grain",
+    "public|iron|Iron",
+    "public|livestock|Livestock and dairy",
+    "public|provisions|Preserved provisions"
+   ],
+   "exportsRawCrime": []
+  }
+ ]
+}

@@ -6,7 +6,10 @@
  * (worldClock / chronicle / pantheon / warNetwork / dashboard) and the saved_maps
  * gallery_world_sections allowlist. Each section the owner leaves on is serialized
  * into the public snapshot; switching one off withholds it. Default all on — the
- * owner narrows, never opts in from nothing.
+ * owner narrows, never opts in from nothing — except a section NOT_SHAREABLE_YET:
+ * shown, off, and not to be switched on (the seventh chair's VR40: the world's
+ * chronicle carries crime-worded headlines naming member towns, a house's sentence
+ * those towns' shares hide, and migration 089's guard refuses a snapshot holding it).
  *
  * Stateless: the parent owns the enabled Set and the persist; this only renders the
  * checkboxes and hands back the next Set.
@@ -29,6 +32,14 @@ export const WORLD_SECTIONS = Object.freeze([
   ['warNetwork', 'War and network', 'Live sieges, trade wars, realm contest records, and the public channels between settlements.'],
   ['dashboard', 'Dashboard', 'The simulation rules in play and the realm-arc summary of its epics.'],
 ]);
+
+/**
+ * THE SECTIONS NOT SHAREABLE YET (VR40), each with the line its control shows. The
+ * share editor never sends one, whatever a saved share's section list holds.
+ */
+export const NOT_SHAREABLE_YET = Object.freeze({
+  chronicle: 'Not shareable yet: its headlines can tell what a town\'s share hides.',
+});
 
 /**
  * @param {Object} props
@@ -54,17 +65,18 @@ export default function WorldSectionToggles({ enabled, onToggle }) {
           Share the living world
         </span>
         <span style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.4 }}>
-          All sections start on. Switch off anything you would rather keep to yourself. Private DM detail is never included.
+          Every shareable section starts on. Switch off anything you would rather keep to yourself. Private DM detail is never included.
         </span>
       </div>
       {WORLD_SECTIONS.map(([key, label, helper]) => {
         const id = `map-share-world-${key}`;
+        const notYet = Object.hasOwn(NOT_SHAREABLE_YET, key) ? NOT_SHAREABLE_YET[/** @type {keyof typeof NOT_SHAREABLE_YET} */ (key)] : null;
         return (
           <label
             key={key}
             htmlFor={id}
             style={{
-              display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
+              display: 'flex', alignItems: 'flex-start', gap: 8, cursor: notYet ? 'not-allowed' : 'pointer',
               padding: SP.xs, border: `1px solid ${BORDER2}`, background: CARD_ALT,
             }}
           >
@@ -72,12 +84,13 @@ export default function WorldSectionToggles({ enabled, onToggle }) {
               id={id}
               type="checkbox"
               aria-label={`Share ${label}`}
-              checked={enabled.has(key)}
-              onChange={() => flip(key)}
+              checked={!notYet && enabled.has(key)}
+              disabled={!!notYet}
+              onChange={() => { if (!notYet) flip(key); }}
               style={{ marginTop: 2, flexShrink: 0 }}
             />
-            <span style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
-              <strong style={{ color: INK }}>{label}</strong>. {helper}
+            <span style={{ color: notYet ? MUTED : BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
+              <strong style={{ color: INK }}>{label}</strong>. {notYet || helper}
             </span>
           </label>
         );

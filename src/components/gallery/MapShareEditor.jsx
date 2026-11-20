@@ -28,7 +28,7 @@ import {
   KIND_OPTIONS, suggestedTagsForCampaign, campaignFacets, } from './galleryMapsUtils.js';
 import GalleryDescriptionEditor from '../GalleryDescriptionEditor.jsx';
 import CoverImageField from './CoverImageField.jsx';
-import WorldSectionToggles, { WORLD_SECTIONS } from './WorldSectionToggles.jsx';
+import WorldSectionToggles, { WORLD_SECTIONS, NOT_SHAREABLE_YET } from './WorldSectionToggles.jsx';
 import Button from '../primitives/Button.jsx';
 import {
   BORDER, BORDER2, CARD, CARD_ALT, sans, SP, FS, GREEN, GREEN_BG, RED, INK, BODY, MUTED } from '../theme.js';
@@ -100,7 +100,9 @@ function KindPicker({ value, onChange, canShareCampaign }) {
   );
 }
 
-const ALL_SECTION_KEYS = WORLD_SECTIONS.map(([key]) => key);
+// The sections the editor may send: every section but those NOT_SHAREABLE_YET (VR40: the world's chronicle is never sent,
+// whatever a saved share's section list holds; get_gallery_map and get_unlisted_map drop a stored one).
+const ALL_SECTION_KEYS = WORLD_SECTIONS.map(([key]) => key).filter(key => !Object.hasOwn(NOT_SHAREABLE_YET, key));
 
 /**
  * The maps / campaigns share editor.
@@ -280,7 +282,7 @@ export default function MapShareEditor({
     const includeWorld = shareCampaign && anySectionOn;
     const sectionOpts = {
       worldClock: enabledSections.has('worldClock'),
-      chronicle: enabledSections.has('chronicle'),
+      chronicle: false, // VR40: not shareable yet (NOT_SHAREABLE_YET)
       pantheon: enabledSections.has('pantheon'),
       warNetwork: enabledSections.has('warNetwork'),
       dashboard: enabledSections.has('dashboard'),
