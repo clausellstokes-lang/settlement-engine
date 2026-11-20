@@ -13,7 +13,8 @@
  * (`!atom` there is `excludes` here), every one an atom `factVocabulary.js` already holds; `needs: []` needs nothing.
  * Lines 1-3 of each kind are today's three stored hooks (guild_conflict 3 in its "both sides" spelling; external_threat 1-2
  * reworded by the chair's rulings of 20:03 UTC, with crime_wave 7, guild_conflict 14, external_threat 6 and
- * legitimacy_crisis 7). legitimacy_crisis 9 (the envoy of the power above the governing one, `seat outranked`) is STRUCK
+ * legitimacy_crisis 7); those that ARE the template's own lines are named by index below (`TROUBLE_HOOK_TEMPLATE_LINES`),
+ * so `TROUBLE_HOOKS[kind]` holds only the lines this pool adds. legitimacy_crisis 9 (the envoy of the power above the governing one, `seat outranked`) is STRUCK
  * (HOOKS-FINISH, the chair's ruling (iv), 20:49 UTC): its need held at the pick and was false on two final records
  * (hxd-hamlet-36, hxd-metropolis-61); it returns when that fact is written before the pick. So that pool holds 8. The timeline's
  * own events still draw their template's list (`historyData.js :: HISTORICAL_EVENTS_DATA[].plotHooks`); this table is the
@@ -29,8 +30,6 @@ export const TROUBLE_HOOK_COUNT = 3;
 /** @type {Readonly<Record<string, ReadonlyArray<TroubleHook>>>} */
 export const TROUBLE_HOOKS = Object.freeze({
   crime_wave: Object.freeze([
-    { text: 'The crime wave is coordinated. Someone is directing it to create a pretext', needs: [] },
-    { text: 'A guard captain is on the payroll of the criminal network', needs: ['watch', 'organised crime'] },
     { text: 'Those who would take the law into their own hands have picked out a culprit on bad information', needs: [] },
     { text: 'A household woke to find its door forced and nothing taken, and wants to know what the thieves were looking for', needs: [] },
     { text: 'A boy who runs errands for half the place has started carrying more coin than any errand pays', needs: [] },
@@ -47,8 +46,6 @@ export const TROUBLE_HOOKS = Object.freeze({
     { text: 'Chalk marks have appeared on several doors overnight, and the households behind them are frightened', needs: [] },
   ]),
   guild_conflict: Object.freeze([
-    { text: "A guild master's records have gone missing ahead of an audit", needs: ['guild'] },
-    { text: 'A journeyman denied mastership has proof the exam was rigged', needs: ['guild'] },
     { text: 'Someone is sabotaging both sides to destabilize the market for a third party', needs: ['market', 'guild'] },
     { text: 'A trader selling outside the rules has had a cart overturned in the night, and has a fair idea who did it', needs: [] },
     { text: 'A craftsman working from home has been told to stop selling, and means to carry on', needs: [] },
@@ -65,9 +62,6 @@ export const TROUBLE_HOOKS = Object.freeze({
     { text: 'A guild master has quietly bought from a trader outside the guild, and someone saw it happen', needs: ['guild'] },
   ]),
   resource_scarcity: Object.freeze([
-    { text: 'A store of the scarce goods is being kept off the market on purpose', needs: ['market'] },
-    { text: 'The scarcity was engineered. Someone destroyed the competing supply route', needs: [] },
-    { text: 'An alternative source exists but the information is being suppressed', needs: [] },
     { text: 'A household caught hoarding is about to be turned out by its neighbours, and swears it was keeping the goods for others', needs: [] },
     { text: 'A carter offers to fetch what is short from elsewhere, if someone will pay half the price before he sets out', needs: [] },
     { text: 'A family that cannot pay the prices asked is selling its last good tools to buy what it needs', needs: [] },
@@ -78,7 +72,6 @@ export const TROUBLE_HOOKS = Object.freeze({
   external_threat: Object.freeze([
     { text: 'The threat is being exaggerated by someone who profits from selling to the fearful', needs: [], excludes: ['war: peace'] },
     { text: 'A way to come to terms exists, and those who want a fight are keeping it quiet', needs: [], excludes: ['war: peace'] },
-    { text: 'The threat has an agent already inside the settlement', needs: [] },
     { text: 'A rider brings fresh news of the danger tonight, and it does not match what the last one said', needs: [] },
     { text: 'A family is packing to leave before dawn, and the neighbours are trying to stop them spreading panic', needs: [] },
     { text: 'Someone nobody here knows has been asking about the paths in and out, and has asked for a bed for the night', needs: [] },
@@ -87,9 +80,6 @@ export const TROUBLE_HOOKS = Object.freeze({
     { text: 'Tracks of the beasts that press on this place have been found beside a well-used path, closer than ever', needs: ['crisis: monster_pressure'] },
   ]),
   succession_crisis: Object.freeze([
-    { text: "A would-be heir approaches outsiders to investigate a rival's past", needs: ['ruler: lord'] },
-    { text: 'The ailing ruler wants a final errand completed before naming a successor', needs: [], excludes: ['ruler: council', 'ruler: elder', 'crisis: succession_void'] },
-    { text: 'Someone is poisoning the ruler slowly, and someone in the household knows', needs: [], excludes: ['ruler: council', 'ruler: elder', 'crisis: succession_void'] },
     { text: 'One of the would-be successors is giving a feast tonight, and every guest will be counted', needs: [] },
     { text: "A would-be successor wants a rival's supporters watched, quietly, and is offering coin for it", needs: [] },
     { text: 'A letter meant for one would-be successor has reached another, and both now know what it says', needs: [] },
@@ -98,9 +88,6 @@ export const TROUBLE_HOOKS = Object.freeze({
     { text: "With the seat empty, the seal used on the place's business has gone missing", needs: ['crisis: succession_void'] },
   ]),
   outside_debt: Object.freeze([
-    { text: 'The original loan documents contain a clause that was never disclosed publicly', needs: [] },
-    { text: "A creditor's agent is in town conducting a quiet assessment before enforcement", needs: [], excludes: ['crisis: under_siege'] },
-    { text: 'The debt could be voided, if someone can prove it was obtained through fraud', needs: [] },
     { text: 'The one who kept the accounts of the loans has gone missing a week before the collectors are due', needs: [] },
     { text: 'A family that would bear the cost is quietly moving its goods out of the place, cart by cart', needs: [] },
     { text: 'The outside power has sent word of the day it will collect, and wants to know who will meet its people', needs: [] },
@@ -109,9 +96,6 @@ export const TROUBLE_HOOKS = Object.freeze({
     { text: 'A trader at the market is selling off stock cheap before the collectors arrive, and seems to know the day', needs: ['market'] },
   ]),
   legitimacy_crisis: Object.freeze([
-    { text: 'A document that would settle the question of legitimacy exists, and both sides would rather it stayed lost', needs: [] },
-    { text: 'Those in power are paying people to speak for them at the gatherings, because no one will do it for free', needs: [] },
-    { text: 'A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with', needs: [] },
     { text: "Someone has painted a challenge to the authority's right to rule where everyone will see it at dawn, and those in charge want the hand found", needs: [] },
     { text: 'A speaker who questions the right to rule is due at a gathering tonight, and those in charge mean to stop the gathering', needs: [] },
     { text: 'One of those who deny the mandate has been offered a post by those in charge, and has not yet answered', needs: [] },
@@ -119,14 +103,59 @@ export const TROUBLE_HOOKS = Object.freeze({
     { text: 'A preacher of the new faith is telling crowds that those in charge rule without blessing', needs: ['crisis: religious_conversion'] },
   ]),
   corruption_scandal: Object.freeze([
-    { text: 'The investigator who uncovered the corruption has received a death threat', needs: [] },
-    { text: "A key witness can be found, but won't speak without protection", needs: [] },
-    { text: 'The corruption goes higher than anyone yet suspects; those pressing to expose it are being used', needs: [] },
     { text: 'A copy of the evidence is being passed from hand to hand, and one copy differs from the rest', needs: [] },
     { text: 'An official named in the evidence is selling property in a hurry', needs: [] },
     { text: 'Someone has offered to buy the evidence outright, for more than it seems worth', needs: [] },
     { text: 'The hearing on the evidence is set for next week, and the clerk who was to read it out has fallen ill', needs: ['court sits'] },
     { text: 'One of those who betrayed the place is named in the evidence, under another name', needs: ['crisis: recently_betrayed'] },
     { text: 'A trader who paid dues to the corrupt has kept every receipt, and is deciding whom to give them to', needs: ['market'] },
+  ]),
+});
+
+/**
+ * HOOKS-CURES A (the chair, 21:41 UTC 2026-11-20; the chair's rule 2, A LITERAL HAS ONE HOME): a pool line the timeline's
+ * template already holds (`historyData.js :: HISTORICAL_EVENTS_DATA`, the entry whose `type` is the kind, its `plotHooks`)
+ * is NOT copied here; it is NAMED by its index there (`plotHook`), with THIS pool's own `needs` / `excludes` beside it
+ * (several differ from the template's: the pool's stand), and `at`, its index in the composed pool, which is the
+ * presumption ledger's line id. `troubleHooksOf.js :: troubleHookPool` composes each kind's pool at the call site:
+ * `TROUBLE_HOOKS[kind]` in order, each named line placed at its `at`.
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ at: number, plotHook: number, needs: ReadonlyArray<string>, excludes?: ReadonlyArray<string> }>>>>}
+ */
+export const TROUBLE_HOOK_TEMPLATE_LINES = Object.freeze({
+  crime_wave: Object.freeze([
+    { at: 0, plotHook: 0, needs: [] },
+    { at: 1, plotHook: 1, needs: ['watch', 'organised crime'] },
+  ]),
+  guild_conflict: Object.freeze([
+    { at: 0, plotHook: 0, needs: ['guild'] },
+    { at: 1, plotHook: 1, needs: ['guild'] },
+  ]),
+  resource_scarcity: Object.freeze([
+    { at: 0, plotHook: 0, needs: ['market'] },
+    { at: 1, plotHook: 1, needs: [] },
+    { at: 2, plotHook: 2, needs: [] },
+  ]),
+  external_threat: Object.freeze([
+    { at: 2, plotHook: 2, needs: [] },
+  ]),
+  succession_crisis: Object.freeze([
+    { at: 0, plotHook: 0, needs: ['ruler: lord'] },
+    { at: 1, plotHook: 1, needs: [], excludes: ['ruler: council', 'ruler: elder', 'crisis: succession_void'] },
+    { at: 2, plotHook: 2, needs: [], excludes: ['ruler: council', 'ruler: elder', 'crisis: succession_void'] },
+  ]),
+  outside_debt: Object.freeze([
+    { at: 0, plotHook: 0, needs: [] },
+    { at: 1, plotHook: 1, needs: [], excludes: ['crisis: under_siege'] },
+    { at: 2, plotHook: 2, needs: [] },
+  ]),
+  legitimacy_crisis: Object.freeze([
+    { at: 0, plotHook: 0, needs: [] },
+    { at: 1, plotHook: 1, needs: [] },
+    { at: 2, plotHook: 2, needs: [] },
+  ]),
+  corruption_scandal: Object.freeze([
+    { at: 0, plotHook: 0, needs: [] },
+    { at: 1, plotHook: 1, needs: [] },
+    { at: 2, plotHook: 2, needs: [] },
   ]),
 });
