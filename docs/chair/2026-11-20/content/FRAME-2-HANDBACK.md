@@ -67,4 +67,19 @@ Executed: every count above, each by a builder's script in its results file (B1,
 
 ## THE HAND-OVER (to FRAME-3)
 
-(Completed below as the last builders land.)
+Written 2026-11-20T08:17Z (`date -u`). Lane tip on origin: see the FRAME-PART line; every merge below is pushed.
+
+**MERGED, green on its guards** (the sheet/frame/crisis-hook test set at the B4 merge: 104 files, 963 passed, 1 expected fail, 1 failed = the phone floor census, named above): the line (20caebf01); B3 the audience gate; B2 + B2c weight and the veil test re-seated; B5 + B5c the names rule in `crisisHooks.js` reconciled with weight; B4 CF9. Counts in the table above.
+
+**BUILT, NOT MERGED, RED (the chair's word: not cured by this seat):** B10, a person in the crisis cast is never "it", on `origin/lane/frame-2-2026-11-20-b10` at `d8a1b1657` (its brief and results file ride it). The fix: `crisisCast.js :: npcRow` gives a person-held row's reason the holder's own possessive (her/his/their) from a closed set; a power-held row keeps "its". Not only the waverer: the instigator's "its power gains from the crisis" and the brunt's lines too. Counts: B5's pool 36 → 0 (waverer 18, instigator 10, brunt 8); its own 396-town pool 94 → 0. Byte-identity: 48/48 calm towns, 263/263 crisis towns without such a row; the 85 that move differ only in those reasons (each stored twice, `stress` and `stressors`). NEWLY RED, none re-recorded: the generator golden master 5 of 525 rows (each an infiltrated instigator); `institutionBudgetPromise` 6 of 60 seeds; `crisisCast.test` rule 1; `crisisCastSeatAndAccess` (the empty seat); `castDerived` (its drawn count 444 under its floor 500: it matches reasons by exact vocabulary text, so it now skips the person rows: the cure is in that test's matcher); four pinned-mode tests, one golden row each. The golden rows are the owner's to sign.
+
+**NOT STARTED (FRAME-3's, in the chair's order):**
+1. B9, W2 "both powers" (brief `frame2/B9-W2-BOTH-POWERS.md`, committed): moves THE COUNT at the top (measured: 58 framed); re-seat the liveness towns it un-frames.
+2. The phone chrome floor census by its door (+1 floored on /create, /settlements, /gallery, from FRAME-1's renderer lines, unchanged by B4's accent).
+3. The re-seat (brief `frame2/B6-RESEAT.md`): `repeatOnceTonightTraditions` soak1k-11 is GREEN since B3 (the stranger's sheet composes no frame); the brief's step 1 then adds the identity assertion only.
+4. CF10: P1b, P4a (render-only), then the stored P1, P2, P3 (a+b), P4b (brief `frame2/B8-CF10-BUILDS.md`, units U1–U6). THE CHAIR'S ADDED LAW for each stored unit: prove byte-identity ALSO on a forced TWO-CRISIS pool pairing its kind with every kind it links or contradicts (P1's face feeds the crisis links; P3's instigator sits in a cross-crisis contradictory pair). P5, P6, P3c: after the deploy.
+5. The measure re-taken after B9 and CF10 (the CF7 face table by kind and archetype, the owner's "usual three", absent by archetype); three calm and three weighty sheets before/after as plain text; `tests/lint` WHOLE and the lighting census by its door at the final tree.
+
+**Figures owed by builders (named, not re-frozen):** the lighting census file count; the phone floor rows; `proseNumerics` SessionMode 404 → 406; FRAME_TUNING's DRAFT row and the tuning inventory's dependents; the wiring-census stamp; B10's golden rows and pins (above).
+
+**Local worktrees** under this seat's scratchpad (`wt-b2`, `wt-b4`, `wt-b5`, `wt-b10`; branches `frame2-b2`, `frame2-b4`, `frame2-b5`, `frame2-b10`): every commit on them is merged into the lane or pushed (`-b10`); nothing lives only there.
