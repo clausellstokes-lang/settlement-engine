@@ -7,7 +7,8 @@ READ WHOLE, ONCE, IN THIS ORDER (paths under `docs/chair/2026-11-20/content/dail
 1. `briefs/B-BUILD-COMMON.md` — binds you, EXCEPT item 2 (no needs module: ruling 11) and item 9's trailer (yours:
    `Claude-Session: https://claude.ai/code/session_019yED1NEpr7XE73nDAxNLv2`).
 2. `DAILY-2-HANDBACK.md` § 3 (every ruling in force) and § 4 (the atoms). A ruling outranks a LINES file.
-3. `measures/B1/REPORT.md` and `measures/B2/REPORT.md` (the shape and route already built: copy it exactly).
+3. The commit message of df28b9319 (B1b's report) and `measures/B2/REPORT.md` or, if absent, B2's C3-equivalent commit message (the
+   shape and route already built: copy it exactly).
 4. `lines/L2/LINES-2.md`, `lines/L2/LINES-2b.md` (its changes govern), `lines/L2/pools.2.mjs`, `lines/L2/probe.2.mjs`.
 5. `src/domain/dailyLife.js`, `src/domain/regenerationDelta.js`, `src/domain/aiGrounding.js` (the `dailyLife` part),
    `src/domain/display/publicSafe.js :: toPublicSafe`, whole where you change them.
@@ -39,4 +40,5 @@ size, EMPTY by size, each branch's reach, the thinnest branch's eligible rows, 0
 
 Write `measures/B3/REPORT.md` (the houses each wording needs, slot by slot, the dm slot apart; the hand-list rows for
 SAME-2; the call sites that never receive the dm slot; what moved by which door; the receipts) and commit it with E3.
+If your tool refuses the report file, its content goes in that commit's message instead, and you say so.
 You do NOT push or merge. Final message: B-BUILD-COMMON item 11.

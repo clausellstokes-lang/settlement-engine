@@ -4,21 +4,18 @@ Lane `lane/daily-2-2026-11-20`; seat DAILY-2 (session_019yED1NEpr7XE73nDAxNLv2);
 Assignment: `origin/lane/chair-2026-11-08:docs/chair/2026-11-20/seventh/prompts/DAILY-2.txt` (it binds DAILY-1.txt's
 cure pattern, points 1 to 8). Predecessor's record: `DAILY-1-HANDBACK.md` (history; this file governs).
 
-## 1. State (written 19:43 UTC)
+## 1. State (written 19:59 UTC)
 - THE LANE WAS GIVEN at 0eadcb032 (chair, 19:03). Branch cut there.
 - Merged: B1 C1 (the dead profile call + parity arm) at 8e2534945; B1b C2 (2d7fa8399: the 13 kinds in both homes,
   four granted atoms, the hideable-and-crime arm `tests/domain/dailyLifeAtoms.test.js`) at b4083d31f, red re-run
   18 failed | 4 passed of 22, green re-run 65 files / 402 passed; wiring census exit 0; lighting census refrozen at
   c4d5b14bb (files 3709, parked 474), walker 34 passed.
-- STOPPED, AWAITING THE CHAIR (asked 19:4x): B1b C3 (`gathering_places`) is BUILT and UNCOMMITTED in
-  `/home/user/wt-daily2-b1` (pools `src/data/dailyLife/gatheringPlaces.js`, `dailyLife.js`, the new
-  `tests/domain/dailyLifeGathering.test.js`, pins in `dailyLife.test.js`, `dailyLifeNoPeople.test.js`,
-  `dailyLifeAtoms.test.js`, the ruin walker's `dailyLife.js` exemption row deleted (115 -> 114),
-  `measures/B1/measure.b1.mjs` + `b1.out.txt`): top share 11/7/12/8/8/9%, EMPTY 0, false 0 on 900. One gate stops it:
-  `presumedThings.walker` ARM 1 (shrink-only; door `node scripts/presumed-things-door.mjs --check`) +4 hits. ASKED:
-  (1) `src/domain/facts/registeredWords.js :: HOUSE_FAMILIES` theatre <- institution:theatre, root cellar <-
-  institution:rootCellar (outside the manifest), N8 {bathhouse} cut; (2) N11 "When the boats come in" gains the
-  exclusion `crisis: under_siege`. On the chair's word a builder finishes C3 (the brief's B1b, resumed).
+- Merged: B1b C3 (`gathering_places`; 999f85558 wip + df28b9319, B1b's report in df28b9319's message) at 9567ea7a2:
+  red re-run on the old deriver 8 failed | 37 of 45, green re-run 74 files / 508 passed, 5 skipped; presumed-things door
+  fresh 0 stale 0 (one stale row shrunk by the door: a `cultureProfiles.js` bathhouse line now answered); eslint 0;
+  typecheck:ratchet 167/167; domain:strict 1113/1113; wiring exit 0; lighting refrozen 648cc7397 (files 3710), 34
+  passed. Re-measure `measures/B1/b1.out.txt`: top 11/7/12/8/8/9%, distinct 17/34/25/26/32/24, EMPTY 0, false 0.
+- NEXT: B2 (`briefs/B2-DAWN-AND-CHILD.md`), worktree `/home/user/wt-daily2-b2`, branch `lane/daily-2-2026-11-20-b2`.
 - Lines: ALL READ AND RULED (LINES-1, 1b, 2, 2b). Nothing more goes to the chair's eye unless a builder must change a
   wording to pass a gate (then one line each).
 
@@ -99,6 +96,10 @@ baseline file's _doc on a clean tree).
    (`docs/chair/2026-11-20/content/seat/u4/measure-lit.sh` at ce3a4e9f6 on `lane/seat-6-2026-11-20`); no new lines.
 18. THE PUSH HAZARD: never commit on a branch while its push is in flight; wait for the push log's last line;
    `git ls-remote` before every push; only `refs/heads/lane/*`; never a pull request; never a force push.
+20. (19:41) `registeredWords.js :: HOUSE_FAMILIES`: theatre, root cellar and bathhouse are answered by
+   `institution: theatre`, `institution: rootCellar`, `institution: bathhouse` (the chair's leave for that file, for these
+   answers only); `bathhouse` was already one of the 14 original kinds (no new row; its pattern matches the catalogue's
+   one name, "Public bathhouse"); N8 and B16 kept; N11 excludes `crisis: under_siege`, wording unchanged.
 19. THE LANE DOES NOT PRINT: nothing under `src/components/`, `src/pdf/`, `supabase/`, `tests/security/`; no file under
    `src/generators/` without one line to the chair first.
 
@@ -123,6 +124,11 @@ baseline file's _doc on a clean tree).
 ## 5. Houses a wording needs (for the security reader)
 LINES-1 § THE HOUSES EACH SLOT NEEDS; LINES-2 § HOUSES EACH WORDING NEEDS; the dm slot: watch, guard force, gate,
 market, trade route, smuggling. Final per-slot list written at each build's merge.
+- `gathering_places` (merged 9567ea7a2): NAMED from the live roster (never hideable, never access-only): the sacred house,
+  church, cathedral, market, market square, inn, mill, bathhouse, bridge, docks, theatre. NEEDED, NOT NAMED: water source,
+  dwellings, farmland, common grazing, fishing landing, root cellar, shepherd; an elder ruler; a small place (tier).
+  SAME-2's hand-list rows: `src/data/dailyLife/gatheringPlaces.js` exports `GATHERING_NAMED`, `GATHERING_PLAIN`, slot
+  `gathering_places`, line shape `{ id, text, needs, excludes? }`.
 
 ## 6. Losses to look at again (for the owner)
 None yet.

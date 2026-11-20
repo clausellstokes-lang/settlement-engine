@@ -8,7 +8,8 @@ READ WHOLE, ONCE, IN THIS ORDER (paths under `docs/chair/2026-11-20/content/dail
    `Claude-Session: https://claude.ai/code/session_019yED1NEpr7XE73nDAxNLv2`).
 2. `DAILY-2-HANDBACK.md` § 3 (every ruling in force, one list) and § 4 (the atoms B1b added). A ruling outranks a
    LINES file.
-3. `measures/B1/REPORT.md` (how B1b declared the pools and which route it chose: copy it exactly; do not invent a
+3. The commit message of df28b9319 (`git show -s df28b9319`: B1b's report — how it declared the pools, the route it chose, the
+   house lookup; `src/data/dailyLife/gatheringPlaces.js` and `deriveGatheringPlaces` are the shape: copy it exactly; do not invent a
    second shape).
 4. `lines/L1/LINES-1.md` § dawn_work, § child_warnings, § HOW THE POOLS ARE APPLIED; `lines/L1/LINES-1b.md` WHOLE
    (it revises both slots on the 18:37 ruling: its pools govern where they differ from LINES-1); `lines/L1/probe.1b.mjs`
@@ -35,4 +36,5 @@ smallest size, 0 false lines by M1's tests — into `measures/B2/` with its re-r
 new wording: STOP and report the slot, size and share (DAILY-2 sends the chair one line).
 
 Write `measures/B2/REPORT.md` (the houses each wording needs, slot by slot; the hand-list rows for SAME-2; what moved
-by which door; the receipts) and commit it with D2. You do NOT push or merge. Final message: B-BUILD-COMMON item 11.
+by which door; the receipts) and commit it with D2.
+If your tool refuses the report file, its content goes in that commit's message instead, and you say so. You do NOT push or merge. Final message: B-BUILD-COMMON item 11.
