@@ -1880,6 +1880,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/blackMarketCaptureSignal.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/galleryVeilSignalCopies.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"

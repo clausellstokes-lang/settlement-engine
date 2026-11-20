@@ -1,0 +1,235 @@
+{
+ "towns": [
+  {
+   "seed": "town-infiltrated-0",
+   "criminal": false,
+   "capture": 0
+  },
+  {
+   "seed": "city-calm-1",
+   "criminal": true,
+   "capture": 0
+  },
+  {
+   "seed": "metropolis-calm-2",
+   "criminal": true,
+   "capture": 26
+  },
+  {
+   "seed": "city-insurgency-3",
+   "criminal": true,
+   "capture": 36
+  },
+  {
+   "seed": "town-calm-4",
+   "criminal": false,
+   "capture": 8
+  },
+  {
+   "seed": "metropolis-indebted-5",
+   "criminal": true,
+   "capture": 8
+  },
+  {
+   "seed": "village-calm-6",
+   "criminal": false,
+   "capture": 14
+  },
+  {
+   "seed": "city-famine-7",
+   "criminal": true,
+   "capture": 15
+  },
+  {
+   "seed": "village-infiltrated-8",
+   "criminal": false,
+   "capture": 5
+  },
+  {
+   "seed": "town-indebted-9",
+   "criminal": false,
+   "capture": 9
+  },
+  {
+   "seed": "hamlet-calm-10",
+   "criminal": true,
+   "capture": 6
+  },
+  {
+   "seed": "city-plague-11",
+   "criminal": true,
+   "capture": 2
+  }
+ ],
+ "arms": {
+  "gallery marked dm=false": {
+   "criminal": {
+    "towns": 7,
+    "drawn": 0,
+    "equalToOwner": 0
+   },
+   "noCriminal": {
+    "towns": 5,
+    "drawn": 0,
+    "equalToOwner": 0
+   },
+   "signalSaysDraw": [
+    false
+   ],
+   "served": [
+    true
+   ],
+   "marked": [
+    true
+   ]
+  },
+  "link marked dm=false": {
+   "criminal": {
+    "towns": 7,
+    "drawn": 0,
+    "equalToOwner": 0
+   },
+   "noCriminal": {
+    "towns": 5,
+    "drawn": 0,
+    "equalToOwner": 0
+   },
+   "signalSaysDraw": [
+    false
+   ],
+   "served": [
+    true
+   ],
+   "marked": [
+    true
+   ]
+  },
+  "gallery unmarked dm=false": {
+   "criminal": {
+    "towns": 7,
+    "drawn": 7,
+    "equalToOwner": 7
+   },
+   "noCriminal": {
+    "towns": 5,
+    "drawn": 5,
+    "equalToOwner": 5
+   },
+   "signalSaysDraw": [
+    true
+   ],
+   "served": [
+    false
+   ],
+   "marked": [
+    false
+   ]
+  },
+  "link unmarked dm=false": {
+   "criminal": {
+    "towns": 7,
+    "drawn": 0,
+    "equalToOwner": 0
+   },
+   "noCriminal": {
+    "towns": 5,
+    "drawn": 0,
+    "equalToOwner": 0
+   },
+   "signalSaysDraw": [
+    false
+   ],
+   "served": [
+    true
+   ],
+   "marked": [
+    true
+   ]
+  },
+  "gallery marked dm=true": {
+   "criminal": {
+    "towns": 7,
+    "drawn": 0,
+    "equalToOwner": 0
+   },
+   "noCriminal": {
+    "towns": 5,
+    "drawn": 0,
+    "equalToOwner": 0
+   },
+   "signalSaysDraw": [
+    false
+   ],
+   "served": [
+    true
+   ],
+   "marked": [
+    true
+   ]
+  },
+  "link marked dm=true": {
+   "criminal": {
+    "towns": 7,
+    "drawn": 0,
+    "equalToOwner": 0
+   },
+   "noCriminal": {
+    "towns": 5,
+    "drawn": 0,
+    "equalToOwner": 0
+   },
+   "signalSaysDraw": [
+    false
+   ],
+   "served": [
+    true
+   ],
+   "marked": [
+    true
+   ]
+  },
+  "gallery unmarked dm=true": {
+   "criminal": {
+    "towns": 7,
+    "drawn": 7,
+    "equalToOwner": 7
+   },
+   "noCriminal": {
+    "towns": 5,
+    "drawn": 5,
+    "equalToOwner": 5
+   },
+   "signalSaysDraw": [
+    true
+   ],
+   "served": [
+    false
+   ],
+   "marked": [
+    false
+   ]
+  },
+  "link unmarked dm=true": {
+   "criminal": {
+    "towns": 7,
+    "drawn": 0,
+    "equalToOwner": 0
+   },
+   "noCriminal": {
+    "towns": 5,
+    "drawn": 0,
+    "equalToOwner": 0
+   },
+   "signalSaysDraw": [
+    false
+   ],
+   "served": [
+    true
+   ],
+   "marked": [
+    true
+   ]
+  }
+ },
+ "bad": []
+}

@@ -1,0 +1,21 @@
+[gate-tail] start:  07:02:01 up  1:09,  0 user,  load average: 4.34, 7.56, 8.01 · cores: 4
+gate-mutex: entered SHARED tier at /tmp/settlementforge-vitest-gate.0.lock.shared as PID 7791 after 0 poll(s); 2 shared holder(s) live, worker cap <= 2.
+
+ RUN  v4.1.8 /home/user/wt/r6
+
+stdout | tests/security/blackMarketCaptureSignal.pglite.test.js > the chair's condition on safety.blackMarketCapture: drawn by the served signal alone, the same on every town (through the server, then sanitizeDossier) > (i) and (ii): the page draws the figure by the served signal alone, the same on every town; equal to the owner's figure where drawn
+R6 CONDITION: 12 towns (7 with a criminal house, 5 without); gallery marked dm=false: drawn 0/7 criminal, 0/5 not; equal 0; served true; marked true | link marked dm=false: drawn 0/7 criminal, 0/5 not; equal 0; served true; marked true | gallery unmarked dm=false: drawn 7/7 criminal, 5/5 not; equal 12; served false; marked false | link unmarked dm=false: drawn 0/7 criminal, 0/5 not; equal 0; served true; marked true | gallery marked dm=true: drawn 0/7 criminal, 0/5 not; equal 0; served true; marked true | link marked dm=true: drawn 0/7 criminal, 0/5 not; equal 0; served true; marked true | gallery unmarked dm=true: drawn 7/7 criminal, 5/5 not; equal 12; served false; marked false | link unmarked dm=true: drawn 0/7 criminal, 0/5 not; equal 0; served true; marked true
+
+ ✓ tests/security/blackMarketCaptureSignal.pglite.test.js > the chair's condition on safety.blackMarketCapture: drawn by the served signal alone, the same on every town (through the server, then sanitizeDossier) > THROUGH THE SERVER: no non-owner read carries the figure (R2, VR33), on any town, signal, Reveal setting or read 4ms
+ ✓ tests/security/blackMarketCaptureSignal.pglite.test.js > the chair's condition on safety.blackMarketCapture: drawn by the served signal alone, the same on every town (through the server, then sanitizeDossier) > (i) and (ii): the page draws the figure by the served signal alone, the same on every town; equal to the owner's figure where drawn 9626ms
+stdout | tests/security/blackMarketCaptureSignal.pglite.test.js > the chair's condition on safety.blackMarketCapture: drawn by the served signal alone, the same on every town (through the server, then sanitizeDossier) > (i) THE SIGNAL ALONE: a served body read with another read's served signal follows that signal, not its body
+R6 CONDITION swaps: 48, against the signal 0
+
+ ✓ tests/security/blackMarketCaptureSignal.pglite.test.js > the chair's condition on safety.blackMarketCapture: drawn by the served signal alone, the same on every town (through the server, then sanitizeDossier) > (i) THE SIGNAL ALONE: a served body read with another read's served signal follows that signal, not its body 5691ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  07:02:02
+   Duration  63.35s (transform 3.85s, setup 29ms, import 129ms, tests 63.09s, environment 0ms)
+
+[gate-tail] end:  07:03:06 up  1:10,  0 user,  load average: 5.89, 7.38, 7.91
