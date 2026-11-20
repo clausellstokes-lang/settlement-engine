@@ -1,0 +1,26 @@
+== tests/generators/tailCrisisIronHooks.test.js
+   r2r-town-20 [I2.price] -> iron-forge: "The forge here is down to its last good iron, and the work waiting on it grows longer every day."
+      was: "Iron has doubled in price this season, and tools are being mended with scrap. Work slows, and people are starting to complain."
+   r2r-town-1 [I3.carts] unchanged (iron-carts)
+      was: "The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, and work waits on mended tools."
+   r2r-town-17 [S3.importer] untouched
+   r2r-town-17 [S4.dam] untouched
+   r2r-town-17 [I4.toll] -> iron-carts: "The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, and work waits on mended tools."
+      was: "A new toll on the iron road has made metal dear. People blame whoever set it, and the tools still need mending."
+   r2r-town-49 [I2.price] unchanged (iron-price-t)
+      was: "Iron has doubled in price this season, and metal for tools and repairs is hard to come by. Work slows, and people are starting to complain."
+   r2r-town-26 [I3.carts] -> iron-river: "The iron barges are late coming up the river, and work here waits on tools nobody can mend."
+      was: "The iron carts are three weeks late and the carters will not say why. Broken tools stay broken, and work waits."
+== tests/generators/tailDefeconBatch3Lines.test.js (row 20893)
+   r2r-town-1 [I3.carts] unchanged (iron-carts)
+      was: "The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, and work waits on mended tools."
+== tests/generators/outlookHookDropRefused.test.js
+   r2r-thorp-17 [S1s.starvingShut] untouched
+   r2r-village-24 [S1.starving] untouched
+== section 0
+   r2r-town-3 [S3.importer] untouched
+   r2r-town-3 [S4.dam] untouched
+   r2r-town-5 [S1t.moderateGapTwin] unchanged (gap-canon)
+      was: "The settlement grows less food than it eats, and a merchant has offered to make up the difference for a price that is not paid in coin."
+   r2r-village-4 [I3.carts] -> iron-forge: "The forge here is down to its last good iron, and the work waiting on it grows longer every day."
+      was: "The iron carts are three weeks late and the carters will not say why. What iron there is goes out in rations, and work waits on mended tools."
