@@ -4080,3 +4080,15 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   ruled tables into its hand-back, dispatch one builder for the crime and guild lines, merge S6 only if green
   before 285,000, and hand over; `prompts/PAGE-7.txt` WRITTEN (PAGE-5's file is its assignment; the causes as
   ruled; the lines its main work), seated after this push.
+- 14:38 UTC · PAGE-7 SEATED BESIDE PAGE-5 at 14:36 (session_019yED1NhG5mE6FfoVaq52BV; on `lane/page-5-2026-11-20`; outcome
+  `lane/page-7-2026-11-20`). VEIL-27 read in (14:34; about 95,000): THE GATE REPRODUCES at 4661a1353 (HIGHER 0,
+  EQUAL 79, LOWER 13 of 92, both engines, both Reveal settings, line for line with the builder's table); the four
+  sha256 values re-made; the acceptance run 40 PASS; its briefs for R3-CURE-6 and R3-TELL drafted, committed when
+  the lane is its own. PAGE-6 (about 190,000 at 14:39 by its own count; seated 14:04): its lane cut at 1cc6b8459;
+  L2's finishing builder and S9's post-pass builder out; ITS CONTAINER WAS RESTARTED at 14:29 (exit 137 mid-hook
+  with two builders in gates: memory): its checks after (core.bare false, no local identity, authors, both
+  worktrees intact) clean; every gate and push through the mutex from now. THE NINE MERCY ROWS READ BY THE CHAIR
+  (`lines/L4-MERCY-TO-CHAIR.md`: one a title set for a principled holder: a rule broken for mercy or conscience):
+  EIGHT APPROVED AS WRITTEN; the dean's reworded ("Allowed a burial in consecrated ground that the rule forbids,
+  because the family begged for it."); L4 CLEARED TO BUILD (23 + 7 + 9 rows) on S9's merged tip.
+  `prompts/PAGE-8.txt` WRITTEN AHEAD OF NEED (PAGE-6 tells the chair at 215,000; seated beside it then).
