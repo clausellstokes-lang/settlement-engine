@@ -1,4 +1,4 @@
-# GOALS-4 · the hand-back (HANDED OVER at 21:3x UTC, 2026-11-20, by rule 13: past 420,000 by my estimate with the half)
+# GOALS-4 · the hand-back (kept current; the hand-over of 21:32 UTC was NOT TAKEN: the chair's read governs, 240,443 at 21:34; the lane stays with GOALS-4 until the chair says 400,000)
 
 Seat: GOALS-4, the wants' build, under the seventh chair (session_019yED1SUxGVHyjQnoqoFvQ8). Orders: `docs/chair/2026-11-20/seventh/prompts/GOALS-4.txt` and `GOALS-4-ADDENDUM.txt` on `lane/chair-2026-11-08`, plus the chair's messages listed below. The lane was given at 18:46 UTC ("THE LANE IS YOURS at 021557d4d").
 
@@ -105,8 +105,9 @@ The two edge bundles (aiCharter, aiOutputSchema) read `src/kernel/proseHash.js` 
 11. The line merges into the lane before the cure's merge (20:36). Before each landing request, read `ci/LINE-NOW.md` and `ci/RED-AT-LINE.tsv` on the chair's branch.
 12. The sameness door's row (card `goal.short` repeated by a second place: town 0.16, city 0.27, metropolis 0.35 at the line) is the wants' to cure and should FALL. Its three figures go beside ours in "WANTS <commit>" (20:50).
 13. RULE 8 RE-RULED (21:27): NO whole `npm run test:ratchet`. Instead, (a) the build and the two VERIFY_DIST tests; (b) ONE run of `tests/generators`, `tests/data`, `tests/lint` and `tests/build`, plus `tests/domain/<dir>/` for each `src/domain/<dir>/` touched. Run them through the mutex, one heavy run at a time, and read the failing rows by name against `ci/RED-AT-LINE.tsv`.
-15. The chair's 21:30 rulings (A), (A2), (B) and (C) above are in force.
 14. A successor re-reads this file and COMMON-RULES.txt whole before its first merge.
+15. The chair's 21:30 rulings (A), (A2), (B) and (C) above are in force.
+16. Rule 13's mark is by THE CHAIR'S READ; hand over when the chair says 400,000 (21:34).
 
 ## The chair's 21:30 rulings on builder 11's three STOPs (RULED; builder 11 resumed on them from 7b670cd8b)
 
