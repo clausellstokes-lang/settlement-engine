@@ -1,0 +1,79 @@
+gate-mutex: acquired atomic lock at /tmp/settlementforge-vitest-gate.0.lock as PID 20960 after 25 atomic poll(s) + 0 legacy poll(s) + 0 shared-drain poll(s).
+
+=== TOWN r2r-city-19 name="Dunbury" pubName="Dunbury"
+SENTENCE owner "The powers of this place include a criminal one, and crime is rising."
+SENTENCE served "More than one criminal crew operates here, none master of the others, and crime is rising."
+CAUSE criminal_power rank 1 holds criminalPowerSeated power - owner true served true
+CAUSE law_thin rank 1 holds lawCriticalOrCollapsed power - owner false served false
+CAUSE rival_rings rank 1 holds rivalRings power - owner true served true
+CAUSE no_force rank 1 holds noForceKept power - owner false served false
+CAUSE force_unpaid_or_cut rank 1 holds forceUnpaidOrCut power - owner true served false  <<< DIFFERS
+CAUSE thieves_house rank 2 holds thievesGuildHouse power - owner false served false
+CAUSE contraband_water rank 2 holds smugglingByWater power - owner true served true
+CAUSE underground rank 2 holds undergroundHouse power - owner true served true
+CAUSE assassins rank 2 holds assassinsHouse power - owner true served true
+CAUSE black_market rank 2 holds blackMarketHouse power - owner true served true
+CAUSE whisper_market rank 2 holds whisperMarketHouse power - owner false served false
+CAUSE outlaws_near rank 2 holds outlawsHouse power - owner false served false
+FIELD powerStructure.factions owner ["Religious Authorities|religious","Royal Authority|government|gov","Noble Families|noble","Military/Guard|military","Thieves' Guild|criminal","The Peerage|noble","The Faithful Assembly|religious"]
+FIELD powerStructure.factions served ["Religious Authorities|religious","Royal Authority|government|gov","Noble Families|noble","Military/Guard|military","Thieves' Guild|criminal","The Peerage|noble","The Faithful Assembly|religious"]
+FACT crime(criminalStructureKeyOf) owner "semi-organized" served "semi-organized"
+FACT rivalRingsOf(factions, live) owner true served true; facts.rivalRings owner true served true
+FACT orderForce owner {"kept":true,"volunteers":false,"paid":true,"pay":"full","payCut":true,"count":{"garrison":1,"watch":1,"militia":0,"mercenary":1}}
+FACT orderForce served {"kept":true,"volunteers":false,"paid":true,"pay":"full","payCut":false,"count":{"garrison":1,"watch":1,"militia":0,"mercenary":1}}
+FACT lawBand owner "strained" served "strained"
+FIELD npcs[category=military].settlementCondition owner ["Úna Sheridan|economic_stress","Banbh MacGregor|undefined","Killian Nolan|undefined","Tailtiu Hennessy|undefined","Rónnat MacKenzie|undefined"] served ["Úna Sheridan|undefined","Banbh MacGregor|undefined","Killian Nolan|undefined","Tailtiu Hennessy|undefined","Rónnat MacKenzie|undefined"]; npcs is array owner true served true
+FIELD institutions count owner 77 served 77; owner-only []; served-only []
+FACT liveInstitutions count owner 77 served 77
+
+=== TOWN r2s-religious_conversion-city-0 name="Chinggisnuur" pubName="Chinggisnuur"
+SENTENCE owner "Crime is rising as rival rings work this place and no one of them rules the rest."
+SENTENCE served "Crime is rising, and a criminal power is counted among the powers of this place."
+CAUSE criminal_power rank 1 holds criminalPowerSeated power - owner true served true
+CAUSE law_thin rank 1 holds lawCriticalOrCollapsed power - owner false served false
+CAUSE rival_rings rank 1 holds rivalRings power - owner true served true
+CAUSE no_force rank 1 holds noForceKept power - owner false served false
+CAUSE force_unpaid_or_cut rank 1 holds forceUnpaidOrCut power - owner true served false  <<< DIFFERS
+CAUSE thieves_house rank 2 holds thievesGuildHouse power - owner false served false
+CAUSE contraband_water rank 2 holds smugglingByWater power - owner false served false
+CAUSE underground rank 2 holds undergroundHouse power - owner true served true
+CAUSE assassins rank 2 holds assassinsHouse power - owner false served false
+CAUSE black_market rank 2 holds blackMarketHouse power - owner true served true
+CAUSE whisper_market rank 2 holds whisperMarketHouse power - owner true served true
+CAUSE outlaws_near rank 2 holds outlawsHouse power - owner false served false
+FIELD powerStructure.factions owner ["Noble Governorship|government|gov","Religious Authorities|religious","Thieves' Guild|criminal","Noble Families|noble","Military/Guard|military","New Faith Community|religious","The Devout Circle|religious"]
+FIELD powerStructure.factions served ["Noble Governorship|government|gov","Religious Authorities|religious","Thieves' Guild|criminal","Noble Families|noble","Military/Guard|military","New Faith Community|religious","The Devout Circle|religious"]
+FACT crime(criminalStructureKeyOf) owner "semi-organized" served "semi-organized"
+FACT rivalRingsOf(factions, live) owner true served true; facts.rivalRings owner true served true
+FACT orderForce owner {"kept":true,"volunteers":false,"paid":true,"pay":"full","payCut":true,"count":{"garrison":1,"watch":1,"militia":0,"mercenary":1}}
+FACT orderForce served {"kept":true,"volunteers":false,"paid":true,"pay":"full","payCut":false,"count":{"garrison":1,"watch":1,"militia":0,"mercenary":1}}
+FACT lawBand owner "strained" served "strained"
+FIELD npcs[category=military].settlementCondition owner ["Mongke Khwarezm|economic_stress","Urangua Arulad|undefined","Altantsetseg Jadaran|undefined","Timur Yorqin|undefined","Chagatai Dörbete|undefined"] served ["Mongke Khwarezm|undefined","Urangua Arulad|undefined","Altantsetseg Jadaran|undefined","Timur Yorqin|undefined","Chagatai Dörbete|undefined"]; npcs is array owner true served true
+FIELD institutions count owner 71 served 71; owner-only []; served-only []
+FACT liveInstitutions count owner 71 served 71
+
+=== TOWN r2s-wartime-metropolis-2 name="Nanwan" pubName="Nanwan"
+SENTENCE owner "The force that keeps order goes unpaid, or its pay falls short or has been cut, and crime is rising."
+SENTENCE served "The powers of this place include a criminal one, and crime is rising."
+CAUSE criminal_power rank 1 holds criminalPowerSeated power - owner true served true
+CAUSE law_thin rank 1 holds lawCriticalOrCollapsed power - owner false served false
+CAUSE rival_rings rank 1 holds rivalRings power - owner false served false
+CAUSE no_force rank 1 holds noForceKept power - owner false served false
+CAUSE force_unpaid_or_cut rank 1 holds forceUnpaidOrCut power - owner true served false  <<< DIFFERS
+CAUSE thieves_house rank 2 holds thievesGuildHouse power - owner true served true
+CAUSE contraband_water rank 2 holds smugglingByWater power - owner false served false
+CAUSE underground rank 2 holds undergroundHouse power - owner true served true
+CAUSE assassins rank 2 holds assassinsHouse power - owner true served true
+CAUSE black_market rank 2 holds blackMarketHouse power - owner false served false
+CAUSE whisper_market rank 2 holds whisperMarketHouse power - owner true served true
+CAUSE outlaws_near rank 2 holds outlawsHouse power - owner false served false
+FIELD powerStructure.factions owner ["Ducal Governorship|government|gov","War Council|military","Thieves' Guild|criminal","Merchant Guilds|economy","Noble Houses|noble","Military/Guard|military","Religious Authorities|religious","Arcane Orders|magic","The Tower Alliance|magic","The Old Houses|noble"]
+FIELD powerStructure.factions served ["Ducal Governorship|government|gov","War Council|military","Thieves' Guild|criminal","Merchant Guilds|economy","Noble Houses|noble","Military/Guard|military","Religious Authorities|religious","Arcane Orders|magic","The Tower Alliance|magic","The Old Houses|noble"]
+FACT crime(criminalStructureKeyOf) owner "organized" served "organized"
+FACT rivalRingsOf(factions, live) owner false served false; facts.rivalRings owner false served false
+FACT orderForce owner {"kept":true,"volunteers":false,"paid":true,"pay":"full","payCut":true,"count":{"garrison":1,"watch":1,"militia":0,"mercenary":1}}
+FACT orderForce served {"kept":true,"volunteers":false,"paid":true,"pay":"full","payCut":false,"count":{"garrison":1,"watch":1,"militia":0,"mercenary":1}}
+FACT lawBand owner "strained" served "strained"
+FIELD npcs[category=military].settlementCondition owner ["Zhiwei Im|economic_stress","Jiro Yamada|undefined","Xiaoling Sato|undefined","Long Li|undefined","Fang Bae|undefined"] served ["Zhiwei Im|undefined","Jiro Yamada|undefined","Xiaoling Sato|undefined","Long Li|undefined","Fang Bae|undefined"]; npcs is array owner true served true
+FIELD institutions count owner 94 served 94; owner-only []; served-only []
+FACT liveInstitutions count owner 94 served 94
