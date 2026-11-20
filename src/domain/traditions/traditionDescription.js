@@ -34,7 +34,10 @@
  *                       hideable house: people/cardVeil.js :: isHideableHouse), so none can stand earlier in the order.
  *   S2 power (powerFor) CHOOSES the seat (rulingPower.js :: governingFactionOf over the view's powers, so a veiled power
  *                       flagged governing cannot stand ahead of the served seat) or the STRONGEST power of an archetype
- *                       (by `power`, over the view's powers: no isVeiledPower row can outrank the one named).
+ *                       (by `power`, over the view's powers: no isVeiledPower row can outrank the one named). The view
+ *                       strips from every power every field any of its eyes can remove (galleryVeil.js ::
+ *                       CARD_KINDS.faction.fields), so a power with no mapped category takes no archetype from its
+ *                       `description` (factionArchetypes.js :: factionArchetype's fallback; TRAD-4 unit 7).
  *   S2 presider         none for a reader (a card's tie is a field the DM may hide card by card).
  *   S3 founding         for the OWNER, CHOOSES between the two founding pools by whether the record holds `foundedBy`; for a
  *                       READER, never reads `foundedBy` (always the bare pool: an editable field veil-22's name sweep
@@ -45,7 +48,10 @@
  *                       event whole when its name holds a hidden name, so for a READER (TRAD-3 unit 4, the chair's item 3)
  *                       the choice is only among events whose name holds no house, person or power name the WHOLE record
  *                       holds (hidden or shown: heldNamesOf), and the event is named by its KIND (DEAD_EVENT_PHRASES),
- *                       never by `event.name`.
+ *                       never by `event.name`. "Holds" is the chair's WORD rule (TRAD-4 unit 7, 13:59 UTC; holdsAName):
+ *                       the event's name shares no word with any held name (letter runs, case-folded, a qualifier's words
+ *                       in, HELD_NAME_STOP_WORDS out, an event word that begins with a held word caught), strictly wider
+ *                       than any by-name withholding, a hidden house's bare form (migration 212's sweep) among them.
  *   S3 economy          RANKS the fitting income (chief / lesser) and COUNTS the incomes ('only') over the view's
  *                       incomeSources: the criminal income row (`isCriminal: true`), the one row the veil withholds whole
  *                       (gallerySecondHomes.js :: withholdCriminalIncome, on the veil lane), is out of the view.
@@ -140,19 +146,33 @@ export function withoutFunction(i) {
  * (`isCriminal: true`, gallerySecondHomes.js :: withholdCriminalIncome's class); and, from every house left, every field
  * its `function` eye can remove (galleryVeil.js :: CARD_KINDS.institution.fields.function, the veil's own declaration,
  * read here and never copied), so a fact the reader's text admits by reads a house's floor (TRAD-3 unit 4). The
- * hideable class is read on the house whole, before the strip (an illegal brokerage is known by its own tags).
- * Everything else is the record's own. A shallow copy: the record is never written.
+ * hideable class is read on the house whole, before the strip (an illegal brokerage is known by its own tags). Likewise
+ * every power left less every field any of its eyes can remove (CARD_KINDS.faction.fields; TRAD-4 unit 7), the veiled
+ * class read on the power whole. Everything else is the record's own. A shallow copy: the record is never written.
  * @param {Rec} settlement @returns {Rec}
  */
 function readerView(settlement) {
   const ps = recordOf(settlement.powerStructure);
   const economy = recordOf(settlement.economicState);
+  // CTR11 (TRAD-4 unit 7): every field any eye of a power can remove (galleryVeil.js :: CARD_KINDS.faction.fields, the
+  // veil's own declaration, read and never copied; none is the power's name or category), stripped from every power as
+  // withoutFunction strips a house: a power with no mapped category takes no archetype from its `description`.
+  const powerEyeKeys = Object.values(CARD_KINDS.faction.fields).flat();
+  /** @param {unknown} f @returns {unknown} */
+  const powerFloor = (f) => {
+    const power = recordOf(f);
+    if (!powerEyeKeys.some((k) => k in power)) return f;
+    /** @type {Rec} */
+    const out = { ...power };
+    for (const k of powerEyeKeys) delete out[k];
+    return out;
+  };
   return {
     ...settlement,
     // the live roster (institutions/institutionRoster.js): every reader of the roster here reads it live already
     institutions: liveInstitutions(/** @type {Parameters<typeof liveInstitutions>[0]} */ (settlement))
       .filter((i) => !isHideableHouse(recordOf(i))).map(withoutFunction),
-    powerStructure: { ...ps, factions: listOf(ps.factions).filter((f) => !isVeiledPower(f)) },
+    powerStructure: { ...ps, factions: listOf(ps.factions).filter((f) => !isVeiledPower(f)).map(powerFloor) },
     economicState: { ...economy, incomeSources: listOf(economy.incomeSources).filter((r) => recordOf(r).isCriminal !== true) },
   };
 }
@@ -160,7 +180,8 @@ function readerView(settlement) {
 /**
  * Every name of a house, a person or a power the WHOLE record holds, hidden or shown (lower-cased): every copy of the
  * gallery veil's institution, npc and faction kinds (galleryVeil.js :: CARD_KINDS[kind].lists, a `*` walking every
- * owner), read on the owner's record and never on the reader's view, so the set is no function of what a DM hides.
+ * owner), read on the owner's record and never on the reader's view, so the set is no function of what a DM hides. Each
+ * name is whole, its bracketed qualifier in ("Rookery (word of mouth)"): holdsAName cuts it into words.
  * @param {Rec} whole @returns {string[]}
  */
 function heldNamesOf(whole) {
@@ -183,15 +204,24 @@ function heldNamesOf(whole) {
 }
 
 /**
- * Does an event's name hold one of the names, at the start of a word (case aside; a plural or possessive after it still
- * holds it)? @param {string} eventName @param {ReadonlyArray<string>} names @returns {boolean}
+ * THE CLOSED STOP LIST of the reader's dead-cause word rule (the chair, 2026-11-20 13:59 UTC; vetoable by the owner): the
+ * only held words that do not count. Pinned by tests/domain/traditionDescription.test.js.
  */
-function holdsAName(eventName, names) {
-  const text = eventName.toLowerCase();
-  return names.some((n) => {
-    for (let i = text.indexOf(n); i >= 0; i = text.indexOf(n, i + 1)) if (i === 0 || !/[\p{L}\p{N}]/u.test(text[i - 1])) return true;
-    return false;
-  });
+export const HELD_NAME_STOP_WORDS = Object.freeze(['the', 'a', 'an', 'of', 'and', 'in', 'on', 'at', 'by', 'for', 'to']);
+
+/**
+ * THE CHAIR'S WORD RULE (TRAD-4 unit 7): does an event's name share a word with any of the names? Both sides are
+ * case-folded and cut into runs of letters (`\p{L}`; digits, marks and punctuation separate); every word of a name counts,
+ * its bracketed qualifier's too, of any length, but HELD_NAME_STOP_WORDS; an event word that BEGINS WITH a held word counts
+ * as that word (a plural or a possessive: "Fences'" for "Fence"). Strictly wider than any by-name withholding (a whole
+ * name, or a hidden house's bare form, shares its words with the event that holds it).
+ * @param {string} eventName @param {ReadonlyArray<string>} names @returns {boolean}
+ */
+export function holdsAName(eventName, names) {
+  /** @param {string} s @returns {string[]} */
+  const wordsOf = (s) => s.toUpperCase().toLowerCase().match(/\p{L}+/gu) || [];
+  const held = [...new Set(names.flatMap(wordsOf))].filter((w) => !HELD_NAME_STOP_WORDS.includes(w));
+  return wordsOf(eventName).some((w) => held.some((h) => w.startsWith(h)));
 }
 
 /**
@@ -447,7 +477,8 @@ export function describeTradition(recIn, settlementIn, options = {}) {
     /** @param {Rec} e @returns {boolean} */
     const graded = (e) => [e.severity].flat().some((v) => DEAD_EVENT_SEVERITIES.includes(str(v)));
     // CTR11 (TRAD-3 unit 4, the chair's item 3): a reader chooses only among events whose name holds no house, person or
-    // power name of the WHOLE record (a name veil-22's sweep would take the event whole by), and names it by its kind.
+    // power name of the WHOLE record (a name veil-22's sweep would take the event whole by), and names it by its kind;
+    // "holds" by the chair's word rule (TRAD-4 unit 7, holdsAName: no word shared, wider than 212's bare-form sweep).
     const held = reader ? heldNamesOf(whole) : [];
     const event = listOf(history.historicalEvents).map(recordOf)
       .filter((e) => DEAD_EVENTS.has(str(e.templateType)) && graded(e) && str(e.name) && Number.isFinite(Number(e.yearsAgo)) && Number(e.yearsAgo) >= 1)
