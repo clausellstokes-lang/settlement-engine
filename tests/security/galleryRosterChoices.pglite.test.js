@@ -1133,4 +1133,43 @@ describe('R3-CURE-8 (ruling 55): a services row with no `institution` key, the t
     expect(rows).toEqual([]);
     expect(bad).toEqual([]);
   }, ARM_TIMEOUT_MS);
+
+  // R3-CURE-8 unit 5 (ruling 55): THE PARITY WALKER. The family list is the GENERATOR'S (servicesGenerator.js ::
+  // generateAvailableServices, every size; the custom family as economyReconcilePass.js writes one), never a hand list, and
+  // every family a born town of the ten wrote is in it. For each family, a row born with no `institution` key and a row the
+  // hidden-house sweep leaves with none are each SERVED BY BOTH ENGINES or WITHHELD BY BOTH, every setting, every read, Reveal
+  // DM off and on; each family judged where a read serves it. Its teeth (out/v27/r3c8/walker-scratch-red.txt, never
+  // committed): the twin's rule (c) taken back out of galleryRosterChoices.js reds it on the criminal family.
+  it('R3-CURE-8 unit 5, THE PARITY WALKER: for EVERY `availableServices` family the generator writes (and a custom one), a row with no `institution` key is served or withheld ALIKE by the twin and 212, every setting, every read, Reveal DM off and on; the outcome per family is said', async () => {
+    const born = new Set(towns.filter((t) => t.seed !== 'hand-services').flatMap((t) => Object.keys(t.stored.availableServices || {})));
+    expect([...born].filter((f) => !families.includes(f))).toEqual([]);
+    expect(families).toContain('criminal');
+    expect(families.length).toBeGreaterThanOrEqual(born.size);
+    const rs = await readTown({ seed: 'walker-services', stored: handSvcOf(families) });
+    const bad = []; const table = {};
+    for (const r of rs) {
+      const twinOf = (dm) => veil.projectShareVeil(veil.galleryPayloadFor(clone(r.t.stored), { shareDm: dm, memberOverrides: r.ov }), r.ov);
+      const twin = twinOf(r.dm); const twinOff = r.dm ? twinOf(false) : twin;
+      for (const [read, d] of Object.entries(r.docs).filter(([, x]) => isRec(x))) {
+        const tw = read === 'map' || read === 'link' ? twinOff : twin;
+        for (const f of families) {
+          const rowsOf = (doc) => (isRec(doc.availableServices) && Array.isArray(doc.availableServices[f]) ? doc.availableServices[f] : null);
+          const a = rowsOf(d); const b = rowsOf(tw);
+          if ((a === null) !== (b === null)) { bad.push(`${f} ${r.setting} dm=${r.dm} ${read}: the family served by ${a ? 'the server' : 'the twin'} alone`); continue; }
+          if (a === null) continue;
+          if (canon(a) !== canon(b)) bad.push(`${f} ${r.setting} dm=${r.dm} ${read}: server ${J(a.map((x) => x?.name))} | twin ${J(b.map((x) => x?.name))}`);
+          for (const kind of ['Keyless', 'Swept']) {
+            const has = (rows) => rows.some((x) => isRec(x) && x.name === `${kind} ${f}` && !Object.prototype.hasOwnProperty.call(x, 'institution'));
+            const k = `${has(a) ? 'server' : '-'}/${has(b) ? 'twin' : '-'}`;
+            const cell = ((table[f] = table[f] || {})[kind] = table[f][kind] || {});
+            cell[k] = (cell[k] || 0) + 1;
+            if (has(a) !== has(b)) bad.push(`${f} ${r.setting} dm=${r.dm} ${read}: the ${kind.toLowerCase()} row served by ${has(a) ? 'the server' : 'the twin'} alone`);
+          }
+        }
+      }
+    }
+    note('R3-CURE-8 unit 5, THE PARITY WALKER: families (from the generator)', J(families), '| born families', J([...born].sort()), '| per family, the row with no key (served by server/twin: reads):', Object.entries(table).map(([f, v]) => `\n  ${f}: ${J(v)}`).join(''), '| faults:', bad.length, bad.length ? `\n  ${bad.slice(0, 60).join('\n  ')}` : '');
+    for (const f of families) expect(table[f], `${f}: judged on no read`).toBeTruthy();
+    expect(bad).toEqual([]);
+  }, ARM_TIMEOUT_MS);
 });
