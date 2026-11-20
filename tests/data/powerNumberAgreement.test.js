@@ -25,6 +25,8 @@ import { fillSentenceSlots } from '../../src/generators/narrativeProse.js';
 import { powerNameWithArticle } from '../../src/domain/display/powerSentenceName.js';
 import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
 import { createPRNG } from '../../src/kernel/prng.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 const MANY = 'Merchant Guilds';
 const ONE = 'Elder Council';
@@ -253,7 +255,7 @@ describe('the goal lines (goalFamilies.js through goals.js :: cellCandidates)', 
 describe('the crisis secrets (stressInstitutionEffects.js, filled as npcGenerator.js fills them)', () => {
   const fills = (name) => Object.values(STRESS_INSTITUTION_EFFECTS).flat().flatMap((e) => [
     fillSentenceSlots(e.secret, { faction: powerNameWithArticle(name), has: powerVerb(name, 'has', 'have') }),
-    e.stakes ? fillSentenceSlots(fillAgreement(e.stakes, { faction: name }), { faction: powerNameWithArticle(name) }) : '',
+    e.stakes ? fillSentenceSlots(fillAgreement(e.stakes, { power: name }), { faction: powerNameWithArticle(name) }) : '', // NAMES-4: the stakes' agreement slot is `power`
   ]);
   it('a plural power takes the plural verb, wherever it stands', () => {
     const t = fills(MANY);
@@ -271,7 +273,7 @@ describe('the crisis secrets (stressInstitutionEffects.js, filled as npcGenerato
     const templates = Object.values(STRESS_INSTITUTION_EFFECTS).flat().flatMap((e) => [e.secret, e.stakes ?? '']);
     const d = numberDiffs(fills(SOLO), fills(MANY), holesOf(SOLO, MANY), templates);
     expect(d.bad).toEqual([]);
-    const formed = templates.filter((t) => /\{faction\||\{has\}/.test(t));
+    const formed = templates.filter((t) => /\{power\||\{has\}/.test(t));
     expect(formed.length).toBeGreaterThan(0);
     expect(formed.filter((t) => !d.differing.has(t))).toEqual([]);
   });
@@ -299,6 +301,34 @@ describe('the crisis secrets (stressInstitutionEffects.js, filled as npcGenerato
       const at = one.findIndex((t) => t.startsWith(head));
       expect(at, head).toBeGreaterThanOrEqual(0);
       expect(d.differing.has(String(at)), head).toBe(true);
+    }
+    // NAMES-4 (CV4): each stake whose verb agrees prints, as generateCrimeLevel deals it, what the old agreement form printed, in either number
+    const rows = Object.entries(STRESS_INSTITUTION_EFFECTS).flatMap(([type, pool]) => pool.filter((e) => /\{power\|/.test(e.stakes ?? '')).map((e) => ({ type, e })));
+    /** a town that keeps a gate (a row may need one), in the crisis */
+    const town = (/** @type {string} */ type) => factsOf({ npcs: [npc], institutions: [{ name: 'Town gate' }], stress: [{ type }] });
+    expect(rows.length).toBeGreaterThan(0);
+    for (const name of [SOLO, MANY]) {
+      for (const { type, e } of rows) {
+        // the old form, computed from the new: the agreement slot as NAMES-3 named it, filled as NAMES-3's npcGenerator.js filled it
+        const oldForm = e.stakes.replace(/\{power\|/g, '{faction|');
+        expect(oldForm).not.toBe(e.stakes);
+        const was = fillSentenceSlots(fillAgreement(oldForm, { faction: name }), { faction: powerNameWithArticle(name) });
+        expect(was).not.toMatch(/[{|}]/); // anchored: `was` is the fill of a non-empty stake; the toContain below reads it whole
+        const held = new Set(); /** @type {string[]} */ const stakes = [];
+        for (let k = 0; k < 64; k++) {
+          setActiveRng({ random: () => 0.1, seed: 'names-4' });
+          const s = generateCrimeLevel(npc, 0, { stressTypes: [type], topFaction: name, govFaction: name, commodity: 'grain', facts: town(type) }, [npc], held);
+          clearActiveRng();
+          if (!s || held.has(String(s.what).trim())) break;
+          held.add(String(s.what).trim()); stakes.push(String(s.stakes));
+        }
+        expect(stakes, `${name} :: ${e.stakes}`).toContain(was);
+      }
+    }
+    // and the number moves the verb: the singular and plural fills of each old form differ
+    for (const { e } of rows) {
+      const oldForm = e.stakes.replace(/\{power\|/g, '{faction|');
+      expect(fillAgreement(oldForm, { faction: SOLO })).not.toBe(fillAgreement(oldForm, { faction: MANY }));
     }
   });
 });
@@ -346,7 +376,7 @@ describe('a qualified name\'s possessive (personMention.js :: qualifiedPossessiv
     const line = `${B.name} still keeps ${Q.name}'s hours. ${Q.name} trained him.`;
     const out = secondMentions(line, [B, Q]);
     expect(out).toContain(`Ada Vell the miller's hours`);
-    expect(out).not.toContain(`)'s`);
+    expectPresentThenAbsent(line, out, `)'s`, 'qualifiedPossessives opens the bracket after the possessive');
     expect(out).toContain(`${Q.name} trained him.`);
     expect(qualifiedPossessives(`${Q.name}’s ledger`, [Q])).toBe(`Ada Vell the miller’s ledger`);
     expect(qualifiedPossessives(`${B.name}'s ledger`, [B])).toBe(`${B.name}'s ledger`);
