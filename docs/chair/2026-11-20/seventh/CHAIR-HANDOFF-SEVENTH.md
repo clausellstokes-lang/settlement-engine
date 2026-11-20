@@ -1376,3 +1376,31 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   **THE CLOSE'S LIST GAINS:** the governed rung of the observed-shape baseline (schema 46) at the joined tree; 213's
   landing with its register rows and the patch for the veil's two head pins; the reader's name probes re-run on
   the joined generator once NAMES lands.
+- 04:37 UTC · **SEVEN MESSAGES READ AT 04:35 UTC.** SEAT-MEASURE, REVIEW-GRANTS-1 (fac781e7e) and VEIL-DOORS-3 seated;
+  VEIL-DOORS-3's base is 97efb7fcf (one docs commit past 4994ee371): told to go on.
+  **REVIEW-VEIL-11: THE COLD READ OF DOORS-2's BUILD HOLDS** (04:31 UTC; `d2a.probe.jsx`): 3 failed and 16 passed
+  at cca49cb8d, 19 of 19 at 4994ee371; a renamed house (its old label, its new name, either id), a removed house
+  (its label, its name with an opaque id, in a free-text slot): 0 of 22 served. TWO RESIDUALS, MEASURED, FOR THE
+  OWNER'S LIST (the DM's own words): a SHORT FORM of a hidden house's name typed into a free-text slot ("Multiple
+  crews rioted…": the name search asks whole names); a CUSTOM stressor the DM named "Gang war", served with the
+  grouping shut (served on the body as stored too). The catalogue's own keys hold no other crime word. The control
+  "A new Bakery was established." for a house the body does not show is withheld 22 of 22: the loss VR41 (a-ii)
+  measures.
+  **NAMES-1's CENSUS (3b567e876, `docs/chair/2026-11-20/content/NAMES-1-CENSUS.md`), on the stored 720:** 20,449
+  bare power labels in sentences (13,992 distinct, 617 towns) and 1,802 mid-sentence "The Guard"; 12,115 full names
+  repeated in one sentence (584 towns); 367 bare-label sentences composed at render. SITES: the goals' composer
+  14,142; `factionDynamics.js` 2,800; the conflict composers 1,700; the pair-prose ties 9,782 of the repeated
+  names. CN3's MEASURE: every person- or power-naming field is ONE string; the one list of strings names powers
+  only; the veil's fold still finds "the X" and "the X's"; no hideable power has a prose form. **RULED:** its
+  mechanisms approved (the article form's body in the data leaf; one pure leaf for second mentions, never leaving
+  the string that names the person); THE ORDER OF A SECOND MENTION: pronoun, else THE ROLE, else the unique
+  surname, else the given name; "Governed by X · Stable" and every header, chip and list entry are labels, left; the
+  sentences composed at render are its own but for the session sheet's and the crisis cast's three files
+  (FRAME-1's); a last check owed: one born town re-read whole as a DM would. MOVES, named by it: the generator's
+  golden master, the prose manifest's golden, the reference corpus, the page census and the pool-dominance
+  registers, text-pinned tests: the owner's yes at the close.
+  **VEIL-21's STAFFING (04:35 UTC):** R3 and R4 in parallel from the R2-green tip (disjoint hosts), merged R3 then
+  R4; R5 after R3; R6 (tests only) started beside R2's cure; briefs committed. Its estimate about 285,000 tokens:
+  it will integrate R2 and hand back near 330,000. **SEAT VEIL-22 NOW, BESIDE IT** (`prompts/VEIL-22.txt`): it
+  reads and re-makes the instruments and writes NOTHING to the lane until the chair's words "THE LANE IS YOURS at
+  <commit>"; then it launches R3 and R4.
