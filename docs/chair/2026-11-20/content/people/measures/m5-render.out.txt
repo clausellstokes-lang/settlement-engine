@@ -1,0 +1,5 @@
+# m5-render.mjs, run twice (2026-11-20), 600 places each (hxd-<size>-0..99, the six sizes), 4 workers:
+# BASE tree = git archive 9110b9861 (src identical to 43ab0f5eb); TRADITIONS tree = git archive origin/lane/trad-4-2026-11-20 at 7955e5304; node_modules linked; package files equal.
+TRADITIONS tree: m5 render: 600 places planned · exit codes 0,0,0,0 · vitest: 150 passed (150),150 passed (150),150 passed (150),150 passed (150)
+BASE tree: m5 render: 600 places planned · exit codes 0,0,0,0 · vitest: 150 passed (150),150 passed (150),150 passed (150),150 passed (150)
+# the per-place files (<out>/views/<seed>.json) are a local cache, not committed; m5-measure.mjs reads them.

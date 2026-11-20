@@ -1,0 +1,591 @@
+# M5 fill read (2026-11-20). A: every distinct rite sentence the projection prints with a NEW founder wording in it,
+# over the 600 places (count<TAB>size<TAB>sentence; the place's names masked to #, digits to 0).
+# A: 260 distinct sentences, 369 places
+8	metropolis	# has kept it since its founding by a great trade house whose banking outgrew every other settlement in the region, 0 years ago.
+6	city	# has kept it since its founding by royal decree, and a century of forced investment in its walls and markets, 0 years ago.
+5	metropolis	It has been kept since # was founded by the slow accretion of three smaller settlements around a shared market, eventually merged under a single administration, 0 years ago.
+4	metropolis	It goes back to the founding of # by the slow accretion of three smaller settlements along the road that eventually merged under a single administration, 0 years ago, and has been kept since.
+4	town	It goes back to the founding of # by a merchant consortium that needed a waypoint on the road and decided to own it, 0 years ago, and has been kept since.
+4	town	It has been kept since # was founded by a noble granted lands by the crown, with the resources to build the first mill and market, 0 years ago.
+4	village	It goes back to the founding of # by a noble granted lands in the forest by the crown and obligated to populate them, 0 years ago, and has been kept since.
+3	hamlet	# has kept it since its founding by three or four families who raised a palisade together for their first winter and never moved on, 0 years ago.
+3	hamlet	It goes back to the founding of # by a retired tradesperson who set up by the road, whose skills drew others to settle near, 0 years ago, and has been kept since.
+3	metropolis	# has kept it since its founding by the slow accretion of three smaller settlements along the road that eventually merged under a single administration, 0 years ago.
+3	metropolis	# has kept it since its founding by the slow accretion of three smaller settlements around a shared market, eventually merged under a single administration, 0 years ago.
+3	metropolis	# has kept it since its founding by the slow accretion of three smaller settlements out on the open plain that eventually merged under a single administration, 0 years ago.
+3	metropolis	It goes back to the founding of # by the slow accretion of three smaller settlements around a shared market, eventually merged under a single administration, 0 years ago, and has been kept since.
+3	metropolis	It has been kept since # was founded by a great trade house whose quays outgrew every other settlement in the region, 0 years ago.
+3	town	# has kept it since its founding by a noble granted lands by the crown, with the resources to build the first mill and market, 0 years ago.
+3	town	# has kept it since its founding by religious authorities who wanted a centre for their work out on the open plain, 0 years ago.
+3	town	It has been kept since # was founded by religious authorities who wanted a centre for their work out on the open plain, 0 years ago.
+3	village	It has been kept since # was founded by a noble granted lands along the road by the crown and obligated to populate them, 0 years ago.
+2	city	# has kept it since its founding by a merchant coalition that outgrew the place it started in and moved to a harbour of its own, 0 years ago.
+2	city	# has kept it since its founding by a military command that fortified a post in the hills and found civilians followed, 0 years ago.
+2	city	# has kept it since its founding by a powerful noble house that needed a commercial base on the road, independent of rivals, 0 years ago.
+2	city	# has kept it since its founding by royal decree to build a city out on the open plain, and a century of forced investment, 0 years ago.
+2	city	# has kept it since its founding by royal decree to hold the river, and a century of forced investment, 0 years ago.
+2	city	It goes back to the founding of # by a merchant coalition that outgrew the place it started in and moved to a harbour of its own, 0 years ago, and has been kept since.
+2	city	It goes back to the founding of # by a military command that fortified a post on the shore and found civilians followed, 0 years ago, and has been kept since.
+2	city	It goes back to the founding of # by a powerful noble house that needed a commercial base on the river, independent of rivals, 0 years ago, and has been kept since.
+2	city	It goes back to the founding of # by royal decree, and a century of forced investment in its walls and markets, 0 years ago, and has been kept since.
+2	city	It has been kept since # was founded by a merchant coalition that outgrew the place it started in and moved its business out on the open plain, 0 years ago.
+2	city	It has been kept since # was founded by a military command that fortified the road and found civilians followed, 0 years ago.
+2	city	It has been kept since # was founded by a powerful noble house that needed a market of its own in the hills, independent of rivals, 0 years ago.
+2	city	It has been kept since # was founded by a powerful noble house that needed a market of its own on the riverbank, independent of rivals, 0 years ago.
+2	city	It has been kept since # was founded by royal decree to build a city on the shore, and a century of forced investment, 0 years ago.
+2	city	It has been kept since # was founded by royal decree to build a city out on the open plain, and a century of forced investment, 0 years ago.
+2	city	It has been kept since # was founded by royal decree, and a century of forced investment in its walls and markets, 0 years ago.
+2	hamlet	# has kept it since its founding by a household that settled first beside the road and found others following it in, 0 years ago.
+2	hamlet	# has kept it since its founding by a household that settled in the desert first and found others following it in, 0 years ago.
+2	hamlet	# has kept it since its founding by a retired mason whose skills drew others to work the quarry, 0 years ago.
+2	hamlet	# has kept it since its founding by three or four families who wintered together beside the river and never moved on, 0 years ago.
+2	hamlet	# has kept it since its founding by three or four families who wintered together on the shore and never moved on, 0 years ago.
+2	hamlet	It goes back to the founding of # by three or four families who agreed to try wintering together out on the open plain and never stopped, 0 years ago, and has been kept since.
+2	hamlet	It goes back to the founding of # by three or four families who wintered together by the road and never moved on, 0 years ago, and has been kept since.
+2	hamlet	It has been kept since # was founded by a retired tradesperson who settled in the forest, whose skills drew others after, 0 years ago.
+2	hamlet	It has been kept since # was founded by a retired tradesperson who settled in the hills, whose skills drew others after, 0 years ago.
+2	hamlet	It has been kept since # was founded by a small religious community that settled in the hills, whose members drifted into secular life over two generations, 0 years ago.
+2	hamlet	It has been kept since # was founded by three or four families who wintered together by the road and never moved on, 0 years ago.
+2	metropolis	# has kept it since its founding by a great trade house whose quays outgrew every other settlement in the region, 0 years ago.
+2	metropolis	# has kept it since its founding by a great trade house whose road trade outgrew every other settlement in the region, 0 years ago.
+2	metropolis	# has kept it since its founding by the slow accretion of three smaller settlements along the river that eventually merged under a single administration, 0 years ago.
+2	metropolis	# has kept it since its founding by the slow accretion of three smaller settlements in the hills that eventually merged under a single administration, 0 years ago.
+2	metropolis	It goes back to the founding of # by a great trade house on the riverbank that outgrew every other settlement in the region, 0 years ago, and has been kept since.
+2	metropolis	It goes back to the founding of # by a great trade house whose banking outgrew every other settlement in the region, 0 years ago, and has been kept since.
+2	metropolis	It goes back to the founding of # by imperial decree to hold the road, and the forced relocation of skilled populations, 0 years ago, and has been kept since.
+2	metropolis	It goes back to the founding of # by imperial decree, and skilled people moved by force to settle on the mountainside, 0 years ago, and has been kept since.
+2	metropolis	It goes back to the founding of # by imperial decree, and skilled people moved by force to settle on the riverbank, 0 years ago, and has been kept since.
+2	metropolis	It has been kept since # was founded by a great trade house whose road trade outgrew every other settlement in the region, 0 years ago.
+2	thorp	# has kept it since its founding by a single extended family who settled out on the open plain and never left, 0 years ago.
+2	thorp	It goes back to the founding of # by a single extended family who settled on the mountainside and never left, 0 years ago, and has been kept since.
+2	thorp	It has been kept since # was founded by a discharged soldier who came in the forest with nowhere better to be, and stayed, 0 years ago.
+2	thorp	It has been kept since # was founded by a discharged soldier who took the road home, stopped here, and never went on, 0 years ago.
+2	thorp	It has been kept since # was founded by a single extended family who settled on the shore and never left, 0 years ago.
+2	town	# has kept it since its founding by a merchant consortium that needed a waypoint on the road and decided to own it, 0 years ago.
+2	town	# has kept it since its founding by a noble granted lands in the hills by the crown, with the resources to develop them, 0 years ago.
+2	town	It goes back to the founding of # by a merchant consortium that needed a harbour of its own and built one, 0 years ago, and has been kept since.
+2	town	It goes back to the founding of # by merchants who saw what the road could bring before anyone else did, 0 years ago, and has been kept since.
+2	town	It goes back to the founding of # by military veterans given land grants along the road, who brought their skills with them, 0 years ago, and has been kept since.
+2	town	It has been kept since # was founded by a merchant consortium that wanted a market of its own in the hills and built one, 0 years ago.
+2	town	It has been kept since # was founded by merchants who saw what the land on the shore could yield before anyone else did, 0 years ago.
+2	town	It has been kept since # was founded by military veterans given land grants along the road, who brought their skills with them, 0 years ago.
+2	village	# has kept it since its founding by a noble granted lands along the road by the crown and obligated to populate them, 0 years ago.
+2	village	# has kept it since its founding by escaped serfs who followed the river out of their former masters' reach, 0 years ago.
+2	village	It goes back to the founding of # by a group of settlers who came by the river looking for land of their own, 0 years ago, and has been kept since.
+2	village	It goes back to the founding of # by refugees fleeing war or persecution who found the hills easy to defend, 0 years ago, and has been kept since.
+2	village	It has been kept since # was founded by a community of tradespeople who left a larger place after a quarrel and set up on the riverbank, 0 years ago.
+2	village	It has been kept since # was founded by a group of settlers who came in the forest looking for land of their own, 0 years ago.
+2	village	It has been kept since # was founded by a group of settlers who came to the crossroads looking for work and land, 0 years ago.
+2	village	It has been kept since # was founded by escaped serfs who followed the river out of their former masters' reach, 0 years ago.
+2	village	It has been kept since # was founded by refugees fleeing war or persecution who found the place defensible, far from the trade roads, 0 years ago.
+1	city	# has kept it since its founding by a merchant coalition that outgrew the place it started in and moved its business on the riverbank, 0 years ago.
+1	city	# has kept it since its founding by a military command that fortified a post in the forest and found civilians followed, 0 years ago.
+1	city	# has kept it since its founding by a military command that fortified the river crossing and found civilians followed, 0 years ago.
+1	city	# has kept it since its founding by a military command that fortified the road and found civilians followed, 0 years ago.
+1	city	# has kept it since its founding by a powerful noble house that needed a commercial base on the river, independent of rivals, 0 years ago.
+1	city	# has kept it since its founding by a powerful noble house that needed a market of its own in the hills, independent of rivals, 0 years ago.
+1	city	# has kept it since its founding by a powerful noble house that needed a market of its own on the shore, independent of rivals, 0 years ago.
+1	city	# has kept it since its founding by royal decree to build a city in the hills, and a century of forced investment, 0 years ago.
+1	city	# has kept it since its founding by royal decree to build a city on the riverbank, and a century of forced investment, 0 years ago.
+1	city	# has kept it since its founding by royal decree to build a city on the shore, and a century of forced investment, 0 years ago.
+1	city	# has kept it since its founding by royal decree to hold the crossing of the roads, and a century of forced investment, 0 years ago.
+1	city	It goes back to the founding of # by a merchant coalition that outgrew the place it started in and moved its business on the shore, 0 years ago, and has been kept since.
+1	city	It goes back to the founding of # by a merchant coalition that outgrew the place it started in and moved its business out on the open plain, 0 years ago, and has been kept since.
+1	city	It goes back to the founding of # by a merchant coalition that outgrew the place it started in and moved its business to the river, 0 years ago, and has been kept since.
+1	city	It goes back to the founding of # by a military command that fortified a post in the hills and found civilians followed, 0 years ago, and has been kept since.
+1	city	It goes back to the founding of # by a military command that fortified the river crossing and found civilians followed, 0 years ago, and has been kept since.
+1	city	It goes back to the founding of # by a powerful noble house that needed a market of its own in the forest, independent of rivals, 0 years ago, and has been kept since.
+1	city	It goes back to the founding of # by royal decree to hold the crossing of the roads, and a century of forced investment, 0 years ago, and has been kept since.
+1	city	It goes back to the founding of # by royal decree to hold the river, and a century of forced investment, 0 years ago, and has been kept since.
+1	city	It has been kept since # was founded by a merchant coalition that outgrew the place it started in and moved its business on the mountainside, 0 years ago.
+1	city	It has been kept since # was founded by a merchant coalition that outgrew the place it started in and moved its business to the river, 0 years ago.
+1	city	It has been kept since # was founded by a merchant coalition that outgrew the place it started in and moved to where the roads cross, 0 years ago.
+1	city	It has been kept since # was founded by a military command that fortified a post on the riverbank and found civilians followed, 0 years ago.
+1	city	It has been kept since # was founded by a military command that fortified a post on the shore and found civilians followed, 0 years ago.
+1	city	It has been kept since # was founded by a military command that fortified a post out on the open plain and found civilians followed, 0 years ago.
+1	city	It has been kept since # was founded by a military command that fortified the crossroads and found civilians followed, 0 years ago.
+1	city	It has been kept since # was founded by a powerful noble house that needed a commercial base on the river, independent of rivals, 0 years ago.
+1	city	It has been kept since # was founded by a powerful noble house that needed a commercial base on the road, independent of rivals, 0 years ago.
+1	city	It has been kept since # was founded by a powerful noble house that needed a market of its own out on the open plain, independent of rivals, 0 years ago.
+1	city	It has been kept since # was founded by royal decree to hold the crossing of the roads, and a century of forced investment, 0 years ago.
+1	hamlet	# has kept it since its founding by a retired tradesperson who set up by the road, whose skills drew others to settle near, 0 years ago.
+1	hamlet	# has kept it since its founding by a retired tradesperson who settled in the forest, whose skills drew others after, 0 years ago.
+1	hamlet	# has kept it since its founding by a retired tradesperson who settled on the shore, whose skills drew others after, 0 years ago.
+1	hamlet	# has kept it since its founding by a retired tradesperson who settled out on the open plain, whose skills drew others after, 0 years ago.
+1	hamlet	# has kept it since its founding by a small religious community that settled in the desert, whose members drifted into secular life over two generations, 0 years ago.
+1	hamlet	# has kept it since its founding by a small religious community that settled on the riverbank, whose members drifted into secular life over two generations, 0 years ago.
+1	hamlet	# has kept it since its founding by a small religious community that settled on the shore, whose members drifted into secular life over two generations, 0 years ago.
+1	hamlet	# has kept it since its founding by a small religious community that settled out on the open plain, whose members drifted into secular life over two generations, 0 years ago.
+1	hamlet	# has kept it since its founding by three or four families who agreed to try wintering together in the forest and never stopped, 0 years ago.
+1	hamlet	# has kept it since its founding by three or four families who agreed to try wintering together in the hills and never stopped, 0 years ago.
+1	hamlet	# has kept it since its founding by three or four families who agreed to try wintering together on the riverbank and never stopped, 0 years ago.
+1	hamlet	# has kept it since its founding by three or four families who agreed to try wintering together on the shore and never stopped, 0 years ago.
+1	hamlet	It goes back to the founding of # by a household that settled first beside the road and found others following it in, 0 years ago, and has been kept since.
+1	hamlet	It goes back to the founding of # by a household that settled first on the shore and found others following it in, 0 years ago, and has been kept since.
+1	hamlet	It goes back to the founding of # by a household that settled in the desert first and found others following it in, 0 years ago, and has been kept since.
+1	hamlet	It goes back to the founding of # by a retired smith whose skills drew others to settle around the forge, 0 years ago, and has been kept since.
+1	hamlet	It goes back to the founding of # by a retired tradesperson who set up where the roads cross, whose skills drew others to settle near, 0 years ago, and has been kept since.
+1	hamlet	It goes back to the founding of # by a retired tradesperson who settled on the shore, whose skills drew others after, 0 years ago, and has been kept since.
+1	hamlet	It goes back to the founding of # by three or four families who agreed to try wintering together in the hills and never stopped, 0 years ago, and has been kept since.
+1	hamlet	It goes back to the founding of # by three or four families who agreed to try wintering together on the mountainside and never stopped, 0 years ago, and has been kept since.
+1	hamlet	It goes back to the founding of # by three or four families who agreed to try wintering together on the riverbank and never stopped, 0 years ago, and has been kept since.
+1	hamlet	It goes back to the founding of # by three or four families who wintered together at the edge of the wild country and never moved on, 0 years ago, and has been kept since.
+1	hamlet	It goes back to the founding of # by three or four families who wintered together beside the river and never moved on, 0 years ago, and has been kept since.
+1	hamlet	It goes back to the founding of # by three or four families who wintered together on the shore and never moved on, 0 years ago, and has been kept since.
+1	hamlet	It has been kept since # was founded by a household that settled first beside the road and found others following it in, 0 years ago.
+1	hamlet	It has been kept since # was founded by a household that settled in the forest first and found others following it in, 0 years ago.
+1	hamlet	It has been kept since # was founded by a household that settled on the shore first and found others following it in, 0 years ago.
+1	hamlet	It has been kept since # was founded by a retired tradesperson who settled on the mountainside, whose skills drew others after, 0 years ago.
+1	hamlet	It has been kept since # was founded by a retired tradesperson who settled on the shore, whose skills drew others after, 0 years ago.
+1	hamlet	It has been kept since # was founded by a small religious community that settled in the desert, whose members drifted into secular life over two generations, 0 years ago.
+1	hamlet	It has been kept since # was founded by three or four families who agreed to try wintering together in the hills and never stopped, 0 years ago.
+1	hamlet	It has been kept since # was founded by three or four families who agreed to try wintering together on the shore and never stopped, 0 years ago.
+1	hamlet	It has been kept since # was founded by three or four families who wintered together at the edge of the wild country and never moved on, 0 years ago.
+1	hamlet	It has been kept since # was founded by three or four families who wintered together on the shore and never moved on, 0 years ago.
+1	hamlet	It has been kept since # was founded by three or four families who wintered together where the roads cross and never moved on, 0 years ago.
+1	metropolis	# has kept it since its founding by a great trade house in the desert that outgrew every other settlement in the region, 0 years ago.
+1	metropolis	# has kept it since its founding by a great trade house on the shore that outgrew every other settlement in the region, 0 years ago.
+1	metropolis	# has kept it since its founding by imperial decree to hold the river, and the forced relocation of skilled populations, 0 years ago.
+1	metropolis	# has kept it since its founding by imperial decree to hold the road, and the forced relocation of skilled populations, 0 years ago.
+1	metropolis	# has kept it since its founding by imperial decree, and skilled people moved by force to settle in the desert, 0 years ago.
+1	metropolis	# has kept it since its founding by imperial decree, and skilled people moved by force to settle on the shore, 0 years ago.
+1	metropolis	# has kept it since its founding by the slow accretion of three smaller settlements in the forest that eventually merged under a single administration, 0 years ago.
+1	metropolis	# has kept it since its founding by the slow accretion of three smaller settlements on the shore that eventually merged under a single administration, 0 years ago.
+1	metropolis	It goes back to the founding of # by a great trade house whose quays outgrew every other settlement in the region, 0 years ago, and has been kept since.
+1	metropolis	It goes back to the founding of # by a great trade house whose road trade outgrew every other settlement in the region, 0 years ago, and has been kept since.
+1	metropolis	It goes back to the founding of # by imperial decree, and skilled people moved by force to settle in the hills, 0 years ago, and has been kept since.
+1	metropolis	It goes back to the founding of # by imperial decree, and skilled people moved by force to settle out on the open plain, 0 years ago, and has been kept since.
+1	metropolis	It goes back to the founding of # by the slow accretion of three smaller settlements out on the open plain that eventually merged under a single administration, 0 years ago, and has been kept since.
+1	metropolis	It has been kept since # was founded by a great trade # on the riverbank that outgrew every other settlement in the region, 0 years ago.
+1	metropolis	It has been kept since # was founded by a great trade house on the riverbank that outgrew every other settlement in the region, 0 years ago.
+1	metropolis	It has been kept since # was founded by imperial decree to hold the road, and the forced relocation of skilled populations, 0 years ago.
+1	metropolis	It has been kept since # was founded by imperial decree, and skilled people moved by force to settle in the forest, 0 years ago.
+1	metropolis	It has been kept since # was founded by imperial decree, and skilled people moved by force to settle on the riverbank, 0 years ago.
+1	metropolis	It has been kept since # was founded by imperial decree, and skilled people moved by force to settle on the shore, 0 years ago.
+1	metropolis	It has been kept since # was founded by imperial decree, and skilled people moved by force to settle out on the open plain, 0 years ago.
+1	metropolis	It has been kept since # was founded by the slow accretion of three smaller settlements along the river that eventually merged under a single administration, 0 years ago.
+1	metropolis	It has been kept since # was founded by the slow accretion of three smaller settlements along the road that eventually merged under a single administration, 0 years ago.
+1	thorp	# has kept it since its founding by a discharged soldier who built the first house within sight of the shore and stayed, 0 years ago.
+1	thorp	# has kept it since its founding by a discharged soldier who came in the forest with nowhere better to be, and stayed, 0 years ago.
+1	thorp	# has kept it since its founding by a discharged soldier who came in the hills with nowhere better to be, and stayed, 0 years ago.
+1	thorp	# has kept it since its founding by a discharged soldier who came on the mountainside with nowhere better to be, and stayed, 0 years ago.
+1	thorp	# has kept it since its founding by a discharged soldier who came on the riverbank with nowhere better to be, and stayed, 0 years ago.
+1	thorp	# has kept it since its founding by a discharged soldier who came out on the open plain with nowhere better to be, and stayed, 0 years ago.
+1	thorp	# has kept it since its founding by a discharged soldier who stopped where the roads cross and never chose one, 0 years ago.
+1	thorp	# has kept it since its founding by a discharged soldier who took the road home, stopped here, and never went on, 0 years ago.
+1	thorp	# has kept it since its founding by a healer who stopped out on the open plain to treat a traveller and found the place too useful to leave, 0 years ago.
+1	thorp	# has kept it since its founding by a healer who treated a boatman on the river here and found the spot too useful to leave, 0 years ago.
+1	thorp	# has kept it since its founding by a pair of siblings who stopped in the desert because they could not agree which way to go on, 0 years ago.
+1	thorp	# has kept it since its founding by a pair of siblings who stopped in the hills because they could not agree which way to go on, 0 years ago.
+1	thorp	# has kept it since its founding by a pair of siblings who stopped out on the open plain because they could not agree which way to go on, 0 years ago.
+1	thorp	# has kept it since its founding by a pair of siblings who stopped where the roads cross, unable to agree which road to take, 0 years ago.
+1	thorp	# has kept it since its founding by a single extended family who came along the road and never left, 0 years ago.
+1	thorp	# has kept it since its founding by a single extended family who came far from the trade roads and never left, 0 years ago.
+1	thorp	# has kept it since its founding by a single extended family who raised a palisade around their first houses and never left, 0 years ago.
+1	thorp	# has kept it since its founding by a single extended family who settled in the hills and never left, 0 years ago.
+1	thorp	# has kept it since its founding by a single extended family who settled on the riverbank and never left, 0 years ago.
+1	thorp	It goes back to the founding of # by a discharged soldier who built the first house by the river and stayed, 0 years ago, and has been kept since.
+1	thorp	It goes back to the founding of # by a discharged soldier who came in the hills with nowhere better to be, and stayed, 0 years ago, and has been kept since.
+1	thorp	It goes back to the founding of # by a discharged soldier who took the road home, stopped here, and never went on, 0 years ago, and has been kept since.
+1	thorp	It goes back to the founding of # by a discharged soldier who wanted to be far from any road, and found the place for it, 0 years ago, and has been kept since.
+1	thorp	It goes back to the founding of # by a healer who stopped on the shore to treat a traveller and found the place too useful to leave, 0 years ago, and has been kept since.
+1	thorp	It goes back to the founding of # by a healer who treated a boatman on the river here and found the spot too useful to leave, 0 years ago, and has been kept since.
+1	thorp	It goes back to the founding of # by a pair of siblings who stopped in the forest because they could not agree which way to go on, 0 years ago, and has been kept since.
+1	thorp	It goes back to the founding of # by a pair of siblings who stopped on the mountainside because they could not agree which way to go on, 0 years ago, and has been kept since.
+1	thorp	It goes back to the founding of # by a pair of siblings who stopped out on the open plain because they could not agree which way to go on, 0 years ago, and has been kept since.
+1	thorp	It goes back to the founding of # by a pair of siblings who stopped where the roads cross, unable to agree which road to take, 0 years ago, and has been kept since.
+1	thorp	It goes back to the founding of # by a pair of siblings who walked the road this far and could not agree which way to go on, 0 years ago, and has been kept since.
+1	thorp	It goes back to the founding of # by a single extended family who came by the river and never left, 0 years ago, and has been kept since.
+1	thorp	It goes back to the founding of # by a single extended family who settled in the forest and never left, 0 years ago, and has been kept since.
+1	thorp	It has been kept since # was founded by a discharged soldier who came in the hills with nowhere better to be, and stayed, 0 years ago.
+1	thorp	It has been kept since # was founded by a discharged soldier who came on the riverbank with nowhere better to be, and stayed, 0 years ago.
+1	thorp	It has been kept since # was founded by a discharged soldier who came on the shore with nowhere better to be, and stayed, 0 years ago.
+1	thorp	It has been kept since # was founded by a discharged soldier who raised the first palisade here and stayed behind it, 0 years ago.
+1	thorp	It has been kept since # was founded by a healer who treated a boatman on the river here and found the spot too useful to leave, 0 years ago.
+1	thorp	It has been kept since # was founded by a healer who treated a traveller on the road here and found the spot too useful to leave, 0 years ago.
+1	thorp	It has been kept since # was founded by a pair of siblings who stopped in the forest because they could not agree which way to go on, 0 years ago.
+1	thorp	It has been kept since # was founded by a pair of siblings who stopped out on the open plain because they could not agree which way to go on, 0 years ago.
+1	thorp	It has been kept since # was founded by a single extended family who built where the roads cross and never left, 0 years ago.
+1	thorp	It has been kept since # was founded by a single extended family who came by the river and never left, 0 years ago.
+1	thorp	It has been kept since # was founded by a single extended family who settled in the forest and never left, 0 years ago.
+1	town	# has kept it since its founding by a merchant consortium that needed a harbour of its own and built one, 0 years ago.
+1	town	# has kept it since its founding by a merchant consortium that wanted a market of its own on the riverbank and built one, 0 years ago.
+1	town	# has kept it since its founding by a noble granted lands in the forest by the crown, with the resources to develop them, 0 years ago.
+1	town	# has kept it since its founding by a noble granted lands on the shore by the crown, with the resources to develop them, 0 years ago.
+1	town	# has kept it since its founding by a noble granted the river lands by the crown, with the resources to develop them, 0 years ago.
+1	town	# has kept it since its founding by merchants who saw what the land in the hills could yield before anyone else did, 0 years ago.
+1	town	# has kept it since its founding by merchants who saw what the river could carry before anyone else did, 0 years ago.
+1	town	# has kept it since its founding by merchants who saw what the road could bring before anyone else did, 0 years ago.
+1	town	# has kept it since its founding by military veterans given land grants along the road, who brought their skills with them, 0 years ago.
+1	town	# has kept it since its founding by military veterans given land grants on the riverbank, who brought their skills with them, 0 years ago.
+1	town	# has kept it since its founding by religious authorities who wanted a centre for their work in the forest, 0 years ago.
+1	town	It goes back to the founding of # by a merchant consortium that wanted a market of its own in the forest and built one, 0 years ago, and has been kept since.
+1	town	It goes back to the founding of # by a noble granted lands by the crown, with the resources to build the first mill and market, 0 years ago, and has been kept since.
+1	town	It goes back to the founding of # by a noble granted lands in the desert by the crown, with the resources to develop them, 0 years ago, and has been kept since.
+1	town	It goes back to the founding of # by a noble granted lands out on the open plain by the crown, with the resources to develop them, 0 years ago, and has been kept since.
+1	town	It goes back to the founding of # by a noble granted the river lands by the crown, with the resources to develop them, 0 years ago, and has been kept since.
+1	town	It goes back to the founding of # by merchants who saw what the land in the hills could yield before anyone else did, 0 years ago, and has been kept since.
+1	town	It goes back to the founding of # by merchants who saw what the land on the riverbank could yield before anyone else did, 0 years ago, and has been kept since.
+1	town	It goes back to the founding of # by merchants who saw what the land on the shore could yield before anyone else did, 0 years ago, and has been kept since.
+1	town	It goes back to the founding of # by military veterans given land grants in the hills, who brought their skills with them, 0 years ago, and has been kept since.
+1	town	It goes back to the founding of # by military veterans given land grants, who built the first walls with the skills they brought, 0 years ago, and has been kept since.
+1	town	It goes back to the founding of # by religious authorities who wanted a centre for their work in the forest, 0 years ago, and has been kept since.
+1	town	It goes back to the founding of # by religious authorities who wanted a centre for their work in the hills, 0 years ago, and has been kept since.
+1	town	It has been kept since # was founded by a merchant consortium that needed a waypoint on the road and decided to own it, 0 years ago.
+1	town	It has been kept since # was founded by a merchant consortium that needed a waypoint where the roads cross and decided to own it, 0 years ago.
+1	town	It has been kept since # was founded by a merchant consortium that wanted a market of its own on the mountainside and built one, 0 years ago.
+1	town	It has been kept since # was founded by a noble granted lands in the hills by the crown, with the resources to develop them, 0 years ago.
+1	town	It has been kept since # was founded by merchants who saw what the land in the desert could yield before anyone else did, 0 years ago.
+1	town	It has been kept since # was founded by merchants who saw what the land in the forest could yield before anyone else did, 0 years ago.
+1	town	It has been kept since # was founded by merchants who saw what the river could carry before anyone else did, 0 years ago.
+1	town	It has been kept since # was founded by military veterans given land grants out on the open plain, who brought their skills with them, 0 years ago.
+1	town	It has been kept since # was founded by military veterans given land grants, who built the first walls with the skills they brought, 0 years ago.
+1	village	# has kept it since its founding by a community of tradespeople who left a larger place after a quarrel and set up on the mountainside, 0 years ago.
+1	village	# has kept it since its founding by a community of tradespeople who left a larger place after a quarrel and set up out on the open plain, 0 years ago.
+1	village	# has kept it since its founding by a group of settlers who came out on the open plain looking for land of their own, 0 years ago.
+1	village	# has kept it since its founding by a noble granted lands out on the open plain by the crown and obligated to populate them, 0 years ago.
+1	village	It goes back to the founding of # by a community of tradespeople who left a larger place after a quarrel and set up on the shore, 0 years ago, and has been kept since.
+1	village	It goes back to the founding of # by a group of settlers who came on the riverbank looking for land of their own, 0 years ago, and has been kept since.
+1	village	It goes back to the founding of # by a group of settlers who came out on the open plain looking for land of their own, 0 years ago, and has been kept since.
+1	village	It goes back to the founding of # by a noble granted lands on the shore by the crown and obligated to populate them, 0 years ago, and has been kept since.
+1	village	It goes back to the founding of # by escaped serfs who fled in the hills, beyond the reach of their former masters, 0 years ago, and has been kept since.
+1	village	It goes back to the founding of # by escaped serfs who followed the river out of their former masters' reach, 0 years ago, and has been kept since.
+1	village	It has been kept since # was founded by a community of tradespeople who left a larger place under contested circumstances and set up along the road, 0 years ago.
+1	village	It has been kept since # was founded by a community of tradespeople who left a larger place under contested circumstances and set up their own market here, 0 years ago.
+1	village	It has been kept since # was founded by a group of settlers who came out on the open plain looking for land of their own, 0 years ago.
+1	village	It has been kept since # was founded by a noble granted lands in the desert by the crown and obligated to populate them, 0 years ago.
+1	village	It has been kept since # was founded by a noble granted lands on the mountainside by the crown and obligated to populate them, 0 years ago.
+1	village	It has been kept since # was founded by a noble granted lands out on the open plain by the crown and obligated to populate them, 0 years ago.
+1	village	It has been kept since # was founded by a noble granted the river lands by the crown and obligated to populate them, 0 years ago.
+1	village	It has been kept since # was founded by escaped serfs who fled in the forest, beyond the reach of their former masters, 0 years ago.
+1	village	It has been kept since # was founded by escaped serfs who fled on the shore, beyond the reach of their former masters, 0 years ago.
+1	village	It has been kept since # was founded by escaped serfs who settled off the trade roads, beyond the reach of their former masters, 0 years ago.
+1	village	It has been kept since # was founded by refugees fleeing war or persecution who found the hills easy to defend, 0 years ago.
+#
+# B (a reading aid, not a count): every one of M3's 108 wordings in each of the three founding frames
+# (traditionDescription.js CAUSE_FRAMES.founding; {ground} read as "in the hills"). row<TAB>sentence
+# B: 324 lines
+a discharged soldier who liked the view 	It has been kept since # was founded by a discharged soldier who came in the hills with nowhere better to be, and stayed, 0 years ago.
+a discharged soldier who liked the view 	# has kept it since its founding by a discharged soldier who came in the hills with nowhere better to be, and stayed, 0 years ago.
+a discharged soldier who liked the view 	It goes back to the founding of # by a discharged soldier who came in the hills with nowhere better to be, and stayed, 0 years ago, and has been kept since.
+a discharged soldier who liked the view 	It has been kept since # was founded by a discharged soldier who took the road home, stopped here, and never went on, 0 years ago.
+a discharged soldier who liked the view 	# has kept it since its founding by a discharged soldier who took the road home, stopped here, and never went on, 0 years ago.
+a discharged soldier who liked the view 	It goes back to the founding of # by a discharged soldier who took the road home, stopped here, and never went on, 0 years ago, and has been kept since.
+a discharged soldier who liked the view 	It has been kept since # was founded by a discharged soldier who stopped where the roads cross and never chose one, 0 years ago.
+a discharged soldier who liked the view 	# has kept it since its founding by a discharged soldier who stopped where the roads cross and never chose one, 0 years ago.
+a discharged soldier who liked the view 	It goes back to the founding of # by a discharged soldier who stopped where the roads cross and never chose one, 0 years ago, and has been kept since.
+a discharged soldier who liked the view 	It has been kept since # was founded by a discharged soldier who built the first house by the river and stayed, 0 years ago.
+a discharged soldier who liked the view 	# has kept it since its founding by a discharged soldier who built the first house by the river and stayed, 0 years ago.
+a discharged soldier who liked the view 	It goes back to the founding of # by a discharged soldier who built the first house by the river and stayed, 0 years ago, and has been kept since.
+a discharged soldier who liked the view 	It has been kept since # was founded by a discharged soldier who built the first house within sight of the shore and stayed, 0 years ago.
+a discharged soldier who liked the view 	# has kept it since its founding by a discharged soldier who built the first house within sight of the shore and stayed, 0 years ago.
+a discharged soldier who liked the view 	It goes back to the founding of # by a discharged soldier who built the first house within sight of the shore and stayed, 0 years ago, and has been kept since.
+a discharged soldier who liked the view 	It has been kept since # was founded by a discharged soldier who wanted to be far from any road, and found the place for it, 0 years ago.
+a discharged soldier who liked the view 	# has kept it since its founding by a discharged soldier who wanted to be far from any road, and found the place for it, 0 years ago.
+a discharged soldier who liked the view 	It goes back to the founding of # by a discharged soldier who wanted to be far from any road, and found the place for it, 0 years ago, and has been kept since.
+a discharged soldier who liked the view 	It has been kept since # was founded by a discharged soldier who raised the first palisade here and stayed behind it, 0 years ago.
+a discharged soldier who liked the view 	# has kept it since its founding by a discharged soldier who raised the first palisade here and stayed behind it, 0 years ago.
+a discharged soldier who liked the view 	It goes back to the founding of # by a discharged soldier who raised the first palisade here and stayed behind it, 0 years ago, and has been kept since.
+a single extended family who came and ne	It has been kept since # was founded by a single extended family who settled in the hills and never left, 0 years ago.
+a single extended family who came and ne	# has kept it since its founding by a single extended family who settled in the hills and never left, 0 years ago.
+a single extended family who came and ne	It goes back to the founding of # by a single extended family who settled in the hills and never left, 0 years ago, and has been kept since.
+a single extended family who came and ne	It has been kept since # was founded by a single extended family who came along the road and never left, 0 years ago.
+a single extended family who came and ne	# has kept it since its founding by a single extended family who came along the road and never left, 0 years ago.
+a single extended family who came and ne	It goes back to the founding of # by a single extended family who came along the road and never left, 0 years ago, and has been kept since.
+a single extended family who came and ne	It has been kept since # was founded by a single extended family who came by the river and never left, 0 years ago.
+a single extended family who came and ne	# has kept it since its founding by a single extended family who came by the river and never left, 0 years ago.
+a single extended family who came and ne	It goes back to the founding of # by a single extended family who came by the river and never left, 0 years ago, and has been kept since.
+a single extended family who came and ne	It has been kept since # was founded by a single extended family who built where the roads cross and never left, 0 years ago.
+a single extended family who came and ne	# has kept it since its founding by a single extended family who built where the roads cross and never left, 0 years ago.
+a single extended family who came and ne	It goes back to the founding of # by a single extended family who built where the roads cross and never left, 0 years ago, and has been kept since.
+a single extended family who came and ne	It has been kept since # was founded by a single extended family who came by boat and never left, 0 years ago.
+a single extended family who came and ne	# has kept it since its founding by a single extended family who came by boat and never left, 0 years ago.
+a single extended family who came and ne	It goes back to the founding of # by a single extended family who came by boat and never left, 0 years ago, and has been kept since.
+a single extended family who came and ne	It has been kept since # was founded by a single extended family who came far from the trade roads and never left, 0 years ago.
+a single extended family who came and ne	# has kept it since its founding by a single extended family who came far from the trade roads and never left, 0 years ago.
+a single extended family who came and ne	It goes back to the founding of # by a single extended family who came far from the trade roads and never left, 0 years ago, and has been kept since.
+a single extended family who came and ne	It has been kept since # was founded by a single extended family who raised a palisade around their first houses and never left, 0 years ago.
+a single extended family who came and ne	# has kept it since its founding by a single extended family who raised a palisade around their first houses and never left, 0 years ago.
+a single extended family who came and ne	It goes back to the founding of # by a single extended family who raised a palisade around their first houses and never left, 0 years ago, and has been kept since.
+a pair of siblings who disagreed about w	It has been kept since # was founded by a pair of siblings who stopped in the hills because they could not agree which way to go on, 0 years ago.
+a pair of siblings who disagreed about w	# has kept it since its founding by a pair of siblings who stopped in the hills because they could not agree which way to go on, 0 years ago.
+a pair of siblings who disagreed about w	It goes back to the founding of # by a pair of siblings who stopped in the hills because they could not agree which way to go on, 0 years ago, and has been kept since.
+a pair of siblings who disagreed about w	It has been kept since # was founded by a pair of siblings who stopped where the roads cross, unable to agree which road to take, 0 years ago.
+a pair of siblings who disagreed about w	# has kept it since its founding by a pair of siblings who stopped where the roads cross, unable to agree which road to take, 0 years ago.
+a pair of siblings who disagreed about w	It goes back to the founding of # by a pair of siblings who stopped where the roads cross, unable to agree which road to take, 0 years ago, and has been kept since.
+a pair of siblings who disagreed about w	It has been kept since # was founded by a pair of siblings who reached the river and could not agree whether to cross it, 0 years ago.
+a pair of siblings who disagreed about w	# has kept it since its founding by a pair of siblings who reached the river and could not agree whether to cross it, 0 years ago.
+a pair of siblings who disagreed about w	It goes back to the founding of # by a pair of siblings who reached the river and could not agree whether to cross it, 0 years ago, and has been kept since.
+a pair of siblings who disagreed about w	It has been kept since # was founded by a pair of siblings who reached the shore and would go no further, 0 years ago.
+a pair of siblings who disagreed about w	# has kept it since its founding by a pair of siblings who reached the shore and would go no further, 0 years ago.
+a pair of siblings who disagreed about w	It goes back to the founding of # by a pair of siblings who reached the shore and would go no further, 0 years ago, and has been kept since.
+a pair of siblings who disagreed about w	It has been kept since # was founded by a pair of siblings who walked the road this far and could not agree which way to go on, 0 years ago.
+a pair of siblings who disagreed about w	# has kept it since its founding by a pair of siblings who walked the road this far and could not agree which way to go on, 0 years ago.
+a pair of siblings who disagreed about w	It goes back to the founding of # by a pair of siblings who walked the road this far and could not agree which way to go on, 0 years ago, and has been kept since.
+a healer who stopped to treat a travelle	It has been kept since # was founded by a healer who stopped in the hills to treat a traveller and found the place too useful to leave, 0 years ago.
+a healer who stopped to treat a travelle	# has kept it since its founding by a healer who stopped in the hills to treat a traveller and found the place too useful to leave, 0 years ago.
+a healer who stopped to treat a travelle	It goes back to the founding of # by a healer who stopped in the hills to treat a traveller and found the place too useful to leave, 0 years ago, and has been kept since.
+a healer who stopped to treat a travelle	It has been kept since # was founded by a healer who stopped at the crossroads to treat a traveller and stayed, since every road brought more, 0 years ago.
+a healer who stopped to treat a travelle	# has kept it since its founding by a healer who stopped at the crossroads to treat a traveller and stayed, since every road brought more, 0 years ago.
+a healer who stopped to treat a travelle	It goes back to the founding of # by a healer who stopped at the crossroads to treat a traveller and stayed, since every road brought more, 0 years ago, and has been kept since.
+a healer who stopped to treat a travelle	It has been kept since # was founded by a healer who treated a traveller on the road here and found the spot too useful to leave, 0 years ago.
+a healer who stopped to treat a travelle	# has kept it since its founding by a healer who treated a traveller on the road here and found the spot too useful to leave, 0 years ago.
+a healer who stopped to treat a travelle	It goes back to the founding of # by a healer who treated a traveller on the road here and found the spot too useful to leave, 0 years ago, and has been kept since.
+a healer who stopped to treat a travelle	It has been kept since # was founded by a healer who treated a boatman on the river here and found the spot too useful to leave, 0 years ago.
+a healer who stopped to treat a travelle	# has kept it since its founding by a healer who treated a boatman on the river here and found the spot too useful to leave, 0 years ago.
+a healer who stopped to treat a travelle	It goes back to the founding of # by a healer who treated a boatman on the river here and found the spot too useful to leave, 0 years ago, and has been kept since.
+a healer who stopped to treat a travelle	It has been kept since # was founded by a healer who stopped to treat a traveller here and stayed on to tend the sick, 0 years ago.
+a healer who stopped to treat a travelle	# has kept it since its founding by a healer who stopped to treat a traveller here and stayed on to tend the sick, 0 years ago.
+a healer who stopped to treat a travelle	It goes back to the founding of # by a healer who stopped to treat a traveller here and stayed on to tend the sick, 0 years ago, and has been kept since.
+three or four families who agreed to try	It has been kept since # was founded by three or four families who agreed to try wintering together in the hills and never stopped, 0 years ago.
+three or four families who agreed to try	# has kept it since its founding by three or four families who agreed to try wintering together in the hills and never stopped, 0 years ago.
+three or four families who agreed to try	It goes back to the founding of # by three or four families who agreed to try wintering together in the hills and never stopped, 0 years ago, and has been kept since.
+three or four families who agreed to try	It has been kept since # was founded by three or four families who wintered together beside the river and never moved on, 0 years ago.
+three or four families who agreed to try	# has kept it since its founding by three or four families who wintered together beside the river and never moved on, 0 years ago.
+three or four families who agreed to try	It goes back to the founding of # by three or four families who wintered together beside the river and never moved on, 0 years ago, and has been kept since.
+three or four families who agreed to try	It has been kept since # was founded by three or four families who wintered together by the road and never moved on, 0 years ago.
+three or four families who agreed to try	# has kept it since its founding by three or four families who wintered together by the road and never moved on, 0 years ago.
+three or four families who agreed to try	It goes back to the founding of # by three or four families who wintered together by the road and never moved on, 0 years ago, and has been kept since.
+three or four families who agreed to try	It has been kept since # was founded by three or four families who wintered together on the shore and never moved on, 0 years ago.
+three or four families who agreed to try	# has kept it since its founding by three or four families who wintered together on the shore and never moved on, 0 years ago.
+three or four families who agreed to try	It goes back to the founding of # by three or four families who wintered together on the shore and never moved on, 0 years ago, and has been kept since.
+three or four families who agreed to try	It has been kept since # was founded by three or four families who wintered together where the roads cross and never moved on, 0 years ago.
+three or four families who agreed to try	# has kept it since its founding by three or four families who wintered together where the roads cross and never moved on, 0 years ago.
+three or four families who agreed to try	It goes back to the founding of # by three or four families who wintered together where the roads cross and never moved on, 0 years ago, and has been kept since.
+three or four families who agreed to try	It has been kept since # was founded by three or four families who wintered together far from the trade roads and never moved on, 0 years ago.
+three or four families who agreed to try	# has kept it since its founding by three or four families who wintered together far from the trade roads and never moved on, 0 years ago.
+three or four families who agreed to try	It goes back to the founding of # by three or four families who wintered together far from the trade roads and never moved on, 0 years ago, and has been kept since.
+three or four families who agreed to try	It has been kept since # was founded by three or four families who raised a palisade together for their first winter and never moved on, 0 years ago.
+three or four families who agreed to try	# has kept it since its founding by three or four families who raised a palisade together for their first winter and never moved on, 0 years ago.
+three or four families who agreed to try	It goes back to the founding of # by three or four families who raised a palisade together for their first winter and never moved on, 0 years ago, and has been kept since.
+three or four families who agreed to try	It has been kept since # was founded by three or four families who wintered together at the edge of the wild country and never moved on, 0 years ago.
+three or four families who agreed to try	# has kept it since its founding by three or four families who wintered together at the edge of the wild country and never moved on, 0 years ago.
+three or four families who agreed to try	It goes back to the founding of # by three or four families who wintered together at the edge of the wild country and never moved on, 0 years ago, and has been kept since.
+a retired tradesperson whose skills attr	It has been kept since # was founded by a retired tradesperson who settled in the hills, whose skills drew others after, 0 years ago.
+a retired tradesperson whose skills attr	# has kept it since its founding by a retired tradesperson who settled in the hills, whose skills drew others after, 0 years ago.
+a retired tradesperson whose skills attr	It goes back to the founding of # by a retired tradesperson who settled in the hills, whose skills drew others after, 0 years ago, and has been kept since.
+a retired tradesperson whose skills attr	It has been kept since # was founded by a retired tradesperson who set up by the road, whose skills drew others to settle near, 0 years ago.
+a retired tradesperson whose skills attr	# has kept it since its founding by a retired tradesperson who set up by the road, whose skills drew others to settle near, 0 years ago.
+a retired tradesperson whose skills attr	It goes back to the founding of # by a retired tradesperson who set up by the road, whose skills drew others to settle near, 0 years ago, and has been kept since.
+a retired tradesperson whose skills attr	It has been kept since # was founded by a retired smith whose skills drew others to settle around the forge, 0 years ago.
+a retired tradesperson whose skills attr	# has kept it since its founding by a retired smith whose skills drew others to settle around the forge, 0 years ago.
+a retired tradesperson whose skills attr	It goes back to the founding of # by a retired smith whose skills drew others to settle around the forge, 0 years ago, and has been kept since.
+a retired tradesperson whose skills attr	It has been kept since # was founded by a retired mason whose skills drew others to work the quarry, 0 years ago.
+a retired tradesperson whose skills attr	# has kept it since its founding by a retired mason whose skills drew others to work the quarry, 0 years ago.
+a retired tradesperson whose skills attr	It goes back to the founding of # by a retired mason whose skills drew others to work the quarry, 0 years ago, and has been kept since.
+a retired tradesperson whose skills attr	It has been kept since # was founded by a retired tradesperson who set up where the roads cross, whose skills drew others to settle near, 0 years ago.
+a retired tradesperson whose skills attr	# has kept it since its founding by a retired tradesperson who set up where the roads cross, whose skills drew others to settle near, 0 years ago.
+a retired tradesperson whose skills attr	It goes back to the founding of # by a retired tradesperson who set up where the roads cross, whose skills drew others to settle near, 0 years ago, and has been kept since.
+a household that settled first and found	It has been kept since # was founded by a household that settled in the hills first and found others following it in, 0 years ago.
+a household that settled first and found	# has kept it since its founding by a household that settled in the hills first and found others following it in, 0 years ago.
+a household that settled first and found	It goes back to the founding of # by a household that settled in the hills first and found others following it in, 0 years ago, and has been kept since.
+a household that settled first and found	It has been kept since # was founded by a household that settled first beside the river and found others following it in, 0 years ago.
+a household that settled first and found	# has kept it since its founding by a household that settled first beside the river and found others following it in, 0 years ago.
+a household that settled first and found	It goes back to the founding of # by a household that settled first beside the river and found others following it in, 0 years ago, and has been kept since.
+a household that settled first and found	It has been kept since # was founded by a household that settled first beside the road and found others following it in, 0 years ago.
+a household that settled first and found	# has kept it since its founding by a household that settled first beside the road and found others following it in, 0 years ago.
+a household that settled first and found	It goes back to the founding of # by a household that settled first beside the road and found others following it in, 0 years ago, and has been kept since.
+a household that settled first and found	It has been kept since # was founded by a household that settled first on the shore and found others following it in, 0 years ago.
+a household that settled first and found	# has kept it since its founding by a household that settled first on the shore and found others following it in, 0 years ago.
+a household that settled first and found	It goes back to the founding of # by a household that settled first on the shore and found others following it in, 0 years ago, and has been kept since.
+a small religious community whose member	It has been kept since # was founded by a small religious community that settled in the hills, whose members drifted into secular life over two generations, 0 years ago.
+a small religious community whose member	# has kept it since its founding by a small religious community that settled in the hills, whose members drifted into secular life over two generations, 0 years ago.
+a small religious community whose member	It goes back to the founding of # by a small religious community that settled in the hills, whose members drifted into secular life over two generations, 0 years ago, and has been kept since.
+a small religious community whose member	It has been kept since # was founded by a small religious community that built the first temple here, whose members drifted into secular life over two generations, 0 years ago.
+a small religious community whose member	# has kept it since its founding by a small religious community that built the first temple here, whose members drifted into secular life over two generations, 0 years ago.
+a small religious community whose member	It goes back to the founding of # by a small religious community that built the first temple here, whose members drifted into secular life over two generations, 0 years ago, and has been kept since.
+a group of settlers seeking new opportun	It has been kept since # was founded by a group of settlers who came in the hills looking for land of their own, 0 years ago.
+a group of settlers seeking new opportun	# has kept it since its founding by a group of settlers who came in the hills looking for land of their own, 0 years ago.
+a group of settlers seeking new opportun	It goes back to the founding of # by a group of settlers who came in the hills looking for land of their own, 0 years ago, and has been kept since.
+a group of settlers seeking new opportun	It has been kept since # was founded by a group of settlers who came by the river looking for land of their own, 0 years ago.
+a group of settlers seeking new opportun	# has kept it since its founding by a group of settlers who came by the river looking for land of their own, 0 years ago.
+a group of settlers seeking new opportun	It goes back to the founding of # by a group of settlers who came by the river looking for land of their own, 0 years ago, and has been kept since.
+a group of settlers seeking new opportun	It has been kept since # was founded by a group of settlers who followed the road looking for land of their own, 0 years ago.
+a group of settlers seeking new opportun	# has kept it since its founding by a group of settlers who followed the road looking for land of their own, 0 years ago.
+a group of settlers seeking new opportun	It goes back to the founding of # by a group of settlers who followed the road looking for land of their own, 0 years ago, and has been kept since.
+a group of settlers seeking new opportun	It has been kept since # was founded by a group of settlers who came to the crossroads looking for work and land, 0 years ago.
+a group of settlers seeking new opportun	# has kept it since its founding by a group of settlers who came to the crossroads looking for work and land, 0 years ago.
+a group of settlers seeking new opportun	It goes back to the founding of # by a group of settlers who came to the crossroads looking for work and land, 0 years ago, and has been kept since.
+a group of settlers seeking new opportun	It has been kept since # was founded by a group of settlers who came by boat looking for land of their own, 0 years ago.
+a group of settlers seeking new opportun	# has kept it since its founding by a group of settlers who came by boat looking for land of their own, 0 years ago.
+a group of settlers seeking new opportun	It goes back to the founding of # by a group of settlers who came by boat looking for land of their own, 0 years ago, and has been kept since.
+refugees fleeing war or persecution who 	It has been kept since # was founded by refugees fleeing war or persecution who found the hills easy to defend, 0 years ago.
+refugees fleeing war or persecution who 	# has kept it since its founding by refugees fleeing war or persecution who found the hills easy to defend, 0 years ago.
+refugees fleeing war or persecution who 	It goes back to the founding of # by refugees fleeing war or persecution who found the hills easy to defend, 0 years ago, and has been kept since.
+refugees fleeing war or persecution who 	It has been kept since # was founded by refugees fleeing war or persecution who found the mountainside easy to defend, 0 years ago.
+refugees fleeing war or persecution who 	# has kept it since its founding by refugees fleeing war or persecution who found the mountainside easy to defend, 0 years ago.
+refugees fleeing war or persecution who 	It goes back to the founding of # by refugees fleeing war or persecution who found the mountainside easy to defend, 0 years ago, and has been kept since.
+refugees fleeing war or persecution who 	It has been kept since # was founded by refugees fleeing war or persecution who found cover in the forest, 0 years ago.
+refugees fleeing war or persecution who 	# has kept it since its founding by refugees fleeing war or persecution who found cover in the forest, 0 years ago.
+refugees fleeing war or persecution who 	It goes back to the founding of # by refugees fleeing war or persecution who found cover in the forest, 0 years ago, and has been kept since.
+refugees fleeing war or persecution who 	It has been kept since # was founded by refugees fleeing war or persecution who raised a palisade here and stayed behind it, 0 years ago.
+refugees fleeing war or persecution who 	# has kept it since its founding by refugees fleeing war or persecution who raised a palisade here and stayed behind it, 0 years ago.
+refugees fleeing war or persecution who 	It goes back to the founding of # by refugees fleeing war or persecution who raised a palisade here and stayed behind it, 0 years ago, and has been kept since.
+refugees fleeing war or persecution who 	It has been kept since # was founded by refugees fleeing war or persecution who found the place defensible, far from the trade roads, 0 years ago.
+refugees fleeing war or persecution who 	# has kept it since its founding by refugees fleeing war or persecution who found the place defensible, far from the trade roads, 0 years ago.
+refugees fleeing war or persecution who 	It goes back to the founding of # by refugees fleeing war or persecution who found the place defensible, far from the trade roads, 0 years ago, and has been kept since.
+a noble granted lands by the crown and o	It has been kept since # was founded by a noble granted lands in the hills by the crown and obligated to populate them, 0 years ago.
+a noble granted lands by the crown and o	# has kept it since its founding by a noble granted lands in the hills by the crown and obligated to populate them, 0 years ago.
+a noble granted lands by the crown and o	It goes back to the founding of # by a noble granted lands in the hills by the crown and obligated to populate them, 0 years ago, and has been kept since.
+a noble granted lands by the crown and o	It has been kept since # was founded by a noble granted the river lands by the crown and obligated to populate them, 0 years ago.
+a noble granted lands by the crown and o	# has kept it since its founding by a noble granted the river lands by the crown and obligated to populate them, 0 years ago.
+a noble granted lands by the crown and o	It goes back to the founding of # by a noble granted the river lands by the crown and obligated to populate them, 0 years ago, and has been kept since.
+a noble granted lands by the crown and o	It has been kept since # was founded by a noble granted lands along the road by the crown and obligated to populate them, 0 years ago.
+a noble granted lands by the crown and o	# has kept it since its founding by a noble granted lands along the road by the crown and obligated to populate them, 0 years ago.
+a noble granted lands by the crown and o	It goes back to the founding of # by a noble granted lands along the road by the crown and obligated to populate them, 0 years ago, and has been kept since.
+escaped serfs seeking a place beyond the	It has been kept since # was founded by escaped serfs who fled in the hills, beyond the reach of their former masters, 0 years ago.
+escaped serfs seeking a place beyond the	# has kept it since its founding by escaped serfs who fled in the hills, beyond the reach of their former masters, 0 years ago.
+escaped serfs seeking a place beyond the	It goes back to the founding of # by escaped serfs who fled in the hills, beyond the reach of their former masters, 0 years ago, and has been kept since.
+escaped serfs seeking a place beyond the	It has been kept since # was founded by escaped serfs who settled off the trade roads, beyond the reach of their former masters, 0 years ago.
+escaped serfs seeking a place beyond the	# has kept it since its founding by escaped serfs who settled off the trade roads, beyond the reach of their former masters, 0 years ago.
+escaped serfs seeking a place beyond the	It goes back to the founding of # by escaped serfs who settled off the trade roads, beyond the reach of their former masters, 0 years ago, and has been kept since.
+escaped serfs seeking a place beyond the	It has been kept since # was founded by escaped serfs who followed the river out of their former masters' reach, 0 years ago.
+escaped serfs seeking a place beyond the	# has kept it since its founding by escaped serfs who followed the river out of their former masters' reach, 0 years ago.
+escaped serfs seeking a place beyond the	It goes back to the founding of # by escaped serfs who followed the river out of their former masters' reach, 0 years ago, and has been kept since.
+a community of tradespeople who left a l	It has been kept since # was founded by a community of tradespeople who left a larger place after a quarrel and set up in the hills, 0 years ago.
+a community of tradespeople who left a l	# has kept it since its founding by a community of tradespeople who left a larger place after a quarrel and set up in the hills, 0 years ago.
+a community of tradespeople who left a l	It goes back to the founding of # by a community of tradespeople who left a larger place after a quarrel and set up in the hills, 0 years ago, and has been kept since.
+a community of tradespeople who left a l	It has been kept since # was founded by a community of tradespeople who left a larger place under contested circumstances and set up their own market here, 0 years ago.
+a community of tradespeople who left a l	# has kept it since its founding by a community of tradespeople who left a larger place under contested circumstances and set up their own market here, 0 years ago.
+a community of tradespeople who left a l	It goes back to the founding of # by a community of tradespeople who left a larger place under contested circumstances and set up their own market here, 0 years ago, and has been kept since.
+a community of tradespeople who left a l	It has been kept since # was founded by a community of tradespeople who left a larger place under contested circumstances and set up along the road, 0 years ago.
+a community of tradespeople who left a l	# has kept it since its founding by a community of tradespeople who left a larger place under contested circumstances and set up along the road, 0 years ago.
+a community of tradespeople who left a l	It goes back to the founding of # by a community of tradespeople who left a larger place under contested circumstances and set up along the road, 0 years ago, and has been kept since.
+merchants recognising economic potential	It has been kept since # was founded by merchants who saw what the road could bring before anyone else did, 0 years ago.
+merchants recognising economic potential	# has kept it since its founding by merchants who saw what the road could bring before anyone else did, 0 years ago.
+merchants recognising economic potential	It goes back to the founding of # by merchants who saw what the road could bring before anyone else did, 0 years ago, and has been kept since.
+merchants recognising economic potential	It has been kept since # was founded by merchants who saw what the river could carry before anyone else did, 0 years ago.
+merchants recognising economic potential	# has kept it since its founding by merchants who saw what the river could carry before anyone else did, 0 years ago.
+merchants recognising economic potential	It goes back to the founding of # by merchants who saw what the river could carry before anyone else did, 0 years ago, and has been kept since.
+merchants recognising economic potential	It has been kept since # was founded by merchants who saw what the crossroads could bring before anyone else did, 0 years ago.
+merchants recognising economic potential	# has kept it since its founding by merchants who saw what the crossroads could bring before anyone else did, 0 years ago.
+merchants recognising economic potential	It goes back to the founding of # by merchants who saw what the crossroads could bring before anyone else did, 0 years ago, and has been kept since.
+merchants recognising economic potential	It has been kept since # was founded by merchants who saw what a harbour here could bring before anyone else did, 0 years ago.
+merchants recognising economic potential	# has kept it since its founding by merchants who saw what a harbour here could bring before anyone else did, 0 years ago.
+merchants recognising economic potential	It goes back to the founding of # by merchants who saw what a harbour here could bring before anyone else did, 0 years ago, and has been kept since.
+merchants recognising economic potential	It has been kept since # was founded by merchants who saw what the land in the hills could yield before anyone else did, 0 years ago.
+merchants recognising economic potential	# has kept it since its founding by merchants who saw what the land in the hills could yield before anyone else did, 0 years ago.
+merchants recognising economic potential	It goes back to the founding of # by merchants who saw what the land in the hills could yield before anyone else did, 0 years ago, and has been kept since.
+a noble granted lands by the crown with 	It has been kept since # was founded by a noble granted lands in the hills by the crown, with the resources to develop them, 0 years ago.
+a noble granted lands by the crown with 	# has kept it since its founding by a noble granted lands in the hills by the crown, with the resources to develop them, 0 years ago.
+a noble granted lands by the crown with 	It goes back to the founding of # by a noble granted lands in the hills by the crown, with the resources to develop them, 0 years ago, and has been kept since.
+a noble granted lands by the crown with 	It has been kept since # was founded by a noble granted lands by the crown, with the resources to build the first mill and market, 0 years ago.
+a noble granted lands by the crown with 	# has kept it since its founding by a noble granted lands by the crown, with the resources to build the first mill and market, 0 years ago.
+a noble granted lands by the crown with 	It goes back to the founding of # by a noble granted lands by the crown, with the resources to build the first mill and market, 0 years ago, and has been kept since.
+a noble granted lands by the crown with 	It has been kept since # was founded by a noble granted the river lands by the crown, with the resources to develop them, 0 years ago.
+a noble granted lands by the crown with 	# has kept it since its founding by a noble granted the river lands by the crown, with the resources to develop them, 0 years ago.
+a noble granted lands by the crown with 	It goes back to the founding of # by a noble granted the river lands by the crown, with the resources to develop them, 0 years ago, and has been kept since.
+military veterans given land grants who 	It has been kept since # was founded by military veterans given land grants in the hills, who brought their skills with them, 0 years ago.
+military veterans given land grants who 	# has kept it since its founding by military veterans given land grants in the hills, who brought their skills with them, 0 years ago.
+military veterans given land grants who 	It goes back to the founding of # by military veterans given land grants in the hills, who brought their skills with them, 0 years ago, and has been kept since.
+military veterans given land grants who 	It has been kept since # was founded by military veterans given land grants, who built the first walls with the skills they brought, 0 years ago.
+military veterans given land grants who 	# has kept it since its founding by military veterans given land grants, who built the first walls with the skills they brought, 0 years ago.
+military veterans given land grants who 	It goes back to the founding of # by military veterans given land grants, who built the first walls with the skills they brought, 0 years ago, and has been kept since.
+military veterans given land grants who 	It has been kept since # was founded by military veterans given land grants along the road, who brought their skills with them, 0 years ago.
+military veterans given land grants who 	# has kept it since its founding by military veterans given land grants along the road, who brought their skills with them, 0 years ago.
+military veterans given land grants who 	It goes back to the founding of # by military veterans given land grants along the road, who brought their skills with them, 0 years ago, and has been kept since.
+a merchant consortium that needed a wayp	It has been kept since # was founded by a merchant consortium that needed a waypoint on the road and decided to own it, 0 years ago.
+a merchant consortium that needed a wayp	# has kept it since its founding by a merchant consortium that needed a waypoint on the road and decided to own it, 0 years ago.
+a merchant consortium that needed a wayp	It goes back to the founding of # by a merchant consortium that needed a waypoint on the road and decided to own it, 0 years ago, and has been kept since.
+a merchant consortium that needed a wayp	It has been kept since # was founded by a merchant consortium that needed a landing on the river and decided to own it, 0 years ago.
+a merchant consortium that needed a wayp	# has kept it since its founding by a merchant consortium that needed a landing on the river and decided to own it, 0 years ago.
+a merchant consortium that needed a wayp	It goes back to the founding of # by a merchant consortium that needed a landing on the river and decided to own it, 0 years ago, and has been kept since.
+a merchant consortium that needed a wayp	It has been kept since # was founded by a merchant consortium that needed a waypoint where the roads cross and decided to own it, 0 years ago.
+a merchant consortium that needed a wayp	# has kept it since its founding by a merchant consortium that needed a waypoint where the roads cross and decided to own it, 0 years ago.
+a merchant consortium that needed a wayp	It goes back to the founding of # by a merchant consortium that needed a waypoint where the roads cross and decided to own it, 0 years ago, and has been kept since.
+a merchant consortium that needed a wayp	It has been kept since # was founded by a merchant consortium that needed a harbour of its own and built one, 0 years ago.
+a merchant consortium that needed a wayp	# has kept it since its founding by a merchant consortium that needed a harbour of its own and built one, 0 years ago.
+a merchant consortium that needed a wayp	It goes back to the founding of # by a merchant consortium that needed a harbour of its own and built one, 0 years ago, and has been kept since.
+a merchant consortium that needed a wayp	It has been kept since # was founded by a merchant consortium that wanted a market of its own in the hills and built one, 0 years ago.
+a merchant consortium that needed a wayp	# has kept it since its founding by a merchant consortium that wanted a market of its own in the hills and built one, 0 years ago.
+a merchant consortium that needed a wayp	It goes back to the founding of # by a merchant consortium that wanted a market of its own in the hills and built one, 0 years ago, and has been kept since.
+religious authorities who wanted a centr	It has been kept since # was founded by religious authorities who wanted a centre for their work in the hills, 0 years ago.
+religious authorities who wanted a centr	# has kept it since its founding by religious authorities who wanted a centre for their work in the hills, 0 years ago.
+religious authorities who wanted a centr	It goes back to the founding of # by religious authorities who wanted a centre for their work in the hills, 0 years ago, and has been kept since.
+religious authorities who wanted a centr	It has been kept since # was founded by religious authorities who built a monastery here as a centre for their work in the region, 0 years ago.
+religious authorities who wanted a centr	# has kept it since its founding by religious authorities who built a monastery here as a centre for their work in the region, 0 years ago.
+religious authorities who wanted a centr	It goes back to the founding of # by religious authorities who built a monastery here as a centre for their work in the region, 0 years ago, and has been kept since.
+a powerful noble house that needed a com	It has been kept since # was founded by a powerful noble house that needed a commercial base on the river, independent of rivals, 0 years ago.
+a powerful noble house that needed a com	# has kept it since its founding by a powerful noble house that needed a commercial base on the river, independent of rivals, 0 years ago.
+a powerful noble house that needed a com	It goes back to the founding of # by a powerful noble house that needed a commercial base on the river, independent of rivals, 0 years ago, and has been kept since.
+a powerful noble house that needed a com	It has been kept since # was founded by a powerful noble house that needed a commercial base on the road, independent of rivals, 0 years ago.
+a powerful noble house that needed a com	# has kept it since its founding by a powerful noble house that needed a commercial base on the road, independent of rivals, 0 years ago.
+a powerful noble house that needed a com	It goes back to the founding of # by a powerful noble house that needed a commercial base on the road, independent of rivals, 0 years ago, and has been kept since.
+a powerful noble house that needed a com	It has been kept since # was founded by a powerful noble house that needed a market of its own in the hills, independent of rivals, 0 years ago.
+a powerful noble house that needed a com	# has kept it since its founding by a powerful noble house that needed a market of its own in the hills, independent of rivals, 0 years ago.
+a powerful noble house that needed a com	It goes back to the founding of # by a powerful noble house that needed a market of its own in the hills, independent of rivals, 0 years ago, and has been kept since.
+a powerful noble house that needed a com	It has been kept since # was founded by a powerful noble house that needed a harbour of its own, independent of rivals, 0 years ago.
+a powerful noble house that needed a com	# has kept it since its founding by a powerful noble house that needed a harbour of its own, independent of rivals, 0 years ago.
+a powerful noble house that needed a com	It goes back to the founding of # by a powerful noble house that needed a harbour of its own, independent of rivals, 0 years ago, and has been kept since.
+a merchant coalition that grew too large	It has been kept since # was founded by a merchant coalition that outgrew the place it started in and moved its business in the hills, 0 years ago.
+a merchant coalition that grew too large	# has kept it since its founding by a merchant coalition that outgrew the place it started in and moved its business in the hills, 0 years ago.
+a merchant coalition that grew too large	It goes back to the founding of # by a merchant coalition that outgrew the place it started in and moved its business in the hills, 0 years ago, and has been kept since.
+a merchant coalition that grew too large	It has been kept since # was founded by a merchant coalition that outgrew the place it started in and moved its business to the river, 0 years ago.
+a merchant coalition that grew too large	# has kept it since its founding by a merchant coalition that outgrew the place it started in and moved its business to the river, 0 years ago.
+a merchant coalition that grew too large	It goes back to the founding of # by a merchant coalition that outgrew the place it started in and moved its business to the river, 0 years ago, and has been kept since.
+a merchant coalition that grew too large	It has been kept since # was founded by a merchant coalition that outgrew the place it started in and moved to a harbour of its own, 0 years ago.
+a merchant coalition that grew too large	# has kept it since its founding by a merchant coalition that outgrew the place it started in and moved to a harbour of its own, 0 years ago.
+a merchant coalition that grew too large	It goes back to the founding of # by a merchant coalition that outgrew the place it started in and moved to a harbour of its own, 0 years ago, and has been kept since.
+a merchant coalition that grew too large	It has been kept since # was founded by a merchant coalition that outgrew the place it started in and moved to where the roads cross, 0 years ago.
+a merchant coalition that grew too large	# has kept it since its founding by a merchant coalition that outgrew the place it started in and moved to where the roads cross, 0 years ago.
+a merchant coalition that grew too large	It goes back to the founding of # by a merchant coalition that outgrew the place it started in and moved to where the roads cross, 0 years ago, and has been kept since.
+a military command that built fortificat	It has been kept since # was founded by a military command that fortified a post in the hills and found civilians followed, 0 years ago.
+a military command that built fortificat	# has kept it since its founding by a military command that fortified a post in the hills and found civilians followed, 0 years ago.
+a military command that built fortificat	It goes back to the founding of # by a military command that fortified a post in the hills and found civilians followed, 0 years ago, and has been kept since.
+a military command that built fortificat	It has been kept since # was founded by a military command that fortified the river crossing and found civilians followed, 0 years ago.
+a military command that built fortificat	# has kept it since its founding by a military command that fortified the river crossing and found civilians followed, 0 years ago.
+a military command that built fortificat	It goes back to the founding of # by a military command that fortified the river crossing and found civilians followed, 0 years ago, and has been kept since.
+a military command that built fortificat	It has been kept since # was founded by a military command that fortified the crossroads and found civilians followed, 0 years ago.
+a military command that built fortificat	# has kept it since its founding by a military command that fortified the crossroads and found civilians followed, 0 years ago.
+a military command that built fortificat	It goes back to the founding of # by a military command that fortified the crossroads and found civilians followed, 0 years ago, and has been kept since.
+a military command that built fortificat	It has been kept since # was founded by a military command that fortified the road and found civilians followed, 0 years ago.
+a military command that built fortificat	# has kept it since its founding by a military command that fortified the road and found civilians followed, 0 years ago.
+a military command that built fortificat	It goes back to the founding of # by a military command that fortified the road and found civilians followed, 0 years ago, and has been kept since.
+royal decree and a century of forced inv	It has been kept since # was founded by royal decree, and a century of forced investment in its walls and markets, 0 years ago.
+royal decree and a century of forced inv	# has kept it since its founding by royal decree, and a century of forced investment in its walls and markets, 0 years ago.
+royal decree and a century of forced inv	It goes back to the founding of # by royal decree, and a century of forced investment in its walls and markets, 0 years ago, and has been kept since.
+royal decree and a century of forced inv	It has been kept since # was founded by royal decree to build a city in the hills, and a century of forced investment, 0 years ago.
+royal decree and a century of forced inv	# has kept it since its founding by royal decree to build a city in the hills, and a century of forced investment, 0 years ago.
+royal decree and a century of forced inv	It goes back to the founding of # by royal decree to build a city in the hills, and a century of forced investment, 0 years ago, and has been kept since.
+royal decree and a century of forced inv	It has been kept since # was founded by royal decree to hold the river, and a century of forced investment, 0 years ago.
+royal decree and a century of forced inv	# has kept it since its founding by royal decree to hold the river, and a century of forced investment, 0 years ago.
+royal decree and a century of forced inv	It goes back to the founding of # by royal decree to hold the river, and a century of forced investment, 0 years ago, and has been kept since.
+royal decree and a century of forced inv	It has been kept since # was founded by royal decree to hold the crossing of the roads, and a century of forced investment, 0 years ago.
+royal decree and a century of forced inv	# has kept it since its founding by royal decree to hold the crossing of the roads, and a century of forced investment, 0 years ago.
+royal decree and a century of forced inv	It goes back to the founding of # by royal decree to hold the crossing of the roads, and a century of forced investment, 0 years ago, and has been kept since.
+imperial decree and the systematic force	It has been kept since # was founded by imperial decree, and skilled people moved by force to settle in the hills, 0 years ago.
+imperial decree and the systematic force	# has kept it since its founding by imperial decree, and skilled people moved by force to settle in the hills, 0 years ago.
+imperial decree and the systematic force	It goes back to the founding of # by imperial decree, and skilled people moved by force to settle in the hills, 0 years ago, and has been kept since.
+imperial decree and the systematic force	It has been kept since # was founded by imperial decree to hold the river, and the forced relocation of skilled populations, 0 years ago.
+imperial decree and the systematic force	# has kept it since its founding by imperial decree to hold the river, and the forced relocation of skilled populations, 0 years ago.
+imperial decree and the systematic force	It goes back to the founding of # by imperial decree to hold the river, and the forced relocation of skilled populations, 0 years ago, and has been kept since.
+imperial decree and the systematic force	It has been kept since # was founded by imperial decree to hold the road, and the forced relocation of skilled populations, 0 years ago.
+imperial decree and the systematic force	# has kept it since its founding by imperial decree to hold the road, and the forced relocation of skilled populations, 0 years ago.
+imperial decree and the systematic force	It goes back to the founding of # by imperial decree to hold the road, and the forced relocation of skilled populations, 0 years ago, and has been kept since.
+the slow accretion of three smaller sett	It has been kept since # was founded by the slow accretion of three smaller settlements in the hills that eventually merged under a single administration, 0 years ago.
+the slow accretion of three smaller sett	# has kept it since its founding by the slow accretion of three smaller settlements in the hills that eventually merged under a single administration, 0 years ago.
+the slow accretion of three smaller sett	It goes back to the founding of # by the slow accretion of three smaller settlements in the hills that eventually merged under a single administration, 0 years ago, and has been kept since.
+the slow accretion of three smaller sett	It has been kept since # was founded by the slow accretion of three smaller settlements along the river that eventually merged under a single administration, 0 years ago.
+the slow accretion of three smaller sett	# has kept it since its founding by the slow accretion of three smaller settlements along the river that eventually merged under a single administration, 0 years ago.
+the slow accretion of three smaller sett	It goes back to the founding of # by the slow accretion of three smaller settlements along the river that eventually merged under a single administration, 0 years ago, and has been kept since.
+the slow accretion of three smaller sett	It has been kept since # was founded by the slow accretion of three smaller settlements along the road that eventually merged under a single administration, 0 years ago.
+the slow accretion of three smaller sett	# has kept it since its founding by the slow accretion of three smaller settlements along the road that eventually merged under a single administration, 0 years ago.
+the slow accretion of three smaller sett	It goes back to the founding of # by the slow accretion of three smaller settlements along the road that eventually merged under a single administration, 0 years ago, and has been kept since.
+the slow accretion of three smaller sett	It has been kept since # was founded by the slow accretion of three smaller settlements around a shared market, eventually merged under a single administration, 0 years ago.
+the slow accretion of three smaller sett	# has kept it since its founding by the slow accretion of three smaller settlements around a shared market, eventually merged under a single administration, 0 years ago.
+the slow accretion of three smaller sett	It goes back to the founding of # by the slow accretion of three smaller settlements around a shared market, eventually merged under a single administration, 0 years ago, and has been kept since.
+a great trade house that outgrew every o	It has been kept since # was founded by a great trade house whose river trade outgrew every other settlement in the region, 0 years ago.
+a great trade house that outgrew every o	# has kept it since its founding by a great trade house whose river trade outgrew every other settlement in the region, 0 years ago.
+a great trade house that outgrew every o	It goes back to the founding of # by a great trade house whose river trade outgrew every other settlement in the region, 0 years ago, and has been kept since.
+a great trade house that outgrew every o	It has been kept since # was founded by a great trade house whose road trade outgrew every other settlement in the region, 0 years ago.
+a great trade house that outgrew every o	# has kept it since its founding by a great trade house whose road trade outgrew every other settlement in the region, 0 years ago.
+a great trade house that outgrew every o	It goes back to the founding of # by a great trade house whose road trade outgrew every other settlement in the region, 0 years ago, and has been kept since.
+a great trade house that outgrew every o	It has been kept since # was founded by a great trade house in the hills that outgrew every other settlement in the region, 0 years ago.
+a great trade house that outgrew every o	# has kept it since its founding by a great trade house in the hills that outgrew every other settlement in the region, 0 years ago.
+a great trade house that outgrew every o	It goes back to the founding of # by a great trade house in the hills that outgrew every other settlement in the region, 0 years ago, and has been kept since.
+a great trade house that outgrew every o	It has been kept since # was founded by a great trade house whose banking outgrew every other settlement in the region, 0 years ago.
+a great trade house that outgrew every o	# has kept it since its founding by a great trade house whose banking outgrew every other settlement in the region, 0 years ago.
+a great trade house that outgrew every o	It goes back to the founding of # by a great trade house whose banking outgrew every other settlement in the region, 0 years ago, and has been kept since.
+a great trade house that outgrew every o	It has been kept since # was founded by a great trade house whose quays outgrew every other settlement in the region, 0 years ago.
+a great trade house that outgrew every o	# has kept it since its founding by a great trade house whose quays outgrew every other settlement in the region, 0 years ago.
+a great trade house that outgrew every o	It goes back to the founding of # by a great trade house whose quays outgrew every other settlement in the region, 0 years ago, and has been kept since.
