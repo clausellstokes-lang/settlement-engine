@@ -1490,3 +1490,76 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   the town's houses and priorities ("Corrupt Council", "Shadow Senate" and their description "Criminal networks
   have captured governance" are served today); is that consistent with the default veil's shut capture grouping,
   and what is served of the name when the governing house is hidden by hand? For the reader's FINAL list.
+- 05:07 UTC · **MIGRATION 213 IS CLEAR; THE SEAT'S COUNT WAS RE-TAKEN UNDER TODAY'S BIRTH LAW; THE DESIGN IS RULED AND ITS BUILDER SEATED.**
+  **(1) REVIEW-GRANTS-1: "213 CLEAR at sha256 c87283acce8223884e9ea973b9be2f2cd19a3fbebbffa48808171c5e3cd82bfb"**, nothing
+  blocking (its review at 9f7dbea9c on `lane/review-grants-1-2026-11-20`, `docs/chair/2026-11-20/security/REVIEW-GRANTS-1.md`).
+  EXECUTED on its own chain: the app is not broken (the 21 invoker helpers are reached only from definer bodies; every
+  visitor flow identical before and after, except that a signed-out caller no longer reads a ticket's thread); the class is
+  closed (the open set equals the allowlist, 105; 106,736 calls as anon and as a signed-in attacker against a seeded
+  victim: no private row returned, no write outside the caller's own rows); five histories each land on the same grants
+  and bodies (440 functions on 001..210, 511 with the veil), THE REAL PRODUCTION ORDER INCLUDED (head 203 by
+  `supabase/applied-head.json`; the emergency script; 204..212; 213); the reversal keeps the 157 and the four doors
+  closed on every history; the walker reds on four plants and is blind to one (a hollowed door that still names
+  `auth.uid()`); `CHECK_213.sql` reads `0 · 0 · 0 · 0 · 0 · 5 · 0` after 213 on every path. PLAUSIBLE ONLY: that
+  production equals the chain (the owner's run of CHECK_213 after the deploy settles it).
+  ITS FOUR ADVISORIES, RULED: **F1** the `@rollback` comment misstates production's state before 213 (it says 001..210
+  plus the ticket lines; production stands at 203 and the ticket lines are unrecorded): THE BUILDER CORRECTS THE COMMENT,
+  COMMENT LINES ONLY, and names the reader's executed reversal (`docs/chair/2026-11-20/security/review/rollback-213.sql`);
+  NO `.down.sql` SHIPS (`supabase/rollback/README.md` forbids a blanket reversal of a security tightening; the emergency
+  move stays one grant, one function, by hand); the reader then RE-CLEARS BY THE DIFF at the new sha256. **F2** the deploy
+  note states both rows of CHECK_213 as measured (before: `21 · 0 · 0 · 1 · 0 · 0 · 21` where the two ticket lines were
+  not run by hand). **F3** (the walker's check arm is a token test: a per-door check line) and **F4** (30 of the 71 doors
+  open to anon refuse anon on every call: their grant is habit) ARE RECORDED FOR AFTER THE DEPLOY (F4 joins the
+  default-deny migration the owner decides then). Sent to SEC-GRANTS-2 and to the reader.
+  **(2) SEAT-MEASURE CORRECTED ITS OWN COUNT, AND THE CHAIR CORRECTED ITS PAGE TO THE OWNER BY NAME THE SAME HOUR.** The
+  first count called the pipeline with a bare config and so measured the law of towns stored before Register VII went
+  live; every birth the app makes goes through `densityCreateBoundary.js :: birthConfig`
+  (`_densityLawVersion: 2`, `_livingContentLawVersion: 2`). RE-RUN (14db733e7; the v1 files kept as the already-stored
+  population): THE SEATS ARE BYTE-IDENTICAL UNDER BOTH LAWS; THE ROSTER BESIDE THE SEAT IS NOT. TODAY'S BIRTHS, 900 towns
+  at untouched sliders (present / rules / contends): the civic seat 682 / 680 / 7; merchants 485 / 148 / 450; nobles
+  252 / 103 by name (15 read noble) / 98; craftsmen 161 / 0 / 2; the military 452 / 0 / 446; the clergy 545 / 0 / 472;
+  mages 207 / 0 / 29; criminals 26 / 0 / barred; labourers and outsiders never born. 240 OF 900 TOWNS HAVE NO CONTENDER
+  AT ALL (thorps and hamlets hold none or one). THE SAME-KIND PAIR IS THE RULE: a merchant seat has Merchant Guilds
+  beside it in 138 of 148 and contending in 132; on the guild councils Merchant Guilds contends in 71 of 79. THE PERSON
+  IN THE SEAT ALREADY COMES FROM A HOUSE OF THE TOWN (the owner's dual-hat law of 2026-11-11,
+  `representatives.js :: dualHatHouseOf`): the seat-holder is the first member of another power in 365 of 900; the
+  page never says so and the contest never reads it. Two tables named `GOVERNMENT_PREFERENCES` (`rulingPower.js`,
+  `worldPulse/factionCompetition.js`) answer one question two ways.
+  ITS ANSWERS TO THE CHAIR'S THREE QUESTIONS (`SEAT-GATE.md`): (a) A BIRTH-LAW GATE EXISTS AND HAS A TEMPLATE (the
+  version rides in the settlement's own `config`; one mint, `birthConfig`; `GENERATION_LAWS`; the walker); the golden
+  master's 525 configurations carry no law key, so a gated law moves no golden row; render-time readers, save-time
+  prose and all 12 callers of `coupContenders` must branch on the version, the partial callers passing the config;
+  (b) THE PUBLIC PROJECTION serves `powerStructure.government` and the governing row; strips capture state and hidden
+  rows; A KEY NAMED `trueHolder` OR `hiddenHolder` WOULD LEAK (the denylist is by key name: `dmHolder` is stripped);
+  (c) deriving the holder at render answers every town (365 by the dual hat, 93 more by the same-kind power, the rest
+  civic seats that hold themselves).
+  **THE CORRECTED TABLE WENT TO THE OWNER** with what was wrong in the first (how many towns each group stands in, not
+  who rules), the redundancy's figures, and TWO DECISIONS OF THE CHAIR SAID AS DECISIONS, each for the owner to strike:
+  the holder is worked out from what a town already records and nothing new is saved before the deploy; the office
+  keeps its own power figure for now.
+  **(3) THE DESIGN, RULED (CS1 to CS13, in full in `prompts/SEAT-1.txt`; each vetoable):** CS1 form, holder and person
+  kept apart; CS2 THE HOLDER IS READ, NOT STORED, before the deploy (no new key; the office keeps its figure; a stored
+  holder and the seat leaving the shares are the owner's, after the deploy); CS3 the holder never contests its own
+  seat; CS4 one reader of a power's kind for the contest; CS5 ONE registered table of circumstance (each a pure read of
+  the record; nothing invented; `COUP_COERCION` untouched), landing DARK and lit by the owner's tuning signature, the
+  kind read lighting with it; CS6 one home for form against holder; CS7 at a transfer the winner becomes the holder
+  and the form is kept where that kind may hold it (the merchant king); CS8 and CS9 (which house the leader comes from
+  at birth; born powers for labourers and outsiders) are TRAIN 2, on the owner's answers; CS10 a third birth law,
+  `_seatLawVersion`: no stored town, golden row or live campaign moves; CS11 the holder read takes its audience and on a
+  page that is not the owner's derives from the served document alone, never naming a criminal or hidden power; no file
+  of the security lane edited; a fresh security reader before it lands; CS12 the prose; CS13 the page.
+  WHY NOT STORE THE HOLDER NOW (the measure recommended a small stored `powerStructure.seat`): a new stored key must
+  pass the share veil's registry, migration 212's final text and the reader's FINAL, which would couple the two longest
+  lanes before the deploy; the dual hat already records the outcome in the cast's memberships.
+  **SEAT-1 is seated** (the middle tier at high effort; an integrator with builders of its own; `lane/seat-2026-11-20`
+  from the line): a PROPOSAL first; it writes nothing under `src/` or `tests/` until the chair's "BUILD at <commit>",
+  which waits on FRAME-1 and NAMES-1 landing on the line.
+  **(4) REVIEW-VEIL-11 MEASURED THE GOVERNING BODY as a visitor (144 born towns):** under the default veil 11 towns
+  have a criminal-worded body (Corrupt Council 6, Shadow Senate 4, Corrupt City Council 1) and all 11 serve the name
+  everywhere a government is named; the capture description is served in none. ITS CALL, ACCEPTED AS **VR42**: TIER 2,
+  the town's public nature (the body is no house the veil hides and no hidden house raised it: it is minted from the
+  criminal priority; a closed vocabulary that tells one bit). It joins the owner's list of what a shared page shows.
+  A hand veil cannot hide a governing house at all (118 towns tried, none removed: a whole-house hide reaches only the
+  hideable class), so that question does not arise. TWO NOTES FORWARDED TO THE VEIL'S NEXT OWNER: `power.entry` (VR11)
+  must never remove the GOVERNING power's row while the government's name stays; `safetyProfile.economicDragDesc`
+  ("Goods change hands here in back rooms…") is served in 6 of the 11, registered and not yet built: an arm of FINAL.
