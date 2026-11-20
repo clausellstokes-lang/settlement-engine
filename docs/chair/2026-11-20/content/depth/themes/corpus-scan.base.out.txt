@@ -1,0 +1,57 @@
+corpus-scan base at 2026-11-20T20:02:33.006Z (196 s)
+towns: golden 525, census 720, hxd 30, legacy saves 69
+distinct folded texts: 1895 (pool lines 270; typed 270)
+hashes shared by two distinct folds: 0
+texts outside the pools hashing to a tagged line: 0
+texts in NO pool: 1625 distinct; their answers at this tree: {"untyped":1625}
+  census:collectPlotHooks: 1232 distinct, 7350 uses, answers {"untyped":1232}
+      e.g. "A relic claimed by both sides has resurfaced in a private collection"
+      e.g. "The reformist leader is being blackmailed into silence"
+      e.g. "The flares are no accident: someone is working magic they cannot control, and hiding the notes"
+  census:deriveAllStructuredHooks: 388 distinct, 2849 uses, answers {"untyped":388}
+      e.g. "A relic claimed by both sides has resurfaced in a private collection"
+      e.g. "The reformist leader is being blackmailed into silence"
+      e.g. "The settlement is starving, and its hungriest are turning to banditry."
+  census:npcs.plotHooks: 53 distinct, 316 uses, answers {"untyped":53}
+      e.g. "A valuable cargo was reported lost on its way here. The manifest has turned up two settlements away."
+      e.g. "The dice at one table have been weighted, and it was not done by anyone they pay."
+      e.g. "A fighter died in the ring last month, and the family says the blade was not blunted."
+  golden:collectPlotHooks: 465 distinct, 5328 uses, answers {"untyped":465}
+      e.g. "A relic claimed by both sides has resurfaced in a private collection"
+      e.g. "The reformist leader is being blackmailed into silence"
+      e.g. "The flares are no accident: someone is working magic they cannot control, and hiding the notes"
+  golden:deriveAllStructuredHooks: 51 distinct, 1968 uses, answers {"untyped":51}
+      e.g. "A relic claimed by both sides has resurfaced in a private collection"
+      e.g. "The reformist leader is being blackmailed into silence"
+      e.g. "The settlement is starving, and its hungriest are turning to banditry."
+  golden:npcs.plotHooks: 15 distinct, 362 uses, answers {"untyped":15}
+      e.g. "A valuable cargo was reported lost on its way here. The manifest has turned up two settlements away."
+      e.g. "The dice at one table have been weighted, and it was not done by anyone they pay."
+      e.g. "A fighter died in the ring last month, and the family says the blade was not blunted."
+  hxd:collectPlotHooks: 153 distinct, 290 uses, answers {"untyped":153}
+      e.g. "A relic claimed by both sides has resurfaced in a private collection"
+      e.g. "The reformist leader is being blackmailed into silence"
+      e.g. "The flares are no accident: someone is working magic they cannot control, and hiding the notes"
+  hxd:deriveAllStructuredHooks: 81 distinct, 115 uses, answers {"untyped":81}
+      e.g. "A relic claimed by both sides has resurfaced in a private collection"
+      e.g. "The reformist leader is being blackmailed into silence"
+      e.g. "The scarcity was engineered. Someone destroyed the competing supply route"
+  hxd:npcs.plotHooks: 12 distinct, 16 uses, answers {"untyped":12}
+      e.g. "A valuable cargo was reported lost on its way here. The manifest has turned up two settlements away."
+      e.g. "A client has paid for a whole year of evenings in advance, and the worker he pays for has asked them for help "
+      e.g. "A patron wants a fighter killed in the ring, and has offered a fortune for it."
+  legacy/people-car-v1-2026-11-07.json:collectPlotHooks: 13 distinct, 133 uses, answers {"untyped":13}
+      e.g. "A merchant they publicly opposed is now publicly supporting them. No explanation offered."
+      e.g. "The previous holder of their position left a letter, sealed, to be opened after their death. It wasn't."
+      e.g. "They know something small that connects to something much larger. They haven't realised the connection. Yet."
+  legacy/people-car-v1-2026-11-07.json:deriveAllStructuredHooks: 13 distinct, 133 uses, answers {"untyped":13}
+      e.g. "A merchant they publicly opposed is now publicly supporting them. No explanation offered."
+      e.g. "The previous holder of their position left a letter, sealed, to be opened after their death. It wasn't."
+      e.g. "They know something small that connects to something much larger. They haven't realised the connection. Yet."
+  legacy/people-car-v1-2026-11-07.json:npcs.plotHooks: 13 distinct, 133 uses, answers {"untyped":13}
+      e.g. "A merchant they publicly opposed is now publicly supporting them. No explanation offered."
+      e.g. "The previous holder of their position left a letter, sealed, to be opened after their death. It wasn't."
+      e.g. "They know something small that connects to something much larger. They haven't realised the connection. Yet."
+errors: 0
+wrote docs/chair/2026-11-20/content/depth/themes/answers.base.json and tests/fixtures/hookThemeAnswers.base.json
+GREEN
