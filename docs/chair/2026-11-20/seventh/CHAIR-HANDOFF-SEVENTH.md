@@ -1029,6 +1029,32 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   `brokerageLegalityOf` reads a house's own tags, so an illegal brokerage with its function eye hidden may stop
   counting as hideable in the veil itself (VEIL-26: one plant when the lane is its own; a stage of its own if real).
 
+- **THE GOALS LANE'S GATE (2026-11-20, 12:32 UTC, on GOALS-2's correction of GOALS-1's hand-back):** identical goal sentences
+  inside one town were 3 at the base and are 92 after the rotation unit (a wording held once, taken by a second
+  holder with the same name values: city 28, metropolis 64): the hand-back had said "remain 0". BAR (a) IS ABSOLUTE:
+  at the lane's last commit identical sentences are AT OR BELOW THE BASE's 3, by size, each one left named with its
+  cause; the mirror rule must close the 92, and where it does not the walk goes on to the next wording, reserve
+  lines included; a repeat stands only where a cell is truly exhausted for those name values, COUNTED. A lane that
+  ends with more identical sentences than it began with does not land. (Also measured: mirror 306 to 222; a
+  template more than twice 1,165 to 337; tie index repeats 2,053 to 1,131.) THE MEASURE in one command:
+  `node docs/chair/2026-11-20/content/goals/measures/goals-final.mjs <tree> 50 <out>`.
+- **THE REFUSAL'S SEAM CORRECTED (12:37 UTC): ONE POST-PASS A SEAM, AFTER THE RARE DEAL, READING EACH CARD'S FINAL
+  SECRET** (the chair's order, before the rare deal, moved one card for a secret the rare deal then replaced: 56
+  moved, 55 holding the pairing); the tooth for every card; a test that the rare deal's output is byte-identical
+  with the pass on and off; the rare-mode branch goes. A string that QUOTES a moved tie's line is in scope with
+  the tie, each by its trace (`prominentRelationship`'s strings; `pressureSentence`).
+- **THE OFFICE SECRETS (L4; 12:31 and 12:36 UTC, to PAGE-2):** the redesign stands (the draw as today; a draw-free pick
+  from `officeSecrets.js`, keyed by the card's drawn name and title): 542 office cards move their secret, 34 their
+  presentation with it, 6 their temperament; no town shows one office secret twice. 48 OTHER cards in 29 towns
+  move by two town-level couplings and are ACCEPTED AS A COUNTED CLASS (the seam mints' held set of printed texts
+  in `castPowers.js`: 12; the override pass's one shared stream in `narrativeGenerator.js`: 26 presentations, 11
+  secrets): not cured (another lane's file; a re-deal of every town for 37 cards); named survivors with K's fifth
+  class and the goals' held set: ONE FAMILY (a town-level set or stream that carries one card's change to
+  another). THE 30 LINES READ BY THE CHAIR: 23 approved as written; 3 sent back by the seat itself (a hidden
+  sickness; a sentry's death; a lost faith that repeats a row); 4 by the chair (the bishop's relic: no public
+  rite, no "saint"; the priest's "confession": said without the rite; the militia captain's second: it parsed two
+  ways; the watch captain's "lock-up": a gaol the town may not have).
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -3528,3 +3554,10 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   registers 0d71eaa3b; 0 bytes added); the corrected keyword's ruling sent to it in words. FORTUNE-1's relay: U1 at
   `lane/fortune-1-2026-11-20-u1` bc3c5cc8e (the builder retook the censuses itself: FORTUNE-2 told to drop those
   hunks and re-take by the doors). FRAME-6 and VEIL-26 read in; their instruments reproduce.
+- 12:37 UTC · VEIL-25 "HANDED OVER at 15567e597" (about 340,000): VEIL-26 TOLD "THE LANE IS YOURS at 15567e597" (12:32):
+  R3-CURE-4's branch (c5786c5ce) read once, line by line, first; the brokerage plant; R3-CURE-5 relayed by VEIL-25
+  when it lands. FRAME-5 (about 280,000): U0 and C1 landed green and pushed; `tests/lint` whole: `seedLoopTotality`
+  cured on C1's branch (10758b67f); `tuningRegister` gains a THIRD named row (`tonightSheet.js#WANT_MAX_WORDS`:
+  dependents moved, by U0's import), unsigned, the owner's at the close; P1b and CF12 building. GOALS-2: unit 5
+  (the 13 tie pairs) landed green at 833e4d413; the post-pass built (238 moved cards to 56). PAGE-2: L4's batch 1
+  read (section 2). THE LANDING HELPER FOR POINT 82 is still running its checks in `/home/user/wt/line`.
