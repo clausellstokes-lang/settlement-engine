@@ -690,6 +690,38 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   144 towns, 336 sentences), THE FLOOR STAYS 300, in its own commit after B9's merge; no crisis kind read at PER 10
   goes unread at PER 12; no new assertion on framed towns in that file.
 
+- **GR2 CHANGED ON GOALS-1's MEASURE (2026-11-20, 10:28 UTC): THE CHAIR'S COUNT OF WORDINGS WAS WRONG** (it counted
+  the it/them agreement forms and second-mention pronouns as wordings and left house nouns unmasked: RANK/enter has
+  6 templates a vantage, not 12). BY TEMPLATE: 28 goal cells and 8 tie archetypes are short of their busiest town's
+  demand (INSTITUTION/solvency long 6 against 20; RANK/enter short 6 against 19; TIES/rival_enemy long 5 against
+  17; POWER/tense long 6 against 17; mutual_leverage 8 against 26); 2,636 of 17,992 goal holdings (14.7%) repeat
+  whatever the re-deal (the chair had said 1.8%); rotation alone removes about 40% (the chair had said nine in
+  ten); demand plus two everywhere would be about 203 goal lines and 90 tie pairs (the chair had said about 25).
+  RULED: GR1 stands at the TEMPLATE's level; THE RESERVE MECHANISM is accepted (new goal lines outside
+  `fork.pick`'s modulus, reached only by rotation; for ties the head size frozen and new pairs reached only past it
+  in `relationshipArchetypes.js :: createTieProseDraw`): it keeps "no other draw moves" true. THE BAR: (a) never
+  the same sentence twice in one town; (b) a template held twice is never held by two people of one house nor by
+  two people tied to each other, and where the cell allows not by two of one power; (c) depth by a table the seat
+  sends first (pool; demand at the busiest city and metropolis; lines needed under T1 no template more than twice
+  anywhere, T2 unique in the busiest city and at most twice in the busiest metropolis, T3 demand plus two); (d) T2
+  if it totals at most 90 goal lines and 40 tie pairs, else T1; (e) every new line a DIFFERENT WANT, never a
+  rewording: a shortfall is counted, never filled; (f) what is left is measured and named a survivor for after
+  the deploy. The chair reads every new line in batches of about thirty.
+- **R3, THE LOWER READINGS (10:28 UTC; the chair changes its own wording of ruling 30 out loud):** "not green while
+  the derived key DIFFERS" becomes: HIGHER in any town BLOCKS; LOWER (13 of 92 at b907c75c9) does not block the
+  merge IF each is assigned to a named, RULED fail-closed rule (never merely "a cause"), the counts by rule with
+  their denominator go into the owner's paragraph, and THE TELL QUESTION goes to the security reader as a named
+  attack with the towns listed (is the served page one that some town with nothing hidden could show?): R3 merges
+  "GREEN TOWARD WITHHOLDING, THE TELL QUESTION OPEN"; the reader's verdict on it gates E. THE ACCEPTANCE's third
+  condition: the regenerated counterfactual is built by a path INDEPENDENT of the projection's re-derivation.
+  R5's ORDER: a power's description that names a withheld power first (tier 1), the six alias rows, then the
+  rank-word class (the wide one). PART 25's five gaps found by VEIL-25 (the "never by a list of fields" clause;
+  the parity walker on hooks and the rival; the wide rank-word class; the reach count with its denominator; VR42's
+  count in the owner's paragraph) are VEIL-24's to cure before the hand-over.
+- **U3 MAY BE CUT BEFORE U2's SECOND CURE MERGES (10:28 UTC, to SEAT-3):** path-disjoint (new files and one
+  `vite.config.js` entry); merged strictly in order; re-run at the merged tip. CS22 (c) binds the holder leaf's
+  `person`.
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -2978,3 +3010,14 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   the power rule overturned (RULED: section 2). FRAME-4: the floor counts sentences (RULED: section 2). TRAD-3's
   first message: on dd13d18cc; TRAD-2's hand-back not yet written. NAMES-4: on 835fabd2d, the line an ancestor;
   the cold read begun.
+- 10:29 UTC · FIVE MESSAGES READ AT 10:26 AND ANSWERED AT 10:28 (hours by the clock). VEIL-25's first message (on 55a264a78):
+  seven of the chair's rulings hold in PART 25 at full strength, five are thinner (section 2): SENT TO VEIL-24 TO
+  CURE. VEIL-24 (335,815 by its record): R3-CURE-3 running on b907c75c9; it restored ruling 30 to the chair's word
+  (0f4e8d284) and asked whether the 13 LOWER block: RULED (section 2). GOALS-1's first message (on 835fabd2d): THE
+  CHAIR'S MEASURE OF THE GOAL POOLS WAS WRONG BY A WIDE MARGIN (section 2): GR2 changed; the table first; GR1 and
+  the reserve mechanism building. NAMES-4: the cold read by eye found no fault; the revert restores (only the
+  hand-back differs); the possessive's edge probes hold; A MUTATION PASS over 101 two-form sites and the full
+  confinement are running. SEAT-3: the lane taken at 8c4beb844; `tests/lint` whole and the confinement running;
+  U3 cut now (allowed). OWED TO THE OWNER IN THE CHAIR'S NEXT WORDS: the corrected figures for the goals fix; the
+  13 calmer pages. WHEN "R3 <commit>" COMES: forward it to REVIEW-VEIL-12 WITH the named attack (the tell question,
+  the 13 towns) and the acceptance's three conditions.
