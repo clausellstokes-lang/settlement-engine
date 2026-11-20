@@ -1,6 +1,6 @@
 # FRAME-5 — hand-back (the session sheet's lane, third owner after FRAME-3 and FRAME-4)
 
-Last written 2026-11-20T12:28:12Z (`date -u`) by FRAME-5 on `lane/frame-5-2026-11-20`. The lane was taken at `9e23a094d` on the chair's word "THE LANE IS YOURS at 9e23a094d" (11:12 UTC). A successor needs this file and the briefs it names. Read it with `FRAME-4-HANDBACK.md`, whose rulings 18 to 25 stay in force, and `FRAME-3-HANDBACK.md`, whose rulings 1 to 17 stay in force.
+Last written 2026-11-20T12:37:55Z (`date -u`) by FRAME-5 on `lane/frame-5-2026-11-20`. The lane was taken at `9e23a094d` on the chair's word "THE LANE IS YOURS at 9e23a094d" (11:12 UTC). A successor needs this file and the briefs it names. Read it with `FRAME-4-HANDBACK.md`, whose rulings 18 to 25 stay in force, and `FRAME-3-HANDBACK.md`, whose rulings 1 to 17 stay in force.
 
 ## THE COUNT THE OWNER READS FIRST
 
@@ -37,6 +37,15 @@ Cast and weight disagree on 0 towns. The opening trouble is unchanged from FRAME
     - `tonightSheet.js` reads `npc.power` (the people to voice), and with it troubleWeight's calm digests and its journal page digests.
     - `crisisCast.js` exploiter and collaborator ties, through `barred`, and with them troubleWeight's IN_CRISIS digests, C1's five-town arm, B7-pool byte-identity, and the golden's cast rows.
     - The COUNT (58) reads no card's power: W1 reads legitimacy and the coup's contenders, W2 conflict rows, W3 food, the creditor and chains. The criminal rung reads a POWER's `power` (`FRAME_TUNING.criminalMinPower`), not a card's.
+
+31. **THE STORED SIDES ARE TOUCHED BY NOBODY** (the chair, 11:58 UTC, on ruling 29's probe).
+    - `tensions[].factions` keeps the template's words. A town's own name for a side is resolved at RENDER by one display reader on the line's side.
+    - This lane's `sideKey`, `templateLabelOf` and `GENERATOR_REPLACED_SIDES` read what they read today.
+    - **AT THE JOIN, NOT BEFORE:** the three places this lane prints a side's words as a label call that same reader, one line each, routed here when the reader lands. They are the sheet's side eyebrow (`TonightSheet.jsx`), the PDF's italic line (`TonightAtTheTable.jsx`, `read.words`) and the journal's "**words**:" (`journalPages.js`). Build nothing for it yet.
+32. **CF12 AS W4, a fourth and weakest strain: AGREED** (the chair, 11:58 UTC).
+    - Law (1) holds where the frame is gated. A framed sheet reached on a reader's, shared or player path is today's bytes. The unit's report names the gate (file and symbol) and the test (file and title).
+    - The count moves for the OWNER's audience only. Both figures are given: the reader's (58, under today's standing) and the owner's (58 plus those of the 5 that W4 opens).
+33. **THE HAND-OVER POINT** (the chair, 12:16 UTC). FRAME-6 is seated beside FRAME-5 (`prompts/FRAME-6.txt` on the chair's branch). FRAME-5 hands over when P1b and CF12 are both merged, or at 330,000 tokens by its own count, whichever comes first: "FRAME-PART <commit>, HANDED OVER". After that FRAME-5 only relays builders, unread.
 
 ## EACH UNIT: STATE, BRANCH, COMMIT
 
