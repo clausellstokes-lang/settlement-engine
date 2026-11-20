@@ -28,6 +28,11 @@ import { gen, stressTypes, PROSPERITY_RANK, collectNpcHooks } from './simHelpers
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const N = 50;                       // settlements per tier in the shared corpus
 const TIMEOUT = 60_000;             // generous headroom for parallel CI contention
+// The shared corpus's beforeAll takes ITS OWN budget, carrying the measured figure (point 76, 2026-11-20): 34.3 s
+// alone / 39.6 s in its shard here (vitest's module duration less its tests'); about 63.4 s on a CI runner (x 1.6,
+// the runner factor point 75 measured), past the 60 s it shared with the tests (CI run 44659169256: "Hook timed out in
+// 60000ms", 0 tests run); x 1.5 -> 95.1 s, rounded up to the minute -> 120 s. The tests keep TIMEOUT.
+const CORPUS_HOOK_TIMEOUT = 120_000;
 
 // The corpus config: hold the tier fixed, let the seed drive every other
 // dimension (route/terrain/threat/culture all randomized) so each seed yields a
@@ -48,7 +53,7 @@ beforeAll(() => {
     corpus[tier] = [];
     for (let i = 0; i < N; i++) corpus[tier].push(gen(corpusConfig(tier), `envelope-${i}`));
   }
-}, TIMEOUT);
+}, CORPUS_HOOK_TIMEOUT);
 
 // Count settlements whose prosperity label falls in a rank set.
 const bandCounts = (settlements) => {

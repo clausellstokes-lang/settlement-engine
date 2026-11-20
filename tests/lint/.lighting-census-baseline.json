@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "b27d5f17126733c96358030cb59b365b70afd538",
-  "measuredBy": "CI-FIT",
+  "measuredAtSha": "46ec7c398fdbe0760ddce7c535f261213acfb195",
+  "measuredBy": "GIT-DOOR (seventh chair, lane/git-door-2026-11-20)",
   "date": "2026-11-20",
-  "note": "CI-FIT point 75 (2026-11-20): one new test file, tests/build/ensurePlaywrightBrowsers.test.js (the browser jobs install probe, 7 arms), and one new arm in tests/build/ciCheckParity.test.js; the budget and ratchet-reader commits add no title",
-  "files": 3701,
+  "note": "GIT-DOOR-2 (2026-11-20): the census re-taken at the merge of the line at 85fccf898 (point 75, CI-FIT) into GIT-DOOR: both sides were born one test file over 3700 (tests/helpers/gitFixture.test.js here, tests/build/ensurePlaywrightBrowsers.test.js and a ciCheckParity arm there); measured at the merged tree, not taken from either side",
+  "files": 3702,
   "parked": 472,
-  "credited": 3229,
-  "titles": 31162,
-  "suiteTitles": 8627
+  "credited": 3230,
+  "titles": 31171,
+  "suiteTitles": 8628
 }
