@@ -22,7 +22,7 @@
  * Pure: reads the record, writes nothing, draws nothing. Every clause is read from the record.
  */
 import { scoreBand } from './defenseScoreBands.js';
-import { deriveMagicRelianceView, magicRowsGated } from './dossierViewModel.js';
+import { deriveMagicPosture, deriveMagicRelianceView, deriveMagicSupplyView, magicRowsGated } from './dossierViewModel.js';
 import { foodAmongMagicDependents, magicDependentChainsShown } from './magicProvisionShown.js';
 import { chainPrintName } from './chainPrintName.js';
 import { magicFoodChannelWord } from './foodBalanceBar.js';
@@ -66,6 +66,26 @@ export function magicRelyNames(settlement) {
 }
 
 /**
+ * WHAT THE MAGIC TAB PRINTS AFTER "· for" (PAGE-4 MAGIC-AUDIENCE, the chair's condition of 14:29: for each audience the
+ * chains the Overview's line names are a subset of the chains that same audience's Magic tab prints). The tab prints its
+ * reliance line only where it assesses magic at all (`deriveMagicPosture`: available, magic works), the reliance row
+ * shows, and something on the record supplies the magic (`deriveMagicSupplyView :: statable`); there the names are
+ * `magicRelyNames`, elsewhere none. The tab and the Overview's line both read this one gate. No audience is read: the
+ * page hands both tabs the same document and neither tab's list reads the audience flags, so the subset holds for every
+ * audience by the document alone (measured: build/MAGIC-AUDIENCE/measure.out.txt).
+ * @param {unknown} settlement
+ * @returns {string[]}
+ */
+export function magicRelyNamesPrinted(settlement) {
+  if (!settlement || typeof settlement !== 'object') return [];
+  const posture = deriveMagicPosture(/** @type {Parameters<typeof deriveMagicPosture>[0]} */ (settlement));
+  if (!posture.available || !posture.magicExists) return [];
+  if (!deriveMagicRelianceView(/** @type {RelianceTown} */ (settlement)).shown) return [];
+  if (!deriveMagicSupplyView(/** @type {Parameters<typeof deriveMagicSupplyView>[0]} */ (settlement)).statable) return [];
+  return magicRelyNames(settlement);
+}
+
+/**
  * The names joined as a list is spoken: "a", "a and b", "a, b and c".
  * @param {readonly string[]} names
  * @returns {string}
@@ -88,7 +108,10 @@ function placeOf(settlement) {
  */
 export function magicHeadlineScope(settlement) {
   if (!settlement || typeof settlement !== 'object') return null;
-  if (/** @type {{ config?: { magicExists?: unknown } }} */ (settlement).config?.magicExists === false) return null;
+  // A dead-magic world, read through the Magic tab's own posture (`posture.magicExists`, false exactly where the record's
+  // config says magic does not exist: magicProfile.js :: deriveMagicProfile), never the raw config key (PAGE-4
+  // MAGIC-AUDIENCE: the observed-shape register's ceiling for this file is 0).
+  if (deriveMagicPosture(/** @type {Parameters<typeof deriveMagicPosture>[0]} */ (settlement)).magicExists === false) return null;
   const level = magicOf(/** @type {Parameters<typeof magicOf>[0]} */ (settlement)).level;
   if (!LEVEL_BANDS.includes(level)) return null;
   return `Magic in the world at large, not the ${placeOf(settlement)}'s own:`;
@@ -118,7 +141,9 @@ export function magicMeasuresApartLine(settlement) {
   const place = placeOf(settlement);
   const strong = band === 'ADEQUATE' || band === 'STRONG';
   if (RELIES.includes(reliance.reading) && !strong) {
-    const names = magicRelyNames(settlement);
+    // PAGE-4 MAGIC-AUDIENCE: only what the Magic tab prints; where it prints none (nothing on the record supplies the
+    // magic), no line, as where nothing is named.
+    const names = magicRelyNamesPrinted(settlement);
     if (names.length === 0) return null;
     return `The ${place} leans on magic for ${spokenList(names)}, but its arcane strength is ${strength}.`;
   }
