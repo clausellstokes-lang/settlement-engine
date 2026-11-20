@@ -35,8 +35,6 @@ import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage
 // ⛔ ONE HOME PER SENTENCE (STYLE-0 §3's keep-on rules, applied by STYLE-RULINGS-2 B4, 2026-11-09):
 // the crisis page's two print rules are the PDF's, from one module.
 import { stakeLines, unprintedFacts } from '../pdf/lib/crisisPrint.js';
-// TAIL-CRISIS-7 (K26): a stake row is a sentence; its power takes its name from the one leaf ("The Guard split").
-import { powerSentenceName } from '../domain/display/powerSentenceName.js';
 // ROUND THREE, ruling (a): every house this journal prints is printed by its label, the one display leaf.
 import { houseLabelsInText, institutionHouseLabel } from '../domain/display/institutionDisplayName.js';
 import { tradeListsAsPrinted, revenuesOffTheLists, plainGoodName } from '../domain/display/tradeListDisplay.js';
@@ -199,7 +197,11 @@ function crisisJournalPage(settlement) {
     '', `### ${CRISIS_PAGE_COPY.cast}`,
     s.cast.length ? s.cast.map(r => `- **${esc(r.roleLabel)}**: ${esc(r.kind === 'institution' ? institutionHouseLabel(r.name) : r.name)} · ${esc(r.reason)}`) : `- ${CRISIS_PAGE_COPY.nobody}`,
     s.stakes.length ? md('', `### ${CRISIS_PAGE_COPY.stakes}`,
-      s.stakeLines.rows.map(k => `- **${esc(powerSentenceName(k.factionId))}** ${CRISIS_PAGE_COPY.stake[k.stake]}: ${esc(k.reason)}.`),
+      // FRAME-6 · C2B (a) (the chair's ruling of 2026-11-20 15:58 UTC, vetoable by the owner): a stake row is a sentence
+      // (TAIL-CRISIS-7 K26), and its opening is the page's ONE composition (`crisisPage.js :: stakeOpening`, carried on each
+      // row by `stakeLines`), read here as the tab and the PDF read it: "- **The Religious Authorities** gain: …"; the journal
+      // keeps its own frame (the subject bold, a colon before the reason)
+      s.stakeLines.rows.map(k => `- **${esc(k.subject)}** ${k.verb}: ${esc(k.reason)}.`),
       s.stakeLines.untouched ? `- ${esc(s.stakeLines.untouched)}` : null) : null,
     '', `### ${CRISIS_PAGE_COPY.levers}`,
     s.levers.length ? s.levers.map(l => `- ${esc(institutionHouseLabel(l.institution))}${l.holderName ? `, held by ${esc(l.holderName)}` : ''}`) : `- ${CRISIS_PAGE_COPY.noLevers}`,
