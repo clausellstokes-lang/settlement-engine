@@ -256,9 +256,9 @@ export const KEEPER_FRAMES_TOO = Object.freeze({
 /** S3, WHERE IT COMES FROM: the only frames that assert a cause (CTR2). */
 export const CAUSE_FRAMES = Object.freeze({
   founding: Object.freeze([
-    plain('It has been kept since {town} was founded by {foundedBy}, {age} years ago.'),
-    plain('{Town} has kept it since its founding by {foundedBy}, {age} years ago.'),
-    plain('It goes back to the founding of {town} by {foundedBy}, {age} years ago, and has been kept since.'),
+    plain('It has been kept since {town} was founded, {age} years ago, by {foundedBy}.'),
+    plain('{Town} has kept it since its founding {age} years ago by {foundedBy}.'),
+    plain('It goes back {age} years, to the founding of {town} by {foundedBy}.'),
   ]),
   foundingBare: Object.freeze([
     plain('It has been kept since {town} was founded, {age} years ago.'),

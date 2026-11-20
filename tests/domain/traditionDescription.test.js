@@ -86,7 +86,7 @@ function deepFreeze(v) {
 }
 
 const sentences = (text) => String(text).split(/(?<=\.)\s+/).filter(Boolean);
-const CAUSE_WORDS = /\b(since|because|in memory of|founded|founding by|after|to mark)\b/i;
+const CAUSE_WORDS = /\b(since|because|in memory of|founded|founding by|goes back|after|to mark)\b/i; // "goes back": TRAD-4 unit 11's third founding line
 
 describe('describeTradition — what is done (the short form), and nothing invented', () => {
   it('a rite whose element and act find no fitting fact says only what is done: one sentence', () => {
@@ -121,8 +121,29 @@ describe('describeTradition — what is done (the short form), and nothing inven
 describe('describeTradition — a cause only on the two marked pairings (CTR2)', () => {
   it('THE FOUNDING CORE carries the founding the record holds: its age and its founders, verbatim', () => {
     const d = describeTradition(rite(0, 'charter', 'feast'), town(), { audience: 'owner' });
-    expect(d.text).toMatch(/120 years ago/);
+    expect(d.text).toMatch(/120 years/); // not "120 years ago" (TRAD-4 unit 11): "It goes back 120 years, to the founding of …"
     expect(d.text).toContain('three or four families who agreed to try wintering together and never stopped');
+  });
+
+  it('THE FOUNDER PHRASE ENDS THE SENTENCE (TRAD-4 unit 11): a founder phrase ending on a verb never has the age hung on it ("…never left, 120 years ago"); the reader never reads the founder', () => {
+    const FOUNDER = 'a single extended family who came and never left';
+    const at = (i) => town({ _seed: `founder-${i}`, history: { ...town().history, founding: { age: 120, foundedBy: FOUNDER } } });
+    const hung = [];
+    const lines = new Set();
+    for (let i = 1; i <= 12; i += 1) {
+      const owner = describeTradition(rite(0, 'founding', 'feast'), at(i), { audience: 'owner' });
+      const s3 = sentences(owner.text).at(-1);
+      lines.add(s3);
+      expect(owner.parts.origin).toBe('cause');
+      expect(s3).toMatch(/120 years/);
+      if (!s3.endsWith(` by ${FOUNDER}.`) || /never left,? \d+ years ago/.test(owner.text)) hung.push(`founder-${i}: ${s3}`);
+      const reader = describeTradition(rite(0, 'founding', 'feast'), at(i), { audience: 'reader' });
+      expect(reader.parts.origin).toBe('cause');
+      // anchored: the owner's text of this same rite and town is asserted above to carry the founder; the reader's never does
+      expect(reader.text).not.toContain('never left');
+    }
+    expect(lines.size).toBe(3); // not vacuous: the twelve seeds reach all three founding lines
+    expect(hung).toEqual([]);
   });
 
   it('a founding-kind rite that is NOT the core carries no founding cause (the record holds no later charter)', () => {
