@@ -1976,6 +1976,82 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   and 25; 17 and 19): UNIT 10, measure first, then a cure by rotation inside a town (keyed, no draw; a town with one
   rite unchanged; the bar 0 of 432 towns). Unit 9 (the word "kept" twice in a sentence) approved as briefed.
 
+### Rulings of 17:10 to 17:21 UTC (fourteen notifications read at 17:10; each ruling vetoable by the owner)
+
+- **THE HIDEABLE RULE, RE-STATED (the chair's citation of 16:51 was wrong).** `src/domain/facts/factLayers.js` is the
+  table of READ LAYERS and holds no hideable rows (SAME-1 measured: 0 hits). THE RULE NOW: (1) no wording of a
+  sameness pool may NEED a house of a hideable kind: the test is `src/domain/people/cardVeil.js :: isHideableHouse`
+  (criminal or clandestine), or any fact about crime or a clandestine thing; a walker reds on one; exempt by
+  declaration only (a field withheld from every shared read; the trouble half's ruled design; a criminal chain's
+  own card). (2) Every OTHER house a wording needs (guild, church, court, market, watch, walls, a named own house)
+  is LISTED, pool by pool (each seat's hand-back; SAME-1's walker as one committed file), and at the join the
+  security reader tests that list against the veil's own registry, the only list of what a shared read may withhold.
+  NO NEW LIST IS MADE. Told to SAME-1, PLACE-1, PEOPLE-1, PEOPLE-2; the successors' prompts corrected.
+- **THE MIXED KEYED PICK IS BUILT AND NAMED: `lane/kernel-mix-2026-11-20` at bd42d63c7** (the chair's builder; two
+  files; the diff read whole by the chair). `src/kernel/proseHash.js :: mix32` and `pickVariantMixed` (the same FNV
+  hash, a 32-bit finalizer, then the modulo; `pickVariant`'s contract; canonical-at-zero). Tests: the old pick gives
+  ONE line of four to all 343 keys of a family that differs only in high bits (pinned, so nobody "fixes"
+  `pickVariant` silently); the mixed pick splits them 89/96/92/66. RUN: the test file 11 of 11; `eslint` on the two
+  files 0; `typecheck:ratchet` 167 of 167; `typecheck:domain:strict` 1113 of 1113 (the chair). NOT RUN: the whole
+  lint; the whole suite. A GAP, SAID PLAINLY: THE BRANCH'S COMMIT AND PUSH RAN NO HOOK (a fresh worktree has no
+  `.husky/_`); the hook's commands above were run by hand instead. The one red its builder met
+  (`generationForkCensus` A1, control row 26932f67...) is the line's own known stored figure: the chair re-ran it on
+  the line at 43ab0f5eb: the same red, the same hash. LANES MERGE THE BRANCH, NEVER CHERRY-PICK. A pool not yet built
+  takes the mixed pick from the start; a built pool switches only if its measure shows a line above about one and a
+  half times its expected share. THE HOUSE ALREADY KNEW THE FAULT: `tests/generators/settlementOriginProse.test.js`
+  forbids a power-of-two pool length for static pools; that law is NOT extended to lists computed per place (the
+  mixed pick is the cure). Named to TRAD-4, PLACE-1, PEOPLE-1, PEOPLE-2, DEPTH-2, PAGE-7. The line takes it at its
+  next landing.
+- **SESSION SHEET (FRAME-6 at a170832e5: F1+F2 merged 603eb2cbf, P4a merged 54e450f40).** F3 as briefed is REFUTED
+  (the Economics tab writes a chain's cause inline in four files; no reader exists): RULED: the sheet gets its own
+  display reader now; a walker holds the four inline expressions to the reader's one vocabulary; the fold is a join
+  unit (ruling 53's pattern). F4: the sheet reads the label the Power tab prints (`CAPTURE_RUNG_LABELS`), owner
+  only. F5 built now; F6 after. Two questions asked (what `officeSidesMax` guards; "Crown Creditors" where the
+  record says the noble houses hold the debt).
+- **THE PEOPLE-AND-PLACE HALF (PAGE-6).** The three fish twins approved as written. THE PRINCIPLED-AND-VENAL COUNT IS
+  MEASURED AND IT IS NOT CURED: 1,014 of 5,452 cards at the base; 1,019 after S9; 1,019 projected after L4 (969 at
+  best). ORDERED, MEASURE ONLY, three arms: (A) the secret side; (B) the temperament side with every later reader
+  of temperament; (C) THE NARROW COUNT: the temperament words that say a person cannot be bought or does not lie,
+  against the wider family of 31, with ten cards of each printed. THE CHAIR'S LEAN, to be tested: a dutiful or pious
+  person with a venal secret is a hypocrite a DM can use; only the narrow family is a contradiction; it is cured on
+  the secret side where another row exists; the survivors are named. No build until ruled.
+- **DISPLAY (PAGE-4).** OUTPUT merged (c01804e5d; tip 524be0147); the clause is DECLARED (`excludes: ['market']`):
+  approved. PIN-FIX approved (two pins its gates had not run showed a caption under the phone floor and three
+  registers never re-taken); "every merge runs both pins" is a rule of the lane.
+- **WANTS, files 4 and 5 (GOALS-3, d6b2b76c5 and be067fa2b): 120 lines read; 103 as written, 17 reworded** (file 4:
+  1.8, 2.2, 4.5, 6.1, 6.2, 7.1, 13.1, 23.1; file 5: 2.5, 5.3, 7.3, 8.1, 12.1, 13.1, 13.2, 14.2, 19.1; the words are in
+  the chair's message of 17:17). WITH FILES 1 TO 5: a second city repeats 13.5 / 13.7% of a first city's wants (36.4
+  / 36.0 today), a metropolis 19.7 / 19.6% (47.3 / 47.2). THE COST: 13,068 of 17,992 goals on the 300 towns change
+  text. The debtor's cells' vantage is still asked. 300 of the 380 lines are read.
+- **THE TRADE NOTE (PLACE-1, `entrepotNote-MEASURE.md` at 0899d93e6): about 88 rows over ten chains read; APPROVED
+  TO BUILD.** THE ATOM `carrier: own|transit` (`chainCarrier.js :: chainCarrierOf`, chain-scoped) is GRANTED. Its
+  six calls approved, the second WIDENED: wherever a chain can be the place's own, every row that says the good
+  comes from elsewhere declares `carrier: transit` (a port that takes its own salt is never told its salt comes in
+  by sea). Eight rewordings (salt-own-keep, furs-port, furs-own, furs-transit, lux-own, silk-steady, wine-tavern,
+  magic-own: the words are in the chair's message of 17:18). Three conditions: named goods only where the chain's
+  record names them; the smuggling chain's rows exempt by declaration (they print on that chain's card only) and
+  listed for the security reader; every distinct {resource} fill read by the chair before the merge. Projection:
+  the worst share held 3/8/13/31/81/76 to 1/3/4/7/12/13 (thorp to metropolis).
+- **THE PEOPLE LANE'S THREE PROPOSALS (PEOPLE-1 at 760384abf) READ WHOLE AND APPROVED TO BUILD (by PEOPLE-2):** why
+  the place is here (62 new wordings; 28/25/17/15/100/96% to 13/11/7/9/12/14%), the powers' descriptions (26 opening
+  pools, 10 coda pools; the leaf 41/35/41/34/38/86% to 10/10/12/9/14/11%), the relations between powers (15 pools;
+  67/26/66/61/71/90% to 67/16/13/14/12/14%). (1) PEOPLE-1's own rule is the chair's: no NEW variant carries a
+  feeling or a scheme its branch does not compute (struck from the arcane pool, MR.dep, MR.tense 4, and four coda
+  pools). (2) TODAY'S INDEX 0 STAYS ELIGIBLE EVERYWHERE (the owner: a calm town should be as it currently is),
+  except the village priest's line, which takes its priest as a need (no cleric in 74 of 100 villages that print
+  it). (3) Seven rewordings (the chair's message of 17:21). (4) THE BAR IS BY THE SENTENCE OVER ALL PLACES OF A SIZE:
+  the codas ship with the openings, and seven or more wordings are to be authored for the six heaviest codas, with
+  pools for five more lines. (5) AN INSIGHT FOR THE OWNER: a coda states a relation of rank; where the same relation
+  holds in nine metropolises of ten, seven wordings MASK the sameness and do not cure it: the cure is the who-rules
+  and fortune laws. (6) Placement: one pipeline line after `withConflictRelations`; one argument in
+  `steps/generateNarratives.js`; one `return` line in `generateSettlementReason`; one line in `factionDynamics.js`
+  named to the chair first. (7) Where no new wording is eligible the lines are returned as they came, byte for byte.
+  (8) FOUNDING IS IN SCOPE (it prints through the traditions card: 387 of 1,232 rites quote `foundedBy`). (9)
+  QUARTERS STAY DROPPED: no surface prints `quarters[].desc`.
+- **THREE SUCCESSORS SEATED AT 17:13:** FRAME-7 (session_019yED1SB7ioJvRQkbzwbGvR, beside FRAME-6 at 362,261);
+  PAGE-9 (session_019yED1Qk8mk5vDPmqDbLpGw, beside PAGE-4 at 369,770); PEOPLE-2
+  (session_019yED1QfbBhtLaDuWfGxc42, beside PEOPLE-1 at 320,304 and burning 40,000 a quarter hour).
+
 ## 3. The queue, in order
 
 1. The four seats' hand-backs, each read by the chair (the hand-back, then the whole diff against its base: the files
@@ -4988,3 +5064,11 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   carries rulings 53, 54 and 55 and the order from here; seat it when VEIL-27 passes 360,000: it read 303,476 at
   16:53 and has the import door's measure added). The hash measure's script saved as `measures/lean.mjs`. The
   kernel builder was in its red phase at 17:09 (the test file changed, the function not yet added).
+- 17:23 UTC · FOURTEEN NOTIFICATIONS READ AT 17:10 AND RULED BY 17:21 (section 2, "Rulings of 17:10 to 17:21"). THREE SUCCESSORS
+  SEATED AT 17:13 (FRAME-7, PAGE-9, PEOPLE-2). THE MIXED PICK NAMED (bd42d63c7 on `lane/kernel-mix-2026-11-20`; its
+  push ran no hook: said in section 2). READ BY THE CHAIR THIS HALF HOUR: 120 wants (files 4 and 5), about 88 trade
+  notes, 62 lines on why a place is here, 26 opening pools and 10 coda pools on the powers, 15 pools on their
+  relations. TWO THINGS OWED TO THE OWNER FROM THIS ROUND, told in the chair's next words to him: the
+  principled-and-venal count is NOT cured (1,014 to 1,019); three figures the chair gave him from the census were
+  overstated by the tool's slot fault (the Outlook verdict is on 50 / 70 / 60% of all thorps / hamlets / towns, not
+  100%; the no-wards line on 24 to 26%; the stakes' reason on 14 to 30% of all places).
