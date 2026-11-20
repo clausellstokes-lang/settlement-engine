@@ -1,0 +1,36 @@
+== m0: 140 towns, 92 with a hideable house, 48 hidden-free (both Reveal settings counted per town)
+    1 towns  crime type outside the hidden-free pool: Arcane black market
+   15 towns  crime type outside the hidden-free pool: Magical crime
+    5 towns  crime type outside the hidden-free pool: Organized guild crime
+    5 towns  crime type outside the hidden-free pool: Religious fraud
+   59 towns  crime type outside the hidden-free pool: Smuggling
+    2 towns  crime type outside the hidden-free pool: Street gang activity
+   18 towns  crime type outside the hidden-free pool: null
+   31 towns  criminal power (not governing) served
+   92 towns  defense:criminal served
+   66 towns  drag desc served, hasCriminalInst raised by a hidden house
+   45 towns  gates tail beneath the walls, no served smuggling flag
+   13 towns  rival-power description served
+    6 towns  shares != 100 where a power is withheld
+   52 towns  smuggling hook, no served smuggling flag
+  derived Defense key (served, Reveal off): hidden {"organized":29,"diffuse":3,"semi-organized":50,"null":10} | control {"null":29,"diffuse":11,"semi-organized":7,"organized":1}
+== m1: 140 towns, 92 with a hideable house, 48 hidden-free (both Reveal settings counted per town)
+    2 towns  crime type outside the hidden-free pool: Magical crime
+  derived Defense key (served, Reveal off): hidden {"organized":11,"diffuse":5,"semi-organized":65,"null":11} | control {"null":29,"diffuse":11,"semi-organized":7,"organized":1}
+== mm0: 140 towns, 91 with a hideable house, 49 hidden-free (both Reveal settings counted per town)
+    2 towns  crime type outside the hidden-free pool: Arcane black market
+   15 towns  crime type outside the hidden-free pool: Magical crime
+    5 towns  crime type outside the hidden-free pool: Organized guild crime
+    5 towns  crime type outside the hidden-free pool: Religious fraud
+   59 towns  crime type outside the hidden-free pool: Smuggling
+   11 towns  crime type outside the hidden-free pool: Street gang activity
+   17 towns  crime type outside the hidden-free pool: null
+   32 towns  criminal power (not governing) served
+   67 towns  drag desc served, hasCriminalInst raised by a hidden house
+   11 towns  rival-power description served
+    6 towns  shares != 100 where a power is withheld
+    4 towns  smuggling hook, no served smuggling flag
+  derived Defense key (served, Reveal off): hidden {"organized":28,"diffuse":3,"semi-organized":47,"null":13} | control {"null":31,"diffuse":10,"semi-organized":7,"organized":1}
+== mm1: 140 towns, 91 with a hideable house, 49 hidden-free (both Reveal settings counted per town)
+    2 towns  crime type outside the hidden-free pool: Magical crime
+  derived Defense key (served, Reveal off): hidden {"organized":9,"diffuse":4,"semi-organized":63,"null":15} | control {"null":31,"diffuse":10,"semi-organized":7,"organized":1}

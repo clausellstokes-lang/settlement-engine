@@ -1,0 +1,2 @@
+security exit 1
+harnesses exit 0

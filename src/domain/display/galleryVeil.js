@@ -70,6 +70,7 @@ import { factionIdFromName } from '../../lib/entities.js';
 import { cardHouseOf } from '../people/cardPowers.js';
 import { brokerageLegalityOf } from '../../data/informationBrokerageTuning.js';
 import { isCriminalInstitution, isClandestineInstitution, isHideableHouse } from '../people/cardVeil.js';
+import { applyRosterChoices } from './galleryRosterChoices.js';
 import { rederiveIncomeShares, renumberTrace, secondHomeSources, withholdCovertCopies, withholdCriminalIncome, withholdImpression, withholdIncomeWeights, withholdSecondHomes } from './gallerySecondHomes.js';
 import { withholdAlways } from './galleryWithholdAlways.js';
 
@@ -773,6 +774,8 @@ export function applyVeil(publicSettlement, veil) {
   // THE VEIL ON STRINGS (STYLE-RULINGS-2 B10(a), SW-B7b item 2): a block hidden here drops the
   // rungs the owner's save shipped for it as TEXT, so the owner's later toggle needs no re-save.
   dropVeiledPublicProse(s, groupings);
+  // VEIL-22 (R3): the drawn conditional rows (212 :: _gallery_veil_roster_choices, before R2's step)
+  applyRosterChoices(s, isRec(publicSettlement) ? publicSettlement : {}, instKind.idOf);
   // VEIL-21 (R2; VR16, VR33, VR37): last, what no non-owner read sends whatever the veil (212 :: _gallery_veil runs
   // _gallery_veil_withhold_always on every body it returns)
   withholdAlways(s);
@@ -1262,7 +1265,12 @@ export function projectShareVeil(publicSettlement, memberOverrides) {
   const { marked, deltas } = readShareVeil(memberOverrides);
   // VEIL-19 (item D (4)): an unmarked share is served as before, but for each income row's `weight` (every non-owner read);
   // VEIL-21 (R2): and for what no non-owner read sends whatever the veil (212 :: _gallery_veil, the unmarked body)
-  if (!marked) return withholdAlways(/** @type {Rec} */ (deepClone(withholdIncomeWeights(publicSettlement))));
+  // VEIL-22 (R3): and the roster choices before it (nothing is hidden whole there: VR31's shares alone can move)
+  if (!marked) {
+    const s = /** @type {Rec} */ (deepClone(withholdIncomeWeights(publicSettlement)));
+    applyRosterChoices(s, publicSettlement, CARD_KINDS.institution.idOf);
+    return withholdAlways(s);
+  }
   return applyVeil(publicSettlement, resolveVeil(defaultVeilFor(publicSettlement), deltas));
 }
 

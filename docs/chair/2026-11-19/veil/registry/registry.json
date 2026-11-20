@@ -105,6 +105,11 @@
     "by": "src/generators/priorityHelpers.js :: getInstFlags"
   },
   {
+    "path": "^economicState\\.economicComplexity$",
+    "rule": "recompose",
+    "by": "src/generators/economy/prosperity.js :: deriveEconomicComplexity"
+  },
+  {
     "path": "^economicState\\.foodSecurity\\.storageMonths$",
     "rule": "withhold",
     "by": "src/generators/foodGenerator.js :: generateFoodSecurity"
@@ -123,6 +128,11 @@
     "path": "^economicState\\.situationDesc$",
     "rule": "withhold",
     "by": "src/generators/economy/prosperity.js :: situationDescOf"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.economicDragDesc$",
+    "rule": "withhold",
+    "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
   },
   {
     "path": "^economicState\\.safetyProfile\\.blackMarketCapture$",
@@ -155,9 +165,39 @@
     "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
   },
   {
+    "path": "^economicState\\.safetyProfile\\.guardEffectivenessDesc$",
+    "rule": "recompose",
+    "by": "src/generators/safetyLineTruth.js :: gatesSmugglersLine"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.safetyDesc$",
+    "rule": "recompose",
+    "by": "src/generators/safetyLineTruth.js :: footholdWord"
+  },
+  {
     "path": "^economicState\\.safetyProfile\\.safetyRatio$",
     "rule": "withhold",
     "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.crimeTypes\\b",
+    "rule": "withhold",
+    "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
+  },
+  {
+    "path": "^economicState\\.safetyProfile\\.plotHooks\\b",
+    "rule": "withhold",
+    "by": "src/generators/safetyProfile.js :: generateSafetyProfile"
+  },
+  {
+    "path": "^history\\.currentTensions\\[\\] \\(only in A\\)$",
+    "rule": "withhold",
+    "by": "src/generators/historyGenerator.js :: buildHistoricalEvent"
+  },
+  {
+    "path": "^history\\.(historicalEvents|eventsTimeline)\\[\\] \\(only in A\\)$",
+    "rule": "withhold",
+    "by": "src/generators/historyGenerator.js :: buildHistoricalEvent"
   },
   {
     "path": "^history\\.eventsTimeline\\[\\]\\.anchored$",
@@ -185,6 +225,11 @@
     "by": "src/generators/narrative/historyCoherence.js :: historySiegeNarrative"
   },
   {
+    "path": "^institutions\\[\\]\\.desc$",
+    "rule": "withhold",
+    "by": "src/domain/facts/drawDeclared.js :: drawDeclared"
+  },
+  {
     "path": "^npcs\\[\\]\\.memberships\\[\\]\\.veiled$",
     "rule": "withhold",
     "by": "src/generators/people/castPowers.js :: landMemberships"
@@ -200,9 +245,19 @@
     "by": "src/generators/power/economyReconciliation.js :: fingerprintPowerEconomyInput"
   },
   {
+    "path": "^powerStructure\\.factions\\[\\] \\(only in A\\)$",
+    "rule": "withhold",
+    "by": "src/generators/power/rulingStructure.js :: generatePowerStructure"
+  },
+  {
     "path": "^powerStructure\\.factions\\[\\]\\.contestsNiche$",
     "rule": "withhold",
     "by": "src/generators/power/rulingStructure.js :: generatePowerStructure"
+  },
+  {
+    "path": "^powerStructure\\.factions\\[\\]\\.power$",
+    "rule": "recompose",
+    "by": "src/generators/factionDynamics.js :: applyLegitimacyMultipliers"
   },
   {
     "path": "^powerStructure\\.factions\\[\\]\\.rawPower$",
@@ -210,7 +265,17 @@
     "by": "src/generators/factionDynamics.js :: applyLegitimacyMultipliers"
   },
   {
+    "path": "^powerStructure\\.factionRelationships\\[\\] \\(only in A\\)$",
+    "rule": "withhold",
+    "by": "src/generators/factionDynamics.js :: withCaptureRelations"
+  },
+  {
     "path": "^powerStructure\\.factionRelationships\\[\\]\\.ratio$",
+    "rule": "withhold",
+    "by": "src/generators/factionDynamics.js :: withCaptureRelations"
+  },
+  {
+    "path": "^powerStructure\\.factionRelationships\\[\\]\\.direction$",
     "rule": "withhold",
     "by": "src/generators/factionDynamics.js :: withCaptureRelations"
   },
@@ -261,6 +326,11 @@
   },
   {
     "path": "^publicProse\\.blocks\\.stressors:overview\\.conditionSeverity\\.glance$",
+    "rule": "withhold",
+    "by": "src/components/new/publicProseCompose.js :: composePublicProse"
+  },
+  {
+    "path": "^publicProse\\.blocks\\.defense:criminal\\b",
     "rule": "withhold",
     "by": "src/components/new/publicProseCompose.js :: composePublicProse"
   },
