@@ -69,12 +69,27 @@ chair's word "THE LANE IS YOURS at a7473f47c" (18:44 UTC). A successor needs THI
     and first paint's raw, gzip and Brotli figures and the worker's, at the lane's BASE by the same build too (the difference
     is the lane's). A rise is cured on the lane: an eager file declares an atom BY NAME; the code that answers it is imported
     only on the lazy side; THE TRADITIONS' WORDINGS ARE NEVER IMPORTED BY AN EAGER MODULE.
+22. THE LANDING REQUEST (the chair, 20:14, RE-RULED 21:27): NO whole `npm run test:ratchet` on a seat's box (cf5b24079's ran
+    1 h 55 min unfinished and was killed, 22:12). Before each request: the build and the two `VERIFY_DIST` tests (ruling 21);
+    ONE run of the test directories of what the lane touched (`git diff --name-only <the line's tip>...HEAD -- src`):
+    `tests/components` and `tests/pdf` for `src/components/**`/`src/pdf/**`, `tests/generators` and `tests/data` for
+    `src/generators/**`/`src/data/**`, `tests/domain/<dir>/` per `src/domain/<dir>/`, ALWAYS `tests/lint` and `tests/build`;
+    through the mutex; failing rows read BY NAME against `docs/chair/2026-11-20/seventh/ci/RED-AT-LINE.tsv` (chair's branch); a
+    row NOT on it is this lane's (a moved figure named with its cause, or a real red cured on the lane). The rules for every
+    lane: `docs/chair/2026-11-20/seventh/prompts/COMMON-RULES.txt` (chair's branch); its rule 2, A LITERAL HAS ONE HOME: the
+    traditions' pools copy no existing line as index 0 (44 index-0 lines probed: 0 copies).
+23. THE SAME SUBJECT TWICE IN ONE PLACE (unit 13; the chair 20:56 and 21:03): (B) a held element's LATER rite takes its
+    element's "also" gloss (`TRAD-5-U13-ALSO-GLOSSES.md`, sixteen lines APPROVED AS WRITTEN; harvest one line, crisis any, no
+    twin; never a pick); (A) not taken; (C) genesis is the owner's. SECURITY: the held elements are those of THE AUDIENCE'S OWN
+    SHOWN SET, never the owner's carried to a reader (a reader lacking the earlier rite reads the plain gloss), pinned by one
+    domain test; listed for the veil's reader at the join.
 
 ## 2. THE UNITS (earlier units: TRAD-4-HANDBACK §2)
 | unit | what | state | commit |
 |---|---|---|---|
 | 10 | no town prints a sentence twice | MERGED by TRAD-4 (`9530bd22f`); its gates re-run by TRAD-5 at `a7473f47c`: module files 0, `tests/lint` 3303/3304 (census only), typechecks 0, eslint 0; census by its door `24a01c130`; then `tests/lint` WHOLE 221/221, 3304/3304 | `ea1e2ffaa` |
 | 11 | founder phrase last (`d32f044d6`); `pickVariantMixed` at the leaf's pick (`dbfca2aa1`); the table's header comment (`b328a9b5a`, TRAD-5's builder, brief `briefs/TRAD-5-U11-COMMENT.md`) | READ ONCE, red re-run at `e97a917b7`: 3 failed / 140 passed, exactly its three new arms; MERGED `37b3f9dcd`; gates there: module files 262/262, `tests/lint` 3306/3307 (census only), typechecks 0, eslint 0, confinement 1,245 identical | `lane/trad-5-2026-11-20-u11-wip` |
+| 13 | two shown rites honouring the same element (measure `f239f5366`: metropolis 54/72, city 32, town 7); the sixteen "also" glosses (`37944aeea`, approved 21:03); the build (brief addendum 2, `01b068790`) | builder out on `trad5-u13` | `lane/trad-5-2026-11-20-u13-wip` |
 | 12 | unit 6's measures re-taken on the final leaf; the owner's four files re-cut once from the same towns; HOUSES.txt (brief `briefs/TRAD-5-U12-RECUT.md`) | READ, MERGED `96d4c7b22` (docs and the lane's tools only); census by its door `624e5a9ba` | `lane/trad-5-2026-11-20-u12-wip` (`1a86ee712`) |
 
 ## 3. FOR THE OWNER (plain text beside this file, re-cut once by unit 12 from the same towns as TRAD-4's first cut)
@@ -127,3 +142,5 @@ criminal income only to leave them out of the reader's text.
   final commit, then "TRAD <commit>".
 - 2026-11-20 20:10 UTC — final gates at `a89c29f74`: `tests/lint` WHOLE 221/221, 3307/3307; module files 262/262; typechecks 0; eslint 0.
   First paint measured (§4). Ruling 21 recorded.
+- 2026-11-20 22:13 UTC — "TRAD cf5b24079" sent (the chair lands it by its own helper, 22:12); the ratchet killed by the chair's re-ruling
+  (no verdict); rulings 22 and 23; unit 13's builder out. Line commits carried by cherry-pick: `e32c9b27e` = `bd42d63c7` only.
