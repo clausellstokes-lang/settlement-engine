@@ -208,6 +208,24 @@ parts of the whole check (at the close).
   hooks tied to it, the names mended: editing, not structure. NOT KNOWN: sameness across many towns; what a real DM
   says. THE SLOT (the intake rule): the first content round after the deploy (task 10) takes these rows.
 
+- **2026-11-20, answered by 03:44 UTC, the owner (verbatim):** "Tell me more:" and the chair's own four sentences quoted
+  back ("Give every town the famine city's frame … That is editing; the structure already supports it.").
+  ANSWERED FIRST, AFTER THE CODE WAS READ, WITH A CORRECTION SAID BY NAME: "that is editing; the structure already
+  supports it" UNDERSOLD IT. WHAT EXISTS (read on the line): the one session sheet (`src/domain/summary/
+  tonightSheet.js`: it opens on the ACTIVE CRISIS and names three people from the crisis record's cast; with no
+  crisis it falls back to the seat-holder and the senior cleric); the cast engine (`src/domain/crisis/
+  crisisCast.js`: existing people chosen by fixed rules, never invented, no random draw; about 25 kinds of crisis);
+  crisis hooks written from the cast (`crisisHooks.js`); the power-naming helper (`display/governanceAccount.js ::
+  powerNameInProse`: "Military/Guard" to "the Guard"), used in some sentences and not others. WHAT DOES NOT EXIST:
+  a cast for a calm town's standing tension: its three sides are plain labels in `src/data/historyData.js` (48
+  entries, some two wordings of one kind) with nobody attached; each kind needs a rule for who stands on each
+  side: the real work; and a pronoun for a second mention (not checked whether a person carries that fact). SHOWN
+  ON HÁKONBERG from lines already on four of its pages (the debt, the creditor's agent in town, the undisclosed
+  clause, the fraud that would void it, the garrison's short pay chest, "at odds over an unpaid debt"). ORDER
+  PROPOSED: names first (the helper used everywhere); then the frame for the most common tension kinds, measured
+  over a pool of born towns; hooks last; then two towns, before and after, to real DMs. COST SAID: a content round
+  of its own after the deploy; every change of text moves the reference towns, which need the owner's yes.
+
 ## 2. Rulings of this chair (each vetoable by the owner)
 
 - **SV1 (00:05 UTC, 2026-11-20): THE VEIL'S LIST ON THREE MACHINES.** VEIL-19 owns 212, its rollback and the twin's
