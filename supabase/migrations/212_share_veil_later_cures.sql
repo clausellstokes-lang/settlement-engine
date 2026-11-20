@@ -2468,6 +2468,19 @@ begin
     s := jsonb_set(s, '{availableServices,criminal}', coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(s #> '{availableServices,criminal}') with ordinality x(e, o)
       where not (jsonb_typeof(e) = 'object' and (not (e ? 'institution') or e -> 'institution' = '"(covert)"'::jsonb))), '[]'));
   end if;
+  -- R3-TELL-3 unit 4b (ruling 60, R3-CURE-8's STOP 1; the chair's word of 20:03 UTC): (d) A NON-CRIMINAL SERVICES ROW WHOSE
+  -- `institution` NAMED A HIDDEN HOUSE LEAVES WHOLE (a husk, ruling 42 (1)): the name sweep takes the key only where its text
+  -- names a hidden house in a spelling the fold finds, so a served row without the key whose pre-sweep counterpart in `pub`
+  -- (the same family, `@>`) carried a string `institution` is such a row; a row born without the key, and one the sweep left,
+  -- stay. Twin: galleryRosterChoices.js :: applyRosterChoices, the same rule
+  if jsonb_typeof(s -> 'availableServices') = 'object' then
+    s := jsonb_set(s, '{availableServices}', (select coalesce(jsonb_object_agg(kv.k, case when kv.k <> 'criminal' and jsonb_typeof(kv.v) = 'array' then
+        coalesce((select jsonb_agg(e order by o) from jsonb_array_elements(kv.v) with ordinality x(e, o)
+                   where not (jsonb_typeof(e) = 'object' and not (e ? 'institution')
+                              and exists (select 1 from jsonb_array_elements(case when jsonb_typeof(p #> array['availableServices', kv.k]) = 'array' then p #> array['availableServices', kv.k] else '[]' end) z
+                                           where jsonb_typeof(z) = 'object' and jsonb_typeof(z -> 'institution') = 'string' and z @> e))), '[]')
+        else kv.v end), '{}'::jsonb) from jsonb_each(s -> 'availableServices') kv(k, v)));
+  end if;
 
   -- registry: economy.complexity ((a): prosperity.js :: deriveEconomicComplexity over the SERVED rows: the tier, the income
   -- rows' count and shares, the exports' count, a served house whose name holds market, trading, merchant or guild, the
@@ -2508,12 +2521,13 @@ begin
   if jsonb_typeof(s #> '{economicState,safetyProfile}') = 'object' then
     -- registry: safety.economicDragDesc ((b): the line reads the black-market share, which moves with hasCriminalInst, the
     -- market flag and the organised crime the houses' names read (safetyProfile.js, factsOf(...).crime); withheld where a
-    -- hidden house raised either flag or carried such a name; VR42: a criminal governing body moves none of them)
+    -- hidden house raised either flag or carried such a name; VR42: a criminal governing body moves none of them).
+    -- R3-TELL-3 (ruling 62 (2)): SERVED AS null, the empty form nothing-hidden pages show; never deleted, never ''
     if (s #> '{economicState,safetyProfile}') ? 'economicDragDesc'
        and ((raised -> 'hasCriminalInst') = 'true'::jsonb or (raised -> 'hasMarket') = 'true'::jsonb
             or exists (select 1 from unnest(gone) g where position('thieves'' guild' in g) > 0 or position('thieves guild' in g) > 0
                          or position('multiple criminal' in g) > 0 or position('underground city' in g) > 0 or position('front business' in g) > 0)) then
-      s := s #- '{economicState,safetyProfile,economicDragDesc}';
+      s := jsonb_set(s, '{economicState,safetyProfile,economicDragDesc}', 'null'::jsonb);
     end if;
     -- registry: safety.guardEffectivenessDesc ((a): safetyLineTruth.js :: gatesSmugglersLine for the served houses: where
     -- none moves goods beneath the walls, the twin, its force noun read back from the sentence)

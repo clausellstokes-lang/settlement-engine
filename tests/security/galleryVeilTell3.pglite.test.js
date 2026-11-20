@@ -10,10 +10,10 @@
  *   UNIT 3 (ruling 62 (5)): THE POWER'S ROW applies ONLY ON A READ THAT HIDES A HOUSE: a nothing-hidden town with a criminal
  *     power (the 29 towns' shape) is served the row byte for byte by both engines; on a hiding read a non-governing criminal
  *     power's row leaves whole where the read serves no criminal house.
- *   UNIT 4b (ruling 60; R3-CURE-8's STOP 1): THE NON-CRIMINAL HUSK, RED ARM ONLY (the cure waits for the chair's word,
- *     relayed by the seat): a NON-criminal `availableServices` row whose `institution` named the hidden house in another
- *     spelling ('(street gang)' beside the hidden "Street gang"), the key swept, must LEAVE WHOLE, both engines, in every
- *     family the generator writes and a custom one. RED BY DESIGN until the cure (out/v28/tell3/).
+ *   UNIT 4b (ruling 60; R3-CURE-8's STOP 1): THE NON-CRIMINAL HUSK: a NON-criminal `availableServices` row whose `institution` named the hidden house in another
+ *     spelling ('(street gang)' beside the hidden "Street gang"), the key swept, LEAVES WHOLE, both engines, in every family the
+ *     generator writes and a custom one (the chair's word of 20:03, relayed by the seat; red at 95f2ddfb8). The sweep stays
+ *     for a row whose `institution` names no hidden house; a row born without the key stays.
  */
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
@@ -59,7 +59,8 @@ const HAND_POWER = Object.freeze({
     { faction: 'Dock Syndicate', category: 'criminal', power: 25 }, { faction: 'Fishers', category: 'economic', power: 15 }] },
   economicState: { safetyProfile: { crimeTypes: [] } },
 });
-/** UNIT 4b: per family, the row whose `institution` holds the hidden house's name in another spelling, and a served one. */
+/** UNIT 4b: per family, the row whose `institution` holds the hidden house's name in another spelling, a served one, one whose
+ * `institution` names no hidden house, and one born without the key. */
 const hand4bOf = (families) => ({
   name: 'Keelmouth', tier: 'town',
   institutions: [{ id: 'inst-sg12', name: 'Street gang', category: 'Criminal', desc: 'The gang works the docks.' },
@@ -67,7 +68,11 @@ const hand4bOf = (families) => ({
   powerStructure: { factions: [{ faction: 'Town Council', category: 'civic', power: 70, isGoverning: true }, { faction: 'Fishers', category: 'economic', power: 30 }] },
   availableServices: Object.fromEntries(families.map((f) => [f, [
     { name: `Swept ${f}`, desc: 'A row whose house is the hidden one, in another spelling.', institution: '(street gang)' },
-    { name: `Served ${f}`, desc: 'A served house offers it.', institution: 'Fish market' }]])),
+    { name: `Served ${f}`, desc: 'A served house offers it.', institution: 'Fish market' },
+    // the seat's condition (2), 20:03: the sweep STAYS for a row whose `institution` names no hidden house (its desc does), and
+    // a row born without the key stays
+    { name: `Kept ${f}`, desc: 'Ask the street gang at the door.', institution: 'Harbour office' },
+    { name: `Bare ${f}`, desc: 'No house offers it.' }]])),
   economicState: { safetyProfile: { crimeTypes: [] } },
 });
 
@@ -172,7 +177,7 @@ describe('R3-TELL-3 (ruling 62; ruling 60): the tell\'s cure on hand plants, the
     expect(bad).toEqual([]);
   }, ARM_TIMEOUT_MS);
 
-  it('UNIT 4b RED ARM (ruling 60; the cure WAITS FOR THE CHAIR\'S WORD): a NON-criminal services row whose `institution` named the hidden "Street gang" in another spelling (\'(street gang)\') LEAVES WHOLE in every family the generator writes and a custom one, both engines, every read, every setting, Reveal DM off and on; the served house\'s row stays', async () => {
+  it('UNIT 4b (ruling 60; THE CHAIR\'S WORD OF 20:03: the row leaves whole): a NON-criminal services row whose `institution` named the hidden "Street gang" in another spelling (\'(street gang)\') LEAVES WHOLE in every family the generator writes and a custom one, both engines, every read, every setting, Reveal DM off and on; the served house\'s row, a row whose `institution` names no hidden house and a row born without the key stay (the seat\'s condition (2))', async () => {
     expect(families).toContain(SVC_CUSTOM_FAMILY);
     const husks = []; const lost = []; const table = {};
     for (const r of await readAll(hand4bOf(families))) {
@@ -184,9 +189,11 @@ describe('R3-TELL-3 (ruling 62; ruling 60): the tell\'s cure on hand plants, the
         ((table[f] ||= {})[k] = (table[f][k] || 0) + 1);
         if (f !== 'criminal' && swept) husks.push(`${f} ${tag(r)}: served ${J(swept)}`);
         if (!av[f].some((x) => isRec(x) && x.name === `Served ${f}`)) lost.push(`${f} ${tag(r)}: the served house's row withheld`);
+        if (!av[f].some((x) => isRec(x) && x.name === `Kept ${f}` && x.institution === 'Harbour office')) lost.push(`${f} ${tag(r)}: the row whose institution names no hidden house withheld or stripped`);
+        if (!av[f].some((x) => isRec(x) && x.name === `Bare ${f}`)) lost.push(`${f} ${tag(r)}: the row born without the key withheld`);
       }
     }
-    note('R3-TELL-3 unit 4b (RED ARM), families', J(families), '| the swept row per family (engine:state reads):', Object.entries(table).map(([f, v]) => `\n  ${f}: ${J(v)}`).join(''), '| husks served', husks.length);
+    note('R3-TELL-3 unit 4b, families', J(families), '| the swept row per family (engine:state reads):', Object.entries(table).map(([f, v]) => `\n  ${f}: ${J(v)}`).join(''), '| husks served', husks.length);
     for (const f of families) expect(table[f], `${f}: judged on no read`).toBeTruthy();
     expect(lost.filter((x) => !x.startsWith('criminal '))).toEqual([]);
     expect(husks).toEqual([]);
