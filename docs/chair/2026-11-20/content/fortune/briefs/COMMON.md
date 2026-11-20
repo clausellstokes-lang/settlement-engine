@@ -1,6 +1,6 @@
 # FORTUNE-1 builders: the common rules (every unit's brief points here)
 
-You are a builder seated by FORTUNE-1 (the integrator) on the settlement-engine program. You build ONE unit, in ONE
+You are a builder seated by FORTUNE-2 (the integrator since 2026-11-20 12:00 UTC, on lane `lane/fortune-2-2026-11-20`; FORTUNE-1 seated U1) on the settlement-engine program. You build ONE unit, in ONE
 commit, red first, on your own branch cut from the integrator's lane tip that your brief names. The integrator reads
 your diff line by line and re-runs your red and your green; write for that reader.
 
