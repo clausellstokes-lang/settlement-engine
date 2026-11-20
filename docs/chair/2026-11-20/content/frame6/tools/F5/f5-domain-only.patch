@@ -1,0 +1,169 @@
+diff --git a/src/domain/summary/tonightSheet.js b/src/domain/summary/tonightSheet.js
+index 0e1c19587..e9e298111 100644
+--- a/src/domain/summary/tonightSheet.js
++++ b/src/domain/summary/tonightSheet.js
+@@ -386,7 +386,7 @@ export function composeTonightSheet(settlement, options) {
+     crisis,
+     ...(frame ? { frame } : {}),
+     opening: crisis ? crisis.line : frame ? sentence(frame.line) : sentence(clean(source.pressureSentence)),
+-    people: frame ? framePeopleOf(frame) : peopleOf(source),
++    people: frame ? framePeopleOf(frame, peopleOf(source)) : peopleOf(source),
+     facts: [foodFact(source), defenceFact(source)].filter(/** @returns {f is TonightFact} */ (f) => f !== null),
+     hooks: frame ? frameHooksOf(source, frame) : hooksOf(source),
+   };
+@@ -466,14 +466,24 @@ export function sideReadOf(side) {
+ /**
+  * The people to voice on a calm town's sheet: the named faces of the trouble's sides, in the sides' order, each once
+  * (a criminal house stands on its side by name and voices nothing; an outsider and an absent side name no one).
+- * @param {TonightFrame} frame @returns {TonightPerson[]}
+- */
+-function framePeopleOf(frame) {
++ * FRAME-6 · F5 (the chair's ruling of 2026-11-20 15:35 UTC, vetoable by the owner): THE SEAT'S HOLDER STAYS ON EVERY
++ * FRAMED SHEET. Where the seat-holder is not already a face, he is the LAST of the people to voice, marked `seat`, by the
++ * row the calm sheet gives him (`peopleOf`'s own: his name, role, line and source; no new wording), the want folded once
++ * where a face wants the same.
++ * @param {TonightFrame} frame @param {TonightPerson[]} calmPeople the calm sheet's people to voice (`peopleOf`)
++ * @returns {TonightPerson[]}
++ */
++function framePeopleOf(frame, calmPeople) {
+   /** @type {TonightPerson[]} */
+   const out = frame.sides.filter((side) => side.name && side.sourcePath).map((side) => ({
+     name: side.name, role: side.role, why: /** @type {'side'} */ ('side'), side: side.words, reason: side.reason,
+     line: side.line, says: side.says, sourcePath: /** @type {string} */ (side.sourcePath),
+   }));
++  const seat = calmPeople.find((p) => p.why === 'seat');
++  if (seat && !out.some((p) => p.name === seat.name)) {
++    const { sameAs: _folded, ...row } = seat;
++    out.push(row);
++  }
+   return wantsOnce(out);
+ }
+ 
+diff --git a/tests/domain/tension/frameSheetRulings.test.js b/tests/domain/tension/frameSheetRulings.test.js
+index 719eab43c..0c9835a8a 100644
+--- a/tests/domain/tension/frameSheetRulings.test.js
++++ b/tests/domain/tension/frameSheetRulings.test.js
+@@ -16,6 +16,9 @@
+  *        live person by rank whom no side holds, even one the record names by role (`isOfficeStandIn`) and even beyond
+  *        `FRAME_TUNING.officeSidesMax`; she is printed by that name alone. Count: such sides 1 at the base, 2 after F1
+  *        (village-75), -> 0.
++ *   F5 — the seat's holder stays on every framed sheet: where he is not already a face, he is the LAST of the people to
++ *        voice, marked `seat`, with the row the calm sheet gives him (its own composition: no new wording). Count:
++ *        framed owner sheets whose seat-holder is dropped, 32 at the base a170832e5 (W3 16, W2 12, W4 3, W1 1) -> 0.
+  */
+ import { describe, it, expect } from 'vitest';
+ import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
+@@ -162,3 +165,63 @@ describe('F2: an empty side yields before the caps', () => {
+     expect(over).toEqual(['frame-calm-hamlet-17', 'frame-calm-village-75']);
+   }, 300000);
+ });
++
++/**
++ * F5's count over one town: the seat-holder the calm sheet voices (the stranger's sheet, today's: its `seat` row) who is
++ * not among the owner's people to voice.
++ * @param {any} s
++ */
++function seatDropped(s) {
++  const seat = composeTonightSheet(s).people.find((p) => p.why === 'seat');
++  return seat && !composeTonightSheet(s, OWNER).people.some((p) => p.name === seat.name) ? seat.name : '';
++}
++
++/** The 32 framed owner sheets that dropped the seat-holder at the base a170832e5 (W3 16, W2 12, W4 3, W1 1). */
++const SEAT_DROPPED_AT_BASE = Object.freeze([
++  'frame-calm-hamlet-35', 'frame-calm-hamlet-49', 'frame-calm-village-20', 'frame-calm-village-58', 'frame-calm-town-1',
++  'frame-calm-town-20', 'frame-calm-town-33', 'frame-calm-town-56', 'frame-calm-town-68', 'frame-calm-town-74',
++  'frame-calm-town-80', 'frame-calm-city-8', 'frame-calm-city-14', 'frame-calm-city-22', 'frame-calm-city-25',
++  'frame-calm-city-27', 'frame-calm-city-33', 'frame-calm-city-35', 'frame-calm-city-45', 'frame-calm-city-52',
++  'frame-calm-city-57', 'frame-calm-metropolis-8', 'frame-calm-metropolis-19', 'frame-calm-metropolis-21',
++  'frame-calm-metropolis-22', 'frame-calm-metropolis-48', 'frame-calm-metropolis-51', 'frame-calm-metropolis-56',
++  'frame-calm-metropolis-57', 'frame-calm-metropolis-59', 'frame-calm-metropolis-64', 'frame-calm-metropolis-68',
++]);
++
++describe('F5: the seat\'s holder stays on every framed sheet', () => {
++  it('frame-calm-city-14: the seat-holder, on no side of the crime wave, is the last of the people to voice, marked seat, with the calm sheet\'s own row', () => {
++    const s = bySeed('frame-calm-city-14');
++    const seat = composeTonightSheet(s).people.find((p) => p.why === 'seat');
++    expect(seat?.name).toBe('Saoirse O\'Meara');
++    const sheet = composeTonightSheet(s, OWNER);
++    expect(sheet.frame?.sides.map((x) => x.name)).not.toContain('Saoirse O\'Meara');
++    expect(sheet.people.at(-1)).toEqual(seat);
++    expect(sheet.people.slice(0, -1).every((p) => p.why === 'side')).toBe(true);
++  });
++
++  it('over the 63: no framed owner sheet drops the seat-holder the calm sheet voices (32 at the base -> 0)', () => {
++    expect(TOWNS.map(({ seed, s }) => [seed, seatDropped(s)]).filter(([, name]) => name).map(([seed, name]) => `${seed}: ${name}`)).toEqual([]);
++  }, 300000);
++
++  it('over the 63: the seat-holder is voiced once: on his side where he is a face, else last, by the calm sheet\'s own seat row', () => {
++    const failures = collectSeedFailures(TOWNS.map((t) => t.seed), (seed) => {
++      const s = bySeed(seed);
++      const seat = composeTonightSheet(s).people.find((p) => p.why === 'seat');
++      expect(seat, `${seed}: the calm sheet voices a seat-holder`).toBeTruthy();
++      const sheet = composeTonightSheet(s, OWNER);
++      const rows = sheet.people.filter((p) => p.name === seat.name);
++      expect(rows.length, `${seed}: once`).toBe(1);
++      const face = sheet.frame.sides.some((x) => x.name === seat.name);
++      if (face) expect(rows[0].why, `${seed}: on his side`).toBe('side');
++      else {
++        // the calm sheet's own row (its name, role, line, says, source), the want folded once where a face wants the same
++        const { sameAs: _a, ...own } = seat;
++        const { sameAs: _b, ...last } = /** @type {any} */ (sheet.people.at(-1));
++        expect(last, `${seed}: last, the calm row`).toEqual(own);
++      }
++      expect(sheet.people.filter((p) => p.why !== 'side').length, `${seed}: no other row but the seat's`).toBe(face ? 0 : 1);
++    });
++    expectNoSeedFailures(failures, 'the seat-holder stays on every framed sheet');
++    expect(TOWNS.filter(({ s }) => !composeTonightSheet(s, OWNER).frame.sides.some((x) => x.name === composeTonightSheet(s).people.find((p) => p.why === 'seat')?.name)).map((t) => t.seed))
++      .toEqual(SEAT_DROPPED_AT_BASE);
++  }, 300000);
++});
+diff --git a/tests/domain/tension/troubleWeight.test.js b/tests/domain/tension/troubleWeight.test.js
+index afdac4167..6ef94ebe5 100644
+--- a/tests/domain/tension/troubleWeight.test.js
++++ b/tests/domain/tension/troubleWeight.test.js
+@@ -217,7 +217,9 @@ const HALL_AND_CRIME_WAVE = Object.freeze({
+   'frame-calm-city-49': 'Merchant oligarchy',
+   'frame-calm-metropolis-51': 'Ducal Governorship',
+ });
+-const ALREADY_FRAMED_W2 = Object.freeze({ seed: 'frame-calm-city-14', hall: 'Merchant oligarchy', pin: 'd9c0870f07fe7c2a' });
++// FRAME-6 · F5 (the seat's holder stays on every framed sheet) re-recorded city-14's pin: d9c0870f07fe7c2a -> 8e8c894bfd0c5af0,
++// its seat-holder (Saoirse O'Meara, on no side of the crime wave) now the last of its people to voice, by the calm sheet's row
++const ALREADY_FRAMED_W2 = Object.freeze({ seed: 'frame-calm-city-14', hall: 'Merchant oligarchy', pin: '8e8c894bfd0c5af0' });
+ 
+ describe('W4: a hall in criminal hands with a live crime wave opens the owner\'s sheet on that crime wave (CF12)', () => {
+   const crimeWaveAt = (s) => s.history.currentTensions.findIndex((t) => t.type === 'crime_wave');
+@@ -245,24 +247,29 @@ describe('W4: a hall in criminal hands with a live crime wave opens the owner\'s
+       const sheet = composeTonightSheet(s, OWNER);
+       expect(sheet.frame?.type, seed).toBe('crime_wave');
+       expect(sheet.frame?.line, seed).toBe(s.history.currentTensions[at].description.replace(/\s+/g, ' ').trim());
+-      // the people to voice are the crime wave's own sides' faces, each on a side the record holds
++      // the people to voice are the crime wave's own sides' faces, each on a side the record holds; then (FRAME-6 · F5) the
++      // seat-holder where he is no face, last, by the calm sheet's own row
+       const sides = sheet.frame.sides.map((d) => d.words);
+-      expect(sheet.people.length, `${seed}: a side's face is voiced`).toBeGreaterThan(0);
+-      for (const p of sheet.people) expect(sides, `${seed}: ${p.name} stands on a side of the crime wave`).toContain(p.side);
++      const faces = sheet.people.filter((p) => p.why !== 'seat');
++      expect(faces.length, `${seed}: a side's face is voiced`).toBeGreaterThan(0);
++      for (const p of faces) expect(sides, `${seed}: ${p.name} stands on a side of the crime wave`).toContain(p.side);
++      expect(sheet.people.slice(faces.length).map((p) => p.why), `${seed}: the seat-holder, if anyone, last`).toEqual(sheet.people.length > faces.length ? ['seat'] : []);
+       // the stranger keeps today's sheet (the audience gate, the first lock)
+       expect(composeTonightSheet(s).frame, `${seed} (a stranger)`).toBeUndefined();
+     });
+     expectNoSeedFailures(failures, 'a calm town with a taken hall and a crime wave opens on the crime wave for the owner');
+   }, 300000);
+ 
+-  it(`${ALREADY_FRAMED_W2.seed}: framed by the same crime wave on W2, which outranks W4: it keeps its sheet byte for byte`, () => {
++  it(`${ALREADY_FRAMED_W2.seed}: framed by the same crime wave on W2, which outranks W4: its sheet is its pin (moved by FRAME-6 · F5 alone)`, () => {
+     const s = born(ALREADY_FRAMED_W2.seed);
+     expect(takenHalls(s)).toEqual([ALREADY_FRAMED_W2.hall]);
+     expect(troubleOfWeight(s)).toMatchObject({ at: crimeWaveAt(s), tension: { type: 'crime_wave' }, strain: { strain: 'W2', grade: 'high-conflict' } });
+     const sheet = composeTonightSheet(s, OWNER);
+     expect(digest(JSON.stringify(sheet))).toBe(ALREADY_FRAMED_W2.pin);
+     // the chair's condition for keeping it (2026-11-20, 11:21 UTC): no side of the crime wave is missing from its people to voice
+-    expect(sheet.people.map((p) => p.side)).toEqual(sheet.frame.sides.map((d) => d.words));
++    expect(sheet.people.filter((p) => p.why === 'side').map((p) => p.side)).toEqual(sheet.frame.sides.map((d) => d.words));
++    // FRAME-6 · F5: and the seat-holder, on no side, is the last of them, marked seat
++    expect(sheet.people.at(-1)).toMatchObject({ name: 'Saoirse O\'Meara', why: 'seat' });
+   });
+ 
+   it('both facts, each needed: no taken hall, a hall below corrupted, or no crime wave, and there is no W4', () => {
