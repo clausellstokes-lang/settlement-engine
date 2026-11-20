@@ -128,3 +128,10 @@ OSR-C STOPPED AT ITS BOUND (merged as records only, 04:01 UTC): with the config 
 `persistMerge.js :: mergePersistedState`'s merge, the walker is UNCHANGED (45 of 47; violations 4; register {2220, 1556,
 448} vs frozen {2214, 1552, 444}); the detector types a value by its SHAPE TOKEN, not its writer (`s.config` resolves to
 the corpus shape `config`, which never carries magicExists). No src change. To the chair: the governed rung as its own unit.
+
+## 6. R2 (in hand)
+
+R2 builder (v21-r2, 12a371c0b, pushed as `lane/veil-21-r2-2026-11-20`): built, NOT GREEN at its mark: reds
+`galleryServerVeil` 11, `galleryVeilHandRows` V7-2 1, `publicProseEquality` Defense 2 lines (soak towns 3, 9). Not
+merged. The chair asked (04:15 UTC) for a ruin exemption row for `src/domain/veil/pageRederive.js` (VR2's form). A fresh
+builder carries R2 onto the lane tip as ONE commit and cures the reds (`briefs/R2-CURE-BRIEF.md`).
