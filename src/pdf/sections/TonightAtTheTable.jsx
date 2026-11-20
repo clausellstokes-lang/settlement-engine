@@ -32,6 +32,11 @@ export function TonightAtTheTable({ settlement, narrativeMode }) {
   // THE OWNER'S SHEET (FRAME-2 B3): the PDF is the DM's own export, built from their own record (no player variant)
   const sheet = composeTonightSheet(settlement, { audience: TONIGHT_AUDIENCES.owner });
   const why = { seat: TONIGHT_COPY.seat, secret: TONIGHT_COPY.secret, cleric: TONIGHT_COPY.cleric };
+  // FRAME-2 · B4 (CF9, no drama added): a FRAMED opening sits under the chapter's neutral accent (gold, as its facts and
+  // hooks eyebrows and the hooks' rule; its tint, goldBg); a crisis keeps the alarm, and a calm town with no frame keeps
+  // exactly the opening it had (CF1)
+  const framed = !!sheet.frame && !sheet.crisis;
+  const openingTone = framed ? palette.gold : palette.bad;
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -45,10 +50,10 @@ export function TonightAtTheTable({ settlement, narrativeMode }) {
         <View style={{
           marginBottom: space.sm,
           padding: 6,
-          backgroundColor: palette.badBg,
-          borderLeft: `2pt solid ${palette.bad}`,
+          backgroundColor: framed ? palette.goldBg : palette.badBg,
+          borderLeft: `2pt solid ${openingTone}`,
         }} wrap={false}>
-          <Eyebrow color={palette.bad}>{sheet.crisis ? TONIGHT_COPY.crisis : sheet.frame ? TONIGHT_COPY.trouble : TONIGHT_COPY.urgent}</Eyebrow>
+          <Eyebrow color={openingTone}>{sheet.crisis ? TONIGHT_COPY.crisis : sheet.frame ? TONIGHT_COPY.trouble : TONIGHT_COPY.urgent}</Eyebrow>
           {/* FRAME-1: the trouble by NAME here; its sentence and its hooks print once per export, in their own chapters (B4) */}
           <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10.5'], lineHeight: 1.35 }}>
             {sheet.frame ? sheet.frame.name : sheet.opening}
