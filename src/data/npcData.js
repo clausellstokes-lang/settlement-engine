@@ -1629,7 +1629,7 @@ export const NPC_PRESENTATION_MODES = {
 // same line under new names. With no index (a legacy edge, a seedless caller) the closure falls
 // back to the pure fnv hash of the DIRECTED pair key, salted per field. ZERO rng draws either
 // way, and the archetype OBJECTS are unchanged (consumers compare them with === and
-// Object.entries().find: identity is load-bearing). `size` hands the pool length to the draw.
+// Object.entries().find: identity is load-bearing). `size` hands the pool length to the draw. GOALS-1 (GR3 for ties, the chair's ruling of 2026-11-20 10:28 UTC: the head frozen, new pairs reached only past it): an optional fifth argument, the RESERVE (default empty), follows the variants in `lines`; `size` counts both and `head` the variants alone, so a stored index reads `lines[i % lines.length]` and one below `head` reads what it read before; the tie draw reaches a reserve index only past the head (`relationshipArchetypes.js :: createTieProseDraw`). An archetype's desc and tension take reserves of ONE length (one index picks both); the no-index fallback hashes over the variants alone. Every reserve is empty today.
 // Index 0 of every pool is the pre-existing canonical closure, verbatim.
 // CENSUS-4c (R-C, the table-consumer rule): a variant that presumes a record fact is declared IN
 // PLACE as `{ line: closure, needs?, excludes?, crisis? }` (the ledger's 30 rows,
@@ -1677,15 +1677,15 @@ const voteUnheld = (row, a, b) => {
 const closureFor = (row, a, b) => (row && typeof row === 'object' && typeof row.twin === 'function'
   && ((row.sharedTrade && pairTradeKnown(a, b) && !pairSharesTrade(a, b)) || (row.votes && voteUnheld(row, a, b))
     || (row.sharedPlace && pairSharesPlaceOf(null, [a, b]) !== true)) ? row.twin : closureOf(row)); // PD1: no place to pass, the twin
-const pairProse = (salt, variants, order = null, debt = false) => Object.assign((r, s, variant, force) => {
+const pairProse = (salt, variants, order = null, debt = false, reserve = []) => ((lines) => Object.assign((r, s, variant, force) => {
   const [a, b] = isReversedTie(variant) ? [s, r] : [r, s]; // TAIL-TIES-2 (T6): the pair's direction, read off the stored variant
   const drawn = order ? endsOf(a, b, order[0], order[1]) : [a, b], ends = debt && secretOwes(drawn[1], drawn[0]) && !secretOwes(drawn[0], drawn[1]) ? [drawn[1], drawn[0]] : drawn; // BAR3-PEOPLE-2 (C35097): the pair's one debt (secretOwes, at the file's end)
   // NAMES-1 (the seventh chair's ruling CN2 of 2026-11-20): a card's later mention in one sentence is a pronoun, its
   // surname, its role or its given name, never its full name twice (data/people/personMention.js :: secondMentions)
-  const said = closureFor(isTieIndex(variant) ? variants[tieIndexOf(variant) % variants.length]
+  const said = closureFor(isTieIndex(variant) ? lines[tieIndexOf(variant) % lines.length]
     : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`), ends[0], ends[1])(...ends, force || TIE_FORCE_WORDS);
   return secondMentions(said, ends);
-}, { size: variants.length, lines: Object.freeze([...variants]) }); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
+}, { size: lines.length, head: variants.length, lines }))(Object.freeze([...variants, ...reserve])); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
 const TIE_FORCE_WORDS = Object.freeze({ body: 'garrison', members: 'soldiers', member: 'soldier' });
 /** A drawn tie index is a non-negative integer; anything else takes the pair-hash fallback. */
 const isTieIndex = variant => Number.isInteger(variant) && variant >= 0;
