@@ -756,7 +756,8 @@ describe('ONE TOWN, NO SENTENCE TWICE (TRAD-4 unit 10; the chair, reading the ow
     const too = (KEEPER_FRAMES_TOO.placePower || []).map((l) => l.text.replace('{house}', 'the weekly market').replace('{power}', 'the Merchant Guilds'));
     expect(too).toHaveLength(2);
     expect(new Set(inSet.slice(0, 3).map(keeperOf)).size).toBe(3);
-    for (const d of inSet.slice(0, 3)) expect(too).not.toContain(keeperOf(d)); // the three frames first
+    // anchored: `too` is asserted two lines long above, and the next line asserts rites four and five print exactly it
+    for (const d of inSet.slice(0, 3)) expect(too).not.toContain(keeperOf(d));
     expect(inSet.slice(3, 5).map(keeperOf)).toEqual(too);
     expect(inSet[5].parts.keeper).toBeNull();
     expect(inSet[5].named.houses).toEqual([]);
@@ -770,6 +771,7 @@ describe('ONE TOWN, NO SENTENCE TWICE (TRAD-4 unit 10; the chair, reading the ow
     const inSet = recs.map((rec) => describeTradition(rec, t, { audience: 'owner', set: recs }));
     for (const d of inSet.slice(0, 3)) expect(d.text).toContain('Edda Vogt'); // not vacuous: the frames name the priest
     expect(inSet[3].parts.keeper).toBe('house');
+    // anchored: the first three rites' texts are asserted to contain 'Edda Vogt' above, and this rite's keeper is asserted standing
     expect(inSet[3].text).not.toContain('Edda Vogt');
     expect(inSet[3].named.persons).toEqual([]);
     expect(inSet[3].named.houses).toEqual(['Parish church']);
