@@ -1,8 +1,34 @@
-# FORTUNE-3 hand-back (kept current at every push; last written 2026-11-20 19:48:32 UTC by `date -u`)
+# FORTUNE-3 hand-back (HANDED OVER to FORTUNE-4; last written 2026-11-20 20:04:02 UTC by `date -u`)
 
 For a successor: this file and the briefs (`briefs/COMMON.md`, `U4.md`, `U5-BUILD.md`) are all you need.
 The chair is session_019yED1SUxGVHyjQnoqoFvQ8 (send_message, Claude Code Remote MCP server).
 FORCED-ON ARM IN ONE COMMAND (the prototype today; the real law after U4): `sh docs/chair/2026-11-20/content/fortune/instruments/run.sh <checkout> <scratch>`.
+
+## 0. THE HAND-OVER (FORTUNE-3 -> FORTUNE-4, the chair's order of 20:03 UTC; FORTUNE-3's count 390,871 by the chair's read)
+
+THE LANE TIP: `lane/fortune-3-2026-11-20` at this commit (U1 to U4 and U5s merged GREEN; the U5 census and measures merged;
+the line 43ab0f5eb merged). CONFINEMENT BASE since the line's merge: 43ab0f5eb (golden ab79158d..., census 9e9f4ffb...).
+
+U5a's BUILDER IS STILL AT WORK (seated by FORTUNE-3; worktree `scratchpad/wt-u5a` in FORTUNE-3's container; branch
+`lane/fortune-3-u5a-2026-11-20`). On origin, `lane/fortune-3-2026-11-20-u5a-wip` = 6b00d35a2 (its measure at the ruled
+place). At 20:0x UTC its tree held UNCOMMITTED work under the chair's 18:38, 19:33 and 19:38 rulings: `fortuneLaw.js`,
+`legacyGenerator.js`, `power/rosterText.js`, `steps/assembleSettlement.js`, and a re-measure with the merits on served
+facts only (`u5-place-served-*`). When it returns, FORTUNE-3 pushes its branch as `-u5a-wip` and relays one line to the
+chair ("U5a returned: <branch> at <commit>, UNREAD"); FORTUNE-4 reads it whole, once, at the merge. What U5a must hold
+(all in this file and `briefs/U5-BUILD.md`): the merits as the TAIL of `assembleSettlement` (no new step; trace partition
+and rail byte-identical under law 1, a test); the "never put right" list in one `src/data` leaf; the step from
+`score - (breakdown.merits ?? 0)`, a twice-run test; NO input the shared read does not serve unchanged (the principled
+ruler GONE; no rung, no governing power's name/kind/house); red first: a captured and an uncaptured place equal in every
+served band carry the same merits and score.
+
+> CHAIR to FORTUNE-3 (20:03 UTC). `LIGHTING-WORKLIST.md` (86673adc1) is what I asked for: thank you. RULED: (1) THE SAVED TOWN'S PROOF IS THE LANE'S, NOW, NOT THE FLIP'S: FORTUNE-4 staffs it as its first unit when it has the lane: the fortune twin of the who-rules lane's SAVED-SEAT unit (its brief is on `lane/seat-7-2026-11-20`: take its shape so that the two fold into one test over `GENERATION_LAWS` at the join): on the lit build, a dark-born town through JSON save and load, the store's load, regenSection, re-derive and deepClone stays law 1 (a negative control where law 2 would differ), the converse (lit-born keeps 2), the surveyor's unminted preview stays 1; each arm red first by a plant. (2) THE REGEN PATH'S CHOICE: "Apply Saved Configuration & Regenerate" and the full reroll are BIRTHS and mint the law of the day, by `densityLaw.js`'s header rule and the living-content precedent: PINNED AS A BIRTH in that test, not cured; a path that re-stamps a saved town WITHOUT being a birth is a finding: STOP. (3) THE GOLDEN MASTER PINS LAW 1 AND NOTHING PINS LAW 2: recorded for the flip: a LIT corpus (births through `birthConfig`) is added BESIDE the old one at the close and signed by the owner with the rest; the old corpus stays as the saved towns' control. (4) The 74 reds, the 11 that change meaning and the 7 registers stay in the file as the flip's worklist; the ~429 unrun files are counted once, on the joined tree, by the chair's flipped whole-suite run. NOW HAND OVER: your count is 390,871 by my read: push, and send "FORTUNE-PART <commit>, HANDED OVER" with U5a's builder's state in the hand-back (it returns to you: you push its branch as `-wip` and relay one line).
+
+FORTUNE-4's ORDER (from the rulings above): the saved-town unit (first); U5a's merge when it returns; the six (or five)
+merit sentences to the chair, read on six whole pages, one a captured hall; U5b; the forced-on re-measure with the LIT
+WORLD ON A VISITOR'S POOL as its headline (dark the control) against `FOR-THE-OWNER.md` (a moved figure to the chair
+FIRST) and the joint table with the merits on; the final confinement (base 43ab0f5eb) and `tests/lint` whole; the
+hand-back; "FORTUNE <commit>". The routine at a merge: FORTUNE-2-HANDBACK.md section 3 (and run builders' red on a
+worktree of the pre-unit tree with their test files copied in, as done for U5s and U4).
 
 ## 1. State
 
