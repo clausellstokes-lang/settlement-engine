@@ -3561,3 +3561,17 @@ RULINGS ON THE REST, under the owner's deferral, each vetoable by the owner:
   dependents moved, by U0's import), unsigned, the owner's at the close; P1b and CF12 building. GOALS-2: unit 5
   (the 13 tie pairs) landed green at 833e4d413; the post-pass built (238 moved cards to 56). PAGE-2: L4's batch 1
   read (section 2). THE LANDING HELPER FOR POINT 82 is still running its checks in `/home/user/wt/line`.
+- 12:47 UTC · SAFETY NET 10's PASS (every working seat read by `get_session` at 12:38, one call each): PAGE-2 369,376 AGAINST A
+  MARK OF 300,000 (NEVER READ BEFORE: the chair's miss a second time: a seat is read from its FIRST net after its
+  seating, whatever its own estimate says); GOALS-2 316,134 against 250,000; TRAD-3 315,431 (its successor point
+  300,000); SEAT-3 324,853 (hand-over at U4's dispatch or 380,000; SEAT-4 beside); FRAME-5's record reads 0 (its
+  own estimate about 280,000; FRAME-6 beside); REVIEW-VEIL-12 350,052, idle (mark 400,000: it cannot read R3 cold
+  inside it); VEIL-26 168,853; FORTUNE-2 213,027; PAGE-1 208,906 (mark 250,000; four builders out). ORDERED AT
+  12:44: PAGE-2 to write its hand-back and HAND OVER ("PAGE-PART <commit>, HANDED OVER"). WRITTEN:
+  `prompts/PAGE-3.txt` (the content lane's next owner: the rulings of 11:24 to 12:36 as one list);
+  `prompts/PAGE-4.txt` (the display lane's next owner, seated BEFORE PAGE-1 passes its mark);
+  `prompts/GOALS-3.txt` (the gate's cure is a unit of its own, not a tail); `prompts/REVIEW-VEIL-13.txt` (the
+  reader from R3 on: the gate's three conditions, the tell question as its named attack, the husk class,
+  TRAD-SHARE). SEATED AFTER THIS PUSH: TRAD-4, PAGE-3, PAGE-4, GOALS-3, REVIEW-VEIL-13. REVIEW-VEIL-12 is not woken
+  (its review file holds its instruments and its leads; a turn at 350,000 buys nothing). POINT 82: the helper's
+  merge (ed9e140a8) and the census cure (379f63cb6) stand in `/home/user/wt/line`, UNPUSHED; its checks still run.
