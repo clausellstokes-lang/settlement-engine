@@ -1,0 +1,27 @@
+_assert_service_admin_actor(actor_user uuid)|t|t|t|void|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_audit_action(p_actor_id uuid, p_target_id uuid, p_action text, p_before jsonb, p_after jsonb, p_reason text)|t|t|t|void|=X/postgres postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_buyback_payout_hold_days()|t|t|t|integer|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_civility_stem_hits(p_stem text)|t|t|f|boolean|=X/postgres postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_civility_token_hits(p_token text)|t|t|f|boolean|=X/postgres postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_consume_action_rate_limit(p_uid uuid, p_action text, p_window_seconds integer)|t|t|t|integer|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_deity_chart_axes_valid(p_axes jsonb)|t|t|f|boolean|=X/postgres postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_founder_transfer_dial(p_key text, p_default integer)|t|t|t|integer|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_gallery_apply_member_overrides(base jsonb, dm_full jsonb, overrides jsonb, settlement_share_dm boolean, settlement_importable boolean, for_import boolean)|t|t|f|jsonb|=X/postgres postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_gallery_chronicle_entry(e jsonb)|t|t|f|jsonb|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_gallery_chronicle_json(entries jsonb)|t|t|f|jsonb|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_gallery_dm_full_json(j jsonb)|t|t|f|jsonb|=X/postgres postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_gallery_map_backdrop(p_map_data jsonb)|t|t|f|jsonb|=X/postgres postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_gallery_npc_key(npc jsonb)|t|t|f|text|=X/postgres postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_gallery_public_tile_rows()|t|t|t|TABLE(id uuid, public_slug text, name text, tier text, published_at timestamp with time zo|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_gallery_sanitize_public_json(value jsonb, path text[])|t|t|f|jsonb|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_gallery_world_snapshot_is_safe(value jsonb)|t|t|f|boolean|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_gc_dim_sql(p_field text)|t|t|f|text|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_log_founder_transfer_event(p_case uuid, p_actor text, p_event text, p_detail jsonb)|t|t|t|void|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_make_public_slug()|t|t|f|text|=X/postgres postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_make_unlisted_slug()|t|t|f|text|=X/postgres postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_saved_maps_world_snapshot_guard()|t|t|f|trigger|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_seat_buyback_cents()|t|t|t|integer|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_seat_holder_last_active(p_user uuid)|t|t|t|timestamp with time zone|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_seat_stewardship_dial(p_key text, p_default integer)|t|t|t|integer|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_surveyor_byok_secret()|t|t|t|text|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
+_trunc_unit(p_granularity text)|t|t|f|text|postgres=X/postgres authenticated=X/postgres anon=X/postgres service_role=X/postgres
