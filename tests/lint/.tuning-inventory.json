@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "5383c309f4476597fc4f881b22a1c31cd2d31c65",
-  "measuredBy": "LASTCLOSE-DOORS",
-  "date": "2026-11-19",
-  "note": "LASTCLOSE-DOORS (2026-11-19, the last close), at the base cc11c9504's landings: the dependents moved, no tuning value: src/domain/people/allegiance.js#ALLEGIANCE_TUNING gains src/generators/power/factionStanding.js (K-POWERS, points 48/49/57, ed176ed08)",
+  "measuredAtSha": "d563406b13188c39992cb9aa8d30e7534ce5a4eb",
+  "measuredBy": "KINDS-1 K3",
+  "date": "2026-11-20",
+  "note": "the trouble law's two tables enter the inventory: TROUBLE_WEIGHT_TUNING (DRAFT, the crime row the chair's B50) and LAW_ONE_TROUBLE_BARS (law 1's 0.5 / 0.7, moved from historyGenerator.js by K1 6a5132049, not changed; indexed by homes[]); historyGenerator.js bare decimals 13 -> 11 banked",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -1291,7 +1291,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 385,
+      "line": 400,
       "spanDigest": "861a71e24fdda07cea9d8f740fbe51ca1685d27dfd0a9f822f579ea609747fe2",
       "leaves": {
         "value": 0.15
@@ -1306,7 +1306,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 616,
+      "line": 631,
       "spanDigest": "d8c363dde6af24802c24ec308fde1963fd20f88ef9f80765dbeb6bd7c6899e55",
       "leaves": {
         "value": 3
@@ -1321,7 +1321,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 618,
+      "line": 633,
       "spanDigest": "61090f7451b7f2aadae1709fa76edc9f360ae61664c9f8fd48b677a1e8ecfa07",
       "leaves": {
         "value": 0.35
@@ -1336,7 +1336,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 620,
+      "line": 635,
       "spanDigest": "0b8b01d51be797cd0143574956002d9faabb6345790cafa0a91e78f63118f528",
       "leaves": {
         "value": 0.08
@@ -1351,7 +1351,7 @@
       "exported": false,
       "idiom": "literal",
       "keys": 1,
-      "line": 622,
+      "line": 637,
       "spanDigest": "013116d8a083862271257454b6e161900d075e0a05df61a52dfd7e61938389e3",
       "leaves": {
         "value": 0.15
@@ -2802,6 +2802,51 @@
         "src/domain/townCartography/cartographySynthesis.js",
         "src/domain/townCartography/cartographyWards.js"
       ]
+    },
+    "src/domain/trouble/troubleLaw.js#TROUBLE_WEIGHT_TUNING": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 3,
+      "line": 107,
+      "spanDigest": "a694cd2c42b0d82dd9e0a13006a5b26aed8346f8a63d6a97acf5806488095a77",
+      "leaves": {
+        "crimeWave.read": "criminalEffective",
+        "crimeWave.floor": 0.05,
+        "crimeWave.ceiling": 0.5,
+        "crimeWave.readLow": 20,
+        "crimeWave.readHigh": 90,
+        "guildConflict.read": "economyPowers",
+        "guildConflict.floor": 0.05,
+        "guildConflict.ceiling": 0.25,
+        "guildConflict.readLow": 1,
+        "guildConflict.readHigh": 4,
+        "smallPlaceCrime.read": "criminalEffective",
+        "smallPlaceCrime.floor": 0.5,
+        "smallPlaceCrime.ceiling": 0.9,
+        "smallPlaceCrime.readLow": 15,
+        "smallPlaceCrime.readHigh": 60
+      },
+      "dependents": [
+        "src/domain/density/densityCreateBoundary.js",
+        "src/generators/historyGenerator.js"
+      ],
+      "namedDependents": []
+    },
+    "src/domain/trouble/troubleLaw.js#LAW_ONE_TROUBLE_BARS": {
+      "exported": true,
+      "idiom": "literal",
+      "keys": 2,
+      "line": 150,
+      "spanDigest": "50bc4049385f723054642f109269f2a1ea1f731382b6c223acf6d799da429f55",
+      "leaves": {
+        "crimeWave": 0.5,
+        "guildSwap": 0.7
+      },
+      "dependents": [
+        "src/domain/density/densityCreateBoundary.js",
+        "src/generators/historyGenerator.js"
+      ],
+      "namedDependents": []
     },
     "src/domain/undercity/colonization.js#UNDERCITY_TUNING": {
       "exported": true,
@@ -8569,7 +8614,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 3,
-      "line": 69,
+      "line": 78,
       "spanDigest": "9ce244b1dbb17502d5534d5ea33f9f9bafe8cec4c191d4f934be6e6673dbba1e",
       "leaves": {
         "base.RANK": 1,
@@ -8607,7 +8652,7 @@
       "exported": true,
       "idiom": "literal",
       "keys": 5,
-      "line": 94,
+      "line": 103,
       "spanDigest": "9959eec349933f6bf2320b936780466dfea07d1f4bedbbed8da671fd806ce7ab",
       "leaves": {
         "strengthFull": 30,
@@ -9252,7 +9297,7 @@
     "src/generators/foodLand.js": 7,
     "src/generators/generationCoherence.js": 1,
     "src/generators/history/historyEventStrands.js": 47,
-    "src/generators/historyGenerator.js": 13,
+    "src/generators/historyGenerator.js": 11,
     "src/generators/institutionProbability.js": 38,
     "src/generators/isolationGenerator.js": 1,
     "src/generators/narrative/historyCoherence.js": 4,
@@ -9284,11 +9329,11 @@
   },
   "unclosed": [],
   "totals": {
-    "tables": 280,
-    "keys": 2293,
+    "tables": 282,
+    "keys": 2298,
     "unregisteredNamed": 541,
-    "bareDecimals": 6877,
+    "bareDecimals": 6875,
     "zeroDependentTables": 10,
-    "zeroNamedDependentTables": 187
+    "zeroNamedDependentTables": 189
   }
 }
