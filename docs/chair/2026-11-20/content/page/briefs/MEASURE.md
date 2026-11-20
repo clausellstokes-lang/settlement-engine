@@ -93,3 +93,20 @@ The tension pipeline: `src/generators/historyGenerator.js` (:583 the draw, :1027
    and secret on one card that contradict (a want of principle or faith beside a secret of venal crime: list your
    classification of wants and secrets as explicit tables). Also the holder's temperament where the card has one
    (e.g. "principled") against a venal secret.
+
+## Addendum (11:06 UTC): the chair's leads of 11:05 (to VERIFY, not findings), sent to each helper
+
+- A: 29 kinds in `historyData.js :: HISTORICAL_EVENTS_DATA`; 24 with one unanchored form; `HISTORY_DESC_VARIANTS`
+  two more wordings a kind (used only against a kind's own past event); 7 of 87 side slots named. ADD: the visitor's
+  odds today and under each step: (1) variants always in rotation; (2) plus sides named from the town's record, a
+  lacking side dropped; (3) plus 3 or 6 new wordings for the eight commonest kinds. Where the keyed fork would live.
+- B: Safety is `src/generators/safetyProfile.js :: generateSafetyProfile` (a court floor of 1.20 = "Moderate"; never
+  reads powerStructure); Output is `economicState.compound.economyOutput` (`priorityHelpers.js :: getInstFlags`).
+  ADD: Safety vs Law & order two steps apart; the hall in criminal hands while Safety reads Moderate or better; how
+  often the court floor alone sets Safety; Output's drags and how often each is the largest; which pages print
+  Safety to a shared or public audience.
+- C: `npcGenerator.js :: powerBandOfRole` keyword fault ('Guild Master' vs 'guild_master'). ADD: every reader of
+  `influence` and what a corrected match would move in a born town (a patched copy in the helper's script, never
+  `src`). "Dean" has no `poolMap.js :: TITLE_SECRETS` row: count catch-all falls per title; the catch-all lines
+  that presume an office or trade; whether `settleTitleLines` serves a draw-free re-pick. Want vs secret: count only
+  (the goals seat's).
