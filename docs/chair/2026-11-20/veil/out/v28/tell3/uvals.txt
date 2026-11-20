@@ -1,0 +1,24 @@
+city|dm|f.economicState.safetyProfile.safetyDesc p:452
+city|dm|f.history.currentTensions p:452
+city|dm|r.imports.criminal 0:451 1:1
+city|off|f.economicState.safetyProfile.safetyDesc p:452
+city|off|f.history.currentTensions p:452
+city|off|r.imports.criminal 0:451 1:1
+metropolis|dm|f.economicState.safetyProfile.safetyDesc p:452
+metropolis|dm|f.history.currentTensions p:452
+metropolis|dm|r.imports.criminal 0:452
+metropolis|off|f.economicState.safetyProfile.safetyDesc p:452
+metropolis|off|f.history.currentTensions p:452
+metropolis|off|r.imports.criminal 0:452
+town|dm|f.economicState.safetyProfile.safetyDesc p:452
+town|dm|f.history.currentTensions p:452
+town|dm|r.imports.criminal 0:445 1:7
+town|off|f.economicState.safetyProfile.safetyDesc p:452
+town|off|f.history.currentTensions p:452
+town|off|r.imports.criminal 0:445 1:7
+village|dm|f.economicState.safetyProfile.safetyDesc p:452
+village|dm|f.history.currentTensions p:452
+village|dm|r.imports.criminal 0:452
+village|off|f.economicState.safetyProfile.safetyDesc p:452
+village|off|f.history.currentTensions p:452
+village|off|r.imports.criminal 0:452
