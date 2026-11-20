@@ -32,6 +32,8 @@ import { powerHighWaterOf, undercityHighWaterActive, withPowerHighWater } from '
 // shared law (resourceDynamicsKernel, institutionLifecycle, mutateEntities).
 import { LEGACY_CONTEST_WIDTH, contestWidthForTier } from '../density/densityBands.js';
 import { rollsRegisterVii } from '../density/densityLaw.js';
+import { seatsByHolder } from '../seat/seatLaw.js';
+import { governmentFamilyOf, oldLawFamilyOf, ownKindOf } from '../seat/seatTable.js';
 
 // Canonical archetype → factionCompetition's local vocabulary (the FACTION_POWER_BASES
 // keys). Folds the archetypes this layer doesn't model: government/other → civic,
@@ -76,17 +78,10 @@ export const FACTION_RULE_MATRIX = Object.freeze([
   'faction_exhaustion',
 ]);
 
-const GOVERNMENT_BY_ARCHETYPE = Object.freeze({
-  noble: 'noble_patronage',
-  merchant: 'merchant_charter',
-  military: 'military_order',
-  religious: 'temple_authority',
-  criminal: 'criminal_shadow_rule',
-  civic: 'council_rule',
-  arcane: 'arcane_magocracy',
-  labor: 'communal_assembly',
-  outsider: 'noble_patronage',
-});
+// The government a NEW faction state prefers is read from THE ONE TABLE (`seat/seatTable.js`, SEAT-1
+// train 1 U2 and its cure): under the old law the id this file's own table held, byte for byte
+// (`oldLawFamilyOf`); under the seat law the family of the power's OWN kind (`ownKindOf`, never its
+// veil). See `ensureFactionStates`.
 
 const LAW_PREFS_BY_ARCHETYPE = Object.freeze({
   noble: ['inheritance_rights', 'land_tenure', 'deference_laws'],
@@ -300,7 +295,7 @@ export function ensureFactionStates(worldState, snapshot, rng) {
         settlementId: item.id,
         name: faction.faction || faction.name || faction.label || `Unnamed power ${index + 1}`,
         archetype,
-        governmentPreference: faction.governmentPreference || (/** @type {any} */ (GOVERNMENT_BY_ARCHETYPE))[archetype] || pick(local, GOVERNMENT_PREFERENCES),
+        governmentPreference: faction.governmentPreference || (seatsByHolder(item.settlement) ? governmentFamilyOf(ownKindOf(faction)) : oldLawFamilyOf(archetype)) || pick(local, GOVERNMENT_PREFERENCES),
         powerBases: [...powerBases],
         controlledInstitutions: [],
         suppressedInstitutions: [],
