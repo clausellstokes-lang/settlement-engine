@@ -27,6 +27,20 @@ never a ref but this lane; tests from a shell with `env | grep '^GIT_'` printing
 11 `GIT_` variables: proxy and credential config, no `GIT_DIR`; every run is prefixed `env -u …` for all 11); the
 author of every commit read before a push; config checked (core.bare false, user Claude, at 00:21 UTC). Relayed to
 every builder as binding. 00:26 UTC: the receipts on origin (section 2).
+00:44 UTC, two rulings joined the list (the seventh chair; vetoable by the owner). V10-1 HIGH (REVIEW-VEIL-10, executed at
+bedd5a392): THE CHRONICLE DOOR: `get_gallery_dossier`'s column `chronicle` (`_gallery_chronicle_json(campaign_state->'eventLog')`,
+032) and `get_gallery_map`'s per member (046) pass no veil; the DM's events name the hidden house ("A new Black market was
+established.", ADD_INSTITUTION; "… has been turned by the Smuggling network.", IMPOSE_CORRUPTION); PublicDossierView draws it;
+the link carries none. RULING VR20: HIGH, blocks the clearance; THE CLASS is every column a non-owner read returns BESIDE
+`data`: (A) a column copied or derived from `data` is computed from the VEILED document and takes its source path's registry
+rule (a filter, facet, sort or search over a raw value is a door too; the tile columns of `_gallery_public_tile_rows`
+019/063 are being measured); (B) the chronicle takes its own veil: MEASURE FIRST, then ONE mechanism proposed to the chair
+before building; (C) a walker over every non-owner function touching a shared town, each returned column registered.
+PLACED after B, C, D; its measure runs beside them, read-only. RULING VR19 (shapes R2, R3, D): a value every shared page
+draws whose stored figure carries a hidden term and has no exact SQL twin keeps its diffuse band; its precise or
+crime-specific part is withheld by the server on EVERY non-owner read (the page may re-derive it from the served document
+with the engine's own function, else does not draw it); crime-only content stays conditional; FOR D: `incomeWeight` is a
+share: re-derived with the percentages or withheld, never left raw (relayed to the B/C/D builder at 00:45 UTC).
 
 ## 1. The bytes (kept current)
 
@@ -62,6 +76,7 @@ THE RECEIPTS (the chair, 00:26 UTC: every figure this file quotes has its output
 |---|---|
 | 1. First act, measured | DONE (section 2) |
 | 2. B, C, D (`briefs/SUB-BRIEF-BCD.md`) | IN HAND |
+| 2b. VR20 (after B, C, D) | MEASURE IN HAND beside B, C, D (a read-only seat, `/var/tmp/v18/out/vr20/`); the mechanism goes to the chair before any build |
 | 3. R2 under VR16 (after R1 is merged) | waiting on "R1 <commit>" |
 | 4. R3, R4, R5, R6 | not started |
 | 5. R7 (VR15 (b)) | not started |
